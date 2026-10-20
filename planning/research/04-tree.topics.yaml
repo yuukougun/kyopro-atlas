@@ -1,0 +1,961 @@
+# 04 木（tree）の項目一覧。詳細と根拠は 04-tree.md を参照。
+# 問題IDはすべて tools/ap.py で実在を確認済み（2026-10-21 取得のキャッシュ）。difficulty は AtCoder Problems の補正後の値。
+# 他分野の項目を指す key は推測（例: dfs, union-find, doubling, tree-dp）。
+area: tree
+topics:
+  - key: tree-basics
+    title: 木の基本性質と表現
+    aliases: [木の定義, 森, 根付き木, 木の性質]
+    level: 基礎
+    level_evidence: "性質を知っていれば解ける問題が灰〜水に多い。abc263_b (136)・abc399_c (321)・abc303_e (1113)・abc378_f (1436)"
+    prerequisites: [graph-representation, dfs, bfs]
+    acl: null
+    signs: ["N 頂点 N-1 辺の連結グラフ", "どの 2 頂点間にもちょうど 1 つの経路", "p_i < i（親の番号が自分より小さい）", "辺を 1 本足す／1 本取り除く", "森にする（閉路をなくす）"]
+    compare_with: [namori-graph, tree-bipartite, tree-degree]
+    page: own
+    visual: "辺を 1 本取り除くと 2 つに分かれ、1 本足すと閉路が 1 つできる様子を切り替えて見せる図"
+    problems:
+      - id: abc263_b
+        difficulty: 136
+        role: example
+        summary: "親の番号を根までたどった回数（深さ）を数える"
+        evidence: "https://qiita.com/gotoki_no_joe/items/98225d578c885656a959"
+      - id: abc399_c
+        difficulty: 321
+        role: practice
+        summary: "森として残せる辺は N −（連結成分数）本なので、それ以外を消す本数を数える"
+        evidence: "https://qiita.com/mattsunkun/items/c060dc9d1d22e298ed02"
+      - id: abc303_e
+        difficulty: 1113
+        role: example
+        summary: "次数 3 以上の頂点は元の星の中心しかありえないことと頂点数の式から、星の大きさごとの個数を逆算する"
+        evidence: "https://drken1215.hatenablog.com/entry/2023/05/29/134700"
+      - id: abc378_f
+        difficulty: 1436
+        role: practice
+        summary: "辺を 1 本足してできる閉路の条件を次数で言い換え、次数 3 の頂点の連結成分ごとに接する次数 2 の頂点の組を数える"
+        evidence: "https://drken1215.hatenablog.com/entry/2024/11/04/002341"
+
+  - key: tree-traversal
+    title: 根付き木と走査順（DFS・BFS・行きがけ／帰りがけ）
+    aliases: [木の探索, DFS 順, 行きがけ順, 帰りがけ順, BFS 順, 部分木サイズ, 深さ]
+    level: 基礎
+    level_evidence: "abc213_d (710)・abc270_c (625)・abc309_e (957)・abc146_d (1192) で、根を決めた DFS/BFS と親・深さ・部分木サイズだけで解ける。abc133_e (1505) が水の応用"
+    prerequisites: [tree-basics, dfs, bfs, recursion]
+    acl: null
+    signs: ["頂点 1 を根とする", "部分木の頂点数・和・最大", "子孫", "親の番号が与えられる", "訪問順を出力"]
+    compare_with: [euler-tour, tree-dp]
+    page: own
+    visual: "DFS のステップ送り。スタックの中身・行きがけ番号・帰りがけ番号を同時に表示し、BFS 順（深さ順）と切り替えられるようにする"
+    problems:
+      - id: abc213_d
+        difficulty: 710
+        role: example
+        summary: "隣接頂点を番号の小さい順に回る DFS で、戻る動きも含めた訪問順を出力する"
+        evidence: "https://drken1215.hatenablog.com/entry/2021/08/11/025100"
+      - id: abc270_c
+        difficulty: 625
+        role: example
+        summary: "片方の端点から DFS して親を記録し、2 点間のパスを復元する"
+        evidence: "https://qiita.com/gotoki_no_joe/items/126eaba4f553c9ef13be"
+      - id: abc309_e
+        difficulty: 957
+        role: practice
+        summary: "親の番号が自分より小さい入力なので、番号順に「あと何世代まで保険が及ぶか」の最大値を子へ伝える"
+        evidence: "https://qiita.com/ZOI_dayo/items/a55cc4342832efdc23ba"
+      - id: abc333_d
+        difficulty: 704
+        role: practice
+        summary: "頂点 1 の子ごとの部分木サイズを求め、最大のものだけを残す"
+        evidence: "https://drken1215.hatenablog.com/entry/2024/11/02/192645"
+      - id: abc146_d
+        difficulty: 1192
+        role: practice
+        summary: "根から順に、親へ向かう辺の色だけを避けて子への辺に色を振ると最大次数色で塗れる"
+        evidence: "https://drken1215.hatenablog.com/entry/2020/04/26/172200"
+      - id: abc133_e
+        difficulty: 1505
+        role: practice
+        summary: "DFS 順に色を決め、距離 2 以内で処理済みの頂点（親・祖父・先に処理した兄弟）の数だけ選択肢が減ることを掛け合わせる"
+        evidence: "https://kmjp.hatenablog.jp/entry/2019/07/07/1000"
+
+  - key: tree-bipartite
+    title: 木の 2 色塗り分けと距離の偶奇
+    aliases: [木は二部グラフ, 深さの偶奇, 2 彩色]
+    level: 基礎
+    level_evidence: "abc209_d (686)・abc398_e (1238)・abc126_d (1279)・競プロ典型90問 026（★4）"
+    prerequisites: [tree-traversal, bipartite-check]
+    acl: null
+    signs: ["距離の偶奇", "2 人が同時に動いて出会う場所", "辺の重みが偶数か奇数か", "独立集合を N/2 個以上", "二部グラフのまま辺を足す"]
+    compare_with: [bipartite-check, tree-distance]
+    page: own
+    visual: "深さの偶奇で色分けした木。2 点を選ぶと距離と色の組み合わせが表示される図"
+    problems:
+      - id: abc209_d
+        difficulty: 686
+        role: example
+        summary: "2 点の距離の偶奇で出会う場所（町か道路）が決まり、偶奇は深さの和で分かる（LCA で距離を求めても解ける）"
+        evidence: "https://blog.hamayanhamayan.com/entry/2021/07/11/154020"
+      - id: abc126_d
+        difficulty: 1279
+        role: example
+        summary: "辺の重みが偶数なら同じ色、奇数なら違う色という規則で DFS しながら塗る"
+        evidence: "https://drken1215.hatenablog.com/entry/2019/05/19/224500"
+      - id: typical90_z
+        difficulty: null
+        role: practice
+        summary: "2 色に塗ると多い方の色は N/2 個以上あり、同じ色どうしは隣接しないので独立集合になる"
+        evidence: "https://github.com/E869120/kyopro_educational_90/blob/main/sol/026.cpp"
+      - id: abc398_e
+        difficulty: 1238
+        role: practice
+        summary: "色の違う頂点の組のうち辺のない組の数の偶奇で、先手と後手のどちらを選ぶかを決めるゲーム"
+        evidence: "https://qiita.com/gotoki_no_joe/items/5fbb19b3022933cc370b"
+      - id: abc437_g
+        difficulty: 2806
+        role: practice
+        summary: "木が二部グラフであることを使い、各辺の消し方を左右の頂点の色の状態の割り当てとして最大流で求める"
+        evidence: "https://kmjp.hatenablog.jp/entry/2025/12/20/0930"
+
+  - key: tree-distance
+    title: 木の上の距離（1 点・2 点から／根からの累積）
+    aliases: [木の距離, 根からの累積, XOR 距離, 追いかけっこ]
+    level: 基礎
+    level_evidence: "1 点からの距離は abc070_d (1182)。2 点からの比較は abc148_f (1457)、根からの XOR は abc201_e (1694)・arc045_c (2022 参考値)"
+    prerequisites: [tree-traversal]
+    acl: null
+    signs: ["頂点 K を経由する最短距離", "2 人の追いかけっこ・どちらが先に着くか", "パス上の XOR", "全ての 2 頂点間の距離が与えられる"]
+    compare_with: [lca, tree-path, tree-diameter]
+    page: own
+    visual: "2 点からの距離を色の濃淡で塗り、どちらに近いかの境目（パスの中点）を見せる図"
+    problems:
+      - id: abc070_d
+        difficulty: 1182
+        role: example
+        summary: "経由点 K から全頂点への距離を 1 回の DFS で前計算し、各クエリは 2 つの距離の和で答える"
+        evidence: "https://drken1215.hatenablog.com/entry/2019/02/17/114200"
+      - id: abc148_f
+        difficulty: 1457
+        role: example
+        summary: "2 人それぞれからの距離を求め、逃げる側が先に着ける頂点のうち鬼から最も遠い所までの手数を求める"
+        evidence: "https://blog.hamayanhamayan.com/entry/2019/12/23/220247"
+      - id: abc201_e
+        difficulty: 1694
+        role: practice
+        summary: "根からの XOR を前計算すると 2 点間の XOR はその XOR になる。全組の和はビットごとに 0 と 1 の個数の積で数える"
+        evidence: "https://blog.hamayanhamayan.com/entry/2021/05/15/235842"
+      - id: arc045_c
+        difficulty: 2022
+        role: practice
+        summary: "根からの XOR が sum[a] と sum[b] なら 2 点間は sum[a] xor sum[b]。値ごとの個数で XOR が X のパスを数える"
+        evidence: "https://drken1215.hatenablog.com/entry/2019/03/10/195800"
+      - id: abc414_f
+        difficulty: 2357
+        role: practice
+        summary: "ちょうど K 辺ずつ進む移動の最短回数を、距離の余りと来た方向を状態に持つ BFS で求める（03 の状態拡張との境界）"
+        evidence: "https://merom686.hatenablog.com/entry/2025/07/13/021033"
+
+  - key: tree-imos
+    title: 木の上の累積和・いもす法
+    aliases: [木上のいもす法, 部分木加算, パス加算, 木上の累積和]
+    level: 基礎
+    level_evidence: "部分木への一括加算は abc138_d (920)、根の向きを自分で決める応用が abc187_e (1358)。パスへの加算は LCA を使うので青の節にする"
+    prerequisites: [tree-traversal, imos]
+    acl: null
+    signs: ["部分木の全頂点に x を加算するクエリがたくさん来て、最後に全頂点の値を出力", "辺のどちら側かに加算", "多数のパスに沿って +1 し、各辺・各頂点を通った回数を求める"]
+    compare_with: [euler-tour, euler-tour-path, lca]
+    page: own
+    visual: "印をつける段階と、根から下へ（または葉から上へ）累積する段階をステップ送りで見せる"
+    problems:
+      - id: abc138_d
+        difficulty: 920
+        role: example
+        summary: "部分木への加算を根の頂点に印として足しておき、最後に根から下へ累積する"
+        evidence: "https://drken1215.hatenablog.com/entry/2020/05/18/174000"
+      - id: abc187_e
+        difficulty: 1358
+        role: example
+        summary: "根を決め、辺の片側への加算を「子の部分木へ加算」か「全体へ加算して子の部分木から引く」に直して累積する"
+        evidence: "https://drken1215.hatenablog.com/entry/2021/01/03/162800"
+      - id: abc222_e
+        difficulty: 1491
+        role: practice
+        summary: "決まった順に移動したときに各辺を通る回数を先に数え、赤と青の差がちょうど K になる塗り方を部分和 DP で数える"
+        evidence: "https://blog.hamayanhamayan.com/entry/2021/10/10/142820"
+
+  - key: leaf-first
+    title: 葉から考える（葉の削除・葉から決める貪欲）
+    aliases: [葉から貪欲, 葉を刈る, トポロジカル順に葉から]
+    level: 水
+    level_evidence: "abc459_e (1298)・abc397_e (1484) で葉から情報を送る発想が要る。黄に abc345_f (2157)"
+    prerequisites: [tree-traversal, greedy-exchange]
+    acl: null
+    signs: ["木を K 頂点ずつのパスに分ける", "辺をすべて使う・すべて覆う", "葉を消していく操作", "部分木で余った個数を上に送る"]
+    compare_with: [tree-dp, tree-degree]
+    page: own
+    visual: "次数 1 の頂点をキューに入れて削っていくステップ送り（キューと残りの次数を表示）"
+    problems:
+      - id: abc459_e
+        difficulty: 1298
+        role: example
+        summary: "部分木で余る個数を末端から集め、そのつど二項係数を掛けていく。足りなくなったら 0"
+        evidence: "https://merom686.hatenablog.com/entry/2026/05/24/005253"
+      - id: abc397_e
+        difficulty: 1484
+        role: example
+        summary: "葉から未完成のパスの長さを親へ送り、K に達したら切り離す。2 本を合わせるときはちょうど K でなければ失敗"
+        evidence: "https://qiita.com/Shizen_Tota/items/df1f142c879a61c21838"
+      - id: abc345_f
+        difficulty: 2157
+        role: practice
+        summary: "全域森を作り、葉の辺から順に「この葉のランプを点けるためにその辺を使うか」を決めていく"
+        evidence: "https://qiita.com/gotoki_no_joe/items/f9770e81cc38a70b5300"
+
+  - key: tree-degree
+    title: 次数と次数列（木を作れる条件・プリューファー列）
+    aliases: [次数列, プリューファー列, Prüfer code, 握手補題]
+    level: 青
+    level_evidence: "次数を数えるだけの問題は abc303_e (1113)・abc385_e (1406) と易しいが、次数列から木を作れる条件を使う abc359_f (1792)・abc239_f (1959) が青"
+    prerequisites: [tree-basics, leaf-first]
+    acl: null
+    signs: ["各頂点の次数を決める", "次数の和が 2N-2", "次数が ○ 以下の木", "星・雪の結晶など次数で決まる形"]
+    compare_with: [tree-counting, tree-construction]
+    page: own
+    visual: "最小番号の葉を消してその隣を記録する、プリューファー列の生成と復元のステップ送り"
+    problems:
+      - id: abc385_e
+        difficulty: 1406
+        role: example
+        summary: "中心にする頂点を全探索し、隣の頂点の次数を大きい順に並べて、作れる形の頂点数の最大を求める"
+        evidence: "https://drken1215.hatenablog.com/entry/2024/12/26/010927"
+      - id: abc359_f
+        difficulty: 1792
+        role: example
+        summary: "各次数が 1 以上で和が 2N-2 なら木が作れるので、増やしたときのコストの増分が小さい頂点へ順に次数を配る"
+        evidence: "https://drken1215.hatenablog.com/entry/2024/06/23/032101"
+      - id: abc239_f
+        difficulty: 1959
+        role: practice
+        summary: "次数の和と閉路の有無を確かめたうえで、次数が不足している連結成分どうしをつないで木を完成させる"
+        evidence: "https://kazun-kyopro.hatenablog.com/entry/ABC/239/F"
+      - id: abc303_h
+        difficulty: 2501
+        role: practice
+        summary: "次数の候補が決まった木の数を、プリューファー列の多項係数と形式的冪級数で数える（07 との境界）"
+        evidence: "https://drken1215.hatenablog.com/entry/2023/05/28/010200"
+
+  - key: tree-edge-contribution
+    title: 辺で切って数える（全ペアのパスの寄与）
+    aliases: [辺の寄与, 主客転倒（木）, 全点対の距離の和]
+    level: 水
+    level_evidence: "abc214_d (1341)・競プロ典型90問 039（★5）が基本。応用は abc201_e (1694)・abc173_f (1892)・abc149_f (2208)"
+    prerequisites: [tree-traversal, contribution, union-find]
+    acl: "atcoder::dsu（重みの順に併合する形のとき）"
+    signs: ["すべての i < j について f(i, j) の総和", "全ペアのパス上の最大値の和", "区間 [L, R] で誘導される森の連結成分数の総和"]
+    compare_with: [rerooting-dp, centroid-decomposition, small-to-large]
+    page: own
+    visual: "辺を 1 本ずつ切って左右の頂点数と積を表示し、総和が積み上がっていくアニメ"
+    problems:
+      - id: typical90_am
+        difficulty: null
+        role: example
+        summary: "辺で切った両側の頂点数を s と N-s とすると、その辺を通るペアは s(N-s) 個。全辺で足すと距離の総和"
+        evidence: "https://github.com/E869120/kyopro_educational_90/blob/main/sol/039.cpp"
+      - id: abc214_d
+        difficulty: 1341
+        role: example
+        summary: "辺を重みの小さい順に Union-Find で併合し、併合した瞬間に両側の大きさの積と重みを掛けて足す"
+        evidence: "https://blog.hamayanhamayan.com/entry/2021/08/15/034729"
+      - id: abc173_f
+        difficulty: 1892
+        role: practice
+        summary: "森の連結成分数 = 頂点数 − 辺数 に分け、各頂点・各辺を含む区間の個数を数えて足す"
+        evidence: "https://blog.hamayanhamayan.com/entry/2020/07/05/235609"
+      - id: abc149_f
+        difficulty: 2208
+        role: practice
+        summary: "各頂点について、周りの各方向にある頂点数から「白で、黒を含む方向が 2 つ以上」の確率を求めて足す（期待値の線形性）"
+        evidence: "https://kmjp.hatenablog.jp/entry/2019/12/30/0930"
+      - id: abc163_f
+        difficulty: 2470
+        role: practice
+        summary: "色ごとに、その色の頂点を取り除いた連結成分の大きさから「その色を通らないパス」を数えて引く"
+        evidence: "https://kmjp.hatenablog.jp/entry/2020/04/20/0930"
+
+  - key: complete-binary-tree
+    title: 完全二分木（ヒープ番号の木）
+    aliases: [完全二分木, ヒープ番号, 親は i/2]
+    level: 水
+    level_evidence: "移動の基本は abc243_d (758)。距離ごとの頂点数を数える abc321_e (1627) が青との境目"
+    prerequisites: [tree-basics, bit-operations]
+    acl: null
+    signs: ["頂点 i と floor(i/2) を結ぶ", "N ≤ 10^18 の木", "L・R・U の移動列"]
+    compare_with: [tree-path, lca]
+    page: own
+    visual: "番号と 2 進表記を並べた完全二分木。L/R/U の移動が 2 進表記の末尾の付け外しになることを見せる"
+    problems:
+      - id: abc243_d
+        difficulty: 758
+        role: example
+        summary: "L/R の直後の U は打ち消し合うのでスタックで消してから、残った移動を番号の計算で行う"
+        evidence: "https://drken1215.hatenablog.com/entry/2024/09/24/123142"
+      - id: abc321_e
+        difficulty: 1627
+        role: example
+        summary: "自分の部分木で深さ K の頂点数に、祖先へ上がるたびに反対側の子の部分木で深さが合う頂点数を足す（N 以下に制限）"
+        evidence: "https://drken1215.hatenablog.com/entry/2023/09/24/231639"
+      - id: abc264_h
+        difficulty: 2660
+        role: practice
+        summary: "完全二分木の高さは log N 程度しかないことを使い、頂点を加えるたびに祖先の DP だけを更新する（02 との境界）"
+        evidence: "https://kmjp.hatenablog.jp/entry/2022/08/13/0930"
+
+  - key: namori-graph
+    title: なもりグラフ（木に 1 本の辺を足したグラフ）
+    aliases: [なもり, unicyclic graph, N 頂点 N 辺の連結グラフ]
+    level: 水
+    level_evidence: "abc266_f (1525)。有向版の Functional graph は abc256_e (1224)・abc357_e (1295)（03 の担当）"
+    prerequisites: [tree-basics, leaf-first, union-find]
+    acl: "atcoder::dsu（閉路を作る辺の検出に使える）"
+    signs: ["N 頂点 N 辺の連結グラフ", "木に辺を 1 本足す", "各頂点から辺が 1 本ずつ出る"]
+    compare_with: [functional-graph, tree-basics]
+    page: own
+    visual: "閉路を横一列に並べ、各閉路の頂点から下に木がぶら下がる描き方に並べ替えるアニメ"
+    problems:
+      - id: abc266_f
+        difficulty: 1525
+        role: example
+        summary: "次数 1 の頂点を削り続けて閉路を求め、閉路の各頂点からぶら下がる木が同じなら 2 点間のパスは一意"
+        evidence: "https://zenn.dev/fjnkt98/articles/98c9dfbd0702a4"
+      - id: abc235_e
+        difficulty: 1304
+        role: practice
+        summary: "最小全域木に辺を 1 本足すとできる閉路の最大の辺と比べる。クエリの辺を混ぜたクラスカル法でまとめて判定できる"
+        evidence: "https://kazun-kyopro.hatenablog.com/entry/ABC/235/E"
+      - id: abc256_e
+        difficulty: 1224
+        role: practice
+        summary: "各頂点から 1 本ずつ辺が出るグラフは連結成分ごとに閉路がちょうど 1 つ。閉路の中で最小のコストを犠牲にする"
+        evidence: "https://drken1215.hatenablog.com/entry/2023/08/03/140800"
+      - id: abc357_e
+        difficulty: 1295
+        role: practice
+        summary: "閉路上の頂点は閉路の長さ、閉路に流れ込む頂点は「1 歩先の値 + 1」で到達可能数を求める"
+        evidence: "https://drken1215.hatenablog.com/entry/2024/06/09/231700"
+
+  - key: tree-diameter
+    title: 木の直径と最遠点
+    aliases: [直径, 最遠点, 離心数, double sweep, 2 回の BFS]
+    level: 水
+    level_evidence: "求め方そのものは abc428_e (1167)・abc361_e (1213)・abc019_4 (1378)。性質の応用は青（abc401_f 1666・abc267_f 1939）"
+    prerequisites: [tree-traversal, tree-distance]
+    acl: null
+    signs: ["最も遠い 2 頂点", "全頂点を訪れる最短の移動（戻らなくてよい）", "各頂点から最も遠い頂点", "辺を 1 本足してできる閉路の最大長", "2 つの木をつないだときの直径"]
+    compare_with: [rerooting-dp, tree-center, tree-centroid]
+    page: own
+    visual: "1 回目の BFS の最遠点が直径の端になる様子のステップ送りと、直径を横一列に並べて残りを枝としてぶら下げる描き方"
+    problems:
+      - id: abc428_e
+        difficulty: 1167
+        role: example
+        summary: "各頂点から最も遠い頂点は直径の端点のどちらか。番号の大きい方を優先するための工夫がいる"
+        evidence: "https://qiita.com/omakasessan/items/7856cb8120beeb205ff3"
+      - id: abc361_e
+        difficulty: 1213
+        role: example
+        summary: "全都市を回る最短距離は「辺の重みの総和の 2 倍 − 直径」"
+        evidence: "https://drken1215.hatenablog.com/entry/2024/07/07/153129"
+      - id: abc019_4
+        difficulty: 1378
+        role: practice
+        summary: "距離を質問できる対話形式で、任意の点からの最遠点を探し、その点からもう一度最遠点を探す"
+        evidence: "https://drken1215.hatenablog.com/entry/2021/06/14/001500"
+      - id: typical90_c
+        difficulty: null
+        role: practice
+        summary: "辺を 1 本足してできる閉路の長さは「パスの長さ + 1」なので、直径 + 1 が答え"
+        evidence: "https://drken1215.hatenablog.com/entry/2021/06/12/181400"
+      - id: abc447_f
+        difficulty: 1480
+        role: practice
+        summary: "次数条件つきの最長パスを、パスの最も浅い頂点で場合分けして子の長さ上位 2 つから求める（直径の木 DP と同じ形）"
+        evidence: "https://merom686.hatenablog.com/entry/2026/03/01/013149"
+      - id: abc401_f
+        difficulty: 1666
+        role: practice
+        summary: "直径の両端からの距離で各頂点の離心数を求め、2 つの木をつないだ直径の全組の和をソートと累積和で数える"
+        evidence: "https://qiita.com/gotoki_no_joe/items/36c02a9cff7cf61b3106"
+
+  - key: tree-center
+    title: 木の中心と半径
+    aliases: [中心, 半径, 離心数の最小]
+    level: 黄
+    level_evidence: "中心を軸にして直径の個数を数える abc221_f (2093)"
+    prerequisites: [tree-diameter]
+    acl: null
+    signs: ["直径の個数", "最も遠い頂点までの距離を最小にする頂点", "2 つの木をつないで直径を最小に"]
+    compare_with: [tree-centroid]
+    page: section-of:tree-diameter
+    visual: "直径の中点に印をつけ、中心から深さが半径の頂点だけが直径の端になれることを色で示す図"
+    problems:
+      - id: abc221_f
+        difficulty: 2093
+        role: example
+        summary: "直径の中心（頂点または辺）で木を分け、異なる枝から深さが半径の頂点を 2 つ以上選ぶ方法を数える"
+        evidence: "https://kazun-kyopro.hatenablog.com/entry/ABC/221/F"
+
+  - key: tree-centroid
+    title: 木の重心
+    aliases: [重心, centroid, 重み付き重心]
+    level: 黄
+    level_evidence: "重心の性質が本質の abc362_f (2186)、重心分解そのものの abc291_h (2097)。易しい使い方として abc348_e (1347) の重み付き重心"
+    prerequisites: [tree-traversal]
+    acl: null
+    signs: ["全頂点への距離の和（重み付き）を最小にする頂点", "ペアを作ってパスの長さの和を最大化", "どの成分も半分以下になるように分ける"]
+    compare_with: [tree-center, rerooting-dp, centroid-decomposition]
+    page: own
+    visual: "頂点を選ぶと取り除いた後の成分の大きさが出て、最大の成分の方へ 1 歩ずつ動くと重心で止まるアニメ"
+    problems:
+      - id: abc348_e
+        difficulty: 1347
+        role: example
+        summary: "根を隣へ動かしたときの増減を辺にかかる重みの和で考え、重い側へ動けなくなった所（重み付き重心）で最小"
+        evidence: "https://qiita.com/gotoki_no_joe/items/6a3a10194d5a276281ca"
+      - id: abc362_f
+        difficulty: 2186
+        role: example
+        summary: "重心で分けると各枝は N/2 以下なので、枝ごとの頂点を並べて半分ずらして組めば全ペアが重心を通る"
+        evidence: "https://qiita.com/gotoki_no_joe/items/63344a24b906bc9a74c9"
+      - id: agc018_d
+        difficulty: 2757
+        role: practice
+        summary: "重心で分けて交互に頂点をたどる構成で距離の和を最大化し、最後に短い辺を 1 本だけ損する"
+        evidence: "https://speakerdeck.com/tatyam_prime/gao-nan-yi-du-mu-wen-ti-wojie-kutekunitukuji"
+
+  - key: lca
+    title: 最小共通祖先（LCA）
+    aliases: [LCA, Lowest Common Ancestor, 最近共通祖先]
+    level: 青
+    level_evidence: "abc294_g (1702)・abc014_4 (1856)・abc152_f (1965) と青に集中。黄に abc133_f (2330)"
+    prerequisites: [tree-traversal, doubling]
+    acl: null
+    signs: ["木の 2 頂点の距離をクエリでたくさん聞かれる", "パス u-v 上の…（Q ≤ 2×10^5）", "辺を 1 本足したときの閉路の長さ"]
+    compare_with: [tree-path, binary-lifting-tree, hld, euler-tour]
+    page: own
+    visual: "深さをそろえてから 2^k 個上へ同時に跳ぶステップ送り。ダブリング表を横に表示する"
+    problems:
+      - id: abc014_4
+        difficulty: 1856
+        role: example
+        summary: "辺 (a, b) を足してできる閉路の長さは a-b の距離 + 1。距離を深さと LCA で求める"
+        evidence: "https://drken1215.hatenablog.com/entry/2021/06/19/175900"
+      - id: abc294_g
+        difficulty: 1702
+        role: example
+        summary: "根からの距離の和の式に LCA を使い、辺の重みの変更は子の部分木への区間加算として BIT で扱う"
+        evidence: "https://kmjp.hatenablog.jp/entry/2023/04/18/0900"
+      - id: typical90_ai
+        difficulty: null
+        role: practice
+        summary: "指定頂点を DFS 順に並べ、隣り合う 2 点（最後と最初も）の距離を LCA で求めて和の半分が必要な辺の数"
+        evidence: "https://github.com/E869120/kyopro_educational_90/blob/main/sol/035-04.cpp"
+
+  - key: tree-path
+    title: 木上のパスの扱い（距離・パス上の判定・交差・中点）
+    aliases: [パスクエリ, 2 頂点間のパス, パスの分解, 合流点]
+    level: 青
+    level_evidence: "パスを辺の集合として扱う abc152_f (1965)。黄の abc133_f (2330)、発展の abc298_h (2792)"
+    prerequisites: [lca, tree-distance]
+    acl: null
+    signs: ["u から v へのパス上の…", "パスに含まれる辺", "2 本のパスが交わるか", "どちらの端に近いか（パスの中点）"]
+    compare_with: [lca, euler-tour-path, hld]
+    page: own
+    visual: "パス u-v を「u から LCA へ上る線」と「LCA から v へ下る線」の 2 本に分解する図。3 点の合流点も示す"
+    problems:
+      - id: abc152_f
+        difficulty: 1965
+        role: example
+        summary: "M ≤ 20 本のパスをそれぞれ辺のビット集合にし、どれも白いパスがある塗り方を包除原理で引く"
+        evidence: "https://drken1215.hatenablog.com/entry/2020/01/26/164200"
+      - id: abc133_f
+        difficulty: 2330
+        role: practice
+        summary: "距離を根からの距離と LCA で表し、パス上の色 X の辺の本数と長さの和を引いて置き換える（オフラインの DFS で数える）"
+        evidence: "https://blog.hamayanhamayan.com/entry/2019/07/08/213009"
+      - id: abc298_h
+        difficulty: 2792
+        role: practice
+        summary: "2 点のどちらに近いかの境目をパス上の 1 点として求め、部分木の大きさと祖先の累積で距離の和を計算する"
+        evidence: "https://kmjp.hatenablog.jp/entry/2023/04/16/0930"
+
+  - key: binary-lifting-tree
+    title: 木のダブリング（k 個上の祖先・パス上の集約）
+    aliases: [binary lifting, level ancestor, k 個上の祖先, ジャンプ]
+    level: 青
+    level_evidence: "直径の端点を根にして K 個上の祖先を求める abc267_f (1939)"
+    prerequisites: [lca, doubling]
+    acl: null
+    signs: ["ちょうど距離 K の頂点", "K 個上の祖先", "パス上の最大の辺", "条件を満たす最も遠い祖先"]
+    compare_with: [lca, root-path-dfs, long-path-decomposition]
+    page: section-of:lca
+    visual: "k の 2 進表記の立っているビットごとに跳ぶ様子と、跳んだ区間の最大値を一緒に持つ表"
+    problems:
+      - id: abc267_f
+        difficulty: 1939
+        role: example
+        summary: "最遠点は直径の端点なので、端点を根にした木で K 個上の祖先を求める（DFS 中のスタックでも求まる）"
+        evidence: "https://kazun-kyopro.hatenablog.com/entry/ABC/267/F"
+      - id: abc235_e
+        difficulty: 1304
+        role: practice
+        summary: "最小全域木のパス上の最大の辺と比べればよい。オフラインのクラスカル法が簡単で、パス最大をダブリングで求めてもよい"
+        evidence: "https://drken1215.hatenablog.com/entry/2023/06/11/023548"
+
+  - key: root-path-dfs
+    title: 根からのパスを DFS で持ち回る（巻き戻し・履歴の木）
+    aliases: [DFS の巻き戻し, undo, ロールバック, 版の木, 操作の履歴を木にする]
+    level: 青
+    level_evidence: "基本は abc198_e (1161)。abc273_e (1624)・abc165_f (1843) が青、abc218_g (2217) が黄、abc302_h (2407) が発展"
+    prerequisites: [tree-traversal]
+    acl: null
+    signs: ["根から頂点 v までのパス上の…をすべての v について", "祖先の情報だけで決まる", "操作を元に戻す・保存した状態に戻る"]
+    compare_with: [euler-tour, persistent-data-structure, union-find-rollback]
+    page: own
+    visual: "DFS のスタックと、データ構造の中身・変更ログを並べたステップ送り（入るときに変更、出るときに戻す）"
+    problems:
+      - id: abc198_e
+        difficulty: 1161
+        role: example
+        summary: "根から DFS しながら色の出現回数を足し、戻るときに引く。今の頂点の色が 1 回目なら良い頂点"
+        evidence: "https://blog.hamayanhamayan.com/entry/2021/04/11/225651"
+      - id: abc165_f
+        difficulty: 1843
+        role: example
+        summary: "LIS の配列の 1 か所の更新を記録しておき、DFS で頂点を出るときに元に戻す"
+        evidence: "https://kmjp.hatenablog.jp/entry/2020/05/02/0930"
+      - id: abc273_e
+        difficulty: 1624
+        role: practice
+        summary: "数列の履歴を木（各版が親を指す）として持ち、追加・削除・保存・読込をポインタの移動で処理する"
+        evidence: "https://kazun-kyopro.hatenablog.com/entry/ABC/273/E"
+      - id: abc218_g
+        difficulty: 2217
+        role: practice
+        summary: "DFS で根からのパス上の値を BIT（または 2 つの multiset）に出し入れして葉での中央値を求め、ミニマックスで答える"
+        evidence: "https://kmjp.hatenablog.jp/entry/2021/09/12/0900"
+      - id: abc302_h
+        difficulty: 2407
+        role: practice
+        summary: "パスの場合は Union-Find で解けるので、DFS で併合と取り消しをする（経路圧縮なしの undo つき Union-Find）"
+        evidence: "https://drken1215.hatenablog.com/entry/2023/06/10/032900"
+
+  - key: euler-tour
+    title: オイラーツアー（DFS 順で部分木を区間にする）
+    aliases: [オイラーツアー, Euler Tour, 行きがけ順の番号付け, in/out, 木の平坦化, tree flattening]
+    level: 青
+    level_evidence: "abc202_e (1638) が典型。部分木和の点更新だけの abc406_f (1470) は水の上端。黄に abc337_g (2080)"
+    prerequisites: [tree-traversal, fenwick-tree, segment-tree]
+    acl: "atcoder::fenwick_tree / atcoder::segtree / atcoder::lazy_segtree（DFS 順の列に載せる）"
+    signs: ["部分木の和・最大・個数を、更新を挟みながら聞かれる", "部分木に加算", "v の子孫のうち深さ d のもの", "辺を取り除いたときの片側の和", "u が v の祖先か"]
+    compare_with: [hld, tree-imos, root-path-dfs, small-to-large]
+    page: own
+    visual: "木と DFS 順の列を上下に並べ、頂点を選ぶとその部分木が列の区間として光る動く図"
+    problems:
+      - id: abc240_e
+        difficulty: 1068
+        role: example
+        summary: "葉に DFS 順で番号を振ると、各頂点の部分木の葉が連続した区間になる"
+        evidence: "https://kazun-kyopro.hatenablog.com/entry/ABC/240/E"
+      - id: abc406_f
+        difficulty: 1470
+        role: example
+        summary: "辺で分けた片側は子の部分木なので、部分木の和を DFS 順と BIT（セグ木）で更新しながら求める"
+        evidence: "https://merom686.hatenablog.com/entry/2025/05/18/151742"
+      - id: abc202_e
+        difficulty: 1638
+        role: example
+        summary: "深さ d の頂点を DFS 順の番号で並べ、部分木の区間に入る個数を二分探索（またはオフラインの BIT）で数える"
+        evidence: "https://blog.hamayanhamayan.com/entry/2021/05/22/225525"
+      - id: abc239_e
+        difficulty: 1084
+        role: practice
+        summary: "部分木の上位 K 個（K ≤ 20 なので子の結果を併合するだけでも、DFS 順の区間で求めてもよい）"
+        evidence: "https://blog.hamayanhamayan.com/entry/2022/02/20/123049"
+      - id: abc337_g
+        difficulty: 2080
+        role: practice
+        summary: "DFS 順と BIT で部分木内の小さいラベルの数を数え、部分木の補集合（2 つの区間）へ加算する"
+        evidence: "https://kmjp.hatenablog.jp/entry/2024/01/20/1000"
+
+  - key: euler-tour-path
+    title: 根からのパスを区間で扱う（辺の重みを部分木に配る）
+    aliases: [辺のオイラーツアー, 根からのパスの和, パスクエリ（可逆）]
+    level: 青
+    level_evidence: "辺の重み変更と 2 点間距離のクエリ abc294_g (1702)"
+    prerequisites: [euler-tour, lca]
+    acl: "atcoder::fenwick_tree"
+    signs: ["辺の重みの変更と 2 点間の距離のクエリ", "根からのパスの和", "パスの和・XOR（逆元がある演算）"]
+    compare_with: [hld, tree-path]
+    page: section-of:euler-tour
+    visual: "辺の重みを変えると、子の部分木（列の区間）全体の「根からの距離」が一斉に変わる様子"
+    problems:
+      - id: abc294_g
+        difficulty: 1702
+        role: example
+        summary: "根からの距離を DFS 順の列に持ち、辺の重みの変更を子の部分木への区間加算にする。距離は LCA との組み合わせ"
+        evidence: "https://kmjp.hatenablog.jp/entry/2023/04/18/0900"
+
+  - key: small-to-large
+    title: マージテク（小さい方を大きい方へ移す）
+    aliases: [マージテク, small-to-large, データ構造をマージする一般的なテク, weighted union heuristic]
+    level: 水
+    level_evidence: "集合の併合の基本が abc329_f (1207)・abc183_f (1586)。木の上の応用は黄（abc350_g 2058・abc359_g 2099）"
+    prerequisites: [union-find, set-map]
+    acl: "atcoder::dsu（merge の戻り値が新しい代表元なので、その代表にデータを寄せる）"
+    signs: ["グループの併合と、グループ内の種類数・個数の問い合わせ", "部分木ごとに集合（map）を持つ", "森に辺を足しながら根付き木を保つ"]
+    compare_with: [dsu-on-tree, union-find, merge-process-tree, auxiliary-tree]
+    page: own
+    visual: "2 つの集合の大きさをバーで示し、要素が移るたびに所属する集合の大きさが 2 倍以上になることを追う図"
+    problems:
+      - id: abc329_f
+        difficulty: 1207
+        role: example
+        summary: "箱の中の色の集合を移すとき、小さい方を大きい方へ入れてから入れ替える"
+        evidence: "https://drken1215.hatenablog.com/entry/2025/03/13/094339"
+      - id: abc183_f
+        difficulty: 1586
+        role: example
+        summary: "Union-Find の代表元に「クラスごとの人数」の map を持たせ、併合では小さい方を大きい方へ足す"
+        evidence: "https://drken1215.hatenablog.com/entry/2020/12/20/192100"
+      - id: abc314_f
+        difficulty: 1736
+        role: practice
+        summary: "チームの併合のたびに期待値の差分を基準値とのずれとして持ち、小さい方のメンバーだけ書き換える"
+        evidence: "https://kazun-kyopro.hatenablog.com/entry/ABC/314/F"
+      - id: abc350_g
+        difficulty: 2058
+        role: practice
+        summary: "辺を足すとき小さい方の木を DFS し直して相手の頂点を根に付け替え、親の配列で共通の隣接点を判定する"
+        evidence: "https://drken1215.hatenablog.com/entry/2024/04/21/014200"
+      - id: abc359_g
+        difficulty: 2099
+        role: practice
+        summary: "色ごとの「頂点数と深さの和」を map で持つ木 DP をマージテクで併合し、同色の組の距離の和を足す"
+        evidence: "https://drken1215.hatenablog.com/entry/2024/06/23/025552"
+      - id: abc394_g
+        difficulty: 2031
+        role: practice
+        summary: "高い建物から順に Union-Find でつなぎ、各成分に持たせたクエリの集合を小さい方から移して、つながった時点で答える"
+        evidence: "https://kmjp.hatenablog.jp/entry/2025/02/24/1000"
+
+  - key: dsu-on-tree
+    title: DSU on Tree（重い子の結果を残す部分木集計）
+    aliases: [DSU on Tree, Sack, 重い子を残す]
+    level: 黄
+    level_evidence: "N が大きく map のマージテクでは遅い abc454_g (2253)"
+    prerequisites: [small-to-large, euler-tour]
+    acl: null
+    signs: ["すべての部分木について、色の最頻値・種類数を求める", "N が大きく map を使うと間に合わない"]
+    compare_with: [small-to-large, mo-on-tree]
+    page: section-of:small-to-large
+    visual: "重い子の結果を残し、軽い子の部分木だけを数え直す様子。各頂点が数え直される回数を表示"
+    problems:
+      - id: abc454_g
+        difficulty: 2253
+        role: example
+        summary: "部分木ごとの色の最頻値とその個数を、重い子の集計を残して軽い子を足し直す方法で配列 1 本で求める"
+        evidence: "https://kmjp.hatenablog.jp/entry/2026/04/19/0900"
+
+  - key: mo-on-tree
+    title: 木上の Mo
+    aliases: [Mo on tree, 木の Mo]
+    level: 黄
+    level_evidence: "パス上の値の頻度を問う abc477_g (2226)"
+    prerequisites: [euler-tour, lca, mo]
+    acl: null
+    signs: ["パス上の値の種類数・頻度のクエリ", "オフラインでよいパスのクエリで、合成しにくい量"]
+    compare_with: [dsu-on-tree, hld]
+    page: section-of:mo
+    visual: "入ると出るの両方を記録した長さ 2N の列で、パスの頂点が「区間にちょうど 1 回現れる頂点」になる様子"
+    problems:
+      - id: abc477_g
+        difficulty: 2226
+        role: example
+        summary: "入る時と出る時の両方を記録した列で、パス上の頂点を区間内に 1 回だけ現れる頂点（と LCA）として Mo で処理する"
+        evidence: "https://kmjp.hatenablog.jp/entry/2026/09/27/0930"
+
+  - key: hld
+    title: HL 分解（重軽分解）
+    aliases: [HLD, Heavy-Light Decomposition, 重軽分解, HL 分解]
+    level: 発展
+    level_evidence: "ABC で必須なのは abc269_h (3178) など 2400 以上だけ。abc294_g (1702) では別解。2000〜2399 で HL 分解が必須の ABC 問題は見つからなかった"
+    prerequisites: [euler-tour, lca, segment-tree]
+    acl: "atcoder::segtree / atcoder::lazy_segtree（HL 分解の番号順の列に載せる）"
+    signs: ["パスへの一括更新とパスの取得", "パス上の最大値（逆元のない演算）を更新付きで", "部分木とパスの両方のクエリ"]
+    compare_with: [euler-tour-path, lca, static-top-tree]
+    page: overview
+    visual: "重い子へ太線を引き、太線の列ごとに番号が連続する様子。パスが O(log N) 本の区間に分かれるのを示す"
+    problems:
+      - id: abc294_g
+        difficulty: 1702
+        role: practice
+        summary: "辺の重み変更と距離のクエリを HL 分解と BIT で解く別解がある"
+        evidence: "https://kmjp.hatenablog.jp/entry/2023/04/18/0900"
+      - id: abc269_h
+        difficulty: 3178
+        role: practice
+        summary: "木の母関数を HL 分解し、重いパスの上で分割統治 FFT を行う"
+        evidence: "https://nyaannyaan.github.io/docs/problems/editorials/"
+
+  - key: centroid-decomposition
+    title: 重心分解
+    aliases: [重心分解, centroid decomposition, 点分治, 木の分割統治]
+    level: 黄
+    level_evidence: "重心分解の木そのものを作る abc291_h (2097)。abc359_g (2099) でも解法の一つ。出題は少ない"
+    prerequisites: [tree-centroid, divide-and-conquer]
+    acl: null
+    signs: ["距離がちょうど K の頂点の組の個数", "全ペアのパスについての量で、辺ごとに分解できないもの", "距離 d 以内の頂点の集計クエリ"]
+    compare_with: [tree-edge-contribution, small-to-large, auxiliary-tree]
+    page: own
+    visual: "重心を取って消し、残った成分で再帰する様子と、できあがる重心木（深さ log N）"
+    problems:
+      - id: abc291_h
+        difficulty: 2097
+        role: example
+        summary: "重心で分解していき、各成分の重心を 1 つ前の重心の子にすると条件を満たす根付き木になる"
+        evidence: "https://kmjp.hatenablog.jp/entry/2023/02/26/0930"
+      - id: abc359_g
+        difficulty: 2099
+        role: practice
+        summary: "同色の頂点の組の距離の和。重心分解・マージテク・Auxiliary Tree など複数の解法がある"
+        evidence: "https://drken1215.hatenablog.com/entry/2024/06/23/025552"
+      - id: keyence2019_e
+        difficulty: 2623
+        role: practice
+        summary: "完全グラフの最小全域木で、辺の候補を重心分解で O(N log N) 本に減らす"
+        evidence: "https://drken1215.hatenablog.com/entry/2019/01/15/081500"
+
+  - key: steiner-subtree
+    title: 指定頂点を結ぶ最小の部分木
+    aliases: [最小シュタイナー木（木）, 指定頂点を含む最小部分木, 必要な辺の数]
+    level: 基礎
+    level_evidence: "1 回だけなら abc368_d (816)。多数のクエリを DFS 順と LCA で答える版は競プロ典型90問 035（★7）で黄相当"
+    prerequisites: [tree-traversal, euler-tour, lca]
+    acl: null
+    signs: ["指定した K 頂点をすべて連結に保つのに必要な最小の頂点数・辺数", "K の合計が N 程度のクエリ"]
+    compare_with: [auxiliary-tree, leaf-first]
+    page: own
+    visual: "指定頂点を DFS 順にたどって 1 周すると、部分木の各辺をちょうど 2 回通ることを示すアニメ"
+    problems:
+      - id: abc368_d
+        difficulty: 816
+        role: example
+        summary: "指定頂点の 1 つを根にして DFS し、部分木に指定頂点を含む頂点だけを数える"
+        evidence: "https://qiita.com/mattsunkun/items/686d98f71383ec29eaf7"
+      - id: typical90_ai
+        difficulty: null
+        role: example
+        summary: "指定頂点を DFS 順に並べ、隣り合う 2 点（最後と最初も）の距離の和の半分が必要な辺の数"
+        evidence: "https://github.com/E869120/kyopro_educational_90/blob/main/sol/035-04.cpp"
+      - id: abc395_g
+        difficulty: 2561
+        role: practice
+        summary: "一般のグラフのシュタイナー木は木の場合と違い、部分集合 DP とダイクストラ法を組み合わせる（03・02 との境界）"
+        evidence: "https://kmjp.hatenablog.jp/entry/2025/03/01/0900"
+
+  - key: auxiliary-tree
+    title: Auxiliary Tree（指定頂点の圧縮木）
+    aliases: [Auxiliary Tree, Virtual Tree, 虚树, 圧縮木, LCA 木]
+    level: 発展
+    level_evidence: "公式の想定解が Auxiliary Tree の abc340_g (2401)。abc359_g (2099) では解法の一つ。黄との境界"
+    prerequisites: [lca, euler-tour, steiner-subtree, tree-dp]
+    acl: null
+    signs: ["色ごと・クエリごとに、少数の頂点だけが関わる木 DP（頂点数の合計が O(N)）"]
+    compare_with: [small-to-large, centroid-decomposition, steiner-subtree]
+    page: overview
+    visual: "指定頂点を DFS 順に並べ、隣り合う 2 点の LCA を足して、祖先関係だけを残した小さな木を組み立てる手順"
+    problems:
+      - id: abc340_g
+        difficulty: 2401
+        role: example
+        summary: "色ごとにその色の頂点の Auxiliary Tree を作って木 DP する（マージテクで木 DP する解法もある）"
+        evidence: "https://ngtkana.hatenablog.com/entry/2024/03/13/202220"
+      - id: abc359_g
+        difficulty: 2099
+        role: practice
+        summary: "色ごとに Auxiliary Tree を作り、辺の寄与で同色の組の距離の和を数える方法がある"
+        evidence: "https://drken1215.hatenablog.com/entry/2024/06/23/025552"
+
+  - key: long-path-decomposition
+    title: 長鎖分解（最も深い子へつなぐ分解）
+    aliases: [長鎖分解, long-path decomposition, 高さによる分解]
+    level: 黄
+    level_evidence: "根から最も遠い葉を順に選ぶ貪欲を、各葉の「長い鎖」の長さを大きい順に取る形で解く abc369_g (2055)。O(1) の祖先ジャンプや深さ添字の DP の高速化は発展"
+    prerequisites: [tree-traversal, tree-diameter]
+    acl: null
+    signs: ["K 個の頂点を選んで通る辺の総長を最大化（K = 1, 2, ... すべて）", "深さを添字にする木 DP を速くしたい"]
+    compare_with: [hld, binary-lifting-tree]
+    page: own
+    visual: "各頂点から最も深い葉へ向かう子に太線を引き、鎖の長さを並べ替えて大きい順に足す様子"
+    problems:
+      - id: abc369_g
+        difficulty: 2055
+        role: example
+        summary: "各葉について、分岐点で最大の葉以外が打ち切られた長さを求め、大きい順に足していく（DFS 順のセグ木でも解ける）"
+        evidence: "https://drken1215.hatenablog.com/entry/2024/09/03/035714"
+
+  - key: merge-process-tree
+    title: 併合過程の木（クラスカル再構築木）
+    aliases: [クラスカル再構築木, Kruskal reconstruction tree, DSU-tree, Union-Find のマージ過程を表す木]
+    level: 発展
+    level_evidence: "abc183_f (1586) の別解として使える。必須になるのは agc002_d (2514) など"
+    prerequisites: [union-find, mst, euler-tour, lca]
+    acl: "atcoder::dsu"
+    signs: ["ある時点のグループについての問い合わせ（オフライン）", "パス上の最大の辺の最小値（ボトルネック）", "辺を重み順に足していく過程"]
+    compare_with: [small-to-large, binary-lifting-tree]
+    page: overview
+    visual: "併合のたびに新しい頂点を作り 2 つの成分の代表を子にする木と、その葉が DFS 順で区間になる様子"
+    problems:
+      - id: abc183_f
+        difficulty: 1586
+        role: practice
+        summary: "併合過程を木にして DFS 順の区間で各時点のグループを表し、クラスごとの人数を累積和の差で求める別解"
+        evidence: "https://drken1215.hatenablog.com/entry/2020/12/20/192100"
+      - id: agc002_d
+        difficulty: 2514
+        role: practice
+        summary: "辺を番号順に併合する過程を使い、2 人が合わせて z 頂点訪れられる最小の番号を求める"
+        evidence: "https://drken1215.hatenablog.com/entry/2018/09/15/193722"
+
+  - key: tree-isomorphism
+    title: 木の同型判定と木のハッシュ
+    aliases: [木の同型, 木のハッシュ, AHU, rooted tree hash]
+    level: 発展
+    level_evidence: "kmjp の ABC E〜Ex 解説 491 件・drken の木カテゴリ・Nyaan の高難度解説一覧を見た範囲で、ABC で本質的に使う問題は見つからなかった（abc351_g の Hash on Tree は更新つき木 DP で別物）"
+    prerequisites: [tree-traversal, tree-center, rolling-hash]
+    acl: null
+    signs: ["形が同じ部分木の種類数", "2 つの木が同じ形か（根あり／根なし）"]
+    compare_with: [tree-center]
+    page: overview
+    visual: "子の名前の多重集合を並べて新しい名前を付けていく AHU の手順を葉から順に見せる"
+    problems: []
+
+  - key: dynamic-tree
+    title: 動的木（Link-Cut Tree・Euler Tour Tree・Top Tree）
+    aliases: [Link-Cut Tree, LCT, Euler Tour Tree, Top Tree, 動的木]
+    level: 発展
+    level_evidence: "森への辺の追加と問い合わせの abc350_g (2058) は LCT でも解けるが、想定はマージテクや平方分割。ABC で必須の問題は見つからなかった"
+    prerequisites: [hld, balanced-bst]
+    acl: null
+    signs: ["辺の追加と削除を繰り返す森でのパスのクエリ", "根の付け替え"]
+    compare_with: [small-to-large, hld]
+    page: overview
+    visual: null
+    problems:
+      - id: abc350_g
+        difficulty: 2058
+        role: practice
+        summary: "辺を追加しながら 2 頂点の共通の隣接頂点を答える。LCT で親を管理する解法もある"
+        evidence: "https://drken1215.hatenablog.com/archive/category/Link-Cut%E6%9C%A8"
+
+  - key: static-top-tree
+    title: Static Top Tree と木 DP の動的更新
+    aliases: [Static Top Tree, 動的木 DP, 重軽再帰 DP]
+    level: 発展
+    level_evidence: "abc351_g (2920)・abc311_h (3605) などすべて 2400 以上"
+    prerequisites: [hld, tree-dp, segment-tree]
+    acl: null
+    signs: ["頂点の値の更新ごとに木 DP の根の値を答える"]
+    compare_with: [hld, dynamic-tree]
+    page: overview
+    visual: null
+    problems:
+      - id: abc351_g
+        difficulty: 2920
+        role: example
+        summary: "頂点の値を変えるたびに木のハッシュ（木 DP の値）を答える。Static Top Tree で更新する"
+        evidence: "https://nyaannyaan.github.io/docs/problems/editorials/"
+      - id: abc311_h
+        difficulty: 3605
+        role: practice
+        summary: "重い子と軽い子に分けて再帰する木 DP（重軽再帰 DP）"
+        evidence: "https://nyaannyaan.github.io/docs/problems/editorials/"
+
+  - key: tree-ratio-greedy
+    title: 比で親に併合する貪欲（01 on Tree）
+    aliases: [01 on Tree, 木の上の順序最適化, 比による併合]
+    level: 発展
+    level_evidence: "abc376_g (2858)"
+    prerequisites: [union-find, priority-queue, greedy-exchange]
+    acl: "atcoder::dsu"
+    signs: ["親を子より先に選ぶ制約つきで、順番による重み付きの和を最適化"]
+    compare_with: [leaf-first]
+    page: overview
+    visual: null
+    problems:
+      - id: abc376_g
+        difficulty: 2858
+        role: example
+        summary: "（確率の和）/（頂点数）が最大の塊は親の塊の直後に訪れてよいので、Union-Find で親へ併合していく"
+        evidence: "https://kmjp.hatenablog.jp/entry/2024/10/23/0930"
+
+  - key: tree-construction
+    title: 木の構築・復元（条件を満たす木を作る）
+    aliases: [木の構築, 木の復元, 距離行列から木]
+    level: 青
+    level_evidence: "abc451_e (1215)・abc478_f (1588) は水だが、abc239_f (1959)・agc005_c (1976) が青"
+    prerequisites: [tree-basics, tree-degree, tree-diameter]
+    acl: "atcoder::dsu（距離行列からの復元でクラスカル法を使うとき）"
+    signs: ["条件を満たす木を 1 つ出力", "距離の情報から木を復元できるか", "訪問順から元の木が何通りあるか"]
+    compare_with: [tree-degree, tree-diameter]
+    page: own
+    visual: null
+    problems:
+      - id: abc451_e
+        difficulty: 1215
+        role: example
+        summary: "各頂点に最も近い頂点とは辺で結ばれることから、距離の短い順に閉路を作らない辺を選んで木を作り、全点から DFS して確かめる"
+        evidence: "https://merom686.hatenablog.com/entry/2026/03/29/013723"
+      - id: abc478_f
+        difficulty: 1588
+        role: example
+        summary: "訪問順から、各頂点の親になれる頂点は左にある自分より大きい値の手前までと分かり、その個数の積で数える"
+        evidence: "https://merom686.hatenablog.com/entry/2026/10/04/013441"
+      - id: abc239_f
+        difficulty: 1959
+        role: practice
+        summary: "与えられた辺と次数の条件を満たすように、次数の足りない成分どうしをつないで木を完成させる"
+        evidence: "https://kazun-kyopro.hatenablog.com/entry/ABC/239/F"
+      - id: agc005_c
+        difficulty: 1976
+        role: practice
+        summary: "最遠距離の最大値から直径を決め、直径上の位置ごとに必要な個数の条件を確かめる"
+        evidence: "https://drken1215.hatenablog.com/entry/2020/11/06/224900"
+      - id: abc252_g
+        difficulty: 2153
+        role: practice
+        summary: "決まった規則の DFS で与えられた順になる木の数を、区間 DP で数える（02 との境界）"
+        evidence: "https://kmjp.hatenablog.jp/entry/2022/05/22/0900"
+
+  - key: tree-counting
+    title: ラベル付き木の数え上げ（Cayley の公式・行列木定理）
+    aliases: [ケーリーの公式, 行列木定理, 全域木の数え上げ]
+    level: 発展
+    level_evidence: "abc303_h (2501)・abc253_h (2758)。数え上げそのものは 07 の担当で、04 では次数列との対応だけを扱う"
+    prerequisites: [tree-degree, binomial-coefficient]
+    acl: null
+    signs: ["ラベル付きの木の個数", "全域木の個数", "次数の条件つきの木の個数"]
+    compare_with: [tree-degree]
+    page: overview
+    visual: null
+    problems:
+      - id: abc303_h
+        difficulty: 2501
+        role: example
+        summary: "次数の候補の制約つきで木を数える。プリューファー列の多項係数を形式的冪級数でまとめる"
+        evidence: "https://drken1215.hatenablog.com/entry/2023/05/28/010200"
+      - id: abc253_h
+        difficulty: 2758
+        role: practice
+        summary: "頂点集合ごとの全域木の数を行列木定理で求め、森の数え上げを部分集合 DP で組み立てる"
+        evidence: "https://kmjp.hatenablog.jp/entry/2022/05/28/1030"

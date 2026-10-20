@@ -1,0 +1,1938 @@
+# 05 データ構造（ds）の項目一覧。planning/research/05-ds.md の §3・§5 を機械で扱える形にしたもの
+# prerequisites / compare_with のうち他分野の key は推測（greedy, bfs-dfs, prefix-sum, coordinate-compression,
+# two-pointers, binary-search, doubling, small-to-large, kruskal, trie, rolling-hash など）
+area: ds
+topics:
+- key: stl-containers
+  title: STL コンテナの使い分けと落とし穴
+  aliases:
+  - STL
+  - 標準ライブラリのコンテナ
+  - コンテナの計算量
+  level: 基礎
+  level_evidence: 容器の使い分けは灰〜緑で必須（abc253_c diff 518、abc233_d 726、abc166_e 1062）。上位の手法の部品
+  prerequisites: []
+  acl: null
+  signs:
+  - どの操作を速くしたいかが決まっている
+  - 追加・削除・検索・最小値の取り出しが混在する
+  compare_with:
+  - ordered-set
+  - priority-queue
+  page: own
+  visual: 操作×コンテナの計算量の早見表（静的な表）
+  problems:
+  - id: abc253_c
+    difficulty: 518
+    role: example
+    summary: 多重集合への追加・個数指定の削除と max−min の出力
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC253C
+  - id: abc233_d
+    difficulty: 726
+    role: practice
+    summary: 和が K の連続部分列の個数
+    evidence: https://drken1215.hatenablog.com/entry/2024/11/23/150237
+  - id: abc166_e
+    difficulty: 1062
+    role: practice
+    summary: j−i=A_i+A_j を満たす組の数
+    evidence: https://drken1215.hatenablog.com/entry/2024/11/23/172436
+  - id: tessoku_book_bb
+    difficulty: null
+    role: example
+    summary: 名前ごとの点数の登録と参照のクエリを処理する
+    evidence: https://github.com/E869120/kyopro-tessoku/tree/main/codes/cpp/chap08
+  - id: tessoku_book_bc
+    difficulty: null
+    role: example
+    summary: 整数の追加・削除と「x 以上で最小の値」のクエリを処理する
+    evidence: https://github.com/E869120/kyopro-tessoku/tree/main/codes/cpp/chap08
+- key: priority-queue
+  title: 優先度付きキューの応用（貪欲・上位 K 個の列挙）
+  aliases:
+  - priority_queue
+  - ヒープ
+  - heap
+  level: 水
+  level_evidence: 容器としては茶（abc234_d 503）。ソート＋ヒープの貪欲・上位 K 個の列挙が水で必須（abc137_d 1313、abc325_d 1367、abc123_d 1489）、青まで続く（abc214_e 1835）
+  prerequisites:
+  - stl-containers
+  - greedy
+  acl: null
+  signs:
+  - 毎回いちばん～なものを選ぶ
+  - 締切・開始時刻があり今使えるものから最良を選ぶ
+  - K 番目に大きい
+  - 上位 K 個の和を大きい順に
+  compare_with:
+  - ordered-set
+  - lazy-deletion
+  page: own
+  visual: 二分ヒープの push（上げる）と pop（下げる）のステップ送り。締切つき貪欲で時刻が進むたびにヒープへ入る様子
+  problems:
+  - id: abc234_d
+    difficulty: 503
+    role: example
+    summary: 各接頭辞で K 番目に大きい値を順に答える
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/15/003821
+  - id: abc141_d
+    difficulty: 823
+    role: practice
+    summary: 割引券を1枚ずつ最も高い品に使い支払いを最小化する
+    evidence: https://drken1215.hatenablog.com/entry/2019/09/16/032000
+  - id: abc137_d
+    difficulty: 1313
+    role: example
+    summary: 締切つきの仕事を1日1件選び報酬和を最大化する
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/29/195900
+  - id: abc325_d
+    difficulty: 1367
+    role: practice
+    summary: 区間内の整数時刻に1つずつ印字でき、最大何個印字できるか
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/22/184800
+  - id: abc123_d
+    difficulty: 1489
+    role: example
+    summary: 3つの数列から1つずつ選んだ和の上位 K 個を出力する
+    evidence: https://drken1215.hatenablog.com/entry/2019/04/07/001000
+  - id: abc214_e
+    difficulty: 1835
+    role: practice
+    summary: 各ボールを区間[L,R]内の別々の箱に入れられるか判定する
+    evidence: https://scrapbox.io/procon-kirokuyou/ABC214_E_-_Packing_Under_Range_Regulations_(500)
+- key: lazy-deletion
+  title: 削除できるヒープ（遅延削除）
+  aliases:
+  - 遅延削除
+  - erasable heap
+  - 削除可能ヒープ
+  level: 水
+  level_evidence: abc170_e（diff 1502）で必須。C++ では multiset で代用できる
+  prerequisites:
+  - priority-queue
+  acl: null
+  signs:
+  - ヒープから任意の要素を消したい
+  - グループ間の移動で各グループの最大値が変わる
+  compare_with:
+  - ordered-set
+  - top-k-multiset
+  page: section-of:priority-queue
+  visual: 本体のヒープと削除予定のヒープを並べ、top が一致したら両方から捨てる様子
+  problems:
+  - id: abc253_c
+    difficulty: 518
+    role: practice
+    summary: 多重集合への追加・個数指定の削除と max−min の出力
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC253C
+  - id: abc170_e
+    difficulty: 1502
+    role: example
+    summary: 転園のたびに各園の最強レートの最小値を答える
+    evidence: https://drken1215.hatenablog.com/entry/2020/11/15/195000
+  - id: abc364_f
+    difficulty: 1878
+    role: practice
+    summary: 区間内の全頂点と新しい頂点を結ぶ操作の後の最小全域木のコスト
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0727_abc364
+- key: top-k-multiset
+  title: 2 つのヒープ・2 つの multiset（中央値・上位 K 個の和）
+  aliases:
+  - 2つのヒープ
+  - 中央値の管理
+  - 上位K個の和
+  - Priority Sum Structure
+  level: 水
+  level_evidence: abc306_e（1268）・abc281_e（1334）で必須、abc127_f（2003）は中央値の発展
+  prerequisites:
+  - ordered-set
+  - priority-queue
+  acl: null
+  signs:
+  - 上位 K 個（下位 K 個）の和を追加・削除しながら
+  - 中央値を更新しながら
+  - 幅 M の窓で小さい方から K 個の和
+  compare_with:
+  - segtree-on-values
+  - kth-element
+  page: own
+  visual: 数直線上の要素を L（小さい K 個）と R に色分けし、追加・削除で境界の要素が移る様子
+  problems:
+  - id: abc306_e
+    difficulty: 1268
+    role: example
+    summary: 1点更新ごとに大きい方から K 個の和を答える
+    evidence: https://scrapbox.io/ganariya-competitive/AtCoderBeginnerContest306_E%E5%95%8F%E9%A1%8C475%E7%82%B9_%E3%80%8CBest_Performances%E3%80%8D
+  - id: abc281_e
+    difficulty: 1334
+    role: example
+    summary: 長さ M の各窓で小さい方から K 個の和を答える
+    evidence: https://drken1215.hatenablog.com/entry/2022/12/14/185200
+  - id: arc074_b
+    difficulty: 1730
+    role: practice
+    summary: 3N 個から N 個除き、前半和−後半和を最大化する
+    evidence: https://drken1215.hatenablog.com/entry/2019/04/28/114800
+  - id: abc127_f
+    difficulty: 2003
+    role: practice
+    summary: '|x−a|+b を足していく関数の最小値と最小点を答える'
+    evidence: https://drken1215.hatenablog.com/entry/2019/06/15/114700
+- key: ordered-set
+  title: set / multiset / map の応用（前後の要素・mex・パレート境界）
+  aliases:
+  - set
+  - multiset
+  - map
+  - 順序付き集合
+  - lower_bound
+  level: 基礎
+  level_evidence: lower_bound で前後を取る基本は緑（abc217_d 802、abc370_d 1088、abc241_d 1177）。応用は水〜黄（abc245_e 1571、abc308_g 2008）
+  prerequisites:
+  - stl-containers
+  acl: null
+  signs:
+  - x 以上で最小の値・最も近い値
+  - まだ使われていない最小の値（mex）
+  - 追加・削除のあとで最小値・最大値
+  - 同じ行・列で次にある壁
+  compare_with:
+  - priority-queue
+  - interval-set
+  - kth-element
+  page: own
+  visual: 数直線上の set の要素と lower_bound が指す位置・その 1 つ前（prev）を矢印で示す図
+  problems:
+  - id: abc217_d
+    difficulty: 802
+    role: example
+    summary: 木材の切断と、点 x を含む木片の長さの問い合わせ
+    evidence: https://kanpurin.hatenablog.com/entry/2021/09/05/163703
+  - id: abc330_e
+    difficulty: 1004
+    role: practice
+    summary: 1点更新ごとに数列の mex を答える
+    evidence: https://drken1215.hatenablog.com/entry/2023/11/26/233800
+  - id: abc370_d
+    difficulty: 1088
+    role: example
+    summary: 爆弾で上下左右の最も近い壁を壊すシミュレーション
+    evidence: https://drken1215.hatenablog.com/entry/2024/09/14/030141
+  - id: abc241_d
+    difficulty: 1177
+    role: practice
+    summary: 追加と「x以下で k 番目に大きい」「x以上で k 番目に小さい」に答える
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC241D-cpp
+  - id: abc245_e
+    difficulty: 1571
+    role: practice
+    summary: 全チョコを縦横とも収まる別々の箱に入れられるか
+    evidence: https://drken1215.hatenablog.com/entry/2022/03/30/003800
+  - id: abc308_g
+    difficulty: 2008
+    role: practice
+    summary: 追加・削除のたびに任意2要素の XOR の最小値を答える
+    evidence: https://www.acwing.com/solution/content/209512/
+- key: interval-set
+  title: 区間を set で管理する
+  aliases:
+  - 区間をsetで管理
+  - IntervalSet
+  - RangeSet
+  - ODT
+  - 珂朵莉树
+  - disjointな区間の集合
+  level: 水
+  level_evidence: 単純な塗り・被覆は緑〜水（abc435_e 982、abc380_e 1230）。値つきの区間の分割・統合は黄〜発展（abc430_g 2371、abc255_h 2430、abc256_h 2531）
+  prerequisites:
+  - ordered-set
+  acl: null
+  signs:
+  - 区間を塗る・塗りつぶす
+  - 同じ値が連続する塊
+  - 座標が 10^9 で区間の追加・削除
+  - 点 x が覆われているか
+  compare_with:
+  - union-find-next-pointer
+  - lazy-segment-tree
+  - segment-tree-beats
+  page: own
+  visual: 数直線上の区間の帯が、代入で分割・併合されるステップ送り
+  problems:
+  - id: abc435_e
+    difficulty: 982
+    role: example
+    summary: 区間を黒く塗るたびに白いマスの数を答える（N は 1e9 まで）
+    evidence: https://qiita.com/omakasessan/items/4d5dfca408ace2f70f7c
+  - id: abc330_e
+    difficulty: 1004
+    role: practice
+    summary: 1点更新ごとに数列の mex を答える
+    evidence: https://drken1215.hatenablog.com/entry/2023/11/26/233800
+  - id: abc380_e
+    difficulty: 1230
+    role: example
+    summary: 同色の連結部分の塗り替えと、色ごとのマス数
+    evidence: https://drken1215.hatenablog.com/entry/2024/11/17/035045
+  - id: abc430_g
+    difficulty: 2371
+    role: practice
+    summary: 区間の各集合への値の追加・削除と、区間内で要素数最大の集合の数
+    evidence: https://kmjp.hatenablog.jp/entry/2025/11/01/1030
+  - id: abc255_h
+    difficulty: 2430
+    role: practice
+    summary: 毎日実がなる木々の区間収穫量を答える
+    evidence: https://kmjp.hatenablog.jp/entry/2022/06/12/0930
+  - id: abc256_h
+    difficulty: 2531
+    role: practice
+    summary: 区間を x で割る・区間代入・区間和のクエリ
+    evidence: https://kmjp.hatenablog.jp/entry/2022/06/18/0930
+- key: global-offset
+  title: 全体への操作を変数で持つ（オフセット・反転フラグ）
+  aliases:
+  - 全体加算
+  - オフセット
+  - 反転フラグ
+  - 全体に反映させる値を別に持つ
+  level: 基礎
+  level_evidence: 茶〜緑で頻出（abc278_d 559、abc158_d 610、abc379_d 745、abc212_d 775）
+  prerequisites:
+  - stl-containers
+  acl: null
+  signs:
+  - 全要素に x を足す
+  - 全体を反転する
+  - 全体を回転する
+  - 全体に代入
+  compare_with:
+  - lazy-segment-tree
+  page: own
+  visual: 実際の値＝格納値＋オフセット、を 2 段で並べた図
+  problems:
+  - id: arc077_a
+    difficulty: 552
+    role: practice
+    summary: 末尾追加と全体反転を繰り返した結果の列
+    evidence: https://drken1215.hatenablog.com/entry/2025/01/01/174846
+  - id: abc278_d
+    difficulty: 559
+    role: practice
+    summary: 全体代入・1点加算・1点取得のクエリ
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/05/002000
+  - id: abc158_d
+    difficulty: 610
+    role: example
+    summary: 文字列の反転と先頭・末尾への追加のクエリ
+    evidence: https://drken1215.hatenablog.com/entry/2020/03/08/144800
+  - id: abc379_d
+    difficulty: 745
+    role: practice
+    summary: 植える・全体が育つ・高さ H 以上を収穫するクエリ
+    evidence: https://drken1215.hatenablog.com/entry/2024/11/10/153300
+  - id: abc212_d
+    difficulty: 775
+    role: example
+    summary: 袋への追加・全体への加算・最小値の取り出し
+    evidence: https://drken1215.hatenablog.com/entry/2025/02/06/101932
+  - id: typical90_ar
+    difficulty: null
+    role: practice
+    summary: 配列の右回転・2要素の交換・参照を高速に処理する
+    evidence: https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/sol/044.cpp
+- key: linked-list
+  title: 配列で作る連結リスト
+  aliases:
+  - 連結リスト
+  - 双方向リスト
+  - linked list
+  level: 基礎
+  level_evidence: 茶〜緑（abc237_d 544、abc344_e 973）
+  prerequisites:
+  - stl-containers
+  acl: null
+  signs:
+  - 値 x の直後に y を挿入
+  - 値 x を削除して前後をつなぐ
+  - 列車の連結・切り離し
+  compare_with:
+  - balanced-bst
+  - ordered-set
+  page: own
+  visual: ノードと next/prev の矢印。挿入・削除で矢印が付け替わるステップ送り
+  problems:
+  - id: abc337_c
+    difficulty: 258
+    role: practice
+    summary: 「自分の前の人」の情報から列全体を復元する
+    evidence: https://zenn.dev/shinonome81/articles/3e1c0c8a9c00fc
+  - id: abc237_d
+    difficulty: 544
+    role: practice
+    summary: L/R に従い数を左右へ足していった最終列
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC237D
+  - id: abc344_e
+    difficulty: 973
+    role: example
+    summary: 値の直後への挿入と値の削除を繰り返した最終列
+    evidence: https://programming-hiroba.com/abc344-e/
+- key: stack-techniques
+  title: スタック・キュー・deque の使いどころ
+  aliases:
+  - stack
+  - queue
+  - deque
+  - 括弧の対応
+  level: 基礎
+  level_evidence: 括弧・打ち消し系は茶（abc328_d 555、abc240_d 570、abc307_d 666）。交差判定は水（abc338_e 1220）、ARC では黄（arc076_c 2180）
+  prerequisites:
+  - stl-containers
+  acl: null
+  signs:
+  - 括弧の対応
+  - 直前の状態に戻す（Undo）
+  - 特定の並びを繰り返し取り除く
+  - 両端への追加
+  compare_with:
+  - monotonic-stack
+  - persistent-data-structures
+  page: own
+  visual: 括弧列を左から読み、スタックに積まれ・降ろされる様子
+  problems:
+  - id: abc328_d
+    difficulty: 555
+    role: example
+    summary: ABC を左から取り除き続けた後の文字列
+    evidence: https://drken1215.hatenablog.com/entry/2023/11/12/191354
+  - id: abc240_d
+    difficulty: 570
+    role: practice
+    summary: 同じ数 k のボールが k 個続くと消える筒のボール数
+    evidence: https://drken1215.hatenablog.com/entry/2024/07/05/035530
+  - id: abc307_d
+    difficulty: 666
+    role: example
+    summary: 中に括弧を含まない (…) を消せるだけ消した結果
+    evidence: https://drken1215.hatenablog.com/entry/2024/06/10/020153
+  - id: abc338_e
+    difficulty: 1220
+    role: practice
+    summary: 円周上の弦どうしに交差があるか判定する
+    evidence: https://drken1215.hatenablog.com/entry/2024/11/02/202502
+  - id: arc076_c
+    difficulty: 2180
+    role: practice
+    summary: 長方形の周上にある点の組を交差せず結べるか
+    evidence: https://drken1215.hatenablog.com/entry/2024/11/05/012734
+- key: monotonic-stack
+  title: 単調スタック
+  aliases:
+  - monotonic stack
+  - 単調stack
+  - ヒストグラム内最大長方形
+  level: 水
+  level_evidence: 「見える数」は緑（abc372_d 901）、最近の大小を使う応用が水〜青（abc359_e 1275、abc379_f 1659、agc005_b 1828）
+  prerequisites:
+  - stack-techniques
+  acl: null
+  signs:
+  - 左（右）で初めて大きい（小さい）要素
+  - 見えるビル
+  - i が最大になる区間の個数
+  - すべての部分列の最大値の和
+  compare_with:
+  - sliding-window-minimum
+  - segtree-binary-search
+  - cartesian-tree
+  page: own
+  visual: 棒グラフを左から見ていき、スタックの中身（右肩下がりの列）が積まれ・崩れるステップ送り
+  problems:
+  - id: abc189_c
+    difficulty: 565
+    role: practice
+    summary: 区間の最小値×長さの最大（ヒストグラム最大長方形）
+    evidence: https://note.com/rikimarublack/n/n3074b0955e95
+  - id: abc372_d
+    difficulty: 901
+    role: example
+    summary: 各ビルについて、右側にある「見える」ビルの数
+    evidence: https://drken1215.hatenablog.com/entry/2024/09/22/015541
+  - id: abc359_e
+    difficulty: 1275
+    role: example
+    summary: 板で仕切られた水槽で各区画に水が入る時刻
+    evidence: https://drken1215.hatenablog.com/entry/2024/11/04/011552
+  - id: abc379_f
+    difficulty: 1659
+    role: practice
+    summary: 2 つのビル l<r の両方から見える、r より右のビルの数をクエリごとに答える
+    evidence: https://note.com/rikimarublack/n/n3074b0955e95
+  - id: agc005_b
+    difficulty: 1828
+    role: practice
+    summary: 全区間の最小値の総和
+    evidence: https://drken1215.hatenablog.com/entry/2019/04/04/210200
+  - id: tessoku_book_bh
+    difficulty: null
+    role: example
+    summary: 各日について、それより前で株価が高かった最後の日を答える
+    evidence: https://github.com/E869120/kyopro-tessoku/tree/main/codes/cpp/chap08
+- key: sliding-window-minimum
+  title: スライド最小値（単調 deque）
+  aliases:
+  - スライド最小値
+  - sliding window minimum
+  - 単調deque
+  level: 水
+  level_evidence: ABC で必須の例は少ない（abc352_d 714 は multiset でも可）。DP の遷移の高速化（02）で青帯に現れる
+  prerequisites:
+  - stack-techniques
+  - two-pointers
+  acl: null
+  signs:
+  - 幅 K の区間の最小値（最大値）をすべて
+  - 尺取りの窓の最大値と最小値の差
+  compare_with:
+  - monotonic-stack
+  - swag
+  - ordered-set
+  page: section-of:monotonic-stack
+  visual: 窓を右へずらしながら deque の中身（単調増加）が変わるステップ送り
+  problems:
+  - id: abc352_d
+    difficulty: 714
+    role: example
+    summary: 連続する値 K 個の位置の max−min の最小値
+    evidence: https://zenn.dev/atlantis/articles/8a4c3d20c05624
+- key: swag
+  title: SWAG（2 つのスタックで作る総積つきキュー）
+  aliases:
+  - Sliding Window Aggregation
+  - Foldable Queue
+  - Queue Operate All Composite
+  level: 発展
+  level_evidence: ABC で必須の問題は見つからなかった（Library Checker の Queue Operate All Composite で練習）
+  prerequisites:
+  - sliding-window-minimum
+  - segment-tree
+  acl: null
+  signs:
+  - 窓の gcd・行列積・一次関数の合成
+  - キューの全要素の総積
+  compare_with:
+  - sliding-window-minimum
+  - segment-tree
+  page: section-of:sliding-window-minimum
+  visual: 前のスタックと後ろのスタック、pop で中身が移る様子
+  problems: []
+- key: union-find
+  title: Union-Find（基本と実装）
+  aliases:
+  - DSU
+  - Disjoint Set Union
+  - 素集合データ構造
+  - UnionFind
+  level: 基礎
+  level_evidence: 茶〜緑で頻出（abc288_c 436、abc292_d 579、abc177_d 732、abc350_d 773）
+  prerequisites:
+  - graph-basics
+  acl: atcoder::dsu
+  signs:
+  - 辺を追加していく
+  - グループを合併する
+  - 同じグループか
+  - グループの大きさ
+  - 連結成分の個数
+  compare_with:
+  - bfs-dfs
+  page: own
+  visual: 森の上で merge（小さい木を大きい木の根の下へ）と find の経路圧縮のステップ送り
+  problems:
+  - id: abc288_c
+    difficulty: 436
+    role: example
+    summary: 閉路をなくすために取り除く辺の最小本数を求める
+    evidence: https://kyo-pro.hatenablog.com/entry/2023/02/04/224004
+  - id: abc292_d
+    difficulty: 579
+    role: practice
+    summary: すべての連結成分で頂点数と辺数が等しいかを判定する
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/292/D
+  - id: abc177_d
+    difficulty: 732
+    role: example
+    summary: 友達どうしを同じ組にしない分け方の最小組数（＝最大の連結成分の大きさ）を求める
+    evidence: https://zenn.dev/dhirabayashi/articles/f09d188b42ed7d
+  - id: abc157_d
+    difficulty: 1208
+    role: practice
+    summary: 各人について、同じ成分にいて友達でもブロック相手でもない人の数を求める
+    evidence: https://drken1215.hatenablog.com/entry/2020/03/02/022900
+  - id: practice2_a
+    difficulty: null
+    role: example
+    summary: 辺の追加と、2頂点が連結かの判定のクエリを処理する
+    evidence: https://drken1215.hatenablog.com/entry/2022/12/14/212330
+  - id: typical90_l
+    difficulty: null
+    role: practice
+    summary: マスを赤く塗るクエリと、2マスが赤マスだけで行き来できるかのクエリを処理する
+    evidence: https://qiita.com/motoya0118/items/a953c986e97214992cd7
+- key: union-find-applications
+  title: Union-Find の応用（成分に情報を持たせる・併合で寄与を数える）
+  aliases:
+  - UFに情報を持たせる
+  - 併合時の寄与
+  - 成分ごとの集約
+  level: 水
+  level_evidence: 水が中心（abc372_e 1042、abc214_d 1341、abc238_e 1577、abc183_f 1586）、言い換え系は青（abc355_f 1924、arc065_b 1996）
+  prerequisites:
+  - union-find
+  acl: atcoder::dsu
+  signs:
+  - 全頂点対の～の総和
+  - パス上の最大の辺
+  - 区間和が分かっているか
+  - 2 種類の辺でともに連結
+  - 成分の上位 k 個
+  compare_with:
+  - small-to-large
+  - kruskal
+  page: own
+  visual: 辺を重みの昇順に足し、併合のたびに「サイズの積」個の組の答えが決まる様子
+  problems:
+  - id: abc372_e
+    difficulty: 1042
+    role: example
+    summary: 辺の追加と、ある頂点の成分で k 番目（k≤10）に大きい頂点番号を答えるクエリを処理する
+    evidence: https://drken1215.hatenablog.com/entry/2024/09/22/022522
+  - id: abc214_d
+    difficulty: 1341
+    role: example
+    summary: 木の全頂点対について、パス上の最大の辺の重みの総和を求める
+    evidence: https://blog.hamayanhamayan.com/entry/2021/08/15/034729
+  - id: abc238_e
+    difficulty: 1577
+    role: example
+    summary: いくつかの区間和が分かっているとき、全体の和が一意に決まるかを判定する
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/238/E
+  - id: abc183_f
+    difficulty: 1586
+    role: practice
+    summary: 生徒のグループの合流と、グループ内のクラス c の人数を答えるクエリを処理する
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/20/192100
+  - id: abc355_f
+    difficulty: 1924
+    role: practice
+    summary: 木に辺を1本ずつ足すたびに最小全域木の重みを答える（辺の重みは10以下）
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0525_abc355
+  - id: arc065_b
+    difficulty: 1996
+    role: practice
+    summary: 道路でも鉄道でも連結な都市の数を、各都市について求める
+    evidence: https://drken1215.hatenablog.com/entry/2021/07/28/014400
+- key: offline-reverse
+  title: 削除を逆順の追加にする
+  aliases:
+  - 逆順処理
+  - 時間を逆にする
+  - 操作を逆順に見る
+  level: 水
+  level_evidence: 水（abc229_e 1015、abc264_e 1229、abc120_d 1355）
+  prerequisites:
+  - union-find
+  acl: atcoder::dsu
+  signs:
+  - 順に削除・崩落・切断
+  - 各時点の連結の情報
+  - 頂点を番号順に取り除く
+  compare_with:
+  - rollback-union-find
+  - offline-queries
+  page: own
+  visual: 時間軸を右から左にたどると「削除」が「追加」に見えるアニメーション
+  problems:
+  - id: abc229_e
+    difficulty: 1015
+    role: example
+    summary: 頂点を番号順に削除していくとき、各時点の連結成分の個数を求める
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC229E
+  - id: abc264_e
+    difficulty: 1229
+    role: practice
+    summary: 電線を順に切るたびに、電気が通っている都市の数を答える
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/264/E
+  - id: abc120_d
+    difficulty: 1355
+    role: example
+    summary: 橋が順に崩落していくとき、各時点で行き来できない島の組の数を求める
+    evidence: https://drken1215.hatenablog.com/entry/2019/03/03/224600
+  - id: abc040_d
+    difficulty: 1656
+    role: practice
+    summary: 年 w より後に作られた道路だけで行ける都市の数を、各クエリについて求める
+    evidence: https://pyteyon.hatenablog.com/entry/2019/09/30/110202
+- key: weighted-union-find
+  title: 重み付き Union-Find（ポテンシャル）
+  aliases:
+  - ポテンシャル付きUnion-Find
+  - 重み付きUF
+  - 差分制約の矛盾判定
+  level: 水
+  level_evidence: 易しい問題は DFS で足りる（abc327_d 709、abc373_d 765）。オンラインの矛盾判定で必須（arc090_b 1452、abc328_f 1477）、応用は青（abc280_f 1819）
+  prerequisites:
+  - union-find
+  acl: null
+  signs:
+  - x_R − x_L = D の形の情報
+  - 矛盾しないか
+  - 相対位置
+  - 正直者と嘘つき
+  - 2 色に塗れるか（偶奇）
+  compare_with:
+  - bfs-dfs
+  - bipartite-graph
+  page: own
+  visual: 辺に差分のラベルを付け、経路圧縮でラベルが足し合わされる様子
+  problems:
+  - id: abc327_d
+    difficulty: 709
+    role: practice
+    summary: 条件を満たす 0/1 列が存在するか（＝グラフが二部グラフか）を判定する
+    evidence: https://drken1215.hatenablog.com/entry/2023/11/05/161745
+  - id: abc373_d
+    difficulty: 765
+    role: practice
+    summary: 各辺 u→v について x_v − x_u = w となる頂点の値を1つ求める
+    evidence: https://drken1215.hatenablog.com/entry/2024/09/29/022852
+  - id: arc090_b
+    difficulty: 1452
+    role: example
+    summary: 「x_R − x_L = D」の形の情報の集まりが矛盾しないかを判定する
+    evidence: https://drken1215.hatenablog.com/entry/2022/12/08/152700
+  - id: abc328_f
+    difficulty: 1477
+    role: example
+    summary: 差の条件を順に見て、それまでに採用した条件と矛盾しないものだけを採用する
+    evidence: https://drken1215.hatenablog.com/entry/2023/11/12/040700
+  - id: abc280_f
+    difficulty: 1819
+    role: practice
+    summary: 逆向きに通ると重みの符号が反転するグラフで、2点間の最長路を答える（nan/inf 判定つき）
+    evidence: https://drken1215.hatenablog.com/entry/2022/12/07/231851
+  - id: typical90_bp
+    difficulty: null
+    role: practice
+    summary: 隣り合う2項の和の情報を受け取りながら、A_X = V のときの A_Y を答える（決まらなければ Ambiguous）
+    evidence: https://enakai00.hatenablog.com/entry/2021/09/06/103720
+- key: union-find-next-pointer
+  title: 「次の空き」へ飛ぶ Union-Find
+  aliases:
+  - 次の要素へのポインタ
+  - 区間を塗るUF
+  - painting subarrays
+  level: 水
+  level_evidence: 水（abc228_d 1035、abc380_e 1230）、応用は青（abc364_f 1878）。set で代用できることが多い
+  prerequisites:
+  - union-find
+  acl: null
+  signs:
+  - 右の最初の空き
+  - 各マスは一度しか塗られない
+  - 区間内の未処理の位置を飛ばす
+  compare_with:
+  - interval-set
+  - ordered-set
+  page: section-of:union-find-applications
+  visual: 配列のマスから右向きの矢印が伸び、埋まったマスが飛ばされる様子
+  problems:
+  - id: abc228_d
+    difficulty: 1035
+    role: example
+    summary: 環状の配列で、位置 h から右へ最初の空きに値を書き込むクエリと読み出しクエリを処理する
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/228/D
+  - id: abc380_e
+    difficulty: 1230
+    role: example
+    summary: 1列のマスで、同じ色でつながった区間を塗り替えるクエリと、色ごとのマス数のクエリを処理する
+    evidence: https://drken1215.hatenablog.com/entry/2024/11/17/035045
+  - id: abc364_f
+    difficulty: 1878
+    role: practice
+    summary: 区間内の全頂点と新しい頂点を結ぶ操作をすべて行った後の最小全域木のコストを求める
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0727_abc364
+- key: partially-persistent-union-find
+  title: 部分永続 Union-Find
+  aliases:
+  - 部分永続UF
+  - 時刻つきUnion-Find
+  level: 発展
+  level_evidence: agc002_d（2514）。ABC で必須の例は見つからなかった
+  prerequisites:
+  - union-find
+  - binary-search
+  acl: null
+  signs:
+  - 時刻 t の時点で連結か
+  - 初めて同じ集合になる時刻
+  - 最初の t 本の辺で
+  compare_with:
+  - parallel-binary-search
+  - rollback-union-find
+  page: overview
+  visual: 各辺に「つながった時刻」を書いた木で、時刻 t の find が t 以下の辺だけを登る様子
+  problems:
+  - id: agc002_d
+    difficulty: 2514
+    role: practice
+    summary: 最初の t 本の辺で、x と y の成分の頂点数の合計が z 以上になる最小の t を各クエリで答える
+    evidence: https://drken1215.hatenablog.com/entry/2018/09/15/193722
+  - id: code_thanks_festival_2017_h
+    difficulty: null
+    role: example
+    summary: 集合の併合操作の列に対し、x と y が初めて同じ集合になる操作番号を答える
+    evidence: https://drken1215.hatenablog.com/entry/2018/09/15/193740
+- key: parallel-binary-search
+  title: 並列二分探索
+  aliases:
+  - 整体二分
+  - parallel binary search
+  level: 発展
+  level_evidence: agc002_d（2514）。ABC で必須の例は見つからなかった
+  prerequisites:
+  - binary-search
+  - union-find
+  acl: null
+  signs:
+  - 多数のクエリそれぞれが「単調な過程のどの時点で条件を満たすか」
+  compare_with:
+  - partially-persistent-union-find
+  page: section-of:partially-persistent-union-find
+  visual: null
+  problems:
+  - id: agc002_d
+    difficulty: 2514
+    role: example
+    summary: 最初の t 本の辺で、x と y の成分の頂点数の合計が z 以上になる最小の t を各クエリで答える
+    evidence: https://drken1215.hatenablog.com/entry/2018/09/15/193722
+  - id: code_thanks_festival_2017_h
+    difficulty: null
+    role: practice
+    summary: 集合の併合操作の列に対し、x と y が初めて同じ集合になる操作番号を答える
+    evidence: https://drken1215.hatenablog.com/entry/2018/09/15/193740
+- key: rollback-union-find
+  title: Undo 可能 Union-Find とオフライン動的連結性
+  aliases:
+  - ロールバックUF
+  - undo つき Union-Find
+  - Offline Dynamic Connectivity
+  - オフライン削除
+  level: 発展
+  level_evidence: abc302_h（2407）。オフライン動的連結性が必須の ABC の問題は見つからなかった
+  prerequisites:
+  - union-find
+  - segment-tree
+  acl: null
+  signs:
+  - 木の DFS で入るとき併合・出るとき取り消し
+  - 辺の追加と削除が混ざる連結判定（オフライン）
+  compare_with:
+  - offline-reverse
+  - partially-persistent-union-find
+  page: overview
+  visual: DFS の行き（併合）と帰り（取り消し）でスタックが伸び縮みする様子
+  problems:
+  - id: abc302_h
+    difficulty: 2407
+    role: example
+    summary: 木の根から各頂点へのパス上で各頂点のボールの片方を選ぶとき、書かれた値の種類数の最大値を求める
+    evidence: https://drken1215.hatenablog.com/entry/2023/06/10/032900
+- key: fenwick-tree
+  title: BIT（Fenwick Tree）
+  aliases:
+  - Binary Indexed Tree
+  - フェニック木
+  - BIT
+  level: 水
+  level_evidence: 道具としては緑〜水（abc185_f 1053、abc340_e 1157）。値で座圧して数える型が水で頻出（abc351_f 1253、abc221_e 1515、abc231_f 1580）、平面走査と組むと青
+  prerequisites:
+  - prefix-sum
+  - bit-operations
+  acl: atcoder::fenwick_tree
+  signs:
+  - 一点更新と区間和が混在
+  - i より前にある x 以下の個数
+  - 座標圧縮した値ごとの個数
+  - N, Q ≤ 2×10^5
+  compare_with:
+  - segment-tree
+  - prefix-sum
+  - sparse-table
+  page: own
+  visual: 添字を 2 進数で並べ、各箱が覆う区間を横棒で描く図。add と sum で通る箱が順に光るステップ送り
+  problems:
+  - id: abc185_f
+    difficulty: 1053
+    role: example
+    summary: 一点を XOR で更新し、区間の XOR を答える
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/14/005700
+  - id: abc351_f
+    difficulty: 1253
+    role: example
+    summary: 全ての i<j について max(A_j−A_i, 0) の総和を求める
+    evidence: https://torus711.hatenablog.com/entry/2024/04/28/182823
+  - id: abc221_e
+    difficulty: 1515
+    role: practice
+    summary: 先頭≦末尾となる長さ2以上の部分列の個数を数える
+    evidence: https://note.com/syamashi/n/nc5b5876e0514
+  - id: abc231_f
+    difficulty: 1580
+    role: practice
+    summary: A_i≧A_j かつ B_i≦B_j となる (i,j) の組を数える
+    evidence: https://zenn.dev/m193h/articles/20211212sun001912m193habc231
+  - id: abc285_f
+    difficulty: 1876
+    role: practice
+    summary: 一文字更新と、区間が全体をソートした文字列の部分文字列か判定
+    evidence: https://qiita.com/recuraki/items/38a850c4aad563853149
+  - id: practice2_b
+    difficulty: null
+    role: example
+    summary: 一点加算と区間和のクエリをそのまま処理する
+    evidence: https://drken1215.hatenablog.com/entry/2022/12/14/215822
+- key: inversion-number
+  title: 転倒数
+  aliases:
+  - inversion
+  - 反転数
+  - バブルソートの交換回数
+  level: 水
+  level_evidence: BIT で数えて差分更新する型が水（abc190_f 1321、abc396_f 1479、abc261_f 1587）、期待値・尺取りと組むと青（arc075_c 1979、abc380_g 1995）
+  prerequisites:
+  - fenwick-tree
+  - coordinate-compression
+  acl: atcoder::fenwick_tree
+  signs:
+  - i < j かつ A_i > A_j の組の数
+  - 隣接 swap の最小回数
+  - 累積和の大小の組（平均が K 以上の区間の数）
+  compare_with:
+  - mo-algorithm
+  page: own
+  visual: 棒グラフの列で逆転している組を線で結ぶ図。BIT に値が入っていくステップ送り
+  problems:
+  - id: abc190_f
+    difficulty: 1321
+    role: example
+    summary: 順列を巡回シフトした N 通りの列それぞれの転倒数を答える
+    evidence: https://kmjp.hatenablog.jp/entry/2021/01/30/0900
+  - id: abc396_f
+    difficulty: 1479
+    role: practice
+    summary: 全要素に k を足して mod M を取った列の転倒数を各 k で答える
+    evidence: https://kcpc.hatenablog.com/entry/2025/03/09/020000
+  - id: abc261_f
+    difficulty: 1587
+    role: practice
+    summary: 色の違う球の交換だけにコストがかかるソートの最小コスト
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC261F
+  - id: arc075_c
+    difficulty: 1979
+    role: practice
+    summary: 平均が K 以上の連続区間の個数を数える
+    evidence: https://drken1215.hatenablog.com/entry/2020/04/24/015400
+  - id: abc380_g
+    difficulty: 1995
+    role: practice
+    summary: 長さKの区間を一様に選んでシャッフルした後の転倒数の期待値
+    evidence: https://drken1215.hatenablog.com/entry/2024/11/17/113336
+  - id: chokudai_S001_j
+    difficulty: null
+    role: example
+    summary: 隣接交換でソートするときの交換回数（転倒数）を求める
+    evidence: https://note.com/vain0x/n/n0037d6468812
+- key: kth-element
+  title: k 番目の値を求めるデータ構造（BIT 上の二分探索ほか）
+  aliases:
+  - BIT上の二分探索
+  - k番目に小さい値
+  - order statistics
+  - 順序統計量
+  level: 水
+  level_evidence: 水〜青（abc281_e 1334、abc392_f 1395、arc033_3 1641 参考値）、更新つき上位 K 和は黄（abc287_g 2180）
+  prerequisites:
+  - fenwick-tree
+  - ordered-set
+  acl: null
+  signs:
+  - k 番目に小さい値を答える（追加・削除あり）
+  - 空いている場所の k 番目
+  - 上位 X 個の和
+  compare_with:
+  - segtree-binary-search
+  - top-k-multiset
+  - balanced-bst
+  - binary-trie
+  page: own
+  visual: BIT 上の二分探索で、2 べきの歩幅を大きい順に試して進む様子
+  problems:
+  - id: abc234_d
+    difficulty: 503
+    role: practice
+    summary: 各接頭辞で K 番目に大きい値を答える
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/15/003821
+  - id: abc241_d
+    difficulty: 1177
+    role: practice
+    summary: 追加と「x以下で k 番目に大きい」「x以上で k 番目に小さい」に答える
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC241D-cpp
+  - id: abc281_e
+    difficulty: 1334
+    role: practice
+    summary: 長さ M の各窓で小さい方から K 個の和を求める
+    evidence: https://drken1215.hatenablog.com/entry/2022/12/14/185200
+  - id: abc392_f
+    difficulty: 1395
+    role: example
+    summary: 指定位置への挿入を繰り返した最終的な列を求める
+    evidence: https://yuulis.hatenablog.com/entry/ABC-392-F
+  - id: arc033_3
+    difficulty: 1641
+    role: example
+    summary: 数の追加と「k 番目に小さい数を答えて削除」を処理する
+    evidence: https://drken1215.hatenablog.com/entry/2020/02/29/035900
+  - id: abc287_g
+    difficulty: 2180
+    role: practice
+    summary: 得点ごとの枚数を更新しながら上位 X 枚の得点和の最大を答える
+    evidence: https://kmjp.hatenablog.jp/entry/2023/01/28/0900
+- key: segment-tree
+  title: セグメント木（モノイド・一点更新・区間取得）
+  aliases:
+  - セグ木
+  - segtree
+  - RMQ
+  - 非再帰セグ木
+  level: 水
+  level_evidence: 一点更新・区間集約そのものは水の入口（abc341_e 1223、abc157_e 1443）
+  prerequisites:
+  - fenwick-tree
+  acl: atcoder::segtree
+  signs:
+  - 一点更新と区間 min/max/gcd/和
+  - 区間の～を Q 回
+  - N, Q ≤ 2×10^5〜5×10^5
+  compare_with:
+  - fenwick-tree
+  - sparse-table
+  - lazy-segment-tree
+  - sqrt-decomposition
+  page: own
+  visual: 完全二分木の各ノードに区間と値を書いた図。prod で選ばれるノードが段ごとに光るステップ送り
+  problems:
+  - id: abc185_f
+    difficulty: 1053
+    role: practice
+    summary: 一点を XOR で更新し、区間の XOR を答える
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/14/005700
+  - id: abc341_e
+    difficulty: 1223
+    role: example
+    summary: 01列の区間反転と、区間が「隣が全て異なる」列か判定
+    evidence: https://programming-hiroba.com/abc341-e/
+  - id: abc157_e
+    difficulty: 1443
+    role: practice
+    summary: 一文字更新と、区間に現れる文字の種類数を答える
+    evidence: https://drken1215.hatenablog.com/entry/2020/03/03/071000
+  - id: practice2_j
+    difficulty: null
+    role: example
+    summary: 一点更新・区間最大・「V 以上になる最初の位置」を処理する
+    evidence: https://drken1215.hatenablog.com/entry/2023/11/14/033300
+  - id: tessoku_book_bf
+    difficulty: null
+    role: example
+    summary: 一点の値の変更と区間の最大値のクエリを処理する
+    evidence: https://github.com/E869120/kyopro-tessoku/tree/main/codes/cpp/chap08
+  - id: dp_q
+    difficulty: null
+    role: practice
+    summary: 高さが増加する部分列の美しさの和の最大値
+    evidence: https://drken1215.hatenablog.com/entry/2021/08/11/000352
+- key: segment-tree-monoids
+  title: セグ木に何を載せるか（モノイドの設計）
+  aliases:
+  - モノイドの設計
+  - セグ木に載せるもの
+  - 抽象化セグ木
+  level: 青
+  level_evidence: 何を載せるかを考えさせる問題は青が中心（abc309_f 1619、abc223_f 1641、abc331_f 1666、abc283_f 1771）
+  prerequisites:
+  - segment-tree
+  acl: atcoder::segtree
+  signs:
+  - 更新ありの括弧列判定
+  - 更新ありの回文判定
+  - 最大部分配列和
+  - 2 番目に大きい値
+  - 一次関数の合成
+  compare_with:
+  - lazy-segtree-patterns
+  page: own
+  visual: 左右の子の情報から親の情報を作る図（括弧列なら和と最小接頭和の 2 つの数）
+  problems:
+  - id: abc343_f
+    difficulty: 1370
+    role: example
+    summary: 一点更新と、区間で2番目に大きい値の個数を答える
+    evidence: https://qiita.com/gotoki_no_joe/items/7446ddde2d6a36eae210
+  - id: abc309_f
+    difficulty: 1619
+    role: practice
+    summary: 回転してよい箱のうち、別の箱に真に入るものがあるか判定
+    evidence: https://qiita.com/ZOI_dayo/items/a55cc4342832efdc23ba
+  - id: abc223_f
+    difficulty: 1641
+    role: example
+    summary: 括弧の2文字交換と、区間が正しい括弧列か判定
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/1017_abc223
+  - id: abc331_f
+    difficulty: 1666
+    role: example
+    summary: 一文字更新と、区間が回文か判定する
+    evidence: https://note.com/syamashi/n/n8e580d4ce59d
+  - id: abc283_f
+    difficulty: 1771
+    role: practice
+    summary: 各 i について |P_i−P_j|+|i−j| の最小値を求める
+    evidence: https://www.cnblogs.com/wushansinger/p/17021389.html
+  - id: abc368_g
+    difficulty: 1841
+    role: practice
+    summary: 区間を順に足すか掛けるかを選ぶ最大値を、一点更新つきで答える
+    evidence: https://kmjp.hatenablog.jp/entry/2024/08/24/0900
+- key: segtree-binary-search
+  title: セグ木上の二分探索（max_right / min_left）
+  aliases:
+  - max_right
+  - min_left
+  - セグメント木上の二分探索
+  level: 青
+  level_evidence: 入門は茶〜緑（abc382_c 476、abc330_e 1004）、必須になるのは青〜黄（abc389_f 1642、abc307_f 2139）
+  prerequisites:
+  - segment-tree
+  - binary-search
+  acl: atcoder::segtree::max_right
+  signs:
+  - 位置 i 以降で初めて～となる位置
+  - k 番目の空き
+  - 条件を満たす最長の区間を各 l について
+  compare_with:
+  - kth-element
+  - monotonic-stack
+  page: own
+  visual: 登る段階と降りる段階を色分けしたステップ送り。累積 sm と f の真偽を表示
+  problems:
+  - id: abc382_c
+    difficulty: 476
+    role: example
+    summary: 各客が最初に取る寿司（条件を満たす最左）を答える
+    evidence: https://qiita.com/hibit/items/e0ed4e6d2604ff6cec49
+  - id: abc330_e
+    difficulty: 1004
+    role: practice
+    summary: 一点を書き換えるたびに数列の mex を答える
+    evidence: https://drken1215.hatenablog.com/entry/2023/11/26/233800
+  - id: abc392_f
+    difficulty: 1395
+    role: practice
+    summary: 指定位置への挿入を繰り返した最終的な列を求める
+    evidence: https://yuulis.hatenablog.com/entry/ABC-392-F
+  - id: abc389_f
+    difficulty: 1642
+    role: practice
+    summary: レート条件を満たすと+1される大会を順に経た最終レートを初期値ごとに答える
+    evidence: https://blog.nishigake.net/posts/20250120/
+  - id: abc307_f
+    difficulty: 2139
+    role: practice
+    summary: 日ごとの距離上限で広がる感染について、各頂点が感染する日を求める
+    evidence: https://drken1215.hatenablog.com/entry/2023/06/25/130110
+  - id: practice2_j
+    difficulty: null
+    role: example
+    summary: 「位置 X 以降で値が V 以上になる最初の位置」を答える
+    evidence: https://drken1215.hatenablog.com/entry/2023/11/14/033300
+- key: lazy-segment-tree
+  title: 遅延セグメント木（作用付きモノイド）
+  aliases:
+  - 遅延セグ木
+  - 遅延評価セグメント木
+  - lazy segtree
+  - 遅延伝搬
+  level: 青
+  level_evidence: 簡単なものは水（abc382_f 1443）、S・F を設計する本体は青（abc327_f 1624、abl_e 1706）
+  prerequisites:
+  - segment-tree
+  - segment-tree-monoids
+  acl: atcoder::lazy_segtree
+  signs:
+  - 区間に一律に加算・代入・アフィン・反転
+  - 区間の和・最小値・最大値
+  - N, Q ≤ 2×10^5
+  compare_with:
+  - dual-segment-tree
+  - segment-tree-beats
+  - fenwick-tree
+  - sqrt-decomposition
+  page: own
+  visual: 各ノードに「値／保留タグ」の 2 段を書いた木。区間加算でタグが付き、取得のときにタグが子へ降りるステップ送り
+  problems:
+  - id: abc382_f
+    difficulty: 1443
+    role: example
+    summary: 横棒を落とし続けたときの各棒の最終的な行を求める
+    evidence: https://merom686.hatenablog.com/entry/2024/12/01/023230
+  - id: abc327_f
+    difficulty: 1624
+    role: practice
+    summary: 時間幅×位置幅の窓に入るりんごの最大個数
+    evidence: https://drken1215.hatenablog.com/entry/2023/11/11/010900
+  - id: abl_e
+    difficulty: 1706
+    role: practice
+    summary: 数字列の区間を1種類の数字で上書きし、整数としての値 mod を答える
+    evidence: https://drken1215.hatenablog.com/entry/2020/09/27/080500
+  - id: practice2_k
+    difficulty: null
+    role: example
+    summary: 区間に x→bx+c を作用させ、区間和を答える
+    evidence: https://drken1215.hatenablog.com/entry/2023/11/15/021000
+  - id: practice2_l
+    difficulty: null
+    role: example
+    summary: 01列の区間反転と、区間の転倒数を答える
+    evidence: https://drken1215.hatenablog.com/entry/2023/11/18/030700
+  - id: typical90_ac
+    difficulty: null
+    role: practice
+    summary: 区間にレンガを順に積み、各レンガの上端の高さを答える
+    evidence: https://qiita.com/hossie/items/f8cf08824c8a5acdef10
+- key: lazy-segtree-patterns
+  title: 遅延セグ木の載せ方の型と言い換え
+  aliases:
+  - 遅延セグ木のチートシート
+  - S と F の設計
+  - 区間加算区間最小
+  - 区間代入区間和
+  - Range Affine Range Sum
+  level: 青
+  level_evidence: 型の当てはめは青（abc332_f 1786、abc357_f 1793、abc322_f 1806）、言い換えと組むと黄（abc237_g 2088、abc371_f 2109）
+  prerequisites:
+  - lazy-segment-tree
+  acl: atcoder::lazy_segtree
+  signs:
+  - 区間をソートする（0/1 に直す）
+  - X_i − i に変換すると区間代入になる
+  - 固定幅の窓を動かして最大
+  compare_with:
+  - segment-tree-monoids
+  page: own
+  visual: 型ごとに S・F・mapping・composition を並べた表（静的）
+  problems:
+  - id: abc332_f
+    difficulty: 1786
+    role: practice
+    summary: 区間内の1点を等確率で X に変える操作の後、各要素の期待値を答える
+    evidence: https://merom686.hatenablog.com/entry/2023/12/11/021036
+  - id: abc357_f
+    difficulty: 1793
+    role: example
+    summary: 2つの数列への区間加算と、区間の Σ A_i B_i を答える
+    evidence: https://drken1215.hatenablog.com/entry/2024/06/09/022229
+  - id: abc322_f
+    difficulty: 1806
+    role: example
+    summary: 01列の区間反転と、区間内で1が連続する最大長を答える
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/08/033507
+  - id: abc237_g
+    difficulty: 2088
+    role: practice
+    summary: 区間を昇順/降順にソートする操作を繰り返した後の値 X の位置
+    evidence: https://kmjp.hatenablog.jp/entry/2022/01/31/0900
+  - id: abc371_f
+    difficulty: 2109
+    role: practice
+    summary: 一列に並ぶ人を順に目的地へ動かすときの総移動回数
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0914_abc371
+  - id: abc265_g
+    difficulty: 2436
+    role: practice
+    summary: 0/1/2 列の区間の転倒数と、区間の値の置換（0,1,2→S,T,U）
+    evidence: https://kmjp.hatenablog.jp/entry/2022/08/23/0900
+- key: dual-segment-tree
+  title: 双対セグ木（区間作用・一点取得）
+  aliases:
+  - 双対セグメント木
+  - Dual Segment Tree
+  - 区間作用一点取得
+  level: 青
+  level_evidence: 青〜黄（abc179_f 1713、abc342_g 2107）。区間加算・一点取得だけなら緑（abc340_e 1157）
+  prerequisites:
+  - segment-tree
+  acl: null
+  signs:
+  - 区間に一律に作用し、一点の値だけを聞かれる
+  - 区間 chmin・一点取得
+  - 取り消しつきの区間 chmax
+  compare_with:
+  - lazy-segment-tree
+  - fenwick-tree
+  page: section-of:lazy-segment-tree
+  visual: 区間作用のタグが O(log N) 個のノードに置かれ、一点取得で根から葉までのタグを集める図
+  problems:
+  - id: abc340_e
+    difficulty: 1157
+    role: example
+    summary: 円環に並ぶ箱の玉を取り出して順に配る操作を繰り返す
+    evidence: https://tayu0110.hatenablog.com/entry/2024/02/11/015113
+  - id: abc179_f
+    difficulty: 1713
+    role: example
+    summary: 盤の端から白石を置く操作の後に残る黒石の数を求める
+    evidence: https://drken1215.hatenablog.com/entry/2020/09/20/081100
+  - id: abc332_f
+    difficulty: 1786
+    role: practice
+    summary: 区間内の1点を等確率で X に変える操作の後、各要素の期待値を答える
+    evidence: https://merom686.hatenablog.com/entry/2023/12/11/021036
+  - id: abc342_g
+    difficulty: 2107
+    role: practice
+    summary: 区間 chmax の追加・取り消しと、一点の現在値を答える
+    evidence: https://kmjp.hatenablog.jp/entry/2024/02/24/0930
+- key: segtree-on-values
+  title: 値を添字にする BIT・セグ木（座標圧縮との組み合わせ）
+  aliases:
+  - 値域セグ木
+  - 権値線段樹
+  - 値を添字にするセグ木
+  level: 水
+  level_evidence: 値を添字にした区間 max の DP は緑〜水（abc339_e 1109、abl_d 1283）、上位 K 和・動的セグ木は黄（abc403_g 2028、abc287_g 2180）
+  prerequisites:
+  - segment-tree
+  - coordinate-compression
+  acl: atcoder::segtree
+  signs:
+  - 上位 K 個の和を更新しながら
+  - 値の差が D 以下の部分列
+  - 値ごとの個数と和
+  compare_with:
+  - top-k-multiset
+  - kth-element
+  page: own
+  visual: 横軸を値にしたヒストグラムとセグ木を重ねた図
+  problems:
+  - id: abc339_e
+    difficulty: 1109
+    role: example
+    summary: 隣接要素の差が D 以下の部分列の最大長を求める
+    evidence: https://programming-hiroba.com/abc339-e/
+  - id: abl_d
+    difficulty: 1283
+    role: practice
+    summary: 隣接要素の差が K 以下の部分列の最大長を求める
+    evidence: https://drken1215.hatenablog.com/entry/2020/09/27/080300
+  - id: abc281_e
+    difficulty: 1334
+    role: practice
+    summary: 長さ M の各窓で小さい方から K 個の和を求める
+    evidence: https://drken1215.hatenablog.com/entry/2022/12/14/185200
+  - id: abc403_g
+    difficulty: 2028
+    role: practice
+    summary: 値を追加するたびに、昇順に並べた奇数番目の和を答える
+    evidence: https://kmjp.hatenablog.jp/entry/2025/04/28/1030
+  - id: abc287_g
+    difficulty: 2180
+    role: example
+    summary: 得点ごとの枚数を更新しながら上位 X 枚の得点和の最大を答える
+    evidence: https://kmjp.hatenablog.jp/entry/2023/01/28/0900
+- key: dynamic-segment-tree
+  title: 動的セグ木
+  aliases:
+  - 動的セグメント木
+  - sparse segment tree
+  - Dynamic Segment Tree
+  level: 黄
+  level_evidence: abc403_g（2028）でオンライン強制のため必要
+  prerequisites:
+  - segment-tree
+  acl: null
+  signs:
+  - 値域が 10^9〜10^18
+  - 前の答えで次の入力が決まる（オンライン強制）
+  compare_with:
+  - segtree-on-values
+  - offline-queries
+  page: section-of:segtree-on-values
+  visual: 必要になったノードだけが作られていく木
+  problems:
+  - id: abc403_g
+    difficulty: 2028
+    role: example
+    summary: 要素を1つずつ追加し、そのたびにソート後の奇数番目の和を答える（オンライン強制）
+    evidence: https://kmjp.hatenablog.jp/entry/2025/04/28/1030
+- key: sparse-table
+  title: Sparse Table（と Disjoint Sparse Table）
+  aliases:
+  - スパーステーブル
+  - ST表
+  - Disjoint Sparse Table
+  level: 青
+  level_evidence: 構造そのものを作らせる abc282_f（1734）。区間 min/max はセグ木で足りることが多い
+  prerequisites:
+  - doubling
+  acl: null
+  signs:
+  - 配列が静的
+  - 区間 min/max/gcd を O(1) で
+  - クエリが 10^6 級
+  compare_with:
+  - segment-tree
+  - lca
+  page: own
+  visual: 2 べき長の区間の段を重ねた図。クエリ区間を 2 つの重なった区間で覆う様子
+  problems:
+  - id: abc282_f
+    difficulty: 1734
+    role: example
+    summary: 区間の集合を自分で用意し、各クエリ区間を用意した2区間の和集合で答える対話問題
+    evidence: https://drken1215.hatenablog.com/entry/2022/12/29/112939
+- key: offline-queries
+  title: クエリ先読み（オフライン処理）
+  aliases:
+  - オフライン処理
+  - クエリ先読み
+  - クエリのソート
+  level: 水
+  level_evidence: 水〜青（abc235_e 1304、abc174_f 1495、abc253_f 1756、abc128_e 1840）
+  prerequisites:
+  - fenwick-tree
+  - sorting
+  acl: null
+  signs:
+  - 区間の種類数
+  - 重み w 以下の辺だけで
+  - X 以下の要素の和
+  - クエリどうしが独立
+  compare_with:
+  - mo-algorithm
+  - persistent-data-structures
+  - merge-sort-tree
+  page: own
+  visual: クエリを右端の順に並べ替えて処理し、元の順に戻して出力する流れ図
+  problems:
+  - id: abc235_e
+    difficulty: 1304
+    role: practice
+    summary: 各クエリ辺を加えたとき、その辺が最小全域木に使われるかを判定する
+    evidence: https://drken1215.hatenablog.com/entry/2023/06/11/023548
+  - id: abc174_f
+    difficulty: 1495
+    role: example
+    summary: 区間内の値の種類数を答える
+    evidence: https://scrapbox.io/procon-kirokuyou/ABC174_F_-_Range_Set_Query_(600)
+  - id: abc253_f
+    difficulty: 1756
+    role: example
+    summary: 行の上書き・列範囲への加算・1マスの値の取得を処理する
+    evidence: https://qiita.com/recuraki/items/57b9f539511ef0876a5f
+  - id: abc128_e
+    difficulty: 1840
+    role: practice
+    summary: 時間帯ごとに通行止めになる地点があり、各人が最初に止まる地点を答える
+    evidence: https://drken1215.hatenablog.com/entry/2019/06/15/174200
+  - id: abc356_f
+    difficulty: 2152
+    role: practice
+    summary: 整数集合への挿入・削除と、差が K 以下でつながる成分の大きさを答える
+    evidence: https://drken1215.hatenablog.com/entry/2024/06/08/024017
+- key: sweep-line-2d
+  title: 平面走査＋BIT（2 次元の数え上げ）
+  aliases:
+  - 平面走査
+  - sweep line
+  - 2次元クエリ
+  - 矩形内の点の数
+  level: 青
+  level_evidence: 青（abc327_f 1624、abc186_f 1833）、黄〜発展まで（abc346_g 2166、abc136_f 2334、abc360_f 2563）
+  prerequisites:
+  - fenwick-tree
+  - offline-queries
+  acl: atcoder::fenwick_tree
+  signs:
+  - 長方形内の点の数
+  - 区間 [p, q] に含まれる区間の数
+  - 幅 W・高さ D の枠で最大
+  compare_with:
+  - merge-sort-tree
+  - prefix-sum-2d
+  page: own
+  visual: x 方向に走査線を動かし、y 方向の BIT が更新されていく図
+  problems:
+  - id: abc106_d
+    difficulty: 1319
+    role: example
+    summary: 区間 [p,q] に完全に含まれる列車の区間の数を多数のクエリで答える
+    evidence: https://drken1215.hatenablog.com/entry/2018/09/06/020200
+  - id: abc327_f
+    difficulty: 1624
+    role: example
+    summary: 時間幅 D・位置幅 W の枠で拾えるリンゴの最大数
+    evidence: https://drken1215.hatenablog.com/entry/2023/11/11/010900
+  - id: abc186_f
+    difficulty: 1833
+    role: practice
+    summary: 障害物のある盤面で、飛車が2手以内に行けるマスの数
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/20/111600
+  - id: abc346_g
+    difficulty: 2166
+    role: practice
+    summary: ちょうど 1 回だけ現れる値を含む連続部分列の個数を数える
+    evidence: https://kmjp.hatenablog.jp/entry/2024/03/23/1000
+  - id: abc136_f
+    difficulty: 2334
+    role: practice
+    summary: 点の全部分集合について、外接長方形に含まれる点の数の総和
+    evidence: https://betrue12.hateblo.jp/entry/2019/08/05/212635
+  - id: abc360_f
+    difficulty: 2563
+    role: practice
+    summary: 与えた区間たちと交差する数が最大になる区間 [l,r] を辞書順最小で求める
+    evidence: https://drken1215.hatenablog.com/entry/2024/07/06/172000
+- key: sqrt-decomposition
+  title: 平方分割（バケット法・根号で場合分け・クエリの平方分割）
+  aliases:
+  - 平方分割
+  - バケット法
+  - sqrt decomposition
+  - heavy/light
+  - 根号で場合分け
+  level: 黄
+  level_evidence: 入口は青（abc335_f 1690）、必須の中心は黄（abc365_g 2254、abc219_g 2287）
+  prerequisites:
+  - segment-tree
+  acl: null
+  signs:
+  - 次数の合計が 2M
+  - 出現回数の合計が N
+  - 歩幅 x ごと
+  - セグ木に載らない区間操作
+  - 制限時間が長め
+  compare_with:
+  - segment-tree
+  - mo-algorithm
+  page: own
+  visual: 列を √N 個のブロックに分け、完全に含まれるブロックはタグ、端は要素ごとに処理する図
+  problems:
+  - id: abc335_f
+    difficulty: 1690
+    role: example
+    summary: マス i から A_i の倍数だけ先へ跳ぶ進み方を数える配る DP
+    evidence: https://torus711.hatenablog.com/entry/2024/01/07/214116
+  - id: abc403_g
+    difficulty: 2028
+    role: practice
+    summary: 要素を1つずつ追加し、そのたびにソート後の奇数番目の和を答える（オンライン強制）
+    evidence: https://kmjp.hatenablog.jp/entry/2025/04/28/1030
+  - id: abc365_g
+    difficulty: 2254
+    role: practice
+    summary: 入退室の記録から、指定した2人が同時に在室した合計時間を多数答える
+    evidence: https://suzukiapple.tumblr.com/post/758965519503228928/abc365g-atcoder-office
+  - id: abc219_g
+    difficulty: 2287
+    role: example
+    summary: 頂点の値を隣接頂点へ伝播させるクエリを繰り返した後の全頂点の値
+    evidence: https://kmjp.hatenablog.jp/entry/2021/09/29/0900
+  - id: abc259_h
+    difficulty: 2406
+    role: practice
+    summary: グリッド上で始点と終点のラベルが等しい右・下移動の経路数の総和
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0709_abc259
+  - id: typical90_ce
+    difficulty: null
+    role: practice
+    summary: 頂点とその隣接頂点を塗り替えるクエリごとに、塗る前の色を答える
+    evidence: https://scrapbox.io/Example0911/%E7%AB%B6%E3%83%97%E3%83%AD%E5%85%B8%E5%9E%8B90%E5%95%8F_083_Colorful_Graph(%E2%98%856)
+- key: mo-algorithm
+  title: Mo's algorithm
+  aliases:
+  - Mo
+  - Mo法
+  - クエリ平方分割
+  level: 青
+  level_evidence: 青（abc293_g 1753、abc242_g 1828）〜黄（abc477_g 2226、abc384_g 2343、abc405_g 2354）
+  prerequisites:
+  - sqrt-decomposition
+  - offline-queries
+  acl: null
+  signs:
+  - 静的な列
+  - 区間ごとの種類数・同じ値の組の数
+  - N, Q ≈ 2×10^5
+  - 制限時間が長め
+  compare_with:
+  - offline-queries
+  - persistent-data-structures
+  page: own
+  visual: (l, r) 平面にクエリを点で置き、ブロックごとに r を走る経路を描く図
+  problems:
+  - id: abc174_f
+    difficulty: 1495
+    role: practice
+    summary: 区間内の値の種類数を答える
+    evidence: https://kanpurin.hatenablog.com/entry/2021/04/09/001439
+  - id: abc293_g
+    difficulty: 1753
+    role: example
+    summary: 区間内で同じ値をもつ3つ組（i<j<k）の個数を答える
+    evidence: https://kmjp.hatenablog.jp/entry/2023/03/12/0900
+  - id: abc242_g
+    difficulty: 1828
+    role: example
+    summary: 区間内で同じ値どうしを組にするとき、作れる組の最大数を答える
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/242/G
+  - id: abc477_g
+    difficulty: 2226
+    role: practice
+    summary: 木のパス上で出現回数が A 以上 B 以下の値の種類数を答える
+    evidence: https://kmjp.hatenablog.jp/entry/2026/09/27/0930
+  - id: abc384_g
+    difficulty: 2343
+    role: practice
+    summary: 2数列の先頭 X 項と先頭 Y 項の全組について |A_i−B_j| の和を答える
+    evidence: https://kmjp.hatenablog.jp/entry/2024/12/14/0900
+  - id: abc405_g
+    difficulty: 2354
+    role: practice
+    summary: 区間内の X 未満の要素を並べ替えてできる列の種類数（多項係数）を答える
+    evidence: https://kmjp.hatenablog.jp/entry/2025/05/10/0900
+- key: persistent-data-structures
+  title: 永続データ構造（版の木・永続セグ木）
+  aliases:
+  - 永続
+  - persistent
+  - 経路コピー
+  - 永続スタック
+  - 永続セグ木
+  level: 青
+  level_evidence: 版の木は青（abc273_e 1624）、永続セグ木は青（abc453_g 1735）
+  prerequisites:
+  - segment-tree
+  - stack-techniques
+  acl: null
+  signs:
+  - 過去の状態に戻る
+  - 状態を保存・読み込み
+  - 配列を丸ごとコピー
+  - 時刻 t の時点で
+  compare_with:
+  - rollback-union-find
+  - merge-sort-tree
+  page: own
+  visual: 更新で根から葉までの経路だけが複製され、古い版と節点を共有する図
+  problems:
+  - id: abc273_e
+    difficulty: 1624
+    role: example
+    summary: 末尾追加・末尾削除・ページへの保存・読み込みを行い、毎回の末尾を答える
+    evidence: https://scrapbox.io/kani/ABC273_-_E_-_Notebook
+  - id: abc453_g
+    difficulty: 1735
+    role: example
+    summary: 多数の数列について、丸ごとコピー・1点更新・区間和を処理する
+    evidence: https://www.cnblogs.com/CR-J/p/19853087
+  - id: code_thanks_festival_2017_h
+    difficulty: null
+    role: practice
+    summary: 併合を順に行い、2要素が初めて同じ組になった操作番号を各クエリで答える
+    evidence: https://drken1215.hatenablog.com/entry/2018/09/15/193740
+- key: merge-sort-tree
+  title: マージソート木（区間の x 以下の個数・和をオンラインで）
+  aliases:
+  - Merge Sort Tree
+  - 領域木
+  - Range Tree
+  level: 青
+  level_evidence: abc339_g（1792）でオンライン強制の区間の x 以下の和に使う
+  prerequisites:
+  - segment-tree
+  - binary-search
+  acl: null
+  signs:
+  - 区間内で X 以下の個数・和
+  - 前の答えで次の入力が決まる（オンライン強制）
+  compare_with:
+  - wavelet-matrix
+  - sweep-line-2d
+  - persistent-data-structures
+  page: own
+  visual: セグ木の各ノードにソート済みの列を書いた図
+  problems:
+  - id: abc339_g
+    difficulty: 1792
+    role: example
+    summary: 区間内で X 以下の要素の和を多数のクエリで答える
+    evidence: https://tayu0110.hatenablog.com/entry/2024/02/05/205618
+- key: wavelet-matrix
+  title: Wavelet Matrix
+  aliases:
+  - ウェーブレット行列
+  - Wavelet Tree
+  level: 発展
+  level_evidence: abc324_g（2501）。abc339_g（1792）はマージソート木でも解ける
+  prerequisites:
+  - merge-sort-tree
+  - bit-operations
+  acl: null
+  signs:
+  - 区間の k 番目
+  - 区間内の x 未満の個数・和（オンライン）
+  compare_with:
+  - merge-sort-tree
+  - persistent-data-structures
+  page: overview
+  visual: 値を上位ビットから安定に 0/1 で振り分けた段を重ねた図
+  problems:
+  - id: abc339_g
+    difficulty: 1792
+    role: example
+    summary: 区間内で X 以下の要素の和を多数のクエリで答える
+    evidence: https://tayu0110.hatenablog.com/entry/2024/02/05/205618
+  - id: abc324_g
+    difficulty: 2501
+    role: practice
+    summary: 順列から始め、「先頭 x 個」「値が x 未満」で列を分割するクエリごとに新しい列の長さを答える
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/15/020209
+- key: segment-tree-beats
+  title: Segment Tree Beats
+  aliases:
+  - beats
+  - 区間chmin区間和
+  - 吉司机线段树
+  level: 発展
+  level_evidence: abc256_h（2531）。区間を map で管理する別解もある
+  prerequisites:
+  - lazy-segment-tree
+  acl: null
+  signs:
+  - 区間 chmin / chmax と区間和
+  - 区間の割り算・mod で値が潰れていく
+  compare_with:
+  - lazy-segment-tree
+  - interval-set
+  page: overview
+  visual: null
+  problems:
+  - id: abc256_h
+    difficulty: 2531
+    role: example
+    summary: 区間の各要素を x で割る（切り捨て）・区間代入・区間和のクエリ
+    evidence: https://nyaannyaan.github.io/docs/problems/editorials/
+- key: balanced-bst
+  title: 平衡二分探索木（treap など）と pb_ds の tree
+  aliases:
+  - 平衡二分木
+  - treap
+  - implicit treap
+  - RBST
+  - splay
+  - pb_ds tree
+  - order statistics tree
+  level: 発展
+  level_evidence: ABC で必須の問題は見つからなかった（k 番目は BIT・set で足りる：abc241_d 1177、arc033_3 1641 参考値）
+  prerequisites:
+  - ordered-set
+  acl: null
+  signs:
+  - 位置で指定した挿入・削除
+  - 区間の反転
+  - k 番目と値の順位を両方
+  compare_with:
+  - kth-element
+  - linked-list
+  - ordered-set
+  page: overview
+  visual: null
+  problems:
+  - id: abc241_d
+    difficulty: 1177
+    role: practice
+    summary: 数の追加と、x 以下（以上）の中で大きい（小さい）方から k 番目の値を答える
+    evidence: https://qiita.com/recuraki/items/993d08d87084fec671ae
+  - id: arc033_3
+    difficulty: 1641
+    role: practice
+    summary: 数の集合への追加と、小さい方から x 番目の数を答えて削除するクエリ
+    evidence: https://drken1215.hatenablog.com/entry/2020/02/29/035900
+- key: binary-trie
+  title: Binary Trie
+  aliases:
+  - 二分トライ
+  - XOR の最小化
+  level: 青
+  level_evidence: abc281_f（1714）・abc308_g（2008）。abc308_g の主解は multiset
+  prerequisites:
+  - trie
+  - bit-operations
+  acl: null
+  signs:
+  - XOR の最小・最大
+  - 整数の集合で k 番目と全体 XOR
+  compare_with:
+  - kth-element
+  - ordered-set
+  page: own
+  visual: 整数を上位ビットから辿る二分木
+  problems:
+  - id: abc281_f
+    difficulty: 1714
+    role: example
+    summary: 全要素と x の XOR の最大値を最小にする x を求める
+    evidence: https://drken1215.hatenablog.com/entry/2022/12/13/144200
+  - id: abc308_g
+    difficulty: 2008
+    role: example
+    summary: 整数の追加・削除と、集合内の2数の XOR の最小値を答える
+    evidence: https://www.acwing.com/solution/content/209512/
+- key: dynamic-dp
+  title: 行列を載せるセグ木（動的 DP）
+  aliases:
+  - 動的DP
+  - 行列セグ木
+  level: 発展
+  level_evidence: abc246_h（2677）
+  prerequisites:
+  - segment-tree-monoids
+  - matrix-power
+  acl: atcoder::segtree
+  signs:
+  - 1 文字（1 要素）ずつ書き換えるたびに DP の答え
+  compare_with:
+  - segment-tree-monoids
+  page: section-of:segment-tree-monoids
+  visual: null
+  problems:
+  - id: abc246_h
+    difficulty: 2677
+    role: example
+    summary: 0/1/? の文字列を1文字ずつ書き換えるたびに、異なる部分列の個数を答える
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0402_abc246
+- key: hashing-for-sets
+  title: 集合・多重集合のハッシュ（Zobrist hash）
+  aliases:
+  - Zobrist hash
+  - 集合のハッシュ
+  - 多重集合のハッシュ
+  level: 水
+  level_evidence: 水（abc250_e 1421、abc367_f 1540）
+  prerequisites:
+  - rolling-hash
+  acl: null
+  signs:
+  - 集合として等しいか
+  - 並べ替えて一致するか（多重集合）
+  compare_with:
+  - rolling-hash
+  page: own
+  visual: null
+  problems:
+  - id: abc250_e
+    difficulty: 1421
+    role: example
+    summary: 2数列の先頭 x 項と先頭 y 項の「集合」が等しいかを多数判定する
+    evidence: https://drken1215.hatenablog.com/entry/2022/05/12/105000
+  - id: abc367_f
+    difficulty: 1540
+    role: example
+    summary: 2数列の区間どうしが並べ替えで一致する（多重集合として等しい）かを判定する
+    evidence: https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/
+- key: cartesian-tree
+  title: Cartesian Tree
+  aliases:
+  - デカルト木
+  - 笛卡尔树
+  level: 黄
+  level_evidence: abc435_f（1385）はセグ木の再帰でも可。必須の中心は黄（arc189_d 2006、abc311_g 2265）
+  prerequisites:
+  - monotonic-stack
+  acl: null
+  signs:
+  - 最大値の位置で区間を左右に割る再帰
+  - 隣の小さいものを吸収していく
+  compare_with:
+  - monotonic-stack
+  page: section-of:monotonic-stack
+  visual: 列の最大値を根にして左右を再帰的に木にする図
+  problems:
+  - id: abc435_f
+    difficulty: 1385
+    role: example
+    summary: 最大値の位置で区間を左右に分けて進む過程の移動距離の合計を最大化する
+    evidence: https://note.com/hip_crow3665/n/ne7a656317cea
+  - id: arc189_d
+    difficulty: 2006
+    role: practice
+    summary: 各スライムから始めて隣の小さいスライムを吸収し続けたときの最終的な大きさ
+    evidence: https://drken1215.hatenablog.com/entry/2025/01/04/101100
+  - id: abc311_g
+    difficulty: 2265
+    role: practice
+    summary: 長方形領域の（和×最小値）の最大値を求める
+    evidence: https://drken1215.hatenablog.com/entry/2023/07/23/190400
+- key: meldable-heap
+  title: 併合可能なヒープ（skew heap・leftist heap）
+  aliases:
+  - meldable heap
+  - skew heap
+  - leftist heap
+  - 左偏树
+  level: 発展
+  level_evidence: ABC で必須の問題は見つからなかった
+  prerequisites:
+  - priority-queue
+  acl: null
+  signs:
+  - ヒープどうしの併合
+  compare_with:
+  - small-to-large
+  page: section-of:advanced-ds-catalog
+  visual: null
+  problems: []
+- key: advanced-ds-catalog
+  title: 発展的なデータ構造の名前と用途の一覧
+  aliases:
+  - CDQ分割統治
+  - セグ木マージ
+  - 2次元セグ木
+  - 2次元BIT
+  - K-D tree
+  - Link-Cut Tree
+  - 時間付きMo
+  - Fast Set
+  level: 発展
+  level_evidence: ABC で必須の問題は見つからなかったもの（CDQ・セグ木マージ・2 次元セグ木・K-D tree・Link-Cut Tree など）
+  prerequisites:
+  - segment-tree
+  acl: null
+  signs:
+  - 解説で見慣れない名前のデータ構造が出てきた
+  compare_with: []
+  page: overview
+  visual: null
+  problems: []

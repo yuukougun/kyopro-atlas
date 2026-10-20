@@ -1,0 +1,2481 @@
+# 03 グラフ（graph）の項目一覧。レポートは 03-graph.md
+# problems の difficulty は tools/ap.py（2026-10-21 のキャッシュ）の値。null は推定値なし（典型90問・EDPC・ACL Practice・鉄則本）
+# 典型90問の★と difficulty の目安：★4=800〜1199、★5=1200〜1599、★6=1600〜1999、★7=2000以上
+area: graph
+topics:
+- key: graph-basics
+  title: グラフの表現と用語
+  aliases:
+  - グラフの基本
+  - 隣接リスト
+  - 隣接行列
+  - 辺リスト
+  level: 基礎
+  level_evidence: typical90_bz（★2）、abc284_c（diff 193）。ABC の C〜D で前提として使われる
+  prerequisites:
+  - complexity-estimation
+  acl: null
+  signs:
+  - N 頂点 M 辺
+  - u_i と v_i を結ぶ辺
+  - 1-indexed の頂点番号
+  - M ≤ 2×10^5 で隣接行列は持てない
+  compare_with:
+  - grid-graph
+  page: own
+  visual: 同じグラフを図・隣接リスト・隣接行列・辺リストの4通りで並べ、1本の辺がそれぞれどこに現れるかを強調する
+  problems:
+  - id: abc284_c
+    difficulty: 193
+    role: practice
+    summary: 単純無向グラフの連結成分の個数を数える
+    evidence: https://drken1215.hatenablog.com/entry/2023/09/28/022105
+  - id: typical90_bz
+    difficulty: null
+    role: example
+    summary: 各頂点について番号の小さい隣接頂点を数える。隣接リストの作り方の確認
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/078.cpp
+- key: dfs
+  title: 深さ優先探索（DFS）
+  aliases:
+  - 深さ優先探索
+  - DFS
+  - バックトラック
+  - 行きがけ順
+  - 帰りがけ順
+  level: 基礎
+  level_evidence: abc138_d（diff 920）、abc315_e（diff 921）、abc284_e（diff 1043）
+  prerequisites:
+  - graph-basics
+  - recursion
+  acl: null
+  signs:
+  - 到達できるか
+  - 連結成分
+  - 単純パスを全部数える（答えの上限が小さい）
+  - 木の部分木
+  - 帰りがけ順に処理
+  compare_with:
+  - bfs
+  - union-find-connectivity
+  page: own
+  visual: 再帰の呼び出しスタックとグラフを並べ、頂点に入る・出るたびに行きがけ番号と帰りがけ番号が付くステップ送り。バックトラック版では印を外す瞬間を色で示す
+  problems:
+  - id: abc378_d
+    difficulty: 587
+    role: practice
+    summary: グリッドで同じマスを通らない長さ K の経路を数える（バックトラック）
+    evidence: https://drken1215.hatenablog.com/entry/2024/11/03/235041
+  - id: abc138_d
+    difficulty: 920
+    role: example
+    summary: 根付き木の部分木への加算を、根からの DFS で値を流して処理する
+    evidence: https://blog.hamayanhamayan.com/entry/2019/08/19/024030
+  - id: abc315_e
+    difficulty: 921
+    role: example
+    summary: 本1を読むのに必要な本を DFS の帰りがけ順で列挙する
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC315E
+  - id: abc284_e
+    difficulty: 1043
+    role: practice
+    summary: 頂点1からの単純パスを上限まで数える。帰りがけで訪問の印を外す
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC284E
+  - id: typical90_bt
+    difficulty: null
+    role: practice
+    summary: 小さいグリッドで最長の閉路を DFS の全探索で求める
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/072.cpp
+- key: bfs
+  title: 幅優先探索（BFS）と無重み最短路
+  aliases:
+  - 幅優先探索
+  - BFS
+  - 無重み最短路
+  level: 基礎
+  level_evidence: abc211_d（diff 755）、abc168_d（diff 804）、abc151_d（diff 959）、abc007_3（diff 1024）
+  prerequisites:
+  - graph-basics
+  - queue
+  acl: null
+  signs:
+  - 最小の手数・回数
+  - 辺の重みがすべて等しい
+  - グリッドの迷路
+  - 最短経路の本数
+  compare_with:
+  - dfs
+  - zero-one-bfs
+  - dijkstra
+  page: own
+  visual: キューの中身と距離の層（同心円状の色分け）を同時に見せるステップ送り。push するときに印を付けることを強調する
+  problems:
+  - id: abc168_d
+    difficulty: 804
+    role: example
+    summary: 部屋1への最短経路で次に進む部屋（BFS の親）を各部屋について出力する
+    evidence: https://blog.hamayanhamayan.com/entry/2020/05/17/224335
+  - id: abc160_d
+    difficulty: 879
+    role: practice
+    summary: 近道が1本ある直線状のグラフで、全点対の距離ごとの組数を数える
+    evidence: https://blog.hamayanhamayan.com/entry/2020/03/29/000745
+  - id: abc151_d
+    difficulty: 959
+    role: practice
+    summary: 迷路の2マス間の最短距離の最大値。全マスから BFS する
+    evidence: https://blog.hamayanhamayan.com/entry/2020/01/12/225950
+  - id: abc088_d
+    difficulty: 999
+    role: practice
+    summary: 最短経路に使わない白マスを黒く塗れる最大数。最短距離から逆算する
+    evidence: https://blog.hamayanhamayan.com/entry/2018/02/18/224521
+  - id: abc007_3
+    difficulty: 1024
+    role: example
+    summary: 迷路の最短手数。グリッド BFS の基本形
+    evidence: https://drken1215.hatenablog.com/entry/2023/06/11/123536
+- key: multi-source-bfs
+  title: 多始点 BFS
+  aliases:
+  - 多始点BFS
+  - multi-source BFS
+  - 超始点
+  level: 基礎
+  level_evidence: abc383_c（diff 750）、agc033_a（diff 1159）
+  prerequisites:
+  - bfs
+  acl: null
+  signs:
+  - 複数の始点のどれかからの最短距離
+  - 同時に広がる
+  - 一番近い〇〇までの距離
+  compare_with:
+  - super-vertex
+  page: section-of:bfs
+  visual: 全始点を最初にキューへ入れた場合と、超始点から距離0の辺を張った場合が同じになることを並べて示す
+  problems:
+  - id: abc383_c
+    difficulty: 750
+    role: example
+    summary: 加湿器から D 歩以内のマスを数える。全加湿器を始点にした BFS
+    evidence: https://www.cnblogs.com/Lanly/p/18606772
+  - id: agc033_a
+    difficulty: 1159
+    role: example
+    summary: 黒マスが周囲に広がる回数。全黒マスを始点にした BFS
+    evidence: https://blog.hamayanhamayan.com/entry/2019/05/05/000255
+- key: grid-graph
+  title: グリッドグラフ
+  aliases:
+  - グリッドBFS
+  - 迷路
+  - 盤面の探索
+  - 8近傍
+  level: 基礎
+  level_evidence: abc325_c（diff 400）、abc351_d（diff 974）、abc088_d（diff 999）。応用は abc413_g（diff 1723）
+  prerequisites:
+  - bfs
+  - dfs
+  acl: null
+  signs:
+  - H×W のマス目
+  - 上下左右（8方向）に移動
+  - 壁・障害物
+  - H×W が大きく障害物が少ない（双対を考える）
+  compare_with:
+  - graph-basics
+  - connected-components
+  page: own
+  visual: (i,j) と頂点番号 i*W+j の対応表、dx/dy の矢印。市松模様の色分けで二部グラフになることも示す
+  problems:
+  - id: abc325_c
+    difficulty: 400
+    role: example
+    summary: 8方向に隣接する '#' の塊の個数を数える
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/22/151450
+  - id: abc351_d
+    difficulty: 974
+    role: practice
+    summary: 磁石の隣で止まるグリッドで、到達できるマス数の最大値（境界マスの扱い）
+    evidence: https://www.cnblogs.com/Lanly/p/18172416
+  - id: abc413_g
+    difficulty: 1723
+    role: practice
+    summary: 巨大グリッドの通行可否を、障害物どうしの8近傍の連結（双対）で判定する
+    evidence: https://kmjp.hatenablog.jp/entry/2025/07/05/0930
+  - id: typical90_l
+    difficulty: null
+    role: practice
+    summary: マスを赤く塗るクエリと2マスの連結判定クエリを Union-Find で処理する
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/012.cpp
+- key: connected-components
+  title: 連結成分
+  aliases:
+  - 連結成分分解
+  - 連結判定
+  level: 基礎
+  level_evidence: abc292_d（diff 579）、abc177_d（diff 732）。座標を頂点にする応用は abc131_f（diff 1937）
+  prerequisites:
+  - dfs
+  - union-find
+  acl: atcoder::dsu
+  signs:
+  - グループに分ける
+  - つながっている
+  - 成分ごとに頂点数・辺数を数える
+  - 友達の友達は友達
+  compare_with:
+  - union-find-connectivity
+  - scc
+  page: own
+  visual: DFS・BFS・Union-Find の3通りで同じ成分が得られる様子。成分ごとに頂点数と辺数を表示し、木（辺=頂点−1）となもり（辺=頂点）を色分けする
+  problems:
+  - id: abc292_d
+    difficulty: 579
+    role: example
+    summary: すべての連結成分で頂点数と辺数が等しいかを判定する
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC292D
+  - id: abc177_d
+    difficulty: 732
+    role: example
+    summary: 友達関係の連結成分の最大サイズがグループ数の答えになる
+    evidence: https://drken1215.hatenablog.com/entry/2020/10/10/023200
+  - id: abc131_f
+    difficulty: 1937
+    role: practice
+    summary: x 座標と y 座標を頂点にした二部グラフの成分ごとに、x の数と y の数の積を数える
+    evidence: https://kmjp.hatenablog.jp/entry/2019/06/23/0930
+- key: cycle-detection
+  title: 閉路の検出と復元
+  aliases:
+  - 閉路検出
+  - サイクル検出
+  - 有向閉路
+  - 無向閉路
+  level: 基礎
+  level_evidence: abc288_c（diff 436）、abc311_c（diff 448）、abc285_d（diff 663）
+  prerequisites:
+  - dfs
+  - union-find
+  acl: atcoder::dsu（無向グラフ）、atcoder::scc_graph（有向グラフ：サイズ2以上の成分が閉路）
+  signs:
+  - 循環している
+  - ループがあると矛盾
+  - 依存関係が回っている
+  - 閉路を1つ出力せよ
+  compare_with:
+  - topological-sort
+  - functional-graph
+  - scc
+  page: own
+  visual: 有向グラフの3色 DFS（未訪問・探索中・完了）。探索中の頂点への辺が見つかった瞬間に、スタックから閉路を切り出す
+  problems:
+  - id: abc288_c
+    difficulty: 436
+    role: example
+    summary: 閉路をなくすために消す辺の最小数。Union-Find で閉路を作る辺を数える
+    evidence: https://kyo-pro.hatenablog.com/entry/2023/02/04/224004
+  - id: abc311_c
+    difficulty: 448
+    role: practice
+    summary: 各頂点から辺が1本出る有向グラフの閉路を1つ見つけて出力する
+    evidence: https://drken1215.hatenablog.com/entry/2023/07/24/030543
+  - id: abc285_d
+    difficulty: 663
+    role: example
+    summary: 名前の変更依頼の有向グラフに閉路があるかを判定する
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC285D
+- key: bipartite-graph
+  title: 二部グラフ判定
+  aliases:
+  - 二部グラフ
+  - 2彩色
+  - 奇閉路
+  level: 基礎
+  level_evidence: abc327_d（diff 709）、abc282_d（diff 1154）、abc126_d（diff 1279）。応用は code_festival_2017_qualb_c（diff 1883）
+  prerequisites:
+  - dfs
+  - bfs
+  acl: atcoder::dsu（頂点を2倍にした偶奇の Union-Find でも判定できる）
+  signs:
+  - 2つのグループに分ける
+  - 隣り合うものは異なる色
+  - 偶奇
+  - 奇数長の閉路
+  - 市松模様
+  compare_with:
+  - bipartite-matching
+  - konig-theorem
+  page: own
+  visual: BFS で色を塗っていき、同じ色どうしの辺（奇閉路）が見つかる瞬間を示す。成分ごとの色の数 (a,b) を表示する
+  problems:
+  - id: abc327_d
+    difficulty: 709
+    role: example
+    summary: 2つの数列の対が「異なる値を割り当てよ」という制約になり、二部グラフかを判定する
+    evidence: https://drken1215.hatenablog.com/entry/2023/11/05/161745
+  - id: abc282_d
+    difficulty: 1154
+    role: example
+    summary: 辺を1本足しても二部グラフのままになる頂点対を、成分ごとの色の数から数える
+    evidence: https://drken1215.hatenablog.com/entry/2022/12/23/223700
+  - id: abc126_d
+    difficulty: 1279
+    role: practice
+    summary: 木の辺の長さの偶奇で頂点を2色に塗り分ける
+    evidence: https://blog.hamayanhamayan.com/entry/2019/05/20/232041
+  - id: code_festival_2017_qualb_c
+    difficulty: 1883
+    role: practice
+    summary: 距離3の頂点間に辺を足し続けた後の辺数。二部グラフかどうかで答えが分かれる
+    evidence: https://qiita.com/drken/items/e77685614f3c6bf86f44
+- key: small-graph-brute-force
+  title: 小さいグラフの全探索（同型・辺集合・彩色）
+  aliases:
+  - グラフ同型
+  - 全域木の全列挙
+  - 彩色の全探索
+  level: 基礎
+  level_evidence: abc232_c（diff 685）、abc371_c（diff 849）、abc328_e（diff 1160）。彩色の数え上げは abc199_d（diff 1804）
+  prerequisites:
+  - dfs
+  - permutation-search
+  acl: null
+  signs:
+  - N ≤ 8〜10
+  - 頂点の番号の付け替え
+  - 辺の部分集合を全部試す
+  - 3色で塗る方法の数
+  compare_with:
+  - hamiltonian-path
+  - chromatic-number
+  page: own
+  visual: null
+  problems:
+  - id: abc232_c
+    difficulty: 685
+    role: example
+    summary: 頂点の対応を順列で全探索して、2つのグラフが同型かを判定する
+    evidence: https://qiita.com/sano192/items/3cb3ae52adae8829c94f
+  - id: abc371_c
+    difficulty: 849
+    role: example
+    summary: 辺の追加・削除のコスト最小で同型にする。8! の対応を全探索する
+    evidence: https://www.cnblogs.com/Lanly/p/18414807
+  - id: abc328_e
+    difficulty: 1160
+    role: practice
+    summary: N ≤ 8 の全域木を全列挙して、重みの和 mod K の最小値を求める
+    evidence: https://drken1215.hatenablog.com/entry/2023/11/12/184431
+  - id: abc199_d
+    difficulty: 1804
+    role: practice
+    summary: 連結成分ごとに DFS で3彩色の数を数え、掛け合わせる
+    evidence: https://blog.hamayanhamayan.com/entry/2021/04/25/002321
+- key: state-space-search
+  title: 状態空間の探索（盤面・配置・組を頂点にする BFS）
+  aliases:
+  - 状態空間BFS
+  - 盤面BFS
+  - パズルの最短手数
+  - ペアの状態
+  level: 水
+  level_evidence: abc361_d（diff 1202）、abc339_d（diff 1276）、abc224_d（diff 1376）、abc197_f（diff 1945）
+  prerequisites:
+  - bfs
+  - hashing-encoding
+  acl: null
+  signs:
+  - 盤面・配置・文字列の最小操作回数
+  - 状態数が 10^6〜10^7 程度に収まる
+  - 2人の位置
+  - 両端から伸ばす
+  compare_with:
+  - extended-dijkstra
+  page: own
+  visual: 状態を頂点としたグラフの一部（盤面の小さな絵を頂点にした図）。状態数の見積もりの式を横に添える
+  problems:
+  - id: abc361_d
+    difficulty: 1202
+    role: example
+    summary: 石の並び（文字列）を状態として BFS し、目標の並びへの最小手数を求める
+    evidence: https://drken1215.hatenablog.com/entry/2024/07/07/151254
+  - id: abc339_d
+    difficulty: 1276
+    role: example
+    summary: 2人の位置の組（60^4 通り）を状態にした BFS
+    evidence: https://www.cnblogs.com/Lanly/p/18005285
+  - id: abc224_d
+    difficulty: 1376
+    role: practice
+    summary: 駒の配置（9! 通り）を状態にした BFS（8パズル）
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC224D
+  - id: abc197_f
+    difficulty: 1945
+    role: practice
+    summary: 両端の頂点の組 (u,v) を状態にし、同じ文字の辺で両側へ伸ばす（回文の最短路）
+    evidence: https://kmjp.hatenablog.jp/entry/2021/03/27/0900
+- key: shortest-path-overview
+  title: 最短路アルゴリズムの使い分け
+  aliases:
+  - 最短路の選び方
+  - 最短経路問題
+  level: 水
+  level_evidence: 横断ページ。BFS（〜1000）・ダイクストラ（〜1100）・01-BFS（1250〜1500）・ワーシャルフロイド（950〜1700）・ベルマンフォード（1740〜1900）の比較
+  prerequisites:
+  - bfs
+  - dijkstra
+  - zero-one-bfs
+  - bellman-ford
+  - warshall-floyd
+  acl: null
+  signs:
+  - 最短
+  - 最小コスト
+  - 最小回数
+  compare_with:
+  - bfs
+  - zero-one-bfs
+  - dijkstra
+  - bellman-ford
+  - warshall-floyd
+  page: own
+  visual: 辺の重みの条件（等しい／0と1／非負／負あり）と始点の数（単一／全点対）の2軸の表
+  problems: []
+- key: dijkstra
+  title: ダイクストラ法
+  aliases:
+  - ダイクストラ
+  - Dijkstra
+  level: 基礎
+  level_evidence: abc362_d（diff 634）、abc340_d（diff 784）、abc325_e（diff 1093）、abc192_e（diff 1135）
+  prerequisites:
+  - bfs
+  - priority-queue
+  acl: null
+  signs:
+  - 非負の重み付きの最短路
+  - N, M ≤ 2×10^5
+  - 頂点にもコストがある
+  compare_with:
+  - bfs
+  - zero-one-bfs
+  - bellman-ford
+  - warshall-floyd
+  page: own
+  visual: ヒープの中身（(距離, 頂点) の組）と確定済みの頂点の集合を並べたステップ送り。古い組を読み飛ばす場面と、負辺を入れると確定済みの距離が後から縮む反例を見せる
+  problems:
+  - id: abc362_d
+    difficulty: 634
+    role: example
+    summary: 頂点にも重みがある最短路。辺の重みに行き先の頂点の重みを足す
+    evidence: https://www.cnblogs.com/Lanly/p/18301039
+  - id: abc340_d
+    difficulty: 784
+    role: example
+    summary: ステージの解放関係をグラフにして、最短距離を求める
+    evidence: https://www.cnblogs.com/Lanly/p/18013072
+  - id: abc325_e
+    difficulty: 1093
+    role: practice
+    summary: 社用車から電車へ1回だけ乗り換える。(頂点, 乗り換えたか) の2層にするか、両端からの最短路を組み合わせる
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/22/191500
+  - id: abc192_e
+    difficulty: 1135
+    role: practice
+    summary: K の倍数の時刻にしか出発できない辺。到着時刻を延ばして遷移する
+    evidence: https://blog.hamayanhamayan.com/entry/2021/02/20/233838
+- key: path-restoration
+  title: 経路復元
+  aliases:
+  - 経路の出力
+  - 親の記録
+  level: 基礎
+  level_evidence: abc168_d（diff 804）
+  prerequisites:
+  - bfs
+  - dijkstra
+  acl: null
+  signs:
+  - 最短経路を1つ出力せよ
+  - 次に進む頂点
+  compare_with:
+  - shortest-path-dag
+  page: section-of:dijkstra
+  visual: prev 配列を矢印で描き、終点から始点へたどって反転する
+  problems:
+  - id: abc168_d
+    difficulty: 804
+    role: example
+    summary: BFS の親を記録して経路（次の一歩）を出力する
+    evidence: https://blog.hamayanhamayan.com/entry/2020/05/17/224335
+- key: reverse-graph-shortest-path
+  title: 逆向きのグラフ・始点と終点からの最短路
+  aliases:
+  - 逆辺
+  - 両端からのダイクストラ
+  - 経由点
+  level: 水
+  level_evidence: abc369_e（diff 1301）、abc035_d（diff 1591）、soundhound2018_summer_qual_d（diff 1637）、typical90_m（★5）
+  prerequisites:
+  - dijkstra
+  acl: null
+  signs:
+  - 頂点 k を経由する最短路をすべての k について
+  - 行きと帰り
+  - 全員がゴールへ向かう
+  - 途中で乗り換える
+  compare_with:
+  - warshall-floyd
+  - shortest-path-dag
+  page: section-of:dijkstra
+  visual: 始点からの距離 d1 と終点からの距離 dN を各頂点の上下に書き、d1[k]+dN[k] が経由の最短路になることを示す
+  problems:
+  - id: abc369_e
+    difficulty: 1301
+    role: practice
+    summary: 指定された K 本（≤5）の橋を通る最短路。順列と向きを全探索し、頂点間距離は全点対で前計算する
+    evidence: https://www.cnblogs.com/Lanly/p/18402027
+  - id: abc035_d
+    difficulty: 1591
+    role: example
+    summary: 行きは元のグラフ、帰りは辺を逆にしたグラフでダイクストラする
+    evidence: https://qiita.com/drken/items/e77685614f3c6bf86f44
+  - id: soundhound2018_summer_qual_d
+    difficulty: 1637
+    role: practice
+    summary: 円とスヌークの2種類の運賃。始点と終点からの最短路と後ろからの最小値を組み合わせる
+    evidence: https://qiita.com/drken/items/e77685614f3c6bf86f44
+  - id: typical90_m
+    difficulty: null
+    role: example
+    summary: 頂点 k を経由する最短路を、頂点1と頂点Nからの2回のダイクストラの和で求める
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/013.cpp
+- key: shortest-cycle
+  title: 最短閉路
+  aliases:
+  - 最小閉路
+  - 頂点を含む最短閉路
+  level: 水
+  level_evidence: abc376_d（diff 743）。各頂点を含む最短閉路を求める abc191_e（diff 1323）は裏付け未確認
+  prerequisites:
+  - bfs
+  - dijkstra
+  acl: null
+  signs:
+  - 戻ってくる最短
+  - 頂点 i を含む閉路の最小の長さ
+  compare_with:
+  - cycle-detection
+  page: section-of:dijkstra
+  visual: null
+  problems:
+  - id: abc376_d
+    difficulty: 743
+    role: example
+    summary: 頂点1を含む最小の有向閉路。頂点1から BFS し、1へ戻る辺を見る
+    evidence: https://www.cnblogs.com/Lanly/p/18486698
+- key: zero-one-bfs
+  title: 01-BFS
+  aliases:
+  - 0-1 BFS
+  - deque BFS
+  level: 水
+  level_evidence: abc176_d（diff 1248）、abc213_e（diff 1423）、abc246_e（diff 1476）、arc005_3（diff 1503）
+  prerequisites:
+  - bfs
+  - dijkstra
+  acl: null
+  signs:
+  - コストが 0 か 1
+  - 壁を壊す回数の最小化
+  - 曲がる回数・向きを変える回数
+  - ワープはコスト1
+  compare_with:
+  - bfs
+  - dijkstra
+  page: own
+  visual: deque の中の距離が「d…d, d+1…d+1」の2種類に保たれるステップ送り（0の辺は前に、1の辺は後ろに入る）
+  problems:
+  - id: abc176_d
+    difficulty: 1248
+    role: example
+    summary: 歩く（コスト0）とワープ（5×5 の範囲、コスト1）の迷路を 01-BFS で解く
+    evidence: https://betrue12.hateblo.jp/entry/2018/12/08/000020
+  - id: abc213_e
+    difficulty: 1423
+    role: practice
+    summary: 2×2 を壊すパンチ（コスト1）と移動（コスト0）の迷路
+    evidence: https://blog.hamayanhamayan.com/entry/2021/08/09/010308
+  - id: abc246_e
+    difficulty: 1476
+    role: practice
+    summary: ビショップの移動。向きを状態に持ち、同じ向きに進むのはコスト0
+    evidence: https://blog.hamayanhamayan.com/entry/2022/04/03/015208
+  - id: arc005_3
+    difficulty: 1503
+    role: example
+    summary: 壁を2回まで壊してゴールに着けるか。壊す回数をコストにした 01-BFS
+    evidence: https://drken1215.hatenablog.com/entry/2021/07/30/024800
+  - id: typical90_aq
+    difficulty: null
+    role: practice
+    summary: 曲がる回数の最小化。向きを状態に持つ 01-BFS
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/043.cpp
+- key: bellman-ford
+  title: ベルマンフォード法と負閉路
+  aliases:
+  - ベルマンフォード
+  - Bellman-Ford
+  - 負閉路検出
+  - SPFA
+  level: 青
+  level_evidence: abc137_e（diff 1740）、abc061_d（diff 1838）、abc404_g（diff 1894）
+  prerequisites:
+  - dijkstra
+  acl: null
+  signs:
+  - 負の辺
+  - 得点を最大化（符号を反転すると負辺）
+  - いくらでも大きくできるなら inf
+  - N ≤ 数千、M ≤ 数千
+  compare_with:
+  - dijkstra
+  - warshall-floyd
+  - difference-constraints
+  page: own
+  visual: 反復ごとに dist が更新される様子と、N 回目にも更新される頂点（負閉路の影響を受ける頂点）を赤く塗る図
+  problems:
+  - id: abc137_e
+    difficulty: 1740
+    role: example
+    summary: ゴールに行ける正閉路があれば無限。到達可能性で絞ってから負閉路を判定する
+    evidence: https://kmjp.hatenablog.jp/entry/2019/08/10/0900
+  - id: abc061_d
+    difficulty: 1838
+    role: example
+    summary: 最長路を符号反転で最短路にし、頂点Nに影響する負閉路を判定する
+    evidence: https://drken1215.hatenablog.com/entry/2019/02/16/075900
+  - id: abc404_g
+    difficulty: 1894
+    role: practice
+    summary: 区間和の条件を累積和の差分制約に直し、負辺を含むのでベルマンフォードで解く
+    evidence: https://kmjp.hatenablog.jp/entry/2025/05/04/0930
+- key: potential-reweighting
+  title: ポテンシャルで負辺を消す
+  aliases:
+  - ポテンシャル
+  - Johnson のアイデア
+  - 高さの差
+  level: 水
+  level_evidence: abc237_e（diff 1208）。最小費用流（黄）の内部でも使う
+  prerequisites:
+  - dijkstra
+  - bellman-ford
+  acl: atcoder::mcf_graph の内部（ポテンシャル付きダイクストラ）
+  signs:
+  - 負の辺があるが、重みが「高さの差」などの形
+  - 負閉路が存在しないと保証
+  compare_with:
+  - bellman-ford
+  - min-cost-flow
+  page: section-of:bellman-ford
+  visual: 辺の重み w(u,v) を w + h(u) − h(v) に置き換えたとき、どの経路も始点と終点だけで決まる定数がずれるだけであることを、2本の経路で比べる図
+  problems:
+  - id: abc237_e
+    difficulty: 1208
+    role: example
+    summary: 高さの差で決まる負の辺を、高さをポテンシャルにして非負に直しダイクストラする
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC237E
+- key: warshall-floyd
+  title: ワーシャルフロイド法
+  aliases:
+  - ワーシャルフロイド
+  - Floyd-Warshall
+  - 全点対最短路
+  level: 水
+  level_evidence: abc208_d（diff 1190）、abc073_d（diff 1345）、abc375_f（diff 1546）、abc243_e（diff 1637）、abc143_e（diff 1695）
+  prerequisites:
+  - dijkstra
+  - dp-basics
+  acl: null
+  signs:
+  - N ≤ 400（N^3 が間に合う）
+  - 全点対の距離
+  - 辺を1本ずつ追加するクエリ
+  - 訪れる点の順番を全探索
+  compare_with:
+  - dijkstra
+  - bellman-ford
+  page: own
+  visual: 距離行列を k ごとに更新する動く図。k 番目の行と列が「中継点」として光り、i-j のマスが d[i][k]+d[k][j] で更新される
+  problems:
+  - id: abc079_d
+    difficulty: 949
+    role: example
+    summary: 数字の書き換えコストの全点対最短路を前計算して、各マスを1に変える
+    evidence: https://blog.hamayanhamayan.com/entry/2017/11/19/010816
+  - id: abc208_d
+    difficulty: 1190
+    role: example
+    summary: 「経由してよい頂点を k まで増やす」というワーシャルフロイドの意味そのものを問う
+    evidence: https://blog.hamayanhamayan.com/entry/2021/07/05/013220
+  - id: abc073_d
+    difficulty: 1345
+    role: practice
+    summary: 訪問する町（≤8）の順番を順列全探索し、町間の距離は全点対で前計算する
+    evidence: https://blog.hamayanhamayan.com/entry/2017/09/10/002511
+  - id: abc375_f
+    difficulty: 1546
+    role: practice
+    summary: 辺の削除クエリを逆順の追加にし、追加1回を O(N^2) で反映する
+    evidence: https://www.cnblogs.com/Lanly/p/18461661
+  - id: abc243_e
+    difficulty: 1637
+    role: practice
+    summary: 迂回路で同じ距離以下にできる辺は消してよい。全点対の距離で判定する
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC243E
+  - id: abc143_e
+    difficulty: 1695
+    role: practice
+    summary: 燃料 L で1回に行ける町の組を全点対で求め、その上でもう一度全点対で給油回数を求める
+    evidence: https://kmjp.hatenablog.jp/entry/2019/10/19/0900
+  - id: abc338_f
+    difficulty: 1835
+    role: practice
+    summary: 負辺あり（負閉路なし）の全点対最短路を前計算し、訪問済みの集合で bitDP する
+    evidence: https://www.cnblogs.com/Lanly/p/17992290
+  - id: typical90_ci
+    difficulty: null
+    role: practice
+    summary: 未知の辺の長さ X を二分探索し、各 X でワーシャルフロイドを回して条件を数える
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/087.cpp
+- key: shortest-path-dag
+  title: 最短路 DAG（経路の数え上げ・最短路に使われる辺）
+  aliases:
+  - 最短路木
+  - 最短経路の数え上げ
+  - 最短路に必ず使われる辺
+  level: 水
+  level_evidence: abc211_d（diff 755）、abc252_e（diff 1294）、abc051_d（diff 1566）、abc218_f（diff 1753）、abc375_g（diff 2014）
+  prerequisites:
+  - dijkstra
+  - dag-dp
+  acl: null
+  signs:
+  - 最短経路の本数
+  - この辺を通らなくても最短距離が変わらないか
+  - 最短路に使われない辺
+  - 最短路木を出力
+  compare_with:
+  - path-restoration
+  - lowlink
+  page: own
+  visual: d(s,u)+w+d(v,t)=d(s,t) を満たす辺だけを太線にし、それが DAG になることと、その上での本数の DP を示す
+  problems:
+  - id: abc211_d
+    difficulty: 755
+    role: example
+    summary: BFS と同時に最短路の本数を数える
+    evidence: https://drken1215.hatenablog.com/entry/2023/06/10/150200
+  - id: abc252_e
+    difficulty: 1294
+    role: example
+    summary: 頂点1からの最短路木の辺を出力する
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC252E
+  - id: abc051_d
+    difficulty: 1566
+    role: practice
+    summary: どの2点間の最短路にも使われない辺を数える
+    evidence: https://drken1215.hatenablog.com/entry/2019/02/15/141000
+  - id: abc218_f
+    difficulty: 1753
+    role: practice
+    summary: 最短路1本に乗る辺（≤N-1本）を消したときだけ再計算する
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC218F
+  - id: abc375_g
+    difficulty: 2014
+    role: practice
+    summary: 各辺を消すと最短距離が変わるか。両端からの距離と最短路の本数で判定する
+    evidence: https://kmjp.hatenablog.jp/entry/2024/10/14/0930
+- key: extended-dijkstra
+  title: 状態を頂点にする（拡張ダイクストラ・頂点倍化）
+  aliases:
+  - 拡張ダイクストラ
+  - 頂点倍化
+  - 頂点倍加
+  - レイヤー化グラフ
+  - 状態付き最短路
+  level: 水
+  level_evidence: abc339_d（diff 1276）、abc246_e（diff 1476）、abc132_e（diff 1625）、abc244_f（diff 1661）、abc164_e（diff 1877）。資源を次元に持つ応用は青
+  prerequisites:
+  - dijkstra
+  - bfs
+  acl: null
+  signs:
+  - K 回までスキップ・無料
+  - 手持ちのお金・燃料・体力
+  - 向き・直前の移動
+  - 歩数の偶奇・mod
+  - スイッチの状態
+  - 訪問済みの集合（N ≤ 17 程度）
+  compare_with:
+  - state-space-search
+  - super-vertex
+  - bit-dp
+  page: own
+  visual: 元のグラフを状態の数だけ層に重ね、層の間の辺（状態が変わる遷移）を縦の矢印で描く立体図。状態数×辺数の見積もりを横に添える
+  problems:
+  - id: abc348_d
+    difficulty: 1108
+    role: example
+    summary: 体力を状態に入れると大きすぎる。薬の位置から BFS して到達関係のグラフを作る
+    evidence: https://www.cnblogs.com/Lanly/p/18118195
+  - id: zone2021_e
+    difficulty: 1624
+    role: practice
+    summary: 上へ戻る移動のコストを頂点を2倍にして辺のコストに直す
+    evidence: https://qiita.com/yuu_kyopro/items/761919d9bccc88521863
+  - id: abc132_e
+    difficulty: 1625
+    role: example
+    summary: 3歩で1回の移動。(頂点, 歩数 mod 3) の 3N 頂点で最短路を求める
+    evidence: https://kmjp.hatenablog.jp/entry/2019/06/29/1030
+  - id: abc244_f
+    difficulty: 1661
+    role: example
+    summary: (訪問の偶奇を表すビット列, 今の頂点) を状態にした BFS
+    evidence: https://blog.hamayanhamayan.com/entry/2022/03/21/163326
+  - id: abc164_e
+    difficulty: 1877
+    role: practice
+    summary: (頂点, 銀貨の枚数) を状態にしたダイクストラ。銀貨は上限 N×max(A) で打ち切る
+    evidence: https://kmjp.hatenablog.jp/entry/2020/04/28/0900
+  - id: arc061_c
+    difficulty: 2502
+    role: practice
+    summary: (駅, 乗っている会社) を頂点にし、乗り換えをコスト1の辺にする
+    evidence: https://betrue12.hateblo.jp/entry/2018/12/08/000020
+- key: super-vertex
+  title: 超頂点・補助頂点
+  aliases:
+  - 超頂点
+  - 仮想頂点
+  - 補助頂点
+  - ハブ頂点
+  level: 水
+  level_evidence: abc264_e（diff 1229）、abc184_e（diff 1418）、abc302_f（diff 1430）、typical90_bb（★6）。辺の圧縮が主題の abc232_g（diff 2550）は発展
+  prerequisites:
+  - bfs
+  - dijkstra
+  acl: null
+  signs:
+  - 同じグループの全点間を移動できる
+  - 同じ色・同じ文字ならワープ
+  - 集合の要素を共有
+  - 完全グラフで辺のコストが特殊な形
+  compare_with:
+  - multi-source-bfs
+  - extended-dijkstra
+  - segment-tree-graph
+  page: own
+  visual: K 点の完全グラフ（K(K-1)/2 本）と、ハブ1点を介した星形（2K 本）を並べて辺数を比べる。距離が2倍・+1 になる場合の補正も示す
+  problems:
+  - id: abc264_e
+    difficulty: 1229
+    role: example
+    summary: 発電所をすべて1つの頂点にまとめ、辺の削除を逆順の連結として処理する
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC264E
+  - id: abc184_e
+    difficulty: 1418
+    role: example
+    summary: 同じ文字のテレポーターへの移動。各文字のテレポートを1回だけ展開する
+    evidence: https://kmjp.hatenablog.jp/entry/2020/11/22/1000
+  - id: abc302_f
+    difficulty: 1430
+    role: example
+    summary: 集合を頂点として、要素の頂点を介して集合どうしをつなぐ（答えは距離から1を引く）
+    evidence: https://drken1215.hatenablog.com/entry/2023/06/10/130500
+  - id: abc232_g
+    difficulty: 2550
+    role: practice
+    summary: (A_i+B_j) mod M の完全グラフを、B の昇順に並べた補助頂点の環で 2N 頂点に縮める
+    evidence: https://kmjp.hatenablog.jp/entry/2021/12/19/1000
+  - id: typical90_bb
+    difficulty: null
+    role: practice
+    summary: 論文を頂点として共著関係を表し、BFS の距離を2で割る
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/054.cpp
+- key: time-dependent-dijkstra
+  title: 時刻で変わる辺（時刻依存の最短路）
+  aliases:
+  - 時刻依存
+  - 待機
+  - 最終電車
+  - 出発時刻
+  level: 水
+  level_evidence: abc192_e（diff 1135）、abc342_e（diff 1476）、abc204_e（diff 1710）
+  prerequisites:
+  - dijkstra
+  acl: null
+  signs:
+  - 出発できる時刻が決まっている
+  - 待つことができる
+  - 時刻によって所要時間が変わる
+  - 間に合う最も遅い出発時刻
+  compare_with:
+  - dijkstra
+  - extended-dijkstra
+  page: own
+  visual: 横軸を時刻にした「到着時刻 → 次の到着時刻」の関数のグラフ。早く着いて損しない（FIFO 性）ことを示す
+  problems:
+  - id: abc192_e
+    difficulty: 1135
+    role: example
+    summary: 出発時刻が K の倍数に限られる。次の出発時刻まで待つ遷移を入れたダイクストラ
+    evidence: https://blog.hamayanhamayan.com/entry/2021/02/20/233838
+  - id: abc342_e
+    difficulty: 1476
+    role: example
+    summary: 最終電車型。頂点Nから逆向きに「最も遅い出発時刻」を大きい順に確定させる
+    evidence: https://www.cnblogs.com/Lanly/p/18032259
+  - id: abc204_e
+    difficulty: 1710
+    role: practice
+    summary: 通過時間が出発時刻で変わる辺。最適な待ち時間を計算してからダイクストラする
+    evidence: https://blog.hamayanhamayan.com/entry/2021/06/07/024520
+- key: difference-constraints
+  title: 差分制約（牛ゲー）
+  aliases:
+  - 牛ゲー
+  - 差分制約系
+  - ポテンシャルの整合性
+  level: 青
+  level_evidence: arc090_b（diff 1452）、abc404_g（diff 1894）、abc216_g（diff 1963）
+  prerequisites:
+  - bellman-ford
+  - dijkstra
+  - prefix-sum
+  acl: null
+  signs:
+  - x_j − x_i ≤ c の形の条件の下で最大化・最小化
+  - 区間の和の条件（累積和に直す）
+  - 位置の差の情報の矛盾判定
+  compare_with:
+  - bellman-ford
+  - weighted-union-find
+  page: own
+  visual: 不等式 x_v ≤ x_u + c を辺 u→v（重み c）に直す対応表と、最短距離が「すべての条件を満たす最大の値」になることの説明図
+  problems:
+  - id: arc090_b
+    difficulty: 1452
+    role: example
+    summary: 「x_r − x_l = d」の情報が矛盾しないかを、重み付きの連結成分で確かめる
+    evidence: https://drken1215.hatenablog.com/entry/2022/12/08/152700
+  - id: abc404_g
+    difficulty: 1894
+    role: practice
+    summary: 区間和が S という条件と正値条件を差分制約にし、ベルマンフォードで解く
+    evidence: https://kmjp.hatenablog.jp/entry/2025/05/04/0930
+  - id: abc216_g
+    difficulty: 1963
+    role: example
+    summary: 区間内の1の個数の下限を、累積の0の個数の差分制約に直して最短路で解く
+    evidence: https://kmjp.hatenablog.jp/entry/2021/09/01/0930
+- key: modular-shortest-path
+  title: 剰余を頂点にする最短路（同余最短路）
+  aliases:
+  - 同余最短路
+  - 剰余グラフ
+  - mod を頂点に
+  level: 発展
+  level_evidence: arc084_b（diff 2457）
+  prerequisites:
+  - zero-one-bfs
+  - extended-dijkstra
+  acl: null
+  signs:
+  - K の倍数のうち〇〇が最小
+  - 作れる数の集合（硬貨の組合せ）
+  - K が 10^5 程度
+  compare_with:
+  - extended-dijkstra
+  page: overview
+  visual: null
+  problems:
+  - id: arc084_b
+    difficulty: 2457
+    role: example
+    summary: K の倍数の桁和の最小値。K で割った余りを頂点にした 01-BFS
+    evidence: https://drken1215.hatenablog.com/entry/2021/07/30/160000
+- key: complement-graph-bfs
+  title: 補グラフ上の BFS
+  aliases:
+  - 補グラフ
+  - 未訪問頂点の集合
+  level: 黄
+  level_evidence: abc319_g（diff 2185）
+  prerequisites:
+  - bfs
+  - set
+  acl: null
+  signs:
+  - 完全グラフから M 本の辺を除いたグラフ
+  - 辺が「ない」ことが与えられる
+  compare_with:
+  - bfs
+  page: own
+  visual: 未訪問頂点のリストを持ち、各頂点で「辺がない（＝補グラフでは辺がある）」頂点だけをまとめて取り出す様子。各頂点が1回しか取り出されない理由を示す
+  problems:
+  - id: abc319_g
+    difficulty: 2185
+    role: example
+    summary: 完全グラフから M 辺を除いたグラフで、最短路の本数を BFS の層ごとに数える
+    evidence: https://kmjp.hatenablog.jp/entry/2023/09/09/0930
+- key: xor-path
+  title: XOR の経路と閉路の基底
+  aliases:
+  - XOR 最短路
+  - 閉路基底
+  - サイクル空間
+  level: 黄
+  level_evidence: abc451_g（diff 2221）。値が小さい場合の (頂点, XOR) の BFS は abc410_d（diff 1048、裏付け未確認）
+  prerequisites:
+  - dfs
+  - xor-basis
+  acl: null
+  signs:
+  - 経路の重みが辺の XOR
+  - 同じ辺を何度通ってもよい（ウォーク）
+  - XOR の最小・最大
+  compare_with:
+  - extended-dijkstra
+  page: own
+  visual: 全域木の根からの XOR を各頂点に書き、木に入らない辺1本が作る閉路の XOR が「寄り道で足せる値」になることを示す
+  problems:
+  - id: abc451_g
+    difficulty: 2221
+    role: example
+    summary: 全域木で根からの XOR を求め、残りの辺が作る閉路の XOR を基底にまとめる
+    evidence: https://kmjp.hatenablog.jp/entry/2026/03/28/0930
+- key: segment-tree-graph
+  title: 区間に辺を張る（セグメント木の形の補助頂点）
+  aliases:
+  - 区間に辺を張るテク
+  - セグ木グラフ
+  level: 発展
+  level_evidence: abc414_g（diff 3020）
+  prerequisites:
+  - super-vertex
+  - segment-tree
+  acl: null
+  signs:
+  - 頂点から区間内の全頂点へ辺がある
+  - 区間から区間へ移動
+  compare_with:
+  - super-vertex
+  page: overview
+  visual: セグメント木のノードを補助頂点にし、区間を O(log N) 個のノードで覆う図
+  problems:
+  - id: abc414_g
+    difficulty: 3020
+    role: example
+    summary: 区間から区間への移動を、セグメント木の形の補助頂点に辺を張ってダイクストラで解く
+    evidence: https://kmjp.hatenablog.jp/entry/2025/07/14/0930
+- key: k-shortest-paths
+  title: k 番目の最短路
+  aliases:
+  - k-shortest path
+  - k 番目に短い経路
+  - Eppstein
+  level: 発展
+  level_evidence: ABC での出題は確認できなかった（Library Checker に k_shortest_walk がある）
+  prerequisites:
+  - dijkstra
+  acl: null
+  signs:
+  - k 番目に短い経路・歩道
+  compare_with:
+  - dijkstra
+  page: overview
+  visual: null
+  problems: []
+- key: steiner-tree
+  title: 最小シュタイナー木
+  aliases:
+  - シュタイナー木
+  - Steiner tree
+  level: 発展
+  level_evidence: abc364_g（diff 2455）、abc395_g（diff 2561）
+  prerequisites:
+  - dijkstra
+  - bit-dp
+  acl: null
+  signs:
+  - 指定した K 点（K ≤ 10 程度）をすべて連結にする最小コスト
+  compare_with:
+  - minimum-spanning-tree
+  page: overview
+  visual: null
+  problems:
+  - id: abc364_g
+    difficulty: 2455
+    role: example
+    summary: 頂点1〜K-1 と各頂点を結ぶ最小コスト。(頂点, 部分集合) の DP とダイクストラ
+    evidence: https://kmjp.hatenablog.jp/entry/2024/07/27/0930
+  - id: abc395_g
+    difficulty: 2561
+    role: practice
+    summary: 完全グラフで、指定の K 点と S・T を含む最小シュタイナー木
+    evidence: https://kmjp.hatenablog.jp/entry/2025/03/01/0900
+- key: topological-sort
+  title: トポロジカルソート
+  aliases:
+  - トポロジカル順序
+  - Kahn 法
+  - 入次数
+  level: 基礎
+  level_evidence: abc315_e（diff 921）、abc216_d（diff 1039）、abc223_d（diff 1069）。応用は abc245_f（diff 1451）
+  prerequisites:
+  - dfs
+  - bfs
+  acl: atcoder::scc_graph（DAG なら各成分が1頂点になり、scc() の順がトポロジカル順）
+  signs:
+  - a は b より前
+  - 依存関係・前提条件
+  - 順序が一意か
+  - 辞書順最小の順序
+  - 矛盾（閉路）があれば -1
+  compare_with:
+  - dfs
+  - scc
+  - cycle-detection
+  page: own
+  visual: 入次数の表とキューを並べた Kahn 法のステップ送り。最後に残った頂点が閉路を含むことを示す
+  problems:
+  - id: abc315_e
+    difficulty: 921
+    role: example
+    summary: 依存関係の DFS の帰りがけ順が、読む順番（トポロジカル順）になる
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC315E
+  - id: abc216_d
+    difficulty: 1039
+    role: practice
+    summary: 筒の一番上の色がそろったものから取り出すシミュレーション（入次数0から処理する考え方）
+    evidence: https://blog.hamayanhamayan.com/entry/2021/08/29/230959
+  - id: abc223_d
+    difficulty: 1069
+    role: example
+    summary: 「a は b より前」の条件を満たす辞書順最小の順列。優先度付きキューで Kahn 法
+    evidence: https://drken1215.hatenablog.com/entry/2025/02/07/003505
+  - id: abc245_f
+    difficulty: 1451
+    role: practice
+    summary: 出次数0の頂点を逆向きに取り除いていき、残った頂点を数える
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC245F
+  - id: abc304_h
+    difficulty: 2642
+    role: practice
+    summary: 順序の制約が DAG をなすことと各要素の範囲から、条件を満たす順列を構成する
+    evidence: https://kmjp.hatenablog.jp/entry/2023/06/10/0930
+  - id: typical90_bs
+    difficulty: null
+    role: practice
+    summary: トポロジカル順序を K 個まで DFS で列挙する
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/071-03.cpp
+- key: dag-dp
+  title: DAG 上の DP
+  aliases:
+  - DAG の最長路
+  - DAG DP
+  level: 基礎
+  level_evidence: dp_g（EDPC、diff なし）、abc139_e（diff 1528）
+  prerequisites:
+  - topological-sort
+  - dp-basics
+  acl: null
+  signs:
+  - 閉路のない有向グラフで最長・経路数
+  - 依存関係の深さ
+  compare_with:
+  - shortest-path-dag
+  page: section-of:topological-sort
+  visual: null
+  problems:
+  - id: abc139_e
+    difficulty: 1528
+    role: practice
+    summary: 総当たり戦の最少日数。試合を頂点とする依存関係を、前日に変化したところだけ調べて進める
+    evidence: https://kmjp.hatenablog.jp/entry/2019/09/01/1000
+  - id: dp_g
+    difficulty: null
+    role: example
+    summary: DAG の最長路。トポロジカル順またはメモ化再帰で DP する
+    evidence: https://qiita.com/drken/items/03c7db44ccd27820ea0d
+- key: scc
+  title: 強連結成分分解（SCC）
+  aliases:
+  - 強連結成分
+  - SCC
+  - Kosaraju
+  - Tarjan
+  - 縮約
+  level: 水
+  level_evidence: abc296_e（diff 1285）、abc357_e（diff 1295）、typical90_u（★5）。縮約後の処理が主題のものは発展（abc374_g 2608、abc214_h 3138）
+  prerequisites:
+  - dfs
+  - topological-sort
+  acl: atcoder::scc_graph（scc() はトポロジカル順の成分のリスト）
+  signs:
+  - 互いに行き来できる
+  - 何度でも繰り返せる（閉路の中にいる）
+  - 縮約して DAG にしてから DP
+  compare_with:
+  - connected-components
+  - two-sat
+  - lowlink
+  page: own
+  visual: Kosaraju の2回の DFS（1回目の帰りがけ順、2回目は逆辺で）を色分けしたステップ送りと、成分を1点に縮めた DAG
+  problems:
+  - id: abc296_e
+    difficulty: 1285
+    role: example
+    summary: i から A_i への辺のグラフで、閉路に含まれる頂点を数える
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC296E
+  - id: abc357_e
+    difficulty: 1295
+    role: practice
+    summary: Functional graph で到達できる頂点対の数。閉路の長さと木の部分の深さを使う
+    evidence: https://drken1215.hatenablog.com/entry/2024/06/09/231700
+  - id: abc374_g
+    difficulty: 2608
+    role: practice
+    summary: SCC で縮約した DAG の最小パス被覆
+    evidence: https://kmjp.hatenablog.jp/entry/2024/10/06/0930
+  - id: abc214_h
+    difficulty: 3138
+    role: practice
+    summary: SCC で縮約してから、K 人の経路を最小費用流で決める
+    evidence: https://kmjp.hatenablog.jp/entry/2021/08/16/0930
+  - id: typical90_u
+    difficulty: null
+    role: example
+    summary: 互いに行き来できる頂点対の数。各 SCC のサイズ s について s(s-1)/2 を足す
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/021.cpp
+  - id: practice2_g
+    difficulty: null
+    role: example
+    summary: SCC を求めてトポロジカル順に出力する。ACL の scc_graph の使用例
+    evidence: https://github.com/atcoder/ac-library/blob/master/test/example/scc_practice.cpp
+- key: two-sat
+  title: 2-SAT
+  aliases:
+  - 2SAT
+  - 充足可能性
+  - 含意グラフ
+  level: 発展
+  level_evidence: abc210_f（diff 2632）、abc277_h（diff 2917）。ACL にあるので「モデル化だけ」なら黄の扱いもありうる
+  prerequisites:
+  - scc
+  acl: atcoder::two_sat（add_clause(i, f, j, g) で (x_i = f) ∨ (x_j = g)、satisfiable()、answer()）
+  signs:
+  - 各要素について2択
+  - この2つは同時に選べない
+  - 少なくともどちらか一方
+  compare_with:
+  - scc
+  - bipartite-graph
+  page: overview
+  visual: 節 (a ∨ b) を2本の含意 ¬a→b、¬b→a に直す図と、x と ¬x が同じ SCC に入ると矛盾することの図
+  problems:
+  - id: abc210_f
+    difficulty: 2632
+    role: example
+    summary: カードの表裏の2択。同じ素因数を持つ表は高々1枚を、補助変数で O(N) 本の節にする
+    evidence: https://kmjp.hatenablog.jp/entry/2021/07/18/0900
+  - id: abc277_h
+    difficulty: 2917
+    role: practice
+    summary: 「X_i が j 以上」を変数にして、値の範囲の制約を 2-SAT にする
+    evidence: https://kmjp.hatenablog.jp/entry/2022/11/13/0930
+  - id: practice2_h
+    difficulty: null
+    role: example
+    summary: 各旗を2か所のどちらかに置き、近すぎる組を禁止する。ACL の two_sat の使用例
+    evidence: https://github.com/atcoder/ac-library/blob/master/test/example/twosat_practice.cpp
+- key: functional-graph
+  title: Functional graph（出次数1のグラフ）
+  aliases:
+  - Functional graph
+  - rho 形
+  - 周期
+  - 置換のサイクル分解
+  level: 水
+  level_evidence: abc256_e（diff 1224）、abc296_e（diff 1285）、abc357_e（diff 1295）、abc377_e（diff 1685）。基本形は abc167_d（diff 754）
+  prerequisites:
+  - cycle-detection
+  - doubling
+  acl: atcoder::scc_graph（閉路の頂点を取り出すのに使える）
+  signs:
+  - 各 i に対して A_i へ移動
+  - K 回（10^18 回）繰り返した後
+  - 周期
+  - 置換
+  - 嫌い・好きの相手が1人ずつ
+  compare_with:
+  - scc
+  - doubling
+  - namori-graph
+  page: own
+  visual: rho（ρ）の形：しっぽ（木の部分）と輪（閉路）。K 回後の位置を「しっぽを抜けてから輪を周回」に分ける
+  problems:
+  - id: abc167_d
+    difficulty: 754
+    role: example
+    summary: テレポーターを K 回（≤10^18）使った後の町。周期を見つけるかダブリング
+    evidence: https://blog.hamayanhamayan.com/entry/2020/05/10/232914
+  - id: abc179_e
+    difficulty: 1175
+    role: example
+    summary: A_{i+1}=A_i^2 mod M の和。値が次の値を決めるので周期を見つける
+    evidence: https://drken1215.hatenablog.com/entry/2020/09/20/091500
+  - id: abc256_e
+    difficulty: 1224
+    role: practice
+    summary: 嫌いな人への辺の Functional graph で、各閉路の最小コストを足す
+    evidence: https://drken1215.hatenablog.com/entry/2023/08/03/140800
+  - id: abc357_e
+    difficulty: 1295
+    role: practice
+    summary: Functional graph の各頂点から到達できる頂点数を合計する
+    evidence: https://drken1215.hatenablog.com/entry/2024/06/09/231700
+  - id: abc377_e
+    difficulty: 1685
+    role: practice
+    summary: 置換を K 回合成する操作は、閉路上を 2^K 歩進むことになる
+    evidence: https://www.cnblogs.com/Lanly/p/18513188
+- key: namori-graph
+  title: なもりグラフ（N 頂点 N 辺の連結グラフ）
+  aliases:
+  - なもり
+  - unicyclic graph
+  - 閉路が1つ
+  level: 水
+  level_evidence: abc292_d（diff 579）。応用の abc266_f（diff 1525）は裏付け未確認
+  prerequisites:
+  - connected-components
+  - cycle-detection
+  acl: null
+  signs:
+  - N 頂点 N 辺で連結
+  - 閉路がちょうど1つ
+  compare_with:
+  - functional-graph
+  - tree-basics
+  page: section-of:functional-graph
+  visual: 葉を次数1から順に削る（トポロジカルソートの要領）と閉路だけが残る様子
+  problems:
+  - id: abc292_d
+    difficulty: 579
+    role: example
+    summary: 各連結成分が「頂点数＝辺数」（閉路がちょうど1つ）かを判定する
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC292D
+- key: reachability-bitset
+  title: 到達可能性の bitset 高速化
+  aliases:
+  - 推移閉包
+  - bitset で到達判定
+  level: 黄
+  level_evidence: typical90_bg（★7）、abc287_h（diff 2639）
+  prerequisites:
+  - topological-sort
+  - bitset
+  acl: null
+  signs:
+  - 到達できるかのクエリが大量
+  - N が 5×10^4 程度で N^2/64 が間に合う
+  compare_with:
+  - scc
+  - warshall-floyd
+  page: own
+  visual: null
+  problems:
+  - id: abc287_h
+    difficulty: 2639
+    role: practice
+    summary: ラベル n 以下の頂点だけで到達できる集合を bitset で持ち、n を増やしながら更新する
+    evidence: https://kmjp.hatenablog.jp/entry/2023/01/28/0930
+  - id: typical90_bg
+    difficulty: null
+    role: example
+    summary: DAG の到達判定クエリを 64 個ずつビット並列で処理する
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/059-02.cpp
+- key: graph-games
+  title: グラフ上のゲーム（後退解析）
+  aliases:
+  - 後退解析
+  - 勝敗の確定
+  - 負け確定から逆にたどる
+  level: 黄
+  level_evidence: abc209_e（diff 2153）、abc261_h（diff 2531）。似た考え方の abc245_f（diff 1451）
+  prerequisites:
+  - topological-sort
+  - game-theory-basics
+  acl: null
+  signs:
+  - 動けなくなったら負け
+  - 引き分け（無限に続く）がある
+  - 有向グラフ上でコマを動かす
+  compare_with:
+  - topological-sort
+  page: section-of:game-theory-basics
+  visual: 負け確定の頂点から逆辺をたどり、「勝ち」「負け」が確定していく様子。残った頂点が引き分け
+  problems:
+  - id: abc209_e
+    difficulty: 2153
+    role: example
+    summary: しりとりの勝敗を、負け確定の状態から逆向きに確定させる（後退解析）
+    evidence: https://blog.hamayanhamayan.com/entry/2021/07/11/154140
+  - id: abc261_h
+    difficulty: 2531
+    role: practice
+    summary: 重み付き有向グラフのゲームの最適値を、後退解析とダイクストラの要領で確定させる
+    evidence: https://kmjp.hatenablog.jp/entry/2022/07/24/0930
+- key: union-find-connectivity
+  title: Union-Find で連結性を扱う（逆順処理・オフライン）
+  aliases:
+  - 逆順 Union-Find
+  - 辺の削除を逆から
+  - オフラインの連結判定
+  level: 水
+  level_evidence: abc229_e（diff 1015）、abc372_e（diff 1042）、abc264_e（diff 1229）、abc120_d（diff 1355）
+  prerequisites:
+  - union-find
+  - connected-components
+  acl: atcoder::dsu（merge・same・leader・size・groups）
+  signs:
+  - 辺・頂点を順に削除していく
+  - 連結成分の数・サイズをそのつど答える
+  - 幾何の点を距離でつなぐ
+  - 二分探索＋連結判定
+  compare_with:
+  - connected-components
+  - offline-dynamic-connectivity
+  - minimum-spanning-tree
+  page: own
+  visual: 時間を逆向きに再生して、削除が追加に変わる様子を見せる動く図
+  problems:
+  - id: abc229_e
+    difficulty: 1015
+    role: example
+    summary: 頂点を順に消すたびの連結成分数を、逆順に頂点を足して Union-Find で数える
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC229E
+  - id: abc372_e
+    difficulty: 1042
+    role: practice
+    summary: 連結成分ごとに番号の大きい上位10頂点を持ち、併合のたびに更新する
+    evidence: https://drken1215.hatenablog.com/entry/2024/09/22/022522
+  - id: abc264_e
+    difficulty: 1229
+    role: practice
+    summary: 発電所を1点にまとめ、停電の辺の削除を逆順の連結として数える
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC264E
+  - id: abc120_d
+    difficulty: 1355
+    role: example
+    summary: 橋が崩落するたびの不便さを、逆順に橋を架けて成分のサイズの積を引いていく
+    evidence: https://blog.hamayanhamayan.com/entry/2019/03/03/234427
+  - id: abc181_f
+    difficulty: 2009
+    role: practice
+    summary: 半径を二分探索し、距離 2R 以下の釘と上下の壁を連結して上下がつながるか判定する
+    evidence: https://kmjp.hatenablog.jp/entry/2020/11/01/0930
+- key: lowlink
+  title: 橋と関節点（lowlink）
+  aliases:
+  - lowlink
+  - 橋
+  - 関節点
+  - ord と low
+  level: 黄
+  level_evidence: abc375_g（diff 2014）、abc334_g（diff 2242）。小さい制約の abc075_c（diff 1067）は全探索で解ける
+  prerequisites:
+  - dfs
+  acl: null
+  signs:
+  - その辺（頂点）を取り除くと非連結になるか
+  - すべての辺について除いたときを考える
+  - 連結成分数の変化
+  compare_with:
+  - scc
+  - union-find-connectivity
+  - shortest-path-dag
+  page: own
+  visual: DFS 木に ord を書き、後退辺で戻れる最小の ord（low）を下から伝える。low[子] > ord[親] の辺が橋になる
+  problems:
+  - id: abc075_c
+    difficulty: 1067
+    role: example
+    summary: 辺を1本ずつ除いて連結かを調べ、橋の本数を数える（小さい制約の全探索）
+    evidence: https://blog.hamayanhamayan.com/entry/2017/10/15/002234
+  - id: abc334_g
+    difficulty: 2242
+    role: practice
+    summary: 緑マスを1つ赤にしたときの連結成分数の期待値。kmjp はロールバック UF と分割統治で解く
+    evidence: https://kmjp.hatenablog.jp/entry/2023/12/23/1030
+- key: biconnected-components
+  title: 二重辺連結成分・二重頂点連結成分・ブロックカット木
+  aliases:
+  - 二辺連結成分
+  - 二重頂点連結成分
+  - BCC
+  - block-cut tree
+  - 橋で分解
+  level: 発展
+  level_evidence: ABC での出題は確認できなかった（Library Checker に two_edge_connected_components、biconnected_components）
+  prerequisites:
+  - lowlink
+  acl: null
+  signs:
+  - 橋を除いた成分を縮約して木にする
+  - 関節点で分けた塊
+  compare_with:
+  - lowlink
+  - scc
+  page: overview
+  visual: null
+  problems: []
+- key: offline-dynamic-connectivity
+  title: 辺の追加と削除が混ざる連結性（オフライン）
+  aliases:
+  - Offline Dynamic Connectivity
+  - ロールバック UF
+  - 時間軸のセグ木
+  level: 発展
+  level_evidence: abc334_g（diff 2242）を kmjp がこの方法で解いている。典型としては発展
+  prerequisites:
+  - union-find-connectivity
+  - rollback-union-find
+  - segment-tree
+  acl: null
+  signs:
+  - 辺の追加と削除のクエリが混在
+  - 各要素が「ない」時刻の区間
+  compare_with:
+  - union-find-connectivity
+  - lowlink
+  page: overview
+  visual: null
+  problems:
+  - id: abc334_g
+    difficulty: 2242
+    role: example
+    summary: 「各マスが消えている時刻」を区間として持ち、セグメント木上でロールバック UF を使う
+    evidence: https://kmjp.hatenablog.jp/entry/2023/12/23/1030
+- key: minimum-spanning-tree
+  title: 最小全域木（Kruskal・Prim）
+  aliases:
+  - MST
+  - クラスカル法
+  - プリム法
+  - 最大全域木
+  level: 水
+  level_evidence: abc218_e（diff 1004）、abc352_e（diff 1030）、abc235_e（diff 1304）、abc282_e（diff 1604）、arc076_b（diff 1615）
+  prerequisites:
+  - union-find
+  - sort
+  acl: atcoder::dsu（Kruskal の連結判定）
+  signs:
+  - すべての頂点をつなぐ最小コスト
+  - 不要な辺を取り除いて報酬を最大に
+  - 完全グラフだが辺の形が特殊
+  - この辺は MST に入るか
+  compare_with:
+  - shortest-path-dag
+  - bottleneck-path
+  page: own
+  visual: 辺を重み順に並べ、Union-Find の成分の色が混ざっていく Kruskal のステップ送り。閉路を作る辺が捨てられる瞬間を示す
+  problems:
+  - id: abc218_e
+    difficulty: 1004
+    role: example
+    summary: 報酬が正の辺を取り除いてよい。逆に考えて必要な辺だけ安い順につなぐ
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC218E
+  - id: abc352_e
+    difficulty: 1030
+    role: example
+    summary: 頂点集合内の全点対の辺は、隣り合う頂点の辺だけ使えば同じ MST になる
+    evidence: https://www.cnblogs.com/Lanly/p/18173063
+  - id: abc235_e
+    difficulty: 1304
+    role: example
+    summary: クエリの辺が MST に入るかを、元の辺とまとめて重み順に Kruskal を進めて判定する
+    evidence: https://drken1215.hatenablog.com/entry/2023/06/11/023548
+  - id: abc282_e
+    difficulty: 1604
+    role: practice
+    summary: 2つのボールの得点を辺の重みとした完全グラフの最大全域木
+    evidence: https://drken1215.hatenablog.com/entry/2022/12/29/102900
+  - id: arc076_b
+    difficulty: 1615
+    role: practice
+    summary: コストが min(|Δx|,|Δy|) の完全グラフ。x と y でソートした隣どうしの辺だけで足りる
+    evidence: https://drken1215.hatenablog.com/entry/2019/02/14/124300
+- key: mst-applications
+  title: 最小全域木の応用（補助頂点・辺の削減・クエリ）
+  aliases:
+  - MST の応用
+  - 辺の候補を減らす
+  level: 青
+  level_evidence: abc210_e（diff 1618）、abc364_f（diff 1878）、abc355_f（diff 1924）、typical90_aw（★6）
+  prerequisites:
+  - minimum-spanning-tree
+  - super-vertex
+  acl: atcoder::dsu
+  signs:
+  - 辺が多すぎる（完全グラフ・区間）
+  - 操作を頂点にする
+  - 辺の重みの種類が少ない
+  compare_with:
+  - super-vertex
+  page: section-of:minimum-spanning-tree
+  visual: null
+  problems:
+  - id: abc210_e
+    difficulty: 1618
+    role: example
+    summary: 環状の辺を操作ごとにまとめて扱う。gcd で連結成分数がどう減るかを使う
+    evidence: https://blog.hamayanhamayan.com/entry/2021/07/17/233253
+  - id: abc364_f
+    difficulty: 1878
+    role: practice
+    summary: 区間とつなぐ操作の頂点を足したグラフの MST を、コスト順に区間を処理して求める
+    evidence: https://www.cnblogs.com/Lanly/p/18327726
+  - id: abc355_f
+    difficulty: 1924
+    role: practice
+    summary: 辺を追加するたびの MST の重み（辺の重みは 10 以下）
+    evidence: https://www.cnblogs.com/Lanly/p/18213969
+  - id: typical90_aw
+    difficulty: null
+    role: example
+    summary: 区間の反転を、累積和の N+1 頂点の間の辺と見て最小全域木を求める
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/049.cpp
+- key: bottleneck-path
+  title: 最小ボトルネック路と Kruskal 再構築木
+  aliases:
+  - minimax 経路
+  - ボトルネック
+  - Kruskal 再構築木
+  - KRT
+  level: 青
+  level_evidence: abc383_e（diff 1616）、abc181_f（diff 2009）、abc394_g（diff 2031）
+  prerequisites:
+  - minimum-spanning-tree
+  - union-find-connectivity
+  acl: atcoder::dsu
+  signs:
+  - 経路上の最大の辺（最小の頂点）を最小化（最大化）
+  - 高さ・重さの制限以下で行けるか
+  - しきい値を上げていくと連結になる時刻
+  compare_with:
+  - minimum-spanning-tree
+  - binary-search-on-answer
+  page: own
+  visual: Kruskal の併合の過程を二分木（再構築木）として記録し、2点の LCA の重みが答えになることを示す
+  problems:
+  - id: abc383_e
+    difficulty: 1616
+    role: example
+    summary: 経路の最大辺の最小値 f を、Kruskal で辺を足す順に貪欲に組み合わせて和を最小化する
+    evidence: https://www.cnblogs.com/Lanly/p/18606772
+  - id: abc394_g
+    difficulty: 2031
+    role: practice
+    summary: 建物を高い順に追加しながら、2点がつながる時点をオフラインで求める
+    evidence: https://kmjp.hatenablog.jp/entry/2025/02/24/1000
+  - id: abc235_h
+    difficulty: 2967
+    role: practice
+    summary: 同じ重みの辺で成分がまとまる過程（Kruskal の要領）で、塗り方を数える
+    evidence: https://kmjp.hatenablog.jp/entry/2022/01/17/0930
+- key: spanning-tree-advanced
+  title: 全域木の発展（Borůvka・Manhattan MST・最小有向全域木・行列木定理）
+  aliases:
+  - Boruvka
+  - Manhattan MST
+  - Chu-Liu/Edmonds
+  - 最小有向全域木
+  - 行列木定理
+  - Kirchhoff
+  level: 発展
+  level_evidence: ABC では MST の重みの総和を数える abc386_g（diff 2930）などの数え上げのみ確認
+  prerequisites:
+  - minimum-spanning-tree
+  acl: null
+  signs:
+  - 辺が暗黙に O(N^2) 本ある
+  - マンハッタン距離の完全グラフ
+  - 有向グラフの全域木
+  - 全域木の個数
+  compare_with:
+  - minimum-spanning-tree
+  page: overview
+  visual: null
+  problems: []
+- key: euler-path
+  title: オイラー路（一筆書き）
+  aliases:
+  - オイラー路
+  - オイラー閉路
+  - 一筆書き
+  - Hierholzer
+  level: 黄
+  level_evidence: abc286_g（diff 2135）
+  prerequisites:
+  - connected-components
+  - dfs
+  acl: null
+  signs:
+  - すべての辺をちょうど1回ずつ通る
+  - 一筆書き
+  - 次数の偶奇
+  compare_with:
+  - hamiltonian-path
+  page: own
+  visual: 奇数次数の頂点に印を付け、条件（0個か2個）を示す。Hierholzer で閉路をつなぎ合わせる過程
+  problems:
+  - id: abc286_g
+    difficulty: 2135
+    role: example
+    summary: 自由に通れる辺で結ばれた頂点を縮約し、指定辺だけのグラフにオイラー路があるか判定する
+    evidence: https://kmjp.hatenablog.jp/entry/2023/01/21/1100
+- key: hamiltonian-path
+  title: ハミルトン路・巡回セールスマン
+  aliases:
+  - TSP
+  - 巡回セールスマン
+  - ハミルトン閉路
+  level: 水
+  level_evidence: abc054_c（diff 1244）、abc180_e（diff 1256）、abc301_e（diff 1673）、abc338_f（diff 1835）
+  prerequisites:
+  - bit-dp
+  - bfs
+  - warshall-floyd
+  acl: null
+  signs:
+  - すべての頂点（重要な点）をちょうど1回訪れる
+  - N ≤ 16〜20
+  - 訪問すべき地点が少ない
+  compare_with:
+  - euler-path
+  page: section-of:bit-dp
+  visual: null
+  problems:
+  - id: abc054_c
+    difficulty: 1244
+    role: example
+    summary: 頂点1から始まるハミルトンパスを DFS（順列全探索）で数える
+    evidence: https://drken1215.hatenablog.com/entry/2019/09/16/224600
+  - id: abc180_e
+    difficulty: 1256
+    role: example
+    summary: 3次元の点を全部回る最小コスト。bitDP（巡回セールスマン）
+    evidence: https://kmjp.hatenablog.jp/entry/2020/10/17/0900
+  - id: abc301_e
+    difficulty: 1673
+    role: practice
+    summary: お菓子マス（≤18）間の距離を BFS で前計算し、訪問集合の bitDP を解く
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/14/165900
+  - id: abc338_f
+    difficulty: 1835
+    role: practice
+    summary: 負辺ありの全点対距離を前計算してから、全頂点を訪れるウォークの最小コストを bitDP で求める
+    evidence: https://www.cnblogs.com/Lanly/p/17992290
+- key: max-flow
+  title: 最大流
+  aliases:
+  - 最大フロー
+  - Ford-Fulkerson
+  - Dinic
+  - 残余グラフ
+  level: 黄
+  level_evidence: abc205_f（diff 2088）、abc318_g（diff 2260）、abc241_g（diff 2422）。鉄則本の9章（A68）にも入っている
+  prerequisites:
+  - bfs
+  - dfs
+  acl: atcoder::mf_graph<Cap>（add_edge(from, to, cap)、flow(s, t)、min_cut(s)、edges()）
+  signs:
+  - 同時に使えない資源の割当
+  - 容量
+  - 各行・各列に高々1つ
+  - 辺（頂点）を共有しない経路の本数
+  compare_with:
+  - bipartite-matching
+  - min-cost-flow
+  - min-cut
+  page: own
+  visual: 残余グラフ（順辺と逆辺）を描き、増加路を流すたびに逆辺の容量が増えて「押し戻し」ができる様子のステップ送り
+  problems:
+  - id: abc205_f
+    difficulty: 2088
+    role: example
+    summary: 行の頂点・駒の頂点（2つに分割）・列の頂点を並べた最大流
+    evidence: https://kmjp.hatenablog.jp/entry/2021/06/13/1000
+  - id: abc318_g
+    difficulty: 2260
+    role: practice
+    summary: 頂点を入口と出口に分けて容量1にし、B から A と C へ合計2の流量が流せるか判定する
+    evidence: https://kmjp.hatenablog.jp/entry/2023/09/02/0900
+  - id: abc241_g
+    difficulty: 2422
+    role: practice
+    summary: 各選手が単独最多勝になれるかを、試合→勝者の流量で判定する
+    evidence: https://kmjp.hatenablog.jp/entry/2022/03/06/0900
+  - id: practice2_d
+    difficulty: null
+    role: example
+    summary: 市松模様で二部グラフにして 1×2 タイルを最大数置く。ACL の mf_graph の使用例
+    evidence: https://github.com/atcoder/ac-library/blob/master/test/example/maxflow_practice.cpp
+  - id: tessoku_book_bp
+    difficulty: null
+    role: practice
+    summary: 最大流の基本形（鉄則本 A68）
+    evidence: https://github.com/E869120/kyopro-tessoku/tree/main/codes/cpp/chap09
+- key: min-cut
+  title: 最小カット（辺カット・頂点カット・カットの復元）
+  aliases:
+  - 最小カット
+  - 最大流最小カット定理
+  - 頂点分割
+  - 頂点カット
+  level: 黄
+  level_evidence: abc010_4（diff 1777 参考値）、abc239_g（diff 2215）。発展の応用は abc332_g（2775）、abc397_g（2947）
+  prerequisites:
+  - max-flow
+  acl: atcoder::mf_graph（min_cut(s) は残余グラフで s から到達できる頂点を返す）
+  signs:
+  - s と t を切り離す最小コスト
+  - 頂点を消すコスト
+  - どれを消したかも出力
+  compare_with:
+  - max-flow
+  - project-selection
+  - lowlink
+  page: own
+  visual: 流し終えた残余グラフで s から到達できる頂点を塗り、塗った側から塗らない側へ向かう辺がカットになる図。頂点を in/out に割る図
+  problems:
+  - id: abc010_4
+    difficulty: 1777
+    role: example
+    summary: 頂点0から指定頂点群へ届かなくする最小の操作数。辺を切るか頂点を消すかを最小カットで表す
+    evidence: https://drken1215.hatenablog.com/entry/2021/08/04/155100
+  - id: abc239_g
+    difficulty: 2215
+    role: example
+    summary: 頂点を消すコストの最小カット。頂点を2つに分割し、残余グラフの到達可能性でカットを復元する
+    evidence: https://kmjp.hatenablog.jp/entry/2022/02/22/0900
+  - id: abc332_g
+    difficulty: 2775
+    role: practice
+    summary: 辺が多すぎるフローの最小カットを、カットの形を決め打って DP で計算する
+    evidence: https://kmjp.hatenablog.jp/entry/2024/05/06/0900
+  - id: abc397_g
+    difficulty: 2947
+    role: practice
+    summary: 答えを決め打ち、(頂点, 距離) の層グラフの最小カットが K 以下かを判定する
+    evidence: https://kmjp.hatenablog.jp/entry/2025/03/15/0930
+- key: project-selection
+  title: 燃やす埋める（Project Selection）
+  aliases:
+  - 燃やす埋める
+  - Project Selection
+  - 最大重み閉包
+  - 劣モジュラ
+  level: 黄
+  level_evidence: abc472_g（diff 2018）、abc445_g（diff 2250）、abc259_g（diff 2428）、abc326_g（diff 2470）、abc193_f（diff 2475）、abc225_g（diff 2566）。2400 前後に集まるが最近は黄まで下がっている（要判断）
+  prerequisites:
+  - min-cut
+  acl: atcoder::mf_graph
+  signs:
+  - 各要素を選ぶ・選ばないの2択
+  - A を選ぶなら B も選ぶ必要がある
+  - 隣どうしが違うとペナルティ
+  - 利得とコストの合計の最大化
+  compare_with:
+  - min-cut
+  - konig-theorem
+  - two-sat
+  page: own
+  visual: 「条件 → 辺」の早見表と、表を選ぶとグラフが組み上がる対話的な図（選んだ条件の辺が追加され、カットの値が計算される）
+  problems:
+  - id: abc472_g
+    difficulty: 2018
+    role: practice
+    summary: 燃やす埋めるの例題として挙げられる新しい ABC G（kmjp は行ごとの bitDP で解く）
+    evidence: https://qiita.com/drken/items/52aafd8c073b37749539
+  - id: abc445_g
+    difficulty: 2250
+    role: practice
+    summary: 駒の利き合うグラフが二部グラフになることを示し、片側を反転して最小カットにする
+    evidence: https://kmjp.hatenablog.jp/entry/2026/02/14/1030
+  - id: abc259_g
+    difficulty: 2428
+    role: practice
+    summary: 行と列を選ぶ。両方選ばれたマスの重複と負のマスをペナルティにする
+    evidence: https://kmjp.hatenablog.jp/entry/2022/07/09/0900
+  - id: abc326_g
+    difficulty: 2470
+    role: example
+    summary: スキルのレベルごとの頂点とアチーブメントの頂点で燃やす埋めるを組む
+    evidence: https://kmjp.hatenablog.jp/entry/2023/10/28/1100
+  - id: abc193_f
+    difficulty: 2475
+    role: practice
+    summary: 市松模様で片側の色を反転し、「隣が同じ色なら利得」を最小カットにする
+    evidence: https://kmjp.hatenablog.jp/entry/2021/02/27/1000
+  - id: abc225_g
+    difficulty: 2566
+    role: practice
+    summary: ×印を付けるかの2択と、斜めの線のコストを燃やす埋めるにする
+    evidence: https://kmjp.hatenablog.jp/entry/2021/11/01/0900
+  - id: abc347_g
+    difficulty: 2876
+    role: practice
+    summary: 値 1〜5 の多値変数を4つの頂点の列で表し、隣接の差の2乗和を最小カットにする
+    evidence: https://kmjp.hatenablog.jp/entry/2024/03/31/0930
+  - id: typical90_an
+    difficulty: null
+    role: example
+    summary: 家に入る利得とコスト、「この家に入るにはあの家にも入る」という依存関係。最大重み閉包を最小カットで解く
+    evidence: https://drken1215.hatenablog.com/entry/2023/11/25/070850
+  - id: tessoku_book_eo
+    difficulty: null
+    role: practice
+    summary: 燃やす埋めるの演習（鉄則本 B68）。けんちょんの記事が例題に挙げる
+    evidence: https://qiita.com/drken/items/52aafd8c073b37749539
+- key: bipartite-matching
+  title: 二部マッチング
+  aliases:
+  - 二部グラフの最大マッチング
+  - Hopcroft-Karp
+  - 増加路
+  - 完全マッチング
+  level: 黄
+  level_evidence: abc401_g（diff 2022）、abc263_g（diff 2261）、abc320_g（diff 2575）、typical90_by（★7）。鉄則本 A69
+  prerequisites:
+  - max-flow
+  - bipartite-graph
+  acl: atcoder::mf_graph（容量1の辺で s→左→右→t）
+  signs:
+  - ペアを作る最大数
+  - 各人に1つずつ割り当てる
+  - 答えを二分探索して完全マッチングがあるか
+  - 奇数と偶数の組
+  compare_with:
+  - max-flow
+  - konig-theorem
+  - min-cost-flow
+  page: own
+  visual: 交互路（マッチしていない辺・している辺が交互）を見つけて反転し、マッチングが1増える様子
+  problems:
+  - id: arc092_a
+    difficulty: 1268
+    role: example
+    summary: 赤点と青点の仲良しペアの最大数（二部グラフのマッチング）。点の並びの構造を使った貪欲で解ける
+    evidence: https://drken1215.hatenablog.com/entry/2021/07/05/183800
+  - id: abc401_g
+    difficulty: 2022
+    role: example
+    summary: 時間 T を二分探索し、各人が各スイッチに間に合うかの二部グラフに完全マッチングがあるか判定する
+    evidence: https://kmjp.hatenablog.jp/entry/2025/04/13/0900
+  - id: abc263_g
+    difficulty: 2261
+    role: practice
+    summary: 和が素数になる対を消す。1以外は奇数と偶数の二部マッチングで、1の扱いを工夫する
+    evidence: https://kmjp.hatenablog.jp/entry/2022/08/07/0900
+  - id: abc320_g
+    difficulty: 2575
+    role: practice
+    summary: 答えを小さい順に辺を足しながらマッチングを伸ばし、N 本そろう最小値を求める
+    evidence: https://kmjp.hatenablog.jp/entry/2023/09/17/0930
+  - id: abc317_g
+    difficulty: 2649
+    role: practice
+    summary: 各行から各値を1つずつ取る完全マッチングを繰り返し取り出す（正則二部グラフ）
+    evidence: https://drken1215.hatenablog.com/entry/2023/08/27/000216
+  - id: typical90_by
+    difficulty: null
+    role: practice
+    summary: 飛行機と行き先の二部マッチング（Dinic）
+    evidence: https://drken1215.hatenablog.com/entry/2023/11/14/023400
+  - id: tessoku_book_bq
+    difficulty: null
+    role: practice
+    summary: 二部マッチングの基本形（鉄則本 A69）
+    evidence: https://github.com/E869120/kyopro-tessoku/tree/main/codes/cpp/chap09
+- key: konig-theorem
+  title: König の定理（最小頂点被覆・最大独立集合）
+  aliases:
+  - 最小頂点被覆
+  - 最大独立集合
+  - König
+  - 最小辺被覆
+  level: 黄
+  level_evidence: abc445_g（diff 2250）、abc274_g（diff 2340）、abc461_g（diff 2391）
+  prerequisites:
+  - bipartite-matching
+  - min-cut
+  acl: atcoder::mf_graph（min_cut で被覆を復元）
+  signs:
+  - 隣り合う（衝突する）ものを同時に選ばずに最大数
+  - すべての辺を監視するのに必要な最小数
+  - 市松模様
+  - 二部グラフ
+  compare_with:
+  - bipartite-matching
+  - project-selection
+  page: own
+  visual: 最大マッチングの大きさと最小頂点被覆の大きさが一致する例。独立集合が被覆の補集合であることを色で示す
+  problems:
+  - id: abc445_g
+    difficulty: 2250
+    role: practice
+    summary: 二部グラフの最大独立集合（置ける駒の最大数）を最小カットで求める
+    evidence: https://kmjp.hatenablog.jp/entry/2026/02/14/1030
+  - id: abc274_g
+    difficulty: 2340
+    role: example
+    summary: カメラの向きを右と下に絞り、行の区間と列の区間の二部グラフの最小頂点被覆にする
+    evidence: https://kmjp.hatenablog.jp/entry/2022/10/22/0900
+  - id: abc461_g
+    difficulty: 2391
+    role: practice
+    summary: 頂点を2倍にして二部グラフにし、最大独立集合に 1013 を割り当てる
+    evidence: https://kmjp.hatenablog.jp/entry/2026/06/09/0900
+- key: min-cost-flow
+  title: 最小費用流
+  aliases:
+  - 最小費用流
+  - primal-dual
+  - 重み付きマッチング
+  - slope
+  level: 黄
+  level_evidence: abc247_g（diff 2159）、abc407_g（diff 2190）、abc421_g（diff 2410）。モデル化が重いものは発展（abc231_h 2681、abc214_h 3138）
+  prerequisites:
+  - max-flow
+  - dijkstra
+  - potential-reweighting
+  acl: atcoder::mcf_graph<Cap, Cost>（add_edge(from, to, cap, cost) は cost ≥ 0、flow(s, t[, limit]) と slope(s, t[, limit])）
+  signs:
+  - K 個選んだときの最大（最小）を K ごとに
+  - 重み付きの割当
+  - 各行・各列から高々 K 個
+  - 流量とコストの両方
+  compare_with:
+  - max-flow
+  - bipartite-matching
+  - assignment-problem
+  page: own
+  visual: 流量を1ずつ増やしたときの最小コストの折れ線（凸）と、各段階の最短路（残余グラフ上）を並べる
+  problems:
+  - id: abc247_g
+    difficulty: 2159
+    role: example
+    summary: 大学と得意分野のマッチングを、コストを「大きい値−強さ」にした最小費用流で、人数ごとに求める
+    evidence: https://kmjp.hatenablog.jp/entry/2022/04/10/1030
+  - id: abc407_g
+    difficulty: 2190
+    role: practice
+    summary: ドミノの配置を市松模様の二部グラフにし、最小費用流で被覆されない和を最大化する
+    evidence: https://kmjp.hatenablog.jp/entry/2025/05/27/0900
+  - id: abc421_g
+    difficulty: 2410
+    role: practice
+    summary: 区間への +1 を差分列上の流れと見て、操作回数を最小費用流で求める
+    evidence: https://kmjp.hatenablog.jp/entry/2025/08/30/1000
+  - id: abc231_h
+    difficulty: 2681
+    role: practice
+    summary: 各行・各列に黒い駒を置く最小コスト（最小辺被覆）を最小費用流で求める
+    evidence: https://kmjp.hatenablog.jp/entry/2021/12/12/1000
+  - id: abc224_h
+    difficulty: 2887
+    role: practice
+    summary: カメラの台数の最小化を LP 双対で読み替え、最小費用流で解く
+    evidence: https://kmjp.hatenablog.jp/entry/2021/10/26/0930
+  - id: abc214_h
+    difficulty: 3138
+    role: practice
+    summary: SCC で縮約した DAG で、頂点を2倍にして「初回だけ回収」をコストで表す
+    evidence: https://kmjp.hatenablog.jp/entry/2021/08/16/0930
+  - id: practice2_e
+    difficulty: null
+    role: example
+    summary: 各行・各列 K 個までのマス選びで和を最大化。コストを「大きい値−a」にする
+    evidence: https://github.com/atcoder/ac-library/blob/master/test/example/mincostflow_practice.cpp
+- key: dilworth-path-cover
+  title: Dilworth の定理・DAG の最小パス被覆
+  aliases:
+  - Dilworth
+  - 最小パス被覆
+  - 最大反鎖
+  - 最小鎖被覆
+  level: 発展
+  level_evidence: abc374_g（diff 2608）、abc354_g（diff 2665）、abc237_h（diff 2807）
+  prerequisites:
+  - bipartite-matching
+  - scc
+  acl: atcoder::mf_graph
+  signs:
+  - 互いに包含しないものを最大数選ぶ
+  - 最少の本数のパスで全頂点を覆う
+  compare_with:
+  - bipartite-matching
+  page: overview
+  visual: null
+  problems:
+  - id: abc374_g
+    difficulty: 2608
+    role: practice
+    summary: SCC で縮約した DAG の最小パス被覆（推移閉包を取ってから）
+    evidence: https://kmjp.hatenablog.jp/entry/2024/10/06/0930
+  - id: abc354_g
+    difficulty: 2665
+    role: practice
+    summary: 重み付きの反鎖。頂点を2つにした容量付きのフローに拡張する
+    evidence: https://kmjp.hatenablog.jp/entry/2024/05/19/0930
+  - id: abc237_h
+    difficulty: 2807
+    role: example
+    summary: 回文の部分文字列の包含関係の DAG で、最大反鎖を二部マッチングから求める
+    evidence: https://kmjp.hatenablog.jp/entry/2022/01/31/0930
+- key: halls-theorem
+  title: Hall の結婚定理
+  aliases:
+  - Hall の定理
+  - 結婚定理
+  level: 発展
+  level_evidence: abc215_h（diff 3101）
+  prerequisites:
+  - bipartite-matching
+  acl: null
+  signs:
+  - 完全マッチングが存在する条件を部分集合ごとに確かめる
+  - 種類が少ない（≤ 20）
+  compare_with:
+  - bipartite-matching
+  page: overview
+  visual: null
+  problems:
+  - id: abc215_h
+    difficulty: 3101
+    role: example
+    summary: すべての部分集合について「供給 ≥ 需要」を高速ゼータ変換で確かめる（Hall の定理）
+    evidence: https://kmjp.hatenablog.jp/entry/2021/08/22/0930
+- key: flow-lower-bounds
+  title: 最小流量制約付きフロー
+  aliases:
+  - 下限付きフロー
+  - flow with demands
+  level: 発展
+  level_evidence: abc285_g（diff 2566）
+  prerequisites:
+  - max-flow
+  acl: atcoder::mf_graph（超頂点を足して帰着）
+  signs:
+  - この辺には少なくとも L だけ流す
+  - 必ず使う・使ってもよい・使ってはいけないが混在
+  compare_with:
+  - max-flow
+  page: overview
+  visual: null
+  problems:
+  - id: abc285_g
+    difficulty: 2566
+    role: example
+    summary: 市松模様のマッチングで「必ずマッチさせるマス」を最小流量制約にする
+    evidence: https://kmjp.hatenablog.jp/entry/2023/01/22/0900
+- key: general-matching
+  title: 一般グラフのマッチング
+  aliases:
+  - Edmonds
+  - blossom
+  - 一般グラフの最大マッチング
+  level: 発展
+  level_evidence: abc412_g（diff 3402）
+  prerequisites:
+  - bipartite-matching
+  acl: null
+  signs:
+  - 二部グラフでないグラフのペア作り
+  - N ≤ 16 程度なら bitDP
+  compare_with:
+  - bipartite-matching
+  - bit-dp
+  page: overview
+  visual: null
+  problems:
+  - id: abc412_g
+    difficulty: 3402
+    role: example
+    summary: 次数の条件を、頂点を A_i 個に増やした一般グラフの最小重み完全マッチングにする
+    evidence: https://kmjp.hatenablog.jp/entry/2025/06/29/0930
+- key: assignment-problem
+  title: 割当問題（ハンガリアン法）
+  aliases:
+  - ハンガリアン法
+  - Hungarian
+  - 最小重み完全マッチング
+  level: 発展
+  level_evidence: ABC で必須の問題は確認できなかった（abc373_g diff 2377 は最小重みマッチングの性質を使う別解法が知られる）
+  prerequisites:
+  - min-cost-flow
+  acl: atcoder::mcf_graph（N が小さければ最小費用流で代用）
+  signs:
+  - N 人に N 個の仕事を割り当てる最小コスト
+  compare_with:
+  - min-cost-flow
+  page: section-of:min-cost-flow
+  visual: null
+  problems: []
+- key: bipartite-edge-coloring
+  title: 二部グラフの辺彩色（正則二部グラフの分解）
+  aliases:
+  - 辺彩色
+  - König の辺彩色定理
+  level: 発展
+  level_evidence: abc317_g（diff 2649）
+  prerequisites:
+  - bipartite-matching
+  acl: atcoder::mf_graph
+  signs:
+  - 各行の値を並べ替えて各列を順列にする
+  - 正則な二部グラフ
+  compare_with:
+  - bipartite-matching
+  page: section-of:bipartite-matching
+  visual: null
+  problems:
+  - id: abc317_g
+    difficulty: 2649
+    role: example
+    summary: 正則二部グラフは完全マッチングに分解できる（辺彩色）ことを使う
+    evidence: https://drken1215.hatenablog.com/entry/2023/08/27/000216
+- key: graph-modeling
+  title: グラフへの帰着（何を頂点・辺にするか）
+  aliases:
+  - グラフに言い換える
+  - モデル化
+  - 値を頂点に
+  level: 水
+  level_evidence: 横断ページ。abc285_d（diff 663）、abc327_d（diff 709）、arc090_b（diff 1452）、abc377_e（diff 1685）、abc131_f（diff 1937）
+  prerequisites:
+  - graph-basics
+  acl: null
+  signs:
+  - 〇〇と××は同じグループ
+  - 置換・写像
+  - 座標や値の関係
+  - 制約を辺にする
+  - 操作を辺にする
+  compare_with:
+  - state-space-search
+  - super-vertex
+  page: own
+  visual: null
+  problems:
+  - id: abc285_d
+    difficulty: 663
+    role: example
+    summary: 名前を頂点、変更を辺にすると、変更できないことは閉路があることになる
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC285D
+  - id: abc327_d
+    difficulty: 709
+    role: example
+    summary: 「X_i と Y_i は異なる値」という条件を辺にすると二部グラフ判定になる
+    evidence: https://drken1215.hatenablog.com/entry/2023/11/05/161745
+  - id: arc090_b
+    difficulty: 1452
+    role: practice
+    summary: 位置の差の情報を重み付きの辺にし、ポテンシャルの矛盾を調べる
+    evidence: https://drken1215.hatenablog.com/entry/2022/12/08/152700
+  - id: abc377_e
+    difficulty: 1685
+    role: practice
+    summary: 置換 i→p_i を辺にすると閉路の集まりになる
+    evidence: https://www.cnblogs.com/Lanly/p/18513188
+  - id: abc131_f
+    difficulty: 1937
+    role: practice
+    summary: 点を「x 座標と y 座標を結ぶ辺」と見る
+    evidence: https://drken1215.hatenablog.com/entry/2019/06/23/004700
+- key: graph-contraction
+  title: グラフの縮約
+  aliases:
+  - 縮約
+  - 成分を1点にまとめる
+  - 次数2の頂点を消す
+  level: 黄
+  level_evidence: abc286_g（diff 2135）、abc419_g（diff 2677）
+  prerequisites:
+  - union-find-connectivity
+  - scc
+  acl: atcoder::dsu、atcoder::scc_graph
+  signs:
+  - 自由に行き来できる部分は1点とみなせる
+  - 次数1・2の頂点が多い
+  compare_with:
+  - scc
+  - union-find-connectivity
+  page: section-of:graph-modeling
+  visual: null
+  problems:
+  - id: abc286_g
+    difficulty: 2135
+    role: example
+    summary: 自由な辺の連結成分を1点に縮約してから、オイラー路の判定をする
+    evidence: https://kmjp.hatenablog.jp/entry/2023/01/21/1100
+  - id: abc419_g
+    difficulty: 2677
+    role: practice
+    summary: 次数1の頂点を消し、次数2の頂点を辺に縮約してから、単純パスを全列挙する
+    evidence: https://kmjp.hatenablog.jp/entry/2025/08/16/0930
+- key: degree-sqrt
+  title: 次数による平方分割（重い頂点・軽い頂点）
+  aliases:
+  - 次数の平方分割
+  - heavy/light 頂点
+  level: 青
+  level_evidence: typical90_ce（★6）
+  prerequisites:
+  - graph-basics
+  - sqrt-decomposition
+  acl: null
+  signs:
+  - 頂点とその隣接頂点すべてに対する操作のクエリ
+  - 次数の大きい頂点が少数しかない
+  - 三角形の列挙
+  compare_with:
+  - sqrt-decomposition
+  page: own
+  visual: null
+  problems:
+  - id: typical90_ce
+    difficulty: null
+    role: example
+    summary: 頂点とその隣接頂点を塗るクエリを、次数が大きい頂点と小さい頂点で処理を変えて高速化する
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/083-02a.cpp
+- key: small-cycle-enumeration
+  title: 三角形・4-サイクルの列挙
+  aliases:
+  - 三角形の列挙
+  - C4 の検出
+  level: 黄
+  level_evidence: abc260_f（diff 1995）は裏付け未確認。Library Checker に enumerate_triangles、counting_c4
+  prerequisites:
+  - degree-sqrt
+  acl: null
+  signs:
+  - 長さ3・4の閉路
+  - 鳩の巣原理で打ち切れる
+  compare_with:
+  - degree-sqrt
+  page: section-of:degree-sqrt
+  visual: null
+  problems: []
+- key: graph-construction
+  title: グラフの構築（DFS 木・BFS 木の性質）
+  aliases:
+  - 構築
+  - DFS 木
+  - BFS 木
+  - 後退辺
+  level: 青
+  level_evidence: arc083_b（diff 1563）、abc251_f（diff 1703）、abc244_g（diff 2117）
+  prerequisites:
+  - dfs
+  - bfs
+  acl: null
+  signs:
+  - 条件を満たすグラフ・経路を1つ出力
+  - 全域木を2つ作る
+  - 訪問回数の偶奇を指定
+  compare_with:
+  - dfs
+  - bfs
+  page: own
+  visual: 無向グラフの DFS 木では木に入らない辺がすべて祖先と子孫を結ぶ（後退辺）こと、BFS 木では層が高々1違う頂点どうしを結ぶことの対比図
+  problems:
+  - id: arc083_b
+    difficulty: 1563
+    role: example
+    summary: 全点対の距離表から、それを実現する辺の長さの和の最小値（不要な辺は迂回できる辺）
+    evidence: https://qiita.com/e869120/items/eb50fdaece12be418faa
+  - id: abc251_f
+    difficulty: 1703
+    role: example
+    summary: DFS 木と BFS 木の性質を満たす全域木を2つ構成する
+    evidence: https://kyo-pro.hatenablog.com/entry/ABC251F
+  - id: abc244_g
+    difficulty: 2117
+    role: practice
+    summary: DFS 木をたどり、偶奇が合わない子では往復を挟んで、指定の訪問回数の偶奇を満たすパスを作る
+    evidence: https://kmjp.hatenablog.jp/entry/2022/03/22/0900
+  - id: abc232_h
+    difficulty: 2780
+    role: practice
+    summary: キングで全マスを1回ずつ通る経路を、小さい問題に分けて構成する
+    evidence: https://kmjp.hatenablog.jp/entry/2021/12/19/1030
+- key: chromatic-number
+  title: 彩色数・最大独立集合・最大クリーク（一般グラフ）
+  aliases:
+  - 彩色数
+  - 最大独立集合
+  - 最大クリーク
+  level: 発展
+  level_evidence: ABC での出題は確認できなかった（Library Checker に chromatic_number、maximum_independent_set）
+  prerequisites:
+  - bit-dp
+  - inclusion-exclusion
+  acl: null
+  signs:
+  - N ≤ 20〜40 の一般グラフで独立集合・彩色
+  compare_with:
+  - konig-theorem
+  - small-graph-brute-force
+  page: overview
+  visual: null
+  problems: []
+- key: adjacency-matrix-power
+  title: 隣接行列の累乗（歩道の数え上げ・min-max 積）
+  aliases:
+  - 行列累乗
+  - 長さ K の歩道
+  - min-plus 積
+  level: 発展
+  level_evidence: abc236_g（diff 2438）。ほかに行列で状態遷移を表す abc199_f（diff 2065）
+  prerequisites:
+  - matrix-power
+  - warshall-floyd
+  acl: null
+  signs:
+  - ちょうど K 歩（K が 10^9 以上）
+  - 長さ K の経路の数
+  compare_with:
+  - warshall-floyd
+  - doubling
+  page: section-of:matrix-power
+  visual: null
+  problems:
+  - id: abc199_f
+    difficulty: 2065
+    role: practice
+    summary: ランダムな辺の平均化を行列で表し、K 乗する
+    evidence: https://kmjp.hatenablog.jp/entry/2021/04/24/0900
+  - id: abc236_g
+    difficulty: 2438
+    role: example
+    summary: 「ちょうど L 歩で到達できる最小の時刻」を min-max の行列のダブリングで求める
+    evidence: https://kmjp.hatenablog.jp/entry/2022/01/24/1030

@@ -23,8 +23,17 @@
 
 - **リポジトリ**：GitHub `yuukougun/kyopro-atlas`（public、作成時は空）。公開 URL は `https://yuukougun.github.io/kyopro-atlas/` になる見込み
 - **AtCoder の AI 関連の指定**：問題ページと解説ページに `<meta name="robots" content="noai, noimageai">` がある。robots.txt（AI 学習用の Google-Extended と Applebot-Extended は全面拒否）と利用規約には、AI による閲覧を禁じる記述はない。言語一覧（img.atcoder.jp の静的ファイル）には noai 指定がない
+- **Codeforces の AI 関連の指定**：codeforces.com のページにも `<meta name="robots" content="noai">` と `noimageai` がある（調査 00 が確認）。AtCoder と同じく、AI で開かず資料にしない（調査の手引き §3.8 の適用）
 - **AtCoder生成AI対策ルール（20261014版）**：ABC・ARC・AGC の開催中は、問題文やその要約を生成 AI に入力して解法やコードを出力させることを禁止している。過去問の練習には適用されない。したがって、claude.ai での解説はコンテスト終了後の問題にだけ使う
 - **AtCoder の C++ 環境**（2025-10 の言語アップデート）：C++23 (GCC 15.2.0) と C++23 (Clang 21.1.0)。GCC 版のおもなオプションは `-std=gnu++23 -O2 -Wall -Wextra -march=native -fmodules -ftrivial-auto-var-init=zero -DATCODER -DONLINE_JUDGE -lstdc++exp`。ac-library 1.6・Boost 1.88.0・GMP 6.3.0・Eigen 3.4.0・abseil などが使える。2026-06 に GCC 版から `-flto=auto` が削除された
 - **手元の環境**：g++-13（13.4.0、`-std=c++23`）、ACL は `~/lib/ac-library-master`（ドキュメントは `document_ja/`）、VS Code と cph（バンドル機能を足したフォーク版）。Python 3.10、uv、Node.js 24、gh が使える
 - **Material for MkDocs**：2025-11 から保守モード（9.7.0 で新機能の追加は終了。重大なバグとセキュリティの修正は少なくとも12か月）。後継の Zensical は alpha（0.0.71、2026-10-16）で、`mkdocs.yml` を読めるがプラグインへの対応は一部
 - **AtCoder Problems の API**：非公式。アクセスの間隔は1秒以上空ける。静的な JSON（`problems.json`、`problem-models.json` など）を一度取得し、キャッシュして使う（`tools/ap.py`）
+
+## 2026-10-21 手元の開発環境の更新
+
+- ユーザーが g++-15（15.2.0）を導入した。VS Code の設定（cph・IntelliSense・デバッグ用ビルド）を g++-15 と `-std=gnu++23 -O2 -Wall -Wextra`（デバッグ用ビルドは `-O2` なし）に変えた。AtCoder に合わせるというユーザーの選択
+- `~/pch/bits/stdc++.h` を GCC 15 版に差し替え、同じオプションで `.gch` を作り直した。差し替え前は GCC 13 版のコピーで、`<print>`・`<flat_map>`・`<generator>` などが含まれていなかった。cph と同じコマンドで `.gch` が使われることを `-H` で確かめた
+- 確かめた事実（GCC 15.2）：`-std=c++23`（厳密モード）では `abs(__int128)` が曖昧でコンパイルエラーになり、`is_integral_v<__int128>`・`is_signed_v<__int128>` は false になる。`numeric_limits<__int128>` はどちらのモードでも使える。`-std=gnu++23` ではすべて使える。C++ 章で扱う
+- コード片の検証は g++-15 と AtCoder と同じ `-std=gnu++23` で行う
+- 手元の ACL を v1.5 系から AtCoder と同じ v1.6（2025-05-01）に更新した（ユーザーの選択）。旧版は `~/lib/ac-library-v1.5` に残した。v1.6 は互換性のない変更として `modint::val()` の戻り値が `unsigned int` から `int` になった（`a.val() - b.val()` が負になりうる）。教材は v1.6 を前提に書く

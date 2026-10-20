@@ -1,0 +1,3059 @@
+# 02 動的計画法（dp）の項目一覧。調査レポート planning/research/02-dp.md の §3〜§5 を機械で扱える形にしたもの
+# difficulty は tools/ap.py の表示値（null は推定値なし：典型90問・EDPC・TDPC など）。evidence は内容の裏付けに使った第三者の解説の URL
+area: dp
+topics:
+- key: dp-basics
+  title: DP の基本（状態・遷移・初期値・答え）
+  aliases:
+  - 動的計画法
+  - DP
+  - 漸化式
+  level: 基礎
+  level_evidence: 状態1次元・遷移が定数個の DP をそのまま問う問題は abc245_c (403)・abc240_c (464)・abc211_c (559)・abc129_c (796)・abc099_c (1101) と灰〜緑に集中。水以上では状態設計や高速化と組み合わさって出る
+  prerequisites:
+  - complexity-estimation
+  - full-search
+  acl: null
+  signs:
+  - 〜の最小値・最大値
+  - 〜の方法の数を 998244353 で割った余り
+  - 〜できるか
+  - 前から順に1つずつ決める・全探索だと 2^N や K^N
+  compare_with:
+  - full-search
+  - greedy
+  - dp-dag
+  page: own
+  visual: 同じ問題を全探索の木と DP の表で並べ、同じ部分問題（同じ状態）が合流して1回の計算で済む様子を見せる。最適化（min）・数え上げ（+）・可否（OR）を同じ表で切り替える図
+  problems:
+  - id: dp_a
+    difficulty: null
+    role: example
+    summary: 1つ前か2つ前の足場から来る最小コスト（最適化の基本形）
+    evidence: https://qiita.com/drken/items/dc53c683d6de8aeacf5a
+  - id: abc129_c
+    difficulty: 796
+    role: example
+    summary: 壊れた段を避けて1段か2段ずつ上る方法の数（数え上げの基本形）
+    evidence: https://drken1215.hatenablog.com/entry/2019/06/10/140000
+  - id: abc240_c
+    difficulty: 464
+    role: example
+    summary: 毎回 a_i か b_i 進んでちょうど X に着けるか（可否判定の基本形）
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/240/C
+  - id: dp_b
+    difficulty: null
+    role: practice
+    summary: Frog 1 の遷移が K 通りに増えた形
+    evidence: https://qiita.com/drken/items/dc53c683d6de8aeacf5a
+  - id: abc245_c
+    difficulty: 403
+    role: practice
+    summary: 各位置で A_i か B_i を選び、隣との差を K 以下にできるか（直前に選んだ方を状態に）
+    evidence: https://drken1215.hatenablog.com/entry/2022/03/29/112500
+  - id: abc211_c
+    difficulty: 559
+    role: practice
+    summary: 部分列として 'chokudai' を選ぶ方法の数（何文字目まで照合したかを状態に）
+    evidence: https://qiita.com/sano192/items/051207b6607b56cc439e
+  - id: abc099_c
+    difficulty: 1101
+    role: practice
+    summary: 1・6^k・9^k 円の引き出しで N 円にする最小回数（貪欲では解けない）
+    evidence: https://qiita.com/drken/items/dc53c683d6de8aeacf5a
+- key: dp-push-pull
+  title: 配る DP と貰う DP
+  aliases:
+  - 配るDP
+  - 貰うDP
+  - push 型
+  - pull 型
+  level: 基礎
+  level_evidence: 考え方は基礎。使い分けが効くのは水：貰う形にすると遷移元が区間になって累積和でまとめられる問題が abc178_d (875)・abc253_e (1073)・abc179_d (1251)
+  prerequisites:
+  - dp-basics
+  acl: null
+  signs:
+  - 遷移先が操作から決まる（すごろく・確率）→ 配る
+  - 遷移元が区間・余りのクラス → 貰う（高速化しやすい）
+  compare_with:
+  - memoized-recursion
+  - dp-prefix-sum
+  page: section-of:dp-basics
+  visual: 同じ表の上で、矢印を出す側（配る）と矢印を集める側（貰う）を色違いで描き、どちらも各辺を1回ずつ使うことを示す
+  problems:
+  - id: dp_a
+    difficulty: null
+    role: example
+    summary: 同じ問題を配る形・貰う形の両方で書く
+    evidence: https://qiita.com/drken/items/dc53c683d6de8aeacf5a
+  - id: abc179_d
+    difficulty: 1251
+    role: example
+    summary: 移動量が区間の和集合。貰う形＋累積和、または配る形＋いもす法
+    evidence: https://drken1215.hatenablog.com/entry/2020/09/20/081800
+  - id: abc275_e
+    difficulty: 1264
+    role: practice
+    summary: 各回の移動後に各マスにいる確率を、出目の数だけ先へ配る確率 DP
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/275/E
+  - id: abc335_f
+    difficulty: 1690
+    role: practice
+    summary: マス i から A_i の倍数先へ配る DP。A_i が小さいときは平方分割でまとめて足す
+    evidence: https://torus711.hatenablog.com/entry/2024/01/07/214116
+- key: memoized-recursion
+  title: メモ化再帰
+  aliases:
+  - メモ化
+  - 再帰 DP
+  - トップダウン DP
+  level: 基礎
+  level_evidence: 素直なメモ化の abc340_c (528)・abc275_d (606) が基礎。計算順が自明でない・状態がまばらでメモ化が楽な問題は abc184_d (1276)・abc357_e (1295)・abc201_d (1317)・abc300_e (1354)・abc350_e (1385) と水
+  prerequisites:
+  - dp-basics
+  - recursion
+  acl: null
+  signs:
+  - N ≤ 10^18 で N/2, N/3 や ⌊N/k⌋ だけが現れる
+  - 計算の順番が分かりにくい（DAG・値の大小・ゲームの局面）
+  - 終了条件が自然に書ける
+  compare_with:
+  - dp-order
+  - dp-dag
+  - dp-push-pull
+  page: own
+  visual: 再帰の呼び出し木を描き、メモに当たった呼び出しを灰色にして枝が刈られる様子を見せる
+  problems:
+  - id: abc340_c
+    difficulty: 528
+    role: example
+    summary: N を半分に割り続けるときの総コスト。現れる値が少ないので map でメモ化
+    evidence: https://programming-hiroba.com/abc340-c/
+  - id: abc275_d
+    difficulty: 606
+    role: example
+    summary: f(k) = f(⌊k/2⌋) + f(⌊k/3⌋) を map でメモ化
+    evidence: https://programming-hiroba.com/abc275-d/
+  - id: dp_g
+    difficulty: null
+    role: practice
+    summary: DAG の最長路。メモ化再帰なら計算順を考えずに済む
+    evidence: https://qiita.com/drken/items/03c7db44ccd27820ea0d
+  - id: abc357_e
+    difficulty: 1295
+    role: practice
+    summary: 関数グラフで各頂点から到達できる頂点数。サイクルを先に処理し、残りをメモ化再帰で
+    evidence: https://drken1215.hatenablog.com/entry/2024/06/09/231700
+  - id: abc350_e
+    difficulty: 1385
+    role: practice
+    summary: 2種の操作で 0 にする費用の期待値の最小。⌊N/b⌋ だけをメモ化し、自己ループは移項
+    evidence: https://programming-hiroba.com/abc350-e/
+  - id: abc380_f
+    difficulty: 1769
+    role: practice
+    summary: カードの所在と手番を状態にした勝敗判定をメモ化
+    evidence: https://torus711.hatenablog.com/entry/2024/11/17/144754
+- key: dp-order
+  title: 計算順序（依存関係の順に回す・後ろから解く）
+  aliases:
+  - 計算順序
+  - トポロジカル順
+  - 後ろから DP
+  level: 水
+  level_evidence: 後ろから・値の順・トポロジカル順に計算しないと解けない問題が abc188_e (1170)・abc266_e (1227)・abc184_d (1276)・abc197_e (1379)・abc146_f (1545)・abc341_f (1604)・abc195_e (1609) と水〜青に集まる
+  prerequisites:
+  - dp-basics
+  - dp-dag
+  acl: null
+  signs:
+  - 期待値・ゲーム（終わりの値が分かっている）
+  - 辞書順最小の復元
+  - 値の小さい（大きい）順にしか移れない
+  - 区間・集合が状態
+  compare_with:
+  - memoized-recursion
+  - dp-dag
+  - dp-reconstruction
+  page: own
+  visual: 状態の依存グラフを描き、矢印に沿った順番（添字順・逆順・長さ順・集合の包含順・値の順）を同じ図式で並べる
+  problems:
+  - id: dp_g
+    difficulty: null
+    role: example
+    summary: DAG の最長路。トポロジカル順に for で回すか、メモ化再帰
+    evidence: https://qiita.com/drken/items/03c7db44ccd27820ea0d
+  - id: abc188_e
+    difficulty: 1170
+    role: example
+    summary: 番号の小さい町から大きい町へだけ道がある。後ろから「そこから行ける町の最高の売値」を埋める
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0110_abc188
+  - id: abc266_e
+    difficulty: 1227
+    role: practice
+    summary: 振り直せるサイコロの期待値。残り回数の少ない方から決める
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/266/E
+  - id: abc197_e
+    difficulty: 1379
+    role: practice
+    summary: 色の小さい順にボールを回収。各色を終えた位置（左端か右端）を状態にする
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0327_abc197
+  - id: abc146_f
+    difficulty: 1545
+    role: practice
+    summary: 最短で辞書順最小の出目列。ゴールから逆に、届く最も手前のマスを決める
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2019/1124_abc146
+  - id: abc341_f
+    difficulty: 1604
+    role: practice
+    summary: 駒は値の小さい隣接頂点にしか移らない。値の小さい順に各頂点でナップサックを解く
+    evidence: https://torus711.hatenablog.com/entry/2024/02/18/234324
+- key: dp-dag
+  title: DAG 上の DP
+  aliases:
+  - DAG DP
+  - 最長路
+  - 経路の数え上げ
+  level: 基礎
+  level_evidence: DAG 上の DP そのものは基礎（abc232_d 539・abc211_d 755）。DAG だと気づく・作る型は水（abc188_e 1170・abc357_e 1295・abc335_e 1540）。二分探索と組み合わせると青（abc324_f 1815）
+  prerequisites:
+  - dp-basics
+  - topological-sort
+  acl: null
+  signs:
+  - u < v の辺だけ
+  - 右か下にしか動けない
+  - 値が増えるように移動
+  - 最短経路の本数
+  - 閉路がない
+  compare_with:
+  - dp-order
+  - dijkstra
+  - bfs
+  page: own
+  visual: DP の表を頂点、遷移を辺にしたグラフを描き、列の DP もグリッドの DP も DAG の特別な場合であることを示す
+  problems:
+  - id: dp_g
+    difficulty: null
+    role: example
+    summary: 有向グラフ（閉路なし）の最長路
+    evidence: https://qiita.com/drken/items/03c7db44ccd27820ea0d
+  - id: abc211_d
+    difficulty: 755
+    role: example
+    summary: BFS で距離が1増える辺だけの DAG 上で、最短路の本数を数える
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0724_abc211
+  - id: abc357_e
+    difficulty: 1295
+    role: practice
+    summary: 関数グラフ。サイクルを先に処理すると残りは DAG として DP できる
+    evidence: https://drken1215.hatenablog.com/entry/2024/06/09/231700
+  - id: abc335_e
+    difficulty: 1540
+    role: practice
+    summary: 非減少のパス。同じ値の隣接頂点をまとめてから値の順に DP
+    evidence: https://torus711.hatenablog.com/entry/2024/01/07/215719
+  - id: abc324_f
+    difficulty: 1815
+    role: practice
+    summary: 美しさの和÷コストの和の最大を、二分探索と DAG 上の最長路で判定
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/21/012800
+  - id: typical90_bg
+    difficulty: null
+    role: practice
+    summary: DAG の到達可能性のクエリを 64 個ずつ bit 並列の DP で答える
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/editorial/059-01.jpg
+- key: dp-state-design
+  title: 状態の設計（何を覚えれば十分か）
+  aliases:
+  - 状態設計
+  - DP の状態
+  level: 水
+  level_evidence: 直前の選択・on/off・個数を1次元足す型は abc306_d (596)・abc303_d (778)・abc312_d (964) と基礎。何を覚えれば十分かを見抜く・情報を圧縮する型が abc322_e (1193)・abc307_e (1240)・abc232_e (1380)・abc359_d (1381)・abc265_e (1531)・abc175_e (1554) と水に集まる
+  prerequisites:
+  - dp-basics
+  acl: null
+  signs:
+  - 隣り合う〜が異なる・連続して〜しない
+  - 直前の〜でコストが変わる・モードが切り替わる
+  - 制約に小さい量（K ≤ 5、末尾 K ≤ 10 文字、文字種 26）
+  compare_with:
+  - dp-dimension-reduction
+  - bit-dp
+  - string-automaton-dp
+  page: own
+  visual: 過去の選び方の木と、それを「将来に効く要約」でまとめた状態の表を並べ、同じ要約の枝が合流する図
+  problems:
+  - id: dp_c
+    difficulty: null
+    role: example
+    summary: 同じ活動を2日続けない幸福度の最大（前日の活動を状態に足す）
+    evidence: https://qiita.com/drken/items/dc53c683d6de8aeacf5a
+  - id: abc306_d
+    difficulty: 596
+    role: example
+    summary: 料理を順に食べるか選び、お腹の状態2通りを状態に美味しさを最大化
+    evidence: https://drken1215.hatenablog.com/entry/2024/07/10/005126
+  - id: abc322_e
+    difficulty: 1193
+    role: practice
+    summary: K（≤5）個の能力値を P で打ち切ったベクトルを状態にした最小コスト
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/03/010702
+  - id: abc232_e
+    difficulty: 1380
+    role: practice
+    summary: 行・列が目的地と一致するかの4状態に圧縮して K 手の経路数
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/1219_abc232
+  - id: abc359_d
+    difficulty: 1381
+    role: practice
+    summary: 末尾 K−1 文字を bit で状態に持ち、長さ K の回文を含まない埋め方を数える
+    evidence: https://torus711.hatenablog.com/entry/2024/06/23/180513
+  - id: abc175_e
+    difficulty: 1554
+    role: practice
+    summary: グリッドの経路で「今の行で何個拾ったか」を状態にした価値の最大
+    evidence: https://drken1215.hatenablog.com/entry/2020/08/17/163200
+  - id: abc345_e
+    difficulty: 2356
+    role: practice
+    summary: 隣接で色が異なる部分列の価値最大。遷移元の上位2つ（色が異なる）だけを持って遷移を速くする
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0316_abc345
+- key: dp-mod-state
+  title: 余り・総和・個数を状態に持つ DP
+  aliases:
+  - 余りを状態に
+  - mod DP
+  level: 水
+  level_evidence: abc220_d (664)・abc281_d (1031) の基礎から、abc262_d (1213)・abc135_d (1334)・arc060_a (1583) と水に集まり、abc207_e (1820) が青
+  prerequisites:
+  - dp-state-design
+  - mod-arithmetic
+  acl: null
+  signs:
+  - 和や積が M の倍数
+  - 平均が整数・平均がちょうど A
+  - M ≤ 1000 程度
+  compare_with:
+  - digit-dp
+  - subset-sum
+  page: own
+  visual: 和そのものの数直線を M ごとに折り返して円にし、状態が M 個にまとまる図
+  problems:
+  - id: abc220_d
+    difficulty: 664
+    role: example
+    summary: 先頭2つを足すか掛けて1桁にする操作の結果が k になる数（下1桁を状態に）
+    evidence: https://ebisuke33.hatenablog.com/entry/abc220d
+  - id: abc281_d
+    difficulty: 1031
+    role: example
+    summary: K 個選んで和が D の倍数になる最大の和（個数と和 mod D を状態に）
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/281/D
+  - id: abc262_d
+    difficulty: 1213
+    role: practice
+    summary: 平均が整数になる選び方の数。選ぶ個数 k を外側で固定し、個数と和 mod k を状態に
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/262/D
+  - id: abc135_d
+    difficulty: 1334
+    role: practice
+    summary: '''?'' を埋めて 13 で割った余りが 5 になる数'
+    evidence: https://drken1215.hatenablog.com/entry/2020/04/23/194600
+  - id: arc060_a
+    difficulty: 1583
+    role: practice
+    summary: 平均がちょうど A になる選び方の数（値から A を引いて和 0 にする）
+    evidence: https://drken1215.hatenablog.com/entry/2020/04/24/025200
+  - id: abc195_e
+    difficulty: 1609
+    role: practice
+    summary: 2人ゲームを後ろから、7 で割った余りごとの勝敗で決める
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0313_abc195
+- key: dp-dimension-reduction
+  title: 状態の削減（不要な次元・値と添字の入れ替え・上限での打ち切り）
+  aliases:
+  - 次元の削減
+  - 状態の圧縮
+  level: 青
+  level_evidence: drken は abc325_f の解説で、DP の値を使って状態を表すこの手法を青色 diff あたりの典型と書いている。該当は abc219_d (1085)・abc410_e (1077) の緑から abc364_e (1496)・abc315_f (1674)・abc325_f (1769)・abc376_f (2089)・abc203_f (2252) と広がる
+  prerequisites:
+  - dp-state-design
+  acl: null
+  signs:
+  - 表全体がメモリ制限を超える
+  - 制約の1つだけが極端に小さい（K ≤ 5、30 程度）
+  - ペナルティが指数的に増える
+  - 同じ量を2通りの添字で表している
+  compare_with:
+  - dp-swap-key-value
+  - dp-rolling-array
+  - dp-state-design
+  page: own
+  visual: 3つの量 (a, b, c) の立方体の表から、c を値に回して2次元の表にする図
+  problems:
+  - id: dp_e
+    difficulty: null
+    role: example
+    summary: 重さの上限が大きく価値の総和が小さい → 価値を添字に、最小の重さを値に
+    evidence: https://kyopro-friends.hatenablog.com/entry/2019/01/12/230931
+  - id: abc364_e
+    difficulty: 1496
+    role: example
+    summary: 甘さとしょっぱさの両方を添字にすると大きい → しょっぱさを値（最小）に回す
+    evidence: https://programming-hiroba.com/abc364-e/
+  - id: abc219_d
+    difficulty: 1085
+    role: practice
+    summary: 2種の個数を X, Y で打ち切って状態を (X+1)(Y+1) に抑える
+    evidence: https://qiita.com/sano192/items/c5a4b2b936a7c0e6fd70
+  - id: abc315_f
+    difficulty: 1674
+    role: practice
+    summary: スキップのペナルティが指数的に増えるので、スキップ数は数十まで見れば十分
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/24/040204
+  - id: abc325_f
+    difficulty: 1769
+    role: practice
+    summary: 2種のセンサーの個数を両方添字にせず、片方の個数を値にする
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/22/195958
+  - id: abc203_f
+    difficulty: 2252
+    role: practice
+    summary: 相手の操作回数（log 回まで）を添字、自分が抜く本数の最小を値にする
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0530_abc203
+- key: dp-swap-key-value
+  title: 値と添字の入れ替え
+  aliases:
+  - キーと値を入れ替える
+  - 添字と値を逆に
+  level: 青
+  level_evidence: EDPC E が入口。abc317_d (929)・abc364_e (1496)・abc032_d (1731 参考値)・abc325_f (1769)・abc203_f (2252)
+  prerequisites:
+  - knapsack-01
+  - dp-state-design
+  acl: null
+  signs:
+  - 一方の量の上限が 10^9 級で、別の量の総和が 10^5 程度
+  - 同じ添字なら値が良い方が常に良い（支配関係）
+  compare_with:
+  - dp-dimension-reduction
+  - lis
+  page: section-of:dp-dimension-reduction
+  visual: 「重さ→価値の最大」の表と「価値→重さの最小」の表を並べ、同じ情報を持つことを示す
+  problems:
+  - id: dp_e
+    difficulty: null
+    role: example
+    summary: 価値を添字に、その価値を作る最小の重さを値にする
+    evidence: https://kyopro-friends.hatenablog.com/entry/2019/01/12/230931
+  - id: abc317_d
+    difficulty: 929
+    role: practice
+    summary: 議席数（総和が小さい）を添字、必要な鞍替え人数の最小を値にした 0-1 ナップサック
+    evidence: https://programming-hiroba.com/abc317-d/
+  - id: abc032_d
+    difficulty: 1731
+    role: practice
+    summary: 制約が3通りで解法を切り替える。価値が小さいときが入れ替え
+    evidence: https://qiita.com/drken/items/dc53c683d6de8aeacf5a
+- key: dp-rolling-array
+  title: 配列の使い回しとループの向き（in-place 更新）
+  aliases:
+  - 配列の使い回し
+  - 1次元化
+  - flying table
+  level: 基礎
+  level_evidence: abc153_e (1015)・abc219_d (1085) で必要。dp_d の1次元化が典型
+  prerequisites:
+  - knapsack-01
+  acl: null
+  signs:
+  - 表 N×W がメモリ制限を超える
+  - 前の段しか使わない
+  compare_with:
+  - knapsack-unbounded
+  - inline-dp
+  page: section-of:knapsack-01
+  visual: 1次元配列を右から（左から）更新する矢印を描き、同じ段で書き換えた値を読むかどうかで 0-1 と個数無制限が分かれることを示す
+  problems:
+  - id: dp_d
+    difficulty: null
+    role: example
+    summary: 0-1 ナップサックを1次元で行うなら容量の大きい方から更新する
+    evidence: https://cp-algorithms.com/dynamic_programming/knapsack.html
+  - id: abc153_e
+    difficulty: 1015
+    role: practice
+    summary: 個数無制限は小さい方から更新すると同じ魔法を何度でも使える
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2020/0126_abc153
+  - id: abc211_c
+    difficulty: 559
+    role: practice
+    summary: 長さ9の配列1本を文字ごとに使い回して数える
+    evidence: https://zenn.dev/m193h/articles/20210725sun135318m193habc211
+- key: dp-reconstruction
+  title: DP の復元（選んだものを出力する）
+  aliases:
+  - 経路復元
+  - DP 復元
+  level: 水
+  level_evidence: 選び方を1つ出力させる問題は abc271_d (886)・典型90 056 (★5) から。辞書順最小の復元は abc146_f (1545)・abc369_f (1618)・arc081_c (2072)
+  prerequisites:
+  - dp-basics
+  acl: null
+  signs:
+  - 選び方（経路）を1つ出力せよ
+  - 複数あれば辞書順最小
+  - そのような選び方が存在しなければ -1
+  compare_with:
+  - dp-order
+  - dp-kth-lexicographic
+  page: own
+  visual: 完成した表を終端から逆にたどり、最適値を与えた遷移を矢印で光らせる。前から辿ると辞書順最小にならない理由の図
+  problems:
+  - id: abc271_d
+    difficulty: 886
+    role: example
+    summary: カードの表裏を選んで和を S にし、その選び方を出力（可否 DP の表を後ろから辿る）
+    evidence: https://programming-hiroba.com/abc271-d/
+  - id: typical90_bd
+    difficulty: null
+    role: example
+    summary: 毎日 A か B を選んで合計 S にし、選び方を出力
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/editorial/056.jpg
+  - id: dp_f
+    difficulty: null
+    role: practice
+    summary: LCS の表を終端から辿って文字列を復元
+    evidence: https://qiita.com/drken/items/03c7db44ccd27820ea0d
+  - id: abc146_f
+    difficulty: 1545
+    role: practice
+    summary: 最短手数で辞書順最小の出目列。ゴールから逆に決める
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2019/1124_abc146
+  - id: abc369_f
+    difficulty: 1618
+    role: practice
+    summary: 右・下移動で集めるコインの最大と経路（LIS 型の DP の復元）
+    evidence: https://torus711.hatenablog.com/entry/2024/09/01/181216
+  - id: arc081_c
+    difficulty: 2072
+    role: practice
+    summary: 部分列にならない最短の文字列で辞書順最小。後ろから DP して前から貪欲に復元
+    evidence: https://drken1215.hatenablog.com/entry/2018/09/22/201000
+- key: dp-kth-lexicographic
+  title: 辞書順 K 番目を数え上げで決める
+  aliases:
+  - K 番目
+  - 辞書順 K 番目
+  level: 水
+  level_evidence: ABC では少ない。二項係数で数える abc202_d (966)・桁数ごとに数える abc363_d (975) が緑、数え上げに DP が要るものは TDPC G
+  prerequisites:
+  - dp-reconstruction
+  - binomial-coefficient
+  acl: null
+  signs:
+  - 辞書順で K 番目
+  - N 番目に小さい〜（K が 10^18 級で列挙できない）
+  compare_with:
+  - dp-reconstruction
+  - subsequence-dp
+  - digit-dp
+  page: section-of:dp-reconstruction
+  visual: 先頭の文字の候補ごとに「その先の個数」を棒グラフにし、K がどの棒に入るかで1文字ずつ決める
+  problems:
+  - id: abc202_d
+    difficulty: 966
+    role: example
+    summary: a が A 個・b が B 個の文字列の辞書順 K 番目。先頭を a にした場合の個数と K を比べる
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0522_abc202
+  - id: tdpc_lexicographical
+    difficulty: null
+    role: practice
+    summary: 異なる部分列の辞書順 K 番目。位置から始まる部分列の数を DP で数えて先頭から決める
+    evidence: https://drken1215.hatenablog.com/entry/2021/08/10/193121
+  - id: abc363_d
+    difficulty: 975
+    role: practice
+    summary: N 番目に小さい回文数。桁数ごとの個数で桁数を決めてから前半を決める
+    evidence: https://programming-hiroba.com/abc363-d/
+- key: dp-grid
+  title: グリッド上の DP
+  aliases:
+  - グリッド DP
+  - 経路数
+  level: 水
+  level_evidence: 基本の経路数・最長路は基礎（EDPC H・abc232_d 539）。状態や累積和などの工夫が入る問題が abc183_e (1288)・abc311_e (1293)・abc201_d (1317)・abc210_d (1507)・abc175_e (1554) と水に集まる。青に abc369_f (1618)・abc147_e (1713)・abc344_f (1922)、黄に abc227_f (2323)
+  prerequisites:
+  - dp-basics
+  acl: null
+  signs:
+  - 右か下にしか動けない
+  - 経路の数・経路上の値の最大
+  - 正方形の最大
+  compare_with:
+  - bfs
+  - dp-dag
+  - inclusion-exclusion-dp
+  page: own
+  visual: マス目に値を書き込みながら左上から右下へ埋めるステップ送り。上下左右に動けるときは閉路ができて DP にならないことの対比図
+  problems:
+  - id: dp_h
+    difficulty: null
+    role: example
+    summary: 壁を避けて右・下に進む経路の数
+    evidence: https://qiita.com/drken/items/03c7db44ccd27820ea0d
+  - id: abc311_e
+    difficulty: 1293
+    role: example
+    summary: 穴のない正方形の数。各マスを右下とする最大の正方形の一辺を DP
+    evidence: https://drken1215.hatenablog.com/entry/2023/07/24/231100
+  - id: abc183_e
+    difficulty: 1288
+    role: practice
+    summary: 何マスでも進める駒の経路数。方向ごとの累積和を持つ
+    evidence: https://drken1215.hatenablog.com/entry/2020/11/16/204900
+  - id: abc210_d
+    difficulty: 1507
+    role: practice
+    summary: 2駅の建設費の最小。左上側の最小値を DP で伝え、向きを反転してもう一度
+    evidence: https://drken1215.hatenablog.com/entry/2000/04/01/033000
+  - id: abc147_e
+    difficulty: 1713
+    role: practice
+    summary: 赤青の差の絶対値の最小。各マスで作れる差の集合（bitset）を持つ
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2019/1208_abc147
+  - id: abc344_f
+    difficulty: 1922
+    role: practice
+    summary: 通過したうち最も効率の良いマスを状態にし、（行動回数, 所持金）の組を比較して持つ
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0309_abc344
+  - id: abc227_f
+    difficulty: 2323
+    role: practice
+    summary: 経路上の上位 K 個の和の最小。K 番目の値を全探索で固定し、それ以上の個数を状態に
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/1113_abc227
+- key: dp-decision-binary-search
+  title: 答えを決め打ちして DP で判定する
+  aliases:
+  - 二分探索＋DP
+  - 決め打ち
+  level: 青
+  level_evidence: abc415_e (1212) の水から、abc324_f (1815)・abc236_e (1893) と青。黄に abc227_f (2323)（全探索で固定する近縁の型）
+  prerequisites:
+  - binary-search-on-answer
+  - dp-basics
+  acl: null
+  signs:
+  - 平均・比・中央値の最大化
+  - 最小値の最大化・最大値の最小化
+  - 直接 DP すると個数や総和の状態が要って重い
+  compare_with:
+  - binary-search-on-answer
+  - dp-dag
+  page: own
+  visual: 答えの候補 X の数直線と、X を固定したときの判定 DP（可/不可）が単調に切り替わる図
+  problems:
+  - id: abc415_e
+    difficulty: 1212
+    role: example
+    summary: 最初の所持コインを二分探索し、所持枚数の最大を持つグリッド DP で可否を判定
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0719_abc415
+  - id: abc324_f
+    difficulty: 1815
+    role: example
+    summary: 比の最大化。Σ(b − X·c) ≥ 0 の経路があるかを DAG の最長路で判定
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/21/012800
+  - id: abc236_e
+    difficulty: 1893
+    role: practice
+    summary: 隣り合う2つを両方は飛ばせない選び方での平均・中央値の最大。値を変換して DP で判定
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0123_abc236
+  - id: abc246_g
+    difficulty: 2313
+    role: practice
+    summary: 木の上のゲーム。答えを決め打ちし、木 DP で達成できるかを判定
+    evidence: https://drken1215.hatenablog.com/entry/2022/04/04/023800
+- key: knapsack-01
+  title: 0-1 ナップサック
+  aliases:
+  - ナップサック
+  - ナップザック
+  - knapsack
+  level: 基礎
+  level_evidence: 基本形は abc344_d (854)・abc317_d (929)・abc219_d (1085) と緑。応用は arc073_b (1477)・abc364_e (1496)・abc145_e (1528)・abc341_f (1604)・abc054_d (1655)・abc169_f (1698)・abc159_f (1876) と水〜青、abc426_g (2119) が黄
+  prerequisites:
+  - dp-basics
+  acl: null
+  signs:
+  - 重さの合計が W 以下で価値の最大
+  - N ≤ 100〜5000・W ≤ 10^4〜10^5
+  - 各品物を選ぶか選ばないか
+  compare_with:
+  - subset-sum
+  - meet-in-the-middle
+  - greedy
+  - dp-swap-key-value
+  page: own
+  visual: 品物 × 重さの表を1行ずつ埋めるステップ送り。選ぶ（斜めの矢印）・選ばない（真下の矢印）を色分けする
+  problems:
+  - id: dp_d
+    difficulty: null
+    role: example
+    summary: 重さの合計 W 以下で価値の最大
+    evidence: https://kyopro-friends.hatenablog.com/entry/2019/01/12/230931
+  - id: abc317_d
+    difficulty: 929
+    role: example
+    summary: 選挙区ごとに鞍替えさせて勝つか捨てるかを選び、過半数に必要な人数の最小
+    evidence: https://programming-hiroba.com/abc317-d/
+  - id: abc219_d
+    difficulty: 1085
+    role: practice
+    summary: 2種の量をそれぞれ X, Y 以上にする最小の個数（量を上限で打ち切る2次元のナップサック）
+    evidence: https://qiita.com/sano192/items/c5a4b2b936a7c0e6fd70
+  - id: abc054_d
+    difficulty: 1655
+    role: practice
+    summary: 2種の薬品の量を状態にした費用の最小（2次元のナップサック）
+    evidence: https://drken1215.hatenablog.com/entry/2019/02/15/205900
+  - id: abc145_e
+    difficulty: 1528
+    role: practice
+    summary: 最後の1品だけ時間を超えてよい。時間の昇順に処理し、最後に頼む品を途中で試す
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2019/1116_abc145
+  - id: abc032_d
+    difficulty: 1731
+    role: practice
+    summary: N・重さ・価値のどれが小さいかで解法（半分全列挙・重さの DP・価値の DP）を切り替える
+    evidence: https://qiita.com/drken/items/dc53c683d6de8aeacf5a
+  - id: abc426_g
+    difficulty: 2119
+    role: practice
+    summary: 区間の品物だけのナップサックのクエリ。区間の境界で分けた左右の DP をマージ（分割統治）
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/1004_abc426
+- key: knapsack-unbounded
+  title: 個数制限なしナップサック
+  aliases:
+  - 個数無制限ナップサック
+  - 硬貨問題
+  - コイン問題
+  level: 基礎
+  level_evidence: abc289_d (551)・abc153_e (1015)・abc099_c (1101)。大きな答えを作る abc118_d (1657) は青、価値が減っていく変形の abc373_f (2018) は黄
+  prerequisites:
+  - knapsack-01
+  acl: null
+  signs:
+  - 同じものを何度でも使える
+  - ちょうど X にする最小回数（硬貨）
+  - 貪欲が使えるか怪しい額面
+  compare_with:
+  - knapsack-01
+  - greedy
+  page: section-of:knapsack-01
+  visual: 1次元配列を小さい方から更新すると同じ品物を何回でも足せることを、矢印が連鎖する図で示す
+  problems:
+  - id: abc153_e
+    difficulty: 1015
+    role: example
+    summary: 魔法を何度でも使って体力 H 以上を削る最小の魔力（H で打ち切る）
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2020/0126_abc153
+  - id: abc289_d
+    difficulty: 551
+    role: practice
+    summary: 決まった歩幅を何度でも使い、罠を避けてちょうど X 段に着けるか
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/289/D
+  - id: abc118_d
+    difficulty: 1657
+    role: practice
+    summary: マッチ N 本ちょうどで作れる最大の整数（桁数の DP をしてから上の桁から決める）
+    evidence: https://drken1215.hatenablog.com/entry/2019/02/16/224100
+  - id: abc373_f
+    difficulty: 2018
+    role: practice
+    summary: 同じ品物を k 個選ぶと価値が k·v − k^2 になる。重さの余りごとに分けると最適な遷移元が単調になる
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0928_abc373
+- key: knapsack-bounded
+  title: 個数制限付きナップサック（二進分解・スライド最小値）
+  aliases:
+  - 個数制限付きナップサック
+  - 多重ナップサック
+  level: 青
+  level_evidence: ABC では二進分解やスライド最小値が必須の問題は見つからなかった。個数が小さく素朴に展開して済む abc286_d (607)、数え上げを余りごとの累積和で速くする arc104_d (2251)、個数の種類が √M しかないことを使う abc269_g (2440)
+  prerequisites:
+  - knapsack-01
+  - dp-sliding-window
+  acl: null
+  signs:
+  - 各品物は B_i 個まで
+  - 在庫
+  - 同じものが複数ある
+  compare_with:
+  - knapsack-01
+  - knapsack-unbounded
+  - dp-sliding-window
+  page: section-of:knapsack-01
+  visual: 個数 k を 1, 2, 4, …, 残り に分ける図と、重さの余りごとの列で窓を動かす図
+  problems:
+  - id: abc286_d
+    difficulty: 607
+    role: example
+    summary: A_i 円硬貨が B_i 枚（≤ 50）でちょうど X 円払えるか（使う枚数を全部試す素朴な DP）
+    evidence: https://programming-hiroba.com/abc286-d/
+  - id: arc104_d
+    difficulty: 2251
+    role: practice
+    summary: 1〜N を各 K 個まで使う多重集合で平均が x のものの数。個数制限付きの数え上げを余りごとの累積和で速くする
+    evidence: https://drken1215.hatenablog.com/entry/2020/10/04/230900
+  - id: abc269_g
+    difficulty: 2440
+    role: practice
+    summary: カードの表裏の変化量の種類は √M 程度しかないので、同じ変化量をまとめた個数制限付きナップサックにする
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+- key: subset-sum
+  title: 部分和問題と部分和の数え上げ
+  aliases:
+  - 部分和
+  - Subset Sum
+  level: 基礎
+  level_evidence: abc240_c (464)・abc204_d (832)・abc271_d (886)・abc274_d (916)・TDPC A が基礎。数え上げの応用は abc222_e (1491)・abc216_f (1541)・arc060_a (1583) が水、abc169_f (1698) が青。bitset の高速化は黄（agc020_c 2259）
+  prerequisites:
+  - dp-basics
+  acl: null
+  signs:
+  - いくつか選んで和をちょうど S に
+  - 2つのグループに分けて差を最小
+  - ±を選んで和を K に
+  compare_with:
+  - knapsack-01
+  - meet-in-the-middle
+  - dp-bitset
+  page: own
+  visual: 作れる和の集合を数直線上の点で表し、要素を1つ足すたびに集合を右へずらして重ねる（OR）図
+  problems:
+  - id: tdpc_contest
+    difficulty: null
+    role: example
+    summary: 配点の部分集合で作れる合計点の種類数
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/21/153600
+  - id: abc204_d
+    difficulty: 832
+    role: example
+    summary: 料理を2台のオーブンに分けて遅い方を最小に。一方の合計として作れる和を求める
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0606_abc204
+  - id: abc274_d
+    difficulty: 916
+    role: practice
+    summary: 線分の向きを ±90 度ずつ選ぶ。x と y が独立になるので、それぞれ ± の部分和で判定
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/274/D
+  - id: abc222_e
+    difficulty: 1491
+    role: practice
+    summary: 各辺の使用回数を求め、±D_i の和が K になる塗り方を数える
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/1009_abc222
+  - id: abc216_f
+    difficulty: 1541
+    role: practice
+    summary: A の昇順に並べて A の最大を固定し、B の和が条件を満たす選び方を数える
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0829_abc216
+  - id: abc169_f
+    difficulty: 1698
+    role: practice
+    summary: 全部分集合についての和 S の選び方の総数。その組を含む部分集合の数の重みを掛ける
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2020/0531_abc169
+- key: knapsack-undo
+  title: 戻す DP（数え上げのナップサックから要素を取り除く）
+  aliases:
+  - 戻すDP
+  - ナップサックの削除
+  level: 青
+  level_evidence: abc321_f (1645) が本命。各要素を除いた場合を全部求める arc070_b (2015) は黄。max のナップサックは戻せないので、前後からの DP（abc441_f 1455）や分割統治（abc426_g 2119）を使う
+  prerequisites:
+  - subset-sum
+  - knapsack-01
+  acl: null
+  signs:
+  - 追加と削除のクエリ
+  - 〜を除いたとき
+  - 各 i について i を使わない場合
+  compare_with:
+  - subset-sum
+  - knapsack-01
+  page: own
+  visual: 追加の更新（大きい方から足す）と、その逆の更新（小さい方から引く）を同じ配列の上で並べるステップ送り
+  problems:
+  - id: abc321_f
+    difficulty: 1645
+    role: example
+    summary: 箱への追加・削除のたびに和が K になる選び方の数を答える（削除は逆向きの更新）
+    evidence: https://drken1215.hatenablog.com/entry/2023/09/25/070100
+  - id: arc070_b
+    difficulty: 2015
+    role: practice
+    summary: 各カードを除いた部分和で不要かを判定する。戻す DP か前後からの DP のマージ
+    evidence: https://drken1215.hatenablog.com/entry/2020/10/06/113600
+  - id: abc441_f
+    difficulty: 1455
+    role: practice
+    summary: max のナップサックは戻せないので、前後からの DP を保存して i を除いた最適値をマージで求める
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0117_abc441
+- key: exchange-argument-dp
+  title: 交換論法で順序を決めてから DP する
+  aliases:
+  - ソートしてから DP
+  - 座布団DP
+  level: 青
+  level_evidence: abc145_e (1528)・abc216_f (1541) の水から、abc366_f (1819) と青、abc163_e (2037) が黄。EDPC X・典型90 011 (★6)
+  prerequisites:
+  - exchange-argument
+  - knapsack-01
+  acl: null
+  signs:
+  - 好きな順番で・いくつか選んで順に
+  - 締切
+  - 積み重ねる
+  - 関数の合成
+  - 最後の1つだけ特別
+  compare_with:
+  - exchange-argument
+  - greedy
+  - knapsack-01
+  page: own
+  visual: 隣り合う2つを入れ替えたときの損得を式にして、比較の基準（s+w、締切、比）が出てくる流れの図
+  problems:
+  - id: dp_x
+    difficulty: null
+    role: example
+    summary: ブロックを積む順を s+w の小さい順に決めてから、重さの合計を状態に価値の最大
+    evidence: https://kyopro-friends.hatenablog.com/entry/2019/01/12/231106
+  - id: typical90_k
+    difficulty: null
+    role: example
+    summary: 締切の早い順に並べてから、使った日数を状態に報酬の最大
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/editorial/011-01.jpg
+  - id: abc366_f
+    difficulty: 1819
+    role: practice
+    summary: 2つの一次関数を適用する順は比の大小で決まる。その順に並べてから K 個選ぶ DP
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0810_abc366
+  - id: abc216_f
+    difficulty: 1541
+    role: practice
+    summary: A の昇順に並べると今の要素が最大と決まり、B の和の数え上げ DP にできる
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0829_abc216
+  - id: abc163_e
+    difficulty: 2037
+    role: practice
+    summary: 活発度の大きい順に左端か右端へ置いてよい。左右に何人置いたかを状態にする
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2020/0419_abc163
+- key: lis
+  title: 最長増加部分列（LIS）
+  aliases:
+  - LIS
+  - 最長増加部分列
+  - Longest Increasing Subsequence
+  level: 水
+  level_evidence: 基本形（二分探索で O(N log N)）が必要な問題は abc134_e (1320)・典型90 060 (★5) から現れ、応用（各要素が LIS に入るか・木の上・1回の変更）は abc354_f (1639)・abc006_4 (1696)・abc165_f (1843)・abc360_g (1982) と青に集まる
+  prerequisites:
+  - dp-basics
+  - binary-search
+  - dp-dimension-reduction
+  acl: atcoder::segtree（セグ木版・重み付き）
+  signs:
+  - N ≤ 2×10^5 で「部分列」「単調増加」
+  - 最小何本の単調列に分けられるか
+  - 挿入・移動の最小回数（N − LIS）
+  - 入れ子にできる最大個数（2次元）
+  compare_with:
+  - lcs
+  - dp-segment-tree
+  - inline-dp
+  page: own
+  visual: 長さ k の増加列の末尾の最小値の配列に値を1つずつ入れ、置き換わる位置をハイライトするステップ送り。O(N^2) 版の表との対比
+  problems:
+  - id: abc134_e
+    difficulty: 1320
+    role: example
+    summary: 同じ色が狭義増加になるよう塗る最小色数＝広義非増加部分列の最長（Dilworth の言い換え）
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/25/184700
+  - id: typical90_bh
+    difficulty: null
+    role: example
+    summary: 左からの LIS と右からの LIS を各位置で合わせ、山型の最長部分列を求める
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/editorial/060.jpg
+  - id: abc354_f
+    difficulty: 1639
+    role: practice
+    summary: 前後からの LIS 長の和で、各要素がある LIS に含まれうるかを判定する
+    evidence: https://drken1215.hatenablog.com/entry/2024/05/19/005916
+  - id: abc006_4
+    difficulty: 1696
+    role: practice
+    summary: カードを抜いて差し込む操作の最小回数を N − LIS に言い換える
+    evidence: https://drken1215.hatenablog.com/entry/2019/04/17/231900
+  - id: abc360_g
+    difficulty: 1982
+    role: practice
+    summary: 1か所だけ値を変えてよいときの LIS。「変更済みか」を状態に足す
+    evidence: https://drken1215.hatenablog.com/entry/2024/07/07/203100
+  - id: dp_q
+    difficulty: null
+    role: practice
+    summary: 重み付きの LIS。高さを添字にしたセグ木で prefix max を取る
+    evidence: https://qiita.com/Series_205/items/6bad5c32a1fce8dc2914
+  - id: tdpc_target
+    difficulty: null
+    role: practice
+    summary: 円の入れ子を区間の包含に直してソートし、LIS で最長の鎖を求める
+    evidence: https://sigma425.hatenablog.com/entry/2016/08/02/214547
+- key: lcs
+  title: 最長共通部分列（LCS）と編集距離
+  aliases:
+  - LCS
+  - 編集距離
+  - レーベンシュタイン距離
+  - Edit Distance
+  level: 水
+  level_evidence: EDPC F が基本。LCS 型の2次元 DP が必要な ABC は abc141_e (1459)・abc185_e (1468)・abc130_e (1676) に集まる
+  prerequisites:
+  - dp-basics
+  - dp-reconstruction
+  acl: null
+  signs:
+  - 2つの列・文字列で N, M ≤ 3000〜5000
+  - 共通の部分列
+  - 挿入・削除・置換の最小回数で一致させる
+  - 共通部分列の組の数
+  compare_with:
+  - subsequence-dp
+  - interval-dp
+  - dp-of-dp
+  page: own
+  visual: 2次元の表を左上から埋め、一致（斜め）・不一致（上か左）の矢印を描く。復元で逆にたどる経路をハイライト
+  problems:
+  - id: dp_f
+    difficulty: null
+    role: example
+    summary: LCS の長さを表で求め、表を逆にたどって1つ復元する
+    evidence: https://qiita.com/drken/items/03c7db44ccd27820ea0d
+  - id: abc185_e
+    difficulty: 1468
+    role: example
+    summary: 2つの列を削除と不一致のコストで揃える＝編集距離の変形
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/14/000300
+  - id: abc141_e
+    difficulty: 1459
+    role: practice
+    summary: 重ならずに2回現れる最長の部分文字列。末尾からの一致長を LCS 型の表で求める
+    evidence: https://drken1215.hatenablog.com/entry/2019/09/16/014600
+  - id: abc130_e
+    difficulty: 1676
+    role: practice
+    summary: 共通部分列（位置の組）の数。包除で重複を除き、2次元累積和で高速化する
+    evidence: https://drken1215.hatenablog.com/entry/2019/06/21/230200
+  - id: agc021_d
+    difficulty: 2287
+    role: practice
+    summary: K 文字まで変えてよいときの最長回文部分列。S と反転の LCS を区間 DP で
+    evidence: https://drken1215.hatenablog.com/entry/2019/04/26/183309
+- key: edit-distance
+  title: 編集距離
+  aliases:
+  - レーベンシュタイン距離
+  level: 水
+  level_evidence: abc185_e (1468)
+  prerequisites:
+  - lcs
+  acl: null
+  signs:
+  - 挿入・削除・置換で一致させる最小回数
+  compare_with:
+  - lcs
+  page: section-of:lcs
+  visual: LCS と同じ表で、3方向の遷移コストを書き込む
+  problems:
+  - id: abc185_e
+    difficulty: 1468
+    role: example
+    summary: 2つの列を削除と不一致のコストで揃える＝編集距離の変形
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/14/000300
+- key: subsequence-dp
+  title: 部分列 DP（重複のない部分列の数え上げ）
+  aliases:
+  - 部分列DP
+  - next 配列
+  - nxt テーブル
+  level: 黄
+  level_evidence: 重複を除いて部分列を数える問題は abc214_f (1973)・arc081_c (2072)・abc230_f (2113)・abc299_f (2349) と黄に集まる。前提の nxt テーブルと部分列判定は典型90 006 (★5)・008 (★4) で水
+  prerequisites:
+  - dp-state-design
+  - dp-counting-dedup
+  acl: null
+  signs:
+  - 異なる部分列の個数
+  - 部分列として現れない（最短・辞書順最小）
+  - 辞書順 K 番目の部分列
+  - 文字種 26 程度
+  compare_with:
+  - lcs
+  - string-automaton-dp
+  - dp-kth-lexicographic
+  page: own
+  visual: 文字列の上に「各位置から各文字の次の出現」への矢印（nxt）を描き、部分列が最も左を取る道1本に対応することを示す
+  problems:
+  - id: typical90_f
+    difficulty: null
+    role: example
+    summary: 長さ K の部分列で辞書順最小のものを、次の出現位置の表を使って先頭から貪欲に決める（DP の前提となる nxt）
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/editorial/006.jpg
+  - id: abc214_f
+    difficulty: 1973
+    role: example
+    summary: 隣り合う位置を選ばない部分列のうち、異なる文字列の数を数える
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: arc081_c
+    difficulty: 2072
+    role: practice
+    summary: 部分列として現れない最短の文字列を、後ろからの DP で長さを求め辞書順最小に復元する
+    evidence: https://drken1215.hatenablog.com/entry/2018/09/22/201000
+  - id: tdpc_lexicographical
+    difficulty: null
+    role: practice
+    summary: 異なる部分列のうち辞書順 K 番目を、後ろからの個数 DP を使って先頭から決める
+    evidence: https://drken1215.hatenablog.com/entry/2021/08/10/193121
+  - id: abc230_f
+    difficulty: 2113
+    role: practice
+    summary: 累積和の列の異なる部分列の数に言い換えて数える
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: abc299_f
+    difficulty: 2349
+    role: practice
+    summary: TT が部分列になる T の数。2つ目の T の開始位置を固定して重複なく数える
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+- key: dp-sequence-partition
+  title: 区間分割 DP（列を区切る DP）
+  aliases:
+  - 区間分割型DP
+  - 仕切りを入れる DP
+  level: 水
+  level_evidence: 区切れるかの可否は arc065_a (930) から。条件を満たす区切り方を数える型は agc031_b (1315) の水から、条件が複雑なもの（abc207_e (1820)・典型90 089 (★7)・arc104_c (2009)）が青〜黄に続く
+  prerequisites:
+  - dp-basics
+  - dp-prefix-sum
+  acl: atcoder::fenwick_tree（区間の条件判定に使う場合）
+  signs:
+  - 列をいくつかの連続部分に分ける
+  - 区切り方の数・各区間のコストの和の最小
+  - 各区間が条件を満たす
+  compare_with:
+  - interval-dp
+  - dp-prefix-sum
+  - monotone-minima
+  - alien-dp
+  page: own
+  visual: 列に仕切りを1本ずつ入れる図と、dp[i] に足し込まれる dp[j] の範囲を色付きの帯で示す図
+  problems:
+  - id: arc065_a
+    difficulty: 930
+    role: example
+    summary: 文字列を決まった4つの単語に区切れるかを、先頭からの位置ごとの可否 DP で判定する
+    evidence: https://drken1215.hatenablog.com/entry/2021/07/28/003500
+  - id: agc031_b
+    difficulty: 1315
+    role: practice
+    summary: 同じ色の石の間を塗り替える操作で作れる列の数。直前の同色の位置からの遷移で重複を避ける
+    evidence: https://drken1215.hatenablog.com/entry/2019/03/17/130800
+  - id: abc207_e
+    difficulty: 1820
+    role: practice
+    summary: k 番目の区間の和が k で割り切れるように区切る方法の数。余りごとの累積で遷移をまとめる
+    evidence: https://drken1215.hatenablog.com/entry/2024/05/21/013749
+  - id: typical90_ck
+    difficulty: null
+    role: practice
+    summary: 各区間の転倒数が K 以下になる区切り方の数。尺取りと BIT で左端の範囲を求め、累積和で数える
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/editorial/089-01.jpg
+  - id: arc104_c
+    difficulty: 2009
+    role: practice
+    summary: エレベーターの乗降記録が整合するかを、区間に区切る DP で判定する
+    evidence: https://drken1215.hatenablog.com/entry/2020/10/05/133100
+- key: string-automaton-dp
+  title: 照合状態を持つ DP（文字列のオートマトン上の DP）
+  aliases:
+  - オートマトン DP
+  - 禁止文字列
+  - KMP DP
+  - Aho-Corasick DP
+  level: 水
+  level_evidence: 直近の数文字やパターンの何文字目まで一致したかを状態にする問題が abc122_d (1533)・abc104_d (1739)・典型90 008 (★4) に出る。KMP・Aho-Corasick の遷移表を作る一般形は ABC では稀（発展の節）
+  prerequisites:
+  - dp-state-design
+  acl: null
+  signs:
+  - 〜を部分文字列に含まない文字列の数
+  - 部分列として 'ABC' がいくつ現れるかの総和
+  - 長さ N の文字列でパターン（短い）を含むもの
+  compare_with:
+  - subsequence-dp
+  - digit-dp
+  - kmp
+  - aho-corasick
+  page: own
+  visual: パターンの状態遷移図（オートマトン）を描き、文字を1つ読むごとに状態が移る様子をステップ送り
+  problems:
+  - id: typical90_h
+    difficulty: null
+    role: example
+    summary: 文字列中に部分列として現れる 'atcoder' の数を、何文字目まで一致したかを状態にして数える
+    evidence: https://drken1215.hatenablog.com/entry/2022/04/01/121700
+  - id: abc122_d
+    difficulty: 1533
+    role: example
+    summary: 1回の隣接交換で 'AGC' が現れる文字列を除いて数える。直近3文字を状態に持つ
+    evidence: https://drken1215.hatenablog.com/entry/2019/04/23/120400
+  - id: abc104_d
+    difficulty: 1739
+    role: practice
+    summary: '''?'' を埋めた全通りについて部分列 ''ABC'' の個数の総和。A・AB・ABC まで一致した数を状態にする'
+    evidence: https://drken1215.hatenablog.com/entry/2018/08/05/224100_1
+  - id: tdpc_concatenation
+    difficulty: null
+    role: practice
+    summary: 単語の連結で作れる文字列の数。直近の数文字と区切りの状態を bit で持つ
+    evidence: https://sigma425.hatenablog.com/entry/2016/08/02/214547
+- key: dp-of-dp
+  title: DP の DP
+  aliases:
+  - DP 套 DP
+  - dp of dp
+  level: 黄
+  level_evidence: abc391_g (2247)：内側の LCS の DP の1行（差分が 0/1）を外側の DP の状態にする
+  prerequisites:
+  - lcs
+  - bit-dp
+  - dp-state-design
+  acl: null
+  signs:
+  - 「LCS（など DP で求まる値）が k になる文字列の数」
+  - 片方の文字列が短い（≤ 10〜20）
+  compare_with:
+  - lcs
+  - string-automaton-dp
+  page: own
+  visual: 内側の DP の表の1行を bit 列として描き、外側で1文字追加するとその行が別の行に移る遷移図
+  problems:
+  - id: abc391_g
+    difficulty: 2247
+    role: example
+    summary: 長さ M の文字列のうち、短い文字列 S との LCS が各 k になるものの数
+    evidence: https://kmjp.hatenablog.jp/entry/2025/02/01/0900
+- key: bracket-dp
+  title: 括弧列の DP
+  aliases:
+  - カッコ列
+  - バランスの取れた括弧
+  level: 基礎
+  level_evidence: abc312_d (964)：'?' を埋めて正しい括弧列になる数を、開き括弧の残り数を状態にして数える
+  prerequisites:
+  - dp-basics
+  acl: null
+  signs:
+  - 正しい括弧列
+  - '''('' と '')'' と ''?'''
+  - 途中で負にならない
+  compare_with:
+  - interval-dp
+  - catalan-number
+  page: own
+  visual: 括弧列を山の高さ（折れ線）として描き、0 未満に潜らない経路を数える図
+  problems:
+  - id: abc312_d
+    difficulty: 964
+    role: example
+    summary: '''?'' を ''('' か '')'' にして正しい括弧列になる置き方の数'
+    evidence: https://zenn.dev/shinonome81/articles/3e1c0c8a9c00fc / https://atcoder-tags.herokuapp.com/tags/Dynamic-Programming/String-DP
+- key: dp-counting-dedup
+  title: 数え上げ DP で重複を避ける（代表元を決める）
+  aliases:
+  - ダブルカウントを防ぐ
+  - 最小添字規則
+  - 正規化
+  level: 青
+  level_evidence: 同じ対象を1回だけ数えるために「代表の作り方」を決める必要がある問題が abc130_e (1676)・abc311_f (1984)・abc214_f (1973) など青に多い
+  prerequisites:
+  - dp-state-design
+  acl: null
+  signs:
+  - 「異なる〜の個数」
+  - 操作の結果として得られるものの種類数
+  - グループ分けの数（順序を区別しない）
+  compare_with:
+  - subsequence-dp
+  - subset-enumeration-dp
+  - inclusion-exclusion-dp
+  page: own
+  visual: 同じ対象に対応する複数の作り方を並べ、そのうち代表（最も左を取る・最小要素を含むグループから決める）だけに印を付ける図
+  problems:
+  - id: abc310_d
+    difficulty: 1368
+    role: example
+    summary: N 人を T チームに分ける方法の数。番号最小の未所属者を含むチームから決めて順序の重複を除く
+    evidence: https://drken1215.hatenablog.com/entry/2023/07/17/213800
+  - id: abc130_e
+    difficulty: 1676
+    role: practice
+    summary: 共通部分列の組の数。包除で重複を除く
+    evidence: https://drken1215.hatenablog.com/entry/2019/06/21/230200
+  - id: abc311_f
+    difficulty: 1984
+    role: practice
+    summary: 条件を満たす黒マスの塗り方の数を、列ごとの高さで重複なく数える
+    evidence: https://drken1215.hatenablog.com/entry/2023/07/24/182416
+  - id: abc180_f
+    difficulty: 2419
+    role: practice
+    summary: 次数 2 以下のグラフの数え上げを、最小番号の頂点を含む成分から決めて重複を除く
+    evidence: https://drken1215.hatenablog.com/entry/2020/10/21/145700
+- key: dp-phase
+  title: フェーズを状態に持つ DP（耳 DP）
+  aliases:
+  - 耳DP
+  - 状態DP
+  - chokudai DP
+  level: 青
+  level_evidence: 「区間の外・中・後」などの段階を状態にする問題が abc211_c (559) の基本形から、abc210_d (1507)・abc104_d (1739)・abc159_f (1876)・abc360_g (1982)・yahoo_procon2019_qual_d (1998) と青に多い
+  prerequisites:
+  - dp-state-design
+  acl: null
+  signs:
+  - 区間を1つ選んでその中だけ操作する
+  - 列の一部だけ変更できる
+  - 左端・右端を同時に決める
+  compare_with:
+  - string-automaton-dp
+  - dp-sequence-partition
+  page: own
+  visual: 列の下に「フェーズ 0→1→2」の帯を描き、各位置でどのフェーズにいるかを状態として遷移図にする
+  problems:
+  - id: typical90_h
+    difficulty: null
+    role: example
+    summary: '''atcoder'' の何文字目まで進んだかをフェーズとして持つ'
+    evidence: https://drken1215.hatenablog.com/entry/2022/04/01/121700
+  - id: abc210_d
+    difficulty: 1507
+    role: practice
+    summary: 2駅の選び方のコスト最小を、1駅目を選んだ後かどうかの段階で2次元 DP にする
+    evidence: https://drken1215.hatenablog.com/entry/2000/04/01/033000
+  - id: abc159_f
+    difficulty: 1876
+    role: practice
+    summary: 全区間についての部分和の個数の総和。区間の左端を「まだ始めていない／始めた」で持つ
+    evidence: https://drken1215.hatenablog.com/entry/2020/03/22/224200
+  - id: yahoo_procon2019_qual_d
+    difficulty: 1998
+    role: practice
+    summary: 数直線を歩く経路を、通らない・偶数回・奇数回…の5段階に分けてコスト最小を求める
+    evidence: https://www.mathenachia.blog/dp/
+- key: interval-dp
+  title: 区間 DP
+  aliases:
+  - 区間DP
+  - dp[l][r]
+  - Range DP
+  level: 青
+  level_evidence: 基本形（分割点・両端から取る・区間を消す）が必要な問題は典型90 019 (★6)・abc217_f (1954) から。ABC の区間 DP は大半が黄以上（abc163_e 2037・abc252_g 2153・abc206_f 2221・abc273_f 2277・abc292_g 2340・abc325_g 2388）
+  prerequisites:
+  - dp-basics
+  - dp-order
+  - memoized-recursion
+  acl: null
+  signs:
+  - N ≤ 300〜500 で O(N^3) が通る
+  - 隣り合うものを合体させる・消す
+  - 列の両端から取っていく
+  - 括弧の対応・回文
+  compare_with:
+  - dp-sequence-partition
+  - knuth-yao
+  - game-dp
+  page: own
+  visual: 上三角の表を対角線（区間の長さ）ごとに埋めるアニメーション。区間を分割点で2つに割る木の図
+  problems:
+  - id: dp_l
+    difficulty: null
+    role: example
+    summary: 列の両端から交互に取るゲームで、残った区間ごとに得点差の最大を求める
+    evidence: https://qiita.com/Series_205/items/618b6ad1a22e7401a606
+  - id: dp_n
+    difficulty: null
+    role: example
+    summary: 隣り合うスライムを合体させるコストの最小を、最後に合体する境目で分けて求める
+    evidence: https://qiita.com/Series_205/items/618b6ad1a22e7401a606
+  - id: tdpc_iwi
+    difficulty: null
+    role: practice
+    summary: '''iwi'' を取り除く操作で区間を全部消せるかを判定し、最大の操作回数を求める'
+    evidence: https://sigma425.hatenablog.com/entry/2016/08/02/214547
+  - id: typical90_s
+    difficulty: null
+    role: practice
+    summary: 隣り合う2つを取り除く操作のコスト最小。外側の2つを最後に取る場合と分割する場合に分ける
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/editorial/019.jpg
+  - id: abc217_f
+    difficulty: 1954
+    role: practice
+    summary: 隣り合う仲良しの組を取り除く順番の数。左端と組む相手で分け、二項係数で順番を混ぜる
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: abc163_e
+    difficulty: 2037
+    role: practice
+    summary: 活発度の大きい順に左端か右端へ並べる。残った区間 [l, r] を状態にする
+    evidence: https://drken1215.hatenablog.com/entry/2020/04/21/153400
+  - id: abc325_g
+    difficulty: 2388
+    role: practice
+    summary: 文字列の削除操作で最短にする。区間の先頭の文字を最後にどう消すかで分ける
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/22/202630
+- key: interval-dp-advanced
+  title: 区間 DP の応用（区間の数え上げ・木構造・座標上の区間）
+  aliases:
+  - 区間DP 応用
+  level: 黄
+  level_evidence: abc252_g (2153)・abc206_f (2221)・abc273_f (2277)・abc292_g (2340)・abc325_g (2388)。発展は abc261_g (2803)・abc262_g (3114)
+  prerequisites:
+  - interval-dp
+  - binomial-coefficient
+  acl: null
+  signs:
+  - 先行順（DFS 順）が与えられた木の数
+  - 区間ゲームの Grundy 数
+  - 座標上を左右に動く（訪れた区間が連続）
+  compare_with:
+  - interval-dp
+  - tree-dp
+  page: own
+  visual: 区間 [l, r] を根とその子の部分木の区間に分ける図（DFS 順と区間の対応）
+  problems:
+  - id: abc252_g
+    difficulty: 2153
+    role: example
+    summary: DFS の訪問順が与えられたとき、それを生む根付き木の数を区間 DP で数える
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: abc206_f
+    difficulty: 2221
+    role: practice
+    summary: 区間を選び合うゲームの勝敗を、区間ごとの Grundy 数を区間 DP で求めて判定する
+    evidence: https://drken1215.hatenablog.com/entry/2021/06/19/224100
+  - id: abc273_f
+    difficulty: 2277
+    role: practice
+    summary: 壁とハンマーのある数直線上の移動。訪れた区間の両端と今いる端を状態にする
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: abc292_g
+    difficulty: 2340
+    role: practice
+    summary: '''?'' を含む数の列を狭義増加にする数え方を、桁と区間で分ける'
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+- key: bit-dp
+  title: bitDP（集合を状態に持つ DP）
+  aliases:
+  - bitDP
+  - 集合DP
+  - ビットDP
+  - Bitmask DP
+  level: 水
+  level_evidence: abc322_e (1193)・abc354_e (1223)・abc180_e (1256)・abc142_e (1397)・abc215_e (1413)・abc278_f (1452) と水に集中。組み合わせの応用（abc190_e 1645・abc301_e 1673・abc199_e 1814・abc338_f 1835）は青
+  prerequisites:
+  - dp-state-design
+  - bit-operations
+  - bit-full-search
+  acl: null
+  signs:
+  - N ≤ 16〜20
+  - 順番を決める・全部の頂点を回る
+  - 使った物の集合が将来に効く
+  - 集合の部分集合ごとの値
+  compare_with:
+  - bit-full-search
+  - subset-enumeration-dp
+  - tsp
+  - zeta-transform
+  page: own
+  visual: 集合の包含関係（ハッセ図）を描き、値が小さい集合から大きい集合へ流れるステップ送り。N! 通りの順列の木が集合で合流する図
+  problems:
+  - id: dp_o
+    difficulty: null
+    role: example
+    summary: 男女のマッチングの数。使った女性の集合を状態にし、男性は集合の大きさで決まる
+    evidence: https://qiita.com/Series_205/items/618b6ad1a22e7401a606
+  - id: abc180_e
+    difficulty: 1256
+    role: example
+    summary: 3次元の都市をすべて回る最短距離（巡回セールスマン）
+    evidence: https://drken1215.hatenablog.com/entry/2020/10/21/172509
+  - id: abc142_e
+    difficulty: 1397
+    role: practice
+    summary: 鍵の組み合わせで全部の箱を開ける最小費用。開けられる箱の集合を状態にする
+    evidence: https://drken1215.hatenablog.com/entry/2019/09/29/103500
+  - id: abc215_e
+    difficulty: 1413
+    role: practice
+    summary: 同じ種類が連続するように部分列を選ぶ数。出た種類の集合と最後の種類を状態にする
+    evidence: https://atcoder-tags.herokuapp.com/tags/Dynamic-Programming/Bit-DP
+  - id: abc278_f
+    difficulty: 1452
+    role: practice
+    summary: しりとりゲームの勝敗を、使った単語の集合と最後の単語で決める
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: abc338_f
+    difficulty: 1835
+    role: practice
+    summary: 負辺のあるグラフで全頂点を訪れる最短の歩道。全点対の最短距離を求めてから bitDP
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: abc195_f
+    difficulty: 2068
+    role: practice
+    summary: 区間 [A, B]（幅 ≤ 72）から互いに素な数を選ぶ方法の数。72 以下の素数 20 個の使用状況を集合で持つ
+    evidence: https://kmjp.hatenablog.jp/entry/2021/03/14/0900
+- key: tsp
+  title: 巡回セールスマン問題（TSP）
+  aliases:
+  - TSP
+  - 巡回セールスマン
+  level: 水
+  level_evidence: abc180_e (1256)・abc274_e (1520)。最短路と組み合わせると abc190_e (1645)・abc301_e (1673)・abc338_f (1835)
+  prerequisites:
+  - bit-dp
+  - dijkstra
+  - bfs
+  acl: null
+  signs:
+  - N ≤ 16〜20 の地点をすべて回る
+  - K ≤ 17 個の特別な地点を回る（ほかはグラフ）
+  compare_with:
+  - bit-dp
+  - warshall-floyd
+  page: section-of:bit-dp
+  visual: 地点の集合と最後の地点の組を表で並べる図
+  problems:
+  - id: abc180_e
+    difficulty: 1256
+    role: example
+    summary: 3次元の都市をすべて回る最短距離
+    evidence: https://drken1215.hatenablog.com/entry/2020/10/21/172509
+  - id: abc274_e
+    difficulty: 1520
+    role: practice
+    summary: 宝箱を拾うと速くなる移動で、町を全部回って戻る最短時間
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: abc190_e
+    difficulty: 1645
+    role: practice
+    summary: 隣り合う石の条件を満たす最短の列。特別な石どうしの BFS 距離を求めてから TSP（始点に戻らない型）
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0130_abc190
+  - id: abc301_e
+    difficulty: 1673
+    role: practice
+    summary: グリッド上でお菓子を集めて制限時間内にゴール。BFS で距離を求めてから bitDP
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/14/165900
+  - id: abc343_g
+    difficulty: 2114
+    role: practice
+    summary: すべての文字列を部分文字列として含む最短の文字列。重なりの長さを前計算して TSP 型の bitDP
+    evidence: https://kmjp.hatenablog.jp/entry/2024/03/02/0930
+- key: subset-enumeration-dp
+  title: 部分集合を列挙する DP（O(3^N)）
+  aliases:
+  - 3^N DP
+  - 部分集合の部分集合
+  - グループ分け DP
+  level: 青
+  level_evidence: abc187_f (1895)・典型90 045 (★6)・EDPC U。abc310_d (1368) は 3^N でも全探索でも解ける。発展は abc321_g (2439)・abc213_g (2663)
+  prerequisites:
+  - bit-dp
+  - dp-counting-dedup
+  acl: null
+  signs:
+  - N ≤ 16〜18 をいくつかのグループに分ける
+  - 集合を部分集合の和に分割する最小/最大/数
+  compare_with:
+  - bit-dp
+  - zeta-transform
+  page: own
+  visual: 集合 S の部分集合 T を (T−1)&S で列挙する様子と、Σ 2^|S| = 3^N になる理由の図（各要素が 3 状態）
+  problems:
+  - id: dp_u
+    difficulty: null
+    role: example
+    summary: うさぎをグループに分けて得点の和を最大化。各集合をその部分集合と残りに分ける
+    evidence: https://qiita.com/Series_205/items/7d2c57b45179006d0bc6
+  - id: typical90_as
+    difficulty: null
+    role: practice
+    summary: 点を K グループに分け、グループ内の最大距離の最大を最小化する
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/editorial/045.jpg
+  - id: abc187_f
+    difficulty: 1895
+    role: practice
+    summary: 頂点を完全グラフになるグループに分ける最小数
+    evidence: https://drken1215.hatenablog.com/entry/2021/01/02/224300
+  - id: abc310_d
+    difficulty: 1368
+    role: practice
+    summary: 仲の悪い組を分けてチーム分けする数。最小番号の人を含むチームから決める
+    evidence: https://drken1215.hatenablog.com/entry/2023/07/17/213800
+  - id: abc321_g
+    difficulty: 2439
+    role: practice
+    summary: 部品を電線でつなぐ連結成分の個数の期待値。連結成分になる部分集合ごとに数える
+    evidence: https://drken1215.hatenablog.com/entry/2023/09/26/105540
+  - id: abc332_e
+    difficulty: 1883
+    role: practice
+    summary: N 個の品物を D 個の袋に分けて重さの分散を最小にする。袋ごとに部分集合を選ぶ 3^N の DP
+    evidence: https://atcoder-tags.herokuapp.com/tags/Dynamic-Programming/Bit-DP
+- key: broken-profile-dp
+  title: グリッドの境界を状態に持つ DP（プロファイル DP・連結性 DP）
+  aliases:
+  - broken profile DP
+  - 插頭DP
+  - フロンティア法
+  - スライド bitDP
+  - 連結性DP
+  level: 黄
+  level_evidence: 行ごとの配置パターンを状態にする基本形は abc113_d (1597) にあるが、マス単位の境界状態や圧縮が必要なのは典型90 023 (★7)・abc204_f (2044、行列累乗と併用)。連結性を持つものは tdpc_grid・abc296_h (2822) で発展
+  prerequisites:
+  - bit-dp
+  - dp-state-design
+  acl: null
+  signs:
+  - グリッドの幅が小さい（W ≤ 6〜10）
+  - 敷き詰め・タイル張り
+  - 隣接しないように置く
+  - 黒マスが連結
+  compare_with:
+  - bit-dp
+  - dp-matrix-power
+  page: own
+  visual: 走査線（折れ線の境界）を1マスずつ進め、境界上の bit が書き換わる様子をステップ送り
+  problems:
+  - id: abc113_d
+    difficulty: 1597
+    role: example
+    summary: あみだくじの横線の置き方の数。1段ごとの横線のパターンを状態にして下へ進む
+    evidence: https://drken1215.hatenablog.com/entry/2019/04/23/183916
+  - id: abc379_g
+    difficulty: 2304
+    role: practice
+    summary: 隣り合うマスが異なる3色の塗り方の数（短い辺 ≤ 14）。各列の確定済みの最下段を状態にし、取り得る状態だけに圧縮する
+    evidence: https://kmjp.hatenablog.jp/entry/2024/11/11/0930
+  - id: typical90_w
+    difficulty: null
+    role: practice
+    summary: キングが互いに攻撃しないように置く数。1マスずつ進め、直前の W+1 マスの状態を圧縮して持つ
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/editorial/023-01.jpg
+  - id: tdpc_grid
+    difficulty: null
+    role: practice
+    summary: 左上と右下が黒マスでつながる塗り方の数。境界上の連結状態を持つ
+    evidence: https://sigma425.hatenablog.com/entry/2016/08/02/214547
+  - id: abc296_h
+    difficulty: 2822
+    role: practice
+    summary: 黒マスを全部連結にする最小の追加数。境界上の連結成分を状態にする
+    evidence: https://www.mathenachia.blog/dp/
+- key: digit-dp
+  title: 桁 DP
+  aliases:
+  - 桁DP
+  - Digit DP
+  - smaller フラグ
+  level: 水
+  level_evidence: abc154_e (1298)・abc135_d (1334)・abc117_d (1423)・abc336_e (1538)・abc129_e (1547)・abc155_e (1569) と水に集中
+  prerequisites:
+  - dp-state-design
+  - mod-arithmetic
+  acl: null
+  signs:
+  - N ≤ 10^18 や N が10進で10^4桁
+  - N 以下の整数で条件を満たすものの個数・総和
+  - 各桁・桁和・0 でない桁の数
+  compare_with:
+  - string-automaton-dp
+  - digit-dp-advanced
+  - bit-full-search
+  page: own
+  visual: N の桁を並べ、「ここで初めて N より小さい数字を選ぶ」分岐を木で描く。上限と一致したままの道が1本だけであることを示すステップ送り
+  problems:
+  - id: dp_s
+    difficulty: null
+    role: example
+    summary: K 以下で桁和が D の倍数の数。smaller フラグと桁和の余りを状態にする
+    evidence: https://qiita.com/Series_205/items/6bad5c32a1fce8dc2914
+  - id: abc154_e
+    difficulty: 1298
+    role: example
+    summary: N 以下で 0 でない桁がちょうど K 個の数
+    evidence: https://drken1215.hatenablog.com/entry/2020/02/09/225300
+  - id: abc135_d
+    difficulty: 1334
+    role: practice
+    summary: '''?'' を含む数で 13 で割って 5 余るものの数（余りを状態に持つ桁ごとの DP）'
+    evidence: https://drken1215.hatenablog.com/entry/2020/04/23/194600
+  - id: abc117_d
+    difficulty: 1423
+    role: practice
+    summary: K 以下の X で Σ (X xor A_i) の最大。2進の上位桁から smaller フラグで決める
+    evidence: https://drken1215.hatenablog.com/entry/2019/02/03/224200
+  - id: abc336_e
+    difficulty: 1538
+    role: practice
+    summary: N 以下で各桁の和で割り切れる数の個数。桁和を固定して桁 DP を繰り返す
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: abc129_e
+    difficulty: 1547
+    role: practice
+    summary: a + b ≤ L かつ a + b = a xor b となる組の数。2進の桁ごとに a,b のビットを決める
+    evidence: https://drken1215.hatenablog.com/entry/2019/06/10/150000
+  - id: tdpc_number
+    difficulty: null
+    role: practice
+    summary: 10000 桁の N 以下で桁和が D の倍数の数
+    evidence: https://sigma425.hatenablog.com/entry/2016/08/02/214547
+- key: digit-dp-advanced
+  title: 桁 DP の応用（複数の数・繰り上がり・状態の圧縮）
+  aliases:
+  - 桁DP 応用
+  level: 黄
+  level_evidence: abc208_e (2024)・abc317_f (2072)・abc182_f (2121)・abc235_f (2129)・abc194_f (2197)・abc172_f (2216)。青では abc231_e (1740)・arc123_c (1827)
+  prerequisites:
+  - digit-dp
+  acl: null
+  signs:
+  - 2つ以上の数を同時に決める（xor・大小関係）
+  - 支払いとお釣り（繰り上がり）
+  - 使った数字の集合
+  - 桁の積（状態の種類が少ない）
+  compare_with:
+  - digit-dp
+  - dp-map-sparse
+  page: own
+  visual: 複数の数の桁を縦に並べ、各数の smaller フラグを並べて持つ図。繰り上がりを下の桁から運ぶ図
+  problems:
+  - id: abc231_e
+    difficulty: 1740
+    role: example
+    summary: 硬貨で払ってお釣りをもらうときの枚数の最小。下の桁から繰り上がりの有無を状態にする
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: abc208_e
+    difficulty: 2024
+    role: practice
+    summary: N 以下で桁の積が K 以下の数。積の種類が少ないので map で状態を持つ
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: abc317_f
+    difficulty: 2072
+    role: practice
+    summary: 3つの数の xor が 0 で各数が A_i の倍数になる組。各数の余りと smaller フラグを並べて持つ
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: abc235_f
+    difficulty: 2129
+    role: practice
+    summary: N 以下で指定の数字を全部含む数の総和。使った数字の集合を状態にし、個数と総和を同時に持つ
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: abc194_f
+    difficulty: 2197
+    role: practice
+    summary: 16進で N 以下、異なる数字がちょうど K 種類の数
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: abc138_f
+    difficulty: 2431
+    role: practice
+    summary: L ≤ x ≤ y ≤ R で y mod x = y xor x の組。上限と下限のフラグを両方持つ
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+- key: tree-dp
+  title: 木 DP
+  aliases:
+  - 木DP
+  - Tree DP
+  - 部分木の DP
+  level: 水
+  level_evidence: 水と青の境目。部分木の値を子から集める基本形は典型90 073 (★5)・abc239_e (1084)・abc133_e (1505)。状態に選択を持つ独立集合型は EDPC P と同じ abc036_d (1602 参考値)・abc387_f (1760)、応用は abc259_f (1961)・abc369_g (2055)・abc246_g (2313)
+  prerequisites:
+  - dp-basics
+  - tree-basics
+  - dfs
+  acl: null
+  signs:
+  - 木（N−1 本の辺・連結）
+  - 各頂点に色を塗る・選ぶ／選ばない
+  - 辺を選ぶ（次数の制限）
+  - 部分木ごとの値
+  compare_with:
+  - rerooting
+  - tree-dp-square
+  - dp-dag
+  page: own
+  visual: 葉から根へ値が集まるアニメーション。各頂点の横に dp の組（選ぶ・選ばない）を表示し、親で掛け合わせる式を見せる
+  problems:
+  - id: dp_p
+    difficulty: null
+    role: example
+    summary: 隣り合う頂点を両方黒にしない塗り方の数。頂点ごとに白・黒の2状態を持つ
+    evidence: https://qiita.com/Series_205/items/6bad5c32a1fce8dc2914
+  - id: typical90_bu
+    difficulty: null
+    role: example
+    summary: 辺を切って、各成分に a と b の両方が含まれるようにする方法の数。根側の成分の中身を3状態で持つ
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/editorial/073.jpg
+  - id: abc239_e
+    difficulty: 1084
+    role: practice
+    summary: 部分木に含まれる値の大きい方から K 番目（K ≤ 20）を、子の上位20個をまとめて求める
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/239/E
+  - id: abc133_e
+    difficulty: 1505
+    role: practice
+    summary: 隣接・距離2の頂点が異なる色になる塗り方の数。根から順に選べる色の数を掛けていく
+    evidence: https://drken1215.hatenablog.com/entry/2019/07/08/002700
+  - id: abc259_f
+    difficulty: 1961
+    role: practice
+    summary: 次数の上限つきで辺を選ぶ重み最大。親との辺を使う・使わないで分け、子の得の大きい順に取る
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/04/015400
+  - id: abc246_g
+    difficulty: 2313
+    role: practice
+    summary: 木の上のゲーム。答えを二分探索で決め打ちし、木 DP で達成できるかを判定する
+    evidence: https://drken1215.hatenablog.com/entry/2022/04/04/023800
+  - id: abc387_f
+    difficulty: 1760
+    role: practice
+    summary: 各 i で x_i と x_{A_i} の間に大小の条件がある数列の数（関数グラフ）。サイクルを1点にまとめ、値ごとの木 DP を累積和で速くする
+    evidence: https://atcoder-tags.herokuapp.com/tags/Dynamic-Programming/Tree-DP
+- key: tree-dp-square
+  title: 二乗の木 DP（サイズで抑える木 DP）
+  aliases:
+  - 2乗の木DP
+  - O(N^2) の木 DP
+  - 木上のナップサック
+  level: 黄
+  level_evidence: abc287_f (2034)・arc171_c (2244)・abc207_f (2398)。発展は arc130_d (2437)・arc121_e (2645)・arc101_c (2913)
+  prerequisites:
+  - tree-dp
+  - knapsack-01
+  acl: null
+  signs:
+  - N ≤ 2000〜5000 の木
+  - 部分木で K 個選ぶ・連結成分の数ごとに数える
+  - O(N^3) に見える木 DP
+  compare_with:
+  - tree-dp
+  - small-to-large
+  page: own
+  visual: 2つの部分木の頂点の組を線で結び、どの組も LCA で1回だけ数えられることを示す図（O(N^2) の証明）
+  problems:
+  - id: abc287_f
+    difficulty: 2034
+    role: example
+    summary: 頂点の部分集合ごとの連結成分の数を、成分数ごとに数える。部分木のサイズまでの配列をマージする
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: abc207_f
+    difficulty: 2398
+    role: practice
+    summary: 見張られる頂点の数ごとに置き方を数える。頂点の3状態と個数を持ち、O(N^2) で合わせる
+    evidence: https://kmjp.hatenablog.jp/entry/2021/06/27/0900
+  - id: arc171_c
+    difficulty: 2244
+    role: practice
+    summary: 辺の交換操作で作れる列の数。子の数と選んだ辺の数を状態にする
+    evidence: https://drken1215.hatenablog.com/entry/2024/02/05/021046
+  - id: tdpc_eel
+    difficulty: null
+    role: practice
+    summary: 木から K 本の互いに交わらないパスを選ぶ数。本数と上へ伸びる本数を状態にする
+    evidence: https://sigma425.hatenablog.com/entry/2016/08/02/214547
+  - id: arc130_d
+    difficulty: 2437
+    role: practice
+    summary: ジグザグになる番号の付け方の数。部分木の中での順位を状態にして合わせる
+    evidence: https://www.mathenachia.blog/dp/
+- key: rerooting
+  title: 全方位木 DP
+  aliases:
+  - 全方位木DP
+  - ReRooting
+  - Rerooting
+  - 換根DP
+  level: 青
+  level_evidence: 根の移動による差分で済む距離和の問題は abc220_f (1304)・abc348_e (1347) と水にあるが、一般の全方位木 DP が必要な問題は abc222_f (1934)・abc160_f (2048)・abc337_g (2080)・abc223_g (2351)
+  prerequisites:
+  - tree-dp
+  - prefix-sum
+  acl: null
+  signs:
+  - すべての頂点について、その頂点を根（起点）としたときの値
+  - 各頂点からの最遠距離・距離の総和
+  compare_with:
+  - tree-dp
+  - tree-diameter
+  - centroid-decomposition
+  page: own
+  visual: 根を隣の頂点へ移したときに変わるのは「親側の部分木」の値だけであることを、色分けした木のステップ送りで示す
+  problems:
+  - id: abc220_f
+    difficulty: 1304
+    role: example
+    summary: 各頂点から他の全頂点への距離の総和。根を子へ移すと和が N − 2×(子の部分木サイズ) 変わる
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: dp_v
+    difficulty: null
+    role: example
+    summary: 各頂点を含む連結な黒の塗り方の数。mod が素数でないので左右からの累積で1つ除いた積を作る
+    evidence: https://qiita.com/Series_205/items/7d2c57b45179006d0bc6
+  - id: abc348_e
+    difficulty: 1347
+    role: practice
+    summary: 重み付きの距離の和を最小にする頂点を求める
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: abc222_f
+    difficulty: 1934
+    role: practice
+    summary: 各頂点から、観光コストつきで最も遠い頂点までの値
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: abc160_f
+    difficulty: 2048
+    role: practice
+    summary: 各頂点を起点に番号を書き込む順の数（部分木のサイズの多項係数）を全頂点について求める
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: tdpc_tree
+    difficulty: null
+    role: practice
+    summary: 辺を連結なまま描く順番の数。すべての根について木 DP する（全方位でも書ける）
+    evidence: https://sigma425.hatenablog.com/entry/2016/08/02/214547
+- key: tree-dp-merge
+  title: データ構造をマージする木 DP（マージテク）
+  aliases:
+  - マージテク
+  - small-to-large
+  - Weighted-Union Heuristic
+  level: 黄
+  level_evidence: abc359_g (2099)・abc183_f (1586、Union-Find 上)。木の構造の手法としては 04 の担当
+  prerequisites:
+  - tree-dp
+  - small-to-large
+  acl: null
+  signs:
+  - 子の部分木の情報（map・集合・優先度付きキュー）を親にまとめたい
+  - N ≤ 2×10^5 で部分木ごとの集合
+  compare_with:
+  - tree-dp
+  - slope-trick
+  page: section-of:tree-dp
+  visual: 小さい集合を大きい集合に移す様子と、各要素が移る回数が log N 回以下になる理由の図
+  problems:
+  - id: abc359_g
+    difficulty: 2099
+    role: example
+    summary: 同じ色の頂点の組の距離の総和。部分木ごとの色の集計を小さい方から大きい方へ合わせる
+    evidence: https://drken1215.hatenablog.com/entry/2024/06/23/025552
+  - id: abc183_f
+    difficulty: 1586
+    role: practice
+    summary: クラスの合併と、クラス内の生徒の出身の集計。小さい方の map を大きい方へ移す
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/20/192100
+- key: insertion-dp
+  title: 挿入 DP（相対順序を持つ順列の DP）
+  aliases:
+  - 挿入DP
+  - 順列 DP
+  - 相対順位の DP
+  level: 黄
+  level_evidence: EDPC T と同型の abc209_f (2307)。発展は abc282_g (2412)・abc267_g (2561)・abc313_h (3008)
+  prerequisites:
+  - dp-state-design
+  - dp-prefix-sum
+  acl: null
+  signs:
+  - 順列で隣り合う大小関係（< と >）が指定される
+  - N ≤ 3000 程度の順列の数え上げ
+  - 値の大きい順（小さい順）に並べていく
+  compare_with:
+  - hakone-ekiden-dp
+  - connected-component-dp
+  page: own
+  visual: 不等号列 <>< に沿って、相対順位の表を1列ずつ埋める。新しい要素が入れる位置の範囲を帯で示し、累積和でまとめる
+  problems:
+  - id: dp_t
+    difficulty: null
+    role: example
+    summary: 隣り合う大小関係が指定された順列の数。最後の要素の相対順位を状態にし、累積和で O(N^2)
+    evidence: https://qiita.com/Series_205/items/7d2c57b45179006d0bc6
+  - id: abc209_f
+    difficulty: 2307
+    role: practice
+    summary: 木を切る順番でコストが最小になる順序の数。隣どうしの大小関係の列に言い換えて EDPC T と同じ形にする
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: tdpc_string
+    difficulty: null
+    role: practice
+    summary: 同じ文字が隣り合わない並べ方の数。文字を種類ごとに挿入し、隣り合う同じ文字の組の数を状態にする
+    evidence: https://sigma425.hatenablog.com/entry/2016/08/02/214547
+  - id: abc282_g
+    difficulty: 2412
+    role: practice
+    summary: 2つの順列で、隣り合う大小関係が一致する位置の数が K になる組。2つの相対順位を状態にする
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: abc267_g
+    difficulty: 2561
+    role: practice
+    summary: A_i < A_{i+1} がちょうど K 回の並べ方。値の小さい順に挿入して増える回数を数える
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/04/215500
+- key: hakone-ekiden-dp
+  title: 箱根駅伝 DP（未確定の数を持つ順列・マッチングの DP）
+  aliases:
+  - 箱根駅伝DP
+  - 箱根DP
+  level: 黄
+  level_evidence: abc309_g (2372)・abc134_f (2532)。ABC での出現は2問で、黄の上端〜発展
+  prerequisites:
+  - insertion-dp
+  - dp-state-design
+  acl: null
+  signs:
+  - 順列で |p_i − i| の和が K
+  - p_i が i の近く（i−1, i, i+1）にならない
+  - 左から見て相手が未定の要素の数
+  compare_with:
+  - insertion-dp
+  - inclusion-exclusion-dp
+  page: own
+  visual: 位置（上段）と値（下段）を2列に並べ、左から順に線を結ぶ。結ばれていない端の数を状態として表示するステップ送り
+  problems:
+  - id: abc134_f
+    difficulty: 2532
+    role: example
+    summary: '|p_i − i| の和がちょうど K の順列の数。左から見て相手が未定の組の数を状態にする'
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/25/220600
+  - id: abc309_g
+    difficulty: 2372
+    role: practice
+    summary: '|p_i − i| ≥ X の順列の数。包除原理で「違反する位置」を選び、近い位置の使用状況を bit で持つ'
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+- key: connected-component-dp
+  title: 連結成分 DP
+  aliases:
+  - Connected Component DP
+  - 連結 DP
+  level: 発展
+  level_evidence: ABC での出題は確認できなかった。USACO Guide の Additional DP Optimizations and Techniques（CSES Permutations II など）で扱われる
+  prerequisites:
+  - insertion-dp
+  acl: null
+  signs:
+  - 順列で隣り合う要素の差・大小に条件（N ≤ 100〜5000）
+  - 値の小さい順に置き、ブロックをつなげていく
+  compare_with:
+  - insertion-dp
+  - hakone-ekiden-dp
+  page: overview
+  visual: 値の小さい順に要素を置き、新しいブロックを作る・端に付ける・2つをつなぐ、の3遷移を図で示す
+  problems: []
+- key: probability-dp
+  title: 確率 DP
+  aliases:
+  - 確率DP
+  level: 水
+  level_evidence: abc360_e (1249)・abc323_e (1279)・abc298_e (1300)・abc300_e (1354) と水に集中
+  prerequisites:
+  - dp-push-pull
+  - probability-basics
+  - modint-rational
+  acl: atcoder::modint998244353（確率を mod で表す場合）
+  signs:
+  - 確率を求めよ（mod 998244353 で出力）
+  - ランダムに選ぶ操作を K 回
+  - サイコロを振って進む
+  compare_with:
+  - expected-value-dp
+  - linearity-of-expectation
+  page: own
+  visual: 状態の列に確率の量を水のように配り、各ステップで分かれて流れる様子をステップ送り
+  problems:
+  - id: dp_i
+    difficulty: null
+    role: example
+    summary: N 枚のコインを投げて表が多くなる確率。投げた枚数と表の枚数を状態にする
+    evidence: https://qiita.com/drken/items/03c7db44ccd27820ea0d
+  - id: abc323_e
+    difficulty: 1279
+    role: example
+    summary: シャッフル再生で時刻 X+0.5 に曲1が流れている確率。各時刻に曲が始まる確率を配る
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/14/113816
+  - id: abc360_e
+    difficulty: 1249
+    role: practice
+    summary: ランダムな交換を K 回したあとの黒玉の位置の期待値。位置1にあるかどうかの2状態にまとめる
+    evidence: https://atcoder-tags.herokuapp.com/tags/Dynamic-Programming/Probability-DP
+  - id: abc300_e
+    difficulty: 1354
+    role: practice
+    summary: サイコロを振って積が N になる確率。到達しうる値（2,3,5 の積）をメモ化して求める
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/03/212600
+  - id: tdpc_dice
+    difficulty: null
+    role: practice
+    summary: N 回振った出目の積が D の倍数になる確率。2,3,5 の指数（上限で打ち切る）を状態にする
+    evidence: https://sigma425.hatenablog.com/entry/2016/08/02/214547
+  - id: tdpc_tournament
+    difficulty: null
+    role: practice
+    summary: トーナメントで各人が優勝する確率。各ラウンドで勝ち残る確率を山ごとに計算する
+    evidence: https://sigma425.hatenablog.com/entry/2016/08/02/214547
+  - id: abc310_f
+    difficulty: 1938
+    role: practice
+    summary: N 個のサイコロの出目から和 10 を作れる確率。作れる和（10 以下）の集合を bit で持つ確率 DP
+    evidence: https://atcoder-tags.herokuapp.com/tags/Dynamic-Programming/Probability-DP
+- key: expected-value-dp
+  title: 期待値 DP
+  aliases:
+  - 期待値DP
+  level: 水
+  level_evidence: abc266_e (1227)・abc280_e (1251)・abc184_d (1276)・abc326_e (1363)・abc350_e (1385) と水に集中。自己ループや閉路の処理が要るものは abc263_e (1659)・abc314_e (1722)・abc333_f (1770) と青、abc342_f (2141)・abc189_f (2154) は黄
+  prerequisites:
+  - probability-dp
+  - dp-order
+  - modint-rational
+  acl: atcoder::modint998244353
+  signs:
+  - 期待値を求めよ
+  - 終わるまでの回数の期待値
+  - 最適に行動したときの期待値
+  - 止めるか続けるかを選ぶ
+  compare_with:
+  - probability-dp
+  - linearity-of-expectation
+  - dp-with-cycles
+  page: own
+  visual: ゴールから逆向きに期待値を埋める表のステップ送り。自己ループの矢印を描き、式を移項する様子を並べる
+  problems:
+  - id: dp_j
+    difficulty: null
+    role: example
+    summary: 皿の寿司がなくなるまでの回数の期待値。残り1個・2個・3個の皿の数を状態にし、自己ループを移項する
+    evidence: https://qiita.com/drken/items/03c7db44ccd27820ea0d
+  - id: abc280_e
+    difficulty: 1251
+    role: example
+    summary: 体力 N のモンスターを倒すまでの攻撃回数の期待値。残り体力を状態に後ろから計算する
+    evidence: https://drken1215.hatenablog.com/entry/2022/12/07/113800
+  - id: abc184_d
+    difficulty: 1276
+    role: practice
+    summary: 金銀銅の硬貨がどれか100枚になるまでの回数の期待値。3つの枚数を状態にする
+    evidence: https://drken1215.hatenablog.com/entry/2020/11/23/010500
+  - id: abc266_e
+    difficulty: 1227
+    role: practice
+    summary: サイコロを最大 N 回振り、止めるか振り直すかを選ぶときの出目の期待値の最大
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/266/E
+  - id: abc350_e
+    difficulty: 1385
+    role: practice
+    summary: 2種類の操作で N を 0 にする費用の期待値の最小。出目1の自己ループを移項し、メモ化再帰で到達する値だけ計算する
+    evidence: https://inamori.hateblo.jp/entry/2024/04/22/082456
+  - id: abc263_e
+    difficulty: 1659
+    role: practice
+    summary: 0 が出ると進まないすごろくのゴールまでの期待値。自己ループを解き、後ろからの累積和で高速化する
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/263/E
+  - id: abc189_f
+    difficulty: 2154
+    role: practice
+    summary: 振り出しに戻るマスがあるすごろく。振り出しの期待値を x と置き、二分探索（または一次式）で解く
+    evidence: https://kmjp.hatenablog.jp/entry/2021/01/23/0900
+- key: dp-with-cycles
+  title: 依存関係に閉路がある DP（自己ループ・連立方程式・二分探索）
+  aliases:
+  - 自己ループ
+  - 期待値の連立方程式
+  level: 青
+  level_evidence: 自己ループの移項は abc350_e (1385)・abc263_e (1659)・abc314_e (1722)、閉路を一次式や二分探索で解くのは abc333_f (1770)・abc189_f (2154)
+  prerequisites:
+  - expected-value-dp
+  acl: null
+  signs:
+  - 振り出しに戻る
+  - 何も起きないことがある（確率 p で同じ状態に残る）
+  - 円環上を回る
+  compare_with:
+  - expected-value-dp
+  - gaussian-elimination
+  - game-dp
+  page: section-of:expected-value-dp
+  visual: 状態のグラフに自己ループと戻る辺を描き、未知数を置いて一次式で表す流れを示す
+  problems:
+  - id: abc314_e
+    difficulty: 1722
+    role: example
+    summary: ルーレットを選んで回し M 点に達するまでの費用の期待値の最小。0 点の目の自己ループを移項する
+    evidence: https://atcoder-tags.herokuapp.com/tags/Dynamic-Programming/Expected-Value-DP
+  - id: abc333_f
+    difficulty: 1770
+    role: practice
+    summary: 列の先頭が確率 1/2 で抜けるか後ろへ回る。人数と位置の確率 DP を、1巡して戻る自己ループを移項して解く
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2023/1216_abc333
+  - id: abc189_f
+    difficulty: 2154
+    role: practice
+    summary: 振り出しに戻るすごろく。振り出しの期待値を未知数として解く
+    evidence: https://kmjp.hatenablog.jp/entry/2021/01/23/0900
+- key: game-dp
+  title: ゲーム DP（勝敗・得点差の DP）
+  aliases:
+  - ゲームDP
+  - minimax
+  - 後退解析
+  level: 水
+  level_evidence: abc354_e (1223)・abc270_d (1300)・abc201_d (1317)・abc278_f (1452)・abc349_e (1464)・arc085_b (1550) と水に集中。閉路のあるグラフの後退解析は abc209_e (2153)・abc261_h (2531)
+  prerequisites:
+  - dp-order
+  - memoized-recursion
+  acl: null
+  signs:
+  - 2人が交互に最適に行動する
+  - 先手が勝つか
+  - 得点の差・先手の得点の最大
+  - N が小さく状態が列挙できる
+  compare_with:
+  - grundy-number
+  - interval-dp
+  - bit-dp
+  page: own
+  visual: 状態のグラフを終局から逆に塗る（勝ち＝緑・負け＝赤）ステップ送り。得点差の値を「自分の得 − 相手の値」で伝える図
+  problems:
+  - id: dp_k
+    difficulty: null
+    role: example
+    summary: 山から決まった個数を取るゲームの勝敗。残りの石の数ごとに勝ちか負けかを決める
+    evidence: https://qiita.com/drken/items/4e1bcf8413af16cb62da
+  - id: dp_l
+    difficulty: null
+    role: example
+    summary: 列の両端から取り合うゲームの得点差。残った区間を状態にする
+    evidence: https://qiita.com/drken/items/4e1bcf8413af16cb62da
+  - id: abc201_d
+    difficulty: 1317
+    role: practice
+    summary: グリッドを右か下へ進むゲームの得点差。ゴール側から各マスの最善の差を求める
+    evidence: https://drken1215.hatenablog.com/entry/2023/07/21/235300
+  - id: abc270_d
+    difficulty: 1300
+    role: practice
+    summary: 決まった個数から取るゲームで先手が取れる石の最大
+    evidence: https://drken1215.hatenablog.com/entry/2023/07/22/020725
+  - id: abc354_e
+    difficulty: 1223
+    role: practice
+    summary: カードの組を取り除くゲームの勝敗（残ったカードの集合で bitDP）
+    evidence: https://drken1215.hatenablog.com/entry/2024/05/19/011051
+  - id: typical90_ae
+    difficulty: null
+    role: practice
+    summary: 2種類の石の山のゲーム。各山の Grundy 数を DP で求めて xor する
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/editorial/031.jpg
+  - id: abc209_e
+    difficulty: 2153
+    role: practice
+    summary: しりとりの勝敗。閉路があるので負けが確定した状態から逆向きに確定させる（後退解析）
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+- key: dp-speedup-overview
+  title: DP の高速化の全体像（遷移の形から道具を選ぶ）
+  aliases:
+  - DP高速化
+  - DP 最適化
+  level: 水
+  level_evidence: 累積和での高速化が abc179_d (1251)・abc183_e (1288) から必要になり、以後の高速化はすべて「遷移の形を見て道具を当てる」同じ考え方で整理できる（横断の入口ページ）
+  prerequisites:
+  - dp-state-design
+  - dp-push-pull
+  acl: null
+  signs:
+  - 素直な DP の計算量が 1 桁〜2 桁足りない
+  - 遷移元が区間・一次関数・単調な範囲
+  compare_with:
+  - dp-prefix-sum
+  - dp-segment-tree
+  - inline-dp
+  - cht
+  - monge
+  page: own
+  visual: 「遷移の形 → 道具」の早見表（区間和→累積和、区間 min→セグ木・スライド最小値、全体に一律の操作→遅延セグ木、一次関数の min→CHT、最適な遷移元が単調→分割統治、線形で同じ遷移の繰り返し→行列累乗）
+  problems: []
+- key: dp-prefix-sum
+  title: 累積和・いもす法による遷移の高速化
+  aliases:
+  - 累積和DP
+  - いもす法 DP
+  level: 水
+  level_evidence: abc222_d (865)・abc178_d (875)・abc253_e (1073) の緑から現れ、abc179_d (1251)・abc183_e (1288) で典型化。応用は abc130_e (1676)・abc207_e (1820)・abc311_f (1984)・abc132_f (2143)・abc265_f (2290)
+  prerequisites:
+  - dp-push-pull
+  - prefix-sum
+  - imos
+  acl: null
+  signs:
+  - 遷移元（遷移先）が連続した範囲
+  - dp[i] = Σ_{j=i−R}^{i−L} dp[j]
+  - 素直に書くと O(N·K·K) でちょうど1つ多い
+  compare_with:
+  - dp-segment-tree
+  - inline-dp
+  - dp-sliding-window
+  page: own
+  visual: dp 配列の下に累積和の配列を並べ、区間の和が2つの値の差で取れる様子を示すステップ送り
+  problems:
+  - id: dp_m
+    difficulty: null
+    role: example
+    summary: 子どもに飴を上限つきで配る方法の数。直前の段の累積和で区間からの遷移を O(1) にする
+    evidence: https://qiita.com/Series_205/items/618b6ad1a22e7401a606
+  - id: abc179_d
+    difficulty: 1251
+    role: example
+    summary: いくつかの区間に含まれる歩幅でマス N まで進む方法の数。区間ごとに累積和を引く
+    evidence: https://drken1215.hatenablog.com/entry/2020/09/20/081800
+  - id: typical90_ap
+    difficulty: null
+    role: practice
+    summary: 各桁の和が K になる 9 の倍数の数。直前 9 項の和を累積和で取る
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/editorial/042.jpg
+  - id: abc178_d
+    difficulty: 875
+    role: practice
+    summary: 各項が 3 以上で和が S の数列の数。累積和で遷移をまとめる
+    evidence: https://drken1215.hatenablog.com/entry/2020/10/11/211000
+  - id: abc183_e
+    difficulty: 1288
+    role: practice
+    summary: クイーンの動きでゴールまでの経路数。縦・横・斜めの3方向の累積を持つ
+    evidence: https://drken1215.hatenablog.com/entry/2020/11/16/204900
+  - id: abc207_e
+    difficulty: 1820
+    role: practice
+    summary: 区切り方の数。区間の番号ごとに余りの累積を持つ
+    evidence: https://drken1215.hatenablog.com/entry/2024/05/21/013749
+  - id: tdpc_semiexp
+    difficulty: null
+    role: practice
+    summary: 準急の停車駅の選び方。直近の連続停車の制約を累積和（と余事象）で処理する
+    evidence: https://sigma425.hatenablog.com/entry/2016/08/02/214547
+  - id: abc265_f
+    difficulty: 2290
+    role: practice
+    summary: 2点からのマンハッタン距離がともに D 以下の点の数。斜め方向の累積和で遷移する
+    evidence: https://drken1215.hatenablog.com/entry/2023/07/15/021500
+- key: dp-segment-tree
+  title: セグ木・BIT による遷移の高速化
+  aliases:
+  - セグ木DP
+  - BIT DP
+  level: 青
+  level_evidence: abc353_g (1765)・arc026_3 (1930)・典型90 037 (★5)・EDPC Q。kmjp の ABC G の解説でもセグ木を使う DP は 2000 前後に多い（abc410_g 2242 など）
+  prerequisites:
+  - dp-prefix-sum
+  - segment-tree
+  - coordinate-compression
+  acl: atcoder::segtree / atcoder::fenwick_tree
+  signs:
+  - 遷移元が添字や値の範囲の min・max
+  - '|x − y| を含む遷移（x<y と x>y に分ける）'
+  - 値で並べた LIS 型の遷移
+  compare_with:
+  - dp-prefix-sum
+  - inline-dp
+  - dp-sliding-window
+  - cht
+  page: own
+  visual: dp 配列をセグ木の葉に並べ、遷移のたびに区間の最大値を取って1点更新するステップ送り
+  problems:
+  - id: dp_q
+    difficulty: null
+    role: example
+    summary: 花の高さを添字にしたセグ木で、低い花からの美しさの最大を取る
+    evidence: https://qiita.com/Series_205/items/6bad5c32a1fce8dc2914
+  - id: typical90_ak
+    difficulty: null
+    role: example
+    summary: 材料の量に範囲がある料理の価値の最大。前の段の区間の最大値をセグ木で取る
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/editorial/037.jpg
+  - id: abc353_g
+    difficulty: 1765
+    role: practice
+    summary: 町を移動しながら市場に参加する利益の最大。|x−y| の費用を左右に分けて2本のセグ木で持つ
+    evidence: https://drken1215.hatenablog.com/entry/2024/05/13/234955
+  - id: arc026_3
+    difficulty: 1930
+    role: practice
+    summary: 区間を照らす蛍光灯を選んで全体を覆う費用の最小。右端までの最小をセグ木で取る
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/21/104733
+  - id: abc410_g
+    difficulty: 2242
+    role: practice
+    summary: 円上の弦を交差しないように最大個数残す。区間の入れ子の深さをセグ木の区間最大値で求める
+    evidence: https://kmjp.hatenablog.jp/entry/2025/06/14/0930
+- key: inline-dp
+  title: インライン DP（DP 配列を使い回して一括更新する）
+  aliases:
+  - in-place DP
+  - インラインDP
+  level: 青
+  level_evidence: abc271_e (1402)・abc372_f (1722)・abc203_e (1750)・abc353_g (1765)・abc038_d (1804)。EDPC W は遅延セグ木で一括更新する典型
+  prerequisites:
+  - dp-rolling-array
+  - dp-segment-tree
+  - lazy-segment-tree
+  acl: atcoder::lazy_segtree
+  signs:
+  - dp[i][*] から dp[i+1][*] で変わる場所が少ない
+  - 全体に一律の加算・シフトが入る
+  - 区間の右端で区間加算
+  compare_with:
+  - dp-rolling-array
+  - dp-segment-tree
+  page: own
+  visual: 2次元の表を描いたあと、各行で変わるセルだけを色付けし、1本の配列（セグ木）を上書きしていく様子に置き換えるステップ送り
+  problems:
+  - id: dp_w
+    difficulty: null
+    role: example
+    summary: 区間ごとの得点の最大。最後に 1 を置いた位置を添字にし、区間の右端で遅延セグ木の区間加算をする
+    evidence: https://qiita.com/Series_205/items/7d2c57b45179006d0bc6
+  - id: abc271_e
+    difficulty: 1402
+    role: example
+    summary: 辺の番号の部分列に沿って進む最短路。辺を列の順に1本ずつ緩和する（配列を作り直さない）
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: abc203_e
+    difficulty: 1750
+    role: practice
+    summary: 白いポーンが到達できる列の集合。黒いポーンのある行だけ更新する
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: abc372_f
+    difficulty: 1722
+    role: practice
+    summary: 円環と追加の辺を K 回たどる方法の数。全体のシフトを添字のずらしで表し、追加辺の端だけ更新する
+    evidence: https://drken1215.hatenablog.com/entry/2024/09/22/030233
+  - id: tdpc_target
+    difficulty: null
+    role: practice
+    summary: LIS の配列を1本だけ持って上書きしていく
+    evidence: https://www.mathenachia.blog/dp/
+- key: dp-sliding-window
+  title: スライド最小値・単調スタックによる遷移の高速化
+  aliases:
+  - スライド最小値
+  - deque DP
+  - 単調スタック DP
+  level: 青
+  level_evidence: abc359_e (1275、スタック)・abc334_f (1813)・abc325_f (1769)。個数制限付きナップサックへの応用は発展側（abc269_g 2440 など）
+  prerequisites:
+  - dp-segment-tree
+  - sliding-window-minimum
+  - monotonic-stack
+  acl: null
+  signs:
+  - 遷移元が「直近 K 個」の窓の min・max
+  - 窓が単調に右へ動く
+  compare_with:
+  - dp-segment-tree
+  - knapsack-bounded
+  page: section-of:dp-segment-tree
+  visual: deque の中身（候補の添字）を窓の移動に合わせて出し入れするステップ送り
+  problems:
+  - id: abc334_f
+    difficulty: 1813
+    role: example
+    summary: サンタが袋の容量 K で家を順に回る最短距離。直近 K 軒からの遷移の最小を取る
+    evidence: https://atcoder-tags.herokuapp.com/tags/Dynamic-Programming/Inline-DP
+  - id: abc359_e
+    difficulty: 1275
+    role: practice
+    summary: 水槽に水が溜まる時刻。手前の高い仕切りまでの値をスタックで求めて遷移する
+    evidence: https://drken1215.hatenablog.com/entry/2024/11/04/011552
+- key: dp-bitset
+  title: bitset による DP の高速化
+  aliases:
+  - bitset DP
+  - ビット並列
+  level: 黄
+  level_evidence: arc070_b (2015)・agc020_c (2259)・abc221_g (2914)。abc147_e (1713) は bitset で書けるが普通の bool の DP でも通る
+  prerequisites:
+  - subset-sum
+  - bit-operations
+  acl: null
+  signs:
+  - 可否だけを持つ DP（bool）で状態数が 10^8〜10^9
+  - 部分和・到達可能性
+  compare_with:
+  - subset-sum
+  - bitset
+  page: section-of:subset-sum
+  visual: bool の配列を 64 個ずつ1語に詰め、シフトと OR で一度に更新する図
+  problems:
+  - id: abc147_e
+    difficulty: 1713
+    role: example
+    summary: グリッドの各マスで、赤と青の差として取り得る値の集合を持つ（bitset で集合を表せる）
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: agc020_c
+    difficulty: 2259
+    role: practice
+    summary: 部分和の中央値。部分和の可否を bitset のシフトで求める
+    evidence: https://drken1215.hatenablog.com/entry/2019/04/03/224800
+  - id: typical90_bg
+    difficulty: null
+    role: practice
+    summary: DAG の到達可能性のクエリを 64 個ずつまとめて bit 並列の DP で答える
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/editorial/059-01.jpg
+- key: dp-matrix-power
+  title: 行列累乗による DP の高速化
+  aliases:
+  - 行列累乗
+  - 遷移行列
+  level: 黄
+  level_evidence: abc305_g (1989)・abc204_f (2044)・abc199_f (2065)・abc009_4 (2213)・abc256_g (2250)。発展は abc129_f (2621)
+  prerequisites:
+  - dp-state-design
+  - matrix-power
+  acl: null
+  signs:
+  - ステップ数が 10^18 など巨大で、状態数が小さい（≤ 100 程度）
+  - 毎回同じ線形の遷移
+  - グリッドの幅が小さく長さが巨大
+  compare_with:
+  - dp-doubling
+  - kitamasa
+  - broken-profile-dp
+  page: own
+  visual: dp のベクトルに遷移行列を掛ける図と、行列を2乗していく繰り返し二乗の図
+  problems:
+  - id: dp_r
+    difficulty: null
+    role: example
+    summary: 有向グラフで長さ K の経路の数。隣接行列の K 乗
+    evidence: https://qiita.com/Series_205/items/6bad5c32a1fce8dc2914
+  - id: abc204_f
+    difficulty: 2044
+    role: practice
+    summary: 幅 H ≤ 6・長さ 10^12 の敷き詰め。列のはみ出しを bit で持つ状態を行列にして累乗する
+    evidence: https://kmjp.hatenablog.jp/entry/2021/06/06/1000
+  - id: abc305_g
+    difficulty: 1989
+    role: practice
+    summary: 禁止文字列を含まない長さ 10^18 の文字列の数。照合状態の遷移を行列累乗する
+    evidence: https://atcoder-tags.herokuapp.com/tags/Dynamic-Programming/Matrix-Power
+  - id: abc256_g
+    difficulty: 2250
+    role: practice
+    summary: 多角形の辺に石を置く塗り方の数。頂点の色を状態にした遷移行列を累乗する
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/04/181400
+  - id: tdpc_house
+    difficulty: null
+    role: practice
+    summary: 各階の移動を bitDP で数え、階をまたぐ遷移を行列累乗する
+    evidence: https://sigma425.hatenablog.com/entry/2016/08/02/214547
+  - id: abc009_4
+    difficulty: 2213
+    role: practice
+    summary: AND と XOR で定義された漸化式。AND と XOR の組の上で行列累乗する
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/05/102300
+- key: dp-doubling
+  title: ダブリングによる DP の高速化
+  aliases:
+  - ダブリング DP
+  level: 黄
+  level_evidence: 典型90 005 (★7)：桁を倍々に伸ばす遷移の合成で 10^18 桁を扱う
+  prerequisites:
+  - dp-matrix-power
+  - doubling
+  acl: null
+  signs:
+  - N ≤ 10^18 で遷移を合成できる
+  - 行列にすると大きいが、合成は別の形で速い
+  compare_with:
+  - dp-matrix-power
+  - doubling
+  page: section-of:dp-matrix-power
+  visual: 長さ 1, 2, 4, 8 … の遷移を前計算して、N を2進で分解して組み立てる図
+  problems:
+  - id: typical90_e
+    difficulty: null
+    role: example
+    summary: 使える数字が決まった N 桁の数で B の倍数の個数。桁数を倍にする遷移の合成（ダブリング）で求める
+    evidence: https://drken1215.hatenablog.com/entry/2021/10/08/231200
+- key: dynamic-dp
+  title: 動的 DP（セグ木に遷移を載せる）
+  aliases:
+  - 動的DP
+  - Dynamic DP
+  level: 発展
+  level_evidence: abc246_h (2677)：部分列の数え上げ DP の遷移を行列にしてセグ木に載せ、1文字の書き換えクエリに答える
+  prerequisites:
+  - dp-matrix-power
+  - segment-tree
+  acl: atcoder::segtree（S に行列を載せる）
+  signs:
+  - DP をする列に1点更新のクエリが来る
+  - 遷移が行列（max-plus を含む）で書ける
+  compare_with:
+  - dp-matrix-power
+  - dp-segment-tree
+  page: overview
+  visual: 各位置の遷移行列を葉に置き、区間の行列の積を上へ集めるセグ木の図
+  problems:
+  - id: abc246_h
+    difficulty: 2677
+    role: example
+    summary: 0・1・? の文字列の異なる部分列の数を、1文字更新のたびに答える
+    evidence: https://kmjp.hatenablog.jp/entry/2022/04/04/0930
+- key: inclusion-exclusion-dp
+  title: 包除原理と DP（最初に違反する場所で分ける）
+  aliases:
+  - 包除DP
+  - 障害物 DP
+  level: 黄
+  level_evidence: EDPC Y が典型。ABC では abc309_g (2372) など黄の上端、arc115_e (2363)・arc101_c (2913)
+  prerequisites:
+  - dp-basics
+  - inclusion-exclusion
+  - binomial-coefficient
+  acl: null
+  signs:
+  - H, W ≤ 10^5 のグリッドで障害物が N ≤ 3000 個
+  - 違反を1つも含まない数え上げ
+  - 「ちょうど」より「少なくとも」が数えやすい
+  compare_with:
+  - dp-grid
+  - inclusion-exclusion
+  - dp-counting-dedup
+  page: own
+  visual: 障害物を通る経路を「最初に通る障害物」で分類して色分けし、全体から引く図
+  problems:
+  - id: dp_y
+    difficulty: null
+    role: example
+    summary: 大きなグリッドで壁を避ける経路の数。壁をソートし、最初に通る壁で分けて引く
+    evidence: https://qiita.com/Series_205/items/05bd22a4e78527cb29dc
+  - id: abc309_g
+    difficulty: 2372
+    role: practice
+    summary: '|p_i − i| ≥ X の順列の数。違反する位置の集合で包除し、近くの使用状況を DP で持つ'
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: arc115_e
+    difficulty: 2363
+    role: practice
+    summary: 隣り合う値が異なる数列の数。「等しい」を区間にまとめて包除し、スタックで高速化する
+    evidence: https://drken1215.hatenablog.com/entry/2021/03/21/235000_1
+- key: dp-cyclic
+  title: 環状の列の DP（最初の状態を固定する）
+  aliases:
+  - 円環 DP
+  - 環状 DP
+  level: 水
+  level_evidence: abc251_e (1227)・abc307_e (1240)
+  prerequisites:
+  - dp-state-design
+  acl: null
+  signs:
+  - 円形に並んでいる（最後と最初が隣り合う）
+  - N 番目と 1 番目の間にも条件
+  compare_with:
+  - dp-state-design
+  page: section-of:dp-state-design
+  visual: 円を1か所で切って列にし、最初の要素の状態ごとに DP を2回回す図
+  problems:
+  - id: abc307_e
+    difficulty: 1240
+    role: example
+    summary: 円形に並ぶ人に隣と異なる整数を配る方法の数。最初の人と同じ値かどうかを状態にする
+    evidence: https://drken1215.hatenablog.com/entry/2024/06/10/024932
+  - id: abc251_e
+    difficulty: 1227
+    role: practice
+    summary: 円形に並ぶ動物に餌を配る費用の最小。最初の行動を選ぶか否かで2回 DP する
+    evidence: https://atcoder-tags.herokuapp.com/tags/Dynamic-Programming/Simple-DP
+- key: dp-map-sparse
+  title: 到達する状態だけを持つ DP（map・メモ化）
+  aliases:
+  - map DP
+  - 疎な DP
+  level: 青
+  level_evidence: abc300_e (1354)・abc350_e (1385) はメモ化で到達する値だけを計算し、abc208_e (2024) は桁の積を map に持つ
+  prerequisites:
+  - memoized-recursion
+  - dp-state-design
+  acl: null
+  signs:
+  - 値の範囲は巨大だが到達する値は少ない（N/k の形・2,3,5 の積など）
+  - N ≤ 10^18 で割り算を繰り返す
+  compare_with:
+  - memoized-recursion
+  - digit-dp-advanced
+  page: section-of:memoized-recursion
+  visual: 到達する状態だけをノードにした木（N → N/2, N/3, …）を描き、重複がまとまる様子を見せる
+  problems:
+  - id: abc300_e
+    difficulty: 1354
+    role: example
+    summary: 積が N になる確率。到達する値（2,3,5 の積）だけをメモ化する
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/03/212600
+  - id: abc350_e
+    difficulty: 1385
+    role: practice
+    summary: N を 0 にする費用の期待値。⌊N/k⌋ の形の値だけをメモ化再帰で計算する
+    evidence: https://inamori.hateblo.jp/entry/2024/04/22/082456
+  - id: abc208_e
+    difficulty: 2024
+    role: practice
+    summary: 桁の積が K 以下の数の個数。桁の積を map で持つ桁 DP
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+- key: dp-convolution
+  title: 畳み込み（FFT・NTT）で DP を高速化する
+  aliases:
+  - FFT DP
+  - 分割統治 FFT
+  level: 発展
+  level_evidence: abc212_h (2741)・abc318_h (2785)・abc213_h (2806)・abc281_h (3180)。畳み込みそのものは 06 の担当
+  prerequisites:
+  - convolution
+  acl: atcoder::convolution
+  signs:
+  - 遷移が「和が s になる組の数」の形（多項式の積）
+  - dp の値が前の値すべてに依存し、その形が畳み込み（オンライン → 分割統治 FFT）
+  compare_with:
+  - dp-prefix-sum
+  - convolution
+  page: overview
+  visual: 2つの dp 配列を多項式の係数とみて掛ける図
+  problems:
+  - id: abc213_h
+    difficulty: 2806
+    role: example
+    summary: 辺ごとに時間の分布がある散歩の数。dp が自分より前の値の畳み込みになるので分割統治 FFT で求める
+    evidence: https://drken1215.hatenablog.com/entry/2021/08/14/184730
+- key: cht
+  title: Convex Hull Trick（CHT）
+  aliases:
+  - CHT
+  - Convex Hull Trick
+  - 傾き最適化
+  - 斜率优化
+  level: 発展
+  level_evidence: ABC で CHT が想定解・主要解の問題は 2019〜2026 年の ABC F/G/Ex で abc289_g (2109)・abc228_h (2729) の2問（kmjp の解説 425 本と AtCoder Tags で確認）。黄に1問あるが頻度が低く、EDPC Z が定番の練習
+  prerequisites:
+  - dp-speedup-overview
+  - dp-segment-tree
+  - convex-hull
+  acl: null
+  signs:
+  - dp[j] = min_i (dp[i] + a_i × x_j + b_i) の形（i と j の積の項が1つ）
+  - N ≤ 2×10^5 で O(N^2) の DP
+  - (h_i − h_j)^2 のような2乗のコスト
+  compare_with:
+  - li-chao-tree
+  - monotone-minima
+  - dp-segment-tree
+  page: own
+  visual: 遷移元ごとの直線を平面に描き、下側の包絡線（下に凸な折れ線）だけが答えになることと、不要な直線が消える様子をステップ送り
+  problems:
+  - id: dp_z
+    difficulty: null
+    role: example
+    summary: 高さの差の2乗＋定数のコストで跳ぶカエルの最小コスト。遷移を直線の最小値として CHT で求める
+    evidence: https://qiita.com/Series_205/items/05bd22a4e78527cb29dc
+  - id: abc289_g
+    difficulty: 2109
+    role: practice
+    summary: 各商品の価格を決めて売上を最大化。買う人数ごとの売上が価格の一次関数になるので CHT で最大を取る
+    evidence: https://kmjp.hatenablog.jp/entry/2023/02/11/0900
+  - id: abc228_h
+    difficulty: 2729
+    role: practice
+    summary: 値を揃えるコストと種類数のコストの和の最小。ソート後の DP の遷移が一次関数の最小になる
+    evidence: https://kmjp.hatenablog.jp/entry/2021/11/22/0930
+  - id: colopl2018_final_c
+    difficulty: null
+    role: practice
+    summary: 各地点での (i − j)^2 + a_j の最小値。直線（放物線の差）の最小値として CHT で求める
+    evidence: https://drken1215.hatenablog.com/entry/2018/09/18/014400
+- key: li-chao-tree
+  title: Li Chao Tree
+  aliases:
+  - Li Chao Tree
+  - 李超线段树
+  level: 発展
+  level_evidence: ABC で Li Chao Tree が必須の問題は確認できなかった。abc244_h (2878) は直線（点）の追加と最大値クエリで、Li Chao Tree・動的 CHT でも、kmjp のように区間ごとの凸包でも解ける
+  prerequisites:
+  - cht
+  - segment-tree
+  acl: null
+  signs:
+  - 直線（線分）を追加しながら任意の x で min・max を問う
+  - 傾きもクエリも単調でない CHT
+  compare_with:
+  - cht
+  - dp-segment-tree
+  page: section-of:cht
+  visual: 区間の真ん中で勝つ直線をノードに置き、負けた直線を半分の区間へ押し下げるステップ送り
+  problems:
+  - id: abc244_h
+    difficulty: 2878
+    role: example
+    summary: 点を追加しながら、与えられたベクトルとの内積の最大を答える（直線の追加と最大値クエリ）
+    evidence: https://kmjp.hatenablog.jp/entry/2022/03/22/0930
+- key: monge
+  title: Monge 性と DP
+  aliases:
+  - Monge
+  - 四角不等式
+  - Quadrangle Inequality
+  - 四边形不等式
+  level: 発展
+  level_evidence: Monge 性（最適な遷移元の単調性）を使う ABC は abc348_g (2559)・abc355_g (2991) など G/Ex のみ（kmjp の解説で monotone minima を使用）
+  prerequisites:
+  - dp-sequence-partition
+  - dp-speedup-overview
+  acl: null
+  signs:
+  - 区間分割 DP で cost(l, r) が「区間が広がるほど増え方が大きい」
+  - 最適な区切り位置が右へ単調に動きそう
+  - K 個に分ける・ちょうど K 個選ぶ
+  compare_with:
+  - monotone-minima
+  - knuth-yao
+  - alien-dp
+  - cht
+  page: own
+  visual: コスト行列を色で塗り、各行の最小値の位置が右下へ単調に並ぶこと（totally monotone）を示す図
+  problems:
+  - id: abc355_g
+    difficulty: 2991
+    role: example
+    summary: K 個の位置を選んで期待されるコストを最小化。区間のコストが Monge なので monotone minima と Alien DP を組み合わせる
+    evidence: https://kmjp.hatenablog.jp/entry/2024/06/05/0900
+  - id: codequeen2023_final_e
+    difficulty: null
+    role: practice
+    summary: 列の区切り方の DP で、区間のコストの Monge 性を使って高速化する
+    evidence: https://drken1215.hatenablog.com/entry/2023/09/04/214120
+- key: monotone-minima
+  title: 分割統治 DP（monotone minima）
+  aliases:
+  - 分割統治DP
+  - Divide and Conquer DP
+  - monotone minima
+  level: 発展
+  level_evidence: abc348_g (2559)：凸な列どうしの合成を分割統治で行う。arc067_d (2729) は USACO Guide の Divide & Conquer DP の問題
+  prerequisites:
+  - monge
+  - divide-and-conquer
+  acl: null
+  signs:
+  - dp[k][j] = min_i (dp[k−1][i] + cost(i, j)) で最適な i が j について単調
+  - N ≤ 10^5・K ≤ 数十の分割 DP
+  compare_with:
+  - monge
+  - knuth-yao
+  - cht
+  page: section-of:monge
+  visual: 真ん中の列の最適位置を求めると、左半分・右半分の探索範囲が狭まる様子の再帰図
+  problems:
+  - id: abc348_g
+    difficulty: 2559
+    role: example
+    summary: B の昇順に並べ、k 個選ぶときの A の和の最大から B を引いた値をすべての k について求める（分割統治）
+    evidence: https://kmjp.hatenablog.jp/entry/2024/04/08/0930
+  - id: arc067_d
+    difficulty: 2729
+    role: practice
+    summary: 焼肉店を巡る最適な区間の選び方。最適な左端の単調性を使う
+    evidence: https://usaco.guide/plat/DC-DP
+- key: smawk-larsch
+  title: SMAWK・LARSCH
+  aliases:
+  - SMAWK
+  - LARSCH
+  level: 発展
+  level_evidence: ABC で必須の問題は確認できなかった（OI Wiki の四辺形不等式の頁は LARSCH の簡略版を扱う）
+  prerequisites:
+  - monotone-minima
+  acl: null
+  signs:
+  - monotone minima の log を落としたい（O(N)）
+  - オンラインで決まる Monge な DP（LARSCH）
+  compare_with:
+  - monotone-minima
+  page: section-of:monge
+  visual: null
+  problems: []
+- key: knuth-yao
+  title: Knuth-Yao speedup（区間 DP の高速化）
+  aliases:
+  - Knuth-Yao
+  - Knuth's optimization
+  - 四辺形不等式による高速化
+  level: 発展
+  level_evidence: ABC で必須の問題は確認できなかった。EDPC N（スライムの合体）は O(N^3) で通るが Knuth-Yao で O(N^2) にできる同型の問題
+  prerequisites:
+  - interval-dp
+  - monge
+  acl: null
+  signs:
+  - 区間 DP で dp[l][r] = min_m (dp[l][m] + dp[m][r]) + w(l, r)、w が Monge かつ区間の包含について単調
+  - N ≤ 5000 程度の区間 DP
+  compare_with:
+  - interval-dp
+  - monotone-minima
+  page: section-of:monge
+  visual: 区間ごとの最適な分割点 opt[l][r] を表に書き、opt[l][r−1] ≤ opt[l][r] ≤ opt[l+1][r] の範囲だけ探す様子
+  problems:
+  - id: dp_n
+    difficulty: null
+    role: example
+    summary: 隣り合うスライムの合体コストの最小（Knuth-Yao の条件を満たす典型。N ≤ 400 なので O(N^3) でも通る）
+    evidence: https://cp-algorithms.com/dynamic_programming/knuth-optimization.html
+- key: alien-dp
+  title: Alien DP（Lagrange 緩和・WQS 二分）
+  aliases:
+  - Alien DP
+  - Aliens trick
+  - WQS 二分
+  - Lagrangian Relaxation
+  level: 発展
+  level_evidence: abc218_h (2805)・abc355_g (2991)・abc305_h (3344)。abc218_h は優先度付きキューの貪欲でも解ける（kmjp）
+  prerequisites:
+  - monge
+  - binary-search
+  - dp-sequence-partition
+  acl: null
+  signs:
+  - ちょうど K 個選ぶ・K 個に分ける（K を状態に持つと O(N^2 K)）
+  - 答えが K について凸（限界効用が単調）
+  compare_with:
+  - monge
+  - binary-search
+  - dp-convexity
+  page: overview
+  visual: K を横軸に答えを描いた凸な折れ線に、傾き λ の直線を当てて接点を探す図
+  problems:
+  - id: abc218_h
+    difficulty: 2805
+    role: example
+    summary: N 個のランプから R 個を赤にするスコアの最大。個数制限を罰金に置き換える（貪欲でも解ける）
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+  - id: abc355_g
+    difficulty: 2991
+    role: practice
+    summary: K 個を選ぶコストの最小を、1個あたりの罰金を探索して K 個の制約を外す
+    evidence: https://kmjp.hatenablog.jp/entry/2024/06/05/0900
+  - id: abc305_h
+    difficulty: 3344
+    role: practice
+    summary: 問題を連続する区間（日）に分けるコストの最小を、日数の制約を罰金に置き換えて求める
+    evidence: https://kanpurin.hatenablog.com/entry/2020/04/07/182948
+- key: slope-trick
+  title: Slope Trick
+  aliases:
+  - slope trick
+  - 区分線形凸関数
+  level: 発展
+  level_evidence: abc127_f (2003) は2つのヒープで中央値を管理する入口。DP として slope trick を使う ABC は abc217_h (3112)。ARC では arc123_d (2143)・arc070_c (3365)
+  prerequisites:
+  - dp-state-design
+  - priority-queue
+  - dp-convexity
+  acl: null
+  signs:
+  - dp[i][x] が x について区分線形で凸
+  - '|x − a| を足す・最小値を左右へ広げる操作の繰り返し'
+  - 数列を単調にする最小の変更量
+  compare_with:
+  - alien-dp
+  - tree-dp-merge
+  page: overview
+  visual: 凸な折れ線と、傾きが変わる点（ブレークポイント）を左右2つの優先度付きキューに入れた図を並べ、操作ごとに更新するステップ送り
+  problems:
+  - id: abc127_f
+    difficulty: 2003
+    role: example
+    summary: '|x − a| と定数を足すクエリと、最小値とそれを取る x を答えるクエリ（2つのヒープで中央値）'
+    evidence: https://maspypy.com/slope-trick-2-%e5%95%8f%e9%a1%8c%e7%b7%a8
+  - id: arc123_d
+    difficulty: 2143
+    role: practice
+    summary: 数列を単調増加と単調減少の和に分け、絶対値の和を最小化する
+    evidence: https://maspypy.com/slope-trick-2-%e5%95%8f%e9%a1%8c%e7%b7%a8
+  - id: abc217_h
+    difficulty: 3112
+    role: practice
+    summary: 時刻ごとに左右へ1ずつ動けるときの被害の最小。凸関数の平行移動と絶対値の加算を slope trick で
+    evidence: https://kmjp.hatenablog.jp/entry/2021/09/05/0930
+- key: convex-max-plus-convolution
+  title: 凸な列どうしの (max,+) 畳み込み
+  aliases:
+  - max-plus 畳み込み
+  - min-plus convolution
+  - 凸関数のマージ
+  level: 発展
+  level_evidence: abc348_g (2559)・abc383_g (3026)：k 個選ぶ最大値が k について凹であることを使い、分割統治で列をマージソートのように合成する
+  prerequisites:
+  - dp-convexity
+  - divide-and-conquer
+  acl: null
+  signs:
+  - 区間から k 個選ぶときの最大値をすべての k について
+  - dp の値が個数について凸（凹）
+  compare_with:
+  - monotone-minima
+  - alien-dp
+  page: section-of:monge
+  visual: 2つの凸な列の差分（増加量）を大きい順にマージする図
+  problems:
+  - id: abc383_g
+    difficulty: 3026
+    role: example
+    summary: 長さ K の区間を重ならないように i 個選ぶ和の最大をすべての i について。区間を分割統治で合成する
+    evidence: https://kmjp.hatenablog.jp/entry/2024/12/13/0930
+  - id: abc348_g
+    difficulty: 2559
+    role: practice
+    summary: k 個選ぶ和の最大（凹）を分割統治で合成する
+    evidence: https://kmjp.hatenablog.jp/entry/2024/04/08/0930
+- key: dp-convexity
+  title: DP の値の凸性（限界効用の単調性）を使う
+  aliases:
+  - 凸性
+  - 限界効用
+  level: 発展
+  level_evidence: Alien DP・slope trick・凸な列のマージの前提となる見方。ABC では abc218_h (2805)・abc348_g (2559)・abc383_g (3026) など G/Ex
+  prerequisites:
+  - dp-state-design
+  acl: null
+  signs:
+  - 「k 個目を足したときの増え方」が k について単調
+  - 貪欲に1個ずつ足すと正しくなりそう
+  compare_with:
+  - alien-dp
+  - slope-trick
+  - convex-max-plus-convolution
+  - greedy
+  page: section-of:monge
+  visual: k ごとの最適値を折れ線にし、隣どうしの差が単調に減る（凹）ことを示す図
+  problems: []

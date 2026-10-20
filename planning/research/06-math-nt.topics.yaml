@@ -1,0 +1,2212 @@
+# 06 数学（整数論・代数）の項目一覧。詳細は 06-math-nt.md
+# problems[].status: verified（第三者の記事・作問者の解答コードで確認）/ tag（手法の分類のみ確認）/ unverified（未確認）
+area: math-nt
+topics:
+- key: math-notation
+  title: 数学の記法（合同式・整除・floor/ceil・Σ/Π）
+  aliases:
+  - 合同式
+  - 整除
+  - 床関数
+  - 天井関数
+  - 記法
+  level: 基礎
+  level_evidence: 解説を読むための前提。abc133_c (592)・abc165_d (600) で合同式と floor の性質を使う
+  prerequisites: []
+  acl: null
+  signs:
+  - 解説に ≡・|・⌊⌋ が出てきて読めない
+  - mod 2019 の周期
+  - floor の差の最大
+  compare_with: []
+  page: own
+  visual: 数直線を m ごとに巻き取って時計（余りの輪）にする図。合同な数が同じ位置に重なる
+  problems:
+  - id: abc133_c
+    difficulty: 592
+    role: example
+    summary: 区間から2数を選び積 mod 2019 を最小化。区間が 2019 以上なら 0
+    evidence: https://drken1215.hatenablog.com/entry/2019/07/07/233700
+    status: verified
+  - id: abc165_d
+    difficulty: 600
+    role: practice
+    summary: ⌊Ax/B⌋ − A⌊x/B⌋ の最大値（floor の性質と周期）
+    evidence: https://drken1215.hatenablog.com/entry/2020/05/02/225600
+    status: verified
+- key: sigma-manipulation
+  title: Σ の変形（入れ替え・分解・添字の付け替え）
+  aliases:
+  - シグマの入れ替え
+  - 和の順序交換
+  - 総和の変形
+  level: 基礎
+  level_evidence: abc230_e (969)・abc356_e (1506) で値ごとに数え直す変形を使う
+  prerequisites:
+  - math-notation
+  acl: null
+  signs:
+  - 全ての組について〜の総和
+  - Σ⌊N/i⌋
+  - 値ごとに数え直す
+  compare_with:
+  - contribution-technique
+  page: own
+  visual: 二重和を格子の表にして、行ごとの和と列ごとの和を切り替える動く図
+  problems:
+  - id: abc230_e
+    difficulty: 969
+    role: example
+    summary: Σ⌊N/i⌋（N ≤ 10^12）を同じ商でまとめる
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/230/E
+    status: verified
+  - id: abc356_e
+    difficulty: 1506
+    role: practice
+    summary: 全ペアの ⌊max/min⌋ の和を値と倍数で数え直す
+    evidence: https://drken1215.hatenablog.com/entry/2024/06/08/032313
+    status: verified
+- key: proof-patterns
+  title: 整数の証明の筋道（不変量・互除法・並べ替え・鳩の巣）
+  aliases:
+  - 整数問題の証明
+  - 不変量
+  - 鳩の巣原理
+  level: 基礎
+  level_evidence: abc118_c (646)・agc018_a (947)・arc105_b (366) で操作の不変量が gcd
+  prerequisites:
+  - math-notation
+  - gcd-lcm
+  acl: null
+  signs:
+  - 操作を好きなだけ繰り返す
+  - 最後に残る値
+  - 作れるか判定
+  compare_with:
+  - invariant
+  page: own
+  visual: 互除法の長方形分割の図、並べ替え論法の対応表
+  problems:
+  - id: abc118_c
+    difficulty: 646
+    role: example
+    summary: 攻撃を繰り返して残る体力の最小値＝全体の gcd
+    evidence: https://drken1215.hatenablog.com/entry/2019/02/16/224200
+    status: verified
+  - id: agc018_a
+    difficulty: 947
+    role: example
+    summary: 差を書き足して K を作れるか（gcd の倍数で最大値以下）
+    evidence: https://drken1215.hatenablog.com/entry/2020/03/22/205100
+    status: verified
+  - id: arc105_b
+    difficulty: 366
+    role: practice
+    summary: 最大から最小を引き続けた結果は gcd
+    evidence: https://drken1215.hatenablog.com/entry/2020/10/12/070100
+    status: verified
+- key: integer-division
+  title: 整数の割り算と余り（負の数・切り上げ・区間の倍数の個数）
+  aliases:
+  - floor_div
+  - 切り捨て除算
+  - 切り上げ
+  - 負の数の割り算
+  level: 基礎
+  level_evidence: abc239_b (57) が負の数の切り捨てそのもの。abc048_b (861)・abc084_c (908) で切り上げと境界
+  prerequisites:
+  - math-notation
+  acl: null
+  signs:
+  - 入力に負の数があり割り算を使う
+  - x 以上で m で割って r 余る最小の数
+  - '[L, R] の K の倍数の個数'
+  - 一定間隔で発車
+  compare_with:
+  - mod-arithmetic
+  page: own
+  visual: 数直線上に b ごとの目盛りを打ち、a の左右の目盛りを floor・ceil として示す
+  problems:
+  - id: abc239_b
+    difficulty: 57
+    role: example
+    summary: 負もありうる X の ⌊X/10⌋（C++ の / は 0 方向）
+    evidence: https://qiita.com/nagi0724/items/0badcef2c9d4f577a77d
+    status: verified
+  - id: abc345_b
+    difficulty: 91
+    role: practice
+    summary: 負もありうる X の ⌈X/10⌉
+    evidence: 未確認
+    status: unverified
+  - id: abc048_b
+    difficulty: 861
+    role: example
+    summary: '[a, b] の x の倍数の個数（a = 0 の境界）'
+    evidence: https://drken1215.hatenablog.com/entry/2024/05/29/023425
+    status: verified
+  - id: abc131_c
+    difficulty: 518
+    role: practice
+    summary: '[A, B] で C でも D でも割り切れない数の個数'
+    evidence: https://drken1215.hatenablog.com/entry/2019/06/22/224100
+    status: verified
+  - id: abc084_c
+    difficulty: 908
+    role: practice
+    summary: 一定間隔の列車を乗り継ぐ到着時刻（切り上げ）
+    evidence: https://drken1215.hatenablog.com/entry/2025/02/03/023357
+    status: verified
+  - id: abc432_c
+    difficulty: 654
+    role: practice
+    summary: 2種の飴の配り方の条件（必要条件と切り上げ）
+    evidence: https://drken1215.hatenablog.com/entry/2025/11/16/160322
+    status: verified
+- key: overflow-check
+  title: 大きな整数の扱い（積・累乗の上限判定）
+  aliases:
+  - オーバーフロー判定
+  - __int128
+  - 多倍長
+  level: 基礎
+  level_evidence: typical90_al（★3）・typical90_t（★3）。D〜F の途中計算の WA の原因
+  prerequisites:
+  - integer-division
+  acl: null
+  signs:
+  - 積や lcm が 10^18 を超えうる
+  - a^b と c^d の大小
+  - log で比較している
+  compare_with:
+  - integer-root
+  page: section-of:integer-division
+  visual: null
+  problems:
+  - id: typical90_al
+    difficulty: null
+    role: example
+    summary: 2 数の lcm が 10^18 を超えるか（割り算で比較）
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/038.cpp
+    status: verified
+  - id: typical90_t
+    difficulty: null
+    role: practice
+    summary: log2 a < b log2 c を整数 a < c^b で判定
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/020.cpp
+    status: verified
+- key: mod-arithmetic
+  title: mod の計算の基本（四則・負の数・998244353）
+  aliases:
+  - 剰余演算
+  - mod 998244353
+  - mod 1e9+7
+  level: 基礎
+  level_evidence: abc266_b (95)・abc275_b (147)・abc055_b (332)。arc111_a (1146) は mod M² を使う応用
+  prerequisites:
+  - integer-division
+  acl: atcoder::static_modint
+  signs:
+  - 答えを 998244353 で割った余り
+  - 10^9+7
+  - 負の数の余り
+  compare_with:
+  - integer-division
+  - modint
+  page: own
+  visual: 時計（余りの輪）の上で足し算・掛け算をする図
+  problems:
+  - id: abc266_b
+    difficulty: 95
+    role: example
+    summary: 負もありうる N の 998244353 での余り
+    evidence: 未確認
+    status: unverified
+  - id: abc275_b
+    difficulty: 147
+    role: example
+    summary: 大きな数の積の差を mod 998244353 で（負の数）
+    evidence: https://drken1215.hatenablog.com/entry/2024/05/29/045828
+    status: verified
+  - id: abc055_b
+    difficulty: 332
+    role: practice
+    summary: N! mod 10^9+7（掛けるたびに余り）
+    evidence: https://drken1215.hatenablog.com/entry/2024/09/22/032616
+    status: verified
+  - id: arc111_a
+    difficulty: 1146
+    role: practice
+    summary: ⌊10^N/M⌋ mod M を 10^N mod M² から
+    evidence: https://drken1215.hatenablog.com/entry/2022/12/26/195928
+    status: verified
+- key: mod-pow
+  title: 繰り返し二乗法
+  aliases:
+  - 二分累乗法
+  - 高速累乗
+  - binary exponentiation
+  - modpow
+  level: 基礎
+  level_evidence: typical90_bq（★3）で N ≤ 10^18 の累乗。abc228_e (1579) などの部品
+  prerequisites:
+  - mod-arithmetic
+  acl: atcoder::pow_mod
+  signs:
+  - N ≤ 10^18 回
+  - a^N を mod で
+  - 結合法則を満たす操作の繰り返し
+  compare_with:
+  - matrix-power
+  - doubling
+  page: own
+  visual: 指数の 2 進表記と a^(2^k) の列を並べ、1 の bit の項を掛けるステップ送り
+  problems:
+  - id: typical90_bq
+    difficulty: null
+    role: example
+    summary: K(K−1)(K−2)^(N−2) を N ≤ 10^18 で
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/069.cpp
+    status: verified
+  - id: abc228_e
+    difficulty: 1579
+    role: practice
+    summary: M^(K^N) mod 998244353（指数の mod と組み合わせる）
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/228/E
+    status: verified
+- key: mod-inverse
+  title: 逆元と割り算（フェルマー・拡張ユークリッド・逆元表）
+  aliases:
+  - モジュラ逆元
+  - modinv
+  - フェルマーの小定理
+  - mod での割り算
+  level: 基礎
+  level_evidence: typical90_cd（★3）・math_and_algorithm_as・abc357_d (970)。非素数 mod は abc186_e (1461)
+  prerequisites:
+  - mod-pow
+  - ext-gcd
+  acl: atcoder::inv_mod
+  signs:
+  - P×Q^(−1) mod 998244353 を出力
+  - 平均・期待値・等比級数の和
+  - 割り算が必要
+  compare_with:
+  - ext-gcd
+  - rational-mod
+  page: own
+  visual: mod 7 の掛け算表で各行に 1 がちょうど 1 つあることを色付けする
+  problems:
+  - id: typical90_cd
+    difficulty: null
+    role: example
+    summary: 等差数列の和を mod で（2 の逆元）
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/082a.cpp
+    status: verified
+  - id: math_and_algorithm_as
+    difficulty: null
+    role: example
+    summary: 4^0 + … + 4^N を (4^(N+1) − 1)/3 で
+    evidence: https://github.com/E869120/math-algorithm-book/blob/main/editorial/chap4-6/prob4-6-3.cpp
+    status: verified
+  - id: abc357_d
+    difficulty: 970
+    role: practice
+    summary: N を N 回連結した数 mod 998244353（等比級数と逆元）
+    evidence: https://drken1215.hatenablog.com/entry/2024/06/10/000051
+    status: verified
+  - id: abc186_e
+    difficulty: 1461
+    role: practice
+    summary: 法が素数でない一次合同式（逆元が存在する条件）
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/20/015100
+    status: verified
+- key: modint
+  title: modint（ACL の使い方と自作の設計）
+  aliases:
+  - static_modint
+  - dynamic_modint
+  - mint
+  level: 基礎
+  level_evidence: mod 付きの問題全般の道具。法が入力の abc281_g (2304) では dynamic_modint
+  prerequisites:
+  - mod-inverse
+  acl: atcoder::static_modint, atcoder::dynamic_modint (modint998244353, modint1000000007, modint)
+  signs:
+  - mod 付きの数え上げ
+  - mod が入力で与えられる
+  compare_with:
+  - mod-arithmetic
+  page: own
+  visual: null
+  problems:
+  - id: abc357_d
+    difficulty: 970
+    role: example
+    summary: modint998244353 で連結した数を計算
+    evidence: https://drken1215.hatenablog.com/entry/2024/06/10/000051
+    status: verified
+  - id: abc281_g
+    difficulty: 2304
+    role: practice
+    summary: 法 P が入力の数え上げ（dynamic_modint）
+    evidence: https://drken1215.hatenablog.com/entry/2022/12/13/173300
+    status: verified
+- key: exponent-mod
+  title: 指数の mod（フェルマー・オイラーの定理）
+  aliases:
+  - フェルマーの小定理
+  - オイラーの定理
+  - 指数を p−1 で割る
+  level: 水
+  level_evidence: abc228_e (1579) が必須。abc222_g (2242) は位数と組み合わせる
+  prerequisites:
+  - mod-pow
+  - mod-inverse
+  acl: atcoder::pow_mod
+  signs:
+  - a^(b^c)
+  - 指数にさらに指数
+  - 累乗の塔
+  compare_with:
+  - multiplicative-order
+  page: own
+  visual: a^0, a^1, … を mod 7 の円でたどり 6 回で戻る様子
+  problems:
+  - id: abc228_e
+    difficulty: 1579
+    role: example
+    summary: M^(K^N) mod p。指数を p−1 で、M が p の倍数は別扱い
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/228/E
+    status: verified
+  - id: abc222_g
+    difficulty: 2242
+    role: practice
+    summary: 2 を n 個並べた数が K の倍数になる最小の n（10^n ≡ 1）
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/222/G
+    status: verified
+- key: geometric-series-mod
+  title: 等比数列の和を mod で（逆元・半分に割る・行列）
+  aliases:
+  - 等比級数
+  - repunit
+  - Σ A^i
+  level: 水
+  level_evidence: abc293_e (1453) で法が任意。abc357_d (970) は素数 mod
+  prerequisites:
+  - mod-inverse
+  - mod-pow
+  acl: null
+  signs:
+  - 同じ数字列を M 回並べた数
+  - Σ A^i を M で割った余り
+  - M が素数とは限らない
+  compare_with:
+  - matrix-power
+  - mod-inverse
+  page: own
+  visual: 長さ 2k の列を半分に折って S(2k) = S(k)(1 + r^k) を示す図
+  problems:
+  - id: math_and_algorithm_as
+    difficulty: null
+    role: example
+    summary: Σ 4^i を逆元で
+    evidence: https://github.com/E869120/math-algorithm-book/blob/main/editorial/chap4-6/prob4-6-3.cpp
+    status: verified
+  - id: abc357_d
+    difficulty: 970
+    role: example
+    summary: N を N 回連結（公比 10^d）
+    evidence: https://drken1215.hatenablog.com/entry/2024/06/10/000051
+    status: verified
+  - id: abc293_e
+    difficulty: 1453
+    role: example
+    summary: Σ A^i mod M（M 任意）を半分に割る漸化式で
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/293/E
+    status: verified
+  - id: abc129_f
+    difficulty: 2621
+    role: practice
+    summary: 等差数列を連結した数 mod M（3×3 行列累乗）
+    evidence: https://drken1215.hatenablog.com/entry/2019/06/10/172000
+    status: verified
+- key: digit-and-mod
+  title: 桁と mod（倍数判定・数の連結・接尾辞の余り）
+  aliases:
+  - 九去法
+  - 倍数判定
+  - 数の連結
+  - 10 倍して a を足す
+  level: 水
+  level_evidence: abc164_d (1232)・abc158_e (1866)
+  prerequisites:
+  - mod-arithmetic
+  acl: null
+  signs:
+  - 部分文字列を整数とみて P の倍数
+  - 桁和
+  - 下 3 桁
+  - 数を何回も並べる
+  compare_with:
+  - prefix-sum
+  page: own
+  visual: 文字列の各位置に接尾辞の余りを書き、同じ余りの位置を線で結ぶ
+  problems:
+  - id: abc182_c
+    difficulty: 292
+    role: example
+    summary: 桁を消して 3 の倍数にする最小個数（桁和）
+    evidence: https://drken1215.hatenablog.com/entry/2020/11/30/014517
+    status: verified
+  - id: abc181_d
+    difficulty: 600
+    role: practice
+    summary: 並べ替えて 8 の倍数（下 3 桁）
+    evidence: https://drken1215.hatenablog.com/entry/2020/11/02/023700
+    status: verified
+  - id: abc164_d
+    difficulty: 1232
+    role: example
+    summary: 部分文字列が 2019 の倍数になる個数（接尾辞の余り）
+    evidence: https://drken1215.hatenablog.com/entry/2020/04/29/171300
+    status: verified
+  - id: abc158_e
+    difficulty: 1866
+    role: practice
+    summary: 同じことを素数 P で（P = 2, 5 の場合分け）
+    evidence: https://drken1215.hatenablog.com/entry/2020/03/08/020200
+    status: verified
+  - id: arc084_b
+    difficulty: 2457
+    role: practice
+    summary: K の倍数の桁和の最小（余りを頂点に 01-BFS）
+    evidence: https://drken1215.hatenablog.com/entry/2021/07/30/160000
+    status: verified
+- key: primality-trial
+  title: 素数判定（試し割り）
+  aliases:
+  - 試し割り
+  - 素数判定
+  level: 基礎
+  level_evidence: abc149_c (172)・arc017_1 (234)
+  prerequisites:
+  - integer-division
+  acl: null
+  signs:
+  - N ≤ 10^12 が素数か
+  - X 以上の最小の素数
+  compare_with:
+  - sieve-eratosthenes
+  - miller-rabin
+  page: section-of:divisor-enum
+  visual: √N で折り返す約数の対の図（divisor-enum と共通）
+  problems:
+  - id: abc149_c
+    difficulty: 172
+    role: example
+    summary: X 以上の最小の素数
+    evidence: https://drken1215.hatenablog.com/entry/2020/01/02/112800
+    status: verified
+  - id: arc017_1
+    difficulty: 234
+    role: practice
+    summary: N が素数か
+    evidence: https://qiita.com/drken/items/a14e9af0ca2d857dad23
+    status: tag
+- key: divisor-enum
+  title: 約数列挙と約数の個数・総和
+  aliases:
+  - 約数列挙
+  - 約数の個数
+  - 約数の総和
+  level: 基礎
+  level_evidence: abc112_d (1025)・diverta2019_d (1098)・abc161_f (1528)
+  prerequisites:
+  - primality-trial
+  acl: null
+  signs:
+  - N ≤ 10^12 の約数
+  - a × b = N
+  - 答えの候補が約数
+  - 約数がちょうど k 個
+  compare_with:
+  - prime-factorization
+  - harmonic-sum
+  page: own
+  visual: d と N/d を √N で折り返して上下に並べる図
+  problems:
+  - id: abc180_c
+    difficulty: 142
+    role: example
+    summary: N の約数を小さい順に
+    evidence: https://drken1215.hatenablog.com/entry/2020/10/21/194700
+    status: verified
+  - id: abc057_c
+    difficulty: 904
+    role: practice
+    summary: N = A×B で桁数の大きい方の最小
+    evidence: https://drken1215.hatenablog.com/entry/2019/09/16/221500
+    status: verified
+  - id: abc112_d
+    difficulty: 1025
+    role: example
+    summary: 和 M を N 個に分けた gcd の最大（M の約数）
+    evidence: https://drken1215.hatenablog.com/entry/2018/11/06/120600
+    status: verified
+  - id: diverta2019_d
+    difficulty: 1098
+    role: practice
+    summary: 商と余りが等しい m の総和（m+1 は N の約数）
+    evidence: https://drken1215.hatenablog.com/entry/2019/05/12/004500
+    status: verified
+  - id: typical90_cg
+    difficulty: null
+    role: practice
+    summary: abc = K の組を約数の組で全探索
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/085.cpp
+    status: verified
+  - id: abc161_f
+    difficulty: 1528
+    role: practice
+    summary: 割るか引くかで 1 になる K（N と N−1 の約数）
+    evidence: https://drken1215.hatenablog.com/entry/2020/04/04/224500
+    status: verified
+  - id: abc420_g
+    difficulty: 1427
+    role: practice
+    summary: n²+n+X が平方数となる n（4X−1 の約数の組）
+    evidence: https://usaco.guide/gold/divisibility
+    status: tag
+- key: prime-factorization
+  title: 素因数分解（試し割り）
+  aliases:
+  - 素因数分解
+  - prime factorization
+  level: 基礎
+  level_evidence: abc169_d (732)・arc067_a (967)・abc114_d (1337)・abc110_d (1695)
+  prerequisites:
+  - primality-trial
+  acl: null
+  signs:
+  - 素数ごとに独立に考える
+  - N! の約数
+  - 積が M の数列
+  compare_with:
+  - spf-sieve
+  - pollard-rho
+  page: own
+  visual: 割れるだけ割っていく様子（360 → 180 → …）のステップ送り
+  problems:
+  - id: abc169_d
+    difficulty: 732
+    role: example
+    summary: 素数冪で割る操作の最大回数
+    evidence: https://drken1215.hatenablog.com/entry/2020/06/01/010800
+    status: verified
+  - id: abc142_d
+    difficulty: 827
+    role: practice
+    summary: 公約数から互いに素に選ぶ最大個数
+    evidence: https://drken1215.hatenablog.com/entry/2019/10/03/175800
+    status: verified
+  - id: arc067_a
+    difficulty: 967
+    role: example
+    summary: N! の約数の個数 mod 10^9+7
+    evidence: https://drken1215.hatenablog.com/entry/2024/05/29/044748
+    status: verified
+  - id: typical90_bw
+    difficulty: null
+    role: practice
+    summary: 素因数の個数から操作回数
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/075.cpp
+    status: verified
+  - id: abc114_d
+    difficulty: 1337
+    role: practice
+    summary: N! の約数で約数が 75 個のもの
+    evidence: https://drken1215.hatenablog.com/entry/2019/05/13/112000
+    status: verified
+  - id: abc110_d
+    difficulty: 1695
+    role: practice
+    summary: 積が M の長さ N の数列（素数ごとに重複組合せ）
+    evidence: https://drken1215.hatenablog.com/entry/2018/09/23/224100
+    status: verified
+- key: divisor-count-bound
+  title: 約数の個数・素因数の種類数の上界
+  aliases:
+  - 高度合成数
+  - 約数の個数の上界
+  level: 水
+  level_evidence: arc167_b (1292)・acl1_b (1785) で約数（の組）を全て試す見積もり
+  prerequisites:
+  - divisor-enum
+  acl: null
+  signs:
+  - 約数ごとに〜
+  - d | N を全て
+  - 約数の組を全探索
+  compare_with:
+  - divisor-enum
+  page: section-of:divisor-enum
+  visual: N ごとの約数の個数の最大値の表（早見表）
+  problems:
+  - id: arc167_b
+    difficulty: 1292
+    role: example
+    summary: A^B の約数の積が A で何回割れるか（約数の個数の公式）
+    evidence: https://drken1215.hatenablog.com/entry/2024/01/31/220502
+    status: verified
+  - id: acl1_b
+    difficulty: 1785
+    role: practice
+    summary: 2N = d1·d2 の分け方を全て試して CRT
+    evidence: https://drken1215.hatenablog.com/entry/2020/09/23/080300
+    status: verified
+- key: sieve-eratosthenes
+  title: エラトステネスの篩
+  aliases:
+  - 篩
+  - 素数の列挙
+  - sieve
+  level: 基礎
+  level_evidence: abc250_d (797)・abc300_d (908)・abc084_d (980)
+  prerequisites:
+  - primality-trial
+  acl: null
+  signs:
+  - N ≤ 10^7 の素数を全て
+  - p q³ ≤ N
+  - 区間の素数の個数（累積和）
+  compare_with:
+  - primality-trial
+  - harmonic-sum
+  - linear-sieve
+  page: own
+  visual: 1..100 の表で素数の倍数を順に塗るステップ送り（11 以降は塗らなくてよい）
+  problems:
+  - id: abc250_d
+    difficulty: 797
+    role: example
+    summary: p·q³ ≤ N の素数の組
+    evidence: https://drken1215.hatenablog.com/entry/2022/05/12/010600
+    status: verified
+  - id: abc300_d
+    difficulty: 908
+    role: practice
+    summary: a²·b·c² ≤ N の素数の組
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/03/201800
+    status: verified
+  - id: abc084_d
+    difficulty: 980
+    role: practice
+    summary: 2017 に似た数の区間クエリ（篩＋累積和）
+    evidence: https://drken1215.hatenablog.com/entry/2019/03/28/181318
+    status: verified
+  - id: typical90_ad
+    difficulty: null
+    role: practice
+    summary: 異なる素因数が K 個以上の数（篩の変形）
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/030.cpp
+    status: verified
+- key: spf-sieve
+  title: 最小素因数の篩（osa_k 法）と高速素因数分解
+  aliases:
+  - osa_k 法
+  - 最小素因数
+  - smallest prime factor
+  - 高速素因数分解
+  level: 基礎
+  level_evidence: abc177_e (1057)・abc368_f (1180)
+  prerequisites:
+  - sieve-eratosthenes
+  - prime-factorization
+  acl: null
+  signs:
+  - A_i ≤ 10^6 の各要素を素因数分解
+  - 全ての組が互いに素か
+  compare_with:
+  - prime-factorization
+  - linear-sieve
+  page: own
+  visual: spf をたどる鎖（360 → 180 → 90 → 45 → 15 → 5 → 1）
+  problems:
+  - id: abc177_e
+    difficulty: 1057
+    role: example
+    summary: pairwise／setwise coprime の判定
+    evidence: https://drken1215.hatenablog.com/entry/2020/10/31/203300
+    status: verified
+  - id: abc368_f
+    difficulty: 1180
+    role: practice
+    summary: 素因数の個数（重複込み）を Nim の山とみる（07 と境界）
+    evidence: https://programming-hiroba.com/abc368-f/
+    status: verified
+- key: linear-sieve
+  title: 線形篩と乗法的関数の表
+  aliases:
+  - linear sieve
+  - オイラーの篩
+  level: 青
+  level_evidence: 必須の ABC 問題は見当たらない。φ・μ の表を作る場面（青〜黄）で使う程度
+  prerequisites:
+  - spf-sieve
+  acl: null
+  signs:
+  - φ や μ の表を N まで
+  compare_with:
+  - sieve-eratosthenes
+  page: section-of:spf-sieve
+  visual: null
+  problems: []
+- key: segmented-sieve
+  title: 区間篩
+  aliases:
+  - 区間ふるい
+  - segmented sieve
+  level: 水
+  level_evidence: abc412_e (1496)・abc227_g (2207)
+  prerequisites:
+  - sieve-eratosthenes
+  acl: null
+  signs:
+  - L ≤ 10^12、R − L ≤ 10^6
+  - 区間の数を素因数分解
+  compare_with:
+  - sieve-eratosthenes
+  page: own
+  visual: '[L, R] の窓に小さい素数の倍数の印を等間隔に打つ'
+  problems:
+  - id: abc412_e
+    difficulty: 1496
+    role: example
+    summary: LCM(1..n) の値の種類（素数冪の位置を区間篩で）
+    evidence: https://inamori.hateblo.jp/entry/2025/06/30/072920
+    status: verified
+  - id: abc227_g
+    difficulty: 2207
+    role: practice
+    summary: C(N, K) の約数の個数（分子の区間を分解）
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/227/G
+    status: verified
+- key: harmonic-sum
+  title: 調和級数の計算量（倍数の列挙）
+  aliases:
+  - 調和級数
+  - O(N log N) の倍数ループ
+  level: 基礎
+  level_evidence: abc134_d (926)・abc170_d (1033)。abc356_e (1506)・abc128_f (2464) で応用
+  prerequisites:
+  - sigma-manipulation
+  acl: null
+  signs:
+  - A_i ≤ 10^6
+  - 割り切れる
+  - 倍数
+  - 約数の個数の和
+  compare_with:
+  - sieve-eratosthenes
+  - floor-quotient-enum
+  page: own
+  visual: i ごとに倍数の点を打つと行の長さが N/i で減っていく図
+  problems:
+  - id: abc179_c
+    difficulty: 283
+    role: example
+    summary: A×B+C = N の組の数（Σ(N−1)/A）
+    evidence: https://drken1215.hatenablog.com/entry/2020/09/21/070100
+    status: verified
+  - id: abc134_d
+    difficulty: 926
+    role: example
+    summary: 倍数の箱の偶奇を後ろから決める
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/25/175400
+    status: verified
+  - id: abc170_d
+    difficulty: 1033
+    role: example
+    summary: 他の要素で割り切れない要素の数
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/30/081500
+    status: verified
+  - id: abc356_e
+    difficulty: 1506
+    role: practice
+    summary: ⌊max/min⌋ の総和を値の倍数で区切る
+    evidence: https://drken1215.hatenablog.com/entry/2024/06/08/032313
+    status: verified
+  - id: abc128_f
+    difficulty: 2464
+    role: practice
+    summary: 歩幅の全探索が調和級数で収まる
+    evidence: https://drken1215.hatenablog.com/entry/2019/06/15/202200
+    status: verified
+- key: legendre-formula
+  title: ルジャンドルの公式（n! の素因数の指数）
+  aliases:
+  - ルジャンドルの定理
+  - 階乗の素因数
+  - 末尾の 0 の個数
+  - v_p(n!)
+  level: 基礎
+  level_evidence: abc148_e (818)・abc280_d (880)
+  prerequisites:
+  - prime-factorization
+  acl: null
+  signs:
+  - N! の末尾の 0
+  - N! が K の倍数
+  - p で何回割れるか
+  compare_with:
+  - prime-exponent-vector
+  page: section-of:prime-exponent-vector
+  visual: 1..n の p の倍数・p² の倍数を段に積む図
+  problems:
+  - id: abc148_e
+    difficulty: 818
+    role: example
+    summary: 二重階乗の末尾の 0 の個数
+    evidence: https://drken1215.hatenablog.com/entry/2019/12/22/224100
+    status: verified
+  - id: abc280_d
+    difficulty: 880
+    role: example
+    summary: N! が K の倍数になる最小の N
+    evidence: https://drken1215.hatenablog.com/entry/2022/12/05/160400
+    status: verified
+- key: prime-exponent-vector
+  title: 素因数の指数で考える（gcd/lcm・平方数・べき乗因子）
+  aliases:
+  - 指数ベクトル
+  - 平方因子
+  - squarefree
+  - smooth 数
+  level: 水
+  level_evidence: abc254_d (1191)・abc152_e (1348)・abc150_d (1534)。abc300_g (2343)・agc003_d (2608) は応用
+  prerequisites:
+  - prime-factorization
+  acl: null
+  signs:
+  - 積が平方数
+  - lcm を mod で
+  - 各素数の指数
+  - 積が M
+  compare_with:
+  - gcd-lcm
+  page: own
+  visual: 数を素数ごとの棒グラフで描き、gcd は低い方・lcm は高い方をなぞる
+  problems:
+  - id: abc342_d
+    difficulty: 944
+    role: example
+    summary: 積が平方数になる組（平方因子を除いた核）
+    evidence: https://drken1215.hatenablog.com/entry/2024/11/23/160056
+    status: verified
+  - id: abc254_d
+    difficulty: 1191
+    role: practice
+    summary: i·j が平方数となる組
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/17/024900
+    status: verified
+  - id: abc152_e
+    difficulty: 1348
+    role: example
+    summary: 巨大な lcm を指数の最大で持つ
+    evidence: https://drken1215.hatenablog.com/entry/2020/01/22/071000
+    status: verified
+  - id: abc150_d
+    difficulty: 1534
+    role: practice
+    summary: 2 で割れる回数で決まる半公倍数
+    evidence: https://drken1215.hatenablog.com/entry/2020/01/12/135000
+    status: verified
+  - id: abc300_g
+    difficulty: 2343
+    role: practice
+    summary: P-smooth 数の個数（半分全列挙）
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/02/234200
+    status: verified
+  - id: agc003_d
+    difficulty: 2608
+    role: practice
+    summary: 積が立方数にならない最大個数（立方因子を除いた正規形）
+    evidence: https://drken1215.hatenablog.com/entry/2018/09/29/011000
+    status: verified
+  - id: typical90_y
+    difficulty: null
+    role: practice
+    summary: 桁の積は 7-smooth なので候補を全列挙
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/025.cpp
+    status: verified
+- key: euler-phi
+  title: オイラーの φ 関数
+  aliases:
+  - トーシェント
+  - totient
+  - Euler 関数
+  level: 黄
+  level_evidence: abc212_g (2150)・abc222_g (2242)。位数・原始根とセットで必要になる
+  prerequisites:
+  - prime-factorization
+  acl: null
+  signs:
+  - n と互いに素な数の個数
+  - 既約分数の個数
+  - a^k ≡ 1 となる最小の k
+  compare_with:
+  - multiplicative-order
+  page: own
+  visual: 1..12 のうち 12 と互いに素な数に印をつける図
+  problems:
+  - id: abc212_g
+    difficulty: 2150
+    role: example
+    summary: x^n ≡ y (mod P) となる組の数（位数 d の元は φ(d) 個）
+    evidence: https://drken1215.hatenablog.com/entry/2021/08/01/163600
+    status: verified
+  - id: abc222_g
+    difficulty: 2242
+    role: practice
+    summary: 10 の位数を φ の約数から探す
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/222/G
+    status: verified
+- key: multiplicative-function
+  title: 乗法的関数・ディリクレ積・その和
+  aliases:
+  - ディリクレ積
+  - 杜教筛
+  - Min_25
+  - 乗法的関数の prefix sum
+  level: 発展
+  level_evidence: abc370_g (3428)（Nyaan の解説一覧で「乗法的関数の prefix sum」）
+  prerequisites:
+  - euler-phi
+  - floor-quotient-enum
+  acl: null
+  signs:
+  - Σ_{n≤N} f(n) で N ≤ 10^10 程度
+  - φ や約数関数の和
+  compare_with:
+  - harmonic-sum
+  page: overview
+  visual: null
+  problems:
+  - id: abc370_g
+    difficulty: 3428
+    role: practice
+    summary: 乗法的関数の prefix sum を使う発展問題
+    evidence: https://nyaannyaan.github.io/docs/problems/editorials/
+    status: tag
+- key: prime-counting
+  title: 素数の個数の数え上げ（Lucy DP など）
+  aliases:
+  - 素数計数
+  - Meissel-Lehmer
+  - Lucy DP
+  level: 発展
+  level_evidence: ABC での必須例は見つからなかった（Library Checker の Counting Primes）
+  prerequisites:
+  - floor-quotient-enum
+  acl: null
+  signs:
+  - N ≤ 10^11 以下の素数の個数
+  compare_with:
+  - sieve-eratosthenes
+  page: section-of:multiplicative-function
+  visual: null
+  problems: []
+- key: miller-rabin
+  title: Miller–Rabin 素数判定
+  aliases:
+  - ミラー・ラビン
+  - 確率的素数判定
+  level: 発展
+  level_evidence: 10^18 の素数判定が必須の ABC 問題は見つからなかった（Library Checker の Primality Test）
+  prerequisites:
+  - mod-pow
+  - exponent-mod
+  acl: 内部のみ（atcoder::internal::is_prime_constexpr、32bit）
+  signs:
+  - N ≤ 10^18 が素数か
+  compare_with:
+  - primality-trial
+  page: overview
+  visual: null
+  problems: []
+- key: pollard-rho
+  title: Pollard's rho 素因数分解
+  aliases:
+  - ポラード・ロー
+  - rho 法
+  level: 発展
+  level_evidence: 10^18 の素因数分解が必須の ABC 問題は見つからなかった（Library Checker の Factorize）
+  prerequisites:
+  - miller-rabin
+  - gcd-lcm
+  acl: null
+  signs:
+  - N ≤ 10^18 を素因数分解
+  compare_with:
+  - prime-factorization
+  page: section-of:miller-rabin
+  visual: null
+  problems: []
+- key: big-modulus-mul
+  title: 64bit の mod での掛け算（__int128・Montgomery・Barrett）
+  aliases:
+  - モンゴメリ乗算
+  - Barrett 還元
+  - mulmod
+  level: 発展
+  level_evidence: Miller–Rabin・Pollard's rho の部品。ACL の dynamic_modint は Barrett 還元
+  prerequisites:
+  - mod-arithmetic
+  acl: 内部のみ（atcoder::internal::barrett）
+  signs:
+  - 法が 10^18 級
+  compare_with: []
+  page: section-of:miller-rabin
+  visual: null
+  problems: []
+- key: gcd-lcm
+  title: GCD・LCM とユークリッドの互除法
+  aliases:
+  - 最大公約数
+  - 最小公倍数
+  - 互除法
+  - std::gcd
+  level: 基礎
+  level_evidence: abc109_c (542)・abc118_c (646)・abc070_c (697)
+  prerequisites:
+  - integer-division
+  acl: null
+  signs:
+  - 全員が同時に
+  - 周期
+  - 等間隔
+  compare_with:
+  - gcd-properties
+  page: own
+  visual: 長方形から正方形を切り取っていく互除法の動く図
+  problems:
+  - id: abc148_c
+    difficulty: 63
+    role: example
+    summary: 2 数の lcm
+    evidence: https://drken1215.hatenablog.com/entry/2019/12/22/224100_2
+    status: verified
+  - id: abc109_c
+    difficulty: 542
+    role: example
+    summary: 全ての都市を訪れる最大の移動幅（差の gcd）
+    evidence: https://drken1215.hatenablog.com/entry/2018/09/08/230200
+    status: verified
+  - id: abc070_c
+    difficulty: 697
+    role: practice
+    summary: 時計の周期の lcm
+    evidence: https://drken1215.hatenablog.com/entry/2025/01/07/000710
+    status: verified
+  - id: typical90_v
+    difficulty: null
+    role: practice
+    summary: 3 数の gcd で立方体に切る
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/022.cpp
+    status: verified
+  - id: typical90_al
+    difficulty: null
+    role: practice
+    summary: lcm のオーバーフロー判定
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/038.cpp
+    status: verified
+- key: gcd-properties
+  title: GCD の性質（差の gcd・累積 gcd・変化回数 O(log)）
+  aliases:
+  - 差の gcd
+  - 累積 gcd
+  - 区間 gcd
+  level: 青
+  level_evidence: abc210_e (1618)・agc026_b (1720)・abc254_f (1764)。累積 gcd は abc125_c (1197)
+  prerequisites:
+  - gcd-lcm
+  acl: null
+  signs:
+  - 1 つだけ書き換えて gcd を最大
+  - 区間の gcd
+  - 全体に x を足した gcd
+  - A_i + B_j の gcd
+  compare_with:
+  - sparse-table
+  - segment-tree
+  page: own
+  visual: 区間 gcd が右に伸ばすたびに約数へ下がる階段グラフ
+  problems:
+  - id: abc125_c
+    difficulty: 1197
+    role: example
+    summary: 1 つ書き換えたときの gcd の最大（左右の累積 gcd）
+    evidence: https://drken1215.hatenablog.com/entry/2019/04/27/224100_1
+    status: verified
+  - id: abc210_e
+    difficulty: 1618
+    role: practice
+    summary: x → x+A mod N の辺で最小全域木（gcd と連結性）
+    evidence: https://drken1215.hatenablog.com/entry/2023/08/07/001608
+    status: verified
+  - id: agc026_b
+    difficulty: 1720
+    role: practice
+    summary: 在庫の消費と補充が続くか（gcd と周期）
+    evidence: https://drken1215.hatenablog.com/entry/2018/07/18/083000
+    status: verified
+  - id: abc254_f
+    difficulty: 1764
+    role: example
+    summary: A_i + B_j の矩形の gcd（隣接差の区間 gcd）
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/254/F
+    status: verified
+- key: rational-normalization
+  title: 分数・傾きを既約にして扱う
+  aliases:
+  - 既約分数
+  - 傾きの正規化
+  level: 水
+  level_evidence: abc248_e (1292)（未確認）。幾何（08）と共通
+  prerequisites:
+  - gcd-lcm
+  acl: null
+  signs:
+  - 同じ直線上
+  - 傾きが等しい
+  - 分数を map のキーに
+  compare_with:
+  - stern-brocot
+  page: section-of:gcd-lcm
+  visual: null
+  problems:
+  - id: abc248_e
+    difficulty: 1292
+    role: practice
+    summary: K 点以上を通る直線の数（直線を既約な整数の組で）
+    evidence: 未確認
+    status: unverified
+- key: ext-gcd
+  title: 拡張ユークリッドの互除法と一次不定方程式
+  aliases:
+  - 拡張 Euclid
+  - ベズーの等式
+  - ax+by=c
+  - extgcd
+  level: 水
+  level_evidence: abc186_e (1461)・abc340_f (1516)
+  prerequisites:
+  - gcd-lcm
+  acl: atcoder::inv_mod（内部で atcoder::internal::inv_gcd を使用）
+  signs:
+  - ax + by = c
+  - 円周上を K ずつ進む
+  - 何回で初めて一致
+  compare_with:
+  - crt
+  - mod-inverse
+  page: own
+  visual: 互除法の表（商・余り・係数）を 1 行ずつ埋めるステップ送り
+  problems:
+  - id: abc060_b
+    difficulty: 503
+    role: example
+    summary: A の倍数の和を B で割って C 余るか（gcd | C）
+    evidence: https://drken1215.hatenablog.com/entry/2024/10/18/025758
+    status: verified
+  - id: abc186_e
+    difficulty: 1461
+    role: example
+    summary: 円周上で玉座に着く最小回数（一次合同式）
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/20/015100
+    status: verified
+  - id: abc340_f
+    difficulty: 1516
+    role: practice
+    summary: 面積 1 の三角形の格子点（|AY − BX| = 2）
+    evidence: https://usaco.guide/adv/extend-euclid
+    status: tag
+- key: linear-congruence
+  title: 一次合同方程式 ax ≡ b (mod m)
+  aliases:
+  - 一次合同式
+  - linear congruence
+  level: 水
+  level_evidence: abc186_e (1461)
+  prerequisites:
+  - ext-gcd
+  acl: null
+  signs:
+  - a x ≡ b (mod m) の最小の x
+  compare_with:
+  - mod-inverse
+  page: section-of:ext-gcd
+  visual: null
+  problems:
+  - id: abc186_e
+    difficulty: 1461
+    role: example
+    summary: K x ≡ −S (mod N) の最小の x
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/20/015100
+    status: verified
+- key: crt
+  title: 中国剰余定理
+  aliases:
+  - CRT
+  - Garner
+  - 中国の剰余定理
+  level: 青
+  level_evidence: acl1_b (1785)・abc286_f (1841)・abc193_e (1948)
+  prerequisites:
+  - ext-gcd
+  acl: atcoder::crt
+  signs:
+  - 複数の周期が同時に
+  - x ≡ r_i (mod m_i)
+  - 素因数ごとに分けて最後に戻す
+  compare_with:
+  - ext-gcd
+  page: own
+  visual: mod 3 と mod 5 の表を並べ 15 マスに余りの組が 1 回ずつ現れる格子図
+  problems:
+  - id: acl1_b
+    difficulty: 1785
+    role: example
+    summary: 1+…+k が N の倍数の最小 k（約数の分け方ごとに CRT）
+    evidence: https://drken1215.hatenablog.com/entry/2020/09/23/080300
+    status: verified
+  - id: abc286_f
+    difficulty: 1841
+    role: practice
+    summary: 互いに素な長さの巡回置換で余りを得て CRT（インタラクティブ）
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/286/F
+    status: verified
+  - id: abc193_e
+    difficulty: 1948
+    role: practice
+    summary: 電車と睡眠の周期が重なる最初の時刻
+    evidence: https://flkanjin.hatenablog.com/entry/chineseremainder
+    status: verified
+- key: multiplicative-order
+  title: 位数（a^k ≡ 1 の最小の k）と周期
+  aliases:
+  - 位数
+  - order
+  - 周期
+  level: 黄
+  level_evidence: abc222_g (2242)・arc042_d (2247)・abc335_g (2614)
+  prerequisites:
+  - euler-phi
+  - divisor-enum
+  - mod-pow
+  acl: null
+  signs:
+  - n 個並べた数が K の倍数になる最小の n
+  - a^k ≡ 1
+  - 累乗の周期
+  compare_with:
+  - discrete-log
+  - exponent-mod
+  page: own
+  visual: mod 7 で 2 の累乗が {1,2,4} を回る円の図
+  problems:
+  - id: abc222_g
+    difficulty: 2242
+    role: example
+    summary: 10^n ≡ 1 となる最小の n を φ の約数から
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/222/G
+    status: verified
+  - id: arc042_d
+    difficulty: 2247
+    role: practice
+    summary: 区間の指数での X^i mod P の最小値
+    evidence: https://drken1215.hatenablog.com/entry/2020/11/04/045400
+    status: verified
+  - id: abc335_g
+    difficulty: 2614
+    role: practice
+    summary: A_i^k ≡ A_j となる組の数を位数で分類
+    evidence: https://drken1215.hatenablog.com/entry/2024/01/07/220400
+    status: verified
+- key: discrete-log
+  title: 離散対数（Baby-step Giant-step）
+  aliases:
+  - BSGS
+  - 離散対数問題
+  level: 黄
+  level_evidence: abc270_g (2220)・arc042_d (2247)
+  prerequisites:
+  - multiplicative-order
+  - mod-inverse
+  acl: null
+  signs:
+  - a^x ≡ b となる最小の x
+  - 一次漸化式 X ← AX+B で G が現れる番号
+  compare_with:
+  - multiplicative-order
+  page: own
+  visual: baby step の表と giant step の飛び方を並べた図
+  problems:
+  - id: abc270_g
+    difficulty: 2220
+    role: example
+    summary: X ← AX+B (mod P) で G が最初に出る番号（不動点で等比数列にして BSGS）
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/270/G
+    status: verified
+  - id: arc042_d
+    difficulty: 2247
+    role: practice
+    summary: 位数と探索の場合分け
+    evidence: https://drken1215.hatenablog.com/entry/2020/11/04/045400
+    status: verified
+- key: primitive-root
+  title: 原始根
+  aliases:
+  - primitive root
+  - 生成元
+  level: 黄
+  level_evidence: abc212_g (2150)。agc047_c (2496) は原始根で積を和に直して畳み込み
+  prerequisites:
+  - multiplicative-order
+  acl: 内部のみ（atcoder::internal::primitive_root）
+  signs:
+  - x^n ≡ y
+  - mod p の積を数える
+  - 積の mod を畳み込みに
+  compare_with:
+  - multiplicative-order
+  - convolution-ntt
+  page: own
+  visual: mod 7 で 3 の累乗が 1..6 を全て回る円の図
+  problems:
+  - id: abc212_g
+    difficulty: 2150
+    role: example
+    summary: x^n ≡ y となる組の数
+    evidence: https://drken1215.hatenablog.com/entry/2021/08/01/163600
+    status: verified
+  - id: agc047_c
+    difficulty: 2496
+    role: practice
+    summary: 全ペアの積 mod P の和（原始根で指数に直して畳み込み）
+    evidence: https://drken1215.hatenablog.com/entry/2020/11/04/155800
+    status: verified
+- key: mod-sqrt
+  title: 平方剰余・mod の k 乗根
+  aliases:
+  - Tonelli-Shanks
+  - Cipolla
+  - 平方剰余
+  level: 発展
+  level_evidence: ABC での必須例は見つからなかった（Library Checker の Sqrt Mod・K-th Root (Mod)）
+  prerequisites:
+  - primitive-root
+  acl: null
+  signs:
+  - x² ≡ a (mod p)
+  compare_with:
+  - discrete-log
+  page: overview
+  visual: null
+  problems: []
+- key: floor-quotient-enum
+  title: 商の列挙（floor(N/i) の値は O(√N) 種類）
+  aliases:
+  - 商列挙
+  - 数論分块
+  - √N 分割
+  - floor でまとめる
+  level: 水
+  level_evidence: abc230_e (969) が直接の形。arc160_b (1275)・arc060_b (2261) で応用
+  prerequisites:
+  - harmonic-sum
+  - sigma-manipulation
+  acl: null
+  signs:
+  - Σ⌊N/i⌋
+  - N ≤ 10^12 で i を全部回せない
+  - N 進法の桁和
+  compare_with:
+  - floor-sum
+  - harmonic-sum
+  page: own
+  visual: i と ⌊N/i⌋ の階段グラフで同じ高さの段をまとめる動く図
+  problems:
+  - id: abc230_e
+    difficulty: 969
+    role: example
+    summary: Σ⌊N/i⌋ を商ごとにまとめる
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/230/E
+    status: verified
+  - id: abc296_d
+    difficulty: 999
+    role: practice
+    summary: M 以上で a×b と書ける最小（片方を √M まで）
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/16/011100
+    status: verified
+  - id: arc160_b
+    difficulty: 1275
+    role: practice
+    summary: xy, yz, zx ≤ N の組（中央を固定して √N で分ける）
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/15/124800
+    status: verified
+  - id: arc060_b
+    difficulty: 2261
+    role: example
+    summary: b 進の桁和（b ≤ √N は全探索、b > √N は式）
+    evidence: https://drken1215.hatenablog.com/entry/2024/09/14/115435
+    status: verified
+- key: floor-sum
+  title: floor sum（Σ⌊(ai+b)/m⌋）と Mod of Linear 系
+  aliases:
+  - 類ユークリッド
+  - sum of floor of linear
+  - floor_sum
+  level: 黄
+  level_evidence: abc443_g (2268)。abc313_g (2454)・abc283_h (2682) 以上は発展
+  prerequisites:
+  - floor-quotient-enum
+  - gcd-lcm
+  acl: atcoder::floor_sum
+  signs:
+  - Σ⌊(ai+b)/m⌋
+  - Σ (ai+b) mod m
+  - 直線の下の格子点
+  - 一次式の mod
+  compare_with:
+  - floor-quotient-enum
+  page: own
+  visual: 直線の下の格子点を数え、傾きを 1 未満にしてから縦横を入れ替える 2 段階の図
+  problems:
+  - id: practice2_c
+    difficulty: null
+    role: example
+    summary: ACL の floor_sum をそのまま使う
+    evidence: https://drken1215.hatenablog.com/entry/2022/12/14/235718
+    status: verified
+  - id: abc443_g
+    difficulty: 2268
+    role: example
+    summary: (Ak+B) mod M > k となる k の個数を floor の差の和に
+    evidence: https://hackmd.io/@cHW2LTvARJKGTUbciR39fQ/SyLDQFiLWl
+    status: verified
+  - id: abc313_g
+    difficulty: 2454
+    role: practice
+    summary: 石の再分配でできる状態の数を floor sum に帰着
+    evidence: https://drken1215.hatenablog.com/entry/2023/08/06/203145
+    status: verified
+  - id: abc283_h
+    difficulty: 2682
+    role: practice
+    summary: mod M が R の数の popcount の和（bit ごとに floor sum）
+    evidence: https://drken1215.hatenablog.com/entry/2022/12/26/125416
+    status: verified
+  - id: abc372_g
+    difficulty: 2925
+    role: practice
+    summary: 一次不等式を全て満たす正の整数の組（直線の下の格子点）
+    evidence: 未確認
+    status: unverified
+  - id: abc402_g
+    difficulty: 3381
+    role: practice
+    summary: 一次式の mod の積の和（一般化した floor sum）
+    evidence: 未確認
+    status: unverified
+- key: stern-brocot
+  title: Stern–Brocot 木・連分数・最良有理近似
+  aliases:
+  - 連分数
+  - 最良近似
+  - Farey 数列
+  level: 発展
+  level_evidence: abc333_g (2536)
+  prerequisites:
+  - gcd-lcm
+  - rational-normalization
+  acl: null
+  signs:
+  - 分母・分子が N 以下で最も近い分数
+  compare_with:
+  - floor-sum
+  page: overview
+  visual: Stern–Brocot 木を同じ方向にまとめて降りる図
+  problems:
+  - id: abc333_g
+    difficulty: 2536
+    role: example
+    summary: 実数 R に最も近い分数（木を連続移動でまとめて降りる）
+    evidence: https://kmjp.hatenablog.jp/entry/2023/12/16/0900
+    status: verified
+- key: integer-root
+  title: 整数の平方根・k 乗根と累乗数
+  aliases:
+  - isqrt
+  - 整数平方根
+  - 累乗数
+  - perfect power
+  level: 基礎
+  level_evidence: abc193_c (379)・abc400_c (702)。abc361_f (1606)・abc243_g (2032) で応用
+  prerequisites:
+  - integer-division
+  - overflow-check
+  acl: null
+  signs:
+  - N ≤ 10^18 の平方数
+  - a^b の形で表せる数
+  - √ を整数で
+  compare_with:
+  - overflow-check
+  page: own
+  visual: sqrt の結果を r² ≤ N < (r+1)² になるまで補正する流れ
+  problems:
+  - id: abc193_c
+    difficulty: 379
+    role: example
+    summary: a^b で表せない数（√N まで列挙して重複除去）
+    evidence: https://drken1215.hatenablog.com/entry/2021/03/02/140000
+    status: verified
+  - id: abc400_c
+    difficulty: 702
+    role: example
+    summary: 2^a × b² で表せる数（整数平方根と重複除去）
+    evidence: https://yuulis.hatenablog.com/entry/ABC-400-C
+    status: verified
+  - id: abc361_f
+    difficulty: 1606
+    role: practice
+    summary: 10^18 以下の累乗数の個数
+    evidence: https://drken1215.hatenablog.com/entry/2024/07/07/020716
+    status: verified
+  - id: abc243_g
+    difficulty: 2032
+    role: practice
+    summary: 平方根以下を選ぶ数列（正確な isqrt と累積和）
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/243/G
+    status: verified
+- key: base-conversion
+  title: N 進法（負の基数・26 進・基数の二分探索）
+  aliases:
+  - 基数変換
+  - b 進法
+  - −2 進法
+  level: 基礎
+  level_evidence: abc171_c (560)・abc105_c (1204)・abc192_d (1425)
+  prerequisites:
+  - integer-division
+  acl: null
+  signs:
+  - b 進法
+  - −2 進法
+  - a..z, aa, …
+  compare_with:
+  - bit-operations
+  page: own
+  visual: b で割った余りを下から積んでいく図
+  problems:
+  - id: abc186_c
+    difficulty: 131
+    role: example
+    summary: 10 進でも 8 進でも 7 を含まない数
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/19/224100
+    status: verified
+  - id: abc171_c
+    difficulty: 560
+    role: example
+    summary: 1 始まりの 26 進（犬の名前）
+    evidence: https://drken1215.hatenablog.com/entry/2020/06/21/225500
+    status: verified
+  - id: typical90_bo
+    difficulty: null
+    role: practice
+    summary: 8 進 → 9 進の変換を K 回
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/067.cpp
+    status: verified
+  - id: abc105_c
+    difficulty: 1204
+    role: practice
+    summary: −2 進法
+    evidence: https://drken1215.hatenablog.com/entry/2018/08/13/123600
+    status: verified
+  - id: abc192_d
+    difficulty: 1425
+    role: practice
+    summary: n 進で読んで M 以下になる n の個数（二分探索）
+    evidence: https://atcoder-tags.herokuapp.com/tags/Mathematics/Number
+    status: tag
+- key: matrix-power
+  title: 行列累乗
+  aliases:
+  - 行列の累乗
+  - matrix exponentiation
+  - 線形漸化式
+  level: 黄
+  level_evidence: abc305_g (1989)・abc204_f (2044)・abc199_f (2065)・abc256_g (2250) に集まる
+  prerequisites:
+  - mod-arithmetic
+  - mod-pow
+  acl: null
+  signs:
+  - K ≤ 10^18 回の操作
+  - 漸化式の第 N 項
+  - 状態数 ≤ 100 で回数が巨大
+  - 長さ K のパスの数
+  compare_with:
+  - linear-recurrence-fast
+  - doubling
+  - geometric-series-mod
+  page: own
+  visual: 漸化式をベクトルに行列を掛ける図で表し、A² が 2 歩の経路数になることを示す
+  problems:
+  - id: dp_r
+    difficulty: null
+    role: example
+    summary: 長さ K の経路の数（隣接行列の K 乗）
+    evidence: https://atcoder-tags.herokuapp.com/tags/Dynamic-Programming/Matrix-Power
+    status: tag
+  - id: math_and_algorithm_aw
+    difficulty: null
+    role: practice
+    summary: K×N のドミノ敷き詰め（2^K 状態の遷移行列）
+    evidence: https://github.com/E869120/math-algorithm-book/blob/main/editorial/chap4-7/prob4-7-4.cpp
+    status: verified
+  - id: abc189_e
+    difficulty: 1526
+    role: practice
+    summary: 回転・反転をアフィン変換の行列の積で前計算
+    evidence: https://atcoder-tags.herokuapp.com/tags/Mathematics/Matrix
+    status: tag
+  - id: abc305_g
+    difficulty: 1989
+    role: practice
+    summary: 禁止文字列を含まない文字列の数（オートマトンの行列累乗）
+    evidence: https://atcoder-tags.herokuapp.com/tags/Dynamic-Programming/Matrix-Power
+    status: tag
+  - id: abc204_f
+    difficulty: 2044
+    role: practice
+    summary: 幅 H ≤ 6 の畳の敷き方（bitDP の行列累乗）
+    evidence: https://atcoder-tags.herokuapp.com/tags/Dynamic-Programming/Matrix-Power
+    status: tag
+  - id: abc199_f
+    difficulty: 2065
+    role: example
+    summary: 辺の平均化を K 回した期待値（N ≤ 100 の行列累乗）
+    evidence: https://blog.hamayanhamayan.com/entry/2021/04/25/002525
+    status: verified
+  - id: abc256_g
+    difficulty: 2250
+    role: practice
+    summary: 正 N 角形の周の石の配置（DP を行列累乗）
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/04/181400
+    status: verified
+- key: semiring-matrix
+  title: 半環上の行列積（min-plus・max-min・AND/XOR）
+  aliases:
+  - トロピカル半環
+  - min-plus 行列
+  - max-plus 行列
+  level: 黄
+  level_evidence: abc009_4 (2213)・abc236_g (2438)
+  prerequisites:
+  - matrix-power
+  acl: null
+  signs:
+  - K 本の辺で最短
+  - AND と XOR の漸化式
+  - ボトルネック
+  compare_with:
+  - matrix-power
+  - doubling
+  page: section-of:matrix-power
+  visual: null
+  problems:
+  - id: abc009_4
+    difficulty: 2213
+    role: example
+    summary: AND を積・XOR を和とみた行列累乗
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/05/102300
+    status: verified
+  - id: abc236_g
+    difficulty: 2438
+    role: practice
+    summary: 長さ L の歩道がいつ存在するか（max-min の行列累乗）
+    evidence: 未確認
+    status: unverified
+- key: linear-recurrence-fast
+  title: 線形漸化式の高速化（きたまさ法・Bostan–Mori・Berlekamp–Massey）
+  aliases:
+  - きたまさ法
+  - Bostan-Mori
+  - Berlekamp-Massey
+  - Fiduccia
+  level: 発展
+  level_evidence: abc436_g (2164) で黄 diff にも出たが、まとまって現れるのは abc300_h (3209) など発展
+  prerequisites:
+  - matrix-power
+  - fps-basics
+  acl: null
+  signs:
+  - 線形漸化式で項数 K が数百〜数千
+  - 有理式の N 次の係数
+  - N ≤ 10^18
+  compare_with:
+  - matrix-power
+  page: overview
+  visual: null
+  problems:
+  - id: tdpc_fibonacci
+    difficulty: null
+    role: example
+    summary: K 項の線形漸化式の第 N 項
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/02/160300
+    status: verified
+  - id: typical90_e
+    difficulty: null
+    role: practice
+    summary: 桁 DP のダブリング（別解に Bostan–Mori）
+    evidence: https://drken1215.hatenablog.com/entry/2021/10/08/231200
+    status: verified
+  - id: abc436_g
+    difficulty: 2164
+    role: practice
+    summary: Σ A_i x_i ≤ M の非負整数解の数（有理式の係数）
+    evidence: https://www.cnblogs.com/ruierqwq/p/19355328/abc436g
+    status: verified
+  - id: abc300_h
+    difficulty: 3209
+    role: practice
+    summary: bit 条件付きの漸化式の項の和（Bostan–Mori）
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/02/202900
+    status: verified
+- key: gaussian-elimination
+  title: 掃き出し法（連立一次方程式・ランク・解の個数）
+  aliases:
+  - ガウスの消去法
+  - Gauss-Jordan
+  - 連立一次方程式
+  - ランク
+  - ライツアウト
+  level: 黄
+  level_evidence: abc313_d (1630)・typical90_be（★6）・abc366_g (2409)・yahoo_procon2019_qual_e (2585)
+  prerequisites:
+  - mod-inverse
+  acl: null
+  signs:
+  - スイッチを押すと複数が反転
+  - 偶奇の条件が N 個
+  - XOR が 0
+  - 解の個数 2^(N−r)
+  compare_with:
+  - xor-basis
+  - bit-full-search
+  page: own
+  visual: 行列を 1 列ずつ掃き出すステップ送り（ピボット行を色付け）
+  problems:
+  - id: abc128_c
+    difficulty: 805
+    role: example
+    summary: スイッチと電球（bit 全探索で足りる入門例）
+    evidence: https://drken1215.hatenablog.com/entry/2019/06/15/135300
+    status: verified
+  - id: abc313_d
+    difficulty: 1630
+    role: practice
+    summary: 偶奇の質問から 0/1 列を復元（インタラクティブ）
+    evidence: https://drken1215.hatenablog.com/entry/2023/08/06/010000
+    status: verified
+  - id: typical90_be
+    difficulty: null
+    role: example
+    summary: パネル反転の押し方の数（F2 のランク）
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/057.cpp
+    status: verified
+  - id: abc366_g
+    difficulty: 2409
+    role: practice
+    summary: 隣接頂点の XOR が 0 になる書き込み（bit ごとに F2）
+    evidence: https://kmjp.hatenablog.jp/entry/2024/08/16/1000
+    status: verified
+  - id: yahoo_procon2019_qual_e
+    difficulty: 2585
+    role: practice
+    summary: 和が奇数になる行・列の選び方（ランク）
+    evidence: https://drken1215.hatenablog.com/entry/2019/02/10/024200
+    status: verified
+- key: xor-basis
+  title: XOR 基底（F2 上の線形代数）
+  aliases:
+  - 線形基底
+  - linear basis
+  - F2 の基底
+  level: 黄
+  level_evidence: abc236_f (1943)・agc045_a (2070)・abc283_g (2173)・abc141_f (2342)
+  prerequisites:
+  - gaussian-elimination
+  - bit-operations
+  acl: null
+  signs:
+  - 部分集合の XOR
+  - XOR の最大
+  - 作れる XOR の個数
+  - K 番目に小さい XOR
+  compare_with:
+  - gaussian-elimination
+  - binary-trie
+  - bit-contribution
+  page: own
+  visual: 数を 2 進で行に並べ、最上位 bit ごとに掃き出すステップ送り
+  problems:
+  - id: abc236_f
+    difficulty: 1943
+    role: example
+    summary: 全ての値を作れる最小コスト（安い順に基底へ）
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/236/F
+    status: verified
+  - id: agc045_a
+    difficulty: 2070
+    role: practice
+    summary: XOR するかを選ぶゲームで 0 にできるか
+    evidence: https://usaco.guide/adv/xor-basis
+    status: tag
+  - id: abc283_g
+    difficulty: 2173
+    role: example
+    summary: 部分列の XOR の L〜R 番目（簡約した基底）
+    evidence: https://miscalc.hatenablog.com/entry/2024/03/21/235130
+    status: verified
+  - id: abc141_f
+    difficulty: 2342
+    role: example
+    summary: 2 グループの XOR 和の和の最大
+    evidence: https://drken1215.hatenablog.com/entry/2019/09/16/213700
+    status: verified
+  - id: zone2021_f
+    difficulty: 2197
+    role: practice
+    summary: XOR で作れない差がある全域木の構成
+    evidence: https://atcoder-tags.herokuapp.com/tags/Mathematics/XOR
+    status: tag
+  - id: abc249_g
+    difficulty: 2756
+    role: practice
+    summary: 表の XOR ≤ K で裏の XOR を最大化
+    evidence: https://miscalc.hatenablog.com/entry/2024/03/21/235130
+    status: verified
+  - id: abc223_h
+    difficulty: 2771
+    role: practice
+    summary: 区間の数で XOR して X を作れるか（区間クエリ版）
+    evidence: 未確認
+    status: unverified
+  - id: abc451_g
+    difficulty: 2221
+    role: practice
+    summary: 歩道の XOR の最小が K 以下の頂点対（閉路の XOR 基底）
+    evidence: 未確認
+    status: unverified
+- key: determinant
+  title: 行列式・行列木定理
+  aliases:
+  - 行列式
+  - Kirchhoff
+  - 全域木の数え上げ
+  level: 発展
+  level_evidence: abc253_h (2758)（未確認）
+  prerequisites:
+  - gaussian-elimination
+  acl: null
+  signs:
+  - 全域木の数
+  - 行列式 mod p
+  compare_with:
+  - minimum-spanning-tree
+  page: overview
+  visual: null
+  problems:
+  - id: abc253_h
+    difficulty: 2758
+    role: practice
+    summary: 辺を選んで森になる確率（部分集合ごとの全域木の数）
+    evidence: 未確認
+    status: unverified
+- key: convolution-ntt
+  title: 畳み込み（FFT・NTT）
+  aliases:
+  - FFT
+  - NTT
+  - 数論変換
+  - 高速フーリエ変換
+  - 多項式乗算
+  level: 黄
+  level_evidence: abc392_g (1817)・abc291_g (2176)・abc196_f (2274)・typical90_bm（★7）。青に下げる案あり
+  prerequisites:
+  - mod-arithmetic
+  acl: atcoder::convolution
+  signs:
+  - 全ての k について和が k の組の数
+  - ずらして一致する数
+  - 多項式の積
+  - i − j = k の組
+  compare_with:
+  - arbitrary-mod-convolution
+  - hadamard-transform
+  page: own
+  visual: 片方を反転して少しずつずらしながら重なりの積を足す素朴な畳み込みの動く図
+  problems:
+  - id: practice2_f
+    difficulty: null
+    role: example
+    summary: ACL の convolution をそのまま使う
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/24/014903
+    status: verified
+  - id: abc143_d
+    difficulty: 686
+    role: practice
+    summary: 三角形を作る棒の組（和の個数を畳み込みで数える別解）
+    evidence: https://drken1215.hatenablog.com/entry/2019/10/20/032700
+    status: verified
+  - id: typical90_bm
+    difficulty: null
+    role: example
+    summary: 色ごとの二項係数の列を畳み込む
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/065-03.cpp
+    status: verified
+  - id: abc392_g
+    difficulty: 1817
+    role: example
+    summary: 等差 3 項の数（指示関数を自分と畳み込む）
+    evidence: https://merom686.hatenablog.com/entry/2025/02/09/020958
+    status: verified
+  - id: abc291_g
+    difficulty: 2176
+    role: example
+    summary: 回転ごとの OR の和（bit ごとに反転して畳み込み）
+    evidence: https://kmjp.hatenablog.jp/entry/2023/02/26/0900
+    status: verified
+  - id: abc196_f
+    difficulty: 2274
+    role: practice
+    summary: 最小ハミング距離（T を反転して畳み込み）
+    evidence: https://kmjp.hatenablog.jp/entry/2021/03/20/1000
+    status: verified
+- key: arbitrary-mod-convolution
+  title: 任意 mod・整数の畳み込み（3 素数 NTT＋Garner）
+  aliases:
+  - 任意 mod 畳み込み
+  - convolution_ll
+  - Garner
+  level: 発展
+  level_evidence: ABC での必須例は見つからなかった（Library Checker の Convolution (mod 1,000,000,007)）
+  prerequisites:
+  - convolution-ntt
+  - crt
+  acl: atcoder::convolution_ll
+  signs:
+  - mod 10^9+7 の畳み込み
+  - 整数のままの畳み込み
+  compare_with:
+  - convolution-ntt
+  page: section-of:convolution-ntt
+  visual: null
+  problems: []
+- key: hadamard-transform
+  title: XOR 畳み込み（アダマール変換）
+  aliases:
+  - Walsh-Hadamard
+  - FWHT
+  - XOR convolution
+  level: 発展
+  level_evidence: abc212_h (2741)・abc265_h (3319)
+  prerequisites:
+  - convolution-ntt
+  - bit-operations
+  acl: null
+  signs:
+  - i XOR j = k の組を数える
+  - Nim の盤面を数える
+  compare_with:
+  - fast-zeta-transform
+  - convolution-ntt
+  page: overview
+  visual: null
+  problems:
+  - id: abc212_h
+    difficulty: 2741
+    role: example
+    summary: 先手必勝の Nim の盤面の数（XOR 畳み込み）
+    evidence: https://drken1215.hatenablog.com/entry/2021/08/01/025200
+    status: verified
+  - id: abc265_h
+    difficulty: 3319
+    role: practice
+    summary: FFT とアダマール変換の発展問題
+    evidence: https://nyaannyaan.github.io/docs/problems/editorials/
+    status: tag
+- key: online-convolution
+  title: 分割統治 FFT・オンライン畳み込み
+  aliases:
+  - 分割統治 FFT
+  - relaxed convolution
+  - 多項式の積の分割統治
+  level: 発展
+  level_evidence: abc352_g (2413)・abc213_h (2806)・abc357_g (3159)・abc281_h (3180)
+  prerequisites:
+  - convolution-ntt
+  acl: null
+  signs:
+  - Π(1 + a_i x)
+  - dp[i] が dp[0..i−1] との畳み込みで決まる
+  compare_with:
+  - convolution-ntt
+  page: overview
+  visual: null
+  problems:
+  - id: abc352_g
+    difficulty: 2413
+    role: example
+    summary: 一次式の積を分割統治で
+    evidence: https://drken1215.hatenablog.com/entry/2024/05/05/023117
+    status: verified
+  - id: abc213_h
+    difficulty: 2806
+    role: practice
+    summary: 距離ごとの経路数を左から（オンライン）
+    evidence: https://drken1215.hatenablog.com/entry/2021/08/14/184730
+    status: verified
+  - id: abc281_h
+    difficulty: 3180
+    role: practice
+    summary: 平方分割＋オンライン分割統治 FFT
+    evidence: https://drken1215.hatenablog.com/entry/2023/01/07/162412
+    status: verified
+  - id: abc357_g
+    difficulty: 3159
+    role: practice
+    summary: 分割統治 FFT の発展問題
+    evidence: https://nyaannyaan.github.io/docs/problems/editorials/
+    status: tag
+- key: fps-basics
+  title: 形式的冪級数（inv・log・exp・pow、母関数）
+  aliases:
+  - FPS
+  - 母関数
+  - 生成関数
+  - 形式的べき級数
+  level: 発展
+  level_evidence: abc303_h (2501)・abc318_h (2785)・abc289_h (3246)・abc345_g (3343)。abc321_f (1645) は戻す DP で解ける
+  prerequisites:
+  - convolution-ntt
+  - mod-inverse
+  acl: null
+  signs:
+  - 母関数
+  - 多項式の逆元・累乗
+  - (1 + x^v) を掛ける・割る
+  compare_with:
+  - online-convolution
+  - lagrange-interpolation
+  page: overview
+  visual: null
+  problems:
+  - id: abc321_f
+    difficulty: 1645
+    role: example
+    summary: 追加・削除のたびに和が K の部分集合の数（多項式の掛け算・割り算）
+    evidence: https://drken1215.hatenablog.com/entry/2023/09/25/070100
+    status: verified
+  - id: abc303_h
+    difficulty: 2501
+    role: practice
+    summary: 次数制約付きの木の数（Prüfer 列と FPS の累乗）
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/28/010200
+    status: verified
+  - id: abc318_h
+    difficulty: 2785
+    role: practice
+    summary: 包除と FPS で数える
+    evidence: https://drken1215.hatenablog.com/entry/2023/09/03/161400
+    status: verified
+  - id: abc289_h
+    difficulty: 3246
+    role: practice
+    summary: 多項式の逆元を使う発展問題
+    evidence: https://nyaannyaan.github.io/docs/problems/editorials/
+    status: tag
+  - id: abc345_g
+    difficulty: 3343
+    role: practice
+    summary: ニュートン法・ラグランジュの反転公式
+    evidence: https://nyaannyaan.github.io/docs/problems/editorials/
+    status: tag
+- key: lagrange-interpolation
+  title: ラグランジュ補間とべき乗和
+  aliases:
+  - 多項式補間
+  - べき乗和
+  - Faulhaber
+  level: 発展
+  level_evidence: abc137_f (2402)・abc208_f (2772)
+  prerequisites:
+  - mod-inverse
+  acl: null
+  signs:
+  - 答えは N の多項式
+  - Σ i^k
+  - p 点の値から係数
+  compare_with:
+  - gaussian-elimination
+  - fps-basics
+  page: overview
+  visual: null
+  problems:
+  - id: abc137_f
+    difficulty: 2402
+    role: example
+    summary: mod p で p 点の値から係数を復元
+    evidence: https://kmjp.hatenablog.jp/entry/2019/08/10/0930
+    status: verified
+  - id: abc208_f
+    difficulty: 2772
+    role: practice
+    summary: 累積和を K 回取った値（N の多項式）を補間
+    evidence: https://nyaannyaan.github.io/docs/problems/editorials/
+    status: tag
+- key: polynomial-ops
+  title: 多項式の除算・Taylor shift・多点評価
+  aliases:
+  - 多項式除算
+  - Taylor shift
+  - 多点評価
+  level: 発展
+  level_evidence: abc245_d (815) は筆算の易しい問題。abc215_g (2276) の別解で Taylor shift
+  prerequisites:
+  - convolution-ntt
+  acl: null
+  signs:
+  - 多項式の割り算
+  - f(x + c) の係数
+  compare_with:
+  - fps-basics
+  page: section-of:fps-basics
+  visual: null
+  problems:
+  - id: abc245_d
+    difficulty: 815
+    role: example
+    summary: A(x)B(x) = C(x) から B を求める（筆算）
+    evidence: https://drken1215.hatenablog.com/entry/2022/03/29/190000
+    status: verified
+  - id: abc215_g
+    difficulty: 2276
+    role: practice
+    summary: 期待値の式の評価を Taylor shift で
+    evidence: https://drken1215.hatenablog.com/entry/2023/09/04/015942
+    status: verified

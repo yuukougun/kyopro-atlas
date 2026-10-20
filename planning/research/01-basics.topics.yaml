@@ -1,0 +1,2660 @@
+# 01 探索・基本テクニック・考察（basics）の項目一覧。説明は 01-basics.md。
+# 手引きの形式に加え、problems に stars（典型90問の★）・experimental（difficulty が参考値）・note（別解など）を付けた。
+area: basics
+topics:
+- key: complexity-estimation
+  title: 計算量の見積もり（制約から手法を逆算する）
+  aliases:
+  - 計算量
+  - オーダー
+  - 制約から考える
+  - TLE の見積もり
+  level: 基礎
+  level_evidence: '全分野の前提。見積もり自体が問われる例: typical90_bc（★2、定数倍の見積もり）、typical90_bt（★4、探索の通り数の見積もり）、abc196_d（diff 1277、愚直 DFS で間に合うことの見積もり）'
+  prerequisites: []
+  acl: null
+  signs:
+  - N ≤ 8 / 20 / 40 / 400 / 5000 / 2×10^5 / 10^18 などの制約
+  - 実行時間制限が 5 秒など長い
+  - Q 個のクエリ
+  - 値の上限が 10^6 程度
+  compare_with:
+  - amortized-analysis
+  - harmonic-series
+  - small-search-space
+  page: own
+  visual: 制約の数直線（N の大きさ）に許される計算量と手法を並べた帯図。各計算量の実際の演算回数（2×10^5 で N log N ≈ 3.5×10^6 など）を棒グラフで比べる
+  problems:
+  - id: typical90_bc
+    difficulty: null
+    role: example
+    summary: 100 個から 5 個選ぶ組合せ（約 7.5×10^7 通り）を全部調べて積の余りを数える。定数倍まで見積もって全探索で間に合うと判断する
+    evidence: https://github.com/Reputeless/tenkei_90
+    stars: 2
+  - id: typical90_bt
+    difficulty: null
+    role: practice
+    summary: 小さいグリッドで山を避ける最長の閉路を探す。経路の通り数を見積もったうえでバックトラックで全部試す
+    evidence: https://github.com/Reputeless/tenkei_90
+    stars: 4
+  - id: abc196_d
+    difficulty: 1277
+    role: practice
+    summary: H×W ≤ 16 のマス目を 1×2 と 1×1 の畳で敷き詰める方法を数える。置き方を DFS で全部試しても間に合う規模だと見積もる
+    evidence: https://blog.hamayanhamayan.com/entry/2021/03/21/124541
+- key: amortized-analysis
+  title: ならし計算量（全体で何回動くかで数える）
+  aliases:
+  - 償却計算量
+  - アモータイズ解析
+  - amortized
+  level: 基礎
+  level_evidence: hhkb2020_c（diff 352、mex のポインタが単調に進む）、abc278_d（559、一括代入を時刻で管理）。drken カテゴリ「ならし計算量解析」の ABC 6 問の中央値 1076
+  prerequisites:
+  - complexity-estimation
+  acl: null
+  signs:
+  - ポインタが戻らない
+  - 各要素が一度入って一度出るだけ
+  - while ループの中で for がある
+  compare_with:
+  - two-pointers
+  page: section-of:complexity-estimation
+  visual: 各要素の「入る・出る」を時間軸に並べ、合計が 2N を超えないことを示す図
+  problems:
+  - id: hhkb2020_c
+    difficulty: 352
+    role: example
+    summary: 数を 1 つずつ追加するたびに、まだ現れていない最小の非負整数を出力する。答えのポインタは戻らないので全体で O(N + 値の上限)
+    evidence: https://drken1215.hatenablog.com/entry/2020/10/11/200000
+  - id: abc278_d
+    difficulty: 559
+    role: practice
+    summary: 全体への一括代入と一点加算・一点取得のクエリ。一括代入の時刻を覚えて、触った要素だけ遅れて更新する
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/05/002000
+- key: harmonic-series
+  title: 調和級数の計算量（倍数を列挙する全探索）
+  aliases:
+  - N/1+N/2+…+N/N
+  - 倍数の列挙
+  - エラトステネス的な数え上げ
+  level: 水
+  level_evidence: abc170_d（1033）, abc177_e（1057）は緑だが、abc356_e（1506）, abc206_e（1745）など水〜青で多い。drken「調和級数」ABC 10 問の中央値 1282
+  prerequisites:
+  - complexity-estimation
+  - bucket-counting
+  acl: null
+  signs:
+  - A_i ≤ 10^6 程度で値を添字にできる
+  - 約数・倍数の関係にある組を数える
+  - ⌊A_j / A_i⌋ の総和
+  compare_with:
+  - eratosthenes-sieve
+  - divisor-inclusion-exclusion
+  page: own
+  visual: d = 1, 2, 3, … ごとに倍数の位置に印を付けていくステップ送り。各段の印の数 N/d を積み上げて N ln N に近づくことを見せる
+  problems:
+  - id: abc170_d
+    difficulty: 1033
+    role: example
+    summary: 他のどの要素でも割り切れない要素の個数。値の上限までの各値の倍数に印を付ける（全体で値の上限 × log）
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/30/081500
+  - id: abc177_e
+    difficulty: 1057
+    role: example
+    summary: N 個の数が互いに素か・全体の gcd が 1 か を判定する。各値の倍数が何個あるかを調和級数の計算量で数える
+    evidence: https://drken1215.hatenablog.com/entry/2020/10/31/203300
+    note: 06 の篩とも関係
+  - id: abc356_e
+    difficulty: 1506
+    role: practice
+    summary: 全ペアの ⌊max/min⌋ の総和。値ごとの個数の累積和を使い、商が同じになる範囲を倍数ごとにまとめて数える
+    evidence: https://drken1215.hatenablog.com/entry/2024/06/08/032313
+  - id: abc206_e
+    difficulty: 1745
+    role: practice
+    summary: L 以上 R 以下で gcd(x, y) が 1 でも x, y 自身でもない組の数。gcd を固定して倍数の個数から数え、包除する
+    evidence: https://drken1215.hatenablog.com/entry/2021/06/25/121800
+    note: 07 の約数包除と境界
+- key: small-search-space
+  title: 候補が少ないことに気づく（探索の対象を選び直す）
+  aliases:
+  - 状態数が少ない
+  - 変な制約に着目
+  - 約数の個数は少ない
+  - log 回で収束
+  level: 基礎
+  level_evidence: sumitb2019_d（838）、typical90_bk（★4）、typical90_cg（★4）、abc153_d（129）。いずれも ABC C〜D 相当
+  prerequisites:
+  - brute-force
+  - complexity-estimation
+  acl: null
+  signs:
+  - 一方の制約だけ極端に小さい（H ≤ 8 など）
+  - 答えの候補が 1000 通りなど N によらず少ない
+  - K ≤ 10^12 で約数を扱う
+  - 値が毎回半分になる
+  compare_with:
+  - brute-force
+  - harmonic-series
+  page: section-of:brute-force
+  visual: 探索の対象（入力側 / 答え側 / 小さい次元）を入れ替えたときの通り数を並べて比べる表
+  problems:
+  - id: sumitb2019_d
+    difficulty: 838
+    role: example
+    summary: 長さ N の数字列から 3 桁の暗証番号が何種類作れるか。番号の候補 1000 通りの側を全探索して作れるか判定する
+    evidence: https://qiita.com/dvoraker3/items/8388ab6e1dc3af55070e
+    note: 典型90 063 の類題として分類
+  - id: typical90_bk
+    difficulty: null
+    role: example
+    summary: グリッドから行と列を選ぶ。行数 H ≤ 8 の側の選び方 2^H 通りを全探索し、列はまとめて数える
+    evidence: https://github.com/Reputeless/tenkei_90
+    stars: 4
+  - id: typical90_cg
+    difficulty: null
+    role: practice
+    summary: abc = K（K ≤ 10^12）となる組を数える。約数の個数が少ないので約数の組を全探索する
+    evidence: https://github.com/Reputeless/tenkei_90
+    stars: 4
+    note: 10^12 以下の約数の個数の最大は 6720
+  - id: abc153_d
+    difficulty: 129
+    role: practice
+    summary: 体力が半分になって分裂するモンスターをすべて倒す攻撃回数。分裂の深さは log H なので再帰で数えられる
+    evidence: https://drken1215.hatenablog.com/entry/2020/01/26/224500
+- key: brute-force
+  title: 全探索の設計（何を全探索するか・固定して残りを決める）
+  aliases:
+  - 全列挙
+  - 工夫した全探索
+  - 総当たり
+  level: 基礎
+  level_evidence: arc096_a（291）, abc085_c（584）, abc051_b（784）, abc112_c（1147）。E869120 中級編の「工夫して通り数を減らす全列挙」
+  prerequisites:
+  - complexity-estimation
+  acl: null
+  signs:
+  - 変数が 2〜3 個で、2 つ決めれば残りが決まる
+  - 答えの候補（中心・座標・値）が少ない
+  - 制約が小さい
+  compare_with:
+  - bit-full-search
+  - fix-variable
+  - small-search-space
+  page: own
+  visual: 3 重ループと「2 つ決めて 3 つ目を計算」のループ回数を比べる図
+  problems:
+  - id: arc096_a
+    difficulty: 291
+    role: example
+    summary: A・B・AB ピザの買い方で費用を最小化する。AB ピザの枚数だけを全探索すれば残りの枚数は決まる
+    evidence: https://qiita.com/e869120/items/eb50fdaece12be418faa
+    note: ABC 095 C。工夫した全探索として分類
+  - id: abc085_c
+    difficulty: 584
+    role: example
+    summary: 1 万円・5 千円・千円札が合計 N 枚で Y 円になるか。2 種類の枚数を決めれば 3 種類目が決まる
+    evidence: https://drken1215.hatenablog.com/entry/2024/05/15/005149
+  - id: abc051_b
+    difficulty: 784
+    role: practice
+    summary: 0 以上 K 以下の X, Y, Z で X+Y+Z = S となる組を数える。2 つを決めて残りを計算する
+    evidence: https://drken1215.hatenablog.com/entry/2019/07/06/221600
+  - id: abc089_c
+    difficulty: 642
+    role: practice
+    summary: 名前の頭文字ごとに人数を数え、MARCH から 3 文字を選ぶ 10 通りを全探索して人数の積を足す
+    evidence: https://blog.hamayanhamayan.com/entry/2018/03/05/003346
+    note: 同じ種類をまとめて数える
+  - id: abc112_c
+    difficulty: 1147
+    role: practice
+    summary: ピラミッドの中心座標 101×101 通りを全探索し、情報から高さを決めて矛盾がないか確かめる
+    evidence: https://drken1215.hatenablog.com/entry/2018/11/06/120500
+    note: 決めてから整合性を確認する
+  - id: typical90_p
+    difficulty: null
+    role: practice
+    summary: 3 種類の硬貨でちょうど N 円払う最小枚数。2 種類の枚数を全探索し、3 種類目は割り算で決める
+    evidence: https://github.com/Reputeless/tenkei_90
+    stars: 3
+- key: grid-brute-force
+  title: 盤面を動かして全部試す（平行移動・回転の全探索）
+  aliases:
+  - ポリオミノ
+  - 盤面の回転
+  - 重ね合わせ
+  level: 水
+  level_evidence: abc307_c（1307）, abc322_d（1310）。いずれも ABC C/D で実装量が多い全探索
+  prerequisites:
+  - brute-force
+  acl: null
+  signs:
+  - 小さい盤面（4×4, 10×10 など）を重ねる・敷き詰める
+  - 回転・平行移動の組合せを試す
+  compare_with:
+  - recursive-enumeration
+  page: section-of:brute-force
+  visual: ピースを平行移動・回転させた全配置を一覧で並べる図
+  problems:
+  - id: abc307_c
+    difficulty: 1307
+    role: example
+    summary: 2 枚のシートを平行移動の全組合せで重ね、切り出した結果が目標と一致するかを調べる
+    evidence: https://drken1215.hatenablog.com/entry/2024/06/10/001849
+  - id: abc322_d
+    difficulty: 1310
+    role: practice
+    summary: 3 つのポリオミノを回転と平行移動の全組合せで置き、4×4 をちょうど埋められるか判定する
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/02/230400
+- key: bit-full-search
+  title: bit 全探索（k 進の全探索を含む）
+  aliases:
+  - ビット全探索
+  - 部分集合の全列挙
+  - 2^N 全探索
+  - 3 進全探索
+  level: 基礎
+  level_evidence: abc182_c（292）, abc190_c（472）, abc128_c（805）, abc197_c（809）, abc147_c（977）。応用は abc100_d（1331）, abc104_c（1393）, abc159_e（1450）。drken「bit全探索」ABC 16 問の中央値 642
+  prerequisites:
+  - brute-force
+  - bit-operations
+  acl: null
+  signs:
+  - N ≤ 15〜20 で各要素を「使う／使わない」
+  - スイッチの on/off
+  - 区切る／区切らない
+  - 各要素が 3 択なら 3^N（N ≤ 12 程度）
+  compare_with:
+  - recursive-enumeration
+  - meet-in-the-middle
+  - bit-dp
+  page: own
+  visual: 0〜2^N−1 の整数を 2 進表記で縦に並べ、1 の桁が「選ぶ」に対応することを示す表。片側を bit で決めて残りを貪欲にする型は 2 段の図
+  problems:
+  - id: abc182_c
+    difficulty: 292
+    role: example
+    summary: 各桁を残すか消すかを bit で全探索し、3 の倍数にできる最小の消去数を求める
+    evidence: https://drken1215.hatenablog.com/entry/2020/11/30/014517
+  - id: abc128_c
+    difficulty: 805
+    role: example
+    summary: スイッチの on/off 2^N 通りを試し、すべての電球が点く組合せを数える
+    evidence: https://drken1215.hatenablog.com/entry/2019/06/15/135300
+  - id: abc147_c
+    difficulty: 977
+    role: example
+    summary: 誰が正直者かを 2^N 通り仮定し、証言と矛盾しない場合の正直者の最大人数を求める
+    evidence: https://drken1215.hatenablog.com/entry/2019/12/14/180200
+    note: 決めてから整合性を確認する
+  - id: abc197_c
+    difficulty: 809
+    role: practice
+    summary: 数列を区間に区切り、各区間の OR の XOR を最小化する。区切り方 2^(N−1) 通りを全部試す
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc197-c.html
+    note: 典型90 002 の類題
+  - id: abc100_d
+    difficulty: 1331
+    role: practice
+    summary: x, y, z の符号の向き 8 通りを全探索し、各向きで評価値の大きい順に M 個取る
+    evidence: https://drken1215.hatenablog.com/entry/2018/06/16/234000
+    note: 片側を全探索して残りは貪欲
+  - id: abc159_e
+    difficulty: 1450
+    role: practice
+    summary: 横の切れ目 2^(H−1) 通りを全探索し、縦の切れ目は左から貪欲に入れて最小回数を求める
+    evidence: https://drken1215.hatenablog.com/entry/2020/03/23/002300
+    note: 片側を全探索して残りは貪欲
+- key: permutation-search
+  title: 順列全探索
+  aliases:
+  - next_permutation
+  - N! 全探索
+  level: 基礎
+  level_evidence: abc145_c（340）, abc150_c（422）, abc232_c（685）, abc371_c（849）。応用 abc198_d（1224）
+  prerequisites:
+  - brute-force
+  acl: null
+  signs:
+  - N ≤ 8〜10
+  - 訪問順・割り当て・頂点の対応を全部試す
+  - グラフの同型判定
+  compare_with:
+  - bit-dp
+  - recursive-enumeration
+  page: own
+  visual: next_permutation が辞書順に次の順列を作る手順のステップ送り（右端から下降が始まる位置を探して入れ替え、反転）
+  problems:
+  - id: abc145_c
+    difficulty: 340
+    role: example
+    summary: N ≤ 8 個の町を回る全順序について経路長の平均を求める
+    evidence: https://blog.hamayanhamayan.com/entry/2019/11/16/233917
+  - id: abc150_c
+    difficulty: 422
+    role: example
+    summary: 2 つの順列が辞書順で何番目かを、全順列を列挙して求める
+    evidence: https://drken1215.hatenablog.com/entry/2020/01/12/122100
+  - id: abc183_c
+    difficulty: 335
+    role: practice
+    summary: 都市 1 から出発して全都市を回り戻る経路のうち、所要時間がちょうど K のものを数える
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc183-c.html
+    note: 典型90 032 の類題
+  - id: abc232_c
+    difficulty: 685
+    role: practice
+    summary: 2 つのグラフが頂点の付け替えで一致するかを、8! 通りの対応を全部試して判定する
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc232-c.html
+  - id: abc371_c
+    difficulty: 849
+    role: practice
+    summary: 辺の追加・削除にコストを払って G を H と同型にする最小費用。頂点の対応 8! 通りを全部試す
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc371-c.html
+  - id: abc198_d
+    difficulty: 1224
+    role: practice
+    summary: 覆面算を解く。文字に数字を割り当てる方法を順列のように DFS で全部試す
+    evidence: https://blog.hamayanhamayan.com/entry/2021/04/11/225553
+- key: recursive-enumeration
+  title: 再帰による全列挙（バックトラック・組分け・枝刈り）
+  aliases:
+  - DFS による全列挙
+  - バックトラック
+  - グループ分けの全列挙
+  - 集合分割
+  - ベル数
+  level: 水
+  level_evidence: abc161_d（991）, abc114_c（1045）は緑、abc236_d（1190）, abc310_d（1368）, abc345_d（1419）, abc390_d（1607）で水〜青に多い。drken「全探索:再帰関数(ビット全探索困難)」ABC 10 問の中央値 1018
+  prerequisites:
+  - bit-full-search
+  - permutation-search
+  acl: null
+  signs:
+  - 条件を満たす数・列を小さい順にすべて作る
+  - N ≤ 10〜16 人を組・グループに分ける
+  - 敷き詰め・パズル
+  - 途中で条件違反なら打ち切れる
+  compare_with:
+  - bit-full-search
+  - bit-dp
+  page: own
+  visual: 再帰木のステップ送り。組分けでは「まだ組のない最小番号の人から決める」ことで同じ分け方を二度数えない様子を示す
+  problems:
+  - id: abc114_c
+    difficulty: 1045
+    role: example
+    summary: 7, 5, 3 だけからなり 3 種類すべてを含む N 以下の数を、桁を 1 つずつ足す再帰で数える
+    evidence: https://drken1215.hatenablog.com/entry/2019/04/03/125400
+  - id: abc161_d
+    difficulty: 991
+    role: example
+    summary: 隣り合う桁の差が 1 以下の数のうち K 番目を、小さい桁数から生成して求める
+    evidence: https://drken1215.hatenablog.com/entry/2020/04/05/150900
+  - id: abc236_d
+    difficulty: 1190
+    role: practice
+    summary: 2N 人を 2 人組に分ける全通りを再帰で列挙し、組ごとの値の XOR の最大を求める
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc236-d.html
+  - id: abc310_d
+    difficulty: 1368
+    role: practice
+    summary: N ≤ 10 人を T チームに分ける方法で、仲の悪い組が同じチームにならないものを数える
+    evidence: https://drken1215.hatenablog.com/entry/2023/07/17/213800
+    note: 最小番号から決めて重複を防ぐ
+  - id: abc345_d
+    difficulty: 1419
+    role: practice
+    summary: N 枚のタイルで H×W を覆えるか。左上の空きマスから置き方を試すバックトラック
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc345-d.html
+  - id: abc390_d
+    difficulty: 1607
+    role: practice
+    summary: N ≤ 12 個の袋をグループにまとめる方法（ベル数 B12 ≈ 4.2×10^6 通り）を全列挙し、グループごとの石の数の和の XOR が何種類あるか数える
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc390-d.html
+- key: meet-in-the-middle
+  title: 半分全列挙
+  aliases:
+  - Meet in the Middle
+  - 半分全探索
+  - 折半全列挙
+  level: 水
+  level_evidence: abc184_f（1423）, typical90_ay（★5 = diff 1200〜1599 相当）, abc271_f（1669）, agc026_c（1836）, abc300_g（2343）
+  prerequisites:
+  - bit-full-search
+  - binary-search
+  - two-pointers
+  - sorting-techniques
+  acl: null
+  signs:
+  - N ≤ 40 で部分集合を選ぶ
+  - 2^N は無理だが 2^(N/2) なら間に合う
+  - グリッドの経路で対角線までが短い
+  - 2 つの独立な選択を組み合わせて条件を満たす
+  compare_with:
+  - bit-full-search
+  - knapsack-dp
+  page: own
+  visual: 前半・後半の部分和リストを並べ、後半をソートして前半の各値に対し二分探索（または 2 ポインタ）で相手を探すステップ送り
+  problems:
+  - id: abc184_f
+    difficulty: 1423
+    role: example
+    summary: N ≤ 40 個から選ぶ和で T 以下の最大値。半分ずつ部分和を列挙し、ソートと二分探索で組み合わせる
+    evidence: https://drken1215.hatenablog.com/entry/2020/11/22/224100
+  - id: typical90_ay
+    difficulty: null
+    role: example
+    summary: N ≤ 40 個からちょうど K 個、合計 P 以下となる選び方を数える。半分ずつ個数別に列挙して二分探索で数える
+    evidence: https://qiita.com/dvoraker3/items/8388ab6e1dc3af55070e
+    stars: 5
+  - id: abc271_f
+    difficulty: 1669
+    role: practice
+    summary: グリッドの左上から右下への経路で XOR が 0 になる数。対角線で半分に分け、両側から列挙して突き合わせる
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc271-f.html
+  - id: agc026_c
+    difficulty: 1836
+    role: practice
+    summary: 2N 文字を赤青に塗り、赤を左から読んだ列と青を右から読んだ列が一致する塗り方を数える。前半の塗り方を列挙して後半と突き合わせる
+    evidence: https://drken1215.hatenablog.com/entry/2018/07/18/210000
+  - id: abc300_g
+    difficulty: 2343
+    role: practice
+    summary: p 以下の素数だけを素因数にもつ N 以下の数を数える。素数を 2 組に分けて積を列挙し、尺取りで組み合わせる
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/02/234200
+    note: 黄
+- key: binary-search
+  title: 二分探索（めぐる式・lower_bound・境界の扱い）
+  aliases:
+  - 二分法
+  - lower_bound
+  - upper_bound
+  - めぐる式二分探索
+  - partition_point
+  level: 基礎
+  level_evidence: abc302_d（682）, abc143_d（686）, abc205_d（713）, abc321_d（806）, arc084_a（1096）, abc119_d（1346）。drken「二分探索:lower_bound」ABC 26 問の中央値 917
+  prerequisites:
+  - sorting-techniques
+  acl: なし（STL の std::lower_bound / upper_bound / partition_point、std::ranges 版）。セグ木上の二分探索は atcoder::segtree::max_right / min_left（05 の担当）
+  signs:
+  - ソート済みの列で x 以上の最初の位置
+  - 片方を固定してもう片方の個数を数える
+  - 単調な関数の境界
+  compare_with:
+  - two-pointers
+  - binary-search-answer
+  page: own
+  visual: ok 側と ng 側を色分けした数直線で、2 本の指が近づくステップ送り（不変条件「ok は常に条件を満たし ng は満たさない」を表示）
+  problems:
+  - id: abc205_d
+    difficulty: 713
+    role: example
+    summary: 昇順の数列に含まれない正整数のうち K 番目を、「x 以下で欠けている個数」の単調性を使って二分探索する
+    evidence: https://drken1215.hatenablog.com/entry/2024/05/20/004045
+  - id: abc143_d
+    difficulty: 686
+    role: example
+    summary: 三角形を作れる 3 本の組を数える。2 本を固定し、3 本目の長さの上限を二分探索して個数を数える
+    evidence: https://drken1215.hatenablog.com/entry/2019/10/20/032700
+  - id: abc302_d
+    difficulty: 682
+    role: example
+    summary: 2 つの数列から差が D 以下の組を選び和を最大化。片方を固定し、もう片方で x+D 以下の最大を探す
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/30/024900
+    note: 2 ポインタでも解ける
+  - id: arc084_a
+    difficulty: 1096
+    role: practice
+    summary: 上段・中段・下段の組合せ数。中段を固定し、上段と下段で条件を満たす個数を二分探索で求める
+    evidence: https://drken1215.hatenablog.com/entry/2021/02/25/223800
+    note: ABC 077 C
+  - id: abc321_d
+    difficulty: 806
+    role: practice
+    summary: 全ペアの min(A+B, P) の総和。B をソートし、A ごとに境界を二分探索して累積和でまとめる
+    evidence: https://drken1215.hatenablog.com/entry/2023/09/30/123700
+  - id: abc119_d
+    difficulty: 1346
+    role: practice
+    summary: 各クエリ位置から神社と寺を 1 つずつ訪れる最短距離。左右の最寄りを lower_bound で求めて 4 通りを比べる
+    evidence: https://drken1215.hatenablog.com/entry/2019/02/24/230900
+    note: 番兵を置くと楽
+- key: interactive-binary-search
+  title: 質問回数が log の二分探索（インタラクティブ）
+  aliases:
+  - インタラクティブ二分探索
+  level: 基礎
+  level_evidence: abc299_d（684）, abc269_e（1030）
+  prerequisites:
+  - binary-search
+  acl: null
+  signs:
+  - 質問回数が 20 回など log N 程度
+  - 端の値が分かっていて途中のどこかで変化する
+  compare_with:
+  - interactive-problems
+  page: section-of:binary-search
+  visual: 区間を半分ずつ狭める様子を質問とその答えと並べて示す
+  problems:
+  - id: abc299_d
+    difficulty: 684
+    role: example
+    summary: 先頭が 0・末尾が 1 の隠れた 01 列で、0 の直後が 1 になる位置を 20 回の質問で見つける
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc299-d.html
+    note: 08 のインタラクティブと境界
+  - id: abc269_e
+    difficulty: 1030
+    role: practice
+    summary: ルークの置かれていない行と列を、範囲内の個数を聞く質問で行・列それぞれ二分探索して特定する
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc269-e.html
+- key: binary-search-answer
+  title: 答えで二分探索（判定問題への帰着）
+  aliases:
+  - 決め打ち二分探索
+  - 最小値の最大化
+  - 最大値の最小化
+  - 判定問題に帰着
+  level: 基礎
+  level_evidence: abc146_c（741）, typical90_a（★4）で緑から現れ、abc174_e（1227）, abc257_d（1203）, abc144_e（1449）, abc227_d（1643）, abc023_d（1843）と水〜青に多い。drken「最大値の最小化」ABC 9 問の中央値 1502
+  prerequisites:
+  - binary-search
+  - greedy-basics
+  acl: null
+  signs:
+  - 最小値を最大化／最大値を最小化
+  - 〜を満たす最大（最小）の X
+  - X を決めれば貪欲や探索で可否が分かる
+  - 答えの範囲が 10^9〜10^18 と広い
+  compare_with:
+  - ternary-search
+  - two-pointers
+  - kth-value
+  page: own
+  visual: 横軸に候補 X、縦に判定結果（可／不可）を並べた階段図。判定関数の中身（貪欲）を別枠でステップ送り
+  problems:
+  - id: typical90_a
+    difficulty: null
+    role: example
+    summary: 切れ目を選んでようかんを分け、最短ピースを最大化。「長さ x 以上で K+1 個に切れるか」を貪欲に判定して x を二分探索
+    evidence: https://drken1215.hatenablog.com/entry/2021/06/12/020300
+    stars: 4
+    note: 最小値の最大化
+  - id: abc146_c
+    difficulty: 741
+    role: example
+    summary: A×N + B×(N の桁数) ≤ X となる最大の N を、値が N について単調なことを使って二分探索する
+    evidence: https://drken1215.hatenablog.com/entry/2020/01/05/154700
+  - id: abc174_e
+    difficulty: 1227
+    role: example
+    summary: 丸太を合計 K 回以下切って最長の長さを最小化。「すべて長さ x 以下にする回数」で判定して二分探索
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc174-e.html
+    note: 最大値の最小化
+  - id: abc257_d
+    difficulty: 1203
+    role: practice
+    summary: ジャンプ台を行き来できる最小の訓練回数。回数 x を決め、ある始点から全部に到達できるかを探索で判定する
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc257-d.html
+    note: 03 のグラフ探索と組み合わせ
+  - id: abc144_e
+    difficulty: 1449
+    role: practice
+    summary: 修行でメンバーの消化コストを下げ、チームの所要時間の最大を最小化。対応付けはソートで決め、上限 x を二分探索
+    evidence: https://blog.hamayanhamayan.com/entry/2019/10/27/233431_2
+  - id: abc023_d
+    difficulty: 1843
+    role: practice
+    summary: 風船を割る順を選んでペナルティの最大を最小化。上限 x から各風船の締め切りが決まり、締め切り順の貪欲で判定
+    evidence: https://drken1215.hatenablog.com/entry/2021/06/12/113100
+    experimental: true
+- key: real-binary-search
+  title: 実数の二分探索（反復回数を固定する）
+  aliases:
+  - 実数二分探索
+  - 連続値の二分探索
+  - 二分法
+  level: 水
+  level_evidence: abc026_d（1406）, abc034_d（1549）
+  prerequisites:
+  - binary-search-answer
+  acl: null
+  signs:
+  - 答えを実数で出力し、誤差 10^-6 などが許される
+  - 単調な連続関数の値がちょうど c になる点
+  compare_with:
+  - ternary-search
+  - fractional-binary-search
+  page: section-of:binary-search-answer
+  visual: 区間幅が反復ごとに半分になる表（100 回で 2^-100 倍）
+  problems:
+  - id: abc026_d
+    difficulty: 1406
+    role: example
+    summary: f(t) = At + B sin(Ctπ) が 100 になる t を誤差の範囲で求める（f が単調増加なので実数で二分探索）
+    evidence: https://drken1215.hatenablog.com/entry/2021/07/03/173400
+    experimental: true
+  - id: abc034_d
+    difficulty: 1549
+    role: practice
+    summary: 食塩水を K 個選んで混ぜた濃度の最大（実数の答えで二分探索）
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/21/021300
+    experimental: true
+    note: fractional-binary-search と共通
+- key: kth-value
+  title: K 番目の値を求める（個数を数えて二分探索）
+  aliases:
+  - K 番目に小さい値
+  - K-th smallest
+  - 順位を数える
+  level: 青
+  level_evidence: 易しい形は abc205_d（713）, abc341_d（829）。積・和・比を全列挙できない本格的な形は arc037_c（1824）, abc155_d（1845）, abc149_e（1905）と青に集まる
+  prerequisites:
+  - binary-search-answer
+  - two-pointers
+  acl: null
+  signs:
+  - N^2 個（以上）の値の K 番目
+  - 上位 M 個の和
+  - 全列挙できないが「x 以下が何個あるか」は数えられる
+  compare_with:
+  - k-best-enumeration
+  - median-binary-search
+  page: own
+  visual: count(x) = 「x 以下の個数」の階段グラフを描き、count(x) ≥ K となる最小の x が答えになる様子を示す
+  problems:
+  - id: abc341_d
+    difficulty: 829
+    role: example
+    summary: N か M のちょうど一方で割り切れる数の K 番目。x 以下の個数を包除で数えて二分探索する
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc341-d.html
+  - id: abc155_d
+    difficulty: 1845
+    role: example
+    summary: N 個から 2 つ選んだ積の K 番目。x 以下の積の個数を符号で場合分けして数え、二分探索する
+    evidence: https://drken1215.hatenablog.com/entry/2020/04/23/142200
+  - id: arc037_c
+    difficulty: 1824
+    role: practice
+    summary: a_i × b_j（N^2 個）の K 番目。片方をソートして x 以下の個数を数え、二分探索する
+    evidence: https://drken1215.hatenablog.com/entry/2021/07/03/041500
+    experimental: true
+  - id: abc149_e
+    difficulty: 1905
+    role: practice
+    summary: 2 人の握手の組のうち値の大きい M 組の和。M 番目の値を二分探索で求め、それ以上の和を累積和でまとめる
+    evidence: https://blog.hamayanhamayan.com/entry/2020/01/01/024415
+- key: k-best-enumeration
+  title: 優先度付きキューで小さい順に列挙する（K 番目までを取り出す）
+  aliases:
+  - K-best
+  - 次に小さいものを取り出す
+  level: 基礎
+  level_evidence: abc234_d（503）, abc297_e（1176）
+  prerequisites:
+  - priority-queue
+  acl: null
+  signs:
+  - K が 2×10^5 程度で、小さい順に K 個取り出せば足りる
+  - 取り出した値から次の候補を作れる
+  compare_with:
+  - kth-value
+  page: section-of:kth-value
+  visual: ヒープから最小を取り出し、そこから作れる候補を入れるステップ送り
+  problems:
+  - id: abc234_d
+    difficulty: 503
+    role: example
+    summary: 順列の先頭 i 個の中で K 番目に大きい値を i ごとに求める。値を 1 つずつ加えながら K 番目を保つ
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/15/003821
+    note: 記事は Wavelet Matrix で解く。上位 K 個を優先度付きキューで保つ方法もある
+  - id: abc297_e
+    difficulty: 1176
+    role: example
+    summary: 品物を重複ありで選んだ合計のうち小さい方から K 番目。最小を取り出して品物を足した値を入れ、重複は set で除く
+    evidence: https://drken1215.hatenablog.com/entry/2025/02/07/012850
+- key: fractional-binary-search
+  title: 平均・比の最大化（分数計画）
+  aliases:
+  - 平均の最大化
+  - 分数計画
+  - 比の最大化
+  - Dinkelbach
+  level: 青
+  level_evidence: abc034_d（1549）, abc324_f（1815）, abc294_f（1891）, abc236_e（1893）, arc026_4（2297）
+  prerequisites:
+  - binary-search-answer
+  - real-binary-search
+  acl: null
+  signs:
+  - 平均・濃度・割合・(Σa)/(Σb) の最大（最小）
+  - 選び方が多くて全部は試せない
+  compare_with:
+  - kth-value
+  - median-binary-search
+  page: own
+  visual: 各要素を a_i − x·b_i に置き換えたとき、x を動かすと選んだものの和の符号が入れ替わる様子を示すグラフ
+  problems:
+  - id: abc034_d
+    difficulty: 1549
+    role: example
+    summary: N 個の食塩水から K 個選んで混ぜた濃度の最大。濃度 x を決め、「食塩 − x × 重さ」の大きい順に K 個取って判定
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/21/021300
+    experimental: true
+  - id: abc324_f
+    difficulty: 1815
+    role: example
+    summary: DAG の経路で Σ美しさ / Σコスト を最大化。x を決めて辺の重みを b − x·c にし、最長路が 0 以上かで判定
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/21/012800
+  - id: abc236_e
+    difficulty: 1893
+    role: practice
+    summary: 隣り合う 2 つの少なくとも一方を選ぶとき、平均の最大と中央値の最大をそれぞれ求める。x を引いた値で DP して判定
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc236-e.html
+    note: median-binary-search と共通
+  - id: abc294_f
+    difficulty: 1891
+    role: practice
+    summary: 砂糖水を 1 つずつ選んで混ぜた濃度の K 番目。濃度 x 以上の組の数を式変形とソートで数えて二分探索
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc294-f.html
+    note: kth-value と組み合わせ
+  - id: arc026_4
+    difficulty: 2297
+    role: practice
+    summary: 連結を保つ辺集合の（コストの和）/（長さの和）の最小。x を決めて重み c − x·l で全域木的に判定する
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/21/032420
+    experimental: true
+    note: 03 の最小全域木と組み合わせ
+- key: median-binary-search
+  title: 中央値の二分探索（x 以上を +1、未満を −1 にする）
+  aliases:
+  - 中央値の最大化
+  - メディアンの二分探索
+  level: 青
+  level_evidence: abc203_d（1622）, abc236_e（1893）, arc101_b（2073）
+  prerequisites:
+  - binary-search-answer
+  - prefix-sum
+  acl: null
+  signs:
+  - 中央値の最大・最小
+  - 中央値の中央値
+  - 区間・領域ごとの中央値
+  compare_with:
+  - kth-value
+  - median-absolute
+  page: own
+  visual: 数列を x 以上 → +1、未満 → −1 に塗り替え、累積和の正負で「中央値 ≥ x」を判定する図
+  problems:
+  - id: abc203_d
+    difficulty: 1622
+    role: example
+    summary: N×N の池の K×K 区画の中央値の最小。「中央値 ≤ x ⇔ x 以下が一定数以上」と言い換え、2 次元累積和で判定
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc203-d.html
+  - id: abc236_e
+    difficulty: 1893
+    role: practice
+    summary: 選び方の制約付きで中央値を最大化。x 以上を +1・未満を −1 にした値の DP で判定する
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc236-e.html
+  - id: arc101_b
+    difficulty: 2073
+    role: practice
+    summary: 全区間の中央値を集めた中央値。+1/−1 に変換し、和が正の区間の個数（転倒数）で判定する
+    evidence: https://drken1215.hatenablog.com/entry/2018/09/08/011500
+    note: 05 の BIT
+- key: parallel-binary-search
+  title: 並列二分探索
+  aliases:
+  - 整体二分
+  - parallel binary search
+  level: 発展
+  level_evidence: agc002_d（2514）。ABC での出題例は今回の調査では確認できていない
+  prerequisites:
+  - binary-search-answer
+  - union-find
+  acl: null
+  signs:
+  - 多数のクエリがそれぞれ「何回目の操作で条件を満たすか」を問う
+  - 1 クエリずつ二分探索すると判定の準備が重い
+  - オフラインでよい
+  compare_with:
+  - persistent-union-find
+  - offline-queries
+  page: overview
+  visual: クエリごとの [lo, hi) を並べ、各段で全クエリの mid を時系列順に一斉に判定するステップ送り
+  problems:
+  - id: agc002_d
+    difficulty: 2514
+    role: example
+    summary: グラフで 2 人が合計 z 頂点を訪れるときに使う辺番号の最大の最小値を、全クエリまとめて二分探索し Union-Find で判定する
+    evidence: https://drken1215.hatenablog.com/entry/2018/09/15/193722
+    note: 部分永続 Union-Find の別解あり
+- key: ternary-search
+  title: 三分探索（凸関数の最小化）
+  aliases:
+  - 三分法
+  - 黄金分割探索
+  - 凸関数の極値
+  level: 水
+  level_evidence: abc279_d（766）が D 問題での例、arc054_b（1269 参考値）, abc151_f（1671）, abc130_f（2240）。drken「凸関数」ABC 4 問の中央値 1898
+  prerequisites:
+  - binary-search
+  - real-binary-search
+  acl: null
+  signs:
+  - 下に凸（谷が 1 つ）な関数の最小
+  - 実数で出力・誤差許容
+  - 時刻や位置を 1 つ選んで何かを最小化
+  compare_with:
+  - binary-search-answer
+  - median-absolute
+  page: own
+  visual: 谷形のグラフに 2 点 m1, m2 を取り、値の大きい側の外側 1/3 を捨てるステップ送り。整数版は f(x+1) − f(x) の符号で二分探索する図も並べる
+  problems:
+  - id: abc279_d
+    difficulty: 766
+    role: example
+    summary: 重力を強くする回数 x を選び、総時間 Bx + A/√(1+x) を最小化する（下に凸なので三分探索）
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc279-d.html
+  - id: arc054_b
+    difficulty: 1269
+    role: example
+    summary: x 年後に計算を始めると P/2^(x/1.5) + x 年かかる。下に凸なので x を三分探索する
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-03-arc/kyoupro-arc054-b.html
+    experimental: true
+    note: E869120 中級編では二分探索の節に分類
+  - id: abc151_f
+    difficulty: 1671
+    role: practice
+    summary: N 点をすべて含む円の半径の最小。中心の x と y を入れ子の三分探索で求める（凸性を使う）
+    evidence: https://drken1215.hatenablog.com/entry/2020/01/12/224200
+    note: 08 の幾何と境界
+  - id: abc130_f
+    difficulty: 2240
+    role: practice
+    summary: 上下左右に動く点群を囲む長方形の面積の最小。端の動きが区分線形なので候補時刻を絞る（三分探索でも解ける）
+    evidence: https://drken1215.hatenablog.com/entry/2019/06/22/022600
+- key: convex-function-basics
+  title: 凸関数の性質（和・最大値の凸性と増分の単調性）
+  aliases:
+  - 凸関数
+  - 離散凸
+  - 増分が単調
+  level: 青
+  level_evidence: abc359_f（1792）, abc127_f（2003）
+  prerequisites:
+  - ternary-search
+  acl: null
+  signs:
+  - 1 つ増やすごとの増分が単調に増える（減る）
+  - '|x − a| や x^2 の和を最小化'
+  compare_with:
+  - greedy-priority-queue
+  - slope-trick
+  page: section-of:ternary-search
+  visual: 区分線形な凸関数の和が凸になることを示す折れ線の重ね合わせ
+  problems:
+  - id: abc359_f
+    difficulty: 1792
+    role: example
+    summary: 木の次数 d_i に対する Σ d_i^2 A_i を最小化。増分が単調なので、次数を 1 ずつ増やす候補を優先度付きキューで選ぶ
+    evidence: https://drken1215.hatenablog.com/entry/2024/06/23/032101
+    note: greedy-priority-queue と共通
+- key: median-absolute
+  title: 絶対値の和の最小化と中央値
+  aliases:
+  - 中央値で絶対値最小
+  - Σ|x − a_i|
+  - メディアン
+  level: 基礎
+  level_evidence: arc100_a（1089）, typical90_br（★4）。応用は abc330_f（1718）, abc127_f（2003）
+  prerequisites:
+  - sorting-techniques
+  acl: null
+  signs:
+  - Σ|x − a_i| を最小化
+  - マンハッタン距離の和を最小にする点
+  - 全員を 1 か所に集める移動の和
+  compare_with:
+  - ternary-search
+  - median-binary-search
+  page: own
+  visual: 数直線上の点と x を動かしたときの左右の点の数の差（傾き）を示す折れ線
+  problems:
+  - id: arc100_a
+    difficulty: 1089
+    role: example
+    summary: Σ|A_i − (b + i)| を最小化。B_i = A_i − i に変換すると中央値を選べばよい
+    evidence: https://drken1215.hatenablog.com/entry/2019/12/22/122300
+    note: ABC 102 C
+  - id: typical90_br
+    difficulty: null
+    role: example
+    summary: マンハッタン距離の和が最小になる点。x と y を独立に考え、それぞれ中央値を取る
+    evidence: https://github.com/Reputeless/tenkei_90
+    stars: 4
+    note: independence と共通
+  - id: abc330_f
+    difficulty: 1718
+    role: practice
+    summary: 点を合計 K 回以下動かして辺 d の正方形に収める最小の d。x, y 独立に、d を二分探索し区間への距離の和で判定
+    evidence: https://drken1215.hatenablog.com/entry/2023/11/27/154100
+  - id: abc127_f
+    difficulty: 2003
+    role: practice
+    summary: '|x − a| + b を足し込む更新と最小値の問い合わせ。中央値を 2 つの優先度付きキューで保つ'
+    evidence: https://drken1215.hatenablog.com/entry/2019/06/15/114700
+    note: slope trick（02/05）の入口
+- key: prefix-sum
+  title: 累積和（1 次元・左右からの累積）
+  aliases:
+  - prefix sum
+  - 累積 GCD
+  - 累積 XOR
+  - 左右からの累積
+  level: 基礎
+  level_evidence: arc098_a（635）, abc122_c（700）, abc265_d（727）, abc172_c（930）, abc125_c（1197）。drken「累積和」ABC 45 問の中央値 1037
+  prerequisites:
+  - complexity-estimation
+  acl: null
+  signs:
+  - 区間の和を何度も聞かれる
+  - 1 つだけ除いたときの値（左右からの累積）
+  - 区間の条件付き個数
+  compare_with:
+  - imos
+  - fenwick-tree
+  - sparse-table
+  page: own
+  visual: 棒グラフと累積和の折れ線を並べ、[l, r) の和が S[r] − S[l] になることを網掛けで示す
+  problems:
+  - id: arc098_a
+    difficulty: 635
+    role: example
+    summary: リーダーを選んだとき向きを変える人数の最小。左側の W の数と右側の E の数を左右からの累積で求める
+    evidence: https://drken1215.hatenablog.com/entry/2018/05/30/233311
+    note: ABC 098 C
+  - id: abc122_c
+    difficulty: 700
+    role: example
+    summary: 文字列の区間ごとに "AC" の出現数を答えるクエリ。位置ごとの累積和で O(1)
+    evidence: https://drken1215.hatenablog.com/entry/2019/03/28/181705
+    note: 半開区間の取り方が要点
+  - id: abc265_d
+    difficulty: 727
+    role: practice
+    summary: 区間和が P, Q, R と続く位置があるか。累積和の値を集合で持ち、x+P, x+P+Q, … があるか調べる
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc265-d.html
+  - id: abc172_c
+    difficulty: 930
+    role: practice
+    summary: 2 つの机の本を上から読み K 分以内に読める最大冊数。累積和と尺取り（または二分探索）
+    evidence: https://blog.hamayanhamayan.com/entry/2020/06/27/230511
+  - id: abc125_c
+    difficulty: 1197
+    role: practice
+    summary: 1 つだけ書き換えたときの gcd の最大。左右からの累積 gcd で「1 つ除いた gcd」を求める
+    evidence: https://drken1215.hatenablog.com/entry/2019/04/27/224100_1
+- key: prefix-sum-counting
+  title: 累積和と連想配列で区間を数える
+  aliases:
+  - Zero-Sum Ranges
+  - 区間和が K
+  - 余りが等しい組を数える
+  level: 基礎
+  level_evidence: abc233_d（726）, abc367_d（1037）, agc023_a（1038）, abc164_d（1232）, abc105_d（1458）, abc146_e（1762）
+  prerequisites:
+  - prefix-sum
+  acl: null
+  signs:
+  - 和がちょうど K の区間の数
+  - 和が M の倍数の区間の数
+  - 区間の条件が S_r と S_l の関係に書き直せる
+  compare_with:
+  - two-pointers
+  page: own
+  visual: 累積和の値を左から順に連想配列に入れ、同じ値（差が K）の個数を足していくステップ送り
+  problems:
+  - id: abc233_d
+    difficulty: 726
+    role: example
+    summary: 区間和がちょうど K の区間を数える。S_r − S_l = K となる l の個数を連想配列で数える
+    evidence: https://drken1215.hatenablog.com/entry/2024/11/23/150237
+    note: 負の値があるので尺取りは使えない
+  - id: agc023_a
+    difficulty: 1038
+    role: example
+    summary: 区間和が 0 の区間を数える。累積和が等しい組の数を数える
+    evidence: https://drken1215.hatenablog.com/entry/2019/12/25/123932
+  - id: abc367_d
+    difficulty: 1037
+    role: practice
+    summary: 円周上の 2 地点間の移動時間が M の倍数になる組を数える。累積和の余りが等しい組を、円環を伸ばして数える
+    evidence: https://drken1215.hatenablog.com/entry/2024/08/21/084614
+  - id: abc164_d
+    difficulty: 1232
+    role: practice
+    summary: 数字列の区間で 2019 の倍数になるものを数える。後ろからの累積の余りが等しい組を数える
+    evidence: https://drken1215.hatenablog.com/entry/2020/04/29/171300
+    note: 10 と 2019 が互いに素であることを使う
+  - id: abc105_d
+    difficulty: 1458
+    role: practice
+    summary: 区間和が M の倍数の区間を数える。累積和の余りごとに個数を数えて組を足す
+    evidence: https://drken1215.hatenablog.com/entry/2018/08/13/125300
+  - id: abc146_e
+    difficulty: 1762
+    role: practice
+    summary: 区間和を K で割った余りが区間長に等しい区間を数える。a_i − 1 に変換し、長さが K 未満の範囲で余りの一致を数える
+    evidence: https://drken1215.hatenablog.com/entry/2024/11/23/183549
+    note: 長さの制限が窓になる
+- key: prefix-sum-2d
+  title: 2 次元累積和（3 次元以上も）
+  aliases:
+  - 二次元累積和
+  - 2D prefix sum
+  - 長方形の和
+  level: 水
+  level_evidence: abc311_e（1293）, abc331_d（1361）, arc025_2（1369）, abc075_d（1470）, abc203_d（1622）。drken「二次元累積和」ABC 4 問の中央値 1573
+  prerequisites:
+  - prefix-sum
+  acl: null
+  signs:
+  - 長方形領域の和・個数を何度も求める
+  - 正方形・長方形を全部試す
+  - 盤面が周期的に敷き詰められている
+  compare_with:
+  - imos-2d
+  - fenwick-tree-2d
+  page: own
+  visual: 4 つの長方形の足し引き（包除）で任意の長方形の和が出る図
+  problems:
+  - id: arc025_2
+    difficulty: 1369
+    role: example
+    summary: 市松模様の黒と白の和が等しい最大の長方形。白を負にして 2 次元累積和で全長方形の和を O(1) で調べる
+    evidence: https://drken1215.hatenablog.com/entry/2020/11/14/073400
+    experimental: true
+  - id: abc311_e
+    difficulty: 1293
+    role: example
+    summary: 穴のない正方形の個数。2 次元累積和で穴の数を数え、各左上から辺の長さを二分探索する
+    evidence: https://drken1215.hatenablog.com/entry/2023/07/24/231100
+    note: DP でも解ける
+  - id: abc331_d
+    difficulty: 1361
+    role: practice
+    summary: N×N の模様を無限に敷き詰めた盤面で長方形内の黒マスを数える。周期で分割して 2 次元累積和
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc331-d.html
+    note: cycle-detection と共通
+  - id: abc075_d
+    difficulty: 1470
+    role: practice
+    summary: K 個以上の点を含む軸平行な長方形の最小面積。座標の候補を全探索し、点の数を 2 次元累積和で数える
+    evidence: https://drken1215.hatenablog.com/entry/2021/07/27/175600
+  - id: abc106_d
+    difficulty: 1319
+    role: practice
+    summary: 区間 [p, q] に完全に含まれる列車の数。(L, R) の 2 次元表の累積和で答える
+    evidence: https://qiita.com/e869120/items/eb50fdaece12be418faa
+    note: E869120 中級編で累積和に分類。drken はイベントソート＋BIT で解説
+- key: imos
+  title: いもす法（区間加算をまとめて行う）
+  aliases:
+  - imos 法
+  - 差分配列
+  - difference array
+  level: 基礎
+  level_evidence: abc183_d（662）, abc221_d（832）, abc188_d（933）, abc014_3（1276）。応用 abc260_e（1692）。drken「いもす法」ABC 8 問の中央値 1264
+  prerequisites:
+  - prefix-sum
+  acl: null
+  signs:
+  - 区間にまとめて加算し、最後に各点の値を知りたい
+  - 各時刻に何人いるか
+  - ちょうど k 個重なる長さ
+  compare_with:
+  - prefix-sum
+  - event-sort
+  - lazy-segment-tree
+  page: own
+  visual: 区間の始点に +1、終点に −1 を置き、左から累積していくステップ送り
+  problems:
+  - id: abc183_d
+    difficulty: 662
+    role: example
+    summary: 各人が時間区間で毎分一定量のお湯を使う。区間の加算をいもす法でまとめ、どの時刻も上限以下か判定する
+    evidence: https://drken1215.hatenablog.com/entry/2020/11/15/225100
+  - id: abc014_3
+    difficulty: 1276
+    role: example
+    summary: 区間に 1 を足す操作を n 回した後の最大値を求める
+    evidence: https://drken1215.hatenablog.com/entry/2021/06/19/184000
+    experimental: true
+    note: E869120 中級編でも累積和に分類
+  - id: abc221_d
+    difficulty: 832
+    role: practice
+    summary: 各プレイヤーのログイン区間から、ちょうど k 人がログインしていた日数を k ごとに求める（座標圧縮と組み合わせ）
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc221-d.html
+  - id: abc188_d
+    difficulty: 933
+    role: practice
+    summary: サービスの利用期間と料金から総費用を最小化。日ごとの料金をイベントでまとめ、各区間で min(和, C) を払う
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc188-d.html
+    note: event-sort / coordinate-compression と共通
+  - id: abc260_e
+    difficulty: 1692
+    role: practice
+    summary: 各長さ k について条件を満たす連続区間の数。左端ごとに必要な右端を求め、区間長の加算をいもす法でまとめる
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc260-e.html
+- key: imos-2d
+  title: 2 次元いもす法
+  aliases:
+  - 二次元いもす法
+  - 長方形への加算
+  level: 基礎
+  level_evidence: typical90_ab（★4 = diff 800〜1199 相当）。ABC での出題は少ない
+  prerequisites:
+  - imos
+  - prefix-sum-2d
+  acl: null
+  signs:
+  - 長方形にまとめて加算
+  - 重なった枚数ごとの面積
+  compare_with:
+  - prefix-sum-2d
+  page: section-of:imos
+  visual: 長方形の四隅に +1, −1, −1, +1 を置き、横方向・縦方向の順に累積する 2 段のステップ送り
+  problems:
+  - id: typical90_ab
+    difficulty: null
+    role: example
+    summary: 長方形の紙を N 枚置き、ちょうど k 枚重なる部分の面積を k ごとに求める
+    evidence: https://github.com/Reputeless/tenkei_90
+    stars: 4
+- key: difference-sequence
+  title: 差分で考える（隣接差・階差・等差数列の区間加算）
+  aliases:
+  - 階差
+  - 差分
+  - 隣接差
+  - 多次元いもす
+  - 等差数列の加算
+  level: 水
+  level_evidence: 易しい形は abc369_c（323）, typical90_bl（★3）。等差数列の加算など 2 階の差分は agc010_b（1892）, abc313_g（2454）で青以上
+  prerequisites:
+  - imos
+  acl: null
+  signs:
+  - 区間に一律の値を足すたびに隣接差の和を答える
+  - 等差数列になっている区間
+  - 区間に 1, 2, 3, … を足す
+  compare_with:
+  - imos
+  page: section-of:imos
+  visual: 数列とその隣接差の列を上下に並べ、区間加算で変わる差が両端の 2 か所だけであることを示す
+  problems:
+  - id: abc369_c
+    difficulty: 323
+    role: example
+    summary: 等差数列になっている区間の個数。隣接差が同じ値で続く塊ごとにまとめて数える
+    evidence: https://drken1215.hatenablog.com/entry/2024/09/01/153129
+    note: run-length-encoding と共通
+  - id: typical90_bl
+    difficulty: null
+    role: example
+    summary: 区間に一律の加算をするたびに、隣接差の絶対値の和を答える。変わるのは両端の差だけ
+    evidence: https://github.com/Reputeless/tenkei_90
+    stars: 3
+  - id: agc010_b
+    difficulty: 1892
+    role: practice
+    summary: 円形の箱から 1, 2, …, N 個を一斉に取り除く操作で全部空にできるか。隣接差を取ると操作が単純な変化になる
+    evidence: https://drken1215.hatenablog.com/entry/2019/04/04/165100
+- key: two-pointers
+  title: 尺取り法（単調性の見抜き方）
+  aliases:
+  - しゃくとり法
+  - two pointers
+  - 2 ポインタ
+  level: 基礎
+  level_evidence: abc130_d（865）, typical90_ah（★4）。応用 abc032_c（1244 参考値）, arc022_2（1395）, arc098_b（1404）。drken「しゃくとり法」ABC 19 問の中央値 1138
+  prerequisites:
+  - prefix-sum
+  - amortized-analysis
+  acl: null
+  signs:
+  - 連続する区間で、区間を広げると条件が単調に変わる
+  - 条件を満たす最長（最短）の区間
+  - 条件を満たす区間の個数
+  - 2 つのソート済み列の組
+  compare_with:
+  - binary-search
+  - prefix-sum-counting
+  - sliding-window-minimum
+  page: own
+  visual: 区間 [l, r) を表す窓が右へ進むステップ送り。各 l に対する最大の r を折れ線にして単調増加であることを示す
+  problems:
+  - id: abc130_d
+    difficulty: 865
+    role: example
+    summary: 和が K 以上の連続区間の数。左端ごとの最小の右端は左端とともに右へ動くので尺取り
+    evidence: https://drken1215.hatenablog.com/entry/2019/06/17/004300
+    note: 二分探索でも解ける
+  - id: typical90_ah
+    difficulty: null
+    role: example
+    summary: K 種類以下の値からなる最長の連続区間。種類数を連想配列で数えながら尺取り
+    evidence: https://github.com/Reputeless/tenkei_90
+    stars: 4
+  - id: abc032_c
+    difficulty: 1244
+    role: practice
+    summary: 積が K 以下の最長の連続区間。0 を含む場合は全体が答えになる
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc032-c.html
+    experimental: true
+    note: 0 の扱いが落とし穴
+  - id: arc022_2
+    difficulty: 1395
+    role: practice
+    summary: 同じ値を 2 つ含まない最長の連続区間。出現回数を管理しながら尺取り
+    evidence: https://drken1215.hatenablog.com/entry/2020/11/14/132258
+    experimental: true
+  - id: arc098_b
+    difficulty: 1404
+    role: practice
+    summary: XOR 和と和が等しい区間の数。「どの bit も重ならない」が区間を縮めても保たれるので尺取り
+    evidence: https://drken1215.hatenablog.com/entry/2018/06/26/125054
+    note: ABC 098 D。bitwise-independence と共通
+- key: sliding-window
+  title: 固定長の窓をずらす
+  aliases:
+  - スライディングウィンドウ
+  - 固定長区間
+  level: 基礎
+  level_evidence: abc326_c（292）, abc153_f（1393）
+  prerequisites:
+  - two-pointers
+  acl: null
+  signs:
+  - 長さ M の区間に入るものの最大個数
+  - 幅 D の範囲に効く操作
+  compare_with:
+  - sliding-window-minimum
+  page: section-of:two-pointers
+  visual: 長さ固定の窓を 1 つずつずらし、入る要素と出る要素だけを更新する図
+  problems:
+  - id: abc326_c
+    difficulty: 292
+    role: example
+    summary: 数直線上の贈り物を長さ M の区間で最大何個取れるか。ソートして窓をずらす
+    evidence: https://drken1215.hatenablog.com/entry/2023/11/11/204912
+  - id: abc153_f
+    difficulty: 1393
+    role: practice
+    summary: 範囲攻撃でモンスターを倒す最小回数。左から貪欲に打ち、攻撃の効果が切れる位置をキュー（またはいもす）で管理
+    evidence: https://drken1215.hatenablog.com/entry/2020/01/26/234000
+- key: sorting-techniques
+  title: ソートで考える（並べてから貪欲・比較関数の注意）
+  aliases:
+  - ソート
+  - 比較関数
+  - 安定ソート
+  - ペアのソート
+  level: 基礎
+  level_evidence: abc121_c（360）, typical90_n（★3）, abc308_c（605）, abc187_d（650）。drken「考察：ソート」ABC 49 問の中央値 127
+  prerequisites: []
+  acl: null
+  signs:
+  - 順番を自由に並べ替えてよい
+  - 大きい順・安い順に取る
+  - 比率の大小で並べる
+  compare_with:
+  - exchange-argument
+  - greedy-basics
+  page: own
+  visual: ソート前後の対応を線で結ぶ図（2 つの列を両方ソートして順に対応させると交差がなくなる）
+  problems:
+  - id: abc121_c
+    difficulty: 360
+    role: example
+    summary: 安い店から順に必要な本数を買う最小費用（ソートして貪欲）
+    evidence: https://drken1215.hatenablog.com/entry/2019/05/15/012700
+  - id: typical90_n
+    difficulty: null
+    role: example
+    summary: 小学生と学校を 1 対 1 に割り当てて距離の和を最小化。両方ソートして順に対応させる
+    evidence: https://github.com/Reputeless/tenkei_90
+    stars: 3
+  - id: abc308_c
+    difficulty: 605
+    role: practice
+    summary: 成功率の降順・番号の昇順に並べる。比率は掛け算で比べて誤差を避け、安定ソートを使う
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/22/124200
+    note: 誤差は 09 と境界
+  - id: abc187_d
+    difficulty: 650
+    role: practice
+    summary: 演説で票を取り返す町の最小数。各町の効果 2A+B が独立に決まるので大きい順に選ぶ
+    evidence: https://drken1215.hatenablog.com/entry/2021/01/03/182300
+- key: coordinate-compression
+  title: 座標圧縮
+  aliases:
+  - 座圧
+  - 値の圧縮
+  - 離散化
+  level: 基礎
+  level_evidence: abc213_c（481）, abc113_c（878）, abc188_d（933）, abc036_c（956）。データ構造と組む形は typical90_ac（★5）
+  prerequisites:
+  - sorting-techniques
+  - binary-search
+  acl: null
+  signs:
+  - 値が 10^9 だが種類は 2×10^5 個以下
+  - 大小関係（順位）だけが重要
+  - 値を配列の添字にしたい
+  compare_with:
+  - stl-map
+  - event-sort
+  page: own
+  visual: 元の値と圧縮後の番号の対応表。sort → unique → lower_bound の 3 段を示す
+  problems:
+  - id: abc213_c
+    difficulty: 481
+    role: example
+    summary: カードのない行・列を消した後の座標。行と列を独立に座標圧縮する
+    evidence: https://drken1215.hatenablog.com/entry/2021/08/11/023013
+  - id: abc036_c
+    difficulty: 956
+    role: example
+    summary: 各値が何番目に小さい値かを出力する（座標圧縮そのもの）
+    evidence: https://drken1215.hatenablog.com/entry/2021/08/10/003714
+    experimental: true
+  - id: abc113_c
+    difficulty: 878
+    role: practice
+    summary: 市に、県ごとの誕生順を付けた ID を作る。県ごとにソートして順位を付ける
+    evidence: https://drken1215.hatenablog.com/entry/2019/03/21/234900
+  - id: typical90_ac
+    difficulty: null
+    role: practice
+    summary: 区間に積むレンガの上面の高さ。座標を圧縮してから区間の最大値を管理する
+    evidence: https://github.com/Reputeless/tenkei_90
+    stars: 5
+    note: 05 のセグ木と組み合わせ
+- key: event-sort
+  title: イベントソートと平面走査の基本
+  aliases:
+  - イベントソート
+  - 平面走査
+  - スイープ
+  - sweep line
+  - クエリ先読み
+  level: 水
+  level_evidence: 易しい形 abc309_c（348）, abc188_d（933）。arc092_a（1268）, abc106_d（1319）, abc245_e（1571）, abc128_e（1840）。drken「平面走査」ABC 9 問の中央値 1833
+  prerequisites:
+  - sorting-techniques
+  - imos
+  acl: null
+  signs:
+  - 区間の開始・終了と時刻のクエリが混ざる
+  - 2 次元の点を一方の座標の順に処理する
+  - 締め切りや有効期間
+  compare_with:
+  - imos
+  - offline-queries
+  - fenwick-tree
+  page: own
+  visual: 時間軸上に開始・終了・クエリのイベントを並べ、左から処理するたびに集合の中身が変わるステップ送り
+  problems:
+  - id: abc309_c
+    difficulty: 348
+    role: example
+    summary: 薬が日ごとに減っていくとき、初めて K 錠以下になる日。飲み終わる日でソートして順に引く
+    evidence: https://drken1215.hatenablog.com/entry/2024/06/01/030100
+  - id: arc092_a
+    difficulty: 1268
+    role: example
+    summary: 赤点と青点を x も y も青が大きい組にする最大数。青点を x の小さい順に見て、使える赤点のうち y 最大を選ぶ
+    evidence: https://drken1215.hatenablog.com/entry/2021/07/05/183800
+    note: ABC 091 C。貪欲の正当性も要る
+  - id: abc106_d
+    difficulty: 1319
+    role: practice
+    summary: M 本の区間のうちクエリ区間に含まれるものの数。端点とクエリを並べて順に処理する
+    evidence: https://drken1215.hatenablog.com/entry/2018/09/06/020200
+    note: 2 次元累積和でも解ける
+  - id: abc245_e
+    difficulty: 1571
+    role: practice
+    summary: チョコを箱に入れられるか。大きい順に並べ、条件を満たす箱を multiset で管理して最小のものを使う
+    evidence: https://drken1215.hatenablog.com/entry/2022/03/30/003800
+  - id: abc128_e
+    difficulty: 1840
+    role: practice
+    summary: 工事で通れない時刻・場所があるとき各人が止まる位置。時刻をずらしてイベントにし、set で管理する
+    evidence: https://drken1215.hatenablog.com/entry/2019/06/15/174200
+    note: 05 の set と組み合わせ
+- key: run-length-encoding
+  title: ランレングス圧縮（同じものの塊で考える）
+  aliases:
+  - 連長圧縮
+  - RLE
+  - 塊ごとに考える
+  level: 基礎
+  level_evidence: abc380_c（223）, abc136_d（794）, abc140_d（1074）, abc124_d（1138）, typical90_cf（★3）。drken「ランレングス圧縮」ABC 16 問の中央値 406
+  prerequisites: []
+  acl: null
+  signs:
+  - 同じ文字・値が続く部分
+  - 区間を反転して 1 の連続を長くする
+  - 境界の数で考える
+  compare_with:
+  - two-pointers
+  page: own
+  visual: 文字列を (文字, 長さ) の列に置き換える図
+  problems:
+  - id: abc380_c
+    difficulty: 223
+    role: example
+    summary: 0/1 文字列の K 番目の 1 の塊を K−1 番目の塊の直後に移す。塊に分けて並べ替える
+    evidence: https://drken1215.hatenablog.com/entry/2024/11/17/012903
+  - id: abc136_d
+    difficulty: 794
+    role: example
+    summary: L/R に従って子どもが 10^100 回動いた後の人数。RL の境界ごとに、塊の長さの偶奇で振り分ける
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/29/190100
+    note: parity / cycle-detection と共通
+  - id: abc140_d
+    difficulty: 1074
+    role: practice
+    summary: 区間の L/R 反転を K 回まで行い幸福な人数を最大化。塊の数が 1 回で 2 減ることに着目する
+    evidence: https://drken1215.hatenablog.com/entry/2020/05/16/005300
+    note: invariant と共通
+  - id: abc124_d
+    difficulty: 1138
+    role: practice
+    summary: 区間反転を K 回まで行い 1 の連続長を最大化。0 の塊 K 個をまとめて反転すると考え、塊の列で尺取り
+    evidence: https://drken1215.hatenablog.com/entry/2019/04/14/222900
+  - id: typical90_cf
+    difficulty: null
+    role: practice
+    summary: o と x の両方を含む区間を数える。同じ文字の塊ごとにまとめて数える（余事象でもよい）
+    evidence: https://github.com/Reputeless/tenkei_90
+    stars: 3
+- key: inversion-count
+  title: 転倒数（隣接交換の回数）
+  aliases:
+  - 反転数
+  - inversion
+  - バブルソートの交換回数
+  level: 水
+  level_evidence: 易しい形 abc264_d（414）。abc190_f（1321）, abc378_e（1406）, abc261_f（1587）
+  prerequisites:
+  - fenwick-tree
+  - coordinate-compression
+  acl: atcoder::fenwick_tree（05 の担当）
+  signs:
+  - 隣り合う要素の交換でソートする最小回数
+  - i < j かつ A_i > A_j の組の数
+  - 順列を回転させたときの転倒数
+  compare_with:
+  - divide-and-conquer
+  page: section-of:fenwick-tree
+  visual: バブルソートの各交換が転倒をちょうど 1 つ減らすことを示すステップ送り
+  problems:
+  - id: abc264_d
+    difficulty: 414
+    role: example
+    summary: 隣接交換で文字列を "atcoder" にする最小回数。転倒数そのもの
+    evidence: https://drken1215.hatenablog.com/entry/2023/06/08/002600
+    note: 記事は並べ替えた文字列を頂点とする BFS も紹介
+  - id: abc190_f
+    difficulty: 1321
+    role: practice
+    summary: 順列を左にずらした各状態の転倒数。最初の転倒数を求め、先頭を末尾に移すときの増減を足していく
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc190-f.html
+  - id: abc378_e
+    difficulty: 1406
+    role: practice
+    summary: 区間和の mod M の総和。累積和の差の余りで、M を足し戻す必要がある組の数を転倒数として数える
+    evidence: https://drken1215.hatenablog.com/entry/2024/11/04/001044
+    note: prefix-sum-counting と共通
+  - id: abc261_f
+    difficulty: 1587
+    role: practice
+    summary: 色付きボールの並べ替えで、色が違う隣接交換だけにコストがかかる。全体の転倒数から同色の転倒数を引く
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc261-f.html
+- key: greedy-basics
+  title: 貪欲法の考え方と正当性の示し方
+  aliases:
+  - グリーディ
+  - Greedy
+  - 貪欲
+  level: 基礎
+  level_evidence: typical90_n（★3）, abc085_d（954）, abc216_e（1084）。drken「Greedy:交換しても悪化しない」ABC 8 問の中央値 886
+  prerequisites:
+  - sorting-techniques
+  acl: null
+  signs:
+  - その場で一番よいものを取って後悔しない理由が言える
+  - N が大きく DP の状態が持てない
+  compare_with:
+  - dp-basics
+  - exchange-argument
+  page: own
+  visual: 最適解と貪欲解を並べ、最初に違う箇所を入れ替えても悪くならないことを示す図
+  problems:
+  - id: abc085_d
+    difficulty: 954
+    role: example
+    summary: 刀を振る・投げるで合計 H のダメージを与える最小回数。振る最大値を基準に、それより強い投げを大きい順に使う
+    evidence: https://drken1215.hatenablog.com/entry/2024/05/15/012834
+  - id: abc216_e
+    difficulty: 1084
+    role: example
+    summary: 乗るたびに楽しさが 1 減るアトラクションに K 回乗る。毎回最大を選ぶ貪欲を、同じ値をまとめて処理する
+    evidence: https://blog.hamayanhamayan.com/entry/2021/08/29/231101
+    note: 答えの二分探索による別解もある
+- key: interval-scheduling
+  title: 区間スケジューリング・区間の串刺し
+  aliases:
+  - 区間スケジューリング問題
+  - 区間を点で突く
+  - Activity Selection
+  level: 基礎
+  level_evidence: abc230_d（963）。abc103_d（1278）, arc106_c（1225）, abc325_d（1367）は水。drken「区間スケジューリング」ABC 3 問の中央値 1367
+  prerequisites:
+  - greedy-basics
+  - sorting-techniques
+  acl: null
+  signs:
+  - 重ならない区間をできるだけ多く選ぶ
+  - すべての区間を最少の点（串）で突く
+  - 区間の右端（締め切り）
+  compare_with:
+  - greedy-priority-queue
+  - dp-basics
+  page: own
+  visual: 区間を右端の順に並べたガントチャートで、選ぶ区間を順に塗るステップ送り
+  problems:
+  - id: abc230_d
+    difficulty: 963
+    role: example
+    summary: 幅 D のパンチですべての壁を壊す最小回数。右端の小さい順に、まだ壊れていない壁の右端から打つ
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc230-d.html
+  - id: abc103_d
+    difficulty: 1278
+    role: example
+    summary: 要望の区間すべてで橋を 1 本以上取り除く最小本数（区間の串刺し）。右端でソートして貪欲
+    evidence: https://drken1215.hatenablog.com/entry/2018/07/21/224200
+  - id: arc106_c
+    difficulty: 1225
+    role: practice
+    summary: 区間スケジューリングの正しい貪欲と誤った貪欲の答えの差がちょうど M になる区間の集合を作る
+    evidence: https://drken1215.hatenablog.com/entry/2020/10/25/002400
+    note: construction と共通
+  - id: abc325_d
+    difficulty: 1367
+    role: practice
+    summary: コンベア上の商品に 1 秒 1 個ずつ印字する最大数。時刻順に入る商品のうち締め切りの早いものから処理する
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/22/184800
+    note: greedy-priority-queue と共通
+- key: exchange-argument
+  title: 交換論法と比較関数の設計
+  aliases:
+  - 隣接交換
+  - exchange argument
+  - ソートの比較関数を作る
+  level: 青
+  level_evidence: 締め切り順に並べるだけの abc131_d（588）は易しいが、並べ順の比較を自分で導く abc116_d（1712）, abc163_e（2037）は青以上。drken「非自明な比較関数でソートする」ABC 6 問の中央値 1008
+  prerequisites:
+  - greedy-basics
+  - sorting-techniques
+  acl: null
+  signs:
+  - 並べる順番で結果が変わる
+  - 2 つを入れ替えたときの差が 2 つだけで決まる
+  - 並べ順を決めてから DP
+  compare_with:
+  - greedy-basics
+  - dp-basics
+  page: own
+  visual: 隣り合う 2 つ i, j を入れ替えたときに全体の値が変わる部分だけを強調する図
+  problems:
+  - id: abc131_d
+    difficulty: 588
+    role: example
+    summary: 締め切り付きの仕事をすべて終えられるか。締め切りの早い順が最適であることを隣接交換で示せる
+    evidence: https://drken1215.hatenablog.com/entry/2019/06/22/224800
+  - id: abc116_d
+    difficulty: 1712
+    role: practice
+    summary: 寿司 K 個の美味しさの和＋種類数の 2 乗を最大化。美味しい順に取り、種類を増やす入れ替えを順に試す
+    evidence: https://drken1215.hatenablog.com/entry/2019/05/15/002400
+  - id: abc163_e
+    difficulty: 2037
+    role: practice
+    summary: 幼児を並べ替えて活発度×移動距離の和を最大化。活発な順に左右の端へ置くのが最適で、その上で区間 DP
+    evidence: https://drken1215.hatenablog.com/entry/2020/04/21/153400
+    note: 02 の区間 DP と組み合わせ
+- key: greedy-priority-queue
+  title: 優先度付きキューを使う貪欲（締め切り・後ろから）
+  aliases:
+  - priority_queue で貪欲
+  - ヒープで貪欲
+  level: 水
+  level_evidence: abc141_d（823）, abc216_e（1084）, abc137_d（1313）, abc325_d（1367）
+  prerequisites:
+  - greedy-basics
+  - priority-queue
+  acl: null
+  signs:
+  - 毎回いちばん大きい（小さい）ものを取り出す
+  - 日が進むと選択肢が増える
+  - 締め切りまでに何個できるか
+  compare_with:
+  - interval-scheduling
+  - reverse-thinking
+  page: own
+  visual: 日を後ろから進めながら選べる仕事をヒープに入れ、最大を 1 つ取り出すステップ送り
+  problems:
+  - id: abc141_d
+    difficulty: 823
+    role: example
+    summary: 割引券を毎回いちばん高い商品に 1 枚ずつ使う。優先度付きキューで最大を取り出す
+    evidence: https://drken1215.hatenablog.com/entry/2019/09/16/032000
+  - id: abc137_d
+    difficulty: 1313
+    role: example
+    summary: 日雇いバイトで期限内に得る報酬の最大。後ろの日から、その日に間に合う仕事の中で最高報酬を選ぶ
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/29/195900
+    note: reverse-thinking と共通
+  - id: abc325_d
+    difficulty: 1367
+    role: practice
+    summary: 入ってくる商品のうち締め切りの早いものから処理する（時刻を飛ばす処理に注意）
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/22/184800
+  - id: abc376_e
+    difficulty: 1063
+    role: practice
+    summary: A の最大値を固定し、それ以下の中から B の小さい K 個の和を優先度付きキューで保って最小化する
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc376-e.html
+    note: fix-variable と共通
+- key: lexicographic-greedy
+  title: 辞書順最小を前から決める貪欲
+  aliases:
+  - 辞書順最小
+  - lexicographically smallest
+  level: 水
+  level_evidence: abc076_c（846）, abc223_d（1069）, typical90_f（★5）, abc009_3（1915 参考値）
+  prerequisites:
+  - greedy-basics
+  acl: null
+  signs:
+  - 辞書順最小（最大）の文字列・列を出力
+  - 条件を満たす中で最も小さいもの
+  compare_with:
+  - topological-sort
+  page: own
+  visual: 先頭から 1 文字ずつ、置ける最小の文字を試して「残りで条件を満たせるか」を判定するステップ送り
+  problems:
+  - id: abc076_c
+    difficulty: 846
+    role: example
+    summary: '? を埋めて T を含む辞書順最小の文字列。T を置ける最も後ろの位置を選び、残りの ? は a にする'
+    evidence: https://drken1215.hatenablog.com/entry/2025/01/22/125627
+  - id: typical90_f
+    difficulty: null
+    role: example
+    summary: 長さ K の部分列で辞書順最小。前から、残りの文字数が足りる範囲で最小の文字を選ぶ
+    evidence: https://github.com/Reputeless/tenkei_90
+    stars: 5
+  - id: abc223_d
+    difficulty: 1069
+    role: practice
+    summary: 順序の制約を満たす辞書順最小の順列。入次数 0 の頂点を小さい順に優先度付きキューから取り出す
+    evidence: https://drken1215.hatenablog.com/entry/2025/02/07/003505
+    note: 03 のトポロジカルソート
+  - id: abc009_3
+    difficulty: 1915
+    role: practice
+    summary: 文字を並べ替えて元と違う位置が K 個以下の辞書順最小。前から小さい文字を試し、残りで条件を満たせるか判定
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/06/013800
+    experimental: true
+- key: regret-greedy
+  title: 取り消し可能な貪欲（後悔付き貪欲）
+  aliases:
+  - 反実仮想
+  - 後悔可能な貪欲
+  - 反悔贪心
+  level: 発展
+  level_evidence: ABC での出題例は今回の調査では確認できていない（OI Wiki の反悔贪心の例は締め切り付き仕事のスケジューリング）。レベルは要確認
+  prerequisites:
+  - greedy-priority-queue
+  acl: null
+  signs:
+  - 一度選んだものを、後でよりよいものが来たら入れ替えたい
+  - 締め切り付きで利益の最大化
+  compare_with:
+  - greedy-priority-queue
+  - slope-trick
+  page: overview
+  visual: 選んだ集合をヒープで持ち、最も弱いものを新しいものと入れ替える図
+  problems: []
+- key: doubling
+  title: ダブリング
+  aliases:
+  - binary lifting
+  - 倍化
+  - 2^k 回後の表
+  level: 水
+  level_evidence: abc241_e（1248）, abc367_e（1370）, abc258_e（1545）, abc013_4（1730 参考値）。abc167_d（754）は周期の検出でも解ける。drken「ダブリング」ABC 8 問の中央値 1674
+  prerequisites:
+  - cycle-detection
+  - bit-operations
+  acl: null
+  signs:
+  - K ≤ 10^18 回の移動・操作
+  - 各状態から次の状態がただ 1 つに決まる
+  - 途中の和も必要
+  - 条件を満たす最大の回数（ダブリング上の二分探索）
+  compare_with:
+  - cycle-detection
+  - matrix-power
+  - lca
+  page: own
+  visual: 表 next[k][v]（2^k 回後）を下の段から作り、K の 2 進表記の 1 の桁だけ跳ぶステップ送り
+  problems:
+  - id: abc167_d
+    difficulty: 754
+    role: example
+    summary: 各町から決まった町へ移動する。K ≤ 10^18 回後の町を、周期の検出またはダブリングで求める
+    evidence: https://drken1215.hatenablog.com/entry/2020/06/20/190700
+  - id: abc241_e
+    difficulty: 1248
+    role: example
+    summary: 皿の飴の個数で次の位置が決まる操作を K ≤ 10^12 回。周期の検出でもダブリングでも解ける
+    evidence: https://qiita.com/recuraki/items/e26c220f2bc01f58e185
+    note: osp の解説は周期の検出
+  - id: abc013_4
+    difficulty: 1730
+    role: practice
+    summary: あみだくじを D 回つなげた結果。1 回分の置換をダブリングで D 回分に合成する
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc013-d.html
+    experimental: true
+  - id: abc258_e
+    difficulty: 1545
+    role: practice
+    summary: じゃがいもを箱に詰めるとき、箱ごとの開始位置の遷移を K 個目まで進める（周期の検出でもダブリングでもよい）
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc258-e.html
+    note: osp の解説は周期の検出＋累積和＋二分探索
+  - id: abc367_e
+    difficulty: 1370
+    role: practice
+    summary: 数列に置換 X を K ≤ 10^18 回適用した結果。置換をダブリングで合成する
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc367-e.html
+    note: osp の解説は逆向きにたどる方法
+- key: cycle-detection
+  title: 周期性の検出（シミュレーションの打ち切り）
+  aliases:
+  - 周期
+  - サイクル検出
+  - ρ 型
+  - 鳩の巣で必ずループ
+  level: 基礎
+  level_evidence: abc106_c（441）, abc167_d（754）, abc179_e（1175）, typical90_bf（★4）。応用 abc354_d（1259）, abc175_d（1491）, abc300_f（1846）。drken「周期性に着目する」ABC 15 問の中央値 754
+  prerequisites:
+  - complexity-estimation
+  acl: null
+  signs:
+  - 状態の種類が N 個以下で、K が巨大
+  - x_{n+1} = f(x_n) の形
+  - 同じ模様が繰り返す盤面
+  compare_with:
+  - doubling
+  - functional-graph
+  page: own
+  visual: 状態を矢印でたどる ρ 字型の図（前半の尾と周期部分）。K から尾の長さを引いて周期で割る計算を併記
+  problems:
+  - id: abc179_e
+    difficulty: 1175
+    role: example
+    summary: x^2 mod M の漸化式の最初の N 項の和。値は M 種類しかないので周期を見つけ、残りをまとめて足す
+    evidence: https://drken1215.hatenablog.com/entry/2020/09/20/091500
+  - id: typical90_bf
+    difficulty: null
+    role: example
+    summary: 桁の和を足す電卓のボタンを K 回押した結果。状態は 10^5 通りなので周期を見つける
+    evidence: https://github.com/Reputeless/tenkei_90
+    stars: 4
+  - id: abc106_c
+    difficulty: 441
+    role: practice
+    summary: 5000 兆回の置換後の K 文字目。1 以外の文字はすぐに十分長くなるので、先頭の 1 の個数だけ見ればよい
+    evidence: https://drken1215.hatenablog.com/entry/2018/09/03/224200
+    note: 収束に気づく
+  - id: abc354_d
+    difficulty: 1259
+    role: practice
+    summary: 無限に続く白黒模様の長方形内の黒の面積。周期で割り算してまとめ、端だけ数える
+    evidence: https://drken1215.hatenablog.com/entry/2024/05/19/013556
+  - id: abc175_d
+    difficulty: 1491
+    role: practice
+    summary: 順列に従ってコマを動かし K 回以内でスコア最大。各始点のサイクルを求め、1 周の和の符号で場合分けする
+    evidence: https://drken1215.hatenablog.com/entry/2020/08/17/182700
+  - id: abc300_f
+    difficulty: 1846
+    role: practice
+    summary: 文字列を M 回繰り返した中で x を K 個まで o に変える最長の o の連続。周期構造で開始位置を 1 周期分だけ試す
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/03/002258
+- key: simulation-speedup
+  title: シミュレーションの高速化（まとめて進める・見かけの変化を記録する）
+  aliases:
+  - シミュレーション
+  - オフセット
+  - 反転フラグ
+  level: 基礎
+  level_evidence: abc199_c（436）, typical90_ar（★3）, abc136_d（794）。応用 abc189_e（1526）
+  prerequisites:
+  - complexity-estimation
+  acl: null
+  signs:
+  - 操作が全体のシフト・反転・回転
+  - 同じ操作を何度も繰り返す
+  - 操作を合成して 1 つの変換にできる
+  compare_with:
+  - cycle-detection
+  - lazy-segment-tree
+  page: section-of:cycle-detection
+  visual: 実際の配列は動かさず、ずれ（オフセット）や反転フラグだけを更新する図
+  problems:
+  - id: typical90_ar
+    difficulty: null
+    role: example
+    summary: 数列の交換・右シフト・参照のクエリ。実際には動かさず、ずれの量だけを記録する
+    evidence: https://github.com/Reputeless/tenkei_90
+    stars: 3
+  - id: abc199_c
+    difficulty: 436
+    role: example
+    summary: 文字列の前半と後半を入れ替える操作を、反転フラグで管理して O(1) にする
+    evidence: https://qiita.com/dvoraker3/items/8388ab6e1dc3af55070e
+    note: 典型90 044 の類題
+  - id: abc189_e
+    difficulty: 1526
+    role: practice
+    summary: 点の回転・反転を繰り返した後の座標を答える。操作をアフィン変換の行列として合成しておく
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc189-e.html
+    note: 06 の行列と境界
+- key: divide-and-conquer
+  title: 分割統治（半分に分けて、またぐものを数える）
+  aliases:
+  - divide and conquer
+  - マージソート
+  - 中央をまたぐ区間
+  level: 青
+  level_evidence: ABC で分割統治そのものが鍵になる問題は少ない。arc189_d（2006）。ABC の G/H では分割統治 FFT など（abc352_g 2413, abc213_h 2806）で 06 の担当。drken「分割統治法」ABC 4 問はすべて 2400 以上。レベルは要確認
+  prerequisites:
+  - recursion-structure
+  - complexity-estimation
+  acl: null
+  signs:
+  - 区間・部分列の全組について数える
+  - 左右に分けたときに「またぐもの」だけ速く数えられる
+  - T(N) = 2T(N/2) + O(N)
+  compare_with:
+  - inversion-count
+  - cdq-divide-and-conquer
+  - segment-tree
+  page: own
+  visual: 再帰木の各段で区間を半分に分け、またぐ組だけを数えるステップ送り（マージソートで転倒数を数える例）
+  problems:
+  - id: arc189_d
+    difficulty: 2006
+    role: example
+    summary: 各スライムが隣の真に小さいスライムを吸収し続けたときの最大サイズを全員分求める。区間内の最大値の位置で左右に分ける分割統治
+    evidence: https://drken1215.hatenablog.com/entry/2025/01/04/101100
+    note: ARC
+- key: recursion-structure
+  title: 再帰的な構造（フラクタル・レベル N の構造）
+  aliases:
+  - フラクタル
+  - 自己相似
+  - 再帰関数
+  level: 基礎
+  level_evidence: abc153_d（129）, abc357_c（371）, abc115_d（1088）, typical90_b（★3）
+  prerequisites: []
+  acl: null
+  signs:
+  - レベル N のものがレベル N−1 のものの組合せで定義される
+  - 長さが 2 倍・3 倍で増える構造の K 番目
+  compare_with:
+  - divide-and-conquer
+  - doubling
+  page: section-of:divide-and-conquer
+  visual: レベル 0, 1, 2 の構造を並べ、再帰の呼び出し関係を木で示す
+  problems:
+  - id: abc357_c
+    difficulty: 371
+    role: example
+    summary: レベル N のシェルピンスキーのカーペットを、9 分割の再帰で描く
+    evidence: https://drken1215.hatenablog.com/entry/2024/06/09/233433
+  - id: abc115_d
+    difficulty: 1088
+    role: example
+    summary: レベル L バーガーの下から X 枚に含まれるパティの数を、層の長さを前計算して再帰で数える
+    evidence: https://drken1215.hatenablog.com/entry/2019/05/13/114600
+  - id: abc153_d
+    difficulty: 129
+    role: practice
+    summary: 半分に分裂するモンスターを倒す攻撃回数を、分裂の再帰構造から数える
+    evidence: https://drken1215.hatenablog.com/entry/2020/01/26/224500
+    note: small-search-space と共通
+  - id: typical90_b
+    difficulty: null
+    role: practice
+    summary: 長さ N の正しい括弧列を辞書順にすべて出力する。再帰（または bit 全探索）で作って判定
+    evidence: https://drken1215.hatenablog.com/entry/2021/06/12/151200
+    stars: 3
+- key: cdq-divide-and-conquer
+  title: CDQ 分割統治・オフラインの分割統治
+  aliases:
+  - CDQ
+  - 時系列の分割統治
+  - オンライン分割統治
+  level: 発展
+  level_evidence: ABC での出題例は今回の調査では確認できていない。関連する ABC の H 問題（abc213_h 2806, abc318_h 2785, abc281_h 3180）は分割統治による畳み込みで 06 の担当
+  prerequisites:
+  - divide-and-conquer
+  - fenwick-tree
+  acl: null
+  signs:
+  - 3 次元の大小関係を満たす組を数える
+  - 更新とクエリが混ざるが、オフラインでよい
+  compare_with:
+  - parallel-binary-search
+  - offline-queries
+  page: overview
+  visual: 時刻の列を半分に分け、左半分の更新が右半分のクエリに与える影響だけをまとめて処理する図
+  problems: []
+- key: bit-operations
+  title: bit 演算の基本と XOR の性質
+  aliases:
+  - ビット演算
+  - XOR
+  - popcount
+  - 部分集合の列挙
+  - submask
+  level: 基礎
+  level_evidence: abc213_a（33）, abc269_c（384）, abc356_d（886）, abc121_d（1164）
+  prerequisites: []
+  acl: null
+  signs:
+  - XOR・AND・OR が問題文に出る
+  - 2 進表記
+  - x xor x = 0 で打ち消す
+  - 部分集合の部分集合を列挙
+  compare_with:
+  - bitwise-independence
+  - xor-basis
+  page: own
+  visual: 2 進表記を桁ごとに縦にそろえて AND / OR / XOR の結果を並べる表。submask を (s−1)&m で列挙するステップ送り
+  problems:
+  - id: abc213_a
+    difficulty: 33
+    role: example
+    summary: A xor C = B となる C を求める（XOR は同じ値で打ち消せるので C = A xor B）
+    evidence: https://drken1215.hatenablog.com/entry/2021/08/09/011200
+  - id: abc269_c
+    difficulty: 384
+    role: example
+    summary: N の 1 の bit の部分集合をすべて昇順に出力する（部分集合の列挙）
+    evidence: https://drken1215.hatenablog.com/entry/2024/07/07/222412
+  - id: abc121_d
+    difficulty: 1164
+    role: practice
+    summary: A 以上 B 以下の整数の XOR。0 から n までの XOR が 4 周期で決まることを使う
+    evidence: https://drken1215.hatenablog.com/entry/2019/03/09/224100
+    note: experiment と共通
+  - id: abc356_d
+    difficulty: 886
+    role: practice
+    summary: 0 から N までの k について popcount(k AND M) の和。bit ごとに 1 が立つ k の個数を数える
+    evidence: https://drken1215.hatenablog.com/entry/2024/06/08/041849
+    note: bitwise-independence と共通
+- key: bitwise-independence
+  title: 桁（bit）ごとに独立に考える
+  aliases:
+  - bit ごとの寄与
+  - 桁ごとに見る
+  - bit ごとに分解
+  level: 水
+  level_evidence: abc365_e（1102）, abc147_d（1205）, arc098_b（1404）, abc117_d（1423）, abc129_e（1547）。drken「各桁ごとに見る」ABC 11 問の中央値 1423
+  prerequisites:
+  - bit-operations
+  - contribution
+  acl: null
+  signs:
+  - XOR の総和
+  - AND / OR / XOR の最大化
+  - bit ごとに結果が独立に決まる
+  compare_with:
+  - contribution
+  - digit-dp
+  - binary-trie
+  page: own
+  visual: 各 bit の 0 と 1 の個数の表を作り、bit ごとの寄与 2^k × (個数の積) を足していく図
+  problems:
+  - id: abc147_d
+    difficulty: 1205
+    role: example
+    summary: 全ペアの XOR の総和。bit ごとに 0 と 1 の個数の積で寄与を数える
+    evidence: https://drken1215.hatenablog.com/entry/2020/04/25/032000
+  - id: abc365_e
+    difficulty: 1102
+    role: example
+    summary: 長さ 2 以上の全区間の XOR の総和。bit ごとに累積 XOR の 0/1 の個数で数える
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc365-e.html
+  - id: abc117_d
+    difficulty: 1423
+    role: practice
+    summary: K 以下の X で Σ(X xor A_i) を最大化。上の bit から、K を超えない範囲で 1 にするかを決める
+    evidence: https://drken1215.hatenablog.com/entry/2019/02/03/224200
+    note: digit-dp（02）でも解ける
+  - id: abc129_e
+    difficulty: 1547
+    role: practice
+    summary: a + b ≤ L かつ a + b = a xor b となる組を数える。後者は「同じ bit に 1 が重ならない」と言い換え、上の桁から数える
+    evidence: https://drken1215.hatenablog.com/entry/2019/06/10/150000
+    note: 02 の桁 DP と境界
+- key: observation-hub
+  title: 考察の型の一覧（入口ページ）
+  aliases:
+  - 考察
+  - 典型考察
+  - 発想の型
+  level: 基礎
+  level_evidence: 入口ページ。個々の型のレベルは各項目による
+  prerequisites: []
+  acl: null
+  signs:
+  - 手法名が思いつかない
+  - 操作・構築・数え上げの問題
+  compare_with: []
+  page: own
+  visual: 「問題の形 → 試す考え方」のフローチャート（総和→寄与、操作→不変量・偶奇・逆から、条件→余事象・固定、最適化→上界と構築）
+  problems: []
+- key: contribution
+  title: 主客転倒・寄与（和の順序を入れ替える）
+  aliases:
+  - 主客転倒
+  - 寄与
+  - 貢献度
+  - contribution technique
+  - 和の順序交換
+  level: 水
+  level_evidence: abc186_d（436）, abc172_d（963）は易しいが、abc379_e（1246）, abc351_f（1253）, abc151_e（1344）と水に多く、abc140_e（1873）, abc127_e（1938）は青。drken「主客転倒・寄与分解」ABC 16 問の中央値 1907
+  prerequisites:
+  - prefix-sum
+  - sorting-techniques
+  acl: null
+  signs:
+  - すべての組・区間・部分集合についての総和
+  - 各要素が答えに何回足されるか
+  - 期待値（07 の線形性と同じ発想）
+  compare_with:
+  - linearity-of-expectation
+  - bitwise-independence
+  page: own
+  visual: （組 × 要素）の表を描き、行ごとに足すか列ごとに足すかを入れ替える図
+  problems:
+  - id: abc186_d
+    difficulty: 436
+    role: example
+    summary: 全ペアの差の絶対値の和。ソートすると各要素が足される回数と引かれる回数が決まる
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/19/231000
+  - id: abc172_d
+    difficulty: 963
+    role: example
+    summary: Σ k × (k の約数の個数)。約数 d ごとに、d の倍数の和として数え直す
+    evidence: https://qiita.com/dvoraker3/items/8388ab6e1dc3af55070e
+    note: 典型90 039（答えへの貢献度）の類題
+  - id: abc379_e
+    difficulty: 1246
+    role: practice
+    summary: 数字列の全部分文字列が表す整数の和。各桁が何回どの位で現れるかを数える
+    evidence: https://drken1215.hatenablog.com/entry/2024/11/10/181617
+  - id: abc151_e
+    difficulty: 1344
+    role: practice
+    summary: K 個選んだときの max − min の総和。ソートし、各要素が最大・最小になる回数を二項係数で数える
+    evidence: https://drken1215.hatenablog.com/entry/2020/01/12/224100
+    note: 07 の二項係数
+  - id: abc351_f
+    difficulty: 1253
+    role: practice
+    summary: i < j の max(A_j − A_i, 0) の和。各 j について、前にある小さい値の個数と和を BIT で数える
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc351-f.html
+    note: 05 の BIT と組み合わせ
+  - id: abc140_e
+    difficulty: 1873
+    role: practice
+    summary: 全区間の 2 番目に大きい値の和。各値が 2 番目になる区間の数を、左右の大きい値の位置から数える
+    evidence: https://blog.hamayanhamayan.com/entry/2019/09/11/203310_3
+    note: 青
+- key: complement
+  title: 余事象（数えやすい側を数えて引く）
+  aliases:
+  - 補集合
+  - 全体から引く
+  - 少なくとも 1 つ
+  level: 基礎
+  level_evidence: abc193_c（379）, abc178_c（653）, abc162_d（757）, abc156_d（1014）。drken「考察：補集合を考える」ABC 29 問の中央値 833
+  prerequisites: []
+  acl: null
+  signs:
+  - 〜でないもの
+  - 少なくとも 1 つ含む
+  - すべて異なる・条件を 1 つでも満たす
+  compare_with:
+  - inclusion-exclusion
+  page: own
+  visual: 全体の長方形から数えやすい部分を切り抜くベン図
+  problems:
+  - id: abc193_c
+    difficulty: 379
+    role: example
+    summary: N 以下で a^b と表せない数。表せる数を列挙して全体から引く
+    evidence: https://drken1215.hatenablog.com/entry/2021/03/02/140000
+  - id: abc178_c
+    difficulty: 653
+    role: example
+    summary: 0 と 9 を両方含む長さ N の数列の数。全体から含まないものを引く（包除）
+    evidence: https://drken1215.hatenablog.com/entry/2020/10/09/162600
+    note: 07 の包除原理
+  - id: abc162_d
+    difficulty: 757
+    role: practice
+    summary: R, G, B がすべて異なる 3 つ組から、等間隔の組を引く
+    evidence: https://drken1215.hatenablog.com/entry/2020/04/12/225900
+    note: fix-variable と共通
+  - id: abc156_d
+    difficulty: 1014
+    role: practice
+    summary: a 本でも b 本でもない花束の作り方。2^n − 1 から nCa と nCb を引く
+    evidence: https://drken1215.hatenablog.com/entry/2020/04/22/013400
+    note: 06/07 の二項係数
+- key: invariant
+  title: 不変量・単調に変わる量
+  aliases:
+  - 不変量
+  - モノバリアント
+  - 保存量
+  - 操作の順序によらない
+  level: 基礎
+  level_evidence: ABC では abc125_d（833）, abc323_d（852）, abc140_d（1074）, arc068_b（1084）, typical90_ca（★3）と緑まで。ARC/AGC では青以上で頻出（drken「不変量に着目する」の ABC/ARC/AGC 25 問の中央値 1171、うち ABC は 5 問）
+  prerequisites: []
+  acl: null
+  signs:
+  - 操作を好きな回数・好きな順に行える
+  - 到達可能か判定
+  - 操作の前後で変わらない量（和・偶奇・余り）
+  compare_with:
+  - parity
+  - reverse-thinking
+  page: own
+  visual: 操作の前後で変わらない量を状態の横に表示しながら進めるステップ送り
+  problems:
+  - id: abc125_d
+    difficulty: 833
+    role: example
+    summary: 隣の 2 つの符号を反転する操作を何度でも。負の数の個数の偶奇が変わらないことから最大和が決まる
+    evidence: https://drken1215.hatenablog.com/entry/2019/04/27/224100
+    note: parity と共通
+  - id: abc323_d
+    difficulty: 852
+    role: example
+    summary: 同じ大きさのスライム 2 体を合体させる。大きさを奇数部分ごとに分けると独立に最小体数が決まる
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/12/020919
+  - id: abc140_d
+    difficulty: 1074
+    role: practice
+    summary: 区間反転 K 回で幸福な人数を最大化。境界の数が 1 回で高々 2 しか減らない
+    evidence: https://drken1215.hatenablog.com/entry/2020/05/16/005300
+  - id: arc068_b
+    difficulty: 1084
+    role: practice
+    summary: 3 枚取って真ん中を戻す操作で残せる最大枚数。1 回で 2 枚減ることから偶奇で決まる
+    evidence: https://drken1215.hatenablog.com/entry/2024/09/21/200934
+    note: ABC 053 D
+  - id: typical90_ca
+    difficulty: null
+    role: practice
+    summary: 2×2 に同じ値を足し引きする操作で A を B にできるか。操作の順番によらないので左上から決めていける
+    evidence: https://github.com/Reputeless/tenkei_90
+    stars: 3
+- key: parity
+  title: 偶奇に着目する
+  aliases:
+  - パリティ
+  - 偶奇性
+  - mod 2
+  level: 基礎
+  level_evidence: arc089_a（397）, typical90_x（★2）。応用 abc126_e（1340）, abc313_d（1630）。drken「パリティに着目する」ABC 38 問の中央値 514
+  prerequisites: []
+  acl: null
+  signs:
+  - ちょうど K 回の操作
+  - ±1 の移動
+  - 和が偶数という条件
+  - チェス盤の塗り分け
+  compare_with:
+  - invariant
+  - bipartite-graph
+  page: own
+  visual: 市松模様の塗り分けで、1 歩ごとに色が入れ替わることを示す図
+  problems:
+  - id: arc089_a
+    difficulty: 397
+    role: example
+    summary: 時刻と位置の計画が実行可能か。距離が時間以下で、その差が偶数であることが必要十分
+    evidence: https://blog.hamayanhamayan.com/entry/2018/01/21/225430
+    note: ABC 086 C
+  - id: typical90_x
+    difficulty: null
+    role: example
+    summary: ±1 をちょうど K 回で A を B にできるか。差の合計が K 以下で偶奇が一致すること
+    evidence: https://github.com/Reputeless/tenkei_90
+    stars: 2
+  - id: abc126_e
+    difficulty: 1340
+    role: practice
+    summary: A_x + A_y + Z が偶数という条件から全カードを当てる最小枚数。条件でつながった成分ごとに 1 枚見ればよい
+    evidence: https://drken1215.hatenablog.com/entry/2019/05/19/224500_1
+    note: 05 の Union-Find
+  - id: abc313_d
+    difficulty: 1630
+    role: practice
+    summary: K 個の和の偶奇だけを聞けるインタラクティブで 01 列を特定する。差を取って 1 つずつ決める
+    evidence: https://drken1215.hatenablog.com/entry/2023/08/06/010000
+    note: 08 のインタラクティブ
+- key: construction
+  title: 構築問題の考え方
+  aliases:
+  - 構築
+  - constructive
+  - 1 つ出力せよ
+  level: 水
+  level_evidence: abc350_c（394）, keyence2020_c（625）, arc115_c（706）, abc131_e（1433）, abc282_f（1734）, abc126_f（1770）。drken「構築」ABC 13 問の中央値 1192
+  prerequisites:
+  - observation-hub
+  acl: null
+  signs:
+  - 条件を満たすものを 1 つ出力せよ（存在しなければ −1）
+  - 操作手順を出力せよ
+  - 回数の上限が与えられている
+  compare_with:
+  - bound-and-construct
+  page: own
+  visual: 小さい N で作った例を並べ、規則的に伸ばす様子を示す図
+  problems:
+  - id: abc350_c
+    difficulty: 394
+    role: example
+    summary: 順列を N−1 回以下の swap でソートする手順を出力する。各値を正しい位置へ送る
+    evidence: https://drken1215.hatenablog.com/entry/2024/04/22/130300
+  - id: keyence2020_c
+    difficulty: 625
+    role: example
+    summary: 和が S の区間がちょうど K 個ある数列を作る。S を K 個並べ、残りは S と干渉しない値で埋める
+    evidence: https://drken1215.hatenablog.com/entry/2020/01/19/012600
+  - id: arc115_c
+    difficulty: 706
+    role: practice
+    summary: i が j の約数なら A_i ≠ A_j で最大値を最小化。素因数の個数 + 1 を割り当てる
+    evidence: https://drken1215.hatenablog.com/entry/2021/03/22/172600
+    note: bound-and-construct と共通
+  - id: abc131_e
+    difficulty: 1433
+    role: practice
+    summary: 距離 2 の頂点対がちょうど K 個の連結グラフを作る。スターから辺を足して 1 つずつ減らす
+    evidence: https://drken1215.hatenablog.com/entry/2019/06/22/232000
+  - id: abc282_f
+    difficulty: 1734
+    role: practice
+    summary: 区間を先に選んでおき、どのクエリ区間も選んだ区間 2 つの和集合で表す。2 冪の長さの区間を用意する
+    evidence: https://drken1215.hatenablog.com/entry/2022/12/29/112939
+    note: doubling / sparse-table の考え方
+  - id: abc126_f
+    difficulty: 1770
+    role: practice
+    summary: 同じ値の 2 つの間の XOR が K になる長さ 2^(M+1) の数列を作る。対称な並べ方を工夫する
+    evidence: https://drken1215.hatenablog.com/entry/2019/05/19/230600
+- key: bound-and-construct
+  title: 上界・下界を示して、達成する例を作る
+  aliases:
+  - 上界と下界
+  - ≤ K と = K の実例
+  - 必要条件と十分性
+  level: 基礎
+  level_evidence: abc139_d（357）, typical90_av（★3）, abc112_d（1025）, abc146_d（1192）。drken「「≦ K であること」と「= K となる実例」を示す」の ABC/ARC/AGC 26 問の中央値 915
+  prerequisites: []
+  acl: null
+  signs:
+  - 最大値・最小値を求めるが、全探索は無理
+  - 答えの候補に自然な上限がある（各項 ≤ i − 1 など）
+  compare_with:
+  - construction
+  - greedy-basics
+  page: section-of:construction
+  visual: 答えの上界の線と、構築した例がその線に届くことを示す図
+  problems:
+  - id: abc139_d
+    difficulty: 357
+    role: example
+    summary: 1..N の並べ替えで Σ (i mod P_i) の最大。各項 ≤ i − 1 の上界を達成する並べ方を示す
+    evidence: https://drken1215.hatenablog.com/entry/2020/05/16/154500
+  - id: typical90_av
+    difficulty: null
+    role: example
+    summary: 部分点と満点の得点を K 分で最大化。追加分が部分点以下になることから、候補を分けて大きい順に取る
+    evidence: https://github.com/Reputeless/tenkei_90
+    stars: 3
+  - id: abc112_d
+    difficulty: 1025
+    role: practice
+    summary: 和が M の N 項の数列の gcd の最大。gcd は M の約数で M/N 以下という上界と、その達成
+    evidence: https://drken1215.hatenablog.com/entry/2018/11/06/120600
+  - id: abc146_d
+    difficulty: 1192
+    role: practice
+    summary: 木の辺の彩色の最小色数は最大次数で、それを達成する塗り方を探索で作る
+    evidence: https://drken1215.hatenablog.com/entry/2020/04/26/172200
+    note: 04 の木
+- key: symmetry
+  title: 対称性を使う
+  aliases:
+  - 対称性
+  - 対称な組
+  - 半分にして 2 倍
+  level: 基礎
+  level_evidence: abc177_c（386）, abc171_e（778）
+  prerequisites: []
+  acl: null
+  signs:
+  - i < j の組の和（i と j を入れ替えても同じ）
+  - 全体の XOR から 1 つを除く
+  - 左右対称・回文
+  compare_with:
+  - contribution
+  page: section-of:observation-hub
+  visual: N×N の表の対角線を境に上下が同じであることを示す図
+  problems:
+  - id: abc177_c
+    difficulty: 386
+    role: example
+    summary: i < j の A_i A_j の和。（和の 2 乗 − 2 乗の和）/ 2 や累積和で求める
+    evidence: https://qiita.com/e869120/items/1ccb2bdf16890637e767
+    note: E869120 の数学的考察編で対称性の例
+  - id: abc171_e
+    difficulty: 778
+    role: example
+    summary: 自分以外の XOR から元の値を復元する。全員分の XOR を取ると全体の XOR になることを使う
+    evidence: https://drken1215.hatenablog.com/entry/2020/06/22/122500
+- key: reformulation
+  title: 言い換えの典型（条件・目的関数を書き直す）
+  aliases:
+  - 言い換え
+  - 式変形
+  - 条件の言い換え
+  level: 水
+  level_evidence: abc140_d（1074）, abc324_e（1153）, abc105_d（1458）, abc146_e（1762）。drken「操作・条件・目的関数を言い換える」ABC 72 問の中央値 617（易しい問題も多い）
+  prerequisites:
+  - observation-hub
+  acl: null
+  signs:
+  - 条件が複雑で直接は数えにくい
+  - 式を変形すると i と j に分離できる
+  compare_with:
+  - prefix-sum-counting
+  - median-binary-search
+  - fractional-binary-search
+  page: own
+  visual: 元の条件と言い換えた条件を左右に並べた対応表
+  problems:
+  - id: abc324_e
+    difficulty: 1153
+    role: example
+    summary: S_i + S_j が T を部分列に含む組の数。各 S_i で T の先頭・末尾から何文字一致するかに言い換え、ソートと二分探索で数える
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/21/181937
+  - id: abc105_d
+    difficulty: 1458
+    role: example
+    summary: 区間和が M の倍数 ⇔ 累積和の余りが等しい、と言い換えて数える
+    evidence: https://drken1215.hatenablog.com/entry/2018/08/13/125300
+    note: prefix-sum-counting と共通
+  - id: abc146_e
+    difficulty: 1762
+    role: practice
+    summary: 余りが区間長に等しい ⇔ a_i − 1 の区間和の余りが 0、と言い換える
+    evidence: https://drken1215.hatenablog.com/entry/2024/11/23/183549
+- key: fix-variable
+  title: 一部を固定して数える（決め打ち・真ん中を固定）
+  aliases:
+  - 決め打ち
+  - 固定して全探索
+  - 真ん中を固定
+  - 片方を固定
+  level: 基礎
+  level_evidence: abc330_d（569）, arc102_a（966）, abc318_e（1004）, arc084_a（1096）, abc254_d（1191）。drken「一部の変数を固定して考える」ABC 55 問の中央値 1004
+  prerequisites:
+  - brute-force
+  acl: null
+  signs:
+  - 3 つ組 (i < j < k) を数える
+  - 2 つの値の組で、片方を決めればもう片方の条件が単純になる
+  - 最大値（最小値）を決めて残りを最適化
+  compare_with:
+  - brute-force
+  - binary-search
+  - contribution
+  page: own
+  visual: 3 つ組のうち真ん中 j を固定し、左側と右側を独立に数える図
+  problems:
+  - id: abc330_d
+    difficulty: 569
+    role: example
+    summary: o のマス 3 つで L 字を作る組の数。角のマスを固定し、同じ行・列の o の数の積を足す
+    evidence: https://drken1215.hatenablog.com/entry/2023/11/26/204900
+  - id: arc102_a
+    difficulty: 966
+    role: example
+    summary: a+b, b+c, c+a がすべて K の倍数となる組。a の余りを固定すると b, c の余りも決まる
+    evidence: https://drken1215.hatenablog.com/entry/2018/09/02/011000
+    note: ABC 108 C
+  - id: abc318_e
+    difficulty: 1004
+    role: practice
+    summary: A_i = A_k ≠ A_j となる i < j < k の数。値ごとに出現位置の列を見て、間の個数をまとめて数える
+    evidence: https://drken1215.hatenablog.com/entry/2023/09/03/192823
+  - id: abc254_d
+    difficulty: 1191
+    role: practice
+    summary: i × j が平方数となる組。i の平方因子を除いた部分を固定すると j の形が決まる
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/17/024900
+  - id: abc376_e
+    difficulty: 1063
+    role: practice
+    summary: A の最大値を固定し、それ以下の中から B の小さい K 個を選ぶ
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc376-e.html
+    note: greedy-priority-queue と共通
+- key: reverse-thinking
+  title: 後ろから・逆順に考える
+  aliases:
+  - 逆から考える
+  - 操作を逆再生
+  - クエリを逆順に処理
+  level: 水
+  level_evidence: agc032_a（738）, abc134_d（926）, arc065_a（930）, abc137_d（1313）, abc120_d（1355）。drken「順序の工夫：後ろから見る」ABC 6 問の中央値 1120
+  prerequisites:
+  - observation-hub
+  acl: null
+  signs:
+  - 後ろから決めると一意に決まる
+  - 辺・要素の削除クエリ（逆にすれば追加）
+  - 最後の操作が特定できる
+  compare_with:
+  - invariant
+  - greedy-priority-queue
+  page: own
+  visual: 時間を逆向きに再生し、削除を追加に置き換える図
+  problems:
+  - id: arc065_a
+    difficulty: 930
+    role: example
+    summary: 4 つの単語の連結で S を作れるか。後ろから照合すると切り方が一意に決まる
+    evidence: https://drken1215.hatenablog.com/entry/2021/07/28/003500
+    note: ABC 049 C
+  - id: abc134_d
+    difficulty: 926
+    role: example
+    summary: i の倍数番目の箱の和の偶奇が指定どおりになる入れ方。大きい i から決めると一意に決まる
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/25/175400
+    note: harmonic-series と共通
+  - id: abc120_d
+    difficulty: 1355
+    role: practice
+    summary: 橋が順に壊れていくときの不便さ。逆順に橋を架け、Union-Find で連結成分を併合する
+    evidence: https://drken1215.hatenablog.com/entry/2019/03/03/224600
+    note: 05 の Union-Find
+  - id: agc032_a
+    difficulty: 738
+    role: practice
+    summary: 操作列を復元する。最後の操作は「位置と値が一致する最も右の要素」と決まるので、逆再生で取り除く
+    evidence: https://drken1215.hatenablog.com/entry/2019/03/24/091900
+- key: pigeonhole
+  title: 鳩の巣原理
+  aliases:
+  - 鳩の巣
+  - 部屋割り論法
+  level: 水
+  level_evidence: abc174_c（902）, abc179_e（1175）, abc200_d（1217）
+  prerequisites:
+  - observation-hub
+  acl: null
+  signs:
+  - 余りが M 種類しかない
+  - N+1 個以上の候補があれば必ず一致する
+  - 答えが必ず存在する
+  compare_with:
+  - cycle-detection
+  page: section-of:observation-hub
+  visual: M 個の箱に M+1 個の玉を入れる図
+  problems:
+  - id: abc200_d
+    difficulty: 1217
+    role: example
+    summary: 200 で割った余りが等しい異なる 2 つの部分列を探す。候補が 201 個あれば必ず一致するので、少数の要素だけ全探索すればよい
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc200-d.html
+  - id: abc174_c
+    difficulty: 902
+    role: example
+    summary: 7, 77, 777, … で最初に K の倍数になる項。余りは K 種類しかないので K 回以内に決着する
+    evidence: https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc174-c.html
+    note: cycle-detection と共通
+  - id: abc179_e
+    difficulty: 1175
+    role: practice
+    summary: 漸化式の値が M 種類しかないので、M+1 項以内に必ず同じ値が現れる
+    evidence: https://drken1215.hatenablog.com/entry/2020/09/20/091500
+- key: independence
+  title: 独立に分解する（x と y・桁ごと・成分ごと）
+  aliases:
+  - 独立に考える
+  - x と y を分ける
+  - 分離
+  level: 基礎
+  level_evidence: agc003_a（436）, typical90_br（★4）。応用 abc330_f（1718）, abc127_e（1938）。drken「考察：独立に考える」ABC 23 問の中央値 880
+  prerequisites: []
+  acl: null
+  signs:
+  - マンハッタン距離
+  - x 方向と y 方向の操作が別々
+  - bit ごと・桁ごと・連結成分ごとに結果が決まる
+  compare_with:
+  - bitwise-independence
+  - manhattan-rotation
+  page: section-of:reformulation
+  visual: 2 次元の移動を x 軸と y 軸への射影に分けて描く図
+  problems:
+  - id: agc003_a
+    difficulty: 436
+    role: example
+    summary: N/S/E/W の移動距離を自由に選んで家に戻れるか。x 方向と y 方向を独立に判定する
+    evidence: https://drken1215.hatenablog.com/entry/2019/03/26/175200
+  - id: typical90_br
+    difficulty: null
+    role: practice
+    summary: マンハッタン距離の和の最小を、x と y に分けてそれぞれ解く
+    evidence: https://github.com/Reputeless/tenkei_90
+    stars: 4
+    note: median-absolute と共通
+- key: experiment
+  title: 小さいケースで実験する（愚直解で規則を見つける）
+  aliases:
+  - 実験
+  - 愚直解
+  - 規則性を探す
+  level: 基礎
+  level_evidence: abc165_d（600）, abc380_d（849）, abc121_d（1164）
+  prerequisites:
+  - observation-hub
+  acl: null
+  signs:
+  - N が大きすぎて直接は計算できないが、小さい N なら全探索できる
+  - 答えに周期・規則がありそう
+  compare_with:
+  - cycle-detection
+  - stress-testing
+  page: section-of:observation-hub
+  visual: 小さい N の答えを表にして規則を読み取る図
+  problems:
+  - id: abc165_d
+    difficulty: 600
+    role: example
+    summary: ⌊Ax/B⌋ − A⌊x/B⌋ の最大。小さい値で試すと x mod B だけで決まり単調に増えることが分かる
+    evidence: https://drken1215.hatenablog.com/entry/2020/05/02/225600
+  - id: abc380_d
+    difficulty: 849
+    role: practice
+    summary: 大文字小文字を反転して連結する操作を繰り返した文字列の K 文字目。位置の 2 進表記の 1 の個数で決まる
+    evidence: https://drken1215.hatenablog.com/entry/2024/11/17/030500
+- key: casework
+  title: 場合分け・操作の順序を入れ替える
+  aliases:
+  - 場合分け
+  - 操作の順序によらない
+  level: 基礎
+  level_evidence: arc091_a（514）, typical90_ca（★3）
+  prerequisites: []
+  acl: null
+  signs:
+  - N = 1 や小さい端の場合だけ別扱い
+  - 操作の順番を好きに入れ替えてよい
+  compare_with:
+  - invariant
+  page: section-of:observation-hub
+  visual: null
+  problems:
+  - id: arc091_a
+    difficulty: 514
+    role: example
+    summary: N×M 枚のカードそれぞれについて周り 9 枚を反転したとき、裏向きになる枚数。各カードが何回反転されるかを場合分けで数える
+    evidence: https://blog.hamayanhamayan.com/entry/2018/03/12/091553
+    note: ABC 090 C。操作の順序によらない

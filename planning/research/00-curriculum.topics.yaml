@@ -1,0 +1,1362 @@
+# 00 全体構成・横断（curriculum）の項目一覧。詳細は 00-curriculum.md。
+# 手引き §5.2 の形式に、次のフィールドを足している。
+#   kind: cross（横断ページ）/ gap（担当表 01〜09 から抜けている項目。裏付けあり）/ gap-candidate（その候補。裏付け未確認や発展寄り）
+#   suggested_area: gap・gap-candidate の置き場所の案（担当表の略号）。設計で最終決定する
+#   links_to: 横断ページから引く先のページの key（推測）
+# 横断ページは level: null。key は他分野の項目も推測で書いている（統合のときに突き合わせる）。
+area: curriculum
+topics:
+  # ===== 横断ページ（kind: cross）=====
+  # level は null。prerequisites は「先に読んでおくとよいページ」で、多くは空。
+  # links_to は「このページから引く先」の分野・ページの key（推測でよい）。
+  - key: reverse-index-constraints
+    kind: cross
+    title: 逆引き辞典（制約・計算量から）
+    aliases: [制約から解法を推測する, 計算量の目安, 制約と計算量の対応表]
+    level: null
+    level_evidence: "横断ページ（全レベル）"
+    prerequisites: [complexity-estimation]
+    acl: null
+    signs: ["N ≤ 8", "N ≤ 20", "N ≤ 40", "N ≤ 500", "N ≤ 5000", "N ≤ 2×10^5", "N ≤ 10^6", "N ≤ 10^9", "N ≤ 10^18", "Q ≤ 2×10^5（クエリ）", "値の範囲 ≤ 10^5 と N ≤ 10^9 の組み合わせ"]
+    compare_with: [reverse-index-signs]
+    page: own
+    visual: "横軸に N（対数目盛）、縦に計算量のクラスを並べ、1秒（約10^8〜10^9回）の線を引いた図。各セルから手法ページへリンク"
+    links_to: [bit-full-search, permutation-full-search, bit-dp, meet-in-the-middle, interval-dp, warshall-floyd, binary-search, segment-tree, sqrt-decomposition, mo, doubling, matrix-power, digit-dp, prime-factorization]
+    problems: []
+  - key: reverse-index-signs
+    kind: cross
+    title: 逆引き辞典（問題の言い回し・サインから）
+    aliases: [キーワードから解法, 典型の言い換え一覧, 問題文のサイン]
+    level: null
+    level_evidence: "横断ページ（全レベル）。各ページの signs メタデータから自動生成し、手で書いた説明を足す"
+    prerequisites: []
+    acl: null
+    signs: ["最小値の最大化", "区間一括更新", "k 番目", "10^18 回の操作", "mod 998244353", "期待値", "すべての組の和", "部分列の個数", "回文", "辞書順最小", "グリッド", "N 頂点 N 辺", "操作の順番を自由に選べる", "XOR", "mex", "括弧列", "順列を swap でソート"]
+    compare_with: [reverse-index-constraints, thinking-checklist]
+    page: own
+    visual: "サイン→疑う手法→該当ページ の3段の表。カテゴリ（最適化・数え上げ・クエリ・グラフ・文字列）ごとのタブ"
+    links_to: []
+    problems: []
+  - key: method-comparison
+    kind: cross
+    title: 似た手法の使い分け
+    aliases: [手法の比較, どれを使うか]
+    level: null
+    level_evidence: "横断ページ。比較の組ごとに節（大きい組は単独ページ）"
+    prerequisites: []
+    acl: null
+    signs: []
+    compare_with: []
+    page: own
+    visual: "組ごとの比較表（できること・計算量・実装の重さ・オンライン/オフライン）と、選び方のフローチャート（Mermaid）"
+    links_to: [bfs, zero-one-bfs, dijkstra, bellman-ford, warshall-floyd, fenwick-tree, segment-tree, lazy-segment-tree, sparse-table, sqrt-decomposition, union-find, prefix-sum, imos, two-pointers, binary-search, rolling-hash, z-algorithm, kmp]
+    problems: []
+  - key: knowledge-map
+    kind: cross
+    title: 知識マップ
+    aliases: [前提関係のグラフ, 依存関係]
+    level: null
+    level_evidence: "全ページの prerequisites から自動生成"
+    prerequisites: []
+    acl: null
+    signs: []
+    compare_with: [roadmap]
+    page: own
+    visual: "全ページを頂点、前提関係を辺にした有向グラフ。分野で色分け、レベルで段を分け、理解度（localStorage）で塗り分け。考察ページは分野をまたぐ帯として描く"
+    links_to: []
+    problems: []
+  - key: roadmap
+    kind: cross
+    title: 色別ロードマップ（水・青・黄）
+    aliases: [学習順序, 何から学ぶか]
+    level: null
+    level_evidence: "レベル（difficulty 帯）と前提関係と頻度から半自動で生成し、色ごとの目標（ABC の位置・時間の目安）を手で書く"
+    prerequisites: [atcoder-system]
+    acl: null
+    signs: []
+    compare_with: [knowledge-map]
+    page: own
+    visual: "色ごとの段（必修・準必修・余裕があれば）に分けたページの列。各ページの「解いた」数から進捗バー"
+    links_to: []
+    problems: []
+  - key: cheatsheet-complexity
+    kind: cross
+    title: 早見表（計算量と制約）
+    aliases: [計算量の目安, 1秒で回る回数]
+    level: null
+    level_evidence: "横断ページ"
+    prerequisites: [complexity-estimation]
+    acl: null
+    signs: []
+    compare_with: [reverse-index-constraints]
+    page: section-of:cheatsheet
+    visual: null
+    links_to: []
+    problems: []
+  - key: cheatsheet
+    kind: cross
+    title: 早見表
+    aliases: [チートシート, 一覧表]
+    level: null
+    level_evidence: "横断ページ。計算量・STL・数の目安・mod の性質・公式・bit 演算・ACL 一覧の節を持つ"
+    prerequisites: []
+    acl: "ACL の全機能の一覧（fenwicktree, segtree, lazysegtree, string, math, convolution, modint, dsu, maxflow, mincostflow, scc, twosat）"
+    signs: []
+    compare_with: []
+    page: own
+    visual: "表のみ。各行から詳しいページへリンク"
+    links_to: []
+    problems: []
+  - key: contest-strategy
+    kind: cross
+    title: コンテストの戦い方
+    aliases: [時間配分, 問題を読む順, 詰まったとき]
+    level: null
+    level_evidence: "横断ページ。ABC の位置ごとの難度・時間の目安（2.3 節のデータ）を載せる"
+    prerequisites: [atcoder-system]
+    acl: null
+    signs: []
+    compare_with: [debugging-checklist, thinking-checklist]
+    page: own
+    visual: "100分の時間軸に、目標パフォーマンスごとの「ここまでに A〜D、ここまでに E」の目安を描いた帯グラフ"
+    links_to: [debugging-checklist, stress-testing, thinking-checklist]
+    problems: []
+  - key: debugging-checklist
+    kind: cross
+    title: WA・TLE・RE・MLE の原因チェックリスト
+    aliases: [デバッグ, バグの探し方]
+    level: null
+    level_evidence: "横断ページ"
+    prerequisites: []
+    acl: null
+    signs: ["サンプルは合うのに WA", "一部のケースだけ TLE", "RE（範囲外アクセス・再帰の深さ）"]
+    compare_with: [stress-testing]
+    page: own
+    visual: "症状（WA/TLE/RE/MLE）→ 疑う順の分岐図"
+    links_to: [overflow, fast-io, recursion-depth, floating-point-error]
+    problems: []
+  - key: stress-testing
+    kind: cross
+    title: ストレステストと実験（愚直解との比較）
+    aliases: [ランダムテスト, 愚直解, 実験, OEIS]
+    level: null
+    level_evidence: "横断ページ"
+    prerequisites: []
+    acl: null
+    signs: ["WA の原因が見つからない", "規則性がありそう（実験で予想する）"]
+    compare_with: [debugging-checklist]
+    page: own
+    visual: "生成器 → 愚直解・本解 → 比較 のループの図"
+    links_to: []
+    problems: []
+  - key: practice-method
+    kind: cross
+    title: 精進の仕方
+    aliases: [upsolve, 解説の読み方, 復習]
+    level: null
+    level_evidence: "横断ページ"
+    prerequisites: []
+    acl: null
+    signs: []
+    compare_with: [problem-sets]
+    page: own
+    visual: null
+    links_to: [problem-sets, roadmap]
+    problems: []
+  - key: problem-sets
+    kind: cross
+    title: 問題集と練習用コンテストの案内
+    aliases: [典型90問, EDPC, TDPC, NDPC, 鉄則本, アルゴリズムと数学, ACL Practice, AAL, FPS 24, 組合せゲーム 24, ADT, AWC]
+    level: null
+    level_evidence: "横断ページ。各問題集の問題を教材のページに対応させた表を自動生成する"
+    prerequisites: []
+    acl: null
+    signs: []
+    compare_with: [practice-method]
+    page: own
+    visual: null
+    links_to: []
+    problems: []
+  - key: glossary
+    kind: cross
+    title: 用語集
+    aliases: [用語, 略語]
+    level: null
+    level_evidence: "横断ページ。本文の用語からリンクする"
+    prerequisites: []
+    acl: null
+    signs: []
+    compare_with: []
+    page: own
+    visual: null
+    links_to: []
+    problems: []
+  - key: atcoder-system
+    kind: cross
+    title: AtCoder の仕組み（レート・パフォーマンス・difficulty・コンテストの種類）
+    aliases: [レーティング, パフォーマンス, difficulty の読み方, ABC の形式]
+    level: null
+    level_evidence: "横断ページ。difficulty と予測解答時間の定義（AtCoder Problems のソース）、ABC の形式の変遷、ARC の区分、練習用コンテスト、生成AIのルール"
+    prerequisites: []
+    acl: null
+    signs: []
+    compare_with: []
+    page: own
+    visual: "位置（A〜G）ごとの difficulty の箱ひげ図（2.3 節のデータ）"
+    links_to: [roadmap, contest-strategy]
+    problems: []
+  - key: library-design
+    kind: cross
+    title: 自作ライブラリの設計と動作確認
+    aliases: [Library Checker, verify, ライブラリ整備]
+    level: null
+    level_evidence: "decisions.md で作ると決めた横断ページ。09（ACL の使い方・バンドル）と分担を決める"
+    prerequisites: [acl-usage]
+    acl: "ACL の設計（テンプレート引数でモノイドを渡すなど）を手本として紹介"
+    signs: []
+    compare_with: []
+    page: own
+    visual: null
+    links_to: []
+    problems: []
+  - key: thinking-checklist
+    kind: cross
+    title: 詰まったときの発想リスト（考察の引き出し）
+    aliases: [考察の手順, 発想の型]
+    level: null
+    level_evidence: "横断ページ。01 の考察系ページへの入口"
+    prerequisites: []
+    acl: null
+    signs: ["方針が立たない", "愚直解しか思いつかない"]
+    compare_with: [contest-strategy, reverse-index-signs]
+    page: own
+    visual: "質問を順にたどるチェックリスト（小さいケース→言い換え→固定→逆から→独立に分ける→決め打ち→…）"
+    links_to: [contribution-technique, complement-counting, invariant, construction, binary-search-answer, parity, symmetry]
+    problems: []
+  - key: how-to-use
+    kind: cross
+    title: この教材の使い方
+    aliases: [引き方, claude.ai での解説の頼み方]
+    level: null
+    level_evidence: "横断ページ。辞書としての引き方、レベルの意味、確認問題・チェックの使い方"
+    prerequisites: []
+    acl: null
+    signs: []
+    compare_with: []
+    page: own
+    visual: null
+    links_to: [reverse-index-signs, reverse-index-constraints, knowledge-map, roadmap]
+    problems: []
+  - key: notation
+    kind: cross
+    title: 記法と用語の約束
+    aliases: [記法, 0-indexed, 半開区間]
+    level: null
+    level_evidence: "横断ページ。執筆者向けの約束を読者にも公開する"
+    prerequisites: []
+    acl: null
+    signs: []
+    compare_with: [glossary]
+    page: own
+    visual: null
+    links_to: []
+    problems: []
+  # ===== 担当表（01〜09）から抜けている項目（kind: gap）=====
+  # suggested_area は置き場所の案（担当表の略号）。設計で最終決定する。
+  - key: permutation-cycles
+    kind: gap
+    suggested_area: math-comb
+    title: 置換の巡回分解（swap でのソート）
+    aliases: [巡回置換, 置換のサイクル, 順列のサイクル分解]
+    level: 基礎
+    level_evidence: "abc436_e (diff 958) で必須。ikatakos 氏は「順列を任意 swap でソートする問題は近年の ABC で頻出」と書く"
+    prerequisites: [functional-graph]
+    acl: null
+    signs: ["順列 P が与えられる", "任意の2要素の swap でソート", "最小の swap 回数（= N − サイクル数）", "i → P_i を辿る"]
+    compare_with: [functional-graph, inversion-number]
+    page: own
+    visual: "i→P_i の矢印でサイクルを描き、同じサイクル内の swap でサイクルが2つに割れるステップ送り"
+    problems:
+      - id: abc436_e
+        difficulty: 958
+        role: example
+        summary: "最小回数でソートする操作列の1手目になりうる swap を数える。サイクルごとに C(サイズ,2) を足す"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/1213_abc436"
+      - id: abc371_g
+        difficulty: 2348
+        role: practice
+        summary: "置換を繰り返し適用して辞書順最小を作る。サイクルごとに最小値の位置を選び、回数の条件を合同式で合わせる"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0914_abc371"
+  - key: permutation-parity
+    kind: gap
+    suggested_area: math-comb
+    title: 置換の偶奇（swap 回数の偶奇）
+    aliases: [偶置換, 奇置換, 置換の符号]
+    level: 青
+    level_evidence: "abc470_f (diff 1604)・abc296_f (diff 1811) で偶奇の議論が鍵"
+    prerequisites: [permutation-cycles, parity]
+    acl: null
+    signs: ["3つの巡回シフト（= swap 2回）しかできない", "ちょうど K 回（10^100 回など）の swap", "同じ値があるかどうかで答えが変わる"]
+    compare_with: [inversion-number, invariant]
+    page: own
+    visual: "互換の積で置換を作り、偶奇が操作で変わらないことを色で示す図"
+    problems:
+      - id: abc470_f
+        difficulty: 1604
+        role: example
+        summary: "swap 可能な位置の組で連結成分を作り、各成分の並べ方を数える。ちょうど 10^100 回なので、同じ文字がない成分では偶奇の片方しか作れない"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0808_abc470"
+      - id: abc296_f
+        difficulty: 1811
+        role: practice
+        summary: "2つの列への同時 swap を、片方の3要素の巡回に言い換え、swap 回数の偶奇で可否を判定する"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2023/0401_abc296"
+  - key: inversion-number
+    kind: gap
+    suggested_area: ds
+    title: 転倒数
+    aliases: [反転数, inversion, バブルソートの交換回数]
+    level: 水
+    level_evidence: "abc190_f (diff 1321)、abc452_f (diff 1630)"
+    prerequisites: [fenwick-tree, coordinate-compression]
+    acl: atcoder::fenwick_tree
+    signs: ["隣接 swap の最小回数", "i<j かつ a_i>a_j の組の数", "巡回シフトしたときの転倒数", "区間の転倒数"]
+    compare_with: [permutation-cycles, permutation-parity]
+    page: own
+    visual: "左から順に BIT に入れ、各要素より大きい既出の数を数えるステップ送り"
+    problems:
+      - id: abc190_f
+        difficulty: 1321
+        role: example
+        summary: "順列を巡回シフトしたときの転倒数をすべて求める。先頭を末尾に移すと、その値より大きい数・小さい数の個数だけ差分が出る"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0130_abc190"
+      - id: abc452_f
+        difficulty: 1630
+        role: practice
+        summary: "転倒数がちょうど K の区間を数える。区間を広げると転倒数が減らない単調性を使い、BIT で末尾追加・先頭削除しながら尺取りする"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0404_abc452"
+  - key: bracket-sequence
+    kind: gap
+    suggested_area: basics
+    title: 括弧列
+    aliases: [正しい括弧列, 括弧の対応, parentheses]
+    level: 水
+    level_evidence: "abc407_e (diff 1531)、abc223_f (diff 1641)、abc167_f (diff 1961)"
+    prerequisites: [prefix-sum]
+    acl: atcoder::lazy_segtree
+    signs: ["'(' と ')' からなる文字列", "正しい括弧列か判定", "括弧列の連結順を決める", "括弧列の個数を数える"]
+    compare_with: [catalan-number]
+    page: own
+    visual: "'(' を +1、')' を −1 とした折れ線グラフ。0 未満に下がらず 0 で終わるのが正しい括弧列"
+    problems:
+      - id: abc407_e
+        difficulty: 1531
+        role: example
+        summary: "価値が最大になるように正しい括弧列の '(' の位置を選ぶ。「先頭 2i−1 文字に '(' が i 個以上」という言い換えと、優先度付きキューで候補から最大を1つずつ取る貪欲"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0524_abc407"
+      - id: abc223_f
+        difficulty: 1641
+        role: practice
+        summary: "括弧の入れ替えと区間が正しい括弧列かの判定を繰り返す。累積和の区間加算と区間 min を遅延セグ木で扱う"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/1017_abc223"
+      - id: abc167_f
+        difficulty: 1961
+        role: practice
+        summary: "複数の括弧列を並べて正しい括弧列にできるか。各列を（最小値, 最終値）に要約し、増えるものと減るもので分けてソートする貪欲"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2020/0510_abc167"
+  - key: mex
+    kind: gap
+    suggested_area: ds
+    title: mex の扱い
+    aliases: [MEX, minimum excluded]
+    level: 水
+    level_evidence: "abc194_e (diff 1088) は基礎、abc438_f (diff 1852) は青。水の帯で set による管理や主客転倒と組み合わさる"
+    prerequisites: [set-usage]
+    acl: null
+    signs: ["含まれない最小の非負整数", "区間・部分列・パスの mex", "mex の総和"]
+    compare_with: [grundy-number]
+    page: own
+    visual: null
+    problems:
+      - id: abc194_e
+        difficulty: 1088
+        role: example
+        summary: "長さ M の全区間の mex の最小値。値 k を固定し「k を含まない長さ M の区間があるか」を各値の出現位置の間隔で判定する"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0306_abc194"
+      - id: abc438_f
+        difficulty: 1852
+        role: practice
+        summary: "木の全パスの mex の総和。mex ≥ k+1 となるパス（0..k を全部含むパス）の数の和に言い換える主客転倒"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/1227_abc438"
+  - key: top-k-sum
+    kind: gap
+    suggested_area: ds
+    title: 上位 K 個の和の管理（multiset 2本）
+    aliases: [priority sum structure, 上位K個の和, 削除できるヒープ]
+    level: 水
+    level_evidence: "abc306_e (diff 1268)"
+    prerequisites: [multiset]
+    acl: null
+    signs: ["値の更新のたびに、大きい方から K 個の和を答える", "スライド窓の中の小さい方から K 個の和"]
+    compare_with: [priority-queue, fenwick-tree]
+    page: own
+    visual: "上位 K 個の集合と残りの集合の境界で、要素を1つ入れ替える図"
+    problems:
+      - id: abc306_e
+        difficulty: 1268
+        role: example
+        summary: "1点更新のたびに上位 K 個の和を答える。上位 K 個とそれ以外を2つの multiset で持ち、境界の要素を入れ替える"
+        evidence: "https://qiita.com/hibit/items/fff6c11e9f17fb435c69"
+      - id: abc458_d
+        difficulty: 450
+        role: practice
+        summary: "数の追加と中央値の質問。小さい半分と大きい半分を2つのヒープで持ち、境界で釣り合わせる"
+        evidence: "https://qiita.com/comet725/items/4e3a310ec19ed32e12f6"
+  - key: set-hashing
+    kind: gap
+    suggested_area: string-geo
+    title: 集合のハッシュ（Zobrist hashing）
+    aliases: [Zobrist hash, 和ハッシュ, XOR ハッシュ, 多重集合のハッシュ]
+    level: 水
+    level_evidence: "abc250_e (diff 1421)。素因数の指数を扱う abc238_g (diff 2254) は黄"
+    prerequisites: [randomization]
+    acl: null
+    signs: ["2つの集合（多重集合）が一致するかを多数のクエリで判定", "並べ替えて一致するか", "積が平方数・立方数か"]
+    compare_with: [rolling-hash]
+    page: own
+    visual: null
+    problems:
+      - id: abc250_e
+        difficulty: 1421
+        role: example
+        summary: "2つの数列の先頭部分を集合として比べるクエリ。値ごとに乱数を割り当て、先頭 i 項の XOR を前計算する"
+        evidence: "https://trap.jp/post/1594/"
+      - id: abc238_g
+        difficulty: 2254
+        role: practice
+        summary: "数の積が立方数かを多数判定する。（素因数, 指数 mod 3）の組に乱数を割り当てたハッシュで判定する"
+        evidence: "https://trap.jp/post/1594/"
+  - key: fractional-programming
+    kind: gap
+    suggested_area: basics
+    title: 平均・比の最大化の二分探索（分数計画）
+    aliases: [平均最大化, 中央値の二分探索, 分数計画法]
+    level: 水
+    level_evidence: "abc469_e (diff 1566) は水の上端、abc324_f (diff 1815)・abc236_e (diff 1893) は青。手法そのものは水の上端から必要で、DP・グラフとの組み合わせが青"
+    prerequisites: [binary-search-answer]
+    acl: null
+    signs: ["(Σb)/(Σc) の最大化", "選んだものの平均の最大値", "中央値の最大値"]
+    compare_with: [binary-search-answer]
+    page: own
+    visual: "答え x を固定し、各要素から x を引いた和の符号で判定する図"
+    problems:
+      - id: abc469_e
+        difficulty: 1566
+        role: example
+        summary: "連続部分列の平均の最大化に帰着。答え a を二分探索し、各要素から a を引いた累積和で「和が 0 以上の区間があるか」を判定する"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0801_abc469"
+      - id: abc324_f
+        difficulty: 1815
+        role: practice
+        summary: "DAG 上のパスで（美しさの和）/（コストの和）を最大化。答え x を二分探索し、辺の重みを b − x·c にした最長路が 0 以上かを DP で判定"
+        evidence: "https://drken1215.hatenablog.com/entry/2023/10/21/012800"
+      - id: abc236_e
+        difficulty: 1893
+        role: practice
+        summary: "選び方に条件のある部分集合で平均と中央値を最大化。答え x を二分探索し、平均は「各値から x を引いた和 ≥ 0」、中央値は「x 以上を +1・未満を −1 にした和 > 0」に言い換えて DP で判定"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0123_abc236"
+  - key: undo-dp
+    kind: gap
+    suggested_area: dp
+    title: 戻す DP（削除できるナップサック）
+    aliases: [戻すDP, 減らすナップサック]
+    level: 青
+    level_evidence: "abc321_f (diff 1645)"
+    prerequisites: [knapsack-dp]
+    acl: null
+    signs: ["要素の追加と削除のたびに部分和の個数を答える", "1つだけ除いたときの数え上げ"]
+    compare_with: [knapsack-dp]
+    page: own
+    visual: "追加は添字の大きい方へ足し込み、削除は小さい方から引き戻す、の対比図"
+    problems:
+      - id: abc321_f
+        difficulty: 1645
+        role: example
+        summary: "要素の追加・削除のたびに、和が K になる選び方の数を答える。追加の逆操作を添字の小さい方から引くことで O(K) で戻す"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2023/0923_abc321"
+  - key: pigeonhole
+    kind: gap
+    suggested_area: basics
+    title: 鳩の巣原理
+    aliases: [部屋割り論法]
+    level: 青
+    level_evidence: "abc260_f (diff 1995)"
+    prerequisites: [complexity-estimation]
+    acl: null
+    signs: ["片方の大きさが小さい（T ≤ 3000 など）", "1つ見つければよい", "状態の種類数より試行回数が多い"]
+    compare_with: [periodicity]
+    page: section-of:thinking-checklist
+    visual: null
+    problems:
+      - id: abc260_f
+        difficulty: 1995
+        role: example
+        summary: "二部グラフの長さ4の閉路を1つ探す。片側の頂点の組を記録し、同じ組が2回出たら見つかる。組の数が上限になるので O(T^2)"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0717_abc260"
+  - key: namori-graph
+    kind: gap
+    suggested_area: graph
+    title: なもりグラフ（N 頂点 N 辺の連結グラフ）
+    aliases: [なもり, pseudotree, 閉路が1つのグラフ]
+    level: 水
+    level_evidence: "abc266_f (diff 1525)"
+    prerequisites: [union-find, dfs]
+    acl: atcoder::dsu
+    signs: ["N 頂点 N 辺", "連結で閉路がちょうど1つ", "単純パスが一意か"]
+    compare_with: [functional-graph]
+    page: own
+    visual: "閉路から木がぶら下がる形の図。次数1の頂点を削って閉路だけ残すステップ送り"
+    problems:
+      - id: abc266_f
+        difficulty: 1525
+        role: example
+        summary: "2頂点間の単純パスが一意かを答えるクエリ。次数1の頂点を削って閉路を見つけ、閉路の各頂点からぶら下がる木を Union-Find でまとめる"
+        evidence: "https://zenn.dev/fjnkt98/articles/98c9dfbd0702a4"
+  - key: range-distinct-count
+    kind: gap
+    suggested_area: ds
+    title: 区間の種類数（オフライン＋BIT）
+    aliases: [Range Set Query, 区間の異なる値の個数]
+    level: 水
+    level_evidence: "abc174_f (diff 1495)"
+    prerequisites: [fenwick-tree, offline-queries]
+    acl: atcoder::fenwick_tree
+    signs: ["区間 [l, r] の異なる値の個数を多数", "クエリを右端でソートしてよい"]
+    compare_with: [mo]
+    page: section-of:offline-queries
+    visual: "右端を伸ばしながら、各値の最後の出現位置だけに 1 を立てる BIT のステップ送り"
+    problems:
+      - id: abc174_f
+        difficulty: 1495
+        role: example
+        summary: "区間の異なる値の個数を多数答える。最も近い同じ値どうしを1つの区間とみなし、クエリ区間に完全に含まれるその区間の数（＝重複の数）を BIT で数える"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2020/0802_abc174"
+  - key: game-on-cyclic-graph
+    kind: gap
+    suggested_area: math-comb
+    title: 閉路のあるグラフ上のゲーム（後退解析）
+    aliases: [後退解析, retrograde analysis, 引き分けのあるゲーム]
+    level: 黄
+    level_evidence: "abc209_e (diff 2153)"
+    prerequisites: [game-dp, bfs]
+    acl: null
+    signs: ["ゲームが終わらない（引き分け）ことがある", "状態遷移に閉路がある", "しりとり"]
+    compare_with: [game-dp, grundy-number]
+    page: own
+    visual: "行き止まりから必勝・必敗を確定させていくステップ送り（残った頂点が引き分け）"
+    problems:
+      - id: abc209_e
+        difficulty: 2153
+        role: example
+        summary: "しりとりの勝敗。3文字を頂点・単語を辺にしたグラフで、行き止まりから逆向きに必勝・必敗を確定させ、決まらない頂点は引き分け"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0710_abc209"
+  - key: bitwise-decomposition
+    kind: gap
+    suggested_area: basics
+    title: bit ごとに独立に考える
+    aliases: [桁ごとの寄与, XOR の和, 上位ビットから決める]
+    level: 水
+    level_evidence: "abc147_d (diff 1205)、abc281_f (diff 1714)"
+    prerequisites: [bit-operations, contribution-technique]
+    acl: null
+    signs: ["XOR・AND・OR の総和", "すべての組の XOR の和", "XOR の最大値・最小値", "x を選んで max(a_i xor x) を最小化"]
+    compare_with: [xor-basis, binary-trie]
+    page: own
+    visual: "数を2進表記で縦に並べ、桁ごとに 0 と 1 の個数を数える図"
+    problems:
+      - id: abc147_d
+        difficulty: 1205
+        role: example
+        summary: "すべての組の XOR の和。桁ごとに独立なので、各桁で（0 の個数）×（1 の個数）×2^桁 を足す"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2019/1208_abc147"
+      - id: abc281_f
+        difficulty: 1714
+        role: practice
+        summary: "x を選んで max(a_i xor x) を最小化。上位ビットから、0 と 1 が混在する桁でグループを2つに分けて再帰する"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/1210_abc281"
+  - key: base-conversion
+    kind: gap
+    suggested_area: math-nt
+    title: N 進法
+    aliases: [基数変換, n 進数]
+    level: 水
+    level_evidence: "abc192_d (diff 1425)"
+    prerequisites: [binary-search-answer]
+    acl: null
+    signs: ["n 進数として解釈する", "基数を変えたときの値", "−2 進数"]
+    compare_with: []
+    page: own
+    visual: null
+    problems:
+      - id: abc192_d
+        difficulty: 1425
+        role: example
+        summary: "文字列を n 進数とみた値が M 以下になる n の個数。値は n について単調増加なので二分探索。1桁の場合の場合分けとオーバーフローに注意"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0220_abc192"
+  - key: dp-restoration
+    kind: gap
+    suggested_area: dp
+    title: DP の復元
+    aliases: [経路復元, DP テーブルからの復元]
+    level: 基礎
+    level_evidence: "EDPC F（dp_f、diff なし）。ABC でも最適解そのものを出力させる問題で使う"
+    prerequisites: [dp-basics]
+    acl: null
+    signs: ["最適値だけでなく、その選び方（列・経路）を出力する"]
+    compare_with: [shortest-path-restoration]
+    page: section-of:dp-basics
+    visual: "DP 表の終点から、遷移元を矢印で逆にたどるステップ送り"
+    problems:
+      - id: dp_f
+        difficulty: null
+        role: example
+        summary: "LCS を1つ出力する。DP 表の終点から、値がどの遷移で決まったかを見て逆にたどる"
+        evidence: "https://qiita.com/drken/items/03c7db44ccd27820ea0d"
+  - key: steiner-tree
+    kind: gap
+    suggested_area: dp
+    title: 最小シュタイナー木
+    aliases: [Steiner tree, Dreyfus–Wagner]
+    level: 発展
+    level_evidence: "abc364_g (diff 2455)"
+    prerequisites: [bit-dp, dijkstra]
+    acl: null
+    signs: ["指定した K 頂点（K ≤ 10 程度）を連結にする最小コスト"]
+    compare_with: [minimum-spanning-tree]
+    page: overview
+    visual: null
+    problems:
+      - id: abc364_g
+        difficulty: 2455
+        role: example
+        summary: "主要都市の集合を連結にする最小コストを、ターミナルの部分集合と頂点を状態にした DP（部分集合の分割＋ダイクストラ）で求める"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0727_abc364"
+  - key: array-linked-list
+    kind: gap
+    suggested_area: ds
+    title: 配列で持つ連結リスト（双方向リスト）
+    aliases: [双方向リスト, linked list, prev/next 配列]
+    level: 基礎
+    level_evidence: "abc455_d (diff 796)。abc344_e (diff 973) も同じ型とされる（内容の裏付けは未確認）"
+    prerequisites: []
+    acl: null
+    signs: ["指定した要素の直後への挿入と削除を繰り返す", "カードの山を移す", "最後に列全体を出力"]
+    compare_with: [set-usage]
+    page: own
+    visual: "prev/next の矢印を付け替えるステップ送り"
+    problems:
+      - id: abc455_d
+        difficulty: 796
+        role: example
+        summary: "カードを別のカードの上へ付け替える操作を繰り返す。上下のつながりを2本の配列（双方向リスト）で持って O(1) で付け替え、最後に各山を土台から辿って数える"
+        evidence: "https://qiita.com/comet725/items/b8d667d45fc386392f6f"
+  - key: sweep-line
+    kind: gap
+    suggested_area: ds
+    title: 平面走査・イベントソート（クエリ先読み）
+    aliases: [スイープライン, 走査線, イベントソート]
+    level: 青
+    level_evidence: "abc477_f (diff 1629)。イベントソートだけなら abc478_d (diff 729)"
+    prerequisites: [sorting, fenwick-tree, lazy-segment-tree, offline-queries]
+    acl: atcoder::lazy_segtree
+    signs: ["長方形領域の和・個数のクエリ", "区間の追加と点の質問", "x（行）の順にイベントを処理してよい"]
+    compare_with: [imos, two-dimensional-prefix-sum, range-distinct-count]
+    page: own
+    visual: "走査線を1行ずつ進め、クエリの下端の直前で引き、上端で足すステップ送り"
+    problems:
+      - id: abc478_d
+        difficulty: 729
+        role: example
+        summary: "区間を追加するクエリを開始・終了の2つのイベントに分けて位置順にソートし、値ごとの被覆数を更新しながら種類数を数える"
+        evidence: "https://qiita.com/comet725/items/53e6c3b9804e2f235a01"
+      - id: abc477_f
+        difficulty: 1629
+        role: practice
+        summary: "グリッドの長方形内の黒マス数のクエリを先読みし、行を1つずつ進めながら列ごとの累計を遅延セグ木で持つ。答えは（上端の行での和）−（下端の1つ前の行での和）"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0926_abc477"
+  - key: super-vertex
+    kind: gap
+    suggested_area: graph
+    title: 超頂点（仮想的な頂点を足す）
+    aliases: [仮想頂点, 超頂点, 多始点]
+    level: 基礎
+    level_evidence: "abc463_e (diff 1055)"
+    prerequisites: [dijkstra]
+    acl: null
+    signs: ["複数の始点", "どこからでもワープできる", "グループ内なら自由に移動できる"]
+    compare_with: [multi-source-bfs, graph-state-extension]
+    page: section-of:graph-state-extension
+    visual: "元のグラフの外に1頂点を足し、そこから各頂点へ辺を張る図"
+    problems:
+      - id: abc463_e
+        difficulty: 1055
+        role: example
+        summary: "ゲートを使う移動を、仮想の頂点を2つ足して辺で表し、ダイクストラで最短距離を求める"
+        evidence: "https://qiita.com/comet725/items/15e9951d2076493fcbe6"
+  - key: dilworth
+    kind: gap
+    suggested_area: dp
+    title: Dilworth の定理（増加部分列への最小分割）
+    aliases: [Dilworth, 最小鎖被覆, 最長減少部分列]
+    level: 青
+    level_evidence: "abc457_g (diff 1928)、abc476_g (diff 2477)"
+    prerequisites: [lis]
+    acl: null
+    signs: ["いくつかの増加（非減少）部分列に分ける最小の個数", "ロボット・人を何台用意すれば全部回れるか", "45度回転すると上か右にしか動けない"]
+    compare_with: [lis, matching-duality]
+    page: section-of:lis
+    visual: "点を並べ、減少部分列の各点が別々の鎖に入るしかないことを示す図"
+    problems:
+      - id: abc457_g
+        difficulty: 1928
+        role: example
+        summary: "座標を45度回転して「上か右にしか動けない」移動にし、必要な台数を「増加部分列への最小分割数＝最長減少部分列の長さ」で求める"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0509_abc457"
+      - id: abc476_g
+        difficulty: 2477
+        role: practice
+        summary: "popcount の列を狭義増加部分列に塗り分ける最小色数を、最長広義減少部分列の長さとして求める。列の自己相似な構造と二項係数で高速化する"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0919_abc476"
+  - key: difference-reformulation
+    kind: gap
+    suggested_area: basics
+    title: 差分列への言い換え（区間操作を2点の操作に）
+    aliases: [差分を取る, 階差, 区間操作の言い換え]
+    level: 黄
+    level_evidence: "abc454_f (diff 2169)、abc459_f (diff 2163)。区間反転の易しい形は abc466_e (diff 1027)"
+    prerequisites: [imos]
+    acl: null
+    signs: ["区間に +1・−1 する操作の最小回数", "区間を反転する操作", "単調な列にする操作"]
+    compare_with: [imos, invariant]
+    page: own
+    visual: "列と差分列を上下に並べ、区間への加算が差分列の2点の増減になる図"
+    problems:
+      - id: abc466_e
+        difficulty: 1027
+        role: example
+        summary: "区間の裏表の反転を「切り替えポイントを2つ置く」ことに言い換え、使ったポイントの数を状態にした DP で解く"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0711_abc466"
+      - id: abc454_f
+        difficulty: 2169
+        role: practice
+        summary: "数列を回文にする最小操作を、左右の差の列への区間 ±1 に言い換え、さらに隣接差分を取って2点の操作の問題にする"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0418_abc454"
+      - id: abc459_f
+        difficulty: 2163
+        role: practice
+        summary: "A_i から i を引いて狭義単調を広義単調に直し、差分列をすべて非負にする問題として操作回数を数える"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0523_abc459"
+  # ===== 抜けている項目の候補（kind: gap-candidate）=====
+  # 裏付けが未確認、または頻度が低いもの。置き場所の担当で確認する。level は推定（level_evidence に「未確認」）。
+  - key: slope-trick
+    kind: gap-candidate
+    suggested_area: dp
+    title: Slope trick
+    aliases: [スロープトリック, 区分線形凸関数の管理]
+    level: 発展
+    level_evidence: "ABC では abc217_h (diff 3112) が代表。黄の帯の例は未確認"
+    prerequisites: [priority-queue, dp-basics]
+    acl: null
+    signs: ["|x − a| の和を最小化する DP", "凸関数の DP の遷移が平行移動と min"]
+    compare_with: [convex-hull-trick]
+    page: overview
+    visual: null
+    problems: []
+  - key: parallel-binary-search
+    kind: gap-candidate
+    suggested_area: ds
+    title: 並列二分探索
+    aliases: [整体二分, parallel binary search]
+    level: 発展
+    level_evidence: "未確認（OI Wiki の離线算法に独立項目）"
+    prerequisites: [binary-search-answer, offline-queries]
+    acl: null
+    signs: ["各クエリについて「何回目の操作で条件を満たすか」を求める"]
+    compare_with: [persistent-data-structure]
+    page: overview
+    visual: null
+    problems: []
+  - key: swag
+    kind: gap-candidate
+    suggested_area: ds
+    title: SWAG（2つのスタックで作るキュー）
+    aliases: [Sliding Window Aggregation]
+    level: 発展
+    level_evidence: "未確認（ライブラリのフォルダ名に多い）"
+    prerequisites: [monotonic-stack]
+    acl: null
+    signs: ["スライド窓の集約（逆元のない演算）"]
+    compare_with: [sliding-window-minimum, segment-tree]
+    page: overview
+    visual: null
+    problems: []
+  - key: binary-trie
+    kind: gap-candidate
+    suggested_area: ds
+    title: Binary Trie
+    aliases: [0-1 trie, XOR trie]
+    level: 青
+    level_evidence: "未確認（hotman78 の記事で XOR 系に頻出とされる）"
+    prerequisites: [bitwise-decomposition, trie]
+    acl: null
+    signs: ["集合と x の XOR の最小・最大", "XOR で k 番目"]
+    compare_with: [bitwise-decomposition, xor-basis]
+    page: own
+    visual: null
+    problems: []
+  - key: subsequence-next-table
+    kind: gap-candidate
+    suggested_area: string-geo
+    title: 部分列の判定と次の出現位置の表
+    aliases: [部分列オートマトン, next 配列]
+    level: 水
+    level_evidence: "典型90問 006（★5）。内容の裏付けは未確認"
+    prerequisites: [greedy]
+    acl: null
+    signs: ["部分列として含むか", "辞書順最小の部分列", "異なる部分列の個数"]
+    compare_with: [lcs-dp]
+    page: own
+    visual: null
+    problems: []
+  - key: run-length-encoding
+    kind: gap-candidate
+    suggested_area: basics
+    title: ランレングス圧縮
+    aliases: [連長圧縮, RLE]
+    level: 基礎
+    level_evidence: "abc019_2 (diff 534 参考値)、abc329_c (diff 205)。内容の裏付けは未確認"
+    prerequisites: []
+    acl: null
+    signs: ["同じ文字の連続", "連続する区間ごとに考える"]
+    compare_with: [two-pointers]
+    page: own
+    visual: null
+    problems: []
+  - key: difference-constraints
+    kind: gap-candidate
+    suggested_area: graph
+    title: 差分制約（牛ゲー）とポテンシャル
+    aliases: [牛ゲー, 差分制約系]
+    level: 黄
+    level_evidence: "未確認（大槻本14章）。abc216_g (diff 1963) は貪欲＋BIT で解ける"
+    prerequisites: [bellman-ford, dijkstra]
+    acl: null
+    signs: ["x_j − x_i ≤ c の形の制約", "最大化したい変数の差"]
+    compare_with: [bellman-ford]
+    page: own
+    visual: null
+    problems: []
+  - key: biconnected-components
+    kind: gap-candidate
+    suggested_area: graph
+    title: 二重辺連結成分・二重頂点連結成分（block-cut tree）
+    aliases: [2-edge-connected, block-cut tree]
+    level: 発展
+    level_evidence: "未確認（USACO Advanced）"
+    prerequisites: [lowlink]
+    acl: null
+    signs: ["橋を除いた連結成分", "関節点で分けた成分"]
+    compare_with: [scc]
+    page: overview
+    visual: null
+    problems: []
+  - key: matching-duality
+    kind: gap-candidate
+    suggested_area: graph
+    title: マッチングの双対（König・Dilworth・最小パス被覆・Hall の定理）
+    aliases: [König の定理, Dilworth の定理, Hall の結婚定理]
+    level: 発展
+    level_evidence: "abc237_h (diff 2807)。内容の裏付けは未確認"
+    prerequisites: [bipartite-matching]
+    acl: atcoder::mf_graph
+    signs: ["最小点被覆", "最大独立集合", "半順序の最小鎖分解"]
+    compare_with: [bipartite-matching]
+    page: overview
+    visual: null
+    problems: []
+  - key: kruskal-reconstruction-tree
+    kind: gap-candidate
+    suggested_area: graph
+    title: Kruskal 再構築木
+    aliases: [KRT]
+    level: 発展
+    level_evidence: "未確認（USACO Platinum）"
+    prerequisites: [minimum-spanning-tree, lca]
+    acl: null
+    signs: ["重み w 以下の辺だけで到達できるか、を多数"]
+    compare_with: [union-find]
+    page: overview
+    visual: null
+    problems: []
+  - key: linear-recurrence-fast
+    kind: gap-candidate
+    suggested_area: math-nt
+    title: 線形漸化式の高速化（きたまさ法・Bostan–Mori・Berlekamp–Massey）
+    aliases: [きたまさ法, Bostan-Mori, BM]
+    level: 発展
+    level_evidence: "未確認"
+    prerequisites: [matrix-power, ntt]
+    acl: atcoder::convolution
+    signs: ["線形漸化式の第 10^18 項（次数が大きい）"]
+    compare_with: [matrix-power]
+    page: overview
+    visual: null
+    problems: []
+  - key: xor-convolution
+    kind: gap-candidate
+    suggested_area: math-comb
+    title: XOR 畳み込み（アダマール変換）
+    aliases: [Walsh–Hadamard transform]
+    level: 発展
+    level_evidence: "未確認"
+    prerequisites: [zeta-mobius-transform]
+    acl: null
+    signs: ["添字の XOR で畳み込む"]
+    compare_with: [zeta-mobius-transform]
+    page: overview
+    visual: null
+    problems: []
+  - key: legendre-formula
+    kind: gap-candidate
+    suggested_area: math-nt
+    title: ルジャンドルの公式（n! の素因数の指数）
+    aliases: [階乗の素因数分解]
+    level: 水
+    level_evidence: "未確認"
+    prerequisites: [prime-factorization]
+    acl: null
+    signs: ["n! が p で何回割り切れるか", "n! の末尾の 0 の個数"]
+    compare_with: []
+    page: section-of:prime-factorization
+    visual: null
+    problems: []
+  - key: derangement-bell
+    kind: gap-candidate
+    suggested_area: math-comb
+    title: 完全順列・ベル数
+    aliases: [攪乱順列, モンモール数]
+    level: 青
+    level_evidence: "未確認"
+    prerequisites: [inclusion-exclusion]
+    acl: null
+    signs: ["どの i も P_i ≠ i", "集合の分割の数"]
+    compare_with: [stirling-numbers]
+    page: section-of:inclusion-exclusion
+    visual: null
+    problems: []
+  - key: tree-counting-formulas
+    kind: gap-candidate
+    suggested_area: math-comb
+    title: Prüfer 列・Cayley の公式・行列木定理・LGV
+    aliases: [ケイリーの公式, Matrix-Tree theorem, LGV lemma]
+    level: 発展
+    level_evidence: "未確認"
+    prerequisites: [binomial-coefficient, gaussian-elimination]
+    acl: null
+    signs: ["ラベル付き木の個数", "全域木の個数", "交差しない経路の組の個数"]
+    compare_with: []
+    page: overview
+    visual: null
+    problems: []
+  - key: polygon-geometry
+    kind: gap-candidate
+    suggested_area: string-geo
+    title: 多角形の面積・点の内外判定・Pick の定理・最近点対・回転キャリパー・最小包含円
+    aliases: [靴ひも公式, 符号付き面積]
+    level: 青
+    level_evidence: "未確認"
+    prerequisites: [cross-product]
+    acl: null
+    signs: ["多角形の面積", "格子点の個数", "最も近い2点", "最も遠い2点"]
+    compare_with: [convex-hull]
+    page: own
+    visual: null
+    problems: []
+  - key: matroid
+    kind: gap-candidate
+    suggested_area: basics
+    title: マトロイド（貪欲が正しい理由）
+    aliases: [matroid]
+    level: 発展
+    level_evidence: "未確認"
+    prerequisites: [greedy, minimum-spanning-tree]
+    acl: null
+    signs: ["独立性を保って重み最大の集合を選ぶ"]
+    compare_with: [greedy]
+    page: overview
+    visual: null
+    problems: []
+  - key: amortized-analysis
+    kind: gap-candidate
+    suggested_area: basics
+    title: 償却計算量・調和級数の計算量・値の種類は O(√N)
+    aliases: [ならし計算量, 調和級数]
+    level: 水
+    level_evidence: "未確認（CPH 8章・27章、PAST 上級）"
+    prerequisites: [complexity-estimation]
+    acl: null
+    signs: ["ループの合計が N/1 + N/2 + … + N/N", "和が N の正整数の種類数"]
+    compare_with: [sqrt-decomposition]
+    page: section-of:complexity-estimation
+    visual: null
+    problems: []
+  - key: scheduling-and-kth-enumeration
+    kind: gap-candidate
+    suggested_area: basics
+    title: 締め切り付きスケジューリング・K 番目の解の列挙（優先度付きキュー）
+    aliases: [fracturing search, K-best]
+    level: 青
+    level_evidence: "未確認（USACO、cp-algorithms）"
+    prerequisites: [priority-queue, greedy]
+    acl: null
+    signs: ["締め切りと報酬のある仕事", "和が小さい方から K 個"]
+    compare_with: [top-k-sum]
+    page: own
+    visual: null
+    problems: []
+  - key: kadane-and-submask
+    kind: gap-candidate
+    suggested_area: dp
+    title: 最大部分配列和・部分集合の部分集合の列挙（3^N）
+    aliases: [Kadane, submask enumeration]
+    level: 水
+    level_evidence: "未確認"
+    prerequisites: [dp-basics, bit-dp]
+    acl: null
+    signs: ["連続部分列の和の最大", "部分集合を2つに分ける DP"]
+    compare_with: [prefix-sum]
+    page: section-of:bit-dp
+    visual: null
+    problems: []
+  - key: exact-integer-root
+    kind: gap-candidate
+    suggested_area: math-nt
+    title: 整数の平方根・累乗根を誤差なく求める
+    aliases: [isqrt, 整数の平方根]
+    level: 基礎
+    level_evidence: "未確認"
+    prerequisites: [floating-point-error]
+    acl: null
+    signs: ["x^2 ≤ N となる最大の x（N ≤ 10^18）"]
+    compare_with: [binary-search]
+    page: section-of:floating-point-error
+    visual: null
+    problems: []
+  - key: lexicographic-greedy
+    kind: gap-candidate
+    suggested_area: basics
+    title: 辞書順最小の構成（前から貪欲）
+    aliases: [辞書順最小]
+    level: 水
+    level_evidence: "未確認（典型90問の考察・実装の典型、蟻本 2-2）"
+    prerequisites: [greedy]
+    acl: null
+    signs: ["辞書順最小の列・文字列を出力"]
+    compare_with: [dp-restoration]
+    page: own
+    visual: null
+    problems: []
+  - key: thinking-patterns-extra
+    kind: gap-candidate
+    suggested_area: basics
+    title: 考察の型の追加（後ろから考える・固定して全探索・足された回数・一手先・上界・実験・データの持ち方）
+    aliases: [考察テクニック]
+    level: 水
+    level_evidence: "鉄則本6章・アルゴリズム×数学5章・典型90問の15項目に共通"
+    prerequisites: []
+    acl: null
+    signs: ["方針が立たない"]
+    compare_with: [thinking-checklist]
+    page: own
+    visual: null
+    problems: []
+  - key: cpp-extra-pitfalls
+    kind: gap-candidate
+    suggested_area: cpp
+    title: pb_ds の順序付き集合・比較関数の strict weak ordering・unordered_map の衝突対策・定数倍高速化
+    aliases: [pb_ds, tree_order_statistics]
+    level: 基礎
+    level_evidence: "未確認"
+    prerequisites: []
+    acl: null
+    signs: ["k 番目の要素を集合から取る", "sort が RE する"]
+    compare_with: [fenwick-tree]
+    page: own
+    visual: null
+    problems: []
+  - key: dynamic-segtree-cartesian
+    kind: gap-candidate
+    suggested_area: ds
+    title: 動的セグ木・Cartesian tree
+    aliases: [dynamic segment tree, デカルト木]
+    level: 発展
+    level_evidence: "未確認"
+    prerequisites: [segment-tree, monotonic-stack]
+    acl: null
+    signs: ["添字の範囲が 10^9 で先読みできない", "区間の最小値で分割する再帰"]
+    compare_with: [coordinate-compression]
+    page: overview
+    visual: null
+    problems: []
+  - key: cycle-basis-xor
+    kind: gap-candidate
+    suggested_area: graph
+    title: "グラフのサイクル基底と XOR の経路"
+    aliases: [サイクル空間, XOR 最短路]
+    level: 黄
+    level_evidence: "abc451_g (diff 2221)。手法の確認は担当C の分類（第三者の解説）による"
+    prerequisites: [xor-basis, dfs]
+    acl: null
+    signs: ["経路の重みの XOR を最小化", "閉路を何度でも回れる"]
+    compare_with: [xor-basis]
+    page: own
+    visual: null
+    problems:
+      - id: abc451_g
+        difficulty: 2221
+        role: example
+        summary: "経路の XOR を最小化する。全域木からの閉路の XOR を基底にし、XOR 基底で最小化する（分割統治も使う）"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0328_abc451"
+  - key: highly-composite-numbers
+    kind: gap-candidate
+    suggested_area: math-nt
+    title: "高度合成数の列挙"
+    aliases: [約数が多い数, highly composite number]
+    level: 黄
+    level_evidence: "abc475_g (diff 2360)。手法の確認は担当C の分類（第三者の解説）による"
+    prerequisites: [divisors, dfs]
+    acl: null
+    signs: ["約数の個数が多い数を探す", "N 以下で約数の個数が最大"]
+    compare_with: []
+    page: section-of:divisors
+    visual: null
+    problems:
+      - id: abc475_g
+        difficulty: 2360
+        role: example
+        summary: "約数の個数が多い数を、小さい素数の指数が単調に減る形に限って列挙する"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0912_abc475"
+  - key: segtree-matrix
+    kind: gap-candidate
+    suggested_area: ds
+    title: "セグ木に行列（(min,+)・(max,+) の半環）を載せる"
+    aliases: [行列のセグ木, 区間の行列積]
+    level: 青
+    level_evidence: "abc456_f (diff 1888)。手法の確認は担当C の分類（第三者の解説）による"
+    prerequisites: [segment-tree, matrix-power]
+    acl: atcoder::segtree
+    signs: ["区間ごとの遷移をまとめて合成する", "DP の遷移が小さい行列で書ける"]
+    compare_with: [segment-tree, matrix-power]
+    page: section-of:segment-tree
+    visual: null
+    problems:
+      - id: abc456_f
+        difficulty: 1888
+        role: example
+        summary: "各日の遷移を (min,+) 行列で表し、区間の行列積をセグ木で求める"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0502_abc456"
+  - key: version-tree-offline
+    kind: gap-candidate
+    suggested_area: ds
+    title: "操作の版を木にしてオフラインで処理する（永続化の代わり）"
+    aliases: [版の木, 操作の巻き戻し]
+    level: 青
+    level_evidence: "abc453_g (diff 1735)。手法の確認は担当C の分類（第三者の解説）による"
+    prerequisites: [offline-queries, euler-tour]
+    acl: null
+    signs: ["過去の版をコピーして操作する", "版を指定したクエリ"]
+    compare_with: [persistent-data-structure]
+    page: own
+    visual: null
+    problems:
+      - id: abc453_g
+        difficulty: 1735
+        role: example
+        summary: "コピー操作で版が枝分かれするクエリを先読みし、版の木をオイラーツアーで辿る（オンラインなら永続セグ木）"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0411_abc453"
+  - key: merge-sort-tree
+    kind: gap-candidate
+    suggested_area: ds
+    title: "merge-sort tree"
+    aliases: [領域木]
+    level: 発展
+    level_evidence: "abc467_g (diff 2544)。手法の確認は担当C の分類（第三者の解説）による"
+    prerequisites: [segment-tree, fenwick-tree]
+    acl: null
+    signs: ["区間内で値が x 以下の個数を多数"]
+    compare_with: [wavelet-matrix]
+    page: overview
+    visual: null
+    problems:
+      - id: abc467_g
+        difficulty: 2544
+        role: example
+        summary: "クエリを先読みし、merge-sort tree の各段に BIT を持たせて処理する"
+        evidence: "https://kmjp.hatenablog.jp/entry/2026/07/25/0900"
+  - key: mo-on-tree
+    kind: gap-candidate
+    suggested_area: ds
+    title: "木上の Mo"
+    aliases: [Mo on tree]
+    level: 黄
+    level_evidence: "abc477_g (diff 2226)。手法の確認は担当C の分類（第三者の解説）による"
+    prerequisites: [mo, euler-tour]
+    acl: null
+    signs: ["木のパス・部分木の種類数・頻度のクエリ"]
+    compare_with: [mo, hld]
+    page: section-of:mo
+    visual: null
+    problems:
+      - id: abc477_g
+        difficulty: 2226
+        role: example
+        summary: "木のクエリをオイラーツアーで列に直し、Mo で頻度を管理する"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0926_abc477"
+  - key: suffix-automaton
+    kind: gap-candidate
+    suggested_area: string-geo
+    title: "Suffix Automaton"
+    aliases: [接尾辞オートマトン]
+    level: 発展
+    level_evidence: "abc452_g (diff 2255)。手法の確認は担当C の分類（第三者の解説）による"
+    prerequisites: [suffix-array]
+    acl: null
+    signs: ["異なる部分文字列の個数"]
+    compare_with: [suffix-array]
+    page: overview
+    visual: null
+    problems:
+      - id: abc452_g
+        difficulty: 2255
+        role: example
+        summary: "ランレングス圧縮した上で部分文字列の種類数を数える（Suffix Automaton か SA＋LCP）"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0404_abc452"
+  - key: concat-order-sort
+    kind: gap-candidate
+    suggested_area: basics
+    title: "連結の比較によるソート（a+b と b+a）"
+    aliases: [連結して最大・最小, 交換論法]
+    level: 青
+    level_evidence: "abc471_f (diff 1895)。手法の確認は担当C の分類（第三者の解説）による"
+    prerequisites: [exchange-argument, sorting]
+    acl: null
+    signs: ["文字列・数を並べて連結した結果を最大（最小）に"]
+    compare_with: [exchange-argument]
+    page: section-of:exchange-argument
+    visual: null
+    problems:
+      - id: abc471_f
+        difficulty: 1895
+        role: example
+        summary: "要素を連結した結果を最大化する。a+b と b+a を比べる順序でソートし、貪欲に選ぶ"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0815_abc471"
+  - key: undoable-greedy
+    kind: gap-candidate
+    suggested_area: dp
+    title: "取り消し付きの貪欲（Alien DP・Monge との関係）"
+    aliases: [取り消し可能な貪欲, 優先度付きキューの貪欲]
+    level: 発展
+    level_evidence: "abc464_g (diff 2592)。手法の確認は担当C の分類（第三者の解説）による"
+    prerequisites: [priority-queue, alien-dp]
+    acl: null
+    signs: ["隣り合わない k 個を選んで和を最大化（k ごとに全部答える）"]
+    compare_with: [alien-dp]
+    page: overview
+    visual: null
+    problems:
+      - id: abc464_g
+        difficulty: 2592
+        role: example
+        summary: "隣接しない k 個の選択を、選択を取り消せる優先度付きキューの貪欲で k ごとに求める"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0627_abc464"
+  - key: minkowski-sum
+    kind: gap-candidate
+    suggested_area: string-geo
+    title: "ミンコフスキー和（凸包の和）"
+    aliases: [Minkowski sum]
+    level: 発展
+    level_evidence: "abc478_g (diff 2582)。手法の確認は担当C の分類（第三者の解説）による"
+    prerequisites: [convex-hull]
+    acl: null
+    signs: ["2つの凸な点集合の和の凸包"]
+    compare_with: [convex-hull]
+    page: overview
+    visual: null
+    problems:
+      - id: abc478_g
+        difficulty: 2582
+        role: example
+        summary: "分割統治で凸包を作り、ミンコフスキー和で合成する"
+        evidence: "https://kmjp.hatenablog.jp/entry/2026/10/08/0900"
+  - key: multidimensional-prefix-sum
+    kind: gap-candidate
+    suggested_area: basics
+    title: "多次元の累積和"
+    aliases: [高次元いもす]
+    level: 青
+    level_evidence: "abc465_f (diff 1754)。手法の確認は担当C の分類（第三者の解説）による"
+    prerequisites: [two-dimensional-prefix-sum, inclusion-exclusion]
+    acl: null
+    signs: ["3次元以上の直方体の和"]
+    compare_with: [two-dimensional-prefix-sum]
+    page: section-of:prefix-sum
+    visual: null
+    problems:
+      - id: abc465_f
+        difficulty: 1754
+        role: example
+        summary: "6次元の累積和（いもす）と包除で領域の和を求める"
+        evidence: "https://qiita.com/gotoki_no_joe/items/998768d198065787e9ce"
+  - key: checkerboard-parity
+    kind: gap-candidate
+    suggested_area: basics
+    title: "グリッドの市松模様（偶奇の不変量）"
+    aliases: [チェッカーボード, 市松]
+    level: 青
+    level_evidence: "abc454_e (diff 1627)、abc474_g (diff 2280)。手法の確認は担当C の分類（第三者の解説）による"
+    prerequisites: [parity, invariant]
+    acl: null
+    signs: ["グリッドを1マスずつ動く操作の可否", "ドミノ・タイルの敷き詰め"]
+    compare_with: [parity, invariant]
+    page: section-of:parity
+    visual: null
+    problems:
+      - id: abc454_e
+        difficulty: 1627
+        role: example
+        summary: "グリッドの市松模様の色の偶奇で到達・構築の可否を判定する"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0418_abc454"
+      - id: abc474_g
+        difficulty: 2280
+        role: example
+        summary: "市松模様の条件を実験で推測して構築する"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0906_abc474"
+  - key: lp-half-integrality
+    kind: gap-candidate
+    suggested_area: graph
+    title: "LP 緩和と半整数性（最大独立集合をフローで）"
+    aliases: [LP 双対, 半整数性]
+    level: 発展
+    level_evidence: "abc461_g (diff 2391)。手法の確認は担当C の分類（第三者の解説）による"
+    prerequisites: [max-flow, min-cut]
+    acl: atcoder::mf_graph
+    signs: ["一般グラフの重み付き独立集合（特殊な構造つき）"]
+    compare_with: [min-cut]
+    page: overview
+    visual: null
+    problems:
+      - id: abc461_g
+        difficulty: 2391
+        role: example
+        summary: "最大独立集合の LP 緩和が半整数になる性質を使い、フローに帰着する"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0606_abc461"

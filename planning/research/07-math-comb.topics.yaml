@@ -1,0 +1,2623 @@
+# 07 数学（数え上げ・確率・ゲーム）の項目一覧
+# 調査レポート planning/research/07-math-comb.md の §3〜§5 を機械で扱える形にしたもの。
+# difficulty は tools/ap.py（AtCoder Problems の 2026-10-21 取得キャッシュ）の値。diff=なしは null。
+# key は仮の識別子。prerequisites / compare_with のうち他分野の key は推測で書いている。
+area: math-comb
+topics:
+- key: counting-mindset
+  title: 数え上げの考え方（総論）
+  aliases:
+  - 数え上げの基本方針
+  - 和の法則・積の法則
+  - ちょうど1回数える
+  level: 水
+  level_evidence: 数え方の設計そのものが問われる問題が水色帯にまとまる：abc167_e (diff 1442)・abc133_e (diff 1505)・abc156_e (diff 1514)。和と積だけで済む abc185_c (diff 374) は茶色以下
+  prerequisites:
+  - modular-arithmetic
+  acl: null
+  signs:
+  - 〜の個数を 998244353 で割った余り
+  - 何通りあるか
+  - すべての〜についての総和
+  compare_with:
+  - dp-basics
+  page: own
+  visual: 同じ対象を2通りの見方で数える図と、積の法則が成り立つか（次の段階の枝の数が一定か）を色分けした樹形図
+  problems:
+  - id: abc185_c
+    difficulty: 374
+    role: example
+    summary: 長さ L の棒を正の長さの 12 本に切る方法を、11 か所の切れ目の選び方に言い換えて数える
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/14/015500
+  - id: abc133_e
+    difficulty: 1505
+    role: example
+    summary: 木の頂点を距離 2 以内が異なる色になるように塗る方法を、BFS 順に決めて積の法則で数える
+    evidence: https://drken1215.hatenablog.com/entry/2019/07/08/002700
+  - id: abc167_e
+    difficulty: 1442
+    role: practice
+    summary: 隣り合う同色の組が K 個以下になる塗り方を、組の数 k ごとに二項係数と累乗の積で数えて足す
+    evidence: https://kmjp.hatenablog.jp/entry/2020/05/10/0900
+  - id: abc156_e
+    difficulty: 1514
+    role: practice
+    summary: k 回の移動後にありうる各部屋の人数の組を、空き部屋の数で場合分けして重複組合せで数える
+    evidence: https://kmjp.hatenablog.jp/entry/2020/02/23/0900
+- key: counting-bijection
+  title: 対応づけ・数える対象の言い換え
+  aliases:
+  - 全単射
+  - 言い換え
+  - 経路数に帰着
+  level: 水
+  level_evidence: abc145_d (diff 1009)（移動の回数の組に言い換え）・abc110_d (diff 1695)（素因数ごとの重複組合せへ）で必要。応用は arc058_b (diff 1905)・arc110_d (diff 2078) と青〜黄
+  prerequisites:
+  - counting-mindset
+  - binomial-coefficient
+  acl: null
+  signs:
+  - 単調な数列の個数
+  - 切り分け方の数
+  - 経路の数
+  - 途中で負にならない列
+  compare_with:
+  - counting-dedup
+  - lattice-paths
+  page: own
+  visual: 左に元の対象・右に言い換えた対象を並べて対応を線で結び、片方を変えるともう片方も変わる動く図
+  problems:
+  - id: abc145_d
+    difficulty: 1009
+    role: example
+    summary: 2 種類のナイト移動で目的のマスに着く方法を、各移動の回数を連立方程式で決めてから並べ方の二項係数で数える
+    evidence: https://drken1215.hatenablog.com/entry/2020/04/26/180000
+  - id: abc110_d
+    difficulty: 1695
+    role: example
+    summary: 積が M になる長さ N の数列を、素因数ごとに指数を N 個へ配る重複組合せの積に言い換える
+    evidence: https://drken1215.hatenablog.com/entry/2018/09/23/224100
+  - id: arc058_b
+    difficulty: 1905
+    role: practice
+    summary: 左下の禁止された長方形を避ける格子路を、境界を越える位置で分類して数える
+    evidence: https://drken1215.hatenablog.com/entry/2020/04/06/235844
+  - id: arc110_d
+    difficulty: 2078
+    role: practice
+    summary: 二項係数の積の総和を、1 本の格子路の数に言い換えて閉じた式にする
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/06/070100
+- key: counting-complement
+  title: 補集合で数える
+  aliases:
+  - 余事象
+  - 全体から引く
+  level: 基礎
+  level_evidence: abc178_c (diff 653)・abc162_d (diff 757)・abc156_d (diff 1014) と茶〜緑で頻出。木のパスの色で使う abc163_f (diff 2470) は発展
+  prerequisites:
+  - counting-mindset
+  acl: null
+  signs:
+  - 少なくとも1つ
+  - 〜を含む
+  - いずれかが
+  compare_with:
+  - inclusion-exclusion
+  page: section-of:counting-mindset
+  visual: 全体の長方形から条件を満たさない部分を切り取る図
+  problems:
+  - id: abc178_c
+    difficulty: 653
+    role: example
+    summary: 0 と 9 を両方含む長さ N の数字列を、全体から 0 を含まない・9 を含まない場合を引いて（重なりを足し戻して）数える
+    evidence: https://drken1215.hatenablog.com/entry/2020/10/09/162600
+  - id: abc162_d
+    difficulty: 757
+    role: example
+    summary: 色がすべて異なる 3 つ組の数から、添字が等間隔になっているものを引く
+    evidence: https://drken1215.hatenablog.com/entry/2020/04/12/225900
+  - id: abc156_d
+    difficulty: 1014
+    role: practice
+    summary: n 本の花から作る花束のうち禁止された 2 つの本数を全体 2^n−1 から引く（n は巨大）
+    evidence: https://drken1215.hatenablog.com/entry/2020/04/22/013400
+  - id: abc163_f
+    difficulty: 2470
+    role: practice
+    summary: 各色について、その色の頂点を通る単純パスの数を、全パス数からその色を避けるパス数を引いて求める
+    evidence: https://kmjp.hatenablog.jp/entry/2020/04/20/0930
+- key: counting-dedup
+  title: 重複の除き方（割る・代表元を決める）
+  aliases:
+  - ダブルカウントを防ぐ
+  - 正規形
+  - 最左マッチ
+  - 最小添字規則
+  level: 青
+  level_evidence: abc310_d (diff 1368) は易しめの入口、arc077_b (diff 1715)・abc171_f (diff 1795) と青帯で必須になる
+  prerequisites:
+  - counting-mindset
+  - binomial-coefficient
+  acl: null
+  signs:
+  - 異なる〜の個数
+  - 操作で作れるものの種類数
+  - 区別しない
+  - 部分列として含む
+  compare_with:
+  - counting-bijection
+  - burnside-lemma
+  page: own
+  visual: 同じ文字列に部分列が何通りにも埋め込める様子と、最も左の埋め込みだけを残す様子のステップ送り
+  problems:
+  - id: abc310_d
+    difficulty: 1368
+    role: example
+    summary: 仲の悪い組を避けて N 人を T 組に分ける方法を、まだ組に入っていない最小番号の人から組を決めて重複なく数える
+    evidence: https://drken1215.hatenablog.com/entry/2023/07/17/213800
+  - id: arc077_b
+    difficulty: 1715
+    role: example
+    summary: 1 つの値だけが 2 回現れる数列の、長さ k の異なる部分列の数を、重複して数えた分を引いて求める
+    evidence: https://kmjp.hatenablog.jp/entry/2017/07/02/0900
+  - id: abc171_f
+    difficulty: 1795
+    role: practice
+    summary: 文字列 S を部分列として含む長さ N+K の文字列を、最も左で一致させる埋め込みで一意にして数える
+    evidence: https://drken1215.hatenablog.com/entry/2020/06/27/125500
+- key: counting-fix-order
+  title: 順序を固定して数える
+  aliases:
+  - 相対順序
+  - ソートしてから数える
+  - 数える順番の工夫
+  level: 水
+  level_evidence: abc151_e (diff 1344)・abc133_e (diff 1505) で必要。木の上の順番を数える abc160_f (diff 2048) は黄
+  prerequisites:
+  - counting-mindset
+  - binomial-coefficient
+  acl: null
+  signs:
+  - 〜より先に
+  - 順番の制約
+  - 最大値（最小値）に注目
+  - 木の頂点に番号を振る
+  compare_with:
+  - counting-contribution
+  page: own
+  visual: k 個の相対順序 k! 通りのうち 1 通りだけを残す図
+  problems:
+  - id: abc151_e
+    difficulty: 1344
+    role: example
+    summary: ソートして各要素が最大・最小になる選び方の数を二項係数で数え、全 K 個組の max−min の総和を求める
+    evidence: https://drken1215.hatenablog.com/entry/2020/01/12/224100
+  - id: abc133_e
+    difficulty: 1505
+    role: example
+    summary: 根から BFS 順に色を決めると各頂点の選択肢の数が一定になり、積の法則で数えられる
+    evidence: https://drken1215.hatenablog.com/entry/2019/07/08/002700
+  - id: abc160_f
+    difficulty: 2048
+    role: practice
+    summary: 隣接する頂点から順に番号を書く方法の数（N!/Π 部分木サイズ）を、全頂点を始点として求める
+    evidence: https://kmjp.hatenablog.jp/entry/2020/03/28/1030
+- key: counting-at-most-difference
+  title: 「ちょうど」を「以下」の差で数える
+  aliases:
+  - 累積で数える
+  - K以上からK+1以上を引く
+  level: 水
+  level_evidence: 考え方は水色帯の数え上げで常用される（abc178_c (diff 653) も同じ構造）。前面に出る例は abc180_f (diff 2419)・arc100_c (diff 2111) と黄以上
+  prerequisites:
+  - counting-complement
+  acl: null
+  signs:
+  - 最大値がちょうど K
+  - 最大の〜がちょうど L
+  - ちょうど K 個
+  compare_with:
+  - divisor-inclusion-exclusion
+  - expectation-tail-sum
+  page: section-of:counting-mindset
+  visual: 「≤k」の集合が「=k」と「≤k−1」に分かれる入れ子の図
+  problems:
+  - id: abc180_f
+    difficulty: 2419
+    role: example
+    summary: 最大の連結成分のサイズがちょうど L のグラフを、「L 以下」から「L−1 以下」を引いて数える
+    evidence: https://drken1215.hatenablog.com/entry/2020/10/21/145700
+  - id: arc100_c
+    difficulty: 2111
+    role: practice
+    summary: 「i or j がちょうど K」の代わりに「K の部分集合」で最大値を求め、累積の max を取る
+    evidence: https://drken1215.hatenablog.com/entry/2018/07/25/200000
+- key: counting-contribution
+  title: 全通りの総和を寄与で数える
+  aliases:
+  - 主客転倒
+  - 寄与
+  - 和の順序の交換
+  level: 水
+  level_evidence: abc186_d (diff 436) が入口、abc151_e (diff 1344)・abc150_e (diff 1851)・abc173_f (diff 1892)・abc127_e (diff 1938) と水〜青で頻出
+  prerequisites:
+  - counting-mindset
+  - binomial-coefficient
+  acl: null
+  signs:
+  - すべての〜についての総和
+  - すべての選び方についての f の和
+  compare_with:
+  - indicator-variables
+  - counting-fix-order
+  page: section-of:counting-mindset
+  visual: 二重和の表を行ごとに足す場合と列ごとに足す場合を切り替える図
+  problems:
+  - id: abc186_d
+    difficulty: 436
+    role: example
+    summary: すべての 2 数の差の絶対値の総和を、ソート後の各要素に付く係数で求める
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/19/231000
+  - id: abc127_e
+    difficulty: 1938
+    role: example
+    summary: K 個のマスの選び方すべてについての距離の総和を、2 マスの組ごとの寄与 × 残りの選び方の数で求める
+    evidence: https://drken1215.hatenablog.com/entry/2019/06/15/111500
+  - id: abc150_e
+    difficulty: 1851
+    role: practice
+    summary: 異なる 2 つの 0/1 列のすべての組の最小コストの総和を、コストをソートして各要素の係数を数えて求める
+    evidence: https://drken1215.hatenablog.com/entry/2020/01/12/142100
+  - id: abc173_f
+    difficulty: 1892
+    role: practice
+    summary: すべての区間 [L,R] の連結成分数の総和を、頂点の寄与から辺の寄与を引いて求める
+    evidence: https://kmjp.hatenablog.jp/entry/2020/07/06/0930
+- key: counting-experiment
+  title: 小さいケースの全探索と OEIS
+  aliases:
+  - 実験
+  - 愚直解との比較
+  - OEIS
+  level: 水
+  level_evidence: 実験で規則を見つけるのが近道とされる問題が abc398_e (diff 1238)・abc297_g (diff 1834)・abc450_g (diff 2227) と幅広い帯にある
+  prerequisites:
+  - counting-mindset
+  acl: null
+  signs:
+  - N が大きく閉じた式がありそう
+  - 答えに単純な規則がありそう
+  compare_with:
+  - grundy-patterns
+  page: section-of:counting-mindset
+  visual: null
+  problems:
+  - id: abc398_e
+    difficulty: 1238
+    role: example
+    summary: 木に辺を加えていくゲームの勝敗を、小さいケースの実験で辺の総数の偶奇に帰着させる（インタラクティブ）
+    evidence: https://kmjp.hatenablog.jp/entry/2025/03/25/0930
+  - id: abc297_g
+    difficulty: 1834
+    role: example
+    summary: 取れる個数に下限と上限がある Nim の Grundy 数の式を、表を作って見つける
+    evidence: https://kmjp.hatenablog.jp/entry/2023/04/19/1000
+  - id: abc450_g
+    difficulty: 2227
+    role: practice
+    summary: ランダムな操作でできる値の二乗の期待値を、小さいケースの全探索から規則を見つけて求める
+    evidence: https://kmjp.hatenablog.jp/entry/2026/03/23/0900
+- key: counting-basics
+  title: 和・積の法則と順列・組合せ（基礎）
+  aliases:
+  - 順列
+  - 円順列
+  - 塗り分けの数
+  level: 基礎
+  level_evidence: typical90_bq (diff なし)（★3）・abc307_e (diff 1240) と緑以下
+  prerequisites: []
+  acl: null
+  signs:
+  - 何通り
+  - 並べ方
+  - 塗り分け
+  compare_with:
+  - binomial-coefficient
+  page: own
+  visual: 一列と円環の塗り分けで、最後の要素の選択肢の数が変わる様子
+  problems:
+  - id: typical90_bq
+    difficulty: null
+    role: example
+    summary: 距離 2 以内が異なる色になる一列の塗り方を積の法則で求める（K(K−1)(K−2)^(N−2)）
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/069.cpp
+  - id: abc307_e
+    difficulty: 1240
+    role: example
+    summary: 円環に並んだ N 人に、隣どうしが異なる 0〜M−1 の整数を割り当てる方法を数える
+    evidence: https://drken1215.hatenablog.com/entry/2024/06/10/024932
+- key: binomial-coefficient
+  title: 二項係数の意味と性質
+  aliases:
+  - nCr
+  - パスカルの三角形
+  - 組合せ
+  level: 基礎
+  level_evidence: arc095_b (diff 867)・abc202_d (diff 966)・abc145_d (diff 1009) など緑以下で必須
+  prerequisites:
+  - counting-basics
+  acl: null
+  signs:
+  - N 個から K 個を選ぶ
+  - 0/1 列で 1 が K 個
+  - グリッドの最短経路
+  compare_with:
+  - binomial-precompute
+  - binomial-variants
+  page: own
+  visual: パスカルの三角形の各値が上の 2 つの和になる様子と、格子路の数としての読み替え
+  problems:
+  - id: arc095_b
+    difficulty: 867
+    role: example
+    summary: nCr が最大になる n と r の組を選ぶ（n は最大、r は n/2 に最も近いもの）
+    evidence: https://blog.hamayanhamayan.com/entry/2018/04/15/164633
+  - id: abc057_d
+    difficulty: 1658
+    role: practice
+    summary: 平均の最大値と、それを実現する選び方の数を二項係数で数える
+    evidence: https://drken1215.hatenablog.com/entry/2019/02/16/000900
+- key: binomial-precompute
+  title: 階乗・逆階乗の前計算による nCr mod p
+  aliases:
+  - fact と ifact
+  - 逆階乗
+  - Combination テーブル
+  level: 基礎
+  level_evidence: abc145_d (diff 1009)・abc132_d (diff 1167) で必要になり、abc167_e (diff 1442)・abc156_e (diff 1514) と水色帯で頻出
+  prerequisites:
+  - binomial-coefficient
+  - modular-inverse
+  acl: なし（atcoder::modint998244353 の inv()・pow() を使って自作する）
+  signs:
+  - 998244353（10^9+7）で割った余り
+  - N ≤ 2×10^5 程度の選び方
+  - H, W ≤ 10^5 の格子路
+  compare_with:
+  - binomial-variants
+  page: own
+  visual: fact を前から、ifact を後ろから埋める 2 本の矢印の図
+  problems:
+  - id: tessoku_book_ad
+    difficulty: null
+    role: example
+    summary: nCr を 10^9+7 で割った余りを、階乗とフェルマーの小定理による逆元で求める（鉄則 A30）
+    evidence: https://github.com/E869120/kyopro-tessoku/blob/main/codes/cpp/chap05/answer_A30.cpp
+  - id: abc132_d
+    difficulty: 1167
+    role: example
+    summary: K 個の青玉を i 個のかたまりに分けて赤玉の間に置く方法を、i ごとに二項係数の積で数える
+    evidence: https://drken1215.hatenablog.com/entry/2019/06/30/183400
+  - id: abc167_e
+    difficulty: 1442
+    role: practice
+    summary: 隣り合う同色の組が K 個以下の塗り方を、前計算した二項係数で k ごとに数えて足す
+    evidence: https://kmjp.hatenablog.jp/entry/2020/05/10/0900
+  - id: abc156_e
+    difficulty: 1514
+    role: practice
+    summary: 空き部屋の数 m ごとに二項係数の積を足す（n ≤ 2×10^5）
+    evidence: https://kmjp.hatenablog.jp/entry/2020/02/23/0900
+- key: binomial-variants
+  title: 二項係数の計算の変種（n が巨大・mod が素数でない・正確な値）
+  aliases:
+  - nCr を O(r) で
+  - パスカルの三角形で前計算
+  - 任意 mod の二項係数
+  level: 水
+  level_evidence: n が巨大な abc156_d (diff 1014) は緑上位、mod が素数とは限らない abc281_g (diff 2304) は黄
+  prerequisites:
+  - binomial-precompute
+  acl: null
+  signs:
+  - n ≤ 10^9 で r が小さい
+  - mod M が入力で与えられる（素数とは限らない）
+  - 答えを mod なしで出す
+  compare_with:
+  - lucas-theorem
+  page: section-of:binomial-precompute
+  visual: null
+  problems:
+  - id: abc156_d
+    difficulty: 1014
+    role: example
+    summary: n ≤ 10^9 の nCa を、分子の a 項の積と a! の逆元で O(a) に計算する
+    evidence: https://drken1215.hatenablog.com/entry/2020/04/22/013400
+  - id: abc281_g
+    difficulty: 2304
+    role: practice
+    summary: mod が素数とは限らないので二項係数をパスカルの三角形で作り、距離の層ごとにグラフを数える
+    evidence: https://drken1215.hatenablog.com/entry/2022/12/13/173300
+- key: multinomial-coefficient
+  title: 多項係数（同じものを含む順列）
+  aliases:
+  - 同じものを含む順列
+  - 並べ替えの数
+  - グループ分けの数
+  level: 水
+  level_evidence: abc234_f (diff 1596) で必須、応用は abc266_g (diff 2045)・arc067_c (diff 2190) と黄
+  prerequisites:
+  - binomial-precompute
+  acl: null
+  signs:
+  - 文字の並べ替えでできる文字列の数
+  - 各種類を使う個数が決まっている
+  - サイズを指定したグループ分け
+  compare_with:
+  - stars-and-bars
+  page: own
+  visual: 全部区別した n! 通りを、同じ種類の入れ替えでまとめる図
+  problems:
+  - id: abc234_f
+    difficulty: 1596
+    role: example
+    summary: 部分列を並べ替えてできる文字列の数を、文字ごとの個数を DP で決めながら二項係数を掛けて数える
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/234/F
+  - id: abc266_g
+    difficulty: 2045
+    role: practice
+    summary: RG が指定回数現れる文字列を、先に一部の文字を並べて残りを挿入する位置で数える
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/04/185000
+  - id: arc067_c
+    difficulty: 2190
+    role: practice
+    summary: 人数の条件を満たすグループ分けを、サイズごとに多項係数を掛け、同じサイズの組の入れ替えで割って数える
+    evidence: https://drken1215.hatenablog.com/entry/2018/06/14/151800
+- key: stars-and-bars
+  title: 重複組合せ（玉と仕切り）
+  aliases:
+  - 重複組合せ
+  - 玉と仕切り
+  - H(n,k)
+  - 隣り合わない選び方
+  level: 基礎
+  level_evidence: abc185_c (diff 374)・abc178_d (diff 875)・abc132_d (diff 1167) と緑以下で頻出。応用は abc156_e (diff 1514)・abc110_d (diff 1695) と水〜青
+  prerequisites:
+  - binomial-coefficient
+  acl: null
+  signs:
+  - 和が N になる非負（正）整数の組
+  - 広義単調な列の個数
+  - 区別のない玉を区別のある箱へ
+  - 間隔を d 以上空けて選ぶ
+  compare_with:
+  - multinomial-coefficient
+  - twelvefold-way
+  page: own
+  visual: 玉と仕切りの列を変数の値の組に対応させ、仕切りを動かすと値が変わる動く図
+  problems:
+  - id: abc185_c
+    difficulty: 374
+    role: example
+    summary: 長さ L の棒を 12 本の正の長さに切る方法 C(L−1, 11)
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/14/015500
+  - id: abc178_d
+    difficulty: 875
+    role: example
+    summary: 3 以上の整数の和で S を表す数列の数を、各項から 2 を引いて正の整数解の数にする（または DP）
+    evidence: https://drken1215.hatenablog.com/entry/2020/10/11/211000
+  - id: typical90_o
+    difficulty: null
+    role: practice
+    summary: 差が k 以上の数だけを選ぶ方法を、選ぶ個数ごとの二項係数で数える（全 k で調和級数の計算量）
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/015.cpp
+  - id: abc021_d
+    difficulty: 1704
+    role: practice
+    summary: 1 ≤ a1 ≤ … ≤ ak ≤ n の個数 C(n+k−1, k) を求める（多重ループの回数）
+    evidence: https://qiita.com/drken/items/f2ea4b58b0d21621bd51
+  - id: abc110_d
+    difficulty: 1695
+    role: practice
+    summary: 素因数ごとの指数を N 個に配る方法の積を求める
+    evidence: https://drken1215.hatenablog.com/entry/2018/09/23/224100
+- key: twelvefold-way
+  title: 写像12相（玉と箱の数え上げの地図）
+  aliases:
+  - 写像12相
+  - 玉と箱
+  - twelvefold way
+  level: 青
+  level_evidence: 重複組合せのマス abc021_d (diff 1704)、集合の分割のマス abc310_d (diff 1368)・abc390_d (diff 1607)、分割数のマス abc226_f (diff 2086) と水〜黄に散らばる
+  prerequisites:
+  - stars-and-bars
+  - binomial-coefficient
+  acl: null
+  signs:
+  - 区別しない
+  - グループに分ける
+  - 各グループ 1 人以上
+  compare_with:
+  - stirling-second
+  - partition-number
+  - bell-number
+  page: own
+  visual: 12 マスの表をクリックすると、そのマスの小さい例（n=4, k=3）の全列挙が出る図
+  problems:
+  - id: abc021_d
+    difficulty: 1704
+    role: example
+    summary: 玉を区別せず箱を区別する・制限なしのマス（重複組合せ）
+    evidence: https://qiita.com/drken/items/f2ea4b58b0d21621bd51
+  - id: abc310_d
+    difficulty: 1368
+    role: example
+    summary: 玉を区別し箱を区別しない・空なしのマス（第2種スターリング数）に、禁止ペアの条件がついたもの
+    evidence: https://drken1215.hatenablog.com/entry/2023/07/17/213800
+  - id: abc390_d
+    difficulty: 1607
+    role: practice
+    summary: 玉を区別し箱を区別しない・個数自由のマス（ベル数）を全列挙する
+    evidence: https://yuulis.hatenablog.com/entry/ABC-390-D
+  - id: abc226_f
+    difficulty: 2086
+    role: practice
+    summary: 玉も箱も区別しないマス（整数の分割）を、置換の巡回型として全列挙する
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/1107_abc226#f_-_score_of_permutations
+- key: binomial-identities
+  title: 二項係数の恒等式と和の公式
+  aliases:
+  - 二項定理
+  - Vandermonde の恒等式
+  - hockey stick
+  - 吸収公式
+  level: 青
+  level_evidence: abc262_e (diff 1719)・abc154_f (diff 1775)・arc106_d (diff 1988)・arc110_d (diff 2078)・abc290_f (diff 2300) と青〜黄にまとまる
+  prerequisites:
+  - binomial-coefficient
+  - lattice-paths
+  acl: null
+  signs:
+  - Σ の中に二項係数
+  - N が大きく和を直接計算できない
+  - 長方形領域の各点への経路数の総和
+  compare_with:
+  - counting-bijection
+  page: own
+  visual: パスカルの三角形の上で、斜めの和（hockey stick）が 1 つ下のマスになる様子
+  problems:
+  - id: abc262_e
+    difficulty: 1719
+    role: example
+    summary: 端点の色が異なる辺の数の偶奇を「赤い頂点の次数の和」の偶奇に言い換え、奇数次数の頂点を偶数個選ぶ方法の和で数える
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/262/E
+  - id: abc154_f
+    difficulty: 1775
+    role: example
+    summary: 長方形領域の各点への格子路の数の総和を、縦の和の公式で閉じた式にする
+    evidence: https://drken1215.hatenablog.com/entry/2020/02/09/225000
+  - id: arc106_d
+    difficulty: 1988
+    role: practice
+    summary: 全ペアの (A_L+A_R)^x の和を、二項定理で展開してべき乗和から求める
+    evidence: https://kmjp.hatenablog.jp/entry/2020/10/26/1030
+  - id: arc110_d
+    difficulty: 2078
+    role: practice
+    summary: 二項係数の積の総和を、Vandermonde 型の恒等式（経路数）で 1 つの二項係数にする
+    evidence: https://drken1215.hatenablog.com/entry/2020/12/06/070100
+  - id: abc290_f
+    difficulty: 2300
+    role: practice
+    summary: 次数列ごとの木の直径の総和を、二項係数の和の公式で閉じた式にする
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2023/0219_abc290#f_-_maximum_diameter
+- key: lattice-paths
+  title: 格子路の数え上げ
+  aliases:
+  - 経路数
+  - グリッドの最短経路
+  - 障害物のある経路
+  level: 水
+  level_evidence: 基本は abc145_d (diff 1009)（緑）。禁止領域・障害物つきは arc058_b (diff 1905)（青）、3 次元・座標変換は abc240_g (diff 2462)（発展）
+  prerequisites:
+  - binomial-precompute
+  acl: null
+  signs:
+  - グリッドの左上から右下へ
+  - 通れないマス
+  - H, W ≤ 10^5（DP では間に合わない）
+  compare_with:
+  - inclusion-exclusion-dp
+  - reflection-principle
+  page: own
+  visual: 格子の各点に経路数を左下から順に埋めるステップ送り。障害物ありでは「最初に踏む障害物」で経路を色分け
+  problems:
+  - id: abc145_d
+    difficulty: 1009
+    role: example
+    summary: (+1,+2) と (+2,+1) の移動を回数の組に直し、並べ方の二項係数で数える
+    evidence: https://drken1215.hatenablog.com/entry/2020/04/26/180000
+  - id: arc058_b
+    difficulty: 1905
+    role: example
+    summary: 左下の長方形を避ける経路を、長方形の境界を越える点で分けて二項係数の積を足す
+    evidence: https://drken1215.hatenablog.com/entry/2020/04/06/235844
+  - id: dp_y
+    difficulty: null
+    role: practice
+    summary: 障害物をソートし「最初に踏む障害物」で分類する DP で、どの障害物も踏まない経路を数える
+    evidence: https://drken1215.hatenablog.com/entry/2019/01/16/000100
+  - id: agc001_e
+    difficulty: null
+    role: practice
+    summary: 多数の二項係数の和を、グリッド上の経路数として DP で一括計算する
+    evidence: https://drken1215.hatenablog.com/entry/2019/05/18/152000
+  - id: abc240_g
+    difficulty: 2462
+    role: practice
+    summary: 3 次元の ±1 移動を軸ごとの回数に分け、平面部分は 45 度回転で独立な 2 本の 1 次元移動にする
+    evidence: https://kmjp.hatenablog.jp/entry/2022/02/23/0900
+- key: kth-combination
+  title: 辞書順 k 番目と順位
+  aliases:
+  - 辞書順 K 番目
+  - ランク・アンランク
+  - 階乗進法
+  level: 基礎
+  level_evidence: abc202_d (diff 966)（緑）。順列の順位は BIT と組み合わせる（05）
+  prerequisites:
+  - binomial-coefficient
+  acl: null
+  signs:
+  - 辞書順で K 番目
+  - 何番目か
+  compare_with:
+  - binomial-coefficient
+  page: section-of:binomial-coefficient
+  visual: null
+  problems:
+  - id: abc202_d
+    difficulty: 966
+    role: example
+    summary: a を A 個・b を B 個並べた文字列の辞書順 K 番目を、先頭から残りの並べ方の数と K を比べて決める
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0522_abc202#d_-_aab_aba_baa
+- key: lucas-theorem
+  title: Lucas の定理と二項係数の偶奇
+  aliases:
+  - Lucas の定理
+  - nCr mod 2
+  - mod 小さい素数の二項係数
+  level: 青
+  level_evidence: arc117_c (diff 1768)・agc043_b (diff 1945) と ARC・AGC の青帯。ABC での直接の出題は見つからなかった
+  prerequisites:
+  - binomial-coefficient
+  - binomial-precompute
+  acl: null
+  signs:
+  - 隣り合う 2 つから新しい値を作る操作の繰り返し（ピラミッド）
+  - mod 2・mod 3 など小さい素数
+  - n ≥ p
+  compare_with:
+  - binomial-variants
+  page: own
+  visual: パスカルの三角形を mod 2 で塗るとシェルピンスキーの三角形になる図
+  problems:
+  - id: arc117_c
+    difficulty: 1768
+    role: example
+    summary: 3 色の三角形の最後の色を、係数が二項係数になることと mod 3 の Lucas の定理で求める
+    evidence: https://drken1215.hatenablog.com/entry/2021/06/12/001400
+  - id: agc043_b
+    difficulty: 1945
+    role: example
+    summary: 差の絶対値を繰り返した最後の値の偶奇を、nCr mod 2 の判定（ビットの包含）で求める
+    evidence: https://drken1215.hatenablog.com/entry/2020/03/22/165200
+- key: inclusion-exclusion
+  title: 包除原理
+  aliases:
+  - 包除
+  - 包除原理
+  - inclusion-exclusion
+  level: 青
+  level_evidence: 2 条件なら abc131_c (diff 518) と茶色。一般形は abc246_f (diff 1677)・abc172_e (diff 1880)・abc152_f (diff 1965)・abc297_f (diff 1990) と青、abc242_f (diff 2268) は黄
+  prerequisites:
+  - counting-complement
+  - bit-full-search
+  - binomial-coefficient
+  acl: null
+  signs:
+  - すべて異なる
+  - どの〜も〜しない
+  - 各〜を少なくとも1回使う
+  - 条件 M ≤ 20 個の禁止
+  - A_i ≠ B_i
+  compare_with:
+  - inclusion-exclusion-dp
+  - divisor-inclusion-exclusion
+  - counting-complement
+  page: own
+  visual: ベン図で 3 集合の和集合を数え、足しすぎ・引きすぎの領域が順に打ち消し合うステップ送り
+  problems:
+  - id: abc131_c
+    difficulty: 518
+    role: example
+    summary: C の倍数でも D の倍数でもない数の個数を、lcm を使った 2 条件の包除で数える
+    evidence: https://drken1215.hatenablog.com/entry/2019/06/22/224100
+  - id: abc172_e
+    difficulty: 1880
+    role: example
+    summary: A_i ≠ B_i の条件を「一致する位置を k 個指定」で包除し、k ごとにまとめて数える
+    evidence: https://kmjp.hatenablog.jp/entry/2020/06/27/1000
+  - id: abc152_f
+    difficulty: 1965
+    role: example
+    summary: M ≤ 20 個の「パスに黒い辺を含む」条件を、bit 全探索の包除で数える
+    evidence: https://drken1215.hatenablog.com/entry/2020/01/26/164200
+  - id: abc246_f
+    difficulty: 1677
+    role: practice
+    summary: 選んだ文字列の文字だけで作れる文字列の数を、選ぶ集合ごとの共通の文字で包除する
+    evidence: https://drken1215.hatenablog.com/entry/2022/04/03/212800
+  - id: abc297_f
+    difficulty: 1990
+    role: practice
+    summary: 外接長方形の面積の期待値を、長方形ごとに「4 辺すべてに点がある」配置を包除で数えて求める
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/297/F
+  - id: abc242_f
+    difficulty: 2268
+    role: practice
+    summary: 白と黒の駒の置き方を、使われない行・列の集合で包除して数える
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0305_abc242#f_-_black_and_white_rooks
+- key: inclusion-exclusion-dp
+  title: 包除原理を DP に載せる
+  aliases:
+  - 包除 DP
+  - 符号付き DP
+  - 最初に踏む障害物で分類
+  level: 黄
+  level_evidence: abc309_g (diff 2372)・arc115_e (diff 2363) と黄。abc214_g (diff 2893)・arc101_c (diff 2913) は発展
+  prerequisites:
+  - inclusion-exclusion
+  - dp-basics
+  acl: null
+  signs:
+  - 障害物 N ≤ 3000 個とグリッド 10^5
+  - 禁止条件が列や木に沿って並ぶ
+  - 値と位置の差に制約のある順列
+  compare_with:
+  - inclusion-exclusion
+  - lattice-paths
+  page: own
+  visual: 障害物を並べて「最初の障害物」で経路を色分けする図
+  problems:
+  - id: dp_y
+    difficulty: null
+    role: example
+    summary: 障害物をソートし、他の障害物を通らずに障害物 i に着く経路数を全経路から引いて求める
+    evidence: https://drken1215.hatenablog.com/entry/2019/01/16/000100
+  - id: abc309_g
+    difficulty: 2372
+    role: example
+    summary: P_i と i の差が X 以上になる順列を、違反する位置の個数を状態に持つ包除 DP で数える
+    evidence: https://kmjp.hatenablog.jp/entry/2023/07/08/1000
+  - id: arc115_e
+    difficulty: 2363
+    role: practice
+    summary: 隣り合う値が異なる数列を、等しいと指定した隣接の個数に符号を付けた DP で数える
+    evidence: https://drken1215.hatenablog.com/entry/2021/03/21/235000_1
+  - id: abc214_g
+    difficulty: 2893
+    role: practice
+    summary: 2 つの順列の両方と異なる順列を、違反の個数ごとに数えてから包除する
+    evidence: https://kmjp.hatenablog.jp/entry/2021/08/16/0900
+  - id: arc101_c
+    difficulty: 2913
+    role: practice
+    summary: 木の頂点のペアリングを、切る辺の集合に符号を付けた木 DP で包除する
+    evidence: https://drken1215.hatenablog.com/entry/2019/06/21/024200
+- key: derangement
+  title: 撹乱順列（完全順列）
+  aliases:
+  - 完全順列
+  - 撹乱順列
+  - モンモール数
+  level: 青
+  level_evidence: 撹乱順列の包除を一般化した abc172_e (diff 1880)（青）。abc462_g (diff 2232) は黄
+  prerequisites:
+  - inclusion-exclusion
+  acl: null
+  signs:
+  - p_i ≠ i
+  - どれも元の位置にない
+  - すべて誤った位置
+  compare_with:
+  - inclusion-exclusion
+  page: section-of:inclusion-exclusion
+  visual: null
+  problems:
+  - id: abc172_e
+    difficulty: 1880
+    role: example
+    summary: 単射どうしで A_i ≠ B_i となる組を、撹乱順列と同じ包除で数える
+    evidence: https://kmjp.hatenablog.jp/entry/2020/06/27/1000
+  - id: abc462_g
+    difficulty: 2232
+    role: practice
+    summary: 重複を含む列の並べ替えで、どの位置も指定の値と一致しない確率を撹乱順列の包除を一般化して求める
+    evidence: https://kmjp.hatenablog.jp/entry/2026/06/13/0900
+- key: divisor-inclusion-exclusion
+  title: 約数包除（gcd ごとに数える）
+  aliases:
+  - 約数系包除
+  - gcd がちょうど g
+  - 倍数から引く
+  level: 青
+  level_evidence: abc361_f (diff 1606)・abc304_f (diff 1619)・abc162_e (diff 1662)・abc206_e (diff 1745) と青帯にまとまる
+  prerequisites:
+  - counting-at-most-difference
+  - harmonic-series-complexity
+  acl: null
+  signs:
+  - gcd の総和
+  - gcd が 1 になる組
+  - 互いに素
+  - 周期
+  - Σ gcd(・)
+  compare_with:
+  - mobius-function
+  - zeta-mobius-divisor
+  page: own
+  visual: 数直線上に g の倍数を並べ、F(g) から倍数側の f を引いていく様子
+  problems:
+  - id: abc162_e
+    difficulty: 1662
+    role: example
+    summary: 長さ N の列の gcd の総和を、gcd がちょうど g の個数を大きい g から求めて計算する
+    evidence: https://kmjp.hatenablog.jp/entry/2020/04/12/1000
+  - id: abc206_e
+    difficulty: 1745
+    role: example
+    summary: gcd(x,y) が条件を満たす組の数を、gcd ごとの個数を倍数から引いて求める
+    evidence: https://drken1215.hatenablog.com/entry/2021/06/25/121800
+  - id: abc304_f
+    difficulty: 1619
+    role: practice
+    summary: 周期 d の文字列の数を、d の約数の周期で重複して数えた分を引いて求める
+    evidence: https://drken1215.hatenablog.com/entry/2023/06/07/153403
+  - id: abc361_f
+    difficulty: 1606
+    role: practice
+    summary: N 以下の完全累乗の個数を、指数ごとの重複を除いて数える
+    evidence: https://drken1215.hatenablog.com/entry/2024/07/07/020716
+- key: mobius-function
+  title: メビウス関数とメビウス反転
+  aliases:
+  - メビウス関数
+  - メビウス反転
+  - μ
+  level: 黄
+  level_evidence: agc038_c (diff 2327)・agc039_c (diff 2379) と黄、ABC では abc230_g (diff 2516)（発展）。青帯の問題は約数包除で足りる
+  prerequisites:
+  - divisor-inclusion-exclusion
+  - eratosthenes-sieve
+  acl: null
+  signs:
+  - 互いに素
+  - gcd(i,j)=1 となる組
+  - Σ gcd・Σ lcm
+  compare_with:
+  - divisor-inclusion-exclusion
+  page: own
+  visual: null
+  problems:
+  - id: agc038_c
+    difficulty: 2327
+    role: example
+    summary: 全ペアの lcm の総和を、gcd ごとの和に直してメビウス変換で求める
+    evidence: https://drken1215.hatenablog.com/entry/2020/11/06/031600
+  - id: agc039_c
+    difficulty: 2379
+    role: practice
+    summary: 周期ごとの個数を、約数の周期との重複をメビウス反転で除いて数える
+    evidence: https://drken1215.hatenablog.com/entry/2020/11/11/035400
+  - id: abc230_g
+    difficulty: 2516
+    role: practice
+    summary: gcd(i,j) と gcd(P_i,P_j) がともに 1 でない組の数を、メビウス関数を変形した符号で数える
+    evidence: https://kmjp.hatenablog.jp/entry/2021/12/08/1000
+- key: zeta-mobius-subset
+  title: 高速ゼータ変換・メビウス変換（部分集合）
+  aliases:
+  - 高速ゼータ変換
+  - 高速メビウス変換
+  - SOS DP
+  - 部分集合の和
+  - OR 畳み込み
+  level: 黄
+  level_evidence: arc100_c (diff 2111)（黄）。ABC では abc213_g (diff 2663)・abc295_h (diff 2728) と発展
+  prerequisites:
+  - bit-full-search
+  - cumulative-sum
+  acl: null
+  signs:
+  - N ≤ 20 で部分集合ごとの和・最大
+  - A_i OR A_j
+  - x ⊆ S となる x についての和
+  compare_with:
+  - zeta-mobius-divisor
+  - inclusion-exclusion
+  page: own
+  visual: n=3 の立方体の頂点に値を置き、軸ごとに累積していくステップ送り
+  problems:
+  - id: arc100_c
+    difficulty: 2111
+    role: example
+    summary: i OR j が K の部分集合となる組の A_i+A_j の最大値を、部分集合ごとに上位 2 つを持つゼータ変換で求める
+    evidence: https://drken1215.hatenablog.com/entry/2018/07/25/200000
+  - id: abc213_g
+    difficulty: 2663
+    role: practice
+    summary: 頂点集合ごとの連結な部分グラフの数を部分集合 DP で求め、頂点 1 と k を含む集合について足す
+    evidence: https://drken1215.hatenablog.com/entry/2021/08/12/132500
+  - id: abc295_h
+    difficulty: 2728
+    role: practice
+    summary: 行ごとの状態を部分集合で持つ DP の遷移を、上位集合のゼータ変換で高速化する
+    evidence: https://kmjp.hatenablog.jp/entry/2023/03/26/0930
+- key: zeta-mobius-divisor
+  title: 約数・倍数のゼータ変換・メビウス変換
+  aliases:
+  - 約数ゼータ変換
+  - 倍数の累積和
+  - GCD 畳み込み
+  - LCM 畳み込み
+  level: 青
+  level_evidence: 倍数の個数を集める abc393_e (diff 1253)（水）、約数メビウス変換を使う abc474_f (diff 1911)（青）、lcm の総和 agc038_c (diff 2327)（黄）
+  prerequisites:
+  - divisor-inclusion-exclusion
+  - eratosthenes-sieve
+  acl: null
+  signs:
+  - gcd ごと・lcm ごとの集計
+  - Σ f(gcd(A_i,A_j))
+  - 各値の倍数（約数）であるものの個数
+  compare_with:
+  - zeta-mobius-subset
+  - mobius-function
+  page: own
+  visual: null
+  problems:
+  - id: abc393_e
+    difficulty: 1253
+    role: example
+    summary: 各 d について A の中の d の倍数の個数を倍数を回して集め、各 A_i の約数で条件を満たす最大のものを求める
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0215_abc393#e_-_gcd_of_subset
+  - id: abc474_f
+    difficulty: 1911
+    role: example
+    summary: 約数ゼータ変換とその逆（約数メビウス変換）を使って、値をそろえる操作の回数を求める
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0906_abc474#f_-_increment_all_divisors
+  - id: agc038_c
+    difficulty: 2327
+    role: practice
+    summary: lcm の総和を、倍数のゼータ変換と約数のメビウス変換で求める
+    evidence: https://drken1215.hatenablog.com/entry/2020/11/06/031600
+- key: reflection-principle
+  title: 鏡像法とカタラン数
+  aliases:
+  - 鏡像法
+  - 反射原理
+  - ballot problem
+  - カタラン数
+  level: 黄
+  level_evidence: abc205_e (diff 2025)（黄）。abc309_h (diff 3029) は発展
+  prerequisites:
+  - lattice-paths
+  acl: null
+  signs:
+  - どの接頭辞でも A の個数 ≥ B の個数
+  - 途中で負にならない
+  - 括弧列
+  - 境界を越えない経路
+  compare_with:
+  - lattice-paths
+  - catalan-number
+  page: own
+  visual: 格子路と境界線を描き、最初に触れた点以降を折り返す動く図
+  problems:
+  - id: abc205_e
+    difficulty: 2025
+    role: example
+    summary: どの接頭辞でも白の数が黒の数 + K 以下になる並べ方を、全体から鏡像法で越えるものを引いて数える
+    evidence: https://drken1215.hatenablog.com/entry/2024/05/20/005905
+  - id: abc309_h
+    difficulty: 3029
+    role: practice
+    summary: 上下の端を越えない移動の数を、鏡像法で多項式の係数に落とし込む
+    evidence: https://kmjp.hatenablog.jp/entry/2023/07/08/1030
+- key: catalan-number
+  title: カタラン数
+  aliases:
+  - カタラン数
+  - 正しい括弧列の数
+  - Dyck path
+  level: 黄
+  level_evidence: ABC では鏡像法の一般化として abc205_e (diff 2025) に現れる。括弧列を数える問題は DP で解くことが多い
+  prerequisites:
+  - reflection-principle
+  acl: null
+  signs:
+  - 正しい括弧列の個数
+  - 二分木の個数
+  - 対角線を越えない単調路
+  compare_with:
+  - reflection-principle
+  page: section-of:reflection-principle
+  visual: null
+  problems:
+  - id: abc205_e
+    difficulty: 2025
+    role: example
+    summary: 条件が 0 なら答えがカタラン数の一般化（ballot 数）になる
+    evidence: https://drken1215.hatenablog.com/entry/2024/05/20/005905
+- key: stirling-second
+  title: 第2種スターリング数と全射
+  aliases:
+  - 第2種スターリング数
+  - 全射の数
+  - S(n,k)
+  level: 黄
+  level_evidence: 全射型の包除 abc242_f (diff 2268)（黄）。区別しないグループ分けの全列挙 abc310_d (diff 1368) は水
+  prerequisites:
+  - inclusion-exclusion
+  - twelvefold-way
+  acl: null
+  signs:
+  - N 人を K 個のグループに分ける（区別なし・空なし）
+  - すべての色を使う
+  compare_with:
+  - bell-number
+  - stirling-first
+  page: section-of:twelvefold-way
+  visual: null
+  problems:
+  - id: abc310_d
+    difficulty: 1368
+    role: example
+    summary: 区別しない T 組への分け方（第2種スターリング数の数え方）を、禁止ペアつきで全列挙する
+    evidence: https://drken1215.hatenablog.com/entry/2023/07/17/213800
+  - id: abc242_f
+    difficulty: 2268
+    role: practice
+    summary: すべての行と列を使う置き方を包除で数える（全射の包除と同じ形）
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0305_abc242#f_-_black_and_white_rooks
+- key: bell-number
+  title: ベル数と集合の分割の列挙
+  aliases:
+  - ベル数
+  - 集合の分割
+  - 制限付き成長列
+  level: 青
+  level_evidence: 分割を全列挙する abc310_d (diff 1368)（水）・abc390_d (diff 1607)（青）。B(12)=4213597 なので N ≤ 12 なら全列挙できる
+  prerequisites:
+  - twelvefold-way
+  acl: null
+  signs:
+  - N ≤ 10〜12 でグループに分ける全通り
+  compare_with:
+  - stirling-second
+  - bit-dp
+  page: section-of:twelvefold-way
+  visual: 要素を1つずつ「既存の組に入れる／新しい組を作る」で分岐する木
+  problems:
+  - id: abc310_d
+    difficulty: 1368
+    role: example
+    summary: 要素を既存の組か新しい組に入れる分岐で、集合の分割を重複なく全列挙する
+    evidence: https://drken1215.hatenablog.com/entry/2023/07/17/213800
+  - id: abc390_d
+    difficulty: 1607
+    role: example
+    summary: N ≤ 12 個の袋の分け方（ベル数通り）をすべて列挙し、各グループの和の XOR の種類数を数える
+    evidence: https://yuulis.hatenablog.com/entry/ABC-390-D
+- key: partition-number
+  title: 分割数と整数の分割の列挙
+  aliases:
+  - 分割数
+  - 整数の分割
+  - p(n,k)
+  level: 黄
+  level_evidence: 分割を全列挙する abc226_f (diff 2086)・abc404_f (diff 2162) と黄。分割数型の DP abc221_h (diff 2793) は発展
+  prerequisites:
+  - twelvefold-way
+  - dp-basics
+  acl: null
+  signs:
+  - 和が N になる多重集合
+  - 区別のない玉を区別のない箱へ
+  - N ≤ 50 程度で長さの組合せを全部試す
+  compare_with:
+  - stars-and-bars
+  page: section-of:twelvefold-way
+  visual: null
+  problems:
+  - id: abc226_f
+    difficulty: 2086
+    role: example
+    summary: 置換の巡回の長さの組（N の分割）を全列挙し、各巡回型の置換の数と lcm を掛けて足す
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/1107_abc226#f_-_score_of_permutations
+  - id: abc404_f
+    difficulty: 2162
+    role: practice
+    summary: ボタンの押し方を M の分割として全列挙し、最適な押し方の確率を求める
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0503_abc404#f_-_lost_and_pound
+  - id: abc221_h
+    difficulty: 2793
+    role: practice
+    summary: 同じ値を M 個まで含む多重集合の数を、分割数の漸化式（全体から 1 を引く／1 を取り除く）で求める
+    evidence: https://kmjp.hatenablog.jp/entry/2021/10/03/1030
+- key: stirling-first
+  title: 第1種スターリング数
+  aliases:
+  - 第1種スターリング数
+  - 巡回の個数ごとの順列の数
+  - 上昇階乗
+  level: 発展
+  level_evidence: abc385_g (diff 2492)・abc247_h (diff 2664) とも発展（FPS と組み合わせる）
+  prerequisites:
+  - permutation-cycles
+  - formal-power-series
+  acl: null
+  signs:
+  - 巡回の個数ごとの順列の数
+  - 左から見える建物の数
+  - 最小の swap 回数ごとの並びの数
+  compare_with:
+  - stirling-second
+  page: overview
+  visual: null
+  problems:
+  - id: abc385_g
+    difficulty: 2492
+    role: example
+    summary: 左右から見える建物の数の差ごとの順列の数を、挿入 DP と上昇階乗の展開で求める
+    evidence: https://kmjp.hatenablog.jp/entry/2024/12/21/0930
+  - id: abc247_h
+    difficulty: 2664
+    role: practice
+    summary: 最小 swap 回数ごとの並びの数（巡回の個数で決まる）を、色ごとの多項式の積で求める
+    evidence: https://kmjp.hatenablog.jp/entry/2022/04/10/1100
+- key: permutation-cycles
+  title: 置換の巡回分解に基づく数え上げ
+  aliases:
+  - 巡回型
+  - サイクル分解
+  - 置換の位数
+  level: 黄
+  level_evidence: abc226_f (diff 2086)（黄）。abc247_h (diff 2664) は発展
+  prerequisites:
+  - partition-number
+  - counting-dedup
+  acl: null
+  signs:
+  - 置換を K 回繰り返す
+  - 巡回（サイクル）の長さ
+  - 元に戻るまでの回数
+  compare_with:
+  - stirling-first
+  page: own
+  visual: null
+  problems:
+  - id: abc226_f
+    difficulty: 2086
+    role: example
+    summary: 巡回型ごとの置換の数 N!/Π(ℓ^m・m!) と、巡回の長さの lcm の K 乗を掛けて足す
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/1107_abc226#f_-_score_of_permutations
+  - id: abc247_h
+    difficulty: 2664
+    role: practice
+    summary: 色ごとの置換の最小 swap 回数が巡回の個数で決まることを使って数える
+    evidence: https://kmjp.hatenablog.jp/entry/2022/04/10/1100
+- key: burnside-lemma
+  title: Burnside の補題（回転などで同一視して数える）
+  aliases:
+  - Burnside の補題
+  - Pólya の数え上げ定理
+  - 数珠順列の一般化
+  level: 発展
+  level_evidence: ABC では abc198_f (diff 2769)（発展）。回転の同一視を最短周期の分類で数える abc428_g (diff 2472)（発展）もある
+  prerequisites:
+  - counting-dedup
+  - gcd-lcm
+  acl: null
+  signs:
+  - 回転（反転）して一致するものは同じとみなす
+  - 数珠・ネックレス
+  - 立方体の面の塗り方
+  compare_with:
+  - counting-dedup
+  page: overview
+  visual: null
+  problems:
+  - id: abc198_f
+    difficulty: 2769
+    role: example
+    summary: 立方体の 24 通りの回転それぞれで動かない書き込み方を数え、平均を取る
+    evidence: https://kmjp.hatenablog.jp/entry/2021/04/11/0900
+  - id: abc428_g
+    difficulty: 2472
+    role: practice
+    summary: 回転で同一視するネックレスを、最短周期ごとに数えて周期の長さで割る（Burnside を使わない方法）
+    evidence: https://kmjp.hatenablog.jp/entry/2025/10/18/0900
+- key: cayley-pruefer
+  title: ラベル付き木の数と Prüfer 列
+  aliases:
+  - Cayley の公式
+  - Prüfer 列
+  - プリューファーコード
+  level: 黄
+  level_evidence: abc290_f (diff 2300)（黄）。abc303_h (diff 2501)・arc106_f (diff 2755) は発展
+  prerequisites:
+  - multinomial-coefficient
+  - counting-bijection
+  acl: null
+  signs:
+  - 頂点にラベルのある木の数
+  - 次数の条件つきの木の数
+  compare_with:
+  - matrix-tree-theorem
+  page: own
+  visual: 葉を最小番号から1つずつ取り除きながら Prüfer 列を作るステップ送り
+  problems:
+  - id: abc290_f
+    difficulty: 2300
+    role: example
+    summary: 次数列を決めたときの木の数を使い、全ての次数列についての直径の最大値の総和を求める
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2023/0219_abc290#f_-_maximum_diameter
+  - id: abc303_h
+    difficulty: 2501
+    role: practice
+    summary: 次数が集合 S に入る木の数を、Prüfer 列と多項式の累乗で求める
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/28/010200
+  - id: arc106_f
+    difficulty: 2755
+    role: practice
+    summary: 各部品の穴の数を次数とみなし、Prüfer 列の考え方で全域木の数を閉じた式にする
+    evidence: https://drken1215.hatenablog.com/entry/2020/10/25/140600
+- key: matrix-tree-theorem
+  title: 行列木定理
+  aliases:
+  - 行列木定理
+  - Kirchhoff の定理
+  - BEST 定理
+  level: 発展
+  level_evidence: abc253_h (diff 2758)・abc336_g (diff 3138) とも発展
+  prerequisites:
+  - gaussian-elimination
+  - cayley-pruefer
+  acl: null
+  signs:
+  - 全域木の個数
+  - 有向グラフのオイラー閉路の数
+  compare_with:
+  - cayley-pruefer
+  - lgv-lemma
+  page: overview
+  visual: null
+  problems:
+  - id: abc253_h
+    difficulty: 2758
+    role: example
+    summary: 頂点集合ごとの全域木の数を行列木定理で求め、集合の DP で森の数を数える
+    evidence: https://kmjp.hatenablog.jp/entry/2022/05/28/1030
+  - id: abc336_g
+    difficulty: 3138
+    role: practice
+    summary: 有向グラフのオイラー路の数を BEST 定理（行列木定理を含む）で数える
+    evidence: https://kmjp.hatenablog.jp/entry/2024/01/16/0930
+- key: lgv-lemma
+  title: LGV 補題（交わらない経路の組）
+  aliases:
+  - LGV 補題
+  - Lindström–Gessel–Viennot
+  level: 発展
+  level_evidence: ABC では abc216_h (diff 3295)（発展）のみ
+  prerequisites:
+  - lattice-paths
+  - gaussian-elimination
+  acl: null
+  signs:
+  - K 本の経路が交わらない
+  - 複数の駒が衝突しない確率
+  compare_with:
+  - matrix-tree-theorem
+  page: overview
+  visual: null
+  problems:
+  - id: abc216_h
+    difficulty: 3295
+    role: example
+    summary: K 個のロボットが衝突しない確率を、LGV 補題の行列式を bitDP で展開して求める
+    evidence: https://kmjp.hatenablog.jp/entry/2021/09/02/0900
+- key: counting-labeled-graphs
+  title: 連結なグラフ・構造の数え上げ
+  aliases:
+  - 連結グラフの数え上げ
+  - 全体から非連結を引く
+  - 頂点 1 を含む成分で分類
+  level: 黄
+  level_evidence: abc281_g (diff 2304)（黄）、abc180_f (diff 2419)・abc213_g (diff 2663) は発展
+  prerequisites:
+  - counting-complement
+  - bit-dp
+  - binomial-precompute
+  acl: null
+  signs:
+  - 条件を満たすグラフの個数
+  - 連結な部分グラフの数
+  - N ≤ 17 程度の頂点集合
+  compare_with:
+  - counting-dedup
+  page: own
+  visual: null
+  problems:
+  - id: abc281_g
+    difficulty: 2304
+    role: example
+    summary: 頂点 1 からの距離の層ごとに頂点を配り、各層の辺の張り方を数えて掛ける
+    evidence: https://drken1215.hatenablog.com/entry/2022/12/13/173300
+  - id: abc180_f
+    difficulty: 2419
+    role: example
+    summary: 連結成分がパスかサイクルのグラフを、頂点 1 を含む成分のサイズで分類して数える
+    evidence: https://drken1215.hatenablog.com/entry/2020/10/21/145700
+  - id: abc213_g
+    difficulty: 2663
+    role: practice
+    summary: 頂点集合が連結になる辺の選び方を、全体から非連結を引く部分集合 DP で求める
+    evidence: https://drken1215.hatenablog.com/entry/2021/08/12/132500
+- key: binomial-prefix-sum
+  title: 二項係数の部分和
+  aliases:
+  - 二項係数の累積和
+  - Σ_{k≤K} C(n,k)
+  level: 発展
+  level_evidence: abc235_g (diff 2462)（発展）
+  prerequisites:
+  - binomial-precompute
+  - inclusion-exclusion
+  acl: null
+  signs:
+  - Σ_{k≤K} C(n,k) が大量に必要
+  compare_with:
+  - binomial-identities
+  page: overview
+  visual: null
+  problems:
+  - id: abc235_g
+    difficulty: 2462
+    role: example
+    summary: 空の庭がない植え方を包除で数え、必要な二項係数の部分和を n を 1 ずつ動かしながら更新する
+    evidence: https://kmjp.hatenablog.jp/entry/2022/01/17/0900
+- key: generating-function-counting
+  title: 母関数の考え方（数え上げの視点）
+  aliases:
+  - 母関数
+  - 数え上げの多項式表現
+  level: 発展
+  level_evidence: abc303_h (diff 2501)・abc385_g (diff 2492) などで FPS と組み合わせて使う（発展）
+  prerequisites:
+  - stars-and-bars
+  - binomial-identities
+  - formal-power-series
+  acl: atcoder::convolution（多項式の積）
+  signs:
+  - 各要素の選び方が独立で個数の和が条件
+  - 多項式の累乗の係数
+  compare_with:
+  - stars-and-bars
+  page: overview
+  visual: null
+  problems:
+  - id: abc303_h
+    difficulty: 2501
+    role: example
+    summary: 次数の制約を多項式の累乗の係数として表す
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/28/010200
+  - id: abc385_g
+    difficulty: 2492
+    role: practice
+    summary: 上昇階乗を多項式として展開し、係数から順列の数を読む
+    evidence: https://kmjp.hatenablog.jp/entry/2024/12/21/0930
+  - id: abc449_g
+    difficulty: 2631
+    role: practice
+    summary: 各桁の上限つきの和を (1−x^10)^(M−1)/(1−x)^M の係数として、二項係数と負の二項係数の畳み込みで求める
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0314_abc449#g_-_many_repunit_sum_2
+- key: young-tableaux
+  title: Young 図形とフック長公式
+  aliases:
+  - ヤング図形
+  - 標準タブロー
+  - フック長公式
+  - Robinson–Schensted 対応
+  level: 発展
+  level_evidence: ABC では abc378_g (diff 3051)（発展）のみ
+  prerequisites:
+  - partition-number
+  acl: null
+  signs:
+  - LIS と LDS の長さの条件つきの順列の数
+  compare_with:
+  - partition-number
+  page: overview
+  visual: null
+  problems:
+  - id: abc378_g
+    difficulty: 3051
+    role: example
+    summary: 最長増加・減少部分列の長さの条件を満たす順列の数を、Robinson–Schensted 対応とフック長公式で数える
+    evidence: https://kmjp.hatenablog.jp/entry/2024/11/07/1000
+- key: probability-basics
+  title: 確率の基本
+  aliases:
+  - 確率
+  - 条件付き確率
+  - 全確率の公式
+  level: 基礎
+  level_evidence: abc126_c (diff 638)・abc193_d (diff 866) と茶〜緑
+  prerequisites:
+  - counting-basics
+  acl: null
+  signs:
+  - 確率を求めよ（誤差 10^-6 まで許容）
+  - 同様に確からしい
+  compare_with:
+  - probability-dp
+  page: own
+  visual: null
+  problems:
+  - id: abc126_c
+    difficulty: 638
+    role: example
+    summary: 最初の出目で場合分けし、各場合でコインが続けて表になる確率を足す
+    evidence: https://drken1215.hatenablog.com/entry/2019/05/19/224500_2
+  - id: abc193_d
+    difficulty: 866
+    role: example
+    summary: 残りのカードの枚数から、2 枚の組合せごとに勝つ確率を数える
+    evidence: https://drken1215.hatenablog.com/entry/2021/03/02/190700
+- key: rational-mod
+  title: 確率・期待値を mod 998244353 で答える（有理数の mod 表現）
+  aliases:
+  - 有理数 mod
+  - P×Q^{-1} mod p
+  - 確率 mod 998244353
+  level: 水
+  level_evidence: abc280_e (diff 1251)・abc323_e (diff 1279)・abc300_e (diff 1354)・abc326_e (diff 1363) と水色帯で頻出
+  prerequisites:
+  - modular-inverse
+  - probability-basics
+  acl: atcoder::modint998244353（割り算は inv() を掛ける）
+  signs:
+  - 期待値（確率）を mod 998244353 で出力
+  - 求める値は有理数で表せ、既約分数 P/Q で…
+  compare_with:
+  - probability-basics
+  page: own
+  visual: null
+  problems:
+  - id: abc280_e
+    difficulty: 1251
+    role: example
+    summary: 確率 P% の会心の一撃があるときの攻撃回数の期待値を、P/100 を mod に入れて DP で求める
+    evidence: https://drken1215.hatenablog.com/entry/2022/12/07/113800
+  - id: abc323_e
+    difficulty: 1279
+    role: example
+    summary: ランダムに曲を流し続けたとき、時刻 X+0.5 に曲 1 が流れている確率を mod で求める
+    evidence: https://drken1215.hatenablog.com/entry/2023/10/14/113816
+  - id: abc300_e
+    difficulty: 1354
+    role: practice
+    summary: サイコロの目を掛けていき N ちょうどになる確率を、mod の分数のまま DP する
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/03/212600
+  - id: abc326_e
+    difficulty: 1363
+    role: practice
+    summary: サイコロで給料が決まる過程の期待値を、後ろから mod で計算する
+    evidence: https://programming-hiroba.com/abc326-e/
+- key: linearity-of-expectation
+  title: 期待値の線形性
+  aliases:
+  - 期待値の線形性
+  - 和の期待値は期待値の和
+  level: 水
+  level_evidence: abc154_d (diff 485) は易しい入口。abc334_e (diff 1195)・abc417_f (diff 1414) と緑上位〜水で前面に出て、abc199_f (diff 2065) は黄
+  prerequisites:
+  - probability-basics
+  acl: null
+  signs:
+  - 〜の個数の期待値
+  - 〜の総和の期待値
+  compare_with:
+  - indicator-variables
+  - counting-contribution
+  page: own
+  visual: 確率変数を表（行＝起こりうる場合、列＝部分の量）で書き、行ごとの和の平均＝列ごとの平均の和を示す図
+  problems:
+  - id: abc154_d
+    difficulty: 485
+    role: example
+    summary: 各サイコロの期待値 (1+p)/2 を足して、連続 K 個の和の期待値の最大値を求める
+    evidence: https://drken1215.hatenablog.com/entry/2020/02/10/235800
+  - id: math_and_algorithm_w
+    difficulty: null
+    role: example
+    summary: 2 つのサイコロの出目の和の期待値を、それぞれの期待値の和で求める
+    evidence: https://github.com/E869120/math-algorithm-book/blob/main/codes/cpp/Code_3_04_1.cpp
+  - id: abc334_e
+    difficulty: 1195
+    role: practice
+    summary: ランダムな赤マスを緑にしたときの連結成分数の期待値を、各マスについての値の平均で求める
+    evidence: https://programming-hiroba.com/abc334-e/
+  - id: abc417_f
+    difficulty: 1414
+    role: practice
+    summary: 区間を平均で上書きする操作を期待値の線形性で置き換え、遅延セグ木で期待値を更新する
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0802_abc417#f_-_random_gathering
+  - id: abc199_f
+    difficulty: 2065
+    role: practice
+    summary: 辺を選んで値を平均する操作が期待値に線形に作用することを使い、行列累乗で K 回後を求める
+    evidence: https://kmjp.hatenablog.jp/entry/2021/04/24/0900
+- key: indicator-variables
+  title: 指示確率変数（個数の期待値を確率の和にする）
+  aliases:
+  - 指示関数
+  - indicator
+  - ペアごとの確率
+  level: 青
+  level_evidence: typical90_bn (diff なし)（★5）・agc049_a (diff 1922)・abc380_g (diff 1995)・abc149_f (diff 2208)・abc215_g (diff 2276) と青〜黄にまとまる
+  prerequisites:
+  - linearity-of-expectation
+  acl: null
+  signs:
+  - 〜の個数の期待値
+  - 〜の種類数の期待値
+  - 転倒数の期待値
+  compare_with:
+  - counting-contribution
+  - probability-symmetry
+  page: section-of:linearity-of-expectation
+  visual: 各候補の上に「条件を満たす確率」を書き、それを足すと期待値になる図
+  problems:
+  - id: typical90_bn
+    difficulty: null
+    role: example
+    summary: 値を一様に選んだ数列の転倒数の期待値を、各ペアが転倒する確率の和で求める
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/editorial/066.jpg
+  - id: agc049_a
+    difficulty: 1922
+    role: example
+    summary: 操作回数の期待値を、各頂点が自分で選ばれる確率 1/(自分に到達できる頂点数) の和にする
+    evidence: https://drken1215.hatenablog.com/entry/2020/11/15/104400
+  - id: abc149_f
+    difficulty: 2208
+    role: practice
+    summary: 最小部分木に含まれる白い頂点の個数の期待値を、頂点ごとの確率の和で求める
+    evidence: https://kmjp.hatenablog.jp/entry/2019/12/30/0930
+  - id: abc215_g
+    difficulty: 2276
+    role: practice
+    summary: K 個選んだときの色の種類数の期待値を、色ごとに「1 つ以上含まれる確率」の和で求める
+    evidence: https://drken1215.hatenablog.com/entry/2023/09/04/015942
+  - id: abc380_g
+    difficulty: 1995
+    role: practice
+    summary: ランダムに選んだ区間をシャッフルした後の転倒数の期待値を、ペアごとに分けて求める
+    evidence: https://drken1215.hatenablog.com/entry/2024/11/17/113336
+- key: expectation-tail-sum
+  title: 期待値と確率の変換（E[X] = Σ P(X ≥ k)）
+  aliases:
+  - tail sum
+  - 期待値と確率の変換
+  - 最大値の期待値
+  level: 黄
+  level_evidence: abc295_e (diff 2157)（黄）、abc352_g (diff 2413) は発展
+  prerequisites:
+  - linearity-of-expectation
+  - counting-at-most-difference
+  acl: null
+  signs:
+  - 最大値（最小値・K 番目）の期待値
+  - 〜になるまでの回数の期待値
+  compare_with:
+  - geometric-distribution
+  page: own
+  visual: P(X ≥ k) の棒グラフを横に積むと面積が期待値になる図
+  problems:
+  - id: abc295_e
+    difficulty: 2157
+    role: example
+    summary: ソート後の K 番目の値の期待値を、各 x について P(K 番目 ≥ x) の和として二項係数で求める
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2023/0325_abc295#e_-_kth_number
+  - id: abc352_g
+    difficulty: 2413
+    role: practice
+    summary: 同じ色の 2 枚がそろうまで取り出す回数の期待値を、「k 回目までそろわない確率」の和で求める
+    evidence: https://drken1215.hatenablog.com/entry/2024/05/05/023117
+- key: expectation-of-square
+  title: 二乗の期待値・分散
+  aliases:
+  - 二乗の期待値
+  - 分散
+  - E[X^2]
+  level: 黄
+  level_evidence: abc450_g (diff 2227)（黄）、abc277_g (diff 2491)（発展）
+  prerequisites:
+  - linearity-of-expectation
+  - indicator-variables
+  acl: null
+  signs:
+  - 〜の二乗の期待値
+  - 分散
+  - スコアの二乗
+  compare_with:
+  - linearity-of-expectation
+  page: own
+  visual: null
+  problems:
+  - id: abc450_g
+    difficulty: 2227
+    role: example
+    summary: ランダムな操作で得る値の二乗の期待値を、全操作についての二乗の総和 / 操作の総数で求める
+    evidence: https://kmjp.hatenablog.jp/entry/2026/03/23/0900
+  - id: abc277_g
+    difficulty: 2491
+    role: practice
+    summary: レベルの二乗の期待値を、確率・期待値・二乗の期待値の 3 つを一緒に遷移させて求める
+    evidence: https://kmjp.hatenablog.jp/entry/2022/11/13/0900
+- key: conditional-expectation
+  title: 条件付き期待値と全期待値の公式
+  aliases:
+  - 条件付き期待値
+  - 全期待値の公式
+  - 最初の一手で場合分け
+  level: 水
+  level_evidence: 期待値 DP の漸化式の根拠として dp_j (diff なし)・abc184_d (diff 1276) で使う
+  prerequisites:
+  - probability-basics
+  - linearity-of-expectation
+  acl: null
+  signs:
+  - 〜になるまでの回数の期待値
+  compare_with:
+  - expected-value-dp
+  page: section-of:expected-value-dp
+  visual: null
+  problems:
+  - id: dp_j
+    difficulty: null
+    role: example
+    summary: 寿司が残っている皿の数ごとの状態で、次の 1 回で場合分けして期待値の式を立てる
+    evidence: https://kyopro-friends.hatenablog.com/entry/2019/01/12/231000
+- key: expected-value-dp
+  title: 期待値 DP の数学的側面（後ろ向きに考える理由）
+  aliases:
+  - 期待値 DP
+  - 後ろから決める期待値
+  - 残りの期待値
+  level: 水
+  level_evidence: abc280_e (diff 1251)・abc184_d (diff 1276)・abc326_e (diff 1363) と水、abc382_e (diff 1671) は青、abc144_f (diff 2189) は黄
+  prerequisites:
+  - conditional-expectation
+  - dp-basics
+  acl: null
+  signs:
+  - 〜になるまでの回数の期待値
+  - 終わるまでにかかる量の期待値
+  compare_with:
+  - probability-dp
+  - self-loop-expectation
+  page: own
+  visual: 状態の DAG に、終状態から E を埋めていくステップ送り
+  problems:
+  - id: dp_j
+    difficulty: null
+    role: example
+    summary: 1〜3 個の寿司が乗った皿の数を状態にし、全部なくなるまでの回数の期待値を求める
+    evidence: https://kyopro-friends.hatenablog.com/entry/2019/01/12/231000
+  - id: abc184_d
+    difficulty: 1276
+    role: example
+    summary: いずれかの硬貨が 100 枚になるまでの操作回数の期待値を、残りの期待値で後ろから求める
+    evidence: https://drken1215.hatenablog.com/entry/2020/11/23/010500
+  - id: abc280_e
+    difficulty: 1251
+    role: example
+    summary: HP が 0 以下になるまでの攻撃回数の期待値を、HP ごとの残りの期待値で求める
+    evidence: https://drken1215.hatenablog.com/entry/2022/12/07/113800
+  - id: abc382_e
+    difficulty: 1671
+    role: practice
+    summary: 1 パックのレアの枚数の分布を確率 DP で求め、必要枚数に達するまでのパック数の期待値を後ろから求める
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/1130_abc382#e_-_expansion_packs
+  - id: abc144_f
+    difficulty: 2189
+    role: practice
+    summary: DAG 上でゴールまでの通路数の期待値を後ろから求め、各部屋で消す通路を全部試す
+    evidence: https://kmjp.hatenablog.jp/entry/2019/10/28/0930
+- key: self-loop-expectation
+  title: 自己ループの除去（方程式を移項して解く）
+  aliases:
+  - 自己ループ
+  - 振り直し
+  - 移項して解く
+  level: 水
+  level_evidence: abc300_e (diff 1354)・abc350_e (diff 1385) と水、abc263_e (diff 1659)・abc314_e (diff 1722) は青
+  prerequisites:
+  - expected-value-dp
+  acl: null
+  signs:
+  - 出た目が〜なら振り直し
+  - 確率 p で何も起きない
+  - その場にとどまる
+  compare_with:
+  - expectation-linear-equations
+  - geometric-distribution
+  page: section-of:expected-value-dp
+  visual: null
+  problems:
+  - id: abc300_e
+    difficulty: 1354
+    role: example
+    summary: 1 の目は状態を変えないので、移項して残り 5 つの目の平均にする
+    evidence: https://drken1215.hatenablog.com/entry/2023/05/03/212600
+  - id: abc350_e
+    difficulty: 1385
+    role: example
+    summary: 1 の目で N が変わらない自己ループを移項し、2 つの操作の期待値の小さい方を取るメモ化再帰
+    evidence: https://programming-hiroba.com/abc350-e/
+  - id: abc263_e
+    difficulty: 1659
+    role: practice
+    summary: 0 の目でその場にとどまるすごろくの期待値を、移項と累積和で後ろから求める
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/263/E
+  - id: abc314_e
+    difficulty: 1722
+    role: practice
+    summary: 0 の目があるルーレットの費用を、0 以外が出る確率で割って自己ループを消しつつ最小の期待値を選ぶ
+    evidence: https://qiita.com/DeltaStruct/items/08a55509095a471c5371
+- key: expectation-linear-equations
+  title: 未知数を残す・連立方程式で解く期待値
+  aliases:
+  - 期待値の方程式
+  - a+bX の形で持つ
+  - 吸収マルコフ連鎖
+  level: 青
+  level_evidence: arc174_c (diff 1706)・abc333_f (diff 1770) と青、振り出しに戻る abc189_f (diff 2154) は黄、abc224_g (diff 2374) は黄上位
+  prerequisites:
+  - self-loop-expectation
+  - gaussian-elimination
+  acl: null
+  signs:
+  - 振り出しに戻る
+  - 円形に並んだ人が順に
+  - 無限に続く可能性がある
+  compare_with:
+  - self-loop-expectation
+  page: own
+  visual: null
+  problems:
+  - id: arc174_c
+    difficulty: 1706
+    role: example
+    summary: 2 人が交互に回すルーレットで各人の支払いの期待値を、無限に続く分を等比級数・方程式で閉じて求める
+    evidence: https://drken1215.hatenablog.com/entry/2024/03/17/233040
+  - id: abc333_f
+    difficulty: 1770
+    role: example
+    summary: 先頭が確率 1/2 で消えるか末尾へ回る過程の確率を、円環状の依存を 1 つの未知数で閉じて解く
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2023/1216_abc333#f_-_bomb_game_2
+  - id: abc189_f
+    difficulty: 2154
+    role: practice
+    summary: 振り出しに戻るマスがあるすごろくで、スタートの期待値を X とおいて各マスを a+bX の形で求める
+    evidence: https://kmjp.hatenablog.jp/entry/2021/01/23/0900
+  - id: abc224_g
+    difficulty: 2374
+    role: practice
+    summary: 最適戦略に未知数を含む期待値を、変数を置いた 2 通りの式を等しくして解く
+    evidence: https://kmjp.hatenablog.jp/entry/2021/10/26/0900
+- key: geometric-distribution
+  title: 幾何分布（成功するまで繰り返す回数）
+  aliases:
+  - 幾何分布
+  - 成功までの回数
+  - 1/p
+  level: 基礎
+  level_evidence: arc085_a (diff 752)・abc194_d (diff 1078) と緑以下
+  prerequisites:
+  - probability-basics
+  acl: null
+  signs:
+  - 成功するまで繰り返す
+  - 〜が出るまで
+  compare_with:
+  - coupon-collector
+  - self-loop-expectation
+  page: section-of:coupon-collector
+  visual: null
+  problems:
+  - id: arc085_a
+    difficulty: 752
+    role: example
+    summary: 確率 1/2^M で全部通るまで提出し直す総時間の期待値を、1/p で求める
+    evidence: https://drken1215.hatenablog.com/entry/2019/03/23/175300
+  - id: abc194_d
+    difficulty: 1078
+    role: example
+    summary: 未訪問の頂点へ移る確率が (N−k)/N の段階ごとに 1/p を足す
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0306_abc194#d_-_journey
+- key: coupon-collector
+  title: コンプリートガチャ型（全種類そろうまで）
+  aliases:
+  - クーポンコレクター
+  - コンプガチャ
+  - N H_N
+  level: 基礎
+  level_evidence: 等確率なら abc194_d (diff 1078)（緑）。確率が異なる・一部だけそろえるものは min-max 包除が要り abc331_g (diff 2668)・abc242_h (diff 2835) と発展
+  prerequisites:
+  - geometric-distribution
+  - linearity-of-expectation
+  acl: null
+  signs:
+  - すべての種類を集めるまで
+  - 全頂点を訪れるまで
+  compare_with:
+  - geometric-distribution
+  - inclusion-exclusion
+  page: own
+  visual: null
+  problems:
+  - id: math_and_algorithm_z
+    difficulty: null
+    role: example
+    summary: N 種類のコインがそろうまでの回数の期待値 N(1+1/2+…+1/N) を求める
+    evidence: https://github.com/E869120/math-algorithm-book/blob/main/editorial/chap3-4/prob3-4-4.cpp
+  - id: abc194_d
+    difficulty: 1078
+    role: example
+    summary: 全頂点を訪れるまでの回数の期待値を、段階ごとの幾何分布の和で求める
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0306_abc194#d_-_journey
+  - id: abc331_g
+    difficulty: 2668
+    role: practice
+    summary: 確率の異なる N 種類がそろうまでの回数の期待値を、min-max 包除と多項式で求める
+    evidence: https://kmjp.hatenablog.jp/entry/2023/12/08/0930
+  - id: abc242_h
+    difficulty: 2835
+    role: practice
+    summary: 区間をランダムに塗って全マスが塗られるまでの回数の期待値を、min-max 包除と DP で求める
+    evidence: https://kmjp.hatenablog.jp/entry/2022/03/07/0930
+- key: probability-symmetry
+  title: 対称性で確率を求める
+  aliases:
+  - 対称性
+  - ランダムな順列に置き換える
+  - どれも同じ確率
+  level: 水
+  level_evidence: abc360_e (diff 1249)（水）、abc473_g (diff 1974)・abc380_g (diff 1995) は青、abc464_f (diff 2225)・abc268_g (diff 2311) は黄
+  prerequisites:
+  - probability-basics
+  acl: null
+  signs:
+  - 一様ランダムにシャッフル
+  - ランダムに入れ替える
+  - 残りから一様に選ぶ
+  compare_with:
+  - indicator-variables
+  page: own
+  visual: N 個の位置を「特別な 1 つ」と「その他すべて（同じ確率）」の 2 状態に縮める図
+  problems:
+  - id: abc360_e
+    difficulty: 1249
+    role: example
+    summary: 黒玉が左端にある確率と、それ以外のどの位置にも等しい確率の 2 つだけを追う
+    evidence: https://programming-hiroba.com/abc360-e/
+  - id: abc473_g
+    difficulty: 1974
+    role: practice
+    summary: ランダムに並べたカードを先頭から順にめくると考えてよいことを使い、確率を求める
+    evidence: https://kmjp.hatenablog.jp/entry/2026/08/29/0900
+  - id: abc380_g
+    difficulty: 1995
+    role: practice
+    summary: シャッフルした区間内のペアは確率 1/2 で転倒することを使って期待値を求める
+    evidence: https://drken1215.hatenablog.com/entry/2024/11/17/113336
+  - id: abc464_f
+    difficulty: 2225
+    role: practice
+    summary: 残りから一様に選んでいく過程を、一様ランダムな順列を先頭から見る過程に置き換える
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0627_abc464#f_-_random_vault_heist
+  - id: abc268_g
+    difficulty: 2311
+    role: practice
+    summary: 接頭辞の関係にない 2 つの文字列の大小は確率 1/2 であることから、順位の期待値を求める
+    evidence: https://kmjp.hatenablog.jp/entry/2022/09/10/0900
+- key: optimal-strategy-expectation
+  title: 最適戦略の期待値（続けるか止めるか）
+  aliases:
+  - 最適停止
+  - expectimax
+  - 期待値の最大化
+  level: 水
+  level_evidence: abc266_e (diff 1227)（水）。abc412_f (diff 2038)・abc470_e (diff 2096)・abc421_e (diff 2122)・abc342_f (diff 2141) と黄にもまとまる
+  prerequisites:
+  - expected-value-dp
+  acl: null
+  signs:
+  - 最適に行動したときの期待値
+  - 好きなタイミングでやめられる
+  - やり直せる
+  compare_with:
+  - minimax
+  - expected-value-dp
+  page: own
+  visual: null
+  problems:
+  - id: abc266_e
+    difficulty: 1227
+    role: example
+    summary: 残り k 回振れるときの期待値を、出目と「続けた場合の期待値」の大きい方の平均で後ろから求める
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/266/E
+  - id: abc412_f
+    difficulty: 2038
+    role: practice
+    summary: 取り出した靴下のどちらを残すかを期待値の上で決め、残りの回数の期待値を求める
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0628_abc412#f_-_socks_4
+  - id: abc421_e
+    difficulty: 2122
+    role: practice
+    summary: サイコロゲームで、振る部分は平均・残す目の選択は max を取るメモ化再帰
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0830_abc421#e_-_yacht
+  - id: abc470_e
+    difficulty: 2096
+    role: practice
+    summary: 神経衰弱で、取ったペア・場所を知ったカード・未知のカードの数を状態に最適行動の期待値を求める
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0808_abc470#e_-_concentration
+  - id: abc342_f
+    difficulty: 2141
+    role: practice
+    summary: 止めるタイミングを選ぶプレイヤーの勝率を、相手の得点の分布と累積和で最大化する
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0224_abc342#f_-_black_jack
+- key: probability-dp
+  title: 確率 DP（前向きに確率を配る）
+  aliases:
+  - 確率 DP
+  - 到達確率
+  - 分布を求める DP
+  level: 水
+  level_evidence: abc275_e (diff 1264)・abc298_e (diff 1300) と水
+  prerequisites:
+  - probability-basics
+  - dp-basics
+  acl: null
+  signs:
+  - K 回後に〜にいる確率
+  - どちらが先にゴールするか
+  - 時刻 T に〜している確率
+  compare_with:
+  - expected-value-dp
+  page: section-of:expected-value-dp
+  visual: null
+  problems:
+  - id: dp_i
+    difficulty: null
+    role: example
+    summary: N 枚のコインを投げて表が過半数になる確率を、表の枚数ごとの確率を配って求める
+    evidence: https://kyopro-friends.hatenablog.com/entry/2019/01/12/231000
+  - id: abc275_e
+    difficulty: 1264
+    role: example
+    summary: 跳ね返りのあるすごろくで K 回以内にゴールする確率を、マスごとの確率を配って求める
+    evidence: https://programming-hiroba.com/abc275-e/
+  - id: abc298_e
+    difficulty: 1300
+    role: practice
+    summary: 2 人のサイコロでどちらが先にゴールするかの確率を、両者の位置を状態に求める
+    evidence: https://programming-hiroba.com/abc298-e/
+- key: counting-vs-expectation
+  title: 総和と期待値の行き来
+  aliases:
+  - 期待値 = 総和 / 総数
+  - 総和 = 期待値 × 総数
+  level: 青
+  level_evidence: abc276_f (diff 1562)（水）・abc297_f (diff 1990)（青）・abc334_g (diff 2242)（黄）
+  prerequisites:
+  - linearity-of-expectation
+  - counting-contribution
+  acl: null
+  signs:
+  - 一様に選ぶときの期待値
+  - 全パターンの〜の和
+  compare_with:
+  - counting-contribution
+  - indicator-variables
+  page: section-of:linearity-of-expectation
+  visual: null
+  problems:
+  - id: abc276_f
+    difficulty: 1562
+    role: example
+    summary: 2 回引いた値の最大値の期待値を、全 K^2 通りの最大値の和を数えて割る
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/1105_abc276#f_-_double_chance
+  - id: abc297_f
+    difficulty: 1990
+    role: example
+    summary: 外接長方形の面積の期待値を、全配置についての面積の和 / 配置の総数で求める
+    evidence: https://kazun-kyopro.hatenablog.com/entry/ABC/297/F
+  - id: abc334_g
+    difficulty: 2242
+    role: practice
+    summary: 黒マスを 1 つ消したときの連結成分数の期待値を、各マスを消したときの成分数の和 / マス数で求める
+    evidence: https://kmjp.hatenablog.jp/entry/2023/12/23/1030
+- key: continuous-probability
+  title: 連続値の確率
+  aliases:
+  - 連続確率
+  - 一様乱数
+  - 積分
+  level: 発展
+  level_evidence: agc021_b (diff 2130)（黄）・abc226_h (diff 2813)（発展）
+  prerequisites:
+  - probability-basics
+  - expectation-tail-sum
+  acl: null
+  signs:
+  - 実数を一様ランダムに選ぶ
+  - 円内のランダムな点
+  compare_with:
+  - expectation-tail-sum
+  page: overview
+  visual: null
+  problems:
+  - id: agc021_b
+    difficulty: 2130
+    role: example
+    summary: 円内のランダムな点に最も近い点が選ばれる確率を、凸包の外角の比で求める
+    evidence: https://drken1215.hatenablog.com/entry/2019/04/02/225600
+  - id: abc226_h
+    difficulty: 2813
+    role: practice
+    summary: 区間ごとに一様な実数の K 番目の値の期待値を、区分的な多項式の積分で求める
+    evidence: https://kmjp.hatenablog.jp/entry/2021/11/08/0930
+- key: random-walk
+  title: ランダムウォーク
+  aliases:
+  - ランダムウォーク
+  - 酔歩
+  level: 青
+  level_evidence: abc011_4 (diff 1843)（青）、abc271_g (diff 2323)（黄）・abc463_g (diff 2452)（発展）
+  prerequisites:
+  - binomial-precompute
+  - probability-basics
+  acl: null
+  signs:
+  - N 回ランダムに上下左右へ動く
+  - N 歩後の位置
+  compare_with:
+  - lattice-paths
+  - probability-dp
+  page: section-of:probability-dp
+  visual: null
+  problems:
+  - id: abc011_4
+    difficulty: 1843
+    role: example
+    summary: 上下左右のランダムな移動を横に動く回数で分け、各軸の到達確率を二項係数で求めて掛ける
+    evidence: https://drken1215.hatenablog.com/entry/2020/11/14/084800
+  - id: abc463_g
+    difficulty: 2452
+    role: practice
+    summary: N 回の ±1 移動後の位置と目標との距離の期待値を、二項係数の和で求める
+    evidence: https://kmjp.hatenablog.jp/entry/2026/06/20/0900
+  - id: abc271_g
+    difficulty: 2323
+    role: practice
+    summary: 時間帯ごとに確率の決まった遷移を、行列累乗で多数回まとめて計算する
+    evidence: https://kmjp.hatenablog.jp/entry/2022/10/04/1000
+- key: game-basics
+  title: ゲームの基本（必勝・必敗の判定）
+  aliases:
+  - 必勝法
+  - 勝ち局面・負け局面
+  - 二人零和有限確定完全情報ゲーム
+  level: 水
+  level_evidence: 基本の判定は tessoku_book_af (diff なし)・dp_k (diff なし)（diff なし）。ABC では abc354_e (diff 1223)・abc270_d (diff 1300) と水
+  prerequisites:
+  - dp-basics
+  acl: null
+  signs:
+  - 先手と後手が交互に
+  - 両者が最適に行動したとき、勝つのはどちらか
+  - First / Second を出力
+  compare_with:
+  - minimax
+  - grundy-number
+  page: own
+  visual: 局面の DAG で、終局から勝ち・負けを塗っていくステップ送り
+  problems:
+  - id: tessoku_book_af
+    difficulty: null
+    role: example
+    summary: A 個か B 個取れる石取りの勝敗を、石の数ごとの勝ち負けの DP で求める（鉄則 A32）
+    evidence: https://github.com/E869120/kyopro-tessoku/blob/main/codes/cpp/chap05/answer_A32.cpp
+  - id: dp_k
+    difficulty: null
+    role: example
+    summary: 取れる個数の集合が決まった石取りの勝敗を、石の数ごとの DP で求める
+    evidence: https://kyopro-friends.hatenablog.com/entry/2019/01/12/231000
+- key: game-winning-losing-dp
+  title: 必勝・必敗の判定（ゲーム DP）
+  aliases:
+  - ゲーム DP
+  - メモ化再帰でゲームを解く
+  - bitDP のゲーム
+  level: 水
+  level_evidence: abc354_e (diff 1223)・abc270_d (diff 1300)・abc278_f (diff 1452) と水、abc195_e (diff 1609)・abc380_f (diff 1769) は青
+  prerequisites:
+  - game-basics
+  - bit-dp
+  acl: null
+  signs:
+  - N ≤ 16〜18 で残りの集合が状態
+  - 状態数が小さい
+  - 手番ごとに取れる手が違う
+  compare_with:
+  - minimax
+  - game-retrograde-analysis
+  page: section-of:game-basics
+  visual: null
+  problems:
+  - id: abc354_e
+    difficulty: 1223
+    role: example
+    summary: 残りのカードの集合を状態にした bitDP で、取り除けるペアがあるかを見て勝敗を決める
+    evidence: https://drken1215.hatenablog.com/entry/2024/05/19/011051
+  - id: abc270_d
+    difficulty: 1300
+    role: example
+    summary: 石の数ごとに手番の人が取れる最大の石の数を DP で求める
+    evidence: https://drken1215.hatenablog.com/entry/2023/07/22/020725
+  - id: abc278_f
+    difficulty: 1452
+    role: practice
+    summary: 使った単語の集合と最後の単語を状態にした bitDP でしりとりの勝敗を決める
+    evidence: https://programming-hiroba.com/abc278-f/
+  - id: abc195_e
+    difficulty: 1609
+    role: practice
+    summary: 後ろから「余りが j のとき勝てるか」を、手番の人に応じて or と and で埋める
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0313_abc195#e_-_lucky_7_battle
+  - id: abc380_f
+    difficulty: 1769
+    role: practice
+    summary: 各カードの所在（3 か所）を状態にした 3^N 状態のメモ化再帰で勝敗を決める
+    evidence: https://drken1215.hatenablog.com/entry/2024/11/17/132223
+- key: minimax
+  title: ミニマックス（得点差を最大化するゲーム）
+  aliases:
+  - ミニマックス
+  - negamax
+  - 得点差 DP
+  level: 水
+  level_evidence: abc201_d (diff 1317)・abc349_e (diff 1464) と水。木の上の abc218_g (diff 2217)・abc246_g (diff 2313) は黄、abc303_g (diff 2736) は発展
+  prerequisites:
+  - game-basics
+  - dp-basics
+  acl: null
+  signs:
+  - 両者が最適に行動したときの得点（の差）
+  - 一方は X−Y を最大化、他方は最小化
+  compare_with:
+  - game-winning-losing-dp
+  - optimal-strategy-expectation
+  page: own
+  visual: null
+  problems:
+  - id: dp_l
+    difficulty: null
+    role: example
+    summary: 両端から取るゲームの得点差を、区間ごとの「手番の人の得点 − 相手の得点」の区間 DP で求める
+    evidence: https://drken1215.hatenablog.com/entry/2023/07/22/031100
+  - id: tessoku_book_ai
+    difficulty: null
+    role: example
+    summary: ピラミッドを交互に下る駒の最終値を、段ごとに max と min を交互に取る DP で求める（鉄則 A35）
+    evidence: https://github.com/E869120/kyopro-tessoku/blob/main/codes/cpp/chap05/answer_A35.cpp
+  - id: abc201_d
+    difficulty: 1317
+    role: example
+    summary: グリッドを右か下に進みながら得点を取り合う差を、後ろからの DP で求める
+    evidence: https://drken1215.hatenablog.com/entry/2023/07/21/235300
+  - id: abc349_e
+    difficulty: 1464
+    role: practice
+    summary: 重み付き三目並べの勝敗を、盤面の全状態のメモ化探索で求める
+    evidence: https://programming-hiroba.com/abc349-e/
+  - id: abc025_c
+    difficulty: 1640
+    role: practice
+    summary: 3×3 のマスを交互に埋めたときの得点を、残りのマスの状態ごとのミニマックス探索で求める
+    evidence: https://drken1215.hatenablog.com/entry/2023/07/22/192817
+  - id: abc218_g
+    difficulty: 2217
+    role: practice
+    summary: 木を根から降りて葉で止まるゲームの中央値を、手番ごとに max と min を取る DFS で求める
+    evidence: https://kmjp.hatenablog.jp/entry/2021/09/12/0900
+  - id: abc303_g
+    difficulty: 2736
+    role: practice
+    summary: 袋を取り合うゲームの得点差を、区間 DP と区間 max の高速化で求める
+    evidence: https://kmjp.hatenablog.jp/entry/2023/05/27/0900
+- key: game-retrograde-analysis
+  title: サイクルのあるゲーム（後退解析）
+  aliases:
+  - 後退解析
+  - retrograde analysis
+  - 引き分けのあるゲーム
+  level: 黄
+  level_evidence: abc209_e (diff 2153)（黄）、abc261_h (diff 2531)（発展）
+  prerequisites:
+  - game-basics
+  - bfs
+  acl: null
+  signs:
+  - 無限に続く場合は Draw
+  - 同じ局面が繰り返されうる
+  - グラフ上でコマを動かす
+  compare_with:
+  - game-winning-losing-dp
+  page: own
+  visual: サイクルのあるグラフで、終局から勝ち・負けが伝わり、サイクルの部分だけ引き分けとして残るステップ送り
+  problems:
+  - id: abc209_e
+    difficulty: 2153
+    role: example
+    summary: しりとりの単語を辺とするグラフで、逆辺をたどって勝ち・負け・引き分けを確定させる
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0710_abc209#e_-_shiritori
+  - id: abc261_h
+    difficulty: 2531
+    role: practice
+    summary: 得点のあるグラフ上のゲームを、確定した局面からダイクストラのように後退解析する
+    evidence: https://kmjp.hatenablog.jp/entry/2022/07/24/0930
+- key: nim
+  title: Nim と XOR（Bouton の定理）
+  aliases:
+  - Nim
+  - ニム
+  - ニム和
+  level: 水
+  level_evidence: arc168_b (diff 1289)（水）。Nim の結論を使って考察する abc172_f (diff 2216) は黄
+  prerequisites:
+  - game-basics
+  - bit-operations
+  acl: null
+  signs:
+  - 山から石を取る
+  - 最後に取った人が勝ち
+  - XOR
+  compare_with:
+  - grundy-number
+  page: own
+  visual: null
+  problems:
+  - id: tessoku_book_ag
+    difficulty: null
+    role: example
+    summary: 山の個数の XOR が 0 かどうかで勝敗を判定する（鉄則 A33）
+    evidence: https://github.com/E869120/kyopro-tessoku/blob/main/codes/cpp/chap05/answer_A33.cpp
+  - id: arc168_b
+    difficulty: 1289
+    role: example
+    summary: 1 回に取れる上限 k を決める Nim で、Grundy 数 A mod (k+1) を使って後手必勝になる最大の k を求める
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2023/1119_arc168#b_-_arbitrary_nim
+  - id: abc172_f
+    difficulty: 2216
+    role: practice
+    summary: 最初の 2 山の間で石を移して XOR を 0 にできるかを、XOR と AND の桁ごとの関係で決める
+    evidence: https://kmjp.hatenablog.jp/entry/2020/06/27/1030
+- key: grundy-number
+  title: Grundy 数と Sprague–Grundy の定理
+  aliases:
+  - Grundy 数
+  - nimber
+  - mex
+  - Sprague–Grundy
+  level: 青
+  level_evidence: abc368_f (diff 1180)（緑）は易しい入口。Grundy 数が必須の問題は typical90_ae (diff なし)（★6）・abc297_g (diff 1834)・abc206_f (diff 2221)・abc278_g (diff 2533) と青〜黄にまとまる
+  prerequisites:
+  - nim
+  - game-winning-losing-dp
+  acl: null
+  signs:
+  - 複数の山（盤面）があり、どれか 1 つを選んで操作する
+  - 先手と後手の取れる手が同じ
+  compare_with:
+  - nim
+  - partizan-games
+  page: own
+  visual: 小さい局面から Grundy 数を mex で埋める表のステップ送り
+  problems:
+  - id: tessoku_book_ah
+    difficulty: null
+    role: example
+    summary: X 個か Y 個取れる石取りの Grundy 数を mex で求め、全山の XOR で判定する（鉄則 A34）
+    evidence: https://github.com/E869120/kyopro-tessoku/blob/main/codes/cpp/chap05/answer_A34.cpp
+  - id: abc368_f
+    difficulty: 1180
+    role: example
+    summary: 真の約数に置き換える操作の Grundy 数が素因数の個数（重複込み）になることを使って XOR で判定する
+    evidence: https://programming-hiroba.com/abc368-f/
+  - id: typical90_ae
+    difficulty: null
+    role: example
+    summary: 白石と青石の 2 種類がある山の Grundy 数を DP で表にして XOR を取る
+    evidence: https://github.com/E869120/kyopro_educational_90/blob/main/sol/031.cpp
+  - id: abc297_g
+    difficulty: 1834
+    role: practice
+    summary: L 個以上 R 個以下取れる Nim の Grundy 数 floor((x mod (L+R))/L) を見つける
+    evidence: https://kmjp.hatenablog.jp/entry/2023/04/19/1000
+  - id: abc206_f
+    difficulty: 2221
+    role: practice
+    summary: 区間を選ぶと重なる区間が使えなくなるゲームを、区間ごとの Grundy 数の区間 DP で解く
+    evidence: https://drken1215.hatenablog.com/entry/2021/06/19/224100
+  - id: abc278_g
+    difficulty: 2533
+    role: practice
+    summary: 連続するカードの列ごとの Grundy 数を求め、XOR を 0 にする手を毎回出力する（インタラクティブ）
+    evidence: https://kmjp.hatenablog.jp/entry/2022/11/24/0900
+- key: grundy-patterns
+  title: Grundy 数の規則を見つける
+  aliases:
+  - Grundy 数の周期性
+  - 実験で規則を見つける
+  level: 青
+  level_evidence: abc297_g (diff 1834)（青）、例外つきの abc255_g (diff 2734) は発展
+  prerequisites:
+  - grundy-number
+  - counting-experiment
+  acl: null
+  signs:
+  - 山の大きさが 10^18 などで Grundy 数を全部は計算できない
+  compare_with:
+  - counting-experiment
+  page: section-of:grundy-number
+  visual: null
+  problems:
+  - id: abc297_g
+    difficulty: 1834
+    role: example
+    summary: 小さい x の Grundy 数を並べて周期 L+R の規則を見つける
+    evidence: https://kmjp.hatenablog.jp/entry/2023/04/19/1000
+  - id: abc255_g
+    difficulty: 2734
+    role: practice
+    summary: 取れない手がある Nim の Grundy 数を、例外の局面だけ別に扱って圧縮して求める
+    evidence: https://kmjp.hatenablog.jp/entry/2022/06/12/0900
+- key: nim-variants
+  title: Nim の変種（上限つき・範囲つき・非対称）
+  aliases:
+  - 制限付き Nim
+  - Bachet のゲーム
+  - 階段 Nim
+  - Wythoff のゲーム
+  level: 青
+  level_evidence: 上限つきの arc168_b (diff 1289)（水）、非対称な arc143_c (diff 1805)（青）、範囲つきの abc297_g (diff 1834)（青）
+  prerequisites:
+  - nim
+  - grundy-number
+  acl: null
+  signs:
+  - 1 回に取れる個数に上限・範囲がある
+  - 先手と後手で取れる個数が違う
+  compare_with:
+  - grundy-number
+  - partizan-games
+  page: section-of:nim
+  visual: null
+  problems:
+  - id: arc168_b
+    difficulty: 1289
+    role: example
+    summary: 上限 k の Nim は各山を k+1 で割った余りの Nim と同じになる
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2023/1119_arc168#b_-_arbitrary_nim
+  - id: arc143_c
+    difficulty: 1805
+    role: example
+    summary: 先手は X 個、後手は Y 個ずつ取る非対称なゲームを、X+Y で割った余りと「相手の手を戻す」戦略で判定する
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0626_arc143#c_-_piles_of_pebbles
+  - id: abc297_g
+    difficulty: 1834
+    role: practice
+    summary: 範囲 [L,R] で取る Nim の Grundy 数を求める
+    evidence: https://kmjp.hatenablog.jp/entry/2023/04/19/1000
+- key: game-mirror-strategy
+  title: 真似戦略・対称戦略
+  aliases:
+  - 真似戦略
+  - 対称戦略
+  - ペアリング戦略
+  level: 青
+  level_evidence: arc143_c (diff 1805)・arc105_d (diff 1871) と青、agc014_d (diff 2266) は黄
+  prerequisites:
+  - game-basics
+  acl: null
+  signs:
+  - 盤面が対称
+  - 同じものが偶数個ずつある
+  - 後手が勝つことを示す
+  compare_with:
+  - grundy-number
+  - game-parity-invariant
+  page: own
+  visual: null
+  problems:
+  - id: arc105_d
+    difficulty: 1871
+    role: example
+    summary: 同じ枚数の袋が偶数個ずつあるとき後手が相手の手を真似できることを使って勝敗を決める
+    evidence: https://drken1215.hatenablog.com/entry/2020/10/14/120100
+  - id: arc143_c
+    difficulty: 1805
+    role: example
+    summary: 相手が崩した状態を後手が必ず元に戻せることを使って勝敗を決める
+    evidence: https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0626_arc143#c_-_piles_of_pebbles
+  - id: agc014_d
+    difficulty: 2266
+    role: practice
+    summary: 木に完全マッチングがあれば、後手が相手の塗った頂点の相方を塗り続けて勝てる
+    evidence: https://drken1215.hatenablog.com/entry/2019/05/30/021200
+- key: game-parity-invariant
+  title: 偶奇・不変量で決まるゲーム
+  aliases:
+  - 手数の偶奇
+  - 不変量
+  - パリティ
+  level: 青
+  level_evidence: abc398_e (diff 1238)（水）・agc033_c (diff 1758)・arc064_b (diff 1814)（青）
+  prerequisites:
+  - game-basics
+  - parity-invariant
+  acl: null
+  signs:
+  - 総手数が戦略によらず決まる
+  - 最終状態の形が決まっている
+  compare_with:
+  - game-mirror-strategy
+  page: section-of:game-basics
+  visual: null
+  problems:
+  - id: abc398_e
+    difficulty: 1238
+    role: example
+    summary: 最終的なグラフが完全二部グラフになることから、追加できる辺の総数の偶奇で手番を選ぶ
+    evidence: https://kmjp.hatenablog.jp/entry/2025/03/25/0930
+  - id: arc064_b
+    difficulty: 1814
+    role: practice
+    summary: 端以外を消すゲームの最終形が両端の文字で決まることから、手数の偶奇で勝敗を決める
+    evidence: https://drken1215.hatenablog.com/entry/2019/02/02/181600
+  - id: agc033_c
+    difficulty: 1758
+    role: practice
+    summary: 木のコイン取りの勝敗が直径の長さを 3 で割った余りで決まることを示す
+    evidence: https://drken1215.hatenablog.com/entry/2019/05/07/005700
+- key: misere-nim
+  title: 逆形 Nim（最後に取った方が負け）
+  aliases:
+  - 逆形
+  - misère Nim
+  level: 発展
+  level_evidence: ABC・ARC での出題は確認できなかった（cp-algorithms・OI Wiki で扱われる知識）
+  prerequisites:
+  - nim
+  acl: null
+  signs:
+  - 最後に取った人が負け
+  compare_with:
+  - nim
+  page: section-of:nim
+  visual: null
+  problems: []
+- key: partizan-games
+  title: 非不偏ゲーム（組合せゲーム理論）
+  aliases:
+  - 非不偏ゲーム
+  - 超現実数
+  - Hackenbush
+  level: 発展
+  level_evidence: abc229_h (diff 3308)・abc265_h (diff 3319) とも発展
+  prerequisites:
+  - grundy-number
+  acl: null
+  signs:
+  - 先手と後手で動かせる駒や手が違う
+  - 各部分の和で勝敗を判定したい
+  compare_with:
+  - grundy-number
+  - nim-variants
+  page: overview
+  visual: null
+  problems:
+  - id: abc229_h
+    difficulty: 3308
+    role: example
+    summary: 先手と後手で動きの違う駒のゲームを、局面に数（超現実数）を割り当てて和で判定する
+    evidence: https://kmjp.hatenablog.jp/entry/2021/12/01/0930
+  - id: abc265_h
+    difficulty: 3319
+    role: practice
+    summary: 向かい合う香車は Grundy 数、それ以外は手数の貯金として扱い、先手必勝の配置を数える
+    evidence: https://kmjp.hatenablog.jp/entry/2022/08/23/0930
+- key: interactive-games
+  title: インタラクティブ形式のゲーム（必勝戦略を実行する）
+  aliases:
+  - インタラクティブなゲーム
+  - 必勝戦略の構成
+  level: 水
+  level_evidence: 易しい abc244_c (diff 165)（灰）から、abc398_e (diff 1238)（水）・abc278_g (diff 2533)（発展）まで
+  prerequisites:
+  - game-basics
+  - interactive
+  acl: null
+  signs:
+  - ジャッジと対戦する
+  - 手番を選んで宣言する
+  compare_with:
+  - game-mirror-strategy
+  - grundy-number
+  page: section-of:game-basics
+  visual: null
+  problems:
+  - id: abc244_c
+    difficulty: 165
+    role: example
+    summary: 1〜2N+1 を交互に言うゲームで、まだ言われていない数を答え続ける
+    evidence: https://drken1215.hatenablog.com/entry/2025/02/08/111105
+  - id: abc398_e
+    difficulty: 1238
+    role: example
+    summary: 偶奇で手番を選び、二部グラフを保つ辺を毎回追加する
+    evidence: https://kmjp.hatenablog.jp/entry/2025/03/25/0930
+  - id: abc278_g
+    difficulty: 2533
+    role: practice
+    summary: Grundy 数の XOR を 0 にする手を毎回探して出力する
+    evidence: https://kmjp.hatenablog.jp/entry/2022/11/24/0900
+- key: nim-counting
+  title: ゲームの局面を数える
+  aliases:
+  - 必勝局面の数え上げ
+  level: 発展
+  level_evidence: abc212_h (diff 2741)（発展）
+  prerequisites:
+  - nim
+  - xor-convolution
+  acl: null
+  signs:
+  - 先手必勝になる初期配置の数
+  compare_with:
+  - nim
+  page: section-of:nim
+  visual: null
+  problems:
+  - id: abc212_h
+    difficulty: 2741
+    role: example
+    summary: 山の数と各山の石の数の候補から、XOR が 0 でない Nim の盤面の数をアダマール変換で数える
+    evidence: https://drken1215.hatenablog.com/entry/2021/08/01/025200

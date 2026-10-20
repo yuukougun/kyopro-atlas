@@ -1,0 +1,662 @@
+# 09 C++ の項目一覧（調査レポート 09-cpp.md の機械可読版）
+# level は「その書き方が解説コードで目に入り始める帯」の目安。環境・道具の項目は null。
+# signs は「解説コードでの見た目」または「症状」。コードの見た目から引く逆引きに使う。
+# problems は C++ 章では空にしている（レポート §5 を参照）。
+area: cpp
+topics:
+  # ===== A. 入口・環境 =====
+  - key: cpp-reading-guide
+    title: 解説コードの読み方（書き方からの逆引き）
+    aliases: [C++ 逆引き, モダン C++ の読み方, 解説コードが読めない]
+    level: 基礎
+    level_evidence: '要件定義書の例（for (const auto& [i, component] : scc.scc() | views::enumerate)）のように、解説コードは易しい問題から現代的な構文を含みうる。章の入口なので基礎に置く'
+    prerequisites: []
+    acl: null
+    signs: ['見慣れない記号やキーワードを含む1行', 'std::views / std::ranges / auto&& / [&] / this auto&& self などが並ぶ行']
+    compare_with: []
+    page: own
+    visual: '1行のコードを部品（const auto& / [i, component] / scc.scc() / | views::enumerate）に分け、部品ごとに該当ページへ矢印を引く分解図'
+    problems: []
+
+  - key: cpp-environment
+    title: AtCoder の C++ 環境と手元の環境
+    aliases: [コンパイラのオプション, GCC 15.2, 言語アップデート, gnu++23, 手元と結果が違う]
+    level: null
+    level_evidence: '環境の知識であり難易度帯に依存しない'
+    prerequisites: []
+    acl: null
+    signs: ['手元では動くのに AtCoder で WA・RE（またはその逆）', '解説コードが手元でコンパイルできない', '-ftrivial-auto-var-init=zero', '-std=gnu++23']
+    compare_with: [cpp-debug-build]
+    page: own
+    visual: 'AtCoder と手元のコンパイルオプションを左右に並べ、結果に差が出る行に印を付けた比較表'
+    problems: []
+
+  - key: cpp-version-matrix
+    title: C++ の版と GCC の対応（早見表）
+    aliases: [C++17, C++20, C++23, C++26, 対応表, GCC 13, GCC 14, GCC 15]
+    level: null
+    level_evidence: '環境の知識'
+    prerequisites: [cpp-environment]
+    acl: null
+    signs: ['error: ‘print’ was not declared in this scope', '‘to’ is not a member of ‘std::ranges’', 'expected identifier before ‘this’', '‘concat’ is not a member of ‘std::views’']
+    compare_with: []
+    page: section-of:cpp-environment
+    visual: '機能 × 処理系（g++-13 / AtCoder の GCC 15.2）の ○× 表。版ごとに色を分ける'
+    problems: []
+
+  - key: cpp-stack-depth
+    title: 再帰の深さとスタックサイズ
+    aliases: [スタックオーバーフロー, Segmentation fault, ulimit -s, 深い再帰]
+    level: 基礎
+    level_evidence: 'N ≤ 2×10^5 の木やグラフを再帰 DFS で回す問題は茶〜緑から多い。8 MiB のスタックで深さ 2×10^5 の再帰が落ちることを手元で確認した'
+    prerequisites: [cpp-environment]
+    acl: null
+    signs: ['手元で Segmentation fault、AtCoder では AC', 'N ≤ 2×10^5 の木を再帰 DFS', '一直線のグラフ（パス）でだけ落ちる']
+    compare_with: [cpp-recursive-lambda]
+    page: section-of:cpp-environment
+    visual: 'コールスタックが1段ずつ積み上がり、上限（8 MiB）を超えたところで落ちるアニメーション'
+    problems: []
+
+  - key: cpp-import-std
+    title: import std; とモジュール
+    aliases: [modules, -fmodules, std モジュール]
+    level: null
+    level_evidence: '環境の知識'
+    prerequisites: [cpp-environment]
+    acl: null
+    signs: ['import std;', 'import std.compat;', '‘INT_MAX’ was not declared（import std ではマクロが来ない）']
+    compare_with: [cpp-macros-template-file]
+    page: section-of:cpp-environment
+    visual: null
+    problems: []
+
+  # ===== B. 値・型・初期化 =====
+  - key: cpp-types-literals
+    title: 型とリテラル（long long・接尾辞・auto の推論・using 別名）
+    aliases: [long long, LL, ULL, 桁区切り, 2進リテラル, uz, auto, using ll, typedef, static_cast]
+    level: 基礎
+    level_evidence: 'どの帯の解説コードにも現れる基本の書き方'
+    prerequisites: []
+    acl: null
+    signs: ['1LL << 60', "1'000'000'007", '0b1010', '0uz', 'auto x = 0;', 'using ll = long long;', 'static_cast<long long>(x)']
+    compare_with: [cpp-integer-overflow, cpp-int128]
+    page: own
+    visual: '32/64/128 bit 整数と double が正確に表せる範囲を1本の数直線に並べた図'
+    problems: []
+
+  - key: cpp-int128
+    title: __int128（128bit 整数）
+    aliases: [int128, i128, u128, 128bit 整数]
+    level: 基礎
+    level_evidence: '推定：64bit を超える中間値（10^18 を超えうる積の判定など）は茶〜青の問題で散発的に現れ、特定の帯に集中しない。型の知識として基礎に置く'
+    prerequisites: [cpp-types-literals, cpp-integer-overflow]
+    acl: null
+    signs: ['__int128', '(__int128)a * b', 'using i128 = __int128;', '答えや中間値が 10^18 を超えうる']
+    compare_with: [cpp-integer-overflow]
+    page: own
+    visual: null
+    problems: []
+
+  - key: cpp-numeric-limits-inf
+    title: numeric_limits と INF の決め方
+    aliases: ['INF', 'LLONG_MAX', 'INT_MAX', 'numeric_limits', '0x3f3f3f3f']
+    level: 基礎
+    level_evidence: '最短路・DP の初期値として易しい問題から使う'
+    prerequisites: [cpp-types-literals]
+    acl: null
+    signs: ['numeric_limits<long long>::max()', 'const long long INF = 1LL << 60;', 'memset(d, 0x3f, sizeof d)', 'dist[u] + w が負になる']
+    compare_with: [cpp-integer-overflow]
+    page: section-of:cpp-types-literals
+    visual: 'INF の候補を数直線上に置き、INF + INF が型の上限を超えるかどうかを示す図'
+    problems: []
+
+  - key: cpp-initialization
+    title: 初期化の書き方（{}・多次元 vector・array・fill・memset・集成体）
+    aliases: [多次元配列, vector の初期化, 値初期化, memset, fill, 指示付き初期化, 集成体初期化]
+    level: 基礎
+    level_evidence: 'DP 表やグリッドを作る問題（灰〜茶）から現れる'
+    prerequisites: [cpp-types-literals]
+    acl: null
+    signs: ['vector<vector<long long>> dp(n + 1, vector<long long>(m + 1, -1));', 'array<int, 26> cnt{};', 'memset(a, -1, sizeof a)', 'Edge{.to = v, .cost = c}', 'es.emplace_back(to, cost);（集成体）']
+    compare_with: [cpp-ctad]
+    page: own
+    visual: '3次元 vector の入れ子を箱で描き、括弧と次元の対応を色分けした図'
+    problems: []
+
+  - key: cpp-ctad
+    title: クラステンプレートの実引数推論（CTAD）
+    aliases: [CTAD, 型を省略した vector, 推論ガイド]
+    level: 基礎
+    level_evidence: '現代的な解説コードで DP 表の宣言に使われる（例 vector dp(n, vector(m, 0LL))）'
+    prerequisites: [cpp-initialization]
+    acl: null
+    signs: ['vector dp(n, vector(m, 0LL));', 'pair p{1, 2};', 'priority_queue pq(greater<int>{}, vector<int>{});', 'vector w{v.begin(), v.end()}（落とし穴）']
+    compare_with: [cpp-initialization]
+    page: section-of:cpp-initialization
+    visual: '0LL → long long → vector<long long> → vector<vector<long long>> と、内側から型が決まっていく流れ'
+    problems: []
+
+  - key: cpp-references
+    title: 参照・コピー・ムーブ
+    aliases: ['参照渡し', 'const 参照', '値渡し', 'std::move', 'swap', 'ムーブ']
+    level: 基礎
+    level_evidence: 'DFS の引数やループ変数で、どの帯の解説コードにも現れる'
+    prerequisites: []
+    acl: null
+    signs: ['void dfs(int v, const vector<vector<int>>& g)', 'auto& row = g[i];', 'swap(dp, ndp);', 'std::move(v)']
+    compare_with: [cpp-range-for, cpp-dangling]
+    page: own
+    visual: '変数名と実体の箱を描き、コピー（箱が増える）・参照（矢印）・ムーブ（中身が移る）を並べた図'
+    problems: []
+
+  # ===== C. 構文 =====
+  - key: cpp-range-for
+    title: 範囲 for と auto／auto&／const auto&／auto&&
+    aliases: [range-based for, 範囲for文, 初期化式付き範囲 for]
+    level: 基礎
+    level_evidence: '灰の解説コードから現れる'
+    prerequisites: [cpp-references]
+    acl: null
+    signs: ['for (auto& x : a)', 'for (const auto& s : strs)', 'for (auto&& [u, v] : es)', 'for (int i = 0; auto x : v)', 'for (auto& b : vb)（vector<bool> でエラー）']
+    compare_with: [cpp-structured-bindings, cpp-references]
+    page: own
+    visual: '4通りの宣言を「コピーが起きるか」「元を書き換えられるか」の2軸の表に置いた図'
+    problems: []
+
+  - key: cpp-structured-bindings
+    title: 構造化束縛
+    aliases: ['structured binding', 'auto [a, b]', '分解宣言']
+    level: 基礎
+    level_evidence: '要件定義書の例を含め、pair や map を扱う易しい問題の解説から現れる'
+    prerequisites: [cpp-range-for]
+    acl: null
+    signs: ['auto [a, b] = p;', 'for (const auto& [key, value] : mp)', 'auto [it, ok] = st.insert(x);', 'const auto& [d, v] = pq.top();（落とし穴）']
+    compare_with: [cpp-optional-tuple, cpp-range-for]
+    page: own
+    visual: 'pair・tuple・構造体の箱から名前へ線を引き、auto（コピー）と auto&（参照）で線の種類を変えた図'
+    problems: []
+
+  - key: cpp-init-statements
+    title: if・switch・範囲 for の初期化式
+    aliases: [if with initializer, 初期化式付き if]
+    level: 基礎
+    level_evidence: 'map の検索結果を使う易しい問題の解説から現れる'
+    prerequisites: [cpp-structured-bindings]
+    acl: null
+    signs: ['if (auto it = mp.find(k); it != mp.end())', 'if (auto [it, ok] = st.insert(x); ok)', 'for (int i = 0; auto x : v)']
+    compare_with: []
+    page: section-of:cpp-idioms
+    visual: null
+    problems: []
+
+  - key: cpp-idioms
+    title: よく見る短い書き方（イディオム集）
+    aliases: [イディオム, 定型句, ワンライナー]
+    level: 基礎
+    level_evidence: '出力の整形や更新関数として灰〜茶の解説から現れる'
+    prerequisites: []
+    acl: null
+    signs: ['cout << a[i] << " \n"[i == n - 1];', 'return a < b && (a = b, true);', 'x & -x', 'prev = exchange(cur, nxt);', 'tie(a, b) = pair{b, a + b};', 'const int k = [&] { ... }();', "c - 'a'", 'cout << (ok ? "Yes" : "No")']
+    compare_with: [cpp-macros-template-file]
+    page: own
+    visual: null
+    problems: []
+
+  - key: cpp-lambda
+    title: ラムダ式（キャプチャ・auto 引数・即時実行）
+    aliases: [lambda, 無名関数, クロージャ, '[&]', '[=]', ジェネリックラムダ]
+    level: 基礎
+    level_evidence: 'ソートの比較関数・二分探索の判定関数として茶の解説から現れる'
+    prerequisites: [cpp-references]
+    acl: null
+    signs: ['[&](int x) { ... }', 'auto f = [](auto a, auto b) { return a + b; };', '[x = std::move(v)] { ... }', '[]() mutable { ... }', '[&] { ... }()', 'set<int, decltype(cmp)> s;']
+    compare_with: [cpp-recursive-lambda, cpp-templates-constexpr]
+    page: own
+    visual: '外側の変数とクロージャの箱を描き、[&]（矢印でつながる）と [=]（作った時点の値を箱にコピー）を比べる図'
+    problems: []
+
+  - key: cpp-recursive-lambda
+    title: 再帰ラムダ（std::function・auto&& self・deducing this）
+    aliases: ['再帰ラムダ', 'Y コンビネータ', '不動点コンビネータ', 'this auto&& self', 'deducing this', 'FixPoint']
+    level: 基礎
+    level_evidence: 'DFS・メモ化再帰を使う茶〜緑の木・グラフ問題の解説から現れる'
+    prerequisites: [cpp-lambda]
+    acl: null
+    signs: ['function<void(int, int)> dfs = [&](int v, int p) { ... };', 'auto dfs = [&](auto&& self, int v) -> void { ... }; dfs(dfs, 0);', 'auto dfs = [&](this auto&& self, int v) -> void { ... }; dfs(0);', 'MFP([&](auto rec, int v) -> void { ... })']
+    compare_with: [cpp-lambda, cpp-stack-depth]
+    page: own
+    visual: '3つの書き方を並べ、呼び出しの経路（std::function は型消去を通る間接呼び出し、self は直接呼び出し）を矢印で示す図'
+    problems: []
+
+  - key: cpp-templates-constexpr
+    title: 関数テンプレート・auto 引数・コンセプト・constexpr・属性
+    aliases: [template, テンプレート関数, concepts, requires, constexpr, static_assert, if constexpr, '[[maybe_unused]]']
+    level: 基礎
+    level_evidence: 'chmin などの補助関数や定数の宣言として灰の解説から現れる'
+    prerequisites: []
+    acl: null
+    signs: ['template <class T> T power(T a, long long n)', 'auto sq(auto x)', 'template <integral T>', 'constexpr int MOD = 998244353;', 'constexpr auto table = [] { ... }();', 'static_assert(...)', '[[maybe_unused]]']
+    compare_with: [cpp-macros-template-file]
+    page: own
+    visual: null
+    problems: []
+
+  - key: cpp-macros-template-file
+    title: マクロと「テンプレート（雛形）」
+    aliases: [rep マクロ, all マクロ, '#define int long long', chmin, chmax, 雛形, テンプレート, '#ifdef LOCAL', '#pragma GCC']
+    level: 基礎
+    level_evidence: 'ライブラリ製作者の雛形（maspy・Nyaan・ei1333）に共通して現れ、解説コードにも混じる'
+    prerequisites: [cpp-templates-constexpr]
+    acl: null
+    signs: ['#define rep(i, n) for (int i = 0; i < (int)(n); i++)', 'sort(all(v));', '#define int long long と signed main()', 'chmin(dp[i], dp[j] + c);', 'vvc<int> g(n);', '#ifdef LOCAL', '#pragma GCC optimize("O3,unroll-loops")']
+    compare_with: [cpp-templates-constexpr, cpp-idioms]
+    page: own
+    visual: null
+    problems: []
+
+  - key: cpp-namespaces
+    title: 名前空間と名前の衝突
+    aliases: ['using namespace std', 'std::', 'atcoder::', 'y1', 'count が曖昧']
+    level: 基礎
+    level_evidence: 'std:: を付ける流儀の解説コードはどの帯にもある'
+    prerequisites: []
+    acl: null
+    signs: ['std::ranges::sort(a);', 'using namespace atcoder;', 'error: reference to ‘count’ is ambiguous', 'int y1; でコンパイルエラー']
+    compare_with: []
+    page: section-of:cpp-macros-template-file
+    visual: null
+    problems: []
+
+  - key: cpp-struct-operators
+    title: 構造体と演算子（operator<・<=>・==・コンストラクタ・explicit）
+    aliases: [struct, 演算子オーバーロード, 三方比較演算子, 宇宙船演算子, '<=>', '= default']
+    level: 基礎
+    level_evidence: '複数の値を持つ要素をソートする茶の問題の解説から現れる'
+    prerequisites: [cpp-initialization]
+    acl: null
+    signs: ['auto operator<=>(const P&) const = default;', 'bool operator<(const Seg& o) const { return r < o.r; }', 'struct E { int to; long long cost = 0; };', 'explicit']
+    compare_with: [cpp-comparators, cpp-optional-tuple]
+    page: own
+    visual: null
+    problems: []
+
+  # ===== D. 標準ライブラリ =====
+  - key: cpp-algorithms-classic
+    title: 従来のアルゴリズム関数の定型（sort・unique・lower_bound・accumulate など）
+    aliases: [sort, unique, lower_bound, upper_bound, accumulate, partial_sum, iota, next_permutation, max_element]
+    level: 基礎
+    level_evidence: '灰〜茶の解説から現れる'
+    prerequisites: [cpp-iterators]
+    acl: null
+    signs: ['sort(v.begin(), v.end());', 'v.erase(unique(v.begin(), v.end()), v.end());', 'lower_bound(v.begin(), v.end(), x) - v.begin()', 'accumulate(a.begin(), a.end(), 0LL)', 'iota(p.begin(), p.end(), 0);', 'do { ... } while (next_permutation(p.begin(), p.end()));', 'max({a, b, c})']
+    compare_with: [cpp-ranges-algorithms]
+    page: own
+    visual: 'unique が重複を詰めて新しい終端を返し、erase で後ろを消す様子のステップ送り'
+    problems: []
+
+  - key: cpp-ranges-algorithms
+    title: ranges アルゴリズムと射影
+    aliases: ['ranges::sort', '射影', 'projection', 'ranges::max', 'ranges::unique', 'ranges::fold_left', 'ranges::contains']
+    level: 基礎
+    level_evidence: '現代的な解説コードではソート・最大値の取得に灰の問題から使われる'
+    prerequisites: [cpp-algorithms-classic, cpp-lambda]
+    acl: null
+    signs: ['ranges::sort(v);', 'ranges::sort(ps, {}, &P::score);', 'ranges::sort(v, greater{});', 'v.erase(ranges::unique(v).begin(), v.end());', 'ranges::max(v, {}, &pair<int, int>::second)', 'ranges::count_if(v, pred)', 'ranges::fold_left(v, 0LL, plus{})']
+    compare_with: [cpp-algorithms-classic, cpp-views-basics]
+    page: own
+    visual: '射影の図：要素の箱からキー（score）だけを取り出して比べ、要素ごと並べ替える様子'
+    problems: []
+
+  - key: cpp-views-basics
+    title: views の基本（遅延評価とパイプ）
+    aliases: ['views', 'ビュー', 'Range アダプタ', 'パイプ', 'views::iota', 'views::reverse', 'views::filter', 'views::transform', 'views::split']
+    level: 基礎
+    level_evidence: '現代的な解説コードでは灰の問題からループに使われる（要件定義書の例）'
+    prerequisites: [cpp-range-for, cpp-lambda]
+    acl: null
+    signs: ['for (int i : views::iota(0, n))', 'for (int x : a | views::reverse)', 'v | views::filter(pred) | views::transform(f)', 'views::keys(mp)', "s | views::split(' ')", 'vv | views::join']
+    compare_with: [cpp-ranges-algorithms, cpp-views-cpp23]
+    page: own
+    visual: 'パイプを流れる要素を1個ずつ取り出すステップ送り（要素が必要になって初めて計算される様子と、transform が2回呼ばれる場合）'
+    problems: []
+
+  - key: cpp-views-cpp23
+    title: C++23 の views（enumerate・zip・adjacent・chunk_by など）
+    aliases: ['views::enumerate', 'views::zip', 'views::pairwise', 'views::adjacent', 'views::chunk', 'views::slide', 'views::chunk_by', 'views::stride', 'views::cartesian_product', 'views::repeat', 'views::join_with']
+    level: 基礎
+    level_evidence: '要件定義書の例（scc.scc() | views::enumerate）。GCC 13 以降のジャッジで使える書き方で、書き手の流儀によってどの帯にも現れる'
+    prerequisites: [cpp-views-basics, cpp-structured-bindings]
+    acl: null
+    signs: ['for (const auto& [i, comp] : scc.scc() | views::enumerate)', 'for (auto [a, b] : views::zip(A, B))', 'for (auto [x, y] : a | views::pairwise)', 's | views::chunk_by(equal_to{})', 'views::cartesian_product(views::iota(0, h), views::iota(0, w))', 'a | views::stride(k)']
+    compare_with: [cpp-views-basics, cpp-range-for]
+    page: own
+    visual: '同じ配列に chunk・slide・chunk_by・stride・adjacent をかけた結果を色付きの区切りで並べる「views 図鑑」'
+    problems: []
+
+  - key: cpp-ranges-to
+    title: ranges::to とコンテナへの変換
+    aliases: ['ranges::to', 'to<vector>', 'from_range', 'insert_range', 'append_range']
+    level: 基礎
+    level_evidence: 'views の結果をコンテナにする書き方として views と同時に現れる'
+    prerequisites: [cpp-views-cpp23]
+    acl: null
+    signs: ['| ranges::to<vector>()', '| ranges::to<set>()', 'vector v(from_range, r);', 'st.insert_range(v);']
+    compare_with: []
+    page: section-of:cpp-views-cpp23
+    visual: null
+    problems: []
+
+  - key: cpp-container-idioms
+    title: コンテナ操作の定型（erase_if・contains・emplace・map[]・multiset の削除）
+    aliases: ['erase_if', 'contains', 'emplace_back', 'try_emplace', 'multiset の1個だけ削除', 'map の operator[]']
+    level: 基礎
+    level_evidence: 'set・map を使う茶〜緑の問題の解説から現れる'
+    prerequisites: [cpp-iterators]
+    acl: null
+    signs: ['erase_if(v, pred);', 'if (st.contains(x))', 'ms.erase(ms.find(x));', 'mp[key]++;', 'auto it = st.lower_bound(x);', 'g[u].emplace_back(v, w);']
+    compare_with: [cpp-iterators]
+    page: own
+    visual: null
+    problems: []
+
+  - key: cpp-iterators
+    title: イテレータ（begin・end・prev・next・distance・無効化）
+    aliases: [iterator, prev, next, rbegin, 'it - v.begin()', イテレータの無効化]
+    level: 基礎
+    level_evidence: 'lower_bound や set を使う茶の解説から現れる'
+    prerequisites: []
+    acl: null
+    signs: ['*prev(st.end())', '*st.rbegin()', 'it - v.begin()', 'next(it)', 'it = st.erase(it);']
+    compare_with: [cpp-container-idioms]
+    page: section-of:cpp-container-idioms
+    visual: '配列と set の上でイテレータが指す位置を描き、end() が最後の要素の次を指すことを示す図'
+    problems: []
+
+  - key: cpp-comparators
+    title: 比較関数と順序（greater・priority_queue・set の比較関数）
+    aliases: [比較関数, comparator, 'greater<>', priority_queue の向き, 厳密弱順序, strict weak ordering]
+    level: 基礎
+    level_evidence: 'ダイクストラ（緑）やソートの比較関数で現れる'
+    prerequisites: [cpp-lambda, cpp-struct-operators]
+    acl: null
+    signs: ['priority_queue<T, vector<T>, greater<T>> pq;', 'sort(v.begin(), v.end(), [](auto& a, auto& b) { return a.second < b.second; });', 'set<int, greater<>> s;', 'priority_queue<int, vector<int>, decltype(cmp)> pq;', 'sort の比較関数に <= を書いて RE']
+    compare_with: [cpp-struct-operators, cpp-ranges-algorithms]
+    page: own
+    visual: '比較関数と取り出される順の対応表（sort・set は true を返す側が前、priority_queue は逆に最後尾が top）'
+    problems: []
+
+  - key: cpp-optional-tuple
+    title: pair・tuple・tie・optional
+    aliases: [pair, tuple, tie, make_tuple, 'get<0>', optional, nullopt, value_or, apply]
+    level: 基礎
+    level_evidence: '複数の値を返す関数や辞書順比較で茶の解説から現れる'
+    prerequisites: [cpp-structured-bindings]
+    acl: null
+    signs: ['get<0>(t)', 'tie(a, b) = make_pair(c, d);', 'tie(x1, y1) < tie(x2, y2)', 'optional<int> res = nullopt;', 'if (auto r = solve()) cout << *r;', 'res.value_or(-1)']
+    compare_with: [cpp-structured-bindings, cpp-struct-operators]
+    page: own
+    visual: null
+    problems: []
+
+  - key: cpp-bit-functions
+    title: ビット操作の関数（std::popcount など・GCC の組み込み関数）
+    aliases: [popcount, countr_zero, countl_zero, bit_width, bit_ceil, bit_floor, has_single_bit, __builtin_popcount, __builtin_ctz, __lg]
+    level: 基礎
+    level_evidence: 'bit 全探索（茶）の解説から現れる'
+    prerequisites: [cpp-types-literals]
+    acl: null
+    signs: ['popcount((unsigned)s)', '__builtin_popcountll(s)', 'countr_zero(x)', 'bit_width(x) - 1', '__lg(x)', 'bit_ceil(n)', 'error: no matching function for call to ‘popcount(int&)’']
+    compare_with: [bit-operations]
+    page: own
+    visual: '2進表記の上で popcount・countr_zero・countl_zero・bit_width が数えている部分を色分けした図'
+    problems: []
+
+  - key: cpp-bitset
+    title: std::bitset
+    aliases: [bitset, ビットセット, _Find_first]
+    level: null
+    level_evidence: '使い方の知識。bitset による高速化の手法としての帯は 08 担当の判断に従う'
+    prerequisites: [cpp-bit-functions]
+    acl: null
+    signs: ['bitset<2001> dp; dp |= dp << w;', 'b.count()', 'b._Find_first()', 'bitset<N> の N に変数を書いてエラー']
+    compare_with: [cpp-bit-functions, bitset-speedup]
+    page: section-of:cpp-bit-functions
+    visual: null
+    problems: []
+
+  - key: cpp-math-functions
+    title: 数の関数（gcd・lcm・abs・midpoint・pow・sqrt・負の割り算）
+    aliases: ['gcd', 'lcm', '__gcd', 'midpoint', 'clamp', '切り上げ', '負の剰余', 'numbers::pi', 'M_PI']
+    level: 基礎
+    level_evidence: '灰〜茶の数学寄りの問題の解説から現れる'
+    prerequisites: [cpp-types-literals]
+    acl: null
+    signs: ['gcd(a, b)', 'lcm(a, b)', '(a + b - 1) / b', '((x % m) + m) % m', '(long long)sqrtl(n)', 'numbers::pi', '__builtin_mul_overflow(a, b, &c)']
+    compare_with: [cpp-floating-point, cpp-integer-overflow]
+    page: own
+    visual: '数直線上で、0 方向への切り捨て（C++ の /）と負の無限大方向への切り捨て（floor）の違いを示す図'
+    problems: []
+
+  - key: cpp-string-api
+    title: 文字列の操作（substr・find・+=・string_view・変換）
+    aliases: [string, substr, find, npos, to_string, stoll, starts_with, string_view]
+    level: 基礎
+    level_evidence: '文字列を扱う灰の問題の解説から現れる'
+    prerequisites: []
+    acl: null
+    signs: ['s.substr(i, len)', 's.find(t) != string::npos', "c - '0'", 's += c;', 'to_string(x)', 'stoll(s)', 's.starts_with("ab")']
+    compare_with: []
+    page: own
+    visual: null
+    problems: []
+
+  - key: cpp-io
+    title: 入出力（高速化・print/format・小数の桁・flush）
+    aliases: [cin.tie, sync_with_stdio, endl, println, format, printf, setprecision, インタラクティブ, flush]
+    level: 基礎
+    level_evidence: '全問で使う。入力が 10^5〜10^6 個の問題（茶〜）で速さの差が出る'
+    prerequisites: []
+    acl: null
+    signs: ['ios::sync_with_stdio(false); cin.tie(nullptr);', "cout << ans << '\\n';", 'println("{}", ans);', 'cout << fixed << setprecision(15) << x;', 'printf("%.10f\n", x);', 'cout << endl;（毎回フラッシュ）']
+    compare_with: [cpp-performance]
+    page: own
+    visual: '出力バッファに溜まって一度に書き出される様子と、endl で毎回書き出される様子を比べるアニメーション'
+    problems: []
+
+  - key: cpp-random-chrono
+    title: 乱数と時間計測
+    aliases: [mt19937, mt19937_64, random_device, uniform_int_distribution, shuffle, chrono]
+    level: null
+    level_evidence: '乱択やハッシュの手法としての帯は 08 担当の判断に従う'
+    prerequisites: []
+    acl: null
+    signs: ['mt19937_64 rng(random_device{}());', 'uniform_int_distribution<int>(0, n - 1)(rng)', 'shuffle(v.begin(), v.end(), rng);', 'chrono::steady_clock::now()']
+    compare_with: []
+    page: own
+    visual: null
+    problems: []
+
+  # ===== E. ACL =====
+  - key: acl-reading
+    title: ACL の読み方（共通の約束）
+    aliases: ['AtCoder Library', 'ACL', 'atcoder/all', 'using namespace atcoder']
+    level: 基礎
+    level_evidence: 'dsu・modint を使う茶〜緑の問題の解説から現れる'
+    prerequisites: [cpp-templates-constexpr]
+    acl: 'atcoder（全体）'
+    signs: ['#include <atcoder/all>', 'using namespace atcoder;', 'dsu uf(n);', 'scc_graph g(n);', 'fenwick_tree<long long> fw(n);', 'conversion from ‘int’ to non-scalar type ‘atcoder::dsu’ requested']
+    compare_with: []
+    page: own
+    visual: null
+    problems: []
+
+  - key: acl-modint
+    title: ACL の modint の使い方
+    aliases: [modint, mint, modint998244353, modint1000000007, static_modint, 'val()']
+    level: 基礎
+    level_evidence: '答えを 998244353 で割った余りで求める数え上げ DP（茶〜緑）の解説から現れる'
+    prerequisites: [acl-reading, mod-arithmetic]
+    acl: 'atcoder::modint998244353 / atcoder::modint1000000007 / atcoder::static_modint / atcoder::modint（法を実行時に決める）'
+    signs: ['using mint = modint998244353;', 'vector<mint> dp(n + 1);', 'cout << dp[n].val() << endl;', 'mint(2).pow(n)', 'x.inv()', 'mint::mod()']
+    compare_with: [mod-arithmetic]
+    page: own
+    visual: null
+    problems: []
+
+  - key: acl-segtree-template
+    title: segtree・lazy_segtree のテンプレート引数
+    aliases: ['segtree<S, op, e>', lazy_segtree, モノイド, max_right, min_left, ラムダをテンプレート引数に]
+    level: 水
+    level_evidence: 'セグメント木を使う問題が水から増える（根拠の問題は 05 担当を参照）。遅延セグ木の引数（7個）は青'
+    prerequisites: [acl-reading, cpp-lambda, segment-tree]
+    acl: 'atcoder::segtree / atcoder::lazy_segtree'
+    signs: ['segtree<int, op, e> seg(n);', 'segtree<int, [](int a, int b) { return max(a, b); }, [] { return 0; }> seg(a);', 'lazy_segtree<S, op, e, F, mapping, composition, id> seg(v);', 'seg.max_right(l, [&](S x) { return x < k; })']
+    compare_with: [segment-tree, lazy-segment-tree]
+    page: own
+    visual: 'テンプレート引数（S・op・e・F・mapping・composition・id）が、モノイドと作用のどの部分に当たるかを線で結ぶ図'
+    problems: []
+
+  - key: acl-other-components
+    title: ACL のその他の部品の呼び出し方（dsu・fenwick_tree・scc_graph など）
+    aliases: [dsu, fenwick_tree, scc_graph, two_sat, mf_graph, mcf_graph, convolution, suffix_array, z_algorithm, floor_sum, crt]
+    level: null
+    level_evidence: '帯は各手法の担当（03・05・06・08）の判断に従う'
+    prerequisites: [acl-reading]
+    acl: 'atcoder::dsu / fenwick_tree / scc_graph / two_sat / mf_graph / mcf_graph / convolution / suffix_array / lcp_array / z_algorithm / floor_sum / crt / inv_mod / pow_mod'
+    signs: ['d.merge(a, b); d.same(a, b);', 'auto groups = d.groups();', 'fw.sum(l, r)', 'for (const auto& [i, comp] : g.scc() | views::enumerate)']
+    compare_with: []
+    page: section-of:acl-reading
+    visual: null
+    problems: []
+
+  # ===== F. 落とし穴 =====
+  - key: cpp-integer-overflow
+    title: 整数オーバーフローと型の落とし穴
+    aliases: ['オーバーフロー', 'int の掛け算', '1 << 40', 'accumulate の初期値', 'size() の符号なし', 'min の型不一致']
+    level: 基礎
+    level_evidence: '答えが 2^31 を超える灰〜茶の問題から起きる'
+    prerequisites: [cpp-types-literals]
+    acl: null
+    signs: ['long long x = a * b;（a, b が int）', '1 << k（k ≥ 31）', 'accumulate(a.begin(), a.end(), 0)', 'v.size() - 1', 'min(1, x)（x が long long でコンパイルエラー）', 'views::iota(0, n)（n が long long でも i は int）']
+    compare_with: [cpp-int128, cpp-undefined-behavior]
+    page: own
+    visual: '32bit 整数を時計の文字盤のような円で描き、最大値を超えると負の側へ回り込む様子のアニメーション'
+    problems: []
+
+  - key: cpp-undefined-behavior
+    title: 未定義動作とその見つけ方
+    aliases: [UB, 未定義動作, 範囲外アクセス, 最適化で結果が変わる]
+    level: 基礎
+    level_evidence: '帯に依存しない。答えが合わない原因として灰から起きる'
+    prerequisites: [cpp-integer-overflow]
+    acl: null
+    signs: ['-O2 と -O0 で結果が違う', '手元と AtCoder で結果が違う', '関係のない行を足すと答えが変わる', 'sort の比較関数に <=']
+    compare_with: [cpp-debug-build, cpp-dangling]
+    page: own
+    visual: null
+    problems: []
+
+  - key: cpp-dangling
+    title: ダングリング（消えたものを指す参照）
+    aliases: [ダングリング参照, 参照の無効化, use-after-free, pq.top() の参照, 一時オブジェクトの寿命]
+    level: 基礎
+    level_evidence: 'ダイクストラ（緑）や vector の追加をしながらの参照で起きる'
+    prerequisites: [cpp-references, cpp-range-for]
+    acl: null
+    signs: ['const auto& [d, v] = pq.top(); pq.pop();', 'auto& x = v[0]; v.push_back(y);', 'for (int v : uf.groups()[0])（GCC 15 の C++23 より前）', 'string_view sv = f();']
+    compare_with: [cpp-references, cpp-undefined-behavior]
+    page: own
+    visual: 'vector の再確保で要素が新しい領域へ移り、古い領域を指す参照が取り残されるステップ送り。priority_queue の pop で先頭の場所に別の要素が入る様子'
+    problems: []
+
+  - key: cpp-uninitialized-variables
+    title: 未初期化変数と -ftrivial-auto-var-init=zero
+    aliases: [未初期化, 初期化忘れ, ゴミの値, ゼロ初期化]
+    level: 基礎
+    level_evidence: '帯に依存しない'
+    prerequisites: [cpp-environment]
+    acl: null
+    signs: ['long long sum; for (...) sum += x;', 'int cnt[26];（関数内）', 'AtCoder では AC、手元では答えがおかしい']
+    compare_with: [cpp-initialization]
+    page: section-of:cpp-undefined-behavior
+    visual: '同じ関数のスタック領域を左右に描き、左（手元）はゴミの値、右（AtCoder）はゼロで埋まっている図'
+    problems: []
+
+  - key: cpp-performance
+    title: 定数倍と TLE の原因（C++ 側）
+    aliases: ['定数倍', 'TLE', '遅い', 'endl が遅い', 'std::function が遅い', '文字列の連結が遅い']
+    level: 基礎
+    level_evidence: 'N や入出力が 10^5〜10^6 の問題（茶〜）で差が出る'
+    prerequisites: [cpp-io]
+    acl: null
+    signs: ['10^6 回の cout << x << endl;', 'lower_bound(st.begin(), st.end(), x)（set に）', 's = s + c;', 'void f(vector<int> v)（値渡しの再帰）', 'function<...> で深い再帰']
+    compare_with: [cpp-io, cpp-recursive-lambda]
+    page: own
+    visual: null
+    problems: []
+
+  - key: cpp-floating-point
+    title: 浮動小数点数の扱い（型・出力の桁・誤差）
+    aliases: [double, long double, 誤差, setprecision, 1e18 は double, sqrt の誤差]
+    level: 基礎
+    level_evidence: '小数の入出力がある灰〜茶の問題から起きる'
+    prerequisites: [cpp-types-literals]
+    acl: null
+    signs: ['cout << ans;（6桁しか出ない）', 'auto INF = 1e18;', '(long long)sqrt(n)', 'pow(10, 9)', '入力に小数が含まれる']
+    compare_with: [cpp-math-functions, geometry-precision]
+    page: own
+    visual: 'double の 53bit の仮数部を描き、2^53 を超えると隣り合う表せる値の間隔が 2 以上になる様子'
+    problems: []
+
+  - key: cpp-debug-build
+    title: デバッグ用のコンパイルオプションと道具
+    aliases: [_GLIBCXX_DEBUG, _GLIBCXX_ASSERTIONS, -fsanitize, AddressSanitizer, UndefinedBehaviorSanitizer, -Wall]
+    level: null
+    level_evidence: '道具の知識'
+    prerequisites: [cpp-environment]
+    acl: null
+    signs: ['原因の分からない WA・RE', '配列外参照の疑い', '手元だけのデバッグ出力']
+    compare_with: [cpp-environment, cpp-undefined-behavior]
+    page: own
+    visual: null
+    problems: []
+
+  - key: cpp-compile-errors
+    title: コンパイルエラーの読み方
+    aliases: [エラーメッセージ, no matching function, required from here, static assertion failed]
+    level: 基礎
+    level_evidence: '解説コードを写して動かすときにどの帯でも起きる'
+    prerequisites: []
+    acl: null
+    signs: ['no matching function for call to', 'use of deleted function', 'is not a member of ‘std::ranges’', 'static assertion failed', 'cannot bind non-const lvalue reference']
+    compare_with: []
+    page: section-of:cpp-debug-build
+    visual: null
+    problems: []
+
+  # ===== G. 横断（自作ライブラリ） =====
+  - key: self-library
+    title: 自作ライブラリの設計と動作確認（C++ の観点）
+    aliases: [自作ライブラリ, ライブラリ整備, Library Checker, oj-verify, competitive-verifier]
+    level: null
+    level_evidence: '横断ページ'
+    prerequisites: [cpp-templates-constexpr, acl-reading]
+    acl: null
+    signs: ['#pragma once', '#include "mylib/xxx.hpp"', '// @impl']
+    compare_with: []
+    page: own
+    visual: null
+    problems: []
+
+  - key: library-bundling
+    title: ライブラリのバンドル（展開）の仕組み
+    aliases: [バンドル, 展開, expander.py, oj-bundle, 提出用にコピー, combined.cpp]
+    level: null
+    level_evidence: '横断ページの節'
+    prerequisites: [self-library]
+    acl: 'ACL の expander.py（他のジャッジへ提出するとき）'
+    signs: ['#include "..." を含むコードを提出したらコンパイルエラー', 'combined.cpp', '// ===== begin: xxx.hpp =====']
+    compare_with: []
+    page: section-of:self-library
+    visual: 'main.cpp と複数のヘッダから1ファイルができる流れ図（@impl より上は include の位置へ、下は main の後ろへ）'
+    problems: []

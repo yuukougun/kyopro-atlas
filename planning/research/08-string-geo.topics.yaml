@@ -1,0 +1,1733 @@
+area: string-geo
+# 08 文字列・幾何・その他の項目一覧。詳細は 08-string-geo.md を参照。
+# - 問題IDと difficulty は tools/ap.py（2026-10-21 のキャッシュ）で確認済み
+# - evidence は内容の裏付けに使った第三者の解説（atcoder.jp は開いていない）
+#   「（検索結果で確認）」は検索結果の要約だけで確認したもの
+# - 05（データ構造）と重なる項目は 05 と同じ key を使った（binary-trie, hashing-for-sets）
+topics:
+  # ==================================================================
+  # 文字列：基本
+  # ==================================================================
+  - key: string-basics
+    title: 文字列の基本操作と辞書順
+    aliases: [辞書順, 部分文字列と部分列, 文字列の比較, 文字の対応, アナグラム]
+    level: 基礎
+    level_evidence: "abc110_c (diff 949) 文字の置換の一貫性、abc042_b (616) 辞書順最小の連結、abc286_c (565) 回転と回文。ABC の A〜D で常連"
+    prerequisites: [sorting]
+    acl: null
+    signs: ["辞書順で最小・最大", "部分文字列（連続）か部分列（連続でなくてよい）か", "文字を一斉に別の文字へ置き換える操作", "先頭を末尾に移す（回転）"]
+    compare_with: [lexicographic-greedy, cyclic-shift]
+    page: own
+    visual: "2つの文字列を先頭から1文字ずつ照合し、最初に異なる位置で大小が決まる様子のステップ送り。接頭辞が小さいことを空文字との比較で示す"
+    problems:
+      - id: abc042_b
+        difficulty: 616
+        role: example
+        summary: "同じ長さの文字列を全部つないだ結果を辞書順最小にする（ソートして連結。長さが違うと a+b<b+a の比較が必要）"
+        evidence: "https://drken1215.hatenablog.com/entry/2024/08/04/012109"
+      - id: abc286_c
+        difficulty: 565
+        role: practice
+        summary: "回転（コスト A）と書き換え（コスト B）で回文にする最小コスト。回転回数を全探索"
+        evidence: "https://drken1215.hatenablog.com/entry/2023/01/29/201129"
+      - id: abc076_c
+        difficulty: 846
+        role: practice
+        summary: "? を埋めて T を含む辞書順最小の文字列を作る。T を置く位置を全部試し残りの ? は a"
+        evidence: "https://drken1215.hatenablog.com/entry/2025/01/22/125627"
+      - id: abc110_c
+        difficulty: 949
+        role: example
+        summary: "文字の一斉置換を繰り返して S を T にできるか。文字の対応が両方向に一意（全単射）かを調べる"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2018/0923_abc110"
+
+  - key: lexicographic-greedy
+    title: 辞書順最小の構築と辞書順 K 番目
+    aliases: [辞書順最小, 辞書順 K 番目, 先頭から貪欲に決める, 連結順のソート]
+    level: 基礎
+    level_evidence: "abc202_d (966)、arc097_a (1108) は基礎帯。実現可能性の判定が重いもの（abc009_3 参考値 1915、abc225_f 2612）は青以上"
+    prerequisites: [string-basics, binomial-coefficient]
+    acl: null
+    signs: ["辞書順最小のものを出力", "辞書順で K 番目", "条件を満たすもののうち辞書順最小（なければ -1）", "文字列を並べて連結した結果を最小に"]
+    compare_with: [subsequence-matching, string-basics]
+    page: own
+    visual: "先頭の文字を a から順に仮置きし、残りで条件を満たせるかを判定して確定していくステップ送り。K 番目では各候補の個数を棒で示す"
+    problems:
+      - id: abc202_d
+        difficulty: 966
+        role: example
+        summary: "a が A 個・b が B 個の文字列の辞書順 K 番目。先頭を a にしたときの個数（二項係数）と K を比べて1文字ずつ決める"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0522_abc202"
+      - id: arc097_a
+        difficulty: 1108
+        role: practice
+        summary: "異なる部分文字列の辞書順 K 番目（K≤5）。長さ K 以下の部分文字列だけ列挙すれば十分と気づく"
+        evidence: "https://drken1215.hatenablog.com/entry/2018/06/06/174000"
+      - id: typical90_f
+        difficulty: null
+        role: example
+        summary: "長さ K の部分列の辞書順最小。先頭から『残りで K 文字取れる範囲の最小の文字』を次の出現位置の表で選ぶ"
+        evidence: "https://drken1215.hatenablog.com/entry/2021/10/10/195200"
+      - id: abc009_3
+        difficulty: 1915
+        role: practice
+        summary: "並べ替えで元と異なる位置が K 個以下の辞書順最小。各位置で小さい文字から試し、残りで実現できるかを数で判定"
+        evidence: "https://drken1215.hatenablog.com/entry/2023/05/06/013800"
+      - id: abc225_f
+        difficulty: 2612
+        role: practice
+        summary: "K 個選んで連結した辞書順最小。a+b<b+a で並べた後に後ろから DP（単純な貪欲は誤り）"
+        evidence: "https://merom686.hatenablog.com/entry/2021/10/30/235859"
+
+  - key: run-length-encoding
+    title: ランレングス圧縮（連続する同じ文字の塊）
+    aliases: [RLE, 連長圧縮, 塊ごとに考える]
+    level: 基礎
+    level_evidence: "abc136_d (794)、abc140_d (1074)、abc124_d (1138) が基礎帯。abc421_d (1321) で水。道具として abc452_g (2255) でも使う"
+    prerequisites: [two-pointers]
+    acl: null
+    signs: ["同じ文字が連続する部分", "区間を反転して連続する 1 を最長に", "塊の個数が操作で何個減るか", "ランレングスで与えられる入力"]
+    compare_with: [two-pointers]
+    page: own
+    visual: "文字列を (文字, 長さ) の帯に変換する図。反転で塊が併合される様子のステップ送り"
+    problems:
+      - id: abc380_c
+        difficulty: 223
+        role: example
+        summary: "0/1 の列で K 番目の 1 の塊を K−1 番目の直後へ移す。塊の列として扱う"
+        evidence: "https://drken1215.hatenablog.com/entry/2024/11/17/012903"
+      - id: abc136_d
+        difficulty: 794
+        role: practice
+        summary: "R/L のマスで子どもが移動を繰り返した後の人数。RL の境目ごとに塊の長さの偶奇で振り分ける"
+        evidence: "https://drken1215.hatenablog.com/entry/2020/12/29/190100"
+      - id: abc140_d
+        difficulty: 1074
+        role: practice
+        summary: "区間反転を K 回して幸福な人を最大化。1回の反転で塊の数が最大2減ることに着目"
+        evidence: "https://drken1215.hatenablog.com/entry/2020/05/16/005300"
+      - id: abc124_d
+        difficulty: 1138
+        role: example
+        summary: "区間反転 K 回で連続する 1 を最長に。ランレングスにして 0 の塊 K 個分の窓を尺取り"
+        evidence: "https://drken1215.hatenablog.com/entry/2019/04/14/222900"
+      - id: abc421_d
+        difficulty: 1321
+        role: practice
+        summary: "ランレングスで与えられた2人の移動で同じマスにいる回数を数える。塊ごとにまとめて処理"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0830_abc421"
+
+  - key: subsequence-matching
+    title: 部分列判定と次の出現位置テーブル
+    aliases: [部分列判定, nxt 配列, 次の出現位置, 部分列オートマトン, 序列自動機]
+    level: 水
+    level_evidence: "typical90_f（★5＝1200〜1599 相当）、abc452_d (903)、abc324_e (1153)。応用は abc346_f (1840)、arc081_c (2072)"
+    prerequisites: [string-basics, binary-search]
+    acl: null
+    signs: ["T を部分列として含むか", "部分列として含まない最短の文字列", "辞書順最小の部分列", "S を何回も繰り返した文字列の部分列"]
+    compare_with: [subsequence-dp, lexicographic-greedy]
+    page: own
+    visual: "後ろから nxt[i][c] の表を埋めるステップ送りと、T の各文字で表を引いて右へ飛ぶ照合のアニメーション"
+    problems:
+      - id: abc452_d
+        difficulty: 903
+        role: example
+        summary: "T を部分列として含まない部分文字列の数。各位置から各文字の次の出現位置を前計算して始点ごとに数える"
+        evidence: "https://merom686.hatenablog.com/entry/2026/04/05/005148"
+      - id: abc324_e
+        difficulty: 1153
+        role: practice
+        summary: "S_i+S_j が T を部分列に含む組の数。S_i で T の先頭から、S_j で末尾から何文字照合できるかを求めて数える"
+        evidence: "https://drken1215.hatenablog.com/entry/2023/10/21/181937"
+      - id: typical90_f
+        difficulty: null
+        role: example
+        summary: "長さ K の部分列の辞書順最小を次の出現位置の表と貪欲で作る"
+        evidence: "https://drken1215.hatenablog.com/entry/2021/10/10/195200"
+      - id: abc346_f
+        difficulty: 1840
+        role: practice
+        summary: "S を N 回並べた中に、T の各文字を k 回ずつ並べたものが部分列で入る最大の k。k を二分探索し文字ごとの累積個数で照合"
+        evidence: "https://merom686.hatenablog.com/entry/2024/03/24/023206"
+      - id: arc081_c
+        difficulty: 2072
+        role: practice
+        summary: "A の部分列でない最短の文字列の辞書順最小。次の出現位置の表で後ろから DP"
+        evidence: "https://drken1215.hatenablog.com/entry/2018/09/22/201000"
+
+  - key: subsequence-dp
+    title: 部分列の数え上げ（照合位置の DP・異なる部分列）
+    aliases: [部分列 DP, 部分列の個数, 異なる部分列の数]
+    level: 青
+    level_evidence: "abc104_d (1739)、abc214_f (1973)。基本の照合位置 DP は typical90_h（★4）"
+    prerequisites: [dp-basics, subsequence-matching]
+    acl: null
+    signs: ["部分列として何通り取り出せるか", "異なる部分列の個数", "? を置き換えた全通りについての和"]
+    compare_with: [string-automaton-dp, subsequence-matching]
+    page: "section-of:subsequence-matching"
+    visual: "dp[i][j]（i 文字見て j 文字目まで照合）の表を埋めるステップ送り"
+    problems:
+      - id: typical90_h
+        difficulty: null
+        role: example
+        summary: "S から atcoder を部分列として取り出す方法の数。何文字目まで照合したかを状態にする DP"
+        evidence: "https://drken1215.hatenablog.com/entry/2022/04/01/121700"
+      - id: abc104_d
+        difficulty: 1739
+        role: practice
+        summary: "? を A/B/C に置き換えた全通りで ABC という部分列の数の和。照合位置を状態にした DP"
+        evidence: "https://drken1215.hatenablog.com/entry/2018/08/05/224100_1"
+      - id: abc214_f
+        difficulty: 1973
+        role: practice
+        summary: "隣り合わない文字を選んでできる文字列の種類数。同じ文字列を二重に数えない異なる部分列の DP"
+        evidence: "https://merom686.hatenablog.com/entry/2021/08/14/235615"
+
+  - key: bracket-sequence
+    title: 括弧列
+    aliases: [正しい括弧列, カッコ列, 括弧の対応, 累積和の最小値]
+    level: 水
+    level_evidence: "基本は基礎帯（abc307_d 666、abc312_d 964）。順序の工夫やセグ木での判定は水〜青（abc407_e 1531、abc223_f 1641、abc167_f 1961）"
+    prerequisites: [prefix-sum, stack-techniques]
+    acl: "atcoder::lazy_segtree（区間加算・区間 min で区間の判定）"
+    signs: ["正しい括弧列か", "括弧列を並べて正しくできるか", "区間が正しい括弧列か（更新あり）", "? を ( か ) にする方法の数"]
+    compare_with: [segment-tree-monoids, catalan-number]
+    page: own
+    visual: "( を +1、) を −1 とした累積和の折れ線グラフ。0 を下回る位置で失敗、最後が 0 で成功。括弧列の連結では（最小値, 合計）の組をつなぐ図"
+    problems:
+      - id: typical90_b
+        difficulty: null
+        role: example
+        summary: "長さ N の正しい括弧列を辞書順に全部出力。bit 全探索で作り累積和で判定"
+        evidence: "https://drken1215.hatenablog.com/entry/2021/06/12/151200"
+      - id: abc394_d
+        difficulty: 253
+        role: practice
+        summary: "3種類の括弧の列が正しいか。スタックで対応をとる"
+        evidence: "https://merom686.hatenablog.com/entry/2025/02/23/001649"
+      - id: abc307_d
+        difficulty: 666
+        role: practice
+        summary: "対応する括弧とその中身を取り除き続けた結果。開き括弧の位置をスタックで覚える"
+        evidence: "https://drken1215.hatenablog.com/entry/2024/06/10/020153"
+      - id: abc312_d
+        difficulty: 964
+        role: practice
+        summary: "? を埋めて正しい括弧列にする方法の数。開いている括弧の数を状態にした DP"
+        evidence: "https://merom686.hatenablog.com/entry/2023/07/30/020536"
+      - id: abc407_e
+        difficulty: 1531
+        role: example
+        summary: "値の和が最大になる正しい括弧列。先頭 i 文字に必要な ( の数の条件で言い換え、優先度付きキューで貪欲"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0524_abc407"
+      - id: abc223_f
+        difficulty: 1641
+        role: example
+        summary: "2文字の交換と区間が正しい括弧列かの判定。累積和に区間加算・区間最小値の遅延セグ木"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/1017_abc223"
+      - id: abc167_f
+        difficulty: 1961
+        role: practice
+        summary: "N 個の括弧列を並べて正しくできるか。各列を（最小の累積和, 合計）に要約し、並べる順を工夫"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2020/0510_abc167"
+
+  - key: parsing
+    title: 構文解析（再帰下降・式の評価）
+    aliases: [再帰下降構文解析, パーサ, BNF, 式の評価, 逆ポーランド記法]
+    level: 青
+    level_evidence: "ABC では稀。文法に沿った DP が abc403_f (1733)、本格的な構文解析が abc338_g (2573)。易しい字句解析は A/B（abc380_b 27）"
+    prerequisites: [recursion, dp-basics]
+    acl: null
+    signs: ["数式の文字列が与えられる", "+ と * と括弧の優先順位", "式として正しい部分文字列", "入れ子の構造を持つ文字列"]
+    compare_with: [bracket-sequence]
+    page: own
+    visual: "BNF の各規則を関数に対応させた呼び出しの木と、読み取り位置のポインタが進むステップ送り"
+    problems:
+      - id: abc380_b
+        difficulty: 27
+        role: practice
+        summary: "|---|-| のような記号列を区切って長さを並べる（易しい字句解析）"
+        evidence: "https://drken1215.hatenablog.com/entry/2024/11/17/011832"
+      - id: arc061_a
+        difficulty: 1089
+        role: example
+        summary: "数字の間に + を入れる全通りの式の値の合計。bit 全探索で式を作って評価"
+        evidence: "https://drken1215.hatenablog.com/entry/2020/04/11/171900"
+      - id: abc403_f
+        difficulty: 1733
+        role: example
+        summary: "1 と + と * と括弧で N を表す最短の式。式・項・因子の文法に沿った DP（括弧が要るかを状態に持つ）"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0427_abc403"
+      - id: abc338_g
+        difficulty: 2573
+        role: practice
+        summary: "数字と + と * の式の、式として正しい部分文字列すべての値の和。項と因子の構造に沿って寄与を数える"
+        evidence: "https://drken1215.hatenablog.com/entry/2024/01/29/231906"
+
+  - key: string-queries-ds
+    title: 文字列へのクエリ（文字ごとの BIT・セグ木）
+    aliases: [文字列のクエリ, 文字種ごとの BIT, 文字集合をビットで持つセグ木]
+    level: 水
+    level_evidence: "abc341_e (1223)、abc157_e (1443)、abc285_f (1876)"
+    prerequisites: [segment-tree, fenwick-tree]
+    acl: "atcoder::segtree / atcoder::fenwick_tree / atcoder::lazy_segtree"
+    signs: ["1文字の更新と区間の問い合わせ", "区間に現れる文字の種類数", "区間がソート済みか"]
+    compare_with: [hash-segment-tree, segment-tree-monoids]
+    page: "section-of:segment-tree-monoids"
+    visual: null
+    problems:
+      - id: abc341_e
+        difficulty: 1223
+        role: practice
+        summary: "0/1 列の区間反転と、区間内で隣り合う文字がすべて異なるかの判定。隣接の一致を 0/1 にして遅延セグ木"
+        evidence: "https://merom686.hatenablog.com/entry/2024/02/18/020947"
+      - id: abc157_e
+        difficulty: 1443
+        role: example
+        summary: "1文字の更新と区間の文字の種類数。文字の集合をビットで持つセグ木"
+        evidence: "https://merom686.hatenablog.com/entry/2020/03/01/233522"
+      - id: abc285_f
+        difficulty: 1876
+        role: practice
+        summary: "1文字の更新と、区間が全体をソートした文字列の部分文字列か。文字ごとの BIT で個数と昇順かを確かめる"
+        evidence: "https://merom686.hatenablog.com/entry/2023/01/16/011510"
+
+  # ==================================================================
+  # 文字列：ハッシュ
+  # ==================================================================
+  - key: rolling-hash
+    title: ローリングハッシュ
+    aliases: [Rabin-Karp, 多項式ハッシュ, ロリハ, 文字列ハッシュ]
+    level: 水
+    level_evidence: "abc141_e (1459)、abc284_f (1575)、typical90_au（★7。考察込み）。別解として abc430_e (1109)、abc150_f (2281)、abc135_f (2388)"
+    prerequisites: [mod-arithmetic, prefix-sum, string-basics]
+    acl: null
+    signs: ["部分文字列どうしの一致判定を大量に行う", "N ≤ 10^5〜10^6 の文字列で同じ部分が現れるか", "最長の〜を二分探索で求めたい", "回文かを多数判定"]
+    compare_with: [z-algorithm, kmp, suffix-array, manacher, hash-safety]
+    page: own
+    visual: "接頭辞のハッシュ表から h[r] − h[l]·B^(r−l) で部分文字列のハッシュを取り出す図。窓を1文字ずつずらすステップ送り"
+    problems:
+      - id: abc430_e
+        difficulty: 1109
+        role: practice
+        summary: "A を何回回転すると B になるか。A+A の中で B を最初に見つける（ハッシュ・Z・KMP のどれでも）"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/1101_abc430"
+      - id: abc141_e
+        difficulty: 1459
+        role: example
+        summary: "重ならずに2回現れる部分文字列の最大長（N≤5000）。長さを二分探索しハッシュで重複判定。DP・Z・SA でも解ける比較用の題材"
+        evidence: "https://drken1215.hatenablog.com/entry/2019/09/16/014600"
+      - id: abc284_f
+        difficulty: 1575
+        role: example
+        summary: "T＝S の前半＋S の反転＋S の後半となる S と位置。位置ごとに部分文字列の一致を O(1) で判定（ハッシュか Z）"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2023/0107_abc284"
+      - id: typical90_au
+        difficulty: null
+        role: practice
+        summary: "色の決まり方を言い換えて『ずらした文字列の一致』に帰着しローリングハッシュで判定（Z でも可）"
+        evidence: "https://github.com/E869120/kyopro_educational_90/blob/main/editorial/047-02.jpg"
+      - id: abc150_f
+        difficulty: 2281
+        role: practice
+        summary: "b が a の巡回シフトを x で XOR したものになる (k,x) の列挙。隣接 XOR の列にして文字列検索"
+        evidence: "https://drken1215.hatenablog.com/entry/2020/01/12/115800"
+      - id: abc135_f
+        difficulty: 2388
+        role: practice
+        summary: "t の繰り返しが s の繰り返しに含まれる最大回数。一致位置をハッシュで求め、遷移の閉路を判定"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2019/0727_abc135"
+
+  - key: hash-safety
+    title: ハッシュの衝突確率と安全な設計（mod の選び方・ハック対策）
+    aliases: [ハッシュ衝突, 誕生日のパラドックス, mod 2^61-1, anti-hash, Thue-Morse, カスタムハッシュ]
+    level: 水
+    level_evidence: "ハッシュを使う水の問題（abc141_e 1459 など）から必要。固定の mod が落とされた例として abc339_f (1716)"
+    prerequisites: [rolling-hash]
+    acl: null
+    signs: ["ハッシュ値を大量に比較する（全ペア・集合への挿入）", "mod 10^9+7 一つでハッシュを取ろうとしている", "unsigned long long の自然なオーバーフローに任せている", "値そのものの mod で比較している"]
+    compare_with: [rolling-hash, hashing-for-sets, randomized]
+    page: own
+    visual: "比較するハッシュの個数と衝突確率のグラフ（mod 約 10^9 と 2^61−1 の比較）。Thue–Morse 列 t→t+反転(t) の構成のステップ送り"
+    problems:
+      - id: typical90_au
+        difficulty: null
+        role: example
+        summary: "作問者の解説が、mod 2^64 ではどの基数でも衝突するテストを作れると明記している"
+        evidence: "https://github.com/E869120/kyopro_educational_90/blob/main/editorial/047-02.jpg"
+      - id: abc141_e
+        difficulty: 1459
+        role: practice
+        summary: "固定の mod・基数でテストに衝突した記録がある（mod を変えても衝突し、基数を変えて回避）"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2019/0915_abc141"
+      - id: abc339_f
+        difficulty: 1716
+        role: example
+        summary: "最大1000桁の A_i×A_j=A_k の組を数える。値を mod p で比べるハッシュで、固定の 2^61−1 や 2^64 は落ち、別の素数で通った記録（mod を乱択すべき例）"
+        evidence: "https://merom686.hatenablog.com/entry/2024/02/04/021920"
+
+  - key: hash-lcp-binary-search
+    title: ハッシュ＋二分探索（LCP・辞書順比較・最長の繰り返し）
+    aliases: [ハッシュで LCP, 二分探索で一致長, 長さの二分探索]
+    level: 水
+    level_evidence: "abc141_e (1459)。回文判定の前後ハッシュは abc398_f (1033) の別解"
+    prerequisites: [rolling-hash, binary-search]
+    acl: null
+    signs: ["2つの位置から何文字一致するか", "部分文字列どうしの辞書順比較", "最長の繰り返し部分（長さに単調性）"]
+    compare_with: [z-algorithm, suffix-array]
+    page: "section-of:rolling-hash"
+    visual: "一致長を二分探索で絞る様子（一致なら右へ、不一致なら左へ）"
+    problems:
+      - id: abc141_e
+        difficulty: 1459
+        role: example
+        summary: "答えの長さを二分探索し、長さ固定の部分文字列のハッシュに重複があるかを調べる"
+        evidence: "https://drken1215.hatenablog.com/entry/2019/09/16/014600"
+      - id: abc398_f
+        difficulty: 1033
+        role: practice
+        summary: "最長の回文接尾辞を前向き・後ろ向きのハッシュの一致で求める（Manacher・Z でも可）"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0322_abc398"
+
+  - key: hash-segment-tree
+    title: セグ木に載せるローリングハッシュ（更新ありの一致・回文判定）
+    aliases: [ハッシュのセグ木, 更新ありのローリングハッシュ]
+    level: 青
+    level_evidence: "abc331_f (1666)。05 の segment-tree-monoids でも同じ問題を例に挙げている"
+    prerequisites: [rolling-hash, segment-tree]
+    acl: "atcoder::segtree（要素を (ハッシュ, B^長さ) の組にし、op で H(L)·B^len(R)+H(R)）"
+    signs: ["1文字の更新と、区間が回文か", "更新ありで部分文字列の一致判定"]
+    compare_with: [string-queries-ds, segment-tree-monoids]
+    page: "section-of:rolling-hash"
+    visual: "セグ木の各節点に（ハッシュ, 長さ）を書き、左右の結合で左を B^右の長さ 倍する図"
+    problems:
+      - id: abc331_f
+        difficulty: 1666
+        role: example
+        summary: "1文字の更新と区間が回文かのクエリ。前向きと後ろ向きのハッシュ（長さ付き）をセグ木に載せる"
+        evidence: "https://merom686.hatenablog.com/entry/2023/12/03/001625"
+
+  - key: hashing-for-sets
+    title: 集合・多重集合のハッシュ（Zobrist hashing）
+    aliases: [Zobrist hash, XOR ハッシュ, 和のハッシュ, 集合の一致判定]
+    level: 水
+    level_evidence: "abc250_e (1421)、abc424_f (1521)、abc367_f (1540)。応用 abc238_g (2254)、発展 abc455_g (3092)"
+    prerequisites: [prefix-sum, randomized]
+    acl: null
+    signs: ["先頭 x 項の集合と先頭 y 項の集合が等しいか", "区間を並べ替えると一致するか", "区間内の各値が偶数個（3の倍数個）か", "順序に関係なく集合を比べたい"]
+    compare_with: [rolling-hash, hash-safety]
+    page: own
+    visual: "値ごとに乱数を割り当てた表と、先頭からの XOR（和）の累積の表。区間の値は両端の差で得る"
+    problems:
+      - id: abc250_e
+        difficulty: 1421
+        role: example
+        summary: "a の先頭 x 項と b の先頭 y 項の集合が等しいか。値ごとの乱数の XOR（重複を除いた集合）の累積で比べる"
+        evidence: "https://merom686.hatenablog.com/entry/2022/05/09/022850"
+      - id: abc424_f
+        difficulty: 1521
+        role: practice
+        summary: "円周に弦を加え、既存の弦と交わるなら加えない。円を切り開いて区間にし、区間内の端点がそろうかを XOR ハッシュと BIT で判定"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0920_abc424"
+      - id: abc367_f
+        difficulty: 1540
+        role: example
+        summary: "A の区間と B の区間が並べ替えで一致するか。値ごとの乱数の和（多重集合のハッシュ）の累積で比べる"
+        evidence: "https://merom686.hatenablog.com/entry/2024/08/18/020931"
+      - id: abc238_g
+        difficulty: 2254
+        role: practice
+        summary: "区間の積が立方数か。素因数ごとの指数 mod 3 を乱数で符号化したハッシュの累積"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0205_abc238"
+      - id: abc455_g
+        difficulty: 3092
+        role: practice
+        summary: "区間の条件を、設計したハッシュの累積和の一致に帰着して数える（発展）"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0425_abc455"
+
+  # ==================================================================
+  # 文字列：線形時間のアルゴリズム
+  # ==================================================================
+  - key: z-algorithm
+    title: Z-algorithm（各位置からの最長共通接頭辞）
+    aliases: [Z 法, Z function, Z 配列, 拡張 KMP]
+    level: 水
+    level_evidence: "abc430_e (1109)、abc141_e (1459)、abc284_f (1575)。応用は abc257_g (2078)、abc343_g (2114)"
+    prerequisites: [string-basics]
+    acl: "atcoder::z_algorithm（z[0]=n を返す。string と vector<T> に対応、O(n)）"
+    signs: ["S の各位置から、S の先頭と何文字一致するか", "接頭辞の連結で表す", "パターンの全出現位置", "接頭辞と接尾辞の一致（border・周期）"]
+    compare_with: [kmp, rolling-hash, suffix-array]
+    page: own
+    visual: "Z-box [l, r) を左から右へ動かし、箱の内側は鏡の位置の値をコピー、はみ出した分だけ比較するステップ送り"
+    problems:
+      - id: abc430_e
+        difficulty: 1109
+        role: example
+        summary: "A+A の中で B を最初に見つけて回転回数を求める（B+区切り+A+A の Z 配列）"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/1101_abc430"
+      - id: abc141_e
+        difficulty: 1459
+        role: practice
+        summary: "各開始位置の接尾辞に Z を適用して O(N^2) で重ならない最長の繰り返しを求める"
+        evidence: "https://drken1215.hatenablog.com/entry/2019/09/16/014600"
+      - id: abc284_f
+        difficulty: 1575
+        role: example
+        summary: "T の前半と後半を反転して Z を取り、各区切り位置で両側の一致を O(1) で確かめる"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2023/0107_abc284"
+      - id: abc257_g
+        difficulty: 2078
+        role: example
+        summary: "T を S の接頭辞の連結に分ける最小個数。S+区切り+T の Z 配列で各位置から伸ばせる長さを得て DP"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0625_abc257"
+      - id: abc343_g
+        difficulty: 2114
+        role: practice
+        summary: "N≤20 個の文字列を全部含む最短の文字列。含まれるものを除き、重なりの長さを求めて bitDP"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0302_abc343"
+      - id: arc055_c
+        difficulty: 2392
+        role: practice
+        summary: "S＝A+B+C+A+C となる分け方の数。先頭からと末尾からの一致長を Z で求めて数える"
+        evidence: "https://drken1215.hatenablog.com/entry/2023/08/07/004451"
+
+  - key: cyclic-shift
+    title: 巡回シフト（A+A の技・最小回転）
+    aliases: [回転, 巡回シフト, 最小回転, 円環の文字列]
+    level: 基礎
+    level_evidence: "abc286_c (565)、abc430_e (1109)。比較が絡むと abc150_f (2281)、abc272_f (2238)"
+    prerequisites: [z-algorithm]
+    acl: "atcoder::z_algorithm / atcoder::suffix_array"
+    signs: ["先頭を末尾に移す操作を何回か", "円環状に並んだ文字列", "回転して一致するか", "回転したものどうしの大小"]
+    compare_with: [string-basics, lyndon-factorization]
+    page: "section-of:z-algorithm"
+    visual: "A を2つ並べた帯の上で長さ N の窓をずらす図"
+    problems:
+      - id: abc286_c
+        difficulty: 565
+        role: example
+        summary: "回転回数を全探索して回文にするコストを比べる"
+        evidence: "https://drken1215.hatenablog.com/entry/2023/01/29/201129"
+      - id: abc430_e
+        difficulty: 1109
+        role: example
+        summary: "A+A の中で B を探して必要な回転回数を求める"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/1101_abc430"
+      - id: abc150_f
+        difficulty: 2281
+        role: practice
+        summary: "XOR の差分列にして、a 側を2周させた列の中で b 側の列を検索"
+        evidence: "https://drken1215.hatenablog.com/entry/2020/01/12/115800"
+      - id: abc272_f
+        difficulty: 2238
+        role: practice
+        summary: "S の回転と T の回転の大小の組を数える。S+S+T+T の Suffix Array で並べる"
+        evidence: "https://merom686.hatenablog.com/entry/2022/10/09/013149"
+
+  - key: kmp
+    title: MP / KMP 法（失敗関数と border）
+    aliases: [KMP, MP 法, 失敗関数, prefix function, border, π 配列]
+    level: 青
+    level_evidence: "パターン検索だけなら Z・ハッシュで代用でき水で足りる。border の連鎖やオートマトンとして使うのは青〜黄（abc419_f 1726 と abc458_f 1744 は一般化した Aho-Corasick、abc150_f 2281、abc135_f 2388）"
+    prerequisites: [z-algorithm]
+    acl: null
+    signs: ["接頭辞と接尾辞が一致する最長の長さ", "最小周期", "パターンを含まない文字列の数え上げ（オートマトン）", "パターンの出現位置の列挙"]
+    compare_with: [z-algorithm, rolling-hash, aho-corasick]
+    page: own
+    visual: "照合に失敗したときにパターンを失敗関数の値だけ戻してずらすステップ送り。border の入れ子（π[i], π[π[i]−1], …）の図"
+    problems:
+      - id: abc150_f
+        difficulty: 2281
+        role: example
+        summary: "差分の列に変換して KMP（または Z）で全出現位置を求める"
+        evidence: "https://drken1215.hatenablog.com/entry/2020/01/12/115800"
+      - id: abc135_f
+        difficulty: 2388
+        role: practice
+        summary: "s の繰り返しの中の t の出現位置を求め、出現からの遷移の閉路を判定（KMP・Z・ハッシュ）"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2019/0727_abc135"
+      - id: arc060_d
+        difficulty: 2804
+        role: practice
+        summary: "周期を持たない文字列への最小分割とその方法の数。各接頭辞・接尾辞が周期を持つかを判定（発展）"
+        evidence: "https://drken1215.hatenablog.com/entry/2018/09/07/190100"
+
+  - key: string-period
+    title: 文字列の周期と繰り返し
+    aliases: [周期, 最小周期, 繰り返し単位, 原始根, primitive root]
+    level: 青
+    level_evidence: "abc304_f (1619)。最小の繰り返し単位への分解は abc312_h (2477)、arc060_d (2804)"
+    prerequisites: [kmp, divisor-enum]
+    acl: "atcoder::z_algorithm（p が周期 ⇔ z[p]=n−p）"
+    signs: ["何かの繰り返しで書けるか", "周期 M（N の約数）を持つ", "同じ単位の何回繰り返しか"]
+    compare_with: [kmp, z-algorithm, mobius-function]
+    page: "section-of:kmp"
+    visual: "周期 p で文字列をずらして重ねた図（重なる部分が一致）"
+    problems:
+      - id: abc304_f
+        difficulty: 1619
+        role: example
+        summary: "N の約数 M を周期に持つ条件のシフト表の数。約数ごとに数え、包除（メビウス）で重複を除く"
+        evidence: "https://drken1215.hatenablog.com/entry/2023/06/07/153403"
+      - id: abc312_h
+        difficulty: 2477
+        role: practice
+        summary: "各文字列を最小の繰り返し単位の何回繰り返しかに直し、単位ごとに使った回数を管理（Z で高速化）"
+        evidence: "https://merom686.hatenablog.com/entry/2023/07/30/020536"
+      - id: arc060_d
+        difficulty: 2804
+        role: practice
+        summary: "周期を持つかどうかの判定を全接頭辞・接尾辞について行う（発展）"
+        evidence: "https://drken1215.hatenablog.com/entry/2018/09/07/190100"
+
+  - key: string-automaton-dp
+    title: パターンを含む・含まない文字列の数え上げ（照合オートマトン上の DP）
+    aliases: [KMP オートマトン DP, Aho-Corasick 上の DP, 禁止文字列, 照合状態の DP]
+    level: 青
+    level_evidence: "abc419_f (1726)、abc458_f (1744)、abc305_g (1989)。単純な照合状態は abc122_d (1533)・typical90_h"
+    prerequisites: [dp-basics, kmp, aho-corasick, matrix-power]
+    acl: null
+    signs: ["長さ N の文字列のうち、どのパターンも含まないものの数", "すべてのパターンを含むものの数", "N が 10^9〜10^18（行列累乗）"]
+    compare_with: [subsequence-dp, inclusion-exclusion]
+    page: own
+    visual: "照合の状態（どこまで一致しているか）を頂点、文字を辺にしたグラフの上で DP の値が流れる図"
+    problems:
+      - id: typical90_h
+        difficulty: null
+        role: example
+        summary: "照合位置を状態にする最も単純な形（部分列版）"
+        evidence: "https://drken1215.hatenablog.com/entry/2022/04/01/121700"
+      - id: abc122_d
+        difficulty: 1533
+        role: practice
+        summary: "AGC を含まず隣接交換でも含まない長さ N の文字列の数。直前の3文字を状態にした DP"
+        evidence: "https://drken1215.hatenablog.com/entry/2019/04/23/120400"
+      - id: abc419_f
+        difficulty: 1726
+        role: example
+        summary: "N≤8 個の短い文字列をすべて含む長さ L の文字列の数。Aho-Corasick の状態と含んだ集合の bit を持つ DP"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0816_abc419"
+      - id: abc458_f
+        difficulty: 1744
+        role: example
+        summary: "長さ N≤10^9 で K 個の文字列をどれも含まないものの数。Aho-Corasick の遷移を行列とみてダブリング"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0516_abc458"
+      - id: abc305_g
+        difficulty: 1989
+        role: practice
+        summary: "a/b の長さ N≤10^18 で禁止部分文字列を含まないものの数。照合状態の遷移行列を累乗"
+        evidence: "https://merom686.hatenablog.com/entry/2023/06/11/005610"
+
+  # ==================================================================
+  # 文字列：回文
+  # ==================================================================
+  - key: palindrome
+    title: 回文の扱い
+    aliases: [回文, palindrome, 回文判定, 中心から伸ばす, 両端から作る]
+    level: 水
+    level_evidence: "abc359_d (1381)、abc394_e (1403)、abc290_e (1485)。基礎帯に abc468_d (683)、abc206_d (879)、応用は abc197_f (1945)、abc175_f (2512)"
+    prerequisites: [string-basics, bfs]
+    acl: null
+    signs: ["回文になるか・回文にする最小操作", "回文の部分文字列を数える", "グラフの歩道の文字列が回文", "長さ K の回文を含まない"]
+    compare_with: [manacher, rolling-hash]
+    page: own
+    visual: "対称な位置の組を弧で結ぶ図。グラフ上の回文は両端から1文字ずつ同じ文字で進む2つの駒の動き"
+    problems:
+      - id: abc468_d
+        difficulty: 683
+        role: example
+        summary: "1文字以下の書き換えで回文になる部分文字列の数。各中心から不一致を1回まで許して伸ばす O(N^2)"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0725_abc468"
+      - id: abc206_d
+        difficulty: 879
+        role: practice
+        summary: "値の一斉置換で数列を回文にする最小回数。対称な位置の値を Union-Find でつなぐ"
+        evidence: "https://drken1215.hatenablog.com/entry/2021/06/26/165800"
+      - id: abc359_d
+        difficulty: 1381
+        role: practice
+        summary: "? を埋めて長さ K の回文の部分文字列を作らない方法の数。直前 K−1 文字を状態にした DP"
+        evidence: "https://merom686.hatenablog.com/entry/2024/06/23/014345"
+      - id: abc394_e
+        difficulty: 1403
+        role: example
+        summary: "文字付きの有向グラフで、各頂点対を結ぶ回文の最短の歩道。頂点の組を状態にして両端から BFS"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0222_abc394"
+      - id: abc290_e
+        difficulty: 1485
+        role: practice
+        summary: "全部分列（連続）を回文にする操作回数の和。対称な位置の組ごとの寄与を数える"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2023/0219_abc290"
+      - id: abc197_f
+        difficulty: 1945
+        role: practice
+        summary: "1 から N への歩道で辺の文字列が回文の最短。頂点の組 (u,v) から両端で同じ文字の辺をたどる BFS"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0327_abc197"
+      - id: abc363_f
+        difficulty: 1913
+        role: practice
+        summary: "N を数字と * の回文の式で表す。反転しても約数になる組を外側から重ねる"
+        evidence: "https://merom686.hatenablog.com/entry/2024/07/21/020359"
+      - id: abc175_f
+        difficulty: 2512
+        role: practice
+        summary: "文字列を並べて回文を作る最小コスト。左右の余りを状態にしたダイクストラ"
+        evidence: "https://drken1215.hatenablog.com/entry/2020/08/16/032500"
+
+  - key: manacher
+    title: Manacher のアルゴリズム（各中心の最長回文）
+    aliases: [Manacher, 回文半径]
+    level: 水
+    level_evidence: "abc398_f (1033) が最長の回文接尾辞を求める典型（Z・ハッシュでも代用可）。Manacher が本質の ABC 問題は少ない"
+    prerequisites: [palindrome]
+    acl: null
+    signs: ["すべての中心について最長の回文", "回文の部分文字列の個数（N が大きい）", "最長の回文接頭辞・接尾辞", "区間が回文かのクエリ（更新なし）"]
+    compare_with: [rolling-hash, z-algorithm, palindromic-tree]
+    page: own
+    visual: "最も右まで届く回文の内側で、鏡の位置の半径をコピーし、はみ出した分だけ比較するステップ送り"
+    problems:
+      - id: abc398_f
+        difficulty: 1033
+        role: example
+        summary: "S の後ろに文字を足して最短の回文を作る。最長の回文接尾辞を Manacher（または Z・ハッシュ）で求める"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0322_abc398"
+
+  # ==================================================================
+  # 文字列：木構造・接尾辞構造
+  # ==================================================================
+  - key: trie
+    title: Trie（文字列の集合を接頭辞で共有する木）
+    aliases: [トライ木, 接頭辞木, prefix tree]
+    level: 水
+    level_evidence: "abc353_e (1217)、abc437_e (1279)、abc403_e (1447)。abc287_e (1093) は基礎帯、応用 abc377_g (1782)、abc268_g (2311)"
+    prerequisites: [string-basics, dfs]
+    acl: null
+    signs: ["多数の文字列の共通接頭辞", "全ペアの LCP の和", "接頭辞に持つ文字列の数", "文字列（数列）の集合を辞書順にたどる"]
+    compare_with: [binary-trie, suffix-array, sorting]
+    page: own
+    visual: "文字列を1つずつ挿入して節点の通過数が増えるステップ送り。全ペア LCP の和が各節点の C(通過数, 2) の和になる図"
+    problems:
+      - id: abc287_e
+        difficulty: 1093
+        role: example
+        summary: "各文字列と他の文字列の最長共通接頭辞の最大。Trie の通過数（またはソートして隣と比べる）"
+        evidence: "https://merom686.hatenablog.com/entry/2023/01/28/234655"
+      - id: abc353_e
+        difficulty: 1217
+        role: example
+        summary: "全組の最長共通接頭辞の長さの和。各節点の通過数 c について C(c,2) を足す（先頭文字で分ける再帰でも可）"
+        evidence: "https://merom686.hatenablog.com/entry/2024/05/12/015723"
+      - id: abc437_e
+        difficulty: 1279
+        role: practice
+        summary: "前の数列に1要素を足して作る数列たちを辞書順に並べる。Trie に入れて辞書順に DFS"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/1220_abc437"
+      - id: abc403_e
+        difficulty: 1447
+        role: practice
+        summary: "X と Y に文字列を加えるたび、X のどれも接頭辞に持たない Y の要素数。Trie で通過数を管理し X の節点以下を消す"
+        evidence: "https://merom686.hatenablog.com/entry/2025/04/28/015126"
+      - id: abc377_g
+        difficulty: 1782
+        role: practice
+        summary: "末尾の削除と追加で前の文字列に一致させる最小コスト。各節点に伸ばして一致させる最小コストを持つ"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/1026_abc377"
+      - id: abc268_g
+        difficulty: 2311
+        role: practice
+        summary: "文字の順序がランダムなときの辞書順の順位の期待値。Trie で接頭辞関係とそれ以外（確率 1/2）を数える"
+        evidence: "https://merom686.hatenablog.com/entry/2022/09/11/000905"
+
+  - key: binary-trie
+    title: 2進 Trie（XOR の最小・最大）
+    aliases: [Binary Trie, ビット Trie, XOR Trie]
+    level: 青
+    level_evidence: "abc281_f (1714)、abc308_g (2008)、abc425_g (2205)。05 と同じ key（05 は own ページ案）"
+    prerequisites: [trie, bit-operations]
+    acl: null
+    signs: ["x を選んで XOR の最大・最小", "集合の中の2要素の XOR の最小（追加・削除あり）", "XOR したときの k 番目"]
+    compare_with: [trie, ordered-set, xor-basis]
+    page: own
+    visual: "整数を上位ビットから辿る二分木。XOR 最小化で同じ側を優先して降りるステップ送り"
+    problems:
+      - id: abc281_f
+        difficulty: 1714
+        role: example
+        summary: "x を選んで max(a_i xor x) を最小化。上位ビットで集合を分ける再帰（2進 Trie の考え方）"
+        evidence: "https://drken1215.hatenablog.com/entry/2022/12/13/144200"
+      - id: abc308_g
+        difficulty: 2008
+        role: practice
+        summary: "追加・削除のたびに任意2要素の XOR の最小値。2進 Trie（またはソート順の隣接組を multiset で）"
+        evidence: "https://merom686.hatenablog.com/entry/2023/07/02/004802"
+      - id: abc425_g
+        difficulty: 2205
+        role: practice
+        summary: "x=0..M−1 の min_i (x xor A_i) の総和。2進 Trie を明示的に作らず再帰で数える"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0927_abc425"
+
+  - key: suffix-array
+    title: Suffix Array と LCP 配列
+    aliases: [接尾辞配列, SA, LCP 配列, Kasai, SA-IS]
+    level: 黄
+    level_evidence: "abc433_g (2060)、abc213_f (2215)、abc272_f (2238)、abc452_g (2255)。abc362_g (1625) は別解"
+    prerequisites: [sorting, sparse-table, monotonic-stack]
+    acl: "atcoder::suffix_array（string は O(n)、vector<T> は O(n log n)、vector<int>+upper は O(n+upper)）、atcoder::lcp_array（長さ n−1、O(n)）"
+    signs: ["異なる部分文字列の個数", "全接尾辞の辞書順", "任意の2位置の LCP を大量に", "全ペアの LCP の和", "部分文字列の辞書順 K 番目", "巡回シフトどうしの大小"]
+    compare_with: [rolling-hash, z-algorithm, suffix-automaton, trie]
+    page: own
+    visual: "接尾辞を辞書順に並べた表と、隣どうしの LCP を棒グラフで並べた図（任意2接尾辞の LCP＝間の最小値）"
+    problems:
+      - id: practice2_i
+        difficulty: null
+        role: example
+        summary: "異なる部分文字列の個数＝n(n+1)/2−ΣLCP（ACL の練習問題）"
+        evidence: "https://drken1215.hatenablog.com/entry/2022/12/15/022900"
+      - id: abc362_g
+        difficulty: 1625
+        role: practice
+        summary: "S の中の各 T_i の出現回数。SA 上の二分探索で範囲を求める（Aho-Corasick でも可）"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0713_abc362"
+      - id: abc433_g
+        difficulty: 2060
+        role: practice
+        summary: "文字を後ろに足していくゲーム。SA と LCP で今の文字列を接頭辞に持つ接尾辞の集合を扱う"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/1122_abc433"
+      - id: abc213_f
+        difficulty: 2215
+        role: example
+        summary: "各 i について Σ_j LCP(S[i:], S[j:])。SA と LCP 配列の上で単調スタック"
+        evidence: "https://drken1215.hatenablog.com/entry/2021/08/12/012000"
+      - id: abc272_f
+        difficulty: 2238
+        role: practice
+        summary: "S の回転と T の回転の組で S 側が辞書順以下のものの数。S+S+T+T の SA で並べて数える"
+        evidence: "https://merom686.hatenablog.com/entry/2022/10/09/013149"
+      - id: abc452_g
+        difficulty: 2255
+        role: practice
+        summary: "条件を満たす連続部分列の種類数。ランレングスで言い換えて異なる部分文字列の数え上げに帰着"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0404_abc452"
+      - id: abc280_h
+        difficulty: 3307
+        role: practice
+        summary: "複数の文字列の全部分文字列（重複込み）の K 番目。SA と LCP（発展）"
+        evidence: "https://drken1215.hatenablog.com/entry/2023/01/02/070100"
+
+  - key: aho-corasick
+    title: Aho–Corasick 法（複数パターンの同時照合）
+    aliases: [エイホ・コラシック, AC オートマトン, 失敗リンク]
+    level: 青
+    level_evidence: "abc362_g (1625)、abc419_f (1726)、abc458_f (1744)。応用 abc268_h (2560)"
+    prerequisites: [trie, bfs, kmp]
+    acl: null
+    signs: ["多数のパターンの出現をまとめて数える", "どのパターンも含まない（含む）文字列の数え上げ", "禁止語を含まないように最少の書き換え", "パターンの総長が 10^5〜10^6"]
+    compare_with: [kmp, suffix-array, rolling-hash]
+    page: own
+    visual: "Trie に失敗リンク（破線）を BFS 順に張るステップ送りと、テキストを流すときの状態の移動。出現の集計を失敗リンクの木で葉から根へ足す図"
+    problems:
+      - id: abc362_g
+        difficulty: 1625
+        role: example
+        summary: "S の中の各 T_i の出現回数。訪問回数を失敗リンクの木の上で後からまとめて足す（素直に出力リンクをたどると遅い）"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0713_abc362"
+      - id: abc419_f
+        difficulty: 1726
+        role: practice
+        summary: "N≤8 個の文字列をすべて含む長さ L の文字列の数。Aho-Corasick の状態×含んだ集合の DP"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0816_abc419"
+      - id: abc458_f
+        difficulty: 1744
+        role: practice
+        summary: "長さ N≤10^9 でどのパターンも含まない文字列の数。Aho-Corasick の遷移行列をダブリング"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0516_abc458"
+      - id: abc268_h
+        difficulty: 2560
+        role: practice
+        summary: "S の文字を最少個数だけ * に変えてどの T_i も含まないようにする。走査して一致したら終端を * にして状態を根に戻す貪欲"
+        evidence: "https://note.com/anoconne/n/n26b5912e1e9c（検索結果で確認）"
+
+  - key: fft-string-matching
+    title: 畳み込みによる文字列照合（ワイルドカード・ハミング距離）
+    aliases: [ワイルドカード照合, ハミング距離の全シフト, FFT 文字列マッチング]
+    level: 黄
+    level_evidence: "abc196_f (2274)"
+    prerequisites: [convolution-ntt]
+    acl: "atcoder::convolution"
+    signs: ["ずらしたときの不一致の数をすべてのずらし方で", "ワイルドカード ? を含むパターンの照合", "0/1 の文字列の一致数"]
+    compare_with: [rolling-hash, z-algorithm]
+    page: own
+    visual: "パターンを反転して畳み込むと、各ずらし位置の一致数が1つの係数に集まる図"
+    problems:
+      - id: abc196_f
+        difficulty: 2274
+        role: example
+        summary: "0/1 の T を S のどこかと一致させる最少の書き換え数。全シフトのハミング距離を畳み込みで一度に計算"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0320_abc196"
+
+  # ==================================================================
+  # 文字列：発展（概要だけ）
+  # ==================================================================
+  - key: suffix-automaton
+    title: Suffix Automaton（発展）
+    aliases: [SAM, 接尾辞オートマトン, DAWG]
+    level: 発展
+    level_evidence: "ABC で必須の確認例はなし。SA＋LCP で代用できることが多い。異なる部分文字列・出現回数・最長共通部分文字列に使う"
+    prerequisites: [suffix-array]
+    acl: null
+    signs: ["文字を1つずつ追加しながら異なる部分文字列の数", "2つの文字列の最長共通部分文字列"]
+    compare_with: [suffix-array]
+    page: overview
+    visual: null
+    problems: []
+
+  - key: palindromic-tree
+    title: 回文木 eertree（発展）
+    aliases: [回文木, eertree, Palindromic Tree]
+    level: 発展
+    level_evidence: "ABC で必須の確認例はなし。Library Checker の eertree・回文の種類数・回文の出現回数に使う"
+    prerequisites: [manacher]
+    acl: null
+    signs: ["異なる回文の部分文字列の種類数", "各回文の出現回数", "文字を追加しながら回文を管理"]
+    compare_with: [manacher]
+    page: overview
+    visual: null
+    problems: []
+
+  - key: lyndon-factorization
+    title: Lyndon 分解と最小回転（発展）
+    aliases: [Lyndon 分解, Duval, 最小表示, Booth のアルゴリズム]
+    level: 発展
+    level_evidence: "ABC で必須の確認例はなし。最小回転は S+S の SA・Z・ハッシュで代用できる（abc272_f 2238 は SA で解く）"
+    prerequisites: [cyclic-shift]
+    acl: null
+    signs: ["辞書順最小の巡回シフト", "文字列を非増加な Lyndon 語に分ける"]
+    compare_with: [cyclic-shift, suffix-array]
+    page: overview
+    visual: null
+    problems: []
+
+  - key: run-enumeration
+    title: Run の列挙・繰り返しの検出（発展）
+    aliases: [Run, 極大な繰り返し, Main-Lorentz]
+    level: 発展
+    level_evidence: "ABC で必須の確認例はなし。Library Checker の Run Enumeration"
+    prerequisites: [string-period, z-algorithm]
+    acl: null
+    signs: ["すべての極大な繰り返し（平方・累乗）を列挙"]
+    compare_with: [string-period]
+    page: overview
+    visual: null
+    problems: []
+
+  - key: inverse-string-problems
+    title: 文字列アルゴリズムの逆問題（発展）
+    aliases: [逆 Manacher, 逆 Z, 逆 Suffix Array, 配列から文字列を復元]
+    level: 発展
+    level_evidence: "回文半径から辞書順最小の文字列を復元する型が ABC の G に出たとされる（abc349_g 2655、内容は未確認）。maspy のライブラリに inverse_manacher / inverse_z_algorithm がある"
+    prerequisites: [manacher, z-algorithm, union-find]
+    acl: null
+    signs: ["Z 配列（回文半径・SA）が与えられ、それを満たす文字列を作る"]
+    compare_with: [manacher, z-algorithm]
+    page: overview
+    visual: null
+    problems: []
+
+  # ==================================================================
+  # 幾何
+  # ==================================================================
+  - key: geometry-vectors
+    title: ベクトル・内積・外積と向き判定（ccw）
+    aliases: [外積, 内積, ccw, 向き判定, 符号付き面積]
+    level: 基礎
+    level_evidence: "abc181_c (274)、abc224_c (301)、abc266_c (516)。以降のすべての幾何の土台"
+    prerequisites: []
+    acl: null
+    signs: ["3点が一直線上にあるか", "左に曲がるか右に曲がるか", "多角形が凸か", "三角形の面積"]
+    compare_with: [geometry-precision]
+    page: own
+    visual: "2つのベクトルを回すと外積の符号と平行四辺形の面積が変わる動く図。内積の符号と角の鋭鈍の対応"
+    problems:
+      - id: abc181_c
+        difficulty: 274
+        role: example
+        summary: "一直線上にある3点があるか。外積が 0 かで判定"
+        evidence: "https://drken1215.hatenablog.com/entry/2020/11/02/030500"
+      - id: abc224_c
+        difficulty: 301
+        role: practice
+        summary: "三角形ができる3点の選び方の数。外積が 0 でない組を数える"
+        evidence: "https://merom686.hatenablog.com/entry/2021/10/24/000901"
+      - id: abc266_c
+        difficulty: 516
+        role: example
+        summary: "四角形が凸か。各頂点で隣り合う辺の外積の符号がそろうか"
+        evidence: "https://merom686.hatenablog.com/entry/2022/08/28/011604"
+
+  - key: geometry-precision
+    title: 誤差の扱いと整数での処理
+    aliases: [浮動小数点の誤差, EPS, 整数化, 桁落ち, long double]
+    level: 水
+    level_evidence: "小数入力の整数化は基礎帯（abc169_c 597）。整数化しないと解けない・桁落ちで WA になるのは青〜黄（abc385_f 1905、abc191_d 1953、abc296_g 2241）"
+    prerequisites: [geometry-vectors]
+    acl: null
+    signs: ["座標が小数第 k 位まで与えられる", "答えが整数か判定・ちょうど境界上か", "絶対誤差または相対誤差 10^-9 以下", "座標が 10^9 で外積を取る"]
+    compare_with: [geometry-vectors]
+    page: own
+    visual: "double の有効桁（約 16 桁）と、10^9 規模どうしの引き算で桁が失われる図"
+    problems:
+      - id: abc169_c
+        difficulty: 597
+        role: example
+        summary: "整数と小数第2位までの数の積の切り捨て。小数を100倍した整数として扱う"
+        evidence: "https://drken1215.hatenablog.com/entry/2020/05/31/224300"
+      - id: abc385_f
+        difficulty: 1905
+        role: example
+        summary: "隣り合うビルの頂点を結ぶ直線の傾きの比較。double で計算すると桁落ちで許容誤差を超える落とし穴"
+        evidence: "https://merom686.hatenablog.com/entry/2024/12/22/165012"
+      - id: abc191_d
+        difficulty: 1953
+        role: example
+        summary: "小数第4位までの円の内部の格子点の数。10^4 倍して整数で判定"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0206_abc191"
+      - id: abc296_g
+        difficulty: 2241
+        role: practice
+        summary: "凸多角形の内外判定を double の偏角で行い境界の判定で WA を重ねた記録（整数の外積で行うべき例）"
+        evidence: "https://merom686.hatenablog.com/entry/2023/04/01/235440"
+
+  - key: segment-intersection
+    title: 線分の交差判定・点と直線の距離
+    aliases: [線分交差, 交点, 点と直線の距離, 射影, 反射]
+    level: 水
+    level_evidence: "abc016_4（参考値 1305）。応用 abc373_g (2377)"
+    prerequisites: [geometry-vectors]
+    acl: null
+    signs: ["線分が交わるか", "多角形を線分で切る", "交わらないように結ぶ", "点から直線（線分）までの距離"]
+    compare_with: [geometry-vectors]
+    page: own
+    visual: "2本の線分で、互いの端点が相手の直線の両側にあるかを外積の符号で示す図。端点が乗る・同一直線上の場合"
+    problems:
+      - id: abc016_4
+        difficulty: 1305
+        role: example
+        summary: "多角形を線分で切って分かれる個数。各辺との交差を外積で判定し、交差数/2+1"
+        evidence: "https://drken1215.hatenablog.com/entry/2023/06/08/041900"
+      - id: abc373_g
+        difficulty: 2377
+        role: practice
+        summary: "2つの点集合を線分が交わらないように結ぶ。交差する組をつなぎ替えると長さの和が減る性質を使う"
+        evidence: "https://drken1215.hatenablog.com/entry/2024/09/29/034410"
+
+  - key: polygon-area
+    title: 多角形の面積（座標の公式）
+    aliases: [靴紐公式, shoelace formula, 符号付き面積, 面積の2倍]
+    level: 水
+    level_evidence: "公式自体は基礎だが単独の出題は少なく、凸包・Pick・尺取りと組んで黄（abc250_f 2044、typical90_ao ★7）"
+    prerequisites: [geometry-vectors]
+    acl: null
+    signs: ["多角形の面積", "面積を半分・1/4 に分ける", "面積が整数か"]
+    compare_with: [lattice-points]
+    page: own
+    visual: "原点と各辺で作る三角形の符号付き面積を足し合わせる図（外側の分が打ち消し合う）"
+    problems:
+      - id: abc250_f
+        difficulty: 2044
+        role: example
+        summary: "凸多角形を対角線で切り片側を全体の 1/4 に近づける。面積の2倍を整数で尺取り"
+        evidence: "https://drken1215.hatenablog.com/entry/2023/06/06/010500"
+      - id: typical90_ao
+        difficulty: null
+        role: practice
+        summary: "凸包の面積と辺上の格子点から Pick の定理で内部の格子点を数える"
+        evidence: "https://github.com/E869120/kyopro_educational_90/blob/main/editorial/041-03.jpg"
+
+  - key: point-in-polygon
+    title: 点の多角形内外判定
+    aliases: [内外判定, 凸多角形の内外判定, 交差数判定, winding number]
+    level: 黄
+    level_evidence: "abc296_g (2241)、abc251_g (2468)"
+    prerequisites: [geometry-vectors, binary-search, argument-sort]
+    acl: null
+    signs: ["点が多角形の内部・境界・外部のどこか", "多数の点について凸多角形の内外"]
+    compare_with: [convex-hull]
+    page: own
+    visual: "基準頂点から扇形に三角形分割し、点の入る扇形を二分探索する図"
+    problems:
+      - id: abc296_g
+        difficulty: 2241
+        role: example
+        summary: "凸多角形に対する多数の点の内外判定。内部の点から見た頂点の偏角で辺を二分探索"
+        evidence: "https://merom686.hatenablog.com/entry/2023/04/01/235440"
+      - id: abc251_g
+        difficulty: 2468
+        role: practice
+        summary: "M 通りに平行移動した凸多角形すべての内部か。辺ごとに外積の最大値を前計算して判定"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0514_abc251"
+
+  - key: convex-hull
+    title: 凸包
+    aliases: [Andrew のアルゴリズム, monotone chain, Graham scan, 上側凸包, 下側凸包]
+    level: 黄
+    level_evidence: "typical90_ao（★7）、agc021_b (2130)、abc341_g (2208)。発展 abc202_f (2905)、abc356_g (3022)"
+    prerequisites: [geometry-vectors, sorting]
+    acl: null
+    signs: ["すべての点を囲む最小の凸多角形", "傾き（比）の最大・最小", "外側にある点だけが効く", "累積和の点の傾き＝区間の平均"]
+    compare_with: [convex-hull-trick, argument-sort]
+    page: own
+    visual: "点を x 順に見て、右に曲がる（凹む）ごとにスタックから取り除く Andrew 法のステップ送り"
+    problems:
+      - id: typical90_ao
+        difficulty: null
+        role: example
+        summary: "凸包を求め、Pick の定理で周上と内部の格子点を数える"
+        evidence: "https://github.com/E869120/kyopro_educational_90/blob/main/editorial/041-03.jpg"
+      - id: agc021_b
+        difficulty: 2130
+        role: practice
+        summary: "遠くの一様な点に最も近い穴の確率。凸包上の点だけが正の確率を持ち、外角を 2π で割る"
+        evidence: "https://drken1215.hatenablog.com/entry/2019/04/02/225600"
+      - id: abc341_g
+        difficulty: 2208
+        role: example
+        summary: "各 i から始まる区間の平均の最大。累積和の点の上側凸包をスタックで保ち、傾きの最大を求める"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0217_abc341"
+      - id: abc202_f
+        difficulty: 2905
+        role: practice
+        summary: "凸包の面積の2倍が偶数になる点の部分集合の数。凸包の構成に沿った DP（発展）"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0522_abc202"
+      - id: abc356_g
+        difficulty: 3022
+        role: practice
+        summary: "2種類の泳法の配分の最小時間のクエリ。点集合の凸包上で答える（発展）"
+        evidence: "https://drken1215.hatenablog.com/entry/2024/06/02/034334"
+
+  - key: argument-sort
+    title: 偏角ソート
+    aliases: [角度でソート, 偏角, argument sort, atan2]
+    level: 水
+    level_evidence: "abc442_e (1355) が水。typical90_i（★6）、abc225_e (1678) が青、abc139_f (2034)、abc207_d (2074) が黄"
+    prerequisites: [geometry-vectors, sorting]
+    acl: null
+    signs: ["原点から見た方向の順", "回転する光線・レーザー", "角度の範囲にある点の数", "ベクトルを選んで和の長さを最大化"]
+    compare_with: [geometry-precision, convex-hull]
+    page: own
+    visual: "原点のまわりで半直線を回し、通過した点に順番が付く動く図。上半平面と下半平面の色分けと、同じ半平面内は外積で比べる様子"
+    problems:
+      - id: abc442_e
+        difficulty: 1355
+        role: example
+        summary: "原点から見た方向でモンスターを並べ、2方向の間にいる数のクエリ。整数の偏角ソートと累積和"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0124_abc442"
+      - id: typical90_i
+        difficulty: null
+        role: example
+        summary: "∠ABC の最大。各 B について他の点を偏角ソートし、反対方向に最も近い点を二分探索"
+        evidence: "https://github.com/E869120/kyopro_educational_90/blob/main/sol/009.cpp"
+      - id: abc225_e
+        difficulty: 1678
+        role: practice
+        summary: "原点から見える図形の最大数。各図形を傾きの区間にし、分数で比べる区間スケジューリング"
+        evidence: "https://merom686.hatenablog.com/entry/2021/10/30/235859"
+      - id: abc139_f
+        difficulty: 2034
+        role: practice
+        summary: "ベクトルを選んで和の長さを最大化。偏角順に並べ、連続する範囲だけを試す"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2019/0901_abc139"
+      - id: abc207_d
+        difficulty: 2074
+        role: practice
+        summary: "点集合が回転と平行移動で一致するか。重心を原点に移し、偏角と距離でそろえて比べる"
+        evidence: "https://drken1215.hatenablog.com/entry/2023/07/25/143000"
+
+  - key: lattice-points
+    title: 格子点と Pick の定理
+    aliases: [格子点, Pick の定理, 線分上の格子点, gcd]
+    level: 黄
+    level_evidence: "typical90_ao（★7）、abc202_f (2905)"
+    prerequisites: [polygon-area, gcd-lcm]
+    acl: "atcoder::floor_sum（格子点の数え上げの別解）"
+    signs: ["多角形の内部の格子点の数", "線分上の格子点の数", "面積と格子点の関係"]
+    compare_with: [polygon-area, floor-sum]
+    page: own
+    visual: "格子の上の多角形で、内部の点 i と辺上の点 b を色分けし S＝i+b/2−1 を確かめる図"
+    problems:
+      - id: typical90_ao
+        difficulty: null
+        role: example
+        summary: "辺上の格子点は gcd(|dx|,|dy|)+1、面積と Pick の定理で内部の格子点を求める"
+        evidence: "https://github.com/E869120/kyopro_educational_90/blob/main/editorial/041-03.jpg"
+      - id: abc202_f
+        difficulty: 2905
+        role: practice
+        summary: "凸包の面積の偶奇（＝格子点の性質）で部分集合を数える（発展）"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0522_abc202"
+
+  - key: circle-geometry
+    title: 円（位置関係・交点・円が絡む探索）
+    aliases: [円の交差判定, 2円の交点, 外接円, 円と格子点]
+    level: 青
+    level_evidence: "abc191_d (1953)、abc181_f (2009)。基礎帯に abc259_d (947)、発展 abc157_f (2525)、abc314_h (2938)"
+    prerequisites: [geometry-vectors, geometry-precision, union-find]
+    acl: "atcoder::dsu（円のつながり）"
+    signs: ["円周を伝って移動", "円どうしが交わるか・接するか", "半径を二分探索", "円の内部の格子点"]
+    compare_with: [min-enclosing-circle, geometry-optimization]
+    page: own
+    visual: "2円の位置関係（離れる・外接・交わる・内接・内包）を中心距離と半径の和・差で並べた図"
+    problems:
+      - id: abc259_d
+        difficulty: 947
+        role: example
+        summary: "円周を伝って2点を行き来できるか。2円の共有点の有無を距離の2乗で整数判定し Union-Find"
+        evidence: "https://merom686.hatenablog.com/entry/2022/07/10/002150"
+      - id: abc191_d
+        difficulty: 1953
+        role: practice
+        summary: "円の内部の格子点の数を y ごとに x の範囲を求めて数える（整数化が要点）"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0206_abc191"
+      - id: abc181_f
+        difficulty: 2009
+        role: example
+        summary: "壁と点を避けて通れる円の最大半径。半径を二分探索し、近い点どうし・壁を Union-Find でつなぐ"
+        evidence: "https://drken1215.hatenablog.com/entry/2020/11/02/013900"
+      - id: abc157_f
+        difficulty: 2525
+        role: practice
+        summary: "K 枚の肉が焼ける最小時刻。時刻を二分探索し、重み付きの円の交点を候補として調べる"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2020/0301_abc157"
+      - id: abc314_h
+        difficulty: 2938
+        role: practice
+        summary: "すべての線分と交わる円の最小半径。凸な関数を入れ子の三分探索（発展）"
+        evidence: "https://drken1215.hatenablog.com/entry/2023/08/12/231800"
+
+  - key: min-enclosing-circle
+    title: 最小包含円
+    aliases: [最小包含円, smallest enclosing circle, Welzl]
+    level: 青
+    level_evidence: "abc151_f (1671)。応用 abc157_f (2525)"
+    prerequisites: [circle-geometry]
+    acl: null
+    signs: ["すべての点を含む最小の円", "最も遠い点までの距離を最小にする位置"]
+    compare_with: [geometry-optimization, randomized]
+    page: "section-of:circle-geometry"
+    visual: "候補の円（2点を直径とする円・3点の外接円）を順に試し、全点を含む最小のものが残る様子"
+    problems:
+      - id: abc151_f
+        difficulty: 1671
+        role: example
+        summary: "N≤50 点を含む最小の円。2点の中点か3点の外心を候補に全部試す（三分探索・乱択でも可）"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2020/0112_abc151"
+      - id: abc157_f
+        difficulty: 2525
+        role: practice
+        summary: "最小包含円と同じ考え方で、重み付きの距離について候補点を絞る"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2020/0301_abc157"
+
+  - key: rotation-transform
+    title: 回転・平行移動・アフィン変換
+    aliases: [回転行列, 座標の回転, アフィン変換, 複素数で回転, 合同変換]
+    level: 水
+    level_evidence: "abc189_e (1526)。基礎帯に abc259_b (180)、abc197_d (831)、黄に abc207_d (2074)"
+    prerequisites: [geometry-vectors, matrix-power]
+    acl: null
+    signs: ["点を θ 度回転", "回転・反転・平行移動の操作列", "回転と平行移動で重なるか", "正多角形の頂点"]
+    compare_with: [manhattan-chebyshev, grid-rotation]
+    page: own
+    visual: "(x, y, 1) に 3×3 行列を掛けると操作が合成できることを、操作を1つずつ適用する動く図で示す"
+    problems:
+      - id: abc259_b
+        difficulty: 180
+        role: example
+        summary: "点を原点中心に d 度回転。度をラジアンに直して回転の式"
+        evidence: "https://merom686.hatenablog.com/entry/2022/07/10/002150"
+      - id: abc197_d
+        difficulty: 831
+        role: example
+        summary: "正 N 角形の向かいの2頂点から隣の頂点。中心を求め、中心まわりに 360/N 度回転"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0327_abc197"
+      - id: abc189_e
+        difficulty: 1526
+        role: example
+        summary: "回転・反転の操作列を何回か適用した点の位置のクエリ。操作を 3×3 のアフィン変換行列にして累積"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0123_abc189"
+      - id: abc207_d
+        difficulty: 2074
+        role: practice
+        summary: "回転と平行移動で点集合が一致するか。重心をそろえ、回転角の候補を絞って照合"
+        evidence: "https://drken1215.hatenablog.com/entry/2023/07/25/143000"
+
+  - key: grid-rotation
+    title: グリッドの回転・転置・反転
+    aliases: [行列の回転, 90 度回転, 転置]
+    level: 基礎
+    level_evidence: "ABC の B〜C で出る（abc298_b は difficulty なし）。01 の2次元配列の扱いとの境界"
+    prerequisites: []
+    acl: null
+    signs: ["盤面を 90 度回転", "回転して一致するか"]
+    compare_with: [rotation-transform]
+    page: "section-of:rotation-transform"
+    visual: "(i, j) → (j, N−1−i) の対応を矢印で示す図"
+    problems:
+      - id: abc298_b
+        difficulty: null
+        role: example
+        summary: "行列 A を 90 度ずつ回転させて条件を満たすか。回転の添字の式で4通り試す"
+        evidence: "https://merom686.hatenablog.com/entry/2023/04/16/020333"
+
+  - key: trig-angle
+    title: 三角関数と角度の基本
+    aliases: [三角関数, 余弦定理, ラジアン, 角度]
+    level: 基礎
+    level_evidence: "abc168_c (230)、abc144_d (714)。応用 abc292_f (1522)"
+    prerequisites: []
+    acl: null
+    signs: ["角度が度で与えられる", "時計の針", "傾けたときの角度"]
+    compare_with: [rotation-transform, geometry-precision]
+    page: "section-of:rotation-transform"
+    visual: null
+    problems:
+      - id: abc168_c
+        difficulty: 230
+        role: example
+        summary: "時計の長針と短針の先端の距離。角度の差から余弦定理"
+        evidence: "https://drken1215.hatenablog.com/entry/2020/05/20/083600"
+      - id: abc144_d
+        difficulty: 714
+        role: practice
+        summary: "水筒を傾けてこぼれない最大角度。水の量で2つの場合に分けて tan を使う"
+        evidence: "https://drken1215.hatenablog.com/entry/2020/04/26/193500"
+      - id: abc292_f
+        difficulty: 1522
+        role: practice
+        summary: "長方形に入る正三角形の最大の一辺。三角形を回したときに先に当たる壁で場合分け"
+        evidence: "https://merom686.hatenablog.com/entry/2023/03/04/234139"
+
+  - key: line-normalization
+    title: 直線・方向の正規化（gcd と符号）
+    aliases: [傾きの正規化, 直線の標準形, ax+by+c=0, 方向ベクトルの約分]
+    level: 水
+    level_evidence: "abc418_e (1282)、abc248_e (1292)。応用 abc220_g (2439)"
+    prerequisites: [gcd-lcm, geometry-vectors]
+    acl: null
+    signs: ["同じ直線上にある点の数", "平行な組の数（台形）", "傾きごとに数える", "垂直二等分線が同じ組"]
+    compare_with: [geometry-precision]
+    page: own
+    visual: "(dx, dy) を gcd で割り、向きを1つにそろえる（dx>0、dx=0 なら dy>0）手順の図"
+    problems:
+      - id: abc418_e
+        difficulty: 1282
+        role: example
+        summary: "台形の数。2点の方向を gcd で約分し符号をそろえ、同じ向きの組の数から数える"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0809_abc418"
+      - id: abc248_e
+        difficulty: 1292
+        role: example
+        summary: "K 点以上を通る直線の数。直線を ax+by+c=0 の既約で符号をそろえた形にして数える"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0416_abc248"
+      - id: abc220_g
+        difficulty: 2439
+        role: practice
+        summary: "等脚台形の重みの最大。座標を2倍して中点を整数にし、中点と方向でまとめる"
+        evidence: "https://merom686.hatenablog.com/entry/2021/09/27/012056"
+
+  - key: manhattan-chebyshev
+    title: マンハッタン距離・チェビシェフ距離と45度回転
+    aliases: [45度回転, u=x+y v=x−y, チェビシェフ距離, L1 距離, L∞ 距離]
+    level: 水
+    level_evidence: "abc437_f (1332)、typical90_aj（★5）。基礎帯に abc178_e (1054)、青に abc351_e (1627)、黄以上に abc265_f (2290)、arc103_b (2677)"
+    prerequisites: [geometry-vectors]
+    acl: "atcoder::segtree（x+y と x−y の最大・最小を管理）"
+    signs: ["マンハッタン距離の最大", "斜め移動・キングの移動", "ひし形の領域", "|x|+|y| の形の距離の和"]
+    compare_with: [axis-independence, rotation-transform]
+    page: own
+    visual: "マンハッタン距離の等距離線（ひし形）が (x+y, x−y) への変換で正方形になる動く図。偶奇で2つの格子に分かれる様子"
+    problems:
+      - id: abc178_e
+        difficulty: 1054
+        role: example
+        summary: "2点間のマンハッタン距離の最大。x+y と x−y それぞれの最大と最小の差"
+        evidence: "https://drken1215.hatenablog.com/entry/2020/10/31/192400"
+      - id: typical90_aj
+        difficulty: null
+        role: example
+        summary: "各クエリ点から最も遠い点の距離。45 度回転した座標の最大・最小の4通りの差"
+        evidence: "https://github.com/E869120/kyopro_educational_90/blob/main/sol/036.cpp"
+      - id: abc437_f
+        difficulty: 1332
+        role: practice
+        summary: "点の更新と、ある点から最も遠い点の距離のクエリ。x+y と x−y の最大・最小をセグ木で管理"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/1220_abc437"
+      - id: abc351_e
+        difficulty: 1627
+        role: practice
+        summary: "斜め移動だけでの全ペアの距離の和。座標を回転して偶奇で分け、各軸を独立にソートして和"
+        evidence: "https://merom686.hatenablog.com/entry/2024/04/28/004200"
+      - id: abc265_f
+        difficulty: 2290
+        role: practice
+        summary: "N 次元で2点からのマンハッタン距離がともに D 以下の格子点の数。斜め方向の累積和で DP を高速化"
+        evidence: "https://drken1215.hatenablog.com/entry/2023/07/15/021500"
+      - id: arc103_b
+        difficulty: 2677
+        role: practice
+        summary: "ロボットアームの腕の長さを決めて全点に届かせる。45 度回転で2軸を独立にし、2 の冪の長さで構成（発展）"
+        evidence: "https://drken1215.hatenablog.com/entry/2018/09/30/002900"
+
+  - key: axis-independence
+    title: x と y を独立に扱う（マンハッタン距離の和・絶対値の外し方）
+    aliases: [軸ごとに独立, 絶対値を外す場合分け, 中央値で距離の和を最小化]
+    level: 水
+    level_evidence: "abc210_d (1507)、abc366_e (1515)。応用 abc330_f (1718)、abc127_e (1938)"
+    prerequisites: [manhattan-chebyshev, prefix-sum, binary-search]
+    acl: null
+    signs: ["マンハッタン距離の和", "x と y の条件が分かれている", "絶対値を含む式の最小化（向きを固定）"]
+    compare_with: [manhattan-chebyshev]
+    page: "section-of:manhattan-chebyshev"
+    visual: null
+    problems:
+      - id: abc210_d
+        difficulty: 1507
+        role: example
+        summary: "C_a+C_b+A×(マンハッタン距離) の最小。向きを固定して絶対値を外し2次元 DP（盤面を反転してもう一度）"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0717_abc210"
+      - id: abc366_e
+        difficulty: 1515
+        role: example
+        summary: "N 点への距離の和が D 以下の格子点の数。x と y の寄与を別々に求めて二分探索で組み合わせる"
+        evidence: "https://merom686.hatenablog.com/entry/2024/08/11/012818"
+      - id: abc330_f
+        difficulty: 1718
+        role: practice
+        summary: "K 回の移動で全点を覆う正方形の最小の一辺。一辺を二分探索し、x と y の必要回数を独立に計算"
+        evidence: "https://drken1215.hatenablog.com/entry/2023/11/27/154100"
+      - id: abc127_e
+        difficulty: 1938
+        role: practice
+        summary: "盤面に K 個置く全通りのコストの和。x 方向と y 方向の差の寄与を別々に数える"
+        evidence: "https://drken1215.hatenablog.com/entry/2019/06/15/111500"
+
+  - key: diagonal-coordinates
+    title: 盤面の斜めを r+c・r−c で扱う
+    aliases: [斜めの番号, 市松模様, r+c の偶奇]
+    level: 基礎
+    level_evidence: "abc184_c (782)。応用 abc377_f (2232)"
+    prerequisites: [manhattan-chebyshev]
+    acl: null
+    signs: ["斜めに動く駒（ビショップ・クイーン）", "市松模様の色が同じマス", "斜めの列ごとに数える"]
+    compare_with: [manhattan-chebyshev]
+    page: "section-of:manhattan-chebyshev"
+    visual: null
+    problems:
+      - id: abc184_c
+        difficulty: 782
+        role: example
+        summary: "特殊な駒の最小手数。r+c の偶奇（市松模様）と斜め移動の性質で場合分け"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2020/1122_abc184"
+      - id: abc377_f
+        difficulty: 2232
+        role: practice
+        summary: "クイーンに取られないマスの数。縦・横・2方向の斜めの直線の交点を包除で数える"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/1026_abc377"
+
+  - key: 3d-geometry
+    title: 3次元の基本（直方体の共通部分・体積）
+    aliases: [3次元, 直方体, 立方体, 体積]
+    level: 基礎
+    level_evidence: "abc361_b (299)、abc144_d (714)。応用 abc343_e (1802)"
+    prerequisites: [geometry-vectors]
+    acl: null
+    signs: ["直方体・立方体の重なり", "共通部分の体積", "3次元の座標"]
+    compare_with: [geometry-vectors]
+    page: own
+    visual: "各軸の区間の重なりを掛け合わせると共通部分の体積になる図"
+    problems:
+      - id: abc361_b
+        difficulty: 299
+        role: example
+        summary: "2つの直方体の共通部分の体積が正か。各軸の区間が重なるか"
+        evidence: "https://drken1215.hatenablog.com/entry/2024/07/07/035814"
+      - id: abc144_d
+        difficulty: 714
+        role: practice
+        summary: "直方体の水筒を傾けてこぼれない最大角度（断面で考える）"
+        evidence: "https://drken1215.hatenablog.com/entry/2020/04/26/193500"
+      - id: abc343_e
+        difficulty: 1802
+        role: practice
+        summary: "3つの立方体の重なりの体積が条件どおりの配置。枝刈りして全探索し、共通部分は軸ごとの区間の積"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0302_abc343"
+
+  - key: geometry-optimization
+    title: 幾何の最適化（候補点の列挙・二分探索・三分探索）
+    aliases: [三分探索で幾何, 半径の二分探索, 候補を絞る]
+    level: 青
+    level_evidence: "abc292_f (1522)、abc151_f (1671)、abc181_f (2009)、abc130_f (2240)、発展 abc314_h (2938)"
+    prerequisites: [binary-search-answer, ternary-search, circle-geometry]
+    acl: null
+    signs: ["実数の位置・時刻・半径を最適化", "答えが実数で誤差 10^-6 程度まで許される", "最適解は何点かで決まる（2点・3点）"]
+    compare_with: [min-enclosing-circle]
+    page: own
+    visual: "目的関数のグラフ（凸）と三分探索の区間が縮む動く図"
+    problems:
+      - id: abc292_f
+        difficulty: 1522
+        role: practice
+        summary: "長方形に入る正三角形の最大の一辺。傾ける角度で場合分け"
+        evidence: "https://merom686.hatenablog.com/entry/2023/03/04/234139"
+      - id: abc151_f
+        difficulty: 1671
+        role: example
+        summary: "最小包含円を候補の列挙で求める（三分探索の別解も）"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2020/0112_abc151"
+      - id: abc181_f
+        difficulty: 2009
+        role: example
+        summary: "半径を二分探索して判定問題（Union-Find）にする"
+        evidence: "https://drken1215.hatenablog.com/entry/2020/11/02/013900"
+      - id: abc130_f
+        difficulty: 2240
+        role: practice
+        summary: "動く点の外接長方形の面積の最小。面積の式が変わる時刻を候補に試す"
+        evidence: "https://drken1215.hatenablog.com/entry/2019/06/22/022600"
+      - id: abc314_h
+        difficulty: 2938
+        role: practice
+        summary: "凸な関数を入れ子の三分探索で最小化（発展）"
+        evidence: "https://drken1215.hatenablog.com/entry/2023/08/12/231800"
+
+  - key: advanced-geometry
+    title: 発展の幾何（動的凸包・回転キャリパー・最近点対・半平面交差など）
+    aliases: [回転キャリパー, 最遠点対, 最近点対, 半平面交差, 動的凸包, ボロノイ図, ドロネー三角形分割, ミンコフスキー和, マンハッタン MST]
+    level: 発展
+    level_evidence: "abc244_h (2878) が動的な上側凸包。ほかは ABC での確認例が少ない（Library Checker の furthest_pair、closest_pair、manhattanmst など）"
+    prerequisites: [convex-hull]
+    acl: null
+    signs: ["最も遠い2点（凸包上）", "最も近い2点（N≤2×10^5）", "半平面の共通部分", "点の追加と ax+by の最大"]
+    compare_with: [convex-hull, convex-hull-trick]
+    page: overview
+    visual: null
+    problems:
+      - id: abc244_h
+        difficulty: 2878
+        role: practice
+        summary: "点の追加と ax+by の最大のクエリ。上側凸包を動的に保ち二分探索（CHT の考え方）"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0320_abc244"
+
+  # ==================================================================
+  # その他
+  # ==================================================================
+  - key: interactive
+    title: インタラクティブ問題
+    aliases: [対話型, インタラクティブ, ジャッジとの対話, flush]
+    level: 水
+    level_evidence: "形式そのものは灰〜茶（abc244_c 165、abc299_d 684）から。設計の工夫が要るのは水〜黄（abc305_f 1420、abc313_d 1630、abc282_f 1734、abc286_f 1841、abc355_e 2299）"
+    prerequisites: [binary-search]
+    acl: null
+    signs: ["This is an interactive task（インタラクティブ問題）", "質問は Q 回まで", "質問の答えが入力として返る", "出力の後に flush"]
+    compare_with: [binary-search]
+    page: own
+    visual: "ジャッジとプログラムのやりとりのシーケンス図（Mermaid）。質問回数と残りの候補数の対応（各質問で候補が半分）"
+    problems:
+      - id: practice_2
+        difficulty: null
+        role: example
+        summary: "比較の質問で N 個を並べる。N=26 は Q≤100 でマージソート、N=5 は Q≤7 で専用の手順（7回で 128 通り ≥ 5!＝120 通り）"
+        evidence: "https://kyopro-friends.hatenablog.com/entry/2020/12/29/133303"
+      - id: abc244_c
+        difficulty: 165
+        role: practice
+        summary: "1〜2N+1 を交互に言い合うゲームをジャッジと行う（入出力の作法の練習）"
+        evidence: "https://drken1215.hatenablog.com/entry/2025/02/08/111105"
+      - id: abc299_d
+        difficulty: 684
+        role: example
+        summary: "S_1=0、S_N=1 の 0/1 列で隣と値が異なる位置を、少ない回数（log2 N 程度）の質問で探す。二分探索"
+        evidence: "https://scrapbox.io/kyopuro-ryusuke920/%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%A9%E3%82%AF%E3%83%86%E3%82%A3%E3%83%96%E5%95%8F%E9%A1%8C%E3%81%BE%E3%81%A8%E3%82%81"
+      - id: abc269_e
+        difficulty: 1030
+        role: practice
+        summary: "盤面で置けるマスを、長方形内のルーク数の質問 20 回で探す。行と列を別々に二分探索"
+        evidence: "https://merom686.hatenablog.com/entry/2022/09/17/232100"
+      - id: abc337_e
+        difficulty: 1155
+        role: example
+        summary: "N 本中1本の腐ったジュースを最少人数で特定。番号の2進表記の各ビットを友人に割り当てる（⌈log2 N⌉ 人）"
+        evidence: "https://merom686.hatenablog.com/entry/2024/01/21/020110"
+      - id: abc019_4
+        difficulty: 1378
+        role: practice
+        summary: "2頂点間の距離の質問で木の直径を求める。ある頂点から最も遠い頂点を探し、そこから再び最も遠い頂点"
+        evidence: "https://drken1215.hatenablog.com/entry/2021/06/14/001500"
+      - id: abc305_f
+        difficulty: 1420
+        role: example
+        summary: "隣接頂点だけ分かるグラフで 2N 回以内の移動で頂点 N へ。DFS の行きと帰りで各辺を高々2回"
+        evidence: "https://drken1215.hatenablog.com/entry/2023/06/12/122200"
+      - id: abc313_d
+        difficulty: 1630
+        role: practice
+        summary: "ちょうど K 個（奇数）の XOR の質問 N 回で全要素を特定。最初の K+1 個を1つずつ除いた質問で連立"
+        evidence: "https://drken1215.hatenablog.com/entry/2023/08/06/010000"
+      - id: abc282_f
+        difficulty: 1734
+        role: practice
+        summary: "先に区間を出力し、後から来る [L,R] を2区間の和で答える。Sparse Table と同じ長さ 2^k の区間"
+        evidence: "https://drken1215.hatenablog.com/entry/2022/12/29/112939"
+      - id: abc286_f
+        difficulty: 1841
+        role: practice
+        summary: "関数グラフを出力し K 回たどった結果から N を当てる。互いに素な長さの閉路と中国剰余定理"
+        evidence: "https://merom686.hatenablog.com/entry/2023/01/21/233759"
+      - id: abc355_e
+        difficulty: 2299
+        role: practice
+        summary: "二進区間の和だけ聞けるとき最少回数で区間和を求める。区間の端点を頂点とするグラフの最短路（引き算も使う）"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0525_abc355"
+
+  - key: randomized
+    title: 乱択アルゴリズム
+    aliases: [乱択, ランダム化, モンテカルロ法, ラスベガス法, mt19937]
+    level: 青
+    level_evidence: "abc339_f (1716)、abc272_g (2187)、abc238_g (2254)、abc447_g (2391)。水に abc422_e (1580)"
+    prerequisites: [expected-value]
+    acl: null
+    signs: ["過半数・半分以上が満たす", "確率的に正しければよい（決定的な方法が重い）", "ハッシュの mod や係数を実行時に決めたい", "敵対的な入力を避けたい"]
+    compare_with: [hashing-for-sets, hash-safety]
+    page: own
+    visual: "試行回数 k と失敗確率 (1−p)^k のグラフ（p＝1/4 なら 100 回で約 3×10^-13）"
+    problems:
+      - id: abc422_e
+        difficulty: 1580
+        role: example
+        summary: "過半数の点を通る直線があるか。ランダムな2点がその直線上にある確率は 1/4 以上なので繰り返して検証"
+        evidence: "https://merom686.hatenablog.com/entry/2025/09/08/001908"
+      - id: abc339_f
+        difficulty: 1716
+        role: example
+        summary: "巨大整数の積の一致を数える。ランダムな大きい素数の mod で比較（固定の mod は対策されていた）"
+        evidence: "https://merom686.hatenablog.com/entry/2024/02/04/021920"
+      - id: abc272_g
+        difficulty: 2187
+        role: practice
+        summary: "半数を超える要素が mod M で合同になる M≥3。ランダムな2要素の差の約数を試す（隣接ペアの決定的解法も）"
+        evidence: "https://merom686.hatenablog.com/entry/2022/10/09/013149"
+      - id: abc238_g
+        difficulty: 2254
+        role: practice
+        summary: "区間積が立方数か。素因数ごとに乱数を割り当てたハッシュの累積和"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0205_abc238"
+      - id: abc447_g
+        difficulty: 2391
+        role: practice
+        summary: "要素にランダムな色を割り当てて条件を単純にし DP する（Color Coding）"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0228_abc447"
+
+  - key: majority-element
+    title: 過半数の扱い（Boyer–Moore の投票・ランダムな代表）
+    aliases: [過半数, 主元素, majority vote, Boyer-Moore majority]
+    level: 青
+    level_evidence: "abc422_e (1580)、abc272_g (2187)"
+    prerequisites: [randomized]
+    acl: null
+    signs: ["半数を超える要素が条件を満たす", "過半数を占める値・直線・剰余"]
+    compare_with: [randomized]
+    page: "section-of:randomized"
+    visual: "異なる2要素を打ち消し合って最後に残る候補を示すステップ送り"
+    problems:
+      - id: abc422_e
+        difficulty: 1580
+        role: example
+        summary: "過半数の点を通る直線をランダムな2点から探す"
+        evidence: "https://merom686.hatenablog.com/entry/2025/09/08/001908"
+      - id: abc272_g
+        difficulty: 2187
+        role: practice
+        summary: "過半数が同じ余りになる M をランダムな2要素の差から探す"
+        evidence: "https://merom686.hatenablog.com/entry/2022/10/09/013149"
+
+  - key: color-coding
+    title: Color Coding（乱択で状態を減らす）
+    aliases: [Color Coding, カラーコーディング]
+    level: 黄
+    level_evidence: "abc447_g (2391)"
+    prerequisites: [randomized, bit-dp]
+    acl: null
+    signs: ["K 個（小さい）の異なる要素を選ぶ条件を DP したいが状態が多すぎる"]
+    compare_with: [bit-dp]
+    page: "section-of:randomized"
+    visual: null
+    problems:
+      - id: abc447_g
+        difficulty: 2391
+        role: example
+        summary: "ランダムな色分けが正解の配置に合う確率（1/64 など）を見積もり、繰り返して DP する"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0228_abc447"
+
+  - key: bitset-speedup
+    title: bitset による高速化
+    aliases: [bitset, ビット並列, ワード並列, 1/64 倍]
+    level: 青
+    level_evidence: "abc258_g (1944)、abc348_f (1955)。黄に arc070_b (2015)、abc350_g (2058)、agc020_c (2259)、発展 abc221_g (2914)"
+    prerequisites: [bit-operations, dp-basics, complexity-estimation]
+    acl: null
+    signs: ["N≤2000〜5000 程度で O(N^3) や O(N^2 M) が少し間に合わない", "部分和が作れるか（和の上限が 10^5〜10^6）", "共通の隣接頂点・三角形の数", "偶奇（XOR）だけ分かればよい"]
+    compare_with: [complexity-estimation, bit-dp]
+    page: own
+    visual: "64 個の bool を1語に詰める図と、シフト OR で作れる部分和の集合が広がるステップ送り"
+    problems:
+      - id: abc258_g
+        difficulty: 1944
+        role: example
+        summary: "N≤3000 頂点のグラフの三角形の数。隣接行列の行を bitset にして AND の popcount"
+        evidence: "https://merom686.hatenablog.com/entry/2022/07/02/233918"
+      - id: abc348_f
+        difficulty: 1955
+        role: example
+        summary: "同じ値の列が奇数個ある行の組の数。(列, 値) ごとの行集合を bitset にして XOR で偶奇を集計"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0406_abc348"
+      - id: arc070_b
+        difficulty: 2015
+        role: practice
+        summary: "不要なカードの枚数。部分和を bitset のシフト OR で（単調性と二分探索の解法も）"
+        evidence: "https://drken1215.hatenablog.com/entry/2020/10/06/113600"
+      - id: abc350_g
+        difficulty: 2058
+        role: practice
+        summary: "森への辺の追加と2頂点の共通の隣接頂点のクエリ。隣接集合の bitset の AND（親を管理する解法も）"
+        evidence: "https://drken1215.hatenablog.com/entry/2024/04/21/014200"
+      - id: agc020_c
+        difficulty: 2259
+        role: practice
+        summary: "全非空部分集合の和の中央値。bitset で作れる部分和を求め、総和の半分以上で最小のもの"
+        evidence: "https://drken1215.hatenablog.com/entry/2019/04/03/224800"
+      - id: abc221_g
+        difficulty: 2914
+        role: practice
+        summary: "45 度回転で2軸を独立にし、bitset の部分和 DP と復元（発展）"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/1002_abc221"
+
+  - key: constant-factor
+    title: 実行時間の見積もりと定数倍（08 から見た補足）
+    aliases: [定数倍高速化, 実行時間の目安, キャッシュ効率]
+    level: 水
+    level_evidence: "abc258_g (1944) と abc348_f (1955) は愚直でも定数倍しだいで通るという記録がある。01（計算量の見積もり）と 09（C++）との境界"
+    prerequisites: [complexity-estimation]
+    acl: null
+    signs: ["計算量はぎりぎり（10^9 回程度）", "同じ計算量でも書き方で通るかが変わる"]
+    compare_with: [bitset-speedup]
+    page: "section-of:complexity-estimation"
+    visual: null
+    problems:
+      - id: abc258_g
+        difficulty: 1944
+        role: practice
+        summary: "O(N^3) の愚直がぎりぎり通り、最適化オプションで約2倍速くなった記録（bitset が本筋）"
+        evidence: "https://merom686.hatenablog.com/entry/2022/07/02/233918"
+      - id: abc348_f
+        difficulty: 1955
+        role: practice
+        summary: "O(N^2 M) の愚直でも C++ なら間に合うという記録（bitset で定数倍を軽くするのが本筋）"
+        evidence: "https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0406_abc348"
