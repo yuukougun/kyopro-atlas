@@ -1,0 +1,28 @@
+# 学習記録（記録用スキルが書き込む。GitHub には上げない）
+notes/
+
+# 取得したデータのキャッシュ（AtCoder Problems の JSON など）
+.cache/
+
+# MkDocs のビルド出力
+site/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Node.js
+node_modules/
+
+# コード片の検証で生成されるファイル
+*.out
+*.o
+a.out
+
+# エディタ・OS が作るファイル
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+*:Zone.Identifier
