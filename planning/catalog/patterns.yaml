@@ -1,0 +1,364 @@
+# 題材別（patterns）の目次。担当 I。規則は planning/catalog/README.md、上位の規則は planning/design.md §2〜§5（特に §4.1 の 8 と §4.2）。
+# - 問題に現れる「対象」（区間・順列・括弧列など）から引く案内ページ（type: pattern）。手法の説明は各分野のページに任せ、
+#   各ページの sections に「よく出る問われ方 → 使う手法（他分野の key）」を書く。prerequisites は空か最小限にし、関係する手法は related に書く。
+# - patterns は level・frequency を持たない（level: null。frequency は書かない）。
+# - 調査の key を持つのは bracket-sequence（research/00・08。README §6 で持ち主は patterns）と mex（research/00 の gap）だけ。
+#   ほかの6ページは調査に key がないので新しい id を付けた。research/00 の gap 項目の受け渡し（moved）は guide.yaml にまとめた。
+# - 並び順は設計書 §4.1 の候補の順を、列の題材（区間・順列・括弧列・mex・K 番目と中央値）→ 数（XOR）→ 盤面（グリッド）→ 操作（クエリ）に並べ替えた。
+# - problems は各分野の調査の候補（第三者の解説で裏付けのあるもの）と research/00 §2.3.8 の分類表から選び、tools/ap.py で実在を確かめた。
+field: patterns
+pages:
+  - id: interval
+    title: 区間（連続部分列と区間の集合）
+    aliases: [区間, 連続部分列, 部分配列, subarray, 区間の集合, 区間クエリ]
+    type: pattern
+    level: null
+    kind: [案内, 区間クエリ, 累積和・差分]
+    prerequisites: []
+    related: [prefix-sum, prefix-sum-counting, imos, difference-sequence, two-pointers, monotonic-stack, contribution, dp-sequence-partition, interval-dp, segment-tree, lazy-segment-tree, sparse-table, offline-queries, mo-algorithm, interval-scheduling, interval-set, event-sort, sweep-line-2d]
+    summary: "区間が出てくる問題の案内。連続部分列を数える・選ぶ、区間に操作して質問する、与えられた区間の集合を選ぶ・まとめる、の3つの型に分け、累積和・尺取り・いもす法・セグ木・区間スケジューリング・区間 DP などへ問われ方ごとに案内する。"
+    signs:
+      - {type: phrase, text: "和が K（K の倍数）になる連続部分列の個数"}
+      - {type: phrase, text: "すべての連続部分列についての最小値・最大値・2番目の値の総和"}
+      - {type: phrase, text: "区間に一括で加算・代入し、区間の和や最小値を答える"}
+      - {type: phrase, text: "N 個の区間 [L_i, R_i] から重ならないように最大何個選べるか"}
+      - {type: phrase, text: "区間を塗るたびに、塗られていない長さや個数を答える"}
+      - {type: phrase, text: "区間に含まれる異なる値の個数を多数答える"}
+    acl: []
+    sections:
+      - "題材の性質：区間は半開区間 [l, r) で考える（長さは r − l、和は S_r − S_l）。区間は O(N²) 個あるので、全部を見ずに数える工夫が要る。区間を (l, r) の2次元の点とみる見方"
+      - "【連続部分列を数える・選ぶ】区間の和 → 累積和（prefix-sum）。和が K・和が K の倍数の区間の個数 → 累積和と連想配列（prefix-sum-counting）"
+      - "条件が区間の伸び縮みで単調（和が K 以上、種類数が K 以下など）→ 尺取り法（two-pointers）。単調でなければ左端ごとに二分探索"
+      - "全区間の最小値・最大値・2番目の値の総和 → 各要素が答えになる区間の数を数える寄与（contribution）。左右の大きい値・小さい値の位置は単調スタック（monotonic-stack）"
+      - "全区間の中央値・mex・転倒数 → 題材別の K 番目と中央値・mex・順列のページ"
+      - "列をいくつかの区間に区切る方法の数・最適値 → 区間分割 DP（dp-sequence-partition）"
+      - "区間を縮めながら取り除く・隣どうしを合体させる操作の最適 → 区間 DP（interval-dp）"
+      - "【区間に操作して質問する】加算をまとめて最後に見る → いもす法（imos）。更新と質問が交互 → BIT・セグ木（segment-tree）、区間への一括更新 → 遅延セグ木（lazy-segment-tree）。値が変わらない区間の min → Sparse Table（sparse-table）"
+      - "区間に ±1 する操作の最小回数・可否 → 差分列で2点の操作に言い換える（difference-sequence）"
+      - "区間の異なる値の個数・区間の x 以下の個数 → クエリを先読みして右端の順に処理し BIT で数える（offline-queries）、Mo（mo-algorithm）"
+      - "【与えられた区間の集合】重ならない最大個数・すべてを串刺しにする最小の点の数 → 区間スケジューリング（interval-scheduling）"
+      - "区間の和集合・塗りつぶし・残りの長さ（座標が 10^9）→ 区間を set で管理（interval-set）、座標圧縮といもす法"
+      - "ある区間に含まれる区間・交差する区間の数 → 端点でソートして走査（event-sort）、BIT と組む平面走査（sweep-line-2d）"
+      - "落とし穴：閉区間と半開区間の混同、空区間の扱い、区間の数 N(N+1)/2 のオーバーフロー"
+    merged_keys: []
+    visual: "連続部分列を (l, r) の2次元の点として描き、区間の数え上げが三角形の領域の数え上げになる様子を示す静的な図"
+    problems:
+      - {id: abc233_d, role: example, summary: "和がちょうど K の区間の個数。累積和の差が K になる組を連想配列で数える"}
+      - {id: abc230_d, role: example, summary: "幅 D のパンチですべての壁を壊す最小回数。右端の小さい順に、まだ壊れていない壁の右端から打つ（区間の串刺し）"}
+      - {id: abc435_e, role: example, summary: "区間を黒く塗るたびに白いマスの数を答える（N は 10^9 まで）。塗った区間を set で管理する"}
+      - {id: abc183_d, role: practice, summary: "各人が時間の区間で一定量のお湯を使うとき、どの時刻も上限以下か。区間の加算をいもす法でまとめる"}
+      - {id: abc130_d, role: practice, summary: "和が K 以上の連続区間の数。左端が進むと最小の右端も進むので尺取り法"}
+      - {id: abc466_e, role: practice, summary: "区間の裏表の反転を「切り替え点を2つ置く」ことに言い換え、使った点の数を状態にした DP で解く"}
+      - {id: abc106_d, role: practice, summary: "区間 [p, q] に完全に含まれる列車の区間の数を多数答える。左端と右端の2次元の累積和（または走査）で数える"}
+      - {id: abc174_f, role: practice, summary: "区間の異なる値の個数を多数答える。クエリを右端の順に処理し、各値の最後の出現位置に印を付けた BIT で数える"}
+      - {id: abc140_e, role: challenge, summary: "全区間の2番目に大きい値の総和。各値が2番目になる区間の数を、左右の大きい値の位置から数える"}
+      - {id: abc454_f, role: challenge, summary: "数列を回文にする最小の操作回数を、差の列への区間 ±1 に言い換え、さらに隣の差を取って2点の操作の問題にする"}
+    sources: ["01-basics §4（累積和・いもす法・尺取り法・区間スケジューリング・イベントソート）", "01-basics §6.2", "05-ds §4.A（interval-set・monotonic-stack）", "05-ds §4.C", "05-ds §4.D（offline-queries・mo-algorithm・sweep-line-2d）", "02-dp §4.C（dp-sequence-partition）", "02-dp §4.D", "00-curriculum §4.2（区間の種類数・平面走査・差分列への言い換え）", "00-curriculum §6.2（区間・列）"]
+
+  - id: permutation
+    title: 順列（置換）
+    aliases: [順列, 置換, permutation, swap, 並べ替え, 1〜N の順列]
+    type: pattern
+    level: null
+    kind: [案内, 数え上げ, 考察]
+    prerequisites: []
+    related: [permutation-cycles, permutation-parity, inversion-number, functional-graph, doubling, insertion-dp, hakone-ekiden-dp, derangement, kth-combination, permutation-search, lis, construction]
+    summary: "1〜N の順列が与えられる問題の案内。i → P_i の矢印が作るサイクル、任意の swap と隣接 swap の回数、swap の回数の偶奇、置換の合成と繰り返し、順列の数え上げ、辞書順など、問われ方ごとに使う手法とページを示す。"
+    signs:
+      - {type: phrase, text: "(1, 2, …, N) の順列 P が与えられる"}
+      - {type: phrase, text: "任意の2要素の swap を繰り返してソートする最小回数"}
+      - {type: phrase, text: "隣り合う2要素の swap でソートする最小回数"}
+      - {type: phrase, text: "ちょうど K 回の swap（10^100 回など）で作れる列"}
+      - {type: phrase, text: "置換を K 回（K ≤ 10^18）適用した結果"}
+      - {type: phrase, text: "条件を満たす順列の個数"}
+    acl: []
+    sections:
+      - "題材の性質：i → P_i の矢印を描くと、いくつかのサイクルに分かれる（どの頂点も入る辺と出る辺が1本の Functional graph）。逆置換（pos[P_i] = i）と置換の合成"
+      - "任意の swap でソートする最小回数・最小手順 → N − サイクル数（permutation-cycles）、手順の構築（construction）"
+      - "隣接 swap でソートする最小回数・i < j かつ P_i > P_j の組の数 → 転倒数を BIT で数える（inversion-number）"
+      - "ちょうど K 回の swap・3要素の巡回だけで作れるか → swap の回数の偶奇（permutation-parity）"
+      - "置換を K 回適用した結果・K 回後の位置 → サイクルごとに K mod 長さ（functional-graph）、置換の合成をダブリング（doubling）"
+      - "位置と値の両方から引く操作 → 順列と逆置換の2つの配列を同時に更新する"
+      - "条件を満たす順列の数 → 相対順位を状態にした挿入 DP（insertion-dp）、未確定の数を持つ箱根駅伝 DP（hakone-ekiden-dp）、包除原理と撹乱順列（derangement）"
+      - "辞書順で何番目か・辞書順で K 番目の順列 → 残りの並べ方の数で先頭から決める（kth-combination）。N ≤ 8 程度なら順列全探索（permutation-search）"
+      - "増加部分列・減少部分列、いくつの増加部分列に分けられるか → LIS（lis）"
+      - "落とし穴：任意 swap と隣接 swap の混同、同じ値があるときの偶奇（同じ値の入れ替えで偶奇を調整できる）、1-indexed の順列を 0-indexed に直すときのずれ"
+    merged_keys: []
+    visual: "i → P_i の矢印のサイクル図。同じサイクルの2要素の swap でサイクルが2つに割れ、別のサイクルどうしの swap で1つにつながる様子（置換の巡回分解のページのステップ送りを共有）"
+    problems:
+      - {id: abc436_e, role: example, summary: "最小回数でソートする swap の列の1手目になりうる swap の数。サイクルごとに C(サイズ, 2) を足す"}
+      - {id: abc190_f, role: example, summary: "順列を巡回シフトした各状態の転倒数。先頭を末尾に移したときの増減を足していく"}
+      - {id: abc470_f, role: example, summary: "swap できる位置の組で連結成分を作り、各成分の並べ方を数える。ちょうど 10^100 回なので swap の回数の偶奇が効く"}
+      - {id: abc350_c, role: practice, summary: "順列を N−1 回以下の swap でソートする手順を出力する。各値を正しい位置へ送る"}
+      - {id: abc470_d, role: practice, summary: "位置 → 値と値 → 位置（逆置換）の2つの配列を同時に更新しながら操作を処理する"}
+      - {id: dp_t, role: practice, summary: "隣り合う大小関係が指定された順列の数。最後の要素の相対順位を状態にした挿入 DP を累積和で速くする"}
+      - {id: abc367_e, role: practice, summary: "数列に置換を K（≤ 10^18）回適用した結果。置換の合成をダブリングで行う"}
+      - {id: abc175_d, role: practice, summary: "順列に従ってコマを K 回以内動かしたスコアの最大。各始点のサイクルを求め、1周の和の符号で場合分けする"}
+      - {id: abc296_f, role: challenge, summary: "2つの列への同時の swap を片方の3要素の巡回に言い換え、swap の回数の偶奇で可否を判定する"}
+      - {id: abc371_g, role: challenge, summary: "置換を繰り返し適用して辞書順最小の列を作る。サイクルごとに最小値の位置を選び、回数の条件を合同式でそろえる"}
+    sources: ["00-curriculum §4.2（置換の巡回分解・置換の偶奇、転倒数）", "00-curriculum §5.1", "07-math-comb §4.4（permutation-cycles）", "07-math-comb §4.3（derangement）", "05-ds §4.C（inversion-number）", "03-graph §4.C（functional-graph）", "02-dp §4.H", "01-basics §4（順列全探索・ダブリング）", "00-curriculum §2.3.8（abc470_d）"]
+
+  - id: bracket-sequence
+    title: 括弧列
+    aliases: [正しい括弧列, カッコ列, 括弧の対応, parentheses, バランスの取れた括弧列]
+    type: pattern
+    level: null
+    kind: [案内, 文字列, 累積和・差分]
+    prerequisites: [prefix-sum]
+    related: [stack-techniques, bracket-dp, catalan-number, lazy-segment-tree, segment-tree-monoids, exchange-argument, greedy-priority-queue, parsing]
+    summary: "'(' を +1、')' を −1 とした累積和が「途中で負にならず、最後に 0」なら正しい括弧列である、という1つの言い換えから、判定・数え上げ・区間の判定・並べる順序・価値の最大化の問われ方ごとに、使う手法とページを案内する。"
+    signs:
+      - {type: phrase, text: "'(' と ')' からなる文字列が正しい括弧列か判定する"}
+      - {type: phrase, text: "? を ( か ) に置き換えて正しい括弧列にする方法の数"}
+      - {type: phrase, text: "文字の入れ替えのたびに、区間が正しい括弧列かを答える"}
+      - {type: phrase, text: "複数の括弧列を並べて連結し、正しい括弧列にできるか"}
+      - {type: phrase, text: "長さ 2N の正しい括弧列の個数（カタラン数）"}
+    acl: []
+    sections:
+      - "題材の性質：±1 の累積和はいま開いている括弧の数。途中で負にならず最後に 0 ⇔ 正しい括弧列。列を（累積和の最小値, 合計）に要約すると、2つの列を連結した列の要約も計算できる（モノイドになる）"
+      - "1種類の括弧の判定 → ±1 の累積和（prefix-sum）。複数種類の括弧の対応 → スタック（stack-techniques）"
+      - "対応する括弧を取り除き続けた結果・入れ子の構造 → 開き括弧の位置をスタックに積む（stack-techniques）"
+      - "? の埋め方の数・条件を満たす括弧列の数 → 開いている括弧の数を状態にした DP（bracket-dp）。長さ 2N の正しい括弧列の数はカタラン数（catalan-number）"
+      - "区間 [l, r) が正しい括弧列か（更新あり）→ 累積和の区間加算と区間 min を遅延セグ木で（lazy-segment-tree）。条件は「区間内の累積和の最小 ≥ 始点の値」かつ「始点と終点の値が等しい」"
+      - "（合計, 最小値）をセグ木に載せて区間の括弧列をまとめる → モノイドの設計（segment-tree-monoids）"
+      - "複数の括弧列を並べる順序 → 各列を（最小値, 合計）に要約し、合計が増えるものと減るものに分けてソートする貪欲（exchange-argument）"
+      - "価値が最大の正しい括弧列を選ぶ → 「先頭 2i−1 文字に ( が i 個以上」と言い換え、優先度付きキューで貪欲に選ぶ（greedy-priority-queue）"
+      - "数式の文字列・入れ子の構造の解析 → 構文解析（parsing）"
+      - "落とし穴：複数種類の括弧を累積和だけで判定する、並べる順序を1つの基準でソートする、区間の判定で始点の累積和を引き忘れる"
+    merged_keys: []
+    visual: "折れ線（山脈）の図：'(' で上がり ')' で下がる。0 の線を下回る位置で失敗、最後が 0 で成功。連結は折れ線をつなぐ図（静的な SVG）"
+    problems:
+      - {id: abc312_d, role: example, summary: "? を ( か ) に置き換えて正しい括弧列にする方法の数。開いている括弧の数を状態にした DP"}
+      - {id: abc407_e, role: example, summary: "値の和が最大になる正しい括弧列を選ぶ。「先頭 2i−1 文字に ( が i 個以上」と言い換え、優先度付きキューで貪欲に選ぶ"}
+      - {id: abc223_f, role: example, summary: "2文字の入れ替えと、区間が正しい括弧列かの判定を繰り返す。累積和の区間加算と区間 min の遅延セグ木"}
+      - {id: abc394_d, role: practice, summary: "3種類の括弧からなる列が正しいかを、スタックで対応を取って判定する"}
+      - {id: typical90_b, role: practice, summary: "長さ N の正しい括弧列を辞書順にすべて出力する。全通りを作って累積和で判定する（★3）"}
+      - {id: abc307_d, role: practice, summary: "中に括弧を含まない (…) を消せるだけ消した結果。開き括弧の位置をスタックに積む"}
+      - {id: abc473_f, role: practice, summary: "括弧列と同じ型の条件（累積和が途中で負にならない）に言い換え、遅延セグ木で扱う"}
+      - {id: abc167_f, role: challenge, summary: "N 個の括弧列を並べて正しい括弧列にできるか。各列を（累積和の最小値, 合計）に要約し、増えるものと減るものに分けて並べる"}
+    sources: ["00-curriculum §4.2（括弧列）", "00-curriculum §5.1", "08-string-geo §4.1（bracket-sequence）", "08-string-geo §5（括弧列）", "02-dp §4.C（bracket-dp）", "05-ds §4.A（stack-techniques）", "05-ds §4.C（segment-tree-monoids）", "07-math-comb §4.4（catalan-number）", "00-curriculum §2.3.8（abc473_f）"]
+
+  - id: mex
+    title: mex（含まれない最小の非負整数）
+    aliases: [MEX, minimum excluded, 含まれない最小の値, まだ出ていない最小の値]
+    type: pattern
+    level: null
+    kind: [案内, データ構造, 考察]
+    prerequisites: []
+    related: [ordered-set, segtree-binary-search, interval-set, fix-variable, contribution, two-pointers, lazy-segment-tree, grundy-number]
+    summary: "集合に含まれない最小の非負整数 mex を求める・更新する・総和を取る問題の案内。「N 要素の mex は N 以下」「mex ≥ k+1 ⇔ 0〜k をすべて含む」の2つの性質から、set による管理・値の固定・主客転倒・Grundy 数へつなぐ。"
+    signs:
+      - {type: phrase, text: "含まれない最小の非負整数（mex）を答える"}
+      - {type: phrase, text: "1点を書き換えるたびに数列の mex を答える"}
+      - {type: phrase, text: "長さ M の全区間の mex の最小値"}
+      - {type: phrase, text: "全区間・全パスの mex の総和"}
+    acl: []
+    sections:
+      - "題材の性質：N 要素の mex は N 以下なので、N より大きい値は無視してよい（出現回数の配列は大きさ N+1 で足りる）。mex ≥ k+1 ⇔ 0〜k をすべて含む。0〜N−1 がそろうと mex は N になる"
+      - "更新のたびに mex を答える → 出現回数を数え、出現回数 0 の値の集合を set で持つ（ordered-set）。セグ木上の二分探索でもよい（segtree-binary-search）。値が区間で入るなら区間を set で管理（interval-set）"
+      - "区間・窓の mex の最小値・最大値 → 値 k を固定し、k を含まない区間があるかを k の出現位置の間隔で調べる（fix-variable）"
+      - "全区間・全パスの mex の総和 → mex ≥ k+1 となる対象の数を k について足す主客転倒（contribution）。区間なら尺取り（two-pointers）と遅延セグ木（lazy-segment-tree）を組み合わせる"
+      - "ゲームの局面の値 → Grundy 数は遷移先の Grundy 数の mex（grundy-number）"
+      - "mex を指定した値にする列の構築 → 0〜k−1 をすべて入れて k を入れない、の必要十分から考える"
+      - "落とし穴：値の上限で打ち切らずに大きすぎる配列を取る、mex が N になる場合を忘れる、多重集合で出現回数を数えずに set から消してしまう"
+    merged_keys: []
+    visual: "数直線上に出現する値を塗り、最初の空きのマスを mex として示す静的な図。更新で空きが動く様子を添える"
+    problems:
+      - {id: abc330_e, role: example, summary: "1点を書き換えるたびに数列の mex を答える。出現回数 0 の値の集合を set で持つ"}
+      - {id: abc194_e, role: example, summary: "長さ M の全区間の mex の最小値。値 k を固定し、k を含まない長さ M の区間があるかを出現位置の間隔で調べる"}
+      - {id: abc438_f, role: example, summary: "木の全パスの mex の総和。mex ≥ k+1 となるパス（0〜k をすべて含むパス）の数を k について足す主客転倒"}
+      - {id: tessoku_book_ah, role: practice, summary: "X 個か Y 個を取る石取りゲーム。各山の Grundy 数を遷移先の mex で求め、全部の山の XOR で勝敗を決める（鉄則本 A34）"}
+      - {id: abc368_f, role: practice, summary: "整数を真の約数に置き換えるゲーム。Grundy 数（遷移先の mex）が素因数の個数になることを使い、XOR で勝敗を決める"}
+      - {id: abc297_g, role: practice, summary: "L 個以上 R 個以下を取る Nim。小さい山の Grundy 数を mex で表にして周期 L+R の規則を見つける"}
+      - {id: abc470_g, role: challenge, summary: "mex の総和を値ごとの寄与に言い換え、尺取りと遅延セグ木で数える"}
+    sources: ["00-curriculum §4.2（mex）", "00-curriculum §5.1", "05-ds §4.A（ordered-set・interval-set）", "05-ds §4.C（segtree-binary-search）", "07-math-comb §4.6（grundy-number・grundy-patterns）", "00-curriculum §2.3.8（abc470_g）"]
+
+  - id: kth-and-median
+    title: K 番目と中央値
+    aliases: [K 番目, k 番目の値, 中央値, メディアン, 上位 K 個, 順位]
+    type: pattern
+    level: null
+    kind: [案内, 二分探索, データ構造]
+    prerequisites: []
+    related: [kth-value, binary-search-answer, priority-queue, top-k-multiset, k-best-enumeration, kth-element, segtree-on-values, ordered-set, balanced-bst, wavelet-matrix, median-binary-search, median-absolute, fractional-binary-search, kth-combination, dp-kth-lexicographic, xor-basis]
+    summary: "K 番目に小さい値・上位 K 個の和・中央値を問う問題の案内。値を1つずつ加えながらデータ構造で保つか、「x 以下が K 個以上か」で答えを二分探索するか、優先度付きキューで小さい順に取り出すかを、問われ方とデータの動き方から選べるようにする。"
+    signs:
+      - {type: phrase, text: "K 番目に小さい（大きい）値を答える"}
+      - {type: phrase, text: "N² 個の積・和・差の中で K 番目"}
+      - {type: phrase, text: "値の追加・更新のたびに、大きい方から K 個の和を答える"}
+      - {type: phrase, text: "中央値の最大値・最小値"}
+      - {type: phrase, text: "Σ|x − a_i| を最小にする x"}
+      - {type: phrase, text: "辞書順で K 番目のもの"}
+    acl: []
+    sections:
+      - "題材の性質：K 番目 ≤ x ⇔ x 以下が K 個以上（個数の単調性）。中央値は「x 以上が半分を超えるか」に言い換えられる。偶数個のときの中央値の定義に注意"
+      - "候補が多すぎて並べられない（N² 個の積など）→ x 以下の個数を数えて答えを二分探索（kth-value, binary-search-answer）"
+      - "値を追加しながら K 番目・上位 K 個 → K が固定なら優先度付きキューで K 個を保つ（priority-queue）。上位 K 個の和・中央値の更新は2つの multiset・2つのヒープ（top-k-multiset）"
+      - "値の追加・削除がある K 番目 → 値の範囲が小さいか先読みできれば BIT 上の二分探索・値を添字にするセグ木（kth-element, segtree-on-values）。k が小さければ multiset から k 歩進む（ordered-set）。オンラインで値域が大きければ平衡二分探索木・pb_ds（balanced-bst）"
+      - "小さい方から K 個の解を列挙する → 優先度付きキューで最小を取り出し、次の候補を足す（k-best-enumeration）"
+      - "区間の K 番目・区間の x 以下の個数 → クエリを先読みして BIT、Wavelet Matrix（wavelet-matrix、発展）"
+      - "中央値の最大化・最小化 → x 以上を +1、未満を −1 にした和の符号で判定する二分探索（median-binary-search）"
+      - "Σ|x − a_i| の最小 → 中央値を選ぶ（median-absolute）。更新があれば2つのヒープで中央値を保つ"
+      - "平均の最大化 → 各要素から x を引いた和の符号で判定する二分探索（fractional-binary-search）"
+      - "辞書順で K 番目の文字列・順列 → 残りの個数を数えて先頭から決める（kth-combination, dp-kth-lexicographic）"
+      - "XOR で作れる値の K 番目 → XOR 基底（xor-basis）"
+      - "落とし穴：K が 0-indexed か 1-indexed か、同じ値が複数あるときの順位、二分探索の判定が「x 以下」か「x 未満」か"
+    merged_keys: []
+    visual: "値を数直線に並べ、x を動かしたときの「x 以下の個数」の階段グラフで、高さ K を初めて超える x が K 番目になる様子を示す静的な図"
+    problems:
+      - {id: abc234_d, role: example, summary: "順列の先頭 i 個の中で K 番目に大きい値を i ごとに答える。大きい方から K 個を優先度付きキューで保つ"}
+      - {id: abc306_e, role: example, summary: "1点更新のたびに大きい方から K 個の和を答える。上位 K 個と残りを2つの multiset で持ち、境界の要素を入れ替える"}
+      - {id: abc155_d, role: example, summary: "N 個から2つ選んだ積の K 番目。x 以下の積の個数を符号で場合分けして数え、x を二分探索する"}
+      - {id: abc205_d, role: practice, summary: "数列に含まれない正整数のうち K 番目。x 以下で欠けている個数の単調性で二分探索する"}
+      - {id: abc202_d, role: practice, summary: "a が A 個・b が B 個の文字列の辞書順 K 番目。先頭を a にした場合の個数（二項係数）と K を比べて1文字ずつ決める"}
+      - {id: arc100_a, role: practice, summary: "Σ|A_i − (b + i)| の最小化。B_i = A_i − i と置き直すと中央値を選べばよい"}
+      - {id: abc297_e, role: practice, summary: "品物を重複して選んだ合計のうち小さい方から K 番目。最小を取り出して品物を足した値を入れ、重複は set で除く"}
+      - {id: abc241_d, role: practice, summary: "値の追加と、x 以下で k 番目に大きい値・x 以上で k 番目に小さい値の質問（k ≤ 5）。multiset の lower_bound から k 歩進む"}
+      - {id: abc203_d, role: practice, summary: "K×K の区画の中央値の最小。「中央値 ≤ x ⇔ x 以下が一定数以上」と言い換え、2次元累積和で判定して二分探索する"}
+      - {id: abc127_f, role: challenge, summary: "|x − a| + b を足し込む更新と最小値の質問。中央値を2つの優先度付きキューで保つ"}
+      - {id: abc287_g, role: challenge, summary: "得点ごとの枚数を更新しながら、上位 X 枚の得点の和の最大を答える。値を添字にしたセグ木で境界を探す"}
+    sources: ["01-basics §4（K 番目の値・中央値の二分探索・絶対値の和と中央値・優先度付きキューで列挙）", "01-basics §7.1", "05-ds §4.A（priority-queue・top-k-multiset・ordered-set）", "05-ds §4.C（kth-element・segtree-on-values）", "05-ds §4.E", "02-dp §4.A（dp-kth-lexicographic）", "07-math-comb §4.2（kth-combination）", "00-curriculum §4.2（上位 K 個の和・分数計画）", "00-curriculum §6.2（K 番目／中央値）"]
+
+  - id: xor
+    title: XOR
+    aliases: [排他的論理和, xor, ビットごとの排他的論理和, 累積 XOR]
+    type: pattern
+    level: null
+    kind: [案内, ビット演算, 線形代数・行列]
+    prerequisites: [bit-operations]
+    related: [bitwise-independence, prefix-sum, fenwick-tree, tree-distance, binary-trie, xor-basis, xor-path, digit-dp, two-pointers, meet-in-the-middle, nim, grundy-number, hashing-for-sets, hadamard-transform]
+    summary: "XOR が出てくる問題の案内。XOR は桁ごとに独立で、同じ値どうしで打ち消し合う、という2つの性質から、桁ごとの寄与・累積 XOR・XOR 基底・Binary Trie・Nim・集合のハッシュへ、問われ方ごとに使う手法とページを示す。"
+    signs:
+      - {type: phrase, text: "すべての組・すべての区間の XOR の総和"}
+      - {type: phrase, text: "x を選んで XOR の最大値・最小値を求める"}
+      - {type: phrase, text: "いくつか選んだ XOR で作れる値・作れる値の個数・K 番目"}
+      - {type: phrase, text: "区間の XOR・木のパスの XOR・経路の XOR"}
+      - {type: phrase, text: "石を取り合うゲームで、山の石の数の XOR"}
+    acl: []
+    sections:
+      - "題材の性質：XOR は桁どうしが干渉しない。a xor a = 0（同じ値で打ち消す）、順序を入れ替えてよい。a + b = (a xor b) + 2(a and b)。0 から n までの XOR は n mod 4 で決まる"
+      - "全ペア・全区間の XOR の和 → 桁ごとに 0 と 1 の個数を数える（bitwise-independence）"
+      - "区間の XOR → 累積 XOR（prefix-sum）。1点の更新があれば BIT・セグ木（fenwick-tree）"
+      - "木の2点間のパスの XOR → 根からの XOR どうしの XOR（tree-distance）"
+      - "x を選んで max(a_i xor x) を最小化・集合の2要素の XOR の最小 → 上位ビットから決める（bitwise-independence）、Binary Trie（binary-trie）"
+      - "いくつか選んだ XOR で作れる値・その最大値・K 番目 → XOR 基底（xor-basis）"
+      - "グラフの経路の XOR の最小 → 閉路の XOR を基底にする（xor-path）"
+      - "XOR が絡む条件を満たす数の個数（a + b = a xor b、x ≤ K）→ 桁 DP（digit-dp）"
+      - "区間の XOR と和が等しい区間の数 → どの bit も重ならない条件は区間を縮めても保たれるので尺取り（two-pointers）"
+      - "小さいグリッドの経路の XOR が 0 になる数 → 半分全列挙（meet-in-the-middle）"
+      - "石取りゲーム → Nim は山の XOR が 0 かどうか（nim）、独立なゲームの和は Grundy 数の XOR（grundy-number）"
+      - "2つの集合が一致するか → 値に乱数を割り当てて XOR（hashing-for-sets）。多重集合には和を使う"
+      - "添字の XOR で畳み込む → アダマール変換（hadamard-transform、発展）"
+      - "落とし穴：足し算は繰り上がりで桁が干渉するので桁ごとに分けられない、XOR のハッシュは同じ要素2つで打ち消す、C++ で ^ は == より優先順位が低い"
+    merged_keys: []
+    visual: "数を2進表記で縦に並べ、桁ごとに 0 と 1 の個数を数える静的な図（bit ごとに独立に考えるページの図を共有）"
+    problems:
+      - {id: abc171_e, role: example, summary: "自分以外の全員の XOR から各自の値を復元する。全員分を XOR すると全体の XOR が求まり、打ち消し合いで各自の値が出る"}
+      - {id: abc147_d, role: example, summary: "すべての組の XOR の和。桁ごとに 0 の個数と 1 の個数の積を数えて足す"}
+      - {id: abc236_f, role: example, summary: "すべての値を XOR で作れるように選ぶ最小コスト。安い順に XOR 基底へ入れていく"}
+      - {id: abc185_f, role: practice, summary: "1点を XOR で更新し、区間の XOR を答える。BIT・セグ木に XOR を載せる"}
+      - {id: abc365_e, role: practice, summary: "長さ2以上の全区間の XOR の総和。累積 XOR の桁ごとの 0 と 1 の個数で数える"}
+      - {id: abc121_d, role: practice, summary: "A 以上 B 以下の整数の XOR。0 から n までの XOR が4つ周期で決まることを使う"}
+      - {id: arc098_b, role: practice, summary: "XOR と和が等しい区間の数。どの bit も重ならない条件は区間を縮めても保たれるので尺取り"}
+      - {id: abc201_e, role: practice, summary: "木の全頂点対のパスの XOR の和。根からの XOR の組に直し、桁ごとに数える"}
+      - {id: abc281_f, role: practice, summary: "x を選んで max(a_i xor x) を最小化する。上位ビットから、0 と 1 が混ざる桁でグループを2つに分けて再帰する"}
+      - {id: abc308_g, role: challenge, summary: "集合への追加・削除のたびに、2要素の XOR の最小値を答える（Binary Trie、またはソート順で隣り合う組を multiset で持つ）"}
+      - {id: abc451_g, role: challenge, summary: "グラフの経路の XOR の最小化。全域木から外れた辺が作る閉路の XOR を基底にし、XOR 基底で最小化する"}
+    sources: ["01-basics §4（bit 演算の基本と XOR の性質・桁ごとに独立に考える）", "00-curriculum §4.2（bit ごとに独立に考える）", "00-curriculum §6.2（整数）", "06-math-nt §4.6（xor-basis）", "05-ds §4.E（binary-trie）", "08-string-geo §4.5（binary-trie）", "03-graph §4.B（xor-path）", "04-tree §4.4", "07-math-comb §4.6（nim）"]
+
+  - id: grid
+    title: グリッド（マス目）
+    aliases: [グリッド, マス目, 盤面, 迷路, 二次元配列, H×W]
+    type: pattern
+    level: null
+    kind: [案内, グラフ探索, DP]
+    prerequisites: []
+    related: [grid-graph, bfs, multi-source-bfs, zero-one-bfs, extended-dijkstra, union-find, dp-grid, lattice-paths, inclusion-exclusion-dp, prefix-sum-2d, imos-2d, sweep-line-2d, axis-independence, coordinate-compression, parity, checkerboard-parity, manhattan-chebyshev, diagonal-coordinates, grid-rotation, grid-brute-force, bipartite-matching, broken-profile-dp, state-space-search]
+    summary: "H×W のマス目が出てくる問題の案内。マスを頂点とする最短路（BFS・01-BFS）、右・下に進む DP、2次元累積和、行と列を独立に扱う、市松模様の偶奇、45度回転、盤面の回転、小さい盤面の全探索などへ、問われ方ごとに案内する。"
+    signs:
+      - {type: phrase, text: "H×W のマス目で、スタートからゴールへの最小の移動回数"}
+      - {type: phrase, text: "右か下にだけ進む経路の数・経路上の値の最大"}
+      - {type: phrase, text: "長方形の範囲の和・黒マスの個数を多数答える"}
+      - {type: phrase, text: "1×2 のタイル（ドミノ）を敷き詰める・置く"}
+      - {type: phrase, text: "盤面を 90 度回転・反転させて一致させる"}
+      - {type: phrase, text: "斜めに動く駒・マンハッタン距離・ひし形の範囲"}
+    acl: []
+    sections:
+      - "題材の性質：マスを頂点・隣り合うマスを辺とするグラフ。(行 + 列) の偶奇で塗った市松模様は二部グラフになる。座標は (行, 列) の 0-indexed で書き、x・y との対応を決める"
+      - "最小の移動回数 → グリッドの BFS（grid-graph, bfs）。コストが 0 と 1 → 01-BFS（zero-one-bfs）。複数の始点 → 多始点 BFS（multi-source-bfs）。向き・残り回数などの状態がある → 状態を頂点にする（extended-dijkstra）"
+      - "連結成分・塗りつぶし・マスを塗りながらの連結判定 → DFS・BFS、Union-Find（union-find）"
+      - "右か下にだけ進む → グリッドの DP（dp-grid）。経路の数は二項係数（lattice-paths）。障害物のある巨大なグリッドの経路の数 → 包除の DP（inclusion-exclusion-dp）"
+      - "長方形の和・個数 → 2次元累積和（prefix-sum-2d）。長方形への加算をまとめる → 2次元いもす法（imos-2d）。更新と質問が交互・先読みできる → 平面走査（sweep-line-2d）"
+      - "行と列を選ぶ・行と列への操作 → 行と列を独立に考える（axis-independence）、行と列を別々に座標圧縮する（coordinate-compression）。最後の操作だけが効く操作は題材別の操作列とクエリのページ"
+      - "到達・敷き詰めの可否、操作で変わらないもの → 市松模様の偶奇（parity, checkerboard-parity）"
+      - "斜めの移動・マンハッタン距離・ひし形の範囲 → 45度回転（manhattan-chebyshev）。斜めの列は r+c・r−c で番号を付ける（diagonal-coordinates）"
+      - "盤面の回転・反転・平行移動 → 添字の対応の式（grid-rotation）、全部試す（grid-brute-force）"
+      - "ドミノの配置・隣り合わないマスの選び方の最大 → 市松模様で二部マッチング・フロー（bipartite-matching）。幅が小さい盤面の塗り方の数 → プロファイル DP（broken-profile-dp）"
+      - "盤面全体が状態の小さなパズル → 状態空間の BFS（state-space-search）"
+      - "落とし穴：範囲外の判定、H と W の取り違え、行と列の向きと x・y の対応、BFS の距離の初期値と訪問済みの印を付ける時点"
+    merged_keys: []
+    visual: "グリッドに市松模様の色を付け、隣り合うマスが必ず違う色であることを示す静的な図。グリッドの BFS の層の動く図は BFS のページのものを使う"
+    problems:
+      - {id: abc176_d, role: example, summary: "歩く（コスト 0）とワープ（5×5 の範囲、コスト 1）がある迷路の最小ワープ回数を 01-BFS で求める"}
+      - {id: abc311_e, role: example, summary: "穴のない正方形の数。各マスを右下の角とする最大の正方形の一辺を DP で求める"}
+      - {id: abc454_e, role: example, summary: "グリッドの市松模様の色の偶奇で、移動の可否を判定して構築する"}
+      - {id: abc213_c, role: practice, summary: "カードのない行と列を消した後の座標。行と列を独立に座標圧縮する"}
+      - {id: abc383_c, role: practice, summary: "加湿器から D 歩以内のマスを数える。すべての加湿器を始点にした多始点 BFS"}
+      - {id: abc331_d, role: practice, summary: "N×N の模様を敷き詰めた巨大な盤面で、長方形内の黒マスを数える。周期で分けて2次元累積和"}
+      - {id: abc232_e, role: practice, summary: "飛車の K 手の経路の数。行・列が目的地と一致するかの4状態に圧縮した DP"}
+      - {id: abc210_d, role: practice, summary: "2マスの値とマンハッタン距離からなるコストの最小。向きを固定して絶対値を外し、盤面を反転してもう一度 DP"}
+      - {id: abc186_f, role: challenge, summary: "障害物のある盤面で、飛車が2手以内に行けるマスの数。行を順に走査し、列の状態を BIT で持つ"}
+    sources: ["03-graph §4.A（bfs・grid-graph・multi-source-bfs）", "03-graph §4.B（zero-one-bfs・extended-dijkstra）", "02-dp §4.A（dp-grid）", "01-basics §4（2次元累積和・2次元いもす法・偶奇）", "08-string-geo §4.8（manhattan-chebyshev・grid-rotation）", "05-ds §4.D（sweep-line-2d）", "07-math-comb §4.2（lattice-paths）", "00-curriculum §3.2（グリッドの市松模様）", "00-curriculum §6.2（グラフ・木）"]
+
+  - id: operation-sequence
+    title: 操作列とクエリ（逆順処理・先読み）
+    aliases: [クエリ, 操作の列, 逆順処理, クエリ先読み, オフライン処理, シミュレーション]
+    type: pattern
+    level: null
+    kind: [案内, クエリ処理の工夫, データ構造]
+    prerequisites: []
+    related: [global-offset, linked-list, stack-techniques, interval-set, union-find-next-pointer, reverse-thinking, offline-reverse, union-find-connectivity, offline-queries, mo-algorithm, segment-tree, lazy-segment-tree, sqrt-decomposition, root-path-dfs, persistent-data-structures, rollback-union-find, simulation-speedup, doubling, event-sort]
+    summary: "操作やクエリが Q 個続く問題の案内。全体への操作を変数で持つ、最後の操作だけが効く、削除を逆順の追加にする、クエリを先読みして並べ替える、過去の版に戻る、周期で打ち切る、などの型を、データ構造と考察のページへ案内する。"
+    signs:
+      - {type: phrase, text: "Q 個のクエリを順に処理する（Q ≤ 2×10^5）"}
+      - {type: phrase, text: "辺や頂点を1つずつ削除するたびに、連結成分の数を答える"}
+      - {type: phrase, text: "全体に加算する・全体を反転する操作が混ざる"}
+      - {type: phrase, text: "過去の状態に戻す・ある時点の状態をコピーする"}
+      - {type: phrase, text: "行や列・区間を塗り替える操作の後の最終状態"}
+      - {type: phrase, text: "同じ操作を 10^18 回繰り返した後の状態"}
+    acl: []
+    sections:
+      - "題材の性質：Q 個の操作を1回 O(log N) 以下で処理するか、まとめて（オフラインで）処理するかの2つの道がある。まず「答えをその場で出す必要があるか」「後の操作が前の操作を打ち消すか」を確かめる"
+      - "全体への加算・反転・回転 → 全体の操作を変数（オフセット・反転フラグ・先頭の位置）で持つ（global-offset）"
+      - "列の途中への挿入・削除・付け替え → 配列で持つ連結リスト（linked-list）。両端だけなら deque（stack-techniques）"
+      - "区間を塗る・同じ値の区間をまとめる → 区間を set で管理（interval-set）、次の空きへ飛ぶ Union-Find（union-find-next-pointer）"
+      - "後の操作が前の操作を上書きする（行・列・区間の塗り替え）→ 後ろから見て、まだ決まっていない場所だけを数える（reverse-thinking）"
+      - "削除が難しい（辺・頂点の削除と連結性）→ 逆順にして追加にする（offline-reverse, union-find-connectivity）"
+      - "クエリを先読みしてよい → 並べ替えてまとめて処理する（offline-queries）。区間のクエリは Mo（mo-algorithm）。時刻と位置のイベントにして走査する（event-sort）"
+      - "更新と質問が交互で区間を扱う → セグ木・遅延セグ木（segment-tree, lazy-segment-tree）。大小で場合分けが要るなら平方分割（sqrt-decomposition）"
+      - "過去の版に戻る・版をコピーする → 版の木を DFS でたどって巻き戻す（root-path-dfs）、永続データ構造（persistent-data-structures）、取り消しのできる Union-Find（rollback-union-find、発展）"
+      - "同じ操作を非常に多く繰り返す → 状態の周期を見つけて打ち切る（simulation-speedup）、操作の合成をダブリング（doubling）"
+      - "落とし穴：クエリの添字が 1-indexed、逆順に処理したときの答えの並べ直し、全体の変数と個別の値に二重に適用する"
+    merged_keys: []
+    visual: "クエリの列を時間軸に並べ、逆順処理では右から左へ辺を足していく様子を示す静的な図（Union-Find の動く図はデータ構造のページのものを使う）"
+    problems:
+      - {id: abc158_d, role: example, summary: "文字列の反転と先頭・末尾への追加のクエリ。反転フラグと deque で、実際には反転しない"}
+      - {id: abc229_e, role: example, summary: "頂点を順に消すたびの連結成分の数。逆順に頂点を足して Union-Find で数える"}
+      - {id: abc253_f, role: example, summary: "行の上書き・列の範囲への加算・1マスの値の取得のクエリ。クエリを先読みし、答えを「最後の上書き」と「その後の加算」に分けて BIT で数える"}
+      - {id: abc212_d, role: practice, summary: "袋への追加・全体への加算・最小値の取り出し。全体への加算をオフセットの変数で持つヒープ"}
+      - {id: abc477_d, role: practice, summary: "後の操作が前の操作を覆い隠す操作列の結果を、クエリを逆順に処理して求める"}
+      - {id: abc344_e, role: practice, summary: "値の直後への挿入と値の削除を繰り返した最終の列。前と次を連想配列で持つ連結リスト"}
+      - {id: abc380_e, role: practice, summary: "同じ色でつながった区間を塗り替えるクエリと、色ごとのマス数のクエリ。区間を set（または Union-Find）でまとめる"}
+      - {id: abc461_e, role: practice, summary: "行と列の塗り替えの後の状態。行・列ごとに最後の操作だけを管理し、寄与の差分をクエリ番号を添字にしたセグ木で数える"}
+      - {id: abc273_e, role: practice, summary: "末尾への追加・削除・保存・読み込みの後の末尾を答える。各版が親を指す木で持つ"}
+      - {id: abc453_g, role: challenge, summary: "数列のコピー・1点更新・区間和のクエリ。クエリを先読みして版の木を作り、オイラーツアーでたどる（オンラインなら永続セグ木）"}
+      - {id: abc128_e, role: challenge, summary: "時間帯ごとに通行止めになる地点があり、各人が最初に止まる地点を答える。時刻をずらしてイベントにし、set で管理する"}
+    sources: ["05-ds §4.A（global-offset・linked-list・stack-techniques・interval-set）", "05-ds §4.B（offline-reverse・union-find-next-pointer・rollback-union-find）", "05-ds §4.D（offline-queries・mo-algorithm・sqrt-decomposition・persistent-data-structures）", "03-graph §4.D（union-find-connectivity）", "04-tree §4.17（root-path-dfs）", "01-basics §4（後ろから・逆順に考える・周期性の検出・イベントソート）", "00-curriculum §2.3.8（abc477_d・abc461_e）", "00-curriculum §6.2（ゲーム・操作・その他）"]
+
+moved: []
+dropped: []
+open_issues:
+  - "bracket-sequence と mex 以外の6ページ（interval・permutation・kth-and-median・xor・grid・operation-sequence）は調査に key がないので新しい id を付けた。題材の候補としては「環状の列（円環）」「回文」「木のパス」も考えたが、それぞれ cyclic-shift・dp-cyclic、palindrome、tree-path の技法ページが案内を兼ねられるので、設計書 §4.1 の8ページにとどめた"
+  - "02 の bracket-dp（括弧列の DP）は、設計書 §4.2「括弧列の DP・セグ木・貪欲の応用は各ページの節」に従い dp 側に残る想定で、bracket-sequence からは related でリンクした。dp 側が patterns へ移すなら bracket-sequence の merged_keys に取り込む"
+  - "kth-and-median は、01 の kth-value（青）・05 の kth-element（水）・05 の top-k-multiset（水）・01 の median-binary-search（青）と問われ方が重なる。手法の説明はそれぞれのページに置き、このページは「データの動き方から手法を選ぶ」表に絞る。method-comparison の「K 番目を取るデータ構造」の節と内容が重ならないよう、執筆時に分担を決める"
+  - "grid と operation-sequence はどちらも「行・列の最後の操作だけが効く」型（abc461_e・abc253_f）を扱う。案内は operation-sequence に置き、grid からはリンクだけにした"

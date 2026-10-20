@@ -1,0 +1,1612 @@
+# 目次：グラフ（graph）。担当 C。規則は planning/catalog/README.md、上位の規則は planning/design.md §3〜§5。
+# 並び順は research/03 §7.1 の6つのまとまり（基本と探索 → 最短路 → 有向グラフ → 連結性と全域木 → 経路の種類 → フロー）に、
+# 横断・その他（グラフの構築・次数の平方分割・彩色数）を最後に足したもの。
+# 問題 ID はすべて tools/ap.py で実在を確かめた。要約は調査の裏付け（research/03・04・00 の表）をもとに自分の言葉で書いた。
+field: graph
+pages:
+  # ───────────── 1. 基本と探索 ─────────────
+  - id: graph-basics
+    chapter: 基本と探索
+    title: グラフの表現と用語
+    aliases: [グラフの基本, 隣接リスト, 隣接行列, 辺リスト, 次数]
+    type: technique
+    level: 基礎
+    level_evidence: "typical90_bz（★2）・abc284_c (193)。ABC の C〜D で前提として使われる"
+    kind: [グラフ探索]
+    prerequisites: [complexity-estimation]
+    related: [dfs, bfs, grid-graph, graph-modeling]
+    summary: "N 頂点 M 辺のグラフを隣接リスト・隣接行列・辺リストのどれで持つかと、次数・パス・連結・木・DAG などの用語をそろえる。アルゴリズムごとに向く表現が決まっている。"
+    signs:
+      - {type: phrase, text: "N 頂点 M 辺のグラフで、i 番目の辺は頂点 u_i と v_i を結ぶ"}
+      - {type: constraint, text: "N, M ≤ 2×10^5 では隣接行列（N^2 要素）は持てない"}
+    acl: []
+    frequency: A
+    sections:
+      - "隣接リスト・隣接行列・辺リストとアルゴリズムごとの使い分け"
+      - "用語（次数・パスとウォーク・単純グラフ・連結・木・DAG・二部グラフ・補グラフ）"
+      - "握手補題（次数の和は 2M）"
+      - "落とし穴（1-indexed・無向グラフは両方向に追加・多重辺・重みの和のあふれ）"
+    merged_keys: []
+    visual: "図：同じグラフを図・隣接リスト・隣接行列・辺リストの4通りで並べ、1本の辺がそれぞれどこに現れるかを色で追う"
+    problems:
+      - {id: typical90_bz, role: example, summary: "各頂点について番号の小さい隣接頂点を数える（隣接リストの作り方の確認）"}
+      - {id: abc284_c, role: practice, summary: "単純無向グラフの連結成分の個数を数える"}
+    sources: ["03-graph §4.A（グラフの表現と用語）", "03-graph §5.2 A", "03-graph §6.4（用語集）"]
+
+  - id: dfs
+    chapter: 基本と探索
+    title: 深さ優先探索（DFS）
+    aliases: [深さ優先探索, DFS, バックトラック, 行きがけ順, 帰りがけ順]
+    type: technique
+    level: 基礎
+    level_evidence: "abc315_e (921)・abc284_e (1043)。木の上では abc138_d (920)"
+    kind: [グラフ探索]
+    prerequisites: [graph-basics]
+    related: [bfs, connected-components, cycle-detection, topological-sort, recursive-enumeration, tree-traversal, cpp-recursive-lambda, cpp-stack-depth]
+    summary: "行けるところまで進んでから戻る探索で、到達可能性・連結成分・閉路検出・トポロジカル順の土台になる。帰りがけで訪問の印を外すバックトラック型にすると、単純パスを全列挙できる。"
+    signs:
+      - {type: phrase, text: "すべての単純パス・経路を数える（答えが上限を超えたら打ち切ってよい）"}
+      - {type: phrase, text: "依存関係をたどり、帰りがけ順に処理する"}
+      - {type: constraint, text: "N ≤ 10 程度で経路を全部列挙できる"}
+    acl: []
+    frequency: A
+    sections:
+      - "一度訪れた頂点は二度と訪れない型（O(N+M)）"
+      - "バックトラック型（帰りがけで印を外す）"
+      - "行きがけ順と帰りがけ順"
+      - "非再帰の DFS と再帰の深さ"
+      - "BFS・Union-Find との使い分け"
+    merged_keys: []
+    visual: "図：再帰の呼び出しスタックとグラフを並べ、行きがけ番号・帰りがけ番号が付いていく様子。バックトラック型では印を外す瞬間を色で示す（余裕があれば動く図）"
+    problems:
+      - {id: abc315_e, role: example, summary: "本1を読むのに必要な本を、依存関係の DFS の帰りがけ順で列挙する"}
+      - {id: abc378_d, role: practice, summary: "グリッドで同じマスを通らない長さ K の経路を、バックトラックで数える"}
+      - {id: typical90_bt, role: practice, summary: "小さいグリッドで最長の閉路を DFS の全探索で求める"}
+      - {id: abc284_e, role: practice, summary: "頂点1からの単純パスを上限まで数える。帰りがけで訪問の印を外す"}
+    sources: ["03-graph §4.A（深さ優先探索）", "03-graph §5.2 A"]
+
+  - id: bfs
+    chapter: 基本と探索
+    title: 幅優先探索（BFS）と無重み最短路
+    aliases: [幅優先探索, BFS, 無重み最短路, 多始点 BFS, 経路復元]
+    type: technique
+    level: 基礎
+    level_evidence: "abc211_d (755)・abc168_d (804)・abc151_d (959)・abc007_3 (1024)。多始点は abc383_c (750)・agc033_a (1159)"
+    kind: [グラフ探索, 最短路]
+    prerequisites: [graph-basics, stack-techniques]
+    related: [dfs, zero-one-bfs, dijkstra, grid-graph, state-space-search, shortest-path-dag, extended-dijkstra]
+    summary: "始点に近い順に頂点を確定させる探索で、辺の重みがすべて等しいグラフの最短距離を O(N+M) で求める。発見したときの親を記録すれば経路を復元でき、全始点を最初にキューへ入れれば多始点の最短距離になる。"
+    signs:
+      - {type: phrase, text: "最小の手数・回数を求める（1回の移動のコストがすべて同じ）"}
+      - {type: phrase, text: "一番近い〇〇までの距離・複数の場所から同時に広がる"}
+      - {type: phrase, text: "最短経路を1つ出力する・次に進む頂点を答える"}
+      - {type: constraint, text: "N, M ≤ 2×10^5、またはマスの数 H×W ≤ 10^6 程度"}
+    acl: []
+    frequency: A
+    sections:
+      - "最初に見つけた距離が最短になる理由"
+      - "印は push のときに付ける・dist を −1 で初期化して訪問済みの印を兼ねる"
+      - "経路復元（発見したときの親を記録して終点からたどる）"
+      - "多始点 BFS（超始点から距離0の辺を張るのと同じ）"
+      - "重みが 1 と 2 なら辺を割る・重み付きなら 01-BFS かダイクストラ"
+    merged_keys: [multi-source-bfs, path-restoration]
+    visual: "動く図：キューの中身と距離の層（同心円状の色分け）を同時に見せるステップ送り。push するときに印を付けることを強調する"
+    problems:
+      - {id: abc007_3, role: example, summary: "迷路の最短手数を求める。グリッド BFS の基本形"}
+      - {id: abc383_c, role: practice, summary: "加湿器から D 歩以内のマスを、全加湿器を始点にした BFS で数える"}
+      - {id: abc168_d, role: practice, summary: "部屋1への最短経路で次に進む部屋（BFS の親）を各部屋について出力する"}
+      - {id: abc160_d, role: practice, summary: "近道が1本ある直線状のグラフで、全点対の距離ごとの組数を数える"}
+      - {id: abc151_d, role: practice, summary: "迷路の2マス間の最短距離の最大値を、全マスから BFS して求める"}
+      - {id: agc033_a, role: practice, summary: "黒マスが周囲に広がる回数を、全黒マスを始点にした BFS で求める"}
+      - {id: abc460_d, role: challenge, summary: "マスの塗り替えの繰り返しを、多始点 BFS（8近傍）の距離と偶奇で調べる"}
+    sources: ["03-graph §4.A（幅優先探索・多始点 BFS）", "03-graph §4.B（ダイクストラ法の経路復元）", "03-graph §5.2 A", "00-curriculum §2.3.8（abc460_d）"]
+
+  - id: grid-graph
+    chapter: 基本と探索
+    title: グリッドグラフ
+    aliases: [グリッド BFS, 迷路, 盤面の探索, 4近傍, 8近傍]
+    type: technique
+    level: 基礎
+    level_evidence: "abc325_c (400)・abc351_d (974)・abc088_d (999)。障害物の連結で判定する応用は abc413_g (1723)"
+    kind: [グラフ探索]
+    prerequisites: [bfs, dfs]
+    related: [connected-components, zero-one-bfs, union-find-connectivity, bipartite-graph, max-flow]
+    summary: "マスを頂点、隣り合うマスを辺とみなして BFS・DFS・Union-Find をそのまま使う。(i, j) の1次元化、番兵、止まるマスの扱い、市松模様で二部グラフになることなどの小技をまとめる。"
+    signs:
+      - {type: phrase, text: "H×W のマス目を上下左右（8方向）に移動する・壁や障害物がある"}
+      - {type: constraint, text: "H, W ≤ 2000 程度（マスの数が 4×10^6 程度まで）"}
+      - {type: phrase, text: "H, W が巨大で障害物が少ない（障害物どうしのつながりを考える）"}
+    acl: []
+    frequency: A
+    sections:
+      - "4近傍・8近傍と dx・dy の配列"
+      - "(i, j) を i×W+j に1次元化する・外周に番兵を置く"
+      - "止まるマス・境界のマスの数え方"
+      - "市松模様で二部グラフになる（フロー・マッチングへの入口）"
+      - "障害物どうしの8近傍の連結で通れるかを判定する（青）"
+    merged_keys: []
+    visual: "図：(i, j) と頂点番号 i×W+j の対応表と dx・dy の矢印。市松模様の色分けで二部グラフになることも示す"
+    problems:
+      - {id: abc325_c, role: example, summary: "8方向に隣接する '#' の塊の個数を数える"}
+      - {id: abc351_d, role: practice, summary: "磁石の隣で止まるグリッドで、到達できるマスの数の最大値を求める（境界のマスの扱い）"}
+      - {id: abc088_d, role: practice, summary: "最短経路に使わない白マスを黒く塗れる最大数を、最短距離から逆算する"}
+      - {id: typical90_l, role: practice, summary: "マスを赤く塗るクエリと2マスの連結判定のクエリを Union-Find で処理する"}
+      - {id: abc413_g, role: challenge, summary: "巨大なグリッドで通れるかを、障害物どうしの8近傍の連結（双対）で判定する"}
+    sources: ["03-graph §4.A（グリッドグラフ）", "03-graph §5.2 A"]
+
+  - id: connected-components
+    chapter: 基本と探索
+    title: 連結成分
+    aliases: [連結成分分解, 連結判定, グループ分け]
+    type: technique
+    level: 基礎
+    level_evidence: "abc292_d (579)・abc177_d (732)。座標を頂点にする応用は abc131_f (1937)"
+    kind: [グラフ探索, 連結性・全域木]
+    prerequisites: [dfs, union-find]
+    related: [union-find-connectivity, scc, namori-graph, cycle-detection, graph-modeling]
+    summary: "無向グラフを互いに行き来できる頂点の集まりに分ける。グラフが固定なら DFS・BFS、辺が増えていくなら Union-Find を使い、成分ごとに頂点数・辺数などを集計する。"
+    signs:
+      - {type: phrase, text: "つながっているか・グループの数・最大のグループの大きさ"}
+      - {type: phrase, text: "友達の友達は友達"}
+      - {type: phrase, text: "成分ごとに頂点数と辺数を比べる（木か・閉路がちょうど1つか）"}
+    acl: [dsu]
+    frequency: A
+    sections:
+      - "DFS・BFS・Union-Find の3つの求め方と使い分け"
+      - "成分ごとの集計（頂点数と辺数で木・なもり・それ以外を見分ける）"
+      - "孤立点・多重辺・自己ループの数え方"
+      - "森の連結成分の数は N − M"
+      - "座標や値を頂点にして成分を考える（青）"
+    merged_keys: []
+    visual: "図：DFS・BFS・Union-Find の3通りで同じ成分が得られる様子。成分ごとに頂点数と辺数を表示し、木（辺 = 頂点 − 1）となもり（辺 = 頂点）を色分けする"
+    problems:
+      - {id: abc177_d, role: example, summary: "友達関係の連結成分の最大の大きさが、必要なグループ数になる"}
+      - {id: abc292_d, role: practice, summary: "すべての連結成分で頂点数と辺数が等しいかを判定する"}
+      - {id: abc157_d, role: practice, summary: "各人について、同じ成分にいて友達でもブロック相手でもない人の数を求める"}
+      - {id: abc131_f, role: challenge, summary: "x 座標と y 座標を頂点にした二部グラフの成分ごとに、x の数と y の数の積を数える"}
+    sources: ["03-graph §4.A（連結成分）", "03-graph §5.2 A", "05-ds §4.B（Union-Find）"]
+
+  - id: cycle-detection
+    chapter: 基本と探索
+    title: 閉路の検出と復元
+    aliases: [閉路検出, サイクル検出, 有向閉路, 無向閉路, 3色の DFS]
+    type: technique
+    level: 基礎
+    level_evidence: "abc288_c (436)・abc311_c (448)・abc285_d (663)"
+    kind: [グラフ探索]
+    prerequisites: [dfs, union-find]
+    related: [topological-sort, functional-graph, scc, namori-graph, graph-modeling, periodicity]
+    summary: "無向グラフでは Union-Find か「親以外の訪問済みの頂点への辺」、有向グラフでは探索中の頂点への辺（3色の DFS）で閉路を見つけ、親をたどって復元する。シミュレーションの周期の検出とは別の話である。"
+    signs:
+      - {type: phrase, text: "循環している・依存関係が回っている・矛盾があれば −1"}
+      - {type: phrase, text: "閉路を1つ見つけて出力せよ"}
+    acl: [dsu, scc_graph]
+    frequency: B
+    sections:
+      - "無向グラフ：Union-Find・親以外の訪問済みの頂点への辺（多重辺は辺の番号で除外）"
+      - "有向グラフ：3色の DFS（探索中の頂点への辺だけが閉路）"
+      - "Kahn 法で残る頂点（すべてが閉路上とは限らない）"
+      - "閉路の復元（親をたどる）"
+      - "出次数1のグラフでは同じ頂点に2回来るまで進む"
+      - "シミュレーションの周期の検出（基本テクニックの章）との違い"
+    merged_keys: []
+    visual: "図：有向グラフの3色 DFS（未訪問・探索中・完了）。探索中の頂点への辺を見つけた瞬間に、スタックから閉路を切り出す"
+    problems:
+      - {id: abc285_d, role: example, summary: "名前の変更依頼の有向グラフに閉路があるかで、変更できるかを判定する"}
+      - {id: abc288_c, role: practice, summary: "閉路をなくすために消す辺の最小数を、Union-Find で閉路を作る辺を数えて求める"}
+      - {id: abc311_c, role: practice, summary: "各頂点から辺が1本出る有向グラフの閉路を1つ見つけて出力する"}
+      - {id: abc456_e, role: challenge, summary: "都市と曜日の組を頂点にし（頂点倍化）、閉路の検出で判定する"}
+    sources: ["03-graph §4.A（閉路の検出と復元）", "03-graph §5.2 A", "00-curriculum §2.3.8（abc456_e）"]
+
+  - id: bipartite-graph
+    chapter: 基本と探索
+    title: 二部グラフ判定
+    aliases: [二部グラフ, 2彩色, 奇閉路, 2色の塗り分け]
+    type: technique
+    level: 基礎
+    level_evidence: "abc327_d (709)・abc472_e (1029)・abc282_d (1154)・abc126_d (1279)。応用は abc451_f (1540)・code_festival_2017_qualb_c (1883)"
+    kind: [グラフ探索]
+    prerequisites: [dfs, bfs]
+    related: [weighted-union-find, tree-bipartite, bipartite-matching, konig-theorem, project-selection, grid-graph, graph-modeling]
+    summary: "隣り合う頂点を反対の色で塗っていき、同じ色どうしを結ぶ辺（奇数長の閉路）があれば二部グラフでない。成分ごとの色の数を使う数え上げや、二部マッチング・最小カットの前提になる。"
+    signs:
+      - {type: phrase, text: "2つのグループに分ける・隣り合うものは異なる色"}
+      - {type: phrase, text: "X_i と Y_i は異なる値（制約を辺にする）"}
+      - {type: phrase, text: "奇数長の閉路・偶奇・市松模様"}
+    acl: [dsu]
+    frequency: B
+    sections:
+      - "BFS・DFS で塗る（非連結なら成分ごとに）"
+      - "二部グラフでないことと奇閉路があることは同じ"
+      - "成分ごとの色の数を使う数え上げ"
+      - "Union-Find（頂点を2倍にする・偶奇を持つ）で判定する"
+      - "木・4近傍のグリッドは必ず二部グラフ"
+    merged_keys: []
+    visual: "図：BFS で色を塗っていき、同じ色どうしの辺（奇閉路）が見つかる瞬間を示す。成分ごとの色の数 (a, b) を表示する"
+    problems:
+      - {id: abc327_d, role: example, summary: "2つの数列の対が「異なる値を割り当てよ」という条件になり、二部グラフかを判定する"}
+      - {id: abc472_e, role: practice, summary: "奇数長の閉路があるかを、二部グラフ判定で調べる"}
+      - {id: abc282_d, role: practice, summary: "辺を1本足しても二部グラフのままになる頂点の組を、成分ごとの色の数から数える"}
+      - {id: abc451_f, role: practice, summary: "二部グラフの色を相対値で持つ重み付き Union-Find で、成分ごとに少ない方の色を選ぶ"}
+      - {id: code_festival_2017_qualb_c, role: challenge, summary: "距離3の頂点の間に辺を足し続けた後の辺の数。二部グラフかどうかで答えが分かれる"}
+    sources: ["03-graph §4.A（二部グラフ判定）", "03-graph §5.2 A", "00-curriculum §2.3.8（abc472_e・abc451_f）"]
+
+  - id: small-graph-brute-force
+    chapter: 基本と探索
+    title: 小さいグラフの全探索（同型・辺集合・彩色）
+    aliases: [グラフ同型, 全域木の全列挙, 彩色の全探索]
+    type: technique
+    level: 基礎
+    level_evidence: "abc232_c (685)・abc371_c (849)・abc328_e (1160)。彩色の数え上げは abc199_d (1804)"
+    kind: [全探索, グラフ探索]
+    prerequisites: [dfs, permutation-search]
+    related: [bit-full-search, chromatic-number, tsp]
+    summary: "N ≤ 8〜10 程度の小さいグラフで、頂点の対応（N! 通り）・辺の部分集合・彩色を全部試す。グラフに特有の全探索の数え方と枝刈りをまとめる。"
+    signs:
+      - {type: constraint, text: "N ≤ 8〜10 で頂点の対応や辺の部分集合を全部試せる"}
+      - {type: phrase, text: "頂点の番号を付け替えて同じ形にできるか（同型）"}
+      - {type: phrase, text: "3色で塗る方法の数"}
+    acl: []
+    frequency: B
+    sections:
+      - "頂点の対応の全探索（同型の判定・同型にするコスト）"
+      - "辺の部分集合の全探索（全域木の全列挙）"
+      - "彩色は成分ごとに DFS で塗って探索を絞る（青）"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: abc232_c, role: example, summary: "頂点の対応を順列で全探索して、2つのグラフが同型かを判定する"}
+      - {id: abc371_c, role: practice, summary: "辺の追加・削除のコストの最小で同型にする。8! 通りの対応を全探索する"}
+      - {id: abc328_e, role: practice, summary: "N ≤ 8 の全域木を全列挙して、重みの和 mod K の最小値を求める"}
+      - {id: abc199_d, role: challenge, summary: "連結成分ごとに DFS で3彩色の数を数え、掛け合わせる"}
+    sources: ["03-graph §4.A（小さいグラフの全探索）", "03-graph §5.2 A"]
+
+  - id: graph-modeling
+    chapter: 基本と探索
+    title: グラフへの帰着（何を頂点・辺にするか）
+    aliases: [グラフに言い換える, モデル化, 値を頂点に, 制約を辺に, グラフの縮約]
+    type: technique
+    level: 水
+    level_evidence: "横断ページ。abc285_d (663)・abc327_d (709)・arc090_b (1452)・abc377_e (1685)・abc131_f (1937)。縮約は黄（abc286_g 2135）"
+    kind: [考察, グラフ探索]
+    prerequisites: [graph-basics]
+    related: [connected-components, bipartite-graph, cycle-detection, state-space-search, extended-dijkstra, difference-constraints, scc, reformulation]
+    summary: "物・値・座標・状態・時刻・剰余などを頂点に、関係・操作・制約を辺にして、問題をグラフの問題に言い換える型を集めた入口のページ。自由に行き来できる部分を1点にまとめる縮約も扱う。"
+    signs:
+      - {type: phrase, text: "〇〇と××は異なる値・同じグループ（制約を辺にする）"}
+      - {type: phrase, text: "置換・名前の付け替え・写像"}
+      - {type: phrase, text: "点 (x, y) の x 座標と y 座標の関係"}
+    acl: []
+    frequency: A
+    sections:
+      - "何を頂点にするか（物・値・座標・状態・時刻・剰余・区間の端点）"
+      - "何を辺にするか（関係・操作・制約・写像）"
+      - "制約を辺にすると何の問題になるか（二部グラフ・閉路・差分制約）"
+      - "グラフの縮約（Union-Find・SCC で1点にまとめる、次数2の頂点を消す）（黄）"
+    merged_keys: [graph-contraction]
+    visual: "図：点 (x, y) を「x の頂点と y の頂点を結ぶ辺」と見直すなど、言い換えの前後を並べた図"
+    problems:
+      - {id: abc285_d, role: example, summary: "名前を頂点、変更を辺にすると、変更できないことは閉路があることになる"}
+      - {id: abc327_d, role: example, summary: "「X_i と Y_i は異なる値」という条件を辺にすると、二部グラフ判定になる"}
+      - {id: arc090_b, role: practice, summary: "位置の差の情報を重み付きの辺にし、矛盾がないかを調べる"}
+      - {id: abc377_e, role: practice, summary: "置換 i → P_i を辺にすると閉路の集まりになり、合成の繰り返しは閉路上を進むことになる"}
+      - {id: abc131_f, role: practice, summary: "点を「x 座標の頂点と y 座標の頂点を結ぶ辺」と見て、成分ごとに数える"}
+      - {id: abc286_g, role: challenge, summary: "自由に通れる辺でつながった頂点を1点に縮約してから、オイラー路の条件を確かめる"}
+    sources: ["03-graph §4.H（グラフへの帰着・グラフの縮約）", "03-graph §5.2 H", "03-graph §6.1（逆引き辞典）"]
+
+  # ───────────── 2. 最短路 ─────────────
+  - id: dijkstra
+    chapter: 最短路
+    title: ダイクストラ法
+    aliases: [ダイクストラ, Dijkstra, 経由点の最短路, 両端からのダイクストラ, 逆向きのグラフ, 最短閉路]
+    type: technique
+    level: 基礎
+    level_evidence: "abc362_d (634)・abc340_d (784)・abc325_e (1093)・abc192_e (1135)。逆向きのグラフ・両端からの最短路は水（abc369_e 1301・abc035_d 1591・soundhound2018_summer_qual_d 1637）"
+    kind: [最短路]
+    prerequisites: [bfs, stl-containers]
+    related: [priority-queue, zero-one-bfs, bellman-ford, shortest-path-overview, extended-dijkstra, time-dependent-dijkstra, shortest-path-dag]
+    summary: "辺の重みが非負のグラフで、暫定距離が最小の頂点から順に確定させ、単一始点の最短距離を O((N+M) log N) で求める。逆向きのグラフや、始点と終点の両方からの距離を組み合わせる応用もここで扱う。"
+    signs:
+      - {type: phrase, text: "非負の重み付きグラフの最短距離・最小コスト（頂点にもコストがある）"}
+      - {type: constraint, text: "N, M ≤ 2×10^5 で辺の重みが非負"}
+      - {type: phrase, text: "頂点 k を経由する最短路をすべての k について・行きと帰り"}
+    acl: []
+    frequency: A
+    sections:
+      - "取り出した頂点の距離が確定する理由"
+      - "古い組を読み飛ばす・priority_queue を最小ヒープにする"
+      - "頂点の重みを辺に足す・経路復元は BFS と同じ"
+      - "密グラフの O(N^2) 版"
+      - "負辺で壊れる例（ポテンシャルで直せる場合はベルマンフォードのページ）"
+      - "最短閉路（ある頂点を含む閉路の最小の長さ）"
+      - "逆向きのグラフと両端からの最短路（水）"
+    merged_keys: [reverse-graph-shortest-path, shortest-cycle]
+    visual: "動く図：ヒープの中身（(距離, 頂点) の組）と確定済みの頂点の集合を並べたステップ送り。古い組を読み飛ばす場面と、負辺を入れると確定済みの距離が後から縮む反例を見せる"
+    problems:
+      - {id: abc362_d, role: example, summary: "頂点にも重みがある最短路。辺の重みに行き先の頂点の重みを足してダイクストラする"}
+      - {id: abc376_d, role: practice, summary: "頂点1を含む最小の有向閉路を、頂点1からの最短距離と1へ戻る辺で求める"}
+      - {id: abc340_d, role: practice, summary: "ステージの解放関係をグラフにして、最短の所要時間を求める"}
+      - {id: abc325_e, role: practice, summary: "社用車から電車へ1回だけ乗り換える。(頂点, 乗り換えたか) の2層にするか、両端からの最短距離を組み合わせる"}
+      - {id: abc477_e, role: practice, summary: "ダイクストラで求めた距離と、円周上の累積和を組み合わせて答える"}
+      - {id: typical90_m, role: practice, summary: "頂点 k を経由する最短路を、頂点1と頂点 N からの2回のダイクストラの和で求める"}
+      - {id: abc035_d, role: practice, summary: "行きは元のグラフ、帰りは辺を逆にしたグラフでダイクストラする"}
+      - {id: soundhound2018_summer_qual_d, role: challenge, summary: "2種類の通貨の運賃。始点と終点からの最短距離と、後ろからの最小値を組み合わせる"}
+    sources: ["03-graph §4.B（ダイクストラ法）", "03-graph §5.2 B（ダイクストラ法・逆向きのグラフ・最短閉路）", "00-curriculum §2.3.8（abc477_e）"]
+
+  - id: zero-one-bfs
+    chapter: 最短路
+    title: 01-BFS
+    aliases: [0-1 BFS, deque BFS]
+    type: technique
+    level: 水
+    level_evidence: "abc176_d (1248)・abc213_e (1423)・abc246_e (1476)・arc005_3 (1503)"
+    kind: [最短路]
+    prerequisites: [bfs, dijkstra]
+    related: [extended-dijkstra, grid-graph, modular-shortest-path, shortest-path-overview]
+    summary: "辺の重みが 0 か 1 のとき、コスト0の辺で得た頂点は deque の先頭へ、コスト1の辺は末尾へ入れて、最短距離を O(N+M) で求める。壁を壊す回数や向きを変える回数の最小化に使う。"
+    signs:
+      - {type: phrase, text: "壁を壊す回数・向きを変える回数・ワープの回数を最小化する"}
+      - {type: phrase, text: "1回の移動のコストが 0 か 1"}
+    acl: []
+    frequency: B
+    sections:
+      - "deque の中の距離が2種類に保たれる理由"
+      - "初めて見つけたときに確定させてはいけない"
+      - "向きを状態に持つ（頂点数が4倍になる）"
+      - "重みが 0, 1, 2 ならどうするか"
+    merged_keys: []
+    visual: "動く図：deque の中の距離が「d…d, d+1…d+1」の2種類に保たれるステップ送り（0の辺は前に、1の辺は後ろに入る）"
+    problems:
+      - {id: abc176_d, role: example, summary: "歩く（コスト0）とワープ（5×5 の範囲、コスト1）の迷路を 01-BFS で解く"}
+      - {id: arc005_3, role: example, summary: "壁を2回まで壊してゴールに着けるかを、壊す回数をコストにした 01-BFS で判定する"}
+      - {id: typical90_aq, role: practice, summary: "曲がる回数の最小化。向きを状態に持つ 01-BFS"}
+      - {id: abc213_e, role: practice, summary: "2×2 を壊すパンチ（コスト1）と移動（コスト0）の迷路"}
+      - {id: abc246_e, role: practice, summary: "ビショップの移動。向きを状態に持ち、同じ向きに進むのはコスト0にする"}
+    sources: ["03-graph §4.B（01-BFS）", "03-graph §5.2 B"]
+
+  - id: warshall-floyd
+    chapter: 最短路
+    title: ワーシャルフロイド法
+    aliases: [ワーシャルフロイド, Floyd-Warshall, 全点対最短路]
+    type: technique
+    level: 水
+    level_evidence: "abc208_d (1190)・abc073_d (1345)・abc375_f (1546)・abc243_e (1637)・abc143_e (1695)"
+    kind: [最短路, DP]
+    prerequisites: [dijkstra, dp-basics]
+    related: [bellman-ford, shortest-path-overview, permutation-search, tsp, graph-construction]
+    summary: "経由してよい頂点を1つずつ増やす DP で、全点対の最短距離を O(N^3) で求める。負辺も扱え、辺を1本足したときは O(N^2) で更新できる。"
+    signs:
+      - {type: constraint, text: "N ≤ 400 程度で全点対の距離が要る"}
+      - {type: phrase, text: "辺を1本ずつ追加（削除）するクエリ"}
+      - {type: phrase, text: "訪れる地点の順番を全探索する（地点間の距離を前計算する）"}
+    acl: []
+    frequency: B
+    sections:
+      - "k を一番外のループにする理由"
+      - "初期化（d[i][i] = 0・多重辺・INF のあふれ）と負閉路の判定"
+      - "辺の追加を O(N^2) で反映する（削除は逆順の追加に）"
+      - "迂回できる辺は不要（青）"
+      - "距離表を作ってから順列全探索・bitDP"
+    merged_keys: []
+    visual: "動く図：距離行列を k ごとに更新する。k 番目の行と列が中継点として光り、i-j のマスが d[i][k]+d[k][j] で更新される"
+    problems:
+      - {id: abc079_d, role: example, summary: "数字を書き換えるコストの全点対最短路を前計算し、各マスを1に変える最小コストを足す"}
+      - {id: abc208_d, role: example, summary: "「経由してよい頂点を k まで増やす」というワーシャルフロイドの意味そのものを問う"}
+      - {id: abc073_d, role: practice, summary: "訪問する町（8以下）の順番を順列全探索し、町間の距離は全点対で前計算する"}
+      - {id: typical90_ci, role: practice, summary: "未知の辺の長さ X を二分探索し、各 X でワーシャルフロイドを回して条件を数える"}
+      - {id: abc375_f, role: practice, summary: "辺の削除クエリを逆順の追加にし、追加1回を O(N^2) で反映する"}
+      - {id: abc243_e, role: practice, summary: "迂回路で同じ距離以下にできる辺は消してよい。全点対の距離で判定する"}
+      - {id: abc143_e, role: practice, summary: "燃料 L で1回に行ける町の組を全点対で求め、その上でもう一度全点対で給油回数を求める"}
+      - {id: abc338_f, role: challenge, summary: "負辺あり（負閉路なし）の全点対最短路を前計算し、訪問した集合で bitDP する"}
+    sources: ["03-graph §4.B（ワーシャルフロイド法）", "03-graph §5.2 B"]
+
+  - id: bellman-ford
+    chapter: 最短路
+    title: ベルマンフォード法と負辺・負閉路
+    aliases: [ベルマンフォード, Bellman-Ford, 負閉路検出, SPFA, ポテンシャル, Johnson のアイデア]
+    type: technique
+    level: 青
+    level_evidence: "abc137_e (1740)・abc061_d (1838)・abc404_g (1894)。ポテンシャルで負辺を消す節は水（abc237_e 1208）"
+    kind: [最短路]
+    prerequisites: [dijkstra]
+    related: [difference-constraints, warshall-floyd, min-cost-flow, shortest-path-overview]
+    summary: "負の辺があっても、全辺の緩和を N−1 回くり返して単一始点の最短距離を O(NM) で求める。答えに影響するのは始点から届き終点へ行ける負閉路だけであることと、ポテンシャルで負辺を消してダイクストラを使う方法も扱う。"
+    signs:
+      - {type: phrase, text: "負の重みの辺がある・得点を最大化する（符号を反転すると負辺になる）"}
+      - {type: phrase, text: "いくらでも大きくできるなら inf と出力する"}
+      - {type: constraint, text: "N, M ≤ 数千（O(NM) が間に合う）"}
+      - {type: phrase, text: "負の辺の重みが「高さの差」の形をしている（ポテンシャル）"}
+    acl: []
+    frequency: B
+    sections:
+      - "N−1 回で十分な理由"
+      - "答えに影響する負閉路だけを判定する（到達可能性で絞る・−∞ を伝える）"
+      - "最長路は符号を反転する"
+      - "SPFA の注意（最悪の計算量は同じ）"
+      - "ポテンシャルで負辺を消してダイクストラ（水）"
+    merged_keys: [potential-reweighting]
+    visual: "図：反復ごとに dist が更新される様子と、N 回目にも更新される頂点（負閉路の影響を受ける頂点）を赤く塗る図"
+    problems:
+      - {id: abc137_e, role: example, summary: "ゴールへ行ける正閉路があれば無限。到達可能性で頂点を絞ってから負閉路を判定する"}
+      - {id: abc061_d, role: example, summary: "最長路を符号反転で最短路にし、頂点 N に影響する負閉路を判定する"}
+      - {id: abc237_e, role: practice, summary: "高さの差で決まる負の辺を、高さをポテンシャルにして非負に直しダイクストラする"}
+      - {id: abc404_g, role: practice, summary: "区間和の条件を累積和の差分制約に直し、負辺を含むのでベルマンフォードで解く"}
+    sources: ["03-graph §4.B（ベルマンフォード法と負閉路・ポテンシャル）", "03-graph §5.2 B"]
+
+  - id: shortest-path-overview
+    chapter: 最短路
+    title: 最短路アルゴリズムの使い分け
+    aliases: [最短路の選び方, 最短経路問題, 最短路の比較]
+    type: technique
+    level: 水
+    level_evidence: "横断ページ。BFS（〜1000）・ダイクストラ（〜1100）・01-BFS（1250〜1500）・ワーシャルフロイド（950〜1700）・ベルマンフォード（1740〜1900）の比較"
+    kind: [最短路]
+    prerequisites: [bfs, dijkstra, zero-one-bfs, warshall-floyd]
+    related: [bellman-ford, extended-dijkstra, time-dependent-dijkstra, shortest-path-dag, state-space-search]
+    summary: "辺の重み（等しい・0と1・非負・負あり）と始点の数（単一・全点対）から、BFS・01-BFS・ダイクストラ・ベルマンフォード・ワーシャルフロイドを選ぶための比較のページ。状態を足す・辺を減らす判断の順序も示す。"
+    signs:
+      - {type: phrase, text: "最短距離・最小コスト・最小回数を求める"}
+    acl: []
+    frequency: A
+    sections:
+      - "重みの種類と始点の数の2軸の表（計算量と制約の目安）"
+      - "判断の順序（重み → 始点 → 制約 → 状態を足す → 辺を減らす）"
+      - "共通の性質（部分路も最短路・三角不等式・最短路 DAG）"
+    merged_keys: []
+    visual: "図：辺の重みの条件（等しい・0と1・非負・負あり）と始点の数（単一・全点対）の2軸の表"
+    problems: []
+    sources: ["03-graph §4.B（最短路アルゴリズムの使い分け）", "03-graph §6.2・§6.3"]
+
+  - id: shortest-path-dag
+    chapter: 最短路
+    title: 最短路 DAG（経路の数え上げ・最短路に使われる辺）
+    aliases: [最短路木, 最短経路の数え上げ, 最短路に必ず使われる辺]
+    type: technique
+    level: 水
+    level_evidence: "abc211_d (755)・abc252_e (1294)・abc051_d (1566)・abc218_f (1753)。黄に abc375_g (2014)"
+    kind: [最短路, DP]
+    prerequisites: [dijkstra, dp-dag]
+    related: [bfs, minimum-spanning-tree, lowlink, warshall-floyd]
+    summary: "始点からの距離 d について d(v) = d(u) + w(u, v) を満たす辺だけを残すと DAG になり、最短路はその上のパスと一対一に対応する。最短路の本数、最短路木、ある辺が最短路に必ず使われるかを扱う。"
+    signs:
+      - {type: phrase, text: "最短経路の本数を数える"}
+      - {type: phrase, text: "この辺を通らなくても最短距離は変わらないか・最短路に使われない辺"}
+      - {type: phrase, text: "最短路木（始点からの最短距離を保つ全域木）を出力する"}
+    acl: []
+    frequency: B
+    sections:
+      - "最短路 DAG の作り方と性質（重み0の辺に注意）"
+      - "最短路の本数の DP"
+      - "最短路木（最小全域木との違い）"
+      - "辺が s-t 最短路に乗る条件（両端からの距離）"
+      - "辺を消すと距離が変わるか（黄）"
+    merged_keys: []
+    visual: "図：d(s,u)+w+d(v,t)=d(s,t) を満たす辺だけを太線にし、それが DAG になることと、その上での本数の DP を示す"
+    problems:
+      - {id: abc211_d, role: example, summary: "BFS と同時に最短路の本数を数える"}
+      - {id: abc252_e, role: example, summary: "頂点1からの最短路木の辺を出力する"}
+      - {id: abc051_d, role: practice, summary: "どの2点間の最短路にも使われない辺を数える"}
+      - {id: abc218_f, role: practice, summary: "最短路1本に乗る辺（N−1 本以下）を消したときだけ再計算する"}
+      - {id: abc375_g, role: challenge, summary: "各辺を消すと最短距離が変わるかを、両端からの距離と最短路の本数で判定する"}
+    sources: ["03-graph §4.B（最短路 DAG）", "03-graph §5.2 B"]
+
+  - id: state-space-search
+    chapter: 最短路
+    title: 状態空間の探索（盤面・配置・組を頂点にする BFS）
+    aliases: [状態空間 BFS, 盤面 BFS, パズルの最短手数, ペアの状態]
+    type: technique
+    level: 水
+    level_evidence: "abc361_d (1202)・abc339_d (1276)・abc224_d (1376)・abc197_f (1945)"
+    kind: [グラフ探索, 最短路]
+    prerequisites: [bfs]
+    related: [extended-dijkstra, meet-in-the-middle, bit-operations, graph-modeling]
+    summary: "盤面・配置・2人の位置の組などを1つの状態として頂点にし、1回の操作を辺にして BFS する。状態数と遷移数の見積もりと、状態を整数に詰める方法が要になる。"
+    signs:
+      - {type: phrase, text: "盤面・配置・文字列を操作して目標にする最小回数"}
+      - {type: constraint, text: "状態数が 10^6〜10^7 程度に収まる（9! = 362880、60^4 ≈ 1.3×10^7）"}
+      - {type: phrase, text: "2人（2つの駒）が同時に動く"}
+    acl: []
+    frequency: B
+    sections:
+      - "状態数と遷移数の見積もり"
+      - "状態を整数に詰める（配列で引くか map で持つか）"
+      - "2つの位置の組を状態にする"
+      - "両端から伸ばす（回文の最短路）（青）"
+    merged_keys: []
+    visual: "図：盤面の小さな絵を頂点にした状態のグラフの一部と、状態数の見積もりの式"
+    problems:
+      - {id: abc361_d, role: example, summary: "石の並びを状態として BFS し、目標の並びへの最小手数を求める"}
+      - {id: abc339_d, role: example, summary: "2人の位置の組（60^4 通り）を状態にした BFS"}
+      - {id: abc224_d, role: practice, summary: "駒の配置（9! 通り）を状態にした BFS（8パズル）"}
+      - {id: abc197_f, role: challenge, summary: "両端の頂点の組 (u, v) を状態にし、同じ文字の辺で両側へ伸ばす（回文の最短路）"}
+    sources: ["03-graph §4.A（状態空間の探索）", "03-graph §5.2 A"]
+
+  - id: extended-dijkstra
+    chapter: 最短路
+    title: 状態を頂点にする（拡張ダイクストラ・頂点倍化・超頂点）
+    aliases: [拡張ダイクストラ, 頂点倍化, 頂点倍加, レイヤー化グラフ, 状態付き最短路, 超頂点, 仮想頂点, 補助頂点]
+    type: technique
+    level: 水
+    level_evidence: "abc339_d (1276)・abc246_e (1476)・abc132_e (1625)・abc244_f (1661)・abc164_e (1877)。超頂点は abc463_e (1055)・abc264_e (1229)・abc184_e (1418)・abc302_f (1430)。資源を状態に持つ・辺を減らす応用は青（設計書 §4.3）"
+    kind: [最短路, グラフ探索]
+    prerequisites: [dijkstra, bfs]
+    related: [state-space-search, zero-one-bfs, bit-dp, segment-tree-graph, union-find-connectivity, graph-modeling, time-dependent-dijkstra]
+    summary: "元の頂点だけでは次にできることが決まらないとき、残り資源・向き・偶奇・訪問した集合などを頂点に加えた (頂点, 状態) のグラフで最短路を求める。グループ内の全点間を行き来できるときは、超頂点を1つ足して辺の数を減らす。"
+    signs:
+      - {type: phrase, text: "K 回まで無料・スキップできる、手持ちのお金・燃料・体力がある"}
+      - {type: phrase, text: "向き・直前の移動・歩数の偶奇や mod で次の移動が変わる"}
+      - {type: phrase, text: "同じグループ（色・文字・集合）の中ならどこへでも移動できる"}
+      - {type: constraint, text: "状態数 × 辺数が 10^7 程度に収まる"}
+    acl: []
+    frequency: A
+    sections:
+      - "状態として持つべき情報を決める"
+      - "頂点倍化（層を作り、層の間の辺でコストを表す）"
+      - "偶奇・mod・向きを持つ"
+      - "資源を状態に持ち、上限で打ち切る（青）"
+      - "訪問した集合を持つ（青、bitDP へ）"
+      - "状態が多すぎるときは重要な点だけのグラフに作り直す"
+      - "超頂点・補助頂点で辺の数を減らす"
+      - "超頂点で距離がずれる場合の補正（2で割る・1を引く）"
+    merged_keys: [super-vertex]
+    visual: "図：元のグラフを状態の数だけ層に重ね、層の間の辺を縦の矢印で描く図と、K 点の完全グラフとハブ1点の星形を並べて辺の数を比べる図"
+    problems:
+      - {id: abc453_d, role: example, summary: "座標と直前の向きの組を頂点にして BFS する"}
+      - {id: abc184_e, role: example, summary: "同じ文字のテレポーターへの移動を、文字ごとに1回だけ展開して BFS する（超頂点と同じ効果）"}
+      - {id: abc132_e, role: example, summary: "3歩で1回の移動。(頂点, 歩数 mod 3) の 3N 頂点で最短路を求める"}
+      - {id: abc463_e, role: practice, summary: "ゲートを使う移動を、仮想の頂点を2つ足して辺で表し、ダイクストラで求める"}
+      - {id: abc348_d, role: practice, summary: "体力を状態に入れると大きすぎるので、薬の位置から BFS して到達関係のグラフを作る"}
+      - {id: abc302_f, role: practice, summary: "集合を頂点として要素の頂点を介してつなぎ、距離から1を引いて答える"}
+      - {id: zone2021_e, role: practice, summary: "上へ戻る移動のコストを、頂点を2倍にして辺のコストに直す"}
+      - {id: abc244_f, role: practice, summary: "(訪問の偶奇を表すビット列, 今の頂点) を状態にした BFS"}
+      - {id: typical90_bb, role: practice, summary: "論文を頂点として共著関係を表し、BFS の距離を2で割る"}
+      - {id: abc164_e, role: challenge, summary: "(頂点, 銀貨の枚数) を状態にしたダイクストラ。銀貨は上限で打ち切る"}
+      - {id: arc061_c, role: challenge, summary: "(駅, 乗っている会社) を頂点にし、乗り換えをコスト1の辺にする"}
+    sources: ["03-graph §4.B（状態を頂点にする・超頂点）", "03-graph §5.2 B", "00-curriculum §4.2（超頂点）", "00-curriculum §2.3.8（abc453_d・abc463_e）"]
+
+  - id: time-dependent-dijkstra
+    chapter: 最短路
+    title: 時刻で変わる辺（時刻依存の最短路）
+    aliases: [時刻依存, 待機, 最終電車, 出発時刻]
+    type: technique
+    level: 水
+    level_evidence: "abc192_e (1135)・abc342_e (1476)・abc204_e (1710)"
+    kind: [最短路]
+    prerequisites: [dijkstra]
+    related: [extended-dijkstra, shortest-path-overview]
+    summary: "辺の所要時間が出発時刻で変わる最短路。早く着いて損をしない（待てる）なら、各頂点で最も早い到着時刻だけを持つダイクストラが正しい。終点に間に合う最も遅い出発時刻を逆向きに確定させる型も扱う。"
+    signs:
+      - {type: phrase, text: "決まった時刻にしか出発できない・待つことができる"}
+      - {type: phrase, text: "出発時刻によって所要時間が変わる"}
+      - {type: phrase, text: "終点に間に合う最も遅い出発時刻"}
+    acl: []
+    frequency: B
+    sections:
+      - "早く着いて損をしない性質（FIFO 性）"
+      - "次の出発時刻まで待つ遷移"
+      - "最適な出発時刻を計算してから進む（青）"
+      - "最終電車型：終点から逆向きに最も遅い時刻を確定させる"
+    merged_keys: []
+    visual: "図：横軸を時刻にした「到着時刻 → 次の到着時刻」の関数のグラフ。早く着いて損をしないことを示す"
+    problems:
+      - {id: abc192_e, role: example, summary: "出発時刻が K の倍数に限られる。次の出発時刻まで待つ遷移を入れたダイクストラ"}
+      - {id: abc342_e, role: example, summary: "最終電車型。頂点 N から逆向きに、間に合う最も遅い出発時刻を大きい順に確定させる"}
+      - {id: abc204_e, role: practice, summary: "通過時間が出発時刻で変わる辺。最適な待ち時間を計算してからダイクストラする"}
+    sources: ["03-graph §4.B（時刻で変わる辺）", "03-graph §5.2 B"]
+
+  - id: difference-constraints
+    chapter: 最短路
+    title: 差分制約（牛ゲー）
+    aliases: [牛ゲー, 差分制約系, ポテンシャルの整合性]
+    type: technique
+    level: 青
+    level_evidence: "arc090_b (1452)・abc404_g (1894)・abc216_g (1963)"
+    kind: [最短路]
+    prerequisites: [bellman-ford, prefix-sum]
+    related: [weighted-union-find, dijkstra, graph-modeling]
+    summary: "x_v − x_u ≤ c の形の条件を辺 u→v（重み c）と読み、始点からの最短距離で条件をすべて満たす最大の解を求める。負閉路があれば解はない。区間の和の条件は累積和の差に直す。"
+    signs:
+      - {type: phrase, text: "x_j − x_i ≤ c の形の条件の下で、ある変数を最大化（最小化）する"}
+      - {type: phrase, text: "区間の和が S（以上・以下）という条件が並ぶ（累積和に直す）"}
+      - {type: phrase, text: "位置の差の情報が矛盾しないか"}
+    acl: []
+    frequency: B
+    sections:
+      - "不等式を辺にする向き"
+      - "最短距離が最大の解になる理由"
+      - "等式・正値・区間の和の条件の書き方"
+      - "負辺があればベルマンフォード、なければダイクストラ"
+      - "整合性の判定だけなら重み付き Union-Find（データ構造の章）"
+    merged_keys: []
+    visual: "図：不等式 x_v ≤ x_u + c を辺 u→v（重み c）に直す対応表と、最短距離がすべての条件を満たす最大の値になることの説明"
+    problems:
+      - {id: arc090_b, role: example, summary: "「x_R − x_L = D」の情報の集まりが矛盾しないかを、重み付きの連結成分で確かめる"}
+      - {id: abc216_g, role: example, summary: "区間内の1の個数の下限を、累積の0の個数の差分制約に直して最短路で解く"}
+      - {id: abc404_g, role: practice, summary: "区間和と正値の条件を差分制約にし、負辺があるのでベルマンフォードで解く"}
+    sources: ["03-graph §4.B（差分制約）", "03-graph §5.2 B", "00-curriculum §3.2（差分制約とポテンシャル）", "05-ds §4.B（重み付き Union-Find）"]
+
+  - id: complement-graph-bfs
+    chapter: 最短路
+    title: 補グラフ上の BFS
+    aliases: [補グラフ, 未訪問頂点の集合]
+    type: technique
+    level: 黄
+    level_evidence: "abc319_g (2185)"
+    kind: [グラフ探索]
+    prerequisites: [bfs, ordered-set]
+    related: [shortest-path-dag, linked-list]
+    summary: "完全グラフから M 本の辺を除いたグラフ（補グラフ）を、未訪問頂点の集合から「元のグラフで隣接しない頂点」をまとめて取り出す BFS で O(N + M) で探索する。"
+    signs:
+      - {type: phrase, text: "完全グラフから M 本の辺を取り除いたグラフ・辺が「ない」ことが与えられる"}
+      - {type: constraint, text: "N ≤ 2×10^5 で、補グラフの辺は N^2 本近くある"}
+    acl: []
+    frequency: C
+    sections:
+      - "未訪問頂点の集合から取り出す"
+      - "各頂点が1回しか取り出されない理由（O(N + M)）"
+      - "層ごとに最短路の本数を数える"
+    merged_keys: []
+    visual: "図：未訪問頂点のリストを持ち、元のグラフで隣接しない（補グラフでは隣接する）頂点だけをまとめて取り出す様子"
+    problems:
+      - {id: abc319_g, role: example, summary: "完全グラフから M 本の辺を除いたグラフで、最短路の本数を BFS の層ごとに数える"}
+    sources: ["03-graph §4.B（補グラフ上の BFS）", "03-graph §5.2 B"]
+
+  - id: xor-path
+    chapter: 最短路
+    title: XOR の経路と閉路の基底
+    aliases: [XOR 最短路, 閉路基底, サイクル基底, サイクル空間]
+    type: technique
+    level: 黄
+    level_evidence: "abc451_g (2221)"
+    kind: [グラフ探索, 線形代数・行列, ビット演算]
+    prerequisites: [dfs, xor-basis]
+    related: [extended-dijkstra, tree-distance]
+    summary: "経路の重みが辺の XOR で、同じ辺を何度通ってもよいとき、全域木の根からの XOR と、木に入らない辺が作る閉路の XOR の基底で、作れる値をすべて表す。"
+    signs:
+      - {type: phrase, text: "経路の重みが辺の重みの XOR で、同じ辺を何度通ってもよい（ウォーク）"}
+      - {type: phrase, text: "経路の XOR の最小値・最大値"}
+    acl: []
+    frequency: B
+    sections:
+      - "ウォークの XOR は根からの XOR の差と閉路の組合せで表せる"
+      - "木に入らない辺ごとに閉路の XOR を基底に加える"
+      - "値が小さければ (頂点, XOR) の BFS"
+    merged_keys: [cycle-basis-xor]
+    visual: "図：全域木の根からの XOR を各頂点に書き、木に入らない辺1本が作る閉路の XOR が「寄り道で足せる値」になることを示す"
+    problems:
+      - {id: abc451_g, role: example, summary: "全域木で根からの XOR を求め、残りの辺が作る閉路の XOR を基底にまとめて、歩道の XOR の最小値を扱う"}
+    sources: ["03-graph §4.B（XOR の経路と閉路の基底）", "03-graph §5.2 B", "00-curriculum §3.2（グラフのサイクル基底と XOR の経路）"]
+
+  - id: modular-shortest-path
+    chapter: 最短路
+    title: 剰余を頂点にする最短路（同余最短路）
+    aliases: [同余最短路, 剰余グラフ, mod を頂点に]
+    type: overview
+    level: 発展
+    level_evidence: "arc084_b (2457)"
+    kind: [最短路, 整数論]
+    prerequisites: [zero-one-bfs, extended-dijkstra]
+    related: [dijkstra]
+    summary: "K で割った余りを頂点にし、数を作る操作を辺にした最短路で、「K の倍数のうち桁和などが最小のもの」や「いくつかの数の和で作れる数」を求める。"
+    signs:
+      - {type: phrase, text: "K の倍数のうち桁和などが最小のもの"}
+      - {type: phrase, text: "いくつかの数の和で作れる数の集合（硬貨の組合せ）"}
+      - {type: constraint, text: "K が 10^5〜10^6 程度"}
+    acl: []
+    frequency: C
+    sections:
+      - "余りを頂点、操作を辺にする"
+      - "同余最短路（最小の数で割った余りごとの最小値）"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: arc084_b, role: example, summary: "K の倍数の桁和の最小値を、K で割った余りを頂点にした 01-BFS で求める"}
+    sources: ["03-graph §4.B（発展・黄の最短路の周辺）", "03-graph §5.2 B"]
+
+  - id: segment-tree-graph
+    chapter: 最短路
+    title: 区間に辺を張る（セグメント木の形の補助頂点）
+    aliases: [区間に辺を張るテク, セグ木グラフ]
+    type: overview
+    level: 発展
+    level_evidence: "abc414_g (3020)"
+    kind: [最短路, データ構造]
+    prerequisites: [extended-dijkstra, segment-tree]
+    related: [dijkstra]
+    summary: "頂点から区間内の全頂点へ辺がある問題で、セグメント木のノードを補助頂点にして区間を O(log N) 個のノードで覆い、辺の数を O(M log N) に減らしてから最短路を求める。"
+    signs:
+      - {type: phrase, text: "頂点から区間内の全頂点へ移動できる・区間から区間へ移動できる"}
+    acl: []
+    frequency: C
+    sections:
+      - "下向きの木と上向きの木（コスト0の辺）"
+      - "区間を O(log N) 個のノードで覆う"
+    merged_keys: []
+    visual: "図：セグメント木のノードを補助頂点にし、区間を O(log N) 個のノードで覆う"
+    problems:
+      - {id: abc414_g, role: example, summary: "区間から区間への移動を、セグメント木の形の補助頂点に辺を張ってダイクストラで解く"}
+    sources: ["03-graph §4.B（発展・黄の最短路の周辺）", "03-graph §5.2 B"]
+
+  - id: k-shortest-paths
+    chapter: 最短路
+    title: k 番目の最短路
+    aliases: [k-shortest path, k 番目に短い経路, Eppstein, Yen]
+    type: overview
+    level: 発展
+    level_evidence: "ABC での出題は確認できなかった（Library Checker に k_shortest_walk がある）"
+    kind: [最短路]
+    prerequisites: [dijkstra]
+    related: [shortest-path-overview]
+    summary: "始点から終点への経路（歩道）のうち、短い方から k 番目の長さを求める。歩道の長さだけなら各頂点を k 回まで取り出すダイクストラで求まり、単純パスは Yen、歩道の列挙は Eppstein の方法を使う。"
+    signs:
+      - {type: phrase, text: "k 番目に短い経路・歩道の長さ"}
+    acl: []
+    frequency: C
+    sections:
+      - "各頂点を k 回まで取り出すダイクストラ"
+      - "単純パス（Yen）と歩道（Eppstein）"
+    merged_keys: []
+    visual: null
+    problems: []
+    sources: ["03-graph §4.B（発展・黄の最短路の周辺）", "03-graph §6.6"]
+
+  - id: steiner-tree
+    chapter: 最短路
+    title: 最小シュタイナー木
+    aliases: [シュタイナー木, Steiner tree, Dreyfus–Wagner]
+    type: overview
+    level: 発展
+    level_evidence: "abc364_g (2455)・abc395_g (2561)"
+    kind: [最短路, DP]
+    prerequisites: [dijkstra, bit-dp]
+    related: [minimum-spanning-tree, steiner-subtree]
+    summary: "一般のグラフで指定した K 点（K ≤ 10 程度）をすべて連結にする最小コストを、端点の集合と頂点を状態にした DP（部分集合の分割とダイクストラを交互に）で O(3^K N + 2^K M log N) で求める。"
+    signs:
+      - {type: constraint, text: "指定した K 点（K ≤ 10 程度）をすべて連結にする最小コスト"}
+    acl: []
+    frequency: C
+    sections:
+      - "dp[S][v] の定義"
+      - "部分集合を2つに分けて合わせる遷移"
+      - "ダイクストラで v を動かす遷移"
+      - "木の上なら易しい（木の章の「指定頂点を結ぶ最小の部分木」）"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: abc364_g, role: example, summary: "頂点1〜K−1 と各頂点を結ぶ最小コストを、(頂点, 部分集合) の DP とダイクストラで求める"}
+      - {id: abc395_g, role: practice, summary: "完全グラフで、指定の K 点と S・T を含む最小シュタイナー木を求める"}
+    sources: ["03-graph §4.B（最小シュタイナー木）", "03-graph §5.2 B", "00-curriculum §5.1（abc364_g）"]
+
+  # ───────────── 3. 有向グラフ ─────────────
+  - id: topological-sort
+    chapter: 有向グラフ
+    title: トポロジカルソート
+    aliases: [トポロジカル順序, Kahn 法, 入次数, DAG]
+    type: technique
+    level: 基礎
+    level_evidence: "abc315_e (921)・abc216_d (1039)・abc223_d (1069)。応用は abc245_f (1451)"
+    kind: [グラフ探索]
+    prerequisites: [dfs, bfs]
+    related: [dp-dag, scc, cycle-detection, dp-order, game-retrograde-analysis]
+    summary: "閉路のない有向グラフ（DAG）の頂点を、すべての辺が前から後ろへ向くように並べる。入次数0の頂点から取り出す Kahn 法か、DFS の帰りがけ順の逆で O(N+M)。閉路があれば並べられない。"
+    signs:
+      - {type: phrase, text: "a は b より前・依存関係・前提条件"}
+      - {type: phrase, text: "条件を満たす辞書順最小の順序・順序が一意か"}
+      - {type: phrase, text: "矛盾（閉路）があれば −1"}
+    acl: [scc_graph]
+    frequency: A
+    sections:
+      - "Kahn 法と DFS の帰りがけ順"
+      - "辞書順最小は優先度付きキューの Kahn 法"
+      - "順序が一意かの判定"
+      - "出次数0の頂点から逆向きに剥がす"
+      - "DAG 上の DP へ（DP の章）"
+      - "ACL の scc_graph を使う（DAG なら scc() の順がトポロジカル順）"
+    merged_keys: []
+    visual: "図：入次数の表とキューを並べた Kahn 法のステップ送り。最後に残った頂点が閉路を含むことを示す（余裕があれば動く図）"
+    problems:
+      - {id: abc223_d, role: example, summary: "「a は b より前」の条件を満たす辞書順最小の順列を、優先度付きキューの Kahn 法で求める"}
+      - {id: abc315_e, role: practice, summary: "依存関係の DFS の帰りがけ順が、本を読む順番（トポロジカル順）になる"}
+      - {id: abc216_d, role: practice, summary: "筒の一番上の色がそろったものから取り出すシミュレーション（入次数0から処理する考え方）"}
+      - {id: abc245_f, role: practice, summary: "出次数0の頂点を逆向きに取り除いていき、残った頂点を数える"}
+      - {id: typical90_bs, role: challenge, summary: "トポロジカル順序を K 個まで DFS で列挙する"}
+    sources: ["03-graph §4.C（トポロジカルソート・DAG 上の DP）", "03-graph §5.2 C"]
+
+  - id: scc
+    chapter: 有向グラフ
+    title: 強連結成分分解（SCC）
+    aliases: [強連結成分, SCC, Kosaraju, Tarjan, 縮約]
+    type: technique
+    level: 水
+    level_evidence: "abc296_e (1285)・abc357_e (1295)・abc478_e (1376)・typical90_u（★5）。ACL で書け、設計書 §4.3 で水。縮約後の処理が主題のものは発展（abc374_g 2608）"
+    kind: [グラフ探索]
+    prerequisites: [dfs, topological-sort]
+    related: [two-sat, functional-graph, connected-components, lowlink, dilworth-path-cover, reachability-bitset]
+    summary: "有向グラフを互いに行き来できる頂点の極大集合に分け、成分を1点に縮めて DAG にする。Kosaraju（2回の DFS）か Tarjan（1回の DFS）で O(N+M)。ACL の scc_graph は成分をトポロジカル順に返す。"
+    signs:
+      - {type: phrase, text: "互いに行き来できる頂点の組・グループ"}
+      - {type: phrase, text: "何度でも繰り返せる（閉路の中にいる）"}
+      - {type: phrase, text: "縮約して DAG にしてから DP・数え上げをする"}
+    acl: [scc_graph]
+    frequency: B
+    sections:
+      - "縮約したグラフが DAG になる理由"
+      - "Kosaraju と Tarjan"
+      - "ACL の scc_graph（トポロジカル順の成分のリスト）"
+      - "閉路に含まれる頂点（自己ループに注意）"
+      - "縮約した DAG の上で DP する"
+    merged_keys: []
+    visual: "図：Kosaraju の2回の DFS（1回目の帰りがけ順、2回目は逆辺で）を色分けしたステップ送りと、成分を1点に縮めた DAG"
+    problems:
+      - {id: practice2_g, role: example, summary: "SCC を求めてトポロジカル順に出力する（ACL の scc_graph の使用例）"}
+      - {id: typical90_u, role: example, summary: "互いに行き来できる頂点の組の数を、各 SCC の大きさ s について s(s−1)/2 を足して求める"}
+      - {id: abc296_e, role: practice, summary: "i から A_i への辺のグラフで、閉路に含まれる頂点を数える"}
+      - {id: abc357_e, role: practice, summary: "出次数1のグラフで、各頂点から到達できる頂点の数の合計を求める"}
+      - {id: abc478_e, role: practice, summary: "大小関係の条件のグラフを SCC で縮約し、DAG にして考える"}
+    sources: ["03-graph §4.C（強連結成分分解）", "03-graph §5.2 C", "00-curriculum §2.3.8（abc478_e）"]
+
+  - id: functional-graph
+    chapter: 有向グラフ
+    title: Functional graph（出次数1のグラフ）
+    aliases: [Functional graph, 関数グラフ, rho 形, 出次数1, 周期]
+    type: technique
+    level: 水
+    level_evidence: "abc256_e (1224)・abc296_e (1285)・abc357_e (1295)・abc377_e (1685)。基本形は abc167_d (754)"
+    kind: [グラフ探索]
+    prerequisites: [cycle-detection]
+    related: [doubling, periodicity, namori-graph, scc, permutation-cycles, topological-sort]
+    summary: "各頂点から出る辺がちょうど1本の有向グラフは、各成分に閉路がちょうど1つあり、そこへ木が流れ込む ρ の形になる。K 回進んだ位置を「閉路に入るまで」と「閉路の周回」に分けて求める。"
+    signs:
+      - {type: phrase, text: "各 i から A_i へ移動する"}
+      - {type: constraint, text: "K 回（K ≤ 10^18）移動した後の位置"}
+      - {type: phrase, text: "置換・嫌いな相手が1人ずつ・周期"}
+    acl: [scc_graph]
+    frequency: B
+    sections:
+      - "各成分に閉路がちょうど1つある理由"
+      - "K 回後の位置（しっぽと周回に分ける・ダブリング）"
+      - "全頂点について閉路上かを求める（入次数0から剥がす・SCC）"
+      - "閉路ごとの集計・到達できる頂点の数"
+      - "置換は閉路の集まり（巡回分解は数え上げの章）"
+    merged_keys: []
+    visual: "図：ρ の形。しっぽ（木の部分）と輪（閉路）を色分けし、K 回後の位置を「しっぽを抜けてから輪を周回」に分ける"
+    problems:
+      - {id: abc167_d, role: example, summary: "テレポーターを K 回（10^18 以下）使った後の町を、周期を見つけるかダブリングで求める"}
+      - {id: abc256_e, role: example, summary: "嫌いな人への辺の Functional graph で、各閉路の最小コストを足す"}
+      - {id: abc357_e, role: practice, summary: "各頂点から到達できる頂点数を、閉路の長さと閉路までの距離から合計する"}
+      - {id: abc377_e, role: practice, summary: "置換を K 回合成する操作が、閉路上を 2^K 歩進むことになる"}
+    sources: ["03-graph §4.C（Functional graph）", "03-graph §5.2 C"]
+
+  - id: namori-graph
+    chapter: 有向グラフ
+    title: なもりグラフ（N 頂点 N 辺の連結グラフ）
+    aliases: [なもり, unicyclic graph, pseudotree, 閉路が1つのグラフ, 木に辺を1本足したグラフ]
+    type: technique
+    level: 水
+    level_evidence: "abc266_f (1525)。成分ごとに頂点数と辺数を比べるだけなら abc292_d (579)"
+    kind: [グラフ探索, 木]
+    prerequisites: [connected-components, cycle-detection, tree-basics]
+    related: [functional-graph, leaf-first, union-find, topological-sort]
+    summary: "N 頂点 N 辺の連結グラフは木に辺を1本足した形で、閉路がちょうど1つあり、閉路上の各頂点から木がぶら下がる。次数1の頂点を削り続けると閉路だけが残る。"
+    signs:
+      - {type: phrase, text: "N 頂点 N 辺の連結グラフ・木に辺を1本足したグラフ"}
+      - {type: phrase, text: "2頂点間の単純パスが一意か"}
+    acl: [dsu]
+    frequency: B
+    sections:
+      - "閉路がちょうど1つある理由"
+      - "次数1の頂点を削って閉路を求める（Union-Find でも）"
+      - "閉路の頂点ごとにぶら下がる木に分ける"
+      - "単純パスが一意になる条件"
+      - "有向版は Functional graph"
+    merged_keys: []
+    visual: "図：閉路を横一列に並べ、各頂点の下に木をぶら下げる描き直しと、次数1の頂点を削っていく様子"
+    problems:
+      - {id: abc266_f, role: example, summary: "次数1の頂点を削り続けて閉路を求め、2点が同じ閉路の頂点からぶら下がる木にあるときだけ単純パスが一意になる"}
+      - {id: abc292_d, role: practice, summary: "すべての連結成分で頂点数と辺数が等しいか（閉路がちょうど1つか）を判定する"}
+    sources: ["03-graph §4.C（なもりグラフ）", "04-tree §4.10", "04-tree §5.1（namori-graph）", "00-curriculum §4.2（なもりグラフ）"]
+
+  - id: reachability-bitset
+    chapter: 有向グラフ
+    title: 到達可能性の bitset 高速化
+    aliases: [推移閉包, bitset で到達判定, 到達可能性クエリ]
+    type: technique
+    level: 黄
+    level_evidence: "typical90_bg（★7）・abc287_h (2639)"
+    kind: [グラフ探索, ビット演算]
+    prerequisites: [topological-sort, bitset-speedup]
+    related: [scc, warshall-floyd, dp-dag]
+    summary: "DAG の各頂点から到達できる頂点の集合を、逆トポロジカル順に bitset の OR で求める。メモリが足りないときは、クエリを 64 個ずつまとめて各頂点に 64 ビットのマスクを流す。"
+    signs:
+      - {type: phrase, text: "u から v へ到達できるかのクエリが大量にある"}
+      - {type: constraint, text: "N が 5×10^4 程度で N^2/64 の計算が間に合う"}
+    acl: []
+    frequency: C
+    sections:
+      - "逆トポロジカル順に bitset の OR"
+      - "メモリの見積もりと 64 個ずつのクエリの処理"
+      - "閉路があれば SCC で縮約してから"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: typical90_bg, role: example, summary: "DAG の到達判定クエリを 64 個ずつビット並列で処理する"}
+      - {id: abc287_h, role: practice, summary: "番号 n 以下の頂点だけで到達できる集合を bitset で持ち、n を増やしながら更新する"}
+    sources: ["03-graph §4.C（到達可能性の bitset 高速化）", "03-graph §5.2 C"]
+
+  - id: two-sat
+    chapter: 有向グラフ
+    title: 2-SAT
+    aliases: [2SAT, 充足可能性, 含意グラフ]
+    type: overview
+    level: 発展
+    level_evidence: "abc210_f (2632)・abc277_h (2917)。ACL の two_sat で書けるので、モデル化の型だけなら黄の学習者にも届く（設計書 §4.3）"
+    kind: [グラフ探索]
+    prerequisites: [scc]
+    related: [bipartite-graph, project-selection]
+    summary: "各変数が真か偽で、条件がすべて「2つのリテラルの OR」のとき、全条件を満たす割当を含意グラフの SCC で O(N+M) で求める。ACL の two_sat で書けるので、条件を節に直すモデル化が中心になる。"
+    signs:
+      - {type: phrase, text: "各要素が2択で「この2つは同時に選べない」「少なくともどちらか一方」"}
+      - {type: phrase, text: "条件を満たす2択の割当があるか、あれば1つ出力する"}
+    acl: [two_sat]
+    frequency: C
+    sections:
+      - "節を含意の辺 ¬a→b・¬b→a に直す"
+      - "x と ¬x が同じ SCC なら充足不能・答えの復元"
+      - "モデル化の早見表（同時に選べない・どちらかは必ず・a なら b）"
+      - "「高々1つ」を補助変数で O(K) 本の節にする"
+      - "ACL では（two_sat の囲み）"
+    merged_keys: []
+    visual: "図：節 (a ∨ b) を2本の含意 ¬a→b、¬b→a に直す図と、x と ¬x が同じ SCC に入ると矛盾することの図"
+    problems:
+      - {id: practice2_h, role: example, summary: "各旗を2か所のどちらかに置き、近すぎる組を禁止する（ACL の two_sat の使用例）"}
+      - {id: abc210_f, role: example, summary: "カードの表裏の2択。同じ素因数を持つ表は高々1枚、を補助変数で O(N) 本の節にする"}
+      - {id: abc277_h, role: practice, summary: "「X_i が j 以上」を変数にして、値の範囲の制約を 2-SAT にする"}
+    sources: ["03-graph §4.C（2-SAT）", "03-graph §5.2 C", "03-graph §7.2"]
+
+  # ───────────── 4. 連結性と全域木 ─────────────
+  - id: union-find-connectivity
+    chapter: 連結性と全域木
+    title: Union-Find で連結性を扱う（逆順処理・オフライン）
+    aliases: [逆順 Union-Find, 削除を逆順の追加にする, 辺の削除を逆から, オフラインの連結判定]
+    type: technique
+    level: 水
+    level_evidence: "abc229_e (1015)・abc264_e (1229)・abc120_d (1355)・abc040_d (1656)。しきい値を動かす連結判定は abc181_f (2009)"
+    kind: [連結性・全域木, クエリ処理の工夫]
+    prerequisites: [union-find, connected-components]
+    related: [union-find-applications, minimum-spanning-tree, bottleneck-path, offline-queries, rollback-union-find, reverse-thinking, binary-search-answer]
+    summary: "辺や頂点の削除を時間の逆順の追加に直したり、しきい値の順に辺を足したりして、連結成分の数・大きさや2点の連結を Union-Find で答える使い方をまとめる。Union-Find の構造そのものはデータ構造の章で扱う。"
+    signs:
+      - {type: phrase, text: "辺（頂点）を順に削除し、そのつど連結成分の数・大きさを答える（橋が崩落する・停電）"}
+      - {type: phrase, text: "重さ・高さ・年などの制限を満たす辺だけで行けるかを多数答える"}
+      - {type: phrase, text: "答えを二分探索し、連結かどうかで判定する"}
+    acl: [dsu]
+    frequency: B
+    sections:
+      - "削除を逆順の追加にする（答えは逆順に記録して反転する）"
+      - "しきい値の順に辺を足してクエリに答える（オフライン）"
+      - "二分探索と連結判定の組合せ（青）"
+      - "超頂点と組み合わせる"
+      - "辺の追加と削除が混ざるとき（ロールバック Union-Find、データ構造の章）"
+    merged_keys: [offline-reverse]
+    visual: "図：時間を逆向きに再生して、削除が追加に変わる様子（余裕があれば動く図）"
+    problems:
+      - {id: abc229_e, role: example, summary: "頂点を順に消すたびの連結成分数を、逆順に頂点を足して Union-Find で数える"}
+      - {id: abc120_d, role: example, summary: "橋が崩落するたびの不便さを、逆順に橋を架けて成分の大きさの積を引いていく"}
+      - {id: abc264_e, role: practice, summary: "発電所を1点にまとめ、電線の削除を逆順の連結として数える"}
+      - {id: abc040_d, role: practice, summary: "年 w より後に作られた道路だけで行ける都市の数を、クエリと道路を年の順に並べて答える"}
+      - {id: abc181_f, role: challenge, summary: "半径を二分探索し、距離 2R 以下の釘と上下の壁を連結して上下がつながるかを判定する"}
+    sources: ["03-graph §4.D（Union-Find で連結性を扱う）", "03-graph §5.2 D", "05-ds §4.B（削除を逆順の追加にする・Union-Find の応用）"]
+
+  - id: minimum-spanning-tree
+    chapter: 連結性と全域木
+    title: 最小全域木（Kruskal・Prim）
+    aliases: [MST, 最小全域木, クラスカル法, プリム法, 最大全域木]
+    type: technique
+    level: 水
+    level_evidence: "abc218_e (1004)・abc352_e (1030)・abc235_e (1304)・abc282_e (1604)・arc076_b (1615)。応用は青（abc210_e 1618・abc364_f 1878・abc355_f 1924・typical90_aw ★6）"
+    kind: [連結性・全域木, 貪欲]
+    prerequisites: [union-find, sorting-techniques]
+    related: [union-find-connectivity, bottleneck-path, shortest-path-dag, steiner-tree, spanning-tree-advanced, union-find-next-pointer]
+    summary: "連結グラフの全域木のうち辺の重みの和が最小のものを、辺を重みの昇順に見て閉路を作らない辺だけを採る Kruskal 法（O(M log M)）か、頂点を1つずつ伸ばす Prim 法で求める。辺の候補を減らす応用も扱う。"
+    signs:
+      - {type: phrase, text: "すべての頂点をつなぐ最小コスト"}
+      - {type: phrase, text: "不要な辺を取り除いて報酬を最大にする"}
+      - {type: phrase, text: "完全グラフだが辺のコストが特殊な形（候補の辺を減らす）"}
+      - {type: phrase, text: "この辺は最小全域木に入るか"}
+    acl: [dsu]
+    frequency: A
+    sections:
+      - "Kruskal 法と Prim 法（密なら O(N^2) の Prim）"
+      - "正しさの理由（カット性質・閉路性質）"
+      - "最大全域木"
+      - "クエリの辺が最小全域木に入るか（まとめて重み順に処理する）"
+      - "辺の候補を減らす（ソートした隣どうし・約数で絞る）"
+      - "操作を頂点にする・区間を辺にする（青）"
+      - "辺の重みの種類が少ないとき（青）"
+    merged_keys: [mst-applications]
+    visual: "動く図：辺を重み順に並べ、Union-Find の成分の色が混ざっていく Kruskal のステップ送り。閉路を作る辺が捨てられる瞬間を示す"
+    problems:
+      - {id: abc218_e, role: example, summary: "報酬が正の辺を取り除いてよい。逆に考えて、必要な辺だけを安い順につなぐ"}
+      - {id: abc235_e, role: example, summary: "クエリの辺が最小全域木に入るかを、元の辺とまとめて重み順に Kruskal を進めて判定する"}
+      - {id: abc352_e, role: practice, summary: "頂点集合内の全点対の辺は、隣り合う頂点の辺だけ使えば同じ最小全域木になる"}
+      - {id: abc469_f, role: practice, summary: "約数で辺の候補を絞ってから、Kruskal 法で最大全域木を求める"}
+      - {id: abc282_e, role: practice, summary: "2つのボールの得点を辺の重みとした完全グラフの最大全域木を求める"}
+      - {id: arc076_b, role: practice, summary: "コストが min(|Δx|, |Δy|) の完全グラフ。x と y でソートした隣どうしの辺だけで足りる"}
+      - {id: typical90_aw, role: practice, summary: "区間の反転を、累積和の N+1 頂点の間の辺と見て最小全域木を求める"}
+      - {id: abc210_e, role: challenge, summary: "環状に並ぶ辺を操作ごとにまとめ、gcd で連結成分の数が減る様子を使う"}
+      - {id: abc364_f, role: challenge, summary: "区間とつなぐ操作の頂点を足したグラフの最小全域木を、コスト順に区間を処理して求める"}
+      - {id: abc355_f, role: challenge, summary: "辺を足すたびに最小全域木の重みを答える（辺の重みは10以下）"}
+    sources: ["03-graph §4.E（最小全域木・応用）", "03-graph §5.2 E", "00-curriculum §2.3.8（abc469_f）"]
+
+  - id: bottleneck-path
+    chapter: 連結性と全域木
+    title: 最小ボトルネック路
+    aliases: [minimax 経路, ボトルネック, 経路上の最大の辺の最小化]
+    type: technique
+    level: 青
+    level_evidence: "abc383_e (1616)・abc181_f (2009)・abc394_g (2031)"
+    kind: [連結性・全域木]
+    prerequisites: [minimum-spanning-tree, union-find-connectivity]
+    related: [merge-process-tree, binary-search-answer, small-to-large, parallel-binary-search, partially-persistent-union-find, lca]
+    summary: "経路上の辺の最大値を最小にする経路は最小全域木の上の経路で実現でき、Kruskal 法で辺を足していき2点が初めて同じ成分になったときの重みが答えになる。多数の2点の質問は、成分にクエリを持たせる併合や Kruskal 再構築木で答える。"
+    signs:
+      - {type: phrase, text: "経路上の最大の辺（最小の頂点）を最小化（最大化）する"}
+      - {type: phrase, text: "重さ・高さの制限以下で行けるか"}
+      - {type: phrase, text: "しきい値を上げていくと連結になる時刻"}
+    acl: [dsu]
+    frequency: B
+    sections:
+      - "最小全域木の上の経路がボトルネック最小になる理由（カット性質）"
+      - "Kruskal の順に成分を併合しながら答える"
+      - "多数の2点の質問：成分にクエリを持たせて小さい方から移す（黄）"
+      - "Kruskal 再構築木でオンラインに答える（発展、木の章の「併合過程の木」）"
+    merged_keys: []
+    visual: "図：Kruskal の併合の過程を二分木（再構築木）として記録し、2点の LCA の重みが答えになることを示す"
+    problems:
+      - {id: abc383_e, role: example, summary: "経路の最大辺の最小値 f の和を、Kruskal で辺を足す順に貪欲に組み合わせて最小化する"}
+      - {id: abc181_f, role: practice, summary: "距離が近い釘どうしと上下の壁をつなぎ、上下が初めてつながる距離から半径の上限を求める（二分探索でもよい）"}
+      - {id: abc394_g, role: practice, summary: "建物を高い順に追加しながら、2点がつながる時点をオフラインで求める"}
+    sources: ["03-graph §4.E（最小ボトルネック路と Kruskal 再構築木）", "03-graph §5.2 E", "04-tree §4.28（併合過程の木）"]
+
+  - id: lowlink
+    chapter: 連結性と全域木
+    title: 橋と関節点（lowlink）
+    aliases: [lowlink, 橋, 関節点, ord と low]
+    type: technique
+    level: 黄
+    level_evidence: "設計書 §4.3 で黄。lowlink が自然な解法になる問題は abc375_g (2014)・abc334_g (2242) だが、解説で確かめた解法は別（経路の本数・オフラインの連結性）。小さい制約の abc075_c (1067) は全探索で解ける"
+    kind: [連結性・全域木, グラフ探索]
+    prerequisites: [dfs]
+    related: [biconnected-components, scc, shortest-path-dag, union-find-connectivity, graph-construction]
+    summary: "DFS 木の行きがけ番号 ord と、部分木から後退辺を1本使って戻れる最小の番号 low から、取り除くと非連結になる辺（橋）と頂点（関節点）を O(N+M) で求める。"
+    signs:
+      - {type: phrase, text: "その辺（頂点）を取り除くと非連結になるか"}
+      - {type: phrase, text: "すべての辺（頂点）について、取り除いたときの連結成分の数を求める"}
+    acl: []
+    frequency: C
+    sections:
+      - "ord と low の定義と求め方"
+      - "橋の条件 low[c] > ord[p] と関節点の条件"
+      - "根の関節点の判定"
+      - "多重辺は辺の番号で親を除外する"
+      - "小さい制約なら1本ずつ除いて調べる（基礎）"
+      - "有向グラフの SCC（同じ ord・low の考え方）との対比"
+    merged_keys: []
+    visual: "図：DFS 木に ord を書き、後退辺で戻れる最小の ord（low）を葉から伝える。low[子] > ord[親] の辺が橋になる"
+    problems:
+      - {id: abc075_c, role: example, summary: "辺を1本ずつ除いて連結かを調べ、橋の本数を数える（小さい制約の全探索）"}
+    sources: ["03-graph §4.D（橋と関節点）", "03-graph §5.2 D", "03-graph §7.2", "03-graph §6.6（Library Checker）"]
+
+  - id: biconnected-components
+    chapter: 連結性と全域木
+    title: 二重辺連結成分・二重頂点連結成分・ブロックカット木
+    aliases: [二辺連結成分, 二重頂点連結成分, BCC, block-cut tree, 橋で分解]
+    type: overview
+    level: 発展
+    level_evidence: "ABC での出題は確認できなかった（Library Checker に two_edge_connected_components・biconnected_components）"
+    kind: [連結性・全域木]
+    prerequisites: [lowlink]
+    related: [scc, graph-modeling]
+    summary: "橋を除いた連結成分（二重辺連結成分）や、関節点で分けた塊（二重頂点連結成分）を求め、縮約して木（ブロックカット木）にする。木の手法を一般のグラフに持ち込むときに使う。"
+    signs:
+      - {type: phrase, text: "橋を除いた成分を縮約して木にする"}
+      - {type: phrase, text: "関節点で分けた塊ごとに考える"}
+    acl: []
+    frequency: C
+    sections:
+      - "二重辺連結成分（橋で分ける）"
+      - "二重頂点連結成分とブロックカット木"
+    merged_keys: []
+    visual: null
+    problems: []
+    sources: ["03-graph §4.D（橋と関節点・二重連結成分）", "03-graph §6.6", "00-curriculum §3.2"]
+
+  - id: offline-dynamic-connectivity
+    chapter: 連結性と全域木
+    title: 辺の追加と削除が混ざる連結性（オフライン）
+    aliases: [Offline Dynamic Connectivity, オフライン動的連結性, 時間軸のセグ木, 辺の削除がある連結判定]
+    type: overview
+    level: 発展
+    level_evidence: "abc334_g (2242) を kmjp がこの方法で解いている。必須になる ABC の問題は見つからず、典型としては発展"
+    kind: [連結性・全域木, クエリ処理の工夫]
+    prerequisites: [union-find-connectivity, rollback-union-find, segment-tree]
+    related: [lowlink, offline-queries]
+    summary: "辺の追加と削除が混ざる連結性の質問に、各辺が存在する時間の区間を時間軸のセグ木の O(log Q) 個のノードに載せ、DFS で入るときに併合・出るときに取り消して、オフラインで O((N+Q) log Q log N) で答える。"
+    signs:
+      - {type: phrase, text: "辺の追加と削除のクエリが混ざり、そのつど連結性を答える（先に全部読んでよい）"}
+      - {type: phrase, text: "各要素が「ない」時刻の区間がいくつかある"}
+    acl: []
+    frequency: C
+    sections:
+      - "各辺の存在する区間を時間軸のセグ木に載せる"
+      - "DFS で入るときに併合・出るときに取り消す（ロールバック Union-Find はデータ構造の章）"
+      - "削除だけなら逆順の追加（水）で足りる"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: abc334_g, role: example, summary: "緑マスを1つ赤にしたときの連結成分数の期待値。各マスが消えている時刻を区間として持ち、セグ木の上でロールバック Union-Find を使う"}
+    sources: ["03-graph §4.D（辺の追加と削除が混ざる連結性）", "03-graph §5.2 D", "05-ds §4.B（rollback-union-find）"]
+
+  - id: spanning-tree-advanced
+    chapter: 連結性と全域木
+    title: 全域木の発展（Borůvka・Manhattan MST・最小有向全域木）
+    aliases: [Borůvka, Boruvka, Manhattan MST, Chu-Liu/Edmonds, 最小有向全域木, 第2最小全域木]
+    type: overview
+    level: 発展
+    level_evidence: "ABC で必須の問題は確認できなかった（Library Checker に directedmst・minimum_spanning_tree）"
+    kind: [連結性・全域木]
+    prerequisites: [minimum-spanning-tree]
+    related: [matrix-tree-theorem, steiner-tree, centroid-decomposition]
+    summary: "辺が暗黙に与えられるときに強い Borůvka 法、マンハッタン距離の完全グラフの候補辺を O(N) 本に絞る Manhattan MST、有向グラフの最小全域木（Chu-Liu/Edmonds）、第2最小全域木の概要をまとめる。"
+    signs:
+      - {type: phrase, text: "辺が暗黙に O(N^2) 本ある完全グラフの最小全域木"}
+      - {type: phrase, text: "マンハッタン距離の完全グラフ"}
+      - {type: phrase, text: "有向グラフで、根から全頂点へ届く最小コストの辺の集合"}
+    acl: []
+    frequency: C
+    sections:
+      - "Borůvka 法"
+      - "Manhattan MST"
+      - "最小有向全域木（Chu-Liu/Edmonds）"
+      - "第2最小全域木"
+    merged_keys: []
+    visual: null
+    problems: []
+    sources: ["03-graph §4.E（全域木の発展）", "03-graph §6.6"]
+
+  - id: matrix-tree-theorem
+    chapter: 連結性と全域木
+    title: 行列木定理（全域木の数え上げ）
+    aliases: [行列木定理, Kirchhoff の定理, 全域木の個数, BEST 定理]
+    type: overview
+    level: 発展
+    level_evidence: "abc253_h (2758)・abc336_g (3138)（07-math-comb の調査）。設計書 §4.2 で graph の発展（math の行列式を前提）"
+    kind: [数え上げ, 線形代数・行列, 連結性・全域木]
+    prerequisites: [determinant]
+    related: [cayley-pruefer, tree-degree, spanning-tree-advanced, euler-path, counting-labeled-graphs]
+    summary: "無向グラフの全域木の個数は、ラプラシアン行列（次数行列 − 隣接行列）から1行1列を除いた行列の行列式に等しい。有向グラフの版と、有向オイラー閉路の数を数える BEST 定理も扱う。"
+    signs:
+      - {type: phrase, text: "全域木の個数を数える（mod p で答える）"}
+      - {type: phrase, text: "有向グラフのオイラー閉路の数"}
+    acl: []
+    frequency: C
+    sections:
+      - "ラプラシアン行列と余因子"
+      - "有向グラフの版（根付き全域木の数）"
+      - "BEST 定理（有向オイラー閉路の数）"
+      - "頂点集合ごとに数えて部分集合の DP と組む"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: abc253_h, role: example, summary: "頂点集合ごとの全域木の数を行列木定理で求め、部分集合の DP で森の数を数える"}
+      - {id: abc336_g, role: practice, summary: "有向グラフのオイラー路の数を、BEST 定理（行列木定理を含む）で数える"}
+    sources: ["07-math-comb §4.4（行列木定理）", "06-math-nt §4.6（行列式）", "03-graph §4.E（全域木の発展）"]
+
+  # ───────────── 5. 経路の種類 ─────────────
+  - id: euler-path
+    chapter: 経路の種類
+    title: オイラー路（一筆書き）
+    aliases: [オイラー路, オイラー閉路, 一筆書き, Hierholzer]
+    type: technique
+    level: 黄
+    level_evidence: "abc286_g (2135)"
+    kind: [グラフ探索]
+    prerequisites: [connected-components, dfs]
+    related: [tsp, graph-modeling, matrix-tree-theorem]
+    summary: "すべての辺をちょうど1回ずつ通る路は、辺のある頂点が連結で、奇数次数の頂点が0個か2個（有向なら入次数と出次数の条件）のときに限り存在し、Hierholzer 法で O(M) で構成できる。"
+    signs:
+      - {type: phrase, text: "すべての辺をちょうど1回ずつ通る・一筆書き"}
+      - {type: phrase, text: "次数の偶奇で可否が決まる"}
+    acl: []
+    frequency: C
+    sections:
+      - "存在条件（無向・有向）"
+      - "Hierholzer 法で構成する"
+      - "孤立点・多重辺・自己ループの扱い"
+      - "ハミルトン路（頂点をちょうど1回、bitDP）との違い"
+    merged_keys: []
+    visual: "図：奇数次数の頂点に印を付けて条件（0個か2個）を示し、Hierholzer 法で閉路をつなぎ合わせる過程"
+    problems:
+      - {id: abc286_g, role: example, summary: "自由に通れる辺で結ばれた頂点を縮約し、指定の辺だけのグラフにオイラー路があるかを判定する"}
+    sources: ["03-graph §4.F（オイラー路・ハミルトン路）", "03-graph §5.2 F"]
+
+  # ───────────── 6. フロー・マッチング ─────────────
+  - id: max-flow
+    chapter: フロー・マッチング
+    title: 最大流
+    aliases: [最大フロー, Ford-Fulkerson, Dinic, 残余グラフ, 増加路]
+    type: technique
+    level: 黄
+    level_evidence: "abc205_f (2088)・abc318_g (2260)・abc241_g (2422)。鉄則本の9章（A68）にも入っている。フロー系は 2021〜2026年の ABC の G にほぼ毎年出る"
+    kind: [フロー・マッチング]
+    prerequisites: [bfs, dfs]
+    related: [min-cut, bipartite-matching, min-cost-flow, flow-lower-bounds, grid-graph, graph-modeling]
+    summary: "容量付きの有向グラフで s から t へ流せる最大量を、残余グラフ上の増加路に流すことを繰り返して求める。逆辺で押し戻せることが正しさの要で、ACL の mf_graph（Dinic）で書ける。"
+    signs:
+      - {type: phrase, text: "同時に使えない資源を割り当てる・各行・各列に高々1つ"}
+      - {type: phrase, text: "辺（頂点）を共有しない経路の本数"}
+      - {type: phrase, text: "容量・上限つきで送れる量の最大"}
+    acl: [mf_graph]
+    frequency: A
+    sections:
+      - "残余グラフと増加路・逆辺が要る理由"
+      - "Ford–Fulkerson・Dinic と計算量"
+      - "モデル化の型（行と列を頂点に・頂点の分割・時間の層）"
+      - "無向の辺・頂点の容量の表し方"
+      - "ACL では（mf_graph の囲み）"
+    merged_keys: []
+    visual: "動く図：残余グラフ（順辺と逆辺）を描き、増加路を流すたびに逆辺の容量が増えて押し戻しができる様子のステップ送り"
+    problems:
+      - {id: practice2_d, role: example, summary: "市松模様で二部グラフにして 1×2 のタイルを最大数置く（ACL の mf_graph の使用例）"}
+      - {id: abc205_f, role: example, summary: "行の頂点・駒の頂点（入口と出口に分割）・列の頂点を並べた最大流"}
+      - {id: tessoku_book_bp, role: practice, summary: "最大流の基本形（鉄則本 A68）"}
+      - {id: abc318_g, role: practice, summary: "頂点を入口と出口に分けて容量1にし、B から A と C へ合計2の流量が流せるかで単純パスの有無を判定する"}
+      - {id: abc241_g, role: challenge, summary: "各選手が単独最多勝になれるかを、試合 → 勝者の流量で判定する"}
+    sources: ["03-graph §4.G（最大流・フロー系の出題）", "03-graph §5.2 G", "03-graph §6.3（ACL の API）"]
+
+  - id: min-cut
+    chapter: フロー・マッチング
+    title: 最小カット（辺カット・頂点カット・カットの復元）
+    aliases: [最小カット, 最大流最小カット定理, 頂点分割, 頂点カット]
+    type: technique
+    level: 黄
+    level_evidence: "abc010_4 (1777 参考値)・abc239_g (2215)。発展の応用は abc332_g (2775)・abc397_g (2947)"
+    kind: [フロー・マッチング]
+    prerequisites: [max-flow]
+    related: [project-selection, konig-theorem, lowlink]
+    summary: "頂点を s 側と t 側に分けたとき、s 側から t 側へ向かう辺の容量の和の最小値は最大流に等しい。流し終えた残余グラフで s から届く頂点を s 側とすればカットを復元でき、頂点を消すコストは頂点を入口と出口に分けて表す。"
+    signs:
+      - {type: phrase, text: "s と t を切り離す最小のコスト"}
+      - {type: phrase, text: "頂点を消すコストの最小・どれを消したかも出力する"}
+    acl: [mf_graph]
+    frequency: B
+    sections:
+      - "最大流最小カット定理"
+      - "カットの復元（ACL の min_cut）"
+      - "頂点を入口と出口に分けて頂点カットを表す"
+      - "カットの形を決め打つ（発展）"
+    merged_keys: []
+    visual: "図：流し終えた残余グラフで s から到達できる頂点を塗り、塗った側から塗らない側へ向かう辺がカットになる図と、頂点を入口と出口に割る図"
+    problems:
+      - {id: abc010_4, role: example, summary: "頂点0から指定の頂点群へ届かなくする最小の操作数。辺を切るか頂点を消すかを最小カットで表す"}
+      - {id: abc239_g, role: example, summary: "頂点を消すコストの最小カット。頂点を2つに分割し、残余グラフの到達可能性でカットを復元する"}
+      - {id: abc332_g, role: challenge, summary: "辺が多すぎるフローの最小カットを、カットの形を決め打って DP で計算する"}
+      - {id: abc397_g, role: challenge, summary: "答えを決め打ち、(頂点, 距離) の層グラフの最小カットが K 以下かを判定する"}
+    sources: ["03-graph §4.G（最小カット）", "03-graph §5.2 G"]
+
+  - id: project-selection
+    chapter: フロー・マッチング
+    title: 燃やす埋める（Project Selection）
+    aliases: [燃やす埋める, Project Selection, 最大重み閉包, 劣モジュラ]
+    type: technique
+    level: 黄
+    level_evidence: "abc472_g (2018)・abc445_g (2250)。2400 前後（abc259_g 2428・abc326_g 2470・abc193_f 2475・abc225_g 2566）に多いが、2025〜2026年の問題は黄に下がっている（設計書 §4.3）。典型90問 040（★7）・鉄則本 B68 にも入っている"
+    kind: [フロー・マッチング]
+    prerequisites: [min-cut]
+    related: [konig-theorem, two-sat, bipartite-graph]
+    summary: "各要素の2択（選ぶ・選ばない）とその組合せのコストを辺に直し、最小カットで最適な選び方を求める。条件から辺への早見表、利得の扱い、二部グラフで片側を反転する型、多値変数を頂点の列で表す型をまとめる。"
+    signs:
+      - {type: phrase, text: "各要素を選ぶ・選ばないの2択で、利得とコストの合計を最大化する"}
+      - {type: phrase, text: "A を選ぶなら B も選ぶ必要がある（依存関係）"}
+      - {type: phrase, text: "隣どうしが違う（同じ）とペナルティ・利得"}
+    acl: [mf_graph]
+    frequency: B
+    sections:
+      - "条件から辺への早見表"
+      - "利得はコストに読み替えて定数を足す"
+      - "最大重み閉包（依存関係）"
+      - "表せる項と表せない項（劣モジュラ）"
+      - "二部グラフで片側の意味を反転する"
+      - "多値変数を頂点の列で表す（発展）"
+    merged_keys: []
+    visual: "図：「条件 → 辺」の早見表と、条件を選ぶとグラフが組み上がる対話的な図（選んだ条件の辺が追加され、カットの値が計算される）"
+    problems:
+      - {id: typical90_an, role: example, summary: "家に入る利得とコスト、「この家に入るにはあの家にも入る」という依存関係。最大重み閉包を最小カットで解く"}
+      - {id: abc472_g, role: example, summary: "DAG 上の選択の条件を最小カットに直す（燃やす埋めるの新しい例題）"}
+      - {id: abc445_g, role: example, summary: "駒の利き合うグラフが二部グラフになることを示し、片側を反転して最小カットにする"}
+      - {id: tessoku_book_eo, role: practice, summary: "燃やす埋めるの演習（鉄則本 B68）"}
+      - {id: abc259_g, role: practice, summary: "行と列を選ぶ。両方選ばれたマスの重複と負のマスをペナルティにする"}
+      - {id: abc326_g, role: practice, summary: "スキルのレベルごとの頂点とアチーブメントの頂点で燃やす埋めるを組む"}
+      - {id: abc193_f, role: practice, summary: "市松模様で片側の色を反転し、「隣が同じ色なら利得」を最小カットにする"}
+      - {id: abc225_g, role: challenge, summary: "×印を付けるかの2択と、斜めの線のコストを燃やす埋めるにする"}
+      - {id: abc347_g, role: challenge, summary: "値1〜5の多値変数を4つの頂点の列で表し、隣接の差の2乗和を最小カットにする"}
+    sources: ["03-graph §4.G（燃やす埋める）", "03-graph §5.2 G", "03-graph §7.2", "00-curriculum §2.3.8（abc472_g）"]
+
+  - id: bipartite-matching
+    chapter: フロー・マッチング
+    title: 二部マッチング
+    aliases: [二部グラフの最大マッチング, Hopcroft-Karp, 増加路, 完全マッチング, 辺彩色]
+    type: technique
+    level: 黄
+    level_evidence: "abc401_g (2022)・abc263_g (2261)・abc320_g (2575)・typical90_by（★7）。鉄則本 A69"
+    kind: [フロー・マッチング]
+    prerequisites: [max-flow, bipartite-graph]
+    related: [konig-theorem, min-cost-flow, general-matching, dilworth-path-cover, binary-search-answer]
+    summary: "二部グラフで端点を共有しない辺の最大集合を、容量1の最大流（s → 左 → 右 → t）で求める。交互路を反転するとマッチングが1増えることが要で、答えの二分探索と完全マッチングの判定を組み合わせる型が多い。"
+    signs:
+      - {type: phrase, text: "ペアを作る最大数・各人に1つずつ割り当てる"}
+      - {type: phrase, text: "答えを二分探索して、完全マッチングがあるかを判定する"}
+      - {type: phrase, text: "和が素数・偶奇で二部グラフに分かれる"}
+    acl: [mf_graph]
+    frequency: B
+    sections:
+      - "最大流への帰着（容量1）"
+      - "交互路と増加路（Kuhn・Hopcroft–Karp）"
+      - "答えの二分探索と完全マッチングの判定"
+      - "構造で貪欲が通る特殊な場合との見分け"
+      - "正則二部グラフの分解・辺彩色（発展）"
+    merged_keys: [bipartite-edge-coloring]
+    visual: "図：交互路（マッチしていない辺・している辺が交互）を見つけて反転し、マッチングが1増える様子"
+    problems:
+      - {id: typical90_by, role: example, summary: "飛行機と行き先の二部マッチング"}
+      - {id: abc401_g, role: example, summary: "時間 T を二分探索し、各人が各スイッチに間に合うかの二部グラフに完全マッチングがあるかを判定する"}
+      - {id: tessoku_book_bq, role: practice, summary: "二部マッチングの基本形（鉄則本 A69）"}
+      - {id: arc092_a, role: practice, summary: "赤点と青点の仲良しペアの最大数。点の並びの構造を使った貪欲で解ける（一般論が要るかの見分け）"}
+      - {id: abc263_g, role: practice, summary: "和が素数になる対を消す。1以外は奇数と偶数の二部マッチングで、1の扱いを工夫する"}
+      - {id: abc320_g, role: challenge, summary: "答えの小さい順に辺を足しながらマッチングを伸ばし、N 本そろう最小値を求める"}
+      - {id: abc317_g, role: challenge, summary: "各行から各値を1つずつ取る完全マッチングを繰り返し取り出す（正則二部グラフの分解）"}
+    sources: ["03-graph §4.G（二部マッチング・二部グラフの辺彩色）", "03-graph §5.2 G"]
+
+  - id: konig-theorem
+    chapter: フロー・マッチング
+    title: König の定理（最小頂点被覆・最大独立集合）
+    aliases: [最小頂点被覆, 最大独立集合, König, 最小辺被覆, LP の半整数性]
+    type: technique
+    level: 黄
+    level_evidence: "abc445_g (2250)・abc274_g (2340)・abc461_g (2391)"
+    kind: [フロー・マッチング]
+    prerequisites: [bipartite-matching, min-cut]
+    related: [project-selection, chromatic-number, dilworth-path-cover]
+    summary: "二部グラフでは最大マッチングの大きさが最小頂点被覆の大きさに等しく、最大独立集合は頂点数から最小頂点被覆を引いたものになる。被覆は最小カットから復元できる。一般グラフでは難しいので、二部グラフかどうかが鍵になる。"
+    signs:
+      - {type: phrase, text: "衝突する（隣り合う）ものを同時に選ばずに最大数選ぶ"}
+      - {type: phrase, text: "すべての辺（マス）を監視するのに必要な最小数"}
+      - {type: phrase, text: "市松模様・偶奇で二部グラフになる"}
+    acl: [mf_graph]
+    frequency: B
+    sections:
+      - "König の定理と3つの関係（頂点被覆・独立集合・辺被覆）"
+      - "被覆の復元（最小カットから）"
+      - "二部グラフに作り直す（市松模様・偶奇）"
+      - "頂点を2倍にして二部グラフにする（LP の半整数性）（発展）"
+      - "一般グラフでは難しい（彩色数・最大独立集合のページへ）"
+    merged_keys: [lp-half-integrality]
+    visual: "図：最大マッチングの大きさと最小頂点被覆の大きさが一致する例。独立集合が被覆の補集合であることを色で示す"
+    problems:
+      - {id: abc274_g, role: example, summary: "カメラの向きを右と下に絞り、行の区間と列の区間の二部グラフの最小頂点被覆にする"}
+      - {id: abc445_g, role: practice, summary: "二部グラフの最大独立集合（置ける駒の最大数）を最小カットで求める"}
+      - {id: abc461_g, role: practice, summary: "頂点を2倍にして二部グラフにし（LP の半整数性）、最大独立集合をフローで求める"}
+    sources: ["03-graph §4.G（König の定理）", "03-graph §5.2 G", "00-curriculum §3.2（LP 緩和と半整数性）", "00-curriculum §2.3.8（abc461_g）"]
+
+  - id: min-cost-flow
+    chapter: フロー・マッチング
+    title: 最小費用流
+    aliases: [最小費用流, primal-dual, 重み付きマッチング, slope, 割当問題, ハンガリアン法]
+    type: technique
+    level: 黄
+    level_evidence: "abc247_g (2159)・abc407_g (2190)・abc421_g (2410)。モデル化が重いものは発展（abc231_h 2681・abc214_h 3138）"
+    kind: [フロー・マッチング]
+    prerequisites: [max-flow, potential-reweighting]
+    related: [bipartite-matching, konig-theorem, dijkstra]
+    summary: "流量 F を流すときのコストの最小値を、残余グラフ上のコストの最短路に沿って流すことを繰り返して求める。逆辺の負のコストはポテンシャルで消してダイクストラを使い、ACL の mcf_graph（コストは0以上）で書ける。"
+    signs:
+      - {type: phrase, text: "K 個選んだときの最大（最小）を K ごとに答える"}
+      - {type: phrase, text: "重み付きの割当・各行・各列から高々 K 個"}
+      - {type: phrase, text: "流す量とコストの両方を最適化する"}
+    acl: [mcf_graph]
+    frequency: B
+    sections:
+      - "逐次最短路とポテンシャル"
+      - "コストは0以上（最大化は「定数 − 利得」に直す）"
+      - "流量ごとの最小コスト（slope は下に凸）"
+      - "モデル化の型（重み付き二部マッチング・市松模様・差分列の流れ）"
+      - "割当問題とハンガリアン法（発展）"
+      - "ACL では（mcf_graph の囲み）"
+    merged_keys: [assignment-problem]
+    visual: "図：流量を1ずつ増やしたときの最小コストの折れ線（凸）と、各段階の残余グラフ上の最短路を並べる"
+    problems:
+      - {id: practice2_e, role: example, summary: "各行・各列 K 個までのマス選びで和を最大化する。コストを「大きい値 − a」にする（ACL の mcf_graph の使用例）"}
+      - {id: abc247_g, role: example, summary: "大学と得意分野のマッチングを、コストを「大きい値 − 強さ」にした最小費用流で人数ごとに求める"}
+      - {id: abc407_g, role: practice, summary: "ドミノの配置を市松模様の二部グラフにし、最小費用流で覆われない和を最大化する"}
+      - {id: abc421_g, role: practice, summary: "区間への +1 を差分列の上の流れと見て、操作回数を最小費用流で求める"}
+      - {id: abc231_h, role: challenge, summary: "各行・各列に黒い駒を置く最小コスト（最小辺被覆）を最小費用流で求める"}
+    sources: ["03-graph §4.G（最小費用流・割当問題）", "03-graph §5.2 G", "03-graph §6.3（ACL の API）"]
+
+  - id: dilworth-path-cover
+    chapter: フロー・マッチング
+    title: Dilworth の定理・最小パス被覆・Hall の定理（マッチングの双対）
+    aliases: [Dilworth, 最小パス被覆, 最大反鎖, 最小鎖被覆, Hall の定理, 結婚定理, マッチングの双対]
+    type: overview
+    level: 発展
+    level_evidence: "abc374_g (2608)・abc354_g (2665)・abc237_h (2807)。Hall の定理は abc215_h (3101)。数列の形の Dilworth（LIS）は DP の章で青"
+    kind: [フロー・マッチング]
+    prerequisites: [bipartite-matching, scc]
+    related: [lis, konig-theorem, zeta-mobius-subset, reachability-bitset]
+    summary: "DAG の頂点を最少の本数のパスで覆う数は「頂点数 − 頂点を分けた二部グラフの最大マッチング」で、頂点を共有してよい鎖での被覆は推移閉包を取ってから同じことをする（Dilworth の定理で最大反鎖の大きさに等しい）。完全マッチングの存在を部分集合ごとに確かめる Hall の定理も扱う。"
+    signs:
+      - {type: phrase, text: "互いに包含しない（比べられない）ものを最大数選ぶ"}
+      - {type: phrase, text: "最少の本数のパス（鎖）で全頂点を覆う"}
+      - {type: phrase, text: "完全マッチングがある条件を部分集合ごとに確かめる（種類が20程度以下）"}
+    acl: [mf_graph]
+    frequency: C
+    sections:
+      - "DAG の最小パス被覆（頂点を2つに分けた二部マッチング）"
+      - "推移閉包と Dilworth の定理（最大反鎖）"
+      - "数列なら LIS（DP の章へ）"
+      - "Hall の結婚定理"
+    merged_keys: [halls-theorem, matching-duality]
+    visual: null
+    problems:
+      - {id: abc237_h, role: example, summary: "回文の部分文字列の包含関係の DAG で、最大反鎖を二部マッチングから求める"}
+      - {id: abc374_g, role: practice, summary: "SCC で縮約した DAG で、推移閉包を取ってから最小パス被覆を求める"}
+      - {id: abc215_h, role: practice, summary: "すべての部分集合について「供給 ≥ 需要」を高速ゼータ変換で確かめる（Hall の定理）"}
+    sources: ["03-graph §4.G（フローの発展：Dilworth・Hall）", "03-graph §5.2 G", "00-curriculum §3.2（マッチングの双対・Dilworth の定理）"]
+
+  - id: flow-lower-bounds
+    chapter: フロー・マッチング
+    title: 最小流量制約付きフロー
+    aliases: [下限付きフロー, flow with demands, 最小流量制約]
+    type: overview
+    level: 発展
+    level_evidence: "abc285_g (2566)"
+    kind: [フロー・マッチング]
+    prerequisites: [max-flow]
+    related: [bipartite-matching, extended-dijkstra]
+    summary: "辺に「少なくとも L は流す」という下限があるとき、L をあらかじめ流したことにして超頂点で過不足を調整し、普通の最大流に帰着する。"
+    signs:
+      - {type: phrase, text: "この辺には少なくとも L だけ流す"}
+      - {type: phrase, text: "必ず使う・使ってもよい・使ってはいけないものが混在する割当"}
+    acl: [mf_graph]
+    frequency: C
+    sections:
+      - "下限を先に流したことにする"
+      - "超頂点で過不足を調整して判定する"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: abc285_g, role: example, summary: "市松模様のマッチングで「必ずマッチさせるマス」を最小流量制約にする"}
+    sources: ["03-graph §4.G（フローの発展：下限付きフロー）", "03-graph §5.2 G"]
+
+  - id: general-matching
+    chapter: フロー・マッチング
+    title: 一般グラフのマッチング
+    aliases: [Edmonds, blossom, 花のアルゴリズム, 一般グラフの最大マッチング]
+    type: overview
+    level: 発展
+    level_evidence: "abc412_g (3402)"
+    kind: [フロー・マッチング]
+    prerequisites: [bipartite-matching]
+    related: [bit-dp, konig-theorem]
+    summary: "二部グラフでないグラフの最大マッチングは、奇閉路（花）を縮約する Edmonds のアルゴリズムで多項式時間で求まる。N ≤ 16 程度なら bitDP で足りる。"
+    signs:
+      - {type: phrase, text: "二部グラフでないグラフでペアを作る最大数"}
+      - {type: constraint, text: "N ≤ 16 程度なら bitDP で足りる"}
+    acl: []
+    frequency: C
+    sections:
+      - "二部グラフとの違い（奇閉路）"
+      - "Edmonds のアルゴリズムの概要"
+      - "小さければ bitDP"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: abc412_g, role: example, summary: "次数の条件を、頂点を A_i 個に増やした一般グラフの最小重み完全マッチングにする"}
+    sources: ["03-graph §4.G（フローの発展：一般グラフのマッチング）", "03-graph §5.2 G", "03-graph §6.6"]
+
+  # ───────────── 7. 横断・その他 ─────────────
+  - id: graph-construction
+    chapter: 横断・その他
+    title: グラフの構築（DFS 木・BFS 木の性質）
+    aliases: [構築, DFS 木, BFS 木, 後退辺, グラフの復元]
+    type: technique
+    level: 青
+    level_evidence: "arc083_b (1563)・abc251_f (1703)・abc244_g (2117)"
+    kind: [グラフ探索, 考察]
+    prerequisites: [dfs, bfs]
+    related: [warshall-floyd, construction, tree-construction, lowlink]
+    summary: "無向グラフの DFS 木では木に入らない辺がすべて祖先と子孫を結び、BFS 木では層が高々1違う頂点どうしを結ぶ。この性質を使って条件を満たす木や経路を作り、距離表からグラフを復元する。"
+    signs:
+      - {type: phrase, text: "条件を満たすグラフ・経路・全域木を1つ出力せよ"}
+      - {type: phrase, text: "訪問回数の偶奇が指定された経路を作る"}
+      - {type: phrase, text: "全点対の距離表からグラフを復元できるか"}
+    acl: []
+    frequency: B
+    sections:
+      - "DFS 木の性質（木に入らない辺は後退辺だけ）"
+      - "BFS 木の性質（層が高々1違う）"
+      - "DFS 木をたどって偶奇を合わせる（黄）"
+      - "距離表からの復元（迂回できる辺は不要）"
+    merged_keys: []
+    visual: "図：無向グラフの DFS 木では木に入らない辺がすべて祖先と子孫を結び、BFS 木では層が高々1違う頂点どうしを結ぶことの対比"
+    problems:
+      - {id: arc083_b, role: example, summary: "全点対の距離表から、それを実現する辺の長さの和の最小値を求める（迂回できる辺は不要）"}
+      - {id: abc251_f, role: example, summary: "DFS 木と BFS 木の性質を満たす全域木を2つ作る"}
+      - {id: abc244_g, role: practice, summary: "DFS 木をたどり、偶奇が合わない子では往復を挟んで、指定の訪問回数の偶奇を満たすパスを作る"}
+    sources: ["03-graph §4.H（グラフの構築）", "03-graph §5.2 H"]
+
+  - id: degree-sqrt
+    chapter: 横断・その他
+    title: 次数による平方分割（重い頂点・軽い頂点）
+    aliases: [次数の平方分割, 重い頂点と軽い頂点, 三角形の列挙, 4-サイクルの検出]
+    type: technique
+    level: 青
+    level_evidence: "typical90_ce（★6）。三角形・4-サイクルは abc260_f (1995)"
+    kind: [グラフ探索, クエリ処理の工夫]
+    prerequisites: [graph-basics]
+    related: [sqrt-decomposition, pigeonhole]
+    summary: "次数が √M を超える重い頂点は 2√M 個以下しかないことを使い、重い頂点と軽い頂点で処理を分けて「頂点とその隣接頂点すべて」へのクエリを O(√M) にする。三角形の列挙や4-サイクルの検出も同じ考え方で速くなる。"
+    signs:
+      - {type: phrase, text: "頂点とその隣接頂点すべてに対する操作・質問が大量に来る"}
+      - {type: phrase, text: "長さ3・4の閉路を見つける・数える"}
+      - {type: constraint, text: "N, M, Q ≤ 2×10^5 で、次数の大きい頂点は少ない"}
+    acl: []
+    frequency: C
+    sections:
+      - "重い頂点は 2√M 個以下"
+      - "重い頂点は受け取る側、軽い頂点は配る側"
+      - "三角形の列挙（次数の小さい方から向き付ける）（黄）"
+      - "4-サイクルの検出（鳩の巣原理で打ち切る）（黄）"
+    merged_keys: [small-cycle-enumeration]
+    visual: "図：重い頂点と軽い頂点を色分けし、更新を配る向きと受け取る向きを矢印で示す"
+    problems:
+      - {id: typical90_ce, role: example, summary: "頂点とその隣接頂点を塗るクエリを、次数が大きい頂点と小さい頂点で処理を変えて速くする"}
+      - {id: abc260_f, role: practice, summary: "二部グラフの長さ4の閉路を1つ探す。片側の頂点の組を記録し、同じ組が2回出たら見つかる（鳩の巣原理で打ち切れる）"}
+    sources: ["03-graph §4.H（次数による平方分割・三角形と4-サイクル）", "03-graph §5.2 H", "00-curriculum §4.2（鳩の巣原理）"]
+
+  - id: chromatic-number
+    chapter: 横断・その他
+    title: 彩色数・最大独立集合・最大クリーク（一般グラフ）
+    aliases: [彩色数, 頂点彩色, 最大クリーク, 一般グラフの最大独立集合]
+    type: overview
+    level: 発展
+    level_evidence: "ABC での出題は確認できなかった（Library Checker に chromatic_number・maximum_independent_set）"
+    kind: [全探索, 数え上げ]
+    prerequisites: [bit-dp, inclusion-exclusion]
+    related: [small-graph-brute-force, konig-theorem, meet-in-the-middle]
+    summary: "一般グラフの彩色数・最大独立集合・最大クリークは NP 困難で、彩色数は包除原理で O(2^N N)、最大独立集合は N ≤ 40 程度なら分枝や半分全列挙で求める。二部グラフなら易しいことと対比する。"
+    signs:
+      - {type: constraint, text: "N ≤ 20〜40 の一般グラフで独立集合・彩色・クリーク"}
+    acl: []
+    frequency: C
+    sections:
+      - "彩色数（包除原理で O(2^N N)）"
+      - "最大独立集合（分枝・半分全列挙）"
+      - "二部グラフなら König の定理"
+    merged_keys: []
+    visual: null
+    problems: []
+    sources: ["03-graph §4.H（その他の発展）", "03-graph §6.6"]
+
+moved:
+  - {key: dag-dp, to: dp, reason: "README §6（持ち主は dp。dp-dag に統合）。topological-sort・shortest-path-dag から dp-dag へリンクする"}
+  - {key: hamiltonian-path, to: dp, reason: "research/03 §7.1 の案（bitDP のページの節）。dp の tsp（巡回セールスマン）と同じ内容。euler-path の節で比べてリンクする"}
+  - {key: graph-games, to: comb, reason: "設計書 §4.2（後退解析は comb のゲームの章）。comb の game-retrograde-analysis と同じ内容。topological-sort からリンクする"}
+  - {key: adjacency-matrix-power, to: math, reason: "research/03 §7.4 の案（06 の行列累乗のページの節）。math の semiring-matrix（min-plus・max-min の行列積）と同じ内容"}
+dropped: []
+open_issues:
+  - "Union-Find の境界：ds が moved で送った offline-reverse（削除を逆順の追加にする）は union-find-connectivity に統合した。ds の open_issues の分担案（ds＝根に情報を持たせる構造の工夫、graph＝逆順・オフライン・しきい値・Kruskal）に合わせ、abc372_e（成分の上位 K 個）は graph に載せていない。offline-dynamic-connectivity は ds の rollback-union-find が「→ グラフの章」としてリンクしているので graph の発展の概要に残した"
+  - "guide が moved（to: graph）で送った kruskal-reconstruction-tree は、同じ担当 C の tree の merge-process-tree（併合過程の木、発展）に統合した（ds の各ページも merge-process-tree にリンクしている）。graph の bottleneck-path は節で概要を述べて tree へリンクする。行列木定理は comb が送った matrix-tree-theorem を graph の発展の概要の id にした"
+  - "lowlink（黄、設計書 §4.3）は、lowlink が想定の解法だと解説で確かめられた ABC の問題がない（abc375_g・abc334_g は別解でだけ裏付け）。例題は abc075_c（全探索）だけなので、執筆時に lowlink で解く解説を探すか、Library Checker（two_edge_connected_components）で練習を補う"
+  - "ABC の例題が1〜2問しかない黄のページ（complement-graph-bfs・xor-path・reachability-bitset・euler-path・lowlink）を単独ページのまま残すか、ほかのページの節にするかを見直しで判断してほしい"
+  - "potential-reweighting（水、abc237_e 1208）を bellman-ford（青）の節にした。水の問題が青のページに入るので、dijkstra の「負辺で壊れる例」の節からリンクする。path-restoration は research/03 の案（ダイクストラの節）ではなく、例題 abc168_d が BFS なので bfs の節にした"
+  - "research/03 §5.3 の未確認の最近の問題（abc395_e・abc400_d・abc410_d・abc416_e など）は入れていない。00 §2.3.8 で裏付けのある最近の問題（abc453_d・abc456_e・abc460_d・abc463_e・abc469_f・abc472_e・abc477_e・abc478_e）は加えた。執筆時に §5.3 の裏付けが取れれば基礎〜水のページの練習に足したい"

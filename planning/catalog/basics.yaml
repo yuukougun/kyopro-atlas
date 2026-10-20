@@ -1,0 +1,1167 @@
+field: basics
+pages:
+  # ---------------------------------------------------------------- A. 方針を立てる
+  - id: complexity-estimation
+    chapter: 方針を立てる
+    title: 計算量の見積もり（制約から手法を逆算する）
+    aliases: [計算量, オーダー, 制約から考える, TLE の見積もり, ならし計算量, 償却計算量, 定数倍]
+    type: technique
+    level: 基礎
+    level_evidence: "全分野の前提。見積もりそのものが問われる例は typical90_bc（★2）・typical90_bt（★4）・abc196_d（1277）。ならし計算量は hhkb2020_c（352）・abc278_d（559）"
+    kind: [全探索]
+    prerequisites: []
+    related: [reverse-index-constraints, harmonic-sum, two-pointers, cpp-performance]
+    summary: "制約の大きさから許される計算量を逆算し、使える手法の候補を絞る。C++ なら 1 秒に 10^8〜数×10^8 回を目安に、ループの回数・log の数・定数倍・メモリを見積もる。"
+    signs:
+      - {type: constraint, text: "N ≤ 8 / 20 / 40 / 400 / 5000 / 2×10^5 / 10^18 のような制約の大きさ"}
+      - {type: constraint, text: "実行時間制限が 5 秒など長い（重めの全探索が想定されている）"}
+      - {type: constraint, text: "Q ≤ 2×10^5 個のクエリ（1 回あたり O(log N) 以下が必要）"}
+      - {type: phrase, text: "while の中に for があって入れ子に見えるが、各要素は一度しか動かない"}
+    acl: []
+    frequency: A
+    sections:
+      - "制約 → 許される計算量 → 疑う手法の表"
+      - "見積もりの手順（ループの回数・log の数・定数倍・メモリ）"
+      - "ならし計算量（ポインタが戻らない・各要素が一度入って一度出る）"
+      - "調和級数の計算量（倍数の列挙。詳しくは整数論の調和級数のページ）"
+      - "候補の数で見積もる（階乗・ベル数・約数の個数の最大）"
+      - "定数倍（配列と set・map の差、メモリの連続性、bitset）（水）"
+      - "複数テストケースは合計（ΣN）で見積もる"
+    merged_keys: [amortized-analysis, constant-factor]
+    visual: "静的な図：制約の数直線に許される計算量と手法を並べた帯図と、N = 2×10^5 での各計算量の演算回数の棒グラフ"
+    problems:
+      - {id: typical90_bc, role: example, summary: "100 個から 5 個選ぶ組合せ（約 7.5×10^7 通り）を全部調べて積の余りを数える。定数倍まで見積もって全探索で間に合うと判断する"}
+      - {id: hhkb2020_c, role: practice, summary: "数を 1 つずつ追加するたびに、まだ現れていない最小の非負整数を出力する。答えのポインタは戻らないので全体で線形（ならし計算量）"}
+      - {id: abc278_d, role: practice, summary: "全体への一括代入と一点の加算・取得のクエリ。一括代入の時刻を覚え、触った要素だけ遅れて更新する"}
+      - {id: typical90_bt, role: practice, summary: "小さいグリッドで山を避ける最長の閉路を探す。経路の通り数を見積もったうえでバックトラックで全部試す"}
+      - {id: abc196_d, role: practice, summary: "H×W ≤ 16 のマス目を 1×2 と 1×1 の畳で敷き詰める方法を数える。置き方を DFS で全部試しても間に合う規模だと見積もる"}
+    sources: ["01-basics §4.A", "01-basics §5", "01-basics §6.1", "01-basics §6.4", "08-string-geo §4.9", "00-curriculum §3.2"]
+
+  # ---------------------------------------------------------------- B. 全探索
+  - id: brute-force
+    chapter: 全探索
+    title: 全探索の設計（何を全探索するか）
+    aliases: [全列挙, 工夫した全探索, 総当たり, 候補が少ない, 盤面の全探索, ポリオミノ]
+    type: technique
+    level: 基礎
+    level_evidence: "arc096_a（291）・abc085_c（584）・abc051_b（784）・abc112_c（1147）。最近も abc469_d（1102、候補を 2 つに絞る）。盤面を動かす全探索は abc307_c（1307）・abc322_d（1310）で水（節に印）"
+    kind: [全探索]
+    prerequisites: [complexity-estimation]
+    related: [bit-full-search, fix-variable, small-graph-brute-force, divisor-count-bound]
+    summary: "何を全探索するかを選び直して通り数を減らす。いくつか決めれば残りが計算で決まる、答えの候補の側を試す、小さい次元だけを試して残りを速く求める、などの型がある。"
+    signs:
+      - {type: phrase, text: "変数が 2〜3 個で、いくつか決めれば残りが計算で決まる"}
+      - {type: phrase, text: "答えの候補（暗証番号・中心の座標など）が N によらず少ない"}
+      - {type: constraint, text: "一方の次元だけ極端に小さい（H ≤ 8 など）"}
+      - {type: constraint, text: "K ≤ 10^12 で約数を扱う（約数の個数は最大 6720）"}
+      - {type: phrase, text: "小さい盤面を回転・平行移動して重ねる・敷き詰める"}
+    acl: []
+    frequency: A
+    sections:
+      - "何を全探索するか（2 つ決めて 3 つ目を計算する）"
+      - "決めてから整合性を確かめる"
+      - "候補が少ないことに気づく（答えの側・小さい次元・約数の個数・log 回の収束）"
+      - "片側を全探索して残りを速く求める（貪欲・二分探索・累積和）"
+      - "盤面を動かして全部試す（回転・平行移動）（水）"
+    merged_keys: [small-search-space, grid-brute-force]
+    visual: "静的な図：3 重ループと「2 つ決めて 3 つ目を計算」のループ回数の比較と、探索の対象を入れ替えたときの通り数の表"
+    problems:
+      - {id: abc085_c, role: example, summary: "1 万円・5 千円・千円札が合計 N 枚で Y 円になるか。2 種類の枚数を決めれば 3 種類目が決まる"}
+      - {id: sumitb2019_d, role: practice, summary: "数字列から作れる 3 桁の暗証番号の種類数。番号の候補 1000 通りの側を全探索して作れるか判定する"}
+      - {id: typical90_bk, role: practice, summary: "グリッドから行と列を選ぶ。H ≤ 8 の行の選び方を全探索し、列はまとめて数える"}
+      - {id: abc469_d, role: practice, summary: "考える候補を 2 つに絞ってから数える最近の D（00 §2.3.8 の分類。内容は執筆時に確かめる）"}
+      - {id: abc112_c, role: practice, summary: "ピラミッドの中心座標 101×101 通りを全探索し、高さを決めて情報と矛盾しないか確かめる"}
+      - {id: abc307_c, role: practice, summary: "2 枚のシートを平行移動の全組合せで重ね、切り出した結果が目標と一致するか調べる"}
+      - {id: abc322_d, role: challenge, summary: "3 つのポリオミノを回転と平行移動の全組合せで置き、4×4 をちょうど埋められるか判定する"}
+    sources: ["01-basics §4.A", "01-basics §4.B", "01-basics §5", "01-basics §7.5", "00-curriculum §2.3.8"]
+
+  - id: bit-full-search
+    chapter: 全探索
+    title: bit 全探索と順列全探索
+    aliases: [ビット全探索, 部分集合の全列挙, 2^N 全探索, 3 進全探索, 順列全探索, next_permutation, N! 全探索]
+    type: technique
+    level: 基礎
+    level_evidence: "bit 全探索は abc182_c（292）・abc128_c（805）・abc197_c（809）・abc147_c（977）、drken の ABC 16 問の中央値 642。順列全探索は abc145_c（340）・abc150_c（422）・abc232_c（685）・abc371_c（849）。片側を bit で決めて残りを貪欲にする型は abc100_d（1331）・abc159_e（1450）で水（節に印）"
+    kind: [全探索, ビット演算]
+    prerequisites: [brute-force, bit-operations]
+    related: [recursive-enumeration, meet-in-the-middle, bit-dp, small-graph-brute-force]
+    summary: "N ≤ 20 程度なら部分集合 2^N 通りを整数の各 bit で表して全部試し、N ≤ 8〜10 なら順列 N! 通りを next_permutation で全部試す。片側だけ全探索して残りを貪欲で決める型が水で頻出する。"
+    signs:
+      - {type: constraint, text: "N ≤ 15〜20 で各要素を「選ぶ／選ばない」"}
+      - {type: constraint, text: "N ≤ 8〜10 で並び順・割り当て・頂点の対応を決める"}
+      - {type: phrase, text: "スイッチの on/off、区切る／区切らない"}
+      - {type: phrase, text: "各要素が 3 択（N ≤ 12 程度なら 3^N 通り）"}
+      - {type: phrase, text: "グラフの同型判定（頂点の対応を全部試す）"}
+    acl: []
+    frequency: A
+    sections:
+      - "bit 全探索の書き方（mask の i ビット目で要素 i を選ぶ）"
+      - "k 進の全探索（3^N）"
+      - "決めてから整合性を確かめる型"
+      - "片側を bit で決めて残りは貪欲（水）"
+      - "順列全探索と next_permutation（昇順から始める・重複要素）"
+      - "落とし穴（1 << 31 のあふれ・== と & の優先順位）"
+    merged_keys: [permutation-search]
+    visual: "静的な図：0〜2^N−1 を 2 進表記で縦に並べた表と、next_permutation が次の順列を作る手順の図"
+    problems:
+      - {id: abc182_c, role: example, summary: "各桁を残すか消すかを bit で全探索し、3 の倍数にできる最小の消去数を求める"}
+      - {id: abc145_c, role: example, summary: "N ≤ 8 個の町を回る全順序について経路長の平均を求める（順列全探索）"}
+      - {id: abc232_c, role: practice, summary: "2 つのグラフが頂点の付け替えで一致するかを、8! 通りの対応を全部試して判定する"}
+      - {id: abc128_c, role: practice, summary: "スイッチの on/off 2^N 通りを試し、すべての電球が点く組合せを数える"}
+      - {id: abc147_c, role: practice, summary: "誰が正直者かを 2^N 通り仮定し、証言と矛盾しない場合の正直者の最大人数を求める"}
+      - {id: abc100_d, role: practice, summary: "評価の符号の向き 8 通りを全探索し、各向きで大きい順に M 個取る（片側を全探索して残りは貪欲）"}
+      - {id: abc159_e, role: challenge, summary: "横の切れ目 2^(H−1) 通りを全探索し、縦の切れ目は左から貪欲に入れて最小回数を求める"}
+    sources: ["01-basics §4.B", "01-basics §5", "01-basics §7.1", "01-basics §7.5"]
+
+  - id: recursive-enumeration
+    chapter: 全探索
+    title: 再帰による全列挙（バックトラック・組分け）
+    aliases: [DFS による全列挙, バックトラック, 枝刈り, グループ分けの全列挙, 集合分割, ベル数]
+    type: technique
+    level: 水
+    level_evidence: "abc161_d（991）・abc114_c（1045）は緑だが、abc236_d（1190）・abc310_d（1368）・abc345_d（1419）・abc390_d（1607）と水に多い。drken の「再帰関数（ビット全探索困難）」ABC 10 問の中央値 1018。最近も abc473_d（838）"
+    kind: [全探索]
+    prerequisites: [bit-full-search]
+    related: [bit-dp, memoized-recursion, brute-force, cpp-recursive-lambda]
+    summary: "部分的に決めた状態から 1 つずつ決めていく再帰で、条件を満たす数・組分け・敷き詰めを全部列挙する。組分けは「まだ組のない最小番号の人から決める」と同じ分け方を二度数えない。"
+    signs:
+      - {type: phrase, text: "条件を満たす数・列を小さい順にすべて作る"}
+      - {type: constraint, text: "N ≤ 10〜12 人を組・グループに分ける（ベル数 B12 ≈ 4.2×10^6）"}
+      - {type: constraint, text: "2N ≤ 16 人を 2 人組に分ける（(2N−1)!! 通り）"}
+      - {type: phrase, text: "タイルの敷き詰め・パズルを途中で打ち切りながら試す"}
+    acl: []
+    frequency: A
+    sections:
+      - "生成型（桁を 1 つずつ足す）"
+      - "組分け型（最小番号から決めて重複を防ぐ）"
+      - "ペア分け型"
+      - "敷き詰め型（左上の空きマスから置く）"
+      - "枝刈りと計算量の見積もり（葉の数 × 1 本あたり）"
+      - "状態を戻し忘れない（バックトラック）"
+    merged_keys: []
+    visual: "静的な図：組分けの再帰木（最小番号から決めると同じ分け方が一度だけ現れる）"
+    problems:
+      - {id: abc161_d, role: example, summary: "隣り合う桁の差が 1 以下の数の K 番目を、桁数の小さい順に生成して求める"}
+      - {id: abc310_d, role: example, summary: "N ≤ 10 人を T チームに分ける方法のうち、仲の悪い組が同じチームにならないものを数える（最小番号から決めて重複を防ぐ）"}
+      - {id: abc473_d, role: practice, summary: "DFS（再帰）による全列挙で解く最近の D（00 §2.3.8 の分類。内容は執筆時に確かめる）"}
+      - {id: abc114_c, role: practice, summary: "7, 5, 3 だけからなり 3 種類すべてを含む N 以下の数を、桁を 1 つずつ足す再帰で数える"}
+      - {id: abc236_d, role: practice, summary: "2N 人を 2 人組に分ける全通りを再帰で列挙し、組ごとの値の XOR の最大を求める"}
+      - {id: abc345_d, role: practice, summary: "N 枚のタイルで H×W を覆えるか。左上の空きマスから置き方を試すバックトラック"}
+      - {id: abc390_d, role: challenge, summary: "N ≤ 12 個の袋の分け方（ベル数通り）を全列挙し、グループの和の XOR が何種類あるか数える"}
+    sources: ["01-basics §4.B", "01-basics §5", "01-basics §6.4", "00-curriculum §2.3.8"]
+
+  - id: meet-in-the-middle
+    chapter: 全探索
+    title: 半分全列挙
+    aliases: [Meet in the Middle, 半分全探索, 折半全列挙]
+    type: technique
+    level: 水
+    level_evidence: "abc184_f（1423）・typical90_ay（★5）・abc271_f（1669）・agc026_c（1836）。黄に abc300_g（2343）、最近は abc464_f（2225）で道具として使われる"
+    kind: [全探索, 二分探索]
+    prerequisites: [bit-full-search, binary-search, sorting-techniques]
+    related: [two-pointers, knapsack-01, subset-sum]
+    summary: "N ≤ 40 程度の部分集合の問題を前半と後半に分け、それぞれ 2^(N/2) 通りを列挙してから、ソートと二分探索（または尺取り）で組み合わせる。"
+    signs:
+      - {type: constraint, text: "N ≤ 40 で部分集合を選ぶ（2^N は無理だが 2^(N/2) は間に合う）"}
+      - {type: phrase, text: "2 つの独立な選択を組み合わせて条件を満たす"}
+      - {type: phrase, text: "グリッドの経路で、対角線までの歩数が短い"}
+    acl: []
+    frequency: B
+    sections:
+      - "前半・後半を列挙して突き合わせる（ソート＋二分探索・尺取り）"
+      - "ちょうど K 個などの制約は個数ごとに分けて持つ"
+      - "グリッドの経路を対角線で分ける（青）"
+      - "「片側を全探索して残りは貪欲」との違い"
+      - "値の範囲が小さければナップサック DP"
+    merged_keys: []
+    visual: "静的な図：前半・後半の部分和リストを並べ、後半をソートして前半の各値の相手を二分探索で探す図"
+    problems:
+      - {id: abc184_f, role: example, summary: "N ≤ 40 個から選ぶ和で T 以下の最大値。半分ずつ部分和を列挙し、ソートと二分探索で組み合わせる"}
+      - {id: typical90_ay, role: example, summary: "N ≤ 40 個からちょうど K 個、合計 P 以下となる選び方を数える。個数ごとに分けて列挙して二分探索する"}
+      - {id: abc271_f, role: practice, summary: "グリッドの左上から右下への経路で XOR が 0 になるものを数える。対角線で分けて両側から列挙し突き合わせる"}
+      - {id: agc026_c, role: practice, summary: "2N 文字を赤青に塗り、赤を左から読んだ列と青を右から読んだ列が一致する塗り方を数える。前半の塗り方を列挙して後半と突き合わせる"}
+      - {id: abc300_g, role: challenge, summary: "p 以下の素数だけを素因数にもつ N 以下の数を数える。素数を 2 組に分けて積を列挙し、尺取りで組み合わせる"}
+    sources: ["01-basics §4.B", "01-basics §5", "01-basics §6.3"]
+
+  # ---------------------------------------------------------------- 並べる・圧縮する
+  - id: sorting-techniques
+    chapter: ソートと座標圧縮
+    title: ソートで考える（並べ替え・比較関数）
+    aliases: [ソート, 比較関数, 安定ソート, ペアのソート]
+    type: technique
+    level: 基礎
+    level_evidence: "abc121_c（360）・typical90_n（★3）・abc308_c（605）・abc187_d（650）。drken の「考察：ソート」ABC 49 問の中央値 127"
+    kind: [ソート・座標圧縮, 貪欲]
+    prerequisites: []
+    related: [exchange-argument, greedy-basics, cpp-comparators, cpp-algorithms-classic]
+    summary: "並べ替えてよい問題では、ソートすると貪欲の順番が決まり、二分探索や尺取りが使えるようになる。比較関数は狭義の弱順序（<= を書かない）にし、比率は掛け算で比べる。"
+    signs:
+      - {type: phrase, text: "順番を自由に並べ替えてよい"}
+      - {type: phrase, text: "安い順・効果の大きい順に取る"}
+      - {type: phrase, text: "2 つの集合を 1 対 1 に対応させて距離の和を最小化する"}
+      - {type: phrase, text: "成功率などの比率の大小で並べる"}
+    acl: []
+    frequency: A
+    sections:
+      - "ソートで貪欲の順が決まる"
+      - "2 つの列を 1 対 1 に対応させる（両方ソートして順に組む）"
+      - "比較関数の要件（狭義の弱順序）"
+      - "比率は掛け算で比べる・同点の順序（stable_sort）"
+    merged_keys: []
+    visual: "静的な図：2 つの列の対応を線で結び、両方ソートすると交差が消える図"
+    problems:
+      - {id: abc121_c, role: example, summary: "安い店から順に必要な本数を買う最小費用（ソートして貪欲）"}
+      - {id: typical90_n, role: practice, summary: "小学生と学校を 1 対 1 に割り当てて距離の和を最小化する。両方ソートして順に対応させる"}
+      - {id: abc308_c, role: practice, summary: "成功率の降順・番号の昇順に並べる。比率は掛け算で比べて誤差を避ける"}
+      - {id: abc187_d, role: practice, summary: "各町の効果 2A + B が独立に決まるので、大きい順に選んで必要な町の最小数を求める"}
+    sources: ["01-basics §4.G", "01-basics §5", "01-basics §7.5"]
+
+  - id: coordinate-compression
+    chapter: ソートと座標圧縮
+    title: 座標圧縮
+    aliases: [座圧, 値の圧縮, 離散化]
+    type: technique
+    level: 基礎
+    level_evidence: "abc213_c（481）・abc113_c（878）・abc188_d（933）・abc036_c（956 参考値）。データ構造と組む形は typical90_ac（★5）"
+    kind: [ソート・座標圧縮]
+    prerequisites: [sorting-techniques, binary-search]
+    related: [stl-containers, fenwick-tree, event-sort, imos]
+    summary: "値を sort・unique・lower_bound で 0〜K−1 の番号に置き換え、大小関係だけを残したまま配列の添字にできるようにする。BIT・セグ木・いもす法と組んで使う。"
+    signs:
+      - {type: constraint, text: "値は 10^9 まであるが、個数は 2×10^5 以下"}
+      - {type: phrase, text: "大小関係（順位）だけが重要"}
+      - {type: phrase, text: "値を配列の添字にしたい（BIT・いもす法に載せたい）"}
+    acl: []
+    frequency: A
+    sections:
+      - "sort → unique → lower_bound の 3 段"
+      - "区間を扱うときは両端点を入れる"
+      - "圧縮後の番号で長さを測らない（元の値を残す）"
+      - "map で足りる場合との使い分け"
+    merged_keys: []
+    visual: "静的な図：元の値と圧縮後の番号の対応表"
+    problems:
+      - {id: abc213_c, role: example, summary: "カードのない行・列を消した後の座標を求める。行と列を独立に座標圧縮する"}
+      - {id: abc113_c, role: practice, summary: "県ごとに市を誕生順に並べて順位を付け、ID を作る"}
+      - {id: abc036_c, role: practice, summary: "各値が何番目に小さい値かを出力する（座標圧縮そのもの）"}
+      - {id: typical90_ac, role: practice, summary: "区間に積むレンガの上面の高さを答える。座標を圧縮してから区間の最大値を管理する"}
+    sources: ["01-basics §4.G", "01-basics §5"]
+
+  # ---------------------------------------------------------------- C. 二分探索
+  - id: binary-search
+    chapter: 二分探索
+    title: 二分探索（めぐる式・lower_bound）
+    aliases: [二分法, lower_bound, upper_bound, めぐる式二分探索, partition_point]
+    type: technique
+    level: 基礎
+    level_evidence: "abc302_d（682）・abc143_d（686）・abc205_d（713）・abc321_d（806）・arc084_a（1096）。drken の「二分探索:lower_bound」ABC 26 問の中央値 917"
+    kind: [二分探索]
+    prerequisites: [sorting-techniques]
+    related: [binary-search-answer, two-pointers, segtree-binary-search, ordered-set, interactive]
+    summary: "単調な条件の境界を O(log N) で見つける。ok は条件を満たし ng は満たさない、という不変条件を保って区間を半分ずつ狭める。ソート済みの列では lower_bound・upper_bound で個数を数えられる。"
+    signs:
+      - {type: phrase, text: "ソート済みの列で x 以上の最初の位置・x 以下の個数"}
+      - {type: phrase, text: "片方を固定して、もう片方が条件を満たす個数を数える"}
+      - {type: phrase, text: "左右で最も近い要素を探す"}
+    acl: []
+    frequency: A
+    sections:
+      - "めぐる式（ok と ng の不変条件・初期値は判定しない番兵）"
+      - "lower_bound・upper_bound と個数の数え方"
+      - "片方を固定してもう片方を二分探索する"
+      - "落とし穴（(ok + ng) / 2 のあふれ・負の数の丸め・set に std::lower_bound）"
+      - "インタラクティブ問題の二分探索（その他の章へ）"
+    merged_keys: []
+    visual: "動く図：ok 側と ng 側を色分けした数直線で 2 本の指が近づくステップ送り（不変条件を常に表示）"
+    problems:
+      - {id: abc143_d, role: example, summary: "三角形を作れる 3 本の組を数える。2 本を固定し、3 本目の長さの上限を二分探索する"}
+      - {id: abc302_d, role: practice, summary: "2 つの数列から差が D 以下の組を選んで和を最大化する。片方を固定し、もう片方で x + D 以下の最大を探す"}
+      - {id: abc205_d, role: practice, summary: "数列に含まれない正整数の K 番目を、「x 以下で欠けている個数」の単調性で二分探索する"}
+      - {id: abc321_d, role: practice, summary: "全ペアの min(A + B, P) の総和。B をソートし、A ごとに境界を二分探索して累積和でまとめる"}
+      - {id: arc084_a, role: practice, summary: "上段・中段・下段の組合せ数。中段を固定し、上段と下段で条件を満たす個数を二分探索で数える"}
+      - {id: abc119_d, role: challenge, summary: "各地点から神社と寺を 1 つずつ訪れる最短距離。左右の最寄りを lower_bound で求めて 4 通りを比べる"}
+    sources: ["01-basics §4.C", "01-basics §5", "01-basics §6.4"]
+
+  - id: binary-search-answer
+    chapter: 二分探索
+    title: 答えで二分探索（判定問題に帰着する）
+    aliases: [決め打ち二分探索, 答えの二分探索, 最小値の最大化, 最大値の最小化, 判定問題, 実数の二分探索]
+    type: technique
+    level: 基礎
+    level_evidence: "abc146_c（741）・typical90_a（★4）で緑から現れ、abc257_d（1203）・abc174_e（1227）・abc144_e（1449）と水に多い。最近も abc457_d（677）・abc463_d（838）。実数の二分探索は abc026_d（1406 参考値）で水（節に印）"
+    kind: [二分探索]
+    prerequisites: [binary-search]
+    related: [greedy-basics, kth-value, fractional-binary-search, ternary-search, dp-decision-binary-search]
+    summary: "「答えを x にできるか」の判定が x について単調なら、x を二分探索して最適値を求める。最大値の最小化・最小値の最大化に使い、判定の中身（貪欲・探索・DP）が問題の本体になる。"
+    signs:
+      - {type: phrase, text: "最小値を最大化する／最大値を最小化する"}
+      - {type: phrase, text: "〜を満たす最大（最小）の X を求める"}
+      - {type: phrase, text: "X を決めれば貪欲や探索で可否が分かる"}
+      - {type: constraint, text: "答えの範囲が 10^9〜10^18 と広い"}
+      - {type: phrase, text: "答えを実数で出力し、誤差 10^−6 まで許される"}
+    acl: []
+    frequency: A
+    sections:
+      - "判定の単調性を確かめる（「ちょうど K」は「K 以上」に直す）"
+      - "最大値の最小化・最小値の最大化"
+      - "判定の中身（貪欲・探索・DP）"
+      - "上限の取り方・判定中のオーバーフロー・ok と ng の取り違え"
+      - "実数の二分探索（反復回数を固定する）（水）"
+      - "K 番目・平均・中央値への入口"
+    merged_keys: [real-binary-search]
+    visual: "静的な図：横軸に候補 x、可／不可を色で塗った階段図と、判定に使う貪欲の図"
+    problems:
+      - {id: typical90_a, role: example, summary: "ようかんを切って最短のピースを最大化する。「長さ x 以上で K+1 個に切れるか」を貪欲に判定して x を二分探索する"}
+      - {id: abc457_d, role: practice, summary: "最小値を上げる操作の問題を、答えの二分探索で解く最近の D（00 §2.3.8 の分類。内容は執筆時に確かめる）"}
+      - {id: abc146_c, role: practice, summary: "A×N + B×(N の桁数) ≤ X となる最大の N を、値が N について単調なことを使って二分探索する"}
+      - {id: abc463_d, role: practice, summary: "間隔を最大化する問題を、答えの二分探索と貪欲な判定で解く最近の D（00 §2.3.8 の分類）"}
+      - {id: abc257_d, role: practice, summary: "ジャンプ台を行き来できる最小の訓練回数。回数 x を決め、ある始点から全部に到達できるかを探索で判定する"}
+      - {id: abc174_e, role: practice, summary: "丸太を合計 K 回以下切って最長の長さを最小化する。すべてを長さ x 以下にする回数で判定する"}
+      - {id: abc026_d, role: practice, summary: "単調増加な f(t) = At + B sin(Ctπ) が 100 になる t を、実数の二分探索で誤差の範囲まで求める"}
+      - {id: abc144_e, role: challenge, summary: "修行でコストを下げ、チームの所要時間の最大を最小化する。組合せはソートで決め、上限 x を二分探索する"}
+    sources: ["01-basics §4.C", "01-basics §5", "01-basics §6.2", "00-curriculum §2.3.8"]
+
+  - id: kth-value
+    chapter: 二分探索
+    title: K 番目の値（個数を数えて二分探索）
+    aliases: [K 番目に小さい値, K-th smallest, 順位を数える, 上位 K 個を列挙, K-best]
+    type: technique
+    level: 青
+    level_evidence: "易しい形は abc205_d（713）・abc341_d（829）。全部を列挙できない積・和の K 番目は arc037_c（1824 参考値）・abc155_d（1845）・abc149_e（1905）と青に集まる（設計 §4.3）。優先度付きキューで小さい順に取り出す型は abc234_d（503）・abc297_e（1176）で基礎（節に印）"
+    kind: [二分探索]
+    prerequisites: [binary-search-answer, two-pointers]
+    related: [kth-element, priority-queue, median-binary-search, fractional-binary-search]
+    summary: "「K 番目 ≤ x ⇔ x 以下の個数 ≥ K」なので、x 以下の個数が速く数えられれば x を二分探索して K 番目を求められる。N^2 個の積・和の K 番目や上位 M 個の和に使う。K が小さければ優先度付きキューで小さい順に取り出してもよい。"
+    signs:
+      - {type: phrase, text: "N^2 個（以上）の値の K 番目"}
+      - {type: phrase, text: "上位 M 個の和"}
+      - {type: phrase, text: "全部は列挙できないが「x 以下が何個あるか」は数えられる"}
+      - {type: constraint, text: "K ≤ 2×10^5 程度で、小さい順に K 個取り出せば足りる"}
+    acl: []
+    frequency: B
+    sections:
+      - "なぜ count(x) ≥ K となる最小の x が答えか"
+      - "数え方の型（ソート＋二分探索・尺取り、符号で場合分け、包除）"
+      - "上位 M 個の和（同じ値の分の調整）"
+      - "優先度付きキューで小さい順に列挙する（基礎）"
+      - "同じ値・不等号・0 始まりと 1 始まりの落とし穴"
+    merged_keys: [k-best-enumeration]
+    visual: "静的な図：count(x) の階段グラフと、count(x) ≥ K となる最小の x"
+    problems:
+      - {id: abc341_d, role: example, summary: "N か M のちょうど一方で割り切れる数の K 番目。x 以下の個数を包除で数えて二分探索する"}
+      - {id: abc155_d, role: example, summary: "N 個から 2 つ選んだ積の K 番目。x 以下の積の個数を符号で場合分けして数え、二分探索する"}
+      - {id: abc234_d, role: practice, summary: "順列の先頭 i 個の中で K 番目に大きい値を、値を 1 つずつ加えながら優先度付きキューで保つ"}
+      - {id: abc297_e, role: practice, summary: "品物を重複ありで選んだ合計の小さい方から K 番目。最小を取り出して次の候補を入れ、重複は set で除く"}
+      - {id: arc037_c, role: practice, summary: "a_i × b_j（N^2 個）の K 番目。片方をソートして x 以下の個数を数え、二分探索する"}
+      - {id: abc149_e, role: challenge, summary: "握手の組の値の大きい M 組の和。M 番目の値を二分探索で求め、それより大きい組の和を累積和でまとめる"}
+    sources: ["01-basics §4.C", "01-basics §5", "01-basics §7.2"]
+
+  - id: fractional-binary-search
+    chapter: 二分探索
+    title: 平均・比の最大化（分数計画の二分探索）
+    aliases: [平均の最大化, 分数計画, 比の最大化, 濃度の最大化, Dinkelbach]
+    type: technique
+    level: 青
+    level_evidence: "abc324_f（1815）・abc294_f（1891）・abc236_e（1893）と青に集まる。手法の入口は abc469_e（1566、最近の E）と abc034_d（1549 参考値）で水の上端。黄に arc026_4（2297 参考値）。research/00 は水、research/01 は青とした"
+    kind: [二分探索]
+    prerequisites: [binary-search-answer]
+    related: [median-binary-search, dp-decision-binary-search, kth-value, minimum-spanning-tree]
+    summary: "「平均 ≥ x ⇔ Σ(a_i − x) ≥ 0」「Σa / Σb ≥ x ⇔ Σ(a_i − x·b_i) ≥ 0」と言い換え、x を二分探索する。判定は和の最大化なので、貪欲・累積和・DP・最長路などで行う。"
+    signs:
+      - {type: phrase, text: "平均・濃度・割合・(Σa)/(Σb) の最大（最小）"}
+      - {type: phrase, text: "選び方が多くて全部は試せない"}
+      - {type: phrase, text: "答えを実数で出力する"}
+    acl: []
+    frequency: B
+    sections:
+      - "言い換え（x を引いた和の符号で判定する）"
+      - "判定の型（上位 K 個の貪欲・累積和・DP・DAG の最長路・全域木）"
+      - "「濃度の高い順に K 個」が誤りである理由"
+      - "実数の精度と分母 0"
+      - "Dinkelbach 法（発展の紹介）"
+    merged_keys: [fractional-programming]
+    visual: "静的な図：各要素を a_i − x·b_i に置き換え、x を動かすと選ぶものの組が入れ替わる様子のグラフ"
+    problems:
+      - {id: abc469_e, role: example, summary: "連続部分列の平均の最大化に帰着する。答え a を二分探索し、各要素から a を引いた累積和で和が 0 以上の区間があるか判定する"}
+      - {id: abc324_f, role: example, summary: "DAG の経路で（美しさの和）/（コストの和）を最大化する。辺の重みを b − x·c にした最長路が 0 以上かで判定する"}
+      - {id: abc034_d, role: practice, summary: "食塩水を K 個選んで混ぜた濃度の最大。「食塩 − x × 重さ」の大きい順に K 個取って判定する"}
+      - {id: abc294_f, role: practice, summary: "砂糖水を 1 つずつ選んで混ぜた濃度の K 番目。濃度 x 以上の組の数を式変形とソートで数えて二分探索する"}
+      - {id: abc236_e, role: practice, summary: "隣り合う 2 つの少なくとも一方を選ぶとき、平均の最大を x を引いた値の DP で判定する（中央値も同じ問題）"}
+      - {id: arc026_4, role: challenge, summary: "連結を保つ辺集合の（コストの和）/（長さの和）の最小。重み c − x·l の全域木で判定する"}
+    sources: ["01-basics §4.C", "01-basics §5", "00-curriculum §3.2", "00-curriculum §4.2", "00-curriculum §5.1"]
+
+  - id: median-binary-search
+    chapter: 二分探索
+    title: 中央値の二分探索（x 以上を +1、未満を −1 にする）
+    aliases: [中央値の最大化, メディアンの二分探索, 中央値の中央値]
+    type: technique
+    level: 青
+    level_evidence: "abc203_d（1622）・abc236_e（1893）・arc101_b（2073）"
+    kind: [二分探索, 累積和・差分]
+    prerequisites: [binary-search-answer, prefix-sum]
+    related: [fractional-binary-search, kth-value, median-absolute, inversion-number, prefix-sum-2d]
+    summary: "「中央値 ≥ x ⇔ x 以上の要素が半分以上」なので、x 以上を +1、未満を −1 に置き換えた和の符号で判定し、x を二分探索する。領域なら 2 次元累積和、選び方の制約があれば DP、全区間なら転倒数で数える。"
+    signs:
+      - {type: phrase, text: "中央値の最大値・最小値"}
+      - {type: phrase, text: "全区間の中央値を集めた中央値"}
+      - {type: phrase, text: "区間・領域ごとの中央値"}
+    acl: []
+    frequency: B
+    sections:
+      - "+1・−1 への置き換えと判定"
+      - "偶数個のときの中央値の定義と不等号"
+      - "領域の中央値（2 次元累積和）"
+      - "選び方の制約付き（DP）"
+      - "中央値の中央値（転倒数で数える）（黄）"
+    merged_keys: []
+    visual: "静的な図：数列を x 以上 → +1、未満 → −1 に塗り替え、累積和の正負で判定する図"
+    problems:
+      - {id: abc203_d, role: example, summary: "N×N の池の K×K 区画の中央値の最小。x 以下の個数を 2 次元累積和で数えて判定する"}
+      - {id: abc236_e, role: practice, summary: "選び方の制約付きで中央値を最大化する。x 以上を +1・未満を −1 にした値の DP で判定する"}
+      - {id: arc101_b, role: challenge, summary: "全区間の中央値を集めた中央値。+1・−1 に変換し、和が正の区間の個数（転倒数）で判定する"}
+    sources: ["01-basics §4.C", "01-basics §5", "01-basics §7.1"]
+
+  # ---------------------------------------------------------------- D. 凸と三分探索
+  - id: ternary-search
+    chapter: 凸と三分探索
+    title: 三分探索（凸関数の最小化）
+    aliases: [三分法, 黄金分割探索, 凸関数の極値, 凸関数, 離散凸, 増分が単調]
+    type: technique
+    level: 水
+    level_evidence: "abc279_d（766）が D での例、arc054_b（1269 参考値）・abc151_f（1671）・abc130_f（2240）。drken の「凸関数」ABC 4 問の中央値 1898。増分が単調な凸関数の貪欲は abc359_f（1792）で青（節に印）"
+    kind: [二分探索]
+    prerequisites: [binary-search-answer]
+    related: [median-absolute, geometry-optimization, slope-trick, greedy-priority-queue]
+    summary: "下に凸（谷が 1 つ）な関数の最小を、2 点の値を比べて外側を捨てながら求める。整数なら f(x+1) − f(x) の符号で二分探索するほうが安全なことが多い。凸関数の和・最大は凸、という性質で凸性を確かめる。"
+    signs:
+      - {type: phrase, text: "時刻や位置を 1 つ選んで、時間やコストを最小化する（谷形）"}
+      - {type: phrase, text: "答えを実数で出力し、誤差が許される"}
+      - {type: phrase, text: "1 つ増やすごとの増分が単調に増える"}
+    acl: []
+    frequency: B
+    sections:
+      - "実数版（反復回数の目安）と整数版（残りを全部調べる）"
+      - "差分の符号で二分探索する方法"
+      - "凸性の確かめ方（凸関数の和・最大は凸、|x − a| と x^2 は凸）"
+      - "平らな部分がある関数での失敗"
+      - "黄金分割探索"
+      - "増分が単調なら 1 単位ずつ貪欲に配る（青）"
+    merged_keys: [convex-function-basics]
+    visual: "静的な図：谷形のグラフに 2 点を取り外側 1/3 を捨てる様子と、整数版の差分の符号の図"
+    problems:
+      - {id: abc279_d, role: example, summary: "重力を強くする回数 x を選び、総時間 Bx + A/√(1+x) を最小化する（下に凸なので三分探索）"}
+      - {id: arc054_b, role: practice, summary: "x 年後に計算を始めると P/2^(x/1.5) + x 年かかる。下に凸なので x を三分探索する"}
+      - {id: abc151_f, role: practice, summary: "N 点をすべて含む円の半径の最小。中心の x と y を入れ子の三分探索で求める"}
+      - {id: abc359_f, role: practice, summary: "木の次数に対する Σ d_i^2 A_i の最小化。増分が単調なので、次数を 1 ずつ増やす候補を優先度付きキューで選ぶ"}
+      - {id: abc130_f, role: challenge, summary: "動く点群を囲む長方形の面積の最小。端の動きが区分線形なので候補の時刻を絞る（三分探索でも解ける）"}
+    sources: ["01-basics §4.D", "01-basics §5"]
+
+  - id: median-absolute
+    chapter: 凸と三分探索
+    title: 絶対値の和の最小化と中央値
+    aliases: [中央値で絶対値最小, "Σ|x − a_i|", メディアン, マンハッタン距離の和の最小]
+    type: technique
+    level: 基礎
+    level_evidence: "arc100_a（1089）・typical90_br（★4）。応用は abc330_f（1718）・abc127_f（2003）"
+    kind: [ソート・座標圧縮, 考察]
+    prerequisites: [sorting-techniques]
+    related: [ternary-search, median-binary-search, axis-independence, top-k-multiset, slope-trick]
+    summary: "Σ|x − a_i| を x の関数と見ると、傾きは（x より左の点の数 − 右の点の数）なので、中央値で最小になる。マンハッタン距離の和は x と y に分けてそれぞれ中央値を取る。"
+    signs:
+      - {type: phrase, text: "Σ|x − a_i| を最小化する"}
+      - {type: phrase, text: "マンハッタン距離の和が最小になる点"}
+      - {type: phrase, text: "全員を 1 か所に集める移動の和"}
+    acl: []
+    frequency: B
+    sections:
+      - "なぜ中央値か（傾きの変化）"
+      - "偶数個のとき（中央の 2 つの間ならどこでもよい）"
+      - "変数変換で帰着する（a_i − i）"
+      - "x と y に分ける"
+      - "更新しながら中央値を保つ（2 つの優先度付きキュー）（黄）"
+      - "二乗和の最小（平均）との違い"
+    merged_keys: []
+    visual: "静的な図：数直線上の点と、x を動かしたときの傾きの折れ線"
+    problems:
+      - {id: arc100_a, role: example, summary: "Σ|A_i − (b + i)| を最小化する。B_i = A_i − i に変換すると中央値を選べばよい"}
+      - {id: typical90_br, role: practice, summary: "マンハッタン距離の和が最小になる点。x と y を独立に考え、それぞれ中央値を取る"}
+      - {id: abc330_f, role: practice, summary: "点を合計 K 回以下動かして辺 d の正方形に収める最小の d。x と y 別々に、d を二分探索して距離の和で判定する"}
+      - {id: abc127_f, role: challenge, summary: "|x − a| + b を足し込む更新と最小値の問い合わせ。中央値を 2 つの優先度付きキューで保つ"}
+    sources: ["01-basics §4.D", "01-basics §5"]
+
+  # ---------------------------------------------------------------- E. 累積和系
+  - id: prefix-sum
+    chapter: 累積和といもす法
+    title: 累積和（1 次元・左右からの累積）
+    aliases: [prefix sum, 累積 GCD, 累積 XOR, 累積 max, 左右からの累積]
+    type: technique
+    level: 基礎
+    level_evidence: "arc098_a（635）・abc122_c（700）・abc265_d（727）・abc172_c（930）・abc125_c（1197）。drken の「累積和」ABC 45 問の中央値 1037。最近の ABC の D〜G でも累積和は最多の道具の 1 つ（abc479_d 563 ほか。research/00 §2.3.8）"
+    kind: [累積和・差分, 区間クエリ]
+    prerequisites: []
+    related: [imos, prefix-sum-counting, fenwick-tree, sparse-table, dp-prefix-sum]
+    summary: "S[0] = 0、S[i+1] = S[i] + a[i] と前計算すると、区間 [l, r) の和が S[r] − S[l] で O(1) で求まる。引き算できない演算（gcd・max）は左右からの累積で「1 つ除いた値」を作る。"
+    signs:
+      - {type: phrase, text: "区間の和を何度も聞かれる"}
+      - {type: phrase, text: "1 つだけ除いた（変えた）ときの値"}
+      - {type: phrase, text: "円環上の区間"}
+      - {type: constraint, text: "Q ≤ 2×10^5 個の区間和のクエリで、値の更新がない"}
+    acl: []
+    frequency: A
+    sections:
+      - "半開区間と S[0] = 0"
+      - "左右からの累積（1 つ除いた gcd・max）"
+      - "円環は 2 周分に伸ばす"
+      - "累積和の上で二分探索・尺取り"
+      - "あふれと添字のずれ"
+      - "値が更新されるなら BIT、静的な区間 min なら Sparse Table"
+    merged_keys: []
+    visual: "静的な図：棒グラフと累積和の折れ線を並べ、[l, r) の和を網掛けで示す"
+    problems:
+      - {id: abc122_c, role: example, summary: "文字列の区間ごとに AC の出現数を答える。位置ごとの累積和で O(1)（半開区間の取り方が要点）"}
+      - {id: abc479_d, role: practice, summary: "左右からの累積 min を前計算して答える最近の D（00 §2.3.8 の分類。内容は執筆時に確かめる）"}
+      - {id: arc098_a, role: practice, summary: "リーダーを選んだとき向きを変える人数の最小。左側の W の数と右側の E の数を左右からの累積で求める"}
+      - {id: abc172_c, role: practice, summary: "2 つの机の本を上から読み、K 分以内に読める最大冊数。累積和と尺取り（または二分探索）"}
+      - {id: abc125_c, role: practice, summary: "1 つだけ書き換えたときの gcd の最大。左右からの累積 gcd で 1 つ除いた gcd を求める"}
+    sources: ["01-basics §4.E", "01-basics §5", "00-curriculum §2.3.8"]
+
+  - id: prefix-sum-counting
+    chapter: 累積和といもす法
+    title: 累積和と連想配列で区間を数える
+    aliases: [Zero-Sum Ranges, 区間和が K, 余りが等しい組を数える, 累積和の mod]
+    type: technique
+    level: 基礎
+    level_evidence: "abc233_d（726）・abc367_d（1037）・agc023_a（1038）・abc164_d（1232）・abc105_d（1458）。長さの制限付きの abc146_e（1762）は青（節に印）。最近も abc473_e（966）"
+    kind: [累積和・差分]
+    prerequisites: [prefix-sum]
+    related: [two-pointers, reformulation, stl-containers]
+    summary: "区間の条件を「S_r と S_l の関係」に言い換え、左から S_l の個数を連想配列で数えながら組を足す。和がちょうど K の区間や、和が M の倍数（余りが等しい）の区間を数える。"
+    signs:
+      - {type: phrase, text: "和がちょうど K の区間の個数"}
+      - {type: phrase, text: "和が M の倍数になる区間の個数"}
+      - {type: phrase, text: "区間の条件が S_r と S_l の関係に書き直せる"}
+      - {type: phrase, text: "値に負の数があり尺取りが使えない"}
+    acl: []
+    frequency: B
+    sections:
+      - "S_r − S_l = K となる l を数える（S_0 を入れ忘れない）"
+      - "余りが等しい組（M の倍数の区間・負の余りの正規化）"
+      - "後ろからの累積（数字列の倍数）"
+      - "円環を伸ばして数える"
+      - "長さの制限付き（窓の中だけで数える）（青）"
+      - "尺取りとの使い分け（負の値）"
+    merged_keys: []
+    visual: "静的な図：累積和の値を左から連想配列に入れ、同じ値（差が K）の個数を足していく図"
+    problems:
+      - {id: abc233_d, role: example, summary: "区間和がちょうど K の区間を数える。S_r − S_l = K となる l の個数を連想配列で数える（負の値があるので尺取りは使えない）"}
+      - {id: abc473_e, role: practice, summary: "累積和の余りで K の倍数の区間を扱い、貪欲と組み合わせる最近の E（00 §2.3.8 の分類）"}
+      - {id: abc367_d, role: practice, summary: "円周上の 2 地点間の移動時間が M の倍数になる組を、円環を伸ばした累積和の余りで数える"}
+      - {id: abc164_d, role: practice, summary: "数字列の区間で 2019 の倍数になるものを、後ろからの累積の余りが等しい組で数える"}
+      - {id: abc105_d, role: practice, summary: "区間和が M の倍数の区間を、累積和の余りごとの個数から数える"}
+      - {id: abc146_e, role: challenge, summary: "区間和を K で割った余りが区間長に等しい区間を数える。a_i − 1 に変換し、長さ K 未満の窓で余りの一致を数える"}
+    sources: ["01-basics §4.E", "01-basics §5", "01-basics §6.3", "00-curriculum §2.3.8"]
+
+  - id: prefix-sum-2d
+    chapter: 累積和といもす法
+    title: 2 次元累積和（多次元の累積和）
+    aliases: [二次元累積和, 2D prefix sum, 長方形の和, 3 次元累積和, 多次元の累積和]
+    type: technique
+    level: 水
+    level_evidence: "abc311_e（1293）・abc331_d（1361）・arc025_2（1369 参考値）・abc075_d（1470）。drken の「二次元累積和」ABC 4 問の中央値 1573。最近も abc461_d（914）・abc475_f（1916）。多次元は abc465_f（1754）で青（節に印）"
+    kind: [累積和・差分, 区間クエリ]
+    prerequisites: [prefix-sum]
+    related: [imos, sweep-line-2d, fenwick-tree, inclusion-exclusion]
+    summary: "S[i+1][j+1] = S[i][j+1] + S[i+1][j] − S[i][j] + a[i][j] と前計算し、長方形の和を 4 項の足し引きで O(1) で求める。3 次元以上も包除の符号で同じように扱える。"
+    signs:
+      - {type: phrase, text: "長方形領域の和・個数を何度も求める"}
+      - {type: phrase, text: "正方形・長方形を全部試す"}
+      - {type: phrase, text: "模様が周期的に敷き詰められた盤面"}
+      - {type: constraint, text: "H, W ≤ 2000 程度のグリッドで領域の和を何度も求める"}
+    acl: []
+    frequency: A
+    sections:
+      - "前計算の式と長方形の和（4 項の包除）"
+      - "各左上から辺の長さを二分探索する"
+      - "周期的な盤面（周期で分割する）"
+      - "区間を点 (l, r) と見て数える"
+      - "3 次元以上（項の数と符号の決め方）（青）"
+    merged_keys: [multidimensional-prefix-sum]
+    visual: "静的な図：4 つの長方形の足し引きで任意の長方形の和が出る図"
+    problems:
+      - {id: abc311_e, role: example, summary: "穴のない正方形の個数。2 次元累積和で穴の数を数え、各左上から辺の長さを二分探索する"}
+      - {id: abc461_d, role: practice, summary: "和がちょうど K の部分長方形を数える。行の組を固定し、2 次元累積和と尺取りで数える（00 §2.3.8 の分類）"}
+      - {id: abc331_d, role: practice, summary: "N×N の模様を無限に敷き詰めた盤面で、長方形内の黒マスを周期で分割して数える"}
+      - {id: arc025_2, role: practice, summary: "市松模様の黒と白の和が等しい最大の長方形。白を負にして全長方形の和を O(1) で調べる"}
+      - {id: abc075_d, role: practice, summary: "K 個以上の点を含む軸平行な長方形の最小面積。座標の候補を全探索し、点の数を 2 次元累積和で数える"}
+      - {id: abc465_f, role: challenge, summary: "6 次元の累積和と包除で領域の和を求める（00 §2.3.8 の分類）"}
+    sources: ["01-basics §4.E", "01-basics §5", "00-curriculum §2.3.8"]
+
+  - id: imos
+    chapter: 累積和といもす法
+    title: いもす法（区間加算をまとめて行う）
+    aliases: [imos 法, 差分配列, difference array, 2 次元いもす法]
+    type: technique
+    level: 基礎
+    level_evidence: "abc183_d（662）・abc221_d（832）・abc188_d（933）・abc014_3（1276 参考値）。最近も abc462_d（798）。drken の「いもす法」ABC 8 問の中央値 1264。2 次元は typical90_ab（★4）"
+    kind: [累積和・差分]
+    prerequisites: [prefix-sum]
+    related: [difference-sequence, coordinate-compression, event-sort, lazy-segment-tree, tree-imos]
+    summary: "区間 [l, r) に x を足す操作を D[l] += x、D[r] −= x と記録し、最後に累積和を取ってまとめて反映する。Q 回の区間加算が O(N + Q) になる。2 次元では長方形の四隅に印を置く。"
+    signs:
+      - {type: phrase, text: "区間にまとめて加算し、最後に各点の値を知りたい"}
+      - {type: phrase, text: "各時刻に何人いるか・ちょうど k 個重なる長さ"}
+      - {type: phrase, text: "長方形にまとめて加算する（重なった枚数ごとの面積）"}
+    acl: []
+    frequency: A
+    sections:
+      - "1 次元のいもす法（閉区間なら右端 + 1 に −x）"
+      - "座標が大きいとき（座標圧縮・イベントのソート）"
+      - "区間長ごとの加算に使う"
+      - "2 次元いもす法（四隅に ±1、横と縦に累積）"
+      - "途中で値を読むなら BIT・遅延セグ木"
+    merged_keys: [imos-2d]
+    visual: "動く図：区間の始点に +1、終点に −1 を置き、左から累積していくステップ送り（2 次元は横・縦の 2 段）"
+    problems:
+      - {id: abc183_d, role: example, summary: "各人が時間区間で一定量のお湯を使う。区間の加算をいもす法でまとめ、どの時刻も上限以下か判定する"}
+      - {id: abc462_d, role: practice, summary: "いもす法で解く最近の D（00 §2.3.8 の分類。内容は執筆時に確かめる）"}
+      - {id: abc221_d, role: practice, summary: "ログイン区間から、ちょうど k 人がログインしていた日数を k ごとに求める（座標圧縮と組み合わせる）"}
+      - {id: abc188_d, role: practice, summary: "サービスの料金を日ごとにイベントでまとめ、各区間で min(和, C) を払う最小の総費用"}
+      - {id: typical90_ab, role: practice, summary: "長方形の紙を N 枚置き、ちょうど k 枚重なる部分の面積を k ごとに求める（2 次元いもす法）"}
+      - {id: abc260_e, role: challenge, summary: "各長さ k について条件を満たす連続区間の数。左端ごとに必要な右端を求め、区間長の加算をいもす法でまとめる"}
+    sources: ["01-basics §4.E", "01-basics §5", "00-curriculum §2.3.8"]
+
+  - id: difference-sequence
+    chapter: 累積和といもす法
+    title: 差分で考える（区間の操作を 2 点の操作に言い換える）
+    aliases: [階差, 差分, 隣接差, 差分列, 差分を取る, 等差数列の加算, 差分列への言い換え]
+    type: technique
+    level: 水
+    level_evidence: "易しい形は abc369_c（323）・typical90_bl（★3）・abc466_e（1027）。言い換えが本体になる問題は agc010_b（1892）・abc459_f（2163）・abc454_f（2169）で青〜黄（節に印）。research/01 は水、research/00 の difference-reformulation は黄"
+    kind: [累積和・差分, 考察]
+    prerequisites: [imos]
+    related: [reformulation, invariant, lazy-segment-tree, run-length-encoding]
+    summary: "隣接差 d_i = a_{i+1} − a_i を見ると、区間への一律の加算は両端の 2 か所だけを変える。区間操作の最小回数や可否を、差分列の点の操作の問題に言い換えて解く。"
+    signs:
+      - {type: phrase, text: "区間に一律の値を足すたびに隣接差の和を答える"}
+      - {type: phrase, text: "区間に +1・−1 する操作の最小回数・可否"}
+      - {type: phrase, text: "区間を反転する操作（切り替わる 2 点で表す）"}
+      - {type: phrase, text: "等差数列になっている区間・区間に 1, 2, 3, … を足す"}
+    acl: []
+    frequency: A
+    sections:
+      - "区間加算は差分列の 2 点の増減"
+      - "等差数列の区間（差が一定の塊）"
+      - "2 階の差分（区間に 1, 2, 3, … を足す）"
+      - "区間反転を切り替え点 2 つで表す"
+      - "最小回数・可否を差分列で考える（黄）"
+      - "円環での一斉操作（青）"
+    merged_keys: [difference-reformulation]
+    visual: "静的な図：数列とその隣接差の列を上下に並べ、区間加算で変わる差が両端の 2 か所だけであることを示す"
+    problems:
+      - {id: typical90_bl, role: example, summary: "区間に一律の加算をするたびに隣接差の絶対値の和を答える。変わるのは両端の差だけ"}
+      - {id: abc466_e, role: example, summary: "区間の裏表の反転を、切り替えの点を 2 つ置くことに言い換え、使った点の数を状態にした DP で解く"}
+      - {id: abc369_c, role: practice, summary: "等差数列になっている区間の個数。隣接差が同じ値で続く塊ごとにまとめて数える"}
+      - {id: agc010_b, role: practice, summary: "円形の箱から 1, 2, …, N 個を一斉に取り除く操作で全部空にできるか。隣接差を取ると操作が単純になる"}
+      - {id: abc459_f, role: challenge, summary: "A_i から i を引いて狭義単調を広義単調に直し、差分列をすべて非負にする問題として操作回数を数える"}
+      - {id: abc454_f, role: challenge, summary: "数列を回文にする最小操作を、左右の差の列への区間 ±1 に言い換え、さらに隣接差分で 2 点の操作にする"}
+    sources: ["01-basics §4.E", "01-basics §5", "00-curriculum §3.2", "00-curriculum §4.2", "00-curriculum §5.1"]
+
+  # ---------------------------------------------------------------- F. 尺取り法
+  - id: two-pointers
+    chapter: 尺取り法
+    title: 尺取り法（単調性の見抜き方）
+    aliases: [しゃくとり法, two pointers, 2 ポインタ, スライディングウィンドウ, 固定長の窓]
+    type: technique
+    level: 基礎
+    level_evidence: "abc130_d（865）・typical90_ah（★4）・abc326_c（292、固定長の窓）。応用 abc032_c（1244 参考値）・arc022_2（1395 参考値）・arc098_b（1404）。drken の「しゃくとり法」ABC 19 問の中央値 1138。最近も abc452_f・abc461_d・abc470_g で道具として使われる"
+    kind: [尺取り・スライド窓]
+    prerequisites: [prefix-sum, complexity-estimation]
+    related: [binary-search, prefix-sum-counting, sliding-window-minimum, run-length-encoding]
+    summary: "区間 [l, r) について、各 l に対する最大（最小）の r が l とともに単調に増えるなら、r を戻さずに動かして全体を O(N) で調べられる。区間を縮めても条件が保たれるかで単調性を見抜く。"
+    signs:
+      - {type: phrase, text: "条件を満たす最長（最短）の連続区間・連続区間の個数"}
+      - {type: phrase, text: "区間を縮めても（広げても）条件が保たれる"}
+      - {type: phrase, text: "長さ M の範囲に入るものの最大個数"}
+      - {type: constraint, text: "N ≤ 2×10^5 で区間を全部は調べられない"}
+    acl: []
+    frequency: A
+    sections:
+      - "2 つの型（部分区間も満たす型・より大きい区間も満たす型）"
+      - "単調性の見抜き方（縮めても保たれるか）"
+      - "空区間・取り除く処理の書き方"
+      - "固定長の窓をずらす"
+      - "負の値があるとき（累積和＋連想配列へ）"
+      - "二分探索との関係（O(N log N) でも解ける）"
+    merged_keys: [sliding-window]
+    visual: "動く図：区間 [l, r) の窓が右へ進むステップ送りと、各 l に対する r の単調な折れ線"
+    problems:
+      - {id: abc130_d, role: example, summary: "和が K 以上の連続区間の数。左端ごとの最小の右端は左端とともに右へ動く"}
+      - {id: abc326_c, role: practice, summary: "数直線上の贈り物を長さ M の区間で最大何個取れるか。ソートして窓をずらす"}
+      - {id: typical90_ah, role: practice, summary: "K 種類以下の値からなる最長の連続区間。種類数を連想配列で数えながら尺取りする"}
+      - {id: abc032_c, role: practice, summary: "積が K 以下の最長の連続区間。0 を含む場合は全体が答えになる"}
+      - {id: arc022_2, role: practice, summary: "同じ値を 2 つ含まない最長の連続区間。出現回数を管理しながら尺取りする"}
+      - {id: abc153_f, role: challenge, summary: "範囲攻撃でモンスターを倒す最小回数。左から貪欲に打ち、効果が切れる位置をキューで管理する"}
+      - {id: arc098_b, role: challenge, summary: "XOR 和と和が等しい区間の数。どの bit も重ならないという条件は区間を縮めても保たれる"}
+    sources: ["01-basics §4.F", "01-basics §5", "01-basics §6.3"]
+
+  # ---------------------------------------------------------------- G. 並べる・圧縮する
+  - id: event-sort
+    chapter: イベントソートとランレングス圧縮
+    title: イベントソートと平面走査の基本
+    aliases: [イベントソート, 平面走査, スイープ, sweep line, クエリ先読み]
+    type: technique
+    level: 水
+    level_evidence: "易しい形は abc309_c（348）・abc478_d（729）・abc188_d（933）。arc092_a（1268）・abc106_d（1319）・abc245_e（1571）で水、abc128_e（1840）は青。BIT・セグ木と組む平面走査は ds（設計 §4.2）"
+    kind: [ソート・座標圧縮, クエリ処理の工夫]
+    prerequisites: [sorting-techniques, imos]
+    related: [sweep-line-2d, offline-queries, ordered-set, coordinate-compression]
+    summary: "区間の開始・終了・クエリを (座標, 種類) の組にして並べ、左から順に処理しながら集合や合計を更新する。2 次元の点を一方の座標の順に処理し、もう一方を集合で管理するのが平面走査の基本形。"
+    signs:
+      - {type: phrase, text: "区間の開始・終了と、時刻のクエリが混ざる"}
+      - {type: phrase, text: "2 次元の点を一方の座標の順に処理する"}
+      - {type: phrase, text: "締め切りや有効期間がある"}
+      - {type: phrase, text: "クエリを先に全部読んでよい（オフライン）"}
+    acl: []
+    frequency: B
+    sections:
+      - "イベントの作り方と同じ座標での処理順"
+      - "集合（set・multiset）を更新しながら走査する"
+      - "平面走査の基本（一方の座標で並べ、もう一方を集合で）"
+      - "BIT・セグ木と組む平面走査へ（データ構造の章）"
+    merged_keys: []
+    visual: "静的な図：時間軸上に開始・終了・クエリのイベントを並べ、処理のたびに集合の中身が変わる様子"
+    problems:
+      - {id: abc309_c, role: example, summary: "薬が日ごとに減るとき、初めて K 錠以下になる日。飲み終わる日でソートして順に引く"}
+      - {id: arc092_a, role: example, summary: "赤点と青点を x も y も青が大きい組にする最大数。青点を x の順に見て、使える赤点のうち y 最大を選ぶ"}
+      - {id: abc478_d, role: practice, summary: "区間のクエリをイベントソートで処理する最近の D（00 §2.3.8 の分類。内容は執筆時に確かめる）"}
+      - {id: abc106_d, role: practice, summary: "M 本の区間のうち各クエリ区間に含まれるものの数。端点とクエリを並べて順に処理する（2 次元累積和でも解ける）"}
+      - {id: abc245_e, role: practice, summary: "チョコを箱に入れられるか。大きい順に並べ、条件を満たす箱を multiset で管理して最小のものを使う"}
+      - {id: abc128_e, role: challenge, summary: "工事で通れない時刻と場所があるとき各人が止まる位置。時刻をずらしてイベントにし、set で管理する"}
+    sources: ["01-basics §4.G", "01-basics §5", "00-curriculum §2.3.8", "00-curriculum §4.2"]
+
+  - id: run-length-encoding
+    chapter: イベントソートとランレングス圧縮
+    title: ランレングス圧縮（同じものの塊で考える）
+    aliases: [連長圧縮, RLE, 塊ごとに考える]
+    type: technique
+    level: 基礎
+    level_evidence: "abc380_c（223）・abc136_d（794）・abc140_d（1074）・abc124_d（1138）・typical90_cf（★3）。drken の「ランレングス圧縮」ABC 16 問の中央値 406。abc421_d（1321）で水、abc452_g（2255）では道具として使う"
+    kind: [文字列, 考察]
+    prerequisites: []
+    related: [two-pointers, string-basics, invariant, difference-sequence]
+    summary: "同じ値（文字）の連続を（値, 長さ）の組にまとめ、塊の単位で考える。多くの操作は塊の内部では一様で境界でだけ変化するので、境界の数や塊の列の尺取りで考えられる。"
+    signs:
+      - {type: phrase, text: "同じ文字・値が続く部分"}
+      - {type: phrase, text: "区間を反転して 1 の連続を最長にする"}
+      - {type: phrase, text: "操作で塊（境界）の数がいくつ減るか"}
+      - {type: phrase, text: "ランレングス形式で与えられる入力"}
+    acl: []
+    frequency: B
+    sections:
+      - "塊への分け方（最後の塊を忘れない・番兵の塊）"
+      - "境界の数で操作を数える"
+      - "塊の列で尺取りする"
+      - "塊ごとに偶奇で振り分ける"
+      - "ランレングスのまま処理する（水）"
+    merged_keys: []
+    visual: "静的な図：文字列を（文字, 長さ）の帯に変換する図"
+    problems:
+      - {id: abc124_d, role: example, summary: "区間反転を K 回まで行って 1 の連続長を最大化する。0 の塊 K 個分の窓を塊の列で尺取りする"}
+      - {id: abc380_c, role: practice, summary: "0/1 の列で K 番目の 1 の塊を K−1 番目の直後に移す。塊に分けて並べ替える"}
+      - {id: typical90_cf, role: practice, summary: "o と x の両方を含む区間を数える。同じ文字の塊ごとにまとめて数える"}
+      - {id: abc136_d, role: practice, summary: "L/R に従って子どもが 10^100 回動いた後の人数。RL の境界ごとに塊の長さの偶奇で振り分ける"}
+      - {id: abc140_d, role: practice, summary: "区間の L/R 反転を K 回まで行って幸福な人数を最大化する。1 回の反転で塊の数が高々 2 減ることに着目する"}
+      - {id: abc421_d, role: challenge, summary: "ランレングスで与えられた 2 人の移動で同じマスにいる回数を、塊ごとにまとめて数える"}
+    sources: ["01-basics §4.G", "01-basics §5", "08-string-geo §4.1", "08-string-geo §5", "00-curriculum §3.2"]
+
+  # ---------------------------------------------------------------- H. 貪欲
+  - id: greedy-basics
+    chapter: 貪欲
+    title: 貪欲法の考え方と正当性
+    aliases: [グリーディ, Greedy, 貪欲, 交換しても悪化しない, マトロイド]
+    type: technique
+    level: 基礎
+    level_evidence: "typical90_n（★3）・abc085_d（954）・abc216_e（1084）。drken の「Greedy:交換しても悪化しない」ABC 8 問の中央値 886。最近も abc459_d（701）"
+    kind: [貪欲]
+    prerequisites: [sorting-techniques]
+    related: [exchange-argument, interval-scheduling, dp-basics, stress-testing, minimum-spanning-tree]
+    summary: "その場で最もよいものを選び続ける方針が正しいことを、交換論法（最適解を貪欲解に近づけても悪くならない）や帰納法で確かめてから使う。怪しいときは小さいケースの全探索と比べる。"
+    signs:
+      - {type: phrase, text: "その場で一番よいものを取って後悔しない理由が言える"}
+      - {type: phrase, text: "強いもの・安いものから順に使う"}
+      - {type: constraint, text: "N が大きく、DP の状態が持てない"}
+    acl: []
+    frequency: A
+    sections:
+      - "正当性の示し方（交換論法・帰納法・常に先行している）"
+      - "基準を決めて強い順に使う"
+      - "同じ値をまとめて処理する"
+      - "反例の探し方（小さいケースの全探索と比べる）"
+      - "貪欲が失敗する例と DP への切り替え"
+      - "マトロイド（貪欲が常に正しい構造。発展の紹介）"
+    merged_keys: [matroid]
+    visual: "静的な図：最適解と貪欲解を並べ、最初に違う所を入れ替えても悪くならないことを示す図"
+    problems:
+      - {id: abc085_d, role: example, summary: "刀を振る・投げるで合計 H のダメージを与える最小回数。振る最大値を基準に、それより強い投げを大きい順に使う"}
+      - {id: abc459_d, role: practice, summary: "隣り合う文字が異なるように並べる。出現回数の上限を確かめ、多い文字から並べる貪欲（00 §2.3.8 の分類）"}
+      - {id: abc216_e, role: practice, summary: "乗るたびに楽しさが 1 減るアトラクションに K 回乗る。毎回最大を選ぶ貪欲を、同じ値をまとめて処理する"}
+    sources: ["01-basics §4.H", "01-basics §5", "00-curriculum §3.2", "00-curriculum §2.3.8"]
+
+  - id: interval-scheduling
+    chapter: 貪欲
+    title: 区間スケジューリング・区間の串刺し
+    aliases: [区間スケジューリング問題, 区間を点で突く, Activity Selection]
+    type: technique
+    level: 基礎
+    level_evidence: "abc230_d（963）。arc106_c（1225）・abc103_d（1278）は水だが、古い問題は高めに出る（設計 §3.1-2）。drken の「区間スケジューリング」ABC 3 問の中央値 1367"
+    kind: [貪欲, ソート・座標圧縮]
+    prerequisites: [greedy-basics]
+    related: [greedy-priority-queue, exchange-argument, dp-basics]
+    summary: "重ならない区間をできるだけ多く選ぶには、右端の小さい順に、選んだ区間と重ならないものを取ればよい。すべての区間を最少の点で突く問題も、右端でソートして右端に点を置く同じ貪欲で解ける。"
+    signs:
+      - {type: phrase, text: "重ならない区間をできるだけ多く選ぶ"}
+      - {type: phrase, text: "すべての区間を最少の点（串）で突く"}
+      - {type: phrase, text: "区間の右端（終了時刻）で並べると決まりそう"}
+    acl: []
+    frequency: B
+    sections:
+      - "右端の順に選ぶ理由（交換論法）"
+      - "区間の串刺し（最少の点で突く）"
+      - "左端の順・長さの順が失敗する例"
+      - "処理時間と締め切りがある場合（優先度付きキューの貪欲へ）"
+      - "区間に重みがあるなら DP"
+    merged_keys: []
+    visual: "動く図：区間を右端の順に並べたガントチャートで、選ぶ区間を順に塗るステップ送り"
+    problems:
+      - {id: abc230_d, role: example, summary: "幅 D のパンチですべての壁を壊す最小回数。右端の小さい順に、まだ壊れていない壁の右端から打つ"}
+      - {id: arc106_c, role: practice, summary: "区間スケジューリングの正しい貪欲と誤った貪欲の答えの差がちょうど M になる区間の集合を作る"}
+      - {id: abc103_d, role: practice, summary: "要望の区間すべてで橋を 1 本以上取り除く最小本数（区間の串刺し）。右端でソートして貪欲"}
+    sources: ["01-basics §4.H", "01-basics §5", "01-basics §6.3"]
+
+  - id: greedy-priority-queue
+    chapter: 貪欲
+    title: 優先度付きキューを使う貪欲（締め切り・スケジューリング）
+    aliases: [priority_queue で貪欲, ヒープで貪欲, 締め切り付きスケジューリング, 後悔付き貪欲, 取り消し可能な貪欲]
+    type: technique
+    level: 水
+    level_evidence: "abc141_d（823）・abc376_e（1063）は易しい形。締め切りの貪欲は abc137_d（1313）・abc325_d（1367）で水"
+    kind: [貪欲, データ構造]
+    prerequisites: [greedy-basics, priority-queue]
+    related: [interval-scheduling, reverse-thinking, top-k-multiset, slope-trick]
+    summary: "時刻や日を進めながら使える候補を優先度付きキューに入れ、毎回いちばんよいものを取り出す貪欲。締め切りのある仕事の選択は、後ろの日から決めるか、時刻順に入れて締め切りの早いものから処理する。"
+    signs:
+      - {type: phrase, text: "日が進むと選択肢が増え、各日に 1 つ選ぶ"}
+      - {type: phrase, text: "締め切りまでに何個できるか・報酬の最大"}
+      - {type: phrase, text: "毎回いちばん大きい（小さい）ものを取り出して更新する"}
+      - {type: phrase, text: "一度選んだものを、後でよいものが来たら入れ替えたい"}
+    acl: []
+    frequency: B
+    sections:
+      - "毎回最大を取り出す（同じ値はまとめる）"
+      - "後ろの日から決める（使えるようになった候補をキューに入れる）"
+      - "時刻順に入れて締め切りの早いものから処理する（時刻は次のイベントまで飛ばす）"
+      - "最大値を固定して上位 K 個を保つ"
+      - "選んだものを後から入れ替える（後悔付き貪欲。一般形は発展）"
+    merged_keys: [regret-greedy, scheduling-and-kth-enumeration]
+    visual: "静的な図：日を後ろから進めながら選べる仕事をヒープに入れ、最大を 1 つ取り出す流れ"
+    problems:
+      - {id: abc137_d, role: example, summary: "日雇いバイトで期限内に得る報酬の最大。後ろの日から、その日に間に合う仕事の中で最高報酬を選ぶ"}
+      - {id: abc325_d, role: example, summary: "コンベア上の商品に 1 秒 1 個ずつ印字する最大数。時刻順に入る商品のうち締め切りの早いものから処理する"}
+      - {id: abc141_d, role: practice, summary: "割引券を毎回いちばん高い商品に 1 枚ずつ使う。優先度付きキューで最大を取り出す"}
+      - {id: abc376_e, role: practice, summary: "A の最大値を固定し、それ以下の中から B の小さい K 個の和を優先度付きキューで保って最小化する"}
+    sources: ["01-basics §4.H", "01-basics §5", "01-basics §6.3", "00-curriculum §3.2", "05-ds §4.A"]
+
+  - id: exchange-argument
+    chapter: 貪欲
+    title: 交換論法と比較関数の設計
+    aliases: [隣接交換, exchange argument, ソートの比較関数を作る, 連結して最大・最小, a+b と b+a]
+    type: technique
+    level: 青
+    level_evidence: "締め切り順に並べるだけの abc131_d（588）は易しいが、並べ順の比較を自分で導く abc116_d（1712）・abc366_f（1819）・abc471_f（1895、連結の比較）・abc163_e（2037）・abc467_f（2052）は青以上。drken の「非自明な比較関数でソートする」ABC 6 問の中央値 1008"
+    kind: [貪欲, ソート・座標圧縮]
+    prerequisites: [greedy-basics, sorting-techniques]
+    related: [exchange-argument-dp, lexicographic-greedy, cpp-comparators, interval-scheduling]
+    summary: "隣り合う 2 つを入れ替えたときに変わる項だけを比べ、「i を先に置くべき条件」を式で導いて比較関数にする。導いた比較が推移的（狭義の弱順序）かを確かめ、その順に並べてから貪欲や DP を行う。"
+    signs:
+      - {type: phrase, text: "並べる順番で結果が変わる"}
+      - {type: phrase, text: "2 つを入れ替えたときの差が、その 2 つだけで決まる"}
+      - {type: phrase, text: "文字列・数を並べて連結した結果を最大（最小）にする"}
+      - {type: phrase, text: "並べ順を決めてから選び方を DP で決める"}
+    acl: []
+    frequency: B
+    sections:
+      - "隣接交換で比較を導く"
+      - "比較が狭義の弱順序になっているか"
+      - "比は掛け算で比べる・分母 0"
+      - "連結の比較（a+b と b+a）"
+      - "順に並べてから DP（DP の章へ）"
+      - "入れ替えで改善できるかを考える型"
+    merged_keys: [concat-order-sort]
+    visual: "静的な図：隣り合う 2 つ i, j を入れ替えたときに変わる部分だけを強調した図"
+    problems:
+      - {id: abc131_d, role: example, summary: "締め切り付きの仕事をすべて終えられるか。締め切りの早い順が最適であることを隣接交換で示す"}
+      - {id: abc116_d, role: example, summary: "寿司 K 個の美味しさの和＋種類数の 2 乗を最大化する。美味しい順に取り、種類を増やす入れ替えを順に試す"}
+      - {id: abc366_f, role: practice, summary: "2 つの一次関数を適用する順は比の大小で決まる。その順に並べてから K 個選ぶ DP をする（DP の章と共通）"}
+      - {id: abc471_f, role: practice, summary: "要素を連結した結果を最大化する。a+b と b+a を比べる順序でソートし、貪欲に選ぶ"}
+      - {id: abc163_e, role: challenge, summary: "幼児を並べ替えて活発度×移動距離の和を最大化する。活発な順に左右の端へ置くと決め、区間 DP で解く"}
+      - {id: abc467_f, role: challenge, summary: "交換論法で順序を決めた貪欲を、座標圧縮したセグ木で速くする（00 §2.3.8 の分類）"}
+    sources: ["01-basics §4.H", "01-basics §5", "00-curriculum §3.2", "00-curriculum §2.3.8", "02-dp §4.B（exchange-argument-dp）"]
+
+  - id: lexicographic-greedy
+    chapter: 貪欲
+    title: 辞書順最小を前から決める貪欲
+    aliases: [辞書順最小, lexicographically smallest, 辞書順 K 番目, 先頭から貪欲に決める]
+    type: technique
+    level: 基礎
+    level_evidence: "abc076_c（846）・abc202_d（966）・abc223_d（1069）・arc097_a（1108）。drken の「Greedy:辞書順最小を求める」ABC 7 問の中央値 885。実現可能性の判定が重い abc009_3（1915 参考値）は青（節に印）。research/01・00 は水、08 は基礎とした"
+    kind: [貪欲, 文字列]
+    prerequisites: [greedy-basics]
+    related: [subsequence-matching, string-basics, topological-sort, kth-combination, dp-kth-lexicographic, exchange-argument]
+    summary: "条件を満たすもののうち辞書順最小を、先頭から 1 つずつ「小さい候補から試し、残りで条件を満たせるならその候補に確定」で作る。残りで実現できるかの判定を速く正しく行うことが問題の本体になる。"
+    signs:
+      - {type: phrase, text: "辞書順最小（最大）の文字列・列を出力する（なければ −1）"}
+      - {type: phrase, text: "条件を満たす中で最も小さいもの"}
+      - {type: phrase, text: "辞書順で K 番目"}
+    acl: []
+    frequency: B
+    sections:
+      - "先頭から決める理由（辞書順の性質）"
+      - "残りで実現できるかの判定（次の出現位置の表・個数の数え上げ）"
+      - "順序の制約は入次数 0 を小さい順に（トポロジカルソート）"
+      - "辞書順 K 番目（先頭ごとの個数と K を比べる）"
+      - "判定が重い型（青）"
+    merged_keys: []
+    visual: "静的な図：先頭から 1 文字ずつ候補を試し、残りで条件を満たせるかを判定して確定する流れ"
+    problems:
+      - {id: abc076_c, role: example, summary: "? を埋めて T を含む辞書順最小の文字列。T を置ける最も後ろの位置を選び、残りの ? は a にする"}
+      - {id: abc202_d, role: practice, summary: "a が A 個・b が B 個の文字列の辞書順 K 番目。先頭を a にしたときの個数（二項係数）と K を比べて 1 文字ずつ決める"}
+      - {id: abc223_d, role: practice, summary: "順序の制約を満たす辞書順最小の順列。入次数 0 の頂点を小さい順に優先度付きキューから取り出す"}
+      - {id: arc097_a, role: practice, summary: "異なる部分文字列の辞書順 K 番目（K ≤ 5）。長さ K 以下の部分文字列だけ列挙すれば十分と気づく"}
+      - {id: typical90_f, role: practice, summary: "長さ K の部分列で辞書順最小。前から、残りの文字数が足りる範囲で最小の文字を選ぶ"}
+      - {id: abc009_3, role: challenge, summary: "並べ替えで元と違う位置が K 個以下の辞書順最小。各位置で小さい文字から試し、残りで実現できるかを数で判定する"}
+    sources: ["01-basics §4.H", "01-basics §5", "08-string-geo §4.1", "08-string-geo §5", "00-curriculum §3.2"]
+
+  # ---------------------------------------------------------------- I. 繰り返し
+  - id: periodicity
+    chapter: 周期とダブリング
+    title: 周期性の検出（シミュレーションの打ち切り）
+    aliases: [周期, 周期性, 周期の検出, ρ 型, ループの検出, シミュレーションの高速化, 反転フラグ]
+    type: technique
+    level: 基礎
+    level_evidence: "abc106_c（441）・abc167_d（754）・abc179_e（1175）・typical90_bf（★4）。応用 abc354_d（1259）・abc175_d（1491）・abc300_f（1846）。drken の「周期性に着目する」ABC 15 問の中央値 754。最近も abc452_e（1318）"
+    kind: [ダブリング・分割統治]
+    prerequisites: []
+    related: [doubling, functional-graph, cycle-detection, pigeonhole, global-offset, matrix-power]
+    summary: "状態が S 種類しかなければ、S 回進むまでに必ず以前と同じ状態が現れる（鳩の巣原理）。初めて訪れた時刻を記録して尾の長さと周期を求め、K 回後の状態や途中の和を割り算でまとめて求める。"
+    signs:
+      - {type: constraint, text: "K ≤ 10^18 回の操作で、状態の種類は 10^5〜10^6 程度"}
+      - {type: phrase, text: "x_{n+1} = f(x_n) の形の漸化式"}
+      - {type: phrase, text: "同じ模様が繰り返し敷き詰められた盤面"}
+      - {type: phrase, text: "全体のシフト・反転を何度も行う"}
+    acl: []
+    frequency: B
+    sections:
+      - "尾と周期（ρ 型）と K 回後の求め方"
+      - "途中の和（尾の和＋周期の和 × 回数＋余り）"
+      - "状態に将来を決める情報をすべて入れる"
+      - "収束に気づく"
+      - "盤面の周期を割り算でまとめる"
+      - "シミュレーションを速くする（ずれ・反転フラグの記録、操作の合成）"
+      - "ダブリング・行列累乗との使い分け"
+    merged_keys: [simulation-speedup]
+    visual: "動く図：状態を矢印でたどり、ρ 字型（尾と周期）が現れる様子のステップ送り。K から尾の長さを引いて周期で割る計算を併記"
+    problems:
+      - {id: abc179_e, role: example, summary: "x^2 mod M の漸化式の最初の N 項の和。値は M 種類しかないので周期を見つけ、残りをまとめて足す"}
+      - {id: abc199_c, role: practice, summary: "文字列の前半と後半を入れ替える操作を、反転フラグで管理して O(1) にする"}
+      - {id: abc106_c, role: practice, summary: "5000 兆回の置換後の K 文字目。1 以外の文字はすぐ十分に長くなるので、先頭の 1 の個数だけ見ればよい（収束に気づく）"}
+      - {id: typical90_bf, role: practice, summary: "桁の和を足す操作を K 回行った結果。状態は 10^5 通りなので周期を見つける"}
+      - {id: abc354_d, role: practice, summary: "無限に続く模様の長方形内の黒の面積。周期で割り算してまとめ、端だけ数える"}
+      - {id: abc452_e, role: practice, summary: "剰余の周期性と累積和で総和を求める最近の E（00 §2.3.8 の分類。内容は執筆時に確かめる）"}
+      - {id: abc175_d, role: challenge, summary: "順列に従ってコマを動かし K 回以内でスコアを最大化する。各始点のサイクルを求め、1 周の和の符号で場合分けする"}
+    sources: ["01-basics §4.I", "01-basics §5", "00-curriculum §2.3.8"]
+
+  - id: doubling
+    chapter: 周期とダブリング
+    title: ダブリング
+    aliases: [binary lifting, 倍化, 2^k 回後の表, ダブリング上の二分探索]
+    type: technique
+    level: 水
+    level_evidence: "abc241_e（1248）・abc367_e（1370）・abc258_e（1545）・abc013_4（1730 参考値）。abc167_d（754）は周期の検出でも解ける。drken の「ダブリング」ABC 8 問の中央値 1674"
+    kind: [ダブリング・分割統治]
+    prerequisites: [periodicity, bit-operations]
+    related: [binary-lifting-tree, lca, matrix-power, sparse-table, functional-graph, dp-doubling]
+    summary: "nxt[k][v]（v から 2^k 回進んだ先）の表を nxt[k+1][v] = nxt[k][nxt[k][v]] で作り、K を 2 進展開して跳ぶ。K ≤ 10^18 回後の位置や途中の和を O(log K) で求め、条件を満たす最大の回数も上の段から決められる。"
+    signs:
+      - {type: constraint, text: "K ≤ 10^18 回の移動・操作で、始点やクエリが多い"}
+      - {type: phrase, text: "各状態から次の状態がただ 1 つに決まる"}
+      - {type: phrase, text: "途中の和・最小値も必要"}
+      - {type: phrase, text: "条件を満たす最大の回数を求める"}
+    acl: []
+    frequency: B
+    sections:
+      - "表の作り方と K の 2 進展開"
+      - "途中の和・最小値を同じ表に持つ（半開で持つ）"
+      - "ダブリング上の二分探索（条件を満たす最大の回数）"
+      - "置換の K 回合成"
+      - "段数とメモリの見積もり"
+      - "周期の検出・行列累乗・LCA との使い分け"
+    merged_keys: []
+    visual: "動く図：表 nxt[k][v] を下の段から作り、K の 2 進表記の 1 の桁だけ跳ぶステップ送り"
+    problems:
+      - {id: abc167_d, role: example, summary: "各町から決まった町へ移動する。K ≤ 10^18 回後の町を、周期の検出またはダブリングで求める"}
+      - {id: abc241_e, role: example, summary: "皿の飴の個数で次の位置が決まる操作を K ≤ 10^12 回行う。周期の検出でもダブリングでも解ける"}
+      - {id: abc367_e, role: practice, summary: "数列に置換 X を K ≤ 10^18 回適用した結果。置換をダブリングで合成する"}
+      - {id: abc258_e, role: practice, summary: "じゃがいもを箱に詰めるとき、箱ごとの開始位置の遷移を K 個目まで進める"}
+      - {id: abc013_4, role: practice, summary: "あみだくじを D 回つなげた結果。1 回分の置換をダブリングで D 回分に合成する"}
+    sources: ["01-basics §4.I", "01-basics §5", "01-basics §6.3"]
+
+  # ---------------------------------------------------------------- J. 分割統治
+  - id: recursion-structure
+    chapter: 再帰と分割統治
+    title: 再帰的な構造（フラクタル・レベル N の構造）
+    aliases: [フラクタル, 自己相似, 再帰関数, レベル N の構造]
+    type: technique
+    level: 基礎
+    level_evidence: "abc153_d（129）・abc357_c（371）・abc115_d（1088）・typical90_b（★3）"
+    kind: [ダブリング・分割統治]
+    prerequisites: []
+    related: [divide-and-conquer, recursive-enumeration, memoized-recursion, cpp-recursive-lambda]
+    summary: "レベル N のものがレベル N − 1 のものの組合せで定義される構造は、各レベルの長さを前計算し、K 番目がどの部分に入るかを再帰でたどって求める。長さが指数的に増えるので、必要な深さは log K 程度で済む。"
+    signs:
+      - {type: phrase, text: "レベル N のものがレベル N − 1 のものを並べて作られる"}
+      - {type: phrase, text: "長さが 2 倍・3 倍で増える構造の K 番目"}
+      - {type: phrase, text: "フラクタル図形を描く"}
+    acl: []
+    frequency: B
+    sections:
+      - "長さを前計算して K 番目を再帰で探す"
+      - "再帰で描く"
+      - "必要な深さは log K（長さの上限で打ち切る）"
+      - "再帰の深さとスタック"
+    merged_keys: []
+    visual: "静的な図：レベル 0, 1, 2 の構造を並べ、再帰の呼び出し関係を木で示す"
+    problems:
+      - {id: abc115_d, role: example, summary: "レベル L バーガーの下から X 枚に含まれるパティの数を、層の長さを前計算して再帰で数える"}
+      - {id: abc153_d, role: practice, summary: "体力が半分になって分裂するモンスターを倒す攻撃回数を、分裂の再帰構造から数える"}
+      - {id: abc357_c, role: practice, summary: "レベル N のシェルピンスキーのカーペットを、9 分割の再帰で描く"}
+      - {id: typical90_b, role: practice, summary: "長さ N の正しい括弧列を辞書順にすべて出力する。再帰（または bit 全探索）で作って判定する"}
+    sources: ["01-basics §4.J", "01-basics §5"]
+
+  - id: divide-and-conquer
+    chapter: 再帰と分割統治
+    title: 分割統治（半分に分けて、またぐものを数える）
+    aliases: [divide and conquer, マージソート, 中央をまたぐ区間]
+    type: technique
+    level: 黄
+    level_evidence: "根拠は arc189_d（2006）だけで、ABC で分割統治そのものが鍵になる問題は drken の 4 問がすべて 2400 以上。最近も abc451_g（2221）・abc478_g（2582）と黄以上。研究の案（青・要確認）から黄に上げた"
+    kind: [ダブリング・分割統治]
+    prerequisites: [recursion-structure]
+    related: [inversion-number, cdq-divide-and-conquer, monotone-minima, online-convolution, segment-tree]
+    summary: "区間を半分に分けて左右を再帰で解き、中央を「またぐもの」だけを O(長さ) で数えれば全体が O(N log N) になる。マージソートでの転倒数や、最大値の位置で区間を分ける処理が代表例。"
+    signs:
+      - {type: phrase, text: "区間・部分列の全部の組について数える"}
+      - {type: phrase, text: "左右に分けたとき、またぐものだけなら速く数えられる"}
+      - {type: phrase, text: "区間の最大値の位置で左右に分けて考える"}
+    acl: []
+    frequency: C
+    sections:
+      - "漸化式 T(N) = 2T(N/2) + O(N) と計算量"
+      - "またぐものの数え方（マージソートで転倒数）"
+      - "最大値の位置で分ける"
+      - "他の分野の分割統治（分割統治 DP・分割統治 FFT・CDQ）への案内"
+    merged_keys: []
+    visual: "静的な図：再帰木の各段で区間を半分に分け、またぐ組だけを数える様子（マージソートで転倒数を数える例）"
+    problems:
+      - {id: arc189_d, role: example, summary: "各スライムが隣の真に小さいスライムを吸収し続けたときの最大サイズを全員分求める。区間の最大値の位置で左右に分ける分割統治"}
+    sources: ["01-basics §4.J", "01-basics §5", "01-basics §7.2", "01-basics §7.4"]
+
+  # ---------------------------------------------------------------- K. bit
+  - id: bit-operations
+    chapter: bit 演算
+    title: bit 演算の基本と XOR の性質
+    aliases: [ビット演算, XOR, popcount, 部分集合の列挙, submask, 最下位ビット]
+    type: technique
+    level: 基礎
+    level_evidence: "abc213_a（33）・abc269_c（384）・abc356_d（886）・abc121_d（1164）"
+    kind: [ビット演算]
+    prerequisites: []
+    related: [bitwise-independence, bit-full-search, cpp-bit-functions, xor-basis, subset-enumeration-dp]
+    summary: "AND・OR・XOR・シフトの性質を使う。x xor x = 0 で打ち消せる、a + b = (a xor b) + 2(a and b)、0〜n の XOR は n mod 4 で決まる、部分集合の部分集合は s = (s − 1) & m で列挙できる。"
+    signs:
+      - {type: phrase, text: "XOR・AND・OR が問題文に出る"}
+      - {type: phrase, text: "自分以外の XOR・同じ値で打ち消す"}
+      - {type: phrase, text: "部分集合の部分集合を列挙する（全体で 3^N）"}
+      - {type: phrase, text: "2 進表記の 1 の個数"}
+    acl: []
+    frequency: A
+    sections:
+      - "AND・OR・XOR・シフトと演算子の優先順位"
+      - "XOR の性質（打ち消し・a + b との関係・0〜n の XOR）"
+      - "popcount・最下位ビット"
+      - "部分集合の部分集合の列挙（3^N）"
+      - "落とし穴（1 << 31 のあふれ・符号付きの右シフト）"
+    merged_keys: []
+    visual: "静的な図：2 進表記を桁ごとにそろえた AND・OR・XOR の表と、submask を (s−1)&m で列挙する手順"
+    problems:
+      - {id: abc269_c, role: example, summary: "N の 1 の bit の部分集合をすべて昇順に出力する（部分集合の列挙）"}
+      - {id: abc213_a, role: practice, summary: "A xor C = B となる C を求める（XOR は同じ値で打ち消せる）"}
+      - {id: abc356_d, role: practice, summary: "0 から N までの k について popcount(k AND M) の和。bit ごとに 1 が立つ k の個数を数える"}
+      - {id: abc121_d, role: practice, summary: "A 以上 B 以下の整数の XOR。0 から n までの XOR が 4 周期で決まることを使う"}
+    sources: ["01-basics §4.K", "01-basics §5", "01-basics §6.4"]
+
+  - id: bitwise-independence
+    chapter: bit 演算
+    title: 桁（bit）ごとに独立に考える
+    aliases: [bit ごとの寄与, 桁ごとに見る, bit ごとに分解, 上位ビットから決める, XOR の和]
+    type: technique
+    level: 水
+    level_evidence: "abc365_e（1102）・abc147_d（1205）・arc098_b（1404）・abc117_d（1423）・abc129_e（1547）。上位ビットで分けて再帰する abc281_f（1714）は青（節に印）。drken の「各桁ごとに見る」ABC 11 問の中央値 1423"
+    kind: [ビット演算, 考察]
+    prerequisites: [bit-operations, contribution]
+    related: [xor-basis, binary-trie, digit-dp, reformulation]
+    summary: "XOR・AND・OR の結果は bit ごとに独立に決まるので、bit ごとに 0 と 1 の個数を数えて 2^k を掛けて足す。最大化・最小化は上の bit から決める。足し算は繰り上がりで bit が干渉するので、この考え方は使えない。"
+    signs:
+      - {type: phrase, text: "全ペア・全区間の XOR の総和"}
+      - {type: phrase, text: "AND・OR・XOR の最大化・最小化"}
+      - {type: phrase, text: "x を選んで max(a_i xor x) を最小化する"}
+      - {type: phrase, text: "a + b = a xor b（繰り上がりがない）"}
+    acl: []
+    frequency: B
+    sections:
+      - "bit ごとの寄与（0 の個数 × 1 の個数 × 2^k）"
+      - "区間の XOR は累積 XOR の 0・1 の個数で"
+      - "上の bit から決める貪欲（上限は桁 DP の考え方）"
+      - "上位ビットで 2 つに分けて再帰する（青）"
+      - "足し算では使えない理由（繰り上がり）"
+    merged_keys: [bitwise-decomposition]
+    visual: "静的な図：数を 2 進表記で縦に並べ、bit ごとの 0 と 1 の個数から寄与を足していく図"
+    problems:
+      - {id: abc147_d, role: example, summary: "全ペアの XOR の総和。bit ごとに 0 と 1 の個数の積で寄与を数える"}
+      - {id: abc365_e, role: practice, summary: "長さ 2 以上の全区間の XOR の総和。bit ごとに累積 XOR の 0・1 の個数で数える"}
+      - {id: abc117_d, role: practice, summary: "K 以下の X で Σ(X xor A_i) を最大化する。上の bit から、K を超えない範囲で 1 にするかを決める"}
+      - {id: abc129_e, role: practice, summary: "a + b ≤ L かつ a + b = a xor b となる組を数える。同じ bit に 1 が重ならないと言い換え、上の桁から数える"}
+      - {id: abc281_f, role: challenge, summary: "x を選んで max(a_i xor x) を最小化する。上位ビットから、0 と 1 が混在する桁でグループを 2 つに分けて再帰する"}
+    sources: ["01-basics §4.K", "01-basics §5", "00-curriculum §3.2", "00-curriculum §4.2", "00-curriculum §5.1"]
+
+moved:
+  - {key: cycle-detection, to: graph, reason: "key の持ち主は graph（catalog/README §6）。01 の内容（シミュレーションの周期の検出）は basics の periodicity に置き、graph の閉路検出と相互リンクする（設計 §4.2）"}
+  - {key: harmonic-series, to: math, reason: "research/06 の harmonic-sum（調和級数の計算量・倍数の列挙）と同じ内容で、abc170_d・abc356_e を共有する。research/06 は調和級数の数え方を約数・倍数と一緒に 06 に置く案。basics は complexity-estimation の節からリンクする（open_issues 参照）"}
+  - {key: inversion-count, to: ds, reason: "設計 §4.2：転倒数は ds（BIT の応用の単独ページ）。05 の inversion-number に統合する"}
+  - {key: parallel-binary-search, to: ds, reason: "設計 §4.2・catalog/README §6：並列二分探索は ds（クエリ処理の工夫）"}
+  - {key: cdq-divide-and-conquer, to: ds, reason: "設計 §4.2：CDQ 分割統治は ds（クエリ処理の工夫）。basics の divide-and-conquer からリンクする"}
+
+dropped: []
+
+open_issues:
+  - "harmonic-series（01、水）と research/06 の harmonic-sum（基礎）は同じ内容の own ページ案で、設計 §4.2 にも catalog/README §6 にもない重複。research/06 §7 の意見（調和級数の数え方は 06）に合わせて math へ moved にし、math.yaml が harmonic-sum の merged_keys に取り込んだ（レベルは基礎、research/01 の水の根拠 abc356_e・abc206_e は節の印）。basics は complexity-estimation の節からリンクする"
+  - "設計 §4.1-3 の例は「いもす法・2 次元いもす・差分は 1 ページ」だが、research/00 の差分列への言い換え（difference-reformulation、黄。最近の F の abc454_f・abc459_f）を取り込むと差分の中身が多く、レベルも離れる（いもす法は基礎、差分は水〜黄）ので、imos（いもす法・2 次元いもす）と difference-sequence（差分で考える）の 2 ページに分けた。1 ページに戻すなら difference-sequence を imos の節（水・黄の印）にする"
+  - "divide-and-conquer は研究の案（青・要確認）から黄に上げた（根拠が arc189_d 2006 だけで、ABC で分割統治そのものが鍵になる問題は 2221 以上）。frequency は C"
+  - "lexicographic-greedy は research/01・00 が水、08 が基礎とした。根拠の問題（846〜1108）と drken の ABC 7 問の中央値 885 から基礎とし、判定が重い型（abc009_3）を青の節にした"
+  - "後悔付き貪欲の分担（dp.yaml の open_issues への回答案）：basics の greedy-priority-queue の節（regret-greedy）は締め切り付きの仕事で「選んだ中で最も弱いものと入れ替える」基本形だけを扱い、取り消し付きの優先度付きキュー貪欲の一般形と Alien DP・Monge との関係（abc464_g）は dp の alien-dp（undoable-greedy）を本体にしてリンクする"
+  - "greedy-priority-queue・k-best-enumeration（01）と research/05 の priority-queue は中身が大きく重なる。ds.yaml の open_issues と同じ分担にした（ds＝ヒープの構造・遅延削除・multiset との使い分け、basics＝締め切り・スケジューリングの貪欲と K 個の列挙。abc137_d・abc141_d・abc325_d・abc297_e は basics の例題）。abc234_d は ds の priority-queue の例題と basics の kth-value の練習の両方にある"
+  - "periodicity の節「シミュレーションを速くする」（simulation-speedup）は ds の global-offset（オフセット・反転フラグ、基礎）と重なる。basics は周期との関係とまとめて進める工夫に絞り、オフセット・反転フラグの詳細は global-offset にリンクする"
+  - "cycle-detection（01 の key）は README §6 どおり graph に送り、01 の内容は periodicity という id にした。graph.yaml の open_issues にあるとおり、graph の cycle-detection の related に periodicity を足して相互リンクにしてほしい（basics 側は periodicity の related に cycle-detection を入れた）"
+  - "interactive-binary-search は research/01 の案（binary-search の節）ではなく misc の interactive に統合した（インタラクティブの作法と質問回数の考え方を 1 か所にまとめるため）。binary-search からは節の見出しと related でリンクする"
+  - "練習問題の候補が設計 §5.3 の目安（2〜6）に足りないページ：median-binary-search（練習 1）・divide-and-conquer（練習 0）。調査で裏付けの取れた候補がないため。執筆時に探して足す"
+  - "最近の ABC（abc451〜480）の問題の一部（abc457_d・abc463_d・abc469_d・abc473_d・abc473_e・abc478_d・abc479_d・abc462_d・abc452_e など）は research/00 §2.3.8 の分類（第三者の解説で手法を確認済み）から採ったが、問題の内容までは調査に書かれていない。要約は手法だけを書いたので、執筆時に解説で内容を確かめて直すこと"
+  - "kind の語彙に計算量の見積もりに当たる語がないので、complexity-estimation は [全探索] とした。「計算量・方針」のような語を足すか検討してほしい"

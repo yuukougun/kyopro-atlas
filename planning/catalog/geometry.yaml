@@ -1,0 +1,325 @@
+# 幾何（geometry）の目次。規則は planning/catalog/README.md、上位の規則は planning/design.md §3〜§5。
+# 主な材料：research/08（幾何）、research/00 §3.2（多角形・ミンコフスキー和）・§2.3.8（最近の ABC の分類）
+# 設計書 §4.1 の 6（ABC での出題が少ないので統合を優先して8ページ前後）に従い、research/08 §7.1 の13案を8ページにまとめた
+field: geometry
+pages:
+  - id: geometry-vectors
+    title: ベクトルと外積（向き・面積・線分の交差）
+    aliases: [外積, 内積, ccw, 向き判定, 符号付き面積, 多角形の面積, 靴紐公式, shoelace formula, 線分の交差判定, 点と直線の距離, 3次元, 直方体の共通部分]
+    type: technique
+    level: 基礎
+    level_evidence: "abc181_c (274)、abc224_c (301)、abc266_c (516)。以降のすべての幾何の土台。線分の交差は abc016_4（参考値 1305）、多角形の面積は単独の出題が少なく abc472_f (1707)・abc250_f (2044) のように組み合わせて出るので、これらの節に水の印を付ける"
+    kind: [幾何]
+    prerequisites: []
+    related: [geometry-precision, argument-sort, convex-hull, prefix-sum, two-pointers]
+    summary: "外積 a.x·b.y−a.y·b.x の符号で向き（左・右・一直線上）が、絶対値で平行四辺形の面積が分かる。これだけで3点の一直線判定・凸性・多角形の面積・線分の交差を、整数のまま誤差なく判定できる。"
+    signs:
+      - {type: phrase, text: "3点が一直線上にあるか・三角形ができるか"}
+      - {type: phrase, text: "左に曲がるか右に曲がるか・四角形が凸か"}
+      - {type: phrase, text: "頂点が順に与えられた多角形の面積"}
+      - {type: phrase, text: "2本の線分が交わるか・多角形を線分で切って分かれる個数"}
+      - {type: phrase, text: "直方体どうしの共通部分の体積"}
+      - {type: constraint, text: "座標が整数で |x|, |y| ≤ 10^9（外積は long long にぎりぎり収まる）"}
+    acl: []
+    frequency: A
+    sections:
+      - "外積と内積の意味（符号と大きさ）"
+      - "ccw：3点の回り方・一直線上の判定・凸性の判定"
+      - "オーバーフローの見積もり（座標 10^9 で外積は 8×10^18、さらに足すなら __int128）"
+      - "三角形・多角形の面積：座標の公式（面積の2倍を整数のまま扱う）（水）"
+      - "線分の交差判定（端点で接する・同一直線上の場合）と点と直線の距離（水）"
+      - "3次元の基本：軸に平行な直方体の共通部分は軸ごとの区間の積"
+      - "点の表し方：整数の構造体と std::complex"
+    merged_keys: [polygon-area, segment-intersection, 3d-geometry]
+    visual: "外積の符号と平行四辺形の面積の図と、多角形の面積で原点と各辺の三角形を正負で塗り分けて外側が打ち消し合う図"
+    problems:
+      - {id: abc181_c, role: example, summary: "一直線上にある3点があるか。外積が 0 かで判定する"}
+      - {id: abc361_b, role: practice, summary: "2つの直方体の共通部分の体積が正か。各軸の区間が重なるかで判定する"}
+      - {id: abc224_c, role: practice, summary: "三角形ができる3点の選び方の数。外積が 0 でない組を数える"}
+      - {id: abc266_c, role: practice, summary: "四角形が凸か。各頂点で隣り合う辺の外積の符号がそろうかを調べる"}
+      - {id: abc016_4, role: practice, summary: "多角形を線分で切って分かれる個数。各辺との交差を外積で判定し、交差数/2+1 を答える"}
+      - {id: abc472_f, role: challenge, summary: "多角形の重心を扱う問題で、幾何と累積和を組み合わせる（research/00 §2.3.8 の分類による。執筆時に内容を確かめる）"}
+      - {id: abc250_f, role: challenge, summary: "凸多角形を対角線で切り、片側の面積を全体の 1/4 に近づける。面積の2倍を整数のまま尺取りする"}
+      - {id: abc373_g, role: challenge, summary: "2つの点集合を、線分が交わらないように結ぶ。交差する組をつなぎ替えると長さの和が減る性質を使う"}
+    sources: ["08-string-geo §4.8 geometry-vectors・segment-intersection・polygon-area・3d-geometry", "08-string-geo §6.3（公式と外積の値の大きさ）", "08-string-geo §5 幾何", "00-curriculum §2.3.8（abc472_f）"]
+
+  - id: geometry-precision
+    title: 誤差の扱いと整数での処理（整数化・方向と直線の正規化）
+    aliases: [浮動小数点の誤差, EPS, 整数化, 桁落ち, long double, 傾きの正規化, 直線の正規化, 方向ベクトルの約分, "ax+by+c=0"]
+    type: technique
+    level: 水
+    level_evidence: "小数入力の整数化は基礎帯（abc169_c 597）。方向・直線の正規化は abc418_e (1282)・abc248_e (1292) で水（易しい例 abc467_d 928）。整数化しないと解けない・桁落ちで WA になるのは青〜黄（abc385_f 1905、abc191_d 1953、abc296_g 2241）"
+    kind: [幾何, 整数論]
+    prerequisites: [geometry-vectors, gcd-lcm]
+    related: [rational-normalization, cpp-floating-point, integer-root, real-binary-search, circle-geometry, argument-sort]
+    summary: "幾何はできるだけ整数で扱う。小数の入力は 10^k 倍して整数にし、比較は外積・内積・距離の2乗で行い、傾きや直線は gcd で約分して符号をそろえた整数の組で表し、実数が避けられないときだけ long double と許容誤差を使う。"
+    signs:
+      - {type: phrase, text: "座標や値が小数第 k 位まで与えられる"}
+      - {type: phrase, text: "ちょうど境界上か・整数になるかを判定する"}
+      - {type: phrase, text: "K 点以上を通る直線の数・平行な辺の組（台形）の数"}
+      - {type: phrase, text: "絶対誤差または相対誤差 10^-6〜10^-9 まで許される"}
+      - {type: constraint, text: "座標が 10^9 規模で、double の引き算で桁落ちする"}
+    acl: []
+    frequency: B
+    sections:
+      - "double の精度の目安（仮数 53 ビット・値 10^9 で絶対誤差 10^-7 程度）と桁落ち"
+      - "小数の入力を 10^k 倍して整数にする（文字列で読んで整数にする）"
+      - "比較は外積・内積・距離の2乗で（sqrt・atan2・除算を避ける）"
+      - "方向・直線の正規化：gcd で約分し、(1, −1) と (−1, 1) を同じにする符号の決め方"
+      - "中点を整数にするために座標を2倍する"
+      - "実数が避けられないとき：long double と、値の大きさに合わせた EPS"
+      - "出力の桁数と、実数の二分探索の打ち切り"
+    merged_keys: [line-normalization]
+    visual: "数直線上で double が表せる点の間隔が、値が大きいほど広がる図"
+    problems:
+      - {id: abc169_c, role: example, summary: "整数と小数第2位までの数の積の切り捨て。小数を100倍した整数として扱う"}
+      - {id: abc248_e, role: example, summary: "K 点以上を通る直線の数。直線を ax+by+c=0 の既約で符号をそろえた形にして数える"}
+      - {id: abc385_f, role: example, summary: "隣り合うビルの頂点を結ぶ直線の傾きの比較。double で計算すると桁落ちで許容誤差を超える"}
+      - {id: abc467_d, role: practice, summary: "垂直二等分線の交差と直線の正規化を使う易しい幾何（research/00 §2.3.8 の分類による。執筆時に内容を確かめる）"}
+      - {id: abc418_e, role: practice, summary: "台形の数。2点の方向を gcd で約分して符号をそろえ、同じ向きの組の数から数える"}
+      - {id: abc191_d, role: practice, summary: "小数第4位までで与えられた円の内部の格子点の数。10^4 倍して整数で判定する"}
+      - {id: abc296_g, role: challenge, summary: "凸多角形に対する多数の点の内外判定。double の偏角で行うと境界で誤り、整数の外積で行うべき例"}
+      - {id: abc220_g, role: challenge, summary: "等脚台形の重みの最大。座標を2倍して中点を整数にし、中点と方向でまとめる"}
+    sources: ["08-string-geo §4.8 geometry-precision・line-normalization", "08-string-geo §6.3（double の精度）", "06-math-nt rational-normalization", "09-cpp cpp-floating-point", "00-curriculum §2.3.8（abc467_d）"]
+
+  - id: argument-sort
+    title: 偏角ソート
+    aliases: [偏角, 角度でソート, argument sort, atan2, 方向の順に並べる, 回転する光線]
+    type: technique
+    level: 水
+    level_evidence: "abc442_e (1355) が水。まとまって現れるのは青〜黄（typical90_i ★6、abc225_e 1678、abc139_f 2034、abc207_d 2074、abc479_g 2386）なので、基本の並べ方を水、応用の節を青にする"
+    kind: [幾何, ソート・座標圧縮]
+    prerequisites: [geometry-vectors, sorting-techniques]
+    related: [geometry-precision, convex-hull, interval-scheduling, two-pointers, prefix-sum, rotation-transform]
+    summary: "点を原点から見た角度の順に並べる。整数座標なら上下の半平面に分け、同じ半平面の中は外積の符号で比べることで、atan2 を使わず誤差なく O(N log N) で並べられる。"
+    signs:
+      - {type: phrase, text: "原点から見た方向の順に並べる"}
+      - {type: phrase, text: "回転する光線（レーザー）に当たる点の数"}
+      - {type: phrase, text: "∠ABC の最大"}
+      - {type: phrase, text: "ベクトルをいくつか選んで和の長さを最大にする"}
+      - {type: constraint, text: "座標が 10^9 規模で、atan2 では同じ角度と近い角度を区別できない"}
+    acl: []
+    frequency: B
+    sections:
+      - "半平面に分けて外積で比べる（全周を外積だけで比べると推移律が壊れる理由）"
+      - "atan2 の手軽さと限界"
+      - "原点・同じ方向の点・半平面の境界（x 軸の正と負）の扱い"
+      - "並べた後に：角度の範囲の点の数（累積和）"
+      - "一周を扱う：配列を2周分にして尺取り（青）"
+      - "反対方向に最も近い点の二分探索（青）"
+      - "角度の区間のスケジューリング・連続する範囲だけを試す最適化（青）"
+    merged_keys: []
+    visual: "（動く図の候補）原点のまわりで半直線を回し、通過した点に順番が付く図。上半平面と下半平面を色分けする"
+    problems:
+      - {id: abc442_e, role: example, summary: "原点から見た方向でモンスターを並べ、2方向の間にいる数のクエリに答える。整数の偏角ソートと累積和"}
+      - {id: typical90_i, role: example, summary: "∠ABC の最大。各 B について他の点を偏角ソートし、反対方向に最も近い点を二分探索する"}
+      - {id: abc225_e, role: practice, summary: "原点から見える図形の最大数。各図形を傾きの区間にし、分数で比べて区間スケジューリングする"}
+      - {id: abc139_f, role: practice, summary: "ベクトルを選んで和の長さを最大化する。偏角順に並べ、連続する範囲だけを試す"}
+      - {id: abc207_d, role: challenge, summary: "点集合が回転と平行移動で一致するか。重心を原点に移し、偏角と距離でそろえて比べる"}
+      - {id: abc479_g, role: challenge, summary: "偏角ソートと累積和で、直線とのマンハッタン距離の和を扱う（research/00 §2.3.8 の分類による。執筆時に内容を確かめる）"}
+    sources: ["08-string-geo §4.8 argument-sort", "08-string-geo §2.3（偏角ソートと atan2）", "08-string-geo §7.2（偏角ソートのレベル）", "00-curriculum §2.3.8（abc479_g）"]
+
+  - id: rotation-transform
+    title: 回転・平行移動・アフィン変換（グリッドの回転・三角関数）
+    aliases: [回転行列, 座標の回転, アフィン変換, 合同変換, 複素数で回転, グリッドの回転, 90 度回転, 転置, 三角関数, ラジアン, 余弦定理]
+    type: technique
+    level: 水
+    level_evidence: "abc189_e (1526)。基礎帯に abc259_b (180)、abc197_d (831)、グリッドの回転 abc298_b、三角関数 abc168_c (230)・abc144_d (714)。応用 abc292_f (1522)、abc207_d (2074)"
+    kind: [幾何, 線形代数・行列]
+    prerequisites: [geometry-vectors]
+    related: [matrix-power, manhattan-chebyshev, argument-sort, grid-brute-force, geometry-precision]
+    summary: "原点まわりの θ 回転は (x cos θ − y sin θ, x sin θ + y cos θ)、90 度回転は (−y, x) で整数のまま書ける。回転・反転・平行移動は (x, y, 1) に 3×3 行列を掛ける形にまとめられ、操作列の合成を行列の積の累積で求められる。"
+    signs:
+      - {type: phrase, text: "点を θ 度回転した位置"}
+      - {type: phrase, text: "回転・反転・平行移動の操作を順に行った後の位置のクエリ"}
+      - {type: phrase, text: "回転と平行移動で2つの点集合が重なるか"}
+      - {type: phrase, text: "盤面を 90 度回転して一致させる"}
+      - {type: constraint, text: "操作が M ≤ 2×10^5 回、各クエリは途中の時点での点の位置"}
+    acl: []
+    frequency: B
+    sections:
+      - "回転の式と、中心まわりの回転（中心を原点に移す・回す・戻す）"
+      - "90 度回転・反転を整数のまま書く"
+      - "アフィン変換：(x, y, 1) と 3×3 行列・掛ける順序（後の操作を左から掛ける）"
+      - "操作列の累積とクエリ"
+      - "点集合の合同判定：重心をそろえて照合する（黄）"
+      - "グリッドの回転・転置・反転の添字（(i, j) → (j, N−1−i)）"
+      - "三角関数と角度の基本（度とラジアン・π は acos(−1)・余弦定理）"
+    merged_keys: [grid-rotation, trig-angle]
+    visual: "(x, y, 1) に行列を1つずつ掛けて操作が合成される様子の図と、グリッドの回転で添字が移る対応を矢印で示す図"
+    problems:
+      - {id: abc259_b, role: example, summary: "点を原点中心に d 度回転する。度をラジアンに直して回転の式を使う"}
+      - {id: abc189_e, role: example, summary: "回転・反転の操作列を途中まで適用した点の位置のクエリ。操作を 3×3 のアフィン変換行列にして累積する"}
+      - {id: abc168_c, role: practice, summary: "時計の長針と短針の先端の距離。角度の差から余弦定理で求める"}
+      - {id: abc298_b, role: practice, summary: "行列 A を 90 度ずつ回転させて条件を満たすか。回転の添字の式で4通り試す"}
+      - {id: abc144_d, role: practice, summary: "直方体の水筒を傾けてこぼれない最大角度。水の量で2つの場合に分け、断面で tan を使う"}
+      - {id: abc197_d, role: practice, summary: "正 N 角形の向かい合う2頂点から隣の頂点を求める。中心を求め、中心まわりに 360/N 度回転する"}
+      - {id: abc292_f, role: practice, summary: "長方形に入る正三角形の最大の一辺。三角形を回したときに先に当たる壁で場合分けする"}
+      - {id: abc207_d, role: challenge, summary: "点集合が回転と平行移動で一致するか。重心をそろえ、回転角の候補を絞って照合する"}
+    sources: ["08-string-geo §4.8 rotation-transform・grid-rotation・trig-angle", "01-basics grid-brute-force（盤面の回転の全探索）", "06-math-nt matrix-power"]
+
+  - id: manhattan-chebyshev
+    title: マンハッタン距離と45度回転（チェビシェフ距離・軸の独立・斜めの座標）
+    aliases: [45度回転, マンハッタン距離, チェビシェフ距離, L1 距離, L∞ 距離, "u=x+y, v=x−y", x と y を独立に, 絶対値を外す, 斜めの番号, 市松模様]
+    type: technique
+    level: 水
+    level_evidence: "abc437_f (1332)、typical90_aj（★5）、abc210_d (1507)、abc366_e (1515)。基礎帯に abc184_c (782)、abc178_e (1054)。青に abc351_e (1627)、abc330_f (1718)、abc476_f (1728)、abc457_g (1928)、黄に abc377_f (2232)、abc265_f (2290)"
+    kind: [幾何, 考察]
+    prerequisites: [sorting-techniques, prefix-sum]
+    related: [median-absolute, independence, segment-tree, prefix-sum-2d, dilworth, checkerboard-parity, rotation-transform, spanning-tree-advanced]
+    summary: "u＝x+y、v＝x−y と座標を変える（45度回転）と、マンハッタン距離はチェビシェフ距離 max(|Δu|, |Δv|) になり、その逆も成り立つ。ひし形の範囲が軸に平行な正方形に変わり、最遠点対・距離の和・斜め移動が x と y を独立に扱う問題に落ちる。"
+    signs:
+      - {type: phrase, text: "マンハッタン距離が最大の2点・ある点から最も遠い点"}
+      - {type: phrase, text: "マンハッタン距離の和の最小・全ペアの距離の総和"}
+      - {type: phrase, text: "斜め移動（キングの移動）だけでの距離・斜めにしか動けない駒"}
+      - {type: phrase, text: "ひし形の範囲（|x|+|y| ≤ D）にある点の数"}
+      - {type: constraint, text: "N ≤ 2×10^5 点で全ペアの距離を直接は計算できない"}
+    acl: [segtree]
+    frequency: A
+    sections:
+      - "45度回転：|Δx|+|Δy|＝max(|Δu|, |Δv|) になる理由"
+      - "最遠点対：x+y と x−y の最大・最小（点の更新はセグ木）"
+      - "x と y を独立に扱う：距離の和は軸ごと・中央値・寄与"
+      - "絶対値の外し方：向きを固定して場合分けし、盤面を反転してもう一度"
+      - "回転後の偶奇：u と v の偶奇がそろう点だけが元の格子点（チェビシェフ→マンハッタンで 1/2 が出る）（青）"
+      - "ひし形の範囲を正方形にして2次元累積和（黄）"
+      - "盤面の斜め：r+c・r−c の番号と市松模様の色（偶奇）"
+    merged_keys: [axis-independence, diagonal-coordinates]
+    visual: "マンハッタン距離の等距離線（ひし形）が (x+y, x−y) への変換で正方形になる図と、u と v の偶奇で2つの格子に分かれる様子"
+    problems:
+      - {id: abc178_e, role: example, summary: "2点間のマンハッタン距離の最大。x+y と x−y それぞれの最大と最小の差を取る"}
+      - {id: abc366_e, role: example, summary: "N 点への距離の和が D 以下の格子点の数。x と y の寄与を別々に求めて二分探索で組み合わせる"}
+      - {id: abc351_e, role: example, summary: "斜め移動だけでの全ペアの距離の和。座標を回転して偶奇で2組に分け、各軸を独立にソートして和を取る"}
+      - {id: abc184_c, role: practice, summary: "特殊な駒の最小手数。r+c の偶奇（市松模様）と斜め移動の性質で場合分けする"}
+      - {id: typical90_aj, role: practice, summary: "各クエリの点から最も遠い点の距離。45度回転した座標の最大・最小の差を使う"}
+      - {id: abc437_f, role: practice, summary: "点の更新と、ある点から最も遠い点の距離のクエリ。x+y と x−y の最大・最小をセグ木で管理する"}
+      - {id: abc210_d, role: practice, summary: "C_a+C_b+A×(マンハッタン距離) の最小。向きを固定して絶対値を外して2次元 DP し、盤面を反転してもう一度"}
+      - {id: abc330_f, role: practice, summary: "K 回の移動で全点を覆う正方形の最小の一辺。一辺を二分探索し、x と y の必要回数を独立に計算する"}
+      - {id: abc476_f, role: practice, summary: "チェビシェフ距離を分解し、四隅から DP する（research/00 §2.3.8 の分類による。執筆時に内容を確かめる）"}
+      - {id: abc457_g, role: challenge, summary: "45度回転してから、増加部分列への分割（Dilworth の定理）を貪欲に求める（research/00 §2.3.8 の分類による）"}
+      - {id: abc377_f, role: challenge, summary: "クイーンに取られないマスの数。縦・横・2方向の斜めの直線の交点を包除で数える"}
+      - {id: abc265_f, role: challenge, summary: "N 次元で2点からのマンハッタン距離がともに D 以下の格子点の数。斜め方向の累積和で DP を高速化する"}
+    sources: ["08-string-geo §4.8 manhattan-chebyshev・axis-independence・diagonal-coordinates", "08-string-geo §2.3（マンハッタン距離とチェビシェフ距離）", "00-curriculum §2.3.8（abc457_g・abc476_f）", "01-basics median-absolute・independence"]
+
+  - id: circle-geometry
+    title: 円と幾何の最適化（最小包含円・二分探索・三分探索）
+    aliases: [円の交差判定, 2円の位置関係, 外接円, 円と格子点, 最小包含円, smallest enclosing circle, Welzl, 半径の二分探索, 三分探索で幾何, 候補点の列挙]
+    type: technique
+    level: 青
+    level_evidence: "abc151_f (1671)、abc191_d (1953)、abc181_f (2009)。基礎帯に abc259_d (947)、水に abc292_f (1522)、黄に abc130_f (2240)、発展 abc157_f (2525)、abc314_h (2938)"
+    kind: [幾何, 二分探索]
+    prerequisites: [geometry-vectors, geometry-precision, binary-search-answer]
+    related: [union-find, ternary-search, real-binary-search, convex-function-basics, integer-root, randomized]
+    summary: "2円の位置関係は、中心間の距離と半径の和・差を2乗して整数のまま判定できる。実数の位置・半径・時刻の最適化は、最適解が少数の点で決まる（最小包含円は2点か3点）なら候補を列挙し、判定が単調なら答えで二分探索、凸なら三分探索する。"
+    signs:
+      - {type: phrase, text: "円周を伝って移動できるか・円どうしが交わるか"}
+      - {type: phrase, text: "すべての点を含む最小の円"}
+      - {type: phrase, text: "障害物を避けて通れる円の最大の半径"}
+      - {type: phrase, text: "円の内部にある格子点の数"}
+      - {type: phrase, text: "答えが実数で、誤差 10^-6 程度まで許される最適化"}
+      - {type: constraint, text: "N ≤ 50 程度で、2点・3点で決まる候補を全部試せる"}
+    acl: [dsu]
+    frequency: B
+    sections:
+      - "2円の位置関係（離れる・外接・交わる・内接・内包）を2乗した整数で判定"
+      - "円と格子点：y ごとに x の範囲を整数で求める"
+      - "円のつながりを Union-Find で"
+      - "最小包含円：候補は2点を直径とする円か3点の外接円（Welzl の乱択も）"
+      - "答えで二分探索して判定問題にする（半径・時刻）"
+      - "三分探索：凸性の確認・入れ子の三分探索・式の変わり目の時刻を列挙する方法"
+      - "外心の計算と退化（3点が一直線上）"
+      - "山登り・焼きなましに頼らない（ABC の幾何の最適化は凸性や候補の列挙で解ける）"
+    merged_keys: [min-enclosing-circle, geometry-optimization]
+    visual: "2円の5つの位置関係を、中心間の距離と半径の和・差で並べた図"
+    problems:
+      - {id: abc259_d, role: example, summary: "円周を伝って2点を行き来できるか。2円の共有点の有無を距離の2乗で整数判定し、Union-Find でつなぐ"}
+      - {id: abc151_f, role: example, summary: "N≤50 点を含む最小の円。2点の中点か3点の外心を候補に全部試す（三分探索でも解ける）"}
+      - {id: abc181_f, role: example, summary: "壁と点を避けて通れる円の最大半径。半径を二分探索し、近い点どうしと壁を Union-Find でつなぐ"}
+      - {id: abc292_f, role: practice, summary: "長方形に入る正三角形の最大の一辺。傾ける角度で場合分けする"}
+      - {id: abc191_d, role: practice, summary: "円の内部の格子点の数。座標を整数にし、y ごとに x の範囲を求めて数える"}
+      - {id: abc130_f, role: challenge, summary: "動く点の外接長方形の面積の最小。面積の式が変わる時刻を候補として全部試す（三分探索は凸でないので危うい）"}
+      - {id: abc157_f, role: challenge, summary: "K 枚の肉が焼ける最小時刻。時刻を二分探索し、重み付きの円の交点を候補として調べる"}
+    sources: ["08-string-geo §4.8 circle-geometry・min-enclosing-circle・geometry-optimization", "08-string-geo §6.2（幾何の最適化）", "08-string-geo §4.9 randomized（山登り法の扱い）", "01-basics ternary-search・real-binary-search"]
+
+  - id: convex-hull
+    title: 凸包と凸多角形（内外判定・格子点と Pick の定理）
+    aliases: [凸包, Andrew のアルゴリズム, monotone chain, Graham scan, 上側凸包, 下側凸包, 内外判定, 凸多角形の内外判定, 交差数判定, Pick の定理, 格子点, 線分上の格子点]
+    type: technique
+    level: 黄
+    level_evidence: "typical90_ao（★7）、agc021_b (2130)、abc341_g (2208)、内外判定 abc296_g (2241)・abc251_g (2468)。発展 abc202_f (2905)、abc356_g (3022)"
+    kind: [幾何]
+    prerequisites: [geometry-vectors, sorting-techniques, binary-search, gcd-lcm]
+    related: [cht, argument-sort, advanced-geometry, monotonic-stack, fractional-binary-search, floor-sum]
+    summary: "点を x 座標でソートし、スタックの末尾が凹む間は取り除くことで、全点を囲む最小の凸多角形（凸包）を O(N log N) で作る（Andrew 法）。凸多角形への多数の点の内外判定（1点 O(log N)）と、格子点を頂点とする多角形の面積と格子点の数の関係（Pick の定理）も扱う。"
+    signs:
+      - {type: phrase, text: "すべての点を囲む最小の凸多角形"}
+      - {type: phrase, text: "外側にある点だけが効く"}
+      - {type: phrase, text: "区間の平均・傾き・比の最大（累積和の点の上側凸包）"}
+      - {type: phrase, text: "多数の点が凸多角形の内部・境界・外部のどこにあるか"}
+      - {type: phrase, text: "多角形の内部にある格子点の数"}
+      - {type: constraint, text: "N ≤ 2×10^5 点で O(N log N)"}
+    acl: []
+    frequency: B
+    sections:
+      - "Andrew 法（monotone chain）：下側と上側を作る"
+      - "一直線上の点・重複点・全点が一直線上のときの扱い（外積の不等号の向き）"
+      - "比・平均の最大は上側凸包の接線（累積和の点）"
+      - "凸包と CHT の双対（点 (a, b) と直線 y＝ax+b）"
+      - "凸多角形の内外判定：扇形に分けて二分探索（O(log N)）"
+      - "一般の多角形の内外判定（交差数の偶奇）"
+      - "格子点：線分上は gcd(|dx|, |dy|)+1、Pick の定理 S＝i＋b/2−1（面積の2倍で整数のまま）"
+    merged_keys: [point-in-polygon, lattice-points, polygon-geometry]
+    visual: "（動く図の候補）点を x 順に見て、右に曲がる（凹む）ごとにスタックから取り除く Andrew 法のステップ送り"
+    problems:
+      - {id: typical90_ao, role: example, summary: "凸包を求め、辺上の格子点は gcd、内部の格子点は Pick の定理で数える"}
+      - {id: abc341_g, role: example, summary: "各 i から始まる区間の平均の最大。累積和の点の上側凸包をスタックで保ち、傾きの最大を求める"}
+      - {id: abc296_g, role: example, summary: "凸多角形に対する多数の点の内外判定。頂点の偏角で辺を二分探索し、整数の外積で判定する"}
+      - {id: agc021_b, role: practice, summary: "遠くの一様な点に最も近い穴の確率。凸包上の点だけが正の確率を持ち、外角を 2π で割る"}
+      - {id: abc251_g, role: practice, summary: "M 通りに平行移動した凸多角形すべての内部か。辺ごとに外積の最大値を前計算して判定する"}
+      - {id: abc202_f, role: challenge, summary: "凸包の面積の2倍が偶数になる点の部分集合の数。凸包の構成に沿った DP（発展）"}
+    sources: ["08-string-geo §4.8 convex-hull・point-in-polygon・lattice-points", "00-curriculum §3.2 優先度 B（多角形の面積・内外判定・Pick の定理）", "02-dp cht（双対の関係）", "06-math-nt floor-sum（格子点の数え上げの別解）"]
+
+  - id: advanced-geometry
+    title: 発展の幾何（動的凸包・回転キャリパー・最近点対・半平面交差・ミンコフスキー和など）
+    aliases: [回転キャリパー, 最遠点対, 最近点対, 半平面交差, 動的凸包, ミンコフスキー和, Minkowski sum, ボロノイ図, ドロネー三角形分割, マンハッタン MST, 円の反転]
+    type: overview
+    level: 発展
+    level_evidence: "abc244_h (2878) が動的な上側凸包、abc478_g (2582) がミンコフスキー和。ほかは ABC での確認例が少ない（Library Checker の furthest_pair・closest_pair・manhattanmst などで確かめる）"
+    kind: [幾何]
+    prerequisites: [convex-hull]
+    related: [cht, li-chao-tree, sweep-line-2d, divide-and-conquer, spanning-tree-advanced]
+    summary: "ABC ではまれな発展の幾何の手法を、何ができるかと使いどころに絞って並べる概要。動的な凸包、回転キャリパー（最遠点対）、最近点対、半平面交差、ミンコフスキー和、ボロノイ図、マンハッタン MST を Library Checker の問題とともに挙げる。"
+    signs:
+      - {type: phrase, text: "最も遠い2点（凸包上の対蹠点）"}
+      - {type: phrase, text: "最も近い2点（N ≤ 2×10^5）"}
+      - {type: phrase, text: "点の追加と ax+by の最大のクエリ"}
+      - {type: phrase, text: "2つの凸な点集合の和の凸包"}
+      - {type: phrase, text: "半平面の共通部分"}
+    acl: []
+    frequency: C
+    sections:
+      - "動的な凸包（点の追加と ax+by の最大）"
+      - "回転キャリパー（凸包上の最遠点対）"
+      - "最近点対（分割統治・平面走査で O(N log N)）"
+      - "半平面交差"
+      - "ミンコフスキー和（凸包の和）"
+      - "ボロノイ図・ドロネー三角形分割"
+      - "マンハッタン MST・線分の交点の列挙（Bentley–Ottmann）"
+    merged_keys: [minkowski-sum]
+    visual: null
+    problems:
+      - {id: abc478_g, role: example, summary: "分割統治で凸包を作り、ミンコフスキー和で合成する（research/00 §5.2 の分類による）"}
+      - {id: abc244_h, role: practice, summary: "点の追加と ax+by の最大のクエリ。上側凸包を動的に保って二分探索する（CHT の考え方）"}
+    sources: ["08-string-geo §4.8 advanced-geometry", "00-curriculum §3.2 優先度 B（ミンコフスキー和）・§5.2（abc478_g）", "05-ds sweep-line-2d（平面走査）"]
+
+moved: []
+
+dropped: []
+
+open_issues:
+  - "設計書 §4.1 の 6 に従い research/08 §7.1 の13案を8ページに統合した：多角形の面積・線分の交差・3次元を geometry-vectors の節（面積と交差に水の印）に、点の内外判定・格子点（Pick の定理）を convex-hull に、直線の正規化を geometry-precision に、最小包含円・幾何の最適化を circle-geometry に入れた。多角形の面積（研究では水）を基礎のページの節にしたことと、Pick の定理を凸包のページに置いたことの是非を見直しで確かめたい"
+  - "research/00 §2.3.8 の分類から足した問題（abc467_d・abc472_f・abc476_f・abc457_g・abc479_g・abc478_g）は、research/08 の個別の裏付けではなく 00 の分類（第三者の解説で手法だけを確かめたもの）による。要約は手法の名前にとどめたので、執筆時に内容を確かめる"
+  - "00 の polygon-geometry（多角形の面積・内外判定・Pick・最近点対・回転キャリパー・最小包含円を束ねた項目）は convex-hull の merged_keys に入れたが、中身は geometry-vectors（面積）・circle-geometry（最小包含円）・advanced-geometry（最近点対・回転キャリパー）にも分かれている"
+  - "geometry-precision の直線の正規化は、math の rational-normalization（分数・傾きを既約にして扱う。gcd-lcm の節）と内容が重なる。math は分数一般、geometry は方向・直線の正規化と幾何の例題、という分担を提案する"
+  - "manhattan-chebyshev は basics の median-absolute（絶対値の和と中央値）・independence（x と y を独立に）、00 の checkerboard-parity（市松模様）と重なる。幾何の文脈（45度回転・距離の和・斜めの座標）をこちらで扱い、一般論は basics に任せる"
+  - "rotation-transform の研究上の前提 matrix-power（黄）はレベルが逆転するので related にした。abc189_e に要るのは 3×3 行列の積だけなので、本文で行列の積を短く説明する"

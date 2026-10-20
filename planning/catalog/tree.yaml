@@ -1,0 +1,847 @@
+# 目次：木（tree）。担当 C。規則は planning/catalog/README.md、上位の規則は planning/design.md §3〜§5。
+# 並び順は research/04 §2.1 の層の順（L1 木の基礎 → L2 木全体の形 → L3 パス → L4 木を列にする → L5 まとめる・分ける → L6 発展）。
+# ただし steiner-subtree（指定頂点を結ぶ最小の部分木）は本体が基礎なので L1 の tree-imos の後に置いた。
+# 木 DP・全方位木 DP・二乗の木 DP は dp（設計書 §4.2）。tree は親・深さ・部分木サイズまでを扱い、dp へリンクする。
+# 問題 ID はすべて tools/ap.py で実在を確かめた。要約は調査の裏付け（research/04・00 の表）をもとに自分の言葉で書いた。
+field: tree
+pages:
+  # ───────────── L1 木の基礎 ─────────────
+  - id: tree-basics
+    chapter: 木の基礎
+    title: 木の基本性質と表現
+    aliases: [木の定義, 森, 根付き木, 木の性質, 親の番号が自分より小さい入力]
+    type: technique
+    level: 基礎
+    level_evidence: "abc263_b (136)・abc399_c (321)・abc303_e (1113)・abc378_f (1436)。性質を知っていれば解ける問題が灰〜水に多い"
+    kind: [木]
+    prerequisites: [graph-basics, dfs]
+    related: [tree-traversal, namori-graph, tree-degree, connected-components, tree-bipartite]
+    summary: "連結で辺が N−1 本・閉路がない・2点間のパスがちょうど1本、が同じことと、辺を1本取り除く（足す）と何が起きるかなど、解くときに使える木の性質をまとめる。根の決め方や辺の値を子に寄せる小技もここに置く。"
+    signs:
+      - {type: phrase, text: "N 頂点 N−1 辺の連結グラフ・どの2頂点の間にもちょうど1つの経路"}
+      - {type: phrase, text: "p_i < i（親の番号が自分より小さい）形で木が与えられる"}
+      - {type: phrase, text: "辺を1本取り除く・1本足す・閉路をなくして森にする"}
+    acl: []
+    frequency: A
+    sections:
+      - "木の同じ意味の定義と、そこから使える事実の一覧"
+      - "入力の形（辺のリスト・親の配列・p_i < i）と根の決め方"
+      - "辺を1本取り除くと2つの成分、1本足すと閉路が1つ"
+      - "森の連結成分の数 = 頂点数 − 辺数"
+      - "辺の値を子の頂点に寄せる"
+      - "形の両極端（パスと星）でテストする"
+    merged_keys: []
+    visual: "図：辺を1本取り除くと2つに分かれ、1本足すと閉路が1つできる様子を切り替えて見せる"
+    problems:
+      - {id: abc303_e, role: example, summary: "次数3以上の頂点は元の星の中心しかありえないことと頂点数の式から、星の大きさごとの個数を逆算する"}
+      - {id: abc263_b, role: practice, summary: "親の番号を根までたどった回数（深さ）を数える"}
+      - {id: abc399_c, role: practice, summary: "森として残せる辺は N −（連結成分数）本なので、それ以外を消す本数を数える"}
+      - {id: abc378_f, role: practice, summary: "辺を1本足してできる閉路の条件を次数で言い換え、次数3の頂点の成分ごとに、接する次数2の頂点の組を数える"}
+    sources: ["04-tree §2.3（木の基本性質を道具として整理する）", "04-tree §4.1", "04-tree §5.1（tree-basics）"]
+
+  - id: tree-traversal
+    chapter: 木の基礎
+    title: 根付き木と走査順（DFS・BFS・行きがけ／帰りがけ）
+    aliases: [木の探索, DFS 順, 行きがけ順, 帰りがけ順, BFS 順, 部分木サイズ, 深さ]
+    type: technique
+    level: 基礎
+    level_evidence: "abc270_c (625)・abc213_d (710)・abc309_e (957)・abc146_d (1192) で、根を決めた DFS・BFS と親・深さ・部分木サイズだけで解ける。abc133_e (1505) が水の応用"
+    kind: [木, グラフ探索]
+    prerequisites: [tree-basics, dfs, bfs]
+    related: [euler-tour, tree-dp, cpp-stack-depth, cpp-recursive-lambda]
+    summary: "根を決めて DFS か BFS をすると、親・深さ・部分木サイズ・行きがけ順・帰りがけ順が O(N) で求まる。帰りがけ順（または BFS 順の逆）で子の結果を親へ集約するのが木 DP の土台になる。"
+    signs:
+      - {type: phrase, text: "頂点1を根とする根付き木で、部分木の頂点数・和・最大を求める"}
+      - {type: phrase, text: "子孫・祖先・訪問順を答える"}
+    acl: []
+    frequency: A
+    sections:
+      - "親・深さ・部分木サイズを求める"
+      - "行きがけ順と帰りがけ順（子から親へ集約する）"
+      - "BFS 順の逆で再帰を使わずに集約する"
+      - "p_i < i なら番号の逆順で足りる"
+      - "再帰の深さ（パス状の木）と非再帰の書き方"
+      - "一般の木 DP は DP の章へ"
+    merged_keys: []
+    visual: "図：DFS のスタックの中身・行きがけ番号・帰りがけ番号を同時に表示し、BFS 順（深さ順）と切り替えて比べる（余裕があれば動く図）"
+    problems:
+      - {id: abc213_d, role: example, summary: "隣接頂点を番号の小さい順に回る DFS で、戻る動きも含めた訪問順を出力する"}
+      - {id: abc270_c, role: practice, summary: "片方の端点から DFS して親を記録し、2点間のパスを復元する"}
+      - {id: abc333_d, role: practice, summary: "頂点1の子ごとの部分木サイズを求め、最大のものだけを残す"}
+      - {id: abc309_e, role: practice, summary: "親の番号が自分より小さい入力なので、番号順に「あと何世代まで保険が及ぶか」の最大値を子へ伝える"}
+      - {id: abc146_d, role: practice, summary: "根から順に、親へ向かう辺の色だけを避けて子への辺に色を振ると、最大次数の色数で塗れる"}
+      - {id: abc133_e, role: challenge, summary: "DFS 順に色を決め、距離2以内で処理済みの頂点の数だけ選択肢が減ることを掛け合わせる"}
+    sources: ["04-tree §4.2", "04-tree §5.1（tree-traversal）"]
+
+  - id: tree-bipartite
+    chapter: 木の基礎
+    title: 木の2色塗り分けと距離の偶奇
+    aliases: [木は二部グラフ, 深さの偶奇, 距離の偶奇, 2彩色]
+    type: technique
+    level: 基礎
+    level_evidence: "abc209_d (686)・abc398_e (1238)・abc126_d (1279)・典型90問 026（★4）"
+    kind: [木]
+    prerequisites: [tree-traversal, bipartite-graph]
+    related: [tree-distance, parity]
+    summary: "木は閉路がないので深さの偶奇で必ず2色に塗れ、2点の距離の偶奇は深さの和の偶奇で分かる。多い方の色が N/2 個以上あることや、色の違う組の数を使う問題に効く。"
+    signs:
+      - {type: phrase, text: "距離の偶奇・2人が同時に動いて出会う場所"}
+      - {type: phrase, text: "辺の重みの偶奇で頂点を塗り分ける"}
+      - {type: phrase, text: "独立集合を N/2 個以上選ぶ・二部グラフのまま辺を足す"}
+    acl: []
+    frequency: B
+    sections:
+      - "深さの偶奇で塗る（重みがあるなら重みの偶奇で）"
+      - "距離の偶奇は LCA なしで深さだけで分かる"
+      - "多い方の色は N/2 個以上"
+      - "色の違う組の数（二部グラフのまま足せる辺）"
+    merged_keys: []
+    visual: "図：深さの偶奇で色分けした木。2点を選ぶと距離と色の組み合わせが表示される"
+    problems:
+      - {id: abc209_d, role: example, summary: "2点の距離の偶奇で出会う場所（町か道路）が決まり、偶奇は深さの和で分かる"}
+      - {id: typical90_z, role: practice, summary: "2色に塗ると多い方の色は N/2 個以上あり、同じ色どうしは隣接しないので独立集合になる"}
+      - {id: abc398_e, role: practice, summary: "色の違う頂点の組のうち辺のない組の数の偶奇で、先手と後手のどちらを選ぶかを決める"}
+      - {id: abc126_d, role: practice, summary: "辺の重みが偶数なら同じ色、奇数なら違う色という規則で DFS しながら塗る"}
+    sources: ["04-tree §4.3", "04-tree §5.1（tree-bipartite）"]
+
+  - id: tree-distance
+    chapter: 木の基礎
+    title: 木の上の距離（1点・2点から／根からの累積）
+    aliases: [木の距離, 根からの累積, XOR 距離, 追いかけっこ]
+    type: technique
+    level: 基礎
+    level_evidence: "1点からの距離は abc070_d (1182)。2点からの比較は abc148_f (1457)、根からの XOR は abc201_e (1694)・arc045_c (2022)"
+    kind: [木]
+    prerequisites: [tree-traversal]
+    related: [lca, tree-path, tree-diameter, xor-path]
+    summary: "木では2点間のパスが一意なので、重み付きでも DFS 1回で1点からの距離が求まる。2点からの距離を比べる型と、根からの累積値で2点間の値を表す型（XOR なら LCA がいらない）を扱う。"
+    signs:
+      - {type: phrase, text: "頂点 K を経由する最短距離"}
+      - {type: phrase, text: "2人の追いかけっこ・どちらが先に着くか"}
+      - {type: phrase, text: "パス上の辺の重みの XOR"}
+    acl: []
+    frequency: B
+    sections:
+      - "1点からの距離（ダイクストラはいらない）"
+      - "2点からの距離を比べる"
+      - "根からの累積値で2点間を表す（XOR は LCA が不要、和は LCA が要る）"
+    merged_keys: []
+    visual: "図：2点からの距離を色の濃淡で塗り、どちらに近いかの境目（パスの中点）を見せる"
+    problems:
+      - {id: abc070_d, role: example, summary: "経由点 K から全頂点への距離を1回の DFS で前計算し、各クエリを2つの距離の和で答える"}
+      - {id: abc148_f, role: practice, summary: "2人それぞれからの距離を求め、逃げる側が先に着ける頂点のうち鬼から最も遠い所までの手数を求める"}
+      - {id: abc201_e, role: practice, summary: "根からの XOR を前計算すると2点間の XOR はその XOR になり、全組の和はビットごとに数える"}
+      - {id: arc045_c, role: challenge, summary: "2点間の XOR は根からの XOR どうしの XOR なので、値ごとの個数から XOR が X になるパスを数える"}
+    sources: ["04-tree §4.4", "04-tree §5.1（tree-distance）"]
+
+  - id: tree-imos
+    chapter: 木の基礎
+    title: 木の上の累積和・いもす法
+    aliases: [木上のいもす法, 部分木加算, パス加算, 木上の累積和]
+    type: technique
+    level: 基礎
+    level_evidence: "部分木への一括加算は abc138_d (920)、根の向きを自分で決める応用が abc187_e (1358)。パスへの加算は LCA を使うので青の節"
+    kind: [木, 累積和・差分]
+    prerequisites: [tree-traversal, imos]
+    related: [euler-tour, lca, tree-path]
+    summary: "部分木への加算をまとめて受けてから値を出力するなら、部分木の根に印を置いて根から下へ累積する。パスへの加算は端点と LCA に印を置いて葉から上へ累積する（青）。途中で値を聞かれるならオイラーツアーを使う。"
+    signs:
+      - {type: phrase, text: "部分木の全頂点に x を加算するクエリがたくさん来て、最後に全頂点の値を出力する"}
+      - {type: phrase, text: "辺のどちら側かの頂点すべてに加算する"}
+      - {type: phrase, text: "多数のパスに沿って +1 し、各辺・各頂点を通った回数を求める"}
+    acl: []
+    frequency: B
+    sections:
+      - "部分木への加算（根から下へ累積する）"
+      - "辺の片側への加算を子の部分木への加算に直す"
+      - "根から y 世代までに及ぶ値を伝える"
+      - "パスへの加算（LCA に印を置いて葉から上へ累積する）（青）"
+      - "途中で値を聞かれるならオイラーツアーと BIT"
+    merged_keys: []
+    visual: "図：印をつける段階と、根から下へ（または葉から上へ）累積する段階を並べ、配列のいもす法と対比する"
+    problems:
+      - {id: abc138_d, role: example, summary: "部分木への加算を根の頂点に印として足しておき、最後に根から下へ累積する"}
+      - {id: abc187_e, role: practice, summary: "辺の片側への加算を「子の部分木へ加算」か「全体へ加算して子の部分木から引く」に直して累積する"}
+      - {id: abc222_e, role: practice, summary: "決まった順に移動したときに各辺を通る回数を数え、赤と青の差がちょうど K になる塗り方を部分和 DP で数える"}
+    sources: ["04-tree §4.5", "04-tree §5.1（tree-imos）"]
+
+  - id: steiner-subtree
+    chapter: 木の基礎
+    title: 指定頂点を結ぶ最小の部分木
+    aliases: [最小シュタイナー木（木）, 指定頂点を含む最小の部分木, 必要な辺の数]
+    type: technique
+    level: 基礎
+    level_evidence: "1回だけなら abc368_d (816)。多数のクエリを DFS 順と LCA で答える版は典型90問 035（★7）で黄の節"
+    kind: [木]
+    prerequisites: [tree-traversal]
+    related: [lca, euler-tour, auxiliary-tree, leaf-first, steiner-tree]
+    summary: "指定した K 頂点をすべて含む最小の連結な部分グラフは一意な部分木で、指定頂点の1つを根にして「部分木に指定頂点を含む頂点」を残せば求まる。クエリが多いときは指定頂点を DFS 順に並べ、隣り合う2点の距離の和の半分が辺の数になる（黄）。"
+    signs:
+      - {type: phrase, text: "指定した K 頂点をすべて連結に保つのに必要な最小の頂点数・辺数"}
+      - {type: phrase, text: "K の合計が N 程度のクエリで、毎回指定頂点を結ぶ部分木の大きさを答える"}
+    acl: []
+    frequency: B
+    sections:
+      - "指定頂点を根にして、部分木に指定頂点を含むかで判定する"
+      - "指定されていない葉を削り続ける"
+      - "DFS 順に並べて隣り合う2点の距離の和の半分（黄）"
+      - "一般のグラフのシュタイナー木は別物（グラフの章）"
+    merged_keys: []
+    visual: "図：指定頂点を DFS 順にたどって1周すると、部分木の各辺をちょうど2回通ることを示す"
+    problems:
+      - {id: abc368_d, role: example, summary: "指定頂点の1つを根にして DFS し、部分木に指定頂点を含む頂点だけを数える"}
+      - {id: typical90_ai, role: challenge, summary: "指定頂点を DFS 順に並べ、隣り合う2点（最後と最初も）の距離の和の半分を必要な辺の数として答える"}
+    sources: ["04-tree §4.25", "04-tree §5.1（steiner-subtree）"]
+
+  - id: leaf-first
+    chapter: 木の基礎
+    title: 葉から考える（葉の削除・葉から決める貪欲）
+    aliases: [葉から貪欲, 葉を刈る, 次数1の頂点を削る, トポロジカル順に葉から]
+    type: technique
+    level: 水
+    level_evidence: "abc459_e (1298)・abc397_e (1484) で葉から情報を送る発想が要る。黄に abc345_f (2157)"
+    kind: [木, 貪欲]
+    prerequisites: [tree-traversal, greedy-basics]
+    related: [exchange-argument, tree-dp, namori-graph, topological-sort, tree-degree]
+    summary: "葉は辺が1本しかないので選択肢が少なく、葉から順に決めると貪欲が正しくなりやすい。次数1の頂点をキューで削っていくか、帰りがけ順に葉から情報を上へ送り、正しさは交換論法で示す。"
+    signs:
+      - {type: phrase, text: "木を K 頂点ずつのパスに分ける"}
+      - {type: phrase, text: "辺をすべて使う・すべて覆う"}
+      - {type: phrase, text: "葉を消していく操作・部分木で余った個数を上へ送る"}
+    acl: []
+    frequency: B
+    sections:
+      - "次数1の頂点をキューで削る"
+      - "帰りがけ順に葉から情報を上へ送る"
+      - "葉の唯一の辺を今使ってよい理由（交換論法）"
+      - "木の最大マッチング（葉と親を組む）"
+    merged_keys: []
+    visual: "図：次数1の頂点をキューに入れて削っていくステップ送り（キューと残りの次数を表示）"
+    problems:
+      - {id: abc459_e, role: example, summary: "部分木で余る個数を末端から集め、そのつど二項係数を掛けていく"}
+      - {id: abc397_e, role: example, summary: "葉から未完成のパスの長さを親へ送り、K に達したら切り離す。2本を合わせるときはちょうど K でなければ失敗"}
+      - {id: abc345_f, role: challenge, summary: "全域森を作り、葉の辺から順に、その葉のランプを点けるためにその辺を使うかを決める"}
+    sources: ["04-tree §4.6", "04-tree §5.1（leaf-first）"]
+
+  - id: tree-degree
+    chapter: 木の基礎
+    title: 次数と次数列（木を作れる条件・プリューファー列）
+    aliases: [次数列, プリューファー列, Prüfer code, 握手補題, 星]
+    type: technique
+    level: 青
+    level_evidence: "次数を数えるだけの問題は abc303_e (1113)・abc385_e (1406) と易しいが、次数列から木を作れる条件を使う abc359_f (1792)・abc239_f (1959) が青"
+    kind: [木, 数え上げ]
+    prerequisites: [tree-basics, leaf-first]
+    related: [cayley-pruefer, tree-construction, matrix-tree-theorem]
+    summary: "各次数が1以上で和が 2N−2 ならその次数列の木が必ず作れることを、プリューファー列（最小番号の葉を消して隣を記録する列）との対応で説明する。次数だけで分かる形の性質と、次数を配る最適化・木の構築に使う。"
+    signs:
+      - {type: phrase, text: "各頂点の次数を決めて木を作る・次数の和が 2N−2"}
+      - {type: phrase, text: "次数が○以下の木・星や雪の結晶など次数で決まる形"}
+    acl: []
+    frequency: B
+    sections:
+      - "次数だけで分かること（葉の数・星の中心）"
+      - "次数列から木を作れる条件"
+      - "プリューファー列と頂点の出現回数（次数 − 1）"
+      - "次数を配る最適化"
+      - "木の数え上げ（Cayley の公式）は数え上げの章、全域木の個数はグラフの章の行列木定理"
+    merged_keys: []
+    visual: "図：最小番号の葉を消してその隣を記録する、プリューファー列の生成と復元のステップ送り"
+    problems:
+      - {id: abc359_f, role: example, summary: "各次数が1以上で和が 2N−2 なら木が作れるので、コストの増分が小さい頂点へ順に次数を配る"}
+      - {id: abc385_e, role: practice, summary: "中心にする頂点を全探索し、隣の頂点の次数を大きい順に並べて、作れる形の頂点数の最大を求める"}
+      - {id: abc239_f, role: practice, summary: "次数の和と閉路の有無を確かめたうえで、次数の足りない連結成分どうしをつないで木を完成させる"}
+    sources: ["04-tree §4.7", "04-tree §5.1（tree-degree）", "07-math-comb §4.4（cayley-pruefer）"]
+
+  # ───────────── L2 木全体の形 ─────────────
+  - id: tree-diameter
+    chapter: 木全体の形
+    title: 木の直径と最遠点
+    aliases: [直径, 最遠点, 離心数, double sweep, 2回の BFS, 木の中心, 半径]
+    type: technique
+    level: 水
+    level_evidence: "求め方そのものは abc428_e (1167)・abc361_e (1213)・abc019_4 (1378)。性質の応用は青（abc401_f 1666・abc267_f 1939・abc460_f 1987）、中心を軸に数える abc221_f (2093) は黄"
+    kind: [木]
+    prerequisites: [tree-traversal, tree-distance]
+    related: [rerooting, tree-centroid, lca, long-path-decomposition, tree-construction]
+    summary: "直径（最も遠い2点を結ぶパス）は、任意の点から最も遠い点 a を求め、a から最も遠い点 b を求めれば a–b になる（辺の重みが非負のとき）。各点の最遠点は直径の端点のどちらかになる性質と、直径の中点（中心）を使う応用を扱う。"
+    signs:
+      - {type: phrase, text: "最も遠い2頂点・最長のパス"}
+      - {type: phrase, text: "全頂点を訪れる最短の移動（戻らなくてよい）"}
+      - {type: phrase, text: "各頂点から最も遠い頂点・2つの木をつないだときの直径"}
+    acl: []
+    frequency: A
+    sections:
+      - "2回の最遠点探索が正しい理由"
+      - "各点の最遠点は直径の端点（離心数）"
+      - "全頂点を回る最短 = 2 × 辺の総和 − 直径"
+      - "負の重みなら木 DP（DP の章）"
+      - "直径の端点を根にして距離 K の頂点を探す（青）"
+      - "2つの木をつないだ直径（青）"
+      - "中心と半径・直径の個数（黄）"
+    merged_keys: [tree-center]
+    visual: "動く図：1回目の探索の最遠点が直径の端になる様子のステップ送りと、直径を横一列に並べて残りを枝としてぶら下げる描き直し"
+    problems:
+      - {id: abc428_e, role: example, summary: "各頂点から最も遠い頂点は直径の端点のどちらかで、番号の大きい方を優先する工夫が要る"}
+      - {id: abc361_e, role: example, summary: "全都市を回る最短距離は「辺の重みの総和の2倍 − 直径」"}
+      - {id: typical90_c, role: practice, summary: "辺を1本足してできる閉路の長さは「パスの長さ + 1」なので、直径 + 1 が答え"}
+      - {id: abc019_4, role: practice, summary: "距離を質問できる対話形式で、任意の点からの最遠点を探し、そこからもう一度最遠点を探す"}
+      - {id: abc447_f, role: practice, summary: "次数の条件つきの最長パスを、パスの最も浅い頂点で場合分けし、子の長さの上位2つから求める"}
+      - {id: abc401_f, role: practice, summary: "直径の両端からの距離で各頂点の離心数を求め、2つの木をつないだ直径の全組の和をソートと累積和で数える"}
+      - {id: abc460_f, role: practice, summary: "最遠点対（直径）の性質と、頂点番号順に並べたセグ木を組み合わせて質問に答える"}
+      - {id: abc221_f, role: challenge, summary: "直径の中心で木を分け、異なる枝から深さが半径の頂点を2つ以上選ぶ方法を数える"}
+    sources: ["04-tree §4.11・§4.12", "04-tree §5.1（tree-diameter・tree-center）", "00-curriculum §2.3.8（abc460_f）"]
+
+  - id: tree-centroid
+    chapter: 木全体の形
+    title: 木の重心
+    aliases: [重心, centroid, 重み付き重心]
+    type: technique
+    level: 黄
+    level_evidence: "重心の性質が本質の abc362_f (2186)、重心分解の abc291_h (2097)。易しい使い方として abc348_e (1347) の重み付き重心"
+    kind: [木]
+    prerequisites: [tree-traversal]
+    related: [centroid-decomposition, tree-diameter, rerooting]
+    summary: "重心は取り除いたときに残る成分の大きさがすべて N/2 以下になる頂点で、1個か隣接する2個ある。部分木サイズから O(N) で求まり、全点への距離の和の最小化、全ペアが重心を通るペアの作り方、重心分解に使う。"
+    signs:
+      - {type: phrase, text: "全頂点への（重み付き）距離の和を最小にする頂点"}
+      - {type: phrase, text: "ペアを作ってパスの長さの和を最大化する"}
+      - {type: phrase, text: "どの成分も半分以下になるように分ける"}
+    acl: []
+    frequency: B
+    sections:
+      - "定義と求め方（子の部分木と親側の N − sz）"
+      - "重心は1個か隣接する2個"
+      - "全点への距離の和が重心で最小になる理由（水）"
+      - "重心で分けて別の枝どうしを組む"
+      - "中心との違い"
+    merged_keys: []
+    visual: "図：頂点を選ぶと取り除いた後の成分の大きさが出て、最大の成分の方へ1歩ずつ動くと重心で止まる"
+    problems:
+      - {id: abc348_e, role: example, summary: "根を隣へ動かしたときの増減を考え、重い側へ動けなくなった所（重み付き重心）で距離の和が最小になる"}
+      - {id: abc362_f, role: example, summary: "重心で分けると各枝は N/2 以下なので、枝ごとの頂点を並べて半分ずらして組めば全ペアが重心を通る"}
+    sources: ["04-tree §4.13", "04-tree §5.1（tree-centroid）", "04-tree §6.2（重心と中心）"]
+
+  - id: tree-edge-contribution
+    chapter: 木全体の形
+    title: 辺で切って数える（全ペアのパスの寄与）
+    aliases: [辺の寄与, 主客転倒（木）, 全点対の距離の和]
+    type: technique
+    level: 水
+    level_evidence: "abc214_d (1341)・典型90問 039（★5）が基本。応用は abc201_e (1694)・abc173_f (1892)・abc149_f (2208)"
+    kind: [木, 考察]
+    prerequisites: [tree-traversal, contribution]
+    related: [rerooting, centroid-decomposition, small-to-large, union-find-applications, linearity-of-expectation]
+    summary: "全ペアのパスについての量の和を、各辺（頂点）が何ペアのパスに含まれるかで数え直す。辺で切った両側の大きさが s と N−s ならその辺を通るペアは s(N−s) 個で、パス上の最大値の和は辺を重みの小さい順に併合して数える。"
+    signs:
+      - {type: phrase, text: "すべての i < j について f(i, j) の総和"}
+      - {type: phrase, text: "全ペアのパス上の最大値（最小値）の和"}
+      - {type: constraint, text: "N ≤ 2×10^5 で全ペアを調べると間に合わない"}
+    acl: [dsu]
+    frequency: B
+    sections:
+      - "辺を通るペアは s(N−s) 個"
+      - "パス上の最大値の和（重みの小さい順に Union-Find で併合する）"
+      - "森の成分数 = 頂点数 − 辺数 に分けて数える"
+      - "期待値・特定の色を通らないパスへの応用（黄）"
+    merged_keys: []
+    visual: "図：辺を1本ずつ切って左右の頂点数と積を表示し、総和が積み上がっていく様子"
+    problems:
+      - {id: typical90_am, role: example, summary: "辺で切った両側の頂点数が s と N−s なら、その辺を通るペアは s(N−s) 個。全辺で足すと距離の総和"}
+      - {id: abc214_d, role: example, summary: "辺を重みの小さい順に Union-Find で併合し、併合した瞬間に両側の大きさの積と重みを掛けて足す"}
+      - {id: abc479_e, role: practice, summary: "木の DFS で部分木サイズを求め、辺の寄与で数える"}
+      - {id: abc173_f, role: practice, summary: "森の連結成分数 = 頂点数 − 辺数 に分け、各頂点・各辺を含む区間の個数を数えて足す"}
+      - {id: abc149_f, role: challenge, summary: "各頂点について周りの各方向にある頂点数から確率を求めて足す（期待値の線形性）"}
+    sources: ["04-tree §4.8", "04-tree §5.1（tree-edge-contribution）", "00-curriculum §2.3.8（abc479_e）"]
+
+  - id: complete-binary-tree
+    chapter: 木全体の形
+    title: 完全二分木（ヒープ番号の木）
+    aliases: [完全二分木, ヒープ番号, 親は i/2, K 分木]
+    type: technique
+    level: 水
+    level_evidence: "移動の基本は abc243_d (758)・abc465_d (839)。距離ごとの頂点数を数える abc321_e (1627) が青との境目"
+    kind: [木, ビット演算]
+    prerequisites: [tree-basics, bit-operations]
+    related: [lca, tree-path, segment-tree]
+    summary: "頂点 i の子が 2i と 2i+1、親が ⌊i/2⌋ の木では、深さが log N 程度しかないので N が 10^18 でも祖先を全部たどれる。番号の2進表記と道順の対応、番号だけで求める LCA・距離をまとめる。"
+    signs:
+      - {type: phrase, text: "頂点 i と ⌊i/2⌋ を結ぶ・L/R/U の移動の列"}
+      - {type: constraint, text: "N ≤ 10^18 の木"}
+    acl: []
+    frequency: B
+    sections:
+      - "番号の2進表記と根からの道順"
+      - "L/R/U の移動はスタックで打ち消す"
+      - "番号だけで LCA を求める（大きい方を2で割る）"
+      - "距離 K の頂点の数（部分木の深さの範囲を N で切る）（青）"
+      - "K 分木への一般化"
+    merged_keys: []
+    visual: "図：番号と2進表記を並べた完全二分木。L/R/U の移動が2進表記の末尾の付け外しになることを見せる"
+    problems:
+      - {id: abc243_d, role: example, summary: "L・R の直後の U は打ち消し合うのでスタックで消してから、残った移動を番号の計算で行う"}
+      - {id: abc321_e, role: example, summary: "自分の部分木で深さ K の頂点数に、祖先へ上がるたびに反対側の子の部分木で深さが合う頂点数を足す"}
+      - {id: abc465_d, role: practice, summary: "K 分木の2頂点について、割り算で親へ上がりながら LCA を求める"}
+    sources: ["04-tree §4.9", "04-tree §5.1（complete-binary-tree）", "00-curriculum §2.3.8（abc465_d）"]
+
+  - id: tree-construction
+    chapter: 木全体の形
+    title: 木の構築・復元（条件を満たす木を作る）
+    aliases: [木の構築, 木の復元, 距離の表から木, 訪問順から木]
+    type: technique
+    level: 青
+    level_evidence: "abc451_e (1215)・abc478_f (1588) は水だが、abc239_f (1959)・agc005_c (1976) が青"
+    kind: [木, 考察]
+    prerequisites: [tree-basics, tree-degree, tree-diameter]
+    related: [graph-construction, minimum-spanning-tree, construction]
+    summary: "距離の情報・次数の条件・訪問順などから、条件を満たす木を作る（元の木を復元する、何通りあるか数える）型をまとめる。作った木が本当に条件を満たすかの確認と、存在しない場合の判定条件が要になる。"
+    signs:
+      - {type: phrase, text: "条件を満たす木を1つ出力せよ（なければ −1）"}
+      - {type: phrase, text: "距離の情報から木を復元できるか"}
+      - {type: phrase, text: "訪問順（DFS 順）から元の木が何通りあるか"}
+    acl: [dsu]
+    frequency: B
+    sections:
+      - "距離の情報から作る（最も近い頂点とは辺で結ばれる）"
+      - "次数の条件から作る（次数の足りない成分どうしをつなぐ）"
+      - "最遠距離の列から直径を決める"
+      - "訪問順から親の候補を数える"
+      - "作った木を必ず確かめる"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: abc451_e, role: example, summary: "各頂点に最も近い頂点とは辺で結ばれることから、距離の短い順に閉路を作らない辺を選んで木を作り、全点から確かめる"}
+      - {id: abc478_f, role: example, summary: "訪問順から各頂点の親になれる頂点の範囲が分かり、その個数の積で木の数を数える"}
+      - {id: abc239_f, role: practice, summary: "与えられた辺と次数の条件を満たすように、次数の足りない成分どうしをつないで木を完成させる"}
+      - {id: agc005_c, role: practice, summary: "最遠距離の最大値から直径を決め、直径上の位置ごとに必要な個数の条件を確かめる"}
+      - {id: abc252_g, role: challenge, summary: "決まった規則の DFS で与えられた順になる木の数を、区間 DP で数える"}
+    sources: ["04-tree §4.33", "04-tree §5.1（tree-construction）"]
+
+  # ───────────── L3 パス（祖先方向） ─────────────
+  - id: lca
+    chapter: パス
+    title: 最小共通祖先（LCA）
+    aliases: [LCA, Lowest Common Ancestor, 最近共通祖先, 木のダブリング, k 個上の祖先, level ancestor]
+    type: technique
+    level: 青
+    level_evidence: "abc294_g (1702)・abc014_4 (1856)・abc152_f (1965) と青に集まる。k 個上の祖先は abc267_f (1939)"
+    kind: [木, ダブリング・分割統治]
+    prerequisites: [tree-traversal, doubling]
+    related: [tree-path, euler-tour, sparse-table, hld, complete-binary-tree, bottleneck-path]
+    summary: "根付き木で2頂点の共通の祖先のうち最も深いものを、各頂点の 2^k 個上の祖先の表（ダブリング）で、前処理 O(N log N)・1回 O(log N) で求める。2点間の距離、k 個上の祖先、パス上の最大値などの集約にそのまま使える。"
+    signs:
+      - {type: phrase, text: "木の2頂点の距離をクエリでたくさん聞かれる"}
+      - {type: constraint, text: "パス u–v に関するクエリが Q ≤ 2×10^5 個"}
+      - {type: phrase, text: "ちょうど距離 K の頂点・K 個上の祖先"}
+    acl: []
+    frequency: A
+    sections:
+      - "深さをそろえてから同時に跳ぶ"
+      - "距離 = dep(u) + dep(v) − 2 dep(lca)"
+      - "k 個上の祖先（k を2進数に分けて跳ぶ）"
+      - "パス上の最大値・和を表と一緒に持つ"
+      - "条件を満たす最も遠い祖先"
+      - "LCA の求め方の比較（ダブリング・オイラーツアーと Sparse Table・HL 分解・オフライン）"
+    merged_keys: [binary-lifting-tree]
+    visual: "動く図：深さをそろえてから 2^k 個上へ同時に跳ぶステップ送り。ダブリングの表を横に表示する"
+    problems:
+      - {id: abc014_4, role: example, summary: "辺 (a, b) を足してできる閉路の長さは a–b の距離 + 1。距離を深さと LCA で求める"}
+      - {id: abc267_f, role: example, summary: "最も遠い点は直径の端点なので、端点を根にした木で K 個上の祖先を求める"}
+      - {id: abc235_e, role: practice, summary: "最小全域木のパス上の最大の辺と比べる。パス上の最大をダブリングで求めてもよい"}
+      - {id: abc294_g, role: practice, summary: "根からの距離の式に LCA を使い、辺の重みの変更を子の部分木への区間加算として BIT で扱う"}
+    sources: ["04-tree §4.14・§4.16", "04-tree §5.1（lca・binary-lifting-tree）", "04-tree §6.2（LCA の求め方）"]
+
+  - id: tree-path
+    chapter: パス
+    title: 木上のパスの扱い（距離・パス上の判定・交差・合流点）
+    aliases: [パスクエリ, 2頂点間のパス, パスの分解, 合流点, 根の付け替え]
+    type: technique
+    level: 青
+    level_evidence: "パスを辺の集合として扱う abc152_f (1965)。黄の abc133_f (2330)、発展の abc298_h (2792)"
+    kind: [木]
+    prerequisites: [lca, tree-distance]
+    related: [euler-tour, hld, inclusion-exclusion, tree-imos]
+    summary: "パス u–v を「u から LCA へ上る」と「LCA から v へ下る」に分け、点がパス上にあるか、3点の合流点、2本のパスが交わるか、パス上の k 番目の頂点などを LCA と距離の式で判定する道具をまとめる。"
+    signs:
+      - {type: phrase, text: "u から v へのパス上の…・パスに含まれる辺"}
+      - {type: phrase, text: "2本のパスが交わるか・共通部分"}
+      - {type: phrase, text: "どちらの端点に近いか（パスの中点）"}
+    acl: []
+    frequency: B
+    sections:
+      - "点 x がパス上にあるか（d(u,x) + d(x,v) = d(u,v)）"
+      - "3点の合流点と根の付け替え"
+      - "2本のパスの交差"
+      - "パス上の k 番目の頂点"
+      - "頂点の値と辺の値で LCA の扱いが違う"
+      - "パスを辺の集合として扱う（包除原理）"
+      - "パスへの一括更新があるなら HL 分解（発展）"
+    merged_keys: []
+    visual: "図：パス u–v を「u から LCA へ上る線」と「LCA から v へ下る線」の2本に分解する図と、3点の合流点"
+    problems:
+      - {id: abc152_f, role: example, summary: "M ≤ 20 本のパスをそれぞれ辺のビット集合にし、条件を満たす塗り方を包除原理で数える"}
+      - {id: abc133_f, role: practice, summary: "距離を根からの距離と LCA で表し、パス上の色 X の辺の本数と長さの和を差し替える（オフラインの DFS で数える）"}
+      - {id: abc298_h, role: challenge, summary: "2点のどちらに近いかの境目をパス上の1点として求め、部分木の大きさと祖先の累積で距離の和を計算する"}
+    sources: ["04-tree §4.15", "04-tree §5.1（tree-path）"]
+
+  - id: root-path-dfs
+    chapter: パス
+    title: 根からのパスを DFS で持ち回る（巻き戻し・履歴の木）
+    aliases: [DFS の巻き戻し, undo, ロールバック, 版の木, 操作の履歴を木にする]
+    type: technique
+    level: 青
+    level_evidence: "基本は abc198_e (1161)。abc273_e (1624)・abc165_f (1843) が青、abc218_g (2217) が黄、abc302_h (2407) が発展"
+    kind: [木, クエリ処理の工夫]
+    prerequisites: [tree-traversal]
+    related: [euler-tour, persistent-data-structures, rollback-union-find, lis]
+    summary: "DFS で頂点に入るときにデータ構造へ情報を足し、出るときに元に戻すと、常に「根から今の頂点までのパス」の情報だけを持てる。パス上の色の数・LIS・中央値などを全頂点について求め、操作の履歴を木にして巻き戻す型にも使う。"
+    signs:
+      - {type: phrase, text: "根から頂点 v までのパス上の…を、すべての v について求める"}
+      - {type: phrase, text: "祖先の情報だけで決まる値"}
+      - {type: phrase, text: "操作を元に戻す・保存した状態に戻る"}
+    acl: []
+    frequency: B
+    sections:
+      - "DFS のスタックは根からのパス"
+      - "変更の記録と巻き戻し（後に変えたものから戻す）"
+      - "パス上の LIS・中央値・種類数"
+      - "操作の履歴を木にする（版の木）"
+      - "経路圧縮つきの Union-Find は戻せない（取り消せる Union-Find はデータ構造の章、発展）"
+    merged_keys: []
+    visual: "図：DFS のスタックと、データ構造の中身・変更の記録を並べたステップ送り（入るときに変更、出るときに戻す）"
+    problems:
+      - {id: abc198_e, role: example, summary: "根から DFS しながら色の出現回数を足し、戻るときに引く。今の頂点の色が1回目なら良い頂点"}
+      - {id: abc165_f, role: example, summary: "LIS の配列の1か所の更新を記録しておき、DFS で頂点を出るときに元に戻す"}
+      - {id: abc273_e, role: practice, summary: "数列の履歴を木（各版が親を指す）として持ち、追加・削除・保存・読み込みをポインタの移動で処理する"}
+      - {id: abc218_g, role: challenge, summary: "根からのパス上の値を BIT（または2つの multiset）に出し入れして葉での中央値を求め、ミニマックスで答える"}
+      - {id: abc302_h, role: challenge, summary: "DFS で併合と取り消しをする（経路圧縮なしの取り消せる Union-Find）"}
+    sources: ["04-tree §4.17", "04-tree §5.1（root-path-dfs）"]
+
+  # ───────────── L4 木を列にする ─────────────
+  - id: euler-tour
+    chapter: 木を列にする
+    title: オイラーツアー（DFS 順で部分木を区間にする）
+    aliases: [オイラーツアー, Euler Tour, 行きがけ順の番号付け, in/out, 木の平坦化, tree flattening, 辺のオイラーツアー]
+    type: technique
+    level: 青
+    level_evidence: "abc202_e (1638)・abc294_g (1702)（設計書 §4.3 で青）。入口は木のいもす法と abc406_f (1470)。黄に abc337_g (2080)"
+    kind: [木, 区間クエリ]
+    prerequisites: [tree-traversal, fenwick-tree]
+    related: [segment-tree, lazy-segment-tree, tree-imos, lca, hld, small-to-large, mo-algorithm]
+    summary: "DFS の行きがけ順に番号 in[v] を振り、子孫を回り終えた時点の番号 out[v] を記録すると、v の部分木が列の区間 [in[v], out[v]) になり、部分木の和や加算を BIT・セグ木の区間クエリで扱える。辺の重みを子の部分木への加算と見れば、根からのパスも扱える。"
+    signs:
+      - {type: phrase, text: "部分木の和・最大・個数を、更新を挟みながら聞かれる"}
+      - {type: phrase, text: "部分木に加算する・辺を取り除いたときの片側の和"}
+      - {type: phrase, text: "u が v の祖先か・v の子孫のうち深さ d のもの"}
+      - {type: phrase, text: "辺の重みの変更と2点間の距離のクエリ"}
+    acl: [fenwick_tree, segtree, lazy_segtree]
+    frequency: A
+    sections:
+      - "「オイラーツアー」の4つの意味"
+      - "部分木が区間になる理由と in・out の定義"
+      - "祖先の判定と深さごとの頂点の数"
+      - "部分木の補集合は2つの区間"
+      - "根からのパスを区間で扱う（辺の重みを子の部分木に配る）"
+      - "逆元がない演算・パスへの一括更新は HL 分解（発展）"
+      - "木上の Mo（データ構造の章）"
+    merged_keys: [euler-tour-path]
+    visual: "動く図：木と DFS 順の列を上下に並べ、頂点を選ぶとその部分木が列の区間として光る"
+    problems:
+      - {id: abc406_f, role: example, summary: "辺で分けた片側は子の部分木なので、部分木の和を DFS 順と BIT で更新しながら求める"}
+      - {id: abc202_e, role: example, summary: "深さ d の頂点を DFS 順の番号で並べ、部分木の区間に入る個数を二分探索で数える"}
+      - {id: abc294_g, role: example, summary: "根からの距離を DFS 順の列に持ち、辺の重みの変更を子の部分木への区間加算にする。2点間の距離は LCA と組み合わせる"}
+      - {id: abc240_e, role: practice, summary: "葉に DFS 順で番号を振ると、各頂点の部分木の葉が連続した区間になる"}
+      - {id: abc239_e, role: practice, summary: "部分木の上位 K 個（K ≤ 20）を求める。子の結果を併合しても、DFS 順の区間で求めてもよい"}
+      - {id: abc337_g, role: challenge, summary: "DFS 順と BIT で部分木内の小さいラベルの数を数え、部分木の補集合（2つの区間）へ加算する"}
+    sources: ["04-tree §4.18・§4.19", "04-tree §5.1（euler-tour・euler-tour-path）", "04-tree §2.4（オイラーツアーの4つの意味）", "04-tree §6.2（部分木とパスのクエリ）"]
+
+  - id: hld
+    chapter: 木を列にする
+    title: HL 分解（重軽分解）
+    aliases: [HLD, Heavy-Light Decomposition, 重軽分解, HL 分解]
+    type: overview
+    level: 発展
+    level_evidence: "設計書 §4.3 で発展。ABC で必須なのは abc460_g (2838)・abc269_h (3178) など 2400 以上だけで、abc294_g (1702) では別解。2000〜2399 で HL 分解が必須の ABC の問題は見つからなかった"
+    kind: [木, 区間クエリ]
+    prerequisites: [euler-tour, lca, segment-tree]
+    related: [lazy-segment-tree, tree-path, static-top-tree, long-path-decomposition]
+    summary: "各頂点で部分木が最大の子へ重い辺を引き、重いパスごとに番号が連続するように振ると、任意のパスが O(log N) 個の区間に分かれる。パスへの一括更新や逆元のない演算のパスの集約を、セグ木と組んで1回 O(log^2 N) で扱える。"
+    signs:
+      - {type: phrase, text: "パスへの一括更新とパスの取得が混ざる"}
+      - {type: phrase, text: "パス上の最大値（逆元のない演算）を更新つきで答える"}
+      - {type: phrase, text: "部分木とパスの両方のクエリ"}
+    acl: [segtree, lazy_segtree]
+    frequency: C
+    sections:
+      - "重い辺と軽い辺・根からの軽い辺が log N 本以下の理由"
+      - "番号の振り方（重い子を先に）とパスの区間への分解"
+      - "辺の値は子の頂点に置く・非可換な演算の向き"
+      - "いつ使うか（オイラーツアーと LCA で足りる場合との使い分け）"
+      - "自作ライブラリでの扱い"
+    merged_keys: []
+    visual: "図：重い子へ太線を引き、太線の列ごとに番号が連続する様子。パスが O(log N) 本の区間に分かれるのを示す"
+    problems:
+      - {id: abc460_g, role: example, summary: "頂点に関する更新と質問のクエリを、HL 分解とセグ木で処理する（実装が重い）"}
+      - {id: abc294_g, role: practice, summary: "辺の重みの変更と距離のクエリを、HL 分解と BIT で解く別解がある"}
+    sources: ["04-tree §4.23", "04-tree §5.1（hld）", "04-tree §7.2", "00-curriculum §2.3.8（abc460_g）"]
+
+  # ───────────── L5 まとめる・分ける ─────────────
+  - id: small-to-large
+    chapter: まとめる・分ける
+    title: マージテク（小さい方を大きい方へ移す）
+    aliases: [マージテク, small-to-large, データ構造をマージする一般的なテク, weighted union heuristic, DSU on Tree, Sack]
+    type: technique
+    level: 水
+    level_evidence: "集合の併合の基本が abc329_f (1207)・abc183_f (1586)。木の上の応用は黄（abc350_g 2058・abc359_g 2099）、DSU on Tree は abc454_g (2253)"
+    kind: [データ構造, 木]
+    prerequisites: [union-find, ordered-set]
+    related: [tree-dp, union-find-applications, merge-process-tree, auxiliary-tree, euler-tour, bottleneck-path]
+    summary: "2つの集合を併合するとき小さい方の要素を大きい方へ移すと、1つの要素が移るのは高々 log N 回なので全体で O(N log N) になる。グループの併合と種類数の問い合わせや、部分木ごとの集計（DSU on Tree）に使う。"
+    signs:
+      - {type: phrase, text: "グループの併合と、グループ内の種類数・個数の問い合わせ"}
+      - {type: phrase, text: "部分木ごとに集合（map）を持って併合する"}
+      - {type: phrase, text: "すべての部分木について、色の種類数・最頻値を求める"}
+    acl: [dsu]
+    frequency: B
+    sections:
+      - "要素が移るのは高々 log N 回の理由"
+      - "swap で入れ替える・大きい方を代表に残す"
+      - "Union-Find の代表元に map を持たせる"
+      - "森に辺を足すとき小さい方を根付け直す（黄）"
+      - "部分木ごとの集合の併合（黄、木 DP での使い方は DP の章）"
+      - "DSU on Tree（重い子の結果を残す）（黄）"
+    merged_keys: [dsu-on-tree]
+    visual: "図：2つの集合の大きさをバーで示し、要素が移るたびに所属する集合の大きさが2倍以上になることを追う"
+    problems:
+      - {id: abc329_f, role: example, summary: "箱の中の色の集合を移すとき、小さい方を大きい方へ入れてから入れ替える"}
+      - {id: abc183_f, role: example, summary: "Union-Find の代表元に「クラスごとの人数」の map を持たせ、併合では小さい方を大きい方へ足す"}
+      - {id: abc314_f, role: practice, summary: "チームの併合のたびに期待値の差分を基準値とのずれとして持ち、小さい方のメンバーだけ書き換える"}
+      - {id: abc394_g, role: practice, summary: "高い建物から順に Union-Find でつなぎ、各成分に持たせたクエリの集合を小さい方から移して、つながった時点で答える"}
+      - {id: abc350_g, role: practice, summary: "辺を足すとき小さい方の木を DFS し直して根を付け替え、親の配列で共通の隣接点を判定する"}
+      - {id: abc359_g, role: practice, summary: "色ごとの「頂点数と深さの和」を map で持ち、マージテクで併合して同色の組の距離の和を足す"}
+      - {id: abc454_g, role: challenge, summary: "部分木ごとの色の最頻値を、重い子の集計を残して軽い子を足し直す DSU on Tree で求める"}
+    sources: ["04-tree §4.20・§4.21", "04-tree §5.1（small-to-large・dsu-on-tree）", "04-tree §6.2（マージテク・DSU on Tree・Union-Find）"]
+
+  - id: centroid-decomposition
+    chapter: まとめる・分ける
+    title: 重心分解
+    aliases: [重心分解, centroid decomposition, 点分治, 木の分割統治]
+    type: technique
+    level: 黄
+    level_evidence: "重心分解の木そのものを作る abc291_h (2097)。abc359_g (2099) でも解法の一つ。出題は少ない"
+    kind: [木, ダブリング・分割統治]
+    prerequisites: [tree-centroid, divide-and-conquer]
+    related: [tree-edge-contribution, small-to-large, auxiliary-tree, convolution-ntt]
+    summary: "重心を取り、重心を通るパスをまとめて処理してから重心を消し、残った各成分で再帰する。成分の大きさが半分以下になるので深さは O(log N) で、距離がちょうど K のペアの数など、辺ごとに分けられない全ペアの量を O(N log N) で数える。"
+    signs:
+      - {type: phrase, text: "距離がちょうど K の頂点の組の個数"}
+      - {type: phrase, text: "全ペアのパスについての量で、辺ごとに分解できないもの"}
+      - {type: phrase, text: "ある頂点から距離 d 以内の頂点の集計クエリ"}
+    acl: []
+    frequency: C
+    sections:
+      - "再帰の深さが log N になる理由"
+      - "重心を通るペアを数え、同じ成分の中のペアを引く"
+      - "木全体の数え上げと、重心木を上にたどるクエリ"
+      - "距離の頻度表は畳み込みと組む（発展）"
+    merged_keys: []
+    visual: "図：重心を取って消し、残った成分で再帰する様子と、できあがる重心木（深さ log N）"
+    problems:
+      - {id: abc291_h, role: example, summary: "重心で分解していき、各成分の重心を1つ前の重心の子にすると条件を満たす根付き木になる"}
+      - {id: abc359_g, role: practice, summary: "同色の頂点の組の距離の和。重心分解・マージテク・Auxiliary Tree など複数の解法がある"}
+      - {id: keyence2019_e, role: challenge, summary: "完全グラフの最小全域木で、辺の候補を重心分解で O(N log N) 本に減らす"}
+    sources: ["04-tree §4.24", "04-tree §5.1（centroid-decomposition）", "04-tree §6.2（全ペアに関する量の手法）"]
+
+  - id: long-path-decomposition
+    chapter: まとめる・分ける
+    title: 長鎖分解（最も深い子へつなぐ分解）
+    aliases: [長鎖分解, long-path decomposition, 高さによる分解]
+    type: technique
+    level: 黄
+    level_evidence: "根から最も遠い葉を順に選ぶ貪欲を、各葉の長い鎖の長さを大きい順に取る形で解く abc369_g (2055)。O(1) の祖先ジャンプや深さを添字にする DP の高速化は発展"
+    kind: [木]
+    prerequisites: [tree-traversal, tree-diameter]
+    related: [hld, lca, tree-dp]
+    summary: "各頂点で最も深い葉に至る子を選んでつなぐ分解で、鎖の長さの和は N になる。根から最も遠い葉を順に選ぶ貪欲の値が、各葉の鎖の長さを大きい順に足した値と一致することを使う。"
+    signs:
+      - {type: phrase, text: "K 個の頂点を選んで通る辺の総長を最大化する（K = 1, 2, … のすべてについて）"}
+      - {type: phrase, text: "深さを添字にする木 DP を速くしたい（発展）"}
+    acl: []
+    frequency: C
+    sections:
+      - "最も深い子へつなぐ分解と鎖の長さの和"
+      - "最も遠い葉を順に選ぶ貪欲と、鎖の長さを大きい順に取ることの一致"
+      - "発展の用途（O(1) の祖先ジャンプ・深さを添字にする DP）"
+    merged_keys: []
+    visual: "図：各頂点から最も深い葉へ向かう子に太線を引き、鎖の長さを並べ替えて大きい順に足す様子"
+    problems:
+      - {id: abc369_g, role: example, summary: "各葉について分岐点で最大の葉以外が打ち切られた長さを求め、大きい順に足していく"}
+    sources: ["04-tree §4.27", "04-tree §5.1（long-path-decomposition）"]
+
+  - id: auxiliary-tree
+    chapter: まとめる・分ける
+    title: Auxiliary Tree（指定頂点の圧縮木）
+    aliases: [Auxiliary Tree, Virtual Tree, 虚樹, 圧縮木, LCA 木]
+    type: overview
+    level: 発展
+    level_evidence: "設計書 §4.3 で発展。想定解が Auxiliary Tree の abc340_g (2401)。abc359_g (2099) では解法の一つ"
+    kind: [木]
+    prerequisites: [lca, euler-tour, steiner-subtree, tree-dp]
+    related: [small-to-large, centroid-decomposition]
+    summary: "指定頂点の集合と、DFS 順で隣り合う2点の LCA だけを頂点にし、祖先関係を保って結んだ 2|S|−1 頂点以下の圧縮木。色ごと・クエリごとに関わる頂点数の合計が O(N) のとき、この小さな木で木 DP をすれば全体で O(N log N) になる。"
+    signs:
+      - {type: phrase, text: "色ごと・クエリごとに少数の頂点だけが関わる木 DP（頂点数の合計が O(N)）"}
+    acl: []
+    frequency: C
+    sections:
+      - "DFS 順に並べて隣り合う2点の LCA を足す"
+      - "スタックで組み立てる"
+      - "マージテク・平方分割で代用できる場合"
+    merged_keys: []
+    visual: "図：指定頂点を DFS 順に並べ、隣り合う2点の LCA を足して、祖先関係だけを残した小さな木を組み立てる手順"
+    problems:
+      - {id: abc340_g, role: example, summary: "色ごとにその色の頂点の Auxiliary Tree を作って木 DP する（マージテクの解法もある）"}
+      - {id: abc359_g, role: practice, summary: "色ごとに Auxiliary Tree を作り、辺の寄与で同色の組の距離の和を数える方法がある"}
+    sources: ["04-tree §4.26", "04-tree §5.1（auxiliary-tree）", "04-tree §7.2"]
+
+  - id: merge-process-tree
+    chapter: まとめる・分ける
+    title: 併合過程の木（Kruskal 再構築木）
+    aliases: [クラスカル再構築木, Kruskal 再構築木, Kruskal reconstruction tree, KRT, DSU-tree, Union-Find の併合の過程を表す木]
+    type: overview
+    level: 発展
+    level_evidence: "abc183_f (1586) の別解として使える。必須になるのは agc002_d (2514) など"
+    kind: [木, 連結性・全域木]
+    prerequisites: [union-find, minimum-spanning-tree, euler-tour, lca]
+    related: [bottleneck-path, small-to-large, partially-persistent-union-find, parallel-binary-search]
+    summary: "Union-Find で2つの成分を併合するたびに新しい頂点を作り、2つの成分を表す頂点をその子にした木。ある時点のグループが DFS 順の区間になり、辺を重みの順に併合すれば2点の LCA の重みが経路の最大の辺の最小値（ボトルネック）になる。"
+    signs:
+      - {type: phrase, text: "ある時点のグループについての問い合わせ（オフライン）"}
+      - {type: phrase, text: "パス上の最大の辺の最小値（ボトルネック）をオンラインで多数答える"}
+      - {type: phrase, text: "辺を重みの順に足していく過程を後から問われる"}
+    acl: [dsu]
+    frequency: C
+    sections:
+      - "併合のたびに新しい頂点を作る"
+      - "ある時点のグループは DFS 順の区間"
+      - "ボトルネックは LCA の重み"
+      - "マージテク・部分永続 Union-Find・並列二分探索との使い分け"
+    merged_keys: [kruskal-reconstruction-tree]
+    visual: "図：併合のたびに新しい頂点を作り2つの成分の代表を子にする木と、その葉が DFS 順で区間になる様子"
+    problems:
+      - {id: agc002_d, role: example, summary: "辺を番号順に併合する過程を使い、2人が合わせて z 頂点訪れられる最小の番号を求める"}
+      - {id: abc183_f, role: practice, summary: "併合過程を木にして DFS 順の区間で各時点のグループを表し、クラスごとの人数を数える別解"}
+    sources: ["04-tree §4.28", "04-tree §5.1（merge-process-tree）", "03-graph §4.E（Kruskal 再構築木）", "00-curriculum §3.2（Kruskal 再構築木）"]
+
+  # ───────────── L6 発展 ─────────────
+  - id: tree-isomorphism
+    chapter: 発展
+    title: 木の同型判定と木のハッシュ
+    aliases: [木の同型, 木のハッシュ, AHU, rooted tree hash]
+    type: overview
+    level: 発展
+    level_evidence: "ABC で本質的に使う問題は見つからなかった（abc351_g の Hash on Tree は更新つきの木 DP で別物）。Library Checker に rooted_tree_isomorphism_classification"
+    kind: [木, ハッシュ・乱択]
+    prerequisites: [tree-traversal, tree-diameter]
+    related: [hashing-for-sets, rolling-hash, static-top-tree]
+    summary: "根付き木の同型は、葉から順に「子の部分木の名前の多重集合」に名前を付ける AHU 法か、多重集合のハッシュで判定する。根のない木は中心（1〜2個）を根にして比べる。"
+    signs:
+      - {type: phrase, text: "形が同じ部分木の種類数"}
+      - {type: phrase, text: "2つの木が同じ形か（根あり・根なし）"}
+    acl: []
+    frequency: C
+    sections:
+      - "AHU 法（子の名前の多重集合に名前を付ける）"
+      - "木のハッシュと衝突しにくい設計"
+      - "根のない木は中心を根にする"
+    merged_keys: []
+    visual: "図：子の名前の多重集合を並べて新しい名前を付けていく AHU 法の手順を、葉から順に見せる"
+    problems: []
+    sources: ["04-tree §4.29", "04-tree §5.1（tree-isomorphism）"]
+
+  - id: dynamic-tree
+    chapter: 発展
+    title: 動的木（Link-Cut Tree・Euler Tour Tree・Top Tree）
+    aliases: [Link-Cut Tree, LCT, Euler Tour Tree, Top Tree, 動的木]
+    type: overview
+    level: 発展
+    level_evidence: "森への辺の追加と問い合わせの abc350_g (2058) は LCT でも解けるが、想定はマージテクや平方分割。ABC で必須の問題は見つからなかった"
+    kind: [木, データ構造]
+    prerequisites: [hld, balanced-bst]
+    related: [small-to-large, static-top-tree]
+    summary: "辺の追加と削除がある森で、パスのクエリや根の付け替えを償却 O(log N) で扱う Link-Cut Tree と、部分木のクエリ向けの Euler Tour Tree、両方を扱う Top Tree の概要。"
+    signs:
+      - {type: phrase, text: "辺の追加と削除を繰り返す森でのパスのクエリ"}
+      - {type: phrase, text: "根の付け替えがある"}
+    acl: []
+    frequency: C
+    sections:
+      - "Link-Cut Tree でできること"
+      - "Euler Tour Tree・Top Tree"
+      - "辺の追加だけならマージテク"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: abc350_g, role: practice, summary: "辺を追加しながら2頂点の共通の隣接頂点を答える。Link-Cut Tree で親を管理する解法もある"}
+    sources: ["04-tree §4.30", "04-tree §5.1（dynamic-tree）"]
+
+  - id: static-top-tree
+    chapter: 発展
+    title: Static Top Tree と木 DP の動的更新
+    aliases: [Static Top Tree, 動的木 DP, 重軽再帰 DP]
+    type: overview
+    level: 発展
+    level_evidence: "abc351_g (2920)・abc311_h (3605) などすべて 2400 以上"
+    kind: [木, DP, データ構造]
+    prerequisites: [hld, tree-dp, segment-tree]
+    related: [dynamic-dp, dynamic-tree]
+    summary: "頂点の値を書き換えるたびに木 DP の根の値を O(log N) 程度で更新する。HL 分解の重いパスの上で DP をセグ木に載せる方法と、木を「パスの圧縮」と「部分木の併合」で平衡に組み直す Static Top Tree の概要。"
+    signs:
+      - {type: phrase, text: "頂点の値を更新するたびに、木 DP の結果（根の値）を答える"}
+    acl: []
+    frequency: C
+    sections:
+      - "重いパスの上で DP をセグ木に載せる"
+      - "Static Top Tree（圧縮と併合）"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: abc351_g, role: example, summary: "頂点の値を変えるたびに木のハッシュ（木 DP の値）を答える。Static Top Tree で更新する"}
+      - {id: abc311_h, role: practice, summary: "重い子と軽い子に分けて再帰する木 DP（重軽再帰 DP）"}
+    sources: ["04-tree §4.31", "04-tree §5.1（static-top-tree）"]
+
+  - id: tree-ratio-greedy
+    chapter: 発展
+    title: 比で親に併合する貪欲（01 on Tree）
+    aliases: [01 on Tree, 木の上の順序最適化, 比による併合]
+    type: overview
+    level: 発展
+    level_evidence: "abc376_g (2858)。Library Checker の rooted_tree_topological_order_with_minimum_inversions が同じ型"
+    kind: [木, 貪欲]
+    prerequisites: [union-find, exchange-argument]
+    related: [leaf-first, priority-queue]
+    summary: "「親を子より先に選ぶ」制約つきで、順番に依存する重み付きの和を最適化する。比が最大の塊は親の塊の直後に訪れてよい（交換論法）ので、優先度付きキューと Union-Find で親の塊へ併合していく。"
+    signs:
+      - {type: phrase, text: "親を子より先に選ぶ制約つきで、順番による重み付きの和を最適化する"}
+    acl: [dsu]
+    frequency: C
+    sections:
+      - "比が最大の塊は親の直後に来てよい理由"
+      - "Union-Find と優先度付きキューで併合する"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: abc376_g, role: example, summary: "（確率の和）/（頂点数）が最大の塊は親の塊の直後に訪れてよいので、Union-Find で親へ併合していく"}
+    sources: ["04-tree §4.32", "04-tree §5.1（tree-ratio-greedy）"]
+
+moved:
+  - {key: namori-graph, to: graph, reason: "README §6・設計書 §4.2（持ち主は graph）。04 の内容（abc266_f・閉路の頂点からぶら下がる木）は graph の namori-graph に取り込み、tree-basics・leaf-first からリンクする"}
+  - {key: mo-on-tree, to: ds, reason: "README §6・設計書 §4.2（Mo のページの節）。ds の mo-algorithm が merged_keys に入れている。euler-tour の節からリンクする"}
+  - {key: tree-counting, to: comb, reason: "木の数え上げ（Cayley の公式・Prüfer 列）は comb の cayley-pruefer、行列木定理は graph の matrix-tree-theorem（設計書 §4.2）。tree-degree の節からリンクする"}
+dropped: []
+open_issues:
+  - "steiner-subtree は research/04 では L5（まとめる・分ける）だが、本体（abc368_d）が基礎なので L1 の tree-imos の後に置いた。クエリ版（典型90問 035、黄）は節にし、auxiliary-tree の前提にした"
+  - "small-to-large（マージテク）と dp の tree-dp（tree-dp-merge を統合）が重なる（abc359_g・abc183_f）。tree は技法そのもの（集合の併合・DSU on Tree）、dp は木 DP での使い方、の分担でよいか。DSU on Tree（黄）は small-to-large（水）の節にした"
+  - "tree-diameter に水・青・黄の節（中心と直径の個数は黄）が入り、例題・練習が8問になった。執筆で量が多ければ「直径の応用（青）」を別ページに分ける"
+  - "root-path-dfs の「操作の履歴を木にする」（abc273_e）は ds の persistent-data-structures（version-tree-offline を統合）と重なる。tree は DFS で巻き戻す型、ds は版の木と永続化、の分担でリンクし合う"
+  - "research/00 §2.3.8 の手法の分類だけで裏付けた問題（abc460_f・abc460_g・abc465_d・abc479_e）は、要約が手法寄りになっている。執筆時に問題の内容を第三者の解説で確かめて要約を直す"

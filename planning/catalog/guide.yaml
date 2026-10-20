@@ -1,0 +1,429 @@
+# 横断ページ（guide）の目次。担当 I。規則は planning/catalog/README.md、上位の規則は planning/design.md §2〜§5・§7。
+# - research/00 §3.1 の横断ページ（kind: cross）の18項目のうち、start に置く3つ（how-to-use・notation・atcoder-system）を除いた14ページ。
+#   cheatsheet-complexity（早見表（計算量と制約））は cheatsheet の節にした。「C++ の逆引き」は cpp（担当 H）、レベル別・種類別の一覧は lists（生成）が持つ。
+# - guide は level・frequency を持たない（level: null。frequency は書かない）。
+# - sections と visual の各行に「手書き」「生成」を書き添えた。生成は tools/gen_site.py が各ページのメタデータ・本文の問題リストから作る部分（設計書 §8.3）。
+# - research/00 の gap・gap-candidate の項目の受け渡し（moved）は、このファイルの末尾にまとめた。題材別に置く bracket-sequence・mex は patterns.yaml が取り込む。
+field: guide
+pages:
+  - id: reverse-index-constraints
+    title: 逆引き辞典（制約・計算量から）
+    aliases: [制約から解法を推測する, 計算量の目安, 制約と計算量の対応表, 制約から逆引き]
+    type: guide
+    level: null
+    kind: [案内]
+    prerequisites: []
+    related: [reverse-index-signs, cheatsheet, complexity-estimation, amortized-analysis, harmonic-series, cpp-performance]
+    summary: "N の上限などの制約から、間に合う計算量のクラスと候補の手法を引く逆引き辞典。骨格の表は手で書き、各ページの制約のサイン（signs の constraint）から候補のページの一覧を生成して添える。"
+    signs: []
+    acl: []
+    sections:
+      - "引き方：制約から許される計算量を逆算し、候補の手法を疑う。制約は作問の都合で緩いこともあるので囚われすぎない（手書き）"
+      - "1秒あたりの演算回数の目安（約 10^8〜10^9 回。定数倍・メモリアクセスで変わる。AtCoder の GCC 15.2・-O2 での実測の例を添える）（手書き）"
+      - "制約 → 許される計算量 → 候補の手法の表（N ≤ 10、20、40、80、500、5000、2×10^5、10^6、10^7、10^12、10^18）（骨格は手書き）"
+      - "各行の候補のページの一覧（生成：各ページの signs の constraint を N の帯ごとに集める）"
+      - "N = 2×10^5 のときの量の目安（log₂N ≈ 17.6、N log N ≈ 3.5×10^6、N log² N ≈ 6.2×10^7、N√N ≈ 8.9×10^7、N² = 4×10^10）（手書き）"
+      - "値や複数の制約から読めるサイン（値が 10^9 なら座標圧縮、値が 10^6 なら配列の添字、Q 個のクエリ、ΣN ≤ 2×10^5 の多重テストケース、小さい K・小さい mod）（手書き）"
+      - "見た目より速い・遅い計算量（調和級数、2乗の木 DP、累積 OR の値の種類、鳩の巣原理による打ち切り、set への std::lower_bound）（手書き）"
+      - "計算量から手法の候補を引く逆向きの表（O(log N)、O(√N)、O(N)、O(N log N)、O(N log² N)、O(N√N)、O(N²)、O(N³)、O(2^N N)、O(3^N)、O(N!)）（手書き）"
+      - "早見表（計算量と制約）・計算量の見積もりのページとの相互リンク（手書き）"
+    merged_keys: []
+    visual: "手書き：横軸に N（対数目盛）、縦に計算量のクラスを並べ、1秒の線を引いた図（SVG）。各セルから手法のページへリンク。生成：制約のサインから集めたページの一覧表"
+    problems: []
+    sources: ["00-curriculum §4.1（逆引き辞典（制約・計算量から））", "00-curriculum §6.1", "01-basics §6.1", "02-dp §6.1", "03-graph §6.1", "05-ds §6.3", "06-math-nt §6.1"]
+
+  - id: reverse-index-signs
+    title: 逆引き辞典（言い回しから）
+    aliases: [問題文のサイン, キーワードから解法, 典型の言い換え一覧, 言い回しから逆引き]
+    type: guide
+    level: null
+    kind: [案内]
+    prerequisites: []
+    related: [reverse-index-constraints, thinking-checklist, method-comparison, observation-hub, bracket-sequence, mex, permutation, xor, interval, grid, kth-and-median, operation-sequence]
+    summary: "問題文の言い回しや求めるもの（最小値の最大化、区間に一括で加算、K 番目、mod 998244353 など）から、疑う手法とページを引く逆引き辞典。表の大部分は各ページの signs（phrase）から生成し、手書きの導入と「どれから疑うか」の注記を付ける。教材の主な入口である。"
+    signs: []
+    acl: []
+    sections:
+      - "引き方と注意：サインは疑う候補の入口で、決め手ではない。まず誤読を疑う（N の大きさ、木か DAG か一般のグラフか、最大か最小か、「ちょうど」か「以下」か）（手書き）"
+      - "カテゴリ別の表（最適化・探索／区間・列／数え上げ・確率／グラフ・木／整数／文字列／ゲーム・操作・その他）：サイン → 疑う手法 → ページ（生成：各ページの signs の phrase から。カテゴリは kind から決める）"
+      - "1つのサインに複数の手法が当たるときの順序と見分け方（例：最小値の最大化 → まず答えの二分探索、単調性がなければ DP。区間に加算 → 最後にまとめて見るならいもす法、交互なら遅延セグ木）（手書き）"
+      - "題材から引く：括弧列・mex・順列・XOR・区間・グリッド・K 番目と中央値・クエリの列 → 題材別のページへ（手書き）"
+      - "状況から引く：方針が立たない → 詰まったときの発想リスト、サンプルは合うのに WA → 原因チェックリスト、規則がありそう → ストレステストと実験（手書き）"
+    merged_keys: []
+    visual: "生成：サイン → 疑う手法 → ページ の3列の表を、カテゴリごとのタブに分ける。手書きの図はない"
+    problems: []
+    sources: ["00-curriculum §4.1（逆引き辞典（言い回し・サインから））", "00-curriculum §6.2", "01-basics §6.2", "02-dp §6.1", "03-graph §6.1", "04-tree §6.1", "05-ds §6.3", "06-math-nt §6.1", "07-math-comb §6.1", "08-string-geo §6.1"]
+
+  - id: knowledge-map
+    title: 知識マップ
+    aliases: [前提関係のグラフ, 前提の地図, 依存関係の地図]
+    type: guide
+    level: null
+    kind: [案内]
+    prerequisites: []
+    related: [roadmap, how-to-use, reverse-index-signs]
+    summary: "全ページの前提関係（prerequisites）を有向グラフで描き、クリックでページへ移れる地図。分野で色分けし、レベルで段を分け、「理解した」ページと、前提をすべて理解した次の候補を塗り分ける。メタデータから自動で生成する。"
+    signs: []
+    acl: []
+    sections:
+      - "地図の読み方：頂点はページ、矢印は前提（実線は必須の前提、薄い線は関連）。考察のページは分野をまたぐ帯として描く（手書き）"
+      - "全体図・分野ごとの表示の切り替えと、レベルでの絞り込み（生成：graph.json と Cytoscape.js＋dagre）"
+      - "選んだページの前提をすべて（祖先）と、次に読むページ（子孫）だけを表示する（生成）"
+      - "「理解した」ページの色分けと、前提をすべて理解した未読のページ（次の候補）の強調（生成：localStorage の記録と突き合わせる）"
+      - "地図を読めない環境・スマホ向けの表での一覧（生成：レベル別一覧へのリンク）"
+    merged_keys: []
+    visual: "生成：graph.json（頂点＝ページ、辺＝prerequisites と related）を Cytoscape.js＋dagre で描く動く図。分野の色、レベルの段、理解度の塗り分け、タップでページへ移る"
+    problems: []
+    sources: ["00-curriculum §4.1（知識マップ）", "00-curriculum §2.4.1", "10-tech §3.4", "10-tech §3.10", "design §9.1"]
+
+  - id: roadmap
+    title: 色別ロードマップ
+    aliases: [学習順序, 何から学ぶか, 水色・青・黄色のロードマップ, 推奨ルート]
+    type: guide
+    level: null
+    kind: [案内]
+    prerequisites: []
+    related: [knowledge-map, atcoder-system, contest-strategy, practice-method, problem-sets]
+    summary: "水・青・黄の色ごとに、到達の目安（ABC で何問を何分で解くか）、読むページの列（必修・準必修・余裕があれば）、練習の方法、解いた数の進捗を示す。ページの列はレベル・前提・出題頻度から生成し、目安と練習の方法は手で書く。"
+    signs: []
+    acl: []
+    sections:
+      - "今の位置と目標：レート961・パフォーマンス1100〜1450 から、パフォーマンス2000前後を安定して出すまで（手書き）"
+      - "色ごとの到達の目安（パフォーマンス1200 は A〜D を約40分で確実に＋E を5回に2回、1600 は A〜E を約55分、2000 は A〜F を約70分）（手書き：research/00 §2.3.6〜§2.3.7 のデータ）"
+      - "黄の段でも主な条件は「青までの知識を速く確実に使うこと」（F の75%は difficulty 2000 未満）。黄の段の列には青までのページの復習を含める（手書き）"
+      - "色ごとのページの列：必修（frequency A）・準必修（B）・余裕があれば（C）を、前提の順に分野ごとに並べる（生成：level・prerequisites・frequency から）"
+      - "色ごとの練習の方法：水は E、青は F（と難しい E）、黄は難しい F と易しい G。典型90問の★5／★6／★7、EDPC・NDPC、AAL、鉄則本の B・C（手書き）"
+      - "解いた数・理解した数の進捗（生成：localStorage の記録と graph.json の問題 ID を突き合わせて色・分野ごとに集計）。データの書き出し・読み込みは使い方のページへ"
+      - "シラバスではないことの注記：ロードマップにない知識も出題される（手書き）"
+    merged_keys: []
+    visual: "生成：色ごとの段（必修・準必修・余裕があれば）に分けたページの列と、解いた数の進捗バー。手書き：目標パフォーマンスごとの「解き終える時刻」の目安の表"
+    problems: []
+    sources: ["00-curriculum §4.1（色別ロードマップ）", "00-curriculum §6.11", "00-curriculum §2.2.3", "00-curriculum §2.2.4", "00-curriculum §2.3.6", "00-curriculum §2.3.7", "10-tech §3.10"]
+
+  - id: method-comparison
+    title: 似た手法の使い分け
+    aliases: [手法の比較, どれを使うか, 使い分け, 混同しやすい手法]
+    type: guide
+    level: null
+    kind: [案内]
+    prerequisites: []
+    related: [shortest-path-overview, dp-speedup-overview, kth-element, stl-containers, reverse-index-signs, cheatsheet]
+    summary: "BFS／01-BFS／ダイクストラ、累積和／BIT／セグ木／Sparse Table のように混同しやすい手法の組を、できる操作・計算量・前提条件・オンラインかオフラインかで比べ、条件から選べるようにする。本文と並行して育てる。"
+    signs: []
+    acl: []
+    sections:
+      - "比べる観点：できる操作・計算量・実装の重さ・オンライン／オフライン・前提条件（辺の重みが非負など）・ACL の有無（手書き）"
+      - "最短路：BFS／01-BFS／ダイクストラ／ベルマンフォード／ワーシャルフロイド、最短路の拡張グラフ／DP（手書き）"
+      - "区間の集約：累積和／いもす法／BIT／セグ木／遅延セグ木／Sparse Table／平方分割、いもす法／遅延セグ木（手書き）"
+      - "二分探索：答えの二分探索／セグ木上の二分探索／BIT 上の二分探索、二分探索／尺取り法、二分探索／三分探索（手書き）"
+      - "繰り返しの高速化：周期の検出／ダブリング／行列累乗、ダブリング（関数）／LCA（木の親）（手書き）"
+      - "小さい N：bit 全探索／bitDP／半分全列挙、部分和 DP／半分全列挙／bitset（手書き）"
+      - "数え方：余事象／包除原理、主客転倒／寄与／期待値の線形性、期待値 DP／期待値の線形性（手書き）"
+      - "ゲーム：ゲーム DP／Grundy 数／閉路のあるゲームの後退解析（手書き）"
+      - "連結性：Union-Find／DFS・BFS／最小全域木、トポロジカルソート／DAG 上の DP／SCC、2-SAT／二部グラフ判定（手書き）"
+      - "木：木 DP／全方位木 DP／重心分解、オイラーツアー／HL 分解、LCA（ダブリング／オイラーツアー＋RMQ）、重心分解／マージテク（手書き）"
+      - "集合とキュー：priority_queue／set・multiset、map／unordered_map／配列、座標圧縮／map／動的セグ木、K 番目を取るデータ構造（手書き）"
+      - "文字列：ローリングハッシュ／Z／KMP／Suffix Array／Manacher／Trie／Aho-Corasick、ローリングハッシュ／集合のハッシュ（手書き）"
+      - "最適化の方針：DP／貪欲（交換論法の証明があるか）／フロー（燃やす埋める）（手書き）"
+      - "名前が似た別物：オイラーツアー（木）とオイラー路（グラフ）、部分列と部分文字列、置換の巡回分解（任意の swap）と転倒数（隣接 swap）、なもりグラフと Functional graph（手書き）"
+      - "数の扱い：double／long double／整数のまま、逆元（フェルマー／拡張ユークリッド）、素数判定・素因数分解（試し割り／篩／Miller-Rabin）（手書き）"
+    merged_keys: []
+    visual: "手書き：組ごとの比較表と、条件から選ぶフローチャート（Mermaid）。生成する部分はない"
+    problems: []
+    sources: ["00-curriculum §4.1（似た手法の使い分け）", "00-curriculum §2.4.2", "00-curriculum §6.3", "01-basics §6.3", "02-dp §6.2", "03-graph §6.2", "05-ds §6.1", "05-ds §6.2", "06-math-nt §6.2", "07-math-comb §6.2", "08-string-geo §6.2", "09-cpp §6.3"]
+
+  - id: cheatsheet
+    title: 早見表
+    aliases: [チートシート, 一覧表, 計算量の目安, 1秒で回る回数, 数の目安, 公式集]
+    type: guide
+    level: null
+    kind: [案内]
+    prerequisites: []
+    related: [reverse-index-constraints, notation, glossary, cpp-integer-overflow, stl-containers, acl-reading, mod-arithmetic, bit-operations, twelvefold-way]
+    summary: "コンテスト中や解説を読むときにすぐ引く数字と公式の表。計算量と制約、型の範囲、数の目安、STL と ACL の計算量、mod の性質、よく使う公式、bit 演算の小技を節ごとに並べ、各行から詳しいページへリンクする。本文と並行して育てる。"
+    signs: []
+    acl: []
+    sections:
+      - "計算量と制約（cheatsheet-complexity を統合）：1秒の目安、N = 2×10^5 のときの量。逆引き辞典（制約から）と相互リンク（手書き）"
+      - "型の範囲とオーバーフローの境目（int・long long・unsigned long long・__int128・double・long double。12! と 13!、20! と 21!、C(66,33)、F_92）（手書き）"
+      - "数の目安（10^9・10^18 以下の約数の個数の最大 1344・103680、異なる素因数の個数の最大、素数の個数 π(10^k)、分割数、カタラン数、2^20・3^15）（手書き。値はスクリプトで計算して確かめる）"
+      - "STL の計算量（vector・deque・set/map・unordered 系・priority_queue・sort・lower_bound。set に std::lower_bound は O(N)）（手書き）"
+      - "ACL の機能と計算量（fenwick_tree・segtree・lazy_segtree・string・math・convolution・modint・dsu・maxflow・mincostflow・scc・two_sat）（手書き）"
+      - "mod の性質（998244353 = 119·2^23 + 1 と原始根 3、% の負の値、逆元が存在する条件、階乗の前計算、小さい素数の mod では Lucas の定理へ）（手書き）"
+      - "よく使う公式（等差・等比数列の和、二乗和、二項係数の和、写像12相、gcd·lcm = ab、次数の和 = 2×辺数、E[X] = Σ P(X ≥ k)、内積・外積、調和級数）（手書き）"
+      - "bit 演算の小技（全体集合、部分集合の列挙 s = (s−1)&A、最下位ビット x&−x、popcount、k 要素の部分集合の列挙）（手書き）"
+      - "C++ の版と GCC の対応・INF の候補（C++ 章の早見表へリンク）（手書き）"
+    merged_keys: [cheatsheet-complexity]
+    visual: "手書き：表のみ。数値は tools/ に置く確認用のスクリプトで計算して確かめる。生成する部分はない"
+    problems: []
+    sources: ["00-curriculum §4.1（早見表）", "00-curriculum §3.1", "00-curriculum §6.1.2", "00-curriculum §6.4", "01-basics §6.4", "02-dp §6.3", "03-graph §6.3", "05-ds §6.4", "06-math-nt §6.3", "07-math-comb §6.3", "08-string-geo §6.3", "09-cpp §6.4"]
+
+  - id: contest-strategy
+    title: コンテストの戦い方
+    aliases: [時間配分, 問題を読む順, 立ち回り, 詰まったときの切り替え]
+    type: guide
+    level: null
+    kind: [案内]
+    prerequisites: []
+    related: [thinking-checklist, debugging-checklist, stress-testing, atcoder-system, practice-method, roadmap]
+    summary: "ABC の100分の使い方。位置ごとの難しさと時間の目安（データ）、問題を読む順、E と F の選び方、詰まったときの切り替え、終了前の使い方、生成AIのルール、終了後の振り返りをまとめる。"
+    signs: []
+    acl: []
+    sections:
+      - "位置ごとの difficulty と色の対応（水 ≒ E、青 ≒ F、黄 ≒ 難しい F と易しい G）（手書き：research/00 §2.3.3 のデータ）"
+      - "目標パフォーマンスごとの解き終える時刻の目安（レート1200〜2000 の人の A〜C・A〜D・A〜E・A〜F）と、解ける確率の表（手書き）"
+      - "完答数・速さとパフォーマンスの関係（水パフォは4完の早解きか5完、など。色変記事の声）（手書き）"
+      - "問題を読む順：D を解いたら E・F・G を一通り読む（E と F、F と G の difficulty が入れ替わる回がそれぞれ約1割）（手書き）"
+      - "取り組む問題の選び方と切り替えの目安（解いた人数・知っている手法か・実装の重さ。E で20〜30分進まなければ移る）。出典のない提案であることを明記する（手書き）"
+      - "詰まったときの手順の要約 → 詰まったときの発想リスト（手書き）"
+      - "提出前の確認と誤答のペナルティ（1回5分）→ WA・TLE・RE・MLE の原因チェックリスト（手書き）"
+      - "終了前の10〜15分の使い方（詰めの実装、裏でランダムテスト）（手書き）"
+      - "生成AIのルール：開催中の ABC・ARC・AGC では問題文や要約を AI に入力して解法を出させない。claude.ai での解説は終了後の問題だけに使う（手書き）"
+      - "終了後：解けなかった原因を誤読・知識不足・考察不足・実装ミス・時間不足に切り分け、記録する → 精進の仕方（手書き）"
+    merged_keys: []
+    visual: "手書き：100分の時間軸に、目標パフォーマンスごとの A〜D・A〜E・A〜F を解き終える時刻を描いた帯グラフ（SVG。research/00 §2.3.6 の表から作る）"
+    problems: []
+    sources: ["00-curriculum §4.1（コンテストの戦い方）", "00-curriculum §6.5", "00-curriculum §2.3.3", "00-curriculum §2.3.5", "00-curriculum §2.3.6", "00-curriculum §2.3.7", "00-curriculum §2.2.2", "03-graph §6.5"]
+
+  - id: thinking-checklist
+    title: 詰まったときの発想リスト
+    aliases: [考察の引き出し, 考察の手順, 発想の型, 方針が立たないとき]
+    type: guide
+    level: null
+    kind: [案内, 考察]
+    prerequisites: []
+    related: [observation-hub, reformulation, binary-search-answer, reverse-thinking, fix-variable, independence, contribution, complement, invariant, parity, experiment, reverse-index-signs, contest-strategy]
+    summary: "方針が立たないときに上から順にたどる問いのリスト（誤読を疑う、制約から逆算する、小さいケースを試す、決め打ちする、逆から見る、1つ固定する、独立に分ける、寄与で数える、不変量を探す など）。各問いから考察の章と手法のページへ案内する入口で、型の説明の本体は考察の章にある。"
+    signs: []
+    acl: []
+    sections:
+      - "使い方：コンテスト中に上から順に問いを当てる。各問いの詳しい説明と例題は考察の章（入口は考察の型の一覧）へ（手書き）"
+      - "誤読を疑う（N の大きさ、木か一般のグラフか、最大か最小か、「ちょうど」か「以下」か）（手書き）"
+      - "制約から許される計算量を逆算する → 逆引き辞典（制約から）（手書き）"
+      - "小さいケース・極端なケースを手で試す、愚直解で表を作って規則を探す → ストレステストと実験（手書き）"
+      - "言い換えの問い：答えを決め打ちすると判定は簡単か／操作を逆から見るとどうか／1つを固定すると残りは決まるか／x と y・bit ごとに独立に分けられるか／和の順序を入れ替えて寄与で数えられるか／余事象の方が数えやすいか（手書き）"
+      - "変わらないものを探す：不変量・偶奇・対称性・鳩の巣原理（手書き）"
+      - "強い仮定を足して解き、仮定を外していく。必要条件を並べると十分条件になっていることがある（手書き）"
+      - "有名な手法を順に当てはめる → 逆引き辞典（言い回しから）。図にする。数列が出たら OEIS で調べる（手書き）"
+      - "一度離れて別の問題を見る → コンテストの戦い方（手書き）"
+      - "鉄則本・アルゴリズム×数学・典型90問の考察の型と、この教材のページの対応表（手書き）"
+    merged_keys: []
+    visual: "手書き：問いを順にたどるチェックリストのフローチャート（Mermaid）。各問いから考察のページへリンク"
+    problems: []
+    sources: ["00-curriculum §4.1（詰まったときの発想リスト）", "00-curriculum §6.5.3", "01-basics §4（考察の型の一覧）", "01-basics §7.3"]
+
+  - id: debugging-checklist
+    title: WA・TLE・RE・MLE の原因チェックリスト
+    aliases: [デバッグ, バグの探し方, WA の原因, TLE の原因, 提出前の確認]
+    type: guide
+    level: null
+    kind: [案内, 実装・C++]
+    prerequisites: []
+    related: [stress-testing, cpp-integer-overflow, cpp-undefined-behavior, cpp-performance, cpp-io, cpp-debug-build, cpp-floating-point, cpp-container-idioms, cpp-stack-depth, integer-division]
+    summary: "提出前の確認と、WA・TLE・RE・MLE の症状ごとに疑う原因を順に並べたチェックリスト。各項目から C++ 章の落とし穴や手法のページの詳しい説明へリンクする。"
+    signs: []
+    acl: []
+    sections:
+      - "提出前の確認：サンプルを全部、自作の小さいケース（N=1・全部同じ値・境界の値）、最大ケースの時間・メモリ・あふれ、提出する言語（手書き）"
+      - "WA：出力形式、端のケース、多重テストケースの初期化漏れ、オーバーフローと mod の取り忘れ、負の数の割り算、浮動小数点の比較、添字の取り違えと ±1、処理や入力の順序、証明していない貪欲、STL の仕様の誤解（multiset の erase など）（手書き）"
+      - "一部のケースだけ落ちるならコーナーケース、多くが落ちるなら解法そのものを疑う（手書き）"
+      - "TLE：計算量の見積もり違い、不要なコピー、入出力の速さ（endl など）、ダイクストラで古い値を飛ばしていない、set への std::lower_bound、ハッシュの衝突（手書き）"
+      - "RE：配列外参照、0 除算、深すぎる再帰、無効になった反復子、比較関数に <=。-fsanitize と _GLIBCXX_DEBUG で見つける（手書き）"
+      - "MLE：メモリの見積もり（int の配列 10^8 個で約 400MB）、テストケースごとの確保（手書き）"
+      - "手元と AtCoder で結果が違う：未初期化変数・未定義動作・スタックの大きさ（C++ 章の症状からの逆引きへ）（手書き）"
+      - "最終手段：元のコードを残して書き直す、愚直解と比べる（誤読していると愚直解とも一致する点に注意）→ ストレステストと実験（手書き）"
+    merged_keys: []
+    visual: "手書き：症状（WA・TLE・RE・MLE）→ 疑う順の分岐図（Mermaid）。各項目から C++ 章の落とし穴のページへリンク"
+    problems: []
+    sources: ["00-curriculum §4.1（WA・TLE・RE・MLE の原因チェックリスト）", "00-curriculum §6.6", "09-cpp §6.2", "03-graph §6.5", "06-math-nt §7.3"]
+
+  - id: stress-testing
+    title: ストレステストと実験
+    aliases: [ランダムテスト, 愚直解との比較, 実験, OEIS, 撃墜ケース探し]
+    type: guide
+    level: null
+    kind: [案内, 実装・C++]
+    prerequisites: []
+    related: [debugging-checklist, experiment, counting-experiment, interactive, cpp-random-chrono]
+    summary: "WA の原因が見つからないときに、愚直解と本解を小さいランダムな入力で比べて反例を探す手順と、小さいケースを全探索して規則を予想する実験の方法。スクリプト全体は載せず、処理の流れを書く。"
+    signs: []
+    acl: []
+    sections:
+      - "手順：明らかに正しい愚直解 → 小さい入力の生成器（N は 5〜10、値は 20 程度まで）→ 生成・実行・比較を繰り返し、不一致で止める → 反例を手で追う（手書き）"
+      - "形：1つのプログラムに本解と愚直解を入れる／シェルのループと diff／online-judge-tools（oj）の生成とテスト（手書き）"
+      - "生成器のコツ：互いに異なる値、木は Union-Find でつないで作る、Yes になる入力を必ず作る、答えが複数ならチェッカーで判定（手書き）"
+      - "注意：完全なランダムは 0 や 2 の冪などのコーナーケースを逃すことがあるので、小さい範囲は全数テストにする。愚直解の方が誤っていることもある。本番の前に練習しておく（手書き）"
+      - "実験：小さいケースの答えの表を作り、周期・単調性・公式を予想して OEIS で調べる。予想は証明するか、ストレステストで十分に確かめてから使う（考え方の側は考察の章の実験の節）（手書き）"
+      - "インタラクティブ問題の手元でのテスト（ジャッジ役のプログラム）→ その他の技法のインタラクティブ問題（手書き）"
+    merged_keys: []
+    visual: "手書き：生成器 → 愚直解・本解 → 比較 のループの図（Mermaid）"
+    problems: []
+    sources: ["00-curriculum §4.1（ストレステストと実験）", "00-curriculum §6.7", "01-basics §7.4", "08-string-geo §7.4"]
+
+  - id: practice-method
+    title: 精進の仕方
+    aliases: [upsolve, 解説の読み方, 復習, 精進, 練習の方法]
+    type: guide
+    level: null
+    kind: [案内]
+    prerequisites: []
+    related: [problem-sets, roadmap, contest-strategy, how-to-use, thinking-checklist]
+    summary: "解けなかった問題との付き合い方。解説を見るまでの時間の諸説、解説の読み方、分からないときの対処、upsolve と復習、記録、演習量と難しさの選び方、速さの訓練、AtCoder Problems の使い方を、この教材の解説（claude.ai）と記録の仕組みにつなげて書く。"
+    signs: []
+    acl: []
+    sections:
+      - "解説を見るまでの時間：諸説を並べ、固定のルールではないと書く。方針が出ない時間と実装に詰まる時間を分け、前者は短めに区切る（手書き）"
+      - "解説の読み方：一度に全部読まず、詰まりが取れたところで止めて続きを自分で考える。決め手になった条件・言い換えを書き出す。読んだ問題は必ず実装する（手書き）"
+      - "解説を読んでも分からないとき：解説放送、ほかの人の提出、第三者の記事、前提のページへ戻る、claude.ai で教材を引きながら解説してもらう（手書き）"
+      - "upsolve と復習の仕組み：解き直し・自力再現・期間をおいた再挑戦（色変記事の共通パターン）（手書き）"
+      - "記録の付け方：/record-problem で原因（知識不足・気づけなかった・実装ミス・時間不足）と学んだことを一言残す（手書き）"
+      - "演習量と難しさの選び方：自分に合った難しさ、青 diff 以下を確実に速く。AC 数稼ぎ・高難度の先取りは効かなかったという声（手書き）"
+      - "速さの訓練：バーチャル参加、易しい問題を時間を計ってまとめて解く（手書き）"
+      - "AtCoder Problems の使い方：difficulty、おすすめ問題（Easy／Moderate／Difficult は解ける確率 80／50／20%）、バーチャルコンテスト（手書き）"
+    merged_keys: []
+    visual: null
+    problems: []
+    sources: ["00-curriculum §4.1（精進の仕方）", "00-curriculum §6.8", "00-curriculum §2.2.2", "00-curriculum §2.2.3", "00-curriculum §2.2.4"]
+
+  - id: problem-sets
+    title: 問題集と練習用コンテストの案内
+    aliases: [典型90問, EDPC, TDPC, NDPC, 鉄則本の問題集, アルゴリズムと数学, ACL Practice, AAL, ADT, AWC, NoviSteps]
+    type: guide
+    level: null
+    kind: [案内]
+    prerequisites: []
+    related: [practice-method, roadmap, library-design, atcoder-system]
+    summary: "典型90問・EDPC・TDPC・NDPC・鉄則本・アルゴリズムと数学・ACL Practice・AAL・FPS 24・組合せゲーム 24・ADT・AWC などを、構成とレベルの目安とともに案内し、各問題から教材のページへの対応表を付ける。対応表は生成する。"
+    signs: []
+    acl: []
+    sections:
+      - "問題集の一覧：contest ID・問題数・時期・使いどころ・レベルの目安（手書き）"
+      - "典型90問の★とレベルの対応（★5＝水、★6＝青、★7＝黄。difficulty がないので★を目安にする）（手書き）"
+      - "問題 → ページの対応表（典型90問・EDPC・TDPC・NDPC・AAL・ACL Practice・鉄則本など。生成：各ページの本文の問題リストから）"
+      - "練習用のコンテスト：ADT・AWC・バーチャル参加。ARC の区分と、どの区分が Rated か（手書き）"
+      - "AtCoder 以外の道具：NoviSteps のグレードと ABC の位置の目安、AtCoder Problems のおすすめ、AtCoder Clans（手書き）"
+      - "ライブラリの確かめ用の問題集：Library Checker・CSES → 自作ライブラリの設計と動作確認（手書き）"
+    merged_keys: []
+    visual: "生成：問題集ごとの「問題 → ページ」の対応表"
+    problems: []
+    sources: ["00-curriculum §4.1（問題集と練習用コンテストの案内）", "00-curriculum §6.9", "00-curriculum §2.1.2", "02-dp §5.2"]
+
+  - id: library-design
+    title: 自作ライブラリの設計と動作確認
+    aliases: [ライブラリ整備, 自作ライブラリ, Library Checker, verify, ライブラリの動作確認]
+    type: guide
+    level: null
+    kind: [案内, 実装・C++]
+    prerequisites: []
+    related: [acl-reading, acl-segtree-template, library-bundling, segment-tree-monoids, stress-testing, problem-sets]
+    summary: "将来の自作ライブラリに向けて、何から作るか、ACL を手本にしたインターフェースの決め方（0-indexed・半開区間・テンプレート引数でモノイドを渡す）、ヘッダの書き方、Library Checker などでの動作確認のしかたをまとめる。各ページの verify から確認用の問題の対応表を生成する。"
+    signs: []
+    acl: []
+    sections:
+      - "何を自作するか：ACL にあるものも作り直す。分野ごとの優先度の目安（手書き）"
+      - "設計の作法：ACL を手本にしたインターフェース（0-indexed、半開区間、explicit なコンストラクタ、assert で前提を確かめる、テンプレート引数でモノイド・作用を渡す、計算量の保証）（手書き）"
+      - "ヘッダの書き方：#pragma once、名前空間に入れる、ヘッダの中でマクロを定義しない、#include の書き方（self-library を統合。手書き）"
+      - "提出用に1ファイルに展開する（バンドル）→ C++ 章の library-bundling へ（手書き）"
+      - "不変条件と境界（空区間・単位元・あふれ）をテストで確かめる。愚直解との比較 → ストレステストと実験（手書き）"
+      - "動作確認：Library Checker（14カテゴリ・約235問）・ACL Practice・AAL での verify の手順、oj-verify・competitive-verifier による自動化（手書き）"
+      - "ページ → 確認用の問題の対応表（生成：各ページの verify から）"
+    merged_keys: [self-library]
+    visual: "生成：Library Checker などの問題 ID とページの対応表"
+    problems: []
+    sources: ["00-curriculum §4.1（自作ライブラリの設計と動作確認）", "00-curriculum §2.1.1（KACTL と Library Checker）", "09-cpp §4.41", "09-cpp §6.6", "03-graph §6.6", "05-ds §7.5", "06-math-nt §6.6", "decisions.md（ACL の扱い）"]
+
+  - id: glossary
+    title: 用語集
+    aliases: [用語, 略語, 用語の定義, 表記の正規形]
+    type: guide
+    level: null
+    kind: [案内]
+    prerequisites: []
+    related: [notation, cheatsheet]
+    summary: "本文で使う用語の短い定義と、表記の正規形（セグ木／セグメント木、UF／Union-Find／DSU など）。本文から用語へリンクし、表記の検査（prh）の元にもする。本文と並行して育てる。"
+    signs: []
+    acl: []
+    sections:
+      - "ジャッジとコンテスト（AC・WA・TLE・RE・MLE・CE・ペナルティ・多重テストケース・インタラクティブ・コーナーケースなど）（手書き）"
+      - "AtCoder（Rated・パフォーマンス・difficulty・色・ARC の区分・解説放送・バーチャル参加など）（手書き）"
+      - "慣用句（精進・upsolve・典型・想定解・嘘解法・愚直解・やるだけ・にぶたん・座圧など）（手書き）"
+      - "計算量（償却計算量・擬多項式時間・定数倍・オンライン／オフライン・前計算）（手書き）"
+      - "手法一般とデータ構造・代数（半開区間・番兵・判定問題・モノイド・作用・冪等・遅延評価・永続など）（手書き）"
+      - "数学・グラフと木・文字列と幾何・実装の用語（手書き）"
+      - "表記の正規形と別名の対応表（prh.yml の元）（手書き）"
+    merged_keys: []
+    visual: null
+    problems: []
+    sources: ["00-curriculum §4.1（用語集）", "00-curriculum §6.10", "01-basics §6.5", "02-dp §6.4", "03-graph §6.4", "05-ds §6.5", "06-math-nt §6.4", "07-math-comb §6.4", "08-string-geo §6.4", "09-cpp §6.5"]
+
+# research/00 の key のうち、guide・start・patterns 以外に置くもの（gap・gap-candidate と README §6 の重複 key）。
+# 持ち主は README §6 の表、設計書 §4.2、research/00 §3.2 の「置き場所の案」の順に決めた。01（基本テクニック・考察）を案とするものは、
+# 01 の調査で同じ内容の key がある側（basics か thinking）に送った（01 の担当が取り込めば、どちらでも検証は通る）。
+moved:
+  # --- 担当表から抜けている項目（kind: gap）---
+  - {key: permutation-cycles, to: comb, reason: "README §6（持ち主は comb）。設計書 §4.2。題材別の順列（permutation）のページからリンクする"}
+  - {key: permutation-parity, to: comb, reason: "設計書 §4.2（置換の巡回分解・偶奇は comb）。題材別の順列のページからリンクする"}
+  - {key: inversion-number, to: ds, reason: "README §6（持ち主は ds）。設計書 §4.2（BIT の応用の単独ページ）"}
+  - {key: top-k-sum, to: ds, reason: "research/00 §3.2 の案は 05。05 の top-k-multiset と同じ内容"}
+  - {key: set-hashing, to: string, reason: "設計書 §4.2（集合のハッシュは string）。05・08 の hashing-for-sets と同じ内容"}
+  - {key: fractional-programming, to: basics, reason: "research/00 §3.2 の案は 01。01 の fractional-binary-search と同じ内容"}
+  - {key: undo-dp, to: dp, reason: "research/00 §3.2 の案は 02。02 の knapsack-undo と同じ内容"}
+  - {key: pigeonhole, to: thinking, reason: "README §6（持ち主は thinking）"}
+  - {key: namori-graph, to: graph, reason: "README §6（持ち主は graph）。設計書 §4.2"}
+  - {key: range-distinct-count, to: ds, reason: "research/00 §3.2 の案は 05（オフライン処理の節）"}
+  - {key: game-on-cyclic-graph, to: comb, reason: "設計書 §4.2（後退解析は comb のゲームの章）。07 の game-retrograde-analysis と同じ内容"}
+  - {key: bitwise-decomposition, to: basics, reason: "01 の bitwise-independence（bit 演算の並び）と同じ内容。research/00 §3.2 の案は 01（考察）なので、01 の担当が thinking に置いてもよい"}
+  - {key: base-conversion, to: math, reason: "README §6（持ち主は math）"}
+  - {key: dp-restoration, to: dp, reason: "research/00 §3.2 の案は 02。02 の dp-reconstruction と同じ内容"}
+  - {key: steiner-tree, to: graph, reason: "README §6（持ち主は graph）。設計書 §4.2"}
+  - {key: array-linked-list, to: ds, reason: "research/00 §3.2 の案は 05。05 の linked-list と同じ内容"}
+  - {key: sweep-line, to: ds, reason: "設計書 §4.2（BIT・セグ木と組む平面走査は ds、基本のイベントソートは basics）。05 の sweep-line-2d と同じ内容"}
+  - {key: super-vertex, to: graph, reason: "README §6（持ち主は graph。状態を頂点にするページの節）"}
+  - {key: dilworth, to: dp, reason: "設計書 §4.2（Dilworth の定理は dp の LIS のページの節）"}
+  - {key: difference-reformulation, to: thinking, reason: "research/00 §3.2 の案は 01（考察）。01 の difference-sequence（いもす法の節）・reformulation と重なるので、01 の担当が basics に置いてもよい"}
+  # --- 抜けている項目の候補（kind: gap-candidate）---
+  - {key: slope-trick, to: dp, reason: "README §6（持ち主は dp）。設計書 §4.2"}
+  - {key: parallel-binary-search, to: ds, reason: "README §6（持ち主は ds）。設計書 §4.2"}
+  - {key: swag, to: ds, reason: "README §6（持ち主は ds）"}
+  - {key: binary-trie, to: ds, reason: "README §6（持ち主は ds）。設計書 §4.2"}
+  - {key: subsequence-next-table, to: string, reason: "research/00 §3.2 の案は 08。08 の subsequence-matching と同じ内容"}
+  - {key: run-length-encoding, to: basics, reason: "README §6（持ち主は basics）。設計書 §4.2"}
+  - {key: difference-constraints, to: graph, reason: "README §6（持ち主は graph）。設計書 §4.2"}
+  - {key: biconnected-components, to: graph, reason: "README §6（持ち主は graph）"}
+  - {key: matching-duality, to: graph, reason: "research/00 §3.2 の案は 03。03 の konig-theorem・dilworth-path-cover・halls-theorem と重なる"}
+  - {key: kruskal-reconstruction-tree, to: graph, reason: "research/00 §3.2 の案は 03／05。03 の bottleneck-path（Kruskal 再構築木）と同じ内容。04 の merge-process-tree とも重なる"}
+  - {key: linear-recurrence-fast, to: math, reason: "README §6（持ち主は math）"}
+  - {key: xor-convolution, to: math, reason: "README §6（math は hadamard-transform の merged_keys に入れる）。設計書 §4.2"}
+  - {key: legendre-formula, to: math, reason: "README §6（持ち主は math）"}
+  - {key: derangement-bell, to: comb, reason: "research/00 §3.2 の案は 07。07 の derangement・bell-number と同じ内容"}
+  - {key: tree-counting-formulas, to: comb, reason: "research/00 §3.2 の案は 07（07 の cayley-pruefer・lgv-lemma・matrix-tree-theorem）。行列木定理の部分は設計書 §4.2 で graph（発展）"}
+  - {key: polygon-geometry, to: geometry, reason: "research/00 §3.2 の案は 08（幾何）。08 の polygon-area・point-in-polygon・lattice-points・advanced-geometry と重なる"}
+  - {key: matroid, to: basics, reason: "research/00 §3.2 の案は 01（貪欲が正しい理由）。発展の概要"}
+  - {key: amortized-analysis, to: basics, reason: "README §6（持ち主は basics）"}
+  - {key: scheduling-and-kth-enumeration, to: basics, reason: "research/00 §3.2 の案は 01／05。01 の greedy-priority-queue・k-best-enumeration と同じ内容"}
+  - {key: kadane-and-submask, to: dp, reason: "research/00 §3.2 の案は 02。02 の subset-enumeration-dp と重なる"}
+  - {key: exact-integer-root, to: math, reason: "research/00 §3.2 の案は 06。06 の integer-root と同じ内容"}
+  - {key: lexicographic-greedy, to: basics, reason: "README §6（持ち主は basics）。設計書 §4.2"}
+  - {key: thinking-patterns-extra, to: thinking, reason: "research/00 §3.2 の案は 01（考察の型の追加）。01 の reverse-thinking・fix-variable・experiment などと重なる"}
+  - {key: cpp-extra-pitfalls, to: cpp, reason: "research/00 §3.2 の案は 09"}
+  - {key: dynamic-segtree-cartesian, to: ds, reason: "research/00 §3.2 の案は 05。05 の dynamic-segment-tree・cartesian-tree と同じ内容"}
+  - {key: cycle-basis-xor, to: graph, reason: "research/00 §3.2 の案は 03／06。03 の xor-path と同じ内容"}
+  - {key: highly-composite-numbers, to: math, reason: "research/00 §3.2 の案は 06（約数のページの節）"}
+  - {key: segtree-matrix, to: ds, reason: "research/00 §3.2 の案は 05（セグ木のページの節）。05 の segment-tree-monoids・dynamic-dp と重なる"}
+  - {key: version-tree-offline, to: ds, reason: "research/00 §3.2 の案は 05。05 の persistent-data-structures（版の木）と重なる"}
+  - {key: merge-sort-tree, to: ds, reason: "README §6（持ち主は ds）"}
+  - {key: mo-on-tree, to: ds, reason: "README §6（持ち主は ds。Mo のページの節）。設計書 §4.2"}
+  - {key: suffix-automaton, to: string, reason: "README §6（持ち主は string）"}
+  - {key: concat-order-sort, to: basics, reason: "research/00 §3.2 の案は 01（交換論法のページの節）。01 の exchange-argument と重なる"}
+  - {key: undoable-greedy, to: dp, reason: "research/00 §3.2 の案は 02。設計書 §4.2（Alien DP・Monge は dp）。01 の regret-greedy とも重なる"}
+  - {key: minkowski-sum, to: geometry, reason: "research/00 §3.2 の案は 08（幾何）"}
+  - {key: multidimensional-prefix-sum, to: basics, reason: "research/00 §3.2 の案は 01。01 の prefix-sum-2d（3次元以上も）と同じ内容"}
+  - {key: checkerboard-parity, to: thinking, reason: "research/00 §3.2 の案は 01（偶奇のページの節）。01 の parity と重なる。題材別のグリッドのページからリンクする"}
+  - {key: lp-half-integrality, to: graph, reason: "research/00 §3.2 の案は 03（発展）"}
+dropped: []
+open_issues:
+  - "research/09 の self-library（自作ライブラリの設計と動作確認（C++ の観点））を library-design の merged_keys に統合した（README §6 の「意味が近い項目は設計書の持ち主が取り込む」。設計書 §7 で持ち主は guide）。バンドル（library-bundling）は C++ の書き方なので cpp に残し、library-design から節でリンクする想定。cpp 側が self-library を id か merged_keys に使っていれば、どちらかに寄せる"
+  - "考察の入口が2つある：guide の thinking-checklist（コンテスト中に上から順にたどる問いのリスト）と、thinking の observation-hub（考察の型の一覧と合図）。設計書 §7 の「入口。本体は thinking」に従い、thinking-checklist は問いの並びと各ページへのリンクだけにしたが、重なりの整理と相互リンクを見直しで確かめてほしい"
+  - "横断ページの signs は空にした。逆引き辞典（言い回し）を問題文の言い回しに限るためで、「WA が取れない」「方針が立たない」などの状況からは、reverse-index-signs の手書きの節で案内する"
+  - "research/00 の bitwise-decomposition・difference-reformulation・checkerboard-parity は「01（考察）」が案だが、01 の調査では同じ内容を basics 側（bit 演算・いもす法の節）にも置いている。to は推定で付けたので、取り込む分野は担当 A の判断に任せる"
+  - "レベル別一覧・種類別一覧（lists）とホーム（docs/index.md）は生成・入口のページで catalog の分野に含めていない（check_catalog の TYPES にも generated がない）。工程8a でどう作るかを決める"

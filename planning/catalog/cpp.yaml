@@ -1,0 +1,709 @@
+# C++（cpp）の目次。担当 H。規則は planning/catalog/README.md、上位の規則は planning/design.md §3〜§5（C++ 章の粒度は §4.1 の 5 と §13 の F）。
+# 主な材料：research/09（50項目）、research/00 §3.2 の cpp-extra-pitfalls（guide から moved で受け取った）
+#
+# 束ね方：research/09 §7.1 の案 B（11〜15ページ）を出発点に、長くなる「型と初期化」「範囲 for と構造化束縛」「ranges と views」
+#   「落とし穴」を分け、入口の C++ の逆引きを含めて20ページにした。書き方1つずつを sections の1行にし（執筆時に見出しとアンカーにする）、
+#   入口の cpp-reverse-index から「書き方 → ページ#節」で引く。
+# - research/09 の cpp-idioms（よく見る短い書き方）は単独のページにせず、各書き方を意味の近いページの節に分けた：
+#     初期化式付き if・tie・exchange → cpp-structured-bindings、その場で呼ぶラムダ → cpp-lambda、chmax の (a = b, true) → cpp-macros-template-file、
+#     " \n"[i == n - 1]・三項演算子・while (cin >> x) → cpp-io、x & -x → cpp-math-functions、c - 'a' → cpp-string-api、
+#     max({a, b, c}) → cpp-algorithms、assert → cpp-undefined-behavior。書き方の一覧は cpp-reverse-index が持つので、key はそこに入れた
+# - import std（research/09 では環境の節）は、#include と並べて読むものなのでマクロと雛形のページに置いた
+# - 自作ライブラリの設計（self-library）は guide の library-design が持ち主（coordinator の調整）。提出前の展開（library-bundling）は
+#   C++ の書き方なので cpp-macros-template-file の節に残し、library-design と related で結ぶ
+#
+# 版の注記（sections の各行）：「（C++20）」「（C++23・GCC 14〜）」のように書く。
+# - C++17 以降の機能と GCC の拡張にだけ付ける（C++14 以前からある書き方には付けない）
+# - GCC の版は GCC 13 以降で差が出るもの（13・14・15・16）だけ書く。規格の版だけのものは GCC 12 以前から使える
+# - AtCoder は GCC 15.2・-std=gnu++23。注記に「AtCoder では使えない」とないものはすべて使える
+# - ページの cpp_std・gcc_min・atcoder は、そのページの中心の機能が1つに決まるときだけ値を入れる（版の混ざるページは cpp_std・gcc_min を null）。
+#   gcc_min は 13・14・15 のときだけ書く。atcoder は中心の書き方が AtCoder で使えるなら true、環境・落とし穴のページは null
+# level：その書き方が解説コードで目に入り始める帯の目安（research/09 §7.2。ほとんど基礎）。入口と環境は null。ACL のセグ木の節には（水）（青）の印
+# frequency：C++ 章では「解説コードで繰り返し見る・事故が繰り返し起きる」ものを A にした
+# signs：問題文の言い回し・制約から C++ の知識が要るとわかるものだけを入れた。「コードの見た目」と「症状」は aliases・sections と
+#   cpp-reverse-index（手書き）で引く（逆引き辞典の phrase に混ぜないため。open_issues を参照）
+# problems：research/09 §5 の候補は内容が未確認なので入れない
+field: cpp
+pages:
+  # 入口。設計書 §7 の「C++ の逆引き」。すべて手書き（書き方 → ページ#節）
+  - id: cpp-reverse-index
+    title: C++ の逆引き（解説コードの書き方から引く）
+    aliases: [C++ の逆引き, 解説コードの読み方, 解説コードが読めない, モダン C++ の読み方, 書き方から引く, 症状から引く, コンパイルエラーの読み方, エラーメッセージ, "required from here"]
+    type: guide
+    level: null
+    level_evidence: "章の入口なのでレベルを持たない（research/09 は cpp-reading-guide を基礎とした。易しい問題の解説コードにも現代的な構文が出るため）"
+    kind: [実装・C++, 案内]
+    prerequisites: []
+    related: [cpp-environment, cpp-undefined-behavior, debugging-checklist, reverse-index-signs, glossary]
+    summary: "解説コードで見かける書き方（記号・キーワード・関数名）、実行時の症状、コンパイルエラーのメッセージから、意味と C++ 章の該当ページの節を引く入口のページ。1行を「何を回すか・何を受け取るか・どう受け取るか」に分けて読む手順も置く。"
+    signs: []
+    acl: []
+    sections:
+      - "1行の読み方：何を回すか（範囲）・何を受け取るか（要素の型）・どう受け取るか（コピーか参照か）に分ける。例 for (const auto& [i, component] : scc.scc() | views::enumerate)"
+      - "書き方から引く：型・リテラル・初期化（1LL << 60・1'000'000'007・0uz・vector dp(n, vector(m, 0LL))・array<int, 26> cnt{}）"
+      - "書き方から引く：受け方・構造化束縛・組（for (auto&& x : v)・auto [a, b] = p・if (auto it = mp.find(k); it != mp.end())・tie）"
+      - "書き方から引く：ラムダ・再帰・テンプレート（[&](int v) { ... }・this auto&& self・template <class T>・auto f(auto x)・constexpr）"
+      - "書き方から引く：雛形とマクロ（rep・all・#define int long long・chmin・#ifdef LOCAL・#pragma GCC・import std;）"
+      - "書き方から引く：アルゴリズム・ranges・views（lower_bound(...) - v.begin()・ranges::sort(v, {}, &T::x)・views::iota・| views::enumerate・| ranges::to<vector>()）"
+      - "書き方から引く：コンテナ・比較関数（erase_if・contains・ms.erase(ms.find(x))・*prev(st.end())・greater<>・<=>）"
+      - "書き方から引く：数・ビット・文字列・入出力（gcd・popcount・__lg・x & -x・string_view・println・setprecision）"
+      - "書き方から引く：ACL（using mint = modint998244353;・x.val()・segtree<S, op, e>・dsu d(n)）"
+      - "混同しやすい書き方の対（std::iota と views::iota、unique と erase、accumulate と reduce、size と ssize、endl と改行文字、-std=c++23 と -std=gnu++23 など）"
+      - "症状から引く：WA・RE・TLE と、手元と AtCoder で結果が違うとき（C++ に由来するもの。全体は debugging-checklist）"
+      - "コンパイルエラーのメッセージから引く（最初の error: の行と、required from here で自分の行を探す読み方を含む）"
+    merged_keys: [cpp-reading-guide, cpp-compile-errors, cpp-idioms]
+    visual: "1行のコードを部品（const auto& / [i, component] / scc.scc() / | views::enumerate）に分け、部品ごとに該当ページの節へ矢印を引く分解図（静的）"
+    problems: []
+    sources: ["09-cpp §4.1", "09-cpp §6.1", "09-cpp §6.2", "09-cpp §2.4", "09-cpp §2.6", "09-cpp §4.14", "09-cpp §4.40（コンパイルエラーの読み方）"]
+
+  - id: cpp-environment
+    title: AtCoder と手元の C++ 環境（オプション・版の対応・スタック）
+    aliases: [AtCoder の C++, コンパイルオプション, GCC 15.2, "-std=gnu++23", "-std=c++23", "-ftrivial-auto-var-init=zero", 言語アップデート, C++ の版, 版の対応表, スタックオーバーフロー, Segmentation fault, "ulimit -s", 深い再帰, 手元と結果が違う]
+    type: cpp
+    level: null
+    level_evidence: "環境の知識で難易度帯に依存しない。深い再帰の事故は、N ≤ 2×10^5 の木を再帰の DFS で回す茶〜緑の問題から起きる（research/09 cpp-environment・cpp-stack-depth）"
+    kind: [実装・C++]
+    prerequisites: []
+    related: [cpp-undefined-behavior, cpp-macros-template-file, acl-reading, cpp-lambda, atcoder-system, dfs]
+    summary: "AtCoder の C++（GCC 15.2・-std=gnu++23）と手元の g++ のオプションの違いと、それで結果が変わる場面（未初期化変数・スタックの大きさ・GNU 拡張・ACL の版）をまとめる。C++ の版ごとに GCC のどの版から使えるかの対応表もここに置く。"
+    signs:
+      - {type: constraint, text: "N ≤ 2×10^5 の木やグラフを再帰の DFS で回す（手元の 8 MiB のスタックでは、一直線の入力で落ちることがある）"}
+    acl: []
+    frequency: A
+    cpp_std: null
+    gcc_min: null
+    atcoder: null
+    sections:
+      - "AtCoder と手元のオプションの比較と、AtCoder と同じ条件で試すコマンド（g++-15 -std=gnu++23 -O2 -Wall -Wextra -ftrivial-auto-var-init=zero -march=native -DATCODER -DONLINE_JUDGE）"
+      - "-std=gnu++23 と -std=c++23 の違い：GNU 拡張（typeof など）と __int128 の型特性（is_integral_v が gnu モードでだけ true）"
+      - "-ftrivial-auto-var-init=zero：AtCoder では未初期化の局所変数・配列が 0 になる（手元に付けるかは好みが分かれる。付けなければ初期化忘れに気づきやすい）"
+      - "-march=native と #pragma GCC target：AtCoder では target の指定は要らない"
+      - "-DATCODER・-DONLINE_JUDGE：ジャッジでだけ定義されるマクロ（-fmodules・-lstdc++exp は使うときだけ関係する）"
+      - "ACL の版：AtCoder は v1.6（modint の val() が int）。手元も v1.6 にそろえる"
+      - "再帰の深さとスタック：手元は 8 MiB が多く -O2 でも深さ 2×10^5 で落ちうる、ulimit -s unlimited で広げる、BFS 順や明示的なスタックに書き直す、関数の中の大きな配列もスタックを使う（AtCoder の上限は大きいが新ジャッジの値は未確認）"
+      - "プリコンパイル済みヘッダ：作ったときと同じオプションのときだけ使われる（-Winvalid-pch で理由が出る）"
+      - "Clang 版（libc++）ではなく GCC 版を選ぶ"
+      - "手元と AtCoder で結果が違うときに疑う順（未初期化変数 → 未定義動作 → スタック → ACL の版）"
+      - "C++ の版と GCC の対応表（C++17・C++20・C++23・C++26 の機能 × g++-13・AtCoder の GCC 15.2）"
+      - "GCC 13 で通らない書き方：deducing this・print・ranges::to（C++23・GCC 14〜）、範囲の書式化・from_range・import std（C++23・GCC 15〜）"
+      - "AtCoder で使えないもの：C++26 の機能（views::concat・add_sat。名前 _ の複数宣言だけは警告つきで通る）と GCC 16 からの機能（ranges::starts_with・mdspan・views::indices）"
+    merged_keys: [cpp-version-matrix, cpp-stack-depth]
+    visual: "AtCoder と手元のコンパイルオプションを左右に並べ、結果に差が出る行に印を付けた比較表（静的）。版の対応表は機能 × 処理系の ○× 表で、版ごとに色を分ける。再帰の深さは、コールスタックが1段ずつ積み上がり上限を超えると落ちるステップ送り"
+    problems: []
+    sources: ["09-cpp §4.2", "09-cpp §4.3", "09-cpp §4.4", "09-cpp §2.5", "09-cpp §7.7", "decisions.md（AtCoder の C++ 環境、手元の開発環境の更新）"]
+
+  - id: cpp-types-literals
+    title: 数の型とリテラル（long long・auto の推論・INF・浮動小数点）
+    aliases: [整数の型, long long, LL, ULL, 桁区切り, 2進リテラル, "0uz", auto の推論, "using ll = long long", static_cast, INF, numeric_limits, LLONG_MAX, INT_MAX, "0x3f3f3f3f", "1LL << 60", double, long double, "1e18", 浮動小数点の誤差]
+    type: cpp
+    level: 基礎
+    level_evidence: "どの帯の解説コードにも現れる基本の書き方。INF は最短路・DP の初期値として、小数の扱いは小数の入出力がある問題として灰〜茶から（research/09 cpp-types-literals・cpp-numeric-limits-inf・cpp-floating-point）"
+    kind: [実装・C++]
+    prerequisites: []
+    related: [cpp-integer-overflow, cpp-initialization, cpp-math-functions, cpp-io, geometry-precision, dijkstra]
+    summary: "整数と浮動小数点数の型、リテラルの接尾辞、auto が推論する型、INF の決め方をまとめる。auto x = 0 は int、v.size() は符号なし、1e18 は double になるなど、型が意図とずれて起きる誤りを防ぐ。"
+    signs: []
+    acl: []
+    frequency: A
+    cpp_std: null
+    gcc_min: null
+    atcoder: true
+    sections:
+      - "整数の型と表せる範囲（int・long long・unsigned・size_t・int64_t）"
+      - "リテラルの書き方：1LL・ULL、桁区切り 1'000'000'007、2進 0b1010、size_t の 0uz（C++23）"
+      - "auto が推論する型：0 は int、0LL は long long、v.size() は size_t（符号なし）、1e18 は double"
+      - "型の別名：using ll = long long と #define ll long long（ll(x) と書けるか）"
+      - "キャスト：static_cast<long long>(x)・(long long)x"
+      - "INF の決め方：numeric_limits<T>::max()・1LL << 60・0x3f3f3f3f と、INF + INF があふれるか（ライブラリの雛形の値の比較も）"
+      - "浮動小数点数の型：double が整数を正確に表せるのは 2^53 まで、x86-64 の long double は仮数部 64bit"
+      - "1e18 は double：(long long)1e18 + 1 は正確だが (long long)(1e18 + 1) は丸められる、auto INF = 1e18 も double"
+      - "浮動小数点数を == で比べない（誤差を許すか、整数で計算する。小数の入力を整数に直す方法と幾何の誤差は geometry-precision のページ）"
+      - "float128_t（<stdfloat>。C++23・GCC 13〜。解説コードではまれ）"
+    merged_keys: [cpp-numeric-limits-inf, cpp-floating-point]
+    visual: "int・long long・__int128・double が正確に表せる範囲を1本の数直線に並べた図（約 2.1×10^9、約 9.2×10^18、約 1.7×10^38、2^53 ≈ 9.0×10^15）。INF の候補を同じ数直線に置き、INF + INF が型の上限を超えるかを示す（静的）"
+    problems: []
+    sources: ["09-cpp §4.6", "09-cpp §4.8", "09-cpp §4.39", "09-cpp §6.3（INF）"]
+
+  - id: cpp-integer-overflow
+    title: 整数のオーバーフローと __int128
+    aliases: [オーバーフロー, あふれ, int の掛け算, "1LL * a * b", "1 << 40", 符号なし整数, "v.size() - 1", ssize, "__int128", i128, 128bit 整数, "__builtin_mul_overflow", 積の上限の判定]
+    type: cpp
+    level: 基礎
+    level_evidence: "答えが 2^31 を超える灰〜茶の問題から起きる。__int128 は 10^18 を超えうる積の判定などで茶〜青に散発的に現れる（推定。research/09 cpp-integer-overflow・cpp-int128）"
+    kind: [実装・C++]
+    prerequisites: [cpp-types-literals]
+    related: [cpp-undefined-behavior, overflow-check, integer-root, cpp-math-functions, cpp-algorithms, cpp-views-basics]
+    summary: "int どうしの積・1 << k・accumulate の初期値・size() の符号なしなど、型の幅を超えて値が壊れる書き方と直し方をまとめる。64bit を超える中間値は GCC の拡張 __int128 で持てるが、cout で出せない・-std=c++23 では gcd に渡せないなどの制限がある。"
+    signs:
+      - {type: constraint, text: "A_i ≤ 10^9 を N ≤ 2×10^5 個足す、または2つ掛ける（int に収まらない）"}
+    acl: []
+    frequency: A
+    cpp_std: null
+    gcc_min: null
+    atcoder: true
+    sections:
+      - "int どうしの積は int で計算される：long long p = a * b は誤り、1LL * a * b か (long long)a * b"
+      - "シフトの幅：1 << 40 は警告が出て 0 になる、1LL << 40"
+      - "初期値と推論の型：accumulate(..., 0)・auto x = 0・views::iota(0, n) の i は int"
+      - "size() は符号なし：空の v で v.size() - 1 が巨大になる、-1 < v.size() が false、ssize(v)（C++20）か (int)v.size()"
+      - "型の違う値を min・max に渡すとコンパイルエラー：min(1, x) → min(1LL, x)・min<long long>(1, x)"
+      - "INF + INF・abs(INT_MIN)・INT_MIN / -1"
+      - "符号付き整数のあふれは未定義動作：-O2 では正しく書いた別の行の値まで変わる（警告は出ず、-fsanitize=undefined で見つかる）"
+      - "__int128：10^18 程度どうしの積を正確に持つ。リテラルはないので (__int128)1 << 100 と書く（GCC の拡張）"
+      - "__int128 の入出力：cout << も cin >> もできない、format（C++20・GCC 13〜）・println（C++23・GCC 14〜）か自作の変換で出し、文字列で読んで変換する"
+      - "-std=c++23 では is_integral_v<__int128> が false で gcd・abs に渡せない（AtCoder の -std=gnu++23 では渡せる。numeric_limits はどちらでも使える）"
+      - "積が上限を超えるかの判定：割り算で比べる考え方は integer-division のページ、C++ では __builtin_mul_overflow（GCC の拡張）も使える、long double は境界で誤りうる"
+    merged_keys: [cpp-int128]
+    visual: "32bit 整数を時計の文字盤のような円で描き、最大値を超えると負の側へ回り込む様子のステップ送り"
+    problems: []
+    sources: ["09-cpp §4.35", "09-cpp §4.7", "09-cpp §4.8", "09-cpp §6.3（あふれへの対処）", "decisions.md（gnu++23 と c++23 の __int128）"]
+
+  - id: cpp-initialization
+    title: 初期化と CTAD（多次元 vector・array・構造体・型の省略）
+    aliases: [初期化, 多次元 vector, 多次元配列, vector の初期化, "array<int, 26> cnt{}", 値初期化, memset, fill, assign, 指示付き初期化, 集成体, explicit, CTAD, クラステンプレートの実引数推論, "vector dp(n, vector(m, 0LL))"]
+    type: cpp
+    level: 基礎
+    level_evidence: "DP 表やグリッドを作る問題（灰〜茶）から現れる。CTAD は現代的な解説コードの DP 表の宣言に使われる（research/09 cpp-initialization・cpp-ctad）"
+    kind: [実装・C++]
+    prerequisites: [cpp-types-literals]
+    related: [cpp-structured-bindings, cpp-comparators, cpp-undefined-behavior, acl-reading, dp-basics, grid-graph]
+    summary: "vector・多次元 vector・array・構造体の初期化と、型引数を省いて中身から型を決める CTAD（C++17）をまとめる。vector<int> a{n} が要素1個になる、vector w{v.begin(), v.end()} がイテレータの vector になるなど、括弧の種類で意味が変わる罠を扱う。"
+    signs: []
+    acl: []
+    frequency: A
+    cpp_std: null
+    gcc_min: null
+    atcoder: true
+    sections:
+      - "vector の初期化：(n) は 0 が n 個、(n, x) は x が n 個、{n} は値 n が1個"
+      - "多次元 vector：dp(n + 1, vector<long long>(m + 1, -1))、3次元は入れ子を1段深くする"
+      - "array と {} による 0 初期化（array<int, 26> cnt{}・vector<array<int, 3>> v(n)）"
+      - "グローバル変数は 0 で初期化され、関数の中の変数・配列は初期化されない"
+      - "構造体のメンバの既定値と指示付き初期化 Edge{.to = v, .cost = c}（C++20。メンバの宣言順に書く）"
+      - "コンストラクタのない構造体（集成体）にも emplace_back(to, cost) が使える（C++20。C++17 ではエラー）"
+      - "explicit なコンストラクタは = で初期化できない（ACL の dsu d = 5 はエラーで、dsu d(5) と書く）"
+      - "埋め直し：memset はバイト単位（0・-1・0x3f だけ）、fill・assign・ranges::fill、2次元の C 配列の fill"
+      - "CTAD：vector dp(n, vector(m, 0LL)) で型を内側から決める（0 と書くと int になる）（C++17）"
+      - "pair・tuple・array・priority_queue の CTAD：pair p{1, 2.5}・priority_queue pq(greater<int>{}, vector<int>{})（C++17）"
+      - "CTAD の罠：vector w{v.begin(), v.end()} はイテレータ2個の vector になる（丸括弧なら要素の vector。警告も出ない）（C++17）"
+    merged_keys: [cpp-ctad]
+    visual: "3次元 vector の入れ子を箱で描き、括弧と次元の対応を色分けした図。CTAD は 0LL → long long → vector<long long> → vector<vector<long long>> と内側から型が決まる流れ（静的）"
+    problems: []
+    sources: ["09-cpp §4.9", "09-cpp §4.19（explicit）", "09-cpp §4.36（未初期化変数）", "09-cpp §7.6"]
+
+  - id: cpp-range-for
+    title: 参照と範囲 for（auto・auto&・const auto&・auto&&）
+    aliases: [参照, 参照渡し, const 参照, 値渡し, コピー, ムーブ, "std::move", swap, 範囲 for, range-based for, "auto&&", "const auto&", "for (auto& x : v)", "vector<bool>"]
+    type: cpp
+    level: 基礎
+    level_evidence: "範囲 for は灰の解説コードから、参照渡しは DFS の引数として茶〜緑から現れる（research/09 cpp-range-for・cpp-references）"
+    kind: [実装・C++]
+    prerequisites: []
+    related: [cpp-structured-bindings, cpp-lambda, cpp-undefined-behavior, cpp-io, dp-rolling-array]
+    summary: "値をコピーで受けるか参照で受けるかを、関数の引数と範囲 for の4通りの受け方（auto・auto&・const auto&・auto&&）で整理する。値渡しの再帰が遅い理由、swap が O(1) の理由、vector<bool> を auto& で回せない理由も扱う。"
+    signs: []
+    acl: []
+    frequency: A
+    cpp_std: null
+    gcc_min: null
+    atcoder: true
+    sections:
+      - "参照 T& と const 参照 const T&：別名を付けてコピーしない"
+      - "関数の引数：値渡しは呼ぶたびにコピー（再帰では O(N) × 呼び出し回数）、大きなものは const& で渡す"
+      - "ムーブと swap：swap(dp, ndp) は中身を入れ替えるだけで O(1)、dp = ndp は O(N) のコピー"
+      - "auto&&：何でも受けられる参照"
+      - "範囲 for の4通りの受け方：コピーが起きるか・元を書き換えられるか"
+      - "vector<bool> の要素は代わりの小さな物（プロキシ）：auto& で回すとエラー、auto y = vb[0] でも元が書き換わる"
+      - "範囲 for の初期化式 for (int i = 0; auto x : v)（C++20。i の更新は自分で書く）"
+      - "ループの中で同じ vector に追加しない（再確保で壊れる）"
+      - "範囲に一時オブジェクトの中身を渡すとき：for (int v : d.groups()[0]) は C++23・GCC 15〜でだけ安全、関数の戻り値そのものを回すのはどの版でも安全"
+    merged_keys: [cpp-references]
+    visual: "変数名と実体の箱を描き、コピー（箱が増える）・参照（矢印）・ムーブ（中身が移り元は空になる）を並べた図。範囲 for の4通りを「コピーが起きるか」「元を書き換えられるか」の2軸の表に置いた図（静的）"
+    problems: []
+    sources: ["09-cpp §4.10", "09-cpp §4.11", "09-cpp §4.37（範囲 for の一時オブジェクト）", "09-cpp §6.3（範囲 for の受け方）"]
+
+  - id: cpp-structured-bindings
+    title: 構造化束縛と pair・tuple・optional
+    aliases: [構造化束縛, structured binding, "auto [a, b]", 分解宣言, pair, tuple, tie, "get<0>", make_pair, optional, nullopt, value_or, exchange, 初期化式付き if]
+    type: cpp
+    level: 基礎
+    level_evidence: "pair や map を扱う易しい問題の解説から現れる（要件定義書の例を含む）。tie・optional は複数の値を返す関数や辞書順の比較で茶から（research/09 cpp-structured-bindings・cpp-optional-tuple・cpp-init-statements）"
+    kind: [実装・C++]
+    prerequisites: [cpp-range-for]
+    related: [cpp-views-cpp23, cpp-comparators, cpp-undefined-behavior, cpp-lambda, dijkstra]
+    summary: "pair・tuple・構造体・配列の中身に名前を付けて取り出す構造化束縛（C++17）と、組を扱う道具（get・tie・exchange・optional）をまとめる。pq.top() を参照で受けてから pop する事故や、tie(a, b) = tie(b, a) が入れ替えにならない理由など、組の受け方で起きる誤りを扱う。"
+    signs: []
+    acl: []
+    frequency: A
+    cpp_std: 17
+    gcc_min: null
+    atcoder: true
+    sections:
+      - "pair と tuple：get<i>・make_pair・pair{a, b}、辞書順で比べられる"
+      - "構造化束縛の形：auto [a, b] = p、構造体・配列・array、for (auto& [k, v] : mp)（C++17）"
+      - "見えない変数：auto はコピー、auto& は参照。名前はメンバの宣言順に付き、数が合わないとエラー（C++17）"
+      - "map を回すとき：キーは const、auto& [k, v] で値を書き換えると map が変わる（C++17）"
+      - "初期化式付き if・switch：if (auto it = mp.find(k); it != mp.end())、if (auto [it, ok] = st.insert(x); ok)（C++17）"
+      - "const auto& [d, v] = pq.top(); pq.pop(); で値が変わる（ダイクストラで起きる。値で受ける）"
+      - "views::enumerate・zip の要素は参照を含む組：auto [i, x] と書いても x は元の要素を指す"
+      - "構造化束縛した名前のラムダでのキャプチャ（C++20）と、使わない名前 _（同じ場所で2回使うのは C++26。AtCoder の GCC 15 では警告つきで通る）"
+      - "tie：既存の変数にまとめて代入・比較する（tie(x1, y1) < tie(x2, y2)・std::ignore）"
+      - "tie(a, b) = tie(b, a) は入れ替えにならない（両方 b になる。swap か tie(a, b) = pair{b, a}）"
+      - "代入の小技：prev = exchange(cur, nxt) で代入して前の値を返す、tie(f0, f1) = pair{f1, f0 + f1}"
+      - "optional：値がないことを表す（nullopt・has_value・value_or・if (auto r = f())。空の *o は未定義動作）（C++17）"
+      - "apply と、同じ型の組としての array（apply は C++17）"
+    merged_keys: [cpp-optional-tuple, cpp-init-statements]
+    visual: "pair・tuple・構造体の箱から名前へ線を引き、auto（コピー）と auto&（参照）で線の種類を変えた図。pq.top() の事故は、ヒープの配列で pop の前後を並べたステップ送り"
+    problems: []
+    sources: ["09-cpp §4.12", "09-cpp §4.13", "09-cpp §4.26", "09-cpp §4.14（tie・exchange）", "09-cpp §7.6"]
+
+  - id: cpp-lambda
+    title: ラムダ式と再帰ラムダ（キャプチャ・auto&& self・deducing this）
+    aliases: [ラムダ, lambda, 無名関数, クロージャ, キャプチャ, "[&]", "[=]", ジェネリックラムダ, 再帰ラムダ, "std::function", "auto&& self", "this auto&& self", deducing this, 不動点コンビネータ, FixPoint]
+    type: cpp
+    level: 基礎
+    level_evidence: "比較関数・判定関数として茶の解説から、DFS・メモ化再帰の再帰ラムダとして茶〜緑の木・グラフ問題の解説から現れる（research/09 cpp-lambda・cpp-recursive-lambda）"
+    kind: [実装・C++]
+    prerequisites: [cpp-range-for]
+    related: [cpp-comparators, cpp-algorithms, acl-reading, cpp-environment, cpp-templates-constexpr, dfs, memoized-recursion]
+    summary: "その場で関数を作るラムダ式（キャプチャ・auto 引数・その場で呼ぶ形）と、ラムダで再帰を書く4つの方法（std::function・auto&& self・deducing this・不動点コンビネータ）をまとめる。std::function の再帰が遅い理由と、戻り値の型を書く必要がある場面も扱う。"
+    signs: []
+    acl: []
+    frequency: A
+    cpp_std: null
+    gcc_min: null
+    atcoder: true
+    sections:
+      - "キャプチャ：[&] は参照、[=] は作った時点のコピー、初期化キャプチャ [x = std::move(v)]、mutable。参照キャプチャしたラムダを変数の寿命より長く使わない"
+      - "auto 引数のジェネリックラムダ、テンプレート構文 []<class T>(...)（C++20）、static ラムダ（C++23・GCC 13〜）"
+      - "その場で呼ぶラムダ：const int k = [&] { ... }(); で複雑な初期化をした値を const にする"
+      - "関数に渡す：sort の比較関数・二分探索の判定関数"
+      - "型だけを書く：set<int, decltype(cmp)>・priority_queue<int, vector<int>, decltype(cmp)>（キャプチャのないラムダの既定構築。C++20。C++17 では pq(cmp) と渡す）"
+      - "テンプレート引数に渡せるのはキャプチャのないラムダだけ（C++20。ACL の segtree）"
+      - "ラムダがそのままでは再帰できない理由（use of ‘f’ before deduction of ‘auto’）"
+      - "std::function<void(int)> による再帰：読みやすいが、呼ぶたびに型消去を通る間接呼び出しになり遅い"
+      - "自分を引数で渡す再帰：[&](auto&& self, int v) -> void { ... self(self, to); } を dfs(dfs, 0) と呼ぶ"
+      - "deducing this：[&](this auto&& self, int v) -> void を dfs(0) と呼ぶ（C++23・GCC 14〜。g++-13 ではエラー）"
+      - "不動点コンビネータ（雛形の FixPoint・MFP）"
+      - "戻り値の型 -> void・-> int を書く場面（再帰より前に型の決まる return がないとき、三項演算子の中の再帰）"
+      - "速さの比較：std::function は fib(35) で約5倍、木の DFS で約1.3倍遅い。深い再帰はスタックに注意"
+    merged_keys: [cpp-recursive-lambda]
+    visual: "外側の変数とクロージャの箱を描き、[&] は矢印でつながり [=] は作った時点の値が箱に入る図。再帰の書き方を並べ、std::function は型消去を通る間接呼び出し、self は直接呼び出しになる経路を矢印で示す図（静的）"
+    problems: []
+    sources: ["09-cpp §4.15", "09-cpp §4.16", "09-cpp §4.14（その場で呼ぶラムダ）", "09-cpp §4.38", "09-cpp §6.3（再帰の書き方）"]
+
+  - id: cpp-templates-constexpr
+    title: 関数テンプレートと constexpr（auto 引数・コンセプト・static_assert）
+    aliases: [テンプレート, template, 関数テンプレート, "template <class T>", 型推論, auto 引数, コンセプト, concepts, requires, constexpr, static_assert, "if constexpr", 畳み込み式, 属性, "[[maybe_unused]]"]
+    type: cpp
+    level: 基礎
+    level_evidence: "chmin などの補助関数や定数の宣言として灰の解説から現れる。コンセプト・if constexpr は主にライブラリのコードで見る（research/09 cpp-templates-constexpr）"
+    kind: [実装・C++]
+    prerequisites: []
+    related: [cpp-macros-template-file, cpp-lambda, acl-reading, library-design]
+    summary: "型を引数にした関数（関数テンプレート・auto 引数・コンセプト）と、コンパイル時に値を決める constexpr・static_assert・if constexpr をまとめる。chmin(a, 3) が long long の a でコンパイルエラーになる型推論の失敗と、その避け方を扱う。"
+    signs: []
+    acl: []
+    frequency: B
+    cpp_std: null
+    gcc_min: null
+    atcoder: true
+    sections:
+      - "「テンプレート」の2つの意味：C++ の template と、競プロのコードの雛形"
+      - "関数テンプレート：template <class T> T power(T a, long long n)"
+      - "型推論の失敗：chmin(a, 3)（a が long long）が通らない理由と、2つの型引数を取る形"
+      - "型を明示して呼ぶ：max<long long>(a, b)"
+      - "auto 引数の省略形 auto sq(auto x)（C++20）"
+      - "コンセプトと requires：template <integral T>（C++20）"
+      - "constexpr の定数と関数、コンパイル時に表を作る constexpr auto table = [] { ... }();"
+      - "static_assert と if constexpr（if constexpr は C++17）"
+      - "畳み込み式で可変長引数を扱う：((cerr << xs << ' '), ...) のデバッグ出力（C++17）"
+      - "属性：[[maybe_unused]]・[[nodiscard]]（C++17）、[[likely]]（C++20）、[[assume]]（C++23・GCC 13〜）"
+    merged_keys: []
+    visual: null
+    problems: []
+    sources: ["09-cpp §4.17", "09-cpp §2.4（テンプレートと雛形）"]
+
+  - id: cpp-macros-template-file
+    title: マクロと雛形（#include・#define・#pragma・提出前の展開）
+    aliases: [マクロ, 雛形, テンプレート（雛形）, rep マクロ, all マクロ, "#define int long long", "signed main()", chmin, chmax, "#ifdef LOCAL", "#pragma GCC optimize", "bits/stdc++.h", "using namespace std", "import std;", 名前の衝突, バンドル, ライブラリの展開, expander.py, 提出用にコピー]
+    type: cpp
+    level: 基礎
+    level_evidence: "ライブラリ製作者の雛形（maspy・Nyaan・ei1333）に共通して現れ、解説コードにも混じる。帯に依存しない（research/09 cpp-macros-template-file・cpp-namespaces）"
+    kind: [実装・C++]
+    prerequisites: [cpp-templates-constexpr]
+    related: [cpp-environment, cpp-undefined-behavior, cpp-types-literals, acl-reading, library-design]
+    summary: "解説コードの先頭に並ぶ #include・using namespace std・マクロ（rep・all・#define int long long）・chmin・#ifdef LOCAL・#pragma の意味と落とし穴をまとめる。自作のヘッダを #include したコードを提出前に1ファイルに展開する（バンドルする）仕組みもここで扱う。"
+    signs: []
+    acl: []
+    frequency: B
+    cpp_std: null
+    gcc_min: null
+    atcoder: true
+    sections:
+      - "#include <bits/stdc++.h> と using namespace std"
+      - "名前の衝突：count・y1 をグローバル変数の名前にするとエラー、std:: を省かない流儀、using namespace atcoder"
+      - "import std;：#include の代わりに標準ライブラリを読む。INT_MAX・assert などのマクロは来ない、手元では std モジュールを先に作る（C++23・GCC 15〜）"
+      - "マクロは文字の置き換え：rep・all・vc/vvc と、引数の数で切り替える FOR"
+      - "#define int long long と signed main()（printf・scanf の書式とも食い違う）"
+      - "chmin・chmax：2つの型を取る形と、return a < b && (a = b, true) のカンマ演算子"
+      - "#ifdef LOCAL・#ifndef ONLINE_JUDGE：手元だけのデバッグ出力を切り替える"
+      - "#pragma GCC optimize・target：AtCoder は -march=native なので target は要らない、g++-13 では #include より前に書くとエラー、Ofast は浮動小数点の約束を変える"
+      - '自作のヘッダを #include "..." したコードは、提出前に1ファイルに展開する（バンドル）'
+      - '展開の道具：cph の「提出用にコピー」（#include "..." だけを展開）・ACL の expander.py（atcoder/ だけを展開し、v1.6 の --origname で元の行番号を出せる）・oj-bundle'
+      - "// @impl で main の後ろに回せるもの・回せないもの（auto を返す関数・定数式で使う constexpr 関数・クラスの定義は前に置く）"
+    merged_keys: [cpp-namespaces, cpp-import-std, library-bundling]
+    visual: "main.cpp と複数のヘッダから1ファイルができる流れ図（@impl より上は include の位置へ、下は main の後ろへ。静的）"
+    problems: []
+    sources: ["09-cpp §4.18", "09-cpp §4.5", "09-cpp §2.6", "09-cpp §4.2（#pragma GCC target）", "09-cpp §6.6", "09-cpp §4.41"]
+
+  - id: cpp-container-idioms
+    title: コンテナ操作とイテレータ（erase_if・contains・multiset の削除・無効化）
+    aliases: [erase_if, contains, emplace_back, "map の []", multiset の削除, "ms.erase(ms.find(x))", イテレータ, iterator, prev, next, rbegin, "it - v.begin()", イテレータの無効化, unordered_map, pb_ds, order_of_key, find_by_order]
+    type: cpp
+    level: 基礎
+    level_evidence: "set・map を使う茶〜緑の問題の解説から現れる。lower_bound が返すイテレータは茶から（research/09 cpp-container-idioms・cpp-iterators）"
+    kind: [実装・C++, データ構造]
+    prerequisites: []
+    related: [stl-containers, ordered-set, cpp-comparators, cpp-algorithms, cpp-undefined-behavior, hash-safety, kth-element]
+    summary: "vector・set・map・multiset の操作の定型（erase_if・contains・emplace_back・multiset から1個だけ消す）と、イテレータの基本（end は最後の次・prev と next・erase の戻り値・無効化）をまとめる。map の [] が要素を作ってしまう、ms.erase(x) が全部消す、set に std::lower_bound を使うと O(N) になるなどの事故を扱う。"
+    signs: []
+    acl: []
+    frequency: A
+    cpp_std: null
+    gcc_min: null
+    atcoder: true
+    sections:
+      - "erase(v, x)・erase_if(v, pred)：消した個数を返し、set・map にも使える（C++20）"
+      - "contains（C++20）と find・count"
+      - "map の [] はキーがなければ既定値で要素を作る（存在を調べるだけなら contains・find、at はなければ例外）"
+      - "multiset から1個だけ消す：ms.erase(ms.find(x))（ms.erase(x) は全部消す。find が end() でないことを確かめる）"
+      - "emplace_back と push_back"
+      - "set・map の lower_bound はメンバを使う（std::lower_bound・ranges::lower_bound は O(N)）"
+      - "イテレータの基本：begin は先頭、end は最後の要素の次（*prev(st.end())・*st.rbegin()・next・prev）"
+      - "it - v.begin() で添字（vector だけ）、distance は set では O(N)"
+      - "erase は次のイテレータを返す（it = st.erase(it)）"
+      - "イテレータと参照の無効化：vector の再確保はすべてを無効にし、set・map は消した要素だけ"
+      - "unordered_map：pair のキーにはハッシュがない（コンパイルエラー）、自作のハッシュの渡し方、衝突を狙った入力（安全な設計は hash-safety）"
+      - "pb_ds の順序付き集合：tree と order_of_key・find_by_order、重複は (値, 通し番号) にする（GCC の拡張）"
+    merged_keys: [cpp-iterators, cpp-extra-pitfalls]
+    visual: "配列と set の上でイテレータが指す位置を描き、end() が最後の要素の次を指すこと、erase の後に次の要素を指すことを示す図（静的）"
+    problems: []
+    sources: ["09-cpp §4.24", "09-cpp §4.20（set に lower_bound）", "05-ds §4.A stl-containers（落とし穴）", "05-ds §4.E balanced-bst（pb_ds の tree）", "08-string-geo §4.2 hash-safety（unordered_map への攻撃）", "00-curriculum §3.2（cpp-extra-pitfalls）"]
+
+  - id: cpp-comparators
+    title: 比較関数と順序（greater・priority_queue の向き・operator<・<=>）
+    aliases: [比較関数, comparator, "greater<>", "greater{}", priority_queue の向き, 最小ヒープ, 厳密弱順序, strict weak ordering, "operator<", 三方比較演算子, 宇宙船演算子, "<=>", "= default", 構造体のソート, 複数キーのソート]
+    type: cpp
+    level: 基礎
+    level_evidence: "ソートの比較関数（茶）とダイクストラの priority_queue（緑）から現れる。構造体の operator< は複数の値を持つ要素をソートする茶の問題から（research/09 cpp-comparators・cpp-struct-operators）"
+    kind: [実装・C++, ソート・座標圧縮]
+    prerequisites: [cpp-lambda]
+    related: [cpp-container-idioms, cpp-algorithms, cpp-structured-bindings, cpp-undefined-behavior, sorting-techniques, priority-queue, dijkstra]
+    summary: "sort・set・map・priority_queue に渡す比較関数の約束（厳密弱順序）と向きを整理し、構造体に順序を持たせる operator< と <=>（C++20）をまとめる。比較関数に <= を書くと sort が落ちる、set の比較関数が「同じ」も決めて要素が消える、priority_queue は greater で最小が先頭になる、という事故を扱う。"
+    signs: []
+    acl: []
+    frequency: A
+    cpp_std: null
+    gcc_min: null
+    atcoder: true
+    sections:
+      - "比較関数の約束：a が b より前なら true を返し、厳密弱順序を満たす（a と a を比べたら false）"
+      - "比較関数に <= を書くと sort が壊れる（同じ値が多いと Segmentation fault。_GLIBCXX_DEBUG で見つかる）"
+      - "降順：greater<T>・greater<>（型の違う値も比べられる）・greater{}（CTAD で greater<void>）"
+      - "priority_queue の向き：既定は最大が先頭、greater で最小が先頭（比較関数は「優先度が低い」を表すので sort と向きが逆に見える）"
+      - "set・map の比較関数は「同じ」も決める（second だけで比べると、second の等しい要素が1個しか残らない）"
+      - "複数のキーで比べる：pair・tuple の辞書順、tie(a.x, a.y) < tie(b.x, b.y)"
+      - "ラムダの比較関数を型として渡す：set<T, decltype(cmp)>（C++20。C++17 では pq(cmp) と渡す）"
+      - "構造体に operator< を持たせる（メンバ関数に const が要る）"
+      - "auto operator<=>(const T&) const = default で6つの比較をメンバの宣言順の辞書順で作る（C++20）"
+    merged_keys: [cpp-struct-operators]
+    visual: "比較関数と取り出される順の対応表（sort・set は true を返す側が前、priority_queue は true を返す側が後ろで、最後尾が top。静的）"
+    problems: []
+    sources: ["09-cpp §4.25", "09-cpp §4.19", "09-cpp §6.3（比較の向き）", "00-curriculum §3.2（cpp-extra-pitfalls の strict weak ordering）"]
+
+  # id は調査の key ではない。従来の関数と ranges 版の2項目を同じ重さで束ねたため（両方の key を merged_keys に入れた）
+  - id: cpp-algorithms
+    title: アルゴリズム関数（sort・lower_bound・accumulate と ranges 版・射影）
+    aliases: [algorithm, sort, unique, lower_bound, upper_bound, accumulate, reduce, partial_sum, iota, next_permutation, max_element, "max({a, b, c})", "ranges::sort", 射影, projection, "ranges::unique", "ranges::fold_left", "ranges::contains"]
+    type: cpp
+    level: 基礎
+    level_evidence: "sort・lower_bound・accumulate は灰〜茶の解説から。ranges 版は現代的な解説コードでソート・最大値の取得に灰の問題から使われる（research/09 cpp-algorithms-classic・cpp-ranges-algorithms）"
+    kind: [実装・C++, ソート・座標圧縮]
+    prerequisites: [cpp-container-idioms, cpp-lambda]
+    related: [cpp-views-basics, cpp-comparators, cpp-integer-overflow, coordinate-compression, binary-search, permutation-search, prefix-sum]
+    summary: "<algorithm>・<numeric> の定型（sort・unique と erase・lower_bound で添字・accumulate・iota・next_permutation など）と、コンテナを直接渡して射影も使える ranges 版（C++20）を並べてまとめる。accumulate の初期値の型、unique だけでは要素が減らないこと、一時オブジェクトを渡すと ranges::dangling になることなどを扱う。"
+    signs: []
+    acl: []
+    frequency: A
+    cpp_std: null
+    gcc_min: null
+    atcoder: true
+    sections:
+      - "sort と降順（greater・rbegin/rend）"
+      - "重複の削除：sort してから v.erase(unique(v.begin(), v.end()), v.end())（unique は前に詰めて新しい終端を返すだけ）"
+      - "二分探索：lower_bound・upper_bound の位置と添字（- v.begin()）・個数、equal_range・binary_search（set・map にはメンバの lower_bound）"
+      - "総和：accumulate は初期値の型で計算する（0 ではなく 0LL・0.0）、reduce は初期値を省くと要素の型で足す"
+      - "累積和と差分：partial_sum・inclusive_scan・adjacent_difference"
+      - "連番：std::iota で埋める（views::iota・ranges::iota との違い）"
+      - "next_permutation で順列を列挙する（ソートした状態から始める）"
+      - "最大・最小・個数：max_element はイテレータを返す、max({a, b, c})、clamp（C++17）、count の戻り値は ptrdiff_t"
+      - "ranges 版：ranges::sort(v) のようにコンテナを直接渡す（C++20）"
+      - "射影：ranges::sort(ps, {}, &P::score)・ranges::max(ps, {}, &P::score)（{} は既定の比較）（C++20）"
+      - "ranges::unique は後ろの不要部分を返す：v.erase(ranges::unique(v).begin(), v.end())（C++20）"
+      - "ranges::fold_left・contains・find_last（C++23・GCC 13〜）。ranges::starts_with（C++23・GCC 16〜）は AtCoder では使えない"
+      - "一時オブジェクトを渡すと戻り値が ranges::dangling になり、使うとコンパイルエラーになる（C++20）"
+    merged_keys: [cpp-algorithms-classic, cpp-ranges-algorithms]
+    visual: "unique が重複を前に詰めて新しい終端を返し、erase で後ろを消す様子のステップ送り。射影の図（要素の箱から score だけを取り出して比べ、要素ごと並べ替える。静的）"
+    problems: []
+    sources: ["09-cpp §4.20", "09-cpp §4.21", "09-cpp §2.4（iota・unique・accumulate の混同）", "09-cpp §6.3（重複の削除・総和）", "09-cpp §4.14（max({a, b, c})）"]
+
+  - id: cpp-views-basics
+    title: views の基本（遅延評価とパイプ・iota・filter・transform）
+    aliases: [views, ビュー, Range アダプタ, パイプ, 遅延評価, "views::iota", "views::reverse", "views::filter", "views::transform", "views::take", "views::keys", "views::split", "views::join", "views::common"]
+    type: cpp
+    level: 基礎
+    level_evidence: "現代的な解説コードでは灰の問題からループに使われる（要件定義書の例。research/09 cpp-views-basics）"
+    kind: [実装・C++]
+    prerequisites: [cpp-range-for, cpp-lambda]
+    related: [cpp-algorithms, cpp-views-cpp23, cpp-integer-overflow, cpp-string-api]
+    summary: "view は元の範囲を「見る方法」だけを持ち、要素を取り出すときに初めて計算する（遅延評価）。| でつなぐ views::iota・reverse・filter・transform・take・split などの意味と、views::iota(0, v.size()) がコンパイルできない理由・iota の添字が int になる罠をまとめる（C++20）。"
+    signs: []
+    acl: []
+    frequency: B
+    cpp_std: 20
+    gcc_min: null
+    atcoder: true
+    sections:
+      - "view とは：元の範囲を見る方法だけを持ち、取り出すときに計算する。| でつなぐ（C++20）"
+      - "views::iota(a, b)・views::iota(a)：for (int i : views::iota(0, n)) は普通の for と同じ速さ（C++20）"
+      - "views::iota(0, v.size()) がコンパイルエラーになる理由（int と size_t）と直し方：(int)v.size()・ssize(v)・views::iota(0uz, v.size())（0uz は C++23）"
+      - "views::iota(0, n) は n が long long でも i が int になる（0LL から始める）（C++20）"
+      - "views::reverse は逆順に見るだけ（ranges::reverse・std::reverse は並べ替える）（C++20）"
+      - "filter と transform：transform の後に filter を置くと、残った要素で関数が2回呼ばれる（C++20）"
+      - "take・drop・take_while・drop_while（C++20）"
+      - "keys・values・elements<N>：map のキーだけを回す（C++20）"
+      - "split と join：文字列を区切る（各部分は string_view(w) で文字列に）、vector の vector を平らにする（C++20）"
+      - "common：イテレータの組を取る古いコンストラクタに渡すとき（C++20）"
+      - "view の寿命：元のコンテナより長く使わない（右辺値のコンテナをパイプに流すと view の中に移されて安全）"
+    merged_keys: []
+    visual: "パイプを流れる要素を1個ずつ取り出すステップ送り（必要になって初めて計算される様子と、transform の後に filter を置くと関数が2回呼ばれる場合）"
+    problems: []
+    sources: ["09-cpp §4.22", "09-cpp §4.1（右辺値をパイプに流したときの寿命）", "09-cpp §2.4（iota・reverse の混同）", "09-cpp §6.3（添字付きのループ）"]
+
+  - id: cpp-views-cpp23
+    title: C++23 の views と ranges::to（enumerate・zip・pairwise・chunk_by）
+    aliases: ["views::enumerate", "views::zip", "views::zip_transform", "views::pairwise", "views::adjacent", "views::chunk", "views::slide", "views::chunk_by", "views::stride", "views::cartesian_product", "views::repeat", "views::join_with", "ranges::to", "to<vector>", from_range, append_range]
+    type: cpp
+    level: 基礎
+    level_evidence: "要件定義書の例（scc.scc() | views::enumerate）。GCC 13 以降のジャッジで使える書き方で、書き手の流儀によってどの帯にも現れる（research/09 cpp-views-cpp23・cpp-ranges-to）"
+    kind: [実装・C++]
+    prerequisites: [cpp-views-basics, cpp-structured-bindings]
+    related: [cpp-range-for, cpp-io, run-length-encoding, grid-graph, scc]
+    summary: "C++23 で加わった views（enumerate・zip・pairwise・adjacent・chunk・slide・chunk_by・stride・cartesian_product など）が何を作るかと、view の結果をコンテナにする ranges::to をまとめる。要素が「参照を含む組」なので auto [i, x] と受けても元が書き換わる罠と、enumerate の添字が ptrdiff_t になる罠を扱う。"
+    signs: []
+    acl: []
+    frequency: B
+    cpp_std: 23
+    gcc_min: 13
+    atcoder: true
+    sections:
+      - "views::enumerate：（添字, 要素への参照）の組を作る、添字は ptrdiff_t（C++23・GCC 13〜）"
+      - "views::zip・zip_transform：同じ位置の要素の組、短いほうに合わせる（C++23・GCC 13〜）"
+      - "pairwise・adjacent<k>・pairwise_transform：隣り合う組と差分（C++23・GCC 13〜）"
+      - "chunk・slide・stride：k 個ずつの塊・長さ k の窓・k 個おき（C++23・GCC 13〜）"
+      - "chunk_by：隣どうしで条件が成り立つ間をまとめる、s | views::chunk_by(equal_to{}) でランレングス圧縮（C++23・GCC 13〜）"
+      - "cartesian_product：二重ループ・グリッドの全マスを1つのループにする（C++23・GCC 13〜）"
+      - "repeat・join_with・as_const（C++23・GCC 13〜）"
+      - "要素は参照を含む組：auto [i, x] でも x は元の要素を指す、auto& で受けるとエラー、const auto& でも書き換えを防げない（C++23・GCC 13〜）"
+      - "enumerate の添字を int にしたいとき：views::zip(views::iota(0), v)（max(best, i) の型の不一致を避ける）（C++23・GCC 13〜）"
+      - "ranges::to<vector>()・to<set>()・入れ子の to<vector<vector<int>>>()（C++23・GCC 14〜）"
+      - "from_range・insert_range・append_range（C++23・GCC 15〜）と、GCC 13 での代わり（views::common を挟んでイテレータの組から作る）"
+      - "views::concat（C++26）は AtCoder では使えない"
+    merged_keys: [cpp-ranges-to]
+    visual: "同じ配列に chunk・slide・chunk_by・stride・adjacent をかけた結果を色付きの区切りで並べる「views 図鑑」（静的）"
+    problems: []
+    sources: ["09-cpp §4.23", "09-cpp §4.1（要件定義書の例の分解）", "09-cpp §7.6"]
+
+  - id: cpp-math-functions
+    title: 数・ビット・乱数の関数（gcd・割り算・sqrt・popcount・bitset・mt19937）
+    aliases: [gcd, lcm, midpoint, clamp, 切り上げ, 負の数の割り算, 負の剰余, pow, sqrt, sqrtl, "numbers::pi", popcount, countr_zero, bit_width, "__builtin_popcount", "__builtin_ctz", "__lg", bitset, "_Find_first", mt19937_64, uniform_int_distribution, shuffle, chrono, 乱数, 時間計測]
+    type: cpp
+    level: 基礎
+    level_evidence: "gcd・割り算・sqrt は灰〜茶の数学寄りの問題から、popcount などは bit 全探索（茶）の解説から現れる。bitset と乱数の帯は手法（bitset 高速化・乱択）の担当に従う（research/09 cpp-math-functions・cpp-bit-functions・cpp-bitset・cpp-random-chrono）"
+    kind: [実装・C++, ビット演算]
+    prerequisites: [cpp-types-literals]
+    related: [cpp-integer-overflow, integer-division, gcd-lcm, integer-root, bit-operations, bitset-speedup, randomized, stress-testing]
+    summary: "数の関数（gcd・lcm・midpoint・割り算・pow・sqrt）、ビットの関数（popcount・countr_zero・bit_width・__builtin_*・__lg・bitset）、乱数と時間計測（mt19937_64・shuffle・chrono）の書き方をまとめる。整数の割り算が 0 に向かって切り捨てること、std::popcount が符号なし整数しか受けないこと、sqrt の誤差などの落とし穴を扱う。"
+    signs: []
+    acl: []
+    frequency: A
+    cpp_std: null
+    gcc_min: null
+    atcoder: true
+    sections:
+      - "gcd・lcm：型を混ぜられる、負の数は絶対値で計算、lcm は a / gcd(a, b) * b の順にしてあふれを避ける（C++17。__gcd は GCC の古い関数）"
+      - "midpoint（C++20）・clamp（C++17）"
+      - "整数の / と % は 0 に向かって切り捨てる（-7 / 2 は -3、-7 % 2 は -1。負の数の床関数・切り上げの書き方は integer-division のページ）"
+      - "pow・sqrt は double で計算する：整数のべき乗に pow を使わない、大きな long long の sqrt は誤差が出る（整数の平方根は標準になく、補正の仕方は integer-root のページ）"
+      - "円周率：numbers::pi（C++20）・M_PI・acos(-1)"
+      - "<bit> の関数：popcount・countr_zero・countl_zero・bit_width・bit_ceil・bit_floor・has_single_bit（C++20）"
+      - "std::popcount などは符号なし整数しか受けない（popcount(int) はエラー、負の int を unsigned long long にすると上位が1で埋まる）（C++20）"
+      - "組み込み関数：__builtin_popcount(ll)・__builtin_ctz・__builtin_clzll・__lg（0 を渡すと未定義。std:: の関数は 0 でも値が決まっている）（GCC の拡張）"
+      - "ビットの小技：x & -x（最下位の1）・x & (x - 1)・部分集合を大きい順に回す for（考え方は bit 演算のページ）"
+      - "bitset：大きさはコンパイル時の定数、count・シフト・dp |= dp << w、_Find_first・_Find_next（後の2つは GCC の拡張）"
+      - "乱数：mt19937_64 rng(random_device{}())・uniform_int_distribution（両端を含む）・shuffle（rand() は使わない。種を固定すると再現できる）"
+      - "時間計測：chrono::steady_clock::now()"
+    merged_keys: [cpp-bit-functions, cpp-bitset, cpp-random-chrono]
+    visual: "2進表記の上で popcount・countr_zero・countl_zero・bit_width が数えている部分を色分けした図。数直線上で、0 に向かう切り捨て（C++ の /）と負の無限大に向かう切り捨て（floor）の違いを示す図（どちらも静的）"
+    problems: []
+    sources: ["09-cpp §4.28", "09-cpp §4.27", "09-cpp §4.31", "09-cpp §4.14（ビットの小技）", "09-cpp §6.3（ビットを数える）"]
+
+  - id: cpp-string-api
+    title: 文字列の操作（substr・find・+=・string_view・変換）
+    aliases: [string, substr, find, npos, to_string, stoi, stoll, starts_with, ends_with, string_view, "s += c", getline, "c - 'a'", 文字と数の変換]
+    type: cpp
+    level: 基礎
+    level_evidence: "文字列を扱う灰の問題の解説から現れる（research/09 cpp-string-api）"
+    kind: [実装・C++]
+    prerequisites: []
+    related: [string-basics, cpp-views-basics, cpp-io, cpp-undefined-behavior, run-length-encoding]
+    summary: "std::string の操作（substr・find と npos・+=・to_string・stoll・starts_with・contains）と string_view の書き方をまとめる。s = s + c が毎回全体をコピーして遅いこと、string_view に一時的な string を入れると壊れること、cin >> の後の getline の罠を扱う。"
+    signs: []
+    acl: []
+    frequency: B
+    cpp_std: null
+    gcc_min: null
+    atcoder: true
+    sections:
+      - "substr(i, len) は O(len) のコピー、find は見つからないと string::npos"
+      - "s += c と s = s + c（後者は毎回全体をコピーして O(|s|)。先頭に足すなら後ろに足して最後に reverse）"
+      - "文字と数の変換：c - 'a'・char('a' + i)・c - '0'"
+      - "to_string（double は小数点以下6桁）・stoi・stoll"
+      - "starts_with・ends_with（C++20）、contains（C++23）"
+      - "string(n, c)・reverse・辞書順の比較"
+      - "string_view：コピーしない部分文字列。一時的な string を入れると壊れる（C++17）"
+      - "区切る：views::split(' ') と string_view(w)（C++20）"
+      - "cin >> s は空白で区切る、cin >> の後に getline を使うと残った改行を読む"
+    merged_keys: []
+    visual: null
+    problems: []
+    sources: ["09-cpp §4.29", "09-cpp §4.14（文字と数の変換）", "08-string-geo §4.1 string-basics（計算量の落とし穴）"]
+
+  - id: cpp-io
+    title: 入出力と定数倍（高速化・println・小数の桁・フラッシュ）
+    aliases: [入出力, "cin.tie(nullptr)", "sync_with_stdio", endl, println, print, format, printf, setprecision, fixed, 小数の出力, インタラクティブ, flush, 定数倍, TLE, 遅い]
+    type: cpp
+    level: 基礎
+    level_evidence: "全問で使う。入出力が 10^5〜10^6 個の問題（茶〜）で速さの差が出る（research/09 cpp-io・cpp-performance）"
+    kind: [実装・C++]
+    prerequisites: []
+    related: [cpp-types-literals, cpp-integer-overflow, acl-reading, interactive, complexity-estimation, debugging-checklist]
+    summary: "cin・cout の高速化（sync_with_stdio と cin.tie）、endl と改行文字、printf と std::format・println（C++23）、小数の桁の指定、インタラクティブ問題のフラッシュをまとめる。同期を切った後に println と cout を混ぜると順番が入れ替わる罠と、C++ 側で TLE になる書き方の一覧（計測つき）も扱う。"
+    signs:
+      - {type: constraint, text: "入力や出力が 10^6 個程度ある（入出力の書き方で実行時間に差が出る）"}
+      - {type: phrase, text: "答えの絶対誤差または相対誤差が 10^-6 以下なら正解とする（小数の桁を指定して出力しないと WA になる）"}
+    acl: []
+    frequency: A
+    cpp_std: null
+    gcc_min: null
+    atcoder: true
+    sections:
+      - "入出力の高速化：ios::sync_with_stdio(false); cin.tie(nullptr);（10^6 個の入力で約 0.15 秒の差）"
+      - "endl は改行のたびに書き出す（10^6 行で約 0.2 秒余計にかかる）、普段は改行文字 '\\n' を出す"
+      - "区切りと改行の書き方：cout << a[i] << \" \\n\"[i == n - 1]、cond ? \"Yes\" : \"No\""
+      - "入力の終わりまで読む：while (cin >> x)"
+      - "printf・scanf と書式"
+      - "std::format（C++20・GCC 13〜）と std::print・println（C++23・GCC 14〜。引数なしの println() も通る）"
+      - "書式の指定：幅・左寄せ・0 埋め・2進・16進・小数の桁（{:5}・{:<5}・{:05}・{:b}・{:x}・{:.3f}）（C++20・GCC 13〜）"
+      - "小数の出力：cout は有効数字6桁（123456789.0 が 1.23457e+08 になる）、fixed << setprecision(15)・{:.15f}・printf(\"%.15f\")"
+      - "同期を切った後に println・printf と cout を混ぜると順番が入れ替わる（println(cout, ...) なら混ざらない）"
+      - "インタラクティブ問題のフラッシュ：出力がパイプのときは cout << endl か fflush(stdout) が要る"
+      - "そのままでは出力できない型：__int128・modint（.val() を出す）、vector は println(\"{}\", v) で [1, 2, 3] と出て AtCoder の形式にならない（C++23・GCC 15〜）"
+      - "C++ 側で TLE になる書き方の一覧と計測（endl・同期・std::function の再帰・set への std::lower_bound・s = s + c・vector の値渡し。views::iota は普通の for と同じ速さ）"
+    merged_keys: [cpp-performance]
+    visual: "出力バッファに溜めて一度に書き出す様子と、endl で毎回書き出す様子を比べるステップ送り"
+    problems: []
+    sources: ["09-cpp §4.30", "09-cpp §4.38", "09-cpp §4.14（区切り・while (cin >> x)）", "09-cpp §6.2（症状：出力・TLE）", "09-cpp §6.3（出力）", "08-string-geo §4.9 constant-factor（08 から見た補足）"]
+
+  - id: acl-reading
+    title: ACL の読み方（共通の約束・modint・segtree のテンプレート引数）
+    aliases: [AtCoder Library, ACL, "atcoder/all", "using namespace atcoder", modint, mint, modint998244353, modint1000000007, static_modint, "val()", "segtree<S, op, e>", lazy_segtree, テンプレート引数, ラムダをテンプレート引数に, max_right, min_left, dsu, fenwick_tree, scc_graph]
+    type: cpp
+    level: 基礎
+    level_evidence: "dsu・modint を使う茶〜緑の問題の解説から現れる。segtree の引数は水から、lazy_segtree の7つの引数は青から（セグ木の帯は research/05 に従う。research/09 acl-reading・acl-modint・acl-segtree-template）"
+    kind: [実装・C++]
+    prerequisites: [cpp-templates-constexpr, cpp-lambda]
+    related: [cpp-initialization, modint, mod-arithmetic, segment-tree, segment-tree-monoids, lazy-segment-tree, segtree-binary-search, library-design]
+    summary: "AtCoder Library（ACL）を使う解説コードを読むための共通の約束（0 始まり・半開区間・explicit なコンストラクタ・assert）と、各部品の宣言の読み方をまとめる。modint の値の取り出しと v1.6 での val() の型の変更、segtree・lazy_segtree のテンプレート引数（S・op・e・F・mapping・composition・id）にラムダを渡す書き方と、キャプチャのあるラムダを渡せない理由を扱う。"
+    signs: []
+    acl: [static_modint, modint, segtree, lazy_segtree, dsu]
+    frequency: A
+    cpp_std: null
+    gcc_min: null
+    atcoder: true
+    sections:
+      - "include と共通の約束：#include <atcoder/all>・using namespace atcoder、添字は 0 始まり、区間は半開区間 [l, r)、引数なしで作った物は代入するまで使わない、制約の違反は assert で止まる（AtCoder では RE）"
+      - "コンストラクタは modint 以外 explicit：dsu d(n) と書く（dsu d = n はエラー）"
+      - "版：AtCoder は v1.6。v1.5 との違いは modint::val() の型など（手元も v1.6 にそろえる）"
+      - "部品の呼び出し方の一覧：dsu・fenwick_tree・scc_graph・two_sat・mf_graph・mcf_graph・convolution・suffix_array・z_algorithm・floor_sum・crt（意味は各手法のページ）"
+      - "dsu の groups() は vector の vector を返す：for (int v : d.groups()[0]) は C++23・GCC 15〜でだけ安全（変数に受けてから回す）"
+      - "modint の読み方：using mint = modint998244353; と書けば四則演算で法が自動で取られる（static_modint と set_mod の使い分け・割り算の条件・raw は math の modint のページ）"
+      - "modint の値・出力と版の差：cout << も println もできないので .val() を出す、v1.6 で val() は int（v1.5 の unsigned int では x.val() - 1 が巨大になる）、< がないのでソートや set に入れられない"
+      - "segtree<S, op, e> の読み方：S は要素の型、op は結合的な演算、e は単位元を返す関数（水）"
+      - "関数の渡し方：名前を渡す従来の形と、キャプチャのないラムダを直接渡す形（C++20・ACL v1.5〜）（水）"
+      - "キャプチャのあるラムダは op・e に渡せない（is not a constant expression）、max_right・min_left の判定関数には渡せる（水）"
+      - "lazy_segtree の7つの引数：F・mapping(f, x)・composition(f, g) は g の後に f・id（青）"
+      - "引数の形が合わないときの static_assert のメッセージ（op must work as S(S, S) など）と、他のジャッジに出すときの expander.py"
+    merged_keys: [acl-other-components, acl-modint, acl-segtree-template]
+    visual: "テンプレート引数（S・op・e・F・mapping・composition・id）が、モノイドと作用のどの部分に当たるかを線で結ぶ図（静的）"
+    problems: []
+    sources: ["09-cpp §4.32", "09-cpp §4.33", "09-cpp §4.34", "09-cpp §7.6", "decisions.md（ACL v1.6 への更新）", "05-ds §4.F（ACL の API。S と F の設計は ds のページ）", "06-math-nt modint（理論と自作の設計は math のページ）"]
+
+  - id: cpp-undefined-behavior
+    title: 未定義動作とダングリング（未初期化・範囲外・見つけ方）
+    aliases: [未定義動作, UB, 範囲外アクセス, 未初期化変数, 初期化忘れ, ゴミの値, ダングリング, use-after-free, 参照の無効化, 一時オブジェクトの寿命, "pq.top() の参照", "_GLIBCXX_DEBUG", "_GLIBCXX_ASSERTIONS", "-fsanitize=address", AddressSanitizer, UndefinedBehaviorSanitizer, デバッグ用ビルド, assert]
+    type: cpp
+    level: 基礎
+    level_evidence: "帯に依存しない。答えが合わない原因として灰から起き、ダングリングはダイクストラ（緑）や vector に追加しながらの参照で起きる（research/09 cpp-undefined-behavior・cpp-dangling・cpp-uninitialized-variables）"
+    kind: [実装・C++]
+    prerequisites: [cpp-environment, cpp-integer-overflow, cpp-structured-bindings]
+    related: [cpp-range-for, cpp-comparators, cpp-container-idioms, cpp-macros-template-file, debugging-checklist, stress-testing, dijkstra]
+    summary: "規格が結果を決めていない操作（符号付き整数のあふれ・範囲外・未初期化変数・ダングリング）は、最適化の前提に使われて -O2 と -O0、手元と AtCoder で結果を変える。ダングリングの4つの型（pq.top() の参照・再確保・範囲 for の一時オブジェクト・string_view）と、_GLIBCXX_DEBUG・サニタイザで何が見つかるかをまとめる。"
+    signs: []
+    acl: []
+    frequency: A
+    cpp_std: null
+    gcc_min: null
+    atcoder: null
+    sections:
+      - "未定義動作とは：何が起きてもよく、最適化の前提に使われる（手元と AtCoder、-O0 と -O2 で結果が変わる）"
+      - "他の行まで壊す：あふれる式があると、-O2 では正しく書いた別の式の値まで変わる"
+      - "配列の範囲外：既定では止まらない"
+      - "未初期化変数：手元では不定、AtCoder では -ftrivial-auto-var-init=zero で 0 になる（-Wall は配列の未初期化を警告しない）"
+      - "ダングリング①：const auto& [d, v] = pq.top(); pq.pop(); で値が変わる（どの道具でも見つからない。値で受ける）"
+      - "ダングリング②：auto& row = g[0]; の後の push_back で再確保され、row が消えた領域を指す"
+      - "ダングリング③：範囲 for の一時オブジェクト（for (int v : d.groups()[0]) は C++23・GCC 15〜でだけ安全。変数に受けてから回す）"
+      - "ダングリング④：string_view に一時的な string を入れる"
+      - "そのほかの未定義動作：比較関数の誤り・型の幅以上のシフト・__builtin_ctz(0)・ループ中のコンテナの変更"
+      - "見つける道具と見つけられるもの：-Wall -Wextra・-D_GLIBCXX_ASSERTIONS・-D_GLIBCXX_DEBUG・-fsanitize=address・-fsanitize=undefined"
+      - "不具合を探すビルドを cph とは別に用意する（g++-15 -std=gnu++23 -O1 -g -D_GLIBCXX_DEBUG -fsanitize=address,undefined -DLOCAL。遅くなる）"
+      - "assert で WA を RE に変えて気づく（AtCoder では NDEBUG が付かない）"
+    merged_keys: [cpp-uninitialized-variables, cpp-dangling, cpp-debug-build]
+    visual: "vector の再確保で要素が新しい領域へ移り、古い領域を指す参照が取り残されるステップ送り。priority_queue の pop で先頭の場所に別の要素が入るステップ送り。同じ関数のスタック領域を左右に描き、手元はゴミの値、AtCoder は 0 で埋まっている図（静的）"
+    problems: []
+    sources: ["09-cpp §4.36", "09-cpp §4.37", "09-cpp §4.40", "09-cpp §4.14（assert）", "09-cpp §6.2", "09-cpp §7.6", "09-cpp §7.7"]
+
+moved:
+  - {key: self-library, to: guide, reason: "設計書 §7 で「自作ライブラリの設計と動作確認」の持ち主は guide。担当 I が library-design の merged_keys に取り込んだ（coordinator の調整）。提出前の展開（library-bundling）は cpp-macros-template-file の節に残し、library-design と related で結ぶ"}
+
+dropped: []
+
+open_issues:
+  - "ページ数は入口を含めて20。上限に収めるため research/09 の cpp-idioms（よく見る短い書き方）を単独のページにせず、各書き方を意味の近いページの節に分け、key は書き方の一覧を持つ cpp-reverse-index に入れた（ファイル先頭の注を参照）。小技を1ページで通読できる形を残したいなら、イディオム集を戻して21ページにする案がある"
+  - "C++ 章の逆引きの材料（解説コードの見た目・症状）は signs の phrase・constraint に合わないので signs に入れず、aliases と sections に書いた。signs には問題文から C++ の知識が要るとわかるもの（int に収まらない値、10^6 個の入出力、誤差の許容、小数の入力、深い再帰）だけを入れた。cpp-reverse-index を手書きでなく aliases から一部生成するか、front matter にコードの見た目の項目（例 code_signs）を足すかは、工程6で決めたい"
+  - "ACL の modint は、C++ の読み方（.val()・出力・v1.6 での型の変更・< がない）を acl-reading の節に、理論と自作の設計を math の modint（research/06）に分けた。同様に overflow-check（math）と cpp-integer-overflow、integer-division（math）と C++ の / の節、stl-containers（ds）と cpp-container-idioms、hash-safety（string）と unordered_map の節も「書き方と事故は cpp、意味と使いどころは相手」で分けた。相手の catalog と重なりすぎていないか見直しで確かめたい"
+  - "acl-reading はページを基礎にし、segtree の引数の節を（水）、lazy_segtree の7つの引数の節を（青）にした。前提は C++ のページだけにし、segment-tree・lazy-segment-tree は related にした（レベルの逆転を避けるため）。各手法ページの ACL の囲みからは acl-reading の節へリンクする想定"
+  - "版の注記の決め方（GCC の版は 13〜16 で差が出るものだけ、ページの cpp_std・gcc_min は中心の機能が1つに決まるときだけ）はファイル先頭に書いた。ACL の segtree にラムダを渡す機能（クラス型の非型テンプレート引数）の GCC の版は research/09 §4.3 で 9〜11 と幅があるので、版は C++20 とだけ書いた"
+  - "AtCoder の新ジャッジ（2025-10〜）のスタックの上限は research/09 で未確認（2023 年の第三者の確認では 1 GiB）。cpp-environment の執筆時にコードテストで ulimit -s を確かめる方法がないので、「大きいが値は未確認」と書く想定"
+  - "設計書 §10.1 の試作の候補「ranges と views（C++）」は cpp-views-basics（遅延評価とパイプ）が相当する。C++23 の views まで含めて試すなら cpp-views-cpp23 も対象にする"

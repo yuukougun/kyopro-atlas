@@ -1,0 +1,1715 @@
+# 目次：数え上げ・確率・ゲーム（comb）
+# 担当 F。research/07 §7.1 の分け方（数え方の考え方 → 二項係数の系統 → 包除の系統 → 構造 → 確率・期待値 → ゲーム、発展の概要）を出発点にし、
+# 設計書 §4.2 で comb が持ち主になる research/02（確率・期待値・ゲームの DP、包除 DP）、research/00 の抜けている項目（置換・閉路のあるゲームなど）、
+# research/03 の graph-games、research/04 の tree-counting を取り込んだ。
+# 並び順がナビゲーションの順。章の中の小見出しは「# ===== 〜 =====」のコメントで示す（catalog の形式に小見出しの項目がないため。open_issues 参照）。
+field: comb
+pages:
+  # ===== 数え上げの基礎 =====
+  - id: counting-basics
+    chapter: 数え上げの基礎
+    title: 和・積の法則と順列・組合せ
+    aliases: [和の法則, 積の法則, 順列, 円順列, 重複順列, 塗り分けの数, nPr]
+    type: technique
+    level: 基礎
+    level_evidence: "typical90_bq（★3）・abc307_e (1240) で使う。積の法則の条件（前の選び方によらず次の選択肢の数が一定）を確かめる問題が緑〜水の入口にある"
+    kind: [数え上げ]
+    prerequisites: []
+    related: [binomial-coefficient, counting-mindset, counting-fix-order, twelvefold-way, mod-arithmetic, mod-pow]
+    summary: "排反な場合分けは足し、独立な段階の選択は掛けて数える。積の法則は「前の段階で何を選んでも次の段階の選択肢の数が同じ」ときだけ使えるので、塗り分けなどでは決める順番や一列と円環の違いに注意する。"
+    signs:
+      - {type: phrase, text: "何通りあるかを 998244353 で割った余りで求める"}
+      - {type: phrase, text: "隣り合うもの（距離 2 以内のもの）が異なるように塗り分ける方法の数"}
+      - {type: phrase, text: "円形に並べる・円環で最後と最初も隣り合う"}
+      - {type: constraint, text: "N ≤ 10^18 でも答えが K(K−1)^(N−1) のような累乗の積になる（繰り返し二乗法で求める）"}
+    acl: []
+    frequency: A
+    sections:
+      - "和の法則と積の法則（積の法則が使える条件）"
+      - "順列・組合せ・重複順列・円順列"
+      - "一列の塗り分けと円環の塗り分け"
+      - "決める順番を変えて積の法則を使えるようにする"
+      - "写像12相の「玉も箱も区別する」マス（k^n と順列）"
+    merged_keys: []
+    visual: "図：一列と円環の塗り分けで、最後の要素の選択肢の数が変わる様子を並べる"
+    problems:
+      - {id: typical90_bq, role: example, summary: "距離 2 以内が異なる色になる一列の塗り方を、積の法則で K(K−1)(K−2)^(N−2) と数える"}
+      - {id: abc307_e, role: practice, summary: "円環に並んだ N 人に隣どうしが異なる値を割り当てる方法を、一列との違いに注意して数える"}
+    sources: ["07-math-comb §4.2", "07-math-comb §6.3"]
+
+  - id: binomial-coefficient
+    chapter: 数え上げの基礎
+    title: 二項係数の意味と性質
+    aliases: [二項係数, nCr, 組合せ, パスカルの三角形, 辞書順 K 番目, 順位]
+    type: technique
+    level: 基礎
+    level_evidence: "arc095_b (867)・abc202_d (966)・abc145_d (1009) など緑以下で必須。辞書順 K 番目は abc202_d (966)"
+    kind: [数え上げ]
+    prerequisites: [counting-basics]
+    related: [binomial-precompute, stars-and-bars, lattice-paths, binomial-identities, dp-kth-lexicographic]
+    summary: "n 個から k 個を選ぶ数 C(n,k) を「選び方」「1 が k 個の 0/1 列」「格子路」の3つの意味で使い分ける。パスカルの漸化式・対称性・範囲外を 0 とする約束を押さえ、辞書順 K 番目の構成にも使う。"
+    signs:
+      - {type: phrase, text: "N 個から K 個を選ぶ方法の数"}
+      - {type: phrase, text: "0 と 1 の列で 1 がちょうど K 個のもの"}
+      - {type: phrase, text: "辞書順で K 番目の並べ方を求める・与えられた並べ方が何番目か"}
+      - {type: constraint, text: "N ≤ 60 程度で mod を取らない正確な値（64 bit に収まるか確かめる）"}
+    acl: []
+    frequency: A
+    sections:
+      - "3つの意味（選ぶ・0/1 列・格子路）"
+      - "パスカルの漸化式と対称性"
+      - "k < 0・k > n を 0 とする約束"
+      - "mod を取らないときの大きさとオーバーフロー"
+      - "辞書順 K 番目と順位"
+    merged_keys: [kth-combination]
+    visual: "図：パスカルの三角形で各値が上の2つの和になる様子と、格子路の数としての読み替えを並べる"
+    problems:
+      - {id: arc095_b, role: example, summary: "C(n,r) が最大になる組を選ぶ（n は最大、r は n/2 に最も近いもの）"}
+      - {id: abc202_d, role: practice, summary: "a と b を並べた文字列の辞書順 K 番目を、先頭から残りの並べ方の数と K を比べて決める"}
+      - {id: abc057_d, role: practice, summary: "平均の最大値と、それを実現する選び方の数を二項係数で数える"}
+    sources: ["07-math-comb §4.2", "07-math-comb §6.2"]
+
+  - id: binomial-precompute
+    chapter: 数え上げの基礎
+    title: 二項係数の前計算（階乗・逆階乗）
+    aliases: [nCr mod p, 階乗と逆階乗の表, fact と ifact, 逆階乗, Combination テーブル, 任意 mod の二項係数]
+    type: technique
+    level: 基礎
+    level_evidence: "abc145_d (1009)・abc132_d (1167) で必要になり、abc167_e (1442)・abc156_e (1514) と水で頻出。前計算できない変種は、n が巨大な abc156_d (1014) と、法が素数とは限らない abc281_g (2304、黄)"
+    kind: [数え上げ, 整数論]
+    prerequisites: [binomial-coefficient, mod-inverse]
+    related: [modint, mod-pow, lucas-theorem, lattice-paths, stars-and-bars]
+    summary: "素数 p を法として 0..N の階乗と逆階乗を O(N + log p) で前計算し、C(n,k) を O(1) で答える。逆階乗は最大の1つだけ逆元を求めて後ろから作り、n が巨大なときや法が素数でないときは別の方法に切り替える。"
+    signs:
+      - {type: phrase, text: "答えを 998244353（10^9+7）で割った余りで求め、二項係数を何度も使う"}
+      - {type: constraint, text: "N ≤ 2×10^5 程度で C(n,k) を多数回求める"}
+      - {type: constraint, text: "n ≤ 10^9 で r が小さい（階乗の表が作れない）"}
+      - {type: phrase, text: "法 M が入力で与えられる（素数とは限らない）"}
+    acl: [modint]
+    frequency: A
+    sections:
+      - "fact を前から、ifact を後ろから作る理由"
+      - "表の大きさ（H+W・N+K・2N など）と範囲外の 0"
+      - "n ≥ p では使えない（Lucas の定理へ）"
+      - "変種：n が巨大で r が小さいときは O(r) で求める"
+      - "変種：法が素数でない・小さいときはパスカルの三角形で作る（黄）"
+      - "変種：mod を取らない正確な値（掛けてから割る・__int128）"
+      - "ACL では：modint998244353 の inv()・pow() を使って自作する"
+    merged_keys: [binomial-variants]
+    visual: "図：fact を前から、ifact を後ろから埋める2本の矢印"
+    problems:
+      - {id: tessoku_book_ad, role: example, summary: "nCr を 10^9+7 で割った余りを、階乗とフェルマーの小定理による逆元で求める"}
+      - {id: abc156_d, role: practice, summary: "n が巨大なので nCa を分子の a 項の積と a! の逆元で O(a) で求め、全体から引く"}
+      - {id: abc132_d, role: practice, summary: "青玉をかたまりに分けて赤玉の間に置く方法を、かたまりの数ごとに二項係数の積で数える"}
+      - {id: abc281_g, role: challenge, summary: "法が素数とは限らないので二項係数をパスカルの三角形で作り、距離の層ごとにグラフを数える"}
+    sources: ["07-math-comb §4.2", "07-math-comb §6.2", "06-math-nt §4.2", "06-math-nt §7.4"]
+
+  - id: stars-and-bars
+    chapter: 数え上げの基礎
+    title: 重複組合せ（玉と仕切り）
+    aliases: [重複組合せ, 玉と仕切り, "H(n,k)", 非負整数解の個数, 隣り合わない選び方]
+    type: technique
+    level: 基礎
+    level_evidence: "abc185_c (374)・abc178_d (875)・abc132_d (1167) と緑以下で頻出。応用は abc156_e (1514)・abc110_d (1695)・abc021_d (1704 参考値) と水〜青"
+    kind: [数え上げ]
+    prerequisites: [binomial-coefficient]
+    related: [counting-bijection, twelvefold-way, multinomial-coefficient, inclusion-exclusion, generating-function-counting]
+    summary: "x_1 + … + x_k = n の非負整数解は C(n+k−1, k−1) 個、正の整数解は C(n−1, k−1) 個で、玉と仕切りの並べ方に1対1に対応する。広義単調な列や、間隔を空けて選ぶ方法も同じ形に言い換えて数える。"
+    signs:
+      - {type: phrase, text: "和が N になる非負（正）整数の組の個数"}
+      - {type: phrase, text: "広義単調増加な列の個数"}
+      - {type: phrase, text: "N 個から隣り合わない（間隔 d 以上の）K 個を選ぶ方法の数"}
+      - {type: phrase, text: "区別のない玉を区別のある箱へ配る方法の数"}
+    acl: []
+    frequency: A
+    sections:
+      - "玉と仕切りの対応（非負解と正の解）"
+      - "「以下」は余りの変数を1つ足して等式にする"
+      - "広義単調な列との対応"
+      - "隣り合わない選び方・間隔 d 以上の選び方"
+      - "上限つき（x_i ≤ c）は包除原理へ"
+      - "場合分けしてから配る応用（水）"
+    merged_keys: []
+    visual: "図：玉と仕切りの列を変数の値の組に対応させる（仕切りの位置を変えると値が変わる様子を2〜3例並べる）"
+    problems:
+      - {id: abc185_c, role: example, summary: "長さ L の棒を正の長さの 12 本に切る方法を、11 か所の切れ目の選び方 C(L−1, 11) で数える"}
+      - {id: abc178_d, role: practice, summary: "3 以上の整数の和で S を表す数列の数を、各項から 2 を引いて正の整数解の数に直す"}
+      - {id: abc156_e, role: practice, summary: "移動後の各部屋の人数の組を、空き部屋の数で場合分けして重複組合せで数える"}
+      - {id: abc110_d, role: practice, summary: "積が M になる長さ N の数列を、素因数ごとに指数を N 個へ配る重複組合せの積にする"}
+      - {id: abc021_d, role: practice, summary: "1 ≤ a_1 ≤ … ≤ a_k ≤ n を満たす列の個数を重複組合せで求める"}
+      - {id: typical90_o, role: practice, summary: "差が k 以上の数だけを選ぶ方法を、選ぶ個数ごとの二項係数で数える（全 k で調和級数の計算量）"}
+    sources: ["07-math-comb §4.2", "07-math-comb §6.3"]
+
+  # ===== 数え方の考え方 =====
+  - id: counting-mindset
+    chapter: 数え方の考え方
+    title: 数え上げの考え方（総論）
+    aliases: [数え上げの基本方針, ちょうど1回数える, 補集合で数える, 寄与で総和を数える, ちょうど＝以下の差, 実験と OEIS]
+    type: technique
+    level: 水
+    level_evidence: "数え方の設計そのものが問われる問題が水にまとまる：abc167_e (1442)・abc133_e (1505)・abc156_e (1514)。補集合だけで済む abc178_c (653)・abc162_d (757) は基礎、寄与の abc173_f (1892)・abc127_e (1938) は青"
+    kind: [数え上げ, 考察]
+    prerequisites: [counting-basics, binomial-coefficient]
+    related: [complement, contribution, experiment, inclusion-exclusion, divisor-inclusion-exclusion, linearity-of-expectation, stress-testing]
+    summary: "数え上げを「対象を確定 → 数えやすく言い換え → 排反に分けて和・独立な段階で積 → 重複と漏れを確かめる → 小さいケースで検算」の手順で解く。補集合で数える・「ちょうど」を「以下」の差で数える・総和を寄与で数える、の3つの型もここで扱う。"
+    signs:
+      - {type: phrase, text: "〜の個数を 998244353 で割った余り"}
+      - {type: phrase, text: "少なくとも1つ〜を含むものの個数"}
+      - {type: phrase, text: "すべての選び方（区間・組）についての〜の総和"}
+      - {type: phrase, text: "最大値がちょうど K になるものの個数"}
+    acl: []
+    frequency: A
+    sections:
+      - "数え上げの手順と「ちょうど1回」"
+      - "式で数えるか DP で数えるか"
+      - "補集合で数える（基礎）"
+      - "「ちょうど」を「以下」の差で数える"
+      - "全通りの総和を寄与で数える（青）"
+      - "小さいケースの全探索と OEIS で検算する"
+    merged_keys: [counting-complement, counting-at-most-difference, counting-contribution, counting-experiment]
+    visual: "図：樹形図で「次の段階の枝の数が一定か」を色分けし、積の法則が使える決め方と使えない決め方を比べる"
+    problems:
+      - {id: abc178_c, role: example, summary: "0 と 9 を両方含む長さ N の数字列を、全体から含まないものを引き、重なりを足し戻して数える"}
+      - {id: abc167_e, role: example, summary: "隣り合う同色の組が K 個以下の塗り方を、組の数ごとに二項係数と累乗の積で数えて足す"}
+      - {id: abc127_e, role: example, summary: "K マスの選び方すべてについての距離の総和を、2 マスの組の寄与 × 残りの選び方の数で求める"}
+      - {id: abc186_d, role: practice, summary: "すべての 2 数の差の絶対値の総和を、ソート後の各要素に付く係数で求める"}
+      - {id: abc162_d, role: practice, summary: "色がすべて異なる 3 つ組の数から、添字が等間隔のものを引く"}
+      - {id: abc156_d, role: practice, summary: "花束の作り方の総数 2^n − 1 から、禁止された 2 つの本数の場合を引く"}
+      - {id: abc150_e, role: practice, summary: "異なる 2 つの 0/1 列のすべての組の最小コストの総和を、コストをソートして各要素の係数を数えて求める"}
+      - {id: abc173_f, role: practice, summary: "すべての区間の連結成分数の総和を、頂点の寄与から辺の寄与を引いて求める"}
+      - {id: abc180_f, role: challenge, summary: "最大の連結成分の大きさがちょうど L のグラフを、「L 以下」から「L−1 以下」を引いて数える"}
+    sources: ["07-math-comb §2.2", "07-math-comb §4.1", "07-math-comb §6.1", "07-math-comb §7.6"]
+
+  - id: counting-bijection
+    chapter: 数え方の考え方
+    title: 対応づけ・数える対象の言い換え
+    aliases: [全単射, 1 対 1 対応, 言い換え, 経路数に帰着]
+    type: technique
+    level: 水
+    level_evidence: "abc145_d (1009)（移動の回数の組に言い換え）・abc110_d (1695)（素因数ごとの重複組合せへ）で必要。格子路に帰着する arc058_b (1905) は青、arc110_d (2078) は黄"
+    kind: [数え上げ, 考察]
+    prerequisites: [counting-mindset, binomial-coefficient]
+    related: [stars-and-bars, lattice-paths, reflection-principle, cayley-pruefer, counting-dedup, reformulation]
+    summary: "数えにくい対象を、個数が同じで数えやすい対象に1対1で対応させて数える。逆向きの写像が作れることが正しさの確かめになり、単射でない対応では同じものを重複して数えてしまう。"
+    signs:
+      - {type: phrase, text: "単調な数列の個数"}
+      - {type: phrase, text: "棒・列の切り分け方の数"}
+      - {type: phrase, text: "決まった移動を組み合わせて目的の点に着く方法の数"}
+      - {type: phrase, text: "途中で負にならない ±1 の列の個数"}
+    acl: []
+    frequency: B
+    sections:
+      - "全単射なら個数が等しい（逆に戻せるかで検算する）"
+      - "単調列と部分集合、切り分けと切れ目の選び方"
+      - "移動の回数を先に決めてから並べる"
+      - "格子路に帰着できないかを疑う（青）"
+      - "括弧列と格子路、ラベル付き木と Prüfer 列"
+      - "単射でない対応は重複する"
+    merged_keys: []
+    visual: "図：左に元の対象、右に言い換えた対象を並べ、対応を線で結ぶ"
+    problems:
+      - {id: abc145_d, role: example, summary: "2 種類のナイト移動の回数を連立方程式で決めてから、並べ方を二項係数で数える"}
+      - {id: abc110_d, role: example, summary: "積が M になる数列を、素因数ごとの指数の配り方（重複組合せ）の積に言い換える"}
+      - {id: arc058_b, role: practice, summary: "禁止された長方形を避ける格子路を、境界を越える位置で分類して数える"}
+      - {id: arc110_d, role: challenge, summary: "二項係数の積の総和を、1 本の格子路の数に言い換えて閉じた式にする"}
+    sources: ["07-math-comb §4.1", "07-math-comb §2.2"]
+
+  - id: counting-fix-order
+    chapter: 数え方の考え方
+    title: 順序を固定して数える
+    aliases: [相対順序の固定, ソートしてから数える, 数える順番の工夫, "n!/k!"]
+    type: technique
+    level: 水
+    level_evidence: "abc151_e (1344)・abc133_e (1505) で必要。木の上の順番を数える abc160_f (2048) は黄"
+    kind: [数え上げ, 考察]
+    prerequisites: [counting-mindset, binomial-coefficient]
+    related: [counting-basics, probability-symmetry, insertion-dp, rerooting, sorting-techniques]
+    summary: "並べ方の一部の相対順序を固定して数え、全体の何分の一かを掛ける（k 個の順序が決まっていれば n!/k!）。あるいはソート順や BFS 順など、次の選択肢の数が一定になる順番で決めて積の法則を使う。"
+    signs:
+      - {type: phrase, text: "A は B より先に来る、という順番の制約がある並べ方の数"}
+      - {type: phrase, text: "選んだ K 個の最大値（最小値）の総和"}
+      - {type: phrase, text: "木の頂点に、親が子より先になるように番号を振る方法の数"}
+    acl: []
+    frequency: B
+    sections:
+      - "相対順序を固定する（n!/k!）"
+      - "ソートして最大・最小を固定する"
+      - "積の法則が使える順番で決める（BFS 順）"
+      - "木の上の順番 n!/Π 部分木の大きさ（黄）"
+      - "順序を状態に持つ DP（挿入 DP・bitDP）との使い分け"
+    merged_keys: []
+    visual: "図：k 個の相対順序 k! 通りのうち1通りだけを残す"
+    problems:
+      - {id: abc151_e, role: example, summary: "ソートして各要素が最大・最小になる選び方の数を二項係数で数え、max − min の総和を求める"}
+      - {id: abc133_e, role: example, summary: "木を根から BFS 順に塗ると各頂点の色の選択肢の数が一定になり、積の法則で数えられる"}
+      - {id: abc160_f, role: challenge, summary: "隣から順に番号を書く方法の数 N!/Π 部分木の大きさを、全頂点を始点として求める"}
+    sources: ["07-math-comb §4.1"]
+
+  - id: counting-dedup
+    chapter: 数え方の考え方
+    title: 重複の除き方（割る・代表元を決める）
+    aliases: [ダブルカウントを防ぐ, 代表元, 正規形, 最左マッチ, 最小添字規則, 区別しないものの数え方]
+    type: technique
+    level: 青
+    level_evidence: "abc310_d (1368) は易しめの入口、arc077_b (1715)・abc171_f (1795) と青で必須になる"
+    kind: [数え上げ, 考察]
+    prerequisites: [counting-mindset, binomial-coefficient]
+    related: [counting-bijection, multinomial-coefficient, bell-number, burnside-lemma, dp-counting-dedup, subsequence-dp]
+    summary: "同じ対象を何度も数えてしまうとき、どれもちょうど c 回ずつ数えているなら c で割り、重複度がばらばらなら代表元（正規形）を1つ決めて代表元だけを数える。回転などの対称性で同一視するなら Burnside の補題を使う。"
+    signs:
+      - {type: phrase, text: "異なる〜の個数（種類数）"}
+      - {type: phrase, text: "操作で作れる文字列（列）の種類数"}
+      - {type: phrase, text: "S を部分列として含む文字列の個数"}
+      - {type: phrase, text: "区別しないグループに分ける方法の数"}
+    acl: []
+    frequency: B
+    sections:
+      - "重複度が一定なら割る（同じものを含む順列・円順列）"
+      - "重複度が一定でないなら代表元を決める"
+      - "部分列として含む文字列は最も左の埋め込みで数える"
+      - "グループ分けは未使用の最小番号から決める"
+      - "対称性で同一視するときは Burnside の補題（発展）"
+      - "数え上げ DP で重複を避ける設計へ"
+    merged_keys: []
+    visual: "図：同じ文字列に部分列が何通りにも埋め込める様子と、最も左の埋め込みだけを残す様子"
+    problems:
+      - {id: abc310_d, role: example, summary: "仲の悪い組を避けて N 人を T 組に分ける方法を、未所属の最小番号の人から組を決めて重複なく数える"}
+      - {id: arc077_b, role: example, summary: "1 つの値だけが 2 回現れる数列の異なる部分列の数を、重複して数えた分を引いて求める"}
+      - {id: abc171_f, role: practice, summary: "S を部分列として含む文字列を、最も左で一致させる埋め込みで一意にして数える"}
+    sources: ["07-math-comb §4.1", "02-dp §4.C"]
+
+  # ===== 二項係数の系統 =====
+  - id: multinomial-coefficient
+    chapter: 二項係数の系統
+    title: 多項係数（同じものを含む順列）
+    aliases: [同じものを含む順列, 並べ替えの数, グループ分けの数, 多項定理]
+    type: technique
+    level: 水
+    level_evidence: "abc234_f (1596) で必須。応用は abc266_g (2045)・arc067_c (2190) と黄"
+    kind: [数え上げ]
+    prerequisites: [binomial-precompute]
+    related: [stars-and-bars, counting-dedup, cayley-pruefer, insertion-dp]
+    summary: "種類ごとの個数が a_1, …, a_m の並べ方は (a_1 + … + a_m)!/(a_1! … a_m!) 通りで、全部を区別した並べ方を同じ種類の入れ替えで割って得る。大きさを指定したグループ分けも同じ式で、区別しない同じ大きさのグループがあればさらにその個数の階乗で割る。"
+    signs:
+      - {type: phrase, text: "文字を並べ替えてできる文字列の個数"}
+      - {type: phrase, text: "各種類を使う個数が決まっている並べ方"}
+      - {type: phrase, text: "大きさを指定してグループに分ける方法の数"}
+    acl: []
+    frequency: B
+    sections:
+      - "式の意味（全部区別した n! を入れ替えで割る）"
+      - "二項係数の積として順に場所を決める"
+      - "DP で個数を決めながら合流ごとに二項係数を掛ける"
+      - "一部を先に並べて残りを挿入する（黄）"
+      - "区別しない同じ大きさのグループを割る（黄）"
+    merged_keys: []
+    visual: "図：全部区別した n! 通りを、同じ種類の入れ替えでまとめる"
+    problems:
+      - {id: abc234_f, role: example, summary: "部分列を並べ替えてできる文字列の数を、文字ごとの個数を DP で決めながら二項係数を掛けて数える"}
+      - {id: abc266_g, role: practice, summary: "RG が指定回数現れる文字列を、一部の文字を先に並べて残りを挿入する位置で数える"}
+      - {id: arc067_c, role: challenge, summary: "人数の条件を満たすグループ分けを、大きさごとに多項係数を掛け、同じ大きさの組の入れ替えで割って数える"}
+    sources: ["07-math-comb §4.2"]
+
+  - id: lattice-paths
+    chapter: 二項係数の系統
+    title: 格子路の数え上げ
+    aliases: [経路数, グリッドの最短経路の数, 障害物のある経路, 経路数に帰着]
+    type: technique
+    level: 水
+    level_evidence: "基本は abc145_d (1009)（緑）。禁止領域を避ける arc058_b (1905) は青、3 次元・座標変換の abc240_g (2462) は発展"
+    kind: [数え上げ]
+    prerequisites: [binomial-precompute]
+    related: [counting-bijection, binomial-identities, reflection-principle, inclusion-exclusion-dp, dp-grid, lgv-lemma]
+    summary: "(0,0) から (a,b) への右・上の最短経路は C(a+b, a) 通りで、R と U の列に対応する。禁止領域は境界を越える点で分類し、障害物が多ければ最初に踏む障害物で分ける包除 DP、斜めや 3 次元の移動は座標変換で独立な成分に分けて数える。"
+    signs:
+      - {type: phrase, text: "グリッドの左上から右下への最短経路の数"}
+      - {type: constraint, text: "H, W ≤ 10^5（グリッド DP では間に合わない）"}
+      - {type: phrase, text: "通れないマス・領域がある経路の数"}
+      - {type: phrase, text: "2 種類の移動を組み合わせて目的地へ行く方法の数"}
+    acl: []
+    frequency: B
+    sections:
+      - "基本：C(a+b, a) と R・U の列"
+      - "移動の種類を回数の組に直す"
+      - "禁止領域を避ける：境界を越える点で分類する（青）"
+      - "障害物が多いときは最初に踏む障害物で分ける（包除 DP へ）"
+      - "経路数の総和は縦の和の公式（恒等式へ）"
+      - "45 度回転・軸ごとに分けて独立にする（発展）"
+      - "二項係数の和を経路数として一括で求める"
+    merged_keys: []
+    visual: "動く図：格子の各点に経路数を左下から順に埋めるステップ送り。障害物があるときは最初に踏む障害物で経路を色分けする"
+    problems:
+      - {id: abc145_d, role: example, summary: "(+1,+2) と (+2,+1) の移動を回数の組に直し、並べ方の二項係数で数える"}
+      - {id: arc058_b, role: example, summary: "左下の長方形を避ける経路を、境界を越える点で分けて二項係数の積を足す"}
+      - {id: agc001_e, role: challenge, summary: "多数の二項係数の和を、グリッド上の経路数として DP で一括計算する"}
+      - {id: abc240_g, role: challenge, summary: "3 次元の ±1 移動を軸ごとの回数に分け、平面部分は 45 度回転で独立な 2 本の 1 次元移動にする"}
+    sources: ["07-math-comb §4.2", "07-math-comb §4.1"]
+
+  - id: binomial-identities
+    chapter: 二項係数の系統
+    title: 二項係数の恒等式と和の公式
+    aliases: [二項定理, Vandermonde の恒等式, hockey stick, 縦の和の公式, 吸収公式, 二項係数の和]
+    type: technique
+    level: 青
+    level_evidence: "abc262_e (1719)・abc154_f (1775)・arc106_d (1988) と青にまとまり、arc110_d (2078)・abc290_f (2300) は黄"
+    kind: [数え上げ]
+    prerequisites: [binomial-coefficient, lattice-paths]
+    related: [sigma-manipulation, counting-bijection, binomial-prefix-sum, generating-function-counting]
+    summary: "二項定理・Vandermonde の恒等式・縦の和（hockey stick）・吸収公式などで、二項係数を含む和を閉じた式にする。どれも「同じものを2通りに数える」で説明でき、式変形は小さいケースで検算する。"
+    signs:
+      - {type: phrase, text: "Σ の中に二項係数があり、N が大きく直接は足せない"}
+      - {type: phrase, text: "長方形領域の各点への経路数の総和"}
+      - {type: phrase, text: "偶数個（奇数個）を選ぶ方法の数の和"}
+      - {type: phrase, text: "全ペアの (A_i + A_j)^x の和"}
+    acl: []
+    frequency: B
+    sections:
+      - "二項定理、Σ C(n,k) = 2^n と交代和 = [n = 0]"
+      - "偶奇の条件つきの和"
+      - "Vandermonde の恒等式（2 グループから合計 k 個）"
+      - "縦の和（hockey stick）と経路数の総和"
+      - "吸収公式 k C(n,k) = n C(n−1, k−1)"
+      - "二項定理で累乗の和をまとめる"
+      - "式変形の検算（小さいケース）"
+    merged_keys: []
+    visual: "図：パスカルの三角形の上で、斜めの和（hockey stick）が1つ下のマスになる様子"
+    problems:
+      - {id: abc262_e, role: example, summary: "異なる色の辺の数の偶奇を赤い頂点の次数の和の偶奇に言い換え、奇数次数の頂点を偶数個選ぶ方法の和で数える"}
+      - {id: abc154_f, role: example, summary: "長方形領域の各点への格子路の数の総和を、縦の和の公式で閉じた式にする"}
+      - {id: arc106_d, role: practice, summary: "全ペアの (A_L + A_R)^x の和を、二項定理で展開してべき乗和から求める"}
+      - {id: arc110_d, role: challenge, summary: "二項係数の積の総和を、Vandermonde 型の恒等式で1つの二項係数にする"}
+      - {id: abc290_f, role: challenge, summary: "次数列ごとの木の直径の総和を、二項係数の和の公式で閉じた式にする"}
+    sources: ["07-math-comb §4.2", "07-math-comb §6.3"]
+
+  - id: twelvefold-way
+    chapter: 二項係数の系統
+    title: 写像12相（玉と箱の数え上げの地図）
+    aliases: [写像12相, 玉と箱, twelvefold way, 区別する・しない]
+    type: technique
+    level: 青
+    level_evidence: "マスごとに帯が散らばる地図のページ：重複組合せのマス abc021_d (1704 参考値)、集合の分割のマス abc310_d (1368)・abc390_d (1607)、整数の分割のマス abc226_f (2086)。各マスの詳しい扱いは個別のページに置く"
+    kind: [数え上げ]
+    prerequisites: [stars-and-bars, binomial-coefficient]
+    related: [counting-basics, bell-number, partition-number, inclusion-exclusion, multinomial-coefficient, counting-dedup]
+    summary: "n 個の玉を k 個の箱に入れる方法を「玉を区別するか × 箱を区別するか × 制限なし・1 個以下・1 個以上」の 12 通りに整理し、各マスの式と詳しいページへ案内する地図。箱を区別しないときに k! で割ってよいのは、どの箱も空でないときだけである。"
+    signs:
+      - {type: phrase, text: "区別しない箱（グループ）に分ける方法の数"}
+      - {type: phrase, text: "どのグループにも少なくとも1人入る"}
+      - {type: phrase, text: "玉（人・数）を箱（グループ・色）に配る方法の数"}
+    acl: []
+    frequency: B
+    sections:
+      - "12 マスの表と各マスの行き先のページ"
+      - "箱を区別しないと k! で割れない理由（空の箱）"
+      - "全射のマスで二項係数の系統と包除の系統が合流する"
+      - "問題文から区別の有無と制限を読み取る"
+    merged_keys: []
+    visual: "図：12 マスの表。各マスに小さい例（n = 4, k = 3）の個数と行き先のページを書く"
+    problems:
+      - {id: abc310_d, role: example, summary: "玉を区別し箱を区別しない・空なしのマス（第2種スターリング数）に、禁止ペアの条件がついたもの"}
+      - {id: abc021_d, role: example, summary: "玉を区別せず箱を区別する・制限なしのマス（重複組合せ）"}
+      - {id: abc390_d, role: practice, summary: "玉を区別し箱を区別しない・個数自由のマス（ベル数）を全列挙する"}
+      - {id: abc226_f, role: practice, summary: "玉も箱も区別しないマス（整数の分割）を、置換の巡回型として全列挙する"}
+    sources: ["07-math-comb §4.2", "07-math-comb §7.1", "07-math-comb §7.4"]
+
+  - id: bell-number
+    chapter: 二項係数の系統
+    title: 集合の分割（第2種スターリング数・ベル数）
+    aliases: [ベル数, 第2種スターリング数, "S(n,k)", 集合の分割, グループ分けの全列挙, 制限付き成長列, 全射の数]
+    type: technique
+    level: 青
+    level_evidence: "分割を全列挙する abc310_d (1368)・abc390_d (1607)。B_12 = 4213597 なので N ≤ 12 なら全列挙できる。全射の数を包除で求める abc242_f (2268) は黄"
+    kind: [数え上げ, 全探索]
+    prerequisites: [counting-dedup, recursive-enumeration]
+    related: [twelvefold-way, inclusion-exclusion, partition-number, stirling-first, bit-dp, subset-enumeration-dp]
+    summary: "n 個の区別できる要素を区別しない k 個の空でない組に分ける数が第2種スターリング数 S(n,k)、組の数を問わない総数がベル数 B_n である。各要素を「既存の組に入れる・新しい組を作る」で分岐すれば重複なく全列挙でき、B_12 ≈ 4.2×10^6 なので N ≤ 12 程度なら全部試せる。"
+    signs:
+      - {type: constraint, text: "N ≤ 10〜12 で、グループ分けを全部試す"}
+      - {type: phrase, text: "N 人を区別しない K 組に分ける（どの組も空でない）方法の数"}
+      - {type: phrase, text: "すべての色（箱）を少なくとも1回使う塗り方の数"}
+    acl: []
+    frequency: B
+    sections:
+      - "S(n,k) の漸化式（最後の要素が新しい組を作るか既存の組に入るか）"
+      - "ベル数と全列挙の個数の見積もり（B_10 = 115975、B_12 = 4213597）"
+      - "重複なく全列挙する書き方（制限付き成長列）"
+      - "全射の数 k! S(n,k) と包除の式（黄）"
+      - "bitDP・3^N の部分集合 DP との使い分け"
+    merged_keys: [stirling-second]
+    visual: "図：要素を1つずつ「既存の組に入れる・新しい組を作る」で分岐する木"
+    problems:
+      - {id: abc310_d, role: example, summary: "要素を既存の組か新しい組に入れる分岐で、禁止ペアを避けたグループ分けを重複なく全列挙する"}
+      - {id: abc390_d, role: example, summary: "N ≤ 12 個の袋の分け方（ベル数通り）をすべて列挙し、各組の和の XOR の種類数を数える"}
+      - {id: abc242_f, role: challenge, summary: "すべての行と列を使う駒の置き方を、全射の数と同じ形の包除で数える"}
+    sources: ["07-math-comb §4.4", "07-math-comb §6.3", "07-math-comb §7.5"]
+
+  - id: partition-number
+    chapter: 二項係数の系統
+    title: 整数の分割（分割数）
+    aliases: [分割数, 整数の分割, "p(n,k)", 分割の全列挙]
+    type: technique
+    level: 黄
+    level_evidence: "分割を全列挙する abc226_f (2086)・abc404_f (2162) と黄。分割数型の DP の abc221_h (2793) は発展"
+    kind: [数え上げ, 全探索]
+    prerequisites: [stars-and-bars, recursive-enumeration, dp-basics]
+    related: [twelvefold-way, permutation-cycles, bell-number, young-tableaux, knapsack-01]
+    summary: "整数 n を順序を区別せずに正の整数の和で表す方法の数が分割数 p(n) で、p(n,k) = p(n,k−1) + p(n−k,k) で数える。降順の列だけを作れば重複なく全列挙でき、p(50) = 204226 なので n ≤ 50 程度なら全部試せる。"
+    signs:
+      - {type: constraint, text: "N ≤ 50 程度で、長さ（個数）の組合せ（多重集合）を全部試す"}
+      - {type: phrase, text: "和が N になる多重集合の個数"}
+      - {type: phrase, text: "区別のない玉を区別のない箱へ配る方法の数"}
+    acl: []
+    frequency: B
+    sections:
+      - "分割数の漸化式 p(n,k)"
+      - "降順の列だけを作る全列挙"
+      - "全列挙の個数の見積もり（p(30) = 5604、p(50) = 204226）"
+      - "置換の巡回型との対応"
+      - "分割数型の DP（発展）"
+    merged_keys: []
+    visual: "図：n = 5 の 7 通りの分割を箱の並び（Young 図形）で並べる"
+    problems:
+      - {id: abc226_f, role: example, summary: "置換の巡回の長さの組（N の分割）を全列挙し、巡回型ごとの置換の数と lcm を掛けて足す"}
+      - {id: abc404_f, role: example, summary: "ボタンの押し方を M の分割として全列挙し、最適な押し方での確率を求める"}
+      - {id: abc221_h, role: challenge, summary: "同じ値を M 個まで含む多重集合の数を、分割数型の漸化式で求める"}
+    sources: ["07-math-comb §4.4", "07-math-comb §6.3", "07-math-comb §7.5"]
+
+  - id: lucas-theorem
+    chapter: 二項係数の系統
+    title: Lucas の定理と二項係数の偶奇
+    aliases: [Lucas の定理, nCr mod 2, 二項係数の偶奇, 小さい素数を法とする二項係数]
+    type: technique
+    level: 青
+    level_evidence: "arc117_c (1768)・agc043_b (1945) と ARC・AGC の青。ABC での直接の出題は見つかっていない"
+    kind: [数え上げ, 整数論]
+    prerequisites: [binomial-precompute]
+    related: [binomial-coefficient, bit-operations]
+    summary: "小さい素数 p を法とする C(n,k) を、n と k を p 進法で書いた各桁の二項係数の積で求める。p = 2 では「C(n,k) が奇数 ⇔ (n & k) == k」になり、隣り合う2つから値を作る操作を繰り返す問題で使う。"
+    signs:
+      - {type: phrase, text: "隣り合う2つから新しい値を作る操作を繰り返し、最後の1つを求める（三角形・ピラミッド）"}
+      - {type: phrase, text: "答えを mod 2・mod 3 など小さい素数で求める"}
+      - {type: constraint, text: "n が法 p 以上になりうる（前計算の nCr では 0 になってしまう）"}
+    acl: []
+    frequency: C
+    sections:
+      - "定理と p 進法の桁ごとの積"
+      - "p = 2 のとき (n & k) == k"
+      - "ピラミッドの係数が二項係数になることを見抜く"
+      - "前計算の nCr を n ≥ p で使う誤り"
+    merged_keys: []
+    visual: "図：パスカルの三角形を mod 2 で塗るとシェルピンスキーの三角形になる"
+    problems:
+      - {id: arc117_c, role: example, summary: "3 色の三角形の最後の色を、係数が二項係数になることと mod 3 の Lucas の定理で求める"}
+      - {id: agc043_b, role: example, summary: "差の絶対値を繰り返した最後の値の偶奇を、nCr mod 2 のビットの包含で判定する"}
+    sources: ["07-math-comb §4.2", "07-math-comb §7.4"]
+
+  - id: reflection-principle
+    chapter: 二項係数の系統
+    title: 鏡像法とカタラン数
+    aliases: [鏡像法, 反射原理, カタラン数, ballot 数, Dyck path, 正しい括弧列の個数]
+    type: technique
+    level: 黄
+    level_evidence: "abc205_e (2025) で必須（黄）。上下の両端を越えない abc309_h (3029) は発展"
+    kind: [数え上げ]
+    prerequisites: [lattice-paths]
+    related: [counting-bijection, binomial-identities, bracket-sequence, bracket-dp]
+    summary: "境界を越える格子路を、最初に境界に触れた点から先を折り返すことで別の終点への経路と1対1に対応させ、全体から引いて数える。対角線を越えない経路の数がカタラン数 C(2n,n)/(n+1) で、正しい括弧列の個数に等しい。"
+    signs:
+      - {type: phrase, text: "どの接頭辞でも A の個数が B の個数（+K）以上"}
+      - {type: phrase, text: "途中で負にならない ±1 の列の個数"}
+      - {type: phrase, text: "正しい括弧列の個数"}
+      - {type: phrase, text: "境界線を越えない経路の数"}
+    acl: []
+    frequency: C
+    sections:
+      - "折り返しの全単射（最初に触れた点から先を折り返す）"
+      - "越えない経路 = 全体 − 越える経路"
+      - "カタラン数と括弧列・二分木"
+      - "折り返す線のずれ（+1）と条件を満たせないときの 0"
+      - "括弧列を DP で数えるときとの使い分け"
+      - "両端を越えない場合（発展）"
+    merged_keys: [catalan-number]
+    visual: "動く図：格子路と境界線を描き、最初に触れた点から先を折り返すステップ送り"
+    problems:
+      - {id: abc205_e, role: example, summary: "どの接頭辞でも白の数が黒の数 + K 以下になる並べ方を、全体から鏡像法で越えるものを引いて数える"}
+      - {id: abc309_h, role: challenge, summary: "上下の端を越えない移動の数を、鏡像法で多項式の係数に落とし込む"}
+    sources: ["07-math-comb §4.4"]
+
+  # ===== 包除の系統 =====
+  - id: inclusion-exclusion
+    chapter: 包除の系統
+    title: 包除原理
+    aliases: [包除, 包除原理, inclusion-exclusion, 撹乱順列, 完全順列, モンモール数, 全射の数]
+    type: technique
+    level: 青
+    level_evidence: "2 条件なら abc131_c (518) と基礎。一般形は abc246_f (1677)・abc172_e (1880)・abc152_f (1965)・abc297_f (1990) と青、abc462_g (2232)・abc242_f (2268) は黄"
+    kind: [数え上げ]
+    prerequisites: [counting-mindset, bit-full-search, binomial-coefficient]
+    related: [inclusion-exclusion-dp, divisor-inclusion-exclusion, bell-number, zeta-mobius-subset, coupon-collector, complement, chromatic-number]
+    summary: "どの条件も破らないものの個数を、指定した条件の集合 S を「少なくとも」破るものの個数 N(S) の符号付きの和 Σ(−1)^|S| N(S) で求める。条件が少なければ bit 全探索、対称なら破る個数 k ごとにまとめ、撹乱順列や全射の数もこの形で数える。"
+    signs:
+      - {type: phrase, text: "すべて異なる・A_i ≠ B_i となるものの個数"}
+      - {type: phrase, text: "どの禁止条件も満たさないものの個数"}
+      - {type: phrase, text: "各色（各行・各列）を少なくとも1回使うものの個数"}
+      - {type: constraint, text: "禁止条件が M ≤ 20 個程度（2^M 通りの組を全部試せる）"}
+    acl: []
+    frequency: A
+    sections:
+      - "2〜3 条件の包除（基礎）"
+      - "一般形と、N(S) が「少なくとも」である理由"
+      - "条件の組を bit 全探索する（M ≤ 20）"
+      - "対称なら破る個数 k ごとにまとめる"
+      - "撹乱順列（完全順列）"
+      - "全射の数（各色を少なくとも1回使う）"
+      - "符号の付け忘れ・空集合・lcm のオーバーフロー"
+      - "使い分け：補集合・包除 DP・約数包除"
+    merged_keys: [derangement, derangement-bell]
+    visual: "動く図：ベン図で3集合の和集合を数え、足しすぎ・引きすぎの領域が順に打ち消し合うステップ送り"
+    problems:
+      - {id: abc131_c, role: example, summary: "C の倍数でも D の倍数でもない数の個数を、lcm を使った 2 条件の包除で数える"}
+      - {id: abc172_e, role: example, summary: "A_i ≠ B_i の条件を「一致する位置を k 個指定」で包除し、k ごとにまとめて数える（撹乱順列の一般化）"}
+      - {id: abc152_f, role: example, summary: "M ≤ 20 個の「パスに黒い辺を含む」条件を、bit 全探索の包除で数える"}
+      - {id: abc246_f, role: practice, summary: "選んだ文字列の文字だけで作れる文字列の数を、選ぶ集合ごとの共通の文字で包除する"}
+      - {id: abc297_f, role: practice, summary: "外接長方形の面積の期待値を、4 辺すべてに点がある配置を包除で数えて求める"}
+      - {id: abc462_g, role: challenge, summary: "重複を含む列の並べ替えでどの位置も指定の値と一致しない確率を、撹乱順列の包除を一般化して求める"}
+      - {id: abc242_f, role: challenge, summary: "白と黒の駒の置き方を、使われない行・列の集合で包除して数える"}
+    sources: ["07-math-comb §4.3", "07-math-comb §6.2", "07-math-comb §7.4", "00-curriculum §3.2"]
+
+  - id: divisor-inclusion-exclusion
+    chapter: 包除の系統
+    title: 約数包除（gcd ごとに数える）
+    aliases: [約数系包除, gcd がちょうど g, 倍数から引く, 互いに素な組の数, gcd の総和]
+    type: technique
+    level: 青
+    level_evidence: "abc361_f (1606)・abc304_f (1619)・abc162_e (1662)・abc206_e (1745) と青にまとまる"
+    kind: [数え上げ, 整数論]
+    prerequisites: [counting-mindset, gcd-lcm, harmonic-sum]
+    related: [mobius-function, zeta-mobius-divisor, euler-phi, burnside-lemma]
+    summary: "gcd がちょうど g になるものの個数 f(g) を、すべて g の倍数になるものの個数 F(g) から、大きい g の順に f(g) = F(g) − f(2g) − f(3g) − … で求める。全体の計算量は調和級数で O(N log N) になる。"
+    signs:
+      - {type: phrase, text: "gcd の総和を求める"}
+      - {type: phrase, text: "gcd が 1 になる（互いに素な）組の個数"}
+      - {type: phrase, text: "最小周期が d の列（文字列）の個数"}
+      - {type: constraint, text: "値の上限 ≤ 10^6 程度で、すべての g について数える"}
+    acl: []
+    frequency: B
+    sections:
+      - "「g の倍数」は gcd = g, 2g, 3g, … に排反に分かれる"
+      - "大きい g から引く理由と計算量 O(N log N)"
+      - "gcd の総和・互いに素な組"
+      - "周期の数え上げ（約数の周期で重複した分を引く）"
+      - "完全累乗などの重複を指数ごとに除く"
+      - "メビウス関数での書き方との対応"
+    merged_keys: []
+    visual: "図：数直線上に g の倍数を並べ、F(g) から倍数側の f を引いていく様子"
+    problems:
+      - {id: abc162_e, role: example, summary: "長さ N の列の gcd の総和を、gcd がちょうど g の個数を大きい g から求めて計算する"}
+      - {id: abc206_e, role: example, summary: "gcd(x, y) が条件を満たす組の数を、gcd ごとの個数を倍数から引いて求める"}
+      - {id: abc361_f, role: practice, summary: "N 以下の完全累乗の個数を、指数ごとの重複を除いて数える"}
+      - {id: abc304_f, role: practice, summary: "周期 d の文字列の数を、d の約数の周期で重複して数えた分を引いて求める"}
+    sources: ["07-math-comb §4.3", "06-math-nt §4.3", "06-math-nt §7.4"]
+
+  - id: zeta-mobius-divisor
+    chapter: 包除の系統
+    title: 約数・倍数のゼータ変換とメビウス変換（GCD・LCM 畳み込み）
+    aliases: [約数ゼータ変換, 倍数ゼータ変換, 倍数の累積和, 約数メビウス変換, GCD 畳み込み, LCM 畳み込み]
+    type: technique
+    level: 青
+    level_evidence: "倍数の個数を集める abc393_e (1253) は水、約数メビウス変換を使う abc474_f (1911) は青、lcm の総和の agc038_c (2327) は黄"
+    kind: [数え上げ, 整数論, 畳み込み・多項式]
+    prerequisites: [divisor-inclusion-exclusion, sieve-eratosthenes]
+    related: [zeta-mobius-subset, mobius-function, harmonic-sum, convolution-ntt, hadamard-transform]
+    summary: "すべての d について「d の倍数（約数）にわたる和」を求める変換とその逆変換で、素数ごとに累積和を取れば O(N log log N)、素朴に倍数を回しても O(N log N) で済む。GCD 畳み込みは倍数のゼータ変換 → 各点の積 → メビウス変換で、LCM 畳み込みは約数の版で求める。"
+    signs:
+      - {type: phrase, text: "各値 d について、d の倍数（約数）である要素の個数・和"}
+      - {type: phrase, text: "Σ f(gcd(A_i, A_j)) や lcm の総和"}
+      - {type: constraint, text: "値の上限 ≤ 10^6 程度で、gcd・lcm ごとに集計する"}
+    acl: []
+    frequency: B
+    sections:
+      - "倍数を回して集める O(N log N)（水）"
+      - "素数ごとの累積和で O(N log log N)"
+      - "逆変換（メビウス変換）と回す向き"
+      - "GCD 畳み込み・LCM 畳み込み"
+      - "部分集合のゼータ変換との対応（指数ベクトルの累積和）"
+    merged_keys: []
+    visual: "図：n を素因数の指数のベクトルとみなし、素数ごとの軸で累積和を取る格子の図"
+    problems:
+      - {id: abc393_e, role: example, summary: "各 d について d の倍数の個数を倍数を回して集め、各要素の約数で条件を満たす最大のものを求める"}
+      - {id: abc474_f, role: example, summary: "約数のゼータ変換とその逆変換（約数メビウス変換）で、値をそろえる操作の回数を求める"}
+      - {id: agc038_c, role: challenge, summary: "lcm の総和を、倍数のゼータ変換と約数のメビウス変換で求める"}
+    sources: ["07-math-comb §4.3", "06-math-nt §4.7", "06-math-nt §7.4"]
+
+  - id: mobius-function
+    chapter: 包除の系統
+    title: メビウス関数とメビウス反転
+    aliases: [メビウス関数, μ, メビウス反転, 互いに素な組の数え上げ]
+    type: technique
+    level: 黄
+    level_evidence: "agc038_c (2327)・agc039_c (2379) と黄、ABC では abc230_g (2516) が発展。青の問題は約数包除で足りる"
+    kind: [数え上げ, 整数論]
+    prerequisites: [divisor-inclusion-exclusion, sieve-eratosthenes]
+    related: [zeta-mobius-divisor, multiplicative-function, floor-quotient-enum, euler-phi]
+    summary: "メビウス関数 μ を使い、約数にわたる和 F(n) = Σ_{d|n} f(d) から f を戻す（メビウス反転）。[gcd = 1] = Σ_{d | gcd} μ(d) と置き換えて和の順序を入れ替えるのが典型で、約数包除を1本の式で書いたものにあたる。"
+    signs:
+      - {type: phrase, text: "gcd(i, j) = 1 となる組の個数・和"}
+      - {type: phrase, text: "Σ gcd や Σ lcm を求める"}
+      - {type: constraint, text: "N ≤ 10^6 程度で、μ を篩で前計算できる"}
+    acl: []
+    frequency: C
+    sections:
+      - "μ の定義と Σ_{d|n} μ(d) = [n = 1]（素因数についての包除）"
+      - "メビウス反転"
+      - "[gcd = 1] の置き換えと和の入れ替え"
+      - "μ を篩で作る"
+      - "商の列挙でまとめる（発展）"
+      - "約数包除との書き換え"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: agc038_c, role: example, summary: "全ペアの lcm の総和を、gcd ごとの和に直してメビウス変換で求める"}
+      - {id: agc039_c, role: practice, summary: "周期ごとの個数を、約数の周期との重複をメビウス反転で除いて数える"}
+      - {id: abc230_g, role: challenge, summary: "gcd(i, j) と gcd(P_i, P_j) がともに 1 でない組の数を、メビウス関数を変形した符号で数える"}
+    sources: ["07-math-comb §4.3", "06-math-nt §4.3", "06-math-nt §7.4"]
+
+  - id: zeta-mobius-subset
+    chapter: 包除の系統
+    title: 高速ゼータ変換・メビウス変換（部分集合）
+    aliases: [高速ゼータ変換, 高速メビウス変換, SOS DP, 部分集合の和, 上位集合の和, OR 畳み込み, AND 畳み込み]
+    type: technique
+    level: 黄
+    level_evidence: "arc100_c (2111) で必須（黄）。ABC では abc213_g (2663)・abc295_h (2728) と発展"
+    kind: [数え上げ, ビット演算, 畳み込み・多項式]
+    prerequisites: [bit-full-search, prefix-sum-2d]
+    related: [zeta-mobius-divisor, inclusion-exclusion, hadamard-transform, bit-dp, subset-enumeration-dp]
+    summary: "すべての集合 S について、部分集合（上位集合）にわたる和を bit ごとの累積和として O(n 2^n) で求める（素朴には O(3^n)）。逆変換（メビウス変換）で戻せ、OR・AND 畳み込みは変換 → 各点の積 → 逆変換で求める。"
+    signs:
+      - {type: constraint, text: "N ≤ 20 で、すべての部分集合（bit）ごとの和・最大を求める"}
+      - {type: phrase, text: "A_i OR A_j が K の部分集合になる組"}
+      - {type: phrase, text: "x ⊆ S となる x についての和を、すべての S で求める"}
+    acl: []
+    frequency: C
+    sections:
+      - "n 次元の累積和として見る（bit ごとに1軸ずつ）"
+      - "ループの順（bit を外側）"
+      - "メビウス変換（引き算で同じ順に回す）"
+      - "上位集合の版"
+      - "OR 畳み込み・AND 畳み込み"
+      - "和の代わりに上位 2 つを持つ"
+      - "XOR 畳み込みとの違い"
+    merged_keys: []
+    visual: "図：n = 3 の立方体の頂点に値を置き、軸ごとに累積していく様子を3段階で並べる"
+    problems:
+      - {id: arc100_c, role: example, summary: "i OR j が K の部分集合となる組の A_i + A_j の最大値を、部分集合ごとに上位 2 つを持つゼータ変換で求める"}
+      - {id: abc213_g, role: challenge, summary: "頂点集合ごとの連結な部分グラフの数を部分集合の DP で求め、頂点 1 と k を含む集合について足す"}
+      - {id: abc295_h, role: challenge, summary: "行ごとの状態を部分集合で持つ DP の遷移を、上位集合のゼータ変換で速くする"}
+    sources: ["07-math-comb §4.3", "06-math-nt §4.7", "06-math-nt §7.4"]
+
+  - id: inclusion-exclusion-dp
+    chapter: 包除の系統
+    title: 包除 DP（包除原理を DP に載せる）
+    aliases: [包除 DP, 符号付き DP, 最初に踏む障害物で分類, 障害物 DP]
+    type: technique
+    level: 黄
+    level_evidence: "arc115_e (2363)・abc309_g (2372) と黄。abc214_g (2893)・arc101_c (2913) は発展。典型の EDPC Y（dp_y）は diff なし"
+    kind: [数え上げ, DP]
+    prerequisites: [inclusion-exclusion, dp-basics, lattice-paths]
+    related: [dp-grid, dp-counting-dedup, tree-dp, insertion-dp]
+    summary: "包除の和 Σ(−1)^|S| N(S) の項が多すぎて列挙できないとき、S を作る過程を DP にし、符号を DP の値に掛けて運ぶ。障害物を並べて最初に踏む障害物で分類し全体から引く形（EDPC Y）もこの仲間で、DP の状態設計とあわせてこのページで扱う。"
+    signs:
+      - {type: constraint, text: "H, W ≤ 10^5 のグリッドに障害物が N ≤ 3000 個"}
+      - {type: phrase, text: "禁止条件が列や木に沿って並ぶ数え上げ"}
+      - {type: phrase, text: "|P_i − i| など、位置と値の差に制約がある順列の個数"}
+      - {type: phrase, text: "隣り合う値が異なる数列の個数"}
+    acl: []
+    frequency: C
+    sections:
+      - "包除の和を「S を作る過程」の重みの和と見る"
+      - "最初に踏む障害物で分類する（ソート順と終点の扱い）"
+      - "違反の個数を状態に持ち、最後に符号と残りの自由度を掛ける"
+      - "「等しい」を区間にまとめる符号付き DP"
+      - "符号付きの木 DP（発展）"
+    merged_keys: []
+    visual: "図：障害物を並べて、最初に踏む障害物で経路を色分けする"
+    problems:
+      - {id: dp_y, role: example, summary: "障害物をソートし、他の障害物を通らずに各障害物に着く経路数を全体から引いて求める"}
+      - {id: abc309_g, role: example, summary: "P_i と i の差が X 以上の順列を、違反する位置の個数を状態に持つ包除 DP で数える"}
+      - {id: arc115_e, role: practice, summary: "隣り合う値が異なる数列を、等しいと指定した隣接の個数に符号を付けた DP で数える"}
+      - {id: abc214_g, role: challenge, summary: "2 つの順列の両方と異なる順列を、違反の個数ごとに数えてから包除する"}
+      - {id: arc101_c, role: challenge, summary: "木の頂点のペアリングを、切る辺の集合に符号を付けた木 DP で包除する"}
+    sources: ["07-math-comb §4.3", "02-dp §4.J", "02-dp §5.1", "02-dp §5.2"]
+
+  # ===== 数え上げの構造 =====
+  - id: permutation-cycles
+    chapter: 数え上げの構造
+    title: 置換の巡回分解
+    aliases: [巡回置換, サイクル分解, 順列のサイクル, swap でソートする最小回数, 巡回型, 置換の位数]
+    type: technique
+    level: 基礎
+    level_evidence: "任意の swap でソートする最小回数の abc436_e (958) で必須（ikatakos 氏の解説では近年の ABC で頻出）。K 回の合成の abc377_e (1685) は青、巡回型ごとの数え上げの abc226_f (2086)・辞書順最小の abc371_g (2348) は黄（節）"
+    kind: [数え上げ, 考察]
+    prerequisites: []
+    related: [permutation-parity, functional-graph, inversion-number, partition-number, stirling-first, doubling]
+    summary: "順列 P を i → P_i の矢印で描くといくつかの巡回（サイクル）に分かれ、任意の2要素の swap でソートする最小回数は N − (巡回の個数) になる。K 回の合成は各巡回の上を進む操作で、巡回型ごとの置換の数 N!/Π(ℓ^{m_ℓ} m_ℓ!) を使えば数え上げもできる。"
+    signs:
+      - {type: phrase, text: "順列を任意の2要素の swap でソートする最小回数"}
+      - {type: phrase, text: "i → P_i をたどる・置換を K 回繰り返す"}
+      - {type: phrase, text: "元に戻るまでの回数（巡回の長さの lcm）"}
+      - {type: phrase, text: "巡回の長さの組ごとに分類して数える"}
+    acl: []
+    frequency: B
+    sections:
+      - "巡回分解の作り方（訪問済みの印をつけてたどる）"
+      - "swap で巡回が割れる・つながる：最小回数は N − 巡回の個数"
+      - "隣接 swap（転倒数）との違い"
+      - "K 回の合成と元に戻る回数（青）"
+      - "巡回型ごとの置換の数と全列挙（黄）"
+      - "巡回ごとに辞書順最小を決める（黄）"
+      - "Functional graph との関係"
+    merged_keys: []
+    visual: "図：i → P_i の矢印で巡回を描き、同じ巡回の中の swap で巡回が2つに割れる前後を並べる"
+    problems:
+      - {id: abc436_e, role: example, summary: "最小回数でソートする操作の1手目になりうる swap を、巡回ごとに C(大きさ, 2) を足して数える"}
+      - {id: abc377_e, role: practice, summary: "置換を自分自身と合成する操作の K 回後を、巡回の上を 2^K 歩進むことに直して求める"}
+      - {id: abc226_f, role: challenge, summary: "巡回型ごとの置換の数と、巡回の長さの lcm の K 乗を掛けて足す"}
+      - {id: abc371_g, role: challenge, summary: "置換を繰り返し適用してできる辞書順最小の列を、巡回ごとに最小値の位置を選び回数の条件を合同式で合わせて作る"}
+    sources: ["00-curriculum §4.2", "00-curriculum §3.2", "07-math-comb §4.4", "03-graph §4.C"]
+
+  - id: permutation-parity
+    chapter: 数え上げの構造
+    title: 置換の偶奇（swap の回数の偶奇）
+    aliases: [偶置換, 奇置換, 置換の符号, swap の回数の偶奇, 3 要素の巡回]
+    type: technique
+    level: 青
+    level_evidence: "abc470_f (1604)・abc296_f (1811) で偶奇の議論が鍵になる"
+    kind: [数え上げ, 考察]
+    prerequisites: [permutation-cycles, parity]
+    related: [inversion-number, invariant, game-mirror-strategy]
+    summary: "同じ置換をどんな swap の列で作っても、swap の回数の偶奇は変わらない（置換の符号）。3 要素の巡回は swap 2 回なので偶奇を変えず、「ちょうど K 回」や「巡回しかできない」操作で作れる列はこの偶奇で決まり、同じ値が2つあれば偶奇を調整できる。"
+    signs:
+      - {type: phrase, text: "ちょうど K 回（10^100 回など）の swap の後にありうる列"}
+      - {type: phrase, text: "3 つの要素を巡回させる操作しかできない"}
+      - {type: phrase, text: "2 つの列に同時に同じ位置の swap をする"}
+      - {type: phrase, text: "同じ値があるかどうかで答えが変わる"}
+    acl: []
+    frequency: B
+    sections:
+      - "置換の符号：swap の回数の偶奇は列によらない"
+      - "巡回の個数・転倒数から偶奇を求める"
+      - "3 要素の巡回は偶置換"
+      - "同じ値があれば偶奇を調整できる"
+      - "ちょうど K 回の操作で作れるもの"
+    merged_keys: []
+    visual: "図：互換の積で置換を作り、操作で偶奇が変わらないことを色で示す"
+    problems:
+      - {id: abc470_f, role: example, summary: "swap できる位置の組の連結成分ごとに並べ方を数え、同じ文字がない成分では偶奇の片方しか作れないことを使う"}
+      - {id: abc296_f, role: practice, summary: "2 つの列への同時 swap を片方の 3 要素の巡回に言い換え、swap の回数の偶奇で可否を判定する"}
+    sources: ["00-curriculum §4.2", "00-curriculum §3.2"]
+
+  - id: cayley-pruefer
+    chapter: 数え上げの構造
+    title: ラベル付き木の数え上げ（Cayley の公式と Prüfer 列）
+    aliases: [Cayley の公式, Prüfer 列, プリューファーコード, "n^(n−2)", 次数を指定した木の数, ラベル付き木の数え上げ]
+    type: technique
+    level: 黄
+    level_evidence: "abc290_f (2300) で使う（黄）。abc303_h (2501)・arc106_f (2755) は発展"
+    kind: [数え上げ, 木]
+    prerequisites: [multinomial-coefficient, counting-bijection, tree-basics]
+    related: [tree-degree, matrix-tree-theorem, generating-function-counting, binomial-identities]
+    summary: "頂点にラベルのある n 頂点の木は n^(n−2) 個あり、長さ n−2 の Prüfer 列と1対1に対応する。頂点 i は列にちょうど（次数 − 1）回現れるので、次数を指定した木は (n−2)!/Π(d_i − 1)! 個になる。"
+    signs:
+      - {type: phrase, text: "頂点にラベルのある木の個数"}
+      - {type: phrase, text: "各頂点の次数を指定（制限）した木の個数"}
+      - {type: phrase, text: "すべての木（すべての次数列）についての総和"}
+    acl: []
+    frequency: C
+    sections:
+      - "Prüfer 列の作り方と復元（全単射）"
+      - "Cayley の公式 n^(n−2)"
+      - "次数を指定した木の数（多項係数）"
+      - "次数列ごとに数えて総和を取る"
+      - "多項式（母関数）と組み合わせる（発展）"
+      - "全域木の個数は行列木定理（graph の発展）"
+    merged_keys: [tree-counting, tree-counting-formulas]
+    visual: "図：葉を最小番号から1つずつ取り除きながら Prüfer 列を作る過程を3〜4段階で並べる"
+    problems:
+      - {id: abc290_f, role: example, summary: "次数列を決めたときの木の数を使い、すべての次数列についての直径の総和を求める"}
+      - {id: abc303_h, role: challenge, summary: "次数が集合 S に入る木の数を、Prüfer 列と多項式の累乗で求める"}
+      - {id: arc106_f, role: challenge, summary: "各部品の穴の数を次数とみなし、Prüfer 列の考え方で全域木の数を閉じた式にする"}
+    sources: ["07-math-comb §4.4", "04-tree §4.7", "04-tree §4.34", "04-tree §7.4"]
+
+  - id: counting-labeled-graphs
+    chapter: 数え上げの構造
+    title: 連結なグラフの数え上げ
+    aliases: [連結グラフの数え上げ, 全体から非連結を引く, 頂点 1 を含む成分で分類, 条件を満たすグラフの個数]
+    type: technique
+    level: 黄
+    level_evidence: "abc281_g (2304) で必須（黄）。abc180_f (2419)・abc213_g (2663) は発展"
+    kind: [数え上げ, DP]
+    prerequisites: [counting-mindset, binomial-precompute, subset-enumeration-dp]
+    related: [counting-dedup, zeta-mobius-subset, connected-components, bfs]
+    summary: "連結なものを「全体 − 非連結なもの」で数え、非連結なものは頂点 1 を含む連結成分の大きさや頂点集合で分類して DP する。代表（頂点 1）を含む成分から決めることで、成分の順序による重複を防ぐ。"
+    signs:
+      - {type: phrase, text: "条件を満たす（連結な）グラフの個数"}
+      - {type: phrase, text: "辺の部分集合のうち、指定した頂点どうしが連結になるものの数"}
+      - {type: constraint, text: "N ≤ 17 程度で頂点集合ごとに DP する（3^N）"}
+      - {type: phrase, text: "最大の連結成分の大きさがちょうど L"}
+    acl: []
+    frequency: C
+    sections:
+      - "連結 = 全体 − 非連結"
+      - "頂点 1 を含む成分で分類する（重複を防ぐ代表）"
+      - "頂点集合ごとの DP（3^N）"
+      - "大きさだけで決まるときは二項係数で頂点を選ぶ"
+      - "距離の層ごとに頂点を配る"
+      - "「ちょうど L」を「L 以下」の差で数える"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: abc281_g, role: example, summary: "頂点 1 からの距離の層ごとに頂点を配り、層の間と層の中の辺の張り方を数えて掛ける"}
+      - {id: abc180_f, role: practice, summary: "連結成分がパスかサイクルのグラフを、頂点 1 を含む成分の大きさで分類して数える"}
+      - {id: abc213_g, role: challenge, summary: "頂点集合が連結になる辺の選び方を、全体から非連結を引く部分集合の DP で求める"}
+    sources: ["07-math-comb §4.4"]
+
+  # ===== 数え上げの発展（概要） =====
+  - id: stirling-first
+    chapter: 数え上げの発展
+    title: 第1種スターリング数
+    aliases: [第1種スターリング数, 巡回の個数ごとの順列の数, 上昇階乗]
+    type: overview
+    level: 発展
+    level_evidence: "abc385_g (2492)・abc247_h (2664) とも発展（FPS と組み合わせる）"
+    kind: [数え上げ, 畳み込み・多項式]
+    prerequisites: [permutation-cycles]
+    related: [bell-number, generating-function-counting, fps-basics, insertion-dp]
+    summary: "ちょうど k 個の巡回からなる n 次の置換の数（符号なし第1種スターリング数）で、c(n,k) = c(n−1,k−1) + (n−1) c(n−1,k) を満たす。上昇階乗 x(x+1)…(x+n−1) の係数になるので、FPS でまとめて求める。"
+    signs:
+      - {type: phrase, text: "巡回（サイクル）の個数ごとの順列の数"}
+      - {type: phrase, text: "左から見える（最大値を更新する）位置の個数ごとの順列の数"}
+      - {type: phrase, text: "最小の swap 回数ごとの並びの数"}
+    acl: [convolution]
+    frequency: C
+    sections:
+      - "何ができるか（巡回の個数ごとの数）"
+      - "漸化式と上昇階乗"
+      - "左から見える位置の数との対応"
+      - "FPS・分割統治でまとめて求める"
+      - "第2種との違い"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: abc385_g, role: example, summary: "左右から見える建物の数の差ごとの順列の数を、挿入 DP と上昇階乗の展開で求める"}
+      - {id: abc247_h, role: practice, summary: "最小 swap 回数ごとの並びの数を、巡回の個数を数える多項式の積で求める"}
+    sources: ["07-math-comb §4.4"]
+
+  - id: burnside-lemma
+    chapter: 数え上げの発展
+    title: Burnside の補題（回転などで同一視して数える）
+    aliases: [Burnside の補題, Pólya の数え上げ定理, ネックレス, 数珠順列]
+    type: overview
+    level: 発展
+    level_evidence: "abc198_f (2769)（発展）。回転の同一視を最短周期で分類して数える abc428_g (2472) も発展"
+    kind: [数え上げ]
+    prerequisites: [counting-dedup]
+    related: [divisor-inclusion-exclusion, euler-phi, gcd-lcm]
+    summary: "回転・反転などで同一視したときの本質的に異なるものの数を、各操作で動かないものの数の平均として求める。重複度が対象ごとに違って単純に割れない場面で使い、回転だけで同一視する数珠は (1/n) Σ_{d|n} φ(d) k^{n/d} になる。"
+    signs:
+      - {type: phrase, text: "回転（反転）して一致するものは同じとみなす"}
+      - {type: phrase, text: "数珠・ネックレスの塗り方の数"}
+      - {type: phrase, text: "立方体の面の塗り方（書き込み方）の数"}
+    acl: []
+    frequency: C
+    sections:
+      - "何ができるか（同一視したものの数 = 動かないものの数の平均）"
+      - "なぜ単純に操作の数で割れないか"
+      - "数珠（回転のみ）の式"
+      - "最短周期で分類して割る方法（約数包除の形）"
+      - "立方体の 24 通りの回転"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: abc198_f, role: example, summary: "立方体の 24 通りの回転それぞれで動かない書き込み方を数え、平均を取る"}
+      - {id: abc428_g, role: practice, summary: "回転で同一視するネックレスを、最短周期ごとに数えて周期の長さで割る（Burnside を使わない方法）"}
+    sources: ["07-math-comb §4.4", "07-math-comb §7.5"]
+
+  - id: binomial-prefix-sum
+    chapter: 数え上げの発展
+    title: 二項係数の部分和
+    aliases: [二項係数の累積和, "Σ_{k≤K} C(n,k)"]
+    type: overview
+    level: 発展
+    level_evidence: "abc235_g (2462)（発展）"
+    kind: [数え上げ]
+    prerequisites: [binomial-precompute]
+    related: [binomial-identities, inclusion-exclusion, mo-algorithm]
+    summary: "S(n,K) = Σ_{k≤K} C(n,k) を、S(n+1,K) = 2S(n,K) − C(n,K) と S(n,K+1) = S(n,K) + C(n,K+1) で (n, K) を1ずつ動かしながら更新する。部分和が大量に要る包除の計算で使う。"
+    signs:
+      - {type: phrase, text: "Σ_{k≤K} C(n,k) を多くの (n, K) について求める"}
+      - {type: phrase, text: "上限つきの配り方を包除で数える"}
+    acl: []
+    frequency: C
+    sections:
+      - "何ができるか"
+      - "n と K を1ずつ動かす更新式"
+      - "Mo のように動かす順番を工夫する"
+      - "包除と組み合わせる例"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: abc235_g, role: example, summary: "空の庭がない植え方を包除で数え、必要な二項係数の部分和を n を1ずつ動かしながら更新する"}
+    sources: ["07-math-comb §4.4"]
+
+  - id: generating-function-counting
+    chapter: 数え上げの発展
+    title: 母関数の考え方（数え上げを多項式の係数にする）
+    aliases: [母関数, 数え上げの多項式表現, 形式的冪級数で数える]
+    type: overview
+    level: 発展
+    level_evidence: "abc385_g (2492)・abc303_h (2501)・abc449_g (2631) などで FPS と組み合わせて使う（発展）"
+    kind: [数え上げ, 畳み込み・多項式]
+    prerequisites: [stars-and-bars, binomial-identities]
+    related: [fps-basics, convolution-ntt, cayley-pruefer, stirling-first]
+    summary: "選び方の数を多項式の係数として表し、積で独立な選択の組合せ、累乗で同じ選択の繰り返しを表す。各値を 0〜c 個使う選び方は (1 + x + … + x^c)、重複組合せは (1 − x)^(−k) の係数になり、多項式の演算そのものは math の FPS のページに任せる。"
+    signs:
+      - {type: phrase, text: "各要素の選び方が独立で、個数（和）の合計に条件がある"}
+      - {type: phrase, text: "多項式の累乗の係数を求める"}
+    acl: [convolution]
+    frequency: C
+    sections:
+      - "何ができるか（係数 = 数え方）"
+      - "積は独立な選択、累乗は繰り返し"
+      - "重複組合せ・上限つきの選び方を式で書く"
+      - "例：Prüfer 列と多項式の累乗、上昇階乗"
+      - "FPS の演算は math へ"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: abc303_h, role: example, summary: "次数の制約を多項式の累乗の係数として表し、木の数を求める"}
+      - {id: abc449_g, role: example, summary: "各桁の上限つきの和を (1−x^10)^(M−1)/(1−x)^M の係数として、二項係数と負の二項係数で求める"}
+      - {id: abc385_g, role: practice, summary: "上昇階乗を多項式として展開し、係数から順列の数を読む"}
+    sources: ["07-math-comb §4.4", "06-math-nt §4.7"]
+
+  - id: lgv-lemma
+    chapter: 数え上げの発展
+    title: LGV 補題（交わらない経路の組）
+    aliases: [LGV 補題, Lindström–Gessel–Viennot の補題, 交わらない経路の組]
+    type: overview
+    level: 発展
+    level_evidence: "ABC では abc216_h (3295) のみ（発展）"
+    kind: [数え上げ, 線形代数・行列]
+    prerequisites: [lattice-paths]
+    related: [determinant, matrix-tree-theorem, bit-dp]
+    summary: "DAG 上で k 個の始点から k 個の終点への、互いに交わらない経路の組の数（符号付き）を、始点 i から終点 j への経路数を並べた行列の行列式で求める。"
+    signs:
+      - {type: phrase, text: "K 本の経路が互いに交わらない組の個数"}
+      - {type: phrase, text: "複数の駒が衝突せずに動く確率"}
+    acl: []
+    frequency: C
+    sections:
+      - "何ができるか（行列式で数える）"
+      - "符号付きで数える理由（交わる組が打ち消し合う）"
+      - "格子路と組み合わせる"
+      - "行列式を bitDP で展開する例"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: abc216_h, role: example, summary: "K 個のロボットが衝突しない確率を、LGV 補題の行列式を bitDP で展開して求める"}
+    sources: ["07-math-comb §4.4"]
+
+  - id: young-tableaux
+    chapter: 数え上げの発展
+    title: Young 図形とフック長公式
+    aliases: [ヤング図形, 標準タブロー, フック長公式, Robinson–Schensted 対応]
+    type: overview
+    level: 発展
+    level_evidence: "ABC では abc378_g (3051) のみ（発展）"
+    kind: [数え上げ]
+    prerequisites: [partition-number]
+    related: [lis]
+    summary: "整数の分割を左詰めの箱の図（Young 図形）で表し、1〜N を行・列とも増加するように書き込む方法の数をフック長公式 N!/Π(フック長) で求める。Robinson–Schensted 対応で、順列の最長増加・減少部分列の長さの条件を図形の形の条件に言い換えられる。"
+    signs:
+      - {type: phrase, text: "最長増加部分列と最長減少部分列の長さが指定された順列の個数"}
+    acl: []
+    frequency: C
+    sections:
+      - "何ができるか"
+      - "フック長公式"
+      - "Robinson–Schensted 対応と LIS・LDS"
+      - "分割数との関係"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: abc378_g, role: example, summary: "最長増加・減少部分列の長さの条件を満たす順列の数を、Robinson–Schensted 対応とフック長公式で数える"}
+    sources: ["07-math-comb §4.4", "07-math-comb §7.5"]
+
+  # ===== 確率・期待値 =====
+  - id: probability-basics
+    chapter: 確率・期待値
+    title: 確率の基本
+    aliases: [確率, 条件付き確率, 全確率の公式, 独立と排反, 期待値の定義]
+    type: technique
+    level: 基礎
+    level_evidence: "abc126_c (638)・abc193_d (866) と茶〜緑"
+    kind: [確率・期待値]
+    prerequisites: [counting-basics]
+    related: [rational-mod, linearity-of-expectation, expected-value-dp, complement]
+    summary: "同様に確からしい場合は「確率 = 条件を満たす場合の数 / 全体の場合の数」で、独立な事象は掛け、排反な事象は足す。条件付き確率と全確率の公式（最初の一手で場合分け）は、期待値 DP の式の根拠になる。"
+    signs:
+      - {type: phrase, text: "確率を求めよ（絶対誤差・相対誤差 10^−6 まで許容）"}
+      - {type: phrase, text: "サイコロ・コイン・カードを使う確率"}
+      - {type: phrase, text: "最初に〜し、その結果に応じて〜するときの確率"}
+    acl: []
+    frequency: A
+    sections:
+      - "同様に確からしいとき：場合の数の比"
+      - "独立・排反・余事象"
+      - "条件付き確率と全確率の公式"
+      - "期待値の定義"
+      - "浮動小数点の誤差と出力の桁数"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: abc126_c, role: example, summary: "最初の出目で場合分けし、各場合でコインが続けて表になる確率を足す"}
+      - {id: abc193_d, role: practice, summary: "残りのカードの枚数から、2 枚の組合せごとに勝つ確率を数える"}
+    sources: ["07-math-comb §4.5"]
+
+  - id: coupon-collector
+    chapter: 確率・期待値
+    title: 幾何分布とコンプリートガチャ（成功まで・全種類そろうまで）
+    aliases: [幾何分布, 成功するまでの回数, "1/p", コンプガチャ, クーポンコレクター, "N H_N", min-max 包除]
+    type: technique
+    level: 基礎
+    level_evidence: "幾何分布の arc085_a (752)、等確率のコンプガチャの abc194_d (1078) と緑以下。確率が異なる・一部だけそろえるものは min-max 包除が要り、abc331_g (2668)・abc242_h (2835) と発展（節）"
+    kind: [確率・期待値]
+    prerequisites: [probability-basics]
+    related: [linearity-of-expectation, expected-value-dp, expectation-tail-sum, inclusion-exclusion]
+    summary: "成功確率 p の試行を成功するまで繰り返す回数の期待値は 1/p（幾何分布）。N 種類が等確率で出るとき全種類そろうまでの回数の期待値は、すでに k 種類ある段階ごとの N/(N−k) を足した N(1 + 1/2 + … + 1/N) になる。"
+    signs:
+      - {type: phrase, text: "成功するまで繰り返すときの回数の期待値"}
+      - {type: phrase, text: "すべての種類を集める（全頂点を訪れる）までの回数の期待値"}
+      - {type: phrase, text: "〜が出るまでサイコロを振り続ける"}
+    acl: []
+    frequency: B
+    sections:
+      - "幾何分布：E = 1 + (1 − p)E から 1/p"
+      - "失敗の回数（1/p − 1）との違い"
+      - "段階に分けて幾何分布の期待値を足す（コンプガチャ）"
+      - "確率が等しくないとき：min-max 包除（発展）"
+    merged_keys: [geometric-distribution]
+    visual: null
+    problems:
+      - {id: arc085_a, role: example, summary: "確率 1/2^M で全部通るまで提出し直す総時間の期待値を、1/p で求める"}
+      - {id: abc194_d, role: example, summary: "未訪問の頂点へ移る確率が (N−k)/N の段階ごとに 1/p を足し、全頂点を訪れるまでの期待値を求める"}
+      - {id: math_and_algorithm_z, role: practice, summary: "N 種類のコインがそろうまでの回数の期待値 N(1 + 1/2 + … + 1/N) を求める"}
+      - {id: abc331_g, role: challenge, summary: "確率の異なる N 種類がそろうまでの回数の期待値を、min-max 包除と多項式で求める"}
+      - {id: abc242_h, role: challenge, summary: "区間をランダムに塗って全マスが塗られるまでの回数の期待値を、min-max 包除と DP で求める"}
+    sources: ["07-math-comb §4.5", "07-math-comb §7.5"]
+
+  - id: rational-mod
+    chapter: 確率・期待値
+    title: 確率・期待値を mod 998244353 で答える
+    aliases: [有理数 mod, 有理数の mod 表現, "P × Q^(−1) mod p", 確率 mod 998244353, 分数を mod で表す]
+    type: technique
+    level: 水
+    level_evidence: "abc280_e (1251)・abc323_e (1279)・abc300_e (1354)・abc326_e (1363) と水で頻出"
+    kind: [確率・期待値, 整数論]
+    prerequisites: [mod-inverse, probability-basics]
+    related: [modint, mod-arithmetic, expected-value-dp, probability-dp, optimal-strategy-expectation]
+    summary: "答えの既約分数 P/Q を P × Q^(−1) mod 998244353 で出力させる形式の意味と扱い方。割り算を逆元の掛け算に置き換えても四則の関係は保たれるので実数での計算をそのまま mod で行ってよいが、mod の値どうしの大小比較はできない。"
+    signs:
+      - {type: phrase, text: "期待値（確率）を mod 998244353 で出力せよ"}
+      - {type: phrase, text: "求める値は有理数で表せ、既約分数 P/Q について R × Q ≡ P となる R を出力する"}
+      - {type: phrase, text: "確率が p% で与えられる"}
+    acl: [modint]
+    frequency: A
+    sections:
+      - "なぜ有理数を mod で表してよいか（逆元と四則の保存）"
+      - "途中の計算をすべて mod で行う"
+      - "確率 p% は p × 100^(−1) として入れる"
+      - "mod の値では大小比較できない（最適戦略は実数で比べる）"
+      - "分母が 0 になる式変形に注意する"
+      - "検算：出力を分数に戻す（有理数復元）"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: abc280_e, role: example, summary: "確率 P% の会心の一撃があるときの攻撃回数の期待値を、P/100 を mod に入れて DP で求める"}
+      - {id: abc323_e, role: example, summary: "ランダムに曲を流し続けたとき、時刻 X+0.5 に曲 1 が流れている確率を mod で求める"}
+      - {id: abc300_e, role: practice, summary: "サイコロの目を掛けていき N ちょうどになる確率を、mod の分数のまま DP する"}
+      - {id: abc326_e, role: practice, summary: "サイコロで給料が決まる過程の期待値を、後ろから mod で計算する"}
+    sources: ["07-math-comb §4.5", "06-math-nt §4.2", "06-math-nt §7.4"]
+
+  - id: linearity-of-expectation
+    chapter: 確率・期待値
+    title: 期待値の線形性と指示確率変数
+    aliases: [期待値の線形性, 和の期待値は期待値の和, 指示確率変数, indicator, ペアごとの確率, 総和と期待値の行き来]
+    type: technique
+    level: 水
+    level_evidence: "abc154_d (485) は易しい入口。abc334_e (1195)・abc417_f (1414) と水で前面に出る。指示確率変数でペアごとの確率に分ける typical90_bn（★5）・agc049_a (1922)・abc380_g (1995) は青、abc199_f (2065)・abc149_f (2208)・abc215_g (2276) は黄"
+    kind: [確率・期待値]
+    prerequisites: [probability-basics]
+    related: [counting-mindset, contribution, probability-symmetry, expected-value-dp, expectation-of-square, lazy-segment-tree]
+    summary: "E[X + Y] = E[X] + E[Y] は X と Y が独立でなくても成り立つので、複雑な量を部分の和に分けてそれぞれの期待値を足せる。個数の期待値は各候補が条件を満たす確率の和（指示確率変数）になり、全通りが一様なら「期待値 = 総和 / 総数」で数え上げの寄与と同じ計算になる。"
+    signs:
+      - {type: phrase, text: "〜の個数（種類数）の期待値"}
+      - {type: phrase, text: "転倒数・連結成分の数などの期待値"}
+      - {type: phrase, text: "ランダムな操作の後の値の総和の期待値"}
+      - {type: phrase, text: "全パターンについての和を求め、総数で割る"}
+    acl: []
+    frequency: A
+    sections:
+      - "線形性と独立性（積には独立性が要る）"
+      - "量を和に分けて各部分の期待値を足す"
+      - "操作が期待値に線形に作用するなら期待値のまま追う"
+      - "指示確率変数：個数の期待値 = 確率の和（青）"
+      - "ペアごとの確率と対称性（青）"
+      - "総和と期待値の行き来（青）"
+      - "線形性が使えない量（積・二乗・max）"
+    merged_keys: [indicator-variables, counting-vs-expectation]
+    visual: "図：確率変数を表（行 = 起こりうる場合、列 = 部分の量）で書き、行ごとの和の平均 = 列ごとの平均の和を示す"
+    problems:
+      - {id: abc154_d, role: example, summary: "各サイコロの期待値 (1+p)/2 を足して、連続 K 個の和の期待値の最大値を求める"}
+      - {id: abc334_e, role: example, summary: "ランダムな赤マスを緑にしたときの連結成分数の期待値を、各マスについての値の平均で求める"}
+      - {id: typical90_bn, role: example, summary: "値を一様に選んだ数列の転倒数の期待値を、各ペアが転倒する確率の和で求める"}
+      - {id: abc417_f, role: practice, summary: "区間を平均で上書きする操作を期待値の線形性で置き換え、遅延セグ木で期待値を更新する"}
+      - {id: abc276_f, role: practice, summary: "2 回引いた値の最大値の期待値を、全 K^2 通りの最大値の和を数えて割る"}
+      - {id: agc049_a, role: practice, summary: "操作回数の期待値を、各頂点が自分で選ばれる確率 1/(自分に到達できる頂点数) の和にする"}
+      - {id: abc380_g, role: practice, summary: "ランダムに選んだ区間をシャッフルした後の転倒数の期待値を、ペアごとに分けて求める"}
+      - {id: abc199_f, role: challenge, summary: "辺を選んで値を平均する操作が期待値に線形に作用することを使い、行列累乗で K 回後を求める"}
+      - {id: abc149_f, role: challenge, summary: "最小部分木に含まれる白い頂点の個数の期待値を、頂点ごとの確率の和で求める"}
+      - {id: abc215_g, role: challenge, summary: "K 個選んだときの色の種類数の期待値を、色ごとに「1 つ以上含まれる確率」の和で求める"}
+    sources: ["07-math-comb §4.5", "07-math-comb §6.2", "07-math-comb §7.3", "07-math-comb §7.4"]
+
+  - id: probability-symmetry
+    chapter: 確率・期待値
+    title: 対称性で確率を求める
+    aliases: [対称性, どれも同じ確率, ランダムな順列に置き換える, 2 状態に縮める]
+    type: technique
+    level: 水
+    level_evidence: "abc360_e (1249) は水、abc473_g (1974)・abc380_g (1995) は青、abc464_f (2225)・abc268_g (2311) は黄"
+    kind: [確率・期待値, 考察]
+    prerequisites: [probability-basics]
+    related: [symmetry, linearity-of-expectation, probability-dp, counting-fix-order]
+    summary: "入れ替えても問題が変わらない対象は、どれも同じ確率を持つ。「残りから一様に選んでいく」過程は「最初に一様ランダムな順列を決めて先頭から見る」過程と同じなので、状態を特別な1つとその他に縮めたり、ペアの大小を確率 1/2 としたりできる。"
+    signs:
+      - {type: phrase, text: "一様ランダムにシャッフルする"}
+      - {type: phrase, text: "ランダムに2つを選んで入れ替える操作を K 回行う"}
+      - {type: phrase, text: "残りから一様ランダムに1つずつ選ぶ"}
+      - {type: phrase, text: "ランダムな順列での順位・転倒の期待値"}
+    acl: []
+    frequency: B
+    sections:
+      - "入れ替えで移り合う事象は同じ確率"
+      - "特別な1つとその他に縮める（2 状態）"
+      - "残りから一様に選ぶ = ランダムな順列"
+      - "ペアの大小は確率 1/2"
+      - "対称でない要素（初期位置・特別な要素）に注意する"
+    merged_keys: []
+    visual: "図：N 個の位置を「特別な1つ」と「その他すべて（同じ確率）」の2状態に縮める"
+    problems:
+      - {id: abc360_e, role: example, summary: "黒玉が左端にある確率と、それ以外のどの位置にも等しい確率の 2 つだけを追う"}
+      - {id: abc473_g, role: practice, summary: "ランダムに並べたカードを先頭から順にめくると考えてよいことを使い、確率を求める"}
+      - {id: abc380_g, role: practice, summary: "シャッフルした区間内のペアは確率 1/2 で転倒することを使って、転倒数の期待値を求める"}
+      - {id: abc464_f, role: challenge, summary: "残りから一様に選んでいく過程を、一様ランダムな順列を先頭から見る過程に置き換える"}
+      - {id: abc268_g, role: challenge, summary: "接頭辞の関係にない 2 つの文字列の大小は確率 1/2 であることから、順位の期待値を求める"}
+    sources: ["07-math-comb §4.5"]
+
+  - id: probability-dp
+    chapter: 確率・期待値
+    title: 確率 DP（前向きに確率を配る）
+    aliases: [確率 DP, 到達確率, 分布を求める DP, ランダムウォーク]
+    type: technique
+    level: 水
+    level_evidence: "abc275_e (1264)・abc323_e (1279)・abc298_e (1300) と水。ランダムウォークの abc011_4 (1843 参考値) は青、行列累乗と組む abc271_g (2323) は黄"
+    kind: [確率・期待値, DP]
+    prerequisites: [probability-basics, dp-basics]
+    related: [expected-value-dp, rational-mod, probability-symmetry, dp-state-design, dp-matrix-power, lattice-paths]
+    summary: "dp[t][s] = 時刻 t に状態 s にいる確率を、初期状態の 1 から前向きに配って求める。確率の和が 1 に保たれることが検算になり、時刻が決まっている問題や分布そのものが要る問題に向く。"
+    signs:
+      - {type: phrase, text: "K 回の操作の後に〜である確率"}
+      - {type: phrase, text: "どちらが先にゴールするかの確率"}
+      - {type: phrase, text: "時刻 T に〜している確率"}
+      - {type: phrase, text: "N 回ランダムに上下左右へ動いた後の位置"}
+    acl: [modint]
+    frequency: B
+    sections:
+      - "状態に到達する確率を前から配る（和が 1 の検算）"
+      - "状態の設計：まとめる・上限で打ち切る・到達する値だけ持つ"
+      - "時刻ごとに配る"
+      - "期待値 DP との使い分け（前向きと後ろ向き）"
+      - "ランダムウォークと二項係数（青）"
+      - "同じ遷移を多数回行うときは行列累乗へ（黄）"
+    merged_keys: [random-walk]
+    visual: "図：状態の列に確率の量を配り、各ステップで分かれて流れる様子を3段階で並べる"
+    problems:
+      - {id: dp_i, role: example, summary: "N 枚のコインを投げて表が過半数になる確率を、表の枚数ごとの確率を配って求める"}
+      - {id: abc275_e, role: example, summary: "跳ね返りのあるすごろくで K 回以内にゴールする確率を、マスごとの確率を配って求める"}
+      - {id: abc323_e, role: practice, summary: "各時刻に曲が始まる確率を配り、時刻 X+0.5 に曲 1 が流れている確率を求める"}
+      - {id: abc298_e, role: practice, summary: "2 人のサイコロでどちらが先にゴールするかの確率を、両者の位置を状態に求める"}
+      - {id: tdpc_dice, role: practice, summary: "N 回振った出目の積が D の倍数になる確率を、2・3・5 の指数を上限で打ち切った状態で求める"}
+      - {id: abc011_4, role: practice, summary: "上下左右のランダムな移動を横に動く回数で分け、各軸の到達確率を二項係数で求めて掛ける"}
+      - {id: abc271_g, role: challenge, summary: "時間帯ごとに確率の決まった遷移を、行列累乗で多数回まとめて計算する"}
+      - {id: abc463_g, role: challenge, summary: "N 回の ±1 移動後の位置と目標との距離の期待値を、二項係数の和で求める"}
+    sources: ["07-math-comb §4.5", "02-dp §4.I", "02-dp §5.1", "02-dp §5.2", "02-dp §2.4"]
+
+  - id: expected-value-dp
+    chapter: 確率・期待値
+    title: 期待値 DP（後ろ向きに求める理由と自己ループ）
+    aliases: [期待値 DP, 後ろから決める期待値, 残りの期待値, 全期待値の公式, 自己ループ, 振り直し, 移項して解く]
+    type: technique
+    level: 水
+    level_evidence: "abc280_e (1251)・abc184_d (1276)・abc300_e (1354)・abc326_e (1363)・abc350_e (1385) と水。自己ループの abc263_e (1659)・abc314_e (1722) と abc382_e (1671) は青、abc144_f (2189) は黄"
+    kind: [確率・期待値, DP]
+    prerequisites: [linearity-of-expectation, dp-order]
+    related: [probability-dp, rational-mod, optimal-strategy-expectation, expectation-linear-equations, coupon-collector, dp-prefix-sum, memoized-recursion]
+    summary: "E[s] = 状態 s から終わるまでにかかる量の期待値とおき、最初の一手で場合分けした E[s] = c(s) + Σ P(s→t) E[t] を、終状態の E = 0 から後ろ向きに埋める。後ろ向きに求めるのは残りの量がそこまでの経緯によらないからで、自分自身へ戻る遷移は移項して消す。"
+    signs:
+      - {type: phrase, text: "〜になるまでの操作回数の期待値"}
+      - {type: phrase, text: "終わるまでにかかる費用の期待値"}
+      - {type: phrase, text: "出た目が〜なら振り直し・確率 p で何も起きない"}
+      - {type: constraint, text: "状態数 N ≤ 10^5 程度で、各状態の遷移が少数（または累積和でまとめられる）"}
+    acl: [modint]
+    frequency: A
+    sections:
+      - "全期待値の公式（最初の一手で場合分け）"
+      - "なぜ後ろ向きか（終状態が 0 の境界条件）"
+      - "状態の設計：区別しない・個数の組にまとめる"
+      - "計算順序とメモ化再帰"
+      - "自己ループの移項 E = (c + Σ …)/(1 − p)"
+      - "遷移を累積和でまとめる（青）"
+      - "前向きの確率 DP との使い分け"
+      - "mod で答えるとき"
+    merged_keys: [conditional-expectation, self-loop-expectation]
+    visual: "動く図：状態の DAG に、終状態から E を埋めていくステップ送り。自己ループの矢印と移項の式を並べる"
+    problems:
+      - {id: abc280_e, role: example, summary: "HP が 0 以下になるまでの攻撃回数の期待値を、HP ごとの残りの期待値で後ろから求める"}
+      - {id: abc184_d, role: example, summary: "いずれかの硬貨が 100 枚になるまでの操作回数の期待値を、3 つの枚数を状態に後ろから求める"}
+      - {id: dp_j, role: example, summary: "寿司が 1〜3 個乗った皿の数を状態にし、自己ループを移項して全部なくなるまでの回数の期待値を求める"}
+      - {id: abc300_e, role: practice, summary: "1 の目は状態を変えないので移項し、残り 5 つの目の平均で確率を求める"}
+      - {id: abc350_e, role: practice, summary: "1 の目で N が変わらない自己ループを移項し、2 つの操作の期待値の小さい方を取るメモ化再帰"}
+      - {id: abc263_e, role: practice, summary: "0 の目でその場にとどまるすごろくの期待値を、移項と累積和で後ろから求める"}
+      - {id: abc382_e, role: practice, summary: "1 パックのレアの枚数の分布を確率 DP で求め、必要枚数に達するまでのパック数の期待値を後ろから求める"}
+      - {id: abc314_e, role: practice, summary: "0 の目があるルーレットの費用を、0 以外が出る確率で割って自己ループを消しつつ最小の期待値を選ぶ"}
+      - {id: abc144_f, role: challenge, summary: "DAG 上でゴールまでの通路数の期待値を後ろから求め、各部屋で消す通路を全部試す"}
+      - {id: tdpc_ball, role: challenge, summary: "ボールを倒し尽くすまでの回数の期待値を、残りの位置の集合を状態にし自己ループを移項して求める"}
+    sources: ["07-math-comb §4.5", "07-math-comb §6.2", "02-dp §4.I", "02-dp §5.1", "02-dp §5.2", "02-dp §7.5"]
+
+  - id: optimal-strategy-expectation
+    chapter: 確率・期待値
+    title: 最適戦略の期待値（続けるか止めるか）
+    aliases: [最適停止, expectimax, 期待値の最大化, 選択は max・偶然は平均]
+    type: technique
+    level: 水
+    level_evidence: "abc266_e (1227)・abc350_e (1385) は水、abc314_e (1722) は青。abc412_f (2038)・abc470_e (2096)・abc421_e (2122)・abc342_f (2141) と黄にもまとまる"
+    kind: [確率・期待値, DP]
+    prerequisites: [expected-value-dp]
+    related: [minimax, rational-mod, expectation-linear-equations, binary-search-answer]
+    summary: "プレイヤーが選択できる確率過程で、期待値を最大（最小）にする戦略のもとでの期待値を、状態ごとに「選択は max（min）、偶然は平均」を取って後ろから求める。mod で答える問題でも比較は実数で行う。"
+    signs:
+      - {type: phrase, text: "最適に行動したときの期待値（勝率）"}
+      - {type: phrase, text: "好きなタイミングでやめられる・振り直せる"}
+      - {type: phrase, text: "どれを残すか（どれを選ぶか）を選びながら進む"}
+    acl: []
+    frequency: A
+    sections:
+      - "選択は max、偶然は平均（expectimax）"
+      - "止めるか続けるかを後ろから決める"
+      - "状態の設計（残すものの組を状態にする）"
+      - "比較は実数で、答えは mod で（比較できない落とし穴）"
+      - "やり直しがあるときは答えを仮定して二分探索する（黄）"
+      - "「最大値の期待値」との違い"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: abc266_e, role: example, summary: "残り k 回振れるときの期待値を、出目と「続けた場合の期待値」の大きい方の平均で後ろから求める"}
+      - {id: abc350_e, role: practice, summary: "2 種類の操作の期待値の小さい方を選びながら、N を 0 にする費用の期待値を求める"}
+      - {id: abc314_e, role: practice, summary: "どのルーレットを回すかを選んで、M 点に達するまでの費用の期待値を最小にする"}
+      - {id: abc412_f, role: practice, summary: "取り出した靴下のどちらを残すかを期待値の上で決め、残りの回数の期待値を求める"}
+      - {id: abc470_e, role: practice, summary: "神経衰弱で、取ったペア・場所を知ったカード・未知のカードの数を状態に最適行動の期待値を求める"}
+      - {id: abc421_e, role: practice, summary: "サイコロゲームで、振る部分は平均・残す目の選択は max を取るメモ化再帰"}
+      - {id: abc342_f, role: challenge, summary: "止めるタイミングを選ぶプレイヤーの勝率を、相手の得点の分布と累積和で最大化する"}
+    sources: ["07-math-comb §4.5", "07-math-comb §7.3", "02-dp §4.I"]
+
+  - id: expectation-linear-equations
+    chapter: 確率・期待値
+    title: 閉路のある期待値（未知数を残す・連立方程式）
+    aliases: [期待値の方程式, a + bX の形で持つ, 吸収マルコフ連鎖, 閉路のある DP, 振り出しに戻る]
+    type: technique
+    level: 青
+    level_evidence: "arc174_c (1706)・abc333_f (1770) と青、振り出しに戻る abc189_f (2154) は黄、最適戦略と組む abc224_g (2374) は黄の上端"
+    kind: [確率・期待値, DP, 線形代数・行列]
+    prerequisites: [expected-value-dp]
+    related: [gaussian-elimination, optimal-strategy-expectation, geometric-series-mod, binary-search-answer]
+    summary: "遷移に閉路があり後ろ向きに埋められない期待値を、戻る先の期待値を未知数 X とおいて各状態を a + bX の1次式で持ち、最後に X = a + bX を解いて求める。円環は1か所を未知数にして一周させ、一般の状態は連立一次方程式（掃き出し法）で解く。"
+    signs:
+      - {type: phrase, text: "振り出し（スタート）に戻るマスがある"}
+      - {type: phrase, text: "円形に並んだ人が順番に〜する"}
+      - {type: phrase, text: "無限に続く可能性がある"}
+      - {type: phrase, text: "2 人が交互に繰り返し、決着がつくまで続ける"}
+    acl: [modint]
+    frequency: B
+    sections:
+      - "自己ループの移項の一般化（戻る先が1か所）"
+      - "未知数を1つ残して a + bX で運ぶ"
+      - "円環状の依存を1周させて閉じる"
+      - "等比級数で閉じる（交互に繰り返す）"
+      - "一般の連立方程式（掃き出し法は math へ）"
+      - "min が入るときは X を二分探索で決める（黄）"
+      - "b = 1 のとき（期待値が無限大）"
+    merged_keys: [dp-with-cycles]
+    visual: "図：状態のグラフに自己ループと戻る辺を描き、未知数を置いて1次式で表す流れを示す"
+    problems:
+      - {id: arc174_c, role: example, summary: "2 人が交互に回すルーレットで各人の支払いの期待値を、無限に続く分を等比級数・方程式で閉じて求める"}
+      - {id: abc333_f, role: example, summary: "先頭が確率 1/2 で消えるか末尾へ回る過程の確率を、円環状の依存を1つの未知数で閉じて解く"}
+      - {id: abc189_f, role: practice, summary: "振り出しに戻るマスがあるすごろくで、スタートの期待値を X とおいて各マスを a + bX の形で求める"}
+      - {id: abc224_g, role: challenge, summary: "最適戦略に未知数を含む期待値を、変数を置いた 2 通りの式を等しくして解く"}
+    sources: ["07-math-comb §4.5", "07-math-comb §6.2", "02-dp §4.I", "02-dp §5.1"]
+
+  - id: expectation-tail-sum
+    chapter: 確率・期待値
+    title: 期待値と確率の変換（E[X] = Σ P(X ≥ k)）
+    aliases: [tail sum, 期待値と確率の変換, 最大値の期待値, K 番目の値の期待値]
+    type: technique
+    level: 黄
+    level_evidence: "abc295_e (2157) で必須（黄）。abc352_g (2413) は発展"
+    kind: [確率・期待値]
+    prerequisites: [linearity-of-expectation, counting-mindset]
+    related: [coupon-collector, continuous-probability, binomial-precompute]
+    summary: "非負整数の確率変数 X について E[X] = Σ_{k≥1} P(X ≥ k) が成り立つ。最大値・最小値・K 番目の値の期待値を「X ≥ k となる確率」の和に直して求め、「〜になるまでの回数」の期待値にも使う。"
+    signs:
+      - {type: phrase, text: "最大値（最小値・K 番目の値）の期待値"}
+      - {type: phrase, text: "〜がそろうまでに取り出す回数の期待値"}
+      - {type: constraint, text: "値の範囲 M ≤ 5000 程度で、各 k について P(X ≥ k) を数える"}
+    acl: []
+    frequency: C
+    sections:
+      - "X = Σ [X ≥ k] と線形性"
+      - "最大値・K 番目の値：「すべて k 未満」の余事象"
+      - "「〜になるまでの回数」= Σ P(k 回目までに終わらない)"
+      - "連続値の場合（積分、発展）"
+      - "「ちょうど」と「以上」の行き来"
+    merged_keys: []
+    visual: "図：P(X ≥ k) の棒グラフを横に積むと面積が期待値になる"
+    problems:
+      - {id: abc295_e, role: example, summary: "ソート後の K 番目の値の期待値を、各 x について P(K 番目 ≥ x) の和として二項係数で求める"}
+      - {id: abc352_g, role: challenge, summary: "同じ色の 2 枚がそろうまで取り出す回数の期待値を、「k 回目までそろわない確率」の和で求める"}
+    sources: ["07-math-comb §4.5"]
+
+  - id: expectation-of-square
+    chapter: 確率・期待値
+    title: 二乗の期待値・分散
+    aliases: [二乗の期待値, 分散, "E[X^2]", 確率・期待値・二乗を同時に運ぶ]
+    type: technique
+    level: 黄
+    level_evidence: "abc450_g (2227)（黄）、abc277_g (2491)（発展）"
+    kind: [確率・期待値]
+    prerequisites: [linearity-of-expectation]
+    related: [probability-dp, expected-value-dp, counting-mindset]
+    summary: "E[X^2] は線形性で直接は求まらないので、X を和に分けて X^2 = Σ_i Σ_j X_i X_j としペアごとの期待値を足すか、DP で「確率」「期待値 × 確率」「二乗の期待値 × 確率」を同時に運ぶ。分散は E[X^2] − E[X]^2 で求める。"
+    signs:
+      - {type: phrase, text: "〜の二乗の期待値"}
+      - {type: phrase, text: "分散を求める（最小化する）"}
+      - {type: phrase, text: "スコアの二乗の期待値"}
+    acl: []
+    frequency: B
+    sections:
+      - "E[X^2] と E[X]^2 の違い"
+      - "ペアに分ける（i = j の項を忘れない）"
+      - "(x + 1)^2 = x^2 + 2x + 1 で3つの量を同時に運ぶ"
+      - "分散と二乗和の関係"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: abc450_g, role: example, summary: "ランダムな操作で得る値の二乗の期待値を、全操作についての二乗の総和 / 操作の総数で求める"}
+      - {id: abc277_g, role: challenge, summary: "レベルの二乗の期待値を、確率・期待値・二乗の期待値の 3 つを一緒に遷移させて求める"}
+    sources: ["07-math-comb §4.5"]
+
+  - id: continuous-probability
+    chapter: 確率・期待値
+    title: 連続値の確率
+    aliases: [連続確率, 一様乱数, 確率と積分, 長さ・面積・角度の比]
+    type: overview
+    level: 発展
+    level_evidence: "agc021_b (2130)（黄）・abc226_h (2813)（発展）。ABC では G・Ex のみ"
+    kind: [確率・期待値]
+    prerequisites: [probability-basics, expectation-tail-sum]
+    related: [geometry-vectors, convex-hull]
+    summary: "[0, 1] の一様乱数などの連続な確率変数を扱い、確率は長さ・面積・角度の比、期待値は積分で求める。E[X] = ∫ P(X > t) dt や「N 個の一様乱数の K 番目の期待値は K/(N+1)」を使う。"
+    signs:
+      - {type: phrase, text: "実数を一様ランダムに選ぶ"}
+      - {type: phrase, text: "円内（区間内）のランダムな点"}
+    acl: []
+    frequency: C
+    sections:
+      - "何ができるか"
+      - "長さ・面積・角度の比"
+      - "積分と tail sum"
+      - "区分的な多項式の積分"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: agc021_b, role: example, summary: "円内のランダムな点に最も近い点が選ばれる確率を、凸包の外角の比で求める"}
+      - {id: abc226_h, role: practice, summary: "区間ごとに一様な実数の K 番目の値の期待値を、区分的な多項式の積分で求める"}
+    sources: ["07-math-comb §4.5"]
+
+  # ===== ゲーム =====
+  - id: game-basics
+    chapter: ゲーム
+    title: ゲームの基本と勝敗の DP（必勝・必敗）
+    aliases: [ゲーム DP, 必勝法, 必勝・必敗, 勝ち局面・負け局面, 二人零和有限確定完全情報ゲーム, メモ化再帰でゲームを解く]
+    type: technique
+    level: 水
+    level_evidence: "abc354_e (1223)・abc270_d (1300)・abc278_f (1452) と水、abc195_e (1609)・abc380_f (1769) は青。基本形の tessoku_book_af・dp_k は diff なし"
+    kind: [ゲーム, DP]
+    prerequisites: [memoized-recursion, dp-order]
+    related: [minimax, nim, grundy-number, game-retrograde-analysis, bit-dp, interactive]
+    summary: "二人零和有限確定完全情報ゲームでは、各局面は手番の人の必勝か必敗のどちらかに決まる。終局から後ろ向きに「負け局面へ1手で移れるなら勝ち、どこへ移っても勝ち局面なら負け」と DP（メモ化再帰）で埋め、残りの集合が状態なら bitDP にする。"
+    signs:
+      - {type: phrase, text: "先手と後手が交互に操作し、両者が最適に行動したとき勝つのはどちらか"}
+      - {type: phrase, text: "First / Second（Takahashi / Aoki）を出力する"}
+      - {type: constraint, text: "N ≤ 16〜18 で、残りのカードの集合が状態（bitDP）"}
+      - {type: phrase, text: "ジャッジと対戦する（インタラクティブ）"}
+    acl: []
+    frequency: A
+    sections:
+      - "ゲームの前提（零和・有限・確定・完全情報）"
+      - "必勝・必敗の定義と後ろ向きに決まる理由"
+      - "勝敗の DP とメモ化再帰"
+      - "状態の設計：集合（bitDP）・3^N・余り"
+      - "手番で取れる手が違うときは手番を状態に入れる"
+      - "閉路があるときは後退解析へ"
+      - "インタラクティブ：必勝戦略を実行する"
+    merged_keys: [game-winning-losing-dp, game-dp, interactive-games]
+    visual: "動く図：局面の DAG で、終局から勝ち・負けを塗っていくステップ送り（後退解析のページと同じ部品）"
+    problems:
+      - {id: tessoku_book_af, role: example, summary: "A 個か B 個取れる石取りの勝敗を、石の数ごとの勝ち負けの DP で求める"}
+      - {id: dp_k, role: example, summary: "取れる個数の集合が決まった石取りの勝敗を、残りの石の数ごとの DP で求める"}
+      - {id: abc354_e, role: example, summary: "残りのカードの集合を状態にした bitDP で、取り除けるペアがあるかを見て勝敗を決める"}
+      - {id: abc244_c, role: practice, summary: "1〜2N+1 を交互に言うゲームで、まだ言われていない数を答え続ける（インタラクティブ）"}
+      - {id: abc270_d, role: practice, summary: "石の数ごとに、手番の人が以後に取れる石の最大数を DP で求める"}
+      - {id: abc278_f, role: practice, summary: "使った単語の集合と最後の単語を状態にした bitDP で、しりとりの勝敗を決める"}
+      - {id: abc195_e, role: practice, summary: "後ろから「余りが j のとき勝てるか」を、手番の人に応じて or と and で埋める"}
+      - {id: abc380_f, role: practice, summary: "各カードの所在（3 か所）を状態にした 3^N 状態のメモ化再帰で勝敗を決める"}
+    sources: ["07-math-comb §4.6", "07-math-comb §2.4", "07-math-comb §7.2", "02-dp §4.I", "02-dp §5.1"]
+
+  - id: minimax
+    chapter: ゲーム
+    title: ミニマックス（得点差を最大化するゲーム）
+    aliases: [ミニマックス, negamax, 得点差 DP, 自分 − 相手の最大化]
+    type: technique
+    level: 水
+    level_evidence: "abc201_d (1317)・abc349_e (1464) と水、abc025_c (1640 参考値) は青。木の上の abc218_g (2217)・abc246_g (2313) は黄、区間 DP の abc303_g (2736) は発展"
+    kind: [ゲーム, DP]
+    prerequisites: [game-basics]
+    related: [interval-dp, optimal-strategy-expectation, tree-dp, dp-decision-binary-search]
+    summary: "両者が「自分の得点 − 相手の得点」を最大化するとき、f(局面) = 手番の人が以後に得る差の最大値とすると f = max_手 (その手の得点 − f(次の局面)) と1本の式で書ける（negamax）。零和なので、相手も同じ式で最適に動くとして後ろから値が決まる。"
+    signs:
+      - {type: phrase, text: "両者が最適に行動したときの得点（の差）"}
+      - {type: phrase, text: "太郎は X − Y を最大化し、次郎は最小化する"}
+      - {type: phrase, text: "列の両端から交互に取る"}
+      - {type: phrase, text: "交互に駒を進めて得点を取り合う"}
+    acl: []
+    frequency: B
+    sections:
+      - "得点差を1本の式で書く（符号の反転）"
+      - "max と min を手番で使い分ける書き方"
+      - "区間・グリッド・盤面を状態にする"
+      - "貪欲が最適でない例"
+      - "木の上のゲーム（黄）"
+      - "答えを決め打ちして勝敗に直す（黄）"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: dp_l, role: example, summary: "両端から取るゲームの得点差を、区間ごとの「手番の人の得点 − 相手の得点」の区間 DP で求める"}
+      - {id: abc201_d, role: example, summary: "グリッドを右か下に進みながら得点を取り合う差を、ゴール側からの DP で求める"}
+      - {id: tessoku_book_ai, role: practice, summary: "ピラミッドを交互に下る駒の最終値を、段ごとに max と min を交互に取る DP で求める"}
+      - {id: tdpc_game, role: practice, summary: "2 つの山から交互に取るゲームで、先手が得る価値の合計を残りの数の組を状態に求める"}
+      - {id: abc349_e, role: practice, summary: "重み付き三目並べの勝敗を、盤面の全状態のメモ化探索で求める"}
+      - {id: abc025_c, role: practice, summary: "3×3 のマスを交互に埋めたときの得点を、残りのマスの状態ごとのミニマックス探索で求める"}
+      - {id: abc218_g, role: challenge, summary: "木を根から降りて葉で止まるゲームの中央値を、手番ごとに max と min を取る DFS で求める"}
+      - {id: abc246_g, role: challenge, summary: "木の上のゲームの答えを決め打ちし、木 DP で達成できるかを判定する"}
+      - {id: abc303_g, role: challenge, summary: "袋を取り合うゲームの得点差を、区間 DP と区間 max の高速化で求める"}
+    sources: ["07-math-comb §4.6", "02-dp §4.I", "02-dp §5.2", "04-tree §7.4"]
+
+  - id: nim
+    chapter: ゲーム
+    title: Nim と XOR（Bouton の定理）
+    aliases: [Nim, ニム, ニム和, 石取りゲーム, 上限つき Nim, 逆形 Nim]
+    type: technique
+    level: 水
+    level_evidence: "変種の arc168_b (1289) が水、非対称な arc143_c (1805) は青。Nim の結論を使って考察する abc172_f (2216) は黄"
+    kind: [ゲーム, ビット演算]
+    prerequisites: [game-basics, bit-operations]
+    related: [grundy-number, game-mirror-strategy, hadamard-transform, partizan-games]
+    summary: "いくつかの山から1つを選んで1個以上取り、最後の石を取った方が勝つゲームでは、全山の個数の XOR が 0 なら後手必勝、0 でなければ先手必勝になる。XOR が 0 の局面からはどう動いても 0 でなくなり、0 でない局面からは必ず 0 にできることが理由である。"
+    signs:
+      - {type: phrase, text: "いくつかの山から石を取り合い、最後に取った人が勝ち"}
+      - {type: phrase, text: "1 回に取れる個数に上限（範囲）がある"}
+      - {type: phrase, text: "先手が勝てるように最初の配置を変えられるか"}
+    acl: []
+    frequency: B
+    sections:
+      - "Bouton の定理と証明の筋"
+      - "勝つための手（XOR を 0 にする山の選び方）"
+      - "上限つき（x mod (k+1)）・範囲つきの変種（青）"
+      - "先手と後手で取れる数が違うとき（青）"
+      - "逆形 Nim（最後に取った方が負け、発展）"
+      - "必勝局面の数え上げ（XOR 畳み込み、発展）"
+    merged_keys: [nim-variants, misere-nim, nim-counting]
+    visual: null
+    problems:
+      - {id: tessoku_book_ag, role: example, summary: "山の個数の XOR が 0 かどうかで勝敗を判定する"}
+      - {id: arc168_b, role: example, summary: "1 回に取れる上限 k の Nim は各山を k+1 で割った余りの Nim と同じになることから、後手必勝になる最大の k を求める"}
+      - {id: arc143_c, role: practice, summary: "先手は X 個、後手は Y 個ずつ取る非対称なゲームを、X+Y で割った余りと相手の手を戻す戦略で判定する"}
+      - {id: abc172_f, role: challenge, summary: "最初の 2 山の間で石を移して XOR を 0 にできるかを、XOR と AND の桁ごとの関係で決める"}
+      - {id: abc212_h, role: challenge, summary: "XOR が 0 でない Nim の盤面の数を、アダマール変換で数える"}
+    sources: ["07-math-comb §4.6", "07-math-comb §7.2"]
+
+  - id: grundy-number
+    chapter: ゲーム
+    title: Grundy 数と Sprague–Grundy の定理
+    aliases: [Grundy 数, nimber, mex, Sprague–Grundy の定理, ゲームの和, Grundy 数の周期性]
+    type: technique
+    level: 青
+    level_evidence: "abc368_f (1180) は易しい入口（水のロードマップから見せる）。Grundy 数が必須の問題は typical90_ae（★6）・abc297_g (1834)・abc206_f (2221)・abc278_g (2533) と青〜黄にまとまる（設計書 §4.3）"
+    kind: [ゲーム]
+    prerequisites: [nim, game-basics]
+    related: [interval-dp, counting-mindset, partizan-games, game-mirror-strategy]
+    summary: "両者の手の選択肢が同じ不偏ゲームでは、局面に Grundy 数 g = mex{次の局面の g} を割り当てると g = 0 ⇔ 必敗になり、独立なゲームの和の Grundy 数は各ゲームの Grundy 数の XOR になる。状態が大きければ、小さい局面の表から周期や式を見つける。"
+    signs:
+      - {type: phrase, text: "複数の山（盤面）があり、どれか1つを選んで操作する"}
+      - {type: phrase, text: "先手と後手の取れる手が同じ"}
+      - {type: constraint, text: "山の大きさが 10^18 などで Grundy 数を全部は計算できない（規則を見つける）"}
+    acl: []
+    frequency: B
+    sections:
+      - "mex と Grundy 数の定義"
+      - "Grundy 数を Nim の山の大きさとみなせる理由"
+      - "ゲームの和は XOR"
+      - "Grundy 数を DP で求める（区間・2 種類の石）"
+      - "規則を見つける：小さい局面の表と周期"
+      - "使えない場合（1手で複数を動かす・非不偏）"
+    merged_keys: [grundy-patterns]
+    visual: "図：小さい局面から Grundy 数を mex で埋めた表（周期が見える範囲まで）"
+    problems:
+      - {id: tessoku_book_ah, role: example, summary: "X 個か Y 個取れる石取りの Grundy 数を mex で求め、全山の XOR で判定する"}
+      - {id: abc368_f, role: example, summary: "真の約数に置き換える操作の Grundy 数が素因数の個数（重複込み）になることを使い、XOR で判定する"}
+      - {id: typical90_ae, role: example, summary: "白石と青石の 2 種類がある山の Grundy 数を DP で表にして XOR を取る"}
+      - {id: abc297_g, role: practice, summary: "L 個以上 R 個以下取れる Nim の Grundy 数の式を、小さい表を作って見つける"}
+      - {id: abc206_f, role: practice, summary: "区間を選ぶと重なる区間が使えなくなるゲームを、区間ごとの Grundy 数の区間 DP で解く"}
+      - {id: abc278_g, role: challenge, summary: "連続するカードの列ごとの Grundy 数を求め、XOR を 0 にする手を毎回出力する（インタラクティブ）"}
+      - {id: abc255_g, role: challenge, summary: "取れない手がある Nim の Grundy 数を、例外の局面だけ別に扱って圧縮して求める"}
+    sources: ["07-math-comb §4.6", "07-math-comb §7.2"]
+
+  - id: game-mirror-strategy
+    chapter: ゲーム
+    title: 真似戦略と手数の偶奇（考察で決まるゲーム）
+    aliases: [真似戦略, 対称戦略, ペアリング戦略, 手数の偶奇, 不変量で決まるゲーム]
+    type: technique
+    level: 青
+    level_evidence: "真似戦略は arc143_c (1805)・arc105_d (1871) と青、agc014_d (2266) は黄。手数の偶奇は abc398_e (1238)（水）・agc033_c (1758)・arc064_b (1814)（青）"
+    kind: [ゲーム, 考察]
+    prerequisites: [game-basics, parity]
+    related: [invariant, symmetry, grundy-number, nim, permutation-parity]
+    summary: "盤面を対称な2つに分けられるとき、相手の手を対称な位置で真似し続ければ負けない（真似戦略・ペアリング戦略）。総手数の偶奇が戦略によらず決まるゲームはその偶奇だけで勝敗が決まり、どちらも状態が大きく DP できないゲームで疑う。"
+    signs:
+      - {type: phrase, text: "盤面（配置）が対称・同じものが偶数個ずつある"}
+      - {type: phrase, text: "後手（先手）が必ず勝てることを示す"}
+      - {type: phrase, text: "最終的な形が戦略によらず決まる"}
+      - {type: phrase, text: "状態が大きすぎて DP できないゲーム"}
+    acl: []
+    frequency: C
+    sections:
+      - "真似戦略：対称な位置で真似する"
+      - "最初の一手で対称にしてから真似する"
+      - "ペアリング戦略（組の片方を取られたらもう片方を取る）"
+      - "真似した手が常に合法か"
+      - "総手数の偶奇で決まるゲーム（最終形から数える）"
+      - "不変量・余りで決まるゲーム"
+      - "実験で見つける"
+    merged_keys: [game-parity-invariant]
+    visual: null
+    problems:
+      - {id: abc398_e, role: example, summary: "最終的なグラフが決まっていることから追加できる辺の総数の偶奇で手番を選び、二部グラフを保つ辺を足し続ける（インタラクティブ）"}
+      - {id: arc105_d, role: example, summary: "同じ枚数の袋が偶数個ずつあるとき後手が相手の手を真似できることを使って勝敗を決める"}
+      - {id: agc033_c, role: practice, summary: "木のコイン取りの勝敗が直径の長さを 3 で割った余りで決まることを示す"}
+      - {id: arc143_c, role: practice, summary: "相手が崩した状態を必ず元に戻せる側が勝つことを使って、非対称なゲームの勝敗を決める"}
+      - {id: arc064_b, role: practice, summary: "端以外を消すゲームの最終形が両端の文字で決まることから、手数の偶奇で勝敗を決める"}
+      - {id: agc014_d, role: challenge, summary: "木に完全マッチングがあれば、後手が相手の塗った頂点の相方を塗り続けて勝てる"}
+    sources: ["07-math-comb §4.6", "07-math-comb §7.2"]
+
+  - id: game-retrograde-analysis
+    chapter: ゲーム
+    title: 後退解析（閉路のあるゲーム）
+    aliases: [後退解析, retrograde analysis, 引き分けのあるゲーム, 閉路のあるグラフ上のゲーム, グラフ上のゲーム]
+    type: technique
+    level: 黄
+    level_evidence: "abc209_e (2153)（黄）、abc261_h (2531)（発展）"
+    kind: [ゲーム, DP, グラフ探索]
+    prerequisites: [game-basics, bfs]
+    related: [topological-sort, dijkstra, cycle-detection]
+    summary: "局面の遷移に閉路があり引き分け（終わらない）もありうるゲームで、終局から逆辺をたどって勝敗を確定させる。行き先のうち勝ち局面と確定していないものの数を数えて 0 になれば負け、負け局面へ移れれば勝ちと確定させ、最後まで決まらない局面が引き分けになる。"
+    signs:
+      - {type: phrase, text: "無限に続く場合は Draw（引き分け）を出力する"}
+      - {type: phrase, text: "同じ局面が繰り返し現れうる"}
+      - {type: phrase, text: "グラフ上でコマを動かすゲーム・しりとり"}
+    acl: []
+    frequency: C
+    sections:
+      - "メモ化再帰が止まらない理由"
+      - "逆辺と、勝ちと確定していない行き先の数のカウンタ"
+      - "確定の規則（負けへ移れる → 勝ち、すべて勝ちへ → 負け）"
+      - "決まらない局面 = 引き分け"
+      - "得点のあるゲームはダイクストラの要領で確定させる（発展）"
+    merged_keys: [game-on-cyclic-graph, graph-games]
+    visual: "動く図：閉路のあるグラフで、終局から勝ち・負けが伝わり、閉路の部分だけ引き分けとして残るステップ送り（ゲーム DP のページと同じ部品）"
+    problems:
+      - {id: abc209_e, role: example, summary: "しりとりの単語を辺とするグラフで、逆辺をたどって勝ち・負け・引き分けを確定させる"}
+      - {id: abc261_h, role: challenge, summary: "得点のあるグラフ上のゲームを、確定した局面からダイクストラのように後退解析する"}
+    sources: ["07-math-comb §4.6", "03-graph §4.C", "00-curriculum §3.2", "02-dp §4.I"]
+
+  - id: partizan-games
+    chapter: ゲーム
+    title: 非不偏ゲーム（組合せゲーム理論）
+    aliases: [非不偏ゲーム, 超現実数, 組合せゲーム理論, Hackenbush]
+    type: overview
+    level: 発展
+    level_evidence: "abc229_h (3308)・abc265_h (3319) とも発展"
+    kind: [ゲーム]
+    prerequisites: [grundy-number]
+    related: [game-mirror-strategy, nim]
+    summary: "先手と後手で取れる手が違うゲームでは Grundy 数が使えない。局面に数（超現実数）を割り当て、独立な部分の和の符号で勝敗を判定する組合せゲーム理論の入口を紹介する。"
+    signs:
+      - {type: phrase, text: "先手と後手で動かせる駒や手が違う"}
+      - {type: phrase, text: "独立な部分の和で勝敗を判定したい"}
+    acl: []
+    frequency: C
+    sections:
+      - "何ができるか"
+      - "Grundy 数が使えない理由"
+      - "局面に数を割り当てて和を取る"
+      - "手数の貯金として見る"
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: abc229_h, role: example, summary: "先手と後手で動きの違う駒のゲームを、局面に数（超現実数）を割り当てて和で判定する"}
+      - {id: abc265_h, role: practice, summary: "向かい合う香車は Grundy 数、それ以外は手数の貯金として扱い、先手必勝の配置を数える"}
+    sources: ["07-math-comb §4.6"]
+
+moved:
+  - {key: matrix-tree-theorem, to: graph, reason: "設計書 §4.2（行列木定理は graph の発展。math の行列式を前提）。comb の cayley-pruefer・lgv-lemma から related でリンクする"}
+
+dropped: []
+
+open_issues:
+  - "04 の tree-counting（ラベル付き木の数え上げ）は、04 の案（07 に置き 04 からリンク）に従い cayley-pruefer の merged_keys に入れた。tree の catalog（担当 C）はまだないので、tree 側が moved（to: comb）にするか確かめてほしい。ほかの取り込み（02 の5つ・03 graph-games・00 の5つ）は dp・graph・guide の catalog の moved と一致し、matrix-tree-theorem は graph が id にしたことを確かめた"
+  - "写像12相は短い地図のページにし、マスごとの扱いを counting-basics・binomial-coefficient・stars-and-bars・inclusion-exclusion・bell-number・partition-number へ振り分けた。07 の案では第2種スターリング数・ベル数・分割数は写像12相の節だったが、地図を短く保つため「集合の分割（第2種スターリング数・ベル数、青）」と「整数の分割（分割数、黄）」を単独のページにした"
+  - "確率 DP は 07 の案（期待値 DP の節）ではなく 02 の案どおり単独のページ（水）にした。名前で引かれ、前向きに配る・時刻が決まっているという独自の「なぜ」があるため。自己ループの移項（水）は期待値 DP の節に、02 の dp-with-cycles（青）は「閉路のある期待値」のページに統合した"
+  - "ゲームの粒度：game-dp・game-winning-losing-dp・interactive-games を game-basics に、game-parity-invariant（07 の案は game-basics の節）を真似戦略と1ページ（考察で決まるゲーム、青）にまとめた"
+  - "permutation-cycles は 00（基礎：swap でソートする最小回数 abc436_e 958）と 07（黄：巡回型ごとの数え上げ abc226_f 2086）の同じ key を1ページにし、基礎のページに青・黄の節を置いた。黄の節が厚くなるなら「巡回型で数える」を別ページ（黄）に分ける案もある"
+  - "レベルの境界で迷った点：bell-number（青）は入口の abc310_d (1368) が水、lattice-paths（水）は基本形が緑、coupon-collector（基礎）は期待値の線形性（水）を使うが前提にせず related にした。optimal-strategy-expectation（水）は水の根拠が abc266_e (1227)・abc350_e (1385) で、まとまって出るのは黄"
+  - "07 の調査が推測で書いた他分野の key を、実在する調査の key に直した（modular-inverse → mod-inverse、eratosthenes-sieve → sieve-eratosthenes、formal-power-series → fps-basics、harmonic-series-complexity → harmonic-sum、cumulative-sum → prefix-sum など）"
+  - "同じ問題が複数のページの候補に入っている（abc310_d・abc226_f・abc390_d・abc297_g・abc398_e・abc380_g・abc350_e・abc314_e など）。執筆時に例題にするページを1つ決め、ほかのページでは練習か本文の参照に回す"
+  - "02 の候補のうち abc310_f は裏付けが AtCoder Tags（投票のタグ）だけなので入れなかった。02 の abc209_e・abc309_g の裏付け URL（kanpurin 2020-04-07）は問題より古い一覧の記事なので、執筆時は 03・07 の URL（hamayan・ikatakos・kmjp）で確かめる"
+  - "comb は 51 ページあるので、章の中に小見出し（数え上げの基礎・数え方の考え方・二項係数の系統・包除の系統・構造・数え上げの発展・確率と期待値・ゲーム）が要る。catalog の形式に小見出しの項目がないので YAML のコメントで区切りを示した。ナビゲーションの小見出しの持ち方を決めてほしい"
+  - "動く図は6つに絞った（格子路・鏡像法・包除原理のベン図・期待値 DP・ゲーム DP・後退解析。後の2つは同じ部品）。全体の 20〜30 個の枠の中で優先度を決めてほしい"
+  - "frequency は 07 §2.3・§2.6 と 00 §2.3.8 からのおおよその見積もりで、abc400 以降の出題数を数え直してはいない"

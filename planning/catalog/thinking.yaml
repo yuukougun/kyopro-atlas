@@ -1,0 +1,313 @@
+# 考察（thinking）の目次。規則は planning/catalog/README.md、上位の規則は planning/design.md §3〜§5（特に §4.1 の 7）。
+# 構成は research/01 §7.3 の案：入口 1 ページ（考察の型の索引）＋短いページ 8 本＋節。
+# 横断ページ「詰まったときの発想リスト」（guide の thinking-checklist、担当 I）がコンテスト中にたどる入口で、
+# このファイルの observation-hub は「型の一覧と合図」の索引、各ページは型の本体（合図・最小の例・ABC の例題 2〜4 問）。
+field: thinking
+pages:
+  - id: observation-hub
+    title: 考察の型の一覧（索引）
+    aliases: [考察, 典型考察, 発想の型, 考察テクニック, 対称性, 鳩の巣原理, 小さいケースで実験, 場合分け]
+    type: thinking
+    level: 基礎
+    level_evidence: "入口ページ。各型のレベルは各ページ・節による。節の型は、対称性 abc177_c（386）・abc171_e（778）、実験 abc165_d（600）・abc380_d（849）、場合分け arc091_a（514）、鳩の巣原理 abc174_c（902）・abc200_d（1217）で、鳩の巣原理は abc260_f（1995）まである（節に水の印）"
+    kind: [考察]
+    prerequisites: []
+    related: [thinking-checklist, stress-testing, proof-patterns, counting-mindset, periodicity, reverse-index-signs]
+    summary: "考察の型（言い換え・一部を固定・寄与・余事象・偶奇・不変量・後ろから・構築）を「問題の形 → 試す型」の表で引けるようにした索引。単独のページを持たない小さな型（対称性・鳩の巣原理・小さいケースの実験・場合分け）もここで扱う。"
+    signs:
+      - {type: phrase, text: "手法の名前が思いつかない・方針が立たない"}
+      - {type: phrase, text: "i < j の組の和など、入れ替えても同じ形をしている（対称性）"}
+      - {type: phrase, text: "余りが M 種類しかなく、M + 1 個以上の候補がある（鳩の巣原理）"}
+      - {type: phrase, text: "N が大きすぎて直接は計算できないが、小さい N なら全探索できる（実験）"}
+      - {type: phrase, text: "N = 1 などの端の場合だけ別扱いが要る（場合分け）"}
+    acl: []
+    frequency: A
+    sections:
+      - "問題の形 → 試す型の表（総和・数え上げ・操作・最大最小・構築）"
+      - "詰まったときの発想リスト（横断ページ）との分担"
+      - "対称性を使う（i < j の和・全体の XOR から 1 つ除く）"
+      - "鳩の巣原理（必ず一致が起きる・探索の打ち切り回数）（水）"
+      - "小さいケースで実験する（愚直解で表を作って規則を探す）"
+      - "場合分け・操作の順序を入れ替える"
+      - "ほかの型の行き先（足された回数 → 寄与、上界 → 構築、一手先 → ゲーム、データの持ち方 → データ構造）"
+    merged_keys: [symmetry, pigeonhole, experiment, casework, thinking-patterns-extra]
+    visual: "静的な図：「問題の形 → 試す考え方」のフローチャート（総和 → 寄与・bit ごと・対称性、数える → 余事象・固定・言い換え、操作 → 不変量・偶奇・後ろから・周期、最大最小 → 上界と構築・二分探索・貪欲、1 つ作る → 構築・実験）"
+    problems:
+      - {id: abc177_c, role: example, summary: "i < j の A_i A_j の和。（和の 2 乗 − 2 乗の和）/ 2 で求める（対称性）"}
+      - {id: abc165_d, role: example, summary: "⌊Ax/B⌋ − A⌊x/B⌋ の最大。小さい値で試すと x mod B だけで決まり、単調に増えると分かる（実験）"}
+      - {id: abc200_d, role: example, summary: "200 で割った余りが等しい異なる 2 つの部分列を探す。候補が 201 個あれば必ず一致するので、少数の要素だけ全探索すればよい（鳩の巣原理）"}
+      - {id: arc091_a, role: practice, summary: "N×M 枚のカードの周り 9 枚を反転したとき裏向きになる枚数。各カードが何回反転されるかを場合分けで数える"}
+      - {id: abc174_c, role: practice, summary: "7, 77, 777, … で最初に K の倍数になる項。余りは K 種類しかないので K 回以内に決着する（鳩の巣原理）"}
+      - {id: abc462_e, role: practice, summary: "対称性で場合を減らして最小化する最近の E（00 §2.3.8 の分類。内容は執筆時に確かめる）"}
+      - {id: abc260_f, role: challenge, summary: "二部グラフの長さ 4 の閉路を 1 つ探す。片側の頂点の組を記録し、同じ組が 2 回出たら見つかる（組の数で探索が止まる）"}
+    sources: ["01-basics §4.L", "01-basics §5", "01-basics §6.2", "01-basics §7.3", "00-curriculum §3.2", "00-curriculum §4.1", "00-curriculum §4.2", "00-curriculum §5.1"]
+
+  - id: reformulation
+    title: 言い換えの典型（条件・目的関数を書き直す）
+    aliases: [言い換え, 式変形, 条件の言い換え, 独立に分解, x と y を分ける, 変数変換]
+    type: thinking
+    level: 水
+    level_evidence: "abc140_d（1074）・abc324_e（1153）・abc105_d（1458）・abc146_e（1762）。drken の「操作・条件・目的関数を言い換える」ABC 72 問の中央値 617（易しい問題も多い）。最近の F では「言い換えてからセグ木に載せる」型が 10 問（research/00 §2.3.8）"
+    kind: [考察]
+    prerequisites: []
+    related: [observation-hub, prefix-sum-counting, fractional-binary-search, difference-sequence, bitwise-independence, axis-independence, manhattan-chebyshev, inversion-number]
+    summary: "条件や目的関数を、数えやすい・判定しやすい形に書き直す。区間和が M の倍数 ⇔ 累積和の余りが等しい、平均 ≥ x ⇔ Σ(a − x) ≥ 0、区間への加算 ⇔ 差分列の 2 点の増減、など手法ページに散らばる言い換えを一覧にして案内する。"
+    signs:
+      - {type: phrase, text: "条件が複雑で直接は数えにくい・判定しにくい"}
+      - {type: phrase, text: "式を変形すると i の項と j の項に分離できる"}
+      - {type: phrase, text: "x 方向と y 方向・bit ごと・連結成分ごとに結果が独立に決まる"}
+    acl: []
+    frequency: A
+    sections:
+      - "言い換えの一覧表（元の条件 → 言い換え → 使う手法のページ）"
+      - "i と j を分離する（a_i − i などの変数変換）"
+      - "独立に分解する（x と y・bit ごと・連結成分ごと）"
+      - "操作の言い換え（区間操作を差分列で・隣接 swap を転倒数で）"
+      - "言い換えてからデータ構造に載せる（青）"
+    merged_keys: [independence]
+    visual: "静的な図：元の条件と言い換えた条件を左右に並べた対応表"
+    problems:
+      - {id: agc003_a, role: example, summary: "N/S/E/W の移動距離を自由に選んで家に戻れるか。x 方向と y 方向を独立に判定する（独立に分解）"}
+      - {id: abc324_e, role: example, summary: "S_i + S_j が T を部分列に含む組の数。先頭・末尾から何文字一致するかに言い換え、ソートと二分探索で数える"}
+      - {id: abc105_d, role: practice, summary: "区間和が M の倍数 ⇔ 累積和の余りが等しい、と言い換えて数える（累積和のページと共通）"}
+      - {id: abc146_e, role: practice, summary: "余りが区間長に等しい ⇔ a_i − 1 の区間和の余りが 0、と言い換えて数える"}
+      - {id: abc479_f, role: challenge, summary: "隣接 swap の回数に言い換え、転倒数で数える最近の F（00 §2.3.8 の分類）"}
+    sources: ["01-basics §4.L", "01-basics §5", "01-basics §6.2", "01-basics §7.3", "00-curriculum §2.3.8"]
+
+  - id: fix-variable
+    title: 一部を固定して数える（決め打ち・真ん中を固定）
+    aliases: [決め打ち, 固定して全探索, 真ん中を固定, 片方を固定, 最大値を固定]
+    type: thinking
+    level: 基礎
+    level_evidence: "abc330_d（569）・arc102_a（966）・abc318_e（1004）・arc084_a（1096）・abc254_d（1191）。drken の「一部の変数を固定して考える」ABC 55 問の中央値 1004。最近も abc458_e（1309）・abc453_e（1513）"
+    kind: [考察, 全探索]
+    prerequisites: [brute-force]
+    related: [binary-search, contribution, counting-fix-order, greedy-priority-queue]
+    summary: "変数の一部（3 つ組の真ん中・最大値・余りなど）を固定すると、残りの条件が単純になって独立に数えられる。固定したあとは二分探索・累積和・連想配列で残りを速く数える。"
+    signs:
+      - {type: phrase, text: "3 つ組 (i < j < k) を数える"}
+      - {type: phrase, text: "2 つの値の組で、片方を決めればもう片方の条件が単純になる"}
+      - {type: phrase, text: "最大値（最小値）を決めて残りを最適化する"}
+    acl: []
+    frequency: A
+    sections:
+      - "真ん中を固定して左右を独立に数える"
+      - "角・余り・平方因子を除いた部分を固定する"
+      - "最大値を固定して残りを最適化する"
+      - "固定したあとを速くする（二分探索・累積和・連想配列）"
+    merged_keys: []
+    visual: "静的な図：3 つ組の真ん中 j を固定し、左側と右側を独立に数える図"
+    problems:
+      - {id: abc330_d, role: example, summary: "o のマス 3 つで L 字を作る組の数。角のマスを固定し、同じ行・列の o の数の積を足す"}
+      - {id: arc102_a, role: example, summary: "a+b, b+c, c+a がすべて K の倍数となる組。a の余りを固定すると b, c の余りも決まる"}
+      - {id: abc318_e, role: example, summary: "A_i = A_k ≠ A_j となる i < j < k の数。値ごとに出現位置の列を見て、間の個数をまとめて数える"}
+      - {id: abc254_d, role: practice, summary: "i × j が平方数となる組。i の平方因子を除いた部分を固定すると j の形が決まる"}
+      - {id: abc458_e, role: practice, summary: "仕切りの位置を固定して二項係数で数える最近の E（00 §2.3.8 の分類）"}
+      - {id: abc453_e, role: challenge, summary: "人数を固定して場合を分け、二項係数と累積和で数える最近の E（00 §2.3.8 の分類）"}
+    sources: ["01-basics §4.L", "01-basics §5", "00-curriculum §2.3.8"]
+
+  - id: contribution
+    title: 主客転倒・寄与（和の順序を入れ替える）
+    aliases: [主客転倒, 寄与, 貢献度, contribution technique, 和の順序交換, 足された回数]
+    type: thinking
+    level: 水
+    level_evidence: "abc186_d（436）・abc172_d（963）は易しいが、abc379_e（1246）・abc351_f（1253）・abc151_e（1344）と水に多く、abc140_e（1873）は青。drken の「主客転倒・寄与分解」ABC 16 問の中央値 1907。最近も abc468_e（1038）・abc455_f（1549）・abc471_g（2464）などで頻出"
+    kind: [考察, 数え上げ]
+    prerequisites: []
+    related: [counting-contribution, linearity-of-expectation, bitwise-independence, sigma-manipulation, monotonic-stack, fenwick-tree]
+    summary: "「対象ごとに要素の和を取る」二重和を、「要素ごとに、その要素が数えられる回数 × 値」に入れ替えて求める。全ペア・全区間・全部分集合についての総和で、各要素が何回足される（最大・最小になる）かを数える。"
+    signs:
+      - {type: phrase, text: "すべての組・区間・部分集合についての総和"}
+      - {type: phrase, text: "各要素が答えに何回足されるか"}
+      - {type: phrase, text: "全区間の最小値（2 番目に大きい値）の和"}
+    acl: []
+    frequency: A
+    sections:
+      - "二重和の順序の入れ替え（表の行と列）"
+      - "ソートで符号を決める（全ペアの差）"
+      - "各桁・各約数の寄与"
+      - "各要素が最大・最小になる回数（同じ値の扱い）"
+      - "数え上げ・期待値での使い方（数え上げの章へ）"
+    merged_keys: []
+    visual: "静的な図：（対象 × 要素）の表で、行ごとに足すか列ごとに足すかを入れ替える図"
+    problems:
+      - {id: abc186_d, role: example, summary: "全ペアの差の絶対値の和。ソートすると各要素が足される回数と引かれる回数が決まる"}
+      - {id: abc172_d, role: example, summary: "Σ k × (k の約数の個数)。約数 d ごとに、d の倍数の和として数え直す"}
+      - {id: abc151_e, role: example, summary: "K 個選んだときの max − min の総和。ソートし、各要素が最大・最小になる回数を二項係数で数える"}
+      - {id: abc468_e, role: practice, summary: "平均の総和を、主客転倒（寄与）と前計算で求める最近の E（00 §2.3.8 の分類）"}
+      - {id: abc379_e, role: practice, summary: "数字列の全部分文字列が表す整数の和。各桁が何回どの位で現れるかを数える"}
+      - {id: abc351_f, role: practice, summary: "i < j の max(A_j − A_i, 0) の和。各 j について前にある小さい値の個数と和を BIT で数える"}
+      - {id: abc140_e, role: challenge, summary: "全区間の 2 番目に大きい値の和。各値が 2 番目になる区間の数を、左右の大きい値の位置から数える"}
+    sources: ["01-basics §4.L", "01-basics §5", "01-basics §7.3", "07-math-comb §4.1", "00-curriculum §2.3.8"]
+
+  - id: complement
+    title: 余事象（数えやすい側を数えて引く）
+    aliases: [補集合, 全体から引く, 少なくとも 1 つ]
+    type: thinking
+    level: 基礎
+    level_evidence: "abc193_c（379）・abc178_c（653）・abc162_d（757）・abc156_d（1014）。drken の「考察：補集合を考える」ABC 29 問の中央値 833。最近も abc455_e（1157）"
+    kind: [考察, 数え上げ]
+    prerequisites: []
+    related: [counting-complement, inclusion-exclusion, counting-at-most-difference]
+    summary: "「少なくとも 1 つ」「〜でない」ものは、全体から数えやすい補集合を引いて数える。条件が 2 つ以上重なると包除原理になる。mod での引き算は負にならないように直す。"
+    signs:
+      - {type: phrase, text: "〜でないもの・少なくとも 1 つ含むもの"}
+      - {type: phrase, text: "すべて異なる・条件を 1 つでも満たす"}
+      - {type: phrase, text: "直接数えると場合分けが多い"}
+    acl: []
+    frequency: B
+    sections:
+      - "全体 − 補集合"
+      - "条件が 2 つなら包除原理（数え上げの章へ）"
+      - "mod の引き算と空集合の扱い"
+    merged_keys: []
+    visual: "静的な図：全体の長方形から数えやすい部分を切り抜くベン図"
+    problems:
+      - {id: abc193_c, role: example, summary: "N 以下で a^b と表せない数。表せる数を列挙して全体から引く"}
+      - {id: abc178_c, role: example, summary: "0 と 9 を両方含む長さ N の数列の数。全体から含まないものを引く（包除）"}
+      - {id: abc162_d, role: example, summary: "R, G, B がすべて異なる 3 つ組から、等間隔の組を引く"}
+      - {id: abc156_d, role: practice, summary: "a 本でも b 本でもない花束の作り方。2^n − 1 から nCa と nCb を引く"}
+      - {id: abc455_e, role: practice, summary: "条件を満たす部分文字列を、余事象・包除原理・累積和で数える最近の E（00 §2.3.8 の分類）"}
+    sources: ["01-basics §4.L", "01-basics §5", "07-math-comb §4.1", "00-curriculum §2.3.8"]
+
+  - id: parity
+    title: 偶奇に着目する
+    aliases: [パリティ, 偶奇性, mod 2, 市松模様, チェッカーボード]
+    type: thinking
+    level: 基礎
+    level_evidence: "arc089_a（397）・typical90_x（★2）。応用 abc126_e（1340）・abc313_d（1630）。drken の「パリティに着目する」ABC 38 問の中央値 514。市松模様の偶奇は abc454_e（1627）・abc474_g（2280）で青以上（節に印）"
+    kind: [考察]
+    prerequisites: []
+    related: [invariant, bipartite-graph, game-parity-invariant, union-find-applications, interactive]
+    summary: "1 歩ごとに (x + y) の偶奇が入れ替わる、±1 をちょうど K 回なら差と K の偶奇がそろう、など偶奇の必要条件から可否を判定する。グリッドでは市松模様の色の偶奇が不変量になる。"
+    signs:
+      - {type: phrase, text: "ちょうど K 回の操作・±1 の移動"}
+      - {type: phrase, text: "和が偶数という条件"}
+      - {type: phrase, text: "グリッドを 1 マスずつ動く操作の可否"}
+      - {type: phrase, text: "チェス盤の塗り分け・ドミノの敷き詰め"}
+    acl: []
+    frequency: A
+    sections:
+      - "1 歩ごとに偶奇が入れ替わる"
+      - "ちょうど K 回なら偶奇がそろうことが必要"
+      - "偶奇の条件でつながった成分（Union-Find）"
+      - "市松模様の偶奇（青）"
+      - "二部グラフ・ゲームとのつながり"
+    merged_keys: [checkerboard-parity]
+    visual: "静的な図：市松模様の塗り分けで、1 歩ごとに色が入れ替わる図"
+    problems:
+      - {id: arc089_a, role: example, summary: "時刻と位置の計画が実行可能か。距離が時間以下で、その差が偶数であることが必要十分"}
+      - {id: typical90_x, role: example, summary: "±1 をちょうど K 回で A を B にできるか。差の合計が K 以下で、偶奇が一致すること"}
+      - {id: abc126_e, role: example, summary: "A_x + A_y + Z が偶数という条件から全カードを当てる最小枚数。条件でつながった成分ごとに 1 枚見ればよい"}
+      - {id: abc454_e, role: practice, summary: "グリッドの市松模様の色の偶奇で、到達・構築の可否を判定する"}
+      - {id: abc313_d, role: practice, summary: "K 個の和の偶奇だけを聞けるインタラクティブで 01 列を特定する。差を取って 1 つずつ決める"}
+      - {id: abc474_g, role: challenge, summary: "市松模様の条件を実験で推測して構築する"}
+    sources: ["01-basics §4.L", "01-basics §5", "00-curriculum §3.2", "00-curriculum §2.3.8"]
+
+  - id: invariant
+    title: 不変量・単調に変わる量
+    aliases: [不変量, モノバリアント, 保存量, 単調量, 操作の順序によらない]
+    type: thinking
+    level: 基礎
+    level_evidence: "ABC では abc125_d（833）・abc323_d（852）・abc140_d（1074）・arc068_b（1084）・typical90_ca（★3）と緑まで。ARC・AGC では青以上で頻出（drken の 25 問の中央値 1171、うち ABC は 5 問）。型の紹介にとどめる"
+    kind: [考察]
+    prerequisites: []
+    related: [parity, reverse-thinking, proof-patterns, game-parity-invariant, run-length-encoding, difference-sequence]
+    summary: "操作で変わらない量（和の余り・個数の偶奇・XOR）を見つけて必要条件を得て、十分性は構築で示す。操作で必ず減る量（単調量）は操作回数の上界や停止性の証明に使う。"
+    signs:
+      - {type: phrase, text: "操作を好きな回数・好きな順に行える"}
+      - {type: phrase, text: "目標の状態に到達できるか・最終状態の最大値"}
+      - {type: phrase, text: "操作の前後で変わらない量（和・偶奇・余り）がありそう"}
+    acl: []
+    frequency: B
+    sections:
+      - "不変量で必要条件を見つけ、構築で十分性を示す"
+      - "単調量（必ず減る量）で回数の上界を得る"
+      - "操作の順序によらないなら都合のよい順で考える"
+      - "独立な部分に分ける（奇数部分ごと）"
+    merged_keys: []
+    visual: "静的な図：状態の横に不変量を表示しながら操作を進める図"
+    problems:
+      - {id: abc125_d, role: example, summary: "隣の 2 つの符号を反転する操作を何度でも行う。負の数の個数の偶奇が変わらないことから最大和が決まる"}
+      - {id: abc323_d, role: example, summary: "同じ大きさのスライム 2 体を合体させる。大きさを奇数部分ごとに分けると独立に最小体数が決まる"}
+      - {id: arc068_b, role: example, summary: "3 枚取って真ん中を戻す操作で残せる最大枚数。1 回で 2 枚減ることから偶奇で決まる"}
+      - {id: typical90_ca, role: practice, summary: "2×2 に同じ値を足し引きする操作で A を B にできるか。操作の順番によらないので左上から決めていける"}
+      - {id: abc140_d, role: practice, summary: "区間反転 K 回で幸福な人数を最大化する。境界の数が 1 回で高々 2 しか減らない（単調量）"}
+    sources: ["01-basics §4.L", "01-basics §5", "01-basics §7.3"]
+
+  - id: reverse-thinking
+    title: 後ろから・逆順に考える
+    aliases: [逆から考える, 操作を逆再生, クエリを逆順に処理, 削除を追加に]
+    type: thinking
+    level: 水
+    level_evidence: "agc032_a（738）・abc134_d（926）・arc065_a（930）・abc137_d（1313）・abc120_d（1355）。drken の「順序の工夫：後ろから見る」ABC 6 問の中央値 1120。最近も abc477_d（946）・abc466_f（1887）"
+    kind: [考察, クエリ処理の工夫]
+    prerequisites: []
+    related: [union-find-connectivity, offline-queries, greedy-priority-queue, invariant]
+    summary: "後ろから決めると選択肢が一意になる、削除を逆にすると追加になる、最後の操作が特定できれば逆再生で取り除ける、など時間の向きを逆にして考える。"
+    signs:
+      - {type: phrase, text: "後ろから決めると一意に決まる"}
+      - {type: phrase, text: "辺・要素の削除のクエリ（逆にすれば追加）"}
+      - {type: phrase, text: "最後の操作が特定できる・操作列を復元する"}
+    acl: []
+    frequency: B
+    sections:
+      - "後ろから決めると一意になる"
+      - "削除を逆順の追加にする（Union-Find はグラフの章）"
+      - "最後の操作を特定して逆再生する"
+      - "締め切りを後ろから見る"
+    merged_keys: []
+    visual: "静的な図：時間を逆向きに再生し、削除を追加に置き換える図"
+    problems:
+      - {id: abc134_d, role: example, summary: "i の倍数番目の箱の和の偶奇が指定どおりになる入れ方。大きい i から決めると一意に決まる"}
+      - {id: arc065_a, role: example, summary: "4 つの単語の連結で S を作れるか。後ろから照合すると切り方が一意に決まる"}
+      - {id: abc120_d, role: example, summary: "橋が順に壊れていくときの不便さ。逆順に橋を架け、Union-Find で連結成分を併合する"}
+      - {id: agc032_a, role: practice, summary: "操作列を復元する。最後の操作は位置と値が一致する最も右の要素と決まるので、逆再生で取り除く"}
+      - {id: abc477_d, role: practice, summary: "クエリを逆順に処理して解く最近の D（00 §2.3.8 の分類。内容は執筆時に確かめる）"}
+      - {id: abc466_f, role: challenge, summary: "操作を逆から考え、同じ長さのものをまとめて処理する最近の F（00 §2.3.8 の分類）"}
+    sources: ["01-basics §4.L", "01-basics §5", "00-curriculum §2.3.8"]
+
+  - id: construction
+    title: 構築問題の考え方
+    aliases: [構築, constructive, 1 つ出力せよ, 上界と下界, 必要条件と十分性]
+    type: thinking
+    level: 水
+    level_evidence: "abc350_c（394）・keyence2020_c（625）・arc115_c（706）・abc131_e（1433）・abc126_f（1770）。drken の「構築」ABC 13 問の中央値 1192。上界を示して達成する型は abc139_d（357）・abc112_d（1025）で基礎（節に印）。最近も abc454_e（1627）・abc474_g（2280）"
+    kind: [考察]
+    prerequisites: []
+    related: [observation-hub, invariant, graph-construction, tree-construction, stress-testing]
+    summary: "条件を満たすものを 1 つ作る問題は、小さい N で手で作って規則を見つけ、不可能な場合の必要条件を先に挙げてから一般化する。最大値を求める問題では、上界を示してそれを達成する例を作る。"
+    signs:
+      - {type: phrase, text: "条件を満たすものを 1 つ出力せよ（存在しなければ −1）"}
+      - {type: phrase, text: "操作手順を出力せよ（回数の上限が与えられている）"}
+      - {type: phrase, text: "最大値を求めるが、答えに自然な上限がありそう"}
+    acl: []
+    frequency: A
+    sections:
+      - "小さい N で作って規則を一般化する"
+      - "必要条件を先に挙げる"
+      - "上界・下界を示して達成する例を作る（基礎）"
+      - "出力を検査するプログラムで確かめる"
+      - "ABC の構築の型（手順・数列・グラフ）"
+    merged_keys: [bound-and-construct]
+    visual: "静的な図：小さい N で作った例を並べて規則的に伸ばす様子と、上界の線に構築例が届く図"
+    problems:
+      - {id: abc139_d, role: example, summary: "1..N の並べ替えで Σ(i mod P_i) の最大。各項 ≤ i − 1 の上界を達成する並べ方を示す（上界と達成）"}
+      - {id: keyence2020_c, role: example, summary: "和が S の区間がちょうど K 個ある数列を作る。S を K 個並べ、残りは S と干渉しない値で埋める"}
+      - {id: abc131_e, role: example, summary: "距離 2 の頂点対がちょうど K 個の連結グラフを作る。スターから辺を足して 1 つずつ減らす"}
+      - {id: abc350_c, role: practice, summary: "順列を N−1 回以下の swap でソートする手順を出力する。各値を正しい位置へ送る"}
+      - {id: arc115_c, role: practice, summary: "i が j の約数なら A_i ≠ A_j の条件で最大値を最小化する。素因数の個数 + 1 を割り当てる"}
+      - {id: abc112_d, role: practice, summary: "和が M の N 項の数列の gcd の最大。gcd は M の約数で M/N 以下という上界と、その達成"}
+      - {id: abc126_f, role: challenge, summary: "同じ値の 2 つの間の XOR が K になる長さ 2^(M+1) の数列を作る。対称な並べ方を工夫する"}
+    sources: ["01-basics §4.L", "01-basics §5", "01-basics §7.3"]
+
+moved: []
+
+dropped: []
+
+open_issues:
+  - "考察の入口が 2 つある：guide の thinking-checklist（コンテスト中に上から順にたどる問いのリスト。担当 I）と、thinking の observation-hub（考察の型の索引）。分担：thinking-checklist は問いの並びと各ページへのリンクだけ、observation-hub は「問題の形 → 型 → ページ」の表と、単独ページを持たない小さな型（対称性・鳩の巣原理・実験・場合分け）の節を持つ。guide.yaml の open_issues と同じ論点"
+  - "鳩の巣原理（pigeonhole、README §6 で thinking が持ち主）は research/00 が青（abc260_f 1995）、research/01 が水（abc200_d 1217 など）。単独ページにせず observation-hub の節（水の印）とし、abc260_f を力試しにした。research/00 §3.2 の案（発想リストの節）とは違う"
+  - "research/00 の difference-reformulation（guide は thinking へ moved）は、research/01 の difference-sequence と同じ考え方なので basics の difference-sequence に統合した（guide の reason にある「basics に置いてもよい」を採った）。reformulation の一覧表からリンクする"
+  - "設計 §4.2 で寄与・余事象・偶奇などの一般論は thinking、数え上げ・期待値・ゲームでの使い方は comb とした。07 の counting-contribution・counting-complement・counting-experiment・game-parity-invariant は comb の持ち主のまま related で相互リンクする（comb.yaml ができたら確かめる）"
+  - "thinking の各ページの prerequisites は空にし、入口の observation-hub は related にした（research/01 は construction・reformulation・reverse-thinking の前提に observation-hub を置いていたが、索引は「読めない前提」ではないため）"
