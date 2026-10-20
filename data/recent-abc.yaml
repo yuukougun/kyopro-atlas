@@ -1,0 +1,1122 @@
+# 最近の ABC（abc451〜abc480 の D〜G、120問）と、使う手法のページの対応（design-review D5）。
+# ロードマップの「位置ごとの頻出手法（最近30回）」「最近の ABC → ページ」の表と、frequency の付け直しの材料。
+#
+# 出典: planning/research/00-curriculum.md §2.3.8 の分類表（technique はその「使われた手法」の列、evidence は「裏付け」の列）。
+# 項目:
+#   position・title・difficulty  tools/ap.py のキャッシュ（取得 2026-10-21T01:14:31+09:00）の値
+#   pages         表に名前の出た手法ごとに、それを説明する catalog のページの id（節が決まれば id#anchor）。1問に複数。
+#                 ほかの手法の中で使う道具（Kruskal 法の Union-Find、転倒数の BIT など）も、表に名前があれば入れた。
+#                 表に名前がなくても、裏付けの記事や research の各レポートで解法の中心と分かった手法は入れ、note に書いた。
+#                 technique・thinking・overview のページを使い、題材別（patterns）は手法のページがないときだけ入れた（abc470_d）。
+#                 hub・guide・cpp・start のページは入れない。
+#   alternatives  表や裏付けで別解・発展とされた手法のページ（frequency の回数に数えない）
+#   unmatched     表に名前の出た手法のうち、対応するページ・節がないもの（ないときは項目ごと省く）
+#   note          対応の根拠と解法の要点。「evidence で確かめた」は裏付けの記事を読んで節・ページを決めたもの、
+#                 「research/0x」はその調査レポートの同じ問題の行、「表の記述どおり」は表の記述だけで決めたもの
+# 対応を確かめた catalog: 2026-10-21T06:13:25+09:00 時点の planning/catalog/*.yaml（ページの id と節の anchor はすべて存在を確かめた）。
+# atcoder.jp・codeforces.com は開いていない。
+problems:
+- id: abc451_d
+  position: D
+  title: Concat Power of 2
+  difficulty: 856
+  technique: 全列挙（2の冪を桁数別に持ち連結を生成）
+  pages: [brute-force]
+  evidence:
+  - https://qiita.com/comet725/items/51e3889f17c1345a193c
+  note: 桁数ごとに、短い候補の後ろへ 2 の冪を連結して候補を作り、重複を除いてソートする（evidence で確かめた。再帰ではなく桁数のループ）
+- id: abc451_e
+  position: E
+  title: Tree Distance
+  difficulty: 1215
+  technique: 最小全域木（クラスカル＋UF）＋DFSで距離確認
+  pages: [minimum-spanning-tree#kruskal-prim, union-find, tree-distance#from-one, tree-construction#from-distances]
+  evidence:
+  - https://qiita.com/hyouri/items/2b13ca1b70a5735460ee
+  note: 距離の表から重み付きの木を復元する。research/04 では tree-construction の例題
+- id: abc451_f
+  position: F
+  title: Make Bipartite 3
+  difficulty: 1540
+  technique: 重み付きUnion-Find（二部グラフの色を相対値で持ち、少ない色を選ぶ）
+  pages: [weighted-union-find#generalization, bipartite-graph#union-find]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0328_abc451
+  note: 二部グラフの色の偶奇を重み付き Union-Find で持ち、成分ごとに少ない色を選ぶ
+- id: abc451_g
+  position: G
+  title: Minimum XOR Walk
+  difficulty: 2221
+  technique: サイクル基底＋XOR基底＋分割統治
+  pages: [xor-basis#xor-walk, divide-and-conquer]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0328_abc451
+  note: 全域木の根からの XOR と、木に入らない辺が作る閉路の XOR の基底を使う（research/03）
+- id: abc452_d
+  position: D
+  title: No-Subsequence Substring
+  difficulty: 903
+  technique: 部分列照合のDP
+  pages: [subsequence-matching#next-occurrence]
+  evidence:
+  - https://qiita.com/comet725/items/f5d92e162ae4cac7f422
+  note: 次の出現位置の表で、始点ごとに T を部分列として含む最初の位置を求めて数える（research/08）
+- id: abc452_e
+  position: E
+  title: You WILL Like Sigma Problem
+  difficulty: 1318
+  technique: 剰余の周期性＋累積和
+  pages: [periodicity#periodic-patterns, harmonic-sum#mark-multiples, prefix-sum]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0404_abc452
+  note: Σ A_i B_j (i mod j) の、i mod j にするための補正を j の倍数ごとに足して累積和を取る。倍数の列挙は調和級数で O(N log N)（evidence で確かめた）
+- id: abc452_f
+  position: F
+  title: Interval Inversion Count
+  difficulty: 1630
+  technique: 尺取り（ポインタ2本）＋BITで区間の転倒数
+  pages: [two-pointers, inversion-number#sliding-window, fenwick-tree]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0404_abc452
+  note: 「K 以下」の個数の差に分け、尺取りの窓の伸び縮みに合わせて BIT で転倒数を増減する（research/05）
+- id: abc452_g
+  position: G
+  title: 221 Substring
+  difficulty: 2255
+  technique: 連長圧縮→部分文字列の種類数（Suffix Automaton／SA+LCP）
+  pages: [run-length-encoding#keep-compressed, suffix-automaton#suffix-automaton, suffix-array#distinct-substrings]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0404_abc452
+  note: ランレングスにしてから異なる部分文字列を数える。SAM と SA＋LCP のどちらでも解けるので両方に数えた
+- id: abc453_d
+  position: D
+  title: Go Straight
+  difficulty: 1011
+  technique: 状態（座標＋直前の向き）を頂点にしたBFS
+  pages: [extended-dijkstra#parity-mod-direction, bfs, grid-graph]
+  evidence:
+  - https://qiita.com/comet725/items/5f7d010ebd6a79b29996
+  note: H×W のグリッドで、マスと直前の向きの組を状態にした BFS（evidence で確かめた）
+- id: abc453_e
+  position: E
+  title: Team Division
+  difficulty: 1513
+  technique: 人数を固定して分類→二項係数＋累積和
+  pages: [fix-variable, binomial-precompute, imos#imos-1d]
+  evidence:
+  - https://qiita.com/comet725/items/0747fd1209e978e74e66
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0411_abc453
+  note: チームの人数を固定して選手を 4 種類に分け、二項係数で数える。種類ごとの人数は区間の端でだけ変わるので、差分と累積和ですべての人数について求める（evidence で確かめた）
+- id: abc453_f
+  position: F
+  title: Avoid Division
+  difficulty: 2811
+  technique: 木の「葉の重心」を使う構築
+  pages: [tree-centroid#pair-across, construction]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0411_abc453
+  note: 葉だけに重みを付けた重心を根にし、DFS 順の葉を前半と後半で組むと、組の 2 枚は別の枝にある（evidence で確かめた）
+- id: abc453_g
+  position: G
+  title: Copy Query
+  difficulty: 1735
+  technique: クエリ先読み＋版の木のオイラーツアー（オンラインなら永続セグ木）
+  pages: [offline-queries, persistent-data-structures#offline-version-tree, euler-tour]
+  alternatives: [persistent-data-structures#path-copying]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0411_abc453
+  note: 版の木を作って先読みし、DFS で入るとき更新・出るとき取り消す。オンラインなら永続セグ木（alternatives）
+- id: abc454_d
+  position: D
+  title: (xx)
+  difficulty: 706
+  technique: スタックで括弧表現を正規化
+  pages: [stack-techniques#cancel]
+  evidence:
+  - https://qiita.com/comet725/items/1e168acdfcf992d2170e
+  note: (xx) を xx に置き換える簡約を、スタックの末尾を見て繰り返す（evidence で確かめた。括弧の対応づけではない）
+- id: abc454_e
+  position: E
+  title: LRUD Moving
+  difficulty: 1627
+  technique: グリッドの市松模様で可否判定＋構築
+  pages: [parity#checkerboard, construction]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0418_abc454
+  note: 市松模様の偶奇で到達の可否を判定し、手順を構築する
+- id: abc454_f
+  position: F
+  title: Make it Palindrome 2
+  difficulty: 2169
+  technique: 回文化→差分配列で区間加算を点操作に言い換え＋貪欲
+  pages: [difference-sequence#palindrome, reformulation#operations, greedy-basics]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0418_abc454
+  note: 回文にする操作を左右の差の列への区間 ±1 に直し、さらに差分列の 2 点の操作にして貪欲に数える（research/00 §3.2）
+- id: abc454_g
+  position: G
+  title: Mode in the Subtree
+  difficulty: 2253
+  technique: マージテク／DSU on Tree（部分木の最頻値）
+  pages: [small-to-large#dsu-on-tree]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0418_abc454
+  note: 重い子の集計を残して軽い子を足し直す DSU on Tree（research/04）
+- id: abc455_d
+  position: D
+  title: Card Pile Query
+  difficulty: 796
+  technique: 双方向リスト（付け替え）
+  pages: [linked-list#operations]
+  evidence:
+  - https://qiita.com/comet725/items/b8d667d45fc386392f6f
+  note: カードの上下のつながりを 2 本の配列で持つ（research/00 §3.2）
+- id: abc455_e
+  position: E
+  title: Unbalanced ABC Substrings
+  difficulty: 1157
+  technique: 余事象＋包除原理＋累積和
+  pages: [complement#two-conditions, prefix-sum-counting#equal-k]
+  evidence:
+  - https://qiita.com/comet725/items/ef3bf31a249dcf3e48f3
+  - https://qiita.com/Authns/items/f01569d1cf0daa9dffe1
+  note: 全体から、2 文字の個数が等しい部分文字列（3 条件）を包除で引く。個数の差が等しい累積の組を連想配列で数える（evidence で確かめた）
+- id: abc455_f
+  position: F
+  title: Merge Slimes 2
+  difficulty: 1549
+  technique: 寄与（全ペアの積の和）＋遅延セグ木
+  pages: [contribution, sigma-manipulation#formulas, lazy-segment-tree-patterns#design-steps]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0425_abc455
+  note: 費用を全ペアの積の和（((ΣB)² − ΣB²)/2）に直し、ノードに長さ・和・ペアの積の和を持たせて区間加算を作用にする。S・F の設計が要るので lazy-segment-tree-patterns に対応させた（evidence で確かめた。catalog は lazy-segment-tree の level_evidence に「ACL を呼ぶだけ」として使う）
+- id: abc455_g
+  position: G
+  title: Balanced Subarrays
+  difficulty: 3092
+  technique: 乱択ハッシュ（Zobrist・和ハッシュ）＋尺取り
+  pages: [hashing-for-sets#prefix-hash, two-pointers]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0425_abc455
+  note: 区間の条件を、乱数で設計したハッシュの累積が一致することに直し、尺取りで数える（research/08）
+- id: abc456_d
+  position: D
+  title: Not Adjacent 2
+  difficulty: 586
+  technique: 末尾文字ごとの部分列DP
+  pages: [dp-state-design#last-characters]
+  evidence:
+  - https://qiita.com/comet725/items/96ce9b1e24f522c6e86f
+  note: 末尾の文字ごとに部分列の個数を持つ DP（evidence で確かめた）。題材別 subsequence-and-substring#count-with-condition の型
+- id: abc456_e
+  position: E
+  title: Endless Holidays
+  difficulty: 1214
+  technique: 頂点倍化（都市×曜日）＋閉路検出
+  pages: [extended-dijkstra#layered-graph, cycle-detection#directed]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0502_abc456
+  note: （都市, 曜日）を頂点にし、いつまでも続けられるかを閉路の有無で判定する。research/03 の洛谷のタグは SCC
+- id: abc456_f
+  position: F
+  title: Plan Holidays
+  difficulty: 1888
+  technique: (min,+)行列（トロピカル）＋セグ木で区間積
+  pages: [segment-tree-monoids#matrix, matrix-power#semiring]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0502_abc456
+  - https://zenn.dev/loop0919/articles/f779f54ccdfedf
+  note: 各日の遷移を (min,+) の行列にし、区間の積をセグ木で求める
+- id: abc456_g
+  position: G
+  title: Count Holidays
+  difficulty: 2488
+  technique: 包除＋順序付き分割の数え上げ
+  pages: [inclusion-exclusion#symmetric, stars-and-bars#stars-bars, counting-mindset#exactly-vs-at-most]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0502_abc456
+  note: 最長の連続が k 以下の数の差で「ちょうど k」を求める。上限を超える部分の個数で包除して順序付き分割（composition）を数え、k ごとの項数が n/k なので全体は O(N log N)（evidence で確かめた）
+- id: abc457_d
+  position: D
+  title: Raise Minimum
+  difficulty: 677
+  technique: 答えの二分探索
+  pages: [binary-search-answer#minimax]
+  evidence:
+  - https://qiita.com/comet725/items/de159972697f73404b8e
+  note: 最小値の最大化を答えの二分探索で解く
+- id: abc457_e
+  position: E
+  title: Crossing Table Cloth
+  difficulty: 1428
+  technique: 端点でソート＋二分探索（左から走査）
+  pages: [sorting-techniques, binary-search#lower-bound]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0509_abc457
+  note: 端点ごとにもう一方の端点をソートして二分探索し、左から走査しながら左端の最大値を持つ（evidence で確かめた）
+- id: abc457_f
+  position: F
+  title: Second Gap
+  difficulty: 2167
+  technique: 場合分けの数え上げ（区間の交差・包含で矛盾判定）
+  pages: [symmetry-pigeonhole-casework#casework, counting-mindset, dp-state-design#typical-summaries]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0509_abc457
+  note: 位置ごとに更新が必要・不要・どちらでもよいで場合分けし、区間 [i, i+D_i] が交差・包含すれば 0。後ろから 2 状態の DP で、挿入できる場所の数を掛ける（evidence で確かめた）
+- id: abc457_g
+  position: G
+  title: Catch All Apples
+  difficulty: 1928
+  technique: 45度回転＋貪欲（増加部分列への分割＝Dilworth）
+  pages: [manhattan-chebyshev#rotate-45, lis#dilworth]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0509_abc457
+  note: 45 度回転で上か右にしか動けない形にし、増加列への最小分割数＝最長減少部分列の長さで求める（research/00 §3.2）
+- id: abc458_d
+  position: D
+  title: Chalkboard Median
+  difficulty: 450
+  technique: 2つのヒープで中央値
+  pages: [top-k-multiset#median]
+  evidence:
+  - https://qiita.com/comet725/items/4e3a310ec19ed32e12f6
+  note: 小さい半分と大きい半分を 2 つのヒープで持つ
+- id: abc458_e
+  position: E
+  title: Count 123
+  difficulty: 1309
+  technique: 仕切りを固定して二項係数
+  pages: [fix-variable, binomial-precompute]
+  evidence:
+  - https://qiita.com/comet725/items/3fdcd73125c20e2cc7a2
+  note: 仕切りの位置を固定して二項係数で数える（表の記述どおり。節は確かめていない）
+- id: abc458_f
+  position: F
+  title: Critical Misread
+  difficulty: 1744
+  technique: Aho-Corasick＋行列累乗（ダブリング）
+  pages: [aho-corasick#as-automaton, string-automaton-dp#matrix-power, matrix-power#dp-transition]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0516_abc458
+  note: Aho-Corasick の状態を DP の状態にし、N ≤ 10^9 なので遷移の行列をダブリングする（research/08）
+- id: abc458_g
+  position: G
+  title: Children Yearn for the Evil Kindergarten
+  difficulty: 2831
+  technique: 答えの二分探索＋DP（(max,+)畳み込み）
+  pages: [binary-search-answer#dp-check, monge#convex-max-plus-convolution, slope-trick#breakpoints]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0516_abc458
+  note: 逃がす人数を二分探索し、日ごとの DP を凹関数として持つ。各日の (max,+) 畳み込みは一次の列とのもので、傾きの切り詰めとして Slope Trick の形で実装する（evidence で確かめた）
+- id: abc459_d
+  position: D
+  title: Adjacent Distinct String
+  difficulty: 701
+  technique: 出現回数の上限判定＋多い文字から並べる貪欲
+  pages: [greedy-basics#strongest-first, symmetry-pigeonhole-casework#pigeonhole]
+  evidence:
+  - https://qiita.com/comet725/items/097da34b603464d309cd
+  - https://zenn.dev/cry999/articles/20260704-atcoder-abc459-d-adjacent-distinct-string
+  note: 最も多い文字が ⌈N/2⌉ 個以下かで可否を判定し、多い文字から並べる。可否の条件は鳩の巣原理の型と見た
+- id: abc459_e
+  position: E
+  title: Select from Subtrees
+  difficulty: 1298
+  technique: 二項係数＋木のDFS（部分木）
+  pages: [leaf-first#send-up, tree-traversal#pre-post-order, binomial-precompute]
+  evidence:
+  - https://qiita.com/alpha0314alpha/items/42353a57131f9fff8f9f
+  note: 部分木で余る個数を葉の側から集め、そのつど二項係数を掛ける（research/04 では leaf-first の例題）
+- id: abc459_f
+  position: F
+  title: -1, +1
+  difficulty: 2163
+  technique: 狭義→広義単調に変換、差分列で操作を言い換え
+  pages: [difference-sequence#strict-to-weak, reformulation#operations]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0523_abc459
+  note: A_i − i で狭義単調を広義単調に直し、差分列をすべて非負にする問題として回数を数える（research/00 §3.2）
+- id: abc459_g
+  position: G
+  title: Golf 2
+  difficulty: 3123
+  technique: 整数条件の整理（パリティ・市松・式変形）
+  pages: [parity#checkerboard, ext-gcd#general-solution]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0523_abc459
+  note: gcd で割って可否を見て、A・B が奇数なら市松の偶奇の条件を足す。拡張ユークリッドの一般解のパラメータを、実数の最適解の近くで試す（evidence で確かめた）
+- id: abc460_d
+  position: D
+  title: Repeatedly Repainting
+  difficulty: 1216
+  technique: 多始点BFS（8近傍・距離の偶奇）
+  pages: [bfs#multi-source, grid-graph#neighbors, parity#alternating]
+  evidence:
+  - https://qiita.com/comet725/items/5ebb5d1dec695f2a3df0
+  note: 表の記述どおり（8 近傍の多始点 BFS と距離の偶奇）
+- id: abc460_e
+  position: E
+  title: x + y ≡ x + y
+  difficulty: 1362
+  technique: 桁数ごとに式変形して数え上げ
+  pages: [digit-and-mod#concatenation, integer-division#count-multiples, gcd-lcm]
+  evidence:
+  - https://qiita.com/comet725/items/7ac6436793b6e5d1ee4f
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0530_abc460
+  note: 連結 x·10^d + y を桁数 d ごとに式変形すると x(10^d − 1) ≡ 0 (mod M) になり、M/gcd(10^d − 1, M) の倍数を数える（evidence で確かめた。gcd で割る一次合同式は ext-gcd#linear-congruence）
+- id: abc460_f
+  position: F
+  title: Farthest Pair Query
+  difficulty: 1987
+  technique: 木の直径（最遠点対）の性質＋頂点番号順のセグ木
+  pages: [tree-diameter, segment-tree-monoids, lca#distance]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0530_abc460
+  note: 頂点番号の区間ごとに最遠点対（直径の両端）を持ち、直径の性質で併合してセグ木に載せる。2 点の距離は LCA で求める（catalog の approach による。LCA は表に名前がないが距離の計算に要る）
+- id: abc460_g
+  position: G
+  title: Vertex Flip Query
+  difficulty: 2838
+  technique: HL分解＋セグ木（重実装）
+  pages: [hld, segment-tree]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0530_abc460
+  note: 表の記述どおり（research/04 では内容未確認）
+- id: abc461_d
+  position: D
+  title: Count Subgrid Sum = K
+  difficulty: 914
+  technique: 2次元累積和＋尺取り（行の組を固定）
+  pages: [prefix-sum-2d#formula, two-pointers, fix-variable]
+  evidence:
+  - https://qiita.com/comet725/items/26d94dac9716a755877f
+  note: 行の組を固定し、列の方向に尺取りする
+- id: abc461_e
+  position: E
+  title: E-liter
+  difficulty: 1431
+  technique: 行・列の最後の操作を管理＋クエリ番号添字のセグ木で寄与の差分
+  pages: [segment-tree, contribution]
+  unmatched:
+  - 行・列ごとに最後の操作の番号を配列で持つ（基本の実装。対応する節がない）
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0606_abc461
+  note: 行・列ごとに最後の操作の番号を持ち、有効な操作の位置に 1 を立てたセグ木（BIT でもよい）の区間和で寄与の増減を求める（evidence で確かめた）
+- id: abc461_f
+  position: F
+  title: Total Product is N
+  difficulty: 1940
+  technique: 約数を品物にしたナップサック風DP
+  pages: [divisor-count-bound#divisor-dp, knapsack-01, divisor-enum#enumerate]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0606_abc461
+  note: N の約数を品物・状態にしたナップサック。約数の個数が少ないので状態が収まる
+- id: abc461_g
+  position: G
+  title: Graph Problem 2026
+  difficulty: 2391
+  technique: 最大独立集合のLP緩和（半整数性）→フロー
+  pages: [konig-theorem#lp-half-integrality, bipartite-matching#reduction]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0606_abc461
+  note: 最大独立集合の LP 緩和が半整数になることを使い、頂点を 2 倍にした二部グラフで最大独立集合＝2N − 最大マッチング（最大流）を求める（evidence で確かめた）
+- id: abc462_d
+  position: D
+  title: Accomplice
+  difficulty: 798
+  technique: imos法
+  pages: [imos#imos-1d]
+  evidence:
+  - https://qiita.com/comet725/items/08fa48c68e736d690de7
+  note: 表の記述どおり
+- id: abc462_e
+  position: E
+  title: Alternating Costs
+  difficulty: 1226
+  technique: 対称性で場合を減らす最小化
+  pages: [symmetry-pigeonhole-casework#symmetry-cases]
+  evidence:
+  - https://qiita.com/comet725/items/2edf7be7b7b4cd846d29
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0613_abc462
+  note: 表の記述どおり
+- id: abc462_f
+  position: F
+  title: More ABC
+  difficulty: 1952
+  technique: 状態を工夫した文字列DP
+  pages: [dp-state-design#last-characters]
+  alternatives: [alien-dp]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0613_abc462
+  note: 「A」「AB」まで一致しているか（書き換えたかも区別する）と、書き換えで作った ABC の数を状態にし、書き換えの最小数を持つ（evidence で確かめた）。公式解説の速い解法は Monge・Alien DP（alternatives）
+- id: abc462_g
+  position: G
+  title: Completely Wrong
+  difficulty: 2232
+  technique: 包除原理＋FPS（攪乱順列の一般化）
+  pages: [inclusion-exclusion#derangement, online-convolution#product-of-many]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0613_abc462
+  note: 撹乱順列の包除を一般化し、値ごとの多項式の積を分割統治と NTT で求める。FPS の exp・log は使わない（evidence で確かめた）
+- id: abc463_d
+  position: D
+  title: Maximize the Gap
+  difficulty: 838
+  technique: 答えの二分探索＋貪欲判定
+  pages: [binary-search-answer#greedy-check]
+  evidence:
+  - https://qiita.com/comet725/items/2d2083b5f12537af27a2
+  note: 表の記述どおり
+- id: abc463_e
+  position: E
+  title: Roads and Gates
+  difficulty: 1055
+  technique: 超頂点を足してダイクストラ
+  pages: [extended-dijkstra#super-vertex, dijkstra]
+  evidence:
+  - https://qiita.com/comet725/items/15e9951d2076493fcbe6
+  note: ゲートでの移動を、仮想の頂点を 2 つ足した辺で表す（research/00 §3.2）
+- id: abc463_f
+  position: F
+  title: Senshuraku
+  difficulty: 2127
+  technique: 確率の場合分け
+  pages: [probability-basics#conditional, symmetry-pigeonhole-casework#casework, binomial-precompute]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0620_abc463
+  note: 最多勝の人数で場合を分け、自分の試合の結果で条件付け、同点の人数（二項分布）ごとに 1/k を掛けて足す。答えは mod 998244353（evidence で確かめた）
+- id: abc463_g
+  position: G
+  title: Random Walk Distance
+  difficulty: 2452
+  technique: 二項係数（ランダムウォーク）＋クエリの先読み
+  pages: [probability-dp#random-walk, binomial-precompute, offline-queries]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0620_abc463
+  note: ±1 の移動の位置の分布を二項係数で表し、距離の期待値を二項係数の和で求める。クエリは先読みする（research/07）
+- id: abc464_d
+  position: D
+  title: Celester
+  difficulty: 752
+  technique: 直前の状態を持つDP
+  pages: [dp-state-design#typical-summaries]
+  evidence:
+  - https://qiita.com/comet725/items/79b0587199021cc0f723
+  note: 表の記述どおり
+- id: abc464_e
+  position: E
+  title: Fill-Rect Query
+  difficulty: 1075
+  technique: 2次元の最大値伝播（imos的な後ろからの伝播）
+  pages: [imos#imos-2d]
+  evidence:
+  - https://qiita.com/comet725/items/94922f79d708c74ca829
+  note: 各操作の番号を長方形の角に置き、和の代わりに max を 2 次元に伝播させる（evidence で確かめた）
+- id: abc464_f
+  position: F
+  title: Random Vault Heist
+  difficulty: 2225
+  technique: 期待値（ランダム順列に言い換え・寄与）＋半分全列挙＋尺取り
+  pages: [probability-symmetry#random-permutation, linearity-of-expectation, meet-in-the-middle#combine-halves, two-pointers]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0627_abc464
+  note: 一様に選んでいく過程をランダムな順列に置き換え（research/07）、寄与で数えて半分全列挙と尺取りで合わせる
+- id: abc464_g
+  position: G
+  title: Celester 2
+  difficulty: 2592
+  technique: 隣接しないk個選択：取り消し付きの優先度付きキュー貪欲（Alien DP・Monge系）
+  pages: [alien-dp#undoable-greedy, greedy-priority-queue#regret]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0627_abc464
+  note: 隣り合わない k 個の和の最大を、取り消せる優先度付きキューの貪欲ですべての k について求める
+- id: abc465_d
+  position: D
+  title: X to Y
+  difficulty: 839
+  technique: K分木のLCA（割り算で親へ）
+  pages: [complete-binary-tree#lca-by-index, complete-binary-tree#k-ary]
+  evidence:
+  - https://qiita.com/comet725/items/ed5414a8d8a200ec863b
+  note: K 分木の番号を K で割って親へ上がり、LCA を求める
+- id: abc465_e
+  position: E
+  title: Digit Circus
+  difficulty: 1417
+  technique: 桁DP（使った数字の集合・mod 3）
+  pages: [digit-dp#extra-state]
+  evidence:
+  - https://qiita.com/comet725/items/0e337dca7c6eba510868
+  note: 使った数字の集合（10 ビット）と 3 で割った余りを状態にする。集合を bit で持つ型は digit-dp-advanced#sparse-states にもある
+- id: abc465_f
+  position: F
+  title: Sjeltzer?
+  difficulty: 1754
+  technique: 6次元の累積和（いもす）・包除
+  pages: [prefix-sum-2d#higher-dimensions, imos]
+  evidence:
+  - https://qiita.com/gotoki_no_joe/items/998768d198065787e9ce
+  note: 6 次元の累積和（いもす）。項の符号は包除で決める
+- id: abc465_g
+  position: G
+  title: Sum of Mex of Mod of Linear
+  difficulty: 3082
+  technique: 未確認
+  pages: []
+  unmatched:
+  - 使われた手法が未確認（§2.3.8 で第三者の解説が見つからず、2026-10-21 に Web で探し直しても見つからなかった）
+  evidence: []
+  note: 題名から一次式の mod（floor sum の系統）が疑われるが、確かめていない
+- id: abc466_d
+  position: D
+  title: Placing Rooks
+  difficulty: 494
+  technique: 行・列ごとに残る操作を管理
+  pages: []
+  unmatched:
+  - 行・列ごとに置いた駒（操作の番号）を配列で持つシミュレーション（基本の実装。対応する節がない）
+  evidence:
+  - https://qiita.com/comet725/items/754d920467029090b165
+  note: 新しい駒と同じ行・列の駒を消す処理を、行と列の配列に操作の番号を持って O(1) で行う（evidence で確かめた）。題材別 operation-sequence が近い（catalog では練習）
+- id: abc466_e
+  position: E
+  title: Range Flip
+  difficulty: 1027
+  technique: 区間反転を切り替え点2つに言い換えたDP
+  pages: [imos#range-flip, dp-phase#flip-interval, reformulation#operations]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0711_abc466
+  - https://qiita.com/comet725/items/d9928d9fdb242140f987
+  note: 区間の反転を切り替えの点 2 つに直し、置いた点の数を段階として持つ DP（research/00 §3.2。そこでは差分列への言い換え（difference-sequence）の易しい形とされるが、基礎の帯なので imos#range-flip に対応させた）
+- id: abc466_f
+  position: F
+  title: Many Mod Calculation
+  difficulty: 1887
+  technique: 操作を逆から考え、同じ長さをまとめる
+  pages: [reverse-thinking, ordered-set]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0711_abc466
+  note: 逆から見ると、長さ X+1 の棒を順に A_i ずつに切る過程になる。同じ長さを（長さ, 個数）にまとめて map で持ち、長さは変わるたびに半分以下になる（evidence で確かめた）
+- id: abc466_g
+  position: G
+  title: Segment Sum Constraints
+  difficulty: 3347
+  technique: 下位bitからの桁DP（2^N状態）
+  pages: [digit-dp-advanced#carry, digit-dp#binary]
+  evidence:
+  - https://kmjp.hatenablog.jp/entry/2026/07/14/0900
+  note: 表の記述どおり（kmjp の解説）。research/03 の洛谷のタグは差分制約
+- id: abc467_d
+  position: D
+  title: Concentric Circles
+  difficulty: 928
+  technique: 幾何（垂直二等分線の交差・直線の正規化）
+  pages: [geometry-precision#line-normalization, geometry-vectors#cross-and-dot]
+  evidence:
+  - https://qiita.com/hyouri/items/c2d2344566d215b6cae0
+  - https://qiita.com/Konini64/items/542bf2b2cb9f01a3ae38
+  note: 2 本の垂直二等分線を整数係数の直線で持ち、平行・一致を掛け算（外積）で判定する（evidence の 1 本目で確かめた。直線の正規化は表の記述による）
+- id: abc467_e
+  position: E
+  title: Adjacent Sums (hard)
+  difficulty: 1694
+  technique: 偶奇・差分の場合分け（1変数を動かして増分を追う）
+  pages: [fix-variable, parity#alternating, event-sort]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0718_abc467
+  note: D_1 を決めると残りが符号を交互に変えて決まる。D_1 を 0 から動かし、値が折り返す O(N) 個の点をソートして増分を追う。傾きは N の偶奇で決まる（evidence で確かめた）
+- id: abc467_f
+  position: F
+  title: Email Scheduling Optimization
+  difficulty: 2052
+  technique: 交換論法の貪欲＋セグ木（座圧）
+  pages: [exchange-argument, segment-tree, coordinate-compression]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0718_abc467
+  note: 表の記述どおり（交換論法で順序を決め、座標圧縮したセグ木で速くする）
+- id: abc467_g
+  position: G
+  title: Many Sweets Problem
+  difficulty: 2544
+  technique: クエリ先読み＋merge-sort tree＋各段にBIT
+  pages: [offline-queries, merge-sort-tree#bit-per-level, fenwick-tree]
+  evidence:
+  - https://kmjp.hatenablog.jp/entry/2026/07/25/0900
+  note: 表の記述どおり（kmjp の解説）
+- id: abc468_d
+  position: D
+  title: Pre-Palindrome
+  difficulty: 683
+  technique: 回文の中心から広げる全探索（発展：ローリングハッシュ）
+  pages: [palindrome#expand-center]
+  alternatives: [rolling-hash#concat-and-reverse]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0725_abc468
+  - https://qiita.com/comet725/items/72f8f924a4bfdb9e13cd
+  note: 中心ごとに不一致を 1 回まで許して伸ばす O(N^2)（research/08）。ローリングハッシュは発展の解法（alternatives）
+- id: abc468_e
+  position: E
+  title: Sum of Average
+  difficulty: 1038
+  technique: 主客転倒（寄与）＋前計算
+  pages: [contribution#swap-roles, mod-inverse#inverse-table, prefix-sum]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0725_abc468
+  note: 長さ w の区間に含まれる回数を w で割った和を、逆元の表とその累積和で各要素 O(1) にする（evidence で確かめた）
+- id: abc468_f
+  position: F
+  title: Chmax
+  difficulty: 1693
+  technique: LISの発展・貪欲
+  pages: [lis#binary-search, greedy-basics]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0725_abc468
+  note: N の位置までの接頭辞の最大値を片方に固定する貪欲のあと、残りの LIS を二分探索版で求める（evidence で確かめた）
+- id: abc468_g
+  position: G
+  title: Restricted Permutation
+  difficulty: 1975
+  technique: 挿入DP
+  pages: [insertion-dp]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0725_abc468
+  note: 表の記述どおり（節は確かめていない）
+- id: abc469_d
+  position: D
+  title: The Big Two
+  difficulty: 1102
+  technique: 候補を2つに絞って数える
+  pages: [brute-force#small-candidates]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0801_abc469
+  - https://qiita.com/comet725/items/5783b8e77e3ef99c72c6
+  note: 表の記述どおり
+- id: abc469_e
+  position: E
+  title: Pro Exam Eligibility
+  difficulty: 1566
+  technique: 平均最大化の二分探索＋累積和
+  pages: [fractional-binary-search#average, prefix-sum]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0801_abc469
+  note: 答え a を二分探索し、各要素から a を引いた累積和で和が 0 以上の区間があるかを判定する（research/00 §3.2）
+- id: abc469_f
+  position: F
+  title: GCD Maximum Spanning Tree
+  difficulty: 1567
+  technique: 約数で辺を絞ってクラスカル（最大全域木）
+  pages: [minimum-spanning-tree#reduce-candidates, minimum-spanning-tree#maximum, harmonic-sum#collect-multiples]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0801_abc469
+  note: gcd の値 g ごとに g の倍数どうしを結ぶ辺だけを候補にし、重みの大きい順に Kruskal 法で最大全域木を作る
+- id: abc469_g
+  position: G
+  title: K-nacci Operations
+  difficulty: 2804
+  technique: 操作をモノイドにして行列累乗
+  pages: [matrix-power#write-as-matrix]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0801_abc469
+  note: 操作を（反転の偶奇, ずらし）の組にして合成し、反転の偶奇が周期 K+1 で繰り返すことから 1 つの (K+1) 次の行列の累乗にする（evidence で確かめた）
+- id: abc470_d
+  position: D
+  title: Inverse and Swap
+  difficulty: 777
+  technique: 置換と逆置換を同時に管理
+  pages: [permutation#inverse]
+  evidence:
+  - https://qiita.com/comet725/items/5b5dd4fa2d26f8b73f9a
+  note: 位置 → 値と値 → 位置の 2 つの配列を同時に更新する。手法のページはなく、題材別 permutation の節だけが対応する
+- id: abc470_e
+  position: E
+  title: Concentration
+  difficulty: 2096
+  technique: 期待値＋メモ化再帰（場合分け）
+  pages: [optimal-strategy-expectation#state-design, memoized-recursion]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0808_abc470
+  note: 神経衰弱で、取ったペア・場所を知ったカード・未知のカードの数を状態にし、最適な行動の期待値をメモ化再帰で求める（research/07）
+- id: abc470_f
+  position: F
+  title: Googol Swaps
+  difficulty: 1604
+  technique: 置換の偶奇＋連結成分＋多項係数
+  pages: [permutation-parity#duplicates, connected-components, multinomial-coefficient]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0808_abc470
+  note: swap できる位置の連結成分ごとに並べ方を多項係数で数え、同じ文字がない成分では偶奇の片方しか作れないことを使う（research/00 §3.2）
+- id: abc470_g
+  position: G
+  title: Σex
+  difficulty: 2097
+  technique: MEXの寄与への言い換え＋尺取り＋遅延セグ木
+  pages: [contribution, two-pointers, lazy-segment-tree, reformulation#then-data-structure]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0808_abc470
+  note: mex の総和を「mex が k より大きい区間の数」の和に直し、尺取りと遅延セグ木で数える。kmjp の解説は Segment Tree Beats を使う
+- id: abc471_d
+  position: D
+  title: Chargers
+  difficulty: 570
+  technique: 優先度付きキュー
+  pages: [priority-queue]
+  evidence:
+  - https://qiita.com/comet725/items/cc08f26bb6f986813248
+  note: 表の記述どおり
+- id: abc471_e
+  position: E
+  title: Sum of Square of Sum
+  difficulty: 990
+  technique: 二項係数＋式変形（Σ_{i≠j}AiAj＝S1²−S2）
+  pages: [sigma-manipulation#formulas, counting-mindset#contribution-with-binomial, binomial-precompute]
+  evidence:
+  - https://qiita.com/hyouri/items/941cbb14aaf4c810fa90
+  - https://qiita.com/bit_otter/items/b032b01dcf3ab95a042e
+  note: 各要素の 2 乗と、ほかの要素との積が、それぞれ何通りの選び方に入るかを二項係数で数える（evidence で確かめた）
+- id: abc471_f
+  position: F
+  title: Concat (maximize)
+  difficulty: 1895
+  technique: 比較関数（a+b と b+a）でソート＋貪欲
+  pages: [exchange-argument#concatenation, greedy-basics]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0815_abc471
+  note: a+b と b+a を比べる順にソートし、貪欲に選ぶ（research/00 §3.2）
+- id: abc471_g
+  position: G
+  title: Caeser Syllables
+  difficulty: 2464
+  technique: 主客転倒＋畳み込み
+  pages: [contribution#swap-roles, convolution-ntt]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0815_abc471
+  note: 表の記述どおり
+- id: abc472_d
+  position: D
+  title: Bomber Mad
+  difficulty: 605
+  technique: 多始点BFS
+  pages: [bfs#multi-source]
+  evidence:
+  - https://qiita.com/comet725/items/630641329b8edc669f8f
+  note: 表の記述どおり
+- id: abc472_e
+  position: E
+  title: Odd Cycle
+  difficulty: 1029
+  technique: 二部グラフ判定で奇閉路
+  pages: [bipartite-graph#odd-cycle]
+  evidence:
+  - https://qiita.com/bit_otter/items/9c4ef77dbf7d5ba293e2
+  note: 表の記述どおり
+- id: abc472_f
+  position: F
+  title: Centroid of a Slice
+  difficulty: 1707
+  technique: 幾何（多角形の重心）＋累積和
+  pages: [geometry-vectors#polygon-area, prefix-sum]
+  unmatched:
+  - 多角形の重心（面積で重みを付けた三角形の重心の和）
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0822_abc472
+  note: 凸多角形の一部の重心を累積和で求める。面積は geometry-vectors#polygon-area にあるが、重心の式を扱うページがない
+- id: abc472_g
+  position: G
+  title: Cascading Grid
+  difficulty: 2018
+  technique: DAG上の選択を最小カットへ
+  pages: [project-selection#closure, min-cut]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0822_abc472
+  note: DAG の上の選択（最大重み閉包）を最小カットに直す（research/03）。kmjp は行ごとの bitDP で解く
+- id: abc473_d
+  position: D
+  title: Coefficient Stair
+  difficulty: 838
+  technique: DFS（再帰）による全列挙
+  pages: [recursive-enumeration]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0829_abc473
+  - https://qiita.com/comet725/items/fccbb66706bb14a53b46
+  note: 表の記述どおり
+- id: abc473_e
+  position: E
+  title: K-Divisible Subarrays
+  difficulty: 966
+  technique: 累積和 mod K＋貪欲
+  pages: [prefix-sum-counting#same-remainder, greedy-basics]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0829_abc473
+  note: 表の記述どおり
+- id: abc473_f
+  position: F
+  title: A/AB Insertion
+  difficulty: 1303
+  technique: 括弧列型の条件（累積和が非負）＋遅延セグ木
+  pages: [lazy-segment-tree#acl-standard, prefix-sum]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0829_abc473
+  note: 累積和が負にならない条件（括弧列型）を、区間加算・区間 min の遅延セグ木で確かめる。題材別 bracket-sequence#range-check の型
+- id: abc473_g
+  position: G
+  title: Wipeout
+  difficulty: 1974
+  technique: 確率＋挿入DP→FPSで高速化
+  pages: [probability-symmetry#random-permutation, insertion-dp, fps-basics]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0829_abc473
+  note: ランダムに並べたカードを先頭からめくると考えてよいことを使い（research/07）、挿入 DP を FPS で速くする
+- id: abc474_d
+  position: D
+  title: Outweigh
+  difficulty: 389
+  technique: 構築
+  pages: [construction]
+  evidence:
+  - https://qiita.com/comet725/items/3772fa3312c73be086e3
+  note: 表の記述どおり
+- id: abc474_e
+  position: E
+  title: One Time Coupon
+  difficulty: 1153
+  technique: ソート＋境界の全探索＋累積和・累積min
+  pages: [sorting-techniques, brute-force, prefix-sum#left-right]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0906_abc474
+  note: 表の記述どおり
+- id: abc474_f
+  position: F
+  title: Increment All Divisors
+  difficulty: 1911
+  technique: 約数メビウス変換
+  pages: [zeta-mobius-divisor#inverse]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0906_abc474
+  note: 約数ゼータ変換とその逆変換で、値をそろえる操作の回数を求める（research/07）
+- id: abc474_g
+  position: G
+  title: LRUD Moving 2
+  difficulty: 2280
+  technique: 市松模様＋実験による条件推測（構築）
+  pages: [parity#checkerboard, construction#small-cases]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0906_abc474
+  note: 市松模様の条件を小さい場合の実験で推測して構築する
+- id: abc475_d
+  position: D
+  title: Alphametic Prime
+  difficulty: 741
+  technique: DFS全探索＋エラトステネスの篩
+  pages: [recursive-enumeration, sieve-eratosthenes]
+  evidence:
+  - https://qiita.com/comet725/items/777d32f7cf7630a48663
+  note: 表の記述どおり
+- id: abc475_e
+  position: E
+  title: 'Quiz Competition: Qualifiers'
+  difficulty: 1737
+  technique: 2進数に言い換え＋順序付き集合
+  pages: [reformulation, ordered-set]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0912_abc475
+  note: 正解を o にそろえて各人の解答を K ビットの数にし、(M+1) 番目に小さい値と比べる。更新のたびに順序付き集合から消して入れ直す（evidence で確かめた。C++ で K 番目を取るなら kth-element・top-k-multiset の型）
+- id: abc475_f
+  position: F
+  title: Rectangle Filling
+  difficulty: 1916
+  technique: 包除原理＋2次元累積和
+  pages: [inclusion-exclusion, prefix-sum-2d]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0912_abc475
+  note: 表の記述どおり
+- id: abc475_g
+  position: G
+  title: Has Many Divisors
+  difficulty: 2360
+  technique: 高度合成数の列挙
+  pages: [divisor-count-bound#enumerate-hcn]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0912_abc475
+  note: 小さい素数の指数が単調に減る形に限って DFS で列挙する（research/00 §3.2）
+- id: abc476_d
+  position: D
+  title: Automat
+  difficulty: 860
+  technique: 全探索＋累積和＋二分探索
+  pages: [brute-force, prefix-sum#with-binary-search, binary-search]
+  evidence:
+  - https://qiita.com/comet725/items/fb0182ba408f04fa3a59
+  note: 表の記述どおり
+- id: abc476_e
+  position: E
+  title: Min-Max Swap
+  difficulty: 964
+  technique: セグ木（区間最大・最小と位置の管理）
+  pages: [segment-tree]
+  evidence:
+  - https://qiita.com/aruru88/items/ca31e5a1e6f9a753cf33
+  - https://qiita.com/Konini64/items/c53dbd8331ce8358f858
+  note: 表の記述どおり
+- id: abc476_f
+  position: F
+  title: Chebyshev Cafe
+  difficulty: 1728
+  technique: チェビシェフ距離を分解し四隅からDP
+  pages: [manhattan-chebyshev#remove-abs, dp-grid#directional-prefix]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0919_abc476
+  note: max(|dx|, |dy|) を行ごとの項と斜めのくさび形の項に分け、4 方向それぞれで斜め隣の値と行の累積和から漸化式で求める（evidence で確かめた。45 度回転は使わない）
+- id: abc476_g
+  position: G
+  title: Increasing Popcount
+  difficulty: 2477
+  technique: Dilworth（最長減少部分列）＋popcountの構造・二項係数
+  pages: [lis#dilworth, bit-operations#popcount, recursion-structure, binomial-coefficient]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0919_abc476
+  note: popcount の列を狭義増加列に塗り分ける最小の色数を最長の広義減少部分列の長さとして求め、列の自己相似な構造と二項係数で速くする（research/00 §3.2）
+- id: abc477_d
+  position: D
+  title: Masking Tape
+  difficulty: 946
+  technique: クエリを逆順に処理
+  pages: [reverse-thinking#decide-from-back]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0926_abc477
+  - https://qiita.com/comet725/items/a3fca15e86349dadf4b2
+  note: 最後に塗った色が残るので、クエリを後ろから見て、色が決まっていないマスだけを塗る（evidence で確かめた）
+- id: abc477_e
+  position: E
+  title: Wheel Distance
+  difficulty: 1235
+  technique: ダイクストラ＋円周の累積和
+  pages: [dijkstra, prefix-sum#circular]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0926_abc477
+  note: 表の記述どおり
+- id: abc477_f
+  position: F
+  title: Count Cells in a Window
+  difficulty: 1629
+  technique: クエリ先読み＋平面走査＋遅延セグ木
+  pages: [offline-queries, sweep-line-2d#rectangle-count, lazy-segment-tree]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0926_abc477
+  note: 行を進めながら列ごとの累計を遅延セグ木で持ち、長方形の答えを上端と下端の 1 つ前の差にする（research/00 §3.2）
+- id: abc477_g
+  position: G
+  title: Frequency Query on Tree
+  difficulty: 2226
+  technique: 木上のMo（オイラーツアー）
+  pages: [mo-algorithm#mo-on-tree, euler-tour#mo-on-tree, lca]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0926_abc477
+  note: 入りと出を記録した長さ 2N の列でパスを区間にし、Mo で頻度を管理する。LCA は別に足す（research/04・05）
+- id: abc478_d
+  position: D
+  title: Range Set Insertion Query
+  difficulty: 729
+  technique: イベントソート
+  pages: [event-sort#make-events]
+  evidence:
+  - https://qiita.com/comet725/items/53e6c3b9804e2f235a01
+  note: 区間の始まりと終わりをイベントにしてソートする。research/05 は値ごとに区間を併合していもす法で数える説明
+- id: abc478_e
+  position: E
+  title: lt and le
+  difficulty: 1376
+  technique: SCCで縮約→DAG
+  pages: [scc#condensation, topological-sort]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/1003_abc478
+  note: ≤ の辺の SCC を同じ値にし、< の両端が同じ成分にあれば不可能。縮約した DAG のトポロジカル順に値を割り当てる（evidence で確かめた）
+- id: abc478_f
+  position: F
+  title: Min-First Search
+  difficulty: 1588
+  technique: 木の構築の数え上げ＋セグ木上の二分探索
+  pages: [tree-construction#from-order, segment-tree-binary-search]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/1003_abc478
+  note: 訪問順から各頂点の親になれる範囲を求め、その個数の積で木を数える。範囲の端をセグ木上の二分探索で求める（research/04）
+- id: abc478_g
+  position: G
+  title: Division Point Hull
+  difficulty: 2582
+  technique: 分割統治＋凸包＋ミンコフスキー和
+  pages: [divide-and-conquer, convex-hull#andrew, advanced-geometry#minkowski-sum]
+  evidence:
+  - https://kmjp.hatenablog.jp/entry/2026/10/08/0900
+  note: 表の記述どおり（kmjp の解説）
+- id: abc479_d
+  position: D
+  title: Back and Forth Distance
+  difficulty: 563
+  technique: 累積min（左右から前計算）
+  pages: [prefix-sum#left-right]
+  evidence:
+  - https://qiita.com/comet725/items/0c8bc1e676d535283e84
+  note: 表の記述どおり
+- id: abc479_e
+  position: E
+  title: Cut and Add
+  difficulty: 1000
+  technique: 木のDFS・部分木サイズと辺の寄与
+  pages: [tree-edge-contribution#edge-pairs, tree-traversal#parent-depth-size]
+  evidence:
+  - https://zenn.dev/takechi_s/articles/atcoder-abc479
+  note: 表の記述どおり
+- id: abc479_f
+  position: F
+  title: Narrow Passage
+  difficulty: 1938
+  technique: 隣接swapへの言い換え→転倒数
+  pages: [inversion-number#adjacent-swaps, reformulation#operations]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/1011_abc479
+  note: 操作の回数を隣接 swap の回数に直し、転倒数で求める
+- id: abc479_g
+  position: G
+  title: Tuning
+  difficulty: 2386
+  technique: 偏角ソート＋累積和（直線とのマンハッタン距離和）
+  pages: [argument-sort#range-count, prefix-sum]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/1011_abc479
+  note: 直線とのマンハッタン距離の和を、方向で偏角ソートして累積和で求める
+- id: abc480_d
+  position: D
+  title: Concatenation of Prefixes
+  difficulty: 864
+  technique: 累積和の累積和＋二分探索
+  pages: [prefix-sum#with-binary-search, binary-search]
+  evidence:
+  - https://qiita.com/hyouri/items/8f271e4fc26928387702
+  note: 累積和をもう一度累積し、二分探索する
+- id: abc480_e
+  position: E
+  title: Product-Bounded Arithmetic Sequences
+  difficulty: 1355
+  technique: 全探索＋二分探索
+  pages: [brute-force, binary-search]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/1017_abc480
+  note: 初項と長さを全探索し、積が N 以下になる最大の公差を二分探索する。積のあふれに注意（evidence で確かめた）
+- id: abc480_f
+  position: F
+  title: Cake Cutting
+  difficulty: 1840
+  technique: 言い換え＋DP
+  pages: [reformulation, bit-dp#set-only]
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/1017_abc480
+  note: ケーキを 1 本の棒に並べ、S/M の倍数の位置にケーキの境界をそろえる個数の最大化に言い換える。並べたケーキの集合を状態にした bitDP（evidence で確かめた）
+- id: abc480_g
+  position: G
+  title: Zonal Score Minimization
+  difficulty: 2100
+  technique: DP＋遅延セグ木＋単調スタック
+  pages: [inline-dp#with-monotonic-stack, lazy-segment-tree, monotonic-stack]
+  evidence:
+  - https://kmjp.hatenablog.jp/entry/2026/10/17/0930
+  note: DP の遷移を、単調スタックで区間をまとめながら遅延セグ木で一括更新する（catalog の inline-dp の節）

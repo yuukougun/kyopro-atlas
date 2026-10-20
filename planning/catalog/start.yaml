@@ -1,5 +1,9 @@
-# はじめに（start）の目次。担当 I。規則は planning/catalog/README.md、上位の規則は planning/design.md §2〜§5・§7・§9。
-# start は level・frequency を持たない（level: null。frequency は書かない）。3ページとも手書き。
+# はじめに（start）の目次。担当 I。規則は planning/catalog/README.md（第2版）、上位の規則は planning/design.md と planning/design-review.md。
+# - start は level・frequency を持たない（level: null）。節の level も持たない。3ページとも手書きで、問題を持たない。
+# - 節の行末のコメントは執筆の指示の補足（節の題名は見出しになるので短くした）。
+# - 第2版（2026-10-21）：sections を {title, anchor} の列に、visual を {kind, priority, text} にした。
+#   how-to-use に「準備中」のページ・書き出しと読み込み（手動の退避）・AtCoder生成AI対策ルールの版の節を足した（design-review T8・T13・T23）。
+#   notation の kind を [案内] にした（03 指摘25）。
 field: start
 pages:
   - id: how-to-use
@@ -9,87 +13,88 @@ pages:
     level: null
     kind: [案内]
     prerequisites: []
-    related: [reverse-index-signs, reverse-index-constraints, knowledge-map, roadmap, notation, atcoder-system, practice-method, glossary]
-    summary: "解けなかった ABC の問題から教材を引く手順（逆引き辞典 → ページ冒頭の要点 → 前提）、レベルの意味、確認問題と進捗チェックの使い方、データの書き出し、claude.ai での解説の頼み方をまとめた入口のページである。"
+    related: [reverse-index-signs, reverse-index-constraints, term-index, knowledge-map, roadmap, notation, atcoder-system, practice-method, glossary]
+    summary: "解けなかった ABC の問題から、逆引き辞典 → ページ冒頭の要点 → 前提の順に教材を引ける。レベルの意味、進捗の記録と退避、claude.ai での解説の頼み方も示す。"
     signs: []
     acl: []
     sections:
-      - "この教材の目的と範囲（黄色を目指す ABC 中心の辞書。シラバスではなく、ここにない知識が出題されることもある）"
-      - "章の構成：はじめに・横断ページ・分野別の章・題材別・C++ のどこから引くか"
-      - "辞書としての引き方：問題の言い回しや制約から逆引き辞典 → ページ冒頭の要点の囲み → 前提をさかのぼる（3クリック以内が目標）。題材（括弧列・順列など）からは題材別のページ"
-      - "色ごとに学ぶとき：色別ロードマップと知識マップ、ページ末尾の「次に読む」のたどり方"
-      - "レベルの意味（基礎〜1199・水・青・黄・発展 2400〜。difficulty 帯との対応、節に付くレベルの印、発展は概要だけ）"
-      - "ページの構成と読み方（要点の囲み・なぜ正しいか・処理の流れ・ACL の囲み・例題・練習・力試し・確認問題）。例題の解法は折りたたみ"
-      - "問題の表示（diff の数値と色、例題・練習・力試しの役割）"
-      - "進捗の記録：練習問題の「解いた」チェックとページの「理解した」チェック（localStorage に保存し、端末間では同期しない）"
-      - "データの書き出し・読み込み（JSON のコピーと貼り付け。Safari が7日間使わないとデータを消すことへの備え。ホーム画面への追加）"
-      - "claude.ai での解説の頼み方（GitHub 連携と llms.txt、ヒントだけか解説までかを選ぶ、開催中のコンテストの問題は頼まない、教材を更新したら同期し直す）"
-      - "記録用スキル /record-problem の使い方（notes/ は公開されず、claude.ai からは見えない）"
+      - {title: "この教材の目的と範囲", anchor: purpose}                    # 黄色を目指す ABC 中心の辞書。シラバスではなく、ここにない知識も出題される
+      - {title: "章の構成", anchor: structure}                              # はじめに・横断ページ・分野別の章・題材別・C++ のどこから引くか
+      - {title: "辞書としての引き方", anchor: lookup}                        # 言い回し・制約から逆引き辞典、名前から用語の索引、題材から題材別 → ページ冒頭の要点の囲み → 前提をさかのぼる（3 クリック以内が目標）
+      - {title: "色ごとに学ぶとき", anchor: by-color}                        # 色別ロードマップ（位置ごとの頻出手法を含む）・知識マップ・ページ末尾の「次に読む」のたどり方
+      - {title: "レベルの意味", anchor: levels}                              # difficulty の帯（基礎 〜1199・水・青・黄・発展 2400〜）、節に付くレベル（ページより上の色の内容）、発展は概要だけ
+      - {title: "ページの構成と読み方", anchor: page-anatomy}                # 要点の囲み・なぜ正しいか・処理の流れ・ACL の囲み・例題（解法は折りたたみ）・練習・力試し・確認問題
+      - {title: "問題の表示", anchor: problems}                              # diff の数値と色、例題・練習・力試しの役割、代表問題の印
+      - {title: "「準備中」のページ", anchor: stub}                          # T13：stub は要点・前提・サインだけで本文がない。索引にも段階が載る。claude.ai の解説は stub を根拠にしない
+      - {title: "進捗の記録（解いた・理解した）", anchor: progress}          # 練習の「解いた」とページの「理解した」（ページ×色。上位の色の節は別に押す。D1）。localStorage の1つのキー kyopro-atlas:v1 に保存し、端末間では同期しない（T23）
+      - {title: "書き出しと読み込み（手動の退避）", anchor: backup}           # 同期ではない手動の退避（JSON のコピーと貼り付け）。Safari が7日間使わないとデータを消すことへの備え、ホーム画面への追加
+      - {title: "claude.ai での解説の頼み方", anchor: claude}                # GitHub 連携と llms.txt、ヒントだけか解説までかを選ぶ、問題はスクリーンショットか要約で渡す（atcoder.jp は開かせない）、教材を更新したら同期し直す
+      - {title: "AtCoder生成AI対策ルールの版", anchor: ai-rule-version}       # T8：教材が前提にする版（20261014版）とプロジェクトの指示の版の番号、開催中かは利用者が確かめる、ADT・AWC は判断がつくまで頼まない、ルールの改定時に見直す
+      - {title: "記録用スキル /record-problem", anchor: record-skill}         # notes/ は公開されず、claude.ai からは見えない
     merged_keys: []
-    visual: "手書き：引き方の流れ図（解けなかった問題 → 逆引き辞典・題材別 → ページの要点 → 前提・次に読む）を Mermaid で。生成する部分はない"
+    visual: {kind: static, priority: 2, text: "引き方の流れ図（解けなかった問題 → 逆引き辞典・用語の索引・題材別 → ページの要点 → 前提・次に読む）を Mermaid で"}
     problems: []
-    sources: ["00-curriculum §4.1（この教材の使い方）", "00-curriculum §2.1.3", "00-curriculum §6.11", "10-tech §3.5", "10-tech §3.6", "10-tech §3.10", "design §1.2", "design §9"]
+    sources: ["00-curriculum §4.1（この教材の使い方）", "00-curriculum §2.1.3", "00-curriculum §6.5.4", "00-curriculum §6.11", "10-tech §3.5", "10-tech §3.6", "10-tech §3.10", "design §1.2", "design §9", "design-review T3・T8・T13・T23"]
 
   - id: notation
     title: 記法と用語の約束
-    aliases: [記法, 0-indexed, 1-indexed, 半開区間, 数学の記法, 合同式, 整除, 床関数, 天井関数, Σ の記法]
+    aliases: [記法, 0-indexed, 1-indexed, 半開区間, 数学の記法, 合同式, 整除, 床関数, 天井関数, Σ の記法, notation]
     type: guide
     level: null
-    kind: [案内, 整数論]
+    kind: [案内]
     prerequisites: []
-    related: [glossary, sigma-manipulation, integer-division, mod-arithmetic, graph-basics, tree-traversal, string-basics, cheatsheet]
-    summary: "教材全体で使う記法の約束。計算量の書き方、半開区間、1-indexed と 0-indexed の変換、合同式・整除・floor/ceil・Σ/Π などの数学の記法、グラフ・木・文字列の記号をまとめる。各ページは定義を繰り返さず、ここを参照する。"
+    related: [glossary, cheatsheet, sigma-manipulation, integer-division, mod-arithmetic, graph-basics, tree-traversal, string-basics]
+    summary: "教材全体で使う記法の約束を引ける。計算量、半開区間、添字、合同式・整除・floor・ceil・Σ などの数学の記法、グラフ・木・文字列の記号を定め、各ページは定義を繰り返さずに参照する。"
     signs: []
     acl: []
     sections:
-      - "計算量の書き方（O(N log N) のように書き、log の底は書かない。償却・期待値の計算量はそう明記する）"
-      - "区間は半開区間 [l, r) が基本（長さは r − l、空区間は l = r）。閉区間を使うときは明記する"
-      - "添字：問題文の 1-indexed と実装の 0-indexed。変換は各ページで明示する"
-      - "数と制約の書き方（2×10^5、10^9+7、998244353。N, Q ≤ 2×10^5 の読み方）"
-      - "数学の記法（math-notation を統合）：合同式 a ≡ b (mod m) と余り a mod m の区別（C++ の % は負の数で負になる）、整除 a | b、⌊x⌋・⌈x⌉、Σ・Π（空の和は 0、空の積は 1）、gcd・lcm、v_p(n)、二項係数 C(n, k)"
-      - "合同式で両辺を割ってよいのは、割る数と m が互いに素のときだけ（逆元が要る）。確認問題：2x ≡ 4 (mod 6) の解"
-      - "集合と bit の記法（部分集合 S ⊆ T、補集合、2^N 通り、i ビット目、popcount）"
-      - "確率・期待値の記法（P(A)、E[X]、独立）"
-      - "グラフの記法（N 頂点 M 辺、有向辺 u → v、辺の重み w、最短距離 dist）"
-      - "木の記法（深さ dep、親 par、部分木のサイズ sz、行きがけ番号 in・出る番号 out、根からの累積 S[v]、lca(u, v)、距離 d(u, v)）"
-      - "文字列の記法（S[i]、部分文字列 S[l, r)、接頭辞・接尾辞。部分文字列（連続）と部分列（飛び飛び）の区別）"
-      - "コード片の約束（long long と書き、マクロと型の別名は使わない。ループは半開区間で書く）"
-      - "用語の正規形は用語集に従う（セグ木・Union-Find などの表記。textlint と prh で検査する）"
+      - {title: "計算量の書き方", anchor: complexity}                        # O(N log N) のように書き、log の底は書かない。償却・期待値の計算量はそう明記する
+      - {title: "区間は半開区間", anchor: half-open}                         # [l, r) が基本（長さは r − l、空区間は l = r）。閉区間を使うときは明記する
+      - {title: "添字（1-indexed と 0-indexed）", anchor: indexing}           # 問題文の 1-indexed と実装の 0-indexed。変換は各ページで明示する
+      - {title: "数と制約の書き方", anchor: numbers}                         # 2×10^5、10^9+7、998244353。N, Q ≤ 2×10^5 の読み方
+      - {title: "数学の記法", anchor: math}                                  # math-notation を統合：合同式 a ≡ b (mod m) と余り a mod m の区別（C++ の % は負の数で負）、整除 a | b、⌊x⌋・⌈x⌉、Σ・Π（空の和は 0、空の積は 1）、gcd・lcm、v_p(n)、二項係数 C(n, k)
+      - {title: "合同式で割ってよいとき", anchor: congruence-division}        # 割る数と m が互いに素のときだけ（逆元が要る）。確認問題：2x ≡ 4 (mod 6) の解
+      - {title: "集合と bit の記法", anchor: sets-bits}                       # 部分集合 S ⊆ T、補集合、2^N 通り、i ビット目、popcount
+      - {title: "確率・期待値の記法", anchor: probability}                   # P(A)、E[X]、独立
+      - {title: "グラフの記法", anchor: graph}                               # N 頂点 M 辺、有向辺 u → v、辺の重み w、最短距離 dist
+      - {title: "木の記法", anchor: tree}                                    # 深さ dep、親 par、部分木のサイズ sz、行きがけ番号 in・出る番号 out、根からの累積 S[v]、lca(u, v)、距離 d(u, v)
+      - {title: "文字列の記法", anchor: string}                              # S[i]、部分文字列 S[l, r)、接頭辞・接尾辞。部分文字列（連続）と部分列（飛び飛び）の区別
+      - {title: "コード片の約束", anchor: code}                              # long long と書き、マクロと型の別名は使わない。ループは半開区間で書く
+      - {title: "用語の表記", anchor: terms}                                 # 用語の正規形は用語集に従う（セグ木・Union-Find などの表記。textlint と prh で検査する）
     merged_keys: [math-notation]
-    visual: "手書き：数直線を m ごとに巻き取って時計にする図（合同な数が同じ位置に重なる）、数直線上の floor・ceil の図、半開区間 [l, r) の図（どれも静的な SVG）"
+    visual: {kind: static, priority: 2, text: "数直線を m ごとに巻き取って時計にする図（合同な数が同じ位置に重なる）、数直線上の floor・ceil の図、半開区間 [l, r) の図（どれも SVG）"}
     problems: []
     sources: ["00-curriculum §4.1（記法と用語の約束）", "06-math-nt §4.1（math-notation）", "06-math-nt §7.6", "04-tree §7.5", "design §6.4", "design §6.5"]
 
   - id: atcoder-system
     title: AtCoder の仕組み
-    aliases: [レーティング, パフォーマンス, difficulty の読み方, ABC の形式, ARC の区分, 生成AIのルール, 色]
+    aliases: [レーティング, パフォーマンス, difficulty の読み方, ABC の形式, ARC の区分, 生成 AI のルール, AtCoder生成AI対策ルール, 色]
     type: guide
     level: null
     kind: [案内]
     prerequisites: []
-    related: [how-to-use, roadmap, contest-strategy, problem-sets, practice-method]
-    summary: "レート・パフォーマンス・色、AtCoder Problems の difficulty（その問題を半々で解けるレート）、ABC の形式・配点・ペナルティ・順位、ARC の区分、練習用コンテスト、生成AIのルールを説明し、この教材のレベルが difficulty の帯で決まることと結びつける。"
+    related: [how-to-use#ai-rule-version, roadmap, contest-strategy, problem-sets#practice-contests, practice-method]
+    summary: "レート・パフォーマンス・色、difficulty、ABC の形式と順位、練習用コンテスト、生成 AI のルールがわかる。教材のレベルは difficulty（その問題を半々で解けるレート）の帯で決まる。"
     signs: []
     acl: []
     sections:
-      - "レーティングとパフォーマンス（1回の成績をレートの尺度にした値。参加回数が少ないと表示レートが低く出る補正）"
-      - "色（400刻み）と人数の割合の目安"
-      - "difficulty の定義（解ける確率が50%になるレート。傾き ln6/400 のロジスティック曲線を当てはめる）と予測解答時間"
-      - "difficulty と教材のレベルの対応（基礎〜1199・水・青・黄・発展 2400〜）と読み方の注意（知識の難しさではなく、その知識を使う問題の難しさ）"
-      - "ABC の形式の変遷（4問 → 6問 → 8問 → 現在の7問・100分）、配点、Rated の範囲（〜1999。黄色になると ABC は Unrated になる）"
-      - "位置ごとの difficulty（abc400〜abc480）：水 ≒ E、青 ≒ F、黄 ≒ 難しい F と易しい G。隣の位置の難しさが入れ替わる回が約1割ある"
-      - "順位の決まり方とペナルティ（得点の合計、同点なら最後の AC の時刻＋誤答1回につき5分）"
-      - "ARC・AGC・AHC と ARC の区分（ARC--・ARC・ARC++ の Rated 範囲。レート961 なら ARC-- が Rated）。執筆時に第三者の資料で確かめる"
-      - "練習用のコンテスト（ADT・AWC・バーチャル参加）→ 問題集と練習用コンテストの案内"
-      - "生成AIのルール（AtCoder生成AI対策ルール 20261014版：開催中の ABC・ARC・AGC は問題文や要約を入力して解法を出させてはいけない。過去問の練習は対象外）と、この教材の解説を使ってよい場面"
+      - {title: "レーティングとパフォーマンス", anchor: rating}              # 1回の成績をレートの尺度にした値。参加回数が少ないと表示レートが低く出る補正
+      - {title: "色と人数の割合", anchor: colors}                            # 400 刻みの色と人数の割合の目安
+      - {title: "difficulty の定義", anchor: difficulty}                    # 解ける確率が 50% になるレート。傾き ln6/400 のロジスティック曲線を当てはめる。予測解答時間
+      - {title: "difficulty と教材のレベル", anchor: levels}                 # 基礎 〜1199・水・青・黄・発展 2400〜。知識の難しさではなく、その知識を使う問題の難しさ
+      - {title: "ABC の形式", anchor: abc-format}                            # 4問 → 6問 → 8問 → 現在の7問・100分（abc319 以降）、配点、Rated の範囲（〜1999。黄色になると ABC は Unrated）
+      - {title: "位置ごとの difficulty", anchor: difficulty-by-position}     # abc400〜abc480：水 ≒ E、青 ≒ F、黄 ≒ 難しい F と易しい G。隣の位置の難しさが入れ替わる回が約1割
+      - {title: "順位とペナルティ", anchor: ranking}                         # 得点の合計、同点なら最後の AC の時刻＋誤答1回につき5分
+      - {title: "ARC・AGC・AHC と ARC の区分", anchor: contests}             # ARC--・ARC・ARC++ の Rated の範囲（レート961 なら ARC-- が Rated）。執筆時に第三者の資料で確かめる
+      - {title: "練習用のコンテスト", anchor: practice-contests}             # ADT・AWC・バーチャル参加 → problem-sets#practice-contests
+      - {title: "生成 AI のルール", anchor: ai-rules}                        # AtCoder生成AI対策ルール 20261014版：開催中の ABC・ARC・AGC は問題文や要約を入力して解法を出させてはいけない。過去問の練習は対象外。教材の解説を使ってよい場面（版の扱いは how-to-use#ai-rule-version）
     merged_keys: []
-    visual: "手書き：位置（A〜G）ごとの difficulty の箱ひげ図と、difficulty の帯と教材のレベルの対応図（research/00 §2.3.3 のデータから作る静的な SVG）"
+    visual: {kind: static, priority: 2, text: "位置（A〜G）ごとの difficulty の箱ひげ図と、difficulty の帯と教材のレベルの対応図（research/00 §2.3.3 のデータから作る SVG）"}
     problems: []
     sources: ["00-curriculum §4.1（AtCoder の仕組み）", "00-curriculum §2.3.1", "00-curriculum §2.3.2", "00-curriculum §2.3.3", "00-curriculum §2.3.4", "00-curriculum §2.3.5", "00-curriculum §2.2.1", "00-curriculum §6.5.4", "00-curriculum §6.9", "decisions.md（2026-10-21 質問の前に確認した事実）"]
 
 moved: []
 dropped: []
 open_issues:
-  - "notation に research/06 の math-notation を統合した（設計書 §4.2）。math-notation の例題（abc133_c・abc165_d）は start では使わないので、math の integer-division・mod-arithmetic などの例題に回すかを担当 E が判断する。06 の多くの項目が math-notation を前提にしているので、前提は notation に解決される"
-  - "ARC の区分（ARC--・ARC・ARC++）と AtCoder Weekday Contest（Beta）での AI 利用の可否は、research/00 が atcoder.jp を開かずに書いたため未確認。atcoder-system の執筆時に第三者の資料で裏付けを取る"
-  - "データの書き出し・読み込みは設計書 §9.1 に従い how-to-use に置いた（research/10 §3.10 はロードマップに置く案）。ロードマップからもリンクする"
+  - "ARC の区分（ARC--・ARC・ARC++）と AtCoder Weekday Contest（Beta）での AI 利用の可否は、research/00 が atcoder.jp を開かずに書いたため未確認。atcoder-system の執筆時に第三者の資料で裏付けを取る。how-to-use#ai-rule-version では、判断がつくまで ADT・AWC の解説は頼まないと書く（design-review T8）"
+  - "how-to-use の「準備中」・進捗・書き出しの節は、工程5でユーザーに確かめる事項（design-review §6 の5・7）と同じ内容。確認の結果で書き方を直す"

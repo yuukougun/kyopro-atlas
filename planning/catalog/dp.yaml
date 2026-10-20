@@ -1,7 +1,8 @@
-# 動的計画法（dp）の目次。規則は planning/catalog/README.md、上位の規則は設計書（planning/design.md）§3〜§5
-# 並び順がナビゲーションの順。章の区切りは下のコメントで示す（catalog の形式に章の欄がないため。open_issues を参照）
-#   第1章 DP の考え方 / 第2章 列の DP / 第3章 状態の形で分かれる DP / 第4章 DP の高速化
-# 確率・期待値・ゲームの DP と包除 DP は comb が持ち主（設計書 §4.2）。dp の各ページからは related でリンクする
+# 動的計画法（dp）の目次（第2版）。規則は planning/catalog/README.md、上位の規則は設計書（planning/design.md）§3〜§5 と見直しへの対応（planning/design-review.md）
+# 並び順がナビゲーションの順。章は各ページの chapter（DP の考え方 / 列の DP / 状態の形で分かれる DP / DP の高速化）
+# 持ち主がほかの分野のもの（設計書 §4.2・design-review §4.2）：確率・期待値・ゲームの DP と包除 DP と数え上げの重複の除き方は comb、照合オートマトン上の DP は string、
+# 行列累乗と畳み込みは math、答えの決め打ちと判定の DP は basics、bitset による高速化は misc。dp の各ページからは related でリンクする
+# 節の anchor は、統合した調査の key に当たる節では key と同じにした（ほかの分野が key で指していたら id#key に直せる）
 field: dp
 pages:
 
@@ -9,178 +10,185 @@ pages:
 
   - id: dp-basics
     chapter: DP の考え方
-    title: DP の基本（状態・遷移・配る DP と貰う DP）
-    aliases: [動的計画法, DP, 漸化式, 配る DP, 貰う DP, 配るDP, 貰うDP, push 型, pull 型]
+    title: DP の基本
+    aliases: [動的計画法, DP, Dynamic Programming, 漸化式, 配る DP, 貰う DP, push 型, pull 型]
     type: technique
     level: 基礎
-    level_evidence: "状態1次元・遷移が定数個の DP をそのまま問う問題は abc245_c (403)・abc240_c (464)・abc211_c (559)・abc129_c (796)・abc099_c (1101) と灰〜緑に集中する。配る・貰うの使い分けが効くのは水（abc179_d 1251）で、その先は dp-prefix-sum へつなぐ"
+    level_evidence: "状態 1 次元・遷移が定数個の DP をそのまま問う問題は abc245_c (403)・abc240_c (464)・abc211_c (559)・abc129_c (796)・abc099_c (1101) と灰〜緑に集中する。配る・貰うの使い分けが効くのは水（abc179_d 1251）で、その先は dp-prefix-sum へつなぐ"
     kind: [DP]
-    prerequisites: [complexity-estimation, brute-force]
-    related: [memoized-recursion, dp-dag, dp-state-design, dp-prefix-sum, dp-speedup-overview, greedy-basics, expected-value-dp, game-dp]
-    summary: "途中の状況（状態）ごとに最良値や場合の数を1回だけ求めて表に残し、全探索で何度も現れる同じ部分問題をまとめる手法。状態・遷移・初期値・答えの取り出し方の4つを決めれば書ける。"
+    prerequisites: [brute-force]
+    related: [memoized-recursion, dp-dag, dp-state-design, dp-prefix-sum, dp-speedup-overview, greedy-basics#when-greedy-fails, expected-value-dp, game-basics#game-dp]
+    summary: "全探索で同じ部分問題が何度も現れるとき、状態ごとの最良値や場合の数を表に 1 回だけ求めて使い回す。状態・遷移・初期値・答えの取り出し方の 4 つを決めれば書ける。"
     signs:
-      - {type: phrase, text: "〜の最小値・最大値を求めよ（前から順に1つずつ選んでいく）"}
-      - {type: phrase, text: "〜の方法の数を 998244353 で割った余り"}
+      - {type: phrase, text: "前から順に 1 つずつ選んでいくときの、〜の最小値・最大値"}
       - {type: phrase, text: "ちょうど X にできるか（可否の判定）"}
       - {type: constraint, text: "N ≤ 10^5 程度で、各位置の選択肢が数通り（全探索だと K^N 通り）"}
+      - {type: shape, text: "dp[i] が dp[i−1]・dp[i−2] など定数個の前の状態から決まる"}
     acl: []
     frequency: A
+    frequency_evidence: "recent 0・前提として 63 ページに届く（直接 19）・古い ABC 6 問"
     sections:
-      - "状態・遷移・初期値・答えの4つを決める"
-      - "最適化・数え上げ・可否判定を同じ骨組みで書く（演算と単位元・到達できない状態の表し方）"
-      - "配る DP と貰う DP（どちらも各遷移を1回ずつ使う）"
-      - "貰う形にすると遷移元が区間になり、累積和でまとめられる（水）"
-      - "貪欲で解けないことの確かめ方（反例から DP へ）"
-      - "DP の型の地図（列・区間・集合・桁・木・順列、確率・期待値・ゲームの DP、高速化）"
-      - "落とし穴：到達できない状態の INF に足して溢れる・mod の取り忘れ・添字のずれ"
+      - {title: "状態・遷移・初期値・答えの 4 つを決める", anchor: four-parts}
+      - {title: "最適化・数え上げ・可否判定を同じ骨組みで書く（演算と単位元・到達できない状態の表し方）", anchor: three-kinds}
+      - {title: "配る DP と貰う DP（どちらも各遷移を 1 回ずつ使う）", anchor: dp-push-pull}
+      - {title: "貰う形にすると遷移元が区間になる（累積和でまとめる高速化へ）", anchor: pull-to-prefix-sum, level: 水}
+      - {title: "貪欲で解けないことの確かめ方（反例から DP へ）", anchor: greedy-counterexample}
+      - {title: "DP の型の地図（列・区間・集合・桁・木・順列・確率・ゲーム・高速化）", anchor: map}
+      - {title: "落とし穴：到達できない状態の INF に足して溢れる・mod の取り忘れ・添字のずれ", anchor: pitfalls}
     merged_keys: [dp-push-pull]
-    visual: "全探索の木と DP の表を並べ、同じ状態が合流して1回の計算で済む様子のステップ送り。同じ表の上に、配る（矢印を出す）と貰う（矢印を集める）を色違いで描く"
+    visual: {kind: dynamic, priority: 1, text: "全探索の木と DP の表を並べ、同じ状態が合流して 1 回の計算で済む様子のステップ送り。同じ表の上に、配る（矢印を出す）と貰う（矢印を集める）を色違いで描く"}
     problems:
-      - {id: dp_a, role: example, summary: "1つ前か2つ前の足場から跳ぶ最小コスト。配る形と貰う形の両方で書く"}
-      - {id: abc240_c, role: practice, summary: "毎回 a_i か b_i 進んで、ちょうど X に着けるか（可否判定の基本形）"}
-      - {id: dp_b, role: practice, summary: "Frog 1 の跳び方が K 通りに増えた形"}
-      - {id: abc129_c, role: practice, summary: "壊れた段を避けて1段か2段ずつ上る方法の数（数え上げの基本形）"}
-      - {id: abc099_c, role: practice, summary: "1円・6^k 円・9^k 円の引き出しで N 円にする最小回数（貪欲では解けない）"}
+      - {id: dp_a, role: example, representative: true, summary: "1 つ先か 2 つ先の足場へ跳ぶたびに高さの差のコストがかかるとき、最後の足場までのコストの和の最小を求める。", approach: "dp[i]＝足場 i までの最小コスト。配る形と貰う形の両方で書く"}
+      - {id: abc240_c, role: practice, summary: "毎回 a_i か b_i だけ進むとき、N 回後にちょうど座標 X に着けるかを判定する。", approach: "到達できる座標の可否 DP（可否判定の基本形）"}
+      - {id: dp_b, role: practice, summary: "1〜K 個先の足場へ跳べるときの、最後の足場までのコストの和の最小を求める。", approach: "Frog 1 の遷移が K 通りに増えた dp[i]"}
+      - {id: abc129_c, role: practice, summary: "壊れた段を踏まずに 1 段か 2 段ずつ上って N 段目に着く方法の数を求める。", approach: "数え上げの基本形（遷移元の和を取る）"}
+      - {id: abc099_c, role: practice, summary: "1 円・6^k 円・9^k 円を引き出して合計ちょうど N 円にする最小の回数を求める。", approach: "dp[n]＝n 円にする最小の回数。貪欲では解けない例"}
     sources: ["02-dp §4.A（dp-basics・dp-push-pull）", "02-dp §2.1", "02-dp §2.3", "02-dp §5.1", "02-dp §5.3", "02-dp §6.3"]
 
   - id: memoized-recursion
     chapter: DP の考え方
     title: メモ化再帰
-    aliases: [メモ化, 再帰 DP, トップダウン DP, map でメモ化, map DP, 疎な DP]
+    aliases: [メモ化, Memoization, 再帰 DP, トップダウン DP, map でメモ化, 疎な DP]
     type: technique
     level: 基礎
     level_evidence: "素直なメモ化の abc340_c (528)・abc275_d (606) が基礎（どちらも map で到達する値だけを持つ）。計算順が自明でない・状態がまばらな問題は abc357_e (1295)・abc300_e (1354)・abc350_e (1385) と水に続くが、メモ化そのものは基礎の道具として扱う"
     kind: [DP]
     prerequisites: [dp-basics]
-    related: [dp-order, dp-dag, cpp-recursive-lambda, cpp-stack-depth, digit-dp-advanced, game-dp, expected-value-dp, probability-dp, dp-with-cycles]
-    summary: "漸化式を再帰関数のまま書き、計算済みの値を覚えて使い回す DP の書き方。計算順序を考えなくてよく、実際に訪れる状態だけを計算するので、⌊N/2⌋ や ⌊N/3⌋ しか現れないようなまばらな状態に強い。"
+    related: [dp-order, dp-dag, cpp-lambda#recursive-lambda, cpp-environment#stack-depth, digit-dp-advanced, game-basics#game-dp, expected-value-dp#self-loop, probability-dp, expectation-linear-equations#cycle]
+    summary: "漸化式を再帰関数のまま書き、計算済みの値を覚えて使い回す。計算順序を考えなくてよく、⌊N/2⌋ のようにまばらにしか現れない状態だけを計算できる。"
     signs:
       - {type: constraint, text: "N ≤ 10^18 で、⌊N/2⌋・⌊N/3⌋ のような値しか現れない"}
-      - {type: phrase, text: "計算の順番が分かりにくい（値の大小で移る・ゲームの局面・依存関係が DAG）"}
       - {type: phrase, text: "f(n) が f(⌊n/k⌋) などで再帰的に定義されている"}
+      - {type: shape, text: "dp[x] が x より小さい値の dp で決まるが、どの値が現れるかを前もって列挙しにくい"}
     acl: []
-    frequency: A
+    frequency: B
+    frequency_evidence: "recent 1（abc470_e）・前提として 8 ページに届く（直接 2）・古い ABC 6 問"
     sections:
-      - "再帰とメモの書き方（未計算の印と答えの値の衝突を避ける）"
-      - "ボトムアップとの使い分け（速さ・スタック・高速化の載せやすさ）"
-      - "到達する状態だけを持つ（map でメモ化・現れる値の個数の見積もり）"
-      - "落とし穴：再帰が深いとスタックが溢れる・閉路があると止まらない・自己ループは移項してから書く"
+      - {title: "再帰とメモの書き方（未計算の印と答えの値の衝突を避ける）", anchor: write-memo}
+      - {title: "ボトムアップとの使い分け（速さ・スタック・高速化の載せやすさ）", anchor: vs-bottom-up}
+      - {title: "到達する状態だけを持つ（map でメモ化・現れる値の個数の見積もり）", anchor: dp-map-sparse}
+      - {title: "落とし穴：再帰が深いとスタックが溢れる・閉路があると止まらない・自己ループは移項してから書く", anchor: pitfalls}
     merged_keys: [dp-map-sparse]
-    visual: "再帰の呼び出し木を描き、メモに当たった呼び出しを灰色にして枝が刈られる様子を見せる。N → ⌊N/2⌋・⌊N/3⌋ の木で同じ値が合流する図"
+    visual: {kind: static, priority: 2, text: "再帰の呼び出し木で、メモに当たった呼び出しを灰色にして枝が刈られる様子。N → ⌊N/2⌋・⌊N/3⌋ の木で同じ値が合流する図"}
     problems:
-      - {id: abc340_c, role: example, summary: "N を半分に割り続けるときの総コスト。現れる値が少ないので map でメモ化する"}
-      - {id: abc275_d, role: practice, summary: "f(k) = f(⌊k/2⌋) + f(⌊k/3⌋) を map でメモ化して求める"}
-      - {id: dp_g, role: practice, summary: "DAG の最長路。メモ化再帰なら計算順序を考えずに済む"}
-      - {id: abc357_e, role: practice, summary: "関数グラフで各頂点から到達できる頂点の数。サイクルを先に処理し、残りをメモ化再帰で数える"}
-      - {id: abc300_e, role: practice, summary: "サイコロを振って積が N になる確率。到達しうる値（2・3・5 の積）だけをメモ化する"}
-      - {id: abc380_f, role: challenge, summary: "カードの所在と手番を状態にした2人ゲームの勝敗を、メモ化再帰で判定する"}
+      - {id: abc340_c, role: example, representative: true, summary: "黒板の整数 x（≥ 2）を ⌊x/2⌋ と ⌈x/2⌉ に書き換えるたびに x 円払う操作を、2 以上の数がなくなるまで続けたときの支払いの総額を求める。", approach: "f(x) = x + f(⌊x/2⌋) + f(⌈x/2⌉)。現れる値が少ないので map でメモ化する"}
+      - {id: abc275_d, role: practice, summary: "f(0) = 1、f(k) = f(⌊k/2⌋) + f(⌊k/3⌋) で定まる f(N) を求める（N ≤ 10^18）。", approach: "map でメモ化する"}
+      - {id: dp_g, role: practice, summary: "閉路のない有向グラフで、最長の有向路の長さを求める。", approach: "メモ化再帰なら計算順序を考えずに済む（例題は dp-dag）"}
+      - {id: abc357_e, role: practice, summary: "各頂点から出る辺がちょうど 1 本の有向グラフで、u から v へ到達できる組 (u, v) の個数を求める。", approach: "サイクルを先に処理し、残りをメモ化再帰で数える"}
+      - {id: abc300_e, role: practice, summary: "1〜6 の目のサイコロを振って出た目を掛けていくとき、積がちょうど N になる確率を求める（mod 998244353）。", approach: "到達しうる値（2・3・5 の積）だけをメモ化する。1 の目の自己ループは移項する"}
+      - {id: abc380_f, role: challenge, summary: "2 人の手札と場のカードを使う 2 人ゲームで、両者が最適に行動したときの勝者を求める。", approach: "カードの所在（3 か所）と手番を状態にしたメモ化再帰"}
     sources: ["02-dp §4.A（memoized-recursion・dp-map-sparse）", "02-dp §5.1", "02-dp §5.3"]
 
   - id: dp-dag
     chapter: DP の考え方
     title: DAG 上の DP
-    aliases: [DAG DP, DAG の最長路, 最長路, 経路の数え上げ, トポロジカル順の DP]
+    aliases: [DAG DP, DP on DAG, DAG の最長路, 経路の数え上げ, トポロジカル順の DP]
     type: technique
     level: 基礎
-    level_evidence: "DAG 上の DP そのものは基礎（EDPC G・abc232_d 539・abc211_d 755）。graph の調査（03）の dag-dp も基礎。DAG だと気づく・作る型は水（abc188_e 1170・abc357_e 1295・abc139_e 1528・abc335_e 1540）"
+    level_evidence: "DAG 上の DP そのものは基礎（EDPC G・abc232_d 539・abc211_d 755）。graph の調査（03）の dag-dp も基礎。DAG だと気づく・作る型は水（abc188_e 1170・abc357_e 1295・abc139_e 1528・abc335_e 1540）で、節に置く"
     kind: [DP, グラフ探索]
     prerequisites: [dp-basics, topological-sort]
-    related: [dp-order, memoized-recursion, shortest-path-dag, scc, functional-graph, reachability-bitset, dp-decision-binary-search]
-    summary: "閉路のない有向グラフ（DAG）では、トポロジカル順に DP すれば最長路や経路の数が O(N+M) で求まる。どの DP も「状態を頂点・遷移を辺とする DAG の上の最短路・最長路・数え上げ」と見られる。"
+    related: [dp-order, memoized-recursion, shortest-path-dag, scc#dp-on-dag, functional-graph, bitset-speedup#reachability]
+    summary: "閉路のない有向グラフで、最長路や経路の数をトポロジカル順の DP で O(N+M) で求める。どの DP も、状態を頂点・遷移を辺とする DAG の上の計算と見られる。"
     signs:
       - {type: phrase, text: "番号の小さい頂点から大きい頂点へだけ辺がある（u < v）"}
-      - {type: phrase, text: "値が増える向きにしか移動できない・右か下にしか動けない"}
-      - {type: phrase, text: "最長の経路の長さ・経路の本数・最短経路の本数"}
+      - {type: phrase, text: "値が増える向きにしか移動できない"}
+      - {type: phrase, text: "有向グラフの最長の経路の長さ・経路の本数・最短経路の本数"}
       - {type: phrase, text: "依存関係に従って順に決める（閉路があれば −1）"}
     acl: []
     frequency: B
+    frequency_evidence: "recent 0・前提として 1 ページに届く（直接 1）・古い ABC 6 問"
     sections:
-      - "DP は DAG 上の最短路・最長路・数え上げ"
-      - "順序の作り方（Kahn 法・DFS の帰りがけ順の逆・メモ化再帰・問題の性質から）"
-      - "DAG だと気づく・作る（値の順・距離の層・同じ値の頂点をまとめる）（水）"
-      - "最短路の本数（距離が確定した順に配る）"
-      - "閉路があるとき（SCC で縮約する・最短路に切り替える）"
+      - {title: "DP は DAG 上の最短路・最長路・数え上げ", anchor: dp-as-dag}
+      - {title: "順序の作り方（Kahn 法・DFS の帰りがけ順の逆・メモ化再帰・問題の性質から）", anchor: ordering}
+      - {title: "DAG だと気づく・作る（値の順・距離の層・同じ値の頂点をまとめる）", anchor: find-dag, level: 水}
+      - {title: "最短路の本数（距離が確定した順に配る）", anchor: count-shortest-paths}
+      - {title: "閉路があるとき（SCC で縮約する・最短路に切り替える）", anchor: with-cycles}
     merged_keys: [dag-dp]
-    visual: "DP の表と同じ構造のグラフを並べ、列の DP やグリッドの DP が DAG の特別な場合であることを示す図"
+    visual: {kind: static, priority: 2, text: "DP の表と同じ構造のグラフを並べ、列の DP やグリッドの DP が DAG の特別な場合であることを示す図"}
     problems:
-      - {id: dp_g, role: example, summary: "閉路のない有向グラフの最長路。トポロジカル順に回すか、メモ化再帰で求める"}
-      - {id: abc211_d, role: practice, summary: "BFS で距離が1増える辺だけからなる DAG の上で、最短路の本数を数える"}
-      - {id: abc139_e, role: practice, summary: "総当たり戦の最少日数。試合を頂点、順序の制約を辺にした依存関係を順に処理する（閉路があれば不可能）"}
-      - {id: abc335_e, role: practice, summary: "値が減らないパスの得点の最大。同じ値の隣接頂点をまとめてから、値の順に DP する"}
+      - {id: dp_g, role: example, representative: true, summary: "閉路のない有向グラフで、最長の有向路の長さを求める。", approach: "トポロジカル順に回すか、メモ化再帰で求める"}
+      - {id: abc211_d, role: practice, summary: "無向グラフで、頂点 1 から頂点 N への最短路の本数を求める（mod 10^9+7）。", approach: "BFS で距離が 1 増える辺だけからなる DAG の上で数える"}
+      - {id: abc139_e, role: practice, summary: "総当たり戦で各選手が試合をする相手の順番が決まっているとき、全試合を終える最少の日数を求める（不可能なら −1）。", approach: "試合を頂点、順序の制約を辺にした依存関係を順に処理する（閉路があれば不可能）"}
+      - {id: abc335_e, role: practice, summary: "頂点に整数が書かれたグラフで、書かれた値が減らないように頂点 1 から N へ進むパスのうち、通った値の種類数の最大を求める。", approach: "同じ値の隣接頂点をまとめてから、値の小さい順に DP する"}
     sources: ["02-dp §4.A（dp-dag）", "03-graph §4.C（topological-sort の DAG 上の DP の節）", "03-graph §5.2（dag-dp）", "02-dp §5.1"]
 
   - id: dp-order
     chapter: DP の考え方
-    title: DP の計算順序（依存関係の順・後ろから解く）
-    aliases: [計算順序, ループの順番, 後ろから DP, 逆順 DP, トポロジカル順]
+    title: DP の計算順序
+    aliases: [計算順序, ループの順番, 後ろから DP, 逆順 DP]
     type: technique
     level: 水
-    level_evidence: "後ろから・値の順・トポロジカル順に計算しないと解けない問題が abc188_e (1170)・abc266_e (1227)・abc197_e (1379)・abc146_f (1545)・abc341_f (1604)・abc195_e (1609) と水〜青に集まる"
+    level_evidence: "後ろから・値の順・依存関係の順に計算しないと解けない問題が abc188_e (1170)・abc266_e (1227)・abc197_e (1379)・abc146_f (1545)・abc341_f (1604)・abc195_e (1609) と水〜青に集まる。abc319 以降の根拠は abc341_f (1604) の 1 問だけで、帯を変える根拠にはならない（古い問題で決めた）"
     kind: [DP]
-    prerequisites: [dp-basics, dp-dag]
-    related: [memoized-recursion, interval-dp, bit-dp, dp-reconstruction, reverse-thinking, expected-value-dp, game-dp]
-    summary: "dp[x] を計算する時点で、依存する値がすべて確定している順に状態を回す。添字の昇順だけでなく、後ろから・値の順・区間の長さ順・集合の包含順・木の帰りがけ順などを、依存関係の向きから選ぶ。"
+    prerequisites: [dp-basics]
+    related: [dp-dag, memoized-recursion, interval-dp, bit-dp, dp-reconstruction, reverse-thinking#decide-from-back, expected-value-dp#order, game-basics#win-lose]
+    summary: "dp[x] を計算する時点で、依存する値がすべて確定している順に状態を回す。添字の昇順に限らず、後ろから・値の順・区間の長さ順・集合の包含順などを依存の向きから選ぶ。"
     signs:
-      - {type: phrase, text: "終わりの状態の値が分かっている（ゲームの終局・残り回数 0・ゴールでの期待値 0）"}
       - {type: phrase, text: "値の小さい（大きい）方へしか移れない"}
-      - {type: phrase, text: "i 番目以降で最適に行動したときの値を考えると漸化式が立つ"}
+      - {type: phrase, text: "ゴールに着いたら終わり・残り回数が 0 になったら終わり（終わりの値が分かっている）"}
+      - {type: shape, text: "dp[i] が dp[j]（j > i）から決まる（i 番目以降で最適に行動したときの値）"}
     acl: []
-    frequency: A
+    frequency: B
+    frequency_evidence: "recent 0・前提として 11 ページに届く（直接 3）・古い ABC 6 問"
     sections:
-      - "依存グラフと計算順序の原則（閉路があれば DP にならない）"
-      - "典型の順序（添字・逆順・値の順・区間の長さ順・集合の昇順・木の帰りがけ順）"
-      - "後ろから解くサイン（終わりの値が分かっている・辞書順最小の復元）"
-      - "期待値 DP・ゲーム DP の計算順序（数え上げ・確率・ゲームの章へ）"
-      - "落とし穴：2重ループの内外の順・逆順の境界・配る形で未確定の値を配る"
+      - {title: "依存グラフと計算順序の原則（閉路があれば DP にならない）", anchor: dependency}
+      - {title: "典型の順序（添字・逆順・値の順・区間の長さ順・集合の昇順・木の帰りがけ順）", anchor: typical-orders}
+      - {title: "後ろから解くサイン（終わりの値が分かっている・辞書順最小の復元）", anchor: backward}
+      - {title: "期待値 DP・ゲーム DP の計算順序（確率・期待値・ゲームの章へ）", anchor: expectation-and-games}
+      - {title: "落とし穴：2 重ループの内外の順・逆順の境界・配る形で未確定の値を配る", anchor: pitfalls}
     merged_keys: []
-    visual: "状態の依存グラフを描き、添字順・逆順・値の順・区間の長さ順・集合の包含順・木の帰りがけ順の6つを同じ図式で並べる"
+    visual: {kind: static, priority: 2, text: "状態の依存グラフを描き、添字順・逆順・値の順・区間の長さ順・集合の包含順・木の帰りがけ順の 6 つを同じ図式で並べる"}
     problems:
-      - {id: abc188_e, role: example, summary: "番号の小さい町から大きい町へだけ道がある。後ろから「そこから行ける町の最高の売値」を埋める"}
-      - {id: abc266_e, role: practice, summary: "振り直せるサイコロで出目の期待値の最大。残り回数の少ない方から決める"}
-      - {id: abc197_e, role: practice, summary: "色の小さい順にボールを回収する。各色を終えた位置（左端か右端）を状態にする"}
-      - {id: abc146_f, role: practice, summary: "最短手数で辞書順最小の出目の列。ゴールから逆に、届く最も手前のマスを決める"}
-      - {id: abc341_f, role: practice, summary: "駒は値の小さい隣の頂点にしか移らない。値の小さい頂点から順に、各頂点でナップサックを解く"}
+      - {id: abc188_e, role: example, summary: "番号の小さい町から大きい町へだけ道がある国で、ある町で金を買い、そこから行ける別の町で売るときの利益の最大を求める。", approach: "後ろから「そこから行ける町の最高の売値」を埋める"}
+      - {id: abc197_e, role: example, representative: true, summary: "数直線上の色付きのボールを、色の番号の小さい順に全部回収して原点に戻るときの、移動距離の最小を求める。", approach: "各色を回収し終えた位置（その色の左端か右端）を状態にし、色の順に DP する"}
+      - {id: abc266_e, role: practice, summary: "最大 N 回まで振り直せるサイコロで、最後に出た目を得点にするとき、得点の期待値の最大を求める。", approach: "残り回数の少ない方から、振り直すかどうかと期待値を決める"}
+      - {id: abc146_f, role: practice, summary: "1〜M マス進めるすごろくで、止まってはいけないマスを避けて最短手数でゴールする出目の列のうち、辞書順最小のものを求める。", approach: "ゴールから逆に、届く最も手前のマスを決める（例題は dp-reconstruction）"}
+      - {id: abc341_f, role: practice, summary: "グラフの頂点に置いた駒を 1 つ取り除き、重みの和が元の頂点より小さい隣接頂点の集合に 1 つずつ置く操作の、最大の回数を求める。", approach: "駒は重みの小さい頂点にしか移らない。重みの小さい頂点から順に、各頂点でナップサックを解く"}
     sources: ["02-dp §4.A（dp-order）", "02-dp §5.1", "02-dp §5.3"]
 
   - id: dp-state-design
     chapter: DP の考え方
-    title: DP の状態の設計（何を覚えれば十分か）
-    aliases: [状態設計, DP の状態, 直前を状態に持つ, 環状 DP, 円環 DP, 括弧列の DP, カッコ列の DP]
+    title: DP の状態の設計
+    aliases: [状態設計, DP の状態, 直前を状態に持つ, 末尾の数文字を状態に持つ, 環状 DP, 円環 DP, 括弧列の DP]
     type: technique
     level: 水
-    level_evidence: "直前の選択・on/off・個数を1次元足す型は abc306_d (596)・abc303_d (778)・abc312_d (964) と基礎。何を覚えれば十分かを見抜く・情報を圧縮する型が abc322_e (1193)・abc307_e (1240)・abc232_e (1380)・abc359_d (1381)・abc265_e (1531)・abc175_e (1554) と水に集まる"
+    level_evidence: "直前の選択・on/off・個数を 1 次元足す型は abc306_d (596)・abc303_d (778)・abc312_d (964) と基礎。何を覚えれば十分かを見抜く・情報を圧縮する型が abc322_e (1193)・abc307_e (1240)・abc232_e (1380)・abc359_d (1381)・abc122_d (1533)・abc175_e (1554) と水に集まり、abc319 以降も abc322_e・abc359_d が水の入口にある。末尾の数文字を状態にする型（abc122_d・abc359_d）は照合オートマトン上の DP（string）の簡易版を受けたもの（design-review §4.2）"
     kind: [DP]
     prerequisites: [dp-basics]
-    related: [dp-dimension-reduction, dp-mod-state, dp-phase, bit-dp, bracket-sequence, string-automaton-dp, dp-counting-dedup]
-    summary: "過去の選び方そのものではなく、残りの選び方と評価に影響する要約（直前の値・on/off・個数・末尾の数文字・開き括弧の数など）だけを状態に持つ。要約が同じなら将来の最適な選び方も同じなので、まとめても答えは変わらない。"
+    related: [dp-dimension-reduction, dp-mod-state, dp-phase, bit-dp, bracket-sequence#counting, string-automaton-dp, palindrome#avoid-k-palindrome, counting-dedup#in-dp, binary-search-answer#dp-check]
+    summary: "過去の選び方そのものではなく、将来の選び方と評価に影響する要約（直前の値・個数・末尾の数文字・開き括弧の数など）だけを状態に持つ。要約が同じ状態は同一視しても答えが変わらない。"
     signs:
       - {type: phrase, text: "隣り合う〜が異なる・同じことを連続して〜しない"}
       - {type: phrase, text: "直前の選択でコストが変わる・モードが切り替わる"}
+      - {type: phrase, text: "長さ K の回文・特定の短い文字列を部分文字列に含まない文字列の数"}
       - {type: phrase, text: "円形に並んでいる（最後と最初も隣り合う）"}
       - {type: phrase, text: "'(' と ')' と '?' の列から正しい括弧列を作る方法の数"}
       - {type: constraint, text: "制約の一部だけが小さい（K ≤ 5、末尾の K ≤ 10 文字、文字の種類 26）"}
     acl: []
     frequency: A
+    frequency_evidence: "recent 4（abc456_d・abc457_f・abc462_f・abc464_d）・前提として 20 ページに届く（直接 9）・古い ABC 10 問"
     sections:
-      - "将来に効く要約だけを持てば合流できる理由"
-      - "典型の要約（直前の値・on/off・偶奇・個数・上限で打ち切った値・末尾の数文字）"
-      - "括弧列の DP（開き括弧の残り数を状態にする）"
-      - "環状の列（1か所で切り、最初の状態を固定して DP を回す）"
-      - "状態数の見積もり（(P+1)^K・2^K）"
-      - "落とし穴：最適値だけを持って状態を潰しすぎる"
+      - {title: "将来に効く要約だけを持てば合流できる理由", anchor: why-summary-works}
+      - {title: "典型の要約（直前の値・on/off・偶奇・個数・上限で打ち切った値）", anchor: typical-summaries}
+      - {title: "末尾の数文字を状態にする（禁止された並び・回文を避ける）", anchor: last-characters}
+      - {title: "括弧列の DP（開き括弧の残り数を状態にする）", anchor: bracket-dp}
+      - {title: "環状の列（1 か所で切り、最初の状態を固定して DP を回す）", anchor: dp-cyclic}
+      - {title: "状態数の見積もり（(P+1)^K・2^K・末尾の数文字の組の数）", anchor: state-count}
+      - {title: "落とし穴：最適値だけを持って状態を潰しすぎる", anchor: pitfalls}
     merged_keys: [dp-cyclic, bracket-dp]
-    visual: "過去の選び方の木と、将来に効く要約でまとめた状態の表を並べ、同じ要約の枝が合流する図。括弧列を開き括弧の数の折れ線として描き、0 未満に潜らない経路を数える図"
+    visual: {kind: static, priority: 2, text: "過去の選び方の木と、将来に効く要約でまとめた状態の表を並べ、同じ要約の枝が合流する図。括弧列を開き括弧の数の折れ線として描き、0 未満に潜らない経路を数える図"}
     problems:
-      - {id: dp_c, role: example, summary: "同じ活動を2日続けない幸福度の最大。前日の活動を状態に足す"}
-      - {id: abc306_d, role: example, summary: "料理を順に食べるか選び、お腹の状態2通りを状態にして美味しさの和を最大化する"}
-      - {id: abc312_d, role: practice, summary: "'?' を '(' か ')' に置き換えて正しい括弧列にする方法の数。開き括弧の残り数を状態にする"}
-      - {id: abc322_e, role: practice, summary: "K（≤ 5）個の能力値を目標値 P で打ち切ったベクトルを状態にした最小コスト"}
-      - {id: abc307_e, role: practice, summary: "円形に並ぶ人に隣と異なる整数を配る方法の数。最初の人と同じ値かどうかを状態にする"}
-      - {id: abc232_e, role: practice, summary: "行・列が目的地と一致するかの4状態にまとめて、K 手の経路の数を数える"}
-      - {id: abc359_d, role: practice, summary: "末尾 K−1 文字を bit で状態に持ち、長さ K の回文を含まない埋め方を数える"}
-      - {id: abc175_e, role: practice, summary: "グリッドの経路で、今の行で拾った個数を状態にして価値の和を最大化する"}
-      - {id: abc345_e, role: challenge, summary: "隣が同じ色にならない部分列の価値の最大。遷移元の上位2つ（色が異なる）だけを持って速くする"}
-    sources: ["02-dp §4.A（dp-state-design・dp-cyclic）", "02-dp §4.C（bracket-dp）", "02-dp §5.1", "02-dp §5.3", "08-string-geo §4.1（bracket-sequence）"]
+      - {id: dp_c, role: example, summary: "N 日間、毎日 3 つの活動から 1 つを選んで幸福度を得るとき、同じ活動を 2 日続けない場合の幸福度の和の最大を求める。", approach: "前日の活動を状態に足す"}
+      - {id: abc359_d, role: example, representative: true, summary: "A・B・? からなる文字列の ? を A か B に置き換える方法のうち、長さ K（≤ 10）の回文を部分文字列に含まないものの数を求める。", approach: "末尾 K−1 文字を bit で状態に持つ（節 last-characters）"}
+      - {id: abc122_d, role: example, summary: "A・C・G・T からなる長さ N の文字列のうち、AGC を部分文字列に含まず、隣り合う 2 文字を 1 回入れ替えても AGC が現れないものの数を求める。", approach: "直前の 3 文字を状態にする（照合オートマトン上の DP の簡易版。節 last-characters）"}
+      - {id: abc306_d, role: practice, summary: "解毒の料理と毒の料理を順に食べるか選び、死なずに食べた料理のおいしさの和の最大を求める。", approach: "お腹の状態（健康・不調）の 2 通りを状態にする"}
+      - {id: abc312_d, role: practice, summary: "'('・')'・'?' からなる文字列の '?' を置き換えて、正しい括弧列にする方法の数を求める。", approach: "開き括弧の残り数を状態にする（節 bracket-dp）"}
+      - {id: abc322_e, role: practice, summary: "K（≤ 5）個のパラメータをすべて P 以上にするように開発案を選ぶときの、費用の最小を求める。", approach: "各パラメータを P で打ち切ったベクトルを状態にする"}
+      - {id: abc307_e, role: practice, summary: "円形に並ぶ N 人に 0〜M−1 の整数を、隣り合う人どうしが異なるように配る方法の数を求める。", approach: "最初の人と同じ値かどうかを状態にする（節 dp-cyclic）"}
+      - {id: abc232_e, role: practice, summary: "H×W の盤でルークを K 回動かして、指定のマスから指定のマスへ移動させる方法の数を求める。", approach: "行・列が目的地と一致するかの 4 状態にまとめる"}
+      - {id: abc345_e, role: challenge, summary: "色と価値のついたボールの列からちょうど K 個を取り除き、残った列で隣り合う色がすべて異なるようにするときの、残った価値の和の最大を求める。", approach: "遷移元の上位 2 つ（色が異なる）だけを持って速くする"}
+    sources: ["02-dp §4.A（dp-state-design・dp-cyclic）", "02-dp §4.C（bracket-dp・string-automaton-dp の簡易版）", "02-dp §5.1", "02-dp §5.3", "08-string-geo §4.1（bracket-sequence）", "08-string-geo §4.6（string-automaton-dp の簡易版）"]
 
   - id: dp-mod-state
     chapter: DP の考え方
@@ -188,11 +196,11 @@ pages:
     aliases: [余りを状態に, mod DP, 倍数の数え上げ, 平均が整数]
     type: technique
     level: 水
-    level_evidence: "abc220_d (664)・abc281_d (1031) の基礎から、abc262_d (1213)・abc135_d (1334)・arc060_a (1583) と水に集まり、abc195_e (1609)・abc207_e (1820) が青"
+    level_evidence: "abc220_d (664)・abc281_d (1031) の基礎から、abc262_d (1213)・abc135_d (1334)・arc060_a (1583) と水に集まり、abc195_e (1609)・abc207_e (1820) が青。abc319 以降の根拠は見つかっていないので、古い問題で決めた"
     kind: [DP, 整数論]
     prerequisites: [dp-state-design, mod-arithmetic]
-    related: [digit-dp, subset-sum, knapsack-01, dp-sequence-partition, game-dp]
-    summary: "条件が「和や積が M の倍数」「平均が整数」のときは、和そのものではなく M で割った余りを状態に持てば足りる。平均は選ぶ個数を外側で固定するか、各値から平均を引いて「和が 0」に直す。"
+    related: [digit-dp, subset-sum, knapsack-01, dp-sequence-partition, game-basics#state-design]
+    summary: "「和が M の倍数」「平均が整数」のような条件は、和そのものではなく M で割った余りを状態に持てば数えられる。平均は選ぶ個数を外側で固定するか、各値から平均を引いて和 0 に直す。"
     signs:
       - {type: phrase, text: "和（積）が M の倍数になる選び方の数"}
       - {type: phrase, text: "平均が整数になる・平均がちょうど A になる選び方の数"}
@@ -200,205 +208,150 @@ pages:
       - {type: constraint, text: "M ≤ 1000 程度、N ≤ 100 程度"}
     acl: []
     frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 6 問"
     sections:
-      - "余りを状態にしてよい理由（足し算・掛け算と mod が両立する）"
-      - "個数も状態に持つ（K 個選んで和が D の倍数）"
-      - "平均の扱い（個数を外側で固定する・平均を引いて和 0 にする）"
-      - "後ろから余りごとの勝敗を決めるゲーム（青）"
-      - "落とし穴：C++ の % が負になる・状態の mod と答えの mod の混同"
+      - {title: "余りを状態にしてよい理由（足し算・掛け算と mod が両立する）", anchor: why-remainder}
+      - {title: "個数も状態に持つ（K 個選んで和が D の倍数）", anchor: with-count}
+      - {title: "平均の扱い（個数を外側で固定する・平均を引いて和 0 にする）", anchor: average}
+      - {title: "後ろから余りごとの勝敗を決めるゲーム", anchor: game-by-remainder, level: 青}
+      - {title: "落とし穴：C++ の % が負になる・状態の mod と答えの mod の混同", anchor: pitfalls}
     merged_keys: []
-    visual: "和の数直線を M ごとに折り返して円にし、状態が M 個にまとまる図"
+    visual: {kind: static, priority: 3, text: "和の数直線を M ごとに折り返して円にし、状態が M 個にまとまる図"}
     problems:
-      - {id: abc281_d, role: example, summary: "K 個選んで和が D の倍数になるときの和の最大。個数と和の余りを状態にする"}
-      - {id: abc262_d, role: example, summary: "平均が整数になる選び方の数。選ぶ個数 k を外側で固定し、個数と和の k での余りを状態にする"}
-      - {id: abc220_d, role: practice, summary: "先頭2つを足すか掛けて1桁にする操作の結果が k になる数。下1桁を状態にする"}
-      - {id: abc135_d, role: practice, summary: "'?' を埋めた数のうち 13 で割って 5 余るものの数"}
-      - {id: arc060_a, role: practice, summary: "平均がちょうど A になる選び方の数。各値から A を引いて和を 0 にする"}
-      - {id: abc195_e, role: practice, summary: "2人ゲームの勝敗を後ろから、7 で割った余りごとに決める"}
+      - {id: abc281_d, role: example, summary: "N 個の整数からちょうど K 個を選び、和が D の倍数になるときの和の最大を求める。", approach: "個数と和の D での余りを状態にする"}
+      - {id: abc262_d, role: example, representative: true, summary: "数列の空でない部分集合のうち、要素の平均が整数になるものの数を求める。", approach: "選ぶ個数 k を外側で固定し、個数と和の k での余りを状態にする"}
+      - {id: abc220_d, role: practice, summary: "0〜9 の数列の先頭 2 つを、和か積の 1 の位に置き換える操作を繰り返すとき、最後に残る値が各 k になる操作の仕方の数を求める。", approach: "下 1 桁を状態にする"}
+      - {id: abc135_d, role: practice, summary: "数字と '?' からなる文字列の '?' を埋めてできる整数のうち、13 で割って 5 余るものの数を求める。", approach: "上の桁から、13 での余りを状態にする"}
+      - {id: arc060_a, role: practice, summary: "N 枚のカードから 1 枚以上を選び、書かれた数の平均がちょうど A になる選び方の数を求める。", approach: "各値から A を引いて和を 0 にする（または個数と和を状態にする）"}
+      - {id: abc195_e, role: practice, summary: "数字列を先頭から順に、決められた手番の人がその数字か 0 を末尾に付けていき、最後にできた数が 7 の倍数かで勝敗が決まる 2 人ゲームの勝者を求める。", approach: "後ろから「余りが r のとき勝てるか」を、手番の人に応じて or と and で埋める（節 game-by-remainder）"}
+    problems_note: "abc319 以降で余りを状態にする DP が主役の問題は research に見当たらない（abc465_e は桁 DP の練習に置いた）。工程 8b の前の問題の補充で探す"
     sources: ["02-dp §4.A（dp-mod-state）", "02-dp §5.1"]
 
   - id: dp-phase
     chapter: DP の考え方
-    title: フェーズを状態に持つ DP（耳 DP）
-    aliases: [耳DP, 耳 DP, 状態 DP, 段階を状態に持つ, 最大部分配列和, Kadane]
+    title: フェーズを状態に持つ DP
+    aliases: [耳 DP, 段階を状態に持つ DP, 最大部分配列和, Kadane, "Kadane's algorithm"]
     type: technique
     level: 青
-    level_evidence: "「区間の外・中・後」などの段階を状態にする問題は abc211_c (559) の基本形から、abc104_d (1739)・abc159_f (1876)・abc360_g (1982)・yahoo_procon2019_qual_d (1998) と青に多い"
+    level_evidence: "「区間の外・中・後」などの段階を状態にする問題は abc211_c (559) の基本形から、abc104_d (1739)・abc159_f (1876)・abc360_g (1982)・yahoo_procon2019_qual_d (1998) と青に多い。abc319 以降では abc466_e (1027) のように易しい E にも出るが、段階の切り替えを設計させる問題は青"
     kind: [DP]
     prerequisites: [dp-state-design]
-    related: [subsequence-dp, string-automaton-dp, dp-sequence-partition, difference-reformulation, lis]
-    summary: "「区間の前・中・後」「何文字目まで集めたか」のように、各位置で今どの段階にいるかを状態に持つ DP。区間を1つ選ぶ問題で左端と右端を全探索する代わりに、段階の切り替わりを遷移にして O(N^2) を O(N) にする。"
+    related: [subsequence-dp, string-automaton-dp, dp-sequence-partition, difference-sequence, lis]
+    summary: "区間を 1 つ選ぶ・何文字目まで集めたか、のように各位置でいまどの段階にいるかを状態に持つ。区間の両端を全探索する代わりに段階の切り替えを遷移にして、O(N^2) を O(N) にする。"
     signs:
-      - {type: phrase, text: "区間を1つ選んで、その中だけ操作する（1回だけ変更できる）"}
+      - {type: phrase, text: "区間を 1 つ選んで、その中だけ操作する（1 回だけ変更できる）"}
       - {type: phrase, text: "部分列として 'ABC' などが何個含まれるか（'?' を埋めた全通りの和）"}
       - {type: phrase, text: "連続する部分列の和の最大"}
+      - {type: shape, text: "区間 [l, r) の両端を全探索すると O(N^2) になり、各位置の扱いが「区間の前・中・後」で変わる"}
     acl: []
     frequency: B
+    frequency_evidence: "recent 1（abc466_e）・前提として届くページなし・古い ABC 4 問"
     sections:
-      - "最大部分配列和（Kadane）：区間を1つ選ぶ最も簡単な例"
-      - "段階の数え方（区間の外側にも段階がある）"
-      - "何文字目まで集めたか（部分列として現れる回数を数える）"
-      - "区間の反転・変更を段階の切り替えで表す"
-      - "落とし穴：同じ位置で段階をいくつ進めてよいか"
+      - {title: "最大部分配列和（Kadane）：区間を 1 つ選ぶ最も簡単な例", anchor: kadane}
+      - {title: "段階の数え方（区間の外側にも段階がある）", anchor: counting-phases}
+      - {title: "何文字目まで集めたか（部分列として現れる回数を数える）", anchor: matched-prefix}
+      - {title: "区間の反転・変更を段階の切り替えで表す", anchor: flip-interval}
+      - {title: "落とし穴：同じ位置で段階をいくつ進めてよいか", anchor: pitfalls}
     merged_keys: [kadane-and-submask]
-    visual: "列の下に「段階 0 → 1 → 2」の帯を描き、各位置でどの段階にいるかを状態遷移図にする"
+    visual: {kind: static, priority: 2, text: "列の下に「段階 0 → 1 → 2」の帯を描き、各位置でどの段階にいるかを状態遷移図にする"}
     problems:
-      - {id: typical90_h, role: example, summary: "文字列から 'atcoder' を部分列として取り出す方法の数。何文字目まで集めたかを段階として持つ"}
-      - {id: abc159_f, role: example, summary: "すべての区間についての部分和の個数の総和。区間の左端を「まだ始めていない・始めた」で持つ"}
-      - {id: abc466_e, role: practice, summary: "区間の裏表の反転を「切り替えの点を2つ置く」ことに言い換え、使った点の数を状態にする"}
-      - {id: abc104_d, role: practice, summary: "'?' を A・B・C に置き換えた全通りについての部分列 'ABC' の個数の総和。A・AB・ABC まで集めた数を状態にする"}
-      - {id: yahoo_procon2019_qual_d, role: practice, summary: "数直線を歩く経路を、通らない・偶数回・奇数回…の5段階に分けてコストの最小を求める"}
+      - {id: typical90_h, role: example, summary: "文字列から部分列として 'atcoder' を取り出す方法の数を求める。", approach: "何文字目まで集めたかを段階として持つ"}
+      - {id: abc159_f, role: example, representative: true, summary: "数列のすべての区間 [L, R] について、その中で和がちょうど S になる部分列の個数を求め、その総和を出す。", approach: "区間の左端を「まだ始めていない・始めた」の段階で持つ"}
+      - {id: abc466_e, role: practice, summary: "（執筆時に確かめる）", approach: "区間の反転を切り替えの点 2 つに言い換え、置いた点の数を段階として持つ（research/00 §2.3.8 の分類）"}
+      - {id: abc104_d, role: practice, summary: "A・B・C・? からなる文字列の ? を埋めた全通りについて、部分列として現れる 'ABC' の個数の総和を求める。", approach: "A・AB・ABC まで集めた数を状態にする"}
+      - {id: yahoo_procon2019_qual_d, role: practice, summary: "数直線上を歩く経路を自由に選ぶとき、各区間を通った回数を目標の個数 A_i に合わせるための追加・削除の回数の最小を求める。", approach: "通らない・偶数回・奇数回…の 5 段階を状態にする（耳 DP の名の由来）"}
     sources: ["02-dp §4.C（dp-phase）", "02-dp §5.1", "08-string-geo §4.1（subsequence-dp：照合位置の DP）", "00-curriculum §3.2（kadane-and-submask）", "00-curriculum §4.2（差分列への言い換え：abc466_e）"]
-
-  - id: dp-dimension-reduction
-    chapter: DP の考え方
-    title: DP の状態の削減（値と添字の入れ替え・上限での打ち切り）
-    aliases: [状態の削減, 次元の削減, 状態の圧縮, 値と添字の入れ替え, キーと値を入れ替える, 添字と値を逆に, 上限で打ち切る]
-    type: technique
-    level: 青
-    level_evidence: "drken 氏は abc325_f の解説で、DP の値を使って状態を表すこの手法を青 diff あたりの典型と書いている。該当は abc410_e (1077)・abc219_d (1085) の緑から abc364_e (1496)・abc315_f (1674)・abc325_f (1769)・abc376_f (2089)・abc203_f (2252) と広がる。入口の EDPC E は易しい"
-    kind: [DP]
-    prerequisites: [dp-state-design, knapsack-01]
-    related: [dp-mod-state, lis, inline-dp, meet-in-the-middle]
-    summary: "表が大きすぎるときに状態を減らす3つの型：使い終わった段の配列を使い回す、範囲を上限で打ち切る、ほかの添字から決まる量や支配される量を値の側に回す（値と添字の入れ替え）。どれを添字に残すかは、範囲が小さい量で決める。"
-    signs:
-      - {type: constraint, text: "重さの上限 W ≤ 10^9 で、価値の総和が 10^5 程度"}
-      - {type: phrase, text: "2つの量の両方を添字にすると表が大きすぎる（片方を値の最小・最大に回す）"}
-      - {type: phrase, text: "目標以上は同じ扱いでよい（上限で打ち切る）"}
-      - {type: phrase, text: "ペナルティが指数的に増える（見るべき範囲は log 程度）"}
-    acl: []
-    frequency: B
-    sections:
-      - "段の使い回し（2本・1本の配列に）"
-      - "上限で打ち切る（目標以上をまとめる・log 回で十分）"
-      - "値と添字の入れ替え（同じ添字なら値が良い方が常に良いとき）"
-      - "どれを添字に残すか（範囲が小さい量を選ぶ）"
-      - "落とし穴：打ち切りの遷移を忘れる・復元が要るのに表を捨てる・入れ替えた後の答えの取り出し"
-    merged_keys: [dp-swap-key-value]
-    visual: "3つの量 (a, b, c) の立方体の表から c を値に回して平面の表にする図。「重さ→価値の最大」と「価値→重さの最小」の表を並べ、同じ情報を持つことを示す"
-    problems:
-      - {id: dp_e, role: example, summary: "重さの上限が大きく価値の総和が小さいナップサック。価値を添字に、その価値を作る最小の重さを値にする"}
-      - {id: abc364_e, role: example, summary: "甘さとしょっぱさの両方を添字にすると大きいので、しょっぱさを値（最小）に回す"}
-      - {id: abc410_e, role: practice, summary: "体力と魔力の両方を添字にせず、残り体力ごとに残せる魔力の最大を値に持つ"}
-      - {id: abc315_f, role: practice, summary: "スキップのペナルティが指数的に増えるので、スキップの回数は数十まで見れば足りる"}
-      - {id: abc325_f, role: practice, summary: "2種類のセンサーの個数を両方は添字にせず、片方の個数を値（最小）にする"}
-      - {id: abc376_f, role: practice, summary: "指示の直後は指定された手の位置が決まるので、状態はもう一方の手の位置だけでよい"}
-      - {id: abc203_f, role: challenge, summary: "相手の操作回数（log 回まで）を添字、自分が抜く本数の最小を値にする"}
-    sources: ["02-dp §4.A（dp-dimension-reduction・dp-swap-key-value）", "02-dp §5.1", "02-dp §5.3", "02-dp §7.2"]
 
   - id: dp-reconstruction
     chapter: DP の考え方
-    title: DP の復元（選び方の出力・辞書順 K 番目）
-    aliases: [DP の復元, 経路復元, DP 復元, DP テーブルからの復元, 辞書順最小の復元, 辞書順 K 番目]
+    title: DP の復元
+    aliases: [DP 復元, 選び方の出力, DP テーブルからの復元, 辞書順最小の復元]
     type: technique
     level: 水
-    level_evidence: "選び方を1つ出力させる問題は abc271_d (886)・典型90 056 (★5)・EDPC F から。辞書順最小の復元は abc146_f (1545)・abc369_f (1618)・arc081_c (2072)。research/00 は EDPC F を根拠に基礎（DP の基本の節）を提案したが、出力の形の工夫が要る問題が水から多いので水の単独ページにした"
+    level_evidence: "選び方を 1 つ出力させる問題は abc271_d (886)・typical90_bd (★5)・EDPC F から。辞書順最小の復元は abc146_f (1545)・arc081_c (2072)、経路の復元は abc369_f (1618、2024。abc319 以降はこの 1 問で、水と青の境目)。research/00 は EDPC F を根拠に基礎（DP の基本の節）を提案したが、出力の形の工夫が要る問題が水から多いので水の単独ページにした"
     kind: [DP]
     prerequisites: [dp-basics]
-    related: [dp-order, lcs, path-restoration, lexicographic-greedy, kth-combination, subsequence-dp]
-    summary: "最適値だけでなく選び方そのものを出力するために、完成した表を終端から「どの遷移で最適値になったか」を見て逆にたどる。辞書順最小なら後ろからの DP を作って先頭から貪欲に決め、辞書順 K 番目なら後ろからの個数を数えて先頭から決める。"
+    related: [dp-order, lcs, bfs#path-restoration, lexicographic-greedy#kth, binomial-coefficient#kth, subsequence-dp]
+    summary: "最適値だけでなく選び方そのものを出力するとき、完成した表を終端から逆にたどって最適な遷移を復元する。辞書順最小は後ろからの DP と前からの貪欲で、辞書順 K 番目は個数を数えて先頭から決める。"
     signs:
-      - {type: phrase, text: "選び方（経路・操作列）を1つ出力せよ"}
+      - {type: phrase, text: "選び方（経路・操作列）を 1 つ出力せよ"}
       - {type: phrase, text: "条件を満たすものが複数あれば辞書順最小のものを出力せよ"}
       - {type: phrase, text: "辞書順で K 番目のものを出力せよ（K は 10^18 程度）"}
     acl: []
     frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 4 問"
     sections:
-      - "表を残して終端から逆にたどる・遷移元を記録しておく"
-      - "最適な遷移が複数あるときの選び方"
-      - "辞書順最小の復元（後ろからの DP と前からの貪欲）（青）"
-      - "辞書順 K 番目を数え上げで決める（個数が K を超えたら打ち切る）"
-      - "落とし穴：使い回した表では辿れない・辿った順の逆転・数え上げの溢れ"
+      - {title: "表を残して終端から逆にたどる・遷移元を記録しておく", anchor: trace-back}
+      - {title: "最適な遷移が複数あるときの選び方", anchor: ties}
+      - {title: "辞書順最小の復元（後ろからの DP と前からの貪欲）", anchor: lexicographic-min}
+      - {title: "辞書順 K 番目を数え上げで決める（個数が K を超えたら打ち切る）", anchor: dp-kth-lexicographic}
+      - {title: "落とし穴：使い回した表では辿れない・辿った順の逆転・数え上げの溢れ", anchor: pitfalls}
     merged_keys: [dp-kth-lexicographic, dp-restoration]
-    visual: "完成した表を終端から逆にたどり、最適値を与えた遷移を光らせるステップ送り。先頭の候補ごとに「その先の個数」を棒グラフにし、K がどの棒に入るかで1文字ずつ決める図"
+    visual: {kind: static, priority: 2, text: "完成した表を終端から逆にたどり、最適値を与えた遷移を強調する図。先頭の候補ごとに「その先の個数」を棒グラフにし、K がどの棒に入るかで 1 文字ずつ決める図"}
     problems:
-      - {id: abc271_d, role: example, summary: "カードの表裏を選んで和を S にし、その選び方を出力する。可否 DP の表を後ろから辿る"}
-      - {id: typical90_bd, role: example, summary: "毎日 A か B を選んで合計を S にし、その選び方を出力する"}
-      - {id: abc202_d, role: practice, summary: "a が A 個・b が B 個の文字列の辞書順 K 番目。先頭を a にした場合の個数と K を比べて決める"}
-      - {id: dp_f, role: practice, summary: "LCS の表を終端から辿って共通部分列を1つ出力する"}
-      - {id: abc146_f, role: practice, summary: "最短手数で辞書順最小の出目の列。ゴールから逆に、届く最も手前のマスを決める"}
-      - {id: abc369_f, role: practice, summary: "右・下に移動して集めるコインの最大と、その経路を出力する"}
-      - {id: arc081_c, role: challenge, summary: "部分列として現れない最短の文字列のうち辞書順最小のもの。後ろから DP して前から貪欲に復元する"}
+      - {id: abc271_d, role: example, summary: "N 枚のカードの表か裏を選んで書かれた数の和をちょうど S にできるかを判定し、できるなら表裏の選び方を 1 つ出力する。", approach: "可否 DP の表を後ろから辿る"}
+      - {id: typical90_bd, role: example, summary: "N 日間、毎日 A_i か B_i のどちらかを買って合計をちょうど S にする選び方を 1 つ出力する。", approach: "可否 DP の表を残し、終端から逆にたどる"}
+      - {id: abc146_f, role: example, representative: true, summary: "1〜M マス進めるすごろくで、止まってはいけないマスを避けて最短手数でゴールする出目の列のうち、辞書順最小のものを求める。", approach: "ゴールから逆に、届く最も手前のマスを決める（後ろからの DP と前からの貪欲）"}
+      - {id: abc202_d, role: practice, summary: "a が A 個・b が B 個からなる文字列のうち、辞書順で K 番目のものを求める。", approach: "先頭を a にした場合の個数（二項係数）と K を比べて 1 文字ずつ決める"}
+      - {id: dp_f, role: practice, summary: "2 つの文字列の最長共通部分列を 1 つ出力する。", approach: "LCS の表を終端から辿る（例題は lcs）"}
+      - {id: abc369_f, role: practice, summary: "グリッドを右か下にだけ進んでコインを集めるとき、集める枚数の最大と、そのときの経路を求める。", approach: "コインの位置で LIS 型の DP をし、直前のコインを記録して復元する"}
+      - {id: arc081_c, role: challenge, summary: "文字列 A の部分列として現れない最短の文字列のうち、辞書順最小のものを求める。", approach: "次の出現位置の表で後ろから DP し、前から貪欲に復元する"}
     sources: ["02-dp §4.A（dp-reconstruction・dp-kth-lexicographic）", "02-dp §5.1", "00-curriculum §4.2（DP の復元）"]
 
-  - id: dp-counting-dedup
+  - id: dp-prefix-sum
     chapter: DP の考え方
-    title: 数え上げ DP で重複を避ける（代表元を決める）
-    aliases: [ダブルカウントを防ぐ, 重複を除く, 代表元を決める, 最小添字規則, 正規化]
+    title: 累積和・いもす法による DP の高速化
+    aliases: [累積和 DP, いもす法 DP, 累積和で遷移をまとめる]
     type: technique
-    level: 青
-    level_evidence: "同じ対象を1回だけ数えるために代表の作り方を決める必要がある問題が abc310_d (1368)・abc130_e (1676)・abc214_f (1973)・abc311_f (1984) と青に多い。発展に abc180_f (2419)"
-    kind: [DP, 数え上げ]
-    prerequisites: [dp-state-design]
-    related: [subsequence-dp, subset-enumeration-dp, counting-dedup, inclusion-exclusion, lcs, dp-sequence-partition]
-    summary: "同じ対象が複数の作り方で作れるときは、作り方に「代表」を1つ決めて代表だけを数える。最も左を取る、番号最小の要素を含むグループから決める、包除で重なりを引く、などで代表を定める。"
+    level: 水
+    level_evidence: "abc222_d (865)・abc178_d (875)・abc253_e (1073) の緑から現れ、abc179_d (1251)・abc183_e (1288)・abc442_f (1295、2026、累積 min で遷移) で典型になる。応用は abc130_e (1676)・abc207_e (1820)・abc311_f (1984)・abc132_f (2143)・abc265_f (2290)。前提が多くのページから参照される基本の道具なので、ナビゲーションでは「DP の考え方」の章の末尾に置く（03-19）"
+    kind: [DP, 累積和・差分]
+    prerequisites: [dp-basics, imos]
+    related: [dp-segment-tree, inline-dp, prefix-sum-2d, dp-sequence-partition, insertion-dp, dp-grid, dp-speedup-overview]
+    summary: "遷移元が連続した範囲の和になる DP を、前の段の累積和で 1 回 O(1) にする。遷移先が範囲なら、いもす法で差分に書いておき後で累積する。"
     signs:
-      - {type: phrase, text: "異なる〜の個数（同じものは1回だけ数える）"}
-      - {type: phrase, text: "区別しないグループに分ける方法の数"}
-      - {type: phrase, text: "操作の結果として得られる列の種類数"}
+      - {type: phrase, text: "各人に 0〜a_i 個を配る方法の数（上限つきの配り方）"}
+      - {type: constraint, text: "N ≤ 100、K ≤ 10^5 程度で、O(NK) は通るが O(NK^2) は通らない"}
+      - {type: shape, text: "dp[i] = Σ_{j=i−R}^{i−L} dp[j] のように、遷移元が連続した範囲の和"}
+      - {type: shape, text: "dp[i] から i+L〜i+R の範囲へ同じ値を配る"}
     acl: []
     frequency: B
+    frequency_evidence: "recent 0・前提として 6 ページに届く（直接 3）・古い ABC 11 問"
     sections:
-      - "作り方と対象を一対一に対応させる"
-      - "最も左を取る（部分列）"
-      - "番号最小の要素を含むグループから決める（グループ分け）"
-      - "包除で重なりを引く"
-      - "直前と違う・最初に〜で場合分けする"
-      - "落とし穴：グループの順序を区別して K! 倍に数える"
+      - {title: "貰う形と累積和・配る形といもす法", anchor: pull-and-push}
+      - {title: "同じ段の累積和（上限つきの配り方）", anchor: same-row}
+      - {title: "区間の和集合・方向ごとの累積（縦・横・斜め）", anchor: directional}
+      - {title: "遷移元が接頭辞なら累積 min・累積 max でもよい", anchor: prefix-min}
+      - {title: "余りごとの累積", anchor: by-remainder, level: 青}
+      - {title: "2 次元の累積", anchor: two-dimensional, level: 青}
+      - {title: "落とし穴：累積和を更新しながら使う順番・区間の端・mod の差が負になる", anchor: pitfalls}
     merged_keys: []
-    visual: "同じ対象に対応する複数の作り方を並べ、代表（最も左を取る・最小の要素を含むグループから決める）だけに印を付ける図"
+    visual: {kind: static, priority: 2, text: "dp 配列の下に累積和の配列を並べ、区間の和が 2 つの値の差で取れる様子の図"}
     problems:
-      - {id: abc310_d, role: example, summary: "N 人を T チームに分ける方法の数。番号最小の未所属者を含むチームから決めて順序の重複を除く"}
-      - {id: abc130_e, role: practice, summary: "2つの列の共通部分列（位置の組）の数。包除で重複を除き、2次元の累積和で速くする"}
-      - {id: abc311_f, role: practice, summary: "条件を満たす黒マスの塗り方の数を、列ごとの高さで重複なく数える"}
-      - {id: abc180_f, role: challenge, summary: "次数 2 以下のグラフの数え上げ。最小番号の頂点を含む連結成分から決めて重複を除く"}
-    sources: ["02-dp §4.C（dp-counting-dedup）", "02-dp §5.1", "07-math-comb §4.1（counting-dedup）"]
-
-  - id: dp-decision-binary-search
-    chapter: DP の考え方
-    title: 答えを決め打ちして DP で判定する
-    aliases: [二分探索＋DP, 決め打ち二分探索, 判定 DP, 平均の最大化, 中央値の最大化, 比の最大化]
-    type: technique
-    level: 青
-    level_evidence: "abc415_e (1212) の水から、abc324_f (1815)・abc236_e (1893) と青。木の上の判定は abc246_g (2313)"
-    kind: [DP, 二分探索]
-    prerequisites: [binary-search-answer, dp-basics]
-    related: [fractional-binary-search, median-binary-search, dp-dag, dp-grid, tree-dp]
-    summary: "「最小値の最大化」「平均・比・中央値の最大化」は、答え X を決め打つと「X 以上を達成できるか」の判定問題になる。判定が X について単調なら二分探索し、判定を DP で作る。"
-    signs:
-      - {type: phrase, text: "平均・比・中央値の最大値"}
-      - {type: phrase, text: "最小値の最大化・最大値の最小化"}
-      - {type: phrase, text: "直接 DP すると個数や総和を状態に持つ必要があって重い"}
-    acl: []
-    frequency: B
-    sections:
-      - "判定問題に直す（単調性の確かめ方）"
-      - "平均 ≥ X ⇔ Σ(a_i − X) ≥ 0、比 ≥ X ⇔ Σ(b_i − X·c_i) ≥ 0"
-      - "中央値 ≥ X ⇔ X 以上を +1・未満を −1 にした和が正"
-      - "判定 DP の書き方（決め打ちごとに初期化し直す）"
-      - "落とし穴：実数の二分探索の回数・境界の ≥ と >・偶数個のときの中央値"
-    merged_keys: []
-    visual: "答えの候補 X の数直線と、X を固定したときの判定 DP の結果（可・不可）が単調に切り替わる図"
-    problems:
-      - {id: abc415_e, role: example, summary: "最初に持つコインの枚数を二分探索し、所持枚数の最大を持つグリッドの DP で可否を判定する"}
-      - {id: abc324_f, role: example, summary: "美しさの和÷コストの和の最大。Σ(b − X·c) ≥ 0 となる経路があるかを DAG の最長路で判定する"}
-      - {id: abc236_e, role: practice, summary: "隣り合う2つを両方は飛ばせない選び方で、平均と中央値の最大。値を変換して DP で判定する"}
-      - {id: abc246_g, role: challenge, summary: "木の上の2人ゲーム。答えを決め打ちし、木 DP で達成できるかを判定する"}
-    sources: ["02-dp §4.A（dp-decision-binary-search）", "02-dp §5.1", "00-curriculum §4.2（平均・比の最大化）"]
+      - {id: dp_m, role: example, summary: "N 人の子どもに K 個の飴を、i 番目の子には 0〜a_i 個ずつ、余さず配る方法の数を求める。", approach: "前の段の累積和で、区間からの遷移を O(1) にする"}
+      - {id: abc179_d, role: example, representative: true, summary: "いくつかの区間の和集合に含まれる歩幅で、マス 1 からマス N まで進む方法の数を求める。", approach: "区間ごとに累積和の差を足す（貰う形）"}
+      - {id: abc178_d, role: practice, summary: "各項が 3 以上の整数で、総和が S になる数列の個数を求める。", approach: "累積和で遷移をまとめる"}
+      - {id: typical90_ap, role: practice, summary: "各桁が 1〜9 で桁の和が K になる正の整数のうち、9 の倍数の個数を求める。", approach: "直前 9 項の和を累積和で取る"}
+      - {id: abc253_e, role: practice, summary: "長さ N・各項が 1〜M で、隣り合う項の差の絶対値が K 以上の数列の個数を求める。", approach: "遷移元が 2 つの区間になり、累積和で速くする"}
+      - {id: abc442_f, role: practice, summary: "グリッドのマスを塗り替えて、各行の左側に並ぶ白の個数が下の行ほど減る形にするときの、塗り替えの最小数を求める。", approach: "上の行の白の個数を状態にし、累積 min で遷移する（節 prefix-min）"}
+      - {id: tdpc_semiexp, role: practice, summary: "1 番目と N 番目の駅には止まり、K 駅以上連続しては止まらない停車駅の選び方の数を求める。", approach: "累積和（と余事象）で遷移をまとめる"}
+      - {id: abc207_e, role: practice, summary: "数列をいくつかの区間に区切り、k 番目の区間の和が k で割り切れるようにする方法の数を求める。", approach: "区間の番号ごとに余りの累積を持つ（節 by-remainder）"}
+      - {id: abc265_f, role: challenge, summary: "N 次元の格子点で、与えられた 2 点からのマンハッタン距離がともに D 以下の点の個数を求める。", approach: "斜め方向の累積和で遷移する"}
+    sources: ["02-dp §4.J（dp-prefix-sum）", "02-dp §5.1", "02-dp §5.3", "02-dp §7.2"]
 
   # ── 第2章 列の DP ──────────────────────────────
 
   - id: knapsack-01
     chapter: 列の DP
-    title: ナップサック DP（0-1・個数制限なし・個数制限付き）
-    aliases: [0-1 ナップサック, ナップサック, ナップザック, knapsack, 個数制限なしナップサック, 個数無制限ナップサック, 個数制限付きナップサック, 多重ナップサック, コイン問題, 配列の使い回し, 1次元化]
+    title: ナップサック DP
+    aliases: [0-1 ナップサック, ナップサック, ナップザック, Knapsack Problem, 0-1 Knapsack, 個数制限なしナップサック, 個数無制限ナップサック, Unbounded Knapsack, 個数制限付きナップサック, 多重ナップサック, コイン問題, 配列の使い回し, 1 次元化]
     type: technique
     level: 基礎
-    level_evidence: "基本形は abc344_d (854)・abc317_d (929)・abc219_d (1085) と緑。応用は arc073_b (1477)・abc364_e (1496)・abc145_e (1528)・abc341_f (1604)・abc054_d (1655)・abc169_f (1698) と水〜青、abc426_g (2119) が黄。個数制限付きの二進分解・スライド最小値が必須の ABC は見つからない（節にとどめる）"
+    level_evidence: "基本形は abc344_d (854)・abc317_d (929)・abc219_d (1085) と緑。応用は arc073_b (1477)・abc364_e (1496)・abc145_e (1528)・abc341_f (1604)・abc054_d (1655)・abc169_f (1698) と水〜青。個数制限付きの二進分解・スライド最小値が必須の ABC は見つからない（青の節にとどめる）。区間の品物だけのナップサック（abc426_g 2119、黄）は、基礎のページの節を青までにする規則で basics の分割統治のページへ送った（design-review §4.2）"
     kind: [DP]
     prerequisites: [dp-basics]
-    related: [subset-sum, dp-dimension-reduction, meet-in-the-middle, knapsack-undo, exchange-argument-dp, tree-dp-square, greedy-basics, divide-and-conquer]
-    summary: "品物を1つずつ「選ぶ・選ばない」で分け、dp[i][w]＝i 番目までの品物で重さ w のときの価値の最大を求める。1次元の配列で書くと、ループの向きで 0-1（大きい方から）と個数制限なし（小さい方から）が分かれる。"
+    related: [subset-sum, dp-dimension-reduction, meet-in-the-middle#vs-knapsack, knapsack-undo, exchange-argument-dp, tree-dp-square, greedy-basics, divide-and-conquer#range-knapsack]
+    summary: "品物を 1 つずつ「選ぶ・選ばない」で分け、重さの合計ごとに価値の最大を求める。1 次元の配列で書くと、ループの向きで 0-1（大きい方から）と個数制限なし（小さい方から）が分かれる。"
     signs:
       - {type: phrase, text: "重さの合計が W 以下で価値の和の最大"}
       - {type: phrase, text: "同じものを何度でも使える（硬貨・魔法）"}
@@ -406,140 +359,175 @@ pages:
       - {type: constraint, text: "N ≤ 100〜5000、W ≤ 10^4〜10^5（O(NW) が通る）"}
     acl: []
     frequency: A
+    frequency_evidence: "recent 1（abc461_f）・前提として 5 ページに届く（直接 5）・古い ABC 13 問"
     sections:
-      - "dp[i][w] の意味（「以下」と「ちょうど」で初期値と答えが変わる）"
-      - "配列の使い回しとループの向き（0-1 は大きい方から、個数制限なしは小さい方から）"
-      - "個数制限なし（数え上げでは品物と和のループの内外で組合せと列が分かれる）"
-      - "多次元の重さ・上限で打ち切る・グループから1つ選ぶ"
-      - "計算量で解法を切り替える（重さ・価値・N のどれが小さいか）（水）"
-      - "個数制限付き（素朴な展開・二進分解・余りごとのスライド最小値）（青）"
-      - "区間の品物だけのナップサック（分割統治で左右の DP をマージ）（黄）"
+      - {title: "dp[i][w] の意味（「以下」と「ちょうど」で初期値と答えが変わる）", anchor: meaning}
+      - {title: "配列の使い回しとループの向き（0-1 は大きい方から、個数制限なしは小さい方から）", anchor: dp-rolling-array}
+      - {title: "個数制限なし（数え上げでは品物と和のループの内外で組合せと列が分かれる）", anchor: knapsack-unbounded}
+      - {title: "多次元の重さ・上限で打ち切る・グループから 1 つ選ぶ", anchor: variants}
+      - {title: "計算量で解法を切り替える（重さ・価値・N のどれが小さいか）", anchor: choose-by-size, level: 水}
+      - {title: "個数制限付き（素朴な展開・二進分解・余りごとのスライド最小値）", anchor: knapsack-bounded, level: 青}
     merged_keys: [knapsack-unbounded, knapsack-bounded, dp-rolling-array]
-    visual: "品物×重さの表を1行ずつ埋めるステップ送り（選ぶ＝斜め、選ばない＝真下の矢印）。1次元配列を右から・左から更新する矢印を並べ、同じ段で書き換えた値を読むかどうかで 0-1 と個数制限なしが分かれることを示す"
+    visual: {kind: dynamic, priority: 1, text: "品物×重さの表を 1 行ずつ埋めるステップ送り（選ぶ＝斜め、選ばない＝真下の矢印）。1 次元配列を右から・左から更新する矢印を並べ、同じ段で書き換えた値を読むかどうかで 0-1 と個数制限なしが分かれることを示す"}
     problems:
-      - {id: dp_d, role: example, summary: "重さの合計が W 以下で価値の和の最大（0-1 ナップサックの基本形）"}
-      - {id: abc286_d, role: practice, summary: "A_i 円硬貨が B_i 枚（≤ 50）でちょうど X 円払えるか。使う枚数を全部試す素朴な個数制限付きの DP"}
-      - {id: abc317_d, role: practice, summary: "選挙区ごとに鞍替えさせて取るか捨てるかを選び、過半数に必要な人数の最小を求める"}
-      - {id: abc153_e, role: practice, summary: "魔法を何度でも使って体力 H 以上を削る最小の魔力。個数制限なしで、H で打ち切る"}
-      - {id: abc219_d, role: practice, summary: "2種類の量をそれぞれ X 以上・Y 以上にする最小の個数。量を上限で打ち切る2次元のナップサック"}
-      - {id: abc145_e, role: practice, summary: "最後の1品だけ時間を超えてよい。時間の昇順に並べ、最後に頼む品を途中で試す"}
-      - {id: abc054_d, role: practice, summary: "2種類の薬品の量を状態にした費用の最小（2次元のナップサック）"}
-      - {id: abc032_d, role: challenge, summary: "N・重さ・価値のどれが小さいかで、半分全列挙・重さの DP・価値の DP を切り替える"}
-      - {id: abc373_f, role: challenge, summary: "同じ品物を k 個選ぶと価値が k·v − k^2 になる。重さの余りごとに分けると最適な遷移元が単調になる"}
-      - {id: abc426_g, role: challenge, summary: "区間の品物だけを使うナップサックのクエリ。区間の境界で分けた左右の DP をマージする（分割統治）"}
+      - {id: dp_d, role: example, representative: true, summary: "重さと価値が決まった N 個の品物から、重さの合計が W 以下になるように選ぶときの価値の和の最大を求める。", approach: "dp[i][w]＝i 番目までの品物で重さ w のときの価値の最大"}
+      - {id: abc286_d, role: practice, summary: "A_i 円硬貨が B_i 枚（≤ 50）ずつあるとき、ちょうど X 円を払えるかを判定する。", approach: "使う枚数を全部試す素朴な個数制限付きの可否 DP"}
+      - {id: abc344_d, role: practice, summary: "N 個の袋からそれぞれ高々 1 つの文字列を選んで順に連結し、文字列 T を作るときの費用の最小を求める。", approach: "作った T の接頭辞の長さを状態にし、袋ごとに 1 つ選ぶ（グループから 1 つ選ぶ型）"}
+      - {id: abc317_d, role: practice, summary: "選挙区ごとに議席数と、議席を取るのに鞍替えさせる必要がある人数が決まっているとき、議席の過半数を取るための鞍替えの人数の最小を求める。", approach: "選挙区を取るか捨てるかの 0-1 ナップサック（議席数を重さに）"}
+      - {id: abc153_e, role: practice, summary: "体力 H のモンスターに、ダメージと消費魔力が決まった魔法を何度でも使って体力を 0 以下にするときの、消費魔力の最小を求める。", approach: "個数制限なしのナップサックで、H で打ち切る"}
+      - {id: abc219_d, role: practice, summary: "たこ焼きとたい焼きの個数が決まった弁当を選び、それぞれ X 個以上・Y 個以上にするときの弁当の個数の最小を求める。", approach: "量を上限で打ち切る 2 次元のナップサック"}
+      - {id: abc032_d, role: challenge, summary: "N 個の品物の 0-1 ナップサックを、N・重さ・価値のどれか 1 つだけが小さい 3 種類の制約で解く。", approach: "N が小さければ半分全列挙、重さが小さければ重さの DP、価値が小さければ価値の DP に切り替える"}
+      - {id: abc373_f, role: challenge, summary: "品物 i を k 個選ぶと価値が k·v_i − k^2 になるとき、重さの合計が W 以下での価値の和の最大を求める。", approach: "重さの余りごとに分けると最適な遷移元が単調になる"}
     sources: ["02-dp §4.B（knapsack-01・knapsack-unbounded・knapsack-bounded）", "02-dp §4.A（dp-rolling-array）", "02-dp §5.1", "02-dp §5.3", "02-dp §6.2（ナップサックの解法の切り替え）"]
 
   - id: subset-sum
     chapter: 列の DP
-    title: 部分和 DP（可否・数え上げ・bitset）
+    title: 部分和 DP
     aliases: [部分和, 部分和問題, Subset Sum, 部分和の数え上げ]
     type: technique
     level: 基礎
-    level_evidence: "abc240_c (464)・abc204_d (832)・abc271_d (886)・abc274_d (916)・TDPC A が基礎。数え上げの応用は abc222_e (1491)・abc216_f (1541)・arc060_a (1583) が水、abc169_f (1698) が青。bitset による高速化は黄（arc070_b 2015・agc020_c 2259）で、DP への使い方をこのページの節に置き、ワード並列の一般論は misc の bitset-speedup に任せる"
+    level_evidence: "abc240_c (464)・abc204_d (832)・abc271_d (886)・abc274_d (916)・TDPC A が基礎。数え上げの応用は abc222_e (1491)・abc216_f (1541)・arc060_a (1583) が水、abc169_f (1698) が青（節）。bitset による高速化（黄：arc070_b 2015・agc020_c 2259）は、基礎のページの節を青までにする規則で misc の bitset による高速化のページの節へ送った（design-review §4.2）"
     kind: [DP]
     prerequisites: [dp-basics]
-    related: [knapsack-01, knapsack-undo, meet-in-the-middle, bitset-speedup, dp-mod-state]
-    summary: "いくつか選んで作れる和の集合（可否）や、和が S になる選び方の数を求める DP。可否だけなら bool の配列を bitset にし、シフトと OR でまとめて更新できる。"
+    related: [knapsack-01, knapsack-undo, meet-in-the-middle, bitset-speedup#subset-sum-shift, dp-mod-state, exchange-argument-dp]
+    summary: "いくつか選んで作れる和の集合や、和が S になる選び方の数を、和を添字にした DP で求める。2 グループへの分け方や ± の符号の付け方も、部分和に言い換えて解ける。"
     signs:
       - {type: phrase, text: "いくつか選んで和をちょうど S にできるか・その選び方の数"}
-      - {type: phrase, text: "2つのグループに分けて差（遅い方）を最小にする"}
+      - {type: phrase, text: "2 つのグループに分けて差（遅い方）を最小にする"}
       - {type: phrase, text: "各要素に + か − を付けて和を K にする"}
-      - {type: constraint, text: "N ≤ 100、和 ≤ 10^5 程度（可否だけなら bitset でもっと大きくても）"}
+      - {type: constraint, text: "N ≤ 100、値の総和 ≤ 10^5 程度"}
     acl: []
     frequency: B
+    frequency_evidence: "recent 0・前提として 1 ページに届く（直接 1）・古い ABC 7 問"
     sections:
-      - "可否・数え上げ・最大の3つの形"
-      - "典型の言い換え（2グループに分ける・± の和・x と y が独立）"
-      - "最大値を固定するためにソートしてから数える（水）"
-      - "全部分集合についての和（含む部分集合の数を重みにする）（青）"
-      - "可否の DP を bitset のシフトと OR で速くする（黄。ワード並列の一般論は bitset による高速化のページへ）"
-      - "落とし穴：負の和のオフセット・空集合を数えるか・bitset のサイズはコンパイル時の定数"
-    merged_keys: [dp-bitset]
-    visual: "作れる和の集合を数直線上の点で表し、要素を1つ足すたびに集合を右へずらして重ねる（OR）図"
+      - {title: "可否・数え上げ・最大の 3 つの形", anchor: three-forms}
+      - {title: "典型の言い換え（2 グループに分ける・± の和・x と y が独立）", anchor: reformulations}
+      - {title: "最大値を固定するためにソートしてから数える", anchor: sort-then-count, level: 水}
+      - {title: "全部分集合についての和（含む部分集合の数を重みにする）", anchor: over-all-subsets, level: 青}
+      - {title: "落とし穴：負の和のオフセット・空集合を数えるか", anchor: pitfalls}
+    merged_keys: []
+    visual: {kind: static, priority: 2, text: "作れる和の集合を数直線上の点で表し、要素を 1 つ足すたびに集合を右へずらして重ねる図"}
     problems:
-      - {id: tdpc_contest, role: example, summary: "配点の部分集合で作れる合計点の種類数"}
-      - {id: abc204_d, role: practice, summary: "料理を2台のオーブンに分けて遅い方を最小にする。一方の合計として作れる和を求める"}
-      - {id: abc274_d, role: practice, summary: "線分の向きを ±90 度ずつ選ぶ。x と y が独立になるので、それぞれ ± の部分和で判定する"}
-      - {id: abc222_e, role: practice, summary: "各辺が使われる回数を求め、±D_i の和が K になる塗り方を数える"}
-      - {id: abc216_f, role: practice, summary: "A の昇順に並べて A の最大を固定し、B の和が条件を満たす選び方を数える"}
-      - {id: abc169_f, role: practice, summary: "全部分集合についての「和が S になる選び方」の総数。その組を含む部分集合の数を重みとして掛ける"}
-      - {id: agc020_c, role: challenge, summary: "部分和の中央値。作れる部分和を bitset のシフトで求める"}
-    sources: ["02-dp §4.B（subset-sum・dp-bitset）", "02-dp §5.1", "02-dp §5.3", "08-string-geo §4.9（bitset-speedup）"]
+      - {id: tdpc_contest, role: example, representative: true, summary: "N 問の配点が決まったコンテストで、取り得る合計点の種類数を求める。", approach: "作れる和の可否 DP"}
+      - {id: abc204_d, role: practice, summary: "N 個の料理を 2 台のオーブンに分けて調理するとき、すべて調理し終えるまでの時間の最小を求める。", approach: "一方の合計として作れる和を求め、全体の半分に近いものを選ぶ"}
+      - {id: abc274_d, role: practice, summary: "長さの決まった線分を順につなぎ、つなぎ目ごとに 90 度左右どちらかに曲げるとき、終点を (x, y) にできるかを判定する。", approach: "x と y が独立になるので、それぞれ ± の部分和で判定する"}
+      - {id: abc222_e, role: practice, summary: "木の上を決まった順に移動するとき、各辺を赤か青に塗って、赤の辺を通る回数と青の辺を通る回数の差を K にする塗り方の数を求める。", approach: "各辺が使われる回数 D_i を求め、±D_i の和が K になる塗り方を数える"}
+      - {id: abc216_f, role: practice, summary: "添字の集合 S のうち、S での A の最大値が S での B の和以上になるものの個数を求める。", approach: "A の昇順に並べて A の最大を固定し、B の和を数える（節 sort-then-count）"}
+      - {id: abc169_f, role: practice, summary: "数列のすべての部分集合 T について、T の部分集合で和が S になるものの個数を求め、その総和を出す。", approach: "その組を含む部分集合の数を重みとして掛ける（節 over-all-subsets）"}
+    sources: ["02-dp §4.B（subset-sum）", "02-dp §5.1", "02-dp §5.3"]
+
+  - id: dp-dimension-reduction
+    chapter: 列の DP
+    title: DP の状態の削減
+    aliases: [状態の削減, 次元の削減, 状態の圧縮, 値と添字の入れ替え, キーと値を入れ替える, 添字と値を逆に, 上限で打ち切る]
+    type: technique
+    level: 青
+    level_evidence: "drken 氏は abc325_f の解説で、DP の値を使って状態を表すこの手法を青 diff あたりの典型と書いている。該当は abc410_e (1077)・abc219_d (1085) の緑から abc364_e (1496)・abc315_f (1674)・abc325_f (1769)・abc376_f (2089)・abc203_f (2252) と広がる。abc319 以降に限っても abc410_e・abc364_e・abc325_f・abc376_f と緑〜黄に散らばり、中心は青。入口の EDPC E は易しい。ナップサックを前提にするので、ナビゲーションではナップサックの後に置く（03-19）"
+    kind: [DP]
+    prerequisites: [dp-state-design, knapsack-01]
+    related: [dp-mod-state, lis, inline-dp, meet-in-the-middle]
+    summary: "DP の表が大きすぎるとき、範囲を上限で打ち切るか、ほかの添字から決まる量・支配される量を値の側に回して状態を減らす。どれを添字に残すかは、範囲が小さい量で決める。"
+    signs:
+      - {type: constraint, text: "重さの上限 W ≤ 10^9 で、価値の総和が 10^5 程度"}
+      - {type: phrase, text: "ペナルティが 2^(C−1) のように指数的に増える"}
+      - {type: shape, text: "dp[i][a][b] の表が大きすぎ、同じ (i, a) なら b が大きい（小さい）ほど常に良い"}
+    acl: []
+    frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 7 問"
+    sections:
+      - {title: "上限で打ち切る（log 回で十分な量・目標以上をまとめる）", anchor: cap}
+      - {title: "値と添字の入れ替え（同じ添字なら値が良い方が常に良いとき）", anchor: dp-swap-key-value}
+      - {title: "どれを添字に残すか（範囲が小さい量を選ぶ）", anchor: which-to-index}
+      - {title: "落とし穴：打ち切りの遷移を忘れる・復元が要るのに表を捨てる・入れ替えた後の答えの取り出し", anchor: pitfalls}
+    merged_keys: [dp-swap-key-value]
+    visual: {kind: static, priority: 2, text: "3 つの量 (a, b, c) の立方体の表から c を値に回して平面の表にする図。「重さ → 価値の最大」と「価値 → 重さの最小」の表を並べ、同じ情報を持つことを示す"}
+    problems:
+      - {id: dp_e, role: example, summary: "重さの上限 W が 10^9 と大きく価値の総和が 10^5 程度の品物で、重さの合計が W 以下での価値の和の最大を求める。", approach: "価値を添字に、その価値を作る最小の重さを値にする"}
+      - {id: abc325_f, role: example, representative: true, summary: "長さ D_i の区間たちを、監視できる長さ・費用・使える個数の上限が決まった 2 種類のセンサーで覆うときの、費用の最小を求める。", approach: "2 種類の個数の両方は添字にせず、片方の個数を値（最小）にする"}
+      - {id: abc410_e, role: practice, summary: "体力 H・魔力 M で敵を順に倒し、敵ごとに体力か魔力の決まった量を使うとき、倒せる敵の数の最大を求める。", approach: "残り体力ごとに残せる魔力の最大を値に持つ"}
+      - {id: abc364_e, role: practice, summary: "甘さとしょっぱさが決まった料理を並べて順に食べ、甘さの合計が X を、しょっぱさの合計が Y を超えた時点でやめるとき、食べられる品数の最大を求める。", approach: "品数と甘さを添字、しょっぱさの最小を値にする"}
+      - {id: abc315_f, role: practice, summary: "チェックポイントを順に回り、いくつか飛ばすと 2^(C−1) のペナルティがかかるとき、移動距離とペナルティの和の最小を求める。", approach: "ペナルティが指数的に増えるので、飛ばす回数は数十まで見れば足りる"}
+      - {id: abc376_f, role: practice, summary: "円環上に置いた左右の手を、指示された手を指示された位置へ順に動かすときの、移動の総数の最小を求める。", approach: "指示の直後は指定された手の位置が決まるので、状態はもう一方の手の位置だけでよい"}
+      - {id: abc203_f, role: challenge, summary: "高橋君が「最も高い草の半分より高い草を全部抜く」操作を繰り返す前に、青木君が K 本まで草を抜いておくとき、高橋君の操作回数と青木君が抜く本数の組の最小を求める。", approach: "高橋君の操作回数（log 回まで）を添字、青木君が抜く本数の最小を値にする"}
+    sources: ["02-dp §4.A（dp-dimension-reduction・dp-swap-key-value）", "02-dp §5.1", "02-dp §5.3", "02-dp §7.2"]
 
   - id: knapsack-undo
     chapter: 列の DP
-    title: 戻す DP（ナップサックから要素を取り除く）
-    aliases: [戻すDP, 戻す DP, ナップサックの削除, 削除できるナップサック, 減らすナップサック]
+    title: 戻す DP
+    aliases: [ナップサックの削除, 削除できるナップサック, 減らすナップサック]
     type: technique
     level: 青
-    level_evidence: "abc321_f (1645) が本命。各要素を除いた場合を全部求める arc070_b (2015) は黄。max のナップサックは戻せないので前後からの DP（abc441_f 1455）や分割統治（abc426_g 2119）を使う。research/00 の undo-dp も青（abc321_f）"
+    level_evidence: "abc321_f (1645、2023-09) が本命。各要素を除いた場合を全部求める arc070_b (2015) は黄。max のナップサックは戻せないので前後からの DP（abc441_f 1455、2026）や分割統治（abc426_g 2119）を使う。research/00 の undo-dp も青（abc321_f）"
     kind: [DP, 数え上げ]
     prerequisites: [subset-sum, knapsack-01]
-    related: [divide-and-conquer, dp-dimension-reduction]
-    summary: "数え上げの部分和 DP の更新 dp'[s] = dp[s] + dp[s − a] は、s の小さい方から dp[s] = dp'[s] − dp[s − a] と逆に解けるので、要素を1つ取り除いた状態に戻せる。max や min の DP は戻せないので、前後からの DP のマージや分割統治を使う。"
+    related: [divide-and-conquer#range-knapsack, dp-dimension-reduction]
+    summary: "数え上げの部分和 DP の更新は逆向きに解けるので、要素を 1 つ取り除いた状態に戻せる。max や min の DP は戻せないので、前後からの DP のマージや分割統治を使う。"
     signs:
       - {type: phrase, text: "要素の追加と削除のクエリのたびに、和が K になる選び方の数を答える"}
       - {type: phrase, text: "各 i について、i を使わないときの答え（〜を除いたとき）"}
+      - {type: constraint, text: "クエリの数 Q と目標の和 K がともに 5000 程度（O(QK) が通る）"}
     acl: []
     frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 3 問"
     sections:
-      - "足し算の更新は引き算で戻せる（ループの向きは追加と逆）"
-      - "戻せない DP（max・min・OR）"
-      - "前後からの DP をマージする"
-      - "分割統治でオフラインに処理する（黄）"
+      - {title: "足し算の更新は引き算で戻せる（ループの向きは追加と逆）", anchor: undo-by-subtraction}
+      - {title: "戻せない DP（max・min・OR）", anchor: not-undoable}
+      - {title: "前後からの DP をマージする", anchor: prefix-and-suffix}
+      - {title: "分割統治でオフラインに処理する", anchor: offline-divide-and-conquer, level: 黄}
     merged_keys: [undo-dp]
-    visual: "追加の更新（大きい方から足す）と削除の更新（小さい方から引く）を同じ配列の上で並べるステップ送り"
+    visual: {kind: dynamic, priority: 3, text: "追加の更新（大きい方から足す）と削除の更新（小さい方から引く）を同じ配列の上で並べるステップ送り（静的な図で代えてよい）"}
     problems:
-      - {id: abc321_f, role: example, summary: "箱への追加・削除のたびに、和が K になる選び方の数を答える。削除は追加の逆向きの更新で戻す"}
-      - {id: abc441_f, role: practice, summary: "max のナップサックは戻せないので、前後からの DP を保存し、i を除いた最適値をマージで求める"}
-      - {id: arc070_b, role: practice, summary: "各カードを除いた部分和で不要かを判定する。戻す DP か前後からの DP のマージで解く"}
+      - {id: abc321_f, role: example, representative: true, summary: "箱に整数を入れる・取り出すクエリのたびに、箱の中から和がちょうど K になるように選ぶ方法の数を答える。", approach: "追加は部分和 DP の更新、削除はその逆向きの更新で戻す"}
+      - {id: abc441_f, role: practice, summary: "（執筆時に確かめる）", approach: "max のナップサックは戻せないので、前後からの DP を保存し、i を除いた最適値をマージで求める"}
+      - {id: arc070_b, role: practice, summary: "和が K 以上の部分集合を「良い集合」と呼ぶとき、含まれるどの良い集合から取り除いても良い集合のままになる「不要な」カードの枚数を求める。", approach: "各カードを除いた部分和を、戻す DP か前後からの DP のマージで求める（単調性と二分探索の解法もある）"}
     sources: ["02-dp §4.B（knapsack-undo）", "02-dp §5.1", "00-curriculum §4.2（戻す DP）"]
 
   - id: exchange-argument-dp
     chapter: 列の DP
-    title: 並べ替えてから DP する（交換論法と DP）
-    aliases: [交換論法＋DP, ソートしてから DP, 座布団DP, 締切つきナップサック]
+    title: 並べ替えてから DP する
+    aliases: [交換論法＋DP, ソートしてから DP, 座布団 DP, 締切つきナップサック]
     type: technique
     level: 青
-    level_evidence: "abc145_e (1528)・abc216_f (1541) の水から、abc366_f (1819) と青、abc163_e (2037) が黄。EDPC X・典型90 011 (★6)"
+    level_evidence: "abc145_e (1528)・abc216_f (1541) の水から、abc366_f (1819、2024) と青、abc163_e (2037) が黄。EDPC X・typical90_k (★6)。最大の要素を固定するために並べる水の型は、部分和 DP のページの節（abc216_f）に置いた"
     kind: [DP, 貪欲]
     prerequisites: [exchange-argument, knapsack-01]
-    related: [greedy-basics, subset-sum, interval-dp]
-    summary: "選ぶ集合が決まれば最適な順序がソートで決まるときは、先にその順に並べておくと「選ぶ・選ばない」のナップサック型の DP にできる。並べる基準は、隣り合う2つを入れ替えたときの損得の式から作る。"
+    related: [greedy-basics, subset-sum#sort-then-count, interval-dp]
+    summary: "選ぶ集合が決まれば最適な順序がソートで決まるとき、先にその順に並べてから「選ぶ・選ばない」の DP をする。並べる基準は、隣り合う 2 つを入れ替えたときの損得の式から作る。"
     signs:
       - {type: phrase, text: "好きな順番で、いくつか選んで順に処理する"}
       - {type: phrase, text: "締切・積み重ね（上に載せられる重さ）がある"}
       - {type: phrase, text: "一次関数を好きな順に合成する"}
-      - {type: phrase, text: "最後の1つだけ特別に扱う"}
+      - {type: phrase, text: "最後の 1 つだけ制限を超えてよい"}
     acl: []
     frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 4 問"
     sections:
-      - "選ぶ集合と順序を分けて考える"
-      - "比較の基準の作り方（入れ替えの差を i だけの量と j だけの量に分ける）"
-      - "比は割らずに掛け算で比べる"
-      - "最大の要素を固定するために並べる（水）"
-      - "大きい順に左右の端へ置く（黄）"
+      - {title: "選ぶ集合と順序を分けて考える", anchor: set-and-order}
+      - {title: "比較の基準の作り方（入れ替えの差を i だけの量と j だけの量に分ける）", anchor: comparison-key}
+      - {title: "比は割らずに掛け算で比べる", anchor: compare-ratios}
+      - {title: "大きい順に左右の端へ置く", anchor: place-at-ends, level: 黄}
     merged_keys: []
-    visual: "隣り合う2つを入れ替えたときの損得を式にし、比較の基準（s+w・締切・比）が出てくる流れの図"
+    visual: {kind: static, priority: 3, text: "隣り合う 2 つを入れ替えたときの損得を式にし、比較の基準（s+w・締切・比）が出てくる流れの図"}
     problems:
-      - {id: dp_x, role: example, summary: "ブロックを積む順を s+w の小さい順に決めてから、重さの合計を状態に価値の最大を求める"}
-      - {id: typical90_k, role: example, summary: "締切の早い順に並べてから、使った日数を状態に報酬の最大を求める"}
-      - {id: abc216_f, role: practice, summary: "A の昇順に並べると今の要素が最大と決まり、B の和の数え上げ DP にできる"}
-      - {id: abc366_f, role: practice, summary: "一次関数を適用する順は比の大小で決まる。その順に並べてから K 個選ぶ DP をする"}
-      - {id: abc163_e, role: challenge, summary: "活発度の大きい順に左端か右端へ置いてよい。左右に何人置いたかを状態にする"}
+      - {id: dp_x, role: example, summary: "重さ・丈夫さ・価値が決まったブロックを積み、各ブロックの上に載る重さの合計が丈夫さ以下になるようにするときの、価値の和の最大を求める。", approach: "s+w の小さい順に並べてから、重さの合計を状態にしたナップサック"}
+      - {id: typical90_k, role: example, summary: "締切・かかる日数・報酬が決まった仕事を選んで締切までに終えるときの、報酬の和の最大を求める。", approach: "締切の早い順に並べてから、使った日数を状態にしたナップサック"}
+      - {id: abc366_f, role: example, representative: true, summary: "N 個の一次関数 f_i(x) = A_i x + B_i から異なる K 個を選んで好きな順に合成し、1 に適用した値の最大を求める。", approach: "適用する順は比の大小で決まるので、その順に並べてから K 個選ぶ DP をする"}
+      - {id: abc145_e, role: practice, summary: "食べ終えるのにかかる時間とおいしさが決まった料理を、最後の注文を T − 0.5 分までにする条件で頼むときの、おいしさの和の最大を求める。", approach: "食べる時間の昇順に並べ、最後に頼む品を途中で試す"}
+      - {id: abc216_f, role: practice, summary: "添字の集合 S のうち、S での A の最大値が S での B の和以上になるものの個数を求める。", approach: "A の昇順に並べると今の要素が最大と決まり、B の和の数え上げ DP にできる（節は subset-sum#sort-then-count）"}
+      - {id: abc163_e, role: challenge, summary: "活発度 A_i の幼児を並べ替えて、各幼児の移動距離×活発度の和の最大を求める。", approach: "活発度の大きい順に左端か右端へ置いてよい。左右に何人置いたかを状態にする（節 place-at-ends）"}
     sources: ["02-dp §4.B（exchange-argument-dp）", "02-dp §5.1"]
 
   - id: dp-grid
     chapter: 列の DP
     title: グリッド上の DP
-    aliases: [グリッド DP, 経路数, 格子路の DP, 最大正方形]
+    aliases: [グリッド DP, Grid DP, 格子路の DP, 最大正方形]
     type: technique
     level: 水
-    level_evidence: "基本の経路数・最長路は基礎（EDPC H・abc232_d 539）。状態や累積和などの工夫が入る問題が abc183_e (1288)・abc311_e (1293)・abc442_f (1295)・abc201_d (1317)・abc210_d (1507)・abc175_e (1554) と水に集まる。青に abc369_f (1618)・abc147_e (1713)・abc344_f (1922)、黄に abc227_f (2323)"
+    level_evidence: "基本の経路数・最長路は基礎（EDPC H・abc232_d 539）。状態や累積和などの工夫が入る問題が abc183_e (1288)・abc311_e (1293)・abc442_f (1295)・abc201_d (1317)・abc210_d (1507)・abc175_e (1554) と水に集まる。abc319 以降は abc442_f (1295)・abc369_f (1618)・abc344_f (1922)。黄に abc227_f (2323)"
     kind: [DP]
     prerequisites: [dp-basics]
-    related: [dp-dag, grid-graph, bfs, lattice-paths, inclusion-exclusion-dp, dp-prefix-sum, dp-decision-binary-search]
-    summary: "右か下にしか動けないグリッドでは、マスを (i, j) の昇順に見れば依存関係が満たされ、経路の数や経路上の値の最大を DP で求められる。上下左右に動けるなら閉路ができるので、BFS やダイクストラ法を使う。"
+    related: [dp-dag, grid-graph, bfs, lattice-paths, inclusion-exclusion-dp#first-obstacle, dp-prefix-sum, grid#right-down]
+    summary: "右か下にしか動けないグリッドで、経路の数や経路上の値の最大を、マスの昇順の DP で求める。上下左右に動けるなら閉路ができるので、BFS やダイクストラ法を使う。"
     signs:
       - {type: phrase, text: "右か下にしか動けない"}
       - {type: phrase, text: "経路の数・経路上で集める値の最大"}
@@ -547,149 +535,155 @@ pages:
       - {type: constraint, text: "H, W ≤ 3000 程度"}
     acl: []
     frequency: B
+    frequency_evidence: "recent 1（abc476_f）・前提として届くページなし・古い ABC 11 問"
     sections:
-      - "計算順序と初期化（1行目・1列目・壁）"
-      - "状態を足す（今の行で拾った個数・作れる差の集合）"
-      - "方向ごとの累積和で遷移をまとめる"
-      - "最大の正方形（左・上・左上の min + 1）"
-      - "向きを反転してもう一度"
-      - "経路上の上位 K 個（K 番目を固定して状態に）（黄）"
+      - {title: "計算順序と初期化（1 行目・1 列目・壁）", anchor: order-and-init}
+      - {title: "状態を足す（今の行で拾った個数・作れる差の集合）", anchor: extra-state}
+      - {title: "方向ごとの累積和で遷移をまとめる", anchor: directional-prefix}
+      - {title: "最大の正方形（左・上・左上の min + 1）", anchor: largest-square}
+      - {title: "向きを反転してもう一度", anchor: flip-direction}
+      - {title: "経路上の上位 K 個（K 番目を固定して状態に）", anchor: top-k-on-path, level: 黄}
     merged_keys: []
-    visual: "マス目に値を書き込みながら左上から右下へ埋めるステップ送り。上下左右に動けると閉路ができて DP にならないことの対比図"
+    visual: {kind: static, priority: 2, text: "マス目に値を書き込みながら左上から右下へ埋める様子の図。上下左右に動けると閉路ができて DP にならないことの対比図"}
     problems:
-      - {id: dp_h, role: example, summary: "壁を避けて右・下に進む経路の数"}
-      - {id: abc311_e, role: example, summary: "穴のない正方形の数。各マスを右下とする最大の正方形の一辺を、左・上・左上から求める"}
-      - {id: abc183_e, role: practice, summary: "何マスでも進めるクイーンの経路の数。縦・横・斜めの方向ごとの累積を持つ"}
-      - {id: abc442_f, role: practice, summary: "各行の左側の白の個数が下へ行くほど減る形にする最小の塗り替え。上の行の白の個数を状態にし、累積 min で遷移する"}
-      - {id: abc210_d, role: practice, summary: "2駅の建設費の最小。左上側の最小値を DP で伝え、向きを反転してもう一度行う"}
-      - {id: abc369_f, role: practice, summary: "右・下に移動して集めるコインの最大と、その経路。コインの位置で LIS 型の DP をして復元する"}
-      - {id: abc147_e, role: practice, summary: "赤と青の差の絶対値の最小。各マスで作れる差の集合を bitset で持つ"}
-      - {id: abc344_f, role: practice, summary: "通過した中で最も効率の良いマスを状態にし、（行動回数, 所持金）の組を比べて持つ"}
-      - {id: abc227_f, role: challenge, summary: "経路上の値の上位 K 個の和の最小。K 番目の値を全探索で固定し、それ以上の個数を状態にする"}
+      - {id: dp_h, role: example, summary: "壁のあるグリッドを右か下にだけ進んで、左上から右下へ行く経路の数を求める。", approach: "マスの昇順に、上と左から足す"}
+      - {id: abc311_e, role: example, representative: true, summary: "穴のあるマスが N 個あるグリッドで、穴を含まない正方形の個数を求める。", approach: "各マスを右下とする最大の正方形の一辺を、左・上・左上の min + 1 で求める（節 largest-square。2 次元累積和と二分探索でも解ける）"}
+      - {id: abc183_e, role: practice, summary: "壁のあるグリッドで、右・下・右下のどれかへ壁の手前まで何マスでも進めるとき、左上から右下へ行く方法の数を求める。", approach: "縦・横・斜めの方向ごとの累積を持つ（節 directional-prefix）"}
+      - {id: abc210_d, role: practice, summary: "グリッドの 2 マスに駅を建て、2 つの建設費と駅間のマンハッタン距離×C の和を最小にする。", approach: "左上側の最小値を DP で伝え、向きを反転してもう一度行う"}
+      - {id: abc175_e, role: practice, summary: "グリッドを右か下に進んでアイテムを拾うとき、各行で 3 個まで拾える条件での価値の和の最大を求める。", approach: "今の行で拾った個数を状態に足す"}
+      - {id: abc369_f, role: practice, summary: "グリッドを右か下にだけ進んでコインを集めるとき、集める枚数の最大と、そのときの経路を求める。", approach: "コインの位置で LIS 型の DP をして復元する（例題は dp-reconstruction）"}
+      - {id: abc147_e, role: practice, summary: "各マスに 2 つの数が書かれたグリッドを右か下に進み、各マスでどちらを赤にするか選ぶとき、赤の和と青の和の差の絶対値の最小を求める。", approach: "各マスで作れる差の集合を bitset で持つ"}
+      - {id: abc344_f, role: practice, summary: "マスにとどまってお金を稼ぐか、費用を払って右か下へ進むかを繰り返して右下へ着くときの、行動回数の最小を求める。", approach: "通過した中で最も稼ぎの良いマスを状態にし、（行動回数, 所持金）の組を比べて持つ"}
+      - {id: abc227_f, role: challenge, summary: "グリッドを右か下に進む経路で、通ったマスの値の大きい方から K 個の和の最小を求める。", approach: "K 番目の値を全探索で固定し、それ以上の個数を状態にする（節 top-k-on-path）"}
     sources: ["02-dp §4.A（dp-grid）", "02-dp §5.1", "02-dp §5.3"]
 
   - id: dp-sequence-partition
     chapter: 列の DP
-    title: 区間分割 DP（列を区切る DP）
-    aliases: [区間分割型DP, 仕切りを入れる DP, 列を区切る DP]
+    title: 区間分割 DP
+    aliases: [区間分割型 DP, 仕切りを入れる DP, 列を区切る DP]
     type: technique
     level: 水
-    level_evidence: "区切れるかの可否は arc065_a (930) から。条件を満たす区切り方を数える型は agc031_b (1315) の水から、条件が複雑なもの（abc207_e 1820・典型90 089 ★7・arc104_c 2009）が青〜黄に続く"
+    level_evidence: "区切れるかの可否は arc065_a (930) から。条件を満たす区切り方を数える型は agc031_b (1315) の水から、条件が複雑なもの（abc207_e 1820・typical90_ck (★7)・arc104_c 2009）が青〜黄に続く。abc319 以降の根拠は見つかっていない（古い問題で決めた）"
     kind: [DP]
-    prerequisites: [dp-basics, dp-prefix-sum]
+    prerequisites: [dp-prefix-sum]
     related: [interval-dp, two-pointers, dp-mod-state, monge, alien-dp]
-    summary: "dp[i]＝先頭 i 個を条件を満たす区間に区切る方法の数（または最小コスト）を、最後の区間の左端 j で分けて求める。j の範囲が単調に動くなら尺取りと累積和で、区間の番号に依存するなら番号を状態に足して速くする。"
+    summary: "列をいくつかの区間に区切る方法の数や最小コストを、最後の区間の左端 j で分けて求める。j の範囲が単調に動くなら尺取りと累積和で、区間の番号に依存するなら番号を状態に足して速くする。"
     signs:
       - {type: phrase, text: "列をいくつかの連続部分に分ける方法の数"}
       - {type: phrase, text: "各区間のコストの和の最小"}
       - {type: phrase, text: "各区間が条件を満たすように区切れるか"}
+      - {type: shape, text: "dp[i] = Σ（または min）_{j < i, [j, i) が条件を満たす} dp[j]"}
     acl: []
-    frequency: B
+    frequency: C
+    frequency_evidence: "recent 0・前提として 2 ページに届く（直接 1）・古い ABC 1 問"
     sections:
-      - "最後の区間で分ける（dp[0] = 1 は空の区切り）"
-      - "区間 DP（dp[l][r]）との違い"
-      - "遷移元の範囲が単調に動く：尺取りと累積和"
-      - "区間の番号に依存する条件：番号を状態に足す（青）"
-      - "コストが Monge なら（発展：Monge・Alien DP へ）"
+      - {title: "最後の区間で分ける（dp[0] = 1 は空の区切り）", anchor: last-block}
+      - {title: "区間 DP（dp[l][r]）との違い", anchor: vs-interval-dp}
+      - {title: "遷移元の範囲が単調に動く：尺取りと累積和", anchor: two-pointers}
+      - {title: "区間の番号に依存する条件：番号を状態に足す", anchor: block-index, level: 青}
     merged_keys: []
-    visual: "列に仕切りを1本ずつ入れる図と、dp[i] に足し込まれる dp[j] の範囲を色付きの帯で示す図"
+    visual: {kind: static, priority: 2, text: "列に仕切りを 1 本ずつ入れる図と、dp[i] に足し込まれる dp[j] の範囲を色付きの帯で示す図"}
     problems:
-      - {id: arc065_a, role: example, summary: "文字列を決まった4つの単語に区切れるかを、先頭からの位置ごとの可否 DP で判定する"}
-      - {id: agc031_b, role: example, summary: "同じ色の石の間を塗り替える操作で作れる列の数。直前の同じ色の位置からの遷移で重複を避ける"}
-      - {id: abc207_e, role: practice, summary: "k 番目の区間の和が k で割り切れるように区切る方法の数。区間の番号ごとに余りの累積で遷移をまとめる"}
-      - {id: typical90_ck, role: practice, summary: "各区間の転倒数が K 以下になる区切り方の数。尺取りと BIT で左端の範囲を求め、累積和で数える"}
-      - {id: arc104_c, role: challenge, summary: "エレベーターの乗り降りの記録が整合するかを、区間に区切る DP で判定する"}
+      - {id: agc031_b, role: example, representative: true, summary: "石の列で、同じ色の 2 つの石を選んでその間を同じ色に塗る操作を何回でも行うとき、最終的に作れる色の列の種類数を求める。", approach: "直前の同じ色の位置からの遷移で重複を避ける"}
+      - {id: arc065_a, role: practice, summary: "文字列 S を dream・dreamer・erase・eraser の連結に区切れるかを判定する。", approach: "先頭からの位置ごとの可否 DP（後ろから照合する貪欲でも解ける。例題は thinking の reverse-thinking）"}
+      - {id: abc207_e, role: practice, summary: "数列をいくつかの区間に区切り、k 番目の区間の和が k で割り切れるようにする方法の数を求める。", approach: "区間の番号ごとに余りの累積で遷移をまとめる（節 block-index）"}
+      - {id: typical90_ck, role: practice, summary: "数列をいくつかの区間に区切り、各区間の転倒数が K 以下になる区切り方の数を求める。", approach: "尺取りと BIT で左端の範囲を求め、累積和で数える"}
+      - {id: arc104_c, role: challenge, summary: "一部が欠けたエレベーターの乗り降りの記録を、条件を満たすように補えるかを判定する。", approach: "区間に区切る可否 DP"}
+    problems_note: "abc319 以降の ABC で区間分割 DP が主役の問題は research で確かめられていない。工程 8b の前の問題の補充で探す"
     sources: ["02-dp §4.C（dp-sequence-partition）", "02-dp §5.1"]
 
   - id: lis
     chapter: 列の DP
-    title: 最長増加部分列（LIS）
-    aliases: [LIS, 最長増加部分列, Longest Increasing Subsequence, 最長減少部分列, Dilworth の定理, 増加列への最小分割]
+    title: 最長増加部分列
+    aliases: [LIS, Longest Increasing Subsequence, 最長減少部分列, Dilworth の定理, 増加列への最小分割]
     type: technique
     level: 水
-    level_evidence: "基本形（二分探索で O(N log N)）が必要な問題は abc134_e (1320)・典型90 060 (★5) から現れ、応用（各要素が LIS に入るか・木の上・1回の変更）は abc354_f (1639)・abc006_4 (1696)・abc165_f (1843)・abc360_g (1982) と青に集まる。Dilworth の定理は abc457_g (1928)・abc476_g (2477)。最近も abc468_f (1693、LIS の発展)などが続く"
+    level_evidence: "基本形（二分探索で O(N log N)）が必要な問題は abc134_e (1320)・typical90_bh (★5) から現れる。abc319 以降の ABC で LIS を使う問題は abc354_f (1639)・abc468_f (1693)・abc457_g (1928)・abc360_g (1982)・abc476_g (2477) と青以上で、どれも応用（各要素の判定・1 か所の変更・Dilworth の定理）にあたる。基本形だけで解ける最近の問題は見つからないので、基本形は古い問題で水とし、応用は青の節に置いた"
     kind: [DP, 二分探索]
     prerequisites: [dp-basics, binary-search]
-    related: [dp-segment-tree, dp-dimension-reduction, inline-dp, lcs, root-path-dfs, dilworth-path-cover, manhattan-chebyshev]
-    summary: "列から順序を保って選ぶ増加列の最長を、L[k]＝長さ k の増加列の末尾として取り得る最小値、を二分探索で更新して O(N log N) で求める。値を添字にしたセグ木で dp[x] = max(dp[<x]) + 1 とすれば、重み付きや数え上げにも広げられる。"
+    related: [dp-segment-tree, segment-tree, dp-dimension-reduction, inline-dp, lcs, root-path-dfs#undo-log, dilworth-path-cover#antichain, manhattan-chebyshev#rotate-45, subsequence-and-substring#longest]
+    summary: "列から順序を保って選ぶ増加列の最長を、長さごとの末尾の最小値の配列を二分探索で更新して O(N log N) で求める。値を添字にしたセグメント木を使えば、重み付きや数え上げにも広げられる。"
     signs:
       - {type: constraint, text: "N ≤ 2×10^5 で「部分列」「単調増加」"}
       - {type: phrase, text: "最小で何本の増加（減少）列に分けられるか・何色で塗れるか"}
-      - {type: phrase, text: "抜いて差し込む操作の最小回数（N − LIS）"}
+      - {type: phrase, text: "抜いて差し込む操作の最小回数"}
       - {type: phrase, text: "箱・円を入れ子にできる最大個数"}
     acl: [segtree]
+    verify: [longest_increasing_subsequence]
     frequency: A
+    frequency_evidence: "recent 3（abc457_g・abc468_f・abc476_g）・前提として届くページなし・古い ABC 5 問"
     sections:
-      - "二分探索版（L が単調になる理由・狭義は lower_bound、広義は upper_bound）"
-      - "セグ木版（重み付き・各要素で終わる最長・数え上げ）"
-      - "復元（直前の要素を記録する）"
-      - "各要素が LIS に含まれうるか（前後から2回求める）（青）"
-      - "2次元の入れ子（一方は昇順・もう一方は降順に並べる）（青）"
-      - "1か所だけ変更できる LIS・木の上の LIS（青）"
-      - "Dilworth の定理（増加列への最小分割数＝最長減少部分列の長さ）（青）"
+      - {title: "二分探索版（L が単調になる理由・狭義は lower_bound、広義は upper_bound）", anchor: binary-search}
+      - {title: "セグメント木版（重み付き・各要素で終わる最長・数え上げ）", anchor: segment-tree}
+      - {title: "復元（直前の要素を記録する）", anchor: restore}
+      - {title: "各要素が LIS に含まれうるか（前後から 2 回求める）", anchor: contained, level: 青}
+      - {title: "2 次元の入れ子（一方は昇順・もう一方は降順に並べる）", anchor: nesting, level: 青}
+      - {title: "1 か所だけ変更できる LIS・木の上の LIS", anchor: variants, level: 青}
+      - {title: "Dilworth の定理（増加列への最小分割数＝最長減少部分列の長さ）", anchor: dilworth, level: 青}
     merged_keys: [dilworth]
-    visual: "値を1つずつ入れ、L のどこが置き換わるかをハイライトするステップ送り（O(N^2) の表との対比）。点を並べ、減少列の各点が別々の増加列に入るしかないことを示す図"
+    visual: {kind: dynamic, priority: 1, text: "値を 1 つずつ入れ、L のどこが置き換わるかを強調するステップ送り（O(N^2) の表との対比）。点を並べ、減少列の各点が別々の増加列に入るしかないことを示す図"}
     problems:
-      - {id: abc134_e, role: example, summary: "同じ色が狭義増加になるよう塗る最小の色数。広義の非増加部分列の最長に言い換える（Dilworth の定理）"}
-      - {id: typical90_bh, role: example, summary: "左からの LIS と右からの LIS を各位置で合わせ、山型の最長部分列を求める"}
-      - {id: abc354_f, role: practice, summary: "前後からの LIS の長さの和で、各要素がある LIS に含まれうるかを判定する"}
-      - {id: dp_q, role: practice, summary: "重み付きの LIS。高さを添字にしたセグ木で、低い花からの美しさの最大を取る"}
-      - {id: abc006_4, role: practice, summary: "カードを抜いて差し込む操作の最小回数を N − LIS に言い換える"}
-      - {id: abc165_f, role: practice, summary: "木の根から各頂点へのパスの LIS。DFS で LIS の配列の1か所の変更を記録し、戻るときに元に戻す"}
-      - {id: abc457_g, role: practice, summary: "座標を45度回転して上か右にしか動けない形にし、必要な台数を増加列への最小分割数（最長減少部分列の長さ）で求める"}
-      - {id: abc360_g, role: practice, summary: "1か所だけ値を変えてよいときの LIS。「変更済みか」を状態に足す"}
-      - {id: abc476_g, role: challenge, summary: "popcount の列を狭義増加の部分列に塗り分ける最小色数を、最長の広義減少部分列の長さとして求める"}
-      - {id: tdpc_target, role: challenge, summary: "円の入れ子を区間の包含に直してソートし、LIS で最長の鎖を求める"}
+      - {id: abc134_e, role: example, representative: true, summary: "数列の各要素に色を塗り、同じ色の要素が左から見て狭義増加になるようにするときの、色の数の最小を求める。", approach: "広義の非増加部分列の最長に言い換える（Dilworth の定理）"}
+      - {id: typical90_bh, role: example, summary: "数列から部分列を選び、ある位置までは狭義増加・そこからは狭義減少になる山型の部分列の長さの最大を求める。", approach: "左からの LIS と右からの LIS を各位置で合わせる"}
+      - {id: abc354_f, role: practice, summary: "数列の各要素について、その要素を含む最長増加部分列が存在するかを判定する。", approach: "前後からの LIS の長さの和で判定する（節 contained）"}
+      - {id: dp_q, role: practice, summary: "高さが相異なる花の列から、高さが左から単調増加になるように選ぶときの美しさの和の最大を求める。", approach: "高さを添字にしたセグメント木で、低い花からの美しさの最大を取る（例題は dp-segment-tree）"}
+      - {id: abc006_4, role: practice, summary: "トランプの列で「1 枚抜いて好きな位置に差し込む」操作を繰り返して昇順に並べるときの、操作回数の最小を求める。", approach: "N − LIS に言い換える"}
+      - {id: abc165_f, role: practice, summary: "木の各頂点 k について、根から k へのパス上の値の列の最長増加部分列の長さを求める。", approach: "DFS で LIS の配列の 1 か所の変更を記録し、戻るときに元に戻す（節 variants）"}
+      - {id: abc457_g, role: practice, summary: "（執筆時に確かめる）", approach: "座標を 45 度回転して上か右にしか動けない形にし、必要な数を増加列への最小分割数（最長減少部分列の長さ）で求める（節 dilworth）"}
+      - {id: abc360_g, role: practice, summary: "数列の要素を 1 つだけ好きな整数に変えてよいとき、最長増加部分列の長さの最大を求める。", approach: "「変更済みか」を状態に足す（節 variants）"}
+      - {id: abc476_g, role: challenge, summary: "（執筆時に確かめる）", approach: "popcount の列を狭義増加の部分列に塗り分ける最小の色数を、最長の広義減少部分列の長さとして求める（Dilworth の定理と popcount の構造）"}
+      - {id: tdpc_target, role: challenge, summary: "数直線上に中心を持つ円の集合から、入れ子（次の円の内側にある）の鎖になるように選べる円の個数の最大を求める。", approach: "円を区間の包含に直してソートし、LIS で最長の鎖を求める（節 nesting）"}
     sources: ["02-dp §4.C（lis）", "02-dp §5.1", "00-curriculum §4.2（Dilworth の定理）", "00-curriculum §2.3.8（abc457_g・abc468_f・abc476_g）", "04-tree §4.17（root-path-dfs：abc165_f）"]
 
   - id: lcs
     chapter: 列の DP
-    title: 最長共通部分列（LCS）と編集距離
-    aliases: [LCS, 最長共通部分列, 編集距離, レーベンシュタイン距離, Edit Distance, 最長共通部分文字列, DP の DP]
+    title: 最長共通部分列と編集距離
+    aliases: [LCS, Longest Common Subsequence, レーベンシュタイン距離, Edit Distance, Levenshtein Distance, 最長共通部分文字列, DP の DP]
     type: technique
     level: 水
-    level_evidence: "EDPC F が基本。LCS 型の2次元 DP が必要な ABC は abc141_e (1459)・abc185_e (1468)・abc130_e (1676) に集まる。LCS の値ごとに数える DP の DP は abc391_g (2247) の黄（ABC の例が1問なので節にした）"
+    level_evidence: "EDPC F が基本。LCS 型の 2 次元 DP が必要な ABC は abc141_e (1459)・abc185_e (1468)・abc130_e (1676) に集まる。LCS の値ごとに数える DP の DP は abc391_g (2247、2025) の黄（ABC の例が 1 問なので節にした）。abc319 以降で LCS 型の水の問題は見つかっていない（古い問題で決めた）"
     kind: [DP, 文字列]
     prerequisites: [dp-basics]
-    related: [dp-reconstruction, subsequence-dp, interval-dp, palindrome, dp-counting-dedup, bit-dp]
-    summary: "dp[i][j]＝S の先頭 i 文字と T の先頭 j 文字の最長共通部分列の長さを、末尾が一致すれば斜めから +1、しなければ上か左の大きい方として O(NM) で求める。同じ表で挿入・削除・置換のコストを取れば編集距離になる。"
+    related: [dp-reconstruction, subsequence-dp, interval-dp, palindrome, counting-dedup, bit-dp, subsequence-and-substring#longest]
+    summary: "2 つの文字列の最長共通部分列の長さを、末尾どうしが一致するかで分ける 2 次元の DP で O(NM) で求める。同じ表で挿入・削除・置換のコストを取れば編集距離になる。"
     signs:
-      - {type: constraint, text: "2つの列・文字列で N, M ≤ 3000〜5000"}
+      - {type: constraint, text: "2 つの列・文字列で N, M ≤ 3000〜5000"}
       - {type: phrase, text: "共通の部分列の最長・共通部分列の組の数"}
       - {type: phrase, text: "挿入・削除・置換で一致させる最小回数"}
-      - {type: phrase, text: "LCS（など DP で求まる値）がちょうど k になる文字列の数"}
+      - {type: phrase, text: "ある値（2 つの文字列の最長共通部分列の長さなど）がちょうど k になる文字列の数"}
     acl: []
     frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 4 問"
     sections:
-      - "表の意味と遷移（一致する末尾を使って損をしない理由）"
-      - "復元（右下から逆にたどる）"
-      - "編集距離（挿入・削除・置換の3方向のコスト）"
-      - "部分列と部分文字列の違い（最長共通部分文字列）"
-      - "共通部分列の組の数（包除で重複を引く・2次元の累積和）（青）"
-      - "最長回文部分列（S と反転の LCS）"
-      - "LCS の値ごとに数える：DP の DP（内側の DP の1行を外側の状態にする）（黄）"
+      - {title: "表の意味と遷移（一致する末尾を使って損をしない理由）", anchor: recurrence}
+      - {title: "復元（右下から逆にたどる）", anchor: restore}
+      - {title: "編集距離（挿入・削除・置換の 3 方向のコスト）", anchor: edit-distance}
+      - {title: "部分列と部分文字列の違い（最長共通部分文字列）", anchor: substring}
+      - {title: "共通部分列の組の数（包除で重複を引く・2 次元の累積和）", anchor: count-pairs, level: 青}
+      - {title: "最長回文部分列（S と反転の LCS）", anchor: palindromic-subsequence}
+      - {title: "LCS の値ごとに数える：DP の DP（内側の DP の 1 行を外側の状態にする）", anchor: dp-of-dp, level: 黄}
     merged_keys: [edit-distance, dp-of-dp]
-    visual: "2次元の表を左上から埋め、一致（斜め）・不一致（上か左）の矢印を描くステップ送り。復元で逆にたどる経路をハイライト。内側の表の1行を bit 列にし、1文字足すと別の行に移る遷移図"
+    visual: {kind: static, priority: 2, text: "2 次元の表を左上から埋め、一致（斜め）・不一致（上か左）の矢印を描く図。復元で逆にたどる経路を強調する。内側の表の 1 行を bit 列にし、1 文字足すと別の行に移る遷移図"}
     problems:
-      - {id: dp_f, role: example, summary: "LCS の長さを表で求め、表を逆にたどって1つ出力する"}
-      - {id: abc185_e, role: example, summary: "2つの列を削除と不一致のコストで揃える最小コスト（編集距離の変形）"}
-      - {id: abc141_e, role: practice, summary: "重ならずに2回現れる最長の部分文字列。末尾からの一致長を LCS 型の表で求める"}
-      - {id: abc130_e, role: practice, summary: "共通部分列（位置の組）の数。包除で重複を除き、2次元の累積和で速くする"}
-      - {id: agc021_d, role: challenge, summary: "K 文字まで変えてよいときの最長回文部分列。S と反転の LCS を区間 DP で求める"}
-      - {id: abc391_g, role: challenge, summary: "長さ M の文字列のうち、短い文字列 S との LCS が各 k になるものの数（DP の DP）"}
+      - {id: dp_f, role: example, summary: "2 つの文字列の最長共通部分列を 1 つ出力する。", approach: "表で長さを求め、終端から逆にたどる"}
+      - {id: abc185_e, role: example, representative: true, summary: "2 つの数列からいくつか要素を削除して長さをそろえるとき、削除した個数と、残った列で値が異なる位置の数との和の最小を求める。", approach: "削除と不一致をコストにした編集距離の変形"}
+      - {id: abc141_e, role: practice, summary: "文字列の中に、重ならずに 2 回現れる連続部分文字列の長さの最大を求める。", approach: "末尾からの一致長を LCS 型の表で求める（Z アルゴリズムやローリングハッシュでも解ける）"}
+      - {id: abc130_e, role: practice, summary: "2 つの数列から、同じ値の列になる部分列の組（取り出す位置の組）の数を求める。", approach: "包除で重複を除き、2 次元の累積和で速くする（節 count-pairs）"}
+      - {id: agc021_d, role: challenge, summary: "文字列の文字を K 個まで書き換えたとき、文字列とその反転の最長共通部分列の長さの最大を求める。", approach: "S と反転の LCS を、書き換えた数も状態にした区間 DP で求める"}
+      - {id: abc391_g, role: challenge, summary: "長さ M の英小文字列のうち、与えられた短い文字列 S との最長共通部分列の長さが各 k になるものの個数を求める。", approach: "内側の LCS の表の 1 行を bit で外側の状態にする（節 dp-of-dp）"}
     sources: ["02-dp §4.C（lcs・edit-distance・dp-of-dp）", "02-dp §5.1"]
 
   - id: subsequence-dp
     chapter: 列の DP
-    title: 部分列 DP（異なる部分列の数え上げ）
-    aliases: [部分列DP, 部分列 DP, 異なる部分列の数, 部分列の個数, next 配列, nxt テーブル]
+    title: 部分列 DP
+    aliases: [異なる部分列の数, 部分列の個数, Distinct Subsequences]
     type: technique
     level: 黄
-    level_evidence: "重複を除いて部分列を数える問題は abc214_f (1973)・arc081_c (2072)・abc230_f (2113)・abc299_f (2349) と黄に集まる。08 は青を提案したが、青の根拠の abc104_d (1739) は位置の組を数える照合位置の DP なので dp-phase に置いた。前提の nxt テーブルと部分列判定は string の subsequence-matching（水）"
+    level_evidence: "重複を除いて部分列を数える問題は abc214_f (1973)・arc081_c (2072)・abc230_f (2113)・abc299_f (2349) と黄に集まる。08 は青を提案したが、青の根拠の abc104_d (1739) は位置の組を数える照合位置の DP なので dp-phase に置いた。前提の次の出現位置の表と部分列判定は string の subsequence-matching、重複の除き方の一般論は comb の counting-dedup（design-review §4.2。counting-dedup が dp-state-design を前提にするので dp-basics は前提に書かない）"
     kind: [DP, 文字列, 数え上げ]
-    prerequisites: [subsequence-matching, dp-counting-dedup]
-    related: [dp-phase, dp-reconstruction, lcs, string-automaton-dp, dynamic-dp]
-    summary: "同じ文字列を作る取り出し方は複数あるので、各文字を「まだ使っていない位置のうち最も左」から取る取り出し方だけを数えると、異なる部分列と一対一に対応する。次の出現位置の表 nxt を使い、dp[i] から各文字 c について nxt[i+1][c] へ配る。"
+    prerequisites: [subsequence-matching, counting-dedup]
+    related: [dp-phase, dp-reconstruction, lcs, string-automaton-dp, dynamic-dp, subsequence-and-substring#distinct-subsequences]
+    summary: "異なる部分列の個数を、各文字を「まだ使っていない位置のうち最も左」から取る取り出し方だけを数えて求める。次の出現位置の表を使い、各位置から文字ごとに配る DP になる。"
     signs:
       - {type: phrase, text: "異なる部分列の個数"}
       - {type: phrase, text: "部分列として現れない最短の文字列（辞書順最小）"}
@@ -697,22 +691,23 @@ pages:
       - {type: constraint, text: "文字の種類 26 程度、|S| ≤ 2×10^5"}
     acl: []
     frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 4 問"
     sections:
-      - "位置の組を数える（重複を気にしない）か、異なる文字列を数えるか"
-      - "最も左を取る取り出し方が一意な理由"
-      - "nxt の表で配る DP"
-      - "部分列として現れない最短の文字列（後ろから DP して辞書順最小に復元）"
-      - "辞書順 K 番目の部分列（後ろからの個数で先頭から決める）"
-      - "条件付き・言い換えてから数える（隣り合う位置を選ばない・累積和の列・TT の形）"
+      - {title: "位置の組を数える（重複を気にしない）か、異なる文字列を数えるか", anchor: positions-or-strings}
+      - {title: "最も左を取る取り出し方が一意な理由", anchor: leftmost}
+      - {title: "次の出現位置の表で配る DP", anchor: next-table-dp}
+      - {title: "部分列として現れない最短の文字列（後ろから DP して辞書順最小に復元）", anchor: shortest-non-subsequence}
+      - {title: "辞書順 K 番目の部分列（後ろからの個数で先頭から決める）", anchor: kth-subsequence}
+      - {title: "条件付き・言い換えてから数える（隣り合う位置を選ばない・累積和の列・TT の形）", anchor: with-conditions}
     merged_keys: []
-    visual: "文字列の上に nxt の矢印を描き、ある部分列に対応する「最も左を取る道」を1本だけ光らせる"
+    visual: {kind: static, priority: 2, text: "文字列の上に次の出現位置の矢印を描き、ある部分列に対応する「最も左を取る道」を 1 本だけ強調する図"}
     problems:
-      - {id: abc214_f, role: example, summary: "隣り合う位置を選ばない部分列のうち、異なる文字列の数を数える"}
-      - {id: typical90_f, role: practice, summary: "長さ K の部分列で辞書順最小のもの。次の出現位置の表を使って先頭から貪欲に決める（nxt の練習）"}
-      - {id: arc081_c, role: practice, summary: "部分列として現れない最短の文字列。後ろからの DP で長さを求め、辞書順最小に復元する"}
-      - {id: abc230_f, role: practice, summary: "累積和の列の異なる部分列の数に言い換えて数える"}
-      - {id: abc299_f, role: practice, summary: "TT が部分列になる T の数。2つ目の T の開始位置を固定して重複なく数える"}
-      - {id: tdpc_lexicographical, role: challenge, summary: "異なる部分列のうち辞書順 K 番目。後ろからの個数を使って先頭から決める"}
+      - {id: abc214_f, role: example, summary: "文字列から、隣り合う位置を選ばずに文字を取り出してできる文字列の種類数を求める。", approach: "最も左を取る取り出し方だけを数える（次の出現位置で配る）"}
+      - {id: abc230_f, role: example, representative: true, summary: "数列の隣り合う 2 項をその和で置き換える操作を 0 回以上行ってできる数列の種類数を求める。", approach: "累積和の列の、最後の項を含む異なる部分列の数に言い換える"}
+      - {id: typical90_f, role: practice, summary: "文字列の長さ K の部分列のうち、辞書順最小のものを求める。", approach: "次の出現位置の表を使って先頭から貪欲に決める（表の練習。例題は subsequence-matching）"}
+      - {id: arc081_c, role: practice, summary: "文字列 A の部分列として現れない最短の文字列のうち、辞書順最小のものを求める。", approach: "後ろからの DP で長さを求め、辞書順最小に復元する"}
+      - {id: abc299_f, role: practice, summary: "文字列 S の部分列として TT（空でない文字列 T を 2 回並べたもの）が現れるような T の種類数を求める。", approach: "2 つ目の T の開始位置を固定して重複なく数える"}
+      - {id: tdpc_lexicographical, role: challenge, summary: "文字列の空でない異なる部分列のうち、辞書順で K 番目のものを求める。", approach: "後ろからの個数を使って先頭から決める"}
     sources: ["02-dp §4.C（subsequence-dp）", "02-dp §5.1", "08-string-geo §4.1（subsequence-matching・subsequence-dp）", "08-string-geo §5（subsequence-dp）"]
 
   # ── 第3章 状態の形で分かれる DP ──────────────────────────────
@@ -720,14 +715,14 @@ pages:
   - id: interval-dp
     chapter: 状態の形で分かれる DP
     title: 区間 DP
-    aliases: [区間DP, "dp[l][r]", Range DP, 区間を状態にする DP]
+    aliases: ["dp[l][r]", Interval DP, Range DP, 区間を状態にする DP]
     type: technique
     level: 青
-    level_evidence: "基本形（分割点・両端から取る・区間を消す）が必要な問題は典型90 019 (★6)・abc217_f (1954) から。ABC の区間 DP は大半が黄以上（abc163_e 2037・abc252_g 2153・abc206_f 2221・abc273_f 2277・abc292_g 2340・abc325_g 2388）なので、基本を青、応用を黄の2ページに分けた（設計書 §4.1）"
+    level_evidence: "基本形（分割点・両端から取る・区間を消す）が必要な問題は typical90_s (★6)・abc217_f (1954) から。ABC の区間 DP は大半が黄以上（abc163_e 2037・abc252_g 2153・abc206_f 2221・abc273_f 2277・abc292_g 2340・abc325_g 2388）なので、基本を青、応用を黄の 2 ページに分けた（設計書 §4.1）。abc319 以降は abc325_g (2388) が黄の帯にある"
     kind: [DP]
-    prerequisites: [dp-basics, dp-order, memoized-recursion]
-    related: [interval-dp-advanced, dp-sequence-partition, monge, game-dp, exchange-argument-dp, palindrome]
-    summary: "dp[l][r]＝区間 [l, r) について求めた値を、内側の短い区間の値から求める。区間の長さの短い順（または l の降順）に埋めれば依存関係が満たされ、分割点を全探索する O(N^3) が基本になる。"
+    prerequisites: [dp-order, memoized-recursion]
+    related: [interval-dp-advanced, dp-sequence-partition, monge#knuth-yao, minimax, exchange-argument-dp, palindrome]
+    summary: "dp[l][r]＝区間 [l, r) について求めた値を、内側の短い区間の値から求める。区間の短い順に埋めれば依存関係が満たされ、分割点を全探索する O(N^3) が基本になる。"
     signs:
       - {type: constraint, text: "N ≤ 300〜500 で O(N^3) が通る"}
       - {type: phrase, text: "隣り合うものを合体させる・消す操作のコストの最小"}
@@ -735,142 +730,145 @@ pages:
       - {type: phrase, text: "括弧の対応・回文"}
     acl: []
     frequency: B
+    frequency_evidence: "recent 0・前提として 1 ページに届く（直接 1）・古い ABC 7 問"
     sections:
-      - "長さ順に埋める理由（l を昇順に回すと困ること）"
-      - "分割点型（最後に行う操作で区間を2つに割る）"
-      - "両端型（左端か右端を取る）"
-      - "最後に残す・最後に消すものを決める型"
-      - "端の相手で分ける数え上げ（二項係数で操作の順序を混ぜる）"
-      - "Knuth-Yao による O(N^2) 化（発展：Monge のページへ）"
+      - {title: "長さ順に埋める理由（l を昇順に回すと困ること）", anchor: by-length}
+      - {title: "分割点型（最後に行う操作で区間を 2 つに割る）", anchor: split-point}
+      - {title: "両端型（左端か右端を取る）", anchor: ends}
+      - {title: "最後に残す・最後に消すものを決める型", anchor: last-operation}
+      - {title: "端の相手で分ける数え上げ（二項係数で操作の順序を混ぜる）", anchor: pair-with-left-end}
     merged_keys: []
-    visual: "上三角の表を対角線（区間の長さ）ごとに埋めるアニメーション。区間を分割点で2つに割る木の図"
+    visual: {kind: dynamic, priority: 2, text: "上三角の表を対角線（区間の長さ）ごとに埋めるステップ送り。区間を分割点で 2 つに割る木の図"}
     problems:
-      - {id: dp_l, role: example, summary: "列の両端から交互に取るゲームで、残った区間ごとに得点差の最大を求める"}
-      - {id: dp_n, role: example, summary: "隣り合うスライムを合体させるコストの最小。最後に合体する境目で分ける"}
-      - {id: typical90_s, role: practice, summary: "隣り合う2つを取り除く操作のコストの最小。外側の2つを最後に取る場合と分割する場合に分ける"}
-      - {id: tdpc_iwi, role: practice, summary: "'iwi' を取り除く操作で区間を全部消せるかを判定し、最大の操作回数を求める"}
-      - {id: abc217_f, role: practice, summary: "隣り合う仲良しの組を取り除く順番の数。左端と組む相手で分け、二項係数で順番を混ぜる"}
-      - {id: abc163_e, role: practice, summary: "活発度の大きい順に左端か右端へ並べる。残った区間を状態にする"}
-      - {id: abc325_g, role: challenge, summary: "文字列の削除操作で最短にする。区間の先頭の文字を最後にどう消すかで分ける"}
+      - {id: dp_n, role: example, summary: "隣り合うスライムを合体させるたびに大きさの和のコストがかかるとき、全部を 1 匹にするコストの最小を求める。", approach: "最後に合体する境目で分ける"}
+      - {id: typical90_s, role: example, representative: true, summary: "2N 個の数の列から隣り合う 2 つを取り除く操作を繰り返して全部消すとき、取り除く 2 つの差の絶対値の和の最小を求める。", approach: "外側の 2 つを最後に取る場合と、分割する場合に分ける"}
+      - {id: dp_l, role: practice, summary: "数列の両端から交互に 1 つずつ取る 2 人ゲームで、両者が最適に取るときの先手の得点 − 後手の得点を求める。", approach: "残った区間ごとに得点差の最大を求める（例題は comb の minimax）"}
+      - {id: tdpc_iwi, role: practice, summary: "i と w からなる文字列から、連続する 'iwi' を取り除く操作を繰り返すとき、操作回数の最大を求める。", approach: "区間を全部消せるかを判定する区間 DP"}
+      - {id: abc217_f, role: practice, summary: "2N 人の列から、仲の良い隣り合う 2 人を取り除く操作を N 回行う方法の数を求める。", approach: "左端と組む相手で分け、二項係数で順番を混ぜる（節 pair-with-left-end）"}
+      - {id: abc163_e, role: practice, summary: "活発度 A_i の幼児を並べ替えて、各幼児の移動距離×活発度の和の最大を求める。", approach: "活発度の大きい順に左端か右端へ並べ、残った区間を状態にする（例題は exchange-argument-dp）"}
+      - {id: abc325_g, role: challenge, summary: "文字列に 2 種類の削除の操作（連続する 'of' を消す・ある文字の後ろの K 文字までを消す）を好きなだけ行ったときの、長さの最小を求める。", approach: "区間の先頭の文字を最後にどう消すかで分ける"}
     sources: ["02-dp §4.D（interval-dp）", "02-dp §5.1", "02-dp §2.4"]
 
   - id: interval-dp-advanced
     chapter: 状態の形で分かれる DP
-    title: 区間 DP の応用（木・ゲーム・座標上の区間）
-    aliases: [区間DP 応用, 区間 DP で木を数える, 区間ゲーム]
+    title: 区間 DP の応用
+    aliases: [区間 DP で木を数える, 区間ゲーム]
     type: technique
     level: 黄
     level_evidence: "abc252_g (2153)・abc206_f (2221)・abc273_f (2277)・abc292_g (2340)・abc325_g (2388) と黄に集まる。発展に abc261_g (2803)・abc262_g (3114)"
     kind: [DP, 数え上げ]
     prerequisites: [interval-dp, binomial-coefficient]
-    related: [tree-dp, grundy-number, euler-tour, digit-dp]
-    summary: "区間 DP の上に、DFS 順の区間を部分木とみる木の数え上げ、区間ごとの Grundy 数、数直線上で訪れた区間の両端を状態にする移動、などを載せる応用。区間の内側と外側を独立に数え、順序を二項係数で混ぜる設計が中心になる。"
+    related: [tree-dp, grundy-number#dp, euler-tour, digit-dp]
+    summary: "区間 DP の上で、DFS 順の区間を部分木とみる木の数え上げ、区間ごとの Grundy 数、訪れた範囲の両端を状態にする移動などを解く。区間の内と外を独立に数え、順序を二項係数で混ぜる設計が多い。"
     signs:
-      - {type: phrase, text: "DFS の訪問順（行きがけ順）が与えられた根付き木の数"}
+      - {type: phrase, text: "頂点を訪れた順（行きがけ順）が与えられたときの根付き木の数"}
       - {type: phrase, text: "区間を選び合うゲームの勝敗"}
       - {type: phrase, text: "数直線上を左右に動き、訪れた範囲が常に連続している"}
       - {type: constraint, text: "N ≤ 400 前後"}
     acl: []
     frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 7 問"
     sections:
-      - "DFS 順の区間＝部分木（木の数え上げ）"
-      - "区間ごとの Grundy 数（ゲーム）"
-      - "訪れた区間の両端と今いる端を状態にする"
-      - "桁と区間で分ける（'?' を含む数の列）"
+      - {title: "DFS 順の区間＝部分木（木の数え上げ）", anchor: dfs-order-trees}
+      - {title: "区間ごとの Grundy 数（ゲーム）", anchor: grundy}
+      - {title: "訪れた区間の両端と今いる端を状態にする", anchor: visited-range}
+      - {title: "桁と区間で分ける（'?' を含む数の列）", anchor: digits-and-ranges}
     merged_keys: []
-    visual: "区間 [l, r) を根とその子の部分木の区間に分ける図（DFS 順と区間の対応）"
+    visual: {kind: static, priority: 3, text: "区間 [l, r) を根とその子の部分木の区間に分ける図（DFS 順と区間の対応）"}
     problems:
-      - {id: abc252_g, role: example, summary: "DFS の訪問順が与えられたとき、それを生む根付き木の数を区間 DP で数える"}
-      - {id: abc206_f, role: practice, summary: "区間を選び合うゲームの勝敗。区間ごとの Grundy 数を区間 DP で求める"}
-      - {id: abc273_f, role: practice, summary: "壁とハンマーのある数直線上の移動。訪れた区間の両端と今いる端を状態にする"}
-      - {id: abc292_g, role: practice, summary: "'?' を含む数の列を狭義増加にする方法の数を、桁と区間で分けて数える"}
+      - {id: abc252_g, role: example, representative: true, summary: "根から子の番号の小さい順にたどって頂点を訪れた順（行きがけ順）が与えられたとき、その順を生む根付き木の個数を求める。", approach: "DFS 順の区間を部分木とみる区間 DP"}
+      - {id: abc206_f, role: practice, summary: "区間の集合から、すでに選ばれた区間と交わらない区間を交互に選び、選べなくなった人が負けるゲームの勝者を求める。", approach: "区間ごとの Grundy 数を区間 DP で求める"}
+      - {id: abc273_f, role: practice, summary: "壁は対応するハンマーを拾わないと通れない数直線上で、原点からゴールへ行く移動距離の最小を求める。", approach: "訪れた区間の両端と今いる端を状態にする"}
+      - {id: abc292_g, role: practice, summary: "数字と '?' からなる同じ桁数の N 個の文字列の '?' を埋めて、狭義増加の数の列にする方法の数を求める。", approach: "桁と区間で分けて数える"}
     sources: ["02-dp §4.D（interval-dp-advanced）", "02-dp §5.1"]
 
   - id: bit-dp
     chapter: 状態の形で分かれる DP
-    title: bitDP（集合を状態に持つ DP）
-    aliases: [bitDP, ビットDP, 集合DP, Bitmask DP, 巡回セールスマン問題, TSP, ハミルトン路]
+    title: bitDP
+    aliases: [ビット DP, 集合 DP, Bitmask DP, 巡回セールスマン問題, TSP, Traveling Salesman Problem, ハミルトン路]
     type: technique
     level: 水
-    level_evidence: "abc322_e (1193)・abc354_e (1223)・abc180_e (1256)・abc142_e (1397)・abc215_e (1413)・abc278_f (1452) と水に集中。ほかの探索との組み合わせ（abc190_e 1645・abc301_e 1673・abc199_e 1814・abc338_f 1835）は青。graph の調査（03）の hamiltonian-path も水で、bitDP の節を提案している"
+    level_evidence: "abc322_e (1193)・abc354_e (1223)・abc180_e (1256)・abc142_e (1397)・abc278_f (1452) と水に集中し、abc319 以降も abc322_e・abc354_e が水の入口にある。ほかの探索との組み合わせ（abc190_e 1645・abc301_e 1673・abc199_e 1814・abc338_f 1835）は青。graph の調査（03）の hamiltonian-path も水で、bitDP の節を提案している（AtCoder Tags の投票だけが裏付けの abc215_e は根拠から外した）"
     kind: [DP, ビット演算]
-    prerequisites: [dp-state-design, bit-operations, bit-full-search]
-    related: [subset-enumeration-dp, broken-profile-dp, permutation-search, bfs, warshall-floyd, zeta-mobius-subset, steiner-tree, game-dp]
-    summary: "順列 N! 通りの探索のうち、将来に効くのが「使ったものの集合」と「最後に使ったもの」だけなら、状態を 2^N·N に減らせる。S ⊂ T なら S の整数表現は T より小さいので、整数の昇順に回せば依存関係が満たされる。"
+    prerequisites: [dp-state-design, bit-full-search]
+    related: [subset-enumeration-dp, broken-profile-dp, bfs, warshall-floyd, zeta-mobius-subset, steiner-tree, game-basics#state-design, bitset-speedup#vs-bit-dp]
+    summary: "順列の探索のうち将来に効くのが「使ったものの集合」と「最後に使ったもの」だけなら、状態を 2^N·N に減らせる。集合を整数で表し、整数の昇順に回せば依存関係が満たされる。"
     signs:
       - {type: constraint, text: "N ≤ 16〜20"}
-      - {type: phrase, text: "すべての地点を1回ずつ回る最短（巡回セールスマン）"}
+      - {type: phrase, text: "すべての地点を 1 回ずつ回って戻る最短の経路"}
       - {type: phrase, text: "順番を決める・使ったものの集合が将来に効く"}
       - {type: constraint, text: "特別な地点が K ≤ 17 個（ほかの地点はグラフで結ばれている）"}
     acl: []
-    frequency: A
+    frequency: B
+    frequency_evidence: "recent 1（abc480_f）・前提として 5 ページに届く（直接 3）・古い ABC 13 問"
     sections:
-      - "集合を整数で表す・昇順に回してよい理由"
-      - "集合だけを状態にする（マッチングの数）"
-      - "集合と最後に使ったもの（巡回セールスマン・ハミルトン路）"
-      - "ほかの探索と組み合わせる（BFS・ワーシャルフロイドで距離を前計算してから）（青）"
-      - "ゲームの状態を集合で持つ"
-      - "素数の使用状況を集合で持つ（黄）"
-      - "落とし穴：& と == の優先順位・1 << N の範囲・始点を集合に入れるか・最後に戻る分"
+      - {title: "集合を整数で表す・昇順に回してよい理由", anchor: subsets-as-integers}
+      - {title: "集合だけを状態にする（マッチングの数）", anchor: set-only}
+      - {title: "集合と最後に使ったもの（巡回セールスマン・ハミルトン路）", anchor: tsp}
+      - {title: "ほかの探索と組み合わせる（BFS・ワーシャルフロイドで距離を前計算してから）", anchor: with-shortest-paths, level: 青}
+      - {title: "ゲームの状態を集合で持つ", anchor: games}
+      - {title: "素数の使用状況を集合で持つ", anchor: primes, level: 黄}
+      - {title: "落とし穴：& と == の優先順位・1 << N の範囲・始点を集合に入れるか・最後に戻る分", anchor: pitfalls}
     merged_keys: [tsp, hamiltonian-path]
-    visual: "集合の包含関係（ハッセ図）を描き、小さい集合から大きい集合へ値が流れるステップ送り。N! 通りの順列の木が「集合と最後」で合流する図"
+    visual: {kind: dynamic, priority: 2, text: "集合の包含関係（ハッセ図）を描き、小さい集合から大きい集合へ値が流れるステップ送り。N! 通りの順列の木が「集合と最後」で合流する図"}
     problems:
-      - {id: dp_o, role: example, summary: "男女のマッチングの数。使った女性の集合を状態にし、男性は集合の大きさで決まる"}
-      - {id: abc180_e, role: example, summary: "3次元の都市をすべて回って戻る最小コスト（巡回セールスマン）"}
-      - {id: abc142_e, role: practice, summary: "鍵の組み合わせで全部の箱を開ける最小費用。開けられる箱の集合を状態にする"}
-      - {id: abc278_f, role: practice, summary: "しりとりゲームの勝敗を、使った単語の集合と最後の単語で決める"}
-      - {id: abc274_e, role: practice, summary: "宝箱を拾うと速くなる移動で、町を全部回って戻る最短時間"}
-      - {id: abc190_e, role: practice, summary: "特別な石どうしの BFS の距離を求めてから、始点に戻らない巡回セールスマンを解く"}
-      - {id: abc301_e, role: practice, summary: "グリッド上でお菓子を集めて制限時間内にゴールする。BFS で距離を求めてから bitDP"}
-      - {id: abc338_f, role: practice, summary: "負の辺のあるグラフで全頂点を訪れる最短の歩道。全点対の最短距離を求めてから bitDP"}
-      - {id: abc195_f, role: challenge, summary: "区間 [A, B]（幅 ≤ 72）から互いに素な数を選ぶ方法の数。72 以下の素数 20 個の使用状況を集合で持つ"}
-      - {id: abc343_g, role: challenge, summary: "すべての文字列を部分文字列に含む最短の文字列。重なりの長さを前計算して巡回セールスマン型の bitDP"}
+      - {id: dp_o, role: example, summary: "N 人の男性と N 人の女性の相性が分かっているとき、相性の良い組だけで N 組のペアを作る方法の数を求める。", approach: "使った女性の集合を状態にし、男性は集合の大きさで決まる（節 set-only）"}
+      - {id: abc180_e, role: example, representative: true, summary: "3 次元空間の N 都市を、決まった式の移動コストで、都市 1 から全都市を回って都市 1 に戻る最小のコストを求める。", approach: "巡回セールスマン問題の bitDP（節 tsp）"}
+      - {id: abc142_e, role: practice, summary: "それぞれいくつかの宝箱を開けられる鍵を買って、全部の宝箱を開けるときの費用の最小を求める。", approach: "開けられる箱の集合を状態にする"}
+      - {id: abc278_f, role: practice, summary: "単語を 1 回ずつしか使えないしりとりで、続けられなくなった人が負けるとき、両者が最適に行動したときの勝者を求める。", approach: "使った単語の集合と最後の単語を状態にする（例題は comb の game-basics）"}
+      - {id: abc274_e, role: practice, summary: "平面上の町と宝箱のうち、宝箱を拾うたびに速さが 2 倍になるとき、全部の町を回って原点に戻る時間の最小を求める。", approach: "訪れた町と宝箱の集合と、最後の地点を状態にする"}
+      - {id: abc190_e, role: practice, summary: "隣り合ってよい石の組がグラフで与えられたとき、指定された K 種類の石をすべて含む石の列の長さの最小を求める。", approach: "特別な石どうしの BFS の距離を求めてから、始点に戻らない巡回セールスマン（節 with-shortest-paths）"}
+      - {id: abc301_e, role: practice, summary: "グリッド上でお菓子を拾いながら T 手以内にスタートからゴールへ行くときの、拾えるお菓子の個数の最大を求める。", approach: "BFS で特別なマスどうしの距離を求めてから bitDP（節 with-shortest-paths）"}
+      - {id: abc338_f, role: practice, summary: "負の重みの辺がある（負閉路のない）有向グラフで、すべての頂点を 1 回以上通る歩道の重みの最小を求める。", approach: "全点対の最短距離を求めてから bitDP（節 with-shortest-paths）"}
+      - {id: abc195_f, role: challenge, summary: "A 以上 B 以下（B − A ≤ 72）の整数から、どの 2 つも互いに素になるように選ぶ方法の数を求める。", approach: "72 以下の素数 20 個の使用状況を集合で持つ（節 primes）"}
+      - {id: abc343_g, role: challenge, summary: "N 個（≤ 20）の文字列をすべて連続部分文字列として含む文字列の長さの最小を求める。", approach: "重なりの長さを前計算して巡回セールスマン型の bitDP"}
     sources: ["02-dp §4.E（bit-dp・tsp）", "02-dp §5.1", "03-graph §4.F（hamiltonian-path）", "03-graph §5.2（hamiltonian-path）"]
 
   - id: subset-enumeration-dp
     chapter: 状態の形で分かれる DP
-    title: 部分集合を列挙する DP（O(3^N)）
-    aliases: [3^N DP, 部分集合の部分集合, 部分集合の列挙, submask enumeration, グループ分け DP]
+    title: 部分集合を列挙する DP
+    aliases: [3^N DP, 部分集合の部分集合, Submask Enumeration, グループ分け DP]
     type: technique
     level: 青
-    level_evidence: "abc187_f (1895)・典型90 045 (★6)・EDPC U。abc310_d (1368) は 3^N でも全探索でも解ける。発展に abc321_g (2439)・abc213_g (2663)"
+    level_evidence: "abc187_f (1895)・typical90_as (★6)・EDPC U。abc310_d (1368) は 3^N でも全探索でも解ける。abc319 以降は abc321_g (2439) が発展の帯。発展に abc213_g (2663)"
     kind: [DP, ビット演算]
     prerequisites: [bit-dp]
-    related: [dp-counting-dedup, zeta-mobius-subset, recursive-enumeration, steiner-tree]
-    summary: "集合 S を「部分集合 T と残り S∖T」に分ける遷移を、T = (T − 1) & S で列挙すると、全体の計算量は Σ 2^|S| = 3^N になる。グループの順序を区別しないため、S の最小要素を含む T だけを列挙する。"
+    related: [counting-dedup#min-index, zeta-mobius-subset, recursive-enumeration#partition, steiner-tree]
+    summary: "集合を部分集合と残りに分ける遷移を T = (T − 1) & S で列挙し、グループ分けの最適値や数を全体 O(3^N) で求める。順序の重複を除くため、最小の要素を含む部分集合だけを列挙する。"
     signs:
       - {type: phrase, text: "N 個をいくつかのグループに分ける方法の数・最適値"}
       - {type: phrase, text: "集合を部分集合の和に分割する"}
       - {type: constraint, text: "N ≤ 16〜18（3^N ≈ 4×10^7〜4×10^8）"}
     acl: []
     frequency: B
+    frequency_evidence: "recent 0・前提として 2 ページに届く（直接 2）・古い ABC 4 問"
     sections:
-      - "部分集合の部分集合を列挙する（T = (T − 1) & S）"
-      - "3^N になる理由（各要素が3通り）"
-      - "最小の要素を含むグループから決める（順序の重複を除く）"
-      - "グループの数を状態に足す"
-      - "高速ゼータ変換との使い分け"
+      - {title: "部分集合の部分集合を列挙する（T = (T − 1) & S）", anchor: submask-loop}
+      - {title: "3^N になる理由（各要素が 3 通り）", anchor: why-3n}
+      - {title: "最小の要素を含むグループから決める（順序の重複を除く）", anchor: fix-minimum}
+      - {title: "グループの数を状態に足す", anchor: group-count}
+      - {title: "高速ゼータ変換との使い分け", anchor: vs-zeta}
     merged_keys: []
-    visual: "集合 S の部分集合 T を (T−1)&S で列挙する様子と、Σ 2^|S| = 3^N になる理由（各要素が3状態）の図"
+    visual: {kind: static, priority: 2, text: "集合 S の部分集合 T を (T − 1) & S で列挙する様子と、Σ 2^|S| = 3^N になる理由（各要素が 3 状態）の図"}
     problems:
-      - {id: dp_u, role: example, summary: "うさぎをグループに分けて得点の和を最大化する。各集合をその部分集合と残りに分ける"}
-      - {id: abc310_d, role: practice, summary: "仲の悪い組を分けてチーム分けする数。番号最小の人を含むチームから決める"}
-      - {id: abc187_f, role: practice, summary: "頂点を完全グラフになるグループに分ける最小数"}
-      - {id: typical90_as, role: practice, summary: "点を K グループに分け、グループ内の最大距離の最大を最小化する"}
-      - {id: abc321_g, role: challenge, summary: "部品を電線でつないだときの連結成分の個数の期待値。連結成分になる部分集合ごとに数える"}
+      - {id: dp_u, role: example, summary: "N 羽のうさぎをいくつかのグループに分け、同じグループになった組ごとの得点の和を最大化する。", approach: "各集合をその部分集合と残りに分ける"}
+      - {id: abc187_f, role: example, representative: true, summary: "N 頂点（≤ 18）のグラフの辺を取り除き、各連結成分の中がすべて辺で結ばれるようにするときの、連結成分の数の最小を求める。", approach: "完全グラフになる部分集合を前計算し、部分集合の部分集合を列挙する"}
+      - {id: abc310_d, role: practice, summary: "N 人を T 個のチームに分ける方法のうち、仲の悪い組が同じチームにならないものの数を求める。", approach: "番号最小の未所属者を含むチームから決める（3^N でも全探索でも解ける）"}
+      - {id: typical90_as, role: practice, summary: "平面上の N 点を K 個のグループに分け、各グループ内の 2 点間の距離の最大の、全グループでの最大を最小化する。", approach: "各部分集合の直径を前計算し、部分集合の部分集合を列挙する"}
+      - {id: abc321_g, role: challenge, summary: "部品の端子を電線でランダムにつないだときの、連結成分の個数の期待値を求める。", approach: "連結成分になる部分集合ごとに、その集合がちょうど 1 つの成分になる場合の数を数える"}
     sources: ["02-dp §4.E（subset-enumeration-dp）", "02-dp §5.1", "00-curriculum §3.2（kadane-and-submask）"]
 
   - id: broken-profile-dp
     chapter: 状態の形で分かれる DP
-    title: プロファイル DP（グリッドの境界を状態に持つ DP）
-    aliases: [プロファイル DP, broken profile DP, 插頭DP, フロンティア法, 連結性DP, スライド bitDP, 敷き詰めの DP]
+    title: プロファイル DP
+    aliases: [Broken Profile DP, 插頭 DP, フロンティア法, 連結性 DP, スライド bitDP, 敷き詰めの DP]
     type: technique
     level: 黄
-    level_evidence: "行ごとの配置パターンを状態にする基本形は abc113_d (1597) にあるが、マス単位の境界状態や圧縮が必要なのは典型90 023 (★7)・abc204_f (2044)・abc379_g (2304)。連結性を持つものは TDPC S・abc296_h (2822) で発展"
+    level_evidence: "行ごとの配置パターンを状態にする基本形は abc113_d (1597) にあるが、マス単位の境界状態や圧縮が必要なのは typical90_w (★7)・abc204_f (2044)・abc379_g (2304、2024)。連結性を持つものは TDPC S・abc296_h (2822) で発展"
     kind: [DP, ビット演算]
-    prerequisites: [bit-dp, dp-state-design]
-    related: [dp-matrix-power, dp-grid]
-    summary: "幅の小さいグリッドを1行（または1マス）ずつ進め、まだ処理していない部分に影響する境界の情報だけを bit で持つ DP。1マスずつ進めれば状態 2^W・遷移 O(1) になり、取り得る状態だけに圧縮するとさらに減る。"
+    prerequisites: [bit-dp]
+    related: [matrix-power#profile-dp, dp-grid, grid#tiling]
+    summary: "幅の小さいグリッドを 1 マスずつ進め、まだ処理していない部分に影響する境界の情報だけを bit で持って、敷き詰め方や塗り方を数える。取り得る状態だけに圧縮すると状態がさらに減る。"
     signs:
       - {type: constraint, text: "グリッドの短い辺 ≤ 6〜14"}
       - {type: phrase, text: "タイル・ドミノの敷き詰め方の数"}
@@ -878,605 +876,540 @@ pages:
       - {type: phrase, text: "黒マスが連結になる塗り方"}
     acl: []
     frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 4 問"
     sections:
-      - "1行ずつ進める（行の配置パターンを状態に）（水）"
-      - "1マスずつ進める（境界の折れ線を状態に）"
-      - "取り得る状態だけを列挙して番号を付ける（圧縮）"
-      - "長さが巨大なら行列累乗と組み合わせる"
-      - "連結性を持つ（フロンティア法）（発展）"
+      - {title: "1 行ずつ進める（行の配置パターンを状態に）", anchor: row-by-row}
+      - {title: "1 マスずつ進める（境界の折れ線を状態に）", anchor: cell-by-cell}
+      - {title: "取り得る状態だけを列挙して番号を付ける（圧縮）", anchor: compress}
+      - {title: "長さが巨大なら行列累乗と組み合わせる", anchor: with-matrix-power}
+      - {title: "連結性を持つ（フロンティア法）", anchor: connectivity, level: 発展}
     merged_keys: []
-    visual: "走査線（折れ線の境界）を1マスずつ進め、境界上の bit が書き換わる様子のステップ送り"
+    visual: {kind: dynamic, priority: 3, text: "走査線（折れ線の境界）を 1 マスずつ進め、境界上の bit が書き換わる様子のステップ送り（静的な図で代えてよい）"}
     problems:
-      - {id: abc113_d, role: example, summary: "あみだくじの横線の置き方の数。1段ごとの横線のパターンを状態にして下へ進む"}
-      - {id: typical90_w, role: practice, summary: "キングが互いに攻撃しないように置く数。1マスずつ進め、直前の W+1 マスの状態を圧縮して持つ"}
-      - {id: abc204_f, role: practice, summary: "幅 H ≤ 6・長さ 10^12 の敷き詰め方の数。列のはみ出しを bit で持つ状態を行列にして累乗する"}
-      - {id: abc379_g, role: practice, summary: "隣り合うマスが異なる3色の塗り方の数（短い辺 ≤ 14）。確定済みの境界を状態にし、取り得る状態だけに圧縮する"}
-      - {id: tdpc_grid, role: challenge, summary: "左上と右下が黒マスでつながる塗り方の数。境界上の連結の状態を持つ"}
-      - {id: abc296_h, role: challenge, summary: "黒マスを全部連結にする最小の追加数。境界上の連結成分を状態にする"}
+      - {id: abc113_d, role: example, summary: "高さ H・縦線 W 本のあみだくじで、横線どうしが端点を共有しないように横線を引き、1 番左の縦線から下りると K 番目に着くものの数を求める。", approach: "1 段ごとの横線のパターンを状態にして下へ進む（節 row-by-row）"}
+      - {id: abc379_g, role: example, representative: true, summary: "1・2・3 と '?' からなるグリッドの '?' を 1〜3 で埋め、隣り合うマスの数がすべて異なるようにする方法の数を求める（H×W ≤ 200）。", approach: "1 マスずつ進め、確定済みの境界を状態にし、取り得る状態だけに圧縮する"}
+      - {id: typical90_w, role: practice, summary: "H×W の盤の空いたマスに、互いに隣接（8 近傍）しないようにキングを置く方法の数を求める。", approach: "1 マスずつ進め、直前の W+1 マスの状態を圧縮して持つ"}
+      - {id: abc204_f, role: practice, summary: "H×W（H ≤ 6、W ≤ 10^12）の部屋に 1×1 と 1×2 の畳を敷き詰める方法の数を求める。", approach: "列のはみ出しを bit で持つ状態を行列にして累乗する（節 with-matrix-power）"}
+      - {id: tdpc_grid, role: challenge, summary: "H×W（H ≤ 6）のグリッドを白黒に塗り、左上と右下が黒マスだけを通ってつながるようにする方法の数を求める。", approach: "境界上の連結の状態を持つ（節 connectivity）"}
+      - {id: abc296_h, role: challenge, summary: "白黒のグリッドで、白マスをいくつか黒に塗って黒マス全体を連結にするときの、塗るマスの数の最小を求める。", approach: "境界上の連結成分を状態にする（節 connectivity）"}
     sources: ["02-dp §4.E（broken-profile-dp）", "02-dp §5.1"]
 
   - id: digit-dp
     chapter: 状態の形で分かれる DP
     title: 桁 DP
-    aliases: [桁DP, Digit DP, smaller フラグ, 未満フラグ, leading zero]
+    aliases: [Digit DP, smaller フラグ, 未満フラグ, leading zero]
     type: technique
     level: 水
-    level_evidence: "abc154_e (1298)・abc135_d (1334)・abc465_e (1417)・abc117_d (1423)・abc336_e (1538)・abc129_e (1547)・abc155_e (1569) と水に集中。AtCoder Tags の Digit-DP は水7・黄5・青1と分かれるので、応用を黄の別ページにした（設計書 §4.1）"
+    level_evidence: "abc154_e (1298)・abc135_d (1334)・abc465_e (1417、2026)・abc117_d (1423)・abc336_e (1538、2024)・abc129_e (1547)・abc155_e (1569) と水に集中し、abc319 以降の 2 問も水。AtCoder Tags の Digit-DP は水 7・黄 5・青 1 と分かれるので、応用を黄の別ページにした（設計書 §4.1）"
     kind: [DP, 数え上げ]
     prerequisites: [dp-state-design, mod-arithmetic]
-    related: [digit-dp-advanced, dp-mod-state, bitwise-independence, string-automaton-dp]
-    summary: "N 以下の整数を上の桁から決め、「ここまで N と一致しているか」のフラグに、問題が求める情報（桁和の余り・0 でない桁の数など）を足した状態で数える。上の桁で一度 N より小さい数字を選べば以降の桁は自由になるので、桁数に比例する計算量で済む。"
+    related: [digit-dp-advanced, dp-mod-state, bitwise-independence#top-down, string-automaton-dp]
+    summary: "N 以下の整数のうち条件を満たすものの個数や総和を、上の桁から決め、それまでの桁が N と一致しているかのフラグと問題の情報を状態にして求める。計算量は桁数に比例する。"
     signs:
       - {type: constraint, text: "N ≤ 10^18、または N が 10^4 桁の文字列"}
       - {type: phrase, text: "N 以下で条件を満たす整数の個数・総和"}
       - {type: phrase, text: "各桁の和・0 でない桁の数"}
-      - {type: phrase, text: "K 以下の X で XOR・AND の条件（2進の桁 DP）"}
+      - {type: phrase, text: "K 以下の X について、XOR や AND の条件を満たすものを数える・最大化する"}
     acl: []
     frequency: A
+    frequency_evidence: "recent 2（abc465_e・abc466_g）・前提として 1 ページに届く（直接 1）・古い ABC 6 問"
     sections:
-      - "N と一致しているかのフラグ（一致したままの道は1本だけ）"
-      - "問題の情報を状態に足す（桁和の余り・個数）"
-      - "leading zero を区別するとき"
-      - "2進の桁 DP（XOR・AND）"
-      - "割る数を全探索して桁 DP を繰り返す"
-      - "落とし穴：N 自身を含むか・0 を数えるか"
+      - {title: "N と一致しているかのフラグ（一致したままの道は 1 本だけ）", anchor: tight-flag}
+      - {title: "問題の情報を状態に足す（桁和の余り・個数）", anchor: extra-state}
+      - {title: "leading zero を区別するとき", anchor: leading-zero}
+      - {title: "2 進の桁 DP（XOR・AND）", anchor: binary}
+      - {title: "割る数を全探索して桁 DP を繰り返す", anchor: fix-divisor}
+      - {title: "落とし穴：N 自身を含むか・0 を数えるか", anchor: pitfalls}
     merged_keys: []
-    visual: "N の桁を並べ、「ここで初めて N より小さい数字を選ぶ」分岐を木で描き、一致したままの道が1本だけであることを示すステップ送り"
+    visual: {kind: dynamic, priority: 1, text: "N の桁を並べ、「ここで初めて N より小さい数字を選ぶ」分岐を木で描き、N と一致したままの道が 1 本だけであることを示すステップ送り"}
     problems:
-      - {id: dp_s, role: example, summary: "K 以下で桁和が D の倍数の数。K と一致しているかのフラグと桁和の余りを状態にする"}
-      - {id: abc154_e, role: example, summary: "N 以下で 0 でない桁がちょうど K 個の数"}
-      - {id: abc135_d, role: practice, summary: "'?' を含む数で 13 で割って 5 余るものの数（余りを状態に持つ桁ごとの DP）"}
-      - {id: abc465_e, role: practice, summary: "使った数字の集合と 3 で割った余りを状態にした桁 DP（2026 年の E）"}
-      - {id: abc117_d, role: practice, summary: "K 以下の X で Σ (X xor A_i) の最大。2進の上の桁から、K と一致しているかのフラグで決める"}
-      - {id: abc336_e, role: practice, summary: "N 以下で各桁の和で割り切れる数の個数。桁和を固定して桁 DP を繰り返す"}
-      - {id: abc129_e, role: practice, summary: "a + b ≤ L かつ a + b = a xor b となる組の数。2進の桁ごとに a・b のビットを決める"}
-      - {id: tdpc_number, role: practice, summary: "10000 桁の N 以下で桁和が D の倍数の数"}
+      - {id: dp_s, role: example, summary: "1 以上 K 以下（K は最大 10^4 桁）の整数のうち、各桁の和が D の倍数になるものの個数を求める。", approach: "K と一致しているかのフラグと、桁和の余りを状態にする"}
+      - {id: abc154_e, role: example, representative: true, summary: "1 以上 N 以下（N < 10^100）の整数のうち、0 でない数字がちょうど K 個のものの個数を求める。", approach: "N と一致しているかのフラグと、0 でない桁の数を状態にする"}
+      - {id: abc135_d, role: practice, summary: "数字と '?' からなる文字列の '?' を埋めてできる整数のうち、13 で割って 5 余るものの数を求める。", approach: "上の桁から余りを状態に持つ（上限のフラグは要らない。例題は dp-mod-state）"}
+      - {id: abc465_e, role: practice, summary: "（執筆時に確かめる）", approach: "使った数字の集合と 3 で割った余りを状態にした桁 DP（research/00 §2.3.8 の分類）"}
+      - {id: abc117_d, role: practice, summary: "0 以上 K 以下の整数 X のうち、Σ (X xor A_i) を最大にするときの最大値を求める。", approach: "2 進の上の桁から、K と一致しているかのフラグで決める（節 binary）"}
+      - {id: abc336_e, role: practice, summary: "N 以下（N ≤ 10^14）の正の整数のうち、各桁の和で割り切れるものの個数を求める。", approach: "桁和を固定して、桁和と余りを状態にした桁 DP を繰り返す（節 fix-divisor）"}
+      - {id: abc129_e, role: practice, summary: "2 進数で与えられた L について、a + b ≤ L かつ a + b = a xor b を満たす非負整数の組 (a, b) の個数を求める。", approach: "2 進の桁ごとに a・b のビットを決める（節 binary）"}
     sources: ["02-dp §4.F（digit-dp）", "02-dp §5.1", "02-dp §2.4", "00-curriculum §2.3.8（abc465_e）"]
 
   - id: digit-dp-advanced
     chapter: 状態の形で分かれる DP
-    title: 桁 DP の応用（複数の数・繰り上がり・状態の圧縮）
-    aliases: [桁DP 応用, 繰り上がりの DP, 上限と下限の桁 DP]
+    title: 桁 DP の応用
+    aliases: [繰り上がりの DP, 上限と下限の桁 DP, 複数の数の桁 DP]
     type: technique
     level: 黄
-    level_evidence: "abc208_e (2024)・abc317_f (2072)・abc182_f (2121)・abc235_f (2129)・abc194_f (2197)・abc172_f (2216) と黄に集まる。青では abc231_e (1740)・arc123_c (1827)"
+    level_evidence: "abc208_e (2024)・abc317_f (2072)・abc182_f (2121)・abc235_f (2129)・abc194_f (2197)・abc172_f (2216) と黄に集まる。青では abc231_e (1740)・arc123_c (1827)。abc319 以降の根拠は見つかっていない（古い問題で決めた）"
     kind: [DP, 数え上げ]
     prerequisites: [digit-dp]
     related: [memoized-recursion, bit-dp, dp-mod-state]
-    summary: "桁 DP を、2つ以上の数を同時に決める（各数のフラグを並べて持つ）、下の桁からの繰り上がりを状態にする、取り得る値が少ない状態（桁の積・使った数字の集合）を map や bit で持つ、などに広げる。"
+    summary: "桁 DP を、2 つ以上の数を同時に決める・下の桁からの繰り上がりを状態にする・種類の少ない状態を map や bit で持つ、などに広げる。上限と下限の両方があるときはフラグを 2 つ持つ。"
     signs:
-      - {type: phrase, text: "2つ以上の数を同時に決める（a + b = a xor b・3つの数の xor）"}
-      - {type: phrase, text: "支払いとお釣りの枚数の最小（繰り上がり）"}
+      - {type: phrase, text: "2 つ以上の数を同時に決める（a + b = a xor b・3 つの数の xor）"}
+      - {type: phrase, text: "支払いとお釣りの枚数の最小"}
       - {type: phrase, text: "使った数字の種類数・指定の数字を全部含む数"}
       - {type: phrase, text: "L ≤ x ≤ y ≤ R の組を数える（上限と下限の両方）"}
     acl: []
     frequency: B
+    frequency_evidence: "recent 1（abc466_g）・前提として届くページなし・古い ABC 8 問"
     sections:
-      - "複数の数を同時に決める（フラグを並べる）"
-      - "上限と下限の両方（2つのフラグ）"
-      - "下の桁からの繰り上がりを状態にする"
-      - "状態の種類が少ないことを使う（桁の積を map で・数字の集合を bit で）"
-      - "個数と総和を同時に持つ（総和 += 個数×桁の値）"
+      - {title: "複数の数を同時に決める（フラグを並べる）", anchor: multiple-numbers}
+      - {title: "上限と下限の両方（2 つのフラグ）", anchor: lower-and-upper}
+      - {title: "下の桁からの繰り上がりを状態にする", anchor: carry}
+      - {title: "状態の種類が少ないことを使う（桁の積を map で・数字の集合を bit で）", anchor: sparse-states}
+      - {title: "個数と総和を同時に持つ（総和 += 個数×桁の値）", anchor: count-and-sum}
     merged_keys: []
-    visual: "複数の数の桁を縦に並べ、各数のフラグを並べて持つ図。繰り上がりを下の桁から運ぶ図"
+    visual: {kind: static, priority: 3, text: "複数の数の桁を縦に並べ、各数のフラグを並べて持つ図。繰り上がりを下の桁から運ぶ図"}
     problems:
-      - {id: abc231_e, role: example, summary: "硬貨で払ってお釣りをもらうときの枚数の最小。下の桁から繰り上がりの有無を状態にする"}
-      - {id: abc208_e, role: example, summary: "N 以下で桁の積が K 以下の数。積の種類が少ないので map で状態を持つ"}
-      - {id: abc317_f, role: practice, summary: "3つの数の xor が 0 で各数が A_i の倍数になる組。各数の余りとフラグを並べて持つ"}
-      - {id: abc235_f, role: practice, summary: "N 以下で指定の数字を全部含む数の総和。使った数字の集合を状態にし、個数と総和を同時に持つ"}
-      - {id: abc194_f, role: practice, summary: "16進で N 以下、異なる数字がちょうど K 種類の数"}
-      - {id: abc138_f, role: challenge, summary: "L ≤ x ≤ y ≤ R で y mod x = y xor x となる組。上限と下限のフラグを両方持つ"}
+      - {id: abc231_e, role: example, summary: "各額面が次の額面を割り切る硬貨で X 円を払い、お釣りを受け取るときの、やり取りする硬貨の枚数の最小を求める。", approach: "下の桁から繰り上がりの有無を状態にする（節 carry）"}
+      - {id: abc208_e, role: example, representative: true, summary: "N 以下（N ≤ 10^18）の正の整数のうち、各桁の積が K 以下のものの個数を求める。", approach: "積の種類が少ないので map で状態を持つ（節 sparse-states）"}
+      - {id: abc317_f, role: practice, summary: "N 以下の正の整数の組 (X1, X2, X3) のうち、X1 xor X2 xor X3 = 0 で、各 Xi が A_i の倍数になるものの個数を求める。", approach: "各数の余りとフラグを並べて持つ（節 multiple-numbers）"}
+      - {id: abc235_f, role: practice, summary: "N 以下（N < 10^10000）の正の整数のうち、指定された数字をすべて含むものの総和を求める。", approach: "使った数字の集合を状態にし、個数と総和を同時に持つ（節 count-and-sum）"}
+      - {id: abc194_f, role: practice, summary: "16 進数で N 以下の正の整数のうち、異なる数字がちょうど K 種類のものの個数を求める。", approach: "N と一致している間は使った数字の集合、一致しなくなったら種類数だけを状態にする"}
+      - {id: abc138_f, role: challenge, summary: "L ≤ x ≤ y ≤ R で、y mod x = y xor x を満たす整数の組 (x, y) の個数を求める。", approach: "上限と下限のフラグを両方持ち、最上位ビットが立ったかも状態にする（節 lower-and-upper）"}
     sources: ["02-dp §4.F（digit-dp-advanced）", "02-dp §5.1"]
 
   - id: tree-dp
     chapter: 状態の形で分かれる DP
     title: 木 DP
-    aliases: [木DP, Tree DP, 部分木の DP, 木の上の DP]
+    aliases: [Tree DP, 部分木の DP, 木の上の DP]
     type: technique
     level: 水
-    level_evidence: "水と青の境目。部分木の値を子から集める基本形は典型90 073 (★5)・abc239_e (1084)・abc447_f (1480)・abc133_e (1505)。状態に選択を持つ独立集合型は abc036_d (1602 参考値)・abc387_f (1760)、応用は abc259_f (1961)・abc369_g (2055)・abc246_g (2313)。水の1ページにし、青・黄の応用を節に置く"
+    level_evidence: "部分木の値を子から集める基本形は typical90_bu (★5)・abc239_e (1084)・abc447_f (1480、2026)・abc133_e (1505)。abc319 以降も abc348_e (1347)・abc447_f が水にあり、abc359_g (2099) が黄。子ごとの得を大きい順に取る型は abc259_f (1961) の青、応用は abc369_g (2055)・abc246_g (2313)。根を動かした差分（全方位の入口）は abc220_f (1304)・abc348_e (1347) と水なので、全方位木 DP（青）からこのページの節に移した（design-review §4.2）。独立集合型（EDPC P）は基本形として水に含め、AtCoder Tags の投票だけが裏付けの abc387_f は根拠から外した"
     kind: [DP, 木]
     prerequisites: [dp-basics, tree-traversal]
-    related: [rerooting, tree-dp-square, small-to-large, dsu-on-tree, tree-diameter, dp-decision-binary-search, cpp-stack-depth, static-top-tree]
-    summary: "根を1つ決めると各頂点の部分木は互いに交わらない小問題になるので、dp[v]＝v の部分木について求めた値を、子の値から帰りがけ順に作る。頂点自身の選択（白黒・選ぶか・親との辺を使うか）を状態に足すのが基本形である。"
+    related: [rerooting, tree-dp-square, small-to-large#subtree-merge, tree-diameter, tree-centroid, binary-search-answer#dp-check, cpp-environment#stack-depth, static-top-tree]
+    summary: "根を決めると各頂点の部分木は互いに交わらない小問題になるので、部分木ごとの値を子の値から帰りがけ順に求める。頂点自身の選択（白黒・選ぶか）を状態に足すのが基本形である。"
     signs:
       - {type: phrase, text: "木の各頂点を塗る・選ぶ（隣り合う頂点に条件がある）"}
-      - {type: phrase, text: "辺を選ぶ（次数の上限つき）"}
+      - {type: phrase, text: "木の辺を選ぶ（次数の上限つき）"}
       - {type: phrase, text: "部分木ごとの値（部分木の上位 K 個など）"}
-      - {type: constraint, text: "N ≤ 2×10^5 の木"}
+      - {type: phrase, text: "木の各頂点からほかの全頂点への距離の総和"}
     acl: []
-    frequency: A
+    frequency: B
+    frequency_evidence: "recent 0・前提として 4 ページに届く（直接 4）・古い ABC 10 問"
     sections:
-      - "帰りがけ順に子から集める（再帰なしなら BFS 順の逆）"
-      - "子の値の積・和（数え上げ）"
-      - "頂点の選択を状態に足す（独立集合型）（青）"
-      - "子ごとの「得」を大きい順に取る（青）"
-      - "根から下へ配る"
-      - "二分探索と組み合わせて判定にする（黄）"
-      - "部分木の情報をデータ構造で持ってマージする（マージテク）（黄）"
-      - "落とし穴：再帰の深さ・親への逆流・根の選び方"
+      - {title: "帰りがけ順に子から集める（再帰なしなら BFS 順の逆）", anchor: postorder}
+      - {title: "頂点の選択を状態に足す（独立集合型）", anchor: vertex-states}
+      - {title: "子の値の積・和（数え上げ）", anchor: product-of-children}
+      - {title: "根から下へ配る", anchor: top-down}
+      - {title: "根を動かした差分（全方位の入口）", anchor: reroot-difference}
+      - {title: "子ごとの「得」を大きい順に取る", anchor: greedy-children, level: 青}
+      - {title: "二分探索と組み合わせて判定にする", anchor: with-binary-search, level: 黄}
+      - {title: "部分木の情報をデータ構造で持ってマージする（マージテク）", anchor: tree-dp-merge, level: 黄}
+      - {title: "落とし穴：再帰の深さ・親への逆流・根の選び方", anchor: pitfalls}
     merged_keys: [tree-dp-merge]
-    visual: "葉から根へ値が集まるアニメーション。各頂点の横に dp の組（選ぶ・選ばない）を表示し、親で掛け合わせる式を見せる"
+    visual: {kind: dynamic, priority: 2, text: "葉から根へ値が集まるステップ送り。各頂点の横に dp の組（選ぶ・選ばない）を表示し、親で掛け合わせる式を見せる。根を隣へ移すと距離の和がどれだけ変わるかの図"}
     problems:
-      - {id: dp_p, role: example, summary: "隣り合う頂点を両方黒にしない塗り方の数。頂点ごとに白・黒の2状態を持つ"}
-      - {id: typical90_bu, role: example, summary: "辺を切って各成分に a と b の両方が含まれるようにする方法の数。根側の成分の中身を3状態で持つ"}
-      - {id: abc239_e, role: practice, summary: "部分木に含まれる値の大きい方から K 番目（K ≤ 20）。子の上位20個をまとめて求める"}
-      - {id: abc447_f, role: practice, summary: "次数の条件つきの最長パス。パスの最も浅い頂点で場合分けし、子の長さの上位2つから求める"}
-      - {id: abc133_e, role: practice, summary: "距離2以内の頂点が異なる色になる塗り方の数。根から順に選べる色の数を掛けていく"}
-      - {id: abc259_f, role: practice, summary: "次数の上限つきで辺を選ぶ重みの最大。親との辺を使うかで分け、子の得の大きい順に取る"}
-      - {id: abc359_g, role: challenge, summary: "同じ色の頂点の組の距離の総和。部分木ごとの色の集計を、小さい方から大きい方へ合わせる"}
-      - {id: abc246_g, role: challenge, summary: "木の上の2人ゲーム。答えを二分探索で決め打ちし、木 DP で達成できるかを判定する"}
-    sources: ["02-dp §4.G（tree-dp・tree-dp-merge）", "02-dp §5.1", "02-dp §7.2", "04-tree §4.11（tree-diameter：abc447_f）", "04-tree §4.20（small-to-large）"]
+      - {id: dp_p, role: example, summary: "N 頂点の木の各頂点を白か黒に塗り、黒どうしが隣り合わないようにする方法の数を求める。", approach: "頂点ごとに白・黒の 2 状態を持つ（節 vertex-states）"}
+      - {id: abc220_f, role: example, summary: "N 頂点の木の各頂点について、ほかのすべての頂点への距離の総和を求める。", approach: "根を子へ移すと和が N − 2×（子の部分木のサイズ）だけ変わる（節 reroot-difference）"}
+      - {id: abc447_f, role: example, representative: true, summary: "（執筆時に確かめる）", approach: "次数の条件つきの最長パスを、パスの最も浅い頂点で場合分けし、子の長さの上位 2 つから求める（直径の木 DP と同じ形）"}
+      - {id: typical90_bu, role: practice, summary: "a か b が書かれた木の辺をいくつか切り、どの連結成分にも a と b の両方が含まれるようにする方法の数を求める。", approach: "根側の成分の中身（a だけ・b だけ・両方）の 3 状態で持つ"}
+      - {id: abc239_e, role: practice, summary: "根付き木の各頂点に値があり、頂点 v の部分木に含まれる値の大きい方から K 番目（K ≤ 20）を答えるクエリに答える。", approach: "子の上位 20 個をまとめて求める"}
+      - {id: abc348_e, role: practice, summary: "頂点に重み C_i のついた木で、Σ C_i × d(v, i) を最小にする頂点 v での値を求める。", approach: "根を動かした差分で全頂点の値を求める（重み付き重心でも解ける。節 reroot-difference）"}
+      - {id: abc133_e, role: practice, summary: "N 頂点の木を K 色で塗り、距離 2 以内の頂点どうしが異なる色になる塗り方の数を求める。", approach: "根から順に、選べる色の数を掛けていく（節 top-down）"}
+      - {id: abc259_f, role: practice, summary: "木の辺をいくつか選び、各頂点 i に接する選んだ辺が d_i 本以下になるようにするときの、辺の重みの和の最大を求める。", approach: "親との辺を使うかで分け、子の得の大きい順に取る（節 greedy-children）"}
+      - {id: abc359_g, role: challenge, summary: "各頂点に色がついた木で、同じ色の頂点の組すべてについての距離の総和を求める。", approach: "部分木ごとの色の集計を、小さい方から大きい方へ合わせる（節 tree-dp-merge）"}
+      - {id: abc246_g, role: challenge, summary: "根から駒を子へ進めていく人と、先回りして頂点の値を 0 にしていく人の 2 人ゲームで、両者が最適に行動したときの、駒を止めた頂点の値を求める。", approach: "答えを二分探索で決め打ちし、木 DP で達成できるかを判定する（節 with-binary-search）"}
+    sources: ["02-dp §4.G（tree-dp・tree-dp-merge）", "02-dp §4.G（rerooting：根の移動の差分で済む場合）", "02-dp §5.1", "02-dp §7.2", "04-tree §4.11（tree-diameter：abc447_f）", "04-tree §4.20（small-to-large）"]
 
   - id: rerooting
     chapter: 状態の形で分かれる DP
     title: 全方位木 DP
-    aliases: [全方位木DP, ReRooting, Rerooting, 換根DP, 根の移動]
+    aliases: [Rerooting, ReRooting DP, 換根 DP]
     type: technique
     level: 青
-    level_evidence: "根の移動による差分で済む距離の和は abc220_f (1304)・abc348_e (1347) と水にあるが、一般の全方位木 DP が必要な問題は abc222_f (1934)・abc160_f (2048)・abc337_g (2080)・abc223_g (2351)。青に置き、水の例を入口にする"
+    level_evidence: "一般の全方位木 DP が必要な問題は abc222_f (1934)・abc160_f (2048)・abc223_g (2351)。根の移動の差分で済む距離の和（abc220_f 1304 など）は水なので木 DP のページの節に移し、このページには使い分けの節（when-to-use）だけを残した（design-review §4.2）。abc319 以降で一般の全方位木 DP が要る ABC は確かめられていない（research/02 が根拠に挙げた 2024 年の G は、research/04 がオイラーツアーの問題としているので外した。open_issues 参照）"
     kind: [DP, 木]
     prerequisites: [tree-dp, prefix-sum]
-    related: [tree-diameter, tree-edge-contribution, centroid-decomposition]
-    summary: "すべての頂点を根としたときの木 DP の値を、1回目の DFS で下向きの値、2回目の DFS で親側の部分木の値を子へ渡して O(N) で求める。兄弟を除いた合成は左右からの累積で作るので、逆元が要らない。"
+    related: [tree-diameter#eccentricity, tree-edge-contribution#edge-pairs, centroid-decomposition]
+    summary: "すべての頂点を根としたときの木 DP の値を、下向きの値と親側の部分木の値を 2 回の DFS で求めて O(N) で出す。兄弟を除いた合成は左右からの累積で作るので逆元が要らない。"
     signs:
       - {type: phrase, text: "すべての頂点について、その頂点を根（起点）としたときの値"}
-      - {type: phrase, text: "各頂点から最も遠い頂点までの距離（重み付き）"}
-      - {type: phrase, text: "各頂点からほかの全頂点への距離の総和"}
+      - {type: phrase, text: "各頂点から最も遠い頂点までの距離（頂点や辺の重みつき）"}
+      - {type: shape, text: "根を v としたときの木 DP の値を、すべての v について求めたい（N 回の木 DP は O(N^2)）"}
     acl: []
     frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 4 問"
     sections:
-      - "根を隣へ移すと変わるのは親側の部分木だけ"
-      - "根の移動の差分で済む場合（距離の総和）（水）"
-      - "一般の枠組み（子の値の合成と「根を付ける」操作を分ける）"
-      - "自分以外の兄弟の合成（左右からの累積）"
-      - "落とし穴：親側の値から自分自身の寄与を除き忘れる"
+      - {title: "根を隣へ移すと変わるのは親側の部分木だけ", anchor: what-changes}
+      - {title: "一般の枠組み（子の値の合成と「根を付ける」操作を分ける）", anchor: framework}
+      - {title: "自分以外の兄弟の合成（左右からの累積）", anchor: exclude-self}
+      - {title: "使い分け（最遠点は直径の性質で、距離の総和は根の移動の差分で済む）", anchor: when-to-use}
+      - {title: "落とし穴：親側の値から自分自身の寄与を除き忘れる", anchor: pitfalls}
     merged_keys: []
-    visual: "根を隣の頂点へ移すとき変わるのは親側の部分木の値だけであることを、色分けした木のステップ送りで示す"
+    visual: {kind: static, priority: 2, text: "根を隣の頂点へ移すとき変わるのは親側の部分木の値だけであることを、色分けした木で示す図"}
     problems:
-      - {id: abc220_f, role: example, summary: "各頂点からほかの全頂点への距離の総和。根を子へ移すと和が N − 2×（子の部分木のサイズ）だけ変わる"}
-      - {id: dp_v, role: example, summary: "各頂点を含む連結な黒の塗り方の数。mod が素数でないので、左右からの累積で1つを除いた積を作る"}
-      - {id: abc348_e, role: practice, summary: "重み付きの距離の和を最小にする頂点を求める"}
-      - {id: abc222_f, role: practice, summary: "各頂点から、観光のコストを含めて最も遠い頂点までの値"}
-      - {id: abc160_f, role: practice, summary: "各頂点を起点に番号を書き込む順の数を、すべての頂点について求める"}
-      - {id: tdpc_tree, role: practice, summary: "辺を連結なまま描く順番の数。すべての根について木 DP する（全方位でも書ける）"}
+      - {id: dp_v, role: example, summary: "木の各頂点 v について、v を含み黒の頂点が連結になる塗り方の数を M で割った余りを求める（M は素数とは限らない）。", approach: "左右からの累積で 1 つを除いた積を作る（逆元を使わない。節 exclude-self）"}
+      - {id: abc222_f, role: example, representative: true, summary: "辺と頂点に費用がある木で、各頂点から出発してほかの頂点へ観光に行くときの費用の最大を、すべての出発点について求める。", approach: "子からの値に頂点の費用を足して合成する全方位木 DP"}
+      - {id: abc160_f, role: practice, summary: "木の各頂点 k について、k に 1 を書き、書いた頂点に隣接する頂点へ 2, 3, … と順に書いていく方法の数を求める。", approach: "部分木のサイズの多項係数を、全方位木 DP で全頂点について求める"}
+      - {id: tdpc_tree, role: practice, summary: "木の辺を、描いた辺がつねに連結になるように 1 本ずつ描く順番の数を求める。", approach: "すべての根について木 DP する（全方位でも書ける）"}
+    problems_note: "abc319 以降で一般の全方位木 DP が要る ABC は research で確かめられていない（abc348_e は根を動かした差分で済むので木 DP のページの節に置いた）。工程 8b の前の問題の補充で探す"
     sources: ["02-dp §4.G（rerooting）", "02-dp §5.1", "02-dp §7.2"]
 
   - id: tree-dp-square
     chapter: 状態の形で分かれる DP
-    title: 二乗の木 DP（部分木のサイズで抑える）
-    aliases: [2乗の木DP, 二乗の木DP, O(N^2) の木 DP, 木の上のナップサック]
+    title: 二乗の木 DP
+    aliases: [2 乗の木 DP, O(N^2) の木 DP, 木の上のナップサック]
     type: technique
     level: 黄
     level_evidence: "abc287_f (2034)・arc171_c (2244)・abc207_f (2398)。発展は arc130_d (2437)・arc121_e (2645)・arc101_c (2913)"
     kind: [DP, 木]
     prerequisites: [tree-dp, knapsack-01]
     related: [small-to-large, subset-sum]
-    summary: "子の配列（長さ＝部分木のサイズ＋1）を順にマージするとき、1回のコストが「それまでのサイズ×新しい子のサイズ」なら全体は O(N^2) で済む。どの頂点の組も、LCA でのマージのときにちょうど1回だけ数えられるからである。"
+    summary: "子の配列を順にマージする木の上のナップサックのような DP は、配列の長さを部分木のサイズに合わせると全体 O(N^2) で済む。どの頂点の組も、LCA でのマージで 1 回だけ数えられるからである。"
     signs:
       - {type: constraint, text: "N ≤ 2000〜5000 の木"}
       - {type: phrase, text: "部分木から K 個選ぶ・連結成分の数ごとに数える"}
-      - {type: phrase, text: "O(N^3) に見える木の上のナップサック"}
+      - {type: shape, text: "dp[v][k] を子の dp[c][j] との (k, j) の組の全探索でマージしていて、O(N^3) に見える"}
     acl: []
-    frequency: B
+    frequency: C
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 2 問"
     sections:
-      - "O(N^2) で済む理由（頂点の組が LCA で1回だけ数えられる）"
-      - "配列の長さを部分木のサイズに合わせる"
-      - "サイズを K で打ち切ると O(NK)"
-      - "頂点の状態と個数を同時に持つ"
+      - {title: "O(N^2) で済む理由（頂点の組が LCA で 1 回だけ数えられる）", anchor: why-n2}
+      - {title: "配列の長さを部分木のサイズに合わせる", anchor: size-bounded}
+      - {title: "サイズを K で打ち切ると O(NK)", anchor: cap-k}
+      - {title: "頂点の状態と個数を同時に持つ", anchor: state-and-count}
     merged_keys: []
-    visual: "2つの部分木の頂点の組を線で結び、どの組も LCA で1回だけ数えられることを示す図（O(N^2) の証明）"
+    visual: {kind: static, priority: 2, text: "2 つの部分木の頂点の組を線で結び、どの組も LCA で 1 回だけ数えられることを示す図（O(N^2) の証明）"}
     problems:
-      - {id: abc287_f, role: example, summary: "頂点の部分集合ごとの連結成分の数を、成分の数ごとに数える。部分木のサイズまでの配列をマージする"}
-      - {id: arc171_c, role: practice, summary: "辺の交換操作で作れる列の数。子の数と選んだ辺の数を状態にする"}
-      - {id: abc207_f, role: practice, summary: "見張られる頂点の数ごとに置き方を数える。頂点の3状態と個数を持ち、O(N^2) で合わせる"}
-      - {id: tdpc_eel, role: practice, summary: "木から K 本の互いに交わらないパスを選ぶ数。本数と上へ伸びる本数を状態にする"}
-      - {id: arc130_d, role: challenge, summary: "ジグザグになる番号の付け方の数。部分木の中での順位を状態にして合わせる"}
+      - {id: abc287_f, role: example, representative: true, summary: "木の頂点の空でない部分集合のうち、選んだ頂点が作る連結成分の個数が x になるものの数を、x = 1〜N のすべてについて求める。", approach: "部分木のサイズまでの配列をマージする"}
+      - {id: arc171_c, role: practice, summary: "（執筆時に確かめる）", approach: "辺の交換操作で作れる列の数。子の数と選んだ辺の数を状態にする"}
+      - {id: abc207_f, role: practice, summary: "木のいくつかの頂点に見張りを置き、置いた頂点とその隣が見張られるとき、見張られる頂点の数がちょうど k になる置き方の数を k = 0〜N について求める。", approach: "頂点の 3 状態と個数を持ち、O(N^2) で合わせる（節 state-and-count）"}
+      - {id: tdpc_eel, role: practice, summary: "木から、互いに共有しない K 本のパスを選ぶ方法の数を求める。", approach: "本数と上へ伸びる本数を状態にする"}
+      - {id: arc130_d, role: challenge, summary: "木の各頂点に 1〜N を 1 つずつ書き、どの頂点も隣接する頂点すべてより大きいか、すべてより小さいようにする方法の数を求める。", approach: "部分木の中での順位を状態にして合わせる"}
     sources: ["02-dp §4.G（tree-dp-square）", "02-dp §5.1"]
 
   - id: insertion-dp
     chapter: 状態の形で分かれる DP
-    title: 挿入 DP・箱根駅伝 DP（順列の数え上げ）
-    aliases: [挿入DP, 挿入 DP, 相対順位の DP, 順列の DP, 箱根駅伝DP, 箱根駅伝 DP, 箱根DP, 連結成分 DP, Connected Component DP]
+    title: 挿入 DP・箱根駅伝 DP
+    aliases: [相対順位の DP, 順列の DP, 箱根 DP, Insertion DP, 連結成分 DP, Connected Component DP]
     type: technique
     level: 黄
-    level_evidence: "挿入 DP は EDPC T と同型の abc209_f (2307)、発展に abc282_g (2412)・abc267_g (2561)。2026 年は abc468_g (1975)・abc473_g (1974、確率と組む) と青の上端の G が続いた。箱根駅伝 DP は abc309_g (2372)・abc134_f (2532) の2問だけなので、同じ「順列を相対的な情報で数える」系統としてこのページの節にした（設計書 §4.3）。連結成分 DP は ABC の例がなく発展の節"
+    level_evidence: "挿入 DP は EDPC T と同型の abc209_f (2307)、発展に abc282_g (2412)・abc267_g (2561)。2026 年は abc468_g (1975)・abc473_g (1974、確率と FPS を組む) と青の上端の G が続いたが、ほかは黄以上なので黄のままにした。abc468_g・abc473_g のように青の帯に出続けたら下げる（design-review §3）。箱根駅伝 DP は abc309_g (2372)・abc134_f (2532) の 2 問だけなので、同じ「順列を相対的な情報で数える」系統としてこのページの節にした（設計書 §4.3）。連結成分 DP は ABC の例がなく発展の節"
     kind: [DP, 数え上げ]
     prerequisites: [dp-state-design, dp-prefix-sum]
-    related: [inclusion-exclusion-dp, counting-fix-order, dp-counting-dedup]
-    summary: "順列そのものではなく、決めた部分の相対順位や「まだ相手が決まっていない要素の数」だけを状態にして順列を数える。隣り合う大小関係が指定された順列は、最後の要素の相対順位を状態にすると累積和で O(N^2) になる。"
+    related: [inclusion-exclusion-dp#count-violations, counting-fix-order#relative-order, counting-dedup]
+    summary: "順列を、決めた部分の相対順位や「相手が未定の要素の数」だけを状態にして数える。隣り合う大小関係が指定された順列は、最後の要素の相対順位を状態にし累積和で O(N^2) になる。"
     signs:
       - {type: phrase, text: "順列で隣り合う大小関係（< と >）が指定される"}
       - {type: phrase, text: "|p_i − i| の和がちょうど K の順列の数"}
       - {type: phrase, text: "値の小さい順に、列の好きな位置へ挿入していく"}
       - {type: constraint, text: "N ≤ 3000 程度の順列の数え上げ"}
     acl: []
-    frequency: B
+    frequency: A
+    frequency_evidence: "recent 2（abc468_g・abc473_g）・前提として届くページなし・古い ABC 5 問"
     sections:
-      - "相対順位を状態にする（最後の要素が何番目か）"
-      - "遷移は区間になるので累積和でまとめる"
-      - "値の大きい（小さい）順に挿入していく見方"
-      - "箱根駅伝 DP（相手が未定の位置と値の数を持つ）"
-      - "連結成分 DP（ブロックを作る・端に付ける・つなぐ）（発展）"
+      - {title: "相対順位を状態にする（最後の要素が何番目か）", anchor: relative-rank}
+      - {title: "遷移は区間になるので累積和でまとめる", anchor: prefix-sum}
+      - {title: "値の大きい（小さい）順に挿入していく見方", anchor: insert-by-value}
+      - {title: "箱根駅伝 DP（相手が未定の位置と値の数を持つ）", anchor: hakone-ekiden-dp}
+      - {title: "連結成分 DP（ブロックを作る・端に付ける・つなぐ）", anchor: connected-component-dp, level: 発展}
     merged_keys: [hakone-ekiden-dp, connected-component-dp]
-    visual: "不等号列 <>< に沿って相対順位の表を1列ずつ埋め、新しい要素が入れる範囲を帯で示す。位置と値を2列に並べて左から線を結び、結ばれていない端の数を状態として表示するステップ送り"
+    visual: {kind: dynamic, priority: 3, text: "不等号列 <>< に沿って相対順位の表を 1 列ずつ埋め、新しい要素が入れる範囲を帯で示す。位置と値を 2 列に並べて左から線を結び、結ばれていない端の数を状態として表示する（静的な図で代えてよい）"}
     problems:
-      - {id: dp_t, role: example, summary: "隣り合う大小関係が指定された順列の数。最後の要素の相対順位を状態にし、累積和で O(N^2)"}
-      - {id: abc134_f, role: example, summary: "|p_i − i| の和がちょうど K の順列の数。左から見て相手が未定の位置と値の数を状態にする（箱根駅伝 DP）"}
-      - {id: abc468_g, role: practice, summary: "制約のついた順列を挿入 DP で数える（2026 年の G）"}
-      - {id: abc209_f, role: practice, summary: "木を切る順番でコストが最小になる順序の数。隣どうしの大小関係の列に言い換えて EDPC T と同じ形にする"}
-      - {id: abc309_g, role: practice, summary: "|p_i − i| ≥ X の順列の数。包除で違反する位置を選び、近い位置の値の使用状況を bit で持つ"}
-      - {id: tdpc_string, role: practice, summary: "同じ文字が隣り合わない並べ方の数。文字を種類ごとに挿入し、隣り合う同じ文字の組の数を状態にする"}
-      - {id: abc282_g, role: challenge, summary: "2つの順列で、隣り合う大小関係が一致する位置の数が K になる組。2つの相対順位を状態にする"}
-      - {id: abc267_g, role: challenge, summary: "A_i < A_{i+1} がちょうど K 回の並べ方。値の小さい順に挿入して、増える回数を数える"}
+      - {id: dp_t, role: example, summary: "隣り合う要素の大小関係（< と >）が文字列で指定されたとき、それを満たす 1〜N の順列の個数を求める。", approach: "最後の要素の相対順位を状態にし、累積和で O(N^2)"}
+      - {id: abc209_f, role: example, representative: true, summary: "N 本の木を 1 本ずつ切り、切る木とその両隣の現在の高さの和がコストになるとき、コストの合計が最小になる切る順番の数を求める。", approach: "隣どうしのどちらを先に切るかの列に言い換えて、EDPC T と同じ形にする"}
+      - {id: abc134_f, role: example, summary: "1〜N の順列 p のうち、Σ |p_i − i| がちょうど K になるものの個数を求める。", approach: "左から見て相手が未定の位置と値の数を状態にする（節 hakone-ekiden-dp）"}
+      - {id: abc468_g, role: practice, summary: "（執筆時に確かめる）", approach: "挿入 DP（research/00 §2.3.8 の分類）"}
+      - {id: abc309_g, role: practice, summary: "1〜N の順列 p のうち、すべての i で |p_i − i| ≥ X を満たすものの個数を求める（X ≤ 5）。", approach: "包除で違反する位置を選び、近い位置の値の使用状況を bit で持つ"}
+      - {id: tdpc_string, role: practice, summary: "各文字の個数が決まった文字を並べる方法のうち、同じ文字が隣り合わないものの個数を求める。", approach: "文字を種類ごとに挿入し、隣り合う同じ文字の組の数を状態にする（節 insert-by-value）"}
+      - {id: abc282_g, role: challenge, summary: "1〜N の順列の組 (P, Q) のうち、隣り合う要素の大小関係が P と Q で一致する位置の数がちょうど K になるものの個数を求める。", approach: "2 つの相対順位を状態にする"}
+      - {id: abc267_g, role: challenge, summary: "数列の並べ替えのうち、A_i < A_{i+1} となる i がちょうど K 個あるものの個数を求める。", approach: "値の小さい順に挿入して、増える回数を数える（節 insert-by-value）"}
     sources: ["02-dp §4.H（insertion-dp・hakone-ekiden-dp・connected-component-dp）", "02-dp §5.1", "00-curriculum §2.3.8（abc468_g・abc473_g）"]
 
   # ── 第4章 DP の高速化 ──────────────────────────────
 
   - id: dp-speedup-overview
     chapter: DP の高速化
-    title: DP の高速化の全体像（遷移の形から道具を選ぶ）
-    aliases: [DP高速化, DP の高速化, DP 最適化, 遷移の高速化]
-    type: technique
-    level: 水
-    level_evidence: "累積和による高速化が abc179_d (1251)・abc183_e (1288) から必要になり、以後の高速化はすべて「遷移の形を見て道具を当てる」同じ考え方で整理できる（横断の入口ページ）。CHT などの発展の手法は、設計書 §4.3 のとおり名前と使いどころだけをここで早めに見せる"
-    kind: [DP]
-    prerequisites: [dp-basics, dp-state-design]
-    related: [dp-prefix-sum, dp-segment-tree, inline-dp, dp-matrix-power, dp-dimension-reduction, bitset-speedup, cht, monge, alien-dp, slope-trick]
-    summary: "DP の高速化は「状態数を減らす」か「1つの遷移を速くする」かのどちらかである。貰う形の式を書き、右辺の形（区間の和・区間の最小・一次関数の最小・同じ線形の遷移の繰り返しなど）を見て、累積和・セグ木・行列累乗・CHT などの道具を選ぶ。"
+    title: DP の高速化の選び方
+    aliases: [DP の高速化, DP 高速化, DP 最適化, DP Optimization, 遷移の高速化]
+    type: hub
+    level: null
+    level_evidence: null
+    kind: [DP, 案内]
+    prerequisites: [dp-basics]
+    related: [dp-prefix-sum, dp-segment-tree, inline-dp, dp-dimension-reduction, bitset-speedup#subset-sum-shift, online-convolution#dp-as-polynomial, fps-basics, matrix-power#dp-transition, cht, monge, alien-dp, slope-trick]
+    summary: "素直な DP が間に合わないとき、貰う形の式の右辺の形（区間の和・区間の最小・多項式の積・同じ線形の遷移の繰り返し・一次関数の最小など）から速くする道具を選ぶ。"
     signs:
-      - {type: phrase, text: "素直な DP の計算量が1〜2桁足りない"}
-      - {type: phrase, text: "遷移元が区間・一次関数・単調に動く範囲になっている"}
+      - {type: shape, text: "素直に書いた DP の遷移が状態 1 つあたり O(N) かかり、全体で O(N^2) になる"}
     acl: []
-    frequency: A
     sections:
-      - "状態を減らすか、遷移を速くするか"
-      - "貰う形の式を書いて右辺の形を見る"
-      - "早見表：遷移の形 → 道具（累積和・セグ木・スライド最小値・インライン DP・bitset・行列累乗・畳み込み・CHT・Monge・Alien DP・Slope Trick）"
-      - "発展の高速化の名前と使いどころ（CHT・Monge・Alien DP・Slope Trick）"
-      - "落とし穴：式を書かずに道具から考える・累積和とセグ木の取り違え"
+      - {title: "状態を減らすか、遷移を速くするか", anchor: two-directions}
+      - {title: "貰う形の式を書き、右辺の形を見る", anchor: read-the-recurrence}
+      - {title: "早見表：遷移の形から道具を選ぶ", anchor: shape-to-tool}
+      - {title: "多項式の積・同じ線形の遷移の繰り返し（畳み込み・行列累乗へ）", anchor: algebraic-tools}
+      - {title: "凸性を使う高速化（CHT・Monge・Alien DP・Slope Trick）の使いどころ", anchor: convexity}
+      - {title: "落とし穴：式を書かずに道具から考える・累積和とセグメント木の取り違え", anchor: pitfalls}
     merged_keys: []
-    visual: "「遷移の形 → 道具」の早見表を、式の形ごとの小さな図（区間の帯・直線の集まり・行列）と並べる"
+    visual: {kind: static, priority: 2, text: "早見表の行（式の形 → 道具 → ページ）：区間の和 → 累積和（dp-prefix-sum）、区間の min・max → セグメント木（dp-segment-tree）、窓が単調に動く min → スライド最小値（dp-segment-tree）、前の段がほぼ写る・一律の加算 → インライン DP（inline-dp）、可否の遷移 → bitset（bitset-speedup）、多項式の積（和が s になる組の数・自分より前の値との畳み込み）→ 畳み込み・分割統治 FFT（math/online-convolution）、同じ線形の遷移の繰り返し（ステップ数が巨大）→ 行列累乗・ダブリング（math/matrix-power）、一次関数の min → CHT（cht）、Monge なコスト → monotone minima・Knuth-Yao（monge）、ちょうど K 個で凸 → Alien DP（alien-dp）、区分線形凸 → Slope Trick（slope-trick）、状態が多すぎる → 状態の削減（dp-dimension-reduction）。各行に式の形の小さな図を添える"}
     problems:
-      - {id: typical90_cl, role: challenge, summary: "素朴な DP から段階的に速くしていく総合問題（典型90問の最終問題）"}
-    sources: ["02-dp §4.J（dp-speedup-overview）", "02-dp §2.5", "02-dp §6.1", "02-dp §6.2"]
-
-  - id: dp-prefix-sum
-    chapter: DP の高速化
-    title: 累積和・いもす法による DP の高速化
-    aliases: [累積和DP, 累積和 DP, いもす法 DP, 累積和で遷移をまとめる]
-    type: technique
-    level: 水
-    level_evidence: "abc222_d (865)・abc178_d (875)・abc253_e (1073) の緑から現れ、abc179_d (1251)・abc183_e (1288) で典型になる。応用は abc130_e (1676)・abc207_e (1820)・abc311_f (1984)・abc132_f (2143)・abc265_f (2290)"
-    kind: [DP, 累積和・差分]
-    prerequisites: [dp-basics, prefix-sum, imos]
-    related: [dp-segment-tree, inline-dp, prefix-sum-2d, dp-sequence-partition, insertion-dp, dp-grid]
-    summary: "貰う形で遷移元が連続した区間なら、前の段の累積和を作って区間の和を O(1) で取る。配る形で遷移先が連続した区間なら、いもす法で差分に書いて後でまとめる。どちらも区間の長さの分だけ計算量を減らす。"
-    signs:
-      - {type: phrase, text: "遷移元（遷移先）が連続した範囲になっている"}
-      - {type: phrase, text: "dp[i] = Σ_{j=i−R}^{i−L} dp[j] の形"}
-      - {type: constraint, text: "素直に書くと O(N·K·K) で、ちょうど1桁多い"}
-    acl: []
-    frequency: A
-    sections:
-      - "貰う形と累積和・配る形といもす法"
-      - "同じ段の累積和（上限つきの配り方）"
-      - "区間の和集合・方向ごとの累積（縦・横・斜め）"
-      - "余りごとの累積（青）"
-      - "2次元の累積（青）"
-      - "落とし穴：累積和を更新しながら使う順番・区間の端・mod の差が負になる"
-    merged_keys: []
-    visual: "dp 配列の下に累積和の配列を並べ、区間の和が2つの値の差で取れる様子のステップ送り"
-    problems:
-      - {id: dp_m, role: example, summary: "子どもに上限つきで飴を配る方法の数。前の段の累積和で区間からの遷移を O(1) にする"}
-      - {id: abc179_d, role: example, summary: "いくつかの区間に含まれる歩幅でマス N まで進む方法の数。区間ごとに累積和の差を足す"}
-      - {id: abc178_d, role: practice, summary: "各項が 3 以上で和が S の数列の数。累積和で遷移をまとめる"}
-      - {id: typical90_ap, role: practice, summary: "各桁の和が K になる 9 の倍数の数。直前 9 項の和を累積和で取る"}
-      - {id: abc253_e, role: practice, summary: "隣り合う差が K 以上の列の数。遷移元が2つの区間になり、累積和で速くする"}
-      - {id: tdpc_semiexp, role: practice, summary: "連続して止まる駅の数に制限がある準急の停車駅の選び方。累積和（と余事象）で遷移をまとめる"}
-      - {id: abc207_e, role: practice, summary: "k 番目の区間の和が k で割り切れる区切り方の数。区間の番号ごとに余りの累積を持つ"}
-      - {id: abc265_f, role: challenge, summary: "2点からのマンハッタン距離がともに D 以下の点の数。斜め方向の累積和で遷移する"}
-    sources: ["02-dp §4.J（dp-prefix-sum）", "02-dp §5.1", "02-dp §5.3", "02-dp §7.2"]
+      - {id: typical90_cl, role: challenge, summary: "（執筆時に確かめる）", approach: "素朴な DP から段階的に速くしていく総合問題（典型 90 問の最終問題）"}
+    sources: ["02-dp §4.J（dp-speedup-overview）", "02-dp §4.J（dp-matrix-power・dp-convolution の位置づけ）", "02-dp §2.5", "02-dp §6.1", "02-dp §6.2"]
 
   - id: dp-segment-tree
     chapter: DP の高速化
-    title: セグ木・スライド最小値による DP の高速化
-    aliases: [セグ木DP, セグ木 DP, BIT DP, 値を添字にした DP, スライド最小値, deque DP, 単調スタック DP]
+    title: セグメント木・スライド最小値による DP の高速化
+    aliases: [セグ木 DP, BIT で DP を速くする, 値を添字にした DP, deque DP, 単調スタック DP]
     type: technique
     level: 青
-    level_evidence: "abc353_g (1765)・arc026_3 (1930 参考値)・典型90 037 (★5)・EDPC Q。kmjp 氏の ABC G の解説でもセグ木を使う DP は 2000 前後に多い（abc410_g 2242 など）。スライド最小値・単調スタックの遷移は abc359_e (1275) など少なく、節にした"
+    level_evidence: "abc353_g (1765、2024)・arc026_3 (1930 参考値)・typical90_ak (★5)・EDPC Q。kmjp 氏の ABC G の解説でもセグメント木を使う DP は 2000 前後に多い（abc410_g 2242 など）。abc319 以降は abc339_e (1109)・abc359_e (1275)・abc353_g (1765)・abc410_g (2242) と広がるが、易しい 2 問は値を添字にしたセグメント木（ds）や単調スタックそのものが主で、DP の遷移を設計させる問題は青。スライド最小値・単調スタックの遷移は少ないので節にした"
     kind: [DP, 区間クエリ, 尺取り・スライド窓]
-    prerequisites: [dp-prefix-sum, segment-tree, coordinate-compression]
-    related: [segtree-on-values, sliding-window-minimum, monotonic-stack, fenwick-tree, lis, inline-dp, cht]
-    summary: "遷移元が添字や値の任意の範囲の min・max・和なら、dp の値をセグ木（和なら BIT）に載せて1回 O(log N) で取る。遷移元の窓が単調に右へ動くだけなら、単調 deque のスライド最小値でならし O(1) にできる。"
+    prerequisites: [dp-prefix-sum, segment-tree-on-values]
+    related: [monotonic-stack#sliding-window-minimum, segment-tree#dp, fenwick-tree, lis, inline-dp, cht, dp-speedup-overview]
+    summary: "遷移元が添字や値の範囲の最小・最大・和になる DP を、dp の値をセグメント木に載せて 1 回 O(log N) にする。遷移元の窓が単調に動くだけなら、スライド最小値でならし O(1) にできる。"
     signs:
-      - {type: phrase, text: "遷移元が添字や値の範囲の最小・最大"}
-      - {type: phrase, text: "|x − y| を含む遷移（x < y と x > y に分ける）"}
-      - {type: phrase, text: "直近 K 個からの遷移の最小（窓が単調に動く）"}
-      - {type: constraint, text: "N ≤ 2×10^5 で素直な DP が O(N^2)"}
+      - {type: phrase, text: "隣り合う要素の差が D 以下になるように選ぶ部分列の最長"}
+      - {type: shape, text: "dp[i] = max_{j < i, l ≤ a_j ≤ r} dp[j] + c のように、遷移元が添字や値の範囲の最小・最大"}
+      - {type: shape, text: "遷移のコストに |x_i − x_j| を含む（x_j < x_i と x_j > x_i で分けられる）"}
+      - {type: shape, text: "dp[i] = min_{i−K ≤ j < i} dp[j] + c（窓が単調に動く）"}
     acl: [segtree, fenwick_tree]
-    frequency: A
+    frequency: B
+    frequency_evidence: "recent 0・前提として 1 ページに届く（直接 1）・古い ABC 4 問"
     sections:
-      - "dp の値を位置や値を添字にしたセグ木に載せる（座標圧縮）"
-      - "|x − y| を左右に分けて2本のセグ木に"
-      - "区間を覆う最小コスト（右端までの最小）"
-      - "スライド最小値（単調 deque）と単調スタックによる遷移"
-      - "セグ木・累積和・スライド最小値の使い分け"
-      - "落とし穴：初期値（−∞）・更新と取得の順番（同じ i の値を使わない）"
+      - {title: "dp の値を位置や値を添字にしたセグメント木に載せる（座標圧縮）", anchor: values-on-segment-tree}
+      - {title: "|x − y| を左右に分けて 2 本のセグメント木に", anchor: split-abs}
+      - {title: "区間を覆う最小コスト（右端までの最小）", anchor: interval-cover}
+      - {title: "スライド最小値（単調 deque）と単調スタックによる遷移", anchor: dp-sliding-window}
+      - {title: "セグメント木・累積和・スライド最小値の使い分け", anchor: which-tool}
+      - {title: "落とし穴：初期値（−∞）・更新と取得の順番（同じ i の値を使わない）", anchor: pitfalls}
     merged_keys: [dp-sliding-window]
-    visual: "dp 配列をセグ木の葉に並べ、遷移のたびに区間の最大値を取って1点更新するステップ送り。deque の中身を窓の移動に合わせて出し入れするステップ送り"
+    visual: {kind: dynamic, priority: 2, text: "dp 配列をセグメント木の葉に並べ、遷移のたびに区間の最大値を取って 1 点更新するステップ送り。deque の中身を窓の移動に合わせて出し入れするステップ送り"}
     problems:
-      - {id: dp_q, role: example, summary: "花の高さを添字にしたセグ木で、低い花からの美しさの和の最大を取る"}
-      - {id: typical90_ak, role: example, summary: "材料の量に範囲があるナップサック。前の段の区間の最大値をセグ木で取る"}
-      - {id: abc339_e, role: practice, summary: "隣り合う要素の差が D 以下の部分列の最大の長さ。値を添字にした dp を区間 max のセグ木で更新する"}
-      - {id: abc359_e, role: practice, summary: "水槽に水が溜まる時刻。手前の高い仕切りまでを単調スタックで求めて遷移する"}
-      - {id: abc353_g, role: practice, summary: "町を移動しながら市場に参加する利益の最大。|x − y| の費用を左右に分け、2本のセグ木で持つ"}
-      - {id: arc026_3, role: practice, summary: "区間を照らす蛍光灯を選んで全体を覆う費用の最小。右端までの最小をセグ木で取る"}
-      - {id: abc410_g, role: challenge, summary: "円上の弦を交差しないように最大個数残す。区間の入れ子の深さをセグ木の区間最大で求める"}
+      - {id: dp_q, role: example, summary: "高さが相異なる花の列から、高さが左から単調増加になるように選ぶときの美しさの和の最大を求める。", approach: "花の高さを添字にしたセグメント木で、低い花からの美しさの和の最大を取る"}
+      - {id: typical90_ak, role: example, summary: "N 種類の材料をそれぞれ L_i〜R_i グラム（または使わない）で使い、合計をちょうど W グラムにするときの価値の和の最大を求める。", approach: "前の段の区間の最大値をセグメント木（スライド最小値でもよい）で取る"}
+      - {id: abc353_g, role: example, representative: true, summary: "順に開かれる市場へ町の間を移動しながら参加するとき、移動費（C×距離）を引いた利益の最大を求める。", approach: "|x − y| の費用を左右に分け、2 本のセグメント木で持つ（節 split-abs）"}
+      - {id: abc339_e, role: practice, summary: "数列から部分列を選び、隣り合う要素の差の絶対値が D 以下になるようにするときの長さの最大を求める。", approach: "値を添字にした dp を区間 max のセグメント木で更新する"}
+      - {id: abc359_e, role: practice, summary: "仕切りの高さが決まった水槽の列の左端から水を 1 ずつ入れていくとき、各水槽に初めて水が入る時刻を求める。", approach: "手前の高い仕切りまでを単調スタックで求めて遷移する（節 dp-sliding-window）"}
+      - {id: arc026_3, role: practice, summary: "区間を照らす蛍光灯を選び、区間全体を照らすときの費用の最小を求める。", approach: "右端までの最小をセグメント木で取る（節 interval-cover）"}
+      - {id: abc410_g, role: challenge, summary: "（執筆時に確かめる）", approach: "円上の弦の入れ子の深さを、セグメント木の区間最大で求める DP"}
     sources: ["02-dp §4.J（dp-segment-tree・dp-sliding-window）", "02-dp §5.1", "05-ds §4.C（segtree-on-values：abc339_e）", "05-ds §4.A（sliding-window-minimum）"]
 
   - id: inline-dp
     chapter: DP の高速化
-    title: インライン DP（配列を使い回して一括更新する）
-    aliases: [インラインDP, インライン DP, in-place DP, 遅延セグ木 DP]
+    title: インライン DP
+    aliases: [in-place DP, Inline DP, 配列を使い回して一括更新, 遅延セグ木 DP]
     type: technique
     level: 青
-    level_evidence: "abc271_e (1402)・abc372_f (1722)・abc203_e (1750)・abc353_g (1765)・abc038_d (1804 参考値)。EDPC W は遅延セグ木で一括更新する典型。2026 年に abc480_g (2100、DP と遅延セグ木と単調スタック)"
+    level_evidence: "abc271_e (1402)・abc372_f (1722、2024)・abc203_e (1750)・abc353_g (1765)・abc038_d (1804 参考値)。EDPC W は遅延セグメント木で一括更新する典型。2026 年に abc480_g (2100、DP と遅延セグメント木と単調スタック)"
     kind: [DP, 区間クエリ]
     prerequisites: [dp-segment-tree, lazy-segment-tree, knapsack-01]
-    related: [dp-dimension-reduction, lazy-segtree-patterns, global-offset, lis, monotonic-stack]
-    summary: "dp[i][*] から dp[i+1][*] へほとんどの値がそのまま写るなら、配列を1本だけ持って変わる場所だけを書き換える。全体への一律の加算や区間への加算が入るなら遅延セグ木で、全体の平行移動なら添字のずらしで表す。"
+    related: [dp-dimension-reduction, lazy-segment-tree-patterns, global-offset#offset, lis, monotonic-stack#dp-transition]
+    summary: "dp[i][*] から dp[i+1][*] へほとんどの値がそのまま写るとき、配列を 1 本だけ持って変わる場所だけを書き換える。一律の加算や区間加算は遅延セグメント木で、全体の平行移動は添字のずらしで表す。"
     signs:
-      - {type: phrase, text: "dp[i][*] から dp[i+1][*] で変わる場所が少ない"}
-      - {type: phrase, text: "全体に一律の加算・シフトが入る"}
-      - {type: phrase, text: "区間の右端で、その区間に含まれる位置へまとめて加算する"}
+      - {type: shape, text: "dp[i][*] から dp[i+1][*] で変わる場所が少ない"}
+      - {type: shape, text: "遷移で dp 全体に一律の加算・平行移動が入る"}
+      - {type: shape, text: "区間 [l, r] の右端 r で、l 以降の位置の dp にまとめて加算する"}
     acl: [lazy_segtree]
     frequency: B
+    frequency_evidence: "recent 1（abc480_g）・前提として届くページなし・古い ABC 5 問"
     sections:
-      - "2次元の表で考えてから、行ごとに変わる場所を書き出す"
-      - "変わる場所だけを更新する（辺を1本ずつ緩和する）"
-      - "全体のシフトを添字のずらしで表す"
-      - "区間加算と区間最大を遅延セグ木で（区間の右端で加算する）"
-      - "単調スタックと組み合わせる（黄）"
+      - {title: "2 次元の表で考えてから、行ごとに変わる場所を書き出す", anchor: diff-per-row}
+      - {title: "変わる場所だけを更新する（辺を 1 本ずつ緩和する）", anchor: update-changes}
+      - {title: "全体のシフトを添字のずらしで表す", anchor: global-shift}
+      - {title: "区間加算と区間最大を遅延セグメント木で（区間の右端で加算する）", anchor: lazy-segment-tree}
+      - {title: "単調スタックと組み合わせる", anchor: with-monotonic-stack, level: 黄}
     merged_keys: []
-    visual: "2次元の表で各行の変化したセルだけを色付けし、1本の配列（セグ木）の上書きに置き換えるステップ送り"
+    visual: {kind: static, priority: 2, text: "2 次元の表で各行の変化したセルだけを色付けし、1 本の配列（セグメント木）の上書きに置き換える図"}
     problems:
-      - {id: abc271_e, role: example, summary: "辺の番号の部分列に沿って進む最短路。辺を列の順に1本ずつ緩和し、配列を作り直さない"}
-      - {id: dp_w, role: example, summary: "区間ごとの得点の最大。最後に 1 を置いた位置を添字にし、区間の右端で遅延セグ木の区間加算をする"}
-      - {id: abc372_f, role: practice, summary: "円環と追加の辺を K 回たどる方法の数。全体のシフトを添字のずらしで表し、追加の辺の端だけ更新する"}
-      - {id: abc203_e, role: practice, summary: "白いポーンが到達できる列の集合。黒いポーンのある行だけ更新する"}
-      - {id: abc480_g, role: challenge, summary: "DP の遷移を、遅延セグ木と単調スタックでまとめて更新する（2026 年の G）"}
+      - {id: abc271_e, role: example, summary: "辺の番号の列 E が与えられ、その部分列の順に辺をたどって都市 1 から都市 N へ行く経路の長さの最小を求める。", approach: "辺を列の順に 1 本ずつ緩和し、配列を作り直さない（節 update-changes）"}
+      - {id: dp_w, role: example, summary: "長さ N の 0/1 列の得点が、各区間 [l, r] に 1 が含まれれば a を足す形で決まるとき、得点の最大を求める。", approach: "最後に 1 を置いた位置を添字にし、区間の右端で遅延セグメント木の区間加算をする（節 lazy-segment-tree）"}
+      - {id: abc372_f, role: example, representative: true, summary: "円環状の N 頂点と追加の M 本（≤ 50）の辺がある有向グラフで、頂点 1 から K 回移動する方法の数を求める。", approach: "全体のシフトを添字のずらしで表し、追加の辺の端だけ更新する（節 global-shift）"}
+      - {id: abc203_e, role: practice, summary: "白いポーンが 1 行ずつ進み、黒いポーンのある列へは斜めにだけ進めるとき、最後の行で到達できる列の数を求める。", approach: "黒いポーンのある行だけ、到達可能な列の集合を更新する"}
+      - {id: tdpc_target, role: practice, summary: "数直線上に中心を持つ円の集合から、入れ子の鎖になるように選べる円の個数の最大を求める。", approach: "LIS の配列を 1 本だけ持って上書きしていく（lis の力試しにもある）"}
+      - {id: abc480_g, role: challenge, summary: "（執筆時に確かめる）", approach: "DP の遷移を遅延セグメント木と単調スタックでまとめて更新する（research/00 §2.3.8 の分類。節 with-monotonic-stack）"}
     sources: ["02-dp §4.J（inline-dp）", "02-dp §5.1", "00-curriculum §2.3.8（abc480_g）"]
-
-  - id: dp-matrix-power
-    chapter: DP の高速化
-    title: 行列累乗による DP の高速化
-    aliases: [行列累乗 DP, 遷移行列, 行列累乗, ダブリング DP, "(max,+) 行列"]
-    type: technique
-    level: 黄
-    level_evidence: "abc305_g (1989)・abc204_f (2044)・abc199_f (2065)・abc009_4 (2213 参考値)・abc256_g (2250)。発展は abc129_f (2621)。行列累乗そのものも黄（設計書 §4.3）"
-    kind: [DP, 線形代数・行列, ダブリング・分割統治]
-    prerequisites: [dp-state-design, matrix-power]
-    related: [doubling, semiring-matrix, broken-profile-dp, string-automaton-dp, dynamic-dp, linear-recurrence-fast, adjacency-matrix-power]
-    summary: "遷移が毎回同じ線形写像（dp_{t+1} = A·dp_t）なら、dp_T = A^T·dp_0 を繰り返し二乗法で O(S^3 log T) で求める（S は状態数）。(max,+) の行列でも結合法則が成り立つので同じことができ、行列にすると大きすぎるときは遷移の合成をダブリングで前計算する。"
-    signs:
-      - {type: constraint, text: "ステップ数が 10^18 など巨大で、状態数が 100 程度以下"}
-      - {type: phrase, text: "毎回同じ遷移を繰り返す"}
-      - {type: phrase, text: "幅の小さいグリッドを長く伸ばす・長さ 10^18 の文字列を数える"}
-    acl: []
-    frequency: B
-    sections:
-      - "遷移を行列で書く（状態ベクトルと遷移行列）"
-      - "繰り返し二乗法と計算量の見積もり（S^3 log T）"
-      - "(max,+)・(min,+) の行列"
-      - "照合の状態・グリッドの境界の状態を行列にする"
-      - "ダブリングで遷移を合成する（桁を倍々に伸ばす）"
-      - "落とし穴：行列の積の向き・mod の掛け算の溢れ"
-    merged_keys: [dp-doubling]
-    visual: "dp のベクトルに遷移行列を掛ける図と、行列を2乗していく繰り返し二乗の図。長さ 1, 2, 4, 8 … の遷移を前計算して組み立てる図"
-    problems:
-      - {id: dp_r, role: example, summary: "有向グラフで長さ K の経路の数。隣接行列の K 乗"}
-      - {id: abc305_g, role: example, summary: "禁止文字列を含まない長さ 10^18 の文字列の数。照合の状態の遷移を行列にして累乗する"}
-      - {id: abc204_f, role: practice, summary: "幅 H ≤ 6・長さ 10^12 の敷き詰め方の数。列のはみ出しを bit で持つ状態を行列にして累乗する"}
-      - {id: typical90_e, role: practice, summary: "使える数字が決まった N 桁（N ≤ 10^18）の数で B の倍数の個数。桁数を倍にする遷移の合成（ダブリング）で求める"}
-      - {id: abc009_4, role: practice, summary: "AND と XOR で定義された漸化式。AND と XOR の組の上で行列累乗する"}
-      - {id: abc256_g, role: practice, summary: "多角形の辺に石を置く塗り方の数。頂点の色を状態にした遷移行列を累乗する"}
-      - {id: tdpc_house, role: practice, summary: "各階の移動を bitDP で数え、階をまたぐ遷移を行列累乗する"}
-    sources: ["02-dp §4.J（dp-matrix-power・dp-doubling）", "02-dp §5.1", "08-string-geo §5（string-automaton-dp：abc305_g）", "06-math-nt §4.6（matrix-power・semiring-matrix）"]
 
   - id: dynamic-dp
     chapter: DP の高速化
-    title: 動的 DP（セグ木に遷移行列を載せる）
-    aliases: [動的DP, 動的 DP, Dynamic DP, 行列セグ木, 遷移行列のセグ木]
+    title: 動的 DP
+    aliases: [Dynamic DP, DDP, 遷移行列のセグメント木]
     type: overview
     level: 発展
-    level_evidence: "abc246_h (2677)：部分列の数え上げ DP の遷移を行列にしてセグ木に載せ、1文字の書き換えのたびに答える。ただし abc456_f (1888、2026-05) が (min,+) 行列をセグ木に載せて区間の積を取る形で青に出ている（open_issues）"
+    level_evidence: "abc246_h (2677)：部分列の数え上げ DP の遷移を行列にしてセグメント木に載せ、1 文字の書き換えのたびに答える。abc456_f (1888、2026) は (min,+) 行列をセグメント木に載せて区間の積を取る形で、1 点更新のたびに求め直す動的 DP の代表ではないので、ds の segment-tree-monoids の行列の節の例題にした（design-review §3）"
     kind: [DP, 線形代数・行列, 区間クエリ]
-    prerequisites: [dp-matrix-power, segment-tree-monoids]
+    prerequisites: [matrix-power, segment-tree-monoids]
     related: [segment-tree, static-top-tree, subsequence-dp]
-    summary: "列の各位置の遷移を小さな行列（(max,+) なども可）にしてセグ木の葉に置き、区間の行列の積を持つと、1点の書き換えのたびに DP の答えを O(S^3 log N) で求め直せる。行列の積は非可換なので、掛ける向きを最初に決める。"
+    summary: "列の各位置の遷移を小さな行列にしてセグメント木に載せると、1 点の書き換えのたびに DP の答えを O(S^3 log N) で求め直せる。行列の積は非可換なので、掛ける向きを最初に決める。"
     signs:
-      - {type: phrase, text: "DP をする列に1点更新のクエリが来て、そのたびに DP の答えを求める"}
-      - {type: phrase, text: "区間ごとの遷移をまとめて合成したい（区間の DP の答え）"}
+      - {type: phrase, text: "DP をする列に 1 点更新のクエリが来て、そのたびに DP の答えを求める"}
+      - {type: phrase, text: "列の区間 [l, r] だけで DP をしたときの答えを、クエリごとに求める"}
     acl: [segtree]
-    frequency: B
-    sections:
-      - "何ができるか（1点更新と区間の DP の答え）"
-      - "遷移を行列にしてセグ木に載せる（ACL の segtree の S を行列にする）"
-      - "積の向きと単位行列"
-      - "木の上の動的 DP（Static Top Tree へ）"
-      - "ライブラリでの検証（Library Checker の point_set_range_composite が土台）"
-    merged_keys: []
-    visual: "各位置の遷移行列を葉に置き、区間の行列の積を上へ集めるセグ木の図"
-    problems:
-      - {id: abc456_f, role: example, summary: "各日の遷移を (min,+) の行列で表し、区間の行列の積をセグ木で求める"}
-      - {id: abc246_h, role: example, summary: "0・1・? の文字列の異なる部分列の数を、1文字の書き換えのたびに答える"}
-    sources: ["02-dp §4.J（dynamic-dp）", "05-ds §4.C（dynamic-dp）", "05-ds §5（dynamic-dp）", "00-curriculum §2.3.8（abc456_f）"]
-
-  - id: dp-convolution
-    chapter: DP の高速化
-    title: 畳み込みによる DP の高速化（分割統治 FFT）
-    aliases: [FFT DP, 分割統治 FFT, オンライン畳み込み, 多項式で DP]
-    type: overview
-    level: 発展
-    level_evidence: "abc212_h (2741)・abc318_h (2785)・abc213_h (2806)・abc281_h (3180) と Ex/G でときどき使われる。畳み込みそのものは math の担当"
-    kind: [DP, 畳み込み・多項式]
-    prerequisites: [convolution-ntt]
-    related: [online-convolution, fps-basics, dp-prefix-sum, dp-speedup-overview]
-    summary: "遷移が「和が s になる組の数」のような多項式の積の形なら、FFT・NTT で一度に計算する。dp の値が自分より前の値との畳み込みで決まる（オンライン）なら、分割統治 FFT で O(N log^2 N) にする。"
-    signs:
-      - {type: phrase, text: "遷移が「和が s になる組の数」の形（多項式の積）"}
-      - {type: phrase, text: "dp[i] が dp[0..i−1] と固定の列の畳み込みで決まる"}
-      - {type: constraint, text: "N ≤ 10^5 で素直な数え上げ DP が O(N^2)"}
-    acl: [convolution]
+    verify: [point_set_range_composite]
     frequency: C
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 1 問"
     sections:
-      - "遷移を多項式の積とみる"
-      - "オンラインに決まるとき（分割統治 FFT）"
-      - "ライブラリでの使い方（ACL の convolution）"
+      - {title: "何ができるか（1 点更新と区間の DP の答え）", anchor: what-it-does}
+      - {title: "遷移を行列にしてセグメント木に載せる（ACL の segtree の S を行列にする）", anchor: matrix-on-segment-tree}
+      - {title: "積の向きと単位行列", anchor: order-and-identity}
+      - {title: "木の上の動的 DP（Static Top Tree へ）", anchor: on-trees}
+      - {title: "ライブラリでの検証（Library Checker の point_set_range_composite が土台）", anchor: verify}
     merged_keys: []
-    visual: "2つの dp 配列を多項式の係数とみて掛ける図"
+    visual: {kind: static, priority: 3, text: "各位置の遷移行列を葉に置き、区間の行列の積を上へ集めるセグメント木の図"}
     problems:
-      - {id: abc213_h, role: example, summary: "辺ごとに時間の分布がある散歩の数。dp が自分より前の値との畳み込みになるので分割統治 FFT で求める"}
-    sources: ["02-dp §4.J（dp-convolution）", "02-dp §2.5", "06-math-nt §4.7（convolution-ntt・online-convolution）"]
+      - {id: abc246_h, role: example, representative: true, summary: "0・1・? からなる文字列の 1 文字を書き換えるクエリのたびに、? を 0 か 1 に置き換えてできる文字列の部分列として現れうる、空でない文字列の種類数を答える。", approach: "部分列の数え上げ DP の遷移を行列にしてセグメント木に載せる"}
+    problems_note: "発展の概要。ABC で動的 DP が想定解の問題は abc246_h のほかに見つかっていない。区間の行列の積を取るだけの abc456_f は ds の segment-tree-monoids の節 matrix の例題（1 点更新を足すと動的 DP になる、と本文で参照する）"
+    sources: ["02-dp §4.J（dynamic-dp）", "05-ds §4.C（dynamic-dp）", "05-ds §5（dynamic-dp）", "00-curriculum §2.3.8（abc456_f）"]
 
   - id: cht
     chapter: DP の高速化
     title: Convex Hull Trick と Li Chao Tree
-    aliases: [CHT, Convex Hull Trick, 傾き最適化, 斜率优化, Li Chao Tree, 李超线段树, 直線の最小値]
+    aliases: [CHT, 傾き最適化, 斜率优化, 李超线段树, 直線の最小値]
     type: overview
     level: 発展
-    level_evidence: "ABC で CHT が想定解・主要解の問題は 2019〜2026 年の F/G/Ex で abc289_g (2109)・abc228_h (2729) の2問だけ（kmjp 氏の解説 425 本と AtCoder Tags で確認）。Li Chao Tree が必須の ABC は見つからない。設計書 §4.3 で発展に決定"
+    level_evidence: "ABC で CHT が想定解・主要解の問題は 2019〜2026 年の F/G/Ex で abc289_g (2109)・abc228_h (2729) の 2 問だけ（kmjp 氏の解説 425 本と AtCoder Tags で確認）。Li Chao Tree が必須の ABC は見つからない。設計書 §4.3 で発展に決定"
     kind: [DP, データ構造]
-    prerequisites: [dp-speedup-overview, convex-hull]
-    related: [dp-segment-tree, segment-tree, monge, alien-dp]
-    summary: "dp[i] = min_j (dp[j] + a_j·x_i + b_j) のように、遷移元 j ごとに x の一次関数が決まり i ごとにその最小値を問う形なら、直線の集合の下側の包絡線だけを持てばよい。傾きもクエリも単調なら deque で全体 O(N)、単調でなければ Li Chao Tree で1回 O(log X) になる。"
+    prerequisites: [dp-basics, convex-hull]
+    related: [dp-segment-tree, segment-tree, monge, alien-dp, dp-speedup-overview]
+    summary: "dp[i] = min_j (dp[j] + a_j·x_i + b_j) のように遷移が一次関数の最小になる DP を、下側の包絡線を持って速くする。単調なら deque、そうでなければ Li Chao Tree を使う。"
     signs:
-      - {type: phrase, text: "遷移のコストが i と j の積の項を1つだけ含む（(h_i − h_j)^2 など）"}
+      - {type: shape, text: "遷移のコストが i と j の積の項を 1 つだけ含む（(h_i − h_j)^2 など）"}
       - {type: phrase, text: "直線を追加しながら、任意の x での最小値・最大値を答える"}
-      - {type: constraint, text: "N ≤ 2×10^5 で素直な DP が O(N^2)"}
     acl: []
+    verify: [line_add_get_min, segment_add_get_min]
     frequency: C
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 2 問"
     sections:
-      - "遷移を直線の最小値に変形する"
-      - "下側の包絡線と不要な直線（傾きもクエリも単調なら deque）"
-      - "クエリが単調でないとき（二分探索）"
-      - "Li Chao Tree（区間の真ん中で勝つ直線を残す）"
-      - "落とし穴：交点の比較は掛け算で（__int128）・最小と最大の取り違え・同じ傾き"
-      - "ライブラリでの検証（Library Checker の line_add_get_min・segment_add_get_min）"
+      - {title: "遷移を直線の最小値に変形する", anchor: lines}
+      - {title: "下側の包絡線と不要な直線（傾きもクエリも単調なら deque）", anchor: lower-envelope}
+      - {title: "クエリが単調でないとき（二分探索）", anchor: non-monotone-queries}
+      - {title: "Li Chao Tree（区間の真ん中で勝つ直線を残す）", anchor: li-chao-tree}
+      - {title: "落とし穴：交点の比較は掛け算で（__int128）・最小と最大の取り違え・同じ傾き", anchor: pitfalls}
+      - {title: "ライブラリでの検証（Library Checker の line_add_get_min・segment_add_get_min）", anchor: verify}
     merged_keys: [li-chao-tree]
-    visual: "遷移元ごとの直線を平面に描き、下側の包絡線だけが答えになることと、不要な直線が消える様子のステップ送り"
+    visual: {kind: dynamic, priority: 2, text: "遷移元ごとの直線を平面に描き、下側の包絡線だけが答えになることと、不要な直線が消える様子のステップ送り"}
     problems:
-      - {id: dp_z, role: example, summary: "高さの差の2乗＋定数のコストで跳ぶ最小コスト。遷移を直線の最小値として CHT で求める"}
-      - {id: abc289_g, role: practice, summary: "各商品の価格を決めて売上を最大化する。買う人数ごとの売上が価格の一次関数になるので CHT で最大を取る"}
+      - {id: dp_z, role: example, representative: true, summary: "足場を前から順に跳んで進み、i から j へ跳ぶと (h_j − h_i)^2 + C のコストがかかるとき、最後の足場までのコストの和の最小を求める。", approach: "遷移を直線の最小値に変形して CHT で求める"}
+      - {id: abc289_g, role: practice, summary: "客ごとの購買意欲と商品ごとの価値から、価格に応じて買う客が決まるとき、商品ごとに売上（価格×買う人数）の最大を求める。", approach: "買う人数ごとの売上が価格の一次関数になるので、CHT で最大を取る"}
+      - {id: abc228_h, role: practice, summary: "数列の値を 1 増やすたびに要素ごとの費用がかかるとき、増やした費用と「値の種類数 × X」の和の最小を求める。", approach: "ソート後の DP の遷移が一次関数の最小になる"}
     sources: ["02-dp §4.K（cht・li-chao-tree）", "02-dp §2.5", "02-dp §5.1"]
 
   - id: monge
     chapter: DP の高速化
-    title: Monge 性による DP の高速化（monotone minima・Knuth-Yao）
+    title: Monge 性による DP の高速化
     aliases: [Monge, 四角不等式, 四辺形不等式, Quadrangle Inequality, monotone minima, 分割統治 DP, Divide and Conquer DP, SMAWK, LARSCH, Knuth-Yao, "Knuth's optimization", "(max,+) 畳み込み", "min-plus 畳み込み", DP の凸性]
     type: overview
     level: 発展
-    level_evidence: "Monge 性を使う ABC は abc348_g (2559)・abc355_g (2991)・abc383_g (3026) と G/Ex のみ（2024 年）。abc373_f (2018) は monotone minima でも解ける。2026 年に abc458_g (2831、(max,+) 畳み込み)。Knuth-Yao・SMAWK・LARSCH が必須の ABC は見つからない。同じ系統で単独では薄いので1枚にまとめた（設計書 §4.1）"
+    level_evidence: "Monge 性を使う ABC は abc348_g (2559)・abc355_g (2991)・abc383_g (3026) と G/Ex のみ（2024 年）。abc373_f (2018) は monotone minima でも解ける。2026 年に abc458_g (2831、(max,+) 畳み込み)。Knuth-Yao・SMAWK・LARSCH が必須の ABC は見つからない。同じ系統で単独では薄いので 1 枚にまとめた（設計書 §4.1）"
     kind: [DP, ダブリング・分割統治]
-    prerequisites: [dp-sequence-partition, dp-speedup-overview, divide-and-conquer]
-    related: [interval-dp, alien-dp, cht, slope-trick, convex-function-basics, knapsack-01]
-    summary: "コスト c(i, j) が Monge（c(a,c) + c(b,d) ≤ c(a,d) + c(b,c)）なら、各行の最小値を取る列の位置が単調になり、分割統治（monotone minima）・SMAWK・Knuth-Yao で DP を速くできる。答えが個数について凸なら、k 個選ぶ最適値の列どうしの合成も差分のマージで行える。"
+    prerequisites: [dp-sequence-partition, divide-and-conquer]
+    related: [interval-dp, alien-dp, cht, slope-trick, ternary-search#convexity, knapsack-01, dp-speedup-overview]
+    summary: "コスト c(i, j) が Monge なら各行の最小値を取る位置が単調になり、分割統治（monotone minima）や Knuth-Yao で区間分割 DP・区間 DP を速くできる。凸な列どうしの合成も速い。"
     signs:
-      - {type: phrase, text: "区間分割 DP で、区間のコストが「広げるほど増え方が大きい」"}
-      - {type: phrase, text: "最適な区切り位置が右へ単調に動きそう"}
+      - {type: shape, text: "区間分割 DP のコストが c(a, c) + c(b, d) ≤ c(a, d) + c(b, c) を満たす（区間を広げるほど増え方が大きい）"}
+      - {type: shape, text: "最適な区切り位置 opt(i) が i について単調に動く"}
       - {type: phrase, text: "区間から k 個選ぶときの最大値を、すべての k について求める"}
-      - {type: constraint, text: "N ≤ 10^5・K ≤ 数十の分割 DP"}
+      - {type: constraint, text: "N ≤ 10^5 の列を K（数十）個の区間に分ける"}
     acl: []
+    verify: [min_plus_convolution_convex_arbitrary, min_plus_convolution_convex_convex]
     frequency: B
+    frequency_evidence: "recent 1（abc458_g）・前提として 1 ページに届く（直接 1）・古い ABC 4 問"
     sections:
-      - "Monge 性の定義と確かめ方"
-      - "monotone minima（分割統治で O(N log N)）"
-      - "SMAWK・LARSCH（O(N)・オンラインに決まる DP）"
-      - "Knuth-Yao（区間 DP の分割点の範囲を絞って O(N^2)）"
-      - "DP の値の凸性と、凸な列どうしの (max,+) 畳み込み"
-      - "ライブラリでの検証（Library Checker の min_plus_convolution_convex_arbitrary など）"
+      - {title: "Monge 性の定義と確かめ方", anchor: definition}
+      - {title: "monotone minima（分割統治で O(N log N)）", anchor: monotone-minima}
+      - {title: "SMAWK・LARSCH（O(N)・オンラインに決まる DP）", anchor: smawk-larsch}
+      - {title: "Knuth-Yao（区間 DP の分割点の範囲を絞って O(N^2)）", anchor: knuth-yao}
+      - {title: "DP の値の凸性（個数について凸な答え）", anchor: dp-convexity}
+      - {title: "凸な列どうしの (max,+) 畳み込み（差分のマージ）", anchor: convex-max-plus-convolution}
+      - {title: "ライブラリでの検証（Library Checker の min_plus_convolution_convex_arbitrary など）", anchor: verify}
     merged_keys: [monotone-minima, smawk-larsch, knuth-yao, convex-max-plus-convolution, dp-convexity]
-    visual: "コスト行列を色で塗り、各行の最小値の位置が右下へ単調に並ぶことを示す図。2つの凸な列の差分を大きい順にマージする図"
+    visual: {kind: static, priority: 3, text: "コスト行列を色で塗り、各行の最小値の位置が右下へ単調に並ぶことを示す図。2 つの凸な列の差分を大きい順にマージする図"}
     problems:
-      - {id: abc348_g, role: example, summary: "B の昇順に並べ、k 個選ぶときの A の和の最大から B を引いた値を、すべての k について求める（分割統治）"}
-      - {id: abc383_g, role: practice, summary: "長さ K の区間を重ならないように i 個選ぶ和の最大を、すべての i について求める。凹な列どうしを分割統治で合成する"}
+      - {id: abc348_g, role: example, representative: true, summary: "N 個の組 (A_i, B_i) からちょうど k 個を選ぶときの「A の和 − B の最大」の最大を、k = 1〜N のすべてについて求める。", approach: "B の昇順に並べ、分割統治と凹な列のマージで求める"}
+      - {id: abc383_g, role: practice, summary: "長さ K の区間を重ならないように i 個選ぶときの和の最大を、すべての i について求める。", approach: "凹な列どうしを分割統治で合成する（節 convex-max-plus-convolution）"}
+      - {id: abc458_g, role: practice, summary: "（執筆時に確かめる）", approach: "答えの二分探索と、(max,+) 畳み込みを使う DP（research/00 §2.3.8 の分類。節 convex-max-plus-convolution）"}
     sources: ["02-dp §4.K（monge・monotone-minima・smawk-larsch・knuth-yao・convex-max-plus-convolution・dp-convexity）", "02-dp §2.5", "02-dp §5.1", "00-curriculum §2.3.8（abc458_g）"]
 
   - id: alien-dp
     chapter: DP の高速化
-    title: Alien DP（Lagrange 緩和・WQS 二分）
-    aliases: [Alien DP, Aliens trick, WQS 二分, Lagrangian Relaxation, Lagrange 緩和, 取り消し付きの貪欲]
+    title: Alien DP
+    aliases: [Aliens trick, WQS 二分, Lagrangian Relaxation, Lagrange 緩和, 取り消し付きの貪欲]
     type: overview
     level: 発展
     level_evidence: "abc218_h (2805)・abc355_g (2991)・abc305_h (3344)。abc218_h は優先度付きキューの貪欲でも解ける（kmjp 氏）。2026 年の abc464_g (2592) は選択を取り消せる貪欲で解かれた（research/00 の undoable-greedy）"
     kind: [DP, 二分探索]
     prerequisites: [monge, binary-search]
-    related: [regret-greedy, dp-sequence-partition, convex-function-basics, priority-queue, slope-trick]
-    summary: "「ちょうど K 個選ぶ（K 個に分ける）」制約のついた最適化で、答え f(K) が K について凸なら、1個あたりの罰金 λ を足して個数の制約を外した問題を解き、選ばれる個数が K になる λ を二分探索する。"
+    related: [greedy-priority-queue#regret, dp-sequence-partition, ternary-search#convexity, priority-queue, slope-trick]
+    summary: "「ちょうど K 個選ぶ」制約のついた最適化で答えが K について凸なら、1 個あたりの罰金 λ を足して制約を外した問題を解き、選ばれる個数が K になる λ を二分探索する。"
     signs:
-      - {type: phrase, text: "ちょうど K 個選ぶ・K 個の区間に分ける（K を状態に持つと O(N^2 K)）"}
-      - {type: phrase, text: "1個増やすときの得が、個数が増えるほど減っていく（答えが K について凸）"}
+      - {type: phrase, text: "ちょうど K 個選ぶ・K 個の区間に分ける（N, K ≤ 2×10^5）"}
       - {type: phrase, text: "隣り合わない k 個を選ぶ和の最大を、すべての k について答える"}
+      - {type: shape, text: "K 個選ぶときの答え f(K) が K について凸（1 個増やすときの得が、個数が増えるほど減る）"}
     acl: []
     frequency: B
+    frequency_evidence: "recent 1（abc464_g）・前提として届くページなし・古い ABC 3 問"
     sections:
-      - "罰金 λ で個数の制約を外す（凸性が要る理由）"
-      - "λ の二分探索と、同じ値が並ぶときの扱い"
-      - "取り消し付きの貪欲で解ける場合（優先度付きキュー）"
-      - "Monge な区間分割と組み合わせる"
+      - {title: "罰金 λ で個数の制約を外す（凸性が要る理由）", anchor: penalty}
+      - {title: "λ の二分探索と、同じ値が並ぶときの扱い", anchor: binary-search-lambda}
+      - {title: "取り消し付きの貪欲で解ける場合（優先度付きキュー）", anchor: undoable-greedy}
+      - {title: "Monge な区間分割と組み合わせる", anchor: with-monge}
     merged_keys: [undoable-greedy]
-    visual: "K を横軸に答えを描いた凸な折れ線に、傾き λ の直線を当てて接点を探す図"
+    visual: {kind: static, priority: 3, text: "K を横軸に答えを描いた凸な折れ線に、傾き λ の直線を当てて接点を探す図"}
     problems:
-      - {id: abc218_h, role: example, summary: "N 個のランプから R 個を赤にするスコアの最大。個数の制約を罰金に置き換える（優先度付きキューの貪欲でも解ける）"}
-      - {id: abc464_g, role: practice, summary: "隣り合わない k 個を選ぶ和の最大を、すべての k について求める。選択を取り消せる優先度付きキューの貪欲で解く"}
+      - {id: abc218_h, role: example, representative: true, summary: "N 個のランプからちょうど R 個を赤、残りを青にし、隣り合う赤と青の組ごとに得点が入るときの得点の最大を求める。", approach: "個数の制約を罰金に置き換える（優先度付きキューの貪欲でも解ける）"}
+      - {id: abc464_g, role: practice, summary: "（執筆時に確かめる）", approach: "隣り合わない k 個を選ぶ和の最大を、すべての k について求める。選択を取り消せる優先度付きキューの貪欲で解く（節 undoable-greedy）"}
+      - {id: abc355_g, role: practice, summary: "（執筆時に確かめる）", approach: "monotone minima と Alien DP を組み合わせる（research/02 §4.K。節 with-monge）"}
     sources: ["02-dp §4.K（alien-dp）", "02-dp §2.5", "02-dp §5.1", "00-curriculum §3.2（undoable-greedy）", "00-curriculum §2.3.8（abc464_g）", "01-basics §4.H（regret-greedy）"]
 
   - id: slope-trick
     chapter: DP の高速化
     title: Slope Trick
-    aliases: [slope trick, スロープトリック, 区分線形凸関数, 区分線形凸関数の管理]
+    aliases: [スロープトリック, 区分線形凸関数, 区分線形凸関数の管理]
     type: overview
     level: 発展
-    level_evidence: "abc127_f (2003) は2つのヒープで中央値を管理する入口。DP として slope trick を使う ABC は abc217_h (3112)。ARC では arc123_d (2143)・arc070_c (3365)。research/00 も発展（abc217_h）"
+    level_evidence: "abc127_f (2003) は 2 つのヒープで中央値を管理する入口。DP として slope trick を使う ABC は abc217_h (3112)。ARC では arc123_d (2143)・arc070_c (3365)。research/00 も発展（abc217_h）"
     kind: [DP, データ構造]
     prerequisites: [dp-state-design, top-k-multiset]
-    related: [priority-queue, median-absolute, monge, alien-dp, small-to-large, regret-greedy]
-    summary: "dp[x] が x について区分線形で凸なとき、傾きが変わる点を左右2つの優先度付きキューに入れて持ち、「|x − a| を足す」「累積 min を取る」「平行移動」を1回 O(log N) で行う。"
+    related: [priority-queue, median-absolute, monge, alien-dp, small-to-large#subtree-merge, greedy-priority-queue#regret]
+    summary: "dp[x] が x について区分線形で凸なとき、傾きが変わる点を 2 つの優先度付きキューで持ち、「|x − a| を足す」「累積 min を取る」「平行移動」を 1 回 O(log N) で行う。"
     signs:
-      - {type: phrase, text: "dp[i][x] が x について区分線形で凸"}
-      - {type: phrase, text: "|x − a| を足していく・数列を単調にする最小の変更量"}
+      - {type: phrase, text: "数列を単調（広義増加）にするための、値の変更量の和の最小"}
       - {type: phrase, text: "時刻ごとに位置を少しずつ動かせるときの最小コスト"}
+      - {type: shape, text: "dp[i][x] = min_{y ≤ x} dp[i−1][y] + |x − a_i| のように、x について区分線形で凸"}
     acl: []
-    frequency: C
+    frequency: B
+    frequency_evidence: "recent 1（abc458_g）・前提として届くページなし・古い ABC 2 問"
     sections:
-      - "凸関数を傾きの変わる点の集まりで表す"
-      - "2つのヒープで中央値を管理する（入口）"
-      - "|x − a| を足す・累積 min・平行移動"
-      - "木の上で凸関数をマージする（マージテクと組む）"
+      - {title: "凸関数を傾きの変わる点の集まりで表す", anchor: breakpoints}
+      - {title: "2 つのヒープで中央値を管理する（入口）", anchor: two-heaps}
+      - {title: "|x − a| を足す・累積 min・平行移動", anchor: operations}
+      - {title: "木の上で凸関数をマージする（マージテクと組む）", anchor: on-trees}
     merged_keys: []
-    visual: "凸な折れ線と、傾きが変わる点を左右2つの優先度付きキューに入れた図を並べ、操作ごとに更新するステップ送り"
+    visual: {kind: dynamic, priority: 3, text: "凸な折れ線と、傾きが変わる点を左右 2 つの優先度付きキューに入れた図を並べ、操作ごとに更新するステップ送り（静的な図で代えてよい）"}
     problems:
-      - {id: abc127_f, role: example, summary: "|x − a| と定数を足すクエリと、最小値とそれを取る x を答えるクエリ。2つのヒープで中央値を管理する"}
-      - {id: arc123_d, role: practice, summary: "数列を単調増加の列と単調減少の列の和に分け、絶対値の和を最小化する"}
+      - {id: abc217_h, role: example, representative: true, summary: "時刻ごとに左右へ 1 ずつ動けるとき、決まった時刻と位置で受けるダメージの和の最小を求める。", approach: "凸関数の平行移動と絶対値の加算を Slope Trick で行う"}
+      - {id: abc127_f, role: practice, summary: "|x − a| + b を足すクエリと、関数の最小値とそれを取る x を答えるクエリを処理する。", approach: "2 つのヒープで中央値を管理する（Slope Trick の入口。2 つの multiset のページの力試しでもある）"}
+      - {id: arc123_d, role: practice, summary: "数列を、単調増加の列と単調減少の列の和に分けるとき、2 つの列の要素の絶対値の和の最小を求める。", approach: "Slope Trick で区分線形凸関数を管理する"}
     sources: ["02-dp §4.K（slope-trick）", "02-dp §2.5", "02-dp §5.1", "00-curriculum §3.2（Slope trick）", "05-ds §7.4（slope trick の境界）"]
 
 moved:
-  - {key: string-automaton-dp, to: string, reason: "設計書 §4.2（照合オートマトン上の DP は作り方が本質なので string）。DP の側面は 02-dp §4.C・§5.1 を string の sources に。dp からは dp-state-design・dp-phase・dp-matrix-power の related でリンクし、部分列としてのパターンを数える照合位置の DP（typical90_h・abc104_d）は dp-phase の節で扱う"}
-  - {key: probability-dp, to: comb, reason: "設計書 §4.2（確率 DP は comb の確率・期待値の章）。状態・遷移・計算順序の材料は 02-dp §4.I と §5.1 の probability-dp を comb の sources に。dp からは memoized-recursion の related と dp-basics の「DP の型の地図」の節でリンクする"}
+  - {key: dp-convolution, to: math, reason: "design-review §4.2・catalog/README §6（math の online-convolution に統合）。本体と例題 abc213_h は online-convolution へ。遷移を多項式の積とみる考え方は dp-speedup-overview の節 algebraic-tools の 1 行に残した"}
+  - {key: dp-counting-dedup, to: comb, reason: "design-review §4.2・catalog/README §6（comb の counting-dedup に統合。kind に DP を足す）。渡すもの：節「作り方と対象を一対一に対応させる」「最も左を取る（部分列）」「番号最小の要素を含むグループから決める」「包除で重なりを引く」「直前と違う・最初に〜で場合分けする」「落とし穴：グループの順序を区別して K! 倍に数える」、問題 abc310_d（例題）・abc130_e・abc311_f（練習）・abc180_f（力試し）、signs「異なる〜の個数（同じものは 1 回だけ数える）」「操作の結果として得られる列の種類数」。subsequence-dp の前提は counting-dedup に直した"}
+  - {key: dp-matrix-power, to: math, reason: "design-review §3・§4.2・catalog/README §6（math の matrix-power（青）に統合）。渡すもの：節「照合の状態・グリッドの境界の状態を行列にする」「ダブリングで遷移を合成する（桁を倍々に伸ばす）」「(max,+)・(min,+) の行列」「落とし穴：行列の積の向き・mod の掛け算の溢れ」、問題 abc305_g・abc204_f・typical90_e・abc256_g・tdpc_house（dp_r・abc009_4 は matrix-power にすでにある）、signs「ステップ数が 10^18 など巨大で、状態数が 100 程度以下」「幅の小さいグリッドを長く伸ばす・長さ 10^18 の文字列を数える」。dp からは dp-speedup-overview の節 algebraic-tools と broken-profile-dp・dynamic-dp からリンクする"}
+  - {key: dp-doubling, to: math, reason: "dp-matrix-power の merged_keys だった key（遷移の合成のダブリング）。節「ダブリングで遷移を合成する」と typical90_e ごと matrix-power へ"}
+  - {key: dp-decision-binary-search, to: basics, reason: "design-review §4.2・catalog/README §6（basics の binary-search-answer に統合。節「判定を DP で作る（決め打ちごとに初期化し直す）（青）」）。問題は 03-7 のとおり：abc415_e を練習、abc246_g を力試し、abc324_f は fractional-binary-search の例題、abc236_e は fractional-binary-search の練習。平均・比・中央値の節と別名は fractional-binary-search へ。dp からは dp-state-design・tree-dp の related でリンクする"}
+  - {key: dp-bitset, to: misc, reason: "design-review §4.2（基礎のページの節は青まで）。subset-sum の節「可否の DP を bitset のシフトと OR で速くする（黄）」を misc の bitset-speedup の節（部分和 DP のシフト OR）の本体にする。arc070_b・agc020_c・abc221_g は bitset-speedup にすでにある。subset-sum からは related でリンクする"}
+  - {key: string-automaton-dp, to: string, reason: "設計書 §4.2（照合オートマトン上の DP は作り方が本質なので string）。DP の側面は 02-dp §4.C・§5.1 を string の sources に。直近の数文字を状態にする簡易版と abc122_d は design-review §4.2 のとおり dp-state-design の節 last-characters に受けた。部分列としてのパターンを数える照合位置の DP（typical90_h・abc104_d）は dp-phase の節で扱う"}
+  - {key: probability-dp, to: comb, reason: "設計書 §4.2（確率 DP は comb の確率・期待値の章）。状態・遷移・計算順序の材料は 02-dp §4.I と §5.1 の probability-dp を comb の sources に。dp からは memoized-recursion の related と dp-basics の節 map でリンクする"}
   - {key: expected-value-dp, to: comb, reason: "設計書 §4.2（期待値 DP は comb）。状態・遷移・計算順序の材料は 02-dp §4.I と §5.1 の expected-value-dp を comb の sources に。dp からは dp-basics・dp-order・memoized-recursion の related でリンクする"}
   - {key: dp-with-cycles, to: comb, reason: "設計書 §4.2（自己ループ・閉路の処理は期待値 DP のページに書く）。材料は 02-dp §4.I（閉路の扱い）と §5.1 の dp-with-cycles。07 の self-loop-expectation・expectation-linear-equations と統合する"}
-  - {key: game-dp, to: comb, reason: "設計書 §4.2（ゲーム DP・ミニマックス・後退解析は comb のゲームの章）。07 の game-winning-losing-dp・minimax と統合する。材料は 02-dp §4.I と §5.1 の game-dp。dp からは dp-order・interval-dp・bit-dp などの related でリンクする"}
+  - {key: game-dp, to: comb, reason: "設計書 §4.2（ゲーム DP・ミニマックス・後退解析は comb のゲームの章）。07 の game-winning-losing-dp・minimax と統合する。材料は 02-dp §4.I と §5.1 の game-dp。dp からは dp-order・bit-dp・dp-mod-state の related（game-basics）と interval-dp の related（minimax）でリンクする"}
   - {key: inclusion-exclusion-dp, to: comb, reason: "設計書 §4.2（包除 DP は comb の包除の系統。07 にも同じ key がある）。DP の側面の材料は 02-dp §4.J と §5.1 の inclusion-exclusion-dp。dp からは dp-grid・insertion-dp の related でリンクする"}
 
 dropped: []
 
 open_issues:
-  - "dynamic-dp を指示どおり発展の概要にしたが、abc456_f（1888、2026-05）が (min,+) 行列をセグ木に載せて区間の積を取る形で青に出ている。ds.yaml は research/00 の segtree-matrix を segment-tree-monoids（青）の節「行列を載せる」に取り込み、abc456_f を練習に入れている。構造は ds の青の節、DP の遷移を行列にして1点更新のたびに求め直す話は dp の発展の概要（前提に segment-tree-monoids）という分担でよいか。dynamic-dp の例題にも abc456_f を入れた"
-  - "insertion-dp（黄）：2026 年に abc468_g（1975）・abc473_g（1974、確率と組む）と青の上端の G が続いた。ほかは abc209_f（2307）以上なので黄のままにしたが、青に下げるか見直しで判断してほしい。箱根駅伝 DP（abc309_g 2372・abc134_f 2532）は ABC の問題が2問だけで、同じ「順列を相対的な情報で数える」系統なので insertion-dp の節にした（単独ページにしない）。連結成分 DP（ABC の例なし）も同じページの発展の節"
-  - "subsequence-dp は黄にした（02 は黄、08 は青）。08 が subsequence-dp に入れていた「部分列として何通り取り出せるか（照合位置の DP：typical90_h・abc104_d）」は dp-phase に置いた。string の subsequence-matching（nxt 表）・string-automaton-dp との分担を見直しで確かめてほしい"
-  - "dp-of-dp（DP の DP、黄）は ABC の例が abc391_g の1問だけなので、lcs のページの黄の節にした。ほかの型の例が見つかれば単独ページに戻す"
-  - "dp は42ページあるので、nav で章（DP の考え方・列の DP・状態の形で分かれる DP・DP の高速化）に分けたい。catalog の形式に章の欄がないため、dp.yaml ではコメントで区切った。group のような欄を足すか、工程6の nav の生成で扱うかを決めてほしい"
-  - "bitset の分担：dp-bitset（部分和 DP の bitset、黄）は dp の subset-sum の節に置き（merged_keys）、ワード並列の一般論は misc の bitset-speedup に任せた。misc.yaml の open_issues も同じ分担を書いている。担当 A と同時に書いたため途中で何度か譲り合って食い違ったので、全体の検証で dp-bitset がどちらか一方だけにあることを確かめてほしい。設計書 §4.2 の「bitset は misc、dp からリンク」をこの分担と読んでよいかも確かめてほしい"
-  - "AtCoder Tags の投票だけが裏付けの問題（abc215_e・abc334_f・abc332_e・abc387_f・abc251_e）は入れなかった（05 も abc334_f を確度が低いとしている）。research/00 §2.3.8 から採った最近の問題（abc465_e・abc468_g・abc480_g・abc456_f）は手法までしか確かめられていないので、要約は手法の範囲にとどめた。執筆時に第三者の解説で内容を確かめること"
-  - "research/00 の kadane-and-submask（最大部分配列和と 3^N の組み合わせ項目）は dp-phase の merged_keys に入れ、最大部分配列和を dp-phase の節に、部分集合の部分集合の列挙を subset-enumeration-dp の節にした。undoable-greedy（取り消し付きの貪欲）は alien-dp に入れたが、basics の regret-greedy（後悔付き貪欲、発展）と内容が重なるので、どちらに説明の本体を置くか決めてほしい"
+  - "見直しで決めた分担に従い、dp は 42 ページから 38 ページになった（dp-convolution・dp-counting-dedup・dp-matrix-power・dp-decision-binary-search を moved。dp-doubling・dp-bitset の key も moved）。受け側の math（online-convolution・matrix-power）・basics（binary-search-answer・divide-and-conquer）・comb（counting-dedup）・misc（bitset-speedup）はすでに merged_keys と節・問題を受けている。dp-speedup-overview は hub（level・frequency なし）にし、早見表の行（多項式の積 → online-convolution#dp-as-polynomial、同じ線形の遷移の繰り返し → matrix-power#dp-transition を含む）を visual の text と節 algebraic-tools に書いた"
+  - "F（comb）は dp-counting-dedup を counting-dedup に受け、前提に dp-state-design を置いたので、subsequence-dp の前提から dp-basics を外した（推移的に届く）。dp_l は minimax の例題のままにし、interval-dp では練習にした。comb のページへの related は comb の第 2 版の anchor（game-basics#game-dp・expected-value-dp#order・counting-dedup#in-dp など）で書いた"
+  - "A（misc・thinking）の提案に合わせた：subset-sum の dp-bitset を moved（to: misc）にし、subset-sum・dp-speedup-overview から bitset-speedup#subset-sum-shift、dp-dag から bitset-speedup#reachability へつないだ。arc065_a は、thinking.yaml の open_issues は reverse-thinking で練習にしたと書くが、データ（problems）では例題のままなので、dp-sequence-partition では練習にした（例題は agc031_b だけ）。reverse-thinking が練習に変えるなら dp-sequence-partition の例題に戻す"
+  - "C（tree）の提案に合わせた：tree-centroid から外れた abc348_e を tree-dp の節 reroot-difference の練習に受けた（例題は abc220_f）。tree-centroid の related の tree-dp は tree-dp#reroot-difference で節を指せる。graph の提案どおり bit-dp の related に k-shortest-paths は置いていない"
+  - "提案（I・patterns）：subsequence-and-substring の練習 abc215_e は、research/02 で AtCoder Tags の投票だけが裏付け（dp では未確認として外した問題）なので、確かめるか外してほしい。lis・lcs・subsequence-dp の related から subsequence-and-substring の節（longest・index-tuples・distinct-subsequences）へつないだ"
+  - "ほかの分野から dp の節を指すときの anchor：統合した調査の key に当たる節は key と同じ（dp-push-pull・dp-map-sparse・dp-cyclic・bracket-dp・dp-swap-key-value・dp-kth-lexicographic・dp-rolling-array・knapsack-unbounded・knapsack-bounded・dilworth・edit-distance・dp-of-dp・tsp・tree-dp-merge・hakone-ekiden-dp・connected-component-dp・dp-sliding-window・li-chao-tree・monotone-minima・smawk-larsch・knuth-yao・dp-convexity・convex-max-plus-convolution・undoable-greedy）。そのほか string-automaton-dp の簡易版は dp-state-design#last-characters、根を動かした差分は tree-dp#reroot-difference、Kadane は dp-phase#kadane、遷移の形の早見表は dp-speedup-overview#shape-to-tool"
+  - "dp-segment-tree の前提は、ds の提案（related に segment-tree-on-values）と違い segment-tree-on-values を前提にした。値を添字にした dp を載せる節が本体で、segment-tree と coordinate-compression の 2 つを前提に書くより直接の前提になるため。dynamic-dp の前提の matrix-power は segment-tree-monoids から届かない（segment-tree-monoids の前提は segment-tree だけ）ので残した"
+  - "レベルの変更（工程 5 でユーザーに示す）：ページの level は変えていない。節の level を D1 の規則に合わせて変えたもの：dp-reconstruction の「辞書順最小の復元」を青から水（abc146_f 1545 が根拠）、tree-dp の「頂点の選択を状態に足す（独立集合型）」を青から水（EDPC P が基本形で、青の根拠は 2016 年の参考値と AtCoder Tags だけの問題だった）、broken-profile-dp の「1 行ずつ進める」は水の印を外してページと同じ黄にした（ページより低い節を作らない）。rerooting の水の節（根の移動の差分）は tree-dp の節へ移し、exchange-argument-dp の水の節（最大の要素を固定するために並べる）は subset-sum#sort-then-count に任せた。knapsack-01 の黄の節（区間ナップサック）は divide-and-conquer#range-knapsack、subset-sum の黄の節（bitset）は bitset-speedup へ送った"
+  - "D2 で確かめ直したが帯は変えなかったもの：lis（水）は abc319 以降の根拠がすべて青以上の応用で、基本形の水の根拠は古い問題だけ。dp-order（水）は abc319 以降が abc341_f (1604) の 1 問。dp-mod-state・dp-sequence-partition・lcs・digit-dp-advanced は abc319 以降の根拠がない。recent-abc のデータ（D5）で見直す"
+  - "visual：priority 1 は分野の枠どおり 4 つ（dp-basics・knapsack-01・lis・digit-dp）。dynamic の priority 2 は interval-dp・bit-dp・tree-dp・dp-segment-tree・cht、priority 3 は knapsack-undo・broken-profile-dp・insertion-dp・slope-trick。static は執筆時に描くものを priority 2、なくてもよいものを 3 とした"
+  - "insertion-dp（黄）：design-review §3 のとおり黄のままにし、level_evidence に「abc468_g・abc473_g のように青の帯に出続けたら下げる」と書いた。箱根駅伝 DP（abc309_g 2372・abc134_f 2532）と連結成分 DP（ABC の例なし）は同じ「順列を相対的な情報で数える」系統なので insertion-dp の節のまま"
+  - "dp-of-dp（DP の DP、黄）は ABC の例が abc391_g の 1 問だけなので、lcs のページの黄の節にした。ほかの型の例が見つかれば単独ページに戻す"
+  - "AtCoder Tags の投票だけが裏付けの問題（abc215_e・abc334_f・abc332_e・abc387_f・abc251_e）は problems に入れず、level_evidence からも外した（bit-dp の abc215_e、tree-dp の abc387_f）。rerooting の level_evidence の abc337_g も、research/04 がオイラーツアーの問題としているので外した。research/00 §2.3.8 から採った最近の問題（abc441_f・abc447_f・abc456_f・abc457_g・abc458_g・abc464_g・abc465_e・abc466_e・abc468_g・abc476_g・abc480_g）は手法までしか確かめられていないので、summary を「（執筆時に確かめる）」にしたものがある。arc171_c・abc410_g・abc355_g・typical90_cl も問いを確かめていない。執筆の前に問いを確かめて summary を書く"
+  - "kadane-and-submask（research/00）は dp-phase の merged_keys に入れ、最大部分配列和を dp-phase の節 kadane に、部分集合の部分集合の列挙を subset-enumeration-dp の節 submask-loop にした。undoable-greedy（取り消し付きの貪欲）は alien-dp の節にしたが、basics の greedy-priority-queue#regret（regret-greedy を統合）と内容が重なるので、どちらに説明の本体を置くか決めてほしい"
+  - "related のほかの分野の節は、各分野の第 2 版（2026-10-21 の作業ツリー）の anchor で書いた。節を指さずページの id だけにしたものは、ページ全体を指す意図のもの"

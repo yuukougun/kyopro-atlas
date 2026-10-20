@@ -1,52 +1,60 @@
-# 文字列（string）の目次。規則は planning/catalog/README.md、上位の規則は planning/design.md §3〜§5。
-# 主な材料：research/08（文字列）、research/05 の hashing-for-sets、research/02 の string-automaton-dp、research/00 §3.2
-# research/08 の「その他」（インタラクティブ・乱択・bitset・定数倍）と構文解析は misc へ送る（moved）
+# 文字列（string）の目次（第2版）。規則は planning/catalog/README.md、上位の規則は planning/design.md §3〜§5 と planning/design-review.md。
+# 主な材料：research/08（文字列）、research/05 の hashing-for-sets、research/02 の string-automaton-dp、research/00 §3.2・§2.3.8
+# research/08 の「その他」（インタラクティブ・乱択・bitset・定数倍）と構文解析はほかの分野へ送った（moved）。fft-string-matching は math の convolution-ntt の節へ送った（design-review §3）
+# 節の anchor は、統合した調査の key に当たる節では key と同じ名前にした（例：rolling-hash#hash-segment-tree、kmp#string-period、palindrome#manacher）
 field: string
 pages:
   - id: string-basics
+    chapter: 文字列の基本
     title: 文字列の基本操作と辞書順
-    aliases: [辞書順, 文字列の比較, 部分文字列と部分列, 文字の一斉置換, 回転（巡回シフト）, 連結して辞書順最小]
+    nav_title: null
+    aliases: [辞書順, 文字列の比較, 文字の一斉置換, 文字列の回転, 連結して辞書順最小, lexicographical order]
     type: technique
     level: 基礎
     level_evidence: "abc042_b (616) 辞書順最小の連結、abc286_c (565) 回転と回文、abc076_c (846)、abc110_c (949) 文字の置換の一貫性。ABC の A〜D で常連"
     kind: [文字列]
     prerequisites: [sorting-techniques]
-    related: [lexicographic-greedy, run-length-encoding, subsequence-matching, z-algorithm, exchange-argument, bracket-sequence, parsing, cpp-string-api]
-    summary: "辞書順の定義（最初に異なる位置で比べ、片方が尽きたら短い方が小さい）を正確に使い、部分文字列・部分列・回転・文字の一斉置換を扱う基本。文字列の B〜D の多くは、この基本と全探索・比較だけで解ける。"
+    related: [lexicographic-greedy, run-length-encoding, subsequence-matching, z-algorithm#cyclic-shift, exchange-argument, subsequence-and-substring, bracket-sequence, parsing, cpp-string-api]
+    summary: "辞書順の最小・回転・文字の一斉置換を問う文字列の問題を、定義に沿った全探索と比較で解く。辞書順は最初に異なる位置の文字で決まり、片方が尽きたら短い方が小さい。"
     signs:
       - {type: phrase, text: "条件を満たす文字列のうち辞書順で最小（最大）のものを出力する"}
       - {type: phrase, text: "文字を一斉に別の文字へ置き換える操作を繰り返して一致させられるか"}
       - {type: phrase, text: "先頭の文字を末尾に移す（回転する）操作を何回か行う"}
       - {type: constraint, text: "|S| ≤ 5000 程度で、回転や置き方を全部試せる"}
     acl: []
+    verify: []
     frequency: A
+    frequency_evidence: "recent 0・前提として 13 ページに届く（直接 7）・古い ABC 4 問"
     sections:
-      - "辞書順の定義と std::string の比較（接頭辞は短い方が小さい）"
-      - "部分文字列（連続）と部分列（連続でなくてよい）の違い"
-      - "文字の一斉置換：両方向の対応が一意か（全単射）"
-      - "連結して辞書順最小：長さが違えば a+b < b+a で比べる"
-      - "回転（巡回シフト）の入口：回転回数の全探索と A+A"
-      - "計算量の落とし穴（substr・+・find は長さに比例する）"
+      - {title: "辞書順の定義と std::string の比較（接頭辞は短い方が小さい）", anchor: lexicographic-order}
+      - {title: "部分文字列（連続）と部分列（連続でなくてよい）の違い", anchor: substring-vs-subsequence}
+      - {title: "文字の一斉置換：両方向の対応が一意か（全単射）", anchor: character-mapping}
+      - {title: "連結して辞書順最小：長さが違えば a+b < b+a で比べる", anchor: concat-order}
+      - {title: "回転（巡回シフト）の入口：回転回数の全探索と A+A", anchor: rotation}
+      - {title: "計算量の落とし穴（substr・+・find は長さに比例する）", anchor: cost-pitfalls}
     merged_keys: []
-    visual: "2つの文字列を先頭から照合し、最初に異なる位置で大小が決まる様子の図（接頭辞が小さいことを空文字との比較で示す）"
+    visual: {kind: static, priority: 2, text: "2 つの文字列を先頭から照合し、最初に異なる位置で大小が決まる様子の図（接頭辞が小さいことを空文字との比較で示す）"}
     problems:
-      - {id: abc042_b, role: example, summary: "同じ長さの文字列を全部つないだ結果を辞書順最小にする。ソートして連結する（長さが違えば a+b<b+a の比較が要る）"}
-      - {id: abc286_c, role: practice, summary: "回転（コスト A）と書き換え（コスト B）で回文にする最小コスト。回転回数を全探索する"}
-      - {id: abc076_c, role: practice, summary: "? を埋めて T を含む辞書順最小の文字列を作る。T を置く位置を全部試し、残りの ? は a にする"}
-      - {id: abc110_c, role: practice, summary: "文字の一斉置換を繰り返して S を T にできるか。文字の対応が両方向に一意かを調べる"}
-      - {id: arc097_a, role: practice, summary: "異なる部分文字列の辞書順 K 番目（K≤5）。長さ K 以下の部分文字列だけ列挙すれば足りると気づく"}
+      - {id: abc042_b, role: example, representative: true, summary: "同じ長さの文字列をすべてつないだ結果のうち、辞書順で最小のものを求める。", approach: "ソートして連結する（長さが違えば a+b < b+a の比較が要る）"}
+      - {id: abc286_c, role: practice, summary: "先頭を末尾へ移す操作（コスト A）と 1 文字の書き換え（コスト B）で、文字列を回文にする最小のコストを求める。", approach: "回転回数を全探索し、それぞれ書き換えの数を数える"}
+      - {id: abc076_c, role: practice, summary: "? を埋めて T を部分文字列に含む文字列のうち、辞書順で最小のものを求める。", approach: "T を置く位置を全部試し、残りの ? は a にする"}
+      - {id: abc110_c, role: practice, summary: "文字を一斉に置き換える操作を繰り返して、S を T にできるかを判定する。", approach: "文字の対応が両方向に一意か（全単射か）を調べる"}
+      - {id: arc097_a, role: practice, summary: "S の異なる部分文字列のうち、辞書順で K 番目（K ≤ 5）のものを求める。", approach: "長さ K 以下の部分文字列だけ列挙すれば足りる"}
+    problems_note: null
     sources: ["08-string-geo §4.1 string-basics", "08-string-geo §2.3（混同されやすいもの）", "08-string-geo §5 string-basics・lexicographic-greedy（arc097_a）"]
 
   - id: subsequence-matching
+    chapter: 文字列の基本
     title: 部分列の判定と次の出現位置の表
-    aliases: [部分列判定, 次の出現位置, nxt 配列, 部分列オートマトン, 序列自動機, 部分列として含むか]
+    nav_title: null
+    aliases: [部分列判定, 次の出現位置, nxt 配列, 部分列オートマトン, 序列自動機, 部分列として含むか, subsequence automaton]
     type: technique
-    level: 水
-    level_evidence: "typical90_f（★5）。貪欲な部分列判定だけなら基礎帯（abc452_d 903、abc324_e 1153）。応用は abc346_f (1840)、arc081_c (2072)"
+    level: 基礎
+    level_evidence: "貪欲な照合と次の出現位置の表は abc452_d (903, 2026)・abc324_e (1153, 2023) と基礎の帯で出る。辞書順最小の部分列は typical90_f（★5、水）、繰り返した文字列の部分列は abc346_f (1840, 2024) で青。abc319 以降に水の根拠がないので、水から基礎に変え、応用を水・青の節にした（design-review §4.2・D2）"
     kind: [文字列]
     prerequisites: [string-basics, binary-search]
-    related: [subsequence-dp, lexicographic-greedy, lcs, dp-kth-lexicographic]
-    summary: "T が S の部分列かは、S を左から見て T の文字をできるだけ早く拾う貪欲で判定できる。各位置から各文字が次に現れる位置の表を作れば、多数の判定・辞書順最小の部分列・部分列でない最短の文字列に使える。"
+    related: [subsequence-dp, lexicographic-greedy, lcs, dp-reconstruction, subsequence-and-substring]
+    summary: "T が S の部分列かを、S を左から見て T の文字をできるだけ早く拾う貪欲で判定する。各位置から各文字が次に現れる位置の表を作れば、多数の判定や辞書順最小の部分列も速く求まる。"
     signs:
       - {type: phrase, text: "T を部分列として含むか（連続でなくてよい）"}
       - {type: phrase, text: "長さ K の部分列のうち辞書順で最小のもの"}
@@ -54,362 +62,409 @@ pages:
       - {type: phrase, text: "S を何回も繰り返した文字列の部分列として入るか"}
       - {type: constraint, text: "|S| ≤ 10^5〜10^6、文字は英小文字で 26×(N+1) の表が持てる"}
     acl: []
+    verify: []
     frequency: B
+    frequency_evidence: "recent 1（abc452_d）・前提として 1 ページに届く（直接 1）・古い ABC 2 問"
     sections:
-      - "貪欲な照合：できるだけ左で拾うのが最善な理由"
-      - "次の出現位置の表 nxt[i][c]（後ろから作る・番兵 N）"
-      - "文字ごとの位置のリストと lower_bound による代用"
-      - "辞書順最小の部分列（残りで足りる範囲の最小の文字を選ぶ）"
-      - "部分列でない最短の文字列（後ろからの DP）（青）"
-      - "繰り返した文字列の部分列（文字ごとの累積個数で位置を飛ばす）（青）"
-      - "部分列の数え上げは DP へ（部分列 DP）"
+      - {title: "貪欲な照合：できるだけ左で拾うのが最善な理由", anchor: greedy-matching}
+      - {title: "次の出現位置の表 nxt[i][c]（後ろから作る・番兵 N）", anchor: next-occurrence}
+      - {title: "文字ごとの位置のリストと lower_bound による代用", anchor: position-lists}
+      - {title: "辞書順最小の部分列（残りで足りる範囲の最小の文字を選ぶ）", anchor: lexicographically-smallest, level: 水}
+      - {title: "繰り返した文字列の部分列（文字ごとの累積個数で位置を飛ばす）", anchor: repeated-string, level: 青}
     merged_keys: [subsequence-next-table]
-    visual: "後ろから nxt の表を埋め、T の各文字で表を引いて右へ跳ぶ様子の図"
+    visual: {kind: static, priority: 2, text: "後ろから nxt の表を埋め、T の各文字で表を引いて右へ跳ぶ様子の図"}
     problems:
-      - {id: abc452_d, role: example, summary: "T を部分列として含まない部分文字列の数。各位置から各文字の次の出現位置を前計算し、始点ごとに数える"}
-      - {id: typical90_f, role: example, summary: "長さ K の部分列の辞書順最小。先頭から、残りで K 文字取れる範囲の最小の文字を次の出現位置の表で選ぶ"}
-      - {id: abc324_e, role: practice, summary: "S_i+S_j が T を部分列に含む組の数。S_i で T の先頭から、S_j で末尾から何文字照合できるかを求めて数える"}
-      - {id: abc346_f, role: practice, summary: "S を N 回並べた中に、T の各文字を k 回ずつ並べたものが部分列で入る最大の k。k を二分探索し、文字ごとの累積個数で照合する"}
-      - {id: arc081_c, role: challenge, summary: "A の部分列でない最短の文字列のうち辞書順最小。次の出現位置の表で後ろから DP し、前から復元する"}
+      - {id: abc452_d, role: example, representative: true, summary: "S の部分文字列のうち、T を部分列として含まないものの数を求める。", approach: "各位置から各文字の次の出現位置を前計算し、始点ごとに数える"}
+      - {id: abc324_e, role: practice, summary: "S_i と S_j をこの順につないだ文字列が T を部分列として含む組 (i, j) の数を求める。", approach: "S_i で T の先頭から、S_j で末尾から何文字照合できるかを求め、個数の累積で数える"}
+      - {id: typical90_f, role: practice, summary: "長さ K の部分列のうち、辞書順で最小のものを求める。", approach: "先頭から、残りで K 文字取れる範囲の最小の文字を次の出現位置の表で選ぶ（節 lexicographically-smallest）"}
+      - {id: abc346_f, role: practice, summary: "S を N 回並べた文字列に、T の各文字を k 回ずつ並べた文字列が部分列として入る最大の k を求める。", approach: "k を二分探索し、文字ごとの累積個数で位置を飛ばして照合する（節 repeated-string）"}
+      - {id: arc081_c, role: challenge, summary: "A の部分列でない最短の文字列のうち、辞書順で最小のものを求める。", approach: "次の出現位置の表で後ろから最短の長さの DP をし、前から復元する（DP の側は subsequence-dp）"}
+    problems_note: null
     sources: ["08-string-geo §4.1 subsequence-matching", "08-string-geo §5 subsequence-matching", "00-curriculum §3.2 優先度 B（部分列の判定と次の出現位置の表）", "02-dp subsequence-dp（nxt の表との関係）"]
 
   - id: rolling-hash
+    chapter: ハッシュ
     title: ローリングハッシュ
-    aliases: [ロリハ, 多項式ハッシュ, Rabin-Karp, 文字列のハッシュ, 部分文字列のハッシュ, ハッシュのセグ木]
+    nav_title: null
+    aliases: [ロリハ, 多項式ハッシュ, Rabin-Karp, 文字列のハッシュ, 部分文字列のハッシュ, ハッシュのセグ木, rolling hash]
     type: technique
     level: 水
-    level_evidence: "abc141_e (1459)、abc284_f (1575)、typical90_au（★7。考察込み）。別解として abc430_e (1109)。更新ありのセグ木版は abc331_f (1666) で青"
+    level_evidence: "abc141_e (1459)・abc284_f (1575) で水。abc319 以降は、Z・Manacher でも解ける入口が abc398_f (1033)・abc430_e (1109) と基礎の帯に、セグ木に載せる型が abc331_f (1666) と青にある。ハッシュが本体の水の問題は abc319 より前にしかないので古い根拠も使い、水のままにした（open_issues）"
     kind: [文字列, ハッシュ・乱択]
     prerequisites: [mod-arithmetic, prefix-sum, string-basics]
-    related: [hash-safety, z-algorithm, palindrome, suffix-array, hashing-for-sets, segment-tree-monoids, binary-search-answer, string-queries-ds]
-    summary: "文字列を B 進数の値（mod p）とみなし、接頭辞のハッシュから任意の部分文字列のハッシュを O(1) で取り出して、部分文字列どうしの一致を確率的に判定する。二分探索と組めば LCP や辞書順の比較、セグ木に載せれば更新ありの一致・回文判定もできる。"
+    related: [hash-safety, hashing-for-sets, z-algorithm, palindrome#manacher, suffix-array, segment-tree-monoids, binary-search-answer, convolution-ntt#string-matching, method-comparison#strings]
+    summary: "文字列を B 進数の値（mod p）とみなし、接頭辞のハッシュから任意の部分文字列のハッシュを O(1) で取り出して、部分文字列どうしの一致を確率的に判定する。二分探索と組めば LCP や辞書順の比較もできる。"
     signs:
       - {type: phrase, text: "部分文字列どうしが等しいかを大量に判定する"}
-      - {type: phrase, text: "重ならずに2回現れる部分文字列の最大の長さ（長さで二分探索）"}
-      - {type: phrase, text: "1文字の更新と、区間が回文か（一致するか）のクエリ"}
-      - {type: constraint, text: "N ≤ 10^5〜10^6 で、任意の2区間の一致判定が Q ≤ 2×10^5 回"}
+      - {type: phrase, text: "重ならずに 2 回現れる部分文字列の最大の長さ"}
+      - {type: phrase, text: "1 文字の更新と、区間が回文か（一致するか）のクエリ"}
+      - {type: constraint, text: "N ≤ 10^5〜10^6 で、任意の 2 区間の一致判定が Q ≤ 2×10^5 回"}
     acl: [segtree]
+    verify: []
     frequency: B
+    frequency_evidence: "recent 0・前提として 1 ページに届く（直接 1）・古い ABC 7 問"
     sections:
-      - "多項式ハッシュと部分文字列の取り出し（h[r] − h[l]·B^(r−l)）"
-      - "なぜ衝突しにくいか（0 でない多項式の根は次数以下）"
-      - "連結のハッシュと逆向きのハッシュ（回文判定）"
-      - "ハッシュ＋二分探索：LCP・辞書順の比較・最長の繰り返し"
-      - "セグ木に載せるハッシュ：（ハッシュ, B^長さ）の組で更新ありの一致・回文判定（青）"
-      - "ハッシュで代用できる場面とできない場面（Z・Manacher・SA・畳み込みとの使い分け）"
-      - "実装の落とし穴（文字を 0 にしない・負の余り・積のオーバーフロー・長さをそろえる）"
+      - {title: "多項式ハッシュと部分文字列の取り出し（h[r] − h[l]·B^(r−l)）", anchor: polynomial-hash}
+      - {title: "なぜ衝突しにくいか（0 でない多項式の根は次数以下）", anchor: collision-bound}
+      - {title: "推奨する設計：mod 2^61−1 と実行時に乱択した基数（理由は hash-safety）", anchor: recommended-design}
+      - {title: "連結のハッシュと逆向きのハッシュ（回文判定）", anchor: concat-and-reverse}
+      - {title: "ハッシュ＋二分探索：LCP・辞書順の比較・最長の繰り返し", anchor: hash-lcp-binary-search}
+      - {title: "セグ木に載せるハッシュ：（ハッシュ, B^長さ）の組で更新ありの一致・回文判定", anchor: hash-segment-tree, level: 青}
+      - {title: "ハッシュで代用できる場面とできない場面（Z・Manacher・SA・畳み込みとの使い分け）", anchor: when-to-use}
+      - {title: "実装の落とし穴（文字を 0 にしない・負の余り・積のオーバーフロー・長さをそろえる）", anchor: pitfalls}
     merged_keys: [hash-lcp-binary-search, hash-segment-tree]
-    visual: "接頭辞のハッシュの表から引き算で部分文字列のハッシュを取り出す図と、セグ木の節点に（ハッシュ, 長さ）を書いて左を右の長さぶんずらして足す図"
+    visual: {kind: static, priority: 2, text: "接頭辞のハッシュの表から引き算で部分文字列のハッシュを取り出す図と、セグ木の節点に（ハッシュ, 長さ）を書いて左を右の長さぶんずらして足す図"}
     problems:
-      - {id: abc141_e, role: example, summary: "重ならずに2回現れる部分文字列の最大長（N≤5000）。長さを二分探索し、長さ固定の部分文字列のハッシュに重複があるかを調べる"}
-      - {id: abc284_f, role: example, summary: "T＝S の前半＋S の反転＋S の後半となる S と位置を探す。区切り位置ごとに部分文字列の一致を O(1) で判定する"}
-      - {id: abc331_f, role: example, summary: "1文字の更新と、区間が回文かのクエリ。前向きと後ろ向きのハッシュ（長さ付き）をセグ木に載せる"}
-      - {id: abc398_f, role: practice, summary: "後ろに文字を足して最短の回文を作る。最長の回文接尾辞を前向き・後ろ向きのハッシュの一致で求める"}
-      - {id: abc430_e, role: practice, summary: "A を何回回転すると B になるか。A+A の中で B を最初に見つける（Z・KMP でも解ける）"}
-      - {id: typical90_au, role: challenge, summary: "色の決まり方を言い換えて「ずらした文字列の一致」に帰着し、ハッシュで判定する（Z でも解ける）"}
-      - {id: abc150_f, role: challenge, summary: "b が a の巡回シフトを x で XOR したものになる (k, x) の列挙。隣接 XOR の列にして文字列検索に落とす"}
-      - {id: abc135_f, role: challenge, summary: "t の繰り返しが s の繰り返しに含まれる最大回数。一致位置をハッシュで求め、遷移の閉路を判定する"}
-    sources: ["08-string-geo §4.2 rolling-hash・hash-lcp-binary-search・hash-segment-tree", "08-string-geo §4.2 の表（ハッシュで代用できる場面とできない場面）", "08-string-geo §5", "05-ds segment-tree-monoids（abc331_f を共有）"]
-
-  - id: hash-safety
-    title: ハッシュの衝突と安全な設計（mod の選び方・ハック対策）
-    aliases: [ハッシュの衝突確率, 誕生日のパラドックス, mod 2^61−1, anti-hash, ハッシュが落とされる, unordered_map の衝突, カスタムハッシュ]
-    type: technique
-    level: 水
-    level_evidence: "ハッシュを使う水の問題から必要（abc141_e 1459 で固定の mod・基数がテストに衝突した記録）。固定の mod で値を比べて落ちる例が abc339_f (1716)"
-    kind: [ハッシュ・乱択]
-    prerequisites: [rolling-hash]
-    related: [hashing-for-sets, randomized, cpp-random-chrono, stl-containers, tree-isomorphism]
-    summary: "ハッシュの衝突確率は比べ合うハッシュの組の数で決まり、mod 10^9 程度を1つ使うだけでは全ペアの比較に耐えない。mod 2^61−1 と実行時に乱択した基数を使い、mod 2^64 の自然なオーバーフローや固定の mod に頼らないことで、事前に用意されたテストでも落ちない設計にする。"
-    signs:
-      - {type: phrase, text: "ハッシュ値を set や map に大量に入れて重複を数える"}
-      - {type: phrase, text: "1000 桁程度の巨大な数の積や和が一致するかを判定する"}
-      - {type: phrase, text: "unsigned long long の自然なオーバーフローに任せたハッシュで WA になる"}
-      - {type: constraint, text: "比べ合うハッシュが 10^5 個以上（組が 5×10^9 以上）"}
-    acl: []
-    frequency: B
-    sections:
-      - "衝突確率の見積もり：比較の回数ではなく組の数（誕生日のパラドックス）"
-      - "mod 2^64 が破られる理由（Thue–Morse 列。奇数のどの基数でも長さ 1024 で衝突する）"
-      - "推奨する設計：mod 2^61−1・乱択した基数・除算を使わない剰余"
-      - "多項式ハッシュは基数を、値のハッシュは mod（素数）を乱択する（abc339_f）"
-      - "AtCoder で狙われる条件（事前に固定されたテストと、誰でも使う固定の選択）"
-      - "二重ハッシュとの比較"
-      - "unordered_map への攻撃と、乱数を混ぜたカスタムハッシュ"
-    merged_keys: []
-    visual: "比べるハッシュの個数と衝突確率の関係を、mod 約 10^9 と 2^61−1 で比べるグラフ"
-    problems:
-      - {id: abc339_f, role: example, summary: "最大1000桁の A_i×A_j＝A_k となる組を数える。値を mod で比べるハッシュで、固定の 2^61−1 や 2^64 が落とされ、mod を乱択すべき例"}
-      - {id: typical90_au, role: example, summary: "ずらした文字列の一致をハッシュで判定する問題。作問者の解説が、mod 2^64 ではどの基数でも衝突するテストを作れると明記している"}
-      - {id: abc141_e, role: practice, summary: "長さの二分探索とハッシュの問題で、固定の mod・基数がテストに衝突し、基数を変えて回避した記録がある"}
-    sources: ["08-string-geo §4.2 hash-safety（衝突確率の表・mod 2^64 の導出・推奨する設計）", "08-string-geo §1.3（自分で確かめたこと）", "08-string-geo §6.3（ハッシュの衝突確率）", "09-cpp cpp-random-chrono"]
+      - {id: abc141_e, role: example, representative: true, summary: "重ならずに 2 回以上現れる部分文字列の最大の長さを求める（N ≤ 5000）。", approach: "長さを二分探索し、長さ固定の部分文字列のハッシュに重複があるかを調べる"}
+      - {id: abc331_f, role: example, summary: "1 文字の更新と、区間が回文かの質問に答える。", approach: "前向きと後ろ向きのハッシュ（長さ付き）をセグ木に載せる（節 hash-segment-tree）"}
+      - {id: abc398_f, role: practice, summary: "S の後ろに文字を足して作れる最短の回文を求める。", approach: "最長の回文接尾辞を、前向きと後ろ向きのハッシュの一致で求める（Manacher・Z でも解ける）"}
+      - {id: abc430_e, role: practice, summary: "A を何回回転すると B に一致するかを求める。", approach: "A+A の中で B を最初に見つける（Z・KMP でも解ける）"}
+      - {id: abc284_f, role: practice, summary: "T が「S の先頭 i 文字＋S の反転＋S の残り」の形になる S と i を求める。", approach: "区切り位置ごとに部分文字列の一致を O(1) で判定する（Z でも解ける。例題は z-algorithm）"}
+      - {id: typical90_au, role: challenge, summary: "（執筆時に確かめる）", approach: "色の決まり方を言い換えて「ずらした文字列の一致」に帰着し、ハッシュで判定する（Z でも解ける）"}
+      - {id: abc150_f, role: challenge, summary: "b が、a の巡回シフトの各要素を x で XOR したものになる (k, x) をすべて求める。", approach: "隣接 XOR の列にして文字列検索に落とす"}
+      - {id: abc135_f, role: challenge, summary: "t を繰り返した文字列が、s を繰り返した文字列に含まれる最大の回数を求める。", approach: "一致位置をハッシュで求め、遷移の閉路を判定する"}
+    problems_note: null
+    sources: ["08-string-geo §4.2 rolling-hash・hash-lcp-binary-search・hash-segment-tree", "08-string-geo §4.2 の表（ハッシュで代用できる場面とできない場面）", "08-string-geo §4.2 hash-safety（推奨する設計）", "08-string-geo §5", "05-ds segment-tree-monoids（abc331_f を共有）"]
 
   - id: hashing-for-sets
-    title: 集合・多重集合のハッシュ（Zobrist hashing）
+    chapter: ハッシュ
+    title: 集合・多重集合のハッシュ
+    nav_title: null
     aliases: [Zobrist hashing, 集合のハッシュ, 多重集合のハッシュ, XOR ハッシュ, 和のハッシュ, 乱択ハッシュ, 並べ替えて一致するか]
     type: technique
     level: 水
-    level_evidence: "abc250_e (1421)、abc424_f (1521)、abc367_f (1540)。応用 abc238_g (2254)、発展 abc455_g (3092)"
+    level_evidence: "abc367_f (1540, 2024)・abc424_f (1521, 2025)・abc250_e (1421)。応用 abc238_g (2254)、発展 abc455_g (3092, 2026)"
     kind: [ハッシュ・乱択, 累積和・差分]
     prerequisites: [prefix-sum, bit-operations]
     related: [rolling-hash, hash-safety, randomized, fenwick-tree, prime-exponent-vector, parity]
-    summary: "値ごとに独立な 64 ビットの乱数を割り当て、集合は XOR、多重集合は和でハッシュにすると、順序に関係なく2つの集合が等しいかを O(1) で比べられる。接頭辞や区間の累積と組めば、区間どうしが並べ替えで一致するかや、各値が偶数個かの判定に使える。"
+    summary: "値ごとに独立な 64 ビットの乱数を割り当て、集合は XOR、多重集合は和で表すと、2 つの集合が等しいかを順序に関係なく O(1) で比べられる。累積と組めば、区間どうしが並べ替えで一致するかも判定できる。"
     signs:
       - {type: phrase, text: "先頭 x 項の集合と先頭 y 項の集合が等しいか"}
-      - {type: phrase, text: "2つの区間を並べ替えると一致するか（多重集合として等しいか）"}
+      - {type: phrase, text: "2 つの区間を並べ替えると一致するか（多重集合として等しいか）"}
       - {type: phrase, text: "区間内の各値が偶数個（3 の倍数個）か・区間の積が平方数（立方数）か"}
       - {type: constraint, text: "N, Q ≤ 2×10^5 で区間の多重集合を毎回比べる"}
     acl: []
+    verify: []
     frequency: B
+    frequency_evidence: "recent 1（abc455_g）・前提として届くページなし・古い ABC 4 問"
     sections:
-      - "値ごとに乱数を割り当てる理由（値そのものを足すと {1, 4} と {2, 3} が衝突する）"
-      - "集合は XOR、多重集合は和（XOR は同じ値2個で打ち消す）"
-      - "接頭辞・区間のハッシュ（集合の接頭辞は初めて出た値だけ入れる）"
-      - "各値が偶数個・k の倍数個かの判定（指数 mod k を乱数で符号化）（黄）"
-      - "衝突確率と乱数の作り方（mt19937_64）"
-      - "BIT と組んで点の更新に対応する"
+      - {title: "値ごとに乱数を割り当てる理由（値そのものを足すと {1, 4} と {2, 3} が衝突する）", anchor: random-values}
+      - {title: "集合は XOR、多重集合は和（XOR は同じ値 2 個で打ち消す）", anchor: xor-vs-sum}
+      - {title: "接頭辞・区間のハッシュ（集合の接頭辞は初めて出た値だけ入れる）", anchor: prefix-hash}
+      - {title: "BIT と組んで点の更新に対応する", anchor: with-fenwick}
+      - {title: "衝突確率と乱数の作り方（mt19937_64）", anchor: collision-and-rng}
+      - {title: "各値が偶数個・k の倍数個かの判定（指数 mod k を乱数で符号化）", anchor: multiplicity-mod-k, level: 黄}
     merged_keys: [set-hashing]
-    visual: "値ごとの乱数の表と、先頭からの XOR（和）の累積の表。区間のハッシュは両端の差で得る図"
+    visual: {kind: static, priority: 2, text: "値ごとの乱数の表と、先頭からの XOR（和）の累積の表。区間のハッシュは両端の差で得る図"}
     problems:
-      - {id: abc250_e, role: example, summary: "数列 a の先頭 x 項と b の先頭 y 項の集合が等しいか。値ごとの乱数の XOR（初めて出たときだけ入れる）の累積で比べる"}
-      - {id: abc367_f, role: example, summary: "A の区間と B の区間が並べ替えで一致するか。値ごとの乱数の和（多重集合のハッシュ）の累積で比べる"}
-      - {id: abc424_f, role: practice, summary: "円周に弦を加え、既存の弦と交わるなら加えない。円を切り開いて区間にし、区間内の端点がそろうかを XOR ハッシュと BIT で判定する"}
-      - {id: abc238_g, role: challenge, summary: "区間の積が立方数か。素因数ごとの指数 mod 3 を乱数で符号化したハッシュの累積で判定する"}
-      - {id: abc455_g, role: challenge, summary: "区間の条件を、設計したハッシュの累積の一致に帰着して数える（発展）"}
+      - {id: abc250_e, role: example, summary: "数列 a の先頭 x 項と b の先頭 y 項が集合として等しいかの質問に答える。", approach: "値ごとの乱数の XOR（初めて出た値だけ入れる）の累積で比べる"}
+      - {id: abc367_f, role: example, representative: true, summary: "A の区間と B の区間が並べ替えで一致するかの質問に答える。", approach: "値ごとの乱数の和（多重集合のハッシュ）の累積で比べる"}
+      - {id: abc424_f, role: practice, summary: "円周上に弦を順に加え、既存の弦と交わるなら加えないとき、各弦を加えるかを答える。", approach: "円を切り開いて区間にし、区間内の端点がそろうかを XOR ハッシュと BIT で判定する"}
+      - {id: abc238_g, role: practice, summary: "区間の積が立方数かの質問に答える。", approach: "素因数ごとの指数 mod 3 を乱数で符号化したハッシュの累積で判定する（節 multiplicity-mod-k）"}
+      - {id: abc455_g, role: challenge, summary: "（執筆時に確かめる）", approach: "区間の条件を、設計したハッシュ（Zobrist・和）の累積の一致に帰着し、尺取りで数える（research/00 §2.3.8 の分類による）"}
+    problems_note: null
     sources: ["08-string-geo §4.2 hashing-for-sets", "05-ds §4 hashing-for-sets（08 との境界）", "00-curriculum §4.2 集合のハッシュ", "08-string-geo §6.2（集合の比較）"]
 
+  - id: hash-safety
+    chapter: ハッシュ
+    title: ハッシュの衝突と安全な設計
+    nav_title: null
+    aliases: [ハッシュの衝突確率, 誕生日のパラドックス, mod 2^61-1, ハッシュの mod の選び方, anti-hash, ハッシュが落とされる, unordered_map の衝突, カスタムハッシュ, hash collision]
+    type: technique
+    level: 青
+    level_evidence: "固定の mod のハッシュが落ちる例が abc339_f (1716, 2024)、mod 2^64 を狙ったテストが typical90_au（★7）。古くは abc141_e (1459) で固定の mod と基数が衝突した記録がある。abc319 以降で安全な設計が答えを分けた問題は青の帯にあるので、水から青に変えた（design-review §4.2・D2）。水で要る実装の推奨（mod 2^61−1・乱択した基数）は rolling-hash#recommended-design に置く"
+    kind: [ハッシュ・乱択]
+    prerequisites: [rolling-hash]
+    related: [hashing-for-sets, randomized, cpp-math-functions#random, cpp-container-idioms#unordered-map, tree-isomorphism]
+    summary: "比べるハッシュの組の数から衝突確率を見積もり、固定のテストでも落ちない mod と基数を選ぶ。mod 10^9 程度の 1 つでは全ペアの比較に耐えないので、mod 2^61−1 と実行時に乱択した基数（値のハッシュなら素数）を使う。"
+    signs:
+      - {type: phrase, text: "ハッシュ値を set や map に大量に入れて重複を数える"}
+      - {type: phrase, text: "1000 桁程度の巨大な数の積や和が一致するかを判定する"}
+      - {type: constraint, text: "比べ合うハッシュが 10^5 個以上（組が 5×10^9 以上）"}
+    acl: []
+    verify: []
+    frequency: C
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 2 問"
+    sections:
+      - {title: "衝突確率の見積もり：比較の回数ではなく組の数（誕生日のパラドックス）", anchor: birthday-bound}
+      - {title: "mod 2^64 が破られる理由（Thue-Morse 列。奇数のどの基数でも長さ 1024 で衝突する）", anchor: mod-2-64}
+      - {title: "推奨する設計：mod 2^61−1・乱択した基数・除算を使わない剰余", anchor: recommended-design}
+      - {title: "多項式ハッシュは基数を、値のハッシュは mod（素数）を乱択する", anchor: what-to-randomize}
+      - {title: "AtCoder で狙われる条件（事前に固定されたテストと、誰でも使う固定の選択）", anchor: atcoder-tests}
+      - {title: "二重ハッシュとの比較", anchor: double-hashing}
+      - {title: "unordered_map への攻撃と、乱数を混ぜたカスタムハッシュ", anchor: unordered-map}
+    merged_keys: []
+    visual: {kind: static, priority: 2, text: "比べるハッシュの個数と衝突確率の関係を、mod 約 10^9 と 2^61−1 で比べるグラフ"}
+    problems:
+      - {id: abc339_f, role: example, representative: true, summary: "最大 1000 桁の整数の列で、A_i×A_j = A_k となる組 (i, j, k) の数を求める。", approach: "値を mod で比べるハッシュ。固定の 2^61−1 や 2^64 は落とされるので、mod（素数）を実行時に乱択する"}
+      - {id: typical90_au, role: example, summary: "（執筆時に確かめる）", approach: "ずらした文字列の一致をハッシュで判定する。作問者の解説が、mod 2^64 ではどの基数でも衝突するテストを作れると明記している"}
+      - {id: abc141_e, role: practice, summary: "重ならずに 2 回以上現れる部分文字列の最大の長さを求める（N ≤ 5000）。", approach: "長さの二分探索とハッシュ。固定の mod・基数がテストに衝突し、基数を変えて回避した記録がある"}
+    problems_note: "練習が 1 問。ハッシュの設計が結果を分けたと確かめられた問題は調査で 3 問だけ（research/08 §4.2）。rolling-hash・hashing-for-sets の問題を安全な設計で解き直すよう本文で案内し、工程8b の前の問題の補充で探す"
+    sources: ["08-string-geo §4.2 hash-safety（衝突確率の表・mod 2^64 の導出・推奨する設計）", "08-string-geo §1.3（自分で確かめたこと）", "08-string-geo §6.3（ハッシュの衝突確率）", "09-cpp cpp-random-chrono"]
+
   - id: z-algorithm
-    title: Z-algorithm（各位置からの最長共通接頭辞）
-    aliases: [Z 法, Z 配列, Z function, 拡張 KMP, z_algorithm, 巡回シフト, A+A の技]
+    chapter: 線形時間の照合と回文
+    title: Z-algorithm
+    nav_title: null
+    aliases: [Z 法, Z 配列, Z function, 拡張 KMP, z_algorithm, 各位置からの最長共通接頭辞, 巡回シフト, A+A の技]
     type: technique
     level: 水
-    level_evidence: "abc430_e (1109)、abc141_e (1459)、abc284_f (1575)。応用は abc257_g (2078)、abc343_g (2114)。パターン検索は ACL の z_algorithm で足りるので Z を水、KMP を青にする（設計書 §4.3）"
+    level_evidence: "abc284_f (1575)・abc141_e (1459) で水。abc319 以降は abc398_f (1033)・abc430_e (1109) が基礎の帯の入口（ハッシュ・KMP・Manacher でも解ける）、応用が abc343_g (2114, 2024)・abc257_g (2078)。パターン検索は ACL の z_algorithm で足りるので Z を水、KMP を青にする（設計書 §4.3）"
     kind: [文字列]
     prerequisites: [string-basics]
-    related: [kmp, rolling-hash, suffix-array, palindrome, dp-sequence-partition, bit-dp]
-    summary: "Z 配列 z[i]（S と S[i:] の最長共通接頭辞の長さ）を O(N) で求め、P＋区切り＋T の Z 配列でパターンの全出現を決定的に見つける。A+A の中で B を探す回転の検索や周期の判定にも使え、ACL の z_algorithm で書ける。"
+    related: [kmp, rolling-hash, suffix-array, palindrome#manacher, dp-sequence-partition, bit-dp, method-comparison#strings]
+    summary: "Z 配列 z[i]（S と S[i:] の最長共通接頭辞の長さ）を O(N) で求める。P＋区切り＋T の Z 配列でパターンの全出現を決定的に見つけられ、回転の検索や周期の判定にも使える。"
     signs:
       - {type: phrase, text: "各位置から、文字列の先頭と何文字一致するか"}
       - {type: phrase, text: "A を何回回転すると B になるか（円環状の文字列の一致）"}
       - {type: phrase, text: "T を S の接頭辞の連結で表す最小の個数"}
       - {type: phrase, text: "パターンの全出現位置"}
-      - {type: constraint, text: "|S|, |T| ≤ 10^6 で、決定的に O(N) で照合したい"}
+      - {type: constraint, text: "|S|, |T| ≤ 10^6 で、ずらし方ごとに比べる O(|S||T|) が間に合わない"}
     acl: [z_algorithm]
+    verify: [zalgorithm]
     frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 6 問"
     sections:
-      - "Z 配列の定義と、P＋区切り＋T によるパターン検索"
-      - "なぜ O(N) か：Z-box の内側は値をコピーでき、比較のたびに右端が進む"
-      - "ACL の z_algorithm（z[0]＝n の流儀・vector<int> にして区切りに −1）"
-      - "巡回シフト：A+A の中で B を探す（回転 N 回を二重に数えない）"
-      - "周期の判定：p が周期 ⇔ z[p]＝N−p"
-      - "S＋区切り＋T で各位置から S の接頭辞が何文字続くか（DP の材料）（黄）"
-      - "Z・KMP・ハッシュの使い分け"
+      - {title: "Z 配列の定義と、P＋区切り＋T によるパターン検索", anchor: pattern-search}
+      - {title: "なぜ O(N) か：Z-box の内側は値をコピーでき、比較のたびに右端が進む", anchor: linear-time}
+      - {title: "ACL の z_algorithm（z[0] = n の流儀・vector<int> にして区切りに −1）", anchor: acl}
+      - {title: "巡回シフト：A+A の中で B を探す（回転 N 回を二重に数えない）", anchor: cyclic-shift}
+      - {title: "周期の判定：p が周期 ⇔ z[p] = N − p", anchor: period}
+      - {title: "S＋区切り＋T で各位置から S の接頭辞が何文字続くか（DP の材料）", anchor: prefix-extension, level: 黄}
+      - {title: "Z・KMP・ハッシュの使い分け", anchor: comparison}
     merged_keys: [cyclic-shift]
-    visual: "（動く図の候補）Z-box [l, r) を左から右へ動かし、箱の内側は対応する位置の値をコピー、はみ出した分だけ比較するステップ送り。比較が成功したマスに色を付けて O(N) を見せる。palindrome の Manacher の図と部品を共有する"
+    visual: {kind: dynamic, priority: 1, text: "Z-box [l, r) を左から右へ動かし、箱の内側は対応する位置の値をコピー、はみ出した分だけ比較するステップ送り。比較が成功したマスに色を付けて O(N) を見せる。palindrome の Manacher の図と部品を共有する"}
     problems:
-      - {id: abc430_e, role: example, summary: "A を何回回転すると B になるか。B＋区切り＋A＋A の Z 配列で、A+A の中の B の最初の出現を探す"}
-      - {id: abc284_f, role: example, summary: "T＝S の前半＋S の反転＋S の後半となる S を探す。T の前半と後半を反転して Z 配列を取り、区切り位置ごとの両側の一致を O(1) で確かめる"}
-      - {id: abc398_f, role: practice, summary: "後ろに文字を足して最短の回文を作る。反転した文字列との連結の Z 配列で最長の回文接尾辞を求める（Manacher・ハッシュでも解ける）"}
-      - {id: abc141_e, role: practice, summary: "重ならずに2回現れる部分文字列の最大長（N≤5000）。各開始位置の接尾辞に Z を適用して O(N^2) で求める"}
-      - {id: abc257_g, role: challenge, summary: "T を S の接頭辞の連結に分ける最小個数。S＋区切り＋T の Z 配列で各位置から伸ばせる長さを得て DP する"}
-      - {id: abc343_g, role: challenge, summary: "N≤20 個の文字列を全部含む最短の文字列。含まれるものを除き、重なりの長さを求めて bitDP する"}
-      - {id: arc055_c, role: challenge, summary: "S＝A+B+C+A+C となる分け方の数。先頭からと末尾からの一致長を Z で求めて数える"}
+      - {id: abc430_e, role: example, summary: "A を何回回転すると B に一致するかを求める。", approach: "B＋区切り＋A＋A の Z 配列で、A+A の中の B の最初の出現を探す（節 cyclic-shift）"}
+      - {id: abc284_f, role: example, representative: true, summary: "T が「S の先頭 i 文字＋S の反転＋S の残り」の形になる S と i を求める。", approach: "T の前半と後半を反転して Z 配列を取り、区切り位置ごとの両側の一致を O(1) で確かめる"}
+      - {id: abc398_f, role: practice, summary: "S の後ろに文字を足して作れる最短の回文を求める。", approach: "反転した文字列との連結の Z 配列で最長の回文接尾辞を求める（Manacher・ハッシュでも解ける。例題は palindrome）"}
+      - {id: abc141_e, role: practice, summary: "重ならずに 2 回以上現れる部分文字列の最大の長さを求める（N ≤ 5000）。", approach: "各開始位置の接尾辞に Z を適用して O(N^2) で求める"}
+      - {id: abc257_g, role: challenge, summary: "T を S の接頭辞の連結に分けるときの最小の個数を求める。", approach: "S＋区切り＋T の Z 配列で各位置から伸ばせる長さを得て DP する（節 prefix-extension）"}
+      - {id: abc343_g, role: challenge, summary: "N ≤ 20 個の文字列をすべて部分文字列として含む最短の文字列の長さを求める。", approach: "ほかに含まれるものを除き、重なりの長さを Z で求めて bitDP する"}
+      - {id: arc055_c, role: challenge, summary: "S を A+B+C+A+C の形に分ける方法の数を求める。", approach: "先頭からと末尾からの一致長を Z で求めて数える"}
+    problems_note: null
     sources: ["08-string-geo §4.3 z-algorithm・cyclic-shift", "08-string-geo §2.2（文字列の早見表）", "08-string-geo §5 z-algorithm・cyclic-shift", "ACL document_ja/string.md（z_algorithm）"]
 
+  - id: kmp
+    chapter: 線形時間の照合と回文
+    title: KMP 法と文字列の周期
+    nav_title: null
+    aliases: [KMP, MP 法, Knuth-Morris-Pratt, 失敗関数, prefix function, π 配列, border, 最小周期, 繰り返し単位]
+    type: technique
+    level: 青
+    level_evidence: "パターン検索だけなら Z・ハッシュで代用でき水で足りる（設計書 §4.3）。border の連鎖・周期・照合オートマトンとして使うのは青〜黄：abc304_f (1619) の周期、照合オートマトンを複数パターンに広げた abc419_f (1726, 2025)・abc458_f (1744, 2026)、abc150_f (2281)、abc135_f (2388)"
+    kind: [文字列]
+    prerequisites: [string-basics]
+    related: [z-algorithm, aho-corasick, string-automaton-dp, rolling-hash, divisor-enum, mobius-function, suffix-automaton]
+    summary: "π[i]（先頭 i+1 文字の、接頭辞でも接尾辞でもある最長の真の部分の長さ）を O(N) で求める。π をたどると全 border と最小周期が分かり、照合に失敗したときのずらし方や照合オートマトンの遷移にも使える。"
+    signs:
+      - {type: phrase, text: "接頭辞と接尾辞が一致する最長の長さ"}
+      - {type: phrase, text: "最小周期・何かの繰り返しで書けるか"}
+      - {type: phrase, text: "N の約数 M を周期に持つ文字列（表）を数える"}
+      - {type: phrase, text: "文字が 1 つずつ来るたびに、パターンが現れたかを判定する"}
+      - {type: constraint, text: "|S| ≤ 10^6 で、すべての接頭辞について周期や一致する長さを問う"}
+    acl: []
+    verify: []
+    frequency: B
+    frequency_evidence: "recent 0・前提として 2 ページに届く（直接 2）・古い ABC 6 問"
+    sections:
+      - {title: "失敗関数 π（border）の定義と添字の流儀（π[0] を 0 にするか −1 にするか）", anchor: failure-function}
+      - {title: "なぜ O(N) か：照合長は 1 文字で高々 1 増え、ループで減る回数も合計 N 以下", anchor: linear-time}
+      - {title: "パターン照合：失敗したら π の値までずらす", anchor: matching}
+      - {title: "MP と KMP の違い（競プロでは MP を KMP と呼ぶことが多い）", anchor: mp-vs-kmp}
+      - {title: "border の連鎖と全 border の列挙", anchor: border-chain}
+      - {title: "周期と繰り返し：最小周期 N − π[N−1]、N を割り切るときだけ繰り返しで書ける（弱周期定理）", anchor: string-period}
+      - {title: "N の約数の周期を数える：約数ごとに数えて包除（メビウス）", anchor: count-periodic}
+      - {title: "照合オートマトン（状態×文字 → 次の状態）を表に埋める", anchor: automaton}
+      - {title: "Z との使い分け（ACL に KMP はなく、周期は z_algorithm でも判定できる）", anchor: comparison}
+    merged_keys: [string-period]
+    visual: {kind: dynamic, priority: 2, text: "照合に失敗したときにパターンを π の値だけずらすステップ送りと、border の入れ子（π[i], π[π[i]−1], …）の図。aho-corasick の失敗リンクの図と部品を共有する"}
+    problems:
+      - {id: abc304_f, role: example, representative: true, summary: "N の約数 M を周期に持つという条件を満たすシフト表の数を求める。", approach: "約数ごとに数え、包除（メビウス）で重複を除く。周期の約数性が要点（節 count-periodic）"}
+      - {id: abc150_f, role: example, summary: "b が、a の巡回シフトの各要素を x で XOR したものになる (k, x) をすべて求める。", approach: "隣接 XOR の差分列にして KMP で全出現を求める"}
+      - {id: abc430_e, role: practice, summary: "A を何回回転すると B に一致するかを求める。", approach: "A+A の中の B の最初の出現を KMP で求める（Z・ハッシュでも解ける。例題は z-algorithm）"}
+      - {id: abc135_f, role: practice, summary: "t を繰り返した文字列が、s を繰り返した文字列に含まれる最大の回数を求める。", approach: "s の繰り返しの中の t の出現位置を KMP で求め、出現からの遷移の閉路を判定する"}
+      - {id: abc312_h, role: challenge, summary: "（執筆時に確かめる）", approach: "各文字列を最小の繰り返し単位の何回繰り返しかに直し、単位ごとに使った回数を管理する"}
+      - {id: arc060_d, role: challenge, summary: "文字列を、周期を持たない文字列に分割するときの最小の個数と、その分け方の数を求める。", approach: "各接頭辞・接尾辞が周期を持つかを判定する（発展）"}
+    problems_note: null
+    sources: ["08-string-geo §4.3 kmp・string-period", "08-string-geo §2.2・§2.3（Z と KMP）", "08-string-geo §5 kmp・string-period", "07-math-comb mobius-function（周期の包除）"]
+
   - id: palindrome
+    chapter: 線形時間の照合と回文
     title: 回文の扱いと Manacher
-    aliases: [回文, palindrome, 回文判定, Manacher, 回文半径, 中心から伸ばす, 両端から作る]
+    nav_title: null
+    aliases: [回文, palindrome, 回文判定, "Manacher's algorithm", 回文半径, 中心から伸ばす, 両端から作る]
     type: technique
     level: 水
-    level_evidence: "abc359_d (1381)、abc394_e (1403)、abc290_e (1485)。基礎帯に abc468_d (683)、abc206_d (879)、応用は abc363_f (1913)、abc197_f (1945)。Manacher は abc398_f (1033) が典型だが Z・ハッシュでも解け、本質になる ABC 問題が少ないので節（青）にする（設計書 §4.3）"
+    level_evidence: "abc359_d (1381, 2024)・abc394_e (1403, 2025)・abc290_e (1485)。基礎帯に abc468_d (683, 2026)・abc206_d (879)、応用は abc363_f (1913)・abc197_f (1945)。Manacher は abc398_f (1033) が典型だが Z・ハッシュでも解け、本質になる ABC 問題が少ないので節（青）にする（設計書 §4.3）"
     kind: [文字列]
-    prerequisites: [string-basics, bfs]
-    related: [rolling-hash, z-algorithm, union-find, dp-state-design, contribution, suffix-automaton]
-    summary: "回文は「外側の1組をはがしても回文」という構造を持つので、対称な位置の組を見る・中心から伸ばす・両端から作るのどれかで状態を小さくできる。各中心の最長回文の半径を O(N) で求める Manacher もこのページで扱う。"
+    prerequisites: [string-basics]
+    related: [bfs, extended-dijkstra#two-ends, union-find, dp-state-design, contribution, rolling-hash, z-algorithm, suffix-automaton#palindromic-tree]
+    summary: "回文の問題を、対称な位置の組を見る・中心から伸ばす・両端から作るの 3 つの見方で小さな状態に落とす。各中心の最長回文の半径は Manacher で O(N) で求まる。"
     signs:
       - {type: phrase, text: "回文にするための最小の操作回数（書き換え・一斉置換）"}
       - {type: phrase, text: "回文になる部分文字列の個数"}
       - {type: phrase, text: "グラフの歩道の文字列が回文になる最短の長さ"}
       - {type: phrase, text: "長さ K の回文を部分文字列に含まないように埋める方法の数"}
-      - {type: constraint, text: "N ≤ 3000 程度なら中心から伸ばす O(N^2)、N ≤ 10^6 なら Manacher"}
+      - {type: constraint, text: "N ≤ 10^6 で、すべての中心（区間）について回文かを問う"}
     acl: []
+    verify: [enumerate_palindromes]
     frequency: B
+    frequency_evidence: "recent 1（abc468_d）・前提として届くページなし・古い ABC 7 問"
     sections:
-      - "対称な位置の組を見る（Union-Find でまとめる・組ごとの寄与を数える）"
-      - "中心から伸ばす O(N^2)（奇数長と偶数長の中心）"
-      - "直前 K−1 文字を状態にした DP（長さ K の回文を作らない）"
-      - "グラフ上の回文：頂点の組を状態にして両端から BFS（出会う位置の偶奇）"
-      - "外側から組み立てる（回文の式・約数）"
-      - "Manacher：各中心の最長回文半径を O(N) で（Z と同じく内側をコピーする）（青）"
-      - "回文判定の道具の使い分け（Manacher・ハッシュ・Z・回文木）"
+      - {title: "対称な位置の組を見る（Union-Find でまとめる・組ごとの寄与を数える）", anchor: symmetric-pairs}
+      - {title: "中心から伸ばす O(N^2)（奇数長と偶数長の中心）", anchor: expand-center}
+      - {title: "直前 K−1 文字を状態にした DP（長さ K の回文を作らない）", anchor: avoid-k-palindrome}
+      - {title: "グラフ上の回文：頂点の組を状態にして両端から BFS（出会う位置の偶奇）", anchor: palindrome-path}
+      - {title: "外側から組み立てる（回文の式・約数）", anchor: build-outside-in, level: 青}
+      - {title: "Manacher：各中心の最長回文半径を O(N) で（Z と同じく内側をコピーする）", anchor: manacher, level: 青}
+      - {title: "回文判定の道具の使い分け（Manacher・ハッシュ・Z・回文木）", anchor: comparison}
     merged_keys: [manacher]
-    visual: "対称な位置を弧で結ぶ図と、Manacher で最も右まで届く回文の内側で鏡の位置の半径をコピーする図（Z の図と並べて同じ考え方と見せる）"
+    visual: {kind: dynamic, priority: 3, text: "対称な位置を弧で結ぶ図と、Manacher で最も右まで届く回文の内側で鏡の位置の半径をコピーするステップ送り（z-algorithm の図と部品を共有する。静的な図で代えてよい）"}
     problems:
-      - {id: abc468_d, role: example, summary: "1文字以下の書き換えで回文になる部分文字列の数。各中心から不一致を1回まで許して伸ばす O(N^2)"}
-      - {id: abc398_f, role: example, summary: "後ろに文字を足して最短の回文を作る。最長の回文接尾辞を Manacher で求める（Z・ハッシュでも解ける）"}
-      - {id: abc394_e, role: example, summary: "文字付きの有向グラフで、各頂点対を結ぶ回文の最短の歩道。頂点の組を状態にして両端から BFS する"}
-      - {id: abc206_d, role: practice, summary: "値の一斉置換で数列を回文にする最小回数。対称な位置の値を Union-Find でつなぐ"}
-      - {id: abc359_d, role: practice, summary: "? を埋めて長さ K の回文を部分文字列に作らない方法の数。直前 K−1 文字を状態にした DP"}
-      - {id: abc290_e, role: practice, summary: "すべての連続部分列を回文にする操作回数の総和。対称な位置の組ごとの寄与を数える"}
-      - {id: abc363_f, role: challenge, summary: "N を数字と * からなる回文の式で表す。反転しても約数になる組を外側から重ねる"}
-      - {id: abc197_f, role: challenge, summary: "1 から N への歩道で辺の文字列が回文になる最短の長さ。頂点の組から両端で同じ文字の辺をたどる BFS"}
+      - {id: abc468_d, role: example, summary: "1 文字以下の書き換えで回文になる部分文字列の数を求める。", approach: "各中心から不一致を 1 回まで許して伸ばす O(N^2)"}
+      - {id: abc398_f, role: example, summary: "S の後ろに文字を足して作れる最短の回文を求める。", approach: "最長の回文接尾辞を Manacher で求める（Z・ハッシュでも解ける）"}
+      - {id: abc394_e, role: example, representative: true, summary: "文字付きの有向グラフで、各頂点対について、たどった文字列が回文になる最短の歩道の長さを求める。", approach: "頂点の組を状態にして両端から BFS する"}
+      - {id: abc206_d, role: practice, summary: "値を一斉に置き換える操作で数列を回文にする最小の回数を求める。", approach: "対称な位置の値を Union-Find でつなぐ"}
+      - {id: abc359_d, role: practice, summary: "? を埋めて、長さ K の回文を部分文字列に含まない文字列を作る方法の数を求める。", approach: "直前 K−1 文字を状態にした DP"}
+      - {id: abc290_e, role: practice, summary: "すべての連続部分列について、回文にするための最小の書き換え回数を足した値を求める。", approach: "対称な位置の組ごとの寄与を数える"}
+      - {id: abc363_f, role: challenge, summary: "N を、数字と * からなる回文になっている式で表す。", approach: "反転しても約数になる組を外側から重ねる"}
+      - {id: abc197_f, role: challenge, summary: "1 から N への歩道で、辺の文字を並べた文字列が回文になる最短の長さを求める。", approach: "頂点の組から両端で同じ文字の辺をたどる BFS"}
+    problems_note: null
     sources: ["08-string-geo §4.4 palindrome", "08-string-geo §4.3 manacher", "08-string-geo §5 palindrome・manacher", "08-string-geo §7.2（Manacher のレベル）"]
 
   - id: trie
-    title: Trie（文字列の集合を接頭辞で共有する木）
-    aliases: [トライ木, 接頭辞木, prefix tree, Trie, 全ペアの LCP の和]
+    chapter: Trie と照合オートマトン
+    title: Trie
+    nav_title: null
+    aliases: [トライ木, 接頭辞木, prefix tree, 全ペアの LCP の和]
     type: technique
     level: 水
-    level_evidence: "abc353_e (1217)、abc437_e (1279)、abc403_e (1447)。基礎帯に abc287_e (1093)、応用 abc377_g (1782)、abc268_g (2311)"
+    level_evidence: "abc353_e (1217, 2024)・abc437_e (1279, 2025)・abc403_e (1447, 2025)。基礎帯に abc287_e (1093)、応用 abc377_g (1782)・abc268_g (2311)"
     kind: [文字列, データ構造]
     prerequisites: [string-basics, dfs]
     related: [binary-trie, aho-corasick, suffix-array, sorting-techniques, contribution, linearity-of-expectation]
-    summary: "文字列の集合を、共通の接頭辞を共有する木に入れる。各節点に通過数を持てば、全ペアの最長共通接頭辞の和・接頭辞に持つ文字列の数・辞書順の列挙などが、文字列の長さの総和に比例する時間で求まる。"
+    summary: "文字列の集合を、共通の接頭辞を共有する木に入れる。各節点に通過数を持てば、全ペアの最長共通接頭辞の和や、ある接頭辞を持つ文字列の数が、長さの総和に比例する時間で求まる。"
     signs:
       - {type: phrase, text: "全ペアの最長共通接頭辞（LCP）の長さの和"}
-      - {type: phrase, text: "各文字列について、他の文字列との LCP の最大"}
+      - {type: phrase, text: "各文字列について、ほかの文字列との LCP の最大"}
       - {type: phrase, text: "ある文字列を接頭辞に持つ文字列の数（追加・削除あり）"}
       - {type: phrase, text: "数列（文字列）の集合を辞書順にたどる"}
       - {type: constraint, text: "文字列の個数が多く、長さの総和が 5×10^5 程度まで"}
     acl: []
+    verify: []
     frequency: B
+    frequency_evidence: "recent 0・前提として 2 ページに届く（直接 2）・古い ABC 6 問"
     sections:
-      - "節点・挿入・検索（子を配列で持つか map で持つか・節点数の上限）"
-      - "通過数と終端の印の区別"
-      - "全ペアの LCP の和：節点ごとに C(通過数, 2) を足す（主客転倒）"
-      - "ソートして隣どうしの LCP を見る代用"
-      - "Trie 上の DFS と、節点に値を持つ DP（青）"
-      - "Trie 上の確率・期待値（黄）"
-      - "2進 Trie（XOR の最小・最大）と Aho–Corasick へのつながり"
+      - {title: "節点・挿入・検索（子を配列で持つか map で持つか・節点数の上限）", anchor: basic-operations}
+      - {title: "通過数と終端の印の区別", anchor: counts}
+      - {title: "全ペアの LCP の和：節点ごとに C(通過数, 2) を足す（主客転倒）", anchor: lcp-sum}
+      - {title: "ソートして隣どうしの LCP を見る代用", anchor: sort-alternative}
+      - {title: "Trie 上の DFS と、節点に値を持つ DP", anchor: dp-on-trie, level: 青}
+      - {title: "Trie 上の確率・期待値", anchor: expectation-on-trie, level: 黄}
     merged_keys: []
-    visual: "文字列を1つずつ挿入して節点の通過数が増える図と、全ペアの LCP の和が各節点の C(通過数, 2) の和になる図"
+    visual: {kind: static, priority: 2, text: "文字列を 1 つずつ挿入して節点の通過数が増える図と、全ペアの LCP の和が各節点の C(通過数, 2) の和になる図"}
     problems:
-      - {id: abc287_e, role: example, summary: "各文字列と他の文字列の LCP の最大。Trie の通過数で求める（ソートして隣と比べてもよい）"}
-      - {id: abc353_e, role: example, summary: "全組の LCP の長さの和。各節点の通過数 c について C(c, 2) を足す"}
-      - {id: abc437_e, role: practice, summary: "前の数列に1要素を足して作る数列たちを辞書順に並べる。Trie に入れて辞書順に DFS する"}
-      - {id: abc403_e, role: practice, summary: "X と Y に文字列を加えるたびに、X のどれも接頭辞に持たない Y の要素数を答える。Trie の通過数を管理し、X の節点以下を消す"}
-      - {id: abc377_g, role: practice, summary: "末尾の削除と追加で前の文字列に一致させる最小コスト。各節点に、そこから伸ばして一致させる最小コストを持つ"}
-      - {id: abc268_g, role: challenge, summary: "文字の順序がランダムなときの辞書順の順位の期待値。Trie で接頭辞の関係とそれ以外（確率 1/2）を数える"}
+      - {id: abc287_e, role: example, summary: "各文字列について、ほかの文字列との最長共通接頭辞の長さの最大を求める。", approach: "Trie の通過数で求める（ソートして隣と比べてもよい）"}
+      - {id: abc353_e, role: example, representative: true, summary: "すべての組について最長共通接頭辞の長さを足した値を求める。", approach: "各節点の通過数 c について C(c, 2) を足す"}
+      - {id: abc437_e, role: practice, summary: "前の数列に 1 要素を足して作る数列たちを、辞書順に並べる。", approach: "Trie に入れて辞書順に DFS する"}
+      - {id: abc403_e, role: practice, summary: "X と Y に文字列を加えるたびに、X のどれも接頭辞に持たない Y の要素の数を答える。", approach: "Trie の通過数を管理し、X の節点以下を消す"}
+      - {id: abc377_g, role: practice, summary: "末尾の削除と追加で、それより前の文字列のどれかに一致させる最小のコストを、各文字列について求める。", approach: "各節点に、そこから伸ばして一致させる最小コストを持つ（節 dp-on-trie）"}
+      - {id: abc268_g, role: challenge, summary: "文字の大小の順序がランダムに決まるとき、各文字列の辞書順の順位の期待値を求める。", approach: "Trie で接頭辞の関係とそれ以外（確率 1/2）を数える（節 expectation-on-trie）"}
+    problems_note: null
     sources: ["08-string-geo §4.5 trie・binary-trie", "08-string-geo §5 trie", "05-ds binary-trie（相互リンク）"]
 
-  - id: kmp
-    title: KMP 法と文字列の周期（失敗関数・border）
-    aliases: [KMP, MP 法, 失敗関数, prefix function, π 配列, border, 周期, 最小周期, 繰り返し単位]
-    type: technique
-    level: 青
-    level_evidence: "パターン検索だけなら Z・ハッシュで代用でき水で足りる（設計書 §4.3）。border の連鎖・周期・照合オートマトンとして使うのは青〜黄：abc304_f (1619) の周期、abc419_f (1726)・abc458_f (1744)（オートマトンを複数パターンに一般化した Aho–Corasick）、abc150_f (2281)、abc135_f (2388)"
-    kind: [文字列]
-    prerequisites: [z-algorithm]
-    related: [aho-corasick, string-automaton-dp, rolling-hash, divisor-enum, mobius-function, suffix-automaton]
-    summary: "π[i]（先頭 i+1 文字の、接頭辞でも接尾辞でもある最長の真の部分の長さ）を O(N) で求める。π をたどると全 border と最小周期が分かり、照合に失敗したときのずらし方や、照合オートマトンの遷移にも使える。"
-    signs:
-      - {type: phrase, text: "接頭辞と接尾辞が一致する最長の長さ（border）"}
-      - {type: phrase, text: "最小周期・何かの繰り返しで書けるか"}
-      - {type: phrase, text: "N の約数 M を周期に持つ文字列（表）を数える"}
-      - {type: phrase, text: "文字が1つずつ来るたびに、パターンが現れたかを判定する"}
-      - {type: constraint, text: "|S| ≤ 10^6 で全接頭辞の border を求める"}
-    acl: []
-    frequency: B
-    sections:
-      - "失敗関数 π（border）の定義と添字の流儀（π[0] を 0 にするか −1 にするか）"
-      - "なぜ O(N) か：照合長は1文字で高々1増え、ループで減る回数も合計 N 以下"
-      - "パターン照合：失敗したら π の値までずらす"
-      - "MP と KMP の違い（競プロでは MP を KMP と呼ぶことが多い）"
-      - "border の連鎖と全 border の列挙"
-      - "周期と繰り返し：最小周期 N−π[N−1]、N を割り切るときだけ繰り返しで書ける（弱周期定理）"
-      - "N の約数の周期を数える：約数ごとに数えて包除（メビウス）"
-      - "照合オートマトン（状態×文字→次の状態）を表に埋める"
-      - "Z との使い分け（ACL に KMP はなく、周期は z_algorithm でも判定できる）"
-    merged_keys: [string-period]
-    visual: "照合に失敗したときにパターンを π の値だけずらす図と、border の入れ子（π[i], π[π[i]−1], …）の図"
-    problems:
-      - {id: abc304_f, role: example, summary: "N の約数 M を周期に持つシフト表の数。約数ごとに数え、包除（メビウス）で重複を除く"}
-      - {id: abc150_f, role: example, summary: "b が a の巡回シフトを x で XOR したものになる (k, x) の列挙。隣接 XOR の差分列にして KMP で全出現を求める"}
-      - {id: abc430_e, role: practice, summary: "A を何回回転すると B になるか。A+A の中の B の最初の出現を KMP で求めてみる（Z・ハッシュでも解ける）"}
-      - {id: abc135_f, role: practice, summary: "t の繰り返しが s の繰り返しに含まれる最大回数。s の繰り返しの中の t の出現位置を求め、出現からの遷移の閉路を判定する"}
-      - {id: abc312_h, role: challenge, summary: "各文字列を最小の繰り返し単位の何回繰り返しかに直し、単位ごとに使った回数を管理する"}
-      - {id: arc060_d, role: challenge, summary: "周期を持たない文字列への最小分割とその方法の数。各接頭辞・接尾辞が周期を持つかを判定する（発展）"}
-    sources: ["08-string-geo §4.3 kmp・string-period", "08-string-geo §2.2・§2.3（Z と KMP）", "08-string-geo §5 kmp・string-period", "07-math-comb mobius-function（周期の包除）"]
-
   - id: aho-corasick
-    title: Aho–Corasick 法（複数パターンの同時照合）
-    aliases: [Aho-Corasick, エイホ–コラシック, AC オートマトン, 失敗リンク, 複数パターン照合, 禁止語]
+    chapter: Trie と照合オートマトン
+    title: Aho-Corasick 法
+    nav_title: null
+    aliases: [AC オートマトン, 失敗リンク, 複数パターン照合, 禁止語, Aho-Corasick algorithm]
     type: technique
     level: 青
-    level_evidence: "abc362_g (1625)、abc419_f (1726)、abc458_f (1744)。応用 abc268_h (2560)。最近の F で出ており、以前の感覚（黄〜発展）より下がった（設計書 §4.3）"
+    level_evidence: "abc362_g (1625, 2024)・abc419_f (1726, 2025)・abc458_f (1744, 2026)。応用 abc268_h (2560)。最近の F で出ており、以前の感覚（黄〜発展）より下がった（設計書 §4.3）"
     kind: [文字列]
     prerequisites: [trie, kmp, bfs]
-    related: [string-automaton-dp, suffix-array, rolling-hash, dp-matrix-power]
-    summary: "パターンの Trie に失敗リンク（Trie にある最長の真の接尾辞へのリンク）を BFS 順に張り、全文字の遷移を埋めたオートマトンにする。テキストを1回流すだけで多数のパターンの出現をまとめて数えられ、照合オートマトンとして DP や行列累乗にも使える。"
+    related: [string-automaton-dp, suffix-array, rolling-hash, matrix-power]
+    summary: "パターンの Trie に失敗リンク（Trie にある最長の真の接尾辞へのリンク）を BFS 順に張り、全文字の遷移を埋めたオートマトンにする。テキストを 1 回流すだけで、多数のパターンの出現をまとめて数えられる。"
     signs:
       - {type: phrase, text: "多数のパターンそれぞれの、テキスト中の出現回数"}
       - {type: phrase, text: "どのパターンも含まない（すべて含む）文字列の数"}
       - {type: phrase, text: "禁止語を含まないように最少の文字を書き換える"}
       - {type: constraint, text: "パターンの長さの総和が 10^5〜10^6 で、パターンの個数も多い"}
     acl: []
+    verify: [aho_corasick]
     frequency: B
+    frequency_evidence: "recent 1（abc458_f）・前提として届くページなし・古い ABC 3 問"
     sections:
-      - "Trie と失敗リンク（KMP の π を Trie に一般化したもの）"
-      - "BFS 順に失敗リンクを張る理由と、全文字の遷移表の埋め方"
-      - "出現回数の集計：訪問回数を失敗リンクの木で葉から根へ足す（出現のたびにたどると遅い）"
-      - "終端の印を失敗リンク先から受け継ぐ"
-      - "照合オートマトンとして使う（DP・行列累乗）"
-      - "禁止語の貪欲：一致したら書き換えて状態を根に戻す（黄）"
-      - "SA の二分探索・ハッシュとの使い分け"
+      - {title: "Trie と失敗リンク（KMP の π を Trie に一般化したもの）", anchor: failure-links}
+      - {title: "BFS 順に失敗リンクを張る理由と、全文字の遷移表の埋め方", anchor: build}
+      - {title: "出現回数の集計：訪問回数を失敗リンクの木で葉から根へ足す（出現のたびにたどると遅い）", anchor: count-occurrences}
+      - {title: "終端の印を失敗リンク先から受け継ぐ", anchor: inherit-terminal}
+      - {title: "照合オートマトンとして使う（DP・行列累乗）", anchor: as-automaton}
+      - {title: "禁止語の貪欲：一致したら書き換えて状態を根に戻す", anchor: forbidden-greedy, level: 黄}
+      - {title: "SA の二分探索・ハッシュとの使い分け", anchor: comparison}
     merged_keys: []
-    visual: "（動く図の候補）Trie に失敗リンク（破線）を BFS 順に張るステップ送りと、テキストを流すときの状態の移動。出現の集計を失敗リンクの木で葉から根へ足す図"
+    visual: {kind: dynamic, priority: 1, text: "Trie に失敗リンク（破線）を BFS 順に張るステップ送りと、テキストを流すときの状態の移動。出現の集計を失敗リンクの木で葉から根へ足す図"}
     problems:
-      - {id: abc362_g, role: example, summary: "S の中の各 T_i の出現回数。訪問回数を失敗リンクの木の上で後からまとめて足す（SA の二分探索でも解ける）"}
-      - {id: abc419_f, role: practice, summary: "N≤8 個の短い文字列をすべて含む長さ L の文字列の数。Aho–Corasick の状態と、含んだ集合の bit を持つ DP"}
-      - {id: abc458_f, role: practice, summary: "長さ N≤10^9 で K 個の文字列をどれも含まないものの数。Aho–Corasick の遷移を行列とみてダブリングする"}
-      - {id: abc268_h, role: challenge, summary: "S の文字を最少個数だけ * に変え、どの T_i も含まないようにする。走査して一致したら終端を * にして状態を根に戻す貪欲（裏付けは検索結果の要約だけなので、執筆時に確かめる）"}
-    sources: ["08-string-geo §4.5 aho-corasick", "08-string-geo §5 aho-corasick", "08-string-geo §7.2（Aho–Corasick のレベル）"]
+      - {id: abc362_g, role: example, representative: true, summary: "文字列 S と多数の T_i について、S の中での各 T_i の出現回数を答える。", approach: "訪問回数を失敗リンクの木の上で後からまとめて足す（SA の二分探索でも解ける）"}
+      - {id: abc419_f, role: practice, summary: "N ≤ 8 個の短い文字列をすべて部分文字列として含む、長さ L の文字列の数を求める。", approach: "Aho-Corasick の状態と、含んだ集合の bit を持つ DP（例題は string-automaton-dp）"}
+      - {id: abc458_f, role: practice, summary: "長さ N（≤ 10^9）の文字列で、K 個の文字列をどれも含まないものの数を求める。", approach: "Aho-Corasick の遷移を行列とみてダブリングする（例題は string-automaton-dp）"}
+      - {id: abc268_h, role: challenge, summary: "S の文字を最少個数だけ * に変えて、どの T_i も部分文字列として含まないようにする。", approach: "走査して一致したら終端を * にして状態を根に戻す貪欲（裏付けは検索結果の要約だけ。執筆時に確かめ、確かめられなければ外す）"}
+    problems_note: null
+    sources: ["08-string-geo §4.5 aho-corasick", "08-string-geo §5 aho-corasick", "08-string-geo §7.2（Aho-Corasick のレベル）"]
 
   - id: string-automaton-dp
-    title: 照合オートマトン上の DP（パターンを含む・含まない文字列の数え上げ）
-    aliases: [オートマトン DP, KMP DP, Aho-Corasick 上の DP, 照合状態の DP, 禁止文字列, 禁止部分文字列]
+    chapter: Trie と照合オートマトン
+    title: 照合オートマトン上の DP
+    nav_title: null
+    aliases: [オートマトン DP, KMP DP, Aho-Corasick 上の DP, 照合状態の DP, 禁止文字列, 禁止部分文字列, automaton DP]
     type: technique
     level: 青
-    level_evidence: "abc419_f (1726)、abc458_f (1744)、abc305_g (1989)。直近の数文字を状態にする簡易版は abc122_d (1533) から出る（research/02 は簡易版を根拠に水とした）。照合オートマトンの作り方が本質なので string に置く（設計書 §4.2）"
+    level_evidence: "abc419_f (1726, 2025)・abc458_f (1744, 2026)・abc305_g (1989)。直近の数文字を状態にする簡易版（abc122_d 1533）は dp の dp-state-design の節に移し、遷移行列の累乗の節は matrix-power が青になったので青にした（design-review §3・§4.2）。照合オートマトンの作り方が本質なので string に置く（設計書 §4.2）"
     kind: [DP, 文字列]
-    prerequisites: [dp-state-design, kmp, aho-corasick]
-    related: [dp-matrix-power, matrix-power, bit-dp, digit-dp, dp-of-dp, inclusion-exclusion, subsequence-dp]
-    summary: "KMP や Aho–Corasick の状態（いまの接尾辞のうちパターンの接頭辞になっている最長のもの）を DP の状態にすると、長さ N の文字列でパターンを含まない・すべて含むものの数が O(N×状態数×文字の種類) で数えられる。N が巨大なら遷移を行列にして累乗する。"
+    prerequisites: [kmp, matrix-power]
+    related: [aho-corasick, dp-state-design, bit-dp, digit-dp, lcs, inclusion-exclusion, subsequence-dp]
+    summary: "KMP や Aho-Corasick の状態（いまの接尾辞のうちパターンの接頭辞になっている最長のもの）を DP の状態にして、パターンを含まない・すべて含む長さ N の文字列を数える。N が巨大なら遷移を行列にして累乗する。"
     signs:
       - {type: phrase, text: "長さ N の文字列のうち、どのパターンも部分文字列に含まないものの数"}
       - {type: phrase, text: "与えられた文字列をすべて含む長さ L の文字列の数"}
-      - {type: constraint, text: "N ≤ 10^9〜10^18 で、パターンの長さの総和が小さい（遷移行列の累乗）"}
-      - {type: constraint, text: "パターンの個数 ≤ 8 程度（含んだパターンの集合を bit で持つ）"}
+      - {type: constraint, text: "N ≤ 10^9〜10^18 で、パターンの長さの総和が小さい"}
+      - {type: constraint, text: "パターンの個数 ≤ 8 程度で、すべてを含むかを問う"}
+      - {type: shape, text: "長さ i までの文字列の数を、末尾とパターンの先頭が何文字一致しているかで分けて持つ"}
     acl: []
+    verify: []
     frequency: B
+    frequency_evidence: "recent 1（abc458_f）・前提として届くページなし・古い ABC 3 問"
     sections:
-      - "簡易版：直近の数文字を状態にする（水）"
-      - "照合の状態とマルコフ性（次の状態は次の文字だけで決まる）"
-      - "KMP オートマトンの遷移表を前計算して DP する"
-      - "複数パターンは Aho–Corasick（終端の印を受け継ぐ）"
-      - "すべて含む：含んだパターンの集合を bit で持つ"
-      - "N が巨大なとき：遷移行列の累乗・ダブリング（黄）"
-      - "包除で解こうとすると破綻する理由（パターンの重なり）"
-      - "部分列 DP・桁 DP との違い"
+      - {title: "照合の状態とマルコフ性（次の状態は次の文字だけで決まる。直近の数文字で足りる簡易版は dp-state-design）", anchor: matching-state}
+      - {title: "KMP オートマトンの遷移表を前計算して DP する", anchor: kmp-automaton}
+      - {title: "複数パターンは Aho-Corasick（終端の印を受け継ぐ）", anchor: multiple-patterns}
+      - {title: "すべて含む：含んだパターンの集合を bit で持つ", anchor: contain-all}
+      - {title: "N が巨大なとき：遷移行列の累乗・ダブリング", anchor: matrix-power}
+      - {title: "包除で解こうとすると破綻する理由（パターンの重なり）", anchor: why-not-inclusion-exclusion}
+      - {title: "部分列 DP・桁 DP との違い", anchor: comparison}
     merged_keys: []
-    visual: "照合の状態を頂点、文字を辺にしたオートマトンの図の上で DP の値が流れる様子"
+    visual: {kind: static, priority: 2, text: "照合の状態を頂点、文字を辺にしたオートマトンの図の上で DP の値が流れる様子"}
     problems:
-      - {id: abc419_f, role: example, summary: "N≤8 個の短い文字列をすべて含む長さ L の文字列の数。Aho–Corasick の状態と、含んだ集合の bit を持つ DP"}
-      - {id: abc458_f, role: example, summary: "長さ N≤10^9 で K 個の文字列をどれも含まないものの数。Aho–Corasick の遷移を行列とみてダブリングする"}
-      - {id: abc122_d, role: practice, summary: "AGC を含まず、隣接2文字の交換1回でも AGC が現れない長さ N の文字列の数。直前の3文字を状態にした DP"}
-      - {id: abc305_g, role: practice, summary: "a と b からなる長さ N≤10^18 の文字列で、禁止された部分文字列を含まないものの数。照合状態の遷移行列を累乗する"}
-    sources: ["08-string-geo §4.6 string-automaton-dp", "02-dp §4 string-automaton-dp（簡易版と DP 側の見方）", "08-string-geo §5 string-automaton-dp", "02-dp dp-matrix-power"]
+      - {id: abc419_f, role: example, summary: "N ≤ 8 個の短い文字列をすべて部分文字列として含む、長さ L の文字列の数を求める。", approach: "Aho-Corasick の状態と、含んだ集合の bit を持つ DP（節 contain-all）"}
+      - {id: abc458_f, role: example, representative: true, summary: "長さ N（≤ 10^9）の文字列で、K 個の文字列をどれも含まないものの数を求める。", approach: "Aho-Corasick の遷移を行列とみてダブリングする（節 matrix-power）"}
+      - {id: abc122_d, role: practice, summary: "AGC を部分文字列に含まず、隣り合う 2 文字を 1 回入れ替えても AGC が現れない、長さ N の文字列の数を求める。", approach: "直前の 3 文字を状態にした DP（照合オートマトンの簡易版。例題は dp-state-design）"}
+      - {id: abc305_g, role: practice, summary: "a と b からなる長さ N（≤ 10^18）の文字列で、禁止された部分文字列を含まないものの数を求める。", approach: "照合状態の遷移行列を累乗する"}
+    problems_note: null
+    sources: ["08-string-geo §4.6 string-automaton-dp", "02-dp §4 string-automaton-dp（簡易版と DP 側の見方）", "08-string-geo §5 string-automaton-dp", "06-math-nt §4.6（行列累乗）"]
 
   - id: suffix-array
+    chapter: 接尾辞の構造
     title: Suffix Array と LCP 配列
+    nav_title: null
     aliases: [接尾辞配列, SA, LCP 配列, SA-IS, Kasai 法, suffix_array, lcp_array, 異なる部分文字列の数]
     type: technique
     level: 黄
-    level_evidence: "abc433_g (2060)、abc213_f (2215)、abc272_f (2238)、abc452_g (2255)。abc362_g (1625) は別解。ACL の suffix_array・lcp_array で手軽に使えるので、水色でも使えると注記する（設計書 §4.3）"
+    level_evidence: "abc433_g (2060, 2025)・abc452_g (2255, 2026)・abc213_f (2215)・abc272_f (2238)。abc362_g (1625) は別解。ACL を呼ぶだけで解ける問題が水・青にまとまっていないので黄のまま（D2）。ACL の suffix_array・lcp_array で手軽に使えるので、水色でも使えると本文で注記する（設計書 §4.3）"
     kind: [文字列, データ構造]
     prerequisites: [string-basics, binary-search]
     related: [sparse-table, monotonic-stack, rolling-hash, trie, z-algorithm, suffix-automaton, run-length-encoding]
-    summary: "全接尾辞を辞書順に並べた添字の列（SA）と、隣どうしの最長共通接頭辞の配列（LCP）を作る。異なる部分文字列の数、任意の2接尾辞の LCP（LCP 配列の区間最小）、パターンの出現回数、全ペアの LCP の和が求まり、ACL の suffix_array・lcp_array で使える。"
+    summary: "全接尾辞を辞書順に並べた添字の列（SA）と隣どうしの最長共通接頭辞（LCP 配列）を作る。異なる部分文字列の数・任意の 2 接尾辞の LCP・パターンの出現回数が求まり、ACL の suffix_array・lcp_array で使える。"
     signs:
       - {type: phrase, text: "異なる部分文字列の個数"}
       - {type: phrase, text: "全接尾辞どうしの LCP の和"}
@@ -417,107 +472,93 @@ pages:
       - {type: phrase, text: "部分文字列を辞書順に並べたときの K 番目"}
       - {type: constraint, text: "|S| ≤ 5×10^5 程度で全部分文字列を扱う"}
     acl: [suffix_array, lcp_array]
+    verify: [suffixarray, number_of_substrings]
     frequency: B
+    frequency_evidence: "recent 1（abc452_g）・前提として 1 ページに届く（直接 1）・古い ABC 4 問"
     sections:
-      - "SA と LCP 配列の定義（ACL の suffix_array・lcp_array。lcp の長さは n−1）"
-      - "ACL があれば水色でも使える：異なる部分文字列の数＝N(N+1)/2−Σlcp"
-      - "任意2接尾辞の LCP は LCP 配列の区間最小（Sparse Table）"
-      - "パターンの出現回数：SA 上の二分探索で範囲を求める"
-      - "全ペアの LCP の和：LCP 配列の上の単調スタック"
-      - "複数の文字列を連結するときの区切り（vector<int> と大きな値）"
-      - "回転どうしの比較：S+S+T+T の SA"
-      - "部分文字列の辞書順 K 番目（発展）"
-      - "自作するなら：ダブリング O(N log^2 N) → O(N log N) → SA-IS"
+      - {title: "SA と LCP 配列の定義（ACL の suffix_array・lcp_array。lcp の長さは n−1）", anchor: definition}
+      - {title: "異なる部分文字列の数 = N(N+1)/2 − Σlcp", anchor: distinct-substrings}
+      - {title: "任意の 2 接尾辞の LCP は LCP 配列の区間最小（Sparse Table）", anchor: lcp-rmq}
+      - {title: "パターンの出現回数：SA 上の二分探索で範囲を求める", anchor: pattern-count}
+      - {title: "全ペアの LCP の和：LCP 配列の上の単調スタック", anchor: lcp-sum}
+      - {title: "複数の文字列を連結するときの区切り（vector<int> と大きな値）", anchor: concat-separator}
+      - {title: "回転どうしの比較：S+S+T+T の SA", anchor: rotations}
+      - {title: "部分文字列の辞書順 K 番目", anchor: kth-substring, level: 発展}
+      - {title: "自作するなら：ダブリング O(N log^2 N) → O(N log N) → SA-IS", anchor: build-your-own}
     merged_keys: []
-    visual: "接尾辞を辞書順に並べた表と、隣どうしの LCP を棒グラフで並べた図（任意2接尾辞の LCP＝間の棒の最小）"
+    visual: {kind: static, priority: 2, text: "接尾辞を辞書順に並べた表と、隣どうしの LCP を棒グラフで並べた図（任意の 2 接尾辞の LCP は間の棒の最小）"}
     problems:
-      - {id: practice2_i, role: example, summary: "異なる部分文字列の個数を N(N+1)/2−ΣLCP で求める（ACL の練習問題）"}
-      - {id: abc213_f, role: example, summary: "各 i について Σ_j LCP(S[i:], S[j:]) を求める。SA と LCP 配列の上で単調スタックを使う"}
-      - {id: abc362_g, role: practice, summary: "S の中の各 T_i の出現回数。SA 上の二分探索で範囲を求める（Aho–Corasick でも解ける）"}
-      - {id: abc433_g, role: practice, summary: "文字を後ろに足していくゲーム。SA と LCP で、いまの文字列を接頭辞に持つ接尾辞の範囲を扱う"}
-      - {id: abc272_f, role: practice, summary: "S の回転と T の回転の組で S 側が辞書順以下のものの数。S+S+T+T の SA で並べて数える"}
-      - {id: abc452_g, role: practice, summary: "条件を満たす連続部分列の種類数。ランレングスで言い換えて異なる部分文字列の数え上げに帰着する（Suffix Automaton でも解ける）"}
+      - {id: practice2_i, role: example, summary: "文字列の異なる部分文字列の個数を求める。", approach: "N(N+1)/2 − ΣLCP（ACL の練習問題）"}
+      - {id: abc213_f, role: example, representative: true, summary: "各 i について、Σ_j LCP(S[i:], S[j:]) を求める。", approach: "SA と LCP 配列の上で単調スタックを使う"}
+      - {id: abc362_g, role: practice, summary: "文字列 S と多数の T_i について、S の中での各 T_i の出現回数を答える。", approach: "SA 上の二分探索で範囲を求める（例題は aho-corasick）"}
+      - {id: abc433_g, role: practice, summary: "文字を後ろに足していくゲームの結果を求める（条件は執筆時に確かめる）。", approach: "SA と LCP で、いまの文字列を接頭辞に持つ接尾辞の範囲を扱う"}
+      - {id: abc272_f, role: practice, summary: "S の回転と T の回転の組のうち、S 側が辞書順で T 側以下になる組の数を求める。", approach: "S+S+T+T の SA で並べて数える"}
+      - {id: abc452_g, role: practice, summary: "条件を満たす連続部分列の種類数を求める。", approach: "ランレングスで言い換えて、異なる部分文字列の数え上げに帰着する（Suffix Automaton でも解ける）"}
+    problems_note: null
     sources: ["08-string-geo §4.5 suffix-array", "08-string-geo §2.2（文字列の早見表）", "08-string-geo §5 suffix-array", "ACL document_ja/string.md・appendix.md（suffix_array・lcp_array）"]
 
-  - id: fft-string-matching
-    title: 畳み込みによる文字列照合（ワイルドカード・ハミング距離）
-    aliases: [ワイルドカード照合, ハミング距離, FFT による文字列照合, 一致数の畳み込み, ずらしたときの不一致の数]
-    type: technique
-    level: 黄
-    level_evidence: "abc196_f (2274)"
-    kind: [文字列, 畳み込み・多項式]
-    prerequisites: [convolution-ntt]
-    related: [rolling-hash, z-algorithm]
-    summary: "パターンを反転して畳み込むと、各ずらし位置での一致数が1つの係数に集まる。全シフトのハミング距離や、ワイルドカードを含むパターンの照合を O((N+M) log(N+M)) で求められる。"
-    signs:
-      - {type: phrase, text: "ずらしたときに一致しない文字の数を、すべてのずらし方について求める"}
-      - {type: phrase, text: "ワイルドカード（?）を含むパターンの照合"}
-      - {type: constraint, text: "|S|, |T| ≤ 10^6 で、ずらし方ごとに数える O(NM) が間に合わない"}
-    acl: [convolution]
-    frequency: C
-    sections:
-      - "反転して畳み込むと一致数が係数に集まる理由"
-      - "0/1 の文字列の一致数とハミング距離"
-      - "文字の種類が多いとき（文字ごとに畳み込む）"
-      - "ワイルドカードを含む照合（Σ t·s·(t−s)^2 の形の畳み込み3回）"
-      - "mod 998244353 で足りるかと添字のずれ"
-    merged_keys: []
-    visual: "パターンを反転して畳み込むと、各ずらし位置の一致数が1つの係数に集まる図"
-    problems:
-      - {id: abc196_f, role: example, summary: "0/1 の T を S のどこかと一致させる最少の書き換え数。全シフトのハミング距離を畳み込みで一度に求める"}
-    sources: ["08-string-geo §4.5 fft-string-matching", "06-math-nt convolution-ntt"]
-
   - id: suffix-automaton
-    title: Suffix Automaton と発展の文字列アルゴリズム（回文木・Lyndon 分解など）
-    aliases: [SAM, 接尾辞オートマトン, DAWG, 回文木, eertree, Palindromic Tree, Lyndon 分解, Duval, 最小回転, Run の列挙, Main–Lorentz, 逆 Manacher, 逆 Z]
+    chapter: 接尾辞の構造
+    title: Suffix Automaton と発展の文字列アルゴリズム
+    nav_title: Suffix Automaton など
+    aliases: [SAM, 接尾辞オートマトン, DAWG, 回文木, eertree, Palindromic Tree, Lyndon 分解, Duval, 最小回転, Run の列挙, Main-Lorentz, 逆 Manacher, 逆 Z]
     type: overview
     level: 発展
-    level_evidence: "ABC で必須の確認例はない。abc452_g (2255) は SA＋LCP でも解ける。回文木・Lyndon 分解・Run は Library Checker（eertree・lyndon_factorization・runenumerate）で確かめる入口として置く。文字列の発展手法は単独では薄いので1枚にまとめる（設計書 §4.1 の 4）"
+    level_evidence: "ABC で必須の確認例はない。abc452_g (2255) は SA＋LCP でも解ける。回文木・Lyndon 分解・Run は Library Checker（eertree・lyndon_factorization・runenumerate）で確かめる入口として置く。文字列の発展手法は単独では薄いので 1 枚にした（設計書 §4.1 の 4）"
     kind: [文字列]
     prerequisites: [suffix-array]
     related: [palindrome, z-algorithm, kmp, trie]
-    summary: "ABC では SA＋LCP・Z・Manacher で代用できることが多い発展の文字列アルゴリズムの概要。Suffix Automaton（全部分文字列を表す DFA）、回文木、Lyndon 分解と最小回転、Run の列挙、Z 配列や回文半径から文字列を作る逆問題を、何ができるかと使いどころに絞って並べる。"
+    summary: "Suffix Automaton は全部分文字列を状態数 2N−1 以下の DFA で表し、文字を足しながら異なる部分文字列の数を答える。回文木・Lyndon 分解なども、ABC では SA・Z・Manacher で代えられることが多い。"
     signs:
-      - {type: phrase, text: "文字を1つずつ追加しながら、異なる部分文字列の数を答える"}
-      - {type: phrase, text: "2つの文字列の最長共通部分文字列"}
+      - {type: phrase, text: "文字を 1 つずつ追加しながら、異なる部分文字列の数を答える"}
+      - {type: phrase, text: "2 つの文字列の最長共通部分文字列"}
       - {type: phrase, text: "異なる回文の部分文字列の種類数と、それぞれの出現回数"}
       - {type: phrase, text: "辞書順最小の巡回シフト"}
       - {type: phrase, text: "Z 配列（回文半径）が与えられ、それを満たす文字列を作る"}
     acl: []
-    frequency: C
+    verify: [eertree, lyndon_factorization, runenumerate]
+    frequency: B
+    frequency_evidence: "recent 1（abc452_g）・前提として届くページなし・古い ABC 0 問"
     sections:
-      - "Suffix Automaton（状態数 2N−1 以下・遷移数 3N−4 以下。文字の追加に強い）"
-      - "回文木（eertree）"
-      - "Lyndon 分解（Duval）と最小回転"
-      - "Run の列挙（Main–Lorentz）"
-      - "文字列アルゴリズムの逆問題（逆 Manacher・逆 Z）"
-      - "その他の名前（2次元ローリングハッシュ・Suffix Tree・Boyer–Moore の検索）"
+      - {title: "Suffix Automaton（状態数 2N−1 以下・遷移数 3N−4 以下。文字の追加に強い）", anchor: suffix-automaton}
+      - {title: "回文木（eertree）", anchor: palindromic-tree}
+      - {title: "Lyndon 分解（Duval）と最小回転", anchor: lyndon-factorization}
+      - {title: "Run の列挙（Main-Lorentz）", anchor: run-enumeration}
+      - {title: "文字列アルゴリズムの逆問題（逆 Manacher・逆 Z）", anchor: inverse-string-problems}
+      - {title: "そのほかの名前（2 次元ローリングハッシュ・Suffix Tree・Boyer-Moore の検索）", anchor: others}
     merged_keys: [palindromic-tree, lyndon-factorization, run-enumeration, inverse-string-problems]
     visual: null
     problems:
-      - {id: abc452_g, role: example, summary: "条件を満たす連続部分列の種類数。ランレングスで言い換えて異なる部分文字列を数える（Suffix Automaton か SA＋LCP）"}
+      - {id: abc452_g, role: example, summary: "条件を満たす連続部分列の種類数を求める。", approach: "ランレングスで言い換えて異なる部分文字列を数える（Suffix Automaton か SA＋LCP）"}
+    problems_note: "発展の概要。ABC で必須の確認例がなく、abc452_g (2255) も SA＋LCP で解けるので、帯の中の例題（代表問題）はない。練習は verify の Library Checker で代える"
     sources: ["08-string-geo §4.7（発展の文字列）", "00-curriculum §3.2 優先度 B（Suffix Automaton）・§5.2（abc452_g）"]
 
 moved:
+  - {key: fft-string-matching, to: math, reason: "design-review §3（黄の薄いページ）・catalog/README §6。math の convolution-ntt#string-matching（節）に受けてもらった。渡すもの：abc196_f、ワイルドカードの照合（Σ t·s·(t − s)^2 の畳み込み 3 回）、Library Checker の wildcard_pattern_matching、signs「ずらしたときに一致しない文字の数」「ワイルドカード（?）を含むパターンの照合」"}
   - {key: lexicographic-greedy, to: basics, reason: "設計書 §4.2（辞書順最小の構成は basics の貪欲）。string-basics・subsequence-matching からリンク"}
   - {key: run-length-encoding, to: basics, reason: "設計書 §4.2。string-basics・suffix-array からリンク"}
   - {key: subsequence-dp, to: dp, reason: "設計書 §4.2（部分列 DP は dp）。subsequence-matching からリンク"}
   - {key: bracket-sequence, to: patterns, reason: "設計書 §4.2（括弧列は patterns の案内ページ）。材料は research/08 §4.1・§5"}
   - {key: parsing, to: misc, reason: "research/08 の「その他」とあわせて misc が持ち主（catalog 作成の指示）。string-basics からリンク"}
-  - {key: string-queries-ds, to: ds, reason: "research/08 §7.4 の案（ds の segment-tree-monoids の節）。research/05 にない key なので ds が取り込む必要がある"}
+  - {key: string-queries-ds, to: ds, reason: "research/08 §7.4 の案。ds の segment-tree の merged_keys に入った（節「文字列へのクエリ」）"}
   - {key: binary-trie, to: ds, reason: "設計書 §4.2（Binary Trie は ds）。trie からリンク"}
   - {key: interactive, to: misc, reason: "research/08 の「その他」（catalog/README §6）"}
   - {key: randomized, to: misc, reason: "research/08 の「その他」。hash-safety・hashing-for-sets からリンク"}
-  - {key: majority-element, to: misc, reason: "research/08 の「その他」（研究は randomized の節の案）"}
-  - {key: color-coding, to: misc, reason: "research/08 の「その他」（研究は randomized の節の案）"}
+  - {key: majority-element, to: misc, reason: "research/08 の「その他」（misc の randomized の merged_keys）"}
+  - {key: color-coding, to: misc, reason: "research/08 の「その他」（misc の randomized の merged_keys）"}
   - {key: bitset-speedup, to: misc, reason: "research/08 の「その他」・設計書 §4.2"}
-  - {key: constant-factor, to: misc, reason: "research/08 の「その他」。研究は basics の complexity-estimation の節を提案（担当 A が判断）"}
+  - {key: constant-factor, to: basics, reason: "research/08 の「その他」。basics の complexity-estimation の merged_keys に入った"}
 
 dropped: []
 
 open_issues:
-  - "string-queries-ds（文字列へのクエリ：文字ごとの BIT・文字の集合を bit で持つセグ木。abc157_e・abc285_f・abc341_e）を ds へ送った。research/05 にない key なので、ds の segment-tree-monoids の merged_keys に入れてもらう必要がある（入らないと検証でエラーになる）"
-  - "string-automaton-dp のレベル：research/02 は簡易版（直近の数文字を状態にする abc122_d 1533）を根拠に水、research/08 は KMP・Aho–Corasick を使う本体（abc419_f・abc458_f・abc305_g）を根拠に青。前提（kmp・aho-corasick）に合わせてページは青にし、簡易版の節に（水）の印を付けた。ページより低いレベルの印を許すか、簡易版を dp の dp-state-design の節に回すかを見直しで決めたい"
-  - "parsing を指示どおり misc へ送った（research/08 §7.1 は括弧列と並べて文字列の章に置く案だった）。string-basics から related でリンクしている"
-  - "hash-safety を単独ページにした（research/08 §7.1 の案。rolling-hash・hashing-for-sets・misc の randomized から参照される）。rolling-hash の節にまとめる案もある"
+  - "提案（E・math）：fft-string-matching は convolution-ntt#string-matching に受けてもらった（rolling-hash の related もそこを指す）。convolution-ntt の verify に Library Checker の wildcard_pattern_matching を足してほしい。string-automaton-dp の前提は kmp と matrix-power（青）にし、dp-state-design は matrix-power 経由で届くので related に移した"
+  - "提案（B・dp）：string-automaton-dp の簡易版（直近の数文字を状態にする）と abc122_d を dp-state-design の「末尾の数文字」の節の例題に受けてほしい。string-automaton-dp では abc122_d を練習として残した。subsequence-dp の別名「next 配列」「nxt テーブル」は subsequence-matching の別名「nxt 配列」と同じものなので、subsequence-dp からは外してほしい（表の作り方は subsequence-matching が持ち、subsequence-dp の前提になっている）"
+  - "提案（D・ds）：abc331_f は rolling-hash の例題（節 hash-segment-tree）にしたので、segment-tree-monoids では練習か本文の参照にしてほしい（例題は 1 問 1 ページ）。ds の segment-tree・segment-tree-monoids の related にある hash-segment-tree は rolling-hash#hash-segment-tree で指せる（2026-10-21：ds の segment-tree・segment-tree-monoids の related を rolling-hash#hash-segment-tree にした。abc331_f は ds が反映済み）"
+  - "提案（A・misc）：abc339_f は hash-safety の例題（代表問題）にしたので、randomized では練習にしてほしい。randomized の節「ハッシュの乱択（mod・base を実行時に決める）」は hash-safety#what-to-randomize への導線にしてほしい"
+  - "提案（C・graph）：palindrome の related に extended-dijkstra を入れた（03-5 の節「両端から伸ばす（回文の最短路）（青）」の受け皿）。その節の anchor が決まったら id#anchor に直す（2026-10-21 反映済み：related を extended-dijkstra#two-ends にした）"
+  - "レベルの変更（工程5でユーザーに示す）：subsequence-matching を水から基礎に、hash-safety を水から青に変えた（理由は各 level_evidence）。ほかのページは D2 で確かめ直して変えていない"
+  - "z-algorithm・rolling-hash（水）：abc319 以降の根拠は基礎の帯の入口（abc398_f 1033・abc430_e 1109。Z・ハッシュ・KMP・Manacher のどれでも解ける）と青以上（abc331_f 1666・abc343_g 2114）に分かれ、水の根拠（abc284_f 1575・abc141_e 1459）は 2023-01 以前。D2 を厳密に当てると基礎も考えられるが、入口の 2 問はどの手法でもよく、特定の手法が要る水の問題は古いものしかないので水のままにした。recent-abc のデータで見直す"
+  - "節の anchor の約束：統合した調査の key に当たる節は anchor を key と同じにした。ほかの分野が key で指していたら id#key に直せる（例：math/gcd-lcm の line-normalization → geometry-precision#line-normalization は geometry 側、ds の hash-segment-tree → rolling-hash#hash-segment-tree、string-period → kmp#string-period、cyclic-shift → z-algorithm#cyclic-shift、manacher → palindrome#manacher、palindromic-tree → suffix-automaton#palindromic-tree）"
   - "abc268_h（aho-corasick の力試し）は裏付けが検索結果の要約だけ（research/08 §1.2）。執筆時に確かめられなければ外す"
+  - "問題の要約を「（執筆時に確かめる）」にしたもの：typical90_au・abc455_g・abc312_h と、条件を確かめていない abc433_g。執筆の前に問いを確かめて summary を書く"

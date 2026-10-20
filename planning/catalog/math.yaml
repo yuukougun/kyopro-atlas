@@ -1,532 +1,552 @@
 # 整数論・代数（担当 E）。材料は research/06（整数論・代数）と research/00 §3.2 の math 向けの項目。
-# 並び順は research/06 §7.1 の章と設計書 §2.1 の区分に合わせた（章の区切りはコメントで示す。open_issues を参照）。
-# 章の中はおおむね レベルの低い順 → 発展の概要 の順。
+# 第2版（2026-10-21）：design-review §1〜§4 に従って形式を改め、統合を受けた
+#   受けた統合：dp-matrix-power（と dp-doubling）→ matrix-power、dp-convolution → online-convolution、
+#   xor-path（と cycle-basis-xor）→ xor-basis、fft-string-matching → convolution-ntt、
+#   discrete-log・primitive-root・mod-sqrt → multiplicative-order（題名「位数・原始根・離散対数」）
+# 並び順がナビゲーションの順。同じ分野の前提は前に置いた（proof-patterns は GCD の章の末尾、
+# multiplicative-function は floor-quotient-enum の後）。章の中はおおむね レベルの低い順 → 発展の概要 の順。
 field: math
 pages:
-  # ── 1. 数学の言葉（記法そのものは start の「記法と用語の約束」が持ち主。設計書 §4.2）──
+  # ── 1. 式と整数の基本（記法そのものは start の notation が持ち主。設計書 §4.2）──
   - id: sigma-manipulation
-    chapter: 数学の言葉
-    title: Σ の変形（入れ替え・分解・数え直し）
-    aliases: [シグマの入れ替え, 和の順序交換, 総和の変形, 二重和, 値ごとに数え直す]
+    chapter: 式と整数の基本
+    title: Σ の変形
+    aliases: [シグマの変形, 和の順序交換, 総和の変形, 二重和, 添字の付け替え, order of summation]
     type: technique
     level: 基礎
-    level_evidence: "abc172_d (963) で Σ k·d(k) を約数ごとの和に入れ替える。abc230_e (969)・abc356_e (1506) で値ごとに数え直す。E は数え上げ・式変形の比重が大きい（research/00 §2.3.8）"
+    level_evidence: "abc172_d (963) で Σ K·d(K) を約数ごとの和に入れ替え、abc471_e (990, 2026) で Σ_{i≠j} A_i A_j を (ΣA)² − ΣA² に直す。abc356_e (1506) は値でまとめ直す応用"
     kind: [考察, 数え上げ]
     prerequisites: []
-    related: [math-notation, contribution, linearity-of-expectation, harmonic-sum, floor-quotient-enum]
-    summary: "Σ の線形性・二重和の順序交換・添字の付け替え・「値ごとに数え直す」の規則をまとめる。同じ量を別の順で数えて計算量を下げる式変形の土台になる。"
+    related: [notation, contribution, linearity-of-expectation, harmonic-sum, floor-quotient-enum]
+    summary: "二重和の順序交換・添字の範囲の書き換え・付け替え・線形性で、Σ の式を計算しやすい形に変える。同じ和を別の順で計算して計算量を下げる式変形の土台になる。"
     signs:
-      - {type: phrase, text: "全ての組 (i, j) について〜の総和を求める"}
-      - {type: phrase, text: "Σ_{i=1}^{N} ⌊N/i⌋ や Σ_k k × (k の約数の個数) のような和"}
-      - {type: constraint, text: "N ≤ 10^7〜10^12 で、和を定義どおりに計算すると間に合わない"}
+      - {type: phrase, text: "全ての組 (i, j)（i < j）について〜を足した和を求める"}
+      - {type: shape, text: "Σ_{i=1}^{N} Σ_{j=i}^{N} f(i, j) のように、内側の和の範囲が外側の添字で決まる二重和"}
+      - {type: shape, text: "Σ_{K=1}^{N} K × (K の約数の個数) のように、約数・倍数の関係で書き換えられる和"}
     acl: []
+    verify: []
     frequency: A
+    frequency_evidence: "recent 2（abc455_f・abc471_e）・前提として 7 ページに届く（直接 3）・古い ABC 3 問"
     sections:
-      - "Σ の線形性と分解（定数を外に出す・和を分ける）"
-      - "二重和の順序交換と添字の範囲（i ≤ j ≤ N を j の側から見る）"
-      - "添字の付け替え（i → N−i、k = i + j、d = gcd）"
-      - "値ごとに数え直す（i を固定する → 値 v を固定する）"
-      - "空の和は 0・空の積は 1 と境界"
-      - "寄与・期待値の線形性とのつながり"
+      - {title: "Σ の線形性と分解（定数を外に出す・和を分ける）", anchor: linearity}
+      - {title: "二重和の順序交換と添字の範囲（i ≤ j ≤ N を j の側から見る）", anchor: swap-order}
+      - {title: "添字の付け替え（i → N − i、k = i + j、約数 d と倍数）", anchor: reindex}
+      - {title: "値でまとめ直す（同じ値になる添字の個数を掛ける）", anchor: group-by-value}
+      - {title: "よく使う和の公式と Σ_{i≠j} a_i a_j = (Σa)² − Σa²", anchor: formulas}
+      - {title: "空の和は 0・空の積は 1 と境界", anchor: empty-sum}
     merged_keys: []
-    visual: "二重和を格子の表にして、行ごとの和と列ごとの和を切り替える動く図"
+    visual: {kind: static, priority: 2, text: "二重和を格子の表にして、行ごとの和と列ごとの和を見比べる図"}
     problems:
-      - {id: abc172_d, role: example, summary: "Σ k × (k の約数の個数) を、約数 d ごとに d の倍数の和として数え直す"}
-      - {id: abc230_e, role: practice, summary: "Σ ⌊N/i⌋（N ≤ 10^12）を、同じ商になる i をまとめて数える"}
-      - {id: abc356_e, role: practice, summary: "全ペアの ⌊max/min⌋ の和を、値ごとの個数と倍数の区切りで数え直す"}
-    sources: ["06-math-nt §4.1", "06-math-nt §5.1", "06-math-nt §7.6", "01-basics §4.L", "01-basics §5"]
+      - {id: abc172_d, role: example, representative: true, summary: "1 以上 N 以下の各 K について K × (K の約数の個数) を求め、その総和を出力する（N ≤ 10^7）。", approach: "Σ_K K·d(K) を約数 d ごとの和に入れ替え、d の倍数の和として O(N) で数える"}
+      - {id: abc230_e, role: practice, summary: "Σ_{i=1}^{N} ⌊N/i⌋ を求める（N ≤ 10^12）。", approach: "同じ商になる i を区間にして O(√N)。値でまとめ直す例として本文で参照する（例題は floor-quotient-enum）"}
+      - {id: abc471_e, role: practice, summary: "（執筆時に確かめる）", approach: "Σ_{i≠j} A_i A_j = (ΣA)² − ΣA² の式変形と二項係数で数える（research/00 §2.3.8 の分類）"}
+      - {id: abc356_e, role: practice, summary: "長さ N の数列の全ての組 i < j について ⌊max(A_i, A_j) / min(A_i, A_j)⌋ を足した和を求める（A_i ≤ 10^6）。", approach: "値ごとの個数の累積和を作り、倍数で区切って値ごとに数え直す（調和級数）"}
+    problems_note: null
+    sources: ["06-math-nt §4.1", "06-math-nt §5.1", "06-math-nt §7.6", "01-basics §4.L", "01-basics §5", "00-curriculum §2.3.8（abc471_e）"]
 
-  - id: proof-patterns
-    chapter: 数学の言葉
-    title: 整数の証明の型（互除法・並べ替え・鳩の巣・mod での矛盾）
-    aliases: [整数問題の証明, 並べ替え論法, 余りの鳩の巣, 操作の不変量, gcd が不変]
-    type: thinking
-    level: 基礎
-    level_evidence: "arc105_b (366)・abc133_c (592)・abc118_c (646)・agc018_a (947) で、操作で変わらない gcd や余りの鳩の巣が鍵になる"
-    kind: [考察, 整数論]
-    prerequisites: [gcd-lcm]
-    related: [math-notation, invariant, pigeonhole, parity, experiment]
-    summary: "実験で見つけた整数の規則が正しいかを確かめる定番の筋道（互除法で gcd が保たれる・並べ替え論法・余りの鳩の巣・mod での矛盾）を、ABC の例とともに集める。"
-    signs:
-      - {type: phrase, text: "操作を好きなだけ繰り返したとき、最後に残る値や作れる値を答える"}
-      - {type: phrase, text: "大きい方から小さい方を引く・余りに置き換える操作を繰り返す"}
-      - {type: phrase, text: "区間の幅が法 m 以上なら答えが決まる（余りは m 種類しかない）"}
-    acl: []
-    frequency: B
-    sections:
-      - "操作で gcd が変わらない（互除法の不変量）"
-      - "互いに割り切り合うことで等号を示す"
-      - "並べ替え論法（a, 2a, …, (p−1)a が余りの並べ替えになる）"
-      - "余りの鳩の巣（m+1 個のうち2つは同じ余り）"
-      - "mod での矛盾で「できない」を示す"
-      - "必要条件と十分条件（実験の結果を信じてよいか）"
-    merged_keys: []
-    visual: "互除法の長方形分割の図と、mod 7 で a, 2a, …, 6a が余りを並べ替える対応表"
-    problems:
-      - {id: abc133_c, role: example, summary: "区間から2数を選んで積の mod 2019 を最小化する。区間の幅が 2019 以上なら必ず 0"}
-      - {id: abc118_c, role: example, summary: "攻撃を繰り返して残る体力の最小値は、全体の gcd になる"}
-      - {id: agc018_a, role: example, summary: "差を書き足す操作で K を作れるか（作れるのは gcd の倍数で最大値以下）"}
-      - {id: arc105_b, role: practice, summary: "最大から最小を引き続けた結果は gcd になる"}
-    sources: ["06-math-nt §4.1", "06-math-nt §5.1", "06-math-nt §7.4", "06-math-nt §7.6"]
-
-  # ── 2. 整数と mod ──
   - id: integer-division
-    chapter: 整数と mod
-    title: 整数の割り算と余り（負の数・切り上げ・倍数の個数）
-    aliases: [floor_div, 切り捨て除算, 切り上げ, 負の数の割り算, 負の数の余り, オーバーフロー判定, 割り算で比較]
+    chapter: 式と整数の基本
+    title: 整数の割り算と余り
+    aliases: [floor_div, floor division, 切り捨て除算, 切り上げ, 負の数の割り算, 負の数の余り, オーバーフロー判定, 割り算で比較]
     type: technique
     level: 基礎
-    level_evidence: "abc239_b (57) が負の数の切り捨てそのもの。abc048_b (861)・abc084_c (908) で区間の倍数と切り上げ。D〜F の途中計算で WA の原因になりやすい（research/06 §7.3）"
+    level_evidence: "abc239_b (57) が負の数の切り捨てそのもの。abc048_b (861)・abc084_c (908)・abc432_c (654, 2025) で区間の倍数と切り上げ。D〜F の途中計算で WA の原因になりやすい（research/06 §7.3）"
     kind: [整数論]
     prerequisites: []
-    related: [math-notation, mod-arithmetic, integer-root, cpp-math-functions, cpp-integer-overflow, cpp-int128]
-    summary: "C++ の / と % はゼロ方向に切り捨てるので、負の数では数学の floor・mod と食い違う。floor・ceil・区間の倍数の個数を正しく求める式と、積があふれるかを割り算で判定する方法をまとめる。"
+    related: [notation, mod-arithmetic, integer-root, cpp-math-functions, cpp-integer-overflow#overflow-check]
+    summary: "負の数を含む割り算・余り・切り上げや区間の倍数の個数を、C++ の / と % の切り捨ての向きに注意して正しく求める。積があふれるかどうかも、掛ける前に割り算で判定する。"
     signs:
       - {type: constraint, text: "入力に負の数（|X| ≤ 10^18 など）があり、割り算・余り・切り上げを使う"}
+      - {type: constraint, text: "積・lcm・累乗が 10^18 を超えうる（long long の上限は約 9.2×10^18）"}
       - {type: phrase, text: "x 以上で、m で割って r 余る最小の数"}
       - {type: phrase, text: "[L, R] にある K の倍数の個数"}
-      - {type: phrase, text: "一定の間隔で発車する・周期的に起こる"}
-      - {type: constraint, text: "積・lcm・累乗が 10^18 を超えうる（long long の上限は約 9.2×10^18）"}
+      - {type: phrase, text: "一定の間隔で発車する・周期的に起こる出来事の、ある時刻以降で最初のもの"}
     acl: []
+    verify: []
     frequency: A
+    frequency_evidence: "recent 1（abc460_e）・前提として 67 ページに届く（直接 6）・古い ABC 6 問"
     sections:
-      - "C++ の / と % と、数学の floor・mod の違い"
-      - "負の数でも正しい floor_div・ceil_div と safe_mod"
-      - "切り上げ ⌈a/b⌉ = ⌊(a+b−1)/b⌋ が使える条件"
-      - "区間 [L, R] の K の倍数の個数（L = 0 の境界）"
-      - "x 以上で m で割って r 余る最小の数"
-      - "あふれる前に割り算で判定する（a > L / b）と __int128 への逃げ方"
-      - "double で割らない（10^18 付近の誤差）"
+      - {title: "C++ の / と % と、数学の floor・mod の違い", anchor: cpp-vs-math}
+      - {title: "負の数でも正しい floor_div・ceil_div・safe_mod", anchor: floor-ceil}
+      - {title: "切り上げ ⌈a/b⌉ = ⌊(a+b−1)/b⌋ が使える条件", anchor: ceil-formula}
+      - {title: "区間 [L, R] の K の倍数の個数と、x 以上で m で割って r 余る最小の数", anchor: count-multiples}
+      - {title: "あふれる前に割り算で判定する（a > L / b）と __int128 への逃げ方", anchor: overflow}
+      - {title: "double で割らない（10^18 付近の誤差）", anchor: no-double}
     merged_keys: [overflow-check]
-    visual: "数直線に b ごとの目盛りを打ち、a の左右の目盛りを floor・ceil として示す図（負の側も描く）"
+    visual: {kind: static, priority: 2, text: "数直線に b ごとの目盛りを打ち、a の左右の目盛りを floor・ceil として示す図（負の側も描く）"}
     problems:
-      - {id: abc239_b, role: example, summary: "負もありうる X（|X| ≤ 10^18）の ⌊X/10⌋。C++ の / はゼロ方向に切り捨てる"}
-      - {id: abc131_c, role: practice, summary: "[A, B] で C でも D でも割り切れない数の個数（倍数の個数と lcm）"}
-      - {id: abc165_d, role: practice, summary: "⌊Ax/B⌋ − A⌊x/B⌋ の最大値（floor の性質と周期 B）"}
-      - {id: abc432_c, role: practice, summary: "大小2種類の飴の配り方の条件（必要条件と切り上げ）"}
-      - {id: abc048_b, role: practice, summary: "[a, b] にある x の倍数の個数（a = 0 のときの境界）"}
-      - {id: abc084_c, role: practice, summary: "一定の間隔で発車する列車を乗り継ぐ到着時刻（切り上げ）"}
-      - {id: typical90_al, role: practice, summary: "2 数の lcm が 10^18 を超えるかを、割り算で比べて判定する"}
+      - {id: abc239_b, role: example, representative: true, summary: "負の数もありうる整数 X（|X| ≤ 10^18）について ⌊X/10⌋ を求める。", approach: "C++ の / はゼロ方向に切り捨てるので、負で割り切れないときは 1 引く"}
+      - {id: abc131_c, role: practice, summary: "A 以上 B 以下の整数のうち、C でも D でも割り切れないものの個数を求める。", approach: "倍数の個数を f(B) − f(A − 1) で数え、lcm(C, D) で包除する"}
+      - {id: abc165_d, role: practice, summary: "0 ≤ x ≤ N の整数 x について ⌊Ax/B⌋ − A⌊x/B⌋ の最大値を求める。", approach: "式は x について周期 B なので、x = min(N, B − 1) を調べればよい"}
+      - {id: abc432_c, role: practice, summary: "大小2種類の飴を配る方法についての条件を調べる（詳細は執筆時に確かめる）。", approach: "必要条件を式にし、切り上げの割り算で境界を求める"}
+      - {id: abc048_b, role: practice, summary: "a 以上 b 以下の整数のうち x で割り切れるものの個数を求める（0 ≤ a ≤ b ≤ 10^18）。", approach: "f(b) − f(a − 1)。a = 0 の境界に注意する"}
+      - {id: abc084_c, role: practice, summary: "駅を順に結ぶ列車がそれぞれ一定の間隔で発車するとき、各駅から出発して終点に着く最も早い時刻を求める。", approach: "次の発車時刻を切り上げの割り算で求めてシミュレーションする"}
+      - {id: typical90_al, role: practice, summary: "2 数の最小公倍数が 10^18 を超えるかを判定し、超えなければその値を出力する。", approach: "a / gcd × b を、掛ける前に割り算で比べて判定する"}
+    problems_note: null
     sources: ["06-math-nt §4.2", "06-math-nt §5.1", "06-math-nt §5.2", "06-math-nt §6.3", "06-math-nt §7.3", "06-math-nt §7.4"]
 
+  # ── 2. mod の計算 ──
   - id: mod-arithmetic
-    chapter: 整数と mod
-    title: mod の計算の基本（四則・負の数・998244353）
-    aliases: [剰余演算, mod 998244353, mod 1e9+7, 余りを取る, 合同式の計算]
+    chapter: mod の計算
+    title: mod の計算の基本
+    aliases: [剰余演算, 余りを取る, 合同式の計算, modular arithmetic, mod 998244353, mod 1e9+7]
     type: technique
     level: 基礎
     level_evidence: "abc275_b (147)・abc055_b (332) が基本形。arc111_a (1146) は mod M² を使う応用。mod 付きの数え上げ全般の前提"
     kind: [整数論]
     prerequisites: [integer-division]
-    related: [modint, mod-inverse, math-notation, dp-mod-state]
-    summary: "足し算・引き算・掛け算は途中で何度余りを取ってもよいが、割り算と大小比較はそのままではできない。負の数の余り・掛け算のあふれ・998244353 が使われる理由をまとめる。"
+    related: [modint, mod-inverse, notation, dp-mod-state]
+    summary: "答えを m で割った余りで求めるとき、足し算・引き算・掛け算は途中で何度余りを取ってもよい。割り算と大小比較はそのままではできず、負の数とあふれにも注意が要る。"
     signs:
-      - {type: phrase, text: "答えを 998244353（10^9+7）で割った余りを出力する"}
-      - {type: phrase, text: "答えが非常に大きくなる数え上げ"}
+      - {type: phrase, text: "引き算を含む式の値を、0 以上 m 未満の余りで出力する"}
       - {type: constraint, text: "10^9 程度の値の積を何度も取り、余りを取らないと 64bit に収まらない"}
     acl: []
+    verify: []
     frequency: A
+    frequency_evidence: "recent 0・前提として 39 ページに届く（直接 6）・古い ABC 2 問"
     sections:
-      - "途中で余りを取ってよい理由（合同式の性質）"
-      - "引き算の後の負の数を 0 以上に直す"
-      - "掛け算のあふれ（両方を mod に収めてから 64bit で掛ける）"
-      - "割り算はそのままではできない（→ 逆元）"
-      - "mod を取った値で大小比較・最大値を考えてはいけない"
-      - "なぜ 998244353 か（素数で、NTT に向く形）"
+      - {title: "途中で余りを取ってよい理由（合同式の性質）", anchor: why-mod}
+      - {title: "引き算の後の負の数を 0 以上に直す", anchor: negative}
+      - {title: "掛け算のあふれ（両方を mod に収めてから 64bit で掛ける）", anchor: overflow}
+      - {title: "割り算はそのままではできない（→ 逆元）", anchor: division}
+      - {title: "mod を取った値で大小比較・最大値を考えてはいけない", anchor: no-compare}
+      - {title: "なぜ 998244353 か（素数で、NTT に向く形）", anchor: why-998244353}
     merged_keys: []
-    visual: "時計（余りの輪）の上で足し算・掛け算をする図"
+    visual: {kind: static, priority: 2, text: "時計（余りの輪）の上で足し算・掛け算をする図"}
     problems:
-      - {id: abc275_b, role: example, summary: "大きな数の積の差を 998244353 で割った余り（途中で mod を取り、負の数を直す）"}
-      - {id: abc055_b, role: practice, summary: "N! mod 10^9+7（掛けるたびに余りを取る）"}
-      - {id: arc111_a, role: practice, summary: "⌊10^N / M⌋ mod M を、10^N mod M² から求める"}
+      - {id: abc275_b, role: example, representative: true, summary: "6 つの整数 A〜F（≤ 10^18）について (A×B×C) − (D×E×F) を 998244353 で割った余りを求める。", approach: "各数の余りを取ってから掛け、差が負なら mod を足して直す"}
+      - {id: abc055_b, role: practice, summary: "N!（N ≤ 10^5）を 10^9+7 で割った余りを求める。", approach: "掛けるたびに余りを取る"}
+      - {id: arc111_a, role: practice, summary: "⌊10^N / M⌋ を M で割った余りを求める（N ≤ 10^18、M ≤ 10^4）。", approach: "10^N mod M² を求め、M で割った商が答えになる"}
+    problems_note: null
     sources: ["06-math-nt §4.2", "06-math-nt §5.2", "06-math-nt §6.3"]
 
   - id: mod-pow
-    chapter: 整数と mod
+    chapter: mod の計算
     title: 繰り返し二乗法
     aliases: [二分累乗法, 高速累乗, binary exponentiation, modpow, pow_mod, モノイドの累乗]
     type: technique
     level: 基礎
-    level_evidence: "typical90_bq（★3）で N ≤ 10^18 の累乗。abc228_e (1579)・逆元（フェルマー）・行列累乗の部品"
+    level_evidence: "typical90_bq（★3）で N ≤ 10^18 の累乗をそのまま使う。逆元（フェルマー）・行列累乗の部品で、abc228_e (1579)・arc111_a (1146) は指数の mod などと組み合わせる応用"
     kind: [整数論, ダブリング・分割統治]
     prerequisites: [mod-arithmetic]
     related: [doubling, matrix-power, exponent-mod, mod-inverse]
-    summary: "a^n mod m を、n の2進表記に沿って a, a², a⁴, … を掛け合わせて O(log n) で求める。結合法則を満たす演算（行列・多項式・写像の合成）なら同じ方法で累乗できる。"
+    summary: "a^n mod m を、n の2進表記に沿って a, a², a⁴, … を掛け合わせて O(log n) で求める。結合法則を満たす演算（行列・写像の合成など）なら同じ方法で累乗できる。"
     signs:
       - {type: constraint, text: "指数・繰り返しの回数が N ≤ 10^18"}
       - {type: phrase, text: "a^N を m で割った余り"}
       - {type: phrase, text: "結合法則を満たす同じ操作を非常に多く繰り返す"}
     acl: [pow_mod]
+    verify: []
     frequency: A
+    frequency_evidence: "recent 0・前提として 28 ページに届く（直接 2）・古い ABC 1 問"
     sections:
-      - "指数を2進展開して必要な a^(2^k) だけ掛ける"
-      - "再帰版と反復版"
-      - "結合法則を満たす演算なら何でも累乗できる（モノイドの累乗）"
-      - "ダブリング・行列累乗とのつながり"
-      - "落とし穴：指数を m で割ってしまう・0^0・int のあふれ"
-      - "ACL では（pow_mod・modint::pow）"
+      - {title: "指数を2進展開して必要な a^(2^k) だけ掛ける", anchor: binary-expansion}
+      - {title: "再帰版と反復版", anchor: recursive-iterative}
+      - {title: "結合法則を満たす演算の累乗（行列・写像の合成）", anchor: monoid-power}
+      - {title: "落とし穴：指数を m で割ってしまう・0^0・掛け算のあふれ", anchor: pitfalls}
+      - {title: "ACL の pow_mod と modint::pow", anchor: acl}
     merged_keys: []
-    visual: "指数の2進表記と a^(2^k) の列を並べ、1 の bit の項だけを掛けるステップ送り"
+    visual: {kind: dynamic, priority: 2, text: "指数の2進表記と a^(2^k) の列を並べ、1 の bit の項だけを掛けていくステップ送り"}
     problems:
-      - {id: typical90_bq, role: example, summary: "K(K−1)(K−2)^(N−2) を N ≤ 10^18 で求める"}
-      - {id: abc228_e, role: practice, summary: "M^(K^N) mod 998244353。指数の mod と組み合わせて累乗を2回使う"}
+      - {id: typical90_bq, role: practice, summary: "N 個のブロックを K 色で塗り、隣り合う2つと1つおきの2つが同じ色にならない塗り方の数を 10^9+7 で割った余りで求める（N ≤ 10^18）。", approach: "K(K−1)(K−2)^(N−2) を繰り返し二乗法で計算する（例題は comb の counting-basics）"}
+      - {id: arc111_a, role: example, representative: true, summary: "⌊10^N / M⌋ を M で割った余りを求める（N ≤ 10^18、M ≤ 10^4）。", approach: "10^N mod M² を繰り返し二乗法で求め、M で割る"}
+      - {id: abc228_e, role: practice, summary: "長さ N で各項が 1 以上 K 以下の数列それぞれに 1 以上 M 以下の点数を付ける方法の数（M^(K^N)）を 998244353 で割った余りで求める（N, K, M ≤ 10^18）。", approach: "指数 K^N を 998244352 で割った余りに直して累乗を2回使う。M が 998244353 の倍数のときは別に扱う"}
+    problems_note: null
     sources: ["06-math-nt §4.2", "06-math-nt §5.2", "06-math-nt §6.5", "06-math-nt §7.3"]
 
   - id: mod-inverse
-    chapter: 整数と mod
+    chapter: mod の計算
     title: 逆元と mod での割り算
-    aliases: [モジュラ逆元, modinv, inv_mod, mod での割り算, 逆元表, 有理数の mod 表現]
+    aliases: [モジュラ逆元, modular inverse, modinv, inv_mod, mod での割り算, 逆元表]
     type: technique
     level: 基礎
-    level_evidence: "typical90_cd（★3）・math_and_algorithm_as で素数 mod の逆元。法が素数でない abc186_e (1461) は拡張ユークリッド（水の節）"
+    level_evidence: "typical90_cd（★3）・math_and_algorithm_as・abc357_d (970, 2024) で素数 mod の逆元をそのまま使う。法が素数でない abc186_e (1461) は拡張ユークリッドの節（水）の例"
     kind: [整数論]
     prerequisites: [mod-pow]
-    related: [ext-gcd, modint, binomial-precompute, rational-mod, geometric-series-mod, lucas-theorem]
-    summary: "a·x ≡ 1 (mod m) となる x（逆元）を求めて、mod での割り算を掛け算に直す。素数 mod ならフェルマーの小定理で a^(m−2)、一般には拡張ユークリッドで求め、1..N の逆元の表は O(N) で作れる。"
+    related: [ext-gcd, modint, binomial-precompute#lucas, rational-mod, geometric-series-mod]
+    summary: "a·x ≡ 1 (mod m) となる逆元 x を求め、mod での割り算を掛け算に直す。素数 mod ならフェルマーの小定理で a^(m−2)、一般の法では拡張ユークリッドで求める。"
     signs:
       - {type: phrase, text: "答えは有理数 P/Q になるので P × Q^(−1) mod 998244353 を出力する"}
-      - {type: phrase, text: "平均・期待値・等比数列の和を mod で求める"}
-      - {type: phrase, text: "mod の世界で割り算が必要になる"}
+      - {type: phrase, text: "平均・等比数列の和などを、割り算を含む式のまま mod で求める"}
     acl: [inv_mod]
+    verify: []
     frequency: A
+    frequency_evidence: "recent 1（abc468_e）・前提として 24 ページに届く（直接 9）・古い ABC 2 問"
     sections:
-      - "逆元が存在する条件（gcd(a, m) = 1）と2つの誤解"
-      - "フェルマーの小定理による a^(p−2)"
-      - "拡張ユークリッドによる逆元（法が素数でないとき）（水）"
-      - "逆元表を O(N) で作る（inv[i] = −⌊m/i⌋·inv[m mod i]）と階乗の逆元（二項係数の前計算の前提）"
-      - "有理数の mod 表現 P × Q^(−1) の計算（確率・期待値での意味づけは comb の章）"
-      - "割れないときの3パターン（割る数が p の倍数・公比 ≡ 1・法が素数でない）"
-      - "ACL では（inv_mod・modint::inv）"
+      - {title: "逆元が存在する条件（gcd(a, m) = 1）", anchor: existence}
+      - {title: "フェルマーの小定理による a^(p−2)", anchor: fermat}
+      - {title: "拡張ユークリッドによる逆元（法が素数でないとき）", anchor: ext-gcd, level: 水}
+      - {title: "逆元表を O(N) で作る（inv[i] = −⌊m/i⌋·inv[m mod i]）と階乗の逆元", anchor: inverse-table}
+      - {title: "有理数 P/Q を P × Q^(−1) で表す計算", anchor: rational}
+      - {title: "割れないときの3つの場合（割る数が p の倍数・公比 ≡ 1・法が素数でない）", anchor: not-invertible}
+      - {title: "ACL の inv_mod と modint::inv", anchor: acl}
     merged_keys: []
-    visual: "mod 7 の掛け算表で、各行に 1 がちょうど1つあることを色付けする図"
+    visual: {kind: static, priority: 2, text: "mod 7 の掛け算表で、各行に 1 がちょうど1つあることを色付けする図"}
     problems:
-      - {id: typical90_cd, role: example, summary: "桁数ごとの等差数列の和を mod 10^9+7 で求める（2 の逆元）"}
-      - {id: math_and_algorithm_as, role: practice, summary: "4^0 + … + 4^N を (4^(N+1) − 1)/3 で求める（3 の逆元）"}
-      - {id: abc186_e, role: practice, summary: "円周上を K ずつ進んで玉座に着く最小回数。法が素数でないので、逆元があるかを gcd で確かめる"}
+      - {id: typical90_cd, role: example, representative: true, summary: "L 以上 R 以下の各整数 x を x 回ずつ書いたときの、書いた文字数の合計を 10^9+7 で割った余りで求める（R ≤ 10^18）。", approach: "桁数ごとに等差数列の和に分け、2 の逆元で割る"}
+      - {id: math_and_algorithm_as, role: practice, summary: "4^0 + 4^1 + … + 4^N を 10^9+7 で割った余りで求める（N ≤ 10^18）。", approach: "(4^(N+1) − 1)/3 を 3 の逆元で計算する"}
+      - {id: abc357_d, role: practice, summary: "正の整数 N を N 回並べてできる整数を 998244353 で割った余りを求める（N ≤ 10^18）。", approach: "公比 10^d の等比数列の和の公式で、10^d − 1 の逆元を掛ける（例題は geometric-series-mod）"}
+      - {id: abc186_e, role: practice, summary: "N 個の椅子が円形に並び、玉座から S 個先の椅子にいる人が1回に K 個ずつ進むとき、玉座に着くまでの最小の回数を求める（着けないなら −1）。", approach: "S + Kx ≡ 0 (mod N) を一次合同式として解く。法が素数でないので gcd で割ってから拡張ユークリッドで逆元を求める"}
+    problems_note: null
     sources: ["06-math-nt §4.2", "06-math-nt §5.2", "06-math-nt §6.2", "06-math-nt §6.5", "06-math-nt §7.3", "06-math-nt §7.4"]
 
   - id: modint
-    chapter: 整数と mod
-    title: modint（mod を自動で取る型）
+    chapter: mod の計算
+    title: modint
     aliases: [static_modint, dynamic_modint, mint, modint998244353, modint1000000007]
     type: technique
     level: 基礎
     level_evidence: "mod 付きの数え上げ全般の道具（abc357_d (970) など）。法が入力で与えられる abc281_g (2304) では dynamic_modint が要る"
     kind: [整数論, 実装・C++]
     prerequisites: [mod-inverse]
-    related: [acl-modint, mod-arithmetic, library-design]
-    summary: "四則演算のたびに自動で余りを取る型。ACL の static_modint（法が固定）と dynamic_modint（法が入力）の使い分け、val() での取り出しや比較できないことなどの落とし穴、自作するときの設計をまとめる。"
+    related: [acl-reading#modint, mod-arithmetic, library-design]
+    summary: "四則演算のたびに自動で余りを取る型で、mod 付きの数え上げを素直に書ける。法が固定なら static_modint、入力で決まるなら dynamic_modint を使い、値は val() で取り出す。"
     signs:
-      - {type: phrase, text: "mod 998244353 の数え上げを素直に書きたい"}
-      - {type: phrase, text: "法 M（素数とは限らない）が入力で与えられる"}
+      - {type: phrase, text: "法 M（素数とは限らない）が入力で与えられ、その余りで数え上げの答えを出力する"}
     acl: [static_modint, dynamic_modint]
+    verify: []
     frequency: A
+    frequency_evidence: "数え上げ・確率を mod で答える問題で常に使う道具（ページ単体の最近の出現は数えにくいので手で A にした）"
     sections:
-      - "何が自動になるか（加減乗除と負の数の正規化）"
-      - "static_modint と dynamic_modint（set_mod）の使い分け"
-      - "val() で取り出す・大小比較や「0 になったか」で元の値は分からない"
-      - "割り算の条件（法が素数でなければ互いに素が必要）"
-      - "自作するときの設計（加減の条件分岐・64bit の掛け算・pow と inv・入出力）"
-      - "ACL の中身（Barrett 還元・raw）"
+      - {title: "何が自動になるか（加減乗除と負の数の正規化）", anchor: what-is-automatic}
+      - {title: "static_modint と dynamic_modint（set_mod）の使い分け", anchor: static-dynamic}
+      - {title: "val() で取り出す・大小比較や「0 になったか」で元の値は分からない", anchor: pitfalls}
+      - {title: "割り算の条件（法が素数でなければ互いに素が必要）", anchor: division}
+      - {title: "自作するときの設計（加減の条件分岐・64bit の掛け算・pow と inv・入出力）", anchor: self-made}
+      - {title: "ACL の中身（Barrett 還元・raw）", anchor: acl-internals}
     merged_keys: []
     visual: null
     problems:
-      - {id: abc357_d, role: example, summary: "N を N 回連結した数を mod 998244353 で求める（modint で等比数列を計算する）"}
-      - {id: abc281_g, role: practice, summary: "BFS 木の層ごとの数え上げ。法 P が入力なので dynamic_modint を使う"}
+      - {id: abc357_d, role: practice, summary: "正の整数 N を N 回並べてできる整数を 998244353 で割った余りを求める（N ≤ 10^18）。", approach: "N の桁数を d とすると公比 10^d の等比数列の和になる。modint の pow と割り算で書く（例題は geometric-series-mod）"}
+      - {id: abc281_g, role: practice, summary: "N 頂点の連結な単純無向グラフのうち、頂点 1 から最も遠い頂点が頂点 N だけであるものの個数を、入力の P で割った余りで求める。", approach: "距離ごとの層の大きさで DP する（BFS 木の層）。P が入力なので dynamic_modint を使う"}
+    problems_note: "modint は道具なので例題を置かず、使い方は本文の短いコードで示す。abc357_d は geometric-series-mod の例題で、練習にした。mod の数え上げの練習は comb のページに任せる"
     sources: ["06-math-nt §4.2", "06-math-nt §5.2", "06-math-nt §6.5", "09-cpp §4.33"]
 
   - id: exponent-mod
-    chapter: 整数と mod
-    title: 指数の mod（フェルマーの小定理・オイラーの定理）
-    aliases: [フェルマーの小定理, オイラーの定理, 指数を p−1 で割る, 累乗の塔, tetration]
+    chapter: mod の計算
+    title: フェルマーの小定理と指数の mod
+    aliases: [指数の mod, オイラーの定理, Fermat's little theorem, Euler's theorem, 指数を p−1 で割る, 累乗の塔, tetration]
     type: technique
     level: 水
-    level_evidence: "abc228_e (1579) が必須（指数を 998244352 で割る）。abc222_g (2242) は位数と組み合わせる"
+    level_evidence: "abc228_e (1579) が必須（指数を 998244352 で割る）。abc222_g (2242) は位数と組み合わせる。abc319 以降の根拠はまだない"
     kind: [整数論]
-    prerequisites: [mod-pow, mod-inverse]
-    related: [euler-phi, multiplicative-order, miller-rabin]
-    summary: "a^(K^N) のように指数が巨大なとき、gcd(a, p) = 1 なら a^(p−1) ≡ 1 なので指数を p−1 で割った余りに直せる。一般の法ではオイラーの定理を使い、底が法の倍数になる場合を別に扱う。"
+    prerequisites: [mod-inverse]
+    related: [euler-phi, multiplicative-order, miller-rabin, mod-pow]
+    summary: "a^(K^N) のように指数が巨大な累乗の mod を、gcd(a, p) = 1 なら指数を p − 1 で割った余りに直して求める。一般の法ではオイラーの定理を使い、底が法の倍数になる場合を分ける。"
     signs:
       - {type: phrase, text: "a^(b^c) mod p のように、指数にさらに指数がある"}
       - {type: phrase, text: "累乗の塔を mod で求める"}
       - {type: constraint, text: "指数が 10^18 をさらに累乗した大きさになる"}
     acl: [pow_mod]
-    frequency: B
+    verify: [tetration_mod]
+    frequency: C
+    frequency_evidence: "recent 0・前提として 1 ページに届く（直接 1）・古い ABC 2 問"
     sections:
-      - "フェルマーの小定理と、指数を p−1 で割ってよい理由（累乗の周期）"
-      - "指数の計算は mod (p−1)（p−1 は合成数なので割り算はできない）"
-      - "底が p の倍数の場合（答えは 0、指数が 0 なら 1）"
-      - "一般の法：オイラーの定理と、互いに素でないときの一般化（黄）"
+      - {title: "フェルマーの小定理と、指数を p − 1 で割ってよい理由（累乗の周期）", anchor: fermat}
+      - {title: "指数の計算は mod (p − 1)（p − 1 は合成数なので割り算はできない）", anchor: exponent-mod-p-1}
+      - {title: "底が p の倍数の場合（答えは 0、指数が 0 なら 1）", anchor: base-multiple}
+      - {title: "一般の法：オイラーの定理と、互いに素でないときの一般化（累乗の塔）", anchor: euler-theorem, level: 黄}
     merged_keys: []
-    visual: "a^0, a^1, a^2, … を mod 7 の円の上でたどり、6 回で 1 に戻る様子"
+    visual: {kind: static, priority: 2, text: "a^0, a^1, a^2, … を mod 7 の円の上でたどり、6 回で 1 に戻る様子"}
     problems:
-      - {id: abc228_e, role: example, summary: "M^(K^N) mod 998244353。指数を 998244352 で割り、M が 998244353 の倍数の場合を分ける"}
-      - {id: abc222_g, role: practice, summary: "2 を n 個並べた数が K の倍数になる最小の n（10^n ≡ 1 をオイラーの定理と位数で解く）"}
+      - {id: abc228_e, role: example, representative: true, summary: "長さ N で各項が 1 以上 K 以下の数列それぞれに 1 以上 M 以下の点数を付ける方法の数（M^(K^N)）を 998244353 で割った余りで求める（N, K, M ≤ 10^18）。", approach: "指数 K^N を 998244352 で割った余りに直す。M が 998244353 の倍数なら答えは 0"}
+      - {id: abc222_g, role: practice, summary: "2 を n 個並べた整数が K の倍数になる最小の n を求める（なければ −1、K ≤ 10^8）。", approach: "10^n ≡ 1 の形に直し、オイラーの定理（φ の約数）から位数を探す"}
+    problems_note: "練習の候補が abc222_g のほかに見つかっておらず、abc319 以降の問題もない（工程8b の前の問題の補充で探す）"
     sources: ["06-math-nt §2.3", "06-math-nt §4.2", "06-math-nt §5.2", "06-math-nt §6.3"]
 
   - id: geometric-series-mod
-    chapter: 整数と mod
+    chapter: mod の計算
     title: 等比数列の和を mod で求める
-    aliases: [等比級数, repunit, Σ A^i, 数の連結, 同じ数字を並べた数]
+    aliases: [等比級数, geometric series, repunit, Σ A^i, 同じ数字を並べた数]
     type: technique
-    level: 水
-    level_evidence: "abc293_e (1453) で法が任意（逆元が使えない）。abc357_d (970) は素数 mod で逆元を使う易しい例。abc129_f (2621) は行列で"
+    level: 基礎
+    level_evidence: "abc357_d (970, 2024) は素数 mod の公式と逆元で解ける。法が任意の abc293_e (1453) は水の節、行列の abc129_f (2621) は青の節の応用。最近の根拠の abc357_d に合わせて第1版の水から基礎にした（design-review D2）"
     kind: [整数論, ダブリング・分割統治]
     prerequisites: [mod-inverse]
     related: [matrix-power, doubling, digit-and-mod, exponent-mod]
-    summary: "1 + r + … + r^(n−1) を mod で求める。素数 mod で r ≢ 1 なら (r^n − 1)/(r − 1)、法が任意なら和を半分に割る漸化式か 2×2 行列の累乗で O(log n) にする。"
+    summary: "1 + r + … + r^(n−1) を mod で求める。素数 mod で r ≢ 1 なら (r^n − 1)/(r − 1)、法が任意なら和を半分に割る漸化式か行列の累乗で O(log n) にする。"
     signs:
       - {type: phrase, text: "同じ数字列を M 回並べてできる数を mod で求める"}
-      - {type: phrase, text: "Σ_{i<N} A^i を M で割った余り"}
-      - {type: constraint, text: "法 M が入力で与えられ、素数とは限らない"}
+      - {type: phrase, text: "法 M が入力で与えられ、素数とは限らない"}
+      - {type: constraint, text: "項数 N ≤ 10^12〜10^18 の等比数列の和を、素数とは限らない法 M ≤ 10^9 で求める"}
+      - {type: shape, text: "Σ_{i=0}^{N−1} A^i の形の和"}
     acl: []
+    verify: []
     frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 3 問"
     sections:
-      - "公式 (r^n − 1)/(r − 1) と r ≡ 1 の場合分け"
-      - "法が任意のとき：S(2k) = S(k)(1 + r^k) で半分に割る"
-      - "2×2 行列 [[r, 1], [0, 1]] の累乗による別解（黄）"
-      - "数の連結は等比数列（x の後ろに d 桁の y を付けると x·10^d + y）"
+      - {title: "公式 (r^n − 1)/(r − 1) と r ≡ 1 の場合分け", anchor: formula}
+      - {title: "法が任意のとき：S(2k) = S(k)(1 + r^k) で半分に割る", anchor: halving, level: 水}
+      - {title: "2×2 行列 [[r, 1], [0, 1]] の累乗による別解", anchor: matrix, level: 青}
+      - {title: "同じ数字列を並べた数は公比 10^d の等比数列の和になる", anchor: repeated-digits}
     merged_keys: []
-    visual: "長さ 2k の列を半分に折って S(2k) = S(k)(1 + r^k) を示す図"
+    visual: {kind: static, priority: 2, text: "長さ 2k の列を半分に折って S(2k) = S(k)(1 + r^k) を示す図"}
     problems:
-      - {id: abc357_d, role: example, summary: "N を N 回連結した数を mod 998244353 で求める（公比 10^d の等比数列）"}
-      - {id: abc293_e, role: example, summary: "Σ A^i mod M（M は任意）。和を半分に割る漸化式か行列で求める"}
-      - {id: math_and_algorithm_as, role: practice, summary: "4^0 + … + 4^N を公式と逆元で求める"}
-      - {id: abc129_f, role: challenge, summary: "等差数列を連結した数を mod M で求める（桁数ごとに 3×3 行列の累乗）"}
+      - {id: abc357_d, role: example, representative: true, summary: "正の整数 N を N 回並べてできる整数を 998244353 で割った余りを求める（N ≤ 10^18）。", approach: "公比 10^d（d は N の桁数）の等比数列の和を、公式と逆元で求める"}
+      - {id: math_and_algorithm_as, role: practice, summary: "4^0 + 4^1 + … + 4^N を 10^9+7 で割った余りで求める（N ≤ 10^18）。", approach: "公式 (4^(N+1) − 1)/3 と逆元で求める"}
+      - {id: abc293_e, role: practice, summary: "A^0 + A^1 + … + A^(X−1) を M で割った余りを求める（A, M ≤ 10^9、X ≤ 10^12、M は素数とは限らない）。", approach: "S(2k) = S(k)(1 + A^k) の漸化式か、2×2 行列の累乗で求める（法が任意の節）"}
+      - {id: abc129_f, role: challenge, summary: "初項 A・公差 B・項数 L の等差数列の各項を 10 進で順に連結した整数を M で割った余りを求める（L ≤ 10^18）。", approach: "桁数ごとに区切り、連結の操作を 3×3 行列の累乗で繰り返す"}
+    problems_note: null
     sources: ["06-math-nt §4.2", "06-math-nt §5.2", "06-math-nt §6.2"]
 
   - id: digit-and-mod
-    chapter: 整数と mod
-    title: 桁と mod（倍数判定・数の連結・接尾辞の余り）
-    aliases: [九去法, 倍数判定, 数の連結, 10 倍して a を足す, 部分文字列の余り, 桁和]
+    chapter: mod の計算
+    title: 桁と mod
+    aliases: [九去法, 倍数判定, divisibility rule, 数の連結, 10 倍して a を足す, 部分文字列の余り, 桁和]
     type: technique
     level: 水
-    level_evidence: "abc164_d (1232)・abc158_e (1866)。倍数判定だけなら abc182_c (292)・abc181_d (600)"
+    level_evidence: "abc164_d (1232)・abc158_e (1866)。倍数判定だけなら abc182_c (292)・abc181_d (600)。最近は abc460_e (1362, 2026) で桁数ごとに式を変形する"
     kind: [整数論, 累積和・差分]
     prerequisites: [mod-arithmetic]
     related: [geometric-series-mod, prefix-sum-counting, modular-shortest-path, digit-dp, dp-mod-state]
-    summary: "10 進数の桁を mod で扱う型をまとめる。3・9・4・8・11 の倍数判定、数の連結 x·10^d + y、部分文字列が P の倍数になる個数を接尾辞の余りで数える方法（10 と P が互いに素かで分かれる）を扱う。"
+    summary: "10 進数の桁を mod で考えて、倍数判定・数の連結 x·10^d + y・部分文字列が P の倍数になる個数を求める。部分文字列は接尾辞の余りが等しい組を数え、P が 2・5 のときは場合を分ける。"
     signs:
       - {type: phrase, text: "数字列の部分文字列を整数とみて、P の倍数になるものを数える"}
       - {type: phrase, text: "桁を消したり並べ替えたりして K の倍数にする"}
-      - {type: phrase, text: "数を何回も並べてできる数・桁和"}
+      - {type: phrase, text: "2 つの数を文字列として連結した数についての条件"}
       - {type: constraint, text: "|S| ≤ 2×10^5 の数字列で、部分文字列を全部試すと間に合わない"}
     acl: []
+    verify: []
     frequency: B
+    frequency_evidence: "recent 1（abc460_e）・前提として届くページなし・古い ABC 4 問"
     sections:
-      - "倍数判定（3・9 は桁和、4 は下2桁、8 は下3桁、11 は交互和）"
-      - "数の連結：x の後ろに d 桁の y を付けると x·10^d + y"
-      - "接尾辞の余りで部分文字列を数える（10 と P が互いに素なとき）"
-      - "P が 2・5 のときの場合分け"
-      - "余りを頂点にした最短路（発展。グラフの章へ）"
+      - {title: "倍数判定（3・9 は桁和、4 は下2桁、8 は下3桁、11 は交互和）", anchor: divisibility}
+      - {title: "数の連結：x の後ろに d 桁の y を付けると x·10^d + y", anchor: concatenation}
+      - {title: "接尾辞の余りで部分文字列を数える（10 と P が互いに素なとき）", anchor: suffix-remainder}
+      - {title: "P が 2・5 のときの場合分け", anchor: p-2-5}
     merged_keys: []
-    visual: "文字列の各位置に接尾辞の余りを書き、同じ余りの位置どうしを線で結ぶ図"
+    visual: {kind: static, priority: 2, text: "文字列の各位置に接尾辞の余りを書き、同じ余りの位置どうしを線で結ぶ図"}
     problems:
-      - {id: abc164_d, role: example, summary: "部分文字列が 2019 の倍数になる個数（接尾辞の余りが等しい組を数える）"}
-      - {id: abc182_c, role: practice, summary: "桁を消して 3 の倍数にする最小個数（桁和 mod 3）"}
-      - {id: abc181_d, role: practice, summary: "並べ替えて 8 の倍数にできるか（下3桁）"}
-      - {id: abc158_e, role: practice, summary: "部分文字列が素数 P の倍数になる個数（P = 2, 5 を分ける）"}
-      - {id: arc084_b, role: challenge, summary: "K の倍数の桁和の最小（余りを頂点にして 01-BFS）"}
-    sources: ["06-math-nt §4.2", "06-math-nt §5.2", "06-math-nt §7.3", "06-math-nt §7.4"]
+      - {id: abc164_d, role: example, representative: true, summary: "数字列 S の部分文字列のうち、整数とみて 2019 の倍数になるものの個数を求める（|S| ≤ 2×10^5）。", approach: "接尾辞の余りが等しい位置の組を数える（10 と 2019 は互いに素）"}
+      - {id: abc182_c, role: practice, summary: "正の整数 N の桁をいくつか（全部ではなく）消して 3 の倍数にするとき、消す桁の最小の個数を求める。", approach: "桁和 mod 3 で場合分けする（桁の部分集合の全探索でもよい）"}
+      - {id: abc181_d, role: practice, summary: "数字列 S の桁を並べ替えて 8 の倍数にできるかを判定する。", approach: "下3桁が 8 の倍数かで決まるので、3 桁以下の 8 の倍数を全て試す"}
+      - {id: abc460_e, role: practice, summary: "（執筆時に確かめる）", approach: "桁数ごとに式を変形して数える（research/00 §2.3.8 の分類）。数の連結 x·10^d + y の式を使うかは執筆時に確かめる"}
+      - {id: abc158_e, role: practice, summary: "数字列 S の部分文字列のうち、整数とみて素数 P の倍数になるものの個数を求める。", approach: "接尾辞の余りが等しい組を数える。P = 2, 5 は末尾の桁だけで決まるので別に数える"}
+      - {id: arc084_b, role: challenge, summary: "正の整数 K の正の倍数のうち、10 進の桁和の最小値を求める。", approach: "余りを頂点にし、+1（コスト1）と ×10（コスト0）の辺で 01-BFS する（graph の modular-shortest-path）"}
+    problems_note: null
+    sources: ["06-math-nt §4.2", "06-math-nt §5.2", "06-math-nt §7.3", "06-math-nt §7.4", "00-curriculum §2.3.8（abc460_e）"]
 
   # ── 3. 素数と約数（調和級数の計算量を含む。research/01 の harmonic-series もここに取り込んだ）──
   - id: divisor-enum
     chapter: 素数と約数
-    title: 約数列挙と素数判定（試し割り）
-    aliases: [約数列挙, 試し割り, 素数判定, 約数の個数, 約数の総和, √N まで調べる]
+    title: 約数列挙と素数判定
+    aliases: [試し割り, trial division, divisor enumeration, primality test, √N まで調べる, 約数の総和]
     type: technique
     level: 基礎
     level_evidence: "abc149_c (172) で素数判定、abc112_d (1025)・diverta2019_d (1098) で答えの候補を約数に絞る。abc161_f (1528) は水"
     kind: [整数論, 全探索]
     prerequisites: [integer-division]
-    related: [prime-factorization, divisor-count-bound, sieve-eratosthenes, small-search-space, miller-rabin]
-    summary: "d と N/d が √N を境に対になることを使い、素数判定と約数列挙を O(√N) で行う。答えの候補が N の約数に限られる問題で、約数を全部試す全探索に使う。"
+    related: [prime-factorization, divisor-count-bound, sieve-eratosthenes, brute-force, miller-rabin, divisors-and-multiples#enumerate]
+    summary: "d と N/d が √N を境に対になることを使い、素数判定と約数の列挙を O(√N) で行う。答えの候補が N の約数に限られる問題で、約数を全部試す全探索に使う。"
     signs:
       - {type: constraint, text: "N ≤ 10^12 程度（√N ≤ 10^6）の約数・素数判定"}
       - {type: phrase, text: "a × b = N となる組を調べる"}
       - {type: phrase, text: "答え（gcd・周期・個数）が N の約数のどれかになる"}
       - {type: phrase, text: "X 以上の最小の素数"}
     acl: []
-    frequency: A
+    verify: []
+    frequency: B
+    frequency_evidence: "recent 1（abc461_f）・前提として 12 ページに届く（直接 2）・古い ABC 4 問"
     sections:
-      - "√N まで調べればよい理由（約数の対）"
-      - "素数判定（試し割り）"
-      - "約数の列挙とソート・平方数での重複"
-      - "約数の個数 Π(e+1) と約数の総和の公式"
-      - "答えの候補が約数に限られる型（gcd の最大・商と余り・割るか引くか）"
-      - "落とし穴：sqrt を double で求める・i*i のあふれ"
+      - {title: "√N まで調べればよい理由（約数の対）", anchor: why-sqrt}
+      - {title: "素数判定（試し割り）", anchor: primality}
+      - {title: "約数の列挙とソート・平方数での重複", anchor: enumerate}
+      - {title: "約数の個数 Π(e+1) と約数の総和の公式", anchor: count-and-sum}
+      - {title: "答えの候補が約数に限られる型（gcd の最大・商と余り・割るか引くか）", anchor: candidates}
+      - {title: "落とし穴：sqrt を double で求める・i*i のあふれ", anchor: pitfalls}
     merged_keys: [primality-trial]
-    visual: "N の約数を d と N/d の組で上下に並べ、√N で折り返す図"
+    visual: {kind: static, priority: 2, text: "N の約数を d と N/d の組で上下に並べ、√N で折り返す図"}
     problems:
-      - {id: abc112_d, role: example, summary: "和 M を N 個に分けたときの gcd の最大（答えは M の約数のどれか）"}
-      - {id: abc149_c, role: practice, summary: "X 以上の最小の素数（試し割りを繰り返す）"}
-      - {id: abc057_c, role: practice, summary: "N = A × B で、A と B の桁数の大きい方を最小化する（約数の組）"}
-      - {id: diverta2019_d, role: practice, summary: "商と余りが等しくなる m の総和（m+1 が N の約数になる）"}
-      - {id: abc161_f, role: practice, summary: "割るか引くかを繰り返して 1 になる K の個数（N と N−1 の約数が候補）"}
+      - {id: abc112_d, role: example, representative: true, summary: "和が M になる長さ N の正の整数列について、全ての要素の最大公約数としてありうる最大値を求める（N ≤ 10^5、M ≤ 10^9）。", approach: "答えは M の約数 d のうち d·N ≤ M を満たす最大のもの"}
+      - {id: abc149_c, role: practice, summary: "X 以上の素数のうち最小のものを求める（X ≤ 10^5）。", approach: "X から順に試し割りで判定する"}
+      - {id: abc057_c, role: practice, summary: "N = A × B となる正の整数の組で、A と B の桁数の大きい方の最小値を求める（N ≤ 10^10）。", approach: "A を √N まで試す（約数の組）"}
+      - {id: diverta2019_d, role: practice, summary: "N を m で割った商と余りが等しくなる正の整数 m を全て求め、その和を出力する（N ≤ 10^12）。", approach: "N = q(m + 1) なので m + 1 は N の約数"}
+      - {id: abc161_f, role: practice, summary: "N に対して、K で割り切れるなら割り、そうでなければ K を引く操作を N < K になるまで続けたとき、1 になる K（2 ≤ K ≤ N）の個数を求める（N ≤ 10^12）。", approach: "候補は N と N − 1 の約数に限られる"}
+    problems_note: null
     sources: ["06-math-nt §4.3", "06-math-nt §5.3", "06-math-nt §6.2", "06-math-nt §6.3", "06-math-nt §7.3"]
 
   - id: prime-factorization
     chapter: 素数と約数
     title: 素因数分解とルジャンドルの公式
-    aliases: [素因数分解, prime factorization, ルジャンドルの公式, 階乗の素因数, 末尾の 0 の個数, v_p(n!)]
+    aliases: [prime factorization, Legendre's formula, 階乗の素因数, 末尾の 0 の個数, v_p(n!)]
     type: technique
     level: 基礎
     level_evidence: "abc169_d (732)・arc067_a (967) で必須。ルジャンドルの公式は abc148_e (818)・abc280_d (880)。abc114_d (1337) は水"
     kind: [整数論]
     prerequisites: [divisor-enum]
     related: [spf-sieve, prime-exponent-vector, divisor-count-bound, miller-rabin, stars-and-bars]
-    summary: "√N までの数で割れるだけ割り、残りが 1 より大きければそれも素数として、N = Π p^e を O(√N) で求める。N! の素因数の指数はルジャンドルの公式 v_p(N!) = Σ ⌊N/p^k⌋ で直接求める。"
+    summary: "√N までの数で割れるだけ割り、残りが 1 より大きければそれも素数として、N = Π p^e を O(√N) で求める。N! の素因数 p の指数はルジャンドルの公式 Σ ⌊N/p^k⌋ で直接求める。"
     signs:
       - {type: phrase, text: "素数ごとに独立に考えられる（積・割り切れる回数）"}
       - {type: phrase, text: "N! の末尾の 0 の個数、N! が K の倍数になる最小の N"}
       - {type: phrase, text: "積が M になる数列の数"}
-      - {type: constraint, text: "N ≤ 10^12 程度の数を1つだけ分解する"}
+      - {type: constraint, text: "N ≤ 10^12 程度の数を1つだけ素因数分解する"}
     acl: []
+    verify: []
     frequency: A
+    frequency_evidence: "recent 0・前提として 7 ページに届く（直接 5）・古い ABC 6 問"
     sections:
-      - "割れるだけ割る手順と、残った数が素数である理由"
-      - "素因数ごとに独立に考える（指数の組合せ）"
-      - "N! の素因数分解とルジャンドルの公式"
-      - "使い分け：1個なら試し割り、多数なら最小素因数の篩、10^18 なら Pollard's rho（発展）"
+      - {title: "割れるだけ割る手順と、残った数が素数である理由", anchor: procedure}
+      - {title: "素因数ごとに独立に考える（指数の組合せ）", anchor: per-prime}
+      - {title: "N! の素因数分解とルジャンドルの公式", anchor: legendre}
+      - {title: "使い分け：1個なら試し割り、多数なら最小素因数の篩（10^18 は大きな数の素因数分解へ）", anchor: which-method}
     merged_keys: [legendre-formula]
-    visual: "360 → 180 → 90 → 45 → 15 → 5 → 1 と割れるだけ割っていくステップ送り"
+    visual: {kind: static, priority: 2, text: "360 → 180 → 90 → 45 → 15 → 5 → 1 と割れるだけ割っていく流れの図"}
     problems:
-      - {id: abc169_d, role: example, summary: "素数冪で割る操作の最大回数（素因数ごとに 1, 2, 3, … と使う）"}
-      - {id: abc148_e, role: practice, summary: "N!! の末尾の 0 の個数（5 で割れる回数をルジャンドルの公式で）"}
-      - {id: abc142_d, role: practice, summary: "公約数から互いに素になるように選べる最大個数（gcd の素因数の個数 + 1）"}
-      - {id: abc280_d, role: practice, summary: "N! が K の倍数になる最小の N（素因数ごとにルジャンドルの公式と二分探索）"}
-      - {id: arc067_a, role: practice, summary: "N! の約数の個数 mod 10^9+7（各数を分解して指数を足す）"}
-      - {id: abc114_d, role: practice, summary: "N! の約数のうち、約数をちょうど 75 個もつものの数（指数の組合せ）"}
-      - {id: abc110_d, role: challenge, summary: "積が M になる長さ N の数列の数（素数ごとに重複組合せ）"}
+      - {id: abc169_d, role: example, representative: true, summary: "N（≤ 10^12）を、素数の累乗 z = p^e で割る操作（同じ z は1回だけ）を最大で何回できるかを求める。", approach: "素因数ごとに、指数を 1, 2, 3, … と小さい順に使う"}
+      - {id: abc148_e, role: practice, summary: "f(n) = n·f(n−2)（f(0) = f(1) = 1）で定まる f(N) を 10 進で書いたときの末尾の 0 の個数を求める（N ≤ 10^18）。", approach: "偶数 N だけ考え、5 で割れる回数をルジャンドルの公式で数える"}
+      - {id: abc142_d, role: practice, summary: "A と B の正の公約数から、どの2つも互いに素になるように選べる最大の個数を求める。", approach: "gcd(A, B) の異なる素因数の個数 + 1"}
+      - {id: abc280_d, role: practice, summary: "N! が K の倍数になる最小の正の整数 N を求める（K ≤ 10^12）。", approach: "K の素因数ごとに、必要な指数をルジャンドルの公式で満たす N を求める"}
+      - {id: arc067_a, role: practice, summary: "N!（N ≤ 1000）の正の約数の個数を 10^9+7 で割った余りで求める。", approach: "1..N を素因数分解して指数を足し、Π(e + 1) を計算する"}
+      - {id: abc114_d, role: practice, summary: "N!（N ≤ 100）の約数のうち、正の約数をちょうど 75 個もつものの個数を求める。", approach: "75 = 75, 3·25, 5·15, 3·5·5 に対応する指数の組合せを数える"}
+      - {id: abc110_d, role: challenge, summary: "積が M になる長さ N の正の整数列の個数を 10^9+7 で割った余りで求める。", approach: "素因数ごとに、指数を N 個に分ける重複組合せを掛ける"}
+    problems_note: null
     sources: ["06-math-nt §4.3", "06-math-nt §5.3", "06-math-nt §6.2", "00-curriculum §3.2"]
 
   - id: sieve-eratosthenes
     chapter: 素数と約数
     title: エラトステネスの篩
-    aliases: [篩, 素数の列挙, sieve, 素数表]
+    aliases: [篩, sieve of Eratosthenes, 素数の列挙, 素数表]
     type: technique
     level: 基礎
-    level_evidence: "abc250_d (797)・abc300_d (908)・abc084_d (980)"
+    level_evidence: "abc250_d (797)・abc300_d (908)・abc084_d (980)。最近は abc475_d (741, 2026)"
     kind: [整数論]
     prerequisites: [divisor-enum]
     related: [spf-sieve, segmented-sieve, harmonic-sum, prefix-sum, mobius-function]
-    summary: "N 以下の素数を、小さい素数の倍数を順に消して O(N log log N) で列挙する。p² から消せば十分な理由と、素数の逆数和が log log N になることが計算量の根拠になる。"
+    summary: "N 以下の素数を、小さい素数の倍数を順に消して O(N log log N) で列挙する。区間にある素数の個数を何度も答えるなら、篩の結果を累積和にする。"
     signs:
       - {type: constraint, text: "N ≤ 10^6〜10^7 の範囲の素数を全部使う"}
       - {type: phrase, text: "p q³ ≤ N を満たす素数の組を数える"}
-      - {type: phrase, text: "区間 [l, r] の素数の個数を何度も答える（篩と累積和）"}
+      - {type: phrase, text: "区間 [l, r] の素数の個数を何度も答える"}
     acl: []
-    frequency: A
+    verify: [enumerate_primes]
+    frequency: B
+    frequency_evidence: "recent 1（abc475_d）・前提として 4 ページに届く（直接 4）・古い ABC 3 問"
     sections:
-      - "倍数を消す手順と、p² から消せば十分な理由"
-      - "計算量 O(N log log N) の根拠（素数の逆数和）と調和級数 O(N log N) との違い"
-      - "篩の結果を累積和にして区間の素数を数える"
-      - "篩の変形（異なる素因数の個数を数える）"
-      - "メモリの見積もり（vector<bool>、10^8 まで）"
+      - {title: "倍数を消す手順と、p² から消せば十分な理由", anchor: procedure}
+      - {title: "計算量 O(N log log N) の根拠（素数の逆数和）と、調和級数の O(N log N) との違い", anchor: complexity}
+      - {title: "篩の結果を累積和にして区間の素数を数える", anchor: prefix-count}
+      - {title: "篩の変形（異なる素因数の個数を数える）", anchor: variants}
+      - {title: "メモリの見積もり（vector<bool>、10^8 まで）", anchor: memory}
     merged_keys: []
-    visual: "1..100 の表で 2・3・5・7 の倍数を順に塗るステップ送り（11 以降は塗る必要がないことを見せる）"
+    visual: {kind: dynamic, priority: 2, text: "1..100 の表で 2・3・5・7 の倍数を順に塗るステップ送り（11 以降は塗る必要がないことを見せる）"}
     problems:
-      - {id: abc250_d, role: example, summary: "p·q³ ≤ N（N ≤ 10^18）となる素数の組の数（q ≤ 10^6 の篩）"}
-      - {id: abc300_d, role: practice, summary: "a²·b·c² ≤ N となる素数の組（a < b < c）の数"}
-      - {id: abc084_d, role: practice, summary: "N も (N+1)/2 も素数である数の個数を区間ごとに答える（篩と累積和）"}
-      - {id: typical90_ad, role: practice, summary: "N 以下で異なる素因数を K 個以上もつ数の個数（素数の倍数に +1 する篩）"}
-    sources: ["06-math-nt §4.3", "06-math-nt §5.3", "06-math-nt §6.2", "06-math-nt §6.3", "06-math-nt §6.6"]
+      - {id: abc250_d, role: example, representative: true, summary: "素数 p < q を使って k = p × q³ と書ける N 以下の整数 k の個数を求める（N ≤ 10^18）。", approach: "q ≤ 10^6 なので篩で素数を列挙し、p の個数を二分探索か尺取りで数える"}
+      - {id: abc475_d, role: practice, summary: "（執筆時に確かめる）", approach: "DFS で候補を全て列挙し、篩で素数か判定する（research/00 §2.3.8 の分類）"}
+      - {id: abc300_d, role: practice, summary: "素数 a < b < c を使って a² × b × c² と書ける N 以下の整数の個数を求める（N ≤ 10^12）。", approach: "√N 程度までの素数を篩で列挙して全探索する"}
+      - {id: abc084_d, role: practice, summary: "l_i ≤ x ≤ r_i を満たす奇数 x のうち、x も (x + 1)/2 も素数であるものの個数を、Q 個のクエリについて答える。", approach: "篩で判定した結果を累積和にする"}
+      - {id: typical90_ad, role: practice, summary: "N 以下の正の整数のうち、異なる素因数を K 個以上もつものの個数を求める（N ≤ 10^7）。", approach: "素数 p の倍数に +1 していく篩の変形"}
+    problems_note: null
+    sources: ["06-math-nt §4.3", "06-math-nt §5.3", "06-math-nt §6.2", "06-math-nt §6.3", "06-math-nt §6.6", "00-curriculum §2.3.8（abc475_d）"]
 
   - id: spf-sieve
     chapter: 素数と約数
-    title: 最小素因数の篩（osa_k 法）と線形篩
-    aliases: [osa_k 法, 最小素因数, smallest prime factor, 高速素因数分解, 線形篩, linear sieve]
+    title: 最小素因数の篩と線形篩
+    aliases: [osa_k 法, 最小素因数, smallest prime factor, SPF, 高速素因数分解, linear sieve]
     type: technique
     level: 基礎
-    level_evidence: "abc177_e (1057)・abc368_f (1180)。線形篩でなければ間に合わない ABC 問題は見当たらない（φ・μ の表を作る場面で使う程度）"
+    level_evidence: "abc177_e (1057)・abc368_f (1180, 2024)。線形篩でなければ間に合わない ABC 問題は見当たらない（φ・μ の表を作る場面で使う程度）"
     kind: [整数論]
     prerequisites: [sieve-eratosthenes, prime-factorization]
     related: [prime-exponent-vector, euler-phi, mobius-function, grundy-number]
-    summary: "篩のついでに各数の最小素因数 spf[n] を記録し、n を spf で割り続けて O(log n) で素因数分解する。値が 10^6〜10^7 以下の多数の数をまとめて分解するときに使う。"
+    summary: "篩のついでに各数の最小素因数を記録し、それで割り続けて O(log n) で素因数分解する。10^6〜10^7 以下の多数の数を、それぞれ素因数分解するときに使う。"
     signs:
       - {type: constraint, text: "A_i ≤ 10^6（〜10^7）の各要素を素因数分解する"}
       - {type: phrase, text: "全ての組が互いに素か（pairwise coprime）を判定する"}
       - {type: phrase, text: "各要素の素因数の個数（重複込み）を求める"}
     acl: []
-    frequency: B
+    verify: []
+    frequency: C
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 2 問"
     sections:
-      - "spf の作り方と、割るたびに半分以下になるので O(log n) で分解できる理由"
-      - "多数の数をまとめて分解する（試し割りとの比較）"
-      - "線形篩：各合成数を1回だけ作り、φ・μ などの表を同時に作る（青）"
-      - "メモリの見積もり（int で 10^7 個は 40MB）"
+      - {title: "最小素因数の表の作り方と、割るたびに半分以下になるので O(log n) で分解できる理由", anchor: build-and-factor}
+      - {title: "多数の数をまとめて分解する（試し割りとの比較）", anchor: many-numbers}
+      - {title: "線形篩：各合成数を1回だけ作り、φ・μ の表を同時に作る", anchor: linear-sieve, level: 青}
+      - {title: "メモリの見積もり（int で 10^7 個は 40MB）", anchor: memory}
     merged_keys: [linear-sieve]
-    visual: "spf をたどる鎖（360 → 180 → 90 → 45 → 15 → 5 → 1）"
+    visual: {kind: static, priority: 2, text: "最小素因数をたどる鎖（360 → 180 → 90 → 45 → 15 → 5 → 1）の図"}
     problems:
-      - {id: abc177_e, role: example, summary: "N 個の数が pairwise／setwise coprime か（全ての数を素因数分解する）"}
-      - {id: abc368_f, role: practice, summary: "真の約数に置き換えるゲーム。素因数の個数（重複込み）を Nim の山とみる"}
+      - {id: abc177_e, role: example, representative: true, summary: "N 個の整数が、どの2つも互いに素（pairwise coprime）か、全体の最大公約数だけが 1（setwise coprime）か、どちらでもないかを判定する（A_i ≤ 10^6）。", approach: "各数を最小素因数の表で素因数分解し、同じ素因数が2回以上出るかを調べる"}
+      - {id: abc368_f, role: practice, summary: "数列の要素を1つ選んでその真の約数に置き換える操作を2人が交互に行い、操作できなくなった方が負けるとき、勝者を求める。", approach: "素因数の個数（重複込み）を Nim の山の大きさとみて XOR する"}
+    problems_note: "練習の候補が abc368_f のほかに見つかっていない（問題の補充で探す）"
     sources: ["06-math-nt §4.3", "06-math-nt §5.3", "06-math-nt §6.2", "06-math-nt §6.3"]
 
   - id: harmonic-sum
     chapter: 素数と約数
-    title: 調和級数の計算量（倍数の列挙）
-    aliases: [調和級数, N/1+N/2+…+N/N, 倍数の列挙, O(N log N) の倍数ループ, 値の倍数をたどる]
+    title: 調和級数と倍数の列挙
+    aliases: [harmonic series, N/1+N/2+…+N/N, O(N log N) の倍数ループ, 倍数を回す]
     type: technique
-    level: 基礎
-    level_evidence: "abc134_d (926)・abc170_d (1033)・abc177_e (1057) で現れ始める。abc356_e (1506)・abc206_e (1745) など水〜青の応用も多い（research/01 は水とし、drken の「調和級数」の ABC 10 問の中央値は 1282）"
-    kind: [整数論, 全探索]
+    level: 水
+    level_evidence: "倍数のループの計算量を使う形は、古くは abc134_d (926)・abc170_d (1033)・abc177_e (1057) と基礎の帯だったが、最近は値ごとに倍数を回して集める形が abc393_e (1253, 2025)・abc356_e (1506, 2024)・abc469_f (1567, 2026) と水に出る。design-review D2 に従い第1版の基礎から水にした（research/01 は水、research/06 は基礎）"
+    kind: [計算量, 整数論]
     prerequisites: [sigma-manipulation, complexity-estimation]
-    related: [sieve-eratosthenes, divisor-enum, floor-quotient-enum, divisor-inclusion-exclusion, zeta-mobius-divisor, amortized-analysis]
-    summary: "各 d について d の倍数を全部たどる二重ループは Σ N/d ≈ N ln N で、値の上限が 10^6 程度なら O(N log N) で回る。約数・倍数の関係にある組を値ごとにまとめて数えるときの計算量の根拠で、素数の倍数だけなら篩の N log log N になる。"
+    related: [sieve-eratosthenes, divisor-enum, floor-quotient-enum, divisor-inclusion-exclusion, zeta-mobius-divisor, divisors-and-multiples#harmonic]
+    summary: "割り切る・割り切られる関係にある組を値ごとに数えるとき、各 d について d の倍数を全てたどる二重ループが合計 N/1 + … + N/N ≈ N ln N 回で済むことを使う。値の上限が 10^6 程度なら間に合う。"
     signs:
       - {type: constraint, text: "A_i ≤ 10^6 程度で、値を配列の添字にできる"}
       - {type: phrase, text: "割り切る・割り切られる関係にある組を数える"}
-      - {type: phrase, text: "全ペアの ⌊A_j / A_i⌋ の総和"}
-      - {type: phrase, text: "各 d について、d の倍数であるものの個数や和を求める"}
+      - {type: phrase, text: "各 d について、d の倍数である要素の個数や和を求める"}
+      - {type: shape, text: "Σ_{d=1}^{N} Σ_{k=1}^{⌊N/d⌋} f(d, kd) の形の二重ループ"}
     acl: []
+    verify: []
     frequency: A
+    frequency_evidence: "recent 2（abc452_e・abc469_f）・前提として 3 ページに届く（直接 1）・古い ABC 7 問"
     sections:
-      - "Σ N/d ≈ N ln N の根拠（N = 10^6 で約 1.4×10^7）"
-      - "値の倍数に印を付ける・倍数の個数を集める"
-      - "倍数の箱を後ろから決める"
-      - "商が同じ範囲を倍数で区切って数える（水）"
-      - "gcd を固定して倍数から数える（約数包除は数え上げの章へ）（青）"
-      - "素数の倍数だけをたどる篩（N log log N）との違い"
-      - "落とし穴：同じ値が複数あると自分自身で割り切れる・ループの上限は値の最大"
+      - {title: "N/1 + N/2 + … + N/N ≈ N ln N の根拠（N = 10^6 で約 1.4×10^7）", anchor: why-n-log-n}
+      - {title: "値の倍数に印を付ける", anchor: mark-multiples}
+      - {title: "倍数を回して集める（d の倍数である要素の個数・和を全ての d について求める）", anchor: collect-multiples}
+      - {title: "倍数の箱を後ろから決める", anchor: decide-from-back}
+      - {title: "商が同じ範囲を倍数で区切って数える", anchor: quotient-ranges}
+      - {title: "素数の倍数だけをたどる篩（N log log N）との違い", anchor: vs-sieve}
+      - {title: "落とし穴：同じ値が複数あると自分自身で割り切れる・ループの上限は値の最大", anchor: pitfalls}
     merged_keys: [harmonic-series]
-    visual: "d = 1, 2, 3, … ごとに倍数の位置に印を付け、行の長さが N/d で減っていく様子のステップ送り"
+    visual: {kind: static, priority: 2, text: "d = 1, 2, 3, … ごとに倍数の位置に印を付けた行を並べ、行の長さが N/d で減っていく図"}
     problems:
-      - {id: abc170_d, role: example, summary: "他のどの要素でも割り切れない要素の個数（値の倍数に印を付ける）"}
-      - {id: abc179_c, role: practice, summary: "A × B + C = N となる組の数（A ごとに (N−1)/A 通りで、合計が調和級数になる）"}
-      - {id: abc134_d, role: practice, summary: "倍数の番号の箱に入れたボールの個数の偶奇を、後ろの箱から決める"}
-      - {id: abc356_e, role: practice, summary: "全ペアの ⌊max/min⌋ の和（値ごとの個数の累積和と、倍数での区切り）"}
-      - {id: abc128_f, role: challenge, summary: "2 つの歩幅を全探索しても、調和級数で O(N log N) に収まる"}
-    sources: ["06-math-nt §4.3", "06-math-nt §5.3", "06-math-nt §6.2", "06-math-nt §6.3", "01-basics §4.A", "01-basics §5", "01-basics §7.4"]
+      - {id: abc170_d, role: example, summary: "長さ N の数列で、自分以外のどの要素でも割り切れない要素の個数を求める（A_i ≤ 10^6）。", approach: "値の出現回数を数え、各値の倍数に印を付ける（同じ値が2つ以上あれば自分も消える）"}
+      - {id: abc393_e, role: example, representative: true, summary: "各 i について、A_i を含むように K 個の要素を選んだときの最大公約数の最大値を求める（A_i ≤ 10^6）。", approach: "各 d について d の倍数である要素の個数を倍数を回して集め、K 個以上ある d のうち A_i の約数で最大のものを答える（comb の zeta-mobius-divisor から移した）"}
+      - {id: abc179_c, role: practice, summary: "A × B + C = N を満たす正の整数の組 (A, B, C) の個数を求める（N ≤ 10^6）。", approach: "A ごとに B は (N − 1)/A 通りで、合計が調和級数になる"}
+      - {id: abc134_d, role: practice, summary: "1..N の箱それぞれにボールを入れるかを決め、各 i について i の倍数の番号の箱のボールの数の偶奇が a_i になるようにできるかを判定し、例を示す。", approach: "番号の大きい箱から順に決める"}
+      - {id: abc356_e, role: practice, summary: "長さ N の数列の全ての組 i < j について ⌊max(A_i, A_j) / min(A_i, A_j)⌋ を足した和を求める（A_i ≤ 10^6）。", approach: "値ごとの個数の累積和を作り、倍数で区切って数える"}
+      - {id: abc469_f, role: practice, summary: "（執筆時に確かめる）", approach: "gcd の値（約数）ごとに倍数を回して辺の候補を絞り、Kruskal 法で最大全域木を求める（research/00 §2.3.8 の分類。graph の minimum-spanning-tree の練習でもある）"}
+      - {id: abc128_f, role: challenge, summary: "池の蓮の上を A 進んで B 戻る移動を繰り返して最後の蓮に着くまでに踏んだ蓮の得点の和の最大値を、A と B を選んで求める（同じ蓮を2回踏むと失敗）。", approach: "C = A − B と移動回数を固定すると踏む位置が決まり、全探索の合計が調和級数で収まる"}
+    problems_note: null
+    sources: ["06-math-nt §4.3", "06-math-nt §5.3", "06-math-nt §6.2", "06-math-nt §6.3", "01-basics §4.A", "01-basics §5", "01-basics §7.4", "07-math-comb §4.3（zeta-mobius-divisor の倍数を回して集める）", "00-curriculum §2.3.8（abc469_f）"]
 
   - id: divisor-count-bound
     chapter: 素数と約数
     title: 約数の個数の上界と高度合成数
-    aliases: [高度合成数, 約数の個数の最大値, highly composite number, 約数が多い数, 素因数の種類数の上界]
+    aliases: [約数の個数の最大値, highly composite number, 約数が多い数, 素因数の種類数の上界]
     type: technique
     level: 水
-    level_evidence: "arc167_b (1292)・acl1_b (1785) で約数（の組）を全部試せることの見積もりが鍵。高度合成数の列挙そのものは abc475_g (2360)（黄の節）"
-    kind: [整数論, 全探索]
-    prerequisites: [divisor-enum, prime-factorization]
-    related: [crt, small-search-space, recursive-enumeration, complexity-estimation]
-    summary: "N 以下の数の約数の個数は 10^9 で最大 1344、10^18 でも最大 103680 しかない。「約数（の組）を全部試す」が間に合うかを見積もる数値と、約数の多い数を小さい素数の指数が減っていく形に限って列挙する方法をまとめる。"
+    level_evidence: "約数（の組）を全部試せることの見積もりが鍵になるのは arc167_b (1292, 2023-10)・typical90_cg（★4）・acl1_b (1785)。abc319 以降の ABC では、約数を状態にした DP（青）と高度合成数の列挙（黄）の応用として出ている（力試しの abc461_f・abc475_g）"
+    kind: [整数論, 計算量]
+    prerequisites: [prime-factorization]
+    related: [crt, brute-force, recursive-enumeration, complexity-estimation]
+    summary: "約数（の組）を全部試す全探索が間に合うかを、約数の個数の上界（10^9 以下で 1344、10^18 以下で 103680）から見積もる。約数の多い数は、小さい素数の指数が減っていく形に限って列挙する。"
     signs:
       - {type: phrase, text: "N の約数ごとに〜を計算する・d | N を満たす d を全部試す"}
       - {type: phrase, text: "N 以下で約数の個数が最大の数・約数が多い数を探す"}
       - {type: constraint, text: "N ≤ 10^12〜10^18 で、約数の組を全探索して間に合うかを見積もる"}
     acl: []
-    frequency: B
+    verify: []
+    frequency: A
+    frequency_evidence: "recent 2（abc461_f・abc475_g）・前提として届くページなし・古い ABC 0 問"
     sections:
-      - "約数の個数・素因数の種類数の最大値の表（10^3〜10^18）"
-      - "約数の組を全部試す見積もり（1344² ≈ 1.8×10^6）"
-      - "約数の個数を √N と見積もる誤りと、10^18 の約数の列挙自体に O(√N) かかる注意"
-      - "高度合成数の列挙（小さい素数の指数が単調に減る形を DFS で）（黄）"
+      - {title: "約数の個数・素因数の種類数の最大値の表（10^3〜10^18）", anchor: table}
+      - {title: "約数の組を全部試す見積もり（1344² ≈ 1.8×10^6）", anchor: pairs}
+      - {title: "約数の個数を √N と見積もる誤りと、10^18 の約数の列挙自体に O(√N) かかる注意", anchor: pitfalls}
+      - {title: "約数を状態にした DP（約数の個数が少ないことを使う）", anchor: divisor-dp, level: 青}
+      - {title: "高度合成数の列挙（小さい素数の指数が単調に減る形を DFS で）", anchor: enumerate-hcn, level: 黄}
     merged_keys: [highly-composite-numbers]
-    visual: "N ごとの約数の個数の最大値の表と、指数が単調に減る素因数分解を DFS でたどる木の図"
+    visual: {kind: static, priority: 2, text: "N ごとの約数の個数の最大値の表と、指数が単調に減る素因数分解を DFS でたどる木の図"}
     problems:
-      - {id: arc167_b, role: example, summary: "A^B の約数の積が A で何回割れるか（約数の個数の公式と指数）"}
-      - {id: typical90_cg, role: practice, summary: "a ≤ b ≤ c かつ abc = K となる組の数（約数の組を全探索して間に合う）"}
-      - {id: acl1_b, role: practice, summary: "1 + … + k が N の倍数になる最小の k。2N を2つの約数に分ける方法を全て試して CRT で解く"}
-      - {id: abc475_g, role: challenge, summary: "約数の個数が多い数を、小さい素数の指数が単調に減る形に限って列挙する"}
-    sources: ["06-math-nt §4.3", "06-math-nt §5.3", "06-math-nt §6.3", "00-curriculum §3.2", "00-curriculum §5.2", "01-basics §4.A"]
+      - {id: arc167_b, role: example, representative: true, summary: "A^B の正の約数を全て掛けた積が A で何回割り切れるかを、998244353 で割った余りで求める。", approach: "約数の個数の公式と、素因数ごとの指数から計算する"}
+      - {id: typical90_cg, role: practice, summary: "a ≤ b ≤ c かつ a × b × c = K を満たす正の整数の組の個数を求める（K ≤ 10^12）。", approach: "K の約数を列挙し、約数の組を全部試しても間に合う"}
+      - {id: acl1_b, role: practice, summary: "1 + 2 + … + k が N の倍数になる最小の正の整数 k を求める（N ≤ 10^15）。", approach: "2N を互いに素な2つの約数に分ける方法を全て試し、それぞれ CRT で解く"}
+      - {id: abc461_f, role: challenge, summary: "（執筆時に確かめる）", approach: "N の約数を品物にしたナップサック風の DP。約数の個数が少ないので状態が収まる（research/00 §2.3.8 の分類）"}
+      - {id: abc475_g, role: challenge, summary: "（執筆時に確かめる）", approach: "約数の多い数の候補を、小さい素数の指数が単調に減る形に限って DFS で列挙する（research/00 §2.3.8 の分類）"}
+    problems_note: null
+    sources: ["06-math-nt §4.3", "06-math-nt §5.3", "06-math-nt §6.3", "00-curriculum §3.2", "00-curriculum §5.2", "00-curriculum §2.3.8（abc461_f・abc475_g）", "01-basics §4.A"]
 
   - id: segmented-sieve
     chapter: 素数と約数
@@ -534,897 +554,948 @@ pages:
     aliases: [区間ふるい, segmented sieve, 区間の素因数分解]
     type: technique
     level: 水
-    level_evidence: "abc412_e (1496)・abc227_g (2207)"
+    level_evidence: "abc412_e (1496, 2025)・abc227_g (2207)"
     kind: [整数論]
     prerequisites: [sieve-eratosthenes]
     related: [prime-factorization, spf-sieve]
-    summary: "L が大きくても R − L が小さい（10^6 程度）とき、√R までの素数で区間 [L, R] だけを篩う。区間の各数の素数判定や素因数分解を O((R−L) log log R + √R) で行う。"
+    summary: "L が 10^12 と大きくても R − L が 10^6 程度なら、√R までの素数で区間 [L, R] だけを篩える。区間の各数の素数判定や素因数分解を O((R−L) log log R + √R) で行う。"
     signs:
       - {type: constraint, text: "L, R ≤ 10^12 で R − L ≤ 10^6"}
       - {type: phrase, text: "連続する区間の数をそれぞれ素因数分解する"}
-      - {type: phrase, text: "二項係数 C(N, K) の分子 N−K+1..N を分解する"}
+      - {type: phrase, text: "二項係数 C(N, K) の分子 N−K+1..N を素因数分解する"}
     acl: []
-    frequency: B
+    verify: []
+    frequency: C
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 2 問"
     sections:
-      - "√R までの素数で十分な理由"
-      - "区間で最初の p の倍数 ⌈L/p⌉·p の求め方と、p 自身・L = 1 の扱い"
-      - "区間の各数の素因数分解（√R までで割った残りは素数）"
+      - {title: "√R までの素数で十分な理由", anchor: why-sqrt}
+      - {title: "区間で最初の p の倍数 ⌈L/p⌉·p の求め方と、p 自身・L = 1 の扱い", anchor: first-multiple}
+      - {title: "区間の各数の素因数分解（√R までで割った残りは素数）", anchor: factorize-range}
     merged_keys: []
-    visual: "[L, R] の窓に、小さい素数の倍数の印を等間隔に打つ図"
+    visual: {kind: static, priority: 2, text: "[L, R] の窓に、小さい素数の倍数の印を等間隔に打つ図"}
     problems:
-      - {id: abc412_e, role: example, summary: "LCM(1..n) が [L, R] で何種類の値をとるか（素数冪の位置を区間篩で求める）"}
-      - {id: abc227_g, role: practice, summary: "C(N, K) の約数の個数（N ≤ 10^12、K ≤ 10^6。分子の連続区間を √N までの素数で分解）"}
+      - {id: abc412_e, role: example, representative: true, summary: "L ≤ n ≤ R の範囲で LCM(1, 2, …, n) が何種類の値をとるかを求める（L, R は大きく、R − L は小さい）。", approach: "値が変わるのは n が素数の累乗のとき。区間篩で素数の累乗の位置を数える"}
+      - {id: abc227_g, role: practice, summary: "N 個から K 個を選ぶ組合せの数 C(N, K) の正の約数の個数を 998244353 で割った余りで求める（N ≤ 10^12、K ≤ 10^6）。", approach: "分子 N−K+1..N の連続区間を √N までの素数で区間篩し、分母は普通の篩で分解する"}
+    problems_note: "練習の候補が abc227_g のほかに見つかっていない（問題の補充で探す）"
     sources: ["06-math-nt §4.3", "06-math-nt §5.3", "06-math-nt §6.3"]
 
   - id: prime-exponent-vector
     chapter: 素数と約数
-    title: 素因数の指数で考える（gcd・lcm・平方数）
+    title: 素因数の指数で考える
     aliases: [指数ベクトル, 平方因子, squarefree, smooth 数, 平方数の判定, 素数ごとに独立]
     type: technique
-    level: 水
-    level_evidence: "abc254_d (1191)・abc152_e (1348)・abc150_d (1534)。abc342_d (944) は易しい例。abc300_g (2343)・agc003_d (2608) は応用"
+    level: 基礎
+    level_evidence: "積が平方数になる組を平方因子を除いた核で数える abc342_d (944, 2024)・abc254_d (1191) は基礎の帯。lcm を指数で持つ abc152_e (1348)・2 の指数をそろえる abc150_d (1534) は水の節。最近の根拠の abc342_d に合わせて第1版の水から基礎にした（design-review D2）。立方因子の正規形・smooth 数の列挙は力試しの問題で扱う"
     kind: [整数論]
     prerequisites: [prime-factorization]
-    related: [gcd-lcm, spf-sieve, hashing-for-sets]
-    summary: "整数を素数ごとの指数のベクトルとみると、積は和、gcd は min、lcm は max、平方数は全成分が偶数になる。積が平方数になる組・巨大な lcm・割り切れる回数などを素数ごとに独立に扱う。"
+    related: [gcd-lcm, spf-sieve, hashing-for-sets, meet-in-the-middle]
+    summary: "積が平方数になる組・巨大な lcm・割り切れる回数などを、整数を素数ごとの指数のベクトルとみて素数ごとに独立に考える。積は和、gcd は min、lcm は max、平方数は全成分が偶数になる。"
     signs:
       - {type: phrase, text: "積が平方数（立方数）になる組を数える"}
       - {type: phrase, text: "多数の数の lcm を mod で求める"}
       - {type: phrase, text: "2 で割り切れる回数・各素数の指数をそろえる"}
       - {type: phrase, text: "素因数が P 以下の数（P-smooth 数）を数える"}
     acl: []
+    verify: []
     frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 5 問"
     sections:
-      - "積は和・gcd は min・lcm は max・割り切りは全成分で ≤（算術の基本定理）"
-      - "平方因子を除いた核で、積が平方数になる組を数える（0 の扱い）"
-      - "巨大な lcm を指数の最大で持つ"
-      - "特定の素数（2 など）の指数だけを比べる"
-      - "立方因子を除いた正規形・smooth 数の列挙（黄）"
+      - {title: "積は和・gcd は min・lcm は max・割り切りは全成分で ≤（算術の基本定理）", anchor: exponent-ops}
+      - {title: "平方因子を除いた核で、積が平方数になる組を数える（0 の扱い）", anchor: squarefree-kernel}
+      - {title: "巨大な lcm を指数の最大で持つ", anchor: huge-lcm, level: 水}
+      - {title: "特定の素数（2 など）の指数だけを比べる", anchor: single-prime, level: 水}
     merged_keys: []
-    visual: "数を素数ごとの棒グラフで描き、gcd は低い方・lcm は高い方をなぞる図"
+    visual: {kind: static, priority: 2, text: "数を素数ごとの棒グラフで描き、gcd は低い方・lcm は高い方をなぞる図"}
     problems:
-      - {id: abc342_d, role: example, summary: "積が平方数になる組の数（平方因子を除いた核でまとめる。0 に注意）"}
-      - {id: abc152_e, role: example, summary: "A_i B_i が全て等しくなる最小の ΣB_i。巨大な lcm を素因数の最大指数で持つ"}
-      - {id: abc254_d, role: practice, summary: "i·j が平方数となる組（i, j ≤ N）の数"}
-      - {id: abc150_d, role: practice, summary: "半公倍数の個数。2 で割れる回数が全て等しいかで決まる"}
-      - {id: typical90_y, role: challenge, summary: "桁の積の候補は 2^a 3^b 5^c 7^d に限られるので、全て列挙して確かめる"}
-      - {id: abc300_g, role: challenge, summary: "素因数が P 以下の数の個数（素数を半分に分けて列挙し、二分探索で組み合わせる）"}
-      - {id: agc003_d, role: challenge, summary: "積が立方数にならないように選べる最大個数（立方因子を除いた正規形）"}
+      - {id: abc342_d, role: example, representative: true, summary: "長さ N の非負整数列から i < j を選んだとき、A_i × A_j が平方数になる組の個数を求める。", approach: "平方因子を除いた核が等しい組を数える。0 は何と掛けても平方数"}
+      - {id: abc254_d, role: practice, summary: "1 ≤ i, j ≤ N で i × j が平方数になる組の個数を求める（N ≤ 2×10^5）。", approach: "i の平方因子を除いた核ごとに数える"}
+      - {id: abc152_e, role: practice, summary: "A_1 B_1 = A_2 B_2 = … = A_N B_N を満たす正の整数 B_i を選ぶとき、B_1 + … + B_N の最小値を 10^9+7 で割った余りで求める。", approach: "lcm(A_1, …, A_N) を素因数ごとの最大の指数で持ち、B_i = lcm / A_i とする"}
+      - {id: abc150_d, role: practice, summary: "偶数の列 a について、全ての k で X = a_k × (p + 0.5) を満たす非負整数 p があるような X（半公倍数）のうち、M 以下の正の整数の個数を求める。", approach: "2 で割れる回数が全て等しいときだけ存在し、lcm の奇数倍を数える"}
+      - {id: typical90_y, role: challenge, summary: "1 以上 N 以下の整数 m で、m − f(m) = B（f(m) は m の各桁の積）となるものの個数を求める（N ≤ 10^11）。", approach: "桁の積は 2^a 3^b 5^c 7^d の形に限られるので、全て列挙して確かめる"}
+      - {id: abc300_g, role: challenge, summary: "素因数が全て P 以下である N 以下の正の整数の個数を求める（N ≤ 10^16、P ≤ 100）。", approach: "素数を半分に分けてそれぞれ列挙し、二分探索で組み合わせる"}
+      - {id: agc003_d, role: challenge, summary: "N 個の整数から、どの2つを選んでも積が立方数にならないように選べる最大の個数を求める。", approach: "立方因子を除いた正規形と、積が立方数になる相手の正規形の組で数える（本文では力試しの解説で触れる）"}
+    problems_note: null
     sources: ["06-math-nt §4.3", "06-math-nt §5.3"]
 
   - id: euler-phi
     chapter: 素数と約数
     title: オイラーの φ 関数
-    aliases: [トーシェント, totient, Euler 関数, φ(n), 互いに素な数の個数]
+    aliases: [トーシェント, totient, Euler's totient function, φ(n), 互いに素な数の個数]
     type: technique
     level: 黄
     level_evidence: "abc212_g (2150)・abc222_g (2242) で位数・原始根とセットで必要になる（設計書 §4.3）"
     kind: [整数論]
     prerequisites: [prime-factorization]
-    related: [exponent-mod, multiplicative-order, primitive-root, spf-sieve, multiplicative-function, mobius-function]
-    summary: "φ(n) は 1..n で n と互いに素な数の個数で、φ(n) = n Π(1 − 1/p) と素因数分解から求まる。オイラーの定理 a^φ(n) ≡ 1 と Σ_{d|n} φ(d) = n を通じて、位数・原始根・指数の mod の計算に使う。"
+    related: [exponent-mod, multiplicative-order, spf-sieve, multiplicative-function, mobius-function, burnside-lemma]
+    summary: "1..n で n と互いに素な数の個数 φ(n) を、素因数分解から φ(n) = n Π(1 − 1/p) で求める。オイラーの定理 a^φ(n) ≡ 1 を通じて、位数や指数の mod の計算に使う。"
     signs:
       - {type: phrase, text: "n と互いに素な 1..n の数の個数・既約分数の個数"}
       - {type: phrase, text: "位数が d になる元の個数"}
       - {type: phrase, text: "a^k ≡ 1 (mod n) となる最小の k を探す"}
     acl: []
-    frequency: B
+    verify: []
+    frequency: C
+    frequency_evidence: "recent 0・前提として 2 ページに届く（直接 2）・古い ABC 2 問"
     sections:
-      - "定義と公式 φ(n) = n Π(1 − 1/p)（素因数分解が必要）"
-      - "篩で 1..N の φ を全部求める"
-      - "オイラーの定理 a^φ(n) ≡ 1 と、指数の mod への応用"
-      - "Σ_{d|n} φ(d) = n と「位数が d の元は φ(d) 個」"
+      - {title: "定義と公式 φ(n) = n Π(1 − 1/p)（素因数分解が必要）", anchor: formula}
+      - {title: "篩で 1..N の φ を全て求める", anchor: sieve}
+      - {title: "オイラーの定理 a^φ(n) ≡ 1 と、指数の mod への応用", anchor: euler-theorem}
+      - {title: "Σ_{d|n} φ(d) = n と「位数が d の元は φ(d) 個」", anchor: divisor-sum}
     merged_keys: []
-    visual: "1..12 のうち 12 と互いに素な数に印を付ける図"
+    visual: {kind: static, priority: 2, text: "1..12 のうち 12 と互いに素な数に印を付ける図"}
     problems:
-      - {id: abc212_g, role: example, summary: "x^n ≡ y (mod P) となる n がある組 (x, y) の数（位数 d の元は φ(d) 個）"}
-      - {id: abc222_g, role: practice, summary: "2 を n 個並べた数が K の倍数になる最小の n（10 の位数を φ の約数から探す）"}
+      - {id: abc212_g, role: example, representative: true, summary: "素数 P について、0 ≤ x, y ≤ P − 1 の組 (x, y) のうち x^n ≡ y (mod P) を満たす正の整数 n があるものの個数を求める（P ≤ 10^12）。", approach: "x の位数を d とすると到達できる y は d 個で、位数 d の元は φ(d) 個。P − 1 の約数ごとに φ(d) を求める"}
+      - {id: abc222_g, role: practice, summary: "2 を n 個並べた整数が K の倍数になる最小の n を求める（なければ −1、K ≤ 10^8）。", approach: "10^n ≡ 1 の形に直し、φ の約数から位数を探す"}
+    problems_note: "練習の候補が少ない（φ が主役の ABC 問題は abc212_g・abc222_g くらい）。位数・原始根のページと問題を共有する"
     sources: ["06-math-nt §4.3", "06-math-nt §5.3", "06-math-nt §6.3", "06-math-nt §7.2"]
 
   - id: miller-rabin
     chapter: 素数と約数
-    title: 大きな数の素数判定と素因数分解（Miller–Rabin・Pollard's rho）
+    title: 大きな数の素数判定と素因数分解
     aliases: [ミラー・ラビン, Miller-Rabin, ポラード・ロー, Pollard's rho, Montgomery 乗算, 64bit の素数判定]
     type: overview
     level: 発展
-    level_evidence: "10^18 の素数判定・素因数分解が必須の ABC 問題は見つからなかった（research/06 §7.5）。自作ライブラリは Library Checker の primality_test・factorize で確かめる"
+    level_evidence: "10^18 の素数判定・素因数分解が必須の ABC 問題は見つからなかった（research/06 §7.5）。自作ライブラリは Library Checker の verify で確かめる"
     kind: [整数論, ハッシュ・乱択]
     prerequisites: [exponent-mod, prime-factorization]
     related: [divisor-enum, gcd-lcm, rolling-hash]
-    summary: "N ≤ 10^18 の素数判定を決定的な底の Miller–Rabin で O(log N) 回の掛け算で行い、合成数は Pollard's rho で期待 O(N^{1/4}) で因数を見つけて分解する方法の概要。64bit の法での掛け算には __int128 か Montgomery 乗算を使う。"
+    summary: "10^18 程度の数の素数判定を Miller-Rabin で、素因数分解を Pollard's rho で期待 O(N^{1/4}) で行う。64bit の法の掛け算には __int128 か Montgomery 乗算を使う。"
     signs:
       - {type: constraint, text: "N ≤ 10^18 の素数判定・素因数分解（√N の試し割りでは間に合わない）"}
       - {type: phrase, text: "非常に大きい数が素数かを多数判定する"}
     acl: []
+    verify: [primality_test, factorize]
     frequency: C
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 0 問"
     sections:
-      - "Miller–Rabin の判定の仕組み（フェルマーの小定理と −1 の現れ方）"
-      - "決定的な底（32bit は {2, 7, 61}、64bit は 7 個の底）"
-      - "Pollard's rho（x ← x² + c の周期と gcd）"
-      - "64bit の法での掛け算（__int128・Montgomery・Barrett）"
-      - "ACL の内部実装（internal::is_prime_constexpr）と Library Checker での確認"
+      - {title: "Miller-Rabin の判定の仕組み（フェルマーの小定理と −1 の現れ方）", anchor: miller-rabin}
+      - {title: "決定的な底（32bit は {2, 7, 61}、64bit は 7 個の底）", anchor: deterministic-bases}
+      - {title: "Pollard's rho（x ← x² + c の周期と gcd）", anchor: pollard-rho}
+      - {title: "64bit の法での掛け算（__int128・Montgomery・Barrett）", anchor: mulmod}
+      - {title: "ACL の内部実装（internal::is_prime_constexpr）", anchor: acl-internal}
     merged_keys: [pollard-rho, big-modulus-mul]
     visual: null
     problems: []
+    problems_note: "必須の ABC 問題が見つかっていない発展の概要なので、問題は置かず verify で確かめる"
     sources: ["06-math-nt §4.3", "06-math-nt §6.2", "06-math-nt §6.3", "06-math-nt §6.5", "06-math-nt §6.6"]
 
-  - id: multiplicative-function
-    chapter: 素数と約数
-    title: 乗法的関数の和と素数の個数（ディリクレ積・Lucy DP）
-    aliases: [ディリクレ積, 杜教筛, Min_25, 乗法的関数の prefix sum, 素数計数, Lucy DP, Meissel-Lehmer]
-    type: overview
-    level: 発展
-    level_evidence: "abc370_g (3428) が乗法的関数の和を使う（手法の分類だけ確認）。素数計数が必須の ABC 問題は見つからなかった"
-    kind: [整数論]
-    prerequisites: [euler-phi, floor-quotient-enum]
-    related: [mobius-function, zeta-mobius-divisor, spf-sieve, sieve-eratosthenes]
-    summary: "φ・μ・約数関数のような乗法的関数の和 Σ_{n≤N} f(n) や N 以下の素数の個数を、商の列挙を使って N^{2/3} や N^{3/4}/log N 程度で求める方法の概要。関数どうしの関係はディリクレ積で表す。"
-    signs:
-      - {type: constraint, text: "N ≤ 10^10〜10^11 で Σ_{n≤N} f(n)（f は φ・約数の個数など）を求める"}
-      - {type: phrase, text: "N 以下の素数の個数・素数の和"}
-    acl: []
-    frequency: C
-    sections:
-      - "乗法的関数（φ・μ・d・σ）とディリクレ積（φ * 1 = id など）"
-      - "和の求め方の概要（杜教筛・Lucy DP・Min_25）"
-      - "素数の個数・素数の和（Lucy DP）"
-      - "Library Checker での確認（counting_primes・sum_of_totient_function など）"
-    merged_keys: [prime-counting]
-    visual: null
-    problems: []
-    sources: ["06-math-nt §4.3", "06-math-nt §6.6"]
-
-  # ── 4. GCD と合同式 ──
+  # ── 4. GCD と合同式（位数・原始根・離散対数を1ページにした。整数の証明の型は末尾）──
   - id: gcd-lcm
     chapter: GCD と合同式
     title: GCD・LCM とユークリッドの互除法
-    aliases: [最大公約数, 最小公倍数, 互除法, std::gcd, 累積 gcd, 既約分数, 傾きの正規化]
+    aliases: [最大公約数, 最小公倍数, 互除法, Euclidean algorithm, std::gcd, 既約分数]
     type: technique
     level: 基礎
-    level_evidence: "abc109_c (542)・abc070_c (697)。累積 gcd の abc125_c (1197) もこのページで扱う（設計書 §4.3）"
+    level_evidence: "abc109_c (542)・abc070_c (697)。累積 gcd の abc125_c (1197) もこのページの節（設計書 §4.3）"
     kind: [整数論]
     prerequisites: [integer-division]
-    related: [gcd-properties, ext-gcd, prime-exponent-vector, line-normalization, proof-patterns]
-    summary: "gcd(a, b) = gcd(b, a mod b) を繰り返して O(log min(a, b)) で最大公約数を求め、lcm は a / gcd × b と割ってから掛ける。左右からの累積 gcd で「1つ除いた gcd」を求める型と、分数・傾きを gcd で既約にして比べる型も扱う。"
+    related: [gcd-properties, ext-gcd, prime-exponent-vector, geometry-precision#line-normalization, prefix-sum, stern-brocot]
+    summary: "gcd(a, b) = gcd(b, a mod b) を繰り返して最大公約数を O(log min(a, b)) で求め、lcm は a / gcd × b で求める。1つ除いた gcd を累積 gcd で求め、分数を既約にして比べる。"
     signs:
       - {type: phrase, text: "全員が同時に・周期がそろう最初の時刻（lcm）"}
       - {type: phrase, text: "等間隔に移動して全ての点を訪れられる最大の幅（gcd）"}
       - {type: phrase, text: "1つだけ書き換え（取り除い）たときの gcd の最大"}
-      - {type: phrase, text: "分数や傾きが等しいものをまとめて数える"}
+      - {type: phrase, text: "分数や傾きが等しいものを同じものとして数える"}
     acl: []
+    verify: []
     frequency: A
+    frequency_evidence: "recent 1（abc460_e）・前提として 14 ページに届く（直接 8）・古い ABC 3 問"
     sections:
-      - "互除法の正しさ（公約数の集合が変わらない）と回数の上限（隣り合うフィボナッチ数）"
-      - "複数の数の gcd・lcm と gcd(0, a) = a"
-      - "lcm のオーバーフロー（割ってから掛ける）"
-      - "左右からの累積 gcd（1つ除いた gcd）"
-      - "分数・傾きを既約にして map のキーにする（水）"
+      - {title: "互除法の正しさ（公約数の集合が変わらない）と回数の上限（隣り合うフィボナッチ数）", anchor: euclid}
+      - {title: "複数の数の gcd・lcm と gcd(0, a) = a", anchor: many-numbers}
+      - {title: "lcm のオーバーフロー（割ってから掛ける）", anchor: lcm-overflow}
+      - {title: "左右からの累積 gcd（1つ除いた gcd）", anchor: prefix-suffix-gcd}
+      - {title: "分数・傾きを既約にして map のキーにする", anchor: reduce-fraction, level: 水}
     merged_keys: [rational-normalization]
-    visual: "a × b の長方形から正方形を切り取っていく互除法の動く図"
+    visual: {kind: dynamic, priority: 2, text: "a × b の長方形から正方形を切り取っていく互除法の動く図"}
     problems:
-      - {id: abc109_c, role: example, summary: "全ての都市を訪れられる最大の移動幅（差の gcd）"}
-      - {id: typical90_v, role: practice, summary: "直方体を同じ大きさの立方体に切り分ける最小回数（3 数の gcd）"}
-      - {id: abc070_c, role: practice, summary: "全ての時計が同時に真上を向く時刻（複数の数の lcm）"}
-      - {id: abc125_c, role: practice, summary: "1つ書き換えたときの gcd の最大（左右からの累積 gcd）"}
+      - {id: abc109_c, role: example, representative: true, summary: "数直線上の座標 X から ±D の移動を繰り返して N 個の都市を全て訪れたいとき、それが可能な最大の D を求める。", approach: "各都市と X の差の gcd"}
+      - {id: typical90_v, role: practice, summary: "A × B × C の直方体を、全て同じ大きさの立方体に切り分けるときの最小の切断回数を求める。", approach: "3 数の gcd を一辺にする"}
+      - {id: abc070_c, role: practice, summary: "N 個の時計の針がそれぞれ T_i 秒で一周するとき、全ての針が再び同時に真上を向く最初の時刻を求める。", approach: "全ての T_i の lcm（割ってから掛ける）"}
+      - {id: abc125_c, role: practice, summary: "N 個の整数のうち1つを好きな整数に書き換えたときの、全体の最大公約数の最大値を求める。", approach: "左右からの累積 gcd で、1つ除いた gcd を全て求める"}
+    problems_note: null
     sources: ["06-math-nt §4.4", "06-math-nt §5.4", "06-math-nt §6.3", "06-math-nt §7.2", "08-string-geo §4.8"]
 
   - id: ext-gcd
     chapter: GCD と合同式
     title: 拡張ユークリッドの互除法と一次合同式
-    aliases: [拡張 Euclid, ベズーの等式, ax+by=c, 一次不定方程式, 一次合同式, extgcd, linear congruence]
+    aliases: [拡張 Euclid, extended Euclidean algorithm, extgcd, ベズーの等式, Bézout's identity, ax+by=c, 一次不定方程式, linear congruence]
     type: technique
     level: 水
-    level_evidence: "abc186_e (1461) が一次合同式（法が素数でない）。abc060_b (503) は解の存在判定だけの易しい例"
+    level_evidence: "abc186_e (1461) が一次合同式（法が素数でない）。abc060_b (503) は解の存在判定だけの易しい例。abc319 以降の根拠はまだない"
     kind: [整数論]
     prerequisites: [gcd-lcm]
     related: [mod-inverse, crt]
-    summary: "互除法の途中経過から ax + by = gcd(a, b) の整数解を求める。ax + by = c は gcd | c のときだけ解をもち、一次合同式 ax ≡ b (mod m) や、法が素数でないときの逆元もこれで解く。"
+    summary: "互除法の途中経過から ax + by = gcd(a, b) の整数解を求める。ax + by = c は gcd | c のときだけ解をもち、一次合同式 ax ≡ b (mod m) や法が素数でないときの逆元もこれで解く。"
     signs:
       - {type: phrase, text: "ax + by = c を満たす整数の組"}
       - {type: phrase, text: "円周上を K ずつ進んで、何回目で初めて特定の位置に着くか"}
       - {type: phrase, text: "A の倍数を足して、B で割った余りを C にできるか"}
-      - {type: constraint, text: "法 M が素数とは限らない一次方程式 a x ≡ b (mod M)"}
+      - {type: phrase, text: "法 M が素数とは限らない一次方程式 a x ≡ b (mod M)"}
+      - {type: constraint, text: "法 M ≤ 10^9 が素数とは限らず、a^(M−2) で逆元を作れない"}
     acl: [inv_mod]
+    verify: []
     frequency: B
+    frequency_evidence: "recent 1（abc459_g）・前提として 1 ページに届く（直接 1）・古い ABC 2 問"
     sections:
-      - "互除法の各段で、余りを a と b の整数係数の組み合わせとして持ち続ける"
-      - "ax + by = c の解の存在条件と一般解 x = x0 + k·b/g"
-      - "最小の非負解への調整と、係数のあふれの見積もり"
-      - "一次合同式 ax ≡ b (mod m) と、gcd で割ること"
-      - "ACL では（inv_mod の内部の inv_gcd。拡張ユークリッドそのものは公開 API にない）"
+      - {title: "互除法の各段で、余りを a と b の整数係数の組み合わせとして持ち続ける", anchor: procedure}
+      - {title: "ax + by = c の解の存在条件と一般解 x = x0 + k·b/g", anchor: general-solution}
+      - {title: "最小の非負解への調整と、係数のあふれの見積もり", anchor: min-solution}
+      - {title: "一次合同式 ax ≡ b (mod m) と、gcd で割ること", anchor: linear-congruence}
+      - {title: "ACL では（inv_mod の内部の inv_gcd。拡張ユークリッドそのものは公開 API にない）", anchor: acl}
     merged_keys: [linear-congruence]
-    visual: "互除法の表（商・余り・係数 x, y）を1行ずつ埋めるステップ送り"
+    visual: {kind: static, priority: 2, text: "互除法の表（商・余り・係数 x, y）を1行ずつ埋めていく図"}
     problems:
-      - {id: abc186_e, role: example, summary: "円周上を K ずつ進んで玉座に着く最小回数（一次合同式、法は素数でない）"}
-      - {id: abc060_b, role: practice, summary: "A の倍数の和を B で割って C 余らせられるか（gcd(A, B) | C で判定）"}
+      - {id: abc186_e, role: example, representative: true, summary: "N 個の椅子が円形に並び、玉座から S 個先の椅子にいる人が1回に K 個ずつ進むとき、玉座に着くまでの最小の回数を求める（着けないなら −1）。", approach: "S + Kx ≡ 0 (mod N) を一次合同式として解く。法は素数とは限らない"}
+      - {id: abc060_b, role: practice, summary: "A の倍数をいくつか（1つ以上）選んだ和を B で割った余りを C にできるかを判定する。", approach: "gcd(A, B) が C を割り切るかで決まる"}
+    problems_note: "練習の候補が少なく、abc319 以降の候補 abc340_f は調査で手法の分類（タグ）だけの確認なので入れていない（問題の補充で裏付けを取る）"
     sources: ["06-math-nt §4.4", "06-math-nt §5.2", "06-math-nt §5.4", "06-math-nt §6.3", "06-math-nt §6.5"]
 
   - id: gcd-properties
     chapter: GCD と合同式
-    title: GCD の性質（差の gcd・区間 gcd・周期）
+    title: GCD の性質
     aliases: [差の gcd, 区間 gcd, gcd の変化は log 回, gcd と周期]
     type: technique
     level: 青
-    level_evidence: "abc210_e (1618)・agc026_b (1720)・abc254_f (1764) で差の gcd・周期が鍵（設計書 §4.3）。累積 gcd は基礎の gcd-lcm"
+    level_evidence: "abc210_e (1618)・agc026_b (1720)・abc254_f (1764) で差の gcd・周期が鍵（設計書 §4.3）。累積 gcd は gcd-lcm の節。abc319 以降の根拠はまだない"
     kind: [整数論, 区間クエリ]
     prerequisites: [gcd-lcm]
-    related: [sparse-table, segment-tree, minimum-spanning-tree, lattice-points]
-    summary: "gcd(a, b) = gcd(a, b − a) から、全体に同じ数を足したときの gcd を隣接差の gcd に帰着させる。左端を固定した区間 gcd は O(log A) 種類しかないことや、x → x + A (mod N) で回れる範囲が gcd で決まることなど、青の帯で効く性質を集める。"
+    related: [sparse-table, segment-tree, minimum-spanning-tree, convex-hull#lattice-points]
+    summary: "全体に同じ数を足したときの gcd を隣接差の gcd に直し、左端を固定した区間 gcd が O(log A) 種類しかないことで区間 gcd を速く求める。mod N で A ずつ進むと gcd(A, N) の倍数だけを回ることも使う。"
     signs:
       - {type: phrase, text: "A_i + B_j の矩形・全体に x を足したときの gcd"}
       - {type: phrase, text: "区間の gcd を多数答える"}
       - {type: phrase, text: "mod N で A ずつ進む操作で全ての点に行けるか"}
       - {type: constraint, text: "N, Q ≤ 2×10^5 で区間 gcd のクエリ"}
     acl: []
-    frequency: B
+    verify: []
+    frequency: C
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 2 問"
     sections:
-      - "差の gcd：gcd(a + x, b + x) = gcd(a + x, b − a)"
-      - "区間 gcd はセグ木・Sparse Table に載る（左端を固定すると値は O(log A) 種類）"
-      - "mod N で A ずつ進むと gcd(A, N) の倍数だけを回る（周期と連結性）"
-      - "線分上の格子点は gcd(|dx|, |dy|) + 1 個"
-      - "ax + by（x, y ≥ 0）で表せない最大の数 ab − a − b"
+      - {title: "差の gcd：gcd(a + x, b + x) = gcd(a + x, b − a)", anchor: difference-gcd}
+      - {title: "区間 gcd はセグメント木・Sparse Table に載る（左端を固定すると値は O(log A) 種類）", anchor: range-gcd}
+      - {title: "mod N で A ずつ進むと gcd(A, N) の倍数だけを回る（周期と連結性）", anchor: step-mod}
+      - {title: "線分上の格子点は gcd(|dx|, |dy|) + 1 個", anchor: lattice-on-segment}
+      - {title: "ax + by（x, y ≥ 0）で表せない最大の数 ab − a − b", anchor: frobenius}
     merged_keys: []
-    visual: "区間 gcd が右に伸ばすたびに約数へ下がっていく階段グラフ"
+    visual: {kind: static, priority: 2, text: "区間 gcd が右に伸ばすたびに約数へ下がっていく階段グラフ"}
     problems:
-      - {id: abc254_f, role: example, summary: "A_i + B_j の矩形の gcd を、隣接差の区間 gcd に帰着して求める"}
-      - {id: abc210_e, role: practice, summary: "x → x + A mod N の辺で最小全域木（gcd が減るごとに連結成分が減る）"}
-      - {id: agc026_b, role: practice, summary: "在庫の消費と補充が永遠に続くか（gcd と周期）"}
+      - {id: abc254_f, role: example, representative: true, summary: "N×N の行列の (i, j) 成分が A_i + B_j のとき、指定された部分長方形の成分の最大公約数を Q 個のクエリについて答える。", approach: "隣接差の gcd に直し、区間 gcd（セグメント木か Sparse Table）で求める"}
+      - {id: abc210_e, role: practice, summary: "頂点 0..N−1 に、x と (x + A_i) mod N を結ぶコスト C_i の辺を何本でも張れるとき、全体を連結にする最小のコストを求める。", approach: "コストの小さい順に使い、gcd が減るごとに連結成分の数が gcd の値に減る"}
+      - {id: agc026_b, role: practice, summary: "在庫が A 個の店で毎日 B 個買われ、閉店時に C 個以下なら D 個補充されるとき、永遠に買い続けられるかを判定する。", approach: "gcd(B, D) の周期で在庫の余りを考える"}
+    problems_note: "abc319 以降の問題が調査で見つかっていない（問題の補充で探す）"
     sources: ["06-math-nt §4.4", "06-math-nt §5.4", "06-math-nt §7.2"]
 
   - id: crt
     chapter: GCD と合同式
     title: 中国剰余定理
-    aliases: [CRT, 中国の剰余定理, Garner, 連立合同式]
+    aliases: [CRT, Chinese remainder theorem, 中国の剰余定理, Garner, 連立合同式]
     type: technique
     level: 青
-    level_evidence: "acl1_b (1785)・abc286_f (1841)・abc193_e (1948)"
+    level_evidence: "acl1_b (1785)・abc286_f (1841)・abc193_e (1948)。abc319 以降の根拠はまだない"
     kind: [整数論]
     prerequisites: [ext-gcd]
     related: [divisor-count-bound, fft-ntt, gcd-lcm]
-    summary: "x ≡ r1 (mod m1)、x ≡ r2 (mod m2) は r1 ≡ r2 (mod gcd(m1, m2)) のときだけ解をもち、解は mod lcm(m1, m2) でただ1つに決まる。拡張ユークリッドで2式ずつまとめ、法が互いに素なら Garner のアルゴリズムで巨大な解の mod を求める。"
+    summary: "複数の合同式 x ≡ r_i (mod m_i) を同時に満たす x を、拡張ユークリッドで2式ずつ合わせて mod lcm でただ1つに求める。解があるのは r1 ≡ r2 (mod gcd(m1, m2)) のときだけである。"
     signs:
       - {type: phrase, text: "周期の違う複数の条件が同時に成り立つ最初の時刻"}
       - {type: phrase, text: "x を m_i で割った余り r_i が複数与えられる"}
       - {type: phrase, text: "法が素数でない数え上げを素因数ごとに分けて最後に戻す"}
     acl: [crt]
-    frequency: B
+    verify: []
+    frequency: C
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 2 問"
     sections:
-      - "2式の CRT は一次不定方程式を1回解くこと"
-      - "法が互いに素でないときの解の存在条件"
-      - "多数の式を順にまとめる・lcm のあふれ"
-      - "Garner のアルゴリズム（巨大な解を mod で求める）（黄）"
-      - "ACL では（crt(r, m) は解がなければ (0, 0)）"
+      - {title: "2式の CRT は一次不定方程式を1回解くこと", anchor: two-equations}
+      - {title: "法が互いに素でないときの解の存在条件", anchor: non-coprime}
+      - {title: "多数の式を順に合わせる・lcm のあふれ", anchor: many-equations}
+      - {title: "Garner のアルゴリズム（巨大な解を mod で求める）", anchor: garner, level: 黄}
+      - {title: "ACL の crt（解がなければ (0, 0)）", anchor: acl}
     merged_keys: []
-    visual: "mod 3 と mod 5 の表を並べ、15 マスに余りの組が1回ずつ現れる格子図"
+    visual: {kind: static, priority: 2, text: "mod 3 と mod 5 の表を並べ、15 マスに余りの組が1回ずつ現れる格子図"}
     problems:
-      - {id: acl1_b, role: example, summary: "1 + … + k が N の倍数となる最小の k。2N を2つの約数に分ける方法ごとに CRT で解く"}
-      - {id: abc286_f, role: practice, summary: "インタラクティブ。互いに素な長さの巡回置換を並べて N の余りを得て、CRT で復元する"}
-      - {id: abc193_e, role: practice, summary: "電車の周期と睡眠の周期が重なる最初の時刻（余りの範囲を全探索して CRT）"}
+      - {id: acl1_b, role: example, representative: true, summary: "1 + 2 + … + k が N の倍数になる最小の正の整数 k を求める（N ≤ 10^15）。", approach: "2N を互いに素な2つの約数に分ける方法ごとに CRT で解き、最小を取る"}
+      - {id: abc286_f, role: practice, summary: "インタラクティブ。隠された整数 N（≤ 10^9）を、写像 f を1つ指定して f を N 回適用した結果を教えてもらう1回の質問から当てる。", approach: "互いに素な長さの巡回置換を並べて N の各余りを得て、CRT で復元する"}
+      - {id: abc193_e, role: practice, summary: "電車が X 秒停車・Y 秒移動を繰り返し、乗客が P 秒眠り Q 秒起きるを繰り返すとき、起きている間に駅に着く最初の時刻を求める。", approach: "X, Y, P, Q が小さいので余りの範囲を全探索し、それぞれ CRT で解く"}
+    problems_note: "abc319 以降の問題が調査で見つかっていない（問題の補充で探す）"
     sources: ["06-math-nt §4.4", "06-math-nt §5.3", "06-math-nt §5.4", "06-math-nt §6.2", "06-math-nt §6.5"]
 
   - id: multiplicative-order
     chapter: GCD と合同式
-    title: 位数（a^k ≡ 1 となる最小の k）
-    aliases: [位数, order, 累乗の周期, ord]
+    title: 位数・原始根・離散対数
+    aliases: [multiplicative order, primitive root, discrete logarithm, 累乗の周期, 生成元, BSGS, baby-step giant-step, 平方剰余, mod の平方根, mod の K 乗根, Tonelli-Shanks, Cipolla]
     type: technique
     level: 黄
-    level_evidence: "abc222_g (2242)・arc042_d (2247 参考値)・abc335_g (2614)"
+    level_evidence: "位数 abc222_g (2242)・離散対数 abc270_g (2220)・原始根と位数 abc212_g (2150) と黄に集まる。3つが同じ数問を共有するので1ページにした（第1版は3ページ。design-review §3）。abc319 以降の ABC は発展の帯の応用だけ（力試し）。平方剰余・K 乗根は必須の ABC 問題がない"
     kind: [整数論]
-    prerequisites: [euler-phi, divisor-enum, mod-pow]
-    related: [exponent-mod, discrete-log, primitive-root, cycle-detection]
-    summary: "a^k ≡ 1 (mod m) となる最小の k（位数）は φ(m) の約数になるので、φ(m) の約数を調べるか、φ(m) から素因数を取り除いていって求める。累乗の列の周期を扱う問題に使う。"
+    prerequisites: [euler-phi, mod-inverse]
+    related: [exponent-mod, cycle-detection, meet-in-the-middle, convolution-ntt, fft-ntt]
+    summary: "a^k ≡ 1 となる最小の k（位数）を φ(m) の約数から求め、原始根で掛け算を指数の足し算に直す。a^x ≡ b を満たす x（離散対数）は Baby-step Giant-step で O(√m) で求める。"
     signs:
       - {type: phrase, text: "同じ数字を n 個並べた数が K の倍数になる最小の n"}
-      - {type: phrase, text: "a^k ≡ 1 となる最小の k・累乗の列の周期"}
-      - {type: phrase, text: "A_i^k ≡ A_j となる組を数える"}
-    acl: []
-    frequency: B
-    sections:
-      - "位数が φ(m) の約数になる理由"
-      - "求め方：φ(m) の約数を試す・φ(m) から素因数を1つずつ取り除く"
-      - "累乗の列の周期として使う"
-      - "位数で元を分類して数える（発展）"
-    merged_keys: []
-    visual: "mod 7 で 2 の累乗が {1, 2, 4} を回り、3 の累乗が 1..6 を全部回る円の図"
-    problems:
-      - {id: abc222_g, role: example, summary: "2 を n 個並べた数が K の倍数になる最小の n（10^n ≡ 1 を φ の約数から探す）"}
-      - {id: arc042_d, role: practice, summary: "区間の指数での X^i mod P の最小値（区間が長ければ位数を求めて探索する）"}
-      - {id: abc335_g, role: challenge, summary: "A_i^k ≡ A_j となる組の数を、位数で分類して数える"}
-    sources: ["06-math-nt §4.4", "06-math-nt §5.4", "06-math-nt §6.2"]
-
-  - id: discrete-log
-    chapter: GCD と合同式
-    title: 離散対数（Baby-step Giant-step）
-    aliases: [BSGS, 離散対数問題, baby-step giant-step]
-    type: technique
-    level: 黄
-    level_evidence: "abc270_g (2220)・arc042_d (2247 参考値)"
-    kind: [整数論, 全探索]
-    prerequisites: [mod-pow, mod-inverse]
-    related: [multiplicative-order, primitive-root, meet-in-the-middle]
-    summary: "a^x ≡ b (mod m) を満たす x を、x = i·n − j と分けて b·a^j を表に入れ、a^(i·n) で引く Baby-step Giant-step で O(√m) で求める。一次漸化式の値が初めて現れる番号なども、変形して離散対数に帰着できる。"
-    signs:
-      - {type: phrase, text: "a^x ≡ b となる最小の x"}
+      - {type: phrase, text: "a^x ≡ b (mod P) となる最小の x"}
       - {type: phrase, text: "X ← AX + B (mod P) を繰り返して G が最初に現れる番号"}
-      - {type: constraint, text: "法 m ≤ 10^9 程度（√m ≈ 3×10^4）"}
-    acl: []
-    frequency: C
-    sections:
-      - "BSGS の手順（表の大きさを √m にする理由・半分全列挙との関係）"
-      - "最小の解の取り方"
-      - "gcd(a, m) ≠ 1 の場合の扱い"
-      - "一次漸化式を不動点で等比数列に直して帰着する"
-    merged_keys: []
-    visual: "baby step の表と giant step の飛び方を並べた図"
-    problems:
-      - {id: abc270_g, role: example, summary: "X ← AX + B (mod P) で G が最初に現れる番号（不動点で等比数列に直して BSGS）"}
-      - {id: arc042_d, role: practice, summary: "区間の指数での X^i mod P の最小値（区間の長さで位数と探索を使い分ける）"}
-    sources: ["06-math-nt §4.4", "06-math-nt §5.4", "06-math-nt §6.2", "06-math-nt §6.3"]
-
-  - id: primitive-root
-    chapter: GCD と合同式
-    title: 原始根
-    aliases: [primitive root, 生成元, 積を指数の和に直す]
-    type: technique
-    level: 黄
-    level_evidence: "abc212_g (2150)。agc047_c (2496) は原始根で積を指数の和に直して畳み込む"
-    kind: [整数論]
-    prerequisites: [multiplicative-order]
-    related: [euler-phi, discrete-log, convolution-ntt, fft-ntt, mod-sqrt]
-    summary: "位数が φ(m) になる元を原始根という。素数 p では g^0, g^1, …, g^(p−2) が 1..p−1 を1回ずつ取るので掛け算を指数の足し算に直せ、NTT で 998244353 が使われる背景にもなる。"
-    signs:
       - {type: phrase, text: "x^n ≡ y (mod P) となる組を数える"}
-      - {type: phrase, text: "mod P での積の分布を数える（積を畳み込みに直す）"}
+      - {type: phrase, text: "mod P での積の値ごとに個数を数える"}
+      - {type: constraint, text: "法 P が 10^9 程度で、√P ≈ 3×10^4 個の表なら持てる"}
     acl: []
-    frequency: C
+    verify: [discrete_logarithm_mod, primitive_root, sqrt_mod, kth_root_mod]
+    frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 4 問"
     sections:
-      - "定義と存在条件（1, 2, 4, p^k, 2p^k）"
-      - "見つけ方：φ(m)/q 乗が 1 にならないかを素因数 q ごとに調べる"
-      - "位数が d の元は φ(d) 個"
-      - "掛け算を指数の足し算に直す（積の mod を畳み込みへ）"
-      - "998244353 の原始根 3 と NTT"
-      - "ACL の内部実装（internal::primitive_root）"
-    merged_keys: []
-    visual: "mod 7 で 3 の累乗が 1..6 を全部回る円の図"
+      - {title: "位数は φ(m) の約数になる理由と、累乗の列の周期", anchor: order}
+      - {title: "位数の求め方（φ(m) の約数を試す・素因数を1つずつ取り除く）", anchor: find-order}
+      - {title: "原始根の定義・存在条件（1, 2, 4, p^k, 2p^k）と見つけ方", anchor: primitive-root}
+      - {title: "位数が d の元は φ(d) 個", anchor: count-by-order}
+      - {title: "掛け算を指数の足し算に直す（積の個数を畳み込みへ）", anchor: mul-to-add}
+      - {title: "離散対数：Baby-step Giant-step（表の大きさを √m にする理由）", anchor: bsgs}
+      - {title: "gcd(a, m) ≠ 1 の場合と、最小の解の取り方", anchor: bsgs-details}
+      - {title: "一次漸化式を不動点で等比数列に直して離散対数に帰着する", anchor: affine-recurrence}
+      - {title: "平方剰余と mod の K 乗根（オイラーの規準・Tonelli-Shanks・Cipolla）", anchor: mod-root, level: 発展}
+    merged_keys: [discrete-log, primitive-root, mod-sqrt]
+    visual: {kind: static, priority: 2, text: "mod 7 で 2 の累乗が {1, 2, 4} を回り、3 の累乗が 1..6 を全て回る円の図と、baby step の表・giant step の飛び方の図"}
     problems:
-      - {id: abc212_g, role: example, summary: "x^n ≡ y (mod P) となる n がある組の数（位数 d の元は φ(d) 個）"}
-      - {id: agc047_c, role: challenge, summary: "全ペアの (A_i A_j mod P) の和（原始根で積を指数の和に直して畳み込む）"}
-    sources: ["06-math-nt §4.4", "06-math-nt §5.4", "06-math-nt §6.3", "06-math-nt §6.5"]
+      - {id: abc222_g, role: example, representative: true, summary: "2 を n 個並べた整数が K の倍数になる最小の n を求める（なければ −1、K ≤ 10^8）。", approach: "10^n ≡ 1 の形に直し、φ の約数を試して位数を求める"}
+      - {id: abc270_g, role: example, summary: "X_{i+1} = (A·X_i + B) mod P で定まる数列で、値 G が最初に現れる番号を求める（P は素数、なければ −1）。", approach: "不動点で等比数列に直し、Baby-step Giant-step で離散対数を求める"}
+      - {id: abc212_g, role: practice, summary: "素数 P について、0 ≤ x, y ≤ P − 1 の組 (x, y) のうち x^n ≡ y (mod P) を満たす正の整数 n があるものの個数を求める（P ≤ 10^12）。", approach: "位数 d の元は φ(d) 個で、位数 d の x から到達できる y は d 個（例題は euler-phi）"}
+      - {id: arc042_d, role: practice, summary: "素数 P について、A ≤ i ≤ B の範囲での X^i mod P の最小値を求める。", approach: "区間が短ければ全探索、長ければ小さい値 v から順に離散対数で指数が区間に入るかを調べる"}
+      - {id: agc047_c, role: challenge, summary: "N 個の整数の全ての組 i < j について (A_i × A_j) mod P を足した和を求める（P = 200003）。", approach: "原始根で積を指数の和に直し、畳み込みで数える"}
+      - {id: abc335_g, role: challenge, summary: "数列 A と素数 P について、A_i^k ≡ A_j (mod P) となる正の整数 k が存在する組 (i, j) の個数を求める。", approach: "各 A_i の位数を求め、位数で分類して数える（位数 d_j が d_i を割り切れば到達できる）"}
+    problems_note: null
+    sources: ["06-math-nt §4.4", "06-math-nt §5.4", "06-math-nt §6.2", "06-math-nt §6.3", "06-math-nt §6.5", "06-math-nt §6.6"]
 
-  - id: mod-sqrt
+  - id: proof-patterns
     chapter: GCD と合同式
-    title: 平方剰余と mod の k 乗根
-    aliases: [平方剰余, Tonelli-Shanks, Cipolla, オイラーの規準, mod の平方根, k 乗根]
-    type: overview
-    level: 発展
-    level_evidence: "必須の ABC 問題は見つからなかった（research/06 §7.5）。Library Checker の sqrt_mod・kth_root_mod で確かめられる"
-    kind: [整数論]
-    prerequisites: [exponent-mod, primitive-root]
-    related: [discrete-log]
-    summary: "x² ≡ a (mod p) の解を Tonelli–Shanks や Cipolla で求め、解があるかをオイラーの規準 a^((p−1)/2) ≡ 1 で判定する方法の概要。一般の k 乗根は原始根と離散対数で指数の一次合同式に帰着する。"
+    title: 整数の証明の型
+    aliases: [整数問題の証明, 並べ替え論法, 余りの鳩の巣, gcd が不変, mod での矛盾]
+    type: thinking
+    level: 基礎
+    level_evidence: "arc105_b (366)・abc133_c (592)・abc118_c (646)・agc018_a (947) で、操作で変わらない gcd や余りの鳩の巣が鍵になる"
+    kind: [考察, 整数論]
+    prerequisites: [gcd-lcm]
+    related: [notation, invariant, symmetry-pigeonhole-casework, parity, stress-testing, gcd-properties]
+    summary: "実験で見つけた整数の規則が正しいかを、定番の筋道で確かめる。操作で gcd が変わらない、a, 2a, … が余りを並べ替える、余りの鳩の巣、mod での矛盾などを使う。"
     signs:
-      - {type: phrase, text: "x² ≡ a (mod p) を満たす x"}
-      - {type: phrase, text: "mod p での平方根・k 乗根"}
+      - {type: phrase, text: "操作を好きなだけ繰り返したとき、最後に残る値や作れる値を答える"}
+      - {type: phrase, text: "大きい方から小さい方を引く・余りに置き換える操作を繰り返す"}
+      - {type: phrase, text: "区間の幅が法 m 以上なら答えが決まる（余りは m 種類しかない）"}
     acl: []
+    verify: []
     frequency: C
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 2 問"
     sections:
-      - "オイラーの規準（解があるか）"
-      - "Tonelli–Shanks・Cipolla の概要"
-      - "k 乗根（原始根と離散対数で指数の一次合同式に直す）"
-      - "Library Checker での確認"
+      - {title: "操作で gcd が変わらない（互除法の不変量）", anchor: gcd-invariant}
+      - {title: "互いに割り切り合うことで等号を示す", anchor: mutual-divisibility}
+      - {title: "並べ替え論法（a, 2a, …, (p−1)a が余りの並べ替えになる）", anchor: rearrangement}
+      - {title: "余りの鳩の巣（m+1 個のうち2つは同じ余り）", anchor: pigeonhole-remainder}
+      - {title: "mod での矛盾で「できない」を示す", anchor: contradiction-mod}
+      - {title: "必要条件と十分条件（実験の結果を信じてよいか）", anchor: necessary-sufficient}
     merged_keys: []
-    visual: null
-    problems: []
-    sources: ["06-math-nt §4.4", "06-math-nt §6.6"]
+    visual: {kind: static, priority: 2, text: "互除法の長方形分割の図と、mod 7 で a, 2a, …, 6a が余りを並べ替える対応表"}
+    problems:
+      - {id: abc133_c, role: example, summary: "L 以上 R 以下から2つの整数 i < j を選ぶときの (i × j) mod 2019 の最小値を求める（R ≤ 2×10^9）。", approach: "区間の幅が 2019 以上なら余りが一周して答えは 0。そうでなければ全探索"}
+      - {id: abc118_c, role: example, representative: true, summary: "体力 A_i のモンスターが互いに攻撃し合い、攻撃された側は攻撃した側の体力だけ減るとき、最後に残る1体の体力の最小値を求める。", approach: "操作で全体の gcd が変わらず、最小値は gcd になる（互除法と同じ形）"}
+      - {id: agc018_a, role: practice, summary: "箱の中の2つの数の差の絶対値を書き足す操作を繰り返して、K を作れるかを判定する。", approach: "作れるのは全体の gcd の倍数で最大値以下の数"}
+      - {id: arc105_b, role: practice, summary: "全ての数が等しくなるまで、最大値を（最大値 − 最小値）に置き換える操作を続けたときの最後の値を求める。", approach: "操作で gcd が保たれ、最後の値は全体の gcd になる"}
+    problems_note: null
+    sources: ["06-math-nt §4.1", "06-math-nt §5.1", "06-math-nt §7.4", "06-math-nt §7.6"]
 
-  # ── 5. floor と精度（整数として正確に計算する）──
+  # ── 5. floor と商（整数として正確に計算する。乗法的関数の和は商の列挙の後）──
   - id: integer-root
-    chapter: floor と精度
-    title: 整数の平方根・k 乗根と累乗数
-    aliases: [isqrt, 整数平方根, 累乗数, perfect power, 誤差のない平方根, sqrt の誤差]
+    chapter: floor と商
+    title: 整数の平方根・K 乗根と累乗数
+    aliases: [isqrt, integer square root, 整数平方根, 累乗数, perfect power, 誤差のない平方根, sqrt の誤差]
     type: technique
     level: 基礎
-    level_evidence: "abc193_c (379)・abc400_c (702)。abc361_f (1606)・abc243_g (2032) は応用。sqrt の誤差による WA が多い（research/06 §7.3）"
+    level_evidence: "abc193_c (379)・abc400_c (702, 2025)。abc361_f (1606)・abc243_g (2032) は応用。sqrt の誤差による WA が多い（research/06 §7.3）"
     kind: [整数論, 二分探索]
     prerequisites: [integer-division]
-    related: [binary-search, cpp-floating-point, cpp-math-functions, divisor-inclusion-exclusion, prime-exponent-vector]
-    summary: "⌊√N⌋ を double の sqrt で求めると 10^18 付近で ±1 ずれるので、r² ≤ N < (r+1)² になるまで整数で補正するか二分探索で求める。a^b ≤ N となる a の上限や、N 以下の累乗数を重複なく数える方法もまとめる。"
+    related: [binary-search, cpp-types-literals#floating-point, cpp-math-functions, divisor-inclusion-exclusion, prime-exponent-vector]
+    summary: "⌊√N⌋ を double の sqrt で求めると 10^18 付近で ±1 ずれるので、r² ≤ N < (r+1)² になるまで整数で補正するか二分探索で求める。a^b ≤ N となる a の上限や、累乗数を重複なく数えるのに使う。"
     signs:
       - {type: constraint, text: "N ≤ 10^18 で平方数・平方根を扱う"}
       - {type: phrase, text: "a^b（b ≥ 2）の形で表せる N 以下の数"}
       - {type: phrase, text: "2^a × b² のように累乗を組み合わせた数を数える"}
     acl: []
+    verify: [kth_root_integer]
     frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 4 問"
     sections:
-      - "sqrt の誤差と補正（r² ≤ N < (r+1)² を確かめる）"
-      - "二分探索による整数の k 乗根（途中の累乗のあふれ）"
-      - "累乗数の数え上げ（b ≥ 3 は列挙、b = 2 は ⌊√N⌋、重複を除く）"
-      - "√ を含む式の大小を整数で比べる"
+      - {title: "sqrt の誤差と補正（r² ≤ N < (r+1)² を確かめる）", anchor: sqrt-correction}
+      - {title: "二分探索による整数の K 乗根（途中の累乗のあふれ）", anchor: kth-root}
+      - {title: "累乗数の数え上げ（b ≥ 3 は列挙、b = 2 は ⌊√N⌋、重複を除く）", anchor: perfect-powers}
+      - {title: "√ を含む式の大小を整数で比べる", anchor: compare-sqrt}
     merged_keys: [exact-integer-root]
-    visual: "sqrt の結果を r² ≤ N < (r+1)² になるまで補正する流れの図"
+    visual: {kind: static, priority: 2, text: "sqrt の結果を r² ≤ N < (r+1)² になるまで補正する流れの図"}
     problems:
-      - {id: abc400_c, role: example, summary: "2^a × b² で表せる数の個数（a ごとに整数の平方根を求め、b を奇数に限って重複を除く）"}
-      - {id: abc193_c, role: practice, summary: "a^b で表せない N 以下の数（√N まで列挙して重複を除く）"}
-      - {id: abc361_f, role: practice, summary: "10^18 以下の累乗数の個数（平方数は isqrt、b ≥ 3 は列挙して重複を除く）"}
-      - {id: abc243_g, role: challenge, summary: "前の項の平方根以下を選び続ける数列の数（9×10^18 の正確な isqrt と累積和）"}
+      - {id: abc400_c, role: example, representative: true, summary: "N 以下の正の整数のうち、正の整数 a, b を使って 2^a × b² と書けるものの個数を求める（N ≤ 10^18）。", approach: "a ごとに整数の平方根を求め、b を奇数に限って重複を除く"}
+      - {id: abc193_c, role: practice, summary: "1 以上 N 以下の整数のうち、a^b（a, b ≥ 2）の形で表せないものの個数を求める（N ≤ 10^10）。", approach: "a を √N まで列挙し、集合で重複を除く"}
+      - {id: abc361_f, role: practice, summary: "1 以上 N 以下の整数のうち、正の整数 a と 2 以上の整数 b で a^b と書けるものの個数を求める（N ≤ 10^18）。", approach: "平方数は isqrt で数え、b ≥ 3 は列挙して重複を除く"}
+      - {id: abc243_g, role: challenge, summary: "X だけからなる数列の末尾に、末尾の値の平方根以下の正の整数を付け加える操作を 10^100 回行うとき、できる数列の種類数を求める（X ≤ 9×10^18）。", approach: "正確な isqrt と、値ごとの通り数の累積和で数える"}
+    problems_note: null
     sources: ["06-math-nt §4.5", "06-math-nt §5.5", "06-math-nt §7.3", "00-curriculum §3.2"]
 
   - id: base-conversion
-    chapter: floor と精度
-    title: N 進法（基数変換・負の基数・26 進）
-    aliases: [基数変換, b 進法, n 進数, −2 進法, 26 進, Horner 法]
+    chapter: floor と商
+    title: N 進法
+    aliases: [基数変換, base conversion, b 進法, n 進数, −2 進法, 26 進, Horner 法]
     type: technique
     level: 基礎
     level_evidence: "abc186_c (131)・abc171_c (560) が基本。負の基数の abc105_c (1204) と基数の二分探索の abc192_d (1425) は水の節"
     kind: [整数論]
     prerequisites: [integer-division]
     related: [bit-operations, binary-search-answer, floor-quotient-enum]
-    summary: "N を b で割った余りを並べて b 進表記にし、Horner 法で数に戻す。負の基数（−2 進）、1 始まりの 26 進（A..Z, AA..）、基数を変数とみた単調性による二分探索などの変形をまとめる。"
+    summary: "N を b で割った余りを並べて b 進表記にし、Horner 法で数に戻す。負の基数（−2 進）や 1 始まりの 26 進（a..z, aa..）、基数を変数とみた二分探索といった変形にも使う。"
     signs:
       - {type: phrase, text: "b 進法・−2 進法で表す"}
       - {type: phrase, text: "a, b, …, z, aa, ab, … と続く名前の n 番目"}
       - {type: phrase, text: "文字列を n 進数とみた値が M 以下になる n を数える"}
     acl: []
+    verify: []
     frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 4 問"
     sections:
-      - "b 進表記への変換と Horner 法による復元（0 の扱い）"
-      - "1 始まりの 26 進（1 を引いてから割る）"
-      - "負の基数（余りを 0 以上に直してから割る）（水）"
-      - "基数の二分探索とオーバーフロー（1 桁の場合分け）（水）"
+      - {title: "b 進表記への変換と Horner 法による復元（0 の扱い）", anchor: convert}
+      - {title: "1 始まりの 26 進（1 を引いてから割る）", anchor: bijective-26}
+      - {title: "負の基数（余りを 0 以上に直してから割る）", anchor: negative-base, level: 水}
+      - {title: "基数の二分探索とオーバーフロー（1 桁の場合分け）", anchor: base-binary-search, level: 水}
     merged_keys: []
-    visual: "b で割った余りを下の桁から積んでいく図"
+    visual: {kind: static, priority: 2, text: "b で割った余りを下の桁から積んでいく図"}
     problems:
-      - {id: abc171_c, role: example, summary: "犬の名前 a..z, aa, …（1 始まりの 26 進）"}
-      - {id: abc186_c, role: practice, summary: "10 進でも 8 進でも 7 を含まない数の個数（8 進への変換）"}
-      - {id: typical90_bo, role: practice, summary: "8 進 → 9 進の変換を K 回繰り返す"}
-      - {id: abc105_c, role: practice, summary: "整数を −2 進法で表す"}
-      - {id: abc192_d, role: practice, summary: "文字列を n 進数とみた値が M 以下になる n の個数（値が n について単調なので二分探索。1 桁とあふれに注意）"}
+      - {id: abc171_c, role: example, representative: true, summary: "犬に 1 番から a, b, …, z, aa, ab, …, zz, aaa, … と名前を付けるとき、N 番目の犬の名前を求める。", approach: "1 を引いてから 26 で割る（1 始まりの 26 進）"}
+      - {id: abc186_c, role: practice, summary: "N 以下の正の整数のうち、10 進でも 8 進でも数字 7 を含まないものの個数を求める。", approach: "各数を 8 進に変換して調べる"}
+      - {id: typical90_bo, role: practice, summary: "8 進法で表された数 N を 9 進法に直し、数字 8 を 5 に置き換える操作を K 回行った結果を求める。", approach: "8 進 → 10 進 → 9 進の変換を K 回繰り返す"}
+      - {id: abc105_c, role: practice, summary: "整数 N（負もありうる）を −2 進法で表す。", approach: "余りを 0 以上に直してから −2 で割る"}
+      - {id: abc192_d, role: practice, summary: "数字列 X を n 進数（n は X の最大の数字 + 1 以上）とみた値のうち、M 以下になるものが何種類あるかを求める（M ≤ 10^18）。", approach: "値は n について単調なので二分探索する。1 桁のときとオーバーフローに注意"}
+    problems_note: null
     sources: ["06-math-nt §4.5", "06-math-nt §5.5", "00-curriculum §4.2", "00-curriculum §5.1"]
 
   - id: floor-quotient-enum
-    chapter: floor と精度
-    title: 商の列挙（⌊N/i⌋ の値は O(√N) 種類）
-    aliases: [商列挙, 数論分块, √N 分割, floor でまとめる, 約数の個数の和]
+    chapter: floor と商
+    title: 商の列挙
+    aliases: [商列挙, enumerate quotients, 数論分块, √N 分割, floor でまとめる, 約数の個数の和]
     type: technique
     level: 水
-    level_evidence: "abc230_e (969) が直接の形（N ≤ 10^12）。abc296_d (999)・arc160_b (1275) で √N を境に分ける。arc060_b (2261) は応用"
+    level_evidence: "直接の形の abc230_e (969) と √N で分ける abc296_d (999) は基礎の帯の上端、arc160_b (1275) が水、arc060_b (2261) は応用。√N を境に分けて考える型を本体にするので水のままにした。abc319 以降の根拠はまだない"
     kind: [整数論]
     prerequisites: [sigma-manipulation, integer-division]
-    related: [harmonic-sum, floor-sum, sqrt-decomposition, multiplicative-function, base-conversion]
-    summary: "⌊N/i⌋（i = 1..N）の値は高々 2√N 種類で、同じ値になる i は区間 [l, ⌊N/⌊N/l⌋⌋] にまとまる。区間ごとに処理して Σ f(⌊N/i⌋) を O(√N) で求め、√N を境に「i が小さい側」と「商が小さい側」に分けて考える。"
+    related: [harmonic-sum, floor-sum, sqrt-decomposition, base-conversion, multiplicative-function]
+    summary: "Σ_{i=1}^{N} f(⌊N/i⌋) を、⌊N/i⌋ の値が高々 2√N 種類で同じ値の i が区間をなすことを使って O(√N) で求める。√N を境に「i が小さい側」と「商が小さい側」に分けて考える型にも使う。"
     signs:
       - {type: phrase, text: "Σ_{i=1}^{N} ⌊N/i⌋ を求める"}
       - {type: constraint, text: "N ≤ 10^12 で i を全部回すと間に合わない"}
-      - {type: phrase, text: "b 進法の桁和・xy ≤ N となる組"}
+      - {type: phrase, text: "xy ≤ N となる組を数える"}
+      - {type: shape, text: "Σ_{i=1}^{N} f(⌊N/i⌋) の形の和"}
     acl: []
-    frequency: B
+    verify: [enumerate_quotients]
+    frequency: C
+    frequency_evidence: "recent 0・前提として 1 ページに届く（直接 1）・古い ABC 2 問"
     sections:
-      - "値が O(√N) 種類である理由（i ≤ √N と i > √N）"
-      - "同じ商になる区間の右端 ⌊N/⌊N/l⌋⌋"
-      - "√N を境に場合分けする（片方を √N まで全探索）"
-      - "調和級数・floor sum との使い分け"
+      - {title: "値が O(√N) 種類である理由（i ≤ √N と i > √N）", anchor: why-sqrt}
+      - {title: "同じ商になる区間の右端 ⌊N/⌊N/l⌋⌋", anchor: block-end}
+      - {title: "√N を境に場合分けする（片方を √N まで全探索）", anchor: split-at-sqrt}
+      - {title: "調和級数・floor sum との使い分け", anchor: vs-others}
     merged_keys: []
-    visual: "i を横軸、⌊N/i⌋ を縦軸にした階段グラフで、同じ高さの段をひとまとめにする動く図"
+    visual: {kind: dynamic, priority: 1, text: "i を横軸、⌊N/i⌋ を縦軸にした階段グラフで、同じ高さの段を1つの区間として順にたどるステップ送り"}
     problems:
-      - {id: abc230_e, role: example, summary: "Σ ⌊N/i⌋（N ≤ 10^12）を同じ商ごとにまとめて求める"}
-      - {id: abc296_d, role: practice, summary: "M 以上で a × b（a, b ≤ N）と書ける最小の数（片方を √M まで調べる）"}
-      - {id: arc160_b, role: practice, summary: "xy, yz, zx ≤ N となる組の数（中央の値を固定し √N で分ける）"}
-      - {id: arc060_b, role: challenge, summary: "b 進の桁和が s となる最小の b（b ≤ √N は全探索、b > √N は 2 桁の式で解く）"}
+      - {id: abc230_e, role: example, summary: "Σ_{i=1}^{N} ⌊N/i⌋ を求める（N ≤ 10^12）。", approach: "同じ商になる i の区間ごとに足して O(√N)"}
+      - {id: arc160_b, role: example, representative: true, summary: "xy ≤ N、yz ≤ N、zx ≤ N を全て満たす正の整数の組 (x, y, z) の個数を 998244353 で割った余りで求める（N ≤ 10^9、複数ケース）。", approach: "最大の値で場合分けし、√N を境に数える"}
+      - {id: abc296_d, role: practice, summary: "1 ≤ a, b ≤ N を満たす a × b のうち、M 以上で最小の値を求める（N, M ≤ 10^12、なければ −1）。", approach: "a ≤ b として a を √M まで調べ、b = ⌈M/a⌉ とする"}
+      - {id: arc060_b, role: challenge, summary: "n の b 進表記の各桁の和が s になる最小の整数 b ≥ 2 を求める（n ≤ 10^11、なければ −1）。", approach: "b ≤ √n は全探索、b > √n は 2 桁になるので n = pb + q を解く"}
+    problems_note: "練習の候補が abc296_d のほかに少なく、abc319 以降の問題も見つかっていない（問題の補充で探す）"
     sources: ["06-math-nt §4.5", "06-math-nt §5.5", "06-math-nt §6.2", "06-math-nt §6.3", "06-math-nt §6.6"]
 
+  - id: multiplicative-function
+    chapter: floor と商
+    title: 乗法的関数の和と素数の個数
+    aliases: [ディリクレ積, Dirichlet convolution, 杜教筛, Min_25, 乗法的関数の prefix sum, 素数計数, prime counting, Lucy DP, Meissel-Lehmer]
+    type: overview
+    level: 発展
+    level_evidence: "abc370_g (3428) が乗法的関数の和を使う（手法の分類だけ確認）。素数計数が必須の ABC 問題は見つからなかった"
+    kind: [整数論]
+    prerequisites: [euler-phi, floor-quotient-enum]
+    related: [mobius-function, zeta-mobius-divisor, spf-sieve, sieve-eratosthenes]
+    summary: "N ≤ 10^10 程度で、φ・μ などの乗法的関数の和 Σ_{n≤N} f(n) や N 以下の素数の個数を、商の列挙を使って O(N^{3/4}/log N) などで求める。関数どうしの関係はディリクレ積で表す。"
+    signs:
+      - {type: constraint, text: "N ≤ 10^10〜10^11 で Σ_{n≤N} f(n)（f は φ・約数の個数など）を求める"}
+      - {type: phrase, text: "N 以下の素数の個数・素数の和"}
+    acl: []
+    verify: [counting_primes, sum_of_totient_function, sum_of_multiplicative_function]
+    frequency: C
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 1 問"
+    sections:
+      - {title: "乗法的関数（φ・μ・d・σ）とディリクレ積（φ * 1 = id など）", anchor: dirichlet}
+      - {title: "和の求め方の概要（杜教筛・Lucy DP・Min_25）", anchor: prefix-sums}
+      - {title: "素数の個数・素数の和（Lucy DP）", anchor: prime-counting}
+    merged_keys: [prime-counting]
+    visual: null
+    problems: []
+    problems_note: "abc370_g は手法の分類（タグ）だけの確認なので入れていない。必須の ABC 問題が見つかっていない発展の概要なので verify で確かめる"
+    sources: ["06-math-nt §4.3", "06-math-nt §6.6"]
+
   - id: floor-sum
-    chapter: floor と精度
-    title: floor sum（Σ⌊(ai+b)/m⌋）と一次式の mod の和
-    aliases: [floor_sum, 類ユークリッド, sum of floor of linear, mod of linear, 直線の下の格子点]
+    chapter: floor と商
+    title: floor sum
+    aliases: [floor_sum, 類ユークリッド, sum of floor of linear, mod of linear, 一次式の mod の和, 直線の下の格子点]
     type: technique
     level: 黄
-    level_evidence: "abc443_g (2268) が基本形の直接の応用。abc313_g (2454)・abc283_h (2682) 以上の応用は発展"
+    level_evidence: "abc443_g (2268, 2025) が基本形の直接の応用。practice2_c は ACL を呼ぶだけ。abc313_g (2454)・abc283_h (2682) 以上の応用は発展"
     kind: [整数論]
     prerequisites: [sigma-manipulation, gcd-lcm]
-    related: [floor-quotient-enum, lattice-points, integer-division]
-    summary: "Σ_{i=0}^{n−1} ⌊(ai + b)/m⌋ を、a ≥ m・b ≥ m の部分を式で取り除いてから直線の下の格子点とみて縦横を入れ替える再帰（互除法と同じ形）で O(log m) で求める。(ai + b) mod m の和や一次式の条件を満たす個数もこれに帰着する。"
+    related: [floor-quotient-enum, convex-hull#lattice-points, integer-division, stern-brocot]
+    summary: "Σ_{i=0}^{n−1} ⌊(ai + b)/m⌋ を、互除法と同じ形の再帰で O(log m) で求める。(ai + b) mod m の和や、一次式の条件を満たす個数もこれに帰着できる。"
     signs:
       - {type: phrase, text: "Σ ⌊(ai + b)/m⌋ や Σ (ai + b) mod m を求める"}
       - {type: phrase, text: "(Ak + B) mod M が条件を満たす k の個数"}
       - {type: phrase, text: "直線の下にある格子点の数"}
       - {type: constraint, text: "n, m ≤ 10^9 程度で i を全部回せない"}
     acl: [floor_sum]
+    verify: [sum_of_floor_of_linear, min_of_mod_of_linear]
     frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 3 問"
     sections:
-      - "a ≥ m・b ≥ m の部分を取り除く"
-      - "直線の下の格子点とみて縦横を入れ替える（互除法と同じ再帰）"
-      - "x mod m = x − m⌊x/m⌋ への書き換え"
-      - "ACL では（floor_sum の引数の範囲と負の a, b）"
-      - "応用の型（発展）：bit ごとの popcount・一次式の mod の積"
+      - {title: "a ≥ m・b ≥ m の部分を式で取り除く", anchor: reduce}
+      - {title: "直線の下の格子点とみて縦横を入れ替える（互除法と同じ再帰）", anchor: swap-axes}
+      - {title: "x mod m = x − m⌊x/m⌋ への書き換え", anchor: mod-to-floor}
+      - {title: "ACL の floor_sum（引数の範囲と負の a, b）", anchor: acl}
+      - {title: "応用の型：bit ごとの popcount・一次式の mod の積", anchor: applications, level: 発展}
     merged_keys: []
-    visual: "直線 y = (ax + b)/m の下の格子点を数え、傾きを 1 未満にしてから縦横を入れ替える2段階の図"
+    visual: {kind: static, priority: 2, text: "直線 y = (ax + b)/m の下の格子点を数え、傾きを 1 未満にしてから縦横を入れ替える2段階の図"}
     problems:
-      - {id: practice2_c, role: example, summary: "ACL の floor_sum をそのまま使う"}
-      - {id: abc443_g, role: example, summary: "(Ak + B) mod M > k となる k の個数を、floor の差の和に直して求める"}
-      - {id: abc313_g, role: challenge, summary: "皿と袋の間で石を動かしてできる状態の数を floor sum に帰着する"}
-      - {id: abc283_h, role: challenge, summary: "N 以下で mod M が R の数の popcount の和（bit ごとに floor sum）"}
+      - {id: practice2_c, role: example, summary: "T 個のケースそれぞれで Σ_{i=0}^{N−1} ⌊(A × i + B)/M⌋ を求める。", approach: "ACL の floor_sum をそのまま使う"}
+      - {id: abc443_g, role: example, representative: true, summary: "(A·k + B) mod M > k を満たす整数 k の個数を求める（詳細は執筆時に確かめる）。", approach: "条件を floor の差に直し、floor sum で数える"}
+      - {id: abc313_g, role: challenge, summary: "皿と袋の間で石を動かす2種類の操作を繰り返したとき、皿の石の数の並びとしてありうるものの個数を求める（詳細は執筆時に確かめる）。", approach: "状態の数を floor sum に帰着する"}
+      - {id: abc283_h, role: challenge, summary: "N 以下の正の整数のうち M で割った余りが R のものについて、2 進表記の 1 の個数の和を求める（複数ケース）。", approach: "bit ごとに、その bit が 1 になる個数を floor sum で数える"}
+    problems_note: "練習の候補が見つかっていない（黄の帯で floor sum が要る ABC 問題は abc443_g くらい。問題の補充で探す）"
     sources: ["06-math-nt §4.5", "06-math-nt §5.5", "06-math-nt §6.2", "06-math-nt §6.5", "06-math-nt §7.2"]
 
   - id: stern-brocot
-    chapter: floor と精度
-    title: Stern–Brocot 木と連分数（最良有理近似）
-    aliases: [Stern-Brocot, 連分数, 最良近似, Farey 数列, 有理数の二分探索]
+    chapter: floor と商
+    title: Stern-Brocot 木と連分数
+    aliases: [Stern-Brocot tree, continued fraction, 最良近似, 最良有理近似, Farey 数列, 有理数の二分探索]
     type: overview
     level: 発展
     level_evidence: "abc333_g (2536)"
     kind: [整数論, 二分探索]
     prerequisites: [gcd-lcm]
     related: [floor-sum, ext-gcd]
-    summary: "既約分数を全て1回ずつ含む二分木を、同じ方向への移動をまとめて（連分数の形で）降りることで、分母・分子が N 以下で実数に最も近い分数などを O(log N) 段で求める方法の概要。"
+    summary: "分母・分子が N 以下で実数に最も近い分数などを、既約分数を全て1回ずつ含む二分木を降りて O(log N) 段で求める。同じ方向への移動を一度に進めるのが連分数にあたる。"
     signs:
       - {type: phrase, text: "分母・分子が N 以下で、与えられた実数に最も近い分数"}
       - {type: phrase, text: "分数の範囲を二分探索する"}
     acl: []
+    verify: [stern_brocot_tree, rational_approximation]
     frequency: C
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 1 問"
     sections:
-      - "Stern–Brocot 木と既約分数"
-      - "同じ方向の移動をまとめる（連分数）"
-      - "最良有理近似と比較の精度（128bit 整数）"
-      - "Library Checker での確認（stern_brocot_tree・rational_approximation）"
+      - {title: "Stern-Brocot 木と既約分数", anchor: tree}
+      - {title: "同じ方向の移動を一度に進める（連分数）", anchor: continued-fraction}
+      - {title: "最良有理近似と比較の精度（128bit 整数）", anchor: best-approximation}
     merged_keys: []
     visual: null
     problems:
-      - {id: abc333_g, role: example, summary: "分母・分子が N 以下で実数 R に最も近い分数（木を連続した移動でまとめて降りる）"}
+      - {id: abc333_g, role: example, representative: true, summary: "分母・分子が N 以下の分数のうち、小数で与えられた実数 r に最も近いものを求める。", approach: "Stern-Brocot 木を、同じ方向の移動を一度に進めながら降りる"}
+    problems_note: "発展の概要なので練習は置かない"
     sources: ["06-math-nt §4.5", "06-math-nt §5.5", "06-math-nt §6.6"]
 
   # ── 6. 行列と線形代数 ──
   - id: matrix-power
     chapter: 行列と線形代数
     title: 行列累乗
-    aliases: [行列の累乗, matrix exponentiation, 隣接行列の累乗, min-plus 行列, 半環, 線形漸化式]
+    aliases: [行列の累乗, matrix exponentiation, 行列累乗 DP, 遷移行列, 隣接行列の累乗, min-plus 行列, "(max,+) 行列", 半環の行列]
     type: technique
-    level: 黄
-    level_evidence: "必須の ABC は abc199_f (2065)・abc009_4 (2213 参考値)・abc256_g (2250)・abc236_g (2438) など 2000 前後以上（設計書 §4.3）。行列でも解ける水の問題（abc293_e 1453）は等比数列のページから別解としてリンクする"
-    kind: [線形代数・行列, ダブリング・分割統治]
-    prerequisites: [mod-pow]
-    related: [doubling, dp-matrix-power, geometric-series-mod, linear-recurrence-fast, segtree-matrix, warshall-floyd]
-    summary: "状態ベクトルが毎回同じ線形変換 v' = Av で変わるとき、K 回後は A^K v で、行列の積の結合法則から繰り返し二乗法で O(n³ log K) で求まる。足し算・掛け算を min と + などに置き換えた半環でも同じように累乗できる。"
+    level: 青
+    level_evidence: "abc458_f (1744, 2026)・abc456_f (1888, 2026)・abc305_g (1989) で遷移を行列にして累乗・積を取る形が青に出る。abc204_f (2044)・abc199_f (2065)・abc256_g (2250) は黄。第1版の黄（必須の ABC は 2000 前後以上）から、2026 年の2問を根拠に青にした（design-review §3）。DP の行列累乗（dp-matrix-power）を統合"
+    kind: [線形代数・行列, DP, ダブリング・分割統治]
+    prerequisites: [mod-pow, dp-state-design]
+    related: [doubling, geometric-series-mod, linear-recurrence-fast, segment-tree-monoids#matrix, warshall-floyd, string-automaton-dp, broken-profile-dp, dp-speedup-overview, dynamic-dp]
+    summary: "状態が毎回同じ線形の遷移 v' = Av で変わるとき、K 回後の A^K v を行列の繰り返し二乗法で O(n³ log K) で求める。DP の遷移や、足し算と掛け算を min と + に替えた行列にも使える。"
     signs:
-      - {type: constraint, text: "状態数 n ≤ 100 程度で、回数 K が 10^9〜10^18"}
+      - {type: constraint, text: "状態数 n ≤ 100 程度で、繰り返しの回数 K が 10^9〜10^18"}
       - {type: phrase, text: "漸化式の第 N 項（N ≤ 10^18）"}
       - {type: phrase, text: "グラフでちょうど K 歩の経路の数・K 本の辺を使う最短路"}
-      - {type: phrase, text: "ランダムな操作を K 回したあとの期待値（期待値が線形に変わる）"}
+      - {type: phrase, text: "長さ 10^18 の文字列のうち、禁止された部分文字列を含まないものの数"}
+      - {type: phrase, text: "幅の小さい盤を長く伸ばしたときの敷き詰め方の数"}
+      - {type: shape, text: "dp[t+1] の各成分が dp[t] の成分の線形結合で、係数が t によらない"}
     acl: []
-    frequency: B
+    verify: [matrix_product, pow_of_matrix]
+    frequency: A
+    frequency_evidence: "recent 3（abc456_f・abc458_f・abc469_g）・前提として 3 ページに届く（直接 3）・古い ABC 6 問"
     sections:
-      - "漸化式・状態遷移を行列で書く（定数項を状態に入れる）"
-      - "行列の積と繰り返し二乗法（積の順序・単位行列）"
-      - "隣接行列の K 乗と長さ K の経路の数"
-      - "計算量の見積もり（n = 100 で n³ log K）"
-      - "半環上の行列積（min-plus・max-min・AND/XOR）と単位元・零元"
-      - "累乗でなく合成として使う（アフィン変換）"
-      - "ダブリング・DP の行列累乗・きたまさ法との使い分け"
-    merged_keys: [semiring-matrix, adjacency-matrix-power]
-    visual: "漸化式 f(n) = f(n−1) + f(n−2) をベクトルに行列を掛ける図で表し、A² が2歩の経路数になることを示す図"
+      - {title: "漸化式・状態の遷移を行列で書く（定数項を状態に入れる）", anchor: write-as-matrix}
+      - {title: "行列の積と繰り返し二乗法（積の向き・単位行列・n³ log K の見積もり・mod の掛け算のあふれ）", anchor: fast-power}
+      - {title: "隣接行列の K 乗と長さ K の経路の数", anchor: adjacency-power}
+      - {title: "DP の遷移を行列にする（照合の状態・末尾の数文字・グリッドの境界の状態）", anchor: dp-transition}
+      - {title: "(min,+)・(max,+) などの半環の行列と単位元・零元", anchor: semiring}
+      - {title: "累乗でなく合成として使う（アフィン変換の積）", anchor: composition}
+      - {title: "ダブリングで遷移を合成する（行列にすると大きすぎるとき・桁を倍々に伸ばす）", anchor: doubling-transition, level: 黄}
+      - {title: "プロファイル DP の遷移行列と状態数の見積もり", anchor: profile-dp, level: 黄}
+    merged_keys: [semiring-matrix, adjacency-matrix-power, dp-matrix-power, dp-doubling]
+    visual: {kind: static, priority: 2, text: "漸化式をベクトルに行列を掛ける図で表し、A² が2歩の経路数になることと、行列を2乗していく繰り返し二乗を示す図"}
     problems:
-      - {id: dp_r, role: example, summary: "有向グラフで長さ K（≤ 10^18）の経路の数（隣接行列の K 乗）"}
-      - {id: abc199_f, role: example, summary: "ランダムに辺を選んで両端を平均化する操作を K 回したあとの期待値（N ≤ 100 の行列累乗）"}
-      - {id: abc189_e, role: practice, summary: "回転・反転の操作列を 3×3 のアフィン変換行列の積として前計算する（累乗ではなく合成）"}
-      - {id: math_and_algorithm_aw, role: practice, summary: "K×N の盤をドミノで敷き詰める方法の数（列の状態 2^K の遷移行列の累乗）"}
-      - {id: abc009_4, role: practice, summary: "AND と XOR で定義された漸化式（AND を積・XOR を和とみた行列累乗）"}
-      - {id: abc236_g, role: challenge, summary: "辺が順に追加されるグラフで、ちょうど L 歩で到達できる最小の時刻（min-max の行列のダブリング）"}
-      - {id: abc129_f, role: challenge, summary: "等差数列を連結した数を mod M で求める（桁数ごとに 3×3 行列の累乗）"}
-    sources: ["06-math-nt §4.6", "06-math-nt §5.6", "06-math-nt §6.2", "06-math-nt §7.2", "03-graph §4.H", "03-graph §5.2", "02-dp §5.1", "01-basics §5"]
+      - {id: dp_r, role: example, summary: "N 頂点の有向グラフ（隣接行列で与えられる）で、長さ K の有向パス（同じ辺を何度通ってもよい）の総数を 10^9+7 で割った余りで求める（N ≤ 50、K ≤ 10^18）。", approach: "隣接行列の K 乗の全成分の和"}
+      - {id: abc305_g, role: example, representative: true, summary: "a と b からなる長さ N の文字列のうち、与えられた M 個の文字列をどれも部分文字列に含まないものの個数を 998244353 で割った余りで求める（N ≤ 10^18）。", approach: "禁止文字列は短いので末尾の数文字を状態にし、遷移行列を累乗する"}
+      - {id: abc199_f, role: example, summary: "N 頂点 M 辺のグラフで、辺を1本一様に選んで両端の値をその平均に置き換える操作を K 回行ったあとの、各頂点の値の期待値を mod 10^9+7 で求める（N ≤ 100、K ≤ 10^9）。", approach: "1回の操作で期待値が線形に変わるので、その行列を K 乗する"}
+      - {id: abc189_e, role: practice, summary: "平面上の N 個の点に回転・反転の操作を M 回行うとき、「A 回目の操作の後の点 B の座標」を Q 個のクエリについて答える。", approach: "各操作を 3×3 のアフィン変換の行列にし、積を前計算する（累乗ではなく合成）"}
+      - {id: math_and_algorithm_aw, role: practice, summary: "K × N の盤（K は小さく、N は大きい）を 1 × 2 のドミノで敷き詰める方法の数を求める。", approach: "列の埋まり方 2^K 通りを状態にした遷移行列を累乗する"}
+      - {id: abc458_f, role: practice, summary: "長さ N（≤ 10^9）の文字列のうち、与えられた K 個の文字列をどれも部分文字列に含まないものの個数を求める（詳細は執筆時に確かめる）。", approach: "Aho-Corasick の状態の遷移を行列とみてダブリング（累乗）する（string の string-automaton-dp の例題）"}
+      - {id: abc456_f, role: practice, summary: "（執筆時に確かめる）", approach: "各日の遷移を (min,+) の行列で表し、区間の行列の積をセグメント木で求める（ds の segment-tree-monoids の例題）"}
+      - {id: abc204_f, role: practice, summary: "H × W（H ≤ 6、W ≤ 10^12）の部屋に 1×1 と 1×2 の畳を敷き詰める方法の数を 998244353 で割った余りで求める。", approach: "列のはみ出しを bit で持つ状態の遷移を行列にして累乗する"}
+      - {id: abc009_4, role: practice, summary: "A_{n} = (C_1 AND A_{n−1}) XOR … XOR (C_K AND A_{n−K}) で定まる数列の第 M 項を求める（M ≤ 10^9）。", approach: "AND を掛け算、XOR を足し算とみた行列の累乗"}
+      - {id: abc256_g, role: challenge, summary: "正 N 角形の辺の上に等間隔に並べた石を白黒に塗るとき、どの辺の上の白い石の個数も等しくなる塗り方の数を求める（N は非常に大きい）。", approach: "白の個数と頂点の色を固定し、辺ごとの遷移を 2×2 行列にして N 乗する"}
+      - {id: typical90_e, role: challenge, summary: "使える数字が限られた N 桁（N ≤ 10^18）の正の整数のうち、B の倍数であるものの個数を求める。", approach: "桁数を倍にする遷移の合成（ダブリング）で余りの分布を求める"}
+    problems_note: "abc236_g（max-min の行列のダブリング）は research/03 では kmjp の記事で確かめているが、research/06 §7.5 で未確認とした問題なので入れていない。tdpc_house は練習の枠の都合で外した"
+    sources: ["06-math-nt §4.6", "06-math-nt §5.6", "06-math-nt §6.2", "06-math-nt §7.2", "03-graph §4.H", "03-graph §5.2", "02-dp §4.J（dp-matrix-power・dp-doubling）", "02-dp §5.1", "08-string-geo §5（string-automaton-dp：abc305_g・abc458_f）", "00-curriculum §2.3.8（abc456_f・abc458_f）", "01-basics §5"]
 
   - id: gaussian-elimination
     chapter: 行列と線形代数
-    title: 掃き出し法（連立一次方程式・ランク・mod 2）
-    aliases: [ガウスの消去法, Gauss-Jordan, 連立一次方程式, ランク, ライツアウト, mod 2 の連立方程式]
+    title: 掃き出し法
+    aliases: [ガウスの消去法, Gaussian elimination, Gauss-Jordan, 連立一次方程式, ランク, ライツアウト, mod 2 の連立方程式]
     type: technique
-    level: 黄
-    level_evidence: "abc313_d (1630)・typical90_be（★6）から abc366_g (2409)・yahoo_procon2019_qual_e (2585) まで。ABC で青の帯は abc313_d の1問だけなので黄とした（open_issues 参照）"
+    level: 青
+    level_evidence: "abc313_d (1630, 2023-08)・typical90_be（★6）で mod 2 の連立方程式を解く形が青に現れる。ランクと解の個数を数える応用は黄〜発展の帯（abc319 以降の ABC はこれだけで、力試しにした）。ABC の根拠が青の帯にあり黄の帯にはないので、第1版の黄から青にした（design-review §4.2）"
     kind: [線形代数・行列]
     prerequisites: [mod-inverse]
-    related: [xor-basis, determinant, bit-full-search, bitset-speedup, lagrange-interpolation]
-    summary: "行基本変形で行列を階段形にし、連立一次方程式の解なし・一意・無数を判定してランクを O(n³) で求める。mod p では逆元で割り、mod 2 では XOR で消去して bitset で速くでき、解の個数は p^(変数の数 − ランク) になる。"
+    related: [xor-basis, determinant, bit-full-search, bitset-speedup, lagrange-interpolation, expectation-linear-equations]
+    summary: "行基本変形で行列を階段形にし、連立一次方程式の解なし・一意・無数を判定してランクを O(n³) で求める。mod 2 では XOR で消去して bitset で速くでき、解の個数は 2^(変数の数 − ランク) になる。"
     signs:
       - {type: phrase, text: "スイッチを押すと複数のランプが反転する・偶奇の条件が N 個ある"}
-      - {type: phrase, text: "条件を満たす押し方の数を mod で答える（2^(N − rank)）"}
-      - {type: phrase, text: "各頂点に書いた値の隣接 XOR が 0 になるように決める"}
+      - {type: phrase, text: "条件を満たす押し方の数を mod で答える"}
+      - {type: phrase, text: "各頂点に書いた値の、隣接する頂点の XOR が 0 になるように決める"}
       - {type: constraint, text: "変数・式の数が数百〜2000 程度で O(n³) や O(n³/64)"}
+      - {type: shape, text: "変数の一次式（mod 2 なら XOR）＝定数 の式が複数立つ"}
     acl: []
+    verify: [system_of_linear_equations, system_of_linear_equations_mod_2, matrix_rank, matrix_rank_mod_2, inverse_matrix]
     frequency: B
+    frequency_evidence: "recent 0・前提として 3 ページに届く（直接 1）・古い ABC 3 問"
     sections:
-      - "行基本変形と階段形、解なし（0 = 1）・一意・無数の判定"
-      - "mod p の掃き出し（ピボットで割る＝逆元）"
-      - "mod 2 の掃き出しは XOR、bitset で速くする"
-      - "ランクと解の個数 p^(n − rank)"
-      - "実数の掃き出し（部分ピボット選択と誤差）"
+      - {title: "行基本変形と階段形、解なし（0 = 1）・一意・無数の判定", anchor: row-reduction}
+      - {title: "mod p の掃き出し（ピボットで割る＝逆元）", anchor: mod-p}
+      - {title: "mod 2 の掃き出しは XOR、bitset で速くする", anchor: mod-2}
+      - {title: "ランクと解の個数 p^(n − rank)", anchor: rank}
+      - {title: "実数の掃き出し（部分ピボット選択と誤差）", anchor: real}
     merged_keys: []
-    visual: "行列を1列ずつ掃き出すステップ送り（ピボットの行を色付け）"
+    visual: {kind: dynamic, priority: 2, text: "行列を1列ずつ掃き出すステップ送り（ピボットの行を色付け）"}
     problems:
-      - {id: typical90_be, role: example, summary: "パネルの反転で目標を作る押し方の数（mod 2 のランク r で 2^(N − r)）"}
-      - {id: abc313_d, role: example, summary: "隠れた 0/1 列を、K 個の和の偶奇の質問から復元する（インタラクティブ）"}
-      - {id: abc128_c, role: practice, summary: "スイッチと電球の偶奇条件（bit 全探索で足りるが、mod 2 の連立方程式として見る入門）"}
-      - {id: abc366_g, role: challenge, summary: "隣接頂点の値の XOR が 0 になる書き込み（bit ごとに mod 2 の連立方程式）"}
-      - {id: yahoo_procon2019_qual_e, role: challenge, summary: "0/1 行列で和が奇数になる行・列の選び方の数（ランク）"}
+      - {id: typical90_be, role: example, summary: "N 個のスイッチがそれぞれ決まった複数のパネルを反転させるとき、全てのパネルを目標の状態にする押し方の数を 998244353 で割った余りで求める。", approach: "mod 2 の連立方程式を掃き出し、ランク r なら 2^(N − r) 通り（解がなければ 0）"}
+      - {id: abc313_d, role: example, representative: true, summary: "インタラクティブ。隠された 0/1 の列を、K 個の位置を指定してその和の偶奇を聞く質問（N 回まで）から復元する（K は奇数）。", approach: "質問の答えを mod 2 の連立方程式とみて解く（K + 1 個の位置を巡回させて差を取る）"}
+      - {id: abc128_c, role: practice, summary: "N 個のスイッチと M 個の電球があり、各電球はつながったスイッチのうち ON の個数の偶奇が決まった値のときに点く。全ての電球が点くスイッチの状態の数を求める（N, M ≤ 10）。", approach: "bit 全探索で足りるが、mod 2 の連立方程式として見る入門"}
+      - {id: abc366_g, role: challenge, summary: "N 頂点の単純無向グラフの各頂点に 1 以上 2^60 未満の整数を書き、次数 1 以上の全ての頂点で隣接頂点の値の XOR が 0 になるようにできるかを判定し、例を示す。", approach: "bit ごとに mod 2 の連立方程式を立てて解空間を求め、どの頂点も 0 にならないように組み合わせる"}
+      - {id: yahoo_procon2019_qual_e, role: challenge, summary: "N × M の 0/1 行列で、行の集合と列の集合の組のうち、交わる部分の和が奇数になるものの個数を 998244353 で割った余りで求める。", approach: "行列の mod 2 のランク r から (2^N − 2^(N−r))·2^(M−1) と数える"}
+    problems_note: "練習が abc128_c だけで、ほかの候補は黄〜発展の帯（力試し）。問題の補充で青の帯の練習を探す"
     sources: ["06-math-nt §4.6", "06-math-nt §5.6", "06-math-nt §6.2", "06-math-nt §6.6"]
 
   - id: xor-basis
     chapter: 行列と線形代数
-    title: XOR 基底（mod 2 の線形代数）
-    aliases: [線形基底, linear basis, F2 の基底, 部分集合の XOR, XOR で作れる値]
+    title: XOR 基底
+    aliases: [XOR basis, 線形基底, linear basis, F2 の基底, 部分集合の XOR, XOR で作れる値, 閉路基底, サイクル基底, サイクル空間, XOR 最短路]
     type: technique
     level: 黄
-    level_evidence: "abc236_f (1943)・abc283_g (2173)・abc141_f (2342)。abc249_g (2756) は発展"
+    level_evidence: "abc236_f (1943)・abc283_g (2173)・abc451_g (2221, 2026)・abc141_f (2342) と黄に集まる。abc249_g (2756) は発展の帯。グラフの閉路の XOR（xor-path）を統合（design-review §3）"
     kind: [線形代数・行列, ビット演算]
-    prerequisites: [gaussian-elimination, bit-operations]
-    related: [xor-path, binary-trie, bitwise-independence, nim]
+    prerequisites: [bit-operations]
+    related: [gaussian-elimination, binary-trie, bitwise-independence, nim, dfs, extended-dijkstra]
     summary: "整数の集合から XOR で作れる値の全体を、最上位 bit が互いに異なる r 個の基底で表す。作れる値は 2^r 種類で、最大値は上の bit から貪欲に、K 番目に小さい値は簡約した基底から求まる。"
     signs:
       - {type: phrase, text: "部分集合（部分列）の XOR として作れる値の個数・最大値・K 番目"}
       - {type: phrase, text: "全ての値を XOR で作れるように最小コストで選ぶ"}
+      - {type: phrase, text: "経路の重みが辺の重みの XOR で、同じ辺を何度通ってもよい（ウォーク）"}
       - {type: constraint, text: "A_i < 2^60 で N ≤ 10^5 程度"}
     acl: []
+    verify: [intersection_of_f2_vector_spaces]
     frequency: B
+    frequency_evidence: "recent 1（abc451_g）・前提として届くページなし・古い ABC 4 問"
     sections:
-      - "基底への挿入（最上位 bit で掃き出す。1 要素 O(bit 数)）"
-      - "作れる値の個数 2^r と作り方の数 2^(n − r)"
-      - "XOR の最大値は上の bit から貪欲に決めてよい理由"
-      - "簡約した基底と K 番目に小さい値"
-      - "コストの小さい順に基底へ入れる貪欲（線形マトロイド）"
-      - "グラフの閉路の XOR への応用（グラフの章へ）"
-    merged_keys: []
-    visual: "数を2進で行に並べ、最上位 bit ごとに掃き出していくステップ送り"
+      - {title: "基底への挿入（最上位 bit で掃き出す。1 要素 O(bit 数)）", anchor: insert}
+      - {title: "作れる値の個数 2^r と作り方の数 2^(n − r)", anchor: count}
+      - {title: "XOR の最大値は上の bit から貪欲に決めてよい理由", anchor: max}
+      - {title: "簡約した基底と K 番目に小さい値", anchor: kth}
+      - {title: "コストの小さい順に基底へ入れる貪欲（線形マトロイド）", anchor: min-cost}
+      - {title: "グラフのウォークの XOR（全域木の根からの XOR と、閉路の XOR の基底）", anchor: xor-walk}
+    merged_keys: [xor-path, cycle-basis-xor]
+    visual: {kind: dynamic, priority: 3, text: "数を2進で行に並べ、最上位 bit ごとに掃き出していくステップ送り（静的な図で代えてよい）。全域木の根からの XOR と、木に入らない辺が作る閉路の XOR の図"}
     problems:
-      - {id: abc236_f, role: example, summary: "全ての値を XOR で作れる集合の最小コスト（安い順に基底へ入れる）"}
-      - {id: abc283_g, role: example, summary: "部分列の XOR として作れる値の L 番目から R 番目（簡約した基底）"}
-      - {id: abc141_f, role: practice, summary: "2 グループに分けたときの XOR 和の和の最大（全体の XOR で 1 の bit を除いて基底で最大化）"}
-      - {id: abc249_g, role: challenge, summary: "表の XOR が K 以下という条件のもとで裏の XOR を最大化する"}
-    sources: ["06-math-nt §4.6", "06-math-nt §5.6", "06-math-nt §6.2", "06-math-nt §7.4"]
+      - {id: abc236_f, role: example, summary: "番号 1..2^N − 1 のスパイスにそれぞれ値段があり、買ったスパイスの番号の XOR で全ての番号を作れるように買うときの、値段の和の最小値を求める。", approach: "安い順に見て、基底に入るものだけ買う（線形マトロイドの貪欲）"}
+      - {id: abc283_g, role: example, representative: true, summary: "数列の部分列の XOR として作れる値を小さい順に並べたとき、L 番目から R 番目までを出力する。", approach: "簡約した基底を作り、番号の2進表記に従って基底を選ぶ"}
+      - {id: abc141_f, role: practice, summary: "N 個の整数を2つのグループに分けたとき、それぞれの XOR の和の最大値を求める。", approach: "全体の XOR で 1 になっている bit を除いた値で基底を作り、最大化する"}
+      - {id: abc451_g, role: practice, summary: "（執筆時に確かめる）", approach: "全域木で根からの XOR を求め、木に入らない辺が作る閉路の XOR を基底にして最小化する（分割統治も使う。research/00 §2.3.8・research/03）"}
+      - {id: abc249_g, role: challenge, summary: "N 枚のカードの表と裏に整数が書かれている。表の XOR が K 以下になるように1枚以上選ぶとき、裏の XOR の最大値を求める。", approach: "(表, 裏) を連結した値で基底を作り、K の上の bit から場合分けして最大化する"}
+    problems_note: null
+    sources: ["06-math-nt §4.6", "06-math-nt §5.6", "06-math-nt §6.2", "06-math-nt §7.4", "03-graph §4.B（xor-path）", "03-graph §5.2 B", "00-curriculum §3.2（グラフのサイクル基底と XOR の経路）", "00-curriculum §2.3.8（abc451_g）"]
 
   - id: determinant
     chapter: 行列と線形代数
     title: 行列式
-    aliases: [行列式, determinant, 行列式 mod p]
+    aliases: [determinant, 行列式 mod p]
     type: overview
     level: 発展
-    level_evidence: "単独で必須の ABC 問題はなく、行列木定理（グラフの章）を通じて abc253_h (2758) などで使う"
+    level_evidence: "単独で必須の ABC 問題はなく、行列木定理（graph の matrix-tree-theorem）を通じて発展の帯で使う"
     kind: [線形代数・行列]
     prerequisites: [gaussian-elimination]
     related: [matrix-tree-theorem, spanning-tree-advanced, lgv-lemma]
-    summary: "掃き出し法で上三角にし、対角成分の積に行の交換の回数だけ符号を掛けて行列式を O(n³) で求める方法の概要。全域木の数を数える行列木定理（グラフの章）の部品になる。"
+    summary: "掃き出し法で上三角にし、対角成分の積に行の交換の回数だけ符号を掛けて行列式を O(n³) で求める。全域木の数を数える行列木定理の部品になる。"
     signs:
       - {type: phrase, text: "行列式を mod p で求める"}
-      - {type: phrase, text: "全域木の個数（行列木定理）・交わらない経路の組の数"}
+      - {type: phrase, text: "全域木の個数・交わらない経路の組の数"}
     acl: []
+    verify: [matrix_det, matrix_det_mod_2, matrix_det_arbitrary_mod]
     frequency: C
+    frequency_evidence: "recent 0・前提として 2 ページに届く（直接 2）・古い ABC 0 問"
     sections:
-      - "掃き出しで行列式を求める（行の交換で符号が変わる）"
-      - "mod p での計算と、法が素数でない場合（互除法による掃き出し）"
-      - "行列木定理・LGV 公式への入口（グラフ・数え上げの章へ）"
-      - "Library Checker での確認（matrix_det など）"
+      - {title: "掃き出しで行列式を求める（行の交換で符号が変わる）", anchor: by-elimination}
+      - {title: "mod p での計算と、法が素数でない場合（互除法による掃き出し）", anchor: modulus}
+      - {title: "行列木定理・LGV 補題への入口", anchor: applications}
     merged_keys: []
     visual: null
-    problems:
-      - {id: abc253_h, role: example, summary: "辺を K 本選んで森になる確率。頂点集合ごとの全域木の数を行列木定理（行列式）で求める"}
+    problems: []
+    problems_note: "第1版の abc253_h は research/06 で未確認の問題なので外した（行列木定理の問題で、graph の matrix-tree-theorem が持ち主）。行列式だけが必須の ABC 問題はないので verify で確かめる"
     sources: ["06-math-nt §4.6", "06-math-nt §6.6", "07-math-comb §4.4", "07-math-comb §5"]
 
   # ── 7. 畳み込みと多項式 ──
   - id: convolution-ntt
     chapter: 畳み込みと多項式
-    title: 畳み込みの使い方（ACL の convolution）
-    aliases: [畳み込み, convolution, 多項式の積, NTT, FFT, convolution_ll]
+    title: 畳み込みの使い方
+    aliases: [畳み込み, convolution, 多項式の積, ACL の convolution, convolution_ll, ずらしたときの一致数, 全シフトのハミング距離, ワイルドカード照合]
     type: technique
     level: 青
-    level_evidence: "abc392_g (1817) は ACL の convolution を呼ぶだけの青（設計書 §4.3）。abc291_g (2176)・abc196_f (2274)・typical90_bm（★7）は黄"
+    level_evidence: "abc392_g (1817, 2025) は ACL の convolution を呼ぶだけで解ける（design-review D2 で帯の根拠に数える）。abc291_g (2176)・abc196_f (2274)・typical90_bm（★7）は黄。文字列照合への応用（fft-string-matching）を統合"
     kind: [畳み込み・多項式]
     prerequisites: [mod-arithmetic]
-    related: [fft-ntt, fft-string-matching, dp-convolution, generating-function-counting, hadamard-transform]
-    summary: "c_k = Σ_{i+j=k} a_i b_j（多項式の積）を ACL の convolution で O(N log N) で求める。値の出現回数の配列どうしを畳み込むと全ての k について「和が k になる組の数」がまとめて求まり、片方を反転すると「ずらしたときの一致数」になる。"
+    related: [fft-ntt, online-convolution, generating-function-counting, hadamard-transform, rolling-hash, z-algorithm]
+    summary: "c_k = Σ_{i+j=k} a_i b_j（多項式の積）を ACL の convolution で O(N log N) で求める。和が k になる組の数や、ずらしたときの一致数を全ての k について一度に数える。"
     signs:
       - {type: phrase, text: "全ての k について、和が k になる組の数を求める"}
-      - {type: phrase, text: "列をずらしたときの一致数・ハミング距離を全てのずらし方で求める"}
-      - {type: phrase, text: "多項式の積の係数・個数の分布を掛け合わせる"}
-      - {type: constraint, text: "値の範囲が 10^5〜10^6 程度で、組の全探索 O(N²) が間に合わない"}
+      - {type: phrase, text: "列をずらしたときの一致数・不一致の数を、全てのずらし方について求める"}
+      - {type: phrase, text: "ワイルドカード（?）を含むパターンの照合"}
+      - {type: constraint, text: "値の範囲や列の長さが 10^5〜10^6 程度で、組の全探索 O(N²) が間に合わない"}
+      - {type: shape, text: "c_k = Σ_{i+j=k} a_i b_j の形の和"}
     acl: [convolution, convolution_ll]
+    verify: [convolution_mod, wildcard_pattern_matching]
     frequency: B
+    frequency_evidence: "recent 1（abc471_g）・前提として 5 ページに届く（直接 4）・古い ABC 4 問"
     sections:
-      - "i + j = k の形に言い換える（出現回数の配列）"
-      - "i − j = k の形は片方を反転する"
-      - "結果の長さと mod（998244353 での値しか返らない）"
-      - "整数のまま・mod 10^9+7 で欲しいとき（convolution_ll）"
-      - "bit ごとに分けて畳み込む型（OR・ハミング距離）（黄）"
-      - "ACL では（convolution<998244353>・convolution_ll の要件）"
-    merged_keys: []
-    visual: "2 つの数列を、片方を反転して少しずつずらしながら重なりの積を足す素朴な畳み込みの動く図"
+      - {title: "i + j = k の形に言い換える（出現回数の配列）", anchor: sum-pairs}
+      - {title: "i − j = k の形は片方を反転する", anchor: reverse}
+      - {title: "結果の長さと mod（998244353 での値しか返らない）", anchor: length-mod}
+      - {title: "整数のまま・mod 10^9+7 で欲しいとき（convolution_ll）", anchor: convolution-ll}
+      - {title: "文字列の照合：ずらしたときの一致数・ハミング距離・ワイルドカード", anchor: string-matching, level: 黄}
+      - {title: "bit ごと・文字ごとに分けて畳み込む（OR の和など）", anchor: split-by-bit, level: 黄}
+      - {title: "ACL の convolution の要件（法の形と長さ）", anchor: acl}
+    merged_keys: [fft-string-matching]
+    visual: {kind: dynamic, priority: 1, text: "2 つの数列を、片方を反転して少しずつずらしながら重なりの積を足す素朴な畳み込みのステップ送り"}
     problems:
-      - {id: practice2_f, role: example, summary: "ACL の convolution をそのまま使う"}
-      - {id: abc392_g, role: example, summary: "集合内の等差3項の数（指示関数を自分自身と畳み込み、2B の係数を見る）"}
-      - {id: abc143_d, role: practice, summary: "三角形を作る3本の棒の数（二分探索で解けるが、和の個数を畳み込みで数える別解の入門）"}
-      - {id: typical90_bm, role: practice, summary: "色ごとの二項係数の列を畳み込んで選び方を数える"}
-      - {id: abc291_g, role: practice, summary: "A を回転したときの Σ(A_i OR B_i) の最大（bit ごとに反転して畳み込む）"}
-      - {id: abc196_f, role: practice, summary: "T を S のどこかに重ねたときの最小ハミング距離（T を反転して畳み込む）"}
-    sources: ["06-math-nt §4.7", "06-math-nt §5.7", "06-math-nt §6.2", "06-math-nt §6.5", "06-math-nt §7.2"]
+      - {id: practice2_f, role: example, summary: "2 つの数列 a, b について、c_k = Σ_{i+j=k} a_i b_j を 998244353 で割った余りで全ての k について求める。", approach: "ACL の convolution をそのまま使う"}
+      - {id: abc392_g, role: example, representative: true, summary: "整数の集合 S から、B − A = C − B > 0 を満たす (A, B, C) を選ぶ方法の数を求める（値 ≤ 10^6）。", approach: "指示関数を自分自身と畳み込み、2B の係数を見る"}
+      - {id: abc143_d, role: practice, summary: "N 本の棒から3本を選んで三角形を作る方法の数を求める（N ≤ 2000）。", approach: "ソートと二分探索で解けるが、長さの和の個数を畳み込みで数える別解の入門"}
+      - {id: typical90_bm, role: practice, summary: "赤・緑・青のボールから個数の条件を満たすように選ぶ方法の数を、998244353 で割った余りで求める。", approach: "色ごとの二項係数の列を畳み込む"}
+      - {id: abc291_g, role: practice, summary: "長さ N の数列 A, B（各値は 32 未満）について、A を巡回シフトしたときの Σ (A_i OR B_i) の最大値を求める。", approach: "bit ごとに片方を反転して畳み込み、1 が重なる数を数える"}
+      - {id: abc196_f, role: practice, summary: "0/1 の文字列 T を S の連続する部分と比べるとき、一致させるために書き換える文字数の最小値を求める（|S|, |T| ≤ 10^6）。", approach: "T を反転して畳み込み、全てのずらし方のハミング距離を一度に求める（第1版の fft-string-matching の例題）"}
+      - {id: abc471_g, role: challenge, summary: "（執筆時に確かめる）", approach: "主客転倒してから畳み込みで数える（research/00 §2.3.8 の分類）"}
+    problems_note: null
+    sources: ["06-math-nt §4.7", "06-math-nt §5.7", "06-math-nt §6.2", "06-math-nt §6.5", "06-math-nt §7.2", "08-string-geo §4.5 fft-string-matching", "00-curriculum §2.3.8（abc471_g）"]
 
   - id: fft-ntt
     chapter: 畳み込みと多項式
     title: FFT・NTT の仕組みと任意 mod の畳み込み
-    aliases: [FFT, NTT, 高速フーリエ変換, 数論変換, 任意 mod 畳み込み, 3 素数 NTT, Garner]
+    aliases: [FFT, NTT, 高速フーリエ変換, fast Fourier transform, 数論変換, number theoretic transform, 任意 mod 畳み込み, 3 素数 NTT]
     type: overview
     level: 発展
     level_evidence: "ACL の convolution を使えば仕組みを知らなくても解ける（設計書 §4.2・§4.3）。仕組みが要るのは自作ライブラリ・任意 mod・多項式の高度な演算。任意 mod が必須の ABC 問題は見つからなかった"
     kind: [畳み込み・多項式]
     prerequisites: [convolution-ntt]
-    related: [primitive-root, crt, fps-basics, online-convolution]
-    summary: "多項式を 1 の N 乗根での値に変換すると掛け算が各点の積になり、変換と逆変換を分割統治で O(N log N) で行えるという FFT・NTT の仕組みの概要。NTT に向く素数（998244353 = 119·2^23 + 1）の条件と、3つの素数で計算して CRT で戻す任意 mod の畳み込みもまとめる。"
+    related: [multiplicative-order, crt, fps-basics, online-convolution]
+    summary: "畳み込みを自作するときや任意 mod で求めるときに、多項式を 1 の N 乗根での値に変えて各点の積にし、分割統治で O(N log N) で変換する。任意 mod は 3 つの素数で計算して CRT で戻す。"
     signs:
       - {type: phrase, text: "mod 10^9+7 や整数のままで畳み込みたい"}
       - {type: phrase, text: "畳み込みを自作ライブラリで実装したい・浮動小数の FFT の誤差が心配"}
     acl: [convolution, convolution_ll]
+    verify: [convolution_mod, convolution_mod_1000000007, convolution_mod_2_64]
     frequency: C
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 0 問"
     sections:
-      - "点での値に直すと掛け算が O(N)（多項式の値表現）"
-      - "1 の N 乗根と分割統治（バタフライ）"
-      - "複素数の FFT と誤差、NTT に向く素数（c·2^k + 1）と原始根"
-      - "任意 mod の畳み込み（3 素数 NTT と Garner、convolution_ll）"
-      - "Library Checker での確認（convolution_mod・convolution_mod_1000000007）"
+      - {title: "点での値に直すと掛け算が O(N)（多項式の値表現）", anchor: point-value}
+      - {title: "1 の N 乗根と分割統治（バタフライ）", anchor: butterfly}
+      - {title: "複素数の FFT と誤差、NTT に向く素数（c·2^k + 1）と原始根", anchor: ntt-prime}
+      - {title: "任意 mod の畳み込み（3 素数 NTT と Garner、convolution_ll）", anchor: arbitrary-mod}
     merged_keys: [arbitrary-mod-convolution]
     visual: null
     problems: []
+    problems_note: "仕組みが必須の ABC 問題がない発展の概要なので、問題は置かず verify で確かめる"
     sources: ["06-math-nt §4.7", "06-math-nt §6.3", "06-math-nt §6.5", "06-math-nt §6.6", "06-math-nt §7.2"]
 
   - id: hadamard-transform
     chapter: 畳み込みと多項式
-    title: XOR 畳み込み（アダマール変換）
-    aliases: [Walsh-Hadamard, FWHT, XOR convolution, アダマール変換, 添字の XOR の畳み込み]
+    title: XOR 畳み込み
+    aliases: [アダマール変換, Walsh-Hadamard, FWHT, XOR convolution, 添字の XOR の畳み込み]
     type: overview
     level: 発展
     level_evidence: "abc212_h (2741) など発展の帯"
     kind: [畳み込み・多項式, ビット演算]
     prerequisites: [convolution-ntt, bit-operations]
     related: [zeta-mobius-subset, zeta-mobius-divisor, nim, fft-ntt]
-    summary: "c_k = Σ_{i XOR j = k} a_i b_j を、アダマール変換で各点の積に直して O(N log N) で求める方法の概要。添字の演算（和・XOR・AND/OR・gcd/lcm）によって使う変換が変わることを整理する。"
+    summary: "c_k = Σ_{i XOR j = k} a_i b_j を、アダマール変換で各点の積に直して O(N log N) で求める。添字の演算（和・XOR・AND/OR・gcd/lcm）ごとに使う変換が変わる。"
     signs:
       - {type: phrase, text: "i XOR j = k となる組を全ての k について数える"}
       - {type: phrase, text: "XOR が 0 でない Nim の盤面の数を数える"}
       - {type: constraint, text: "値が 2^16〜2^20 程度で、添字の XOR で畳み込む"}
     acl: []
+    verify: [bitwise_xor_convolution]
     frequency: C
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 1 問"
     sections:
-      - "アダマール変換と逆変換（各 bit で (x + y, x − y)）"
-      - "同じ配列を K 回 XOR 畳み込みする（変換後の累乗）"
-      - "添字の演算と変換の対応（和は FFT、AND/OR は高速ゼータ変換、gcd/lcm は約数のゼータ変換）"
-      - "Library Checker での確認（bitwise_xor_convolution）"
+      - {title: "アダマール変換と逆変換（各 bit で (x + y, x − y)）", anchor: transform}
+      - {title: "同じ配列を K 回 XOR 畳み込みする（変換後の累乗）", anchor: power}
+      - {title: "添字の演算と変換の対応（和は FFT、AND/OR は高速ゼータ変換、gcd/lcm は約数のゼータ変換）", anchor: index-operations}
     merged_keys: [xor-convolution]
     visual: null
     problems:
-      - {id: abc212_h, role: example, summary: "先手必勝になる Nim の盤面の数（XOR 畳み込みをアダマール変換で）"}
+      - {id: abc212_h, role: example, representative: true, summary: "K 種類の整数から長さ 1 以上 N 以下の列（Nim の山の大きさ）を作るとき、先手が勝つものの個数を 998244353 で割った余りで求める。", approach: "XOR 畳み込みをアダマール変換で行い、変換後に等比数列の和を取る"}
+    problems_note: "発展の概要なので練習は置かない（abc265_h は手法の分類（タグ）だけの確認）"
     sources: ["06-math-nt §4.7", "06-math-nt §5.7", "06-math-nt §6.6", "06-math-nt §7.4", "00-curriculum §3.2"]
 
   - id: online-convolution
     chapter: 畳み込みと多項式
     title: 分割統治 FFT・オンライン畳み込み
-    aliases: [分割統治 FFT, relaxed convolution, オンライン畳み込み, 多項式の積の分割統治]
+    aliases: [online convolution, relaxed convolution, 多項式の積の分割統治, FFT DP, 多項式で DP]
     type: overview
     level: 発展
-    level_evidence: "abc352_g (2413)・abc213_h (2806)・abc281_h (3180) とすべて発展"
-    kind: [畳み込み・多項式, ダブリング・分割統治]
+    level_evidence: "abc352_g (2413)・abc213_h (2806)・abc281_h (3180) とすべて発展の帯。DP の畳み込みによる高速化（dp-convolution）を統合"
+    kind: [畳み込み・多項式, DP, ダブリング・分割統治]
     prerequisites: [convolution-ntt]
-    related: [dp-convolution, divide-and-conquer, fps-basics]
-    summary: "多数の多項式の積を次数の小さいものから2つずつ掛けて O(N log² N) で求める方法と、dp[i] が dp[0..i−1] と既知の列の畳み込みで決まるとき、分割統治で左から順に決めていく方法の概要。"
+    related: [divide-and-conquer, fps-basics, dp-speedup-overview]
+    summary: "多数の多項式の積を次数の小さいものから2つずつ掛けて O(N log² N) で求める。dp[i] が dp[0..i−1] と既知の列の畳み込みで決まるときは、左半分を確定させてから右半分へ寄与を足す分割統治で求める。"
     signs:
       - {type: phrase, text: "Π(1 + a_i x) のような多数の一次式の積の係数"}
-      - {type: phrase, text: "dp[i] が dp[0..i−1] と既知の数列の畳み込みで決まる"}
+      - {type: shape, text: "dp[i] = Σ_{j<i} dp[j]·g[i−j] のように、dp が自分より前の値との畳み込みで決まる"}
+      - {type: shape, text: "遷移が「和が s になる組の数」の形（多項式の積）"}
     acl: [convolution]
+    verify: []
     frequency: B
+    frequency_evidence: "recent 1（abc462_g）・前提として届くページなし・古い ABC 3 問"
     sections:
-      - "多数の多項式の積（小さいものから掛ける・分割統治）"
-      - "オンライン畳み込み（左半分を確定させてから右半分へ寄与を足す）"
-      - "DP の高速化としての位置づけ（DP の章へ）"
-    merged_keys: []
+      - {title: "多数の多項式の積（次数の小さいものから掛ける・分割統治）", anchor: product-of-many}
+      - {title: "DP の遷移を多項式の積とみる", anchor: dp-as-polynomial}
+      - {title: "オンライン畳み込み（左半分を確定させてから右半分へ寄与を足す）", anchor: online}
+    merged_keys: [dp-convolution]
     visual: null
     problems:
-      - {id: abc352_g, role: example, summary: "一次式の積を分割統治で掛ける（期待値を確率の和に直した後）"}
-      - {id: abc213_h, role: example, summary: "距離ごとの経路の数を左から決めていく（オンラインの分割統治 FFT）"}
-    sources: ["06-math-nt §4.7", "06-math-nt §5.7", "02-dp §4.J"]
+      - {id: abc352_g, role: example, representative: true, summary: "N 種類の靴下が A_i 枚ずつ袋に入っており、同じ種類の2枚がそろうまで1枚ずつ取り出すときの、取り出す回数の期待値を 998244353 で割った余りで求める。", approach: "期待値を「k 枚目までにそろわない確率」の和に直し、Π(1 + A_i x) を分割統治で掛ける"}
+      - {id: abc213_h, role: example, summary: "各道について通る長さごとの通り方の数が与えられるとき、町 1 から出て合計の長さがちょうど T で町 1 に戻る散歩の数を求める。", approach: "長さごとの dp が自分より前の値と道の分布の畳み込みになるので、オンラインの分割統治 FFT で求める"}
+      - {id: abc281_h, role: practice, summary: "（執筆時に確かめる）", approach: "平方分割とオンラインの分割統治 FFT で数える"}
+    problems_note: "発展の概要なので練習は abc281_h だけにした（abc357_g は手法の分類（タグ）だけの確認）"
+    sources: ["06-math-nt §4.7", "06-math-nt §5.7", "02-dp §4.J（dp-convolution）", "02-dp §2.5"]
 
   - id: fps-basics
     chapter: 畳み込みと多項式
-    title: 形式的冪級数（FPS）と多項式の演算
-    aliases: [FPS, 形式的冪級数, 母関数, 生成関数, 多項式の逆元, 多項式の割り算, Taylor shift]
+    title: 形式的冪級数と多項式の演算
+    aliases: [FPS, formal power series, 多項式の逆元, 多項式の割り算, Taylor shift, 多点評価, 冪級数の log・exp]
     type: overview
     level: 発展
-    level_evidence: "abc303_h (2501)・abc318_h (2785) など発展。abc321_f (1645) は FPS を知らなくても戻す DP で解ける（レベルの根拠にしない）"
+    level_evidence: "abc303_h (2501)・abc318_h (2785) など発展。戻す DP で解ける易しい問題（練習）はレベルの根拠にしない"
     kind: [畳み込み・多項式, 数え上げ]
     prerequisites: [convolution-ntt, mod-inverse]
     related: [generating-function-counting, knapsack-undo, online-convolution, lagrange-interpolation, cayley-pruefer, fft-ntt]
-    summary: "数列を母関数（冪級数）とみて、逆元 1/f・log・exp・累乗を O(N log N) で計算する方法と、多項式の割り算・Taylor shift・多点評価の概要。DP の遷移を多項式の掛け算・割り算として見る視点は青の帯でも役に立つ。"
+    summary: "数列を冪級数とみて、逆元 1/f・log・exp・累乗を O(N log N) で計算し、多項式の割り算・Taylor shift・多点評価も行う。数え上げの式を多項式で立てた後の計算を受け持つ。"
     signs:
-      - {type: phrase, text: "解説に母関数・多項式の逆元・log・exp が出てくる"}
-      - {type: phrase, text: "(1 + x^v) を掛ける・割るように、集合への追加と削除を繰り返す"}
+      - {type: phrase, text: "(1 + x^v) を掛ける・割るように、集合への追加と削除を繰り返して個数の分布を求める"}
       - {type: phrase, text: "次数の条件つきの木や個数の分布を、多項式の累乗の係数として数える"}
+      - {type: shape, text: "答えが多項式 f の 1/f・log f・exp f・f^K の係数で書ける"}
     acl: [convolution]
+    verify: [inv_of_formal_power_series, log_of_formal_power_series, exp_of_formal_power_series, pow_of_formal_power_series, sqrt_of_formal_power_series, division_of_polynomials, polynomial_taylor_shift, multipoint_evaluation, polynomial_interpolation]
     frequency: B
+    frequency_evidence: "recent 1（abc473_g）・前提として 1 ページに届く（直接 1）・古い ABC 4 問"
     sections:
-      - "母関数の考え方（DP の遷移を多項式の積・商として見る）"
-      - "演算の一覧と計算量（inv・log・exp・pow・sqrt）"
-      - "多項式の割り算・Taylor shift・多点評価"
-      - "数え上げでの立式は数え上げの章（母関数の考え方）へ"
-      - "Library Checker での確認"
+      - {title: "演算の一覧と計算量（inv・log・exp・pow・sqrt）", anchor: operations}
+      - {title: "多項式の割り算・Taylor shift・多点評価", anchor: polynomial-ops}
     merged_keys: [polynomial-ops]
     visual: null
     problems:
-      - {id: abc321_f, role: example, summary: "追加・削除のたびに和が K になる部分集合の数（(1 + x^v) を掛ける・割る＝戻す DP）"}
-      - {id: abc303_h, role: example, summary: "次数が指定の集合に入るラベル付き木の数（Prüfer 列と FPS の累乗）"}
+      - {id: abc318_h, role: example, representative: true, summary: "（執筆時に確かめる）", approach: "包除原理で式を立て、分割統治 FFT か FPS の演算で数える"}
+      - {id: abc245_d, role: practice, summary: "N 次の多項式 A(x) と、A(x)B(x) = C(x) を満たす N+M 次の多項式 C(x) の係数が与えられるとき、B(x) の係数を求める。", approach: "割り算の筆算を上の次数からたどる"}
+      - {id: abc321_f, role: practice, summary: "空の箱にボールを入れる・取り出すクエリのたびに、箱の中のボールから書かれた数の和が K になるように選ぶ方法の数を 998244353 で割った余りで答える。", approach: "(1 + x^v) を掛ける・割る（戻す DP。例題は dp の knapsack-undo）"}
+      - {id: abc303_h, role: practice, summary: "各頂点の次数が与えられた集合に入る N 頂点のラベル付き木の個数を 998244353 で割った余りで求める。", approach: "Prüfer 列で次数 − 1 を出現回数とみて、FPS の累乗の係数として求める（例題は comb の generating-function-counting）"}
+    problems_note: null
     sources: ["06-math-nt §4.7", "06-math-nt §5.7", "06-math-nt §6.6", "06-math-nt §7.4"]
 
   - id: linear-recurrence-fast
     chapter: 畳み込みと多項式
-    title: 線形漸化式の高速化（きたまさ法・Bostan–Mori・Berlekamp–Massey）
+    title: 線形漸化式の高速化
     aliases: [きたまさ法, Bostan-Mori, Berlekamp-Massey, Fiduccia, 線形漸化式の第 N 項]
     type: overview
     level: 発展
     level_evidence: "まとまって現れるのは abc300_h (3209) など発展の帯。ただし abc436_g (2164) のように黄の帯でも出ることがある（設計書 §4.3、research/06 §7.2）"
     kind: [線形代数・行列, 畳み込み・多項式]
     prerequisites: [matrix-power, fps-basics]
-    related: [convolution-ntt, dp-matrix-power]
-    summary: "K 項の線形漸化式の第 N 項を行列累乗 O(K³ log N) より速く求める方法（きたまさ法 O(K² log N)、母関数 P/Q の係数を求める Bostan–Mori O(K log K log N)）と、最初の 2K 項から漸化式を見つける Berlekamp–Massey の概要。発展だが黄の帯でも出ることがある。"
+    related: [convolution-ntt]
+    summary: "K 項の線形漸化式の第 N 項を、行列累乗より速くきたまさ法 O(K² log N) や Bostan-Mori O(K log K log N) で求める。最初の 2K 項から漸化式を見つける Berlekamp-Massey も使う。"
     signs:
       - {type: constraint, text: "線形漸化式の項数 K が数百〜数千で、N ≤ 10^18"}
       - {type: phrase, text: "有理式 P(x)/Q(x) の N 次の係数"}
       - {type: phrase, text: "答えが線形漸化式を満たしそうだが式が分からない（最初の項から推定する）"}
+      - {type: shape, text: "a_n = Σ_{k=1}^{K} c_k a_{n−k} の形の漸化式"}
     acl: [convolution]
-    frequency: B
+    verify: [kth_term_of_linearly_recurrent_sequence, find_linear_recurrence, consecutive_terms_of_linear_recurrent_sequence]
+    frequency: C
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 2 問"
     sections:
-      - "行列累乗との比較（いつ必要になるか）"
-      - "きたまさ法（x^N mod 特性多項式）"
-      - "Bostan–Mori（Q(x)Q(−x) で次数を半分にする）"
-      - "Berlekamp–Massey（漸化式を見つける）"
-      - "黄の帯での出題（abc436_g）と ACL の convolution を使った実装"
-      - "Library Checker での確認"
+      - {title: "行列累乗との比較（いつ必要になるか）", anchor: vs-matrix}
+      - {title: "きたまさ法（x^N mod 特性多項式）", anchor: kitamasa}
+      - {title: "Bostan-Mori（Q(x)Q(−x) で次数を半分にする）", anchor: bostan-mori}
+      - {title: "Berlekamp-Massey（漸化式を見つける）", anchor: berlekamp-massey}
+      - {title: "ACL の convolution を使った実装", anchor: implementation}
     merged_keys: []
     visual: null
     problems:
-      - {id: tdpc_fibonacci, role: example, summary: "K 項の線形漸化式の第 N 項（きたまさ法・Bostan–Mori）"}
-      - {id: abc436_g, role: example, summary: "Σ A_i x_i ≤ M の非負整数解の数を、有理式の係数として求める（Bostan–Mori・BM）"}
+      - {id: tdpc_fibonacci, role: example, summary: "a_1 = … = a_K = 1、a_i = a_{i−1} + … + a_{i−K} で定まる数列の第 N 項を 10^9+7 で割った余りで求める（K ≤ 1000、N ≤ 10^9）。", approach: "きたまさ法（または Bostan-Mori）で求める"}
+      - {id: abc436_g, role: example, summary: "Σ A_i x_i ≤ M を満たす非負整数の組 (x_1, …, x_N) の個数を 998244353 で割った余りで求める（M は非常に大きい）。", approach: "1/((1 − x)Π(1 − x^{A_i})) の係数として Bostan-Mori（か Berlekamp-Massey）で求める"}
+      - {id: abc300_h, role: practice, summary: "（執筆時に確かめる）", approach: "Bostan-Mori で、添字の bit 条件付きの項の和を求める"}
+    problems_note: "例題は発展の帯に入らない（tdpc_fibonacci は difficulty なし、abc436_g は 2164）ので代表問題は付けていない。発展の概要なので練習は abc300_h だけ"
     sources: ["06-math-nt §4.6", "06-math-nt §5.6", "06-math-nt §6.2", "06-math-nt §6.6", "06-math-nt §7.2", "00-curriculum §3.2"]
 
   - id: lagrange-interpolation
     chapter: 畳み込みと多項式
     title: ラグランジュ補間とべき乗和
-    aliases: [多項式補間, べき乗和, Faulhaber, 補間, 答えが多項式になる]
+    aliases: [Lagrange interpolation, 多項式補間, 補間, べき乗和, Faulhaber, 答えが多項式になる]
     type: overview
     level: 発展
     level_evidence: "abc137_f (2402)・abc208_f (2772) と発展の帯"
     kind: [畳み込み・多項式]
     prerequisites: [mod-inverse]
     related: [binomial-precompute, fps-basics, gaussian-elimination]
-    summary: "d 次多項式は d + 1 点の値で決まるので、x = 0..d での値から任意の x での値を階乗の逆元を使って O(d) で求める方法の概要。べき乗和 Σ i^k や、答えが N の多項式になる DP を小さい N で計算して補間するのに使う。"
+    summary: "d 次多項式は d + 1 点の値で決まるので、x = 0..d での値から任意の x での値を階乗の逆元を使って O(d) で求める。べき乗和 Σ i^k や、答えが N の多項式になる DP を小さい N で計算して補間するのに使う。"
     signs:
       - {type: phrase, text: "答えが N の多項式になる（小さい N で実験すると分かる）"}
       - {type: phrase, text: "Σ_{i=1}^{N} i^k を N ≤ 10^18 で求める"}
       - {type: phrase, text: "mod p で p 点の値から多項式の係数を復元する"}
+      - {type: shape, text: "答え f(N) が N の d 次多項式になる"}
     acl: []
+    verify: [shift_of_sampling_points_of_polynomial, sum_of_exponential_times_polynomial]
     frequency: C
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 2 問"
     sections:
-      - "d + 1 点で多項式が決まる理由"
-      - "x = 0..d のときの O(d) の補間（階乗の逆元）"
-      - "べき乗和・多項式になる DP への応用"
-      - "係数の復元（O(d²)）"
+      - {title: "d + 1 点で多項式が決まる理由", anchor: uniqueness}
+      - {title: "x = 0..d のときの O(d) の補間（階乗の逆元）", anchor: linear-time}
+      - {title: "べき乗和・多項式になる DP への応用", anchor: applications}
+      - {title: "係数の復元（O(d²)）", anchor: coefficients}
     merged_keys: []
     visual: null
     problems:
-      - {id: abc137_f, role: example, summary: "mod p で p 点の値から係数を復元する（ラグランジュ補間など、O(p²)）"}
+      - {id: abc137_f, role: example, representative: true, summary: "素数 p と 0/1 の列 a_0, …, a_{p−1} が与えられるとき、f(i) ≡ a_i (mod p) を満たす p − 1 次以下の多項式 f の係数を求める。", approach: "1 − (x − i)^(p−1) の和、またはラグランジュ補間で O(p²)"}
+    problems_note: "発展の概要なので練習は置かない（abc208_f は手法の分類（タグ）だけの確認）"
     sources: ["06-math-nt §4.7", "06-math-nt §5.7", "06-math-nt §6.6"]
 
 moved:
   - {key: math-notation, to: start, reason: "設計書 §4.2（数学の記法は start の「記法と用語の約束」に統合）。research/06 §4.1 の記法の中身・確認問題・§7.6 の提案は start で使う。§5.1 の問題は abc133_c を proof-patterns、abc165_d を integer-division に移した"}
 dropped: []
 open_issues:
-  - "調和級数の重複：research/06 の harmonic-sum と research/01 の harmonic-series は同じ内容（設計書 §4.2 に決めがない）。basics が harmonic-series を math へ moved にしたので、math の harmonic-sum（素数と約数の章、基礎）の merged_keys に取り込んだ。レベルは research/06 の基礎（abc134_d 926・abc170_d 1033・abc177_e 1057 で現れ始める）にし、research/01 の水の根拠（abc356_e・abc206_e）は応用の節の印にした"
-  - "modint の分担：research/09 の acl-modint（cpp）と math の modint が重なる。案：math は考え方・static と dynamic の選び方・落とし穴・自作の設計を持ち、cpp は解説コードの読み方（using mint・val() で出力する）に絞って相互にリンクする。cpp が acl-modint を ACL のページの節にするなら重複は小さい"
-  - "行列累乗の分担：research/02 の dp-matrix-power（dp）と例題が重なる。math は道具（行列の積と累乗・隣接行列・半環・アフィン変換の合成）、dp は DP の遷移を行列にする状態設計とし、abc204_f・abc305_g・abc256_g は dp 側に残した（dp_r・abc009_4 は両方に出る可能性がある）。research/03 の adjacency-matrix-power は research/03 §7.4 の提案どおり matrix-power の merged_keys に入れた（graph も moved（to: math）にしている）"
-  - "ナビゲーションの小見出し：math は 45 ページあり、research/06 §7.1 と設計書 §2.1 の区分（数学の言葉・整数と mod・素数と約数・GCD と合同式・floor と精度・行列と線形代数・畳み込みと多項式）を YAML のコメントでしか示せない。catalog の形式に章の小見出し（例：各ページの group）を持たせるかを決めてほしい"
-  - "FFT/NTT の仕組みのページ fft-ntt は、設計書 §4.2 の分割で新しく作った id で調査の key はない（arbitrary-mod-convolution を merged_keys に入れた）。使い方のページは調査の key の convolution-ntt を id にした（string の fft-string-matching などが前提に使っているため）。title は「畳み込みの使い方」"
-  - "行列式：research/06 の determinant は「行列式・行列木定理」の1つの key。設計書 §4.2 に従い、math は行列式の概要ページ（determinant）だけを持ち、行列木定理は graph の matrix-tree-theorem（determinant を前提にしている）に任せた"
-  - "掃き出し法のレベル：ABC で必須の最初の問題は abc313_d（1630、青）だけで、ほかは typical90_be（★6）と 2400 以上。research/06 のとおり黄にしたが、青に下げる余地がある"
-  - "proof-patterns は中身が「型の一覧と例題」なので type を thinking にした（field は math）。設計書 §4.2 の「Σ の変形・証明の型（短いページ）」は2ページに分けた。technique にそろえる・1ページにまとめるなら直す"
-  - "練習問題が少ないページ：調査で裏付けの取れた問題が少なく、練習が2問に満たないページがある（mod-pow・modint・exponent-mod・geometric-series-mod・spf-sieve・segmented-sieve・euler-phi・ext-gcd・multiplicative-order・discrete-log・primitive-root・floor-sum・gaussian-elimination・xor-basis。黄のページは力試しで補っている）。research/06 で「タグ」「未確認」の abc340_f（ext-gcd）・agc045_a（xor-basis）・abc305_g・abc204_f（行列累乗）、§2.3.8 の最近の問題（abc469_g の行列累乗、abc471_g の畳み込み、abc473_g・abc462_g の FPS など）は、執筆時に第三者の解説で裏付けてから加える"
-  - "位数・離散対数・原始根は research/06 の案どおり3ページ（いずれも黄、問題は各2〜3問）。薄ければ「位数・原始根・離散対数」の1ページにまとめる案もある。平方剰余（mod-sqrt）は ABC での出題がない問題0の概要ページで、原始根のページの発展の節にする案もある（設計書 §4.1 の「発展は1手法1ページ」に従い単独にした）"
-  - "kind の語彙：Σ の変形は「考察・数え上げ」、基数変換は「整数論」で足りたが、N 進法・整数の平方根などの「整数として正確に計算する」系統をまとめる語はない。今の語彙のままでよいかを確かめてほしい"
+  - "統合を受けた（design-review §3・§4.2、README §6）：dp-matrix-power と dp-doubling → matrix-power（DP の節と kind の DP を足した）、dp-convolution → online-convolution#dp-as-polynomial（kind に DP）、xor-path と cycle-basis-xor → xor-basis#xor-walk、fft-string-matching → convolution-ntt#string-matching、discrete-log・primitive-root・mod-sqrt → multiplicative-order（題名「位数・原始根・離散対数」、平方剰余は発展の節）。ページは 45 → 42。送る側（dp・graph・string）の moved と、相手からの参照（dynamic-dp・dp-speedup-overview・string-automaton-dp・segment-tree-monoids など）は直っていることを確かめた"
+  - "レベルの変更（工程5でユーザーに確かめる）：matrix-power 黄 → 青（abc458_f 1744・abc456_f 1888・abc305_g 1989。design-review §3）、gaussian-elimination 黄 → 青（ABC の根拠 abc313_d 1630・typical90_be ★6 が青で、黄の帯の根拠がない）。D2（abc319 以降の根拠を主に数える）で確かめ直して、geometric-series-mod 水 → 基礎（最近の根拠 abc357_d 970。法が任意の形は水の節）、prime-exponent-vector 水 → 基礎（abc342_d 944・abc254_d 1191。lcm・2 の指数は水の節、黄の節は消して力試しに）、harmonic-sum 基礎 → 水（最近の根拠 abc393_e 1253・abc356_e 1506・abc469_f 1567 がすべて水。design-review §4.2 は基礎を前提に「倍数を回して集める（水）」を受ける形だったので、確かめてほしい）"
+  - "レベルを変えなかったもの（検証スクリプトの「根拠の問題がどれも帯に入らない」はこの3つで、理由は次のとおり）：divisor-count-bound は abc319 以降の ABC が青・黄の応用（abc461_f・abc475_g、力試し）だけだが、arc167_b (1292, 2023-10) を根拠に水のままにした。fps-basics（発展）は abc319 以降の問題が易しい練習 abc321_f だけ（発展の FPS の最近の問題は comb の abc462_g・abc473_g が持つ）。linear-recurrence-fast は abc436_g (2164) が黄の帯にあるが、まとまっていないので発展の概要のまま（続けば黄の technique にする）。ほかに floor-quotient-enum は直接の形 abc230_e (969)・abc296_d (999) が基礎の帯の上端だが、√N で分ける型を本体にして水のままにした（基礎にする案もある）"
+  - "章：proof-patterns を GCD の章の末尾へ移すと「数学の言葉」が1ページになるので integer-division と合わせて「式と整数の基本」にした。「整数と mod」は「mod の計算」に、「floor と精度」は multiplicative-function を受けたので「floor と商」に改めた"
+  - "提案（F・comb）：zeta-mobius-divisor の「倍数を回して集める（水）」の節は harmonic-sum#collect-multiples への導線にし、abc393_e は zeta-mobius-divisor の例題から外す（harmonic-sum の例題・代表問題にした。練習には残してよい）。typical90_bq は mod-pow の例題（N ≤ 10^18 の累乗が本体）にしたので counting-basics では練習にしてほしい（counting-basics に代わりの例題がなければ、mod-pow 側を練習に下げ、例題を arc111_a にする）。probability-dp の related の dp-matrix-power は matrix-power（節なら matrix-power#dp-transition）に。generating-function-counting は fps-basics から外した「母関数の考え方」の節と別名「生成関数」を受ける（abc303_h は fps-basics では練習にした）（2026-10-21：typical90_bq は counting-basics の例題のままにし、mod-pow では練習に下げて例題を arc111_a（代表問題）にした。probability-dp の related は matrix-power#dp-transition にした）"
+  - "外した問題：abc253_h（determinant。research/06 で未確認）、abc236_g（matrix-power。research/06 §7.5 で未確認。research/03 では kmjp の記事で確かめているので、台帳で確認済みになれば力試しに戻せる）。research/06 で「タグ」だけの abc340_f・abc420_g・agc045_a・zone2021_f・abc370_g・abc357_g・abc208_f・abc265_h は入れていない。abc451_g は research/06 では未確認だが、research/00 §2.3.8 と research/03 で裏付けがあるので xor-basis の練習に入れた。research/06 で「タグ」だった dp_r・abc204_f（research/02）、abc189_e（research/01・08）、abc305_g（research/08）、abc192_d（research/00）は、ほかの調査に第三者の記事の裏付けがあるので残した"
+  - "最近の問題（research/00 §2.3.8）を足した：abc471_e（sigma-manipulation）、abc460_e（digit-and-mod）、abc475_d（sieve-eratosthenes）、abc461_f・abc475_g（divisor-count-bound）、abc469_f・abc393_e（harmonic-sum）、abc458_f・abc456_f（matrix-power）、abc451_g（xor-basis）、abc471_g（convolution-ntt）。§2.3.8 は手法の分類しかないので、summary を「（執筆時に確かめる）」にしたものがある"
+  - "abc319 以降の問題がない水・青のページ（exponent-mod・ext-gcd・gcd-properties・crt・floor-quotient-enum）と練習が2問未満のページは problems_note に書いた。工程8b の前の「問題の補充」で探す"
+  - "modint の分担（第1版から）：math は考え方・static と dynamic の選び方・落とし穴・自作の設計を持ち、cpp の acl-reading は解説コードの読み方（using mint・val() で出力する）に絞って相互にリンクする（cpp 側の重なる別名はすでに外されている）。modint は道具のページなので例題を置かなかった"
+  - "euler-phi と multiplicative-order は abc212_g・abc222_g を共有する。例題は abc212_g を euler-phi、abc222_g を multiplicative-order に分け、相手のページでは練習にした"
+  - "prime-factorization の Pollard's rho（発展）の節は miller-rabin（大きな数の素数判定と素因数分解）に任せ、使い分けの節には導線だけを残した。harmonic-sum の「gcd を固定して倍数から数える（青）」の節は comb の divisor-inclusion-exclusion と重なるので消し、related で導く。sigma-manipulation は式の規則に絞り、寄与の考え方は related の contribution へ"

@@ -8,9 +8,9 @@
 | --- | --- | --- | --- |
 | 1 | 質問 | 完了（2026-10-21） | [decisions.md](decisions.md) |
 | 2 | 調査 | 完了（2026-10-21） | [research/](research/)（手引きは [research/README.md](research/README.md)） |
-| 3 | 設計 | 進行中 | design.md（予定） |
-| 4 | 設計の見直し | 未着手 | 別のサブエージェントによるレビュー |
-| 5 | 決定の提示 | 未着手 | ユーザーの確認 |
+| 3 | 設計 | 初版完了（2026-10-21） | [design.md](design.md)・[catalog/](catalog/) |
+| 4 | 設計の見直し | 完了（2026-10-21） | planning/review/（見直し3本）・[design-review.md](design-review.md)（対応）・設計書第2版・目次第2版 |
+| 5 | 決定の提示 | 進行中 | ユーザーの確認 |
 | 6 | 土台作り | 未着手 | |
 | 7 | 試作 | 未着手 | |
 | 8 | 本制作 | 未着手 | |
@@ -34,11 +34,18 @@
 
 9本とも完了（2026-10-21）。目次の初版は15分野・367ページ。`tools/check_catalog.py` でエラー0・警告0・未処理の調査の key 0。章の区切り（コメント）を `chapter` の項目に変換した。各ファイルの `open_issues` に担当が決めきれなかった点がある。
 
+## 工程4：設計の見直し（完了）
+
+- 見直し3本（planning/review/）の指摘76件と照合112項目への対応を [design-review.md](design-review.md) に決め、設計書を第2版にした
+- 目次（catalog）を第2版の形式に直した：353ページ（基礎100・水79・青52・黄37・発展51・レベルなし34）。統合で消えた id 21・新しい id 7・レベルの変更23（hub への変更4を含む）。`tools/check_catalog.py`（第2版）でエラー0、警告35（すべて「根拠の問題が帯の外」で、理由を level_evidence に記載）
+- 問題の台帳 `data/problems.yaml`：1178問すべて裏付けを確認済み（`tools/build_ledger.py --check` で食い違い0）。**台帳は手で status・summary・note を直したので、`build_ledger.py` で作り直さない**（`--check` だけ使う）
+- 最近の ABC のデータ `data/recent-abc.yaml`（abc451〜480 の D〜G 120問中118問を手法のページに対応）から frequency を付け直した（A 76・B 153・C 72。modint を A、interval-scheduling・median-absolute を B に手で直した）
+- 執筆時に扱う残り：abc461_e・abc466_d（行・列ごとに最後の操作を持つ）と abc472_f（多角形の重心）に対応する節がない。abc465_g は手法が未確認。z-algorithm・rolling-hash・mo-algorithm・binary-trie・lis・euler-tour・tree-edge-contribution など、最近の根拠が帯と少しずれるページは level_evidence に理由を書いて帯を据え置いた
+
 ## 次にやること
 
-1. 工程4：別のサブエージェントに設計書と目次を批判的に見直してもらう（観点を分けて3本）。各担当の open_issues と、メインが集めた論点も渡す
-2. 見直しの指摘への対応を決めて直す（planning/design-review.md に記録）
-3. 工程5：決定の一覧をユーザーに示して確認を得る
+1. 工程5：決定の一覧（設計書 §12）と、ユーザーに確かめる点（design-review §6）を示して確認を得る
+2. 確認を得たら工程6（土台作り）。最初に CI のコンテナで snippets を1本通す、記録用スキル（9a）を作る
 
 ## ユーザーにお願いしていること
 

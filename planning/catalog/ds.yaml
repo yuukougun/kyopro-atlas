@@ -1,7 +1,8 @@
-# データ構造（ds）の目次。規則は planning/design.md §3〜§5 と planning/catalog/README.md
-# 章立ては research/05 §7.1 の6つ（標準コンテナの応用・スタックとキュー・Union-Find・区間クエリ・
-# クエリ処理の工夫・発展的なデータ構造）。形式に節を表す項目がないので、章の区切りはコメントで示す
-# verify は Library Checker の問題名（設計書 §3.3 の front matter の項目。research/05 §7.5）
+# データ構造（ds）の目次（第2版）。規則は planning/catalog/README.md（第2版）と planning/design-review.md
+# 章は research/05 §7.1 の6つ（標準コンテナの応用・スタックとキュー・Union-Find・区間クエリ・クエリ処理の工夫・
+# そのほかのデータ構造）。セグメント木の6ページは「基本（水）／セグメント木上の二分探索（水）／値を添字にする（水）／
+# 遅延セグメント木（水）／モノイドの設計（青）／遅延セグメント木の載せ方の型（青）」
+# verify は Library Checker の問題名（research/05 §7.5）
 field: ds
 pages:
 
@@ -10,225 +11,237 @@ pages:
   - id: stl-containers
     chapter: 標準コンテナの応用
     title: STL コンテナの使い分け
-    aliases: [STL, 標準ライブラリのコンテナ, コンテナの計算量, vector, deque, unordered_map]
+    aliases: [STL, STL containers, 標準ライブラリのコンテナ, コンテナの計算量]
     type: technique
     level: 基礎
     level_evidence: "容器の使い分けは灰〜緑で必須（abc253_c 518・abc166_e 1062）。上位の手法の部品なので基礎の短いページにする"
     kind: [データ構造, 実装・C++]
     prerequisites: []
-    related: [ordered-set, priority-queue, stack-techniques, prefix-sum-counting, cpp-container-idioms, cpp-iterators]
-    summary: "どの操作を速くしたいかで vector・deque・set・map・priority_queue・unordered_map を選ぶ。各コンテナの得意・不得意と、multiset の erase や map の [] などの落とし穴をまとめる。"
+    related: [ordered-set, priority-queue, stack-techniques, prefix-sum-counting, cpp-container-idioms]
+    summary: "どの操作を速くしたいかで vector・deque・set・map・priority_queue・unordered_map を選ぶ。multiset の erase(x) は同じ値を全部消し、map の [] は要素を作る。"
     signs:
-      - {type: phrase, text: "追加・削除・検索・最小値の取り出しが混ざり、どの操作を速くするかで道具が決まる"}
-      - {type: phrase, text: "式を i 側と j 側に分け、片側の値を数えながら走査して組の数を数える"}
-      - {type: constraint, text: "N, Q ≤ 2×10^5 で、1 回の操作を O(log N) 以下にしたい"}
+      - {type: phrase, text: "要素の追加・削除と、検索・最小値の取り出しのクエリが混ざる"}
+      - {type: shape, text: "j − i = A_i + A_j のように、i だけの式と j だけの式が等しい組 (i, j) を数える"}
+      - {type: constraint, text: "N, Q ≤ 2×10^5 で、追加・削除・検索のクエリが来る"}
     acl: []
-    frequency: A
-    sections:
-      - "操作 × コンテナの計算量の早見表"
-      - "選び方（何を速くしたいか）"
-      - "map で数えながら走査する型（→ 累積和と連想配列で区間を数える）"
-      - "落とし穴（multiset の erase(x) は全部消す・set に std::lower_bound は O(N)・map の [] は要素を作る・空の size() − 1・イテレータの無効化・unordered_map のハック）"
-      - "C++ の書き方は C++ 章へ"
-    merged_keys: []
-    visual: "静的な表：操作 × コンテナの計算量"
-    problems:
-      - {id: abc253_c, role: example, summary: "多重集合への追加・個数を指定した削除と、最大値 − 最小値の出力を繰り返す"}
-      - {id: abc166_e, role: practice, summary: "j − i = A_i + A_j を満たす組の数。式を i 側と j 側に分け、片側の値を map で数える"}
-      - {id: tessoku_book_bb, role: practice, summary: "名前ごとの点数の登録と参照のクエリを map で処理する"}
-      - {id: tessoku_book_bc, role: practice, summary: "整数の追加・削除と「x 以上で最小の値」のクエリを set で処理する"}
-    sources: ["05-ds §4.A（stl-containers）", "05-ds §5（stl-containers）", "05-ds §6.4"]
     verify: [associative_array]
+    frequency: A
+    frequency_evidence: "recent 0・前提として 72 ページに届く（直接 5）・古い ABC 2 問"
+    sections:
+      - {title: "操作とコンテナの計算量の早見表", anchor: complexity-table}
+      - {title: "選び方（何を速くしたいか）", anchor: choosing}
+      - {title: "map で数えながら走査する（→ 累積和と連想配列で区間を数える）", anchor: counting-map}
+      - {title: "落とし穴（multiset の erase(x) は全部消す・set に std::lower_bound は O(N)・map の [] は要素を作る・空の size() − 1・イテレータの無効化・unordered_map のハック）", anchor: pitfalls}
+    merged_keys: []
+    visual: {kind: static, priority: 2, text: "操作 × コンテナの計算量の表"}
+    problems:
+      - {id: abc253_c, role: example, representative: true, summary: "多重集合への追加・個数を指定した削除と、最大値 − 最小値の出力を繰り返す。", approach: "multiset でイテレータを使って 1 個ずつ消す（ヒープ 2 本と個数の表で遅延削除してもよい）"}
+      - {id: abc166_e, role: practice, summary: "j − i = A_i + A_j を満たす組 (i, j) の数を求める。", approach: "i + A_i = j − A_j に分け、片側の値の出現回数を map で数えながら走査する"}
+      - {id: tessoku_book_bb, role: practice, summary: "名前ごとの点数の登録と参照のクエリを処理する。", approach: "map<string, int>"}
+      - {id: tessoku_book_bc, role: practice, summary: "整数の追加・削除と「x 以上で最小の値」のクエリを処理する。", approach: "set の insert・erase・lower_bound"}
+    sources: ["05-ds §4.A（stl-containers）", "05-ds §5（stl-containers）", "05-ds §6.4"]
 
   - id: ordered-set
     chapter: 標準コンテナの応用
-    title: set・multiset・map の応用（前後の要素・mex・パレート境界）
-    aliases: [set, multiset, map, 順序付き集合, lower_bound, 前後の要素, 番兵]
+    title: set・multiset・map の応用
+    aliases: [順序付き集合, ordered set, set::lower_bound, 前後の要素, 番兵, パレート境界]
     type: technique
     level: 基礎
-    level_evidence: "lower_bound で前後を取る基本は緑（abc217_d 802・abc370_d 1088・abc241_d 1177）。応用は水〜黄（abc245_e 1571・abc140_e 1873・abc308_g 2008）で、節にレベルの印を付ける"
+    level_evidence: "lower_bound で前後を取る基本は緑（abc217_d 802・abc370_d 1088・abc241_d 1177）。パレート境界・使える箱の multiset は水の節（abc245_e 1571）、ソート順で隣り合う組は青の節（abc140_e 1873）。最小 XOR の組（abc308_g 2008）は binary-trie へ移した"
     kind: [データ構造]
     prerequisites: [stl-containers]
-    related: [interval-set, kth-element, priority-queue, top-k-multiset, binary-trie, mex, hashing-for-sets, binary-search, cpp-iterators]
-    summary: "set・multiset・map の lower_bound で「x 以上の最小」「x 未満の最大」を O(log N) で求め、要素の追加・削除と組み合わせる。番兵、mex の管理、行・列ごとの set、パレート境界などの型を扱う。"
+    related: [interval-set, kth-element, priority-queue, top-k-multiset, binary-trie, mex, hashing-for-sets, binary-search, cpp-container-idioms#iterators]
+    summary: "set・multiset・map の lower_bound で「x 以上の最小」「x 未満の最大」を O(log N) で求め、要素の追加・削除と組み合わせる。番兵で端の場合分けを消し、mex や同じ行・列の次の要素も同じ形で求める。"
     signs:
       - {type: phrase, text: "x 以上で最小の値・最も近い値を、追加・削除しながら何度も答える"}
       - {type: phrase, text: "まだ使われていない最小の値（mex）を更新のたびに答える"}
       - {type: phrase, text: "同じ行・同じ列で次にある壁や家を見つけて壊す"}
       - {type: constraint, text: "値が 10^9 まであり、配列の添字にできない"}
     acl: []
-    frequency: A
-    sections:
-      - "前後の要素（lower_bound とその 1 つ前。番兵で端の場合分けを消す）"
-      - "k 番目付近（イテレータを k 歩動かす。k が小さいときだけ）"
-      - "まだ出ていない値の set で mex を管理する（→ 題材別の mex）"
-      - "行ごと・列ごとの set（グリッドで次の壁を探し、両方から消す）（水）"
-      - "パレート境界を map で持つ（支配される点を消す。ならし O(log N)）（水）"
-      - "ソート順で隣り合う組の集合（2 番目に大きい値の寄与・最小の XOR）（青〜黄）"
-      - "落とし穴（multiset の erase・end と begin の前の参照・イテレータの無効化）"
-    merged_keys: []
-    visual: "静的な図：数直線上の set の要素と、lower_bound が指す位置・その 1 つ前（prev）を矢印で示す"
-    problems:
-      - {id: abc217_d, role: example, summary: "木材の切断と、点 x を含む木片の長さの質問。切れ目を set に入れ（番兵 0 と L）、前後の切れ目を探す"}
-      - {id: abc330_e, role: practice, summary: "1 点を書き換えるたびに数列の mex を答える。個数 0 の値を set で持ち、最小を取る"}
-      - {id: abc370_d, role: practice, summary: "爆弾で上下左右の最も近い壁を壊すシミュレーション。行ごと・列ごとの set から探して両方から消す"}
-      - {id: abc385_d, role: practice, summary: "軸に平行に動いて通過した家の数と最終位置。x ごと・y ごとの set を走査し、見つけた家を両方から消す"}
-      - {id: abc241_d, role: practice, summary: "数の追加と「x 以下で大きい方から k 番目」「x 以上で小さい方から k 番目」の質問（k ≤ 5）"}
-      - {id: abc245_e, role: practice, summary: "チョコをすべて縦横とも収まる別々の箱に入れられるか。大きい順に処理し、使える箱の幅を multiset で持つ"}
-      - {id: abc140_e, role: challenge, summary: "全区間の 2 番目に大きい値の総和。大きい順に位置を set に入れ、左右それぞれ 2 つ先の位置から寄与を数える"}
-      - {id: abc308_g, role: challenge, summary: "整数の追加・削除のたびに、2 要素の XOR の最小値を答える。ソート順で隣り合う組の XOR を multiset で持つ"}
-    sources: ["05-ds §4.A（ordered-set）", "05-ds §5（ordered-set）", "05-ds 付録 A", "00-curriculum §4.2（mex）"]
     verify: [predecessor_problem, double_ended_priority_queue]
+    frequency: A
+    frequency_evidence: "recent 2（abc466_f・abc475_e）・前提として 8 ページに届く（直接 6）・古い ABC 8 問"
+    sections:
+      - {title: "前後の要素（lower_bound とその 1 つ前。番兵で端の場合分けを消す）", anchor: neighbors}
+      - {title: "K 番目付近（イテレータを K 歩動かす。K が小さいときだけ）", anchor: near-kth}
+      - {title: "まだ出ていない値の set で mex を管理する（→ 題材別の mex）", anchor: mex}
+      - {title: "行ごと・列ごとの set（グリッドで次の壁を探し、両方から消す）", anchor: rows-and-columns, level: 水}
+      - {title: "パレート境界を map で持つ（支配される点を消す。ならし O(log N)）", anchor: pareto, level: 水}
+      - {title: "ソート順で隣り合う組の集合（2 番目に大きい値の寄与。最小 XOR の組は Binary Trie のページ）", anchor: adjacent-pairs, level: 青}
+      - {title: "落とし穴（multiset の erase・end と begin の前の参照・イテレータの無効化）", anchor: pitfalls}
+    merged_keys: []
+    visual: {kind: static, priority: 2, text: "数直線上の set の要素と、lower_bound が指す位置・その 1 つ前を矢印で示す"}
+    problems:
+      - {id: abc217_d, role: example, representative: true, summary: "長さ L の木材の切断と、点 x を含む木片の長さの質問を処理する。", approach: "切れ目を set に入れ（番兵 0 と L）、lower_bound で前後の切れ目を探す"}
+      - {id: abc330_e, role: practice, summary: "1 点を書き換えるたびに数列の mex を答える。", approach: "個数 0 の値（N 以下）を set で持ち、最小を取る"}
+      - {id: abc370_d, role: practice, summary: "爆弾で上下左右の最も近い壁を壊していくシミュレーションの後に残る壁の数を求める。", approach: "行ごと・列ごとの set を lower_bound で探し、見つけた壁を両方から消す"}
+      - {id: abc385_d, role: practice, summary: "軸に平行に移動したときの最終位置と、通過した家の数を求める。", approach: "x ごと・y ごとの set を lower_bound で走査し、見つけた家を両方から消す"}
+      - {id: abc241_d, role: practice, summary: "数の追加と「x 以下で大きい方から k 番目」「x 以上で小さい方から k 番目」の質問を処理する（k ≤ 5）。", approach: "multiset の lower_bound からイテレータを k 歩動かす"}
+      - {id: abc245_e, role: practice, summary: "チョコレートをすべて、縦横とも収まる別々の箱に入れられるかを判定する。", approach: "縦の大きい順に処理し、使える箱の横幅を multiset に入れて lower_bound で最小のものを使う"}
+      - {id: abc140_e, role: challenge, summary: "すべての区間について 2 番目に大きい値を求め、その総和を答える。", approach: "大きい順に位置を set に入れ、左右それぞれ 2 つ先の位置から寄与を数える"}
+    sources: ["05-ds §4.A（ordered-set）", "05-ds §5（ordered-set）", "05-ds 付録 A", "00-curriculum §4.2（mex）"]
 
   - id: priority-queue
     chapter: 標準コンテナの応用
-    title: 優先度付きキュー（ヒープ）
-    aliases: [priority_queue, ヒープ, heap, 二分ヒープ, 削除できるヒープ, 遅延削除, erasable heap]
+    title: 優先度付きキュー
+    aliases: [priority_queue, ヒープ, heap, 二分ヒープ, binary heap, 削除できるヒープ, 遅延削除, erasable heap]
     type: technique
     level: 水
-    level_evidence: "容器としては茶（abc234_d 503）。上位 K 個の列挙・遅延削除が水で必須（abc123_d 1489・abc170_e 1502）、青まで続く（abc116_d 1712・abc214_e 1835）。設計書 §4.3 で水と決定（容器としての使い方は基礎の節）"
+    level_evidence: "容器としては茶（abc234_d 503）。上位 K 個の列挙・遅延削除が水で必須（abc123_d 1489・abc170_e 1502・abc391_f 1554、2025）、青まで続く（abc116_d 1712・abc214_e 1835）。設計書 §4.3 で水"
     kind: [データ構造, 貪欲]
     prerequisites: [stl-containers]
-    related: [greedy-priority-queue, k-best-enumeration, top-k-multiset, ordered-set, global-offset, dijkstra, advanced-ds-catalog]
-    summary: "最大（最小）の要素の取り出しと追加を O(log N) で行う二分ヒープ。ソートと組む貪欲・上位 K 個の列挙・接頭辞の K 番目に使い、任意の要素の削除は「削除予定のヒープ」で遅れて行う。"
+    related: [greedy-priority-queue, kth-value, top-k-multiset, ordered-set, global-offset, dijkstra, cpp-comparators, advanced-ds-catalog]
+    summary: "最大（最小）の要素の取り出しと追加を O(log N) で行う。ソートと組む貪欲・上位 K 個の列挙・接頭辞の K 番目に使い、任意の要素の削除は削除予定のヒープで遅らせて行う。"
     signs:
       - {type: phrase, text: "毎回いちばん大きい（小さい）ものを取り出し、新しい候補を入れる"}
       - {type: phrase, text: "接頭辞ごとに K 番目に大きい値を答える"}
       - {type: phrase, text: "グループ間の移動のたびに、各グループの最大値のうちの最小値を答える"}
       - {type: constraint, text: "追加と取り出しが合わせて 2×10^5 回程度"}
     acl: []
-    frequency: A
+    verify: []
+    frequency: B
+    frequency_evidence: "recent 1（abc471_d）・前提として 3 ページに届く（直接 2）・古い ABC 7 問"
     sections:
-      - "容器としての使い方（最大・最小の向き・greater<>・pair の比較順）（基礎）"
-      - "二分ヒープの仕組み（保つ性質「親 ≤ 子」・push で上げる・pop で下げる・heapify は O(N)）"
-      - "使い方の型（ソートと組む貪欲 → 優先度付きキューを使う貪欲、上位 K 個の列挙 → K 番目までを取り出す、大きさ K のヒープで接頭辞の K 番目）"
-      - "全体への加算と組む（入れるときに引き、出すときに足す）"
-      - "削除できるヒープ（遅延削除：削除予定のヒープの top と一致したら両方から捨てる）"
-      - "priority_queue と multiset の使い分け（任意の削除・両端・前後の要素が要るなら multiset）"
-      - "落とし穴（向きの取り違え・古いエントリを捨て忘れる・空のときの top）"
+      - {title: "何ができるか（push・top・pop。最小を取り出す向きと pair の比較順。書き方は C++ 章）", anchor: what-it-does}
+      - {title: "二分ヒープの仕組み（保つ性質「親 ≤ 子」・push で上げる・pop で下げる・heapify は O(N)）", anchor: binary-heap}
+      - {title: "使い方の型（ソートと組む貪欲・上位 K 個の列挙・大きさ K のヒープで接頭辞の K 番目）", anchor: patterns}
+      - {title: "全体への加算と組む（入れるときに引き、出すときに足す）", anchor: with-offset}
+      - {title: "削除できるヒープ（遅延削除：削除予定のヒープの top と一致したら両方から捨てる）", anchor: lazy-deletion}
+      - {title: "priority_queue と multiset の使い分け（任意の削除・両端・前後の要素が要るなら multiset）", anchor: vs-multiset}
+      - {title: "落とし穴（向きの取り違え・古いエントリを捨て忘れる・空のときの top）", anchor: pitfalls}
     merged_keys: [lazy-deletion]
-    visual: "静的な図：二分ヒープの配列と木の対応、push で上げる・pop で下げる経路。本体と削除予定のヒープを並べた図"
+    visual: {kind: static, priority: 2, text: "二分ヒープの配列と木の対応、push で上げる・pop で下げる経路。本体と削除予定のヒープを並べた図"}
     problems:
-      - {id: abc234_d, role: example, summary: "接頭辞ごとに K 番目に大きい値を答える。大きさ K の最小ヒープを保ち、top が答え"}
-      - {id: abc123_d, role: example, summary: "3 つの数列から 1 つずつ選んだ和の上位 K 個。添字の組をヒープで広げ、重複を set で除く"}
-      - {id: abc170_e, role: example, summary: "転園のたびに、各園の最強レートのうちの最小値を答える。ヒープなら遅延削除（multiset でもよい）"}
-      - {id: abc217_e, role: practice, summary: "末尾追加・先頭取り出し・全体ソートのクエリ。ソート済みの部分を最小ヒープ、後から来た部分を queue で持つ"}
-      - {id: abc116_d, role: practice, summary: "種類数のボーナスつきで K 個選ぶ満足度の最大化。入れ替えの候補をヒープで持ち、種類数を変えながら差分を更新する"}
-      - {id: abc214_e, role: practice, summary: "各ボールを区間 [L, R] の別々の箱に入れられるか。L の順に処理し、R の小さいものから置く"}
-    sources: ["05-ds §4.A（priority-queue・lazy-deletion）", "05-ds §5（priority-queue・lazy-deletion）", "05-ds 付録 A", "01-basics §4.H（greedy-priority-queue）"]
+      - {id: abc234_d, role: example, summary: "数列の接頭辞ごとに、K 番目に大きい値を答える。", approach: "大きさ K の最小ヒープを保ち、top が答え"}
+      - {id: abc123_d, role: example, representative: true, summary: "3 つの数列から 1 つずつ選んだ和のうち、大きい方から K 個を出力する。", approach: "降順にソートし、添字の組を最大ヒープで広げ、重複は set で除く"}
+      - {id: abc170_e, role: example, summary: "幼児の転園のたびに、各幼稚園の最強レートのうちの最小値を答える。", approach: "園ごとの multiset と「各園の最大値」の multiset。ヒープなら遅延削除"}
+      - {id: abc471_d, role: practice, summary: "（執筆時に確かめる）", approach: "優先度付きキュー（research/00 §2.3.8 の分類）"}
+      - {id: abc217_e, role: practice, summary: "末尾への追加・先頭の取り出し・全体のソートのクエリを処理する。", approach: "ソート済みの先頭部分を最小ヒープ、後から来た部分を queue で持つ"}
+      - {id: abc391_f, role: practice, summary: "3 つの数列から 1 つずつ選んだ組の評価値のうち、K 番目に大きいものを求める。", approach: "降順ソートで単調にし、最大の組から隣の添字をヒープで広げる（訪問済みを管理する）"}
+      - {id: abc116_d, role: practice, summary: "種類数のボーナスつきで K 個の寿司を選ぶときの満足度の最大値を求める。", approach: "入れ替えの候補をヒープで持ち、種類数を変えながら差分を更新する"}
+      - {id: abc214_e, role: practice, summary: "各ボールを区間 [L, R] の中の別々の箱に入れられるかを判定する。", approach: "L の順に処理し、入れられるボールの R を最小ヒープで持って R の小さいものから置く"}
+    sources: ["05-ds §4.A（priority-queue・lazy-deletion）", "05-ds §5（priority-queue・lazy-deletion）", "05-ds 付録 A（abc391_f）", "00-curriculum §2.3.8（abc471_d）", "01-basics §4.H（greedy-priority-queue）"]
 
   - id: top-k-multiset
     chapter: 標準コンテナの応用
-    title: 上位 K 個の和と中央値の管理（2 つの multiset）
-    aliases: [2つのヒープ, 2つのmultiset, 中央値の管理, 上位K個の和, 下位K個の和, Priority Sum Structure]
+    title: 上位 K 個の和と中央値の管理
+    aliases: [2 つの multiset, 2 つのヒープ, two heaps, 下位 K 個の和, 動的な中央値, running median, Priority Sum Structure]
     type: technique
     level: 水
-    level_evidence: "abc306_e（1268）・abc281_e（1334）で必須。易しい形は abc458_d（450、2 つのヒープで中央値）、中央値の発展は abc127_f（2003）"
+    level_evidence: "abc306_e（1268）・abc281_e（1334）で必須。易しい形は abc458_d（450、2026、2 つのヒープで中央値）、応用は abc127_f（2003）。abc319 以降で水の帯の問題が見つからないので古い根拠を使った（D2）"
     kind: [データ構造]
     prerequisites: [ordered-set, priority-queue]
-    related: [segtree-on-values, kth-element, median-absolute, slope-trick]
-    summary: "多重集合を「小さい方の K 個」と「残り」の 2 つの multiset（ヒープ）に分けて持ち、和を差分で更新する。追加・削除・更新のたびに上位（下位）K 個の和や中央値を O(log N) で答えられる。"
+    related: [segment-tree-on-values, kth-element, median-absolute, slope-trick, greedy-priority-queue]
+    summary: "追加・削除のたびに上位（下位）K 個の和や中央値を O(log N) で答える。小さい方の K 個と残りを 2 つの multiset（ヒープ）に分けて持ち、境界の 1 個を移して分け方を保つ。"
     signs:
       - {type: phrase, text: "1 点を更新するたびに、大きい方から K 個の和を答える"}
       - {type: phrase, text: "幅 M の窓をずらしながら、小さい方から K 個の和を答える"}
       - {type: phrase, text: "数を追加しながら中央値（|x − a_i| の和を最小にする x）を答える"}
+      - {type: constraint, text: "Q ≤ 2×10^5 で、更新のたびに上位 K 個の和や中央値を答える"}
     acl: []
+    verify: []
     frequency: B
+    frequency_evidence: "recent 1（abc458_d）・前提として 1 ページに届く（直接 1）・古い ABC 3 問"
     sections:
-      - "2 つに分けて持つ（L＝小さい K 個、R＝残り。L の和を持つ）"
-      - "保つ性質（L の個数が K・L の最大 ≤ R の最小）と、境界の 1 個を移して回復する手順"
-      - "削除・更新（どちらにあるかを見て消してから回復する）"
-      - "中央値（個数の差を 1 以内に保つ。削除がなければヒープ 2 本）と |x − a_i| の和"
-      - "値の BIT・セグ木で書く別解（→ 値を添字にする BIT・セグ木）"
-      - "slope trick への入口（黄・発展 → DP の章）"
-      - "落とし穴（同じ値の削除先・multiset の erase・和の更新漏れ）"
+      - {title: "2 つに分けて持つ（L＝小さい K 個、R＝残り。L の和を持つ）", anchor: two-sets}
+      - {title: "保つ性質（L の個数が K・L の最大 ≤ R の最小）と、境界の 1 個を移して回復する手順", anchor: invariants}
+      - {title: "削除・更新（どちらにあるかを見て消してから回復する）", anchor: erase-update}
+      - {title: "中央値を保つ（個数の差を 1 以内に。削除がなければヒープ 2 本）と Σ|x − a_i| の更新", anchor: median}
+      - {title: "値を添字にした BIT・セグメント木で書く方法（→ 値を添字にする BIT・セグメント木）", anchor: by-index}
+      - {title: "落とし穴（同じ値の削除先・multiset の erase・和の更新漏れ）", anchor: pitfalls}
+      - {title: "|x − a| + b を足していく関数の最小値（中央値の更新の応用。slope trick の入口）", anchor: absolute-sum-function, level: 黄}
     merged_keys: [top-k-sum]
-    visual: "静的な図：数直線上の要素を L（小さい K 個）と R に色分けし、追加・削除で境界の 1 個が移る様子"
+    visual: {kind: static, priority: 2, text: "数直線上の要素を L（小さい K 個）と R に色分けし、追加・削除で境界の 1 個が移る様子"}
     problems:
-      - {id: abc306_e, role: example, summary: "1 点更新のたびに大きい方から K 個の和を答える。上位 K 個と残りを 2 つの multiset で持ち、境界を入れ替える"}
-      - {id: abc281_e, role: example, summary: "長さ M の各窓で、小さい方から K 個の和を答える"}
-      - {id: abc458_d, role: practice, summary: "数の追加と中央値の質問。小さい半分と大きい半分を 2 つのヒープで持つ"}
-      - {id: arc074_b, role: practice, summary: "3N 個から N 個を除き、前半の和 − 後半の和を最大化する。境界ごとに前側の上位 N 個の和と後側の下位 N 個の和をヒープで求める"}
-      - {id: abc127_f, role: challenge, summary: "|x − a| + b を足していく関数の最小値と最小点を答える。中央値を左右 2 つのヒープで持つ"}
-    sources: ["05-ds §4.A（top-k-multiset）", "05-ds §5（top-k-multiset）", "00-curriculum §4.2（上位 K 個の和の管理）", "00-curriculum §5.1"]
+      - {id: abc306_e, role: example, representative: true, summary: "数列の 1 点更新のたびに、大きい方から K 個の和を答える。", approach: "上位 K 個と残りを 2 つの multiset で持ち、境界の 1 個を入れ替えて和を差分で更新する"}
+      - {id: abc458_d, role: practice, summary: "（執筆時に確かめる）", approach: "小さい半分と大きい半分を 2 つのヒープで持ち、中央値を答える（research/00 §2.3.8 の分類）"}
+      - {id: abc281_e, role: practice, summary: "長さ M の各窓で、小さい方から K 個の和を答える。", approach: "窓をずらしながら下位 K 個と残りの 2 つの multiset を調整する（例題は値を添字にする方法）"}
+      - {id: arc074_b, role: practice, summary: "長さ 3N の数列から N 個を除き、残りの前半 N 個の和 − 後半 N 個の和を最大にする。", approach: "境界ごとに、前側の上位 N 個の和と後側の下位 N 個の和をヒープで前計算する"}
+      - {id: abc127_f, role: challenge, summary: "関数に |x − a| + b を足す更新と、関数の最小値と最小点の質問を処理する。", approach: "中央値を左右 2 つのヒープで保つ（左の最大が中央値）"}
+    sources: ["05-ds §4.A（top-k-multiset）", "05-ds §5（top-k-multiset）", "01-basics §4.D（median-absolute の中央値の更新）", "00-curriculum §4.2（上位 K 個の和の管理）", "00-curriculum §5.1"]
 
   - id: interval-set
     chapter: 標準コンテナの応用
     title: 区間を set で管理する
-    aliases: [区間をsetで管理, IntervalSet, RangeSet, ODT, 珂朵莉树, 互いに素な区間の集合]
+    aliases: [IntervalSet, RangeSet, ODT, Chtholly Tree, 珂朵莉树, 互いに素な区間の集合]
     type: technique
     level: 水
     level_evidence: "単純な塗り・被覆は緑〜水（abc435_e 982・abc330_e 1004・abc380_e 1230）。値つきの区間の分割・統合は黄〜発展（abc430_g 2371・abc255_h 2430・abc256_h 2531）"
     kind: [データ構造]
     prerequisites: [ordered-set]
-    related: [union-find-applications, lazy-segment-tree, segment-tree-beats, amortized-analysis, coordinate-compression]
-    summary: "互いに重ならない区間を左端をキーにした set・map で持ち、点を含む区間の検索・区間の追加と併合・区間への代入（分割してから中を消す）を、ならし O(log N) で行う。座標が 10^9 でも使える。"
+    related: [union-find-applications, lazy-segment-tree, segment-tree-beats, complexity-estimation, coordinate-compression]
+    summary: "互いに重ならない区間を左端をキーにした set・map で持ち、点を含む区間の検索・区間の追加と併合・区間への代入を、ならし O(log N) で行う。座標が 10^9 でも使える。"
     signs:
       - {type: phrase, text: "区間を塗るたびに、塗られたマスの数や色ごとのマスの数を答える"}
-      - {type: phrase, text: "同じ値が連続する塊ごとに考える"}
+      - {type: phrase, text: "同じ色でつながった区間をまとめて塗り替える"}
       - {type: phrase, text: "点 x が覆われているか・x を含む区間はどこか"}
-      - {type: constraint, text: "座標が 10^9 まであり、配列や座標圧縮が使いにくい"}
+      - {type: constraint, text: "座標が 10^9 まで（配列の添字にできない）"}
     acl: []
+    verify: []
     frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 6 問"
     sections:
-      - "持ち方（左端をキーにした map・両端の番兵の区間）"
-      - "x を含む区間の検索（upper_bound の 1 つ前）"
-      - "split(x)（区間の分割）を先に書き、代入・削除はその組み合わせで書く"
-      - "なぜならしで速いか（新しくできる区間は O(1) 個、消える区間は一度だけ）と、走査だけの操作が混ざると崩れる理由"
-      - "応用（mex・塗り分け・和集合の長さ・値ごとの合計の差分更新）"
-      - "値つきの区間の分割・統合（黄）"
-      - "使い分け（飛ばすだけなら次の空きへ飛ぶ Union-Find、座標が小さく区間和も要るなら遅延セグ木）"
+      - {title: "持ち方（左端をキーにした map・両端の番兵の区間）", anchor: representation}
+      - {title: "x を含む区間の検索（upper_bound の 1 つ前）", anchor: find}
+      - {title: "split(x)（区間の分割）を先に書き、代入・削除はその組み合わせで書く", anchor: split}
+      - {title: "なぜならしで速いか（新しくできる区間は O(1) 個、消える区間は一度だけ）と、走査だけの操作が混ざると崩れる理由", anchor: amortized}
+      - {title: "応用（mex・塗り分け・和集合の長さ・値ごとの合計の差分更新）", anchor: applications}
+      - {title: "使い分け（飛ばすだけなら次の空きへ飛ぶ Union-Find、座標が小さく区間和も要るなら遅延セグメント木）", anchor: choosing}
+      - {title: "値つきの区間の分割・統合", anchor: valued-intervals, level: 黄}
     merged_keys: []
-    visual: "静的な図：数直線上の区間の帯が、代入の前後で分割・併合される様子"
+    visual: {kind: static, priority: 2, text: "数直線上の区間の帯が、代入の前後で分割・併合される様子"}
     problems:
-      - {id: abc435_e, role: example, summary: "区間を黒く塗るたびに白いマスの数を答える（N は 10^9 まで）。白い区間を set で持ち、重なる区間を消す"}
-      - {id: abc380_e, role: example, summary: "同じ色でつながった区間の塗り替えと、色ごとのマス数の質問。同色の区間の左端を set で持つ"}
-      - {id: abc330_e, role: practice, summary: "1 点を書き換えるたびに数列の mex を答える。まだ出ていない値を区間の集合として持つ"}
-      - {id: abc430_g, role: practice, summary: "区間の各集合への値の追加・削除と、区間で要素数が最大の集合の数。値ごとに含まれる区間を set で持つ"}
-      - {id: abc255_h, role: challenge, summary: "毎日実がなる木々の区間の収穫量を答える。最後に収穫した日が同じ区間を map で持ち、分割・統合する"}
-      - {id: abc256_h, role: challenge, summary: "区間を x で割る・区間代入・区間和のクエリ。同じ値の連続区間を map で持ち、割り算で値が速く減ることでならす"}
+      - {id: abc435_e, role: example, summary: "白いマスの列（長さは 10^9 まで）で、区間を黒く塗るたびに白いマスの数を答える。", approach: "白い区間を set で持ち、重なる区間を消して分割する"}
+      - {id: abc380_e, role: example, representative: true, summary: "1 列のマスで、同じ色でつながった区間の塗り替えと、色ごとのマスの数の質問を処理する。", approach: "同色の区間の左端を set で持つ（Union-Find・遅延セグ木でもよい）"}
+      - {id: abc330_e, role: practice, summary: "1 点を書き換えるたびに数列の mex を答える。", approach: "まだ出ていない値を区間の集合として持ち、最小を mex にする"}
+      - {id: abc430_g, role: practice, summary: "区間の各集合への値の追加・削除と、区間の中で要素数が最大の集合の数の質問を処理する。", approach: "値ごとに含まれる区間を set で持ち、遅延セグ木（区間加算・最大とその個数）と組む"}
+      - {id: abc255_h, role: challenge, summary: "毎日実がなる木々の区間を収穫する質問ごとに、収穫量を答える。", approach: "最後に収穫した日が同じ区間を map で持ち、ならしで分割・統合する"}
+      - {id: abc256_h, role: challenge, summary: "区間の各要素を x で割る・区間代入・区間和のクエリを処理する。", approach: "同じ値の連続区間を map で持ち、割り算で値が速く減ることでならす"}
     sources: ["05-ds §4.A（interval-set）", "05-ds §5（interval-set）", "05-ds §6.2"]
 
   - id: global-offset
     chapter: 標準コンテナの応用
-    title: 全体への操作を変数で持つ（オフセット・反転フラグ）
-    aliases: [全体加算, オフセット, 反転フラグ, 全体に反映させる値を別に持つ, 回転量]
+    title: 全体への操作を変数で持つ
+    aliases: [global offset, オフセット, 全体加算, 反転フラグ, 回転量, 全体に反映させる値を別に持つ]
     type: technique
     level: 基礎
-    level_evidence: "茶〜緑で頻出（abc278_d 559・abc158_d 610・abc379_d 745・abc212_d 775）"
+    level_evidence: "茶〜緑で頻出（abc199_c 436・abc278_d 559・abc158_d 610・abc379_d 745・abc212_d 775）"
     kind: [データ構造, クエリ処理の工夫]
     prerequisites: [stl-containers]
-    related: [lazy-segment-tree, priority-queue, stack-techniques, amortized-analysis]
-    summary: "「全要素に x を足す」「全体を反転する」「全体を回転する」を、要素を書き換えずにオフセット・反転フラグ・先頭位置の変数で表す。入れるときに引き、取り出すときに足すのが基本で、遅延セグ木の遅延評価の入口になる。"
+    related: [lazy-segment-tree, priority-queue, stack-techniques, periodicity, complexity-estimation]
+    summary: "「全要素に x を足す」「全体を反転する」「全体を回転する」を、要素を書き換えずにオフセット・反転フラグ・先頭位置の変数で表す。入れるときに引き、取り出すときに足すのが基本になる。"
     signs:
       - {type: phrase, text: "全要素に x を足す・全体に代入する操作がクエリに混ざる"}
       - {type: phrase, text: "列全体を反転してから先頭・末尾に追加する"}
       - {type: phrase, text: "配列を回転してから i 番目を参照する"}
       - {type: constraint, text: "Q ≤ 2×10^5 で、全体への操作を毎回 O(N) で行うと間に合わない"}
     acl: []
+    verify: []
     frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 5 問"
     sections:
-      - "オフセット（入れるときに引き、出すときに足す）"
-      - "反転フラグ（追加する側を入れ替え、最後に向きを直す）"
-      - "全体代入と個別の差分（代入のたびに差分の map を空にする。ならし）"
-      - "回転は先頭位置の添字で表す"
-      - "遅延セグ木の遅延評価とのつながり"
-      - "落とし穴（反転中の先頭と末尾の取り違え・向きの直し忘れ・オフセットのあふれ）"
+      - {title: "オフセット（入れるときに引き、出すときに足す）", anchor: offset}
+      - {title: "反転フラグ（追加する側や添字の読み方を入れ替え、最後に向きを直す）", anchor: flip-flag}
+      - {title: "全体代入と個別の差分（代入のたびに差分の map を空にする。ならし）", anchor: assign-all}
+      - {title: "回転は先頭位置の添字で表す", anchor: rotation}
+      - {title: "落とし穴（反転中の先頭と末尾の取り違え・向きの直し忘れ・オフセットのあふれ）", anchor: pitfalls}
+      - {title: "遅延セグメント木とのつながり（全体への操作を区間への操作に広げる）", anchor: to-lazy-segment-tree, level: 水}
     merged_keys: []
-    visual: "静的な図：実際の値＝格納値＋オフセット、を 2 段で並べる"
+    visual: {kind: static, priority: 2, text: "実際の値＝格納値＋オフセット、を 2 段で並べる"}
     problems:
-      - {id: abc212_d, role: example, summary: "袋への追加・全体への加算・最小値の取り出し。全体の加算をオフセットに足し、入れるときにオフセットを引く"}
-      - {id: arc077_a, role: practice, summary: "末尾への追加と全体の反転を繰り返した結果の列。反転の代わりに追加する側を交互にする"}
-      - {id: abc278_d, role: practice, summary: "全体代入・1 点加算・1 点取得のクエリ。全体代入の値を別に持ち、個別の加算は差分の map に持つ"}
-      - {id: abc158_d, role: practice, summary: "文字列の反転と先頭・末尾への追加のクエリ。反転フラグを持ち deque の反対側へ追加する"}
-      - {id: abc379_d, role: practice, summary: "植える・全体が育つ・高さ H 以上を収穫するクエリ。成長をオフセットで持ち、古い順に queue から収穫する"}
-      - {id: typical90_ar, role: practice, summary: "配列の右回転・2 要素の交換・参照を処理する。回転量を変数に持ち、添字を読み替える"}
-    sources: ["05-ds §4.A（global-offset）", "05-ds §5（global-offset）"]
+      - {id: abc212_d, role: example, representative: true, summary: "袋への数の追加・全体への加算・最小値の取り出しのクエリを処理する。", approach: "全体の加算をオフセットに足し、入れるときにオフセットを引いて保存する"}
+      - {id: abc199_c, role: practice, summary: "長さ 2N の文字列に、2 文字の入れ替えと前半・後半の入れ替えを繰り返した後の文字列を求める。", approach: "前半と後半が入れ替わっているかのフラグを持ち、添字を読み替える"}
+      - {id: arc077_a, role: practice, summary: "末尾への追加と全体の反転を繰り返した後の列を求める。", approach: "反転の代わりに追加する側を交互にする（deque）"}
+      - {id: abc278_d, role: practice, summary: "全体代入・1 点加算・1 点取得のクエリを処理する。", approach: "全体代入の値を別に持ち、個別の加算は差分の map に持って代入のときに空にする"}
+      - {id: abc158_d, role: practice, summary: "文字列の反転と、先頭・末尾への文字の追加のクエリを処理した後の文字列を求める。", approach: "反転フラグを持ち deque の反対側へ追加し、最後に必要なら反転する"}
+      - {id: abc379_d, role: practice, summary: "植える・全体が育つ・高さ H 以上を収穫するクエリを処理する。", approach: "成長をオフセットで持ち、古い順に背が高いので queue の先頭から収穫する"}
+      - {id: typical90_ar, role: practice, summary: "配列の右回転・2 要素の交換・参照のクエリを処理する。", approach: "回転量を変数に持ち、添字を (x + shift) mod N に読み替える"}
+    sources: ["05-ds §4.A（global-offset）", "05-ds §5（global-offset）", "01-basics §4.I（simulation-speedup の反転フラグ・abc199_c）"]
 
   - id: linked-list
     chapter: 標準コンテナの応用
     title: 配列で作る連結リスト
-    aliases: [連結リスト, 双方向リスト, linked list, prev/next 配列]
+    aliases: [連結リスト, 双方向リスト, linked list, doubly linked list, prev・next の配列]
     type: technique
     level: 基礎
     level_evidence: "茶〜緑（abc237_d 544・abc455_d 796・abc344_e 973）"
@@ -241,20 +254,22 @@ pages:
       - {type: phrase, text: "カードの山を別のカードの上へ付け替える"}
       - {type: phrase, text: "列車の連結・切り離し"}
     acl: []
+    verify: []
     frequency: B
+    frequency_evidence: "recent 1（abc455_d）・前提として届くページなし・古い ABC 3 問"
     sections:
-      - "prev・next の配列と番兵（先頭・末尾）"
-      - "挿入・削除・付け替えの手順"
-      - "最後に先頭からたどって出力する"
-      - "使い分け（位置で指定するなら連結リストでは速くならない → 逆順の処理と BIT・平衡二分木）"
-      - "落とし穴（値が重複すると節点を特定できない・削除した節点の指す先を使う）"
+      - {title: "prev・next の配列と番兵（先頭・末尾）", anchor: arrays}
+      - {title: "挿入・削除・付け替えの手順", anchor: operations}
+      - {title: "最後に先頭からたどって出力する", anchor: output}
+      - {title: "使い分け（位置で指定するなら連結リストでは速くならない → 逆順の処理と BIT・平衡二分探索木）", anchor: choosing}
+      - {title: "落とし穴（値が重複すると節点を特定できない・削除した節点の指す先を使う）", anchor: pitfalls}
     merged_keys: [array-linked-list]
-    visual: "静的な図：ノードと next・prev の矢印。挿入・削除の前後"
+    visual: {kind: static, priority: 2, text: "ノードと next・prev の矢印。挿入・削除の前後"}
     problems:
-      - {id: abc344_e, role: example, summary: "値の直後への挿入と値の削除を繰り返した最終的な列。値 → 次・前の値を連想配列で持つ（番兵つき）"}
-      - {id: abc337_c, role: practice, summary: "「自分の前の人」の情報から列全体を復元する。前 → 自分の対応を作り先頭からたどる"}
-      - {id: abc237_d, role: practice, summary: "L・R に従い数を左右へ足していった最終的な列。左右の隣を配列で持つ（逆順に見て deque でもよい）"}
-      - {id: abc455_d, role: practice, summary: "カードを別のカードの上へ付け替える操作を繰り返す。上下のつながりを 2 本の配列で持ち、最後に各山を土台からたどる"}
+      - {id: abc344_e, role: example, representative: true, summary: "値の直後への挿入と値の削除を繰り返した後の列を出力する。", approach: "値 → 次・前の値を連想配列で持つ双方向リスト（番兵つき）"}
+      - {id: abc337_c, role: practice, summary: "各人の「自分の前にいる人」の情報から、列全体を前から順に出力する。", approach: "前 → 自分の対応を作り、先頭からたどる"}
+      - {id: abc237_d, role: practice, summary: "文字列の L・R に従って数を左右へ足していった最終的な列を求める。", approach: "左右の隣を配列で持つ（逆順に見て deque でもよい）"}
+      - {id: abc455_d, role: practice, summary: "カードを別のカードの上へ付け替える操作を繰り返す。", approach: "上下のつながりを 2 本の配列で持ち、最後に各山を土台からたどる（research/00 §2.3.8 の分類。内容は執筆時に確かめる）"}
     sources: ["05-ds §4.A（linked-list）", "05-ds §5（linked-list）", "00-curriculum §4.2（配列で持つ連結リスト）", "00-curriculum §5.1"]
 
   # ===== 2. スタックとキュー =====
@@ -262,1060 +277,1116 @@ pages:
   - id: stack-techniques
     chapter: スタックとキュー
     title: スタック・キュー・deque の使いどころ
-    aliases: [stack, queue, deque, 括弧の対応, 打ち消し, Undo]
+    aliases: [stack, queue, 括弧の対応, 打ち消し, 操作の取り消し]
     type: technique
     level: 基礎
-    level_evidence: "括弧・打ち消し系は茶（abc328_d 555・abc240_d 570・abc307_d 666）。交差判定は水（abc338_e 1220）、ARC では黄（arc076_c 2180）"
+    level_evidence: "括弧・打ち消し系は茶（abc328_d 555・abc240_d 570・abc307_d 666）。円を切り開く交差判定は水（abc338_e 1220）、ARC では黄（arc076_c 2180）"
     kind: [データ構造]
     prerequisites: [stl-containers]
     related: [monotonic-stack, bracket-sequence, persistent-data-structures, run-length-encoding, zero-one-bfs]
-    summary: "スタックで括弧の対応・直前との打ち消し・Undo を、deque で両端への追加を扱う。ランレングスを積む、円を切り開いて交差判定に帰着する、などの型と、0-1 BFS・単調スタックへのつながりをまとめる。"
+    summary: "スタックで括弧の対応・直前との打ち消し・操作の取り消しを、deque で両端への追加を処理する。ランレングスを積む、円を切り開いて弦の交差判定に帰着する、などの型がある。"
     signs:
       - {type: phrase, text: "括弧の対応を取る・対応する括弧ごと消す"}
       - {type: phrase, text: "特定の並びが現れたら取り除く操作を繰り返した結果"}
       - {type: phrase, text: "直前の操作を取り消す（Undo）"}
       - {type: phrase, text: "円周上の弦どうしが交差するか"}
     acl: []
-    frequency: B
+    verify: []
+    frequency: A
+    frequency_evidence: "recent 1（abc454_d）・前提として 60 ページに届く（直接 3）・古い ABC 5 問"
     sections:
-      - "括弧の対応（開き括弧の位置を積む）と括弧列の残高（→ 題材別の括弧列）"
-      - "直前と打ち消し合うものを消す（末尾を見て pop）"
-      - "ランレングスを積む（(値, 個数) の組）"
-      - "円を切り開いて弦の交差判定に帰着する（水）"
-      - "deque（両端への追加・真ん中への挿入は deque 2 本）"
-      - "履歴を親ポインタの木で持つ（→ 永続データ構造）"
+      - {title: "括弧の対応（開き括弧の位置を積む）と括弧列の残高（→ 題材別の括弧列）", anchor: brackets}
+      - {title: "直前と打ち消し合うものを消す（末尾を見て pop）", anchor: cancel}
+      - {title: "ランレングスを積む（(値, 個数) の組）", anchor: run-length}
+      - {title: "直前の操作を取り消す（変更前の値を積んで戻す。任意の版へ戻るなら永続データ構造）", anchor: undo}
+      - {title: "deque（両端への追加・真ん中への挿入は deque 2 本）", anchor: deque}
+      - {title: "円を切り開いて弦の交差判定に帰着する", anchor: chords, level: 水}
     merged_keys: []
-    visual: "静的な図：括弧列を左から読んだときのスタックの中身の変化"
+    visual: {kind: static, priority: 2, text: "括弧列を左から読んだときのスタックの中身の変化"}
     problems:
-      - {id: abc328_d, role: example, summary: "ABC を左から取り除き続けた後の文字列。文字を積み、末尾 3 文字が ABC なら取り除く"}
-      - {id: abc240_d, role: practice, summary: "同じ数 k のボールが k 個続くと消える筒のボールの数。(値, 連続数) を積む"}
-      - {id: abc307_d, role: practice, summary: "中に括弧を含まない (…) を消せるだけ消した結果。'(' の位置を積む"}
-      - {id: arc108_b, role: practice, summary: "fox を消せるだけ消した後の長さ。積んで末尾が fox なら取り除く"}
-      - {id: abc243_d, role: practice, summary: "完全二分木の上下の移動の結果（途中は巨大）。子へ行って親へ戻る移動を打ち消して簡約する"}
-      - {id: abc338_e, role: practice, summary: "円周上の弦どうしに交差があるか。円を切り開き、対応する端点がスタックの先頭にあるかを見る"}
-      - {id: arc076_c, role: challenge, summary: "長方形の周上にある点の組を交差せずに結べるか。周に沿って一列に並べ、括弧の対応を確かめる"}
+      - {id: abc328_d, role: example, representative: true, summary: "文字列から ABC を左から取り除き続けた後の文字列を求める。", approach: "文字を積み、末尾 3 文字が ABC なら取り除く"}
+      - {id: abc240_d, role: practice, summary: "同じ数 k のボールが k 個続くと消える筒に順にボールを入れ、毎回のボールの数を答える。", approach: "(値, 連続数) を積む"}
+      - {id: abc307_d, role: practice, summary: "中に括弧を含まない (…) を消せるだけ消した後の文字列を求める。", approach: "'(' の位置を積み、')' で対応が取れたら区間を消す"}
+      - {id: arc108_b, role: practice, summary: "文字列から fox を消せるだけ消した後の長さを求める。", approach: "積んで末尾が fox なら取り除く"}
+      - {id: abc243_d, role: practice, summary: "完全二分木の上下の移動を繰り返した後の頂点の番号を求める（途中の番号は巨大になりうる）。", approach: "子へ行って親へ戻る移動を打ち消して簡約する"}
+      - {id: abc338_e, role: practice, summary: "円周上の弦どうしに交差があるかを判定する。", approach: "円を切り開き、左端で積み、右端で先頭が対応する左端かを見る"}
+      - {id: arc076_c, role: challenge, summary: "長方形の周上にある点の組を、交差しないように結べるかを判定する。", approach: "両端が周上にある組だけを周に沿って一列に並べ、括弧の対応を確かめる"}
     sources: ["05-ds §4.A（stack-techniques）", "05-ds §5（stack-techniques）", "05-ds 付録 A"]
 
   - id: monotonic-stack
     chapter: スタックとキュー
     title: 単調スタックとスライド最小値
-    aliases: [monotonic stack, 単調stack, ヒストグラム内最大長方形, スライド最小値, sliding window minimum, 単調deque, 単調キュー, SWAG, Sliding Window Aggregation, Cartesian Tree, デカルト木]
+    aliases: [monotonic stack, 単調 stack, ヒストグラム内最大長方形, sliding window minimum, 単調 deque, 単調キュー, SWAG, Sliding Window Aggregation, Cartesian Tree, デカルト木]
     type: technique
     level: 水
     level_evidence: "「見える数」は緑（abc372_d 901）、直近の大小を使う応用が水〜青（abc359_e 1275・agc005_b 1828）。スライド最小値は ABC では multiset でも書ける（abc352_d 714）が、DP の遷移の高速化で青に出る。Cartesian tree の節は黄（arc189_d 2006・abc311_g 2265）、SWAG は発展"
     kind: [データ構造, 尺取り・スライド窓]
     prerequisites: [stack-techniques]
-    related: [two-pointers, segtree-binary-search, sparse-table, contribution, dp-sliding-window, divide-and-conquer]
-    summary: "各要素について「左（右）で初めて自分より大きい（小さい）要素」を、添字を単調に積んだスタックで全体 O(N) で求める。同じ考え方で、幅 K の窓の最小値を deque で O(N) で求め（スライド最小値）、最大値で区間を割る Cartesian tree も作れる。"
+    related: [two-pointers, segment-tree-binary-search, sparse-table, contribution, dp-segment-tree, divide-and-conquer]
+    summary: "各要素について「左（右）で初めて自分より大きい（小さい）要素」を、添字を単調に積んだスタックで全体 O(N) で求める。同じ考え方で幅 K の窓の最小値を deque で O(N) で求め、Cartesian tree も作れる。"
     signs:
       - {type: phrase, text: "左（右）で初めて自分より大きい（小さい）要素の位置"}
       - {type: phrase, text: "各ビルから見えるビルの数・すべての区間の最小値の和"}
-      - {type: phrase, text: "長さ K のすべての区間の最小値（最大値）、dp[i] = min(dp[i−K..i−1]) + c の形の遷移"}
+      - {type: phrase, text: "長さ K のすべての区間の最小値（最大値）"}
+      - {type: shape, text: "dp[i] = min(dp[i−K..i−1]) + c のように、直前 K 個の最小値で決まる遷移"}
       - {type: constraint, text: "N ≤ 2×10^5 で、各要素から左右を見ていくと O(N^2) になる"}
     acl: []
-    frequency: B
-    sections:
-      - "単調スタックの手順と保つ性質（中の値は単調。各添字は 1 回積まれ 1 回降ろされるので O(N)）"
-      - "ヒストグラムの最大長方形"
-      - "i が最大（最小）になる区間の数 (i − L)(R − i) と寄与の数え上げ（同じ値は片側 ≤・片側 <）"
-      - "見えるビルの数・水位のシミュレーション"
-      - "スライド最小値（単調 deque。末尾から支配される要素を捨て、先頭が窓から出たら捨てる）"
-      - "尺取りの窓・DP の遷移の高速化（→ DP の章）"
-      - "SWAG：スタック 2 本で作る総積つきキュー（gcd・行列・一次関数の合成の窓）（発展）"
-      - "Cartesian tree（最大値で区間を左右に割る再帰を O(N) で作る）（黄）"
-      - "使い分け（区間の最大値を多数聞くならセグ木・Sparse Table、窓の最小値は multiset でも書ける）"
-    merged_keys: [sliding-window-minimum, swag, cartesian-tree]
-    visual: "動く図：棒グラフを左から見ていき、スタックの中身（単調な列）が積まれ・崩れるステップ送り。静的な図：窓をずらしたときの deque の中身、SWAG の 2 つのスタック"
-    problems:
-      - {id: abc372_d, role: example, summary: "各ビルについて、右側にある「見える」ビルの数。右から見て低いものを降ろしてから積む"}
-      - {id: abc359_e, role: example, summary: "板で仕切られた水槽で、各区画に水が入る時刻。左で最も近い高い板を単調スタックで求めて累積する"}
-      - {id: abc352_d, role: practice, summary: "連続する値 K 個の位置の最大 − 最小の最小値。値の順に位置を並べ、長さ K の窓の最大・最小を deque で求める"}
-      - {id: abc435_f, role: practice, summary: "最大値の位置で区間を左右に分けて進む過程の、移動距離の合計の最大。最大値で割る再帰（Cartesian tree）"}
-      - {id: donuts_2015_3, role: practice, summary: "各人から前方に見える人の数。単調スタックの大きさを答える"}
-      - {id: agc005_b, role: practice, summary: "全区間の最小値の総和。各要素が最小になる範囲を左右で求め、寄与を足す"}
-      - {id: tessoku_book_bh, role: practice, summary: "各日について、それより前で株価が高かった最後の日を答える"}
-      - {id: arc189_d, role: challenge, summary: "各スライムから始めて、隣の小さいスライムを吸収し続けたときの最終的な大きさ。最大値で割る分割統治を Cartesian tree で回す"}
-      - {id: abc311_g, role: challenge, summary: "長方形領域の（和 × 最小値）の最大値。最小値の下限ごとに行のヒストグラムと単調スタックで極大な長方形を調べる"}
-    sources: ["05-ds §4.A（monotonic-stack・sliding-window-minimum・swag・cartesian-tree）", "05-ds §5（同）", "05-ds 付録 A", "02-dp §4.J（dp-sliding-window）"]
     verify: [queue_operate_all_composite, deque_operate_all_composite]
+    frequency: B
+    frequency_evidence: "recent 1（abc480_g）・前提として届くページなし・古い ABC 5 問"
+    sections:
+      - {title: "単調スタックの手順と保つ性質（中の値は単調。各添字は 1 回積まれ 1 回降ろされるので O(N)）", anchor: procedure}
+      - {title: "ヒストグラムの最大長方形", anchor: histogram}
+      - {title: "i が最大（最小）になる区間の数 (i − L)(R − i) と寄与の数え上げ（同じ値は片側 ≤・片側 <）", anchor: contribution}
+      - {title: "見えるビルの数・水位のシミュレーション", anchor: visible}
+      - {title: "スライド最小値（単調 deque。末尾から支配される要素を捨て、先頭が窓から出たら捨てる）", anchor: sliding-window-minimum}
+      - {title: "DP の遷移の高速化に使う（→ DP の章のセグメント木・スライド最小値による高速化）", anchor: dp-transition}
+      - {title: "使い分け（区間の最大値を多数聞くならセグメント木・Sparse Table、窓の最小値は multiset でも書ける）", anchor: choosing}
+      - {title: "Cartesian tree（最大値で区間を左右に割る再帰を O(N) で作る）", anchor: cartesian-tree, level: 黄}
+      - {title: "SWAG：スタック 2 本で作る総積つきキュー（gcd・行列・一次関数の合成の窓）", anchor: swag, level: 発展}
+    merged_keys: [sliding-window-minimum, swag, cartesian-tree]
+    visual: {kind: dynamic, priority: 3, text: "棒グラフを左から見ていき、スタックの中身（単調な列）が積まれ・崩れるステップ送り。窓をずらしたときの deque の中身と SWAG の 2 つのスタックは静的な図"}
+    problems:
+      - {id: abc372_d, role: example, summary: "各ビルについて、右側にある「見える」ビルの数を答える。", approach: "右から見て低いものを降ろしてから積み、スタックの大きさが答え"}
+      - {id: abc359_e, role: example, representative: true, summary: "板で仕切られた水槽に左端から水を入れ続けるとき、各区画に初めて水が入る時刻を答える。", approach: "左で最も近い高い板を単調スタックで求め、その位置からの量を累積する"}
+      - {id: abc352_d, role: practice, summary: "順列で、連続する値 K 個の位置の最大 − 最小の最小値を求める。", approach: "値の順に位置を並べ、長さ K の窓の最大・最小を deque で求める"}
+      - {id: abc435_f, role: practice, summary: "最大値の位置で区間を左右に分けて進む過程の、移動距離の合計の最大値を求める。", approach: "最大値で割る再帰（Cartesian tree）"}
+      - {id: donuts_2015_3, role: practice, summary: "行列に並ぶ各人から前方に見える人の数を答える。", approach: "単調スタックの大きさを出力する"}
+      - {id: agc005_b, role: practice, summary: "すべての区間の最小値の総和を求める。", approach: "各要素が最小になる範囲を左右で求め、寄与を足す"}
+      - {id: tessoku_book_bh, role: practice, summary: "各日について、それより前で株価が高かった最後の日を答える。", approach: "(日, 株価) の単調スタック"}
+      - {id: arc189_d, role: challenge, summary: "各スライムから始めて、隣の小さいスライムを吸収し続けたときの最終的な大きさを答える。", approach: "最大値で割る分割統治を Cartesian tree で回す"}
+      - {id: abc311_g, role: challenge, summary: "グリッドの長方形領域のうち、(和 × 最小値) の最大値を求める。", approach: "最小値の下限ごとに行のヒストグラムと単調スタックで極大な長方形を調べる"}
+    sources: ["05-ds §4.A（monotonic-stack・sliding-window-minimum・swag・cartesian-tree）", "05-ds §5（同）", "05-ds 付録 A", "02-dp §4.J（dp-sliding-window）"]
 
   # ===== 3. Union-Find =====
 
   - id: union-find
     chapter: Union-Find
     title: Union-Find
-    aliases: [UF, DSU, Disjoint Set Union, 素集合データ構造, UnionFind, 経路圧縮, union by size]
+    aliases: [UF, DSU, Disjoint Set Union, disjoint set, 素集合データ構造, 経路圧縮, union by size]
     type: technique
     level: 基礎
     level_evidence: "茶〜緑で頻出（abc288_c 436・abc292_d 579・abc177_d 732・abc206_d 879）"
     kind: [データ構造, 連結性・全域木]
     prerequisites: [graph-basics]
-    related: [connected-components, union-find-connectivity, minimum-spanning-tree, union-find-applications, weighted-union-find, small-to-large, acl-other-components]
-    summary: "要素を互いに素なグループに分けて持ち、2 つのグループの併合と「同じグループか」の判定を、union by size と経路圧縮でならし O(α(N))（実用上は定数）で行う。グループの大きさや個数も数えられる。"
+    related: [connected-components, union-find-connectivity, minimum-spanning-tree, union-find-applications, weighted-union-find, small-to-large, acl-reading#components]
+    summary: "要素を互いに素なグループに分けて持ち、2 つのグループの併合と「同じグループか」の判定を、union by size と経路圧縮でならし O(α(N)) で行う。グループの大きさや個数も数えられる。"
     signs:
       - {type: phrase, text: "辺を追加していきながら、2 頂点が同じグループか・グループの大きさを答える"}
       - {type: phrase, text: "グループを合併する操作と、グループについての質問が交互に来る"}
       - {type: phrase, text: "連結成分の個数・最大の連結成分の大きさ"}
       - {type: constraint, text: "N, Q ≤ 2×10^5 で辺の追加と質問が混ざる"}
     acl: [dsu]
-    frequency: A
-    sections:
-      - "何ができるか（併合と判定。分割・削除はできない）"
-      - "保つ性質（各グループは根付き木で、根が代表元。parent は根なら −(サイズ)）"
-      - "各操作の手順（find は根までたどって経路圧縮、merge は根どうしを小さい方から大きい方へつなぐ）"
-      - "なぜ速いか（union by size だけで深さ log N、経路圧縮と合わせてならし O(α(N))）"
-      - "境界（同じグループどうしの併合・自己ループと多重辺・成分数は併合に成功した回数を引く・サイズの積のあふれ）"
-      - "成分に情報を持たせる入口（サイズ・辺数）→ Union-Find の応用"
-      - "使い分け（グラフが固定なら BFS・DFS、削除があるなら逆順の処理 → グラフの章）"
-    merged_keys: []
-    visual: "動く図：森の上で merge（小さい木を大きい木の根の下へ）と find の経路圧縮のステップ送り。圧縮の前後で深さが縮む様子"
-    problems:
-      - {id: abc288_c, role: example, summary: "閉路をなくすために取り除く辺の最小本数。両端がすでに同じ成分の辺を数える"}
-      - {id: abc292_d, role: practice, summary: "すべての連結成分で頂点数と辺数が等しいか。根に頂点数と辺数を持たせる"}
-      - {id: abc177_d, role: practice, summary: "友達どうしを同じ組にしない分け方の最小の組数。最大の連結成分の大きさを求める"}
-      - {id: abc206_d, role: practice, summary: "値を一括で置き換える操作で数列を回文にする最小回数。対称な位置の値どうしをつなぎ、併合した回数を数える"}
-      - {id: abc157_d, role: practice, summary: "各人について、同じ成分にいて友達でもブロック相手でもない人の数"}
-      - {id: practice2_a, role: practice, summary: "辺の追加と、2 頂点が連結かの判定のクエリ（ACL の dsu）"}
-      - {id: typical90_l, role: practice, summary: "マスを赤く塗るクエリと、2 マスが赤いマスだけで行き来できるかのクエリ。グリッドのマスを番号にして併合する"}
-    sources: ["05-ds §4.B（union-find）", "05-ds §5（union-find）", "05-ds §4.F", "05-ds 付録 A", "03-graph §4.D（union-find-connectivity の境界）"]
     verify: [unionfind]
+    frequency: A
+    frequency_evidence: "recent 1（abc451_e）・前提として 17 ページに届く（直接 9）・古い ABC 5 問"
+    sections:
+      - {title: "何ができるか（併合と判定。分割・削除はできない）", anchor: what-it-does}
+      - {title: "保つ性質（各グループは根付き木で、根が代表元。parent は根なら −(サイズ)）", anchor: invariants}
+      - {title: "各操作の手順（find は根までたどって経路圧縮、merge は根どうしを小さい方から大きい方へつなぐ）", anchor: operations}
+      - {title: "なぜ速いか（union by size だけで深さ log N、経路圧縮と合わせてならし O(α(N))）", anchor: complexity}
+      - {title: "境界（同じグループどうしの併合・自己ループと多重辺・成分数は併合に成功した回数を引く・サイズの積のあふれ）", anchor: boundaries}
+      - {title: "根にサイズ・辺数を持たせる（ほかの情報を持たせる型は Union-Find の応用）", anchor: size-and-edges}
+      - {title: "使い分け（グラフが固定なら BFS・DFS、削除があるなら逆順の処理 → グラフの章）", anchor: choosing}
+    merged_keys: []
+    visual: {kind: dynamic, priority: 1, text: "森の上で merge（小さい木を大きい木の根の下へ）と find の経路圧縮のステップ送り。圧縮の前後で深さが縮む様子"}
+    problems:
+      - {id: abc288_c, role: example, representative: true, summary: "単純無向グラフから辺を取り除いて閉路をなくすとき、取り除く辺の最小本数を求める。", approach: "辺を順に見て、両端がすでに同じ成分なら数える"}
+      - {id: abc292_d, role: practice, summary: "すべての連結成分で頂点数と辺数が等しいかを判定する。", approach: "根に頂点数と辺数を持たせる"}
+      - {id: abc177_d, role: practice, summary: "友達関係から、どのグループにも友達どうしがいないように分けるときの最小のグループ数を求める。", approach: "最大の連結成分の大きさが答え"}
+      - {id: abc206_d, role: practice, summary: "値を別の値に一括で置き換える操作で、数列を回文にする最小回数を求める。", approach: "対称な位置の値どうしをつなぎ、併合に成功した回数を数える"}
+      - {id: abc157_d, role: practice, summary: "各人について、同じ成分にいて友達でもブロック相手でもない人の数を答える。", approach: "成分のサイズ − 次数 − 同じ成分のブロック相手 − 1"}
+      - {id: practice2_a, role: practice, summary: "辺の追加と、2 頂点が連結かの判定のクエリを処理する。", approach: "ACL の dsu"}
+      - {id: typical90_l, role: practice, summary: "マスを赤く塗るクエリと、2 マスが赤いマスだけで行き来できるかのクエリを処理する。", approach: "マスを番号にして、隣の赤いマスと併合する"}
+    sources: ["05-ds §4.B（union-find）", "05-ds §5（union-find）", "05-ds §4.F", "05-ds 付録 A", "03-graph §4.D（union-find-connectivity の境界）"]
 
   - id: union-find-applications
     chapter: Union-Find
-    title: Union-Find の応用（成分に情報を持たせる・併合で数える）
-    aliases: [UFに情報を持たせる, 併合時の寄与, 成分ごとの集約, 次の空きへ飛ぶUnion-Find, 次の要素へのポインタ, 区間を塗るUF]
+    title: Union-Find の応用
+    aliases: [UF に情報を持たせる, 併合時の寄与, 成分ごとの集約, 次の空きへ飛ぶ Union-Find, 次の要素へのポインタ, 区間を塗る UF]
     type: technique
     level: 水
-    level_evidence: "水が中心（abc372_e 1042・abc214_d 1341・abc238_e 1577・abc409_f 1580・abc183_f 1586）、言い換え系は青（abc355_f 1924・arc065_b 1996）"
+    level_evidence: "水が中心（abc372_e 1042・abc214_d 1341・abc238_e 1577・abc409_f 1580・abc183_f 1586）、言い換え系は青（abc355_f 1924・arc065_b 1996）。abc319 以降も水の帯に出る（abc409_f、2025）"
     kind: [データ構造, 連結性・全域木]
     prerequisites: [union-find]
-    related: [union-find-connectivity, minimum-spanning-tree, small-to-large, merge-process-tree, interval-set, contribution]
-    summary: "Union-Find の根に成分の情報（サイズ・辺数・上位 k 個・値ごとの個数など）を持たせ、併合のときに合成する。辺を重み順に併合して「その瞬間に決まる組の数」を数える型、区間和や点を辺に言い換える型、次の空きへ飛ぶ Union-Find を扱う。"
+    related: [union-find-connectivity, minimum-spanning-tree, small-to-large, merge-process-tree, interval-set, contribution, tree-edge-contribution]
+    summary: "Union-Find の根に成分の情報（サイズ・辺数・上位 K 個・値ごとの個数）を持たせ、併合のときに合成する。辺を重みの順に足して組の数を数える型、区間の和を辺に言い換える型、次の空きへ飛ぶ型がある。"
     signs:
       - {type: phrase, text: "全頂点対について、パス上の最大の辺の重みの総和"}
       - {type: phrase, text: "いくつかの区間の和が分かっているとき、全体の和が決まるか"}
-      - {type: phrase, text: "成分の中で k 番目に大きい番号・成分の中のクラス c の人数"}
-      - {type: phrase, text: "右にある最初の空きに書き込む・各マスは一度しか塗られない"}
+      - {type: phrase, text: "成分の中で K 番目に大きい番号・成分の中のクラス c の人数"}
+      - {type: phrase, text: "右にある最初の空き位置に書き込む"}
     acl: [dsu]
-    frequency: A
+    verify: []
+    frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 9 問"
     sections:
-      - "成分に情報を持たせる（根にだけ持ち、併合で合成する。上位 k 個や値ごとの map は小さい方を大きい方へ）"
-      - "併合の瞬間に寄与を数える（辺を重みの昇順に足し、2 つの成分のサイズの積だけ組が決まる）"
-      - "何を頂点にするかの言い換え（累積和の添字・x 座標と y 座標の二部グラフ・値を頂点に）"
-      - "閾値ごと・関係ごとに Union-Find を持つ（重みごとの Union-Find・2 つの Union-Find の根の組）（青）"
-      - "次の空きへ飛ぶ Union-Find（区間を一度ずつ塗る。set の lower_bound で代用できる）"
-      - "削除を逆順の追加にする・しきい値を動かす連結判定（→ グラフの章）"
+      - {title: "根に成分の情報を持たせる（根にだけ持ち、併合で合成する。上位 K 個や値ごとの map は小さい方を大きい方へ）", anchor: data-on-root}
+      - {title: "併合の瞬間に寄与を数える（辺を重みの昇順に足し、2 つの成分のサイズの積だけ組が決まる）", anchor: count-on-merge}
+      - {title: "何を頂点にするかの言い換え（累積和の添字・x 座標と y 座標の二部グラフ・値を頂点に）", anchor: modeling}
+      - {title: "次の空きへ飛ぶ Union-Find（区間を一度ずつ塗る。set の lower_bound で代用できる）", anchor: next-pointer}
+      - {title: "グラフの章との分担（根に情報を持たせる型は Union-Find の応用、削除を逆順の追加にする・しきい値で辺を絞る・Kruskal 法はグラフの章）", anchor: vs-graph}
+      - {title: "閾値ごと・関係ごとに Union-Find を持つ（重みごとの Union-Find・2 つの Union-Find の根の組）", anchor: multiple-uf, level: 青}
     merged_keys: [union-find-next-pointer]
-    visual: "静的な図：辺を重みの昇順に足し、併合のたびに「サイズの積」個の組の答えが決まる様子。埋まったマスを飛ばす右向きの矢印"
+    visual: {kind: static, priority: 2, text: "辺を重みの昇順に足し、併合のたびに「サイズの積」個の組の答えが決まる様子。埋まったマスを飛ばす右向きの矢印"}
     problems:
-      - {id: abc372_e, role: example, summary: "辺の追加と、ある頂点の成分で k 番目（k ≤ 10）に大きい頂点番号の質問。根に上位 10 個を持ち、併合で切り詰める"}
-      - {id: abc214_d, role: example, summary: "木の全頂点対について、パス上の最大の辺の重みの総和。重みの小さい順に併合し、w × サイズの積を足す"}
-      - {id: abc238_e, role: example, summary: "いくつかの区間の和が分かっているとき全体の和が決まるか。累積和の添字 l−1 と r をつなぎ、0 と N が連結かを見る"}
-      - {id: abc420_e, role: practice, summary: "辺の追加と頂点の白黒の反転をしながら、ある頂点から黒い頂点に行けるかを答える。根に成分内の黒い頂点の数を持つ"}
-      - {id: abc228_d, role: practice, summary: "環状の配列で、位置 h から右へ最初の空きに書き込むクエリと読み出すクエリ。埋まった位置を右隣と併合する"}
-      - {id: abc409_f, role: practice, summary: "平面上の頂点の追加・最も近い成分どうしの一括併合・連結判定のクエリ。頂点対の距離をヒープに入れ、同じ成分の組は捨てる"}
-      - {id: abc183_f, role: practice, summary: "生徒のグループの合流と、グループ内のクラス c の人数の質問。根ごとの map を小さい方から大きい方へ移す"}
-      - {id: abc131_f, role: practice, summary: "長方形の 3 頂点があれば 4 頂点目を足す操作を最大何回できるか。x 座標と y 座標を頂点にした二部グラフで併合する"}
-      - {id: abc364_f, role: challenge, summary: "区間内の全頂点と新しい頂点を結ぶ操作の後の最小全域木のコスト。すでにつながった境目を次の未連結の位置へ飛ばす"}
-      - {id: abc355_f, role: challenge, summary: "木に辺を 1 本ずつ足すたびに最小全域木の重みを答える（辺の重みは 10 以下）。重みごとに Union-Find を持つ"}
-      - {id: arc065_b, role: challenge, summary: "道路でも鉄道でも連結な都市の数を各都市について求める。2 つの Union-Find の根の組を数える"}
+      - {id: abc372_e, role: example, summary: "辺の追加と、ある頂点の連結成分で k 番目（k ≤ 10）に大きい頂点番号の質問を処理する。", approach: "根に上位 10 個を持ち、併合で切り詰める"}
+      - {id: abc214_d, role: example, representative: true, summary: "重み付きの木の全頂点対について、パス上の最大の辺の重みの総和を求める。", approach: "重みの小さい順に辺を併合し、重み × 両側のサイズの積を足す"}
+      - {id: abc238_e, role: example, summary: "いくつかの区間の和が分かっているとき、全体の和が一意に決まるかを判定する。", approach: "累積和の添字 l − 1 と r をつなぎ、0 と N が連結かを見る"}
+      - {id: abc420_e, role: practice, summary: "辺の追加と頂点の白黒の反転をしながら、ある頂点から黒い頂点に行けるかを答える。", approach: "根に成分内の黒い頂点の数を持つ"}
+      - {id: abc228_d, role: practice, summary: "環状の配列で、位置 h から右へ最初の空きに値を書き込むクエリと、値を読み出すクエリを処理する。", approach: "埋まった位置を右隣と併合し、根が次の空きを指す（set の lower_bound でもよい）"}
+      - {id: abc409_f, role: practice, summary: "平面上の頂点の追加・最も近い成分どうしの一括併合・連結判定のクエリを処理する。", approach: "頂点対の距離をヒープに入れ、同じ成分の組は捨てながら併合する"}
+      - {id: abc183_f, role: practice, summary: "生徒のグループの合流と、グループ内のクラス c の人数の質問を処理する。", approach: "根ごとの map を小さい方から大きい方へ移す"}
+      - {id: abc364_f, role: challenge, summary: "区間内の全頂点と新しい頂点を結ぶ操作をすべて行った後の、最小全域木のコストを求める。", approach: "コストの小さい順に処理し、すでにつながった境目を次の未連結の位置へ飛ばす"}
+      - {id: abc355_f, role: challenge, summary: "木に辺を 1 本ずつ足すたびに、最小全域木の重みを答える（辺の重みは 10 以下）。", approach: "重み c 以下の辺だけを使う Union-Find を c ごとに持つ"}
+      - {id: arc065_b, role: challenge, summary: "各都市について、道路でも鉄道でも連結な都市の数を求める。", approach: "道路用と鉄道用の Union-Find の根の組を数える"}
     sources: ["05-ds §4.B（union-find-applications・union-find-next-pointer）", "05-ds §5（同）", "05-ds 付録 A", "03-graph §4.D（union-find-connectivity）"]
 
   - id: weighted-union-find
     chapter: Union-Find
-    title: 重み付き Union-Find（ポテンシャル・偶奇）
-    aliases: [ポテンシャル付きUnion-Find, 重み付きUF, 偶奇のUnion-Find, 二部グラフのUnion-Find, 頂点倍化のUnion-Find, 差分の矛盾判定]
+    title: 重み付き Union-Find
+    aliases: [weighted union-find, ポテンシャル付き Union-Find, 重み付き UF, 偶奇の Union-Find, 二部グラフの Union-Find, 頂点倍化の Union-Find, 差分の矛盾判定]
     type: technique
     level: 水
     level_evidence: "易しい問題は DFS で足りる（abc327_d 709・abc373_d 765）。情報が順に来て途中で矛盾を判定する形で必須（arc090_b 1452・abc328_f 1477・abc451_f 1540）、応用は青（abc280_f 1819）"
     kind: [データ構造, 連結性・全域木]
     prerequisites: [union-find]
     related: [bipartite-graph, difference-constraints, dfs, union-find-applications]
-    summary: "各要素に「親との差」を持たせた Union-Find で、x_v − x_u = w の形の情報を順に受け取りながら、矛盾の判定と同じ成分の 2 要素の差の取得を行う。差を XOR にすると偶奇（二部グラフ）を扱える。"
+    summary: "x_v − x_u = w の形の情報を順に受け取りながら、矛盾の判定と同じ成分の 2 要素の差の取得を行う。各要素に親との差を持たせた Union-Find で、差を XOR にすると 2 色の塗り分けになる。"
     signs:
       - {type: phrase, text: "x_R − x_L = D の形の情報が順に与えられ、矛盾しないかを判定する"}
       - {type: phrase, text: "相対的な位置・差だけが分かっている"}
       - {type: phrase, text: "正直者と嘘つき・2 色に塗り分けられるか"}
       - {type: constraint, text: "情報と質問が交互に Q ≤ 2×10^5 回来る"}
     acl: []
-    frequency: B
-    sections:
-      - "保つ性質（diff[v] は親との差。経路圧縮の後は根との差）"
-      - "各操作の手順（find は親を先に圧縮してから差を足す、merge は根どうしの差に直してつなぐ、向きを入れ替えたら符号を反転）"
-      - "矛盾の判定と差の取得"
-      - "一般化（群なら載る。XOR で偶奇・二部グラフ判定、頂点を 2 倍にする Union-Find）"
-      - "使い分け（一度だけ判定するなら DFS で十分、不等式の制約なら差分制約の最短路）"
-      - "落とし穴（圧縮の順序・符号・成分ごとの矛盾フラグの引き継ぎ）"
-    merged_keys: []
-    visual: "静的な図：辺に差のラベルを付け、経路圧縮でラベルが足し合わされる様子"
-    problems:
-      - {id: arc090_b, role: example, summary: "「x_R − x_L = D」の形の情報の集まりが矛盾しないかを判定する"}
-      - {id: abc328_f, role: example, summary: "差の条件を順に見て、それまでに採用した条件と矛盾しないものだけを採用する"}
-      - {id: abc327_d, role: practice, summary: "条件を満たす 0/1 列が存在するか（グラフが二部グラフか）。偶奇の Union-Find か頂点を 2 倍にする"}
-      - {id: abc373_d, role: practice, summary: "各辺 u→v で x_v − x_u = w となる頂点の値を 1 つ求める（DFS でもよい）"}
-      - {id: abc451_f, role: practice, summary: "辺を足しながら二部グラフを保ち、成分ごとの色の相対値を偶奇の Union-Find で持って少ない方の色を選ぶ"}
-      - {id: abc280_f, role: practice, summary: "逆向きに通ると重みの符号が反転するグラフで、2 点間の最長路を答える。矛盾（正の閉路）がある成分は inf"}
-      - {id: typical90_bp, role: practice, summary: "隣り合う 2 項の和の情報を受け取りながら、A_X = V のときの A_Y を答える（決まらなければ Ambiguous）"}
-      - {id: arc188_c, role: challenge, summary: "正直者・嘘つき・混乱の有無について、すべての証言と整合する割り当てを求める。2 変数の XOR の制約に直す"}
-    sources: ["05-ds §4.B（weighted-union-find）", "05-ds §5（weighted-union-find）", "05-ds 付録 A", "00-curriculum §2.3.8（abc451_f）"]
     verify: [unionfind_with_potential, unionfind_with_potential_non_commutative_group]
+    frequency: B
+    frequency_evidence: "recent 1（abc451_f）・前提として届くページなし・古い ABC 4 問"
+    sections:
+      - {title: "保つ性質（diff[v] は親との差。経路圧縮の後は根との差）", anchor: invariants}
+      - {title: "各操作の手順（find は親を先に圧縮してから差を足す、merge は根どうしの差に直してつなぐ、向きを入れ替えたら符号を反転）", anchor: operations}
+      - {title: "矛盾の判定と差の取得", anchor: consistency}
+      - {title: "一般化（群なら載る。XOR で偶奇・二部グラフの判定、頂点を 2 倍にする Union-Find）", anchor: generalization}
+      - {title: "使い分け（一度だけ判定するなら DFS で十分、不等式の制約なら差分制約の最短路）", anchor: choosing}
+      - {title: "落とし穴（圧縮の順序・符号・成分ごとの矛盾フラグの引き継ぎ）", anchor: pitfalls}
+    merged_keys: []
+    visual: {kind: static, priority: 2, text: "辺に差のラベルを付け、経路圧縮でラベルが足し合わされる様子"}
+    problems:
+      - {id: arc090_b, role: example, representative: true, summary: "「x_R − x_L = D」の形の情報の集まりが矛盾しないかを判定する。", approach: "根からの差を持ち、同じ成分なら差を照合する"}
+      - {id: abc328_f, role: example, summary: "差の条件を順に見て、それまでに採用した条件と矛盾しないものだけを採用し、採用した番号を答える。", approach: "重み付き Union-Find でオンラインに矛盾を判定する"}
+      - {id: abc327_d, role: practice, summary: "条件を満たす 0/1 の列が存在するかを判定する。", approach: "グラフが二部グラフかに言い換え、偶奇の Union-Find か頂点を 2 倍にする（BFS の 2 色塗りでもよい）"}
+      - {id: abc373_d, role: practice, summary: "各辺 u → v について x_v − x_u = w となる頂点の値を 1 つ求める。", approach: "逆辺を −w で張って DFS で決める（重み付き Union-Find でもよい）"}
+      - {id: abc451_f, role: practice, summary: "（執筆時に確かめる）", approach: "辺を足しながら二部グラフを保ち、色の相対値を偶奇の Union-Find で持って成分ごとに少ない色を選ぶ（research/00 §2.3.8 の分類）"}
+      - {id: abc280_f, role: practice, summary: "逆向きに通ると重みの符号が反転するグラフで、2 点間の最長路を答える（いくらでも大きくできるなら inf）。", approach: "重み付き Union-Find で差を管理し、矛盾が出た成分は inf"}
+      - {id: typical90_bp, role: practice, summary: "隣り合う 2 項の和の情報を受け取りながら、A_X = V のときの A_Y を答える（決まらなければ Ambiguous）。", approach: "符号を交互に反転して和を差に直し、重み付き Union-Find で持つ"}
+      - {id: arc188_c, role: challenge, summary: "正直者・嘘つき・混乱の有無について、すべての証言と整合する割り当てを求める。", approach: "混乱の変数を消して 2 変数の XOR の制約に直し、偶奇の Union-Find で持つ"}
+    sources: ["05-ds §4.B（weighted-union-find）", "05-ds §5（weighted-union-find）", "05-ds 付録 A", "00-curriculum §2.3.8（abc451_f）"]
 
   - id: partially-persistent-union-find
     chapter: Union-Find
     title: 部分永続 Union-Find
-    aliases: [部分永続UF, 時刻つきUnion-Find, partially persistent union-find]
+    aliases: [部分永続 UF, 時刻つき Union-Find, partially persistent union-find]
     type: overview
     level: 発展
     level_evidence: "agc002_d（2514）。ABC で必須の例は見つからなかった"
     kind: [データ構造, 連結性・全域木]
     prerequisites: [union-find, binary-search]
     related: [parallel-binary-search, rollback-union-find, merge-process-tree, bottleneck-path, persistent-data-structures]
-    summary: "経路圧縮をせず union by size だけで高さを O(log N) に保ち、各頂点に「根でなくなった時刻」を記録する Union-Find。時刻 t の時点での連結判定や成分の大きさを答えられ、時刻の二分探索で「初めて同じ集合になる時刻」が分かる。"
+    summary: "過去の時刻 t の時点での連結判定や成分の大きさを答えられる Union-Find。経路圧縮をせず各頂点に根でなくなった時刻を記録し、時刻の二分探索で初めて連結になる時刻も求める。"
     signs:
       - {type: phrase, text: "最初の t 本の辺だけを使ったときに連結か・成分の大きさは"}
       - {type: phrase, text: "x と y が初めて同じ集合になるのは何回目の操作か"}
     acl: []
+    verify: []
     frequency: C
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 0 問"
     sections:
-      - "何ができるか（過去の時刻での find）"
-      - "なぜ経路圧縮をしないのか"
-      - "時刻の二分探索で「初めて連結になる時刻」を求める"
-      - "代わりの手（並列二分探索・併合過程の木（クラスカル再構築木））"
+      - {title: "何ができるか（過去の時刻での find）", anchor: what-it-does}
+      - {title: "なぜ経路圧縮をしないのか", anchor: no-path-compression}
+      - {title: "時刻の二分探索で「初めて連結になる時刻」を求める", anchor: binary-search-time}
+      - {title: "代わりの手（並列二分探索・併合過程の木（Kruskal 再構築木））", anchor: alternatives}
     merged_keys: []
-    visual: "静的な図：各辺に「つながった時刻」を書いた木で、時刻 t の find が t 以下の辺だけを登る様子"
+    visual: {kind: static, priority: 2, text: "各辺に「つながった時刻」を書いた木で、時刻 t の find が t 以下の辺だけを登る様子"}
     problems:
-      - {id: code_thanks_festival_2017_h, role: example, summary: "集合の併合の列に対し、x と y が初めて同じ集合になる操作の番号を答える"}
-      - {id: agc002_d, role: practice, summary: "最初の t 本の辺で、x と y の成分の頂点数の合計が z 以上になる最小の t を各クエリで答える"}
+      - {id: code_thanks_festival_2017_h, role: example, summary: "集合の併合を順に行う列に対し、2 要素が初めて同じ集合になった操作の番号を各クエリで答える。", approach: "部分永続 Union-Find と時刻の二分探索"}
+      - {id: agc002_d, role: practice, summary: "最初の t 本の辺だけを使ったとき、x と y の成分の頂点数の合計が z 以上になる最小の t を各クエリで答える。", approach: "部分永続 Union-Find と二分探索"}
+    problems_note: "発展の概要。ABC で必須の問題がなく、練習は 1 問。例題に difficulty がないので代表問題なし"
     sources: ["05-ds §4.B（partially-persistent-union-find）", "05-ds §5（partially-persistent-union-find）"]
 
   - id: rollback-union-find
     chapter: Union-Find
     title: ロールバックできる Union-Find
-    aliases: [ロールバックUF, Undo つき Union-Find, undoable union-find, rollback union-find]
+    aliases: [ロールバック UF, Undo つき Union-Find, undoable union-find, rollback union-find]
     type: overview
     level: 発展
     level_evidence: "abc302_h（2407）。オフライン動的連結性（グラフの章）の部品"
     kind: [データ構造, 連結性・全域木]
     prerequisites: [union-find]
     related: [offline-dynamic-connectivity, root-path-dfs, partially-persistent-union-find, persistent-data-structures, segment-tree]
-    summary: "経路圧縮をせず、併合で書き換えた場所と元の値をスタックに積んでおき、直前の併合から順に取り消せる Union-Find。木の DFS で入るとき併合・出るとき取り消す使い方や、オフライン動的連結性の部品になる。"
+    summary: "直前の併合から順に取り消せる Union-Find。経路圧縮をせず、書き換えた場所と元の値をスタックに積み、木の DFS（入るとき併合・出るとき取り消し）やオフライン動的連結性の部品に使う。"
     signs:
-      - {type: phrase, text: "木の根から各頂点へのパスごとに、パス上の要素で Union-Find を作りたい"}
-      - {type: phrase, text: "辺の追加と削除が混ざる連結判定を、オフラインで答える"}
+      - {type: phrase, text: "木の根から各頂点へのパスごとに、パス上の要素どうしのつながりを答える"}
+      - {type: phrase, text: "辺の追加と削除が混ざり、そのたびに 2 頂点が連結かを答える"}
     acl: []
-    frequency: C
-    sections:
-      - "何ができるか（後入れ先出しの取り消し）"
-      - "なぜ経路圧縮をしないのか（戻すコストとならしの保証が崩れること）"
-      - "木の DFS と組む（入るとき併合・出るとき取り消し）"
-      - "オフライン動的連結性（時間軸のセグ木に辺を載せる → グラフの章）"
-    merged_keys: []
-    visual: "静的な図：DFS の行き（併合）と帰り（取り消し）で履歴のスタックが伸び縮みする様子"
-    problems:
-      - {id: abc302_h, role: example, summary: "木の根から各頂点へのパス上で各頂点のボールの片方を選ぶとき、書かれた値の種類数の最大値。DFS で入るとき併合・出るとき取り消す"}
-    sources: ["05-ds §4.B（rollback-union-find）", "05-ds §5（rollback-union-find）", "03-graph §4.D（offline-dynamic-connectivity）"]
     verify: [dynamic_graph_vertex_add_component_sum]
+    frequency: C
+    frequency_evidence: "recent 0・前提として 1 ページに届く（直接 1）・古い ABC 1 問"
+    sections:
+      - {title: "何ができるか（後入れ先出しの取り消し）", anchor: what-it-does}
+      - {title: "なぜ経路圧縮をしないのか（戻すコストとならしの保証が崩れること）", anchor: no-path-compression}
+      - {title: "木の DFS と組む（入るとき併合・出るとき取り消し）", anchor: with-dfs}
+      - {title: "オフライン動的連結性の部品（時間軸のセグメント木に辺を載せる → グラフの章）", anchor: offline-dynamic-connectivity}
+    merged_keys: []
+    visual: {kind: static, priority: 2, text: "DFS の行き（併合）と帰り（取り消し）で履歴のスタックが伸び縮みする様子"}
+    problems:
+      - {id: abc302_h, role: example, representative: true, summary: "木の根から各頂点へのパス上で各頂点のボールの片方を選ぶとき、書かれた値の種類数の最大値を各頂点について求める。", approach: "値を頂点にした Union-Find を、DFS で入るとき併合・出るとき取り消す"}
+    problems_note: "発展の概要。ABC の問題は abc302_h だけ"
+    sources: ["05-ds §4.B（rollback-union-find）", "05-ds §5（rollback-union-find）", "03-graph §4.D（offline-dynamic-connectivity）"]
 
-  # ===== 4. 区間クエリ（BIT・セグ木） =====
+  # ===== 4. 区間クエリ（BIT・セグメント木） =====
 
   - id: fenwick-tree
     chapter: 区間クエリ
     title: BIT（Fenwick Tree）
-    aliases: [BIT, Binary Indexed Tree, フェニック木, Fenwick Tree, fenwick_tree]
+    aliases: [Binary Indexed Tree, フェニック木, fenwick_tree]
     type: technique
     level: 水
     level_evidence: "道具としては緑〜水（abc185_f 1053・abc340_e 1157）。値で座標圧縮して数える型が水で頻出（abc351_f 1253・abc221_e 1515・abc231_f 1580）、平面走査と組むと青"
     kind: [データ構造, 区間クエリ]
     prerequisites: [prefix-sum, bit-operations]
-    related: [segment-tree, inversion-number, kth-element, coordinate-compression, sweep-line-2d, offline-queries, imos]
-    summary: "一点への加算と接頭辞の和（したがって区間の和）を、どちらも O(log N) で行う。区間の和は 2 つの接頭辞の差で求めるので演算に逆元が要り（和・XOR は可、min・max は不可）、値を添字にして個数を数える使い方が多い。"
+    related: [segment-tree, inversion-number, kth-element, coordinate-compression, sweep-line-2d, offline-queries, imos, segment-tree-on-values]
+    summary: "一点への加算と接頭辞の和（したがって区間の和）を、どちらも O(log N) で行う。区間の和は 2 つの接頭辞の差なので演算に逆元が要り、値を添字にして個数を数える使い方が多い。"
     signs:
       - {type: phrase, text: "一点の値の更新と区間の和の質問が交互に来る"}
       - {type: phrase, text: "i より前にある x 以下の要素の個数"}
-      - {type: phrase, text: "座標圧縮した値ごとの個数・和を数えながら走査する"}
+      - {type: shape, text: "Σ_{j<i} [A_j ≤ A_i] のように、前にある要素のうち条件を満たすものの個数・和を i ごとに足す"}
       - {type: constraint, text: "N, Q ≤ 2×10^5 で更新があり、累積和を毎回作り直すと間に合わない"}
     acl: [fenwick_tree]
-    frequency: A
-    sections:
-      - "何ができるか（一点加算・接頭辞和。区間和は 2 つの接頭辞の差なので逆元が要る）"
-      - "保つ性質（1-indexed で、t[i] は区間 (i − lowbit(i), i] の和。lowbit(i) = i & −i）"
-      - "各操作の手順（add は i += lowbit(i) で上へ、sum は i −= lowbit(i) で下へ。線形時間の構築）"
-      - "境界（内部は 1-indexed・外部は 0-indexed の半開区間、i = 0 の add は止まらない、ACL は符号なし整数で持つ）"
-      - "値を添字にして数える（座標圧縮と組む）"
-      - "変種：区間加算・一点取得（差分の BIT）、区間加算・区間和（BIT 2 本）、2 次元 BIT、接頭辞の max（増える更新だけ）"
-      - "BIT 上の二分探索（→ k 番目の値を求めるデータ構造）"
-      - "使い分け（更新がなければ累積和、min・max や非可換な演算ならセグ木）"
-    merged_keys: []
-    visual: "動く図：添字を 2 進数で並べ、各箱が覆う区間を横棒で描き、add と sum で通る箱が順に光るステップ送り"
-    problems:
-      - {id: practice2_b, role: example, summary: "一点加算と区間和のクエリをそのまま処理する（ACL の fenwick_tree）"}
-      - {id: abc185_f, role: example, summary: "一点を XOR で更新し、区間の XOR を答える（XOR は自分自身が逆元なので BIT で区間が取れる）"}
-      - {id: abc351_f, role: example, summary: "すべての i < j について max(A_j − A_i, 0) の総和。座標圧縮して、自分以下の個数と和を BIT 2 本で数える"}
-      - {id: abc340_e, role: practice, summary: "円環に並ぶ箱の玉を取り出して順に配る操作の繰り返し。区間加算・一点取得（差分の BIT）"}
-      - {id: abc221_e, role: practice, summary: "先頭 ≤ 末尾となる長さ 2 以上の部分列の個数。座標圧縮した BIT に、個数でなく重みを載せて足す"}
-      - {id: abc276_f, role: practice, summary: "先頭 K 枚から 2 枚を復元抽出したときの最大値の期待値を各 K で求める。値で座圧した BIT で個数と和を持つ"}
-      - {id: abc231_f, role: practice, summary: "A_i ≥ A_j かつ B_i ≤ B_j となる組 (i, j) の数。A でソートし、B を座圧した BIT で数える（同じ組の扱いに注意）"}
-      - {id: arc068_c, role: challenge, summary: "各 d について、d 刻みで止まる列車が通る区間の数。区間を長さの順に入れ、区間加算・一点取得の BIT で d の倍数だけ調べる"}
-    sources: ["05-ds §4.C（fenwick-tree）", "05-ds §5（fenwick-tree）", "05-ds §4.F", "05-ds 付録 A"]
     verify: [point_add_range_sum, static_range_sum]
+    frequency: A
+    frequency_evidence: "recent 2（abc452_f・abc467_g）・前提として 13 ページに届く（直接 5）・古い ABC 6 問"
+    sections:
+      - {title: "何ができるか（一点加算・接頭辞和。区間和は 2 つの接頭辞の差なので逆元が要る）", anchor: what-it-does}
+      - {title: "保つ性質（1-indexed で、t[i] は区間 (i − lowbit(i), i] の和。lowbit(i) = i & −i）", anchor: invariants}
+      - {title: "各操作の手順（add は i += lowbit(i) で上へ、sum は i −= lowbit(i) で下へ。線形時間の構築）", anchor: operations}
+      - {title: "境界（内部は 1-indexed・外部は 0-indexed の半開区間、i = 0 の add は止まらない、ACL は符号なし整数で持つ）", anchor: boundaries}
+      - {title: "値を添字にして数える（座標圧縮と組む）", anchor: count-by-value}
+      - {title: "変種（区間加算・一点取得は差分の BIT、区間加算・区間和は BIT 2 本、2 次元 BIT、増える更新だけなら接頭辞の max）", anchor: variants}
+      - {title: "BIT 上の二分探索（→ K 番目の値を求めるデータ構造）", anchor: binary-search}
+      - {title: "使い分け（更新がなければ累積和、min・max や非可換な演算ならセグメント木）", anchor: choosing}
+    merged_keys: []
+    visual: {kind: dynamic, priority: 2, text: "添字を 2 進数で並べ、各箱が覆う区間を横棒で描き、add と sum で通る箱が順に光るステップ送り"}
+    problems:
+      - {id: abc185_f, role: example, summary: "一点を XOR で更新し、区間の XOR を答える。", approach: "XOR は自分自身が逆元なので BIT で区間が取れる"}
+      - {id: abc351_f, role: example, representative: true, summary: "すべての i < j について max(A_j − A_i, 0) の総和を求める。", approach: "座標圧縮して、自分以下の個数と和を BIT 2 本で数える"}
+      - {id: practice2_b, role: example, summary: "一点加算と区間和のクエリを処理する。", approach: "ACL の fenwick_tree"}
+      - {id: abc340_e, role: practice, summary: "円環に並ぶ箱の玉を取り出して順に配る操作を繰り返した後の、各箱の玉の数を求める。", approach: "区間加算・一点取得（差分の BIT）。一周を超える分は全体への加算にする"}
+      - {id: abc221_e, role: practice, summary: "先頭 ≤ 末尾となる長さ 2 以上の部分列の個数を求める。", approach: "座標圧縮した BIT に、個数でなく 2 の冪の重みを載せて足す"}
+      - {id: abc276_f, role: practice, summary: "先頭 K 枚から 2 枚を復元抽出したときの最大値の期待値を、各 K について求める。", approach: "値で座圧した BIT で個数と和を持つ"}
+      - {id: abc231_f, role: practice, summary: "A_i ≥ A_j かつ B_i ≤ B_j となる組 (i, j) の数を求める。", approach: "A でソートし、B を座圧した BIT で数える（同じ組の扱いに注意）"}
+      - {id: arc068_c, role: challenge, summary: "各 d について、d 刻みで止まる列車が通る区間の数を求める。", approach: "区間を長さの順に入れ、区間加算・一点取得の BIT で d の倍数だけ調べる"}
+    sources: ["05-ds §4.C（fenwick-tree）", "05-ds §5（fenwick-tree）", "05-ds §4.F", "05-ds 付録 A"]
 
   - id: inversion-number
     chapter: 区間クエリ
     title: 転倒数
-    aliases: [inversion, 反転数, inversion count, バブルソートの交換回数, 隣接swapの最小回数]
+    aliases: [inversion, inversion number, inversion count, 反転数, バブルソートの交換回数, 隣接 swap の最小回数]
     type: technique
     level: 水
     level_evidence: "BIT で数えて差分を更新する型が水（abc190_f 1321・abc378_e 1406・abc396_f 1479・abc261_f 1587）、尺取り・期待値・言い換えと組むと青（abc452_f 1630・abc479_f 1938・abc380_g 1995）"
     kind: [データ構造, 数え上げ]
     prerequisites: [fenwick-tree, coordinate-compression]
-    related: [permutation-cycles, divide-and-conquer, two-pointers, mo-algorithm, lazy-segtree-patterns]
-    summary: "列の転倒数（i < j かつ A_i > A_j の組の数）を、左から見て「既に出た値のうち自分より大きいものの個数」を BIT で足して O(N log N) で数える。隣接 swap でソートする最小回数に等しく、1 要素の出し入れで差分を更新する型が多い。"
+    related: [permutation-cycles, divide-and-conquer, two-pointers, mo-algorithm, lazy-segment-tree-patterns]
+    summary: "列の転倒数（i < j かつ A_i > A_j の組の数）を、左から見て既に出た値のうち自分より大きいものの個数を BIT で足して O(N log N) で数える。隣接 swap でソートする最小回数に等しい。"
     signs:
       - {type: phrase, text: "隣り合う要素の交換でソートする最小回数・バブルソートの交換回数"}
       - {type: phrase, text: "i < j かつ A_i > A_j を満たす組の数"}
       - {type: phrase, text: "巡回シフトや、全体に加算して mod を取った各列の転倒数"}
-      - {type: constraint, text: "N ≤ 2×10^5 で、答えが約 2×10^10 まで大きくなる（long long が要る）"}
+      - {type: constraint, text: "N ≤ 2×10^5 で、答えが約 2×10^10 まで大きくなる"}
     acl: [fenwick_tree]
-    frequency: B
+    verify: []
+    frequency: A
+    frequency_evidence: "recent 2（abc452_f・abc479_f）・前提として届くページなし・古い ABC 6 問"
     sections:
-      - "BIT で数える手順（値を座標圧縮し、左から「自分より大きい既出の個数」を足す）"
-      - "なぜ隣接 swap の最小回数か（1 回の隣接 swap で転倒数はちょうど 1 増減する）"
-      - "言い換え（P を Q に並べ替える回数＝Q での位置に置き換えた列の転倒数、累積和の大小の組）"
-      - "差分で更新する型（先頭を末尾へ・窓を伸縮する尺取り・色ごとの転倒数を引く）（青）"
-      - "使い分け（任意の 2 要素の swap なら置換の巡回分解、区間ごとの転倒数を多数なら Mo）"
-      - "落とし穴（等しい値の不等号・座標圧縮・64 bit）"
+      - {title: "BIT で数える手順（値を座標圧縮し、左から自分より大きい既出の個数を足す）", anchor: count-with-bit}
+      - {title: "なぜ隣接 swap の最小回数か（1 回の隣接 swap で転倒数はちょうど 1 増減する）", anchor: adjacent-swaps}
+      - {title: "言い換え（P を Q に並べ替える回数＝Q での位置に置き換えた列の転倒数、累積和の大小の組）", anchor: reformulation}
+      - {title: "差分で更新する（先頭を末尾へ回す・全体に足して mod を取る・色ごとの転倒数を引く）", anchor: incremental}
+      - {title: "使い分け（任意の 2 要素の swap なら置換の巡回分解、区間ごとの転倒数を多数なら Mo）", anchor: choosing}
+      - {title: "落とし穴（等しい値の不等号・座標圧縮・64 bit）", anchor: pitfalls}
+      - {title: "窓を伸縮しながら転倒数を増減する（尺取り・期待値と組む）", anchor: sliding-window, level: 青}
     merged_keys: [inversion-count]
-    visual: "静的な図：棒グラフの列で逆転している組を線で結ぶ。左から BIT に値が入っていく様子"
+    visual: {kind: static, priority: 2, text: "棒グラフの列で逆転している組を線で結ぶ。左から BIT に値が入っていく様子"}
     problems:
-      - {id: chokudai_S001_j, role: example, summary: "隣接交換でソートするときの交換回数（転倒数）を求める"}
-      - {id: abc190_f, role: example, summary: "順列を巡回シフトした N 通りの列それぞれの転倒数。先頭の値を末尾に移したときの増減を O(1) で足す"}
-      - {id: abc452_f, role: example, summary: "転倒数がちょうど K の連続部分列の個数。「K 以下」の差に分け、尺取りで窓を動かしながら BIT で転倒数を増減する"}
-      - {id: abc264_d, role: practice, summary: "隣接交換で文字列を atcoder に並べ替える最小回数"}
-      - {id: abc378_e, role: practice, summary: "すべての区間の区間和 mod M の総和。累積和 mod M の列で前の方が大きい組の数を BIT で数えて補正する"}
-      - {id: abc396_f, role: practice, summary: "全要素に k を足して mod M を取った列の転倒数を各 k で答える。M−1 から 0 に戻る要素の分だけ差分を足す"}
-      - {id: abc261_f, role: practice, summary: "色の違う球の交換にだけコストがかかるソートの最小コスト。全体の転倒数から色ごとの転倒数を引く"}
-      - {id: arc075_c, role: practice, summary: "平均が K 以上の連続区間の個数。A_i − K の累積和で S_l ≤ S_r の組を BIT で数える"}
-      - {id: abc479_f, role: challenge, summary: "操作の回数を隣接 swap の回数に言い換え、転倒数で求める"}
-      - {id: abc380_g, role: challenge, summary: "長さ K の区間を一様に選んでシャッフルした後の転倒数の期待値。窓の内外の転倒数を BIT で差分更新する"}
-    sources: ["05-ds §4.C（inversion-number）", "05-ds §5（inversion-number）", "01-basics §4.G（inversion-count）", "00-curriculum §4.2（転倒数）", "00-curriculum §2.3.8"]
+      - {id: abc190_f, role: example, representative: true, summary: "0〜N−1 の順列を巡回シフトした N 通りの列それぞれの転倒数を答える。", approach: "初期の転倒数を BIT で数え、先頭の値 a を末尾に移したときの増減 N − 1 − 2a を足す"}
+      - {id: abc452_f, role: example, summary: "転倒数がちょうど K の連続部分列の個数を求める。", approach: "「K 以下」の個数の差に分け、尺取りで窓を動かしながら BIT で転倒数を増減する"}
+      - {id: chokudai_S001_j, role: example, summary: "数列を隣接交換でソートするときの交換回数を求める。", approach: "左から、既出のうち自分より大きい数の個数を BIT で数えて足す"}
+      - {id: abc264_d, role: practice, summary: "隣接交換で文字列を atcoder に並べ替える最小回数を求める。", approach: "目標位置への写像に直して転倒数を数える"}
+      - {id: abc378_e, role: practice, summary: "すべての区間について区間和 mod M を求め、その総和を答える。", approach: "累積和 mod M の列で前の方が大きい組の数を BIT で数え、M 倍して補正する"}
+      - {id: abc396_f, role: practice, summary: "全要素に k を足して mod M を取った列の転倒数を、各 k について答える。", approach: "M − 1 から 0 に戻る要素の分だけ差分を足す"}
+      - {id: abc261_f, role: practice, summary: "色と数の書かれた球の列を、色の違う球の交換にだけコストがかかる隣接交換でソートする最小コストを求める。", approach: "全体の転倒数から色ごとの転倒数を引く"}
+      - {id: arc075_c, role: practice, summary: "平均が K 以上の連続部分列の個数を求める。", approach: "A_i − K の累積和で S_l ≤ S_r の組を BIT で数える"}
+      - {id: abc479_f, role: challenge, summary: "（執筆時に確かめる）", approach: "操作の回数を隣接 swap の回数に言い換え、転倒数で求める（research/00 §2.3.8 の分類）"}
+      - {id: abc380_g, role: challenge, summary: "長さ K の区間を一様に選んでシャッフルした後の転倒数の期待値を求める。", approach: "窓の内外の転倒数を BIT で差分更新し、窓の中はシャッフル後の期待値に置き換える"}
+    sources: ["05-ds §4.C（inversion-number）", "05-ds §5（inversion-number）", "05-ds 付録 A（abc452_f）", "01-basics §4.G（inversion-count）", "00-curriculum §4.2（転倒数）", "00-curriculum §2.3.8"]
 
   - id: kth-element
     chapter: 区間クエリ
-    title: k 番目の値を求めるデータ構造（BIT 上の二分探索ほか）
-    aliases: [BIT上の二分探索, k番目に小さい値, order statistics, 順序統計量, 空きの k 番目]
+    title: K 番目の値を求めるデータ構造
+    aliases: [BIT 上の二分探索, Fenwick tree binary search, order statistics, 順序統計量, 空きの K 番目]
     type: technique
     level: 水
-    level_evidence: "水〜青（abc281_e 1334・abc392_f 1395・arc033_3 1641）。更新つきの上位 K 個の和は黄（abc287_g 2180）"
+    level_evidence: "水〜青（abc281_e 1334・abc392_f 1395・arc033_3 1641 参考値）"
     kind: [データ構造, 二分探索]
     prerequisites: [fenwick-tree, ordered-set]
-    related: [segtree-binary-search, top-k-multiset, segtree-on-values, balanced-bst, binary-trie, kth-value, sqrt-decomposition, linked-list]
-    summary: "値の追加・削除がある多重集合で「k 番目に小さい値」や「x 以下の個数」を求める方法を比べる。値を座標圧縮した個数の BIT と BIT 上の二分探索なら O(log N) で、空き位置の k 番目を探して挿入を逆順に処理する型にも使える。"
+    related: [segment-tree-binary-search, top-k-multiset, segment-tree-on-values, balanced-bst, binary-trie, kth-value, wavelet-matrix, sqrt-decomposition, linked-list]
+    summary: "値の追加・削除がある多重集合で、K 番目に小さい値や x 以下の個数を O(log N) で求める。値を添字にした個数の BIT の上で、2 べきの歩幅を大きい順に試して境界を探す。"
     signs:
-      - {type: phrase, text: "数の追加・削除と、k 番目に小さい値の質問"}
-      - {type: phrase, text: "空いている場所のうち k 番目に置く・指定した位置への挿入を繰り返した最終的な列"}
+      - {type: phrase, text: "数の追加・削除と、K 番目に小さい値の質問"}
+      - {type: phrase, text: "空いている場所のうち K 番目に置く・指定した位置への挿入を繰り返した最終的な列"}
       - {type: phrase, text: "x 以下の要素の個数（順位）"}
     acl: [fenwick_tree]
-    frequency: B
-    sections:
-      - "方法の比較（multiset で k 歩・BIT 上の二分探索・セグ木の max_right・外側の二分探索・pb_ds・2 つのヒープ・Binary Trie・平方分割）"
-      - "BIT 上の二分探索の手順（2 べきの歩幅を大きい順に試す。値が非負であることが前提）"
-      - "挿入を逆順に処理して「空きの P 番目」に置く"
-      - "上位 K 個の和（個数と和の BIT 2 本＋二分探索）（黄）"
-      - "答えの二分探索で K 番目を数える方法（→ 基本テクニックの K 番目の値）との違い"
-    merged_keys: []
-    visual: "静的な図：BIT 上の二分探索で、2 べきの歩幅を大きい順に試して進む様子"
-    problems:
-      - {id: abc392_f, role: example, summary: "指定した位置への挿入を繰り返した最終的な列。逆順に処理し、空きのうち P_i 番目を BIT 上の二分探索で探す"}
-      - {id: arc033_3, role: example, summary: "数の追加と「k 番目に小さい数を答えて削除」。値ごとの個数の BIT で、累積個数が k になる位置を探す"}
-      - {id: abc241_d, role: practice, summary: "数の追加と「x 以下で大きい方から k 番目」「x 以上で小さい方から k 番目」の質問（k ≤ 5）"}
-      - {id: abc281_e, role: practice, summary: "長さ M の各窓で、小さい方から K 個の和。座圧した（個数, 和）の BIT で K 個目の境界を探す"}
-      - {id: abc287_g, role: challenge, summary: "得点ごとの枚数を更新しながら、上位 X 枚の得点の和の最大を答える。得点を先読みして座圧し、BIT 2 本と二分探索"}
-    sources: ["05-ds §4.C（kth-element）", "05-ds §5（kth-element）", "05-ds §6.1"]
     verify: [ordered_set]
+    frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 3 問"
+    sections:
+      - {title: "方法の比較（multiset で K 歩・BIT 上の二分探索・セグメント木の max_right・外側の二分探索・pb_ds・2 つのヒープ・Binary Trie・平方分割）", anchor: comparison}
+      - {title: "BIT 上の二分探索の手順（2 べきの歩幅を大きい順に試す。値が非負であることが前提）", anchor: bit-binary-search}
+      - {title: "挿入を逆順に処理して「空きの P 番目」に置く", anchor: reverse-insertion}
+      - {title: "答えの二分探索で K 番目を数える方法（→ 基本テクニックの K 番目の値）との違い", anchor: vs-kth-value}
+    merged_keys: []
+    visual: {kind: static, priority: 2, text: "BIT 上の二分探索で、2 べきの歩幅を大きい順に試して進む様子"}
+    problems:
+      - {id: arc033_3, role: example, summary: "数の集合への追加と、小さい方から x 番目の数を答えて削除するクエリを処理する。", approach: "値ごとの個数の BIT で、累積個数が x になる位置を BIT 上の二分探索で探す"}
+      - {id: abc241_d, role: practice, summary: "数の追加と「x 以下で大きい方から k 番目」「x 以上で小さい方から k 番目」の質問を処理する（k ≤ 5）。", approach: "k が小さいので multiset からイテレータを k 歩動かす（BIT 上の二分探索でもよい）"}
+      - {id: abc281_e, role: practice, summary: "長さ M の各窓で、小さい方から K 個の和を答える。", approach: "座圧した（個数, 和）の BIT で、K 個目の境界を BIT 上の二分探索で探す"}
+      - {id: abc392_f, role: practice, summary: "空の列に、i = 1, 2, …, N の順に i を先頭から P_i 番目の位置へ挿入した後の列を求める。", approach: "逆順に処理し、空きのうち P_i 番目を BIT 上の二分探索で探す（例題はセグメント木上の二分探索）"}
+    problems_note: "帯の中の例題がない（D4）。水の帯の abc392_f は segment-tree-binary-search、abc281_e は segment-tree-on-values の例題にした。arc033_3 は 2015 年の参考値の difficulty。代表問題は問題の補充で探す。上位 K 個の和の節は top-k-multiset・segment-tree-on-values に任せた（abc287_g も外した）"
+    sources: ["05-ds §4.C（kth-element）", "05-ds §5（kth-element）", "05-ds §6.1"]
 
   - id: segment-tree
     chapter: 区間クエリ
-    title: セグメント木（一点更新・区間取得）
-    aliases: [セグ木, segtree, Segment Tree, RMQ, 非再帰セグ木, 区間最小値, 文字種ごとの BIT]
+    title: セグメント木
+    aliases: [セグ木, segtree, Segment Tree, RMQ, 非再帰セグ木, 区間最小値, 文字の集合を持つセグ木]
     type: technique
     level: 水
-    level_evidence: "一点更新・区間の集約そのものは水の入口（abc341_e 1223・abc157_e 1443）。設計書 §4.1 の 2 でセグ木の基本を水とした"
+    level_evidence: "一点更新・区間の集約そのものは水の入口（abc341_e 1223・abc461_e 1431・abc157_e 1443）。設計書 §4.1-2 でセグ木の基本を水とした"
     kind: [データ構造, 区間クエリ]
     prerequisites: [prefix-sum]
-    related: [fenwick-tree, segment-tree-monoids, segtree-binary-search, lazy-segment-tree, sparse-table, segtree-on-values, complete-binary-tree, acl-segtree-template, dp-segment-tree, hash-segment-tree]
+    related: [fenwick-tree, segment-tree-monoids, segment-tree-binary-search, lazy-segment-tree, sparse-table, segment-tree-on-values, complete-binary-tree, acl-reading#segtree-args, dp-segment-tree, rolling-hash#hash-segment-tree, cht]
     summary: "結合律と単位元を持つ演算（モノイド）が載った列で、一点の更新と区間の総積（和・最小・最大・gcd など）の取得を、どちらも O(log N) で行う。演算は可換でなくてよい。"
     signs:
       - {type: phrase, text: "配列の値を書き換えながら、区間の最小値（最大値・gcd）を何度も答える"}
       - {type: phrase, text: "1 文字の更新と、区間に現れる文字の種類数"}
       - {type: constraint, text: "N, Q ≤ 2×10^5〜5×10^5 で、一点の更新と区間の質問が交互に来る"}
     acl: [segtree]
-    frequency: A
-    sections:
-      - "何ができるか（モノイド (S, op, e)・一点更新・区間取得）"
-      - "なぜ O(log N) か（区間を各段で高々 2 個のノードに分ける。結合律と単位元の役割）"
-      - "保つ性質（d[k] は k が表す区間の総積、葉は d[size + i]、余った葉は e()）"
-      - "各操作の手順（set は葉から根へ作り直す、prod は左右の端から 1 段ずつ上がり、左は左から右へ・右は右から左へ積む）"
-      - "境界（半開区間 [l, r)・l = r なら e()・0-indexed・e() の選び方と INF のあふれ）"
-      - "再帰型と非再帰型"
-      - "文字列へのクエリ（文字ごとの BIT・文字の集合を 26 ビットの OR で持つ）"
-      - "DP の配列を載せる（→ DP の章のセグ木による遷移の高速化）"
-      - "使い分け（和だけなら BIT、更新がなければ累積和・Sparse Table、区間の更新があるなら遅延セグ木）"
-    merged_keys: [string-queries-ds]
-    visual: "動く図：完全二分木の各ノードに区間と値を書き、prod で選ばれるノードが段ごとに光り、set で葉から根までが更新されるステップ送り"
-    problems:
-      - {id: abc341_e, role: example, summary: "0/1 列の区間反転と、区間が「隣がすべて異なる」かの判定。隣が同じかを 0/1 にした列の区間和に言い換える"}
-      - {id: abc157_e, role: example, summary: "1 文字の更新と、区間に現れる文字の種類数。文字の集合を 26 ビットで持ち OR のセグ木に載せる"}
-      - {id: abc185_f, role: practice, summary: "一点を XOR で更新し、区間の XOR を答える"}
-      - {id: abc285_f, role: practice, summary: "1 文字の更新と、区間が全体をソートした文字列の部分文字列かの判定。文字ごとの BIT と隣の大小の違反の個数を持つ"}
-      - {id: tessoku_book_bf, role: practice, summary: "一点の値の変更と区間の最大値のクエリ"}
-    sources: ["05-ds §4.C（segment-tree）", "05-ds §5（segment-tree）", "05-ds §4.F", "08-string-geo §4.1（string-queries-ds）"]
     verify: [point_set_range_composite]
+    frequency: A
+    frequency_evidence: "recent 4（abc460_g・abc461_e・abc467_f・abc476_e）・前提として 19 ページに届く（直接 10）・古い ABC 4 問"
+    sections:
+      - {title: "何ができるか（モノイド (S, op, e)・一点更新・区間取得）", anchor: what-it-does}
+      - {title: "なぜ O(log N) か（区間を各段で高々 2 個のノードに分ける。結合律と単位元の役割）", anchor: complexity}
+      - {title: "保つ性質（d[k] は k が表す区間の総積、葉は d[size + i]、余った葉は e()）", anchor: invariants}
+      - {title: "各操作の手順（set は葉から根へ作り直す、prod は左右の端から 1 段ずつ上がり、左は左から右へ・右は右から左へ積む）", anchor: operations}
+      - {title: "境界（半開区間 [l, r)・l = r なら e()・0-indexed・e() の選び方と INF のあふれ）", anchor: boundaries}
+      - {title: "再帰型と非再帰型", anchor: recursive-vs-iterative}
+      - {title: "文字列へのクエリ（文字ごとの BIT・文字の集合を 26 ビットの OR で持つ）", anchor: string-queries}
+      - {title: "DP の配列を載せる（→ DP の章のセグメント木による遷移の高速化）", anchor: dp}
+      - {title: "使い分け（和だけなら BIT、更新がなければ累積和・Sparse Table、区間の更新があるなら遅延セグメント木）", anchor: choosing}
+    merged_keys: [string-queries-ds]
+    visual: {kind: dynamic, priority: 1, text: "完全二分木の各ノードに区間と値を書き、prod で選ばれるノードが段ごとに光り、set で葉から根までが更新されるステップ送り"}
+    problems:
+      - {id: abc341_e, role: example, representative: true, summary: "0/1 の列の区間反転と、区間が「隣どうしがすべて異なる」かの判定のクエリを処理する。", approach: "隣が同じかを 0/1 にした列の区間和に言い換え、反転は両端 2 点の更新にする"}
+      - {id: abc157_e, role: example, summary: "文字列の 1 文字の更新と、区間に現れる文字の種類数の質問を処理する。", approach: "文字の集合を 26 ビットで持ち OR のセグ木に載せる（文字ごとの BIT でもよい）"}
+      - {id: abc476_e, role: practice, summary: "（執筆時に確かめる）", approach: "区間の最大・最小とその位置をセグ木で管理する（research/00 §2.3.8 の分類）"}
+      - {id: abc185_f, role: practice, summary: "一点を XOR で更新し、区間の XOR を答える。", approach: "XOR のセグ木（BIT でもよい）"}
+      - {id: abc461_e, role: practice, summary: "（執筆時に確かめる）", approach: "行・列ごとに最後の操作を管理し、寄与の差分をクエリ番号を添字にしたセグ木で数える（research/00 §2.3.8 の分類）"}
+      - {id: abc285_f, role: practice, summary: "文字列の 1 文字の更新と、区間が全体をソートした文字列の部分文字列かの判定のクエリを処理する。", approach: "文字ごとの BIT と、隣の大小の違反の個数を持つ"}
+      - {id: tessoku_book_bf, role: practice, summary: "一点の値の変更と区間の最大値のクエリを処理する。", approach: "区間 max のセグ木"}
+    sources: ["05-ds §4.C（segment-tree）", "05-ds §5（segment-tree）", "05-ds §4.F", "08-string-geo §4.1（string-queries-ds）", "00-curriculum §2.3.8（abc461_e・abc476_e）"]
 
-  - id: segtree-on-values
+  - id: segment-tree-binary-search
     chapter: 区間クエリ
-    title: 値を添字にする BIT・セグ木（座標圧縮との組み合わせ）
+    title: セグメント木上の二分探索
+    aliases: [セグ木上の二分探索, セグ木の二分探索, binary search on segment tree, max_right, min_left]
+    type: technique
+    level: 水
+    level_evidence: "abc319 以降の根拠で青から水に下げた（design-review §3）：abc392_f（1395、2025）・abc478_f（1588、2026）。易しい形は abc382_c（476）・abc330_e（1004）。遅延セグメント木の上で境界を探す abc389_f（1642）は青の節、abc307_f（2139、2023-06）は黄"
+    kind: [データ構造, 二分探索, 区間クエリ]
+    prerequisites: [segment-tree, binary-search]
+    related: [kth-element, monotonic-stack, segment-tree-on-values, lazy-segment-tree, acl-reading]
+    summary: "左端 l を固定し、区間 [l, r) の総積が条件を満たす最大の r を、木を登って降りる手順で O(log N) で求める。l 以降で初めて x 以上になる位置・和が w を超えない最長の区間・K 番目の 1 に使う。"
+    signs:
+      - {type: phrase, text: "位置 i 以降で初めて値が x 以上になる位置"}
+      - {type: phrase, text: "空いている場所のうち K 番目"}
+      - {type: phrase, text: "各 l について、条件を満たす最長の区間"}
+      - {type: constraint, text: "N, Q ≤ 2×10^5 で、更新のたびに条件を満たす最初の位置を答える"}
+    acl: [segtree, lazy_segtree]
+    verify: []
+    frequency: B
+    frequency_evidence: "recent 1（abc478_f）・前提として届くページなし・古い ABC 5 問"
+    sections:
+      - {title: "何ができるか（max_right・min_left）と f の条件（副作用なし・f(e()) が真・単調）", anchor: what-it-does}
+      - {title: "なぜ O(log N) か（登る段階と降りる段階）", anchor: complexity}
+      - {title: "和が K に達する位置（K 番目の 1・空きの K 番目）", anchor: kth-one}
+      - {title: "境界（l = N のとき・返り値の r が N のとき・f(e()) が偽になる条件の言い換え・1-indexed への直し）", anchor: boundaries}
+      - {title: "使い分け（BIT 上の二分探索・外側の二分探索と prod の O(log^2 N)・set の lower_bound）", anchor: choosing}
+      - {title: "落とし穴（min_left に同じ向きの条件を流用する・単調でない条件）", anchor: pitfalls}
+      - {title: "遅延セグメント木の上の二分探索（単調な列への区間作用と境界の探索）", anchor: on-lazy-segment-tree, level: 青}
+    merged_keys: [segtree-binary-search]
+    visual: {kind: dynamic, priority: 2, text: "登る段階と降りる段階を色分けし、累積と f の真偽を各ステップで表示するステップ送り（セグメント木の図の部品を共有）"}
+    problems:
+      - {id: abc382_c, role: example, summary: "客 1, 2, … の前を寿司が順に流れ、美味しさが美食度以上の寿司を客が取るとき、各寿司を誰が食べるかを答える。", approach: "美食度の min のセグ木で、条件を満たす最左の客を max_right で探す"}
+      - {id: abc392_f, role: example, representative: true, summary: "空の列に、i = 1, 2, …, N の順に i を先頭から P_i 番目の位置へ挿入した後の列を求める。", approach: "逆順に処理し、空きを 1 とした和のセグ木で、和が P_i に達する位置を max_right で探す（BIT 上の二分探索でもよい）"}
+      - {id: practice2_j, role: example, summary: "一点更新・区間の最大値・「位置 X 以降で値が V 以上になる最初の位置」のクエリを処理する。", approach: "max のセグ木で max_right(X, v < V)"}
+      - {id: abc330_e, role: practice, summary: "1 点を書き換えるたびに数列の mex を答える。", approach: "値ごとの個数のセグ木で、個数 0 の最初の位置を探す"}
+      - {id: abc478_f, role: practice, summary: "（執筆時に確かめる）", approach: "木の構築の数え上げで、各頂点の親になれる範囲をセグ木上の二分探索で求める（research/00 §2.3.8 の分類。例題は tree-construction）"}
+      - {id: abc389_f, role: practice, summary: "レートが範囲に入っていれば +1 される大会を順に経た後の最終レートを、初期レートを変えた多数の質問に答える。", approach: "初期値の順に並べた単調な列に区間加算し、境界を遅延セグ木上の二分探索で探す"}
+      - {id: abc307_f, role: challenge, summary: "日ごとに距離の上限が決まる感染の広がりで、各頂点が感染する日を答える。", approach: "（日, 距離）のダイクストラと、その辺を通せる最初の日をセグ木上の二分探索で求める"}
+    sources: ["05-ds §4.C（segtree-binary-search）", "05-ds §5（segtree-binary-search）", "05-ds §4.F", "00-curriculum §2.3.8（abc478_f）"]
+
+  - id: segment-tree-on-values
+    chapter: 区間クエリ
+    title: 値を添字にする BIT・セグメント木
     aliases: [値域セグ木, 権値線段樹, 値を添字にするセグ木, 動的セグ木, dynamic segment tree, sparse segment tree]
     type: technique
     level: 水
-    level_evidence: "値を添字にした区間 max の DP は緑〜水（abc339_e 1109・abl_d 1283）、上位 K 個の和は水〜黄（abc281_e 1334・abc287_g 2180）。オンライン強制で動的セグ木が要るのは黄（abc403_g 2028）"
+    level_evidence: "値を添字にした区間 max の DP は緑〜水（abc339_e 1109・abl_d 1283）、個数と和を載せて境界を探す形は水（abc281_e 1334・abc276_f 1562）。上位 K 個の和の更新は黄（abc287_g 2180）、オンライン強制で動的セグ木が要るのは黄（abc403_g 2028）。abc319 以降の問題は帯の外（abc339_e・abc403_g）なので、水の根拠には古い問題を使った（D2）"
     kind: [データ構造, 区間クエリ, ソート・座標圧縮]
     prerequisites: [segment-tree, coordinate-compression]
-    related: [fenwick-tree, kth-element, top-k-multiset, dp-segment-tree, segtree-binary-search, offline-queries]
-    summary: "値（必要なら座標圧縮した値）を添字にした BIT・セグ木に個数や和を載せ、「x 以下の個数・和」「上位 K 個の和」を O(log N) で求める。DP の「その値で終わる最良」を値の添字で持つ使い方もある。先読みできないときは必要なノードだけ作る動的セグ木を使う。"
+    related: [fenwick-tree, kth-element, top-k-multiset, dp-segment-tree, segment-tree-binary-search, offline-queries]
+    summary: "値（必要なら座標圧縮した値）を添字にした BIT・セグメント木に個数や和を載せ、「x 以下の個数・和」「上位 K 個の和」を O(log N) で求める。DP の「その値で終わる最良」も値の添字で持てる。"
     signs:
-      - {type: phrase, text: "隣り合う要素の差が D 以下の部分列の最長（値の範囲から dp の最大を取る）"}
+      - {type: phrase, text: "隣り合う要素の差が D 以下の部分列の最長"}
       - {type: phrase, text: "値を追加しながら、上位 K 個の和・ソートしたときの奇数番目の和を答える"}
-      - {type: constraint, text: "値が 10^9 まで（座標圧縮してから添字にする）"}
-      - {type: constraint, text: "前の答えで次の入力が決まり、先読みができない（オンライン強制）"}
+      - {type: phrase, text: "前の答えを使って次のクエリが復号され、先読みができない"}
+      - {type: shape, text: "dp[v] = max(dp[v − D..v + D]) + 1 のように、値の範囲から最大を取る遷移"}
+      - {type: constraint, text: "値が 10^9 まで、N, Q ≤ 2×10^5"}
     acl: [segtree, fenwick_tree]
-    frequency: B
-    sections:
-      - "値を添字にする（個数・和を載せる）と座標圧縮"
-      - "DP の値を値の添字で持つ（→ DP の章のセグ木による遷移の高速化）"
-      - "上位 K 個の和（境界はセグ木上の二分探索で探す）（青）"
-      - "左の個数の偶奇で右の読み方が変わる量（ソート後の奇数番目の和）（黄）"
-      - "動的セグ木（必要なノードだけ作る。オフラインなら座標圧縮で済む）（黄）"
-    merged_keys: [dynamic-segment-tree, dynamic-segtree-cartesian]
-    visual: "静的な図：横軸を値にしたヒストグラムとセグ木を重ねる。動的セグ木は必要になったノードだけが作られた木"
-    problems:
-      - {id: abc339_e, role: example, summary: "隣り合う要素の差が D 以下の部分列の最大の長さ。値を添字にした dp を区間 max のセグ木で持つ"}
-      - {id: abl_d, role: practice, summary: "隣り合う要素の差が K 以下の部分列の最大の長さ（abc339_e と同じ型）"}
-      - {id: abc281_e, role: practice, summary: "長さ M の各窓で、小さい方から K 個の和。値を座圧した（個数, 和）のセグ木で境界を探す"}
-      - {id: abc403_g, role: challenge, summary: "値を追加するたびに、昇順に並べた奇数番目の和を答える（オンライン強制）。値域の動的セグ木で、左の個数の偶奇で右を入れ替えて合成する"}
-      - {id: abc287_g, role: challenge, summary: "得点ごとの枚数を更新しながら、上位 X 枚の得点の和の最大を答える"}
-    sources: ["05-ds §4.C（segtree-on-values・dynamic-segment-tree）", "05-ds §5（segtree-on-values・dynamic-segment-tree）", "02-dp §4.J（dp-segment-tree）"]
     verify: [point_set_range_composite_large_array]
+    frequency: B
+    frequency_evidence: "recent 0・前提として 2 ページに届く（直接 1）・古い ABC 5 問"
+    sections:
+      - {title: "値を添字にする（個数・和を載せる）と座標圧縮", anchor: index-by-value}
+      - {title: "DP の値を値の添字で持つ（→ DP の章のセグメント木による遷移の高速化）", anchor: dp-on-values}
+      - {title: "上位 K 個の和（個数と和を載せ、境界はセグメント木上の二分探索で探す）", anchor: top-k-sum, level: 青}
+      - {title: "左の個数の偶奇で右の読み方が変わる量（ソート後の奇数番目の和）", anchor: odd-position-sum, level: 黄}
+      - {title: "動的セグメント木（必要なノードだけ作る。オフラインなら座標圧縮で済む）", anchor: dynamic-segment-tree, level: 黄}
+    merged_keys: [segtree-on-values, dynamic-segment-tree, dynamic-segtree-cartesian]
+    visual: {kind: static, priority: 2, text: "横軸を値にしたヒストグラムとセグ木を重ねる。動的セグ木は必要になったノードだけが作られた木"}
+    problems:
+      - {id: abc339_e, role: example, summary: "隣り合う要素の差が D 以下であるような部分列の最大の長さを求める。", approach: "値を添字にした dp を区間 max のセグ木で持つ"}
+      - {id: abc281_e, role: example, representative: true, summary: "長さ M の各窓で、小さい方から K 個の和を答える。", approach: "値を座圧した（個数, 和）のセグ木・BIT を窓に合わせて更新し、K 個目の境界を二分探索で探す（2 つの multiset でもよい）"}
+      - {id: abl_d, role: practice, summary: "隣り合う要素の差が K 以下であるような部分列の最大の長さを求める。", approach: "値を添字にした dp を区間 max のセグ木で更新する（abc339_e と同じ型）"}
+      - {id: abc276_f, role: practice, summary: "先頭 K 枚から 2 枚を復元抽出したときの最大値の期待値を、各 K について求める。", approach: "値で座圧した BIT で「A_K 以下の個数」と「A_K より大きい和」を持つ"}
+      - {id: abc403_g, role: challenge, summary: "値を 1 つずつ追加するたびに、昇順に並べたときの奇数番目の和を答える（前の答えで次の値が決まる）。", approach: "値域の動的セグ木に（個数, 奇数番目の和, 偶数番目の和）を載せ、左の個数の偶奇で右を入れ替えて合成する"}
+      - {id: abc287_g, role: challenge, summary: "得点ごとの枚数を更新しながら、上位 X 枚の得点の和の最大を答える。", approach: "得点を先読みして座圧し、（枚数, 得点の和）の BIT 2 本と二分探索"}
+    sources: ["05-ds §4.C（segtree-on-values・dynamic-segment-tree）", "05-ds §5（segtree-on-values・dynamic-segment-tree）", "02-dp §4.J（dp-segment-tree）"]
+
+  - id: lazy-segment-tree
+    chapter: 区間クエリ
+    title: 遅延セグメント木
+    aliases: [遅延セグ木, Lazy Segment Tree, lazy segtree, 遅延評価セグメント木, 遅延伝搬, 区間作用・区間取得, 双対セグ木, Dual Segment Tree]
+    type: technique
+    level: 水
+    level_evidence: "abc319 以降の根拠で青から水に下げた（design-review §3・D2）：abc340_e（1157、2024）・abc473_f（1303、2026）・abc382_f（1443、2024）・abc455_f（1549、2026）は ACL を呼ぶだけで解ける。S・F の設計が本体の青の問題（abl_e 1706・abc179_f 1713）は lazy-segment-tree-patterns と青の節へ"
+    kind: [データ構造, 区間クエリ]
+    prerequisites: [segment-tree]
+    related: [segment-tree-monoids, lazy-segment-tree-patterns, global-offset, fenwick-tree, segment-tree-beats, sqrt-decomposition, interval-set, acl-reading#lazy-segtree-args]
+    summary: "区間の全要素への加算・代入・アフィン変換と、区間の和・最小値などの取得を、どちらも O(log N) で行う。ACL の lazy_segtree に標準の型を渡して使い、区間の和には S に区間の長さを持たせる。"
+    signs:
+      - {type: phrase, text: "区間に一律に加算・代入・アフィン変換・反転し、区間の和・最小値・最大値を答える"}
+      - {type: phrase, text: "区間に一律に加算・代入し、一点の値だけを答える"}
+      - {type: constraint, text: "N, Q ≤ 2×10^5 で、区間の更新と区間の取得が交互に来る"}
+    acl: [lazy_segtree]
+    verify: [range_affine_range_sum, range_add_range_min, range_affine_point_get]
+    frequency: A
+    frequency_evidence: "recent 4（abc470_g・abc473_f・abc477_f・abc480_g）・前提として 4 ページに届く（直接 4）・古い ABC 4 問"
+    sections:
+      - {title: "何ができるか（区間作用・区間取得。一点を取るだけなら双対セグメント木）", anchor: what-it-does}
+      - {title: "ACL の lazy_segtree で標準の型を呼ぶ（区間加算・区間代入 × 区間 min・max）", anchor: acl-standard}
+      - {title: "区間の長さを S に持たせる（区間加算・区間代入・アフィン変換 × 区間和）", anchor: size-in-node}
+      - {title: "ACL の約束（mapping(f, x)・composition(f, g) は g の後に f・id()）", anchor: acl-conventions}
+      - {title: "境界（葉の長さは 1・e() の長さは 0・代入の「なし」の番兵・INF への加算・mod の取り忘れ）", anchor: boundaries}
+      - {title: "双対セグメント木（区間作用・一点取得。作用が可換なら push は要らない）", anchor: dual-segment-tree}
+      - {title: "使い分け（一点取得だけなら差分の BIT、区間加算・区間和だけなら BIT 2 本、S・F を自分で設計するなら載せ方の型、載らない作用は Segment Tree Beats・区間を set で管理）", anchor: choosing}
+      - {title: "保つ性質と push の手順（自作するとき）", anchor: invariants, level: 青}
+    merged_keys: [dual-segment-tree]
+    visual: {kind: dynamic, priority: 1, text: "各ノードに「値／保留中の作用」の 2 段を書き、区間作用で作用が付き、取得のときに作用が子へ降りるステップ送り"}
+    problems:
+      - {id: abc473_f, role: example, summary: "（執筆時に確かめる）", approach: "括弧列型の条件（累積和が負にならない）を、区間加算・区間 min の遅延セグ木で確かめる（research/00 §2.3.8 の分類）"}
+      - {id: abc382_f, role: example, representative: true, summary: "横棒を下にある方から落とし続けたとき、各棒が最終的に止まる行を求める。", approach: "列の区間の min 取得と区間 chmin（代入）の遅延セグ木"}
+      - {id: practice2_k, role: example, summary: "区間に x → bx + c を作用させる操作と、区間和の質問を処理する。", approach: "S＝(和, 長さ)、F＝(b, c)。合成は (b_f b_g, b_f c_g + c_f)"}
+      - {id: abc340_e, role: practice, summary: "円環に並ぶ箱の玉を取り出して順に配る操作を繰り返した後の、各箱の玉の数を求める。", approach: "区間加算・一点取得（双対セグ木・差分の BIT でもよい）"}
+      - {id: abc455_f, role: practice, summary: "（執筆時に確かめる）", approach: "全ペアの積の和を寄与に分け、遅延セグ木で区間の値をまとめて更新しながら求める（research/00 §2.3.8 の分類）"}
+      - {id: typical90_ac, role: practice, summary: "区間にレンガを順に積み、各レンガの上端の高さを答える。", approach: "区間 max の取得と区間代入（座圧・平方分割でもよい）"}
+      - {id: abl_e, role: practice, summary: "数字列の区間を 1 種類の数字で上書きする操作のたびに、整数としての値の mod を答える。", approach: "S＝(値, 桁数の重み)、F＝代入する数字。区間の長さを S に持たせる型の応用"}
+      - {id: abc179_f, role: practice, summary: "盤の端から白石を置く操作を繰り返した後に残る黒石の数を求める。", approach: "各行・各列の最初の白の位置を区間 chmin・一点取得（双対セグ木）で持つ"}
+      - {id: abc342_g, role: challenge, summary: "区間 chmax の追加・取り消しと、一点の現在の値の質問を処理する。", approach: "ノードに multiset を持ち、根までの祖先の max を取る"}
+    sources: ["05-ds §4.C（lazy-segment-tree・dual-segment-tree）", "05-ds §5（lazy-segment-tree・dual-segment-tree）", "05-ds §4.F", "00-curriculum §2.3.8（abc473_f・abc455_f）"]
 
   - id: segment-tree-monoids
     chapter: 区間クエリ
-    title: セグ木に何を載せるか（モノイドの設計）
-    aliases: [モノイドの設計, セグ木に載せるもの, 抽象化セグ木, second best, 行列を載せるセグ木]
+    title: セグメント木に何を載せるか
+    aliases: [モノイドの設計, monoid design, 抽象化セグ木, second best, 行列を載せるセグ木]
     type: technique
     level: 青
-    level_evidence: "何を載せるかを考えさせる問題は青が中心（abc309_f 1619・abc223_f 1641・abc331_f 1666・abc283_f 1771・abc456_f 1888）。易しい形は abc343_f（1370）"
+    level_evidence: "何を載せるかを考えさせる問題は青が中心（abc331_f 1666・abc456_f 1888・abc460_f 1987、古くは abc309_f 1619・abc223_f 1641・abc283_f 1771）。易しい形は abc343_f（1370）"
     kind: [データ構造, 区間クエリ]
     prerequisites: [segment-tree]
-    related: [lazy-segtree-patterns, hash-segment-tree, bracket-sequence, dynamic-dp, matrix-power, semiring-matrix]
-    summary: "「左右の子の情報だけから親の情報を作れる」ように、答えに要る情報を足してセグ木に載せる。最小値とその個数、最大値と 2 番目、括弧列の (和, 最小接頭和)、最大部分配列和、ハッシュ、一次関数の合成、行列などの型と、結合律・単位元の確かめ方をまとめる。"
+    related: [lazy-segment-tree, lazy-segment-tree-patterns, rolling-hash#hash-segment-tree, bracket-sequence, matrix-power, dynamic-dp]
+    summary: "左右の子の情報だけから親の情報を作れるように、答えに要る情報を足してセグメント木に載せる。最小値とその個数、最大値と 2 番目、括弧列の (和, 最小接頭和)、ハッシュ、一次関数の合成、行列などの型がある。"
     signs:
       - {type: phrase, text: "1 点の更新と、区間が正しい括弧列か・回文かの判定"}
       - {type: phrase, text: "区間で 2 番目に大きい値（の個数）"}
       - {type: phrase, text: "区間の最大部分配列和・区間で最長の連続する 1"}
-      - {type: phrase, text: "区間ごとの遷移を合成する（一次関数・小さな行列）"}
+      - {type: shape, text: "区間 [l, r) の答えが、各位置の一次関数や小さな行列を順に合成したもので書ける"}
     acl: [segtree]
+    verify: []
     frequency: A
+    frequency_evidence: "recent 2（abc456_f・abc460_f）・前提として 2 ページに届く（直接 2）・古い ABC 5 問"
     sections:
-      - "設計の手順（答えに要る情報 → 親が作れるまで情報を足す → 結合律と単位元を確かめる）"
-      - "型の表（和・min/max・gcd・最小値と個数・最大値と 2 番目・文字の種類・ソート済みか・括弧列・最大部分配列和・最長の連続・ハッシュ・0/1 列の転倒数）"
-      - "非可換なモノイド（一次関数の合成・ハッシュの連結。積む順序）"
-      - "行列を載せる（(min,+)・(max,+) の半環も）"
-      - "動的 DP への入口（発展 → DP の章）"
-      - "落とし穴（単位元になっていない e・結合的でない op・左右の取り違え）"
+      - {title: "設計の手順（答えに要る情報 → 親が作れるまで情報を足す → 結合律と単位元を確かめる）", anchor: design-steps}
+      - {title: "型の表（和・min/max・gcd・最小値と個数・最大値と 2 番目・文字の種類・ソート済みか・括弧列・最大部分配列和・最長の連続・ハッシュ・0/1 列の転倒数）", anchor: pattern-table}
+      - {title: "非可換なモノイド（一次関数の合成・ハッシュの連結。積む順序）", anchor: non-commutative}
+      - {title: "行列を載せる（(min,+)・(max,+) の半環も。行列の積は行列累乗のページ、1 点更新のたびに DP を求め直すなら動的 DP）", anchor: matrix}
+      - {title: "落とし穴（単位元になっていない e・結合的でない op・左右の取り違え）", anchor: pitfalls}
     merged_keys: [segtree-matrix]
-    visual: "静的な図：左右の子の情報から親の情報を作る（括弧列なら和と最小接頭和の 2 つの数）"
+    visual: {kind: static, priority: 2, text: "左右の子の情報から親の情報を作る（括弧列なら和と最小接頭和の 2 つの数）"}
     problems:
-      - {id: abc343_f, role: example, summary: "1 点更新と、区間で 2 番目に大きい値の個数。（最大, 個数, 2 番目, 個数）を載せる"}
-      - {id: abc223_f, role: example, summary: "括弧の 2 文字の交換と、区間が正しい括弧列かの判定。（区間和, 最小接頭和）を載せる"}
-      - {id: abc331_f, role: example, summary: "1 文字の更新と、区間が回文かの判定。順方向・逆方向のハッシュ（と長さ）を載せる"}
-      - {id: abc309_f, role: practice, summary: "回転してよい箱のうち、別の箱に真に入るものがあるか。1 軸で走査し、2 軸目を座圧して 3 軸目の min を持つ"}
-      - {id: abc283_f, role: practice, summary: "各 i について |P_i − P_j| + |i − j| の最小値。絶対値を外す 4 通りに分け、min のセグ木を 4 回使う"}
-      - {id: abc456_f, role: practice, summary: "各日の遷移を (min,+) の行列で表し、区間の行列の積をセグ木で求める"}
-      - {id: abc460_f, role: challenge, summary: "頂点番号の区間についての最遠点対のクエリ。区間ごとの直径の両端を、木の直径の性質で合成して載せる"}
-      - {id: arc008_4, role: challenge, summary: "一次関数の列を 1 つずつ差し替えながら、合成した結果の最大・最小を求める。（傾き, 切片）の合成を載せる"}
-    sources: ["05-ds §4.C（segment-tree-monoids・dynamic-dp）", "05-ds §5（segment-tree-monoids）", "05-ds 付録 A", "00-curriculum §5.2（abc456_f）", "08-string-geo §4.2（hash-segment-tree）"]
+      - {id: abc343_f, role: example, summary: "1 点更新と、区間で 2 番目に大きい値の個数の質問を処理する。", approach: "（最大, 個数, 2 番目, 個数）を載せ、場合分けで結合する"}
+      - {id: abc223_f, role: example, representative: true, summary: "括弧列の 2 文字の交換と、区間が正しい括弧列かの判定のクエリを処理する。", approach: "（区間和, 最小接頭和）を載せる（±1 の累積和を区間加算・区間 min の遅延セグ木で持ってもよい）"}
+      - {id: abc456_f, role: example, summary: "（執筆時に確かめる）", approach: "各日の遷移を (min,+) の行列で表し、区間の行列の積をセグ木で求める（research/00 §2.3.8 の分類）"}
+      - {id: abc309_f, role: practice, summary: "回転してよい直方体の箱のうち、別の箱に真に入るものがあるかを判定する。", approach: "辺をソートして 1 軸で走査し、2 軸目を座圧して 3 軸目の min を持つ"}
+      - {id: abc331_f, role: practice, summary: "文字列の 1 文字の更新と、区間が回文かの判定のクエリを処理する。", approach: "順方向・逆方向のハッシュ（と長さ）を載せる（例題は rolling-hash）"}
+      - {id: abc283_f, role: practice, summary: "順列の各 i について |P_i − P_j| + |i − j| の最小値を求める。", approach: "絶対値を外す 4 通りに分け、min のセグ木を 4 回使う"}
+      - {id: abc460_f, role: challenge, summary: "（執筆時に確かめる）", approach: "頂点番号の区間ごとの直径の両端を、木の直径の性質で合成して載せる（research/00 §2.3.8 の分類）"}
+      - {id: arc008_4, role: challenge, summary: "一次関数の列を 1 つずつ差し替えながら、すべてを合成した結果の値の最大・最小を求める。", approach: "（傾き, 切片）の合成を載せ、座標圧縮する"}
+    sources: ["05-ds §4.C（segment-tree-monoids・dynamic-dp）", "05-ds §5（segment-tree-monoids）", "05-ds 付録 A", "00-curriculum §2.3.8（abc456_f・abc460_f）", "08-string-geo §4.2（hash-segment-tree）"]
 
-  - id: segtree-binary-search
+  - id: lazy-segment-tree-patterns
     chapter: 区間クエリ
-    title: セグ木上の二分探索（max_right・min_left）
-    aliases: [max_right, min_left, セグメント木上の二分探索, セグ木の二分探索]
-    type: technique
-    level: 青
-    level_evidence: "入門は茶〜緑（abc382_c 476・abc330_e 1004・abc392_f 1395）、必須になるのは青〜黄（abc389_f 1642・abc307_f 2139）"
-    kind: [データ構造, 二分探索, 区間クエリ]
-    prerequisites: [segment-tree, binary-search]
-    related: [kth-element, monotonic-stack, segtree-on-values, lazy-segment-tree]
-    summary: "左端 l を固定し、条件 f(区間 [l, r) の総積) が真である最大の r を、木を登って降りる手順で O(log N) で求める（ACL の max_right）。「位置 l 以降で初めて x 以上になる位置」「和が w を超えない最長の区間」「k 番目の 1」に使う。"
-    signs:
-      - {type: phrase, text: "位置 i 以降で初めて値が x 以上になる位置"}
-      - {type: phrase, text: "空いている場所のうち k 番目"}
-      - {type: phrase, text: "各 l について、条件を満たす最長の区間"}
-      - {type: constraint, text: "外側の二分探索で prod を呼ぶ O(log^2 N) では厳しい"}
-    acl: [segtree, lazy_segtree]
-    frequency: B
-    sections:
-      - "何ができるか（max_right・min_left）と f の条件（副作用なし・f(e()) が真・単調）"
-      - "なぜ O(log N) か（登る段階と降りる段階）"
-      - "境界（l = N のとき・返り値の r が N のとき・f(e()) が偽になる条件の言い換え・1-indexed への直し）"
-      - "遅延セグ木上の二分探索"
-      - "使い分け（BIT 上の二分探索・外側の二分探索＋prod・set の lower_bound）"
-      - "落とし穴（min_left に同じ向きの条件を流用する・単調でない条件）"
-    merged_keys: []
-    visual: "動く図：登る段階と降りる段階を色分けし、累積と f の真偽を各ステップで表示するステップ送り"
-    problems:
-      - {id: abc382_c, role: example, summary: "各客が最初に取る寿司を答える。美味しさの min のセグ木で、条件を満たす最左の位置を探す"}
-      - {id: practice2_j, role: example, summary: "一点更新・区間の最大値・「位置 X 以降で値が V 以上になる最初の位置」を処理する"}
-      - {id: abc330_e, role: practice, summary: "1 点を書き換えるたびに数列の mex を答える。値ごとの個数のセグ木で、個数 0 の最初の位置を探す"}
-      - {id: abc392_f, role: practice, summary: "指定した位置への挿入を繰り返した最終的な列。空きを 1 とした和のセグ木で、逆順に和が P_i に達する位置を探す"}
-      - {id: abc389_f, role: practice, summary: "レートが条件を満たすと +1 される大会を順に経た最終レートを、初期値ごとに答える。単調な列に区間加算し、境界を遅延セグ木上の二分探索で探す"}
-      - {id: abc307_f, role: challenge, summary: "日ごとの距離の上限で広がる感染で、各頂点が感染する日。その辺を通せる最初の日をセグ木上の二分探索で求める"}
-    sources: ["05-ds §4.C（segtree-binary-search）", "05-ds §5（segtree-binary-search）", "05-ds §4.F"]
-
-  - id: lazy-segment-tree
-    chapter: 区間クエリ
-    title: 遅延セグメント木（区間作用・区間取得）
-    aliases: [遅延セグ木, 遅延評価セグメント木, lazy segtree, 遅延伝搬, 作用付きモノイド, 双対セグ木, Dual Segment Tree]
-    type: technique
-    level: 青
-    level_evidence: "S・F を設計する本体は青（abc327_f 1624・abl_e 1706・abc179_f 1713）。設計書 §4.1 の 2 で青とした。ただし ACL を呼ぶだけの易しい形は水にも出ている（abc473_f 1303・abc382_f 1443・abc455_f 1549）"
-    kind: [データ構造, 区間クエリ]
-    prerequisites: [segment-tree, segment-tree-monoids]
-    related: [lazy-segtree-patterns, global-offset, fenwick-tree, segment-tree-beats, sqrt-decomposition, interval-set, acl-segtree-template]
-    summary: "区間の全要素に写像を作用させる操作（加算・代入・アフィン変換・反転など）と区間の総積の取得を、どちらも O(log N) で行う。作用を保留のタグとしてノードに置き、必要になったときに子へ配る。"
-    signs:
-      - {type: phrase, text: "区間に一律に加算・代入・アフィン変換・反転し、区間の和・最小値・最大値を答える"}
-      - {type: phrase, text: "区間に作用させ、一点の値だけを答える（双対セグ木）"}
-      - {type: constraint, text: "N, Q ≤ 2×10^5 で、区間の更新と区間の取得が交互に来る"}
-    acl: [lazy_segtree]
-    frequency: A
-    sections:
-      - "載せられる条件（モノイド・恒等写像・合成で閉じる・f(x·y) = f(x)·f(y)）と、足りない情報（区間の長さなど）を S に足す設計"
-      - "ACL の約束（composition(f, g) は g の後に f・mapping(f, x)・id()）"
-      - "保つ性質（d[k] は祖先に残る作用を除いて正しい総積、lz[k] は d[k] に反映済みで子には未配布の作用）"
-      - "各操作の手順（端の 2 本の経路を上から push、区間を O(log N) 個のノードに分けて all_apply、下から作り直す。再帰型ならノードに入ったら push）"
-      - "境界（葉の長さは 1・e() の長さは 0・代入の「なし」の番兵・INF への加算・mod の取り忘れ）"
-      - "双対セグ木（区間作用・一点取得。作用が可換なら push は要らない）"
-      - "使い分け（一点取得だけなら双対セグ木か差分の BIT、区間加算・区間和だけなら BIT 2 本、条件を満たさない作用は Segment Tree Beats・区間を set で管理）"
-    merged_keys: [dual-segment-tree]
-    visual: "動く図：各ノードに「値／保留タグ」の 2 段を書き、区間作用でタグが付き、取得のときにタグが子へ降りるステップ送り"
-    problems:
-      - {id: abc382_f, role: example, summary: "横棒を落とし続けたときの各棒の最終的な行。列の区間の min 取得と区間 chmin の遅延セグ木"}
-      - {id: practice2_k, role: example, summary: "区間に x → bx + c を作用させ、区間和を答える。S＝(和, 長さ)、F＝(b, c)"}
-      - {id: practice2_l, role: example, summary: "0/1 列の区間反転と区間の転倒数。S＝(0 の数, 1 の数, 転倒数)、F＝反転フラグ"}
-      - {id: abc340_e, role: practice, summary: "円環に並ぶ箱の玉を取り出して順に配る。区間加算・一点取得（双対セグ木・差分の BIT でもよい）"}
-      - {id: abc473_f, role: practice, summary: "累積和が負にならないという括弧列型の条件を、区間加算・区間 min の遅延セグ木で確かめる"}
-      - {id: abc455_f, role: practice, summary: "全ペアの積の和を寄与に分け、遅延セグ木で区間の値をまとめて更新しながら求める"}
-      - {id: abl_e, role: practice, summary: "数字列の区間を 1 種類の数字で上書きし、整数としての値の mod を答える。S＝(値, 桁数)、F＝代入する数字"}
-      - {id: abc179_f, role: practice, summary: "盤の端から白石を置く操作の後に残る黒石の数。各行・各列の最初の白の位置を区間 chmin・一点取得で持つ"}
-      - {id: typical90_ac, role: practice, summary: "区間にレンガを順に積み、各レンガの上端の高さを答える。区間 max の取得と区間代入"}
-      - {id: abc342_g, role: challenge, summary: "区間 chmax の追加・取り消しと一点の現在値。ノードに multiset を持ち、根までの祖先の max を取る"}
-    sources: ["05-ds §4.C（lazy-segment-tree・dual-segment-tree）", "05-ds §5（lazy-segment-tree・dual-segment-tree）", "05-ds §4.F", "00-curriculum §2.3.8"]
-    verify: [range_affine_range_sum, range_add_range_min, range_affine_point_get]
-
-  - id: lazy-segtree-patterns
-    chapter: 区間クエリ
-    title: 遅延セグ木の載せ方の型と言い換え
+    title: 遅延セグメント木の載せ方の型
     aliases: [遅延セグ木のチートシート, S と F の設計, 区間加算区間最小, 区間代入区間和, Range Affine Range Sum, 区間反転]
     type: technique
     level: 青
     level_evidence: "型の当てはめは青（abc332_f 1786・abc357_f 1793・abc322_f 1806）、言い換えと組むと黄（abc237_g 2088・abc470_g 2097・abc371_f 2109）"
     kind: [データ構造, 区間クエリ, 考察]
-    prerequisites: [lazy-segment-tree]
-    related: [segment-tree-monoids, sweep-line-2d, inversion-number, bracket-sequence, difference-sequence, contribution]
-    summary: "遅延セグ木に載せる S（値）と F（作用）・mapping・composition の組を、区間加算・区間代入・アフィン・0/1 反転・等差数列の加算・2 列の積の和などの型ごとに表で引けるようにまとめる。問題を 0/1 列や X_i − i に言い換えてから載せる型も扱う。"
+    prerequisites: [lazy-segment-tree, segment-tree-monoids]
+    related: [sweep-line-2d, inversion-number, bracket-sequence, difference-sequence, contribution, segment-tree-beats, inline-dp]
+    summary: "区間作用の問題で、遅延セグメント木に載せる S（値）と F（作用）・mapping・composition の組を型の表から選ぶ。0/1 列や X_i − i への言い換えで、そのままでは載らない問題を載る形に直す。"
     signs:
-      - {type: phrase, text: "区間をソートする操作を繰り返す（しきい値で 0/1 列に直す）"}
+      - {type: phrase, text: "区間をソートする操作を繰り返す"}
       - {type: phrase, text: "2 つの数列への区間加算と、区間の Σ A_i B_i"}
       - {type: phrase, text: "0/1 列の区間反転と、区間で 1 が連続する最大の長さ"}
-      - {type: phrase, text: "一列に並ぶ人を順に動かす総移動量（X_i − i に直すと区間代入）"}
+      - {type: phrase, text: "一列に並ぶ人を順に動かす総移動量"}
     acl: [lazy_segtree]
-    frequency: A
-    sections:
-      - "型の表（S・op・e・F・mapping・composition・id）"
-      - "区間代入の「なし」の番兵と composition の向き"
-      - "0/1 反転・転倒数・最長の連続（0 と 1 の情報を入れ替える）"
-      - "等差数列の加算・2 列の積の和（添字の和や Σa・Σb を S に足す）"
-      - "言い換えてから載せる（しきい値で 0/1 にする・X_i − i・寄与）（黄）"
-      - "載らない作用（区間 chmin＋区間和・区間の割り算・区間の並べ替え）と逃げ道"
-    merged_keys: []
-    visual: "静的な表：型ごとの S・F・mapping・composition"
-    problems:
-      - {id: abc357_f, role: example, summary: "2 つの数列への区間加算と区間の Σ A_i B_i。S＝(長さ, ΣA, ΣB, ΣAB)、F＝(x, y) の加算"}
-      - {id: abc322_f, role: example, summary: "0/1 列の区間反転と、区間で 1 が連続する最大の長さ。0 と 1 それぞれの端から続く長さと最長を持つ"}
-      - {id: abc332_f, role: practice, summary: "区間内の 1 点を等確率で X に変える操作の後の各要素の期待値。x → (1−p)x + pX のアフィン作用"}
-      - {id: abc237_g, role: practice, summary: "区間の昇順・降順のソートを繰り返した後の値 X の位置。X との大小で 0/1 列にし、区間代入・区間和で再現する"}
-      - {id: abc371_f, role: practice, summary: "一列に並ぶ人を順に目的地へ動かすときの総移動回数。X_i − i に直して区間代入・区間和と二分探索"}
-      - {id: abc470_g, role: challenge, summary: "区間の mex の総和を寄与に言い換え、尺取りと遅延セグ木で数える"}
-      - {id: abc265_g, role: challenge, summary: "0/1/2 列の区間の転倒数と、区間の値の置換。各値の個数と順序対の個数を S、値の写像を F にする"}
-    sources: ["05-ds §4.C（lazy-segtree-patterns）", "05-ds §5（lazy-segtree-patterns）", "00-curriculum §2.3.8（abc470_g）"]
     verify: [range_set_range_composite]
-
-  - id: segment-tree-beats
-    chapter: 区間クエリ
-    title: Segment Tree Beats
-    aliases: [beats, 区間chmin区間和, 吉司机线段树, 区間 chmin・chmax]
-    type: overview
-    level: 発展
-    level_evidence: "abc256_h（2531）。区間を map で管理する別解もある"
-    kind: [データ構造, 区間クエリ]
-    prerequisites: [lazy-segment-tree]
-    related: [interval-set, lazy-segtree-patterns]
-    summary: "区間 chmin・chmax と区間和のように遅延セグ木の条件を満たさない更新を、「効かないなら止める・最大値だけ変わるならタグ・それ以外は子へ」の 3 つに分けて処理し、ならし計算量で抑えるセグ木。区間の割り算のように値が潰れていく操作にも同じ系統の工夫が効く。"
-    signs:
-      - {type: phrase, text: "区間 chmin・chmax と区間和を同時に扱う"}
-      - {type: phrase, text: "区間の各要素を x で割る（切り捨て）操作と区間和"}
-    acl: []
-    frequency: C
+    frequency: B
+    frequency_evidence: "recent 1（abc455_f）・前提として届くページなし・古い ABC 6 問"
     sections:
-      - "何ができるか（遅延セグ木に載らない更新）"
-      - "ノードに持つもの（最大値・真に 2 番目の最大値・最大値の個数・和）と 3 つの場合"
-      - "計算量（chmin と和だけならならし O((N+Q) log N)、区間加算が混ざると log^2）"
-      - "値が潰れる操作（割り算・mod・平方根）と、区間を set で管理する別解"
-    merged_keys: []
-    visual: null
+      - {title: "設計の手順と載せられる条件（S はモノイド・F は恒等写像を含み合成で閉じる・f(x·y) = f(x)·f(y)）", anchor: design-steps}
+      - {title: "型の表（S・op・e・F・mapping・composition・id）", anchor: pattern-table}
+      - {title: "区間代入の「なし」の番兵と composition の向き", anchor: assign-sentinel}
+      - {title: "0/1 反転・転倒数・最長の連続（0 と 1 の情報を入れ替える）", anchor: flip}
+      - {title: "等差数列の加算・2 列の積の和（添字の和や Σa・Σb を S に足す）", anchor: arithmetic-add}
+      - {title: "載らない作用（区間 chmin と区間和・区間の割り算・区間の並べ替え）と逃げ道", anchor: not-applicable}
+      - {title: "言い換えてから載せる（しきい値で 0/1 にする・X_i − i・寄与）", anchor: reformulate, level: 黄}
+    merged_keys: [lazy-segtree-patterns]
+    visual: {kind: static, priority: 2, text: "型ごとの S・F・mapping・composition の表"}
     problems:
-      - {id: abc256_h, role: example, summary: "区間の各要素を x で割る・区間代入・区間和のクエリ。区間がすべて同じ値なら一括で処理し、違えば子へ潜る"}
-    sources: ["05-ds §4.E（segment-tree-beats）", "05-ds §5（segment-tree-beats）"]
-    verify: [range_chmin_chmax_add_range_sum]
+      - {id: abc357_f, role: example, representative: true, summary: "2 つの数列への区間加算と、区間の Σ A_i B_i の質問を処理する。", approach: "S＝(長さ, ΣA, ΣB, ΣAB)、F＝(x, y) の加算"}
+      - {id: abc322_f, role: example, summary: "0/1 の列の区間反転と、区間で 1 が連続する最大の長さの質問を処理する。", approach: "0 と 1 それぞれの端から続く長さと最長を持ち、反転で入れ替える"}
+      - {id: abc332_f, role: practice, summary: "区間内の 1 点を等確率で選んで X に書き換える操作を繰り返した後の、各要素の期待値を答える。", approach: "x → (1 − p)x + pX のアフィン作用（一点取得だけなので双対セグ木でも足りる）"}
+      - {id: abc237_g, role: practice, summary: "区間を昇順・降順にソートする操作を繰り返した後の、値 X の位置を求める。", approach: "X との大小で 0/1 の列にし、区間代入・区間和でソートを再現する"}
+      - {id: abc371_f, role: practice, summary: "一列に並ぶ人を順に目的地へ動かすときの、総移動回数を求める。", approach: "X_i − i に直して区間代入・区間和と遅延セグ木上の二分探索"}
+      - {id: practice2_l, role: practice, summary: "0/1 の列の区間反転と、区間の転倒数の質問を処理する。", approach: "S＝(0 の数, 1 の数, 転倒数)、F＝反転フラグ。反転後の転倒数は 0 の数 × 1 の数 − 転倒数"}
+      - {id: abc470_g, role: challenge, summary: "（執筆時に確かめる）", approach: "mex の総和を寄与に言い換え、尺取りと遅延セグ木で数える（research/00 §2.3.8 の分類）"}
+      - {id: abc265_g, role: challenge, summary: "0/1/2 の列の区間の転倒数と、区間の値を写像で置き換える操作のクエリを処理する。", approach: "各値の個数と順序対の個数を S、値の写像を F にする"}
+    sources: ["05-ds §4.C（lazy-segtree-patterns）", "05-ds §5（lazy-segtree-patterns・lazy-segment-tree）", "00-curriculum §2.3.8（abc470_g）"]
 
   - id: sparse-table
     chapter: 区間クエリ
     title: Sparse Table
-    aliases: [スパーステーブル, ST表, 静的RMQ, Disjoint Sparse Table]
+    aliases: [スパーステーブル, ST 表, 静的 RMQ, Disjoint Sparse Table]
     type: technique
     level: 青
     level_evidence: "構造そのものを作らせる abc282_f（1734）。区間 min・max はセグ木で足りることが多く必須はまれだが、LCA（木の章）・ダブリングから参照されるので青の短い単独ページにする（設計書 §4.3）"
     kind: [データ構造, 区間クエリ, ダブリング・分割統治]
     prerequisites: [doubling]
     related: [segment-tree, lca, prefix-sum, suffix-array]
-    summary: "更新のない列で、冪等な演算（min・max・gcd・and・or）の区間クエリを、前処理 O(N log N)・クエリ O(1) で答える。長さ 2^k の区間の答えを持ち、クエリは重なってよい 2 つの区間で覆う。"
+    summary: "更新のない列で、冪等な演算（min・max・gcd・and・or）の区間クエリに、前処理 O(N log N)・質問 O(1) で答える。長さ 2^k の区間の答えを持ち、質問は重なってよい 2 つの区間で覆う。"
     signs:
       - {type: phrase, text: "配列が変わらず、区間の最小値・最大値・gcd を非常に多く聞かれる"}
       - {type: constraint, text: "クエリが 10^6 級で、1 回 O(1) で答えたい"}
     acl: []
-    frequency: C
-    sections:
-      - "何ができるか（静的・冪等な演算なら O(1)）"
-      - "なぜ重なってよいか（冪等）と k = ⌊log₂ L⌋"
-      - "作り方（st[k][i] = op(st[k−1][i], st[k−1][i + 2^(k−1)])、log の表）"
-      - "冪等でない演算（2 べきに分けて O(log N)、Disjoint Sparse Table）（発展）"
-      - "使い分け（更新があるならセグ木、和なら累積和）"
-    merged_keys: []
-    visual: "静的な図：2 べき長の区間の段と、クエリ区間を重なった 2 つの区間で覆う様子"
-    problems:
-      - {id: abc282_f, role: example, summary: "区間の集合を自分で用意し、各クエリ区間を用意した 2 区間の和集合で答える対話問題（Sparse Table の構造そのもの）"}
-    sources: ["05-ds §4.D（sparse-table）", "05-ds §5（sparse-table）"]
     verify: [staticrmq]
+    frequency: C
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 1 問"
+    sections:
+      - {title: "何ができるか（静的・冪等な演算なら O(1)）", anchor: what-it-does}
+      - {title: "なぜ重なってよいか（冪等）と k = ⌊log₂ L⌋", anchor: idempotent}
+      - {title: "作り方（st[k][i] = op(st[k−1][i], st[k−1][i + 2^(k−1)])、log の表）", anchor: build}
+      - {title: "使い分け（更新があるならセグメント木、和なら累積和）", anchor: choosing}
+      - {title: "冪等でない演算（2 べきに分けて O(log N)、Disjoint Sparse Table）", anchor: disjoint-sparse-table, level: 発展}
+    merged_keys: []
+    visual: {kind: static, priority: 2, text: "2 べき長の区間の段と、クエリ区間を重なった 2 つの区間で覆う様子"}
+    problems:
+      - {id: abc282_f, role: example, representative: true, summary: "区間の集合を自分で用意し、質問された区間を用意した 2 つの区間の和集合で表す（対話問題）。", approach: "長さ 2^k の区間をすべての始点に用意し、重なってよい 2 区間で覆う"}
+    problems_note: "練習の候補が調査にない。abc319 以降で Sparse Table が要る問題も見つからなかった（工程8b の前の問題の補充で探す）"
+    sources: ["05-ds §4.D（sparse-table）", "05-ds §5（sparse-table）"]
+
+  - id: segment-tree-beats
+    chapter: 区間クエリ
+    title: Segment Tree Beats
+    aliases: [beats, Ji Driver Segment Tree, 吉司机线段树, 区間 chmin 区間和, 区間 chmin・chmax]
+    type: overview
+    level: 発展
+    level_evidence: "abc256_h（2531）。区間を map で管理する別解もある"
+    kind: [データ構造, 区間クエリ]
+    prerequisites: [lazy-segment-tree]
+    related: [interval-set, lazy-segment-tree-patterns]
+    summary: "区間 chmin・chmax と区間和のように遅延セグメント木の条件を満たさない更新を、ならし計算量で処理する。効かないなら止める・最大値だけ変わるならタグ・それ以外は子へ、の 3 つに分ける。"
+    signs:
+      - {type: phrase, text: "区間 chmin・chmax と区間和を同時に答える"}
+      - {type: phrase, text: "区間の各要素を x で割る（切り捨て）操作と区間和"}
+    acl: []
+    verify: [range_chmin_chmax_add_range_sum]
+    frequency: C
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 1 問"
+    sections:
+      - {title: "何ができるか（遅延セグメント木に載らない更新）", anchor: what-it-does}
+      - {title: "ノードに持つもの（最大値・真に 2 番目の最大値・最大値の個数・和）と 3 つの場合", anchor: node-data}
+      - {title: "計算量（chmin と和だけならならし O((N+Q) log N)、区間加算が混ざると log^2）", anchor: complexity}
+      - {title: "値が潰れる操作（割り算・mod・平方根）と、区間を set で管理する別解", anchor: shrinking-values}
+    merged_keys: []
+    visual: null
+    problems:
+      - {id: abc256_h, role: example, representative: true, summary: "区間の各要素を x で割る（切り捨て）・区間代入・区間和のクエリを処理する。", approach: "区間がすべて同じ値なら一括で処理し、違えば子へ潜る（同じ値の区間を map で持つ別解もある）"}
+    problems_note: "発展の概要。ABC の問題は abc256_h だけ"
+    sources: ["05-ds §4.E（segment-tree-beats）", "05-ds §5（segment-tree-beats）"]
 
   # ===== 5. クエリ処理の工夫 =====
 
   - id: offline-queries
     chapter: クエリ処理の工夫
-    title: クエリ先読み（オフライン処理）
-    aliases: [オフライン処理, クエリ先読み, クエリのソート, 区間の種類数, Range Set Query, オンライン強制]
+    title: クエリの先読み
+    aliases: [オフライン処理, offline queries, クエリ先読み, クエリのソート, 区間の種類数, Range Set Query, オンライン強制]
     type: technique
     level: 水
-    level_evidence: "水〜青（abc235_e 1304・abc174_f 1495・abc253_f 1756・abc128_e 1840）"
+    level_evidence: "基本形は水〜青（abc235_e 1304・abc174_f 1495・abc253_f 1756・abc128_e 1840）。abc319 以降の先読みはほかの手法と組む形で青以上（abc477_f 1629・abc453_g 1735・abc356_f 2152）。基本形の最近の根拠がないので、古い根拠で水とした（D2）"
     kind: [クエリ処理の工夫, データ構造]
     prerequisites: [fenwick-tree, sorting-techniques]
     related: [sweep-line-2d, mo-algorithm, union-find-connectivity, event-sort, reverse-thinking, persistent-data-structures, merge-sort-tree, coordinate-compression, parallel-binary-search]
-    summary: "クエリを入力の順に答えなくてよいときに、答えやすい順（右端の順・しきい値の順・時間の逆順）に並べ替えて処理し、最後に元の順に並べ直す。区間の種類数を BIT で数える型が代表で、前の答えで次の入力が決まる問題（オンライン強制）では使えない。"
+    summary: "クエリを入力の順に答えなくてよいとき、答えやすい順（右端の順・しきい値の順・時間の逆順）に並べ替えて処理し、最後に元の順に戻す。前の答えで次の入力が決まる問題には使えない。"
     signs:
       - {type: phrase, text: "区間 [l, r] に含まれる値の種類数を多数のクエリで答える"}
       - {type: phrase, text: "重み w 以下の辺だけを使ったときの連結・X 以下の要素の和をクエリごとに答える"}
       - {type: phrase, text: "クエリどうしが独立で、順番を入れ替えても答えが変わらない"}
-      - {type: constraint, text: "値が 10^9 までだが、クエリを先に全部読めば座標圧縮できる"}
+      - {type: constraint, text: "値が 10^9 まで、N, Q ≤ 2×10^5 で、クエリにも新しい値が現れる"}
     acl: [fenwick_tree]
-    frequency: A
-    sections:
-      - "考え方（並べ替えて処理し、元の順に戻して出力する）"
-      - "右端でソートして BIT（区間の種類数：各値の最後の出現位置にだけ 1 を立てる）"
-      - "しきい値でソート（重み w 以下の辺だけで連結か・X 以下の要素の和）"
-      - "時間を逆にする（削除を追加に → グラフの章の Union-Find で連結性を扱う）"
-      - "答えを 2 時点の差に分ける"
-      - "先に全部読んで座標圧縮する"
-      - "オンライン強制の見分け方と、そのときの構造（永続・マージソート木・動的セグ木）"
-    merged_keys: [range-distinct-count]
-    visual: "静的な図：クエリを右端の順に並べ替えて処理し、元の順に戻して出力する流れ。右端を伸ばしながら各値の最後の出現位置だけに 1 を立てる BIT の変化"
-    problems:
-      - {id: abc174_f, role: example, summary: "区間内の値の種類数を多数答える。クエリを右端の順に並べ、各値の最後の出現位置だけに 1 を立てた BIT の区間和"}
-      - {id: abc253_f, role: example, summary: "行の上書き・列の範囲への加算・1 マスの値の取得。直前の上書きの時刻を先読みし、区間加算の BIT で「今 − その時刻」を答える"}
-      - {id: abc235_e, role: practice, summary: "各クエリの辺を加えたとき、その辺が最小全域木に使われるか。クエリの辺を元の辺と混ぜて重み順に処理する"}
-      - {id: abc040_d, role: practice, summary: "年 w より後に作られた道路だけで行ける都市の数を各クエリで答える。道路とクエリを年の降順に並べて併合する"}
-      - {id: abc128_e, role: practice, summary: "時間帯ごとに通行止めになる地点があり、各人が最初に止まる地点を答える。工事をイベントとして時刻順に処理し、set で持つ"}
-      - {id: abc356_f, role: challenge, summary: "整数の集合への挿入・削除と、差が K 以下でつながる成分の大きさ。クエリを先読みして座標圧縮し、BIT と遅延セグ木で持つ"}
-    sources: ["05-ds §4.D（offline-queries）", "05-ds §5（offline-queries・offline-reverse）", "00-curriculum §4.2（区間の種類数）", "05-ds §7.3"]
     verify: [static_range_count_distinct, static_range_frequency]
+    frequency: A
+    frequency_evidence: "recent 4（abc453_g・abc463_g・abc467_g・abc477_f）・前提として 3 ページに届く（直接 3）・古い ABC 6 問"
+    sections:
+      - {title: "考え方（並べ替えて処理し、元の順に戻して出力する）", anchor: idea}
+      - {title: "右端でソートして BIT（区間の種類数：各値の最後の出現位置にだけ 1 を立てる）", anchor: distinct-count}
+      - {title: "しきい値でソート（重み w 以下の辺だけで連結か・X 以下の要素の和）", anchor: threshold}
+      - {title: "時間を逆にする（削除を追加に → グラフの章の Union-Find と連結性）", anchor: reverse-time}
+      - {title: "答えを 2 時点の差に分ける", anchor: difference-of-times}
+      - {title: "先に全部読んで座標圧縮する", anchor: compress}
+      - {title: "オンライン強制の見分け方と、そのときの構造（永続・マージソート木・動的セグメント木）", anchor: online}
+    merged_keys: [range-distinct-count]
+    visual: {kind: static, priority: 2, text: "クエリを右端の順に並べ替えて処理し、元の順に戻して出力する流れ。右端を伸ばしながら各値の最後の出現位置だけに 1 を立てる BIT の変化"}
+    problems:
+      - {id: abc174_f, role: example, representative: true, summary: "列の区間に含まれる値の種類数を、多数のクエリで答える。", approach: "クエリを右端の順に並べ、各値の最後の出現位置だけに 1 を立てた BIT の区間和"}
+      - {id: abc253_f, role: example, summary: "行の上書き・列の範囲への加算・1 マスの値の取得のクエリを処理する。", approach: "直前の上書きの時刻を先読みし、区間加算の BIT で「今の値 − その時刻の値」を答える"}
+      - {id: abc235_e, role: practice, summary: "グラフに辺を 1 本加えたとき、その辺が最小全域木に使われるかを多数の質問で答える。", approach: "質問の辺を元の辺と混ぜて重み順に処理する"}
+      - {id: abc040_d, role: practice, summary: "年 w より後に作られた道路だけで行ける都市の数を、各クエリについて答える。", approach: "道路とクエリを年の降順に並べて併合する"}
+      - {id: abc128_e, role: practice, summary: "時間帯ごとに通行止めになる地点があり、各人が最初に止まる地点を答える。", approach: "工事をイベントとして時刻順に処理し、有効な地点を set で持つ"}
+      - {id: abc356_f, role: challenge, summary: "整数の集合への挿入・削除と、差が K 以下でつながる成分の大きさの質問を処理する。", approach: "クエリを先読みして座標圧縮し、BIT と遅延セグ木で持つ"}
+    sources: ["05-ds §4.D（offline-queries）", "05-ds §5（offline-queries・offline-reverse）", "00-curriculum §4.2（区間の種類数）", "05-ds §7.3"]
 
   - id: sweep-line-2d
     chapter: クエリ処理の工夫
-    title: 平面走査（2 次元のクエリを BIT・セグ木で処理する）
-    aliases: [平面走査, sweep line, 走査線, スイープライン, 2次元クエリ, 矩形内の点の数, 長方形クエリ]
+    title: 平面走査
+    aliases: [sweep line, plane sweep, 走査線, スイープライン, 2 次元クエリ, 矩形内の点の数, 長方形クエリ]
     type: technique
     level: 青
     level_evidence: "青（abc327_f 1624・abc477_f 1629・abc186_f 1833）、黄〜発展まで（abc346_g 2166・abc136_f 2334・abc360_f 2563）。イベントソートだけの基本は基本テクニックの章（設計書 §4.2）"
     kind: [クエリ処理の工夫, 区間クエリ, ソート・座標圧縮]
-    prerequisites: [event-sort, fenwick-tree, offline-queries]
-    related: [lazy-segment-tree, prefix-sum-2d, imos-2d, merge-sort-tree, cdq-divide-and-conquer, inversion-number]
-    summary: "2 次元の問題を、一方の座標の順にイベント（点・区間の端・クエリ）を並べ、走査線を動かしながらもう一方の座標を BIT・セグ木で管理する形にする。長方形内の点の数、区間に含まれる区間の数、固定幅の窓の最大などを扱う。"
+    prerequisites: [event-sort, offline-queries, lazy-segment-tree]
+    related: [fenwick-tree, prefix-sum-2d, imos, merge-sort-tree, cdq-divide-and-conquer, inversion-number]
+    summary: "2 次元の問題を、一方の座標の順にイベント（点・区間の端・クエリ）を並べ、走査線を動かしながらもう一方の座標を BIT・セグメント木で持つ形にする。長方形内の点の数や固定幅の窓の最大を求める。"
     signs:
       - {type: phrase, text: "長方形の中にある点の数・和を多数のクエリで答える"}
       - {type: phrase, text: "区間 [p, q] に完全に含まれる区間の数"}
       - {type: phrase, text: "幅 W・高さ D の枠に入る点の最大数"}
       - {type: constraint, text: "座標が 10^9 まで・点とクエリが 2×10^5 個（2 次元累積和の表は作れない）"}
     acl: [fenwick_tree, lazy_segtree]
-    frequency: B
-    sections:
-      - "考え方（一方の座標で並べ、もう一方をデータ構造で持つ）"
-      - "支配点の数え上げ・長方形内の点の数（4 つの接頭辞の包除、上端での値 − 下端の 1 つ前での値）"
-      - "区間を 2 次元の点と見る（区間に含まれる区間の数）"
-      - "固定幅の窓を動かして区間加算・区間最大（遅延セグ木）"
-      - "長方形の和集合の面積（区間加算・最小値とその個数）（黄）"
-      - "同じ座標での処理順・閉区間と半開区間・座標圧縮"
-      - "使い分け（値が変わらず座標が小さいなら 2 次元累積和、オンライン強制ならマージソート木・永続セグ木、点の追加もあるなら CDQ 分割統治）"
-    merged_keys: [sweep-line]
-    visual: "静的な図：x 方向に走査線を動かし、y 方向の BIT が更新されていく様子。クエリの下端の直前で引き、上端で足す"
-    problems:
-      - {id: abc327_f, role: example, summary: "時間幅 D・位置幅 W の枠で拾えるリンゴの最大数。時間で走査し、位置の軸に区間加算・全体最大の遅延セグ木"}
-      - {id: abc477_f, role: example, summary: "グリッドの長方形内の黒マスの数のクエリ。先読みして行を 1 つずつ進め、上端の行での和から下端の 1 つ前の行での和を引く"}
-      - {id: abc106_d, role: practice, summary: "区間 [p, q] に完全に含まれる列車の区間の数を多数答える（N が小さいので 2 次元累積和でもよい）"}
-      - {id: abc186_f, role: practice, summary: "障害物のある盤面で、飛車が 2 手以内に行けるマスの数。列ごとの走査と BIT で重複を除いて足す"}
-      - {id: abc346_g, role: practice, summary: "ちょうど 1 回だけ現れる値を含む連続部分列の個数。左端を走査し、右端の範囲の和集合の長さを遅延セグ木で持つ"}
-      - {id: abc136_f, role: challenge, summary: "点の全部分集合について、外接長方形に含まれる点の数の総和。点ごとの寄与に分け、4 象限の点の数を BIT で数える"}
-      - {id: abc360_f, role: challenge, summary: "与えた区間たちと交差する数が最大になる区間 [l, r] を辞書順最小で求める。l を動かしながら r の軸に区間加算・最大値の遅延セグ木"}
-    sources: ["05-ds §4.D（sweep-line-2d）", "05-ds §5（sweep-line-2d）", "00-curriculum §4.2（平面走査・イベントソート）", "01-basics §4.G（event-sort）"]
     verify: [rectangle_sum, area_of_union_of_rectangles]
+    frequency: B
+    frequency_evidence: "recent 1（abc477_f）・前提として届くページなし・古い ABC 6 問"
+    sections:
+      - {title: "考え方（一方の座標で並べ、もう一方をデータ構造で持つ）", anchor: idea}
+      - {title: "支配点の数え上げ・長方形内の点の数（4 つの接頭辞の包除、上端での値 − 下端の 1 つ前での値）", anchor: rectangle-count}
+      - {title: "区間を 2 次元の点と見る（区間に含まれる区間の数）", anchor: intervals-as-points}
+      - {title: "固定幅の窓を動かして区間加算・区間最大（遅延セグメント木）", anchor: window-max}
+      - {title: "同じ座標での処理順・閉区間と半開区間・座標圧縮", anchor: boundaries}
+      - {title: "使い分け（値が変わらず座標が小さいなら 2 次元累積和、オンライン強制ならマージソート木・永続セグメント木、点の追加もあるなら CDQ 分割統治）", anchor: choosing}
+      - {title: "長方形の和集合の面積（区間加算・最小値とその個数）", anchor: union-area, level: 黄}
+    merged_keys: [sweep-line]
+    visual: {kind: static, priority: 2, text: "x 方向に走査線を動かし、y 方向の BIT が更新されていく様子。クエリの下端の直前で引き、上端で足す"}
+    problems:
+      - {id: abc327_f, role: example, representative: true, summary: "時刻と位置が決まったリンゴのうち、時間幅 D・位置幅 W の枠で拾えるものの最大数を求める。", approach: "時間で走査し、位置の軸に区間加算・全体最大の遅延セグ木"}
+      - {id: abc477_f, role: example, summary: "（執筆時に確かめる）", approach: "クエリを先読みし、平面走査と遅延セグ木で窓の中のマスを数える（research/00 §2.3.8 の分類）"}
+      - {id: abc106_d, role: practice, summary: "区間 [p, q] に完全に含まれる列車の区間の数を、多数のクエリで答える。", approach: "区間を 2 次元の点と見る（N が小さいので 2 次元累積和でもよい）"}
+      - {id: abc186_f, role: practice, summary: "障害物のある盤面で、飛車が 2 手以内に行けるマスの数を求める。", approach: "縦 → 横で届くマスを数え、横 → 縦でしか届かないマスを列ごとの走査と BIT で足す"}
+      - {id: abc346_g, role: practice, summary: "ちょうど 1 回だけ現れる値を含む連続部分列の個数を求める。", approach: "左端を走査し、各値が唯一になる右端の範囲の和集合の長さを遅延セグ木で持つ"}
+      - {id: abc136_f, role: challenge, summary: "平面上の点の全部分集合について、外接長方形に含まれる点の数の総和を求める。", approach: "点ごとの寄与に分け、4 象限の点の数を BIT で数える"}
+      - {id: abc360_f, role: challenge, summary: "与えた区間たちと交差する数が最大になる区間 [l, r] を、辞書順最小で求める。", approach: "l を動かしながら r の軸に区間加算・最大値の遅延セグ木"}
+    sources: ["05-ds §4.D（sweep-line-2d）", "05-ds §5（sweep-line-2d）", "00-curriculum §4.2（平面走査・イベントソート）", "00-curriculum §2.3.8（abc477_f）", "01-basics §4.G（event-sort）"]
 
   - id: mo-algorithm
     chapter: クエリ処理の工夫
     title: Mo's algorithm
-    aliases: [Mo, Mo法, クエリ平方分割, 木上の Mo, Mo on tree, 時間付き Mo]
+    aliases: [Mo, Mo 法, クエリ平方分割, 木上の Mo, Mo on tree, 時間付き Mo]
     type: technique
     level: 青
-    level_evidence: "青（abc293_g 1753・abc242_g 1828）、2024〜2026 年の G は黄（abc477_g 2226・abc384_g 2343・abc405_g 2354）。木上の Mo の節は黄"
+    level_evidence: "基本形は青（abc293_g 1753・abc242_g 1828）。abc319 以降の Mo は拡張と組む G で黄（abc477_g 2226・abc384_g 2343・abc405_g 2354）。基本形の最近の根拠がないので古い根拠で青とし（D2）、拡張は黄の節にした"
     kind: [クエリ処理の工夫, 区間クエリ]
     prerequisites: [offline-queries]
-    related: [sqrt-decomposition, euler-tour, lca, fenwick-tree, dsu-on-tree, hld, inversion-number]
-    summary: "更新のない列への区間クエリをオフラインで並べ替え（l のブロックの順、次に r の順）、前のクエリの区間から 1 要素ずつ伸び縮みして答える。伸縮の総回数は O(N√Q) で、区間の種類数や同じ値の組の数のように左右を合成できない量に使う。"
+    related: [sqrt-decomposition, euler-tour, lca, fenwick-tree, small-to-large, hld, inversion-number]
+    summary: "更新のない列への区間クエリを並べ替え（l のブロックの順、次に r の順）、前の区間から 1 要素ずつ伸び縮みして答える。伸縮は合計 O(N√Q) 回で、区間の種類数のように左右を合成できない量に使う。"
     signs:
       - {type: phrase, text: "静的な列で、区間ごとの同じ値の組の数・出現回数が条件を満たす値の種類数"}
       - {type: phrase, text: "木のパス上の値の頻度を多数のクエリで答える"}
       - {type: constraint, text: "N, Q ≈ 2×10^5 で、制限時間が長めにとってある"}
     acl: []
-    frequency: B
-    sections:
-      - "何ができるか（1 要素の出入りで答えを差分更新できる量）"
-      - "クエリの並べ方と計算量（ブロックの大きさ N/√Q、伸縮の総回数 O(N√Q)）"
-      - "実装の要点（伸ばしてから縮める・奇数ブロックで r を逆順・取得を重くしてよい（値の平方分割））"
-      - "2 つの接頭辞の長さ (X, Y) を区間と見る（黄）"
-      - "木上の Mo（入りと出の両方を記録した列で、パスを区間にする。LCA を別に足す）（黄）"
-      - "時間付き Mo・ロールバック Mo（発展）"
-      - "使い分け（種類数だけならオフライン BIT、オンライン強制なら使えない）"
-    merged_keys: [mo-on-tree]
-    visual: "静的な図：(l, r) 平面にクエリを点で置き、ブロックごとに r を走る経路"
-    problems:
-      - {id: abc293_g, role: example, summary: "区間内で同じ値を持つ 3 つ組の個数。値の個数 c について C(c, 3) の差分を O(1) で更新する"}
-      - {id: abc242_g, role: example, summary: "区間内で同じ値どうしを組にするとき作れる組の最大数。1 要素の出入りで答えが ±1 だけ変わる"}
-      - {id: abc477_g, role: practice, summary: "木のパス上で、出現回数が A 以上 B 以下の値の種類数。入りと出を記録した列で木上の Mo"}
-      - {id: abc384_g, role: practice, summary: "2 つの数列の先頭 X 項と先頭 Y 項の全組の |A_i − B_j| の和。(X, Y) を Mo の区間に見立て、値で座圧した BIT で増減する"}
-      - {id: abc405_g, role: challenge, summary: "区間内の X 未満の要素を並べ替えてできる列の種類数。Mo と値の平方分割（更新 O(1)・取得 O(√N)）を組む"}
-    sources: ["05-ds §4.D（mo-algorithm）", "05-ds §5（mo-algorithm）", "04-tree §4.22（mo-on-tree）", "00-curriculum §5.2（abc477_g）"]
     verify: [static_range_inversions_query]
+    frequency: B
+    frequency_evidence: "recent 1（abc477_g）・前提として届くページなし・古い ABC 4 問"
+    sections:
+      - {title: "何ができるか（1 要素の出入りで答えを差分更新できる量）", anchor: what-it-does}
+      - {title: "クエリの並べ方と計算量（ブロックの大きさ N/√Q、伸縮の総回数 O(N√Q)）", anchor: ordering}
+      - {title: "実装の要点（伸ばしてから縮める・奇数ブロックで r を逆順・取得を重くしてよい（値の平方分割））", anchor: implementation}
+      - {title: "使い分け（種類数だけならオフラインの BIT、オンライン強制なら使えない）", anchor: choosing}
+      - {title: "2 つの接頭辞の長さ (X, Y) を区間と見る", anchor: two-prefixes, level: 黄}
+      - {title: "木上の Mo（入りと出の両方を記録した列で、パスを区間にする。LCA を別に足す）", anchor: mo-on-tree, level: 黄}
+      - {title: "時間付き Mo・ロールバック Mo", anchor: variants, level: 発展}
+    merged_keys: [mo-on-tree]
+    visual: {kind: static, priority: 2, text: "(l, r) 平面にクエリを点で置き、ブロックごとに r を走る経路"}
+    problems:
+      - {id: abc293_g, role: example, representative: true, summary: "区間内で同じ値を持つ 3 つ組 (i < j < k) の個数を、多数のクエリで答える。", approach: "値の個数 c について C(c, 3) の差分を O(1) で更新する"}
+      - {id: abc242_g, role: example, summary: "区間内で同じ値どうしを組にするとき、作れる組の最大数を多数のクエリで答える。", approach: "1 要素の出入りで答えが ±1 だけ変わる"}
+      - {id: abc477_g, role: practice, summary: "木のパス上で、出現回数が A 以上 B 以下の値の種類数を答える。", approach: "入りと出を記録した列で木上の Mo"}
+      - {id: abc384_g, role: practice, summary: "2 つの数列の先頭 X 項と先頭 Y 項の全組について |A_i − B_j| の和を、多数のクエリで答える。", approach: "(X, Y) を Mo の区間に見立て、値で座圧した BIT で増減する"}
+      - {id: abc405_g, role: challenge, summary: "区間内の X 未満の要素を並べ替えてできる列の種類数を、多数のクエリで答える。", approach: "Mo と値の平方分割（更新 O(1)・取得 O(√N)）を組む"}
+    sources: ["05-ds §4.D（mo-algorithm）", "05-ds §5（mo-algorithm）", "04-tree §4.22（mo-on-tree）", "00-curriculum §5.2（abc477_g）"]
 
   - id: sqrt-decomposition
     chapter: クエリ処理の工夫
-    title: 平方分割（バケット法・根号で場合分け）
-    aliases: [平方分割, バケット法, sqrt decomposition, 根号で場合分け, heavy/light, クエリの平方分割]
+    title: 平方分割
+    aliases: [sqrt decomposition, バケット法, bucket method, 根号で場合分け, heavy/light, クエリの平方分割]
     type: technique
     level: 黄
     level_evidence: "入口は青（abc335_f 1690）、必須の中心は黄（abc365_g 2254・abc219_g 2287）。設計書 §4.3 で黄とし、入口の青の問題を例題の先頭に置く"
-    kind: [クエリ処理の工夫, データ構造]
+    kind: [クエリ処理の工夫, データ構造, 計算量]
     prerequisites: [segment-tree]
-    related: [mo-algorithm, degree-sqrt, amortized-analysis, lazy-segment-tree, complexity-estimation]
-    summary: "列を約 √N 個のブロックに分けてブロックごとの集約とタグを持つ方法と、合計が N のとき「大きいもの」は √N 個しかないことを使って大小で処理を分ける方法。セグ木に載らない操作の逃げ道や、計算量を釣り合わせる道具として使う。"
+    related: [mo-algorithm, degree-sqrt, complexity-estimation, lazy-segment-tree]
+    summary: "セグメント木に載らない区間操作や、合計だけが抑えられた量の処理を、√N を境に分けて O(N√N) 程度で行う。ブロックごとに集約とタグを持つ方法と、大きいものと小さいもので処理を変える方法がある。"
     signs:
       - {type: phrase, text: "次数の合計が 2M・各色の個数の合計が N のように、合計だけが抑えられている"}
-      - {type: phrase, text: "歩幅 x ごとに配る（小さい歩幅は（歩幅, 余り）ごとにまとめる）"}
-      - {type: phrase, text: "セグ木に載らない区間操作（区間加算と区間内の x 以上の個数など）"}
+      - {type: phrase, text: "位置 i から A_i ずつ先へ跳ぶ・配る"}
+      - {type: phrase, text: "区間加算と、区間内の x 以上の要素の個数"}
       - {type: constraint, text: "制限時間が長めで、O(N√N) ≈ 10^8 なら間に合う"}
     acl: []
-    frequency: B
-    sections:
-      - "配列のバケット分割（完全に含まれるブロックはタグ、端は要素ごと）"
-      - "根号で場合分け（重い・軽い。B を √N 付近にして釣り合わせる）（→ グラフの章の次数による平方分割）"
-      - "歩幅ごとの場合分け（小さい歩幅は（歩幅, 余り）の配列）（青）"
-      - "クエリの平方分割（√Q 個ごとに作り直し、未反映の分は愚直に補正する）"
-      - "実装の要点（ブロック番号は i / B・l と r が同じブロックの場合・タグを押し下げる時機・B は定数でよい）"
-      - "使い分け（載せられるならセグ木のほうが速く安全）"
-    merged_keys: []
-    visual: "静的な図：列を √N 個のブロックに分け、完全に含まれるブロックはタグ、端は要素ごとに処理する"
-    problems:
-      - {id: abc335_f, role: example, summary: "マス i から A_i の倍数だけ先へ跳ぶ進み方を数える配る DP。歩幅が √N 以下なら（歩幅, 余り）ごとに加算を予約する"}
-      - {id: abc219_g, role: example, summary: "頂点の値を隣接頂点へ伝播させるクエリの後の全頂点の値。次数が √M 以上の頂点は伝播を保留し、隣が問い合わせのときに参照する"}
-      - {id: abc403_g, role: practice, summary: "値を追加するたびに、昇順に並べた奇数番目の和を答える（別解として約 √Q 個のバケットで整列を保つ）"}
-      - {id: abc365_g, role: practice, summary: "入退室の記録から、指定した 2 人が同時に在室した合計時間を多数答える。記録の数で人を分け、多い人を含む組は前計算する"}
-      - {id: abc259_h, role: challenge, summary: "グリッドで始点と終点のラベルが等しい右・下移動の経路数の総和。ラベルの出現数で場合を分ける"}
-    sources: ["05-ds §4.D（sqrt-decomposition）", "05-ds §5（sqrt-decomposition）", "03-graph §4.H（degree-sqrt）"]
     verify: [static_range_mode_query]
+    frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 5 問"
+    sections:
+      - {title: "配列のバケット分割（完全に含まれるブロックはタグ、端は要素ごと）", anchor: buckets}
+      - {title: "根号で場合分け（合計が抑えられた量の大小で分ける。歩幅なら小さい歩幅を（歩幅, 余り）でまとめる。入口は次数による平方分割のページ）", anchor: heavy-light}
+      - {title: "クエリの平方分割（√Q 個ごとに作り直し、未反映の分は愚直に補正する）", anchor: query-buckets}
+      - {title: "実装の要点（ブロック番号は i / B・l と r が同じブロックの場合・タグを押し下げる時機・B は定数でよい）", anchor: implementation}
+      - {title: "使い分け（載せられるならセグメント木のほうが速く安全）", anchor: choosing}
+    merged_keys: []
+    visual: {kind: static, priority: 2, text: "列を √N 個のブロックに分け、完全に含まれるブロックはタグ、端は要素ごとに処理する"}
+    problems:
+      - {id: abc335_f, role: example, summary: "マス i から A_i の正の倍数だけ先のマスへ進んでマスを塗ることを繰り返すとき、塗られたマスの集合としてありうるものの数を求める。", approach: "配る DP。歩幅が √N 以下なら（歩幅, 余り）ごとに加算を予約し、大きければ愚直に配る"}
+      - {id: abc219_g, role: example, representative: true, summary: "頂点の値を隣接頂点へ伝播させるクエリを繰り返した後の、全頂点の値を求める。", approach: "次数が √M 以上の頂点は伝播を保留し、隣が問い合わせのときに参照する"}
+      - {id: abc403_g, role: practice, summary: "値を 1 つずつ追加するたびに、昇順に並べたときの奇数番目の和を答える（前の答えで次の値が決まる）。", approach: "約 √Q 個のバケットで整列を保つ（想定解は動的セグ木）"}
+      - {id: abc365_g, role: practice, summary: "入退室の記録から、指定した 2 人が同時に在室した合計時間を多数答える。", approach: "記録の数で人を分け、多い人を含む組は前計算する"}
+      - {id: abc259_h, role: challenge, summary: "グリッドで、始点と終点のラベルが等しい右・下移動の経路数の総和を求める。", approach: "ラベルの出現数で場合を分ける"}
+    sources: ["05-ds §4.D（sqrt-decomposition）", "05-ds §5（sqrt-decomposition）", "03-graph §4.H（degree-sqrt）"]
 
   - id: parallel-binary-search
     chapter: クエリ処理の工夫
     title: 並列二分探索
-    aliases: [整体二分, parallel binary search, 全クエリの二分探索を同時に進める]
+    aliases: [parallel binary search, 整体二分, 全クエリの二分探索を同時に進める]
     type: overview
     level: 発展
     level_evidence: "agc002_d（2514）。ABC で必須の例は見つからなかった（01・05 の調査）。設計書 §4.2 で ds のクエリ処理の工夫に置く"
     kind: [クエリ処理の工夫, 二分探索]
     prerequisites: [binary-search-answer, offline-queries]
     related: [partially-persistent-union-find, union-find, cdq-divide-and-conquer, merge-process-tree]
-    summary: "多数のクエリがそれぞれ「単調な過程のどの時点で条件を満たすか」を二分探索するとき、全クエリの探索区間を同時に持ち、各段で過程を最初から 1 回だけ流して中央の時刻に来たクエリをまとめて判定する。段の数は O(log M)。"
+    summary: "多数のクエリがそれぞれ「単調な過程のどの時点で条件を満たすか」を二分探索するとき、全クエリの探索を同時に進める。各段で過程を最初から 1 回だけ流して判定し、段の数は O(log M) で済む。"
     signs:
       - {type: phrase, text: "多数のクエリが、それぞれ何回目の操作で条件を満たすようになるかを問う"}
-      - {type: phrase, text: "1 クエリずつ二分探索すると、判定のたびに過程を作り直すことになる"}
+      - {type: phrase, text: "最初の t 回の操作の後に条件を満たす最小の t を、クエリごとに答える"}
     acl: []
+    verify: []
     frequency: C
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 0 問"
     sections:
-      - "何ができるか（オフラインで全クエリの二分探索を一斉に進める）"
-      - "手順（各段で mid の順にクエリを並べ、過程を 1 回流して判定する）と計算量"
-      - "Union-Find と組む例（最初の t 本の辺で条件を満たすか）"
-      - "代わりの手（部分永続 Union-Find・併合過程の木）"
+      - {title: "何ができるか（オフラインで全クエリの二分探索を一斉に進める）", anchor: what-it-does}
+      - {title: "手順（各段で mid の順にクエリを並べ、過程を 1 回流して判定する）と計算量", anchor: procedure}
+      - {title: "Union-Find と組む例（最初の t 本の辺で条件を満たすか）", anchor: with-union-find}
+      - {title: "代わりの手（部分永続 Union-Find・併合過程の木）", anchor: alternatives}
     merged_keys: []
-    visual: "静的な図：クエリごとの [lo, hi) を並べ、各段で全クエリの mid を時系列順にまとめて判定する様子"
+    visual: {kind: static, priority: 2, text: "クエリごとの [lo, hi) を並べ、各段で全クエリの mid を時系列順にまとめて判定する様子"}
     problems:
-      - {id: agc002_d, role: example, summary: "最初の t 本の辺で、x と y の成分の頂点数の合計が z 以上になる最小の t。全クエリの二分探索を同時に進め、各段で辺を先頭から Union-Find に足す"}
+      - {id: agc002_d, role: example, representative: true, summary: "最初の t 本の辺だけを使ったとき、x と y の成分の頂点数の合計が z 以上になる最小の t を各クエリで答える。", approach: "全クエリの二分探索を同時に進め、各段で辺を先頭から Union-Find に足しながら判定する"}
+      - {id: code_thanks_festival_2017_h, role: practice, summary: "集合の併合を順に行う列に対し、2 要素が初めて同じ集合になった操作の番号を各クエリで答える。", approach: "並列二分探索（部分永続 Union-Find でもよい）"}
+    problems_note: "発展の概要。ABC で必須の問題がなく、練習は 1 問"
     sources: ["01-basics §4.C（parallel-binary-search）", "05-ds §4.B（parallel-binary-search）", "05-ds §5（parallel-binary-search）"]
 
   - id: cdq-divide-and-conquer
     chapter: クエリ処理の工夫
-    title: CDQ 分割統治（時系列の分割統治）
-    aliases: [CDQ, 時系列の分割統治, オフラインの分割統治, 3次元の支配点の数え上げ]
+    title: CDQ 分割統治
+    aliases: [CDQ divide and conquer, 時系列の分割統治, オフラインの分割統治, 3 次元の支配点の数え上げ]
     type: overview
     level: 発展
     level_evidence: "ABC で必須の例は見つからなかった（01・05 の調査）。設計書 §4.2 で ds のクエリ処理の工夫に置く"
     kind: [クエリ処理の工夫, ダブリング・分割統治]
     prerequisites: [divide-and-conquer, fenwick-tree]
     related: [sweep-line-2d, parallel-binary-search, offline-queries]
-    summary: "更新とクエリが混ざる列を時刻で半分に分け、左半分の更新が右半分のクエリに与える影響だけを BIT などでまとめて処理する分割統治。3 次元の支配点の数え上げや、点の追加つきの長方形クエリをオフラインで解く。"
+    summary: "3 次元の支配点の数え上げや、点の追加つきの長方形クエリを、オフラインで O(N log^2 N) で解く。更新とクエリの列を時刻で半分に分け、左の更新が右のクエリに与える影響だけを BIT で処理する。"
     signs:
       - {type: phrase, text: "3 つの値すべての大小関係を満たす組を数える"}
       - {type: phrase, text: "点の追加と長方形の質問が混ざるが、オフラインでよい"}
     acl: []
-    frequency: C
-    sections:
-      - "何ができるか（時系列の分割統治で 1 次元を消す）"
-      - "手順（左の更新 → 右のクエリをまとめて平面走査する）と計算量 O(N log^2 N)"
-      - "代わりの手（座標が小さいなら 2 次元 BIT、更新がなければ平面走査）"
-    merged_keys: []
-    visual: "静的な図：時刻の列を半分に分け、左半分の更新が右半分のクエリに与える影響だけをまとめて処理する様子"
-    problems: []
-    sources: ["01-basics §4.J（cdq-divide-and-conquer）", "05-ds §4.E（advanced-ds-catalog）"]
     verify: [point_add_rectangle_sum]
+    frequency: C
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 0 問"
+    sections:
+      - {title: "何ができるか（時系列の分割統治で 1 次元を消す）", anchor: what-it-does}
+      - {title: "手順（左の更新 → 右のクエリを平面走査で処理する）と計算量 O(N log^2 N)", anchor: procedure}
+      - {title: "代わりの手（座標が小さいなら 2 次元 BIT、更新がなければ平面走査）", anchor: alternatives}
+    merged_keys: []
+    visual: {kind: static, priority: 2, text: "時刻の列を半分に分け、左半分の更新が右半分のクエリに与える影響だけをまとめて処理する様子"}
+    problems: []
+    problems_note: "発展の概要。ABC で必須の問題が見つからないので問題なし（verify の point_add_rectangle_sum で練習する）"
+    sources: ["01-basics §4.J（cdq-divide-and-conquer）", "05-ds §4.E（advanced-ds-catalog）"]
 
-  # ===== 6. 発展的なデータ構造（永続・オンラインの区間クエリ・その他） =====
+  # ===== 6. そのほかのデータ構造 =====
 
   - id: persistent-data-structures
-    chapter: 発展的なデータ構造
-    title: 永続データ構造（版の木・永続セグ木）
-    aliases: [永続, persistent, 経路コピー, 永続スタック, 永続セグ木, 版の木, 操作の巻き戻し]
+    chapter: そのほかのデータ構造
+    title: 永続データ構造
+    aliases: [persistent data structure, 永続, 版の木, 永続スタック, 永続セグ木, 経路コピー, path copying, 操作の巻き戻し]
     type: technique
     level: 青
-    level_evidence: "版の木は青（abc273_e 1624）、永続セグ木・版の木のオイラーツアーは青（abc453_g 1735）"
+    level_evidence: "版の木は青（abc273_e 1624）、永続セグ木・版の木のオイラーツアーは青（abc453_g 1735、2026）"
     kind: [データ構造, クエリ処理の工夫]
     prerequisites: [segment-tree, stack-techniques]
     related: [rollback-union-find, root-path-dfs, euler-tour, merge-sort-tree, offline-queries, partially-persistent-union-find]
-    summary: "過去の版を残したまま更新するデータ構造。末尾の追加・削除・保存・読み込みは版を木の頂点にして表し（版の木）、配列やセグ木は更新した経路のノードだけを作り直して古い版と共有する（経路コピー）。オフラインなら版の木を DFS でたどる方法もある。"
+    summary: "過去の版を残したまま更新し、任意の版から続きの操作をする。末尾の追加・削除・保存・読み込みは版を木の頂点にして表し（版の木）、配列やセグメント木は更新した経路だけを作り直して古い版と共有する。"
     signs:
       - {type: phrase, text: "状態を保存し、あとで読み込んで続きの操作をする"}
       - {type: phrase, text: "配列を丸ごとコピーする操作と、1 点更新・区間和が混ざる"}
       - {type: phrase, text: "時刻 t の時点での区間の値の分布"}
     acl: []
-    frequency: B
-    sections:
-      - "版の木（追加は子を作る・削除は親へ戻る・保存は頂点を覚える）"
-      - "経路コピー（1 回の更新で O(log N) 個のノードを新しく作る。丸ごとのコピーは根の指し替え）"
-      - "部分永続と完全永続"
-      - "操作の版を木にしてオフラインで処理する（版の木の DFS と取り消し）"
-      - "接頭辞ごとの版で区間の k 番目・x 以下の個数をオンラインで（発展寄り）"
-      - "使い分け（ロールバックは直前から順に戻すだけ、永続は任意の版へ）"
-    merged_keys: [version-tree-offline]
-    visual: "静的な図：更新で根から葉までの経路だけが複製され、古い版と節点を共有する様子。版の木で追加・削除・保存が頂点の移動になる様子"
-    problems:
-      - {id: abc273_e, role: example, summary: "末尾追加・末尾削除・ページへの保存・読み込みを行い、毎回の末尾を答える。版を木で持つ"}
-      - {id: abc453_g, role: example, summary: "多数の数列について、丸ごとのコピー・1 点更新・区間和を処理する。永続セグ木か、先読みして版の木をたどる"}
-    sources: ["05-ds §4.E（persistent-data-structures）", "05-ds §5（persistent-data-structures）", "00-curriculum §5.2（abc453_g）"]
     verify: [persistent_queue, persistent_range_affine_range_sum]
+    frequency: B
+    frequency_evidence: "recent 1（abc453_g）・前提として届くページなし・古い ABC 1 問"
+    sections:
+      - {title: "版の木（追加は子を作る・削除は親へ戻る・保存は頂点を覚える）", anchor: version-tree}
+      - {title: "経路コピー（1 回の更新で O(log N) 個のノードを新しく作る。丸ごとのコピーは根の指し替え）", anchor: path-copying}
+      - {title: "部分永続と完全永続", anchor: partial-vs-full}
+      - {title: "操作の版を木にしてオフラインで処理する（版の木の DFS と取り消し）", anchor: offline-version-tree}
+      - {title: "使い分け（ロールバックは直前から順に戻すだけ、永続は任意の版へ）", anchor: choosing}
+      - {title: "接頭辞ごとの版で区間の K 番目・x 以下の個数をオンラインで求める", anchor: prefix-versions, level: 発展}
+    merged_keys: [version-tree-offline]
+    visual: {kind: static, priority: 2, text: "更新で根から葉までの経路だけが複製され、古い版と節点を共有する様子。版の木で追加・削除・保存が頂点の移動になる様子"}
+    problems:
+      - {id: abc273_e, role: example, representative: true, summary: "末尾への追加・末尾の削除・ページへの保存・ページの読み込みの操作のたびに、列の末尾を答える。", approach: "版を木で持ち、追加は子を作る・削除は親へ戻る・保存と読み込みは頂点番号を記録する"}
+      - {id: abc453_g, role: example, summary: "多数の数列について、丸ごとのコピー・1 点更新・区間和のクエリを処理する。", approach: "永続セグ木（コピーは根の指し替え）。先読みして版の木をオイラーツアーでたどってもよい"}
+    problems_note: "練習の候補が調査にない（工程8b の前の問題の補充で探す）"
+    sources: ["05-ds §4.E（persistent-data-structures）", "05-ds §5（persistent-data-structures）", "00-curriculum §5.2（abc453_g）"]
 
   - id: merge-sort-tree
-    chapter: 発展的なデータ構造
-    title: マージソート木（区間の x 以下の個数・和をオンラインで）
+    chapter: そのほかのデータ構造
+    title: マージソート木
     aliases: [Merge Sort Tree, マージソートツリー, 領域木, Range Tree]
     type: technique
     level: 青
-    level_evidence: "abc339_g（1792）でオンライン強制の区間の x 以下の和に使う。先読みと各段の BIT を組む発展の例は abc467_g（2544）"
+    level_evidence: "abc339_g（1792、2024）でオンライン強制の区間の x 以下の和に使う。先読みと各段の BIT を組む発展の例は abc467_g（2544）"
     kind: [データ構造, 区間クエリ]
     prerequisites: [segment-tree, binary-search]
     related: [wavelet-matrix, sweep-line-2d, persistent-data-structures, offline-queries]
-    summary: "セグ木の各ノードに、その区間の要素をソートした列（と累積和）を持つ静的な構造。区間を O(log N) 個のノードに分けて各ノードで二分探索し、区間内の x 以下の個数・和を O(log^2 N) でオンラインに答える。メモリは O(N log N)。"
+    summary: "区間内の x 以下の要素の個数・和を、オンラインで O(log^2 N) で答える静的な構造。セグメント木の各ノードにその区間をソートした列と累積和を持ち、メモリは O(N log N)。"
     signs:
       - {type: phrase, text: "区間内で X 以下の要素の個数・和を多数のクエリで答える"}
       - {type: phrase, text: "前の答えで次のクエリが決まる（オンライン強制）"}
     acl: []
-    frequency: C
-    sections:
-      - "作り方（子の列をマージする）とメモリ O(N log N)"
-      - "クエリの手順（O(log N) 個のノードで二分探索）と累積和で和も"
-      - "各段に BIT を持たせる（先読みと組む）（発展）"
-      - "使い分け（オフラインなら平面走査＋BIT、速さが要るなら Wavelet Matrix・永続セグ木）"
-    merged_keys: []
-    visual: "静的な図：セグ木の各ノードにソート済みの列を書く"
-    problems:
-      - {id: abc339_g, role: example, summary: "区間内で X 以下の要素の和を多数のクエリで答える（オンライン強制）。各ノードにソート列と累積和を持つ"}
-      - {id: abc467_g, role: challenge, summary: "クエリを先読みし、マージソート木の各段に BIT を持たせて処理する"}
-    sources: ["05-ds §4.E（merge-sort-tree）", "05-ds §5（merge-sort-tree）", "00-curriculum §5.2（abc467_g）"]
     verify: [static_range_sum_with_upper_bound]
+    frequency: B
+    frequency_evidence: "recent 1（abc467_g）・前提として 1 ページに届く（直接 1）・古い ABC 1 問"
+    sections:
+      - {title: "作り方（子の列をマージする）とメモリ O(N log N)", anchor: build}
+      - {title: "クエリの手順（O(log N) 個のノードで二分探索）と累積和で和も", anchor: query}
+      - {title: "使い分け（オフラインなら平面走査と BIT、速さが要るなら Wavelet Matrix・永続セグメント木）", anchor: choosing}
+      - {title: "各段に BIT を持たせる（先読みと組む）", anchor: bit-per-level, level: 発展}
+    merged_keys: []
+    visual: {kind: static, priority: 2, text: "セグ木の各ノードにソート済みの列を書く"}
+    problems:
+      - {id: abc339_g, role: example, representative: true, summary: "区間内で X 以下の要素の和を、前の答えで次の質問が決まる形で多数答える。", approach: "各ノードにソート列と累積和を持つ（Wavelet Matrix でもよい）"}
+      - {id: abc467_g, role: challenge, summary: "（執筆時に確かめる）", approach: "クエリを先読みし、マージソート木の各段に BIT を持たせる（research/00 §2.3.8 の分類）"}
+    problems_note: "練習の候補が調査にない（工程8b の前の問題の補充で探す）"
+    sources: ["05-ds §4.E（merge-sort-tree）", "05-ds §5（merge-sort-tree）", "00-curriculum §5.2（abc467_g）"]
 
   - id: wavelet-matrix
-    chapter: 発展的なデータ構造
+    chapter: そのほかのデータ構造
     title: Wavelet Matrix
-    aliases: [ウェーブレット行列, Wavelet Tree, 区間の k 番目]
+    aliases: [ウェーブレット行列, Wavelet Tree, 区間の K 番目]
     type: overview
     level: 発展
     level_evidence: "abc324_g（2501）。abc339_g（1792）はマージソート木でも解ける"
     kind: [データ構造, 区間クエリ, ビット演算]
     prerequisites: [merge-sort-tree, bit-operations]
     related: [persistent-data-structures, kth-element]
-    summary: "値を上位ビットから順に安定に 0/1 で振り分けた段を重ね、各段で 0 の個数の累積を持つ静的な構造。区間の k 番目・x 未満の個数（段ごとの累積和で和も）を O(log σ) でオンラインに答える。"
+    summary: "区間の K 番目の値・x 未満の個数・和を、オンラインで O(log σ) で答える静的な構造。値を上位ビットから順に安定に 0/1 で振り分けた段を重ね、各段で 0 の個数の累積を持つ。"
     signs:
-      - {type: phrase, text: "区間の k 番目に小さい値をオンラインで答える"}
+      - {type: phrase, text: "区間の K 番目に小さい値をオンラインで答える"}
       - {type: phrase, text: "長方形（添字の範囲 × 値の範囲）の中の点の数"}
     acl: []
-    frequency: C
-    sections:
-      - "何ができるか（区間の k 番目・x 未満の個数・和）"
-      - "段の作り方（上位ビットから安定に振り分ける）"
-      - "ライブラリでの使い方と、マージソート木・永続セグ木との比較"
-    merged_keys: []
-    visual: "静的な図：値を上位ビットから安定に 0/1 で振り分けた段"
-    problems:
-      - {id: abc339_g, role: example, summary: "区間内で X 以下の要素の和を多数のクエリで答える（マージソート木でもよい）"}
-      - {id: abc324_g, role: example, summary: "順列から始め、「先頭 x 個」「値が x 未満」で列を分割するクエリごとに新しい列の長さを答える。長方形内の個数と二分探索"}
-    sources: ["05-ds §4.E（wavelet-matrix）", "05-ds §5（wavelet-matrix）"]
     verify: [range_kth_smallest]
+    frequency: C
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 2 問"
+    sections:
+      - {title: "何ができるか（区間の K 番目・x 未満の個数・和）", anchor: what-it-does}
+      - {title: "段の作り方（上位ビットから安定に振り分ける）", anchor: build}
+      - {title: "ライブラリでの使い方と、マージソート木・永続セグメント木との比較", anchor: usage}
+    merged_keys: []
+    visual: {kind: static, priority: 2, text: "値を上位ビットから安定に 0/1 で振り分けた段"}
+    problems:
+      - {id: abc324_g, role: example, representative: true, summary: "順列から始め、「先頭 x 個」「値が x 未満」で列を分割するクエリごとに、新しい列の長さを答える。", approach: "各列を（添字範囲 × 値範囲）の長方形で表し、矩形内の個数と二分探索で分割位置を求める"}
+      - {id: abc339_g, role: practice, summary: "区間内で X 以下の要素の和を、前の答えで次の質問が決まる形で多数答える。", approach: "区間の x 以下の和を Wavelet Matrix で求める（例題はマージソート木）"}
+    problems_note: "発展の概要。練習は 1 問（ABC で Wavelet Matrix が要る問題が少ない）"
+    sources: ["05-ds §4.E（wavelet-matrix）", "05-ds §5（wavelet-matrix）"]
 
   - id: binary-trie
-    chapter: 発展的なデータ構造
-    title: Binary Trie（2 進 Trie）
-    aliases: [二分トライ, 2進Trie, ビットTrie, XOR Trie, XOR の最小化]
+    chapter: そのほかのデータ構造
+    title: Binary Trie
+    aliases: [二分トライ, 2 進 Trie, ビット Trie, XOR Trie, XOR の最小化]
     type: technique
     level: 青
-    level_evidence: "abc281_f（1714）・abc308_g（2008）・abc425_g（2205）。abc281_f は上位ビットで分ける再帰、abc308_g の主解は multiset"
+    level_evidence: "abc281_f（1714）・abc308_g（2008）・abc425_g（2205、2025）。abc281_f は上位ビットで分ける再帰、abc308_g の主解は multiset。abc319 以降は abc425_g（黄）だけなので、青の根拠には古い abc281_f を使った（D2）"
     kind: [データ構造, ビット演算]
     prerequisites: [trie, bit-operations]
     related: [bitwise-independence, ordered-set, kth-element, xor-basis]
-    summary: "整数を 2 進数の上位ビットから Trie に入れ、各ノードに部分木の個数を持たせる。x との XOR の最小・最大、k 番目に小さい値、全体に XOR をかける操作を O(ビット数) で扱える。"
+    summary: "整数を 2 進数の上位ビットから Trie に入れ、各ノードに部分木の個数を持たせる。x との XOR の最小・最大、K 番目に小さい値、全体に XOR をかける操作を O(ビット数) で処理する。"
     signs:
       - {type: phrase, text: "x を選んで XOR の最大値を最小にする・集合の中で x との XOR が最小の要素"}
       - {type: phrase, text: "追加・削除のたびに、任意の 2 要素の XOR の最小値を答える"}
-      - {type: phrase, text: "全体に XOR をかけてから k 番目に小さい値"}
+      - {type: phrase, text: "全体に XOR をかけてから K 番目に小さい値"}
+      - {type: constraint, text: "A_i < 2^30 で、追加・削除・質問が合わせて 2×10^5 回程度"}
     acl: []
-    frequency: B
-    sections:
-      - "作り方（上位ビットから辿る二分木・ノードに個数）"
-      - "XOR の最小・最大（同じ側を優先して降りる）"
-      - "k 番目と全体への XOR（ビットごとの反転フラグ）"
-      - "明示的に作らない Binary Trie（上位ビットで分ける再帰）"
-      - "使い分け（最小の XOR の組はソートで隣り合う組でも求まる、XOR で作れる値の集合は XOR 基底）"
-      - "落とし穴（ノード数＝要素数 × ビット数。配列で確保する）"
-    merged_keys: []
-    visual: "静的な図：整数を上位ビットから辿る二分木と、XOR を最小にするときに降りる道"
-    problems:
-      - {id: abc281_f, role: example, summary: "x を選んで max(a_i xor x) を最小にする。上位ビットで集合を分ける再帰（明示的に作らない Binary Trie）"}
-      - {id: abc308_g, role: example, summary: "整数の追加・削除のたびに、2 要素の XOR の最小値を答える（ソート順で隣り合う組の multiset でもよい）"}
-      - {id: abc425_g, role: practice, summary: "x = 0..M−1 について min_i (x xor A_i) の総和。Binary Trie を上から再帰でたどって数える"}
-    sources: ["05-ds §4.E（binary-trie）", "05-ds §5（binary-trie）", "08-string-geo §4.5（binary-trie）"]
     verify: [set_xor_min]
+    frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 3 問"
+    sections:
+      - {title: "作り方（上位ビットから辿る二分木・ノードに個数）", anchor: build}
+      - {title: "XOR の最小・最大（同じ側を優先して降りる）", anchor: xor-min-max}
+      - {title: "K 番目と全体への XOR（ビットごとの反転フラグ）", anchor: kth-and-global-xor}
+      - {title: "明示的に作らない Binary Trie（上位ビットで分ける再帰）", anchor: implicit}
+      - {title: "使い分け（最小の XOR の組はソート順で隣り合う組でも求まる、XOR で作れる値の集合は XOR 基底）", anchor: choosing}
+      - {title: "落とし穴（ノード数＝要素数 × ビット数。配列で確保する）", anchor: pitfalls}
+    merged_keys: []
+    visual: {kind: static, priority: 2, text: "整数を上位ビットから辿る二分木と、XOR を最小にするときに降りる道"}
+    problems:
+      - {id: abc281_f, role: example, representative: true, summary: "x を選んで、全要素と x の XOR の最大値を最小にする。", approach: "上位ビットで集合を分ける再帰（明示的に作らない Binary Trie）"}
+      - {id: abc308_g, role: example, summary: "整数の追加・削除のたびに、集合内の 2 要素の XOR の最小値を答える。", approach: "Binary Trie（ソート順で隣り合う組の XOR を multiset で持つ解もある）"}
+      - {id: abc425_g, role: practice, summary: "x = 0, 1, …, M − 1 について min_i (x xor A_i) を求め、その総和を答える。", approach: "Binary Trie を上から再帰でたどって数える"}
+    problems_note: "練習が 1 問（調査の候補が少ない。工程8b の前の問題の補充で探す）"
+    sources: ["05-ds §4.E（binary-trie）", "05-ds §5（binary-trie）", "08-string-geo §4.5（binary-trie）"]
 
   - id: balanced-bst
-    chapter: 発展的なデータ構造
+    chapter: そのほかのデータ構造
     title: 平衡二分探索木と pb_ds の tree
-    aliases: [平衡二分木, treap, implicit treap, RBST, splay, pb_ds tree, order statistics tree]
+    aliases: [平衡二分木, balanced binary search tree, treap, implicit treap, RBST, splay, pb_ds tree, order statistics tree]
     type: overview
     level: 発展
-    level_evidence: "ABC で必須の問題は見つからなかった（k 番目は BIT・set で足りる：abc241_d 1177・arc033_3 1641）"
+    level_evidence: "ABC で平衡二分探索木が必須の問題は見つからなかった（K 番目と順位だけなら multiset・BIT 上の二分探索で足りる）"
     kind: [データ構造]
     prerequisites: [ordered-set]
-    related: [kth-element, linked-list, segment-tree]
-    summary: "キーで二分探索木、ランダムな優先度でヒープになる treap などで、split・merge を基本操作にすると、位置で指定した挿入・削除・区間の反転・区間の総積を期待 O(log N) で扱える。k 番目と順位だけなら GCC の pb_ds の tree が使える。"
+    related: [kth-element, linked-list, segment-tree, advanced-ds-catalog]
+    summary: "位置で指定した挿入・削除・区間の反転・区間の総積を、期待 O(log N) で処理する列の構造。treap などで split・merge を基本操作にし、K 番目と順位だけなら GCC の pb_ds の tree で足りる。"
     signs:
       - {type: phrase, text: "列の途中（位置で指定）への挿入・削除と、区間の反転"}
-      - {type: phrase, text: "k 番目の値と、値の順位の両方をオンラインで答える"}
+      - {type: phrase, text: "K 番目の値と、値の順位の両方をオンラインで答える"}
     acl: []
+    verify: [range_reverse_range_sum, dynamic_sequence_range_affine_range_sum]
     frequency: C
+    frequency_evidence: "recent 0・前提として 1 ページに届く（直接 1）・古い ABC 1 問"
     sections:
-      - "何ができるか（位置で分割・結合する列の構造）"
-      - "treap の split・merge と、深さが期待 O(log N) になる理由"
-      - "pb_ds の tree（order_of_key・find_by_order。重複は (値, 通し番号) にする）（→ C++ 章）"
-      - "代わりの手（BIT 上の二分探索・連結リスト・逆順の処理と BIT）"
+      - {title: "何ができるか（位置で分割・結合する列の構造）", anchor: what-it-does}
+      - {title: "treap の split・merge と、深さが期待 O(log N) になる理由", anchor: treap}
+      - {title: "pb_ds の tree（order_of_key・find_by_order。重複は (値, 通し番号) にする）（→ C++ 章）", anchor: pbds}
+      - {title: "代わりの手（BIT 上の二分探索・連結リスト・逆順の処理と BIT）", anchor: alternatives}
     merged_keys: []
     visual: null
     problems:
-      - {id: abc241_d, role: practice, summary: "数の追加と、x 以下（以上）の中で大きい（小さい）方から k 番目の値（multiset でも pb_ds の tree でも解ける）"}
-      - {id: arc033_3, role: practice, summary: "数の集合への追加と、小さい方から x 番目の数を答えて削除するクエリ（BIT 上の二分探索でも解ける）"}
+      - {id: abc241_d, role: practice, summary: "数の追加と、x 以下（以上）の中で大きい（小さい）方から k 番目の値の質問を処理する。", approach: "multiset でも pb_ds の tree でも解ける"}
+      - {id: arc033_3, role: practice, summary: "数の集合への追加と、小さい方から x 番目の数を答えて削除するクエリを処理する。", approach: "BIT 上の二分探索でも平衡二分探索木でも解ける"}
+    problems_note: "発展の概要。ABC で必須の問題がないので例題なし。練習の 2 問はほかの方法でも解ける"
     sources: ["05-ds §4.E（balanced-bst）", "05-ds §5（balanced-bst）"]
-    verify: [range_reverse_range_sum, dynamic_sequence_range_affine_range_sum]
 
   - id: advanced-ds-catalog
-    chapter: 発展的なデータ構造
-    title: 発展的なデータ構造の名前と用途の一覧
-    aliases: [セグ木マージ, 2次元セグ木, 2次元BIT, K-D tree, 併合可能なヒープ, skew heap, leftist heap, Fast Set, Fractional Cascading, 析合木, Kinetic Segment Tree, Disjoint Sparse Table]
-    type: overview
-    level: 発展
-    level_evidence: "ABC で必須の例は見つからなかったもの（セグ木のマージ・2 次元セグ木・K-D tree・併合可能なヒープなど）"
-    kind: [データ構造]
-    prerequisites: [segment-tree]
-    related: [dynamic-tree, cdq-divide-and-conquer, mo-algorithm, sparse-table, small-to-large, priority-queue]
-    summary: "解説で見慣れない名前のデータ構造に出会ったときに引く一覧。セグ木のマージ、2 次元セグ木・2 次元 BIT、K-D tree、併合可能なヒープ、Fast Set、Fractional Cascading、析合木、Kinetic Segment Tree などについて、1 行の説明と代わりになる手を並べる。"
-    signs:
-      - {type: phrase, text: "解説に見慣れない名前のデータ構造が出てきた"}
+    chapter: そのほかのデータ構造
+    title: 見慣れないデータ構造の名前と用途
+    aliases: [セグ木マージ, segment tree merging, 2 次元セグ木, 2 次元 BIT, K-D tree, 併合可能なヒープ, meldable heap, skew heap, leftist heap, Fast Set, Fractional Cascading, 析合木, Kinetic Segment Tree]
+    type: hub
+    level: null
+    kind: [案内, データ構造]
+    prerequisites: []
+    related: [segment-tree, priority-queue, small-to-large, balanced-bst, wavelet-matrix, dynamic-tree, cdq-divide-and-conquer, mo-algorithm, cht]
+    summary: "解説に見慣れない名前のデータ構造が出てきたときに、何ができるかと代わりになる手を 1 行ずつ引く。セグ木のマージ・2 次元セグ木・K-D tree・併合可能なヒープ・Fast Set・析合木などを並べる。"
+    signs: []
     acl: []
-    frequency: C
+    verify: []
     sections:
-      - "名前・何ができるか・代わりになる手の表"
-      - "併合可能なヒープ（skew heap・leftist heap・ランダム化ヒープ。マージテクで足りることが多い）"
-      - "木の動的な構造（Link-Cut Tree など → 木の章）と CDQ 分割統治・時間付き Mo（→ 各ページ）"
+      - {title: "名前・何ができるか・代わりになる手の表", anchor: table}
+      - {title: "併合可能なヒープ（skew heap・leftist heap・ランダム化ヒープ。マージテクで足りることが多い）", anchor: meldable-heap}
+      - {title: "ほかのページにあるもの（木の動的な構造は木の章、CDQ 分割統治・時間付き Mo・Li Chao Tree は各ページ）", anchor: elsewhere}
     merged_keys: [meldable-heap]
     visual: null
     problems: []
     sources: ["05-ds §4.E（advanced-ds-catalog・meldable-heap）"]
 
 moved:
-  - {key: offline-reverse, to: graph, reason: "設計書 §4.2：Union-Find で連結性を扱う使い方（逆順処理・オフライン）は graph。03 の union-find-connectivity に統合する。ds は offline-queries の節「時間を逆にする」と union-find-applications からリンク"}
+  - {key: offline-reverse, to: graph, reason: "設計書 §4.2：Union-Find で連結性を扱う使い方（逆順処理・オフライン）は graph。03 の union-find-connectivity に統合する。ds は offline-queries の節「時間を逆にする」と union-find-applications の節「グラフの章との分担」からリンク"}
   - {key: hashing-for-sets, to: string, reason: "設計書 §4.2・catalog/README §6（持ち主は string）。ds の ordered-set から related でリンク"}
   - {key: dynamic-dp, to: dp, reason: "catalog/README §6（持ち主は dp）。ds の segment-tree-monoids の節「行列を載せる」から related でリンク"}
-  - {key: mex, to: patterns, reason: "設計書 §2.1・§4.1 の 8：mex は題材別の案内ページ。set で mex を管理する手法は ordered-set の節、mex の総和の言い換えは lazy-segtree-patterns の例題（abc470_g）"}
+  - {key: mex, to: patterns, reason: "設計書 §2.1・§4.1 の 8：mex は題材別の案内ページ。set で mex を管理する手法は ordered-set の節、mex の総和の言い換えは lazy-segment-tree-patterns の力試し（abc470_g）"}
 
 dropped: []
 
 open_issues:
-  - "Union-Find の境界：設計書 §4.2 に従い offline-reverse を graph（union-find-connectivity）へ移した。ただし graph の union-find-connectivity は「成分ごとの値を併合時に更新する」型（abc372_e）も持っており、ds の union-find-applications と重なる。分担の案：ds＝構造の工夫（根に情報を持たせる・併合での合成・言い換え・次の空きへ飛ぶ）、graph＝連結性の使い方（逆順・オフライン・しきい値の二分探索・Kruskal）。abc372_e を両方に載せるか一方に寄せるか"
-  - "遅延セグ木のレベル：設計書 §4.1 の 2 どおり青にしたが、最近の ABC では ACL を呼ぶだけの易しい遅延セグ木が水の帯にも出ている（abc473_f 1303・abc382_f 1443・abc455_f 1549）。水のロードマップから「使い方だけ」を案内するか、遅延セグ木のページの冒頭の節に（水）の印を付けるか"
-  - "スライド最小値・SWAG・Cartesian tree は research/05 §7.1 の案どおり単調スタックのページの節にした（題名は「単調スタックとスライド最小値」）。スライド最小値だけで裏付けの取れた ABC の問題が abc352_d しかなく、単独ページでは薄いため。DP の章の dp-sliding-window の前提 sliding-window-minimum は merged_keys で解決する"
-  - "ナビゲーションの節：ds は 37 ページあるので、research/05 §7.1 の 6 つの章（標準コンテナの応用・スタックとキュー・Union-Find・区間クエリ・クエリ処理の工夫・発展的なデータ構造）に分けて見せたい。catalog の形式に節（group）の項目がないので YAML のコメントで区切った。形式に足すか"
-  - "優先度付きキューの分担：ds の priority-queue（水）はヒープの構造・遅延削除・multiset との使い分けを持ち、貪欲の正しさ（basics の greedy-priority-queue）と K 個の列挙（basics の k-best-enumeration）はリンクにした。例題も分けた（abc137_d・abc141_d・abc325_d・abc297_e は basics に任せる）"
-  - "graph の degree-sqrt（青）は sqrt-decomposition（黄、設計書 §4.3）を前提にしており、レベルの逆転の警告が出る見込み。graph 側で related にするか、平方分割の「根号で場合分け」の節に（青）の印を付けて入口にするか"
-  - "string-queries-ds（research/08。担当 G が moved で ds に送ったことを確認済み）は research/08 の案では segment-tree-monoids の節だが、レベル（水）と例題（abc157_e・abc341_e）が基本のセグ木に合うので segment-tree の merged_keys に入れ、節「文字列へのクエリ」にした"
-  - "dynamic-segtree-cartesian（research/00）は 2 つの手法を 1 つにした key なので segtree-on-values の merged_keys に入れ、Cartesian tree の部分は monotonic-stack の節で扱う"
-  - "CDQ 分割統治と並列二分探索は設計書 §4.2 の「発展か黄」を発展にした（ABC で必須の例が見つからない）。両方とも ds のクエリ処理の工夫の章に概要ページとして置き、basics の divide-and-conquer・binary-search-answer からリンクしてもらう"
-  - "research/00 §2.3.8 の手法の分類だけで裏付けた問題（abc451_f・abc455_f・abc460_f・abc470_g・abc473_f・abc479_f）は、要約が手法寄りになっている。執筆時に問題の内容を第三者の解説で確かめて要約を直す"
-  - "練習問題の候補が足りないページ：sparse-table・persistent-data-structures・merge-sort-tree は練習 0 問、binary-trie は 1 問（設計書 §5.3 の目安は 2〜6）。裏付けの取れた候補が調査にないため。執筆時に探して足す"
-  - "AAL Contest 001（aalc001、セグ木の練習セット）は内容が未確認なので入れていない（research/05 §7.6）。裏付けが取れればセグ木の各ページの練習と verify に使う価値が高い"
-  - "verify（Library Checker の問題名）は README の形式にない項目だが、設計書 §3.3 の front matter に合わせてリストで入れた。部分永続 Union-Find に対応する問題は見つからない（persistent_unionfind は完全永続）"
+  - "第2版の主な直し（design-review §4.2 の D の行）：lazy-segment-tree を青から水に（前提は segment-tree だけ、保つ性質と push の手順は青の節）、segment-tree-binary-search を水に、id を segment-tree- にそろえた（旧 id の segtree-on-values・segtree-binary-search・lazy-segtree-patterns は merged_keys）。lazy-segment-tree-patterns の前提に segment-tree-monoids、sweep-line-2d の前提に lazy-segment-tree（推移的に届く fenwick-tree は related へ）。章名「発展的なデータ構造」は「そのほかのデータ構造」に、advanced-ds-catalog は hub にした（題名「見慣れないデータ構造の名前と用途」、level・frequency なし。Disjoint Sparse Table の別名は sparse-table だけ）"
+  - "上位 K 個の持ち主：2 つの multiset は top-k-multiset、値を添字にする方法は segment-tree-on-values。kth-element の節「上位 K 個の和」は消して related に（abc287_g も外した）。例題の分け方は abc306_e（top-k-multiset）と abc281_e（segment-tree-on-values。2 つの multiset と値の添字の両方で解けるので、例題の種類が重ならない方へ）。basics の median-absolute の「更新しながら中央値を保つ」は top-k-multiset#median で受けた"
+  - "代表問題：segment-tree-binary-search（水）は abc392_f にした（水に下げた根拠の問題）。そのため kth-element は abc392_f を練習にし、帯の中の例題がない（problems_note）。abc478_f は木の構築の数え上げが本体なので tree-construction の例題とみて、ここでは練習にした。kth-element は「BIT 上の二分探索」の節を fenwick-tree に、比較の表を patterns の kth-and-median に寄せてページを減らす案もある（ページの削除なので工程5でユーザーに確かめる候補）"
+  - "判断を確かめてほしい：mo-algorithm は青のまま。abc319 以降の Mo はどれも拡張と組む G で黄（abc477_g 2226・abc384_g 2343・abc405_g 2354）なので D2 を字どおり当てると黄になるが、基本形の最近の根拠がないので古い根拠（abc293_g 1753・abc242_g 1828）を使い、拡張を黄の節にした。binary-trie も同じ理由で青のまま（abc319 以降は abc425_g 2205 だけ）"
+  - "visual：priority 1 は segment-tree・lazy-segment-tree・union-find の動く図の 3 つ。ほかの動く図は fenwick-tree・segment-tree-binary-search を 2、monotonic-stack を 3 にした。静的な図はすべて priority 2 にした（priority 1 は動く図の枠にだけ使う）。他の分野と合わせて決めてほしい"
+  - "提案（C・tree）：tree-edge-contribution の abc214_d を練習にしてほしい（D4。例題は union-find-applications。design-review §4.2 の C の行）。merge-process-tree の agc002_d も練習にしてほしい（例題は parallel-binary-search。部分永続 Union-Find では練習にした）。root-path-dfs から版の木の別名を外し、節は persistent-data-structures#version-tree への導線に（2026-10-21：root-path-dfs の related を persistent-data-structures#version-tree にした。ほかは tree が反映済み）"
+  - "提案（C・graph）：difference-constraints の arc090_b を練習にしてほしい（D4。等式だけの制約なので例題は weighted-union-find）。minimum-spanning-tree の related に残る union-find-next-pointer は union-find-applications#next-pointer に。union-find-connectivity との分担は union-find-applications#vs-graph に書いた（根に情報を持たせる型は ds、逆順処理・オフライン・しきい値・Kruskal は graph）（2026-10-21：minimum-spanning-tree の related を union-find-applications#next-pointer にした。arc090_b は graph が反映済み）"
+  - "提案（B・dp）：dynamic-dp の abc456_f は segment-tree-monoids の例題にした（dynamic-dp の例題から外してもらう）。dp-segment-tree の related の segtree-on-values・sliding-window-minimum は segment-tree-on-values・monotonic-stack#sliding-window-minimum に、inline-dp の related の lazy-segtree-patterns は lazy-segment-tree-patterns に。dp-segment-tree のスライド最小値の別名は monotonic-stack の題名と重なるので外してほしい。cht へは segment-tree と advanced-ds-catalog の related からつないだ（03-9）"
+  - "提案（A・basics）：two-pointers の related の sliding-window-minimum は monotonic-stack#sliding-window-minimum に。median-absolute の節「更新しながら中央値を保つ（黄）」は top-k-multiset#median への導線に（受けた）。periodicity から反転フラグの別名を外してほしい（global-offset が持つ。abc199_c は global-offset の練習にした）。event-sort から sweep line・平面走査・クエリ先読みの別名を外してほしい（sweep-line-2d・offline-queries が持つ）。binary-search-answer の related に parallel-binary-search を足してほしい（設計書 §4.2 の basics からのリンク、03-9）"
+  - "提案（E・math）：行列を載せるセグメント木の節 segment-tree-monoids#matrix を、動的 DP や遷移行列を区間で合成するページからのリンクの受け皿にした（行列の積そのものは matrix-power）。matrix-power の related は節まで指すなら segment-tree-monoids#matrix に（2026-10-21 反映済み：matrix-power の related を segment-tree-monoids#matrix にした）"
+  - "提案（H・cpp）：acl-reading の別名 max_right・min_left・dsu・fenwick_tree が残っていれば外してほしい（持ち主は segment-tree-binary-search・union-find・fenwick-tree）。lazy_segtree の節は水（lazy-segment-tree を水にした）"
+  - "提案（I・patterns）：ds の例題と重なる patterns の例題（abc190_f・abc223_f・abc234_d・abc253_f・abc306_e・abc435_e）は表の行の参照か練習に（D4・D16）。オフライン処理・クエリ先読みの別名は offline-queries が持つので、operation-sequence からは外してほしい。別名「括弧の対応」は stack-techniques（スタックでの取り方）と bracket-sequence（題材）の両方にあり、意図した重複とした"
+  - "abc331_f は string の rolling-hash の例題のまま（hash-segment-tree の持ち主は string）。ds の segment-tree-monoids では練習にした"
+  - "research/00 §2.3.8 の分類だけで裏付けた問題（abc451_f・abc455_f・abc456_f・abc458_d・abc460_f・abc461_e・abc467_g・abc470_g・abc471_d・abc473_f・abc476_e・abc477_f・abc478_f・abc479_f）は summary を「（執筆時に確かめる）」にした。abc455_d は付け替えの操作までは分かるので問いを残した。執筆時に問題の内容を第三者の解説で確かめる"
+  - "problems_note のページ（kth-element・sparse-table・persistent-data-structures・merge-sort-tree・binary-trie と発展の概要）は、工程8b の前の問題の補充で候補を探す。AAL Contest 001（aalc001、セグ木の練習セット）は内容が未確認なので入れていない（research/05 §7.6）。裏付けが取れればセグ木の各ページの練習と verify に使う価値が高い"
+  - "第1版からの記録：スライド最小値・SWAG・Cartesian tree は monotonic-stack の節（単独では薄い）。string-queries-ds は segment-tree の節「文字列へのクエリ」、dynamic-segtree-cartesian は segment-tree-on-values の merged_keys（Cartesian tree の部分は monotonic-stack の節）。部分永続 Union-Find に対応する Library Checker の問題は見つからない（persistent_unionfind は完全永続）"

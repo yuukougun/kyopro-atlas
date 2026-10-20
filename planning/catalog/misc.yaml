@@ -1,155 +1,165 @@
-# その他の技法（misc）の目次。規則は planning/catalog/README.md、上位の規則は planning/design.md §3〜§5。
+# その他の技法（misc）の目次。第2版（2026-10-21）。規則は planning/catalog/README.md、決定は planning/design-review.md。
 # 主な材料：research/08 の「その他」（インタラクティブ・乱択・bitset）と構文解析（担当 G が moved で送る）、
-# research/01 の interactive-binary-search。bitset の応用のうち DP（research/02 の dp-bitset）は dp の subset-sum の節、
-# 到達可能性（research/03 の reachability-bitset）は graph の単独ページが持ち、どちらもこのファイルの bitset-speedup にリンクする。
+# research/01 の interactive-binary-search。bitset による高速化は、graph の到達可能性（research/03 の reachability-bitset）と
+# dp の部分和（research/02 の dp-bitset）を節として持つ（design-review §3・§4.2）。
 # research/08 の constant-factor は basics の complexity-estimation の節に入れた。
 field: misc
 pages:
   - id: interactive
     title: インタラクティブ問題
-    aliases: [対話型, インタラクティブ, ジャッジとの対話, flush, 質問回数, インタラクティブの二分探索]
+    aliases: [対話型, インタラクティブ, ジャッジとの対話, 質問回数, インタラクティブの二分探索, interactive problem]
     type: technique
-    level: 水
-    level_evidence: "形式だけなら abc244_c（165）・abc299_d（684）・abc269_e（1030）・abc337_e（1155）と灰〜緑から出る。質問の設計が要るのは abc305_f（1420）・abc313_d（1630）・abc282_f（1734）・abc286_f（1841）・abc355_e（2299）で水〜黄。研究どおり水とし、易しい型から順に並べて節にレベルの印を付ける"
+    level: 基礎
+    level_evidence: "形式と二分探索を知っていれば解ける問題が abc244_c（165）・abc299_d（684）・abc269_e（1030）・abc337_e（1155、2024）と基礎の帯から現れる。質問の設計が要るのは abc305_f（1420）・abc313_d（1630）・abc282_f（1734）・abc286_f（1841）・abc355_e（2299、2024）で水〜黄（節に印）。研究の案（水）から、形式と二分探索の節がページより低くならないよう基礎に下げた"
     kind: [二分探索, 実装・C++]
     prerequisites: [binary-search]
-    related: [cpp-io, interactive-games, crt, tree-diameter, dfs, stress-testing]
-    summary: "プログラムが質問を出力し、ジャッジの答えを入力として受け取る形式の問題。質問回数の上限から方針を逆算し（2 択の質問なら ⌈log2 候補数⌉ 回）、出力のたびに flush する。"
+    related: [cpp-io#flush, game-basics#interactive, crt, tree-diameter#double-sweep, dfs, stress-testing#interactive]
+    summary: "質問を出力してジャッジの答えを受け取る形式の問題で、質問回数の上限から方針を逆算する（2 択の質問なら ⌈log2 候補数⌉ 回）。出力のたびに flush し、二分探索や 2 進表記で質問を設計する。"
     signs:
       - {type: phrase, text: "問題文に「インタラクティブ」「質問は Q 回まで」とある"}
       - {type: phrase, text: "質問の答えが入力として返ってくる・入出力例が対話の形"}
       - {type: constraint, text: "質問回数の上限が 20 回など log2 N 程度"}
     acl: []
     frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 9 問"
     sections:
-      - "形式と C++ の作法（出力のたびに flush・cin.tie(nullptr) を書いたとき）（基礎）"
-      - "回数の上限から方針を逆算する（情報量の下界）"
-      - "二分探索で候補を半分ずつ減らす（基礎）"
-      - "2 進表記で質問を設計する"
-      - "未知のグラフを探索する（DFS の行きと帰り）"
-      - "連立方程式・中国剰余定理で特定する（青）"
-      - "先に構造を出力してから答える（青）"
-      - "適応的ジャッジ（最悪の場合の回数で考える）"
-      - "手元でのテスト（ジャッジ役のプログラムとパイプでつなぐ）"
+      - {title: "形式と C++ の作法（出力のたびに flush・cin.tie(nullptr) を書いたとき）", anchor: format}
+      - {title: "回数の上限から方針を逆算する（情報量の下界）", anchor: query-budget}
+      - {title: "二分探索で候補を半分ずつ減らす", anchor: binary-search}
+      - {title: "2 進表記で質問を設計する", anchor: binary-encoding}
+      - {title: "未知のグラフを探索する（DFS の行きと帰り）", anchor: explore-graph, level: 水}
+      - {title: "連立方程式・中国剰余定理で特定する", anchor: equations-crt, level: 青}
+      - {title: "先に構造を出力してから答える", anchor: output-structure-first, level: 青}
+      - {title: "適応的ジャッジ（最悪の場合の回数で考える）", anchor: adaptive-judge}
+      - {title: "手元でのテスト（ジャッジ役のプログラムとパイプでつなぐ）", anchor: local-testing}
     merged_keys: [interactive-binary-search]
-    visual: "静的な図：ジャッジとプログラムのやりとりのシーケンス図（Mermaid）と、質問ごとに候補が半分になる図"
+    visual: {kind: static, priority: 2, text: "ジャッジとプログラムのやりとりのシーケンス図（Mermaid）と、質問ごとに候補が半分になる図"}
     problems:
-      - {id: abc299_d, role: example, summary: "先頭が 0・末尾が 1 の隠れた 01 列で、隣と値が異なる位置を 20 回の質問の二分探索で見つける"}
-      - {id: abc337_e, role: example, summary: "N 本中 1 本の腐ったジュースを最少人数で特定する。番号の 2 進表記の各ビットを友人に割り当てる"}
-      - {id: abc305_f, role: example, summary: "隣接頂点だけ分かるグラフで 2N 回以内の移動で頂点 N へ行く。DFS の行きと帰りで各辺を高々 2 回通る"}
-      - {id: abc244_c, role: practice, summary: "1〜2N+1 を交互に言い合うゲームをジャッジと行う（入出力の作法の練習）"}
-      - {id: practice_2, role: practice, summary: "比較の質問で N 個を並べる。N=26 は 100 回でマージソート、N=5 は 7 回の専用の手順（7 回で 128 通り ≥ 5! = 120 通り）"}
-      - {id: abc269_e, role: practice, summary: "ルークの置かれていない行と列を、長方形内の個数を聞く質問で行と列それぞれ二分探索して特定する"}
-      - {id: abc019_4, role: practice, summary: "2 頂点間の距離の質問で木の直径を求める。ある頂点から最も遠い頂点を探し、そこから再び最も遠い頂点を探す"}
-      - {id: abc313_d, role: practice, summary: "ちょうど K 個（奇数）の XOR の質問 N 回で全要素を特定する。最初の K+1 個を 1 つずつ除いた質問で連立する"}
-      - {id: abc282_f, role: challenge, summary: "先に区間を出力し、後から来る [L, R] を 2 区間の和で答える。長さ 2^k の区間を用意する（Sparse Table と同じ形）"}
-      - {id: abc286_f, role: challenge, summary: "関数グラフを出力し、K 回たどった結果から N を当てる。互いに素な長さの閉路と中国剰余定理"}
-      - {id: abc355_e, role: challenge, summary: "二進区間の和だけ聞けるとき、最少回数で区間和を求める。区間の端点を頂点とするグラフの最短路で質問を選ぶ"}
+      - {id: abc299_d, role: example, representative: true, summary: "先頭が 0・末尾が 1 の隠れた 01 列について、隣と値が異なる位置を 20 回以内の質問で見つける。", approach: "二分探索で候補を半分ずつ減らす"}
+      - {id: abc244_c, role: practice, summary: "1〜2N+1 の整数を、ジャッジと交互に重複なく言い合うゲームを最後まで行う。", approach: "入出力の作法の練習（まだ言われていない数を答え続ける）"}
+      - {id: practice_2, role: practice, summary: "2 つのボールの重さを比べる質問だけで、N 個のボールを軽い順に並べる。", approach: "N=26 は 100 回でマージソート、N=5 は 7 回の専用の手順（7 回で 128 通り ≥ 5! = 120 通り）"}
+      - {id: abc269_e, role: practice, summary: "N×N の盤面で、ルークの置かれていない行と列を、長方形内のルークの数を聞く 20 回以内の質問で特定する。", approach: "行と列を別々に二分探索する"}
+      - {id: abc337_e, role: practice, summary: "N 本のジュースのうち 1 本だけ腐っているとき、最少の人数の友人に飲ませて腐った 1 本を特定する。", approach: "番号の 2 進表記の各ビットを友人に割り当てる（⌈log2 N⌉ 人）"}
+      - {id: abc305_f, role: practice, summary: "隣接する頂点だけが分かるグラフで、2N 回以内の移動で頂点 N に着く。", approach: "DFS の行きと帰りで各辺を高々 2 回通る"}
+      - {id: abc313_d, role: practice, summary: "ちょうど K 個（奇数）の要素の和の偶奇を聞く N 回の質問で、01 列のすべての要素を特定する。", approach: "最初の K+1 個から 1 つずつ除いた質問で連立する"}
+      - {id: abc282_f, role: challenge, summary: "先に区間をいくつか出力しておき、後から来る区間 [L, R] を、出力した区間 2 つの和集合で表す。", approach: "長さ 2^k の区間を全始点に用意する（Sparse Table と同じ形）"}
+      - {id: abc286_f, role: challenge, summary: "関数グラフを出力し、各頂点から隠れた回数 N だけたどった結果を受け取って、N を当てる。", approach: "互いに素な長さの閉路を並べ、余りから中国剰余定理で求める"}
+      - {id: abc355_e, role: challenge, summary: "二進区間の和だけを聞けるとき、区間 [L, R] の和を最少回数の質問で求める。", approach: "区間の端点を頂点とするグラフの最短路で質問を選ぶ（引き算も使う）"}
     sources: ["08-string-geo §4.9", "08-string-geo §5（その他）", "08-string-geo §6.3", "08-string-geo §7.3", "01-basics §4.C", "01-basics §5"]
 
   - id: randomized
     title: 乱択アルゴリズム
-    aliases: [乱択, ランダム化, モンテカルロ法, ラスベガス法, mt19937, 過半数, Boyer–Moore の投票, Color Coding]
+    aliases: [乱択, ランダム化, モンテカルロ法, ラスベガス法, 過半数, Boyer-Moore の投票, Color Coding, randomized algorithm]
     type: technique
     level: 青
-    level_evidence: "abc339_f（1716）・abc272_g（2187）・abc238_g（2254）・abc447_g（2391）。水の上端に abc422_e（1580）。最近は abc455_g（3092、乱択ハッシュ）のように G で道具として使われる"
+    level_evidence: "abc339_f（1716、2024）・abc272_g（2187）・abc238_g（2254）・abc447_g（2391、2026）。水の上端に abc422_e（1580、2025）。最近は abc455_g（3092、乱択ハッシュ）のように G で道具として使われる。値のハッシュの mod を乱択する abc339_f は string の hash-safety の例題（代表問題）に任せた"
     kind: [ハッシュ・乱択]
     prerequisites: [probability-basics]
-    related: [hash-safety, hashing-for-sets, rolling-hash, cpp-random-chrono, min-enclosing-circle, bit-dp]
+    related: [hash-safety#what-to-randomize, hashing-for-sets, rolling-hash, cpp-math-functions#random, circle-geometry#min-enclosing-circle, bit-dp]
     summary: "乱数を使って、一定の確率で誤るが速い方法（モンテカルロ法）や、常に正しいが時間が確率的な方法（ラスベガス法）を作る。成功確率 p の試行を k 回繰り返すと失敗確率は (1 − p)^k になるので、回数を見積もって決める。"
     signs:
       - {type: phrase, text: "半数を超える要素が条件を満たす（過半数）"}
-      - {type: phrase, text: "決定的な方法が重く、確率的に正しければよい"}
-      - {type: phrase, text: "ハッシュの mod や係数を実行時に決めたい（狙い撃ちを避ける）"}
-      - {type: phrase, text: "少数の K 個の異なる要素を選ぶ条件を DP したいが、状態が多すぎる"}
+      - {type: constraint, text: "K ≤ 10 程度の少数の要素を選ぶ条件で、要素の種類が多い"}
+      - {type: shape, text: "決定的な方法は重いが、確率的に正しければ十分に速い"}
+      - {type: shape, text: "固定の mod・係数のハッシュが、作為的な入力で衝突させられる"}
     acl: []
     frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 5 問"
     sections:
-      - "モンテカルロ法とラスベガス法"
-      - "失敗確率の見積もりと試行回数（(1 − p)^k）"
-      - "過半数の扱い（ランダムな 2 つを選ぶ・Boyer–Moore の投票）"
-      - "ハッシュの乱択（mod・base を実行時に決める）"
-      - "Color Coding（黄）"
-      - "C++ の乱数（mt19937_64・時間計測）"
-      - "焼きなましなどのヒューリスティックは ABC の範囲外（AHC）"
+      - {title: "モンテカルロ法とラスベガス法", anchor: monte-carlo-las-vegas}
+      - {title: "失敗確率の見積もりと試行回数（(1 − p)^k）", anchor: failure-probability}
+      - {title: "過半数の扱い（ランダムな 2 つを選ぶ・Boyer-Moore の投票）", anchor: majority}
+      - {title: "Color Coding", anchor: color-coding, level: 黄}
+      - {title: "C++ の乱数（mt19937_64・時間計測）", anchor: cpp-random}
+      - {title: "焼きなましなどのヒューリスティックは ABC の範囲外（AHC）", anchor: heuristics}
     merged_keys: [majority-element, color-coding]
-    visual: "静的な図：試行回数 k と失敗確率 (1 − p)^k のグラフと、過半数投票で異なる 2 要素を打ち消していく様子"
+    visual: {kind: static, priority: 2, text: "試行回数 k と失敗確率 (1 − p)^k のグラフと、過半数投票で異なる 2 要素を打ち消していく様子"}
     problems:
-      - {id: abc422_e, role: example, summary: "過半数の点を通る直線があるか。ランダムな 2 点がその直線上にある確率は 1/4 以上なので、繰り返して検証する"}
-      - {id: abc339_f, role: example, summary: "巨大整数の積の一致を数える。実行時にランダムに選んだ大きい素数の mod で比べる（固定の mod は対策されていた）"}
-      - {id: abc272_g, role: practice, summary: "半数を超える要素が mod M で合同になる M ≥ 3 を探す。ランダムな 2 要素の差の約数を試す"}
-      - {id: abc238_g, role: practice, summary: "区間積が立方数か。素因数ごとに乱数を割り当てたハッシュの累積和で判定する"}
-      - {id: abc447_g, role: challenge, summary: "要素にランダムな色を割り当てて条件を単純にし、DP を繰り返す（Color Coding）"}
+      - {id: abc422_e, role: example, summary: "平面上の N 点のうち過半数を通る直線があるか判定し、あれば 1 つ答える。", approach: "ランダムな 2 点がその直線上にある確率は 1/4 以上なので、繰り返して検証する"}
+      - {id: abc272_g, role: example, summary: "半数を超える要素が mod M で合同になるような 3 以上の整数 M を 1 つ求める（なければ −1）。", approach: "ランダムな 2 要素の差の約数を試す（隣接ペアの決定的な解法もある）"}
+      - {id: abc339_f, role: practice, summary: "桁数の大きい整数の列で、A_i × A_j = A_k となる組 (i, j, k) の数を求める。", approach: "実行時にランダムに選んだ大きい素数の mod で比べる（固定の mod は対策されていた）。持ち主は string の hash-safety"}
+      - {id: abc238_g, role: practice, summary: "数列の区間の積が立方数かどうかを答えるクエリに答える。", approach: "素因数ごとに乱数を割り当てたハッシュの累積和で判定する"}
+      - {id: abc447_g, role: challenge, summary: "（執筆時に確かめる）", approach: "要素にランダムな色を割り当てて条件を単純にし、DP を繰り返す（Color Coding）"}
+    problems_note: "青の帯の例題がないので代表問題を置かない。青の abc339_f（1716）は string の hash-safety の例題（代表問題）にしたのでここでは練習。例題は水の上端の abc422_e（1580）と黄の abc272_g（2187）"
     sources: ["08-string-geo §4.9", "08-string-geo §5（その他）", "08-string-geo §6.2", "08-string-geo §6.3"]
 
   - id: bitset-speedup
     title: bitset による高速化
-    aliases: [bitset, ビット並列, ワード並列, 1/64 倍, bitset で部分和]
+    aliases: [bitset, ビット並列, ワード並列, 1/64 倍, bitset で部分和, 推移閉包, 到達可能性クエリ, bitset speedup]
     type: technique
     level: 青
-    level_evidence: "abc258_g（1944）・abc348_f（1955）。黄に arc070_b（2015）・abc350_g（2058）・agc020_c（2259）、発展に abc221_g（2914）。DP の bitset（research/02 の dp-bitset、黄）は dp の subset-sum の節、到達可能性（research/03 の reachability-bitset、黄）は graph の単独ページが持つ"
-    kind: [ビット演算, DP]
+    level_evidence: "abc258_g（1944）・abc348_f（1955、2024）。黄に arc070_b（2015）・abc350_g（2058、2024）・agc020_c（2259）、発展に abc287_h（2639）・abc221_g（2914）。graph の reachability-bitset（黄、typical90_bg ★7・abc287_h）と dp の subset-sum の bitset の節（dp-bitset、黄）を統合した（design-review §3・§4.2）"
+    kind: [ビット演算, 計算量, DP]
     prerequisites: [bit-operations, complexity-estimation]
-    related: [subset-sum, reachability-bitset, cpp-bitset, gaussian-elimination, xor-basis, bit-dp]
-    summary: "bool を 64 個ずつ 1 語に詰め、AND・OR・XOR・シフトを語単位で行って計算量をおよそ 1/64 にする。部分和 DP のシフト OR、共通の隣接頂点・三角形の数え上げ、偶奇の集計、到達可能性に使う。"
+    related: [subset-sum, topological-sort, scc#condensation, cpp-math-functions#bitset, gaussian-elimination#mod-2, xor-basis, bit-dp]
+    summary: "bool を 64 個ずつ 1 語に詰め、AND・OR・XOR・シフトを語単位で行って計算量をおよそ 1/64 にする。部分和 DP のシフト OR、共通の隣接頂点・三角形の数え上げ、偶奇の集計、DAG の到達可能性に使う。"
     signs:
       - {type: constraint, text: "N ≤ 2000〜5000 程度で、O(N^3) や O(N^2 M) が少し間に合わない"}
-      - {type: phrase, text: "部分和が作れるか（和の上限が 10^5〜10^6）"}
-      - {type: phrase, text: "共通の隣接頂点・三角形の数"}
+      - {type: phrase, text: "部分和として作れる値か（和の上限が 10^5〜10^6）"}
+      - {type: phrase, text: "2 頂点の共通の隣接頂点・三角形の数"}
       - {type: phrase, text: "偶奇（XOR）だけ分かればよい"}
+      - {type: phrase, text: "u から v へ到達できるかのクエリが大量にある"}
+      - {type: constraint, text: "N が 5×10^4 程度で N^2/64 の計算が間に合う"}
     acl: []
     frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 6 問"
     sections:
-      - "ワード並列の考え方と計算量の目安（N^3/64）"
-      - "部分和 DP のシフト OR（dp |= dp << a。DP への使い方は部分和 DP のページの節）（黄）"
-      - "共通の隣接頂点・三角形の数（行の AND と popcount）"
-      - "偶奇だけの集計（XOR）"
-      - "到達可能性・推移閉包（グラフの章の単独ページへ）（黄）"
-      - "C++ の作法（大きさはコンパイル時の定数・大きな bitset をスタックに置かない）"
-      - "bitDP との違い"
-    merged_keys: []
-    visual: "静的な図：64 個の bool を 1 語に詰める図と、シフト OR で作れる部分和の集合が広がる図"
+      - {title: "ワード並列の考え方と計算量の目安（N^3/64）", anchor: word-parallel}
+      - {title: "共通の隣接頂点・三角形の数（行の AND と popcount）", anchor: common-neighbors}
+      - {title: "偶奇だけの集計（XOR）", anchor: parity-xor}
+      - {title: "部分和 DP のシフト OR（dp |= dp << a）", anchor: subset-sum-shift, level: 黄}
+      - {title: "DAG の到達可能性（逆トポロジカル順に OR、閉路は SCC で縮約）", anchor: reachability, level: 黄}
+      - {title: "メモリの見積もりと 64 個ずつのクエリの処理", anchor: memory-batching, level: 黄}
+      - {title: "C++ の作法（大きさはコンパイル時の定数・大きな bitset をスタックに置かない）", anchor: cpp}
+      - {title: "bitDP との違い", anchor: vs-bit-dp}
+    merged_keys: [reachability-bitset, dp-bitset]
+    visual: {kind: static, priority: 2, text: "64 個の bool を 1 語に詰める図と、シフト OR で作れる部分和の集合が広がる図"}
     problems:
-      - {id: abc258_g, role: example, summary: "N ≤ 3000 頂点のグラフの三角形の数。隣接行列の行を bitset にして AND の popcount を取る"}
-      - {id: abc348_f, role: example, summary: "同じ値の列が奇数個ある行の組の数。(列, 値) ごとの行集合を bitset にして XOR で偶奇を集計する"}
-      - {id: abc147_e, role: practice, summary: "グリッドの各マスで、赤と青の差として取り得る値の集合を bitset で持つ（普通の bool の DP でも通る）"}
-      - {id: arc070_b, role: practice, summary: "不要なカードの枚数。部分和を bitset のシフト OR で求める（単調性と二分探索の解法もある）"}
-      - {id: abc350_g, role: practice, summary: "森への辺の追加と、2 頂点の共通の隣接頂点のクエリ。隣接集合の bitset の AND で答える"}
-      - {id: agc020_c, role: practice, summary: "全非空部分集合の和の中央値。bitset で作れる部分和を求め、総和の半分以上で最小のものを答える"}
-      - {id: abc221_g, role: challenge, summary: "45 度回転で 2 軸を独立にし、bitset の部分和 DP と復元を行う"}
-    sources: ["08-string-geo §4.9", "08-string-geo §5（その他）", "08-string-geo §6.3", "02-dp §4.B", "02-dp §5.1"]
+      - {id: abc258_g, role: example, representative: true, summary: "N ≤ 3000 頂点のグラフに含まれる三角形（3 頂点が互いに隣接する組）の数を求める。", approach: "隣接行列の行を bitset にして AND の popcount を取る"}
+      - {id: abc348_f, role: example, summary: "N 行 M 列の表で、同じ値の列が奇数個ある行の組の数を求める。", approach: "(列, 値) ごとの行集合を bitset にして XOR で偶奇を集計する"}
+      - {id: typical90_bg, role: example, summary: "DAG で、頂点 u から v へ到達できるかを答えるクエリに大量に答える。", approach: "クエリを 64 個ずつまとめ、各頂点に 64 ビットのマスクを逆トポロジカル順に流す（graph の reachability-bitset から受けた）"}
+      - {id: abc147_e, role: practice, summary: "グリッドの各マスの 2 つの数の一方を赤・他方を青として左上から右下へ進むとき、経路上の赤の和と青の和の差の絶対値の最小値を求める。", approach: "各マスで作れる差の集合を bitset で持つ（普通の bool の DP でも通る）"}
+      - {id: arc070_b, role: practice, summary: "カードの集合の和の条件について「不要」なカードの枚数を求める（定義は執筆時に確かめる）。", approach: "部分和を bitset のシフト OR で求める（単調性と二分探索の解法もある）"}
+      - {id: abc350_g, role: practice, summary: "森への辺の追加と、2 頂点の共通の隣接頂点を答えるクエリを処理する。", approach: "隣接集合の bitset の AND で答える（親を管理する解法もある）"}
+      - {id: agc020_c, role: practice, summary: "N 個の整数のすべての空でない部分集合の和を小さい順に並べたときの、中央値を求める。", approach: "bitset で作れる部分和を求め、総和の半分以上で最小のものを答える"}
+      - {id: abc287_h, role: practice, summary: "有向グラフで、通る頂点の番号に上限を付けたときの到達可能性に関するクエリに答える（詳細は執筆時に確かめる）。", approach: "番号 n 以下の頂点だけで到達できる集合を bitset で持ち、n を増やしながら更新する（graph の reachability-bitset から受けた）"}
+      - {id: abc221_g, role: challenge, summary: "（執筆時に確かめる）", approach: "45 度回転で 2 軸を独立にし、bitset の部分和 DP と復元を行う"}
+    sources: ["08-string-geo §4.9", "08-string-geo §5（その他）", "08-string-geo §6.3", "02-dp §4.B（dp-bitset）", "02-dp §5.1", "03-graph §4.C（reachability-bitset）", "03-graph §5.2 C"]
 
   - id: parsing
-    title: 構文解析（再帰下降・式の評価）
-    aliases: [再帰下降構文解析, パーサ, BNF, 式の評価, 逆ポーランド記法]
+    title: 構文解析
+    aliases: [再帰下降構文解析, パーサ, BNF, 式の評価, 逆ポーランド記法, recursive descent parsing]
     type: technique
     level: 青
-    level_evidence: "ABC では稀。文法に沿った DP が abc403_f（1733）、本格的な構文解析が abc338_g（2573）。易しい字句解析は abc380_b（27）、式を作って評価する全探索は arc061_a（1089）"
+    level_evidence: "ABC では稀。文法に沿った DP が abc403_f（1733、2025）、本格的な構文解析が abc338_g（2573、2024）。易しい字句解析は abc380_b（27）、式を作って評価する全探索は arc061_a（1089）"
     kind: [文字列]
     prerequisites: [recursion-structure]
-    related: [bracket-sequence, stack-techniques, dp-basics, bit-full-search, cpp-stack-depth]
-    summary: "式＝項 {(+|−) 項}、項＝因子 {(*|/) 因子}、因子＝数 | (式) のような文法の各規則を関数にし、読み取り位置を共有して再帰的に読む。演算子の優先順位と括弧が自然に扱え、文法に沿った DP の土台にもなる。"
+    related: [bracket-sequence, stack-techniques, dp-basics, bit-full-search, cpp-environment#stack-depth]
+    summary: "+・*・括弧を含む式の文字列を、演算子の優先順位どおりに評価・解析する。文法の規則（式・項・因子）ごとに関数を作り、読み取り位置を共有して再帰的に読む（再帰下降構文解析）。"
     signs:
       - {type: phrase, text: "数式の文字列が与えられ、値を求める"}
       - {type: phrase, text: "+ と * と括弧の優先順位がある"}
       - {type: phrase, text: "式として正しい部分文字列"}
       - {type: phrase, text: "入れ子の構造を持つ文字列"}
+      - {type: constraint, text: "式の長さが 2×10^5 程度で、括弧の入れ子が深くなりうる"}
     acl: []
-    frequency: C
+    frequency: B
+    frequency_evidence: "recent 0・前提として届くページなし・古い ABC 3 問"
     sections:
-      - "BNF と規則ごとの関数（読み取り位置を参照で共有する）"
-      - "優先順位と括弧が扱える理由（構文木と呼び出しの木）"
-      - "単項マイナス・空白などの例外"
-      - "文法に沿った DP（青）"
-      - "式の部分文字列の総和（発展）"
-      - "深い入れ子と再帰の深さ"
+      - {title: "BNF と規則ごとの関数（読み取り位置を参照で共有する）", anchor: bnf}
+      - {title: "優先順位と括弧が正しく読める理由（構文木と呼び出しの木）", anchor: why-it-works}
+      - {title: "単項マイナス・空白などの例外", anchor: edge-cases}
+      - {title: "文法に沿った DP", anchor: grammar-dp}
+      - {title: "式の部分文字列の総和", anchor: substring-sum, level: 発展}
+      - {title: "深い入れ子と再帰の深さ", anchor: deep-nesting}
     merged_keys: []
-    visual: "静的な図：式の構文木と、規則ごとの関数の呼び出しの木が一致する様子"
+    visual: {kind: static, priority: 2, text: "式の構文木と、規則ごとの関数の呼び出しの木が一致する様子"}
     problems:
-      - {id: arc061_a, role: example, summary: "数字の間に + を入れる全通りの式の値の合計。bit 全探索で式を作って評価する"}
-      - {id: abc403_f, role: example, summary: "1 と + と * と括弧で N を表す最短の式。式・項・因子の文法に沿った DP（括弧が要るかを状態に持つ）"}
-      - {id: abc380_b, role: practice, summary: "| と - からなる記号列を区切って長さを並べる（易しい字句解析）"}
-      - {id: abc338_g, role: challenge, summary: "数字と + と * の式で、式として正しい部分文字列すべての値の和。項と因子の構造に沿って寄与を数える"}
+      - {id: arc061_a, role: example, summary: "数字の列の間に + を入れる全通りの式について、値の合計を求める。", approach: "bit 全探索で式を作って評価する"}
+      - {id: abc403_f, role: example, representative: true, summary: "1・+・*・括弧だけを使って N を表す、最も短い式を求める。", approach: "式・項・因子の文法に沿った DP（括弧が要るかを状態に持つ）"}
+      - {id: abc380_b, role: practice, summary: "| と - からなる記号列を区切り、各区間の - の数を順に出力する。", approach: "易しい字句解析"}
+      - {id: abc338_g, role: challenge, summary: "数字と + と * からなる式で、式として正しい部分文字列すべての値の和を求める。", approach: "項と因子の構造に沿って寄与を数える"}
+    problems_note: "練習の候補が abc380_b の 1 問だけ。ABC で構文解析が要る問題が少なく、調査で裏付けの取れた候補がない。工程8b の前の問題の補充で探す"
     sources: ["08-string-geo §4.1", "08-string-geo §5（文字列）", "08-string-geo §6.1"]
 
 moved: []
@@ -157,9 +167,10 @@ moved: []
 dropped: []
 
 open_issues:
-  - "bitset の分担：設計 §4.2（bitset による高速化は misc、dp・graph からリンク）について、dp.yaml は dp-bitset を subset-sum の節（黄）に、graph.yaml は reachability-bitset を単独ページ（黄、前提に bitset-speedup）に置いた。misc の bitset-speedup はワード並列の一般論と、三角形・共通の隣接頂点・偶奇の集計などの型を持ち、部分和と到達可能性は節の見出しで相手のページへ案内する（例題 typical90_bg・abc287_h は graph に任せた）。dp.yaml の open_issues と同じ分担（担当 B と同時に書いたため途中で一度食い違った）。設計 §4.2 の「リンク」をこの分担と読んでよいか、reachability-bitset を単独ページで残すかを見直しで確かめてほしい"
-  - "parsing（構文解析）は research/08 では文字列の項目だが、catalog 作成の指示に従い misc に置いた（string.yaml は moved で misc に送っている）。設計 §2.1 の misc の中身（インタラクティブ・乱択・bitset）には構文解析がないので、設計書の表に足すか、文字列に戻すかを見直しで決めてほしい。レベルは研究どおり青、frequency は ABC で稀なので C"
-  - "interactive は形式だけなら灰〜緑から出るが、設計が要る問題は水〜黄に散らばるので研究どおり水とし、節にレベルの印を付けた。research/01 の interactive-binary-search（基礎）もこのページの節にした"
-  - "parsing は練習の候補が abc380_b（易しい字句解析）の 1 問だけ（設計 §5.3 の目安は 2〜6）。ABC で構文解析が要る問題が少なく、調査で裏付けの取れた候補がないため。執筆時に探して足す"
-  - "kind の語彙にインタラクティブ（問題の形式）に当たる語がないので、interactive は [二分探索, 実装・C++] とした"
-  - "research/08 の constant-factor（定数倍）は研究の案どおり basics の complexity-estimation の節（merged_keys）にした。string.yaml は to: misc で送っているが、取り込みは basics で済んでいる"
+  - "bitset-speedup に graph の reachability-bitset（ページ）と dp の subset-sum の bitset の節（key dp-bitset）を統合した（design-review §3・§4.2）。節 subset-sum-shift・reachability・memory-batching（黄）を足し、typical90_bg（例題）・abc287_h（練習）を受けた。graph（C）・dp（B）の moved と、dp-dag・subset-sum・dp-speedup-overview・bit-dp からの #reachability・#subset-sum-shift・#vs-bit-dp への related は対応済み（2026-10-21 時点）"
+  - "interactive のレベルを水から基礎に下げた。形式と二分探索だけで解ける問題（abc299_d 684・abc269_e 1030・abc337_e 1155 など）が基礎の帯にまとまっており、第1版の（基礎）の印の節がページより低くなっていたため。設計が要る型（DFS・連立方程式・先に構造を出力）は水・青の節にした。基礎のページなので例題は abc299_d の 1 問にし、abc337_e・abc305_f は練習にした。abc019_4 は tree の tree-diameter の練習に任せて外した"
+  - "randomized の abc339_f は string（G）の提案どおり hash-safety の例題（代表問題）に任せて練習にし、節「ハッシュの乱択」は外して related の hash-safety#what-to-randomize でつないだ。青の帯の例題がなくなったので代表問題は置かず、problems_note に理由を書いた（例題は abc422_e 1580・abc272_g 2187）"
+  - "parsing は練習の候補が abc380_b の 1 問だけ（problems_note）。設計 §2.1 の misc に構文解析が入ったので、置き場所の論点は解消した"
+  - "別名の整理：interactive から flush を、randomized から mt19937 を外した（C++ の書き方は cpp の cpp-io#flush・cpp-math-functions#random が持つ）。Boyer–Moore はエンダッシュから ASCII のハイフンに直した"
+  - "kind の語彙にインタラクティブ（問題の形式）に当たる語がないので、interactive は [二分探索, 実装・C++] のまま。bitset-speedup には計算量を足した（D15）"
+  - "research/08 の constant-factor（定数倍）は basics の complexity-estimation の節（merged_keys）。string.yaml が to: misc で送っているが、取り込みは basics で済んでいる"
