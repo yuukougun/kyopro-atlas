@@ -898,9 +898,12 @@ class Site:
             else:
                 body = self.render(name, pg.rel)
                 out.append(lines[i])
+                # 生成部分は目次の題名・別名（揺れた表記をわざと含む）を写すので、表記の検査から外す
+                out.append(indent + "<!-- textlint-disable -->")
                 out.append("")
                 out += [(indent + x) if x else "" for x in body.split("\n")]
                 out.append("")
+                out.append(indent + "<!-- textlint-enable -->")
                 out.append(lines[j])
                 found.append(name)
             i = j + 1

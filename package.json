@@ -3,7 +3,7 @@
   "private": true,
   "description": "表記の検査（textlint）。docs/ の手書きの Markdown を検査する（生成物の docs/lists/・docs/index/・docs/<field>/index.md は除く）",
   "scripts": {
-    "lint:text": "textlint \"docs/*.md\" \"docs/!(lists|index)/!(index).md\"",
+    "lint:text": "textlint $(python3 tools/textlint_targets.py)",
     "lint:text:fix": "textlint --fix \"docs/*.md\" \"docs/!(lists|index)/!(index).md\""
   },
   "engines": {

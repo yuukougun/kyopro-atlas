@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 608 284" font-family="sans-serif" font-size="14">
+<defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#999" stroke-width="2"/></pattern><marker id="ar" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#333"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="40" y="24" fill="#222">check(x)：どのピースも x 以上にして K + 1 = 2 個に分けられるか</text>
+<text x="40" y="44" fill="#555" font-size="12">（長さ 10、切れ目の候補 3・5・7、K = 1 のとき）</text>
+<rect x="40" y="92" width="44" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="62.0" y="118" text-anchor="middle" fill="#1f4e9a" font-weight="bold">可</text>
+<text x="62.0" y="150" text-anchor="middle" fill="#222">0</text>
+<rect x="84" y="92" width="44" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="106.0" y="118" text-anchor="middle" fill="#1f4e9a" font-weight="bold">可</text>
+<text x="106.0" y="150" text-anchor="middle" fill="#222">1</text>
+<rect x="128" y="92" width="44" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="150.0" y="118" text-anchor="middle" fill="#1f4e9a" font-weight="bold">可</text>
+<text x="150.0" y="150" text-anchor="middle" fill="#222">2</text>
+<rect x="172" y="92" width="44" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="194.0" y="118" text-anchor="middle" fill="#1f4e9a" font-weight="bold">可</text>
+<text x="194.0" y="150" text-anchor="middle" fill="#222">3</text>
+<rect x="216" y="92" width="44" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="238.0" y="118" text-anchor="middle" fill="#1f4e9a" font-weight="bold">可</text>
+<text x="238.0" y="150" text-anchor="middle" fill="#222">4</text>
+<rect x="260" y="92" width="44" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="282.0" y="118" text-anchor="middle" fill="#1f4e9a" font-weight="bold">可</text>
+<text x="282.0" y="150" text-anchor="middle" fill="#222">5</text>
+<rect x="304" y="92" width="44" height="40" fill="url(#hatch)" stroke="#666" stroke-width="1.5" stroke-dasharray="4 2"/>
+<rect x="312" y="102" width="28" height="20" fill="#ffffff"/>
+<text x="326.0" y="117" text-anchor="middle" fill="#333" font-size="12">不可</text>
+<text x="326.0" y="150" text-anchor="middle" fill="#222">6</text>
+<rect x="348" y="92" width="44" height="40" fill="url(#hatch)" stroke="#666" stroke-width="1.5" stroke-dasharray="4 2"/>
+<rect x="356" y="102" width="28" height="20" fill="#ffffff"/>
+<text x="370.0" y="117" text-anchor="middle" fill="#333" font-size="12">不可</text>
+<text x="370.0" y="150" text-anchor="middle" fill="#222">7</text>
+<rect x="392" y="92" width="44" height="40" fill="url(#hatch)" stroke="#666" stroke-width="1.5" stroke-dasharray="4 2"/>
+<rect x="400" y="102" width="28" height="20" fill="#ffffff"/>
+<text x="414.0" y="117" text-anchor="middle" fill="#333" font-size="12">不可</text>
+<text x="414.0" y="150" text-anchor="middle" fill="#222">8</text>
+<rect x="436" y="92" width="44" height="40" fill="url(#hatch)" stroke="#666" stroke-width="1.5" stroke-dasharray="4 2"/>
+<rect x="444" y="102" width="28" height="20" fill="#ffffff"/>
+<text x="458.0" y="117" text-anchor="middle" fill="#333" font-size="12">不可</text>
+<text x="458.0" y="150" text-anchor="middle" fill="#222">9</text>
+<rect x="480" y="92" width="44" height="40" fill="url(#hatch)" stroke="#666" stroke-width="1.5" stroke-dasharray="4 2"/>
+<rect x="488" y="102" width="28" height="20" fill="#ffffff"/>
+<text x="502.0" y="117" text-anchor="middle" fill="#333" font-size="12">不可</text>
+<text x="502.0" y="150" text-anchor="middle" fill="#222">10</text>
+<rect x="524" y="92" width="44" height="40" fill="url(#hatch)" stroke="#666" stroke-width="1.5" stroke-dasharray="4 2"/>
+<rect x="532" y="102" width="28" height="20" fill="#ffffff"/>
+<text x="546.0" y="117" text-anchor="middle" fill="#333" font-size="12">不可</text>
+<text x="546.0" y="150" text-anchor="middle" fill="#222">11</text>
+<text x="32" y="150" text-anchor="end" fill="#222">x</text>
+<line x1="304" y1="78" x2="304" y2="136" stroke="#c0392b" stroke-width="3"/>
+<text x="304" y="74" text-anchor="middle" fill="#c0392b" font-size="12">境界（ここを探す）</text>
+<line x1="62.0" y1="204" x2="62.0" y2="156" stroke="#333" marker-end="url(#ar)"/>
+<text x="62.0" y="220" text-anchor="middle" fill="#222" font-size="12">ok の初期値</text>
+<line x1="546.0" y1="204" x2="546.0" y2="156" stroke="#333" marker-end="url(#ar)"/>
+<text x="546.0" y="220" text-anchor="middle" fill="#222" font-size="12">ng の初期値</text>
+<line x1="282.0" y1="244" x2="282.0" y2="156" stroke="#333" marker-end="url(#ar)"/>
+<text x="282.0" y="260" text-anchor="middle" fill="#1f4e9a" font-size="12">最後の ok = 答え</text>
+<line x1="326.0" y1="204" x2="326.0" y2="156" stroke="#333" marker-end="url(#ar)"/>
+<text x="326.0" y="220" text-anchor="middle" fill="#222" font-size="12">最後の ng</text>
+<text x="62.0" y="236" text-anchor="middle" fill="#555" font-size="11">（必ず可）</text>
+<text x="546.0" y="236" text-anchor="middle" fill="#555" font-size="11">（棒より長い）</text>
+</svg>

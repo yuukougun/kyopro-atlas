@@ -1,0 +1,8 @@
+compilers: [g++-13, g++-15]
+expect: run
+cases:
+  - {input: "ab cd e\n", output: "3\n[ab][cd][e]\n1 2 3\n"}
+  - {input: "a  b\n", output: "3\n[a][][b]\n1 2 3\n"}
+  - {input: "x\n", output: "1\n[x]\n1 2 3\n"}
+  - {input: "\n", output: "0\n\n1 2 3\n"}
+  - {input: "a \n", output: "2\n[a][]\n1 2 3\n"}

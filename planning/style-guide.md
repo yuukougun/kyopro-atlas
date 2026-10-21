@@ -166,7 +166,7 @@ cases:
 ```
 
 - プログラムは `main` と `assert` を持つ完全なものにし、cases には空・1 要素・境界を入れる。問題の入出力例は使わない。ACL は v1.6（`third_party/ac-library/`）で、`modint::val()` は `int` を返す
-- 書き方：AtCoder の GCC 15.2（`-std=gnu++23`）で通る範囲で読みやすさを優先する。`#include <bits/stdc++.h>` と `using namespace std;` を使い、マクロ（`rep` など）と型の別名は使わない（`long long` と書く）。ループは素朴な for を基本にし、範囲 for・構造化束縛・ラムダ（比較関数と DFS）は使ってよく、DFS は `auto dfs = [&](auto&& self, int v, int p) -> void { … };` の形にする。views・`println`・deducing this などを使うときは C++ の章の該当ページへリンクする。C++26 は使わない
+- 書き方：AtCoder の GCC 15.2（`-std=gnu++23`）で通る範囲で読みやすさを優先する。`#include <bits/stdc++.h>` と `using namespace std;` を使い、マクロ（`rep` など）と型の別名は使わない（`long long` と書く）。ただし ACL の modint は例外として `using mint = atcoder::modint998244353;`（法が 10^9+7 なら `atcoder::modint1000000007`）を使ってよい。ループは素朴な for を基本にし、範囲 for・構造化束縛・ラムダ（比較関数・DFS・二分探索などの判定の関数）は使ってよく、DFS は `auto dfs = [&](auto&& self, int v, int p) -> void { … };` の形にする。views・`println`・deducing this などを使うときは C++ の章の該当ページへリンクする。C++26 は使わない
 - 変数名は §6 にそろえる（`n`・`a`・`dp`・`par`・`dep`）。添字は 0-indexed、区間は半開、改行は `'\n'`。入出力は最小限にして中心の関数を見せる
 
 ## 10. 問題の載せ方
@@ -208,6 +208,22 @@ cases:
 - 使用量の目安：道具の呼び出し回数、Web 取得の回数、所要時間（分かれば入出力のトークン）
 ```
 
+## 13. 試作で決めたこと（2026-10-21）
+
+試作の執筆者が迷った点の決まり。上の各節と食い違うときはこちらを優先する。
+
+1. **sections に載せる節**：中身の節（理解度のチェックやほかのページからのリンクの単位になるもの）だけを載せる。定型の節は sections に載せず、次の見出しと anchor を使う：`## 例題 {#examples}`・`## 練習問題 {#practice}`・`## 力試し {#challenge}`・`## 確認問題 {#quiz}`・`## 使い分け {#comparison}`・`## 落とし穴 {#pitfalls}`・`## 参考 {#references}`。練習と力試しは別の見出しにする
+2. **見出しの文字**：sections に載せた節は、見出しの文字と front matter の `title` を同じにする（見出しを短くしたら title も直す。front matter の sections の title と level と anchor の変更は、執筆者が行ってよい）
+3. **例題の小見出し**：`### ABC382 F. 題名 {#abc382_f}` のように anchor は問題 ID にする。difficulty のない問題は、難しさの見当（★や内容）で易しい順の位置に置く
+4. **まだないページへのリンク**：catalog にある id のページへは、まだなくても相対リンク（`../ds/segment-tree.md`）を書いてよい。骨格を作れば解決する
+5. **用語集へのリンク**：`../guide/glossary.md#<英語の anchor>` で書いてよい（まだなくても）。報告に「用語集の提案」として語・anchor・定義を書き、メインが足す
+6. **台帳にない問題**：本文で触れるときは問題 ID を出さず型だけを書き、報告で台帳への追加を提案する
+7. **台帳の summary が表記の規則に合わないとき**：本文の行は fix_problems が台帳から作り直すので、本文だけ直さず、報告で台帳の直しを提案する（メインが台帳を直して fix_problems を流す）
+8. **textlint**：エラーは0にする。警告は、数式（`$…$`）の中の括弧や読点、数式を含む文の長さなど、規則の誤検出なら残してよい
+9. **取り込まないコード片**：版の注記や失敗例を確かめるためだけの snippets（`*-ng` など）は、本文に取り込まなくても置いてよい
+10. **発展の概要の分量**：上限はないが、何ができるか・サイン・計算量・使い方・「なぜ」の要点に絞る。自作するときの要点と Library Checker の対応は入れる
+11. **見本**：試作のページのうち、性質の違う2枚を見本として渡す（どれを見本にするかはメインが決める）
+
 ## 付録 A　用語の正規形
 
 かっこ内は本文で使ってよい別の書き方。
@@ -229,7 +245,7 @@ cases:
 
 robots の meta と X-Robots-Tag に noai・noimageai がないことを確かめた（2026-10-21）。はてなブログは書き手ごとに設定できるので、ここにないブログは確かめる。
 
-- はてなブログ：drken1215・merom686・kazun-kyopro・kanpurin・kyo-pro・torus711・sigma425・kyopro-friends・noshi91（どれも .hatenablog.com）、kmjp.hatenablog.jp・betrue12.hateblo.jp・blog.hamayanhamayan.com
-- そのほか：ikatakos.com・qiita.com・zenn.dev・github.com・nyaannyaan.github.io・ei1333.github.io・programming-hiroba.com・oraclesqlpuzzle.ninja-web.net・www.cnblogs.com・atcoder-tags.herokuapp.com・maspypy.com・www.mathenachia.blog・cp-algorithms.com・oi-wiki.org・judge.yosupo.jp・ja.wikipedia.org・usaco.guide（構成の参考だけ）
-- note.com は meta の指定はないが、利用条件を記事ごとに確かめる
+- はてなブログ：drken1215・merom686・kazun-kyopro・kanpurin・kyo-pro・torus711・sigma425・kyopro-friends・noshi91・rsk0315・tayu0110・enakai00（どれも .hatenablog.com）、kmjp.hatenablog.jp・betrue12.hateblo.jp・blog.hamayanhamayan.com
+- そのほか：ikatakos.com・qiita.com・zenn.dev・github.com・nyaannyaan.github.io・ei1333.github.io・programming-hiroba.com・oraclesqlpuzzle.ninja-web.net・www.cnblogs.com・atcoder-tags.herokuapp.com・maspypy.com・www.mathenachia.blog・cp-algorithms.com・oi-wiki.org・judge.yosupo.jp・ja.wikipedia.org・hackmd.io・en.cppreference.com・cpprefjp.github.io・gcc.gnu.org・usaco.guide（構成の参考だけ）
+- note.com は meta の指定はないが、利用条件を記事ごとに確かめる（確かめた記事：igasu_7 の n5bd80b1e0eb9）
 - 開かない（noai 指定）：atcoder.jp・codeforces.com

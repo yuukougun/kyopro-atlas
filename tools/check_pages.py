@@ -219,7 +219,8 @@ def contest_name(cid: str) -> str:
 
 
 def problem_label(e: dict) -> str:
-    return f"{contest_name(str(e.get('contest')))} {e.get('index')}. {e.get('title')}"
+    # 題名は AtCoder Problems の値を写しているので、末尾の空白（'Pac-Takahashi ' など）があり得る。label では落とす
+    return f"{contest_name(str(e.get('contest')))} {e.get('index')}. {str(e.get('title')).strip()}"
 
 
 def problem_url(e: dict) -> str:

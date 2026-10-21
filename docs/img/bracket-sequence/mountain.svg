@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 260" width="680" height="260" font-family="sans-serif">
+<rect width="680" height="260" fill="#ffffff"/>
+<text x="50" y="30" font-size="15" font-weight="bold">正しい：負にならず、最後が 0</text>
+<line x1="40" y1="140" x2="300" y2="140" stroke="#555" stroke-dasharray="5 4"/>
+<text x="22" y="145" font-size="13">0</text>
+<text x="22" y="117" font-size="13" fill="#666">1</text>
+<text x="22" y="89" font-size="13" fill="#666">2</text>
+<text x="16" y="173" font-size="13" fill="#666">−1</text>
+<polyline points="50,140 90,112 130,84 170,112 210,84 250,112 290,140" fill="none" stroke="#1565c0" stroke-width="3"/>
+<circle cx="50" cy="140" r="4" fill="#1565c0"/>
+<circle cx="90" cy="112" r="4" fill="#1565c0"/>
+<circle cx="130" cy="84" r="4" fill="#1565c0"/>
+<circle cx="170" cy="112" r="4" fill="#1565c0"/>
+<circle cx="210" cy="84" r="4" fill="#1565c0"/>
+<circle cx="250" cy="112" r="4" fill="#1565c0"/>
+<circle cx="290" cy="140" r="4" fill="#1565c0"/>
+<text x="70.0" y="218" font-size="18" text-anchor="middle" font-family="monospace">(</text>
+<text x="110.0" y="218" font-size="18" text-anchor="middle" font-family="monospace">(</text>
+<text x="150.0" y="218" font-size="18" text-anchor="middle" font-family="monospace">)</text>
+<text x="190.0" y="218" font-size="18" text-anchor="middle" font-family="monospace">(</text>
+<text x="230.0" y="218" font-size="18" text-anchor="middle" font-family="monospace">)</text>
+<text x="270.0" y="218" font-size="18" text-anchor="middle" font-family="monospace">)</text>
+<text x="50" y="248" font-size="13">最小値 0、最後 0</text>
+<text x="400" y="30" font-size="15" font-weight="bold">正しくない：途中で −1</text>
+<line x1="390" y1="140" x2="650" y2="140" stroke="#555" stroke-dasharray="5 4"/>
+<text x="372" y="145" font-size="13">0</text>
+<text x="372" y="117" font-size="13" fill="#666">1</text>
+<text x="372" y="89" font-size="13" fill="#666">2</text>
+<text x="366" y="173" font-size="13" fill="#666">−1</text>
+<polyline points="400,140 440,112 480,140 520,168 560,140 600,112 640,140" fill="none" stroke="#1565c0" stroke-width="3"/>
+<circle cx="400" cy="140" r="4" fill="#1565c0"/>
+<circle cx="440" cy="112" r="4" fill="#1565c0"/>
+<circle cx="480" cy="140" r="4" fill="#1565c0"/>
+<circle cx="520" cy="168" r="4" fill="#1565c0"/>
+<circle cx="560" cy="140" r="4" fill="#1565c0"/>
+<circle cx="600" cy="112" r="4" fill="#1565c0"/>
+<circle cx="640" cy="140" r="4" fill="#1565c0"/>
+<text x="420.0" y="218" font-size="18" text-anchor="middle" font-family="monospace">(</text>
+<text x="460.0" y="218" font-size="18" text-anchor="middle" font-family="monospace">)</text>
+<text x="500.0" y="218" font-size="18" text-anchor="middle" font-family="monospace">)</text>
+<text x="540.0" y="218" font-size="18" text-anchor="middle" font-family="monospace">(</text>
+<text x="580.0" y="218" font-size="18" text-anchor="middle" font-family="monospace">(</text>
+<text x="620.0" y="218" font-size="18" text-anchor="middle" font-family="monospace">)</text>
+<circle cx="520" cy="168" r="9" fill="none" stroke="#c62828" stroke-width="2.5"/>
+<text x="400" y="198" font-size="13" fill="#c62828">3 文字目の ) に相手がない</text>
+<text x="400" y="248" font-size="13">最小値 −1、最後 0</text>
+</svg>

@@ -2,13 +2,486 @@
 # 並びは interfaces.md §8：分野の順 → 分野の入口 → chapter のないページ → chapter ごと（order の順）。最後に一覧。
 nav:
   - ホーム: index.md
+  - はじめに:
+      - start/index.md
+      - この教材の使い方: start/how-to-use.md
+      - 記法と用語の約束: start/notation.md
+      - AtCoder の仕組み: start/atcoder-system.md
   - 横断ページ:
       - guide/index.md
       - 辞書として引く:
+          - 逆引き辞典（言い回しから）: guide/reverse-index-signs.md
+          - 逆引き辞典（制約・計算量から）: guide/reverse-index-constraints.md
+          - 用語の索引: guide/term-index.md
           - 知識マップ: guide/knowledge-map.md
+          - 似た手法の使い分け: guide/method-comparison.md
+      - 学び方と練習:
+          - 色別ロードマップ: guide/roadmap.md
+          - 精進の仕方: guide/practice-method.md
+          - 問題集と練習用コンテストの案内: guide/problem-sets.md
+      - コンテストと考察:
+          - コンテストの戦い方: guide/contest-strategy.md
+          - 詰まったときの発想リスト: guide/thinking-checklist.md
+          - WA・TLE・RE・MLE の原因チェックリスト: guide/debugging-checklist.md
+          - ストレステストと実験: guide/stress-testing.md
+      - 早見表と資料:
+          - 早見表: guide/cheatsheet.md
+          - 用語集: guide/glossary.md
+          - 自作ライブラリの設計と動作確認: guide/library-design.md
+  - 基本テクニック:
+      - basics/index.md
+      - 計算量と bit 演算:
+          - 計算量の見積もり: basics/complexity-estimation.md
+          - bit 演算の基本と XOR の性質: basics/bit-operations.md
+          - bit ごとに独立に考える: basics/bitwise-independence.md
+      - 全探索:
+          - 全探索の設計: basics/brute-force.md
+          - bit 全探索と順列全探索: basics/bit-full-search.md
+          - 再帰による全列挙: basics/recursive-enumeration.md
+      - ソートと二分探索:
+          - ソートで考える: basics/sorting-techniques.md
+          - 二分探索: basics/binary-search.md
+          - 答えで二分探索: basics/binary-search-answer.md
+          - 座標圧縮: basics/coordinate-compression.md
+          - イベントソートと平面走査の基本: basics/event-sort.md
+      - 累積和といもす法:
+          - 累積和: basics/prefix-sum.md
+          - 累積和と連想配列で区間を数える: basics/prefix-sum-counting.md
+          - 2 次元累積和: basics/prefix-sum-2d.md
+          - いもす法: basics/imos.md
+          - 差分列への言い換え: basics/difference-sequence.md
+      - 尺取り法とランレングス圧縮:
+          - 尺取り法: basics/two-pointers.md
+          - ランレングス圧縮: basics/run-length-encoding.md
+      - 二分探索の応用:
+          - 半分全列挙: basics/meet-in-the-middle.md
+          - 平均・中央値の最大化: basics/fractional-binary-search.md
+          - K 番目の値: basics/kth-value.md
+      - 凸と三分探索:
+          - 三分探索: basics/ternary-search.md
+          - 絶対値の和の最小化と中央値: basics/median-absolute.md
+      - 貪欲:
+          - 貪欲法の考え方と正当性: basics/greedy-basics.md
+          - 区間スケジューリング・区間の串刺し: basics/interval-scheduling.md
+          - 優先度付きキューを使う貪欲: basics/greedy-priority-queue.md
+          - 交換論法と比較関数の設計: basics/exchange-argument.md
+          - 辞書順最小を前から決める貪欲: basics/lexicographic-greedy.md
+      - 周期とダブリング:
+          - 周期性の検出: basics/periodicity.md
+          - ダブリング: basics/doubling.md
+      - 再帰と分割統治:
+          - 再帰的な構造: basics/recursion-structure.md
+          - 分割統治: basics/divide-and-conquer.md
+  - 考察:
+      - thinking/index.md
+      - 言い換えの典型: thinking/reformulation.md
+      - 一部を固定して数える: thinking/fix-variable.md
+      - 主客転倒・寄与: thinking/contribution.md
+      - 余事象: thinking/complement.md
+      - 偶奇に着目する: thinking/parity.md
+      - 不変量・単調に変わる量: thinking/invariant.md
+      - 後ろから・逆順に考える: thinking/reverse-thinking.md
+      - 構築問題の考え方: thinking/construction.md
+      - 対称性・鳩の巣原理・場合分け: thinking/symmetry-pigeonhole-casework.md
+  - 動的計画法:
+      - dp/index.md
+      - DP の考え方:
+          - DP の基本: dp/dp-basics.md
+          - メモ化再帰: dp/memoized-recursion.md
+          - DAG 上の DP: dp/dp-dag.md
+          - DP の計算順序: dp/dp-order.md
+          - DP の状態の設計: dp/dp-state-design.md
+          - 余り・個数を状態に持つ DP: dp/dp-mod-state.md
+          - フェーズを状態に持つ DP: dp/dp-phase.md
+          - DP の復元: dp/dp-reconstruction.md
+          - 累積和・いもす法による DP の高速化: dp/dp-prefix-sum.md
+      - 列の DP:
+          - ナップサック DP: dp/knapsack-01.md
+          - 部分和 DP: dp/subset-sum.md
+          - DP の状態の削減: dp/dp-dimension-reduction.md
+          - 戻す DP: dp/knapsack-undo.md
+          - 並べ替えてから DP する: dp/exchange-argument-dp.md
+          - グリッド上の DP: dp/dp-grid.md
+          - 区間分割 DP: dp/dp-sequence-partition.md
+          - 最長増加部分列: dp/lis.md
+          - 最長共通部分列と編集距離: dp/lcs.md
+          - 部分列 DP: dp/subsequence-dp.md
+      - 状態の形で分かれる DP:
+          - 区間 DP: dp/interval-dp.md
+          - 区間 DP の応用: dp/interval-dp-advanced.md
+          - bitDP: dp/bit-dp.md
+          - 部分集合を列挙する DP: dp/subset-enumeration-dp.md
+          - プロファイル DP: dp/broken-profile-dp.md
+          - 桁 DP: dp/digit-dp.md
+          - 桁 DP の応用: dp/digit-dp-advanced.md
+          - 木 DP: dp/tree-dp.md
+          - 全方位木 DP: dp/rerooting.md
+          - 二乗の木 DP: dp/tree-dp-square.md
+          - 挿入 DP・箱根駅伝 DP: dp/insertion-dp.md
+      - DP の高速化:
+          - DP の高速化の選び方: dp/dp-speedup-overview.md
+          - セグメント木・スライド最小値による DP の高速化: dp/dp-segment-tree.md
+          - インライン DP: dp/inline-dp.md
+          - 動的 DP: dp/dynamic-dp.md
+          - Convex Hull Trick と Li Chao Tree: dp/cht.md
+          - Monge 性による DP の高速化: dp/monge.md
+          - Alien DP: dp/alien-dp.md
+          - Slope Trick: dp/slope-trick.md
+  - グラフ:
+      - graph/index.md
+      - 基本と探索:
+          - グラフの表現と用語: graph/graph-basics.md
+          - グラフへの帰着: graph/graph-modeling.md
+          - 深さ優先探索（DFS）: graph/dfs.md
+          - 幅優先探索（BFS）と無重み最短路: graph/bfs.md
+          - グリッドグラフ: graph/grid-graph.md
+          - 連結成分: graph/connected-components.md
+          - 閉路の検出と復元: graph/cycle-detection.md
+          - 二部グラフ判定: graph/bipartite-graph.md
+          - 小さいグラフの全探索: graph/small-graph-brute-force.md
+          - 彩色数・最大独立集合・最大クリーク: graph/chromatic-number.md
+      - 最短路:
+          - ダイクストラ法: graph/dijkstra.md
+          - 01-BFS: graph/zero-one-bfs.md
+          - ワーシャルフロイド法: graph/warshall-floyd.md
+          - ベルマンフォード法: graph/bellman-ford.md
+          - 最短路 DAG: graph/shortest-path-dag.md
+          - 状態を頂点にする: graph/extended-dijkstra.md
+          - 時刻で変わる辺の最短路: graph/time-dependent-dijkstra.md
+          - 差分制約（牛ゲー）: graph/difference-constraints.md
+          - 補グラフ上の BFS: graph/complement-graph-bfs.md
+          - 剰余を頂点にする最短路: graph/modular-shortest-path.md
+          - 区間に辺を張る: graph/segment-tree-graph.md
+          - K 番目の最短路: graph/k-shortest-paths.md
+          - 最小シュタイナー木: graph/steiner-tree.md
+      - 有向グラフ:
+          - トポロジカルソート: graph/topological-sort.md
+          - 強連結成分分解（SCC）: graph/scc.md
+          - Functional graph（出次数 1 のグラフ）: graph/functional-graph.md
+          - なもりグラフ: graph/namori-graph.md
+          - 2-SAT: graph/two-sat.md
+      - 連結性と全域木:
+          - Union-Find で連結性を扱う: graph/union-find-connectivity.md
+          - 最小全域木: graph/minimum-spanning-tree.md
+          - 最小ボトルネック路: graph/bottleneck-path.md
+          - 橋・関節点・二重連結成分: graph/lowlink.md
+          - 辺の追加と削除が混ざる連結性: graph/offline-dynamic-connectivity.md
+          - 特殊な最小全域木: graph/spanning-tree-advanced.md
+          - 行列木定理: graph/matrix-tree-theorem.md
+      - 探索木と次数の性質:
+          - DFS 木・BFS 木とグラフの構築: graph/graph-construction.md
+          - オイラー路（一筆書き）: graph/euler-path.md
+          - 次数による平方分割: graph/degree-sqrt.md
+      - フロー・マッチング:
+          - 最大流: graph/max-flow.md
+          - 最小カット: graph/min-cut.md
+          - 燃やす埋める: graph/project-selection.md
+          - 二部マッチング: graph/bipartite-matching.md
+          - König の定理: graph/konig-theorem.md
+          - 最小費用流: graph/min-cost-flow.md
+          - 最小パス被覆と Hall の定理: graph/dilworth-path-cover.md
+          - 最小流量制約付きフロー: graph/flow-lower-bounds.md
+          - 一般グラフのマッチング: graph/general-matching.md
+  - 木:
+      - tree/index.md
+      - 木の基礎:
+          - 木の基本性質と表現: tree/tree-basics.md
+          - 根付き木と走査順: tree/tree-traversal.md
+          - 木の 2 色塗り分けと距離の偶奇: tree/tree-bipartite.md
+          - 木の上の距離: tree/tree-distance.md
+          - 木の上の累積和・いもす法: tree/tree-imos.md
+          - 指定頂点を結ぶ最小の部分木: tree/steiner-subtree.md
+          - 完全二分木: tree/complete-binary-tree.md
+          - 葉から考える: tree/leaf-first.md
+          - 木の次数列と Prüfer 列: tree/tree-degree.md
+      - 木全体の形:
+          - 木の直径と最遠点: tree/tree-diameter.md
+          - 木の重心: tree/tree-centroid.md
+          - 辺で切って数える: tree/tree-edge-contribution.md
+          - 木の構築・復元: tree/tree-construction.md
+          - 木の同型判定と木のハッシュ: tree/tree-isomorphism.md
+      - パス:
+          - 最小共通祖先（LCA）: tree/lca.md
+          - 木の上のパスの判定と分解: tree/tree-path.md
+          - 根からのパスを DFS で持ち回る: tree/root-path-dfs.md
+      - 部分木とパスのクエリ:
+          - オイラーツアー: tree/euler-tour.md
+          - HL 分解: tree/hld.md
+          - Static Top Tree と木 DP の動的更新: tree/static-top-tree.md
+          - 動的木: tree/dynamic-tree.md
+      - まとめる・分ける:
+          - マージテク: tree/small-to-large.md
+          - 重心分解: tree/centroid-decomposition.md
+          - Auxiliary Tree: tree/auxiliary-tree.md
+          - 併合過程の木: tree/merge-process-tree.md
+          - 比で親に併合する貪欲: tree/tree-ratio-greedy.md
+  - データ構造:
+      - ds/index.md
+      - 標準コンテナの応用:
+          - STL コンテナの使い分け: ds/stl-containers.md
+          - set・multiset・map の応用: ds/ordered-set.md
+          - 優先度付きキュー: ds/priority-queue.md
+          - 上位 K 個の和と中央値の管理: ds/top-k-multiset.md
+          - 区間を set で管理する: ds/interval-set.md
+          - 全体への操作を変数で持つ: ds/global-offset.md
+          - 配列で作る連結リスト: ds/linked-list.md
+      - スタックとキュー:
+          - スタック・キュー・deque の使いどころ: ds/stack-techniques.md
+          - 単調スタックとスライド最小値: ds/monotonic-stack.md
+      - Union-Find:
+          - Union-Find: ds/union-find.md
+          - Union-Find の応用: ds/union-find-applications.md
+          - 重み付き Union-Find: ds/weighted-union-find.md
+          - 部分永続 Union-Find: ds/partially-persistent-union-find.md
+          - ロールバックできる Union-Find: ds/rollback-union-find.md
+      - 区間クエリ:
+          - BIT（Fenwick Tree）: ds/fenwick-tree.md
+          - 転倒数: ds/inversion-number.md
+          - K 番目の値を求めるデータ構造: ds/kth-element.md
+          - セグメント木: ds/segment-tree.md
+          - セグメント木上の二分探索: ds/segment-tree-binary-search.md
+          - 値を添字にする BIT・セグメント木: ds/segment-tree-on-values.md
+          - 遅延セグメント木: ds/lazy-segment-tree.md
+          - セグメント木に何を載せるか: ds/segment-tree-monoids.md
+          - 遅延セグメント木の載せ方の型: ds/lazy-segment-tree-patterns.md
+          - Sparse Table: ds/sparse-table.md
+          - Segment Tree Beats: ds/segment-tree-beats.md
+      - クエリ処理の工夫:
+          - クエリの先読み: ds/offline-queries.md
+          - 平面走査: ds/sweep-line-2d.md
+          - Mo's algorithm: ds/mo-algorithm.md
+          - 平方分割: ds/sqrt-decomposition.md
+          - 並列二分探索: ds/parallel-binary-search.md
+          - CDQ 分割統治: ds/cdq-divide-and-conquer.md
+      - そのほかのデータ構造:
+          - 永続データ構造: ds/persistent-data-structures.md
+          - マージソート木: ds/merge-sort-tree.md
+          - Wavelet Matrix: ds/wavelet-matrix.md
+          - Binary Trie: ds/binary-trie.md
+          - 平衡二分探索木と pb_ds の tree: ds/balanced-bst.md
+          - 見慣れないデータ構造の名前と用途: ds/advanced-ds-catalog.md
+  - 整数論・代数:
+      - math/index.md
+      - 式と整数の基本:
+          - Σ の変形: math/sigma-manipulation.md
+          - 整数の割り算と余り: math/integer-division.md
+      - mod の計算:
+          - mod の計算の基本: math/mod-arithmetic.md
+          - 繰り返し二乗法: math/mod-pow.md
+          - 逆元と mod での割り算: math/mod-inverse.md
+          - modint: math/modint.md
+          - フェルマーの小定理と指数の mod: math/exponent-mod.md
+          - 等比数列の和を mod で求める: math/geometric-series-mod.md
+          - 桁と mod: math/digit-and-mod.md
+      - 素数と約数:
+          - 約数列挙と素数判定: math/divisor-enum.md
+          - 素因数分解とルジャンドルの公式: math/prime-factorization.md
+          - エラトステネスの篩: math/sieve-eratosthenes.md
+          - 最小素因数の篩と線形篩: math/spf-sieve.md
+          - 調和級数と倍数の列挙: math/harmonic-sum.md
+          - 約数の個数の上界と高度合成数: math/divisor-count-bound.md
+          - 区間篩: math/segmented-sieve.md
+          - 素因数の指数で考える: math/prime-exponent-vector.md
+          - オイラーの φ 関数: math/euler-phi.md
+          - 大きな数の素数判定と素因数分解: math/miller-rabin.md
+      - GCD と合同式:
+          - GCD・LCM とユークリッドの互除法: math/gcd-lcm.md
+          - 拡張ユークリッドの互除法と一次合同式: math/ext-gcd.md
+          - GCD の性質: math/gcd-properties.md
+          - 中国剰余定理: math/crt.md
+          - 位数・原始根・離散対数: math/multiplicative-order.md
+          - 整数の証明の型: math/proof-patterns.md
+      - floor と商:
+          - 整数の平方根・K 乗根と累乗数: math/integer-root.md
+          - N 進法: math/base-conversion.md
+          - 商の列挙: math/floor-quotient-enum.md
+          - 乗法的関数の和と素数の個数: math/multiplicative-function.md
+          - floor sum: math/floor-sum.md
+          - Stern-Brocot 木と連分数: math/stern-brocot.md
+      - 行列と線形代数:
+          - 行列累乗: math/matrix-power.md
+          - 掃き出し法: math/gaussian-elimination.md
+          - XOR 基底: math/xor-basis.md
+          - 行列式: math/determinant.md
+      - 畳み込みと多項式:
+          - 畳み込みの使い方: math/convolution-ntt.md
+          - FFT・NTT の仕組みと任意 mod の畳み込み: math/fft-ntt.md
+          - XOR 畳み込み: math/hadamard-transform.md
+          - 分割統治 FFT・オンライン畳み込み: math/online-convolution.md
+          - 形式的冪級数と多項式の演算: math/fps-basics.md
+          - 線形漸化式の高速化: math/linear-recurrence-fast.md
+          - ラグランジュ補間とべき乗和: math/lagrange-interpolation.md
+  - 数え上げ・確率・ゲーム:
+      - comb/index.md
+      - 数え上げの基礎:
+          - 和・積の法則と順列・組合せ: comb/counting-basics.md
+          - 二項係数の意味と性質: comb/binomial-coefficient.md
+          - 二項係数の前計算: comb/binomial-precompute.md
+          - 重複組合せ: comb/stars-and-bars.md
+          - 格子路の数え上げ: comb/lattice-paths.md
+          - 写像 12 相: comb/twelvefold-way.md
+      - 数え方の考え方:
+          - 数え上げの考え方: comb/counting-mindset.md
+          - 対応づけ・数える対象の言い換え: comb/counting-bijection.md
+          - 順序を固定して数える: comb/counting-fix-order.md
+          - 重複の除き方: comb/counting-dedup.md
+          - Burnside の補題: comb/burnside-lemma.md
+      - 二項係数の系統:
+          - 多項係数: comb/multinomial-coefficient.md
+          - 二項係数の恒等式と和の公式: comb/binomial-identities.md
+          - 二項係数の部分和: comb/binomial-prefix-sum.md
+          - 鏡像法とカタラン数: comb/reflection-principle.md
+          - LGV 補題: comb/lgv-lemma.md
+          - 母関数の考え方: comb/generating-function-counting.md
+      - 包除の系統:
+          - 包除原理: comb/inclusion-exclusion.md
+          - 包除 DP: comb/inclusion-exclusion-dp.md
+          - 約数包除: comb/divisor-inclusion-exclusion.md
+          - 約数・倍数のゼータ変換とメビウス変換: comb/zeta-mobius-divisor.md
+          - メビウス関数とメビウス反転: comb/mobius-function.md
+          - 部分集合の高速ゼータ変換とメビウス変換: comb/zeta-mobius-subset.md
+      - 置換・分割・木の数え上げ:
+          - 置換の巡回分解: comb/permutation-cycles.md
+          - 置換の偶奇: comb/permutation-parity.md
+          - 第 1 種スターリング数: comb/stirling-first.md
+          - 第 2 種スターリング数とベル数: comb/bell-number.md
+          - 整数の分割と分割数: comb/partition-number.md
+          - Young 図形とフック長公式: comb/young-tableaux.md
+          - ラベル付き木の数え上げ: comb/cayley-pruefer.md
+          - 連結なグラフの数え上げ: comb/counting-labeled-graphs.md
+      - 確率・期待値:
+          - 確率の基本: comb/probability-basics.md
+          - 幾何分布とコンプリートガチャ: comb/coupon-collector.md
+          - 確率・期待値を mod 998244353 で答える: comb/rational-mod.md
+          - 期待値の線形性と指示確率変数: comb/linearity-of-expectation.md
+          - 対称性で確率を求める: comb/probability-symmetry.md
+          - 確率 DP: comb/probability-dp.md
+          - 期待値 DP: comb/expected-value-dp.md
+          - 最適戦略の期待値: comb/optimal-strategy-expectation.md
+          - 閉路のある期待値: comb/expectation-linear-equations.md
+          - 期待値と確率の変換: comb/expectation-tail-sum.md
+          - 二乗の期待値・分散: comb/expectation-of-square.md
+          - 連続値の確率: comb/continuous-probability.md
+      - ゲーム:
+          - ゲームの基本と勝敗の DP: comb/game-basics.md
+          - ミニマックス: comb/minimax.md
+          - Nim と XOR: comb/nim.md
+          - Grundy 数と Sprague-Grundy の定理: comb/grundy-number.md
+          - 後退解析: comb/game-retrograde-analysis.md
+          - 非不偏ゲーム: comb/partizan-games.md
+  - 文字列:
+      - string/index.md
+      - 文字列の基本:
+          - 文字列の基本操作と辞書順: string/string-basics.md
+          - 部分列の判定と次の出現位置の表: string/subsequence-matching.md
+      - ハッシュ:
+          - ローリングハッシュ: string/rolling-hash.md
+          - 集合・多重集合のハッシュ: string/hashing-for-sets.md
+          - ハッシュの衝突と安全な設計: string/hash-safety.md
+      - 線形時間の照合と回文:
+          - Z-algorithm: string/z-algorithm.md
+          - KMP 法と文字列の周期: string/kmp.md
+          - 回文の扱いと Manacher: string/palindrome.md
+      - Trie と照合オートマトン:
+          - Trie: string/trie.md
+          - Aho-Corasick 法: string/aho-corasick.md
+          - 照合オートマトン上の DP: string/string-automaton-dp.md
+      - 接尾辞の構造:
+          - Suffix Array と LCP 配列: string/suffix-array.md
+          - Suffix Automaton など: string/suffix-automaton.md
+  - 幾何:
+      - geometry/index.md
+      - ベクトルと外積: geometry/geometry-vectors.md
+      - 誤差の扱いと整数での処理: geometry/geometry-precision.md
+      - 偏角ソート: geometry/argument-sort.md
+      - 回転・平行移動・アフィン変換: geometry/rotation-transform.md
+      - マンハッタン距離と 45 度回転: geometry/manhattan-chebyshev.md
+      - 円と幾何の最適化: geometry/circle-geometry.md
+      - 凸包と凸多角形: geometry/convex-hull.md
+      - 発展の幾何: geometry/advanced-geometry.md
+  - その他の技法:
+      - misc/index.md
+      - インタラクティブ問題: misc/interactive.md
+      - 乱択アルゴリズム: misc/randomized.md
+      - bitset による高速化: misc/bitset-speedup.md
+      - 構文解析: misc/parsing.md
+  - 題材別:
+      - patterns/index.md
+      - 区間: patterns/interval.md
+      - 部分列と部分文字列: patterns/subsequence-and-substring.md
+      - 順列と置換: patterns/permutation.md
+      - 括弧列: patterns/bracket-sequence.md
+      - mex: patterns/mex.md
+      - K 番目と中央値: patterns/kth-and-median.md
+      - XOR: patterns/xor.md
+      - 約数と倍数: patterns/divisors-and-multiples.md
+      - グリッド: patterns/grid.md
+      - 操作列とクエリ: patterns/operation-sequence.md
+  - C++:
+      - cpp/index.md
+      - C++ の逆引き: cpp/cpp-reverse-index.md
+      - 型と値:
+          - 数の型とリテラル: cpp/cpp-types-literals.md
+          - オーバーフローと __int128: cpp/cpp-integer-overflow.md
+          - 初期化と CTAD: cpp/cpp-initialization.md
+          - 数・ビット・乱数の関数: cpp/cpp-math-functions.md
+      - 参照・ラムダ・テンプレート:
+          - 参照と範囲 for: cpp/cpp-range-for.md
+          - 構造化束縛と pair・tuple: cpp/cpp-structured-bindings.md
+          - ラムダ式と再帰ラムダ: cpp/cpp-lambda.md
+          - 関数テンプレートと constexpr: cpp/cpp-templates-constexpr.md
+          - マクロと雛形: cpp/cpp-macros-template-file.md
+      - コンテナ・アルゴリズム・ACL:
+          - コンテナ操作とイテレータ: cpp/cpp-container-idioms.md
+          - 比較関数と順序: cpp/cpp-comparators.md
+          - アルゴリズム関数と ranges 版: cpp/cpp-algorithms.md
+          - 文字列の操作: cpp/cpp-string-api.md
+          - ACL の読み方: cpp/acl-reading.md
+      - ranges と views:
+          - views の基本: cpp/cpp-views-basics.md
+          - C++23 の views と ranges::to: cpp/cpp-views-cpp23.md
+      - 入出力・環境・落とし穴:
+          - 入出力と定数倍: cpp/cpp-io.md
+          - AtCoder と手元の C++ 環境: cpp/cpp-environment.md
+          - 未定義動作とダングリング: cpp/cpp-undefined-behavior.md
   - 一覧:
       - lists/index.md
+      - レベル別:
+          - 基礎: lists/level-basic.md
+          - 水: lists/level-cyan.md
+          - 青: lists/level-blue.md
+          - 黄: lists/level-yellow.md
+          - 発展: lists/level-advanced.md
       - 種類別:
+          - 計算量: lists/kind-complexity.md
+          - 全探索: lists/kind-brute-force.md
+          - 二分探索: lists/kind-binary-search.md
+          - 累積和・差分: lists/kind-prefix-sum.md
+          - 尺取り・スライド窓: lists/kind-two-pointers.md
+          - 貪欲: lists/kind-greedy.md
+          - ソート・座標圧縮: lists/kind-sorting.md
+          - ダブリング・分割統治: lists/kind-doubling.md
+          - DP: lists/kind-dp.md
+          - グラフ探索: lists/kind-graph-search.md
+          - 最短路: lists/kind-shortest-path.md
+          - 連結性・全域木: lists/kind-connectivity.md
+          - フロー・マッチング: lists/kind-flow.md
+          - 木: lists/kind-tree.md
+          - データ構造: lists/kind-data-structure.md
+          - 区間クエリ: lists/kind-range-query.md
+          - クエリ処理の工夫: lists/kind-query-processing.md
+          - 整数論: lists/kind-number-theory.md
+          - 線形代数・行列: lists/kind-linear-algebra.md
+          - 畳み込み・多項式: lists/kind-convolution.md
+          - 数え上げ: lists/kind-counting.md
+          - 確率・期待値: lists/kind-probability.md
+          - ゲーム: lists/kind-game.md
+          - 文字列: lists/kind-string.md
+          - ハッシュ・乱択: lists/kind-hashing.md
+          - 幾何: lists/kind-geometry.md
+          - ビット演算: lists/kind-bit.md
+          - 考察: lists/kind-observation.md
+          - 実装・C++: lists/kind-implementation.md
           - 案内: lists/kind-guide.md
 extra:
   kp:

@@ -1,0 +1,7 @@
+compilers: [g++-13, g++-15]
+flags: "-std=gnu++20 -O2 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "ab cd e\n", output: "[ab][cd][e]\n"}
+  - {input: "a  b\n", output: "[a][][b]\n"}
+  - {input: "\n", output: "\n"}

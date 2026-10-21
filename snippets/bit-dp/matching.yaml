@@ -1,0 +1,10 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "1\n1\n", output: "1\n"}
+  - {input: "1\n0\n", output: "0\n"}
+  # 全員と組めるなら 3! = 6 通り
+  - {input: "3\n1 1 1\n1 1 1\n1 1 1\n", output: "6\n"}
+  # 男性 0 は女性 1 とだけ組める
+  - {input: "3\n0 1 0\n1 1 1\n1 0 1\n", output: "2\n"}
