@@ -145,6 +145,6 @@ difficulty 2000〜2399 の帯で主に必要になるページ（37 ページ）
 | ひし形の範囲を正方形にして 2 次元累積和 | [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md#diamond-range)（水） | 幾何 |
 | 三分探索の注意：凸性の確認・入れ子の三分探索・式の変わり目の時刻を列挙する方法 | [円と幾何の最適化](../geometry/circle-geometry.md)（青）（準備中） | 幾何 |
 | Color Coding | [乱択アルゴリズム](../misc/randomized.md)（青）（準備中） | その他の技法 |
-| 部分和 DP のシフト OR（dp \|= dp << a） | [bitset による高速化](../misc/bitset-speedup.md)（青）（準備中） | その他の技法 |
+| 部分和 DP のシフト OR | [bitset による高速化](../misc/bitset-speedup.md)（青）（準備中） | その他の技法 |
 | DAG の到達可能性（逆トポロジカル順に OR、閉路は SCC で縮約） | [bitset による高速化](../misc/bitset-speedup.md)（青）（準備中） | その他の技法 |
 | メモリの見積もりと 64 個ずつのクエリの処理 | [bitset による高速化](../misc/bitset-speedup.md)（青）（準備中） | その他の技法 |

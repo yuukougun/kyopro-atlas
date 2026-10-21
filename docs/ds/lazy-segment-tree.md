@@ -29,7 +29,6 @@ sections:
   - {title: ACL の約束（mapping・composition・id）, anchor: acl-conventions}
   - {title: 境界（葉の長さ・e()・代入の番兵・INF・mod）, anchor: boundaries}
   - {title: 双対セグメント木（区間作用・一点取得）, anchor: dual-segment-tree}
-  - {title: 使い分け, anchor: choosing}
   - {title: 保つ性質と push の手順（自作するとき）, anchor: invariants, level: 青}
 stage: draft
 updated: 2026-10-21
@@ -291,7 +290,7 @@ A を $+1$、B を $-1$ に置き換えて累積和を取ると、部分文字�
 ??? question "確認問題：ACL の lazy_segtree の get が O(1) でなく O(log N) なのはなぜか"
     葉の値 $d[p]$ には、祖先に残る保留がまだ施されていないことがあるからである。`get` は葉の祖先を上から順に push してから葉を読むので、高さぶんの $O(\log N)$ かかる。
 
-## 使い分け {#choosing}
+## 使い分け {#comparison}
 
 遅延セグメント木を書く前に、もっと軽い手法で済まないかを確かめる。
 

@@ -30,7 +30,6 @@ sections:
   - {title: 最短閉路（ある頂点を含む閉路の最小の長さ）, anchor: shortest-cycle}
   - {title: 逆向きのグラフと両端からの最短路, anchor: reverse-graph, level: 水}
   - {title: ポテンシャルで負辺を消す（Johnson のアイデア）, anchor: potential, level: 水}
-  - {title: 上位の手法とのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---
@@ -210,7 +209,7 @@ $p(s) - p(t)$ は道によらない定数なので、$s$ から $t$ への道の
 - **頂点ごとにダイクストラ法を回す**：「各頂点から終点への距離」は逆向きのグラフで 1 回で求まる（[逆向きのグラフと両端からの最短路](#reverse-graph)）
 - **最短閉路で dist[s] を読む**：$\mathrm{dist}[s] = 0$ は閉路の長さではない。$s$ へ戻る辺を別に見る（[最短閉路](#shortest-cycle)）
 
-## 上位の手法とのつながり {#next-steps}
+## 上位の手法へのつながり {#next-steps}
 
 ダイクストラ法は「暫定距離の小さい順に確定させる」の代表で、多くの最短路の手法がこの上に乗る。
 

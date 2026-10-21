@@ -20,7 +20,7 @@ acl: []
 frequency: C
 frequency_evidence: recent 0・前提として届くページなし・古い ABC 2 問
 sections:
-  - {title: 'E[X^2] と E[X]^2 の違い', anchor: difference}
+  - {title: 2 乗の期待値と期待値の 2 乗の違い, anchor: difference}
   - {title: ペアに分ける（i = j の項を忘れない）, anchor: pairs}
   - {title: (x + 1)^2 = x^2 + 2x + 1 で 3 つの量を同時に運ぶ, anchor: carry-three}
   - {title: 分散と二乗和の関係, anchor: variance}

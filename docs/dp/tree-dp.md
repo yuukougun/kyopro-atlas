@@ -10,7 +10,7 @@ level: 水
 kind: [DP, 木]
 prerequisites: [dp-basics, tree-traversal]
 related: [rerooting, tree-dp-square, small-to-large#subtree-merge, tree-diameter, tree-centroid, binary-search-answer#dp-check, cpp-environment#stack-depth, static-top-tree]
-summary: 根を決めると各頂点の部分木は互いに交わらない小問題になるので、部分木ごとの値を子の値から帰りがけ順に求める。頂点自身の選択（白黒・選ぶか）を状態に足すのが基本形である。
+summary: 根を決めると同じ頂点の子の部分木どうしは交わらない小問題に分かれるので、部分木ごとの値を子の値から帰りがけ順に求める。頂点自身の選択（白黒・選ぶか）を状態に足すのが基本形である。
 complexity: 子の値をまとめる計算が子の数に比例すれば全体 O(N)。子をソートする型は O(N log N)、map をマージする型は O(N log^2 N)
 signs:
   - {type: phrase, text: 木の各頂点を塗る・選ぶ（隣り合う頂点に条件がある）}
@@ -30,7 +30,6 @@ sections:
   - {title: 子ごとの「得」を大きい順に取る, anchor: greedy-children, level: 青}
   - {title: 二分探索と組み合わせて判定にする, anchor: with-binary-search, level: 黄}
   - {title: 部分木の情報をデータ構造で持ってマージする（マージテク）, anchor: tree-dp-merge, level: 黄}
-  - {title: 落とし穴：再帰の深さ・親への逆流・根の選び方, anchor: pitfalls}
 stage: draft
 updated: 2026-10-21
 ---
@@ -219,7 +218,7 @@ $\mathrm{dp}[v]$ が数ではなく「部分木に含まれる色ごとの個数
 
 C++ では、子の map を `swap` で親に引き継ぐと、大きい方をコピーせずに済む。`map` を値で返すと、戻り値のムーブで済むので、関数の外でコピーしなければ追加の計算量はかからない。
 
-## 落とし穴：再帰の深さ・親への逆流・根の選び方 {#pitfalls}
+## 落とし穴 {#pitfalls}
 
 - **再帰が深すぎる**：木が一直線（パス状）だと、DFS の再帰は $N$ 段になる。$N = 2 \times 10^5$ 程度で、手元の環境（スタックの上限が 8 MiB のことが多い）では落ちる。ジャッジの上限は環境によるので、手元で落ちるなら提出でも危ないと考える（[環境の設定](../cpp/cpp-environment.md)）。ランダムな木の入力例では起きないので、提出前に一直線の木で試す。心配なら[帰りがけ順に子から集める](#postorder)の BFS 順の逆で書けば、再帰を使わずに済む
 - **親へ逆流する**：無向の隣接リストには親も入っている。DFS では親を引数 `p` で渡し、`c == p` を飛ばす。BFS 順の作り方でも同じである。忘れると親と子を往復し続けるか、親の値を子として掛けてしまう

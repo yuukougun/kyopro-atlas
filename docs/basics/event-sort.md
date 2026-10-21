@@ -20,7 +20,7 @@ signs:
   - {type: constraint, text: 座標は 10^9 まで、区間とクエリは合わせて 2×10^5 個程度}
 acl: []
 frequency: A
-frequency_evidence: recent 2（abc467_e・abc478_d）・前提として 1 ページに届く（直接 1）・古い ABC 5 問
+frequency_evidence: recent 1（abc478_d）・前提として 1 ページに届く（直接 1）・古い ABC 5 問
 sections:
   - {title: イベントの作り方と同じ座標での処理順, anchor: make-events}
   - {title: 集合（set・multiset）を更新しながら走査する, anchor: with-set}

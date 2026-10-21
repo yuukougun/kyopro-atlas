@@ -26,7 +26,6 @@ sections:
   - {title: 平方因子を除いた核で、積が平方数になる組を数える（0 の扱い）, anchor: squarefree-kernel}
   - {title: 巨大な lcm を指数の最大で持つ, anchor: huge-lcm, level: 水}
   - {title: 特定の素数（2 など）の指数だけを比べる, anchor: single-prime, level: 水}
-  - {title: XOR 基底・集合のハッシュ・半分全列挙へのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---
@@ -152,7 +151,7 @@ lcm を 2 数ずつ $\operatorname{lcm}(x, y) = x / \gcd(x, y) \times y$ で求�
 
 **組の数え方の取り違え**。$i < j$ の組か、順序付きの組 $(i, j)$ か、$i = j$ を含むかで答えが変わる。核ごとの個数 $c$ から、$i < j$ なら $\binom{c}{2}$、$i = j$ を含む順序付きなら $c^2$ を足す。
 
-## XOR 基底・集合のハッシュ・半分全列挙へのつながり {#next-steps}
+## 上位の手法へのつながり {#next-steps}
 
 指数の列を偶奇だけ残すと、各数は「奇数の指数をもつ素数の集合」になる。積は集合の対称差（偶奇の足し算）に対応するので、上位の手法につながる。
 

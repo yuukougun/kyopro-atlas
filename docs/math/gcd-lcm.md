@@ -10,12 +10,12 @@ level: 基礎
 kind: [整数論]
 prerequisites: [integer-division]
 related: [gcd-properties, ext-gcd, prime-exponent-vector, geometry-precision#line-normalization, prefix-sum, stern-brocot]
-summary: gcd(a, b) = gcd(b, a mod b) を繰り返して最大公約数を O(log min(a, b)) で求め、lcm は a / gcd × b で求める。1つ除いた gcd を累積 gcd で求め、分数を既約にして比べる。
+summary: gcd(a, b) = gcd(b, a mod b) を繰り返して最大公約数を O(log min(a, b)) で求め、lcm は a / gcd × b で求める。1 つ除いた gcd を累積 gcd で求め、分数を既約にして比べる。
 complexity: gcd・lcm 1 回は O(log min(a, b))、N 個の gcd・lcm と 1 つ除いた gcd の全体は O(N log V)（V は値の上限）
 signs:
   - {type: phrase, text: 全員が同時に・周期がそろう最初の時刻（lcm）}
-  - {type: phrase, text: 等間隔に移動して全ての点を訪れられる最大の幅（gcd）}
-  - {type: phrase, text: 1つだけ書き換え（取り除い）たときの gcd の最大}
+  - {type: phrase, text: 等間隔に移動してすべての点を訪れられる最大の幅（gcd）}
+  - {type: phrase, text: 1 つだけ書き換え（取り除い）たときの gcd の最大}
   - {type: phrase, text: 分数や傾きが等しいものを同じものとして数える}
 acl: []
 verify: []
@@ -25,9 +25,8 @@ sections:
   - {title: 互除法の正しさ（公約数の集合が変わらない）と回数の上限（隣り合うフィボナッチ数）, anchor: euclid}
   - {title: '複数の数の gcd・lcm と gcd(0, a) = a', anchor: many-numbers}
   - {title: lcm のオーバーフロー（割ってから掛ける）, anchor: lcm-overflow}
-  - {title: 左右からの累積 gcd（1つ除いた gcd）, anchor: prefix-suffix-gcd}
+  - {title: 左右からの累積 gcd（1 つ除いた gcd）, anchor: prefix-suffix-gcd}
   - {title: 分数・傾きを既約にして map のキーにする, anchor: reduce-fraction, level: 水}
-  - {title: 拡張ユークリッド・GCD の性質・素因数の指数へのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---
@@ -110,7 +109,7 @@ $\operatorname{lcm}(a, b) = ab / \gcd(a, b)$ だが、この順で計算する�
 
 答えを「lcm を 998244353 で割った余り」で出す問題では、余りを取った値どうしで gcd を取り直せないので、割ってから掛ける方法は使えない。素因数ごとに指数の最大を取る（[素因数の指数で考える](../math/prime-exponent-vector.md)）。
 
-## 左右からの累積 gcd（1つ除いた gcd） {#prefix-suffix-gcd}
+## 左右からの累積 gcd（1 つ除いた gcd） {#prefix-suffix-gcd}
 
 「$A_i$ を 1 つ除いた残りの gcd」を各 $i$ で求めるには、左からと右からの累積 gcd を前計算する。gcd には引き算に当たる逆の操作がないので、累積和のように全体から $A_i$ の分を取り除くことはできない。添字は 0-indexed で $a_i = A_{i+1}$ とし、
 
@@ -157,7 +156,7 @@ $$
 
 **lcm の型と順序**。`a * b / gcd(a, b)` は途中であふれる（[lcm のオーバーフロー](#lcm-overflow)）。`std::lcm` は `int` どうしなら `int` で返すので、片方を `long long` にする。古い解説の `__gcd` は型をそろえないと通らない（[gcd・lcm の関数](../cpp/cpp-math-functions.md#gcd-lcm)）。
 
-## 拡張ユークリッド・GCD の性質・素因数の指数へのつながり {#next-steps}
+## 上位の手法へのつながり {#next-steps}
 
 互除法と gcd は、整数論の多くの手法の入口である。
 

@@ -21,7 +21,7 @@ frequency: B
 frequency_evidence: recent 0・前提として届くページなし・古い ABC 7 問
 sections:
   - {title: k を一番外のループにする理由, anchor: k-outer}
-  - {title: '初期化（d[i][i] = 0・多重辺・INF のあふれ）と負閉路の判定', anchor: init}
+  - {title: 初期化（自分への距離は 0・多重辺・INF のあふれ）と負閉路の判定, anchor: init}
   - {title: 辺の追加を O(N^2) で反映する（削除は逆順の追加に）, anchor: add-edge}
   - {title: 距離表を作ってから順列全探索・bitDP, anchor: with-enumeration}
   - {title: 距離以外の値を同じ形で求める（到達可能性・ボトルネック・2 つの基準）, anchor: beyond-distance}
@@ -95,7 +95,7 @@ $d[0][1] = 3$ は 2 つの頂点 $3$ と $2$ を経由する経路の長さで�
 !!! tip "経路を復元するには"
     $\mathrm{nxt}[i][j]$（$i$ から $j$ への最短路で $i$ の次に通る頂点）を一緒に持つ。辺 $(i, j)$ があれば $\mathrm{nxt}[i][j] = j$ で始め、$d[i][j]$ を $d[i][k] + d[k][j]$ で更新したときは $\mathrm{nxt}[i][j] \leftarrow \mathrm{nxt}[i][k]$ とする。$i$ から $\mathrm{nxt}$ をたどれば $j$ に着く。
 
-## 初期化（d[i][i] = 0・多重辺・INF のあふれ）と負閉路の判定 {#init}
+## 初期化（自分への距離は 0・多重辺・INF のあふれ）と負閉路の判定 {#init}
 
 ワーシャルフロイド法の 3 重ループは短いので、バグはほとんど初期化と INF の扱いで起きる。次のコードは、有向辺を読んで表を作り、負閉路を判定するまでである。
 

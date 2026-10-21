@@ -24,7 +24,6 @@ sections:
   - {title: 下側の包絡線と不要な直線（傾きもクエリも単調なら deque）, anchor: lower-envelope}
   - {title: クエリが単調でないとき（二分探索）, anchor: non-monotone-queries}
   - {title: Li Chao Tree（区間の真ん中で勝つ直線を残す）, anchor: li-chao-tree}
-  - {title: 落とし穴：交点の比較は掛け算で（__int128）・最小と最大の取り違え・同じ傾き, anchor: pitfalls}
   - {title: ライブラリでの検証（Library Checker の line_add_get_min・segment_add_get_min）, anchor: verify}
 stage: stub
 updated: 2026-10-21

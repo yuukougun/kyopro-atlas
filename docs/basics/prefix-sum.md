@@ -21,11 +21,10 @@ acl: []
 frequency: A
 frequency_evidence: recent 11（abc452_e・abc468_e・abc469_e・abc472_f・abc473_f・abc474_eほか）・前提として 51 ページに届く（直接 13）・古い ABC 4 問
 sections:
-  - {title: '半開区間と S[0] = 0', anchor: half-open}
+  - {title: 半開区間と、先頭に 0 を置く約束, anchor: half-open}
   - {title: 左右からの累積（1 つ除いた gcd・max）, anchor: left-right}
   - {title: 円環は 2 周分に伸ばす, anchor: circular}
   - {title: 累積和の上で二分探索・尺取り, anchor: with-binary-search}
-  - {title: あふれと添字のずれ, anchor: pitfalls}
   - {title: 値が更新されるなら BIT、静的な区間 min なら Sparse Table, anchor: next-tools}
 stage: draft
 updated: 2026-10-21
@@ -47,7 +46,7 @@ updated: 2026-10-21
 
 累積和は、列の先頭から順に足した値を前計算しておき、区間の和を 2 つの値の引き算で答える方法である。$Q$ 個の区間の和を毎回足し直すと $O(NQ)$ かかるが、累積和なら前計算 $O(N)$ と 1 回 $O(1)$ の合計 $O(N + Q)$ で済む。考え方は和に限らず、XOR・gcd・max など、前から順に積み上げられる演算に広がる。
 
-## 半開区間と S[0] = 0 {#half-open}
+## 半開区間と、先頭に 0 を置く約束 {#half-open}
 
 累積和の添字は、$S_k$ を「先頭 $k$ 個の和」と決めると迷わない。実装では列を 0-indexed で $a_0, \dots, a_{N-1}$ と持ち、次のように定める。
 
@@ -150,7 +149,7 @@ for l in 0 .. N-1:
     ??? success "答え"
         $S = (0, 3, 0, 1)$ で単調でない。`lower_bound` は中央の $S_2 = 0 < 3$ を見て、$r \le 2$ をまとめて捨てる。続けて $S_3 = 1 < 3$ も不可なので「見つからない」と返す。実際には $r = 1$（区間 $[0, 1)$ の和 3）が条件を満たす。`lower_bound` はソートされた列を前提にするので、負の値があるときは単調性に頼らず、区間の数え方を変える。
 
-## あふれと添字のずれ {#pitfalls}
+## 落とし穴 {#pitfalls}
 
 累積和のバグの多くは、型のあふれと添字の 1 つのずれである。
 

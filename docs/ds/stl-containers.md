@@ -22,10 +22,7 @@ frequency: A
 frequency_evidence: recent 0・前提として 72 ページに届く（直接 5）・古い ABC 2 問
 sections:
   - {title: 操作とコンテナの計算量の早見表, anchor: complexity-table}
-  - {title: 選び方（何を速くしたいか）, anchor: choosing}
   - {title: map で数えながら走査する（→ 累積和と連想配列で区間を数える）, anchor: counting-map}
-  - {title: '落とし穴（multiset の erase(x)・set に std::lower_bound・map の []・空の size() − 1・無効化・ハッシュ）', anchor: pitfalls}
-  - {title: 順序付き集合・ヒープの応用へのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---
@@ -65,7 +62,7 @@ set・map は平衡二分探索木（libstdc++ では赤黒木）で、木の高
 
 表にない `list`（位置が分かっていれば挿入・削除 $O(1)$）は競技プログラミングではほとんど使わない。前後の要素をつなぎ替える操作は、配列で前後の添字を持つ方が速く書ける（[配列で作る連結リスト](../ds/linked-list.md)）。
 
-## 選び方（何を速くしたいか） {#choosing}
+## 使い分け {#comparison}
 
 選ぶ手順は「クエリで繰り返す操作を全部書き出す → そのすべてが速いコンテナを表から探す」である。よく出る組み合わせは次のとおりである。
 
@@ -105,7 +102,7 @@ set・map は平衡二分探索木（libstdc++ では赤黒木）で、木の高
 
 区間の和の条件も、累積和 $S$ を使うと「$S_l = S_r - K$」のように $l$ だけの式と $r$ だけの式に分かれるので、同じ走査で数えられる。$S_0$ を最初に記録しておくことや余りの扱いなど、区間に固有の注意は[累積和と連想配列で区間を数える](../basics/prefix-sum-counting.md#equal-k)にまとめてある。
 
-## 落とし穴（multiset の erase(x)・set に std::lower_bound・map の []・空の size() − 1・無効化・ハッシュ） {#pitfalls}
+## 落とし穴 {#pitfalls}
 
 **multiset の `erase(x)` は等しい要素を全部消す**。`ms.erase(5)` は 5 を 1 個ではなく全部消し、消した個数を返す。1 個だけ消すなら、`find` で得たイテレータを渡す。`find` が `end()` を返したまま `erase` すると未定義動作なので、先に確かめる（[1 個だけ消す書き方](../cpp/cpp-container-idioms.md#multiset-erase-one)）。また `count(x)` は $x$ の個数に比例する時間がかかる。同じ値が大量にあるときに毎回呼ぶと遅いので、有無だけなら `contains(x)`（C++20）を使う。
 
@@ -131,7 +128,7 @@ set・map は平衡二分探索木（libstdc++ では赤黒木）で、木の高
     ??? success "答え"
         1 回目の `ms.erase(3)` で 3 が 4 個とも消え、2 回目は何も消さずに 0 を返す。1 個ずつ消すには `auto it = ms.find(3); if (it != ms.end()) ms.erase(it);` を 2 回行う。
 
-## 順序付き集合・ヒープの応用へのつながり {#next-steps}
+## 上位の手法へのつながり {#next-steps}
 
 この使い分けは、上位の手法の部品になる。
 

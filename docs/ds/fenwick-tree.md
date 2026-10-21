@@ -23,13 +23,12 @@ frequency: A
 frequency_evidence: recent 2（abc452_f・abc467_g）・前提として 13 ページに届く（直接 5）・古い ABC 6 問
 sections:
   - {title: 何ができるか（一点加算・接頭辞の和と逆元）, anchor: what-it-does}
-  - {title: '保つ性質（t[i] は区間 (i − lowbit(i), i] の和）', anchor: invariants}
+  - {title: 保つ性質（添字 i は、i で終わる長さ lowbit(i) の区間の和を持つ）, anchor: invariants}
   - {title: 各操作の手順（add は上へ、sum は下へ。線形時間の構築）, anchor: operations}
   - {title: 境界（添字の変換・i = 0・符号なし整数）, anchor: boundaries}
   - {title: 値を添字にして数える（座標圧縮と組む）, anchor: count-by-value}
   - {title: 変種（差分の BIT・BIT 2 本・2 次元 BIT・接頭辞の max）, anchor: variants}
   - {title: BIT 上の二分探索, anchor: binary-search}
-  - {title: 使い分け, anchor: choosing}
 stage: draft
 updated: 2026-10-21
 ---
@@ -68,7 +67,7 @@ BIT は、長さ $N$ の列 $a_0, \dots, a_{N-1}$（0-indexed）に対して次�
 
 区間の min・max や、結合法則だけを満たす一般の演算は[セグメント木](../ds/segment-tree.md)を使う。BIT で max を扱えるのは、値が増える更新と接頭辞の質問だけのときである（[変種](#variants)）。
 
-## 保つ性質（t[i] は区間 (i − lowbit(i), i] の和） {#invariants}
+## 保つ性質（添字 i は、i で終わる長さ lowbit(i) の区間の和を持つ） {#invariants}
 
 BIT の中身は、1-indexed の配列 $t[1], \dots, t[N]$ である。この節と次の節では、列も 1-indexed で $a_1, \dots, a_N$ と書く。$\mathrm{lowbit}(i)$ を「$i$ の 2 進数で最下位の 1 だけを残した値」とする（C++ では `i & -i`。[popcount・最下位ビット](../basics/bit-operations.md#popcount)）。BIT は次の性質を保つ。
 
@@ -309,7 +308,7 @@ $\max(A_j - A_i, 0)$ は、$A_i \le A_j$ の組だけが $A_j - A_i$ を足し�
 ??? question "確認問題：自作の BIT で add(0, x) を内部の添字 0 のまま呼ぶと何が起きるか"
     $\mathrm{lowbit}(0) = 0$ なので、$i \leftarrow i + \mathrm{lowbit}(i)$ で $i$ が 0 のまま変わらず、ループが止まらない。外部を 0-indexed にするなら、add の最初に 1 を足して内部の添字に変換する。
 
-## 使い分け {#choosing}
+## 使い分け {#comparison}
 
 区間の和を扱う道具は、更新の種類で選ぶ。
 

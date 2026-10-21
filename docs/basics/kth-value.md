@@ -24,7 +24,6 @@ sections:
   - {title: なぜ count(x) ≥ K となる最小の x が答えか, anchor: why-count}
   - {title: 数え方の型（ソート＋二分探索・尺取り、符号で場合分け、包除）, anchor: counting-patterns}
   - {title: 上位 M 個の和（同じ値の分の調整）, anchor: top-m-sum}
-  - {title: 同じ値・不等号・0 始まりと 1 始まりの落とし穴, anchor: pitfalls}
 stage: stub
 updated: 2026-10-21
 ---

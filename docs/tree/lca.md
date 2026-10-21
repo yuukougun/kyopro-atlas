@@ -26,7 +26,6 @@ sections:
   - {title: K 個上の祖先（K を 2 進数に分けて跳ぶ）, anchor: kth-ancestor}
   - {title: パス上の最大値・和を表と一緒に持つ, anchor: path-aggregate}
   - {title: 条件を満たす最も遠い祖先, anchor: farthest-ancestor}
-  - {title: LCA の求め方の比較（ダブリング・オイラーツアーと Sparse Table・HL 分解・オフライン）, anchor: comparison}
 stage: draft
 updated: 2026-10-21
 ---
@@ -239,7 +238,7 @@ K 個上ごとに表を引き直して二分探索すると 1 回 $O(\log^2 N)$ 
 ??? question "確認問題：頂点の値の和で、S[u] + S[v] − 2S[l] に a_l を足し戻すのはなぜか"
     $S[v]$ は根から $v$ までの頂点の値の和で、$l$ 自身の値を含む。$S[u] - S[l]$ と $S[v] - S[l]$ はどちらも $l$ を含まないので、パス上でただ 1 つ両側に共通する $l$ の値が抜ける。辺の値を子に置く場合は、$l$ に置いた値は $l$ と親を結ぶ辺のものでパスに含まれないので、足し戻さない。
 
-## LCA の求め方の比較（ダブリング・オイラーツアーと Sparse Table・HL 分解・オフライン） {#comparison}
+## 使い分け {#comparison}
 
 LCA の求め方は、前処理の重さ・1 回の重さ・一緒に手に入るもので選ぶ。
 

@@ -29,7 +29,6 @@ sections:
   - {title: 見えるビルの数・水位のシミュレーション, anchor: visible}
   - {title: スライド最小値（単調 deque）, anchor: sliding-window-minimum}
   - {title: DP の遷移の高速化に使う, anchor: dp-transition}
-  - {title: 使い分け, anchor: choosing}
   - {title: Cartesian tree（最大値で区間を割る再帰を O(N) で作る）, anchor: cartesian-tree, level: 黄}
   - {title: SWAG：スタック 2 本で作る総積つきキュー, anchor: swag, level: 発展}
 stage: draft
@@ -278,7 +277,7 @@ for i = 1, 2, …, N:
 ??? question "確認問題：スライド最小値で、deque の末尾から A_j ≥ A_i の添字を捨ててよいのはなぜか"
     $j < i$ なので、$j$ は $i$ より先に窓から出る。$j$ が窓にいる間は $i$ も窓にいて、$A_i \le A_j$ である。よって $j$ が窓の最小値として必要になる場面はない（同じ値なら $i$ で代わりがきく）。
 
-## 使い分け {#choosing}
+## 使い分け {#comparison}
 
 単調スタック・スライド最小値と、ほかの道具の使い分けは次のとおりである。
 

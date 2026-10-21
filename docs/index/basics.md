@@ -27,7 +27,7 @@ search:
     - `complexity-estimation#constraint-table` 制約 → 許される計算量 → 疑う手法の表：https://yuukougun.github.io/kyopro-atlas/basics/complexity-estimation/#constraint-table
     - `complexity-estimation#how-to-estimate` 見積もりの手順（ループの回数・log の数・定数倍・メモリ）：https://yuukougun.github.io/kyopro-atlas/basics/complexity-estimation/#how-to-estimate
     - `complexity-estimation#amortized` ならし計算量（ポインタが戻らない・各要素が一度入って一度出る）：https://yuukougun.github.io/kyopro-atlas/basics/complexity-estimation/#amortized
-    - `complexity-estimation#harmonic-series` 調和級数の計算量（倍数の列挙。詳しくは整数論の調和級数のページ）：https://yuukougun.github.io/kyopro-atlas/basics/complexity-estimation/#harmonic-series
+    - `complexity-estimation#harmonic-series` 調和級数の計算量（倍数の列挙）：https://yuukougun.github.io/kyopro-atlas/basics/complexity-estimation/#harmonic-series
     - `complexity-estimation#count-candidates` 候補の数で見積もる（階乗・ベル数・約数の個数の最大）：https://yuukougun.github.io/kyopro-atlas/basics/complexity-estimation/#count-candidates
     - `complexity-estimation#constant-factor` 定数倍（配列と set・map の差・メモリの連続性・bitset）（水）：https://yuukougun.github.io/kyopro-atlas/basics/complexity-estimation/#constant-factor
     - `complexity-estimation#multiple-testcases` 複数テストケースは合計（ΣN）で見積もる：https://yuukougun.github.io/kyopro-atlas/basics/complexity-estimation/#multiple-testcases
@@ -48,8 +48,6 @@ search:
     - `bit-operations#xor-properties` XOR の性質（打ち消し・a + b との関係・0〜n の XOR）：https://yuukougun.github.io/kyopro-atlas/basics/bit-operations/#xor-properties
     - `bit-operations#popcount` popcount・最下位ビット：https://yuukougun.github.io/kyopro-atlas/basics/bit-operations/#popcount
     - `bit-operations#submask` 部分集合の部分集合の列挙（3^N）：https://yuukougun.github.io/kyopro-atlas/basics/bit-operations/#submask
-    - `bit-operations#pitfalls` 落とし穴（1 << 31 のあふれ・符号付きの右シフト）：https://yuukougun.github.io/kyopro-atlas/basics/bit-operations/#pitfalls
-    - `bit-operations#next-steps` 上位の手法とのつながり：https://yuukougun.github.io/kyopro-atlas/basics/bit-operations/#next-steps
 
 ## bit ごとに独立に考える（bitwise-independence） {#bitwise-independence}
 
@@ -90,7 +88,6 @@ search:
     - `brute-force#small-candidates` 候補が少ないことに気づく（答えの側・小さい次元・約数の個数・log 回の収束）：https://yuukougun.github.io/kyopro-atlas/basics/brute-force/#small-candidates
     - `brute-force#half-enumeration` 片側を全探索して残りを速く求める（貪欲・二分探索・累積和）：https://yuukougun.github.io/kyopro-atlas/basics/brute-force/#half-enumeration
     - `brute-force#move-board` 盤面を動かして全部試す（回転・平行移動）（水）：https://yuukougun.github.io/kyopro-atlas/basics/brute-force/#move-board
-    - `brute-force#next-steps` 上位の手法へのつながり（残りを速くする・重複をまとめる）：https://yuukougun.github.io/kyopro-atlas/basics/brute-force/#next-steps
 
 ## bit 全探索と順列全探索（bit-full-search） {#bit-full-search}
 
@@ -111,7 +108,6 @@ search:
     - `bit-full-search#assume-and-check` 決めてから整合性を確かめる型：https://yuukougun.github.io/kyopro-atlas/basics/bit-full-search/#assume-and-check
     - `bit-full-search#half-greedy` 片側を bit で決めて残りは貪欲（水）：https://yuukougun.github.io/kyopro-atlas/basics/bit-full-search/#half-greedy
     - `bit-full-search#permutations` 順列全探索と next_permutation（昇順から始める・重複要素）：https://yuukougun.github.io/kyopro-atlas/basics/bit-full-search/#permutations
-    - `bit-full-search#pitfalls` 落とし穴（1 << 31 のあふれ・== と & の優先順位）：https://yuukougun.github.io/kyopro-atlas/basics/bit-full-search/#pitfalls
 
 ## 再帰による全列挙（recursive-enumeration） {#recursive-enumeration}
 
@@ -133,7 +129,6 @@ search:
     - `recursive-enumeration#tiling` 敷き詰め型（左上の空きマスから置く）：https://yuukougun.github.io/kyopro-atlas/basics/recursive-enumeration/#tiling
     - `recursive-enumeration#pruning` 枝刈りと計算量の見積もり（葉の数 × 1 本あたり）：https://yuukougun.github.io/kyopro-atlas/basics/recursive-enumeration/#pruning
     - `recursive-enumeration#backtrack` 状態を戻し忘れない（バックトラック）：https://yuukougun.github.io/kyopro-atlas/basics/recursive-enumeration/#backtrack
-    - `recursive-enumeration#next-steps` 上位の手法へのつながり：https://yuukougun.github.io/kyopro-atlas/basics/recursive-enumeration/#next-steps
 
 ## ソートで考える（sorting-techniques） {#sorting-techniques}
 
@@ -151,7 +146,6 @@ search:
     - `sorting-techniques#matching-two-lists` 2 つの列を 1 対 1 に対応させる（両方ソートして順に組む）：https://yuukougun.github.io/kyopro-atlas/basics/sorting-techniques/#matching-two-lists
     - `sorting-techniques#strict-weak-ordering` 比較関数の要件（狭義の弱順序）：https://yuukougun.github.io/kyopro-atlas/basics/sorting-techniques/#strict-weak-ordering
     - `sorting-techniques#ratio-and-ties` 比率は掛け算で比べる・同点の順序（stable_sort）：https://yuukougun.github.io/kyopro-atlas/basics/sorting-techniques/#ratio-and-ties
-    - `sorting-techniques#next-steps` 二分探索・尺取り法・交換論法へのつながり：https://yuukougun.github.io/kyopro-atlas/basics/sorting-techniques/#next-steps
 
 ## 二分探索（binary-search） {#binary-search}
 
@@ -190,7 +184,6 @@ search:
     - `binary-search-answer#greedy-check` 判定を貪欲・探索で作る：https://yuukougun.github.io/kyopro-atlas/basics/binary-search-answer/#greedy-check
     - `binary-search-answer#dp-check` 判定を DP で作る（決め打ちごとに初期化し直す）（青）：https://yuukougun.github.io/kyopro-atlas/basics/binary-search-answer/#dp-check
     - `binary-search-answer#real-number` 実数の二分探索（反復回数を固定する）（水）：https://yuukougun.github.io/kyopro-atlas/basics/binary-search-answer/#real-number
-    - `binary-search-answer#next-steps` K 番目・平均・中央値・並列二分探索へのつながり：https://yuukougun.github.io/kyopro-atlas/basics/binary-search-answer/#next-steps
 
 ## 座標圧縮（coordinate-compression） {#coordinate-compression}
 
@@ -241,11 +234,10 @@ search:
     - 言い回し：円環上の区間
     - 制約：Q ≤ 2×10^5 個の区間和のクエリで、値の更新がない
 - 節：
-    - `prefix-sum#half-open` 半開区間と S[0] = 0：https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum/#half-open
+    - `prefix-sum#half-open` 半開区間と、先頭に 0 を置く約束：https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum/#half-open
     - `prefix-sum#left-right` 左右からの累積（1 つ除いた gcd・max）：https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum/#left-right
     - `prefix-sum#circular` 円環は 2 周分に伸ばす：https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum/#circular
     - `prefix-sum#with-binary-search` 累積和の上で二分探索・尺取り：https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum/#with-binary-search
-    - `prefix-sum#pitfalls` あふれと添字のずれ：https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum/#pitfalls
     - `prefix-sum#next-tools` 値が更新されるなら BIT、静的な区間 min なら Sparse Table：https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum/#next-tools
 
 ## 累積和と連想配列で区間を数える（prefix-sum-counting） {#prefix-sum-counting}
@@ -267,7 +259,6 @@ search:
     - `prefix-sum-counting#circular` 円環上の組を数える：https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum-counting/#circular
     - `prefix-sum-counting#length-limited` 長さの制限付き（窓の中だけで数える）（青）：https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum-counting/#length-limited
     - `prefix-sum-counting#vs-two-pointers` 尺取りとの使い分け（負の値）：https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum-counting/#vs-two-pointers
-    - `prefix-sum-counting#next-steps` XOR・不等式・最長の区間へのつながり：https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum-counting/#next-steps
 
 ## 2 次元累積和（prefix-sum-2d） {#prefix-sum-2d}
 
@@ -428,7 +419,6 @@ search:
     - `kth-value#why-count` なぜ count(x) ≥ K となる最小の x が答えか：https://yuukougun.github.io/kyopro-atlas/basics/kth-value/#why-count
     - `kth-value#counting-patterns` 数え方の型（ソート＋二分探索・尺取り、符号で場合分け、包除）：https://yuukougun.github.io/kyopro-atlas/basics/kth-value/#counting-patterns
     - `kth-value#top-m-sum` 上位 M 個の和（同じ値の分の調整）：https://yuukougun.github.io/kyopro-atlas/basics/kth-value/#top-m-sum
-    - `kth-value#pitfalls` 同じ値・不等号・0 始まりと 1 始まりの落とし穴：https://yuukougun.github.io/kyopro-atlas/basics/kth-value/#pitfalls
 
 ## 三分探索（ternary-search） {#ternary-search}
 
@@ -467,7 +457,6 @@ search:
     - `median-absolute#separate-axes` x と y に分ける：https://yuukougun.github.io/kyopro-atlas/basics/median-absolute/#separate-axes
     - `median-absolute#with-binary-search` 距離の和で判定して二分探索する（青）：https://yuukougun.github.io/kyopro-atlas/basics/median-absolute/#with-binary-search
     - `median-absolute#vs-squares` 二乗和の最小（平均）との違い：https://yuukougun.github.io/kyopro-atlas/basics/median-absolute/#vs-squares
-    - `median-absolute#next-steps` 中央値の更新・slope trick・三分探索へのつながり：https://yuukougun.github.io/kyopro-atlas/basics/median-absolute/#next-steps
 
 ## 貪欲法の考え方と正当性（greedy-basics） {#greedy-basics}
 
@@ -486,7 +475,6 @@ search:
     - `greedy-basics#batch-same-values` 同じ値をまとめて処理する：https://yuukougun.github.io/kyopro-atlas/basics/greedy-basics/#batch-same-values
     - `greedy-basics#counterexamples` 反例の探し方（小さいケースの全探索と比べる）：https://yuukougun.github.io/kyopro-atlas/basics/greedy-basics/#counterexamples
     - `greedy-basics#when-greedy-fails` 貪欲が失敗する例と DP への切り替え：https://yuukougun.github.io/kyopro-atlas/basics/greedy-basics/#when-greedy-fails
-    - `greedy-basics#next-steps` 交換論法・優先度付きキュー・区間スケジューリングへのつながり：https://yuukougun.github.io/kyopro-atlas/basics/greedy-basics/#next-steps
 
 ## 区間スケジューリング・区間の串刺し（interval-scheduling） {#interval-scheduling}
 
@@ -602,7 +590,6 @@ search:
     - `doubling#binary-search-on-doubling` ダブリング上の二分探索（条件を満たす最大の回数）：https://yuukougun.github.io/kyopro-atlas/basics/doubling/#binary-search-on-doubling
     - `doubling#permutation-power` 置換の K 回合成：https://yuukougun.github.io/kyopro-atlas/basics/doubling/#permutation-power
     - `doubling#memory` 段数とメモリの見積もり：https://yuukougun.github.io/kyopro-atlas/basics/doubling/#memory
-    - `doubling#comparison` 周期の検出・行列累乗・LCA との使い分け：https://yuukougun.github.io/kyopro-atlas/basics/doubling/#comparison
 
 ## 再帰的な構造（recursion-structure） {#recursion-structure}
 

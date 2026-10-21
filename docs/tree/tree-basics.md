@@ -10,7 +10,7 @@ level: 基礎
 kind: [木]
 prerequisites: [dfs]
 related: [tree-traversal, namori-graph, functional-graph, tree-degree, connected-components, tree-bipartite]
-summary: 連結で辺が N−1 本・閉路がない・2 点間のパスがちょうど 1 本、の 3 つは同値で、辺を 1 本除くと 2 つに分かれ、1 本足すと閉路が 1 つできる。根の決め方と、辺の値を子の頂点に寄せる小技が多くの問題の出発点になる。
+summary: 連結で閉路がない・連結で辺が N−1 本・閉路がなく辺が N−1 本・どの 2 点間もパスが 1 本、の 4 つは同値で、辺を 1 本除くと 2 つに分かれ、1 本足すと閉路ができる。根の決め方と辺の値を子に寄せる小技が出発点になる。
 complexity: 根の決定・親・部分木サイズはどれも O(N)（隣接リストの長さの和が 2(N−1)）
 signs:
   - {type: phrase, text: 辺を 1 本取り除く・1 本足す・閉路をなくして森にする}
@@ -20,12 +20,11 @@ frequency: A
 frequency_evidence: recent 0・前提として 28 ページに届く（直接 3）・古い ABC 4 問
 sections:
   - {title: 木の同じ意味の定義と、そこから使える事実の一覧, anchor: definitions}
-  - {title: 入力の形（辺のリスト・親の配列・p_i < i）と根の決め方, anchor: input-forms}
+  - {title: 入力の形（辺のリスト・親の配列・親の番号が自分より小さい形）と根の決め方, anchor: input-forms}
   - {title: 辺を 1 本取り除くと 2 つの成分、1 本足すと閉路が 1 つ, anchor: remove-add-edge}
   - {title: 森の連結成分の数 = 頂点数 − 辺数, anchor: forest}
   - {title: 辺の値を子の頂点に寄せる, anchor: edge-to-child}
   - {title: 形の両極端（パスと星）でテストする, anchor: extremes}
-  - {title: 上位の手法とのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---
@@ -86,7 +85,7 @@ $$
     ??? success "答え"
         $(3, 1, 1, 1)$ はなりうる。和が $6 = 2 \times 4 - 2$ で、中心 1 つに葉 3 つの星がこの次数列を持つ。$(2, 2, 2, 2)$ は和が $8$ で $6$ にならないのでなりえない。辺が 4 本あり、4 頂点の閉路になる。
 
-## 入力の形（辺のリスト・親の配列・p_i < i）と根の決め方 {#input-forms}
+## 入力の形（辺のリスト・親の配列・親の番号が自分より小さい形）と根の決め方 {#input-forms}
 
 木の入力は主に 3 つの形で来る。どれも隣接リストに直せば同じに扱える。
 
@@ -169,7 +168,7 @@ $u$ と $v$ がもともと隣り合っていると、足した辺は多重辺�
 
 **辺の値を lca に持たせたまま集約する**。[辺の値を子の頂点に寄せる](#edge-to-child)では、パスの集約から lca の頂点を除く。頂点の値の問題と同じ書き方をそのまま使うと、パスの外の辺を 1 本足してしまう。
 
-## 上位の手法とのつながり {#next-steps}
+## 上位の手法へのつながり {#next-steps}
 
 - **走査と集約**：親・深さ・部分木サイズ、行きがけ順と帰りがけ順は[根付き木と走査順](../tree/tree-traversal.md)、部分木ごとの値を子から集める一般の形は[木 DP](../dp/tree-dp.md)
 - **辺ごとの寄与**：辺を取り除いた両側の大きさの積で、全ペアについての和を数える（[辺で切って数える](../tree/tree-edge-contribution.md)）

@@ -27,7 +27,6 @@ sections:
   - {title: 区間を 2 次元の点と見る（区間に含まれる区間の数）, anchor: intervals-as-points}
   - {title: 固定幅の窓を動かして区間加算・区間最大（遅延セグメント木）, anchor: window-max}
   - {title: 同じ座標での処理順・閉区間と半開区間・座標圧縮, anchor: boundaries}
-  - {title: 使い分け（値が変わらず座標が小さいなら 2 次元累積和、オンライン強制ならマージソート木・永続セグメント木、点の追加もあるなら CDQ 分割統治）, anchor: choosing}
   - {title: 長方形の和集合の面積（区間加算・最小値とその個数）, anchor: union-area, level: 黄}
 stage: stub
 updated: 2026-10-21

@@ -39,7 +39,7 @@ updated: 2026-10-21
 | abc451_e Tree Distance | E | 1215 | [最小全域木](../graph/minimum-spanning-tree.md#kruskal-prim) › クラスカル法とプリム法（密なら O(N^2) のプリム法）、[Union-Find](../ds/union-find.md)、[木の上の距離](../tree/tree-distance.md#from-one) › 1 点からの距離（ダイクストラはいらない）、[木の構築・復元](../tree/tree-construction.md#from-distances) › 距離の情報から作る（最も近い頂点とは辺で結ばれる） |
 | abc451_f Make Bipartite 3 | F | 1540 | [重み付き Union-Find](../ds/weighted-union-find.md#generalization) › 一般化（XOR で偶奇・二部グラフ、頂点を 2 倍にする）、[二部グラフ判定](../graph/bipartite-graph.md#union-find) › Union-Find（頂点を 2 倍にする・偶奇を持つ）で判定する |
 | abc451_g Minimum XOR Walk | G | 2221 | [XOR 基底](../math/xor-basis.md) › グラフのウォークの XOR（全域木の根からの XOR と、閉路の XOR の基底）、[分割統治](../basics/divide-and-conquer.md) |
-| abc452_d No-Subsequence Substring | D | 903 | [部分列の判定と次の出現位置の表](../string/subsequence-matching.md#next-occurrence) › 次の出現位置の表 nxt\[i][c]（後ろから作る・番兵 N） |
+| abc452_d No-Subsequence Substring | D | 903 | [部分列の判定と次の出現位置の表](../string/subsequence-matching.md#next-occurrence) › 次の出現位置の表（後ろから作る・番兵 N） |
 | abc452_e You WILL Like Sigma Problem | E | 1318 | [周期性の検出](../basics/periodicity.md#periodic-patterns) › 盤面・剰余の周期を割り算で数える、[調和級数と倍数の列挙](../math/harmonic-sum.md#mark-multiples) › 値の倍数に印を付ける、[累積和](../basics/prefix-sum.md) |
 | abc452_f Interval Inversion Count | F | 1630 | [尺取り法](../basics/two-pointers.md)、[転倒数](../ds/inversion-number.md#sliding-window) › 窓を伸縮しながら転倒数を増減する（尺取り・期待値と組む）、[BIT（Fenwick Tree）](../ds/fenwick-tree.md) |
 | abc452_g 221 Substring | G | 2255 | [ランレングス圧縮](../basics/run-length-encoding.md#keep-compressed) › ランレングスのまま処理する、[Suffix Automaton と発展の文字列アルゴリズム](../string/suffix-automaton.md) › Suffix Automaton（状態数 2N−1 以下・遷移数 3N−4 以下。文字の追加に強い）、[Suffix Array と LCP 配列](../string/suffix-array.md#distinct-substrings) › 異なる部分文字列の数 = N(N+1)/2 − Σlcp |
@@ -72,7 +72,7 @@ updated: 2026-10-21
 | abc459_f -1, +1 | F | 2163 | [差分列への言い換え](../basics/difference-sequence.md) › 狭義の条件は a_i − i で広義に直してから差分を取る、[言い換えの典型](../thinking/reformulation.md#operations) › 操作の言い換え（区間操作を差分列で・隣接 swap を転倒数で） |
 | abc459_g Golf 2 | G | 3123 | [偶奇に着目する](../thinking/parity.md#checkerboard) › 市松模様の偶奇、[拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md#general-solution) › ax + by = c の解の存在条件と一般解 x = x0 + k·b/g |
 | abc460_d Repeatedly Repainting | D | 1216 | [幅優先探索（BFS）と無重み最短路](../graph/bfs.md#multi-source) › 多始点 BFS（超頂点から距離 0 の辺を張るのと同じ）、[グリッドグラフ](../graph/grid-graph.md#neighbors) › 4 近傍・8 近傍と dx・dy の配列、[偶奇に着目する](../thinking/parity.md#alternating) › 1 歩ごとに偶奇が入れ替わる |
-| abc460_e x + y ≡ x + y | E | 1362 | [桁と mod](../math/digit-and-mod.md#concatenation) › 数の連結：x の後ろに d 桁の y を付けると x·10^d + y、[整数の割り算と余り](../math/integer-division.md#count-multiples) › 区間 [L, R] の K の倍数の個数と、x 以上で m で割って r 余る最小の数、[GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md) |
+| abc460_e x + y ≡ x + y | E | 1362 | [桁と mod](../math/digit-and-mod.md#concatenation) › 数の連結：x の後ろに d 桁の y を付けると x·10^d + y、[整数の割り算と余り](../math/integer-division.md#count-multiples) › 区間の中の K の倍数の個数と、x 以上で m で割って r 余る最小の数、[GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md) |
 | abc460_f Farthest Pair Query | F | 1987 | [木の直径と最遠点](../tree/tree-diameter.md)、[セグメント木に何を載せるか](../ds/segment-tree-monoids.md)、[最小共通祖先（LCA）](../tree/lca.md#distance) › 距離 = dep(u) + dep(v) − 2 dep(lca) |
 | abc460_g Vertex Flip Query | G | 2838 | [HL 分解](../tree/hld.md)、[セグメント木](../ds/segment-tree.md) |
 | abc461_d Count Subgrid Sum = K | D | 914 | [2 次元累積和](../basics/prefix-sum-2d.md#formula) › 前計算の式と長方形の和（4 項の包除）、[尺取り法](../basics/two-pointers.md)、[一部を固定して数える](../thinking/fix-variable.md) |
@@ -104,7 +104,7 @@ updated: 2026-10-21
 | abc467_f Email Scheduling Optimization | F | 2052 | [交換論法と比較関数の設計](../basics/exchange-argument.md)、[セグメント木](../ds/segment-tree.md)、[座標圧縮](../basics/coordinate-compression.md) |
 | abc467_g Many Sweets Problem | G | 2544 | [クエリの先読み](../ds/offline-queries.md)、[マージソート木](../ds/merge-sort-tree.md) › 各段に BIT を持たせる（先読みと組む）、[BIT（Fenwick Tree）](../ds/fenwick-tree.md) |
 | abc468_d Pre-Palindrome | D | 683 | [回文の扱いと Manacher](../string/palindrome.md#expand-center) › 中心から伸ばす O(N^2)（奇数長と偶数長の中心） |
-| abc468_e Sum of Average | E | 1038 | [主客転倒・寄与](../thinking/contribution.md#swap-roles) › 数える対象を入れ替える（表の行と列。式の規則は Σ の変形のページ）、[逆元と mod での割り算](../math/mod-inverse.md#inverse-table) › 逆元表を O(N) で作る（inv[i] = −⌊m/i⌋·inv[m mod i]）と階乗の逆元、[累積和](../basics/prefix-sum.md) |
+| abc468_e Sum of Average | E | 1038 | [主客転倒・寄与](../thinking/contribution.md#swap-roles) › 数える対象を入れ替える（表の行と列。式の規則は Σ の変形のページ）、[逆元と mod での割り算](../math/mod-inverse.md#inverse-table) › 逆元表を O(N) で作る方法と階乗の逆元、[累積和](../basics/prefix-sum.md) |
 | abc468_f Chmax | F | 1693 | [最長増加部分列](../dp/lis.md#binary-search) › 二分探索版（L が単調になる理由・狭義は lower_bound、広義は upper_bound）、[貪欲法の考え方と正当性](../basics/greedy-basics.md) |
 | abc468_g Restricted Permutation | G | 1975 | [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md) |
 | abc469_d The Big Two | D | 1102 | [全探索の設計](../basics/brute-force.md#small-candidates) › 候補が少ないことに気づく（答えの側・小さい次元・約数の個数・log 回の収束） |

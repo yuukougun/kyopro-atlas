@@ -173,6 +173,7 @@ atcoder: null                          # cpp だけ（true / false）
 compilers: [g++-15]          # cpp の版の確認なら [g++-13, g++-15]
 flags: "-std=gnu++23 -O2 -Wall -Wextra"
 expect: run                  # run（実行して出力が一致）／ compile-error ／ warning
+                             # ／ crash（0 以外の終了コードかシグナルで終わる。output があれば出力も比べる）
 cases:
   - {input: "3\n1 2 3\n", output: "6\n"}
 ```

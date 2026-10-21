@@ -25,9 +25,9 @@ frequency_evidence: recent 0・前提として届くページなし・古い ABC
 sections:
   - {title: Z 配列の定義と、P＋区切り＋T によるパターン検索, anchor: pattern-search}
   - {title: なぜ O(N) か：Z-box の内側は値をコピーでき、比較のたびに右端が進む, anchor: linear-time}
-  - {title: 'ACL の z_algorithm（z[0] = n の流儀・vector<int> にして区切りに −1）', anchor: acl}
+  - {title: ACL の z_algorithm（先頭の値が n になる流儀・区切りの −1）, anchor: acl}
   - {title: 巡回シフト：A+A の中で B を探す（回転 N 回を二重に数えない）, anchor: cyclic-shift}
-  - {title: '周期の判定：p が周期 ⇔ z[p] = N − p', anchor: period}
+  - {title: 周期の判定：p が周期であることと Z 配列の値の関係, anchor: period}
   - {title: 反転と連結する：後ろからの一致と回文の接尾辞, anchor: reverse}
   - {title: S＋区切り＋T で各位置から S の接頭辞が何文字続くか（DP の材料）, anchor: prefix-extension, level: 黄}
 stage: draft
@@ -105,7 +105,7 @@ $1 \le i' < i$ の位置のうち、一致区間 $[i', i' + z[i'])$ の右端が
     ??? success "答え"
         $z[i - l] > r - i$ のとき、箱の外の文字まで一致すると決めつけることになり、$z[i]$ が大きすぎる値になりうる。箱の外は接頭辞の側と同じとは限らない。たとえば $S = \texttt{aabaabaac}$ の $i = 6$ では $z[3] = 5$ だが、本当の $z[6]$ は 2 である。
 
-## ACL の z_algorithm（z[0] = n の流儀・vector<int> にして区切りに −1） {#acl}
+## ACL の z_algorithm（先頭の値が n になる流儀・区切りの −1） {#acl}
 
 ACL の `z_algorithm` は文字列と整数の列の両方に使える。区切りを挟むときは `vector<int>` にしておくと安全である。
 
@@ -130,7 +130,7 @@ $A + A$ の位置 $N$ から始まる窓は $A$ 自身で、0 回転と同じで
 
 回転どうしの辞書順の比較は、Z 配列ではなく [Suffix Array の回転の節](../string/suffix-array.md#rotations)の方法を使う。
 
-## 周期の判定：p が周期 ⇔ z[p] = N − p {#period}
+## 周期の判定：p が周期であることと Z 配列の値の関係 {#period}
 
 $1 \le p \le N$ について、すべての $0 \le i < N - p$ で $S[i] = S[i + p]$ が成り立つとき、$p$ を $S$ の[周期](../guide/glossary.md#period)という。この条件は「$S[p, N)$ と $S[0, N - p)$ が等しい」と同じなので、$p < N$ なら次が成り立つ。
 

@@ -23,10 +23,9 @@ frequency: A
 frequency_evidence: recent 2（abc456_f・abc460_f）・前提として 2 ページに届く（直接 2）・古い ABC 5 問
 sections:
   - {title: 設計の手順（答えに要る情報 → 親が作れるまで情報を足す → 結合律と単位元を確かめる）, anchor: design-steps}
-  - {title: 型の表（和・min/max・gcd・最小値と個数・最大値と 2 番目・文字の種類・ソート済みか・括弧列・最大部分配列和・最長の連続・ハッシュ・0/1 列の転倒数）, anchor: pattern-table}
+  - {title: 型の表（和・min/max・gcd・最小値と個数・括弧列・最大部分配列和など）, anchor: pattern-table}
   - {title: 非可換なモノイド（一次関数の合成・ハッシュの連結。積む順序）, anchor: non-commutative}
   - {title: '行列を載せる（(min,+)・(max,+) の半環も。行列の積は行列累乗のページ、1 点更新のたびに DP を求め直すなら動的 DP）', anchor: matrix}
-  - {title: 落とし穴（単位元になっていない e・結合的でない op・左右の取り違え）, anchor: pitfalls}
 stage: stub
 updated: 2026-10-21
 ---

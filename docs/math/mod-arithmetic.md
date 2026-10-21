@@ -26,7 +26,6 @@ sections:
   - {title: 割り算はそのままではできない（→ 逆元）, anchor: division}
   - {title: mod を取った値で大小比較・最大値を考えてはいけない, anchor: no-compare}
   - {title: なぜ 998244353 か（素数で、NTT に向く形）, anchor: why-998244353}
-  - {title: 繰り返し二乗法・逆元・modint へのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---
@@ -151,7 +150,7 @@ NTT は、法 $p$ の下で 1 の $2^k$ 乗根を使って長さ $2^k$ の畳み
 
 **`pow` で累乗の余りを求める**。`pow(a, n)` は `double` で計算するので、$a^n$ が $2^{53}$ を超えると下の桁が失われ、余りが合わない。累乗は繰り返し二乗法で、掛けるたびに余りを取る（[繰り返し二乗法](../math/mod-pow.md)）。
 
-## 繰り返し二乗法・逆元・modint へのつながり {#next-steps}
+## 上位の手法へのつながり {#next-steps}
 
 mod の計算の基本は、mod 付きの数え上げ全体の土台になる。
 

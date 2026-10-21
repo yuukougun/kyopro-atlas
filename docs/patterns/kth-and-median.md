@@ -22,15 +22,14 @@ acl: []
 sections:
   - {title: 題材の性質, anchor: properties}
   - {title: '候補が多すぎて並べられない → x 以下の個数で答えを二分探索（kth-value, binary-search-answer）', anchor: count-and-search}
-  - {title: '値を追加しながら K 番目・上位 K 個 → 優先度付きキュー・2 つの multiset（priority-queue, top-k-multiset）', anchor: streaming}
-  - {title: '追加と削除がある K 番目 → BIT 上の二分探索・値を添字にするセグメント木（kth-element, segment-tree-on-values）', anchor: dynamic}
+  - {title: 値を追加しながら K 番目・上位 K 個 → 優先度付きキュー・2 つの multiset, anchor: streaming}
+  - {title: 追加と削除がある K 番目 → BIT 上の二分探索・値を添字にするセグメント木, anchor: dynamic}
   - {title: 小さい方から K 個の解を列挙 → 優先度付きキューで最小を取り出す（kth-value）, anchor: k-best}
-  - {title: '区間の K 番目・x 以下の個数 → クエリの先読みと BIT、Wavelet Matrix（offline-queries, wavelet-matrix）', anchor: range-kth}
+  - {title: 区間の K 番目・x 以下の個数 → クエリの先読みと BIT、Wavelet Matrix, anchor: range-kth}
   - {title: 中央値・平均の最大化 → 値を引く・±1 にして符号で判定する二分探索（fractional-binary-search）, anchor: maximize-median}
   - {title: Σ|x − a_i| の最小 → 中央値を選ぶ（median-absolute）, anchor: absolute-sum}
-  - {title: '辞書順で K 番目の文字列・順列 → 残りの個数を数えて先頭から決める（binomial-coefficient, dp-reconstruction）', anchor: lexicographic-kth}
+  - {title: 辞書順で K 番目の文字列・順列 → 残りの個数を数えて先頭から決める, anchor: lexicographic-kth}
   - {title: XOR で作れる値の K 番目 → XOR 基底（xor-basis）, anchor: xor-kth}
-  - {title: 落とし穴, anchor: pitfalls}
 stage: stub
 updated: 2026-10-21
 ---

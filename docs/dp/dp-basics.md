@@ -27,7 +27,6 @@ sections:
   - {title: 貰う形にすると遷移元が区間になる（累積和でまとめる高速化へ）, anchor: pull-to-prefix-sum, level: 水}
   - {title: 貪欲で解けないことの確かめ方（反例から DP へ）, anchor: greedy-counterexample}
   - {title: DP の型の地図（列・区間・集合・桁・木・順列・確率・ゲーム・高速化）, anchor: map}
-  - {title: 落とし穴：到達できない状態の INF に足して溢れる・mod の取り忘れ・添字のずれ, anchor: pitfalls}
 stage: draft
 updated: 2026-10-21
 ---
@@ -187,7 +186,7 @@ DP の型は、主に「何を状態にするか」で分かれる。問題を�
 
 型とは別に、どの DP にも関わる考え方がある。何を状態に持てば足りるかは[状態の設計](../dp/dp-state-design.md)、DP の表をグラフとみて最短路・経路の数え上げとして考えるのは [DAG 上の DP](../dp/dp-dag.md)、昇順以外の順に回すのは[計算順序](../dp/dp-order.md)、最適な選び方そのものを出力するのは[復元](../dp/dp-reconstruction.md)で扱う。遷移が多くて間に合わないときは、遷移の式の形から高速化の道具を選ぶ（[DP の高速化の全体像](../dp/dp-speedup-overview.md)）。
 
-## 落とし穴：到達できない状態の INF に足して溢れる・mod の取り忘れ・添字のずれ {#pitfalls}
+## 落とし穴 {#pitfalls}
 
 **INF にコストを足してあふれる**。到達できない状態を `INT_MAX` や `LLONG_MAX` で表すと、配る形で `dp[i] + cost` を計算した瞬間にオーバーフローし、負の値が最小として残る。INF は「答えの最大値より十分大きく、コストを数回足してもあふれない値」にする。`long long` なら $2^{60}$（約 $1.15 \times 10^{18}$）がよく使われる。配る形では `if (dp[i] == INF) continue;` で到達できない状態から配らないようにすると、あふれの心配もなくなる。最大化の $-\infty$ も同じで、`LLONG_MIN` から引くとあふれる。
 

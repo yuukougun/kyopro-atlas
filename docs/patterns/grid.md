@@ -26,12 +26,11 @@ sections:
   - {title: 連結成分・塗りつぶし → DFS・BFS・Union-Find（union-find）, anchor: components}
   - {title: '右か下にだけ進む → グリッドの DP・格子路（dp-grid, lattice-paths）', anchor: right-down}
   - {title: '長方形の和・長方形への加算 → 2 次元累積和・2 次元いもす法（prefix-sum-2d, imos）', anchor: rectangles}
-  - {title: '行と列を選ぶ・行と列への操作 → 行と列を独立に考える・別々に座標圧縮（manhattan-chebyshev, coordinate-compression）', anchor: rows-cols}
+  - {title: 行と列を選ぶ・行と列への操作 → 行と列を独立に考える・別々に座標圧縮, anchor: rows-cols}
   - {title: 到達・敷き詰めの可否 → 市松模様の偶奇（parity）, anchor: checkerboard}
   - {title: 斜めの移動・マンハッタン距離・ひし形の範囲 → 45 度回転・斜めの座標（manhattan-chebyshev）, anchor: diagonal}
   - {title: '盤面の回転・反転・平行移動 → 添字の対応の式・全部試す（rotation-transform, brute-force）', anchor: rotation}
-  - {title: 'ドミノの配置・隣り合わないマスの選び方 → 二部マッチング・プロファイル DP（bipartite-matching, broken-profile-dp）', anchor: tiling}
-  - {title: 落とし穴, anchor: pitfalls}
+  - {title: ドミノの配置・隣り合わないマスの選び方 → 二部マッチング・プロファイル DP, anchor: tiling}
 stage: stub
 updated: 2026-10-21
 ---

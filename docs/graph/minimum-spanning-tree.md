@@ -10,7 +10,7 @@ level: 水
 kind: [連結性・全域木, 貪欲]
 prerequisites: [union-find, sorting-techniques]
 related: [union-find-connectivity, bottleneck-path, shortest-path-dag, steiner-tree, spanning-tree-advanced, union-find-applications#next-pointer, merge-process-tree]
-summary: 連結グラフの全域木のうち辺の重みの和が最小のものを、辺を重みの昇順に見て閉路を作らない辺だけを採る クラスカル法か、頂点を 1 つずつ伸ばすプリム法で求める。候補の辺を減らせば完全グラフにも使える。
+summary: 連結グラフの全域木のうち辺の重みの和が最小のものを、辺を重みの昇順に見て閉路を作らない辺だけを採るクラスカル法か、頂点を 1 つずつ伸ばすプリム法で求める。候補の辺を減らせば完全グラフにも使える。
 complexity: クラスカル法 O(M log M)、プリム法は優先度付きキューで O(M log N)・配列で O(N^2)
 signs:
   - {type: phrase, text: すべての頂点をつなぐ最小コスト}

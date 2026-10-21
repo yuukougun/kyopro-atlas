@@ -25,7 +25,6 @@ sections:
   - {title: 成分ごとの色の数を使う数え上げ, anchor: count-by-color}
   - {title: Union-Find（頂点を 2 倍にする・偶奇を持つ）で判定する, anchor: union-find}
   - {title: 木・4 近傍のグリッドは必ず二部グラフ, anchor: always-bipartite}
-  - {title: 上位の手法とのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---
@@ -163,7 +162,7 @@ DFS で塗った場合は、無向グラフの DFS 木に含まれない辺は�
 
 **数え上げのあふれ**。頂点の組の数は $10^{10}$ を超えることがある。`int` どうしの積 `a * b` は、代入先が `long long` でも `int` のまま計算されてあふれる。`1LL * a * b` と書く。
 
-## 上位の手法とのつながり {#next-steps}
+## 上位の手法へのつながり {#next-steps}
 
 二部グラフであることは、多くの上位の手法の前提になる。
 

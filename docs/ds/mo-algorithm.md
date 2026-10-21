@@ -24,7 +24,6 @@ sections:
   - {title: 何ができるか（1 要素の出入りで答えを差分更新できる量）, anchor: what-it-does}
   - {title: クエリの並べ方と計算量（ブロックの大きさ N/√Q、伸縮の総回数 O(N√Q)）, anchor: ordering}
   - {title: 実装の要点（伸ばしてから縮める・奇数ブロックで r を逆順・取得を重くしてよい（値の平方分割））, anchor: implementation}
-  - {title: 使い分け（種類数だけならオフラインの BIT、オンライン強制なら使えない）, anchor: choosing}
   - {title: '2 つの接頭辞の長さ (X, Y) を区間と見る', anchor: two-prefixes, level: 黄}
   - {title: 木上の Mo（入りと出の両方を記録した列で、パスを区間にする。LCA を別に足す）, anchor: mo-on-tree, level: 黄}
   - {title: 時間付き Mo・ロールバック Mo, anchor: variants, level: 発展}

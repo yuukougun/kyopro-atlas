@@ -25,8 +25,6 @@ sections:
   - {title: XOR の性質（打ち消し・a + b との関係・0〜n の XOR）, anchor: xor-properties}
   - {title: popcount・最下位ビット, anchor: popcount}
   - {title: 部分集合の部分集合の列挙（3^N）, anchor: submask}
-  - {title: 落とし穴（1 << 31 のあふれ・符号付きの右シフト）, anchor: pitfalls}
-  - {title: 上位の手法とのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---
@@ -153,7 +151,7 @@ $3^{15} \approx 1.4 \times 10^7$、$3^{16} \approx 4.3 \times 10^7$、$3^{18} \a
     ??? success "答え"
         $3^{20} \approx 3.5 \times 10^9$ 回で、中身が軽くても C++ の目安（1 秒に $10^8$〜数×$10^8$ 回）を大きく超える。部分集合の和をまとめて求めたいだけなら、[高速ゼータ変換](../comb/zeta-mobius-subset.md)で $O(2^N N)$ にできないかを考える。
 
-## 落とし穴（1 << 31 のあふれ・符号付きの右シフト） {#pitfalls}
+## 落とし穴 {#pitfalls}
 
 **`1 << k` は int で計算される**。`1` は `int` なので、`long long b = 1 << 31;` は `int` で計算してから広げられ、$-2147483648$ になる（C++20 以降は値が決まっているので、警告も出ない）。$k \ge 32$ では未定義動作である。手元の g++ の `-O2` では、定数の `1 << 40` は 0、入力から読んだ変数で `1 << n`（$n = 40$）は 256（$40 \bmod 32 = 8$ だけずらした値）になった。どちらも当てにならない。`long long` の桁を扱うときは `1LL << k` と書く（[シフトの幅](../cpp/cpp-integer-overflow.md#shift-width)）。
 
@@ -171,7 +169,7 @@ $3^{15} \approx 1.4 \times 10^7$、$3^{16} \approx 4.3 \times 10^7$、$3^{18} \a
     ??? success "答え"
         `1 << 40` は `int` のシフトで、幅が 32 以上なので未定義動作である（GCC は警告を出し、手元では 0 になった）。bit 40 が立っていても判定が偽になりうる。`(x >> 40) & 1` か `x & (1LL << 40)` と書く。
 
-## 上位の手法とのつながり {#next-steps}
+## 上位の手法へのつながり {#next-steps}
 
 このページの性質は、次の手法の部品になる。
 

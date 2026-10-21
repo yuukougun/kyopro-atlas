@@ -24,7 +24,6 @@ sections:
   - {title: 番号だけで LCA を求める（大きい方を 2 で割る）, anchor: lca-by-index}
   - {title: K 分木への一般化, anchor: k-ary}
   - {title: 距離 K の頂点の数（部分木の深さの範囲を N で切る）, anchor: count-at-distance, level: 青}
-  - {title: 上位の手法とのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---
@@ -156,7 +155,7 @@ $c'$ の番号は、$X$ の側の子 $c$ の最後の桁を反転した $c \oplu
 
 **深さを int 用の関数で求める**。`__builtin_clz` は `unsigned int` を受け取るので、`long long` の番号を渡すと上位の桁が切り捨てられる。`__builtin_clzll` を使う。0 を渡すと未定義動作になる点も同じである（[bit 演算の落とし穴](../basics/bit-operations.md#pitfalls)）。
 
-## 上位の手法とのつながり {#next-steps}
+## 上位の手法へのつながり {#next-steps}
 
 番号で親子を決める完全二分木は、配列で木を持つデータ構造の土台である。
 

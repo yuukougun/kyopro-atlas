@@ -9,7 +9,7 @@ order: 180
 level: 基礎
 kind: [実装・C++, 計算量]
 prerequisites: []
-related: [cpp-types-literals, cpp-integer-overflow, acl-reading, interactive, complexity-estimation, debugging-checklist]
+related: [cpp-types-literals, cpp-integer-overflow, acl-reading, interactive, complexity-estimation, debugging-checklist, cpp-views-basics, cpp-lambda]
 summary: 入出力を速くし（sync_with_stdio・cin.tie）、println・小数の桁の指定・インタラクティブ問題のフラッシュを正しく書く。C++ の書き方が原因で TLE になる例も、計測つきで示す。
 complexity: 入出力は個数に比例する O(N)。endl は 1 行ごとに書き出すので、定数倍が 10 倍ほどになる
 signs:
@@ -17,18 +17,18 @@ signs:
   - {type: phrase, text: 答えの絶対誤差または相対誤差が 10^-6 以下なら正解とする（小数の桁を指定して出力しないと WA になる）}
 acl: []
 sections:
-  - {title: '入出力の高速化：ios::sync_with_stdio(false); cin.tie(nullptr);（10^6 個の入力で約 0.2 秒の差）', anchor: fast-io}
+  - {title: 入出力の高速化：sync_with_stdio(false) と cin.tie(nullptr), anchor: fast-io}
   - {title: endl は改行のたびに書き出す（10^6 行で約 0.2 秒余計にかかる）、普段は改行文字 '\n' を出す, anchor: endl}
-  - {title: '区切りと改行の書き方：cout << a[i] << " \n"[i == n - 1]、cond ? "Yes" : "No"', anchor: separators}
-  - {title: 入力の終わりまで読む：while (cin >> x), anchor: read-until-eof}
+  - {title: 区切りと改行の書き方：最後だけ改行する書き方と Yes・No の出し分け, anchor: separators}
+  - {title: 入力の終わりまで読む：読み込みの成否を while の条件にする, anchor: read-until-eof}
   - {title: printf・scanf と書式, anchor: printf}
-  - {title: 'std::format（C++20・GCC 13〜）と std::print・println（C++23・GCC 14〜。引数なしの println() も通る）', anchor: format-println}
-  - {title: '書式の指定：幅・左寄せ・0 埋め・2 進・16 進・小数の桁（{:5}・{:<5}・{:05}・{:b}・{:x}・{:.3f}）（C++20・GCC 13〜）', anchor: format-spec}
-  - {title: '小数の出力：cout は有効数字 6 桁（123456789.0 が 1.23457e+08 になる）、fixed << setprecision(15)・{:.15f}・printf("%.15f")', anchor: float-output}
-  - {title: '同期を切った後に println・printf と cout を混ぜると順番が入れ替わる（println(cout, ...) なら混ざらない）', anchor: mixing-streams}
-  - {title: インタラクティブ問題のフラッシュ：cin.tie(nullptr) を書いたら、質問のたびに cout << endl か fflush(stdout) が要る, anchor: flush}
-  - {title: 'そのままでは出力できない型：__int128・modint（.val() を出す）、vector は println("{}", v) で [1, 2, 3] と出て AtCoder の形式にならない（C++23・GCC 15〜）', anchor: unprintable-types}
-  - {title: 'C++ 側で TLE になる書き方の一覧と計測（endl・同期・std::function の再帰・set への std::lower_bound・s = s + c・vector の値渡し。views::iota は普通の for と同じ速さ）', anchor: tle-causes}
+  - {title: 'std::format（C++20・GCC 13〜）と std::print・println（C++23・GCC 14〜）', anchor: format-println}
+  - {title: 書式の指定：幅・左寄せ・0 埋め・2 進・16 進・小数の桁（C++20・GCC 13〜）, anchor: format-spec}
+  - {title: 小数の出力：cout の既定は有効数字 6 桁、fixed と setprecision・printf で桁を指定する, anchor: float-output}
+  - {title: 同期を切った後に println・printf と cout を混ぜると順番が入れ替わる, anchor: mixing-streams}
+  - {title: インタラクティブ問題のフラッシュ：同期を切る 2 行を書いたら、質問のたびに endl か fflush(stdout) が要る, anchor: flush}
+  - {title: そのままでは出力できない型：__int128・modint・vector, anchor: unprintable-types}
+  - {title: C++ 側で TLE になる書き方の一覧と計測, anchor: tle-causes}
 stage: draft
 updated: 2026-10-21
 cpp_std: null
@@ -52,7 +52,7 @@ atcoder: true
 
 このページのコードは `#include <bits/stdc++.h>` と `using namespace std;` を前提にする。
 
-## 入出力の高速化：ios::sync_with_stdio(false); cin.tie(nullptr);（10^6 個の入力で約 0.2 秒の差） {#fast-io}
+## 入出力の高速化：sync_with_stdio(false) と cin.tie(nullptr) {#fast-io}
 
 `main` の最初に次の 2 行を書くと、`cin`・`cout` が速くなる。入出力が $10^5$ 個程度までなら差は小さいが、書いておいて損はない。
 
@@ -86,7 +86,7 @@ atcoder: true
 - **版**：C++98 からある
 - **混同**：`endl` は「改行」ではなく「改行と書き出し」である。デバッグの出力を `cerr` に出すときは、`cerr` がもともと書き出しを溜めないので `endl` は要らない
 
-## 区切りと改行の書き方：cout << a[i] << " \n"[i == n - 1]、cond ? "Yes" : "No" {#separators}
+## 区切りと改行の書き方：最後だけ改行する書き方と Yes・No の出し分け {#separators}
 
 解説コードには、配列を空白区切りで 1 行に出す短い書き方がよく出る。`" \n"` は空白と改行の 2 文字の文字列リテラルで、`" \n"[k]` はその `k` 文字目である。`i == n - 1` は最後の要素で `true`（1）、それ以外で `false`（0）になるので、最後だけ改行、ほかは空白を出す。
 
@@ -104,7 +104,7 @@ atcoder: true
 --8<-- "cpp-io/ternary-ng.cpp:core"
 ```
 
-## 入力の終わりまで読む：while (cin >> x) {#read-until-eof}
+## 入力の終わりまで読む：読み込みの成否を while の条件にする {#read-until-eof}
 
 個数が書かれていない入力は、読めなくなるまで読む。`cin >> x` は `cin` 自身を返し、`cin` は直前の読み込みが失敗すると条件式の中で `false` になる。入力の終わりに来ると読み込みが失敗するので、ループを抜ける。
 
@@ -137,7 +137,7 @@ atcoder: true
 - **落とし穴 2**：手元の Ubuntu の g++-13・g++-15 では、`-O2` を付けると、`scanf` の戻り値を使わないだけで警告が出た（`ignoring return value of 'int scanf(const char*, ...)'`。`-O0` では出ない）。動作には影響しない。気になるなら、上のように読めた個数（戻り値）を確かめる
 - **落とし穴 3**：`printf`・`scanf` と `cin`・`cout` は、同期を切った後に混ぜない（[混ぜたとき](#mixing-streams)）
 
-## std::format（C++20・GCC 13〜）と std::print・println（C++23・GCC 14〜。引数なしの println() も通る） {#format-println}
+## std::format（C++20・GCC 13〜）と std::print・println（C++23・GCC 14〜） {#format-println}
 
 `println` は、書式の文字列の `{}` に引数を順に入れて出し、最後に改行を付ける関数である。`print` は改行を付けない。`format` は同じ書式で文字列を作るだけで、出力はしない。型は自動で判断されるので、`printf` のように型と書式を合わせる必要はない。
 
@@ -162,7 +162,7 @@ atcoder: true
 --8<-- "cpp-io/format-index-ng.cpp:core"
 ```
 
-## 書式の指定：幅・左寄せ・0 埋め・2 進・16 進・小数の桁（{:5}・{:<5}・{:05}・{:b}・{:x}・{:.3f}）（C++20・GCC 13〜） {#format-spec}
+## 書式の指定：幅・左寄せ・0 埋め・2 進・16 進・小数の桁（C++20・GCC 13〜） {#format-spec}
 
 `{}` の中で `:` の後に書式を書く。並びは「寄せ方・`0`（0 埋め）・幅・`.` 桁数・種類」で、どれも省略できる。ここでは、埋める文字（`{:*>5}` で `***42`）や符号の指定は省いた。
 
@@ -185,7 +185,7 @@ atcoder: true
 - **版**：C++20。g++-13・g++-15 で、表のとおりに出た
 - **落とし穴**：0 埋めは負の数では符号の後を埋める（`-5` を `{:05}` で出すと `-0005`）
 
-## 小数の出力：cout は有効数字 6 桁（123456789.0 が 1.23457e+08 になる）、fixed << setprecision(15)・{:.15f}・printf("%.15f") {#float-output}
+## 小数の出力：cout の既定は有効数字 6 桁、fixed と setprecision・printf で桁を指定する {#float-output}
 
 `cout << x` は、`double` を有効数字 6 桁で出す。`123456789.0` は `1.23457e+08`、`1.0 / 3` は `0.333333` になる。「誤差 $10^{-6}$ 以下なら正解」の問題でも、大きな値は桁が足りずに WA になる。指数の表記（`1.23457e+08`）を受け付けないジャッジもあるので、これも避ける。小数を出すときは必ず桁を指定する。
 
@@ -207,7 +207,7 @@ atcoder: true
 - **落とし穴 1**：`fixed` を付けずに `setprecision(15)` だけを書くと、有効数字 15 桁になる。小数点以下の桁数ではないので、大きな値は指数の表記になりうる
 - **落とし穴 2**：桁を増やしても、`double` の精度（有効数字 15〜16 桁）を超える桁は意味を持たない。$10^{18}$ 程度の整数を `double` で計算すると、1 の位は正しくない（[浮動小数点数の型](../cpp/cpp-types-literals.md#floating-point)）
 
-## 同期を切った後に println・printf と cout を混ぜると順番が入れ替わる（println(cout, ...) なら混ざらない） {#mixing-streams}
+## 同期を切った後に println・printf と cout を混ぜると順番が入れ替わる {#mixing-streams}
 
 `ios::sync_with_stdio(false)` を書いた後は、`cout` と C の `stdout` が別々のバッファを持つ。`println`・`printf` は `stdout` に書き、`cout` は自分のバッファに書くので、それぞれのバッファが書き出される順に出力が並ぶ。書いた順にはならない。
 
@@ -220,7 +220,7 @@ atcoder: true
 - **直し方**：どちらか一方にそろえる。`cout` と一緒に使うなら、`println(cout, "...")` で `cout` に書く
 - **落とし穴**：出力の順番が入れ替わると WA になる。手元で実行しても入れ替わるが、出力の長い問題では気づきにくい。雛形に同期を切る 2 行があるなら、`printf`・`println` を使わないと決めておく
 
-## インタラクティブ問題のフラッシュ：cin.tie(nullptr) を書いたら、質問のたびに cout << endl か fflush(stdout) が要る {#flush}
+## インタラクティブ問題のフラッシュ：同期を切る 2 行を書いたら、質問のたびに endl か fflush(stdout) が要る {#flush}
 
 [インタラクティブ問題](../misc/interactive.md)では、質問を出して、相手（ジャッジ）の答えを読み、また質問する。出力がパイプにつながっていると、出力はバッファにたまるだけで、書き出すまで相手に届かない。相手は質問を待ち、自分は答えを待つので、両方が止まって TLE になる。
 
@@ -242,7 +242,7 @@ atcoder: true
 - **直し方**：雛形に関係なく、質問のたびに `cout << endl`（または `cout << flush`）か、`println`・`printf` の後に `fflush(stdout)` を書く。質問の回数は多くても数千回程度なので、`endl` の遅さは問題にならない
 - **落とし穴**：`println`・`printf` の出力は、端末へ出すときは 1 行ごとに書き出される。手元でキーボードから入力して試すとフラッシュを忘れても動いて見え、提出して初めて TLE になる。同期を切った `cout` は端末でも溜めるので、`cout << ... << '\n'` なら質問が画面に出ないことで気づける
 
-## そのままでは出力できない型：__int128・modint（.val() を出す）、vector は println("{}", v) で [1, 2, 3] と出て AtCoder の形式にならない（C++23・GCC 15〜） {#unprintable-types}
+## そのままでは出力できない型：__int128・modint・vector {#unprintable-types}
 
 `cout <<` で出せない型が 2 つよく出る。`__int128` は `cout <<` の版がなく、`ambiguous overload for 'operator<<'` のコンパイルエラーになる。ACL の modint も `no match for 'operator<<'` になる。
 
@@ -257,7 +257,7 @@ atcoder: true
 - **`vector`**：`println("{}", v)` は `[2, 3]` のようにかっこと `, ` 付きで出し、AtCoder の空白区切りの形式にならない。`{:n}` でかっこは消えるが、`, ` は残る。空白区切りで出すときは、[区切りの書き方](#separators)のループで出す
 - **版**：`vector` などの範囲を `format`・`println` で出すのは C++23 の機能で、GCC 15 から入った。g++-13 ではコンパイルエラーになる。AtCoder の GCC 15.2 では使えるので、デバッグの出力（`println(stderr, "{}", v)`）に便利である
 
-## C++ 側で TLE になる書き方の一覧と計測（endl・同期・std::function の再帰・set への std::lower_bound・s = s + c・vector の値渡し。views::iota は普通の for と同じ速さ） {#tle-causes}
+## C++ 側で TLE になる書き方の一覧と計測 {#tle-causes}
 
 計算量の見積もりが合っているのに TLE になるとき、C++ の書き方が原因のことがある。手元の g++-15（`-O2`）で測った例を並べる。計算量そのものの見積もりと定数倍の考え方は[計算量の見積もり](../basics/complexity-estimation.md#constant-factor)にある。
 

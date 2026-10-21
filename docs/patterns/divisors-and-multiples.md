@@ -25,12 +25,11 @@ sections:
   - {title: 1〜N の各数の約数・倍数を集める → 倍数を回す調和級数（harmonic-sum）, anchor: harmonic}
   - {title: '素因数分解 → 多数なら最小素因数の篩、1 つなら試し割り（spf-sieve, prime-factorization）', anchor: factorize}
   - {title: 約数の個数・約数の和 → 素因数分解の指数から（multiplicative-function）, anchor: divisor-functions}
-  - {title: 'gcd がちょうど g の組の数 → 倍数で数えて大きい方から引く・メビウス関数（divisor-inclusion-exclusion, mobius-function）', anchor: exact-gcd}
+  - {title: gcd がちょうど g の組の数 → 倍数で数えて大きい方から引く・メビウス関数, anchor: exact-gcd}
   - {title: 約数・倍数の向きの累積和 → 約数のゼータ変換・メビウス変換（zeta-mobius-divisor）, anchor: zeta}
   - {title: 積が平方数・積がちょうど N → 素因数の指数で考える（prime-exponent-vector）, anchor: products}
   - {title: '差の gcd・区間の gcd の値の種類 → gcd の性質（gcd-lcm, gcd-properties）', anchor: gcd}
   - {title: ⌊N/i⌋ の値ごとにまとめる → floor の値の列挙（floor-quotient-enum）, anchor: floor-sums}
-  - {title: 落とし穴, anchor: pitfalls}
 stage: stub
 updated: 2026-10-21
 ---

@@ -16,16 +16,16 @@ signs: []
 acl: []
 sections:
   - {title: 'vector の初期化：(n) は 0 が n 個、(n, x) は x が n 個、{n} は値 n が 1 個', anchor: vector-init}
-  - {title: '多次元 vector：dp(n + 1, vector<long long>(m + 1, -1))、3 次元は入れ子を 1 段深くする', anchor: multi-dim-vector}
-  - {title: 'array と {} による 0 初期化（array<int, 26> cnt{}・vector<array<int, 3>> v(n)）', anchor: array-init}
+  - {title: 多次元 vector：入れ子の vector で作り、3 次元は 1 段深くする, anchor: multi-dim-vector}
+  - {title: 'array と {} による 0 初期化', anchor: array-init}
   - {title: グローバル変数は 0 で初期化され、関数の中の変数・配列は初期化されない, anchor: global-vs-local}
   - {title: '構造体のメンバの既定値と指示付き初期化 Edge{.to = v, .cost = c}（C++20。メンバの宣言順に書く）', anchor: designated-init}
   - {title: 'コンストラクタのない構造体（集成体）にも emplace_back(to, cost) が使える（C++20。C++17 ではエラー）', anchor: aggregate-emplace}
   - {title: explicit なコンストラクタは = で初期化できない（ACL の dsu d = 5 はエラーで、dsu d(5) と書く）, anchor: explicit}
-  - {title: '埋め直し：memset はバイト単位（0・-1・0x3f だけ）、fill・assign・ranges::fill、2 次元の C 配列の fill', anchor: refill}
+  - {title: '埋め直し：memset はバイト単位、fill・assign・ranges::fill', anchor: refill}
   - {title: 'CTAD：vector dp(n, vector(m, 0LL)) で型を内側から決める（0 と書くと int になる）（C++17）', anchor: ctad}
-  - {title: 'pair・tuple・array・priority_queue の CTAD：pair p{1, 2.5}・priority_queue pq(greater<int>{}, vector<int>{})（C++17）', anchor: ctad-std-types}
-  - {title: 'CTAD の罠：vector w{v.begin(), v.end()} はイテレータ 2 個の vector になる（丸括弧なら要素の vector。警告も出ない）（C++17）', anchor: ctad-pitfall}
+  - {title: pair・tuple・array・priority_queue の CTAD（C++17）, anchor: ctad-std-types}
+  - {title: CTAD の罠：波括弧にイテレータ 2 個を渡すとイテレータの vector になる（C++17）, anchor: ctad-pitfall}
 stage: draft
 updated: 2026-10-21
 cpp_std: 20
@@ -61,7 +61,7 @@ atcoder: true
 - **版**：C++11 から。g++-13・g++-15 で同じ結果だった
 - **落とし穴**：`vector<int> c{n};` はコンパイルも通り、警告も出ない。大きさを渡すときは丸括弧と決めておく。波括弧を使うのは `vector<int> v{1, 2, 3};` のように値を並べるときだけにする
 
-## 多次元 vector：dp(n + 1, vector&lt;long long&gt;(m + 1, -1))、3 次元は入れ子を 1 段深くする {#multi-dim-vector}
+## 多次元 vector：入れ子の vector で作り、3 次元は 1 段深くする {#multi-dim-vector}
 
 2 次元の表は「vector の vector」で作る。外側の丸括弧に行の数と「1 行分の vector」を渡すと、その 1 行がコピーされて並ぶ。3 次元は、1 行分の vector の代わりに「2 次元の vector」を渡す。
 
@@ -78,7 +78,7 @@ atcoder: true
 - **落とし穴 1**：外側と内側の大きさを逆に渡すと、`dp[i][j]` が範囲外になる。`dp[i][j]` の `i` の範囲を外側に書く、と決めておく
 - **落とし穴 2**：内側の型を外側と合わせて書く必要がある。`vector<vector<long long>> dp(n, vector<int>(m));` はコンパイルエラーになる。型を書く手間は [CTAD](#ctad) で省ける
 
-## array と {} による 0 初期化（array&lt;int, 26&gt; cnt{}・vector&lt;array&lt;int, 3&gt;&gt; v(n)） {#array-init}
+## array と {} による 0 初期化 {#array-init}
 
 `array<T, N>` は長さ `N` が固定の配列である。関数の中で `array<int, 26> cnt;` とだけ書くと中身は決まらないが、`{}` を付けると 26 個とも 0 になる。`vector<array<int, 3>> v(n);` の各要素も 0 で埋まる。
 
@@ -188,7 +188,7 @@ C++17 までは丸括弧で集成体を作れないので、`emplace_back(v, c)`
 - **版**：`explicit` は C++98 から。ACL v1.6 の `third_party/ac-library` で確かめた
 - **落とし穴**：`modint` のコンストラクタには `explicit` がなく、`mint x = 5;` は通る。ACL の型ごとに違うので、エラーが出たら丸括弧に直す
 
-## 埋め直し：memset はバイト単位（0・-1・0x3f だけ）、fill・assign・ranges::fill、2 次元の C 配列の fill {#refill}
+## 埋め直し：memset はバイト単位、fill・assign・ranges::fill {#refill}
 
 テストケースが複数ある問題では、表をケースごとに初期値へ戻す。`memset(配列, 値, バイト数)` は、領域の各バイトを同じ値にする。`int` は 4 バイトなので、思った値になるのは「4 バイトとも同じ」で表せる値だけである。
 
@@ -230,7 +230,7 @@ CTAD（クラステンプレートの実引数推論）は、`vector<long long>`
 - **版**：C++17。g++-13・g++-15 とも `-std=gnu++17` で同じ型になった
 - **落とし穴**：初期値を `0` と書くと `int` の表になる。和が `int` の範囲を超える DP では[オーバーフロー](../cpp/cpp-integer-overflow.md)する。`long long` の表は `0LL`、INF なら `1LL << 60` のように、初期値の型で決める
 
-## pair・tuple・array・priority_queue の CTAD：pair p{1, 2.5}・priority_queue pq(greater&lt;int&gt;{}, vector&lt;int&gt;{})（C++17） {#ctad-std-types}
+## pair・tuple・array・priority_queue の CTAD（C++17） {#ctad-std-types}
 
 CTAD は `vector` 以外の標準の型にも使える。
 
@@ -247,7 +247,7 @@ CTAD は `vector` 以外の標準の型にも使える。
 --8<-- "cpp-initialization/ctad-std.cpp:pair-int"
 ```
 
-## CTAD の罠：vector w{v.begin(), v.end()} はイテレータ 2 個の vector になる（丸括弧なら要素の vector。警告も出ない）（C++17） {#ctad-pitfall}
+## CTAD の罠：波括弧にイテレータ 2 個を渡すとイテレータの vector になる（C++17） {#ctad-pitfall}
 
 CTAD でも、波括弧は「中の値を並べた vector」を作る。`vector w{v.begin(), v.end()};` は、`v` の要素のコピーではなく、イテレータ 2 個を並べた `vector<vector<int>::iterator>` になる。丸括弧なら、イテレータの組から要素をコピーした `vector<int>` になる。
 

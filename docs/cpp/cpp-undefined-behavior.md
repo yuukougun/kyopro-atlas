@@ -18,15 +18,15 @@ sections:
   - {title: 未定義動作とは：何が起きてもよく、最適化の前提に使われる（手元と AtCoder、-O0 と -O2 で結果が変わる）, anchor: what-is-ub}
   - {title: 他の行まで壊す：あふれる式があると、-O2 では正しく書いた別の式の値まで変わる, anchor: breaks-other-lines}
   - {title: 配列の範囲外：既定では止まらない, anchor: out-of-range}
-  - {title: 未初期化変数：手元では不定、AtCoder では -ftrivial-auto-var-init=zero で 0 になる（-Wall は配列の未初期化を警告しない）, anchor: uninitialized}
-  - {title: ダングリングとは：寿命の切れた要素・一時オブジェクト・文字列を指す参照・イテレータ・string_view（確かめた 4 つの型を次の節に並べる）, anchor: dangling}
-  - {title: 'ダングリング①：const auto& [d, v] = pq.top(); pq.pop(); で値が変わる（どの道具でも見つからない。値で受ける）', anchor: dangling-pq-top}
-  - {title: 'ダングリング②：auto& row = g[0]; の後の push_back で再確保され、row が消えた領域を指す', anchor: dangling-reallocation}
-  - {title: 'ダングリング③：範囲 for の一時オブジェクト（for (int v : d.groups()[0]) は C++23・GCC 15〜でだけ安全。変数に受けてから回す）', anchor: dangling-temporary}
+  - {title: 未初期化変数：手元では不定、AtCoder では 0 になる（-Wall は配列の未初期化を見落とす）, anchor: uninitialized}
+  - {title: ダングリングとは：寿命の切れたものを指す参照・イテレータ・string_view, anchor: dangling}
+  - {title: ダングリング①：pq.top() を参照で受けて pop すると値が変わる（値で受ける）, anchor: dangling-pq-top}
+  - {title: ダングリング②：要素への参照を持ったまま push_back すると、再確保で消えた領域を指す, anchor: dangling-reallocation}
+  - {title: ダングリング③：範囲 for の一時オブジェクト（変数に受けてから回す）, anchor: dangling-temporary}
   - {title: ダングリング④：string_view に一時的な string を入れる, anchor: dangling-string-view}
   - {title: そのほかの未定義動作：比較関数の誤り・型の幅以上のシフト・__builtin_ctz(0)・ループ中のコンテナの変更, anchor: other-ub}
-  - {title: 見つける道具と見つけられるもの：-Wall -Wextra・-D_GLIBCXX_ASSERTIONS・-D_GLIBCXX_DEBUG・-fsanitize=address・-fsanitize=undefined, anchor: detection-tools}
-  - {title: '不具合を探すビルドを cph とは別に用意する（g++-15 -std=gnu++23 -O1 -g -D_GLIBCXX_DEBUG -fsanitize=address,undefined -DLOCAL。遅くなる）', anchor: debug-build}
+  - {title: 見つける道具と見つけられるもの：警告・アサーション・デバッグモード・サニタイザ, anchor: detection-tools}
+  - {title: 不具合を探すビルドを cph とは別に用意する, anchor: debug-build}
   - {title: assert で WA を RE に変えて気づく（AtCoder では NDEBUG が付かない）, anchor: assert}
 stage: draft
 updated: 2026-10-21
@@ -101,7 +101,7 @@ $x = 1$ のとき、`-O0` では 31 回で止まり 31 と出る。`-O2` では�
 - **版**：GCC 15 から、最適化なし（`-O0`、VS Code の `-g` だけのビルドもこれ）では `_GLIBCXX_ASSERTIONS` が自動で付く。手元の g++-15 の `-O0` では、上のコードが何も付けずに止まった。g++-13 の `-O0` と、`-O2`（AtCoder・cph）では止まらない
 - **落とし穴**：`a.at(i)` は範囲外で例外を投げるので止まるが、解説コードではほとんど使わない。`[]` のまま、手元でだけ検査を付けるほうが速さを失わない
 
-## 未初期化変数：手元では不定、AtCoder では -ftrivial-auto-var-init=zero で 0 になる（-Wall は配列の未初期化を警告しない） {#uninitialized}
+## 未初期化変数：手元では不定、AtCoder では 0 になる（-Wall は配列の未初期化を見落とす） {#uninitialized}
 
 関数の中で宣言した `int`・`long long`・`double` などの変数と、その配列（自動変数）は、初期値を書かなければ値が決まらない。読むと未定義動作で、手元ではゴミの値になる。グローバル変数と `vector<int> a(n)` は 0 で初期化されるので、この問題はない。`string s;` や `vector<int> v;` も空で作られる。
 
@@ -134,7 +134,7 @@ AtCoder の GCC には `-ftrivial-auto-var-init=zero` が付いていて、初�
 - **落とし穴**：`-ftrivial-auto-var-init=zero` を手元にも付ければ AtCoder と同じ答えになるが、規格の上では未定義動作のままである。0 で埋めることに頼らず、初期値を書く習慣で防ぐ
 - **落とし穴**：テストケースごとに使い回す配列（多くのテストケースを読む問題）は、ケースの最初に 0 へ戻す。これは未定義動作ではないが、同じ「初期化忘れ」の症状になる
 
-## ダングリングとは：寿命の切れた要素・一時オブジェクト・文字列を指す参照・イテレータ・string_view（確かめた 4 つの型を次の節に並べる） {#dangling}
+## ダングリングとは：寿命の切れたものを指す参照・イテレータ・string_view {#dangling}
 
 [ダングリング](../guide/glossary.md#dangling)は、参照・イテレータ・ポインタ・`string_view` が、もう存在しない物（寿命の切れた物）を指している状態である。そこを読み書きすると未定義動作になる（use-after-free）。参照やイテレータは「指す先の場所」だけを持ち、指す先が消えても自分では気づかない。
 
@@ -149,7 +149,7 @@ AtCoder の GCC には `-ftrivial-auto-var-init=zero` が付いていて、初�
 
 手元の g++-13・g++-15 では、このページの 4 つの例のどれも `-Wall -Wextra` で警告が出なかった。避け方は共通で、参照を長く持たずに値で受けるか、使うたびに取り直すかである。
 
-## ダングリング①：const auto& [d, v] = pq.top(); pq.pop(); で値が変わる（どの道具でも見つからない。値で受ける） {#dangling-pq-top}
+## ダングリング①：pq.top() を参照で受けて pop すると値が変わる（値で受ける） {#dangling-pq-top}
 
 `pq.top()` は、優先度付きキューが中に持つ `vector` の先頭の要素への参照を返す。参照で受けてから `pop` すると、先頭の場所に次の要素が移ってくるので、受けた値が変わる。
 
@@ -168,7 +168,7 @@ AtCoder の GCC には `-ftrivial-auto-var-init=zero` が付いていて、初�
 - **費用**：(距離, 頂点) のコピーは 16 バイト程度で、気にしなくてよい
 - **関連**：構造化束縛の見えない変数が参照になる仕組みは[構造化束縛の節](../cpp/cpp-structured-bindings.md#pq-top-reference)にある
 
-## ダングリング②：auto& row = g[0]; の後の push_back で再確保され、row が消えた領域を指す {#dangling-reallocation}
+## ダングリング②：要素への参照を持ったまま push_back すると、再確保で消えた領域を指す {#dangling-reallocation}
 
 `vector` は、容量が足りなくなると、より大きな領域を新しく確保して要素を移し、古い領域を解放する（再確保）。再確保の前に取った参照・イテレータは古い領域を指したまま残る。
 
@@ -190,7 +190,7 @@ AtCoder の GCC には `-ftrivial-auto-var-init=zero` が付いていて、初�
 - **落とし穴**：`reserve` で容量を先に取れば再確保は起きないが、要素数の見積もりを誤ると壊れる。参照を持たない書き方のほうが確実である
 - **関連**：`set`・`map` の参照は、その要素を消すまで無効にならない（[イテレータと参照の無効化](../cpp/cpp-container-idioms.md#invalidation)）
 
-## ダングリング③：範囲 for の一時オブジェクト（for (int v : d.groups()[0]) は C++23・GCC 15〜でだけ安全。変数に受けてから回す） {#dangling-temporary}
+## ダングリング③：範囲 for の一時オブジェクト（変数に受けてから回す） {#dangling-temporary}
 
 範囲 for は、範囲の式を参照で受けてから回す。`for (int v : groups(n)[0])` では、`groups(n)` が返した[一時オブジェクト](../guide/glossary.md#temporary-object)の `vector<vector<int>>` から `[0]` を取り、その参照で回す。C++20 までの規則では、外側の一時的な `vector` はループが始まる前に消えるので、`[0]` の参照はダングリングになる。ACL の `dsu` の `d.groups()[0]` も同じ形である。
 
@@ -248,7 +248,7 @@ AtCoder では動くが、古い環境や解説の写し方によっては壊れ
 - **直し方**：シフトは幅の足りる型を使い（`1LL << k`）、$k$ が 64 以上になりうるなら先に場合分けする。最下位の 1 の位置は `countr_zero`（C++20。符号なし整数だけ受ける）で求める。0 を渡すと型の幅を返すと決まっている
 - **見つけ方**：ループ中の `push_back` は `_GLIBCXX_DEBUG` で `attempt to increment a singular iterator` と出て止まった
 
-## 見つける道具と見つけられるもの：-Wall -Wextra・-D_GLIBCXX_ASSERTIONS・-D_GLIBCXX_DEBUG・-fsanitize=address・-fsanitize=undefined {#detection-tools}
+## 見つける道具と見つけられるもの：警告・アサーション・デバッグモード・サニタイザ {#detection-tools}
 
 道具ごとに見つけられるものが違う。このページの例を手元の g++-13・g++-15 で試した結果は次のとおりで、両者は同じだった（○は止まるか警告が出た、×は何も出なかった）。
 
@@ -271,7 +271,7 @@ AtCoder では動くが、古い環境や解説の写し方によっては壊れ
 - **`-fsanitize=undefined`**（UndefinedBehaviorSanitizer）：あふれ・シフトの幅・`__builtin_ctz(0)` などを見つける。既定では `runtime error:` を出した後も実行を続けるので、出力の答えだけを見ていると見落とす。`-fno-sanitize-recover=all` を足すと、最初の 1 件で止まる
 - **落とし穴**：道具で何も出なくても、未定義動作がないとは言えない。道具が見るのは、その入力で実際に通った行だけである。小さいケースを大量に試す[ランダムテスト](../guide/stress-testing.md)と組み合わせる
 
-## 不具合を探すビルドを cph とは別に用意する（g++-15 -std=gnu++23 -O1 -g -D_GLIBCXX_DEBUG -fsanitize=address,undefined -DLOCAL。遅くなる） {#debug-build}
+## 不具合を探すビルドを cph とは別に用意する {#debug-build}
 
 ふだんのビルド（cph で AtCoder と同じ `-O2`）とは別に、不具合を探すためのビルドを 1 つ用意しておく。答えが合わない・落ちるときに、同じ入力をこちらで動かす。
 

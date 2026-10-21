@@ -15,19 +15,19 @@ complexity: 'ラムダを作るのは O(1)（[=] や初期化キャプチャは�
 signs: []
 acl: []
 sections:
-  - {title: 'キャプチャ：[&] は参照、[=] は作った時点のコピー、初期化キャプチャ [x = std::move(v)]、mutable。参照キャプチャしたラムダを変数の寿命より長く使わない', anchor: capture}
-  - {title: 'auto 引数のジェネリックラムダ、テンプレート構文 []<class T>(...)（C++20）、static ラムダ（C++23・GCC 13〜）', anchor: generic-lambda}
-  - {title: 'その場で呼ぶラムダ：const int k = [&] { ... }(); で複雑な初期化をした値を const にする', anchor: immediately-invoked}
+  - {title: キャプチャ：参照・コピー・初期化キャプチャ・mutable と、参照で取り込んだときの寿命, anchor: capture}
+  - {title: auto 引数のジェネリックラムダ、テンプレート構文（C++20）、static ラムダ（C++23・GCC 13〜）, anchor: generic-lambda}
+  - {title: その場で呼ぶラムダ：複雑な初期化をした値を const にする, anchor: immediately-invoked}
   - {title: 関数に渡す：sort の比較関数・二分探索の判定関数, anchor: pass-to-function}
-  - {title: '型だけを書く：set<int, decltype(cmp)>・priority_queue<int, vector<int>, decltype(cmp)>（キャプチャのないラムダの既定構築。C++20。C++17 では pq(cmp) と渡す）', anchor: decltype-type}
-  - {title: テンプレート引数に渡せるのはキャプチャのないラムダだけ（C++20。ACL の segtree）, anchor: template-argument}
+  - {title: 型だけを書く：decltype でラムダの型を set・priority_queue に渡す（C++20）, anchor: decltype-type}
+  - {title: テンプレート引数にキャプチャのないラムダを渡す（GCC で通る。ACL の segtree）, anchor: template-argument}
   - {title: ラムダがそのままでは再帰できない理由（use of ‘f’ before deduction of ‘auto’）, anchor: recursive-lambda}
-  - {title: 'std::function<void(int)> による再帰：読みやすいが、呼ぶたびに型消去を通る間接呼び出しになり遅い', anchor: std-function}
+  - {title: 'std::function による再帰：読みやすいが、型消去を通る間接呼び出しになり遅い', anchor: std-function}
   - {title: '自分を引数で渡す再帰：self(self, to) と書き、dfs(dfs, 0) と呼ぶ', anchor: self-argument}
-  - {title: 'deducing this：this auto&& self で受け、dfs(0) と呼ぶ（C++23・GCC 14〜。g++-13 ではエラー）', anchor: deducing-this}
+  - {title: 'deducing this：this auto&& self で受ける再帰ラムダ（C++23・GCC 14〜）', anchor: deducing-this}
   - {title: 不動点コンビネータ（雛形の FixPoint・MFP）, anchor: fixpoint}
-  - {title: 戻り値の型 -> void・-> int を書く場面（再帰より前に型の決まる return がないとき、三項演算子の中の再帰）, anchor: return-type}
-  - {title: '速さの比較：std::function は fib(40) で約 5 倍、木の DFS で約 1.5 倍遅い。深い再帰はスタックに注意', anchor: speed}
+  - {title: 戻り値の型を後置で書く場面（再帰より前に型の決まる return がないとき）, anchor: return-type}
+  - {title: '速さの比較：std::function は fib(40) で約 5 倍、木の DFS で約 1.5 倍遅い', anchor: speed}
 stage: draft
 updated: 2026-10-21
 cpp_std: null
@@ -49,7 +49,7 @@ atcoder: true
 
 このページのコードは `#include <bits/stdc++.h>` と `using namespace std;` を前提にする。
 
-## キャプチャ：[&] は参照、[=] は作った時点のコピー、初期化キャプチャ [x = std::move(v)]、mutable。参照キャプチャしたラムダを変数の寿命より長く使わない {#capture}
+## キャプチャ：参照・コピー・初期化キャプチャ・mutable と、参照で取り込んだときの寿命 {#capture}
 
 キャプチャは、ラムダの本体から外側の変数を使う方法を決める。`[&]` は使う変数を参照で取り込み、呼んだ時点の値を読む。`[=]` は使う変数をラムダを作った時点でコピーし、後で外側の変数が変わっても中のコピーは変わらない。
 
@@ -84,7 +84,7 @@ atcoder: true
 --8<-- "cpp-lambda/dangling.cpp:good"
 ```
 
-## auto 引数のジェネリックラムダ、テンプレート構文 []<class T>(...)（C++20）、static ラムダ（C++23・GCC 13〜） {#generic-lambda}
+## auto 引数のジェネリックラムダ、テンプレート構文（C++20）、static ラムダ（C++23・GCC 13〜） {#generic-lambda}
 
 引数の型を `auto` と書いたラムダをジェネリックラムダという。中身は関数テンプレートで、呼んだ引数の型ごとに別の関数が作られる。`sort` の比較関数を `[](const auto& x, const auto& y) { ... }` と書けば、要素の型を書き写さずに済む。
 
@@ -99,7 +99,7 @@ atcoder: true
 - **版**：`auto` 引数は C++14、テンプレート構文は C++20、`static` ラムダは C++23。`static` ラムダは g++-13・g++-15 の `-std=gnu++23` で通る。`-std=gnu++20` ではどちらも「‘static’ only valid in lambda with ‘-std=c++23’ or ‘-std=gnu++23’」という警告になる
 - **落とし穴**：`static` ラムダはキャプチャを書くとコンパイルエラーになる。`[&]` が要るなら `static` を付けない
 
-## その場で呼ぶラムダ：const int k = [&] { ... }(); で複雑な初期化をした値を const にする {#immediately-invoked}
+## その場で呼ぶラムダ：複雑な初期化をした値を const にする {#immediately-invoked}
 
 ラムダを作った直後に `()` を付けると、その場で呼んで結果を受け取れる。ループや条件分岐で求める値を、一度で初期化して `const` にできる。素朴に書くと `int k = 0; while (...) k++;` となり、`k` を後で誤って書き換えても気づけない。
 
@@ -131,7 +131,7 @@ atcoder: true
 - 判定のラムダが `bool` を返すことは、`return cnt >= k;` から推論される。`return` が複数あるなら、すべて同じ型にする
 - **落とし穴**：比較関数を `[=]` で書くと、配列が大きいときにラムダを作るたびにコピーが走る。`sort` に渡したラムダは中でさらにコピーされることがあるので、配列は `[&]` で取り込む
 
-## 型だけを書く：set<int, decltype(cmp)>・priority_queue<int, vector<int>, decltype(cmp)>（キャプチャのないラムダの既定構築。C++20。C++17 では pq(cmp) と渡す） {#decltype-type}
+## 型だけを書く：decltype でラムダの型を set・priority_queue に渡す（C++20） {#decltype-type}
 
 `set` や `priority_queue` は、比較関数をテンプレート引数（型）として受け取る。ラムダの型には名前がないので、`decltype(cmp)` で「`cmp` の型」を書く。
 
@@ -154,7 +154,7 @@ atcoder: true
 --8<-- "cpp-lambda/decltype-capture.cpp:core"
 ```
 
-## テンプレート引数に渡せるのはキャプチャのないラムダだけ（C++20。ACL の segtree） {#template-argument}
+## テンプレート引数にキャプチャのないラムダを渡す（GCC で通る。ACL の segtree） {#template-argument}
 
 ACL の `segtree<S, op, e>` は、演算 `op` と単位元を返す `e` を、型ではなく値のテンプレート引数（非型テンプレート引数）として受け取る。ACL v1.6 の宣言は `template <class S, auto op, auto e> struct segtree` なので、関数の代わりにキャプチャのないラムダを渡せる。
 
@@ -194,7 +194,7 @@ g++-15 では `the value of ‘op’ is not usable in a constant expression` と
 
 AtCoder 向けには、`auto&& self` か deducing this を勧める。手元が g++-13 なら `auto&& self` にする。普通の関数（`main` の外に書き、配列をグローバル変数にする）も同じ速さである。
 
-## std::function<void(int)> による再帰：読みやすいが、呼ぶたびに型消去を通る間接呼び出しになり遅い {#std-function}
+## std::function による再帰：読みやすいが、型消去を通る間接呼び出しになり遅い {#std-function}
 
 `std::function<戻り値(引数)>` は、その形で呼べるものなら何でも入る入れ物である。変数の型を `function<void(int, int)>` と先に書くので、本体の中で `dfs` の名前を使える。頂点 0 を根とした木の各頂点の部分木の頂点数を求める例を示す。
 
@@ -223,7 +223,7 @@ AtCoder 向けには、`auto&& self` か deducing this を勧める。手元が 
 - **`auto&&` の理由**：`auto self`（値で受ける）でも動く。ただし、呼ぶたびにクロージャがコピーされる。`[&]` だけなら中身は参照なのでコピーは軽い。それでも、`auto&&` か `const auto&` で受けるのがよい
 - **落とし穴**：`self(to, v)` と自分を渡し忘れると、引数の数が合わずコンパイルエラーになる。`-> void` を消してもコンパイルエラーになる（[戻り値の型](#return-type)）
 
-## deducing this：this auto&& self で受け、dfs(0) と呼ぶ（C++23・GCC 14〜。g++-13 ではエラー） {#deducing-this}
+## deducing this：this auto&& self で受ける再帰ラムダ（C++23・GCC 14〜） {#deducing-this}
 
 C++23 の deducing this は、最初の引数に `this` を付けると、そこに「呼ばれたオブジェクト自身」が入る仕組みである。ラムダに使うと、`self` にラムダ自身が自動で入る。呼ぶときに自分を渡さなくてよいので、`dfs(0, -1)`・`self(to, v)` と普通の関数のように書ける。
 
@@ -253,7 +253,7 @@ C++23 の deducing this は、最初の引数に `this` を付けると、そこ
 - **版**：C++14 で書ける（上の形は C++17 のクラステンプレートの実引数推論で `FixPoint(...)` と書いている）。g++-13・g++-15 で使える
 - **読み方**：解説コードで `FixPoint`・`MFP` を見たら、「ラムダの最初の引数が自分自身で、呼ぶときは省いてよい」と読めばよい。deducing this の `this auto&& self` と同じ意味である
 
-## 戻り値の型 -> void・-> int を書く場面（再帰より前に型の決まる return がないとき、三項演算子の中の再帰） {#return-type}
+## 戻り値の型を後置で書く場面（再帰より前に型の決まる return がないとき） {#return-type}
 
 `auto&& self` や deducing this のラムダは、戻り値の型を本体の `return` から推論する。本体を上から読んで、再帰呼び出しより前に型の決まる `return` があれば推論できる。ない場合は、`self(...)` の戻り値の型が分からず、`use of ... before deduction of ‘auto’` のエラーになる。エラーになるのは、次の 2 つの場合である。
 
@@ -273,7 +273,7 @@ C++23 の deducing this は、最初の引数に `this` を付けると、そこ
 - `std::function` は型を先に書くので、この問題は起きない
 - **落とし穴**：`-> int` と書いて `long long` の値を返すと、黙って `int` に切り詰められる（[オーバーフロー](../cpp/cpp-integer-overflow.md)）。数え上げや距離の再帰は `-> long long` にする
 
-## 速さの比較：std::function は fib(40) で約 5 倍、木の DFS で約 1.5 倍遅い。深い再帰はスタックに注意 {#speed}
+## 速さの比較：std::function は fib(40) で約 5 倍、木の DFS で約 1.5 倍遅い {#speed}
 
 手元の g++-15（`-O2`）で、再帰の書き方ごとに時間を測った。どれも 5〜7 回測った値の範囲である。
 

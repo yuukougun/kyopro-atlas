@@ -41,7 +41,6 @@ search:
     - `interval#union` 区間の和集合・塗りつぶし・残りの長さ → 区間を set で管理（interval-set）：https://yuukougun.github.io/kyopro-atlas/patterns/interval/#union
     - `interval#containment` 含まれる・交差する区間の数 → イベントソート・平面走査（event-sort, sweep-line-2d）：https://yuukougun.github.io/kyopro-atlas/patterns/interval/#containment
     - `interval#substrings` 数列ではなく文字列の連続部分 → 部分列と部分文字列（subsequence-and-substring）：https://yuukougun.github.io/kyopro-atlas/patterns/interval/#substrings
-    - `interval#pitfalls` 落とし穴：https://yuukougun.github.io/kyopro-atlas/patterns/interval/#pitfalls
 
 ## 部分列と部分文字列（subsequence-and-substring） {#subsequence-and-substring}
 
@@ -60,14 +59,13 @@ search:
     - `subsequence-and-substring#count-occurrences` T が部分列として現れる選び方の数 → 照合した文字数を状態にした DP（dp-state-design）：https://yuukougun.github.io/kyopro-atlas/patterns/subsequence-and-substring/#count-occurrences
     - `subsequence-and-substring#count-with-condition` 条件を満たす部分列の数 → 末尾の文字や余りを状態にした DP（dp-state-design, dp-mod-state）：https://yuukougun.github.io/kyopro-atlas/patterns/subsequence-and-substring/#count-with-condition
     - `subsequence-and-substring#distinct-subsequences` 異なる部分列の数 → 部分列 DP と代表元の決め方（subsequence-dp, counting-dedup）：https://yuukougun.github.io/kyopro-atlas/patterns/subsequence-and-substring/#distinct-subsequences
-    - `subsequence-and-substring#index-tuples` i < j < k の位置の組の数 → 段階を状態にした DP（dp-phase）：https://yuukougun.github.io/kyopro-atlas/patterns/subsequence-and-substring/#index-tuples
+    - `subsequence-and-substring#index-tuples` 位置の 3 つ組（添字が増える順）の数 → 段階を状態にした DP（dp-phase）：https://yuukougun.github.io/kyopro-atlas/patterns/subsequence-and-substring/#index-tuples
     - `subsequence-and-substring#longest` 最長共通部分列・最長増加部分列 → LCS・LIS（lcs, lis）：https://yuukougun.github.io/kyopro-atlas/patterns/subsequence-and-substring/#longest
     - `subsequence-and-substring#substring-match` 部分文字列の一致・比較 → ローリングハッシュ・Z（rolling-hash, z-algorithm）：https://yuukougun.github.io/kyopro-atlas/patterns/subsequence-and-substring/#substring-match
     - `subsequence-and-substring#distinct-substrings` 部分文字列の種類数・K 番目 → Suffix Array（suffix-array）：https://yuukougun.github.io/kyopro-atlas/patterns/subsequence-and-substring/#distinct-substrings
     - `subsequence-and-substring#palindromes` 回文の部分文字列・部分列 → 回文のページと区間 DP（palindrome, interval-dp）：https://yuukougun.github.io/kyopro-atlas/patterns/subsequence-and-substring/#palindromes
     - `subsequence-and-substring#avoid-substring` T を部分文字列に含まない文字列の数 → 照合の状態を持つ DP（string-automaton-dp）：https://yuukougun.github.io/kyopro-atlas/patterns/subsequence-and-substring/#avoid-substring
     - `subsequence-and-substring#subarrays` 数列の連続部分列 → 題材別の区間（interval）：https://yuukougun.github.io/kyopro-atlas/patterns/subsequence-and-substring/#subarrays
-    - `subsequence-and-substring#pitfalls` 落とし穴：https://yuukougun.github.io/kyopro-atlas/patterns/subsequence-and-substring/#pitfalls
 
 ## 順列と置換（permutation） {#permutation}
 
@@ -90,9 +88,8 @@ search:
     - `permutation#repeat` 置換を K 回適用した結果 → サイクルごとの周期・ダブリング（functional-graph, doubling）：https://yuukougun.github.io/kyopro-atlas/patterns/permutation/#repeat
     - `permutation#inverse` 位置と値の両方から引く操作 → 逆置換を同時に持つ：https://yuukougun.github.io/kyopro-atlas/patterns/permutation/#inverse
     - `permutation#counting` 条件を満たす順列の数 → 挿入 DP・撹乱順列（insertion-dp, inclusion-exclusion）：https://yuukougun.github.io/kyopro-atlas/patterns/permutation/#counting
-    - `permutation#lexicographic` 辞書順で何番目・K 番目の順列 → 残りの並べ方の数・順列全探索（binomial-coefficient, bit-full-search）：https://yuukougun.github.io/kyopro-atlas/patterns/permutation/#lexicographic
+    - `permutation#lexicographic` 辞書順で何番目・K 番目の順列 → 残りの並べ方の数・順列全探索：https://yuukougun.github.io/kyopro-atlas/patterns/permutation/#lexicographic
     - `permutation#increasing` 増加部分列・いくつの増加部分列に分けるか → LIS（lis）：https://yuukougun.github.io/kyopro-atlas/patterns/permutation/#increasing
-    - `permutation#pitfalls` 落とし穴：https://yuukougun.github.io/kyopro-atlas/patterns/permutation/#pitfalls
 
 ## 括弧列（bracket-sequence） {#bracket-sequence}
 
@@ -132,13 +129,12 @@ search:
     - 言い回し：全区間・全パスの mex の総和
 - 節：
     - `mex#properties` 題材の性質：https://yuukougun.github.io/kyopro-atlas/patterns/mex/#properties
-    - `mex#online-mex` 更新のたびに mex を答える → 出現回数 0 の値の set・セグメント木上の二分探索（ordered-set, segment-tree-binary-search）：https://yuukougun.github.io/kyopro-atlas/patterns/mex/#online-mex
+    - `mex#online-mex` 更新のたびに mex を答える → 出現回数 0 の値の set・セグメント木上の二分探索：https://yuukougun.github.io/kyopro-atlas/patterns/mex/#online-mex
     - `mex#interval-values` 値が区間でまとめて入る → 区間を set で管理（interval-set）：https://yuukougun.github.io/kyopro-atlas/patterns/mex/#interval-values
     - `mex#window-mex` 区間・窓の mex の最小値・最大値 → 値を固定して出現位置の間隔を見る（fix-variable）：https://yuukougun.github.io/kyopro-atlas/patterns/mex/#window-mex
-    - `mex#sum-of-mex` 全区間・全パスの mex の総和 → mex ≥ k+1 の数を足す主客転倒（contribution, two-pointers, lazy-segment-tree）：https://yuukougun.github.io/kyopro-atlas/patterns/mex/#sum-of-mex
+    - `mex#sum-of-mex` 全区間・全パスの mex の総和 → mex が k+1 以上の数を足す主客転倒：https://yuukougun.github.io/kyopro-atlas/patterns/mex/#sum-of-mex
     - `mex#grundy` ゲームの局面の値 → Grundy 数（grundy-number）：https://yuukougun.github.io/kyopro-atlas/patterns/mex/#grundy
     - `mex#construction` mex を指定した値にする構築 → 0〜k−1 を入れて k を入れない（construction）：https://yuukougun.github.io/kyopro-atlas/patterns/mex/#construction
-    - `mex#pitfalls` 落とし穴：https://yuukougun.github.io/kyopro-atlas/patterns/mex/#pitfalls
 
 ## K 番目と中央値（kth-and-median） {#kth-and-median}
 
@@ -156,15 +152,14 @@ search:
 - 節：
     - `kth-and-median#properties` 題材の性質：https://yuukougun.github.io/kyopro-atlas/patterns/kth-and-median/#properties
     - `kth-and-median#count-and-search` 候補が多すぎて並べられない → x 以下の個数で答えを二分探索（kth-value, binary-search-answer）：https://yuukougun.github.io/kyopro-atlas/patterns/kth-and-median/#count-and-search
-    - `kth-and-median#streaming` 値を追加しながら K 番目・上位 K 個 → 優先度付きキュー・2 つの multiset（priority-queue, top-k-multiset）：https://yuukougun.github.io/kyopro-atlas/patterns/kth-and-median/#streaming
-    - `kth-and-median#dynamic` 追加と削除がある K 番目 → BIT 上の二分探索・値を添字にするセグメント木（kth-element, segment-tree-on-values）：https://yuukougun.github.io/kyopro-atlas/patterns/kth-and-median/#dynamic
+    - `kth-and-median#streaming` 値を追加しながら K 番目・上位 K 個 → 優先度付きキュー・2 つの multiset：https://yuukougun.github.io/kyopro-atlas/patterns/kth-and-median/#streaming
+    - `kth-and-median#dynamic` 追加と削除がある K 番目 → BIT 上の二分探索・値を添字にするセグメント木：https://yuukougun.github.io/kyopro-atlas/patterns/kth-and-median/#dynamic
     - `kth-and-median#k-best` 小さい方から K 個の解を列挙 → 優先度付きキューで最小を取り出す（kth-value）：https://yuukougun.github.io/kyopro-atlas/patterns/kth-and-median/#k-best
-    - `kth-and-median#range-kth` 区間の K 番目・x 以下の個数 → クエリの先読みと BIT、Wavelet Matrix（offline-queries, wavelet-matrix）：https://yuukougun.github.io/kyopro-atlas/patterns/kth-and-median/#range-kth
+    - `kth-and-median#range-kth` 区間の K 番目・x 以下の個数 → クエリの先読みと BIT、Wavelet Matrix：https://yuukougun.github.io/kyopro-atlas/patterns/kth-and-median/#range-kth
     - `kth-and-median#maximize-median` 中央値・平均の最大化 → 値を引く・±1 にして符号で判定する二分探索（fractional-binary-search）：https://yuukougun.github.io/kyopro-atlas/patterns/kth-and-median/#maximize-median
     - `kth-and-median#absolute-sum` Σ|x − a_i| の最小 → 中央値を選ぶ（median-absolute）：https://yuukougun.github.io/kyopro-atlas/patterns/kth-and-median/#absolute-sum
-    - `kth-and-median#lexicographic-kth` 辞書順で K 番目の文字列・順列 → 残りの個数を数えて先頭から決める（binomial-coefficient, dp-reconstruction）：https://yuukougun.github.io/kyopro-atlas/patterns/kth-and-median/#lexicographic-kth
+    - `kth-and-median#lexicographic-kth` 辞書順で K 番目の文字列・順列 → 残りの個数を数えて先頭から決める：https://yuukougun.github.io/kyopro-atlas/patterns/kth-and-median/#lexicographic-kth
     - `kth-and-median#xor-kth` XOR で作れる値の K 番目 → XOR 基底（xor-basis）：https://yuukougun.github.io/kyopro-atlas/patterns/kth-and-median/#xor-kth
-    - `kth-and-median#pitfalls` 落とし穴：https://yuukougun.github.io/kyopro-atlas/patterns/kth-and-median/#pitfalls
 
 ## XOR（xor） {#xor}
 
@@ -184,7 +179,7 @@ search:
     - `xor#sum-of-xor` 全ペア・全区間の XOR の和 → 桁ごとに 0 と 1 の個数を数える（bitwise-independence）：https://yuukougun.github.io/kyopro-atlas/patterns/xor/#sum-of-xor
     - `xor#range-xor` 区間の XOR → 累積 XOR、更新があれば BIT（prefix-sum, fenwick-tree）：https://yuukougun.github.io/kyopro-atlas/patterns/xor/#range-xor
     - `xor#tree-path` 木の 2 点間のパスの XOR → 根からの XOR どうしの XOR（tree-distance）：https://yuukougun.github.io/kyopro-atlas/patterns/xor/#tree-path
-    - `xor#choose-x` x を選んで XOR の最大・最小、2 要素の XOR の最小 → 上位ビットから決める・Binary Trie（bitwise-independence, binary-trie）：https://yuukougun.github.io/kyopro-atlas/patterns/xor/#choose-x
+    - `xor#choose-x` x を選んで XOR の最大・最小、2 要素の XOR の最小 → 上位ビットから決める・Binary Trie：https://yuukougun.github.io/kyopro-atlas/patterns/xor/#choose-x
     - `xor#basis` 選んだ XOR で作れる値・最大値・K 番目 → XOR 基底（xor-basis）：https://yuukougun.github.io/kyopro-atlas/patterns/xor/#basis
     - `xor#path-xor` グラフの経路の XOR の最小 → 閉路の XOR を基底にする（xor-basis）：https://yuukougun.github.io/kyopro-atlas/patterns/xor/#path-xor
     - `xor#digit-dp` XOR が絡む条件を満たす数の個数 → 桁 DP（digit-dp）：https://yuukougun.github.io/kyopro-atlas/patterns/xor/#digit-dp
@@ -193,7 +188,6 @@ search:
     - `xor#games` 石取りゲーム → Nim・Grundy 数（nim, grundy-number）：https://yuukougun.github.io/kyopro-atlas/patterns/xor/#games
     - `xor#set-hash` 2 つの集合が一致するか → 乱数の XOR によるハッシュ（hashing-for-sets）：https://yuukougun.github.io/kyopro-atlas/patterns/xor/#set-hash
     - `xor#xor-convolution` 添字の XOR で畳み込む → アダマール変換（hadamard-transform）：https://yuukougun.github.io/kyopro-atlas/patterns/xor/#xor-convolution
-    - `xor#pitfalls` 落とし穴：https://yuukougun.github.io/kyopro-atlas/patterns/xor/#pitfalls
 
 ## 約数と倍数（divisors-and-multiples） {#divisors-and-multiples}
 
@@ -214,12 +208,11 @@ search:
     - `divisors-and-multiples#harmonic` 1〜N の各数の約数・倍数を集める → 倍数を回す調和級数（harmonic-sum）：https://yuukougun.github.io/kyopro-atlas/patterns/divisors-and-multiples/#harmonic
     - `divisors-and-multiples#factorize` 素因数分解 → 多数なら最小素因数の篩、1 つなら試し割り（spf-sieve, prime-factorization）：https://yuukougun.github.io/kyopro-atlas/patterns/divisors-and-multiples/#factorize
     - `divisors-and-multiples#divisor-functions` 約数の個数・約数の和 → 素因数分解の指数から（multiplicative-function）：https://yuukougun.github.io/kyopro-atlas/patterns/divisors-and-multiples/#divisor-functions
-    - `divisors-and-multiples#exact-gcd` gcd がちょうど g の組の数 → 倍数で数えて大きい方から引く・メビウス関数（divisor-inclusion-exclusion, mobius-function）：https://yuukougun.github.io/kyopro-atlas/patterns/divisors-and-multiples/#exact-gcd
+    - `divisors-and-multiples#exact-gcd` gcd がちょうど g の組の数 → 倍数で数えて大きい方から引く・メビウス関数：https://yuukougun.github.io/kyopro-atlas/patterns/divisors-and-multiples/#exact-gcd
     - `divisors-and-multiples#zeta` 約数・倍数の向きの累積和 → 約数のゼータ変換・メビウス変換（zeta-mobius-divisor）：https://yuukougun.github.io/kyopro-atlas/patterns/divisors-and-multiples/#zeta
     - `divisors-and-multiples#products` 積が平方数・積がちょうど N → 素因数の指数で考える（prime-exponent-vector）：https://yuukougun.github.io/kyopro-atlas/patterns/divisors-and-multiples/#products
     - `divisors-and-multiples#gcd` 差の gcd・区間の gcd の値の種類 → gcd の性質（gcd-lcm, gcd-properties）：https://yuukougun.github.io/kyopro-atlas/patterns/divisors-and-multiples/#gcd
     - `divisors-and-multiples#floor-sums` ⌊N/i⌋ の値ごとにまとめる → floor の値の列挙（floor-quotient-enum）：https://yuukougun.github.io/kyopro-atlas/patterns/divisors-and-multiples/#floor-sums
-    - `divisors-and-multiples#pitfalls` 落とし穴：https://yuukougun.github.io/kyopro-atlas/patterns/divisors-and-multiples/#pitfalls
 
 ## グリッド（grid） {#grid}
 
@@ -241,12 +234,11 @@ search:
     - `grid#components` 連結成分・塗りつぶし → DFS・BFS・Union-Find（union-find）：https://yuukougun.github.io/kyopro-atlas/patterns/grid/#components
     - `grid#right-down` 右か下にだけ進む → グリッドの DP・格子路（dp-grid, lattice-paths）：https://yuukougun.github.io/kyopro-atlas/patterns/grid/#right-down
     - `grid#rectangles` 長方形の和・長方形への加算 → 2 次元累積和・2 次元いもす法（prefix-sum-2d, imos）：https://yuukougun.github.io/kyopro-atlas/patterns/grid/#rectangles
-    - `grid#rows-cols` 行と列を選ぶ・行と列への操作 → 行と列を独立に考える・別々に座標圧縮（manhattan-chebyshev, coordinate-compression）：https://yuukougun.github.io/kyopro-atlas/patterns/grid/#rows-cols
+    - `grid#rows-cols` 行と列を選ぶ・行と列への操作 → 行と列を独立に考える・別々に座標圧縮：https://yuukougun.github.io/kyopro-atlas/patterns/grid/#rows-cols
     - `grid#checkerboard` 到達・敷き詰めの可否 → 市松模様の偶奇（parity）：https://yuukougun.github.io/kyopro-atlas/patterns/grid/#checkerboard
     - `grid#diagonal` 斜めの移動・マンハッタン距離・ひし形の範囲 → 45 度回転・斜めの座標（manhattan-chebyshev）：https://yuukougun.github.io/kyopro-atlas/patterns/grid/#diagonal
     - `grid#rotation` 盤面の回転・反転・平行移動 → 添字の対応の式・全部試す（rotation-transform, brute-force）：https://yuukougun.github.io/kyopro-atlas/patterns/grid/#rotation
-    - `grid#tiling` ドミノの配置・隣り合わないマスの選び方 → 二部マッチング・プロファイル DP（bipartite-matching, broken-profile-dp）：https://yuukougun.github.io/kyopro-atlas/patterns/grid/#tiling
-    - `grid#pitfalls` 落とし穴：https://yuukougun.github.io/kyopro-atlas/patterns/grid/#pitfalls
+    - `grid#tiling` ドミノの配置・隣り合わないマスの選び方 → 二部マッチング・プロファイル DP：https://yuukougun.github.io/kyopro-atlas/patterns/grid/#tiling
 
 ## 操作列とクエリ（operation-sequence） {#operation-sequence}
 
@@ -264,11 +256,10 @@ search:
     - `operation-sequence#properties` 題材の性質：https://yuukougun.github.io/kyopro-atlas/patterns/operation-sequence/#properties
     - `operation-sequence#global-ops` 全体への加算・反転・回転 → 全体の操作を変数で持つ（global-offset）：https://yuukougun.github.io/kyopro-atlas/patterns/operation-sequence/#global-ops
     - `operation-sequence#insert-delete` 列の途中への挿入・削除・付け替え → 配列で持つ連結リスト・deque（linked-list, stack-techniques）：https://yuukougun.github.io/kyopro-atlas/patterns/operation-sequence/#insert-delete
-    - `operation-sequence#paint` 区間を塗る・同じ値の区間をつなぐ → 区間を set で管理・次の空きへ飛ぶ Union-Find（interval-set, union-find-applications）：https://yuukougun.github.io/kyopro-atlas/patterns/operation-sequence/#paint
+    - `operation-sequence#paint` 区間を塗る・同じ値の区間をつなぐ → 区間を set で管理・次の空きへ飛ぶ Union-Find：https://yuukougun.github.io/kyopro-atlas/patterns/operation-sequence/#paint
     - `operation-sequence#overwrite` 後の操作が前の操作を上書きする → 後ろから見る（reverse-thinking）：https://yuukougun.github.io/kyopro-atlas/patterns/operation-sequence/#overwrite
     - `operation-sequence#reverse-deletion` 削除が難しい → 逆順にして追加にする（union-find-connectivity）：https://yuukougun.github.io/kyopro-atlas/patterns/operation-sequence/#reverse-deletion
-    - `operation-sequence#offline` 先読みしてよい → 並べ替えてまとめて処理・Mo・イベントにして走査（offline-queries, mo-algorithm, event-sort）：https://yuukougun.github.io/kyopro-atlas/patterns/operation-sequence/#offline
-    - `operation-sequence#online` 更新と質問が交互で区間を扱う → セグメント木・遅延セグメント木・平方分割（segment-tree, lazy-segment-tree, sqrt-decomposition）：https://yuukougun.github.io/kyopro-atlas/patterns/operation-sequence/#online
-    - `operation-sequence#versions` 過去の版に戻る・版をコピーする → 版の木・永続データ構造（persistent-data-structures, root-path-dfs, rollback-union-find）：https://yuukougun.github.io/kyopro-atlas/patterns/operation-sequence/#versions
+    - `operation-sequence#offline` 先読みしてよい → 並べ替えてまとめて処理・Mo・イベントにして走査：https://yuukougun.github.io/kyopro-atlas/patterns/operation-sequence/#offline
+    - `operation-sequence#online` 更新と質問が交互で区間を扱う → セグメント木・遅延セグメント木・平方分割：https://yuukougun.github.io/kyopro-atlas/patterns/operation-sequence/#online
+    - `operation-sequence#versions` 過去の版に戻る・版をコピーする → 版の木・永続データ構造：https://yuukougun.github.io/kyopro-atlas/patterns/operation-sequence/#versions
     - `operation-sequence#repeat` 同じ操作を非常に多く繰り返す → 周期で打ち切る・操作の合成をダブリング（periodicity, doubling）：https://yuukougun.github.io/kyopro-atlas/patterns/operation-sequence/#repeat
-    - `operation-sequence#pitfalls` 落とし穴：https://yuukougun.github.io/kyopro-atlas/patterns/operation-sequence/#pitfalls

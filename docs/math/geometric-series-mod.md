@@ -13,7 +13,7 @@ related: [matrix-power, doubling, digit-and-mod, exponent-mod]
 summary: 1 + r + … + r^(n−1) を mod で求める。素数 mod で r ≢ 1 なら (r^n − 1)/(r − 1)、法が任意なら和を半分に割る漸化式か行列の累乗で O(log n) にする。
 complexity: O(log n)（素数 mod の公式・半分に割る再帰・2×2 行列のどれも。公式は gcd(r − 1, m) = 1 のときだけ）
 signs:
-  - {type: phrase, text: 同じ数字列を M 回並べてできる数を mod で求める}
+  - {type: phrase, text: 同じ数字列を K 回並べてできる数を mod で求める}
   - {type: phrase, text: 法 M が入力で与えられ、素数とは限らない}
   - {type: constraint, text: 項数 N ≤ 10^12〜10^18 の等比数列の和を、素数とは限らない法 M ≤ 10^9 で求める}
   - {type: shape, text: 'Σ_{i=0}^{N−1} A^i の形の和'}
@@ -24,9 +24,8 @@ frequency_evidence: recent 0・前提として届くページなし・古い ABC
 sections:
   - {title: 公式 (r^n − 1)/(r − 1) と r ≡ 1 の場合分け, anchor: formula}
   - {title: 法が任意のとき：S(2k) = S(k)(1 + r^k) で半分に割る, anchor: halving, level: 水}
-  - {title: '2×2 行列 [[r, 1], [0, 1]] の累乗による別解', anchor: matrix, level: 青}
+  - {title: 2×2 行列の累乗による別解, anchor: matrix, level: 青}
   - {title: 同じ数字列を並べた数は公比 10^d の等比数列の和になる, anchor: repeated-digits}
-  - {title: 行列累乗・ダブリング・位数へのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---
@@ -34,7 +33,7 @@ updated: 2026-10-21
 !!! abstract "要点"
     - **何ができるか**：$1 + r + \dots + r^{n-1}$ を mod で $O(\log n)$ で求める。素数 mod で $r \not\equiv 1$ なら $(r^n - 1)/(r - 1)$ を逆元で計算し、法が任意なら和を半分に割る漸化式か 2×2 行列の累乗を使う。
     - **いつ使うか**：
-        - 同じ数字列を M 回並べてできる数を mod で求める。
+        - 同じ数字列を K 回並べてできる数を mod で求める。
         - 法 M が入力で与えられ、素数とは限らない。
         - 項数 N ≤ $10^{12}$〜$10^{18}$ の等比数列の和を、素数とは限らない法 M ≤ $10^9$ で求める。
         - $\sum_{i=0}^{N-1} A^i$ の形の和を立てた。
@@ -111,7 +110,7 @@ $$
     ??? success "答え"
         $r^n - 1 = (r - 1) S(n)$ なので、$(r - 1)S(n)$ を $(r - 1)m$ で割った余りは $(r - 1) \cdot (S(n) \bmod m)$ に等しい。だから余りを $r - 1$ で割れば $S(n) \bmod m$ になる。$r^n \equiv 1 \pmod{r - 1}$ なので、求めた余り $x$ は $r - 1$ で割って 1 余る数で、$r - 1 \ge 2$ なら 1 以上である。だから 1 を引いても負にならない。法 $m(r - 1)$ は $10^{18}$ 近くになりうるので、繰り返し二乗法の中の掛け算は `__int128` で行う。$r = 1$ は法が 0 になるので別に扱う（答えは $n \bmod m$）。$r = 2$ では法が $m$ のままで余りが 0 になりうるので、$(x - 1 + m) \bmod m$ のように法を足してから 1 を引く（$r - 1 = 1$ で割る必要はない）。
 
-## 2×2 行列 [[r, 1], [0, 1]] の累乗による別解 {#matrix}
+## 2×2 行列の累乗による別解 {#matrix}
 
 この節は[行列累乗](../math/matrix-power.md)を前提にする。$S(n)$ は「$x$ を $rx + 1$ に置き換える」操作を $x = 0$ から $n$ 回くり返した値である（$S(t + 1) = r S(t) + 1$）。定数項 1 を状態に入れて、$(S(t), 1)$ を 1 歩進める行列を作る（[定数項を状態に入れる](../math/matrix-power.md#write-as-matrix)）。
 
@@ -160,7 +159,7 @@ $$
 
 **桁数 $d$ を数え違える**。並べる数 $N$ の桁数は `to_string(N).size()` で数えるのが確実である。$N = 10^{18}$ は 19 桁で、`log10` を浮動小数点で計算すると境目の値で 1 ずれることがある。
 
-## 行列累乗・ダブリング・位数へのつながり {#next-steps}
+## 上位の手法へのつながり {#next-steps}
 
 等比数列の和は、より一般の手法の最も小さい例になっている。
 

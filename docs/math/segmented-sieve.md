@@ -10,12 +10,13 @@ level: 水
 kind: [整数論]
 prerequisites: [sieve-eratosthenes]
 related: [prime-factorization, spf-sieve]
-summary: L が 10^12 と大きくても R − L が 10^6 程度なら、√R までの素数で区間 [L, R] だけを篩える。区間の各数の素数判定や素因数分解を O((R−L) log log R + √R) で行う。
+summary: L が 10^12 と大きくても R − L が 10^6 程度なら、√R までの素数で区間 [L, R] だけを篩える。区間の各数の素数判定や素因数分解を O((R−L) log log R + √R log log R) で行う。
 complexity: 素数判定・素因数分解とも O((R−L) log log R + √R log log R)、メモリ O(R−L + √R)
 signs:
   - {type: constraint, text: 'L, R ≤ 10^12 で R − L ≤ 10^6'}
   - {type: phrase, text: 連続する区間の数をそれぞれ素因数分解する}
   - {type: phrase, text: '二項係数 C(N, K) の分子 N−K+1..N を素因数分解する'}
+  - {type: phrase, text: '区間の中の素数の累乗（lcm(1, …, n) が変わる位置）を数える'}
 acl: []
 verify: []
 frequency: C
@@ -36,6 +37,7 @@ updated: 2026-10-21
         - $L, R \le 10^{12}$ で $R - L \le 10^6$
         - 連続する区間の数をそれぞれ素因数分解する
         - 二項係数 $\binom{N}{K}$ の分子 $N-K+1, \dots, N$ を素因数分解する
+        - 区間の中の素数の累乗（$\operatorname{lcm}(1, \dots, n)$ が変わる位置）を数える
     - **計算量**：素数判定・素因数分解とも $O((R - L) \log \log R + \sqrt{R} \log \log R)$。メモリは $O(R - L + \sqrt{R})$
     - **前提**：[エラトステネスの篩](../math/sieve-eratosthenes.md)
 

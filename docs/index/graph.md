@@ -54,20 +54,18 @@ search:
     - `dfs#backtracking` バックトラック型（帰りがけで印を外す）：https://yuukougun.github.io/kyopro-atlas/graph/dfs/#backtracking
     - `dfs#pre-post-order` 行きがけ順と帰りがけ順：https://yuukougun.github.io/kyopro-atlas/graph/dfs/#pre-post-order
     - `dfs#iterative` 非再帰の DFS と再帰の深さ：https://yuukougun.github.io/kyopro-atlas/graph/dfs/#iterative
-    - `dfs#next-steps` 上位の手法へのつながり：https://yuukougun.github.io/kyopro-atlas/graph/dfs/#next-steps
-    - `dfs#comparison` BFS・Union-Find との使い分け：https://yuukougun.github.io/kyopro-atlas/graph/dfs/#comparison
 
 ## 幅優先探索（BFS）と無重み最短路（bfs） {#bfs}
 
 - id：`bfs`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/bfs/
-- 別名：幅優先探索、BFS、breadth-first search、無重み最短路、多始点 BFS、最短経路の復元
+- 別名：幅優先探索、BFS、breadth-first search、無重み最短路、多始点 BFS、最短路の復元、経路復元
 - 種類：グラフ探索、最短路
 - 前提：`graph-basics`、`stack-techniques`
 - サイン：
     - 言い回し：最小の手数・回数を求める（1 回の移動のコストがすべて同じ）
     - 言い回し：一番近い〇〇までの距離・複数の場所から同時に広がる
-    - 言い回し：最短経路を 1 つ出力する・次に進む頂点を答える
+    - 言い回し：最短路を 1 つ出力する・次に進む頂点を答える
     - 制約：N, M ≤ 2×10^5、またはマスの数 H×W ≤ 10^6 程度
 - 節：
     - `bfs#why-shortest` 最初に見つけた距離が最短になる理由：https://yuukougun.github.io/kyopro-atlas/graph/bfs/#why-shortest
@@ -112,7 +110,6 @@ search:
     - `connected-components#per-component` 成分ごとの集計（頂点数と辺数で木・なもり・それ以外を見分ける）：https://yuukougun.github.io/kyopro-atlas/graph/connected-components/#per-component
     - `connected-components#forest` 森の連結成分の数は N − M：https://yuukougun.github.io/kyopro-atlas/graph/connected-components/#forest
     - `connected-components#values-as-vertices` 座標や値を頂点にして成分を考える（青）：https://yuukougun.github.io/kyopro-atlas/graph/connected-components/#values-as-vertices
-    - `connected-components#next-steps` 上位の手法とのつながり：https://yuukougun.github.io/kyopro-atlas/graph/connected-components/#next-steps
 
 ## 閉路の検出と復元（cycle-detection） {#cycle-detection}
 
@@ -151,7 +148,6 @@ search:
     - `bipartite-graph#count-by-color` 成分ごとの色の数を使う数え上げ：https://yuukougun.github.io/kyopro-atlas/graph/bipartite-graph/#count-by-color
     - `bipartite-graph#union-find` Union-Find（頂点を 2 倍にする・偶奇を持つ）で判定する：https://yuukougun.github.io/kyopro-atlas/graph/bipartite-graph/#union-find
     - `bipartite-graph#always-bipartite` 木・4 近傍のグリッドは必ず二部グラフ：https://yuukougun.github.io/kyopro-atlas/graph/bipartite-graph/#always-bipartite
-    - `bipartite-graph#next-steps` 上位の手法とのつながり：https://yuukougun.github.io/kyopro-atlas/graph/bipartite-graph/#next-steps
 
 ## 小さいグラフの全探索（small-graph-brute-force） {#small-graph-brute-force}
 
@@ -164,11 +160,11 @@ search:
     - 制約：N ≤ 8〜10 で頂点の対応や辺の部分集合を全部試せる
     - 言い回し：頂点の番号を付け替えて同じ形にできるか
     - 言い回し：隣り合う頂点が異なる色になる 3 色の塗り方の数
+    - 制約：3 彩色なら N ≤ 20 でも、DFS 順に塗れば 3·2^(N−1) 通り以下に収まる
 - 節：
     - `small-graph-brute-force#isomorphism` 頂点の対応の全探索（同型の判定・同型にするコスト）：https://yuukougun.github.io/kyopro-atlas/graph/small-graph-brute-force/#isomorphism
     - `small-graph-brute-force#edge-subsets` 辺の部分集合の全探索（全域木の全列挙）：https://yuukougun.github.io/kyopro-atlas/graph/small-graph-brute-force/#edge-subsets
     - `small-graph-brute-force#coloring` 彩色は成分ごとに DFS で塗って探索を絞る（青）：https://yuukougun.github.io/kyopro-atlas/graph/small-graph-brute-force/#coloring
-    - `small-graph-brute-force#next-steps` 上位の手法とのつながり：https://yuukougun.github.io/kyopro-atlas/graph/small-graph-brute-force/#next-steps
 
 ## 彩色数・最大独立集合・最大クリーク（chromatic-number） {#chromatic-number}
 
@@ -205,7 +201,6 @@ search:
     - `dijkstra#shortest-cycle` 最短閉路（ある頂点を含む閉路の最小の長さ）：https://yuukougun.github.io/kyopro-atlas/graph/dijkstra/#shortest-cycle
     - `dijkstra#reverse-graph` 逆向きのグラフと両端からの最短路（水）：https://yuukougun.github.io/kyopro-atlas/graph/dijkstra/#reverse-graph
     - `dijkstra#potential` ポテンシャルで負辺を消す（Johnson のアイデア）（水）：https://yuukougun.github.io/kyopro-atlas/graph/dijkstra/#potential
-    - `dijkstra#next-steps` 上位の手法とのつながり：https://yuukougun.github.io/kyopro-atlas/graph/dijkstra/#next-steps
 
 ## 01-BFS（zero-one-bfs） {#zero-one-bfs}
 
@@ -239,7 +234,7 @@ search:
     - 言い回し：訪れる地点の順番を全部試す（地点間の距離が要る）
 - 節：
     - `warshall-floyd#k-outer` k を一番外のループにする理由：https://yuukougun.github.io/kyopro-atlas/graph/warshall-floyd/#k-outer
-    - `warshall-floyd#init` 初期化（d\[i][i] = 0・多重辺・INF のあふれ）と負閉路の判定：https://yuukougun.github.io/kyopro-atlas/graph/warshall-floyd/#init
+    - `warshall-floyd#init` 初期化（自分への距離は 0・多重辺・INF のあふれ）と負閉路の判定：https://yuukougun.github.io/kyopro-atlas/graph/warshall-floyd/#init
     - `warshall-floyd#add-edge` 辺の追加を O(N^2) で反映する（削除は逆順の追加に）：https://yuukougun.github.io/kyopro-atlas/graph/warshall-floyd/#add-edge
     - `warshall-floyd#with-enumeration` 距離表を作ってから順列全探索・bitDP：https://yuukougun.github.io/kyopro-atlas/graph/warshall-floyd/#with-enumeration
     - `warshall-floyd#beyond-distance` 距離以外の値を同じ形で求める（到達可能性・ボトルネック・2 つの基準）：https://yuukougun.github.io/kyopro-atlas/graph/warshall-floyd/#beyond-distance
@@ -267,11 +262,11 @@ search:
 
 - id：`shortest-path-dag`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/shortest-path-dag/
-- 別名：最短路木、最短経路の数え上げ、最短路に必ず使われる辺、shortest path DAG
+- 別名：最短路木、最短経路の数え上げ、最短路に必ず使われる辺、すべての最短路に含まれる辺、shortest path DAG
 - 種類：最短路、DP
 - 前提：`dijkstra`、`dp-dag`
 - サイン：
-    - 言い回し：最短経路の本数を数える
+    - 言い回し：最短路の本数を数える
     - 言い回し：この辺を通らなくても最短距離は変わらないか・最短路に使われない辺
     - 言い回し：始点からの最短距離を保ったまま辺を減らし、全域木を出力する
 - 節：
@@ -410,7 +405,7 @@ search:
 - サイン：
     - 制約：指定した K 点（K ≤ 10 程度）をすべて連結にする最小コスト
 - 節：
-    - `steiner-tree#state` dp\[S][v] の定義：https://yuukougun.github.io/kyopro-atlas/graph/steiner-tree/#state
+    - `steiner-tree#state` DP の状態の定義（頂点の集合と根の頂点）：https://yuukougun.github.io/kyopro-atlas/graph/steiner-tree/#state
     - `steiner-tree#merge` 部分集合を 2 つに分けて合わせる遷移：https://yuukougun.github.io/kyopro-atlas/graph/steiner-tree/#merge
     - `steiner-tree#dijkstra-step` ダイクストラで v を動かす遷移：https://yuukougun.github.io/kyopro-atlas/graph/steiner-tree/#dijkstra-step
     - `steiner-tree#on-tree` 木の上なら易しい（木の章の「指定頂点を結ぶ最小の部分木」）：https://yuukougun.github.io/kyopro-atlas/graph/steiner-tree/#on-tree
@@ -584,7 +579,7 @@ search:
     - 制約：N, M ≤ 2×10^5 で、辺を 1 本ずつ除いて調べる O(M(N+M)) は間に合わない
 - 節：
     - `lowlink#ord-low` ord と low の定義と求め方：https://yuukougun.github.io/kyopro-atlas/graph/lowlink/#ord-low
-    - `lowlink#conditions` 橋の条件 low[c] > ord[p] と関節点の条件（根は子の数で判定）：https://yuukougun.github.io/kyopro-atlas/graph/lowlink/#conditions
+    - `lowlink#conditions` 橋の条件と関節点の条件（根は子の数で判定）：https://yuukougun.github.io/kyopro-atlas/graph/lowlink/#conditions
     - `lowlink#multi-edges` 多重辺は辺の番号で親を除外する：https://yuukougun.github.io/kyopro-atlas/graph/lowlink/#multi-edges
     - `lowlink#two-edge-connected` 二重辺連結成分（橋で分けて縮約すると木になる）：https://yuukougun.github.io/kyopro-atlas/graph/lowlink/#two-edge-connected
     - `lowlink#vs-scc` 有向グラフの SCC（同じ ord・low の考え方）との対比：https://yuukougun.github.io/kyopro-atlas/graph/lowlink/#vs-scc
@@ -667,7 +662,6 @@ search:
 - 節：
     - `euler-path#conditions` 存在条件（無向・有向）：https://yuukougun.github.io/kyopro-atlas/graph/euler-path/#conditions
     - `euler-path#hierholzer` Hierholzer 法で構成する：https://yuukougun.github.io/kyopro-atlas/graph/euler-path/#hierholzer
-    - `euler-path#pitfalls` 孤立点・多重辺・自己ループの扱い：https://yuukougun.github.io/kyopro-atlas/graph/euler-path/#pitfalls
     - `euler-path#vs-hamiltonian` ハミルトン路（頂点をちょうど 1 回、bitDP）との違い：https://yuukougun.github.io/kyopro-atlas/graph/euler-path/#vs-hamiltonian
 
 ## 次数による平方分割（degree-sqrt） {#degree-sqrt}

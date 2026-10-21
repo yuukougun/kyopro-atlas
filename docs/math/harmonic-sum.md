@@ -10,13 +10,13 @@ level: 水
 kind: [計算量, 整数論]
 prerequisites: [sigma-manipulation, complexity-estimation]
 related: [sieve-eratosthenes, divisor-enum, floor-quotient-enum, divisor-inclusion-exclusion, zeta-mobius-divisor, divisors-and-multiples#harmonic]
-summary: 割り切る・割り切られる関係にある組を値ごとに数えるとき、各 d について d の倍数を全てたどる二重ループが合計 N/1 + … + N/N ≈ N ln N 回で済むことを使う。値の上限が 10^6 程度なら間に合う。
+summary: 割り切る・割り切られる関係にある組を値ごとに数えるとき、各 d の倍数をすべてたどる二重ループが、値の上限 M に対して合計 M/1 + … + M/M ≈ M ln M 回で済むことを使う。M が 10^6 程度なら間に合う。
 complexity: O(M log M)（M は倍数をたどる値の上限。M = 10^6 で内側のループは合計約 1.4×10^7 回）
 signs:
   - {type: constraint, text: A_i ≤ 10^6 程度で、値を配列の添字にできる}
   - {type: phrase, text: 割り切る・割り切られる関係にある組を数える}
   - {type: phrase, text: 各 d について、d の倍数である要素の個数や和を求める}
-  - {type: shape, text: 'Σ_{d=1}^{N} Σ_{k=1}^{⌊N/d⌋} f(d, kd) の形の二重ループ'}
+  - {type: shape, text: 'Σ_{d=1}^{M} Σ_{k=1}^{⌊M/d⌋} f(d, kd) の形の二重ループ'}
 acl: []
 verify: []
 frequency: A

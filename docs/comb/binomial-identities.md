@@ -21,7 +21,7 @@ acl: []
 frequency: B
 frequency_evidence: recent 0・前提として 1 ページに届く（直接 1）・古い ABC 3 問
 sections:
-  - {title: '二項定理、Σ C(n,k) = 2^n と交代和 = [n = 0]', anchor: binomial-theorem}
+  - {title: 二項定理、二項係数の和 2^n と交代和, anchor: binomial-theorem}
   - {title: 偶奇の条件つきの和, anchor: parity-sum}
   - {title: Vandermonde の恒等式（2 グループから合計 k 個）, anchor: vandermonde}
   - {title: 縦の和（hockey stick）と経路数の総和, anchor: hockey-stick}

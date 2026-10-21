@@ -22,7 +22,7 @@ verify: [enumerate_quotients]
 frequency: C
 frequency_evidence: recent 0・前提として 1 ページに届く（直接 1）・古い ABC 2 問
 sections:
-  - {title: 値が O(√N) 種類である理由（i ≤ √N と i > √N）, anchor: why-sqrt}
+  - {title: 値が O(√N) 種類である理由（i が √N 以下か、√N より大きいか）, anchor: why-sqrt}
   - {title: 同じ商になる区間の右端 ⌊N/⌊N/l⌋⌋, anchor: block-end}
   - {title: √N を境に場合分けする（片方を √N まで全探索）, anchor: split-at-sqrt}
   - {title: 調和級数・floor sum との使い分け, anchor: vs-others}
@@ -48,7 +48,7 @@ updated: 2026-10-21
 
 このページで使う記法：$N$ は正の整数で、$i$ は $1$ 以上 $N$ 以下を動く（1-indexed）。商が同じになる $i$ の範囲は両端を含めた閉区間 $[l, r]$ で書き、$s = \lfloor \sqrt{N} \rfloor$ とする。ほかの記法は[記法と用語の約束](../start/notation.md)にそろえる。
 
-## 値が O(√N) 種類である理由（i ≤ √N と i > √N） {#why-sqrt}
+## 値が O(√N) 種類である理由（i が √N 以下か、√N より大きいか） {#why-sqrt}
 
 $\sum_{i=1}^{N} \lfloor N/i \rfloor$ は $1$ から $N$ までの各数の約数の個数の和に等しい（$\lfloor N/i \rfloor$ は $N$ 以下の $i$ の倍数の個数なので）。$N \le 10^6$ なら $i$ を全部回せば済むが、$N = 10^{12}$ では $10^{12}$ 回のループになり間に合わない。そこで、項の値の種類が少ないことを使う。
 

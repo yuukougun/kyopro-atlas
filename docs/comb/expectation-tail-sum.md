@@ -20,7 +20,7 @@ acl: []
 frequency: C
 frequency_evidence: recent 0・前提として 1 ページに届く（直接 1）・古い ABC 2 問
 sections:
-  - {title: 'X = Σ [X ≥ k] と線形性', anchor: identity}
+  - {title: X を「X ≥ k」の個数の和に分けて線形性を使う, anchor: identity}
   - {title: 最大値・K 番目の値：「すべて k 未満」の余事象, anchor: kth-value}
   - {title: 「〜になるまでの回数」= Σ P(k 回目までに終わらない), anchor: waiting-time}
   - {title: 連続値の場合（積分）, anchor: continuous, level: 発展}

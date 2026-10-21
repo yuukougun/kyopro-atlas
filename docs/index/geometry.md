@@ -33,7 +33,6 @@ search:
     - `geometry-vectors#segment-intersection` 線分の交差判定（端点で接する・同一直線上の場合）と点と直線の距離（水）：https://yuukougun.github.io/kyopro-atlas/geometry/geometry-vectors/#segment-intersection
     - `geometry-vectors#3d-geometry` 3 次元の基本：軸に平行な直方体の共通部分は軸ごとの区間の積：https://yuukougun.github.io/kyopro-atlas/geometry/geometry-vectors/#3d-geometry
     - `geometry-vectors#point-representation` 点の表し方：整数の構造体と std::complex：https://yuukougun.github.io/kyopro-atlas/geometry/geometry-vectors/#point-representation
-    - `geometry-vectors#next-steps` 偏角ソート・凸包・累積和へのつながり：https://yuukougun.github.io/kyopro-atlas/geometry/geometry-vectors/#next-steps
 
 ## 誤差の扱いと整数での処理（geometry-precision） {#geometry-precision}
 

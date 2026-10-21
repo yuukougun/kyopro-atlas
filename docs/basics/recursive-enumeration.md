@@ -28,7 +28,6 @@ sections:
   - {title: 敷き詰め型（左上の空きマスから置く）, anchor: tiling}
   - {title: 枝刈りと計算量の見積もり（葉の数 × 1 本あたり）, anchor: pruning}
   - {title: 状態を戻し忘れない（バックトラック）, anchor: backtrack}
-  - {title: 上位の手法へのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---

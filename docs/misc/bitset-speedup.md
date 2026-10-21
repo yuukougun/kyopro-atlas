@@ -25,7 +25,7 @@ sections:
   - {title: ワード並列の考え方と計算量の目安（N^3/64）, anchor: word-parallel}
   - {title: 共通の隣接頂点・三角形の数（行の AND と popcount）, anchor: common-neighbors}
   - {title: 偶奇だけの集計（XOR）, anchor: parity-xor}
-  - {title: 部分和 DP のシフト OR（dp |= dp << a）, anchor: subset-sum-shift, level: 黄}
+  - {title: 部分和 DP のシフト OR, anchor: subset-sum-shift, level: 黄}
   - {title: DAG の到達可能性（逆トポロジカル順に OR、閉路は SCC で縮約）, anchor: reachability, level: 黄}
   - {title: メモリの見積もりと 64 個ずつのクエリの処理, anchor: memory-batching, level: 黄}
   - {title: C++ の作法（大きさはコンパイル時の定数・大きな bitset をスタックに置かない）, anchor: cpp}

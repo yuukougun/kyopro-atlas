@@ -25,7 +25,6 @@ sections:
   - {title: 条件付き確率と全確率の公式, anchor: conditional}
   - {title: 期待値の定義, anchor: expectation}
   - {title: 浮動小数点の誤差と出力の桁数, anchor: precision}
-  - {title: 確率 DP・期待値 DP・期待値の線形性へのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---
@@ -156,7 +155,7 @@ $$
 
 **積の期待値を期待値の積にする**。$E[XY] = E[X] \, E[Y]$ は $X$ と $Y$ が独立なら成り立つが、一般には成り立たない。同じサイコロの目 $X$ について $E[X^2] = 91/6$ だが、$E[X]^2 = 49/4$ である（[線形性が使えない量](../comb/linearity-of-expectation.md#nonlinear)）。
 
-## 確率 DP・期待値 DP・期待値の線形性へのつながり {#next-steps}
+## 上位の手法へのつながり {#next-steps}
 
 全確率の公式を何段も重ねると DP になる。どちらの向きに使うかで 2 種類に分かれる。
 

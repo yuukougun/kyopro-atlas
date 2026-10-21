@@ -27,7 +27,6 @@ sections:
   - {title: 円環上の組を数える, anchor: circular}
   - {title: 長さの制限付き（窓の中だけで数える）, anchor: length-limited, level: 青}
   - {title: 尺取りとの使い分け（負の値）, anchor: vs-two-pointers}
-  - {title: XOR・不等式・最長の区間へのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---
@@ -184,7 +183,7 @@ $$
 
 「ちょうど」や「倍数」は値の一致に書けるので連想配列が合う。「以下」「以上」は一致ではなく大小なので、連想配列ではなく尺取りや BIT で数える。
 
-## XOR・不等式・最長の区間へのつながり {#next-steps}
+## 上位の手法へのつながり {#next-steps}
 
 $S_r$ と $S_l$ の関係に書き直すという考え方は、和以外の演算や、数える以外の問いにも広がる。
 

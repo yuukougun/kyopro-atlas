@@ -26,8 +26,6 @@ sections:
   - {title: XOR の最小・最大（同じ側を優先して降りる）, anchor: xor-min-max}
   - {title: K 番目と全体への XOR（ビットごとの反転フラグ）, anchor: kth-and-global-xor}
   - {title: 明示的に作らない Binary Trie（上位ビットで分ける再帰）, anchor: implicit}
-  - {title: 使い分け（最小の XOR の組はソート順で隣り合う組でも求まる、XOR で作れる値の集合は XOR 基底）, anchor: choosing}
-  - {title: 落とし穴（ノード数＝要素数 × ビット数。配列で確保する）, anchor: pitfalls}
 stage: stub
 updated: 2026-10-21
 ---

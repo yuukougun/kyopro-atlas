@@ -23,7 +23,7 @@ sections:
   - {title: 親・深さ・部分木サイズを求める, anchor: parent-depth-size}
   - {title: 行きがけ順と帰りがけ順（子から親へ集約する）, anchor: pre-post-order}
   - {title: BFS 順の逆で再帰を使わずに集約する, anchor: bfs-order}
-  - {title: p_i < i なら番号の逆順で足りる, anchor: parent-index}
+  - {title: 親の番号が自分より小さいなら、番号の逆順で足りる, anchor: parent-index}
   - {title: 再帰の深さ（パス状の木）と非再帰の書き方, anchor: recursion-depth}
   - {title: 一般の木 DP は DP の章へ, anchor: to-tree-dp}
 stage: draft
@@ -117,7 +117,7 @@ BFS 順の逆は、再帰を使わないので、パス状の木でもスタッ�
     ??? success "答え"
         `sz[v]` に足し込まれるのは $v$ の子 $c$ の `sz[c]` だけで、子は $v$ より深いので BFS 順で $v$ より後ろにある。逆からたどると、$v$ に来る前に子はすべて処理済みで、`sz[v]` は完成している。子の `sz[c]` も同じ理由で、さらに深い頂点から順に確定している。
 
-## p_i < i なら番号の逆順で足りる {#parent-index}
+## 親の番号が自分より小さいなら、番号の逆順で足りる {#parent-index}
 
 問題文で「頂点 $i$（$2 \le i \le N$）の親は $p_i$ で、$p_i < i$」の形で木が与えられる問題を考える。この形では親の番号は必ず子より小さく、番号の小さい順はすでに「親の後に子が来る」順になっている。隣接リストを作らず、DFS や BFS もせずに、番号の順と番号の逆順のループで済む。
 

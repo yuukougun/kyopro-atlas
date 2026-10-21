@@ -22,14 +22,13 @@ sections:
   - {title: 題材の性質, anchor: properties}
   - {title: 全体への加算・反転・回転 → 全体の操作を変数で持つ（global-offset）, anchor: global-ops}
   - {title: '列の途中への挿入・削除・付け替え → 配列で持つ連結リスト・deque（linked-list, stack-techniques）', anchor: insert-delete}
-  - {title: '区間を塗る・同じ値の区間をつなぐ → 区間を set で管理・次の空きへ飛ぶ Union-Find（interval-set, union-find-applications）', anchor: paint}
+  - {title: 区間を塗る・同じ値の区間をつなぐ → 区間を set で管理・次の空きへ飛ぶ Union-Find, anchor: paint}
   - {title: 後の操作が前の操作を上書きする → 後ろから見る（reverse-thinking）, anchor: overwrite}
   - {title: 削除が難しい → 逆順にして追加にする（union-find-connectivity）, anchor: reverse-deletion}
-  - {title: '先読みしてよい → 並べ替えてまとめて処理・Mo・イベントにして走査（offline-queries, mo-algorithm, event-sort）', anchor: offline}
-  - {title: '更新と質問が交互で区間を扱う → セグメント木・遅延セグメント木・平方分割（segment-tree, lazy-segment-tree, sqrt-decomposition）', anchor: online}
-  - {title: '過去の版に戻る・版をコピーする → 版の木・永続データ構造（persistent-data-structures, root-path-dfs, rollback-union-find）', anchor: versions}
+  - {title: 先読みしてよい → 並べ替えてまとめて処理・Mo・イベントにして走査, anchor: offline}
+  - {title: 更新と質問が交互で区間を扱う → セグメント木・遅延セグメント木・平方分割, anchor: online}
+  - {title: 過去の版に戻る・版をコピーする → 版の木・永続データ構造, anchor: versions}
   - {title: '同じ操作を非常に多く繰り返す → 周期で打ち切る・操作の合成をダブリング（periodicity, doubling）', anchor: repeat}
-  - {title: 落とし穴, anchor: pitfalls}
 stage: stub
 updated: 2026-10-21
 ---

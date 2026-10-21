@@ -25,7 +25,6 @@ sections:
   - {title: 成分ごとの集計（頂点数と辺数で木・なもり・それ以外を見分ける）, anchor: per-component}
   - {title: 森の連結成分の数は N − M, anchor: forest}
   - {title: 座標や値を頂点にして成分を考える, anchor: values-as-vertices, level: 青}
-  - {title: 上位の手法とのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---
@@ -138,7 +137,7 @@ Union-Find は隣接リストを作らずに辺を読みながら併合でき、
 
 値を頂点にする型はほかにもある。「同じ値を持つ位置どうしをつなぐ」なら、値ごとに 1 頂点（[超頂点](../guide/glossary.md#super-vertex)）を作り、各位置をその値の頂点に結べば辺は $N$ 本で済む。「値 $a$ を値 $b$ に一括で置き換える」操作を値どうしの辺とみなし、成分の大きさから必要な回数を数える型もある（[Union-Find の練習](../ds/union-find.md#practice)）。
 
-## 上位の手法とのつながり {#next-steps}
+## 上位の手法へのつながり {#next-steps}
 
 - **辺の削除・しきい値の順に辺を足す**：削除を逆順の追加に直す、重みの小さい順に辺を足して質問に答える（[Union-Find で連結性を扱う](../graph/union-find-connectivity.md)）
 - **成分に情報を持たせる**：成分ごとの最小値や上位 $K$ 個を、併合のたびに更新して持つ（[Union-Find の応用](../ds/union-find-applications.md)）

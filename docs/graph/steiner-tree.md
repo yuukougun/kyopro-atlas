@@ -19,7 +19,7 @@ verify: [minimum_steiner_tree]
 frequency: C
 frequency_evidence: recent 0・前提として届くページなし・古い ABC 2 問
 sections:
-  - {title: 'dp[S][v] の定義', anchor: state}
+  - {title: DP の状態の定義（頂点の集合と根の頂点）, anchor: state}
   - {title: 部分集合を 2 つに分けて合わせる遷移, anchor: merge}
   - {title: ダイクストラで v を動かす遷移, anchor: dijkstra-step}
   - {title: 木の上なら易しい（木の章の「指定頂点を結ぶ最小の部分木」）, anchor: on-tree}

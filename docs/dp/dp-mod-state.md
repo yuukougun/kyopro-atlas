@@ -25,7 +25,6 @@ sections:
   - {title: 個数も状態に持つ（K 個選んで和が D の倍数）, anchor: with-count}
   - {title: 平均の扱い（個数を外側で固定する・平均を引いて和 0 にする）, anchor: average}
   - {title: 後ろから余りごとの勝敗を決めるゲーム, anchor: game-by-remainder, level: 青}
-  - {title: 落とし穴：C++ の % が負になる・状態の mod と答えの mod の混同, anchor: pitfalls}
 stage: draft
 updated: 2026-10-21
 ---
@@ -143,7 +142,7 @@ $k$ ごとの状態は $(k + 1) k$ 個で、要素ごとに全状態を見るの
 --8<-- "dp-mod-state/game-remainder.cpp:core"
 ```
 
-## 落とし穴：C++ の % が負になる・状態の mod と答えの mod の混同 {#pitfalls}
+## 落とし穴 {#pitfalls}
 
 **貰う形で `(r - a) % M` と書く**。貰う形では $\mathrm{dp}[i+1][r]$ を $\mathrm{dp}[i][(r - A_i) \bmod M]$ から作るが、C++ の `%` は左辺が負なら 0 以下の値を返す。$r = 1$、$A_i \bmod M = 3$、$M = 4$ なら `(1 - 3) % 4` は $-2$ で、配列の外を読む。`((r - a) % M + M) % M` と書くか、配る形 `(r + a) % M` にして引き算を避ける（[mod の計算の基本](../math/mod-arithmetic.md)）。入力に負の値が来るときも、`a % M` が負になるので同じ直しが要る。
 

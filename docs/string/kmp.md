@@ -23,12 +23,12 @@ verify: []
 frequency: B
 frequency_evidence: recent 0・前提として 2 ページに届く（直接 2）・古い ABC 6 問
 sections:
-  - {title: '失敗関数 π（border）の定義と添字の流儀（π[0] を 0 にするか −1 にするか）', anchor: failure-function}
+  - {title: 失敗関数 π（border）の定義と添字の流儀, anchor: failure-function}
   - {title: なぜ O(N) か：照合長は 1 文字で高々 1 増え、ループで減る回数も合計 N 以下, anchor: linear-time}
   - {title: パターン照合：失敗したら π の値までずらす, anchor: matching}
   - {title: MP と KMP の違い（競プロでは MP を KMP と呼ぶことが多い）, anchor: mp-vs-kmp}
   - {title: border の連鎖と全 border の列挙, anchor: border-chain}
-  - {title: '周期と繰り返し：最小周期 N − π[N−1]、N を割り切るときだけ繰り返しで書ける（弱周期定理）', anchor: string-period}
+  - {title: 周期と繰り返し：最小周期と、繰り返しで書ける条件（弱周期定理）, anchor: string-period}
   - {title: N の約数の周期を数える：約数ごとに数えて包除（メビウス）, anchor: count-periodic}
   - {title: 照合オートマトン（状態×文字 → 次の状態）を表に埋める, anchor: automaton}
 stage: draft
@@ -52,7 +52,7 @@ updated: 2026-10-21
 
 KMP 法は、文字列の各接頭辞について「接頭辞でも接尾辞でもある最長の部分」の長さ $\pi$ を、すでに求めた値を使い回して線形時間で求める手法である。$\pi$ は、照合に失敗したときに、ずらした後も一致が分かっている長さ（どこから比べ直すか）を表す。$\pi$ をたどれば、文字列の周期や繰り返しの単位も分かる。ACL にはないので自分で書くが、中心は 10 行ほどである。
 
-## 失敗関数 π（border）の定義と添字の流儀（π[0] を 0 にするか −1 にするか） {#failure-function}
+## 失敗関数 π（border）の定義と添字の流儀 {#failure-function}
 
 $S$ 自身より短い文字列で、$S$ の[接頭辞](../string/string-basics.md)かつ接尾辞であるものを $S$ の [border](../guide/glossary.md#border) という。空の文字列はいつでも border である。たとえば $S = \texttt{abacaba}$ の border は $\texttt{aba}$・$\texttt{a}$・空の 3 つである。
 
@@ -136,7 +136,7 @@ $S$ の border は、最長の border の長さ $\pi[N - 1]$ から始めて $b 
 
 受け渡しは $k$ の大きい順に行う。$\pi[k - 1] < k$ なので、`cnt[k]` は自分より長い接頭辞からの受け渡しがすべて済んでから読まれる。
 
-## 周期と繰り返し：最小周期 N − π[N−1]、N を割り切るときだけ繰り返しで書ける（弱周期定理） {#string-period}
+## 周期と繰り返し：最小周期と、繰り返しで書ける条件（弱周期定理） {#string-period}
 
 $1 \le p \le N$ について、すべての $0 \le i < N - p$ で $S[i] = S[i + p]$ が成り立つとき、$p$ を $S$ の[周期](../guide/glossary.md#period)という。この条件は「$S[0, N - p)$ と $S[p, N)$ が等しい」と同じで、長さ $N - p$ の border があることと同じである。
 

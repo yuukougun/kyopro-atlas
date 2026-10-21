@@ -15,7 +15,7 @@ complexity: O(N+M)（トポロジカル順を作るのも DP も各頂点・各�
 signs:
   - {type: phrase, text: 番号の小さい頂点から大きい頂点へだけ辺がある（u < v）}
   - {type: phrase, text: 値が増える向きにしか移動できない}
-  - {type: phrase, text: 有向グラフの最長の経路の長さ・経路の本数・最短経路の本数}
+  - {type: phrase, text: 有向グラフの最長の経路の長さ・経路の本数・最短路の本数}
   - {type: phrase, text: 依存関係に従って順に決める（閉路があれば −1）}
 acl: []
 frequency: B
@@ -26,7 +26,6 @@ sections:
   - {title: DAG だと気づく・作る（値の順・距離の層・同じ値の頂点をまとめる）, anchor: find-dag, level: 水}
   - {title: 最短路の本数（距離が確定した順に配る）, anchor: count-shortest-paths}
   - {title: 閉路があるとき（SCC で縮約する・最短路に切り替える）, anchor: with-cycles}
-  - {title: 上位の手法とのつながり, anchor: connections}
 stage: draft
 updated: 2026-10-21
 ---
@@ -148,7 +147,7 @@ dist[s] = 0, cnt[s] = 1、ほかは dist = 未訪問, cnt = 0
 
 各頂点から辺がちょうど 1 本出るグラフは、閉路を先に見つけて処理すれば、残りの木の部分が DAG になる（[Functional graph](../graph/functional-graph.md)）。
 
-## 上位の手法とのつながり {#connections}
+## 上位の手法へのつながり {#next-steps}
 
 DAG 上の DP は、ほかの手法の判定や下ごしらえとしてよく現れる。
 

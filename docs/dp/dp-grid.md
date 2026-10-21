@@ -9,7 +9,7 @@ order: 150
 level: 水
 kind: [DP]
 prerequisites: [dp-basics]
-related: [dp-dag, grid-graph, bfs, lattice-paths, inclusion-exclusion-dp#first-obstacle, dp-prefix-sum, grid#right-down]
+related: [dp-dag, grid-graph, bfs, lattice-paths, inclusion-exclusion-dp#first-obstacle, dp-prefix-sum, grid#right-down, lis, dp-reconstruction, dp-state-design]
 summary: 右か下にしか動けないグリッドで、経路の数や経路上の値の最大を、マスの昇順の DP で求める。上下左右に動けるなら閉路ができるので、BFS やダイクストラ法を使う。
 complexity: 基本は O(HW)。状態を足すと O(HW × 状態数)
 signs:

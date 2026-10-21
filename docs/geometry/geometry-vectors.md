@@ -31,7 +31,6 @@ sections:
   - {title: 線分の交差判定（端点で接する・同一直線上の場合）と点と直線の距離, anchor: segment-intersection, level: 水}
   - {title: 3 次元の基本：軸に平行な直方体の共通部分は軸ごとの区間の積, anchor: 3d-geometry}
   - {title: '点の表し方：整数の構造体と std::complex', anchor: point-representation}
-  - {title: 偏角ソート・凸包・累積和へのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---
@@ -230,7 +229,7 @@ $$
 
 **面積を 2 で割ってから比べる**。$2S$ が奇数なら、整数の割り算で切り捨てられて等しくない面積が等しく見える。比較は $2S$ のまま行う。
 
-## 偏角ソート・凸包・累積和へのつながり {#next-steps}
+## 上位の手法へのつながり {#next-steps}
 
 外積の符号は、上位の幾何の手法でそのまま比較や判定の部品になる。
 

@@ -21,11 +21,10 @@ verify: [kth_root_integer]
 frequency: B
 frequency_evidence: recent 0・前提として届くページなし・古い ABC 4 問
 sections:
-  - {title: sqrt の誤差と補正（r² ≤ N < (r+1)² を確かめる）, anchor: sqrt-correction}
+  - {title: sqrt の誤差と補正（r の 2 乗と r + 1 の 2 乗で N を挟む）, anchor: sqrt-correction}
   - {title: 二分探索による整数の K 乗根（途中の累乗のあふれ）, anchor: kth-root}
   - {title: 累乗数の数え上げ（b ≥ 3 は列挙、b = 2 は ⌊√N⌋、重複を除く）, anchor: perfect-powers}
   - {title: √ を含む式の大小を整数で比べる, anchor: compare-sqrt}
-  - {title: 約数列挙・商の列挙・素因数の指数へのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---
@@ -47,7 +46,7 @@ updated: 2026-10-21
 
 このページでは $N \ge 0$ の整数とし、$\lfloor \sqrt{N} \rfloor$ を `isqrt(N)` とも書く。記法は[記法と用語の約束](../start/notation.md)にそろえる。
 
-## sqrt の誤差と補正（r² ≤ N < (r+1)² を確かめる） {#sqrt-correction}
+## sqrt の誤差と補正（r の 2 乗と r + 1 の 2 乗で N を挟む） {#sqrt-correction}
 
 `(long long)sqrt(n)` は、$n$ が $4.5 \times 10^{15}$ ほどの大きさで、もう 1 大きい値を返すことがある。`sqrt` は double で計算し、double の仮数部は 53 bit しかない（[浮動小数点数の型](../cpp/cpp-types-literals.md#floating-point)）。$n = r^2 - 1$ の平方根は $r - \frac{1}{2r}$ ほどで、$r$ が大きいとこの差が double の刻みの半分より小さくなり、$r$ に丸められる。
 
@@ -149,7 +148,7 @@ $$
 
 **`i <= sqrt(n)` のループ**。約数の列挙などで `for (long long i = 1; i <= sqrt(n); i++)` と書くと、`sqrt` の誤差で最後の 1 回が抜けたり増えたりする。毎回の `sqrt` の呼び出しも遅い。`i * i <= n`（$i$ が大きいなら `i <= n / i`）と書く。
 
-## 約数列挙・商の列挙・素因数の指数へのつながり {#next-steps}
+## 上位の手法へのつながり {#next-steps}
 
 $\sqrt{N}$ は、整数の問題で「小さい側と大きい側の境目」として何度も現れる。
 

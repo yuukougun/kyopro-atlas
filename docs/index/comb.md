@@ -44,7 +44,7 @@ search:
 - 節：
     - `binomial-coefficient#meanings` 3 つの意味（選ぶ・0/1 列・格子路）：https://yuukougun.github.io/kyopro-atlas/comb/binomial-coefficient/#meanings
     - `binomial-coefficient#pascal` パスカルの漸化式と対称性：https://yuukougun.github.io/kyopro-atlas/comb/binomial-coefficient/#pascal
-    - `binomial-coefficient#out-of-range` k < 0・k > n を 0 とする約束：https://yuukougun.github.io/kyopro-atlas/comb/binomial-coefficient/#out-of-range
+    - `binomial-coefficient#out-of-range` 範囲の外の k（負や n 超え）を 0 とする約束：https://yuukougun.github.io/kyopro-atlas/comb/binomial-coefficient/#out-of-range
     - `binomial-coefficient#overflow` mod を取らないときの大きさとオーバーフロー：https://yuukougun.github.io/kyopro-atlas/comb/binomial-coefficient/#overflow
     - `binomial-coefficient#kth` 辞書順 K 番目の組合せと順位：https://yuukougun.github.io/kyopro-atlas/comb/binomial-coefficient/#kth
 
@@ -76,7 +76,7 @@ search:
 
 - id：`stars-and-bars`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/stars-and-bars/
-- 別名：玉と仕切り、H(n,k)、非負整数解の個数、隣り合わない選び方、stars and bars
+- 別名：玉と仕切り、ₖHₙ、非負整数解の個数、隣り合わない選び方、stars and bars
 - 種類：数え上げ
 - 前提：`binomial-coefficient`
 - サイン：
@@ -99,7 +99,7 @@ search:
 - 種類：数え上げ
 - 前提：`binomial-precompute`
 - サイン：
-    - 言い回し：グリッドの左上から右下への最短経路の数
+    - 言い回し：グリッドの左上から右下への最短路の数
     - 制約：H, W ≤ 10^5 のグリッドで、左上から右下への経路の数を求める
     - 言い回し：通れない長方形の領域がある経路の数
     - 言い回し：2 種類の移動を組み合わせて目的地へ行く方法の数
@@ -109,7 +109,6 @@ search:
     - `lattice-paths#forbidden-region` 禁止領域を避ける：境界を越える点で分類する（青）：https://yuukougun.github.io/kyopro-atlas/comb/lattice-paths/#forbidden-region
     - `lattice-paths#sum-of-paths` 経路数の総和と、二項係数の和を経路数として一括で求める（青）：https://yuukougun.github.io/kyopro-atlas/comb/lattice-paths/#sum-of-paths
     - `lattice-paths#independent-axes` 移動を軸ごとの回数に分けて独立にする（45 度回転）（青）：https://yuukougun.github.io/kyopro-atlas/comb/lattice-paths/#independent-axes
-    - `lattice-paths#next-steps` 鏡像法・包除 DP・LGV 補題へのつながり：https://yuukougun.github.io/kyopro-atlas/comb/lattice-paths/#next-steps
 
 ## 写像 12 相（twelvefold-way） {#twelvefold-way}
 
@@ -253,7 +252,7 @@ search:
     - 言い回し：全ペアの (A_i + A_j)^x の和
     - 式の形：Σ の中に二項係数があり、N が大きく項ごとには足せない
 - 節：
-    - `binomial-identities#binomial-theorem` 二項定理、Σ C(n,k) = 2^n と交代和 = [n = 0]：https://yuukougun.github.io/kyopro-atlas/comb/binomial-identities/#binomial-theorem
+    - `binomial-identities#binomial-theorem` 二項定理、二項係数の和 2^n と交代和：https://yuukougun.github.io/kyopro-atlas/comb/binomial-identities/#binomial-theorem
     - `binomial-identities#parity-sum` 偶奇の条件つきの和：https://yuukougun.github.io/kyopro-atlas/comb/binomial-identities/#parity-sum
     - `binomial-identities#vandermonde` Vandermonde の恒等式（2 グループから合計 k 個）：https://yuukougun.github.io/kyopro-atlas/comb/binomial-identities/#vandermonde
     - `binomial-identities#hockey-stick` 縦の和（hockey stick）と経路数の総和：https://yuukougun.github.io/kyopro-atlas/comb/binomial-identities/#hockey-stick
@@ -349,7 +348,6 @@ search:
     - `inclusion-exclusion#symmetric` 対称なら破る個数 k ごとに足す：https://yuukougun.github.io/kyopro-atlas/comb/inclusion-exclusion/#symmetric
     - `inclusion-exclusion#derangement` 撹乱順列（完全順列）：https://yuukougun.github.io/kyopro-atlas/comb/inclusion-exclusion/#derangement
     - `inclusion-exclusion#surjection` 全射の数（各色を少なくとも 1 回使う）：https://yuukougun.github.io/kyopro-atlas/comb/inclusion-exclusion/#surjection
-    - `inclusion-exclusion#pitfalls` 落とし穴：符号・空集合・lcm のオーバーフロー：https://yuukougun.github.io/kyopro-atlas/comb/inclusion-exclusion/#pitfalls
     - `inclusion-exclusion#when-to-use` 使い分け：余事象・包除 DP・約数包除：https://yuukougun.github.io/kyopro-atlas/comb/inclusion-exclusion/#when-to-use
     - `inclusion-exclusion#min-max` min-max 包除（全種類がそろうまでの期待値）（発展）：https://yuukougun.github.io/kyopro-atlas/comb/inclusion-exclusion/#min-max
 
@@ -421,9 +419,9 @@ search:
     - 言い回し：Σ gcd や Σ lcm を求める
     - 制約：N ≤ 10^6 程度で、μ を篩で前計算できる
 - 節：
-    - `mobius-function#definition` μ の定義と Σ_{d|n} μ(d) = [n = 1]（素因数についての包除）：https://yuukougun.github.io/kyopro-atlas/comb/mobius-function/#definition
+    - `mobius-function#definition` μ の定義と、約数についての和が n = 1 のときだけ 1 になる性質：https://yuukougun.github.io/kyopro-atlas/comb/mobius-function/#definition
     - `mobius-function#inversion` メビウス反転：https://yuukougun.github.io/kyopro-atlas/comb/mobius-function/#inversion
-    - `mobius-function#gcd-one` [gcd = 1] の置き換えと和の入れ替え：https://yuukougun.github.io/kyopro-atlas/comb/mobius-function/#gcd-one
+    - `mobius-function#gcd-one` 「gcd が 1」の条件の置き換えと和の入れ替え：https://yuukougun.github.io/kyopro-atlas/comb/mobius-function/#gcd-one
     - `mobius-function#sieve` μ を篩で作る：https://yuukougun.github.io/kyopro-atlas/comb/mobius-function/#sieve
     - `mobius-function#quotient` 商の列挙で同じ値の範囲を束ねる（発展）：https://yuukougun.github.io/kyopro-atlas/comb/mobius-function/#quotient
     - `mobius-function#vs-divisor-ie` 約数包除との書き換え：https://yuukougun.github.io/kyopro-atlas/comb/mobius-function/#vs-divisor-ie
@@ -607,7 +605,6 @@ search:
     - `probability-basics#conditional` 条件付き確率と全確率の公式：https://yuukougun.github.io/kyopro-atlas/comb/probability-basics/#conditional
     - `probability-basics#expectation` 期待値の定義：https://yuukougun.github.io/kyopro-atlas/comb/probability-basics/#expectation
     - `probability-basics#precision` 浮動小数点の誤差と出力の桁数：https://yuukougun.github.io/kyopro-atlas/comb/probability-basics/#precision
-    - `probability-basics#next-steps` 確率 DP・期待値 DP・期待値の線形性へのつながり：https://yuukougun.github.io/kyopro-atlas/comb/probability-basics/#next-steps
 
 ## 幾何分布とコンプリートガチャ（coupon-collector） {#coupon-collector}
 
@@ -624,7 +621,6 @@ search:
     - `coupon-collector#geometric` 幾何分布：E = 1 + (1 − p)E から 1/p：https://yuukougun.github.io/kyopro-atlas/comb/coupon-collector/#geometric
     - `coupon-collector#failures` 失敗の回数（1/p − 1）との違い：https://yuukougun.github.io/kyopro-atlas/comb/coupon-collector/#failures
     - `coupon-collector#staged` 段階に分けて幾何分布の期待値を足す（コンプガチャ）：https://yuukougun.github.io/kyopro-atlas/comb/coupon-collector/#staged
-    - `coupon-collector#next-steps` 確率が違う・戻りがあるときへのつながり：https://yuukougun.github.io/kyopro-atlas/comb/coupon-collector/#next-steps
 
 ## 確率・期待値を mod 998244353 で答える（rational-mod） {#rational-mod}
 
@@ -782,7 +778,7 @@ search:
     - 言い回し：〜がそろうまでに取り出す回数の期待値
     - 制約：値の範囲 M ≤ 5000 程度で、各 k について P(X ≥ k) を数える
 - 節：
-    - `expectation-tail-sum#identity` X = Σ [X ≥ k] と線形性：https://yuukougun.github.io/kyopro-atlas/comb/expectation-tail-sum/#identity
+    - `expectation-tail-sum#identity` X を「X ≥ k」の個数の和に分けて線形性を使う：https://yuukougun.github.io/kyopro-atlas/comb/expectation-tail-sum/#identity
     - `expectation-tail-sum#kth-value` 最大値・K 番目の値：「すべて k 未満」の余事象：https://yuukougun.github.io/kyopro-atlas/comb/expectation-tail-sum/#kth-value
     - `expectation-tail-sum#waiting-time` 「〜になるまでの回数」= Σ P(k 回目までに終わらない)：https://yuukougun.github.io/kyopro-atlas/comb/expectation-tail-sum/#waiting-time
     - `expectation-tail-sum#continuous` 連続値の場合（積分）（発展）：https://yuukougun.github.io/kyopro-atlas/comb/expectation-tail-sum/#continuous
@@ -800,7 +796,7 @@ search:
     - 言い回し：分散を求める（最小化する）
     - 言い回し：スコアの二乗の期待値
 - 節：
-    - `expectation-of-square#difference` E[X^2] と E[X]^2 の違い：https://yuukougun.github.io/kyopro-atlas/comb/expectation-of-square/#difference
+    - `expectation-of-square#difference` 2 乗の期待値と期待値の 2 乗の違い：https://yuukougun.github.io/kyopro-atlas/comb/expectation-of-square/#difference
     - `expectation-of-square#pairs` ペアに分ける（i = j の項を忘れない）：https://yuukougun.github.io/kyopro-atlas/comb/expectation-of-square/#pairs
     - `expectation-of-square#carry-three` (x + 1)^2 = x^2 + 2x + 1 で 3 つの量を同時に運ぶ：https://yuukougun.github.io/kyopro-atlas/comb/expectation-of-square/#carry-three
     - `expectation-of-square#variance` 分散と二乗和の関係：https://yuukougun.github.io/kyopro-atlas/comb/expectation-of-square/#variance

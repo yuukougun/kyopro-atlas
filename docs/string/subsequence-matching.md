@@ -24,7 +24,7 @@ frequency: B
 frequency_evidence: recent 1（abc452_d）・前提として 1 ページに届く（直接 1）・古い ABC 2 問
 sections:
   - {title: 貪欲な照合：できるだけ左で拾うのが最善な理由, anchor: greedy-matching}
-  - {title: '次の出現位置の表 nxt[i][c]（後ろから作る・番兵 N）', anchor: next-occurrence}
+  - {title: 次の出現位置の表（後ろから作る・番兵 N）, anchor: next-occurrence}
   - {title: 文字ごとの位置のリストと lower_bound による代用, anchor: position-lists}
   - {title: 辞書順最小の部分列（残りで足りる範囲の最小の文字を選ぶ）, anchor: lexicographically-smallest, level: 水}
   - {title: 繰り返した文字列の部分列（文字ごとの累積個数で位置を飛ばす）, anchor: repeated-string, level: 青}
@@ -74,7 +74,7 @@ $$
     ??? success "答え"
         位置 3 で `a` を拾う照合では、`b` は位置 4 で拾う。位置 0 で `a` を拾い直しても、`b` に使える範囲は位置 1〜4 に広がるだけで、位置 4 の `b` はそのまま使える。左で拾って選択肢が減ることはないので、最初の `a` を使ってよい。
 
-## 次の出現位置の表 nxt[i][c]（後ろから作る・番兵 N） {#next-occurrence}
+## 次の出現位置の表（後ろから作る・番兵 N） {#next-occurrence}
 
 同じ $S$ に対して多数の $T$ を判定するとき、毎回 $S$ を走査すると $O(Q \lvert S \rvert)$ かかる。そこで貪欲の「次に $T[j]$ が現れる位置まで進む」を表にしておく。$\mathrm{nxt}[i][c]$ を、位置 $i$ 以降で文字 $c$ が最初に現れる位置（なければ $N$）と定める。$N$ はどの文字も見つからないことを表す[番兵](../guide/glossary.md#sentinel)で、表は $N + 1$ 行ある。
 

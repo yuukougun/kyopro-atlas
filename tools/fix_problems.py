@@ -5,7 +5,9 @@
 使い方:
   python3 tools/fix_problems.py                  全ページを直す（変わったファイルだけ書く）
   python3 tools/fix_problems.py --check          直すべき行を出すだけ（書かない）。あれば終了コード 1
-  python3 tools/fix_problems.py --page lazy-segment-tree --field ds   そのページ・分野だけ（くり返し・カンマ区切り可）
+  python3 tools/fix_problems.py --page lazy-segment-tree   そのページだけ（くり返し・カンマ区切り可。--field より優先）
+  python3 tools/fix_problems.py --check --page lazy-segment-tree   そのページだけを検査する（書かない）
+  python3 tools/fix_problems.py --field ds       その分野だけ（--page がないときだけ効く）
   python3 tools/fix_problems.py --root DIR       DIR/docs のページを直す（試験用。台帳は --ledger）
 終了コード: --check で直すべき行がある、または直せない行がある（ID が読めない・台帳にない・要約がない）と 1
 
@@ -85,7 +87,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--check", action="store_true", help="直すべき行を出すだけ（書かない）")
     parser.add_argument("--page", action="append", default=[], help="そのページだけ（id かパス。くり返し・カンマ区切り可）")
-    parser.add_argument("--field", choices=cp.FIELDS, action="append", default=[], help="その分野だけ")
+    parser.add_argument("--field", choices=cp.FIELDS, action="append", default=[], help="その分野だけ（--page があるときは使わない）")
     parser.add_argument("--root", type=Path, default=cp.ROOT, help="docs/ のある場所（既定はリポジトリ）")
     parser.add_argument("--ledger", type=Path, default=cp.LEDGER_PATH, help="問題の台帳（既定は data/problems.yaml）")
     args = parser.parse_args()
@@ -97,15 +99,16 @@ def main() -> None:
     pages, others = cp.load_docs(docs)
     targets = pages + others
     wanted = [x.strip() for v in args.page for x in v.split(",") if x.strip()]
-    if wanted or args.field:
-        sel = []
-        for p in targets:
-            if p.dir_field in args.field or any(x in (p.id, p.rel, f"docs/{p.rel}") for x in wanted):
-                sel.append(p)
+    if wanted:
+        # --page があれば --field は見ない（決定 D1・D2：執筆者はそのページだけを直す・検査する）
         missing = [x for x in wanted if not any(x in (p.id, p.rel, f"docs/{p.rel}") for p in targets)]
         if missing:
             sys.exit("そのページがない: " + ", ".join(missing))
-        targets = sel
+        if args.field:
+            print("注意: --page があるので --field は使わない", file=sys.stderr)
+        targets = [p for p in targets if any(x in (p.id, p.rel, f"docs/{p.rel}") for x in wanted)]
+    elif args.field:
+        targets = [p for p in targets if p.dir_field in args.field]
 
     n_changes, n_files, all_problems = 0, 0, []
     for p in targets:

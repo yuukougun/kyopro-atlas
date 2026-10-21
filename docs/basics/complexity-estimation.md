@@ -25,7 +25,7 @@ sections:
   - {title: 制約 → 許される計算量 → 疑う手法の表, anchor: constraint-table}
   - {title: 見積もりの手順（ループの回数・log の数・定数倍・メモリ）, anchor: how-to-estimate}
   - {title: ならし計算量（ポインタが戻らない・各要素が一度入って一度出る）, anchor: amortized}
-  - {title: 調和級数の計算量（倍数の列挙。詳しくは整数論の調和級数のページ）, anchor: harmonic-series}
+  - {title: 調和級数の計算量（倍数の列挙）, anchor: harmonic-series}
   - {title: 候補の数で見積もる（階乗・ベル数・約数の個数の最大）, anchor: count-candidates}
   - {title: 定数倍（配列と set・map の差・メモリの連続性・bitset）, anchor: constant-factor, level: 水}
   - {title: 複数テストケースは合計（ΣN）で見積もる, anchor: multiple-testcases}
@@ -112,7 +112,7 @@ updated: 2026-10-21
     ??? success "答え"
         $i$ ごとに $j$ を $i$ から進め直すと、最悪で $O(N^2)$ になる。すべての要素が正なら、$i$ を 1 つ進めても和は減るだけなので、届く位置は左へ戻らない。前の $j$ を引き継いで進めれば、$j$ は全体で $N$ 回しか進まず $O(N)$ になる（尺取り法）。
 
-## 調和級数の計算量（倍数の列挙。詳しくは整数論の調和級数のページ） {#harmonic-series}
+## 調和級数の計算量（倍数の列挙） {#harmonic-series}
 
 調和級数の計算量は、$d = 1, 2, \dots, M$ のそれぞれについて $d$ の倍数を全部たどる処理の計算量である。$d$ ごとの回数は $M / d$ で、合計は次のようになる。
 

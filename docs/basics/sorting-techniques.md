@@ -25,7 +25,6 @@ sections:
   - {title: 2 つの列を 1 対 1 に対応させる（両方ソートして順に組む）, anchor: matching-two-lists}
   - {title: 比較関数の要件（狭義の弱順序）, anchor: strict-weak-ordering}
   - {title: 比率は掛け算で比べる・同点の順序（stable_sort）, anchor: ratio-and-ties}
-  - {title: 二分探索・尺取り法・交換論法へのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---
@@ -151,7 +150,7 @@ $$
 
 **番号の配列を並べるときの添字**。番号の配列 `idx` を並べるときは、キーの配列を `[&]` で参照して受け取り、比較関数の引数は番号になる。これを忘れて、`a[i]` と書くべきところで `i` を比べてしまうことがある。並べ替えた後に `a[idx[k]]` で参照する。
 
-## 二分探索・尺取り法・交換論法へのつながり {#next-steps}
+## 上位の手法へのつながり {#next-steps}
 
 ソートは多くの手法の下準備である。並べた後に何を使うかで、次の手法につながる。
 

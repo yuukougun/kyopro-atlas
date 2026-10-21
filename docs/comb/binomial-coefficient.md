@@ -19,11 +19,11 @@ signs:
   - {type: constraint, text: N ≤ 60 程度で、mod を取らない正確な値を求める}
 acl: []
 frequency: A
-frequency_evidence: recent 1（abc476_g）・前提として 28 ページに届く（直接 5）・古い ABC 3 問
+frequency_evidence: recent 0・前提として 28 ページに届く（直接 5）・古い ABC 3 問
 sections:
   - {title: 3 つの意味（選ぶ・0/1 列・格子路）, anchor: meanings}
   - {title: パスカルの漸化式と対称性, anchor: pascal}
-  - {title: k < 0・k > n を 0 とする約束, anchor: out-of-range}
+  - {title: 範囲の外の k（負や n 超え）を 0 とする約束, anchor: out-of-range}
   - {title: mod を取らないときの大きさとオーバーフロー, anchor: overflow}
   - {title: 辞書順 K 番目の組合せと順位, anchor: kth}
 stage: draft
@@ -89,7 +89,7 @@ $\binom{n}{k}$ は $k$ を $0$ から増やすと、真ん中まで増えて、�
     ??? success "答え"
         5 人目が係に入るかどうかで分ける。入るなら、残りの 4 人から 1 人を選ぶので $\binom{4}{1} = 4$ 通り。入らないなら、4 人から 2 人を選ぶので $\binom{4}{2} = 6$ 通り。どの選び方もちょうど一方に入るので、合わせて $10$ 通りである。
 
-## k < 0・k > n を 0 とする約束 {#out-of-range}
+## 範囲の外の k（負や n 超え）を 0 とする約束 {#out-of-range}
 
 $k < 0$ や $k > n$ のとき、$n$ 個から $k$ 個を選ぶ方法はないので $\binom{n}{k} = 0$ と約束する。$\frac{n!}{k!\,(n-k)!}$ の式は負の数の階乗を含むので、この範囲では使えない。値を返す関数の中で範囲外を 0 にしておけば、使う側で場合分けがいらなくなる。
 

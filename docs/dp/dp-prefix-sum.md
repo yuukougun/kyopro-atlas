@@ -27,7 +27,6 @@ sections:
   - {title: 遷移元が接頭辞なら累積 min・累積 max でもよい, anchor: prefix-min}
   - {title: 余りごとの累積, anchor: by-remainder, level: 青}
   - {title: 2 次元の累積, anchor: two-dimensional, level: 青}
-  - {title: 落とし穴：累積和を更新しながら使う順番・区間の端・mod の差が負になる, anchor: pitfalls}
 stage: draft
 updated: 2026-10-21
 ---
@@ -204,7 +203,7 @@ $$
 
 遷移先が長方形になる配る形なら、2 次元のいもす法（四隅に $\pm v$、横と縦に累積）を使う（[2 次元いもす法](../basics/imos.md#imos-2d)）。
 
-## 落とし穴：累積和を更新しながら使う順番・区間の端・mod の差が負になる {#pitfalls}
+## 落とし穴 {#pitfalls}
 
 **累積和を更新しながら同じ段で使う**。上限つきの配り方で、$\mathrm{dp}$ を上書きしながら「$S$ も同時に作る」と、$S$ に新しい段の値が混ざる。前の段の累積和は、新しい段を書き始める前に作り切る。1 次元で同じ配列から貰う DP（[貰う形と累積和](#pull-and-push)）では逆に、$\mathrm{dp}[i]$ を求めてから $S[i + 1]$ を伸ばす。$S[i + 1]$ を先に伸ばそうとすると、まだ 0 の $\mathrm{dp}[i]$ を足してしまう。
 

@@ -23,7 +23,7 @@ sections:
   - {title: 'string(n, c)・reverse・辞書順の比較', anchor: construct-compare}
   - {title: string_view：コピーしない部分文字列。一時的な string を入れると壊れる（C++17）, anchor: string-view}
   - {title: '区切る：views::split('' '') と string_view(w)（C++20）', anchor: split}
-  - {title: cin >> s は空白で区切る、cin >> の後に getline を使うと残った改行を読む, anchor: getline}
+  - {title: cin で読む文字列は空白で区切られる、その後の getline は残った改行を読む, anchor: getline}
 stage: draft
 updated: 2026-10-21
 cpp_std: null
@@ -183,7 +183,7 @@ $N = 2 \times 10^5$ ではメモリのコピーが速く 1 秒を切るが、$O(
 - **版**：`views::split` は C++20。ただし `string_view(w)` は C++23 で、`-std=gnu++20` ではコンパイルエラーになる。AtCoder の `-std=gnu++23` なら通る
 - **使い分け**：空白で区切られた語を読むだけなら `istringstream`（または入力から直接 `cin >>`）が確実である。`,` などの決まった 1 文字で区切り、空の部分も数えたいときは `split` を使う
 
-## cin >> s は空白で区切る、cin >> の後に getline を使うと残った改行を読む {#getline}
+## cin で読む文字列は空白で区切られる、その後の getline は残った改行を読む {#getline}
 
 `cin >> s` は先頭の空白・改行を読み飛ばし、次の空白・改行の手前までを 1 語として読む。空白を含む 1 行を読むには `getline(cin, s)` を使う。`getline` は改行までを読んで、改行そのものは捨てる。
 

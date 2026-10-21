@@ -10,24 +10,24 @@ order: 70
 level: 基礎
 kind: [実装・C++]
 prerequisites: [cpp-range-for]
-related: [cpp-views-cpp23, cpp-comparators, cpp-undefined-behavior, cpp-lambda, dijkstra]
+related: [cpp-views-cpp23, cpp-comparators, cpp-undefined-behavior, cpp-lambda, dijkstra, cpp-container-idioms]
 summary: pair・tuple・構造体の中身に名前を付けて取り出し（構造化束縛）、tie・optional で組や「値がない」を表す。pq.top() を参照で受けてから pop するような、受け方の誤りを防ぐ。
 complexity: '構造化束縛・tie・exchange・optional の操作は O(1)。auto で受けると右辺を丸ごとコピーするので、vector などを持つ組ではその大きさに比例する'
 signs: []
 acl: []
 sections:
-  - {title: 'pair と tuple：get<i>・make_pair・pair{a, b}、辞書順で比べられる', anchor: pair-tuple}
-  - {title: '構造化束縛の形：auto [a, b] = p、構造体・配列・array、for (auto& [k, v] : mp)（C++17）', anchor: structured-binding}
+  - {title: 'pair と tuple：get・make_pair・pair{a, b}、辞書順で比べられる', anchor: pair-tuple}
+  - {title: 構造化束縛の形：pair・構造体・配列・array を名前に分ける、map の範囲 for（C++17）, anchor: structured-binding}
   - {title: 見えない変数：auto はコピー、auto& は参照。名前はメンバの宣言順に付き、数が合わないとエラー（C++17）, anchor: hidden-variable}
-  - {title: 'map を回すとき：キーは const、auto& [k, v] で値を書き換えると map が変わる（C++17）', anchor: map-loop}
-  - {title: '初期化式付き if・switch：if (auto it = mp.find(k); it != mp.end())、if (auto [it, ok] = st.insert(x); ok)（C++17）', anchor: if-init}
-  - {title: 'const auto& [d, v] = pq.top(); pq.pop(); で値が変わる（ダイクストラで起きる。値で受ける。要素が 1 個ならダングリング）', anchor: pq-top-reference}
-  - {title: 'views::enumerate・zip の要素は参照を含む組：auto [i, x] と書いても x は元の要素を指す', anchor: enumerate-reference}
-  - {title: 構造化束縛した名前のラムダでのキャプチャ（C++20）と、使わない名前 _（同じ場所で 2 回使うのは C++26。AtCoder の GCC 15 では警告つきで通る）, anchor: capture-and-placeholder}
-  - {title: 'tie：既存の変数にまとめて代入・比較する（tie(x1, y1) < tie(x2, y2)・std::ignore）', anchor: tie}
-  - {title: 'tie(a, b) = tie(b, a) は入れ替えにならない（両方 b になる。swap か tie(a, b) = pair{b, a}）', anchor: tie-swap-pitfall}
-  - {title: '代入の小技：prev = exchange(cur, nxt) で代入して前の値を返す、tie(f0, f1) = pair{f1, f0 + f1}', anchor: exchange}
-  - {title: optional：値がないことを表す（nullopt・has_value・value_or・if (auto r = f())。空の *o は未定義動作）（C++17）, anchor: optional}
+  - {title: map を回すとき：キーは const、値を参照で受けて書き換えると map が変わる（C++17）, anchor: map-loop}
+  - {title: 初期化式付き if・switch：find や insert の結果をその場で受けて調べる（C++17）, anchor: if-init}
+  - {title: pq.top() を参照で受けて pop すると値が変わる（ダイクストラで起きる。値で受ける）, anchor: pq-top-reference}
+  - {title: 'views::enumerate・zip の要素は参照を含む組：構造化束縛でも元の要素を指す', anchor: enumerate-reference}
+  - {title: 構造化束縛した名前のキャプチャ（C++20）と、使わない名前 _, anchor: capture-and-placeholder}
+  - {title: 'tie：既存の変数にまとめて代入・比較する（std::ignore）', anchor: tie}
+  - {title: 'tie(a, b) = tie(b, a) は入れ替えにならない（swap か pair で渡す）', anchor: tie-swap-pitfall}
+  - {title: 代入の小技：exchange で代入して前の値を返す、tie と pair でまとめて更新する, anchor: exchange}
+  - {title: optional：値がないことを表す（nullopt・has_value・value_or。C++17）, anchor: optional}
   - {title: apply と、同じ型の組としての array（apply は C++17）, anchor: apply}
 stage: draft
 updated: 2026-10-21
@@ -50,7 +50,7 @@ atcoder: true
 
 このページのコードは `#include <bits/stdc++.h>` と `using namespace std;` を前提にする。
 
-## pair と tuple：get<i>・make_pair・pair{a, b}、辞書順で比べられる {#pair-tuple}
+## pair と tuple：get・make_pair・pair{a, b}、辞書順で比べられる {#pair-tuple}
 
 `pair<T, U>` は 2 つの値の組で、`first`・`second` で取り出す。`tuple<T, U, V, …>` は好きな個数の組で、3 つ以上をまとめるのに使う。`get<i>(t)`（$i$ は 0 から数える定数）で要素を取り出す。作るときは `make_pair(a, b)`・`make_tuple(a, b, c)`、または型を書かない `pair{a, b}`・`tuple{a, b, c}` を使う（中身から型を決める CTAD。C++17。[初期化の書き方](../cpp/cpp-initialization.md)）。
 
@@ -64,7 +64,7 @@ pair・tuple は辞書順で比べられる。まず 0 番目どうしを比べ�
 - **落とし穴**：`get<i>` の $i$ は定数でなければならず、ループの変数では書けない。同じ型を添字で回したいなら [array](#apply) を使う
 - **使い分け**：2〜3 個の値を一時的にまとめるなら pair・tuple、意味のある名前を残したいなら構造体、同じ型を添字で扱うなら `array` を使う。構造体の比較は [比較関数と順序](../cpp/cpp-comparators.md) で扱う
 
-## 構造化束縛の形：auto [a, b] = p、構造体・配列・array、for (auto& [k, v] : mp)（C++17） {#structured-binding}
+## 構造化束縛の形：pair・構造体・配列・array を名前に分ける、map の範囲 for（C++17） {#structured-binding}
 
 `auto [a, b] = p;` は、`p` の中身に先頭から順に `a`・`b` と名前を付ける。分けられるのは次の 3 種類である。
 
@@ -113,7 +113,7 @@ g++-15 では `only 2 names provided for structured binding` と、続く `note:
 - **版**：C++17。g++-13・g++-15 で同じ結果だった
 - **使い分け**：読むだけで中身が小さい（数値の組）なら `auto`、書き換えたいなら `auto&`、大きな中身（`vector` や `string` を持つ組）を読むだけなら `const auto&` でコピーを避ける。ただし `const auto&` は元が変わると値も変わる（[pq.top() の事故](#pq-top-reference)）
 
-## map を回すとき：キーは const、auto& [k, v] で値を書き換えると map が変わる（C++17） {#map-loop}
+## map を回すとき：キーは const、値を参照で受けて書き換えると map が変わる（C++17） {#map-loop}
 
 `map<K, V>` の要素の型は `pair<const K, V>` である。`for (auto& [k, v] : mp)` の `v` は `map` の中の値そのものなので、`v` を書き換えると `map` が変わる。`for (auto [k, v] : mp)` なら各要素のコピーを書き換えるだけで、`map` は変わらない。
 
@@ -132,7 +132,7 @@ g++-15 では `only 2 names provided for structured binding` と、続く `note:
 - **落とし穴 2**：`auto [k, v]` は 1 要素ごとにキーと値をコピーする。`map<string, vector<int>>` を読むだけなら `const auto& [k, v]` にする
 - キーを変えたいときは、`erase` して新しいキーで入れ直す（[コンテナ操作の定型](../cpp/cpp-container-idioms.md)）
 
-## 初期化式付き if・switch：if (auto it = mp.find(k); it != mp.end())、if (auto [it, ok] = st.insert(x); ok)（C++17） {#if-init}
+## 初期化式付き if・switch：find や insert の結果をその場で受けて調べる（C++17） {#if-init}
 
 `if (宣言; 条件)` と書くと、条件の前に変数を宣言できる。宣言した変数は if 文の中（`else` を含む）だけで使え、外には漏れない。`find` の結果のイテレータのように、判定のためだけに作る変数を閉じ込めるのに使う。`switch (宣言; 値)` も同じである。
 
@@ -153,7 +153,7 @@ g++-15 では `only 2 names provided for structured binding` と、続く `note:
 - **落とし穴**：`if (auto [it, ok] = seen.insert(x))` のように構造化束縛そのものを条件にする書き方は C++26 の機能である。g++-15 は `-std=gnu++23` では `structured bindings in conditions only available with '-std=c++2c'` と警告し、g++-13 は文法エラーにする。しかも条件になるのは組全体を `bool` に変えた値（`ok` ではない）なので、`insert` が返す pair では C++26 でもコンパイルエラーになる。条件は `; ok` と分けて書く
 - `if (auto r = f())` のように宣言だけを書くと、`r` を `bool` に変えた値が条件になる。[optional](#optional) で使う形である
 
-## const auto& [d, v] = pq.top(); pq.pop(); で値が変わる（ダイクストラで起きる。値で受ける。要素が 1 個ならダングリング） {#pq-top-reference}
+## pq.top() を参照で受けて pop すると値が変わる（ダイクストラで起きる。値で受ける） {#pq-top-reference}
 
 [ダイクストラ法](../graph/dijkstra.md)で、優先度付きキューの先頭を `const auto&` で受けてから `pop` すると、受けた値が別の要素の値に変わる。次のコードは (5, 1)・(7, 2)・(9, 3) を入れたキューで、(5, 1) を取り出したつもりが `7 2` と出る（g++-13・g++-15 で同じ）。
 
@@ -175,7 +175,7 @@ g++-15 では `only 2 names provided for structured binding` と、続く `note:
 ??? question "確認問題：`const auto& [d, v] = pq.top(); pq.pop();` の後、`d` は何を指しているか？"
     キューが中に持つ `vector` の先頭の場所を指している。`pop` の後、そこには残りの中で最小の要素が入っているので、`d` はその距離になる（要素が 1 個だったときは、消えた要素を指す未定義動作）。取り出した要素の値は、もうどこにも残っていない。
 
-## views::enumerate・zip の要素は参照を含む組：auto [i, x] と書いても x は元の要素を指す {#enumerate-reference}
+## views::enumerate・zip の要素は参照を含む組：構造化束縛でも元の要素を指す {#enumerate-reference}
 
 `v | views::enumerate` の要素は (添字, 元の要素への参照) の組、`views::zip(a, b)` の要素は (a の要素への参照, b の要素への参照) の組である。`auto [i, x]` の見えない変数はこの組のコピーになるが、コピーされるのは「参照」なので、`x` は元の要素を指したままである。`auto` と書いても要素のコピーにはならず、`x` を書き換えると元の `vector` が変わる。
 
@@ -188,7 +188,7 @@ g++-15 では `only 2 names provided for structured binding` と、続く `note:
 - **版**：`views::enumerate`・`views::zip` は C++23。g++-13・g++-15 の `-std=gnu++23` で使える（詳しくは [C++23 の views](../cpp/cpp-views-cpp23.md)）
 - **落とし穴**：ループの中で `x` を一時的に書き換えて計算に使う（元の配列は変えたくない）つもりで `auto [i, x]` と書くと、元の `vector` が書き換わる。元を変えたくないなら、ループの中で `int y = x;` とコピーしてから使う
 
-## 構造化束縛した名前のラムダでのキャプチャ（C++20）と、使わない名前 _（同じ場所で 2 回使うのは C++26。AtCoder の GCC 15 では警告つきで通る） {#capture-and-placeholder}
+## 構造化束縛した名前のキャプチャ（C++20）と、使わない名前 _ {#capture-and-placeholder}
 
 構造化束縛した名前は、C++20 から普通の変数と同じように[ラムダ式](../cpp/cpp-lambda.md)でキャプチャできる。グリッドの幅と高さを pair で受けて、範囲の判定のラムダで使う、といった書き方が通る。
 
@@ -206,7 +206,7 @@ g++-15 では `only 2 names provided for structured binding` と、続く `note:
 - **版（`_` を 2 回）**：g++-15 は `-std=gnu++23` で `name-independent declarations only available with '-std=c++2c'` の警告を出して通す。AtCoder の GCC 15.2 も同じ版・同じ `-std=gnu++23` を使い、警告をエラーにしないので通るはずである（AtCoder の上では試していない）。g++-13 では `redeclaration of 'auto _'` のコンパイルエラーになる
 - **落とし穴**：手元が g++-13 だと、AtCoder で通る `auto [_, x, _]` が手元で通らない。使わない要素が 2 個以上あるなら、`auto [unused1, x, unused2]` と別の名前を付けるか、[tie と ignore](#tie) を使う
 
-## tie：既存の変数にまとめて代入・比較する（tie(x1, y1) < tie(x2, y2)・std::ignore） {#tie}
+## tie：既存の変数にまとめて代入・比較する（std::ignore） {#tie}
 
 `tie(a, b)` は、変数 `a`・`b` への参照の組（`tuple<int&, int&>`）を作る。左辺に置くと、右辺の組を既にある変数へまとめて代入できる。構造化束縛は新しい名前を作る宣言なので、ループの外で宣言した変数を更新するときは `tie` を使う。要らない要素は `ignore` で捨てる。
 
@@ -219,7 +219,7 @@ g++-15 では `only 2 names provided for structured binding` と、続く `note:
 - **版**：`tie`・`ignore` は C++11
 - **使い分け**：新しい変数で取り出すなら構造化束縛、既にある変数に入れ直すなら `tie`
 
-## tie(a, b) = tie(b, a) は入れ替えにならない（両方 b になる。swap か tie(a, b) = pair{b, a}） {#tie-swap-pitfall}
+## tie(a, b) = tie(b, a) は入れ替えにならない（swap か pair で渡す） {#tie-swap-pitfall}
 
 `tie(a, b) = tie(b, a);` は、右辺も参照の組なので、片方を代入した時点で右辺の残りも書き換わっている。GCC（libstdc++）は先頭の要素から順に代入するので、`a = b;` の後に `b = a;`（書き換わった後の `a`）を行うことになり、両方とも元の `b` になる。規格は代入の順を決めていないが、逆の順でも両方とも元の `a` になるだけで、どちらにしても入れ替えにはならない。
 
@@ -239,7 +239,7 @@ g++-15 では `only 2 names provided for structured binding` と、続く `note:
 ??? question "確認問題：`int a = 1, b = 2;` の後に `tie(a, b) = tie(b, a);` とすると、`a`・`b` はいくつになるか？"
     GCC ではどちらも 2 になる。右辺は `b` と `a` への参照の組なので、まず `a = b`（`a` が 2）、次に `b = a`（いまの `a` の 2）が行われる。入れ替えるには `swap(a, b)` か `tie(a, b) = pair{b, a};` と書く。
 
-## 代入の小技：prev = exchange(cur, nxt) で代入して前の値を返す、tie(f0, f1) = pair{f1, f0 + f1} {#exchange}
+## 代入の小技：exchange で代入して前の値を返す、tie と pair でまとめて更新する {#exchange}
 
 `exchange(x, y)` は、`x` に `y` を入れ、入れる前の `x` の値を返す（`<utility>`。C++14）。`int old = x; x = y;` の 2 行を 1 式にしたものである。`tie(f0, f1) = pair{f1, f0 + f1};` は、右辺の pair を先に作ってから代入するので、一時変数なしで「同時に」更新できる。フィボナッチ数のような 2 項の漸化式で使う。
 
@@ -252,7 +252,7 @@ $n = 10$ なら $F_{10} = 55$ と出る。素朴に書くと `long long nf = f0 
 - **版**：`exchange` は C++14、`pair{…}` の CTAD は C++17
 - **落とし穴**：`tie(f0, f1) = tie(f1, f0 + f1)` とは書けない（`f0 + f1` は変数ではないので参照の組に入らず、`cannot bind non-const lvalue reference` のコンパイルエラーになる）。右辺は `pair{…}` にする
 
-## optional：値がないことを表す（nullopt・has_value・value_or・if (auto r = f())。空の *o は未定義動作）（C++17） {#optional}
+## optional：値がないことを表す（nullopt・has_value・value_or。C++17） {#optional}
 
 `optional<T>` は「`T` の値が 1 つある」か「何もない」かのどちらかを持つ型である。見つからないことを `-1` や `INF` で表す代わりに使うと、その値が本物の答えと紛れない。何もないことは `nullopt` で表す。
 

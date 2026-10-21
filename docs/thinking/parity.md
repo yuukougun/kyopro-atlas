@@ -8,7 +8,7 @@ order: 50
 level: 基礎
 kind: [考察]
 prerequisites: []
-related: [invariant, bipartite-graph, game-basics#move-parity, union-find-applications, interactive]
+related: [invariant, bipartite-graph, game-basics#move-parity, union-find-applications, interactive, permutation-parity]
 summary: 1 歩ごとに (x + y) の偶奇が入れ替わる、±1 をちょうど K 回なら差と K の偶奇がそろう、など偶奇の必要条件から可否を判定する。グリッドでは市松模様の色の偶奇が不変量になる。
 complexity: 判定は O(N)（差や個数の偶奇を数えるだけ）。偶奇の条件の成分は Union-Find で 1 回あたりならし O(α(N))
 signs:

@@ -23,10 +23,7 @@ search:
     - 制約：N, Q ≤ 2×10^5 で、追加・削除・検索のクエリが来る
 - 節：
     - `stl-containers#complexity-table` 操作とコンテナの計算量の早見表：https://yuukougun.github.io/kyopro-atlas/ds/stl-containers/#complexity-table
-    - `stl-containers#choosing` 選び方（何を速くしたいか）：https://yuukougun.github.io/kyopro-atlas/ds/stl-containers/#choosing
     - `stl-containers#counting-map` map で数えながら走査する（→ 累積和と連想配列で区間を数える）：https://yuukougun.github.io/kyopro-atlas/ds/stl-containers/#counting-map
-    - `stl-containers#pitfalls` 落とし穴（multiset の erase(x)・set に std::lower_bound・map の []・空の size() − 1・無効化・ハッシュ）：https://yuukougun.github.io/kyopro-atlas/ds/stl-containers/#pitfalls
-    - `stl-containers#next-steps` 順序付き集合・ヒープの応用へのつながり：https://yuukougun.github.io/kyopro-atlas/ds/stl-containers/#next-steps
 
 ## set・multiset・map の応用（ordered-set） {#ordered-set}
 
@@ -67,7 +64,6 @@ search:
     - `priority-queue#with-offset` 全体への加算と組む（入れるときに引き、出すときに足す）：https://yuukougun.github.io/kyopro-atlas/ds/priority-queue/#with-offset
     - `priority-queue#lazy-deletion` 削除できるヒープ（遅延削除：削除予定のヒープの top と一致したら両方から捨てる）：https://yuukougun.github.io/kyopro-atlas/ds/priority-queue/#lazy-deletion
     - `priority-queue#vs-multiset` priority_queue と multiset の使い分け（任意の削除・両端・前後の要素が要るなら multiset）：https://yuukougun.github.io/kyopro-atlas/ds/priority-queue/#vs-multiset
-    - `priority-queue#pitfalls` 落とし穴（向きの取り違え・古いエントリを捨て忘れる・空のときの top）：https://yuukougun.github.io/kyopro-atlas/ds/priority-queue/#pitfalls
 
 ## 上位 K 個の和と中央値の管理（top-k-multiset） {#top-k-multiset}
 
@@ -87,7 +83,6 @@ search:
     - `top-k-multiset#erase-update` 削除・更新（どちらにあるかを見て消してから回復する）：https://yuukougun.github.io/kyopro-atlas/ds/top-k-multiset/#erase-update
     - `top-k-multiset#median` 中央値を保つ（個数の差を 1 以内に。削除がなければヒープ 2 本）と Σ|x − a_i| の更新：https://yuukougun.github.io/kyopro-atlas/ds/top-k-multiset/#median
     - `top-k-multiset#by-index` 値を添字にした BIT・セグメント木で書く方法（→ 値を添字にする BIT・セグメント木）：https://yuukougun.github.io/kyopro-atlas/ds/top-k-multiset/#by-index
-    - `top-k-multiset#pitfalls` 落とし穴（同じ値の削除先・multiset の erase・和の更新漏れ）：https://yuukougun.github.io/kyopro-atlas/ds/top-k-multiset/#pitfalls
     - `top-k-multiset#absolute-sum-function` |x − a| + b を足していく関数の最小値（中央値の更新の応用。Slope Trick の入口）（黄）：https://yuukougun.github.io/kyopro-atlas/ds/top-k-multiset/#absolute-sum-function
 
 ## 区間を set で管理する（interval-set） {#interval-set}
@@ -127,7 +122,6 @@ search:
     - `global-offset#flip-flag` 反転フラグ（追加する側や添字の読み方を入れ替え、最後に向きを直す）：https://yuukougun.github.io/kyopro-atlas/ds/global-offset/#flip-flag
     - `global-offset#assign-all` 全体代入と個別の差分（代入のたびに差分の map を空にする。ならし）：https://yuukougun.github.io/kyopro-atlas/ds/global-offset/#assign-all
     - `global-offset#rotation` 回転は先頭位置の添字で表す：https://yuukougun.github.io/kyopro-atlas/ds/global-offset/#rotation
-    - `global-offset#pitfalls` 落とし穴（反転中の先頭と末尾の取り違え・向きの直し忘れ・オフセットのあふれ）：https://yuukougun.github.io/kyopro-atlas/ds/global-offset/#pitfalls
     - `global-offset#to-lazy-segment-tree` 遅延セグメント木とのつながり（全体への操作を区間への操作に広げる）（水）：https://yuukougun.github.io/kyopro-atlas/ds/global-offset/#to-lazy-segment-tree
 
 ## 配列で作る連結リスト（linked-list） {#linked-list}
@@ -145,9 +139,6 @@ search:
     - `linked-list#arrays` prev・next の配列と番兵（先頭・末尾）：https://yuukougun.github.io/kyopro-atlas/ds/linked-list/#arrays
     - `linked-list#operations` 挿入・削除・付け替えの手順：https://yuukougun.github.io/kyopro-atlas/ds/linked-list/#operations
     - `linked-list#output` 最後に先頭からたどって出力する：https://yuukougun.github.io/kyopro-atlas/ds/linked-list/#output
-    - `linked-list#choosing` 使い分け（位置で指定するなら連結リストでは速くならない → 逆順の処理と BIT・平衡二分探索木）：https://yuukougun.github.io/kyopro-atlas/ds/linked-list/#choosing
-    - `linked-list#pitfalls` 落とし穴（値が重複すると節点を特定できない・削除した節点の指す先を使う）：https://yuukougun.github.io/kyopro-atlas/ds/linked-list/#pitfalls
-    - `linked-list#next-steps` 上位の手法とのつながり：https://yuukougun.github.io/kyopro-atlas/ds/linked-list/#next-steps
 
 ## スタック・キュー・deque の使いどころ（stack-techniques） {#stack-techniques}
 
@@ -168,7 +159,6 @@ search:
     - `stack-techniques#undo` 直前の操作を取り消す（変更前の値を積んで戻す。任意の版へ戻るなら永続データ構造）：https://yuukougun.github.io/kyopro-atlas/ds/stack-techniques/#undo
     - `stack-techniques#deque` deque（両端への追加・真ん中への挿入は deque 2 本）：https://yuukougun.github.io/kyopro-atlas/ds/stack-techniques/#deque
     - `stack-techniques#chords` 円を切り開いて弦の交差判定に帰着する（水）：https://yuukougun.github.io/kyopro-atlas/ds/stack-techniques/#chords
-    - `stack-techniques#next-steps` 単調スタック・永続データ構造・01-BFS へのつながり：https://yuukougun.github.io/kyopro-atlas/ds/stack-techniques/#next-steps
 
 ## 単調スタックとスライド最小値（monotonic-stack） {#monotonic-stack}
 
@@ -190,7 +180,6 @@ search:
     - `monotonic-stack#visible` 見えるビルの数・水位のシミュレーション：https://yuukougun.github.io/kyopro-atlas/ds/monotonic-stack/#visible
     - `monotonic-stack#sliding-window-minimum` スライド最小値（単調 deque）：https://yuukougun.github.io/kyopro-atlas/ds/monotonic-stack/#sliding-window-minimum
     - `monotonic-stack#dp-transition` DP の遷移の高速化に使う：https://yuukougun.github.io/kyopro-atlas/ds/monotonic-stack/#dp-transition
-    - `monotonic-stack#choosing` 使い分け：https://yuukougun.github.io/kyopro-atlas/ds/monotonic-stack/#choosing
     - `monotonic-stack#cartesian-tree` Cartesian tree（最大値で区間を割る再帰を O(N) で作る）（黄）：https://yuukougun.github.io/kyopro-atlas/ds/monotonic-stack/#cartesian-tree
     - `monotonic-stack#swag` SWAG：スタック 2 本で作る総積つきキュー（発展）：https://yuukougun.github.io/kyopro-atlas/ds/monotonic-stack/#swag
 
@@ -209,13 +198,11 @@ search:
     - 制約：N, Q ≤ 2×10^5 で辺の追加と質問が混ざる
 - 節：
     - `union-find#what-it-does` 何ができるか（併合と判定。分割・削除はできない）：https://yuukougun.github.io/kyopro-atlas/ds/union-find/#what-it-does
-    - `union-find#invariants` 保つ性質（各グループは根付き木で、根が代表元。parent は根なら −(サイズ)）：https://yuukougun.github.io/kyopro-atlas/ds/union-find/#invariants
+    - `union-find#invariants` 保つ性質（各グループは根付き木で、根が代表元。par は根なら −(大きさ)）：https://yuukougun.github.io/kyopro-atlas/ds/union-find/#invariants
     - `union-find#operations` 各操作の手順（find は根までたどって経路圧縮、merge は根どうしを小さい方から大きい方へつなぐ）：https://yuukougun.github.io/kyopro-atlas/ds/union-find/#operations
     - `union-find#complexity` なぜ速いか（union by size だけで深さ log N、経路圧縮と合わせてならし O(α(N))）：https://yuukougun.github.io/kyopro-atlas/ds/union-find/#complexity
-    - `union-find#boundaries` 境界（同じグループどうしの併合・自己ループと多重辺・成分数は併合に成功した回数を引く・サイズの積のあふれ）：https://yuukougun.github.io/kyopro-atlas/ds/union-find/#boundaries
-    - `union-find#size-and-edges` 根にサイズ・辺数を持たせる（ほかの情報を持たせる型は Union-Find の応用）：https://yuukougun.github.io/kyopro-atlas/ds/union-find/#size-and-edges
-    - `union-find#choosing` 使い分け（グラフが固定なら BFS・DFS、削除があるなら逆順の処理 → グラフの章）：https://yuukougun.github.io/kyopro-atlas/ds/union-find/#choosing
-    - `union-find#next-steps` 上位の手法へのつながり：https://yuukougun.github.io/kyopro-atlas/ds/union-find/#next-steps
+    - `union-find#boundaries` 境界（同じグループどうしの併合・自己ループと多重辺・成分数・大きさの積のあふれ）：https://yuukougun.github.io/kyopro-atlas/ds/union-find/#boundaries
+    - `union-find#size-and-edges` 根に大きさ・辺数を持たせる（ほかの情報を持たせる型は Union-Find の応用）：https://yuukougun.github.io/kyopro-atlas/ds/union-find/#size-and-edges
 
 ## Union-Find の応用（union-find-applications） {#union-find-applications}
 
@@ -252,15 +239,13 @@ search:
     - 制約：情報と質問が交互に Q ≤ 2×10^5 回来る
 - 節：
     - `weighted-union-find#idea` 必要になる場面とアイデア：https://yuukougun.github.io/kyopro-atlas/ds/weighted-union-find/#idea
-    - `weighted-union-find#invariants` 保つ性質（diff[v] は親との差）：https://yuukougun.github.io/kyopro-atlas/ds/weighted-union-find/#invariants
+    - `weighted-union-find#invariants` 保つ性質（各頂点は親との差を持つ）：https://yuukougun.github.io/kyopro-atlas/ds/weighted-union-find/#invariants
     - `weighted-union-find#operations` 各操作の手順（find・merge・差の取得）：https://yuukougun.github.io/kyopro-atlas/ds/weighted-union-find/#operations
     - `weighted-union-find#boundaries` 境界（根の差は 0・同じ成分の merge・値の範囲）：https://yuukougun.github.io/kyopro-atlas/ds/weighted-union-find/#boundaries
     - `weighted-union-find#consistency` 矛盾の判定と差の取得：https://yuukougun.github.io/kyopro-atlas/ds/weighted-union-find/#consistency
     - `weighted-union-find#complexity` 計算量とその根拠：https://yuukougun.github.io/kyopro-atlas/ds/weighted-union-find/#complexity
     - `weighted-union-find#generalization` 一般化（XOR で偶奇・二部グラフ、頂点を 2 倍にする）：https://yuukougun.github.io/kyopro-atlas/ds/weighted-union-find/#generalization
     - `weighted-union-find#applications` 応用の型：https://yuukougun.github.io/kyopro-atlas/ds/weighted-union-find/#applications
-    - `weighted-union-find#pitfalls` 落とし穴：https://yuukougun.github.io/kyopro-atlas/ds/weighted-union-find/#pitfalls
-    - `weighted-union-find#choosing` 使い分け：https://yuukougun.github.io/kyopro-atlas/ds/weighted-union-find/#choosing
 
 ## 部分永続 Union-Find（partially-persistent-union-find） {#partially-persistent-union-find}
 
@@ -309,13 +294,12 @@ search:
     - 制約：N, Q ≤ 2×10^5 で更新があり、累積和を毎回作り直すと間に合わない
 - 節：
     - `fenwick-tree#what-it-does` 何ができるか（一点加算・接頭辞の和と逆元）：https://yuukougun.github.io/kyopro-atlas/ds/fenwick-tree/#what-it-does
-    - `fenwick-tree#invariants` 保つ性質（t[i] は区間 (i − lowbit(i), i] の和）：https://yuukougun.github.io/kyopro-atlas/ds/fenwick-tree/#invariants
+    - `fenwick-tree#invariants` 保つ性質（添字 i は、i で終わる長さ lowbit(i) の区間の和を持つ）：https://yuukougun.github.io/kyopro-atlas/ds/fenwick-tree/#invariants
     - `fenwick-tree#operations` 各操作の手順（add は上へ、sum は下へ。線形時間の構築）：https://yuukougun.github.io/kyopro-atlas/ds/fenwick-tree/#operations
     - `fenwick-tree#boundaries` 境界（添字の変換・i = 0・符号なし整数）：https://yuukougun.github.io/kyopro-atlas/ds/fenwick-tree/#boundaries
     - `fenwick-tree#count-by-value` 値を添字にして数える（座標圧縮と組む）：https://yuukougun.github.io/kyopro-atlas/ds/fenwick-tree/#count-by-value
     - `fenwick-tree#variants` 変種（差分の BIT・BIT 2 本・2 次元 BIT・接頭辞の max）：https://yuukougun.github.io/kyopro-atlas/ds/fenwick-tree/#variants
     - `fenwick-tree#binary-search` BIT 上の二分探索：https://yuukougun.github.io/kyopro-atlas/ds/fenwick-tree/#binary-search
-    - `fenwick-tree#choosing` 使い分け：https://yuukougun.github.io/kyopro-atlas/ds/fenwick-tree/#choosing
 
 ## 転倒数（inversion-number） {#inversion-number}
 
@@ -335,8 +319,6 @@ search:
     - `inversion-number#adjacent-swaps` なぜ隣接 swap の最小回数か（1 回の隣接 swap で転倒数はちょうど 1 増減する）：https://yuukougun.github.io/kyopro-atlas/ds/inversion-number/#adjacent-swaps
     - `inversion-number#reformulation` 言い換え（P を Q に並べ替える回数＝Q での位置に置き換えた列の転倒数、累積和の大小の組）：https://yuukougun.github.io/kyopro-atlas/ds/inversion-number/#reformulation
     - `inversion-number#incremental` 差分で更新する（先頭を末尾へ回す・全体に足して mod を取る・色ごとの転倒数を引く）：https://yuukougun.github.io/kyopro-atlas/ds/inversion-number/#incremental
-    - `inversion-number#choosing` 使い分け（任意の 2 要素の swap なら置換の巡回分解、区間ごとの転倒数を多数なら Mo）：https://yuukougun.github.io/kyopro-atlas/ds/inversion-number/#choosing
-    - `inversion-number#pitfalls` 落とし穴（等しい値の不等号・座標圧縮・64 bit）：https://yuukougun.github.io/kyopro-atlas/ds/inversion-number/#pitfalls
     - `inversion-number#sliding-window` 窓を伸縮しながら転倒数を増減する（尺取り・期待値と組む）（青）：https://yuukougun.github.io/kyopro-atlas/ds/inversion-number/#sliding-window
 
 ## K 番目の値を求めるデータ構造（kth-element） {#kth-element}
@@ -352,7 +334,6 @@ search:
     - 言い回し：空いている場所のうち K 番目に置く・指定した位置への挿入を繰り返した最終的な列
     - 言い回し：x 以下の要素の個数（順位）
 - 節：
-    - `kth-element#comparison` 方法の比較（どの方法で K 番目を求めるか）：https://yuukougun.github.io/kyopro-atlas/ds/kth-element/#comparison
     - `kth-element#bit-binary-search` BIT 上の二分探索の手順（値が 0 以上であることが前提）：https://yuukougun.github.io/kyopro-atlas/ds/kth-element/#bit-binary-search
     - `kth-element#reverse-insertion` 挿入を逆順に処理して「空きの P 番目」に置く：https://yuukougun.github.io/kyopro-atlas/ds/kth-element/#reverse-insertion
     - `kth-element#vs-kth-value` 答えの二分探索で K 番目を数える方法との違い：https://yuukougun.github.io/kyopro-atlas/ds/kth-element/#vs-kth-value
@@ -378,7 +359,6 @@ search:
     - `segment-tree#recursive-vs-iterative` 再帰型と非再帰型：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree/#recursive-vs-iterative
     - `segment-tree#string-queries` 文字列へのクエリ（文字の集合をビットで持つ）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree/#string-queries
     - `segment-tree#dp` DP の配列を載せる：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree/#dp
-    - `segment-tree#choosing` 使い分け：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree/#choosing
 
 ## セグメント木上の二分探索（segment-tree-binary-search） {#segment-tree-binary-search}
 
@@ -443,7 +423,6 @@ search:
     - `lazy-segment-tree#acl-conventions` ACL の約束（mapping・composition・id）：https://yuukougun.github.io/kyopro-atlas/ds/lazy-segment-tree/#acl-conventions
     - `lazy-segment-tree#boundaries` 境界（葉の長さ・e()・代入の番兵・INF・mod）：https://yuukougun.github.io/kyopro-atlas/ds/lazy-segment-tree/#boundaries
     - `lazy-segment-tree#dual-segment-tree` 双対セグメント木（区間作用・一点取得）：https://yuukougun.github.io/kyopro-atlas/ds/lazy-segment-tree/#dual-segment-tree
-    - `lazy-segment-tree#choosing` 使い分け：https://yuukougun.github.io/kyopro-atlas/ds/lazy-segment-tree/#choosing
     - `lazy-segment-tree#invariants` 保つ性質と push の手順（自作するとき）（青）：https://yuukougun.github.io/kyopro-atlas/ds/lazy-segment-tree/#invariants
 
 ## セグメント木に何を載せるか（segment-tree-monoids） {#segment-tree-monoids}
@@ -461,10 +440,9 @@ search:
     - 式の形：区間 [l, r) の答えが、各位置の一次関数や小さな行列を順に合成したもので書ける
 - 節：
     - `segment-tree-monoids#design-steps` 設計の手順（答えに要る情報 → 親が作れるまで情報を足す → 結合律と単位元を確かめる）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-monoids/#design-steps
-    - `segment-tree-monoids#pattern-table` 型の表（和・min/max・gcd・最小値と個数・最大値と 2 番目・文字の種類・ソート済みか・括弧列・最大部分配列和・最長の連続・ハッシュ・0/1 列の転倒数）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-monoids/#pattern-table
+    - `segment-tree-monoids#pattern-table` 型の表（和・min/max・gcd・最小値と個数・括弧列・最大部分配列和など）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-monoids/#pattern-table
     - `segment-tree-monoids#non-commutative` 非可換なモノイド（一次関数の合成・ハッシュの連結。積む順序）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-monoids/#non-commutative
     - `segment-tree-monoids#matrix` 行列を載せる（(min,+)・(max,+) の半環も。行列の積は行列累乗のページ、1 点更新のたびに DP を求め直すなら動的 DP）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-monoids/#matrix
-    - `segment-tree-monoids#pitfalls` 落とし穴（単位元になっていない e・結合的でない op・左右の取り違え）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-monoids/#pitfalls
 
 ## 遅延セグメント木の載せ方の型（lazy-segment-tree-patterns） {#lazy-segment-tree-patterns}
 
@@ -501,8 +479,7 @@ search:
 - 節：
     - `sparse-table#what-it-does` 何ができるか（静的・冪等な演算なら O(1)）：https://yuukougun.github.io/kyopro-atlas/ds/sparse-table/#what-it-does
     - `sparse-table#idempotent` なぜ重なってよいか（冪等）と k = ⌊log₂ L⌋：https://yuukougun.github.io/kyopro-atlas/ds/sparse-table/#idempotent
-    - `sparse-table#build` 作り方（st\[k][i] = op(st\[k−1][i], st\[k−1][i + 2^(k−1)])、log の表）：https://yuukougun.github.io/kyopro-atlas/ds/sparse-table/#build
-    - `sparse-table#choosing` 使い分け（更新があるならセグメント木、和なら累積和）：https://yuukougun.github.io/kyopro-atlas/ds/sparse-table/#choosing
+    - `sparse-table#build` 作り方（長さが 2 のべきの区間の表と log の表）：https://yuukougun.github.io/kyopro-atlas/ds/sparse-table/#build
     - `sparse-table#disjoint-sparse-table` 冪等でない演算（2 べきに分けて O(log N)、Disjoint Sparse Table）（発展）：https://yuukougun.github.io/kyopro-atlas/ds/sparse-table/#disjoint-sparse-table
 
 ## Segment Tree Beats（segment-tree-beats） {#segment-tree-beats}
@@ -562,7 +539,6 @@ search:
     - `sweep-line-2d#intervals-as-points` 区間を 2 次元の点と見る（区間に含まれる区間の数）：https://yuukougun.github.io/kyopro-atlas/ds/sweep-line-2d/#intervals-as-points
     - `sweep-line-2d#window-max` 固定幅の窓を動かして区間加算・区間最大（遅延セグメント木）：https://yuukougun.github.io/kyopro-atlas/ds/sweep-line-2d/#window-max
     - `sweep-line-2d#boundaries` 同じ座標での処理順・閉区間と半開区間・座標圧縮：https://yuukougun.github.io/kyopro-atlas/ds/sweep-line-2d/#boundaries
-    - `sweep-line-2d#choosing` 使い分け（値が変わらず座標が小さいなら 2 次元累積和、オンライン強制ならマージソート木・永続セグメント木、点の追加もあるなら CDQ 分割統治）：https://yuukougun.github.io/kyopro-atlas/ds/sweep-line-2d/#choosing
     - `sweep-line-2d#union-area` 長方形の和集合の面積（区間加算・最小値とその個数）（黄）：https://yuukougun.github.io/kyopro-atlas/ds/sweep-line-2d/#union-area
 
 ## Mo's algorithm（mo-algorithm） {#mo-algorithm}
@@ -580,7 +556,6 @@ search:
     - `mo-algorithm#what-it-does` 何ができるか（1 要素の出入りで答えを差分更新できる量）：https://yuukougun.github.io/kyopro-atlas/ds/mo-algorithm/#what-it-does
     - `mo-algorithm#ordering` クエリの並べ方と計算量（ブロックの大きさ N/√Q、伸縮の総回数 O(N√Q)）：https://yuukougun.github.io/kyopro-atlas/ds/mo-algorithm/#ordering
     - `mo-algorithm#implementation` 実装の要点（伸ばしてから縮める・奇数ブロックで r を逆順・取得を重くしてよい（値の平方分割））：https://yuukougun.github.io/kyopro-atlas/ds/mo-algorithm/#implementation
-    - `mo-algorithm#choosing` 使い分け（種類数だけならオフラインの BIT、オンライン強制なら使えない）：https://yuukougun.github.io/kyopro-atlas/ds/mo-algorithm/#choosing
     - `mo-algorithm#two-prefixes` 2 つの接頭辞の長さ (X, Y) を区間と見る（黄）：https://yuukougun.github.io/kyopro-atlas/ds/mo-algorithm/#two-prefixes
     - `mo-algorithm#mo-on-tree` 木上の Mo（入りと出の両方を記録した列で、パスを区間にする。LCA を別に足す）（黄）：https://yuukougun.github.io/kyopro-atlas/ds/mo-algorithm/#mo-on-tree
     - `mo-algorithm#variants` 時間付き Mo・ロールバック Mo（発展）：https://yuukougun.github.io/kyopro-atlas/ds/mo-algorithm/#variants
@@ -602,7 +577,6 @@ search:
     - `sqrt-decomposition#heavy-light` 根号で場合分け（合計が抑えられた量の大小で分ける。歩幅なら小さい歩幅を（歩幅, 余り）でまとめる。入口は次数による平方分割のページ）：https://yuukougun.github.io/kyopro-atlas/ds/sqrt-decomposition/#heavy-light
     - `sqrt-decomposition#query-buckets` クエリの平方分割（√Q 個ごとに作り直し、未反映の分は愚直に補正する）：https://yuukougun.github.io/kyopro-atlas/ds/sqrt-decomposition/#query-buckets
     - `sqrt-decomposition#implementation` 実装の要点（ブロック番号は i / B・l と r が同じブロックの場合・タグを押し下げる時機・B は定数でよい）：https://yuukougun.github.io/kyopro-atlas/ds/sqrt-decomposition/#implementation
-    - `sqrt-decomposition#choosing` 使い分け（載せられるならセグメント木のほうが速く安全）：https://yuukougun.github.io/kyopro-atlas/ds/sqrt-decomposition/#choosing
 
 ## 並列二分探索（parallel-binary-search） {#parallel-binary-search}
 
@@ -651,7 +625,6 @@ search:
     - `persistent-data-structures#path-copying` 経路コピー（1 回の更新で O(log N) 個のノードを新しく作る。丸ごとのコピーは根の指し替え）：https://yuukougun.github.io/kyopro-atlas/ds/persistent-data-structures/#path-copying
     - `persistent-data-structures#partial-vs-full` 部分永続と完全永続：https://yuukougun.github.io/kyopro-atlas/ds/persistent-data-structures/#partial-vs-full
     - `persistent-data-structures#offline-version-tree` 操作の版を木にしてオフラインで処理する（版の木の DFS と取り消し）：https://yuukougun.github.io/kyopro-atlas/ds/persistent-data-structures/#offline-version-tree
-    - `persistent-data-structures#choosing` 使い分け（ロールバックは直前から順に戻すだけ、永続は任意の版へ）：https://yuukougun.github.io/kyopro-atlas/ds/persistent-data-structures/#choosing
     - `persistent-data-structures#prefix-versions` 接頭辞ごとの版で区間の K 番目・x 以下の個数をオンラインで求める（発展）：https://yuukougun.github.io/kyopro-atlas/ds/persistent-data-structures/#prefix-versions
 
 ## マージソート木（merge-sort-tree） {#merge-sort-tree}
@@ -667,7 +640,6 @@ search:
 - 節：
     - `merge-sort-tree#build` 作り方（子の列をマージする）とメモリ O(N log N)：https://yuukougun.github.io/kyopro-atlas/ds/merge-sort-tree/#build
     - `merge-sort-tree#query` クエリの手順（O(log N) 個のノードで二分探索）と累積和で和も：https://yuukougun.github.io/kyopro-atlas/ds/merge-sort-tree/#query
-    - `merge-sort-tree#choosing` 使い分け（オフラインなら平面走査と BIT、速さが要るなら Wavelet Matrix・永続セグメント木）：https://yuukougun.github.io/kyopro-atlas/ds/merge-sort-tree/#choosing
     - `merge-sort-tree#bit-per-level` 各段に BIT を持たせる（先読みと組む）（発展）：https://yuukougun.github.io/kyopro-atlas/ds/merge-sort-tree/#bit-per-level
 
 ## Wavelet Matrix（wavelet-matrix） {#wavelet-matrix}
@@ -702,8 +674,6 @@ search:
     - `binary-trie#xor-min-max` XOR の最小・最大（同じ側を優先して降りる）：https://yuukougun.github.io/kyopro-atlas/ds/binary-trie/#xor-min-max
     - `binary-trie#kth-and-global-xor` K 番目と全体への XOR（ビットごとの反転フラグ）：https://yuukougun.github.io/kyopro-atlas/ds/binary-trie/#kth-and-global-xor
     - `binary-trie#implicit` 明示的に作らない Binary Trie（上位ビットで分ける再帰）：https://yuukougun.github.io/kyopro-atlas/ds/binary-trie/#implicit
-    - `binary-trie#choosing` 使い分け（最小の XOR の組はソート順で隣り合う組でも求まる、XOR で作れる値の集合は XOR 基底）：https://yuukougun.github.io/kyopro-atlas/ds/binary-trie/#choosing
-    - `binary-trie#pitfalls` 落とし穴（ノード数＝要素数 × ビット数。配列で確保する）：https://yuukougun.github.io/kyopro-atlas/ds/binary-trie/#pitfalls
 
 ## 平衡二分探索木と pb_ds の tree（balanced-bst） {#balanced-bst}
 

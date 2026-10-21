@@ -17,17 +17,17 @@ signs:
   - {type: constraint, text: A_i ≤ 10^9 を N ≤ 2×10^5 個足す、または 2 つ掛ける（int に収まらない）}
 acl: []
 sections:
-  - {title: int どうしの積は int で計算される：long long p = a * b は誤り、1LL * a * b か (long long)a * b, anchor: int-product}
-  - {title: シフトの幅：1 << 40 は警告が出て 0 になる、1LL << 40, anchor: shift-width}
+  - {title: 'int どうしの積は int で計算される（1LL * a * b と書く）', anchor: int-product}
+  - {title: シフトの幅：int の 1 を 40 ずらすと警告が出て 0 になる、1LL をずらす, anchor: shift-width}
   - {title: '初期値と推論の型：accumulate(..., 0)・auto x = 0・views::iota(0, n) の i は int', anchor: inferred-int}
-  - {title: size() は符号なし：空の v で v.size() - 1 が巨大になる、-1 < v.size() が false、ssize(v)（C++20）か (int)v.size(), anchor: unsigned-size}
-  - {title: '型の違う値を min・max に渡すとコンパイルエラー：min(1, x) → min(1LL, x)・min<long long>(1, x)', anchor: min-max-types}
+  - {title: size() は符号なし：空の v で v.size() - 1 が巨大になる、ssize(v) か (int)v.size(), anchor: unsigned-size}
+  - {title: 型の違う値を min・max に渡すとコンパイルエラー（1LL にそろえるか型を明示する）, anchor: min-max-types}
   - {title: INF + INF・abs(INT_MIN)・INT_MIN / -1, anchor: edge-values}
-  - {title: 符号付き整数のあふれは未定義動作：-O2 では正しく書いた比較の結果まで変わる（警告は出ず、-fsanitize=undefined で見つかる）, anchor: signed-overflow-ub}
-  - {title: __int128：10^18 程度どうしの積を正確に持つ。リテラルはないので (__int128)1 << 100 と書く（GCC の拡張）, anchor: int128}
-  - {title: __int128 の入出力：cout << も cin >> もできない、format（C++20・GCC 13〜）・println（C++23・GCC 14〜）か自作の変換で出し、文字列で読んで変換する, anchor: int128-io}
-  - {title: -std=c++23 では is_integral_v<__int128> が false で gcd・abs に渡せない（AtCoder の -std=gnu++23 では渡せる。numeric_limits はどちらでも使える）, anchor: int128-strict-mode}
-  - {title: 積が上限を超えるかの判定：割り算で比べる考え方は integer-division のページ、C++ では __builtin_mul_overflow（GCC の拡張）も使える、long double は境界で誤りうる, anchor: overflow-check}
+  - {title: 符号付き整数のあふれは未定義動作：-O2 では正しく書いた比較の結果まで変わる, anchor: signed-overflow-ub}
+  - {title: __int128：10^18 程度どうしの積を正確に持つ（GCC の拡張）, anchor: int128}
+  - {title: __int128 の入出力：cin・cout では扱えない、format・println か自作の変換で出す, anchor: int128-io}
+  - {title: '-std=c++23 では __int128 が整数型と判定されず gcd・abs に渡せない', anchor: int128-strict-mode}
+  - {title: 積が上限を超えるかの判定：割り算で比べる・__builtin_mul_overflow, anchor: overflow-check}
 stage: draft
 updated: 2026-10-21
 cpp_std: null
@@ -51,7 +51,7 @@ atcoder: true
 
 このページのコードは `#include <bits/stdc++.h>` と `using namespace std;` を前提にする。
 
-## int どうしの積は int で計算される：long long p = a * b は誤り、1LL * a * b か (long long)a * b {#int-product}
+## int どうしの積は int で計算される（1LL * a * b と書く） {#int-product}
 
 `a * b` の型は `a` と `b` の型で決まり、代入先の型は関係しない。`a` と `b` が `int` なら、積は `int` で計算され、あふれた後の値が `long long` に入る。
 
@@ -73,7 +73,7 @@ $a = b = 10^5$ なら正しい積は $10^{10}$ だが、手元では `1410065408
 - **落とし穴**：`a * b * 1LL` と `(long long)(a * b)` は誤りである。どちらも `a * b` を `int` で計算した後に広げている。`1LL` は先頭に置き、キャストは掛ける前の変数に付ける
 - **落とし穴**：足し算も同じである。`int` の配列を `int` の変数に足し込むと、$10^9$ を 3 個足した時点であふれる。和を持つ変数を `long long` にする
 
-## シフトの幅：1 << 40 は警告が出て 0 になる、1LL << 40 {#shift-width}
+## シフトの幅：int の 1 を 40 ずらすと警告が出て 0 になる、1LL をずらす {#shift-width}
 
 `1` は `int`（32 bit）なので、`1 << 40` は型の幅以上のシフトになり、未定義動作である。定数なら `-Wall` で警告 `left shift count >= width of type [-Wshift-count-overflow]` が出て、手元では値が 0 になった。$2^{40}$ が欲しいなら `1LL << 40` と書く。
 
@@ -103,7 +103,7 @@ $a = b = 10^5$ なら正しい積は $10^{10}$ だが、手元では `1410065408
 - `accumulate(first, last, init)` は、`init` の型の変数に足し込み、その型で返す（[accumulate](../cpp/cpp-algorithms.md)）。`v` が `vector<long long>` でも `init` が `0` なら、足すたびに `int` へ直される。手元では $10^9$ を 3 個足して `-1294967296` になり、警告は出なかった。`0LL` と書けば `3000000000` になる
 - `views::iota(0, n)` の要素は始まりの `0` の型 `int` になる。`n` が `long long` でも同じで、`for (long long i : …)` と受けても直らない（[views::iota(0, n) は n が long long でも i が int になる](../cpp/cpp-views-basics.md#iota-int)）。`views::iota(0LL, n)` と書く
 
-## size() は符号なし：空の v で v.size() - 1 が巨大になる、-1 < v.size() が false、ssize(v)（C++20）か (int)v.size() {#unsigned-size}
+## size() は符号なし：空の v で v.size() - 1 が巨大になる、ssize(v) か (int)v.size() {#unsigned-size}
 
 `v.size()` の型は `size_t`（64 bit の符号なし整数）である。[符号なし整数](../guide/glossary.md#unsigned-integer)の計算は $2^{64}$ を法として回り込むと決まっていて（未定義動作ではない）、負の値にはならない。
 
@@ -123,7 +123,7 @@ $a = b = 10^5$ なら正しい積は $10^{10}$ だが、手元では `1410065408
 - **落とし穴**：`for (size_t i = n - 1; i >= 0; i--)` は終わらない。符号なしの `i` は常に 0 以上で、0 の次は最大値に回り込む（`-Wextra` で `comparison of unsigned expression in '>= 0' is always true` と警告が出る）。逆順のループは `int` で回す
 - **関連**：`views::iota(0, v.size())` がコンパイルエラーになるのも同じ符号の違いによる（[views::iota(0, v.size()) がコンパイルエラーになる理由と直し方](../cpp/cpp-views-basics.md#iota-size-mismatch)）
 
-## 型の違う値を min・max に渡すとコンパイルエラー：min(1, x) → min(1LL, x)・`min<long long>(1, x)` {#min-max-types}
+## 型の違う値を min・max に渡すとコンパイルエラー（1LL にそろえるか型を明示する） {#min-max-types}
 
 `min` と `max` は 2 つの引数が同じ型であることを求める。`x` が `long long` のとき `min(1, x)` は `int` と `long long` の組になり、コンパイルエラーになる。
 
@@ -154,7 +154,7 @@ $a = b = 10^5$ なら正しい積は $10^{10}$ だが、手元では `1410065408
 - **INT_MIN / -1**：商 $2^{31}$ が `int` に収まらず、未定義動作である。手元の x86-64 では、`a = INT_MIN`・`d = -1` を入力から読んで割ると、`Floating point exception` で異常終了した（割り算の命令が例外を出す）。`INT_MIN % -1` も同じく異常終了した
 - **見分け方**：あふれは WA になるとは限らない。RE（異常終了）として現れることもある
 
-## 符号付き整数のあふれは未定義動作：-O2 では正しく書いた比較の結果まで変わる（警告は出ず、-fsanitize=undefined で見つかる） {#signed-overflow-ub}
+## 符号付き整数のあふれは未定義動作：-O2 では正しく書いた比較の結果まで変わる {#signed-overflow-ub}
 
 `int`・`long long` などの符号付き整数のあふれは、規格が結果を決めていない[未定義動作](../cpp/cpp-undefined-behavior.md)である。コンパイラは「あふれは起きない」と仮定して最適化してよい。そのため、あふれた式そのものだけでなく、その値を使う別の行の結果まで変わる。
 
@@ -169,7 +169,7 @@ $a = b = 10^5$ を入れると、`c` は `1410065408`、`p` は `10000000000` �
 - **疑うとき**：`-O0` と `-O2` で答えが変わる、答えに関係のない行を足す・消すと答えが変わる、手元と AtCoder で結果が違う
 - **符号なしは別**：`unsigned` や `size_t` の回り込みは規格で決まっていて、未定義動作ではない（[size() は符号なし](#unsigned-size)）。ただし値が壊れることに変わりはない
 
-## __int128：10^18 程度どうしの積を正確に持つ。リテラルはないので (__int128)1 << 100 と書く（GCC の拡張） {#int128}
+## __int128：10^18 程度どうしの積を正確に持つ（GCC の拡張） {#int128}
 
 `__int128` は GCC の拡張の 128 bit 符号付き整数で、約 $\pm 1.7 \times 10^{38}$（$2^{127} - 1$ まで）を表せる。$10^{18}$ どうしの積 $10^{36}$ も収まるので、`long long` であふれる中間値を持つのに使う。解説コードでは `using i128 = __int128;` と別名を付けることが多い。
 
@@ -183,7 +183,7 @@ $a = b = 10^5$ を入れると、`c` は `1410065408`、`p` は `10000000000` �
 - **版**：GCC の拡張。g++-13・g++-15 と AtCoder（x86-64 の GCC）で使える
 - **使いどころ**：積を比べたいだけなら、[積が上限を超えるかの判定](#overflow-check)の方法もある。$\bmod$ の積 $a \times b \bmod m$（$m \approx 10^{18}$）を求めるときにも使う
 
-## __int128 の入出力：cout << も cin >> もできない、format（C++20・GCC 13〜）・println（C++23・GCC 14〜）か自作の変換で出し、文字列で読んで変換する {#int128-io}
+## __int128 の入出力：cin・cout では扱えない、format・println か自作の変換で出す {#int128-io}
 
 `cout << x` と `cin >> x` は、`__int128` を受ける版がないのでコンパイルエラーになる。
 
@@ -217,7 +217,7 @@ $a = b = 10^5$ を入れると、`c` は `1410065408`、`p` は `10000000000` �
 
 - **落とし穴**：`printf("%lld", x)` も使えない。`-Wformat` の警告が出て、手元では $2^{100}$ が `0` と出た。`long long` に収まる値なら、`(long long)x` に戻してから出す
 
-## -std=c++23 では `is_integral_v<__int128>` が false で gcd・abs に渡せない（AtCoder の -std=gnu++23 では渡せる。numeric_limits はどちらでも使える） {#int128-strict-mode}
+## -std=c++23 では __int128 が整数型と判定されず gcd・abs に渡せない {#int128-strict-mode}
 
 GCC は、GNU 拡張を有効にする `-std=gnu++23` と、規格どおりの `-std=c++23` で `__int128` の扱いが違う。`-std=c++23` では `__int128` を「整数型」と認めず、`is_integral_v<__int128>` が `false` になる。整数型を要求する標準の関数に渡せなくなる。
 
@@ -236,7 +236,7 @@ GCC は、GNU 拡張を有効にする `-std=gnu++23` と、規格どおりの `
 
 - **AtCoder では**：`-std=gnu++23` なので渡せる。手元の設定やエディタの拡張（コード補完）が `-std=c++23` だと、手元だけでエラーになる。手元のオプションは [環境構築](../cpp/cpp-environment.md)でそろえる
 
-## 積が上限を超えるかの判定：割り算で比べる考え方は integer-division のページ、C++ では __builtin_mul_overflow（GCC の拡張）も使える、long double は境界で誤りうる {#overflow-check}
+## 積が上限を超えるかの判定：割り算で比べる・__builtin_mul_overflow {#overflow-check}
 
 「$a \times b \le L$ か」を、$a \times b$ が `long long` に収まらない場合も含めて判定する方法は 3 つある（$a, b \ge 1$ とする）。
 

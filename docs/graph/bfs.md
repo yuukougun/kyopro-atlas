@@ -1,7 +1,7 @@
 ---
 id: bfs
 title: 幅優先探索（BFS）と無重み最短路
-aliases: [幅優先探索, BFS, breadth-first search, 無重み最短路, 多始点 BFS, 最短経路の復元]
+aliases: [幅優先探索, BFS, breadth-first search, 無重み最短路, 多始点 BFS, 最短路の復元, 経路復元]
 type: technique
 field: graph
 chapter: 基本と探索
@@ -15,7 +15,7 @@ complexity: O(N+M)（グリッドは O(HW)）
 signs:
   - {type: phrase, text: 最小の手数・回数を求める（1 回の移動のコストがすべて同じ）}
   - {type: phrase, text: 一番近い〇〇までの距離・複数の場所から同時に広がる}
-  - {type: phrase, text: 最短経路を 1 つ出力する・次に進む頂点を答える}
+  - {type: phrase, text: 最短路を 1 つ出力する・次に進む頂点を答える}
   - {type: constraint, text: 'N, M ≤ 2×10^5、またはマスの数 H×W ≤ 10^6 程度'}
 acl: []
 frequency: A
@@ -41,7 +41,7 @@ updated: 2026-10-21
     - **前提**：[グラフの表現と用語](../graph/graph-basics.md)、[スタック・キュー・deque の使いどころ](../ds/stack-techniques.md)
 
 <!-- textlint-disable -->
-別名：幅優先探索・BFS・breadth-first search・無重み最短路・多始点 BFS・最短経路の復元
+別名：幅優先探索・BFS・breadth-first search・無重み最短路・多始点 BFS・最短路の復元・経路復元
 <!-- textlint-enable -->
 
 幅優先探索（BFS）は、始点から距離 0 の頂点、距離 1 の頂点、距離 2 の頂点…と、近い順に頂点を見つけていく探索である。見つけた頂点をキュー（先に入れたものから取り出す列）に積むだけで近い順になり、最初に見つけたときの距離がそのまま最短距離になる。辺の重みがすべて等しいグラフなら、最短路はこれだけで線形時間に求まる。以下、頂点は 0-indexed で、$\mathrm{dist}[v]$ を始点から $v$ までの辺の本数の最小とする。

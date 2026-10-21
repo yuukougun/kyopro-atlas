@@ -29,7 +29,6 @@ sections:
   - {title: すべて含む：含んだパターンの集合を bit で持つ, anchor: contain-all}
   - {title: N が巨大なとき：遷移行列の累乗・ダブリング, anchor: matrix-power}
   - {title: 包除で解こうとすると破綻する理由（パターンの重なり）, anchor: why-not-inclusion-exclusion}
-  - {title: 部分列 DP・桁 DP との違い, anchor: comparison}
 stage: stub
 updated: 2026-10-21
 ---

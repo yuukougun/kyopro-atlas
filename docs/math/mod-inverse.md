@@ -23,7 +23,7 @@ sections:
   - {title: '逆元が存在する条件（gcd(a, m) = 1）', anchor: existence}
   - {title: フェルマーの小定理による a^(p−2), anchor: fermat}
   - {title: 拡張ユークリッドによる逆元（法が素数でないとき）, anchor: ext-gcd, level: 水}
-  - {title: '逆元表を O(N) で作る（inv[i] = −⌊m/i⌋·inv[m mod i]）と階乗の逆元', anchor: inverse-table}
+  - {title: 逆元表を O(N) で作る方法と階乗の逆元, anchor: inverse-table}
   - {title: 有理数 P/Q を P × Q^(−1) で表す計算, anchor: rational}
   - {title: 割れないときの3つの場合（割る数が p の倍数・公比 ≡ 1・法が素数でない）, anchor: not-invertible}
   - {title: 'ACL の inv_mod と modint::inv', anchor: acl}
@@ -111,7 +111,7 @@ $$
 
 フェルマーとの違いは 2 つある。素数でない法でも使えること、互いに素でないときに「ない」と判定できることである。$g = \gcd(a, m) > 1$ で $ax \equiv b \pmod{m}$ を解きたいときは、$g$ が $b$ を割り切るときだけ解がある。そのときは両辺と法を $g$ で割ってから逆元を取る（[一次合同式](../math/ext-gcd.md#linear-congruence)）。法が素数でも、ライブラリとして 1 つ持つならこちらが汎用である。
 
-## 逆元表を O(N) で作る（inv[i] = −⌊m/i⌋·inv[m mod i]）と階乗の逆元 {#inverse-table}
+## 逆元表を O(N) で作る方法と階乗の逆元 {#inverse-table}
 
 $1$ から $N$ までの逆元が全部欲しいとき、1 つずつフェルマーで求めると $O(N \log p)$ かかる。法が素数 $p$ で $N < p$ なら、次の漸化式で $O(N)$ で作れる。
 

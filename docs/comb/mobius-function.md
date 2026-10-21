@@ -20,9 +20,9 @@ acl: []
 frequency: C
 frequency_evidence: recent 0・前提として届くページなし・古い ABC 1 問
 sections:
-  - {title: 'μ の定義と Σ_{d|n} μ(d) = [n = 1]（素因数についての包除）', anchor: definition}
+  - {title: μ の定義と、約数についての和が n = 1 のときだけ 1 になる性質, anchor: definition}
   - {title: メビウス反転, anchor: inversion}
-  - {title: '[gcd = 1] の置き換えと和の入れ替え', anchor: gcd-one}
+  - {title: 「gcd が 1」の条件の置き換えと和の入れ替え, anchor: gcd-one}
   - {title: μ を篩で作る, anchor: sieve}
   - {title: 商の列挙で同じ値の範囲を束ねる, anchor: quotient, level: 発展}
   - {title: 約数包除との書き換え, anchor: vs-divisor-ie}

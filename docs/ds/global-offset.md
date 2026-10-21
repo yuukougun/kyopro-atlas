@@ -26,7 +26,6 @@ sections:
   - {title: 反転フラグ（追加する側や添字の読み方を入れ替え、最後に向きを直す）, anchor: flip-flag}
   - {title: 全体代入と個別の差分（代入のたびに差分の map を空にする。ならし）, anchor: assign-all}
   - {title: 回転は先頭位置の添字で表す, anchor: rotation}
-  - {title: 落とし穴（反転中の先頭と末尾の取り違え・向きの直し忘れ・オフセットのあふれ）, anchor: pitfalls}
   - {title: 遅延セグメント木とのつながり（全体への操作を区間への操作に広げる）, anchor: to-lazy-segment-tree, level: 水}
 stage: draft
 updated: 2026-10-21
@@ -96,7 +95,7 @@ $$
 - **実際の $i$ 番目を読む**（0-indexed）：$\mathrm{rev}$ が偽なら $i$ 番目、真なら $n - 1 - i$ 番目を読む（$n$ は今の要素数）
 - **最後に列全体を出力する**：$\mathrm{rev}$ が真なら、コンテナ全体を 1 回だけ反転してから出力する
 
-両端への追加が要るので、コンテナには [deque](../ds/stl-containers.md#choosing) を使う。
+両端への追加が要るので、コンテナには [deque](../ds/stl-containers.md#comparison) を使う。
 
 ```cpp
 --8<-- "global-offset/flip-deque.cpp:core"
@@ -143,7 +142,7 @@ $\mathrm{diff}$ を map ではなく長さ $N$ の配列にすると、空にす
     ??? success "答え"
         $s = (0 + 4 - 1) \bmod 4 = 3$ になり、実際の 0 番目はもとの 3 番目の $40$ である。右回転で末尾の $40$ が先頭へ来たことと合っている。$s - 1$ を `% 4` で割ると C++ では $-1$ になるので、$N$ を足してから割る。
 
-## 落とし穴（反転中の先頭と末尾の取り違え・向きの直し忘れ・オフセットのあふれ） {#pitfalls}
+## 落とし穴 {#pitfalls}
 
 **反転中に先頭と末尾を取り違える**。$\mathrm{rev}$ が真のとき「先頭に追加」をコンテナの先頭へ入れてしまう誤りが多い。実際の位置とコンテナの位置を変換する処理を `push_front`・`push_back`・`at` のような関数 1 か所にまとめ、クエリの処理からは実際の位置だけで呼ぶ。小さな例で、反転を 0 回・1 回・2 回挟んだ結果を手で確かめる。
 

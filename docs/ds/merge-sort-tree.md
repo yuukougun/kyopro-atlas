@@ -22,7 +22,6 @@ frequency_evidence: recent 1（abc467_g）・前提として 1 ページに届�
 sections:
   - {title: 作り方（子の列をマージする）とメモリ O(N log N), anchor: build}
   - {title: クエリの手順（O(log N) 個のノードで二分探索）と累積和で和も, anchor: query}
-  - {title: 使い分け（オフラインなら平面走査と BIT、速さが要るなら Wavelet Matrix・永続セグメント木）, anchor: choosing}
   - {title: 各段に BIT を持たせる（先読みと組む）, anchor: bit-per-level, level: 発展}
 stage: stub
 updated: 2026-10-21

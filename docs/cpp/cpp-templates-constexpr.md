@@ -16,15 +16,15 @@ signs: []
 acl: []
 sections:
   - {title: 「テンプレート」の 2 つの意味：C++ の template と、競プロのコードの雛形, anchor: two-meanings}
-  - {title: '関数テンプレート：template <class T> T power(T a, long long n)', anchor: function-template}
+  - {title: 関数テンプレート：型を引数に取る関数を 1 つ書く, anchor: function-template}
   - {title: '型推論の失敗：chmin(a, 3)（a が long long）が通らない理由と、2 つの型引数を取る形', anchor: deduction-failure}
-  - {title: '型を明示して呼ぶ：max<long long>(a, b)', anchor: explicit-type}
+  - {title: 型を明示して呼ぶ（max に long long を指定する）, anchor: explicit-type}
   - {title: auto 引数の省略形 auto sq(auto x)（C++20）, anchor: abbreviated-template}
-  - {title: コンセプトと requires：template <integral T>（C++20）, anchor: concepts}
-  - {title: 'constexpr の定数と関数、コンパイル時に表を作る constexpr auto table = [] { ... }();', anchor: constexpr}
+  - {title: コンセプトと requires：型の条件を書く（C++20）, anchor: concepts}
+  - {title: constexpr の定数と関数、コンパイル時に表を作る, anchor: constexpr}
   - {title: static_assert と if constexpr（if constexpr は C++17）, anchor: static-assert}
-  - {title: '畳み込み式で可変長引数を展開する：((cerr << xs << '' ''), ...) のデバッグ出力（C++17）', anchor: fold-expression}
-  - {title: '属性：[[maybe_unused]]・[[nodiscard]]（C++17）、[[likely]]（C++20）、[[assume]]（C++23・GCC 13〜）', anchor: attributes}
+  - {title: 畳み込み式で可変長引数を展開する：デバッグ出力の例（C++17）, anchor: fold-expression}
+  - {title: 属性：maybe_unused・nodiscard（C++17）、likely（C++20）、assume（C++23・GCC 13〜）, anchor: attributes}
 stage: draft
 updated: 2026-10-21
 cpp_std: 20
@@ -55,7 +55,7 @@ atcoder: true
 
 雛形の中の `chmin` は、たいてい C++ の `template` で書かれている。そのため、雛形を読むには C++ の `template` の読み方が要る。エラーの文に `template argument deduction/substitution failed` とあれば、C++ の `template` の話である。
 
-## 関数テンプレート：template <class T> T power(T a, long long n) {#function-template}
+## 関数テンプレート：型を引数に取る関数を 1 つ書く {#function-template}
 
 `template <class T>` の後に書いた関数では、`T` を型の名前として使える。次の `power` は、`a` の `n` 乗を繰り返し二乗法で求める。`T` は `long long` でも `double` でも、`*=` と `1` からの初期化ができる型なら何でもよい（ACL の [modint](../cpp/acl-reading.md) も入る）。`class T` は `typename T` と書いても同じ意味である。
 
@@ -114,7 +114,7 @@ note:   deduced conflicting types for parameter 'const T' ('long long int' and '
 --8<-- "cpp-templates-constexpr/chmin-narrow.cpp:core"
 ```
 
-## 型を明示して呼ぶ：max<long long>(a, b) {#explicit-type}
+## 型を明示して呼ぶ（max に long long を指定する） {#explicit-type}
 
 標準ライブラリの `max` と `min` も、2 つの引数が同じ型 `T` の関数テンプレートである。そのため `chmin` と同じく、`long long` と `int` を混ぜると、`deduced conflicting types` でコンパイルエラーになる。
 
@@ -149,7 +149,7 @@ note:   deduced conflicting types for parameter 'const T' ('long long int' and '
 - **版**：C++20。g++-13・g++-15 で使える。`-std=gnu++17` でも GCC は通す。ただし `use of 'auto' in parameter declaration only available with '-std=c++20' or '-fconcepts'` という警告が出る。これは GNU の拡張で、`-std=c++17 -pedantic-errors` ではエラーになる
 - **落とし穴**：`auto` を書いた引数どうしの型をそろえたいとき（`a` と `b` を同じ型にしたいとき）は、`template <class T>` の形で書く
 
-## コンセプトと requires：template <integral T>（C++20） {#concepts}
+## コンセプトと requires：型の条件を書く（C++20） {#concepts}
 
 コンセプトは、型引数に付ける条件である。`template <integral T>` と書くと、`T` は整数型（`int`・`long long`・`char` など）に限られる。`requires integral<T>` と書いても同じで、`integral auto x` のように `auto` 引数にも付けられる。ライブラリのコードで、整数だけを受け取る関数によく使われる。
 
@@ -168,7 +168,7 @@ note:   deduced conflicting types for parameter 'const T' ('long long int' and '
 - **版**：C++20。`integral`・`floating_point`・`same_as` などのコンセプトは `<concepts>` にある。g++-13・g++-15 で使える
 - **読み方**：解説コードでは、自分で書くより読むことが多い。`template <integral T>` は「`T` は整数型」、`requires` の後ろは「この条件を満たす型だけ」と読めば足りる
 
-## constexpr の定数と関数、コンパイル時に表を作る constexpr auto table = [] { ... }(); {#constexpr}
+## constexpr の定数と関数、コンパイル時に表を作る {#constexpr}
 
 `constexpr` を付けた変数は、コンパイル時に値が決まる定数になる。配列の大きさや、テンプレートの引数に使える。`constexpr` を付けた関数は、定数式が要る場所（`constexpr` の変数の初期化や `static_assert`）で呼べばコンパイル時に計算され、実行時の値で呼べば普通の関数として動く。普通の式の中で呼んだとき、コンパイル時に計算するかはコンパイラが決める。必ずコンパイル時に計算したい値は、`constexpr` の変数に入れる。
 
@@ -216,7 +216,7 @@ note:   deduced conflicting types for parameter 'const T' ('long long int' and '
 - **版**：`static_assert` は C++11、メッセージの省略と `if constexpr` は C++17。g++-13・g++-15 で使える
 - **落とし穴**：`if constexpr` で捨てた枝がコンパイルされないのは、関数テンプレートの中で、枝の中身が型引数（`T` や `x`）に依存しているときだけである。テンプレートでない普通の関数の中や、`T` に関係しない誤り（たとえば `int y` を範囲 for で回す行）は、捨てた枝でもエラーになる
 
-## 畳み込み式で可変長引数を展開する：((cerr << xs << ' '), ...) のデバッグ出力（C++17） {#fold-expression}
+## 畳み込み式で可変長引数を展開する：デバッグ出力の例（C++17） {#fold-expression}
 
 `template <class... Ts>` と書くと、型引数をいくつでも取る関数テンプレート（可変長テンプレート）になる。`xs` は引数のまとまり（パラメータパック）で、畳み込み式でまとめて展開する。デバッグ出力の `debug(n, m, s)` は、雛形によく入っている使い方である。
 
@@ -241,7 +241,7 @@ note:   deduced conflicting types for parameter 'const T' ('long long int' and '
 
 - **落とし穴 2**：`cerr` への出力は、AtCoder では採点されないが、時間はかかる。ループの中で何万回も呼ぶと TLE の原因になる。提出前に消すか、`#ifdef LOCAL` で手元だけ有効にする（[マクロと雛形](../cpp/cpp-macros-template-file.md)）
 
-## 属性：[[maybe_unused]]・[[nodiscard]]（C++17）、[[likely]]（C++20）、[[assume]]（C++23・GCC 13〜） {#attributes}
+## 属性：maybe_unused・nodiscard（C++17）、likely（C++20）、assume（C++23・GCC 13〜） {#attributes}
 
 属性は `[[…]]` の形でコンパイラに伝える注記で、プログラムの意味は（`assume` を除き）変えない。競プロのコードで見るのは次の 4 つである。
 

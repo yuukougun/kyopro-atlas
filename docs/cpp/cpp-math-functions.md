@@ -9,7 +9,7 @@ order: 50
 level: 基礎
 kind: [実装・C++, ビット演算]
 prerequisites: [cpp-types-literals]
-related: [cpp-integer-overflow, integer-division, gcd-lcm, integer-root, bit-operations, bitset-speedup, randomized, stress-testing]
+related: [cpp-integer-overflow, integer-division, gcd-lcm, integer-root, bit-operations, bitset-speedup, randomized, stress-testing, mod-pow, binary-search]
 summary: gcd・割り算・sqrt などの数の関数、popcount・bitset などのビットの関数、乱数と時間計測を正しく使う。整数の割り算が 0 に向かって切り捨てることや、sqrt の誤差に気をつける。
 complexity: 'gcd・lcm は O(log min(a, b))、`<bit>` の関数と組み込み関数は O(1)、`bitset<N>` のシフト・論理演算・count は O(N/64)'
 signs: []
@@ -17,15 +17,15 @@ acl: []
 sections:
   - {title: 'gcd・lcm：型を混ぜられる、負の数は絶対値で計算、lcm は戻り値の型であふれる（C++17。__gcd は GCC の古い関数）', anchor: gcd-lcm}
   - {title: midpoint（C++20）・clamp（C++17）, anchor: midpoint-clamp}
-  - {title: 整数の / と % は 0 に向かって切り捨てる（-7 / 2 は -3、-7 % 2 は -1。負の数の床関数・切り上げの書き方は integer-division のページ）, anchor: integer-division}
-  - {title: pow・sqrt は double で計算する：整数のべき乗に pow を使わない、大きな long long の sqrt は誤差が出る（整数の平方根は標準になく、補正の仕方は integer-root のページ）, anchor: pow-sqrt}
+  - {title: '整数の / と % は 0 に向かって切り捨てる（-7 / 2 は -3、-7 % 2 は -1）', anchor: integer-division}
+  - {title: pow・sqrt は double で計算する：整数のべき乗や大きな long long の平方根に使わない, anchor: pow-sqrt}
   - {title: '円周率：numbers::pi（C++20）・M_PI・acos(-1)', anchor: pi}
-  - {title: '`<bit>` の関数：popcount・countr_zero・countl_zero・bit_width・bit_ceil・bit_floor・has_single_bit（C++20）', anchor: bit-functions}
-  - {title: 'std::popcount などは符号なし整数しか受けない（popcount(int) はエラー、負の int を unsigned long long にすると上位が 1 で埋まる）（C++20）', anchor: bit-unsigned-only}
-  - {title: '組み込み関数：__builtin_popcount・__builtin_popcountll・__builtin_ctz・__builtin_clzll・__lg（ctz・clz・__lg に 0 を渡すと未定義。std:: の関数は 0 でも値が決まっている）（GCC の拡張）', anchor: builtins}
+  - {title: bit ヘッダの関数：popcount・countr_zero・bit_width など（C++20）, anchor: bit-functions}
+  - {title: 'std::popcount などは符号なし整数しか受けない（C++20）', anchor: bit-unsigned-only}
+  - {title: 組み込み関数：__builtin_popcount・__builtin_ctz・__builtin_clzll・__lg（GCC の拡張）, anchor: builtins}
   - {title: ビットの小技：x & -x（最下位の 1）・x & (x - 1)・部分集合を大きい順に回す for（考え方は bit 演算のページ）, anchor: bit-tricks}
-  - {title: bitset：大きさはコンパイル時の定数、count・シフト・dp |= dp << w、_Find_first・_Find_next（後の 2 つは GCC の拡張）, anchor: bitset}
-  - {title: '乱数：mt19937_64 rng(random_device{}())・uniform_int_distribution（両端を含む）・shuffle（rand() は使わない。種を固定すると再現できる）', anchor: random}
+  - {title: bitset：大きさはコンパイル時の定数、count・シフト・_Find_first・_Find_next, anchor: bitset}
+  - {title: 乱数：mt19937_64・uniform_int_distribution・shuffle（rand() は使わない）, anchor: random}
   - {title: '時間計測：chrono::steady_clock::now()', anchor: chrono}
 stage: draft
 updated: 2026-10-21
@@ -80,7 +80,7 @@ atcoder: true
 --8<-- "cpp-math-functions/clamp-ng.cpp:core"
 ```
 
-## 整数の / と % は 0 に向かって切り捨てる（-7 / 2 は -3、-7 % 2 は -1。負の数の床関数・切り上げの書き方は integer-division のページ） {#integer-division}
+## 整数の / と % は 0 に向かって切り捨てる（-7 / 2 は -3、-7 % 2 は -1） {#integer-division}
 
 C++ の整数の `a / b` は、実数の商を 0 に向かって切り捨てる。正の数では床関数 $\lfloor a / b \rfloor$ と同じだが、負の数では 1 ずれる。`a % b` は `a - (a / b) * b` と決まっていて、符号は `a` と同じになる。
 
@@ -101,7 +101,7 @@ C++ の整数の `a / b` は、実数の商を 0 に向かって切り捨てる�
 - **落とし穴 2**：負になりうる値の mod を取るとき、`a % m` は負のまま残る。配列の添字や modint の引数として使う前に、0 以上 $m$ 未満へ直す
 - **落とし穴 3**：正の数の切り上げ `(a + b - 1) / b` は、$a$ が負だと正しくない。$b = 2$ のとき、$a = -7$ では $-3$ で合うが、$a = -8$ でも $-3$ と出る（正しくは $-4$）
 
-## pow・sqrt は double で計算する：整数のべき乗に pow を使わない、大きな long long の sqrt は誤差が出る（整数の平方根は標準になく、補正の仕方は integer-root のページ） {#pow-sqrt}
+## pow・sqrt は double で計算する：整数のべき乗や大きな long long の平方根に使わない {#pow-sqrt}
 
 `pow` と `sqrt` は、引数を double に変えて計算し、double を返す（`<cmath>`）。double の仮数部は 53 bit なので、$2^{53} \approx 9 \times 10^{15}$ を超えると表せない整数が出てくる（[浮動小数点数の型](../cpp/cpp-types-literals.md#floating-point)）。
 
@@ -129,7 +129,7 @@ $3^{35} = 50031545098999707$ は奇数で、double では表せない。`pow(3, 
 - **acos(-1)**：昔からの書き方で、関数呼び出しになる。long double の精度が要るなら `acosl(-1)` にする
 - **版**：`numbers::pi` は C++20。`-std=gnu++17` ではコンパイルエラーになる
 
-## `<bit>` の関数：popcount・countr_zero・countl_zero・bit_width・bit_ceil・bit_floor・has_single_bit（C++20） {#bit-functions}
+## bit ヘッダの関数：popcount・countr_zero・bit_width など（C++20） {#bit-functions}
 
 `<bit>` の関数は、2 進表記の 1 の個数や、端から続く 0 の個数を数える。$x = 12$（2 進で $1100$）を `unsigned`（32 桁）で数えると、次の図のようになる。
 
@@ -151,7 +151,7 @@ $3^{35} = 50031545098999707$ は奇数で、double では表せない。`pow(3, 
 - **版**：C++20。`-std=gnu++17` ではコンパイルエラーになる。g++-13・g++-15 とも `-std=gnu++20` から使える
 - **落とし穴**：`bit_ceil(x)` は、結果がその型で表せないと未定義動作である。`unsigned` で $x > 2^{31}$ を渡してはいけない（手元で $2^{32} - 1$ を渡すと 1 が返った）。大きくなりうるなら `unsigned long long` で受ける
 
-## std::popcount などは符号なし整数しか受けない（popcount(int) はエラー、負の int を unsigned long long にすると上位が 1 で埋まる）（C++20） {#bit-unsigned-only}
+## std::popcount などは符号なし整数しか受けない（C++20） {#bit-unsigned-only}
 
 `<bit>` の関数は、`unsigned`・`unsigned long long` などの符号なし整数しか受けない。`int` や `long long` を渡すとコンパイルエラーになる。g++-15 のエラーは `no matching function for call to 'popcount(int&)'` である。
 
@@ -168,7 +168,7 @@ $3^{35} = 50031545098999707$ は奇数で、double では表せない。`pow(3, 
 - **素朴に書くと**：組み込み関数 `__builtin_popcount(s)` は `int` をそのまま受ける（[組み込み関数](#builtins)）
 - **落とし穴**：負の数になりうる値を数えるときは、何桁として数えたいかを決めてからキャストする。bit 全探索の集合は 0 以上なので、`unsigned` にしてよい
 
-## 組み込み関数：__builtin_popcount・__builtin_popcountll・__builtin_ctz・__builtin_clzll・__lg（ctz・clz・__lg に 0 を渡すと未定義。std:: の関数は 0 でも値が決まっている）（GCC の拡張） {#builtins}
+## 組み込み関数：__builtin_popcount・__builtin_ctz・__builtin_clzll・__lg（GCC の拡張） {#builtins}
 
 `__builtin_` で始まる関数は GCC の拡張で、C++20 より前の解説コードによく出る。末尾の `ll` は `unsigned long long` を受ける版で、ないものは `unsigned int` を受ける。
 
@@ -200,7 +200,7 @@ $3^{35} = 50031545098999707$ は奇数で、double では表せない。`pow(3, 
 - `s = (s - 1) & m`：$m$ の部分集合を大きい順に回す。$m = 5$（$101$）なら 5, 4, 1, 0 と進む
 - **落とし穴**：`for (int s = m; s > 0; s = (s - 1) & m)` のように `s > 0` を条件にすると、空集合 0 を処理しない。条件を外すと、`(0 - 1) & m` が $m$ に戻って回り続ける。0 を処理してから `break` する形（上のコード）にする
 
-## bitset：大きさはコンパイル時の定数、count・シフト・dp |= dp << w、_Find_first・_Find_next（後の 2 つは GCC の拡張） {#bitset}
+## bitset：大きさはコンパイル時の定数、count・シフト・_Find_first・_Find_next {#bitset}
 
 `bitset<N>` は $N$ 個の 0/1 を 64 個ずつ 1 語にまとめて持つ。シフト・AND・OR・`count` は 64 個ずつまとめて処理するので、$O(N / 64)$ で終わる。部分和の DP で「作れる和の集合」を丸ごと 1 つの bitset に持つと、1 個ずつ更新する場合の約 1/64 の時間になる（[bitset による高速化](../misc/bitset-speedup.md)）。
 
@@ -220,7 +220,7 @@ $w = \{3, 5\}$ なら、作れる和は 0・3・5・8 の 4 個である。`dp <
 - **落とし穴 1**：`b[i]` は範囲を調べない。範囲外を読むと未定義動作になる。`b.test(i)` は範囲外で例外を投げる
 - **落とし穴 2**：`bitset<N>` を関数の中に置くと、$N / 8$ バイトがスタックに乗る。$N = 10^8$ なら約 12 MB なので、大きいものはグローバル変数にする
 
-## 乱数：mt19937_64 rng(random_device{}())・uniform_int_distribution（両端を含む）・shuffle（rand() は使わない。種を固定すると再現できる） {#random}
+## 乱数：mt19937_64・uniform_int_distribution・shuffle（rand() は使わない） {#random}
 
 乱数は、乱数を作るエンジン（`mt19937_64`）と、値を範囲に割り振る分布（`uniform_int_distribution`）を組み合わせて使う（`<random>`）。乱択アルゴリズムやハッシュの基数を決めるときに使う（[乱択アルゴリズム](../misc/randomized.md)）。
 

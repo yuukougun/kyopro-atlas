@@ -21,8 +21,8 @@ acl: []
 frequency: C
 frequency_evidence: recent 0・前提として 2 ページに届く（直接 1）・古い ABC 1 問
 sections:
-  - {title: '最後の区間で分ける（dp[0] = 1 は空の区切り）', anchor: last-block}
-  - {title: '区間 DP（dp[l][r]）との違い', anchor: vs-interval-dp}
+  - {title: 最後の区間で分ける（空の区切りを 1 通りと数える）, anchor: last-block}
+  - {title: 区間 DP との違い, anchor: vs-interval-dp}
   - {title: 遷移元の範囲が単調に動く：尺取りと累積和, anchor: two-pointers}
   - {title: 区間の番号に依存する条件：番号を状態に足す, anchor: block-index, level: 青}
 stage: draft
@@ -45,7 +45,7 @@ updated: 2026-10-21
 
 区間分割 DP は、列を連続する区間に区切る問題を、「先頭 $i$ 個をどう区切るか」の表で解く DP である。区切り方は長さ $N$ の列で $2^{N-1}$ 通りあり、全部は試せない。最後の区間だけを決めれば残りは同じ形の小さい問題になる、という一点を使って $O(N^2)$ に落とし、遷移の形に応じてさらに $O(N)$ まで速くする。
 
-## 最後の区間で分ける（dp[0] = 1 は空の区切り） {#last-block}
+## 最後の区間で分ける（空の区切りを 1 通りと数える） {#last-block}
 
 ここでは列を 0-indexed で $a_0, \dots, a_{N-1}$ と書き、区間は[半開区間](../guide/glossary.md#half-open-interval) $[j, i)$ で表す。列を区切るとは、要素の間の境界 $1, \dots, N-1$ のうち好きなものに仕切りを入れることである。
 
@@ -83,7 +83,7 @@ $$
     ??? success "答え"
         すべての $\mathrm{dp}[i]$ が 0 になり、答えも 0 になる。どの区切り方も、最初の区間 $[0, j)$ を最後の区間と見た $\mathrm{dp}[j]$ への遷移で $\mathrm{dp}[0]$ を使う。$\mathrm{dp}[0]$ は「まだ何も区切っていない」状態の数で、空の区切り方が 1 通りあるので 1 にする。
 
-## 区間 DP（dp[l][r]）との違い {#vs-interval-dp}
+## 区間 DP との違い {#vs-interval-dp}
 
 区間分割 DP と[区間 DP](../dp/interval-dp.md) は、どちらも列の区間を扱うが、表の持ち方が違う。
 

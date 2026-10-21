@@ -21,7 +21,6 @@ frequency_evidence: 数え上げ・確率を mod で答える問題で常に使�
 sections:
   - {title: 何が自動になるか（加減乗除と負の数の正規化）, anchor: what-is-automatic}
   - {title: static_modint と dynamic_modint（set_mod）の使い分け, anchor: static-dynamic}
-  - {title: val() で取り出す・大小比較や「0 になったか」で元の値は分からない, anchor: pitfalls}
   - {title: 割り算の条件（法が素数でなければ互いに素が必要）, anchor: division}
   - {title: 上位の手法での使われ方（階乗の表・畳み込み・行列・期待値）, anchor: connections}
   - {title: 自作するときの設計（加減の条件分岐・64bit の掛け算・pow と inv・入出力）, anchor: self-made}
@@ -93,7 +92,7 @@ ACL の modint には、法をコンパイル時に決める static_modint と�
 
 static_modint は法が定数なので、コンパイラが「定数で割った余り」を掛け算とシフトに置き換えられ、速くなる。dynamic_modint は代わりに [Barrett 還元](#acl-internals)で速くしているが、法が定数のときは static_modint を使うのが基本である。
 
-## val() で取り出す・大小比較や「0 になったか」で元の値は分からない {#pitfalls}
+## 落とし穴 {#pitfalls}
 
 mint が持っているのは余りだけで、元の整数の情報は失われている。このことから来るバグが modint の落とし穴の大半である。
 

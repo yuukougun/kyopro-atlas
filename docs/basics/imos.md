@@ -21,7 +21,7 @@ signs:
   - {type: constraint, text: 'N, Q ≤ 2×10^5 で区間への加算が多数あり、値を読むのは最後だけ'}
 acl: []
 frequency: A
-frequency_evidence: recent 5（abc453_e・abc462_d・abc464_e・abc465_f・abc466_e）・前提として 9 ページに届く（直接 3）・古い ABC 6 問
+frequency_evidence: recent 4（abc453_e・abc462_d・abc464_e・abc466_e）・前提として 9 ページに届く（直接 3）・古い ABC 6 問
 sections:
   - {title: 1 次元のいもす法（閉区間なら右端 + 1 に −x）, anchor: imos-1d}
   - {title: 座標が大きいとき（座標圧縮・イベントのソート）, anchor: large-coordinates}

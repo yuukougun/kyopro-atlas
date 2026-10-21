@@ -21,7 +21,6 @@ sections:
   - {title: 早見表：遷移の形から道具を選ぶ, anchor: shape-to-tool}
   - {title: 多項式の積・同じ線形の遷移の繰り返し（畳み込み・行列累乗へ）, anchor: algebraic-tools}
   - {title: 凸性を使う高速化（CHT・Monge・Alien DP・Slope Trick）の使いどころ, anchor: convexity}
-  - {title: 落とし穴：式を書かずに道具から考える・累積和とセグメント木の取り違え, anchor: pitfalls}
 stage: stub
 updated: 2026-10-21
 ---

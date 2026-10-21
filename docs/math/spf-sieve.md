@@ -14,7 +14,7 @@ summary: 篩のついでに各数の最小素因数を記録し、それで割�
 complexity: 前計算 O(V log log V)（V は値の上限。線形篩なら O(V)）、1 個の素因数分解 O(log V)
 signs:
   - {type: constraint, text: A_i ≤ 10^6（〜10^7）の各要素を素因数分解する}
-  - {type: phrase, text: 全ての組が互いに素か（pairwise coprime）を判定する}
+  - {type: phrase, text: すべての組が互いに素か（pairwise coprime）を判定する}
   - {type: phrase, text: 各要素の素因数の個数（重複込み）を求める}
 acl: []
 verify: []

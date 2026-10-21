@@ -21,7 +21,6 @@ sections:
   - {title: 指定頂点を根にして、部分木に指定頂点を含むかで判定する, anchor: root-at-terminal}
   - {title: 指定されていない葉を削り続ける, anchor: prune-leaves}
   - {title: 一般のグラフのシュタイナー木は別物（グラフの章）, anchor: vs-graph}
-  - {title: 上位の手法とのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---
@@ -104,7 +103,7 @@ $$
 
 **再帰が深すぎる**。パス状の木では DFS の再帰の深さが $N$ になる。AtCoder はスタックの上限が大きく、通ることが多い。一方、手元の Linux の既定（8 MiB）ではパス状の $N = 2 \times 10^5$ の木で落ちる（[再帰の深さ](../tree/tree-traversal.md#recursion-depth)）。手元で確かめたいなら、葉を削る方法を使うか、スタックの上限を広げる。
 
-## 上位の手法とのつながり {#next-steps}
+## 上位の手法へのつながり {#next-steps}
 
 指定頂点の集合が 1 つなら $O(N)$ で十分だが、集合が何度も変わると毎回 $O(N)$ では間に合わない。その場合の道具が次の 2 つである。
 

@@ -20,10 +20,10 @@ sections:
   - {title: 'ムーブと swap：swap(dp, ndp) は中身を入れ替えるだけで O(1)、dp = ndp は長さに比例するコピー', anchor: move-swap}
   - {title: auto&&：何でも受けられる参照, anchor: forwarding-reference}
   - {title: 範囲 for の 4 通りの受け方：コピーが起きるか・元を書き換えられるか, anchor: range-for-forms}
-  - {title: 'vector<bool> の要素は代わりの小さな物（プロキシ）：auto& で回すとエラー、auto y = vb[0] でも元が書き換わる', anchor: vector-bool}
+  - {title: 'bool の vector の要素はプロキシ：auto& で回すとエラー、auto で受けても元が書き換わる', anchor: vector-bool}
   - {title: '範囲 for の初期化式 for (int i = 0; auto x : v)（C++20。i の更新は自分で書く）', anchor: range-for-init}
   - {title: ループの中で同じ vector に追加しない（再確保で壊れる）, anchor: modify-in-loop}
-  - {title: '範囲に一時オブジェクトの中身を渡すとき：for (int v : d.groups()[0]) は C++23・GCC 15〜でだけ安全、関数の戻り値そのものを回すのはどの版でも安全', anchor: temporary-range}
+  - {title: 範囲に一時オブジェクトの中身を渡すとき（C++23・GCC 15〜でだけ安全な形）, anchor: temporary-range}
 stage: draft
 updated: 2026-10-21
 cpp_std: 17
@@ -144,7 +144,7 @@ DP を 2 本の配列で回すとき（[0-1 ナップサック](../dp/knapsack-0
 - **落とし穴**：`vector<string>` や `vector<vector<int>>` を `for (auto s : strs)` で回すと、要素を 1 つ取り出すたびにコピーする。合計の長さに比例する時間が毎回かかるので、読むだけなら `const auto&` にする
 - **関連**：`pair` や `tuple` の要素は `for (const auto& [u, w] : g[v])` と分けて受けられる（[構造化束縛](../cpp/cpp-structured-bindings.md)）
 
-## vector<bool> の要素は代わりの小さな物（プロキシ）：auto& で回すとエラー、auto y = vb[0] でも元が書き換わる {#vector-bool}
+## bool の vector の要素はプロキシ：auto& で回すとエラー、auto で受けても元が書き換わる {#vector-bool}
 
 `vector<bool>` は、メモリを節約するために要素を 1 bit ずつ詰めて持つ特別な `vector` である。1 bit には参照を作れないので、`vb[i]` は `bool&` ではなく、「`vb` の $i$ 番目の bit を指す代わりの小さな物」（[プロキシ](../guide/glossary.md#proxy)。型は `vector<bool>::reference`）を返す。
 
@@ -192,7 +192,7 @@ C++20 から、範囲 for の前に変数の宣言を 1 つ書ける。添字も
 - **版**：どの版でも未定義動作である
 - **落とし穴**：`auto& row = g[0];` と参照を取った後に `g.push_back(…)` しても、同じ理由で `row` が壊れる。再確保の後は、参照とイテレータを使わない。BFS のキューを `vector` で書くときは、範囲 for ではなく添字で回す
 
-## 範囲に一時オブジェクトの中身を渡すとき：for (int v : d.groups()[0]) は C++23・GCC 15〜でだけ安全、関数の戻り値そのものを回すのはどの版でも安全 {#temporary-range}
+## 範囲に一時オブジェクトの中身を渡すとき（C++23・GCC 15〜でだけ安全な形） {#temporary-range}
 
 範囲 for は、内部で `auto&& range = 範囲の式;` と受けてから回す。範囲の式が値で返す関数の戻り値そのもの（`for (int x : make(n))`）なら、[auto&&](#forwarding-reference) の規則で寿命が延びるので、どの版でも安全である。
 

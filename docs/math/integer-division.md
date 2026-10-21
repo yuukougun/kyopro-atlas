@@ -26,10 +26,9 @@ sections:
   - {title: C++ の / と % と、数学の floor・mod の違い, anchor: cpp-vs-math}
   - {title: 負の数でも正しい floor_div・ceil_div・safe_mod, anchor: floor-ceil}
   - {title: 切り上げ ⌈a/b⌉ = ⌊(a+b−1)/b⌋ が使える条件, anchor: ceil-formula}
-  - {title: '区間 [L, R] の K の倍数の個数と、x 以上で m で割って r 余る最小の数', anchor: count-multiples}
-  - {title: あふれる前に割り算で判定する（a > L / b）と __int128 への逃げ方, anchor: overflow}
+  - {title: 区間の中の K の倍数の個数と、x 以上で m で割って r 余る最小の数, anchor: count-multiples}
+  - {title: あふれる前に割り算で判定する方法と __int128 への逃げ方, anchor: overflow}
   - {title: double で割らない（10^18 付近の誤差）, anchor: no-double}
-  - {title: 周期・mod・floor sum・商の列挙へのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---
@@ -107,7 +106,7 @@ ceil を $\lceil a/b \rceil = -\lfloor -a/b \rfloor$ で作る書き方もある
 
 `(a + b - 1)` は $a$ と $b$ がともに $10^{18}$ 程度なら $2 \times 10^{18}$ 程度で `long long` に収まる。$a$ が `LLONG_MAX` に近い値（「十分大きい数」として置いた番兵など）だとあふれるので、番兵は $10^{18}$ や $2 \times 10^{18}$ のように余裕を持たせる。
 
-## 区間 [L, R] の K の倍数の個数と、x 以上で m で割って r 余る最小の数 {#count-multiples}
+## 区間の中の K の倍数の個数と、x 以上で m で割って r 余る最小の数 {#count-multiples}
 
 閉区間 $[L, R]$ にある $K$ の倍数を $Kj$（$j$ は整数、$K > 0$）と書き、$j$ の範囲を数える。$Kj \le R$ は $j \le \lfloor R/K \rfloor$ と同じで、$Kj \ge L$ は $Kj > L - 1$、すなわち $j > \lfloor (L-1)/K \rfloor$ と同じである。よって $j$ は $\lfloor (L-1)/K \rfloor < j \le \lfloor R/K \rfloor$ を動き、個数は次の式になる。$L, R \ge 1$ なら「$R$ 以下の正の倍数の個数」から「$L - 1$ 以下の正の倍数の個数」を引く、と読んでもよい。
 
@@ -131,7 +130,7 @@ $r = 0$ の場合が「$x$ 以上の最小の $m$ の倍数」で、$m \lceil x/
     ??? success "答え"
         $\lfloor 10/3 \rfloor - \lfloor -1/3 \rfloor = 3 - (-1) = 4$ で、0・3・6・9 の 4 個である。C++ の `(0 - 1) / 3` は $0$ なので、`10 / 3 - 0` は $3$ になり、0 を数え漏らす。floor_div を使うか、$L = 0$ を別に扱う。
 
-## あふれる前に割り算で判定する（a > L / b）と __int128 への逃げ方 {#overflow}
+## あふれる前に割り算で判定する方法と __int128 への逃げ方 {#overflow}
 
 `long long` が表せるのは約 $9.2 \times 10^{18}$ までなので、$10^{18}$ 程度の 2 数を掛けると[オーバーフロー](../cpp/cpp-integer-overflow.md#signed-overflow-ub)する。符号付き整数のあふれは未定義動作で、掛けた後に「負になったか」を調べる判定は正しく働かない。掛ける前に、割り算で判定する。
 
@@ -181,7 +180,7 @@ $10^{18} - 1$ を `double` にすると、近くの表せる値は $128$ おき�
 - **`int` のまま掛ける**：`int` どうしの積は `int` で計算されてからあふれる。`1LL * a * b` と書く（[整数のオーバーフロー](../cpp/cpp-integer-overflow.md#int-product)）
 - **double を経る**：`floor((double)a / b)` は $2^{53}$ を超えると誤る
 
-## 周期・mod・floor sum・商の列挙へのつながり {#next-steps}
+## 上位の手法へのつながり {#next-steps}
 
 床関数と 0 以上の余りは、上位の手法の式の中にそのまま現れる。ここで扱った関数の約束（余りは 0 以上、商は floor）を守っておくと、上位の手法の式を負の数にもそのまま使える。
 

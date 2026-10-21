@@ -164,7 +164,7 @@ difficulty 1600〜1999 の帯で主に必要になるページ（52 ページ）
 | 遅延セグメント木の上の二分探索（単調な列への区間作用） | [セグメント木上の二分探索](../ds/segment-tree-binary-search.md#on-lazy-segment-tree)（水） | データ構造 |
 | 上位 K 個の和（境界はセグメント木上の二分探索で探す） | [値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md#top-k-sum)（水） | データ構造 |
 | 保つ性質と push の手順（自作するとき） | [遅延セグメント木](../ds/lazy-segment-tree.md#invariants)（水） | データ構造 |
-| 2×2 行列 [[r, 1], [0, 1]] の累乗による別解 | [等比数列の和を mod で求める](../math/geometric-series-mod.md#matrix)（基礎） | 整数論・代数 |
+| 2×2 行列の累乗による別解 | [等比数列の和を mod で求める](../math/geometric-series-mod.md#matrix)（基礎） | 整数論・代数 |
 | 線形篩：各合成数を1回だけ作り、φ・μ の表を同時に作る | [最小素因数の篩と線形篩](../math/spf-sieve.md#linear-sieve)（基礎） | 整数論・代数 |
 | 約数を状態にした DP（約数の個数が少ないことを使う） | [約数の個数の上界と高度合成数](../math/divisor-count-bound.md#divisor-dp)（水） | 整数論・代数 |
 | 法が小さい素数で n ≥ p になるとき：Lucas の定理 | [二項係数の前計算](../comb/binomial-precompute.md#lucas)（基礎） | 数え上げ・確率・ゲーム |

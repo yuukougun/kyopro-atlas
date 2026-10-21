@@ -19,7 +19,7 @@ signs:
   - {type: constraint, text: レベルは 50 程度まででも、全体の長さが 10^15 を超える}
 acl: []
 frequency: B
-frequency_evidence: recent 1（abc476_g）・前提として 6 ページに届く（直接 2）・古い ABC 3 問
+frequency_evidence: recent 0・前提として 6 ページに届く（直接 2）・古い ABC 3 問
 sections:
   - {title: 長さを前計算して K 番目を再帰で探す, anchor: kth-by-length}
   - {title: 再帰で描く, anchor: draw}
@@ -151,7 +151,7 @@ $K$ 番目を探す再帰は、各レベルで自分を 1 回だけ呼び、そ�
 
 **$K$ 番目の文字で集計を代用する**。先頭 $K$ 個に含まれる数を問われているのに $K$ 番目の文字だけを求めても答えにならない。通り過ぎた部品の $\mathrm{all}$ を足す形にする。
 
-## 上位の手法とのつながり {#next-steps}
+## 上位の手法へのつながり {#next-steps}
 
 - **分割統治**：再帰的な構造は、問題の側が「半分（3 分の 1）ずつに分かれる」形をしている場合である。入力の列を自分で半分に分け、左右を解いてから「またぐもの」を数えるのが[分割統治](../basics/divide-and-conquer.md)で、マージソートや転倒数の数え方につながる
 - **メモ化再帰**：1 回の呼び出しで再帰を 2 回以上呼び、しかも同じ引数で何度も呼ぶなら、答えを覚えておく[メモ化再帰](../dp/memoized-recursion.md)にする。$f(n) = f(\lfloor n/2 \rfloor) + f(\lfloor n/3 \rfloor)$ のような再帰は、現れる引数の種類が少ないので速くなる

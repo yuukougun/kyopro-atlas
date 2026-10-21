@@ -10,12 +10,13 @@ level: 基礎
 kind: [全探索, グラフ探索]
 prerequisites: [dfs, bit-full-search]
 related: [chromatic-number, bit-dp]
-summary: N ≤ 8〜10 程度の小さいグラフで、頂点の対応（N! 通り）・辺の部分集合・彩色を全部試す。場合の数の見積もりと、成分ごとに分ける枝刈りが要になる。
+summary: N ≤ 8〜10 程度の小さいグラフで、頂点の対応（N! 通り）・辺の部分集合・彩色を全部試す。場合の数の見積もりと成分ごとに分ける枝刈りが要で、彩色は塗る順を工夫すれば N ≤ 20 まで届く。
 complexity: 頂点の対応 O(N!·N^2)、N−1 本の辺の組 O(C(M, N−1)·M)、3 彩色（成分ごとに DFS 順で塗る）O(2^N·(N+M))
 signs:
   - {type: constraint, text: N ≤ 8〜10 で頂点の対応や辺の部分集合を全部試せる}
   - {type: phrase, text: 頂点の番号を付け替えて同じ形にできるか}
   - {type: phrase, text: 隣り合う頂点が異なる色になる 3 色の塗り方の数}
+  - {type: constraint, text: 3 彩色なら N ≤ 20 でも、DFS 順に塗れば 3·2^(N−1) 通り以下に収まる}
 acl: []
 frequency: B
 frequency_evidence: recent 0・前提として届くページなし・古い ABC 4 問
@@ -23,7 +24,6 @@ sections:
   - {title: 頂点の対応の全探索（同型の判定・同型にするコスト）, anchor: isomorphism}
   - {title: 辺の部分集合の全探索（全域木の全列挙）, anchor: edge-subsets}
   - {title: 彩色は成分ごとに DFS で塗って探索を絞る, anchor: coloring, level: 青}
-  - {title: 上位の手法とのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---
@@ -34,6 +34,7 @@ updated: 2026-10-21
         - $N \le 8$〜$10$ で頂点の対応や辺の部分集合を全部試せる。
         - 頂点の番号を付け替えて同じ形にできるか。
         - 隣り合う頂点が異なる色になる 3 色の塗り方の数。
+        - 3 彩色なら $N \le 20$ でも、DFS 順に塗れば $3 \cdot 2^{N-1}$ 通り以下に収まる。
     - **計算量**：頂点の対応は $O(N! \cdot N^2)$（$N = 8$ で約 $1.1 \times 10^6$）。$N - 1$ 本の辺の組は $O(\binom{M}{N-1} \cdot M)$。3 彩色は成分ごとに DFS 順で塗れば $O(2^N (N + M))$。
     - **前提**：[深さ優先探索（DFS）](../graph/dfs.md)、[bit 全探索と順列全探索](../basics/bit-full-search.md)
 
@@ -126,7 +127,7 @@ $N - 1$ 本の組は、長さ $M$ の 0/1 の列（1 が $N - 1$ 個）を `next
 
 **戻し忘れ**。再帰で色を塗ったら、次の色を試す前と関数を抜ける前に「未塗り」に戻す。戻し忘れると、別の枝で塗った色が残って隣の判定を狂わせる（[状態を戻し忘れない](../basics/recursive-enumeration.md#backtrack)）。
 
-## 上位の手法とのつながり {#next-steps}
+## 上位の手法へのつながり {#next-steps}
 
 - **頂点数が 16〜20 で、途中の状態が合流する**：訪れた頂点の集合などで途中の状態が表せるなら、$N!$ 通りの全探索を [bitDP](../dp/bit-dp.md) にまとめられる
 - **全域木の数を数える**：列挙せずに数だけ求めるなら、[行列木定理](../graph/matrix-tree-theorem.md)で行列式として計算できる

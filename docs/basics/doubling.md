@@ -26,7 +26,6 @@ sections:
   - {title: ダブリング上の二分探索（条件を満たす最大の回数）, anchor: binary-search-on-doubling}
   - {title: 置換の K 回合成, anchor: permutation-power}
   - {title: 段数とメモリの見積もり, anchor: memory}
-  - {title: 周期の検出・行列累乗・LCA との使い分け, anchor: comparison}
 stage: draft
 updated: 2026-10-21
 ---
@@ -168,7 +167,7 @@ $$
 
 **1-indexed のまま表を引く**。入力の $A_i$ が 1-indexed なら、読むときに 1 を引いて 0-indexed にそろえる。そろえ忘れると、表の範囲外を読む。
 
-## 周期の検出・行列累乗・LCA との使い分け {#comparison}
+## 使い分け {#comparison}
 
 | 場面 | 選ぶもの | 理由 |
 | --- | --- | --- |

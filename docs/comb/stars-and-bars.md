@@ -1,7 +1,7 @@
 ---
 id: stars-and-bars
 title: 重複組合せ
-aliases: [玉と仕切り, 'H(n,k)', 非負整数解の個数, 隣り合わない選び方, stars and bars]
+aliases: [玉と仕切り, ₖHₙ, 非負整数解の個数, 隣り合わない選び方, stars and bars]
 type: technique
 field: comb
 chapter: 数え上げの基礎
@@ -41,7 +41,7 @@ updated: 2026-10-21
     - **前提**：[二項係数の意味と性質](../comb/binomial-coefficient.md)
 
 <!-- textlint-disable -->
-別名：玉と仕切り・H(n,k)・非負整数解の個数・隣り合わない選び方・stars and bars
+別名：玉と仕切り・ₖHₙ・非負整数解の個数・隣り合わない選び方・stars and bars
 <!-- textlint-enable -->
 
 重複組合せは、区別のない $n$ 個の玉を区別のある $k$ 個の箱に配る方法の数で、${}_k\mathrm{H}_n = \binom{n+k-1}{n}$ と書かれる（$k$ 種類から重複を許して $n$ 個選ぶ数とも読める。H の引数の順は資料によって違うので、どちらが種類（箱）の数かを確かめる）。使うときに大事なのは公式そのものより、問題の対象を「和が決まった整数の組」に言い換える手順である。上限の付かない和・広義単調な列・間隔を空けた選び方は、どれも変数をずらすだけでこの形になる。

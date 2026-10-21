@@ -9,7 +9,7 @@ order: 260
 level: 水
 kind: [グラフ探索]
 prerequisites: [cycle-detection]
-related: [doubling, periodicity, namori-graph, scc, permutation-cycles, topological-sort, tree-basics]
+related: [doubling, periodicity, namori-graph, scc, permutation-cycles, topological-sort, tree-basics, memoized-recursion, tree-dp]
 summary: 各頂点から出る辺がちょうど 1 本の有向グラフは、各成分に閉路がちょうど 1 つあり、そこへ木が流れ込む ρ の形になる。K 回進んだ位置は、閉路に入るまでと閉路の周回に分けて求める。
 complexity: 閉路の検出・閉路までの距離・閉路ごとの集計は O(N)、全頂点の K 回後はダブリングで O(N log K)
 signs:

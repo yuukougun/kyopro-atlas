@@ -17,14 +17,14 @@ acl: []
 sections:
   - {title: 整数の型と表せる範囲（int・long long・unsigned・size_t・int64_t）, anchor: integer-types}
   - {title: リテラルの書き方：1LL・ULL、桁区切り 1'000'000'007、2 進 0b1010、size_t の 0uz（C++23）, anchor: literals}
-  - {title: auto が推論する型：0 は int、0LL は long long、v.size() は size_t（符号なし）、1e18 は double, anchor: auto-deduction}
+  - {title: auto が推論する型：0 は int、0LL は long long、v.size() は size_t、1e18 は double, anchor: auto-deduction}
   - {title: '型の別名：using ll = long long と #define ll long long（ll(x) と書けるか）', anchor: type-alias}
-  - {title: キャスト：static_cast<long long>(x)・(long long)x, anchor: cast}
-  - {title: 'INF の決め方：numeric_limits<T>::max()・1LL << 60・0x3f3f3f3f と、INF + INF があふれるか（ライブラリの雛形の値の比較も）', anchor: inf}
+  - {title: キャスト：static_cast と C 形式のキャスト, anchor: cast}
+  - {title: INF の決め方と、INF + INF があふれるか, anchor: inf}
   - {title: 浮動小数点数の型：double が整数を正確に表せるのは 2^53 まで、x86-64 の long double は仮数部 64bit, anchor: floating-point}
-  - {title: 1e18 は double：(long long)1e18 + 1 は正確だが (long long)(1e18 + 1) は丸められる、auto INF = 1e18 も double, anchor: double-1e18}
-  - {title: 浮動小数点数を == で比べない（誤差を許すか、整数で計算する。小数の入力を整数に直す方法と幾何の誤差は geometry-precision のページ）, anchor: float-compare}
-  - {title: float128_t（<stdfloat>。C++23・GCC 13〜。解説コードではまれ）, anchor: float128}
+  - {title: 1e18 は double：long long に直す位置で値が変わる、auto INF = 1e18 も double, anchor: double-1e18}
+  - {title: 浮動小数点数を == で比べない（誤差を許すか、整数で計算する）, anchor: float-compare}
+  - {title: float128_t（stdfloat ヘッダ。C++23・GCC 13〜。解説コードではまれ）, anchor: float128}
 stage: draft
 updated: 2026-10-21
 cpp_std: 17
@@ -94,7 +94,7 @@ atcoder: true
 - **版**：`0uz` は C++23 で、g++-13・g++-15 とも `-std=gnu++23` で使える。`-std=gnu++20` では警告になる（views の基本の版の注記と同じ）。ほかは C++14 までに入っている
 - **落とし穴**：`const int MOD = 1e9 + 7;` は `double` の `1000000007.0` を `int` に変換しており、たまたま正確である。`1e9 + 7` は `double` が正確に表せる範囲（$2^{53}$ まで）なので問題は出ないが、`1'000'000'007` と書けば型を考えずに済む
 
-## auto が推論する型：0 は int、0LL は long long、v.size() は size_t（符号なし）、1e18 は double {#auto-deduction}
+## auto が推論する型：0 は int、0LL は long long、v.size() は size_t、1e18 は double {#auto-deduction}
 
 `auto` は初期値の型をそのまま変数の型にする。変数に入れる値がどれだけ大きくなるかは見ない。そのため、`auto sum = 0;` と書いて大きな値を足していくと、`sum` は `int` のままあふれる。
 
@@ -134,7 +134,7 @@ g++-15 のエラーは `expected primary-expression before 'long'` である。`
 - **落とし穴**：`#define int long long` はすべての `int` を置き換える書き方で、`main` の戻り値の型まで変わる（`signed main()` と書く理由）。詳しくは[マクロと雛形](../cpp/cpp-macros-template-file.md)に任せる
 - 教材のコード片は別名を使わず `long long` と書く。解説コードの `ll` は `long long` と読み替えればよい
 
-## キャスト：static_cast<long long>(x)・(long long)x {#cast}
+## キャスト：static_cast と C 形式のキャスト {#cast}
 
 キャストは値を別の型に変える書き方である。`static_cast<long long>(x)`・`(long long)x`・`(long long)(x)`（`using` の別名なら `ll(x)`）は、数の型の変換ではどれも同じ意味になる。`static_cast` は長いが、ポインタなど危ない変換を誤って書くとエラーにしてくれる。解説コードでは短い `(long long)x` が多い。
 
@@ -150,7 +150,7 @@ g++-15 のエラーは `expected primary-expression before 'long'` である。`
 - **版**：どの書き方も C++ の最初からある。g++-13・g++-15 で、上の出力は同じだった
 - **落とし穴**：`(long long)(a * b)` のように、計算の結果だけを広げても直らない。広げるのは計算に入る前の値である
 
-## INF の決め方：numeric_limits<T>::max()・1LL << 60・0x3f3f3f3f と、INF + INF があふれるか（ライブラリの雛形の値の比較も） {#inf}
+## INF の決め方と、INF + INF があふれるか {#inf}
 
 INF は、最短路の「まだ到達していない」や、最小値を求める DP の初期値に置く大きな値である。INF に辺の重みや別の INF を足すことがあるので、選ぶ基準は 2 つある。1 つは、本物の答えより確実に大きいこと。もう 1 つは、INF に辺の重みや別の INF を足しても型の上限を超えないことで、目安は INF + INF である。
 
@@ -212,7 +212,7 @@ $2^{53} + 1$ を `double` にすると、+1 が消えて $2^{53}$ になる。`l
 - **版**：`long double` の大きさは環境で違う（Visual C++ では `double` と同じ 64 bit）。AtCoder と手元の g++ は x86-64 なので 64 bit の仮数部を持つ
 - **落とし穴**：`sqrt`・`pow` は `double` で計算するので、大きな整数に使うと誤差が出る（[数・ビット・乱数の関数](../cpp/cpp-math-functions.md#pow-sqrt)）。小数の出力は、`cout` の既定では有効数字 6 桁になる（[入出力と定数倍](../cpp/cpp-io.md#float-output)）
 
-## 1e18 は double：(long long)1e18 + 1 は正確だが (long long)(1e18 + 1) は丸められる、auto INF = 1e18 も double {#double-1e18}
+## 1e18 は double：long long に直す位置で値が変わる、auto INF = 1e18 も double {#double-1e18}
 
 `1e18` は指数表記のリテラルなので、型は `double` である。$10^{18}$ そのものは `double` で正確に表せるが、$2^{53}$ を大きく超えているので、+1 のような小さな差は表せない。そのため、どこで整数に変えるかで結果が変わる。
 
@@ -233,7 +233,7 @@ $2^{53} + 1$ を `double` にすると、+1 が消えて $2^{53}$ になる。`l
 ??? question "確認問題：`auto INF = 1e18;` の型は何か？ `INF + 1` は正確か？"
     型は `double` である。$10^{18}$ は `double` で正確に表せるが、隣の表せる数との間隔は 128 あるので、`INF + 1` は丸められて `INF` に戻る（`INF + 1 == INF` が真）。`long long INF = 1e18;` と書けば `long long` になり、`INF + 1` は正確である。
 
-## 浮動小数点数を == で比べない（誤差を許すか、整数で計算する。小数の入力を整数に直す方法と幾何の誤差は geometry-precision のページ） {#float-compare}
+## 浮動小数点数を == で比べない（誤差を許すか、整数で計算する） {#float-compare}
 
 浮動小数点数は、多くの小数を 2 進で正確に表せない。`0.1` と `0.2` は近い値に丸めて持つので、`0.1 + 0.2` は `0.30000000000000004` になり、`0.3` と `==` で比べると偽になる。
 
@@ -252,7 +252,7 @@ $2^{53} + 1$ を `double` にすると、+1 が消えて $2^{53}$ になる。`l
 --8<-- "cpp-types-literals/scale-round.cpp:core"
 ```
 
-## float128_t（<stdfloat>。C++23・GCC 13〜。解説コードではまれ） {#float128}
+## float128_t（stdfloat ヘッダ。C++23・GCC 13〜。解説コードではまれ） {#float128}
 
 `float128_t` は `<stdfloat>` にある 128 bit の浮動小数点数で、仮数部が 113 bit（10 進で約 34 桁）ある。リテラルは `1.0f128` のように接尾辞 `f128` を付ける。`long double` でも精度が足りない計算のための型だが、ソフトウェアで計算するので遅く、解説コードで見ることはまれである。
 

@@ -27,9 +27,8 @@ sections:
   - {title: '置換を K 回適用した結果 → サイクルごとの周期・ダブリング（functional-graph, doubling）', anchor: repeat}
   - {title: 位置と値の両方から引く操作 → 逆置換を同時に持つ, anchor: inverse}
   - {title: '条件を満たす順列の数 → 挿入 DP・撹乱順列（insertion-dp, inclusion-exclusion）', anchor: counting}
-  - {title: '辞書順で何番目・K 番目の順列 → 残りの並べ方の数・順列全探索（binomial-coefficient, bit-full-search）', anchor: lexicographic}
+  - {title: 辞書順で何番目・K 番目の順列 → 残りの並べ方の数・順列全探索, anchor: lexicographic}
   - {title: 増加部分列・いくつの増加部分列に分けるか → LIS（lis）, anchor: increasing}
-  - {title: 落とし穴, anchor: pitfalls}
 stage: stub
 updated: 2026-10-21
 ---

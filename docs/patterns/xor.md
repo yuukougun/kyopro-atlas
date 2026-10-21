@@ -23,7 +23,7 @@ sections:
   - {title: 全ペア・全区間の XOR の和 → 桁ごとに 0 と 1 の個数を数える（bitwise-independence）, anchor: sum-of-xor}
   - {title: '区間の XOR → 累積 XOR、更新があれば BIT（prefix-sum, fenwick-tree）', anchor: range-xor}
   - {title: 木の 2 点間のパスの XOR → 根からの XOR どうしの XOR（tree-distance）, anchor: tree-path}
-  - {title: 'x を選んで XOR の最大・最小、2 要素の XOR の最小 → 上位ビットから決める・Binary Trie（bitwise-independence, binary-trie）', anchor: choose-x}
+  - {title: x を選んで XOR の最大・最小、2 要素の XOR の最小 → 上位ビットから決める・Binary Trie, anchor: choose-x}
   - {title: 選んだ XOR で作れる値・最大値・K 番目 → XOR 基底（xor-basis）, anchor: basis}
   - {title: グラフの経路の XOR の最小 → 閉路の XOR を基底にする（xor-basis）, anchor: path-xor}
   - {title: XOR が絡む条件を満たす数の個数 → 桁 DP（digit-dp）, anchor: digit-dp}
@@ -32,7 +32,6 @@ sections:
   - {title: '石取りゲーム → Nim・Grundy 数（nim, grundy-number）', anchor: games}
   - {title: 2 つの集合が一致するか → 乱数の XOR によるハッシュ（hashing-for-sets）, anchor: set-hash}
   - {title: 添字の XOR で畳み込む → アダマール変換（hadamard-transform）, anchor: xor-convolution}
-  - {title: 落とし穴, anchor: pitfalls}
 stage: stub
 updated: 2026-10-21
 ---

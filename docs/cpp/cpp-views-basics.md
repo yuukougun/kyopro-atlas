@@ -22,7 +22,7 @@ sections:
   - {title: 'views::reverse は逆順に見るだけ', anchor: reverse}
   - {title: 'filter と transform：transform の後に filter を置くと関数が 2 回呼ばれる', anchor: filter-transform}
   - {title: 'take・drop・take_while・drop_while', anchor: take-drop}
-  - {title: 'keys・values・elements<N>：map のキーだけを回す', anchor: keys-values}
+  - {title: keys・values・elements：map のキーだけを回す, anchor: keys-values}
   - {title: 'split と join：文字列を区切る、vector の vector を平らにする', anchor: split-join}
   - {title: 'common：イテレータの組を取る古いコンストラクタに渡すとき', anchor: common}
   - {title: 'view の寿命：元のコンテナより長く使わない', anchor: lifetime}
@@ -175,7 +175,7 @@ view は値を覚えない。同じ `transform` の view を 2 回回すと 2 �
 - **版**：C++20。g++-13・g++-15 で使える
 - **落とし穴**：`take_while` は条件が初めて偽になった所で止まり、その先に条件を満たす要素があっても見ない（`filter` とは違う）。`take_while` の結果を `vector` のコンストラクタに渡すときは、[common](#common) を挟む
 
-## keys・values・elements<N>：map のキーだけを回す {#keys-values}
+## keys・values・elements：map のキーだけを回す {#keys-values}
 
 `views::keys` は `pair` や `tuple` の 0 番目だけ、`views::values` は 1 番目だけを見る。`views::elements<N>` は $N$ 番目（0 から数える）だけを見る。`map` のキーだけ、辺の `tuple` の重みだけを回すときに使う。
 

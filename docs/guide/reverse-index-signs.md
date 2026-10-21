@@ -99,7 +99,7 @@ updated: 2026-10-21
 | 最大値（最小値）を決めて残りを最適化する | [一部を固定して数える](../thinking/fix-variable.md) | 基礎 |
 | すべての組・区間・部分集合についての総和 | [主客転倒・寄与](../thinking/contribution.md) | 水 |
 | 各要素が答えに何回足されるか | [主客転倒・寄与](../thinking/contribution.md) | 水 |
-| 全区間の最小値（2 番目に大きい値）の和 | [主客転倒・寄与](../thinking/contribution.md) | 水 |
+| 全区間の最小値・2 番目に大きい値などの和 | [主客転倒・寄与](../thinking/contribution.md) | 水 |
 | 〜でないもの・少なくとも 1 つ含むもの | [余事象](../thinking/complement.md) | 基礎 |
 | すべて異なる・条件を 1 つでも満たす | [余事象](../thinking/complement.md) | 基礎 |
 | A でも B でもないものの個数 | [余事象](../thinking/complement.md) | 基礎 |
@@ -123,7 +123,7 @@ updated: 2026-10-21
 | f(n) が f(⌊n/k⌋) などで再帰的に定義されている | [メモ化再帰](../dp/memoized-recursion.md) | 基礎 |
 | 番号の小さい頂点から大きい頂点へだけ辺がある（u < v） | [DAG 上の DP](../dp/dp-dag.md) | 基礎 |
 | 値が増える向きにしか移動できない | [DAG 上の DP](../dp/dp-dag.md) | 基礎 |
-| 有向グラフの最長の経路の長さ・経路の本数・最短経路の本数 | [DAG 上の DP](../dp/dp-dag.md) | 基礎 |
+| 有向グラフの最長の経路の長さ・経路の本数・最短路の本数 | [DAG 上の DP](../dp/dp-dag.md) | 基礎 |
 | 依存関係に従って順に決める（閉路があれば −1） | [DAG 上の DP](../dp/dp-dag.md) | 基礎 |
 | 値の小さい（大きい）方へしか移れない | [DP の計算順序](../dp/dp-order.md) | 水 |
 | ゴールに着いたら終わり・残り回数が 0 になったら終わり（終わりの値が分かっている） | [DP の計算順序](../dp/dp-order.md) | 水 |
@@ -211,7 +211,7 @@ updated: 2026-10-21
 | 時刻ごとに位置を少しずつ動かせるときの最小コスト | [Slope Trick](../dp/slope-trick.md)（準備中） | 発展 |
 | 頂点の番号を付け替えて同じ形にできるか | [小さいグラフの全探索](../graph/small-graph-brute-force.md) | 基礎 |
 | 隣り合う頂点が異なる色になる 3 色の塗り方の数 | [小さいグラフの全探索](../graph/small-graph-brute-force.md) | 基礎 |
-| 全ての組 (i, j)（i < j）について〜を足した和を求める | [Σ の変形](../math/sigma-manipulation.md) | 基礎 |
+| すべての組 (i, j)（i < j）について〜を足した和を求める | [Σ の変形](../math/sigma-manipulation.md) | 基礎 |
 | 割り切る・割り切られる関係にある組を数える | [調和級数と倍数の列挙](../math/harmonic-sum.md) | 水 |
 | 各 d について、d の倍数である要素の個数や和を求める | [調和級数と倍数の列挙](../math/harmonic-sum.md) | 水 |
 | 操作を好きなだけ繰り返したとき、最後に残る値や作れる値を答える | [整数の証明の型](../math/proof-patterns.md) | 基礎 |
@@ -353,7 +353,7 @@ updated: 2026-10-21
 | 依存関係をたどり、必要なものを先に済ませる順に出力する | [深さ優先探索（DFS）](../graph/dfs.md) | 基礎 |
 | 最小の手数・回数を求める（1 回の移動のコストがすべて同じ） | [幅優先探索（BFS）と無重み最短路](../graph/bfs.md) | 基礎 |
 | 一番近い〇〇までの距離・複数の場所から同時に広がる | [幅優先探索（BFS）と無重み最短路](../graph/bfs.md) | 基礎 |
-| 最短経路を 1 つ出力する・次に進む頂点を答える | [幅優先探索（BFS）と無重み最短路](../graph/bfs.md) | 基礎 |
+| 最短路を 1 つ出力する・次に進む頂点を答える | [幅優先探索（BFS）と無重み最短路](../graph/bfs.md) | 基礎 |
 | H×W のマス目を上下左右（8 方向）に移動する・壁や障害物がある | [グリッドグラフ](../graph/grid-graph.md) | 基礎 |
 | H, W が巨大で、障害物の数だけが少ない | [グリッドグラフ](../graph/grid-graph.md) | 基礎 |
 | つながっているか・グループの数・最大のグループの大きさ | [連結成分](../graph/connected-components.md) | 基礎 |
@@ -373,7 +373,7 @@ updated: 2026-10-21
 | 訪れる地点の順番を全部試す（地点間の距離が要る） | [ワーシャルフロイド法](../graph/warshall-floyd.md) | 水 |
 | 負の重みの辺がある・得点を最大化する（符号を反転すると負辺になる） | [ベルマンフォード法](../graph/bellman-ford.md)（準備中） | 青 |
 | いくらでも大きくできるなら inf と出力する | [ベルマンフォード法](../graph/bellman-ford.md)（準備中） | 青 |
-| 最短経路の本数を数える | [最短路 DAG](../graph/shortest-path-dag.md) | 水 |
+| 最短路の本数を数える | [最短路 DAG](../graph/shortest-path-dag.md) | 水 |
 | この辺を通らなくても最短距離は変わらないか・最短路に使われない辺 | [最短路 DAG](../graph/shortest-path-dag.md) | 水 |
 | 始点からの最短距離を保ったまま辺を減らし、全域木を出力する | [最短路 DAG](../graph/shortest-path-dag.md) | 水 |
 | K 回まで無料・スキップできる、手持ちのお金・燃料・体力がある | [状態を頂点にする](../graph/extended-dijkstra.md) | 水 |
@@ -533,7 +533,7 @@ updated: 2026-10-21
 | 法 M（素数とは限らない）が入力で与えられ、その余りで数え上げの答えを出力する | [modint](../math/modint.md) | 基礎 |
 | a&#94;(b&#94;c) mod p のように、指数にさらに指数がある | [フェルマーの小定理と指数の mod](../math/exponent-mod.md) | 水 |
 | 累乗の塔を mod で求める | [フェルマーの小定理と指数の mod](../math/exponent-mod.md) | 水 |
-| 同じ数字列を M 回並べてできる数を mod で求める | [等比数列の和を mod で求める](../math/geometric-series-mod.md) | 基礎 |
+| 同じ数字列を K 回並べてできる数を mod で求める | [等比数列の和を mod で求める](../math/geometric-series-mod.md) | 基礎 |
 | 法 M が入力で与えられ、素数とは限らない | [等比数列の和を mod で求める](../math/geometric-series-mod.md) | 基礎 |
 | 数字列の部分文字列を整数とみて、P の倍数になるものを数える | [桁と mod](../math/digit-and-mod.md) | 水 |
 | 桁を消したり並べ替えたりして K の倍数にする | [桁と mod](../math/digit-and-mod.md) | 水 |
@@ -546,12 +546,13 @@ updated: 2026-10-21
 | 積が M になる数列の数 | [素因数分解とルジャンドルの公式](../math/prime-factorization.md) | 基礎 |
 | p q³ ≤ N を満たす素数の組を数える | [エラトステネスの篩](../math/sieve-eratosthenes.md) | 基礎 |
 | 区間 [l, r] の素数の個数を何度も答える | [エラトステネスの篩](../math/sieve-eratosthenes.md) | 基礎 |
-| 全ての組が互いに素か（pairwise coprime）を判定する | [最小素因数の篩と線形篩](../math/spf-sieve.md) | 基礎 |
+| すべての組が互いに素か（pairwise coprime）を判定する | [最小素因数の篩と線形篩](../math/spf-sieve.md) | 基礎 |
 | 各要素の素因数の個数（重複込み）を求める | [最小素因数の篩と線形篩](../math/spf-sieve.md) | 基礎 |
 | N の約数ごとに〜を計算する・d \| N を満たす d を全部試す | [約数の個数の上界と高度合成数](../math/divisor-count-bound.md) | 水 |
 | N 以下で約数の個数が最大の数・約数が多い数を探す | [約数の個数の上界と高度合成数](../math/divisor-count-bound.md) | 水 |
 | 連続する区間の数をそれぞれ素因数分解する | [区間篩](../math/segmented-sieve.md) | 水 |
 | 二項係数 C(N, K) の分子 N−K+1..N を素因数分解する | [区間篩](../math/segmented-sieve.md) | 水 |
+| 区間の中の素数の累乗（lcm(1, …, n) が変わる位置）を数える | [区間篩](../math/segmented-sieve.md) | 水 |
 | 積が平方数（立方数）になる組を数える | [素因数の指数で考える](../math/prime-exponent-vector.md) | 基礎 |
 | 多数の数の lcm を mod で求める | [素因数の指数で考える](../math/prime-exponent-vector.md) | 基礎 |
 | 2 で割り切れる回数・各素数の指数をそろえる | [素因数の指数で考える](../math/prime-exponent-vector.md) | 基礎 |
@@ -561,8 +562,8 @@ updated: 2026-10-21
 | a^k ≡ 1 (mod n) となる最小の k を探す | [オイラーの φ 関数](../math/euler-phi.md)（準備中） | 黄 |
 | 非常に大きい数が素数かを多数判定する | [大きな数の素数判定と素因数分解](../math/miller-rabin.md)（準備中） | 発展 |
 | 全員が同時に・周期がそろう最初の時刻（lcm） | [GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md) | 基礎 |
-| 等間隔に移動して全ての点を訪れられる最大の幅（gcd） | [GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md) | 基礎 |
-| 1つだけ書き換え（取り除い）たときの gcd の最大 | [GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md) | 基礎 |
+| 等間隔に移動してすべての点を訪れられる最大の幅（gcd） | [GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md) | 基礎 |
+| 1 つだけ書き換え（取り除い）たときの gcd の最大 | [GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md) | 基礎 |
 | 分数や傾きが等しいものを同じものとして数える | [GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md) | 基礎 |
 | ax + by = c を満たす整数の組 | [拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md) | 水 |
 | 円周上を K ずつ進んで、何回目で初めて特定の位置に着くか | [拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md) | 水 |
@@ -631,7 +632,7 @@ updated: 2026-10-21
 | 広義単調増加な列の個数 | [重複組合せ](../comb/stars-and-bars.md) | 基礎 |
 | N 個から隣り合わない（間隔 d 以上の）K 個を選ぶ方法の数 | [重複組合せ](../comb/stars-and-bars.md) | 基礎 |
 | 区別のない玉を区別のある箱へ配る方法の数 | [重複組合せ](../comb/stars-and-bars.md) | 基礎 |
-| グリッドの左上から右下への最短経路の数 | [格子路の数え上げ](../comb/lattice-paths.md) | 基礎 |
+| グリッドの左上から右下への最短路の数 | [格子路の数え上げ](../comb/lattice-paths.md) | 基礎 |
 | 通れない長方形の領域がある経路の数 | [格子路の数え上げ](../comb/lattice-paths.md) | 基礎 |
 | 2 種類の移動を組み合わせて目的地へ行く方法の数 | [格子路の数え上げ](../comb/lattice-paths.md) | 基礎 |
 | 最大値（最小値）がちょうど K になるものの個数 | [数え上げの考え方](../comb/counting-mindset.md) | 水 |
@@ -772,7 +773,7 @@ updated: 2026-10-21
 | 先手と後手で動かせる駒や手が違う | [非不偏ゲーム](../comb/partizan-games.md)（準備中） | 発展 |
 | 独立な部分の和で勝敗を判定したい | [非不偏ゲーム](../comb/partizan-games.md)（準備中） | 発展 |
 | 条件を満たす文字列のうち辞書順で最小（最大）のものを出力する | [文字列の基本操作と辞書順](../string/string-basics.md) | 基礎 |
-| 文字を一斉に別の文字へ置き換える操作を繰り返して一致させられるか | [文字列の基本操作と辞書順](../string/string-basics.md) | 基礎 |
+| 2 種類の文字を一斉に入れ替える操作を繰り返して一致させられるか | [文字列の基本操作と辞書順](../string/string-basics.md) | 基礎 |
 | 先頭の文字を末尾に移す（回転する）操作を何回か行う | [文字列の基本操作と辞書順](../string/string-basics.md) | 基礎 |
 | T を部分列として含むか（連続でなくてよい） | [部分列の判定と次の出現位置の表](../string/subsequence-matching.md) | 基礎 |
 | 長さ K の部分列のうち辞書順で最小のもの | [部分列の判定と次の出現位置の表](../string/subsequence-matching.md) | 基礎 |
@@ -968,7 +969,7 @@ updated: 2026-10-21
 | Σ_{i=1}^{N} Σ_{j=i}^{N} f(i, j) のように、内側の和の範囲が外側の添字で決まる二重和 | [Σ の変形](../math/sigma-manipulation.md) | 基礎 |
 | Σ_{K=1}^{N} K × (K の約数の個数) のように、約数・倍数の関係で書き換えられる和 | [Σ の変形](../math/sigma-manipulation.md) | 基礎 |
 | Σ_{i=0}^{N−1} A^i の形の和 | [等比数列の和を mod で求める](../math/geometric-series-mod.md) | 基礎 |
-| Σ_{d=1}^{N} Σ_{k=1}^{⌊N/d⌋} f(d, kd) の形の二重ループ | [調和級数と倍数の列挙](../math/harmonic-sum.md) | 水 |
+| Σ_{d=1}^{M} Σ_{k=1}^{⌊M/d⌋} f(d, kd) の形の二重ループ | [調和級数と倍数の列挙](../math/harmonic-sum.md) | 水 |
 | Σ_{i=1}^{N} f(⌊N/i⌋) の形の和 | [商の列挙](../math/floor-quotient-enum.md) | 水 |
 | dp[t+1] の各成分が dp[t] の成分の線形結合で、係数が t によらない | [行列累乗](../math/matrix-power.md) | 青 |
 | 変数の一次式（mod 2 なら XOR）＝定数 の式が複数立つ | [掃き出し法](../math/gaussian-elimination.md)（準備中） | 青 |

@@ -24,7 +24,6 @@ sections:
   - {title: 距離の偶奇は深さだけで分かる, anchor: distance-parity}
   - {title: 多い方の色は N/2 個以上, anchor: majority-color}
   - {title: 色の違う組の数（二部グラフのまま足せる辺）, anchor: cross-pairs}
-  - {title: 上位の手法とのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---
@@ -134,7 +133,7 @@ $N = 2 \times 10^5$ なら $ab$ は最大 $10^{10}$ になり、`int` に収ま�
 
 **森や非連結のグラフに同じ式を使う**。色の違う組の数 $ab$ が塗り方によらず決まるのは、連結な木だからである。森では成分ごとに色を入れ替えられるので、成分ごとの色の数から数え直す。
 
-## 上位の手法とのつながり {#next-steps}
+## 上位の手法へのつながり {#next-steps}
 
 木が二部グラフであることは、上位の手法の前提や近道になる。
 

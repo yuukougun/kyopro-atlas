@@ -15,17 +15,17 @@ complexity: '実行時の計算量は変わらない（マクロと #include は
 signs: []
 acl: []
 sections:
-  - {title: '#include <bits/stdc++.h> と using namespace std', anchor: bits-stdcpp}
-  - {title: '名前の衝突：count・y1 をグローバル変数の名前にするとエラー、std:: を省かない流儀、using namespace atcoder', anchor: namespaces}
-  - {title: import std;：#include の代わりに標準ライブラリを読む。INT_MAX・assert などのマクロは来ない、手元では std モジュールを先に作る（C++23・GCC 15〜）, anchor: import-std}
+  - {title: bits/stdc++.h の取り込みと using namespace std, anchor: bits-stdcpp}
+  - {title: 名前の衝突：count・y1 をグローバル変数の名前にするとエラー, anchor: namespaces}
+  - {title: 'import std;：#include の代わりに標準ライブラリを読む（C++23・GCC 15〜）', anchor: import-std}
   - {title: マクロは文字の置き換え：rep・all・vc/vvc と、引数の数で切り替える FOR, anchor: macros}
   - {title: '#define int long long と signed main()（printf・scanf の書式とも食い違う）', anchor: define-int}
-  - {title: 'chmin・chmax：2 つの型を取る形と、return a < b && (a = b, true) のカンマ演算子', anchor: chmin}
+  - {title: chmin・chmax：2 つの型を取る形とカンマ演算子で書く形, anchor: chmin}
   - {title: '#ifdef LOCAL・#ifndef ONLINE_JUDGE：手元だけのデバッグ出力を切り替える', anchor: ifdef-local}
-  - {title: '#pragma GCC optimize・target：AtCoder は -march=native なので target は要らない、g++-13 では #include より前に書くとエラー、Ofast は浮動小数点の約束を変える', anchor: pragma}
+  - {title: '#pragma GCC optimize・target：AtCoder では target は要らない', anchor: pragma}
   - {title: '自作のヘッダを #include "..." したコードは、提出前に 1 ファイルに展開する（バンドル）', anchor: bundling}
-  - {title: 展開の道具：cph の「提出用にコピー」（#include "..." だけを展開）・ACL の expander.py（atcoder/ だけを展開し、v1.6 の --origname で元の行番号を出せる）・oj-bundle, anchor: bundling-tools}
-  - {title: // @impl で main の後ろに回せるもの・回せないもの（auto を返す関数・定数式で使う constexpr 関数・クラスの定義は前に置く）, anchor: impl-marker}
+  - {title: 展開の道具：cph の提出用のコピー・ACL の expander.py・oj-bundle, anchor: bundling-tools}
+  - {title: '// @impl で main の後ろに回せるもの・回せないもの', anchor: impl-marker}
 stage: draft
 updated: 2026-10-21
 cpp_std: null
@@ -47,7 +47,7 @@ atcoder: true
 
 マクロ（`#define`）は、コンパイルの前に動くプリプロセッサが行う文字の置き換えである。型も変数の有効範囲も知らない。このページの落とし穴のほとんどは、この 1 点から起きる。
 
-## `#include <bits/stdc++.h>` と using namespace std {#bits-stdcpp}
+## bits/stdc++.h の取り込みと using namespace std {#bits-stdcpp}
 
 `#include <bits/stdc++.h>` は、GCC の標準ライブラリ（libstdc++）が持つ「標準ライブラリのヘッダをすべて読む」ヘッダである。`<vector>`・`<algorithm>`・`<queue>` などを 1 つずつ書く代わりになる。GCC の独自のもので規格にはなく、Clang（libc++）や MSVC にはない。AtCoder の GCC と手元の g++ では使える。
 
@@ -57,7 +57,7 @@ atcoder: true
 - **コンパイル時間**：すべてのヘッダを読むので、1 回のコンパイルが 1〜3 秒ほど長くなる。手元ではプリコンパイル済みヘッダで縮められる（[AtCoder と手元の環境](../cpp/cpp-environment.md)）
 - **落とし穴**：`std` の名前がすべてグローバルから見えるので、自分の変数や関数の名前とぶつかりうる。次の節で扱う
 
-## 名前の衝突：count・y1 をグローバル変数の名前にするとエラー、std:: を省かない流儀、using namespace atcoder {#namespaces}
+## 名前の衝突：count・y1 をグローバル変数の名前にするとエラー {#namespaces}
 
 `#include <bits/stdc++.h>` と `using namespace std;` のもとで、グローバル変数に `count` や `y1` という名前を付けると、コンパイルエラーになる。`count` はアルゴリズムの `std::count` と区別できず、`y1` は `<cmath>` が読み込む C の数学関数 `y1`（第 2 種ベッセル関数。POSIX の拡張）と同じ名前だからである。`count` は `std` の中にあるので名前が曖昧になり、`y1` はグローバルに宣言されているので同じ名前の宣言が重なる。そのため、エラーの種類が違う。
 
@@ -80,7 +80,7 @@ g++-13・g++-15 とも、`count` は `reference to 'count' is ambiguous`、`y1` 
 ??? question "確認問題：`int count;` を `main` の中に移すとエラーは消えるか？"
     消える。関数の中の変数は、外側（グローバル）にある `std::count` を隠すので、`count` はその変数を指すと決まる。グローバルに置くと、自分の `::count` と `using namespace std;` で見える `std::count` が同じ高さに並び、どちらか決まらない。
 
-## import std;：#include の代わりに標準ライブラリを読む。INT_MAX・assert などのマクロは来ない、手元では std モジュールを先に作る（C++23・GCC 15〜） {#import-std}
+## import std;：#include の代わりに標準ライブラリを読む（C++23・GCC 15〜） {#import-std}
 
 `import std;` は、C++23 のモジュールの機能で、標準ライブラリ全体を読み込む。解説コードに出てきたら、`#include <bits/stdc++.h>` の代わりと読めば足りる。`using namespace std;` の役割は持たないので、`using namespace std;` がなければ `std::` を付けて書く。
 
@@ -159,7 +159,7 @@ g++-13・g++-15 とも `'::main' must return 'int'` と出る。`signed` は `in
 ??? question "確認問題：`#define int long long` のとき、`main` をどう書くか。なぜか"
     `signed main()` と書く。`int main()` は置き換えで `long long main()` になり、`main` の戻り値は `int` でなければならないのでエラーになる。`signed` は `int` と同じ型で、`int` という語を含まないので置き換えを受けない。
 
-## chmin・chmax：2 つの型を取る形と、return a < b && (a = b, true) のカンマ演算子 {#chmin}
+## chmin・chmax：2 つの型を取る形とカンマ演算子で書く形 {#chmin}
 
 `chmin(a, b)` は「`b` が `a` より小さければ `a` を `b` に書き換え、書き換えたかを返す」関数である。`chmax` はその逆である。最小値・最大値の更新と DP の遷移でよく使う。
 
@@ -203,7 +203,7 @@ g++-13・g++-15 とも `'::main' must return 'int'` と出る。`signed` は `in
 - **ONLINE_JUDGE**：AtCoder はコンパイルのときに `-DATCODER -DONLINE_JUDGE` を付ける（[AtCoder と手元の環境](../cpp/cpp-environment.md)）。`#ifndef ONLINE_JUDGE` と書けば、手元で何も付けなくてもデバッグ出力が有効になり、ジャッジでは消える。ただし、`ONLINE_JUDGE` を定義するかはジャッジごとに違う
 - **落とし穴**：デバッグ用の部分に副作用（変数の書き換え・入力の読み込み）を入れない。手元と提出で動きが変わる。また、標準エラー出力でも大量に出すと遅くなるので、手元で時間を測るときは `-DLOCAL` を外す
 
-## #pragma GCC optimize・target：AtCoder は -march=native なので target は要らない、g++-13 では #include より前に書くとエラー、Ofast は浮動小数点の約束を変える {#pragma}
+## #pragma GCC optimize・target：AtCoder では target は要らない {#pragma}
 
 `#pragma GCC optimize("O3,unroll-loops")` は、コンパイルのオプション（最適化の段階・ループの展開）をソースの中で指定する。`#pragma GCC target("avx2")` は、使ってよい CPU の命令を指定する。どちらも定数倍を変えるだけで、計算量は変わらない。
 
@@ -249,7 +249,7 @@ ACL は AtCoder のジャッジに入っているので、`#include <atcoder/dsu
 
 - **落とし穴**：ヘッダの中に `using namespace std;` やマクロを書くと、展開した後のファイル全体に効く。名前の衝突（[名前の衝突](#namespaces)）が自分のライブラリと本体の間でも起きるので、ライブラリの中では `std::` を付けて書くほうが安全である。ライブラリの作り方は[ライブラリの設計](../guide/library-design.md)で扱う
 
-## 展開の道具：cph の「提出用にコピー」（#include "..." だけを展開）・ACL の expander.py（atcoder/ だけを展開し、v1.6 の --origname で元の行番号を出せる）・oj-bundle {#bundling-tools}
+## 展開の道具：cph の提出用のコピー・ACL の expander.py・oj-bundle {#bundling-tools}
 
 展開は手でもできるが、道具に任せる。展開する範囲が道具ごとに違う。
 
@@ -263,7 +263,7 @@ ACL は AtCoder のジャッジに入っているので、`#include <atcoder/dsu
 - **ACL の expander.py**：`python3 expander.py --lib <ACL の場所> main.cpp` で `combined.cpp` を出す（`-c` で標準出力）。ACL のファイルからはインクルードガードと `//` のコメント行を除く。自作のヘッダの `#include "..."` は展開しない。自作のヘッダと ACL の両方を展開するなら、道具を組み合わせる。v1.6 で加わった `--origname main.cpp` を付けると、展開した部分の直後に `#line 3 "main.cpp"` のような行が入る。コンパイルエラーの行番号が元のファイルの行で出る（手元の v1.6 で確かめた。v1.5 にはない）
 - **oj-bundle**：ライブラリを自動で検証する道具 verification-helper に含まれる（`oj-bundle` だけでも使える）。`#pragma once` かインクルードガードで、同じファイルを 1 回だけ展開する。`#ifdef LOCAL` などの条件の中の `#include "..."` はエラーになる（cph の改造版はその場に展開する）
 
-## // @impl で main の後ろに回せるもの・回せないもの（auto を返す関数・定数式で使う constexpr 関数・クラスの定義は前に置く） {#impl-marker}
+## // @impl で main の後ろに回せるもの・回せないもの {#impl-marker}
 
 ライブラリをそのまま展開すると、提出したコードの先頭に数百行のライブラリが並び、`main` が末尾に来る。cph の「提出用にコピー」は、ヘッダの中の目印 `// @impl` の行で中身を 2 つに分ける。目印より上は include の位置に、下は `main` の後ろにまとめて出す（目印の文字は設定 `cph.bundle.implMarker` で変えられる）。上には宣言を、下には定義を置けば、`main` が先頭近くに来る。
 

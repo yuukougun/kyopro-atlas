@@ -26,7 +26,6 @@ sections:
   - {title: 区間を覆う最小コスト（右端までの最小）, anchor: interval-cover}
   - {title: スライド最小値（単調 deque）と単調スタックによる遷移, anchor: dp-sliding-window}
   - {title: セグメント木・累積和・スライド最小値の使い分け, anchor: which-tool}
-  - {title: 落とし穴：初期値（−∞）・更新と取得の順番（同じ i の値を使わない）, anchor: pitfalls}
 stage: stub
 updated: 2026-10-21
 ---

@@ -23,15 +23,13 @@ frequency: B
 frequency_evidence: recent 1（abc451_f）・前提として届くページなし・古い ABC 4 問
 sections:
   - {title: 必要になる場面とアイデア, anchor: idea}
-  - {title: '保つ性質（diff[v] は親との差）', anchor: invariants}
+  - {title: 保つ性質（各頂点は親との差を持つ）, anchor: invariants}
   - {title: 各操作の手順（find・merge・差の取得）, anchor: operations}
   - {title: 境界（根の差は 0・同じ成分の merge・値の範囲）, anchor: boundaries}
   - {title: 矛盾の判定と差の取得, anchor: consistency}
   - {title: 計算量とその根拠, anchor: complexity}
   - {title: 一般化（XOR で偶奇・二部グラフ、頂点を 2 倍にする）, anchor: generalization}
   - {title: 応用の型, anchor: applications}
-  - {title: 落とし穴, anchor: pitfalls}
-  - {title: 使い分け, anchor: choosing}
 stage: draft
 updated: 2026-10-21
 ---
@@ -62,7 +60,7 @@ $N$ 個の未知の値 $x_0, \dots, x_{N-1}$ について、「$x_v - x_u = w$�
 
 ただし、成分をつなぐたびに片方の成分の全要素の「根との差」を直すと遅い。そこで各要素は親との差だけを持ち、根との差は親をたどって足し合わせて求める。Union-Find の木の形はそのままに、辺に差のラベルが付いたものと考えればよい。
 
-## 保つ性質（diff[v] は親との差） {#invariants}
+## 保つ性質（各頂点は親との差を持つ） {#invariants}
 
 各要素 $v$ に親 $\mathrm{par}[v]$ と、親との差 $\mathrm{diff}[v]$ を持たせ、次の性質を常に保つ。
 
@@ -292,7 +290,7 @@ ACL の `dsu` をそのまま使えるのが利点で、要素数は $2N$ にな
 ??? question "確認問題：差を XOR にしたとき、向きを入れ替えても符号の反転が要らないのはなぜか"
     XOR では $a \oplus a = 0$ なので、各値が自分自身の逆になるからである。$x_{r_v} \oplus x_{r_u}$ と $x_{r_u} \oplus x_{r_v}$ は同じ値で、どちらを下につないでも $\mathrm{diff}$ に入れる値は変わらない。
 
-## 使い分け {#choosing}
+## 使い分け {#comparison}
 
 重み付き Union-Find が要るのは、差の情報が順に来て、途中で矛盾の判定や差の質問に答える場合である。
 

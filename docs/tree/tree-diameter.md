@@ -9,7 +9,7 @@ order: 100
 level: 水
 kind: [木]
 prerequisites: [tree-distance]
-related: [rerooting, tree-centroid, lca, tree-construction, hld, tree-dp]
+related: [rerooting, tree-centroid, lca, tree-construction, hld, tree-dp, tree-path]
 summary: 直径（最も遠い 2 点を結ぶパス）は、任意の点から最も遠い点 a を求め、a から最も遠い点 b を求めれば a–b になる（重みが非負のとき）。各点の最遠点は直径の端点のどちらかになる。
 complexity: 直径・全頂点の離心数ともに O(N)（探索 3 回）
 signs:

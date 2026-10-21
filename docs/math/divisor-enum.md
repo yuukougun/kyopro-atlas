@@ -27,7 +27,6 @@ sections:
   - {title: 約数の列挙とソート・平方数での重複, anchor: enumerate}
   - {title: 約数の個数 Π(e+1) と約数の総和の公式, anchor: count-and-sum}
   - {title: 答えの候補が約数に限られる型（gcd の最大・商と余り・割るか引くか）, anchor: candidates}
-  - {title: 落とし穴：sqrt を double で求める・i*i のあふれ, anchor: pitfalls}
 stage: draft
 updated: 2026-10-21
 ---
@@ -128,7 +127,7 @@ $N = 36 = 2^2 \cdot 3^2$ なら、$d(36) = 3 \times 3 = 9$、$\sigma(36) = (1 + 
 
 どの型でも、「必要条件として約数に絞る」ことと「絞った候補が本当に条件を満たすか確かめる」ことを分けて考える。商と余りの型の $r < m$ のように、約数でも条件を満たさない候補が混ざるからである。
 
-## 落とし穴：sqrt を double で求める・i*i のあふれ {#pitfalls}
+## 落とし穴 {#pitfalls}
 
 **$\sqrt{N}$ を `double` で求めて境界がずれる**。`for (long long i = 1; i <= sqrt(n); i++)` は、$N$ が $2^{52}$（約 $4.5 \times 10^{15}$）程度を超えると、`double` の丸めで $\sqrt{N}$ が整数に化けることがある。$N = 10^{16} - 1$ では、本当は $\lfloor \sqrt{N} \rfloor = 99999999$ だが、`(long long)sqrt(n)` は $10^8$ を返す。約数の列挙なら余分な $i$ を 1 回調べるだけで済むこともあるが、$s$ を式に使う場合（$s^2$ を引くなど）は答えが変わる。終了条件は `i * i <= n` と整数で書けば誤差の心配がない。$s$ そのものが必要なら[整数の平方根](../math/integer-root.md)の補正の手順で求める。
 

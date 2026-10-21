@@ -19,13 +19,12 @@ signs:
 acl: []
 sections:
   - {title: 題材の性質, anchor: properties}
-  - {title: '更新のたびに mex を答える → 出現回数 0 の値の set・セグメント木上の二分探索（ordered-set, segment-tree-binary-search）', anchor: online-mex}
+  - {title: 更新のたびに mex を答える → 出現回数 0 の値の set・セグメント木上の二分探索, anchor: online-mex}
   - {title: 値が区間でまとめて入る → 区間を set で管理（interval-set）, anchor: interval-values}
   - {title: 区間・窓の mex の最小値・最大値 → 値を固定して出現位置の間隔を見る（fix-variable）, anchor: window-mex}
-  - {title: '全区間・全パスの mex の総和 → mex ≥ k+1 の数を足す主客転倒（contribution, two-pointers, lazy-segment-tree）', anchor: sum-of-mex}
+  - {title: 全区間・全パスの mex の総和 → mex が k+1 以上の数を足す主客転倒, anchor: sum-of-mex}
   - {title: ゲームの局面の値 → Grundy 数（grundy-number）, anchor: grundy}
   - {title: mex を指定した値にする構築 → 0〜k−1 を入れて k を入れない（construction）, anchor: construction}
-  - {title: 落とし穴, anchor: pitfalls}
 stage: stub
 updated: 2026-10-21
 ---

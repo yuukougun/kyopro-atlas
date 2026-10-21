@@ -26,7 +26,6 @@ sections:
   - {title: 対称なら破る個数 k ごとに足す, anchor: symmetric}
   - {title: 撹乱順列（完全順列）, anchor: derangement}
   - {title: 全射の数（各色を少なくとも 1 回使う）, anchor: surjection}
-  - {title: 落とし穴：符号・空集合・lcm のオーバーフロー, anchor: pitfalls}
   - {title: 使い分け：余事象・包除 DP・約数包除, anchor: when-to-use}
   - {title: min-max 包除（全種類がそろうまでの期待値）, anchor: min-max, level: 発展}
 stage: stub

@@ -26,7 +26,6 @@ sections:
   - {title: x と y に分ける, anchor: separate-axes}
   - {title: 距離の和で判定して二分探索する, anchor: with-binary-search, level: 青}
   - {title: 二乗和の最小（平均）との違い, anchor: vs-squares}
-  - {title: 中央値の更新・slope trick・三分探索へのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---
@@ -180,7 +179,7 @@ $$
 
 **軸に分けられない距離に使う**。ユークリッド距離の和や、斜めにも移動できる問題は、[x と y に分ける](#separate-axes)ことができない。距離が軸ごとの和になっているかを先に確かめる。
 
-## 中央値の更新・slope trick・三分探索へのつながり {#next-steps}
+## 上位の手法へのつながり {#next-steps}
 
 絶対値の和の最小化は、凸な折れ線を傾きで扱う考え方の入口である。
 

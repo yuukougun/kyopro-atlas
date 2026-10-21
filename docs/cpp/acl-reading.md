@@ -15,14 +15,14 @@ complexity: 'dsu の操作はならし O(α(N))、fenwick_tree・segtree・lazy_
 signs: []
 acl: [static_modint, modint, segtree, lazy_segtree, dsu]
 sections:
-  - {title: 'include と共通の約束：0 始まり・半開区間 [l, r)・引数なしで作った物・assert', anchor: conventions}
+  - {title: include と共通の約束：0 始まり・半開区間・引数なしで作った物・assert, anchor: conventions}
   - {title: コンストラクタは modint 以外 explicit：dsu d(n) と書く（dsu d = n はエラー）, anchor: explicit}
   - {title: '版：AtCoder は v1.6、v1.5 との違いは modint::val() の型など', anchor: version}
   - {title: 部品の呼び出し方の一覧（意味は各手法のページ）, anchor: components}
-  - {title: 'dsu の groups()：for (int v : d.groups()[0]) は C++23・GCC 15〜でだけ安全', anchor: dsu-groups}
+  - {title: dsu の groups()：戻り値の要素を範囲 for で直接回すのは C++23・GCC 15〜でだけ安全, anchor: dsu-groups}
   - {title: modint の読み方：using mint = modint998244353; で法が自動で取られる, anchor: modint}
-  - {title: 'modint の値と出力：.val() を出す、v1.6 で val() は int、< はない', anchor: modint-val}
-  - {title: 'segtree<S, op, e> の読み方：S は要素の型、op は結合的な演算、e は単位元を返す関数', anchor: segtree-args, level: 水}
+  - {title: modint の値と出力：.val() を出す、v1.6 で val() は int、大小比較はない, anchor: modint-val}
+  - {title: segtree のテンプレート引数の読み方：S は要素の型、op は結合的な演算、e は単位元, anchor: segtree-args, level: 水}
   - {title: 関数の渡し方：関数の名前か、キャプチャのないラムダ（C++20）, anchor: passing-functions, level: 水}
   - {title: キャプチャのあるラムダは op・e に渡せない（max_right・min_left の判定関数には渡せる）, anchor: capturing-lambda, level: 水}
   - {title: 'lazy_segtree の 7 つの引数：composition(f, g) は g の後に f', anchor: lazy-segtree-args, level: 水}
@@ -48,7 +48,7 @@ ACL は AtCoder が公開している C++ のライブラリで、AtCoder の提
 
 このページのコードは `#include <bits/stdc++.h>`・`#include <atcoder/all>`・`using namespace std;`・`using namespace atcoder;` を前提にする。確かめた環境は ACL v1.6 と g++-13・g++-15（`-std=gnu++23`）である。
 
-## include と共通の約束：0 始まり・半開区間 [l, r)・引数なしで作った物・assert {#conventions}
+## include と共通の約束：0 始まり・半開区間・引数なしで作った物・assert {#conventions}
 
 ACL の部品は、どれも次の約束に従う。解説コードの添字や区間は、この約束で読む。
 
@@ -121,7 +121,7 @@ v1.5（2023-04）から、segtree・lazy_segtree は `S op(const S& a, const S& 
 
 `mcf_graph` の容量と費用の型は別々に決められるので、`<int, long long>` のように書かれることがある。
 
-## dsu の groups()：for (int v : d.groups()[0]) は C++23・GCC 15〜でだけ安全 {#dsu-groups}
+## dsu の groups()：戻り値の要素を範囲 for で直接回すのは C++23・GCC 15〜でだけ安全 {#dsu-groups}
 
 `d.groups()` は連結成分ごとの頂点の列を `vector<vector<int>>` として返す。返り値は一時オブジェクトなので、範囲 for の範囲に `d.groups()[0]` と書くと、C++20 までの規則では範囲を決めた時点で一時オブジェクトが消え、消えた `vector` を読む。C++23 で規則が変わり（P2718）、一時オブジェクトはループの終わりまで生きるようになった。GCC が対応したのは GCC 15 からである。
 
@@ -153,7 +153,7 @@ v1.5（2023-04）から、segtree・lazy_segtree は `S op(const S& a, const S& 
 - `/` は逆元を掛ける。割る数が法と互いに素のときだけ使える（法が 998244353 のような素数なら、法の倍数でなければよい）。そうでなければ `assert` で止まる
 - `modint1000000007` は法が $10^9 + 7$ の型である。法を自分で決めるときは `static_modint<M>`（コンパイル時に決まる法）か `modint`（実行時に `modint::set_mod(m)` で決める法）を使う。使い分けと、割り算の条件は [modint](../math/modint.md) にある
 
-## modint の値と出力：.val() を出す、v1.6 で val() は int、< はない {#modint-val}
+## modint の値と出力：.val() を出す、v1.6 で val() は int、大小比較はない {#modint-val}
 
 `mint` は `cout <<` でも `println` でも出力できない。どちらもコンパイルエラーになる。整数の値は `.val()` で取り出して出力する（[そのままでは出力できない型](../cpp/cpp-io.md#unprintable-types)）。
 
@@ -183,7 +183,7 @@ v1.5（2023-04）から、segtree・lazy_segtree は `S op(const S& a, const S& 
 ??? question "確認問題：`mint` で持った答え $x$ について「$x$ が 0 なら -1 を出力」とするために `x.val() - 1` を使うコードは、どの版でも同じ結果になるか？"
     ならない。v1.6 では `val()` が `int` なので -1 になる。v1.5 以前では `unsigned int` なので 4294967295 になる。ただし `mint` が 0 でも、元の整数が 998244353 の倍数だった可能性があるので、「元の値が 0 か」の判定にはそもそも使えない（[modint](../math/modint.md)）。
 
-## segtree<S, op, e> の読み方：S は要素の型、op は結合的な演算、e は単位元を返す関数 {#segtree-args}
+## segtree のテンプレート引数の読み方：S は要素の型、op は結合的な演算、e は単位元 {#segtree-args}
 
 この節からは[セグメント木](../ds/segment-tree.md)を前提にする。
 

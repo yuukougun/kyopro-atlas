@@ -22,8 +22,7 @@ frequency_evidence: recent 0・前提として届くページなし・古い ABC
 sections:
   - {title: 何ができるか（静的・冪等な演算なら O(1)）, anchor: what-it-does}
   - {title: なぜ重なってよいか（冪等）と k = ⌊log₂ L⌋, anchor: idempotent}
-  - {title: '作り方（st[k][i] = op(st[k−1][i], st[k−1][i + 2^(k−1)])、log の表）', anchor: build}
-  - {title: 使い分け（更新があるならセグメント木、和なら累積和）, anchor: choosing}
+  - {title: 作り方（長さが 2 のべきの区間の表と log の表）, anchor: build}
   - {title: 冪等でない演算（2 べきに分けて O(log N)、Disjoint Sparse Table）, anchor: disjoint-sparse-table, level: 発展}
 stage: stub
 updated: 2026-10-21

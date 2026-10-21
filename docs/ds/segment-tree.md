@@ -29,7 +29,6 @@ sections:
   - {title: 再帰型と非再帰型, anchor: recursive-vs-iterative}
   - {title: 文字列へのクエリ（文字の集合をビットで持つ）, anchor: string-queries}
   - {title: DP の配列を載せる, anchor: dp}
-  - {title: 使い分け, anchor: choosing}
 stage: draft
 updated: 2026-10-21
 ---
@@ -304,7 +303,7 @@ DP の遷移が「ある範囲の $\mathrm{dp}[j]$ の最大値（最小値・�
 ??? question "確認問題：N = 5 のとき、葉の数 size と配列 d の長さはいくつか"
     $\mathrm{size}$ は 5 以上の最小の 2 の冪の 8 で、$d$ の長さは $2 \cdot 8 = 16$（ノード 1〜15 を使う）である。葉 5〜7 は余りの葉で、$e$ を入れておく。
 
-## 使い分け {#choosing}
+## 使い分け {#comparison}
 
 区間の取得をくり返すときは、更新の有無と種類で道具を選ぶ。
 

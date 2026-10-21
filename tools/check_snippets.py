@@ -23,6 +23,8 @@
   expect: run                                 run：警告なしでコンパイルでき、各 case の出力が一致する（case がなければ正常終了）
                                               compile-error：コンパイルが失敗する
                                               warning：コンパイルでき、警告（warning:）が出る。case があれば出力も確かめる
+                                              crash：コンパイルでき（警告は問わない）、各 case の実行が 0 以外の終了コードか
+                                              シグナルで終わる（case がなければ入力なしで1回）。output があれば標準出力も比べる
   cases: [{input: "3\\n1 2 3\\n", output: "6\\n"}]   出力は各行の末尾の空白と最後の改行を無視して比べる
 知らない項目があれば誤りとする（綴りの誤りを見逃さないため）。範囲の目印（// --8<-- [start:名前] 〜 [end:名前]）の
 対応と名前の重なりも確かめる。.yaml だけで .cpp がないものも誤りとする。
@@ -35,6 +37,7 @@ import os
 import re
 import shlex
 import shutil
+import signal
 import subprocess
 import sys
 import tempfile
@@ -48,7 +51,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SNIPPETS = ROOT / "snippets"
 ACL = ROOT / "third_party" / "ac-library"
 DEFAULTS = {"compilers": ["g++-15"], "flags": "-std=gnu++23 -O2 -Wall -Wextra", "expect": "run", "cases": []}
-EXPECTS = {"run", "compile-error", "warning"}
+EXPECTS = {"run", "compile-error", "warning", "crash"}
 MARK_RE = re.compile(r"--8<--\s*\[(start|end):([A-Za-z0-9_-]+)\]")
 
 
@@ -87,7 +90,7 @@ def load_unit(cpp: Path, base: Path) -> Unit:
         u.errors.append(f"flags が文字列でない: {conf['flags']!r}")
         conf["flags"] = DEFAULTS["flags"]
     if conf["expect"] not in EXPECTS:
-        u.errors.append(f"expect が不正: {conf['expect']!r}（run・compile-error・warning）")
+        u.errors.append(f"expect が不正: {conf['expect']!r}（run・compile-error・warning・crash）")
     cases = conf["cases"] or []
     good = []
     for i, c in enumerate(cases if isinstance(cases, list) else []):
@@ -137,6 +140,13 @@ def resolve_compiler(name: str) -> str | None:
     return _compiler_cache[name]
 
 
+def signal_name(num: int) -> str:
+    try:
+        return signal.Signals(num).name
+    except ValueError:
+        return str(num)
+
+
 def norm_out(s: str) -> str:
     return "\n".join(line.rstrip() for line in s.replace("\r\n", "\n").split("\n")).rstrip("\n")
 
@@ -171,19 +181,25 @@ def run_one(u: Unit, compiler: str, acl: Path | None, timeout: float) -> tuple[b
             return False, "警告が出ない（warning のはず）", []
         if expect == "run" and has_warning:
             return False, "警告が出た（run は警告なし。警告を確かめるなら expect: warning）", [x for x in diag if "warning:" in x][:10]
-        cases = conf["cases"] or ([{"input": "", "output": None}] if expect == "run" else [])
+        cases = conf["cases"] or ([{"input": "", "output": None}] if expect in ("run", "crash") else [])
+        ends: list[str] = []
         for i, c in enumerate(cases):
             try:
                 r = subprocess.run([str(exe)], input=c["input"], capture_output=True, text=True, timeout=timeout, cwd=tmp)
             except subprocess.TimeoutExpired:
                 return False, f"case {i + 1}: {timeout:g} 秒で終わらない", []
-            if r.returncode != 0:
+            if expect == "crash":
+                if r.returncode == 0:
+                    return False, f"case {i + 1}: 正常に終わった（crash のはず）", r.stdout.strip().split("\n")[:6] if r.stdout.strip() else []
+                ends.append(f"シグナル {signal_name(-r.returncode)}" if r.returncode < 0 else f"終了コード {r.returncode}")
+            elif r.returncode != 0:
                 return False, f"case {i + 1}: 終了コード {r.returncode}", (r.stderr.strip().split("\n")[:8] if r.stderr.strip() else [])
             if c["output"] is not None and norm_out(r.stdout) != norm_out(c["output"]):
                 exp, got = norm_out(c["output"]).split("\n"), norm_out(r.stdout).split("\n")
                 return False, f"case {i + 1}: 出力が違う", [f"期待: {x}" for x in exp[:6]] + [f"出力: {x}" for x in got[:6]]
         what = {"run": f"{len(conf['cases'])} case 一致" if conf["cases"] else "実行できた（case なし）",
-                "warning": "警告あり（期待どおり）" + (f"・{len(conf['cases'])} case 一致" if conf["cases"] else "")}[expect]
+                "warning": "警告あり（期待どおり）" + (f"・{len(conf['cases'])} case 一致" if conf["cases"] else ""),
+                "crash": "異常終了（期待どおり。" + "・".join(dict.fromkeys(ends)) + "）"}[expect]
         return True, what, []
 
 

@@ -55,7 +55,7 @@ search:
 - サイン：
     - 言い回し：すべての組・区間・部分集合についての総和
     - 言い回し：各要素が答えに何回足されるか
-    - 言い回し：全区間の最小値（2 番目に大きい値）の和
+    - 言い回し：全区間の最小値・2 番目に大きい値などの和
     - 制約：N ≤ 2×10^5 で、組・区間は N^2 個あり列挙できない
 - 節：
     - `contribution#swap-roles` 数える対象を入れ替える（表の行と列。式の規則は Σ の変形のページ）：https://yuukougun.github.io/kyopro-atlas/thinking/contribution/#swap-roles
@@ -160,7 +160,7 @@ search:
     - 制約：余りや状態が M 種類しかなく、M + 1 個以上の候補がある
     - 言い回し：N = 1 や N が小さいときだけ答えの形が違う
 - 節：
-    - `symmetry-pigeonhole-casework#symmetry` 対称性で計算を半分にする（i < j の和・全体の XOR から 1 つ除く）：https://yuukougun.github.io/kyopro-atlas/thinking/symmetry-pigeonhole-casework/#symmetry
+    - `symmetry-pigeonhole-casework#symmetry` 対称性で計算を半分にする（添字の小さい順の組の和・全体の XOR から 1 つ除く）：https://yuukougun.github.io/kyopro-atlas/thinking/symmetry-pigeonhole-casework/#symmetry
     - `symmetry-pigeonhole-casework#symmetry-cases` 対称性で場合を減らす（N ≤ M に入れ替える）：https://yuukougun.github.io/kyopro-atlas/thinking/symmetry-pigeonhole-casework/#symmetry-cases
     - `symmetry-pigeonhole-casework#pigeonhole` 鳩の巣原理（必ず一致が起きる・探索の打ち切り回数）（水）：https://yuukougun.github.io/kyopro-atlas/thinking/symmetry-pigeonhole-casework/#pigeonhole
     - `symmetry-pigeonhole-casework#casework` 場合分け（端の場合・大小関係・操作の順序によらないこと）：https://yuukougun.github.io/kyopro-atlas/thinking/symmetry-pigeonhole-casework/#casework

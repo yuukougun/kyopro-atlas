@@ -30,7 +30,6 @@ search:
     - `dp-basics#pull-to-prefix-sum` 貰う形にすると遷移元が区間になる（累積和でまとめる高速化へ）（水）：https://yuukougun.github.io/kyopro-atlas/dp/dp-basics/#pull-to-prefix-sum
     - `dp-basics#greedy-counterexample` 貪欲で解けないことの確かめ方（反例から DP へ）：https://yuukougun.github.io/kyopro-atlas/dp/dp-basics/#greedy-counterexample
     - `dp-basics#map` DP の型の地図（列・区間・集合・桁・木・順列・確率・ゲーム・高速化）：https://yuukougun.github.io/kyopro-atlas/dp/dp-basics/#map
-    - `dp-basics#pitfalls` 落とし穴：到達できない状態の INF に足して溢れる・mod の取り忘れ・添字のずれ：https://yuukougun.github.io/kyopro-atlas/dp/dp-basics/#pitfalls
 
 ## メモ化再帰（memoized-recursion） {#memoized-recursion}
 
@@ -47,8 +46,6 @@ search:
     - `memoized-recursion#write-memo` 再帰とメモの書き方（未計算の印と答えの値の衝突を避ける）：https://yuukougun.github.io/kyopro-atlas/dp/memoized-recursion/#write-memo
     - `memoized-recursion#vs-bottom-up` ボトムアップとの使い分け（速さ・スタック・高速化の載せやすさ）：https://yuukougun.github.io/kyopro-atlas/dp/memoized-recursion/#vs-bottom-up
     - `memoized-recursion#dp-map-sparse` 到達する状態だけを持つ（map でメモ化・現れる値の個数の見積もり）：https://yuukougun.github.io/kyopro-atlas/dp/memoized-recursion/#dp-map-sparse
-    - `memoized-recursion#pitfalls` 落とし穴：深い再帰・閉路・自己ループ：https://yuukougun.github.io/kyopro-atlas/dp/memoized-recursion/#pitfalls
-    - `memoized-recursion#next-steps` 上位の手法とのつながり：https://yuukougun.github.io/kyopro-atlas/dp/memoized-recursion/#next-steps
 
 ## DAG 上の DP（dp-dag） {#dp-dag}
 
@@ -60,7 +57,7 @@ search:
 - サイン：
     - 言い回し：番号の小さい頂点から大きい頂点へだけ辺がある（u < v）
     - 言い回し：値が増える向きにしか移動できない
-    - 言い回し：有向グラフの最長の経路の長さ・経路の本数・最短経路の本数
+    - 言い回し：有向グラフの最長の経路の長さ・経路の本数・最短路の本数
     - 言い回し：依存関係に従って順に決める（閉路があれば −1）
 - 節：
     - `dp-dag#dp-as-dag` DP は DAG 上の最短路・最長路・数え上げ：https://yuukougun.github.io/kyopro-atlas/dp/dp-dag/#dp-as-dag
@@ -68,7 +65,6 @@ search:
     - `dp-dag#find-dag` DAG だと気づく・作る（値の順・距離の層・同じ値の頂点をまとめる）（水）：https://yuukougun.github.io/kyopro-atlas/dp/dp-dag/#find-dag
     - `dp-dag#count-shortest-paths` 最短路の本数（距離が確定した順に配る）：https://yuukougun.github.io/kyopro-atlas/dp/dp-dag/#count-shortest-paths
     - `dp-dag#with-cycles` 閉路があるとき（SCC で縮約する・最短路に切り替える）：https://yuukougun.github.io/kyopro-atlas/dp/dp-dag/#with-cycles
-    - `dp-dag#connections` 上位の手法とのつながり：https://yuukougun.github.io/kyopro-atlas/dp/dp-dag/#connections
 
 ## DP の計算順序（dp-order） {#dp-order}
 
@@ -86,7 +82,6 @@ search:
     - `dp-order#typical-orders` 典型の順序（添字・逆順・値の順・区間の長さ順・集合の昇順・木の帰りがけ順）：https://yuukougun.github.io/kyopro-atlas/dp/dp-order/#typical-orders
     - `dp-order#backward` 後ろから解くサイン（終わりの値が分かっている・辞書順最小の復元）：https://yuukougun.github.io/kyopro-atlas/dp/dp-order/#backward
     - `dp-order#expectation-and-games` 期待値 DP・ゲーム DP の計算順序（確率・期待値・ゲームの章へ）：https://yuukougun.github.io/kyopro-atlas/dp/dp-order/#expectation-and-games
-    - `dp-order#pitfalls` 落とし穴：2 重ループの内外の順・逆順の境界・配る形で未確定の値を配る：https://yuukougun.github.io/kyopro-atlas/dp/dp-order/#pitfalls
 
 ## DP の状態の設計（dp-state-design） {#dp-state-design}
 
@@ -127,7 +122,6 @@ search:
     - `dp-mod-state#with-count` 個数も状態に持つ（K 個選んで和が D の倍数）：https://yuukougun.github.io/kyopro-atlas/dp/dp-mod-state/#with-count
     - `dp-mod-state#average` 平均の扱い（個数を外側で固定する・平均を引いて和 0 にする）：https://yuukougun.github.io/kyopro-atlas/dp/dp-mod-state/#average
     - `dp-mod-state#game-by-remainder` 後ろから余りごとの勝敗を決めるゲーム（青）：https://yuukougun.github.io/kyopro-atlas/dp/dp-mod-state/#game-by-remainder
-    - `dp-mod-state#pitfalls` 落とし穴：C++ の % が負になる・状態の mod と答えの mod の混同：https://yuukougun.github.io/kyopro-atlas/dp/dp-mod-state/#pitfalls
 
 ## フェーズを状態に持つ DP（dp-phase） {#dp-phase}
 
@@ -146,7 +140,6 @@ search:
     - `dp-phase#counting-phases` 段階の数え方（区間の外側にも段階がある）：https://yuukougun.github.io/kyopro-atlas/dp/dp-phase/#counting-phases
     - `dp-phase#matched-prefix` 何文字目まで集めたか（部分列として現れる回数を数える）：https://yuukougun.github.io/kyopro-atlas/dp/dp-phase/#matched-prefix
     - `dp-phase#flip-interval` 区間の反転・変更を段階の切り替えで表す：https://yuukougun.github.io/kyopro-atlas/dp/dp-phase/#flip-interval
-    - `dp-phase#pitfalls` 落とし穴：同じ位置で段階をいくつ進めてよいか：https://yuukougun.github.io/kyopro-atlas/dp/dp-phase/#pitfalls
 
 ## DP の復元（dp-reconstruction） {#dp-reconstruction}
 
@@ -184,7 +177,6 @@ search:
     - `dp-prefix-sum#prefix-min` 遷移元が接頭辞なら累積 min・累積 max でもよい：https://yuukougun.github.io/kyopro-atlas/dp/dp-prefix-sum/#prefix-min
     - `dp-prefix-sum#by-remainder` 余りごとの累積（青）：https://yuukougun.github.io/kyopro-atlas/dp/dp-prefix-sum/#by-remainder
     - `dp-prefix-sum#two-dimensional` 2 次元の累積（青）：https://yuukougun.github.io/kyopro-atlas/dp/dp-prefix-sum/#two-dimensional
-    - `dp-prefix-sum#pitfalls` 落とし穴：累積和を更新しながら使う順番・区間の端・mod の差が負になる：https://yuukougun.github.io/kyopro-atlas/dp/dp-prefix-sum/#pitfalls
 
 ## ナップサック DP（knapsack-01） {#knapsack-01}
 
@@ -197,15 +189,14 @@ search:
     - 言い回し：重さの合計が W 以下で価値の和の最大
     - 言い回し：同じものを何度でも使える（硬貨・魔法）
     - 言い回し：各品物は B_i 個まで使える
-    - 制約：N ≤ 100〜5000、W ≤ 10&#94;4〜10&#94;5（O(NW) が通る）
+    - 制約：NW ≤ 10&#94;7〜10&#94;8（O(NW) が通る）
 - 節：
-    - `knapsack-01#meaning` dp\[i][j] の意味（「以下」と「ちょうど」で初期値と答えが変わる）：https://yuukougun.github.io/kyopro-atlas/dp/knapsack-01/#meaning
+    - `knapsack-01#meaning` DP の表の意味（「以下」と「ちょうど」で初期値と答えが変わる）：https://yuukougun.github.io/kyopro-atlas/dp/knapsack-01/#meaning
     - `knapsack-01#dp-rolling-array` 配列の使い回しとループの向き（0-1 は大きい方から、個数制限なしは小さい方から）：https://yuukougun.github.io/kyopro-atlas/dp/knapsack-01/#dp-rolling-array
     - `knapsack-01#knapsack-unbounded` 個数制限なし（数え上げでは品物と和のループの内外で組合せと列が分かれる）：https://yuukougun.github.io/kyopro-atlas/dp/knapsack-01/#knapsack-unbounded
     - `knapsack-01#variants` 多次元の重さ・上限で打ち切る・グループから 1 つ選ぶ：https://yuukougun.github.io/kyopro-atlas/dp/knapsack-01/#variants
     - `knapsack-01#choose-by-size` 計算量で解法を切り替える（重さ・価値・N のどれが小さいか）（水）：https://yuukougun.github.io/kyopro-atlas/dp/knapsack-01/#choose-by-size
     - `knapsack-01#knapsack-bounded` 個数制限付き（素朴な展開・二進分解・余りごとのスライド最小値）（青）：https://yuukougun.github.io/kyopro-atlas/dp/knapsack-01/#knapsack-bounded
-    - `knapsack-01#next-steps` 上位の手法とのつながり：https://yuukougun.github.io/kyopro-atlas/dp/knapsack-01/#next-steps
 
 ## 部分和 DP（subset-sum） {#subset-sum}
 
@@ -221,10 +212,9 @@ search:
     - 制約：N ≤ 100、値の総和 ≤ 10^5 程度
 - 節：
     - `subset-sum#three-forms` 可否・数え上げ・最大の 3 つの形：https://yuukougun.github.io/kyopro-atlas/dp/subset-sum/#three-forms
-    - `subset-sum#reformulations` 典型の言い換え（2 グループに分ける・± の和・x と y が独立）：https://yuukougun.github.io/kyopro-atlas/dp/subset-sum/#reformulations
+    - `subset-sum#reformulations` 典型の言い換え（2 グループに分ける・± の和・x と y が独立・平均）：https://yuukougun.github.io/kyopro-atlas/dp/subset-sum/#reformulations
     - `subset-sum#sort-then-count` 最大値を固定するためにソートしてから数える（水）：https://yuukougun.github.io/kyopro-atlas/dp/subset-sum/#sort-then-count
     - `subset-sum#over-all-subsets` 全部分集合についての和（含む部分集合の数を重みにする）（青）：https://yuukougun.github.io/kyopro-atlas/dp/subset-sum/#over-all-subsets
-    - `subset-sum#pitfalls` 落とし穴：負の和のオフセット・空集合を数えるか：https://yuukougun.github.io/kyopro-atlas/dp/subset-sum/#pitfalls
 
 ## DP の状態の削減（dp-dimension-reduction） {#dp-dimension-reduction}
 
@@ -241,7 +231,6 @@ search:
     - `dp-dimension-reduction#cap` 上限で打ち切る（log 回で十分な量・目標以上をまとめる）：https://yuukougun.github.io/kyopro-atlas/dp/dp-dimension-reduction/#cap
     - `dp-dimension-reduction#dp-swap-key-value` 値と添字の入れ替え（同じ添字なら値が良い方が常に良いとき）：https://yuukougun.github.io/kyopro-atlas/dp/dp-dimension-reduction/#dp-swap-key-value
     - `dp-dimension-reduction#which-to-index` どれを添字に残すか（範囲が小さい量を選ぶ）：https://yuukougun.github.io/kyopro-atlas/dp/dp-dimension-reduction/#which-to-index
-    - `dp-dimension-reduction#pitfalls` 落とし穴：打ち切りの遷移を忘れる・復元が要るのに表を捨てる・入れ替えた後の答えの取り出し：https://yuukougun.github.io/kyopro-atlas/dp/dp-dimension-reduction/#pitfalls
 
 ## 戻す DP（knapsack-undo） {#knapsack-undo}
 
@@ -311,8 +300,8 @@ search:
     - 言い回し：各区間が条件を満たすように区切れるか
     - 式の形：dp[i] = Σ（または min）\_{j < i, [j, i) が条件を満たす} dp[j]
 - 節：
-    - `dp-sequence-partition#last-block` 最後の区間で分ける（dp[0] = 1 は空の区切り）：https://yuukougun.github.io/kyopro-atlas/dp/dp-sequence-partition/#last-block
-    - `dp-sequence-partition#vs-interval-dp` 区間 DP（dp\[l][r]）との違い：https://yuukougun.github.io/kyopro-atlas/dp/dp-sequence-partition/#vs-interval-dp
+    - `dp-sequence-partition#last-block` 最後の区間で分ける（空の区切りを 1 通りと数える）：https://yuukougun.github.io/kyopro-atlas/dp/dp-sequence-partition/#last-block
+    - `dp-sequence-partition#vs-interval-dp` 区間 DP との違い：https://yuukougun.github.io/kyopro-atlas/dp/dp-sequence-partition/#vs-interval-dp
     - `dp-sequence-partition#two-pointers` 遷移元の範囲が単調に動く：尺取りと累積和：https://yuukougun.github.io/kyopro-atlas/dp/dp-sequence-partition/#two-pointers
     - `dp-sequence-partition#block-index` 区間の番号に依存する条件：番号を状態に足す（青）：https://yuukougun.github.io/kyopro-atlas/dp/dp-sequence-partition/#block-index
 
@@ -492,7 +481,6 @@ search:
     - `digit-dp#leading-zero` leading zero を区別するとき：https://yuukougun.github.io/kyopro-atlas/dp/digit-dp/#leading-zero
     - `digit-dp#binary` 2 進の桁 DP（XOR・AND）：https://yuukougun.github.io/kyopro-atlas/dp/digit-dp/#binary
     - `digit-dp#fix-divisor` 割る数を全探索して桁 DP を繰り返す：https://yuukougun.github.io/kyopro-atlas/dp/digit-dp/#fix-divisor
-    - `digit-dp#pitfalls` 落とし穴：N 自身を含むか・0 を数えるか：https://yuukougun.github.io/kyopro-atlas/dp/digit-dp/#pitfalls
 
 ## 桁 DP の応用（digit-dp-advanced） {#digit-dp-advanced}
 
@@ -535,7 +523,6 @@ search:
     - `tree-dp#greedy-children` 子ごとの「得」を大きい順に取る（青）：https://yuukougun.github.io/kyopro-atlas/dp/tree-dp/#greedy-children
     - `tree-dp#with-binary-search` 二分探索と組み合わせて判定にする（黄）：https://yuukougun.github.io/kyopro-atlas/dp/tree-dp/#with-binary-search
     - `tree-dp#tree-dp-merge` 部分木の情報をデータ構造で持ってマージする（マージテク）（黄）：https://yuukougun.github.io/kyopro-atlas/dp/tree-dp/#tree-dp-merge
-    - `tree-dp#pitfalls` 落とし穴：再帰の深さ・親への逆流・根の選び方：https://yuukougun.github.io/kyopro-atlas/dp/tree-dp/#pitfalls
 
 ## 全方位木 DP（rerooting） {#rerooting}
 
@@ -554,7 +541,6 @@ search:
     - `rerooting#exclude-self` 自分以外の兄弟の合成（左右からの累積）：https://yuukougun.github.io/kyopro-atlas/dp/rerooting/#exclude-self
     - `rerooting#patterns` 合成と根を付ける操作の作り方の型：https://yuukougun.github.io/kyopro-atlas/dp/rerooting/#patterns
     - `rerooting#when-to-use` 使い分け（最遠点は直径の性質で、距離の総和は根の移動の差分で済む）：https://yuukougun.github.io/kyopro-atlas/dp/rerooting/#when-to-use
-    - `rerooting#pitfalls` 落とし穴：親側の値から自分自身の寄与を除き忘れる：https://yuukougun.github.io/kyopro-atlas/dp/rerooting/#pitfalls
 
 ## 二乗の木 DP（tree-dp-square） {#tree-dp-square}
 
@@ -607,7 +593,6 @@ search:
     - `dp-speedup-overview#shape-to-tool` 早見表：遷移の形から道具を選ぶ：https://yuukougun.github.io/kyopro-atlas/dp/dp-speedup-overview/#shape-to-tool
     - `dp-speedup-overview#algebraic-tools` 多項式の積・同じ線形の遷移の繰り返し（畳み込み・行列累乗へ）：https://yuukougun.github.io/kyopro-atlas/dp/dp-speedup-overview/#algebraic-tools
     - `dp-speedup-overview#convexity` 凸性を使う高速化（CHT・Monge・Alien DP・Slope Trick）の使いどころ：https://yuukougun.github.io/kyopro-atlas/dp/dp-speedup-overview/#convexity
-    - `dp-speedup-overview#pitfalls` 落とし穴：式を書かずに道具から考える・累積和とセグメント木の取り違え：https://yuukougun.github.io/kyopro-atlas/dp/dp-speedup-overview/#pitfalls
 
 ## セグメント木・スライド最小値による DP の高速化（dp-segment-tree） {#dp-segment-tree}
 
@@ -628,7 +613,6 @@ search:
     - `dp-segment-tree#interval-cover` 区間を覆う最小コスト（右端までの最小）：https://yuukougun.github.io/kyopro-atlas/dp/dp-segment-tree/#interval-cover
     - `dp-segment-tree#dp-sliding-window` スライド最小値（単調 deque）と単調スタックによる遷移：https://yuukougun.github.io/kyopro-atlas/dp/dp-segment-tree/#dp-sliding-window
     - `dp-segment-tree#which-tool` セグメント木・累積和・スライド最小値の使い分け：https://yuukougun.github.io/kyopro-atlas/dp/dp-segment-tree/#which-tool
-    - `dp-segment-tree#pitfalls` 落とし穴：初期値（−∞）・更新と取得の順番（同じ i の値を使わない）：https://yuukougun.github.io/kyopro-atlas/dp/dp-segment-tree/#pitfalls
 
 ## インライン DP（inline-dp） {#inline-dp}
 
@@ -682,7 +666,6 @@ search:
     - `cht#lower-envelope` 下側の包絡線と不要な直線（傾きもクエリも単調なら deque）：https://yuukougun.github.io/kyopro-atlas/dp/cht/#lower-envelope
     - `cht#non-monotone-queries` クエリが単調でないとき（二分探索）：https://yuukougun.github.io/kyopro-atlas/dp/cht/#non-monotone-queries
     - `cht#li-chao-tree` Li Chao Tree（区間の真ん中で勝つ直線を残す）：https://yuukougun.github.io/kyopro-atlas/dp/cht/#li-chao-tree
-    - `cht#pitfalls` 落とし穴：交点の比較は掛け算で（\_\_int128）・最小と最大の取り違え・同じ傾き：https://yuukougun.github.io/kyopro-atlas/dp/cht/#pitfalls
     - `cht#verify` ライブラリでの検証（Library Checker の line_add_get_min・segment_add_get_min）：https://yuukougun.github.io/kyopro-atlas/dp/cht/#verify
 
 ## Monge 性による DP の高速化（monge） {#monge}

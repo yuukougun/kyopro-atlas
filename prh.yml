@@ -226,6 +226,10 @@ rules:
       - {from: サフィックスアレイ, to: サフィックスアレイ}   # この規則では変えない（上の Suffix Array の規則が直す）
   - expected: 接頭辞
     pattern: '/プレフィッ?クス/'
+  - expected: Z 配列
+    pattern: '/Z[- ]?array/'
+  - expected: 巡回シフト
+    pattern: 循環シフト
   - expected: Trie
     pattern: トライ木
   - expected: Manacher

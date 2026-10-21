@@ -25,7 +25,6 @@ sections:
   - {title: 同じ値をまとめて処理する, anchor: batch-same-values}
   - {title: 反例の探し方（小さいケースの全探索と比べる）, anchor: counterexamples}
   - {title: 貪欲が失敗する例と DP への切り替え, anchor: when-greedy-fails}
-  - {title: 交換論法・優先度付きキュー・区間スケジューリングへのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---
@@ -179,7 +178,7 @@ $i$ は高々 $N$ 回しか進まないので、ソートを含めて $O(N \log 
 
 **切り上げとオーバーフロー**。「$H$ 以上にする回数」は $\lceil H / a \rceil$ で、整数なら `(h + a - 1) / a` と書く（$h, a > 0$ のとき）。値と回数がどちらも $2 \times 10^9$ なら、値の和や等差数列の和は約 $4 \times 10^{18}$ になり、`int` では足りない。途中の積も含めて `long long` に収まるかを見積もる。
 
-## 交換論法・優先度付きキュー・区間スケジューリングへのつながり {#next-steps}
+## 上位の手法へのつながり {#next-steps}
 
 貪欲法は、何を「いちばんよい」とするかと、それをどう速く取り出すかで、いくつかの型に分かれる。
 

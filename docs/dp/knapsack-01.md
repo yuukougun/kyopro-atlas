@@ -16,18 +16,17 @@ signs:
   - {type: phrase, text: 重さの合計が W 以下で価値の和の最大}
   - {type: phrase, text: 同じものを何度でも使える（硬貨・魔法）}
   - {type: phrase, text: 各品物は B_i 個まで使える}
-  - {type: constraint, text: N ≤ 100〜5000、W ≤ 10^4〜10^5（O(NW) が通る）}
+  - {type: constraint, text: NW ≤ 10^7〜10^8（O(NW) が通る）}
 acl: []
 frequency: A
 frequency_evidence: recent 1（abc461_f）・前提として 5 ページに届く（直接 5）・古い ABC 13 問
 sections:
-  - {title: 'dp[i][j] の意味（「以下」と「ちょうど」で初期値と答えが変わる）', anchor: meaning}
+  - {title: DP の表の意味（「以下」と「ちょうど」で初期値と答えが変わる）, anchor: meaning}
   - {title: 配列の使い回しとループの向き（0-1 は大きい方から、個数制限なしは小さい方から）, anchor: dp-rolling-array}
   - {title: 個数制限なし（数え上げでは品物と和のループの内外で組合せと列が分かれる）, anchor: knapsack-unbounded}
   - {title: 多次元の重さ・上限で打ち切る・グループから 1 つ選ぶ, anchor: variants}
   - {title: 計算量で解法を切り替える（重さ・価値・N のどれが小さいか）, anchor: choose-by-size, level: 水}
   - {title: 個数制限付き（素朴な展開・二進分解・余りごとのスライド最小値）, anchor: knapsack-bounded, level: 青}
-  - {title: 上位の手法とのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---
@@ -38,7 +37,7 @@ updated: 2026-10-21
         - 重さの合計が W 以下で価値の和の最大を求める。
         - 同じものを何度でも使える（硬貨・魔法）。
         - 各品物は $B_i$ 個まで使える。
-        - $N \le 100$〜$5000$、$W \le 10^4$〜$10^5$ で、$O(NW)$ が通る。
+        - $NW \le 10^7$〜$10^8$ で、$O(NW)$ が通る。
     - **計算量**：品物の数を $N$、重さの上限を $W$ として時間 $O(NW)$。1 次元の配列を使い回せばメモリは $O(W)$。
     - **前提**：[DP の基本](../dp/dp-basics.md)
 
@@ -48,7 +47,7 @@ updated: 2026-10-21
 
 ナップサック DP は、品物を前から 1 つずつ見て「選ぶ・選ばない」を決め、使った重さの合計を[状態](../guide/glossary.md#state)に持つ DP である。$2^N$ 通りの選び方を、重さの合計が同じものどうしでまとめるので $O(NW)$ で済む。基本形は易しいが、「以下」と「ちょうど」の取り違え、1 次元にしたときのループの向き、上限での打ち切りなど、実装の細部で間違えやすい。このページでは品物を 0-indexed で $i = 0, 1, \dots, N - 1$ と番号付け、品物 $i$ の重さを $w_i$、価値を $v_i$ と書く。
 
-## dp[i][j] の意味（「以下」と「ちょうど」で初期値と答えが変わる） {#meaning}
+## DP の表の意味（「以下」と「ちょうど」で初期値と答えが変わる） {#meaning}
 
 0-1 ナップサックの表は次のように定める。
 
@@ -207,7 +206,7 @@ ABC で二進分解やスライド最小値が必須になる問題は少なく�
 
 **負の添字**。$j - w_i < 0$ のときに $\mathrm{dp}[j - w_i]$ を読むと範囲外になる。配る DP なら遷移先 $j + w_i$ が $W$ を超えないかを確かめる。
 
-## 上位の手法とのつながり {#next-steps}
+## 上位の手法へのつながり {#next-steps}
 
 ナップサック DP は、多くの DP の土台になる。
 

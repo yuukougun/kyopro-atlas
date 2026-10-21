@@ -17,16 +17,16 @@ acl: []
 sections:
   - {title: 'erase(v, x)・erase_if(v, pred)：消した個数を返す。erase_if は set・map にも使える（C++20）', anchor: erase-if}
   - {title: contains（C++20）と find・count, anchor: contains}
-  - {title: 'map の [] はキーがなければ既定値で要素を作る（存在を調べるだけなら contains・find、at はなければ例外）', anchor: map-subscript}
-  - {title: multiset から 1 個だけ消す：ms.erase(ms.find(x))（ms.erase(x) は全部消す。find が end() でないことを確かめる）, anchor: multiset-erase-one}
+  - {title: map の添字演算子はキーがなければ要素を作る（存在を調べるなら contains・find）, anchor: map-subscript}
+  - {title: multiset から 1 個だけ消す：ms.erase(ms.find(x))（erase(x) は全部消す）, anchor: multiset-erase-one}
   - {title: emplace_back と push_back, anchor: emplace-back}
-  - {title: 'set・map の lower_bound はメンバを使う（std::lower_bound・ranges::lower_bound は O(N)）', anchor: member-lower-bound}
-  - {title: イテレータの基本：begin は先頭、end は最後の要素の次（*prev(st.end())・*st.rbegin()・next・prev）, anchor: iterators}
+  - {title: 'set・map の lower_bound はメンバ関数を使う（std::lower_bound は O(N)）', anchor: member-lower-bound}
+  - {title: イテレータの基本：begin は先頭、end は最後の要素の次（prev・next・rbegin）, anchor: iterators}
   - {title: it - v.begin() で添字（vector だけ）、distance は set では O(N), anchor: iterator-index}
   - {title: erase は次のイテレータを返す（it = st.erase(it)）, anchor: erase-returns-next}
   - {title: イテレータと参照の無効化：vector の再確保はすべてを無効にし、set・map は消した要素だけ, anchor: invalidation}
-  - {title: unordered_map：pair のキーにはハッシュがない（コンパイルエラー）、自作のハッシュの渡し方、衝突を狙った入力（安全な設計は hash-safety）, anchor: unordered-map}
-  - {title: 'pb_ds の順序付き集合：tree と order_of_key・find_by_order、重複は (値, 通し番号) にする（GCC の拡張）', anchor: pb-ds}
+  - {title: unordered_map：pair のキーにはハッシュがない、自作のハッシュ、衝突を狙った入力, anchor: unordered-map}
+  - {title: pb_ds の順序付き集合：tree と order_of_key・find_by_order（GCC の拡張）, anchor: pb-ds}
 stage: draft
 updated: 2026-10-21
 cpp_std: null
@@ -79,7 +79,7 @@ atcoder: true
 - **版**：コンテナの `contains` は C++20、`string::contains` は C++23。どちらも g++-13・g++-15 で使える。`-std=gnu++20` では `string` の `contains` が `has no member named 'contains'` でコンパイルエラーになる
 - **落とし穴**：multiset の `count(x)` は $O(\log N + \text{個数})$ かかる。同じ値が $10^5$ 個入った multiset で `count(x) > 0` を繰り返すと遅いので、あるかどうかは `contains` か `find` で調べる
 
-## map の [] はキーがなければ既定値で要素を作る（存在を調べるだけなら contains・find、at はなければ例外） {#map-subscript}
+## map の添字演算子はキーがなければ要素を作る（存在を調べるなら contains・find） {#map-subscript}
 
 `mp[k]` は、キー `k` がなければ値を既定値（`int` なら 0）にした要素を作ってから、その値への参照を返す。数えるときの `cnt[x]++` はこの性質を使った書き方である。一方、調べるだけのつもりで `mp[k]` を書くと、要素が増える。
 
@@ -95,7 +95,7 @@ atcoder: true
 ??? question "確認問題：`if (cnt[x] > 0)` を何度も実行するとき、何が問題か"
     `x` がない回ごとに `cnt[x] = 0` の要素が作られる。答えは変わらないが、`cnt.size()` が問い合わせた種類の数だけ増える。`cnt.size()` を「現れた値の種類数」として使っていると WA になる。`cnt.contains(x)` か `cnt.find(x) != cnt.end()` で調べる。
 
-## multiset から 1 個だけ消す：ms.erase(ms.find(x))（ms.erase(x) は全部消す。find が end() でないことを確かめる） {#multiset-erase-one}
+## multiset から 1 個だけ消す：ms.erase(ms.find(x))（erase(x) は全部消す） {#multiset-erase-one}
 
 multiset のメンバの `erase` は、値を渡すと**その値をすべて**消し、イテレータを渡すとその 1 個だけを消す。1 個だけ消すには、`find(x)` で 1 個のイテレータを得てから渡す。
 
@@ -121,7 +121,7 @@ $\{1, 2, 2, 2, 3\}$ から 2 を消すとき、`ms.erase(2)` では 3 個とも�
 - **落とし穴 1**：`emplace_back` は引数をコンストラクタに渡す。`vector<vector<int>>` に `vs.emplace_back(3)` と書くと、要素 1 個の `{3}` ではなく、大きさ 3 の `{0, 0, 0}` が足される。`push_back({3})` は `{3}` を足す。要素が vector のときは、意図した方を確かめる
 - **落とし穴 2**：`e.emplace_back({1, 2})` はコンパイルエラーになる。メッセージは `no matching function for call to ... emplace_back(<brace-enclosed initializer list>)` である。`emplace_back` は引数の型を推論するが、`{1, 2}` だけからは型が決まらないからである。`{}` で書くなら `push_back({1, 2})` にする
 
-## set・map の lower_bound はメンバを使う（std::lower_bound・ranges::lower_bound は O(N)） {#member-lower-bound}
+## set・map の lower_bound はメンバ関数を使う（std::lower_bound は O(N)） {#member-lower-bound}
 
 set・multiset・map で「$x$ 以上の最小の要素」を探すときは、メンバの `st.lower_bound(x)` を使う。木の上を根から下りるので $O(\log N)$ で済む。
 
@@ -134,7 +134,7 @@ set・multiset・map で「$x$ 以上の最小の要素」を探すときは、�
 - **落とし穴**：結果が同じなので、小さな入力のテストでは気づかない。set・map に対しては `upper_bound`・`find`・`count` もメンバを使う
 - **境界**：$x$ 以上の要素がなければ `end()` が返る。`*it` を読む前に `it != st.end()` を確かめる
 
-## イテレータの基本：begin は先頭、end は最後の要素の次（*prev(st.end())・*st.rbegin()・next・prev） {#iterators}
+## イテレータの基本：begin は先頭、end は最後の要素の次（prev・next・rbegin） {#iterators}
 
 [イテレータ](../guide/glossary.md#iterator)は、コンテナの中の 1 つの位置を指す物で、`*it` でその位置の要素を読む。`begin()` は先頭の要素を指し、`end()` は最後の要素の**次**（要素のない位置）を指す。コンテナ全体は半開区間 $[\texttt{begin}, \texttt{end})$ に当たり、空のコンテナでは `begin() == end()` になる。
 
@@ -207,7 +207,7 @@ vector は要素を連続したメモリに置く。`push_back` で容量（`cap
 ??? question "確認問題：`int& r = v.back(); v.push_back(0); r++;` は安全か"
     安全とは言えない。`push_back` で容量が足りずに再確保されると、`r` は解放されたメモリを指し、`r++` は未定義動作になる。容量に余りがあれば再確保は起きない。しかし、余りの有無は `capacity()` を見ないと分からない。添字 `int i = v.size() - 1;` を覚えておき、`push_back` の後で `v[i]++` と書く。
 
-## unordered_map：pair のキーにはハッシュがない（コンパイルエラー）、自作のハッシュの渡し方、衝突を狙った入力（安全な設計は hash-safety） {#unordered-map}
+## unordered_map：pair のキーにはハッシュがない、自作のハッシュ、衝突を狙った入力 {#unordered-map}
 
 unordered_map はキーのハッシュ値で置き場所を決めるので、キーの型にハッシュ関数 `hash<キーの型>` が要る。`int`・`long long`・`string` にはあるが、`pair` と `tuple` にはない。`unordered_map<pair<int, int>, int>` は、g++-13・g++-15 とも `use of deleted function` でコンパイルエラーになる。g++-15 では、その前に `hash function must be copy constructible` が出る。エラーの中に `_Hash = std::hash<std::pair<int, int> >` と出ていれば、この原因である。
 
@@ -232,7 +232,7 @@ unordered_map はキーのハッシュ値で置き場所を決めるので、キ
 - **衝突を狙った入力**：libstdc++ の `hash<int>` と `hash<long long>` は値をそのまま返す（手元で `hash<int>{}(12345)` は 12345 だった）。そのため、置き場所の数の倍数ばかりを入れる入力を作られると、すべてが同じ場所に集まって 1 回の操作が $O(N)$ になる。上の自作のハッシュは、実行ごとに変わる値を足してから値を混ぜる関数（splitmix64）を通し、狙いを外している。攻撃の仕組みと安全な設計は[ハッシュの衝突と安全な設計](../string/hash-safety.md)で扱う
 - **使い分け**：AtCoder では、まず map・ソート・[座標圧縮](../basics/coordinate-compression.md)で書けないかを考える。unordered_map は定数倍が軽いが、反復の順序が決まらず、`lower_bound` も使えない
 
-## pb_ds の順序付き集合：tree と order_of_key・find_by_order、重複は (値, 通し番号) にする（GCC の拡張） {#pb-ds}
+## pb_ds の順序付き集合：tree と order_of_key・find_by_order（GCC の拡張） {#pb-ds}
 
 pb_ds（policy-based data structures）は GCC に付いてくるライブラリで、その `tree` は set に 2 つの操作を足した物として使える。`order_of_key(x)` は $x$ 未満の要素の個数を、`find_by_order(k)` は小さいほうから $k$ 番目（0 から数える）の要素のイテレータを返す。どちらも $O(\log N)$ である。
 

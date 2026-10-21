@@ -27,7 +27,6 @@ sections:
   - {title: 削除・更新（どちらにあるかを見て消してから回復する）, anchor: erase-update}
   - {title: 中央値を保つ（個数の差を 1 以内に。削除がなければヒープ 2 本）と Σ|x − a_i| の更新, anchor: median}
   - {title: 値を添字にした BIT・セグメント木で書く方法（→ 値を添字にする BIT・セグメント木）, anchor: by-index}
-  - {title: 落とし穴（同じ値の削除先・multiset の erase・和の更新漏れ）, anchor: pitfalls}
   - {title: '|x − a| + b を足していく関数の最小値（中央値の更新の応用。Slope Trick の入口）', anchor: absolute-sum-function, level: 黄}
 stage: draft
 updated: 2026-10-21
@@ -177,7 +176,7 @@ $$
 
 $K$ が固定か 1 ずつ動くだけなら 2 つの multiset が手軽である。毎回違う $K$ を問われる・$K$ 番目の値そのものも要るといった場合は、[値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md)と [K 番目の値を求めるデータ構造](../ds/kth-element.md)の方法を使う。
 
-## 落とし穴（同じ値の削除先・multiset の erase・和の更新漏れ） {#pitfalls}
+## 落とし穴 {#pitfalls}
 
 **`L.erase(x)` で同じ値をすべて消す**。multiset の `erase` に値を渡すと、その値の要素が全部消える。1 個だけ消すには `L.erase(L.find(x))` と書く（[multiset から 1 個だけ消す](../cpp/cpp-container-idioms.md#multiset-erase-one)）。同じ値が多い入力でだけ答えが合わなくなるので、小さい例では気づきにくい。
 

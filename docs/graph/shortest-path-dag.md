@@ -1,7 +1,7 @@
 ---
 id: shortest-path-dag
 title: 最短路 DAG
-aliases: [最短路木, 最短経路の数え上げ, 最短路に必ず使われる辺, shortest path DAG]
+aliases: [最短路木, 最短経路の数え上げ, 最短路に必ず使われる辺, すべての最短路に含まれる辺, shortest path DAG]
 type: technique
 field: graph
 chapter: 最短路
@@ -13,7 +13,7 @@ related: [bfs, minimum-spanning-tree, lowlink, warshall-floyd, complement-graph-
 summary: 始点からの距離 d で d(v) = d(u) + w(u, v) を満たす辺だけを残すと DAG になり、最短路はその上のパスと一対一に対応する。最短路の本数・最短路木・必ず使われる辺が分かる。
 complexity: 距離を求めるのに O((N + M) log N)（重みがすべて 1 なら BFS で O(N + M)）。DAG を作るのと本数の DP は、距離の順に並べて O(N log N + M)
 signs:
-  - {type: phrase, text: 最短経路の本数を数える}
+  - {type: phrase, text: 最短路の本数を数える}
   - {type: phrase, text: この辺を通らなくても最短距離は変わらないか・最短路に使われない辺}
   - {type: phrase, text: 始点からの最短距離を保ったまま辺を減らし、全域木を出力する}
 acl: []
@@ -39,7 +39,7 @@ updated: 2026-10-21
     - **前提**：[ダイクストラ法](../graph/dijkstra.md)、[DAG 上の DP](../dp/dp-dag.md)
 
 <!-- textlint-disable -->
-別名：最短路木・最短経路の数え上げ・最短路に必ず使われる辺・shortest path DAG
+別名：最短路木・最短経路の数え上げ・最短路に必ず使われる辺・すべての最短路に含まれる辺・shortest path DAG
 <!-- textlint-enable -->
 
 最短路 DAG は、始点からの距離がちょうど辺の重みだけ増える辺だけを集めたグラフである。経路復元が最短路を 1 本だけ取り出すのに対し、最短路 DAG はすべての最短路を一度に表す。最短路についての「何本あるか」「この辺を使うか」「全部がこの辺を通るか」という問いは、この DAG の上の DP と、両端からの距離の比較に帰着する。

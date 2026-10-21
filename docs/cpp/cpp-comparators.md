@@ -9,21 +9,21 @@ order: 120
 level: 基礎
 kind: [実装・C++, ソート・座標圧縮]
 prerequisites: [cpp-lambda]
-related: [cpp-container-idioms, cpp-algorithms, cpp-structured-bindings, cpp-undefined-behavior, sorting-techniques, priority-queue, dijkstra]
+related: [cpp-container-idioms, cpp-algorithms, cpp-structured-bindings, cpp-undefined-behavior, sorting-techniques, priority-queue, dijkstra, minimum-spanning-tree]
 summary: sort・set・priority_queue に渡す比較関数を約束（狭義の弱順序）と向きを守って書き、構造体に operator< や <=> で順序を持たせる。比較関数に <= を書いて sort が落ちるような事故を防ぐ。
 complexity: '比較関数は sort で O(N log N) 回、set・map・priority_queue の 1 回の操作で O(log N) 回呼ばれる'
 signs: []
 acl: []
 sections:
   - {title: 比較関数の約束：a が b より前なら true を返し、狭義の弱順序を満たす（a と a を比べたら false）, anchor: strict-weak-ordering}
-  - {title: 比較関数に <= を書くと sort が壊れる（同じ値が多いと Segmentation fault。_GLIBCXX_DEBUG で見つかる）, anchor: less-equal-pitfall}
-  - {title: '降順：greater<T>・greater<>（型の違う値も比べられる）・greater{}（CTAD で greater<void>）', anchor: greater}
-  - {title: priority_queue の向き：既定は最大が先頭、greater で最小が先頭（比較関数は「優先度が低い」を表すので sort と向きが逆に見える）, anchor: priority-queue-order}
+  - {title: 比較関数に「以下」を書くと sort が壊れる（同じ値が多いと Segmentation fault）, anchor: less-equal-pitfall}
+  - {title: 降順：greater の 3 つの書き方（型を書く・型を省く・CTAD）, anchor: greater}
+  - {title: priority_queue の向き：既定は最大が先頭、greater で最小が先頭, anchor: priority-queue-order}
   - {title: set・map の比較関数は「同じ」も決める（second だけで比べると、second の等しい要素が 1 個しか残らない）, anchor: set-equivalence}
-  - {title: '複数のキーで比べる：pair・tuple の辞書順、tie(a.x, a.y) < tie(b.x, b.y)', anchor: multiple-keys}
-  - {title: 'ラムダの比較関数を型として渡す：set<T, decltype(cmp)>（C++20。C++17 では pq(cmp) と渡す）', anchor: lambda-comparator-type}
-  - {title: 構造体に operator< を持たせる（メンバ関数に const が要る）, anchor: operator-less}
-  - {title: auto operator<=>(const T&) const = default で 6 つの比較をメンバの宣言順の辞書順で使えるようにする（C++20）, anchor: spaceship}
+  - {title: 複数のキーで比べる：pair・tuple の辞書順と tie, anchor: multiple-keys}
+  - {title: ラムダの比較関数を型として渡す：decltype（C++20。C++17 では pq(cmp) と渡す）, anchor: lambda-comparator-type}
+  - {title: 構造体に比較演算子の小なりを持たせる（メンバ関数に const が要る）, anchor: operator-less}
+  - {title: 三方比較演算子の default で 6 つの比較を宣言順の辞書順にする（C++20）, anchor: spaceship}
 stage: draft
 updated: 2026-10-21
 cpp_std: null
@@ -64,7 +64,7 @@ atcoder: true
 - **既定では**：比較関数を渡さない `sort(v.begin(), v.end())` は、要素の `<` を使う。`cmp` を渡すと、その `<` を `cmp` に置き換えて並べる
 - **落とし穴**：比較関数の中で重い計算をしない。`sort` では $O(N \log N)$ 回呼ばれる。キーは先に計算して配列で持ち、引数は `const T&` で受ける
 
-## 比較関数に <= を書くと sort が壊れる（同じ値が多いと Segmentation fault。_GLIBCXX_DEBUG で見つかる） {#less-equal-pitfall}
+## 比較関数に「以下」を書くと sort が壊れる（同じ値が多いと Segmentation fault） {#less-equal-pitfall}
 
 比較関数に `<=`（降順なら `>=`）を書くと、等しい 2 つで true を返し、「自分自身と比べたら false」の約束を破る。約束を破った比較関数を `sort` に渡すのは[未定義動作](../cpp/cpp-undefined-behavior.md)で、コンパイラは警告を出さない。
 
@@ -87,7 +87,7 @@ atcoder: true
 - **直し方**：昇順は `<`、降順は `>` を書く。`=` を付けない
 - **落とし穴**：`set`・`map` に `<=` の比較関数を渡すと、同じ値を何度でも入れられてしまい、`find` で見つからなくなる。どのコンテナでも、比較関数は `<` か `>` で書く
 
-## 降順：greater&lt;T&gt;・greater&lt;&gt;（型の違う値も比べられる）・greater{}（CTAD で greater&lt;void&gt;） {#greater}
+## 降順：greater の 3 つの書き方（型を書く・型を省く・CTAD） {#greater}
 
 `greater` は `a > b` を返す関数オブジェクトで、比較関数として渡すと降順になる。書き方は 3 通りある。
 
@@ -109,7 +109,7 @@ atcoder: true
 - **使い分け**：型を書き間違えないよう、`greater<>()` か `greater{}` を使うとよい。`less` も同じで、`less<>` は `<` を型を変換せずに呼ぶ
 - **素朴に書くと**：`[](const auto& a, const auto& b) { return a > b; }` と同じである
 
-## priority_queue の向き：既定は最大が先頭、greater で最小が先頭（比較関数は「優先度が低い」を表すので sort と向きが逆に見える） {#priority-queue-order}
+## priority_queue の向き：既定は最大が先頭、greater で最小が先頭 {#priority-queue-order}
 
 `priority_queue` の比較関数 `cmp(a, b)` は「`a` は `b` より優先度が低い（後で取り出す）」を意味する。既定の比較関数は `less` なので、小さいものほど後になり、最大が `top` に来る。`greater` を渡すと、大きいものほど後になり、最小が `top` に来る。
 
@@ -150,7 +150,7 @@ atcoder: true
 - **使い分け**：同じキーを重ねて持ちたいなら `multiset` を使う。ただし `multiset` でも「同じ」の判定は比較関数で行うので、`erase(x)` は比較関数で同じとみなされる要素をすべて消す（1 個だけ消す書き方は[コンテナの定型](../cpp/cpp-container-idioms.md#multiset-erase-one)）
 - **落とし穴**：`sort` では「同じ」要素は並ぶだけで消えない。同じ比較関数を `set` に移すと要素が減るので、移す前に、比較関数がすべてのメンバを見ているかを確かめる
 
-## 複数のキーで比べる：pair・tuple の辞書順、tie(a.x, a.y) &lt; tie(b.x, b.y) {#multiple-keys}
+## 複数のキーで比べる：pair・tuple の辞書順と tie {#multiple-keys}
 
 `pair` と `tuple` の `<` は辞書順である。1 つ目で比べ、等しければ 2 つ目で比べる。比較関数を書かずに 2 つのキーで並べられる。
 
@@ -170,7 +170,7 @@ atcoder: true
 - **使い分け**：数のキーなら、`pair(-a.score, a.name)` のように符号を反転したキーで比べても降順にできる。符号を反転すると `INT_MIN` であふれるので、範囲に気をつける
 - **関連**：`tie` のほかの使い方は[構造化束縛と tie](../cpp/cpp-structured-bindings.md#tie)。構造体に順序を 1 つだけ持たせるなら、[operator<](#operator-less) や [<=>](#spaceship) で書く
 
-## ラムダの比較関数を型として渡す：set&lt;T, decltype(cmp)&gt;（C++20。C++17 では pq(cmp) と渡す） {#lambda-comparator-type}
+## ラムダの比較関数を型として渡す：decltype（C++20。C++17 では pq(cmp) と渡す） {#lambda-comparator-type}
 
 `sort` には比較関数そのものを引数で渡すが、`set`・`map`・`priority_queue` には比較関数の「型」をテンプレート引数で渡す。ラムダ式の型には名前がないので、`decltype(cmp)` で取り出す（[ラムダ式と再帰ラムダ](../cpp/cpp-lambda.md)）。
 
@@ -196,7 +196,7 @@ C++17 では、ラムダの型から比較関数を作れないので、`set<int
 - **落とし穴**：`by_w` で比べる `set` に入れた後で `w` を書き換えると、`set` の中の並びが崩れ、`find` などが正しく動かない。キーにする値は、入れている間は変えない
 - **関連**：`priority_queue pq(greater<int>{}, vector<int>{})` のように型引数を省く書き方は[初期化と CTAD](../cpp/cpp-initialization.md#ctad-std-types)
 
-## 構造体に operator&lt; を持たせる（メンバ関数に const が要る） {#operator-less}
+## 構造体に比較演算子の小なりを持たせる（メンバ関数に const が要る） {#operator-less}
 
 構造体に `operator<` を書くと、比較関数を渡さずに `sort`・`set`・`priority_queue` が使える。メンバ関数として書くときは、引数を `const T&` で受け、最後に `const` を付ける。
 
@@ -215,7 +215,7 @@ g++-13・g++-15 では `no match for 'operator<' (operand types are 'const Seg' 
 - **素朴に書くと**：`sort(v.begin(), v.end(), [](const Seg& a, const Seg& b) { return a.r < b.r; });` と同じ順である。順序がその構造体で 1 つに決まるなら `operator<`、場面ごとに違う順で並べるならラムダの比較関数を使う
 - **落とし穴**：`operator<` を右端 `r` だけで書くと、`set<Seg>` では右端の等しい区間が 1 つしか入らない（[set・map の比較関数は「同じ」も決める](#set-equivalence)）
 
-## auto operator&lt;=&gt;(const T&amp;) const = default で 6 つの比較をメンバの宣言順の辞書順で使えるようにする（C++20） {#spaceship}
+## 三方比較演算子の default で 6 つの比較を宣言順の辞書順にする（C++20） {#spaceship}
 
 `auto operator<=>(const T&) const = default;` を書くと、`<`・`<=`・`>`・`>=`・`==`・`!=` の 6 つの比較が使えるようになる。`==` はコンパイラが合わせて作り、`<` などは `<=>` を使う式に、`!=` は `==` を使う式に書き換えられる。比べ方はメンバの宣言順の辞書順である。1 つ目のメンバで比べ、等しければ 2 つ目で比べる。`<=>` を三方比較演算子（宇宙船演算子）という。
 

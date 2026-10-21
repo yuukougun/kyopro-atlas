@@ -1,6 +1,6 @@
 ---
 id: cpp-views-cpp23
-title: C++23 の views と ranges::to
+title: 'C++23 の views と ranges::to'
 aliases: ['views::enumerate', 'views::zip', 'views::zip_transform', 'views::pairwise', 'views::adjacent', 'views::chunk', 'views::slide', 'views::chunk_by', 'views::stride', 'views::cartesian_product', 'views::repeat', 'views::join_with', 'ranges::to', to<vector>, from_range, append_range]
 type: cpp
 field: cpp
@@ -17,15 +17,15 @@ acl: []
 sections:
   - {title: 'views::enumerate：（添字, 要素への参照）の組を作る、添字は ptrdiff_t（C++23・GCC 13〜）', anchor: enumerate}
   - {title: 'views::zip・zip_transform：同じ位置の要素の組、短いほうに合わせる（C++23・GCC 13〜）', anchor: zip}
-  - {title: pairwise・adjacent<k>・pairwise_transform：隣り合う組と差分（C++23・GCC 13〜）, anchor: adjacent}
+  - {title: pairwise・adjacent・pairwise_transform：隣り合う組と差分（C++23・GCC 13〜）, anchor: adjacent}
   - {title: chunk・slide・stride：k 個ずつの塊・長さ k の窓・k 個おき（C++23・GCC 13〜）, anchor: chunk-slide-stride}
-  - {title: 'chunk_by：隣どうしで条件が成り立つ間をまとめる、s | views::chunk_by(equal_to{}) でランレングス圧縮（C++23・GCC 13〜）', anchor: chunk-by}
+  - {title: chunk_by：隣どうしで条件が成り立つ間をまとめる（C++23・GCC 13〜）, anchor: chunk-by}
   - {title: cartesian_product：二重ループ・グリッドの全マスを 1 つのループにする（C++23・GCC 13〜）, anchor: cartesian-product}
   - {title: repeat・join_with・as_const（C++23・GCC 13〜）, anchor: repeat-join-with}
-  - {title: '要素は参照を含む組：auto [i, x] でも x は元の要素を指す、auto& で受けるとエラー、const auto& でも書き換えを防げない（C++23・GCC 13〜）', anchor: reference-tuples}
-  - {title: 'enumerate の添字を int にしたいとき：views::zip(views::iota(0), v)（max(best, i) の型の不一致を避ける）（C++23・GCC 13〜）', anchor: int-index}
-  - {title: 'ranges::to<vector>()・to<set>()・入れ子の to<vector<vector<int>>>()（C++23・GCC 14〜）', anchor: ranges-to}
-  - {title: 'from_range・insert_range・append_range（C++23・GCC 15〜）と、GCC 13 での代わり（views::common を挟んでイテレータの組から作る）', anchor: from-range}
+  - {title: 要素は参照を含む組：構造化束縛でも元の要素を指す（C++23・GCC 13〜）, anchor: reference-tuples}
+  - {title: enumerate の添字を int にしたいとき：zip と iota で作る（C++23・GCC 13〜）, anchor: int-index}
+  - {title: 'ranges::to でコンテナに変換する（入れ子も。C++23・GCC 14〜）', anchor: ranges-to}
+  - {title: from_range・insert_range・append_range（C++23・GCC 15〜）と GCC 13 での代わり, anchor: from-range}
   - {title: 'views::concat（C++26）は AtCoder では使えない', anchor: concat}
 stage: draft
 updated: 2026-10-21
@@ -88,7 +88,7 @@ C++23 の views は、[views の基本](../cpp/cpp-views-basics.md)の部品（`
 - **版**：C++23。g++-13・g++-15 で使える。要素の型は、2 つの範囲の zip で g++-13 が `pair<int&, int&>`、g++-15 が `tuple<int&, int&>` だった（エラーの文面に出る）。構造化束縛で受ける限り違いはない
 - **落とし穴**：長さが違うときは、警告やエラーなしに長いほうの残りが黙って捨てられる。長さがそろっている前提なら、先に `assert(a.size() == b.size())` を置く
 
-## pairwise・adjacent<k>・pairwise_transform：隣り合う組と差分（C++23・GCC 13〜） {#adjacent}
+## pairwise・adjacent・pairwise_transform：隣り合う組と差分（C++23・GCC 13〜） {#adjacent}
 
 `a | views::pairwise` は隣り合う 2 個の組 $(a_i, a_{i+1})$ を順に作る。`a | views::adjacent<k>` は連続する $k$ 個の組を作り、`pairwise` は `adjacent<2>` と同じである。`a | views::pairwise_transform(f)` は、組の代わりに $f(a_i, a_{i+1})$ を並べる。差分の列は `f` を `q - p` にすれば作れる。
 
@@ -120,7 +120,7 @@ C++23 の views は、[views の基本](../cpp/cpp-views-basics.md)の部品（`
 - **版**：C++23。g++-13・g++-15 で使える。GCC 13 の更新の一覧には `chunk` と `slide` が載っている。`stride` は載っていないが、手元の g++-13 で使えた
 - **落とし穴**：`slide(k)` の各窓は元の配列を見るだけで、窓の和を覚えない。上の例のように窓ごとに `fold_left` で足すと $O(Nk)$ かかる。$N = 2 \times 10^5$・$k = 10^5$ なら約 $10^{10}$ 回で間に合わないので、[累積和](../basics/prefix-sum.md)や[尺取り法](../basics/two-pointers.md)で $O(N)$ にする
 
-## chunk_by：隣どうしで条件が成り立つ間をまとめる、s | views::chunk_by(equal_to{}) でランレングス圧縮（C++23・GCC 13〜） {#chunk-by}
+## chunk_by：隣どうしで条件が成り立つ間をまとめる（C++23・GCC 13〜） {#chunk-by}
 
 `a | views::chunk_by(pred)` は、隣り合う 2 個 $(a_i, a_{i+1})$ で `pred(a_i, a_{i+1})` が偽になる所で区切り、残りをつないだ塊の列を作る view である。`pred` に `equal_to{}` を渡すと、同じ値が続く塊ごとに分かれる。これが[ランレングス圧縮](../basics/run-length-encoding.md)である。
 
@@ -171,7 +171,7 @@ C++23 の views は、[views の基本](../cpp/cpp-views-basics.md)の部品（`
 - **版**：C++23。g++-13・g++-15 で使える。GCC 13 の更新の一覧には `repeat` と `as_const` が載っている。`join_with` は載っていないが、手元の g++-13 で使えた
 - **落とし穴**：上の書き方は数ごとに `to_string` で文字列を作り、1 文字ずつ出すので、$10^6$ 個の数を出すような場面では遅くなりうる。普段の出力はループで書けば十分である
 
-## 要素は参照を含む組：auto [i, x] でも x は元の要素を指す、auto& で受けるとエラー、const auto& でも書き換えを防げない（C++23・GCC 13〜） {#reference-tuples}
+## 要素は参照を含む組：構造化束縛でも元の要素を指す（C++23・GCC 13〜） {#reference-tuples}
 
 `enumerate`・`zip`・`pairwise`・`adjacent`・`cartesian_product`（範囲が配列のとき）の要素は、回すたびにその場で作られる組である。組の中身は元の要素への参照（`tuple<ptrdiff_t, int&>` など）である。このため、範囲 for の受け方は [普通の vector を回すとき](../cpp/cpp-range-for.md#range-for-forms)と意味が変わる。
 
@@ -198,7 +198,7 @@ g++-13・g++-15 とも、エラーは `cannot bind non-const lvalue reference of
 - **版**：C++23。g++-13・g++-15 で同じ型だった
 - **落とし穴**：「`auto` で受けたからコピーで安全」と考えて、ループの中で `x` を作業用の変数として書き換えると、元の配列が壊れる。作業用にするなら `int y = x;` と別の変数に写す
 
-## enumerate の添字を int にしたいとき：views::zip(views::iota(0), v)（max(best, i) の型の不一致を避ける）（C++23・GCC 13〜） {#int-index}
+## enumerate の添字を int にしたいとき：zip と iota で作る（C++23・GCC 13〜） {#int-index}
 
 `views::enumerate` の添字は `ptrdiff_t`（64 bit の Linux では `long`）である。`std::max` は 2 つの引数が同じ型であることを求めるので、`int` の変数と比べるとコンパイルエラーになる。
 
@@ -217,7 +217,7 @@ g++-13・g++-15 とも、エラーは `cannot bind non-const lvalue reference of
 - **落とし穴 1**：`best` を `long long` にしても通らない。`ptrdiff_t` は 64 bit の Linux では `long` で、`long long` とは別の型だからである
 - **落とし穴 2**：`for (auto [i, x] : …)` の `i` を `int` で受けることはできない（構造化束縛は型を書けない）。型を変えたいなら、上のように作る側で決める
 
-## ranges::to<vector>()・to<set>()・入れ子の to<vector<vector<int>>>()（C++23・GCC 14〜） {#ranges-to}
+## ranges::to でコンテナに変換する（入れ子も。C++23・GCC 14〜） {#ranges-to}
 
 `r | ranges::to<C>()` は、範囲 `r` の要素を並べたコンテナ `C` を作る。view は値を覚えないので、何度も使う結果や並べ替えたい結果は `ranges::to` で `vector` などにする。`ranges::to<vector>()` のように要素の型を省くと、`r` の要素の型から推論される。入れ子の範囲は `ranges::to<vector<vector<int>>>()` と型を全部書くと、内側も変換される（`ranges::to<vector>()` だと内側は view のまま入る）。
 
@@ -231,7 +231,7 @@ g++-13・g++-15 とも、エラーは `cannot bind non-const lvalue reference of
 - **版**：C++23。GCC 14 から使え、AtCoder の GCC 15.2 と手元の g++-15 では使える。g++-13 では `'to' is not a member of 'std::ranges'` のコンパイルエラーになる。g++-13 での代わりは [from_range と GCC 13 での代わり](#from-range)
 - **落とし穴**：`ranges::to` は要素をすべてコピーするので、要素数に比例する時間とメモリを使う。1 回回すだけなら、`to` せずに view のまま回す
 
-## from_range・insert_range・append_range（C++23・GCC 15〜）と、GCC 13 での代わり（views::common を挟んでイテレータの組から作る） {#from-range}
+## from_range・insert_range・append_range（C++23・GCC 15〜）と GCC 13 での代わり {#from-range}
 
 GCC 15 から、コンテナの側にも範囲を受け取る関数がある。
 

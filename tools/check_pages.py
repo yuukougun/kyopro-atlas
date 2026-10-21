@@ -27,6 +27,10 @@
                 取り込むコード片のファイル・範囲（[start:名前]）がない、
                 stage が draft 以降なのに sections の anchor が本文の見出し（{#anchor}）にない、
                 stage が reviewed 以降なのに別名が冒頭（最初の ## より前）にない
+  リンク        本文の相対リンク（[..](../<field>/<id>.md#anchor)・[..](#anchor)・用語集の #anchor。コードの中は見ない）を
+                mkdocs build --strict の validation と同じ見方で確かめる：先のファイルがない、相対リンクとして解釈できない
+                （生の [&](auto&& self) など）、絶対パス、先に anchor がない（見出しの {#id}・toc が見出しから作る id・
+                attr_list の {#id}・HTML の id・脚注）、用語集に anchor がない、stage が stub のページの節へのリンク
 警告
   前提のレベルの逆転、節のレベルがページより低い・基礎のページに黄・発展の節、同じ分野の前提が order で後ろ、
   推移的に冗長な前提、前提と related の重複、自分への related、level が発展なのに type が overview でない、
@@ -50,6 +54,7 @@ import posixpath
 import re
 import sys
 import unicodedata
+import urllib.parse
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -356,7 +361,9 @@ class Page:
     def url(self) -> str:
         """サイトのルートからの URL（use_directory_urls）。"""
         stem = self.rel[:-3]
-        return (stem[: -len("index")] if stem.endswith("index") else stem + "/")
+        # index.md と <dir>/index.md だけがディレクトリの URL になる（cpp-reverse-index.md は違う）
+        is_index = stem == "index" or stem.endswith("/index")
+        return (stem[: -len("index")] if is_index else stem + "/")
 
     def line_no(self, i: int) -> int:
         return self.body_line + i
@@ -746,9 +753,188 @@ def check_snippet_ref(p: Page, rep: Report, snippets: Path, ref: str, line: int)
             rep.error("取り込むコード片がない", p.rel, f"{p.rel}:{line}: snippets/{path} に範囲 [start:{section}]〜[end:{section}] がない")
 
 
+# ---------------------------------------------------------------- 本文のリンクと anchor（mkdocs build --strict の validation に合わせる）
+
+# [文字](行き先) と ![代替](行き先)。文字は1段の [ ] を含んでよい。行き先は1段のかっこを含んでよい（Python-Markdown と同じ）
+LINK_RE = re.compile(r"(?<!\\)!?\[(?:[^\[\]\\\n]|\\.|\[(?:[^\[\]\\\n]|\\.)*\])*\]\((?P<dest>(?:[^()\n]|\([^()\n]*\))*)\)")
+REFDEF_RE = re.compile(r"^[ ]{0,3}\[(?!\^)[^\]]+\]:\s*(?P<dest>\S+)")
+CODE_SPAN_RE = re.compile(r"(`+)(?:(?!\1).)+?\1")
+MATH_RE = re.compile(r"\$\$.+?\$\$|(?<![\\$])\$(?!\s)(?:\\.|[^$\\\n])+?(?<!\s)\$")
+ATTR_ANY_RE = re.compile(r"\{:?[^{}\n]*?#(?P<id>[A-Za-z0-9_:.-]+)[^{}\n]*\}")
+ANY_HEADING_RE = re.compile(r"^\s*(?P<hashes>#{1,6})\s+(?P<text>.*?)\s*#*\s*$")
+HTML_NAME_RE = re.compile(r"""<a\s[^>]*?\bname=["'](?P<id>[^"']+)["']""")
+FOOTNOTE_DEF_RE = re.compile(r"^\[\^(?P<id>[^\]]+)\]:")
+FOOTNOTE_REF_RE = re.compile(r"\[\^(?P<id>[^\]]+)\](?!:)")
+GLOSSARY_REL = "guide/glossary.md"
+
+
+def prose_lines(p: Page) -> list[tuple[int, str]]:
+    """フェンス・HTML のコメント・$$ の数式ブロックの外の行 (本文の行の番号, 行)。行の中のコード（`…`）と数式（$…$）は空白にする。"""
+    out, in_comment, in_math = [], False, False
+    for i, raw in enumerate(p.lines):
+        if p.in_fence[i]:
+            continue
+        s = raw
+        if in_comment:
+            if "-->" not in s:
+                continue
+            s, in_comment = s.split("-->", 1)[1], False
+        s = re.sub(r"<!--.*?-->", "", s)
+        if "<!--" in s:
+            s, in_comment = s.split("<!--", 1)[0], True
+        if s.strip() == "$$":
+            in_math = not in_math
+            continue
+        if in_math:
+            continue
+        s = CODE_SPAN_RE.sub(lambda m: " " * len(m.group(0)), s)
+        s = MATH_RE.sub(lambda m: " " * len(m.group(0)), s)
+        out.append((i, s))
+    return out
+
+
+def link_dest(dest: str) -> str:
+    """リンクの (…) の中から行き先を取り出す（Python-Markdown と同じく、"題" が続かなければ空白も行き先に含める）。"""
+    d = dest.strip()
+    if d.startswith("<") and ">" in d:
+        return d[1:d.index(">")]
+    m = re.match(r"""^(\S+)\s+(?:"[^"]*"|'[^']*'|\([^()]*\))$""", d)
+    return m.group(1) if m else d
+
+
+def page_links(p: Page) -> list[tuple[int, str]]:
+    """本文のリンク (ファイルの行番号, 行き先)。コードの中のものは入れない。"""
+    out = []
+    for i, s in prose_lines(p):
+        for m in LINK_RE.finditer(s):
+            out.append((p.line_no(i), link_dest(m.group("dest"))))
+        if m := REFDEF_RE.match(s):
+            out.append((p.line_no(i), m.group("dest").strip("<>")))
+    return out
+
+
+def heading_attr(text: str) -> tuple[str | None, str]:
+    """見出しの末尾の attr_list：(id, attr_list を除いた文字)。attr_list の HEADER_RE と同じく、コードの外で最初の
+    ' {' から末尾の '}' までを attr_list とみなすので、途中に { } があれば（例 [&] { ... }(); … {#x}）attr_list にならない。"""
+    t = CODE_SPAN_RE.sub(lambda m: " " * len(m.group(0)), text)
+    m = re.search(r"[ ]+\{:?[ ]*([^}\n ][^\n]*)[ ]*\}[ ]*$", t)
+    if not m or "{" in m.group(1) or "}" in m.group(1):
+        return None, text
+    a = re.search(r"(?:^|\s)#([^\s}]+)", m.group(1))
+    return (a.group(1) if a else None), text[:m.start()]
+
+
+def heading_slug(text: str) -> str:
+    """見出しの文字から toc が作る id（mkdocs.yml の pymdownx.slugs.slugify(case=lower) の近似）。"""
+    import html
+    t = re.sub(r"!?\[([^\]]*)\]\([^)]*\)", r"\1", text)                 # リンクは文字だけ
+    t = re.sub(r"(`+)(.+?)\1", r"\2", t)
+    t = re.sub(r"\*\*|__|(?<!\w)[*_]|[*_](?!\w)", "", t)
+    t = re.sub(r"</?[^>]*>", "", html.unescape(t))
+    t = unicodedata.normalize("NFC", t).strip().lower()
+    return re.sub(r"[^\w\- ]", "", t).replace(" ", "-")
+
+
+def page_anchor_ids(p: Page) -> set[str]:
+    """ページを描画したときにある id（見出しの {#id} と toc が作る id、attr_list の {#id}、HTML の id・name、脚注）。"""
+    cached = getattr(p, "_anchor_ids", None)
+    if cached is not None:
+        return cached
+    ids: set[str] = set()
+    heads: list[str] = []
+    for i, s in prose_lines(p):
+        raw = p.lines[i]
+        h = ANY_HEADING_RE.match(raw)
+        if h:
+            hid, htext = heading_attr(h.group("text"))
+            if hid:
+                ids.add(hid)
+            else:
+                heads.append(htext)
+        else:
+            for m in ATTR_ANY_RE.finditer(s):
+                ids.add(m.group("id"))
+        for m in HTML_ID_RE.finditer(raw):
+            ids.add(m.group("id"))
+        for m in HTML_NAME_RE.finditer(raw):
+            ids.add(m.group("id"))
+        if m := FOOTNOTE_DEF_RE.match(raw):
+            ids.add("fn:" + m.group("id"))
+        for m in FOOTNOTE_REF_RE.finditer(s):
+            ids.add("fnref:" + m.group("id"))
+    for text in heads:              # toc の unique()：重なれば _1, _2 …
+        a = heading_slug(text)
+        while a in ids or not a:
+            m = re.match(r"^(.*)_([0-9]+)$", a)
+            a = f"{m.group(1)}_{int(m.group(2)) + 1}" if m else f"{a}_1"
+        ids.add(a)
+    p._anchor_ids = ids
+    return ids
+
+
+def check_links(all_pages: list[Page], rep: Report, docs: Path) -> None:
+    """本文の相対リンクを mkdocs の validation（unrecognized_links・not_found・anchors）と同じ見方で確かめる。"""
+    by_rel = {p.rel: p for p in all_pages}
+    extra_roots = [docs.parent / "overrides"]
+
+    def target_page(rel: str) -> Page | None:
+        if rel not in by_rel:
+            f = docs / rel
+            by_rel[rel] = read_page(f, docs) if f.is_file() else None
+        return by_rel[rel]
+
+    for p in all_pages:
+        for no, url in page_links(p):
+            where = f"{p.rel}:{no}"
+            parts = urllib.parse.urlsplit(url)
+            if parts.scheme or parts.netloc:
+                continue
+            if url.startswith(("/", "\\")):
+                rep.error("絶対パスのリンク", p.rel, f"{where}: 絶対パスのリンク {url!r}（相対パス ../<field>/<id>.md で書く）")
+                continue
+            path, anchor = urllib.parse.unquote(parts.path), parts.fragment
+            if not path:
+                q, trel = p, p.rel
+            else:
+                trel = posixpath.normpath(posixpath.join(posixpath.dirname(p.rel), path))
+                exists = not trel.startswith("../") and ((docs / trel).is_file() or any((r / trel).is_file() for r in extra_roots))
+                if not exists:
+                    if not posixpath.splitext(path)[1]:
+                        rep.error("解釈できない相対リンク", p.rel,
+                                  f"{where}: {url!r} は相対リンクとして解釈できない（MkDocs の unrecognized relative link）。"
+                                  "リンクのつもりでなければ [ を \\[ にするかコード（`…`）に入れる")
+                    else:
+                        rep.error("リンク先のファイルがない", p.rel, f"{where}: {url!r} の先 docs/{trel} がない")
+                    continue
+                if not trel.endswith(".md"):
+                    continue
+                q = target_page(trel)
+            if not anchor or anchor.startswith("__") or q is None:
+                continue
+            if q is not p and q.is_content and q.meta is not None and q.stage == "stub" and trel != GLOSSARY_REL:
+                # 用語集はメインが書く語の辞書で、stage にかかわらず anchor を持つので、下で anchor だけを見る
+                rep.error("準備中のページの節へのリンク", (p.rel, q.rel),
+                          f"{where}: {url} の先 {q.rel} は stage が stub（節へのリンクは draft 以降のページにだけ付ける。"
+                          "ページへのリンクにする）")
+                continue
+            if anchor in page_anchor_ids(q):
+                continue
+            if trel == GLOSSARY_REL:
+                rep.error("用語集に anchor がない", (p.rel, q.rel),
+                          f"{where}: {url}: 用語集に {{#{anchor}}} がない（新しい語なら、語・anchor・定義を報告で提案する）")
+            else:
+                rep.error("リンク先に anchor がない", (p.rel, q.rel),
+                          f"{where}: {url}: {q.rel} に {{#{anchor}}} の見出し・要素がない")
+
+
 def check_all(pages: list[Page], others: list[Page], rep: Report, ledger: dict[str, dict], validator: Validator,
-              snippets: Path, catalog_ids: set[str] | None = None) -> None:
+              snippets: Path, catalog_ids: set[str] | None = None, docs: Path | None = None) -> None:
     catalog_ids = catalog_ids or set()
+    if docs is None and (pages or others):
+        q = (pages or others)[0]
+        docs = Path(str(q.path)[: -len(q.rel)])
+    if docs is not None:
+        check_links(pages + others, rep, docs)
     # ---- ページごと
     by_id: dict[str, Page] = {}
     for p in pages:
@@ -970,7 +1156,7 @@ def main() -> None:
     ledger = load_ledger(args.ledger)
     pages, others = load_docs(docs)
     rep = Report()
-    check_all(pages, others, rep, ledger, validator, args.root / "snippets", load_catalog_ids())
+    check_all(pages, others, rep, ledger, validator, args.root / "snippets", load_catalog_ids(), docs)
 
     keys: set[str] | None = None
     if args.field or args.page:

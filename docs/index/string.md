@@ -20,14 +20,14 @@ search:
 - 前提：`sorting-techniques`
 - サイン：
     - 言い回し：条件を満たす文字列のうち辞書順で最小（最大）のものを出力する
-    - 言い回し：文字を一斉に別の文字へ置き換える操作を繰り返して一致させられるか
+    - 言い回し：2 種類の文字を一斉に入れ替える操作を繰り返して一致させられるか
     - 言い回し：先頭の文字を末尾に移す（回転する）操作を何回か行う
     - 制約：|S| ≤ 5000 程度で、回転や置き方を全部試せる
 - 節：
     - `string-basics#lexicographic-order` 辞書順の定義と std::string の比較（接頭辞は短い方が小さい）：https://yuukougun.github.io/kyopro-atlas/string/string-basics/#lexicographic-order
     - `string-basics#substring-vs-subsequence` 部分文字列（連続）と部分列（連続でなくてよい）の違い：https://yuukougun.github.io/kyopro-atlas/string/string-basics/#substring-vs-subsequence
     - `string-basics#character-mapping` 文字の一斉置換：両方向の対応が一意か（全単射）：https://yuukougun.github.io/kyopro-atlas/string/string-basics/#character-mapping
-    - `string-basics#concat-order` 連結して辞書順最小：長さが違えば a+b < b+a で比べる：https://yuukougun.github.io/kyopro-atlas/string/string-basics/#concat-order
+    - `string-basics#concat-order` 連結して辞書順最小：長さが違えば 2 通りの連結を比べる：https://yuukougun.github.io/kyopro-atlas/string/string-basics/#concat-order
     - `string-basics#rotation` 回転（巡回シフト）の入口：回転回数の全探索と A+A：https://yuukougun.github.io/kyopro-atlas/string/string-basics/#rotation
     - `string-basics#cost-pitfalls` 計算量の落とし穴（substr・+・find は長さに比例する）：https://yuukougun.github.io/kyopro-atlas/string/string-basics/#cost-pitfalls
 
@@ -46,7 +46,7 @@ search:
     - 制約：|S| ≤ 10&#94;5〜10&#94;6、文字は英小文字で 26×(N+1) の表が持てる
 - 節：
     - `subsequence-matching#greedy-matching` 貪欲な照合：できるだけ左で拾うのが最善な理由：https://yuukougun.github.io/kyopro-atlas/string/subsequence-matching/#greedy-matching
-    - `subsequence-matching#next-occurrence` 次の出現位置の表 nxt\[i][c]（後ろから作る・番兵 N）：https://yuukougun.github.io/kyopro-atlas/string/subsequence-matching/#next-occurrence
+    - `subsequence-matching#next-occurrence` 次の出現位置の表（後ろから作る・番兵 N）：https://yuukougun.github.io/kyopro-atlas/string/subsequence-matching/#next-occurrence
     - `subsequence-matching#position-lists` 文字ごとの位置のリストと lower_bound による代用：https://yuukougun.github.io/kyopro-atlas/string/subsequence-matching/#position-lists
     - `subsequence-matching#lexicographically-smallest` 辞書順最小の部分列（残りで足りる範囲の最小の文字を選ぶ）（水）：https://yuukougun.github.io/kyopro-atlas/string/subsequence-matching/#lexicographically-smallest
     - `subsequence-matching#repeated-string` 繰り返した文字列の部分列（文字ごとの累積個数で位置を飛ばす）（青）：https://yuukougun.github.io/kyopro-atlas/string/subsequence-matching/#repeated-string
@@ -65,14 +65,13 @@ search:
     - 言い回し：1 文字の更新と、区間が回文か（一致するか）のクエリ
     - 制約：N ≤ 10&#94;5〜10&#94;6 で、任意の 2 区間の一致判定が Q ≤ 2×10&#94;5 回
 - 節：
-    - `rolling-hash#polynomial-hash` 多項式ハッシュと部分文字列の取り出し（h[r] − h[l]·B^(r−l)）：https://yuukougun.github.io/kyopro-atlas/string/rolling-hash/#polynomial-hash
+    - `rolling-hash#polynomial-hash` 多項式ハッシュと部分文字列の取り出し：https://yuukougun.github.io/kyopro-atlas/string/rolling-hash/#polynomial-hash
     - `rolling-hash#collision-bound` なぜ衝突しにくいか（0 でない多項式の根は次数以下）：https://yuukougun.github.io/kyopro-atlas/string/rolling-hash/#collision-bound
     - `rolling-hash#recommended-design` 推奨する設計：mod 2^61−1 と実行時に乱択した基数（理由は hash-safety）：https://yuukougun.github.io/kyopro-atlas/string/rolling-hash/#recommended-design
     - `rolling-hash#concat-and-reverse` 連結のハッシュと逆向きのハッシュ（回文判定）：https://yuukougun.github.io/kyopro-atlas/string/rolling-hash/#concat-and-reverse
     - `rolling-hash#hash-lcp-binary-search` ハッシュ＋二分探索：LCP・辞書順の比較・最長の繰り返し：https://yuukougun.github.io/kyopro-atlas/string/rolling-hash/#hash-lcp-binary-search
     - `rolling-hash#hash-segment-tree` セグ木に載せるハッシュ：（ハッシュ, B^長さ）の組で更新ありの一致・回文判定（青）：https://yuukougun.github.io/kyopro-atlas/string/rolling-hash/#hash-segment-tree
     - `rolling-hash#when-to-use` ハッシュで代用できる場面とできない場面（Z・Manacher・SA・畳み込みとの使い分け）：https://yuukougun.github.io/kyopro-atlas/string/rolling-hash/#when-to-use
-    - `rolling-hash#pitfalls` 実装の落とし穴（文字を 0 にしない・負の余り・積のオーバーフロー・長さをそろえる）：https://yuukougun.github.io/kyopro-atlas/string/rolling-hash/#pitfalls
 
 ## 集合・多重集合のハッシュ（hashing-for-sets） {#hashing-for-sets}
 
@@ -131,9 +130,9 @@ search:
 - 節：
     - `z-algorithm#pattern-search` Z 配列の定義と、P＋区切り＋T によるパターン検索：https://yuukougun.github.io/kyopro-atlas/string/z-algorithm/#pattern-search
     - `z-algorithm#linear-time` なぜ O(N) か：Z-box の内側は値をコピーでき、比較のたびに右端が進む：https://yuukougun.github.io/kyopro-atlas/string/z-algorithm/#linear-time
-    - `z-algorithm#acl` ACL の z_algorithm（z[0] = n の流儀・vector&lt;int> にして区切りに −1）：https://yuukougun.github.io/kyopro-atlas/string/z-algorithm/#acl
+    - `z-algorithm#acl` ACL の z_algorithm（先頭の値が n になる流儀・区切りの −1）：https://yuukougun.github.io/kyopro-atlas/string/z-algorithm/#acl
     - `z-algorithm#cyclic-shift` 巡回シフト：A+A の中で B を探す（回転 N 回を二重に数えない）：https://yuukougun.github.io/kyopro-atlas/string/z-algorithm/#cyclic-shift
-    - `z-algorithm#period` 周期の判定：p が周期 ⇔ z[p] = N − p：https://yuukougun.github.io/kyopro-atlas/string/z-algorithm/#period
+    - `z-algorithm#period` 周期の判定：p が周期であることと Z 配列の値の関係：https://yuukougun.github.io/kyopro-atlas/string/z-algorithm/#period
     - `z-algorithm#reverse` 反転と連結する：後ろからの一致と回文の接尾辞：https://yuukougun.github.io/kyopro-atlas/string/z-algorithm/#reverse
     - `z-algorithm#prefix-extension` S＋区切り＋T で各位置から S の接頭辞が何文字続くか（DP の材料）（黄）：https://yuukougun.github.io/kyopro-atlas/string/z-algorithm/#prefix-extension
 
@@ -151,12 +150,12 @@ search:
     - 言い回し：文字が 1 つずつ来るたびに、パターンが現れたかを判定する
     - 制約：|S| ≤ 10^6 で、すべての接頭辞について周期や一致する長さを問う
 - 節：
-    - `kmp#failure-function` 失敗関数 π（border）の定義と添字の流儀（π[0] を 0 にするか −1 にするか）：https://yuukougun.github.io/kyopro-atlas/string/kmp/#failure-function
+    - `kmp#failure-function` 失敗関数 π（border）の定義と添字の流儀：https://yuukougun.github.io/kyopro-atlas/string/kmp/#failure-function
     - `kmp#linear-time` なぜ O(N) か：照合長は 1 文字で高々 1 増え、ループで減る回数も合計 N 以下：https://yuukougun.github.io/kyopro-atlas/string/kmp/#linear-time
     - `kmp#matching` パターン照合：失敗したら π の値までずらす：https://yuukougun.github.io/kyopro-atlas/string/kmp/#matching
     - `kmp#mp-vs-kmp` MP と KMP の違い（競プロでは MP を KMP と呼ぶことが多い）：https://yuukougun.github.io/kyopro-atlas/string/kmp/#mp-vs-kmp
     - `kmp#border-chain` border の連鎖と全 border の列挙：https://yuukougun.github.io/kyopro-atlas/string/kmp/#border-chain
-    - `kmp#string-period` 周期と繰り返し：最小周期 N − π[N−1]、N を割り切るときだけ繰り返しで書ける（弱周期定理）：https://yuukougun.github.io/kyopro-atlas/string/kmp/#string-period
+    - `kmp#string-period` 周期と繰り返し：最小周期と、繰り返しで書ける条件（弱周期定理）：https://yuukougun.github.io/kyopro-atlas/string/kmp/#string-period
     - `kmp#count-periodic` N の約数の周期を数える：約数ごとに数えて包除（メビウス）：https://yuukougun.github.io/kyopro-atlas/string/kmp/#count-periodic
     - `kmp#automaton` 照合オートマトン（状態×文字 → 次の状態）を表に埋める：https://yuukougun.github.io/kyopro-atlas/string/kmp/#automaton
 
@@ -221,7 +220,6 @@ search:
     - `aho-corasick#inherit-terminal` 終端の印を失敗リンク先から受け継ぐ：https://yuukougun.github.io/kyopro-atlas/string/aho-corasick/#inherit-terminal
     - `aho-corasick#as-automaton` 照合オートマトンとして使う（DP・行列累乗）：https://yuukougun.github.io/kyopro-atlas/string/aho-corasick/#as-automaton
     - `aho-corasick#forbidden-greedy` 禁止語の貪欲：一致したら書き換えて状態を根に戻す（黄）：https://yuukougun.github.io/kyopro-atlas/string/aho-corasick/#forbidden-greedy
-    - `aho-corasick#comparison` SA の二分探索・ハッシュとの使い分け：https://yuukougun.github.io/kyopro-atlas/string/aho-corasick/#comparison
 
 ## 照合オートマトン上の DP（string-automaton-dp） {#string-automaton-dp}
 
@@ -243,7 +241,6 @@ search:
     - `string-automaton-dp#contain-all` すべて含む：含んだパターンの集合を bit で持つ：https://yuukougun.github.io/kyopro-atlas/string/string-automaton-dp/#contain-all
     - `string-automaton-dp#matrix-power` N が巨大なとき：遷移行列の累乗・ダブリング：https://yuukougun.github.io/kyopro-atlas/string/string-automaton-dp/#matrix-power
     - `string-automaton-dp#why-not-inclusion-exclusion` 包除で解こうとすると破綻する理由（パターンの重なり）：https://yuukougun.github.io/kyopro-atlas/string/string-automaton-dp/#why-not-inclusion-exclusion
-    - `string-automaton-dp#comparison` 部分列 DP・桁 DP との違い：https://yuukougun.github.io/kyopro-atlas/string/string-automaton-dp/#comparison
 
 ## Suffix Array と LCP 配列（suffix-array） {#suffix-array}
 

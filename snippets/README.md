@@ -4,5 +4,6 @@
 
 - `snippets/<page-id>/<name>.cpp`：完全なプログラム。本文に取り込む範囲を `// --8<-- [start:名前]` 〜 `// --8<-- [end:名前]` で囲む
 - `snippets/<page-id>/<name>.yaml`：設定（compilers・flags・expect・cases）
+- expect は run（実行して出力が一致）・compile-error・warning・crash（実行が 0 以外の終了コードかシグナルで終わる。範囲外の参照の検出などを見せるとき）
 - 検査：`python3 tools/check_snippets.py`
 - `_ci-smoke/` は CI のコンテナ（gcc:15.2.0）と同梱の ACL v1.6 で通ることを確かめるための1本で、ページからは取り込まない

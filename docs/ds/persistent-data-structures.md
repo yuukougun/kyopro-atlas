@@ -25,7 +25,6 @@ sections:
   - {title: 経路コピー（1 回の更新で O(log N) 個のノードを新しく作る。丸ごとのコピーは根の指し替え）, anchor: path-copying}
   - {title: 部分永続と完全永続, anchor: partial-vs-full}
   - {title: 操作の版を木にしてオフラインで処理する（版の木の DFS と取り消し）, anchor: offline-version-tree}
-  - {title: 使い分け（ロールバックは直前から順に戻すだけ、永続は任意の版へ）, anchor: choosing}
   - {title: 接頭辞ごとの版で区間の K 番目・x 以下の個数をオンラインで求める, anchor: prefix-versions, level: 発展}
 stage: stub
 updated: 2026-10-21

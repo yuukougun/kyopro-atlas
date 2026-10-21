@@ -28,7 +28,6 @@ sections:
   - {title: 全体への加算と組む（入れるときに引き、出すときに足す）, anchor: with-offset}
   - {title: 削除できるヒープ（遅延削除：削除予定のヒープの top と一致したら両方から捨てる）, anchor: lazy-deletion}
   - {title: priority_queue と multiset の使い分け（任意の削除・両端・前後の要素が要るなら multiset）, anchor: vs-multiset}
-  - {title: 落とし穴（向きの取り違え・古いエントリを捨て忘れる・空のときの top）, anchor: pitfalls}
 stage: draft
 updated: 2026-10-21
 ---
@@ -196,7 +195,7 @@ $K$ 番目に大きい値を最大ヒープで探そうとすると、上位 $K 
 - 両端・前後の要素・範囲の走査が要るなら `multiset` にする（[set・multiset・map の応用](../ds/ordered-set.md)）。2 つの集合の間で要素を移す管理（上位 $K$ 個・中央値）も、削除があるなら `multiset` の方が書きやすい
 - 併合（2 つのヒープを 1 つにまとめる）が要るときは、小さい方を大きい方に入れ直すマージテクで足りることが多い。$O(\log N)$ で併合できるヒープは [発展的なデータ構造の一覧](../ds/advanced-ds-catalog.md) にある
 
-## 落とし穴（向きの取り違え・古いエントリを捨て忘れる・空のときの top） {#pitfalls}
+## 落とし穴 {#pitfalls}
 
 **最大と最小の向きを取り違える**。`priority_queue<T>` は最大が先頭である。最小が要るのに既定のまま使うと、小さな例では偶然合うこともあるので、気づきにくい。最小を取り出すときは `priority_queue<T, vector<T>, greater<T>>` と書く。値に $-1$ を掛けて入れる方法もあるが、取り出すときに戻し忘れやすい。`pair` の 1 つ目の成分だけに $-1$ を掛けると、1 つ目が同じときは 2 つ目の大きい方が先に出る（`greater` を使ったときと逆）。2 つ目も小さい順にしたいなら両方に掛ける。
 

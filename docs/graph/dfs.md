@@ -24,8 +24,6 @@ sections:
   - {title: バックトラック型（帰りがけで印を外す）, anchor: backtracking}
   - {title: 行きがけ順と帰りがけ順, anchor: pre-post-order}
   - {title: 非再帰の DFS と再帰の深さ, anchor: iterative}
-  - {title: 上位の手法へのつながり, anchor: next-steps}
-  - {title: BFS・Union-Find との使い分け, anchor: comparison}
 stage: draft
 updated: 2026-10-21
 ---
@@ -144,7 +142,7 @@ DFS は多くの手法で、行きがけ順・帰りがけ順・DFS 木の性質
 
 **再帰の中で大きな配列を作る**。関数の中で `vector` を作ってコピーすると、呼び出しのたびに $O(N)$ かかる。バックトラック型では経路を表す配列を 1 つだけ外に置き、行きがけで足して帰りがけで戻す。
 
-## BFS・Union-Find との使い分け {#comparison}
+## 使い分け {#comparison}
 
 - **最短距離・最小の手数が要る**：[幅優先探索](../graph/bfs.md)を使う。DFS が最初に見つけた経路は最短とは限らない
 - **辺が増えていく中で連結かを何度も聞かれる**：[Union-Find](../ds/union-find.md) を使う。DFS で毎回調べ直すと $O(Q(N + M))$ かかる

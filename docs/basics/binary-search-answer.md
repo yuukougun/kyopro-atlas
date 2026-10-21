@@ -27,7 +27,6 @@ sections:
   - {title: 判定を貪欲・探索で作る, anchor: greedy-check}
   - {title: 判定を DP で作る（決め打ちごとに初期化し直す）, anchor: dp-check, level: 青}
   - {title: 実数の二分探索（反復回数を固定する）, anchor: real-number, level: 水}
-  - {title: K 番目・平均・中央値・並列二分探索へのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---
@@ -159,7 +158,7 @@ DP で判定するときの典型的なバグは、表を前の $x$ の値が残
 
 **判定が重すぎる**。判定は $O(\log V)$ 回呼ばれる。$V = 10^{18}$ なら約 60 回なので、判定が $O(N^2)$ で $N = 2 \times 10^5$ なら間に合わない。判定は $O(N)$ か $O(N \log N)$ を目安にする。
 
-## K 番目・平均・中央値・並列二分探索へのつながり {#next-steps}
+## 上位の手法へのつながり {#next-steps}
 
 答えで二分探索は、判定を言い換える手法の入口である。
 

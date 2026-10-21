@@ -17,16 +17,16 @@ acl: []
 sections:
   - {title: sort と降順（greater・rbegin/rend）, anchor: sort}
   - {title: 重複の削除：sort → unique → erase（unique は前に詰めて新しい終端を返すだけ）, anchor: unique-erase}
-  - {title: 二分探索：lower_bound・upper_bound の添字と個数、equal_range・binary_search（set・map はメンバ関数）, anchor: lower-bound}
+  - {title: 二分探索：lower_bound・upper_bound・equal_range・binary_search, anchor: lower-bound}
   - {title: 総和：accumulate は初期値の型で足す（0LL・0.0）、reduce は初期値を省くと要素の型で足す, anchor: accumulate}
   - {title: 累積和と差分：partial_sum・inclusive_scan・adjacent_difference, anchor: partial-sum}
   - {title: '連番：std::iota で埋める（views::iota・ranges::iota との違い）', anchor: iota}
   - {title: next_permutation で順列を列挙する（ソートした状態から始める）, anchor: next-permutation}
-  - {title: '最大・最小・個数：max_element はイテレータを返す、max({a, b, c})・clamp、count は ptrdiff_t を返す', anchor: max-element}
+  - {title: 最大・最小・個数：max_element・max・clamp・count の戻り値, anchor: max-element}
   - {title: 'ranges 版：ranges::sort(v) のようにコンテナを直接渡す（C++20）', anchor: ranges}
   - {title: '射影：ranges::sort(ps, {}, &P::score) は score で比べて要素ごと並べ替える（C++20）', anchor: projection}
   - {title: 'ranges::unique は後ろの不要部分を返す（C++20）', anchor: ranges-unique}
-  - {title: 'ranges::fold_left・contains・find_last（C++23・GCC 13〜）と、AtCoder にない ranges::starts_with', anchor: fold-left}
+  - {title: fold_left・contains・find_last（C++23・GCC 13〜）と AtCoder にない starts_with, anchor: fold-left}
   - {title: '一時オブジェクトを渡すと戻り値が ranges::dangling になる（使うとコンパイルエラー）', anchor: ranges-dangling}
 stage: draft
 updated: 2026-10-21
@@ -82,7 +82,7 @@ atcoder: true
 - **落とし穴 2**：`sort` を忘れると、離れた位置の重複が残る（`1 2 1` は `1 2 1` のまま）
 - **落とし穴 3**：`unique` の名前から「重複のない要素を返す」と読み違えやすい。消すのは 2 個目以降で、1 個目は残る
 
-## 二分探索：lower_bound・upper_bound の添字と個数、equal_range・binary_search（set・map はメンバ関数） {#lower-bound}
+## 二分探索：lower_bound・upper_bound・equal_range・binary_search {#lower-bound}
 
 ソート済みの列で、`lower_bound(…, x)` は $x$ 以上の最初の位置、`upper_bound(…, x)` は $x$ より大きい最初の位置を返す。どちらもなければ `v.end()` を返す。`vector` ならイテレータから `v.begin()` を引くと添字になり、2 つの差が $x$ の個数になる。
 
@@ -175,7 +175,7 @@ atcoder: true
 - **落とし穴 1**：`while (next_permutation(…)) { … }` と書くと、最初の並びを処理し忘れる。`do`〜`while` にする
 - **落とし穴 2**：重複のある列では $N!$ 通りではなく、異なる並びの数だけ回る。「$N!$ 通りすべて」を数えたいなら、添字の列 `0, 1, …, N-1` の順列を回す
 
-## 最大・最小・個数：max_element はイテレータを返す、max({a, b, c})・clamp、count は ptrdiff_t を返す {#max-element}
+## 最大・最小・個数：max_element・max・clamp・count の戻り値 {#max-element}
 
 `max_element` と `min_element` は、値ではなく位置（イテレータ）を返す。値は `*it`、添字は `it - v.begin()` で取り出す。最大が複数あるときは最初の位置を返す。`max({a, b, c})` は 3 つ以上の値の最大を返し、`clamp(x, lo, hi)` は $x$ を閉区間 $[lo, hi]$ に収める。
 
@@ -247,7 +247,7 @@ ranges 版のアルゴリズムは、`v.begin(), v.end()` の代わりにコン�
 - **版**：C++20。g++-13・g++-15 で使える
 - **落とし穴**：従来の `unique` の癖で `v.erase(ranges::unique(v), v.end())` と書くと、`subrange` はイテレータでないのでコンパイルエラーになる
 
-## ranges::fold_left・contains・find_last（C++23・GCC 13〜）と、AtCoder にない ranges::starts_with {#fold-left}
+## fold_left・contains・find_last（C++23・GCC 13〜）と AtCoder にない starts_with {#fold-left}
 
 C++23 で、`ranges::fold_left`（初期値から左に向かって畳み込む）、`ranges::contains`（値があるか）、`ranges::find_last`（最後に現れる位置）が入った。どれも GCC 13 から使える。
 

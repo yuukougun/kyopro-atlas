@@ -22,7 +22,6 @@ frequency_evidence: recent 0・前提として届くページなし・古い ABC
 sections:
   - {title: 存在条件（無向・有向）, anchor: conditions}
   - {title: Hierholzer 法で構成する, anchor: hierholzer}
-  - {title: 孤立点・多重辺・自己ループの扱い, anchor: pitfalls}
   - {title: ハミルトン路（頂点をちょうど 1 回、bitDP）との違い, anchor: vs-hamiltonian}
 stage: stub
 updated: 2026-10-21

@@ -22,7 +22,7 @@ frequency: B
 frequency_evidence: recent 0・前提として届くページなし・古い ABC 3 問
 sections:
   - {title: ord と low の定義と求め方, anchor: ord-low}
-  - {title: '橋の条件 low[c] > ord[p] と関節点の条件（根は子の数で判定）', anchor: conditions}
+  - {title: 橋の条件と関節点の条件（根は子の数で判定）, anchor: conditions}
   - {title: 多重辺は辺の番号で親を除外する, anchor: multi-edges}
   - {title: 二重辺連結成分（橋で分けて縮約すると木になる）, anchor: two-edge-connected}
   - {title: 有向グラフの SCC（同じ ord・low の考え方）との対比, anchor: vs-scc}

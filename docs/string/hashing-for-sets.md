@@ -9,7 +9,7 @@ order: 40
 level: 水
 kind: [ハッシュ・乱択, 累積和・差分]
 prerequisites: [prefix-sum, bit-operations]
-related: [rolling-hash, hash-safety, randomized, fenwick-tree, prime-exponent-vector, parity]
+related: [rolling-hash, hash-safety, randomized, fenwick-tree, prime-exponent-vector, parity, spf-sieve, two-pointers]
 summary: 値ごとに独立な 64 ビットの乱数を割り当て、集合は XOR、多重集合は和で表すと、2 つの集合が等しいかを順序に関係なく O(1) で比べられる。累積と組めば、区間どうしが並べ替えで一致するかも判定できる。
 complexity: 前計算 O(N)、比較 1 回 O(1)、BIT と組むと更新・比較 O(log N)。誤判定の確率は比較 1 回あたり XOR で 2^-64、和で 2^-47 以下（個数が 2×10^5 以下のとき）
 signs:

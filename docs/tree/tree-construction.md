@@ -8,8 +8,8 @@ chapter: 木全体の形
 order: 130
 level: 水
 kind: [木, 考察]
-prerequisites: [tree-traversal]
-related: [tree-degree, tree-diameter, minimum-spanning-tree, graph-construction, construction]
+prerequisites: [tree-traversal, minimum-spanning-tree]
+related: [tree-degree, tree-diameter, graph-construction, construction]
 summary: 距離の情報・訪問順・次数の条件などから、条件を満たす木を作るか、ないと判定する（何通りあるかを数えることもある）。作った木が本当に条件を満たすかを最後に確かめることが要になる。
 complexity: 距離の表から作る O(N^2 log N)、全点対の距離で確かめる O(N^2)、訪問順から数える O(N)
 signs:
@@ -36,7 +36,7 @@ updated: 2026-10-21
         - 距離の情報から木を復元できるか。
         - 訪問順（DFS 順）から元の木が何通りあるか。
     - **計算量**：全点対の距離の表から作るなら、辺の候補 $O(N^2)$ 個のソートで $O(N^2 \log N)$、作った木を全点からの探索で確かめて $O(N^2)$。訪問順から各頂点の親の候補を数えるなら、単調スタックで $O(N)$。
-    - **前提**：[根付き木と走査順](../tree/tree-traversal.md)
+    - **前提**：[根付き木と走査順](../tree/tree-traversal.md)、[最小全域木](../graph/minimum-spanning-tree.md)
 
 <!-- textlint-disable -->
 別名：木の構築・木の復元・距離の表から木・訪問順から木・tree construction

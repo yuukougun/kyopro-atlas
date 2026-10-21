@@ -23,12 +23,11 @@ search:
     - 言い回し：森として残せる辺の数・消す辺の数
 - 節：
     - `tree-basics#definitions` 木の同じ意味の定義と、そこから使える事実の一覧：https://yuukougun.github.io/kyopro-atlas/tree/tree-basics/#definitions
-    - `tree-basics#input-forms` 入力の形（辺のリスト・親の配列・p_i < i）と根の決め方：https://yuukougun.github.io/kyopro-atlas/tree/tree-basics/#input-forms
+    - `tree-basics#input-forms` 入力の形（辺のリスト・親の配列・親の番号が自分より小さい形）と根の決め方：https://yuukougun.github.io/kyopro-atlas/tree/tree-basics/#input-forms
     - `tree-basics#remove-add-edge` 辺を 1 本取り除くと 2 つの成分、1 本足すと閉路が 1 つ：https://yuukougun.github.io/kyopro-atlas/tree/tree-basics/#remove-add-edge
     - `tree-basics#forest` 森の連結成分の数 = 頂点数 − 辺数：https://yuukougun.github.io/kyopro-atlas/tree/tree-basics/#forest
     - `tree-basics#edge-to-child` 辺の値を子の頂点に寄せる：https://yuukougun.github.io/kyopro-atlas/tree/tree-basics/#edge-to-child
     - `tree-basics#extremes` 形の両極端（パスと星）でテストする：https://yuukougun.github.io/kyopro-atlas/tree/tree-basics/#extremes
-    - `tree-basics#next-steps` 上位の手法とのつながり：https://yuukougun.github.io/kyopro-atlas/tree/tree-basics/#next-steps
 
 ## 根付き木と走査順（tree-traversal） {#tree-traversal}
 
@@ -45,7 +44,7 @@ search:
     - `tree-traversal#parent-depth-size` 親・深さ・部分木サイズを求める：https://yuukougun.github.io/kyopro-atlas/tree/tree-traversal/#parent-depth-size
     - `tree-traversal#pre-post-order` 行きがけ順と帰りがけ順（子から親へ集約する）：https://yuukougun.github.io/kyopro-atlas/tree/tree-traversal/#pre-post-order
     - `tree-traversal#bfs-order` BFS 順の逆で再帰を使わずに集約する：https://yuukougun.github.io/kyopro-atlas/tree/tree-traversal/#bfs-order
-    - `tree-traversal#parent-index` p_i < i なら番号の逆順で足りる：https://yuukougun.github.io/kyopro-atlas/tree/tree-traversal/#parent-index
+    - `tree-traversal#parent-index` 親の番号が自分より小さいなら、番号の逆順で足りる：https://yuukougun.github.io/kyopro-atlas/tree/tree-traversal/#parent-index
     - `tree-traversal#recursion-depth` 再帰の深さ（パス状の木）と非再帰の書き方：https://yuukougun.github.io/kyopro-atlas/tree/tree-traversal/#recursion-depth
     - `tree-traversal#to-tree-dp` 一般の木 DP は DP の章へ：https://yuukougun.github.io/kyopro-atlas/tree/tree-traversal/#to-tree-dp
 
@@ -65,7 +64,6 @@ search:
     - `tree-bipartite#distance-parity` 距離の偶奇は深さだけで分かる：https://yuukougun.github.io/kyopro-atlas/tree/tree-bipartite/#distance-parity
     - `tree-bipartite#majority-color` 多い方の色は N/2 個以上：https://yuukougun.github.io/kyopro-atlas/tree/tree-bipartite/#majority-color
     - `tree-bipartite#cross-pairs` 色の違う組の数（二部グラフのまま足せる辺）：https://yuukougun.github.io/kyopro-atlas/tree/tree-bipartite/#cross-pairs
-    - `tree-bipartite#next-steps` 上位の手法とのつながり：https://yuukougun.github.io/kyopro-atlas/tree/tree-bipartite/#next-steps
 
 ## 木の上の距離（tree-distance） {#tree-distance}
 
@@ -82,7 +80,6 @@ search:
     - `tree-distance#from-one` 1 点からの距離（ダイクストラはいらない）：https://yuukougun.github.io/kyopro-atlas/tree/tree-distance/#from-one
     - `tree-distance#from-two` 2 点からの距離を比べる：https://yuukougun.github.io/kyopro-atlas/tree/tree-distance/#from-two
     - `tree-distance#root-prefix` 根からの累積値で 2 点間を表す（XOR は LCA が不要、和は LCA が要る）：https://yuukougun.github.io/kyopro-atlas/tree/tree-distance/#root-prefix
-    - `tree-distance#next-steps` LCA・直径・全方位木 DP へのつながり：https://yuukougun.github.io/kyopro-atlas/tree/tree-distance/#next-steps
 
 ## 木の上の累積和・いもす法（tree-imos） {#tree-imos}
 
@@ -115,7 +112,6 @@ search:
     - `steiner-subtree#root-at-terminal` 指定頂点を根にして、部分木に指定頂点を含むかで判定する：https://yuukougun.github.io/kyopro-atlas/tree/steiner-subtree/#root-at-terminal
     - `steiner-subtree#prune-leaves` 指定されていない葉を削り続ける：https://yuukougun.github.io/kyopro-atlas/tree/steiner-subtree/#prune-leaves
     - `steiner-subtree#vs-graph` 一般のグラフのシュタイナー木は別物（グラフの章）：https://yuukougun.github.io/kyopro-atlas/tree/steiner-subtree/#vs-graph
-    - `steiner-subtree#next-steps` 上位の手法とのつながり：https://yuukougun.github.io/kyopro-atlas/tree/steiner-subtree/#next-steps
 
 ## 完全二分木（complete-binary-tree） {#complete-binary-tree}
 
@@ -133,7 +129,6 @@ search:
     - `complete-binary-tree#lca-by-index` 番号だけで LCA を求める（大きい方を 2 で割る）：https://yuukougun.github.io/kyopro-atlas/tree/complete-binary-tree/#lca-by-index
     - `complete-binary-tree#k-ary` K 分木への一般化：https://yuukougun.github.io/kyopro-atlas/tree/complete-binary-tree/#k-ary
     - `complete-binary-tree#count-at-distance` 距離 K の頂点の数（部分木の深さの範囲を N で切る）（青）：https://yuukougun.github.io/kyopro-atlas/tree/complete-binary-tree/#count-at-distance
-    - `complete-binary-tree#next-steps` 上位の手法とのつながり：https://yuukougun.github.io/kyopro-atlas/tree/complete-binary-tree/#next-steps
 
 ## 葉から考える（leaf-first） {#leaf-first}
 
@@ -230,7 +225,7 @@ search:
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-construction/
 - 別名：木の構築、木の復元、距離の表から木、訪問順から木、tree construction
 - 種類：木、考察
-- 前提：`tree-traversal`
+- 前提：`tree-traversal`、`minimum-spanning-tree`
 - ACL：`dsu`
 - サイン：
     - 言い回し：条件を満たす木を 1 つ出力せよ（なければ −1）
@@ -275,7 +270,6 @@ search:
     - `lca#kth-ancestor` K 個上の祖先（K を 2 進数に分けて跳ぶ）：https://yuukougun.github.io/kyopro-atlas/tree/lca/#kth-ancestor
     - `lca#path-aggregate` パス上の最大値・和を表と一緒に持つ：https://yuukougun.github.io/kyopro-atlas/tree/lca/#path-aggregate
     - `lca#farthest-ancestor` 条件を満たす最も遠い祖先：https://yuukougun.github.io/kyopro-atlas/tree/lca/#farthest-ancestor
-    - `lca#comparison` LCA の求め方の比較（ダブリング・オイラーツアーと Sparse Table・HL 分解・オフライン）：https://yuukougun.github.io/kyopro-atlas/tree/lca/#comparison
 
 ## 木の上のパスの判定と分解（tree-path） {#tree-path}
 

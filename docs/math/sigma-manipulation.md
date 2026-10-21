@@ -13,7 +13,7 @@ related: [notation, contribution, linearity-of-expectation, harmonic-sum, floor-
 summary: 二重和の順序交換・添字の範囲の書き換え・付け替え・線形性で、Σ の式を計算しやすい形に変える。同じ和を別の順で計算して計算量を下げる式変形の土台になる。
 complexity: 式変形そのものに計算量はない。変形の後は、元の式で O(N^2) の二重和が O(N) や O(N log N) になることが多い
 signs:
-  - {type: phrase, text: '全ての組 (i, j)（i < j）について〜を足した和を求める'}
+  - {type: phrase, text: 'すべての組 (i, j)（i < j）について〜を足した和を求める'}
   - {type: shape, text: 'Σ_{i=1}^{N} Σ_{j=i}^{N} f(i, j) のように、内側の和の範囲が外側の添字で決まる二重和'}
   - {type: shape, text: 'Σ_{K=1}^{N} K × (K の約数の個数) のように、約数・倍数の関係で書き換えられる和'}
 acl: []
@@ -27,7 +27,6 @@ sections:
   - {title: 値でまとめ直す（同じ値になる添字の個数を掛ける）, anchor: group-by-value}
   - {title: 'よく使う和の公式と Σ_{i≠j} a_i a_j = (Σa)² − Σa²', anchor: formulas}
   - {title: 空の和は 0・空の積は 1 と境界, anchor: empty-sum}
-  - {title: 上位の手法へのつながり, anchor: next-steps}
 stage: draft
 updated: 2026-10-21
 ---

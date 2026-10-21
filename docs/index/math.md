@@ -18,7 +18,7 @@ search:
 - 別名：シグマの変形、和の順序交換、総和の変形、二重和、添字の付け替え、order of summation
 - 種類：考察、数え上げ
 - サイン：
-    - 言い回し：全ての組 (i, j)（i < j）について〜を足した和を求める
+    - 言い回し：すべての組 (i, j)（i < j）について〜を足した和を求める
     - 式の形：Σ_{i=1}^{N} Σ_{j=i}^{N} f(i, j) のように、内側の和の範囲が外側の添字で決まる二重和
     - 式の形：Σ_{K=1}^{N} K × (K の約数の個数) のように、約数・倍数の関係で書き換えられる和
 - 節：
@@ -28,7 +28,6 @@ search:
     - `sigma-manipulation#group-by-value` 値でまとめ直す（同じ値になる添字の個数を掛ける）：https://yuukougun.github.io/kyopro-atlas/math/sigma-manipulation/#group-by-value
     - `sigma-manipulation#formulas` よく使う和の公式と Σ_{i≠j} a_i a_j = (Σa)² − Σa²：https://yuukougun.github.io/kyopro-atlas/math/sigma-manipulation/#formulas
     - `sigma-manipulation#empty-sum` 空の和は 0・空の積は 1 と境界：https://yuukougun.github.io/kyopro-atlas/math/sigma-manipulation/#empty-sum
-    - `sigma-manipulation#next-steps` 上位の手法へのつながり：https://yuukougun.github.io/kyopro-atlas/math/sigma-manipulation/#next-steps
 
 ## 整数の割り算と余り（integer-division） {#integer-division}
 
@@ -46,10 +45,9 @@ search:
     - `integer-division#cpp-vs-math` C++ の / と % と、数学の floor・mod の違い：https://yuukougun.github.io/kyopro-atlas/math/integer-division/#cpp-vs-math
     - `integer-division#floor-ceil` 負の数でも正しい floor_div・ceil_div・safe_mod：https://yuukougun.github.io/kyopro-atlas/math/integer-division/#floor-ceil
     - `integer-division#ceil-formula` 切り上げ ⌈a/b⌉ = ⌊(a+b−1)/b⌋ が使える条件：https://yuukougun.github.io/kyopro-atlas/math/integer-division/#ceil-formula
-    - `integer-division#count-multiples` 区間 [L, R] の K の倍数の個数と、x 以上で m で割って r 余る最小の数：https://yuukougun.github.io/kyopro-atlas/math/integer-division/#count-multiples
-    - `integer-division#overflow` あふれる前に割り算で判定する（a > L / b）と \_\_int128 への逃げ方：https://yuukougun.github.io/kyopro-atlas/math/integer-division/#overflow
+    - `integer-division#count-multiples` 区間の中の K の倍数の個数と、x 以上で m で割って r 余る最小の数：https://yuukougun.github.io/kyopro-atlas/math/integer-division/#count-multiples
+    - `integer-division#overflow` あふれる前に割り算で判定する方法と \_\_int128 への逃げ方：https://yuukougun.github.io/kyopro-atlas/math/integer-division/#overflow
     - `integer-division#no-double` double で割らない（10^18 付近の誤差）：https://yuukougun.github.io/kyopro-atlas/math/integer-division/#no-double
-    - `integer-division#next-steps` 周期・mod・floor sum・商の列挙へのつながり：https://yuukougun.github.io/kyopro-atlas/math/integer-division/#next-steps
 
 ## mod の計算の基本（mod-arithmetic） {#mod-arithmetic}
 
@@ -68,7 +66,6 @@ search:
     - `mod-arithmetic#division` 割り算はそのままではできない（→ 逆元）：https://yuukougun.github.io/kyopro-atlas/math/mod-arithmetic/#division
     - `mod-arithmetic#no-compare` mod を取った値で大小比較・最大値を考えてはいけない：https://yuukougun.github.io/kyopro-atlas/math/mod-arithmetic/#no-compare
     - `mod-arithmetic#why-998244353` なぜ 998244353 か（素数で、NTT に向く形）：https://yuukougun.github.io/kyopro-atlas/math/mod-arithmetic/#why-998244353
-    - `mod-arithmetic#next-steps` 繰り返し二乗法・逆元・modint へのつながり：https://yuukougun.github.io/kyopro-atlas/math/mod-arithmetic/#next-steps
 
 ## 繰り返し二乗法（mod-pow） {#mod-pow}
 
@@ -104,7 +101,7 @@ search:
     - `mod-inverse#existence` 逆元が存在する条件（gcd(a, m) = 1）：https://yuukougun.github.io/kyopro-atlas/math/mod-inverse/#existence
     - `mod-inverse#fermat` フェルマーの小定理による a^(p−2)：https://yuukougun.github.io/kyopro-atlas/math/mod-inverse/#fermat
     - `mod-inverse#ext-gcd` 拡張ユークリッドによる逆元（法が素数でないとき）（水）：https://yuukougun.github.io/kyopro-atlas/math/mod-inverse/#ext-gcd
-    - `mod-inverse#inverse-table` 逆元表を O(N) で作る（inv[i] = −⌊m/i⌋·inv[m mod i]）と階乗の逆元：https://yuukougun.github.io/kyopro-atlas/math/mod-inverse/#inverse-table
+    - `mod-inverse#inverse-table` 逆元表を O(N) で作る方法と階乗の逆元：https://yuukougun.github.io/kyopro-atlas/math/mod-inverse/#inverse-table
     - `mod-inverse#rational` 有理数 P/Q を P × Q^(−1) で表す計算：https://yuukougun.github.io/kyopro-atlas/math/mod-inverse/#rational
     - `mod-inverse#not-invertible` 割れないときの3つの場合（割る数が p の倍数・公比 ≡ 1・法が素数でない）：https://yuukougun.github.io/kyopro-atlas/math/mod-inverse/#not-invertible
     - `mod-inverse#acl` ACL の inv_mod と modint::inv：https://yuukougun.github.io/kyopro-atlas/math/mod-inverse/#acl
@@ -122,7 +119,6 @@ search:
 - 節：
     - `modint#what-is-automatic` 何が自動になるか（加減乗除と負の数の正規化）：https://yuukougun.github.io/kyopro-atlas/math/modint/#what-is-automatic
     - `modint#static-dynamic` static_modint と dynamic_modint（set_mod）の使い分け：https://yuukougun.github.io/kyopro-atlas/math/modint/#static-dynamic
-    - `modint#pitfalls` val() で取り出す・大小比較や「0 になったか」で元の値は分からない：https://yuukougun.github.io/kyopro-atlas/math/modint/#pitfalls
     - `modint#division` 割り算の条件（法が素数でなければ互いに素が必要）：https://yuukougun.github.io/kyopro-atlas/math/modint/#division
     - `modint#connections` 上位の手法での使われ方（階乗の表・畳み込み・行列・期待値）：https://yuukougun.github.io/kyopro-atlas/math/modint/#connections
     - `modint#self-made` 自作するときの設計（加減の条件分岐・64bit の掛け算・pow と inv・入出力）：https://yuukougun.github.io/kyopro-atlas/math/modint/#self-made
@@ -154,16 +150,15 @@ search:
 - 種類：整数論、ダブリング・分割統治
 - 前提：`mod-inverse`
 - サイン：
-    - 言い回し：同じ数字列を M 回並べてできる数を mod で求める
+    - 言い回し：同じ数字列を K 回並べてできる数を mod で求める
     - 言い回し：法 M が入力で与えられ、素数とは限らない
     - 制約：項数 N ≤ 10&#94;12〜10&#94;18 の等比数列の和を、素数とは限らない法 M ≤ 10&#94;9 で求める
     - 式の形：Σ_{i=0}^{N−1} A^i の形の和
 - 節：
     - `geometric-series-mod#formula` 公式 (r^n − 1)/(r − 1) と r ≡ 1 の場合分け：https://yuukougun.github.io/kyopro-atlas/math/geometric-series-mod/#formula
     - `geometric-series-mod#halving` 法が任意のとき：S(2k) = S(k)(1 + r^k) で半分に割る（水）：https://yuukougun.github.io/kyopro-atlas/math/geometric-series-mod/#halving
-    - `geometric-series-mod#matrix` 2×2 行列 [[r, 1], [0, 1]] の累乗による別解（青）：https://yuukougun.github.io/kyopro-atlas/math/geometric-series-mod/#matrix
+    - `geometric-series-mod#matrix` 2×2 行列の累乗による別解（青）：https://yuukougun.github.io/kyopro-atlas/math/geometric-series-mod/#matrix
     - `geometric-series-mod#repeated-digits` 同じ数字列を並べた数は公比 10^d の等比数列の和になる：https://yuukougun.github.io/kyopro-atlas/math/geometric-series-mod/#repeated-digits
-    - `geometric-series-mod#next-steps` 行列累乗・ダブリング・位数へのつながり：https://yuukougun.github.io/kyopro-atlas/math/geometric-series-mod/#next-steps
 
 ## 桁と mod（digit-and-mod） {#digit-and-mod}
 
@@ -201,7 +196,6 @@ search:
     - `divisor-enum#enumerate` 約数の列挙とソート・平方数での重複：https://yuukougun.github.io/kyopro-atlas/math/divisor-enum/#enumerate
     - `divisor-enum#count-and-sum` 約数の個数 Π(e+1) と約数の総和の公式：https://yuukougun.github.io/kyopro-atlas/math/divisor-enum/#count-and-sum
     - `divisor-enum#candidates` 答えの候補が約数に限られる型（gcd の最大・商と余り・割るか引くか）：https://yuukougun.github.io/kyopro-atlas/math/divisor-enum/#candidates
-    - `divisor-enum#pitfalls` 落とし穴：sqrt を double で求める・i\*i のあふれ：https://yuukougun.github.io/kyopro-atlas/math/divisor-enum/#pitfalls
 
 ## 素因数分解とルジャンドルの公式（prime-factorization） {#prime-factorization}
 
@@ -248,7 +242,7 @@ search:
 - 前提：`sieve-eratosthenes`、`prime-factorization`
 - サイン：
     - 制約：A_i ≤ 10&#94;6（〜10&#94;7）の各要素を素因数分解する
-    - 言い回し：全ての組が互いに素か（pairwise coprime）を判定する
+    - 言い回し：すべての組が互いに素か（pairwise coprime）を判定する
     - 言い回し：各要素の素因数の個数（重複込み）を求める
 - 節：
     - `spf-sieve#build-and-factor` 最小素因数の表の作り方と、割るたびに半分以下になるので O(log n) で分解できる理由：https://yuukougun.github.io/kyopro-atlas/math/spf-sieve/#build-and-factor
@@ -268,7 +262,7 @@ search:
     - 制約：A_i ≤ 10^6 程度で、値を配列の添字にできる
     - 言い回し：割り切る・割り切られる関係にある組を数える
     - 言い回し：各 d について、d の倍数である要素の個数や和を求める
-    - 式の形：Σ_{d=1}^{N} Σ_{k=1}^{⌊N/d⌋} f(d, kd) の形の二重ループ
+    - 式の形：Σ_{d=1}^{M} Σ_{k=1}^{⌊M/d⌋} f(d, kd) の形の二重ループ
 - 節：
     - `harmonic-sum#why-n-log-n` M/1 + M/2 + … + M/M ≈ M ln M の根拠（M = 10^6 で約 1.4×10^7）：https://yuukougun.github.io/kyopro-atlas/math/harmonic-sum/#why-n-log-n
     - `harmonic-sum#mark-multiples` 値の倍数に印を付ける：https://yuukougun.github.io/kyopro-atlas/math/harmonic-sum/#mark-multiples
@@ -305,6 +299,7 @@ search:
     - 制約：L, R ≤ 10^12 で R − L ≤ 10^6
     - 言い回し：連続する区間の数をそれぞれ素因数分解する
     - 言い回し：二項係数 C(N, K) の分子 N−K+1..N を素因数分解する
+    - 言い回し：区間の中の素数の累乗（lcm(1, …, n) が変わる位置）を数える
 - 節：
     - `segmented-sieve#why-sqrt` √R までの素数で十分な理由：https://yuukougun.github.io/kyopro-atlas/math/segmented-sieve/#why-sqrt
     - `segmented-sieve#first-multiple` 区間で最初の p の倍数 ⌈L/p⌉·p の求め方と、p 自身・L = 1 の扱い：https://yuukougun.github.io/kyopro-atlas/math/segmented-sieve/#first-multiple
@@ -329,7 +324,6 @@ search:
     - `prime-exponent-vector#squarefree-kernel` 平方因子を除いた核で、積が平方数になる組を数える（0 の扱い）：https://yuukougun.github.io/kyopro-atlas/math/prime-exponent-vector/#squarefree-kernel
     - `prime-exponent-vector#huge-lcm` 巨大な lcm を指数の最大で持つ（水）：https://yuukougun.github.io/kyopro-atlas/math/prime-exponent-vector/#huge-lcm
     - `prime-exponent-vector#single-prime` 特定の素数（2 など）の指数だけを比べる（水）：https://yuukougun.github.io/kyopro-atlas/math/prime-exponent-vector/#single-prime
-    - `prime-exponent-vector#next-steps` XOR 基底・集合のハッシュ・半分全列挙へのつながり：https://yuukougun.github.io/kyopro-atlas/math/prime-exponent-vector/#next-steps
 
 ## オイラーの φ 関数（euler-phi） {#euler-phi}
 
@@ -374,16 +368,15 @@ search:
 - 前提：`integer-division`
 - サイン：
     - 言い回し：全員が同時に・周期がそろう最初の時刻（lcm）
-    - 言い回し：等間隔に移動して全ての点を訪れられる最大の幅（gcd）
-    - 言い回し：1つだけ書き換え（取り除い）たときの gcd の最大
+    - 言い回し：等間隔に移動してすべての点を訪れられる最大の幅（gcd）
+    - 言い回し：1 つだけ書き換え（取り除い）たときの gcd の最大
     - 言い回し：分数や傾きが等しいものを同じものとして数える
 - 節：
     - `gcd-lcm#euclid` 互除法の正しさ（公約数の集合が変わらない）と回数の上限（隣り合うフィボナッチ数）：https://yuukougun.github.io/kyopro-atlas/math/gcd-lcm/#euclid
     - `gcd-lcm#many-numbers` 複数の数の gcd・lcm と gcd(0, a) = a：https://yuukougun.github.io/kyopro-atlas/math/gcd-lcm/#many-numbers
     - `gcd-lcm#lcm-overflow` lcm のオーバーフロー（割ってから掛ける）：https://yuukougun.github.io/kyopro-atlas/math/gcd-lcm/#lcm-overflow
-    - `gcd-lcm#prefix-suffix-gcd` 左右からの累積 gcd（1つ除いた gcd）：https://yuukougun.github.io/kyopro-atlas/math/gcd-lcm/#prefix-suffix-gcd
+    - `gcd-lcm#prefix-suffix-gcd` 左右からの累積 gcd（1 つ除いた gcd）：https://yuukougun.github.io/kyopro-atlas/math/gcd-lcm/#prefix-suffix-gcd
     - `gcd-lcm#reduce-fraction` 分数・傾きを既約にして map のキーにする（水）：https://yuukougun.github.io/kyopro-atlas/math/gcd-lcm/#reduce-fraction
-    - `gcd-lcm#next-steps` 拡張ユークリッド・GCD の性質・素因数の指数へのつながり：https://yuukougun.github.io/kyopro-atlas/math/gcd-lcm/#next-steps
 
 ## 拡張ユークリッドの互除法と一次合同式（ext-gcd） {#ext-gcd}
 
@@ -502,11 +495,10 @@ search:
     - 言い回し：a^b（b ≥ 2）の形で表せる N 以下の数
     - 言い回し：2^a × b² のように累乗を組み合わせた数を数える
 - 節：
-    - `integer-root#sqrt-correction` sqrt の誤差と補正（r² ≤ N < (r+1)² を確かめる）：https://yuukougun.github.io/kyopro-atlas/math/integer-root/#sqrt-correction
+    - `integer-root#sqrt-correction` sqrt の誤差と補正（r の 2 乗と r + 1 の 2 乗で N を挟む）：https://yuukougun.github.io/kyopro-atlas/math/integer-root/#sqrt-correction
     - `integer-root#kth-root` 二分探索による整数の K 乗根（途中の累乗のあふれ）：https://yuukougun.github.io/kyopro-atlas/math/integer-root/#kth-root
     - `integer-root#perfect-powers` 累乗数の数え上げ（b ≥ 3 は列挙、b = 2 は ⌊√N⌋、重複を除く）：https://yuukougun.github.io/kyopro-atlas/math/integer-root/#perfect-powers
     - `integer-root#compare-sqrt` √ を含む式の大小を整数で比べる：https://yuukougun.github.io/kyopro-atlas/math/integer-root/#compare-sqrt
-    - `integer-root#next-steps` 約数列挙・商の列挙・素因数の指数へのつながり：https://yuukougun.github.io/kyopro-atlas/math/integer-root/#next-steps
 
 ## N 進法（base-conversion） {#base-conversion}
 
@@ -538,7 +530,7 @@ search:
     - 言い回し：xy ≤ N となる組を数える
     - 式の形：Σ_{i=1}^{N} f(⌊N/i⌋) の形の和
 - 節：
-    - `floor-quotient-enum#why-sqrt` 値が O(√N) 種類である理由（i ≤ √N と i > √N）：https://yuukougun.github.io/kyopro-atlas/math/floor-quotient-enum/#why-sqrt
+    - `floor-quotient-enum#why-sqrt` 値が O(√N) 種類である理由（i が √N 以下か、√N より大きいか）：https://yuukougun.github.io/kyopro-atlas/math/floor-quotient-enum/#why-sqrt
     - `floor-quotient-enum#block-end` 同じ商になる区間の右端 ⌊N/⌊N/l⌋⌋：https://yuukougun.github.io/kyopro-atlas/math/floor-quotient-enum/#block-end
     - `floor-quotient-enum#split-at-sqrt` √N を境に場合分けする（片方を √N まで全探索）：https://yuukougun.github.io/kyopro-atlas/math/floor-quotient-enum/#split-at-sqrt
     - `floor-quotient-enum#vs-others` 調和級数・floor sum との使い分け：https://yuukougun.github.io/kyopro-atlas/math/floor-quotient-enum/#vs-others

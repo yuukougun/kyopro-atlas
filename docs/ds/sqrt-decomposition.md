@@ -26,7 +26,6 @@ sections:
   - {title: '根号で場合分け（合計が抑えられた量の大小で分ける。歩幅なら小さい歩幅を（歩幅, 余り）でまとめる。入口は次数による平方分割のページ）', anchor: heavy-light}
   - {title: クエリの平方分割（√Q 個ごとに作り直し、未反映の分は愚直に補正する）, anchor: query-buckets}
   - {title: 実装の要点（ブロック番号は i / B・l と r が同じブロックの場合・タグを押し下げる時機・B は定数でよい）, anchor: implementation}
-  - {title: 使い分け（載せられるならセグメント木のほうが速く安全）, anchor: choosing}
 stage: stub
 updated: 2026-10-21
 ---

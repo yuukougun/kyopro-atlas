@@ -23,14 +23,13 @@ sections:
   - {title: T が部分列として現れる選び方の数 → 照合した文字数を状態にした DP（dp-state-design）, anchor: count-occurrences}
   - {title: '条件を満たす部分列の数 → 末尾の文字や余りを状態にした DP（dp-state-design, dp-mod-state）', anchor: count-with-condition}
   - {title: '異なる部分列の数 → 部分列 DP と代表元の決め方（subsequence-dp, counting-dedup）', anchor: distinct-subsequences}
-  - {title: i < j < k の位置の組の数 → 段階を状態にした DP（dp-phase）, anchor: index-tuples}
+  - {title: 位置の 3 つ組（添字が増える順）の数 → 段階を状態にした DP（dp-phase）, anchor: index-tuples}
   - {title: '最長共通部分列・最長増加部分列 → LCS・LIS（lcs, lis）', anchor: longest}
   - {title: '部分文字列の一致・比較 → ローリングハッシュ・Z（rolling-hash, z-algorithm）', anchor: substring-match}
   - {title: 部分文字列の種類数・K 番目 → Suffix Array（suffix-array）, anchor: distinct-substrings}
   - {title: '回文の部分文字列・部分列 → 回文のページと区間 DP（palindrome, interval-dp）', anchor: palindromes}
   - {title: T を部分文字列に含まない文字列の数 → 照合の状態を持つ DP（string-automaton-dp）, anchor: avoid-substring}
   - {title: 数列の連続部分列 → 題材別の区間（interval）, anchor: subarrays}
-  - {title: 落とし穴, anchor: pitfalls}
 stage: stub
 updated: 2026-10-21
 ---

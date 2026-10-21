@@ -71,7 +71,7 @@ search:
     - `bitset-speedup#word-parallel` ワード並列の考え方と計算量の目安（N^3/64）：https://yuukougun.github.io/kyopro-atlas/misc/bitset-speedup/#word-parallel
     - `bitset-speedup#common-neighbors` 共通の隣接頂点・三角形の数（行の AND と popcount）：https://yuukougun.github.io/kyopro-atlas/misc/bitset-speedup/#common-neighbors
     - `bitset-speedup#parity-xor` 偶奇だけの集計（XOR）：https://yuukougun.github.io/kyopro-atlas/misc/bitset-speedup/#parity-xor
-    - `bitset-speedup#subset-sum-shift` 部分和 DP のシフト OR（dp |= dp << a）（黄）：https://yuukougun.github.io/kyopro-atlas/misc/bitset-speedup/#subset-sum-shift
+    - `bitset-speedup#subset-sum-shift` 部分和 DP のシフト OR（黄）：https://yuukougun.github.io/kyopro-atlas/misc/bitset-speedup/#subset-sum-shift
     - `bitset-speedup#reachability` DAG の到達可能性（逆トポロジカル順に OR、閉路は SCC で縮約）（黄）：https://yuukougun.github.io/kyopro-atlas/misc/bitset-speedup/#reachability
     - `bitset-speedup#memory-batching` メモリの見積もりと 64 個ずつのクエリの処理（黄）：https://yuukougun.github.io/kyopro-atlas/misc/bitset-speedup/#memory-batching
     - `bitset-speedup#cpp` C++ の作法（大きさはコンパイル時の定数・大きな bitset をスタックに置かない）：https://yuukougun.github.io/kyopro-atlas/misc/bitset-speedup/#cpp
