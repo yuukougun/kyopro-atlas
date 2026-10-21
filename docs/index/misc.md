@@ -35,7 +35,7 @@ search:
 
 ## 乱択アルゴリズム（randomized） {#randomized}
 
-- id：`randomized`　レベル：青　段階：stub　type：technique
+- id：`randomized`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/misc/randomized/
 - 別名：乱択、ランダム化、モンテカルロ法、ラスベガス法、過半数、Boyer-Moore の投票、Color Coding、randomized algorithm
 - 種類：ハッシュ・乱択
@@ -55,7 +55,7 @@ search:
 
 ## bitset による高速化（bitset-speedup） {#bitset-speedup}
 
-- id：`bitset-speedup`　レベル：青　段階：stub　type：technique
+- id：`bitset-speedup`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/misc/bitset-speedup/
 - 別名：bitset、ビット並列、ワード並列、1/64 倍、bitset で部分和、推移閉包、到達可能性クエリ、bitset speedup
 - 種類：ビット演算、計算量、DP
@@ -79,7 +79,7 @@ search:
 
 ## 構文解析（parsing） {#parsing}
 
-- id：`parsing`　レベル：青　段階：stub　type：technique
+- id：`parsing`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/misc/parsing/
 - 別名：再帰下降構文解析、パーサ、BNF、式の評価、逆ポーランド記法、recursive descent parsing
 - 種類：文字列
@@ -94,6 +94,6 @@ search:
     - `parsing#bnf` BNF と規則ごとの関数（読み取り位置を参照で共有する）：https://yuukougun.github.io/kyopro-atlas/misc/parsing/#bnf
     - `parsing#why-it-works` 優先順位と括弧が正しく読める理由（構文木と呼び出しの木）：https://yuukougun.github.io/kyopro-atlas/misc/parsing/#why-it-works
     - `parsing#edge-cases` 単項マイナス・空白などの例外：https://yuukougun.github.io/kyopro-atlas/misc/parsing/#edge-cases
+    - `parsing#deep-nesting` 深い入れ子と再帰の深さ：https://yuukougun.github.io/kyopro-atlas/misc/parsing/#deep-nesting
     - `parsing#grammar-dp` 文法に沿った DP：https://yuukougun.github.io/kyopro-atlas/misc/parsing/#grammar-dp
     - `parsing#substring-sum` 式の部分文字列の総和（発展）：https://yuukougun.github.io/kyopro-atlas/misc/parsing/#substring-sum
-    - `parsing#deep-nesting` 深い入れ子と再帰の深さ：https://yuukougun.github.io/kyopro-atlas/misc/parsing/#deep-nesting

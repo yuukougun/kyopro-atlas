@@ -1,0 +1,6 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "0\n", output: "0\nperiod 12 from 71\n"}
+  - {input: "13\n", output: "0 1 2 3 1 4 3 2 1 4 2 6 4 1\nperiod 12 from 71\n"}

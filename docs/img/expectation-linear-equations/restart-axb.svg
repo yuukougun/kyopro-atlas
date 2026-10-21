@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 290" font-family="sans-serif" font-size="15">
+  <rect width="540" height="290" fill="#ffffff"/>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333333"/>
+    </marker>
+  </defs>
+  <text x="270" y="24" text-anchor="middle" font-size="16">表・裏とも確率 1/2。X ＝ E[0] を未知数にする</text>
+  <!-- nodes: x = 85, 270, 455 ; y = 150 -->
+  <g stroke="#333333" stroke-width="1.5">
+    <circle cx="85" cy="150" r="36" fill="#fff4d6" stroke-width="3"/>
+    <circle cx="270" cy="150" r="36" fill="#e8f0fe"/>
+    <circle cx="455" cy="150" r="36" fill="#fde7e7" stroke-width="3"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="85" y="146">連続 0</text><text x="85" y="165">E[0] = X</text>
+    <text x="270" y="146">連続 1</text><text x="270" y="165">E[1]</text>
+    <text x="455" y="146">連続 2</text><text x="455" y="165">終わり</text>
+  </g>
+  <!-- forward edges (heads): solid -->
+  <g stroke="#333333" stroke-width="1.5" fill="none" marker-end="url(#ah)">
+    <line x1="123" y1="150" x2="232" y2="150"/>
+    <line x1="308" y1="150" x2="417" y2="150"/>
+  </g>
+  <g text-anchor="middle" font-size="14">
+    <text x="177" y="142">表 1/2</text>
+    <text x="362" y="142">表 1/2</text>
+  </g>
+  <!-- back edges (tails): dashed -->
+  <g stroke="#333333" stroke-width="1.5" fill="none" stroke-dasharray="6 4" marker-end="url(#ah)">
+    <path d="M250,120 Q177,58 105,120"/>
+    <path d="M62,122 C34,68 136,68 108,122"/>
+  </g>
+  <g text-anchor="middle" font-size="14">
+    <text x="215" y="80">裏 1/2（振り出しへ）</text>
+    <text x="85" y="60">裏 1/2</text>
+  </g>
+  <!-- a + bX labels under nodes -->
+  <g text-anchor="middle" font-size="15">
+    <text x="455" y="216">0</text>
+    <text x="455" y="238">(a, b) = (0, 0)</text>
+    <text x="270" y="216">1 + ½·0 + ½X</text>
+    <text x="270" y="238">(a, b) = (1, ½)</text>
+    <text x="85" y="216">1 + ½E[1] + ½X</text>
+    <text x="85" y="238">(a, b) = (3/2, 3/4)</text>
+  </g>
+  <g stroke="#888888" stroke-width="1" fill="none" marker-end="url(#ah)">
+    <line x1="400" y1="231" x2="338" y2="231"/>
+    <line x1="203" y1="231" x2="170" y2="231"/>
+  </g>
+  <text x="270" y="276" text-anchor="middle" font-size="15">右から埋め、X = 3/2 + (3/4)X を解いて X = 6</text>
+</svg>

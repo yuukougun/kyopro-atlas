@@ -107,25 +107,25 @@ difficulty 2400〜（概要だけ） の帯で主に必要になるページ（5
 | Dinkelbach 法 | [平均・中央値の最大化](../basics/fractional-binary-search.md#dinkelbach)（水） | 基本テクニック |
 | 連結性を持つ（フロンティア法） | [プロファイル DP](../dp/broken-profile-dp.md)（黄）（準備中） | 動的計画法 |
 | 連結成分 DP（ブロックを作る・端に付ける・つなぐ） | [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md)（黄）（準備中） | 動的計画法 |
-| 併合過程の木（Kruskal 再構築木）でオンラインに答える（木の章へ） | [最小ボトルネック路](../graph/bottleneck-path.md)（青）（準備中） | グラフ |
+| 併合過程の木（Kruskal 再構築木）でオンラインに答える（木の章へ） | [最小ボトルネック路](../graph/bottleneck-path.md#reconstruction-tree)（青） | グラフ |
 | 二重頂点連結成分とブロックカット木 | [橋・関節点・二重連結成分](../graph/lowlink.md)（黄）（準備中） | グラフ |
 | カットの形を決め打つ | [最小カット](../graph/min-cut.md)（黄）（準備中） | グラフ |
 | 多値変数を頂点の列で表す | [燃やす埋める](../graph/project-selection.md)（黄）（準備中） | グラフ |
 | 正則二部グラフの分解・辺彩色 | [二部マッチング](../graph/bipartite-matching.md)（黄）（準備中） | グラフ |
 | 頂点を 2 倍にして二部グラフにする（LP の半整数性） | [König の定理](../graph/konig-theorem.md)（黄）（準備中） | グラフ |
 | 割当問題とハンガリアン法 | [最小費用流](../graph/min-cost-flow.md)（黄）（準備中） | グラフ |
-| パスへの一括更新があるなら HL 分解 | [木の上のパスの判定と分解](../tree/tree-path.md)（青）（準備中） | 木 |
+| パスへの一括更新があるなら HL 分解 | [木の上のパスの判定と分解](../tree/tree-path.md#to-hld)（青） | 木 |
 | 逆元がない演算・パスへの一括更新は HL 分解 | [オイラーツアー](../tree/euler-tour.md#to-hld)（青） | 木 |
 | 距離の頻度表は畳み込みと組む | [重心分解](../tree/centroid-decomposition.md)（黄）（準備中） | 木 |
 | SWAG：スタック 2 本で作る総積つきキュー | [単調スタックとスライド最小値](../ds/monotonic-stack.md#swag)（水） | データ構造 |
-| 冪等でない演算（2 べきに分けて O(log N)、Disjoint Sparse Table） | [Sparse Table](../ds/sparse-table.md)（青）（準備中） | データ構造 |
-| 時間付き Mo・ロールバック Mo | [Mo's algorithm](../ds/mo-algorithm.md)（青）（準備中） | データ構造 |
-| 接頭辞ごとの版で区間の K 番目・x 以下の個数をオンラインで求める | [永続データ構造](../ds/persistent-data-structures.md)（青）（準備中） | データ構造 |
-| 各段に BIT を持たせる（先読みと組む） | [マージソート木](../ds/merge-sort-tree.md)（青）（準備中） | データ構造 |
+| 冪等でない演算（2 べきに分けて O(log N)、Disjoint Sparse Table） | [Sparse Table](../ds/sparse-table.md#disjoint-sparse-table)（青） | データ構造 |
+| 時間付き Mo・ロールバック Mo | [Mo's algorithm](../ds/mo-algorithm.md#variants)（青） | データ構造 |
+| 接頭辞ごとの版で区間の K 番目・x 以下の個数をオンラインで求める | [永続データ構造](../ds/persistent-data-structures.md#prefix-versions)（青） | データ構造 |
+| 各段に BIT を持たせる（先読みと組む） | [マージソート木](../ds/merge-sort-tree.md#bit-per-level)（青） | データ構造 |
 | 平方剰余と mod の K 乗根（オイラーの規準・Tonelli-Shanks・Cipolla） | [位数・原始根・離散対数](../math/multiplicative-order.md)（黄）（準備中） | 整数論・代数 |
 | 応用の型：bit ごとの popcount・一次式の mod の積 | [floor sum](../math/floor-sum.md#applications)（黄） | 整数論・代数 |
 | 両端を越えない場合 | [鏡像法とカタラン数](../comb/reflection-principle.md)（黄）（準備中） | 数え上げ・確率・ゲーム |
-| min-max 包除（全種類がそろうまでの期待値） | [包除原理](../comb/inclusion-exclusion.md)（青）（準備中） | 数え上げ・確率・ゲーム |
+| min-max 包除（全種類がそろうまでの期待値） | [包除原理](../comb/inclusion-exclusion.md#min-max)（青） | 数え上げ・確率・ゲーム |
 | 符号付きの木 DP | [包除 DP](../comb/inclusion-exclusion-dp.md)（黄）（準備中） | 数え上げ・確率・ゲーム |
 | 商の列挙で同じ値の範囲を束ねる | [メビウス関数とメビウス反転](../comb/mobius-function.md)（黄）（準備中） | 数え上げ・確率・ゲーム |
 | 分割数型の DP | [整数の分割と分割数](../comb/partition-number.md)（黄）（準備中） | 数え上げ・確率・ゲーム |
@@ -135,4 +135,4 @@ difficulty 2400〜（概要だけ） の帯で主に必要になるページ（5
 | 必勝局面の数え上げ（XOR 畳み込み） | [Nim と XOR](../comb/nim.md#counting)（水） | 数え上げ・確率・ゲーム |
 | 得点のあるゲームはダイクストラの要領で確定させる | [後退解析](../comb/game-retrograde-analysis.md)（黄）（準備中） | 数え上げ・確率・ゲーム |
 | 部分文字列の辞書順 K 番目 | [Suffix Array と LCP 配列](../string/suffix-array.md#kth-substring)（黄） | 文字列 |
-| 式の部分文字列の総和 | [構文解析](../misc/parsing.md)（青）（準備中） | その他の技法 |
+| 式の部分文字列の総和 | [構文解析](../misc/parsing.md#substring-sum)（青） | その他の技法 |

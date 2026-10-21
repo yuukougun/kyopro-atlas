@@ -1,0 +1,12 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 1 頂点
+  - {input: "1\n7\n", output: "7\n"}
+  # パス状の木：5 → {5,1} → {5,1,4} → {5,1,4,2}
+  - {input: "4\n5 1 4 2\n1 2\n2 3\n3 4\n", output: "5\n1\n4\n2\n"}
+  # 根 1（10）の子 2（20）・3（1）、3 の子 4（1）と 5（30）。兄弟の値が混ざらないこと
+  - {input: "5\n10 20 1 1 30\n1 2\n1 3\n3 4\n3 5\n", output: "10\n10\n1\n1\n10\n"}
+  # 同じ値が多い
+  - {input: "3\n3 3 3\n1 2\n1 3\n", output: "3\n3\n3\n"}

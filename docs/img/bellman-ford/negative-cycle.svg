@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" width="600" height="360" font-family="sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#222222"/>
+    </marker>
+  </defs>
+  <rect width="600" height="360" fill="#ffffff"/>
+  <g stroke="#222222" stroke-width="2" fill="none" marker-end="url(#arr)">
+    <line x1="82" y1="111" x2="176" y2="70"/>
+    <line x1="364" y1="60" x2="454" y2="60"/>
+    <line x1="79" y1="135" x2="180" y2="214"/>
+    <line x1="356" y1="230" x2="226" y2="230"/>
+    <path d="M214,42 Q270.0,10.0 326,41"/>
+    <path d="M326,78 Q270.0,110.0 214,79"/>
+    <path d="M394,212 Q450.0,180.0 506,211"/>
+    <path d="M506,248 Q450.0,280.0 394,249"/>
+  </g>
+  <g font-size="16" fill="#222222" text-anchor="middle">
+    <text x="120" y="80">2</text>
+    <text x="270" y="22">1</text>
+    <text x="270" y="112">−3</text>
+    <text x="410" y="52">1</text>
+    <text x="118" y="186">3</text>
+    <text x="290" y="222">−5</text>
+    <text x="450" y="192">−1</text>
+    <text x="450" y="282">−1</text>
+  </g>
+  <circle cx="60" cy="120" r="22" fill="#ffffff" stroke="#222222" stroke-width="2"/>
+  <circle cx="200" cy="60" r="22" fill="#f6d5d5" stroke="#b03030" stroke-width="2"/>
+  <circle cx="200" cy="60" r="17" fill="none" stroke="#b03030" stroke-width="1.5"/>
+  <circle cx="340" cy="60" r="22" fill="#f6d5d5" stroke="#b03030" stroke-width="2"/>
+  <circle cx="340" cy="60" r="17" fill="none" stroke="#b03030" stroke-width="1.5"/>
+  <circle cx="480" cy="60" r="22" fill="#f6d5d5" stroke="#b03030" stroke-width="2"/>
+  <circle cx="480" cy="60" r="17" fill="none" stroke="#b03030" stroke-width="1.5"/>
+  <circle cx="200" cy="230" r="22" fill="#ffffff" stroke="#222222" stroke-width="2"/>
+  <circle cx="380" cy="230" r="22" fill="#eeeeee" stroke="#777777" stroke-width="2" stroke-dasharray="5 4"/>
+  <circle cx="520" cy="230" r="22" fill="#eeeeee" stroke="#777777" stroke-width="2" stroke-dasharray="5 4"/>
+  <g font-size="18" fill="#222222" text-anchor="middle" dominant-baseline="central">
+    <text x="60" y="120">s</text>
+    <text x="200" y="60">a</text>
+    <text x="340" y="60">b</text>
+    <text x="480" y="60">c</text>
+    <text x="200" y="230">d</text>
+    <text x="380" y="230">y</text>
+    <text x="520" y="230">x</text>
+  </g>
+  <g font-size="16" text-anchor="middle">
+    <text x="60" y="160" fill="#222222" font-weight="bold">0</text>
+    <text x="200" y="102" fill="#b03030" font-weight="bold">−∞</text>
+    <text x="340" y="102" fill="#b03030" font-weight="bold">−∞</text>
+    <text x="480" y="102" fill="#b03030" font-weight="bold">−∞</text>
+    <text x="200" y="270" fill="#222222" font-weight="bold">3</text>
+    <text x="380" y="270" fill="#555555" font-weight="bold">INF</text>
+    <text x="520" y="270" fill="#555555" font-weight="bold">INF</text>
+  </g>
+  <circle cx="40" cy="315" r="10" fill="#ffffff" stroke="#222222" stroke-width="2"/>
+  <text x="58" y="315" font-size="14" fill="#222222" dominant-baseline="central">有限の距離</text>
+  <circle cx="180" cy="315" r="10" fill="#f6d5d5" stroke="#b03030" stroke-width="2"/><circle cx="180" cy="315" r="6" fill="none" stroke="#b03030" stroke-width="1.5"/>
+  <text x="198" y="315" font-size="14" fill="#222222" dominant-baseline="central">−∞（N 回目以降も更新される・その先）</text>
+  <circle cx="40" cy="345" r="10" fill="#eeeeee" stroke="#777777" stroke-width="2" stroke-dasharray="4 3"/>
+  <text x="58" y="345" font-size="14" fill="#222222" dominant-baseline="central">始点から届かない（INF。閉路 x, y は負でも答えに影響しない）</text>
+</svg>

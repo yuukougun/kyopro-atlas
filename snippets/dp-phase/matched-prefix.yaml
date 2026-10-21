@@ -1,0 +1,11 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 1 文字の s で t = "aa"：小さい j から回すと 1 と誤る
+  - {input: "a\naa\n", output: "0\n"}
+  - {input: "aaa\naa\n", output: "3\n"}
+  # 含まれない
+  - {input: "abc\nd\n", output: "0\n"}
+  - {input: "abcabc\nabc\n", output: "4\n"}
+  - {input: "aaaaaaaaaaaaaaaa\naaaa\n", output: "1820\n"}

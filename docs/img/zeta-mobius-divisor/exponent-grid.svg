@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 702 324" width="702" height="324" font-family="sans-serif">
+<rect x="0" y="0" width="702" height="324" fill="#ffffff"/>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker></defs>
+<text x="127.0" y="30" font-size="17" text-anchor="middle" fill="#222">f（すべて 1）</text>
+<text x="69.0" y="62" font-size="13" text-anchor="middle" fill="#555">2^0</text>
+<text x="127.0" y="62" font-size="13" text-anchor="middle" fill="#555">2^1</text>
+<text x="185.0" y="62" font-size="13" text-anchor="middle" fill="#555">2^2</text>
+<text x="34" y="104.0" font-size="13" text-anchor="end" fill="#555">3^0</text>
+<rect x="40" y="70" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="45" y="85" font-size="12" fill="#666">n=1</text>
+<text x="69.0" y="112.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">1</text>
+<rect x="98" y="70" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="103" y="85" font-size="12" fill="#666">n=2</text>
+<text x="127.0" y="112.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">1</text>
+<rect x="156" y="70" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="161" y="85" font-size="12" fill="#666">n=4</text>
+<text x="185.0" y="112.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">1</text>
+<text x="34" y="162.0" font-size="13" text-anchor="end" fill="#555">3^1</text>
+<rect x="40" y="128" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="45" y="143" font-size="12" fill="#666">n=3</text>
+<text x="69.0" y="170.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">1</text>
+<rect x="98" y="128" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="103" y="143" font-size="12" fill="#666">n=6</text>
+<text x="127.0" y="170.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">1</text>
+<rect x="156" y="128" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="161" y="143" font-size="12" fill="#666">n=12</text>
+<text x="185.0" y="170.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">1</text>
+<text x="34" y="220.0" font-size="13" text-anchor="end" fill="#555">3^2</text>
+<rect x="40" y="186" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="45" y="201" font-size="12" fill="#666">n=9</text>
+<text x="69.0" y="228.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">1</text>
+<rect x="98" y="186" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="103" y="201" font-size="12" fill="#666">n=18</text>
+<text x="127.0" y="228.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">1</text>
+<rect x="156" y="186" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="161" y="201" font-size="12" fill="#666">n=36</text>
+<text x="185.0" y="228.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">1</text>
+<text x="127.0" y="292" font-size="14" text-anchor="middle" fill="#222">横は 2 の指数、縦は 3 の指数</text>
+<text x="351.0" y="30" font-size="17" text-anchor="middle" fill="#222">素数 2 の段の後</text>
+<text x="293.0" y="62" font-size="13" text-anchor="middle" fill="#555">2^0</text>
+<text x="351.0" y="62" font-size="13" text-anchor="middle" fill="#555">2^1</text>
+<text x="409.0" y="62" font-size="13" text-anchor="middle" fill="#555">2^2</text>
+<text x="258" y="104.0" font-size="13" text-anchor="end" fill="#555">3^0</text>
+<rect x="264" y="70" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="269" y="85" font-size="12" fill="#666">n=1</text>
+<text x="293.0" y="112.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">1</text>
+<rect x="322" y="70" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="327" y="85" font-size="12" fill="#666">n=2</text>
+<text x="351.0" y="112.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">2</text>
+<rect x="380" y="70" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="385" y="85" font-size="12" fill="#666">n=4</text>
+<text x="409.0" y="112.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">3</text>
+<text x="258" y="162.0" font-size="13" text-anchor="end" fill="#555">3^1</text>
+<rect x="264" y="128" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="269" y="143" font-size="12" fill="#666">n=3</text>
+<text x="293.0" y="170.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">1</text>
+<rect x="322" y="128" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="327" y="143" font-size="12" fill="#666">n=6</text>
+<text x="351.0" y="170.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">2</text>
+<rect x="380" y="128" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="385" y="143" font-size="12" fill="#666">n=12</text>
+<text x="409.0" y="170.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">3</text>
+<text x="258" y="220.0" font-size="13" text-anchor="end" fill="#555">3^2</text>
+<rect x="264" y="186" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="269" y="201" font-size="12" fill="#666">n=9</text>
+<text x="293.0" y="228.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">1</text>
+<rect x="322" y="186" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="327" y="201" font-size="12" fill="#666">n=18</text>
+<text x="351.0" y="228.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">2</text>
+<rect x="380" y="186" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="385" y="201" font-size="12" fill="#666">n=36</text>
+<text x="409.0" y="228.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">3</text>
+<line x1="272" y1="266" x2="430" y2="266" stroke="#c0392b" stroke-width="2.5" marker-end="url(#ar)"/>
+<text x="351.0" y="292" font-size="14" text-anchor="middle" fill="#222">左から右へ足す</text>
+<text x="351.0" y="312" font-size="14" text-anchor="middle" fill="#222">v[2i] += v[i]</text>
+<text x="565.0" y="30" font-size="17" text-anchor="middle" fill="#222">素数 3 の段の後</text>
+<text x="507.0" y="62" font-size="13" text-anchor="middle" fill="#555">2^0</text>
+<text x="565.0" y="62" font-size="13" text-anchor="middle" fill="#555">2^1</text>
+<text x="623.0" y="62" font-size="13" text-anchor="middle" fill="#555">2^2</text>
+<text x="472" y="104.0" font-size="13" text-anchor="end" fill="#555">3^0</text>
+<rect x="478" y="70" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="483" y="85" font-size="12" fill="#666">n=1</text>
+<text x="507.0" y="112.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">1</text>
+<rect x="536" y="70" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="541" y="85" font-size="12" fill="#666">n=2</text>
+<text x="565.0" y="112.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">2</text>
+<rect x="594" y="70" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="599" y="85" font-size="12" fill="#666">n=4</text>
+<text x="623.0" y="112.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">3</text>
+<text x="472" y="162.0" font-size="13" text-anchor="end" fill="#555">3^1</text>
+<rect x="478" y="128" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="483" y="143" font-size="12" fill="#666">n=3</text>
+<text x="507.0" y="170.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">2</text>
+<rect x="536" y="128" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="541" y="143" font-size="12" fill="#666">n=6</text>
+<text x="565.0" y="170.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">4</text>
+<rect x="594" y="128" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="599" y="143" font-size="12" fill="#666">n=12</text>
+<text x="623.0" y="170.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">6</text>
+<text x="472" y="220.0" font-size="13" text-anchor="end" fill="#555">3^2</text>
+<rect x="478" y="186" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="483" y="201" font-size="12" fill="#666">n=9</text>
+<text x="507.0" y="228.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">3</text>
+<rect x="536" y="186" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="541" y="201" font-size="12" fill="#666">n=18</text>
+<text x="565.0" y="228.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">6</text>
+<rect x="594" y="186" width="58" height="58" fill="#f4f7fb" stroke="#333" stroke-width="1.2"/>
+<text x="599" y="201" font-size="12" fill="#666">n=36</text>
+<text x="623.0" y="228.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">9</text>
+<line x1="662" y1="78" x2="662" y2="236" stroke="#c0392b" stroke-width="2.5" stroke-dasharray="6 3" marker-end="url(#ar)"/>
+<text x="565.0" y="292" font-size="14" text-anchor="middle" fill="#222">上から下へ足す</text>
+<text x="565.0" y="312" font-size="14" text-anchor="middle" fill="#222">v[3i] += v[i]（約数の個数になる）</text>
+</svg>

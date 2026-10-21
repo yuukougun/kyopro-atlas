@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 312" font-family="sans-serif" font-size="14">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<line x1="200" y1="86" x2="110" y2="134" stroke="#555" stroke-width="1.5"/>
+<line x1="200" y1="86" x2="290" y2="134" stroke="#555" stroke-width="1.5"/>
+<line x1="110" y1="166" x2="65" y2="214" stroke="#555" stroke-width="1.5"/>
+<line x1="110" y1="166" x2="155" y2="214" stroke="#555" stroke-width="1.5"/>
+<line x1="290" y1="166" x2="245" y2="214" stroke="#555" stroke-width="1.5"/>
+<line x1="290" y1="166" x2="335" y2="214" stroke="#555" stroke-width="1.5"/>
+<line x1="500" y1="86" x2="500" y2="134" stroke="#1f4e9a" stroke-width="2.5"/>
+<line x1="500" y1="166" x2="455" y2="214" stroke="#1f4e9a" stroke-width="2.5"/>
+<line x1="500" y1="86" x2="110" y2="134" stroke="#1f4e9a" stroke-width="2" stroke-dasharray="6 4"/>
+<line x1="500" y1="166" x2="335" y2="214" stroke="#1f4e9a" stroke-width="2" stroke-dasharray="6 4"/>
+<rect x="174" y="54" width="52" height="32" rx="6" fill="#eeeeee" stroke="#555" stroke-width="1.5"/>
+<text x="200" y="75" text-anchor="middle" fill="#222">8</text>
+<text x="200" y="48" text-anchor="middle" fill="#555" font-size="14">[0,4)</text>
+<rect x="84" y="134" width="52" height="32" rx="6" fill="#eeeeee" stroke="#555" stroke-width="1.5"/>
+<text x="110" y="155" text-anchor="middle" fill="#222">2</text>
+<text x="110" y="128" text-anchor="middle" fill="#555" font-size="14">[0,2)</text>
+<rect x="264" y="134" width="52" height="32" rx="6" fill="#eeeeee" stroke="#555" stroke-width="1.5"/>
+<text x="290" y="155" text-anchor="middle" fill="#222">6</text>
+<text x="290" y="128" text-anchor="middle" fill="#555" font-size="14">[2,4)</text>
+<rect x="39" y="214" width="52" height="32" rx="6" fill="#eeeeee" stroke="#555" stroke-width="1.5"/>
+<text x="65" y="235" text-anchor="middle" fill="#222">2</text>
+<text x="65" y="264" text-anchor="middle" fill="#555" font-size="14">位置 0</text>
+<rect x="129" y="214" width="52" height="32" rx="6" fill="#eeeeee" stroke="#555" stroke-width="1.5"/>
+<text x="155" y="235" text-anchor="middle" fill="#222">0</text>
+<text x="155" y="264" text-anchor="middle" fill="#555" font-size="14">位置 1</text>
+<rect x="219" y="214" width="52" height="32" rx="6" fill="#eeeeee" stroke="#555" stroke-width="1.5"/>
+<text x="245" y="235" text-anchor="middle" fill="#222">5</text>
+<text x="245" y="264" text-anchor="middle" fill="#555" font-size="14">位置 2</text>
+<rect x="309" y="214" width="52" height="32" rx="6" fill="#eeeeee" stroke="#555" stroke-width="1.5"/>
+<text x="335" y="235" text-anchor="middle" fill="#222">1</text>
+<text x="335" y="264" text-anchor="middle" fill="#555" font-size="14">位置 3</text>
+<rect x="474" y="54" width="52" height="32" rx="6" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
+<text x="500" y="75" text-anchor="middle" fill="#222">10</text>
+<text x="534" y="75" fill="#1f4e9a" font-size="14">[0,4)</text>
+<rect x="474" y="134" width="52" height="32" rx="6" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
+<text x="500" y="155" text-anchor="middle" fill="#222">8</text>
+<text x="534" y="155" fill="#1f4e9a" font-size="14">[2,4)</text>
+<rect x="429" y="214" width="52" height="32" rx="6" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
+<text x="455" y="235" text-anchor="middle" fill="#222">7</text>
+<text x="455" y="264" text-anchor="middle" fill="#1f4e9a" font-size="14">位置 2</text>
+<text x="200" y="30" text-anchor="middle" fill="#555" font-weight="bold">版 0 の根</text>
+<text x="500" y="30" text-anchor="middle" fill="#1f4e9a" font-weight="bold">版 1 の根</text>
+<text x="20" y="298" fill="#1f4e9a" font-size="14">青（太枠）：版 1 で新しく作る 3 個のノード。破線：版 0 のノードをそのまま指す</text>
+</svg>

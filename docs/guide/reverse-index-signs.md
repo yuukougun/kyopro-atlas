@@ -62,8 +62,8 @@ updated: 2026-10-21
 | 平均・濃度・割合・(Σa)/(Σb) の最大（最小） | [平均・中央値の最大化](../basics/fractional-binary-search.md) | 水 |
 | 中央値の最大値・最小値 | [平均・中央値の最大化](../basics/fractional-binary-search.md) | 水 |
 | 全区間の中央値を集めた中央値 | [平均・中央値の最大化](../basics/fractional-binary-search.md) | 水 |
-| N^2 個（以上）の値の K 番目 | [K 番目の値](../basics/kth-value.md)（準備中） | 青 |
-| 大きい方から M 個の和 | [K 番目の値](../basics/kth-value.md)（準備中） | 青 |
+| N^2 個（以上）の値の K 番目 | [K 番目の値](../basics/kth-value.md) | 青 |
+| 大きい方から M 個の和 | [K 番目の値](../basics/kth-value.md) | 青 |
 | 時刻や位置を 1 つ選んで、時間やコストを最小化する（谷形） | [三分探索](../basics/ternary-search.md) | 水 |
 | 答えを実数で出力し、誤差が許される | [三分探索](../basics/ternary-search.md) | 水 |
 | Σ\|x − a_i\| を最小化する | [絶対値の和の最小化と中央値](../basics/median-absolute.md) | 基礎 |
@@ -77,8 +77,8 @@ updated: 2026-10-21
 | 締め切りまでに何個できるか・報酬の最大 | [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md) | 水 |
 | 毎回いちばん大きい（小さい）ものを取り出して更新する | [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md) | 水 |
 | 組合せの和の小さい方から K 番目（K が小さい） | [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md) | 水 |
-| 並べる順番で結果が変わる | [交換論法と比較関数の設計](../basics/exchange-argument.md)（準備中） | 青 |
-| 文字列・数を並べて連結した結果を最大（最小）にする | [交換論法と比較関数の設計](../basics/exchange-argument.md)（準備中） | 青 |
+| 並べる順番で結果が変わる | [交換論法と比較関数の設計](../basics/exchange-argument.md) | 青 |
+| 文字列・数を並べて連結した結果を最大（最小）にする | [交換論法と比較関数の設計](../basics/exchange-argument.md) | 青 |
 | 辞書順最小（最大）の文字列・列を出力する（なければ −1） | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md) | 基礎 |
 | 条件を満たす中で最も小さいもの | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md) | 基礎 |
 | 辞書順で K 番目 | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md) | 基礎 |
@@ -135,9 +135,9 @@ updated: 2026-10-21
 | 和（積）が M の倍数になる選び方の数 | [余り・個数を状態に持つ DP](../dp/dp-mod-state.md) | 水 |
 | 平均が整数になる・平均がちょうど A になる選び方の数 | [余り・個数を状態に持つ DP](../dp/dp-mod-state.md) | 水 |
 | '?' を埋めた数を M で割った余りが r になるものの数 | [余り・個数を状態に持つ DP](../dp/dp-mod-state.md) | 水 |
-| 区間を 1 つ選んで、その中だけ操作する（1 回だけ変更できる） | [フェーズを状態に持つ DP](../dp/dp-phase.md)（準備中） | 青 |
-| 部分列として 'ABC' などが何個含まれるか（'?' を埋めた全通りの和） | [フェーズを状態に持つ DP](../dp/dp-phase.md)（準備中） | 青 |
-| 連続する部分列の和の最大 | [フェーズを状態に持つ DP](../dp/dp-phase.md)（準備中） | 青 |
+| 区間を 1 つ選んで、その中だけ操作する（1 回だけ変更できる） | [フェーズを状態に持つ DP](../dp/dp-phase.md) | 青 |
+| 部分列として 'ABC' などが何個含まれるか（'?' を埋めた全通りの和） | [フェーズを状態に持つ DP](../dp/dp-phase.md) | 青 |
+| 連続する部分列の和の最大 | [フェーズを状態に持つ DP](../dp/dp-phase.md) | 青 |
 | 選び方（経路・操作列）を 1 つ出力せよ | [DP の復元](../dp/dp-reconstruction.md) | 水 |
 | 条件を満たすものが複数あれば辞書順最小のものを出力せよ | [DP の復元](../dp/dp-reconstruction.md) | 水 |
 | 辞書順で K 番目のものを出力せよ（K は 10^18 程度） | [DP の復元](../dp/dp-reconstruction.md) | 水 |
@@ -148,13 +148,13 @@ updated: 2026-10-21
 | いくつか選んで和をちょうど S にできるか・その選び方の数 | [部分和 DP](../dp/subset-sum.md) | 基礎 |
 | 2 つのグループに分けて差（遅い方）を最小にする | [部分和 DP](../dp/subset-sum.md) | 基礎 |
 | 各要素に + か − を付けて和を K にする | [部分和 DP](../dp/subset-sum.md) | 基礎 |
-| ペナルティが 2^(C−1) のように指数的に増える | [DP の状態の削減](../dp/dp-dimension-reduction.md)（準備中） | 青 |
-| 要素の追加と削除のクエリのたびに、和が K になる選び方の数を答える | [戻す DP](../dp/knapsack-undo.md)（準備中） | 青 |
-| 各 i について、i を使わないときの答え（〜を除いたとき） | [戻す DP](../dp/knapsack-undo.md)（準備中） | 青 |
-| 好きな順番で、いくつか選んで順に処理する | [並べ替えてから DP する](../dp/exchange-argument-dp.md)（準備中） | 青 |
-| 締切・積み重ね（上に載せられる重さ）がある | [並べ替えてから DP する](../dp/exchange-argument-dp.md)（準備中） | 青 |
-| 一次関数を好きな順に合成する | [並べ替えてから DP する](../dp/exchange-argument-dp.md)（準備中） | 青 |
-| 最後の 1 つだけ制限を超えてよい | [並べ替えてから DP する](../dp/exchange-argument-dp.md)（準備中） | 青 |
+| ペナルティが 2^(C−1) のように指数的に増える | [DP の状態の削減](../dp/dp-dimension-reduction.md) | 青 |
+| 要素の追加と削除のクエリのたびに、和が K になる選び方の数を答える | [戻す DP](../dp/knapsack-undo.md) | 青 |
+| 各 i について、i を使わないときの答え（〜を除いたとき） | [戻す DP](../dp/knapsack-undo.md) | 青 |
+| 好きな順番で、いくつか選んで順に処理する | [並べ替えてから DP する](../dp/exchange-argument-dp.md) | 青 |
+| 締切・積み重ね（上に載せられる重さ）がある | [並べ替えてから DP する](../dp/exchange-argument-dp.md) | 青 |
+| 一次関数を好きな順に合成する | [並べ替えてから DP する](../dp/exchange-argument-dp.md) | 青 |
+| 最後の 1 つだけ制限を超えてよい | [並べ替えてから DP する](../dp/exchange-argument-dp.md) | 青 |
 | 右か下にしか動けない | [グリッド上の DP](../dp/dp-grid.md) | 水 |
 | 経路の数・経路上で集める値の最大 | [グリッド上の DP](../dp/dp-grid.md) | 水 |
 | 条件を満たす正方形の数・最大の正方形 | [グリッド上の DP](../dp/dp-grid.md) | 水 |
@@ -170,16 +170,16 @@ updated: 2026-10-21
 | 異なる部分列の個数 | [部分列 DP](../dp/subsequence-dp.md)（準備中） | 黄 |
 | 部分列として現れない最短の文字列（辞書順最小） | [部分列 DP](../dp/subsequence-dp.md)（準備中） | 黄 |
 | 辞書順で K 番目の部分列 | [部分列 DP](../dp/subsequence-dp.md)（準備中） | 黄 |
-| 隣り合うものを合体させる・消す操作のコストの最小 | [区間 DP](../dp/interval-dp.md)（準備中） | 青 |
-| 列の両端から交互に取っていく | [区間 DP](../dp/interval-dp.md)（準備中） | 青 |
-| 括弧の対応・回文 | [区間 DP](../dp/interval-dp.md)（準備中） | 青 |
+| 隣り合うものを合体させる・消す操作のコストの最小 | [区間 DP](../dp/interval-dp.md) | 青 |
+| 列の両端から交互に取っていく | [区間 DP](../dp/interval-dp.md) | 青 |
+| 括弧の対応・回文 | [区間 DP](../dp/interval-dp.md) | 青 |
 | 頂点を訪れた順（行きがけ順）が与えられたときの根付き木の数 | [区間 DP の応用](../dp/interval-dp-advanced.md)（準備中） | 黄 |
 | 区間を選び合うゲームの勝敗 | [区間 DP の応用](../dp/interval-dp-advanced.md)（準備中） | 黄 |
 | 数直線上を左右に動き、訪れた範囲が常に連続している | [区間 DP の応用](../dp/interval-dp-advanced.md)（準備中） | 黄 |
 | すべての地点を 1 回ずつ回って戻る最短の経路 | [bitDP](../dp/bit-dp.md) | 水 |
 | 順番を決める・使ったものの集合が将来に効く | [bitDP](../dp/bit-dp.md) | 水 |
-| N 個をいくつかのグループに分ける方法の数・最適値 | [部分集合を列挙する DP](../dp/subset-enumeration-dp.md)（準備中） | 青 |
-| 集合を部分集合の和に分割する | [部分集合を列挙する DP](../dp/subset-enumeration-dp.md)（準備中） | 青 |
+| N 個をいくつかのグループに分ける方法の数・最適値 | [部分集合を列挙する DP](../dp/subset-enumeration-dp.md) | 青 |
+| 集合を部分集合の和に分割する | [部分集合を列挙する DP](../dp/subset-enumeration-dp.md) | 青 |
 | タイル・ドミノの敷き詰め方の数 | [プロファイル DP](../dp/broken-profile-dp.md)（準備中） | 黄 |
 | 隣り合わないように置く・隣と異なる色で塗る方法の数 | [プロファイル DP](../dp/broken-profile-dp.md)（準備中） | 黄 |
 | 黒マスが連結になる塗り方 | [プロファイル DP](../dp/broken-profile-dp.md)（準備中） | 黄 |
@@ -200,7 +200,7 @@ updated: 2026-10-21
 | 順列で隣り合う大小関係（< と >）が指定される | [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md)（準備中） | 黄 |
 | \|p_i − i\| の和がちょうど K の順列の数 | [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md)（準備中） | 黄 |
 | 値の小さい順に、列の好きな位置へ挿入していく | [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md)（準備中） | 黄 |
-| 隣り合う要素の差が D 以下になるように選ぶ部分列の最長 | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md)（準備中） | 青 |
+| 隣り合う要素の差が D 以下になるように選ぶ部分列の最長 | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md) | 青 |
 | DP をする列に 1 点更新のクエリが来て、そのたびに DP の答えを求める | [動的 DP](../dp/dynamic-dp.md)（準備中） | 発展 |
 | 列の区間 [l, r] だけで DP をしたときの答えを、クエリごとに求める | [動的 DP](../dp/dynamic-dp.md)（準備中） | 発展 |
 | 直線を追加しながら、任意の x での最小値・最大値を答える | [Convex Hull Trick と Li Chao Tree](../dp/cht.md)（準備中） | 発展 |
@@ -217,8 +217,8 @@ updated: 2026-10-21
 | 操作を好きなだけ繰り返したとき、最後に残る値や作れる値を答える | [整数の証明の型](../math/proof-patterns.md) | 基礎 |
 | 大きい方から小さい方を引く・余りに置き換える操作を繰り返す | [整数の証明の型](../math/proof-patterns.md) | 基礎 |
 | 区間の幅が法 m 以上なら答えが決まる（余りは m 種類しかない） | [整数の証明の型](../math/proof-patterns.md) | 基礎 |
-| 長さ N の文字列のうち、どのパターンも部分文字列に含まないものの数 | [照合オートマトン上の DP](../string/string-automaton-dp.md)（準備中） | 青 |
-| 与えられた文字列をすべて含む長さ L の文字列の数 | [照合オートマトン上の DP](../string/string-automaton-dp.md)（準備中） | 青 |
+| 長さ N の文字列のうち、どのパターンも部分文字列に含まないものの数 | [照合オートマトン上の DP](../string/string-automaton-dp.md) | 青 |
+| 与えられた文字列をすべて含む長さ L の文字列の数 | [照合オートマトン上の DP](../string/string-automaton-dp.md) | 青 |
 | 問題文に「インタラクティブ」「質問は Q 回まで」とある | [インタラクティブ問題](../misc/interactive.md) | 基礎 |
 | 質問の答えが入力として返ってくる・入出力例が対話の形 | [インタラクティブ問題](../misc/interactive.md) | 基礎 |
 
@@ -306,24 +306,24 @@ updated: 2026-10-21
 | 前の答えを使って次のクエリが復号され、先読みができない | [値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md) | 水 |
 | 区間に一律に加算・代入・アフィン変換・反転し、区間の和・最小値・最大値を答える | [遅延セグメント木](../ds/lazy-segment-tree.md) | 水 |
 | 区間に一律に加算・代入し、一点の値だけを答える | [遅延セグメント木](../ds/lazy-segment-tree.md) | 水 |
-| 1 点の更新と、区間が正しい括弧列か・回文かの判定 | [セグメント木に何を載せるか](../ds/segment-tree-monoids.md)（準備中） | 青 |
-| 区間で 2 番目に大きい値（の個数） | [セグメント木に何を載せるか](../ds/segment-tree-monoids.md)（準備中） | 青 |
-| 区間の最大部分配列和・区間で最長の連続する 1 | [セグメント木に何を載せるか](../ds/segment-tree-monoids.md)（準備中） | 青 |
-| 区間をソートする操作を繰り返す | [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md)（準備中） | 青 |
-| 2 つの数列への区間加算と、区間の Σ A_i B_i | [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md)（準備中） | 青 |
-| 0/1 列の区間反転と、区間で 1 が連続する最大の長さ | [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md)（準備中） | 青 |
-| 一列に並ぶ人を順に動かす総移動量 | [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md)（準備中） | 青 |
-| 配列が変わらず、区間の最小値・最大値・gcd を非常に多く聞かれる | [Sparse Table](../ds/sparse-table.md)（準備中） | 青 |
+| 1 点の更新と、区間が正しい括弧列か・回文かの判定 | [セグメント木に何を載せるか](../ds/segment-tree-monoids.md) | 青 |
+| 区間で 2 番目に大きい値（の個数） | [セグメント木に何を載せるか](../ds/segment-tree-monoids.md) | 青 |
+| 区間の最大部分配列和・区間で最長の連続する 1 | [セグメント木に何を載せるか](../ds/segment-tree-monoids.md) | 青 |
+| 区間をソートする操作を繰り返す | [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md) | 青 |
+| 2 つの数列への区間加算と、区間の Σ A_i B_i | [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md) | 青 |
+| 0/1 列の区間反転と、区間で 1 が連続する最大の長さ | [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md) | 青 |
+| 一列に並ぶ人を順に動かす総移動量 | [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md) | 青 |
+| 配列が変わらず、区間の最小値・最大値・gcd を非常に多く聞かれる | [Sparse Table](../ds/sparse-table.md) | 青 |
 | 区間 chmin・chmax と区間和を同時に答える | [Segment Tree Beats](../ds/segment-tree-beats.md)（準備中） | 発展 |
 | 区間の各要素を x で割る（切り捨て）操作と区間和 | [Segment Tree Beats](../ds/segment-tree-beats.md)（準備中） | 発展 |
 | 区間 [l, r] に含まれる値の種類数を多数のクエリで答える | [クエリの先読み](../ds/offline-queries.md) | 水 |
 | 重み w 以下の辺だけを使ったときの連結・X 以下の要素の和をクエリごとに答える | [クエリの先読み](../ds/offline-queries.md) | 水 |
 | クエリどうしが独立で、順番を入れ替えても答えが変わらない | [クエリの先読み](../ds/offline-queries.md) | 水 |
-| 長方形の中にある点の数・和を多数のクエリで答える | [平面走査](../ds/sweep-line-2d.md)（準備中） | 青 |
-| 区間 [p, q] に完全に含まれる区間の数 | [平面走査](../ds/sweep-line-2d.md)（準備中） | 青 |
-| 幅 W・高さ D の枠に入る点の最大数 | [平面走査](../ds/sweep-line-2d.md)（準備中） | 青 |
-| 静的な列で、区間ごとの同じ値の組の数・出現回数が条件を満たす値の種類数 | [Mo's algorithm](../ds/mo-algorithm.md)（準備中） | 青 |
-| 木のパス上の値の頻度を多数のクエリで答える | [Mo's algorithm](../ds/mo-algorithm.md)（準備中） | 青 |
+| 長方形の中にある点の数・和を多数のクエリで答える | [平面走査](../ds/sweep-line-2d.md) | 青 |
+| 区間 [p, q] に完全に含まれる区間の数 | [平面走査](../ds/sweep-line-2d.md) | 青 |
+| 幅 W・高さ D の枠に入る点の最大数 | [平面走査](../ds/sweep-line-2d.md) | 青 |
+| 静的な列で、区間ごとの同じ値の組の数・出現回数が条件を満たす値の種類数 | [Mo's algorithm](../ds/mo-algorithm.md) | 青 |
+| 木のパス上の値の頻度を多数のクエリで答える | [Mo's algorithm](../ds/mo-algorithm.md) | 青 |
 | 次数の合計が 2M・各色の個数の合計が N のように、合計だけが抑えられている | [平方分割](../ds/sqrt-decomposition.md)（準備中） | 黄 |
 | 位置 i から A_i ずつ先へ跳ぶ・配る | [平方分割](../ds/sqrt-decomposition.md)（準備中） | 黄 |
 | 区間加算と、区間内の x 以上の要素の個数 | [平方分割](../ds/sqrt-decomposition.md)（準備中） | 黄 |
@@ -331,16 +331,16 @@ updated: 2026-10-21
 | 最初の t 回の操作の後に条件を満たす最小の t を、クエリごとに答える | [並列二分探索](../ds/parallel-binary-search.md)（準備中） | 発展 |
 | 3 つの値すべての大小関係を満たす組を数える | [CDQ 分割統治](../ds/cdq-divide-and-conquer.md)（準備中） | 発展 |
 | 点の追加と長方形の質問が混ざるが、オフラインでよい | [CDQ 分割統治](../ds/cdq-divide-and-conquer.md)（準備中） | 発展 |
-| 状態を保存し、あとで読み込んで続きの操作をする | [永続データ構造](../ds/persistent-data-structures.md)（準備中） | 青 |
-| 配列を丸ごとコピーする操作と、1 点更新・区間和が混ざる | [永続データ構造](../ds/persistent-data-structures.md)（準備中） | 青 |
-| 時刻 t の時点での区間の値の分布 | [永続データ構造](../ds/persistent-data-structures.md)（準備中） | 青 |
-| 区間内で X 以下の要素の個数・和を多数のクエリで答える | [マージソート木](../ds/merge-sort-tree.md)（準備中） | 青 |
-| 前の答えで次のクエリが決まる（オンライン強制） | [マージソート木](../ds/merge-sort-tree.md)（準備中） | 青 |
+| 状態を保存し、あとで読み込んで続きの操作をする | [永続データ構造](../ds/persistent-data-structures.md) | 青 |
+| 配列を丸ごとコピーする操作と、1 点更新・区間和が混ざる | [永続データ構造](../ds/persistent-data-structures.md) | 青 |
+| 時刻 t の時点での区間の値の分布 | [永続データ構造](../ds/persistent-data-structures.md) | 青 |
+| 区間内で X 以下の要素の個数・和を多数のクエリで答える | [マージソート木](../ds/merge-sort-tree.md) | 青 |
+| 前の答えで次のクエリが決まる（オンライン強制） | [マージソート木](../ds/merge-sort-tree.md) | 青 |
 | 区間の K 番目に小さい値をオンラインで答える | [Wavelet Matrix](../ds/wavelet-matrix.md)（準備中） | 発展 |
 | 長方形（添字の範囲 × 値の範囲）の中の点の数 | [Wavelet Matrix](../ds/wavelet-matrix.md)（準備中） | 発展 |
-| x を選んで XOR の最大値を最小にする・集合の中で x との XOR が最小の要素 | [Binary Trie](../ds/binary-trie.md)（準備中） | 青 |
-| 追加・削除のたびに、任意の 2 要素の XOR の最小値を答える | [Binary Trie](../ds/binary-trie.md)（準備中） | 青 |
-| 全体に XOR をかけてから K 番目に小さい値 | [Binary Trie](../ds/binary-trie.md)（準備中） | 青 |
+| x を選んで XOR の最大値を最小にする・集合の中で x との XOR が最小の要素 | [Binary Trie](../ds/binary-trie.md) | 青 |
+| 追加・削除のたびに、任意の 2 要素の XOR の最小値を答える | [Binary Trie](../ds/binary-trie.md) | 青 |
+| 全体に XOR をかけてから K 番目に小さい値 | [Binary Trie](../ds/binary-trie.md) | 青 |
 | 列の途中（位置で指定）への挿入・削除と、区間の反転 | [平衡二分探索木と pb_ds の tree](../ds/balanced-bst.md)（準備中） | 発展 |
 | K 番目の値と、値の順位の両方をオンラインで答える | [平衡二分探索木と pb_ds の tree](../ds/balanced-bst.md)（準備中） | 発展 |
 
@@ -371,8 +371,8 @@ updated: 2026-10-21
 | 1 回の移動のコストが 0 か 1 | [01-BFS](../graph/zero-one-bfs.md) | 水 |
 | 辺を 1 本ずつ追加（削除）するたびに、距離についての値を答える | [ワーシャルフロイド法](../graph/warshall-floyd.md) | 水 |
 | 訪れる地点の順番を全部試す（地点間の距離が要る） | [ワーシャルフロイド法](../graph/warshall-floyd.md) | 水 |
-| 負の重みの辺がある・得点を最大化する（符号を反転すると負辺になる） | [ベルマンフォード法](../graph/bellman-ford.md)（準備中） | 青 |
-| いくらでも大きくできるなら inf と出力する | [ベルマンフォード法](../graph/bellman-ford.md)（準備中） | 青 |
+| 負の重みの辺がある・得点を最大化する（符号を反転すると負辺になる） | [ベルマンフォード法](../graph/bellman-ford.md) | 青 |
+| いくらでも大きくできるなら inf と出力する | [ベルマンフォード法](../graph/bellman-ford.md) | 青 |
 | 最短路の本数を数える | [最短路 DAG](../graph/shortest-path-dag.md) | 水 |
 | この辺を通らなくても最短距離は変わらないか・最短路に使われない辺 | [最短路 DAG](../graph/shortest-path-dag.md) | 水 |
 | 始点からの最短距離を保ったまま辺を減らし、全域木を出力する | [最短路 DAG](../graph/shortest-path-dag.md) | 水 |
@@ -383,9 +383,9 @@ updated: 2026-10-21
 | 決まった時刻にしか出発できない・待つことができる | [時刻で変わる辺の最短路](../graph/time-dependent-dijkstra.md) | 水 |
 | 出発時刻によって所要時間が変わる | [時刻で変わる辺の最短路](../graph/time-dependent-dijkstra.md) | 水 |
 | 終点に間に合う最も遅い出発時刻 | [時刻で変わる辺の最短路](../graph/time-dependent-dijkstra.md) | 水 |
-| x_j − x_i ≤ c の形の条件の下で、ある変数を最大化（最小化）する | [差分制約（牛ゲー）](../graph/difference-constraints.md)（準備中） | 青 |
-| 区間の和が S 以上・以下という条件が並ぶ | [差分制約（牛ゲー）](../graph/difference-constraints.md)（準備中） | 青 |
-| 位置の差の情報が矛盾しないか | [差分制約（牛ゲー）](../graph/difference-constraints.md)（準備中） | 青 |
+| x_j − x_i ≤ c の形の条件の下で、ある変数を最大化（最小化）する | [差分制約（牛ゲー）](../graph/difference-constraints.md) | 青 |
+| 区間の和が S 以上・以下という条件が並ぶ | [差分制約（牛ゲー）](../graph/difference-constraints.md) | 青 |
+| 位置の差の情報が矛盾しないか | [差分制約（牛ゲー）](../graph/difference-constraints.md) | 青 |
 | 完全グラフから M 本の辺を取り除いたグラフ・辺が「ない」組が与えられる | [補グラフ上の BFS](../graph/complement-graph-bfs.md)（準備中） | 黄 |
 | K の倍数のうち桁和などが最小のもの | [剰余を頂点にする最短路](../graph/modular-shortest-path.md)（準備中） | 発展 |
 | いくつかの数の和で作れる数の集合（硬貨の組合せ） | [剰余を頂点にする最短路](../graph/modular-shortest-path.md)（準備中） | 発展 |
@@ -408,9 +408,9 @@ updated: 2026-10-21
 | すべての頂点をつなぐ最小コスト | [最小全域木](../graph/minimum-spanning-tree.md) | 水 |
 | 不要な辺を取り除いて報酬を最大にする | [最小全域木](../graph/minimum-spanning-tree.md) | 水 |
 | この辺は最小全域木に入るか | [最小全域木](../graph/minimum-spanning-tree.md) | 水 |
-| 経路上の最大の辺（最小の頂点）を最小化（最大化）する | [最小ボトルネック路](../graph/bottleneck-path.md)（準備中） | 青 |
-| 重さ・高さの制限以下で行けるか | [最小ボトルネック路](../graph/bottleneck-path.md)（準備中） | 青 |
-| しきい値を上げていくと連結になる時刻 | [最小ボトルネック路](../graph/bottleneck-path.md)（準備中） | 青 |
+| 経路上の最大の辺（最小の頂点）を最小化（最大化）する | [最小ボトルネック路](../graph/bottleneck-path.md) | 青 |
+| 重さ・高さの制限以下で行けるか | [最小ボトルネック路](../graph/bottleneck-path.md) | 青 |
+| しきい値を上げていくと連結になる時刻 | [最小ボトルネック路](../graph/bottleneck-path.md) | 青 |
 | その辺（頂点）を取り除くと非連結になるか | [橋・関節点・二重連結成分](../graph/lowlink.md)（準備中） | 黄 |
 | すべての辺（頂点）について、取り除いたときの連結成分の数を求める | [橋・関節点・二重連結成分](../graph/lowlink.md)（準備中） | 黄 |
 | 辺の追加と削除のクエリが混ざり、そのつど連結性を答える（先に全部読んでよい） | [辺の追加と削除が混ざる連結性](../graph/offline-dynamic-connectivity.md)（準備中） | 発展 |
@@ -418,13 +418,13 @@ updated: 2026-10-21
 | 辺が暗黙に O(N^2) 本ある完全グラフの最小全域木 | [特殊な最小全域木](../graph/spanning-tree-advanced.md)（準備中） | 発展 |
 | マンハッタン距離の完全グラフ | [特殊な最小全域木](../graph/spanning-tree-advanced.md)（準備中） | 発展 |
 | 有向グラフで、根から全頂点へ届く最小コストの辺の集合 | [特殊な最小全域木](../graph/spanning-tree-advanced.md)（準備中） | 発展 |
-| 条件を満たすグラフ・経路・全域木を 1 つ出力せよ | [DFS 木・BFS 木とグラフの構築](../graph/graph-construction.md)（準備中） | 青 |
-| 訪問回数の偶奇が指定された経路を作る | [DFS 木・BFS 木とグラフの構築](../graph/graph-construction.md)（準備中） | 青 |
-| 全点対の距離表からグラフを復元できるか | [DFS 木・BFS 木とグラフの構築](../graph/graph-construction.md)（準備中） | 青 |
+| 条件を満たすグラフ・経路・全域木を 1 つ出力せよ | [DFS 木・BFS 木とグラフの構築](../graph/graph-construction.md) | 青 |
+| 訪問回数の偶奇が指定された経路を作る | [DFS 木・BFS 木とグラフの構築](../graph/graph-construction.md) | 青 |
+| 全点対の距離表からグラフを復元できるか | [DFS 木・BFS 木とグラフの構築](../graph/graph-construction.md) | 青 |
 | すべての辺をちょうど 1 回ずつ通る・一筆書き | [オイラー路（一筆書き）](../graph/euler-path.md)（準備中） | 黄 |
 | 同じ道を 2 度通らずにすべての道を通れるか | [オイラー路（一筆書き）](../graph/euler-path.md)（準備中） | 黄 |
-| 頂点とその隣接頂点すべてに対する操作・質問が大量に来る | [次数による平方分割](../graph/degree-sqrt.md)（準備中） | 青 |
-| 長さ 3・4 の閉路を見つける・数える | [次数による平方分割](../graph/degree-sqrt.md)（準備中） | 青 |
+| 頂点とその隣接頂点すべてに対する操作・質問が大量に来る | [次数による平方分割](../graph/degree-sqrt.md) | 青 |
+| 長さ 3・4 の閉路を見つける・数える | [次数による平方分割](../graph/degree-sqrt.md) | 青 |
 | 同時に使えない資源を割り当てる・各行・各列に高々 1 つ | [最大流](../graph/max-flow.md)（準備中） | 黄 |
 | 辺（頂点）を共有しない経路の本数 | [最大流](../graph/max-flow.md)（準備中） | 黄 |
 | 容量・上限つきで送れる量の最大 | [最大流](../graph/max-flow.md)（準備中） | 黄 |
@@ -466,8 +466,8 @@ updated: 2026-10-21
 | 木を K 頂点ずつのパスに分ける | [葉から考える](../tree/leaf-first.md) | 水 |
 | 辺をすべて使う・すべて覆う | [葉から考える](../tree/leaf-first.md) | 水 |
 | 葉を消していく操作 | [葉から考える](../tree/leaf-first.md) | 水 |
-| 各頂点の次数を決めて木を作る・次数の和が 2N−2 | [木の次数列と Prüfer 列](../tree/tree-degree.md)（準備中） | 青 |
-| 次数が○以下の木・星や雪の結晶など次数で決まる形 | [木の次数列と Prüfer 列](../tree/tree-degree.md)（準備中） | 青 |
+| 各頂点の次数を決めて木を作る・次数の和が 2N−2 | [木の次数列と Prüfer 列](../tree/tree-degree.md) | 青 |
+| 次数が○以下の木・星や雪の結晶など次数で決まる形 | [木の次数列と Prüfer 列](../tree/tree-degree.md) | 青 |
 | 最も遠い 2 頂点・最長のパス | [木の直径と最遠点](../tree/tree-diameter.md) | 水 |
 | 全頂点を訪れる最短の移動（戻らなくてよい） | [木の直径と最遠点](../tree/tree-diameter.md) | 水 |
 | 各頂点から最も遠い頂点・2 つの木をつないだときの直径 | [木の直径と最遠点](../tree/tree-diameter.md) | 水 |
@@ -483,12 +483,12 @@ updated: 2026-10-21
 | 2 つの木が同じ形か（根あり・根なし） | [木の同型判定と木のハッシュ](../tree/tree-isomorphism.md)（準備中） | 発展 |
 | 木の 2 頂点の距離をクエリでたくさん聞かれる | [最小共通祖先（LCA）](../tree/lca.md) | 青 |
 | ちょうど距離 K の頂点・K 個上の祖先 | [最小共通祖先（LCA）](../tree/lca.md) | 青 |
-| u から v へのパス上の…・パスに含まれる辺 | [木の上のパスの判定と分解](../tree/tree-path.md)（準備中） | 青 |
-| 2 本のパスが交わるか・共通部分 | [木の上のパスの判定と分解](../tree/tree-path.md)（準備中） | 青 |
-| どちらの端点に近いか（パスの中点） | [木の上のパスの判定と分解](../tree/tree-path.md)（準備中） | 青 |
-| 根から頂点 v までのパス上の…を、すべての v について求める | [根からのパスを DFS で持ち回る](../tree/root-path-dfs.md)（準備中） | 青 |
-| 祖先の情報だけで決まる値 | [根からのパスを DFS で持ち回る](../tree/root-path-dfs.md)（準備中） | 青 |
-| 操作を元に戻す・保存した状態に戻る | [根からのパスを DFS で持ち回る](../tree/root-path-dfs.md)（準備中） | 青 |
+| u から v へのパス上の…・パスに含まれる辺 | [木の上のパスの判定と分解](../tree/tree-path.md) | 青 |
+| 2 本のパスが交わるか・共通部分 | [木の上のパスの判定と分解](../tree/tree-path.md) | 青 |
+| どちらの端点に近いか（パスの中点） | [木の上のパスの判定と分解](../tree/tree-path.md) | 青 |
+| 根から頂点 v までのパス上の…を、すべての v について求める | [根からのパスを DFS で持ち回る](../tree/root-path-dfs.md) | 青 |
+| 祖先の情報だけで決まる値 | [根からのパスを DFS で持ち回る](../tree/root-path-dfs.md) | 青 |
+| 操作を元に戻す・保存した状態に戻る | [根からのパスを DFS で持ち回る](../tree/root-path-dfs.md) | 青 |
 | 部分木の和・最大・個数を、更新を挟みながら聞かれる | [オイラーツアー](../tree/euler-tour.md) | 青 |
 | 部分木に加算する・辺を取り除いたときの片側の和 | [オイラーツアー](../tree/euler-tour.md) | 青 |
 | u が v の祖先か・v の子孫のうち深さ d のもの | [オイラーツアー](../tree/euler-tour.md) | 青 |
@@ -569,9 +569,9 @@ updated: 2026-10-21
 | 円周上を K ずつ進んで、何回目で初めて特定の位置に着くか | [拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md) | 水 |
 | A の倍数を足して、B で割った余りを C にできるか | [拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md) | 水 |
 | 法 M が素数とは限らない一次方程式 a x ≡ b (mod M) | [拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md) | 水 |
-| A_i + B_j の矩形・全体に x を足したときの gcd | [GCD の性質](../math/gcd-properties.md)（準備中） | 青 |
-| 区間の gcd を多数答える | [GCD の性質](../math/gcd-properties.md)（準備中） | 青 |
-| mod N で A ずつ進む操作で全ての点に行けるか | [GCD の性質](../math/gcd-properties.md)（準備中） | 青 |
+| A_i + B_j の矩形・全体に x を足したときの gcd | [GCD の性質](../math/gcd-properties.md) | 青 |
+| 区間の gcd を多数答える | [GCD の性質](../math/gcd-properties.md) | 青 |
+| mod N で A ずつ進む操作で全ての点に行けるか | [GCD の性質](../math/gcd-properties.md) | 青 |
 | 周期の違う複数の条件が同時に成り立つ最初の時刻 | [中国剰余定理](../math/crt.md) | 青 |
 | x を m_i で割った余り r_i が複数与えられる | [中国剰余定理](../math/crt.md) | 青 |
 | 法が素数でない数え上げを素因数ごとに分けて最後に戻す | [中国剰余定理](../math/crt.md) | 青 |
@@ -597,17 +597,17 @@ updated: 2026-10-21
 | グラフでちょうど K 歩の経路の数・K 本の辺を使う最短路 | [行列累乗](../math/matrix-power.md) | 青 |
 | 長さ 10^18 の文字列のうち、禁止された部分文字列を含まないものの数 | [行列累乗](../math/matrix-power.md) | 青 |
 | 幅の小さい盤を長く伸ばしたときの敷き詰め方の数 | [行列累乗](../math/matrix-power.md) | 青 |
-| スイッチを押すと複数のランプが反転する・偶奇の条件が N 個ある | [掃き出し法](../math/gaussian-elimination.md)（準備中） | 青 |
-| 条件を満たす押し方の数を mod で答える | [掃き出し法](../math/gaussian-elimination.md)（準備中） | 青 |
-| 各頂点に書いた値の、隣接する頂点の XOR が 0 になるように決める | [掃き出し法](../math/gaussian-elimination.md)（準備中） | 青 |
+| スイッチを押すと複数のランプが反転する・偶奇の条件が N 個ある | [掃き出し法](../math/gaussian-elimination.md) | 青 |
+| 条件を満たす押し方の数を mod で答える | [掃き出し法](../math/gaussian-elimination.md) | 青 |
+| 各頂点に書いた値の、隣接する頂点の XOR が 0 になるように決める | [掃き出し法](../math/gaussian-elimination.md) | 青 |
 | 部分集合（部分列）の XOR として作れる値の個数・最大値・K 番目 | [XOR 基底](../math/xor-basis.md)（準備中） | 黄 |
 | 全ての値を XOR で作れるように最小コストで選ぶ | [XOR 基底](../math/xor-basis.md)（準備中） | 黄 |
 | 経路の重みが辺の重みの XOR で、同じ辺を何度通ってもよい（ウォーク） | [XOR 基底](../math/xor-basis.md)（準備中） | 黄 |
 | 行列式を mod p で求める | [行列式](../math/determinant.md)（準備中） | 発展 |
 | 全域木の個数・交わらない経路の組の数 | [行列式](../math/determinant.md)（準備中） | 発展 |
-| 全ての k について、和が k になる組の数を求める | [畳み込みの使い方](../math/convolution-ntt.md)（準備中） | 青 |
-| 列をずらしたときの一致数・不一致の数を、全てのずらし方について求める | [畳み込みの使い方](../math/convolution-ntt.md)（準備中） | 青 |
-| ワイルドカード（?）を含むパターンの照合 | [畳み込みの使い方](../math/convolution-ntt.md)（準備中） | 青 |
+| 全ての k について、和が k になる組の数を求める | [畳み込みの使い方](../math/convolution-ntt.md) | 青 |
+| 列をずらしたときの一致数・不一致の数を、全てのずらし方について求める | [畳み込みの使い方](../math/convolution-ntt.md) | 青 |
+| ワイルドカード（?）を含むパターンの照合 | [畳み込みの使い方](../math/convolution-ntt.md) | 青 |
 | mod 10^9+7 や整数のままで畳み込みたい | [FFT・NTT の仕組みと任意 mod の畳み込み](../math/fft-ntt.md)（準備中） | 発展 |
 | 畳み込みを自作ライブラリで実装したい・浮動小数の FFT の誤差が心配 | [FFT・NTT の仕組みと任意 mod の畳み込み](../math/fft-ntt.md)（準備中） | 発展 |
 | i XOR j = k となる組を全ての k について数える | [XOR 畳み込み](../math/hadamard-transform.md)（準備中） | 発展 |
@@ -637,25 +637,25 @@ updated: 2026-10-21
 | 2 種類の移動を組み合わせて目的地へ行く方法の数 | [格子路の数え上げ](../comb/lattice-paths.md) | 基礎 |
 | 最大値（最小値）がちょうど K になるものの個数 | [数え上げの考え方](../comb/counting-mindset.md) | 水 |
 | すべての選び方についての〜の総和 | [数え上げの考え方](../comb/counting-mindset.md) | 水 |
-| 単調な数列の個数 | [対応づけ・数える対象の言い換え](../comb/counting-bijection.md)（準備中） | 青 |
-| 積（和）が決まった値になる数列の個数 | [対応づけ・数える対象の言い換え](../comb/counting-bijection.md)（準備中） | 青 |
-| 途中で負にならない ±1 の列の個数 | [対応づけ・数える対象の言い換え](../comb/counting-bijection.md)（準備中） | 青 |
+| 単調な数列の個数 | [対応づけ・数える対象の言い換え](../comb/counting-bijection.md) | 青 |
+| 積（和）が決まった値になる数列の個数 | [対応づけ・数える対象の言い換え](../comb/counting-bijection.md) | 青 |
+| 途中で負にならない ±1 の列の個数 | [対応づけ・数える対象の言い換え](../comb/counting-bijection.md) | 青 |
 | A は B より先に来る、という順番の制約がある並べ方の数 | [順序を固定して数える](../comb/counting-fix-order.md) | 水 |
 | 選んだ K 個の最大値（最小値）の総和 | [順序を固定して数える](../comb/counting-fix-order.md) | 水 |
 | 木の頂点に、親が子より先になるように番号を振る方法の数 | [順序を固定して数える](../comb/counting-fix-order.md) | 水 |
-| 異なる〜の個数（種類数） | [重複の除き方](../comb/counting-dedup.md)（準備中） | 青 |
-| 操作で作れる文字列（列）の種類数 | [重複の除き方](../comb/counting-dedup.md)（準備中） | 青 |
-| S を部分列として含む文字列の個数 | [重複の除き方](../comb/counting-dedup.md)（準備中） | 青 |
-| 区別しないグループに分ける方法の数 | [重複の除き方](../comb/counting-dedup.md)（準備中） | 青 |
+| 異なる〜の個数（種類数） | [重複の除き方](../comb/counting-dedup.md) | 青 |
+| 操作で作れる文字列（列）の種類数 | [重複の除き方](../comb/counting-dedup.md) | 青 |
+| S を部分列として含む文字列の個数 | [重複の除き方](../comb/counting-dedup.md) | 青 |
+| 区別しないグループに分ける方法の数 | [重複の除き方](../comb/counting-dedup.md) | 青 |
 | 回転（反転）して一致するものは同じとみなす | [Burnside の補題](../comb/burnside-lemma.md)（準備中） | 発展 |
 | 数珠・ネックレスの塗り方の数 | [Burnside の補題](../comb/burnside-lemma.md)（準備中） | 発展 |
 | 立方体の面の塗り方（書き込み方）の数 | [Burnside の補題](../comb/burnside-lemma.md)（準備中） | 発展 |
 | 文字を並べ替えてできる文字列の個数 | [多項係数](../comb/multinomial-coefficient.md) | 水 |
 | 各種類を使う個数が決まっている並べ方 | [多項係数](../comb/multinomial-coefficient.md) | 水 |
 | 大きさを指定してグループに分ける方法の数 | [多項係数](../comb/multinomial-coefficient.md) | 水 |
-| 長方形領域の各点への経路数の総和 | [二項係数の恒等式と和の公式](../comb/binomial-identities.md)（準備中） | 青 |
-| 偶数個（奇数個）を選ぶ方法の数の和 | [二項係数の恒等式と和の公式](../comb/binomial-identities.md)（準備中） | 青 |
-| 全ペアの (A_i + A_j)^x の和 | [二項係数の恒等式と和の公式](../comb/binomial-identities.md)（準備中） | 青 |
+| 長方形領域の各点への経路数の総和 | [二項係数の恒等式と和の公式](../comb/binomial-identities.md) | 青 |
+| 偶数個（奇数個）を選ぶ方法の数の和 | [二項係数の恒等式と和の公式](../comb/binomial-identities.md) | 青 |
+| 全ペアの (A_i + A_j)^x の和 | [二項係数の恒等式と和の公式](../comb/binomial-identities.md) | 青 |
 | どの接頭辞でも A の個数が B の個数（+K）以上 | [鏡像法とカタラン数](../comb/reflection-principle.md)（準備中） | 黄 |
 | 途中で負にならない ±1 の列の個数 | [鏡像法とカタラン数](../comb/reflection-principle.md)（準備中） | 黄 |
 | 正しい括弧列の個数 | [鏡像法とカタラン数](../comb/reflection-principle.md)（準備中） | 黄 |
@@ -663,17 +663,17 @@ updated: 2026-10-21
 | K 本の経路が互いに交わらない組の個数 | [LGV 補題](../comb/lgv-lemma.md)（準備中） | 発展 |
 | 複数の駒が衝突せずに動く確率 | [LGV 補題](../comb/lgv-lemma.md)（準備中） | 発展 |
 | 各要素の選び方が独立で、個数（和）の合計に条件がある | [母関数の考え方](../comb/generating-function-counting.md)（準備中） | 発展 |
-| すべて異なる・A_i ≠ B_i となるものの個数 | [包除原理](../comb/inclusion-exclusion.md)（準備中） | 青 |
-| どの禁止条件も満たさないものの個数 | [包除原理](../comb/inclusion-exclusion.md)（準備中） | 青 |
-| 各色（各行・各列）を少なくとも 1 回使うものの個数 | [包除原理](../comb/inclusion-exclusion.md)（準備中） | 青 |
+| すべて異なる・A_i ≠ B_i となるものの個数 | [包除原理](../comb/inclusion-exclusion.md) | 青 |
+| どの禁止条件も満たさないものの個数 | [包除原理](../comb/inclusion-exclusion.md) | 青 |
+| 各色（各行・各列）を少なくとも 1 回使うものの個数 | [包除原理](../comb/inclusion-exclusion.md) | 青 |
 | 禁止条件が列や木に沿って並ぶ数え上げ | [包除 DP](../comb/inclusion-exclusion-dp.md)（準備中） | 黄 |
 | \|P_i − i\| など、位置と値の差に制約がある順列の個数 | [包除 DP](../comb/inclusion-exclusion-dp.md)（準備中） | 黄 |
 | 隣り合う値が異なる数列の個数 | [包除 DP](../comb/inclusion-exclusion-dp.md)（準備中） | 黄 |
-| gcd の総和を求める | [約数包除](../comb/divisor-inclusion-exclusion.md)（準備中） | 青 |
-| gcd が 1 になる（互いに素な）組の個数 | [約数包除](../comb/divisor-inclusion-exclusion.md)（準備中） | 青 |
-| 最小周期が d の列（文字列）の個数 | [約数包除](../comb/divisor-inclusion-exclusion.md)（準備中） | 青 |
-| 各値 d について、d の倍数（約数）である要素の個数・和 | [約数・倍数のゼータ変換とメビウス変換](../comb/zeta-mobius-divisor.md)（準備中） | 青 |
-| Σ f(gcd(A_i, A_j)) や lcm の総和 | [約数・倍数のゼータ変換とメビウス変換](../comb/zeta-mobius-divisor.md)（準備中） | 青 |
+| gcd の総和を求める | [約数包除](../comb/divisor-inclusion-exclusion.md) | 青 |
+| gcd が 1 になる（互いに素な）組の個数 | [約数包除](../comb/divisor-inclusion-exclusion.md) | 青 |
+| 最小周期が d の列（文字列）の個数 | [約数包除](../comb/divisor-inclusion-exclusion.md) | 青 |
+| 各値 d について、d の倍数（約数）である要素の個数・和 | [約数・倍数のゼータ変換とメビウス変換](../comb/zeta-mobius-divisor.md) | 青 |
+| Σ f(gcd(A_i, A_j)) や lcm の総和 | [約数・倍数のゼータ変換とメビウス変換](../comb/zeta-mobius-divisor.md) | 青 |
 | gcd(i, j) = 1 となる組の個数・和 | [メビウス関数とメビウス反転](../comb/mobius-function.md)（準備中） | 黄 |
 | Σ gcd や Σ lcm を求める | [メビウス関数とメビウス反転](../comb/mobius-function.md)（準備中） | 黄 |
 | A_i OR A_j が K の部分集合になる組 | [部分集合の高速ゼータ変換とメビウス変換](../comb/zeta-mobius-subset.md)（準備中） | 黄 |
@@ -681,14 +681,14 @@ updated: 2026-10-21
 | 順列を任意の 2 要素の swap でソートする最小回数 | [置換の巡回分解](../comb/permutation-cycles.md) | 基礎 |
 | i → P_i をたどる・置換を何回も繰り返す | [置換の巡回分解](../comb/permutation-cycles.md) | 基礎 |
 | 元に戻るまでの回数 | [置換の巡回分解](../comb/permutation-cycles.md) | 基礎 |
-| ちょうど K 回（10^100 回など）の swap の後にありうる列 | [置換の偶奇](../comb/permutation-parity.md)（準備中） | 青 |
-| 3 つの要素を巡回させる操作しかできない | [置換の偶奇](../comb/permutation-parity.md)（準備中） | 青 |
-| 2 つの列でそれぞれ 1 回ずつの swap を同時に行う | [置換の偶奇](../comb/permutation-parity.md)（準備中） | 青 |
-| 同じ値があるかどうかで答えが変わる | [置換の偶奇](../comb/permutation-parity.md)（準備中） | 青 |
+| ちょうど K 回（10^100 回など）の swap の後にありうる列 | [置換の偶奇](../comb/permutation-parity.md) | 青 |
+| 3 つの要素を巡回させる操作しかできない | [置換の偶奇](../comb/permutation-parity.md) | 青 |
+| 2 つの列でそれぞれ 1 回ずつの swap を同時に行う | [置換の偶奇](../comb/permutation-parity.md) | 青 |
+| 同じ値があるかどうかで答えが変わる | [置換の偶奇](../comb/permutation-parity.md) | 青 |
 | 巡回（サイクル）の個数ごとの順列の数 | [第 1 種スターリング数](../comb/stirling-first.md)（準備中） | 発展 |
 | 左から見える（最大値を更新する）位置の個数ごとの順列の数 | [第 1 種スターリング数](../comb/stirling-first.md)（準備中） | 発展 |
 | 最小の swap 回数ごとの並びの数 | [第 1 種スターリング数](../comb/stirling-first.md)（準備中） | 発展 |
-| N 人を区別しない K 組に分ける（どの組も空でない）方法の数 | [第 2 種スターリング数とベル数](../comb/bell-number.md)（準備中） | 青 |
+| N 人を区別しない K 組に分ける（どの組も空でない）方法の数 | [第 2 種スターリング数とベル数](../comb/bell-number.md) | 青 |
 | 和が N になる多重集合の個数 | [整数の分割と分割数](../comb/partition-number.md)（準備中） | 黄 |
 | 区別のない玉を区別のない箱へ配る方法の数 | [整数の分割と分割数](../comb/partition-number.md)（準備中） | 黄 |
 | 順列を巡回の長さの組ごとに分類して数える | [整数の分割と分割数](../comb/partition-number.md)（準備中） | 黄 |
@@ -726,10 +726,10 @@ updated: 2026-10-21
 | 最適に行動したときの期待値（勝率） | [最適戦略の期待値](../comb/optimal-strategy-expectation.md)（準備中） | 黄 |
 | 好きなタイミングでやめられる・最初からやり直せる | [最適戦略の期待値](../comb/optimal-strategy-expectation.md)（準備中） | 黄 |
 | どれを残すか（どれを選ぶか）を選びながら進む | [最適戦略の期待値](../comb/optimal-strategy-expectation.md)（準備中） | 黄 |
-| 振り出し（スタート）に戻るマスがある | [閉路のある期待値](../comb/expectation-linear-equations.md)（準備中） | 青 |
-| 円形に並んだ人が順番に〜する | [閉路のある期待値](../comb/expectation-linear-equations.md)（準備中） | 青 |
-| 無限に続く可能性がある | [閉路のある期待値](../comb/expectation-linear-equations.md)（準備中） | 青 |
-| 2 人が交互に繰り返し、決着がつくまで続ける | [閉路のある期待値](../comb/expectation-linear-equations.md)（準備中） | 青 |
+| 振り出し（スタート）に戻るマスがある | [閉路のある期待値](../comb/expectation-linear-equations.md) | 青 |
+| 円形に並んだ人が順番に〜する | [閉路のある期待値](../comb/expectation-linear-equations.md) | 青 |
+| 無限に続く可能性がある | [閉路のある期待値](../comb/expectation-linear-equations.md) | 青 |
+| 2 人が交互に繰り返し、決着がつくまで続ける | [閉路のある期待値](../comb/expectation-linear-equations.md) | 青 |
 | 最大値（最小値・K 番目の値）の期待値 | [期待値と確率の変換](../comb/expectation-tail-sum.md)（準備中） | 黄 |
 | 〜がそろうまでに取り出す回数の期待値 | [期待値と確率の変換](../comb/expectation-tail-sum.md)（準備中） | 黄 |
 | 〜の二乗の期待値 | [二乗の期待値・分散](../comb/expectation-of-square.md)（準備中） | 黄 |
@@ -737,10 +737,10 @@ updated: 2026-10-21
 | スコアの二乗の期待値 | [二乗の期待値・分散](../comb/expectation-of-square.md)（準備中） | 黄 |
 | 実数を一様ランダムに選ぶ | [連続値の確率](../comb/continuous-probability.md)（準備中） | 発展 |
 | 円内（区間内）のランダムな点 | [連続値の確率](../comb/continuous-probability.md)（準備中） | 発展 |
-| 部分和として作れる値か（和の上限が 10&#94;5〜10&#94;6） | [bitset による高速化](../misc/bitset-speedup.md)（準備中） | 青 |
-| 2 頂点の共通の隣接頂点・三角形の数 | [bitset による高速化](../misc/bitset-speedup.md)（準備中） | 青 |
-| 偶奇（XOR）だけ分かればよい | [bitset による高速化](../misc/bitset-speedup.md)（準備中） | 青 |
-| u から v へ到達できるかのクエリが大量にある | [bitset による高速化](../misc/bitset-speedup.md)（準備中） | 青 |
+| 部分和として作れる値か（和の上限が 10&#94;5〜10&#94;6） | [bitset による高速化](../misc/bitset-speedup.md) | 青 |
+| 2 頂点の共通の隣接頂点・三角形の数 | [bitset による高速化](../misc/bitset-speedup.md) | 青 |
+| 偶奇（XOR）だけ分かればよい | [bitset による高速化](../misc/bitset-speedup.md) | 青 |
+| u から v へ到達できるかのクエリが大量にある | [bitset による高速化](../misc/bitset-speedup.md) | 青 |
 
 ### 文字列・幾何・ゲーム・そのほか {#signs-phrase-other}
 
@@ -765,8 +765,8 @@ updated: 2026-10-21
 | いくつかの山から石を取り合い、最後に取った人が勝ち | [Nim と XOR](../comb/nim.md) | 水 |
 | 1 回に取れる個数に上限（範囲）がある | [Nim と XOR](../comb/nim.md) | 水 |
 | 先手が勝てるように最初の配置を変えられるか | [Nim と XOR](../comb/nim.md) | 水 |
-| 複数の山（盤面）があり、どれか 1 つを選んで操作する | [Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md)（準備中） | 青 |
-| 先手と後手の取れる手が同じ | [Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md)（準備中） | 青 |
+| 複数の山（盤面）があり、どれか 1 つを選んで操作する | [Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md) | 青 |
+| 先手と後手の取れる手が同じ | [Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md) | 青 |
 | 無限に続く場合は Draw（引き分け）を出力する | [後退解析](../comb/game-retrograde-analysis.md)（準備中） | 黄 |
 | 同じ局面が繰り返し現れうる | [後退解析](../comb/game-retrograde-analysis.md)（準備中） | 黄 |
 | グラフ上でコマを動かすゲーム・しりとり | [後退解析](../comb/game-retrograde-analysis.md)（準備中） | 黄 |
@@ -785,8 +785,8 @@ updated: 2026-10-21
 | 先頭 x 項の集合と先頭 y 項の集合が等しいか | [集合・多重集合のハッシュ](../string/hashing-for-sets.md) | 水 |
 | 2 つの区間を並べ替えると一致するか（多重集合として等しいか） | [集合・多重集合のハッシュ](../string/hashing-for-sets.md) | 水 |
 | 区間内の各値が偶数個（3 の倍数個）か・区間の積が平方数（立方数）か | [集合・多重集合のハッシュ](../string/hashing-for-sets.md) | 水 |
-| ハッシュ値を set や map に大量に入れて重複を数える | [ハッシュの衝突と安全な設計](../string/hash-safety.md)（準備中） | 青 |
-| 1000 桁程度の巨大な数の積や和が一致するかを判定する | [ハッシュの衝突と安全な設計](../string/hash-safety.md)（準備中） | 青 |
+| ハッシュ値を set や map に大量に入れて重複を数える | [ハッシュの衝突と安全な設計](../string/hash-safety.md) | 青 |
+| 1000 桁程度の巨大な数の積や和が一致するかを判定する | [ハッシュの衝突と安全な設計](../string/hash-safety.md) | 青 |
 | 各位置から、文字列の先頭と何文字一致するか | [Z-algorithm](../string/z-algorithm.md) | 水 |
 | A を何回回転すると B になるか（円環状の文字列の一致） | [Z-algorithm](../string/z-algorithm.md) | 水 |
 | T を S の接頭辞の連結で表す最小の個数 | [Z-algorithm](../string/z-algorithm.md) | 水 |
@@ -803,9 +803,9 @@ updated: 2026-10-21
 | 各文字列について、ほかの文字列との LCP の最大 | [Trie](../string/trie.md) | 水 |
 | ある文字列を接頭辞に持つ文字列の数（追加・削除あり） | [Trie](../string/trie.md) | 水 |
 | 数列（文字列）の集合を辞書順にたどる | [Trie](../string/trie.md) | 水 |
-| 多数のパターンそれぞれの、テキスト中の出現回数 | [Aho-Corasick 法](../string/aho-corasick.md)（準備中） | 青 |
-| どのパターンも含まない（すべて含む）文字列の数 | [Aho-Corasick 法](../string/aho-corasick.md)（準備中） | 青 |
-| 禁止語を含まないように最少の文字を書き換える | [Aho-Corasick 法](../string/aho-corasick.md)（準備中） | 青 |
+| 多数のパターンそれぞれの、テキスト中の出現回数 | [Aho-Corasick 法](../string/aho-corasick.md) | 青 |
+| どのパターンも含まない（すべて含む）文字列の数 | [Aho-Corasick 法](../string/aho-corasick.md) | 青 |
+| 禁止語を含まないように最少の文字を書き換える | [Aho-Corasick 法](../string/aho-corasick.md) | 青 |
 | 異なる部分文字列の個数 | [Suffix Array と LCP 配列](../string/suffix-array.md) | 黄 |
 | 全接尾辞どうしの LCP の和 | [Suffix Array と LCP 配列](../string/suffix-array.md) | 黄 |
 | 回転したものどうしの辞書順の大小を数える | [Suffix Array と LCP 配列](../string/suffix-array.md) | 黄 |
@@ -836,10 +836,10 @@ updated: 2026-10-21
 | マンハッタン距離の和の最小・全ペアの距離の総和 | [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md) | 水 |
 | 斜め移動（キングの移動）だけでの距離・斜めにしか動けない駒 | [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md) | 水 |
 | ひし形の範囲（\|x\|+\|y\| ≤ D）にある点の数 | [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md) | 水 |
-| 円周を伝って移動できるか・円どうしが交わるか | [円と幾何の最適化](../geometry/circle-geometry.md)（準備中） | 青 |
-| すべての点を含む最小の円 | [円と幾何の最適化](../geometry/circle-geometry.md)（準備中） | 青 |
-| 障害物を避けて通れる円の最大の半径 | [円と幾何の最適化](../geometry/circle-geometry.md)（準備中） | 青 |
-| 円の内部にある格子点の数 | [円と幾何の最適化](../geometry/circle-geometry.md)（準備中） | 青 |
+| 円周を伝って移動できるか・円どうしが交わるか | [円と幾何の最適化](../geometry/circle-geometry.md) | 青 |
+| すべての点を含む最小の円 | [円と幾何の最適化](../geometry/circle-geometry.md) | 青 |
+| 障害物を避けて通れる円の最大の半径 | [円と幾何の最適化](../geometry/circle-geometry.md) | 青 |
+| 円の内部にある格子点の数 | [円と幾何の最適化](../geometry/circle-geometry.md) | 青 |
 | すべての点を囲む最小の凸多角形 | [凸包と凸多角形](../geometry/convex-hull.md)（準備中） | 黄 |
 | 外側にある点だけが効く | [凸包と凸多角形](../geometry/convex-hull.md)（準備中） | 黄 |
 | 区間の平均・傾き・比の最大 | [凸包と凸多角形](../geometry/convex-hull.md)（準備中） | 黄 |
@@ -850,11 +850,11 @@ updated: 2026-10-21
 | 点の追加と ax+by の最大のクエリ | [発展の幾何](../geometry/advanced-geometry.md)（準備中） | 発展 |
 | 2 つの凸な点集合の和の凸包 | [発展の幾何](../geometry/advanced-geometry.md)（準備中） | 発展 |
 | 半平面の共通部分 | [発展の幾何](../geometry/advanced-geometry.md)（準備中） | 発展 |
-| 半数を超える要素が条件を満たす（過半数） | [乱択アルゴリズム](../misc/randomized.md)（準備中） | 青 |
-| 数式の文字列が与えられ、値を求める | [構文解析](../misc/parsing.md)（準備中） | 青 |
-| \+ と \* と括弧の優先順位がある | [構文解析](../misc/parsing.md)（準備中） | 青 |
-| 式として正しい部分文字列 | [構文解析](../misc/parsing.md)（準備中） | 青 |
-| 入れ子の構造を持つ文字列 | [構文解析](../misc/parsing.md)（準備中） | 青 |
+| 半数を超える要素が条件を満たす（過半数） | [乱択アルゴリズム](../misc/randomized.md) | 青 |
+| 数式の文字列が与えられ、値を求める | [構文解析](../misc/parsing.md) | 青 |
+| \+ と \* と括弧の優先順位がある | [構文解析](../misc/parsing.md) | 青 |
+| 式として正しい部分文字列 | [構文解析](../misc/parsing.md) | 青 |
+| 入れ子の構造を持つ文字列 | [構文解析](../misc/parsing.md) | 青 |
 | 和が K（K の倍数）になる連続部分列の個数 | [区間](../patterns/interval.md)（準備中） | — |
 | すべての連続部分列についての最小値・最大値・2 番目の値の総和 | [区間](../patterns/interval.md)（準備中） | — |
 | N 個の区間 [L_i, R_i] から重ならないように最大何個選べるか | [区間](../patterns/interval.md)（準備中） | — |
@@ -921,11 +921,11 @@ updated: 2026-10-21
 | 区間の条件が S_r と S_l の関係（差が K・余りが等しい）に書き直せる | [累積和と連想配列で区間を数える](../basics/prefix-sum-counting.md) | 基礎 |
 | 操作が区間に一律の値を足す形で、隣接差では 2 か所だけが変わる | [差分列への言い換え](../basics/difference-sequence.md)（準備中） | 黄 |
 | 選び方の和の最大化なら解けるが、割り算（平均・比）が入ると直接は最大化できない | [平均・中央値の最大化](../basics/fractional-binary-search.md) | 水 |
-| 全部は列挙できないが「x 以下が何個あるか」は数えられる | [K 番目の値](../basics/kth-value.md)（準備中） | 青 |
+| 全部は列挙できないが「x 以下が何個あるか」は数えられる | [K 番目の値](../basics/kth-value.md) | 青 |
 | 1 つ増やすごとの増分が単調に増える | [三分探索](../basics/ternary-search.md) | 水 |
 | その場で一番よいものを選んでも後悔しない（入れ替えても悪くならない） | [貪欲法の考え方と正当性](../basics/greedy-basics.md) | 基礎 |
 | 一度選んだものを、後でよいものが来たら入れ替えたい | [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md) | 水 |
-| 2 つを入れ替えたときの差が、その 2 つだけで決まる | [交換論法と比較関数の設計](../basics/exchange-argument.md)（準備中） | 青 |
+| 2 つを入れ替えたときの差が、その 2 つだけで決まる | [交換論法と比較関数の設計](../basics/exchange-argument.md) | 青 |
 | 左右に分けたとき、中央をまたぐものだけなら速く数えられる | [分割統治](../basics/divide-and-conquer.md)（準備中） | 黄 |
 | 区間の最大値の位置で左右に分けると、それぞれが同じ形の問題になる | [分割統治](../basics/divide-and-conquer.md)（準備中） | 黄 |
 | 式を変形すると i の項と j の項に分離できる | [言い換えの典型](../thinking/reformulation.md) | 水 |
@@ -934,20 +934,20 @@ updated: 2026-10-21
 | dp[i] が dp[i−1]・dp[i−2] など定数個の前の状態から決まる | [DP の基本](../dp/dp-basics.md) | 基礎 |
 | dp[x] が x より小さい値の dp で決まるが、どの値が現れるかを前もって列挙しにくい | [メモ化再帰](../dp/memoized-recursion.md) | 基礎 |
 | dp[i] が dp[j]（j > i）から決まる（i 番目以降で最適に行動したときの値） | [DP の計算順序](../dp/dp-order.md) | 水 |
-| 区間 [l, r) の両端を全探索すると O(N^2) になり、各位置の扱いが「区間の前・中・後」で変わる | [フェーズを状態に持つ DP](../dp/dp-phase.md)（準備中） | 青 |
+| 区間 [l, r) の両端を全探索すると O(N^2) になり、各位置の扱いが「区間の前・中・後」で変わる | [フェーズを状態に持つ DP](../dp/dp-phase.md) | 青 |
 | dp[i] = Σ_{j=i−R}^{i−L} dp[j] のように、遷移元が連続した範囲の和 | [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md) | 水 |
 | dp[i] から i+L〜i+R の範囲へ同じ値を配る | [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md) | 水 |
-| dp\[i]\[a][b] の表が大きすぎ、同じ (i, a) なら b が大きい（小さい）ほど常に良い | [DP の状態の削減](../dp/dp-dimension-reduction.md)（準備中） | 青 |
+| dp\[i]\[a][b] の表が大きすぎ、同じ (i, a) なら b が大きい（小さい）ほど常に良い | [DP の状態の削減](../dp/dp-dimension-reduction.md) | 青 |
 | dp[i] = Σ（または min）\_{j < i, [j, i) が条件を満たす} dp[j] | [区間分割 DP](../dp/dp-sequence-partition.md) | 水 |
 | 根を v としたときの木 DP の値を、すべての v について求めたい（N 回の木 DP は O(N^2)） | [全方位木 DP](../dp/rerooting.md) | 青 |
 | dp\[v][k] を子の dp\[c][j] との (k, j) の組の全探索でマージしていて、O(N^3) に見える | [二乗の木 DP](../dp/tree-dp-square.md)（準備中） | 黄 |
 | 素直に書いた DP の遷移が状態 1 つあたり O(N) かかり、全体で O(N^2) になる | [DP の高速化の選び方](../dp/dp-speedup-overview.md)（準備中） | — |
-| dp[i] = max_{j < i, l ≤ a_j ≤ r} dp[j] + c のように、遷移元が添字や値の範囲の最小・最大 | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md)（準備中） | 青 |
-| 遷移のコストに \|x_i − x_j\| を含む（x_j < x_i と x_j > x_i で分けられる） | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md)（準備中） | 青 |
-| dp[i] = min_{i−K ≤ j < i} dp[j] + c（窓が単調に動く） | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md)（準備中） | 青 |
-| dp\[i][\*] から dp\[i+1][\*] で変わる場所が少ない | [インライン DP](../dp/inline-dp.md)（準備中） | 青 |
-| 遷移で dp 全体に一律の加算・平行移動が入る | [インライン DP](../dp/inline-dp.md)（準備中） | 青 |
-| 区間 [l, r] の右端 r で、l 以降の位置の dp にまとめて加算する | [インライン DP](../dp/inline-dp.md)（準備中） | 青 |
+| dp[i] = max_{j < i, l ≤ a_j ≤ r} dp[j] + c のように、遷移元が添字や値の範囲の最小・最大 | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md) | 青 |
+| 遷移のコストに \|x_i − x_j\| を含む（x_j < x_i と x_j > x_i で分けられる） | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md) | 青 |
+| dp[i] = min_{i−K ≤ j < i} dp[j] + c（窓が単調に動く） | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md) | 青 |
+| dp\[i][\*] から dp\[i+1][\*] で変わる場所が少ない | [インライン DP](../dp/inline-dp.md) | 青 |
+| 遷移で dp 全体に一律の加算・平行移動が入る | [インライン DP](../dp/inline-dp.md) | 青 |
+| 区間 [l, r] の右端 r で、l 以降の位置の dp にまとめて加算する | [インライン DP](../dp/inline-dp.md) | 青 |
 | 遷移のコストが i と j の積の項を 1 つだけ含む（(h_i − h_j)^2 など） | [Convex Hull Trick と Li Chao Tree](../dp/cht.md)（準備中） | 発展 |
 | 区間分割 DP のコストが c(a, c) + c(b, d) ≤ c(a, d) + c(b, c) を満たす（区間を広げるほど増え方が大きい） | [Monge 性による DP の高速化](../dp/monge.md)（準備中） | 発展 |
 | 最適な区切り位置 opt(i) が i について単調に動く | [Monge 性による DP の高速化](../dp/monge.md)（準備中） | 発展 |
@@ -956,7 +956,7 @@ updated: 2026-10-21
 | 成分ごとの頂点数と辺数の関係（木か・閉路がちょうど 1 つか）で条件が決まる | [連結成分](../graph/connected-components.md) | 基礎 |
 | 言い換えると、辺の重みが 0 と 1 の 2 種類だけのグラフの最短路になる | [01-BFS](../graph/zero-one-bfs.md) | 水 |
 | 距離を dist\[頂点][向き・残り回数・偶奇] のように 2 次元以上で持ちたくなる | [状態を頂点にする](../graph/extended-dijkstra.md) | 水 |
-| 条件を整理すると x_v ≤ x_u + c の形の不等式の集まりになる | [差分制約（牛ゲー）](../graph/difference-constraints.md)（準備中） | 青 |
+| 条件を整理すると x_v ≤ x_u + c の形の不等式の集まりになる | [差分制約（牛ゲー）](../graph/difference-constraints.md) | 青 |
 | 閉路を 1 点に縮めた DAG の上で DP・数え上げをしたくなる | [強連結成分分解（SCC）](../graph/scc.md) | 水 |
 | 遷移が x → f(x) の写像 1 つで決まる | [Functional graph（出次数 1 のグラフ）](../graph/functional-graph.md) | 水 |
 | 条件がすべて (x_i ∨ x_j) の形（2 つのリテラルの OR）に書ける | [2-SAT](../graph/two-sat.md)（準備中） | 発展 |
@@ -965,15 +965,15 @@ updated: 2026-10-21
 | dp[i] = min(dp[i−K..i−1]) + c のように、直前 K 個の最小値で決まる遷移 | [単調スタックとスライド最小値](../ds/monotonic-stack.md) | 水 |
 | Σ_{j&lt;i} [A_j ≤ A_i] のように、前にある要素のうち条件を満たすものの個数・和を i ごとに足す | [BIT（Fenwick Tree）](../ds/fenwick-tree.md) | 水 |
 | dp[v] = max(dp[v − D..v + D]) + 1 のように、値の範囲から最大を取る遷移 | [値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md) | 水 |
-| 区間 [l, r) の答えが、各位置の一次関数や小さな行列を順に合成したもので書ける | [セグメント木に何を載せるか](../ds/segment-tree-monoids.md)（準備中） | 青 |
+| 区間 [l, r) の答えが、各位置の一次関数や小さな行列を順に合成したもので書ける | [セグメント木に何を載せるか](../ds/segment-tree-monoids.md) | 青 |
 | Σ_{i=1}^{N} Σ_{j=i}^{N} f(i, j) のように、内側の和の範囲が外側の添字で決まる二重和 | [Σ の変形](../math/sigma-manipulation.md) | 基礎 |
 | Σ_{K=1}^{N} K × (K の約数の個数) のように、約数・倍数の関係で書き換えられる和 | [Σ の変形](../math/sigma-manipulation.md) | 基礎 |
 | Σ_{i=0}^{N−1} A^i の形の和 | [等比数列の和を mod で求める](../math/geometric-series-mod.md) | 基礎 |
 | Σ_{d=1}^{M} Σ_{k=1}^{⌊M/d⌋} f(d, kd) の形の二重ループ | [調和級数と倍数の列挙](../math/harmonic-sum.md) | 水 |
 | Σ_{i=1}^{N} f(⌊N/i⌋) の形の和 | [商の列挙](../math/floor-quotient-enum.md) | 水 |
 | dp[t+1] の各成分が dp[t] の成分の線形結合で、係数が t によらない | [行列累乗](../math/matrix-power.md) | 青 |
-| 変数の一次式（mod 2 なら XOR）＝定数 の式が複数立つ | [掃き出し法](../math/gaussian-elimination.md)（準備中） | 青 |
-| c_k = Σ_{i+j=k} a_i b_j の形の和 | [畳み込みの使い方](../math/convolution-ntt.md)（準備中） | 青 |
+| 変数の一次式（mod 2 なら XOR）＝定数 の式が複数立つ | [掃き出し法](../math/gaussian-elimination.md) | 青 |
+| c_k = Σ_{i+j=k} a_i b_j の形の和 | [畳み込みの使い方](../math/convolution-ntt.md) | 青 |
 | dp[i] = Σ_{j&lt;i} dp[j]·g[i−j] のように、dp が自分より前の値との畳み込みで決まる | [分割統治 FFT・オンライン畳み込み](../math/online-convolution.md)（準備中） | 発展 |
 | 遷移が「和が s になる組の数」の形（多項式の積） | [分割統治 FFT・オンライン畳み込み](../math/online-convolution.md)（準備中） | 発展 |
 | 答えが多項式 f の 1/f・log f・exp f・f^K の係数で書ける | [形式的冪級数と多項式の演算](../math/fps-basics.md)（準備中） | 発展 |
@@ -981,19 +981,19 @@ updated: 2026-10-21
 | 答え f(N) が N の d 次多項式になる | [ラグランジュ補間とべき乗和](../math/lagrange-interpolation.md)（準備中） | 発展 |
 | 答えが K(K−1)^(N−1) のような累乗の積の形になる | [和・積の法則と順列・組合せ](../comb/counting-basics.md) | 基礎 |
 | 答えが「K 以下」の個数の差 f(K) − f(K−1) で書ける | [数え上げの考え方](../comb/counting-mindset.md) | 水 |
-| 二項係数の積の和を、1 つの二項係数（経路の数）に直したい | [対応づけ・数える対象の言い換え](../comb/counting-bijection.md)（準備中） | 青 |
-| 作り方（遷移の列）を数える式で、同じ対象が複数回数えられてしまう | [重複の除き方](../comb/counting-dedup.md)（準備中） | 青 |
-| Σ の中に二項係数があり、N が大きく項ごとには足せない | [二項係数の恒等式と和の公式](../comb/binomial-identities.md)（準備中） | 青 |
+| 二項係数の積の和を、1 つの二項係数（経路の数）に直したい | [対応づけ・数える対象の言い換え](../comb/counting-bijection.md) | 青 |
+| 作り方（遷移の列）を数える式で、同じ対象が複数回数えられてしまう | [重複の除き方](../comb/counting-dedup.md) | 青 |
+| Σ の中に二項係数があり、N が大きく項ごとには足せない | [二項係数の恒等式と和の公式](../comb/binomial-identities.md) | 青 |
 | 答えの式に Σ_{k≤K} C(n,k) の形の和が、多くの (n, K) について現れる | [二項係数の部分和](../comb/binomial-prefix-sum.md)（準備中） | 発展 |
 | 答えが (1 + x + … + x&#94;c)&#94;N のような式の特定の係数になる | [母関数の考え方](../comb/generating-function-counting.md)（準備中） | 発展 |
 | 遷移が dp'[s] = dp[s] + dp[s − v] のように、値をずらして足す形になる | [母関数の考え方](../comb/generating-function-counting.md)（準備中） | 発展 |
 | E[s] が、s から 1 手で移る状態の E の平均に定数を足した式になる | [期待値 DP](../comb/expected-value-dp.md) | 水 |
-| 長さ i までの文字列の数を、末尾とパターンの先頭が何文字一致しているかで分けて持つ | [照合オートマトン上の DP](../string/string-automaton-dp.md)（準備中） | 青 |
+| 長さ i までの文字列の数を、末尾とパターンの先頭が何文字一致しているかで分けて持つ | [照合オートマトン上の DP](../string/string-automaton-dp.md) | 青 |
 | (x2 − x1)(y3 − y1) − (y2 − y1)(x3 − x1) の符号で場合を分ける | [ベクトルと外積](../geometry/geometry-vectors.md) | 基礎 |
 | \|x_i − x_j\| + \|y_i − y_j\| や max(\|x_i − x_j\|, \|y_i − y_j\|) の最大・和が式に出る | [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md) | 水 |
 | (S_j − S_i)/(j − i) の最大（2 点を結ぶ傾きの最大） | [凸包と凸多角形](../geometry/convex-hull.md)（準備中） | 黄 |
-| 決定的な方法は重いが、確率的に正しければ十分に速い | [乱択アルゴリズム](../misc/randomized.md)（準備中） | 青 |
-| 固定の mod・係数のハッシュが、作為的な入力で衝突させられる | [乱択アルゴリズム](../misc/randomized.md)（準備中） | 青 |
+| 決定的な方法は重いが、確率的に正しければ十分に速い | [乱択アルゴリズム](../misc/randomized.md) | 青 |
+| 固定の mod・係数のハッシュが、作為的な入力で衝突させられる | [乱択アルゴリズム](../misc/randomized.md) | 青 |
 
 <!-- textlint-enable -->
 <!-- gen:end signs-shape -->

@@ -1,0 +1,12 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 辺のない 1 頂点
+  - {input: "1 0\n", output: "0\n"}
+  # 三角形 1 つと 1 本の辺
+  - {input: "4 4\n1 2\n2 3\n3 1\n3 4\n", output: "1\n"}
+  # 完全グラフ K4（三角形は 4 個）
+  - {input: "4 6\n1 2\n1 3\n1 4\n2 3\n2 4\n3 4\n", output: "4\n"}
+  # 星形（三角形はない）
+  - {input: "5 4\n1 2\n1 3\n1 4\n1 5\n", output: "0\n"}

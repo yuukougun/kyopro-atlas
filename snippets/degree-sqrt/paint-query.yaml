@@ -1,0 +1,10 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 辺のない 1 頂点
+  - {input: "1 0\n2\n1 5\n1 7\n", output: "0\n5\n"}
+  # 星形（中心 1 は重い頂点）：葉を塗ると中心も塗られ、中心を塗ると葉がすべて塗られる（葉 4 を塗っても葉 3 は変わらない）
+  - {input: "5 4\n1 2\n1 3\n1 4\n1 5\n4\n2 9\n1 3\n4 8\n3 1\n", output: "0\n9\n3\n3\n"}
+  # 三角形と 1 本の辺（1-2, 2-3, 3-1, 3-4）
+  - {input: "4 4\n1 2\n2 3\n3 1\n3 4\n3\n4 6\n1 2\n2 1\n", output: "0\n0\n2\n"}

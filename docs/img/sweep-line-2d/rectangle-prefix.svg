@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 705" width="420" height="705" font-family="sans-serif" font-size="15">
+  <rect x="0" y="0" width="420" height="705" fill="#ffffff"/>
+  <defs>
+    <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#b25e00" stroke-width="2"/>
+    </pattern>
+  </defs>
+  <!-- 原点 (50, 380)、1 目盛り 40px -->
+  <!-- 帯 x < 7・y が [2, 6)：薄い青 -->
+  <rect x="50" y="140" width="280" height="160" fill="#e8f0fe"/>
+  <!-- 帯 x < 3・y が [2, 6)：斜線 -->
+  <rect x="50" y="140" width="120" height="160" fill="url(#hatch)" opacity="0.55"/>
+  <!-- 格子 -->
+  <g stroke="#dddddd" stroke-width="1">
+    <line x1="90" y1="60" x2="90" y2="380"/><line x1="130" y1="60" x2="130" y2="380"/>
+    <line x1="170" y1="60" x2="170" y2="380"/><line x1="210" y1="60" x2="210" y2="380"/>
+    <line x1="250" y1="60" x2="250" y2="380"/><line x1="290" y1="60" x2="290" y2="380"/>
+    <line x1="330" y1="60" x2="330" y2="380"/><line x1="370" y1="60" x2="370" y2="380"/>
+    <line x1="50" y1="340" x2="370" y2="340"/><line x1="50" y1="300" x2="370" y2="300"/>
+    <line x1="50" y1="260" x2="370" y2="260"/><line x1="50" y1="220" x2="370" y2="220"/>
+    <line x1="50" y1="180" x2="370" y2="180"/><line x1="50" y1="140" x2="370" y2="140"/>
+    <line x1="50" y1="100" x2="370" y2="100"/><line x1="50" y1="60" x2="370" y2="60"/>
+  </g>
+  <!-- 軸 -->
+  <g stroke="#333" stroke-width="1.5">
+    <line x1="50" y1="380" x2="385" y2="380"/>
+    <line x1="50" y1="380" x2="50" y2="45"/>
+  </g>
+  <text x="394" y="385">x</text>
+  <text x="44" y="38">y</text>
+  <g font-size="15" text-anchor="middle" fill="#555">
+    <text x="50" y="398">0</text><text x="170" y="398">3</text><text x="330" y="398">7</text>
+  </g>
+  <g font-size="15" text-anchor="end" fill="#555">
+    <text x="44" y="305">2</text><text x="44" y="145">6</text>
+  </g>
+  <!-- 問いの長方形 [3, 7) × [2, 6) -->
+  <rect x="170" y="140" width="160" height="160" fill="none" stroke="#1a56c4" stroke-width="3"/>
+  <!-- 走査線の位置 x = 3, x = 7 -->
+  <g stroke="#c0392b" stroke-width="2" stroke-dasharray="7 4">
+    <line x1="170" y1="40" x2="170" y2="390"/>
+    <line x1="330" y1="40" x2="330" y2="390"/>
+  </g>
+  <text x="170" y="32" text-anchor="middle" fill="#c0392b" font-size="15">x = l = 3</text>
+  <text x="330" y="32" text-anchor="middle" fill="#c0392b" font-size="15">x = r = 7</text>
+  <!-- 点：(1,2) (2,5) (3,4) (4,4) (5,6) (6,3) (7,5) -->
+  <g fill="#333">
+    <circle cx="90" cy="300" r="6"/>
+    <circle cx="130" cy="180" r="6"/>
+    <circle cx="170" cy="220" r="6"/>
+    <circle cx="210" cy="220" r="6"/>
+    <circle cx="250" cy="140" r="6"/>
+    <circle cx="290" cy="260" r="6"/>
+    <circle cx="330" cy="180" r="6"/>
+  </g>
+  <!-- 説明（図の下に置く） -->
+  <g font-size="15" transform="translate(-360, 340)">
+    <rect x="410" y="80" width="26" height="18" fill="#e8f0fe" stroke="#999"/>
+    <text x="444" y="94">x &lt; 7・y が [2, 6)：5 点</text>
+    <rect x="410" y="115" width="26" height="18" fill="url(#hatch)" opacity="0.55" stroke="#999"/>
+    <text x="444" y="129">x &lt; 3・y が [2, 6)：2 点</text>
+    <line x1="410" y1="160" x2="436" y2="160" stroke="#1a56c4" stroke-width="3"/>
+    <text x="444" y="165">長方形 [3, 7) × [2, 6)</text>
+    <line x1="410" y1="195" x2="436" y2="195" stroke="#c0392b" stroke-width="2" stroke-dasharray="7 4"/>
+    <text x="444" y="200">走査線で値を読む位置</text>
+    <text x="410" y="245">長方形の中の点の数</text>
+    <text x="410" y="270">＝ 5 − 2 ＝ 3</text>
+    <text x="410" y="310" font-size="15" fill="#555">x = 3 の点 (3, 4) は数え、</text>
+    <text x="410" y="330" font-size="15" fill="#555">x = 7 の (7, 5) と y = 6 の</text>
+    <text x="410" y="350" font-size="15" fill="#555">(5, 6) は数えない（半開区間）</text>
+  </g>
+</svg>

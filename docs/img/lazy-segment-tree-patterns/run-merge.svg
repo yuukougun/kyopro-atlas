@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 330" width="480" height="330" font-family="sans-serif" font-size="15">
+  <rect x="0" y="0" width="480" height="330" fill="#ffffff"/>
+  <text x="122" y="45" text-anchor="middle">左の子 [0, 4)</text>
+  <text x="358" y="45" text-anchor="middle">右の子 [4, 8)</text>
+  <rect x="30" y="60" width="46" height="40" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+  <text x="53.0" y="87" text-anchor="middle" font-size="18">0</text>
+  <rect x="76" y="60" width="46" height="40" fill="#dbe8fb" stroke="#333" stroke-width="1.5"/>
+  <text x="99.0" y="87" text-anchor="middle" font-size="18">1</text>
+  <rect x="122" y="60" width="46" height="40" fill="#dbe8fb" stroke="#333" stroke-width="1.5"/>
+  <text x="145.0" y="87" text-anchor="middle" font-size="18">1</text>
+  <rect x="168" y="60" width="46" height="40" fill="#dbe8fb" stroke="#333" stroke-width="1.5"/>
+  <text x="191.0" y="87" text-anchor="middle" font-size="18">1</text>
+  <rect x="266" y="60" width="46" height="40" fill="#dbe8fb" stroke="#333" stroke-width="1.5"/>
+  <text x="289.0" y="87" text-anchor="middle" font-size="18">1</text>
+  <rect x="312" y="60" width="46" height="40" fill="#dbe8fb" stroke="#333" stroke-width="1.5"/>
+  <text x="335.0" y="87" text-anchor="middle" font-size="18">1</text>
+  <rect x="358" y="60" width="46" height="40" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+  <text x="381.0" y="87" text-anchor="middle" font-size="18">0</text>
+  <rect x="404" y="60" width="46" height="40" fill="#dbe8fb" stroke="#333" stroke-width="1.5"/>
+  <text x="427.0" y="87" text-anchor="middle" font-size="18">1</text>
+  <path d="M76 112 v8 h92 v-8" fill="none" stroke="#1a56c4" stroke-width="2"/>
+  <path d="M266 112 v8 h92 v-8" fill="none" stroke="#1a56c4" stroke-width="2"/>
+  <text x="122" y="142" text-anchor="middle" fill="#1a56c4">接尾辞の 1：3</text>
+  <text x="312" y="142" text-anchor="middle" fill="#1a56c4">接頭辞の 1：2</text>
+  <text x="122" y="174" text-anchor="middle">接頭辞 0・最長 3</text>
+  <text x="358" y="174" text-anchor="middle">接尾辞 1・最長 2</text>
+  <rect x="30" y="202" width="420" height="92" rx="6" fill="#f5f5f5" stroke="#333" stroke-width="1.5" stroke-dasharray="6 3"/>
+  <text x="240" y="228" text-anchor="middle">親 [0, 8) の 1 の情報</text>
+  <text x="240" y="254" text-anchor="middle">接頭辞 0（左が全部 1 ではない）・接尾辞 1</text>
+  <text x="240" y="280" text-anchor="middle" font-weight="bold">最長 = max(3, 2, 3 + 2) = 5</text>
+</svg>

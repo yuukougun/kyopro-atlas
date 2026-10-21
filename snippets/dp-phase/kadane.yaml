@@ -1,0 +1,14 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 1 要素（負でも空にはできない）
+  - {input: "1\n-5\n", output: "-5\n"}
+  # 本文の例
+  - {input: "7\n2 -5 3 -1 4 -6 1\n", output: "6\n"}
+  # すべて負なら最大の 1 要素
+  - {input: "3\n-3 -1 -2\n", output: "-1\n"}
+  # すべて正なら全体
+  - {input: "4\n1 2 3 4\n", output: "10\n"}
+  # 大きな値
+  - {input: "3\n1000000000 -1 1000000000\n", output: "1999999999\n"}

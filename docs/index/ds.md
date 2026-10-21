@@ -427,7 +427,7 @@ search:
 
 ## セグメント木に何を載せるか（segment-tree-monoids） {#segment-tree-monoids}
 
-- id：`segment-tree-monoids`　レベル：青　段階：stub　type：technique
+- id：`segment-tree-monoids`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-monoids/
 - 別名：モノイドの設計、monoid design、抽象化セグ木、second best、行列を載せるセグ木
 - 種類：データ構造、区間クエリ
@@ -439,14 +439,14 @@ search:
     - 言い回し：区間の最大部分配列和・区間で最長の連続する 1
     - 式の形：区間 [l, r) の答えが、各位置の一次関数や小さな行列を順に合成したもので書ける
 - 節：
-    - `segment-tree-monoids#design-steps` 設計の手順（答えに要る情報 → 親が作れるまで情報を足す → 結合律と単位元を確かめる）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-monoids/#design-steps
+    - `segment-tree-monoids#design-steps` 設計の手順（答えに要る情報を足し、結合法則と単位元を確かめる）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-monoids/#design-steps
     - `segment-tree-monoids#pattern-table` 型の表（和・min/max・gcd・最小値と個数・括弧列・最大部分配列和など）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-monoids/#pattern-table
     - `segment-tree-monoids#non-commutative` 非可換なモノイド（一次関数の合成・ハッシュの連結。積む順序）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-monoids/#non-commutative
-    - `segment-tree-monoids#matrix` 行列を載せる（(min,+)・(max,+) の半環も。行列の積は行列累乗のページ、1 点更新のたびに DP を求め直すなら動的 DP）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-monoids/#matrix
+    - `segment-tree-monoids#matrix` 行列を載せる（(min,+)・(max,+) の半環も）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-monoids/#matrix
 
 ## 遅延セグメント木の載せ方の型（lazy-segment-tree-patterns） {#lazy-segment-tree-patterns}
 
-- id：`lazy-segment-tree-patterns`　レベル：青　段階：stub　type：technique
+- id：`lazy-segment-tree-patterns`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/lazy-segment-tree-patterns/
 - 別名：遅延セグ木のチートシート、S と F の設計、区間加算区間最小、区間代入区間和、Range Affine Range Sum、区間反転
 - 種類：データ構造、区間クエリ、考察
@@ -468,7 +468,7 @@ search:
 
 ## Sparse Table（sparse-table） {#sparse-table}
 
-- id：`sparse-table`　レベル：青　段階：stub　type：technique
+- id：`sparse-table`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/sparse-table/
 - 別名：スパーステーブル、ST 表、静的 RMQ、Disjoint Sparse Table
 - 種類：データ構造、区間クエリ、ダブリング・分割統治
@@ -522,7 +522,7 @@ search:
 
 ## 平面走査（sweep-line-2d） {#sweep-line-2d}
 
-- id：`sweep-line-2d`　レベル：青　段階：stub　type：technique
+- id：`sweep-line-2d`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/sweep-line-2d/
 - 別名：sweep line、plane sweep、走査線、スイープライン、2 次元クエリ、矩形内の点の数、長方形クエリ
 - 種類：クエリ処理の工夫、区間クエリ、ソート・座標圧縮
@@ -535,7 +535,7 @@ search:
     - 制約：座標が 10^9 まで・点とクエリが 2×10^5 個（2 次元累積和の表は作れない）
 - 節：
     - `sweep-line-2d#idea` 考え方（一方の座標で並べ、もう一方をデータ構造で持つ）：https://yuukougun.github.io/kyopro-atlas/ds/sweep-line-2d/#idea
-    - `sweep-line-2d#rectangle-count` 支配点の数え上げ・長方形内の点の数（4 つの接頭辞の包除、上端での値 − 下端の 1 つ前での値）：https://yuukougun.github.io/kyopro-atlas/ds/sweep-line-2d/#rectangle-count
+    - `sweep-line-2d#rectangle-count` 支配点の数え上げと長方形内の点の数：https://yuukougun.github.io/kyopro-atlas/ds/sweep-line-2d/#rectangle-count
     - `sweep-line-2d#intervals-as-points` 区間を 2 次元の点と見る（区間に含まれる区間の数）：https://yuukougun.github.io/kyopro-atlas/ds/sweep-line-2d/#intervals-as-points
     - `sweep-line-2d#window-max` 固定幅の窓を動かして区間加算・区間最大（遅延セグメント木）：https://yuukougun.github.io/kyopro-atlas/ds/sweep-line-2d/#window-max
     - `sweep-line-2d#boundaries` 同じ座標での処理順・閉区間と半開区間・座標圧縮：https://yuukougun.github.io/kyopro-atlas/ds/sweep-line-2d/#boundaries
@@ -543,7 +543,7 @@ search:
 
 ## Mo's algorithm（mo-algorithm） {#mo-algorithm}
 
-- id：`mo-algorithm`　レベル：青　段階：stub　type：technique
+- id：`mo-algorithm`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/mo-algorithm/
 - 別名：Mo、Mo 法、クエリ平方分割、木上の Mo、Mo on tree、時間付き Mo
 - 種類：クエリ処理の工夫、区間クエリ
@@ -611,7 +611,7 @@ search:
 
 ## 永続データ構造（persistent-data-structures） {#persistent-data-structures}
 
-- id：`persistent-data-structures`　レベル：青　段階：stub　type：technique
+- id：`persistent-data-structures`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/persistent-data-structures/
 - 別名：persistent data structure、永続、版の木、永続スタック、永続セグ木、経路コピー、path copying、操作の巻き戻し
 - 種類：データ構造、クエリ処理の工夫
@@ -629,7 +629,7 @@ search:
 
 ## マージソート木（merge-sort-tree） {#merge-sort-tree}
 
-- id：`merge-sort-tree`　レベル：青　段階：stub　type：technique
+- id：`merge-sort-tree`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/merge-sort-tree/
 - 別名：Merge Sort Tree、マージソートツリー、領域木、Range Tree
 - 種類：データ構造、区間クエリ
@@ -638,6 +638,7 @@ search:
     - 言い回し：区間内で X 以下の要素の個数・和を多数のクエリで答える
     - 言い回し：前の答えで次のクエリが決まる（オンライン強制）
 - 節：
+    - `merge-sort-tree#idea` 必要になる場面とアイデア：https://yuukougun.github.io/kyopro-atlas/ds/merge-sort-tree/#idea
     - `merge-sort-tree#build` 作り方（子の列をマージする）とメモリ O(N log N)：https://yuukougun.github.io/kyopro-atlas/ds/merge-sort-tree/#build
     - `merge-sort-tree#query` クエリの手順（O(log N) 個のノードで二分探索）と累積和で和も：https://yuukougun.github.io/kyopro-atlas/ds/merge-sort-tree/#query
     - `merge-sort-tree#bit-per-level` 各段に BIT を持たせる（先読みと組む）（発展）：https://yuukougun.github.io/kyopro-atlas/ds/merge-sort-tree/#bit-per-level
@@ -659,7 +660,7 @@ search:
 
 ## Binary Trie（binary-trie） {#binary-trie}
 
-- id：`binary-trie`　レベル：青　段階：stub　type：technique
+- id：`binary-trie`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/binary-trie/
 - 別名：二分トライ、2 進 Trie、ビット Trie、XOR Trie、XOR の最小化
 - 種類：データ構造、ビット演算
@@ -670,10 +671,10 @@ search:
     - 言い回し：全体に XOR をかけてから K 番目に小さい値
     - 制約：A_i < 2^30 で、追加・削除・質問が合わせて 2×10^5 回程度
 - 節：
-    - `binary-trie#build` 作り方（上位ビットから辿る二分木・ノードに個数）：https://yuukougun.github.io/kyopro-atlas/ds/binary-trie/#build
+    - `binary-trie#build` 作り方（上位 bit からたどる二分木・ノードに個数）：https://yuukougun.github.io/kyopro-atlas/ds/binary-trie/#build
     - `binary-trie#xor-min-max` XOR の最小・最大（同じ側を優先して降りる）：https://yuukougun.github.io/kyopro-atlas/ds/binary-trie/#xor-min-max
-    - `binary-trie#kth-and-global-xor` K 番目と全体への XOR（ビットごとの反転フラグ）：https://yuukougun.github.io/kyopro-atlas/ds/binary-trie/#kth-and-global-xor
-    - `binary-trie#implicit` 明示的に作らない Binary Trie（上位ビットで分ける再帰）：https://yuukougun.github.io/kyopro-atlas/ds/binary-trie/#implicit
+    - `binary-trie#kth-and-global-xor` K 番目と全体への XOR（bit ごとの反転フラグ）：https://yuukougun.github.io/kyopro-atlas/ds/binary-trie/#kth-and-global-xor
+    - `binary-trie#implicit` 明示的に作らない Binary Trie（上位 bit で分ける再帰）：https://yuukougun.github.io/kyopro-atlas/ds/binary-trie/#implicit
 
 ## 平衡二分探索木と pb_ds の tree（balanced-bst） {#balanced-bst}
 

@@ -95,7 +95,7 @@ search:
 
 ## ハッシュの衝突と安全な設計（hash-safety） {#hash-safety}
 
-- id：`hash-safety`　レベル：青　段階：stub　type：technique
+- id：`hash-safety`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/hash-safety/
 - 別名：ハッシュの衝突確率、誕生日のパラドックス、mod 2^61-1、ハッシュの mod の選び方、anti-hash、ハッシュが落とされる、unordered_map の衝突、カスタムハッシュ、hash collision
 - 種類：ハッシュ・乱択
@@ -203,7 +203,7 @@ search:
 
 ## Aho-Corasick 法（aho-corasick） {#aho-corasick}
 
-- id：`aho-corasick`　レベル：青　段階：stub　type：technique
+- id：`aho-corasick`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/aho-corasick/
 - 別名：AC オートマトン、失敗リンク、複数パターン照合、禁止語、Aho-Corasick algorithm
 - 種類：文字列
@@ -223,7 +223,7 @@ search:
 
 ## 照合オートマトン上の DP（string-automaton-dp） {#string-automaton-dp}
 
-- id：`string-automaton-dp`　レベル：青　段階：stub　type：technique
+- id：`string-automaton-dp`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/string-automaton-dp/
 - 別名：オートマトン DP、KMP DP、Aho-Corasick 上の DP、照合状態の DP、禁止文字列、禁止部分文字列、automaton DP
 - 種類：DP、文字列
@@ -235,12 +235,12 @@ search:
     - 制約：パターンの個数 ≤ 8 程度で、すべてを含むかを問う
     - 式の形：長さ i までの文字列の数を、末尾とパターンの先頭が何文字一致しているかで分けて持つ
 - 節：
-    - `string-automaton-dp#matching-state` 照合の状態とマルコフ性（次の状態は次の文字だけで決まる。直近の数文字で足りる簡易版は dp-state-design）：https://yuukougun.github.io/kyopro-atlas/string/string-automaton-dp/#matching-state
+    - `string-automaton-dp#matching-state` 照合の状態とマルコフ性：https://yuukougun.github.io/kyopro-atlas/string/string-automaton-dp/#matching-state
     - `string-automaton-dp#kmp-automaton` KMP オートマトンの遷移表を前計算して DP する：https://yuukougun.github.io/kyopro-atlas/string/string-automaton-dp/#kmp-automaton
     - `string-automaton-dp#multiple-patterns` 複数パターンは Aho-Corasick（終端の印を受け継ぐ）：https://yuukougun.github.io/kyopro-atlas/string/string-automaton-dp/#multiple-patterns
     - `string-automaton-dp#contain-all` すべて含む：含んだパターンの集合を bit で持つ：https://yuukougun.github.io/kyopro-atlas/string/string-automaton-dp/#contain-all
     - `string-automaton-dp#matrix-power` N が巨大なとき：遷移行列の累乗・ダブリング：https://yuukougun.github.io/kyopro-atlas/string/string-automaton-dp/#matrix-power
-    - `string-automaton-dp#why-not-inclusion-exclusion` 包除で解こうとすると破綻する理由（パターンの重なり）：https://yuukougun.github.io/kyopro-atlas/string/string-automaton-dp/#why-not-inclusion-exclusion
+    - `string-automaton-dp#why-not-inclusion-exclusion` 包除はどこで破綻するか（位置の重なりとパターンの集合）：https://yuukougun.github.io/kyopro-atlas/string/string-automaton-dp/#why-not-inclusion-exclusion
 
 ## Suffix Array と LCP 配列（suffix-array） {#suffix-array}
 

@@ -1,0 +1,14 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 空の列：過半数はない
+  - {input: "0\n", output: "-1\n"}
+  # 1 要素：その値が過半数
+  - {input: "1\n5\n", output: "5\n"}
+  # 打ち消し合った後に残る候補 3 が過半数（4 個 / 7 個）
+  - {input: "7\n3 1 3 2 3 3 1\n", output: "3\n"}
+  # ちょうど半分は過半数ではない（候補は出るが数え直しで落ちる）
+  - {input: "4\n2 2 1 1\n", output: "-1\n"}
+  # 過半数がないと候補は意味のない値になる（最後の 9 が候補に残る）
+  - {input: "5\n1 2 3 4 9\n", output: "-1\n"}

@@ -1,0 +1,10 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 1 要素
+  - {input: "1\n0\n", output: "0\n"}
+  # 0, 1, 2, 3, 4：(0,1,2) (1,2,3) (2,3,4) (0,2,4) の 4 組
+  - {input: "5\n0 1 2 3 4\n", output: "4\n"}
+  - {input: "4\n1 3 7 5\n", output: "2\n"}
+  - {input: "3\n2 9 100\n", output: "0\n"}

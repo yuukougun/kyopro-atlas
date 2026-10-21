@@ -1,0 +1,7 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "7\nADD 3\nADD 1\nSAVE 7\nDELETE\nADD 4\nLOAD 7\nADD 5\n", output: "3\n1\n1\n3\n4\n1\n5\n"}
+  - {input: "3\nDELETE\nLOAD 2\nADD 9\n", output: "-1\n-1\n9\n"}
+  - {input: "6\nADD 2\nSAVE 1\nADD 8\nSAVE 1\nLOAD 1\nDELETE\n", output: "2\n2\n8\n8\n8\n2\n"}

@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="56 0 568 380" font-family="sans-serif" font-size="14">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="230" y="28" fill="#222">和 s →（bit s が 1 ＝ 和 s を作れる）</text>
+<text x="247" y="52" text-anchor="middle" fill="#555" font-size="12">0</text>
+<text x="281" y="52" text-anchor="middle" fill="#555" font-size="12">1</text>
+<text x="315" y="52" text-anchor="middle" fill="#555" font-size="12">2</text>
+<text x="349" y="52" text-anchor="middle" fill="#555" font-size="12">3</text>
+<text x="383" y="52" text-anchor="middle" fill="#555" font-size="12">4</text>
+<text x="417" y="52" text-anchor="middle" fill="#555" font-size="12">5</text>
+<text x="451" y="52" text-anchor="middle" fill="#555" font-size="12">6</text>
+<text x="485" y="52" text-anchor="middle" fill="#555" font-size="12">7</text>
+<text x="519" y="52" text-anchor="middle" fill="#555" font-size="12">8</text>
+<text x="553" y="52" text-anchor="middle" fill="#555" font-size="12">9</text>
+<text x="587" y="52" text-anchor="middle" fill="#555" font-size="12">10</text>
+<text x="218" y="82" text-anchor="end" fill="#222">dp（初め）</text>
+<rect x="230" y="62" width="34" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="247.0" y="82.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
+<rect x="264" y="62" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="281.0" y="82.0" text-anchor="middle" fill="#222">0</text>
+<rect x="298" y="62" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="315.0" y="82.0" text-anchor="middle" fill="#222">0</text>
+<rect x="332" y="62" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="349.0" y="82.0" text-anchor="middle" fill="#222">0</text>
+<rect x="366" y="62" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="383.0" y="82.0" text-anchor="middle" fill="#222">0</text>
+<rect x="400" y="62" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="417.0" y="82.0" text-anchor="middle" fill="#222">0</text>
+<rect x="434" y="62" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="451.0" y="82.0" text-anchor="middle" fill="#222">0</text>
+<rect x="468" y="62" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="485.0" y="82.0" text-anchor="middle" fill="#222">0</text>
+<rect x="502" y="62" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="519.0" y="82.0" text-anchor="middle" fill="#222">0</text>
+<rect x="536" y="62" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="553.0" y="82.0" text-anchor="middle" fill="#222">0</text>
+<rect x="570" y="62" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="587.0" y="82.0" text-anchor="middle" fill="#222">0</text>
+<text x="218" y="132" text-anchor="end" fill="#222">dp &lt;&lt; 3（3 を足す）</text>
+<rect x="230" y="112" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="4 2"/>
+<text x="247.0" y="132.0" text-anchor="middle" fill="#222">0</text>
+<rect x="264" y="112" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="4 2"/>
+<text x="281.0" y="132.0" text-anchor="middle" fill="#222">0</text>
+<rect x="298" y="112" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="4 2"/>
+<text x="315.0" y="132.0" text-anchor="middle" fill="#222">0</text>
+<rect x="332" y="112" width="34" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="4 2"/>
+<text x="349.0" y="132.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
+<rect x="366" y="112" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="4 2"/>
+<text x="383.0" y="132.0" text-anchor="middle" fill="#222">0</text>
+<rect x="400" y="112" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="4 2"/>
+<text x="417.0" y="132.0" text-anchor="middle" fill="#222">0</text>
+<rect x="434" y="112" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="4 2"/>
+<text x="451.0" y="132.0" text-anchor="middle" fill="#222">0</text>
+<rect x="468" y="112" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="4 2"/>
+<text x="485.0" y="132.0" text-anchor="middle" fill="#222">0</text>
+<rect x="502" y="112" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="4 2"/>
+<text x="519.0" y="132.0" text-anchor="middle" fill="#222">0</text>
+<rect x="536" y="112" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="4 2"/>
+<text x="553.0" y="132.0" text-anchor="middle" fill="#222">0</text>
+<rect x="570" y="112" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="4 2"/>
+<text x="587.0" y="132.0" text-anchor="middle" fill="#222">0</text>
+<text x="218" y="182" text-anchor="end" fill="#222">OR → 3 まで使った後</text>
+<rect x="230" y="162" width="34" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="247.0" y="182.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
+<rect x="264" y="162" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="281.0" y="182.0" text-anchor="middle" fill="#222">0</text>
+<rect x="298" y="162" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="315.0" y="182.0" text-anchor="middle" fill="#222">0</text>
+<rect x="332" y="162" width="34" height="30" fill="#ffd8a8" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="349.0" y="182.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
+<rect x="366" y="162" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="383.0" y="182.0" text-anchor="middle" fill="#222">0</text>
+<rect x="400" y="162" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="417.0" y="182.0" text-anchor="middle" fill="#222">0</text>
+<rect x="434" y="162" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="451.0" y="182.0" text-anchor="middle" fill="#222">0</text>
+<rect x="468" y="162" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="485.0" y="182.0" text-anchor="middle" fill="#222">0</text>
+<rect x="502" y="162" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="519.0" y="182.0" text-anchor="middle" fill="#222">0</text>
+<rect x="536" y="162" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="553.0" y="182.0" text-anchor="middle" fill="#222">0</text>
+<rect x="570" y="162" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="587.0" y="182.0" text-anchor="middle" fill="#222">0</text>
+<text x="218" y="232" text-anchor="end" fill="#222">dp &lt;&lt; 5（5 を足す）</text>
+<rect x="230" y="212" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="4 2"/>
+<text x="247.0" y="232.0" text-anchor="middle" fill="#222">0</text>
+<rect x="264" y="212" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="4 2"/>
+<text x="281.0" y="232.0" text-anchor="middle" fill="#222">0</text>
+<rect x="298" y="212" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="4 2"/>
+<text x="315.0" y="232.0" text-anchor="middle" fill="#222">0</text>
+<rect x="332" y="212" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="4 2"/>
+<text x="349.0" y="232.0" text-anchor="middle" fill="#222">0</text>
+<rect x="366" y="212" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="4 2"/>
+<text x="383.0" y="232.0" text-anchor="middle" fill="#222">0</text>
+<rect x="400" y="212" width="34" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="4 2"/>
+<text x="417.0" y="232.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
+<rect x="434" y="212" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="4 2"/>
+<text x="451.0" y="232.0" text-anchor="middle" fill="#222">0</text>
+<rect x="468" y="212" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="4 2"/>
+<text x="485.0" y="232.0" text-anchor="middle" fill="#222">0</text>
+<rect x="502" y="212" width="34" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="4 2"/>
+<text x="519.0" y="232.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
+<rect x="536" y="212" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="4 2"/>
+<text x="553.0" y="232.0" text-anchor="middle" fill="#222">0</text>
+<rect x="570" y="212" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="4 2"/>
+<text x="587.0" y="232.0" text-anchor="middle" fill="#222">0</text>
+<text x="218" y="282" text-anchor="end" fill="#222">OR → 5 まで使った後</text>
+<rect x="230" y="262" width="34" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="247.0" y="282.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
+<rect x="264" y="262" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="281.0" y="282.0" text-anchor="middle" fill="#222">0</text>
+<rect x="298" y="262" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="315.0" y="282.0" text-anchor="middle" fill="#222">0</text>
+<rect x="332" y="262" width="34" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="349.0" y="282.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
+<rect x="366" y="262" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="383.0" y="282.0" text-anchor="middle" fill="#222">0</text>
+<rect x="400" y="262" width="34" height="30" fill="#ffd8a8" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="417.0" y="282.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
+<rect x="434" y="262" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="451.0" y="282.0" text-anchor="middle" fill="#222">0</text>
+<rect x="468" y="262" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="485.0" y="282.0" text-anchor="middle" fill="#222">0</text>
+<rect x="502" y="262" width="34" height="30" fill="#ffd8a8" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="519.0" y="282.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
+<rect x="536" y="262" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="553.0" y="282.0" text-anchor="middle" fill="#222">0</text>
+<rect x="570" y="262" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="587.0" y="282.0" text-anchor="middle" fill="#222">0</text>
+<text x="230" y="324" fill="#555" font-size="14">点線の行：直前の dp を右（和の大きい方）へずらしたもの</text>
+<text x="230" y="346" fill="#555" font-size="14">橙のマス：その要素で新しく作れるようになった和</text>
+<text x="230" y="370" fill="#555" font-size="14">図では bit 0 を左に置く（2 進数の書き方とは左右が逆）</text>
+</svg>

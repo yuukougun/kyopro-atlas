@@ -1,0 +1,8 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "1 1\n3\n4\n", output: "12\n"}
+  # 10^9+6 = -1 なので、(-1)(-1) = 1 と (-1) * 2 = -2 = 10^9+5
+  - {input: "1 2\n1000000006\n1000000006 2\n", output: "1 1000000005\n"}
+  - {input: "3 2\n1 2 3\n4 5\n", output: "4 13 22 15\n"}

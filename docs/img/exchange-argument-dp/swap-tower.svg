@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 640" width="400" height="640" font-family="sans-serif" font-size="16">
+<rect x="0" y="0" width="400" height="640" fill="#ffffff"/>
+<text x="20" y="30" font-weight="bold">(a) i を上・j を下</text>
+<rect x="20" y="45" width="130" height="40" fill="#eeeeee" stroke="#666" stroke-dasharray="5,3"/>
+<text x="85" y="70" text-anchor="middle">上の重さ W</text>
+<rect x="20" y="90" width="130" height="44" fill="#dbeafe" stroke="#1e40af" stroke-width="2"/>
+<text x="85" y="117" text-anchor="middle">ブロック i</text>
+<rect x="20" y="139" width="130" height="44" fill="#fde68a" stroke="#92400e" stroke-width="2" stroke-dasharray="8,3"/>
+<text x="85" y="166" text-anchor="middle">ブロック j</text>
+<text x="164" y="117">W ≤ s<tspan baseline-shift="sub" font-size="13">i</tspan></text>
+<text x="164" y="166">W + w<tspan baseline-shift="sub" font-size="13">i</tspan> ≤ s<tspan baseline-shift="sub" font-size="13">j</tspan></text>
+<text x="20" y="212">耐えられる W の上限：</text>
+<text x="20" y="238" font-weight="bold">min(s<tspan baseline-shift="sub" font-size="13">i</tspan>, s<tspan baseline-shift="sub" font-size="13">j</tspan> − w<tspan baseline-shift="sub" font-size="13">i</tspan>)</text>
+<line x1="10" y1="256" x2="390" y2="256" stroke="#999" stroke-dasharray="4,4"/>
+<text x="20" y="286" font-weight="bold">(b) j を上・i を下</text>
+<rect x="20" y="301" width="130" height="40" fill="#eeeeee" stroke="#666" stroke-dasharray="5,3"/>
+<text x="85" y="326" text-anchor="middle">上の重さ W</text>
+<rect x="20" y="346" width="130" height="44" fill="#fde68a" stroke="#92400e" stroke-width="2" stroke-dasharray="8,3"/>
+<text x="85" y="373" text-anchor="middle">ブロック j</text>
+<rect x="20" y="395" width="130" height="44" fill="#dbeafe" stroke="#1e40af" stroke-width="2"/>
+<text x="85" y="422" text-anchor="middle">ブロック i</text>
+<text x="164" y="373">W ≤ s<tspan baseline-shift="sub" font-size="13">j</tspan></text>
+<text x="164" y="422">W + w<tspan baseline-shift="sub" font-size="13">j</tspan> ≤ s<tspan baseline-shift="sub" font-size="13">i</tspan></text>
+<text x="20" y="468">耐えられる W の上限：</text>
+<text x="20" y="494" font-weight="bold">min(s<tspan baseline-shift="sub" font-size="13">j</tspan>, s<tspan baseline-shift="sub" font-size="13">i</tspan> − w<tspan baseline-shift="sub" font-size="13">j</tspan>)</text>
+<rect x="10" y="514" width="380" height="116" fill="#f0fdf4" stroke="#166534"/>
+<text x="22" y="540">s<tspan baseline-shift="sub" font-size="13">i</tspan> + w<tspan baseline-shift="sub" font-size="13">i</tspan> ≤ s<tspan baseline-shift="sub" font-size="13">j</tspan> + w<tspan baseline-shift="sub" font-size="13">j</tspan> なら</text>
+<text x="22" y="566">(b) の上限 ≤ s<tspan baseline-shift="sub" font-size="13">i</tspan> − w<tspan baseline-shift="sub" font-size="13">j</tspan> ≤ (a) の上限</text>
+<text x="22" y="594">→ s + w の小さい方を上に置いて損をしない</text>
+<text x="22" y="618" font-size="14">（2 つより下が受ける重さはどちらでも同じ）</text>
+</svg>

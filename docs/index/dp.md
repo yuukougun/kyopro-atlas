@@ -125,7 +125,7 @@ search:
 
 ## フェーズを状態に持つ DP（dp-phase） {#dp-phase}
 
-- id：`dp-phase`　レベル：青　段階：stub　type：technique
+- id：`dp-phase`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-phase/
 - 別名：耳 DP、段階を状態に持つ DP、最大部分配列和、Kadane、Kadane's algorithm
 - 種類：DP
@@ -218,7 +218,7 @@ search:
 
 ## DP の状態の削減（dp-dimension-reduction） {#dp-dimension-reduction}
 
-- id：`dp-dimension-reduction`　レベル：青　段階：stub　type：technique
+- id：`dp-dimension-reduction`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-dimension-reduction/
 - 別名：状態の削減、次元の削減、状態の圧縮、値と添字の入れ替え、キーと値を入れ替える、添字と値を逆に、上限で打ち切る
 - 種類：DP
@@ -234,7 +234,7 @@ search:
 
 ## 戻す DP（knapsack-undo） {#knapsack-undo}
 
-- id：`knapsack-undo`　レベル：青　段階：stub　type：technique
+- id：`knapsack-undo`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/knapsack-undo/
 - 別名：ナップサックの削除、削除できるナップサック、減らすナップサック
 - 種類：DP、数え上げ
@@ -251,7 +251,7 @@ search:
 
 ## 並べ替えてから DP する（exchange-argument-dp） {#exchange-argument-dp}
 
-- id：`exchange-argument-dp`　レベル：青　段階：stub　type：technique
+- id：`exchange-argument-dp`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/exchange-argument-dp/
 - 別名：交換論法＋DP、ソートしてから DP、座布団 DP、締切つきナップサック
 - 種類：DP、貪欲
@@ -370,7 +370,7 @@ search:
 
 ## 区間 DP（interval-dp） {#interval-dp}
 
-- id：`interval-dp`　レベル：青　段階：stub　type：technique
+- id：`interval-dp`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/interval-dp/
 - 別名：dp\[l][r]、Interval DP、Range DP、区間を状態にする DP
 - 種類：DP
@@ -381,6 +381,7 @@ search:
     - 言い回し：列の両端から交互に取っていく
     - 言い回し：括弧の対応・回文
 - 節：
+    - `interval-dp#state` 区間を状態にする（状態・遷移・初期値・答え）：https://yuukougun.github.io/kyopro-atlas/dp/interval-dp/#state
     - `interval-dp#by-length` 長さ順に埋める理由（l を昇順に回すと困ること）：https://yuukougun.github.io/kyopro-atlas/dp/interval-dp/#by-length
     - `interval-dp#split-point` 分割点型（最後に行う操作で区間を 2 つに割る）：https://yuukougun.github.io/kyopro-atlas/dp/interval-dp/#split-point
     - `interval-dp#ends` 両端型（左端か右端を取る）：https://yuukougun.github.io/kyopro-atlas/dp/interval-dp/#ends
@@ -428,7 +429,7 @@ search:
 
 ## 部分集合を列挙する DP（subset-enumeration-dp） {#subset-enumeration-dp}
 
-- id：`subset-enumeration-dp`　レベル：青　段階：stub　type：technique
+- id：`subset-enumeration-dp`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/subset-enumeration-dp/
 - 別名：3^N DP、部分集合の部分集合、Submask Enumeration、グループ分け DP
 - 種類：DP、ビット演算
@@ -596,7 +597,7 @@ search:
 
 ## セグメント木・スライド最小値による DP の高速化（dp-segment-tree） {#dp-segment-tree}
 
-- id：`dp-segment-tree`　レベル：青　段階：stub　type：technique
+- id：`dp-segment-tree`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-segment-tree/
 - 別名：セグ木 DP、BIT で DP を速くする、値を添字にした DP、deque DP、単調スタック DP
 - 種類：DP、区間クエリ、尺取り・スライド窓
@@ -616,7 +617,7 @@ search:
 
 ## インライン DP（inline-dp） {#inline-dp}
 
-- id：`inline-dp`　レベル：青　段階：stub　type：technique
+- id：`inline-dp`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/inline-dp/
 - 別名：in-place DP、Inline DP、配列を使い回して一括更新、遅延セグ木 DP
 - 種類：DP、区間クエリ

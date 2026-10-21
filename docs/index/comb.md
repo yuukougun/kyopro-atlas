@@ -147,7 +147,7 @@ search:
 
 ## 対応づけ・数える対象の言い換え（counting-bijection） {#counting-bijection}
 
-- id：`counting-bijection`　レベル：青　段階：stub　type：technique
+- id：`counting-bijection`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/counting-bijection/
 - 別名：全単射、1 対 1 対応、経路数に帰着、bijection、bijective proof
 - 種類：数え上げ、考察
@@ -184,7 +184,7 @@ search:
 
 ## 重複の除き方（counting-dedup） {#counting-dedup}
 
-- id：`counting-dedup`　レベル：青　段階：stub　type：technique
+- id：`counting-dedup`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/counting-dedup/
 - 別名：ダブルカウントを防ぐ、重複を除く、代表元、正規形、最左マッチ、最小添字規則
 - 種類：数え上げ、DP、考察
@@ -200,8 +200,7 @@ search:
     - `counting-dedup#representative` 重複度が一定でないなら代表元を決める：https://yuukougun.github.io/kyopro-atlas/comb/counting-dedup/#representative
     - `counting-dedup#leftmost` 部分列として含む文字列は最も左の埋め込みで数える：https://yuukougun.github.io/kyopro-atlas/comb/counting-dedup/#leftmost
     - `counting-dedup#min-index` グループ分けは未使用の最小番号から決める：https://yuukougun.github.io/kyopro-atlas/comb/counting-dedup/#min-index
-    - `counting-dedup#in-dp` DP の中で代表を決める（直前と違う・最初に〜で場合分け・包除で重なりを引く）：https://yuukougun.github.io/kyopro-atlas/comb/counting-dedup/#in-dp
-    - `counting-dedup#pitfall-order` 落とし穴：グループの順序を区別して K! 倍に数える：https://yuukougun.github.io/kyopro-atlas/comb/counting-dedup/#pitfall-order
+    - `counting-dedup#in-dp` DP の中で代表を決める（何も変えない操作を除く・最初に〜で場合分け・包除で重なりを引く）：https://yuukougun.github.io/kyopro-atlas/comb/counting-dedup/#in-dp
 
 ## Burnside の補題（burnside-lemma） {#burnside-lemma}
 
@@ -241,7 +240,7 @@ search:
 
 ## 二項係数の恒等式と和の公式（binomial-identities） {#binomial-identities}
 
-- id：`binomial-identities`　レベル：青　段階：stub　type：technique
+- id：`binomial-identities`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/binomial-identities/
 - 別名：二項定理、Vandermonde の恒等式、hockey stick、縦の和の公式、吸収公式、二項係数の和、binomial theorem、Vandermonde's identity
 - 種類：数え上げ
@@ -332,7 +331,7 @@ search:
 
 ## 包除原理（inclusion-exclusion） {#inclusion-exclusion}
 
-- id：`inclusion-exclusion`　レベル：青　段階：stub　type：technique
+- id：`inclusion-exclusion`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/inclusion-exclusion/
 - 別名：包除、撹乱順列、完全順列、モンモール数、全射の数、min-max 包除、inclusion-exclusion principle、derangement
 - 種類：数え上げ
@@ -372,7 +371,7 @@ search:
 
 ## 約数包除（divisor-inclusion-exclusion） {#divisor-inclusion-exclusion}
 
-- id：`divisor-inclusion-exclusion`　レベル：青　段階：stub　type：technique
+- id：`divisor-inclusion-exclusion`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/divisor-inclusion-exclusion/
 - 別名：約数系包除、gcd がちょうど g、倍数から引く、互いに素な組の数、gcd の総和
 - 種類：数え上げ、整数論
@@ -384,15 +383,15 @@ search:
     - 制約：値の上限 ≤ 10^6 程度で、すべての g について数える
 - 節：
     - `divisor-inclusion-exclusion#partition` 「g の倍数」は gcd = g, 2g, 3g, … に排反に分かれる：https://yuukougun.github.io/kyopro-atlas/comb/divisor-inclusion-exclusion/#partition
-    - `divisor-inclusion-exclusion#order` 大きい g から引く理由と計算量 O(N log N)：https://yuukougun.github.io/kyopro-atlas/comb/divisor-inclusion-exclusion/#order
+    - `divisor-inclusion-exclusion#order` 大きい g から引く理由と計算量 O(M log M)：https://yuukougun.github.io/kyopro-atlas/comb/divisor-inclusion-exclusion/#order
     - `divisor-inclusion-exclusion#gcd-sum` gcd の総和・互いに素な組：https://yuukougun.github.io/kyopro-atlas/comb/divisor-inclusion-exclusion/#gcd-sum
     - `divisor-inclusion-exclusion#period` 周期の数え上げ（約数の周期で重複した分を引く）：https://yuukougun.github.io/kyopro-atlas/comb/divisor-inclusion-exclusion/#period
-    - `divisor-inclusion-exclusion#perfect-powers` 完全累乗などの重複を指数ごとに除く：https://yuukougun.github.io/kyopro-atlas/comb/divisor-inclusion-exclusion/#perfect-powers
+    - `divisor-inclusion-exclusion#perfect-powers` 累乗数の重複を指数ごとに除く：https://yuukougun.github.io/kyopro-atlas/comb/divisor-inclusion-exclusion/#perfect-powers
     - `divisor-inclusion-exclusion#vs-mobius` メビウス関数での書き方との対応：https://yuukougun.github.io/kyopro-atlas/comb/divisor-inclusion-exclusion/#vs-mobius
 
 ## 約数・倍数のゼータ変換とメビウス変換（zeta-mobius-divisor） {#zeta-mobius-divisor}
 
-- id：`zeta-mobius-divisor`　レベル：青　段階：stub　type：technique
+- id：`zeta-mobius-divisor`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/zeta-mobius-divisor/
 - 別名：約数ゼータ変換、倍数ゼータ変換、約数メビウス変換、倍数メビウス変換、GCD 畳み込み、LCM 畳み込み、GCD convolution、LCM convolution
 - 種類：数え上げ、整数論、畳み込み・多項式
@@ -466,7 +465,7 @@ search:
 
 ## 置換の偶奇（permutation-parity） {#permutation-parity}
 
-- id：`permutation-parity`　レベル：青　段階：stub　type：technique
+- id：`permutation-parity`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/permutation-parity/
 - 別名：偶置換、奇置換、置換の符号、swap の回数の偶奇、3 要素の巡回、sign of a permutation
 - 種類：数え上げ、考察
@@ -504,7 +503,7 @@ search:
 
 ## 第 2 種スターリング数とベル数（bell-number） {#bell-number}
 
-- id：`bell-number`　レベル：青　段階：stub　type：technique
+- id：`bell-number`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/bell-number/
 - 別名：集合の分割の数、第 2 種スターリング数、ベル数、S(n,k)、B_n、Stirling numbers of the second kind、Bell number
 - 種類：数え上げ、DP
@@ -747,7 +746,7 @@ search:
 
 ## 閉路のある期待値（expectation-linear-equations） {#expectation-linear-equations}
 
-- id：`expectation-linear-equations`　レベル：青　段階：stub　type：technique
+- id：`expectation-linear-equations`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/expectation-linear-equations/
 - 別名：期待値の方程式、a + bX の形で持つ、吸収マルコフ連鎖、閉路のある DP、振り出しに戻る、absorbing Markov chain
 - 種類：確率・期待値、DP、線形代数・行列
@@ -882,7 +881,7 @@ search:
 
 ## Grundy 数と Sprague-Grundy の定理（grundy-number） {#grundy-number}
 
-- id：`grundy-number`　レベル：青　段階：stub　type：technique
+- id：`grundy-number`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/grundy-number/
 - 別名：nimber、Sprague-Grundy の定理、ゲームの和、Grundy 数の周期性、Sprague-Grundy theorem、Grundy number
 - 種類：ゲーム

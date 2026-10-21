@@ -45,7 +45,7 @@ type: generated
 | [大きな数の素数判定と素因数分解](../math/miller-rabin.md)（準備中） | 発展 | 10^18 程度の数の素数判定を Miller-Rabin で、素因数分解を Pollard's rho で期待 O(N^{1/4}) で行う。64bit の法の掛け算には \_\_int128 か Montgomery 乗算を使う。 |
 | [GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md) | 基礎 | gcd(a, b) = gcd(b, a mod b) を繰り返して最大公約数を O(log min(a, b)) で求め、lcm は a / gcd × b で求める。1 つ除いた gcd を累積 gcd で求め、分数を既約にして比べる。 |
 | [拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md) | 水 | 互除法の途中経過から ax + by = gcd(a, b) の整数解を求める。ax + by = c は gcd \| c のときだけ解をもち、一次合同式 ax ≡ b (mod m) や法が素数でないときの逆元もこれで解く。 |
-| [GCD の性質](../math/gcd-properties.md)（準備中） | 青 | 全体に同じ数を足したときの gcd を隣接差の gcd に直し、左端を固定した区間 gcd が O(log A) 種類しかないことで区間 gcd を速く求める。mod N で A ずつ進むと gcd(A, N) の倍数だけを回ることも使う。 |
+| [GCD の性質](../math/gcd-properties.md) | 青 | 全体に同じ数を足したときの gcd を隣接差の gcd に直し、左端を固定した区間 gcd が O(log A) 種類しかないことで区間 gcd を速く求める。mod N で A ずつ進むと gcd(A, N) の倍数だけを回ることも使う。 |
 | [中国剰余定理](../math/crt.md) | 青 | 複数の合同式 x ≡ r_i (mod m_i) を同時に満たす x を、拡張ユークリッドで2式ずつ合わせて mod lcm でただ1つに求める。解があるのは r1 ≡ r2 (mod gcd(m1, m2)) のときだけである。 |
 | [位数・原始根・離散対数](../math/multiplicative-order.md)（準備中） | 黄 | a^k ≡ 1 となる最小の k（位数）を φ(m) の約数から求め、原始根で掛け算を指数の足し算に直す。a^x ≡ b を満たす x（離散対数）は Baby-step Giant-step で O(√m) で求める。 |
 | [整数の証明の型](../math/proof-patterns.md) | 基礎 | 実験で見つけた整数の規則が正しいかを、定番の筋道で確かめる。操作で gcd が変わらない、a, 2a, … が余りを並べ替える、余りの鳩の巣、mod での矛盾などを使う。 |
@@ -61,8 +61,8 @@ type: generated
 | ページ | レベル | 要約 |
 | --- | --- | --- |
 | [二項係数の前計算](../comb/binomial-precompute.md) | 基礎 | 素数 p を法として階乗と逆階乗を前計算し、C(n,k) を O(1) で求める。n が巨大なら O(k) の積、p が小さく n ≥ p なら Lucas の定理、法が素数でなければパスカルの三角形を使う。 |
-| [約数包除](../comb/divisor-inclusion-exclusion.md)（準備中） | 青 | gcd がちょうど g のものの個数 f(g) を、すべて g の倍数のものの個数 F(g) から大きい g の順に f(g) = F(g) − f(2g) − f(3g) − … で求める。全体で O(N log N) になる。 |
-| [約数・倍数のゼータ変換とメビウス変換](../comb/zeta-mobius-divisor.md)（準備中） | 青 | すべての d について d の倍数（約数）にわたる和を求める変換とその逆変換で、素数ごとに累積和を取って O(N log log N) で求める。GCD 畳み込みは倍数の版、LCM 畳み込みは約数の版の変換で求める。 |
+| [約数包除](../comb/divisor-inclusion-exclusion.md) | 青 | gcd がちょうど g の個数 f(g) を、すべて g の倍数の個数 F(g) から大きい g の順に f(g) = F(g) − f(2g) − f(3g) − … で求める。値の上限を M として O(M log M) になる。 |
+| [約数・倍数のゼータ変換とメビウス変換](../comb/zeta-mobius-divisor.md) | 青 | すべての d について d の倍数（約数）にわたる和を求める変換とその逆変換で、素数ごとに累積和を取って O(N log log N) で求める。GCD 畳み込みは倍数の版、LCM 畳み込みは約数の版の変換で求める。 |
 | [メビウス関数とメビウス反転](../comb/mobius-function.md)（準備中） | 黄 | 約数にわたる和 F(n) = Σ_{d\|n} f(d) から f をメビウス関数 μ で戻す（メビウス反転）。[gcd = 1] = Σ_{d\|gcd} μ(d) と置き換えて和の順序を入れ替えるのが典型である。 |
 | [確率・期待値を mod 998244353 で答える](../comb/rational-mod.md) | 水 | 確率・期待値の既約分数 P/Q を P × Q^(−1) mod 998244353 で答える。逆元の掛け算でも四則の関係は保たれるので実数の計算をそのまま mod で行ってよいが、mod の値どうしは大小を比べられない。 |
 

@@ -1,0 +1,11 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "ushers\n4\nhe\nshe\nhis\nhers\n", output: "1\n"}
+  - {input: "abcab\n1\nab\n", output: "2\n"}
+  - {input: "aaaa\n1\naa\n", output: "2\n"}
+  - {input: "abcd\n2\nbc\nabcd\n", output: "1\n"}
+  - {input: "abc\n1\nd\n", output: "0\n"}
+  - {input: "ababab\n2\naba\nbab\n", output: "2\n"}
+  - {input: "abcbcab\n3\nabc\nbcb\nca\n", output: "2\n"}

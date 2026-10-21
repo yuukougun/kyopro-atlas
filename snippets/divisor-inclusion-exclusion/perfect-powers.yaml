@@ -1,0 +1,12 @@
+# main の中で、n <= 2×10^5 のすべてを集合で重複を除く数え方と比べてから、入力を解く
+# 大きい n の期待値は Python で 1 − Σ μ(b)(⌊n^(1/b)⌋ − 1) から求めた
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "1\n", output: "1\n"}
+  - {input: "3\n", output: "1\n"}
+  - {input: "99\n", output: "12\n"}
+  - {input: "1000000000000\n", output: "1010196\n"}
+  - {input: "1152921504606846976\n", output: "1074793830\n"}
+  - {input: "999999999999999999\n", output: "1001003331\n"}

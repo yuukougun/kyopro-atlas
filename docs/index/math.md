@@ -402,7 +402,7 @@ search:
 
 ## GCD の性質（gcd-properties） {#gcd-properties}
 
-- id：`gcd-properties`　レベル：青　段階：stub　type：technique
+- id：`gcd-properties`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/gcd-properties/
 - 別名：差の gcd、区間 gcd、gcd の変化は log 回、gcd と周期
 - 種類：整数論、区間クエリ
@@ -613,7 +613,7 @@ search:
 
 ## 掃き出し法（gaussian-elimination） {#gaussian-elimination}
 
-- id：`gaussian-elimination`　レベル：青　段階：stub　type：technique
+- id：`gaussian-elimination`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/gaussian-elimination/
 - 別名：ガウスの消去法、Gaussian elimination、Gauss-Jordan、連立一次方程式、ランク、ライツアウト、mod 2 の連立方程式
 - 種類：線形代数・行列
@@ -628,7 +628,7 @@ search:
     - `gaussian-elimination#row-reduction` 行基本変形と階段形、解なし（0 = 1）・一意・無数の判定：https://yuukougun.github.io/kyopro-atlas/math/gaussian-elimination/#row-reduction
     - `gaussian-elimination#mod-p` mod p の掃き出し（ピボットで割る＝逆元）：https://yuukougun.github.io/kyopro-atlas/math/gaussian-elimination/#mod-p
     - `gaussian-elimination#mod-2` mod 2 の掃き出しは XOR、bitset で速くする：https://yuukougun.github.io/kyopro-atlas/math/gaussian-elimination/#mod-2
-    - `gaussian-elimination#rank` ランクと解の個数 p^(n − rank)：https://yuukougun.github.io/kyopro-atlas/math/gaussian-elimination/#rank
+    - `gaussian-elimination#rank` ランクと解の個数 p^(変数の数 − ランク)：https://yuukougun.github.io/kyopro-atlas/math/gaussian-elimination/#rank
     - `gaussian-elimination#real` 実数の掃き出し（部分ピボット選択と誤差）：https://yuukougun.github.io/kyopro-atlas/math/gaussian-elimination/#real
 
 ## XOR 基底（xor-basis） {#xor-basis}
@@ -668,7 +668,7 @@ search:
 
 ## 畳み込みの使い方（convolution-ntt） {#convolution-ntt}
 
-- id：`convolution-ntt`　レベル：青　段階：stub　type：technique
+- id：`convolution-ntt`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/convolution-ntt/
 - 別名：畳み込み、convolution、多項式の積、ACL の convolution、convolution_ll、ずらしたときの一致数、全シフトのハミング距離、ワイルドカード照合
 - 種類：畳み込み・多項式

@@ -1,0 +1,12 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 3 点が一直線にない：どの 2 点の直線も 2 点 / 3 点を通るので過半数
+  - {input: "3\n0 0\n1 0\n0 1\n", output: "Yes\n"}
+  # 6 点のうち y = x 上に 4 点
+  - {input: "6\n0 0\n1 1\n2 2\n3 3\n5 0\n0 7\n", output: "Yes\n"}
+  # 4 点が正方形の頂点：どの直線も 2 点しか通らず、2 は 4 の過半数ではない
+  - {input: "4\n0 0\n1 0\n0 1\n1 1\n", output: "No\n"}
+  # 座標が大きくても外積は long long に収まる
+  - {input: "5\n-1000000000 -1000000000\n1000000000 1000000000\n0 0\n7 -3\n1 1\n", output: "Yes\n"}

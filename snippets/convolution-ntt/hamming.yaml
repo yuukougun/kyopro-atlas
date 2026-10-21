@@ -1,0 +1,9 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "0\n1\n", output: "1\n"}
+  - {input: "1\n1\n", output: "0\n"}
+  # S = 0110、T = 11：位置 0 は 01 と 11（1 か所）、位置 1 は 11（0）、位置 2 は 10（1）
+  - {input: "0110\n11\n", output: "1 0 1\n"}
+  - {input: "10101\n010\n", output: "3 0 3\n"}

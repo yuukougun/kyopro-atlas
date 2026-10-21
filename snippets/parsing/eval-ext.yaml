@@ -1,0 +1,7 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "-3*-2\n", output: "6\n"}
+  - {input: " 1 - -2 \n-(1 + 2) * 3\n2*-3+4\n", output: "3\n-9\n-2\n"}
+  - {input: "--5\n12 - 3 - 4\n", output: "5\n5\n"}

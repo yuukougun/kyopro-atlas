@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 365" width="640" height="365" font-family="sans-serif">
+<rect x="0" y="0" width="640" height="365" fill="#ffffff"/>
+<text x="320" y="28" text-anchor="middle" font-size="16" fill="#222">T を位置 p = 2 に重ねるとき、比べる 2 文字の添字の和は 4 に決まる</text>
+<text x="175" y="85" text-anchor="end" font-size="15" fill="#222">S</text>
+<rect x="190" y="60" width="50" height="38" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="215.0" y="85" text-anchor="middle" font-size="18" fill="#222">0</text>
+<text x="215.0" y="116" text-anchor="middle" font-size="14" fill="#555">i=0</text>
+<rect x="246" y="60" width="50" height="38" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="271.0" y="85" text-anchor="middle" font-size="18" fill="#222">1</text>
+<text x="271.0" y="116" text-anchor="middle" font-size="14" fill="#555">i=1</text>
+<rect x="302" y="60" width="50" height="38" fill="#fdebd0" stroke="#c0392b" stroke-width="3"/>
+<text x="327.0" y="85" text-anchor="middle" font-size="18" fill="#222">1</text>
+<text x="327.0" y="116" text-anchor="middle" font-size="14" fill="#555">i=2</text>
+<rect x="358" y="60" width="50" height="38" fill="#fdebd0" stroke="#c0392b" stroke-width="3"/>
+<text x="383.0" y="85" text-anchor="middle" font-size="18" fill="#222">0</text>
+<text x="383.0" y="116" text-anchor="middle" font-size="14" fill="#555">i=3</text>
+<rect x="414" y="60" width="50" height="38" fill="#fdebd0" stroke="#c0392b" stroke-width="3"/>
+<text x="439.0" y="85" text-anchor="middle" font-size="18" fill="#222">1</text>
+<text x="439.0" y="116" text-anchor="middle" font-size="14" fill="#555">i=4</text>
+<rect x="470" y="60" width="50" height="38" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="495.0" y="85" text-anchor="middle" font-size="18" fill="#222">0</text>
+<text x="495.0" y="116" text-anchor="middle" font-size="14" fill="#555">i=5</text>
+<text x="175" y="175" text-anchor="end" font-size="15" fill="#222">T を位置 2 に置く</text>
+<rect x="302" y="150" width="50" height="38" fill="#fdebd0" stroke="#c0392b" stroke-width="3"/>
+<text x="327.0" y="175" text-anchor="middle" font-size="18" fill="#222">1</text>
+<text x="327.0" y="206" text-anchor="middle" font-size="14" fill="#555">j=0</text>
+<rect x="358" y="150" width="50" height="38" fill="#fdebd0" stroke="#c0392b" stroke-width="3"/>
+<text x="383.0" y="175" text-anchor="middle" font-size="18" fill="#222">0</text>
+<text x="383.0" y="206" text-anchor="middle" font-size="14" fill="#555">j=1</text>
+<rect x="414" y="150" width="50" height="38" fill="#fdebd0" stroke="#c0392b" stroke-width="3"/>
+<text x="439.0" y="175" text-anchor="middle" font-size="18" fill="#222">0</text>
+<text x="439.0" y="206" text-anchor="middle" font-size="14" fill="#555">j=2</text>
+<text x="175" y="275" text-anchor="end" font-size="15" fill="#222">反転した T</text>
+<rect x="190" y="250" width="50" height="38" fill="#ffffff" stroke="#555" stroke-width="1.5" stroke-dasharray="6,4"/>
+<text x="215.0" y="275" text-anchor="middle" font-size="18" fill="#222">0</text>
+<text x="215.0" y="306" text-anchor="middle" font-size="14" fill="#555">0 (j=2)</text>
+<rect x="246" y="250" width="50" height="38" fill="#ffffff" stroke="#555" stroke-width="1.5" stroke-dasharray="6,4"/>
+<text x="271.0" y="275" text-anchor="middle" font-size="18" fill="#222">0</text>
+<text x="271.0" y="306" text-anchor="middle" font-size="14" fill="#555">1 (j=1)</text>
+<rect x="302" y="250" width="50" height="38" fill="#ffffff" stroke="#555" stroke-width="1.5" stroke-dasharray="6,4"/>
+<text x="327.0" y="275" text-anchor="middle" font-size="18" fill="#222">1</text>
+<text x="327.0" y="306" text-anchor="middle" font-size="14" fill="#555">2 (j=0)</text>
+<line x1="327.0" y1="118" x2="327.0" y2="150" stroke="#c0392b" stroke-width="2" stroke-dasharray="5,4"/>
+<line x1="383.0" y1="118" x2="383.0" y2="150" stroke="#c0392b" stroke-width="2" stroke-dasharray="5,4"/>
+<line x1="439.0" y1="118" x2="439.0" y2="150" stroke="#c0392b" stroke-width="2" stroke-dasharray="5,4"/>
+<text x="378" y="262" font-size="14" fill="#555">S の i = 2 + j と、反転した T の</text>
+<text x="378" y="282" font-size="14" fill="#555">2 − j を組にすると、和はいつも 4</text>
+<text x="320" y="353" text-anchor="middle" font-size="14" fill="#222">一般に、位置 p での比べ合いは畳み込みの第 p + |T| − 1 項に集まる</text>
+</svg>

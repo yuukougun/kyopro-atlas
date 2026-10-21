@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 398" font-family="sans-serif" font-size="15">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="225.0" y="24" text-anchor="middle" fill="#222" font-weight="bold">1 回に 2〜3 個取る山の Grundy 数 g(x)</text>
+<text x="20" y="58" fill="#555" font-size="13">x mod 5</text>
+<text x="142.0" y="58" text-anchor="middle" fill="#555" font-size="13">0</text>
+<text x="206.0" y="58" text-anchor="middle" fill="#555" font-size="13">1</text>
+<text x="270.0" y="58" text-anchor="middle" fill="#555" font-size="13">2</text>
+<text x="334.0" y="58" text-anchor="middle" fill="#555" font-size="13">3</text>
+<text x="398.0" y="58" text-anchor="middle" fill="#555" font-size="13">4</text>
+<text x="20" y="103.0" fill="#222" font-size="14">x = 0〜4</text>
+<rect x="112" y="70" width="60" height="56" fill="#e6e6e6" stroke="#555" stroke-width="1"/>
+<text x="118" y="86" fill="#666" font-size="12">x=0</text>
+<text x="142.0" y="114" text-anchor="middle" fill="#222" font-size="20" font-weight="bold">0</text>
+<rect x="176" y="70" width="60" height="56" fill="#e6e6e6" stroke="#555" stroke-width="1"/>
+<text x="182" y="86" fill="#666" font-size="12">x=1</text>
+<text x="206.0" y="114" text-anchor="middle" fill="#222" font-size="20" font-weight="bold">0</text>
+<rect x="240" y="70" width="60" height="56" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="246" y="86" fill="#666" font-size="12">x=2</text>
+<text x="270.0" y="114" text-anchor="middle" fill="#222" font-size="20" font-weight="bold">1</text>
+<rect x="304" y="70" width="60" height="56" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="310" y="86" fill="#666" font-size="12">x=3</text>
+<text x="334.0" y="114" text-anchor="middle" fill="#222" font-size="20" font-weight="bold">1</text>
+<rect x="368" y="70" width="60" height="56" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="374" y="86" fill="#666" font-size="12">x=4</text>
+<text x="398.0" y="114" text-anchor="middle" fill="#222" font-size="20" font-weight="bold">2</text>
+<text x="20" y="199.0" fill="#222" font-size="14">x = 5〜9</text>
+<rect x="112" y="166" width="60" height="56" fill="#e6e6e6" stroke="#555" stroke-width="1"/>
+<text x="118" y="182" fill="#666" font-size="12">x=5</text>
+<text x="142.0" y="210" text-anchor="middle" fill="#222" font-size="20" font-weight="bold">0</text>
+<rect x="176" y="166" width="60" height="56" fill="#e6e6e6" stroke="#c0392b" stroke-width="2" stroke-dasharray="5 3"/>
+<text x="182" y="182" fill="#666" font-size="12">x=6</text>
+<text x="206.0" y="210" text-anchor="middle" fill="#222" font-size="20" font-weight="bold">0</text>
+<rect x="240" y="166" width="60" height="56" fill="#ffffff" stroke="#c0392b" stroke-width="2" stroke-dasharray="5 3"/>
+<text x="246" y="182" fill="#666" font-size="12">x=7</text>
+<text x="270.0" y="210" text-anchor="middle" fill="#222" font-size="20" font-weight="bold">1</text>
+<rect x="304" y="166" width="60" height="56" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="310" y="182" fill="#666" font-size="12">x=8</text>
+<text x="334.0" y="210" text-anchor="middle" fill="#222" font-size="20" font-weight="bold">1</text>
+<rect x="368" y="166" width="60" height="56" fill="#ffffff" stroke="#c0392b" stroke-width="3"/>
+<text x="374" y="182" fill="#666" font-size="12">x=9</text>
+<text x="398.0" y="210" text-anchor="middle" fill="#222" font-size="20" font-weight="bold">2</text>
+<text x="20" y="295.0" fill="#222" font-size="14">x = 10〜14</text>
+<rect x="112" y="262" width="60" height="56" fill="#e6e6e6" stroke="#555" stroke-width="1"/>
+<text x="118" y="278" fill="#666" font-size="12">x=10</text>
+<text x="142.0" y="306" text-anchor="middle" fill="#222" font-size="20" font-weight="bold">0</text>
+<rect x="176" y="262" width="60" height="56" fill="#e6e6e6" stroke="#555" stroke-width="1"/>
+<text x="182" y="278" fill="#666" font-size="12">x=11</text>
+<text x="206.0" y="306" text-anchor="middle" fill="#222" font-size="20" font-weight="bold">0</text>
+<rect x="240" y="262" width="60" height="56" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="246" y="278" fill="#666" font-size="12">x=12</text>
+<text x="270.0" y="306" text-anchor="middle" fill="#222" font-size="20" font-weight="bold">1</text>
+<rect x="304" y="262" width="60" height="56" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="310" y="278" fill="#666" font-size="12">x=13</text>
+<text x="334.0" y="306" text-anchor="middle" fill="#222" font-size="20" font-weight="bold">1</text>
+<rect x="368" y="262" width="60" height="56" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="374" y="278" fill="#666" font-size="12">x=14</text>
+<text x="398.0" y="306" text-anchor="middle" fill="#222" font-size="20" font-weight="bold">2</text>
+<path d="M392.0,224 Q334.0,252 274.0,226" fill="none" stroke="#c0392b" stroke-width="2" marker-end="url(#ah)"/>
+<text x="334.0" y="254" text-anchor="middle" fill="#c0392b" font-size="12">2 個</text>
+<path d="M404.0,224 Q302.0,266 206.0,226" fill="none" stroke="#c0392b" stroke-width="2" marker-end="url(#ah)"/>
+<text x="236.0" y="260" text-anchor="middle" fill="#c0392b" font-size="12">3 個</text>
+<text x="20" y="350" fill="#222" font-size="13">9 から移れる 7・6 の g は 1・0 なので g(9) = mex{1, 0} = 2</text>
+<text x="20" y="370" fill="#555" font-size="13">灰色は g = 0（必敗）。3 段とも同じ並びで、周期は L + R = 5</text>
+</svg>

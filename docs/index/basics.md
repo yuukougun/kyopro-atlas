@@ -405,7 +405,7 @@ search:
 
 ## K 番目の値（kth-value） {#kth-value}
 
-- id：`kth-value`　レベル：青　段階：stub　type：technique
+- id：`kth-value`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/kth-value/
 - 別名：K 番目を二分探索で求める、順位を数える、N^2 個の K 番目、K-th smallest
 - 種類：二分探索
@@ -518,7 +518,7 @@ search:
 
 ## 交換論法と比較関数の設計（exchange-argument） {#exchange-argument}
 
-- id：`exchange-argument`　レベル：青　段階：stub　type：technique
+- id：`exchange-argument`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/exchange-argument/
 - 別名：隣接交換、exchange argument、ソートの比較関数を作る、連結して最大・最小、a+b と b+a
 - 種類：貪欲、ソート・座標圧縮

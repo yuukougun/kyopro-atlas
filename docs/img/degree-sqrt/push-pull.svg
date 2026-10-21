@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" width="720" height="360" font-family="sans-serif" font-size="14">
+  <rect x="0" y="0" width="720" height="360" fill="#ffffff"/>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1c64b0"/>
+    </marker>
+    <marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/>
+    </marker>
+  </defs>
+  <line x1="240" y1="20" x2="240" y2="300" stroke="#ccc" stroke-width="1"/>
+  <line x1="480" y1="20" x2="480" y2="300" stroke="#ccc" stroke-width="1"/>
+
+  <!-- 1. 軽い頂点を塗る -->
+  <text x="120" y="32" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">① 軽い頂点 x を塗る</text>
+  <text x="120" y="54" text-anchor="middle" fill="#444">隣すべてに書く（B 個未満）</text>
+  <g stroke="#1c64b0" stroke-width="2.5" marker-end="url(#ah)">
+    <line x1="106" y1="162" x2="64" y2="118"/>
+    <line x1="136" y1="162" x2="171" y2="122"/>
+    <line x1="106" y1="190" x2="64" y2="234"/>
+    <line x1="136" y1="190" x2="176" y2="234"/>
+  </g>
+  <g fill="#ffffff" stroke="#222" stroke-width="2">
+    <circle cx="120" cy="176" r="18"/>
+    <circle cx="50" cy="104" r="16"/>
+    <circle cx="50" cy="248" r="16"/>
+    <circle cx="190" cy="248" r="16"/>
+  </g>
+  <circle cx="190" cy="104" r="20" fill="#d4d4d4" stroke="#222" stroke-width="2"/>
+  <circle cx="190" cy="104" r="15" fill="none" stroke="#222" stroke-width="1.5"/>
+  <g text-anchor="middle" fill="#222">
+    <text x="120" y="181" font-weight="bold">x</text>
+    <text x="190" y="109" font-weight="bold">h</text>
+  </g>
+  <text x="120" y="290" text-anchor="middle" fill="#1c64b0">pushed[u] ← t（u は x と隣）</text>
+
+  <!-- 2. 重い頂点を塗る -->
+  <text x="360" y="32" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">② 重い頂点 h を塗る</text>
+  <text x="360" y="54" text-anchor="middle" fill="#444">自分の記録だけ書く（O(1)）</text>
+  <g stroke="#999" stroke-width="1.5">
+    <line x1="360" y1="176" x2="360" y2="96"/>
+    <line x1="360" y1="176" x2="417" y2="119"/>
+    <line x1="360" y1="176" x2="440" y2="176"/>
+    <line x1="360" y1="176" x2="417" y2="233"/>
+    <line x1="360" y1="176" x2="360" y2="256"/>
+    <line x1="360" y1="176" x2="303" y2="233"/>
+    <line x1="360" y1="176" x2="280" y2="176"/>
+    <line x1="360" y1="176" x2="303" y2="119"/>
+  </g>
+  <g fill="#ffffff" stroke="#222" stroke-width="1.5">
+    <circle cx="360" cy="96" r="11"/>
+    <circle cx="417" cy="119" r="11"/>
+    <circle cx="440" cy="176" r="11"/>
+    <circle cx="417" cy="233" r="11"/>
+    <circle cx="360" cy="256" r="11"/>
+    <circle cx="303" cy="233" r="11"/>
+    <circle cx="280" cy="176" r="11"/>
+    <circle cx="303" cy="119" r="11"/>
+  </g>
+  <circle cx="360" cy="176" r="20" fill="#d4d4d4" stroke="#222" stroke-width="2"/>
+  <circle cx="360" cy="176" r="15" fill="none" stroke="#222" stroke-width="1.5"/>
+  <text x="360" y="181" text-anchor="middle" font-weight="bold" fill="#222">h</text>
+  <text x="360" y="290" text-anchor="middle" fill="#222">own[h] ← t（隣には書かない）</text>
+
+  <!-- 3. 色を聞く -->
+  <text x="600" y="32" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">③ 頂点 x の色を聞く</text>
+  <text x="600" y="54" text-anchor="middle" fill="#444">自分と隣の重い頂点だけ見る</text>
+  <g stroke="#999" stroke-width="1.5">
+    <line x1="600" y1="186" x2="530" y2="112"/>
+    <line x1="600" y1="186" x2="530" y2="252"/>
+  </g>
+  <g stroke="#c2410c" stroke-width="2.5" stroke-dasharray="7 4" marker-end="url(#ahr)">
+    <line x1="655" y1="118" x2="614" y2="170"/>
+    <line x1="657" y1="246" x2="616" y2="200"/>
+  </g>
+  <g fill="#ffffff" stroke="#222" stroke-width="2">
+    <circle cx="600" cy="186" r="18"/>
+    <circle cx="530" cy="112" r="16"/>
+    <circle cx="530" cy="252" r="16"/>
+  </g>
+  <g fill="#d4d4d4" stroke="#222" stroke-width="2">
+    <circle cx="670" cy="104" r="20"/>
+    <circle cx="672" cy="260" r="20"/>
+  </g>
+  <g fill="none" stroke="#222" stroke-width="1.5">
+    <circle cx="670" cy="104" r="15"/>
+    <circle cx="672" cy="260" r="15"/>
+  </g>
+  <g text-anchor="middle" fill="#222" font-weight="bold">
+    <text x="600" y="191">x</text>
+    <text x="670" y="109">h₁</text>
+    <text x="672" y="265">h₂</text>
+  </g>
+  <text x="600" y="290" text-anchor="middle" fill="#c2410c">max(pushed[x], own[h₁], own[h₂])</text>
+
+  <!-- 凡例 -->
+  <g transform="translate(40,325)">
+    <circle cx="10" cy="0" r="10" fill="#ffffff" stroke="#222" stroke-width="2"/>
+    <text x="28" y="5" fill="#222">軽い頂点（次数 B 未満）</text>
+    <circle cx="230" cy="0" r="12" fill="#d4d4d4" stroke="#222" stroke-width="2"/>
+    <circle cx="230" cy="0" r="8" fill="none" stroke="#222" stroke-width="1.5"/>
+    <text x="250" y="5" fill="#222">重い頂点（次数 B 以上、2M/B 個以下）</text>
+    <text x="560" y="5" fill="#444">t は塗った時刻</text>
+  </g>
+</svg>

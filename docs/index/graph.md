@@ -242,7 +242,7 @@ search:
 
 ## ベルマンフォード法（bellman-ford） {#bellman-ford}
 
-- id：`bellman-ford`　レベル：青　段階：stub　type：technique
+- id：`bellman-ford`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/bellman-ford/
 - 別名：ベルマンフォード、Bellman-Ford、負閉路検出、SPFA、負辺のある最短路
 - 種類：最短路
@@ -322,7 +322,7 @@ search:
 
 ## 差分制約（牛ゲー）（difference-constraints） {#difference-constraints}
 
-- id：`difference-constraints`　レベル：青　段階：stub　type：technique
+- id：`difference-constraints`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/difference-constraints/
 - 別名：牛ゲー、差分制約系、不等式を辺にする、difference constraints
 - 種類：最短路
@@ -550,7 +550,7 @@ search:
 
 ## 最小ボトルネック路（bottleneck-path） {#bottleneck-path}
 
-- id：`bottleneck-path`　レベル：青　段階：stub　type：technique
+- id：`bottleneck-path`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/bottleneck-path/
 - 別名：minimax 経路、ボトルネック、経路上の最大の辺の最小化、bottleneck path
 - 種類：連結性・全域木
@@ -562,7 +562,7 @@ search:
     - 言い回し：しきい値を上げていくと連結になる時刻
 - 節：
     - `bottleneck-path#why-mst` 最小全域木の上の経路がボトルネック最小になる理由（カット性質）：https://yuukougun.github.io/kyopro-atlas/graph/bottleneck-path/#why-mst
-    - `bottleneck-path#kruskal-order` Kruskal の順に成分を併合しながら答える：https://yuukougun.github.io/kyopro-atlas/graph/bottleneck-path/#kruskal-order
+    - `bottleneck-path#kruskal-order` クラスカル法の順に成分を併合しながら答える：https://yuukougun.github.io/kyopro-atlas/graph/bottleneck-path/#kruskal-order
     - `bottleneck-path#many-queries` 多数の 2 点の質問：成分にクエリを持たせて小さい方から移す（黄）：https://yuukougun.github.io/kyopro-atlas/graph/bottleneck-path/#many-queries
     - `bottleneck-path#reconstruction-tree` 併合過程の木（Kruskal 再構築木）でオンラインに答える（木の章へ）（発展）：https://yuukougun.github.io/kyopro-atlas/graph/bottleneck-path/#reconstruction-tree
 
@@ -634,7 +634,7 @@ search:
 
 ## DFS 木・BFS 木とグラフの構築（graph-construction） {#graph-construction}
 
-- id：`graph-construction`　レベル：青　段階：stub　type：technique
+- id：`graph-construction`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/graph-construction/
 - 別名：グラフの構築、DFS 木、BFS 木、後退辺、グラフの復元、DFS tree、back edge
 - 種類：グラフ探索、考察
@@ -666,7 +666,7 @@ search:
 
 ## 次数による平方分割（degree-sqrt） {#degree-sqrt}
 
-- id：`degree-sqrt`　レベル：青　段階：stub　type：technique
+- id：`degree-sqrt`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/degree-sqrt/
 - 別名：次数の平方分割、重い頂点と軽い頂点、三角形の列挙、4-サイクルの検出、sqrt decomposition on degrees
 - 種類：グラフ探索、クエリ処理の工夫
@@ -677,7 +677,7 @@ search:
     - 制約：N, M, Q ≤ 2×10^5 で、1 つの頂点の次数が N 近くになりうる
 - 節：
     - `degree-sqrt#few-heavy` 重い頂点は 2√M 個以下：https://yuukougun.github.io/kyopro-atlas/graph/degree-sqrt/#few-heavy
-    - `degree-sqrt#push-pull` 重い頂点は受け取る側、軽い頂点は配る側：https://yuukougun.github.io/kyopro-atlas/graph/degree-sqrt/#push-pull
+    - `degree-sqrt#push-pull` 配るか取りに行くかを次数で決める：https://yuukougun.github.io/kyopro-atlas/graph/degree-sqrt/#push-pull
     - `degree-sqrt#triangles` 三角形の列挙（次数の小さい方から向き付ける）（黄）：https://yuukougun.github.io/kyopro-atlas/graph/degree-sqrt/#triangles
     - `degree-sqrt#four-cycles` 4-サイクルの検出（鳩の巣原理で打ち切る）（黄）：https://yuukougun.github.io/kyopro-atlas/graph/degree-sqrt/#four-cycles
 

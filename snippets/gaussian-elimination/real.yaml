@@ -1,0 +1,9 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 1e-20 x + y = 1, x + y = 2 → x ≈ 1, y ≈ 1（ピボットの選び方で答えが変わる例）
+  - {input: "2\n1e-20 1 1\n1 1 2\n", output: "1.000000 1.000000\n"}
+  - {input: "2\n2 1 5\n1 3 10\n", output: "1.000000 3.000000\n"}
+  - {input: "2\n1 1 1\n2 2 2\n", output: "singular\n"}
+  - {input: "1\n4 2\n", output: "0.500000\n"}

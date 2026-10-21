@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 432" width="480" height="432" font-family="sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#222222"/>
+    </marker>
+    <marker id="arrb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f4e9c"/>
+    </marker>
+  </defs>
+  <rect width="480" height="432" fill="#ffffff"/>
+  <g transform="translate(5,0)">
+  <!-- 余裕のある条件（破線） -->
+  <g stroke="#222222" stroke-width="2" stroke-dasharray="6 5" fill="none" marker-end="url(#arr)">
+    <line x1="240" y1="74" x2="240" y2="205"/>
+    <line x1="400.3" y1="130.2" x2="262" y2="61"/>
+  </g>
+  <!-- 最短路の木の辺（太い実線。等号で効いている条件） -->
+  <g stroke="#1f4e9c" stroke-width="4" fill="none" marker-end="url(#arrb)">
+    <line x1="89.4" y1="129.7" x2="217" y2="62"/>
+    <line x1="89.4" y1="150.3" x2="217" y2="218"/>
+    <line x1="259.7" y1="220.2" x2="397" y2="151.5"/>
+  </g>
+  <!-- 辺の重み -->
+  <g font-size="17" fill="#222222" text-anchor="middle">
+    <text x="143" y="80">4</text>
+    <text x="143" y="215">5</text>
+    <text x="254" y="145">2</text>
+    <text x="340" y="212">1</text>
+    <text x="345" y="82">−1</text>
+  </g>
+  <!-- 頂点 -->
+  <g stroke="#222222" stroke-width="2" fill="#ffffff">
+    <circle cx="70" cy="140" r="21"/>
+    <circle cx="240" cy="50" r="21"/>
+    <circle cx="240" cy="230" r="21"/>
+    <circle cx="420" cy="140" r="21"/>
+  </g>
+  <g font-size="17" fill="#222222" text-anchor="middle">
+    <text x="70" y="146">x<tspan font-size="12" dy="4">0</tspan></text>
+    <text x="240" y="56">x<tspan font-size="12" dy="4">1</tspan></text>
+    <text x="240" y="236">x<tspan font-size="12" dy="4">2</tspan></text>
+    <text x="420" y="146">x<tspan font-size="12" dy="4">3</tspan></text>
+  </g>
+  <!-- 最短距離 -->
+  <g font-size="16" fill="#b03030" text-anchor="middle" font-weight="bold">
+    <text x="70" y="185">d = 0</text>
+    <text x="300" y="30">d = 4</text>
+    <text x="240" y="280">d = 5</text>
+    <text x="420" y="185">d = 6</text>
+  </g>
+  </g>
+  <!-- 凡例 -->
+  <g font-size="14" fill="#222222">
+    <line x1="20" y1="315" x2="60" y2="315" stroke="#1f4e9c" stroke-width="4"/>
+    <text x="70" y="320">最短路の木の辺（等号で効く条件）</text>
+    <line x1="20" y1="342" x2="60" y2="342" stroke="#222222" stroke-width="2" stroke-dasharray="6 5"/>
+    <text x="70" y="347">ほかの辺（余裕のある条件）</text>
+    <text x="20" y="374">辺 u → v（重み c）は x<tspan font-size="11" dy="4">v</tspan><tspan dy="-4"> − x</tspan><tspan font-size="11" dy="4">u</tspan><tspan dy="-4"> ≤ c を表す</tspan></text>
+    <text x="20" y="399" fill="#b03030" font-weight="bold">d：x<tspan font-size="11" dy="4">0</tspan><tspan dy="-4"> からの最短距離</tspan></text>
+    <text x="20" y="418" fill="#b03030">＝ x<tspan font-size="11" dy="4">0</tspan><tspan dy="-4"> = 0 の下での各変数の最大値</tspan></text>
+  </g>
+</svg>

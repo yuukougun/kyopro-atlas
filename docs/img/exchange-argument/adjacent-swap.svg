@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 248" width="480" height="248" font-family="sans-serif">
+  <rect x="0" y="0" width="480" height="248" fill="#ffffff"/>
+  <text x="12" y="26" font-size="17" fill="#222">隣り合う i と j だけを入れ替える</text>
+
+  <!-- time axis ticks (shared) -->
+  <g font-size="16" fill="#444" text-anchor="middle">
+    <text x="144" y="58">S</text>
+    <text x="324" y="58">S + tᵢ + tⱼ</text>
+  </g>
+  <line x1="144" y1="64" x2="144" y2="118" stroke="#888" stroke-dasharray="3 3"/>
+  <line x1="144" y1="152" x2="144" y2="208" stroke="#888" stroke-dasharray="3 3"/>
+  <line x1="324" y1="64" x2="324" y2="118" stroke="#888" stroke-dasharray="3 3"/>
+  <line x1="324" y1="152" x2="324" y2="208" stroke="#888" stroke-dasharray="3 3"/>
+
+  <!-- row labels -->
+  <g font-size="16" fill="#222">
+    <text x="8" y="97">i が先</text>
+    <text x="8" y="187">j が先</text>
+  </g>
+
+  <!-- row 1: prefix, i, j, suffix -->
+  <g stroke="#999" stroke-width="1.5" stroke-dasharray="4 3" fill="#eeeeee">
+    <rect x="64" y="72" width="80" height="40"/>
+    <rect x="324" y="72" width="148" height="40"/>
+  </g>
+  <g font-size="15" fill="#555" text-anchor="middle">
+    <text x="104" y="97">前の仕事</text>
+    <text x="398" y="97">後ろの仕事</text>
+  </g>
+  <rect x="144" y="72" width="70" height="40" fill="#cfe0f5" stroke="#1f4e8c" stroke-width="2"/>
+  <rect x="214" y="72" width="110" height="40" fill="#fde2c8" stroke="#b5561b" stroke-width="2"/>
+  <g font-size="17" fill="#222" text-anchor="middle">
+    <text x="179" y="98">i</text>
+    <text x="269" y="98">j</text>
+  </g>
+  <text x="64" y="138" font-size="16" fill="#222">変わる項：wᵢ(S + tᵢ) + wⱼ(S + tᵢ + tⱼ)</text>
+
+  <!-- row 2: prefix, j, i, suffix -->
+  <g stroke="#999" stroke-width="1.5" stroke-dasharray="4 3" fill="#eeeeee">
+    <rect x="64" y="162" width="80" height="40"/>
+    <rect x="324" y="162" width="148" height="40"/>
+  </g>
+  <g font-size="15" fill="#555" text-anchor="middle">
+    <text x="104" y="187">前の仕事</text>
+    <text x="398" y="187">後ろの仕事</text>
+  </g>
+  <rect x="144" y="162" width="110" height="40" fill="#fde2c8" stroke="#b5561b" stroke-width="2"/>
+  <rect x="254" y="162" width="70" height="40" fill="#cfe0f5" stroke="#1f4e8c" stroke-width="2"/>
+  <g font-size="17" fill="#222" text-anchor="middle">
+    <text x="199" y="188">j</text>
+    <text x="289" y="188">i</text>
+  </g>
+  <text x="64" y="228" font-size="16" fill="#222">変わる項：wⱼ(S + tⱼ) + wᵢ(S + tⱼ + tᵢ)</text>
+</svg>

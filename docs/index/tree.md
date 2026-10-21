@@ -149,7 +149,7 @@ search:
 
 ## 木の次数列と Prüfer 列（tree-degree） {#tree-degree}
 
-- id：`tree-degree`　レベル：青　段階：stub　type：technique
+- id：`tree-degree`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-degree/
 - 別名：次数列、プリューファー列、Prüfer code、Prüfer sequence、握手補題、星、degree sequence
 - 種類：木、数え上げ
@@ -162,7 +162,7 @@ search:
     - `tree-degree#realizable` 次数列から木を作れる条件：https://yuukougun.github.io/kyopro-atlas/tree/tree-degree/#realizable
     - `tree-degree#pruefer` Prüfer 列と木の全単射（出現回数 = 次数 − 1）：https://yuukougun.github.io/kyopro-atlas/tree/tree-degree/#pruefer
     - `tree-degree#allocate-degrees` 次数を配る最適化：https://yuukougun.github.io/kyopro-atlas/tree/tree-degree/#allocate-degrees
-    - `tree-degree#counting-links` 木の数え上げ（Cayley の公式）は数え上げの章、全域木の個数はグラフの章の行列木定理：https://yuukougun.github.io/kyopro-atlas/tree/tree-degree/#counting-links
+    - `tree-degree#counting-links` 木の数え上げ（Cayley の公式・行列木定理）へのつながり：https://yuukougun.github.io/kyopro-atlas/tree/tree-degree/#counting-links
 
 ## 木の直径と最遠点（tree-diameter） {#tree-diameter}
 
@@ -273,7 +273,7 @@ search:
 
 ## 木の上のパスの判定と分解（tree-path） {#tree-path}
 
-- id：`tree-path`　レベル：青　段階：stub　type：technique
+- id：`tree-path`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-path/
 - 別名：パスクエリ、2 頂点間のパス、パスの分解、合流点、パスの交差、path queries on a tree
 - 種類：木
@@ -293,7 +293,7 @@ search:
 
 ## 根からのパスを DFS で持ち回る（root-path-dfs） {#root-path-dfs}
 
-- id：`root-path-dfs`　レベル：青　段階：stub　type：technique
+- id：`root-path-dfs`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/root-path-dfs/
 - 別名：DFS の巻き戻し、根からのパスの情報、入るとき足して出るとき戻す、rollback on DFS
 - 種類：木、クエリ処理の工夫

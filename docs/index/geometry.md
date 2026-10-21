@@ -126,7 +126,7 @@ search:
 
 ## 円と幾何の最適化（circle-geometry） {#circle-geometry}
 
-- id：`circle-geometry`　レベル：青　段階：stub　type：technique
+- id：`circle-geometry`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/geometry/circle-geometry/
 - 別名：円の交差判定、2 円の位置関係、外接円、円と格子点、最小包含円、smallest enclosing circle、Welzl、半径の二分探索、三分探索で幾何、候補点の列挙
 - 種類：幾何、二分探索
