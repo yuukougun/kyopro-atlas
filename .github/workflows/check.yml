@@ -67,8 +67,9 @@ jobs:
       - if: steps.ap-fetch.outcome == 'failure'
         run: echo "::warning title=AtCoder Problems::問題のデータを取れなかったので、台帳と目次の照合を飛ばした"
       # 工程8a で目次を凍結した後は、台帳にだけある問題が増えてこの照合が落ちるので、下の目次の検査と同じく警告だけにする
-      - name: 目次と台帳の照合
+      - name: 目次と台帳の照合（8a 以降は台帳とページが正で目次は凍結なので、警告だけ）
         if: steps.ap-fetch.outcome != 'failure'
+        continue-on-error: true
         run: python tools/build_ledger.py --check
       - name: 目次の検査（8a 以降は凍結なので、エラーでも警告だけ）
         if: steps.ap-fetch.outcome != 'failure'
