@@ -58,7 +58,7 @@ $\mathrm{dp}_0$ は途中に何も通さない経路、すなわち辺 1 本の�
 $\mathrm{dp}_k$ から $\mathrm{dp}_{k+1}$ を作るには、新しく頂点 $k$ を経由してよくなったことを反映する。途中の頂点が $0, \dots, k$ に収まる最短の経路は、次の 2 通りのどちらかである。
 
 - 頂点 $k$ を通らない：長さは $\mathrm{dp}_k[i][j]$
-- 頂点 $k$ を通る：負閉路がなければ、最短の経路は $k$ を 1 回だけ通るものに取れる。$k$ で 2 つに切ると、前半の $i \to k$ と後半の $k \to j$ はどちらも途中の頂点が $0, \dots, k - 1$ に収まる。よって長さは $\mathrm{dp}_k[i][k] + \mathrm{dp}_k[k][j]$
+- 頂点 $k$ を通る：[負閉路](../guide/glossary.md#negative-cycle)がなければ、最短の経路は $k$ を 1 回だけ通るものに取れる。$k$ で 2 つに切ると、前半の $i \to k$ と後半の $k \to j$ はどちらも途中の頂点が $0, \dots, k - 1$ に収まる。よって長さは $\mathrm{dp}_k[i][k] + \mathrm{dp}_k[k][j]$
 
 $$
 \mathrm{dp}_{k+1}[i][j] = \min\bigl(\mathrm{dp}_k[i][j],\ \mathrm{dp}_k[i][k] + \mathrm{dp}_k[k][j]\bigr)

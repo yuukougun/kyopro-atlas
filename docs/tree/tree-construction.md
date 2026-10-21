@@ -149,7 +149,7 @@ B の組が空でない間：
 
 ## 最遠距離の列から直径を決める {#from-eccentricities}
 
-この節は[直径](../tree/tree-diameter.md)と[各点の最遠点は直径の端点](../tree/tree-diameter.md#eccentricity)を前提にする。辺の重みがすべて 1 の木で、各頂点から最も遠い頂点までの距離（離心数）$a_v$ の列が与えられ、それを満たす木があるかを問う型である。
+この節は[直径](../tree/tree-diameter.md)と[各点の最遠点は直径の端点](../tree/tree-diameter.md#eccentricity)を前提にする。辺の重みがすべて 1 の木で、各頂点から最も遠い頂点までの距離（[離心数](../guide/glossary.md#eccentricity)）$a_v$ の列が与えられ、それを満たす木があるかを問う型である。
 
 最遠距離の最大値 $K$ は直径の長さになる。直径の両端からの距離を考えると、直径の上の $K + 1$ 個の頂点の最遠距離は、両端から順に $K, K - 1, \dots, \lceil K/2 \rceil, \dots, K - 1, K$ と決まる。直径から外れた頂点は、直径の上のどこかの頂点 $w$ から枝分かれして $a_w$ より遠くなるので、最遠距離は $\lceil K/2 \rceil + 1$ 以上になる。
 

@@ -73,7 +73,7 @@ C++ の作法で必ず守るのは次の 3 つである。
 
 ジャッジと交互に手を打つゲームの形式は、[ゲームの基本](../comb/game-basics.md#interactive)で扱う。
 
-質問の部分を関数に分けておくと、flush と不正の合図の処理を 1 か所にまとめられる。次は[二分探索の節](#binary-search)で使うコードの中心である。ng・ok の意味と不変条件は、その節で説明する。
+質問の部分を関数に分けておくと、[flush](../guide/glossary.md#flush) と不正の合図の処理を 1 か所にまとめられる。次は[二分探索の節](#binary-search)で使うコードの中心である。ng・ok の意味と不変条件は、その節で説明する。
 
 ```cpp
 --8<-- "interactive/boundary.cpp:core"

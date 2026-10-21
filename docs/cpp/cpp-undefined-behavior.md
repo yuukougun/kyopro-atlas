@@ -287,7 +287,7 @@ g++-15 -std=gnu++23 -O1 -g -Wall -Wextra -D_GLIBCXX_DEBUG -fsanitize=address,und
 
 **遅くなる**：手元で、長さ $2 \times 10^5$ の配列のソートと $4 \times 10^8$ 回のループを含むコードを比べた。ふだんの `-O2` で 0.08 秒、上のビルドで約 15 秒、`_GLIBCXX_DEBUG` を `_GLIBCXX_ASSERTIONS` に替えて約 0.9 秒だった。倍率は書き方で大きく変わり、別の例では約 3 倍と約 65 倍だった。目安は、`ASSERTIONS` 版で数倍〜十数倍、`_GLIBCXX_DEBUG` 版で数十〜数百倍である。大きいケースではなく、落ちる小さいケースを探してから動かす。
 
-- **落とし穴**：プリコンパイル済みヘッダ（`~/pch`）は作ったときと同じオプションでしか使われない。そのため、このビルドではコンパイルに毎回数秒かかる（[プリコンパイル済みヘッダ](../cpp/cpp-environment.md#pch)）
+- **落とし穴**：プリコンパイル済みヘッダ（`~/pch`）は作ったときと同じオプションでしか使われない。そのため、このビルドではコンパイルに毎回数秒かかる（[プリコンパイル済みヘッダ](../cpp/cpp-environment.md)）
 - **落とし穴**：深い再帰で落ちるのは未定義動作ではなくスタックの不足である。手元で試す前に `ulimit -s unlimited` を実行する（[AtCoder と手元の C++ 環境](../cpp/cpp-environment.md)）
 
 ## assert で WA を RE に変えて気づく（AtCoder では NDEBUG が付かない） {#assert}

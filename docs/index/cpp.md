@@ -167,8 +167,8 @@ search:
     - `cpp-lambda#template-argument` テンプレート引数に渡せるのはキャプチャのないラムダだけ（C++20。ACL の segtree）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-lambda/#template-argument
     - `cpp-lambda#recursive-lambda` ラムダがそのままでは再帰できない理由（use of ‘f’ before deduction of ‘auto’）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-lambda/#recursive-lambda
     - `cpp-lambda#std-function` std::function&lt;void(int)> による再帰：読みやすいが、呼ぶたびに型消去を通る間接呼び出しになり遅い：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-lambda/#std-function
-    - `cpp-lambda#self-argument` 自分を引数で渡す再帰：\[&](auto&& self, int v) -> void { ... self(self, to); } を dfs(dfs, 0) と呼ぶ：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-lambda/#self-argument
-    - `cpp-lambda#deducing-this` deducing this：\[&](this auto&& self, int v) -> void を dfs(0) と呼ぶ（C++23・GCC 14〜。g++-13 ではエラー）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-lambda/#deducing-this
+    - `cpp-lambda#self-argument` 自分を引数で渡す再帰：self(self, to) と書き、dfs(dfs, 0) と呼ぶ：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-lambda/#self-argument
+    - `cpp-lambda#deducing-this` deducing this：this auto&& self で受け、dfs(0) と呼ぶ（C++23・GCC 14〜。g++-13 ではエラー）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-lambda/#deducing-this
     - `cpp-lambda#fixpoint` 不動点コンビネータ（雛形の FixPoint・MFP）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-lambda/#fixpoint
     - `cpp-lambda#return-type` 戻り値の型 -> void・-> int を書く場面（再帰より前に型の決まる return がないとき、三項演算子の中の再帰）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-lambda/#return-type
     - `cpp-lambda#speed` 速さの比較：std::function は fib(40) で約 5 倍、木の DFS で約 1.5 倍遅い。深い再帰はスタックに注意：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-lambda/#speed

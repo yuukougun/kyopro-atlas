@@ -23,8 +23,8 @@ sections:
   - {title: テンプレート引数に渡せるのはキャプチャのないラムダだけ（C++20。ACL の segtree）, anchor: template-argument}
   - {title: ラムダがそのままでは再帰できない理由（use of ‘f’ before deduction of ‘auto’）, anchor: recursive-lambda}
   - {title: 'std::function<void(int)> による再帰：読みやすいが、呼ぶたびに型消去を通る間接呼び出しになり遅い', anchor: std-function}
-  - {title: '自分を引数で渡す再帰：[&](auto&& self, int v) -> void { ... self(self, to); } を dfs(dfs, 0) と呼ぶ', anchor: self-argument}
-  - {title: 'deducing this：[&](this auto&& self, int v) -> void を dfs(0) と呼ぶ（C++23・GCC 14〜。g++-13 ではエラー）', anchor: deducing-this}
+  - {title: '自分を引数で渡す再帰：self(self, to) と書き、dfs(dfs, 0) と呼ぶ', anchor: self-argument}
+  - {title: 'deducing this：this auto&& self で受け、dfs(0) と呼ぶ（C++23・GCC 14〜。g++-13 ではエラー）', anchor: deducing-this}
   - {title: 不動点コンビネータ（雛形の FixPoint・MFP）, anchor: fixpoint}
   - {title: 戻り値の型 -> void・-> int を書く場面（再帰より前に型の決まる return がないとき、三項演算子の中の再帰）, anchor: return-type}
   - {title: '速さの比較：std::function は fib(40) で約 5 倍、木の DFS で約 1.5 倍遅い。深い再帰はスタックに注意', anchor: speed}
@@ -209,7 +209,7 @@ AtCoder 向けには、`auto&& self` か deducing this を勧める。手元が 
 - **版**：C++11。g++-13・g++-15 で使える
 - **落とし穴**：遅さに加えて、1 段の再帰で使うスタックも大きい。測った数は[速さの比較](#speed)にまとめた。軽い処理を何百万回も再帰するなら、ほかの書き方にする
 
-## 自分を引数で渡す再帰：[&](auto&& self, int v) -> void { ... self(self, to); } を dfs(dfs, 0) と呼ぶ {#self-argument}
+## 自分を引数で渡す再帰：self(self, to) と書き、dfs(dfs, 0) と呼ぶ {#self-argument}
 
 ラムダが自分の名前を使えないなら、自分を引数で受け取ればよい。最初の引数 `self` に自分自身を受け取り、本体では `self(self, to, v)` と、次の呼び出しにも自分を渡す。外からは `dfs(dfs, 0, -1)` と呼ぶ。
 
@@ -223,7 +223,7 @@ AtCoder 向けには、`auto&& self` か deducing this を勧める。手元が 
 - **`auto&&` の理由**：`auto self`（値で受ける）でも動く。ただし、呼ぶたびにクロージャがコピーされる。`[&]` だけなら中身は参照なのでコピーは軽い。それでも、`auto&&` か `const auto&` で受けるのがよい
 - **落とし穴**：`self(to, v)` と自分を渡し忘れると、引数の数が合わずコンパイルエラーになる。`-> void` を消してもコンパイルエラーになる（[戻り値の型](#return-type)）
 
-## deducing this：[&](this auto&& self, int v) -> void を dfs(0) と呼ぶ（C++23・GCC 14〜。g++-13 ではエラー） {#deducing-this}
+## deducing this：this auto&& self で受け、dfs(0) と呼ぶ（C++23・GCC 14〜。g++-13 ではエラー） {#deducing-this}
 
 C++23 の deducing this は、最初の引数に `this` を付けると、そこに「呼ばれたオブジェクト自身」が入る仕組みである。ラムダに使うと、`self` にラムダ自身が自動で入る。呼ぶときに自分を渡さなくてよいので、`dfs(0, -1)`・`self(to, v)` と普通の関数のように書ける。
 

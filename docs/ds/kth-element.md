@@ -67,7 +67,7 @@ K 番目を求める方法は多い。問題の条件（値の範囲・先読み
 
 各方法の要点は次のとおりである。
 
-- **BIT 上の二分探索**：最も定数倍が軽く、コードも短い。値は配列の添字にするので、値が $10^9$ まであるなら、全クエリを先に読んで[座標圧縮](../basics/coordinate-compression.md#with-ds)する（オフライン）。手順は[次の節](#bit-binary-search)で述べる
+- **BIT 上の二分探索**：最も定数倍が軽く、コードも短い。値は配列の添字にするので、値が $10^9$ まであるなら、全クエリを先に読んで[座標圧縮](../basics/coordinate-compression.md#with-ds)する（[オフライン](../guide/glossary.md#offline)）。手順は[次の節](#bit-binary-search)で述べる
 - **セグメント木の `max_right`**：個数を載せた和のセグメント木で、`max_right(0, [&](int s) { return s < k; })` が K 番目の位置を返す。ACL だけで書け、和以外の条件にも広げやすい（[セグメント木上の二分探索](../ds/segment-tree-binary-search.md)）
 - **外側の二分探索**：値 $v$ を二分探索し、BIT の接頭辞の和で $v$ 以下の個数を数える。1 回の判定が $O(\log N)$ なので全体で $O(\log^2 N)$ になる。$Q = 2 \times 10^5$ なら $Q \log^2 N$ はおよそ $6 \times 10^7$ で、多くは間に合う
 - **pb_ds の `tree`**：GCC の拡張の順序付き集合で、`find_by_order(k)`（0 始まりの番号 $k$ の要素）と `order_of_key(x)`（$x$ 未満の個数）を持つ。値を先読みできないオンラインの問題でも使える。重複を許すには `(値, 通し番号)` の組にする（[pb_ds の tree](../cpp/cpp-container-idioms.md#pb-ds)・[平衡二分探索木と pb_ds の tree](../ds/balanced-bst.md)）

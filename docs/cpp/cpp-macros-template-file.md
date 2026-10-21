@@ -54,7 +54,7 @@ atcoder: true
 `using namespace std;` は、名前空間 `std` の名前を `std::` なしで書けるようにする宣言である。`std::vector<int>` を `vector<int>`、`std::views::iota` を `views::iota` と書ける。
 
 - **素朴に書くと**：使うヘッダを 1 つずつ `#include` し、名前に `std::` を付ける
-- **コンパイル時間**：すべてのヘッダを読むので、1 回のコンパイルが 1〜3 秒ほど長くなる。手元ではプリコンパイル済みヘッダで縮められる（[AtCoder と手元の環境](../cpp/cpp-environment.md#pch)）
+- **コンパイル時間**：すべてのヘッダを読むので、1 回のコンパイルが 1〜3 秒ほど長くなる。手元ではプリコンパイル済みヘッダで縮められる（[AtCoder と手元の環境](../cpp/cpp-environment.md)）
 - **落とし穴**：`std` の名前がすべてグローバルから見えるので、自分の変数や関数の名前とぶつかりうる。次の節で扱う
 
 ## 名前の衝突：count・y1 をグローバル変数の名前にするとエラー、std:: を省かない流儀、using namespace atcoder {#namespaces}
@@ -200,14 +200,14 @@ g++-13・g++-15 とも `'::main' must return 'int'` と出る。`signed` は `in
 
 `#x` は引数の文字をそのまま文字列にするマクロの機能で、`debug(s)` は `cerr << "s" << " = " << (s) << endl` になる。`g++-15 -DLOCAL` でコンパイルすると標準エラー出力に `s = 1`・`s = 3` と出て、付けなければ何も出ない。
 
-- **ONLINE_JUDGE**：AtCoder はコンパイルのときに `-DATCODER -DONLINE_JUDGE` を付ける（[AtCoder と手元の環境](../cpp/cpp-environment.md#judge-macros)）。`#ifndef ONLINE_JUDGE` と書けば、手元で何も付けなくてもデバッグ出力が有効になり、ジャッジでは消える。ただし、`ONLINE_JUDGE` を定義するかはジャッジごとに違う
+- **ONLINE_JUDGE**：AtCoder はコンパイルのときに `-DATCODER -DONLINE_JUDGE` を付ける（[AtCoder と手元の環境](../cpp/cpp-environment.md)）。`#ifndef ONLINE_JUDGE` と書けば、手元で何も付けなくてもデバッグ出力が有効になり、ジャッジでは消える。ただし、`ONLINE_JUDGE` を定義するかはジャッジごとに違う
 - **落とし穴**：デバッグ用の部分に副作用（変数の書き換え・入力の読み込み）を入れない。手元と提出で動きが変わる。また、標準エラー出力でも大量に出すと遅くなるので、手元で時間を測るときは `-DLOCAL` を外す
 
 ## #pragma GCC optimize・target：AtCoder は -march=native なので target は要らない、g++-13 では #include より前に書くとエラー、Ofast は浮動小数点の約束を変える {#pragma}
 
 `#pragma GCC optimize("O3,unroll-loops")` は、コンパイルのオプション（最適化の段階・ループの展開）をソースの中で指定する。`#pragma GCC target("avx2")` は、使ってよい CPU の命令を指定する。どちらも定数倍を変えるだけで、計算量は変わらない。
 
-- **target は AtCoder では要らない**：AtCoder の GCC は `-march=native` 付きでコンパイルするので、ジャッジの CPU の命令（AVX2 など）はもともと使われる（[AtCoder と手元の環境](../cpp/cpp-environment.md#march-native)）
+- **target は AtCoder では要らない**：AtCoder の GCC は `-march=native` 付きでコンパイルするので、ジャッジの CPU の命令（AVX2 など）はもともと使われる（[AtCoder と手元の環境](../cpp/cpp-environment.md)）
 - **g++-13 では置き場所でエラー**：`#pragma GCC target` を `#include <bits/stdc++.h>` より前に書くと、g++-13 では `string` などを使うだけでコンパイルエラーになる。g++-15 では通った
 
 ```cpp
