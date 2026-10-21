@@ -68,22 +68,29 @@
 
 | ページ | 種類 | 執筆 | 検証 |
 | --- | --- | --- | --- |
-| basics/binary-search-answer | 基礎 | 実行中 | |
-| dp/bit-dp | 水・DP | 実行中 | |
-| ds/lazy-segment-tree | 水・データ構造・動く図 | 実行中 | |
-| comb/linearity-of-expectation | 水・数学 | 実行中 | |
-| graph/extended-dijkstra | 水（青の節）・グラフ | 実行中 | |
-| cpp/cpp-views-basics | C++ | 実行中 | |
-| tree/hld | 発展の概要 | 実行中 | |
-| patterns/bracket-sequence | 題材別 | 実行中 | |
-| math/floor-sum | 黄・数学 | 実行中 | |
+| basics/binary-search-answer | 基礎 | 完了 | 完了 |
+| dp/bit-dp | 水・DP | 完了 | 完了 |
+| ds/lazy-segment-tree | 水・データ構造・動く図 | 完了 | 完了 |
+| comb/linearity-of-expectation | 水・数学 | 完了 | 完了 |
+| graph/extended-dijkstra | 水（青の節）・グラフ | 完了 | 完了 |
+| cpp/cpp-views-basics | C++ | 完了 | 完了 |
+| tree/hld | 発展の概要 | 完了 | 完了 |
+| patterns/bracket-sequence | 題材別 | 完了 | 完了 |
+| math/floor-sum | 黄・数学 | 完了 | 完了 |
+
+## 試作の結果
+
+- 9ページを執筆→検証（別の担当）→直しの流れで仕上げた。検証で事実の誤りが各ページに1〜4件見つかり、すべて直した。詳細と使用量は [batches/pilot.md](batches/pilot.md)、検証の報告は batches/pilot-verify/
+- 試作をサイトで確かめるため、工程8a の骨格（準備中の343ページ）を作り、公開した（ユーザーの選択）
+- 全体の見込み：1ページあたり約35〜45万トークン、残り約340ページで約1.2〜1.5億トークン・作業時間は合計約20時間
+- 手引きに §13「試作で決めたこと」を足した。用語集に13語
 
 ## 次にやること
 
-1. 執筆がそろったら、検証役（書いた本人以外）に確かめさせ、直す
-2. 使用量を集計して見込みを出す。9b（claude.ai の実機確認）の手順を用意する
-3. 試作をユーザーに見てもらい、設計と手引きを直す
+1. ユーザーに試作を見てもらい、意見を設計・手引きに反映する（見本の2枚を決める）
+2. 9b：claude.ai の実機確認（ユーザーの操作が要る）
+3. 工程8b（本文）：基礎・水から。9c（解説手順の確定）と問題の補充
 
 ## ユーザーにお願いしていること
 
-- なし（g++-15 は 2026-10-21 に導入済み。VS Code の設定と `~/pch` も更新済み）
+- `sudo apt install libnspr4 libnss3 libasound2`（図をブラウザで画像にして確かめるため。2026-10-21 にお願いした）
