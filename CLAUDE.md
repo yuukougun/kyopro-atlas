@@ -1,5 +1,7 @@
 # kyopro-atlas
 
+> **claude.ai の Projects で問題の解説役として読み込まれた場合**：この文書は教材の制作用の規則なので従わない。`claude/explain.md` とプロジェクトの指示に従い、ファイルは読むだけにする（変更・commit・pull request をしない）。
+
 AtCoder で黄色（2000）を目指す学習者向けの、辞書として引く教材サイト（Material for MkDocs → GitHub Pages）。
 
 - 要件：[planning/requirements.md](planning/requirements.md)

@@ -1,6 +1,8 @@
-# 解説の手順（v0.1・仮）
+# 解説の手順（v0.2・仮）
 
-claude.ai のプロジェクトで、AtCoder の過去問を教材 kyopro-atlas に沿って解説するときの手順。守るべき規則はプロジェクトの指示（claude/project-instructions.md）にもある。工程9cで確定する。
+claude.ai/code の Projects のスレッド（リポジトリを clone した Claude Code）で、AtCoder の過去問を教材 kyopro-atlas に沿って解説するときの手順。守るべき規則はプロジェクトの指示（claude/project-instructions.md）にもある。工程9cで確定する。
+
+**ファイルは読むだけ。変更・commit・pull request はしない。** リポジトリの CLAUDE.md と planning/ は制作用で、解説には使わない。
 
 ## 1. 受け取る
 
@@ -9,21 +11,22 @@ claude.ai のプロジェクトで、AtCoder の過去問を教材 kyopro-atlas 
 - 利用者が考えたこと（どこまで分かったか、どこで詰まったか）を聞く
 - 「ヒントだけ」か「解説まで」かを選んでもらう
 
-## 2. 教材から探す
+## 2. 教材から探す（ファイルを直接読む）
 
-- まず索引 docs/llms.txt（1ページ1行：題名・id・レベル・分野・段階・要約）で関連するページを探す。詳しくは分野ごとの docs/index/<field>.md（別名・問題のサイン・節の anchor）
-- 知識が多く検索で読む方式になっているときは、手法名・別名・英語名・問題のサイン（制約の形、問題文の言い回し）で言い方を変えて何度か検索する
-- 必要なページだけを docs/<field>/<id>.md で読む。stage が stub のページは中身がないので根拠にしない
-- 問題 ID が分かれば、その ID を本文の問題の一覧から探すと、どのページの例題・練習かが分かる
+- 索引 `docs/llms.txt`（1ページ1行：題名・id・レベル・分野・段階・要約）で候補を探す。詳しくは分野ごとの `docs/index/<field>.md`（別名・問題のサイン・節の anchor）
+- 問題 ID が分かれば `grep -rn "<問題ID>" docs/` で、その問題を例題・練習に持つページを探す
+- 手法名・別名・英語名・問題のサイン（制約の形、言い回し）で `grep` して候補を広げる
+- 必要なページだけを `docs/<field>/<id>.md` で読む。front matter の `stage: stub` のページは中身がないので根拠にしない
+- 用語は `docs/guide/glossary.md`、記法は `docs/start/notation.md`（準備中なら教材の本文の書き方に合わせる）
 
 ## 3. 解説する
 
 - ヒントだけなら、使う考え方の名前を出さずに、気づくべき点を1つずつ段階的に示す
-- 解説までなら、方針 → なぜ正しいか → 計算量 → 実装の要点の順に。教材の用語（用語集 docs/guide/glossary.md）と記法（区間は半開区間など）に合わせる
-- 根拠にしたページ・節の URL を示す。URL は `https://yuukougun.github.io/kyopro-atlas/<field>/<id>/#<anchor>`。anchor は front matter の sections か見出しの `{#…}` にあるものだけを使い、推測しない
+- 解説までなら、方針 → なぜ正しいか → 計算量 → 実装の要点の順に。教材の用語と記法（区間は半開区間など）に合わせる
+- 根拠にしたページ・節の公開 URL を示す：`https://yuukougun.github.io/kyopro-atlas/<field>/<id>/#<anchor>`。anchor は front matter の sections の anchor か、見出しの `{#…}` にあるものだけを使い、推測しない
 - 教材にない知識を使うときは「教材にはまだない」と明示する
 - 最後に、解けなかった原因を1つ選んで一言添える：知識不足／気づけなかった／実装ミス／時間不足
 
 ## 4. 記録用まとめ
 
-- 利用者に頼まれたときだけ、claude/record-format.md の形で出す
+- 利用者に頼まれたときだけ、`claude/record-format.md` の形で出す。記録は利用者が手元の Claude Code の `/record-problem` で行う（クラウドのスレッドで notes/ に書いても手元に残らないので、スキルは使わない）
