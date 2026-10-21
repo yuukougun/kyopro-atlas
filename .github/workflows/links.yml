@@ -1,0 +1,37 @@
+# 外部リンクを週1回確かめる（design.md §8.6、research/10 §3.9）。
+# 外部サイトの一時的な不調で push のたびに落ちないよう、検査（check.yml）とデプロイからは分けている。
+# - atcoder.jp と codeforces.com（サブドメインを含む）は AI での自動アクセスを断っているので除外する。
+#   問題の実在は台帳（data/problems.yaml）と tools/check_pages.py で確かめる
+# - サイト自身の URL（llms.txt・索引）は除外する。内部リンクは mkdocs build --strict が確かめる
+# - 相対リンク・mailto は --scheme で対象外。結果はジョブの Summary に出る
+name: links
+
+on:
+  schedule:
+    - cron: "37 18 * * 0" # 毎週月曜 3:37（日本時間）
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lychee:
+    name: 外部リンク（lychee）
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
+        with:
+          # 骨格の段階では外部リンクが1つもないことがあるので、0件でも失敗にしない
+          failIfEmpty: false
+          args: >-
+            --no-progress
+            --scheme https --scheme http
+            --exclude '^https?://([a-z0-9-]+\.)*atcoder\.jp([:/?#]|$)'
+            --exclude '^https?://([a-z0-9-]+\.)*codeforces\.com([:/?#]|$)'
+            --exclude '^https?://yuukougun\.github\.io/kyopro-atlas([/?#]|$)'
+            --accept '100..=103,200..=299,429'
+            --max-concurrency 16
+            'docs/**/*.md'

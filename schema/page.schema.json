@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://yuukougun.github.io/kyopro-atlas/schema/page.schema.json",
+  "title": "kyopro-atlas のページの front matter",
+  "description": "docs/<field>/<id>.md の front matter（planning/interfaces.md §2）。catalog 第2版の項目に制作の項目（field・order・complexity・stage・updated）を足したもの。tools/check_pages.py が検査する。YAML の日付（updated: 2026-10-21）は文字列にしてから当てる。ファイル名・フォルダとの一致、参照の解決、節の anchor の一意、本文との照合は tools/check_pages.py が行う。",
+  "type": "object",
+  "required": ["id", "title", "type", "field", "order", "kind", "prerequisites", "summary", "stage", "updated"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {"$ref": "#/definitions/page_id", "description": "ファイル名と同じ。8a 以降は変えない"},
+    "title": {"type": "string", "minLength": 1},
+    "nav_title": {"type": ["string", "null"], "minLength": 1, "description": "題名が長いときだけ、ナビゲーション用の短い名前"},
+    "aliases": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "type": {"enum": ["technique", "thinking", "pattern", "hub", "overview", "cpp", "guide"]},
+    "field": {"enum": ["start", "guide", "basics", "thinking", "dp", "graph", "tree", "ds", "math", "comb", "string", "geometry", "misc", "patterns", "cpp"]},
+    "chapter": {"type": ["string", "null"], "minLength": 1, "description": "分野の中の章。小さい分野と分野の先頭のページは省く"},
+    "order": {"type": "integer", "minimum": 0, "description": "分野の中の並び順（骨格では10刻み）"},
+    "level": {"enum": ["基礎", "水", "青", "黄", "発展", null]},
+    "kind": {
+      "type": "array", "minItems": 1, "maxItems": 3, "uniqueItems": true,
+      "items": {"enum": ["計算量", "全探索", "二分探索", "累積和・差分", "尺取り・スライド窓", "貪欲", "ソート・座標圧縮", "ダブリング・分割統治", "DP", "グラフ探索", "最短路", "連結性・全域木", "フロー・マッチング", "木", "データ構造", "区間クエリ", "クエリ処理の工夫", "整数論", "線形代数・行列", "畳み込み・多項式", "数え上げ", "確率・期待値", "ゲーム", "文字列", "ハッシュ・乱択", "幾何", "ビット演算", "考察", "実装・C++", "案内"]},
+      "description": "catalog/README.md §4 の語彙から1〜3個"
+    },
+    "prerequisites": {"type": "array", "items": {"$ref": "#/definitions/page_id"}, "uniqueItems": true, "description": "直接の前提だけ。ページの id（節は書かない）"},
+    "related": {"type": "array", "items": {"$ref": "#/definitions/page_ref"}, "uniqueItems": true, "description": "ページの id か id#anchor"},
+    "summary": {"type": "string", "minLength": 1, "description": "2文・120字以内（長さと禁止語は check_pages.py の警告）"},
+    "complexity": {"type": ["string", "null"], "minLength": 1, "description": "本文を書くときに入れる（骨格では null）"},
+    "signs": {"type": "array", "items": {"$ref": "#/definitions/sign"}},
+    "acl": {"type": "array", "items": {"type": "string", "pattern": "^[a-z0-9_]+$"}, "uniqueItems": true},
+    "verify": {"type": "array", "items": {"type": "string", "pattern": "^[a-z0-9_]+$"}, "uniqueItems": true, "description": "Library Checker の問題名"},
+    "frequency": {"enum": ["A", "B", "C", null]},
+    "frequency_evidence": {"type": ["string", "null"]},
+    "sections": {"type": "array", "items": {"$ref": "#/definitions/section"}},
+    "stage": {"enum": ["stub", "draft", "reviewed", "done"]},
+    "updated": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$", "x-message": "日付（2026-10-21 の形）にする"},
+    "cpp_std": {"enum": [17, 20, 23, null]},
+    "gcc_min": {"enum": [13, 14, 15, null]},
+    "atcoder": {"type": ["boolean", "null"]},
+    "hide": {
+      "type": "array", "uniqueItems": true,
+      "items": {"enum": ["navigation", "toc", "footer", "feedback", "path", "tags"]},
+      "description": "Material for MkDocs の表示の切り替え（interfaces.md の外。知識マップなど幅の要るページ用）"
+    },
+    "search": {
+      "type": "object", "additionalProperties": false,
+      "properties": {"boost": {"type": "number"}, "exclude": {"type": "boolean"}},
+      "description": "Material for MkDocs の検索の調整（interfaces.md の外）"
+    }
+  },
+  "allOf": [
+    {
+      "if": {"required": ["type"], "properties": {"type": {"enum": ["technique", "thinking", "overview"]}}},
+      "then": {
+        "required": ["level", "frequency"],
+        "properties": {
+          "level": {"enum": ["基礎", "水", "青", "黄", "発展"], "x-message": "technique・thinking・overview は level（基礎・水・青・黄・発展）を持つ"},
+          "frequency": {"enum": ["A", "B", "C"], "x-message": "technique・thinking・overview は frequency（A・B・C）を持つ"}
+        }
+      }
+    },
+    {
+      "if": {"required": ["type"], "properties": {"type": {"enum": ["guide", "hub", "pattern"]}}},
+      "then": {
+        "properties": {
+          "level": {"const": null, "x-message": "guide・hub・pattern は level を持たない（null にするか省く）"}
+        }
+      }
+    },
+    {
+      "if": {"required": ["type"], "properties": {"type": {"enum": ["guide", "hub", "pattern", "cpp"]}}},
+      "then": {
+        "properties": {
+          "frequency": {"const": null, "x-message": "cpp・hub・guide・pattern は frequency を持たない（null にするか省く）"},
+          "frequency_evidence": {"const": null, "x-message": "frequency を持たない type なので frequency_evidence も持たない"}
+        }
+      }
+    },
+    {
+      "if": {"required": ["type"], "properties": {"type": {"const": "overview"}}},
+      "then": {"properties": {"level": {"const": "発展", "x-message": "overview の level は発展"}}}
+    },
+    {
+      "if": {"required": ["type"], "properties": {"type": {"not": {"const": "cpp"}}}},
+      "then": {
+        "properties": {
+          "cpp_std": {"const": null, "x-message": "cpp_std は cpp のページだけ"},
+          "gcc_min": {"const": null, "x-message": "gcc_min は cpp のページだけ"},
+          "atcoder": {"const": null, "x-message": "atcoder は cpp のページだけ"}
+        }
+      }
+    }
+  ],
+  "definitions": {
+    "page_id": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$", "x-message": "ページの id（英小文字・数字・ハイフン）にする"},
+    "page_ref": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*(#[a-z0-9]+(-[a-z0-9]+)*)?$", "x-message": "ページの id か id#anchor にする"},
+    "sign": {
+      "type": "object", "additionalProperties": false, "required": ["type", "text"],
+      "properties": {
+        "type": {"enum": ["phrase", "constraint", "shape"]},
+        "text": {"type": "string", "minLength": 1}
+      }
+    },
+    "section": {
+      "type": "object", "additionalProperties": false, "required": ["title", "anchor"],
+      "properties": {
+        "title": {"type": "string", "minLength": 1},
+        "anchor": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$", "x-message": "anchor は英小文字・数字・ハイフン"},
+        "level": {"enum": ["基礎", "水", "青", "黄", "発展"], "description": "省くとページと同じ"}
+      }
+    }
+  }
+}

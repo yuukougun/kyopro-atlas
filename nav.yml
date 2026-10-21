@@ -1,0 +1,67 @@
+# tools/gen_site.py が生成する。手で直さない（mkdocs.yml が INHERIT: nav.yml で読む）。
+# 並びは interfaces.md §8：分野の順 → 分野の入口 → chapter のないページ → chapter ごと（order の順）。最後に一覧。
+nav:
+  - ホーム: index.md
+  - 横断ページ:
+      - guide/index.md
+      - 辞書として引く:
+          - 知識マップ: guide/knowledge-map.md
+  - 一覧:
+      - lists/index.md
+      - 種類別:
+          - 案内: lists/kind-guide.md
+extra:
+  kp:
+    levels:
+      基礎: basic
+      水: cyan
+      青: blue
+      黄: yellow
+      発展: advanced
+    kinds:
+      計算量: complexity
+      全探索: brute-force
+      二分探索: binary-search
+      累積和・差分: prefix-sum
+      尺取り・スライド窓: two-pointers
+      貪欲: greedy
+      ソート・座標圧縮: sorting
+      ダブリング・分割統治: doubling
+      DP: dp
+      グラフ探索: graph-search
+      最短路: shortest-path
+      連結性・全域木: connectivity
+      フロー・マッチング: flow
+      木: tree
+      データ構造: data-structure
+      区間クエリ: range-query
+      クエリ処理の工夫: query-processing
+      整数論: number-theory
+      線形代数・行列: linear-algebra
+      畳み込み・多項式: convolution
+      数え上げ: counting
+      確率・期待値: probability
+      ゲーム: game
+      文字列: string
+      ハッシュ・乱択: hashing
+      幾何: geometry
+      ビット演算: bit
+      考察: observation
+      実装・C++: implementation
+      案内: guide
+    fields:
+      start: はじめに
+      guide: 横断ページ
+      basics: 基本テクニック
+      thinking: 考察
+      dp: 動的計画法
+      graph: グラフ
+      tree: 木
+      ds: データ構造
+      math: 整数論・代数
+      comb: 数え上げ・確率・ゲーム
+      string: 文字列
+      geometry: 幾何
+      misc: その他の技法
+      patterns: 題材別
+      cpp: C++

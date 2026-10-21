@@ -1,0 +1,45 @@
+{
+  "filters": {
+    "comments": true
+  },
+  "rules": {
+    "prh": {
+      "rulePaths": ["./prh.yml"],
+      "checkEmphasis": true
+    },
+    "ja-space-between-half-and-full-width": {
+      "space": "always",
+      "allows": ["典型90"]
+    },
+    "ja-space-around-code": {
+      "before": true,
+      "after": true
+    },
+    "preset-ja-technical-writing": {
+      "no-mix-dearu-desumasu": {
+        "preferInHeader": "",
+        "preferInBody": "である",
+        "preferInList": "である",
+        "strict": false
+      },
+      "ja-no-mixed-period": false,
+      "no-exclamation-question-mark": false,
+      "ja-no-weak-phrase": false,
+      "sentence-length": { "max": 120, "severity": "warning" },
+      "max-comma": { "max": 3, "severity": "warning" },
+      "max-ten": { "max": 3, "severity": "warning" },
+      "max-kanji-continuous-len": { "max": 8, "severity": "warning" },
+      "arabic-kanji-numbers": { "severity": "warning" },
+      "no-doubled-conjunction": { "severity": "warning" },
+      "no-doubled-conjunctive-particle-ga": { "severity": "warning" },
+      "no-double-negative-ja": { "severity": "warning" },
+      "no-doubled-joshi": { "severity": "warning" },
+      "no-dropping-the-ra": { "severity": "warning" },
+      "ja-no-successive-word": { "severity": "warning" },
+      "ja-no-abusage": { "severity": "warning" },
+      "ja-no-redundant-expression": { "severity": "warning" },
+      "ja-unnatural-alphabet": { "severity": "warning" },
+      "no-unmatched-pair": { "severity": "warning" }
+    }
+  }
+}

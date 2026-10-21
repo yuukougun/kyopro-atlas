@@ -1,0 +1,288 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/prh/prh/master/prh.schema.json
+# 表記の揺れを直す規則（textlint-rule-prh が読む）。
+# - 正規形は planning/style-guide.md の §7（用語とリンク）と付録 A。その表から機械的に作れる規則だけを置く
+# - 誤検出しやすい規則は入れない。入れなかった例：
+#     「ダイクストラ」単独 → 「ダイクストラ法」（別名「拡張ダイクストラ」などとぶつかる）
+#     「Segment Tree」→「セグメント木」（題名「Segment Tree Beats」とぶつかる）
+#     「組み合わせ」↔「組合せ」（数学の用語と一般語で書き分ける）、「事」「時」のひらがな化（「事実」「時間」）
+# - ページ冒頭の別名の行は <!-- textlint-disable -->〜<!-- textlint-enable --> で検査から外す
+#   （別名には揺れた表記も入っているため。style-guide §2.2）
+# - 正規表現は '/…/' の形で、YAML の単引用符で囲む
+# - 用語集とこのファイルはメインのセッションが更新する。執筆者は報告に「提案」として書く
+# - specs はルールの試験。読み込むときに prh が確かめ、外れると textlint が止まる
+version: 1
+
+rules:
+  # ---- 全体・計算量 ----
+  - expected: ならし計算量
+    patterns:
+      - 償却計算量
+      - 均し計算量
+  - expected: $1-indexed
+    pattern: '/([01])(?:[-‐ ]?origin| indexed)/'
+    specs:
+      - {from: 0-origin で書く, to: 0-indexed で書く}
+      - {from: 1 indexed の添字, to: 1-indexed の添字}
+      - {from: 0-indexed のまま, to: 0-indexed のまま}
+  - expected: Library Checker
+    pattern: ライブラリチェッカー
+  - expected: K 番目
+    pattern: '/(?<![A-Za-z0-9_$\\{])k ?番目/'
+    specs:
+      - {from: k 番目に小さい値, to: K 番目に小さい値}
+      - {from: '$k$ 番目のビット', to: '$k$ 番目のビット'}
+  - expected: 1 次元
+    pattern: 一次元
+  - expected: 2 次元
+    pattern: 二次元
+  - expected: 3 次元
+    pattern: 三次元
+
+  # ---- 基本テクニック ----
+  - expected: 二分探索
+    patterns:
+      - '/[2２] ?分探索/'
+      - 二部探索
+      - バイナリサーチ
+    specs:
+      - {from: 2 分探索で求める, to: 二分探索で求める}
+      - {from: 二部探索, to: 二分探索}
+  - expected: 三分探索
+    pattern: '/[3３] ?分探索/'
+  - expected: 半分全列挙
+    patterns:
+      - 半分全探索
+      - 折半全列挙
+  - expected: bit 全探索
+    pattern: ビット全探索
+  - expected: bit 演算
+    pattern: ビット演算
+  - expected: bit ごと
+    pattern: ビットごと
+  - expected: bitDP
+    pattern: '/(?:ビット|bit) ?DP/'
+    specs:
+      - {from: ビット DP で解く, to: bitDP で解く}
+      - {from: bit DP, to: bitDP}
+      - {from: bitDP, to: bitDP}
+  - expected: bitset
+    pattern: ビットセット
+  - expected: 座標圧縮
+    pattern: 座圧
+  - expected: いもす法
+    pattern: '/[iIｉＩ][mMｍＭ][oOｏＯ][sSｓＳ] ?法/'
+    specs:
+      - {from: imos 法, to: いもす法}
+      - {from: IMOS法, to: いもす法}
+  - expected: 尺取り
+    pattern: '/しゃく(?:とり|取り)|尺とり|シャクトリ/'
+    specs:
+      - {from: しゃくとり法, to: 尺取り法}
+      - {from: 尺とり法, to: 尺取り法}
+  - expected: 貪欲
+    pattern: '/グリーディー?/'
+    specs:
+      - {from: グリーディに選ぶ, to: 貪欲に選ぶ}
+      - {from: グリーディー法, to: 貪欲法}
+
+  # ---- DP ----
+  - expected: ナップサック
+    pattern: ナップザック
+  - expected: 貰う DP
+    pattern: '/もらう ?DP/'
+
+  # ---- グラフ ----
+  - expected: ダイクストラ法
+    patterns:
+      - '/Dijkstra ?法/'
+      - ダイクストラのアルゴリズム
+  - expected: ワーシャルフロイド
+    patterns:
+      - '/ワーシャル[・=＝‐‑–—−－-]フロイド/'
+      - '/フロイド[・=＝‐‑–—−－-]?ワーシャル/'
+    specs:
+      - {from: ワーシャル・フロイド法, to: ワーシャルフロイド法}
+      - {from: フロイドワーシャル法, to: ワーシャルフロイド法}
+  - expected: ワーシャルフロイド法
+    pattern: '/Floyd[-‐–—]Warshall ?法/'
+  - expected: ベルマンフォード
+    pattern: '/ベルマン[・=＝‐‑–—−－-]フォード/'
+  - expected: ベルマンフォード法
+    pattern: '/Bellman[-‐–—]Ford ?法/'
+  - expected: クラスカル法
+    pattern: '/Kruskal ?法/'
+  - expected: プリム法
+    pattern: '/(?<![A-Za-z])Prim ?法/'
+  - expected: 01-BFS
+    pattern: '/0-?1[ -]?BFS/'
+    specs:
+      - {from: 0-1 BFS, to: 01-BFS}
+      - {from: 01 BFS, to: 01-BFS}
+      - {from: 01-BFS, to: 01-BFS}
+  - expected: 二部グラフ
+    patterns:
+      - '/[2２] ?部グラフ/'
+      - 二分グラフ
+  - expected: 最短路
+    pattern: 最短経路
+  - expected: 閉路検出
+    pattern: サイクル検出
+  - expected: 全域木
+    pattern: '/スパニング・?ツリー/'
+  - expected: 最小費用流
+    pattern: 最小費用フロー
+  - expected: 最大流
+    pattern: '/(?<!費用)最大フロー/'
+
+  # ---- 木 ----
+  - expected: 最小共通祖先
+    patterns:
+      - 最近共通祖先
+      - 最低共通祖先
+  - expected: 行きがけ順
+    pattern: 行き掛け順
+  - expected: 帰りがけ順
+    pattern: 帰り掛け順
+  - expected: オイラーツアー
+    pattern: オイラー・ツアー
+
+  # ---- データ構造 ----
+  - expected: セグメント木
+    patterns:
+      - セグメントツリー
+      - セグメント・ツリー
+    specs:
+      - {from: 遅延セグメントツリー, to: 遅延セグメント木}
+  - expected: セグ木
+    pattern: セグツリー
+  - expected: Union-Find
+    patterns:
+      - '/Union[ ・]?Find/'
+      - ユニオン・ファインド
+      - ユニオンファインド
+    specs:
+      - {from: UnionFind で管理する, to: Union-Find で管理する}
+      - {from: Union Find, to: Union-Find}
+      - {from: Union-Find, to: Union-Find}
+  - expected: Union-Find
+    pattern: UF
+    options:
+      wordBoundary: true
+    specs:
+      - {from: 重み付き UF, to: 重み付き Union-Find}
+      - {from: UFO, to: UFO}
+  - expected: 優先度付きキュー
+    pattern: '/優先(?:度|順位)つきキュー|優先順位付きキュー|プライオリティ・?キュー/'
+  - expected: deque
+    pattern: デック
+
+  # ---- 整数論・代数 ----
+  - expected: 繰り返し二乗法
+    pattern: '/繰り?返し ?[2２] ?乗法|繰返し二乗法|くり返し二乗法/'
+    specs:
+      - {from: 繰り返し 2 乗法, to: 繰り返し二乗法}
+      - {from: 繰り返し二乗法, to: 繰り返し二乗法}
+  - expected: $1篩
+    pattern: '/(エラトステネスの|区間)ふるい/'
+    specs:
+      - {from: エラトステネスのふるい, to: エラトステネスの篩}
+      - {from: 区間ふるい, to: 区間篩}
+  - expected: 中国剰余定理
+    pattern: 中国の剰余定理
+  - expected: 掃き出し法
+    patterns:
+      - 掃出し法
+      - はきだし法
+  - expected: 畳み込み
+    patterns:
+      - たたみ込み
+      - たたみこみ
+      - 畳込み
+      - 畳みこみ
+  - expected: 形式的冪級数
+    pattern: 形式的べき級数
+
+  # ---- 数え上げ・確率・ゲーム ----
+  - expected: 包除原理
+    patterns:
+      - 包含除外原理
+      - 包除の原理
+  - expected: Grundy 数
+    pattern: グランディ数
+
+  # ---- 文字列 ----
+  - expected: ローリングハッシュ
+    pattern: ロリハ
+  - expected: Z-algorithm
+    pattern: '/Z ?アルゴリズム|Z algorithm/'
+  - expected: Suffix Array
+    patterns:
+      - '/サフィックス・?アレイ/'
+      - 接尾辞配列
+  - expected: 接尾辞
+    pattern: '/サフィックス(?!・?アレイ)/'
+    specs:
+      - {from: サフィックスオートマトン, to: 接尾辞オートマトン}
+      - {from: サフィックスアレイ, to: サフィックスアレイ}   # この規則では変えない（上の Suffix Array の規則が直す）
+  - expected: 接頭辞
+    pattern: '/プレフィッ?クス/'
+  - expected: Trie
+    pattern: トライ木
+  - expected: Manacher
+    pattern: マナカー
+
+  # ---- C++ ----
+  - expected: ラムダ式
+    pattern: ラムダ関数
+  - expected: 構造化束縛
+    pattern: 構造化バインディング
+  - expected: 範囲 for
+    pattern: '/範囲ベース ?for/'
+  - expected: イテレータ
+    pattern: イテレーター
+  - expected: コンテナ
+    pattern: コンテナー
+  - expected: ポインタ
+    pattern: ポインター
+  - expected: コンパイラ
+    pattern: コンパイラー
+  - expected: メモリ
+    pattern: メモリー
+  - expected: パラメータ
+    pattern: パラメーター
+  - expected: オーバーフロー
+    pattern: オーバフロー
+
+  # ---- 人名の連結は ASCII のハイフン（Aho-Corasick・Sprague-Grundy） ----
+  - expected: $1-
+    pattern: '/([A-ZÀ-Ö][a-zß-öø-ÿĀ-ž]+)[‐‑–—−－](?=[A-ZÀ-Ö][a-zß-öø-ÿĀ-ž])/'
+    specs:
+      - {from: Aho–Corasick 法, to: Aho-Corasick 法}
+      - {from: Sprague–Grundy の定理, to: Sprague-Grundy の定理}
+      - {from: Lindström–Gessel–Viennot, to: Lindström-Gessel-Viennot}
+      - {from: A–Z, to: A–Z}
+
+  # ---- ひらがなで書く語 ----
+  - expected: すべて
+    pattern: 全て
+  - expected: でき$1
+    pattern: '/出来(る|ない|た|て|れば|ず)/'
+    specs:
+      - {from: 出来る, to: できる}
+      - {from: 出来事, to: 出来事}
+  - expected: あらかじめ
+    pattern: 予め
+  - expected: ほとんど
+    pattern: 殆ど
+  - expected: または
+    pattern: 又は
+  - expected: および
+    pattern: 及び
+  - expected: かつ
+    pattern: 且つ
+  - expected: ただし
+    pattern: 但し
+  - expected: すなわち
+    pattern: 即ち
+  - expected: ごとに
+    pattern: 毎に

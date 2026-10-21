@@ -1,0 +1,60 @@
+# サイトを作って GitHub Pages に公開する（design.md §8.7、research/10 §3.8）。
+# 前提：リポジトリの設定で Pages の公開元を「GitHub Actions」にしておく
+#   gh api -X POST repos/yuukougun/kyopro-atlas/pages -f build_type=workflow
+# 検査は check.yml、Zensical の試験ビルドは zensical.yml（どちらもデプロイを止めない）。
+name: deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# 公開は1つずつ順に行い、途中のものを取り消さない
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: サイトを作る
+    runs-on: ubuntu-latest
+    env:
+      NO_MKDOCS_2_WARNING: "1" # Material 9.7 が毎回出す MkDocs 2.0 の非互換の警告を消す
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      # setup-uv は v8 から v10.3.0 のような版のタグしか出さないので、コミットの SHA で固定する
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          activate-environment: true
+      - name: 依存を入れる（uv.lock のとおり）
+        run: uv sync --locked
+      - name: 生成物が最新か（nav.yml・一覧・索引・graph.json・手書きのページの生成部分）
+        run: python tools/gen_site.py --check --diff
+      - name: Pages の設定を読む
+        uses: actions/configure-pages@v6
+      - name: MkDocs でビルドする（警告で失敗）
+        run: mkdocs build --strict
+      # TODO（design-review T5、design.md §8.7）：各ページの Markdown 版（snippets を展開したもの）を site/ に出し、
+      #   claude.ai から読めるようにする。tools/ に仕組みができたら、ここで実行する
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+
+  deploy:
+    name: 公開する
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

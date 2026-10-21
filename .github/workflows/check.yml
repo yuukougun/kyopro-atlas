@@ -1,0 +1,159 @@
+# 検査（design.md §8.6、interfaces.md §10）。push と pull request のたびに動き、デプロイ（deploy.yml）とは別。
+# - ページ（check_pages.py）・台帳と目次（build_ledger.py・check_catalog.py）・表記（textlint）・動く図の単体試験・
+#   変わったコード片（check_snippets.py --changed。gcc:15.2.0 のコンテナ）
+# - 生成物の鮮度と mkdocs build --strict は deploy.yml、すべてのコード片は snippets-weekly.yml（週1回）、
+#   外部リンクは links.yml（週1回）、Zensical の試験ビルドは zensical.yml
+name: check
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pages:
+    name: ページ
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          activate-environment: true
+      - name: 依存を入れる（uv.lock のとおり）
+        run: uv sync --locked
+      - name: front matter・前提・問題の一覧・本文の規則
+        run: python tools/check_pages.py
+
+  ledger:
+    name: 台帳と目次
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          activate-environment: true
+      - name: 依存を入れる（uv.lock のとおり）
+        run: uv sync --locked
+      # build_ledger.py と check_catalog.py は問題の実在を tools/ap.py のキャッシュ（.cache/、追跡外）で確かめる。
+      # AtCoder Problems の静的な JSON は、台帳か目次が変わったときだけ取り直す（4ファイル、間隔 1.5 秒）。
+      # 取れなくても CI は落とさない（CI は外部の API に左右されない。design.md §5.4・§11）
+      - name: 問題のデータを戻す
+        id: ap-cache
+        uses: actions/cache/restore@v6
+        with:
+          path: .cache/atcoder-problems
+          key: atcoder-problems-${{ hashFiles('data/problems.yaml', 'planning/catalog/*.yaml') }}
+      - name: 問題のデータを取る
+        id: ap-fetch
+        if: steps.ap-cache.outputs.cache-hit != 'true'
+        continue-on-error: true
+        run: python tools/ap.py fetch
+      - if: steps.ap-fetch.outcome == 'success'
+        uses: actions/cache/save@v6
+        with:
+          path: .cache/atcoder-problems
+          key: ${{ steps.ap-cache.outputs.cache-primary-key }}
+      - if: steps.ap-fetch.outcome == 'failure'
+        run: echo "::warning title=AtCoder Problems::問題のデータを取れなかったので、台帳と目次の照合を飛ばした"
+      # 工程8a で目次を凍結した後は、台帳にだけある問題が増えてこの照合が落ちるので、下の目次の検査と同じく警告だけにする
+      - name: 目次と台帳の照合
+        if: steps.ap-fetch.outcome != 'failure'
+        run: python tools/build_ledger.py --check
+      - name: 目次の検査（8a 以降は凍結なので、エラーでも警告だけ）
+        if: steps.ap-fetch.outcome != 'failure'
+        run: |
+          if ! python tools/check_catalog.py; then
+            echo "::warning title=check_catalog::目次（planning/catalog）の検査でエラーがあった。ログを見る"
+          fi
+
+  textlint:
+    name: 表記（textlint）
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - name: 依存を入れる（package-lock.json のとおり）
+        run: npm ci
+      - name: docs/ の手書きの Markdown（生成物は除く。対象は package.json の lint:text）
+        run: npm run lint:text
+
+  viz:
+    name: 動く図の単体試験（Node）
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - name: 状態の列を作る関数の試験（design.md §8.5・§8.6）
+        if: hashFiles('tests/viz/*.test.mjs') != ''
+        run: node --test "tests/viz/*.test.mjs"
+
+  # コード片（interfaces.md §9）。AtCoder と同じ GCC 15.2.0 のコンテナで、各コード片の設定の compilers を
+  # 1回ですべて確かめる（check_snippets.py は g++-15 がなければ版が 15 の g++ を使い、ないコンパイラは誤りにする）。
+  # g++-13 を使うコード片（cpp ページの gcc_min: 13）があるときは、Debian trixie の g++-13（13.3.0）を足す。
+  # すべてのコード片は snippets-weekly.yml が週1回検査する
+  snippets:
+    name: コード片（変わったもの）
+    runs-on: ubuntu-latest
+    container: gcc:15.2.0-trixie # = gcc:15.2.0
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # 比べる元のコミットまでの履歴
+          persist-credentials: false
+      - name: 準備（git の安全なディレクトリ、g++-13）
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          if grep -rqsF --include='*.yaml' 'g++-13' snippets; then
+            apt-get update -qq
+            DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends g++-13
+            g++-13 --version
+          fi
+          g++ --version
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          activate-environment: true
+      - name: 依存を入れる（uv.lock のとおり）
+        run: uv sync --locked
+      # 比べる元：push は直前の push の先頭（github.event.before）、pull request は base。
+      # 新しいブランチなどで元がない（全桁 0・履歴にない）ときは、すべてを検査する
+      - name: 比べる元のコミット
+        id: base
+        env:
+          PUSH_BEFORE: ${{ github.event.before }}
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          base="${PR_BASE:-$PUSH_BEFORE}"
+          if [ -z "$base" ] || [ "$base" = 0000000000000000000000000000000000000000 ] || ! git cat-file -e "$base^{commit}" 2>/dev/null; then
+            base=""
+          fi
+          echo "sha=$base" >> "$GITHUB_OUTPUT"
+          echo "比べる元: ${base:-（なし。すべてを検査する）}"
+      - name: 変わったコード片を検査
+        env:
+          BASE: ${{ steps.base.outputs.sha }}
+        run: |
+          if [ -n "$BASE" ]; then
+            python tools/check_snippets.py --changed --base "$BASE"
+          else
+            python tools/check_snippets.py
+          fi

@@ -10,8 +10,8 @@
 | 2 | 調査 | 完了（2026-10-21） | [research/](research/)（手引きは [research/README.md](research/README.md)） |
 | 3 | 設計 | 初版完了（2026-10-21） | [design.md](design.md)・[catalog/](catalog/) |
 | 4 | 設計の見直し | 完了（2026-10-21） | planning/review/（見直し3本）・[design-review.md](design-review.md)（対応）・設計書第2版・目次第2版 |
-| 5 | 決定の提示 | 進行中 | ユーザーの確認 |
-| 6 | 土台作り | 未着手 | |
+| 5 | 決定の提示 | 完了（2026-10-21） | ユーザーの承認（decisions.md の「工程5での確認」） |
+| 6 | 土台作り | 進行中 | [interfaces.md](interfaces.md)（部品どうしの約束） |
 | 7 | 試作 | 未着手 | |
 | 8 | 本制作 | 未着手 | |
 | 9 | スキル作成 | 未着手 | |
@@ -42,10 +42,23 @@
 - 最近の ABC のデータ `data/recent-abc.yaml`（abc451〜480 の D〜G 120問中118問を手法のページに対応）から frequency を付け直した（A 76・B 153・C 72。modint を A、interval-scheduling・median-absolute を B に手で直した）
 - 執筆時に扱う残り：abc461_e・abc466_d（行・列ごとに最後の操作を持つ）と abc472_f（多角形の重心）に対応する節がない。abc465_g は手法が未確認。z-algorithm・rolling-hash・mo-algorithm・binary-trie・lis・euler-tour・tree-edge-contribution など、最近の根拠が帯と少しずれるページは level_evidence に理由を書いて帯を据え置いた
 
+## 工程6：土台作り
+
+部品どうしの約束を [interfaces.md](interfaces.md) に決め、5つの担当が並列で作っている（2026-10-21 開始）。
+
+| 担当 | 作るもの | 状態 |
+| --- | --- | --- |
+| S1 サイト | mkdocs.yml、overrides/main.html、overrides/assets（CSS・progress.js・map.js・viz.js・同梱ライブラリ）、仮のホームと知識マップの置き場 | 完了 |
+| S2 道具 | schema/page.schema.json、tools/make_skeleton.py・gen_site.py・check_pages.py・fix_problems.py・check_snippets.py・check_noai.py、tools/README.md | 完了 |
+| S3 CI と環境 | pyproject.toml・uv.lock、package.json・textlint、third_party/ac-library（v1.6）、.github/workflows | 完了 |
+| S4 執筆の手引き | planning/style-guide.md、planning/checklists/、prh.yml | 完了 |
+| S5 記録用スキル（9a） | .claude/skills/record-problem/SKILL.md、claude/record-format.md | 完了 |
+
 ## 次にやること
 
-1. 工程5：決定の一覧（設計書 §12）と、ユーザーに確かめる点（design-review §6）を示して確認を得る
-2. 確認を得たら工程6（土台作り）。最初に CI のコンテナで snippets を1本通す、記録用スキル（9a）を作る
+1. 5つの担当の成果を統合し、手元で `uv sync`・`mkdocs build --strict`・各検査を通す
+2. commit・push し、GitHub Pages のソースを GitHub Actions にして、空のサイトが公開されることと CI（gcc:15.2 のコンテナでの snippets の検査を含む）が通ることを確かめる
+3. 工程7（試作）：性質の違うページを書き、claude.ai の実機確認（9b）と使用量の測定を行い、ユーザーに見てもらう
 
 ## ユーザーにお願いしていること
 

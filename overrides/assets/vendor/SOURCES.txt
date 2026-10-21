@@ -1,0 +1,27 @@
+同梱ライブラリの出所（2026-10-21 取得。npm の公式レジストリの tarball）
+
+取得した tarball の sha512 がレジストリの dist.integrity と一致することを確かめてから、
+下のファイルを手を加えずに写した。版を上げるときはディレクトリ名ごと替え、
+mkdocs.yml と assets/js/map.js の版の文字列も直す。
+
+katex-0.16.47/  (MIT)
+  https://registry.npmjs.org/katex/-/katex-0.16.47.tgz
+  sha512-Eeo8Ys1doU1z+x8AZsPpQu+p/QcZBI5PeOo7QGQdy2x2m0MU/hYagBbGOmXwr5KVbEfVuWv9LpnQWeehogurjg==
+  dist/katex.min.js, dist/katex.min.css, dist/fonts/*.woff2（woff・ttf は入れない）, LICENSE
+
+cytoscape-3.34.3/  (MIT)
+  https://registry.npmjs.org/cytoscape/-/cytoscape-3.34.3.tgz
+  sha512-yfYGhRcGAntq6YBD583j4n0Eg3jIxvWmZtz/5uz9UYkeIStSlMxuUja+ec5j3iBD8nv1rwaOAYMW09tBdkSeaQ==
+  dist/cytoscape.min.js, LICENSE
+
+cytoscape-dagre-4.0.1/  (MIT)
+  https://registry.npmjs.org/cytoscape-dagre/-/cytoscape-dagre-4.0.1.tgz
+  sha512-hyNdh8Vp1nwzBcjHnM4c71G81bFhPmQYLXD2HM9AZIvl+8TrMzWEOPW45hF/XOBQiEguPcDQzi6VrXR1XBcXOA==
+  dist/cytoscape-dagre.min.js, LICENSE
+  cytoscape-dagre.min.js は dagre を内蔵している（@dagrejs/dagre 3.0.0 と、それが内蔵する
+  @dagrejs/graphlib 4.0.1。版の文字列とコードの一致で確かめた）。dagre を別に読み込む必要はない。
+  内蔵分のライセンスは次の2つの tarball の LICENSE を写したもの：
+  LICENSE.dagre     https://registry.npmjs.org/@dagrejs/dagre/-/dagre-3.0.0.tgz
+                    sha512-ZzhnTy1rfuoew9Ez3EIw4L2znPGnYYhfn8vc9c4oB8iw6QAsszbiU0vRhlxWPFnmmNSFAkrYeF1PhM5m4lAN0Q==
+  LICENSE.graphlib  https://registry.npmjs.org/@dagrejs/graphlib/-/graphlib-4.0.1.tgz
+                    sha512-IvcV6FduIIAmLwnH+yun+QtV36SC7mERqa86aClNqmMN09WhmPPYU8ckHrZBozErf+UvHPWOTJYaGYiIcs0DgA==

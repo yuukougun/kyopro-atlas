@@ -1,0 +1,121 @@
+# kyopro-atlas のサイトの設定（planning/design.md §8、planning/interfaces.md、planning/research/10-tech.md §4.2）
+#
+# - ナビゲーションは tools/gen_site.py が生成する nav.yml にあり、ここから INHERIT で読む（design-review T14）。
+#   nav.yml の値とここの値は合わせられ、同じキーはここが優先する
+# - Zensical へ移りやすくするため、hooks と search 以外のプラグインは使わない（design.md §8.1）
+# - ビルドは `mkdocs build --strict`。validation の警告で失敗にする
+# - pymdownx.betterem は入れない（日本語の太字が壊れる。research/10 §3.1.1）
+
+INHERIT: nav.yml
+
+site_name: kyopro-atlas
+site_description: AtCoder で黄色（2000）を目指す人のための、辞書として引く競技プログラミングの教材
+site_url: https://yuukougun.github.io/kyopro-atlas/
+repo_url: https://github.com/yuukougun/kyopro-atlas
+repo_name: yuukougun/kyopro-atlas
+edit_uri: edit/main/docs/
+use_directory_urls: true
+
+theme:
+  name: material
+  language: ja
+  custom_dir: overrides
+  font: false # Google Fonts を読まない（日本語は OS のフォント）
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.sections
+    - navigation.indexes
+    - navigation.path
+    - navigation.top
+    - navigation.footer
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.tooltips
+    - toc.follow
+    # navigation.tracking は入れない（instant navigation で前のページの見出しが URL に残る。research/10 §3.1.8）
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: ライトモードに切り替え
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: ダークモードに切り替え
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: システムの設定に従う
+
+plugins:
+  - search:
+      lang: ja
+      # 空白・句読点に加えて、カタカナ・ひらがな・漢字・英数字の境目でも区切る（research/10 §2.4 の設定 C）
+      separator: '[\s　\-、。，．・：；！？「」『』（）()\[\]/:]+|(?<=[゠-ヿ])(?=[^゠-ヿ])|(?<=[^゠-ヿ])(?=[゠-ヿ])|(?<=[぀-ゟ])(?=[^぀-ゟ])|(?<=[^぀-ゟ])(?=[぀-ゟ])|(?<=[A-Za-z0-9])(?=[一-鿿])|(?<=[一-鿿])(?=[A-Za-z0-9])'
+      pipeline: [stemmer, stopWordFilter]
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      # 日本語の見出しのアンカーを残す（既定の slugify は非 ASCII を落とす）。sections の見出しは {#anchor} で明示する
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets:
+      base_path: [snippets]
+      check_paths: true
+      dedent_subsections: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
+  anchors: warn
+
+# nav に載せない生成物（Claude 用の分野ごとの詳細索引と、生成した一覧）。nav に載せたものには効かない
+not_in_nav: |
+  /index/
+  /lists/
+
+extra_css:
+  - assets/vendor/katex-0.16.47/katex.min.css
+  - assets/css/kp.css
+
+extra_javascript:
+  - assets/vendor/katex-0.16.47/katex.min.js
+  - assets/js/katex-init.js
+  - assets/js/progress.js
+  - assets/js/viz.js
+  - assets/js/map.js # Cytoscape.js は地図のあるページでだけ読み込む

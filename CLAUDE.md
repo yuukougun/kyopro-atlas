@@ -23,6 +23,7 @@ AtCoder で黄色（2000）を目指す学習者向けの、辞書として引�
 
 ## 並列で書くときの規則（design-review T9・T10）
 
-- 執筆のサブエージェントが書いてよいのは、担当のページ（`docs/<field>/<id>.md`）と `snippets/<id>/` だけ。用語集・prh.yml・早見表・使い分け・catalog・問題の台帳への追加は、報告に「提案」として書かせ、メインがバッチの終わりにまとめて反映する
+- 執筆のサブエージェントが書いてよいのは、担当のページ（`docs/<field>/<id>.md`）・`snippets/<id>/`・図の画像 `docs/img/<id>/` だけ。動く図（`overrides/assets/js/viz/<名前>.js` と `tests/viz/`）は指示で頼まれたときだけ。用語集・prh.yml・早見表・使い分け・catalog・問題の台帳への追加は、報告に「提案」として書かせ、メインがバッチの終わりにまとめて反映する
+- 執筆者に渡すのは `planning/style-guide.md`（執筆の手引き）と見本のページ。検証役には `planning/checklists/` を渡す
 - `tools/gen_site.py` の実行と commit・push はメインのセッションだけが行う
 - 骨格（工程8a）以降は、各ページの front matter と問題の台帳 `data/problems.yaml` が正。catalog は凍結し、執筆の指示としてだけ使う。ページの id と URL は変えない（変えるときは転送と localStorage の鍵の読み替えを用意し、ユーザーに知らせる）

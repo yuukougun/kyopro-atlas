@@ -1,0 +1,22 @@
+# サイトの生成と独立スクリプト（tools/）の Python の依存（design.md §8.1）。
+# 全依存の版は uv.lock で固定する。入れるときは `uv sync --locked`（CI も同じ）。
+# 版を上げるときは `uv lock --upgrade-package <名前>` で意図して行い、全ページの表示の差分を見る。
+
+[project]
+name = "kyopro-atlas"
+version = "0.0.0"
+description = "AtCoder で黄色を目指す学習者向けの、辞書として引く教材サイト"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+  # サイトの生成。Material は 2027-05-05 まで保守（Zensical の試験ビルドは .github/workflows/zensical.yml）
+  "mkdocs==1.6.1",
+  "mkdocs-material==9.7.7",
+  # 12.0 で強調（BetterEm）の扱いが変わった。上げるときは日本語の強調の表示を確かめる（pymdownx.betterem は入れない）
+  "pymdown-extensions==12.3",
+  # 独立スクリプト：front matter・台帳の読み込み（PyYAML）と schema/page.schema.json の検査（jsonschema）
+  "pyyaml>=6.0",
+  "jsonschema>=4.23",
+]
+
+[tool.uv]
+package = false

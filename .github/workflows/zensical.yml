@@ -1,0 +1,41 @@
+# Zensical の試験ビルド（design.md §8.1・§8.6、design-review T4、research/10 §3.2）。
+# Material for MkDocs の保守は 2027-05-05 まで。同じ mkdocs.yml が Zensical でも作れるかを見張る。
+# 公開はしない。失敗してもデプロイ（deploy.yml）と検査（check.yml）は止めず、この実行に警告を出すだけにする。
+# 評価（0.1.0 の後の工程6の終わりと、8b の前）のときは ZENSICAL_VERSION を上げ、手元でも同じコマンドで試す。
+# 手元では --clean を付けない（Zensical は .cache/ を丸ごと消し、tools/ap.py のキャッシュ .cache/atcoder-problems/ も消える）。
+name: zensical
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - "overrides/**"
+      - "snippets/**"
+      - "mkdocs.yml"
+      - "nav.yml"
+      - ".github/workflows/zensical.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  ZENSICAL_VERSION: "0.0.71"
+
+jobs:
+  build:
+    name: Zensical でビルドする
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+      - name: 試験ビルド（警告でも失敗にする。失敗しても止めない）
+        id: build
+        continue-on-error: true
+        run: uvx --from "zensical==${ZENSICAL_VERSION}" zensical build --strict
+      - name: 失敗を警告として残す
+        if: steps.build.outcome == 'failure'
+        run: echo "::warning title=Zensical ${ZENSICAL_VERSION}::Zensical の試験ビルドが失敗した。デプロイには影響しない。上の手順のログを見る"

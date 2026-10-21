@@ -1,0 +1,39 @@
+# すべてのコード片を週1回検査する（design.md §8.6、design-review T11）。push のたびの検査は check.yml（変わったものだけ）。
+# コンテナは check.yml と同じ AtCoder と同じ GCC 15.2.0。各コード片の設定の compilers を1回ですべて確かめる
+# （g++-15 がなければ版が 15 の g++ を使う）。g++-13 を使うコード片（cpp ページの gcc_min: 13）があるときは、
+# Debian trixie の g++-13（13.3.0）を足す。ACL は third_party/ac-library（v1.6）を check_snippets.py が -I で足す。
+name: snippets-weekly
+
+on:
+  schedule:
+    - cron: "17 18 * * 6" # 毎週日曜 3:17（日本時間）
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  snippets:
+    name: すべてのコード片
+    runs-on: ubuntu-latest
+    container: gcc:15.2.0-trixie # = gcc:15.2.0
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: 準備（git の安全なディレクトリ、g++-13）
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          if grep -rqsF --include='*.yaml' 'g++-13' snippets; then
+            apt-get update -qq
+            DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends g++-13
+            g++-13 --version
+          fi
+          g++ --version
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          activate-environment: true
+      - name: 依存を入れる（uv.lock のとおり）
+        run: uv sync --locked
+      - name: すべてのコード片を検査
+        run: python tools/check_snippets.py

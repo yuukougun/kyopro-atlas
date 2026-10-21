@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+
+{#-
+  kyopro-atlas のテンプレートの上書き（planning/interfaces.md §7、design.md §8.4）
+
+  front matter に id を持つページにだけ、次を出す。
+  - ページ上部：準備中の帯（stage が stub）、バッジ（レベル＝AtCoder の色・分野・種類）、「理解した」のチェック欄
+  - ページ下部：前提・次に読む・知識マップの焦点の表示へのリンク、「理解した」のチェック欄（もう一度）
+
+  ほかのページの meta は nav.pages から引く（全ページの front matter は描画の前に読まれている）。
+  レベル別・種類別の一覧の URL は lists/level-<slug>/・lists/kind-<slug>/。slug の対応は tools/gen_site.py が持つので、
+  nav.yml の extra.kp.levels・extra.kp.kinds（と extra.kp.fields：分野の表示名）にあればそれを使い、なければ下の既定を使う。
+  どちらの場合も、nav にその一覧のページがあるときだけリンクにする（リンク切れを出さない）。
+
+  Zensical（MiniJinja）でも読めるよう、Python のメソッドの呼び出しは使わない。MkDocs の Jinja は自動でエスケープしないので、
+  front matter の文字列は | e を通す。
+-#}
+
+{% block content %}
+{%- set m = page.meta if (page and page.meta) else {} -%}
+{%- if m.id -%}
+  {%- set kp = config.extra.kp if (config.extra and config.extra.kp) else {} -%}
+  {%- set LV_CLASS = {"基礎": "kiso", "水": "mizu", "青": "ao", "黄": "ki", "発展": "hatten"} -%}
+  {%- set LV_RANK = {"基礎": 1, "水": 2, "青": 3, "黄": 4, "発展": 5} -%}
+  {%- set LV_NEXT = {"基礎": "水", "水": "青", "青": "黄", "黄": "発展"} -%}
+  {%- set LV_RANGE = {"基礎": "〜1199", "水": "1200〜1599", "青": "1600〜1999", "黄": "2000〜2399", "発展": "2400〜"} -%}
+  {%- set LV_SLUG = kp.levels or {"基礎": "basic", "水": "cyan", "青": "blue", "黄": "yellow", "発展": "advanced"} -%}
+  {%- set KIND_SLUG = kp.kinds or {
+    "計算量": "complexity", "全探索": "brute-force", "二分探索": "binary-search", "累積和・差分": "prefix-sum",
+    "尺取り・スライド窓": "two-pointers", "貪欲": "greedy", "ソート・座標圧縮": "sorting", "ダブリング・分割統治": "doubling",
+    "DP": "dp", "グラフ探索": "graph-search", "最短路": "shortest-path", "連結性・全域木": "connectivity",
+    "フロー・マッチング": "flow", "木": "tree", "データ構造": "data-structure", "区間クエリ": "range-query",
+    "クエリ処理の工夫": "query-processing", "整数論": "number-theory", "線形代数・行列": "linear-algebra",
+    "畳み込み・多項式": "convolution", "数え上げ": "counting", "確率・期待値": "probability", "ゲーム": "game",
+    "文字列": "string", "ハッシュ・乱択": "hashing", "幾何": "geometry", "ビット演算": "bit", "考察": "observation",
+    "実装・C++": "implementation", "案内": "guide"} -%}
+  {%- set FIELD_TITLE = kp.fields or {
+    "start": "はじめに", "guide": "横断ページ", "basics": "基本テクニック", "thinking": "考察", "dp": "動的計画法",
+    "graph": "グラフ", "tree": "木", "ds": "データ構造", "math": "整数論・代数", "comb": "数え上げ・確率・ゲーム",
+    "string": "文字列", "geometry": "幾何", "misc": "その他の技法", "patterns": "題材別", "cpp": "C++"} -%}
+
+  {#- nav を1回だけ見て、一覧・分野の入口・知識マップ・前提・次に読むを集める。
+      ページは URL（lists/kind-dp/ のようなサイトのルートからの相対）で見分ける。p.file は Zensical にないので使わない -#}
+  {%- set ns = namespace(lists=[], field_url=none, map_url=none, howto_url=none, prereqs=[], near=[], far=[]) -%}
+  {%- for p in nav.pages -%}
+    {%- set pm = p.meta or {} -%}
+    {%- set pu = (p.url or "")[1:] if (p.url or "")[:1] == "/" else (p.url or "") -%}
+    {%- if pu[:6] == "lists/" -%}
+      {%- set ns.lists = ns.lists + [pu] -%}
+    {%- elif pu == m.field ~ "/" -%}
+      {%- set ns.field_url = p.url -%}
+    {%- endif -%}
+    {%- if pm.id -%}
+      {%- if pm.id == "knowledge-map" -%}{%- set ns.map_url = p.url -%}{%- endif -%}
+      {%- if pm.id == "how-to-use" -%}{%- set ns.howto_url = p.url -%}{%- endif -%}
+      {%- if pm.id in (m.prerequisites or []) -%}
+        {%- set ns.prereqs = ns.prereqs + [p] -%}
+      {%- endif -%}
+      {%- if pm.id != m.id and m.id in (pm.prerequisites or []) -%}
+        {%- if (not m.level) or pm.level == m.level or pm.level == LV_NEXT[m.level] -%}
+          {%- set ns.near = ns.near + [p] -%}
+        {%- else -%}
+          {%- set ns.far = ns.far + [p] -%}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- set nexts = ns.near + ns.far -%}
+
+  {#- 「理解した」のチェック：ページの level と、sections にある上位の level -#}
+  {%- set lv_ns = namespace(levels=[]) -%}
+  {%- if m.level in LV_RANK -%}
+    {%- for lv in ["基礎", "水", "青", "黄", "発展"] -%}
+      {%- if lv == m.level -%}
+        {%- set lv_ns.levels = lv_ns.levels + [lv] -%}
+      {%- elif LV_RANK[lv] > LV_RANK[m.level] -%}
+        {%- for s in (m.sections or []) if s.level == lv and lv not in lv_ns.levels -%}
+          {%- set lv_ns.levels = lv_ns.levels + [lv] -%}
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+
+  {%- set checks -%}
+    {%- if lv_ns.levels -%}
+    <div class="kp-understood" role="group" aria-label="理解したかの記録（この端末のブラウザに保存する）">
+      <span class="kp-understood__label">理解した</span>
+      {%- for lv in lv_ns.levels %}
+      {%- set titles = [] -%}
+      {%- if lv != m.level -%}
+        {%- set titles = (m.sections or []) | selectattr("level", "equalto", lv) | map(attribute="title") | list -%}
+      {%- endif %}
+      <label class="kp-check kp-lv-{{ LV_CLASS[lv] }}"{% if titles %} title="{{ lv }}の節：{{ titles | join('、') | e }}"{% endif %}>
+        <input type="checkbox" data-kp-understood="{{ m.id | e }}" data-kp-level="{{ lv }}">
+        <span class="kp-check__text">{{ lv }}{% if lv != m.level %}の節{% endif %}</span>
+      </label>
+      {%- endfor %}
+    </div>
+    {%- endif -%}
+  {%- endset -%}
+
+  {%- if m.stage == "stub" %}
+  <div class="kp-stub" role="note">
+    <span class="kp-stub__label">準備中</span>
+    <span class="kp-stub__text">このページは骨組みだけで、本文はまだない。冒頭の要点は目次から機械的に作ったものである。{% if ns.howto_url %}<a href="{{ ns.howto_url | url }}">準備中のページについて</a>{% endif %}</span>
+  </div>
+  {%- endif %}
+  <div class="kp-page-head">
+    <dl class="kp-meta">
+      {%- if m.level in LV_RANK %}
+      {%- set lv_url = "lists/level-" ~ LV_SLUG[m.level] ~ "/" %}
+      <div class="kp-meta__item">
+        <dt>レベル</dt>
+        <dd>
+          {%- if lv_url in ns.lists -%}
+          <a class="kp-badge kp-badge--level kp-lv-{{ LV_CLASS[m.level] }}" href="{{ lv_url | url }}" title="difficulty {{ LV_RANGE[m.level] }}。このレベルのページの一覧へ">{{ m.level }}</a>
+          {%- else -%}
+          <span class="kp-badge kp-badge--level kp-lv-{{ LV_CLASS[m.level] }}" title="difficulty {{ LV_RANGE[m.level] }}">{{ m.level }}</span>
+          {%- endif -%}
+        </dd>
+      </div>
+      {%- endif %}
+      {%- if m.field %}
+      <div class="kp-meta__item">
+        <dt>分野</dt>
+        <dd>
+          {%- set ftitle = FIELD_TITLE[m.field] or m.field -%}
+          {%- if ns.field_url -%}
+          <a class="kp-badge kp-badge--field" href="{{ ns.field_url | url }}">{{ ftitle | e }}</a>
+          {%- else -%}
+          <span class="kp-badge kp-badge--field">{{ ftitle | e }}</span>
+          {%- endif -%}
+        </dd>
+      </div>
+      {%- endif %}
+      {%- if m.kind %}
+      <div class="kp-meta__item">
+        <dt>種類</dt>
+        <dd>
+          {%- for k in m.kind -%}
+          {%- set k_url = "lists/kind-" ~ (KIND_SLUG[k] or "") ~ "/" -%}
+          {%- if KIND_SLUG[k] and k_url in ns.lists -%}
+          <a class="kp-badge kp-badge--kind" href="{{ k_url | url }}" title="この種類のページの一覧へ">{{ k | e }}</a>
+          {%- else -%}
+          <span class="kp-badge kp-badge--kind">{{ k | e }}</span>
+          {%- endif -%}
+          {%- endfor -%}
+        </dd>
+      </div>
+      {%- endif %}
+    </dl>
+    {{ checks }}
+  </div>
+{%- endif %}
+{{ super() }}
+{%- if m.id %}
+  {%- set show_prereq = ns.prereqs or (m.level in LV_RANK) %}
+  {#- 次に読むが8件を超えるときは「ほか N ページ」が同じリンクになるので、まとめのリンクは出さない -#}
+  {%- set show_map = ns.map_url and m.id != "knowledge-map" and (ns.prereqs or nexts) and nexts | length <= 8 %}
+  {%- if show_prereq or nexts or show_map or lv_ns.levels %}
+  <nav class="kp-links" aria-label="このページの前後">
+    {%- if show_prereq %}
+    <div class="kp-links__col">
+      <p class="kp-links__heading">前提</p>
+      {%- if ns.prereqs %}
+      <ul class="kp-links__list">
+        {%- for pid in m.prerequisites %}
+        {%- for q in ns.prereqs if q.meta.id == pid %}
+        <li><a href="{{ q.url | url }}"{% if q.meta.summary %} title="{{ q.meta.summary | e }}"{% endif %}>{{ (q.meta.nav_title or q.title) | e }}</a>
+          {%- if q.meta.level in LV_RANK %} <span class="kp-mini kp-lv-{{ LV_CLASS[q.meta.level] }}">{{ q.meta.level }}</span>{% endif %}</li>
+        {%- endfor %}
+        {%- endfor %}
+      </ul>
+      {%- else %}
+      <p class="kp-links__none">なし（このページから読める）</p>
+      {%- endif %}
+    </div>
+    {%- endif %}
+    {%- if nexts %}
+    <div class="kp-links__col">
+      <p class="kp-links__heading">次に読む</p>
+      <ul class="kp-links__list">
+        {%- for q in nexts[:8] %}
+        <li><a href="{{ q.url | url }}"{% if q.meta.summary %} title="{{ q.meta.summary | e }}"{% endif %}>{{ (q.meta.nav_title or q.title) | e }}</a>
+          {%- if q.meta.level in LV_RANK %} <span class="kp-mini kp-lv-{{ LV_CLASS[q.meta.level] }}">{{ q.meta.level }}</span>{% endif %}</li>
+        {%- endfor %}
+      </ul>
+      {%- if nexts | length > 8 and ns.map_url %}
+      <p class="kp-links__more"><a href="{{ ns.map_url | url }}?focus={{ m.id | urlencode }}">ほか {{ nexts | length - 8 }} ページは知識マップで見る</a></p>
+      {%- elif nexts | length > 8 %}
+      <p class="kp-links__more">ほか {{ nexts | length - 8 }} ページ</p>
+      {%- endif %}
+    </div>
+    {%- endif %}
+    {%- if show_map %}
+    <p class="kp-links__map"><a href="{{ ns.map_url | url }}?focus={{ m.id | urlencode }}">知識マップでこのページの前後を見る</a></p>
+    {%- endif %}
+    {{ checks }}
+  </nav>
+  {%- endif %}
+{%- endif %}
+{% endblock %}
