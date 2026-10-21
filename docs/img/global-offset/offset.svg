@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 250" font-family="sans-serif" font-size="15">
+  <rect x="0" y="0" width="600" height="250" fill="#ffffff"/>
+  <text x="20" y="28" font-size="14" fill="#333">操作：5 を入れる → 全体に +3 → 6 を入れる → 全体に +2 → 5 を入れる（今の d = 5）</text>
+  <!-- labels -->
+  <text x="20" y="85" fill="#111">格納値</text>
+  <text x="20" y="185" fill="#111">実際の値</text>
+  <!-- stored row -->
+  <rect x="140" y="60" width="70" height="40" fill="#e8f0fe" stroke="#1a4fa0" stroke-width="1.5"/>
+  <text x="175" y="86" text-anchor="middle">0</text>
+  <rect x="230" y="60" width="70" height="40" fill="#e8f0fe" stroke="#1a4fa0" stroke-width="1.5"/>
+  <text x="265" y="86" text-anchor="middle">3</text>
+  <rect x="320" y="60" width="70" height="40" fill="#e8f0fe" stroke="#1a4fa0" stroke-width="1.5"/>
+  <text x="355" y="86" text-anchor="middle">5</text>
+  <text x="175" y="54" text-anchor="middle" font-size="12" fill="#333">5 − 5</text>
+  <text x="265" y="54" text-anchor="middle" font-size="12" fill="#333">6 − 3</text>
+  <text x="355" y="54" text-anchor="middle" font-size="12" fill="#333">5 − 0</text>
+  <text x="410" y="78" font-size="13" fill="#333">入れたときの d を</text>
+  <text x="410" y="96" font-size="13" fill="#333">引いて保存</text>
+  <!-- arrows -->
+  <g stroke="#555" stroke-width="1.5" stroke-dasharray="5 4" fill="none">
+    <line x1="175" y1="102" x2="175" y2="156"/>
+    <line x1="265" y1="102" x2="265" y2="156"/>
+    <line x1="355" y1="102" x2="355" y2="156"/>
+  </g>
+  <g fill="#555">
+    <polygon points="170,154 180,154 175,162"/>
+    <polygon points="260,154 270,154 265,162"/>
+    <polygon points="350,154 360,154 355,162"/>
+  </g>
+  <text x="185" y="134" font-size="13" fill="#b03a00">＋d</text>
+  <text x="275" y="134" font-size="13" fill="#b03a00">＋d</text>
+  <text x="365" y="134" font-size="13" fill="#b03a00">＋d</text>
+  <!-- actual row -->
+  <rect x="140" y="162" width="70" height="40" fill="#fff4e5" stroke="#b03a00" stroke-width="1.5" stroke-dasharray="6 3"/>
+  <text x="175" y="188" text-anchor="middle">5</text>
+  <rect x="230" y="162" width="70" height="40" fill="#fff4e5" stroke="#b03a00" stroke-width="1.5" stroke-dasharray="6 3"/>
+  <text x="265" y="188" text-anchor="middle">8</text>
+  <rect x="320" y="162" width="70" height="40" fill="#fff4e5" stroke="#b03a00" stroke-width="1.5" stroke-dasharray="6 3"/>
+  <text x="355" y="188" text-anchor="middle">10</text>
+  <text x="410" y="180" font-size="13" fill="#333">どの要素にも</text>
+  <text x="410" y="198" font-size="13" fill="#333">同じ d = 5 を足す</text>
+  <text x="20" y="235" font-size="13" fill="#333">並び順は格納値でも実際の値でも同じなので、ヒープや set はそのまま使える</text>
+</svg>

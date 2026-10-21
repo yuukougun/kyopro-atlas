@@ -1,0 +1,5 @@
+compilers: [g++-13, g++-15]
+expect: warning
+cases:
+  - {input: "40\n", output: "0 1099511627776\n256\n"}
+  - {input: "3\n", output: "0 1099511627776\n8\n"}

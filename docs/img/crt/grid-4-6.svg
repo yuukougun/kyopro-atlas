@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 470 378" font-family="sans-serif" font-size="14">
+<defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#bbb" stroke-width="2"/></pattern></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="20" y="26" fill="#222">x = 0〜11 を x mod 4 と x mod 6 のマスに書く</text>
+<text x="20" y="48" fill="#555" font-size="13">gcd(4, 6) = 2。偶奇がそろうマスにだけ数が入る</text>
+<text x="20" y="66" fill="#555" font-size="13">点線・斜線の「なし」のマスには解がない</text>
+<text x="20" y="84" fill="#555" font-size="13">太枠：x ≡ 1 (mod 4) かつ x ≡ 2 (mod 6)（解なし）</text>
+<g transform="translate(0,36)">
+<text x="278.0" y="70" text-anchor="middle" fill="#222">x mod 6</text>
+<text x="48" y="189.0" text-anchor="middle" fill="#222">x mod 4</text>
+<text x="138.0" y="88" text-anchor="middle" fill="#555">0</text>
+<text x="194.0" y="88" text-anchor="middle" fill="#555">1</text>
+<text x="250.0" y="88" text-anchor="middle" fill="#555">2</text>
+<text x="306.0" y="88" text-anchor="middle" fill="#555">3</text>
+<text x="362.0" y="88" text-anchor="middle" fill="#555">4</text>
+<text x="418.0" y="88" text-anchor="middle" fill="#555">5</text>
+<text x="94" y="123.0" text-anchor="middle" fill="#555">0</text>
+<text x="94" y="167.0" text-anchor="middle" fill="#555">1</text>
+<text x="94" y="211.0" text-anchor="middle" fill="#555">2</text>
+<text x="94" y="255.0" text-anchor="middle" fill="#555">3</text>
+<rect x="110" y="96" width="56" height="44" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="138.0" y="123.0" text-anchor="middle" fill="#1f4e9a">0</text>
+<rect x="166" y="96" width="56" height="44" fill="url(#hatch)" stroke="#999" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="194.0" y="123.0" text-anchor="middle" fill="#777" font-size="12">なし</text>
+<rect x="222" y="96" width="56" height="44" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="250.0" y="123.0" text-anchor="middle" fill="#1f4e9a">8</text>
+<rect x="278" y="96" width="56" height="44" fill="url(#hatch)" stroke="#999" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="306.0" y="123.0" text-anchor="middle" fill="#777" font-size="12">なし</text>
+<rect x="334" y="96" width="56" height="44" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="362.0" y="123.0" text-anchor="middle" fill="#1f4e9a">4</text>
+<rect x="390" y="96" width="56" height="44" fill="url(#hatch)" stroke="#999" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="418.0" y="123.0" text-anchor="middle" fill="#777" font-size="12">なし</text>
+<rect x="110" y="140" width="56" height="44" fill="url(#hatch)" stroke="#999" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="138.0" y="167.0" text-anchor="middle" fill="#777" font-size="12">なし</text>
+<rect x="166" y="140" width="56" height="44" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="194.0" y="167.0" text-anchor="middle" fill="#1f4e9a">1</text>
+<rect x="222" y="140" width="56" height="44" fill="url(#hatch)" stroke="#999" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="250.0" y="167.0" text-anchor="middle" fill="#777" font-size="12">なし</text>
+<rect x="278" y="140" width="56" height="44" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="306.0" y="167.0" text-anchor="middle" fill="#1f4e9a">9</text>
+<rect x="334" y="140" width="56" height="44" fill="url(#hatch)" stroke="#999" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="362.0" y="167.0" text-anchor="middle" fill="#777" font-size="12">なし</text>
+<rect x="390" y="140" width="56" height="44" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="418.0" y="167.0" text-anchor="middle" fill="#1f4e9a">5</text>
+<rect x="110" y="184" width="56" height="44" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="138.0" y="211.0" text-anchor="middle" fill="#1f4e9a">6</text>
+<rect x="166" y="184" width="56" height="44" fill="url(#hatch)" stroke="#999" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="194.0" y="211.0" text-anchor="middle" fill="#777" font-size="12">なし</text>
+<rect x="222" y="184" width="56" height="44" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="250.0" y="211.0" text-anchor="middle" fill="#1f4e9a">2</text>
+<rect x="278" y="184" width="56" height="44" fill="url(#hatch)" stroke="#999" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="306.0" y="211.0" text-anchor="middle" fill="#777" font-size="12">なし</text>
+<rect x="334" y="184" width="56" height="44" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="362.0" y="211.0" text-anchor="middle" fill="#1f4e9a">10</text>
+<rect x="390" y="184" width="56" height="44" fill="url(#hatch)" stroke="#999" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="418.0" y="211.0" text-anchor="middle" fill="#777" font-size="12">なし</text>
+<rect x="110" y="228" width="56" height="44" fill="url(#hatch)" stroke="#999" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="138.0" y="255.0" text-anchor="middle" fill="#777" font-size="12">なし</text>
+<rect x="166" y="228" width="56" height="44" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="194.0" y="255.0" text-anchor="middle" fill="#1f4e9a">7</text>
+<rect x="222" y="228" width="56" height="44" fill="url(#hatch)" stroke="#999" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="250.0" y="255.0" text-anchor="middle" fill="#777" font-size="12">なし</text>
+<rect x="278" y="228" width="56" height="44" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="306.0" y="255.0" text-anchor="middle" fill="#1f4e9a">3</text>
+<rect x="334" y="228" width="56" height="44" fill="url(#hatch)" stroke="#999" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="362.0" y="255.0" text-anchor="middle" fill="#777" font-size="12">なし</text>
+<rect x="390" y="228" width="56" height="44" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="418.0" y="255.0" text-anchor="middle" fill="#1f4e9a">11</text>
+</g>
+</svg>

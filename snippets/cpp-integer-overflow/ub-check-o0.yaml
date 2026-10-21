@@ -1,0 +1,5 @@
+compilers: [g++-13, g++-15]
+flags: "-std=gnu++23 -O0 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "100000 100000\n", output: "1410065408 10000000000 differ\n"}

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 330" width="520" height="330" font-family="sans-serif">
+<rect width="520" height="330" fill="#ffffff"/>
+<text x="260.0" y="24" text-anchor="middle" font-size="15" fill="#222">N = 5、P = (2, 3, 4, 5, 1) の各項と上界</text>
+<line x1="50" y1="230" x2="490" y2="230" stroke="#888" stroke-width="1.5"/>
+<rect x="60" y="190" width="60" height="40" fill="#cfe3f5" stroke="#1f6fb2" stroke-width="1.5"/>
+<line x1="54" y1="190" x2="126" y2="190" stroke="#c0392b" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="90" y="182" text-anchor="middle" font-size="13" fill="#222">1</text>
+<text x="90" y="250" text-anchor="middle" font-size="13" fill="#222">i = 1</text>
+<text x="90" y="268" text-anchor="middle" font-size="13" fill="#444">P<tspan baseline-shift="sub" font-size="10">i</tspan> = 2</text>
+<rect x="150" y="150" width="60" height="80" fill="#cfe3f5" stroke="#1f6fb2" stroke-width="1.5"/>
+<line x1="144" y1="150" x2="216" y2="150" stroke="#c0392b" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="180" y="142" text-anchor="middle" font-size="13" fill="#222">2</text>
+<text x="180" y="250" text-anchor="middle" font-size="13" fill="#222">i = 2</text>
+<text x="180" y="268" text-anchor="middle" font-size="13" fill="#444">P<tspan baseline-shift="sub" font-size="10">i</tspan> = 3</text>
+<rect x="240" y="110" width="60" height="120" fill="#cfe3f5" stroke="#1f6fb2" stroke-width="1.5"/>
+<line x1="234" y1="110" x2="306" y2="110" stroke="#c0392b" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="270" y="102" text-anchor="middle" font-size="13" fill="#222">3</text>
+<text x="270" y="250" text-anchor="middle" font-size="13" fill="#222">i = 3</text>
+<text x="270" y="268" text-anchor="middle" font-size="13" fill="#444">P<tspan baseline-shift="sub" font-size="10">i</tspan> = 4</text>
+<rect x="330" y="70" width="60" height="160" fill="#cfe3f5" stroke="#1f6fb2" stroke-width="1.5"/>
+<line x1="324" y1="70" x2="396" y2="70" stroke="#c0392b" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="360" y="62" text-anchor="middle" font-size="13" fill="#222">4</text>
+<text x="360" y="250" text-anchor="middle" font-size="13" fill="#222">i = 4</text>
+<text x="360" y="268" text-anchor="middle" font-size="13" fill="#444">P<tspan baseline-shift="sub" font-size="10">i</tspan> = 5</text>
+<line x1="414" y1="230" x2="486" y2="230" stroke="#c0392b" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="450" y="222" text-anchor="middle" font-size="13" fill="#222">0</text>
+<text x="450" y="250" text-anchor="middle" font-size="13" fill="#222">i = 5</text>
+<text x="450" y="268" text-anchor="middle" font-size="13" fill="#444">P<tspan baseline-shift="sub" font-size="10">i</tspan> = 1</text>
+<text x="260.0" y="296" text-anchor="middle" font-size="14" fill="#444">箱は i mod P<tspan baseline-shift="sub" font-size="10">i</tspan>、赤の破線は上界 P<tspan baseline-shift="sub" font-size="10">i</tspan> − 1</text>
+<text x="260.0" y="318" text-anchor="middle" font-size="14" fill="#444">合計 10 は上界の和に等しい</text>
+</svg>

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 342" width="620" height="342" font-family="sans-serif" font-size="15">
+<rect x="0" y="0" width="620" height="342" fill="#ffffff"/>
+<text x="310.0" y="24" text-anchor="middle" font-size="16" font-weight="bold">右端を伸ばしながら、各値の最後の出現位置だけに 1 を立てる</text>
+<text x="138" y="52" text-anchor="end" fill="#555">位置 i</text>
+<text x="174.0" y="52" text-anchor="middle" fill="#555">0</text>
+<text x="222.0" y="52" text-anchor="middle" fill="#555">1</text>
+<text x="270.0" y="52" text-anchor="middle" fill="#555">2</text>
+<text x="318.0" y="52" text-anchor="middle" fill="#555">3</text>
+<text x="366.0" y="52" text-anchor="middle" fill="#555">4</text>
+<text x="138" y="93.0" text-anchor="end" font-weight="bold">A</text>
+<rect x="150" y="70" width="48" height="36" fill="#eef2f7" stroke="#333"/>
+<text x="174.0" y="93.0" text-anchor="middle" font-weight="bold">1</text>
+<rect x="198" y="70" width="48" height="36" fill="#eef2f7" stroke="#333"/>
+<text x="222.0" y="93.0" text-anchor="middle" font-weight="bold">2</text>
+<rect x="246" y="70" width="48" height="36" fill="#eef2f7" stroke="#333"/>
+<text x="270.0" y="93.0" text-anchor="middle" font-weight="bold">1</text>
+<rect x="294" y="70" width="48" height="36" fill="#eef2f7" stroke="#333"/>
+<text x="318.0" y="93.0" text-anchor="middle" font-weight="bold">3</text>
+<rect x="342" y="70" width="48" height="36" fill="#eef2f7" stroke="#333"/>
+<text x="366.0" y="93.0" text-anchor="middle" font-weight="bold">2</text>
+<text x="138" y="139.0" text-anchor="end">r = 1 の後</text>
+<rect x="150" y="116" width="48" height="36" fill="#ffffff" stroke="#999"/>
+<text x="174.0" y="139.0" text-anchor="middle" font-weight="bold">1</text>
+<rect x="198" y="116" width="48" height="36" fill="#f2f2f2" stroke="#999"/>
+<rect x="246" y="116" width="48" height="36" fill="#f2f2f2" stroke="#999"/>
+<rect x="294" y="116" width="48" height="36" fill="#f2f2f2" stroke="#999"/>
+<rect x="342" y="116" width="48" height="36" fill="#f2f2f2" stroke="#999"/>
+<text x="138" y="175.0" text-anchor="end">r = 2 の後</text>
+<rect x="150" y="152" width="48" height="36" fill="#ffffff" stroke="#999"/>
+<text x="174.0" y="175.0" text-anchor="middle" font-weight="bold">1</text>
+<rect x="198" y="152" width="48" height="36" fill="#ffffff" stroke="#999"/>
+<text x="222.0" y="175.0" text-anchor="middle" font-weight="bold">1</text>
+<rect x="246" y="152" width="48" height="36" fill="#f2f2f2" stroke="#999"/>
+<rect x="294" y="152" width="48" height="36" fill="#f2f2f2" stroke="#999"/>
+<rect x="342" y="152" width="48" height="36" fill="#f2f2f2" stroke="#999"/>
+<text x="138" y="211.0" text-anchor="end">r = 3 の後</text>
+<rect x="150" y="188" width="48" height="36" fill="#ffffff" stroke="#999"/>
+<text x="174.0" y="211.0" text-anchor="middle" fill="#888">0</text>
+<rect x="198" y="188" width="48" height="36" fill="#ffffff" stroke="#999"/>
+<text x="222.0" y="211.0" text-anchor="middle" font-weight="bold">1</text>
+<rect x="246" y="188" width="48" height="36" fill="#ffffff" stroke="#999"/>
+<text x="270.0" y="211.0" text-anchor="middle" font-weight="bold">1</text>
+<rect x="294" y="188" width="48" height="36" fill="#f2f2f2" stroke="#999"/>
+<rect x="342" y="188" width="48" height="36" fill="#f2f2f2" stroke="#999"/>
+<text x="404" y="211.0" fill="#333">値 1 の 1 を位置 0 から 2 へ移す</text>
+<text x="138" y="247.0" text-anchor="end">r = 4 の後</text>
+<rect x="150" y="224" width="48" height="36" fill="#ffffff" stroke="#999"/>
+<text x="174.0" y="247.0" text-anchor="middle" fill="#888">0</text>
+<rect x="198" y="224" width="48" height="36" fill="#ffffff" stroke="#999"/>
+<text x="222.0" y="247.0" text-anchor="middle" font-weight="bold">1</text>
+<rect x="246" y="224" width="48" height="36" fill="#ffffff" stroke="#999"/>
+<text x="270.0" y="247.0" text-anchor="middle" font-weight="bold">1</text>
+<rect x="294" y="224" width="48" height="36" fill="#ffffff" stroke="#999"/>
+<text x="318.0" y="247.0" text-anchor="middle" font-weight="bold">1</text>
+<rect x="342" y="224" width="48" height="36" fill="#f2f2f2" stroke="#999"/>
+<rect x="200" y="226" width="140" height="32" fill="none" stroke="#c0392b" stroke-width="3" stroke-dasharray="7 4"/>
+<text x="404" y="247.0" fill="#c0392b">クエリ [1, 4) の和 = 3</text>
+<text x="138" y="283.0" text-anchor="end">r = 5 の後</text>
+<rect x="150" y="260" width="48" height="36" fill="#ffffff" stroke="#999"/>
+<text x="174.0" y="283.0" text-anchor="middle" fill="#888">0</text>
+<rect x="198" y="260" width="48" height="36" fill="#ffffff" stroke="#999"/>
+<text x="222.0" y="283.0" text-anchor="middle" fill="#888">0</text>
+<rect x="246" y="260" width="48" height="36" fill="#ffffff" stroke="#999"/>
+<text x="270.0" y="283.0" text-anchor="middle" font-weight="bold">1</text>
+<rect x="294" y="260" width="48" height="36" fill="#ffffff" stroke="#999"/>
+<text x="318.0" y="283.0" text-anchor="middle" font-weight="bold">1</text>
+<rect x="342" y="260" width="48" height="36" fill="#ffffff" stroke="#999"/>
+<text x="366.0" y="283.0" text-anchor="middle" font-weight="bold">1</text>
+<rect x="200" y="262" width="188" height="32" fill="none" stroke="#c0392b" stroke-width="3" stroke-dasharray="7 4"/>
+<text x="404" y="283.0" fill="#c0392b">クエリ [1, 5) の和 = 3</text>
+<text x="150" y="334" fill="#555" font-size="13">r = 5 では値 2 の 1 が位置 1 から 4 へ移る。灰色はまだ読んでいない位置</text>
+</svg>

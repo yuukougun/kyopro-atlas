@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 378" font-family="sans-serif" font-size="15">
+<rect x="0" y="0" width="640" height="378" fill="#ffffff"/>
+<text x="20" y="28" font-size="16" font-weight="bold" fill="#000">a = 38, b = 14 の拡張ユークリッドの互除法</text>
+<text x="20" y="52" font-size="15" fill="#333">次の行 ＝ 前の行 − q × この行（r・x・y のどれにも同じ計算をする）</text>
+<rect x="15" y="70" width="610" height="34" fill="#eeeeee" stroke="#666"/>
+<text x="40" y="92" text-anchor="middle" font-weight="bold" fill="#000">行 i</text>
+<text x="100" y="92" text-anchor="middle" font-weight="bold" fill="#000">余り r</text>
+<text x="170" y="92" text-anchor="middle" font-weight="bold" fill="#000">商 q</text>
+<text x="235" y="92" text-anchor="middle" font-weight="bold" fill="#000">x</text>
+<text x="295" y="92" text-anchor="middle" font-weight="bold" fill="#000">y</text>
+<text x="470" y="92" text-anchor="middle" font-weight="bold" fill="#000">確かめ：38x + 14y</text>
+<rect x="15" y="104" width="610" height="34" fill="#ffffff" stroke="#666" stroke-width="1"/>
+<text x="40" y="126" text-anchor="middle" fill="#000">0</text>
+<text x="100" y="126" text-anchor="middle" fill="#000">38</text>
+<text x="170" y="126" text-anchor="middle" fill="#000">—</text>
+<text x="235" y="126" text-anchor="middle" fill="#000">1</text>
+<text x="295" y="126" text-anchor="middle" fill="#000">0</text>
+<text x="470" y="126" text-anchor="middle" fill="#000">38·1 + 14·0 = 38</text>
+<rect x="15" y="138" width="610" height="34" fill="#ffffff" stroke="#666" stroke-width="1"/>
+<text x="40" y="160" text-anchor="middle" fill="#000">1</text>
+<text x="100" y="160" text-anchor="middle" fill="#000">14</text>
+<text x="170" y="160" text-anchor="middle" fill="#000">2</text>
+<text x="235" y="160" text-anchor="middle" fill="#000">0</text>
+<text x="295" y="160" text-anchor="middle" fill="#000">1</text>
+<text x="470" y="160" text-anchor="middle" fill="#000">38·0 + 14·1 = 14</text>
+<rect x="15" y="172" width="610" height="34" fill="#ffffff" stroke="#666" stroke-width="1"/>
+<text x="40" y="194" text-anchor="middle" fill="#000">2</text>
+<text x="100" y="194" text-anchor="middle" fill="#000">10</text>
+<text x="170" y="194" text-anchor="middle" fill="#000">1</text>
+<text x="235" y="194" text-anchor="middle" fill="#000">1</text>
+<text x="295" y="194" text-anchor="middle" fill="#000">−2</text>
+<text x="470" y="194" text-anchor="middle" fill="#000">38·1 + 14·(−2) = 10</text>
+<rect x="15" y="206" width="610" height="34" fill="#ffffff" stroke="#666" stroke-width="1"/>
+<text x="40" y="228" text-anchor="middle" fill="#000">3</text>
+<text x="100" y="228" text-anchor="middle" fill="#000">4</text>
+<text x="170" y="228" text-anchor="middle" fill="#000">2</text>
+<text x="235" y="228" text-anchor="middle" fill="#000">−1</text>
+<text x="295" y="228" text-anchor="middle" fill="#000">3</text>
+<text x="470" y="228" text-anchor="middle" fill="#000">38·(−1) + 14·3 = 4</text>
+<rect x="15" y="240" width="610" height="34" fill="#fff4cc" stroke="#666" stroke-width="2.5"/>
+<text x="40" y="262" text-anchor="middle" fill="#000">4</text>
+<text x="100" y="262" text-anchor="middle" fill="#000">2</text>
+<text x="170" y="262" text-anchor="middle" fill="#000">2</text>
+<text x="235" y="262" text-anchor="middle" fill="#000">3</text>
+<text x="295" y="262" text-anchor="middle" fill="#000">−8</text>
+<text x="470" y="262" text-anchor="middle" fill="#000">38·3 + 14·(−8) = 2</text>
+<rect x="15" y="274" width="610" height="34" fill="#ffffff" stroke="#666" stroke-width="1" stroke-dasharray="6 4"/>
+<text x="40" y="296" text-anchor="middle" fill="#000">5</text>
+<text x="100" y="296" text-anchor="middle" fill="#000">0</text>
+<text x="170" y="296" text-anchor="middle" fill="#000">—</text>
+<text x="235" y="296" text-anchor="middle" fill="#000">−7</text>
+<text x="295" y="296" text-anchor="middle" fill="#000">19</text>
+<text x="470" y="296" text-anchor="middle" fill="#000">38·(−7) + 14·19 = 0</text>
+<text x="20" y="332" font-size="15" fill="#000">太枠（r = 2）：g = 2 で、(x, y) = (3, −8) が 38x + 14y = 2 の解</text>
+<text x="20" y="356" font-size="15" fill="#000">破線（r = 0）：(−7, 19) = (−b/g, a/g)。何倍足しても 38x + 14y は同じ</text>
+</svg>

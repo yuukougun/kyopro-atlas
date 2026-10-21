@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 330" font-family="sans-serif" font-size="14">
+<defs><marker id="ar" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#333"/></marker>
+<marker id="arr" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#c0392b"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="30" y="28" fill="#222">find(c) の前：矢印は親へ。数は diff（親との差）</text>
+<circle cx="150" cy="70" r="20" fill="#fde7c8" stroke="#a35c00" stroke-width="3"/>
+<text x="150" y="75" text-anchor="middle" fill="#222" font-weight="bold">r</text>
+<circle cx="150" cy="140" r="20" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="150" y="145" text-anchor="middle" fill="#222" font-weight="bold">a</text>
+<circle cx="150" cy="210" r="20" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="150" y="215" text-anchor="middle" fill="#222" font-weight="bold">b</text>
+<circle cx="150" cy="280" r="20" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="150" y="285" text-anchor="middle" fill="#222" font-weight="bold">c</text>
+<line x1="150" y1="120" x2="150" y2="92" stroke="#333" stroke-width="2" marker-end="url(#ar)"/>
+<text x="178" y="110" text-anchor="middle" fill="#333">3</text>
+<line x1="150" y1="190" x2="150" y2="162" stroke="#333" stroke-width="2" marker-end="url(#ar)"/>
+<text x="178" y="180" text-anchor="middle" fill="#333">−1</text>
+<line x1="150" y1="260" x2="150" y2="232" stroke="#333" stroke-width="2" marker-end="url(#ar)"/>
+<text x="178" y="250" text-anchor="middle" fill="#333">2</text>
+<text x="60" y="75" fill="#555" font-size="12">根</text>
+<text x="340" y="28" fill="#222">find(c) の後：どれも根の直下</text>
+<circle cx="470" cy="80" r="20" fill="#fde7c8" stroke="#a35c00" stroke-width="3"/>
+<text x="470" y="85" text-anchor="middle" fill="#222" font-weight="bold">r</text>
+<circle cx="370" cy="230" r="20" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="370" y="235" text-anchor="middle" fill="#222" font-weight="bold">a</text>
+<circle cx="470" cy="250" r="20" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="470" y="255" text-anchor="middle" fill="#222" font-weight="bold">b</text>
+<circle cx="570" cy="230" r="20" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="570" y="235" text-anchor="middle" fill="#222" font-weight="bold">c</text>
+<line x1="381.0940039245046" y1="213.3589941132431" x2="457.796595683045" y2="98.30510647543257" stroke="#333" stroke-width="2" marker-end="url(#ar)"/>
+<text x="0" y="0" text-anchor="middle" fill="#333"></text>
+<line x1="470.0" y1="230.0" x2="470.0" y2="102.0" stroke="#333" stroke-width="2" marker-end="url(#ar)"/>
+<text x="0" y="0" text-anchor="middle" fill="#333"></text>
+<line x1="558.9059960754954" y1="213.3589941132431" x2="482.203404316955" y2="98.30510647543257" stroke="#333" stroke-width="2" marker-end="url(#ar)"/>
+<text x="0" y="0" text-anchor="middle" fill="#333"></text>
+<text x="395" y="160" text-anchor="end" fill="#333">3</text>
+<text x="478" y="170" text-anchor="start" fill="#333">2</text>
+<text x="545" y="160" text-anchor="start" fill="#333">4</text>
+<text x="340" y="305" fill="#555" font-size="12">b の 2 ＝ 3 + (−1)、c の 4 ＝ 3 + (−1) + 2</text>
+<text x="340" y="322" fill="#555" font-size="12">（根に近い方から足し込むので、根との差になる）</text>
+</svg>

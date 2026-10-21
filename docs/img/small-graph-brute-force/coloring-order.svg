@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="600" height="300" font-family="sans-serif">
+  <rect width="600" height="300" fill="#ffffff"/>
+  <text x="150" y="26" font-size="15" text-anchor="middle" fill="#222">中心から塗る（DFS 順）</text>
+  <text x="450" y="26" font-size="15" text-anchor="middle" fill="#222">葉を先に塗る（番号順）</text>
+  <line x1="300" y1="40" x2="300" y2="260" stroke="#bbb" stroke-width="1" stroke-dasharray="4 4"/>
+  <!-- left star: center (150,140) leaves -->
+  <g stroke="#222" stroke-width="2.5">
+    <line x1="150" y1="140" x2="150" y2="60"/><line x1="150" y1="140" x2="230" y2="140"/>
+    <line x1="150" y1="140" x2="150" y2="220"/><line x1="150" y1="140" x2="70" y2="140"/>
+  </g>
+  <g stroke="#222" stroke-width="2.5">
+    <line x1="450" y1="140" x2="450" y2="60"/><line x1="450" y1="140" x2="530" y2="140"/>
+    <line x1="450" y1="140" x2="450" y2="220"/><line x1="450" y1="140" x2="370" y2="140"/>
+  </g>
+  <g fill="#ffffff" stroke="#222" stroke-width="2">
+    <circle cx="150" cy="140" r="20" stroke-width="3.5"/>
+    <circle cx="150" cy="60" r="18" stroke-dasharray="4 3"/><circle cx="230" cy="140" r="18" stroke-dasharray="4 3"/>
+    <circle cx="150" cy="220" r="18" stroke-dasharray="4 3"/><circle cx="70" cy="140" r="18" stroke-dasharray="4 3"/>
+    <circle cx="450" cy="140" r="20" stroke-width="3.5"/>
+    <circle cx="450" cy="60" r="18" stroke-dasharray="4 3"/><circle cx="530" cy="140" r="18" stroke-dasharray="4 3"/>
+    <circle cx="450" cy="220" r="18" stroke-dasharray="4 3"/><circle cx="370" cy="140" r="18" stroke-dasharray="4 3"/>
+  </g>
+  <!-- choice counts -->
+  <g font-size="15" text-anchor="middle" fill="#222">
+    <text x="150" y="146">3</text>
+    <text x="150" y="66">2</text><text x="230" y="146">2</text><text x="150" y="226">2</text><text x="70" y="146">2</text>
+    <text x="450" y="146">≤2</text>
+    <text x="450" y="66">3</text><text x="530" y="146">3</text><text x="450" y="226">3</text><text x="370" y="146">3</text>
+  </g>
+  <text x="150" y="268" font-size="14" text-anchor="middle" fill="#222">試す塗り方：3 × 2 × 2 × 2 × 2</text>
+  <text x="150" y="288" font-size="13" text-anchor="middle" fill="#444">葉 k 枚で 3 × 2^k</text>
+  <text x="450" y="268" font-size="14" text-anchor="middle" fill="#222">試す塗り方：3 × 3 × 3 × 3 × (…)</text>
+  <text x="450" y="288" font-size="13" text-anchor="middle" fill="#444">葉 k 枚で 3^k 通りを経由する</text>
+</svg>

@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" font-family="sans-serif" font-size="14">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="180" y="30" text-anchor="middle" fill="#222" font-weight="bold">push(0)：末尾に置いて上げる</text>
+<line x1="180" y1="70" x2="105" y2="132" stroke="#888" stroke-width="1.5"/>
+<line x1="180" y1="70" x2="255" y2="132" stroke="#888" stroke-width="1.5"/>
+<line x1="105" y1="132" x2="68" y2="194" stroke="#888" stroke-width="1.5"/>
+<line x1="105" y1="132" x2="142" y2="194" stroke="#888" stroke-width="1.5"/>
+<line x1="255" y1="132" x2="218" y2="194" stroke="#888" stroke-width="1.5"/>
+<line x1="255" y1="132" x2="292" y2="194" stroke="#888" stroke-width="1.5"/>
+<line x1="68" y1="194" x2="48" y2="256" stroke="#888" stroke-width="1.5" stroke-dasharray="4 3"/>
+<line x1="48" y1="256" x2="68" y2="194" stroke="#c0392b" stroke-width="4" opacity="0.8"/>
+<line x1="68" y1="194" x2="105" y2="132" stroke="#c0392b" stroke-width="4" opacity="0.8"/>
+<line x1="105" y1="132" x2="180" y2="70" stroke="#c0392b" stroke-width="4" opacity="0.8"/>
+<circle cx="180" cy="70" r="17" fill="#ffe0dc" stroke="#c0392b" stroke-width="2"/>
+<text x="180" y="75" text-anchor="middle" fill="#222">1</text>
+<text x="202" y="58" fill="#777" font-size="11">[0]</text>
+<circle cx="105" cy="132" r="17" fill="#ffe0dc" stroke="#c0392b" stroke-width="2"/>
+<text x="105" y="137" text-anchor="middle" fill="#222">3</text>
+<text x="127" y="120" fill="#777" font-size="11">[1]</text>
+<circle cx="255" cy="132" r="17" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2"/>
+<text x="255" y="137" text-anchor="middle" fill="#222">2</text>
+<text x="277" y="120" fill="#777" font-size="11">[2]</text>
+<circle cx="68" cy="194" r="17" fill="#ffe0dc" stroke="#c0392b" stroke-width="2"/>
+<text x="68" y="199" text-anchor="middle" fill="#222">6</text>
+<text x="90" y="182" fill="#777" font-size="11">[3]</text>
+<circle cx="142" cy="194" r="17" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2"/>
+<text x="142" y="199" text-anchor="middle" fill="#222">4</text>
+<text x="164" y="182" fill="#777" font-size="11">[4]</text>
+<circle cx="218" cy="194" r="17" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2"/>
+<text x="218" y="199" text-anchor="middle" fill="#222">8</text>
+<text x="240" y="182" fill="#777" font-size="11">[5]</text>
+<circle cx="292" cy="194" r="17" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2"/>
+<text x="292" y="199" text-anchor="middle" fill="#222">5</text>
+<text x="314" y="182" fill="#777" font-size="11">[6]</text>
+<circle cx="48" cy="256" r="17" fill="#ffe0dc" stroke="#c0392b" stroke-width="2"/>
+<text x="48" y="261" text-anchor="middle" fill="#222">0</text>
+<text x="70" y="244" fill="#777" font-size="11">[7]</text>
+<text x="44.0" y="290" fill="#555" font-size="12">配列 d（添字 [i]）</text>
+<rect x="44.0" y="300" width="34" height="28" fill="#ffe0dc" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="61.0" y="319" text-anchor="middle" fill="#222">1</text>
+<text x="61.0" y="344" text-anchor="middle" fill="#777" font-size="11">0</text>
+<rect x="78.0" y="300" width="34" height="28" fill="#ffe0dc" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="95.0" y="319" text-anchor="middle" fill="#222">3</text>
+<text x="95.0" y="344" text-anchor="middle" fill="#777" font-size="11">1</text>
+<rect x="112.0" y="300" width="34" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="129.0" y="319" text-anchor="middle" fill="#222">2</text>
+<text x="129.0" y="344" text-anchor="middle" fill="#777" font-size="11">2</text>
+<rect x="146.0" y="300" width="34" height="28" fill="#ffe0dc" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="163.0" y="319" text-anchor="middle" fill="#222">6</text>
+<text x="163.0" y="344" text-anchor="middle" fill="#777" font-size="11">3</text>
+<rect x="180.0" y="300" width="34" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="197.0" y="319" text-anchor="middle" fill="#222">4</text>
+<text x="197.0" y="344" text-anchor="middle" fill="#777" font-size="11">4</text>
+<rect x="214.0" y="300" width="34" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="231.0" y="319" text-anchor="middle" fill="#222">8</text>
+<text x="231.0" y="344" text-anchor="middle" fill="#777" font-size="11">5</text>
+<rect x="248.0" y="300" width="34" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="265.0" y="319" text-anchor="middle" fill="#222">5</text>
+<text x="265.0" y="344" text-anchor="middle" fill="#777" font-size="11">6</text>
+<rect x="282.0" y="300" width="34" height="28" fill="#ffe0dc" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="299.0" y="319" text-anchor="middle" fill="#222">0</text>
+<text x="299.0" y="344" text-anchor="middle" fill="#777" font-size="11">7</text>
+<text x="180" y="372" text-anchor="middle" fill="#222" font-size="13">0 を [7] に置き、親 6・3・1 と比べて</text>
+<text x="180" y="390" text-anchor="middle" fill="#222" font-size="13">小さいので 3 回入れ替え、根まで上がる</text>
+<line x1="360" y1="15" x2="360" y2="405" stroke="#ccc"/>
+<text x="540" y="30" text-anchor="middle" fill="#222" font-weight="bold">pop()：末尾の 5 を根に移して下げる</text>
+<line x1="540" y1="70" x2="465" y2="132" stroke="#888" stroke-width="1.5"/>
+<line x1="540" y1="70" x2="615" y2="132" stroke="#888" stroke-width="1.5"/>
+<line x1="465" y1="132" x2="428" y2="194" stroke="#888" stroke-width="1.5"/>
+<line x1="465" y1="132" x2="502" y2="194" stroke="#888" stroke-width="1.5"/>
+<line x1="615" y1="132" x2="578" y2="194" stroke="#888" stroke-width="1.5"/>
+<line x1="540" y1="70" x2="615" y2="132" stroke="#c0392b" stroke-width="4" opacity="0.8"/>
+<circle cx="540" cy="70" r="17" fill="#ffe0dc" stroke="#c0392b" stroke-width="2"/>
+<text x="540" y="75" text-anchor="middle" fill="#222">5</text>
+<text x="562" y="58" fill="#777" font-size="11">[0]</text>
+<circle cx="465" cy="132" r="17" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2"/>
+<text x="465" y="137" text-anchor="middle" fill="#222">3</text>
+<text x="487" y="120" fill="#777" font-size="11">[1]</text>
+<circle cx="615" cy="132" r="17" fill="#ffe0dc" stroke="#c0392b" stroke-width="2"/>
+<text x="615" y="137" text-anchor="middle" fill="#222">2</text>
+<text x="637" y="120" fill="#777" font-size="11">[2]</text>
+<circle cx="428" cy="194" r="17" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2"/>
+<text x="428" y="199" text-anchor="middle" fill="#222">6</text>
+<text x="450" y="182" fill="#777" font-size="11">[3]</text>
+<circle cx="502" cy="194" r="17" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2"/>
+<text x="502" y="199" text-anchor="middle" fill="#222">4</text>
+<text x="524" y="182" fill="#777" font-size="11">[4]</text>
+<circle cx="578" cy="194" r="17" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2"/>
+<text x="578" y="199" text-anchor="middle" fill="#222">8</text>
+<text x="600" y="182" fill="#777" font-size="11">[5]</text>
+<text x="438.0" y="290" fill="#555" font-size="12">配列 d（添字 [i]）</text>
+<rect x="438.0" y="300" width="34" height="28" fill="#ffe0dc" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="455.0" y="319" text-anchor="middle" fill="#222">5</text>
+<text x="455.0" y="344" text-anchor="middle" fill="#777" font-size="11">0</text>
+<rect x="472.0" y="300" width="34" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="489.0" y="319" text-anchor="middle" fill="#222">3</text>
+<text x="489.0" y="344" text-anchor="middle" fill="#777" font-size="11">1</text>
+<rect x="506.0" y="300" width="34" height="28" fill="#ffe0dc" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="523.0" y="319" text-anchor="middle" fill="#222">2</text>
+<text x="523.0" y="344" text-anchor="middle" fill="#777" font-size="11">2</text>
+<rect x="540.0" y="300" width="34" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="557.0" y="319" text-anchor="middle" fill="#222">6</text>
+<text x="557.0" y="344" text-anchor="middle" fill="#777" font-size="11">3</text>
+<rect x="574.0" y="300" width="34" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="591.0" y="319" text-anchor="middle" fill="#222">4</text>
+<text x="591.0" y="344" text-anchor="middle" fill="#777" font-size="11">4</text>
+<rect x="608.0" y="300" width="34" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="625.0" y="319" text-anchor="middle" fill="#222">8</text>
+<text x="625.0" y="344" text-anchor="middle" fill="#777" font-size="11">5</text>
+<text x="540" y="372" text-anchor="middle" fill="#222" font-size="13">根の 1 を消し、末尾の 5 を根へ。小さい方の子 2 と</text>
+<text x="540" y="390" text-anchor="middle" fill="#222" font-size="13">入れ替え、[2] の子 8 より小さいので止まる</text>
+</svg>

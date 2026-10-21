@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" font-family="sans-serif" font-size="14">
+<defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#999" stroke-width="2"/></pattern></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="24" y="28" fill="#222">a + b + c = N（N = 4、a, b, c ≥ 0）の組を探す</text>
+<text x="24" y="70" fill="#222" font-weight="bold">3 重ループ</text>
+<text x="24" y="94" fill="#222">a, b, c を 0〜4 で全部試す</text>
+<text x="24" y="118" fill="#222">5 × 5 × 5 = 125 通り</text>
+<text x="24" y="142" fill="#555" font-size="12">（条件を満たすのは 15 通りだけ）</text>
+<text x="24" y="196" fill="#222" font-weight="bold">2 つ決めて 3 つ目を計算</text>
+<text x="24" y="220" fill="#222">a, b を決めると c = N − a − b</text>
+<text x="24" y="244" fill="#222">5 × 5 = 25 通り（右の表）</text>
+<text x="24" y="268" fill="#555" font-size="12">c &lt; 0 のマスは不可として捨てる</text>
+<text x="400.0" y="66" text-anchor="middle" fill="#222">b →</text>
+<text x="266" y="196.0" text-anchor="middle" fill="#222">a ↓</text>
+<text x="320.0" y="88" text-anchor="middle" fill="#222">0</text>
+<text x="360.0" y="88" text-anchor="middle" fill="#222">1</text>
+<text x="400.0" y="88" text-anchor="middle" fill="#222">2</text>
+<text x="440.0" y="88" text-anchor="middle" fill="#222">3</text>
+<text x="480.0" y="88" text-anchor="middle" fill="#222">4</text>
+<text x="288" y="121.0" text-anchor="middle" fill="#222">0</text>
+<rect x="300" y="96" width="40" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="320.0" y="121.0" text-anchor="middle" fill="#1f4e9a" font-weight="bold">c=4</text>
+<rect x="340" y="96" width="40" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="360.0" y="121.0" text-anchor="middle" fill="#1f4e9a" font-weight="bold">c=3</text>
+<rect x="380" y="96" width="40" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="400.0" y="121.0" text-anchor="middle" fill="#1f4e9a" font-weight="bold">c=2</text>
+<rect x="420" y="96" width="40" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="440.0" y="121.0" text-anchor="middle" fill="#1f4e9a" font-weight="bold">c=1</text>
+<rect x="460" y="96" width="40" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="480.0" y="121.0" text-anchor="middle" fill="#1f4e9a" font-weight="bold">c=0</text>
+<text x="288" y="161.0" text-anchor="middle" fill="#222">1</text>
+<rect x="300" y="136" width="40" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="320.0" y="161.0" text-anchor="middle" fill="#1f4e9a" font-weight="bold">c=3</text>
+<rect x="340" y="136" width="40" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="360.0" y="161.0" text-anchor="middle" fill="#1f4e9a" font-weight="bold">c=2</text>
+<rect x="380" y="136" width="40" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="400.0" y="161.0" text-anchor="middle" fill="#1f4e9a" font-weight="bold">c=1</text>
+<rect x="420" y="136" width="40" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="440.0" y="161.0" text-anchor="middle" fill="#1f4e9a" font-weight="bold">c=0</text>
+<rect x="460" y="136" width="40" height="40" fill="url(#hatch)" stroke="#999" stroke-width="1" stroke-dasharray="3,2"/>
+<text x="288" y="201.0" text-anchor="middle" fill="#222">2</text>
+<rect x="300" y="176" width="40" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="320.0" y="201.0" text-anchor="middle" fill="#1f4e9a" font-weight="bold">c=2</text>
+<rect x="340" y="176" width="40" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="360.0" y="201.0" text-anchor="middle" fill="#1f4e9a" font-weight="bold">c=1</text>
+<rect x="380" y="176" width="40" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="400.0" y="201.0" text-anchor="middle" fill="#1f4e9a" font-weight="bold">c=0</text>
+<rect x="420" y="176" width="40" height="40" fill="url(#hatch)" stroke="#999" stroke-width="1" stroke-dasharray="3,2"/>
+<rect x="460" y="176" width="40" height="40" fill="url(#hatch)" stroke="#999" stroke-width="1" stroke-dasharray="3,2"/>
+<text x="288" y="241.0" text-anchor="middle" fill="#222">3</text>
+<rect x="300" y="216" width="40" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="320.0" y="241.0" text-anchor="middle" fill="#1f4e9a" font-weight="bold">c=1</text>
+<rect x="340" y="216" width="40" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="360.0" y="241.0" text-anchor="middle" fill="#1f4e9a" font-weight="bold">c=0</text>
+<rect x="380" y="216" width="40" height="40" fill="url(#hatch)" stroke="#999" stroke-width="1" stroke-dasharray="3,2"/>
+<rect x="420" y="216" width="40" height="40" fill="url(#hatch)" stroke="#999" stroke-width="1" stroke-dasharray="3,2"/>
+<rect x="460" y="216" width="40" height="40" fill="url(#hatch)" stroke="#999" stroke-width="1" stroke-dasharray="3,2"/>
+<text x="288" y="281.0" text-anchor="middle" fill="#222">4</text>
+<rect x="300" y="256" width="40" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="320.0" y="281.0" text-anchor="middle" fill="#1f4e9a" font-weight="bold">c=0</text>
+<rect x="340" y="256" width="40" height="40" fill="url(#hatch)" stroke="#999" stroke-width="1" stroke-dasharray="3,2"/>
+<rect x="380" y="256" width="40" height="40" fill="url(#hatch)" stroke="#999" stroke-width="1" stroke-dasharray="3,2"/>
+<rect x="420" y="256" width="40" height="40" fill="url(#hatch)" stroke="#999" stroke-width="1" stroke-dasharray="3,2"/>
+<rect x="460" y="256" width="40" height="40" fill="url(#hatch)" stroke="#999" stroke-width="1" stroke-dasharray="3,2"/>
+<text x="512" y="156.0" fill="#1f4e9a" font-size="12">実線：c ≥ 0 で可</text>
+<text x="512" y="174.0" fill="#555" font-size="12">斜線：c &lt; 0</text>
+<line x1="24" y1="324" x2="616" y2="324" stroke="#ccc"/>
+<text x="24" y="352" fill="#222">N = 2000 なら　3 重ループ：2001³ ≈ 8.0 × 10⁹ 回（間に合わない）</text>
+<text x="24" y="378" fill="#222">　　　　　　　 2 重ループ：2001² ≈ 4.0 × 10⁶ 回（十分速い）</text>
+</svg>

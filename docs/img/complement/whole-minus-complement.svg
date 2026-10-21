@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 250" width="480" height="250" font-family="sans-serif">
+  <rect x="0" y="0" width="480" height="250" fill="#ffffff"/>
+  <defs>
+    <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="8" height="8" fill="#dbeafe"/>
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#3b82f6" stroke-width="2"/>
+    </pattern>
+  </defs>
+  <rect x="20" y="30" width="440" height="200" fill="url(#hatch)" stroke="#1f2937" stroke-width="2"/>
+  <text x="26" y="22" font-size="16" fill="#1f2937">全体：長さ N の数字の列（10<tspan baseline-shift="super" font-size="11">N</tspan> 通り）</text>
+  <ellipse cx="310" cy="130" rx="138" ry="78" fill="#ffffff" stroke="#1f2937" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="310" y="122" font-size="15" text-anchor="middle" fill="#1f2937">補集合：0 を 1 つも含まない</text>
+  <text x="310" y="146" font-size="15" text-anchor="middle" fill="#1f2937">各桁 9 通り → 9<tspan baseline-shift="super" font-size="10">N</tspan> 通り</text>
+  <rect x="30" y="92" width="134" height="76" fill="#ffffff" stroke="#3b82f6"/>
+  <text x="97" y="117" font-size="15" text-anchor="middle" fill="#1f2937">斜線の部分：</text>
+  <text x="97" y="137" font-size="15" text-anchor="middle" fill="#1f2937">0 を少なくとも</text>
+  <text x="97" y="157" font-size="15" text-anchor="middle" fill="#1f2937">1 つ含む</text>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 300" width="620" height="300" font-family="sans-serif" font-size="16">
+<rect x="0" y="0" width="620" height="300" fill="#ffffff"/>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="5" refY="9" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,0 L5,10 z" fill="#333"/></marker></defs>
+<text x="20" y="50" fill="#111">sort の後</text>
+<rect x="170" y="20" width="48" height="44" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="194.0" y="49" text-anchor="middle" fill="#111">1</text>
+<rect x="218" y="20" width="48" height="44" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="242.0" y="49" text-anchor="middle" fill="#111">1</text>
+<rect x="266" y="20" width="48" height="44" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="290.0" y="49" text-anchor="middle" fill="#111">2</text>
+<rect x="314" y="20" width="48" height="44" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="338.0" y="49" text-anchor="middle" fill="#111">3</text>
+<rect x="362" y="20" width="48" height="44" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="386.0" y="49" text-anchor="middle" fill="#111">3</text>
+<rect x="410" y="20" width="48" height="44" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="434.0" y="49" text-anchor="middle" fill="#111">3</text>
+<text x="20" y="150" fill="#111">unique の後</text>
+<rect x="170" y="120" width="48" height="44" fill="#e3effd" stroke="#1f4e8c" stroke-width="2"/>
+<text x="194.0" y="149" text-anchor="middle" fill="#111">1</text>
+<rect x="218" y="120" width="48" height="44" fill="#e3effd" stroke="#1f4e8c" stroke-width="2"/>
+<text x="242.0" y="149" text-anchor="middle" fill="#111">2</text>
+<rect x="266" y="120" width="48" height="44" fill="#e3effd" stroke="#1f4e8c" stroke-width="2"/>
+<text x="290.0" y="149" text-anchor="middle" fill="#111">3</text>
+<rect x="314" y="120" width="48" height="44" fill="#f2f2f2" stroke="#888" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="338.0" y="149" text-anchor="middle" fill="#666">?</text>
+<rect x="362" y="120" width="48" height="44" fill="#f2f2f2" stroke="#888" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="386.0" y="149" text-anchor="middle" fill="#666">?</text>
+<rect x="410" y="120" width="48" height="44" fill="#f2f2f2" stroke="#888" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="434.0" y="149" text-anchor="middle" fill="#666">?</text>
+<text x="20" y="266" fill="#111">erase の後</text>
+<rect x="170" y="236" width="48" height="44" fill="#e3effd" stroke="#1f4e8c" stroke-width="2"/>
+<text x="194.0" y="265" text-anchor="middle" fill="#111">1</text>
+<rect x="218" y="236" width="48" height="44" fill="#e3effd" stroke="#1f4e8c" stroke-width="2"/>
+<text x="242.0" y="265" text-anchor="middle" fill="#111">2</text>
+<rect x="266" y="236" width="48" height="44" fill="#e3effd" stroke="#1f4e8c" stroke-width="2"/>
+<text x="290.0" y="265" text-anchor="middle" fill="#111">3</text>
+<line x1="314" y1="186" x2="314" y2="168" stroke="#333" stroke-width="2" marker-end="url(#ar)"/>
+<text x="314" y="206" text-anchor="middle" font-size="14" fill="#111">it（新しい終端）</text>
+<line x1="458" y1="186" x2="458" y2="168" stroke="#333" stroke-width="2" marker-end="url(#ar)"/>
+<text x="458" y="206" text-anchor="middle" font-size="14" fill="#111">v.end()</text>
+<text x="386.0" y="112" text-anchor="middle" font-size="14" fill="#555">値は決まっていない</text>
+<text x="242.0" y="112" text-anchor="middle" font-size="14" fill="#1f4e8c">重複なしの 3 個</text>
+</svg>

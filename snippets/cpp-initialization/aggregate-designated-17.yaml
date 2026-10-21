@@ -1,0 +1,5 @@
+compilers: [g++-13, g++-15]
+flags: "-std=c++17 -O2 -Wall -Wextra -Wpedantic"
+expect: warning
+cases:
+  - {input: "", output: "3 5\n"}

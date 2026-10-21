@@ -1,0 +1,12 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # (M-1)^N + (-1)^N (M-1) と一致する
+  - {input: "2 2\n", output: "2\n"}
+  - {input: "3 2\n", output: "0\n"}
+  - {input: "3 3\n", output: "6\n"}
+  - {input: "4 2\n", output: "2\n"}
+  - {input: "5 3\n", output: "30\n"}
+  - {input: "2 1\n", output: "0\n"}
+  - {input: "6 4\n", output: "732\n"}

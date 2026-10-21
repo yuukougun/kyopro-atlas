@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 400" width="560" height="400" font-family="sans-serif">
+<rect width="560" height="400" fill="#ffffff"/>
+<defs><marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker></defs>
+<text x="280.0" y="26" text-anchor="middle" font-size="16" fill="#111">和の数直線を M = 4 ごとに折り返す</text>
+<text x="195.0" y="50" text-anchor="middle" font-size="13" fill="#333">余り 0</text>
+<text x="285.0" y="50" text-anchor="middle" font-size="13" fill="#333">余り 1</text>
+<text x="375.0" y="50" text-anchor="middle" font-size="13" fill="#333">余り 2</text>
+<text x="465.0" y="50" text-anchor="middle" font-size="13" fill="#333">余り 3</text>
+<text x="138" y="87.0" text-anchor="end" font-size="13" fill="#333">和 0〜3</text>
+<rect x="154" y="64" width="82" height="36" rx="4" fill="#e8f0fe" stroke="#555"/>
+<text x="195.0" y="88.0" text-anchor="middle" font-size="16" fill="#111">0</text>
+<rect x="244" y="64" width="82" height="36" rx="4" fill="#ffffff" stroke="#555"/>
+<text x="285.0" y="88.0" text-anchor="middle" font-size="16" fill="#111">1</text>
+<rect x="334" y="64" width="82" height="36" rx="4" fill="#ffffff" stroke="#555"/>
+<text x="375.0" y="88.0" text-anchor="middle" font-size="16" fill="#111">2</text>
+<rect x="424" y="64" width="82" height="36" rx="4" fill="#ffffff" stroke="#555"/>
+<text x="465.0" y="88.0" text-anchor="middle" font-size="16" fill="#111">3</text>
+<text x="138" y="131.0" text-anchor="end" font-size="13" fill="#333">和 4〜7</text>
+<rect x="154" y="108" width="82" height="36" rx="4" fill="#e8f0fe" stroke="#555"/>
+<text x="195.0" y="132.0" text-anchor="middle" font-size="16" fill="#111">4</text>
+<rect x="244" y="108" width="82" height="36" rx="4" fill="#ffffff" stroke="#555"/>
+<text x="285.0" y="132.0" text-anchor="middle" font-size="16" fill="#111">5</text>
+<rect x="334" y="108" width="82" height="36" rx="4" fill="#ffffff" stroke="#555"/>
+<text x="375.0" y="132.0" text-anchor="middle" font-size="16" fill="#111">6</text>
+<rect x="424" y="108" width="82" height="36" rx="4" fill="#ffffff" stroke="#555"/>
+<text x="465.0" y="132.0" text-anchor="middle" font-size="16" fill="#111">7</text>
+<text x="138" y="175.0" text-anchor="end" font-size="13" fill="#333">和 8〜11</text>
+<rect x="154" y="152" width="82" height="36" rx="4" fill="#e8f0fe" stroke="#555"/>
+<text x="195.0" y="176.0" text-anchor="middle" font-size="16" fill="#111">8</text>
+<rect x="244" y="152" width="82" height="36" rx="4" fill="#ffffff" stroke="#555"/>
+<text x="285.0" y="176.0" text-anchor="middle" font-size="16" fill="#111">9</text>
+<rect x="334" y="152" width="82" height="36" rx="4" fill="#ffffff" stroke="#555"/>
+<text x="375.0" y="176.0" text-anchor="middle" font-size="16" fill="#111">10</text>
+<rect x="424" y="152" width="82" height="36" rx="4" fill="#ffffff" stroke="#555"/>
+<text x="465.0" y="176.0" text-anchor="middle" font-size="16" fill="#111">11</text>
+<rect x="150" y="60" width="90" height="132" fill="none" stroke="#888" stroke-dasharray="5,4"/>
+<rect x="240" y="60" width="90" height="132" fill="none" stroke="#888" stroke-dasharray="5,4"/>
+<rect x="330" y="60" width="90" height="132" fill="none" stroke="#888" stroke-dasharray="5,4"/>
+<rect x="420" y="60" width="90" height="132" fill="none" stroke="#888" stroke-dasharray="5,4"/>
+<line x1="195.0" y1="202" x2="195.0" y2="252" stroke="#333" stroke-width="1.5" marker-end="url(#ah)"/>
+<line x1="285.0" y1="202" x2="285.0" y2="252" stroke="#333" stroke-width="1.5" marker-end="url(#ah)"/>
+<line x1="375.0" y1="202" x2="375.0" y2="252" stroke="#333" stroke-width="1.5" marker-end="url(#ah)"/>
+<line x1="465.0" y1="202" x2="465.0" y2="252" stroke="#333" stroke-width="1.5" marker-end="url(#ah)"/>
+<text x="138" y="234" text-anchor="end" font-size="13" fill="#333">列ごとにまとめる</text>
+<rect x="156" y="264" width="78" height="46" rx="6" fill="#fff7e0" stroke="#333" stroke-width="2"/>
+<text x="195.0" y="293" text-anchor="middle" font-size="15" fill="#111">dp[0]</text>
+<rect x="246" y="264" width="78" height="46" rx="6" fill="#fff7e0" stroke="#333" stroke-width="2"/>
+<text x="285.0" y="293" text-anchor="middle" font-size="15" fill="#111">dp[1]</text>
+<rect x="336" y="264" width="78" height="46" rx="6" fill="#fff7e0" stroke="#333" stroke-width="2"/>
+<text x="375.0" y="293" text-anchor="middle" font-size="15" fill="#111">dp[2]</text>
+<rect x="426" y="264" width="78" height="46" rx="6" fill="#fff7e0" stroke="#333" stroke-width="2"/>
+<text x="465.0" y="293" text-anchor="middle" font-size="15" fill="#111">dp[3]</text>
+<text x="138" y="293" text-anchor="end" font-size="13" fill="#333">状態は 4 個</text>
+<text x="280.0" y="344" text-anchor="middle" font-size="13" fill="#333">同じ列の和は、この先どの数を足しても余りが同じに動く</text>
+</svg>

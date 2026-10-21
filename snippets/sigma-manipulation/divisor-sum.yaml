@@ -1,0 +1,10 @@
+# main の最初で、N = 0〜300 の全通りについて愚直な二重ループと一致することを assert で確かめる
+# 大きいケースの期待値は Python で Σ_d d·M(M+1)/2 を計算して確かめた（N = 9999999 で約 8.4×10^14 なので long long に収まる）
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "1\n", output: "1\n"}
+  - {input: "2\n", output: "5\n"}
+  - {input: "12\n", output: "264\n"}
+  - {input: "9999999\n", output: "838626648460105\n"}

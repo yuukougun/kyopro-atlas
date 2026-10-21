@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 256" width="560" height="256" font-family="sans-serif" font-size="14">
+<rect x="0" y="0" width="560" height="256" fill="#ffffff"/>
+<text x="280" y="24" text-anchor="middle" font-size="15" font-weight="bold" fill="#000">N = 4 種類がそろうまで：段階ごとの回数の期待値を足す</text>
+<text x="12" y="80" fill="#000">持っている</text><text x="12" y="98" fill="#000">種類</text>
+<text x="12" y="134" fill="#000">新しい種類</text><text x="12" y="152" fill="#000">が出る確率</text>
+<text x="12" y="196" fill="#000">回数の</text><text x="12" y="214" fill="#000">期待値 1/p</text>
+<line x1="100.0" y1="64" x2="100.0" y2="226" stroke="#888" stroke-dasharray="4 3"/>
+<rect x="100.0" y="172" width="52.0" height="54" fill="#f4f4f4" stroke="#000"/>
+<text x="126.0" y="204" text-anchor="middle" fill="#000" font-weight="bold">1</text>
+<text x="126.0" y="90" text-anchor="middle" fill="#000">0</text>
+<text x="126.0" y="144" text-anchor="middle" fill="#000">4/4</text>
+<line x1="152.0" y1="64" x2="152.0" y2="226" stroke="#888" stroke-dasharray="4 3"/>
+<rect x="152.0" y="172" width="69.3" height="54" fill="#e0e0e0" stroke="#000"/>
+<text x="186.7" y="204" text-anchor="middle" fill="#000" font-weight="bold">4/3</text>
+<text x="186.7" y="90" text-anchor="middle" fill="#000">1</text>
+<text x="186.7" y="144" text-anchor="middle" fill="#000">3/4</text>
+<line x1="221.3" y1="64" x2="221.3" y2="226" stroke="#888" stroke-dasharray="4 3"/>
+<rect x="221.3" y="172" width="104.0" height="54" fill="#c8c8c8" stroke="#000"/>
+<text x="273.3" y="204" text-anchor="middle" fill="#000" font-weight="bold">2</text>
+<text x="273.3" y="90" text-anchor="middle" fill="#000">2</text>
+<text x="273.3" y="144" text-anchor="middle" fill="#000">2/4</text>
+<line x1="325.3" y1="64" x2="325.3" y2="226" stroke="#888" stroke-dasharray="4 3"/>
+<rect x="325.3" y="172" width="208.0" height="54" fill="#b0b0b0" stroke="#000"/>
+<text x="429.3" y="204" text-anchor="middle" fill="#000" font-weight="bold">4</text>
+<text x="429.3" y="90" text-anchor="middle" fill="#000">3</text>
+<text x="429.3" y="144" text-anchor="middle" fill="#000">1/4</text>
+<line x1="533.3" y1="64" x2="533.3" y2="226" stroke="#888" stroke-dasharray="4 3"/>
+<text x="533.3" y="56" text-anchor="end" fill="#000">4 種類そろって終了</text>
+<text x="280" y="248" text-anchor="middle" fill="#000">合計 1 + 4/3 + 2 + 4 = 25/3 ≈ 8.33 回（箱の幅は期待値に比例）</text>
+</svg>

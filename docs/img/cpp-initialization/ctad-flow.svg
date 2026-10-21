@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 250" width="840" height="250" font-family="sans-serif">
+<rect x="0" y="0" width="840" height="250" fill="#ffffff"/>
+<defs><marker id="ar" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#444"/></marker></defs>
+<text x="20" y="30" font-family="monospace" font-size="15" fill="#222">vector dp(n, vector(m, 0LL));</text>
+<text x="20" y="54" font-size="13" fill="#222">型は内側から決まる（上から順に、書いた式 → 決まる型）</text>
+<rect x="20" y="72" width="260" height="40" fill="#f5f5f5" stroke="#444" stroke-width="1.5"/>
+<text x="150" y="97" font-family="monospace" font-size="13" fill="#222" text-anchor="middle">0LL</text>
+<line x1="285" y1="92" x2="345" y2="92" stroke="#444" stroke-width="2" marker-end="url(#ar)"/>
+<rect x="350" y="72" width="250" height="40" fill="#eef4fc" stroke="#1f5fbf" stroke-width="2"/>
+<text x="475" y="97" font-family="monospace" font-size="13" fill="#1f5fbf" text-anchor="middle">long long</text>
+<text x="610" y="97" font-size="12" fill="#444">最初の値の型</text>
+<line x1="475" y1="114" x2="150" y2="128" stroke="#888" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+<rect x="20" y="130" width="260" height="40" fill="#f5f5f5" stroke="#444" stroke-width="1.5"/>
+<text x="150" y="155" font-family="monospace" font-size="13" fill="#222" text-anchor="middle">vector(m, 0LL)</text>
+<line x1="285" y1="150" x2="345" y2="150" stroke="#444" stroke-width="2" marker-end="url(#ar)"/>
+<rect x="350" y="130" width="250" height="40" fill="#eef4fc" stroke="#1f5fbf" stroke-width="2"/>
+<text x="475" y="155" font-family="monospace" font-size="13" fill="#1f5fbf" text-anchor="middle">vector&lt;long long&gt;</text>
+<text x="610" y="155" font-size="12" fill="#444">中身が long long の vector</text>
+<line x1="475" y1="172" x2="150" y2="186" stroke="#888" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+<rect x="20" y="188" width="260" height="40" fill="#f5f5f5" stroke="#444" stroke-width="1.5"/>
+<text x="150" y="213" font-family="monospace" font-size="13" fill="#222" text-anchor="middle">vector(n, vector(m, 0LL))</text>
+<line x1="285" y1="208" x2="345" y2="208" stroke="#444" stroke-width="2" marker-end="url(#ar)"/>
+<rect x="350" y="188" width="250" height="40" fill="#eef4fc" stroke="#1f5fbf" stroke-width="2"/>
+<text x="475" y="213" font-family="monospace" font-size="13" fill="#1f5fbf" text-anchor="middle">vector&lt;vector&lt;long long&gt;&gt;</text>
+<text x="610" y="213" font-size="12" fill="#444">dp の型</text>
+<text x="20" y="238" font-size="13" fill="#c0392b">0LL を 0 と書くと、1 段目が int になり、dp は vector&lt;vector&lt;int&gt;&gt; になる</text>
+</svg>

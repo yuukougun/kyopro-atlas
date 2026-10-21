@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 345" font-family="sans-serif" font-size="14">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#555"/></marker><marker id="ahr" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="30" y="32" fill="#222">前半 (3, 5) の部分和 p と、相手に探す範囲</text>
+<text x="420" y="32" fill="#222">後半 (8, 2) の部分和 q</text>
+<text x="420" y="50" fill="#555" font-size="12">（昇順にソート済み）</text>
+<rect x="30" y="70" width="230" height="38" fill="#fff3d6" stroke="#9a6b1f" stroke-width="1.5"/>
+<text x="42" y="94" fill="#555" font-size="12">∅</text>
+<text x="100" y="94" fill="#222">p = 0</text>
+<text x="168" y="94" fill="#222">q ≤ 11</text>
+<rect x="30" y="125" width="230" height="38" fill="#fff3d6" stroke="#9a6b1f" stroke-width="1.5"/>
+<text x="42" y="149" fill="#555" font-size="12">{3}</text>
+<text x="100" y="149" fill="#222">p = 3</text>
+<text x="168" y="149" fill="#222">q ≤ 8</text>
+<rect x="30" y="180" width="230" height="38" fill="#fff3d6" stroke="#9a6b1f" stroke-width="1.5"/>
+<text x="42" y="204" fill="#555" font-size="12">{5}</text>
+<text x="100" y="204" fill="#222">p = 5</text>
+<text x="168" y="204" fill="#222">q ≤ 6</text>
+<rect x="30" y="235" width="230" height="38" fill="#fff3d6" stroke="#9a6b1f" stroke-width="1.5"/>
+<text x="42" y="259" fill="#555" font-size="12">{3, 5}</text>
+<text x="100" y="259" fill="#222">p = 8</text>
+<text x="168" y="259" fill="#222">q ≤ 3</text>
+<rect x="420" y="70" width="150" height="38" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="432" y="94" fill="#555" font-size="12">∅</text>
+<text x="500" y="94" fill="#222">q = 0</text>
+<rect x="420" y="125" width="150" height="38" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="432" y="149" fill="#555" font-size="12">{2}</text>
+<text x="500" y="149" fill="#222">q = 2</text>
+<rect x="420" y="180" width="150" height="38" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="432" y="204" fill="#555" font-size="12">{8}</text>
+<text x="500" y="204" fill="#222">q = 8</text>
+<rect x="420" y="235" width="150" height="38" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="432" y="259" fill="#555" font-size="12">{8, 2}</text>
+<text x="500" y="259" fill="#222">q = 10</text>
+<line x1="262" y1="89.0" x2="417" y2="254.0" stroke="#555" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+<line x1="262" y1="144.0" x2="417" y2="199.0" stroke="#c0392b" stroke-width="3" marker-end="url(#ahr)"/>
+<line x1="262" y1="199.0" x2="417" y2="144.0" stroke="#555" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+<line x1="262" y1="254.0" x2="417" y2="144.0" stroke="#555" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+<text x="30" y="305" fill="#222">p + q：0 + 10 = 10、3 + 8 = 11、5 + 2 = 7、8 + 2 = 10</text>
+<text x="30" y="330" fill="#222">T = 11 以下の最大は 11（太い実線の矢印）</text>
+</svg>

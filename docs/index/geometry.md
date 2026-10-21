@@ -13,7 +13,7 @@ search:
 
 ## ベクトルと外積（geometry-vectors） {#geometry-vectors}
 
-- id：`geometry-vectors`　レベル：基礎　段階：stub　type：technique
+- id：`geometry-vectors`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/geometry/geometry-vectors/
 - 別名：外積、内積、cross product、ccw、向き判定、符号付き面積、多角形の面積、靴紐公式、shoelace formula、線分の交差判定、点と直線の距離、3 次元の基本、直方体の共通部分
 - 種類：幾何
@@ -33,10 +33,11 @@ search:
     - `geometry-vectors#segment-intersection` 線分の交差判定（端点で接する・同一直線上の場合）と点と直線の距離（水）：https://yuukougun.github.io/kyopro-atlas/geometry/geometry-vectors/#segment-intersection
     - `geometry-vectors#3d-geometry` 3 次元の基本：軸に平行な直方体の共通部分は軸ごとの区間の積：https://yuukougun.github.io/kyopro-atlas/geometry/geometry-vectors/#3d-geometry
     - `geometry-vectors#point-representation` 点の表し方：整数の構造体と std::complex：https://yuukougun.github.io/kyopro-atlas/geometry/geometry-vectors/#point-representation
+    - `geometry-vectors#next-steps` 偏角ソート・凸包・累積和へのつながり：https://yuukougun.github.io/kyopro-atlas/geometry/geometry-vectors/#next-steps
 
 ## 誤差の扱いと整数での処理（geometry-precision） {#geometry-precision}
 
-- id：`geometry-precision`　レベル：水　段階：stub　type：technique
+- id：`geometry-precision`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/geometry/geometry-precision/
 - 別名：浮動小数点の誤差、floating-point error、EPS、整数化、桁落ち、直線の正規化、方向ベクトルの約分、ax+by+c=0
 - 種類：幾何、整数論
@@ -58,7 +59,7 @@ search:
 
 ## 偏角ソート（argument-sort） {#argument-sort}
 
-- id：`argument-sort`　レベル：水　段階：stub　type：technique
+- id：`argument-sort`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/geometry/argument-sort/
 - 別名：偏角、角度でソート、argument sort、atan2、方向の順に並べる、回転する光線
 - 種類：幾何、ソート・座標圧縮
@@ -80,7 +81,7 @@ search:
 
 ## 回転・平行移動・アフィン変換（rotation-transform） {#rotation-transform}
 
-- id：`rotation-transform`　レベル：水　段階：stub　type：technique
+- id：`rotation-transform`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/geometry/rotation-transform/
 - 別名：回転行列、rotation matrix、座標の回転、affine transformation、合同変換、複素数で回転、グリッドの回転、90 度回転、転置、三角関数、ラジアン、余弦定理
 - 種類：幾何、線形代数・行列
@@ -102,7 +103,7 @@ search:
 
 ## マンハッタン距離と 45 度回転（manhattan-chebyshev） {#manhattan-chebyshev}
 
-- id：`manhattan-chebyshev`　レベル：水　段階：stub　type：technique
+- id：`manhattan-chebyshev`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/geometry/manhattan-chebyshev/
 - 別名：45 度回転、マンハッタン距離、Manhattan distance、チェビシェフ距離、Chebyshev distance、L1 距離、L∞ 距離、u=x+y, v=x−y、絶対値を外す、斜めの番号
 - 種類：幾何、考察

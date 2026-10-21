@@ -1,0 +1,5 @@
+compilers: [g++-13, g++-15]
+expect: run
+cases:
+  - {input: "3\nalice 70\nbob 90\ncarol 50\n", output: "carol alice bob \nbob\n3,7 2,9 1,5 \n"}
+  - {input: "1\nx 0\n", output: "x \nx\n3,7 2,9 1,5 \n"}

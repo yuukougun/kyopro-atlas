@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 150" width="700" height="150" font-family="sans-serif">
+  <rect x="0" y="0" width="700" height="150" fill="#ffffff"/>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333333"/>
+    </marker>
+  </defs>
+  <g font-size="18" text-anchor="middle">
+    <!-- nodes: x centers 50, 150, 250, 350, 450, 550, 650 -->
+    <rect x="20" y="40" width="60" height="40" rx="6" fill="#e8f0fe" stroke="#1a56db" stroke-width="2"/>
+    <text x="50" y="66">360</text>
+    <rect x="120" y="40" width="60" height="40" rx="6" fill="#e8f0fe" stroke="#1a56db" stroke-width="2"/>
+    <text x="150" y="66">180</text>
+    <rect x="220" y="40" width="60" height="40" rx="6" fill="#e8f0fe" stroke="#1a56db" stroke-width="2"/>
+    <text x="250" y="66">90</text>
+    <rect x="320" y="40" width="60" height="40" rx="6" fill="#e8f0fe" stroke="#1a56db" stroke-width="2"/>
+    <text x="350" y="66">45</text>
+    <rect x="420" y="40" width="60" height="40" rx="6" fill="#e8f0fe" stroke="#1a56db" stroke-width="2"/>
+    <text x="450" y="66">15</text>
+    <rect x="520" y="40" width="60" height="40" rx="6" fill="#e8f0fe" stroke="#1a56db" stroke-width="2"/>
+    <text x="550" y="66">5</text>
+    <rect x="620" y="40" width="60" height="40" rx="6" fill="#f3f4f6" stroke="#6b7280" stroke-width="2" stroke-dasharray="5,3"/>
+    <text x="650" y="66">1</text>
+  </g>
+  <g stroke="#333333" stroke-width="2" marker-end="url(#arr)">
+    <line x1="80" y1="60" x2="118" y2="60"/>
+    <line x1="180" y1="60" x2="218" y2="60"/>
+    <line x1="280" y1="60" x2="318" y2="60"/>
+    <line x1="380" y1="60" x2="418" y2="60"/>
+    <line x1="480" y1="60" x2="518" y2="60"/>
+    <line x1="580" y1="60" x2="618" y2="60"/>
+  </g>
+  <g font-size="14" text-anchor="middle" fill="#333333">
+    <text x="100" y="30">÷2</text>
+    <text x="200" y="30">÷2</text>
+    <text x="300" y="30">÷2</text>
+    <text x="400" y="30">÷3</text>
+    <text x="500" y="30">÷3</text>
+    <text x="600" y="30">÷5</text>
+  </g>
+  <g font-size="13" text-anchor="middle" fill="#444444">
+    <text x="50" y="102">spf = 2</text>
+    <text x="150" y="102">spf = 2</text>
+    <text x="250" y="102">spf = 2</text>
+    <text x="350" y="102">spf = 3</text>
+    <text x="450" y="102">spf = 3</text>
+    <text x="550" y="102">spf = 5</text>
+    <text x="650" y="102">終わり</text>
+  </g>
+  <text x="350" y="135" font-size="15" text-anchor="middle" fill="#111111">360 = 2³ × 3² × 5（割った回数 6 回 ≤ log₂ 360 ≈ 8.5）</text>
+</svg>

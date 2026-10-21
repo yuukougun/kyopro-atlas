@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" font-family="sans-serif" font-size="14">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f4e9a"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="20" y="30" fill="#222">列の DP：i は i−1 と i−2 から決まる</text>
+<rect x="28" y="102" width="44" height="36" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="50" y="125" text-anchor="middle" fill="#222">0</text>
+<rect x="98" y="102" width="44" height="36" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="120" y="125" text-anchor="middle" fill="#222">1</text>
+<rect x="168" y="102" width="44" height="36" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="190" y="125" text-anchor="middle" fill="#222">2</text>
+<rect x="238" y="102" width="44" height="36" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="260" y="125" text-anchor="middle" fill="#222">3</text>
+<rect x="308" y="102" width="44" height="36" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="330" y="125" text-anchor="middle" fill="#222">4</text>
+<rect x="378" y="102" width="44" height="36" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="400" y="125" text-anchor="middle" fill="#222">5</text>
+<line x1="72" y1="120" x2="97" y2="120" stroke="#1f4e9a" stroke-width="1.5" marker-end="url(#ar)"/>
+<line x1="142" y1="120" x2="167" y2="120" stroke="#1f4e9a" stroke-width="1.5" marker-end="url(#ar)"/>
+<line x1="212" y1="120" x2="237" y2="120" stroke="#1f4e9a" stroke-width="1.5" marker-end="url(#ar)"/>
+<line x1="282" y1="120" x2="307" y2="120" stroke="#1f4e9a" stroke-width="1.5" marker-end="url(#ar)"/>
+<line x1="352" y1="120" x2="377" y2="120" stroke="#1f4e9a" stroke-width="1.5" marker-end="url(#ar)"/>
+<path d="M50,102 Q120.0,50 190,101" fill="none" stroke="#1f4e9a" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#ar)"/>
+<path d="M120,102 Q190.0,50 260,101" fill="none" stroke="#1f4e9a" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#ar)"/>
+<path d="M190,102 Q260.0,50 330,101" fill="none" stroke="#1f4e9a" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#ar)"/>
+<path d="M260,102 Q330.0,50 400,101" fill="none" stroke="#1f4e9a" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#ar)"/>
+<text x="20" y="190" fill="#555" font-size="13">実線：i → i+1、破線：i → i+2</text>
+<text x="20" y="212" fill="#555" font-size="13">辺はどれも添字が増える向き</text>
+<text x="20" y="234" fill="#555" font-size="13">→ 添字の昇順がトポロジカル順</text>
+<text x="440" y="30" fill="#222">グリッドの DP：右か下へ進む</text>
+<rect x="446" y="54" width="48" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="470" y="75" text-anchor="middle" fill="#222" font-size="13">(0,0)</text>
+<line x1="494" y1="70" x2="525" y2="70" stroke="#1f4e9a" stroke-width="1.5" marker-end="url(#ar)"/>
+<line x1="470" y1="86" x2="470" y2="123" stroke="#1f4e9a" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="526" y="54" width="48" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="550" y="75" text-anchor="middle" fill="#222" font-size="13">(0,1)</text>
+<line x1="574" y1="70" x2="605" y2="70" stroke="#1f4e9a" stroke-width="1.5" marker-end="url(#ar)"/>
+<line x1="550" y1="86" x2="550" y2="123" stroke="#1f4e9a" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="606" y="54" width="48" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="630" y="75" text-anchor="middle" fill="#222" font-size="13">(0,2)</text>
+<line x1="630" y1="86" x2="630" y2="123" stroke="#1f4e9a" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="446" y="124" width="48" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="470" y="145" text-anchor="middle" fill="#222" font-size="13">(1,0)</text>
+<line x1="494" y1="140" x2="525" y2="140" stroke="#1f4e9a" stroke-width="1.5" marker-end="url(#ar)"/>
+<line x1="470" y1="156" x2="470" y2="193" stroke="#1f4e9a" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="526" y="124" width="48" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="550" y="145" text-anchor="middle" fill="#222" font-size="13">(1,1)</text>
+<line x1="574" y1="140" x2="605" y2="140" stroke="#1f4e9a" stroke-width="1.5" marker-end="url(#ar)"/>
+<line x1="550" y1="156" x2="550" y2="193" stroke="#1f4e9a" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="606" y="124" width="48" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="630" y="145" text-anchor="middle" fill="#222" font-size="13">(1,2)</text>
+<line x1="630" y1="156" x2="630" y2="193" stroke="#1f4e9a" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="446" y="194" width="48" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="470" y="215" text-anchor="middle" fill="#222" font-size="13">(2,0)</text>
+<line x1="494" y1="210" x2="525" y2="210" stroke="#1f4e9a" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="526" y="194" width="48" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="550" y="215" text-anchor="middle" fill="#222" font-size="13">(2,1)</text>
+<line x1="574" y1="210" x2="605" y2="210" stroke="#1f4e9a" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="606" y="194" width="48" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="630" y="215" text-anchor="middle" fill="#222" font-size="13">(2,2)</text>
+<text x="440" y="250" fill="#555" font-size="13">(i, j) の辞書順（行ごとに左から）が</text>
+<text x="440" y="272" fill="#555" font-size="13">トポロジカル順になる</text>
+</svg>

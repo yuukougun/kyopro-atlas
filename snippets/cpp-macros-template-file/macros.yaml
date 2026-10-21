@@ -1,0 +1,5 @@
+compilers: [g++-13, g++-15]
+cases:
+  - {input: "3\n3 1 2\n", output: "11\n"}
+  - {input: "1\n7\n", output: "7\n"}
+  - {input: "0\n\n", output: "0\n"}

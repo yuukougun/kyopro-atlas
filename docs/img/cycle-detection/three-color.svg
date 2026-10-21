@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" width="640" height="300" font-family="sans-serif">
+  <rect width="640" height="300" fill="#ffffff"/>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#37474f"/>
+    </marker>
+    <marker id="arr-hit" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c62828"/>
+    </marker>
+  </defs>
+  <line x1="320" y1="10" x2="320" y2="290" stroke="#b0bec5" stroke-width="1"/>
+
+  <!-- 左：閉路ではない -->
+  <text x="160" y="26" font-size="14" text-anchor="middle" fill="#212121">訪問順 A → B → C（B は完了）</text>
+  <line x1="148.5" y1="78.7" x2="93.6" y2="167.8" stroke="#37474f" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="171.5" y1="78.7" x2="226.4" y2="167.8" stroke="#37474f" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="218" y1="190" x2="106" y2="190" stroke="#37474f" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arr)"/>
+  <circle cx="160" cy="60" r="22" fill="#ffe0b2" stroke="#e65100" stroke-width="2.5"/>
+  <circle cx="80" cy="190" r="22" fill="#cfd8dc" stroke="#455a64" stroke-width="1.5"/>
+  <circle cx="240" cy="190" r="22" fill="#ffe0b2" stroke="#e65100" stroke-width="2.5"/>
+  <text x="160" y="65" font-size="15" text-anchor="middle" fill="#212121">A</text>
+  <text x="80" y="195" font-size="15" text-anchor="middle" fill="#212121">B</text>
+  <text x="240" y="195" font-size="15" text-anchor="middle" fill="#212121">C</text>
+  <text x="200" y="60" font-size="12" fill="#e65100">探索中</text>
+  <text x="80" y="230" font-size="12" text-anchor="middle" fill="#455a64">完了</text>
+  <text x="240" y="230" font-size="12" text-anchor="middle" fill="#e65100">探索中</text>
+  <text x="160" y="180" font-size="12" text-anchor="middle" fill="#37474f">C → B（点線）</text>
+  <text x="160" y="262" font-size="13" text-anchor="middle" fill="#212121">完了した頂点への辺：閉路ではない</text>
+  <text x="160" y="281" font-size="12" text-anchor="middle" fill="#455a64">B から A へは戻れない</text>
+
+  <!-- 右：閉路 -->
+  <text x="480" y="26" font-size="14" text-anchor="middle" fill="#212121">訪問順 A → B → C（すべて探索中）</text>
+  <line x1="468.5" y1="78.7" x2="413.6" y2="167.8" stroke="#37474f" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="422" y1="190" x2="534" y2="190" stroke="#37474f" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="548.5" y1="171.3" x2="493.6" y2="82.2" stroke="#c62828" stroke-width="3.5" marker-end="url(#arr-hit)"/>
+  <circle cx="480" cy="60" r="22" fill="#ffe0b2" stroke="#e65100" stroke-width="2.5"/>
+  <circle cx="400" cy="190" r="22" fill="#ffe0b2" stroke="#e65100" stroke-width="2.5"/>
+  <circle cx="560" cy="190" r="22" fill="#ffe0b2" stroke="#e65100" stroke-width="2.5"/>
+  <text x="480" y="65" font-size="15" text-anchor="middle" fill="#212121">A</text>
+  <text x="400" y="195" font-size="15" text-anchor="middle" fill="#212121">B</text>
+  <text x="560" y="195" font-size="15" text-anchor="middle" fill="#212121">C</text>
+  <text x="400" y="230" font-size="12" text-anchor="middle" fill="#e65100">探索中</text>
+  <text x="560" y="230" font-size="12" text-anchor="middle" fill="#e65100">探索中</text>
+  <text x="440" y="60" font-size="12" text-anchor="end" fill="#e65100">探索中</text>
+  <text x="580" y="120" font-size="12" text-anchor="middle" fill="#c62828">C → A（太線）</text>
+  <text x="480" y="262" font-size="13" text-anchor="middle" fill="#212121">探索中の頂点への辺：閉路 A → B → C → A</text>
+  <text x="480" y="281" font-size="12" text-anchor="middle" fill="#455a64">C から親を A までたどって切り出す</text>
+</svg>

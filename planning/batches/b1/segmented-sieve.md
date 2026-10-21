@@ -1,0 +1,40 @@
+# segmented-sieve の報告と提案（工程8b・b1）
+
+- 書いたファイル：docs/math/segmented-sieve.md、snippets/segmented-sieve/sieve.{cpp,yaml}・factorize.{cpp,yaml}、docs/img/segmented-sieve/window.svg
+- front matter で変えたもの：complexity・stage（draft）・updated。sections に「計算量とメモリの見積もり（complexity）」「応用の型（patterns）」を足した（level はページと同じ）
+- 検査の結果：check_pages エラー 0・警告 0／fix_problems --check 直すべき行 0／check_snippets 期待と違う 0（2 本）／textlint エラー 0。警告 11 は、数式を含む文の長さ（要点・図の代替テキスト・計算量の式）と、台帳の summary から作る問題の行（160・176 行）
+- 使った出典：inamori.hateblo.jp（例題の方針）、qiita gotoki_no_joe・Shizen_Tota（例題の方針・実装の形）、kazun-kyopro（練習の方針）
+- 新しく noai を確かめたドメイン（どれも指定なし、2026-10-21）：inamori.hateblo.jp、satomshr.hatenablog.com、www.luogu.com.cn、scrapbox.io（後の 3 つは制約の確認のために見ただけで、本文の出典には入れていない）
+- SVG は手元に描画の道具がなく、目で確かめていない（座標は生成スクリプトで計算。幅 760）
+
+## 台帳への提案
+
+| 問題 ID | 項目 | 新しい値 | 根拠 |
+| --- | --- | --- | --- |
+| abc412_e | evidence | 追加：https://qiita.com/Shizen_Tota/items/c9ee7d07887c1dd0e935 | 区間を [L+1, R] にして篩い、素数の累乗を数える実装 |
+| abc412_e | summary | 「L ≤ n ≤ R の範囲で LCM(1, 2, …, n) がとる値の種類数を求める（L, R は大きく、R − L は小さい）。」 | 読点が 4 つで textlint の max-comma の警告が出るため（任意） |
+| abc227_g | summary | 「N 個から K 個を選ぶ組合せの数 C(N, K) の正の約数の個数を、998244353 で割った余りとして求める（N ≤ 10^12、K ≤ 10^6）。」 | 「で」の重複と文の長さの警告（任意） |
+
+## 用語集への提案
+
+- 素数の累乗｜prime-power｜p を素数、k を 1 以上の整数として p^k と書ける数。lcm(1, …, n) は n が素数の累乗のときだけ変わる（本文ではリンクしていない。必要なら）
+
+## front matter・catalog への提案
+
+- summary の計算量「O((R−L) log log R + √R)」は、√R までの素数の列挙の分を含めると O((R−L) log log R + √R log log R)。本文と complexity は後者で書いた。summary を合わせるか、そのままでよいかをメインが決める
+- signs に「区間の中の素数の累乗（lcm(1..n) が変わる位置）を数える」を足す案（例題 abc412_e のサイン）
+
+## 手引きへの提案
+
+- 数学のページで「区間は半開区間を基本」とあるが、区間篩のように問題が閉区間 [L, R] で書く手法は閉区間のまま書いた（冒頭で明記）。手引きに「題材が閉区間で定まる手法は閉区間でよい（明記する）」と足すとよい
+
+## 問題の補充の候補
+
+- 確認済みの問題は例題 1・練習 1（abc227_g は黄の diff 2207 で、水のページの練習としては難しい）。易しい練習（区間の素数を数えるだけのもの）の候補は、この作業では探していない（ap.py での検索も未実施）。ABC 以外（典型90・アルゴ数学・鉄則本・yukicoder の区間篩の問題）を問題の補充で探すとよい
+- Library Checker には区間篩そのものの問題はない（Enumerate Primes は 1 からの篩）。verify は空のまま
+
+## 未解決の点
+
+- abc412_e の正確な制約（R ≤ 10^14・R − L ≤ 10^7 と推測）は第三者の解説に書かれておらず確かめきれなかった（コードが 10^7 までの素数と長さ R − L + 1 の配列を使っていることからの推測）。本文には具体的な上限を書かず「区間が長く R も大きい」とした
+- 例題の解法の詳細で「区間篩で素数を数え、k ≥ 2 の累乗を別に列挙する」方式は、解説の方式（素数の累乗に印を付け直す）と同じ考えを、メモリを 1 バイト/要素に抑える形に書き直したもの。自分では提出して確かめていない
+- 使用量の目安：道具の呼び出し 約 35 回、Web 取得 7 回・検索 1 回

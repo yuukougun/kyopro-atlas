@@ -1,0 +1,7 @@
+compilers: [g++-13, g++-15]
+expect: run
+cases:
+  - {input: "25\n", output: "10 40 40\nge 30\nlt 20\nnext 40\n"}
+  - {input: "5\n", output: "10 40 40\nge 10\nnext 20\n"}
+  - {input: "40\n", output: "10 40 40\nge 40\nlt 30\n"}
+  - {input: "50\n", output: "10 40 40\nlt 40\n"}

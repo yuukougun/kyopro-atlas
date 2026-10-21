@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 200" width="500" height="200" font-family="sans-serif">
+<rect width="500" height="200" fill="#ffffff"/>
+<text x="60" y="107" font-size="18" fill="#222">T</text>
+<rect x="100" y="76" width="50" height="48" fill="#ffffff" stroke="#444" stroke-width="1.5"/>
+<text x="125.0" y="107" font-size="20" text-anchor="middle" fill="#222">a</text>
+<rect x="150" y="76" width="50" height="48" fill="#ffffff" stroke="#444" stroke-width="1.5"/>
+<text x="175.0" y="107" font-size="20" text-anchor="middle" fill="#222">b</text>
+<rect x="200" y="76" width="50" height="48" fill="#ffffff" stroke="#444" stroke-width="1.5"/>
+<text x="225.0" y="107" font-size="20" text-anchor="middle" fill="#222">c</text>
+<rect x="250" y="76" width="50" height="48" fill="#ffffff" stroke="#444" stroke-width="1.5"/>
+<text x="275.0" y="107" font-size="20" text-anchor="middle" fill="#222">d</text>
+<rect x="300" y="76" width="50" height="48" fill="#ffffff" stroke="#444" stroke-width="1.5"/>
+<text x="325.0" y="107" font-size="20" text-anchor="middle" fill="#222">e</text>
+<path d="M100,68 V54 H250 V68" fill="none" stroke="#1f4e9a" stroke-width="2.5"/>
+<text x="175.0" y="40" font-size="16" text-anchor="middle" fill="#1f4e9a">S_i で前から l_i = 3（実線）</text>
+<path d="M200,132 V146 H350 V132" fill="none" stroke="#b5462b" stroke-width="2.5" stroke-dasharray="7 4"/>
+<text x="275.0" y="172" font-size="16" text-anchor="middle" fill="#b5462b">S_j で後ろから r_j = 3（破線）</text>
+</svg>

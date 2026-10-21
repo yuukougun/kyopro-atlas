@@ -1,0 +1,5 @@
+compilers: [g++-13, g++-15]
+flags: "-std=gnu++20 -O2 -Wall -Wextra"
+expect: warning
+cases:
+  - {input: "", output: "12\n"}

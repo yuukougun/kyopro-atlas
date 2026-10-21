@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 330" font-family="sans-serif" font-size="14">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="20" y="28" fill="#222">m = 3、仕事 (a, b) = (1, 2), (1, 3), (2, 4), (3, 5), (3, 1)。後ろの日から決める</text>
+<text x="20" y="62" fill="#555" font-size="13">日（間に合う a）</text>
+<text x="170" y="62" fill="#555" font-size="13">新しく入れる b</text>
+<text x="330" y="62" fill="#555" font-size="13">ヒープ（大きい順）</text>
+<text x="560" y="62" fill="#555" font-size="13">選ぶ</text>
+<text x="650" y="62" fill="#555" font-size="13">合計</text>
+<line x1="20" y1="72" x2="700" y2="72" stroke="#888"/>
+<text x="20" y="115" fill="#222">日 2（a ≤ 1）</text>
+<rect x="170" y="95" width="36" height="30" fill="#fff4d6" stroke="#b7791f" stroke-dasharray="4 3"/>
+<text x="188" y="115" text-anchor="middle" fill="#222">2</text>
+<rect x="214" y="95" width="36" height="30" fill="#fff4d6" stroke="#b7791f" stroke-dasharray="4 3"/>
+<text x="232" y="115" text-anchor="middle" fill="#222">3</text>
+<rect x="330" y="95" width="36" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
+<text x="348" y="115" text-anchor="middle" fill="#222">3</text>
+<rect x="374" y="95" width="36" height="30" fill="#f2f2f2" stroke="#888" stroke-width="1"/>
+<text x="392" y="115" text-anchor="middle" fill="#222">2</text>
+<text x="422" y="115" fill="#555" font-size="12">← 先頭を取り出す</text>
+<text x="572" y="115" text-anchor="middle" fill="#1f4e9a" font-weight="bold">3</text>
+<text x="665" y="115" text-anchor="middle" fill="#222">3</text>
+<text x="330" y="148" fill="#555" font-size="12">残り 2 は次の日へ持ち越す</text>
+<text x="20" y="190" fill="#222">日 1（a ≤ 2）</text>
+<rect x="170" y="170" width="36" height="30" fill="#fff4d6" stroke="#b7791f" stroke-dasharray="4 3"/>
+<text x="188" y="190" text-anchor="middle" fill="#222">4</text>
+<rect x="330" y="170" width="36" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
+<text x="348" y="190" text-anchor="middle" fill="#222">4</text>
+<rect x="374" y="170" width="36" height="30" fill="#f2f2f2" stroke="#888" stroke-width="1"/>
+<text x="392" y="190" text-anchor="middle" fill="#222">2</text>
+<text x="572" y="190" text-anchor="middle" fill="#1f4e9a" font-weight="bold">4</text>
+<text x="665" y="190" text-anchor="middle" fill="#222">7</text>
+<text x="330" y="223" fill="#555" font-size="12">残り 2 は次の日へ持ち越す</text>
+<text x="20" y="265" fill="#222">日 0（a ≤ 3）</text>
+<rect x="170" y="245" width="36" height="30" fill="#fff4d6" stroke="#b7791f" stroke-dasharray="4 3"/>
+<text x="188" y="265" text-anchor="middle" fill="#222">5</text>
+<rect x="214" y="245" width="36" height="30" fill="#fff4d6" stroke="#b7791f" stroke-dasharray="4 3"/>
+<text x="232" y="265" text-anchor="middle" fill="#222">1</text>
+<rect x="330" y="245" width="36" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
+<text x="348" y="265" text-anchor="middle" fill="#222">5</text>
+<rect x="374" y="245" width="36" height="30" fill="#f2f2f2" stroke="#888" stroke-width="1"/>
+<text x="392" y="265" text-anchor="middle" fill="#222">2</text>
+<rect x="418" y="245" width="36" height="30" fill="#f2f2f2" stroke="#888" stroke-width="1"/>
+<text x="436" y="265" text-anchor="middle" fill="#222">1</text>
+<text x="572" y="265" text-anchor="middle" fill="#1f4e9a" font-weight="bold">5</text>
+<text x="665" y="265" text-anchor="middle" fill="#222">12</text>
+<text x="20" y="318" fill="#222">選ばれなかった報酬 2 と 1 はヒープに残る。答えは 3 + 4 + 5 = 12</text>
+</svg>

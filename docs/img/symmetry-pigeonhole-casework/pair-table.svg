@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 330" width="600" height="330" font-family="sans-serif">
+<defs><pattern id="h" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#888" stroke-width="2"/></pattern></defs>
+<rect width="600" height="330" fill="#ffffff"/>
+<text x="20" y="26" font-size="14" fill="#222">N = 4 の積 a_i a_j の表（全体の和 = (a_0 + a_1 + a_2 + a_3)^2）</text>
+<text x="96.0" y="60" font-size="13" text-anchor="middle" fill="#333">j = 0</text>
+<text x="60" y="101.0" font-size="13" text-anchor="end" fill="#333">i = 0</text>
+<text x="148.0" y="60" font-size="13" text-anchor="middle" fill="#333">j = 1</text>
+<text x="60" y="153.0" font-size="13" text-anchor="end" fill="#333">i = 1</text>
+<text x="200.0" y="60" font-size="13" text-anchor="middle" fill="#333">j = 2</text>
+<text x="60" y="205.0" font-size="13" text-anchor="end" fill="#333">i = 2</text>
+<text x="252.0" y="60" font-size="13" text-anchor="middle" fill="#333">j = 3</text>
+<text x="60" y="257.0" font-size="13" text-anchor="end" fill="#333">i = 3</text>
+<rect x="70" y="70" width="52" height="52" fill="url(#h)" stroke="#555" stroke-width="1"/>
+<text x="96.0" y="101.0" font-size="12" text-anchor="middle" fill="#111">a0a0</text>
+<rect x="122" y="70" width="52" height="52" fill="#9ec1ec" stroke="#555" stroke-width="1"/>
+<text x="148.0" y="101.0" font-size="12" text-anchor="middle" fill="#111">a0a1</text>
+<rect x="174" y="70" width="52" height="52" fill="#9ec1ec" stroke="#555" stroke-width="1"/>
+<text x="200.0" y="101.0" font-size="12" text-anchor="middle" fill="#111">a0a2</text>
+<rect x="226" y="70" width="52" height="52" fill="#9ec1ec" stroke="#555" stroke-width="1"/>
+<text x="252.0" y="101.0" font-size="12" text-anchor="middle" fill="#111">a0a3</text>
+<rect x="70" y="122" width="52" height="52" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="96.0" y="153.0" font-size="12" text-anchor="middle" fill="#111">a1a0</text>
+<rect x="122" y="122" width="52" height="52" fill="url(#h)" stroke="#555" stroke-width="1"/>
+<text x="148.0" y="153.0" font-size="12" text-anchor="middle" fill="#111">a1a1</text>
+<rect x="174" y="122" width="52" height="52" fill="#9ec1ec" stroke="#555" stroke-width="1"/>
+<text x="200.0" y="153.0" font-size="12" text-anchor="middle" fill="#111">a1a2</text>
+<rect x="226" y="122" width="52" height="52" fill="#9ec1ec" stroke="#555" stroke-width="1"/>
+<text x="252.0" y="153.0" font-size="12" text-anchor="middle" fill="#111">a1a3</text>
+<rect x="70" y="174" width="52" height="52" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="96.0" y="205.0" font-size="12" text-anchor="middle" fill="#111">a2a0</text>
+<rect x="122" y="174" width="52" height="52" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="148.0" y="205.0" font-size="12" text-anchor="middle" fill="#111">a2a1</text>
+<rect x="174" y="174" width="52" height="52" fill="url(#h)" stroke="#555" stroke-width="1"/>
+<text x="200.0" y="205.0" font-size="12" text-anchor="middle" fill="#111">a2a2</text>
+<rect x="226" y="174" width="52" height="52" fill="#9ec1ec" stroke="#555" stroke-width="1"/>
+<text x="252.0" y="205.0" font-size="12" text-anchor="middle" fill="#111">a2a3</text>
+<rect x="70" y="226" width="52" height="52" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="96.0" y="257.0" font-size="12" text-anchor="middle" fill="#111">a3a0</text>
+<rect x="122" y="226" width="52" height="52" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="148.0" y="257.0" font-size="12" text-anchor="middle" fill="#111">a3a1</text>
+<rect x="174" y="226" width="52" height="52" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="200.0" y="257.0" font-size="12" text-anchor="middle" fill="#111">a3a2</text>
+<rect x="226" y="226" width="52" height="52" fill="url(#h)" stroke="#555" stroke-width="1"/>
+<text x="252.0" y="257.0" font-size="12" text-anchor="middle" fill="#111">a3a3</text>
+<rect x="308" y="80" width="24" height="24" fill="#9ec1ec" stroke="#555"/>
+<text x="342" y="97" font-size="13" fill="#222">求める i &lt; j の部分（6 マス）</text>
+<rect x="308" y="120" width="24" height="24" fill="#ffffff" stroke="#555"/>
+<text x="342" y="137" font-size="13" fill="#222">i &gt; j の部分：転置すると同じ値</text>
+<rect x="308" y="160" width="24" height="24" fill="url(#h)" stroke="#555"/>
+<text x="342" y="177" font-size="13" fill="#222">対角 i = j：a_i^2 の和</text>
+<text x="308" y="220" font-size="13" fill="#222">i &lt; j の和 =（全体 − 対角）÷ 2</text>
+<text x="20" y="310" font-size="12" fill="#444">上の三角と下の三角は対角について対称なので値の和が等しい</text>
+</svg>

@@ -1,0 +1,14 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 図の例：木（4 頂点 3 辺）・なもり（4 頂点 4 辺）・孤立点・閉路 2 つ（4 頂点 5 辺）
+  - {input: "13 12\n1 2\n2 3\n2 4\n5 6\n6 7\n7 5\n7 8\n10 11\n11 12\n12 13\n13 10\n10 12\n", output: "4 4 2 1 1\n"}
+  # 孤立点だけ（1 頂点）
+  - {input: "1 0\n", output: "1 1 1 0 0\n"}
+  # 自己ループ 1 本は頂点数 1・辺数 1
+  - {input: "1 1\n1 1\n", output: "1 1 0 1 0\n"}
+  # 多重辺 2 本は長さ 2 の閉路
+  - {input: "2 2\n1 2\n2 1\n", output: "1 2 0 1 0\n"}
+  # 辺がない 3 頂点
+  - {input: "3 0\n", output: "3 1 3 0 0\n"}

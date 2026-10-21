@@ -13,7 +13,7 @@ search:
 
 ## Σ の変形（sigma-manipulation） {#sigma-manipulation}
 
-- id：`sigma-manipulation`　レベル：基礎　段階：stub　type：technique
+- id：`sigma-manipulation`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/sigma-manipulation/
 - 別名：シグマの変形、和の順序交換、総和の変形、二重和、添字の付け替え、order of summation
 - 種類：考察、数え上げ
@@ -28,10 +28,11 @@ search:
     - `sigma-manipulation#group-by-value` 値でまとめ直す（同じ値になる添字の個数を掛ける）：https://yuukougun.github.io/kyopro-atlas/math/sigma-manipulation/#group-by-value
     - `sigma-manipulation#formulas` よく使う和の公式と Σ_{i≠j} a_i a_j = (Σa)² − Σa²：https://yuukougun.github.io/kyopro-atlas/math/sigma-manipulation/#formulas
     - `sigma-manipulation#empty-sum` 空の和は 0・空の積は 1 と境界：https://yuukougun.github.io/kyopro-atlas/math/sigma-manipulation/#empty-sum
+    - `sigma-manipulation#next-steps` 上位の手法へのつながり：https://yuukougun.github.io/kyopro-atlas/math/sigma-manipulation/#next-steps
 
 ## 整数の割り算と余り（integer-division） {#integer-division}
 
-- id：`integer-division`　レベル：基礎　段階：stub　type：technique
+- id：`integer-division`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/integer-division/
 - 別名：floor_div、floor division、切り捨て除算、切り上げ、負の数の割り算、負の数の余り、オーバーフロー判定、割り算で比較
 - 種類：整数論
@@ -48,10 +49,11 @@ search:
     - `integer-division#count-multiples` 区間 [L, R] の K の倍数の個数と、x 以上で m で割って r 余る最小の数：https://yuukougun.github.io/kyopro-atlas/math/integer-division/#count-multiples
     - `integer-division#overflow` あふれる前に割り算で判定する（a > L / b）と \_\_int128 への逃げ方：https://yuukougun.github.io/kyopro-atlas/math/integer-division/#overflow
     - `integer-division#no-double` double で割らない（10^18 付近の誤差）：https://yuukougun.github.io/kyopro-atlas/math/integer-division/#no-double
+    - `integer-division#next-steps` 周期・mod・floor sum・商の列挙へのつながり：https://yuukougun.github.io/kyopro-atlas/math/integer-division/#next-steps
 
 ## mod の計算の基本（mod-arithmetic） {#mod-arithmetic}
 
-- id：`mod-arithmetic`　レベル：基礎　段階：stub　type：technique
+- id：`mod-arithmetic`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/mod-arithmetic/
 - 別名：剰余演算、余りを取る、合同式の計算、modular arithmetic、mod 998244353、mod 1e9+7
 - 種類：整数論
@@ -66,10 +68,11 @@ search:
     - `mod-arithmetic#division` 割り算はそのままではできない（→ 逆元）：https://yuukougun.github.io/kyopro-atlas/math/mod-arithmetic/#division
     - `mod-arithmetic#no-compare` mod を取った値で大小比較・最大値を考えてはいけない：https://yuukougun.github.io/kyopro-atlas/math/mod-arithmetic/#no-compare
     - `mod-arithmetic#why-998244353` なぜ 998244353 か（素数で、NTT に向く形）：https://yuukougun.github.io/kyopro-atlas/math/mod-arithmetic/#why-998244353
+    - `mod-arithmetic#next-steps` 繰り返し二乗法・逆元・modint へのつながり：https://yuukougun.github.io/kyopro-atlas/math/mod-arithmetic/#next-steps
 
 ## 繰り返し二乗法（mod-pow） {#mod-pow}
 
-- id：`mod-pow`　レベル：基礎　段階：stub　type：technique
+- id：`mod-pow`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/mod-pow/
 - 別名：二分累乗法、高速累乗、binary exponentiation、modpow、pow_mod、モノイドの累乗
 - 種類：整数論、ダブリング・分割統治
@@ -80,15 +83,16 @@ search:
     - 言い回し：a^N を m で割った余り
     - 言い回し：結合法則を満たす同じ操作を非常に多く繰り返す
 - 節：
-    - `mod-pow#binary-expansion` 指数を2進展開して必要な a&#94;(2&#94;k) だけ掛ける：https://yuukougun.github.io/kyopro-atlas/math/mod-pow/#binary-expansion
+    - `mod-pow#binary-expansion` 指数を 2 進展開して必要な a&#94;(2&#94;k) だけ掛ける：https://yuukougun.github.io/kyopro-atlas/math/mod-pow/#binary-expansion
     - `mod-pow#recursive-iterative` 再帰版と反復版：https://yuukougun.github.io/kyopro-atlas/math/mod-pow/#recursive-iterative
     - `mod-pow#monoid-power` 結合法則を満たす演算の累乗（行列・写像の合成）：https://yuukougun.github.io/kyopro-atlas/math/mod-pow/#monoid-power
     - `mod-pow#pitfalls` 落とし穴：指数を m で割ってしまう・0^0・掛け算のあふれ：https://yuukougun.github.io/kyopro-atlas/math/mod-pow/#pitfalls
     - `mod-pow#acl` ACL の pow_mod と modint::pow：https://yuukougun.github.io/kyopro-atlas/math/mod-pow/#acl
+    - `mod-pow#building-block` 繰り返し二乗法を部品にする手法：https://yuukougun.github.io/kyopro-atlas/math/mod-pow/#building-block
 
 ## 逆元と mod での割り算（mod-inverse） {#mod-inverse}
 
-- id：`mod-inverse`　レベル：基礎　段階：stub　type：technique
+- id：`mod-inverse`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/mod-inverse/
 - 別名：モジュラ逆元、modular inverse、modinv、inv_mod、mod での割り算、逆元表
 - 種類：整数論
@@ -108,7 +112,7 @@ search:
 
 ## modint（modint） {#modint}
 
-- id：`modint`　レベル：基礎　段階：stub　type：technique
+- id：`modint`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/modint/
 - 別名：static_modint、dynamic_modint、mint、modint998244353、modint1000000007
 - 種類：整数論、実装・C++
@@ -121,12 +125,13 @@ search:
     - `modint#static-dynamic` static_modint と dynamic_modint（set_mod）の使い分け：https://yuukougun.github.io/kyopro-atlas/math/modint/#static-dynamic
     - `modint#pitfalls` val() で取り出す・大小比較や「0 になったか」で元の値は分からない：https://yuukougun.github.io/kyopro-atlas/math/modint/#pitfalls
     - `modint#division` 割り算の条件（法が素数でなければ互いに素が必要）：https://yuukougun.github.io/kyopro-atlas/math/modint/#division
+    - `modint#connections` 上位の手法での使われ方（階乗の表・畳み込み・行列・期待値）：https://yuukougun.github.io/kyopro-atlas/math/modint/#connections
     - `modint#self-made` 自作するときの設計（加減の条件分岐・64bit の掛け算・pow と inv・入出力）：https://yuukougun.github.io/kyopro-atlas/math/modint/#self-made
     - `modint#acl-internals` ACL の中身（Barrett 還元・raw）：https://yuukougun.github.io/kyopro-atlas/math/modint/#acl-internals
 
 ## フェルマーの小定理と指数の mod（exponent-mod） {#exponent-mod}
 
-- id：`exponent-mod`　レベル：水　段階：stub　type：technique
+- id：`exponent-mod`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/exponent-mod/
 - 別名：指数の mod、オイラーの定理、Fermat's little theorem、Euler's theorem、指数を p−1 で割る、累乗の塔、tetration
 - 種類：整数論
@@ -144,7 +149,7 @@ search:
 
 ## 等比数列の和を mod で求める（geometric-series-mod） {#geometric-series-mod}
 
-- id：`geometric-series-mod`　レベル：基礎　段階：stub　type：technique
+- id：`geometric-series-mod`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/geometric-series-mod/
 - 別名：等比級数、geometric series、repunit、Σ A^i、同じ数字を並べた数
 - 種類：整数論、ダブリング・分割統治
@@ -159,10 +164,11 @@ search:
     - `geometric-series-mod#halving` 法が任意のとき：S(2k) = S(k)(1 + r^k) で半分に割る（水）：https://yuukougun.github.io/kyopro-atlas/math/geometric-series-mod/#halving
     - `geometric-series-mod#matrix` 2×2 行列 [[r, 1], [0, 1]] の累乗による別解（青）：https://yuukougun.github.io/kyopro-atlas/math/geometric-series-mod/#matrix
     - `geometric-series-mod#repeated-digits` 同じ数字列を並べた数は公比 10^d の等比数列の和になる：https://yuukougun.github.io/kyopro-atlas/math/geometric-series-mod/#repeated-digits
+    - `geometric-series-mod#next-steps` 行列累乗・ダブリング・位数へのつながり：https://yuukougun.github.io/kyopro-atlas/math/geometric-series-mod/#next-steps
 
 ## 桁と mod（digit-and-mod） {#digit-and-mod}
 
-- id：`digit-and-mod`　レベル：水　段階：stub　type：technique
+- id：`digit-and-mod`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/digit-and-mod/
 - 別名：九去法、倍数判定、divisibility rule、数の連結、10 倍して a を足す、部分文字列の余り、桁和
 - 種類：整数論、累積和・差分
@@ -180,7 +186,7 @@ search:
 
 ## 約数列挙と素数判定（divisor-enum） {#divisor-enum}
 
-- id：`divisor-enum`　レベル：基礎　段階：stub　type：technique
+- id：`divisor-enum`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/divisor-enum/
 - 別名：試し割り、trial division、divisor enumeration、primality test、√N まで調べる、約数の総和
 - 種類：整数論、全探索
@@ -200,7 +206,7 @@ search:
 
 ## 素因数分解とルジャンドルの公式（prime-factorization） {#prime-factorization}
 
-- id：`prime-factorization`　レベル：基礎　段階：stub　type：technique
+- id：`prime-factorization`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/prime-factorization/
 - 別名：prime factorization、Legendre's formula、階乗の素因数、末尾の 0 の個数、v_p(n!)
 - 種類：整数論
@@ -218,7 +224,7 @@ search:
 
 ## エラトステネスの篩（sieve-eratosthenes） {#sieve-eratosthenes}
 
-- id：`sieve-eratosthenes`　レベル：基礎　段階：stub　type：technique
+- id：`sieve-eratosthenes`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/sieve-eratosthenes/
 - 別名：篩、sieve of Eratosthenes、素数の列挙、素数表
 - 種類：整数論
@@ -229,14 +235,14 @@ search:
     - 言い回し：区間 [l, r] の素数の個数を何度も答える
 - 節：
     - `sieve-eratosthenes#procedure` 倍数を消す手順と、p² から消せば十分な理由：https://yuukougun.github.io/kyopro-atlas/math/sieve-eratosthenes/#procedure
-    - `sieve-eratosthenes#complexity` 計算量 O(N log log N) の根拠（素数の逆数和）と、調和級数の O(N log N) との違い：https://yuukougun.github.io/kyopro-atlas/math/sieve-eratosthenes/#complexity
+    - `sieve-eratosthenes#complexity` 計算量 O(N log log N) の根拠と、調和級数の O(N log N) との違い：https://yuukougun.github.io/kyopro-atlas/math/sieve-eratosthenes/#complexity
     - `sieve-eratosthenes#prefix-count` 篩の結果を累積和にして区間の素数を数える：https://yuukougun.github.io/kyopro-atlas/math/sieve-eratosthenes/#prefix-count
     - `sieve-eratosthenes#variants` 篩の変形（異なる素因数の個数を数える）：https://yuukougun.github.io/kyopro-atlas/math/sieve-eratosthenes/#variants
-    - `sieve-eratosthenes#memory` メモリの見積もり（vector&lt;bool>、10^8 まで）：https://yuukougun.github.io/kyopro-atlas/math/sieve-eratosthenes/#memory
+    - `sieve-eratosthenes#memory` メモリの見積もり（10^8 までは bit で持つ）：https://yuukougun.github.io/kyopro-atlas/math/sieve-eratosthenes/#memory
 
 ## 最小素因数の篩と線形篩（spf-sieve） {#spf-sieve}
 
-- id：`spf-sieve`　レベル：基礎　段階：stub　type：technique
+- id：`spf-sieve`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/spf-sieve/
 - 別名：osa_k 法、最小素因数、smallest prime factor、SPF、高速素因数分解、linear sieve
 - 種類：整数論
@@ -248,12 +254,13 @@ search:
 - 節：
     - `spf-sieve#build-and-factor` 最小素因数の表の作り方と、割るたびに半分以下になるので O(log n) で分解できる理由：https://yuukougun.github.io/kyopro-atlas/math/spf-sieve/#build-and-factor
     - `spf-sieve#many-numbers` 多数の数をまとめて分解する（試し割りとの比較）：https://yuukougun.github.io/kyopro-atlas/math/spf-sieve/#many-numbers
+    - `spf-sieve#after-factor` 分解した後の使い方（異なる素因数・指数・約数）：https://yuukougun.github.io/kyopro-atlas/math/spf-sieve/#after-factor
     - `spf-sieve#linear-sieve` 線形篩：各合成数を1回だけ作り、φ・μ の表を同時に作る（青）：https://yuukougun.github.io/kyopro-atlas/math/spf-sieve/#linear-sieve
     - `spf-sieve#memory` メモリの見積もり（int で 10^7 個は 40MB）：https://yuukougun.github.io/kyopro-atlas/math/spf-sieve/#memory
 
 ## 調和級数と倍数の列挙（harmonic-sum） {#harmonic-sum}
 
-- id：`harmonic-sum`　レベル：水　段階：stub　type：technique
+- id：`harmonic-sum`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/harmonic-sum/
 - 別名：harmonic series、N/1+N/2+…+N/N、O(N log N) の倍数ループ、倍数を回す
 - 種類：計算量、整数論
@@ -264,17 +271,17 @@ search:
     - 言い回し：各 d について、d の倍数である要素の個数や和を求める
     - 式の形：Σ_{d=1}^{N} Σ_{k=1}^{⌊N/d⌋} f(d, kd) の形の二重ループ
 - 節：
-    - `harmonic-sum#why-n-log-n` N/1 + N/2 + … + N/N ≈ N ln N の根拠（N = 10^6 で約 1.4×10^7）：https://yuukougun.github.io/kyopro-atlas/math/harmonic-sum/#why-n-log-n
+    - `harmonic-sum#why-n-log-n` M/1 + M/2 + … + M/M ≈ M ln M の根拠（M = 10^6 で約 1.4×10^7）：https://yuukougun.github.io/kyopro-atlas/math/harmonic-sum/#why-n-log-n
     - `harmonic-sum#mark-multiples` 値の倍数に印を付ける：https://yuukougun.github.io/kyopro-atlas/math/harmonic-sum/#mark-multiples
-    - `harmonic-sum#collect-multiples` 倍数を回して集める（d の倍数である要素の個数・和を全ての d について求める）：https://yuukougun.github.io/kyopro-atlas/math/harmonic-sum/#collect-multiples
+    - `harmonic-sum#collect-multiples` 倍数を回して集める（d の倍数である要素の個数・和）：https://yuukougun.github.io/kyopro-atlas/math/harmonic-sum/#collect-multiples
     - `harmonic-sum#decide-from-back` 倍数の箱を後ろから決める：https://yuukougun.github.io/kyopro-atlas/math/harmonic-sum/#decide-from-back
     - `harmonic-sum#quotient-ranges` 商が同じ範囲を倍数で区切って数える：https://yuukougun.github.io/kyopro-atlas/math/harmonic-sum/#quotient-ranges
-    - `harmonic-sum#vs-sieve` 素数の倍数だけをたどる篩（N log log N）との違い：https://yuukougun.github.io/kyopro-atlas/math/harmonic-sum/#vs-sieve
-    - `harmonic-sum#pitfalls` 落とし穴：同じ値が複数あると自分自身で割り切れる・ループの上限は値の最大：https://yuukougun.github.io/kyopro-atlas/math/harmonic-sum/#pitfalls
+    - `harmonic-sum#vs-sieve` 素数の倍数だけをたどる篩（M log log M）との違い：https://yuukougun.github.io/kyopro-atlas/math/harmonic-sum/#vs-sieve
+    - `harmonic-sum#pitfalls` 落とし穴：https://yuukougun.github.io/kyopro-atlas/math/harmonic-sum/#pitfalls
 
 ## 約数の個数の上界と高度合成数（divisor-count-bound） {#divisor-count-bound}
 
-- id：`divisor-count-bound`　レベル：水　段階：stub　type：technique
+- id：`divisor-count-bound`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/divisor-count-bound/
 - 別名：約数の個数の最大値、highly composite number、約数が多い数、素因数の種類数の上界
 - 種類：整数論、計算量
@@ -286,13 +293,13 @@ search:
 - 節：
     - `divisor-count-bound#table` 約数の個数・素因数の種類数の最大値の表（10&#94;3〜10&#94;18）：https://yuukougun.github.io/kyopro-atlas/math/divisor-count-bound/#table
     - `divisor-count-bound#pairs` 約数の組を全部試す見積もり（1344² ≈ 1.8×10^6）：https://yuukougun.github.io/kyopro-atlas/math/divisor-count-bound/#pairs
-    - `divisor-count-bound#pitfalls` 約数の個数を √N と見積もる誤りと、10^18 の約数の列挙自体に O(√N) かかる注意：https://yuukougun.github.io/kyopro-atlas/math/divisor-count-bound/#pitfalls
+    - `divisor-count-bound#pitfalls` 落とし穴（約数の個数を √N と見積もる・10^18 の約数の列挙に O(√N) かかる）：https://yuukougun.github.io/kyopro-atlas/math/divisor-count-bound/#pitfalls
     - `divisor-count-bound#divisor-dp` 約数を状態にした DP（約数の個数が少ないことを使う）（青）：https://yuukougun.github.io/kyopro-atlas/math/divisor-count-bound/#divisor-dp
     - `divisor-count-bound#enumerate-hcn` 高度合成数の列挙（小さい素数の指数が単調に減る形を DFS で）（黄）：https://yuukougun.github.io/kyopro-atlas/math/divisor-count-bound/#enumerate-hcn
 
 ## 区間篩（segmented-sieve） {#segmented-sieve}
 
-- id：`segmented-sieve`　レベル：水　段階：stub　type：technique
+- id：`segmented-sieve`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/segmented-sieve/
 - 別名：区間ふるい、segmented sieve、区間の素因数分解
 - 種類：整数論
@@ -305,10 +312,12 @@ search:
     - `segmented-sieve#why-sqrt` √R までの素数で十分な理由：https://yuukougun.github.io/kyopro-atlas/math/segmented-sieve/#why-sqrt
     - `segmented-sieve#first-multiple` 区間で最初の p の倍数 ⌈L/p⌉·p の求め方と、p 自身・L = 1 の扱い：https://yuukougun.github.io/kyopro-atlas/math/segmented-sieve/#first-multiple
     - `segmented-sieve#factorize-range` 区間の各数の素因数分解（√R までで割った残りは素数）：https://yuukougun.github.io/kyopro-atlas/math/segmented-sieve/#factorize-range
+    - `segmented-sieve#complexity` 計算量とメモリの見積もり：https://yuukougun.github.io/kyopro-atlas/math/segmented-sieve/#complexity
+    - `segmented-sieve#patterns` 応用の型：https://yuukougun.github.io/kyopro-atlas/math/segmented-sieve/#patterns
 
 ## 素因数の指数で考える（prime-exponent-vector） {#prime-exponent-vector}
 
-- id：`prime-exponent-vector`　レベル：基礎　段階：stub　type：technique
+- id：`prime-exponent-vector`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/prime-exponent-vector/
 - 別名：指数ベクトル、平方因子、squarefree、smooth 数、平方数の判定、素数ごとに独立
 - 種類：整数論
@@ -323,6 +332,7 @@ search:
     - `prime-exponent-vector#squarefree-kernel` 平方因子を除いた核で、積が平方数になる組を数える（0 の扱い）：https://yuukougun.github.io/kyopro-atlas/math/prime-exponent-vector/#squarefree-kernel
     - `prime-exponent-vector#huge-lcm` 巨大な lcm を指数の最大で持つ（水）：https://yuukougun.github.io/kyopro-atlas/math/prime-exponent-vector/#huge-lcm
     - `prime-exponent-vector#single-prime` 特定の素数（2 など）の指数だけを比べる（水）：https://yuukougun.github.io/kyopro-atlas/math/prime-exponent-vector/#single-prime
+    - `prime-exponent-vector#next-steps` XOR 基底・集合のハッシュ・半分全列挙へのつながり：https://yuukougun.github.io/kyopro-atlas/math/prime-exponent-vector/#next-steps
 
 ## オイラーの φ 関数（euler-phi） {#euler-phi}
 
@@ -360,7 +370,7 @@ search:
 
 ## GCD・LCM とユークリッドの互除法（gcd-lcm） {#gcd-lcm}
 
-- id：`gcd-lcm`　レベル：基礎　段階：stub　type：technique
+- id：`gcd-lcm`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/gcd-lcm/
 - 別名：最大公約数、最小公倍数、互除法、Euclidean algorithm、std::gcd、既約分数
 - 種類：整数論
@@ -376,10 +386,11 @@ search:
     - `gcd-lcm#lcm-overflow` lcm のオーバーフロー（割ってから掛ける）：https://yuukougun.github.io/kyopro-atlas/math/gcd-lcm/#lcm-overflow
     - `gcd-lcm#prefix-suffix-gcd` 左右からの累積 gcd（1つ除いた gcd）：https://yuukougun.github.io/kyopro-atlas/math/gcd-lcm/#prefix-suffix-gcd
     - `gcd-lcm#reduce-fraction` 分数・傾きを既約にして map のキーにする（水）：https://yuukougun.github.io/kyopro-atlas/math/gcd-lcm/#reduce-fraction
+    - `gcd-lcm#next-steps` 拡張ユークリッド・GCD の性質・素因数の指数へのつながり：https://yuukougun.github.io/kyopro-atlas/math/gcd-lcm/#next-steps
 
 ## 拡張ユークリッドの互除法と一次合同式（ext-gcd） {#ext-gcd}
 
-- id：`ext-gcd`　レベル：水　段階：stub　type：technique
+- id：`ext-gcd`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/ext-gcd/
 - 別名：拡張 Euclid、extended Euclidean algorithm、extgcd、ベズーの等式、Bézout's identity、ax+by=c、一次不定方程式、linear congruence
 - 種類：整数論
@@ -396,6 +407,7 @@ search:
     - `ext-gcd#general-solution` ax + by = c の解の存在条件と一般解 x = x0 + k·b/g：https://yuukougun.github.io/kyopro-atlas/math/ext-gcd/#general-solution
     - `ext-gcd#min-solution` 最小の非負解への調整と、係数のあふれの見積もり：https://yuukougun.github.io/kyopro-atlas/math/ext-gcd/#min-solution
     - `ext-gcd#linear-congruence` 一次合同式 ax ≡ b (mod m) と、gcd で割ること：https://yuukougun.github.io/kyopro-atlas/math/ext-gcd/#linear-congruence
+    - `ext-gcd#applications` 応用の型（円周の移動・倍数の余り・面積 1 の格子点・CRT）：https://yuukougun.github.io/kyopro-atlas/math/ext-gcd/#applications
     - `ext-gcd#acl` ACL では（inv_mod の内部の inv_gcd。拡張ユークリッドそのものは公開 API にない）：https://yuukougun.github.io/kyopro-atlas/math/ext-gcd/#acl
 
 ## GCD の性質（gcd-properties） {#gcd-properties}
@@ -419,7 +431,7 @@ search:
 
 ## 中国剰余定理（crt） {#crt}
 
-- id：`crt`　レベル：青　段階：stub　type：technique
+- id：`crt`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/crt/
 - 別名：CRT、Chinese remainder theorem、中国の剰余定理、Garner、連立合同式
 - 種類：整数論
@@ -433,6 +445,7 @@ search:
     - `crt#two-equations` 2式の CRT は一次不定方程式を1回解くこと：https://yuukougun.github.io/kyopro-atlas/math/crt/#two-equations
     - `crt#non-coprime` 法が互いに素でないときの解の存在条件：https://yuukougun.github.io/kyopro-atlas/math/crt/#non-coprime
     - `crt#many-equations` 多数の式を順に合わせる・lcm のあふれ：https://yuukougun.github.io/kyopro-atlas/math/crt/#many-equations
+    - `crt#applications` 応用の型（範囲を余りに直す・分けて戻す）：https://yuukougun.github.io/kyopro-atlas/math/crt/#applications
     - `crt#garner` Garner のアルゴリズム（巨大な解を mod で求める）（黄）：https://yuukougun.github.io/kyopro-atlas/math/crt/#garner
     - `crt#acl` ACL の crt（解がなければ (0, 0)）：https://yuukougun.github.io/kyopro-atlas/math/crt/#acl
 
@@ -499,7 +512,7 @@ search:
 
 ## N 進法（base-conversion） {#base-conversion}
 
-- id：`base-conversion`　レベル：基礎　段階：stub　type：technique
+- id：`base-conversion`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/base-conversion/
 - 別名：基数変換、base conversion、b 進法、n 進数、−2 進法、26 進、Horner 法
 - 種類：整数論
@@ -516,7 +529,7 @@ search:
 
 ## 商の列挙（floor-quotient-enum） {#floor-quotient-enum}
 
-- id：`floor-quotient-enum`　レベル：水　段階：stub　type：technique
+- id：`floor-quotient-enum`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/floor-quotient-enum/
 - 別名：商列挙、enumerate quotients、数論分块、√N 分割、floor でまとめる、約数の個数の和
 - 種類：整数論
@@ -586,7 +599,7 @@ search:
 
 ## 行列累乗（matrix-power） {#matrix-power}
 
-- id：`matrix-power`　レベル：青　段階：stub　type：technique
+- id：`matrix-power`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/matrix-power/
 - 別名：行列の累乗、matrix exponentiation、行列累乗 DP、遷移行列、隣接行列の累乗、min-plus 行列、(max,+) 行列、半環の行列
 - 種類：線形代数・行列、DP、ダブリング・分割統治

@@ -13,7 +13,7 @@ search:
 
 ## 言い換えの典型（reformulation） {#reformulation}
 
-- id：`reformulation`　レベル：水　段階：stub　type：thinking
+- id：`reformulation`　レベル：水　段階：draft　type：thinking
 - URL：https://yuukougun.github.io/kyopro-atlas/thinking/reformulation/
 - 別名：言い換え、式変形、条件の言い換え、独立に分解、x と y を分ける、変数変換、reformulation
 - 種類：考察
@@ -48,7 +48,7 @@ search:
 
 ## 主客転倒・寄与（contribution） {#contribution}
 
-- id：`contribution`　レベル：水　段階：stub　type：thinking
+- id：`contribution`　レベル：水　段階：draft　type：thinking
 - URL：https://yuukougun.github.io/kyopro-atlas/thinking/contribution/
 - 別名：主客転倒、寄与、貢献度、contribution technique、足された回数、各要素が何回数えられるか
 - 種類：考察、数え上げ
@@ -66,7 +66,7 @@ search:
 
 ## 余事象（complement） {#complement}
 
-- id：`complement`　レベル：基礎　段階：stub　type：thinking
+- id：`complement`　レベル：基礎　段階：draft　type：thinking
 - URL：https://yuukougun.github.io/kyopro-atlas/thinking/complement/
 - 別名：補集合、全体から引く、少なくとも 1 つ、2 条件の包除、complementary counting
 - 種類：考察、数え上げ
@@ -82,7 +82,7 @@ search:
 
 ## 偶奇に着目する（parity） {#parity}
 
-- id：`parity`　レベル：基礎　段階：stub　type：thinking
+- id：`parity`　レベル：基礎　段階：draft　type：thinking
 - URL：https://yuukougun.github.io/kyopro-atlas/thinking/parity/
 - 別名：パリティ、偶奇性、mod 2、市松模様、チェッカーボード、parity
 - 種類：考察
@@ -100,7 +100,7 @@ search:
 
 ## 不変量・単調に変わる量（invariant） {#invariant}
 
-- id：`invariant`　レベル：基礎　段階：stub　type：thinking
+- id：`invariant`　レベル：基礎　段階：draft　type：thinking
 - URL：https://yuukougun.github.io/kyopro-atlas/thinking/invariant/
 - 別名：モノバリアント、保存量、単調量、操作の順序によらない、invariant、monovariant
 - 種類：考察
@@ -110,9 +110,10 @@ search:
     - 言い回し：操作の前後で変わらない量（和・偶奇・余り）がありそう
 - 節：
     - `invariant#necessary-and-sufficient` 不変量で必要条件を見つけ、構築で十分性を示す：https://yuukougun.github.io/kyopro-atlas/thinking/invariant/#necessary-and-sufficient
-    - `invariant#monovariant` 単調量（必ず減る量）で回数の上界を得る：https://yuukougun.github.io/kyopro-atlas/thinking/invariant/#monovariant
+    - `invariant#monovariant` 単調量（必ず減る量）で操作回数を抑える：https://yuukougun.github.io/kyopro-atlas/thinking/invariant/#monovariant
     - `invariant#order-independence` 操作の順序によらないなら都合のよい順で考える：https://yuukougun.github.io/kyopro-atlas/thinking/invariant/#order-independence
     - `invariant#independent-parts` 独立な部分に分ける（奇数部分ごと）：https://yuukougun.github.io/kyopro-atlas/thinking/invariant/#independent-parts
+    - `invariant#connections` 偶奇・構築・ゲームとのつながり：https://yuukougun.github.io/kyopro-atlas/thinking/invariant/#connections
 
 ## 後ろから・逆順に考える（reverse-thinking） {#reverse-thinking}
 
@@ -132,7 +133,7 @@ search:
 
 ## 構築問題の考え方（construction） {#construction}
 
-- id：`construction`　レベル：基礎　段階：stub　type：thinking
+- id：`construction`　レベル：基礎　段階：draft　type：thinking
 - URL：https://yuukougun.github.io/kyopro-atlas/thinking/construction/
 - 別名：構築、constructive、1 つ出力せよ、上界と下界、必要条件と十分性、constructive algorithms
 - 種類：考察
@@ -149,7 +150,7 @@ search:
 
 ## 対称性・鳩の巣原理・場合分け（symmetry-pigeonhole-casework） {#symmetry-pigeonhole-casework}
 
-- id：`symmetry-pigeonhole-casework`　レベル：基礎　段階：stub　type：thinking
+- id：`symmetry-pigeonhole-casework`　レベル：基礎　段階：draft　type：thinking
 - URL：https://yuukougun.github.io/kyopro-atlas/thinking/symmetry-pigeonhole-casework/
 - 別名：対称性、鳩の巣原理、部屋割り論法、場合分け、pigeonhole principle、端の場合を分ける
 - 種類：考察

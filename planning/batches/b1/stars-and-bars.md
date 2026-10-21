@@ -1,0 +1,44 @@
+# stars-and-bars（重複組合せ）執筆の報告
+
+- 書いたファイル：docs/comb/stars-and-bars.md、snippets/stars-and-bars/count.{cpp,yaml}、docs/img/stars-and-bars/stars-bars.svg
+- front matter で変えたもの：complexity・stage（draft）・updated（2026-10-21 のまま）。sections は変えていない
+- 検査の結果：check_pages エラー 0・警告 0／fix_problems --check 直すべき行 0／check_snippets 期待と違う 0／textlint エラー 0・警告 21（数式を含む文の長さ・読点の数、二項係数の式を並べた文の助詞の重なり。規則の誤検出として残した）
+- 使った出典：drken（abc185_c・abc178_d・abc110_d の記事、Qiita「写像12相」を総整理）、kmjp（abc156_e）、E869120 の典型90 015 の解答例（GitHub）。すべて付録 B のドメインで、新しいドメインはない
+- 動く図は作っていない（visual は priority 2。静的な SVG で玉と仕切りの対応を 3 例示した）
+
+## 台帳への提案
+
+| 問題 ID | 項目 | 新しい値 | 根拠 |
+| --- | --- | --- | --- |
+| abc132_d | pages | `{id: stars-and-bars, role: practice}` を足す（本文の gaps の節で「青のかたまりを赤の間に入れる」型として説明済み） | https://drken1215.hatenablog.com/entry/2019/06/30/183400 （台帳の evidence。式 C(K−1, i−1)·C(N−K+1, i)） |
+| abc178_d | evidence | 重複組合せの式（長さ m ごとに C(S−2m−1, m−1)）は drken の記事には出てこない（記事は DP・累積和・行列累乗）。式は小さい値の全探索で確かめた。重複組合せで解く第三者の解説があれば evidence に足したい | https://drken1215.hatenablog.com/entry/2020/10/11/211000 |
+| abc156_e | approach（alternatives の stars-and-bars） | 「空き部屋の数 m（≤ min(k, n−1)）ごとに C(n, m)·C(n−1, m) を足す」と式まで書くとよい（残り n−m 部屋への配り方 C(n−1, m) は正の整数解）。k = 1 では全員が元の部屋にいる組を除く例外がある（n = 2 も偶奇で例外。全探索で確認）| https://kmjp.hatenablog.jp/entry/2020/02/23/0900 |
+| abc021_d | evidence | Qiita の記事は問題名と「重複組合せぴったり」の紹介だけで、問い・制約は書かれていない。問いを確かめられる解説（ブログ）を足したい | https://qiita.com/drken/items/f2ea4b58b0d21621bd51 |
+
+## 用語集への提案
+
+なし（本文で用語集へのリンクを使っていない）。足すなら次の 1 語。
+
+| 語 | anchor | 定義 |
+| --- | --- | --- |
+| 広義単調増加 | non-decreasing | 隣り合う項が $a_i \le a_{i+1}$ を満たす列。等号を許さない $a_i < a_{i+1}$ は狭義単調増加という |
+
+## 手引きへの提案
+
+- 二項係数の範囲外を 0 とする約束だけでは、重複組合せの $k = 0$（$\binom{n-1}{-1}$）で空の組 1 通りを落とす。comb の分野の書き方（§5）に「範囲外 0 の約束と空の組の扱い」を落とし穴の定番として挙げてよい
+- 見本のページの指示で同じファイル（binary-search-answer）が 2 回渡されていた。性質の違う 2 枚目（comb や ds など）を渡す想定なら指示の確認を
+
+## 問題の補充の候補
+
+| 問題 ID | 何を問うか | 裏付けの URL |
+| --- | --- | --- |
+| abc132_d | N 個の玉のうち K 個が青で、青を連続でまとめて回収する操作がちょうど i 回で済む並べ方を各 i で数える（青の分け方の正の整数解 × 赤の間に隣り合わないように置く） | https://drken1215.hatenablog.com/entry/2019/06/30/183400 （台帳で確認済み。pages に足すだけ） |
+
+abc319 以降（7 問体制）の問題は今回見つけていない（frequency_evidence の abc456_g は diff 2488 で発展。中身は第三者の解説で確かめていないので載せなかった）。
+
+## 未解決の点
+
+- abc156_e の制約（n ≥ 3、k ≥ 2 か）は evidence に書かれておらず確かめられなかった。本文の練習の方針では「n ≥ 3・k ≥ 2 のとき」と条件を付けて書いた
+- 練習問題 5 問のうち例題相当の基本形が abc185_c のみ。易しい練習（灰〜茶）があるとよいが、候補は見つけていない
+- 「上位の手法とのつながり」は独立の節にせず、使い分け（comparison）と落とし穴の中に入れた
+- 使用量の目安：道具の呼び出し約 25 回、Web 取得 6 回（＋題名の確認に curl 1 回）

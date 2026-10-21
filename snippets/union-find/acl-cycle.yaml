@@ -1,0 +1,12 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 三角形と孤立点
+  - {input: "4 3\n1 2\n2 3\n3 1\n", output: "1 2\n"}
+  # 辺がない
+  - {input: "3 0\n", output: "0 3\n"}
+  # 1 頂点に自己ループ
+  - {input: "1 1\n1 1\n", output: "1 1\n"}
+  # 多重辺
+  - {input: "2 3\n1 2\n2 1\n1 2\n", output: "2 1\n"}

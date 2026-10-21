@@ -1,0 +1,3 @@
+# -O2 では「may be used uninitialized」の警告が出る（-O0 では出ない）
+compilers: [g++-13, g++-15]
+expect: warning

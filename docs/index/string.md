@@ -13,7 +13,7 @@ search:
 
 ## 文字列の基本操作と辞書順（string-basics） {#string-basics}
 
-- id：`string-basics`　レベル：基礎　段階：stub　type：technique
+- id：`string-basics`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/string-basics/
 - 別名：辞書順、文字列の比較、文字の一斉置換、文字列の回転、連結して辞書順最小、lexicographical order
 - 種類：文字列
@@ -53,7 +53,7 @@ search:
 
 ## ローリングハッシュ（rolling-hash） {#rolling-hash}
 
-- id：`rolling-hash`　レベル：水　段階：stub　type：technique
+- id：`rolling-hash`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/rolling-hash/
 - 別名：ロリハ、多項式ハッシュ、Rabin-Karp、文字列のハッシュ、部分文字列のハッシュ、ハッシュのセグ木、rolling hash
 - 種類：文字列、ハッシュ・乱択
@@ -116,7 +116,7 @@ search:
 
 ## Z-algorithm（z-algorithm） {#z-algorithm}
 
-- id：`z-algorithm`　レベル：水　段階：stub　type：technique
+- id：`z-algorithm`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/z-algorithm/
 - 別名：Z 法、Z 配列、Z function、拡張 KMP、z_algorithm、各位置からの最長共通接頭辞、巡回シフト、A+A の技
 - 種類：文字列
@@ -134,12 +134,12 @@ search:
     - `z-algorithm#acl` ACL の z_algorithm（z[0] = n の流儀・vector&lt;int> にして区切りに −1）：https://yuukougun.github.io/kyopro-atlas/string/z-algorithm/#acl
     - `z-algorithm#cyclic-shift` 巡回シフト：A+A の中で B を探す（回転 N 回を二重に数えない）：https://yuukougun.github.io/kyopro-atlas/string/z-algorithm/#cyclic-shift
     - `z-algorithm#period` 周期の判定：p が周期 ⇔ z[p] = N − p：https://yuukougun.github.io/kyopro-atlas/string/z-algorithm/#period
+    - `z-algorithm#reverse` 反転と連結する：後ろからの一致と回文の接尾辞：https://yuukougun.github.io/kyopro-atlas/string/z-algorithm/#reverse
     - `z-algorithm#prefix-extension` S＋区切り＋T で各位置から S の接頭辞が何文字続くか（DP の材料）（黄）：https://yuukougun.github.io/kyopro-atlas/string/z-algorithm/#prefix-extension
-    - `z-algorithm#comparison` Z・KMP・ハッシュの使い分け：https://yuukougun.github.io/kyopro-atlas/string/z-algorithm/#comparison
 
 ## KMP 法と文字列の周期（kmp） {#kmp}
 
-- id：`kmp`　レベル：青　段階：stub　type：technique
+- id：`kmp`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/kmp/
 - 別名：KMP、MP 法、Knuth-Morris-Pratt、失敗関数、prefix function、π 配列、border、最小周期、繰り返し単位
 - 種類：文字列
@@ -159,11 +159,10 @@ search:
     - `kmp#string-period` 周期と繰り返し：最小周期 N − π[N−1]、N を割り切るときだけ繰り返しで書ける（弱周期定理）：https://yuukougun.github.io/kyopro-atlas/string/kmp/#string-period
     - `kmp#count-periodic` N の約数の周期を数える：約数ごとに数えて包除（メビウス）：https://yuukougun.github.io/kyopro-atlas/string/kmp/#count-periodic
     - `kmp#automaton` 照合オートマトン（状態×文字 → 次の状態）を表に埋める：https://yuukougun.github.io/kyopro-atlas/string/kmp/#automaton
-    - `kmp#comparison` Z との使い分け（ACL に KMP はなく、周期は z_algorithm でも判定できる）：https://yuukougun.github.io/kyopro-atlas/string/kmp/#comparison
 
 ## 回文の扱いと Manacher（palindrome） {#palindrome}
 
-- id：`palindrome`　レベル：水　段階：stub　type：technique
+- id：`palindrome`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/palindrome/
 - 別名：回文、palindrome、回文判定、Manacher's algorithm、回文半径、中心から伸ばす、両端から作る
 - 種類：文字列
@@ -181,11 +180,10 @@ search:
     - `palindrome#palindrome-path` グラフ上の回文：頂点の組を状態にして両端から BFS（出会う位置の偶奇）：https://yuukougun.github.io/kyopro-atlas/string/palindrome/#palindrome-path
     - `palindrome#build-outside-in` 外側から組み立てる（回文の式・約数）（青）：https://yuukougun.github.io/kyopro-atlas/string/palindrome/#build-outside-in
     - `palindrome#manacher` Manacher：各中心の最長回文半径を O(N) で（Z と同じく内側をコピーする）（青）：https://yuukougun.github.io/kyopro-atlas/string/palindrome/#manacher
-    - `palindrome#comparison` 回文判定の道具の使い分け（Manacher・ハッシュ・Z・回文木）：https://yuukougun.github.io/kyopro-atlas/string/palindrome/#comparison
 
 ## Trie（trie） {#trie}
 
-- id：`trie`　レベル：水　段階：stub　type：technique
+- id：`trie`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/trie/
 - 別名：トライ木、接頭辞木、prefix tree、全ペアの LCP の和
 - 種類：文字列、データ構造
@@ -249,7 +247,7 @@ search:
 
 ## Suffix Array と LCP 配列（suffix-array） {#suffix-array}
 
-- id：`suffix-array`　レベル：黄　段階：stub　type：technique
+- id：`suffix-array`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/suffix-array/
 - 別名：接尾辞配列、SA、LCP 配列、SA-IS、Kasai 法、suffix_array、lcp_array、異なる部分文字列の数
 - 種類：文字列、データ構造
@@ -262,12 +260,12 @@ search:
     - 言い回し：部分文字列を辞書順に並べたときの K 番目
     - 制約：|S| ≤ 5×10^5 程度で全部分文字列を扱う
 - 節：
-    - `suffix-array#definition` SA と LCP 配列の定義（ACL の suffix_array・lcp_array。lcp の長さは n−1）：https://yuukougun.github.io/kyopro-atlas/string/suffix-array/#definition
+    - `suffix-array#definition` SA と LCP 配列の定義（ACL の suffix_array・lcp_array。lcp の長さは N−1）：https://yuukougun.github.io/kyopro-atlas/string/suffix-array/#definition
     - `suffix-array#distinct-substrings` 異なる部分文字列の数 = N(N+1)/2 − Σlcp：https://yuukougun.github.io/kyopro-atlas/string/suffix-array/#distinct-substrings
     - `suffix-array#lcp-rmq` 任意の 2 接尾辞の LCP は LCP 配列の区間最小（Sparse Table）：https://yuukougun.github.io/kyopro-atlas/string/suffix-array/#lcp-rmq
     - `suffix-array#pattern-count` パターンの出現回数：SA 上の二分探索で範囲を求める：https://yuukougun.github.io/kyopro-atlas/string/suffix-array/#pattern-count
     - `suffix-array#lcp-sum` 全ペアの LCP の和：LCP 配列の上の単調スタック：https://yuukougun.github.io/kyopro-atlas/string/suffix-array/#lcp-sum
-    - `suffix-array#concat-separator` 複数の文字列を連結するときの区切り（vector&lt;int> と大きな値）：https://yuukougun.github.io/kyopro-atlas/string/suffix-array/#concat-separator
+    - `suffix-array#concat-separator` 複数の文字列を連結するときの区切り（int の列と大きな値）：https://yuukougun.github.io/kyopro-atlas/string/suffix-array/#concat-separator
     - `suffix-array#rotations` 回転どうしの比較：S+S+T+T の SA：https://yuukougun.github.io/kyopro-atlas/string/suffix-array/#rotations
     - `suffix-array#kth-substring` 部分文字列の辞書順 K 番目（発展）：https://yuukougun.github.io/kyopro-atlas/string/suffix-array/#kth-substring
     - `suffix-array#build-your-own` 自作するなら：ダブリング O(N log^2 N) → O(N log N) → SA-IS：https://yuukougun.github.io/kyopro-atlas/string/suffix-array/#build-your-own

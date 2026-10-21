@@ -1,0 +1,14 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 本文の図の例（頂点 2 は一度 1 になった後に 0 へ縮む）
+  - {input: "5 6 0\n0 1 1\n0 2 1\n0 3 0\n3 2 0\n1 4 0\n2 4 1\n", output: "0\n1\n0\n0\n1\n"}
+  # 頂点 1 つ・辺なし
+  - {input: "1 0 0\n", output: "0\n"}
+  # 届かない頂点がある
+  - {input: "3 1 0\n0 1 1\n", output: "0\n1\n-1\n"}
+  # 重み 0 の閉路があっても止まる
+  - {input: "3 4 0\n0 1 0\n1 0 0\n1 2 1\n2 1 0\n", output: "0\n0\n1\n"}
+  # 重み 1 の直通より、重み 0 の回り道が短い
+  - {input: "4 4 0\n0 3 1\n0 1 0\n1 2 0\n2 3 0\n", output: "0\n0\n0\n0\n"}

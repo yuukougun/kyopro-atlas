@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400" font-family="sans-serif">
+<rect x="0" y="0" width="640" height="400" fill="#ffffff"/>
+<text x="16" y="24" font-size="14" fill="#222">N = 60：指数が単調に減る形だけを DFS でたどる（括弧は約数の個数）</text>
+<text x="628" y="145" font-size="12" fill="#555" text-anchor="end">2 の指数</text>
+<text x="628" y="235" font-size="12" fill="#555" text-anchor="end">3 の指数</text>
+<text x="628" y="325" font-size="12" fill="#555" text-anchor="end">5 の指数</text>
+<line x1="290" y1="68.0" x2="60" y2="122.0" stroke="#666" stroke-width="1.5"/>
+<line x1="290" y1="68.0" x2="200" y2="122.0" stroke="#666" stroke-width="1.5"/>
+<line x1="290" y1="68.0" x2="330" y2="122.0" stroke="#666" stroke-width="1.5"/>
+<line x1="290" y1="68.0" x2="440" y2="122.0" stroke="#666" stroke-width="1.5"/>
+<line x1="290" y1="68.0" x2="540" y2="122.0" stroke="#666" stroke-width="1.5"/>
+<line x1="60" y1="158.0" x2="60" y2="212.0" stroke="#666" stroke-width="1.5"/>
+<line x1="200" y1="158.0" x2="165" y2="212.0" stroke="#666" stroke-width="1.5"/>
+<line x1="200" y1="158.0" x2="245" y2="212.0" stroke="#666" stroke-width="1.5"/>
+<line x1="330" y1="158.0" x2="330" y2="212.0" stroke="#666" stroke-width="1.5"/>
+<line x1="440" y1="158.0" x2="440" y2="212.0" stroke="#666" stroke-width="1.5"/>
+<line x1="60" y1="248.0" x2="60" y2="302.0" stroke="#666" stroke-width="1.5"/>
+<line x1="165" y1="248.0" x2="165" y2="302.0" stroke="#666" stroke-width="1.5"/>
+<rect x="257.0" y="32.0" width="66" height="36" rx="6" fill="#f4f6fb" stroke="#333" stroke-width="1.5"/>
+<text x="290" y="55" font-size="15" text-anchor="middle" fill="#111">1（1）</text>
+<rect x="27.0" y="122.0" width="66" height="36" rx="6" fill="#f4f6fb" stroke="#333" stroke-width="1.5"/>
+<text x="60" y="145" font-size="15" text-anchor="middle" fill="#111">2（2）</text>
+<rect x="167.0" y="122.0" width="66" height="36" rx="6" fill="#f4f6fb" stroke="#333" stroke-width="1.5"/>
+<text x="200" y="145" font-size="15" text-anchor="middle" fill="#111">4（3）</text>
+<rect x="297.0" y="122.0" width="66" height="36" rx="6" fill="#f4f6fb" stroke="#333" stroke-width="1.5"/>
+<text x="330" y="145" font-size="15" text-anchor="middle" fill="#111">8（4）</text>
+<rect x="407.0" y="122.0" width="66" height="36" rx="6" fill="#f4f6fb" stroke="#333" stroke-width="1.5"/>
+<text x="440" y="145" font-size="15" text-anchor="middle" fill="#111">16（5）</text>
+<rect x="507.0" y="122.0" width="66" height="36" rx="6" fill="#f4f6fb" stroke="#333" stroke-width="1.5"/>
+<text x="540" y="145" font-size="15" text-anchor="middle" fill="#111">32（6）</text>
+<rect x="27.0" y="212.0" width="66" height="36" rx="6" fill="#f4f6fb" stroke="#333" stroke-width="1.5"/>
+<text x="60" y="235" font-size="15" text-anchor="middle" fill="#111">6（4）</text>
+<rect x="132.0" y="212.0" width="66" height="36" rx="6" fill="#f4f6fb" stroke="#333" stroke-width="1.5"/>
+<text x="165" y="235" font-size="15" text-anchor="middle" fill="#111">12（6）</text>
+<rect x="212.0" y="212.0" width="66" height="36" rx="6" fill="#f4f6fb" stroke="#333" stroke-width="1.5"/>
+<text x="245" y="235" font-size="15" text-anchor="middle" fill="#111">36（9）</text>
+<rect x="297.0" y="212.0" width="66" height="36" rx="6" fill="#f4f6fb" stroke="#333" stroke-width="1.5"/>
+<text x="330" y="235" font-size="15" text-anchor="middle" fill="#111">24（8）</text>
+<rect x="407.0" y="212.0" width="66" height="36" rx="6" fill="#f4f6fb" stroke="#333" stroke-width="1.5"/>
+<text x="440" y="235" font-size="15" text-anchor="middle" fill="#111">48（10）</text>
+<rect x="27.0" y="302.0" width="66" height="36" rx="6" fill="#f4f6fb" stroke="#333" stroke-width="1.5"/>
+<text x="60" y="325" font-size="15" text-anchor="middle" fill="#111">30（8）</text>
+<rect x="132.0" y="302.0" width="66" height="36" rx="6" fill="#fff3c4" stroke="#333" stroke-width="3"/>
+<rect x="128.0" y="298.0" width="74" height="44" rx="8" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="165" y="325" font-size="15" text-anchor="middle" fill="#111">60（12）</text>
+<text x="290" y="320" font-size="12" fill="#555">8·3² = 72 や 2·3² = 18 は作らない</text>
+<text x="290" y="340" font-size="12" fill="#555">（60 を超える、または 3 の指数が 2 の指数より大きい）</text>
+<text x="16" y="385" font-size="13" fill="#222">最大は 60 = 2²·3·5 の 12 個（二重枠）。調べた数は 13 個</text>
+</svg>

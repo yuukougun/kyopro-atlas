@@ -1,0 +1,10 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 1-2-3 と 4-5、孤立点 6
+  - {input: "6 3\n1 2\n2 3\n4 5\n", output: "3 3\n"}
+  # 1 頂点・辺なし
+  - {input: "1 0\n", output: "1 1\n"}
+  # 自己ループと多重辺は連結性を変えない
+  - {input: "3 3\n1 1\n2 3\n3 2\n", output: "2 2\n"}

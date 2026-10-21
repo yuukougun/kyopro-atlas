@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 230" width="640" height="230" font-family="sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#222222"/>
+    </marker>
+  </defs>
+  <rect width="640" height="230" fill="#ffffff"/>
+  <g stroke="#222222" stroke-width="2" fill="none" marker-end="url(#arr)">
+    <line x1="82" y1="108" x2="218" y2="52"/>
+    <line x1="82" y1="132" x2="218" y2="178"/>
+  </g>
+  <line x1="240" y1="168" x2="240" y2="62" stroke="#b03030" stroke-width="3" stroke-dasharray="8 5" marker-end="url(#arr)"/>
+  <g font-size="16" fill="#222222" text-anchor="middle">
+    <text x="140" y="68">2</text>
+    <text x="140" y="178">3</text>
+  </g>
+  <text x="262" y="120" font-size="16" fill="#b03030">−2（負の辺）</text>
+  <g stroke="#222222" stroke-width="2" fill="#ffffff">
+    <circle cx="60" cy="120" r="22"/>
+    <circle cx="240" cy="40" r="22"/>
+    <circle cx="240" cy="190" r="22"/>
+  </g>
+  <g font-size="18" fill="#222222" text-anchor="middle" dominant-baseline="central">
+    <text x="60" y="120">s</text>
+    <text x="240" y="40">a</text>
+    <text x="240" y="190">b</text>
+  </g>
+  <g font-size="14" fill="#222222">
+    <text x="380" y="40">① s を取り出す：a = 2, b = 3</text>
+    <text x="380" y="70">② a（2）を取り出し確定</text>
+    <text x="380" y="100">③ b（3）を取り出す</text>
+    <text x="380" y="130">④ s→b→a は 3 − 2 = 1</text>
+    <text x="380" y="160" fill="#b03030">確定した a の 2 は誤り</text>
+  </g>
+</svg>

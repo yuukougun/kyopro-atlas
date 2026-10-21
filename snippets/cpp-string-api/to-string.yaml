@@ -1,0 +1,4 @@
+compilers: [g++-13, g++-15]
+expect: run
+cases:
+  - {input: "", output: "123!\n3.140000\n0.000000\n42\n12\n3000000000\nout_of_range\n"}

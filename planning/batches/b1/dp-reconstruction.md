@@ -1,0 +1,36 @@
+# dp-reconstruction の報告と提案（工程8b・b1）
+
+- 書いたファイル：docs/dp/dp-reconstruction.md、snippets/dp-reconstruction/{trace-back,lex-min,kth}.{cpp,yaml}、docs/img/dp-reconstruction/{trace-back,kth-counts}.svg
+- front matter で変えたもの：complexity・stage（draft）。updated は 2026-10-21 のまま。sections から `pitfalls`（落とし穴：使い回した表では辿れない・…）を外し、本文は手引き §13.1 の定型の見出し `## 落とし穴 {#pitfalls}` にした（anchor は本文に残っているので docs/index/dp.md のリンクは切れない。索引の生成で節の行が 1 つ減る）
+- 検査の結果：check_pages エラー 0・警告 0。check_snippets 3 片とも一致（ほかに Python の全列挙で 300〜500 個の乱択の入力と突き合わせた）。fix_problems --check 直すべき行 0。textlint エラー 0・警告 15（数式を含む文の長さ・数式の中の読点・折りたたみの見出しの行の誤検出が中心）
+- 使った出典：プロひろ（abc271_d）、E869120 の典型90 056 の解説画像（GitHub）、ikatakos の ABC146 メモ（F の解説部分だけ）・ABC202 メモ（D の解説部分だけ）、drken（EDPC F〜J・ARC081 E）、torus711（ABC369 F）。新しいドメインはない
+- 図：catalog の visual は static・priority 2 なので、静的な SVG 2 枚（表を終端からたどる図、K 番目で先頭ごとの個数の区間へ降りる図）にした。SVG を画像に変換する道具が手元になく、見た目は座標の計算でしか確かめていない（検証で表示を確かめてほしい）
+
+## 台帳への提案
+
+- abc146_f：summary・approach は本文と合う。本文の解法の詳細では「後ろからの DP（ゴールまでの手数）と前からの貪欲」と「ゴールから最も手前のマスへ戻る方法」が同じ列を与えることを書いた（後者は ikatakos のメモの方法）
+- typical90_bd：役割は example のままにしたが、ABC271 D と構造が同じ（毎回 2 択で和をちょうど S）で、例題としては重なる。practice に移すことを提案する（例題の数は 2 になる）
+- dp_f：difficulty がないので、練習の並びは EDPC の易しさの見当で abc202_d と abc369_f の間に置いた
+- 変更の必要な summary はない
+
+## 用語集への提案
+
+- なし（「状態」は既存の `#state` にリンクした）
+- 入れるなら：頭打ち｜saturation｜数え上げの値を上限 K で打ち切り min(K, ·) で持つこと。K 以上かどうかの比較の結果を変えずに溢れを防ぐ
+
+## 手引きへの提案
+
+- §13.1 の定型の節（落とし穴など）が、骨格の sections に長い題名で載っているページがある（このページの pitfalls）。骨格からは外すか、残すなら見出しを「落とし穴」にそろえるかを決めておくとよい
+- SVG の確認用に、手元で SVG を PNG にする道具（rsvg-convert など）があると、執筆者が見た目を確かめられる
+
+## 問題の補充の候補（問題ID・何を問うか・裏付けの URL）
+
+- tdpc_lexicographical（TDPC G. 辞書順、台帳で確認済み・diff なし）：文字列の空でない異なる部分列のうち辞書順で K 番目を求める。後ろからの個数の DP を K で頭打ちにして先頭から決める型で、K 番目の節のそのままの力試しになる。challenge として dp-reconstruction にも載せることを提案する。裏付け：https://drken1215.hatenablog.com/entry/2021/08/10/193121（研究ノート 02-dp の表にある URL。今回は開いていない）
+- abc363_d（ABC363 D. Palindromic Number、diff 975）：N 番目に小さい回文数。桁数ごとの個数で桁数を決めてから前半を決める（数え上げで K 番目を決める型の易しい例）。裏付け：https://programming-hiroba.com/abc363-d/（研究ノート 02-dp の表にある URL。今回は開いていない。台帳での状態は未確認）
+- abc319 以降で「選び方を出力する DP」の問題はこのページの台帳では abc369_f だけである。ほかの候補は今回見つけられなかった
+
+## 未解決の点
+
+- ABC146 F・典型90 056・ABC271 D の制約の具体的な値は、第三者の解説で確かめきれなかったので本文に書いていない（「O(NM) では間に合わない」も、ikatakos のメモが高速化の必要に触れていることを根拠にした一般的な書き方にとどめた）
+- ABC146 F の解法の詳細の「止まれるマスどうしでは x < y なら dist[x] ≥ dist[y]」と、ゴールから戻る方法が前からの貪欲と同じ列を与えることは、自分で証明した（解説の文章にはない）。検証で確かめてほしい
+- 練習の方針の ABC369 F は torus711 の解説（コインを (行, 列) で並べた列の広義単調増加の LIS と直前のコインの記録）に沿った

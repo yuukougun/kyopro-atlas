@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 310" width="540" height="310" font-family="sans-serif">
+<rect x="0" y="0" width="540" height="310" fill="#ffffff"/>
+<text x="12" y="28" font-size="16" fill="#333">操作</text>
+<text x="140" y="28" font-size="16" fill="#333">数列（負の数は灰色・太字）</text>
+<text x="428" y="28" font-size="16" fill="#333">負の数の個数</text>
+<text x="12" y="79" font-size="18" fill="#333">初め</text>
+<rect x="140" y="50" width="50" height="44" fill="#d0d0d0" stroke="#333" stroke-width="1.5"/>
+<text x="165" y="79" font-size="20" text-anchor="middle" font-weight="bold" fill="#111">-3</text>
+<rect x="196" y="50" width="50" height="44" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="221" y="79" font-size="20" text-anchor="middle" font-weight="normal" fill="#111">1</text>
+<rect x="252" y="50" width="50" height="44" fill="#d0d0d0" stroke="#333" stroke-width="1.5"/>
+<text x="277" y="79" font-size="20" text-anchor="middle" font-weight="bold" fill="#111">-4</text>
+<rect x="308" y="50" width="50" height="44" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="333" y="79" font-size="20" text-anchor="middle" font-weight="normal" fill="#111">1</text>
+<rect x="364" y="50" width="50" height="44" fill="#d0d0d0" stroke="#333" stroke-width="1.5"/>
+<text x="389" y="79" font-size="20" text-anchor="middle" font-weight="bold" fill="#111">-5</text>
+<text x="428" y="79" font-size="18" fill="#111">3（奇数）</text>
+<text x="12" y="147" font-size="18" fill="#333">1・2 を反転</text>
+<rect x="140" y="118" width="50" height="44" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="165" y="147" font-size="20" text-anchor="middle" font-weight="normal" fill="#111">3</text>
+<rect x="196" y="118" width="50" height="44" fill="#d0d0d0" stroke="#333" stroke-width="1.5"/>
+<text x="221" y="147" font-size="20" text-anchor="middle" font-weight="bold" fill="#111">-1</text>
+<rect x="252" y="118" width="50" height="44" fill="#d0d0d0" stroke="#333" stroke-width="1.5"/>
+<text x="277" y="147" font-size="20" text-anchor="middle" font-weight="bold" fill="#111">-4</text>
+<rect x="308" y="118" width="50" height="44" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="333" y="147" font-size="20" text-anchor="middle" font-weight="normal" fill="#111">1</text>
+<rect x="364" y="118" width="50" height="44" fill="#d0d0d0" stroke="#333" stroke-width="1.5"/>
+<text x="389" y="147" font-size="20" text-anchor="middle" font-weight="bold" fill="#111">-5</text>
+<rect x="136" y="114" width="114" height="52" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="428" y="147" font-size="18" fill="#111">3（奇数）</text>
+<text x="12" y="215" font-size="18" fill="#333">2・3 を反転</text>
+<rect x="140" y="186" width="50" height="44" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="165" y="215" font-size="20" text-anchor="middle" font-weight="normal" fill="#111">3</text>
+<rect x="196" y="186" width="50" height="44" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="221" y="215" font-size="20" text-anchor="middle" font-weight="normal" fill="#111">1</text>
+<rect x="252" y="186" width="50" height="44" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="277" y="215" font-size="20" text-anchor="middle" font-weight="normal" fill="#111">4</text>
+<rect x="308" y="186" width="50" height="44" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="333" y="215" font-size="20" text-anchor="middle" font-weight="normal" fill="#111">1</text>
+<rect x="364" y="186" width="50" height="44" fill="#d0d0d0" stroke="#333" stroke-width="1.5"/>
+<text x="389" y="215" font-size="20" text-anchor="middle" font-weight="bold" fill="#111">-5</text>
+<rect x="192" y="182" width="114" height="52" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="428" y="215" font-size="18" fill="#111">1（奇数）</text>
+<text x="12" y="283" font-size="18" fill="#333">4・5 を反転</text>
+<rect x="140" y="254" width="50" height="44" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="165" y="283" font-size="20" text-anchor="middle" font-weight="normal" fill="#111">3</text>
+<rect x="196" y="254" width="50" height="44" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="221" y="283" font-size="20" text-anchor="middle" font-weight="normal" fill="#111">1</text>
+<rect x="252" y="254" width="50" height="44" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="277" y="283" font-size="20" text-anchor="middle" font-weight="normal" fill="#111">4</text>
+<rect x="308" y="254" width="50" height="44" fill="#d0d0d0" stroke="#333" stroke-width="1.5"/>
+<text x="333" y="283" font-size="20" text-anchor="middle" font-weight="bold" fill="#111">-1</text>
+<rect x="364" y="254" width="50" height="44" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="389" y="283" font-size="20" text-anchor="middle" font-weight="normal" fill="#111">5</text>
+<rect x="304" y="250" width="114" height="52" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="428" y="283" font-size="18" fill="#111">1（奇数）</text>
+</svg>

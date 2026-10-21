@@ -1,0 +1,15 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 1 文字：作れない
+  - {input: "?\n", output: "0\n"}
+  - {input: "??\n", output: "1\n"}
+  # 先頭が ')' なら途中で負になる
+  - {input: ")(\n", output: "0\n"}
+  # 長さ 6 の正しい括弧列はカタラン数 C_3 = 5 個
+  - {input: "??????\n", output: "5\n"}
+  - {input: "(??)\n", output: "2\n"}
+  - {input: "(()\n", output: "0\n"}
+  # 長さ 20 はカタラン数 C_10 = 16796
+  - {input: "????????????????????\n", output: "16796\n"}

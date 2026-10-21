@@ -1,0 +1,3 @@
+compilers: [g++-13, g++-15]
+cases:
+  - {input: "", output: "abc\n"}

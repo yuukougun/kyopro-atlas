@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 330" font-family="sans-serif" font-size="14">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="24" y="28" fill="#222" font-weight="bold">A = abcd の回転は、A + A の長さ 4 の窓（開始位置 k = 0〜3）</text>
+<text x="94" y="96" text-anchor="end" fill="#222">A + A</text>
+<text x="132.0" y="64" text-anchor="middle" font-size="12" fill="#666">0</text>
+<rect x="110" y="68" width="44" height="44" fill="#ffffff" stroke="#333" stroke-width="1.5"/><text x="132.0" y="97" text-anchor="middle" font-size="20" fill="#222">a</text>
+<text x="176.0" y="64" text-anchor="middle" font-size="12" fill="#666">1</text>
+<rect x="154" y="68" width="44" height="44" fill="#ffffff" stroke="#333" stroke-width="1.5"/><text x="176.0" y="97" text-anchor="middle" font-size="20" fill="#222">b</text>
+<text x="220.0" y="64" text-anchor="middle" font-size="12" fill="#666">2</text>
+<rect x="198" y="68" width="44" height="44" fill="#ffffff" stroke="#333" stroke-width="1.5"/><text x="220.0" y="97" text-anchor="middle" font-size="20" fill="#222">c</text>
+<text x="264.0" y="64" text-anchor="middle" font-size="12" fill="#666">3</text>
+<rect x="242" y="68" width="44" height="44" fill="#ffffff" stroke="#333" stroke-width="1.5"/><text x="264.0" y="97" text-anchor="middle" font-size="20" fill="#222">d</text>
+<text x="308.0" y="64" text-anchor="middle" font-size="12" fill="#666">4</text>
+<rect x="286" y="68" width="44" height="44" fill="#eeeeee" stroke="#333" stroke-width="1.5"/><text x="308.0" y="97" text-anchor="middle" font-size="20" fill="#222">a</text>
+<text x="352.0" y="64" text-anchor="middle" font-size="12" fill="#666">5</text>
+<rect x="330" y="68" width="44" height="44" fill="#eeeeee" stroke="#333" stroke-width="1.5"/><text x="352.0" y="97" text-anchor="middle" font-size="20" fill="#222">b</text>
+<text x="396.0" y="64" text-anchor="middle" font-size="12" fill="#666">6</text>
+<rect x="374" y="68" width="44" height="44" fill="#eeeeee" stroke="#333" stroke-width="1.5"/><text x="396.0" y="97" text-anchor="middle" font-size="20" fill="#222">c</text>
+<text x="440.0" y="64" text-anchor="middle" font-size="12" fill="#666">7</text>
+<rect x="418" y="68" width="44" height="44" fill="#eeeeee" stroke="#333" stroke-width="1.5"/><text x="440.0" y="97" text-anchor="middle" font-size="20" fill="#222">d</text>
+<text x="374.0" y="132" text-anchor="middle" font-size="12" fill="#555">（後ろ半分は A の写し）</text>
+<line x1="113" y1="152" x2="283" y2="152" stroke="#1f4e9a" stroke-width="3"/>
+<line x1="113" y1="145" x2="113" y2="159" stroke="#1f4e9a" stroke-width="2"/>
+<line x1="283" y1="145" x2="283" y2="159" stroke="#1f4e9a" stroke-width="2"/>
+<text x="94" y="157" text-anchor="end" fill="#222">k = 0</text>
+<text x="296" y="157" fill="#1f4e9a">abcd</text>
+<line x1="157" y1="192" x2="327" y2="192" stroke="#1f4e9a" stroke-width="3"/>
+<line x1="157" y1="185" x2="157" y2="199" stroke="#1f4e9a" stroke-width="2"/>
+<line x1="327" y1="185" x2="327" y2="199" stroke="#1f4e9a" stroke-width="2"/>
+<text x="94" y="197" text-anchor="end" fill="#222">k = 1</text>
+<text x="340" y="197" fill="#1f4e9a">bcda</text>
+<line x1="201" y1="232" x2="371" y2="232" stroke="#1f4e9a" stroke-width="3"/>
+<line x1="201" y1="225" x2="201" y2="239" stroke="#1f4e9a" stroke-width="2"/>
+<line x1="371" y1="225" x2="371" y2="239" stroke="#1f4e9a" stroke-width="2"/>
+<text x="94" y="237" text-anchor="end" fill="#222">k = 2</text>
+<text x="384" y="237" fill="#1f4e9a">cdab</text>
+<line x1="245" y1="272" x2="415" y2="272" stroke="#1f4e9a" stroke-width="3"/>
+<line x1="245" y1="265" x2="245" y2="279" stroke="#1f4e9a" stroke-width="2"/>
+<line x1="415" y1="265" x2="415" y2="279" stroke="#1f4e9a" stroke-width="2"/>
+<text x="94" y="277" text-anchor="end" fill="#222">k = 3</text>
+<text x="428" y="277" fill="#1f4e9a">dabc</text>
+<text x="24" y="320" fill="#555" font-size="12">k = 4 の窓は k = 0 と同じ A になるので、開始位置は 0〜N−1 の N 通りだけ数える</text>
+</svg>

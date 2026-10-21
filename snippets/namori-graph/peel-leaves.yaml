@@ -1,0 +1,13 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # ページの図の 9 頂点の例：閉路 1-2-3-4、5・6 は 1 に、7・8・9 は 3 にぶら下がる
+  - {input: "9\n1 2\n2 3\n3 4\n4 1\n1 5\n5 6\n3 7\n7 8\n7 9\n4\n6 5\n6 8\n2 4\n8 9\n", output: "Yes\nNo\nNo\nYes\n"}
+  # 全体が閉路（木がない）
+  - {input: "3\n1 2\n2 3\n3 1\n2\n1 2\n3 3\n", output: "No\nYes\n"}
+  # 多重辺で長さ 2 の閉路ができる
+  - {input: "3\n1 2\n2 1\n2 3\n2\n2 3\n1 3\n", output: "Yes\nNo\n"}
+  # 自己ループで長さ 1 の閉路ができる（パスはすべて一意）
+  - {input: "1\n1 1\n1\n1 1\n", output: "Yes\n"}
+  - {input: "3\n1 1\n1 2\n2 3\n2\n1 3\n2 3\n", output: "Yes\nYes\n"}

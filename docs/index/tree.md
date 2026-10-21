@@ -31,7 +31,7 @@ search:
 
 ## 根付き木と走査順（tree-traversal） {#tree-traversal}
 
-- id：`tree-traversal`　レベル：基礎　段階：stub　type：technique
+- id：`tree-traversal`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-traversal/
 - 別名：木の探索、行きがけ順、帰りがけ順、DFS 順、BFS 順、部分木サイズ、深さ、preorder、postorder
 - 種類：木、グラフ探索
@@ -166,7 +166,7 @@ search:
 
 ## 木の直径と最遠点（tree-diameter） {#tree-diameter}
 
-- id：`tree-diameter`　レベル：水　段階：stub　type：technique
+- id：`tree-diameter`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-diameter/
 - 別名：直径、最遠点、離心数、double sweep、2 回の BFS、木の中心、半径、長鎖分解、long-path decomposition、tree diameter
 - 種類：木
@@ -255,7 +255,7 @@ search:
 
 ## 最小共通祖先（LCA）（lca） {#lca}
 
-- id：`lca`　レベル：青　段階：stub　type：technique
+- id：`lca`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/lca/
 - 別名：LCA、Lowest Common Ancestor、最近共通祖先、木のダブリング、K 個上の祖先、level ancestor
 - 種類：木、ダブリング・分割統治
@@ -312,7 +312,7 @@ search:
 
 ## オイラーツアー（euler-tour） {#euler-tour}
 
-- id：`euler-tour`　レベル：青　段階：stub　type：technique
+- id：`euler-tour`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/euler-tour/
 - 別名：Euler Tour、行きがけ順の番号付け、in/out、木の平坦化、tree flattening、辺のオイラーツアー、DFS 順で部分木を区間にする
 - 種類：木、区間クエリ

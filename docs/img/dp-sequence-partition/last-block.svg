@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 330" font-family="sans-serif" font-size="15">
+<rect width="640" height="330" fill="#ffffff"/>
+<text x="10" y="22" font-size="14" fill="#333">(1) 仕切りを入れる：a = (2, 1, 1, 1, 1, 2, 2, 1)、どの区間の和も 4 以下</text>
+<rect x="90" y="40" width="60" height="36" fill="#e3f2fd" stroke="#555"/>
+<rect x="150" y="40" width="60" height="36" fill="#e3f2fd" stroke="#555"/>
+<rect x="210" y="40" width="60" height="36" fill="#fff3e0" stroke="#555"/>
+<rect x="270" y="40" width="60" height="36" fill="#e8f5e9" stroke="#555"/>
+<rect x="330" y="40" width="60" height="36" fill="#e8f5e9" stroke="#555"/>
+<rect x="390" y="40" width="60" height="36" fill="#e8f5e9" stroke="#555"/>
+<rect x="450" y="40" width="60" height="36" fill="#fce4ec" stroke="#555"/>
+<rect x="510" y="40" width="60" height="36" fill="#fce4ec" stroke="#555"/>
+<text x="120.0" y="64" text-anchor="middle">2</text>
+<text x="180.0" y="64" text-anchor="middle">1</text>
+<text x="240.0" y="64" text-anchor="middle">1</text>
+<text x="300.0" y="64" text-anchor="middle">1</text>
+<text x="360.0" y="64" text-anchor="middle">1</text>
+<text x="420.0" y="64" text-anchor="middle">2</text>
+<text x="480.0" y="64" text-anchor="middle">2</text>
+<text x="540.0" y="64" text-anchor="middle">1</text>
+<text x="90" y="94" text-anchor="middle" font-size="12" fill="#555">0</text>
+<text x="150" y="94" text-anchor="middle" font-size="12" fill="#555">1</text>
+<text x="210" y="94" text-anchor="middle" font-size="12" fill="#555">2</text>
+<text x="270" y="94" text-anchor="middle" font-size="12" fill="#555">3</text>
+<text x="330" y="94" text-anchor="middle" font-size="12" fill="#555">4</text>
+<text x="390" y="94" text-anchor="middle" font-size="12" fill="#555">5</text>
+<text x="450" y="94" text-anchor="middle" font-size="12" fill="#555">6</text>
+<text x="510" y="94" text-anchor="middle" font-size="12" fill="#555">7</text>
+<text x="570" y="94" text-anchor="middle" font-size="12" fill="#555">8</text>
+<line x1="210" y1="32" x2="210" y2="84" stroke="#c62828" stroke-width="4"/>
+<line x1="270" y1="32" x2="270" y2="84" stroke="#c62828" stroke-width="4"/>
+<line x1="450" y1="32" x2="450" y2="84" stroke="#c62828" stroke-width="4"/>
+<text x="10" y="64" font-size="13">列</text>
+<text x="10" y="94" font-size="12" fill="#555">境界</text>
+<text x="10" y="116" font-size="13" fill="#333">赤の太線が仕切り（境界 1〜7 に置ける）。区間は [0, 2)・[2, 3)・[3, 6)・[6, 8)</text>
+<text x="10" y="138" font-size="14" fill="#333">(2) dp[6] は、最後の区間 [j, 6) の和が 4 以下になる j の dp[j] の和</text>
+<rect x="64.0" y="170" width="52" height="34" fill="#f5f5f5" stroke="#555"/>
+<text x="90" y="192" text-anchor="middle" font-size="13">dp[0]</text>
+<rect x="124.0" y="170" width="52" height="34" fill="#f5f5f5" stroke="#555"/>
+<text x="150" y="192" text-anchor="middle" font-size="13">dp[1]</text>
+<rect x="184.0" y="170" width="52" height="34" fill="#f5f5f5" stroke="#555"/>
+<text x="210" y="192" text-anchor="middle" font-size="13">dp[2]</text>
+<rect x="244.0" y="170" width="52" height="34" fill="#ffe082" stroke="#555"/>
+<text x="270" y="192" text-anchor="middle" font-size="13">dp[3]</text>
+<rect x="304.0" y="170" width="52" height="34" fill="#ffe082" stroke="#555"/>
+<text x="330" y="192" text-anchor="middle" font-size="13">dp[4]</text>
+<rect x="364.0" y="170" width="52" height="34" fill="#ffe082" stroke="#555"/>
+<text x="390" y="192" text-anchor="middle" font-size="13">dp[5]</text>
+<rect x="424.0" y="170" width="52" height="34" fill="#90caf9" stroke="#555"/>
+<text x="450" y="192" text-anchor="middle" font-size="13">dp[6]</text>
+<rect x="484.0" y="170" width="52" height="34" fill="#f5f5f5" stroke="#555" stroke-dasharray="4 3"/>
+<text x="510" y="192" text-anchor="middle" font-size="13">dp[7]</text>
+<rect x="544.0" y="170" width="52" height="34" fill="#f5f5f5" stroke="#555" stroke-dasharray="4 3"/>
+<text x="570" y="192" text-anchor="middle" font-size="13">dp[8]</text>
+<text x="10" y="192" font-size="13">表</text>
+<path d="M244.0 212 L244.0 222 L416.0 222 L416.0 212" fill="none" stroke="#8d6e00" stroke-width="2"/>
+<text x="330.0" y="242" text-anchor="middle" font-size="13" fill="#5d4400">遷移元 j = 3, 4, 5（黄）</text>
+<text x="330.0" y="260" text-anchor="middle" font-size="12" fill="#5d4400">最後の区間の和 4・3・2</text>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#1565c0"/></marker></defs>
+<path d="M330 168 C 366.0 140, 426.0 140, 450 168" fill="none" stroke="#1565c0" stroke-width="2" marker-end="url(#ar)"/>
+<text x="150" y="242" text-anchor="middle" font-size="12" fill="#555">j = 2 は和 5 で不可</text>
+<text x="10" y="295" font-size="13" fill="#333">dp[6] = dp[3] + dp[4] + dp[5] は、累積和 T を使えば T[6] − T[3] の 1 回の引き算で求まる</text>
+</svg>

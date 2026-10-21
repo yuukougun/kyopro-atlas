@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 280" width="520" height="280" font-family="sans-serif">
+  <rect x="0" y="0" width="520" height="280" fill="#ffffff"/>
+  <defs>
+    <pattern id="hatch2" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="8" height="8" fill="#dbeafe"/>
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#3b82f6" stroke-width="2"/>
+    </pattern>
+    <clipPath id="clipA">
+      <ellipse cx="200" cy="150" rx="120" ry="85"/>
+    </clipPath>
+  </defs>
+  <rect x="20" y="30" width="480" height="235" fill="url(#hatch2)" stroke="#1f2937" stroke-width="2"/>
+  <text x="26" y="22" font-size="15" fill="#1f2937">全体 U：10<tspan baseline-shift="super" font-size="10">N</tspan> 通り（斜線の部分 ＝ 0 と 9 をどちらも含む）</text>
+  <ellipse cx="200" cy="150" rx="120" ry="85" fill="#ffffff" stroke="none"/>
+  <ellipse cx="330" cy="150" rx="120" ry="85" fill="#ffffff" stroke="none"/>
+  <ellipse cx="330" cy="150" rx="120" ry="85" fill="#e5e7eb" stroke="none" clip-path="url(#clipA)"/>
+  <ellipse cx="200" cy="150" rx="120" ry="85" fill="none" stroke="#1f2937" stroke-width="2" stroke-dasharray="6 4"/>
+  <ellipse cx="330" cy="150" rx="120" ry="85" fill="none" stroke="#1f2937" stroke-width="2" stroke-dasharray="2 3"/>
+  <text x="140" y="134" font-size="15" text-anchor="middle" fill="#1f2937">A：0 を</text>
+  <text x="140" y="154" font-size="15" text-anchor="middle" fill="#1f2937">含まない</text>
+  <text x="140" y="174" font-size="15" text-anchor="middle" fill="#1f2937">（9<tspan baseline-shift="super" font-size="10">N</tspan>）</text>
+  <text x="390" y="134" font-size="15" text-anchor="middle" fill="#1f2937">B：9 を</text>
+  <text x="390" y="154" font-size="15" text-anchor="middle" fill="#1f2937">含まない</text>
+  <text x="390" y="174" font-size="15" text-anchor="middle" fill="#1f2937">（9<tspan baseline-shift="super" font-size="10">N</tspan>）</text>
+  <text x="265" y="128" font-size="15" text-anchor="middle" fill="#1f2937">A ∩ B</text>
+  <text x="265" y="148" font-size="15" text-anchor="middle" fill="#1f2937">どちらも</text>
+  <text x="265" y="168" font-size="15" text-anchor="middle" fill="#1f2937">含まない</text>
+  <text x="265" y="188" font-size="15" text-anchor="middle" fill="#1f2937">（8<tspan baseline-shift="super" font-size="10">N</tspan>）</text>
+</svg>

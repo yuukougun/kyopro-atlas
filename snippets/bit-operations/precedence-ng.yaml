@@ -1,0 +1,6 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: warning
+cases:
+  - {input: "4\n", output: "odd\neven\n"}
+  - {input: "3\n", output: "odd\nodd\n"}

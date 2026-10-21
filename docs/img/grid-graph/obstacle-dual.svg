@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 392" font-family="sans-serif">
+<rect width="520" height="392" fill="#ffffff"/>
+<rect x="90" y="50" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="130" y="50" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="170" y="50" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="210" y="50" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="250" y="50" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="290" y="50" width="40" height="40" fill="#555555" stroke="#999" stroke-width="1"/>
+<rect x="330" y="50" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="370" y="50" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="90" y="90" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="130" y="90" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="170" y="90" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="210" y="90" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="250" y="90" width="40" height="40" fill="#555555" stroke="#999" stroke-width="1"/>
+<rect x="290" y="90" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="330" y="90" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="370" y="90" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="90" y="130" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="130" y="130" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="170" y="130" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="210" y="130" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="250" y="130" width="40" height="40" fill="#555555" stroke="#999" stroke-width="1"/>
+<rect x="290" y="130" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="330" y="130" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="370" y="130" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="90" y="170" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="130" y="170" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="170" y="170" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="210" y="170" width="40" height="40" fill="#555555" stroke="#999" stroke-width="1"/>
+<rect x="250" y="170" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="290" y="170" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="330" y="170" width="40" height="40" fill="#555555" stroke="#999" stroke-width="1"/>
+<rect x="370" y="170" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="90" y="210" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="130" y="210" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="170" y="210" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="210" y="210" width="40" height="40" fill="#555555" stroke="#999" stroke-width="1"/>
+<rect x="250" y="210" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="290" y="210" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="330" y="210" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="370" y="210" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="90" y="250" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="130" y="250" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="170" y="250" width="40" height="40" fill="#555555" stroke="#999" stroke-width="1"/>
+<rect x="210" y="250" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="250" y="250" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="290" y="250" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="330" y="250" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<rect x="370" y="250" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<text x="110.0" y="76.0" font-size="16" text-anchor="middle" fill="#111">S</text>
+<text x="390.0" y="276.0" font-size="16" text-anchor="middle" fill="#111">G</text>
+<polyline points="190.0,270.0 230.0,230.0 230.0,190.0 270.0,150.0 270.0,110.0 310.0,70.0" fill="none" stroke="#ffffff" stroke-width="3"/>
+<circle cx="190.0" cy="270.0" r="4" fill="#ffffff"/>
+<circle cx="230.0" cy="230.0" r="4" fill="#ffffff"/>
+<circle cx="230.0" cy="190.0" r="4" fill="#ffffff"/>
+<circle cx="270.0" cy="150.0" r="4" fill="#ffffff"/>
+<circle cx="270.0" cy="110.0" r="4" fill="#ffffff"/>
+<circle cx="310.0" cy="70.0" r="4" fill="#ffffff"/>
+<polyline points="90,50 90,290 410,290" fill="none" stroke="#000" stroke-width="5"/>
+<polyline points="90,50 410,50 410,290" fill="none" stroke="#000" stroke-width="5" stroke-dasharray="10 6"/>
+<text x="80" y="170.0" font-size="14" text-anchor="end" fill="#111">A</text>
+<text x="250.0" y="314" font-size="14" text-anchor="middle" fill="#111">A（左端・下端：実線）</text>
+<text x="250.0" y="36" font-size="14" text-anchor="middle" fill="#111">B（上端・右端：点線）</text>
+<text x="420" y="170.0" font-size="14" fill="#111">B</text>
+<text x="20" y="342" font-size="13" fill="#333">斜めを含めてつながる障害物の鎖（白い線）が</text>
+<text x="20" y="360" font-size="13" fill="#333">下端（A）と上端（B）を結ぶので、S から G へは行けない</text>
+<text x="20" y="378" font-size="13" fill="#333">鎖に加わらない障害物（右の 1 個）は判定に関係しない</text>
+</svg>

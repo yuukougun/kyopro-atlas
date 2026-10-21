@@ -1,0 +1,11 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "1 7\n7\nT\n", output: "T\n"}
+  - {input: "1 7\n7\nA\n", output: "T\n"}
+  - {input: "1 1\n5\nA\n", output: "T\n"}
+  - {input: "2 7\n35\nTA\n", output: "A\n"}
+  - {input: "4 3\n1212\nATTT\n", output: "T\n"}
+  - {input: "5 7\n12345\nATATA\n", output: "A\n"}
+  - {input: "6 13\n931862\nTTAATA\n", output: "A\n"}

@@ -1,0 +1,8 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 1 個・偶数個（小さい方の中央値）・同じ値・負の数
+  - {input: "1\n7\n", output: "7 0\n"}
+  - {input: "5\n4\n1\n8\n3\n6\n", output: "4 0\n1 3\n4 7\n3 8\n4 10\n"}
+  - {input: "4\n2\n2\n-3\n2\n", output: "2 0\n2 0\n2 5\n2 5\n"}

@@ -13,7 +13,7 @@ search:
 
 ## 和・積の法則と順列・組合せ（counting-basics） {#counting-basics}
 
-- id：`counting-basics`　レベル：基礎　段階：stub　type：technique
+- id：`counting-basics`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/counting-basics/
 - 別名：和の法則、積の法則、円順列、重複順列、nPr、塗り分けの数、rule of product
 - 種類：数え上げ
@@ -31,7 +31,7 @@ search:
 
 ## 二項係数の意味と性質（binomial-coefficient） {#binomial-coefficient}
 
-- id：`binomial-coefficient`　レベル：基礎　段階：stub　type：technique
+- id：`binomial-coefficient`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/binomial-coefficient/
 - 別名：二項係数、nCr、パスカルの三角形、辞書順 K 番目の組合せ、組合せの順位、binomial coefficient
 - 種類：数え上げ
@@ -50,7 +50,7 @@ search:
 
 ## 二項係数の前計算（binomial-precompute） {#binomial-precompute}
 
-- id：`binomial-precompute`　レベル：基礎　段階：stub　type：technique
+- id：`binomial-precompute`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/binomial-precompute/
 - 別名：nCr mod p、階乗と逆階乗の表、fact と ifact、逆階乗、Combination テーブル、任意 mod の二項係数、Lucas の定理、nCr mod 2、Lucas's theorem
 - 種類：数え上げ、整数論
@@ -74,7 +74,7 @@ search:
 
 ## 重複組合せ（stars-and-bars） {#stars-and-bars}
 
-- id：`stars-and-bars`　レベル：基礎　段階：stub　type：technique
+- id：`stars-and-bars`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/stars-and-bars/
 - 別名：玉と仕切り、H(n,k)、非負整数解の個数、隣り合わない選び方、stars and bars
 - 種類：数え上げ
@@ -93,7 +93,7 @@ search:
 
 ## 格子路の数え上げ（lattice-paths） {#lattice-paths}
 
-- id：`lattice-paths`　レベル：基礎　段階：stub　type：technique
+- id：`lattice-paths`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/lattice-paths/
 - 別名：格子路、グリッドの最短経路の数、障害物のある経路、lattice path
 - 種類：数え上げ
@@ -109,6 +109,7 @@ search:
     - `lattice-paths#forbidden-region` 禁止領域を避ける：境界を越える点で分類する（青）：https://yuukougun.github.io/kyopro-atlas/comb/lattice-paths/#forbidden-region
     - `lattice-paths#sum-of-paths` 経路数の総和と、二項係数の和を経路数として一括で求める（青）：https://yuukougun.github.io/kyopro-atlas/comb/lattice-paths/#sum-of-paths
     - `lattice-paths#independent-axes` 移動を軸ごとの回数に分けて独立にする（45 度回転）（青）：https://yuukougun.github.io/kyopro-atlas/comb/lattice-paths/#independent-axes
+    - `lattice-paths#next-steps` 鏡像法・包除 DP・LGV 補題へのつながり：https://yuukougun.github.io/kyopro-atlas/comb/lattice-paths/#next-steps
 
 ## 写像 12 相（twelvefold-way） {#twelvefold-way}
 
@@ -129,7 +130,7 @@ search:
 
 ## 数え上げの考え方（counting-mindset） {#counting-mindset}
 
-- id：`counting-mindset`　レベル：水　段階：stub　type：technique
+- id：`counting-mindset`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/counting-mindset/
 - 別名：数え上げの基本方針、ちょうど 1 回数える、ちょうど＝以下の差、式で数えるか DP で数えるか
 - 種類：数え上げ、考察
@@ -166,7 +167,7 @@ search:
 
 ## 順序を固定して数える（counting-fix-order） {#counting-fix-order}
 
-- id：`counting-fix-order`　レベル：水　段階：stub　type：technique
+- id：`counting-fix-order`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/counting-fix-order/
 - 別名：相対順序の固定、ソートしてから数える、数える順番の工夫、n!/k!
 - 種類：数え上げ、考察
@@ -223,7 +224,7 @@ search:
 
 ## 多項係数（multinomial-coefficient） {#multinomial-coefficient}
 
-- id：`multinomial-coefficient`　レベル：水　段階：stub　type：technique
+- id：`multinomial-coefficient`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/multinomial-coefficient/
 - 別名：同じものを含む順列、並べ替えの数、グループ分けの数、多項定理、multinomial coefficient
 - 種類：数え上げ
@@ -449,7 +450,7 @@ search:
 
 ## 置換の巡回分解（permutation-cycles） {#permutation-cycles}
 
-- id：`permutation-cycles`　レベル：基礎　段階：stub　type：technique
+- id：`permutation-cycles`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/permutation-cycles/
 - 別名：巡回置換、サイクル分解、順列のサイクル、swap でソートする最小回数、置換の位数、cycle decomposition
 - 種類：数え上げ、考察
@@ -591,7 +592,7 @@ search:
 
 ## 確率の基本（probability-basics） {#probability-basics}
 
-- id：`probability-basics`　レベル：基礎　段階：stub　type：technique
+- id：`probability-basics`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/probability-basics/
 - 別名：確率、条件付き確率、全確率の公式、独立と排反、期待値の定義、conditional probability
 - 種類：確率・期待値
@@ -606,10 +607,11 @@ search:
     - `probability-basics#conditional` 条件付き確率と全確率の公式：https://yuukougun.github.io/kyopro-atlas/comb/probability-basics/#conditional
     - `probability-basics#expectation` 期待値の定義：https://yuukougun.github.io/kyopro-atlas/comb/probability-basics/#expectation
     - `probability-basics#precision` 浮動小数点の誤差と出力の桁数：https://yuukougun.github.io/kyopro-atlas/comb/probability-basics/#precision
+    - `probability-basics#next-steps` 確率 DP・期待値 DP・期待値の線形性へのつながり：https://yuukougun.github.io/kyopro-atlas/comb/probability-basics/#next-steps
 
 ## 幾何分布とコンプリートガチャ（coupon-collector） {#coupon-collector}
 
-- id：`coupon-collector`　レベル：基礎　段階：stub　type：technique
+- id：`coupon-collector`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/coupon-collector/
 - 別名：幾何分布、成功するまでの回数、1/p、コンプガチャ、クーポンコレクター、N H_N、coupon collector's problem、geometric distribution
 - 種類：確率・期待値
@@ -622,10 +624,11 @@ search:
     - `coupon-collector#geometric` 幾何分布：E = 1 + (1 − p)E から 1/p：https://yuukougun.github.io/kyopro-atlas/comb/coupon-collector/#geometric
     - `coupon-collector#failures` 失敗の回数（1/p − 1）との違い：https://yuukougun.github.io/kyopro-atlas/comb/coupon-collector/#failures
     - `coupon-collector#staged` 段階に分けて幾何分布の期待値を足す（コンプガチャ）：https://yuukougun.github.io/kyopro-atlas/comb/coupon-collector/#staged
+    - `coupon-collector#next-steps` 確率が違う・戻りがあるときへのつながり：https://yuukougun.github.io/kyopro-atlas/comb/coupon-collector/#next-steps
 
 ## 確率・期待値を mod 998244353 で答える（rational-mod） {#rational-mod}
 
-- id：`rational-mod`　レベル：水　段階：stub　type：technique
+- id：`rational-mod`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/rational-mod/
 - 別名：有理数 mod、有理数の mod 表現、P × Q^(−1) mod p、確率 mod 998244353、分数を mod で表す
 - 種類：確率・期待値、整数論
@@ -666,7 +669,7 @@ search:
 
 ## 対称性で確率を求める（probability-symmetry） {#probability-symmetry}
 
-- id：`probability-symmetry`　レベル：水　段階：stub　type：technique
+- id：`probability-symmetry`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/probability-symmetry/
 - 別名：どれも同じ確率、ランダムな順列に置き換える、2 状態に縮める
 - 種類：確率・期待値、考察
@@ -685,7 +688,7 @@ search:
 
 ## 確率 DP（probability-dp） {#probability-dp}
 
-- id：`probability-dp`　レベル：水　段階：stub　type：technique
+- id：`probability-dp`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/probability-dp/
 - 別名：前向きに確率を配る、到達確率、分布を求める DP、ランダムウォーク、random walk
 - 種類：確率・期待値、DP
@@ -706,7 +709,7 @@ search:
 
 ## 期待値 DP（expected-value-dp） {#expected-value-dp}
 
-- id：`expected-value-dp`　レベル：水　段階：stub　type：technique
+- id：`expected-value-dp`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/expected-value-dp/
 - 別名：後ろから決める期待値、残りの期待値、全期待値の公式、自己ループ、振り直し、移項して解く、選択は max・偶然は平均
 - 種類：確率・期待値、DP
@@ -820,7 +823,7 @@ search:
 
 ## ゲームの基本と勝敗の DP（game-basics） {#game-basics}
 
-- id：`game-basics`　レベル：水　段階：stub　type：technique
+- id：`game-basics`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/game-basics/
 - 別名：ゲーム DP、必勝法、必勝・必敗、勝ち局面・負け局面、二人零和有限確定完全情報ゲーム、手数の偶奇、真似戦略、ペアリング戦略
 - 種類：ゲーム、DP
@@ -844,7 +847,7 @@ search:
 
 ## ミニマックス（minimax） {#minimax}
 
-- id：`minimax`　レベル：水　段階：stub　type：technique
+- id：`minimax`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/minimax/
 - 別名：negamax、得点差 DP、自分 − 相手の最大化、得点差を最大化するゲーム、minimax
 - 種類：ゲーム、DP
@@ -864,7 +867,7 @@ search:
 
 ## Nim と XOR（nim） {#nim}
 
-- id：`nim`　レベル：水　段階：stub　type：technique
+- id：`nim`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/nim/
 - 別名：ニム、ニム和、石取りゲーム、上限つき Nim、逆形 Nim、Bouton の定理、misère Nim
 - 種類：ゲーム、ビット演算

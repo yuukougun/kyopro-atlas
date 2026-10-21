@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 250" font-family="sans-serif" font-size="14">
+  <rect width="640" height="250" fill="#ffffff"/>
+  <defs>
+    <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333333"/>
+    </marker>
+  </defs>
+  <text x="20" y="28" font-size="15" font-weight="bold" fill="#111111">再帰の 1 回の呼び出しがたどる経路</text>
+  <!-- std::function -->
+  <text x="20" y="70" fill="#333333">std::function</text>
+  <rect x="140" y="50" width="130" height="34" rx="5" fill="#ffffff" stroke="#333333" stroke-width="2"/>
+  <text x="205" y="72" text-anchor="middle">dfs(to, v)</text>
+  <rect x="310" y="50" width="160" height="34" rx="5" fill="#fff4e0" stroke="#b36b00" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="390" y="72" text-anchor="middle">型消去の入れ物</text>
+  <rect x="510" y="50" width="110" height="34" rx="5" fill="#eef4ff" stroke="#1f4e9c" stroke-width="2"/>
+  <text x="565" y="72" text-anchor="middle">ラムダの本体</text>
+  <line x1="270" y1="67" x2="306" y2="67" stroke="#333333" stroke-width="2" marker-end="url(#a2)"/>
+  <line x1="470" y1="67" x2="506" y2="67" stroke="#333333" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#a2)"/>
+  <text x="390" y="104" text-anchor="middle" font-size="12" fill="#b36b00">中身の型を知らないので、関数ポインタを経て間接的に呼ぶ</text>
+  <text x="390" y="120" text-anchor="middle" font-size="12" fill="#b36b00">（インライン化されにくく、1 段ごとのスタックも大きい）</text>
+  <!-- self -->
+  <text x="20" y="170" fill="#333333">auto&amp;&amp; self</text>
+  <text x="20" y="188" fill="#333333">this auto&amp;&amp; self</text>
+  <rect x="140" y="160" width="130" height="34" rx="5" fill="#ffffff" stroke="#333333" stroke-width="2"/>
+  <text x="205" y="182" text-anchor="middle">self(to, v)</text>
+  <rect x="510" y="160" width="110" height="34" rx="5" fill="#eef4ff" stroke="#1f4e9c" stroke-width="2"/>
+  <text x="565" y="182" text-anchor="middle">ラムダの本体</text>
+  <line x1="270" y1="177" x2="506" y2="177" stroke="#333333" stroke-width="2" marker-end="url(#a2)"/>
+  <text x="390" y="215" text-anchor="middle" font-size="12" fill="#1f4e9c">self の型はコンパイル時に分かっているので、直接呼ぶ</text>
+  <text x="390" y="231" text-anchor="middle" font-size="12" fill="#1f4e9c">（普通の関数の再帰と同じ速さ）</text>
+</svg>

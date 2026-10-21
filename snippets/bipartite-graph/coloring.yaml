@@ -1,0 +1,16 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 道 0-1-2 と、辺 3-4 と、孤立点 5 の 3 成分
+  - {input: "6 3\n0 1\n1 2\n3 4\n", output: "Yes\n2 1\n1 1\n1 0\n"}
+  # 長さ 4 の閉路は二部グラフ
+  - {input: "4 4\n0 1\n1 2\n2 3\n3 0\n", output: "Yes\n2 2\n"}
+  # 2 つ目の成分に長さ 3 の閉路がある（最初の成分だけ見ると見落とす）
+  - {input: "5 4\n0 1\n2 3\n3 4\n4 2\n", output: "No\n"}
+  # 自己ループは長さ 1 の閉路
+  - {input: "2 2\n0 1\n1 1\n", output: "No\n"}
+  # 多重辺（長さ 2 の閉路）は二部グラフのまま
+  - {input: "2 2\n0 1\n1 0\n", output: "Yes\n1 1\n"}
+  # 頂点 1 つ・辺なし
+  - {input: "1 0\n", output: "Yes\n1 0\n"}

@@ -1,0 +1,9 @@
+# AtCoder と同じく -ftrivial-auto-var-init=zero を付けると、cnt が 0 で埋まって正しい答えになる。
+# 警告が出ないこと（expect: run）も確かめている。付けないと答えはゴミの値になる（本文に手元の結果を書いた）
+compilers: [g++-13, g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra -ftrivial-auto-var-init=zero"
+expect: run
+cases:
+  - {input: "abcab\n", output: "9\n"}
+  - {input: "z\n", output: "1\n"}
+  - {input: "aaaa\n", output: "16\n"}

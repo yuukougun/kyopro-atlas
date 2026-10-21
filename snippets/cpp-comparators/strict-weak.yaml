@@ -1,0 +1,6 @@
+compilers: [g++-13, g++-15]
+expect: run
+cases:
+  - {input: "5\nccc b aa d ee\n", output: "b d aa ee ccc\n"}
+  - {input: "1\nx\n", output: "x\n"}
+  - {input: "0\n\n", output: "\n"}

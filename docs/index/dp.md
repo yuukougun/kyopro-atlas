@@ -13,7 +13,7 @@ search:
 
 ## DP の基本（dp-basics） {#dp-basics}
 
-- id：`dp-basics`　レベル：基礎　段階：stub　type：technique
+- id：`dp-basics`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-basics/
 - 別名：動的計画法、DP、Dynamic Programming、漸化式、配る DP、貰う DP、push 型、pull 型
 - 種類：DP
@@ -34,7 +34,7 @@ search:
 
 ## メモ化再帰（memoized-recursion） {#memoized-recursion}
 
-- id：`memoized-recursion`　レベル：基礎　段階：stub　type：technique
+- id：`memoized-recursion`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/memoized-recursion/
 - 別名：メモ化、Memoization、再帰 DP、トップダウン DP、map でメモ化、疎な DP
 - 種類：DP
@@ -47,11 +47,12 @@ search:
     - `memoized-recursion#write-memo` 再帰とメモの書き方（未計算の印と答えの値の衝突を避ける）：https://yuukougun.github.io/kyopro-atlas/dp/memoized-recursion/#write-memo
     - `memoized-recursion#vs-bottom-up` ボトムアップとの使い分け（速さ・スタック・高速化の載せやすさ）：https://yuukougun.github.io/kyopro-atlas/dp/memoized-recursion/#vs-bottom-up
     - `memoized-recursion#dp-map-sparse` 到達する状態だけを持つ（map でメモ化・現れる値の個数の見積もり）：https://yuukougun.github.io/kyopro-atlas/dp/memoized-recursion/#dp-map-sparse
-    - `memoized-recursion#pitfalls` 落とし穴：再帰が深いとスタックが溢れる・閉路があると止まらない・自己ループは移項してから書く：https://yuukougun.github.io/kyopro-atlas/dp/memoized-recursion/#pitfalls
+    - `memoized-recursion#pitfalls` 落とし穴：深い再帰・閉路・自己ループ：https://yuukougun.github.io/kyopro-atlas/dp/memoized-recursion/#pitfalls
+    - `memoized-recursion#next-steps` 上位の手法とのつながり：https://yuukougun.github.io/kyopro-atlas/dp/memoized-recursion/#next-steps
 
 ## DAG 上の DP（dp-dag） {#dp-dag}
 
-- id：`dp-dag`　レベル：基礎　段階：stub　type：technique
+- id：`dp-dag`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-dag/
 - 別名：DAG DP、DP on DAG、DAG の最長路、経路の数え上げ、トポロジカル順の DP
 - 種類：DP、グラフ探索
@@ -67,10 +68,11 @@ search:
     - `dp-dag#find-dag` DAG だと気づく・作る（値の順・距離の層・同じ値の頂点をまとめる）（水）：https://yuukougun.github.io/kyopro-atlas/dp/dp-dag/#find-dag
     - `dp-dag#count-shortest-paths` 最短路の本数（距離が確定した順に配る）：https://yuukougun.github.io/kyopro-atlas/dp/dp-dag/#count-shortest-paths
     - `dp-dag#with-cycles` 閉路があるとき（SCC で縮約する・最短路に切り替える）：https://yuukougun.github.io/kyopro-atlas/dp/dp-dag/#with-cycles
+    - `dp-dag#connections` 上位の手法とのつながり：https://yuukougun.github.io/kyopro-atlas/dp/dp-dag/#connections
 
 ## DP の計算順序（dp-order） {#dp-order}
 
-- id：`dp-order`　レベル：水　段階：stub　type：technique
+- id：`dp-order`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-order/
 - 別名：計算順序、ループの順番、後ろから DP、逆順 DP
 - 種類：DP
@@ -88,7 +90,7 @@ search:
 
 ## DP の状態の設計（dp-state-design） {#dp-state-design}
 
-- id：`dp-state-design`　レベル：水　段階：stub　type：technique
+- id：`dp-state-design`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-state-design/
 - 別名：状態設計、DP の状態、直前を状態に持つ、末尾の数文字を状態に持つ、環状 DP、円環 DP、括弧列の DP
 - 種類：DP
@@ -107,11 +109,11 @@ search:
     - `dp-state-design#bracket-dp` 括弧列の DP（開き括弧の残り数を状態にする）：https://yuukougun.github.io/kyopro-atlas/dp/dp-state-design/#bracket-dp
     - `dp-state-design#dp-cyclic` 環状の列（1 か所で切り、最初の状態を固定して DP を回す）：https://yuukougun.github.io/kyopro-atlas/dp/dp-state-design/#dp-cyclic
     - `dp-state-design#state-count` 状態数の見積もり（(P+1)&#94;K・2&#94;K・末尾の数文字の組の数）：https://yuukougun.github.io/kyopro-atlas/dp/dp-state-design/#state-count
-    - `dp-state-design#pitfalls` 落とし穴：最適値だけを持って状態を潰しすぎる：https://yuukougun.github.io/kyopro-atlas/dp/dp-state-design/#pitfalls
+    - `dp-state-design#pitfalls` 落とし穴（最適値だけを持って状態を潰しすぎる）：https://yuukougun.github.io/kyopro-atlas/dp/dp-state-design/#pitfalls
 
 ## 余り・個数を状態に持つ DP（dp-mod-state） {#dp-mod-state}
 
-- id：`dp-mod-state`　レベル：水　段階：stub　type：technique
+- id：`dp-mod-state`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-mod-state/
 - 別名：余りを状態に、mod DP、倍数の数え上げ、平均が整数
 - 種類：DP、整数論
@@ -149,7 +151,7 @@ search:
 
 ## DP の復元（dp-reconstruction） {#dp-reconstruction}
 
-- id：`dp-reconstruction`　レベル：水　段階：stub　type：technique
+- id：`dp-reconstruction`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-reconstruction/
 - 別名：DP 復元、選び方の出力、DP テーブルからの復元、辞書順最小の復元
 - 種類：DP
@@ -163,11 +165,10 @@ search:
     - `dp-reconstruction#ties` 最適な遷移が複数あるときの選び方：https://yuukougun.github.io/kyopro-atlas/dp/dp-reconstruction/#ties
     - `dp-reconstruction#lexicographic-min` 辞書順最小の復元（後ろからの DP と前からの貪欲）：https://yuukougun.github.io/kyopro-atlas/dp/dp-reconstruction/#lexicographic-min
     - `dp-reconstruction#dp-kth-lexicographic` 辞書順 K 番目を数え上げで決める（個数が K を超えたら打ち切る）：https://yuukougun.github.io/kyopro-atlas/dp/dp-reconstruction/#dp-kth-lexicographic
-    - `dp-reconstruction#pitfalls` 落とし穴：使い回した表では辿れない・辿った順の逆転・数え上げの溢れ：https://yuukougun.github.io/kyopro-atlas/dp/dp-reconstruction/#pitfalls
 
 ## 累積和・いもす法による DP の高速化（dp-prefix-sum） {#dp-prefix-sum}
 
-- id：`dp-prefix-sum`　レベル：水　段階：stub　type：technique
+- id：`dp-prefix-sum`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-prefix-sum/
 - 別名：累積和 DP、いもす法 DP、累積和で遷移をまとめる
 - 種類：DP、累積和・差分
@@ -188,7 +189,7 @@ search:
 
 ## ナップサック DP（knapsack-01） {#knapsack-01}
 
-- id：`knapsack-01`　レベル：基礎　段階：stub　type：technique
+- id：`knapsack-01`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/knapsack-01/
 - 別名：0-1 ナップサック、ナップサック、ナップザック、Knapsack Problem、0-1 Knapsack、個数制限なしナップサック、個数無制限ナップサック、Unbounded Knapsack、個数制限付きナップサック、多重ナップサック、コイン問題、配列の使い回し、1 次元化
 - 種類：DP
@@ -199,16 +200,17 @@ search:
     - 言い回し：各品物は B_i 個まで使える
     - 制約：N ≤ 100〜5000、W ≤ 10&#94;4〜10&#94;5（O(NW) が通る）
 - 節：
-    - `knapsack-01#meaning` dp\[i][w] の意味（「以下」と「ちょうど」で初期値と答えが変わる）：https://yuukougun.github.io/kyopro-atlas/dp/knapsack-01/#meaning
+    - `knapsack-01#meaning` dp\[i][j] の意味（「以下」と「ちょうど」で初期値と答えが変わる）：https://yuukougun.github.io/kyopro-atlas/dp/knapsack-01/#meaning
     - `knapsack-01#dp-rolling-array` 配列の使い回しとループの向き（0-1 は大きい方から、個数制限なしは小さい方から）：https://yuukougun.github.io/kyopro-atlas/dp/knapsack-01/#dp-rolling-array
     - `knapsack-01#knapsack-unbounded` 個数制限なし（数え上げでは品物と和のループの内外で組合せと列が分かれる）：https://yuukougun.github.io/kyopro-atlas/dp/knapsack-01/#knapsack-unbounded
     - `knapsack-01#variants` 多次元の重さ・上限で打ち切る・グループから 1 つ選ぶ：https://yuukougun.github.io/kyopro-atlas/dp/knapsack-01/#variants
     - `knapsack-01#choose-by-size` 計算量で解法を切り替える（重さ・価値・N のどれが小さいか）（水）：https://yuukougun.github.io/kyopro-atlas/dp/knapsack-01/#choose-by-size
     - `knapsack-01#knapsack-bounded` 個数制限付き（素朴な展開・二進分解・余りごとのスライド最小値）（青）：https://yuukougun.github.io/kyopro-atlas/dp/knapsack-01/#knapsack-bounded
+    - `knapsack-01#next-steps` 上位の手法とのつながり：https://yuukougun.github.io/kyopro-atlas/dp/knapsack-01/#next-steps
 
 ## 部分和 DP（subset-sum） {#subset-sum}
 
-- id：`subset-sum`　レベル：基礎　段階：stub　type：technique
+- id：`subset-sum`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/subset-sum/
 - 別名：部分和、部分和問題、Subset Sum、部分和の数え上げ
 - 種類：DP
@@ -279,7 +281,7 @@ search:
 
 ## グリッド上の DP（dp-grid） {#dp-grid}
 
-- id：`dp-grid`　レベル：水　段階：stub　type：technique
+- id：`dp-grid`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-grid/
 - 別名：グリッド DP、Grid DP、格子路の DP、最大正方形
 - 種類：DP
@@ -299,7 +301,7 @@ search:
 
 ## 区間分割 DP（dp-sequence-partition） {#dp-sequence-partition}
 
-- id：`dp-sequence-partition`　レベル：水　段階：stub　type：technique
+- id：`dp-sequence-partition`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-sequence-partition/
 - 別名：区間分割型 DP、仕切りを入れる DP、列を区切る DP
 - 種類：DP
@@ -317,7 +319,7 @@ search:
 
 ## 最長増加部分列（lis） {#lis}
 
-- id：`lis`　レベル：水　段階：stub　type：technique
+- id：`lis`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/lis/
 - 別名：LIS、Longest Increasing Subsequence、最長減少部分列、Dilworth の定理、増加列への最小分割
 - 種類：DP、二分探索
@@ -339,7 +341,7 @@ search:
 
 ## 最長共通部分列と編集距離（lcs） {#lcs}
 
-- id：`lcs`　レベル：水　段階：stub　type：technique
+- id：`lcs`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/lcs/
 - 別名：LCS、Longest Common Subsequence、レーベンシュタイン距離、Edit Distance、Levenshtein Distance、最長共通部分文字列、DP の DP
 - 種類：DP、文字列
@@ -475,7 +477,7 @@ search:
 
 ## 桁 DP（digit-dp） {#digit-dp}
 
-- id：`digit-dp`　レベル：水　段階：stub　type：technique
+- id：`digit-dp`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/digit-dp/
 - 別名：Digit DP、smaller フラグ、未満フラグ、leading zero
 - 種類：DP、数え上げ
@@ -514,7 +516,7 @@ search:
 
 ## 木 DP（tree-dp） {#tree-dp}
 
-- id：`tree-dp`　レベル：水　段階：stub　type：technique
+- id：`tree-dp`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/tree-dp/
 - 別名：Tree DP、部分木の DP、木の上の DP
 - 種類：DP、木
@@ -527,6 +529,7 @@ search:
 - 節：
     - `tree-dp#postorder` 帰りがけ順に子から集める（再帰なしなら BFS 順の逆）：https://yuukougun.github.io/kyopro-atlas/dp/tree-dp/#postorder
     - `tree-dp#vertex-states` 頂点の選択を状態に足す（独立集合型）：https://yuukougun.github.io/kyopro-atlas/dp/tree-dp/#vertex-states
+    - `tree-dp#path-at-top` パスを最も浅い頂点で数える（子の上位 2 つ）：https://yuukougun.github.io/kyopro-atlas/dp/tree-dp/#path-at-top
     - `tree-dp#product-of-children` 子の値の積・和（数え上げ）：https://yuukougun.github.io/kyopro-atlas/dp/tree-dp/#product-of-children
     - `tree-dp#top-down` 根から下へ配る：https://yuukougun.github.io/kyopro-atlas/dp/tree-dp/#top-down
     - `tree-dp#reroot-difference` 根を動かした差分（全方位の入口）：https://yuukougun.github.io/kyopro-atlas/dp/tree-dp/#reroot-difference
@@ -537,7 +540,7 @@ search:
 
 ## 全方位木 DP（rerooting） {#rerooting}
 
-- id：`rerooting`　レベル：青　段階：stub　type：technique
+- id：`rerooting`　レベル：青　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/rerooting/
 - 別名：Rerooting、ReRooting DP、換根 DP
 - 種類：DP、木
@@ -550,6 +553,7 @@ search:
     - `rerooting#what-changes` 根を隣へ移すと変わるのは親側の部分木だけ：https://yuukougun.github.io/kyopro-atlas/dp/rerooting/#what-changes
     - `rerooting#framework` 一般の枠組み（子の値の合成と「根を付ける」操作を分ける）：https://yuukougun.github.io/kyopro-atlas/dp/rerooting/#framework
     - `rerooting#exclude-self` 自分以外の兄弟の合成（左右からの累積）：https://yuukougun.github.io/kyopro-atlas/dp/rerooting/#exclude-self
+    - `rerooting#patterns` 合成と根を付ける操作の作り方の型：https://yuukougun.github.io/kyopro-atlas/dp/rerooting/#patterns
     - `rerooting#when-to-use` 使い分け（最遠点は直径の性質で、距離の総和は根の移動の差分で済む）：https://yuukougun.github.io/kyopro-atlas/dp/rerooting/#when-to-use
     - `rerooting#pitfalls` 落とし穴：親側の値から自分自身の寄与を除き忘れる：https://yuukougun.github.io/kyopro-atlas/dp/rerooting/#pitfalls
 

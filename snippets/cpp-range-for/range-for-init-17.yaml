@@ -1,0 +1,5 @@
+compilers: [g++-13, g++-15]
+flags: "-std=gnu++17 -O2 -Wall -Wextra"
+expect: warning
+cases:
+  - {input: "", output: "0:5 1:6 2:7\n"}

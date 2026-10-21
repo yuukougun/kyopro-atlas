@@ -1,0 +1,6 @@
+compilers: [g++-13, g++-15]
+expect: run
+cases:
+  - {input: "level\n", output: "----- 1\n1 0 1\n"}
+  - {input: "ab\n", output: "----- 0\n1 0 1\n"}
+  - {input: "x\n", output: "----- 1\n1 0 1\n"}

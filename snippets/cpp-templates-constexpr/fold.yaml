@@ -1,0 +1,5 @@
+compilers: [g++-13, g++-15]
+expect: run
+cases:
+  - {input: "3 10000000000 abc\n", output: "10000000003 0\n"}
+  - {input: "0 0 x\n", output: "0 0\n"}

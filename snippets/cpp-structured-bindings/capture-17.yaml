@@ -1,0 +1,5 @@
+compilers: [g++-13, g++-15]
+flags: "-std=gnu++17 -O2 -Wall -Wextra -pedantic"
+expect: run
+cases:
+  - {input: "", output: "7\n"}

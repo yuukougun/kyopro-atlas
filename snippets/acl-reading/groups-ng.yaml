@@ -1,0 +1,5 @@
+# g++-15 の -std=gnu++23 でだけ安全（g++-13 の gnu++23 と g++-15 の gnu++20 では手元で Segmentation fault）
+compilers: [g++-15]
+expect: run
+cases:
+  - {input: "", output: "0 2\n"}

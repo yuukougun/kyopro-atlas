@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 316" font-family="sans-serif">
+<rect width="640" height="316" fill="#ffffff"/>
+<text x="20" y="30" font-size="15" fill="#222">H = 3, W = 4：番号 = i×W + j（灰色は i + j が奇数）</text>
+<rect x="20" y="50" width="80" height="60" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="60.0" y="78" font-size="22" text-anchor="middle" fill="#111">0</text>
+<text x="60.0" y="100" font-size="13" text-anchor="middle" fill="#333">(0, 0)</text>
+<rect x="100" y="50" width="80" height="60" fill="#d0d0d0" stroke="#333" stroke-width="1.5"/>
+<text x="140.0" y="78" font-size="22" text-anchor="middle" fill="#111">1</text>
+<text x="140.0" y="100" font-size="13" text-anchor="middle" fill="#333">(0, 1)</text>
+<rect x="180" y="50" width="80" height="60" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="220.0" y="78" font-size="22" text-anchor="middle" fill="#111">2</text>
+<text x="220.0" y="100" font-size="13" text-anchor="middle" fill="#333">(0, 2)</text>
+<rect x="260" y="50" width="80" height="60" fill="#d0d0d0" stroke="#333" stroke-width="1.5"/>
+<text x="300.0" y="78" font-size="22" text-anchor="middle" fill="#111">3</text>
+<text x="300.0" y="100" font-size="13" text-anchor="middle" fill="#333">(0, 3)</text>
+<rect x="20" y="110" width="80" height="60" fill="#d0d0d0" stroke="#333" stroke-width="1.5"/>
+<text x="60.0" y="138" font-size="22" text-anchor="middle" fill="#111">4</text>
+<text x="60.0" y="160" font-size="13" text-anchor="middle" fill="#333">(1, 0)</text>
+<rect x="100" y="110" width="80" height="60" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="140.0" y="138" font-size="22" text-anchor="middle" fill="#111">5</text>
+<text x="140.0" y="160" font-size="13" text-anchor="middle" fill="#333">(1, 1)</text>
+<rect x="180" y="110" width="80" height="60" fill="#d0d0d0" stroke="#333" stroke-width="1.5"/>
+<text x="220.0" y="138" font-size="22" text-anchor="middle" fill="#111">6</text>
+<text x="220.0" y="160" font-size="13" text-anchor="middle" fill="#333">(1, 2)</text>
+<rect x="260" y="110" width="80" height="60" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="300.0" y="138" font-size="22" text-anchor="middle" fill="#111">7</text>
+<text x="300.0" y="160" font-size="13" text-anchor="middle" fill="#333">(1, 3)</text>
+<rect x="20" y="170" width="80" height="60" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="60.0" y="198" font-size="22" text-anchor="middle" fill="#111">8</text>
+<text x="60.0" y="220" font-size="13" text-anchor="middle" fill="#333">(2, 0)</text>
+<rect x="100" y="170" width="80" height="60" fill="#d0d0d0" stroke="#333" stroke-width="1.5"/>
+<text x="140.0" y="198" font-size="22" text-anchor="middle" fill="#111">9</text>
+<text x="140.0" y="220" font-size="13" text-anchor="middle" fill="#333">(2, 1)</text>
+<rect x="180" y="170" width="80" height="60" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="220.0" y="198" font-size="22" text-anchor="middle" fill="#111">10</text>
+<text x="220.0" y="220" font-size="13" text-anchor="middle" fill="#333">(2, 2)</text>
+<rect x="260" y="170" width="80" height="60" fill="#d0d0d0" stroke="#333" stroke-width="1.5"/>
+<text x="300.0" y="198" font-size="22" text-anchor="middle" fill="#111">11</text>
+<text x="300.0" y="220" font-size="13" text-anchor="middle" fill="#333">(2, 3)</text>
+<text x="20" y="258" font-size="13" fill="#333">番号 v から戻す：i = v / W、j = v % W</text>
+<text x="20" y="280" font-size="13" fill="#333">4 近傍の辺は必ず白と灰色を結ぶ</text>
+<text x="420" y="30" font-size="15" fill="#222">(di, dj) と番号の差</text>
+<rect x="420" y="60" width="62" height="62" fill="#ffffff" stroke="#333" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="451.0" y="84" font-size="12" text-anchor="middle" fill="#333">(−1, −1)</text>
+<text x="451.0" y="106" font-size="14" text-anchor="middle" fill="#111">−W−1</text>
+<rect x="482" y="60" width="62" height="62" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="513.0" y="84" font-size="12" text-anchor="middle" fill="#333">(−1, 0)</text>
+<text x="513.0" y="106" font-size="14" text-anchor="middle" fill="#111">−W</text>
+<rect x="544" y="60" width="62" height="62" fill="#ffffff" stroke="#333" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="575.0" y="84" font-size="12" text-anchor="middle" fill="#333">(−1, +1)</text>
+<text x="575.0" y="106" font-size="14" text-anchor="middle" fill="#111">−W+1</text>
+<rect x="420" y="122" width="62" height="62" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="451.0" y="146" font-size="12" text-anchor="middle" fill="#333">(0, −1)</text>
+<text x="451.0" y="168" font-size="14" text-anchor="middle" fill="#111">−1</text>
+<rect x="482" y="122" width="62" height="62" fill="#f2f2f2" stroke="#333" stroke-width="2.5"/>
+<text x="513.0" y="158.0" font-size="14" text-anchor="middle" fill="#111">(i, j)</text>
+<rect x="544" y="122" width="62" height="62" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="575.0" y="146" font-size="12" text-anchor="middle" fill="#333">(0, +1)</text>
+<text x="575.0" y="168" font-size="14" text-anchor="middle" fill="#111">+1</text>
+<rect x="420" y="184" width="62" height="62" fill="#ffffff" stroke="#333" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="451.0" y="208" font-size="12" text-anchor="middle" fill="#333">(+1, −1)</text>
+<text x="451.0" y="230" font-size="14" text-anchor="middle" fill="#111">+W−1</text>
+<rect x="482" y="184" width="62" height="62" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="513.0" y="208" font-size="12" text-anchor="middle" fill="#333">(+1, 0)</text>
+<text x="513.0" y="230" font-size="14" text-anchor="middle" fill="#111">+W</text>
+<rect x="544" y="184" width="62" height="62" fill="#ffffff" stroke="#333" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="575.0" y="208" font-size="12" text-anchor="middle" fill="#333">(+1, +1)</text>
+<text x="575.0" y="230" font-size="14" text-anchor="middle" fill="#111">+W+1</text>
+<text x="390" y="270" font-size="12" fill="#333">実線の枠：4 近傍</text>
+<text x="390" y="286" font-size="12" fill="#333">点線の枠：斜め（8 近傍で足す）</text>
+<text x="390" y="302" font-size="12" fill="#333">番兵で囲んだら W を W + 2 に読み替える</text>
+</svg>

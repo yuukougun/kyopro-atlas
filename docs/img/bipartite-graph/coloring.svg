@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 300" font-family="sans-serif" font-size="14">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="20" y="30" fill="#222">二部グラフ：成分ごとに色の数 (a, b) が決まる</text>
+<!-- 成分 A：長さ 4 の閉路 -->
+<g stroke="#444" stroke-width="2">
+<line x1="60" y1="90" x2="160" y2="90"/>
+<line x1="160" y1="90" x2="160" y2="190"/>
+<line x1="160" y1="190" x2="60" y2="190"/>
+<line x1="60" y1="190" x2="60" y2="90"/>
+<line x1="250" y1="140" x2="320" y2="90"/>
+<line x1="250" y1="140" x2="320" y2="190"/>
+</g>
+<g stroke="#1f4e9a" stroke-width="2">
+<circle cx="60" cy="90" r="17" fill="#ffffff"/>
+<circle cx="160" cy="90" r="17" fill="#1f4e9a"/>
+<circle cx="160" cy="190" r="17" fill="#ffffff"/>
+<circle cx="60" cy="190" r="17" fill="#1f4e9a"/>
+<circle cx="250" cy="140" r="17" fill="#ffffff"/>
+<circle cx="320" cy="90" r="17" fill="#1f4e9a"/>
+<circle cx="320" cy="190" r="17" fill="#1f4e9a"/>
+</g>
+<g text-anchor="middle">
+<text x="60" y="95" fill="#222">0</text>
+<text x="160" y="95" fill="#ffffff">1</text>
+<text x="160" y="195" fill="#222">2</text>
+<text x="60" y="195" fill="#ffffff">3</text>
+<text x="250" y="145" fill="#222">4</text>
+<text x="320" y="95" fill="#ffffff">5</text>
+<text x="320" y="195" fill="#ffffff">6</text>
+<text x="110" y="238" fill="#222">(a, b) = (2, 2)</text>
+<text x="285" y="238" fill="#222">(a, b) = (1, 2)</text>
+</g>
+<line x1="380" y1="15" x2="380" y2="285" stroke="#bbb" stroke-dasharray="4 4"/>
+<text x="400" y="30" fill="#222">二部グラフでない：BFS で深さの偶奇に塗る</text>
+<g stroke="#444" stroke-width="2">
+<line x1="550" y1="80" x2="480" y2="170"/>
+<line x1="550" y1="80" x2="620" y2="170"/>
+</g>
+<line x1="480" y1="170" x2="620" y2="170" stroke="#c0392b" stroke-width="4" stroke-dasharray="8 5"/>
+<g stroke="#1f4e9a" stroke-width="2">
+<circle cx="550" cy="80" r="17" fill="#ffffff"/>
+<circle cx="480" cy="170" r="17" fill="#1f4e9a"/>
+<circle cx="620" cy="170" r="17" fill="#1f4e9a"/>
+</g>
+<g text-anchor="middle">
+<text x="550" y="85" fill="#222">s</text>
+<text x="480" y="175" fill="#ffffff">u</text>
+<text x="620" y="175" fill="#ffffff">v</text>
+<text x="550" y="198" fill="#c0392b">同じ色どうしの辺（破線）</text>
+<text x="550" y="238" fill="#222">s → u → v → s は長さ 3 の閉路</text>
+</g>
+<text x="600" y="75" fill="#555" font-size="12">深さ 0</text>
+<text x="650" y="175" fill="#555" font-size="12">深さ 1</text>
+<!-- 凡例 -->
+<circle cx="40" cy="272" r="9" fill="#ffffff" stroke="#1f4e9a" stroke-width="2"/>
+<text x="56" y="277" fill="#222" font-size="13">色 0（白）</text>
+<circle cx="150" cy="272" r="9" fill="#1f4e9a" stroke="#1f4e9a" stroke-width="2"/>
+<text x="166" y="277" fill="#222" font-size="13">色 1（黒）</text>
+</svg>

@@ -13,7 +13,7 @@ search:
 
 ## グラフの表現と用語（graph-basics） {#graph-basics}
 
-- id：`graph-basics`　レベル：基礎　段階：stub　type：technique
+- id：`graph-basics`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/graph-basics/
 - 別名：グラフの基本、隣接リスト、隣接行列、辺リスト、次数、adjacency list、graph representation
 - 種類：グラフ探索
@@ -41,7 +41,7 @@ search:
 
 ## 深さ優先探索（DFS）（dfs） {#dfs}
 
-- id：`dfs`　レベル：基礎　段階：stub　type：technique
+- id：`dfs`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/dfs/
 - 別名：深さ優先探索、DFS、depth-first search、単純パスの列挙
 - 種類：グラフ探索
@@ -55,11 +55,12 @@ search:
     - `dfs#backtracking` バックトラック型（帰りがけで印を外す）：https://yuukougun.github.io/kyopro-atlas/graph/dfs/#backtracking
     - `dfs#pre-post-order` 行きがけ順と帰りがけ順：https://yuukougun.github.io/kyopro-atlas/graph/dfs/#pre-post-order
     - `dfs#iterative` 非再帰の DFS と再帰の深さ：https://yuukougun.github.io/kyopro-atlas/graph/dfs/#iterative
+    - `dfs#next-steps` 上位の手法へのつながり：https://yuukougun.github.io/kyopro-atlas/graph/dfs/#next-steps
     - `dfs#comparison` BFS・Union-Find との使い分け：https://yuukougun.github.io/kyopro-atlas/graph/dfs/#comparison
 
 ## 幅優先探索（BFS）と無重み最短路（bfs） {#bfs}
 
-- id：`bfs`　レベル：基礎　段階：stub　type：technique
+- id：`bfs`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/bfs/
 - 別名：幅優先探索、BFS、breadth-first search、無重み最短路、多始点 BFS、最短経路の復元
 - 種類：グラフ探索、最短路
@@ -74,11 +75,11 @@ search:
     - `bfs#mark-on-push` 印は push のときに付ける・dist を −1 で初期化して訪問済みの印を兼ねる：https://yuukougun.github.io/kyopro-atlas/graph/bfs/#mark-on-push
     - `bfs#path-restoration` 経路復元（発見したときの親を記録して終点からたどる）：https://yuukougun.github.io/kyopro-atlas/graph/bfs/#path-restoration
     - `bfs#multi-source` 多始点 BFS（超始点から距離 0 の辺を張るのと同じ）：https://yuukougun.github.io/kyopro-atlas/graph/bfs/#multi-source
-    - `bfs#weighted` 重みが 1 と 2 なら辺を割る・重み付きなら 01-BFS かダイクストラ：https://yuukougun.github.io/kyopro-atlas/graph/bfs/#weighted
+    - `bfs#weighted` 重みが 1 と 2 なら辺を割る・重み付きなら 01-BFS かダイクストラ法：https://yuukougun.github.io/kyopro-atlas/graph/bfs/#weighted
 
 ## グリッドグラフ（grid-graph） {#grid-graph}
 
-- id：`grid-graph`　レベル：基礎　段階：stub　type：technique
+- id：`grid-graph`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/grid-graph/
 - 別名：グリッド BFS、迷路の探索、4 近傍、8 近傍、grid graph
 - 種類：グラフ探索
@@ -96,7 +97,7 @@ search:
 
 ## 連結成分（connected-components） {#connected-components}
 
-- id：`connected-components`　レベル：基礎　段階：stub　type：technique
+- id：`connected-components`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/connected-components/
 - 別名：連結成分分解、連結判定、connected components
 - 種類：グラフ探索、連結性・全域木
@@ -110,13 +111,14 @@ search:
 - 節：
     - `connected-components#three-methods` DFS・BFS・Union-Find の 3 つの求め方と使い分け：https://yuukougun.github.io/kyopro-atlas/graph/connected-components/#three-methods
     - `connected-components#per-component` 成分ごとの集計（頂点数と辺数で木・なもり・それ以外を見分ける）：https://yuukougun.github.io/kyopro-atlas/graph/connected-components/#per-component
-    - `connected-components#pitfalls` 孤立点・多重辺・自己ループの数え方：https://yuukougun.github.io/kyopro-atlas/graph/connected-components/#pitfalls
+    - `connected-components#pitfalls` 落とし穴（孤立点・多重辺・自己ループ・再帰の深さ）：https://yuukougun.github.io/kyopro-atlas/graph/connected-components/#pitfalls
     - `connected-components#forest` 森の連結成分の数は N − M：https://yuukougun.github.io/kyopro-atlas/graph/connected-components/#forest
     - `connected-components#values-as-vertices` 座標や値を頂点にして成分を考える（青）：https://yuukougun.github.io/kyopro-atlas/graph/connected-components/#values-as-vertices
+    - `connected-components#next-steps` 上位の手法とのつながり：https://yuukougun.github.io/kyopro-atlas/graph/connected-components/#next-steps
 
 ## 閉路の検出と復元（cycle-detection） {#cycle-detection}
 
-- id：`cycle-detection`　レベル：基礎　段階：stub　type：technique
+- id：`cycle-detection`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/cycle-detection/
 - 別名：閉路検出、サイクル検出、有向閉路、無向閉路、3 色の DFS、cycle detection
 - 種類：グラフ探索
@@ -135,7 +137,7 @@ search:
 
 ## 二部グラフ判定（bipartite-graph） {#bipartite-graph}
 
-- id：`bipartite-graph`　レベル：基礎　段階：stub　type：technique
+- id：`bipartite-graph`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/bipartite-graph/
 - 別名：二部グラフ、2 彩色、奇閉路、2 色の塗り分け、bipartite graph
 - 種類：グラフ探索
@@ -151,10 +153,11 @@ search:
     - `bipartite-graph#count-by-color` 成分ごとの色の数を使う数え上げ：https://yuukougun.github.io/kyopro-atlas/graph/bipartite-graph/#count-by-color
     - `bipartite-graph#union-find` Union-Find（頂点を 2 倍にする・偶奇を持つ）で判定する：https://yuukougun.github.io/kyopro-atlas/graph/bipartite-graph/#union-find
     - `bipartite-graph#always-bipartite` 木・4 近傍のグリッドは必ず二部グラフ：https://yuukougun.github.io/kyopro-atlas/graph/bipartite-graph/#always-bipartite
+    - `bipartite-graph#next-steps` 上位の手法とのつながり：https://yuukougun.github.io/kyopro-atlas/graph/bipartite-graph/#next-steps
 
 ## 小さいグラフの全探索（small-graph-brute-force） {#small-graph-brute-force}
 
-- id：`small-graph-brute-force`　レベル：基礎　段階：stub　type：technique
+- id：`small-graph-brute-force`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/small-graph-brute-force/
 - 別名：グラフ同型、全域木の全列挙、彩色の全探索、頂点の対応の全探索、graph isomorphism
 - 種類：全探索、グラフ探索
@@ -167,6 +170,7 @@ search:
     - `small-graph-brute-force#isomorphism` 頂点の対応の全探索（同型の判定・同型にするコスト）：https://yuukougun.github.io/kyopro-atlas/graph/small-graph-brute-force/#isomorphism
     - `small-graph-brute-force#edge-subsets` 辺の部分集合の全探索（全域木の全列挙）：https://yuukougun.github.io/kyopro-atlas/graph/small-graph-brute-force/#edge-subsets
     - `small-graph-brute-force#coloring` 彩色は成分ごとに DFS で塗って探索を絞る（青）：https://yuukougun.github.io/kyopro-atlas/graph/small-graph-brute-force/#coloring
+    - `small-graph-brute-force#next-steps` 上位の手法とのつながり：https://yuukougun.github.io/kyopro-atlas/graph/small-graph-brute-force/#next-steps
 
 ## 彩色数・最大独立集合・最大クリーク（chromatic-number） {#chromatic-number}
 
@@ -184,7 +188,7 @@ search:
 
 ## ダイクストラ法（dijkstra） {#dijkstra}
 
-- id：`dijkstra`　レベル：基礎　段階：stub　type：technique
+- id：`dijkstra`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/dijkstra/
 - 別名：ダイクストラ、Dijkstra、Dijkstra's algorithm、経由点の最短路、両端からのダイクストラ、逆向きのグラフ、最短閉路、ポテンシャルで負辺を消す、Johnson のアイデア
 - 種類：最短路
@@ -203,10 +207,11 @@ search:
     - `dijkstra#shortest-cycle` 最短閉路（ある頂点を含む閉路の最小の長さ）：https://yuukougun.github.io/kyopro-atlas/graph/dijkstra/#shortest-cycle
     - `dijkstra#reverse-graph` 逆向きのグラフと両端からの最短路（水）：https://yuukougun.github.io/kyopro-atlas/graph/dijkstra/#reverse-graph
     - `dijkstra#potential` ポテンシャルで負辺を消す（Johnson のアイデア）（水）：https://yuukougun.github.io/kyopro-atlas/graph/dijkstra/#potential
+    - `dijkstra#next-steps` 上位の手法とのつながり：https://yuukougun.github.io/kyopro-atlas/graph/dijkstra/#next-steps
 
 ## 01-BFS（zero-one-bfs） {#zero-one-bfs}
 
-- id：`zero-one-bfs`　レベル：水　段階：stub　type：technique
+- id：`zero-one-bfs`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/zero-one-bfs/
 - 別名：0-1 BFS、deque BFS
 - 種類：最短路
@@ -217,13 +222,15 @@ search:
     - 式の形：言い換えると、辺の重みが 0 と 1 の 2 種類だけのグラフの最短路になる
 - 節：
     - `zero-one-bfs#deque-invariant` deque の中の距離が 2 種類に保たれる理由：https://yuukougun.github.io/kyopro-atlas/graph/zero-one-bfs/#deque-invariant
+    - `zero-one-bfs#procedure` 処理の流れ：https://yuukougun.github.io/kyopro-atlas/graph/zero-one-bfs/#procedure
     - `zero-one-bfs#no-early-fix` 初めて見つけたときに確定させてはいけない：https://yuukougun.github.io/kyopro-atlas/graph/zero-one-bfs/#no-early-fix
+    - `zero-one-bfs#cost-modeling` 何をコスト 1 にするか：https://yuukougun.github.io/kyopro-atlas/graph/zero-one-bfs/#cost-modeling
     - `zero-one-bfs#direction-state` 向きを状態に持つ（頂点数が 4 倍になる）：https://yuukougun.github.io/kyopro-atlas/graph/zero-one-bfs/#direction-state
     - `zero-one-bfs#weights-012` 重みが 0, 1, 2 ならどうするか：https://yuukougun.github.io/kyopro-atlas/graph/zero-one-bfs/#weights-012
 
 ## ワーシャルフロイド法（warshall-floyd） {#warshall-floyd}
 
-- id：`warshall-floyd`　レベル：水　段階：stub　type：technique
+- id：`warshall-floyd`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/warshall-floyd/
 - 別名：ワーシャルフロイド、Floyd-Warshall、全点対最短路、all-pairs shortest paths
 - 種類：最短路、DP
@@ -237,6 +244,7 @@ search:
     - `warshall-floyd#init` 初期化（d\[i][i] = 0・多重辺・INF のあふれ）と負閉路の判定：https://yuukougun.github.io/kyopro-atlas/graph/warshall-floyd/#init
     - `warshall-floyd#add-edge` 辺の追加を O(N^2) で反映する（削除は逆順の追加に）：https://yuukougun.github.io/kyopro-atlas/graph/warshall-floyd/#add-edge
     - `warshall-floyd#with-enumeration` 距離表を作ってから順列全探索・bitDP：https://yuukougun.github.io/kyopro-atlas/graph/warshall-floyd/#with-enumeration
+    - `warshall-floyd#beyond-distance` 距離以外の値を同じ形で求める（到達可能性・ボトルネック・2 つの基準）：https://yuukougun.github.io/kyopro-atlas/graph/warshall-floyd/#beyond-distance
     - `warshall-floyd#redundant-edges` 迂回できる辺は不要（青）：https://yuukougun.github.io/kyopro-atlas/graph/warshall-floyd/#redundant-edges
 
 ## ベルマンフォード法（bellman-ford） {#bellman-ford}
@@ -259,7 +267,7 @@ search:
 
 ## 最短路 DAG（shortest-path-dag） {#shortest-path-dag}
 
-- id：`shortest-path-dag`　レベル：水　段階：stub　type：technique
+- id：`shortest-path-dag`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/shortest-path-dag/
 - 別名：最短路木、最短経路の数え上げ、最短路に必ず使われる辺、shortest path DAG
 - 種類：最短路、DP
@@ -304,7 +312,7 @@ search:
 
 ## 時刻で変わる辺の最短路（time-dependent-dijkstra） {#time-dependent-dijkstra}
 
-- id：`time-dependent-dijkstra`　レベル：水　段階：stub　type：technique
+- id：`time-dependent-dijkstra`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/time-dependent-dijkstra/
 - 別名：時刻依存の最短路、待機、最終電車、出発時刻、time-dependent shortest path
 - 種類：最短路
@@ -411,7 +419,7 @@ search:
 
 ## トポロジカルソート（topological-sort） {#topological-sort}
 
-- id：`topological-sort`　レベル：基礎　段階：stub　type：technique
+- id：`topological-sort`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/topological-sort/
 - 別名：トポロジカル順序、Kahn 法、入次数、DAG、topological sort
 - 種類：グラフ探索
@@ -431,7 +439,7 @@ search:
 
 ## 強連結成分分解（SCC）（scc） {#scc}
 
-- id：`scc`　レベル：水　段階：stub　type：technique
+- id：`scc`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/scc/
 - 別名：強連結成分、SCC、Kosaraju、Tarjan、strongly connected components
 - 種類：グラフ探索
@@ -447,10 +455,11 @@ search:
     - `scc#acl` ACL の scc_graph（トポロジカル順の成分のリスト）：https://yuukougun.github.io/kyopro-atlas/graph/scc/#acl
     - `scc#on-cycle` 閉路に含まれる頂点（自己ループに注意）：https://yuukougun.github.io/kyopro-atlas/graph/scc/#on-cycle
     - `scc#dp-on-dag` 縮約した DAG の上で DP する：https://yuukougun.github.io/kyopro-atlas/graph/scc/#dp-on-dag
+    - `scc#patterns` 縮約の応用の型（組の数・不等式の割り当て・2-SAT）：https://yuukougun.github.io/kyopro-atlas/graph/scc/#patterns
 
 ## Functional graph（出次数 1 のグラフ）（functional-graph） {#functional-graph}
 
-- id：`functional-graph`　レベル：水　段階：stub　type：technique
+- id：`functional-graph`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/functional-graph/
 - 別名：関数グラフ、ρ 形、rho 形、successor graph
 - 種類：グラフ探索
@@ -470,7 +479,7 @@ search:
 
 ## なもりグラフ（namori-graph） {#namori-graph}
 
-- id：`namori-graph`　レベル：水　段階：stub　type：technique
+- id：`namori-graph`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/
 - 別名：なもり、unicyclic graph、pseudotree、閉路が 1 つのグラフ、木に辺を 1 本足したグラフ、N 頂点 N 辺の連結グラフ
 - 種類：グラフ探索、木
@@ -507,7 +516,7 @@ search:
 
 ## Union-Find で連結性を扱う（union-find-connectivity） {#union-find-connectivity}
 
-- id：`union-find-connectivity`　レベル：水　段階：stub　type：technique
+- id：`union-find-connectivity`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/union-find-connectivity/
 - 別名：逆順 Union-Find、削除を逆順の追加にする、辺の削除を逆から、オフラインの連結判定、offline connectivity
 - 種類：連結性・全域木、クエリ処理の工夫
@@ -526,7 +535,7 @@ search:
 
 ## 最小全域木（minimum-spanning-tree） {#minimum-spanning-tree}
 
-- id：`minimum-spanning-tree`　レベル：水　段階：stub　type：technique
+- id：`minimum-spanning-tree`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/minimum-spanning-tree/
 - 別名：MST、クラスカル法、プリム法、Kruskal、Prim、最大全域木、minimum spanning tree
 - 種類：連結性・全域木、貪欲
@@ -538,7 +547,7 @@ search:
     - 制約：完全グラフで N ≤ 2×10^5（辺が N^2 本あり、候補の辺を減らす必要がある）
     - 言い回し：この辺は最小全域木に入るか
 - 節：
-    - `minimum-spanning-tree#kruskal-prim` Kruskal 法と Prim 法（密なら O(N^2) の Prim）：https://yuukougun.github.io/kyopro-atlas/graph/minimum-spanning-tree/#kruskal-prim
+    - `minimum-spanning-tree#kruskal-prim` クラスカル法とプリム法（密なら O(N^2) のプリム法）：https://yuukougun.github.io/kyopro-atlas/graph/minimum-spanning-tree/#kruskal-prim
     - `minimum-spanning-tree#why-correct` 正しさの理由（カット性質・閉路性質）：https://yuukougun.github.io/kyopro-atlas/graph/minimum-spanning-tree/#why-correct
     - `minimum-spanning-tree#maximum` 最大全域木：https://yuukougun.github.io/kyopro-atlas/graph/minimum-spanning-tree/#maximum
     - `minimum-spanning-tree#query-edges` クエリの辺が最小全域木に入るか（まとめて重み順に処理する）：https://yuukougun.github.io/kyopro-atlas/graph/minimum-spanning-tree/#query-edges

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 470 300" width="470" height="300" font-family="sans-serif">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker></defs>
+<rect x="0" y="0" width="470" height="300" fill="#ffffff"/>
+<line x1="80.0" y1="120.0" x2="148.0" y2="120.0" stroke="#333" stroke-width="1.6" marker-end="url(#arr)"/>
+<line x1="186.9" y1="109.3" x2="261.4" y2="61.8" stroke="#333" stroke-width="2.6" marker-end="url(#arr)"/>
+<line x1="280.0" y1="70.0" x2="280.0" y2="168.0" stroke="#333" stroke-width="2.6" marker-end="url(#arr)"/>
+<line x1="263.1" y1="179.3" x2="188.6" y2="131.8" stroke="#333" stroke-width="2.6" marker-end="url(#arr)"/>
+<line x1="300.0" y1="190.0" x2="378.0" y2="190.0" stroke="#333" stroke-width="1.6" marker-end="url(#arr)"/>
+<circle cx="60" cy="120" r="20" fill="#eeeeee" stroke="#333" stroke-width="1.6" stroke-dasharray="4,3"/>
+<text x="60" y="126" font-size="17" text-anchor="middle" fill="#111">1</text>
+<circle cx="170" cy="120" r="20" fill="#ffffff" stroke="#333" stroke-width="2.8"/>
+<text x="170" y="126" font-size="17" text-anchor="middle" fill="#111">2</text>
+<circle cx="280" cy="50" r="20" fill="#ffffff" stroke="#333" stroke-width="2.8"/>
+<text x="280" y="56" font-size="17" text-anchor="middle" fill="#111">3</text>
+<circle cx="280" cy="190" r="20" fill="#ffffff" stroke="#333" stroke-width="2.8"/>
+<text x="280" y="196" font-size="17" text-anchor="middle" fill="#111">4</text>
+<circle cx="400" cy="190" r="20" fill="#ffffff" stroke="#333" stroke-width="1.6"/>
+<text x="400" y="196" font-size="17" text-anchor="middle" fill="#111">5</text>
+<text x="60" y="160" font-size="12" text-anchor="middle" fill="#333">取り出せた</text>
+<text x="170" y="160" font-size="12" text-anchor="middle" fill="#333">入次数 1 のまま</text>
+<text x="320" y="58" font-size="12" text-anchor="start" fill="#333">閉路 2→3→4→2</text>
+<text x="400" y="230" font-size="12" text-anchor="middle" fill="#333">閉路の先</text>
+<text x="400" y="246" font-size="12" text-anchor="middle" fill="#333">（閉路上ではない）</text>
+<text x="230" y="280" font-size="14" text-anchor="middle" fill="#333">Kahn 法では 1 しか取り出せず、2・3・4・5 が残る</text>
+</svg>

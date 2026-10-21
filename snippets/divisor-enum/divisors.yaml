@@ -1,0 +1,10 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "1\n", output: "not prime\n1\n"}
+  - {input: "2\n", output: "prime\n1 2\n"}
+  - {input: "36\n", output: "not prime\n1 2 3 4 6 9 12 18 36\n"}
+  - {input: "97\n", output: "prime\n1 97\n"}
+  - {input: "999999999989\n", output: "prime\n1 999999999989\n"}
+  - {input: "999966000289\n", output: "not prime\n1 999983 999966000289\n"}

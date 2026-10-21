@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 282" font-family="sans-serif" font-size="14">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="24" y="26" fill="#222">玉 5 個と仕切り 2 本の並べ方 ↔ x₁ + x₂ + x₃ = 5 の非負整数解</text>
+<text x="24" y="46" fill="#555" font-size="12">（7 か所から仕切りの位置 2 か所を選ぶので C(7, 2) = 21 通り）</text>
+<circle cx="60" cy="92" r="13" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<circle cx="100" cy="92" r="13" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<line x1="140" y1="72" x2="140" y2="112" stroke="#b03030" stroke-width="4"/>
+<circle cx="180" cy="92" r="13" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<line x1="220" y1="72" x2="220" y2="112" stroke="#b03030" stroke-width="4"/>
+<circle cx="260" cy="92" r="13" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<circle cx="300" cy="92" r="13" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="80" y="128" text-anchor="middle" fill="#222" font-size="12">x₁ = 2</text>
+<text x="180" y="128" text-anchor="middle" fill="#222" font-size="12">x₂ = 1</text>
+<text x="280" y="128" text-anchor="middle" fill="#222" font-size="12">x₃ = 2</text>
+<text x="340" y="97" fill="#222">→ (2, 1, 2)</text>
+<line x1="60" y1="136" x2="60" y2="176" stroke="#b03030" stroke-width="4"/>
+<circle cx="100" cy="156" r="13" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<circle cx="140" cy="156" r="13" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<circle cx="180" cy="156" r="13" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<line x1="220" y1="136" x2="220" y2="176" stroke="#b03030" stroke-width="4"/>
+<circle cx="260" cy="156" r="13" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<circle cx="300" cy="156" r="13" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="40" y="192" text-anchor="middle" fill="#222" font-size="12">x₁ = 0</text>
+<text x="140" y="192" text-anchor="middle" fill="#222" font-size="12">x₂ = 3</text>
+<text x="280" y="192" text-anchor="middle" fill="#222" font-size="12">x₃ = 2</text>
+<text x="340" y="161" fill="#222">→ (0, 3, 2)</text>
+<circle cx="60" cy="220" r="13" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<circle cx="100" cy="220" r="13" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<circle cx="140" cy="220" r="13" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<circle cx="180" cy="220" r="13" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<circle cx="220" cy="220" r="13" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<line x1="260" y1="200" x2="260" y2="240" stroke="#b03030" stroke-width="4"/>
+<line x1="300" y1="200" x2="300" y2="240" stroke="#b03030" stroke-width="4"/>
+<text x="140" y="256" text-anchor="middle" fill="#222" font-size="12">x₁ = 5</text>
+<text x="280" y="256" text-anchor="middle" fill="#222" font-size="12">x₂ = 0</text>
+<text x="320" y="256" text-anchor="middle" fill="#222" font-size="12">x₃ = 0</text>
+<text x="340" y="225" fill="#222">→ (5, 0, 0)</text>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 280" font-family="sans-serif" font-size="14">
+<defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#999" stroke-width="2"/></pattern></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="310.0" y="22.0" text-anchor="middle" fill="#222">凸でない関数：m1 と m2 が同じ高さの平らな部分に乗ると、どちらを捨てるか決まらない</text>
+<rect x="48" y="80" width="38" height="110" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="67.0" y="74.0" text-anchor="middle" fill="#1f4e9a">5</text>
+<text x="67.0" y="208.0" text-anchor="middle" fill="#222">0</text>
+<rect x="102" y="80" width="38" height="110" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="121.0" y="74.0" text-anchor="middle" fill="#1f4e9a">5</text>
+<text x="121.0" y="208.0" text-anchor="middle" fill="#222">1</text>
+<rect x="156" y="80" width="38" height="110" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="175.0" y="74.0" text-anchor="middle" fill="#1f4e9a">5</text>
+<text x="175.0" y="208.0" text-anchor="middle" fill="#222">2</text>
+<rect x="210" y="80" width="38" height="110" fill="#f6d5d5" stroke="#b03a2e" stroke-width="1.5"/>
+<text x="229.0" y="74.0" text-anchor="middle" fill="#1f4e9a">5</text>
+<text x="229.0" y="208.0" text-anchor="middle" fill="#222">3</text>
+<text x="229.0" y="226.0" text-anchor="middle" fill="#b03a2e" font-weight="bold">m1</text>
+<rect x="264" y="80" width="38" height="110" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="283.0" y="74.0" text-anchor="middle" fill="#1f4e9a">5</text>
+<text x="283.0" y="208.0" text-anchor="middle" fill="#222">4</text>
+<rect x="318" y="80" width="38" height="110" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="337.0" y="74.0" text-anchor="middle" fill="#1f4e9a">5</text>
+<text x="337.0" y="208.0" text-anchor="middle" fill="#222">5</text>
+<rect x="372" y="80" width="38" height="110" fill="#f6d5d5" stroke="#b03a2e" stroke-width="1.5"/>
+<text x="391.0" y="74.0" text-anchor="middle" fill="#1f4e9a">5</text>
+<text x="391.0" y="208.0" text-anchor="middle" fill="#222">6</text>
+<text x="391.0" y="226.0" text-anchor="middle" fill="#b03a2e" font-weight="bold">m2</text>
+<rect x="418" y="60" width="54" height="130" fill="url(#hatch)" opacity="0.5"/>
+<rect x="426" y="124" width="38" height="66" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="445.0" y="118.0" text-anchor="middle" fill="#1f4e9a">3</text>
+<text x="445.0" y="208.0" text-anchor="middle" fill="#222">7</text>
+<rect x="472" y="60" width="54" height="130" fill="url(#hatch)" opacity="0.5"/>
+<rect x="480" y="168" width="38" height="22" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="499.0" y="162.0" text-anchor="middle" fill="#1f4e9a">1</text>
+<text x="499.0" y="208.0" text-anchor="middle" fill="#222">8</text>
+<rect x="526" y="60" width="54" height="130" fill="url(#hatch)" opacity="0.5"/>
+<rect x="534" y="124" width="38" height="66" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="553.0" y="118.0" text-anchor="middle" fill="#1f4e9a">3</text>
+<text x="553.0" y="208.0" text-anchor="middle" fill="#222">9</text>
+<text x="499.0" y="50.0" text-anchor="middle" fill="#222" font-size="12">最小は x = 8</text>
+<text x="310.0" y="252.0" text-anchor="middle" fill="#222" font-size="12">f(m1) = f(m2) = 5 のとき「(m2, r] を捨てる」と書くと、最小の x = 8 を含む斜線部を捨ててしまう</text>
+<text x="310.0" y="270.0" text-anchor="middle" fill="#222" font-size="12">差分は 0, 0, …, 0, −2, −2, +2 で単調でなく、差分の二分探索も同じ理由で失敗する</text>
+</svg>

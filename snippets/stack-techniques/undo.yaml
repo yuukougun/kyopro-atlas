@@ -1,0 +1,8 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "0\n", output: ""}
+  - {input: "1\n1 (\n", output: "No\n"}
+  - {input: "5\n1 )\n1 (\n2\n2\n1 (\n", output: "No\nNo\nNo\nYes\nNo\n"}
+  - {input: "4\n1 (\n1 )\n1 )\n2\n", output: "No\nYes\nNo\nYes\n"}

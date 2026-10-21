@@ -1,0 +1,14 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 長さ 3 の閉路：辺 1-2 で衝突し、親の 0 で出会う
+  - {input: "3 3\n0 1\n1 2\n2 0\n", output: "3\n1 0 2\n"}
+  # 長さ 4 の閉路だけなら奇閉路はない
+  - {input: "4 4\n0 1\n1 2\n2 3\n3 0\n", output: "-1\n"}
+  # 自己ループは長さ 1 の奇閉路
+  - {input: "2 2\n0 1\n1 1\n", output: "1\n1\n"}
+  # 2 つ目の成分にある長さ 5 の閉路
+  - {input: "7 6\n0 1\n2 3\n3 4\n4 5\n5 6\n6 2\n", output: "5\n4 3 2 6 5\n"}
+  # 頂点 1 つ・辺なし
+  - {input: "1 0\n", output: "-1\n"}

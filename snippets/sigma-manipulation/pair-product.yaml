@@ -1,0 +1,9 @@
+# 期待値は Python で i < j の積を直接足して 998244353 で割った余りを計算して確かめた
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "1\n5\n", output: "0\n"}
+  - {input: "3\n1 2 3\n", output: "11\n"}
+  - {input: "2\n1000000000 1000000000\n", output: "716070898\n"}
+  - {input: "4\n1000000000 999999999 7 998244353\n", output: "738894302\n"}

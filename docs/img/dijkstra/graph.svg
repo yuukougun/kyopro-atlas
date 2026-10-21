@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 250" width="560" height="250" font-family="sans-serif">
+  <rect width="560" height="250" fill="#ffffff"/>
+  <!-- 最短路の木に入らない辺（破線） -->
+  <g stroke="#888888" stroke-width="2" stroke-dasharray="6 5" fill="none">
+    <line x1="60" y1="120" x2="200" y2="50"/>
+    <line x1="200" y1="190" x2="340" y2="120"/>
+  </g>
+  <!-- 最短路の木の辺（太い実線） -->
+  <g stroke="#1f4e9c" stroke-width="4" fill="none">
+    <line x1="60" y1="120" x2="200" y2="190"/>
+    <line x1="200" y1="190" x2="200" y2="50"/>
+    <line x1="200" y1="50" x2="340" y2="120"/>
+    <line x1="340" y1="120" x2="480" y2="120"/>
+  </g>
+  <!-- 辺の重み -->
+  <g font-size="16" fill="#222222" text-anchor="middle">
+    <text x="118" y="74">4</text>
+    <text x="118" y="176">1</text>
+    <text x="214" y="125">2</text>
+    <text x="282" y="74">1</text>
+    <text x="282" y="176">5</text>
+    <text x="410" y="110">3</text>
+  </g>
+  <!-- 頂点 -->
+  <g stroke="#222222" stroke-width="2" fill="#ffffff">
+    <circle cx="60" cy="120" r="20"/>
+    <circle cx="200" cy="50" r="20"/>
+    <circle cx="200" cy="190" r="20"/>
+    <circle cx="340" cy="120" r="20"/>
+    <circle cx="480" cy="120" r="20"/>
+  </g>
+  <g font-size="18" fill="#222222" text-anchor="middle" dominant-baseline="central">
+    <text x="60" y="120">0</text>
+    <text x="200" y="50">1</text>
+    <text x="200" y="190">2</text>
+    <text x="340" y="120">3</text>
+    <text x="480" y="120">4</text>
+  </g>
+  <!-- 最短距離 -->
+  <g font-size="14" fill="#1f4e9c" text-anchor="middle">
+    <text x="60" y="160">dist 0</text>
+    <text x="200" y="20">dist 3</text>
+    <text x="200" y="232">dist 1</text>
+    <text x="340" y="160">dist 4</text>
+    <text x="480" y="160">dist 7</text>
+  </g>
+  <g font-size="13" fill="#444444">
+    <line x1="380" y1="205" x2="410" y2="205" stroke="#1f4e9c" stroke-width="4"/>
+    <text x="418" y="210">最短路の木の辺</text>
+    <line x1="380" y1="230" x2="410" y2="230" stroke="#888888" stroke-width="2" stroke-dasharray="6 5"/>
+    <text x="418" y="235">使われない辺</text>
+  </g>
+</svg>

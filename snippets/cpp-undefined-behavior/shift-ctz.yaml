@@ -1,0 +1,7 @@
+# k = 32 の 1 行目の 1 は未定義動作の結果の一例（x86-64 のシフト命令が幅を 32 で割った余りを使うため）
+compilers: [g++-13, g++-15]
+expect: run
+cases:
+  - {input: "3 12\n", output: "8 8 2\n"}
+  - {input: "32 0\n", output: "1 4294967296 32\n"}
+  - {input: "0 1\n", output: "1 1 0\n"}

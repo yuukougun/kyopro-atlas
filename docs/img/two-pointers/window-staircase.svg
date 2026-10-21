@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 538 358" width="538" height="358" font-family="sans-serif" font-size="15">
+<rect width="538" height="358" fill="#ffffff"/>
+<text x="80" y="18" font-size="14" fill="#333">和が 4 以下の区間：各 l に対する最大の r</text>
+<text x="68" y="50" text-anchor="end" fill="#555" font-size="13">添字</text>
+<text x="80" y="50" text-anchor="middle" fill="#555" font-size="13">0</text>
+<text x="124" y="50" text-anchor="middle" fill="#555" font-size="13">1</text>
+<text x="168" y="50" text-anchor="middle" fill="#555" font-size="13">2</text>
+<text x="212" y="50" text-anchor="middle" fill="#555" font-size="13">3</text>
+<text x="256" y="50" text-anchor="middle" fill="#555" font-size="13">4</text>
+<text x="300" y="50" text-anchor="middle" fill="#555" font-size="13">5</text>
+<text x="344" y="50" text-anchor="middle" fill="#555" font-size="13">6</text>
+<text x="388" y="50" text-anchor="middle" fill="#555" font-size="13">7</text>
+<text x="68" y="79" text-anchor="end" fill="#333">A</text>
+<rect x="80" y="58" width="44" height="30" fill="#f4f4f4" stroke="#333"/>
+<text x="102.0" y="79" text-anchor="middle" fill="#111">1</text>
+<rect x="124" y="58" width="44" height="30" fill="#f4f4f4" stroke="#333"/>
+<text x="146.0" y="79" text-anchor="middle" fill="#111">2</text>
+<rect x="168" y="58" width="44" height="30" fill="#f4f4f4" stroke="#333"/>
+<text x="190.0" y="79" text-anchor="middle" fill="#111">1</text>
+<rect x="212" y="58" width="44" height="30" fill="#f4f4f4" stroke="#333"/>
+<text x="234.0" y="79" text-anchor="middle" fill="#111">3</text>
+<rect x="256" y="58" width="44" height="30" fill="#f4f4f4" stroke="#333"/>
+<text x="278.0" y="79" text-anchor="middle" fill="#111">1</text>
+<rect x="300" y="58" width="44" height="30" fill="#f4f4f4" stroke="#333"/>
+<text x="322.0" y="79" text-anchor="middle" fill="#111">1</text>
+<rect x="344" y="58" width="44" height="30" fill="#f4f4f4" stroke="#333"/>
+<text x="366.0" y="79" text-anchor="middle" fill="#111">2</text>
+<text x="68" y="121" text-anchor="end" fill="#333">l = 0</text>
+<line x1="80" y1="105" x2="80" y2="133" stroke="#e2e2e2"/>
+<line x1="124" y1="105" x2="124" y2="133" stroke="#e2e2e2"/>
+<line x1="168" y1="105" x2="168" y2="133" stroke="#e2e2e2"/>
+<line x1="212" y1="105" x2="212" y2="133" stroke="#e2e2e2"/>
+<line x1="256" y1="105" x2="256" y2="133" stroke="#e2e2e2"/>
+<line x1="300" y1="105" x2="300" y2="133" stroke="#e2e2e2"/>
+<line x1="344" y1="105" x2="344" y2="133" stroke="#e2e2e2"/>
+<rect x="82" y="107" width="128" height="24" rx="4" fill="#cfe3f7" stroke="#1f5f9e" stroke-width="2"/>
+<rect x="214" y="107" width="40" height="24" rx="4" fill="none" stroke="#b33" stroke-width="2" stroke-dasharray="5 3"/>
+<text x="234.0" y="124" text-anchor="middle" fill="#b33" font-size="13">×</text>
+<line x1="212" y1="104" x2="212" y2="134" stroke="#1f5f9e" stroke-width="3"/>
+<text x="402" y="121" fill="#333">r = 3（和 4）</text>
+<text x="68" y="155" text-anchor="end" fill="#333">l = 1</text>
+<line x1="80" y1="139" x2="80" y2="167" stroke="#e2e2e2"/>
+<line x1="124" y1="139" x2="124" y2="167" stroke="#e2e2e2"/>
+<line x1="168" y1="139" x2="168" y2="167" stroke="#e2e2e2"/>
+<line x1="212" y1="139" x2="212" y2="167" stroke="#e2e2e2"/>
+<line x1="256" y1="139" x2="256" y2="167" stroke="#e2e2e2"/>
+<line x1="300" y1="139" x2="300" y2="167" stroke="#e2e2e2"/>
+<line x1="344" y1="139" x2="344" y2="167" stroke="#e2e2e2"/>
+<rect x="126" y="141" width="84" height="24" rx="4" fill="#cfe3f7" stroke="#1f5f9e" stroke-width="2"/>
+<rect x="214" y="141" width="40" height="24" rx="4" fill="none" stroke="#b33" stroke-width="2" stroke-dasharray="5 3"/>
+<text x="234.0" y="158" text-anchor="middle" fill="#b33" font-size="13">×</text>
+<line x1="212" y1="138" x2="212" y2="168" stroke="#1f5f9e" stroke-width="3"/>
+<text x="402" y="155" fill="#333">r = 3（和 3）</text>
+<text x="68" y="189" text-anchor="end" fill="#333">l = 2</text>
+<line x1="80" y1="173" x2="80" y2="201" stroke="#e2e2e2"/>
+<line x1="124" y1="173" x2="124" y2="201" stroke="#e2e2e2"/>
+<line x1="168" y1="173" x2="168" y2="201" stroke="#e2e2e2"/>
+<line x1="212" y1="173" x2="212" y2="201" stroke="#e2e2e2"/>
+<line x1="256" y1="173" x2="256" y2="201" stroke="#e2e2e2"/>
+<line x1="300" y1="173" x2="300" y2="201" stroke="#e2e2e2"/>
+<line x1="344" y1="173" x2="344" y2="201" stroke="#e2e2e2"/>
+<rect x="170" y="175" width="84" height="24" rx="4" fill="#cfe3f7" stroke="#1f5f9e" stroke-width="2"/>
+<rect x="258" y="175" width="40" height="24" rx="4" fill="none" stroke="#b33" stroke-width="2" stroke-dasharray="5 3"/>
+<text x="278.0" y="192" text-anchor="middle" fill="#b33" font-size="13">×</text>
+<line x1="256" y1="172" x2="256" y2="202" stroke="#1f5f9e" stroke-width="3"/>
+<text x="402" y="189" fill="#333">r = 4（和 4）</text>
+<text x="68" y="223" text-anchor="end" fill="#333">l = 3</text>
+<line x1="80" y1="207" x2="80" y2="235" stroke="#e2e2e2"/>
+<line x1="124" y1="207" x2="124" y2="235" stroke="#e2e2e2"/>
+<line x1="168" y1="207" x2="168" y2="235" stroke="#e2e2e2"/>
+<line x1="212" y1="207" x2="212" y2="235" stroke="#e2e2e2"/>
+<line x1="256" y1="207" x2="256" y2="235" stroke="#e2e2e2"/>
+<line x1="300" y1="207" x2="300" y2="235" stroke="#e2e2e2"/>
+<line x1="344" y1="207" x2="344" y2="235" stroke="#e2e2e2"/>
+<rect x="214" y="209" width="84" height="24" rx="4" fill="#cfe3f7" stroke="#1f5f9e" stroke-width="2"/>
+<rect x="302" y="209" width="40" height="24" rx="4" fill="none" stroke="#b33" stroke-width="2" stroke-dasharray="5 3"/>
+<text x="322.0" y="226" text-anchor="middle" fill="#b33" font-size="13">×</text>
+<line x1="300" y1="206" x2="300" y2="236" stroke="#1f5f9e" stroke-width="3"/>
+<text x="402" y="223" fill="#333">r = 5（和 4）</text>
+<text x="68" y="257" text-anchor="end" fill="#333">l = 4</text>
+<line x1="80" y1="241" x2="80" y2="269" stroke="#e2e2e2"/>
+<line x1="124" y1="241" x2="124" y2="269" stroke="#e2e2e2"/>
+<line x1="168" y1="241" x2="168" y2="269" stroke="#e2e2e2"/>
+<line x1="212" y1="241" x2="212" y2="269" stroke="#e2e2e2"/>
+<line x1="256" y1="241" x2="256" y2="269" stroke="#e2e2e2"/>
+<line x1="300" y1="241" x2="300" y2="269" stroke="#e2e2e2"/>
+<line x1="344" y1="241" x2="344" y2="269" stroke="#e2e2e2"/>
+<rect x="258" y="243" width="128" height="24" rx="4" fill="#cfe3f7" stroke="#1f5f9e" stroke-width="2"/>
+<line x1="388" y1="240" x2="388" y2="270" stroke="#1f5f9e" stroke-width="3"/>
+<text x="402" y="257" fill="#333">r = 7（和 4）</text>
+<text x="68" y="291" text-anchor="end" fill="#333">l = 5</text>
+<line x1="80" y1="275" x2="80" y2="303" stroke="#e2e2e2"/>
+<line x1="124" y1="275" x2="124" y2="303" stroke="#e2e2e2"/>
+<line x1="168" y1="275" x2="168" y2="303" stroke="#e2e2e2"/>
+<line x1="212" y1="275" x2="212" y2="303" stroke="#e2e2e2"/>
+<line x1="256" y1="275" x2="256" y2="303" stroke="#e2e2e2"/>
+<line x1="300" y1="275" x2="300" y2="303" stroke="#e2e2e2"/>
+<line x1="344" y1="275" x2="344" y2="303" stroke="#e2e2e2"/>
+<rect x="302" y="277" width="84" height="24" rx="4" fill="#cfe3f7" stroke="#1f5f9e" stroke-width="2"/>
+<line x1="388" y1="274" x2="388" y2="304" stroke="#1f5f9e" stroke-width="3"/>
+<text x="402" y="291" fill="#333">r = 7（和 3）</text>
+<text x="68" y="325" text-anchor="end" fill="#333">l = 6</text>
+<line x1="80" y1="309" x2="80" y2="337" stroke="#e2e2e2"/>
+<line x1="124" y1="309" x2="124" y2="337" stroke="#e2e2e2"/>
+<line x1="168" y1="309" x2="168" y2="337" stroke="#e2e2e2"/>
+<line x1="212" y1="309" x2="212" y2="337" stroke="#e2e2e2"/>
+<line x1="256" y1="309" x2="256" y2="337" stroke="#e2e2e2"/>
+<line x1="300" y1="309" x2="300" y2="337" stroke="#e2e2e2"/>
+<line x1="344" y1="309" x2="344" y2="337" stroke="#e2e2e2"/>
+<rect x="346" y="311" width="40" height="24" rx="4" fill="#cfe3f7" stroke="#1f5f9e" stroke-width="2"/>
+<line x1="388" y1="308" x2="388" y2="338" stroke="#1f5f9e" stroke-width="3"/>
+<text x="402" y="325" fill="#333">r = 7（和 2）</text>
+</svg>

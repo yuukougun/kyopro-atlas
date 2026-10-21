@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" font-family="sans-serif" font-size="14">
+  <rect x="0" y="0" width="720" height="300" fill="#ffffff"/>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333333"/>
+    </marker>
+  </defs>
+
+  <!-- コピー -->
+  <text x="120" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#000000">コピー：auto b = a;</text>
+  <text x="40" y="78" fill="#000000">a</text>
+  <rect x="60" y="56" width="150" height="34" fill="#dbeafe" stroke="#1e40af" stroke-width="2"/>
+  <text x="135" y="78" text-anchor="middle" fill="#000000">1 2 3</text>
+  <text x="40" y="148" fill="#000000">b</text>
+  <rect x="60" y="126" width="150" height="34" fill="#dbeafe" stroke="#1e40af" stroke-width="2" stroke-dasharray="6 3"/>
+  <text x="135" y="148" text-anchor="middle" fill="#000000">1 2 3</text>
+  <text x="135" y="196" text-anchor="middle" fill="#000000">箱が増える（N 個を写す）</text>
+  <text x="135" y="218" text-anchor="middle" fill="#000000">b を変えても a は変わらない</text>
+
+  <!-- 参照 -->
+  <text x="360" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#000000">参照：auto&amp; r = a;</text>
+  <text x="280" y="78" fill="#000000">a</text>
+  <rect x="300" y="56" width="150" height="34" fill="#dbeafe" stroke="#1e40af" stroke-width="2"/>
+  <text x="375" y="78" text-anchor="middle" fill="#000000">1 2 3</text>
+  <text x="280" y="148" fill="#000000">r</text>
+  <line x1="298" y1="143" x2="370" y2="94" stroke="#333333" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="360" y="196" text-anchor="middle" fill="#000000">箱は 1 つのまま（名前だけ増える）</text>
+  <text x="360" y="218" text-anchor="middle" fill="#000000">r を変えると a が変わる</text>
+
+  <!-- ムーブ -->
+  <text x="600" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#000000">ムーブ：auto b = move(a);</text>
+  <text x="520" y="78" fill="#000000">a</text>
+  <rect x="540" y="56" width="150" height="34" fill="#ffffff" stroke="#6b7280" stroke-width="2" stroke-dasharray="2 3"/>
+  <text x="615" y="78" text-anchor="middle" fill="#6b7280">（空）</text>
+  <text x="520" y="148" fill="#000000">b</text>
+  <rect x="540" y="126" width="150" height="34" fill="#dbeafe" stroke="#1e40af" stroke-width="2"/>
+  <text x="615" y="148" text-anchor="middle" fill="#000000">1 2 3</text>
+  <line x1="615" y1="92" x2="615" y2="122" stroke="#333333" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="600" y="196" text-anchor="middle" fill="#000000">中身の置き場所を渡すだけ（O(1)）</text>
+  <text x="600" y="218" text-anchor="middle" fill="#000000">a は手元では空になる</text>
+
+  <text x="360" y="272" text-anchor="middle" fill="#333333">swap(a, b) は、2 つの箱の中身の置き場所を交換するだけなので O(1)</text>
+</svg>

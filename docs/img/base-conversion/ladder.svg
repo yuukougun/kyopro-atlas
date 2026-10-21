@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 300" width="520" height="300" font-family="sans-serif" font-size="16">
+  <rect x="0" y="0" width="520" height="300" fill="#ffffff"/>
+  <text x="20" y="28" font-size="15" fill="#333">変換：3 で割り、余りを下の桁から積む</text>
+  <!-- rows -->
+  <g fill="#111">
+    <text x="40" y="70">23 ÷ 3 = 7</text>
+    <text x="180" y="70">余り</text>
+    <text x="40" y="110">7 ÷ 3 = 2</text>
+    <text x="180" y="110">余り</text>
+    <text x="40" y="150">2 ÷ 3 = 0</text>
+    <text x="180" y="150">余り</text>
+  </g>
+  <!-- remainder boxes -->
+  <g fill="#ffffff" stroke="#1f5fa8" stroke-width="2">
+    <rect x="222" y="50" width="30" height="28" rx="4"/>
+    <rect x="222" y="90" width="30" height="28" rx="4"/>
+    <rect x="222" y="130" width="30" height="28" rx="4"/>
+  </g>
+  <g fill="#1f5fa8" font-weight="bold" text-anchor="middle">
+    <text x="237" y="70">2</text>
+    <text x="237" y="110">1</text>
+    <text x="237" y="150">2</text>
+  </g>
+  <g fill="#555" font-size="15">
+    <text x="262" y="69">← 1 の位（3<tspan baseline-shift="super" font-size="11">0</tspan>）</text>
+    <text x="262" y="109">← 3 の位（3<tspan baseline-shift="super" font-size="11">1</tspan>）</text>
+    <text x="262" y="149">← 9 の位（3<tspan baseline-shift="super" font-size="11">2</tspan>）</text>
+  </g>
+  <text x="40" y="178" fill="#555" font-size="15">商が 0 になったら止める</text>
+  <!-- upward arrow -->
+  <line x1="410" y1="150" x2="410" y2="62" stroke="#c0392b" stroke-width="2" stroke-dasharray="6 4"/>
+  <polygon points="410,52 404,64 416,64" fill="#c0392b"/>
+  <text x="422" y="100" fill="#c0392b" font-size="14">下から</text>
+  <text x="422" y="118" fill="#c0392b" font-size="14">読む</text>
+  <text x="380" y="180" fill="#c0392b" font-weight="bold">23 = 212₃</text>
+  <!-- Horner -->
+  <line x1="20" y1="200" x2="500" y2="200" stroke="#bbb" stroke-width="1"/>
+  <text x="20" y="226" font-size="15" fill="#333">復元（Horner 法）：上の桁から v = v × 3 + d</text>
+  <text x="40" y="258" fill="#111">v = 0 → 0×3+2 = 2 → 2×3+1 = 7 → 7×3+2 = 23</text>
+  <text x="20" y="286" fill="#555" font-size="15">途中の v（2, 7）は、変換のときの商を逆にたどった値になる</text>
+</svg>

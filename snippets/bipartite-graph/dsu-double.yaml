@@ -1,0 +1,12 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 長さ 4 の閉路までは塗れ、対角線 0-2 で長さ 3 の閉路ができて塗れなくなる
+  - {input: "4 5\n0 1\n1 2\n2 3\n3 0\n0 2\n", output: "Yes\nYes\nYes\nYes\nNo\n"}
+  # 別々の成分をつないでも二部グラフのまま
+  - {input: "4 3\n0 1\n2 3\n1 2\n", output: "Yes\nYes\nYes\n"}
+  # 自己ループ
+  - {input: "1 1\n0 0\n", output: "No\n"}
+  # 頂点 1 つ・辺なし
+  - {input: "1 0\n", output: ""}

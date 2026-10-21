@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 330" width="640" height="330" font-family="sans-serif" font-size="15">
+<rect width="640" height="330" fill="#ffffff"/>
+<defs><marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#555"/></marker></defs>
+<text x="20" y="26" font-weight="bold">過去の選び方（2 日目まで）</text>
+<text x="420" y="26" font-weight="bold">要約＝最後の活動</text>
+<circle cx="40" cy="170" r="14" fill="#fff" stroke="#333"/><text x="40" y="175" text-anchor="middle" font-size="12">始</text>
+<line x1="54" y1="170" x2="116" y2="80" stroke="#333"/>
+<rect x="116" y="66" width="36" height="28" rx="4" fill="#fff" stroke="#333"/><text x="134" y="85" text-anchor="middle">A</text>
+<line x1="152" y1="80" x2="216" y2="50" stroke="#333"/>
+<rect x="216" y="36" width="44" height="28" rx="4" fill="#fff" stroke="#333"/><text x="238" y="55" text-anchor="middle">AB</text>
+<line x1="152" y1="80" x2="216" y2="98" stroke="#333"/>
+<rect x="216" y="84" width="44" height="28" rx="4" fill="#fff" stroke="#333"/><text x="238" y="103" text-anchor="middle">AC</text>
+<line x1="54" y1="170" x2="116" y2="170" stroke="#333"/>
+<rect x="116" y="156" width="36" height="28" rx="4" fill="#fff" stroke="#333"/><text x="134" y="175" text-anchor="middle">B</text>
+<line x1="152" y1="170" x2="216" y2="146" stroke="#333"/>
+<rect x="216" y="132" width="44" height="28" rx="4" fill="#fff" stroke="#333"/><text x="238" y="151" text-anchor="middle">BA</text>
+<line x1="152" y1="170" x2="216" y2="194" stroke="#333"/>
+<rect x="216" y="180" width="44" height="28" rx="4" fill="#fff" stroke="#333"/><text x="238" y="199" text-anchor="middle">BC</text>
+<line x1="54" y1="170" x2="116" y2="260" stroke="#333"/>
+<rect x="116" y="246" width="36" height="28" rx="4" fill="#fff" stroke="#333"/><text x="134" y="265" text-anchor="middle">C</text>
+<line x1="152" y1="260" x2="216" y2="242" stroke="#333"/>
+<rect x="216" y="228" width="44" height="28" rx="4" fill="#fff" stroke="#333"/><text x="238" y="247" text-anchor="middle">CA</text>
+<line x1="152" y1="260" x2="216" y2="290" stroke="#333"/>
+<rect x="216" y="276" width="44" height="28" rx="4" fill="#fff" stroke="#333"/><text x="238" y="295" text-anchor="middle">CB</text>
+<rect x="420" y="68" width="190" height="44" rx="4" fill="#f2f2f2" stroke="#333" stroke-width="1.5"/>
+<text x="515" y="95" text-anchor="middle">dp[2][A]（末尾が A）</text>
+<rect x="420" y="148" width="190" height="44" rx="4" fill="#f2f2f2" stroke="#333" stroke-width="1.5"/>
+<text x="515" y="175" text-anchor="middle">dp[2][B]（末尾が B）</text>
+<rect x="420" y="228" width="190" height="44" rx="4" fill="#f2f2f2" stroke="#333" stroke-width="1.5"/>
+<text x="515" y="255" text-anchor="middle">dp[2][C]（末尾が C）</text>
+<line x1="262" y1="50" x2="416" y2="170" stroke="#555" stroke-dasharray="5,3" marker-end="url(#ar)"/>
+<line x1="262" y1="98" x2="416" y2="250" stroke="#555" stroke-dasharray="5,3" marker-end="url(#ar)"/>
+<line x1="262" y1="146" x2="416" y2="90" stroke="#555" stroke-dasharray="5,3" marker-end="url(#ar)"/>
+<line x1="262" y1="194" x2="416" y2="250" stroke="#555" stroke-dasharray="5,3" marker-end="url(#ar)"/>
+<line x1="262" y1="242" x2="416" y2="90" stroke="#555" stroke-dasharray="5,3" marker-end="url(#ar)"/>
+<line x1="262" y1="290" x2="416" y2="170" stroke="#555" stroke-dasharray="5,3" marker-end="url(#ar)"/>
+<text x="20" y="318" font-size="13">6 本の枝が 3 つの状態に合流する。3 日目に選べる活動は末尾だけで決まる</text>
+</svg>

@@ -33,7 +33,7 @@ search:
 
 ## 数の型とリテラル（cpp-types-literals） {#cpp-types-literals}
 
-- id：`cpp-types-literals`　レベル：基礎　段階：stub　type：cpp
+- id：`cpp-types-literals`　レベル：基礎　段階：draft　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-types-literals/
 - 別名：整数の型、long long、LL、ULL、桁区切り、2 進リテラル、0uz、auto の推論、using ll = long long、static_cast、INF、numeric_limits、LLONG_MAX、INT_MAX、0x3f3f3f3f、1LL << 60、double、long double、1e18、浮動小数点数の型
 - 種類：実装・C++
@@ -51,7 +51,7 @@ search:
 
 ## 整数のオーバーフローと \_\_int128（cpp-integer-overflow） {#cpp-integer-overflow}
 
-- id：`cpp-integer-overflow`　レベル：基礎　段階：stub　type：cpp
+- id：`cpp-integer-overflow`　レベル：基礎　段階：draft　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-integer-overflow/
 - 別名：オーバーフロー、integer overflow、あふれ、int の掛け算、1LL \* a \* b、1 << 40、符号なし整数、v.size() - 1、ssize、\_\_int128、i128、128bit 整数、\_\_builtin_mul_overflow
 - 種類：実装・C++
@@ -65,7 +65,7 @@ search:
     - `cpp-integer-overflow#unsigned-size` size() は符号なし：空の v で v.size() - 1 が巨大になる、-1 < v.size() が false、ssize(v)（C++20）か (int)v.size()：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-integer-overflow/#unsigned-size
     - `cpp-integer-overflow#min-max-types` 型の違う値を min・max に渡すとコンパイルエラー：min(1, x) → min(1LL, x)・min&lt;long long>(1, x)：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-integer-overflow/#min-max-types
     - `cpp-integer-overflow#edge-values` INF + INF・abs(INT_MIN)・INT_MIN / -1：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-integer-overflow/#edge-values
-    - `cpp-integer-overflow#signed-overflow-ub` 符号付き整数のあふれは未定義動作：-O2 では正しく書いた別の行の値まで変わる（警告は出ず、-fsanitize=undefined で見つかる）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-integer-overflow/#signed-overflow-ub
+    - `cpp-integer-overflow#signed-overflow-ub` 符号付き整数のあふれは未定義動作：-O2 では正しく書いた比較の結果まで変わる（警告は出ず、-fsanitize=undefined で見つかる）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-integer-overflow/#signed-overflow-ub
     - `cpp-integer-overflow#int128` \_\_int128：10^18 程度どうしの積を正確に持つ。リテラルはないので (\_\_int128)1 << 100 と書く（GCC の拡張）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-integer-overflow/#int128
     - `cpp-integer-overflow#int128-io` \_\_int128 の入出力：cout << も cin >> もできない、format（C++20・GCC 13〜）・println（C++23・GCC 14〜）か自作の変換で出し、文字列で読んで変換する：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-integer-overflow/#int128-io
     - `cpp-integer-overflow#int128-strict-mode` -std=c++23 では is_integral_v<\_\_int128> が false で gcd・abs に渡せない（AtCoder の -std=gnu++23 では渡せる。numeric_limits はどちらでも使える）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-integer-overflow/#int128-strict-mode
@@ -73,7 +73,7 @@ search:
 
 ## 初期化と CTAD（cpp-initialization） {#cpp-initialization}
 
-- id：`cpp-initialization`　レベル：基礎　段階：stub　type：cpp
+- id：`cpp-initialization`　レベル：基礎　段階：draft　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-initialization/
 - 別名：初期化、多次元 vector、多次元配列、vector の初期化、array&lt;int, 26> cnt{\}、値初期化、memset、fill、assign、指示付き初期化、集成体、explicit、クラステンプレートの実引数推論、class template argument deduction、vector dp(n, vector(m, 0LL))
 - 種類：実装・C++
@@ -93,13 +93,13 @@ search:
 
 ## 数・ビット・乱数の関数（cpp-math-functions） {#cpp-math-functions}
 
-- id：`cpp-math-functions`　レベル：基礎　段階：stub　type：cpp
+- id：`cpp-math-functions`　レベル：基礎　段階：draft　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-math-functions/
 - 別名：gcd、lcm、midpoint、clamp、割り算の切り捨ての向き、pow、sqrt、sqrtl、numbers::pi、std::popcount、countr_zero、bit_width、\_\_builtin_popcount、\_\_builtin_ctz、\_\_lg、std::bitset、\_Find_first、mt19937_64、uniform_int_distribution、shuffle、chrono、乱数、時間計測
 - 種類：実装・C++、ビット演算
 - 前提：`cpp-types-literals`
 - 節：
-    - `cpp-math-functions#gcd-lcm` gcd・lcm：型を混ぜられる、負の数は絶対値で計算、lcm は a / gcd(a, b) \* b の順にしてあふれを避ける（C++17。\_\_gcd は GCC の古い関数）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-math-functions/#gcd-lcm
+    - `cpp-math-functions#gcd-lcm` gcd・lcm：型を混ぜられる、負の数は絶対値で計算、lcm は戻り値の型であふれる（C++17。\_\_gcd は GCC の古い関数）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-math-functions/#gcd-lcm
     - `cpp-math-functions#midpoint-clamp` midpoint（C++20）・clamp（C++17）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-math-functions/#midpoint-clamp
     - `cpp-math-functions#integer-division` 整数の / と % は 0 に向かって切り捨てる（-7 / 2 は -3、-7 % 2 は -1。負の数の床関数・切り上げの書き方は integer-division のページ）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-math-functions/#integer-division
     - `cpp-math-functions#pow-sqrt` pow・sqrt は double で計算する：整数のべき乗に pow を使わない、大きな long long の sqrt は誤差が出る（整数の平方根は標準になく、補正の仕方は integer-root のページ）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-math-functions/#pow-sqrt
@@ -114,7 +114,7 @@ search:
 
 ## 参照と範囲 for（cpp-range-for） {#cpp-range-for}
 
-- id：`cpp-range-for`　レベル：基礎　段階：stub　type：cpp
+- id：`cpp-range-for`　レベル：基礎　段階：draft　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-range-for/
 - 別名：参照、参照渡し、const 参照、値渡し、コピー、ムーブ、std::move、std::swap、範囲 for、range-based for、auto&&、const auto&、for (auto& x : v)、vector&lt;bool>
 - 種類：実装・C++
@@ -131,7 +131,7 @@ search:
 
 ## 構造化束縛と pair・tuple・optional（cpp-structured-bindings） {#cpp-structured-bindings}
 
-- id：`cpp-structured-bindings`　レベル：基礎　段階：stub　type：cpp
+- id：`cpp-structured-bindings`　レベル：基礎　段階：draft　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-structured-bindings/
 - 別名：構造化束縛、structured binding、auto [a, b]、分解宣言、pair、tuple、tie、get<0>、make_pair、optional、nullopt、value_or、exchange、初期化式付き if
 - 種類：実装・C++
@@ -153,7 +153,7 @@ search:
 
 ## ラムダ式と再帰ラムダ（cpp-lambda） {#cpp-lambda}
 
-- id：`cpp-lambda`　レベル：基礎　段階：stub　type：cpp
+- id：`cpp-lambda`　レベル：基礎　段階：draft　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-lambda/
 - 別名：ラムダ、lambda、無名関数、クロージャ、キャプチャ、[&]、[=]、ジェネリックラムダ、再帰ラムダ、std::function、auto&& self、this auto&& self、deducing this、不動点コンビネータ、FixPoint
 - 種類：実装・C++
@@ -171,11 +171,11 @@ search:
     - `cpp-lambda#deducing-this` deducing this：\[&](this auto&& self, int v) -> void を dfs(0) と呼ぶ（C++23・GCC 14〜。g++-13 ではエラー）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-lambda/#deducing-this
     - `cpp-lambda#fixpoint` 不動点コンビネータ（雛形の FixPoint・MFP）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-lambda/#fixpoint
     - `cpp-lambda#return-type` 戻り値の型 -> void・-> int を書く場面（再帰より前に型の決まる return がないとき、三項演算子の中の再帰）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-lambda/#return-type
-    - `cpp-lambda#speed` 速さの比較：std::function は fib(35) で約 5 倍、木の DFS で約 1.3 倍遅い。深い再帰はスタックに注意：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-lambda/#speed
+    - `cpp-lambda#speed` 速さの比較：std::function は fib(40) で約 5 倍、木の DFS で約 1.5 倍遅い。深い再帰はスタックに注意：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-lambda/#speed
 
 ## 関数テンプレートと constexpr（cpp-templates-constexpr） {#cpp-templates-constexpr}
 
-- id：`cpp-templates-constexpr`　レベル：基礎　段階：stub　type：cpp
+- id：`cpp-templates-constexpr`　レベル：基礎　段階：draft　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-templates-constexpr/
 - 別名：テンプレート、template、関数テンプレート、template &lt;class T>、型推論、auto 引数、コンセプト、concepts、requires、static_assert、if constexpr、畳み込み式、fold expression、属性、[[maybe_unused]]
 - 種類：実装・C++
@@ -193,7 +193,7 @@ search:
 
 ## マクロと雛形（cpp-macros-template-file） {#cpp-macros-template-file}
 
-- id：`cpp-macros-template-file`　レベル：基礎　段階：stub　type：cpp
+- id：`cpp-macros-template-file`　レベル：基礎　段階：draft　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-macros-template-file/
 - 別名：マクロ、macro、テンプレート（雛形）、rep マクロ、all マクロ、\#define int long long、signed main()、chmin、chmax、\#ifdef LOCAL、\#pragma GCC optimize、bits/stdc++.h、using namespace std、import std;、名前の衝突、バンドル、ライブラリの展開、expander.py、提出用にコピー
 - 種類：実装・C++
@@ -213,7 +213,7 @@ search:
 
 ## コンテナ操作とイテレータ（cpp-container-idioms） {#cpp-container-idioms}
 
-- id：`cpp-container-idioms`　レベル：基礎　段階：stub　type：cpp
+- id：`cpp-container-idioms`　レベル：基礎　段階：draft　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-container-idioms/
 - 別名：erase_if、contains、emplace_back、map の []、multiset の削除、ms.erase(ms.find(x))、イテレータ、iterator、std::prev、std::next、rbegin、it - v.begin()、イテレータの無効化、unordered_map のハッシュ、pb_ds、order_of_key、find_by_order
 - 種類：実装・C++、データ構造
@@ -233,13 +233,13 @@ search:
 
 ## 比較関数と順序（cpp-comparators） {#cpp-comparators}
 
-- id：`cpp-comparators`　レベル：基礎　段階：stub　type：cpp
+- id：`cpp-comparators`　レベル：基礎　段階：draft　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-comparators/
 - 別名：comparator、greater<>、greater{\}、priority_queue の向き、最小ヒープ、厳密弱順序、strict weak ordering、operator&lt;、三方比較演算子、宇宙船演算子、<=>、= default、構造体のソート、複数キーのソート
 - 種類：実装・C++、ソート・座標圧縮
 - 前提：`cpp-lambda`
 - 節：
-    - `cpp-comparators#strict-weak-ordering` 比較関数の約束：a が b より前なら true を返し、厳密弱順序を満たす（a と a を比べたら false）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-comparators/#strict-weak-ordering
+    - `cpp-comparators#strict-weak-ordering` 比較関数の約束：a が b より前なら true を返し、狭義の弱順序を満たす（a と a を比べたら false）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-comparators/#strict-weak-ordering
     - `cpp-comparators#less-equal-pitfall` 比較関数に <= を書くと sort が壊れる（同じ値が多いと Segmentation fault。\_GLIBCXX_DEBUG で見つかる）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-comparators/#less-equal-pitfall
     - `cpp-comparators#greater` 降順：greater&lt;T>・greater<>（型の違う値も比べられる）・greater{}（CTAD で greater&lt;void>）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-comparators/#greater
     - `cpp-comparators#priority-queue-order` priority_queue の向き：既定は最大が先頭、greater で最小が先頭（比較関数は「優先度が低い」を表すので sort と向きが逆に見える）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-comparators/#priority-queue-order
@@ -251,29 +251,29 @@ search:
 
 ## アルゴリズム関数と ranges 版（cpp-algorithms） {#cpp-algorithms}
 
-- id：`cpp-algorithms`　レベル：基礎　段階：stub　type：cpp
+- id：`cpp-algorithms`　レベル：基礎　段階：draft　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/
 - 別名：algorithm、sort、unique、std::lower_bound、std::upper_bound、accumulate、reduce、partial_sum、std::iota、std::next_permutation、max_element、max({a, b, c})、ranges::sort、射影、projection、ranges::unique、ranges::fold_left、ranges::contains
 - 種類：実装・C++、ソート・座標圧縮
 - 前提：`cpp-container-idioms`、`cpp-lambda`
 - 節：
     - `cpp-algorithms#sort` sort と降順（greater・rbegin/rend）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#sort
-    - `cpp-algorithms#unique-erase` 重複の削除：sort してから v.erase(unique(v.begin(), v.end()), v.end())（unique は前に詰めて新しい終端を返すだけ）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#unique-erase
-    - `cpp-algorithms#lower-bound` 二分探索：lower_bound・upper_bound の位置と添字（- v.begin()）・個数、equal_range・binary_search（set・map にはメンバの lower_bound）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#lower-bound
-    - `cpp-algorithms#accumulate` 総和：accumulate は初期値の型で計算する（0 ではなく 0LL・0.0）、reduce は初期値を省くと要素の型で足す：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#accumulate
+    - `cpp-algorithms#unique-erase` 重複の削除：sort → unique → erase（unique は前に詰めて新しい終端を返すだけ）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#unique-erase
+    - `cpp-algorithms#lower-bound` 二分探索：lower_bound・upper_bound の添字と個数、equal_range・binary_search（set・map はメンバ関数）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#lower-bound
+    - `cpp-algorithms#accumulate` 総和：accumulate は初期値の型で足す（0LL・0.0）、reduce は初期値を省くと要素の型で足す：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#accumulate
     - `cpp-algorithms#partial-sum` 累積和と差分：partial_sum・inclusive_scan・adjacent_difference：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#partial-sum
     - `cpp-algorithms#iota` 連番：std::iota で埋める（views::iota・ranges::iota との違い）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#iota
     - `cpp-algorithms#next-permutation` next_permutation で順列を列挙する（ソートした状態から始める）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#next-permutation
-    - `cpp-algorithms#max-element` 最大・最小・個数：max_element はイテレータを返す、max({a, b, c})、clamp（C++17）、count の戻り値は ptrdiff_t：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#max-element
+    - `cpp-algorithms#max-element` 最大・最小・個数：max_element はイテレータを返す、max({a, b, c})・clamp、count は ptrdiff_t を返す：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#max-element
     - `cpp-algorithms#ranges` ranges 版：ranges::sort(v) のようにコンテナを直接渡す（C++20）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#ranges
-    - `cpp-algorithms#projection` 射影：ranges::sort(ps, {}, &P::score)・ranges::max(ps, {}, &P::score)（{} は既定の比較）（C++20）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#projection
-    - `cpp-algorithms#ranges-unique` ranges::unique は後ろの不要部分を返す：v.erase(ranges::unique(v).begin(), v.end())（C++20）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#ranges-unique
-    - `cpp-algorithms#fold-left` ranges::fold_left・contains・find_last（C++23・GCC 13〜）。ranges::starts_with（C++23・GCC 16〜）は AtCoder では使えない：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#fold-left
-    - `cpp-algorithms#ranges-dangling` 一時オブジェクトを渡すと戻り値が ranges::dangling になり、使うとコンパイルエラーになる（C++20）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#ranges-dangling
+    - `cpp-algorithms#projection` 射影：ranges::sort(ps, {}, &P::score) は score で比べて要素ごと並べ替える（C++20）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#projection
+    - `cpp-algorithms#ranges-unique` ranges::unique は後ろの不要部分を返す（C++20）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#ranges-unique
+    - `cpp-algorithms#fold-left` ranges::fold_left・contains・find_last（C++23・GCC 13〜）と、AtCoder にない ranges::starts_with：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#fold-left
+    - `cpp-algorithms#ranges-dangling` 一時オブジェクトを渡すと戻り値が ranges::dangling になる（使うとコンパイルエラー）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#ranges-dangling
 
 ## 文字列の操作（cpp-string-api） {#cpp-string-api}
 
-- id：`cpp-string-api`　レベル：基礎　段階：stub　type：cpp
+- id：`cpp-string-api`　レベル：基礎　段階：draft　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-string-api/
 - 別名：string、substr、string::find、npos、to_string、stoi、stoll、starts_with、ends_with、string_view、s += c、getline、c - 'a'、文字と数の変換
 - 種類：実装・C++
@@ -290,25 +290,25 @@ search:
 
 ## ACL の読み方（acl-reading） {#acl-reading}
 
-- id：`acl-reading`　レベル：基礎　段階：stub　type：cpp
+- id：`acl-reading`　レベル：基礎　段階：draft　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/
 - 別名：AtCoder Library、ACL、atcoder/all、using namespace atcoder、val()、segtree&lt;S, op, e>、lazy_segtree のテンプレート引数、テンプレート引数、ラムダをテンプレート引数に
 - 種類：実装・C++
 - 前提：`cpp-templates-constexpr`、`cpp-lambda`
 - ACL：`static_modint`、`modint`、`segtree`、`lazy_segtree`、`dsu`
 - 節：
-    - `acl-reading#conventions` include と共通の約束：#include &lt;atcoder/all>・using namespace atcoder、添字は 0 始まり、区間は半開区間 [l, r)、引数なしで作った物は代入するまで使わない、制約の違反は assert で止まる（AtCoder では RE）：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#conventions
+    - `acl-reading#conventions` include と共通の約束：0 始まり・半開区間 [l, r)・引数なしで作った物・assert：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#conventions
     - `acl-reading#explicit` コンストラクタは modint 以外 explicit：dsu d(n) と書く（dsu d = n はエラー）：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#explicit
-    - `acl-reading#version` 版：AtCoder は v1.6。v1.5 との違いは modint::val() の型など（手元も v1.6 にそろえる）：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#version
-    - `acl-reading#components` 部品の呼び出し方の一覧：dsu・fenwick_tree・scc_graph・two_sat・mf_graph・mcf_graph・convolution・suffix_array・z_algorithm・floor_sum・crt（意味は各手法のページ）：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#components
-    - `acl-reading#dsu-groups` dsu の groups() は vector の vector を返す：for (int v : d.groups()[0]) は C++23・GCC 15〜でだけ安全（変数に受けてから回す）：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#dsu-groups
-    - `acl-reading#modint` modint の読み方：using mint = modint998244353; と書けば四則演算で法が自動で取られる（static_modint と set_mod の使い分け・割り算の条件・raw は math の modint のページ）：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#modint
-    - `acl-reading#modint-val` modint の値・出力と版の差：cout << も println もできないので .val() を出す、v1.6 で val() は int（v1.5 の unsigned int では x.val() - 1 が巨大になる）、< がないのでソートや set に入れられない：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#modint-val
+    - `acl-reading#version` 版：AtCoder は v1.6、v1.5 との違いは modint::val() の型など：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#version
+    - `acl-reading#components` 部品の呼び出し方の一覧（意味は各手法のページ）：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#components
+    - `acl-reading#dsu-groups` dsu の groups()：for (int v : d.groups()[0]) は C++23・GCC 15〜でだけ安全：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#dsu-groups
+    - `acl-reading#modint` modint の読み方：using mint = modint998244353; で法が自動で取られる：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#modint
+    - `acl-reading#modint-val` modint の値と出力：.val() を出す、v1.6 で val() は int、< はない：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#modint-val
     - `acl-reading#segtree-args` segtree&lt;S, op, e> の読み方：S は要素の型、op は結合的な演算、e は単位元を返す関数（水）：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#segtree-args
-    - `acl-reading#passing-functions` 関数の渡し方：名前を渡す従来の形と、キャプチャのないラムダを直接渡す形（C++20・ACL v1.5〜）（水）：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#passing-functions
-    - `acl-reading#capturing-lambda` キャプチャのあるラムダは op・e に渡せない（is not a constant expression）、max_right・min_left の判定関数には渡せる（水）：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#capturing-lambda
-    - `acl-reading#lazy-segtree-args` lazy_segtree の 7 つの引数：F・mapping(f, x)・composition(f, g) は g の後に f・id（水）：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#lazy-segtree-args
-    - `acl-reading#template-arg-errors` テンプレート引数の形が合わないときの static_assert のメッセージ（op must work as S(S, S) など）（水）：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#template-arg-errors
+    - `acl-reading#passing-functions` 関数の渡し方：関数の名前か、キャプチャのないラムダ（C++20・ACL v1.5〜）（水）：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#passing-functions
+    - `acl-reading#capturing-lambda` キャプチャのあるラムダは op・e に渡せない（max_right・min_left の判定関数には渡せる）（水）：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#capturing-lambda
+    - `acl-reading#lazy-segtree-args` lazy_segtree の 7 つの引数：composition(f, g) は g の後に f（水）：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#lazy-segtree-args
+    - `acl-reading#template-arg-errors` テンプレート引数の形が合わないときの static_assert（mapping must work as S(F, S) など）（水）：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#template-arg-errors
 
 ## views の基本（cpp-views-basics） {#cpp-views-basics}
 
@@ -332,7 +332,7 @@ search:
 
 ## C++23 の views と ranges::to（cpp-views-cpp23） {#cpp-views-cpp23}
 
-- id：`cpp-views-cpp23`　レベル：基礎　段階：stub　type：cpp
+- id：`cpp-views-cpp23`　レベル：基礎　段階：draft　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-views-cpp23/
 - 別名：views::enumerate、views::zip、views::zip_transform、views::pairwise、views::adjacent、views::chunk、views::slide、views::chunk_by、views::stride、views::cartesian_product、views::repeat、views::join_with、ranges::to、to&lt;vector>、from_range、append_range
 - 種類：実装・C++
@@ -353,7 +353,7 @@ search:
 
 ## 入出力と定数倍（cpp-io） {#cpp-io}
 
-- id：`cpp-io`　レベル：基礎　段階：stub　type：cpp
+- id：`cpp-io`　レベル：基礎　段階：draft　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-io/
 - 別名：入出力、fast I/O、cin.tie(nullptr)、sync_with_stdio、endl、println、std::print、std::format、printf、setprecision、fixed、小数の出力、fflush(stdout)、TLE になる書き方、入出力が遅い
 - 種類：実装・C++、計算量
@@ -361,7 +361,7 @@ search:
     - 制約：入力や出力が 10^6 個程度ある（入出力の書き方で実行時間に差が出る）
     - 言い回し：答えの絶対誤差または相対誤差が 10^-6 以下なら正解とする（小数の桁を指定して出力しないと WA になる）
 - 節：
-    - `cpp-io#fast-io` 入出力の高速化：ios::sync_with_stdio(false); cin.tie(nullptr);（10^6 個の入力で約 0.15 秒の差）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-io/#fast-io
+    - `cpp-io#fast-io` 入出力の高速化：ios::sync_with_stdio(false); cin.tie(nullptr);（10^6 個の入力で約 0.2 秒の差）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-io/#fast-io
     - `cpp-io#endl` endl は改行のたびに書き出す（10^6 行で約 0.2 秒余計にかかる）、普段は改行文字 '\\n' を出す：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-io/#endl
     - `cpp-io#separators` 区切りと改行の書き方：cout << a[i] << " \\n"[i == n - 1]、cond ? "Yes" : "No"：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-io/#separators
     - `cpp-io#read-until-eof` 入力の終わりまで読む：while (cin >> x)：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-io/#read-until-eof
@@ -370,7 +370,7 @@ search:
     - `cpp-io#format-spec` 書式の指定：幅・左寄せ・0 埋め・2 進・16 進・小数の桁（{:5}・{:<5}・{:05}・{:b}・{:x}・{:.3f}）（C++20・GCC 13〜）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-io/#format-spec
     - `cpp-io#float-output` 小数の出力：cout は有効数字 6 桁（123456789.0 が 1.23457e+08 になる）、fixed << setprecision(15)・{:.15f}・printf("%.15f")：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-io/#float-output
     - `cpp-io#mixing-streams` 同期を切った後に println・printf と cout を混ぜると順番が入れ替わる（println(cout, ...) なら混ざらない）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-io/#mixing-streams
-    - `cpp-io#flush` インタラクティブ問題のフラッシュ：出力がパイプのときは cout << endl か fflush(stdout) が要る：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-io/#flush
+    - `cpp-io#flush` インタラクティブ問題のフラッシュ：cin.tie(nullptr) を書いたら、質問のたびに cout << endl か fflush(stdout) が要る：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-io/#flush
     - `cpp-io#unprintable-types` そのままでは出力できない型：\_\_int128・modint（.val() を出す）、vector は println("{}", v) で [1, 2, 3] と出て AtCoder の形式にならない（C++23・GCC 15〜）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-io/#unprintable-types
     - `cpp-io#tle-causes` C++ 側で TLE になる書き方の一覧と計測（endl・同期・std::function の再帰・set への std::lower_bound・s = s + c・vector の値渡し。views::iota は普通の for と同じ速さ）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-io/#tle-causes
 
@@ -399,7 +399,7 @@ search:
 
 ## 未定義動作とダングリング（cpp-undefined-behavior） {#cpp-undefined-behavior}
 
-- id：`cpp-undefined-behavior`　レベル：基礎　段階：stub　type：cpp
+- id：`cpp-undefined-behavior`　レベル：基礎　段階：draft　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-undefined-behavior/
 - 別名：未定義動作、UB、undefined behavior、範囲外アクセス、未初期化変数、初期化忘れ、ゴミの値、ダングリング、dangling reference、use-after-free、参照の無効化、一時オブジェクトの寿命、pq.top() の参照、\_GLIBCXX_DEBUG、\_GLIBCXX_ASSERTIONS、-fsanitize=address、AddressSanitizer、UndefinedBehaviorSanitizer、デバッグ用ビルド、assert
 - 種類：実装・C++

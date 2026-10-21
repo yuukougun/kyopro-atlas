@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 325" font-family="sans-serif" font-size="14">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="30" y="24" fill="#222">元の描き方（9 頂点 9 辺）</text>
+<line x1="130" y1="150" x2="60" y2="90" stroke="#555" stroke-width="2"/>
+<line x1="60" y1="90" x2="140" y2="60" stroke="#555" stroke-width="2"/>
+<line x1="140" y1="60" x2="210" y2="110" stroke="#555" stroke-width="2"/>
+<line x1="210" y1="110" x2="130" y2="150" stroke="#555" stroke-width="2"/>
+<line x1="130" y1="150" x2="70" y2="220" stroke="#555" stroke-width="2"/>
+<line x1="70" y1="220" x2="170" y2="250" stroke="#555" stroke-width="2"/>
+<line x1="140" y1="60" x2="250" y2="40" stroke="#555" stroke-width="2"/>
+<line x1="250" y1="40" x2="300" y2="120" stroke="#555" stroke-width="2"/>
+<line x1="250" y1="40" x2="260" y2="200" stroke="#555" stroke-width="2"/>
+<circle cx="130" cy="150" r="16" fill="#ffffff" stroke="#222" stroke-width="1.5"/><text x="130" y="155" text-anchor="middle" fill="#222">1</text>
+<circle cx="60" cy="90" r="16" fill="#ffffff" stroke="#222" stroke-width="1.5"/><text x="60" y="95" text-anchor="middle" fill="#222">2</text>
+<circle cx="140" cy="60" r="16" fill="#ffffff" stroke="#222" stroke-width="1.5"/><text x="140" y="65" text-anchor="middle" fill="#222">3</text>
+<circle cx="210" cy="110" r="16" fill="#ffffff" stroke="#222" stroke-width="1.5"/><text x="210" y="115" text-anchor="middle" fill="#222">4</text>
+<circle cx="70" cy="220" r="16" fill="#ffffff" stroke="#222" stroke-width="1.5"/><text x="70" y="225" text-anchor="middle" fill="#222">5</text>
+<circle cx="170" cy="250" r="16" fill="#ffffff" stroke="#222" stroke-width="1.5"/><text x="170" y="255" text-anchor="middle" fill="#222">6</text>
+<circle cx="250" cy="40" r="16" fill="#ffffff" stroke="#222" stroke-width="1.5"/><text x="250" y="45" text-anchor="middle" fill="#222">7</text>
+<circle cx="300" cy="120" r="16" fill="#ffffff" stroke="#222" stroke-width="1.5"/><text x="300" y="125" text-anchor="middle" fill="#222">8</text>
+<circle cx="260" cy="200" r="16" fill="#ffffff" stroke="#222" stroke-width="1.5"/><text x="260" y="205" text-anchor="middle" fill="#222">9</text>
+<text x="345" y="155" fill="#222" font-size="22">→</text>
+<text x="410" y="24" fill="#222">閉路を横一列にした描き直し</text>
+<rect x="412" y="64" width="56" height="210" rx="10" fill="none" stroke="#1f4e9a" stroke-dasharray="6 4"/><text x="440" y="290" text-anchor="middle" fill="#1f4e9a" font-size="12">1 の木</text>
+<rect x="504" y="64" width="52" height="52" rx="10" fill="none" stroke="#1f4e9a" stroke-dasharray="6 4"/><text x="530" y="132" text-anchor="middle" fill="#1f4e9a" font-size="12">2 の木</text>
+<rect x="560" y="64" width="120" height="210" rx="10" fill="none" stroke="#1f4e9a" stroke-dasharray="6 4"/><text x="620" y="290" text-anchor="middle" fill="#1f4e9a" font-size="12">3 の木</text>
+<rect x="684" y="64" width="52" height="52" rx="10" fill="none" stroke="#1f4e9a" stroke-dasharray="6 4"/><text x="710" y="132" text-anchor="middle" fill="#1f4e9a" font-size="12">4 の木</text>
+<line x1="440" y1="90" x2="530" y2="90" stroke="#c0392b" stroke-width="4"/>
+<line x1="530" y1="90" x2="620" y2="90" stroke="#c0392b" stroke-width="4"/>
+<line x1="620" y1="90" x2="710" y2="90" stroke="#c0392b" stroke-width="4"/>
+<path d="M 710 74 C 710 20, 440 20, 440 74" fill="none" stroke="#c0392b" stroke-width="4"/>
+<line x1="440" y1="90" x2="440" y2="170" stroke="#555" stroke-width="2"/>
+<line x1="440" y1="170" x2="440" y2="250" stroke="#555" stroke-width="2"/>
+<line x1="620" y1="90" x2="620" y2="170" stroke="#555" stroke-width="2"/>
+<line x1="620" y1="170" x2="580" y2="250" stroke="#555" stroke-width="2"/>
+<line x1="620" y1="170" x2="660" y2="250" stroke="#555" stroke-width="2"/>
+<circle cx="440" cy="90" r="16" fill="#ffe0d6" stroke="#c0392b" stroke-width="2.5"/><text x="440" y="95" text-anchor="middle" fill="#222">1</text>
+<circle cx="530" cy="90" r="16" fill="#ffe0d6" stroke="#c0392b" stroke-width="2.5"/><text x="530" y="95" text-anchor="middle" fill="#222">2</text>
+<circle cx="620" cy="90" r="16" fill="#ffe0d6" stroke="#c0392b" stroke-width="2.5"/><text x="620" y="95" text-anchor="middle" fill="#222">3</text>
+<circle cx="710" cy="90" r="16" fill="#ffe0d6" stroke="#c0392b" stroke-width="2.5"/><text x="710" y="95" text-anchor="middle" fill="#222">4</text>
+<circle cx="440" cy="170" r="16" fill="#ffffff" stroke="#222" stroke-width="1.5"/><text x="440" y="175" text-anchor="middle" fill="#222">5</text>
+<circle cx="440" cy="250" r="16" fill="#ffffff" stroke="#222" stroke-width="1.5"/><text x="440" y="255" text-anchor="middle" fill="#222">6</text>
+<circle cx="620" cy="170" r="16" fill="#ffffff" stroke="#222" stroke-width="1.5"/><text x="620" y="175" text-anchor="middle" fill="#222">7</text>
+<circle cx="580" cy="250" r="16" fill="#ffffff" stroke="#222" stroke-width="1.5"/><text x="580" y="255" text-anchor="middle" fill="#222">8</text>
+<circle cx="660" cy="250" r="16" fill="#ffffff" stroke="#222" stroke-width="1.5"/><text x="660" y="255" text-anchor="middle" fill="#222">9</text>
+<text x="30" y="314" fill="#555" font-size="12">太線：閉路の辺　点線の枠：閉路の頂点とそこからぶら下がる木</text>
+</svg>

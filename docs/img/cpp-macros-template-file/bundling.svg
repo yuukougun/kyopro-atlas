@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" width="760" height="420" font-family="sans-serif" font-size="13">
+  <rect x="0" y="0" width="760" height="420" fill="#ffffff"/>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333333"/>
+    </marker>
+  </defs>
+
+  <!-- main.cpp -->
+  <text x="20" y="28" font-size="14" font-weight="bold" fill="#222222">main.cpp（手元で書く）</text>
+  <rect x="20" y="38" width="290" height="132" fill="#f4f4f4" stroke="#555555"/>
+  <text x="32" y="62" fill="#222222">#include &lt;bits/stdc++.h&gt;</text>
+  <text x="32" y="84" fill="#222222">#include &lt;atcoder/dsu&gt;</text>
+  <text x="32" y="106" fill="#0b4f9c" font-weight="bold">#include "graph.hpp"</text>
+  <text x="32" y="128" fill="#222222">using namespace std;</text>
+  <text x="32" y="150" fill="#222222">int main() { … }</text>
+
+  <!-- graph.hpp -->
+  <text x="20" y="218" font-size="14" font-weight="bold" fill="#222222">lib/graph.hpp（自作のヘッダ）</text>
+  <rect x="20" y="228" width="290" height="70" fill="#e3eefb" stroke="#0b4f9c"/>
+  <text x="32" y="250" fill="#222222">#pragma once（展開で消える）</text>
+  <text x="32" y="272" fill="#222222">A：宣言・クラスの定義</text>
+  <line x1="20" y1="298" x2="310" y2="298" stroke="#0b4f9c" stroke-dasharray="6 4" stroke-width="2"/>
+  <text x="32" y="318" fill="#0b4f9c" font-weight="bold">// @impl（目印）</text>
+  <rect x="20" y="326" width="290" height="44" fill="#fdf0dc" stroke="#a35f00"/>
+  <text x="32" y="353" fill="#222222">B：関数の定義（中身）</text>
+
+  <!-- submit.cpp -->
+  <text x="450" y="28" font-size="14" font-weight="bold" fill="#222222">提出する 1 ファイル</text>
+  <rect x="450" y="38" width="290" height="332" fill="#ffffff" stroke="#222222" stroke-width="1.5"/>
+  <text x="462" y="62" fill="#222222">#include &lt;bits/stdc++.h&gt;</text>
+  <text x="462" y="84" fill="#222222">#include &lt;atcoder/dsu&gt;（残す）</text>
+  <rect x="456" y="96" width="278" height="58" fill="#e3eefb" stroke="#0b4f9c"/>
+  <text x="466" y="118" fill="#222222">// ===== begin: graph.hpp</text>
+  <text x="466" y="142" fill="#222222">A：宣言・クラスの定義</text>
+  <text x="462" y="180" fill="#222222">using namespace std;</text>
+  <text x="462" y="204" fill="#222222">int main() { … }</text>
+  <rect x="456" y="226" width="278" height="58" fill="#fdf0dc" stroke="#a35f00" stroke-dasharray="4 3"/>
+  <text x="466" y="248" fill="#222222">// ===== impl: graph.hpp</text>
+  <text x="466" y="272" fill="#222222">B：関数の定義（中身）</text>
+  <text x="462" y="314" fill="#555555">main が先頭近くに来て、</text>
+  <text x="462" y="336" fill="#555555">提出したコードが読みやすい</text>
+
+  <!-- arrows -->
+  <line x1="310" y1="102" x2="452" y2="120" stroke="#333333" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="322" y="92" fill="#333333">include の位置へ</text>
+  <line x1="310" y1="268" x2="452" y2="136" stroke="#0b4f9c" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="322" y="292" fill="#0b4f9c">A は上へ</text>
+  <line x1="310" y1="348" x2="452" y2="262" stroke="#a35f00" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arr)"/>
+  <text x="322" y="384" fill="#a35f00">B は main の後ろへ</text>
+
+  <text x="20" y="404" fill="#555555">#include "…"（二重引用符）だけを展開する。&lt;…&gt; の ACL は AtCoder にあるので残す。</text>
+</svg>

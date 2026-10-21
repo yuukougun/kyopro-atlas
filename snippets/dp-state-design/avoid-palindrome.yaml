@@ -1,0 +1,16 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # K = 2：隣り合う文字が異なる列だけ（ABAB… と BABA… の 2 通り）
+  - {input: "2 2\n??\n", output: "2\n"}
+  - {input: "3 2\n???\n", output: "2\n"}
+  # 全部決まっていて回文を含む
+  - {input: "3 3\nA?A\n", output: "0\n"}
+  - {input: "5 3\nABABA\n", output: "0\n"}
+  # K = N（最後に 1 回だけ判定する）
+  - {input: "5 5\n?A?B?\n", output: "8\n"}
+  - {input: "4 3\nA??B\n", output: "1\n"}
+  - {input: "8 3\nAB?A??B?\n", output: "1\n"}
+  - {input: "6 4\n??????\n", output: "26\n"}
+  - {input: "10 4\n??????????\n", output: "120\n"}

@@ -1,0 +1,8 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "3\n12 18 8\n", output: "2 4 6\n"}
+  - {input: "1\n5\n", output: "0\n"}
+  - {input: "2\n6 10\n", output: "10 6\n"}
+  - {input: "4\n7 14 21 5\n", output: "1 1 1 7\n"}

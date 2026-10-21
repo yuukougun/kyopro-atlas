@@ -1,0 +1,12 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 本文の例：{0, 1} と {2, 3} を x_3 − x_1 = 4 でつなぐと x_2 − x_0 = 2 になる
+  - {input: "4 7\n0 0 1 3\n0 2 3 5\n1 0 2\n0 1 3 4\n1 0 2\n1 3 0\n0 0 3 8\n", output: "ok\nok\n?\nok\n2\n-7\nng\n"}
+  # 要素 1 つ・質問なし
+  - {input: "1 0\n", output: ""}
+  # 自分自身との差は 0、x_0 − x_0 = 1 は矛盾
+  - {input: "1 2\n1 0 0\n0 0 0 1\n", output: "0\nng\n"}
+  # 大きさの違う成分をつなぎ、向きを入れ替えたときの符号を確かめる
+  - {input: "5 6\n0 0 1 1\n0 1 2 1\n0 4 3 -10\n0 3 0 5\n1 4 2\n1 2 4\n", output: "ok\nok\nok\nok\n-3\n3\n"}

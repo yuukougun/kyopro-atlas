@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 330" width="560" height="330" font-family="sans-serif">
+  <rect x="0" y="0" width="560" height="330" fill="#ffffff"/>
+  <!-- 層の帯 -->
+  <g fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1">
+    <rect x="30" y="40" width="80" height="230" rx="10"/>
+    <rect x="170" y="40" width="80" height="230" rx="10"/>
+    <rect x="310" y="40" width="80" height="230" rx="10"/>
+    <rect x="450" y="40" width="80" height="230" rx="10"/>
+  </g>
+  <g font-size="14" fill="#334155" text-anchor="middle">
+    <text x="70" y="28">距離 0</text>
+    <text x="210" y="28">距離 1</text>
+    <text x="350" y="28">距離 2</text>
+    <text x="490" y="28">距離 3</text>
+  </g>
+  <!-- 発見に使わなかった辺（細い破線） -->
+  <g stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 4" fill="none">
+    <line x1="210" y1="90" x2="210" y2="210"/>
+    <line x1="210" y1="210" x2="350" y2="90"/>
+    <line x1="350" y1="90" x2="350" y2="210"/>
+    <line x1="350" y1="210" x2="490" y2="155"/>
+  </g>
+  <!-- 発見に使った辺（親への辺、太い実線） -->
+  <g stroke="#1d4ed8" stroke-width="4" fill="none">
+    <line x1="70" y1="155" x2="210" y2="90"/>
+    <line x1="70" y1="155" x2="210" y2="210"/>
+    <line x1="210" y1="90" x2="350" y2="90"/>
+    <line x1="210" y1="210" x2="350" y2="210"/>
+    <line x1="350" y1="90" x2="490" y2="155"/>
+  </g>
+  <g fill="#ffffff" stroke="#0f172a" stroke-width="2">
+    <circle cx="70" cy="155" r="20"/>
+    <circle cx="210" cy="90" r="20"/>
+    <circle cx="210" cy="210" r="20"/>
+    <circle cx="350" cy="90" r="20"/>
+    <circle cx="350" cy="210" r="20"/>
+    <circle cx="490" cy="155" r="20"/>
+  </g>
+  <g font-size="16" fill="#0f172a" text-anchor="middle" dominant-baseline="central">
+    <text x="70" y="155">s</text>
+    <text x="210" y="90">a</text>
+    <text x="210" y="210">b</text>
+    <text x="350" y="90">c</text>
+    <text x="350" y="210">d</text>
+    <text x="490" y="155">e</text>
+  </g>
+  <!-- 凡例 -->
+  <g font-size="13" fill="#334155">
+    <line x1="40" y1="298" x2="80" y2="298" stroke="#1d4ed8" stroke-width="4"/>
+    <text x="88" y="303">見つけたときの親への辺（par）</text>
+    <line x1="300" y1="298" x2="340" y2="298" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <text x="348" y="303">そのほかの辺（同じ層か隣の層）</text>
+  </g>
+</svg>

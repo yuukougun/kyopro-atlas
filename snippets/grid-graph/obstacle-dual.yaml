@@ -1,0 +1,13 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "1 1 0\n", output: "Yes\n"}
+  - {input: "1 1 1\n1 1\n", output: "No\n"}
+  - {input: "3 3 0\n", output: "Yes\n"}
+  - {input: "3 3 2\n2 2\n1 3\n", output: "Yes\n"}
+  - {input: "3 3 3\n3 1\n2 2\n1 3\n", output: "No\n"}
+  - {input: "3 3 2\n2 1\n2 2\n", output: "Yes\n"}
+  - {input: "1 5 1\n1 3\n", output: "No\n"}
+  - {input: "1000000000 1000000000 2\n2 1\n1 2\n", output: "No\n"}
+  - {input: "1000000000 1000000000 1\n500000000 500000000\n", output: "Yes\n"}

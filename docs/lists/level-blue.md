@@ -26,7 +26,7 @@ difficulty 1600〜1999 の帯で主に必要になるページ（52 ページ）
 | [並べ替えてから DP する](../dp/exchange-argument-dp.md)（準備中） | DP・貪欲 | 選ぶ集合が決まれば最適な順序がソートで決まるとき、先にその順に並べてから「選ぶ・選ばない」の DP をする。並べる基準は、隣り合う 2 つを入れ替えたときの損得の式から作る。 |
 | [区間 DP](../dp/interval-dp.md)（準備中） | DP | dp\[l][r]＝区間 [l, r) について求めた値を、内側の短い区間の値から求める。区間の短い順に埋めれば依存関係が満たされ、分割点を全探索する O(N^3) が基本になる。 |
 | [部分集合を列挙する DP](../dp/subset-enumeration-dp.md)（準備中） | DP・ビット演算 | 集合を部分集合と残りに分ける遷移を T = (T − 1) & S で列挙し、グループ分けの最適値や数を全体 O(3^N) で求める。順序の重複を除くため、最小の要素を含む部分集合だけを列挙する。 |
-| [全方位木 DP](../dp/rerooting.md)（準備中） | DP・木 | すべての頂点を根としたときの木 DP の値を、下向きの値と親側の部分木の値を 2 回の DFS で求めて O(N) で出す。兄弟を除いた合成は左右からの累積で作るので逆元が要らない。 |
+| [全方位木 DP](../dp/rerooting.md) | DP・木 | すべての頂点を根としたときの木 DP の値を、下向きの値と親側の部分木の値を 2 回の DFS で求めて O(N) で出す。兄弟を除いた合成は左右からの累積で作るので逆元が要らない。 |
 | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md)（準備中） | DP・区間クエリ・尺取り・スライド窓 | 遷移元が添字や値の範囲の最小・最大・和になる DP を、dp の値をセグメント木に載せて 1 回 O(log N) にする。遷移元の窓が単調に動くだけなら、スライド最小値でならし O(1) にできる。 |
 | [インライン DP](../dp/inline-dp.md)（準備中） | DP・区間クエリ | dp\[i][\*] から dp\[i+1][\*] へほとんどの値がそのまま写るとき、配列を 1 本だけ持って変わる場所だけを書き換える。一律の加算や区間加算は遅延セグメント木で、全体の平行移動は添字のずらしで表す。 |
 
@@ -45,10 +45,10 @@ difficulty 1600〜1999 の帯で主に必要になるページ（52 ページ）
 | ページ | 種類 | 要約 |
 | --- | --- | --- |
 | [木の次数列と Prüfer 列](../tree/tree-degree.md)（準備中） | 木・数え上げ | 各次数が 1 以上で和が 2N−2 なら、その次数列の木が必ず作れる。Prüfer 列（最小番号の葉を消して隣を記録する列）が木と一対一に対応し、各頂点の出現回数が次数 − 1 になることが理由である。 |
-| [最小共通祖先（LCA）](../tree/lca.md)（準備中） | 木・ダブリング・分割統治 | 根付き木で 2 頂点の共通の祖先のうち最も深いものを、各頂点の 2^k 個上の祖先の表（ダブリング）で、前処理 O(N log N)・1 回 O(log N) で求める。2 点間の距離・K 個上の祖先・パス上の最大値にそのまま使える。 |
+| [最小共通祖先（LCA）](../tree/lca.md) | 木・ダブリング・分割統治 | 根付き木で 2 頂点の共通の祖先のうち最も深いものを、各頂点の 2^k 個上の祖先の表（ダブリング）で、前処理 O(N log N)・1 回 O(log N) で求める。2 点間の距離・K 個上の祖先・パス上の最大値にそのまま使える。 |
 | [木の上のパスの判定と分解](../tree/tree-path.md)（準備中） | 木 | パス u–v を「u から LCA へ上る」と「LCA から v へ下る」に分け、点がパス上にあるか・3 点の合流点・2 本のパスの交差・パス上の K 番目の頂点を、LCA と距離の式で判定する。 |
 | [根からのパスを DFS で持ち回る](../tree/root-path-dfs.md)（準備中） | 木・クエリ処理の工夫 | DFS で頂点に入るときにデータ構造へ情報を足し、出るときに元に戻すと、常に根から今の頂点までのパスの情報だけを持てる。パス上の色の数・LIS・中央値などを全頂点について求められる。 |
-| [オイラーツアー](../tree/euler-tour.md)（準備中） | 木・区間クエリ | DFS の行きがけ順に番号 in[v] を振り、子孫を回り終えた時点の番号 out[v] を記録すると、v の部分木が列の区間 [in[v], out[v]) になる。部分木の和や加算が BIT・セグメント木の区間クエリになる。 |
+| [オイラーツアー](../tree/euler-tour.md) | 木・区間クエリ | DFS の行きがけ順に番号 in[v] を振り、子孫を回り終えた時点の番号 out[v] を記録すると、v の部分木が列の区間 [in[v], out[v]) になる。部分木の和や加算が BIT・セグメント木の区間クエリになる。 |
 
 ## データ構造
 
@@ -68,8 +68,8 @@ difficulty 1600〜1999 の帯で主に必要になるページ（52 ページ）
 | ページ | 種類 | 要約 |
 | --- | --- | --- |
 | [GCD の性質](../math/gcd-properties.md)（準備中） | 整数論・区間クエリ | 全体に同じ数を足したときの gcd を隣接差の gcd に直し、左端を固定した区間 gcd が O(log A) 種類しかないことで区間 gcd を速く求める。mod N で A ずつ進むと gcd(A, N) の倍数だけを回ることも使う。 |
-| [中国剰余定理](../math/crt.md)（準備中） | 整数論 | 複数の合同式 x ≡ r_i (mod m_i) を同時に満たす x を、拡張ユークリッドで2式ずつ合わせて mod lcm でただ1つに求める。解があるのは r1 ≡ r2 (mod gcd(m1, m2)) のときだけである。 |
-| [行列累乗](../math/matrix-power.md)（準備中） | 線形代数・行列・DP・ダブリング・分割統治 | 状態が毎回同じ線形の遷移 v' = Av で変わるとき、K 回後の A^K v を行列の繰り返し二乗法で O(n³ log K) で求める。DP の遷移や、足し算と掛け算を min と + に替えた行列にも使える。 |
+| [中国剰余定理](../math/crt.md) | 整数論 | 複数の合同式 x ≡ r_i (mod m_i) を同時に満たす x を、拡張ユークリッドで2式ずつ合わせて mod lcm でただ1つに求める。解があるのは r1 ≡ r2 (mod gcd(m1, m2)) のときだけである。 |
+| [行列累乗](../math/matrix-power.md) | 線形代数・行列・DP・ダブリング・分割統治 | 状態が毎回同じ線形の遷移 v' = Av で変わるとき、K 回後の A^K v を行列の繰り返し二乗法で O(n³ log K) で求める。DP の遷移や、足し算と掛け算を min と + に替えた行列にも使える。 |
 | [掃き出し法](../math/gaussian-elimination.md)（準備中） | 線形代数・行列 | 行基本変形で行列を階段形にし、連立一次方程式の解なし・一意・無数を判定してランクを O(n³) で求める。mod 2 では XOR で消去して bitset で速くでき、解の個数は 2^(変数の数 − ランク) になる。 |
 | [畳み込みの使い方](../math/convolution-ntt.md)（準備中） | 畳み込み・多項式 | c_k = Σ_{i+j=k} a_i b_j（多項式の積）を ACL の convolution で O(N log N) で求める。和が k になる組の数や、ずらしたときの一致数を全ての k について一度に数える。 |
 
@@ -93,7 +93,7 @@ difficulty 1600〜1999 の帯で主に必要になるページ（52 ページ）
 | ページ | 種類 | 要約 |
 | --- | --- | --- |
 | [ハッシュの衝突と安全な設計](../string/hash-safety.md)（準備中） | ハッシュ・乱択 | 比べるハッシュの組の数から衝突確率を見積もり、固定のテストでも落ちない mod と基数を選ぶ。mod 10^9 程度の 1 つでは全ペアの比較に耐えないので、mod 2^61−1 と実行時に乱択した基数（値のハッシュなら素数）を使う。 |
-| [KMP 法と文字列の周期](../string/kmp.md)（準備中） | 文字列 | π[i]（先頭 i+1 文字の、接頭辞でも接尾辞でもある最長の真の部分の長さ）を O(N) で求める。π をたどると全 border と最小周期が分かり、照合に失敗したときのずらし方や照合オートマトンの遷移にも使える。 |
+| [KMP 法と文字列の周期](../string/kmp.md) | 文字列 | π[i]（先頭 i+1 文字の、接頭辞でも接尾辞でもある最長の真の部分の長さ）を O(N) で求める。π をたどると全 border と最小周期が分かり、照合に失敗したときのずらし方や照合オートマトンの遷移にも使える。 |
 | [Aho-Corasick 法](../string/aho-corasick.md)（準備中） | 文字列 | パターンの Trie に失敗リンク（Trie にある最長の真の接尾辞へのリンク）を BFS 順に張り、全文字の遷移を埋めたオートマトンにする。テキストを 1 回流すだけで、多数のパターンの出現をまとめて数えられる。 |
 | [照合オートマトン上の DP](../string/string-automaton-dp.md)（準備中） | DP・文字列 | KMP や Aho-Corasick の状態（いまの接尾辞のうちパターンの接頭辞になっている最長のもの）を DP の状態にして、パターンを含まない・すべて含む長さ N の文字列を数える。N が巨大なら遷移を行列にして累乗する。 |
 
@@ -115,79 +115,79 @@ difficulty 1600〜1999 の帯で主に必要になるページ（52 ページ）
 
 | 節 | ページ（レベル） | 分野 |
 | --- | --- | --- |
-| 上位ビットで 2 つに分けて再帰する | [bit ごとに独立に考える](../basics/bitwise-independence.md)（水）（準備中） | 基本テクニック |
+| 上位ビットで 2 つに分けて再帰する | [bit ごとに独立に考える](../basics/bitwise-independence.md#split-by-top-bit)（水） | 基本テクニック |
 | 判定を DP で作る（決め打ちごとに初期化し直す） | [答えで二分探索](../basics/binary-search-answer.md#dp-check)（基礎） | 基本テクニック |
-| 長さの制限付き（窓の中だけで数える） | [累積和と連想配列で区間を数える](../basics/prefix-sum-counting.md)（基礎）（準備中） | 基本テクニック |
-| 3 次元以上（項の数と符号の決め方） | [2 次元累積和](../basics/prefix-sum-2d.md)（水）（準備中） | 基本テクニック |
-| グリッドの経路を対角線で分ける | [半分全列挙](../basics/meet-in-the-middle.md)（水）（準備中） | 基本テクニック |
-| 中央値の言い換え（x 以上を +1、未満を −1）と偶数個のときの不等号 | [平均・中央値の最大化](../basics/fractional-binary-search.md)（水）（準備中） | 基本テクニック |
-| 判定を DP・DAG の最長路・全域木で行う | [平均・中央値の最大化](../basics/fractional-binary-search.md)（水）（準備中） | 基本テクニック |
-| 領域の中央値（2 次元累積和） | [平均・中央値の最大化](../basics/fractional-binary-search.md)（水）（準備中） | 基本テクニック |
-| 増分が単調なら 1 単位ずつ貪欲に配る | [三分探索](../basics/ternary-search.md)（水）（準備中） | 基本テクニック |
-| 距離の和で判定して二分探索する | [絶対値の和の最小化と中央値](../basics/median-absolute.md)（基礎）（準備中） | 基本テクニック |
-| 判定が重い型 | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md)（基礎）（準備中） | 基本テクニック |
-| 言い換えてからデータ構造に載せる | [言い換えの典型](../thinking/reformulation.md)（水）（準備中） | 考察 |
-| 市松模様の偶奇 | [偶奇に着目する](../thinking/parity.md)（基礎）（準備中） | 考察 |
-| 後ろから余りごとの勝敗を決めるゲーム | [余り・個数を状態に持つ DP](../dp/dp-mod-state.md)（水）（準備中） | 動的計画法 |
-| 余りごとの累積 | [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md)（水）（準備中） | 動的計画法 |
-| 2 次元の累積 | [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md)（水）（準備中） | 動的計画法 |
-| 個数制限付き（素朴な展開・二進分解・余りごとのスライド最小値） | [ナップサック DP](../dp/knapsack-01.md)（基礎）（準備中） | 動的計画法 |
-| 全部分集合についての和（含む部分集合の数を重みにする） | [部分和 DP](../dp/subset-sum.md)（基礎）（準備中） | 動的計画法 |
-| 区間の番号に依存する条件：番号を状態に足す | [区間分割 DP](../dp/dp-sequence-partition.md)（水）（準備中） | 動的計画法 |
-| 各要素が LIS に含まれうるか（前後から 2 回求める） | [最長増加部分列](../dp/lis.md)（水）（準備中） | 動的計画法 |
-| 2 次元の入れ子（一方は昇順・もう一方は降順に並べる） | [最長増加部分列](../dp/lis.md)（水）（準備中） | 動的計画法 |
-| 1 か所だけ変更できる LIS・木の上の LIS | [最長増加部分列](../dp/lis.md)（水）（準備中） | 動的計画法 |
-| Dilworth の定理（増加列への最小分割数＝最長減少部分列の長さ） | [最長増加部分列](../dp/lis.md)（水）（準備中） | 動的計画法 |
-| 共通部分列の組の数（包除で重複を引く・2 次元の累積和） | [最長共通部分列と編集距離](../dp/lcs.md)（水）（準備中） | 動的計画法 |
+| 長さの制限付き（窓の中だけで数える） | [累積和と連想配列で区間を数える](../basics/prefix-sum-counting.md#length-limited)（基礎） | 基本テクニック |
+| 3 次元以上（項の数と符号の決め方） | [2 次元累積和](../basics/prefix-sum-2d.md#higher-dimensions)（水） | 基本テクニック |
+| グリッドの経路を対角線で分ける | [半分全列挙](../basics/meet-in-the-middle.md#grid-diagonal)（水） | 基本テクニック |
+| 中央値の言い換え（x 以上を +1、未満を −1）と偶数個のときの不等号 | [平均・中央値の最大化](../basics/fractional-binary-search.md#median)（水） | 基本テクニック |
+| 判定を DP・DAG の最長路・全域木で行う | [平均・中央値の最大化](../basics/fractional-binary-search.md#dp-check)（水） | 基本テクニック |
+| 領域の中央値（2 次元累積和） | [平均・中央値の最大化](../basics/fractional-binary-search.md#median-2d)（水） | 基本テクニック |
+| 増分が単調なら 1 単位ずつ貪欲に配る | [三分探索](../basics/ternary-search.md#marginal-greedy)（水） | 基本テクニック |
+| 距離の和で判定して二分探索する | [絶対値の和の最小化と中央値](../basics/median-absolute.md#with-binary-search)（基礎） | 基本テクニック |
+| 判定が重い型 | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md#heavy-check)（基礎） | 基本テクニック |
+| 言い換えてからデータ構造に載せる | [言い換えの典型](../thinking/reformulation.md#then-data-structure)（水） | 考察 |
+| 市松模様の偶奇 | [偶奇に着目する](../thinking/parity.md#checkerboard)（基礎） | 考察 |
+| 後ろから余りごとの勝敗を決めるゲーム | [余り・個数を状態に持つ DP](../dp/dp-mod-state.md#game-by-remainder)（水） | 動的計画法 |
+| 余りごとの累積 | [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md#by-remainder)（水） | 動的計画法 |
+| 2 次元の累積 | [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md#two-dimensional)（水） | 動的計画法 |
+| 個数制限付き（素朴な展開・二進分解・余りごとのスライド最小値） | [ナップサック DP](../dp/knapsack-01.md#knapsack-bounded)（基礎） | 動的計画法 |
+| 全部分集合についての和（含む部分集合の数を重みにする） | [部分和 DP](../dp/subset-sum.md#over-all-subsets)（基礎） | 動的計画法 |
+| 区間の番号に依存する条件：番号を状態に足す | [区間分割 DP](../dp/dp-sequence-partition.md#block-index)（水） | 動的計画法 |
+| 各要素が LIS に含まれうるか（前後から 2 回求める） | [最長増加部分列](../dp/lis.md#contained)（水） | 動的計画法 |
+| 2 次元の入れ子（一方は昇順・もう一方は降順に並べる） | [最長増加部分列](../dp/lis.md#nesting)（水） | 動的計画法 |
+| 1 か所だけ変更できる LIS・木の上の LIS | [最長増加部分列](../dp/lis.md#variants)（水） | 動的計画法 |
+| Dilworth の定理（増加列への最小分割数＝最長減少部分列の長さ） | [最長増加部分列](../dp/lis.md#dilworth)（水） | 動的計画法 |
+| 共通部分列の組の数（包除で重複を引く・2 次元の累積和） | [最長共通部分列と編集距離](../dp/lcs.md#count-pairs)（水） | 動的計画法 |
 | ほかの探索と組み合わせる（BFS・ワーシャルフロイドで距離を前計算してから） | [bitDP](../dp/bit-dp.md#with-shortest-paths)（水） | 動的計画法 |
-| 子ごとの「得」を大きい順に取る | [木 DP](../dp/tree-dp.md)（水）（準備中） | 動的計画法 |
-| 障害物どうしの 8 近傍の連結で通れるかを判定する | [グリッドグラフ](../graph/grid-graph.md)（基礎）（準備中） | グラフ |
-| 座標や値を頂点にして成分を考える | [連結成分](../graph/connected-components.md)（基礎）（準備中） | グラフ |
-| 彩色は成分ごとに DFS で塗って探索を絞る | [小さいグラフの全探索](../graph/small-graph-brute-force.md)（基礎）（準備中） | グラフ |
-| 迂回できる辺は不要 | [ワーシャルフロイド法](../graph/warshall-floyd.md)（水）（準備中） | グラフ |
+| 子ごとの「得」を大きい順に取る | [木 DP](../dp/tree-dp.md#greedy-children)（水） | 動的計画法 |
+| 障害物どうしの 8 近傍の連結で通れるかを判定する | [グリッドグラフ](../graph/grid-graph.md#obstacle-dual)（基礎） | グラフ |
+| 座標や値を頂点にして成分を考える | [連結成分](../graph/connected-components.md#values-as-vertices)（基礎） | グラフ |
+| 彩色は成分ごとに DFS で塗って探索を絞る | [小さいグラフの全探索](../graph/small-graph-brute-force.md#coloring)（基礎） | グラフ |
+| 迂回できる辺は不要 | [ワーシャルフロイド法](../graph/warshall-floyd.md#redundant-edges)（水） | グラフ |
 | 資源を状態に持ち、上限で打ち切る | [状態を頂点にする](../graph/extended-dijkstra.md#resource-state)（水） | グラフ |
 | 訪問した集合を持つ（bitDP へのつなぎ） | [状態を頂点にする](../graph/extended-dijkstra.md#visited-set)（水） | グラフ |
 | 両端から伸ばす（回文の最短路） | [状態を頂点にする](../graph/extended-dijkstra.md#two-ends)（水） | グラフ |
-| 最適な出発時刻を計算してから進む | [時刻で変わる辺の最短路](../graph/time-dependent-dijkstra.md)（水）（準備中） | グラフ |
-| 二分探索と連結判定の組合せ | [Union-Find で連結性を扱う](../graph/union-find-connectivity.md)（水）（準備中） | グラフ |
-| 操作を頂点にする・区間を辺にする | [最小全域木](../graph/minimum-spanning-tree.md)（水）（準備中） | グラフ |
-| 辺の重みの種類が少ないとき | [最小全域木](../graph/minimum-spanning-tree.md)（水）（準備中） | グラフ |
+| 最適な出発時刻を計算してから進む | [時刻で変わる辺の最短路](../graph/time-dependent-dijkstra.md#optimal-departure)（水） | グラフ |
+| 二分探索と連結判定の組合せ | [Union-Find で連結性を扱う](../graph/union-find-connectivity.md#binary-search)（水） | グラフ |
+| 操作を頂点にする・区間を辺にする | [最小全域木](../graph/minimum-spanning-tree.md#modeling)（水） | グラフ |
+| 辺の重みの種類が少ないとき | [最小全域木](../graph/minimum-spanning-tree.md#few-weights)（水） | グラフ |
 | パスへの加算（LCA に印を置いて葉から上へ累積する） | [木の上の累積和・いもす法](../tree/tree-imos.md)（基礎）（準備中） | 木 |
 | 距離 K の頂点の数（部分木の深さの範囲を N で切る） | [完全二分木](../tree/complete-binary-tree.md)（基礎）（準備中） | 木 |
-| 直径の端点を根にして距離 K の頂点を探す | [木の直径と最遠点](../tree/tree-diameter.md)（水）（準備中） | 木 |
-| 2 つの木をつないだ直径 | [木の直径と最遠点](../tree/tree-diameter.md)（水）（準備中） | 木 |
+| 直径の端点を根にして距離 K の頂点を探す | [木の直径と最遠点](../tree/tree-diameter.md#root-at-end)（水） | 木 |
+| 2 つの木をつないだ直径 | [木の直径と最遠点](../tree/tree-diameter.md#join-trees)（水） | 木 |
 | 次数の条件から作る（次数の足りない成分どうしをつなぐ） | [木の構築・復元](../tree/tree-construction.md)（水）（準備中） | 木 |
 | 最遠距離の列から直径を決める | [木の構築・復元](../tree/tree-construction.md)（水）（準備中） | 木 |
-| ソート順で隣り合う組の集合（2 番目に大きい値の寄与。最小 XOR の組は Binary Trie のページ） | [set・multiset・map の応用](../ds/ordered-set.md)（基礎）（準備中） | データ構造 |
-| 閾値ごと・関係ごとに Union-Find を持つ（重みごとの Union-Find・2 つの Union-Find の根の組） | [Union-Find の応用](../ds/union-find-applications.md)（水）（準備中） | データ構造 |
-| 窓を伸縮しながら転倒数を増減する（尺取り・期待値と組む） | [転倒数](../ds/inversion-number.md)（水）（準備中） | データ構造 |
-| 遅延セグメント木の上の二分探索（単調な列への区間作用と境界の探索） | [セグメント木上の二分探索](../ds/segment-tree-binary-search.md)（水）（準備中） | データ構造 |
-| 上位 K 個の和（個数と和を載せ、境界はセグメント木上の二分探索で探す） | [値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md)（水）（準備中） | データ構造 |
+| ソート順で隣り合う組の集合（2 番目に大きい値の寄与。最小 XOR の組は Binary Trie のページ） | [set・multiset・map の応用](../ds/ordered-set.md#adjacent-pairs)（基礎） | データ構造 |
+| しきい値ごと・関係ごとに Union-Find を持つ | [Union-Find の応用](../ds/union-find-applications.md#multiple-uf)（水） | データ構造 |
+| 窓を伸縮しながら転倒数を増減する（尺取り・期待値と組む） | [転倒数](../ds/inversion-number.md#sliding-window)（水） | データ構造 |
+| 遅延セグメント木の上の二分探索（単調な列への区間作用） | [セグメント木上の二分探索](../ds/segment-tree-binary-search.md#on-lazy-segment-tree)（水） | データ構造 |
+| 上位 K 個の和（境界はセグメント木上の二分探索で探す） | [値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md#top-k-sum)（水） | データ構造 |
 | 保つ性質と push の手順（自作するとき） | [遅延セグメント木](../ds/lazy-segment-tree.md#invariants)（水） | データ構造 |
-| 2×2 行列 [[r, 1], [0, 1]] の累乗による別解 | [等比数列の和を mod で求める](../math/geometric-series-mod.md)（基礎）（準備中） | 整数論・代数 |
-| 線形篩：各合成数を1回だけ作り、φ・μ の表を同時に作る | [最小素因数の篩と線形篩](../math/spf-sieve.md)（基礎）（準備中） | 整数論・代数 |
-| 約数を状態にした DP（約数の個数が少ないことを使う） | [約数の個数の上界と高度合成数](../math/divisor-count-bound.md)（水）（準備中） | 整数論・代数 |
-| 法が小さい素数で n ≥ p になるとき：Lucas の定理 | [二項係数の前計算](../comb/binomial-precompute.md)（基礎）（準備中） | 数え上げ・確率・ゲーム |
-| p = 2 では (n & k) == k、ピラミッドの係数を二項係数と見抜く | [二項係数の前計算](../comb/binomial-precompute.md)（基礎）（準備中） | 数え上げ・確率・ゲーム |
-| 禁止領域を避ける：境界を越える点で分類する | [格子路の数え上げ](../comb/lattice-paths.md)（基礎）（準備中） | 数え上げ・確率・ゲーム |
-| 経路数の総和と、二項係数の和を経路数として一括で求める | [格子路の数え上げ](../comb/lattice-paths.md)（基礎）（準備中） | 数え上げ・確率・ゲーム |
-| 移動を軸ごとの回数に分けて独立にする（45 度回転） | [格子路の数え上げ](../comb/lattice-paths.md)（基礎）（準備中） | 数え上げ・確率・ゲーム |
-| 二項係数と組み合わせた寄与（残りの選び方を掛ける） | [数え上げの考え方](../comb/counting-mindset.md)（水）（準備中） | 数え上げ・確率・ゲーム |
-| K 回の合成と元に戻る回数（巡回の長さの lcm） | [置換の巡回分解](../comb/permutation-cycles.md)（基礎）（準備中） | 数え上げ・確率・ゲーム |
+| 2×2 行列 [[r, 1], [0, 1]] の累乗による別解 | [等比数列の和を mod で求める](../math/geometric-series-mod.md#matrix)（基礎） | 整数論・代数 |
+| 線形篩：各合成数を1回だけ作り、φ・μ の表を同時に作る | [最小素因数の篩と線形篩](../math/spf-sieve.md#linear-sieve)（基礎） | 整数論・代数 |
+| 約数を状態にした DP（約数の個数が少ないことを使う） | [約数の個数の上界と高度合成数](../math/divisor-count-bound.md#divisor-dp)（水） | 整数論・代数 |
+| 法が小さい素数で n ≥ p になるとき：Lucas の定理 | [二項係数の前計算](../comb/binomial-precompute.md#lucas)（基礎） | 数え上げ・確率・ゲーム |
+| p = 2 では (n & k) == k、ピラミッドの係数を二項係数と見抜く | [二項係数の前計算](../comb/binomial-precompute.md#parity-pyramid)（基礎） | 数え上げ・確率・ゲーム |
+| 禁止領域を避ける：境界を越える点で分類する | [格子路の数え上げ](../comb/lattice-paths.md#forbidden-region)（基礎） | 数え上げ・確率・ゲーム |
+| 経路数の総和と、二項係数の和を経路数として一括で求める | [格子路の数え上げ](../comb/lattice-paths.md#sum-of-paths)（基礎） | 数え上げ・確率・ゲーム |
+| 移動を軸ごとの回数に分けて独立にする（45 度回転） | [格子路の数え上げ](../comb/lattice-paths.md#independent-axes)（基礎） | 数え上げ・確率・ゲーム |
+| 二項係数と組み合わせた寄与（残りの選び方を掛ける） | [数え上げの考え方](../comb/counting-mindset.md#contribution-with-binomial)（水） | 数え上げ・確率・ゲーム |
+| K 回の合成と元に戻る回数（巡回の長さの lcm） | [置換の巡回分解](../comb/permutation-cycles.md#power)（基礎） | 数え上げ・確率・ゲーム |
 | ペアごとの確率と対称性 | [期待値の線形性と指示確率変数](../comb/linearity-of-expectation.md#pairs)（水） | 数え上げ・確率・ゲーム |
-| ランダムウォークと二項係数 | [確率 DP](../comb/probability-dp.md)（水）（準備中） | 数え上げ・確率・ゲーム |
-| 遷移を累積和でまとめる | [期待値 DP](../comb/expected-value-dp.md)（水）（準備中） | 数え上げ・確率・ゲーム |
-| 真似戦略・ペアリング戦略（真似した手が合法かを確かめる） | [ゲームの基本と勝敗の DP](../comb/game-basics.md)（水）（準備中） | 数え上げ・確率・ゲーム |
-| 上限つき（x mod (k+1)）・範囲つきの変種 | [Nim と XOR](../comb/nim.md)（水）（準備中） | 数え上げ・確率・ゲーム |
-| 先手と後手で取れる数が違うとき | [Nim と XOR](../comb/nim.md)（水）（準備中） | 数え上げ・確率・ゲーム |
+| ランダムウォークと二項係数 | [確率 DP](../comb/probability-dp.md#random-walk)（水） | 数え上げ・確率・ゲーム |
+| 遷移を累積和でまとめる | [期待値 DP](../comb/expected-value-dp.md#prefix-sum)（水） | 数え上げ・確率・ゲーム |
+| 真似戦略・ペアリング戦略（真似した手が合法かを確かめる） | [ゲームの基本と勝敗の DP](../comb/game-basics.md#mirror-strategy)（水） | 数え上げ・確率・ゲーム |
+| 上限つき（x mod (k+1)）・範囲つきの変種 | [Nim と XOR](../comb/nim.md#bounded)（水） | 数え上げ・確率・ゲーム |
+| 先手と後手で取れる数が違うとき | [Nim と XOR](../comb/nim.md#asymmetric)（水） | 数え上げ・確率・ゲーム |
 | 繰り返した文字列の部分列（文字ごとの累積個数で位置を飛ばす） | [部分列の判定と次の出現位置の表](../string/subsequence-matching.md)（基礎）（準備中） | 文字列 |
-| セグ木に載せるハッシュ：（ハッシュ, B^長さ）の組で更新ありの一致・回文判定 | [ローリングハッシュ](../string/rolling-hash.md)（水）（準備中） | 文字列 |
-| 外側から組み立てる（回文の式・約数） | [回文の扱いと Manacher](../string/palindrome.md)（水）（準備中） | 文字列 |
-| Manacher：各中心の最長回文半径を O(N) で（Z と同じく内側をコピーする） | [回文の扱いと Manacher](../string/palindrome.md)（水）（準備中） | 文字列 |
-| Trie 上の DFS と、節点に値を持つ DP | [Trie](../string/trie.md)（水）（準備中） | 文字列 |
-| 一周を扱う：配列を 2 周分にして尺取り | [偏角ソート](../geometry/argument-sort.md)（水）（準備中） | 幾何 |
-| 反対方向に最も近い点の二分探索 | [偏角ソート](../geometry/argument-sort.md)（水）（準備中） | 幾何 |
-| 角度の区間のスケジューリング・連続する範囲だけを試す最適化 | [偏角ソート](../geometry/argument-sort.md)（水）（準備中） | 幾何 |
-| 回転後の偶奇：u と v の偶奇がそろう点だけが元の格子点（チェビシェフ → マンハッタンで 1/2 が出る） | [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md)（水）（準備中） | 幾何 |
+| セグ木に載せるハッシュ：（ハッシュ, B^長さ）の組で更新ありの一致・回文判定 | [ローリングハッシュ](../string/rolling-hash.md#hash-segment-tree)（水） | 文字列 |
+| 外側から組み立てる（回文の式・約数） | [回文の扱いと Manacher](../string/palindrome.md#build-outside-in)（水） | 文字列 |
+| Manacher：各中心の最長回文半径を O(N) で（Z と同じく内側をコピーする） | [回文の扱いと Manacher](../string/palindrome.md#manacher)（水） | 文字列 |
+| Trie 上の DFS と、節点に値を持つ DP | [Trie](../string/trie.md#dp-on-trie)（水） | 文字列 |
+| 一周を扱う：配列を 2 周分にして尺取り | [偏角ソート](../geometry/argument-sort.md#wrap-around)（水） | 幾何 |
+| 反対方向に最も近い点の二分探索 | [偏角ソート](../geometry/argument-sort.md#opposite-direction)（水） | 幾何 |
+| 角度の区間のスケジューリング・連続する範囲だけを試す最適化 | [偏角ソート](../geometry/argument-sort.md#angular-intervals)（水） | 幾何 |
+| 回転後の偶奇：u と v の偶奇がそろう点だけが元の格子点（チェビシェフ → マンハッタンで 1/2 が出る） | [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md#parity-after-rotation)（水） | 幾何 |
 | 連立方程式・中国剰余定理で特定する | [インタラクティブ問題](../misc/interactive.md)（基礎）（準備中） | その他の技法 |
 | 先に構造を出力してから答える | [インタラクティブ問題](../misc/interactive.md)（基礎）（準備中） | その他の技法 |

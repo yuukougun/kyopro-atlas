@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 320" font-family="sans-serif" font-size="14">
+<defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#999" stroke-width="2"/></pattern></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="310.0" y="22.0" text-anchor="middle" fill="#222">下に凸な f の差分 d(x) = f(x+1) − f(x) は左から右へ増える</text>
+<rect x="70" y="74" width="40" height="126" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="90.0" y="68.0" text-anchor="middle" fill="#1f4e9a">9</text>
+<text x="90.0" y="218.0" text-anchor="middle" fill="#222">0</text>
+<rect x="130" y="116" width="40" height="84" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="150.0" y="110.0" text-anchor="middle" fill="#1f4e9a">6</text>
+<text x="150.0" y="218.0" text-anchor="middle" fill="#222">1</text>
+<rect x="190" y="144" width="40" height="56" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="210.0" y="138.0" text-anchor="middle" fill="#1f4e9a">4</text>
+<text x="210.0" y="218.0" text-anchor="middle" fill="#222">2</text>
+<rect x="250" y="158" width="40" height="42" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="270.0" y="152.0" text-anchor="middle" fill="#1f4e9a">3</text>
+<text x="270.0" y="218.0" text-anchor="middle" fill="#222">3</text>
+<rect x="310" y="158" width="40" height="42" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="330.0" y="152.0" text-anchor="middle" fill="#1f4e9a">3</text>
+<text x="330.0" y="218.0" text-anchor="middle" fill="#222">4</text>
+<rect x="370" y="144" width="40" height="56" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="390.0" y="138.0" text-anchor="middle" fill="#1f4e9a">4</text>
+<text x="390.0" y="218.0" text-anchor="middle" fill="#222">5</text>
+<rect x="430" y="116" width="40" height="84" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="450.0" y="110.0" text-anchor="middle" fill="#1f4e9a">6</text>
+<text x="450.0" y="218.0" text-anchor="middle" fill="#222">6</text>
+<rect x="490" y="74" width="40" height="126" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="510.0" y="68.0" text-anchor="middle" fill="#1f4e9a">9</text>
+<text x="510.0" y="218.0" text-anchor="middle" fill="#222">7</text>
+<text x="30.0" y="218.0" text-anchor="middle" fill="#555">x</text>
+<text x="30.0" y="160.0" text-anchor="middle" fill="#555" font-size="12">f(x)</text>
+<rect x="100" y="230" width="40" height="28" fill="#f6d5d5" stroke="#b03a2e" stroke-dasharray="4 3"/>
+<text x="120.0" y="249.0" text-anchor="middle" fill="#b03a2e" font-weight="bold">-3</text>
+<rect x="160" y="230" width="40" height="28" fill="#f6d5d5" stroke="#b03a2e" stroke-dasharray="4 3"/>
+<text x="180.0" y="249.0" text-anchor="middle" fill="#b03a2e" font-weight="bold">-2</text>
+<rect x="220" y="230" width="40" height="28" fill="#f6d5d5" stroke="#b03a2e" stroke-dasharray="4 3"/>
+<text x="240.0" y="249.0" text-anchor="middle" fill="#b03a2e" font-weight="bold">-1</text>
+<rect x="280" y="230" width="40" height="28" fill="#d9f2d9" stroke="#2e7d32" stroke-dasharray=""/>
+<text x="300.0" y="249.0" text-anchor="middle" fill="#2e7d32" font-weight="bold">0</text>
+<rect x="340" y="230" width="40" height="28" fill="#d9f2d9" stroke="#2e7d32" stroke-dasharray=""/>
+<text x="360.0" y="249.0" text-anchor="middle" fill="#2e7d32" font-weight="bold">+1</text>
+<rect x="400" y="230" width="40" height="28" fill="#d9f2d9" stroke="#2e7d32" stroke-dasharray=""/>
+<text x="420.0" y="249.0" text-anchor="middle" fill="#2e7d32" font-weight="bold">+2</text>
+<rect x="460" y="230" width="40" height="28" fill="#d9f2d9" stroke="#2e7d32" stroke-dasharray=""/>
+<text x="480.0" y="249.0" text-anchor="middle" fill="#2e7d32" font-weight="bold">+3</text>
+<text x="30.0" y="249.0" text-anchor="middle" fill="#555" font-size="12">d(x)</text>
+<line x1="270.0" y1="226" x2="270.0" y2="280" stroke="#333" stroke-width="2"/>
+<text x="180.0" y="280.0" text-anchor="middle" fill="#b03a2e" font-size="12">d &lt; 0（ng の側）</text>
+<text x="390.0" y="280.0" text-anchor="middle" fill="#2e7d32" font-size="12">d ≥ 0（ok の側）</text>
+<text x="310.0" y="298.0" text-anchor="middle" fill="#222" font-size="12">d(x) ≥ 0 となる最小の x = 3 で f は最小（f(3) = f(4) = 3 の平らな谷でも左端が求まる）</text>
+</svg>

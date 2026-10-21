@@ -1,0 +1,42 @@
+# minimax の報告と提案（工程8b・b1）
+
+- 書いたファイル：docs/comb/minimax.md、snippets/minimax/{deque,grid}.{cpp,yaml}、docs/img/minimax/deque-tree.svg
+- front matter で変えたもの：complexity・stage（draft）・updated（2026-10-21 のまま）。sections は変えていない
+- 検査の結果：check_pages（エラー 0・警告 0）、fix_problems --check（直すべき行 0）、check_snippets（2 件すべて一致）、textlint（エラー 0・警告 10）
+  - 残した警告：図の代替テキストの長さと読点（73 行）、数式の半開区間 $[l, r)$ を括弧の対と誤検出（77・191・251 行）、台帳の summary から作られる問題の行の助詞「に」（204・227 行）、力試しの方針の文の長さ（250 行。リンクを含む）、175 行の助詞「が」、34 行（front matter の summary の長さの誤検出と思われる）
+- 図：catalog の visual は null。符号の反転を示すため、列 (3, 9, 1, 2) のゲーム木の静的な SVG を 1 枚足した（値は Python の全探索で確かめた）。手元に SVG の描画の道具がなく、見た目は座標の計算だけで確かめた。メインで一度表示を確かめてほしい
+- 動く図：作っていない（visual が null のため）
+- 使った出典：drken の Qiita（EDPC K・L の解説。dp_l の制約 N ≤ 3000・a_i ≤ 10^9 もここで確かめた）、drken のはてなブログ 4 本（abc201_d・tdpc_game・abc025_c・abc246_g）、kmjp 2 本（abc218_g・abc303_g）、programming-hiroba（abc349_e）、E869120 の GitHub（tessoku A35 の解答コード）。どれも付録 B のドメインで、新しく noai を確かめたドメインはない
+
+## 台帳への提案
+
+| 問題 ID | 項目 | 新しい値 | 根拠 |
+| --- | --- | --- | --- |
+| abc303_g | summary | 列に並んだ袋を、端から 1 つ取るか、費用を払って端から決まった個数までまとめて取るかを交互に選ぶとき、両者が最適に動いたときの (先手の金額 − 後手の金額) を求める。 | https://kmjp.hatenablog.jp/entry/2023/05/27/0900 |
+| abc303_g | approach | 残りの区間ごとの得点差を区間 DP で求め、まとめて取る遷移は残る区間の長さごとの区間 max（セグメント木）で速くする（O(N^2 log N)） | 同上 |
+| abc246_g | alternatives（pages: minimax） | summary が「（執筆時に確かめる）」のまま。本文では台帳の本体の summary（根から子へ駒を進める人と、毎手 1 つの頂点の値を 0 にする人の…）を使った。minimax の alternative は消すか、本体と同じ文にする | https://drken1215.hatenablog.com/entry/2022/04/04/023800 |
+
+- 本文の問題の行の要約は、abc218_g は台帳の alternatives（pages: minimax）の文、ほかは台帳の本体の summary を使った
+- ほかの使った問題（dp_l・abc201_d・tessoku_book_ai・tdpc_game・abc349_e・abc025_c・abc218_g）の summary と approach は、evidence の解説と食い違いがなかった
+
+## 用語集への提案
+
+- 零和｜zero-sum｜2 人の利得の和が戦略によらず一定（差の上では 0）であること。一方の得がそのまま他方の損になるので、相手の最適は自分にとって最悪になる。（本文ではリンクしていない。game-basics の前提の節が書かれたら、そちらへのリンクで足りるかもしれない）
+- negamax は本ページの別名なので、用語集には足さなくてよいと考える
+
+## 手引きへの提案
+
+- 例題の折りたたみ（`??? note "解法の詳細"`）の中に、コード片の取り込み（```` ```cpp ```` と `--8<--`）を 4 字下げで置いた（abc201_d）。check_pages は通ったが、mkdocs の表示で取り込みが効くかはビルドで確かめてほしい。効かないなら、取り込みを本文の節へ移す
+- 黄の節（tree・binary-search）は、手引き §2.3 に従い最初の文で追加の前提をリンクした。binary-search の節は draft の binary-search-answer#dp-check へ、節単位でリンクしている
+
+## 問題の補充の候補
+
+- 水のページに要る abc319 以降の問題は、練習の abc349_e（diff 1464）で満たしている。追加の候補は探していない
+- [木の上のゲーム](../../../docs/comb/minimax.md) の節には、易しい（青までの）練習がない。木を降りるゲームで終局の値を max・min で決めるだけの易しい問題が見つかれば、練習に足したい（今回は探していない）
+
+## 未解決の点
+
+- tessoku_book_ai は、evidence が解答コードだけで、どちらが最大化する側かを文章では確かめていない。本文では「一方は最大化、他方は最小化」と台帳どおりに書き、方針も手番の偶奇で max と min を交互に取るとだけ書いた
+- abc218_g の制約 N は kmjp の記事に明記がなく、本文の「N = 10^5 程度なら再帰でも通ることが多い」は一般論として書いた（問題の制約としては書いていない）
+- related の optimal-strategy-expectation・interval-dp・tree-dp・game-basics・game-retrograde-analysis・grundy-number・root-path-dfs・memoized-recursion・bit-dp はまだ stub なので、ページへのリンクだけにし、節へのリンクはしていない
+- 使用量の目安：道具の呼び出し 約 35 回、Web 取得 9 回

@@ -1,0 +1,8 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "0\n", output: "0.000000000\n"}
+  - {input: "0.25\n", output: "0.250000000\n"}
+  - {input: "4\n", output: "3.000000000\n"}
+  - {input: "1000000\n", output: "1999.000000000\n"}
