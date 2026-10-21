@@ -327,7 +327,7 @@ search:
 
 ## オイラーの φ 関数（euler-phi） {#euler-phi}
 
-- id：`euler-phi`　レベル：黄　段階：stub　type：technique
+- id：`euler-phi`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/euler-phi/
 - 別名：トーシェント、totient、Euler's totient function、φ(n)、互いに素な数の個数
 - 種類：整数論
@@ -338,9 +338,9 @@ search:
     - 言い回し：a^k ≡ 1 (mod n) となる最小の k を探す
 - 節：
     - `euler-phi#formula` 定義と公式 φ(n) = n Π(1 − 1/p)（素因数分解が必要）：https://yuukougun.github.io/kyopro-atlas/math/euler-phi/#formula
-    - `euler-phi#sieve` 篩で 1..N の φ を全て求める：https://yuukougun.github.io/kyopro-atlas/math/euler-phi/#sieve
-    - `euler-phi#euler-theorem` オイラーの定理 a^φ(n) ≡ 1 と、指数の mod への応用：https://yuukougun.github.io/kyopro-atlas/math/euler-phi/#euler-theorem
-    - `euler-phi#divisor-sum` Σ_{d|n} φ(d) = n と「位数が d の元は φ(d) 個」：https://yuukougun.github.io/kyopro-atlas/math/euler-phi/#divisor-sum
+    - `euler-phi#sieve` 篩で 1..N の φ をすべて求める：https://yuukougun.github.io/kyopro-atlas/math/euler-phi/#sieve
+    - `euler-phi#euler-theorem` オイラーの定理 a^φ(n) ≡ 1 と、位数・指数の mod への応用：https://yuukougun.github.io/kyopro-atlas/math/euler-phi/#euler-theorem
+    - `euler-phi#divisor-sum` 約数についての φ の和が n になることと、位数が d の元が φ(d) 個あること：https://yuukougun.github.io/kyopro-atlas/math/euler-phi/#divisor-sum
 
 ## 大きな数の素数判定と素因数分解（miller-rabin） {#miller-rabin}
 
@@ -441,7 +441,7 @@ search:
 
 ## 位数・原始根・離散対数（multiplicative-order） {#multiplicative-order}
 
-- id：`multiplicative-order`　レベル：黄　段階：stub　type：technique
+- id：`multiplicative-order`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/multiplicative-order/
 - 別名：multiplicative order、primitive root、discrete logarithm、累乗の周期、生成元、BSGS、baby-step giant-step、平方剰余、mod の平方根、mod の K 乗根、Tonelli-Shanks、Cipolla
 - 種類：整数論
@@ -633,7 +633,7 @@ search:
 
 ## XOR 基底（xor-basis） {#xor-basis}
 
-- id：`xor-basis`　レベル：黄　段階：stub　type：technique
+- id：`xor-basis`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/xor-basis/
 - 別名：XOR basis、線形基底、linear basis、F2 の基底、部分集合の XOR、XOR で作れる値、閉路基底、サイクル基底、サイクル空間、XOR 最短路
 - 種類：線形代数・行列、ビット演算

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 460" font-family="sans-serif" font-size="14">
+<defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#bbb" stroke-width="2"/></pattern></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="20" y="26" fill="#222">X² = (X<tspan baseline-shift="sub" font-size="11">1</tspan> + X<tspan baseline-shift="sub" font-size="11">2</tspan> + X<tspan baseline-shift="sub" font-size="11">3</tspan> + X<tspan baseline-shift="sub" font-size="11">4</tspan>)² を展開した 16 項</text>
+<text x="20" y="48" fill="#222">（行 i・列 j のマスが X<tspan baseline-shift="sub" font-size="11">i</tspan>X<tspan baseline-shift="sub" font-size="11">j</tspan>）</text>
+<text x="128.0" y="82" text-anchor="middle" fill="#222">j = 1</text>
+<text x="194.0" y="82" text-anchor="middle" fill="#222">j = 2</text>
+<text x="260.0" y="82" text-anchor="middle" fill="#222">j = 3</text>
+<text x="326.0" y="82" text-anchor="middle" fill="#222">j = 4</text>
+<text x="85" y="120" text-anchor="end" fill="#222">i = 1</text>
+<rect x="95" y="92" width="66" height="46" fill="#ffe2b8" stroke="#a35a00" stroke-width="2.5"/>
+<text x="128.0" y="120" text-anchor="middle" fill="#7a4200" font-weight="bold">X<tspan baseline-shift="sub" font-size="11">1</tspan>²</text>
+<rect x="161" y="92" width="66" height="46" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="194.0" y="120" text-anchor="middle" fill="#1f4e9a">X<tspan baseline-shift="sub" font-size="11">1</tspan>X<tspan baseline-shift="sub" font-size="11">2</tspan></text>
+<rect x="227" y="92" width="66" height="46" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="260.0" y="120" text-anchor="middle" fill="#1f4e9a">X<tspan baseline-shift="sub" font-size="11">1</tspan>X<tspan baseline-shift="sub" font-size="11">3</tspan></text>
+<rect x="293" y="92" width="66" height="46" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="326.0" y="120" text-anchor="middle" fill="#1f4e9a">X<tspan baseline-shift="sub" font-size="11">1</tspan>X<tspan baseline-shift="sub" font-size="11">4</tspan></text>
+<text x="85" y="166" text-anchor="end" fill="#222">i = 2</text>
+<rect x="95" y="138" width="66" height="46" fill="url(#hatch)" stroke="#666" stroke-width="1.5" stroke-dasharray="4 2"/>
+<rect x="104" y="151" width="48" height="20" fill="#ffffff"/>
+<text x="128.0" y="166" text-anchor="middle" fill="#555">X<tspan baseline-shift="sub" font-size="11">2</tspan>X<tspan baseline-shift="sub" font-size="11">1</tspan></text>
+<rect x="161" y="138" width="66" height="46" fill="#ffe2b8" stroke="#a35a00" stroke-width="2.5"/>
+<text x="194.0" y="166" text-anchor="middle" fill="#7a4200" font-weight="bold">X<tspan baseline-shift="sub" font-size="11">2</tspan>²</text>
+<rect x="227" y="138" width="66" height="46" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="260.0" y="166" text-anchor="middle" fill="#1f4e9a">X<tspan baseline-shift="sub" font-size="11">2</tspan>X<tspan baseline-shift="sub" font-size="11">3</tspan></text>
+<rect x="293" y="138" width="66" height="46" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="326.0" y="166" text-anchor="middle" fill="#1f4e9a">X<tspan baseline-shift="sub" font-size="11">2</tspan>X<tspan baseline-shift="sub" font-size="11">4</tspan></text>
+<text x="85" y="212" text-anchor="end" fill="#222">i = 3</text>
+<rect x="95" y="184" width="66" height="46" fill="url(#hatch)" stroke="#666" stroke-width="1.5" stroke-dasharray="4 2"/>
+<rect x="104" y="197" width="48" height="20" fill="#ffffff"/>
+<text x="128.0" y="212" text-anchor="middle" fill="#555">X<tspan baseline-shift="sub" font-size="11">3</tspan>X<tspan baseline-shift="sub" font-size="11">1</tspan></text>
+<rect x="161" y="184" width="66" height="46" fill="url(#hatch)" stroke="#666" stroke-width="1.5" stroke-dasharray="4 2"/>
+<rect x="170" y="197" width="48" height="20" fill="#ffffff"/>
+<text x="194.0" y="212" text-anchor="middle" fill="#555">X<tspan baseline-shift="sub" font-size="11">3</tspan>X<tspan baseline-shift="sub" font-size="11">2</tspan></text>
+<rect x="227" y="184" width="66" height="46" fill="#ffe2b8" stroke="#a35a00" stroke-width="2.5"/>
+<text x="260.0" y="212" text-anchor="middle" fill="#7a4200" font-weight="bold">X<tspan baseline-shift="sub" font-size="11">3</tspan>²</text>
+<rect x="293" y="184" width="66" height="46" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="326.0" y="212" text-anchor="middle" fill="#1f4e9a">X<tspan baseline-shift="sub" font-size="11">3</tspan>X<tspan baseline-shift="sub" font-size="11">4</tspan></text>
+<text x="85" y="258" text-anchor="end" fill="#222">i = 4</text>
+<rect x="95" y="230" width="66" height="46" fill="url(#hatch)" stroke="#666" stroke-width="1.5" stroke-dasharray="4 2"/>
+<rect x="104" y="243" width="48" height="20" fill="#ffffff"/>
+<text x="128.0" y="258" text-anchor="middle" fill="#555">X<tspan baseline-shift="sub" font-size="11">4</tspan>X<tspan baseline-shift="sub" font-size="11">1</tspan></text>
+<rect x="161" y="230" width="66" height="46" fill="url(#hatch)" stroke="#666" stroke-width="1.5" stroke-dasharray="4 2"/>
+<rect x="170" y="243" width="48" height="20" fill="#ffffff"/>
+<text x="194.0" y="258" text-anchor="middle" fill="#555">X<tspan baseline-shift="sub" font-size="11">4</tspan>X<tspan baseline-shift="sub" font-size="11">2</tspan></text>
+<rect x="227" y="230" width="66" height="46" fill="url(#hatch)" stroke="#666" stroke-width="1.5" stroke-dasharray="4 2"/>
+<rect x="236" y="243" width="48" height="20" fill="#ffffff"/>
+<text x="260.0" y="258" text-anchor="middle" fill="#555">X<tspan baseline-shift="sub" font-size="11">4</tspan>X<tspan baseline-shift="sub" font-size="11">3</tspan></text>
+<rect x="293" y="230" width="66" height="46" fill="#ffe2b8" stroke="#a35a00" stroke-width="2.5"/>
+<text x="326.0" y="258" text-anchor="middle" fill="#7a4200" font-weight="bold">X<tspan baseline-shift="sub" font-size="11">4</tspan>²</text>
+<rect x="20" y="306" width="26" height="20" fill="#ffe2b8" stroke="#a35a00" stroke-width="2.5"/>
+<text x="56" y="321" fill="#222">対角 i = j：N 個</text>
+<text x="56" y="342" fill="#555">指示確率変数なら X<tspan baseline-shift="sub" font-size="11">i</tspan>² = X<tspan baseline-shift="sub" font-size="11">i</tspan></text>
+<rect x="20" y="358" width="26" height="20" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="56" y="373" fill="#222">右上 i &lt; j：N(N−1)/2 個</text>
+<text x="56" y="394" fill="#555">ペアごとに E[X<tspan baseline-shift="sub" font-size="11">i</tspan>X<tspan baseline-shift="sub" font-size="11">j</tspan>] を求める</text>
+<rect x="20" y="410" width="26" height="20" fill="url(#hatch)" stroke="#666" stroke-width="1.5" stroke-dasharray="4 2"/>
+<text x="56" y="425" fill="#222">左下 i &gt; j：右上と同じ値</text>
+<text x="56" y="446" fill="#555">右上の和を 2 倍すればよい</text>
+</svg>

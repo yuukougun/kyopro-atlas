@@ -55,11 +55,11 @@ updated: 2026-10-21
 | 各要素が 3 択で N ≤ 12 程度（3^N 通り） | [bit 全探索と順列全探索](../basics/bit-full-search.md) | 基礎 |
 | N ≤ 10〜12 人を組・グループに分ける（ベル数 B12 ≈ 4.2×10^6） | [再帰による全列挙](../basics/recursive-enumeration.md) | 水 |
 | N ≤ 10〜12 で、グループ分けを全部試す | [第 2 種スターリング数とベル数](../comb/bell-number.md) | 青 |
-| グリッドの短い辺 ≤ 6〜14 | [プロファイル DP](../dp/broken-profile-dp.md)（準備中） | 黄 |
+| グリッドの短い辺 ≤ 6〜14 | [プロファイル DP](../dp/broken-profile-dp.md) | 黄 |
 | 2N ≤ 16 人を 2 人組に分ける（(2N−1)!! 通り） | [再帰による全列挙](../basics/recursive-enumeration.md) | 水 |
 | N ≤ 16 程度の一般グラフでペアを作る | [一般グラフのマッチング](../graph/general-matching.md)（準備中） | 発展 |
 | 特別な地点が K ≤ 17 個（ほかの地点はグラフで結ばれている） | [bitDP](../dp/bit-dp.md) | 水 |
-| N ≤ 17 程度の頂点数で、条件を満たす辺の選び方を数える | [連結なグラフの数え上げ](../comb/counting-labeled-graphs.md)（準備中） | 黄 |
+| N ≤ 17 程度の頂点数で、条件を満たす辺の選び方を数える | [連結なグラフの数え上げ](../comb/counting-labeled-graphs.md) | 黄 |
 | N ≤ 18 程度で、集合とその部分集合の組をすべて調べる（全体で 3^N） | [bit 演算の基本と XOR の性質](../basics/bit-operations.md) | 基礎 |
 | N ≤ 16〜18（3&#94;N ≈ 4×10&#94;7〜4×10&#94;8） | [部分集合を列挙する DP](../dp/subset-enumeration-dp.md) | 青 |
 | カードの枚数 N ≤ 18 程度で、残りのカードの集合が局面になる | [ゲームの基本と勝敗の DP](../comb/game-basics.md) | 水 |
@@ -67,7 +67,7 @@ updated: 2026-10-21
 | N ≤ 16〜20 | [bitDP](../dp/bit-dp.md) | 水 |
 | 3 彩色なら N ≤ 20 でも、DFS 順に塗れば 3·2^(N−1) 通り以下に収まる | [小さいグラフの全探索](../graph/small-graph-brute-force.md) | 基礎 |
 | 禁止条件が M ≤ 20 個程度 | [包除原理](../comb/inclusion-exclusion.md) | 青 |
-| N ≤ 20 で、すべての部分集合（bit）ごとの和・最大を求める | [部分集合の高速ゼータ変換とメビウス変換](../comb/zeta-mobius-subset.md)（準備中） | 黄 |
+| N ≤ 20 で、すべての部分集合（bit）ごとの和・最大を求める | [部分集合の高速ゼータ変換とメビウス変換](../comb/zeta-mobius-subset.md) | 黄 |
 
 ### 上限が 40 以下 {#signs-constraint-40}
 
@@ -81,7 +81,7 @@ updated: 2026-10-21
 
 | 制約 | ページ | レベル |
 | --- | --- | --- |
-| N ≤ 50 程度で、長さ（個数）の組合せ（多重集合）を全部試す | [整数の分割と分割数](../comb/partition-number.md)（準備中） | 黄 |
+| N ≤ 50 程度で、長さ（個数）の組合せ（多重集合）を全部試す | [整数の分割と分割数](../comb/partition-number.md) | 黄 |
 | N ≤ 50 程度の点で、実数の位置や半径を最適化する | [円と幾何の最適化](../geometry/circle-geometry.md) | 青 |
 | N ≤ 60 程度で、mod を取らない正確な値を求める | [二項係数の意味と性質](../comb/binomial-coefficient.md) | 基礎 |
 
@@ -92,10 +92,10 @@ updated: 2026-10-21
 | N ≤ 100、K ≤ 10^5 程度で、O(NK) は通るが O(NK^2) は通らない | [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md) | 水 |
 | N ≤ 100、値の総和 ≤ 10^5 程度 | [部分和 DP](../dp/subset-sum.md) | 基礎 |
 | 状態数 n ≤ 100 程度で、繰り返しの回数 K が 10&#94;9〜10&#94;18 | [行列累乗](../math/matrix-power.md) | 青 |
-| N ≤ 400 前後 | [区間 DP の応用](../dp/interval-dp-advanced.md)（準備中） | 黄 |
+| N ≤ 400 前後 | [区間 DP の応用](../dp/interval-dp-advanced.md) | 黄 |
 | N ≤ 400 程度で全点対の距離が要る | [ワーシャルフロイド法](../graph/warshall-floyd.md) | 水 |
 | N ≤ 300〜500 で O(N^3) が通る | [区間 DP](../dp/interval-dp.md) | 青 |
-| N ≤ 数百、M ≤ 数千程度で、流す量 K ≤ N | [最小費用流](../graph/min-cost-flow.md)（準備中） | 黄 |
+| N ≤ 数百、M ≤ 数千程度で、流す量 K ≤ N | [最小費用流](../graph/min-cost-flow.md) | 黄 |
 
 ### 上限が 5000 以下 {#signs-constraint-5000}
 
@@ -105,11 +105,11 @@ updated: 2026-10-21
 | H, W ≤ 2000 程度のグリッドで領域の和を何度も求める | [2 次元累積和](../basics/prefix-sum-2d.md) | 水 |
 | H, W ≤ 2000 程度（マスの数が 4×10^6 程度まで） | [グリッドグラフ](../graph/grid-graph.md) | 基礎 |
 | H, W ≤ 3000 程度 | [グリッド上の DP](../dp/dp-grid.md) | 水 |
-| N ≤ 3000 程度の順列の数え上げ | [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md)（準備中） | 黄 |
+| N ≤ 3000 程度の順列の数え上げ | [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md) | 黄 |
 | 2 つの列・文字列で N, M ≤ 3000〜5000 | [最長共通部分列と編集距離](../dp/lcs.md) | 水 |
-| N ≤ 2000〜5000 の木 | [二乗の木 DP](../dp/tree-dp-square.md)（準備中） | 黄 |
+| N ≤ 2000〜5000 の木 | [二乗の木 DP](../dp/tree-dp-square.md) | 黄 |
 | N, M ≤ 数千（O(NM) が間に合う） | [ベルマンフォード法](../graph/bellman-ford.md) | 青 |
-| 値の範囲 M ≤ 5000 程度で、各 k について P(X ≥ k) を数える | [期待値と確率の変換](../comb/expectation-tail-sum.md)（準備中） | 黄 |
+| 値の範囲 M ≤ 5000 程度で、各 k について P(X ≥ k) を数える | [期待値と確率の変換](../comb/expectation-tail-sum.md) | 黄 |
 | \|S\| ≤ 5000 程度で、回転や置き方を全部試せる | [文字列の基本操作と辞書順](../string/string-basics.md) | 基礎 |
 | N ≤ 2000〜5000 程度で、O(N^3) や O(N^2 M) が少し間に合わない | [bitset による高速化](../misc/bitset-speedup.md) | 青 |
 
@@ -117,12 +117,12 @@ updated: 2026-10-21
 
 | 制約 | ページ | レベル |
 | --- | --- | --- |
-| 法 P が 10^9 程度で、√P ≈ 3×10^4 個の表なら持てる | [位数・原始根・離散対数](../math/multiplicative-order.md)（準備中） | 黄 |
+| 法 P が 10^9 程度で、√P ≈ 3×10^4 個の表なら持てる | [位数・原始根・離散対数](../math/multiplicative-order.md) | 黄 |
 | N ≤ 10^5 程度で、各位置の選択肢が数通り（全探索だと K^N 通り） | [DP の基本](../dp/dp-basics.md) | 基礎 |
 | N ≤ 10^5 の列を K（数十）個の区間に分ける | [Monge 性による DP の高速化](../dp/monge.md)（準備中） | 発展 |
-| A_i < 2^60 で N ≤ 10^5 程度 | [XOR 基底](../math/xor-basis.md)（準備中） | 黄 |
+| A_i < 2^60 で N ≤ 10^5 程度 | [XOR 基底](../math/xor-basis.md) | 黄 |
 | H, W ≤ 10^5 のグリッドで、左上から右下への経路の数を求める | [格子路の数え上げ](../comb/lattice-paths.md) | 基礎 |
-| H, W ≤ 10^5 のグリッドに障害物が N ≤ 3000 個 | [包除 DP](../comb/inclusion-exclusion-dp.md)（準備中） | 黄 |
+| H, W ≤ 10^5 のグリッドに障害物が N ≤ 3000 個 | [包除 DP](../comb/inclusion-exclusion-dp.md) | 黄 |
 | 状態数 N ≤ 10^5 程度で、各状態の遷移が少数（または区間） | [期待値 DP](../comb/expected-value-dp.md) | 水 |
 | Q ≤ 2×10^5 個のクエリ（1 回あたり O(log N) 以下が必要） | [計算量の見積もり](../basics/complexity-estimation.md) | 基礎 |
 | A_i < 2&#94;30〜2&#94;60 で、全ペア（N ≤ 2×10&#94;5）の値を集計する | [bit ごとに独立に考える](../basics/bitwise-independence.md) | 水 |
@@ -133,17 +133,17 @@ updated: 2026-10-21
 | N ≤ 2×10^5 で、K が N^2 程度まで大きい | [K 番目の値](../basics/kth-value.md) | 青 |
 | N ≤ 2×10^5 本の区間で、座標は 10^9 まで | [区間スケジューリング・区間の串刺し](../basics/interval-scheduling.md) | 基礎 |
 | K ≤ 2×10^5 程度で、小さい順に K 個取り出せば足りる | [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md) | 水 |
-| N, Q ≤ 2×10^5 で、区間ごとに計算し直すと間に合わない | [分割統治](../basics/divide-and-conquer.md)（準備中） | 黄 |
+| N, Q ≤ 2×10^5 で、区間ごとに計算し直すと間に合わない | [分割統治](../basics/divide-and-conquer.md) | 黄 |
 | N ≤ 2×10^5 で 3 つ組は N^3 通りあり、全部は試せない | [一部を固定して数える](../thinking/fix-variable.md) | 基礎 |
 | N ≤ 2×10^5 で、組・区間は N^2 個あり列挙できない | [主客転倒・寄与](../thinking/contribution.md) | 水 |
 | N ≤ 2×10^5 で「部分列」「単調増加」 | [最長増加部分列](../dp/lis.md) | 水 |
-| 文字の種類 26 程度、\|S\| ≤ 2×10^5 | [部分列 DP](../dp/subsequence-dp.md)（準備中） | 黄 |
+| 文字の種類 26 程度、\|S\| ≤ 2×10^5 | [部分列 DP](../dp/subsequence-dp.md) | 黄 |
 | N ≤ 2×10^5 では N^2 の隣接行列を持てない（N ≤ 2000 程度なら持てる） | [グラフの表現と用語](../graph/graph-basics.md) | 基礎 |
 | N, M ≤ 2×10^5、またはマスの数 H×W ≤ 10^6 程度 | [幅優先探索（BFS）と無重み最短路](../graph/bfs.md) | 基礎 |
 | N, M ≤ 2×10^5 で辺の重みが非負 | [ダイクストラ法](../graph/dijkstra.md) | 基礎 |
-| N ≤ 2×10^5 で、補グラフの辺は N^2 本近くあり列挙できない | [補グラフ上の BFS](../graph/complement-graph-bfs.md)（準備中） | 黄 |
+| N ≤ 2×10^5 で、補グラフの辺は N^2 本近くあり列挙できない | [補グラフ上の BFS](../graph/complement-graph-bfs.md) | 黄 |
 | 完全グラフで N ≤ 2×10^5（辺が N^2 本あり、候補の辺を減らす必要がある） | [最小全域木](../graph/minimum-spanning-tree.md) | 水 |
-| N, M ≤ 2×10^5 で、辺を 1 本ずつ除いて調べる O(M(N+M)) は間に合わない | [橋・関節点・二重連結成分](../graph/lowlink.md)（準備中） | 黄 |
+| N, M ≤ 2×10^5 で、辺を 1 本ずつ除いて調べる O(M(N+M)) は間に合わない | [橋・関節点・二重連結成分](../graph/lowlink.md) | 黄 |
 | N, M, Q ≤ 2×10^5 で、1 つの頂点の次数が N 近くになりうる | [次数による平方分割](../graph/degree-sqrt.md) | 青 |
 | N ≤ 2×10^5 の木で、全ペア（N^2/2 組）についての和を求める | [辺で切って数える](../tree/tree-edge-contribution.md) | 水 |
 | パス u–v に関するクエリが Q ≤ 2×10^5 個 | [最小共通祖先（LCA）](../tree/lca.md) | 青 |
@@ -181,7 +181,7 @@ updated: 2026-10-21
 | A_i ≤ 10^6 程度で、値を配列の添字にできる | [調和級数と倍数の列挙](../math/harmonic-sum.md) | 水 |
 | 値の上限 ≤ 10^6 程度で、すべての g について数える | [約数包除](../comb/divisor-inclusion-exclusion.md) | 青 |
 | 値の上限 ≤ 10^6 程度で、gcd・lcm ごとに集計する | [約数・倍数のゼータ変換とメビウス変換](../comb/zeta-mobius-divisor.md) | 青 |
-| N ≤ 10^6 程度で、μ を篩で前計算できる | [メビウス関数とメビウス反転](../comb/mobius-function.md)（準備中） | 黄 |
+| N ≤ 10^6 程度で、μ を篩で前計算できる | [メビウス関数とメビウス反転](../comb/mobius-function.md) | 黄 |
 | \|S\| ≤ 10&#94;5〜10&#94;6、文字は英小文字で 26×(N+1) の表が持てる | [部分列の判定と次の出現位置の表](../string/subsequence-matching.md) | 基礎 |
 | N ≤ 10&#94;5〜10&#94;6 で、任意の 2 区間の一致判定が Q ≤ 2×10&#94;5 回 | [ローリングハッシュ](../string/rolling-hash.md) | 水 |
 | \|S\|, \|T\| ≤ 10^6 で、ずらし方ごとに比べる O(\|S\|\|T\|) が間に合わない | [Z-algorithm](../string/z-algorithm.md) | 水 |
@@ -200,7 +200,7 @@ updated: 2026-10-21
 | --- | --- | --- |
 | 状態数が 10&#94;6〜10&#94;7 程度に収まる（9! = 362880、60&#94;4 ≈ 1.3×10&#94;7） | [状態を頂点にする](../graph/extended-dijkstra.md) | 水 |
 | NW ≤ 10&#94;7〜10&#94;8（O(NW) が通る） | [ナップサック DP](../dp/knapsack-01.md) | 基礎 |
-| 制限時間が長めで、O(N√N) ≈ 10^8 なら間に合う | [平方分割](../ds/sqrt-decomposition.md)（準備中） | 黄 |
+| 制限時間が長めで、O(N√N) ≈ 10^8 なら間に合う | [平方分割](../ds/sqrt-decomposition.md) | 黄 |
 | −10^9 ≤ A_i ≤ 10^9 のように負の値を含む | [累積和と連想配列で区間を数える](../basics/prefix-sum-counting.md) | 基礎 |
 | 重さの上限 W ≤ 10^9 で、価値の総和が 10^5 程度 | [DP の状態の削減](../dp/dp-dimension-reduction.md) | 青 |
 | 法 M ≤ 10^9 が素数とは限らず、a^(M−2) で逆元を作れない | [拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md) | 水 |
@@ -250,8 +250,8 @@ updated: 2026-10-21
 | 余りや状態が M 種類しかなく、M + 1 個以上の候補がある | [対称性・鳩の巣原理・場合分け](../thinking/symmetry-pigeonhole-casework.md) | 基礎 |
 | クエリの数 Q と目標の和 K がともに 5000 程度（O(QK) が通る） | [戻す DP](../dp/knapsack-undo.md) | 青 |
 | K が 10&#94;5〜10&#94;6 程度 | [剰余を頂点にする最短路](../graph/modular-shortest-path.md)（準備中） | 発展 |
-| 頂点数が数百〜数千、辺数が 10^5 程度まで（フローが間に合う規模） | [最大流](../graph/max-flow.md)（準備中） | 黄 |
-| 要素の数 N が 100〜数百程度で、選び方は 2^N 通りある | [燃やす埋める](../graph/project-selection.md)（準備中） | 黄 |
+| 頂点数が数百〜数千、辺数が 10^5 程度まで（フローが間に合う規模） | [最大流](../graph/max-flow.md) | 黄 |
+| 要素の数 N が 100〜数百程度で、選び方は 2^N 通りある | [燃やす埋める](../graph/project-selection.md) | 黄 |
 | 種類が 20 程度以下で、部分集合ごとに供給と需要を比べられる | [最小パス被覆と Hall の定理](../graph/dilworth-path-cover.md)（準備中） | 発展 |
 | 値が 10^9 まであり、配列の添字にできない | [set・multiset・map の応用](../ds/ordered-set.md) | 基礎 |
 | 追加と取り出しが合わせて 2×10^5 回程度 | [優先度付きキュー](../ds/priority-queue.md) | 水 |

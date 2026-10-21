@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" width="640" height="300" font-family="sans-serif">
+  <rect x="0" y="0" width="640" height="300" fill="#ffffff"/>
+  <text x="320" y="24" font-size="15" text-anchor="middle" fill="#222222">x ≤ A = 1101、y ≤ B = 0111、x AND y = 0 を上の bit から決める</text>
+  <!-- bit の見出し -->
+  <text x="40" y="58" font-size="15" fill="#555555">bit</text>
+  <text x="190" y="58" font-size="15" text-anchor="middle" fill="#555555">3</text>
+  <text x="270" y="58" font-size="15" text-anchor="middle" fill="#555555">2</text>
+  <text x="350" y="58" font-size="15" text-anchor="middle" fill="#555555">1</text>
+  <text x="430" y="58" font-size="15" text-anchor="middle" fill="#555555">0</text>
+  <!-- 行の名前 -->
+  <text x="40" y="92" font-size="14" fill="#222222">上限 A</text>
+  <text x="40" y="132" font-size="14" fill="#222222">x</text>
+  <text x="40" y="172" font-size="14" fill="#555555">x のフラグ</text>
+  <text x="40" y="222" font-size="14" fill="#222222">上限 B</text>
+  <text x="40" y="262" font-size="14" fill="#222222">y</text>
+  <text x="40" y="292" font-size="14" fill="#555555">y のフラグ</text>
+  <!-- A の bit -->
+  <g font-size="16" text-anchor="middle" fill="#555555">
+    <text x="190" y="93">1</text><text x="270" y="93">1</text><text x="350" y="93">0</text><text x="430" y="93">1</text>
+  </g>
+  <!-- x の bit：bit 2 で A より小さくなる -->
+  <rect x="172" y="112" width="36" height="30" fill="#ffffff" stroke="#333333"/>
+  <rect x="252" y="112" width="36" height="30" fill="#ffffff" stroke="#1f5fbf" stroke-width="2.5"/>
+  <rect x="332" y="112" width="36" height="30" fill="#ffffff" stroke="#333333"/>
+  <rect x="412" y="112" width="36" height="30" fill="#ffffff" stroke="#333333"/>
+  <g font-size="16" text-anchor="middle" fill="#222222">
+    <text x="190" y="133">1</text><text x="270" y="133" fill="#1f5fbf">0</text><text x="350" y="133">1</text><text x="430" y="133">0</text>
+  </g>
+  <g font-size="15" text-anchor="middle">
+    <text x="190" y="173" fill="#222222">一致</text>
+    <text x="270" y="173" fill="#1f5fbf">未満</text>
+    <text x="350" y="173" fill="#1f5fbf">未満</text>
+    <text x="430" y="173" fill="#1f5fbf">未満</text>
+  </g>
+  <!-- B の bit -->
+  <g font-size="16" text-anchor="middle" fill="#555555">
+    <text x="190" y="223">0</text><text x="270" y="223">1</text><text x="350" y="223">1</text><text x="430" y="223">1</text>
+  </g>
+  <!-- y の bit：bit 1 で B より小さくなる -->
+  <rect x="172" y="242" width="36" height="30" fill="#ffffff" stroke="#333333"/>
+  <rect x="252" y="242" width="36" height="30" fill="#ffffff" stroke="#333333"/>
+  <rect x="332" y="242" width="36" height="30" fill="#ffffff" stroke="#b5521b" stroke-width="2.5" stroke-dasharray="5 2"/>
+  <rect x="412" y="242" width="36" height="30" fill="#ffffff" stroke="#333333"/>
+  <g font-size="16" text-anchor="middle" fill="#222222">
+    <text x="190" y="263">0</text><text x="270" y="263">1</text><text x="350" y="263" fill="#b5521b">0</text><text x="430" y="263">1</text>
+  </g>
+  <g font-size="15" text-anchor="middle">
+    <text x="190" y="293" fill="#222222">一致</text>
+    <text x="270" y="293" fill="#222222">一致</text>
+    <text x="350" y="293" fill="#b5521b">未満</text>
+    <text x="430" y="293" fill="#b5521b">未満</text>
+  </g>
+  <text x="466" y="133" font-size="15" fill="#1f5fbf">bit 2 で A より小さく</text>
+  <text x="466" y="263" font-size="15" fill="#b5521b">bit 1 で B より小さく</text>
+  <text x="466" y="200" font-size="15" fill="#555555">フラグは数ごとに</text>
+  <text x="466" y="220" font-size="15" fill="#555555">別々に切り替わる</text>
+</svg>

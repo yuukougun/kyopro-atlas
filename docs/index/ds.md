@@ -562,7 +562,7 @@ search:
 
 ## 平方分割（sqrt-decomposition） {#sqrt-decomposition}
 
-- id：`sqrt-decomposition`　レベル：黄　段階：stub　type：technique
+- id：`sqrt-decomposition`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/sqrt-decomposition/
 - 別名：sqrt decomposition、バケット法、bucket method、根号で場合分け、heavy/light、クエリの平方分割
 - 種類：クエリ処理の工夫、データ構造、計算量
@@ -573,10 +573,10 @@ search:
     - 言い回し：区間加算と、区間内の x 以上の要素の個数
     - 制約：制限時間が長めで、O(N√N) ≈ 10^8 なら間に合う
 - 節：
-    - `sqrt-decomposition#buckets` 配列のバケット分割（完全に含まれるブロックはタグ、端は要素ごと）：https://yuukougun.github.io/kyopro-atlas/ds/sqrt-decomposition/#buckets
-    - `sqrt-decomposition#heavy-light` 根号で場合分け（合計が抑えられた量の大小で分ける。歩幅なら小さい歩幅を（歩幅, 余り）でまとめる。入口は次数による平方分割のページ）：https://yuukougun.github.io/kyopro-atlas/ds/sqrt-decomposition/#heavy-light
+    - `sqrt-decomposition#buckets` 配列のバケット分割（丸ごと入るブロックはタグ、端は要素ごと）：https://yuukougun.github.io/kyopro-atlas/ds/sqrt-decomposition/#buckets
+    - `sqrt-decomposition#heavy-light` 根号で場合分け（合計が抑えられた量の大小で分ける）：https://yuukougun.github.io/kyopro-atlas/ds/sqrt-decomposition/#heavy-light
     - `sqrt-decomposition#query-buckets` クエリの平方分割（√Q 個ごとに作り直し、未反映の分は愚直に補正する）：https://yuukougun.github.io/kyopro-atlas/ds/sqrt-decomposition/#query-buckets
-    - `sqrt-decomposition#implementation` 実装の要点（ブロック番号は i / B・l と r が同じブロックの場合・タグを押し下げる時機・B は定数でよい）：https://yuukougun.github.io/kyopro-atlas/ds/sqrt-decomposition/#implementation
+    - `sqrt-decomposition#implementation` 実装の要点（ブロック番号・同じブロックの場合・タグの押し下げ・B の選び方）：https://yuukougun.github.io/kyopro-atlas/ds/sqrt-decomposition/#implementation
 
 ## 並列二分探索（parallel-binary-search） {#parallel-binary-search}
 

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 340" width="720" height="340" font-family="sans-serif" font-size="14">
+  <rect x="0" y="0" width="720" height="340" fill="#ffffff"/>
+  <!-- 左：木 -->
+  <rect x="18" y="18" width="232" height="222" rx="14" fill="#e8f0fb" stroke="#3b6fb6" stroke-width="2" stroke-dasharray="7 5"/>
+  <text x="22" y="262" fill="#3b6fb6">A：v とマージ済みの子（s = 5）</text>
+  <rect x="262" y="95" width="150" height="145" rx="14" fill="#fdf0e2" stroke="#c46a12" stroke-width="2"/>
+  <text x="22" y="284" fill="#c46a12">B：次にマージする子 c3 の部分木（t = 3）</text>
+  <!-- 辺 -->
+  <g stroke="#555" stroke-width="2">
+    <line x1="200" y1="50" x2="90" y2="125"/>
+    <line x1="200" y1="50" x2="200" y2="125"/>
+    <line x1="90" y1="125" x2="50" y2="205"/>
+    <line x1="90" y1="125" x2="130" y2="205"/>
+    <line x1="330" y1="125" x2="290" y2="205"/>
+    <line x1="330" y1="125" x2="370" y2="205"/>
+  </g>
+  <line x1="200" y1="50" x2="330" y2="125" stroke="#555" stroke-width="2" stroke-dasharray="4 4"/>
+  <!-- a から e への道（強調） -->
+  <polyline points="50,205 90,125 200,50 330,125 370,205" fill="none" stroke="#c0392b" stroke-width="5" stroke-opacity="0.45"/>
+  <!-- 頂点 -->
+  <g stroke="#333" stroke-width="2">
+    <circle cx="200" cy="50" r="17" fill="#ffffff"/>
+    <circle cx="90" cy="125" r="17" fill="#ffffff"/>
+    <circle cx="200" cy="125" r="17" fill="#ffffff"/>
+    <circle cx="50" cy="205" r="17" fill="#ffffff"/>
+    <circle cx="130" cy="205" r="17" fill="#ffffff"/>
+    <circle cx="330" cy="125" r="17" fill="#ffffff"/>
+    <circle cx="290" cy="205" r="17" fill="#ffffff"/>
+    <circle cx="370" cy="205" r="17" fill="#ffffff"/>
+  </g>
+  <g text-anchor="middle" dominant-baseline="central" fill="#111">
+    <text x="200" y="50" font-weight="bold">v</text>
+    <text x="90" y="125">c1</text>
+    <text x="200" y="125">c2</text>
+    <text x="50" y="205">a</text>
+    <text x="130" y="205">b</text>
+    <text x="330" y="125">c3</text>
+    <text x="290" y="205">d</text>
+    <text x="370" y="205">e</text>
+  </g>
+  <text x="22" y="312" fill="#c0392b">赤い道：a と e を結ぶ道の最も浅い頂点（LCA）は v</text>
+  <!-- 右：組の表 -->
+  <text x="450" y="40">マージ 1 回の仕事 ＝ A × B の組</text>
+  <g text-anchor="middle" dominant-baseline="central">
+    <text x="530" y="70" fill="#c46a12">c3</text>
+    <text x="580" y="70" fill="#c46a12">d</text>
+    <text x="630" y="70" fill="#c46a12">e</text>
+    <text x="470" y="100" fill="#3b6fb6">v</text>
+    <text x="470" y="135" fill="#3b6fb6">c1</text>
+    <text x="470" y="170" fill="#3b6fb6">c2</text>
+    <text x="470" y="205" fill="#3b6fb6">a</text>
+    <text x="470" y="240" fill="#3b6fb6">b</text>
+  </g>
+  <g fill="#f4f4f4" stroke="#888" stroke-width="1">
+    <rect x="505" y="83" width="50" height="35"/><rect x="555" y="83" width="50" height="35"/><rect x="605" y="83" width="50" height="35"/>
+    <rect x="505" y="118" width="50" height="35"/><rect x="555" y="118" width="50" height="35"/><rect x="605" y="118" width="50" height="35"/>
+    <rect x="505" y="153" width="50" height="35"/><rect x="555" y="153" width="50" height="35"/><rect x="605" y="153" width="50" height="35"/>
+    <rect x="505" y="188" width="50" height="35"/><rect x="555" y="188" width="50" height="35"/>
+    <rect x="505" y="223" width="50" height="35"/><rect x="555" y="223" width="50" height="35"/><rect x="605" y="223" width="50" height="35"/>
+  </g>
+  <rect x="605" y="188" width="50" height="35" fill="#f6d5d1" stroke="#c0392b" stroke-width="3"/>
+  <text x="630" y="205" text-anchor="middle" dominant-baseline="central" fill="#c0392b" font-weight="bold">(a, e)</text>
+  <text x="450" y="284">s × t ＝ 5 × 3 ＝ 15 組。</text>
+  <text x="450" y="306">どの組もここで初めて同じ配列に</text>
+  <text x="450" y="326">入り、二度と数えない</text>
+</svg>

@@ -1,0 +1,12 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 2 本目で 1 本目の (0,0) を外す（逆辺を通る）。k=1 は 5、k=2 は 4+4=8
+  - {input: "2 2 4\n0 0 5\n0 1 4\n1 0 4\n1 1 1\n", output: "2\n5\n8\n"}
+  # 辺がない
+  - {input: "1 1 0\n", output: "0\n"}
+  # 3 本とも同じ重み：slope は (0,0) と (3,…) だけを返すので、間を補う必要がある
+  - {input: "3 3 3\n0 0 7\n1 1 7\n2 2 7\n", output: "3\n7\n14\n21\n"}
+  # 重み 0 と 10^9（BIG - w = 0 になる境界）
+  - {input: "2 1 2\n0 0 0\n1 0 1000000000\n", output: "1\n1000000000\n"}

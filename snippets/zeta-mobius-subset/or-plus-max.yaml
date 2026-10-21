@@ -1,0 +1,12 @@
+# main の中で、愚直な O(4^n) の計算と一致することを assert で確かめてから出力する
+# 「1 / 3 5」は組が (0, 1) だけで 8。「2 / 5 5 1 1」は同じ値 5 の 2 つを別の添字として足す例
+# 「3 / 0 6 6 0 1 0 0 0」の K = 4 は、4 の部分集合だけなら 0 + 1 = 1 だが、K = 3 の (1, 2) の 12 が累積の max で残る例
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "1\n3 5\n", output: "8\n"}
+  - {input: "2\n5 5 1 1\n", output: "10\n10\n10\n"}
+  - {input: "2\n1 1 9 1\n", output: "2\n10\n10\n"}
+  - {input: "3\n1 2 3 4 5 6 7 8\n", output: "3\n4\n7\n7\n11\n12\n15\n"}
+  - {input: "3\n0 6 6 0 1 0 0 0\n", output: "6\n6\n12\n12\n12\n12\n12\n"}

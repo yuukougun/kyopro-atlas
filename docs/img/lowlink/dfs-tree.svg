@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" width="400" height="600" font-family="sans-serif">
+<rect x="0" y="0" width="400" height="600" fill="#ffffff"/>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#888888"/></marker></defs>
+<line x1="150" y1="50" x2="150" y2="130" stroke="#333333" stroke-width="2"/>
+<line x1="150" y1="130" x2="70" y2="210" stroke="#333333" stroke-width="2"/>
+<line x1="150" y1="130" x2="230" y2="210" stroke="#c0392b" stroke-width="6"/>
+<text x="200.0" y="164.0" font-size="14" fill="#c0392b" font-weight="bold">橋</text>
+<line x1="230" y1="210" x2="230" y2="290" stroke="#333333" stroke-width="2"/>
+<line x1="230" y1="290" x2="230" y2="370" stroke="#333333" stroke-width="2"/>
+<line x1="230" y1="370" x2="230" y2="450" stroke="#c0392b" stroke-width="6"/>
+<text x="242.0" y="415.0" font-size="14" fill="#c0392b" font-weight="bold">橋</text>
+<path d="M57,198 C20,130 60,52 132,46" fill="none" stroke="#888888" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ah)"/>
+<path d="M213,362 C175,330 175,250 211,220" fill="none" stroke="#888888" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ah)"/>
+<circle cx="150" cy="50" r="16" fill="#ffffff" stroke="#333333" stroke-width="2"/>
+<text x="150" y="55" font-size="15" text-anchor="middle" fill="#111111">0</text>
+<text x="180" y="55" font-size="13" fill="#1f4e99">ord 0・low 0</text>
+<circle cx="150" cy="130" r="22" fill="#ffffff" stroke="#333333" stroke-width="2"/>
+<circle cx="150" cy="130" r="16" fill="#ffffff" stroke="#333333" stroke-width="2"/>
+<text x="150" y="135" font-size="15" text-anchor="middle" fill="#111111">1</text>
+<text x="180" y="135" font-size="13" fill="#1f4e99">ord 1・low 0</text>
+<circle cx="70" cy="210" r="16" fill="#ffffff" stroke="#333333" stroke-width="2"/>
+<text x="70" y="215" font-size="15" text-anchor="middle" fill="#111111">2</text>
+<text x="70" y="252" font-size="13" text-anchor="middle" fill="#1f4e99">ord 2・low 0</text>
+<circle cx="230" cy="210" r="22" fill="#ffffff" stroke="#333333" stroke-width="2"/>
+<circle cx="230" cy="210" r="16" fill="#ffffff" stroke="#333333" stroke-width="2"/>
+<text x="230" y="215" font-size="15" text-anchor="middle" fill="#111111">3</text>
+<text x="260" y="215" font-size="13" fill="#1f4e99">ord 3・low 3</text>
+<circle cx="230" cy="290" r="16" fill="#ffffff" stroke="#333333" stroke-width="2"/>
+<text x="230" y="295" font-size="15" text-anchor="middle" fill="#111111">4</text>
+<text x="260" y="295" font-size="13" fill="#1f4e99">ord 4・low 3</text>
+<circle cx="230" cy="370" r="22" fill="#ffffff" stroke="#333333" stroke-width="2"/>
+<circle cx="230" cy="370" r="16" fill="#ffffff" stroke="#333333" stroke-width="2"/>
+<text x="230" y="375" font-size="15" text-anchor="middle" fill="#111111">5</text>
+<text x="260" y="375" font-size="13" fill="#1f4e99">ord 5・low 3</text>
+<circle cx="230" cy="450" r="16" fill="#ffffff" stroke="#333333" stroke-width="2"/>
+<text x="230" y="455" font-size="15" text-anchor="middle" fill="#111111">6</text>
+<text x="260" y="455" font-size="13" fill="#1f4e99">ord 6・low 6</text>
+<line x1="20" y1="505" x2="60" y2="505" stroke="#333333" stroke-width="2"/><text x="68" y="510" font-size="13" fill="#111111">木の辺</text>
+<line x1="200" y1="505" x2="240" y2="505" stroke="#888888" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ah)"/><text x="248" y="510" font-size="13" fill="#111111">後退辺</text>
+<line x1="20" y1="545" x2="60" y2="545" stroke="#c0392b" stroke-width="6"/><text x="68" y="550" font-size="13" fill="#111111">橋（low[子] &gt; ord[親]）</text>
+<circle cx="40" cy="580" r="11" fill="#ffffff" stroke="#333333" stroke-width="2"/><circle cx="40" cy="580" r="16" fill="none" stroke="#333333" stroke-width="2"/><text x="68" y="585" font-size="13" fill="#111111">関節点</text>
+</svg>

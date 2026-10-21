@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 440" width="560" height="440" font-family="sans-serif" font-size="14">
+<defs>
+<marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b03a2e"/></marker>
+<marker id="arb" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1f4e9a"/></marker>
+</defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+
+<polygon points="50,350 350,350 400,200" fill="#e8f0fb" stroke="none"/>
+<polygon points="50,350 200,400 350,350 400,200 250,100 100,150" fill="none" stroke="#222" stroke-width="2.5"/>
+<line x1="50" y1="350" x2="350" y2="350" stroke="#1f4e9a" stroke-width="1.5" stroke-dasharray="6 4"/>
+<line x1="50" y1="350" x2="400" y2="200" stroke="#1f4e9a" stroke-width="1.5" stroke-dasharray="6 4"/>
+<line x1="50" y1="350" x2="250" y2="100" stroke="#1f4e9a" stroke-width="1.5" stroke-dasharray="6 4"/>
+<line x1="350" y1="350" x2="400" y2="200" stroke="#1f4e9a" stroke-width="4"/>
+<circle cx="50" cy="350" r="5" fill="#222"/>
+<text x="20" y="355" fill="#222">p0</text>
+<circle cx="200" cy="400" r="5" fill="#222"/>
+<text x="194" y="422" fill="#222">p1</text>
+<circle cx="350" cy="350" r="5" fill="#222"/>
+<text x="358" y="366" fill="#222">p2</text>
+<circle cx="400" cy="200" r="5" fill="#222"/>
+<text x="410" y="204" fill="#222">p3</text>
+<circle cx="250" cy="100" r="5" fill="#222"/>
+<text x="244" y="88" fill="#222">p4</text>
+<circle cx="100" cy="150" r="5" fill="#222"/>
+<text x="70" y="144" fill="#222">p5</text>
+<circle cx="300" cy="250" r="6" fill="#1f4e9a"/><text x="270" y="240" fill="#1f4e9a">q (5, 3)</text>
+<rect x="444" y="294" width="12" height="12" fill="#b03a2e"/><text x="440" y="324" fill="#b03a2e">r (8, 2)</text>
+<text x="20" y="22" fill="#222">p0 から扇形に分け、点の入る扇形を二分探索する</text>
+<text x="20" y="46" fill="#222" font-size="13">q と r はどちらも p0 から見て p2 と p3 の間の角にある。</text>
+<text x="20" y="66" fill="#222" font-size="13">辺 p2→p3 の左にある q は内部、右にある r は外部である。</text>
+</svg>

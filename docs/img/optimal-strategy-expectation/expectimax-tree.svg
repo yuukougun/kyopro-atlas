@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 470" width="420" height="470" font-family="sans-serif">
+<rect x="0" y="0" width="420" height="470" fill="#ffffff"/>
+<text x="12" y="24" font-size="14" fill="#333">E₂：1 回目を振る（偶然）</text>
+<line x1="78" y1="213" x2="114" y2="68" stroke="#555" stroke-width="1.5"/>
+<rect x="114" y="44" width="112" height="48" fill="#fff4e5" stroke="#b45309" stroke-width="2"/>
+<text x="170" y="63" font-size="14" text-anchor="middle" fill="#111">max(1, 3.5)</text>
+<text x="170" y="84" font-size="16" text-anchor="middle" font-weight="bold" fill="#111">= 3.5</text>
+<line x1="226" y1="68" x2="262" y2="56" stroke="#333" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="268" y="61" font-size="14" fill="#111">やめる 1</text>
+<line x1="226" y1="68" x2="262" y2="80" stroke="#333" stroke-width="3"/>
+<text x="268" y="85" font-size="14" fill="#111" font-weight="bold">振り直す 3.5</text>
+<line x1="78" y1="213" x2="114" y2="126" stroke="#555" stroke-width="1.5"/>
+<rect x="114" y="102" width="112" height="48" fill="#fff4e5" stroke="#b45309" stroke-width="2"/>
+<text x="170" y="121" font-size="14" text-anchor="middle" fill="#111">max(2, 3.5)</text>
+<text x="170" y="142" font-size="16" text-anchor="middle" font-weight="bold" fill="#111">= 3.5</text>
+<line x1="226" y1="126" x2="262" y2="114" stroke="#333" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="268" y="119" font-size="14" fill="#111">やめる 2</text>
+<line x1="226" y1="126" x2="262" y2="138" stroke="#333" stroke-width="3"/>
+<text x="268" y="143" font-size="14" fill="#111" font-weight="bold">振り直す 3.5</text>
+<line x1="78" y1="213" x2="114" y2="184" stroke="#555" stroke-width="1.5"/>
+<rect x="114" y="160" width="112" height="48" fill="#fff4e5" stroke="#b45309" stroke-width="2"/>
+<text x="170" y="179" font-size="14" text-anchor="middle" fill="#111">max(3, 3.5)</text>
+<text x="170" y="200" font-size="16" text-anchor="middle" font-weight="bold" fill="#111">= 3.5</text>
+<line x1="226" y1="184" x2="262" y2="172" stroke="#333" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="268" y="177" font-size="14" fill="#111">やめる 3</text>
+<line x1="226" y1="184" x2="262" y2="196" stroke="#333" stroke-width="3"/>
+<text x="268" y="201" font-size="14" fill="#111" font-weight="bold">振り直す 3.5</text>
+<line x1="78" y1="213" x2="114" y2="242" stroke="#555" stroke-width="1.5"/>
+<rect x="114" y="218" width="112" height="48" fill="#fff4e5" stroke="#b45309" stroke-width="2"/>
+<text x="170" y="237" font-size="14" text-anchor="middle" fill="#111">max(4, 3.5)</text>
+<text x="170" y="258" font-size="16" text-anchor="middle" font-weight="bold" fill="#111">= 4</text>
+<line x1="226" y1="242" x2="262" y2="230" stroke="#333" stroke-width="3"/>
+<text x="268" y="235" font-size="14" fill="#111" font-weight="bold">やめる 4</text>
+<line x1="226" y1="242" x2="262" y2="254" stroke="#333" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="268" y="259" font-size="14" fill="#111">振り直す 3.5</text>
+<line x1="78" y1="213" x2="114" y2="300" stroke="#555" stroke-width="1.5"/>
+<rect x="114" y="276" width="112" height="48" fill="#fff4e5" stroke="#b45309" stroke-width="2"/>
+<text x="170" y="295" font-size="14" text-anchor="middle" fill="#111">max(5, 3.5)</text>
+<text x="170" y="316" font-size="16" text-anchor="middle" font-weight="bold" fill="#111">= 5</text>
+<line x1="226" y1="300" x2="262" y2="288" stroke="#333" stroke-width="3"/>
+<text x="268" y="293" font-size="14" fill="#111" font-weight="bold">やめる 5</text>
+<line x1="226" y1="300" x2="262" y2="312" stroke="#333" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="268" y="317" font-size="14" fill="#111">振り直す 3.5</text>
+<line x1="78" y1="213" x2="114" y2="358" stroke="#555" stroke-width="1.5"/>
+<rect x="114" y="334" width="112" height="48" fill="#fff4e5" stroke="#b45309" stroke-width="2"/>
+<text x="170" y="353" font-size="14" text-anchor="middle" fill="#111">max(6, 3.5)</text>
+<text x="170" y="374" font-size="16" text-anchor="middle" font-weight="bold" fill="#111">= 6</text>
+<line x1="226" y1="358" x2="262" y2="346" stroke="#333" stroke-width="3"/>
+<text x="268" y="351" font-size="14" fill="#111" font-weight="bold">やめる 6</text>
+<line x1="226" y1="358" x2="262" y2="370" stroke="#333" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="268" y="375" font-size="14" fill="#111">振り直す 3.5</text>
+<circle cx="46" cy="213" r="32" fill="#e8f0fe" stroke="#1a56db" stroke-width="2"/>
+<text x="46" y="208" font-size="14" text-anchor="middle" fill="#111">平均</text>
+<text x="46" y="228" font-size="16" text-anchor="middle" font-weight="bold" fill="#111">4.25</text>
+<circle cx="22" cy="412" r="9" fill="#e8f0fe" stroke="#1a56db" stroke-width="2"/>
+<text x="38" y="417" font-size="14" fill="#111">偶然の節点：子の平均</text>
+<rect x="213" y="403" width="18" height="18" fill="#fff4e5" stroke="#b45309" stroke-width="2"/>
+<text x="239" y="417" font-size="14" fill="#111">選択の節点：子の max</text>
+<line x1="12" y1="440" x2="40" y2="440" stroke="#333" stroke-width="3"/>
+<text x="48" y="445" font-size="14" fill="#111">選んだ行動</text>
+<line x1="203" y1="440" x2="231" y2="440" stroke="#333" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="239" y="445" font-size="14" fill="#111">選ばない行動</text>
+</svg>

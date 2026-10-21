@@ -350,7 +350,7 @@ search:
 
 ## 部分列 DP（subsequence-dp） {#subsequence-dp}
 
-- id：`subsequence-dp`　レベル：黄　段階：stub　type：technique
+- id：`subsequence-dp`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/subsequence-dp/
 - 別名：異なる部分列の数、部分列の個数、Distinct Subsequences
 - 種類：DP、文字列、数え上げ
@@ -361,7 +361,7 @@ search:
     - 言い回し：辞書順で K 番目の部分列
     - 制約：文字の種類 26 程度、|S| ≤ 2×10^5
 - 節：
-    - `subsequence-dp#positions-or-strings` 位置の組を数える（重複を気にしない）か、異なる文字列を数えるか：https://yuukougun.github.io/kyopro-atlas/dp/subsequence-dp/#positions-or-strings
+    - `subsequence-dp#positions-or-strings` 位置の組を数えるか、異なる文字列を数えるか：https://yuukougun.github.io/kyopro-atlas/dp/subsequence-dp/#positions-or-strings
     - `subsequence-dp#leftmost` 最も左を取る取り出し方が一意な理由：https://yuukougun.github.io/kyopro-atlas/dp/subsequence-dp/#leftmost
     - `subsequence-dp#next-table-dp` 次の出現位置の表で配る DP：https://yuukougun.github.io/kyopro-atlas/dp/subsequence-dp/#next-table-dp
     - `subsequence-dp#shortest-non-subsequence` 部分列として現れない最短の文字列（後ろから DP して辞書順最小に復元）：https://yuukougun.github.io/kyopro-atlas/dp/subsequence-dp/#shortest-non-subsequence
@@ -390,7 +390,7 @@ search:
 
 ## 区間 DP の応用（interval-dp-advanced） {#interval-dp-advanced}
 
-- id：`interval-dp-advanced`　レベル：黄　段階：stub　type：technique
+- id：`interval-dp-advanced`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/interval-dp-advanced/
 - 別名：区間 DP で木を数える、区間ゲーム
 - 種類：DP、数え上げ
@@ -447,7 +447,7 @@ search:
 
 ## プロファイル DP（broken-profile-dp） {#broken-profile-dp}
 
-- id：`broken-profile-dp`　レベル：黄　段階：stub　type：technique
+- id：`broken-profile-dp`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/broken-profile-dp/
 - 別名：Broken Profile DP、插頭 DP、フロンティア法、連結性 DP、スライド bitDP、敷き詰めの DP
 - 種類：DP、ビット演算
@@ -485,7 +485,7 @@ search:
 
 ## 桁 DP の応用（digit-dp-advanced） {#digit-dp-advanced}
 
-- id：`digit-dp-advanced`　レベル：黄　段階：stub　type：technique
+- id：`digit-dp-advanced`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/digit-dp-advanced/
 - 別名：繰り上がりの DP、上限と下限の桁 DP、複数の数の桁 DP
 - 種類：DP、数え上げ
@@ -545,7 +545,7 @@ search:
 
 ## 二乗の木 DP（tree-dp-square） {#tree-dp-square}
 
-- id：`tree-dp-square`　レベル：黄　段階：stub　type：technique
+- id：`tree-dp-square`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/tree-dp-square/
 - 別名：2 乗の木 DP、O(N^2) の木 DP、木の上のナップサック
 - 種類：DP、木
@@ -562,7 +562,7 @@ search:
 
 ## 挿入 DP・箱根駅伝 DP（insertion-dp） {#insertion-dp}
 
-- id：`insertion-dp`　レベル：黄　段階：stub　type：technique
+- id：`insertion-dp`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/insertion-dp/
 - 別名：相対順位の DP、順列の DP、箱根 DP、Insertion DP、連結成分 DP、Connected Component DP
 - 種類：DP、数え上げ

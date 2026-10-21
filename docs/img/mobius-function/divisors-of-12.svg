@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340" width="480" height="340" font-family="sans-serif">
+<rect x="0" y="0" width="480" height="340" fill="#ffffff"/>
+<text x="240" y="30" font-size="16" text-anchor="middle" fill="#222">12 の約数と μ の値（横は 2 の指数、縦は 3 の指数）</text>
+<text x="62" y="235" font-size="14" text-anchor="middle" fill="#666">3⁰</text>
+<text x="62" y="115" font-size="14" text-anchor="middle" fill="#666">3¹</text>
+<line x1="182" y1="230" x2="218" y2="230" stroke="#888" stroke-width="1.5"/>
+<text x="200" y="224" font-size="14" text-anchor="middle" fill="#666">×2</text>
+<line x1="322" y1="230" x2="358" y2="230" stroke="#888" stroke-width="1.5"/>
+<text x="340" y="224" font-size="14" text-anchor="middle" fill="#666">×2</text>
+<line x1="182" y1="110" x2="218" y2="110" stroke="#888" stroke-width="1.5"/>
+<text x="200" y="104" font-size="14" text-anchor="middle" fill="#666">×2</text>
+<line x1="322" y1="110" x2="358" y2="110" stroke="#888" stroke-width="1.5"/>
+<text x="340" y="104" font-size="14" text-anchor="middle" fill="#666">×2</text>
+<line x1="130" y1="200.0" x2="130" y2="140.0" stroke="#888" stroke-width="1.5"/>
+<text x="138" y="174.0" font-size="14" fill="#666">×3</text>
+<line x1="270" y1="200.0" x2="270" y2="140.0" stroke="#888" stroke-width="1.5"/>
+<text x="278" y="174.0" font-size="14" fill="#666">×3</text>
+<line x1="410" y1="200.0" x2="410" y2="140.0" stroke="#888" stroke-width="1.5"/>
+<text x="418" y="174.0" font-size="14" fill="#666">×3</text>
+<rect x="78" y="200.0" width="104" height="60" rx="6" fill="#cfe3ff" stroke="#1f5fbf" stroke-width="2"/>
+<text x="130" y="225" font-size="18" font-weight="bold" text-anchor="middle" fill="#123c7a">1</text>
+<text x="130" y="247" font-size="14" text-anchor="middle" fill="#123c7a">μ = +1</text>
+<rect x="218" y="200.0" width="104" height="60" rx="6" fill="#ffe0c2" stroke="#b85c00" stroke-width="2"/>
+<text x="270" y="225" font-size="18" font-weight="bold" text-anchor="middle" fill="#7a3d00">2</text>
+<text x="270" y="247" font-size="14" text-anchor="middle" fill="#7a3d00">μ = −1</text>
+<rect x="358" y="200.0" width="104" height="60" rx="6" fill="#f2f2f2" stroke="#999999" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="410" y="225" font-size="18" font-weight="bold" text-anchor="middle" fill="#777">4</text>
+<text x="410" y="247" font-size="14" text-anchor="middle" fill="#777">μ = 0</text>
+<rect x="78" y="80.0" width="104" height="60" rx="6" fill="#ffe0c2" stroke="#b85c00" stroke-width="2"/>
+<text x="130" y="105" font-size="18" font-weight="bold" text-anchor="middle" fill="#7a3d00">3</text>
+<text x="130" y="127" font-size="14" text-anchor="middle" fill="#7a3d00">μ = −1</text>
+<rect x="218" y="80.0" width="104" height="60" rx="6" fill="#cfe3ff" stroke="#1f5fbf" stroke-width="2"/>
+<text x="270" y="105" font-size="18" font-weight="bold" text-anchor="middle" fill="#123c7a">6</text>
+<text x="270" y="127" font-size="14" text-anchor="middle" fill="#123c7a">μ = +1</text>
+<rect x="358" y="80.0" width="104" height="60" rx="6" fill="#f2f2f2" stroke="#999999" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="410" y="105" font-size="18" font-weight="bold" text-anchor="middle" fill="#777">12</text>
+<text x="410" y="127" font-size="14" text-anchor="middle" fill="#777">μ = 0</text>
+<text x="130" y="284.0" font-size="14" text-anchor="middle" fill="#666">2⁰</text>
+<text x="270" y="284.0" font-size="14" text-anchor="middle" fill="#666">2¹</text>
+<text x="410" y="284.0" font-size="14" text-anchor="middle" fill="#666">2²</text>
+<text x="240" y="316" font-size="15" text-anchor="middle" fill="#222">破線の枠は μ = 0。和は 1 − 1 − 1 + 0 + 1 + 0 = 0</text>
+</svg>

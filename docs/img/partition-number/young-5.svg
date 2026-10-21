@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 304" width="540" height="304" font-family="sans-serif">
+<rect x="0" y="0" width="540" height="304" fill="#ffffff"/>
+<rect x="17" y="8" width="20" height="20" fill="#cfe3f7" stroke="#333333" stroke-width="1.5"/>
+<rect x="37" y="8" width="20" height="20" fill="#cfe3f7" stroke="#333333" stroke-width="1.5"/>
+<rect x="57" y="8" width="20" height="20" fill="#cfe3f7" stroke="#333333" stroke-width="1.5"/>
+<rect x="77" y="8" width="20" height="20" fill="#cfe3f7" stroke="#333333" stroke-width="1.5"/>
+<rect x="97" y="8" width="20" height="20" fill="#cfe3f7" stroke="#333333" stroke-width="1.5"/>
+<text x="67.5" y="95" font-size="17" text-anchor="middle" fill="#111111">5</text>
+<text x="67.5" y="117" font-size="15" text-anchor="middle" fill="#444444">最大 5・1 個</text>
+<rect x="152" y="8" width="20" height="20" fill="#cfe3f7" stroke="#333333" stroke-width="1.5"/>
+<rect x="172" y="8" width="20" height="20" fill="#cfe3f7" stroke="#333333" stroke-width="1.5"/>
+<rect x="192" y="8" width="20" height="20" fill="#cfe3f7" stroke="#333333" stroke-width="1.5"/>
+<rect x="212" y="8" width="20" height="20" fill="#cfe3f7" stroke="#333333" stroke-width="1.5"/>
+<rect x="152" y="28" width="20" height="20" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<text x="202.5" y="95" font-size="17" text-anchor="middle" fill="#111111">4+1</text>
+<text x="202.5" y="117" font-size="15" text-anchor="middle" fill="#444444">最大 4・2 個</text>
+<rect x="287" y="8" width="20" height="20" fill="#cfe3f7" stroke="#333333" stroke-width="1.5"/>
+<rect x="307" y="8" width="20" height="20" fill="#cfe3f7" stroke="#333333" stroke-width="1.5"/>
+<rect x="327" y="8" width="20" height="20" fill="#cfe3f7" stroke="#333333" stroke-width="1.5"/>
+<rect x="287" y="28" width="20" height="20" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<rect x="307" y="28" width="20" height="20" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<text x="337.5" y="95" font-size="17" text-anchor="middle" fill="#111111">3+2</text>
+<text x="337.5" y="117" font-size="15" text-anchor="middle" fill="#444444">最大 3・2 個</text>
+<rect x="422" y="8" width="20" height="20" fill="#cfe3f7" stroke="#333333" stroke-width="1.5"/>
+<rect x="442" y="8" width="20" height="20" fill="#cfe3f7" stroke="#333333" stroke-width="1.5"/>
+<rect x="462" y="8" width="20" height="20" fill="#cfe3f7" stroke="#333333" stroke-width="1.5"/>
+<rect x="422" y="28" width="20" height="20" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<rect x="422" y="48" width="20" height="20" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<text x="472.5" y="95" font-size="17" text-anchor="middle" fill="#111111">3+1+1</text>
+<text x="472.5" y="117" font-size="15" text-anchor="middle" fill="#444444">最大 3・3 個</text>
+<rect x="17" y="140" width="20" height="20" fill="#cfe3f7" stroke="#333333" stroke-width="1.5"/>
+<rect x="37" y="140" width="20" height="20" fill="#cfe3f7" stroke="#333333" stroke-width="1.5"/>
+<rect x="17" y="160" width="20" height="20" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<rect x="37" y="160" width="20" height="20" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<rect x="17" y="180" width="20" height="20" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<text x="67.5" y="266" font-size="17" text-anchor="middle" fill="#111111">2+2+1</text>
+<text x="67.5" y="288" font-size="15" text-anchor="middle" fill="#444444">最大 2・3 個</text>
+<rect x="152" y="140" width="20" height="20" fill="#cfe3f7" stroke="#333333" stroke-width="1.5"/>
+<rect x="172" y="140" width="20" height="20" fill="#cfe3f7" stroke="#333333" stroke-width="1.5"/>
+<rect x="152" y="160" width="20" height="20" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<rect x="152" y="180" width="20" height="20" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<rect x="152" y="200" width="20" height="20" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<text x="202.5" y="266" font-size="17" text-anchor="middle" fill="#111111">2+1+1+1</text>
+<text x="202.5" y="288" font-size="15" text-anchor="middle" fill="#444444">最大 2・4 個</text>
+<rect x="287" y="140" width="20" height="20" fill="#cfe3f7" stroke="#333333" stroke-width="1.5"/>
+<rect x="287" y="160" width="20" height="20" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<rect x="287" y="180" width="20" height="20" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<rect x="287" y="200" width="20" height="20" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<rect x="287" y="220" width="20" height="20" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<text x="337.5" y="266" font-size="17" text-anchor="middle" fill="#111111">1+1+1+1+1</text>
+<text x="337.5" y="288" font-size="15" text-anchor="middle" fill="#444444">最大 1・5 個</text>
+<rect x="413" y="140" width="20" height="20" fill="#cfe3f7" stroke="#333333" stroke-width="1.5"/>
+<text x="439" y="156" font-size="15" fill="#111111">＝最大の部分</text>
+<text x="413" y="188" font-size="15" fill="#111111">行の数</text>
+<text x="413" y="208" font-size="15" fill="#111111">＝部分の個数</text>
+<text x="413" y="244" font-size="17" fill="#111111">p(5) = 7</text>
+</svg>

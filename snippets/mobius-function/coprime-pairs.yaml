@@ -1,0 +1,16 @@
+# 入力は n m。1 <= i <= n, 1 <= j <= m の互いに素な順序対の数を出力する
+# main の中で、μ の式・商で束ねた式・総当たり（n × m が 4×10^6 以下のとき）の 3 つが一致すること、
+# k <= 1000 で μ の約数の和が [k = 1] になることを assert で確かめてから出力する
+# 10^6 の値は 2 × (φ(1) + … + φ(10^6)) − 1 = 2 × 303963552392 − 1 とも一致する
+# 「1 1」は (1, 1) の 1 組。「6 6」の 23 と「4 4」の 11 は divisor-inclusion-exclusion のページで手で数えた値と同じ
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "1 1\n", output: "1\n"}
+  - {input: "4 4\n", output: "11\n"}
+  - {input: "6 6\n", output: "23\n"}
+  - {input: "1 5\n", output: "5\n"}
+  - {input: "3 7\n", output: "16\n"}
+  - {input: "2000 2000\n", output: "2433175\n"}
+  - {input: "1000000 1000000\n", output: "607927104783\n"}

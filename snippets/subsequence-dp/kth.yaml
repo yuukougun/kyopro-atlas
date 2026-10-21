@@ -1,0 +1,13 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "a 1\n", output: "a\n"}
+  - {input: "a 2\n", output: "-1\n"}
+  - {input: "aba 1\n", output: "a\n"}
+  - {input: "aba 4\n", output: "aba\n"}
+  - {input: "aba 5\n", output: "b\n"}
+  - {input: "aba 6\n", output: "ba\n"}
+  - {input: "aba 7\n", output: "-1\n"}
+  - {input: "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz 1000000000000000000\n", output: "-1\n"}
+  - {input: "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz 1000000000000000000\n", output: "abcdefghijklmnopqruvxzabcdfilpquwyacdefghknoruvwyz\n"}

@@ -188,7 +188,7 @@ search:
 
 ## 木の重心（tree-centroid） {#tree-centroid}
 
-- id：`tree-centroid`　レベル：黄　段階：stub　type：technique
+- id：`tree-centroid`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-centroid/
 - 別名：重心、centroid、重み付き重心、tree centroid
 - 種類：木
@@ -402,7 +402,7 @@ search:
 
 ## 重心分解（centroid-decomposition） {#centroid-decomposition}
 
-- id：`centroid-decomposition`　レベル：黄　段階：stub　type：technique
+- id：`centroid-decomposition`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/centroid-decomposition/
 - 別名：centroid decomposition、点分治、木の分割統治
 - 種類：木、ダブリング・分割統治

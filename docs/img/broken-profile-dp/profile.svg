@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 370" font-family="sans-serif" font-size="15">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="20" y="26" fill="#222">黄色のマス (2, 3) を処理する直前（灰色は処理済み）</text>
+<text x="20" y="50" fill="#222">赤い折れ線が境界、外側の 6 マスが状態の bit</text>
+<text x="83.0" y="72" text-anchor="middle" fill="#555" font-size="13">列0</text>
+<text x="129.0" y="72" text-anchor="middle" fill="#555" font-size="13">列1</text>
+<text x="175.0" y="72" text-anchor="middle" fill="#555" font-size="13">列2</text>
+<text x="221.0" y="72" text-anchor="middle" fill="#555" font-size="13">列3</text>
+<text x="267.0" y="72" text-anchor="middle" fill="#555" font-size="13">列4</text>
+<text x="313.0" y="72" text-anchor="middle" fill="#555" font-size="13">列5</text>
+<text x="52" y="108.0" text-anchor="end" fill="#555" font-size="13">行0</text>
+<text x="52" y="154.0" text-anchor="end" fill="#555" font-size="13">行1</text>
+<text x="52" y="200.0" text-anchor="end" fill="#555" font-size="13">行2</text>
+<text x="52" y="246.0" text-anchor="end" fill="#555" font-size="13">行3</text>
+<rect x="60" y="80" width="46" height="46" fill="#d9d9d9" stroke="#555" stroke-width="1"/>
+<rect x="106" y="80" width="46" height="46" fill="#d9d9d9" stroke="#555" stroke-width="1"/>
+<rect x="152" y="80" width="46" height="46" fill="#d9d9d9" stroke="#555" stroke-width="1"/>
+<rect x="198" y="80" width="46" height="46" fill="#d9d9d9" stroke="#555" stroke-width="1"/>
+<rect x="244" y="80" width="46" height="46" fill="#d9d9d9" stroke="#555" stroke-width="1"/>
+<rect x="290" y="80" width="46" height="46" fill="#d9d9d9" stroke="#555" stroke-width="1"/>
+<rect x="60" y="126" width="46" height="46" fill="#d9d9d9" stroke="#555" stroke-width="1"/>
+<rect x="106" y="126" width="46" height="46" fill="#d9d9d9" stroke="#555" stroke-width="1"/>
+<rect x="152" y="126" width="46" height="46" fill="#d9d9d9" stroke="#555" stroke-width="1"/>
+<rect x="198" y="126" width="46" height="46" fill="#d9d9d9" stroke="#555" stroke-width="1"/>
+<rect x="244" y="126" width="46" height="46" fill="#d9d9d9" stroke="#555" stroke-width="1"/>
+<rect x="290" y="126" width="46" height="46" fill="#d9d9d9" stroke="#555" stroke-width="1"/>
+<rect x="60" y="172" width="46" height="46" fill="#d9d9d9" stroke="#555" stroke-width="1"/>
+<rect x="106" y="172" width="46" height="46" fill="#d9d9d9" stroke="#555" stroke-width="1"/>
+<rect x="152" y="172" width="46" height="46" fill="#d9d9d9" stroke="#555" stroke-width="1"/>
+<rect x="198" y="172" width="46" height="46" fill="#fff2b3" stroke="#555" stroke-width="1"/>
+<rect x="244" y="172" width="46" height="46" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<rect x="290" y="172" width="46" height="46" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<rect x="60" y="218" width="46" height="46" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<rect x="106" y="218" width="46" height="46" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<rect x="152" y="218" width="46" height="46" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<rect x="198" y="218" width="46" height="46" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<rect x="244" y="218" width="46" height="46" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<rect x="290" y="218" width="46" height="46" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<rect x="64" y="222" width="38" height="38" fill="none" stroke="#1f4e9a" stroke-width="2" stroke-dasharray="5,3"/>
+<text x="83.0" y="247.0" text-anchor="middle" fill="#1f4e9a" font-size="16">b0</text>
+<rect x="110" y="222" width="38" height="38" fill="none" stroke="#1f4e9a" stroke-width="2" stroke-dasharray="5,3"/>
+<text x="129.0" y="247.0" text-anchor="middle" fill="#1f4e9a" font-size="16">b1</text>
+<rect x="156" y="222" width="38" height="38" fill="none" stroke="#1f4e9a" stroke-width="2" stroke-dasharray="5,3"/>
+<text x="175.0" y="247.0" text-anchor="middle" fill="#1f4e9a" font-size="16">b2</text>
+<rect x="202" y="176" width="38" height="38" fill="none" stroke="#1f4e9a" stroke-width="2" stroke-dasharray="5,3"/>
+<text x="221.0" y="201.0" text-anchor="middle" fill="#1f4e9a" font-size="16">b3</text>
+<rect x="248" y="176" width="38" height="38" fill="none" stroke="#1f4e9a" stroke-width="2" stroke-dasharray="5,3"/>
+<text x="267.0" y="201.0" text-anchor="middle" fill="#1f4e9a" font-size="16">b4</text>
+<rect x="294" y="176" width="38" height="38" fill="none" stroke="#1f4e9a" stroke-width="2" stroke-dasharray="5,3"/>
+<text x="313.0" y="201.0" text-anchor="middle" fill="#1f4e9a" font-size="16">b5</text>
+<path d="M60,218 L198,218 L198,172 L336,172" fill="none" stroke="#c0392b" stroke-width="5" stroke-linejoin="round"/>
+<text x="20" y="294" fill="#222">b0〜b2：次の行（行 3）のマス</text>
+<text x="20" y="316" fill="#222">b3〜b5：今の行（行 2）の残りのマス</text>
+<text x="20" y="338" fill="#222">bit が 1 ＝ そのマスは処理済みの側から覆われている</text>
+</svg>

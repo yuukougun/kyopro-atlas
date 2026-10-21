@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 720 296" font-family="sans-serif" font-size="19">
+<rect x="0" y="30" width="720" height="296" fill="#ffffff"/>
+<defs>
+<marker id="ar" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#444"/></marker>
+<marker id="arc" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker>
+</defs>
+<!-- 領域 -->
+<rect x="20" y="48" width="405" height="262" rx="10" fill="#eef3fb" stroke="#1f4e9a" stroke-width="1.5"/>
+<rect x="440" y="48" width="260" height="262" rx="10" fill="#f6f6f6" stroke="#888" stroke-width="1.5"/>
+<text x="34" y="70" fill="#1f4e9a">s 側：a・b を選ぶ</text>
+<text x="454" y="70" fill="#555">t 側：c を選ばない</text>
+<line x1="432" y1="40" x2="432" y2="318" stroke="#c0392b" stroke-width="2" stroke-dasharray="8 6"/>
+<!-- 切れない辺 -->
+<g stroke="#444" stroke-width="2" fill="none">
+<line x1="82" y1="170" x2="200" y2="108" marker-end="url(#ar)"/>
+<line x1="235" y1="122" x2="345" y2="180" marker-end="url(#ar)"/>
+<line x1="522" y1="250" x2="640" y2="188" marker-end="url(#ar)"/>
+</g>
+<!-- 切れる辺 -->
+<g stroke="#c0392b" stroke-width="4" fill="none">
+<line x1="382" y1="196" x2="638" y2="175" marker-end="url(#arc)"/>
+<line x1="378" y1="212" x2="482" y2="252" marker-end="url(#arc)"/>
+</g>
+<!-- 頂点 -->
+<g stroke="#222" stroke-width="2" fill="#ffffff">
+<circle cx="62" cy="180" r="20"/>
+<circle cx="220" cy="100" r="20"/>
+<circle cx="360" cy="195" r="20"/>
+<circle cx="500" cy="262" r="20"/>
+<circle cx="660" cy="175" r="20"/>
+</g>
+<g text-anchor="middle" fill="#222">
+<text x="62" y="186" font-weight="bold">s</text>
+<text x="220" y="106">a</text>
+<text x="360" y="201">b</text>
+<text x="500" y="268">c</text>
+<text x="660" y="181" font-weight="bold">t</text>
+</g>
+<!-- 辺の容量と意味 -->
+<g fill="#222" font-size="17">
+<text x="110" y="196">5：a を選ばないと</text>
+<text x="110" y="214">利得 5 を失う</text>
+<text x="292" y="132">∞：a なら b も</text>
+<text x="470" y="166" fill="#c0392b">3：b を選ぶ費用</text>
+<text x="250" y="262" fill="#c0392b">1：b を選び c を</text>
+<text x="250" y="280" fill="#c0392b">選ばない罰</text>
+<text x="560" y="250">4：c を選ぶ費用</text>
+</g>
+</svg>

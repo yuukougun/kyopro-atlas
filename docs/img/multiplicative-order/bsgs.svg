@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 300" width="560" height="300" font-family="sans-serif">
+<rect width="560" height="300" fill="#ffffff"/>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker></defs>
+<line x1="30" y1="150" x2="530" y2="150" stroke="#333" stroke-width="2"/>
+<line x1="40" y1="140" x2="40" y2="160" stroke="#333" stroke-width="2"/>
+<text x="40" y="184" font-size="20" text-anchor="middle">0</text>
+<path d="M46,134 Q97.5,78 149,134" fill="none" stroke="#c0392b" stroke-width="2.5" marker-end="url(#ar)"/>
+<line x1="155" y1="140" x2="155" y2="160" stroke="#333" stroke-width="2"/>
+<text x="155" y="184" font-size="20" text-anchor="middle">n</text>
+<path d="M161,134 Q212.5,78 264,134" fill="none" stroke="#c0392b" stroke-width="2.5" marker-end="url(#ar)"/>
+<line x1="270" y1="140" x2="270" y2="160" stroke="#333" stroke-width="2"/>
+<text x="270" y="184" font-size="20" text-anchor="middle">2n</text>
+<path d="M276,134 Q327.5,78 379,134" fill="none" stroke="#c0392b" stroke-width="2.5" marker-end="url(#ar)"/>
+<line x1="385" y1="140" x2="385" y2="160" stroke="#333" stroke-width="2"/>
+<text x="385" y="184" font-size="20" text-anchor="middle">3n</text>
+<path d="M391,134 Q442.5,78 494,134" fill="none" stroke="#c0392b" stroke-width="2.5" marker-end="url(#ar)"/>
+<line x1="500" y1="140" x2="500" y2="160" stroke="#333" stroke-width="2"/>
+<text x="512" y="184" font-size="20" text-anchor="end">4n = n²</text>
+<text x="280" y="44" font-size="21" text-anchor="middle" fill="#c0392b">giant step：n ずつ跳ぶ（最大 n 回）</text>
+<rect x="272" y="142" width="111" height="16" fill="#2c6fbb" fill-opacity="0.15" stroke="none"/>
+<line x1="382" y1="206" x2="355" y2="206" stroke="#2c6fbb" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#ar)"/>
+<line x1="350" y1="206" x2="323" y2="206" stroke="#2c6fbb" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#ar)"/>
+<line x1="318" y1="206" x2="291" y2="206" stroke="#2c6fbb" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#ar)"/>
+<line x1="286" y1="206" x2="272" y2="206" stroke="#2c6fbb" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#ar)"/>
+<text x="327" y="238" font-size="20" text-anchor="middle" fill="#2c6fbb">x = 3n − j</text>
+<text x="280" y="280" font-size="21" text-anchor="middle" fill="#2c6fbb">baby step：表の j だけ戻る（0 ≤ j &lt; n）</text>
+</svg>

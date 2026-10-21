@@ -1,0 +1,12 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 本文の図のグラフ（コードが作る木は図と違うが、答えは同じ）
+  - {input: "4 4\n1 2 3\n2 3 5\n3 4 6\n1 3 4\n3\n2 4\n1 4\n1 1\n", output: "1\n0\n0\n"}
+  # 頂点 1 つ・辺なし
+  - {input: "1 0\n1\n1 1\n", output: "0\n"}
+  # 木（閉路なし）：パスの XOR そのもの
+  - {input: "3 2\n1 2 5\n2 3 9\n2\n1 3\n3 1\n", output: "12\n12\n"}
+  # 自己ループと多重辺
+  - {input: "2 3\n1 2 12\n1 2 4\n2 2 7\n1\n1 2\n", output: "3\n"}

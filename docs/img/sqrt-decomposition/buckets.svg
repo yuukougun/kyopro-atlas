@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 250" width="720" height="250" font-family="sans-serif" font-size="14">
+  <rect x="0" y="0" width="720" height="250" fill="#ffffff"/>
+  <defs>
+    <pattern id="hatch" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(45)">
+      <rect width="8" height="8" fill="#fde7d6"/>
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#c2410c" stroke-width="2.5"/>
+    </pattern>
+  </defs>
+
+  <text x="360" y="28" text-anchor="middle" font-size="20" font-weight="bold" fill="#222">区間 [2, 13) に x を加える（N = 16、B = 4）</text>
+
+  <!-- ブロックの名前 -->
+  <g text-anchor="middle" fill="#444" font-size="19">
+    <text x="120" y="60">ブロック 0</text>
+    <text x="280" y="60">ブロック 1</text>
+    <text x="440" y="60">ブロック 2</text>
+    <text x="600" y="60">ブロック 3</text>
+  </g>
+
+  <!-- 添字 -->
+  <g text-anchor="middle" fill="#555" font-size="18">
+    <text x="60" y="84">0</text><text x="100" y="84">1</text><text x="140" y="84">2</text><text x="180" y="84">3</text>
+    <text x="220" y="84">4</text><text x="260" y="84">5</text><text x="300" y="84">6</text><text x="340" y="84">7</text>
+    <text x="380" y="84">8</text><text x="420" y="84">9</text><text x="460" y="84">10</text><text x="500" y="84">11</text>
+    <text x="540" y="84">12</text><text x="580" y="84">13</text><text x="620" y="84">14</text><text x="660" y="84">15</text>
+  </g>
+
+  <!-- 区間の外 -->
+  <g fill="#ffffff" stroke="#888" stroke-width="1">
+    <rect x="40" y="92" width="40" height="40"/>
+    <rect x="80" y="92" width="40" height="40"/>
+    <rect x="560" y="92" width="40" height="40"/>
+    <rect x="600" y="92" width="40" height="40"/>
+    <rect x="640" y="92" width="40" height="40"/>
+  </g>
+  <!-- 端のブロックで区間に入る要素（斜線） -->
+  <g fill="url(#hatch)" stroke="#888" stroke-width="1">
+    <rect x="120" y="92" width="40" height="40"/>
+    <rect x="160" y="92" width="40" height="40"/>
+    <rect x="520" y="92" width="40" height="40"/>
+  </g>
+  <!-- 丸ごと入るブロック（塗り） -->
+  <g fill="#cfe0f3" stroke="#888" stroke-width="1">
+    <rect x="200" y="92" width="40" height="40"/>
+    <rect x="240" y="92" width="40" height="40"/>
+    <rect x="280" y="92" width="40" height="40"/>
+    <rect x="320" y="92" width="40" height="40"/>
+    <rect x="360" y="92" width="40" height="40"/>
+    <rect x="400" y="92" width="40" height="40"/>
+    <rect x="440" y="92" width="40" height="40"/>
+    <rect x="480" y="92" width="40" height="40"/>
+  </g>
+  <!-- ブロックの境目（太線） -->
+  <g stroke="#222" stroke-width="3">
+    <rect x="40" y="92" width="640" height="40" fill="none"/>
+    <line x1="200" y1="88" x2="200" y2="136"/>
+    <line x1="360" y1="88" x2="360" y2="136"/>
+    <line x1="520" y1="88" x2="520" y2="136"/>
+  </g>
+
+  <!-- 区間 [2, 13) の括弧 -->
+  <path d="M120,146 L120,156 L560,156 L560,146" fill="none" stroke="#222" stroke-width="2"/>
+  <text x="340" y="180" text-anchor="middle" fill="#222" font-size="18">l = 2 から r = 13 の手前まで</text>
+
+  <!-- 下の説明 -->
+  <g font-size="18">
+    <rect x="118" y="198" width="84" height="38" fill="none" stroke="#c2410c" stroke-width="2" stroke-dasharray="5,3"/>
+    <text x="160" y="223" text-anchor="middle" fill="#c2410c">要素ごと</text>
+    <rect x="228" y="198" width="104" height="38" fill="none" stroke="#1c64b0" stroke-width="2"/>
+    <text x="280" y="223" text-anchor="middle" fill="#1c64b0">tag[1] += x</text>
+    <rect x="378" y="198" width="104" height="38" fill="none" stroke="#1c64b0" stroke-width="2"/>
+    <text x="430" y="223" text-anchor="middle" fill="#1c64b0">tag[2] += x</text>
+    <rect x="502" y="198" width="80" height="38" fill="none" stroke="#c2410c" stroke-width="2" stroke-dasharray="5,3"/>
+    <text x="540" y="223" text-anchor="middle" fill="#c2410c">要素ごと</text>
+  </g>
+</svg>

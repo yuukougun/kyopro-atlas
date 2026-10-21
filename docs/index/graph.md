@@ -341,7 +341,7 @@ search:
 
 ## 補グラフ上の BFS（complement-graph-bfs） {#complement-graph-bfs}
 
-- id：`complement-graph-bfs`　レベル：黄　段階：stub　type：technique
+- id：`complement-graph-bfs`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/complement-graph-bfs/
 - 別名：補グラフ、未訪問頂点の集合、complement graph
 - 種類：グラフ探索
@@ -568,7 +568,7 @@ search:
 
 ## 橋・関節点・二重連結成分（lowlink） {#lowlink}
 
-- id：`lowlink`　レベル：黄　段階：stub　type：technique
+- id：`lowlink`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/lowlink/
 - 別名：lowlink、橋、関節点、二重辺連結成分、二重頂点連結成分、ブロックカット木、ord と low、bridge、articulation point、biconnected components、block-cut tree
 - 種類：連結性・全域木、グラフ探索
@@ -651,7 +651,7 @@ search:
 
 ## オイラー路（一筆書き）（euler-path） {#euler-path}
 
-- id：`euler-path`　レベル：黄　段階：stub　type：technique
+- id：`euler-path`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/euler-path/
 - 別名：オイラー閉路、一筆書き、Hierholzer、Euler path、Eulerian trail
 - 種類：グラフ探索
@@ -662,6 +662,7 @@ search:
 - 節：
     - `euler-path#conditions` 存在条件（無向・有向）：https://yuukougun.github.io/kyopro-atlas/graph/euler-path/#conditions
     - `euler-path#hierholzer` Hierholzer 法で構成する：https://yuukougun.github.io/kyopro-atlas/graph/euler-path/#hierholzer
+    - `euler-path#applications` 応用の型（縮約・辺を足す・向き付け・文字列を辺にする）：https://yuukougun.github.io/kyopro-atlas/graph/euler-path/#applications
     - `euler-path#vs-hamiltonian` ハミルトン路（頂点をちょうど 1 回、bitDP）との違い：https://yuukougun.github.io/kyopro-atlas/graph/euler-path/#vs-hamiltonian
 
 ## 次数による平方分割（degree-sqrt） {#degree-sqrt}
@@ -683,7 +684,7 @@ search:
 
 ## 最大流（max-flow） {#max-flow}
 
-- id：`max-flow`　レベル：黄　段階：stub　type：technique
+- id：`max-flow`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/max-flow/
 - 別名：最大フロー、Ford-Fulkerson、Dinic、残余グラフ、増加路、maximum flow
 - 種類：フロー・マッチング
@@ -697,13 +698,13 @@ search:
 - 節：
     - `max-flow#residual` 残余グラフと増加路・逆辺が要る理由：https://yuukougun.github.io/kyopro-atlas/graph/max-flow/#residual
     - `max-flow#algorithms` Ford-Fulkerson・Dinic と計算量：https://yuukougun.github.io/kyopro-atlas/graph/max-flow/#algorithms
+    - `max-flow#acl` ACL の mf_graph で書く：https://yuukougun.github.io/kyopro-atlas/graph/max-flow/#acl
     - `max-flow#modeling` モデル化の型（行と列を頂点に・頂点の分割・時間の層）：https://yuukougun.github.io/kyopro-atlas/graph/max-flow/#modeling
     - `max-flow#undirected-vertex-capacity` 無向の辺・頂点の容量の表し方：https://yuukougun.github.io/kyopro-atlas/graph/max-flow/#undirected-vertex-capacity
-    - `max-flow#acl` ACL では（mf_graph の囲み）：https://yuukougun.github.io/kyopro-atlas/graph/max-flow/#acl
 
 ## 最小カット（min-cut） {#min-cut}
 
-- id：`min-cut`　レベル：黄　段階：stub　type：technique
+- id：`min-cut`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/min-cut/
 - 別名：最大流最小カット定理、頂点カット、頂点分割、カットの復元、minimum cut、s-t cut
 - 種類：フロー・マッチング
@@ -720,7 +721,7 @@ search:
 
 ## 燃やす埋める（project-selection） {#project-selection}
 
-- id：`project-selection`　レベル：黄　段階：stub　type：technique
+- id：`project-selection`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/project-selection/
 - 別名：Project Selection、最大重み閉包、劣モジュラ、project selection problem
 - 種類：フロー・マッチング
@@ -733,6 +734,7 @@ search:
     - 制約：要素の数 N が 100〜数百程度で、選び方は 2^N 通りある
     - 式の形：目的関数が、0/1 変数ごとの項と「x_i = 1 かつ x_j = 0 ならコスト c」の項の和で書ける
 - 節：
+    - `project-selection#idea` 0/1 の選択を s 側と t 側に対応させる：https://yuukougun.github.io/kyopro-atlas/graph/project-selection/#idea
     - `project-selection#cheatsheet` 条件から辺への早見表：https://yuukougun.github.io/kyopro-atlas/graph/project-selection/#cheatsheet
     - `project-selection#gains` 利得はコストに読み替えて定数を足す：https://yuukougun.github.io/kyopro-atlas/graph/project-selection/#gains
     - `project-selection#closure` 最大重み閉包（依存関係）：https://yuukougun.github.io/kyopro-atlas/graph/project-selection/#closure
@@ -742,7 +744,7 @@ search:
 
 ## 二部マッチング（bipartite-matching） {#bipartite-matching}
 
-- id：`bipartite-matching`　レベル：黄　段階：stub　type：technique
+- id：`bipartite-matching`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/bipartite-matching/
 - 別名：二部グラフの最大マッチング、Hopcroft-Karp、交互路、完全マッチング、二部グラフの辺彩色、bipartite matching
 - 種類：フロー・マッチング
@@ -761,7 +763,7 @@ search:
 
 ## König の定理（konig-theorem） {#konig-theorem}
 
-- id：`konig-theorem`　レベル：黄　段階：stub　type：technique
+- id：`konig-theorem`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/konig-theorem/
 - 別名：Konig の定理、最小頂点被覆、最大独立集合、最小辺被覆、LP の半整数性、König's theorem
 - 種類：フロー・マッチング
@@ -780,7 +782,7 @@ search:
 
 ## 最小費用流（min-cost-flow） {#min-cost-flow}
 
-- id：`min-cost-flow`　レベル：黄　段階：stub　type：technique
+- id：`min-cost-flow`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/min-cost-flow/
 - 別名：primal-dual、重み付きマッチング、割当問題、ハンガリアン法、slope、minimum cost flow
 - 種類：フロー・マッチング
@@ -796,7 +798,7 @@ search:
     - `min-cost-flow#nonnegative-cost` コストは 0 以上（最大化は「定数 − 利得」に直す）：https://yuukougun.github.io/kyopro-atlas/graph/min-cost-flow/#nonnegative-cost
     - `min-cost-flow#slope` 流量ごとの最小コスト（slope は下に凸）：https://yuukougun.github.io/kyopro-atlas/graph/min-cost-flow/#slope
     - `min-cost-flow#modeling` モデル化の型（重み付き二部マッチング・市松模様・差分列の流れ）：https://yuukougun.github.io/kyopro-atlas/graph/min-cost-flow/#modeling
-    - `min-cost-flow#acl` ACL では（mcf_graph の囲み）：https://yuukougun.github.io/kyopro-atlas/graph/min-cost-flow/#acl
+    - `min-cost-flow#acl` ACL の mcf_graph（flow と slope）：https://yuukougun.github.io/kyopro-atlas/graph/min-cost-flow/#acl
     - `min-cost-flow#hungarian` 割当問題とハンガリアン法（発展）：https://yuukougun.github.io/kyopro-atlas/graph/min-cost-flow/#hungarian
 
 ## 最小パス被覆と Hall の定理（dilworth-path-cover） {#dilworth-path-cover}

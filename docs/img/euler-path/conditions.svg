@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 310" font-family="sans-serif">
+<rect width="520" height="310" fill="#fff"/>
+<line x1="130" y1="40" x2="80" y2="100" stroke="#333" stroke-width="2" />
+<line x1="130" y1="40" x2="180" y2="100" stroke="#333" stroke-width="2" />
+<line x1="80" y1="100" x2="180" y2="100" stroke="#333" stroke-width="2" />
+<line x1="80" y1="100" x2="80" y2="200" stroke="#333" stroke-width="2" />
+<line x1="180" y1="100" x2="180" y2="200" stroke="#333" stroke-width="2" />
+<line x1="80" y1="200" x2="180" y2="200" stroke="#333" stroke-width="2" />
+<line x1="80" y1="100" x2="180" y2="200" stroke="#333" stroke-width="2" />
+<line x1="180" y1="100" x2="80" y2="200" stroke="#333" stroke-width="2" />
+<line x1="350" y1="80" x2="470" y2="80" stroke="#333" stroke-width="2" />
+<line x1="350" y1="80" x2="350" y2="200" stroke="#333" stroke-width="2" />
+<line x1="350" y1="80" x2="470" y2="200" stroke="#333" stroke-width="2" />
+<line x1="470" y1="80" x2="350" y2="200" stroke="#333" stroke-width="2" />
+<line x1="470" y1="80" x2="470" y2="200" stroke="#333" stroke-width="2" />
+<line x1="350" y1="200" x2="470" y2="200" stroke="#333" stroke-width="2" />
+<circle cx="130" cy="40" r="15" fill="#fff" stroke="#333" stroke-width="2"/><text x="130" y="45" text-anchor="middle" font-size="15">A</text>
+<circle cx="80" cy="100" r="15" fill="#fff" stroke="#333" stroke-width="2"/><text x="80" y="105" text-anchor="middle" font-size="15">B</text>
+<circle cx="180" cy="100" r="15" fill="#fff" stroke="#333" stroke-width="2"/><text x="180" y="105" text-anchor="middle" font-size="15">C</text>
+<circle cx="80" cy="200" r="21" fill="#fde2c8" stroke="#c0560a" stroke-width="2"/><circle cx="80" cy="200" r="15" fill="#fff" stroke="#333" stroke-width="2"/><text x="80" y="205" text-anchor="middle" font-size="15">D</text>
+<circle cx="180" cy="200" r="21" fill="#fde2c8" stroke="#c0560a" stroke-width="2"/><circle cx="180" cy="200" r="15" fill="#fff" stroke="#333" stroke-width="2"/><text x="180" y="205" text-anchor="middle" font-size="15">E</text>
+<circle cx="350" cy="80" r="21" fill="#fde2c8" stroke="#c0560a" stroke-width="2"/><circle cx="350" cy="80" r="15" fill="#fff" stroke="#333" stroke-width="2"/><text x="350" y="85" text-anchor="middle" font-size="15">P</text>
+<circle cx="470" cy="80" r="21" fill="#fde2c8" stroke="#c0560a" stroke-width="2"/><circle cx="470" cy="80" r="15" fill="#fff" stroke="#333" stroke-width="2"/><text x="470" y="85" text-anchor="middle" font-size="15">Q</text>
+<circle cx="350" cy="200" r="21" fill="#fde2c8" stroke="#c0560a" stroke-width="2"/><circle cx="350" cy="200" r="15" fill="#fff" stroke="#333" stroke-width="2"/><text x="350" y="205" text-anchor="middle" font-size="15">R</text>
+<circle cx="470" cy="200" r="21" fill="#fde2c8" stroke="#c0560a" stroke-width="2"/><circle cx="470" cy="200" r="15" fill="#fff" stroke="#333" stroke-width="2"/><text x="470" y="205" text-anchor="middle" font-size="15">S</text>
+<text x="160" y="45" text-anchor="middle" font-size="13" fill="#555">2</text>
+<text x="46" y="105" text-anchor="middle" font-size="13" fill="#555">4</text>
+<text x="214" y="105" text-anchor="middle" font-size="13" fill="#555">4</text>
+<text x="46" y="205" text-anchor="middle" font-size="13" fill="#555">3</text>
+<text x="214" y="205" text-anchor="middle" font-size="13" fill="#555">3</text>
+<text x="316" y="85" text-anchor="middle" font-size="13" fill="#555">3</text>
+<text x="504" y="85" text-anchor="middle" font-size="13" fill="#555">3</text>
+<text x="316" y="205" text-anchor="middle" font-size="13" fill="#555">3</text>
+<text x="504" y="205" text-anchor="middle" font-size="13" fill="#555">3</text>
+<text x="130" y="245" text-anchor="middle" font-size="14">(a) 奇数次数の頂点は D・E の 2 個</text>
+<text x="130" y="267" text-anchor="middle" font-size="14">→ D から E へ一筆書きできる</text>
+<text x="410" y="245" text-anchor="middle" font-size="14">(b) 4 頂点すべてが奇数次数</text>
+<text x="410" y="267" text-anchor="middle" font-size="14">→ 一筆書きできない</text>
+<circle cx="150" cy="292" r="8" fill="#fde2c8" stroke="#c0560a" stroke-width="2"/><text x="164" y="297" font-size="13">＝奇数次数の頂点（数字は次数）</text>
+</svg>

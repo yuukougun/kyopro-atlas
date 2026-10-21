@@ -150,7 +150,7 @@ search:
 
 ## 凸包と凸多角形（convex-hull） {#convex-hull}
 
-- id：`convex-hull`　レベル：黄　段階：stub　type：technique
+- id：`convex-hull`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/geometry/convex-hull/
 - 別名：凸包、convex hull、Andrew のアルゴリズム、monotone chain、Graham scan、上側凸包、下側凸包、点の内外判定、凸多角形の内外判定、交差数判定、Pick の定理、多角形の格子点、線分上の格子点
 - 種類：幾何
@@ -169,7 +169,7 @@ search:
     - `convex-hull#cht-duality` 凸包と CHT の双対（点 (a, b) と直線 y = ax+b）：https://yuukougun.github.io/kyopro-atlas/geometry/convex-hull/#cht-duality
     - `convex-hull#point-in-convex-polygon` 凸多角形の内外判定：扇形に分けて二分探索（O(log N)）：https://yuukougun.github.io/kyopro-atlas/geometry/convex-hull/#point-in-convex-polygon
     - `convex-hull#point-in-polygon` 一般の多角形の内外判定（交差数の偶奇）：https://yuukougun.github.io/kyopro-atlas/geometry/convex-hull/#point-in-polygon
-    - `convex-hull#lattice-points` 格子点：線分上は gcd(|dx|, |dy|)+1、Pick の定理 S = i + b/2 − 1（面積の 2 倍で整数のまま）：https://yuukougun.github.io/kyopro-atlas/geometry/convex-hull/#lattice-points
+    - `convex-hull#lattice-points` 格子点：線分上は gcd(|dx|, |dy|)+1、多角形は Pick の定理：https://yuukougun.github.io/kyopro-atlas/geometry/convex-hull/#lattice-points
 
 ## 発展の幾何（advanced-geometry） {#advanced-geometry}
 

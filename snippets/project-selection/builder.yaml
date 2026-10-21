@@ -1,0 +1,7 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 乱数の種と回数。変数 1〜7 個・項 0〜8 個の入力を作り、2^n 通りの全探索と比べる
+  - {input: "1 3000\n", output: "ok\n"}
+  - {input: "20261021 3000\n", output: "ok\n"}

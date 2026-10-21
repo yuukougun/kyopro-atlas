@@ -306,7 +306,7 @@ search:
 
 ## 差分列への言い換え（difference-sequence） {#difference-sequence}
 
-- id：`difference-sequence`　レベル：黄　段階：stub　type：technique
+- id：`difference-sequence`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/difference-sequence/
 - 別名：差分列、差分で言い換える、区間 ±1 の最小回数、区間操作を 2 点の操作に、difference sequence
 - 種類：累積和・差分、考察
@@ -610,7 +610,7 @@ search:
 
 ## 分割統治（divide-and-conquer） {#divide-and-conquer}
 
-- id：`divide-and-conquer`　レベル：黄　段階：stub　type：technique
+- id：`divide-and-conquer`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/divide-and-conquer/
 - 別名：divide and conquer、分割統治法、マージソート、中央をまたぐ区間、区間ナップサック
 - 種類：ダブリング・分割統治

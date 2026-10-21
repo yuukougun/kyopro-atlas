@@ -1,0 +1,12 @@
+# 入力は n と列 a。i < j についての lcm(a_i, a_j) の総和を mod 998244353 で出力する
+# n <= 2000 なら main の中で O(n^2) の総当たりと一致することを assert で確かめてから出力する
+# 期待値は Python の math.lcm による総当たりで求めた（「1 2 3 4 5 6」の 141 など）
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "1\n5\n", output: "0\n"}
+  - {input: "2\n2 3\n", output: "6\n"}
+  - {input: "2\n4 6\n", output: "12\n"}
+  - {input: "6\n1 2 3 4 5 6\n", output: "141\n"}
+  - {input: "3\n1000000 1000000 999999\n", output: "515560941\n"}

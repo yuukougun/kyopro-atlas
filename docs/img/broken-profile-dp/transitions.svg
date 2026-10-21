@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 465 275" font-family="sans-serif" font-size="15">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="15" y="26" fill="#222">黄色のマス（列 j = 1）での 3 通りの遷移</text>
+<text x="15" y="70" fill="#222" font-size="15">(a) 覆われている</text>
+<text x="15" y="90" fill="#555" font-size="13">bit j が 1</text>
+<rect x="15" y="100" width="46" height="46" fill="#d9d9d9" stroke="#555" stroke-width="1"/>
+<rect x="61" y="100" width="46" height="46" fill="#fff2b3" stroke="#555" stroke-width="1"/>
+<rect x="107" y="100" width="46" height="46" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<rect x="15" y="146" width="46" height="46" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<rect x="61" y="146" width="46" height="46" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<rect x="107" y="146" width="46" height="46" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<rect x="21" y="106" width="80" height="34" rx="6" fill="#8fb4e3" stroke="#1f4e9a" stroke-width="2"/>
+<text x="15" y="216" fill="#222" font-size="14">置かずに進む</text>
+<text x="15" y="238" fill="#222" font-size="14">bit j を 0 に</text>
+<text x="165" y="70" fill="#222" font-size="15">(b) 縦に置く</text>
+<text x="165" y="90" fill="#555" font-size="13">下のマスへ</text>
+<rect x="165" y="100" width="46" height="46" fill="#d9d9d9" stroke="#555" stroke-width="1"/>
+<rect x="211" y="100" width="46" height="46" fill="#fff2b3" stroke="#555" stroke-width="1"/>
+<rect x="257" y="100" width="46" height="46" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<rect x="165" y="146" width="46" height="46" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<rect x="211" y="146" width="46" height="46" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<rect x="257" y="146" width="46" height="46" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<rect x="217" y="106" width="34" height="80" rx="6" fill="#8fb4e3" stroke="#1f4e9a" stroke-width="2"/>
+<text x="165" y="216" fill="#222" font-size="14">bit j を 1 に</text>
+<text x="165" y="238" fill="#222" font-size="14">下が盤の外か</text>
+<text x="165" y="260" fill="#222" font-size="14"># なら不可</text>
+<text x="315" y="70" fill="#222" font-size="15">(c) 横に置く</text>
+<text x="315" y="90" fill="#555" font-size="13">右のマスへ</text>
+<rect x="315" y="100" width="46" height="46" fill="#d9d9d9" stroke="#555" stroke-width="1"/>
+<rect x="361" y="100" width="46" height="46" fill="#fff2b3" stroke="#555" stroke-width="1"/>
+<rect x="407" y="100" width="46" height="46" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<rect x="315" y="146" width="46" height="46" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<rect x="361" y="146" width="46" height="46" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<rect x="407" y="146" width="46" height="46" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<rect x="367" y="106" width="80" height="34" rx="6" fill="#8fb4e3" stroke="#1f4e9a" stroke-width="2"/>
+<text x="315" y="216" fill="#222" font-size="14">bit j を 0、</text>
+<text x="315" y="238" fill="#222" font-size="14">bit j+1 を 1 に</text>
+<text x="315" y="260" fill="#222" font-size="14">右が空いていれば</text>
+</svg>

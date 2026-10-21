@@ -1,0 +1,17 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 1 マスだけ：覆えない
+  - {input: "1 1\n.\n", output: "0\n"}
+  # 空きマスがない：何も置かない 1 通り
+  - {input: "1 1\n#\n", output: "1\n"}
+  - {input: "2 2\n..\n..\n", output: "2\n"}
+  - {input: "2 3\n...\n...\n", output: "3\n"}
+  - {input: "3 4\n....\n....\n....\n", output: "11\n"}
+  # 中央が置けない 3×3：周りの 8 マスの輪を覆う 2 通り
+  - {input: "3 3\n...\n.#.\n...\n", output: "2\n"}
+  # 置けないマスで 1 マスが孤立する
+  - {input: "2 2\n.#\n..\n", output: "0\n"}
+  - {input: "5 6\n......\n......\n......\n......\n......\n", output: "1183\n"}
+  - {input: "8 8\n........\n........\n........\n........\n........\n........\n........\n........\n", output: "12988816\n"}

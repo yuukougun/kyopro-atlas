@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 448" width="500" height="448" font-family="sans-serif" font-size="14">
+<rect x="0" y="0" width="500" height="448" fill="#ffffff"/>
+<text x="250" y="22" text-anchor="middle" font-size="15" fill="#222">サイコロ 2 個の目の大きい方 X（確率は 36 分の何か）</text>
+<text x="250" y="44" text-anchor="middle" fill="#222">横の帯（行）で読むと Σ v·P(X = v)</text>
+<text x="250" y="63" text-anchor="middle" fill="#222">縦の棒（列）で読むと Σ P(X ≥ k)</text>
+<rect x="100" y="80" width="56" height="8" fill="#dbe8f5" stroke="#335" stroke-width="1"/>
+<text x="92" y="83" text-anchor="end" fill="#222" font-size="13">X = 1：1/36</text>
+<text x="164" y="83" fill="#555" font-size="13">幅 1</text>
+<rect x="100" y="88" width="112" height="24" fill="#b9d3ec" stroke="#335" stroke-width="1"/>
+<text x="92" y="105.0" text-anchor="end" fill="#222">X = 2：3/36</text>
+<text x="220" y="105.0" fill="#555" font-size="13">幅 2</text>
+<rect x="100" y="112" width="168" height="40" fill="#dbe8f5" stroke="#335" stroke-width="1"/>
+<text x="92" y="137.0" text-anchor="end" fill="#222">X = 3：5/36</text>
+<text x="276" y="137.0" fill="#555" font-size="13">幅 3</text>
+<rect x="100" y="152" width="224" height="56" fill="#b9d3ec" stroke="#335" stroke-width="1"/>
+<text x="92" y="185.0" text-anchor="end" fill="#222">X = 4：7/36</text>
+<text x="332" y="185.0" fill="#555" font-size="13">幅 4</text>
+<rect x="100" y="208" width="280" height="72" fill="#dbe8f5" stroke="#335" stroke-width="1"/>
+<text x="92" y="249.0" text-anchor="end" fill="#222">X = 5：9/36</text>
+<text x="388" y="249.0" fill="#555" font-size="13">幅 5</text>
+<rect x="100" y="280" width="336" height="88" fill="#b9d3ec" stroke="#335" stroke-width="1"/>
+<text x="92" y="329.0" text-anchor="end" fill="#222">X = 6：11/36</text>
+<text x="444" y="329.0" fill="#555" font-size="13">幅 6</text>
+<line x1="156" y1="80" x2="156" y2="368" stroke="#335" stroke-width="1.5" stroke-dasharray="4 3"/>
+<line x1="212" y1="88" x2="212" y2="368" stroke="#335" stroke-width="1.5" stroke-dasharray="4 3"/>
+<line x1="268" y1="112" x2="268" y2="368" stroke="#335" stroke-width="1.5" stroke-dasharray="4 3"/>
+<line x1="324" y1="152" x2="324" y2="368" stroke="#335" stroke-width="1.5" stroke-dasharray="4 3"/>
+<line x1="380" y1="208" x2="380" y2="368" stroke="#335" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="128.0" y="387" text-anchor="middle" fill="#222">k = 1</text>
+<text x="128.0" y="406" text-anchor="middle" fill="#222">36/36</text>
+<text x="184.0" y="387" text-anchor="middle" fill="#222">k = 2</text>
+<text x="184.0" y="406" text-anchor="middle" fill="#222">35/36</text>
+<text x="240.0" y="387" text-anchor="middle" fill="#222">k = 3</text>
+<text x="240.0" y="406" text-anchor="middle" fill="#222">32/36</text>
+<text x="296.0" y="387" text-anchor="middle" fill="#222">k = 4</text>
+<text x="296.0" y="406" text-anchor="middle" fill="#222">27/36</text>
+<text x="352.0" y="387" text-anchor="middle" fill="#222">k = 5</text>
+<text x="352.0" y="406" text-anchor="middle" fill="#222">20/36</text>
+<text x="408.0" y="387" text-anchor="middle" fill="#222">k = 6</text>
+<text x="408.0" y="406" text-anchor="middle" fill="#222">11/36</text>
+<text x="92" y="406" text-anchor="end" fill="#222">P(X ≥ k)</text>
+<text x="250" y="434" text-anchor="middle" fill="#222" font-size="15">面積 ＝ (36 + 35 + 32 + 27 + 20 + 11)/36 ＝ 161/36 ＝ E[X]</text>
+</svg>

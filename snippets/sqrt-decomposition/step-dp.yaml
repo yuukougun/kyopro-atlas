@@ -1,0 +1,10 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 1 マス：どこへも配れない
+  - {input: "1\n5\n", output: "1\n"}
+  # 歩幅がすべて 1（B = 2 なので予約の表を使う）：dp は 2 のべき
+  - {input: "4\n1 1 1 1\n", output: "1 1 2 4\n"}
+  # 歩幅が大きい位置（愚直に配る）と小さい位置が混ざる
+  - {input: "6\n2 3 1 5 1 1\n", output: "1 0 1 1 2 3\n"}

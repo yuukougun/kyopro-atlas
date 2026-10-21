@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 292" width="420" height="292" font-family="sans-serif">
+<rect x="0" y="0" width="420" height="292" fill="#ffffff"/>
+<text x="210.0" y="28" font-size="17" text-anchor="middle" fill="#222">1〜12 のうち 12 と互いに素な数（太枠）は 4 個</text>
+<rect x="34" y="50" width="52" height="44" rx="5" fill="#cfe3ff" stroke="#1f5fbf" stroke-width="3"/>
+<text x="60.0" y="79" font-size="20" font-weight="bold" text-anchor="middle" fill="#123c7a">1</text>
+<rect x="94" y="50" width="52" height="44" rx="5" fill="#f2f2f2" stroke="#999999" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="120.0" y="79" font-size="20" text-anchor="middle" fill="#777">2</text>
+<circle cx="109.0" cy="112" r="8" fill="#b85c00"/>
+<rect x="154" y="50" width="52" height="44" rx="5" fill="#f2f2f2" stroke="#999999" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="180.0" y="79" font-size="20" text-anchor="middle" fill="#777">3</text>
+<polygon points="191.0,103 182.0,119 200.0,119" fill="#5a8a00"/>
+<rect x="214" y="50" width="52" height="44" rx="5" fill="#f2f2f2" stroke="#999999" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="240.0" y="79" font-size="20" text-anchor="middle" fill="#777">4</text>
+<circle cx="229.0" cy="112" r="8" fill="#b85c00"/>
+<rect x="274" y="50" width="52" height="44" rx="5" fill="#cfe3ff" stroke="#1f5fbf" stroke-width="3"/>
+<text x="300.0" y="79" font-size="20" font-weight="bold" text-anchor="middle" fill="#123c7a">5</text>
+<rect x="334" y="50" width="52" height="44" rx="5" fill="#f2f2f2" stroke="#999999" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="360.0" y="79" font-size="20" text-anchor="middle" fill="#777">6</text>
+<circle cx="349.0" cy="112" r="8" fill="#b85c00"/>
+<polygon points="371.0,103 362.0,119 380.0,119" fill="#5a8a00"/>
+<rect x="34" y="140" width="52" height="44" rx="5" fill="#cfe3ff" stroke="#1f5fbf" stroke-width="3"/>
+<text x="60.0" y="169" font-size="20" font-weight="bold" text-anchor="middle" fill="#123c7a">7</text>
+<rect x="94" y="140" width="52" height="44" rx="5" fill="#f2f2f2" stroke="#999999" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="120.0" y="169" font-size="20" text-anchor="middle" fill="#777">8</text>
+<circle cx="109.0" cy="202" r="8" fill="#b85c00"/>
+<rect x="154" y="140" width="52" height="44" rx="5" fill="#f2f2f2" stroke="#999999" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="180.0" y="169" font-size="20" text-anchor="middle" fill="#777">9</text>
+<polygon points="191.0,193 182.0,209 200.0,209" fill="#5a8a00"/>
+<rect x="214" y="140" width="52" height="44" rx="5" fill="#f2f2f2" stroke="#999999" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="240.0" y="169" font-size="20" text-anchor="middle" fill="#777">10</text>
+<circle cx="229.0" cy="202" r="8" fill="#b85c00"/>
+<rect x="274" y="140" width="52" height="44" rx="5" fill="#cfe3ff" stroke="#1f5fbf" stroke-width="3"/>
+<text x="300.0" y="169" font-size="20" font-weight="bold" text-anchor="middle" fill="#123c7a">11</text>
+<rect x="334" y="140" width="52" height="44" rx="5" fill="#f2f2f2" stroke="#999999" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="360.0" y="169" font-size="20" text-anchor="middle" fill="#777">12</text>
+<circle cx="349.0" cy="202" r="8" fill="#b85c00"/>
+<polygon points="371.0,193 362.0,209 380.0,209" fill="#5a8a00"/>
+<text x="34" y="244" font-size="17" fill="#7a3d00">● 2 の倍数 6 個</text>
+<text x="214" y="244" font-size="17" fill="#3d5e00">▲ 3 の倍数 4 個</text>
+<text x="34" y="276" font-size="17" fill="#444">●▲ 両方（6 の倍数）は 6・12 の 2 個</text>
+</svg>

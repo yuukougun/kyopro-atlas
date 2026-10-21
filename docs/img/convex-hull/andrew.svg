@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 600" width="380" height="600" font-family="sans-serif" font-size="14">
+<defs>
+<marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b03a2e"/></marker>
+<marker id="arb" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1f4e9a"/></marker>
+</defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+
+<line x1="40" y1="230" x2="40" y2="70" stroke="#eeeeee"/>
+<line x1="80" y1="230" x2="80" y2="70" stroke="#eeeeee"/>
+<line x1="120" y1="230" x2="120" y2="70" stroke="#eeeeee"/>
+<line x1="160" y1="230" x2="160" y2="70" stroke="#eeeeee"/>
+<line x1="200" y1="230" x2="200" y2="70" stroke="#eeeeee"/>
+<line x1="240" y1="230" x2="240" y2="70" stroke="#eeeeee"/>
+<line x1="280" y1="230" x2="280" y2="70" stroke="#eeeeee"/>
+<line x1="320" y1="230" x2="320" y2="70" stroke="#eeeeee"/>
+<line x1="40" y1="230" x2="320" y2="230" stroke="#eeeeee"/>
+<line x1="40" y1="190" x2="320" y2="190" stroke="#eeeeee"/>
+<line x1="40" y1="150" x2="320" y2="150" stroke="#eeeeee"/>
+<line x1="40" y1="110" x2="320" y2="110" stroke="#eeeeee"/>
+<line x1="40" y1="70" x2="320" y2="70" stroke="#eeeeee"/>
+<text x="20" y="24" fill="#222">(a) 下側を作る途中：(5, 0) を加える</text>
+<line x1="40" y1="530" x2="40" y2="370" stroke="#eeeeee"/>
+<line x1="80" y1="530" x2="80" y2="370" stroke="#eeeeee"/>
+<line x1="120" y1="530" x2="120" y2="370" stroke="#eeeeee"/>
+<line x1="160" y1="530" x2="160" y2="370" stroke="#eeeeee"/>
+<line x1="200" y1="530" x2="200" y2="370" stroke="#eeeeee"/>
+<line x1="240" y1="530" x2="240" y2="370" stroke="#eeeeee"/>
+<line x1="280" y1="530" x2="280" y2="370" stroke="#eeeeee"/>
+<line x1="320" y1="530" x2="320" y2="370" stroke="#eeeeee"/>
+<line x1="40" y1="530" x2="320" y2="530" stroke="#eeeeee"/>
+<line x1="40" y1="490" x2="320" y2="490" stroke="#eeeeee"/>
+<line x1="40" y1="450" x2="320" y2="450" stroke="#eeeeee"/>
+<line x1="40" y1="410" x2="320" y2="410" stroke="#eeeeee"/>
+<line x1="40" y1="370" x2="320" y2="370" stroke="#eeeeee"/>
+<text x="20" y="324" fill="#222">(b) できあがった凸包</text>
+<line x1="40" y1="150" x2="80" y2="230" stroke="#1f4e9a" stroke-width="3"/>
+<line x1="80" y1="230" x2="160" y2="190" stroke="#888888" stroke-width="2.5" stroke-dasharray="3 4"/>
+<line x1="160" y1="190" x2="200" y2="70" stroke="#888888" stroke-width="2.5" stroke-dasharray="3 4"/>
+<line x1="80" y1="230" x2="240" y2="230" stroke="#1f4e9a" stroke-width="3"/>
+<circle cx="40" cy="150" r="6" fill="#1f4e9a"/>
+<circle cx="80" cy="230" r="6" fill="#1f4e9a"/>
+<circle cx="120" cy="150" r="5" fill="#999999"/>
+<circle cx="160" cy="190" r="6" fill="#ffffff" stroke="#b03a2e" stroke-width="2.5"/>
+<text x="169" y="182" fill="#b03a2e" font-size="13">除く</text>
+<circle cx="200" cy="70" r="6" fill="#ffffff" stroke="#b03a2e" stroke-width="2.5"/>
+<text x="209" y="62" fill="#b03a2e" font-size="13">除く</text>
+<circle cx="240" cy="230" r="7" fill="#1f4e9a"/>
+<text x="226" y="252" fill="#1f4e9a" font-size="13">新しい点</text>
+<circle cx="280" cy="150" r="5" fill="#999999"/>
+<circle cx="320" cy="110" r="5" fill="#999999"/>
+<text x="20" y="280" fill="#222" font-size="13">(3,1)→(4,4)→(5,0) も (1,0)→(3,1)→(5,0) も右に曲がる。</text>
+<text x="20" y="300" fill="#222" font-size="13">灰色の点線の辺を末尾から除き、(1, 0)→(5, 0) をつなぐ。</text>
+<polygon points="40,450 80,530 240,530 320,410 200,370 40,450" fill="#e8f0fb" stroke="none"/>
+<line x1="40" y1="450" x2="80" y2="530" stroke="#1f4e9a" stroke-width="3"/>
+<line x1="80" y1="530" x2="240" y2="530" stroke="#1f4e9a" stroke-width="3"/>
+<line x1="240" y1="530" x2="320" y2="410" stroke="#1f4e9a" stroke-width="3"/>
+<line x1="320" y1="410" x2="200" y2="370" stroke="#b03a2e" stroke-width="3" stroke-dasharray="8 4"/>
+<line x1="200" y1="370" x2="40" y2="450" stroke="#b03a2e" stroke-width="3" stroke-dasharray="8 4"/>
+<circle cx="40" cy="450" r="6" fill="#222"/>
+<circle cx="80" cy="530" r="6" fill="#222"/>
+<circle cx="120" cy="450" r="5" fill="#999999"/>
+<circle cx="160" cy="490" r="5" fill="#999999"/>
+<circle cx="200" cy="370" r="6" fill="#222"/>
+<circle cx="240" cy="530" r="6" fill="#222"/>
+<circle cx="280" cy="450" r="5" fill="#999999"/>
+<circle cx="320" cy="410" r="6" fill="#222"/>
+<line x1="20" y1="568" x2="50" y2="568" stroke="#1f4e9a" stroke-width="3"/><text x="56" y="573" fill="#222" font-size="13">(b) 下側（左→右）</text>
+<line x1="170" y1="568" x2="200" y2="568" stroke="#b03a2e" stroke-width="3" stroke-dasharray="8 4"/><text x="206" y="573" fill="#222" font-size="13">(b) 上側（右→左）</text>
+</svg>

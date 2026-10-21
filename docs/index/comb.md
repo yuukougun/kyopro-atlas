@@ -276,7 +276,7 @@ search:
 
 ## 鏡像法とカタラン数（reflection-principle） {#reflection-principle}
 
-- id：`reflection-principle`　レベル：黄　段階：stub　type：technique
+- id：`reflection-principle`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/reflection-principle/
 - 別名：鏡像法、反射原理、カタラン数、ballot 数、Dyck path、正しい括弧列の個数、reflection principle、Catalan number
 - 種類：数え上げ
@@ -352,7 +352,7 @@ search:
 
 ## 包除 DP（inclusion-exclusion-dp） {#inclusion-exclusion-dp}
 
-- id：`inclusion-exclusion-dp`　レベル：黄　段階：stub　type：technique
+- id：`inclusion-exclusion-dp`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/inclusion-exclusion-dp/
 - 別名：符号付き DP、最初に踏む障害物で分類、障害物 DP、包除原理を DP に載せる
 - 種類：数え上げ、DP
@@ -408,7 +408,7 @@ search:
 
 ## メビウス関数とメビウス反転（mobius-function） {#mobius-function}
 
-- id：`mobius-function`　レベル：黄　段階：stub　type：technique
+- id：`mobius-function`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/mobius-function/
 - 別名：メビウス関数、μ、メビウス反転、Möbius function、Mobius inversion
 - 種類：数え上げ、整数論
@@ -427,7 +427,7 @@ search:
 
 ## 部分集合の高速ゼータ変換とメビウス変換（zeta-mobius-subset） {#zeta-mobius-subset}
 
-- id：`zeta-mobius-subset`　レベル：黄　段階：stub　type：technique
+- id：`zeta-mobius-subset`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/zeta-mobius-subset/
 - 別名：高速ゼータ変換、高速メビウス変換、SOS DP、部分集合にわたる和、上位集合の和、OR 畳み込み、AND 畳み込み、zeta transform
 - 種類：数え上げ、ビット演算、畳み込み・多項式
@@ -518,7 +518,7 @@ search:
 
 ## 整数の分割と分割数（partition-number） {#partition-number}
 
-- id：`partition-number`　レベル：黄　段階：stub　type：technique
+- id：`partition-number`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/partition-number/
 - 別名：分割数、p(n,k)、分割の全列挙、巡回型、partition number、integer partition
 - 種類：数え上げ、DP
@@ -552,7 +552,7 @@ search:
 
 ## ラベル付き木の数え上げ（cayley-pruefer） {#cayley-pruefer}
 
-- id：`cayley-pruefer`　レベル：黄　段階：stub　type：technique
+- id：`cayley-pruefer`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/cayley-pruefer/
 - 別名：Cayley の公式、n^(n−2)、次数を指定した木の数、頂点にラベルのある木の個数、Cayley's formula
 - 種類：数え上げ、木
@@ -569,7 +569,7 @@ search:
 
 ## 連結なグラフの数え上げ（counting-labeled-graphs） {#counting-labeled-graphs}
 
-- id：`counting-labeled-graphs`　レベル：黄　段階：stub　type：technique
+- id：`counting-labeled-graphs`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/counting-labeled-graphs/
 - 別名：連結グラフの数え上げ、全体から非連結を引く、頂点 1 を含む成分で分類、条件を満たすグラフの個数
 - 種類：数え上げ、DP
@@ -582,8 +582,8 @@ search:
 - 節：
     - `counting-labeled-graphs#complement` 連結 = 全体 − 非連結：https://yuukougun.github.io/kyopro-atlas/comb/counting-labeled-graphs/#complement
     - `counting-labeled-graphs#component-of-1` 頂点 1 を含む成分で分類する（重複を防ぐ代表）：https://yuukougun.github.io/kyopro-atlas/comb/counting-labeled-graphs/#component-of-1
-    - `counting-labeled-graphs#subset-dp` 頂点集合ごとの DP（3^N）：https://yuukougun.github.io/kyopro-atlas/comb/counting-labeled-graphs/#subset-dp
     - `counting-labeled-graphs#by-size` 大きさだけで決まるときは二項係数で頂点を選ぶ：https://yuukougun.github.io/kyopro-atlas/comb/counting-labeled-graphs/#by-size
+    - `counting-labeled-graphs#subset-dp` 頂点集合ごとの DP（3^N）：https://yuukougun.github.io/kyopro-atlas/comb/counting-labeled-graphs/#subset-dp
     - `counting-labeled-graphs#bfs-layers` 距離の層ごとに頂点を配る：https://yuukougun.github.io/kyopro-atlas/comb/counting-labeled-graphs/#bfs-layers
     - `counting-labeled-graphs#exactly-l` 「ちょうど L」を「L 以下」の差で数える：https://yuukougun.github.io/kyopro-atlas/comb/counting-labeled-graphs/#exactly-l
 
@@ -728,7 +728,7 @@ search:
 
 ## 最適戦略の期待値（optimal-strategy-expectation） {#optimal-strategy-expectation}
 
-- id：`optimal-strategy-expectation`　レベル：黄　段階：stub　type：technique
+- id：`optimal-strategy-expectation`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/optimal-strategy-expectation/
 - 別名：最適停止、expectimax、期待値の最大化、optimal stopping
 - 種類：確率・期待値、DP
@@ -767,7 +767,7 @@ search:
 
 ## 期待値と確率の変換（expectation-tail-sum） {#expectation-tail-sum}
 
-- id：`expectation-tail-sum`　レベル：黄　段階：stub　type：technique
+- id：`expectation-tail-sum`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/expectation-tail-sum/
 - 別名：E[X] = Σ P(X ≥ k)、tail sum、期待値と確率の行き来、最大値の期待値、K 番目の値の期待値
 - 種類：確率・期待値
@@ -785,7 +785,7 @@ search:
 
 ## 二乗の期待値・分散（expectation-of-square） {#expectation-of-square}
 
-- id：`expectation-of-square`　レベル：黄　段階：stub　type：technique
+- id：`expectation-of-square`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/expectation-of-square/
 - 別名：二乗の期待値、分散、E[X^2]、確率・期待値・二乗を同時に運ぶ、variance
 - 種類：確率・期待値
@@ -795,7 +795,7 @@ search:
     - 言い回し：分散を求める（最小化する）
     - 言い回し：スコアの二乗の期待値
 - 節：
-    - `expectation-of-square#difference` 2 乗の期待値と期待値の 2 乗の違い：https://yuukougun.github.io/kyopro-atlas/comb/expectation-of-square/#difference
+    - `expectation-of-square#difference` 二乗の期待値と期待値の二乗の違い：https://yuukougun.github.io/kyopro-atlas/comb/expectation-of-square/#difference
     - `expectation-of-square#pairs` ペアに分ける（i = j の項を忘れない）：https://yuukougun.github.io/kyopro-atlas/comb/expectation-of-square/#pairs
     - `expectation-of-square#carry-three` (x + 1)^2 = x^2 + 2x + 1 で 3 つの量を同時に運ぶ：https://yuukougun.github.io/kyopro-atlas/comb/expectation-of-square/#carry-three
     - `expectation-of-square#variance` 分散と二乗和の関係：https://yuukougun.github.io/kyopro-atlas/comb/expectation-of-square/#variance
@@ -900,7 +900,7 @@ search:
 
 ## 後退解析（game-retrograde-analysis） {#game-retrograde-analysis}
 
-- id：`game-retrograde-analysis`　レベル：黄　段階：stub　type：technique
+- id：`game-retrograde-analysis`　レベル：黄　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/game-retrograde-analysis/
 - 別名：retrograde analysis、引き分けのあるゲーム、閉路のあるグラフ上のゲーム、グラフ上のゲーム
 - 種類：ゲーム、DP、グラフ探索
@@ -911,8 +911,8 @@ search:
     - 言い回し：グラフ上でコマを動かすゲーム・しりとり
 - 節：
     - `game-retrograde-analysis#why-not-memo` メモ化再帰が止まらない理由：https://yuukougun.github.io/kyopro-atlas/comb/game-retrograde-analysis/#why-not-memo
-    - `game-retrograde-analysis#counter` 逆辺と、勝ちと確定していない行き先の数のカウンタ：https://yuukougun.github.io/kyopro-atlas/comb/game-retrograde-analysis/#counter
     - `game-retrograde-analysis#rules` 確定の規則（負けへ移れる → 勝ち、すべて勝ちへ → 負け）：https://yuukougun.github.io/kyopro-atlas/comb/game-retrograde-analysis/#rules
+    - `game-retrograde-analysis#counter` 逆辺と、勝ちと確定していない行き先の数のカウンタ：https://yuukougun.github.io/kyopro-atlas/comb/game-retrograde-analysis/#counter
     - `game-retrograde-analysis#draw` 決まらない局面 = 引き分け：https://yuukougun.github.io/kyopro-atlas/comb/game-retrograde-analysis/#draw
     - `game-retrograde-analysis#weighted` 得点のあるゲームはダイクストラの要領で確定させる（発展）：https://yuukougun.github.io/kyopro-atlas/comb/game-retrograde-analysis/#weighted
 

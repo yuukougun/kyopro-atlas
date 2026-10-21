@@ -1,0 +1,10 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 1 人だけ
+  - {input: "1\n0 0\n3 4\n", output: "25\n"}
+  # 組み方は 2 通りで、最大値は 64（1 と 64）と 81（4 と 81）。小さい方の 64
+  - {input: "2\n0 0\n10 0\n1 0\n2 0\n", output: "64\n"}
+  # 同じ位置どうし
+  - {input: "3\n0 0\n5 5\n-3 2\n-3 2\n0 0\n5 5\n", output: "0\n"}
