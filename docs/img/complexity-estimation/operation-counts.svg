@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 400" font-family="sans-serif" font-size="16">
+<defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#ffd6d6"/><line x1="0" y1="0" x2="0" y2="8" stroke="#b33" stroke-width="2"/></pattern></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="12" y="26" fill="#222" font-size="17">N = 2×10<tspan baseline-shift="super" font-size="0.7em">5</tspan> のときの演算回数（横軸は対数）</text>
+<line x1="250" y1="40" x2="250" y2="312" stroke="#b33" stroke-width="1.8" stroke-dasharray="7,4"/>
+<line x1="320" y1="40" x2="320" y2="312" stroke="#b33" stroke-width="1.8" stroke-dasharray="2,3"/>
+<rect x="40" y="69" width="21.1" height="22" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="40" y="62" fill="#222" stroke="#fff" stroke-width="5" stroke-linejoin="round" paint-order="stroke">O(N)　2.0×10<tspan baseline-shift="super" font-size="0.7em">5</tspan></text>
+<rect x="40" y="121" width="108.3" height="22" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="40" y="114" fill="#222" stroke="#fff" stroke-width="5" stroke-linejoin="round" paint-order="stroke">O(N log N)　3.5×10<tspan baseline-shift="super" font-size="0.7em">6</tspan></text>
+<rect x="40" y="173" width="195.5" height="22" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="40" y="166" fill="#222" stroke="#fff" stroke-width="5" stroke-linejoin="round" paint-order="stroke">O(N log² N)　6.2×10<tspan baseline-shift="super" font-size="0.7em">7</tspan></text>
+<rect x="40" y="225" width="206.6" height="22" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="40" y="218" fill="#222" stroke="#fff" stroke-width="5" stroke-linejoin="round" paint-order="stroke">O(N√N)　8.9×10<tspan baseline-shift="super" font-size="0.7em">7</tspan></text>
+<rect x="40" y="277" width="392.1" height="22" fill="url(#hatch)" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="40" y="270" fill="#222" stroke="#fff" stroke-width="5" stroke-linejoin="round" paint-order="stroke" font-weight="bold">O(N²)　4.0×10<tspan baseline-shift="super" font-size="0.7em">10</tspan>（間に合わない）</text>
+<line x1="40" y1="312" x2="460" y2="312" stroke="#333"/>
+<line x1="40" y1="312" x2="40" y2="317" stroke="#333"/>
+<text x="40" y="336" text-anchor="middle" fill="#222" font-size="14">10<tspan baseline-shift="super" font-size="0.7em">5</tspan></text>
+<line x1="110" y1="312" x2="110" y2="317" stroke="#333"/>
+<text x="110" y="336" text-anchor="middle" fill="#222" font-size="14">10<tspan baseline-shift="super" font-size="0.7em">6</tspan></text>
+<line x1="180" y1="312" x2="180" y2="317" stroke="#333"/>
+<text x="180" y="336" text-anchor="middle" fill="#222" font-size="14">10<tspan baseline-shift="super" font-size="0.7em">7</tspan></text>
+<line x1="250" y1="312" x2="250" y2="317" stroke="#333"/>
+<text x="250" y="336" text-anchor="middle" fill="#222" font-size="14">10<tspan baseline-shift="super" font-size="0.7em">8</tspan></text>
+<line x1="320" y1="312" x2="320" y2="317" stroke="#333"/>
+<text x="320" y="336" text-anchor="middle" fill="#222" font-size="14">10<tspan baseline-shift="super" font-size="0.7em">9</tspan></text>
+<line x1="390" y1="312" x2="390" y2="317" stroke="#333"/>
+<text x="390" y="336" text-anchor="middle" fill="#222" font-size="14">10<tspan baseline-shift="super" font-size="0.7em">10</tspan></text>
+<line x1="460" y1="312" x2="460" y2="317" stroke="#333"/>
+<text x="460" y="336" text-anchor="middle" fill="#222" font-size="14">10<tspan baseline-shift="super" font-size="0.7em">11</tspan></text>
+<text x="12" y="368" fill="#b33" font-size="15">赤の破線：10<tspan baseline-shift="super" font-size="0.7em">8</tspan> 回。1 秒でまず間に合う</text>
+<text x="12" y="392" fill="#b33" font-size="15">赤の点線：10<tspan baseline-shift="super" font-size="0.7em">9</tspan> 回。単純な処理でも厳しい</text>
+</svg>
