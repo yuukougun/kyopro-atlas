@@ -11,7 +11,7 @@
 | 3 | 設計 | 初版完了（2026-10-21） | [design.md](design.md)・[catalog/](catalog/) |
 | 4 | 設計の見直し | 完了（2026-10-21） | planning/review/（見直し3本）・[design-review.md](design-review.md)（対応）・設計書第2版・目次第2版 |
 | 5 | 決定の提示 | 完了（2026-10-21） | ユーザーの承認（decisions.md の「工程5での確認」） |
-| 6 | 土台作り | 進行中 | [interfaces.md](interfaces.md)（部品どうしの約束） |
+| 6 | 土台作り | 完了（2026-10-21） | [interfaces.md](interfaces.md)・公開 https://yuukougun.github.io/kyopro-atlas/ |
 | 7 | 試作 | 未着手 | |
 | 8 | 本制作 | 未着手 | |
 | 9 | スキル作成 | 未着手 | |
@@ -54,11 +54,19 @@
 | S4 執筆の手引き | planning/style-guide.md、planning/checklists/、prh.yml | 完了 |
 | S5 記録用スキル（9a） | .claude/skills/record-problem/SKILL.md、claude/record-format.md | 完了 |
 
+## 工程6の結果
+
+- commit 7086af6 を push。deploy・check・zensical の3つのワークフローが成功し、サイトが https://yuukougun.github.io/kyopro-atlas/ で公開された
+- CI のコンテナ（gcc:15.2.0）で、同梱の ACL v1.6 を使うコード片（snippets/_ci-smoke）がコンパイル・実行まで通った（T11）
+- 353ページの骨格（一時置き場）で、check_pages エラー0、mkdocs build --strict 成功、ブラウザ確認86項目すべて通過（ライト・ダーク・スマホ幅）。知識マップの表示は約0.2秒（CPU 1/4 で約1.1秒）
+- Zensical の正式な評価（T4）は 0.1.0（2026-11-05 予定）が出てから行う。それまでは CI の試験ビルドで見る
+- 残り：用語の索引の漢字の読み（五十音順にするか）、docs/index/*.md に search: exclude を足す（S1 の提案）
+
 ## 次にやること
 
-1. 5つの担当の成果を統合し、手元で `uv sync`・`mkdocs build --strict`・各検査を通す
-2. commit・push し、GitHub Pages のソースを GitHub Actions にして、空のサイトが公開されることと CI（gcc:15.2 のコンテナでの snippets の検査を含む）が通ることを確かめる
-3. 工程7（試作）：性質の違うページを書き、claude.ai の実機確認（9b）と使用量の測定を行い、ユーザーに見てもらう
+1. 工程7（試作）：性質の違うページを書く（設計書 §10.1 の候補＋黄の手法ページ1つ）。執筆→検証→修正の流れを試し、ページの種類ごとの使用量を測る（T21）
+2. 9b：試作のページと仮の索引で claude.ai の実機確認
+3. 試作をユーザーに見てもらい、設計と手引きを直す
 
 ## ユーザーにお願いしていること
 
