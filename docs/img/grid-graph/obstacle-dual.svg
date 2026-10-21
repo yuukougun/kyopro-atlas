@@ -63,7 +63,7 @@
 <text x="250.0" y="314" font-size="14" text-anchor="middle" fill="#111">A（左端・下端：実線）</text>
 <text x="250.0" y="36" font-size="14" text-anchor="middle" fill="#111">B（上端・右端：点線）</text>
 <text x="420" y="170.0" font-size="14" fill="#111">B</text>
-<text x="20" y="342" font-size="13" fill="#333">斜めを含めてつながる障害物の鎖（白い線）が</text>
-<text x="20" y="360" font-size="13" fill="#333">下端（A）と上端（B）を結ぶので、S から G へは行けない</text>
-<text x="20" y="378" font-size="13" fill="#333">鎖に加わらない障害物（右の 1 個）は判定に関係しない</text>
+<text x="20" y="342" font-size="14" fill="#333">斜めを含めてつながる障害物の鎖（白い線）が</text>
+<text x="20" y="362" font-size="14" fill="#333">下端（A）と上端（B）を結ぶので、S から G へは行けない</text>
+<text x="20" y="382" font-size="14" fill="#333">鎖に加わらない障害物（右の 1 個）は判定に関係しない</text>
 </svg>

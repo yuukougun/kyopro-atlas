@@ -14,11 +14,11 @@
   </g>
   <g fill="#ffffff" stroke="#222" stroke-width="2">
     <circle cx="150" cy="140" r="20" stroke-width="3.5"/>
-    <circle cx="150" cy="60" r="18" stroke-dasharray="4 3"/><circle cx="230" cy="140" r="18" stroke-dasharray="4 3"/>
-    <circle cx="150" cy="220" r="18" stroke-dasharray="4 3"/><circle cx="70" cy="140" r="18" stroke-dasharray="4 3"/>
+    <circle cx="150" cy="60" r="18"/><circle cx="230" cy="140" r="18"/>
+    <circle cx="150" cy="220" r="18"/><circle cx="70" cy="140" r="18"/>
     <circle cx="450" cy="140" r="20" stroke-width="3.5"/>
-    <circle cx="450" cy="60" r="18" stroke-dasharray="4 3"/><circle cx="530" cy="140" r="18" stroke-dasharray="4 3"/>
-    <circle cx="450" cy="220" r="18" stroke-dasharray="4 3"/><circle cx="370" cy="140" r="18" stroke-dasharray="4 3"/>
+    <circle cx="450" cy="60" r="18"/><circle cx="530" cy="140" r="18"/>
+    <circle cx="450" cy="220" r="18"/><circle cx="370" cy="140" r="18"/>
   </g>
   <!-- choice counts -->
   <g font-size="15" text-anchor="middle" fill="#222">
@@ -28,7 +28,7 @@
     <text x="450" y="66">3</text><text x="530" y="146">3</text><text x="450" y="226">3</text><text x="370" y="146">3</text>
   </g>
   <text x="150" y="268" font-size="14" text-anchor="middle" fill="#222">試す塗り方：3 × 2 × 2 × 2 × 2</text>
-  <text x="150" y="288" font-size="13" text-anchor="middle" fill="#444">葉 k 枚で 3 × 2^k</text>
+  <text x="150" y="288" font-size="13" text-anchor="middle" fill="#444">葉 k 枚で 3 × 2<tspan baseline-shift="super" font-size="10">k</tspan></text>
   <text x="450" y="268" font-size="14" text-anchor="middle" fill="#222">試す塗り方：3 × 3 × 3 × 3 × (…)</text>
-  <text x="450" y="288" font-size="13" text-anchor="middle" fill="#444">葉 k 枚で 3^k 通りを経由する</text>
+  <text x="450" y="288" font-size="13" text-anchor="middle" fill="#444">葉 k 枚で 3<tspan baseline-shift="super" font-size="10">k</tspan> 通りを経由する</text>
 </svg>

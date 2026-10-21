@@ -1,66 +1,67 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 424" font-family="sans-serif" font-size="14">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 468" font-family="sans-serif" font-size="14">
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="20" y="20" fill="#222">S = bacbab から長さ 3 の部分列を辞書順最小に選ぶ。</text>
-<text x="20" y="38" fill="#222">各段で a から順に試し、残りの文字数が足りる範囲（青い枠）に出てくれば確定する。</text>
-<g transform="translate(0,14)">
-<text x="20" y="70" fill="#222" font-weight="bold">1 文字目</text>
-<text x="20" y="90" fill="#555" font-size="12">位置 0〜3</text>
-<rect x="110" y="58" width="32" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="126.0" y="80" text-anchor="middle" fill="#222">b</text>
-<text x="126.0" y="50" text-anchor="middle" fill="#555" font-size="12">0</text>
-<rect x="146" y="58" width="32" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="162.0" y="80" text-anchor="middle" fill="#222">a</text>
-<text x="162.0" y="50" text-anchor="middle" fill="#555" font-size="12">1</text>
-<rect x="182" y="58" width="32" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="198.0" y="80" text-anchor="middle" fill="#222">c</text>
-<text x="198.0" y="50" text-anchor="middle" fill="#555" font-size="12">2</text>
-<rect x="218" y="58" width="32" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="234.0" y="80" text-anchor="middle" fill="#222">b</text>
-<text x="234.0" y="50" text-anchor="middle" fill="#555" font-size="12">3</text>
-<rect x="254" y="58" width="32" height="32" fill="#eeeeee" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="3 3"/>
-<text x="270.0" y="80" text-anchor="middle" fill="#999">a</text>
-<text x="270.0" y="50" text-anchor="middle" fill="#555" font-size="12">4</text>
-<rect x="290" y="58" width="32" height="32" fill="#eeeeee" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="3 3"/>
-<text x="306.0" y="80" text-anchor="middle" fill="#999">b</text>
-<text x="306.0" y="50" text-anchor="middle" fill="#555" font-size="12">5</text>
-<rect x="143" y="55" width="38" height="38" fill="none" stroke="#c0392b" stroke-width="3"/>
-<text x="346" y="72" fill="#222">a を試す：○ 位置 1（範囲内）で確定</text>
-<text x="20" y="175" fill="#222" font-weight="bold">2 文字目</text>
-<text x="20" y="195" fill="#555" font-size="12">位置 2〜4</text>
-<rect x="110" y="163" width="32" height="32" fill="#eeeeee" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="3 3"/>
-<text x="126.0" y="185" text-anchor="middle" fill="#999">b</text>
-<rect x="146" y="163" width="32" height="32" fill="#eeeeee" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="3 3"/>
-<text x="162.0" y="185" text-anchor="middle" fill="#999">a</text>
-<text x="162.0" y="210" text-anchor="middle" fill="#555" font-size="11">選択済</text>
-<rect x="182" y="163" width="32" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="198.0" y="185" text-anchor="middle" fill="#222">c</text>
-<rect x="218" y="163" width="32" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="234.0" y="185" text-anchor="middle" fill="#222">b</text>
-<rect x="254" y="163" width="32" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="270.0" y="185" text-anchor="middle" fill="#222">a</text>
-<rect x="290" y="163" width="32" height="32" fill="#eeeeee" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="3 3"/>
-<text x="306.0" y="185" text-anchor="middle" fill="#999">b</text>
-<rect x="251" y="160" width="38" height="38" fill="none" stroke="#c0392b" stroke-width="3"/>
-<text x="346" y="177" fill="#222">a を試す：○ 位置 4（範囲内）で確定</text>
-<text x="20" y="280" fill="#222" font-weight="bold">3 文字目</text>
-<text x="20" y="300" fill="#555" font-size="12">位置 5 だけ</text>
-<rect x="110" y="268" width="32" height="32" fill="#eeeeee" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="3 3"/>
-<text x="126.0" y="290" text-anchor="middle" fill="#999">b</text>
-<rect x="146" y="268" width="32" height="32" fill="#eeeeee" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="3 3"/>
-<text x="162.0" y="290" text-anchor="middle" fill="#999">a</text>
-<text x="162.0" y="315" text-anchor="middle" fill="#555" font-size="11">選択済</text>
-<rect x="182" y="268" width="32" height="32" fill="#eeeeee" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="3 3"/>
-<text x="198.0" y="290" text-anchor="middle" fill="#999">c</text>
-<rect x="218" y="268" width="32" height="32" fill="#eeeeee" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="3 3"/>
-<text x="234.0" y="290" text-anchor="middle" fill="#999">b</text>
-<rect x="254" y="268" width="32" height="32" fill="#eeeeee" stroke="#1f4e9a" stroke-width="1.2" stroke-dasharray="3 3"/>
-<text x="270.0" y="290" text-anchor="middle" fill="#999">a</text>
-<text x="270.0" y="315" text-anchor="middle" fill="#555" font-size="11">選択済</text>
-<rect x="290" y="268" width="32" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="306.0" y="290" text-anchor="middle" fill="#222">b</text>
-<rect x="287" y="265" width="38" height="38" fill="none" stroke="#c0392b" stroke-width="3"/>
-<text x="346" y="282" fill="#222">a を試す：× 位置 5 以降に a がない</text>
-<text x="346" y="302" fill="#222">b を試す：○ 位置 5 で確定</text>
-<text x="20" y="370" fill="#222">答え：aab（太枠が選んだ位置。破線の枠は、取ると残りが足りなくなるか、すでに通り過ぎた位置）</text>
-</g>
+<text x="16" y="22" fill="#222">S = bacbab から長さ 3 の部分列を辞書順最小に選ぶ。</text>
+<text x="16" y="42" fill="#222">各段で a から順に試し、残りの文字数が足りる範囲</text>
+<text x="16" y="62" fill="#222">（青く塗った実線の箱）に出てくれば確定する。</text>
+<text x="132" y="96" text-anchor="middle" fill="#555" font-size="13">0</text>
+<text x="170" y="96" text-anchor="middle" fill="#555" font-size="13">1</text>
+<text x="208" y="96" text-anchor="middle" fill="#555" font-size="13">2</text>
+<text x="246" y="96" text-anchor="middle" fill="#555" font-size="13">3</text>
+<text x="284" y="96" text-anchor="middle" fill="#555" font-size="13">4</text>
+<text x="322" y="96" text-anchor="middle" fill="#555" font-size="13">5</text>
+<text x="16" y="118" fill="#222" font-weight="bold">1 文字目</text>
+<text x="16" y="136" fill="#555" font-size="13">位置 0〜3</text>
+<rect x="116" y="104" width="32" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="132" y="126" text-anchor="middle" fill="#222">b</text>
+<rect x="154" y="104" width="32" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="170" y="126" text-anchor="middle" fill="#222">a</text>
+<rect x="192" y="104" width="32" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="208" y="126" text-anchor="middle" fill="#222">c</text>
+<rect x="230" y="104" width="32" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="246" y="126" text-anchor="middle" fill="#222">b</text>
+<rect x="268" y="104" width="32" height="32" fill="#eeeeee" stroke="#999999" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="284" y="126" text-anchor="middle" fill="#999">a</text>
+<rect x="306" y="104" width="32" height="32" fill="#eeeeee" stroke="#999999" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="322" y="126" text-anchor="middle" fill="#999">b</text>
+<rect x="151" y="101" width="38" height="38" fill="none" stroke="#c0392b" stroke-width="3"/>
+<text x="116" y="158" fill="#222">a を試す：○ 位置 1（範囲内）で確定</text>
+<text x="16" y="206" fill="#222" font-weight="bold">2 文字目</text>
+<text x="16" y="224" fill="#555" font-size="13">位置 2〜4</text>
+<rect x="116" y="192" width="32" height="32" fill="#eeeeee" stroke="#999999" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="132" y="214" text-anchor="middle" fill="#999">b</text>
+<rect x="154" y="192" width="32" height="32" fill="#eeeeee" stroke="#999999" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="170" y="214" text-anchor="middle" fill="#999">a</text>
+<text x="170" y="240" text-anchor="middle" fill="#555" font-size="12">選択済</text>
+<rect x="192" y="192" width="32" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="208" y="214" text-anchor="middle" fill="#222">c</text>
+<rect x="230" y="192" width="32" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="246" y="214" text-anchor="middle" fill="#222">b</text>
+<rect x="268" y="192" width="32" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="284" y="214" text-anchor="middle" fill="#222">a</text>
+<rect x="306" y="192" width="32" height="32" fill="#eeeeee" stroke="#999999" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="322" y="214" text-anchor="middle" fill="#999">b</text>
+<rect x="265" y="189" width="38" height="38" fill="none" stroke="#c0392b" stroke-width="3"/>
+<text x="116" y="260" fill="#222">a を試す：○ 位置 4（範囲内）で確定</text>
+<text x="16" y="308" fill="#222" font-weight="bold">3 文字目</text>
+<text x="16" y="326" fill="#555" font-size="13">位置 5 だけ</text>
+<rect x="116" y="294" width="32" height="32" fill="#eeeeee" stroke="#999999" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="132" y="316" text-anchor="middle" fill="#999">b</text>
+<rect x="154" y="294" width="32" height="32" fill="#eeeeee" stroke="#999999" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="170" y="316" text-anchor="middle" fill="#999">a</text>
+<text x="170" y="342" text-anchor="middle" fill="#555" font-size="12">選択済</text>
+<rect x="192" y="294" width="32" height="32" fill="#eeeeee" stroke="#999999" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="208" y="316" text-anchor="middle" fill="#999">c</text>
+<rect x="230" y="294" width="32" height="32" fill="#eeeeee" stroke="#999999" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="246" y="316" text-anchor="middle" fill="#999">b</text>
+<rect x="268" y="294" width="32" height="32" fill="#eeeeee" stroke="#999999" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="284" y="316" text-anchor="middle" fill="#999">a</text>
+<text x="284" y="342" text-anchor="middle" fill="#555" font-size="12">選択済</text>
+<rect x="306" y="294" width="32" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="322" y="316" text-anchor="middle" fill="#222">b</text>
+<rect x="303" y="291" width="38" height="38" fill="none" stroke="#c0392b" stroke-width="3"/>
+<text x="116" y="362" fill="#222">a を試す：× 位置 5 以降に a がない</text>
+<text x="116" y="382" fill="#222">b を試す：○ 位置 5 で確定</text>
+<text x="16" y="414" fill="#222" font-weight="bold">答え：aab</text>
+<text x="16" y="434" fill="#222">赤の太枠が選んだ位置。灰色の破線の箱は、取ると</text>
+<text x="16" y="454" fill="#222">残りが足りなくなるか、すでに通り過ぎた位置。</text>
 </svg>

@@ -18,5 +18,12 @@ int main() {
         }
     }
     // --8<-- [end:core]
+    if (n <= 200) {  // 小さい N では 3 重ループの数え上げと比べる
+        long long naive = 0;
+        for (int i = 0; i < n; i++)
+            for (int j = i + 1; j < n; j++)
+                for (int k = j + 1; k < n; k++) naive += l[k] < l[i] + l[j];
+        assert(ans == naive);
+    }
     cout << ans << '\n';
 }

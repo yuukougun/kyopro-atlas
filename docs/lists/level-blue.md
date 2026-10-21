@@ -152,12 +152,12 @@ difficulty 1600〜1999 の帯で主に必要になるページ（52 ページ）
 | 二分探索と連結判定の組合せ | [Union-Find で連結性を扱う](../graph/union-find-connectivity.md#binary-search)（水） | グラフ |
 | 操作を頂点にする・区間を辺にする | [最小全域木](../graph/minimum-spanning-tree.md#modeling)（水） | グラフ |
 | 辺の重みの種類が少ないとき | [最小全域木](../graph/minimum-spanning-tree.md#few-weights)（水） | グラフ |
-| パスへの加算（LCA に印を置いて葉から上へ累積する） | [木の上の累積和・いもす法](../tree/tree-imos.md)（基礎）（準備中） | 木 |
-| 距離 K の頂点の数（部分木の深さの範囲を N で切る） | [完全二分木](../tree/complete-binary-tree.md)（基礎）（準備中） | 木 |
+| パスへの加算（LCA に印を置いて葉から上へ累積する） | [木の上の累積和・いもす法](../tree/tree-imos.md#path-add)（基礎） | 木 |
+| 距離 K の頂点の数（部分木の深さの範囲を N で切る） | [完全二分木](../tree/complete-binary-tree.md#count-at-distance)（基礎） | 木 |
 | 直径の端点を根にして距離 K の頂点を探す | [木の直径と最遠点](../tree/tree-diameter.md#root-at-end)（水） | 木 |
 | 2 つの木をつないだ直径 | [木の直径と最遠点](../tree/tree-diameter.md#join-trees)（水） | 木 |
-| 次数の条件から作る（次数の足りない成分どうしをつなぐ） | [木の構築・復元](../tree/tree-construction.md)（水）（準備中） | 木 |
-| 最遠距離の列から直径を決める | [木の構築・復元](../tree/tree-construction.md)（水）（準備中） | 木 |
+| 次数の条件から作る（次数の足りない成分どうしをつなぐ） | [木の構築・復元](../tree/tree-construction.md#from-degrees)（水） | 木 |
+| 最遠距離の列から直径を決める | [木の構築・復元](../tree/tree-construction.md#from-eccentricities)（水） | 木 |
 | ソート順で隣り合う組の集合（2 番目に大きい値の寄与。最小 XOR の組は Binary Trie のページ） | [set・multiset・map の応用](../ds/ordered-set.md#adjacent-pairs)（基礎） | データ構造 |
 | しきい値ごと・関係ごとに Union-Find を持つ | [Union-Find の応用](../ds/union-find-applications.md#multiple-uf)（水） | データ構造 |
 | 窓を伸縮しながら転倒数を増減する（尺取り・期待値と組む） | [転倒数](../ds/inversion-number.md#sliding-window)（水） | データ構造 |
@@ -180,7 +180,7 @@ difficulty 1600〜1999 の帯で主に必要になるページ（52 ページ）
 | 真似戦略・ペアリング戦略（真似した手が合法かを確かめる） | [ゲームの基本と勝敗の DP](../comb/game-basics.md#mirror-strategy)（水） | 数え上げ・確率・ゲーム |
 | 上限つき（x mod (k+1)）・範囲つきの変種 | [Nim と XOR](../comb/nim.md#bounded)（水） | 数え上げ・確率・ゲーム |
 | 先手と後手で取れる数が違うとき | [Nim と XOR](../comb/nim.md#asymmetric)（水） | 数え上げ・確率・ゲーム |
-| 繰り返した文字列の部分列（文字ごとの累積個数で位置を飛ばす） | [部分列の判定と次の出現位置の表](../string/subsequence-matching.md)（基礎）（準備中） | 文字列 |
+| 繰り返した文字列の部分列（文字ごとの累積個数で位置を飛ばす） | [部分列の判定と次の出現位置の表](../string/subsequence-matching.md#repeated-string)（基礎） | 文字列 |
 | セグ木に載せるハッシュ：（ハッシュ, B^長さ）の組で更新ありの一致・回文判定 | [ローリングハッシュ](../string/rolling-hash.md#hash-segment-tree)（水） | 文字列 |
 | 外側から組み立てる（回文の式・約数） | [回文の扱いと Manacher](../string/palindrome.md#build-outside-in)（水） | 文字列 |
 | Manacher：各中心の最長回文半径を O(N) で（Z と同じく内側をコピーする） | [回文の扱いと Manacher](../string/palindrome.md#manacher)（水） | 文字列 |
@@ -189,5 +189,5 @@ difficulty 1600〜1999 の帯で主に必要になるページ（52 ページ）
 | 反対方向に最も近い点の二分探索 | [偏角ソート](../geometry/argument-sort.md#opposite-direction)（水） | 幾何 |
 | 角度の区間のスケジューリング・連続する範囲だけを試す最適化 | [偏角ソート](../geometry/argument-sort.md#angular-intervals)（水） | 幾何 |
 | 回転後の偶奇：u と v の偶奇がそろう点だけが元の格子点（チェビシェフ → マンハッタンで 1/2 が出る） | [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md#parity-after-rotation)（水） | 幾何 |
-| 連立方程式・中国剰余定理で特定する | [インタラクティブ問題](../misc/interactive.md)（基礎）（準備中） | その他の技法 |
-| 先に構造を出力してから答える | [インタラクティブ問題](../misc/interactive.md)（基礎）（準備中） | その他の技法 |
+| 連立方程式・中国剰余定理で特定する | [インタラクティブ問題](../misc/interactive.md#equations-crt)（基礎） | その他の技法 |
+| 先に構造を出力してから答える | [インタラクティブ問題](../misc/interactive.md#output-structure-first)（基礎） | その他の技法 |

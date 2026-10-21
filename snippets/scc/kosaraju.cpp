@@ -41,6 +41,10 @@ int main() {
         if (comp[v] == -1) dfs2(dfs2, v, k++);
     }
     // --8<-- [end:core]
+    // すべての辺 u → v で comp[u] <= comp[v]（番号はトポロジカル順）
+    for (int u = 0; u < n; u++) {
+        for (int v : g[u]) assert(comp[u] <= comp[v]);
+    }
     cout << k << '\n';
     for (int v = 0; v < n; v++) cout << comp[v] << (v + 1 < n ? ' ' : '\n');
 }

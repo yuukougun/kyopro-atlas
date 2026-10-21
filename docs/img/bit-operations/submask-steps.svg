@@ -117,5 +117,5 @@
 <text x="142" y="330" fill="#222" text-anchor="middle" font-weight="normal">0</text>
 <text x="190" y="330" fill="#555">0 を処理して終了</text>
 <text x="16" y="378" fill="#555" font-size="14">灰色の桁（bit 2）は m で 0 なので、&amp; m で必ず 0 に戻る。</text>
-<text x="16" y="400" fill="#555" font-size="14">点線の行：s − 1 で bit 2 に立った 1 を消し、下の桁だけが残る。</text>
+<text x="16" y="400" fill="#555" font-size="14">点線の行：s − 1 で立った bit 2 の 1 を &amp; m が消し、011 が残る。</text>
 </svg>

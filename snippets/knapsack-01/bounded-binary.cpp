@@ -7,7 +7,8 @@ using namespace std;
 int main() {
     int n, W;
     cin >> n >> W;
-    vector<int> w(n), b(n);
+    vector<int> w(n);
+    vector<long long> b(n);
     vector<long long> v(n);
     for (int i = 0; i < n; i++) cin >> w[i] >> v[i] >> b[i];
     for (int i = 0; i < n; i++) assert(1 <= w[i] && 0 <= b[i]);
@@ -15,11 +16,11 @@ int main() {
     // --8<-- [start:core]
     vector<long long> dp(W + 1, 0);
     for (int i = 0; i < n; i++) {
-        int rest = b[i];
-        for (int k = 1; rest > 0; k *= 2) {
-            int c = min(k, rest);  // 1, 2, 4, … と取り、最後は残りをまとめる
+        long long rest = b[i];
+        for (long long k = 1; rest > 0; k *= 2) {
+            long long c = min(k, rest);  // 1, 2, 4, … と取り、最後は残りをまとめる
             rest -= c;
-            long long cw = (long long)c * w[i];
+            long long cw = c * w[i];
             long long cv = c * v[i];
             for (long long j = W; j >= cw; j--) {  // まとまりを 1 つの品物とみた 0-1 の更新
                 dp[j] = max(dp[j], dp[j - cw] + cv);

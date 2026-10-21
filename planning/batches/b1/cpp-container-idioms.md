@@ -41,3 +41,10 @@
 - unordered_map の rehash でイテレータは無効になるが参照・ポインタは無効にならない、という記述は規格の記憶と cppreference の無効化の表に基づき、手元の実行では確かめていない
 - 「AtCoder の GCC でも pb_ds が使える」は、AtCoder の GCC 15.2 が libstdc++ を使うことからの判断で、提出しては確かめていない（atcoder.jp を開かない規則のため）
 - multiset の count が O(log N + 個数) であることは cpprefjp の記述の記憶に基づく（研究資料 05-ds の落とし穴とも一致）。検証役に cpprefjp での確認を頼みたい
+
+## 検証の指摘への対応
+
+- 直すべき 1〜6：すべて直した（erase(v, x) と erase_if の使えるコンテナを分け、見出し・sections の title も合わせた。149 行の打ち間違い、49 行の「AtCoder で確かめた」の書き分け、ASan では見つからないことと `-D_GLIBCXX_DEBUG`、iterators.svg の矢じりを +x 向きの三角に、要点と complexity を「自由関数の erase・erase_if」に）
+- 直すとよい 7〜11：すべて採った（範囲 for の結果を g++-15・g++-13 で書き分け、`max`・`min` に渡すとエラーと直した、g++-15 の最初のエラーを添えた、図の右下を x = 462 で 3 行にし 13px の文字を 14px に、190 行を 2 文に）
+- 直すとよい 12：invalidation.yaml に未定義動作の例である旨の注記を足した（道具にコンパイルだけを見る期待がないため expect: run のまま）。reserve.cpp・reserve.yaml は中身に合わせて capacity.cpp・capacity.yaml に改名し、本文の取り込みも直した
+- 用語集の「イテレータの無効化」の提案に、検証役の提案どおり「unordered 系の rehash はイテレータだけを無効にし、参照・ポインタは保つ」を定義に含めることを足す（メイン向け）

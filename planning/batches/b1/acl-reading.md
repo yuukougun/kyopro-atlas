@@ -31,3 +31,8 @@
 - 本文で節へリンクした cpp-initialization#explicit・cpp-range-for#temporary-range は、front matter は draft だが、確認した時点では本文に見出しがまだなかった（並行して執筆中と思われる）。anchor は相手の sections にあるので check_pages は通る
 - 部品の一覧の表の「手法のページ」のリンク先（union-find・fenwick-tree・scc・two-sat・max-flow・min-cost-flow・convolution-ntt・z-algorithm）はまだ stub なので、ページへのリンクだけにして節へはリンクしていない
 - 使用量の目安：道具の呼び出し 約 45 回、Web 取得 5 回（うち 1 回は 404 で、その出典は使わなかった）
+
+## 検証の指摘への対応（工程8b・b1）
+
+- 指摘 1〜8 は直した。指摘 6 はコード片を `core`（op・e などの定義）と `use`（木を作る数行）の 2 区間に分けた。指摘 8 は図を幅 460 の縦並びにし、補足の式（結合法則・単位元・`composition(f, id())`）を外して文字を 15〜16 にした（手元に描画の道具がなく、狭い画面での見た目は確かめていない）
+- 指摘 9 は一部だけ採った。#capturing-lambda の理由の文に cpp-lambda#template-argument へのリンクを添えたが、理由の 2 文と確認問題は残した。この節を ACL の文脈だけで読めるようにするためで、重なりは 2〜3 文に収まる。#dsu-groups の版ごとの結果も残した。AtCoder（g++-15）と手元（g++-13）で食い違うのは ACL を使う読者がつまずく具体例で、このページで引かれることが多いと考えた

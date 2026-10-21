@@ -1,4 +1,0 @@
-compilers: [g++-13, g++-15]
-expect: run
-cases:
-  - {input: "3\n", output: "3\n"}

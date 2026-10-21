@@ -23,12 +23,12 @@ struct SegTree {
     }
     S get(int p) const { return d[size + p]; }
     S prod(int l, int r) const {  // [l, r) の総積。l == r なら e()
-        S sml = e(), smr = e();  // 左端から集めた積・右端から集めた積
+        S sL = e(), sR = e();  // 左端から集めた積・右端から集めた積
         for (l += size, r += size; l < r; l /= 2, r /= 2) {
-            if (l & 1) sml = op(sml, d[l++]);  // l が右の子なら使って右隣へ
-            if (r & 1) smr = op(d[--r], smr);  // r - 1 が左の子なら使って左隣へ
+            if (l & 1) sL = op(sL, d[l++]);  // l が右の子なら使って右隣へ
+            if (r & 1) sR = op(d[--r], sR);  // r - 1 が左の子なら使って左隣へ
         }
-        return op(sml, smr);  // 左の積を先に置く
+        return op(sL, sR);  // 左の積を先に置く
     }
 };
 // --8<-- [end:core]

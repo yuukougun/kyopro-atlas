@@ -21,10 +21,10 @@
 <circle cx="260" cy="200" r="16" fill="#ffffff" stroke="#222" stroke-width="1.5"/><text x="260" y="205" text-anchor="middle" fill="#222">9</text>
 <text x="345" y="155" fill="#222" font-size="22">→</text>
 <text x="410" y="24" fill="#222">閉路を横一列にした描き直し</text>
-<rect x="412" y="64" width="56" height="210" rx="10" fill="none" stroke="#1f4e9a" stroke-dasharray="6 4"/><text x="440" y="290" text-anchor="middle" fill="#1f4e9a" font-size="12">1 の木</text>
-<rect x="504" y="64" width="52" height="52" rx="10" fill="none" stroke="#1f4e9a" stroke-dasharray="6 4"/><text x="530" y="132" text-anchor="middle" fill="#1f4e9a" font-size="12">2 の木</text>
-<rect x="560" y="64" width="120" height="210" rx="10" fill="none" stroke="#1f4e9a" stroke-dasharray="6 4"/><text x="620" y="290" text-anchor="middle" fill="#1f4e9a" font-size="12">3 の木</text>
-<rect x="684" y="64" width="52" height="52" rx="10" fill="none" stroke="#1f4e9a" stroke-dasharray="6 4"/><text x="710" y="132" text-anchor="middle" fill="#1f4e9a" font-size="12">4 の木</text>
+<rect x="412" y="64" width="56" height="210" rx="10" fill="none" stroke="#1f4e9a" stroke-dasharray="6 4"/><text x="440" y="290" text-anchor="middle" fill="#1f4e9a" font-size="14">1 の木</text>
+<rect x="504" y="64" width="52" height="52" rx="10" fill="none" stroke="#1f4e9a" stroke-dasharray="6 4"/><text x="530" y="132" text-anchor="middle" fill="#1f4e9a" font-size="14">2 の木</text>
+<rect x="560" y="64" width="120" height="210" rx="10" fill="none" stroke="#1f4e9a" stroke-dasharray="6 4"/><text x="620" y="290" text-anchor="middle" fill="#1f4e9a" font-size="14">3 の木</text>
+<rect x="684" y="64" width="52" height="52" rx="10" fill="none" stroke="#1f4e9a" stroke-dasharray="6 4"/><text x="710" y="132" text-anchor="middle" fill="#1f4e9a" font-size="14">4 の木</text>
 <line x1="440" y1="90" x2="530" y2="90" stroke="#c0392b" stroke-width="4"/>
 <line x1="530" y1="90" x2="620" y2="90" stroke="#c0392b" stroke-width="4"/>
 <line x1="620" y1="90" x2="710" y2="90" stroke="#c0392b" stroke-width="4"/>
@@ -43,5 +43,5 @@
 <circle cx="620" cy="170" r="16" fill="#ffffff" stroke="#222" stroke-width="1.5"/><text x="620" y="175" text-anchor="middle" fill="#222">7</text>
 <circle cx="580" cy="250" r="16" fill="#ffffff" stroke="#222" stroke-width="1.5"/><text x="580" y="255" text-anchor="middle" fill="#222">8</text>
 <circle cx="660" cy="250" r="16" fill="#ffffff" stroke="#222" stroke-width="1.5"/><text x="660" y="255" text-anchor="middle" fill="#222">9</text>
-<text x="30" y="314" fill="#555" font-size="12">太線：閉路の辺　点線の枠：閉路の頂点とそこからぶら下がる木</text>
+<text x="30" y="314" fill="#555" font-size="14">太線：閉路の辺　点線の枠：閉路の頂点とそこからぶら下がる木</text>
 </svg>

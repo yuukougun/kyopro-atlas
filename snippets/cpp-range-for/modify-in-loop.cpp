@@ -7,7 +7,7 @@ int main() {
     vector<int> v(n);
     for (auto& x : v) cin >> x;
     // --8<-- [start:bad]
-    // for (int x : v) if (x % 2 == 0) v.push_back(x / 2);  // 未定義動作：再確保で x の元の場所が消える
+    // for (int x : v) if (x % 2 == 0) v.push_back(x / 2);  // 未定義動作：範囲 for が覚えた位置が無効になる
     // --8<-- [end:bad]
     // --8<-- [start:core]
     int m = v.size();               // 回す前の長さを覚える

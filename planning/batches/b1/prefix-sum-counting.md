@@ -34,3 +34,21 @@
 - 「後ろからの累積」の節は digit-and-mod#suffix-remainder と内容が重なる。こちらは手順の要点だけにしたが、どちらに詳しく書くかはメインで判断してほしい
 
 - 使用量の目安：道具の呼び出し 約 30 回、Web 取得 11 回（WebFetch 9・検索 2）
+
+## 検証の指摘への対応（2026-10-21）
+
+- 指摘 1〜9 はすべて採った（採らなかったものはない）
+    - 1・2・6：#suffix は数字の列を $D$、$d_i$ を定義。漸化式の作り方は digit-and-mod#suffix-remainder に任せてリンクし、「1 の位だけで決まる」は $P = 2, 5$ に限った（#p-2-5 へリンク）
+    - 3：案 (a)。#circular は $s < t$ と $s > t$ に分けて左から 2 回検索する方法を主にし、擬似コードを置いた。2 周分に伸ばす窓は後に回し、#length-limited へリンク。主な方法が「伸ばす」でなくなったので、見出しと sections の title を「円環上の組を数える」に変えた（anchor `circular` はそのまま）。練習の ABC367 D の方針も合わせた
+    - 4：練習の ABC473 E の要約を「数列をいくつかの連続部分列に分割するとき、和が K の倍数である部分の個数の最大値を求める。」にした
+    - 5：stl-containers#counting-map・#pitfalls、integer-division#floor-ceil、digit-and-mod#suffix-remainder・#p-2-5、reformulation#separate-indices へリンクを直した
+    - 7：コード片のコメントと落とし穴の両方に「直後に同じキーを記録するなら [] で引いてよい」を足した
+    - 8：#length-limited の擬似コードを `cnt[S_r − K]` にし、余りや $B_i$ のときにキーと検索の値を変えることを添えた
+    - 9：pairs.svg の題の行を消し（viewBox を上に詰めた）、ラベルを各弧の最下点のすぐ内側に置いて白の縁取りを付け、ラベルを 14px 太字・凡例を 14px にした。chrome-headless-shell で画像にして重なりがないことを確かめた（和文は豆腐）
+
+### 共有ファイルへの提案（追加）
+
+- 台帳 abc473_e｜summary｜「数列をいくつかの連続部分列に分割するとき、和が K の倍数である部分の個数の最大値を求める。」｜https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0829_abc473 （上の「台帳への提案」の summary の文をこれに置き換える）
+- 台帳 abc367_d｜approach｜「s < t と s > t に分け、累積和の余りの関係（S_s ≡ S_t と S_t + T ≡ S_s）を左から数える（2 周分に伸ばして窓で数えてもよい）」｜https://drken1215.hatenablog.com/entry/2024/08/21/084614 （上の提案を置き換える）
+- 台帳 abc233_d・abc105_d・abc146_e・abc164_d・abc367_d・abc473_e｜checked｜2026-10-21（検証で題名・diff を確かめた）
+- docs/index/basics.md（gen_site の出力）の `prefix-sum-counting#circular` の題が「円環を伸ばして数える」のまま。gen_site の再実行で「円環上の組を数える」になるはず

@@ -54,3 +54,19 @@ abc319 以降（7 問体制）は abc350_e・abc382_e の 2 問が練習にあ�
 - EDPC J の difficulty がないので、例題の中で最後（3 問目）に置いた
 - 「ACL では」の囲みは独立の節にせず、落とし穴の後に置いた
 - 使用量の目安：道具の呼び出し約 35 回、Web 取得 10 回・検索 1 回
+
+## 検証の指摘への対応（2026-10-21）
+
+- 指摘 1〜8 はすべて直した。採らなかったものはない
+  - 指摘 1：ABC263 E の方針を「答えは mod 998244353 なので…」と言い切り、本文の練習の要約の行に「を mod 998244353 で求める」を足した（台帳の直しは下の提案）
+  - 指摘 2：drken の 2 件の題名を記事どおり「(1D, 水色, 500 点)」「(1Q, 水色, 400 点)」にした
+  - 指摘 3：要点・front matter・ACL の囲みの計算量を $O(\log \mathrm{mod})$（front matter は `O(log mod)`）にした
+  - 指摘 4：動く図の div の後の段落に、自己ループの状態では移項前と移項後の式を並べてから埋める旨を 1 文足した。expected-value-dp.js はまだないので、作るかどうかはメインの判断（progress への記録を提案）
+  - 指摘 5〜7：$E[X_s]$ を $E[s]$ と書く橋、すごろくの設定（0-indexed・ゴール $N-1$・$i + A_i \le N - 1$）の前出し、$E[\max]$ との違いの具体化を入れた
+  - 指摘 8：画像にして確かめられないため、座標で離した。「終状態」を (578, 198) に移し、viewBox と背景の高さを 260、下の説明文の基線を y = 252 にした
+
+### 提案（共有ファイル）
+
+- `data/problems.yaml` の abc263_e：summary の末尾を「…振る回数の期待値を mod 998244353 で求める。」にする。evidence に gotoki_no_joe「ABC263 A～E をHaskellで」 https://qiita.com/gotoki_no_joe/items/98225d578c885656a959 を足す
+- 検証役の提案どおり、abc280_e・abc184_d・dp_j・abc300_e・abc350_e・abc382_e・abc314_e・abc144_f・tdpc_ball・abc263_e に `checked: 2026-10-21` を入れる
+- `planning/progress.md`：動く図 expected-value-dp.js（mode hp と自己ループ）が未作成であることを残す

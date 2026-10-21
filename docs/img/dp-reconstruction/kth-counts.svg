@@ -1,28 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 340" font-family="sans-serif" font-size="14">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 400" font-family="sans-serif" font-size="15">
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="20" y="28" fill="#222">長さ 3 で 1 が続かない 0/1 列を辞書順に並べ、K = 4 番目を先頭から決める</text>
-<rect x="60" y="60" width="100" height="34" fill="#f3f3f3" stroke="#999" stroke-width="1"/>
-<text x="110.0" y="82" text-anchor="middle" fill="#222" font-family="monospace" font-size="16">000</text>
-<text x="110.0" y="112" text-anchor="middle" fill="#555" font-size="12">1 番目</text>
-<rect x="160" y="60" width="100" height="34" fill="#f3f3f3" stroke="#999" stroke-width="1"/>
-<text x="210.0" y="82" text-anchor="middle" fill="#222" font-family="monospace" font-size="16">001</text>
-<text x="210.0" y="112" text-anchor="middle" fill="#555" font-size="12">2 番目</text>
-<rect x="260" y="60" width="100" height="34" fill="#f3f3f3" stroke="#999" stroke-width="1"/>
-<text x="310.0" y="82" text-anchor="middle" fill="#222" font-family="monospace" font-size="16">010</text>
-<text x="310.0" y="112" text-anchor="middle" fill="#555" font-size="12">3 番目</text>
-<rect x="360" y="60" width="100" height="34" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
-<text x="410.0" y="82" text-anchor="middle" fill="#222" font-family="monospace" font-size="16">100</text>
-<text x="410.0" y="112" text-anchor="middle" fill="#555" font-size="12">4 番目</text>
-<rect x="460" y="60" width="100" height="34" fill="#f3f3f3" stroke="#999" stroke-width="1"/>
-<text x="510.0" y="82" text-anchor="middle" fill="#222" font-family="monospace" font-size="16">101</text>
-<text x="510.0" y="112" text-anchor="middle" fill="#555" font-size="12">5 番目</text>
-<path d="M66,132 L66,140 L354,140 L354,132" fill="none" stroke="#888" stroke-width="2" stroke-dasharray="5 4"/>
-<text x="210.0" y="160" text-anchor="middle" fill="#888" font-size="13">先頭 0：3 個（K = 4 > 3 なので飛ばす）</text>
-<path d="M366,132 L366,140 L554,140 L554,132" fill="none" stroke="#c0392b" stroke-width="2"/>
-<text x="460.0" y="160" text-anchor="middle" fill="#c0392b" font-size="13">先頭 1：2 個、K = 1 に</text>
-<path d="M366,187 L366,195 L554,195 L554,187" fill="none" stroke="#c0392b" stroke-width="2"/>
-<text x="460.0" y="215" text-anchor="middle" fill="#c0392b" font-size="13">2 文字目 0：10 で始まるのは 2 個 ≥ 1（11 は 0 個）</text>
-<path d="M366,242 L366,250 L454,250 L454,242" fill="none" stroke="#c0392b" stroke-width="2"/>
-<text x="410.0" y="270" text-anchor="middle" fill="#c0392b" font-size="13">3 文字目 0：1 個 ≥ 1</text>
-<text x="20" y="320" fill="#222">各段の個数は後ろからの DP で数える。K が入る区間へ降りると 100 に決まる</text>
+<text x="20" y="26" fill="#222" font-size="16">長さ 3 で 1 が続かない 0/1 列を辞書順に</text>
+<text x="20" y="50" fill="#222" font-size="16">並べ、K = 4 番目を先頭から決める</text>
+<rect x="20" y="70" width="80" height="36" fill="#f3f3f3" stroke="#999" stroke-width="1"/>
+<text x="60.0" y="94" text-anchor="middle" fill="#222" font-family="monospace" font-size="18">000</text>
+<text x="60.0" y="126" text-anchor="middle" fill="#555" font-size="14">1 番目</text>
+<rect x="100" y="70" width="80" height="36" fill="#f3f3f3" stroke="#999" stroke-width="1"/>
+<text x="140.0" y="94" text-anchor="middle" fill="#222" font-family="monospace" font-size="18">001</text>
+<text x="140.0" y="126" text-anchor="middle" fill="#555" font-size="14">2 番目</text>
+<rect x="180" y="70" width="80" height="36" fill="#f3f3f3" stroke="#999" stroke-width="1"/>
+<text x="220.0" y="94" text-anchor="middle" fill="#222" font-family="monospace" font-size="18">010</text>
+<text x="220.0" y="126" text-anchor="middle" fill="#555" font-size="14">3 番目</text>
+<rect x="260" y="70" width="80" height="36" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
+<text x="300.0" y="94" text-anchor="middle" fill="#222" font-family="monospace" font-size="18">100</text>
+<text x="300.0" y="126" text-anchor="middle" fill="#555" font-size="14">4 番目</text>
+<rect x="340" y="70" width="80" height="36" fill="#f3f3f3" stroke="#999" stroke-width="1"/>
+<text x="380.0" y="94" text-anchor="middle" fill="#222" font-family="monospace" font-size="18">101</text>
+<text x="380.0" y="126" text-anchor="middle" fill="#555" font-size="14">5 番目</text>
+<path d="M26,146 L26,154 L254,154 L254,146" fill="none" stroke="#888" stroke-width="2" stroke-dasharray="5 4"/>
+<text x="20" y="176" fill="#888">① 先頭 0 は 3 個。K = 4 > 3 なので飛ばし K = 1</text>
+<path d="M266,200 L266,208 L414,208 L414,200" fill="none" stroke="#c0392b" stroke-width="2"/>
+<text x="20" y="230" fill="#c0392b">② 先頭 1 は 2 個 ≥ 1。先頭は 1</text>
+<path d="M266,254 L266,262 L414,262 L414,254" fill="none" stroke="#c0392b" stroke-width="2"/>
+<text x="20" y="284" fill="#c0392b">③ 10 で始まるのは 2 個 ≥ 1（11 は 0 個）</text>
+<path d="M266,308 L266,316 L334,316 L334,308" fill="none" stroke="#c0392b" stroke-width="2"/>
+<text x="20" y="338" fill="#c0392b">④ 100 で始まるのは 1 個 ≥ 1。答えは 100</text>
+<text x="20" y="376" fill="#222">各段の個数は後ろからの DP で数える</text>
 </svg>

@@ -9,20 +9,20 @@ long long count_divisible(long long n) {
     int len = s.size();
     long long res = 0;
     for (int m = 1; m <= 9 * len; m++) {  // 桁和を m と決め打つ
-        // dp[t][sum][r]：N と一致しているか、ここまでの桁和、ここまでの数を m で割った余り
+        // dp[t][j][r]：N と一致しているか、ここまでの桁和、ここまでの数を m で割った余り
         vector dp(2, vector(m + 1, vector<long long>(m, 0)));
         dp[1][0][0] = 1;
         for (int i = 0; i < len; i++) {
             int lim = s[i] - '0';
             vector nd(2, vector(m + 1, vector<long long>(m, 0)));
             for (int t = 0; t < 2; t++) {
-                for (int sum = 0; sum <= m; sum++) {
+                for (int j = 0; j <= m; j++) {
                     for (int r = 0; r < m; r++) {
-                        if (dp[t][sum][r] == 0) continue;
+                        if (dp[t][j][r] == 0) continue;
                         int hi = t ? lim : 9;
-                        for (int x = 0; x <= hi && sum + x <= m; x++) {  // 桁和が m を超えたら捨てる
+                        for (int x = 0; x <= hi && j + x <= m; x++) {  // 桁和が m を超えたら捨てる
                             int nt = (t && x == lim) ? 1 : 0;
-                            nd[nt][sum + x][(r * 10 + x) % m] += dp[t][sum][r];
+                            nd[nt][j + x][(r * 10 + x) % m] += dp[t][j][r];
                         }
                     }
                 }

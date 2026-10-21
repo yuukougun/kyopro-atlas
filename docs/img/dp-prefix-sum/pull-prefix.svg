@@ -1,16 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 330" font-family="sans-serif" font-size="14">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 350" font-family="sans-serif" font-size="14">
 <defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#bbb" stroke-width="3"/></pattern></defs>
 <rect width="100%" height="100%" fill="#ffffff"/>
 <text x="20" y="26" fill="#222">歩幅が 2〜4 のとき：dp[i] = dp[i−4] + dp[i−3] + dp[i−2]（i = 7 を求める）</text>
-<text x="134.0" y="62" text-anchor="middle" fill="#555" font-size="12">0</text>
-<text x="182.0" y="62" text-anchor="middle" fill="#555" font-size="12">1</text>
-<text x="230.0" y="62" text-anchor="middle" fill="#555" font-size="12">2</text>
-<text x="278.0" y="62" text-anchor="middle" fill="#555" font-size="12">3</text>
-<text x="326.0" y="62" text-anchor="middle" fill="#555" font-size="12">4</text>
-<text x="374.0" y="62" text-anchor="middle" fill="#555" font-size="12">5</text>
-<text x="422.0" y="62" text-anchor="middle" fill="#555" font-size="12">6</text>
-<text x="470.0" y="62" text-anchor="middle" fill="#555" font-size="12">7</text>
-<text x="20" y="62" fill="#555" font-size="12">添字 i</text>
+<text x="134.0" y="62" text-anchor="middle" fill="#555">0</text>
+<text x="182.0" y="62" text-anchor="middle" fill="#555">1</text>
+<text x="230.0" y="62" text-anchor="middle" fill="#555">2</text>
+<text x="278.0" y="62" text-anchor="middle" fill="#555">3</text>
+<text x="326.0" y="62" text-anchor="middle" fill="#555">4</text>
+<text x="374.0" y="62" text-anchor="middle" fill="#555">5</text>
+<text x="422.0" y="62" text-anchor="middle" fill="#555">6</text>
+<text x="470.0" y="62" text-anchor="middle" fill="#555">7</text>
+<text x="20" y="62" fill="#555">添字 i</text>
 <text x="20" y="98" fill="#222">dp[i]</text>
 <rect x="110" y="70" width="48" height="40" fill="#ffffff" stroke="#666" stroke-width="1.2"/>
 <text x="134.0" y="96" text-anchor="middle" fill="#222" font-weight="bold">1</text>
@@ -29,42 +29,42 @@
 <rect x="446" y="70" width="48" height="40" fill="#fff4cc" stroke="#9a6a00" stroke-width="2" stroke-dasharray="5,3"/>
 <text x="470.0" y="96" text-anchor="middle" fill="#222" font-weight="bold">?</text>
 <path d="M256,118 L256,126 L396,126 L396,118" fill="none" stroke="#1f4e9a" stroke-width="2"/>
-<text x="326.0" y="144" text-anchor="middle" fill="#1f4e9a" font-size="13">遷移元 [3, 6)：1 + 2 + 2 = 5</text>
-<text x="20" y="172" fill="#555" font-size="12">S[k] = dp[0] + … + dp[k−1]（境界 k の下に置く）</text>
+<text x="326.0" y="144" text-anchor="middle" fill="#1f4e9a">遷移元 [3, 6)：1 + 2 + 2 = 5</text>
+<text x="20" y="306" fill="#555">S[k] = dp[0] + … + dp[k−1]（境界 k の下に置く）</text>
 <text x="20" y="226" fill="#222">S[k]</text>
 <rect x="90.0" y="200" width="40" height="40" fill="#ffffff" stroke="#666" stroke-width="1.2"/>
 <text x="110.0" y="226" text-anchor="middle" fill="#222" font-weight="bold">0</text>
-<text x="110.0" y="256" text-anchor="middle" fill="#555" font-size="12">0</text>
-<line x1="110" y1="110" x2="110" y2="200" stroke="#ccc" stroke-width="1" stroke-dasharray="2,3"/>
+<text x="110.0" y="258" text-anchor="middle" fill="#555">0</text>
+<line x1="110" y1="110" x2="110" y2="128" stroke="#ccc" stroke-width="1" stroke-dasharray="2,3"/><line x1="110" y1="152" x2="110" y2="200" stroke="#ccc" stroke-width="1" stroke-dasharray="2,3"/>
 <rect x="138.0" y="200" width="40" height="40" fill="#ffffff" stroke="#666" stroke-width="1.2"/>
 <text x="158.0" y="226" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<text x="158.0" y="256" text-anchor="middle" fill="#555" font-size="12">1</text>
-<line x1="158" y1="110" x2="158" y2="200" stroke="#ccc" stroke-width="1" stroke-dasharray="2,3"/>
+<text x="158.0" y="258" text-anchor="middle" fill="#555">1</text>
+<line x1="158" y1="110" x2="158" y2="128" stroke="#ccc" stroke-width="1" stroke-dasharray="2,3"/><line x1="158" y1="152" x2="158" y2="200" stroke="#ccc" stroke-width="1" stroke-dasharray="2,3"/>
 <rect x="186.0" y="200" width="40" height="40" fill="#ffffff" stroke="#666" stroke-width="1.2"/>
 <text x="206.0" y="226" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<text x="206.0" y="256" text-anchor="middle" fill="#555" font-size="12">2</text>
-<line x1="206" y1="110" x2="206" y2="200" stroke="#ccc" stroke-width="1" stroke-dasharray="2,3"/>
+<text x="206.0" y="258" text-anchor="middle" fill="#555">2</text>
+<line x1="206" y1="110" x2="206" y2="128" stroke="#ccc" stroke-width="1" stroke-dasharray="2,3"/><line x1="206" y1="152" x2="206" y2="200" stroke="#ccc" stroke-width="1" stroke-dasharray="2,3"/>
 <rect x="234.0" y="200" width="40" height="40" fill="url(#hatch)" stroke="#1f4e9a" stroke-width="2.5"/>
 <text x="254.0" y="226" text-anchor="middle" fill="#222" font-weight="bold">2</text>
-<text x="254.0" y="256" text-anchor="middle" fill="#555" font-size="12">3</text>
-<line x1="254" y1="110" x2="254" y2="200" stroke="#ccc" stroke-width="1" stroke-dasharray="2,3"/>
+<text x="254.0" y="258" text-anchor="middle" fill="#555">3</text>
+<line x1="254" y1="110" x2="254" y2="128" stroke="#ccc" stroke-width="1" stroke-dasharray="2,3"/><line x1="254" y1="152" x2="254" y2="200" stroke="#ccc" stroke-width="1" stroke-dasharray="2,3"/>
 <rect x="282.0" y="200" width="40" height="40" fill="#ffffff" stroke="#666" stroke-width="1.2"/>
 <text x="302.0" y="226" text-anchor="middle" fill="#222" font-weight="bold">3</text>
-<text x="302.0" y="256" text-anchor="middle" fill="#555" font-size="12">4</text>
-<line x1="302" y1="110" x2="302" y2="200" stroke="#ccc" stroke-width="1" stroke-dasharray="2,3"/>
+<text x="302.0" y="258" text-anchor="middle" fill="#555">4</text>
+<line x1="302" y1="110" x2="302" y2="128" stroke="#ccc" stroke-width="1" stroke-dasharray="2,3"/><line x1="302" y1="152" x2="302" y2="200" stroke="#ccc" stroke-width="1" stroke-dasharray="2,3"/>
 <rect x="330.0" y="200" width="40" height="40" fill="#ffffff" stroke="#666" stroke-width="1.2"/>
 <text x="350.0" y="226" text-anchor="middle" fill="#222" font-weight="bold">5</text>
-<text x="350.0" y="256" text-anchor="middle" fill="#555" font-size="12">5</text>
-<line x1="350" y1="110" x2="350" y2="200" stroke="#ccc" stroke-width="1" stroke-dasharray="2,3"/>
+<text x="350.0" y="258" text-anchor="middle" fill="#555">5</text>
+<line x1="350" y1="110" x2="350" y2="128" stroke="#ccc" stroke-width="1" stroke-dasharray="2,3"/><line x1="350" y1="152" x2="350" y2="200" stroke="#ccc" stroke-width="1" stroke-dasharray="2,3"/>
 <rect x="378.0" y="200" width="40" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
 <text x="398.0" y="226" text-anchor="middle" fill="#222" font-weight="bold">7</text>
-<text x="398.0" y="256" text-anchor="middle" fill="#555" font-size="12">6</text>
-<line x1="398" y1="110" x2="398" y2="200" stroke="#ccc" stroke-width="1" stroke-dasharray="2,3"/>
+<text x="398.0" y="258" text-anchor="middle" fill="#555">6</text>
+<line x1="398" y1="110" x2="398" y2="128" stroke="#ccc" stroke-width="1" stroke-dasharray="2,3"/><line x1="398" y1="152" x2="398" y2="200" stroke="#ccc" stroke-width="1" stroke-dasharray="2,3"/>
 <rect x="426.0" y="200" width="40" height="40" fill="#ffffff" stroke="#666" stroke-width="1.2"/>
 <text x="446.0" y="226" text-anchor="middle" fill="#222" font-weight="bold">11</text>
-<text x="446.0" y="256" text-anchor="middle" fill="#555" font-size="12">7</text>
-<line x1="446" y1="110" x2="446" y2="200" stroke="#ccc" stroke-width="1" stroke-dasharray="2,3"/>
-<text x="398" y="196" text-anchor="middle" fill="#1f4e9a" font-size="12">足す</text>
-<text x="254" y="196" text-anchor="middle" fill="#1f4e9a" font-size="12">引く</text>
-<text x="20" y="300" fill="#222">dp[7] = S[6] − S[3] = 7 − 2 = 5。区間の長さによらず 2 つの値の差で済む</text>
+<text x="446.0" y="258" text-anchor="middle" fill="#555">7</text>
+<line x1="446" y1="110" x2="446" y2="128" stroke="#ccc" stroke-width="1" stroke-dasharray="2,3"/><line x1="446" y1="152" x2="446" y2="200" stroke="#ccc" stroke-width="1" stroke-dasharray="2,3"/>
+<text x="398" y="280" text-anchor="middle" fill="#1f4e9a">足す</text>
+<text x="254" y="280" text-anchor="middle" fill="#1f4e9a">引く</text>
+<text x="20" y="334" fill="#222">dp[7] = S[6] − S[3] = 7 − 2 = 5。区間の長さによらず 2 つの値の差で済む</text>
 </svg>

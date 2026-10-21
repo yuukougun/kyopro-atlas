@@ -41,7 +41,11 @@ int main() {
     vector<int> par(n, -1), order(1, 0), sz(n, 1);
     for (int i = 0; i < (int)order.size(); i++)
         for (int to : g[order[i]])
-            if (to != par[order[i]] && to != 0) par[to] = order[i], order.push_back(to);
+            // 根 0 の親は -1 なので、根へ戻る辺は to != 0 で除く
+            if (to != par[order[i]] && to != 0) {
+                par[to] = order[i];
+                order.push_back(to);
+            }
     for (int i = n - 1; i >= 1; i--) sz[par[order[i]]] += sz[order[i]];
 
     mint fact = 1, prod = 1;

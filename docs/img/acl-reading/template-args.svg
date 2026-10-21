@@ -1,54 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 400" width="720" height="400" font-family="sans-serif" font-size="14">
-  <rect x="0" y="0" width="720" height="400" fill="#ffffff"/>
-  <!-- 上の行：テンプレート引数 -->
-  <text x="20" y="34" font-size="15" fill="#000">lazy_segtree&lt;</text>
-  <g font-family="monospace" font-size="15">
-    <rect x="130" y="14" width="40" height="30" rx="4" fill="#e8f0fe" stroke="#1a56c4" stroke-width="1.5"/>
-    <text x="150" y="34" text-anchor="middle">S</text>
-    <rect x="180" y="14" width="44" height="30" rx="4" fill="#e8f0fe" stroke="#1a56c4" stroke-width="1.5"/>
-    <text x="202" y="34" text-anchor="middle">op</text>
-    <rect x="234" y="14" width="40" height="30" rx="4" fill="#e8f0fe" stroke="#1a56c4" stroke-width="1.5"/>
-    <text x="254" y="34" text-anchor="middle">e</text>
-    <rect x="284" y="14" width="40" height="30" rx="4" fill="#fdf0e0" stroke="#b25e00" stroke-width="1.5" stroke-dasharray="5 3"/>
-    <text x="304" y="34" text-anchor="middle">F</text>
-    <rect x="334" y="14" width="86" height="30" rx="4" fill="#f0f0f0" stroke="#333" stroke-width="1.5" stroke-dasharray="1 3"/>
-    <text x="377" y="34" text-anchor="middle">mapping</text>
-    <rect x="430" y="14" width="118" height="30" rx="4" fill="#fdf0e0" stroke="#b25e00" stroke-width="1.5" stroke-dasharray="5 3"/>
-    <text x="489" y="34" text-anchor="middle">composition</text>
-    <rect x="558" y="14" width="40" height="30" rx="4" fill="#fdf0e0" stroke="#b25e00" stroke-width="1.5" stroke-dasharray="5 3"/>
-    <text x="578" y="34" text-anchor="middle">id</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 560" width="460" height="560" font-family="sans-serif" font-size="16">
+  <rect x="0" y="0" width="460" height="560" fill="#ffffff"/>
+  <!-- テンプレート引数（2 行に分けて並べる） -->
+  <g font-family="monospace" font-size="16">
+    <text x="20" y="35">lazy_segtree&lt;</text>
+    <rect x="160" y="14" width="40" height="30" rx="4" fill="#e8f0fe" stroke="#1a56c4" stroke-width="1.5"/>
+    <text x="180" y="35" text-anchor="middle">S</text>
+    <rect x="208" y="14" width="44" height="30" rx="4" fill="#e8f0fe" stroke="#1a56c4" stroke-width="1.5"/>
+    <text x="230" y="35" text-anchor="middle">op</text>
+    <rect x="260" y="14" width="40" height="30" rx="4" fill="#e8f0fe" stroke="#1a56c4" stroke-width="1.5"/>
+    <text x="280" y="35" text-anchor="middle">e</text>
+    <rect x="60" y="54" width="40" height="30" rx="4" fill="#fdf0e0" stroke="#b25e00" stroke-width="1.5" stroke-dasharray="5 3"/>
+    <text x="80" y="75" text-anchor="middle">F</text>
+    <rect x="108" y="54" width="90" height="30" rx="4" fill="#f0f0f0" stroke="#333" stroke-width="1.5" stroke-dasharray="1 3"/>
+    <text x="153" y="75" text-anchor="middle">mapping</text>
+    <rect x="206" y="54" width="126" height="30" rx="4" fill="#fdf0e0" stroke="#b25e00" stroke-width="1.5" stroke-dasharray="5 3"/>
+    <text x="269" y="75" text-anchor="middle">composition</text>
+    <rect x="340" y="54" width="40" height="30" rx="4" fill="#fdf0e0" stroke="#b25e00" stroke-width="1.5" stroke-dasharray="5 3"/>
+    <text x="360" y="75" text-anchor="middle">id</text>
+    <text x="386" y="75">&gt;</text>
   </g>
-  <text x="606" y="34" font-size="15">&gt;</text>
-  <text x="20" y="66" font-size="12" fill="#444">segtree&lt;S, op, e&gt; は左の 3 つ（値の側）だけを持つ</text>
+  <text x="20" y="112" font-size="15" fill="#333">segtree&lt;S, op, e&gt; は 1 行目の 3 つだけを持つ</text>
 
   <!-- 値の側 -->
-  <rect x="20" y="90" width="300" height="200" rx="8" fill="#ffffff" stroke="#1a56c4" stroke-width="2"/>
-  <text x="34" y="114" font-weight="bold" fill="#1a56c4">値の側（区間の集約）</text>
-  <text x="34" y="146">S：区間の情報の型（和と長さなど）</text>
-  <text x="34" y="176">op(a, b)：隣り合う区間をつなぐ</text>
-  <text x="54" y="196" font-size="12" fill="#444">結合法則 op(op(a, b), c) = op(a, op(b, c))</text>
-  <text x="34" y="226">e()：空の区間（op の単位元）</text>
-  <text x="54" y="246" font-size="12" fill="#444">op(e(), x) = op(x, e()) = x</text>
-  <text x="34" y="274" font-size="12" fill="#444">prod(l, r) が返すのは S</text>
-
-  <!-- 作用の側 -->
-  <rect x="400" y="90" width="300" height="200" rx="8" fill="#ffffff" stroke="#b25e00" stroke-width="2" stroke-dasharray="7 4"/>
-  <text x="414" y="114" font-weight="bold" fill="#b25e00">作用の側（区間への更新）</text>
-  <text x="414" y="146">F：更新の型（足す値など）</text>
-  <text x="414" y="176">composition(f, g)：</text>
-  <text x="434" y="196" font-size="13">g を施した後に f を施す 1 つの更新</text>
-  <text x="414" y="226">id()：何もしない更新</text>
-  <text x="434" y="246" font-size="12" fill="#444">composition(f, id()) = f</text>
-  <text x="414" y="274" font-size="12" fill="#444">apply(l, r, f) が受け取るのは F</text>
+  <rect x="20" y="130" width="420" height="150" rx="8" fill="#ffffff" stroke="#1a56c4" stroke-width="2"/>
+  <text x="36" y="158" font-weight="bold" fill="#1a56c4">値の側（区間の集約）</text>
+  <text x="36" y="190">S：区間の情報の型（和と長さなど）</text>
+  <text x="36" y="218">op(a, b)：隣り合う区間をつなぐ</text>
+  <text x="36" y="246">e()：空の区間（op の単位元）</text>
+  <text x="36" y="270" font-size="15" fill="#333">prod(l, r) が返すのは S</text>
 
   <!-- mapping の橋 -->
-  <line x1="400" y1="330" x2="320" y2="330" stroke="#333" stroke-width="2" stroke-dasharray="1 3"/>
-  <polygon points="320,330 332,324 332,336" fill="#333"/>
-  <text x="360" y="320" text-anchor="middle" font-family="monospace">mapping(f, x)</text>
-  <text x="360" y="356" text-anchor="middle" font-size="13">更新 f を区間の情報 x に施した S を返す（引数は F が先）</text>
-  <line x1="170" y1="290" x2="170" y2="330" stroke="#1a56c4" stroke-width="1.5"/>
-  <line x1="170" y1="330" x2="320" y2="330" stroke="#1a56c4" stroke-width="1.5"/>
-  <line x1="550" y1="290" x2="550" y2="330" stroke="#b25e00" stroke-width="1.5" stroke-dasharray="5 3"/>
-  <line x1="550" y1="330" x2="400" y2="330" stroke="#b25e00" stroke-width="1.5" stroke-dasharray="5 3"/>
-  <text x="20" y="390" font-size="12" fill="#444">実線の枠＝値の側、破線の枠＝作用の側、点線＝両方をつなぐ mapping</text>
+  <line x1="230" y1="372" x2="230" y2="290" stroke="#333" stroke-width="2" stroke-dasharray="1 3"/>
+  <polygon points="230,282 224,294 236,294" fill="#333"/>
+  <text x="246" y="318" font-family="monospace">mapping(f, x)</text>
+  <text x="246" y="342" font-size="15">f を x に施した S を返す</text>
+  <text x="246" y="362" font-size="15">（引数は F が先）</text>
+
+  <!-- 作用の側 -->
+  <rect x="20" y="380" width="420" height="150" rx="8" fill="#ffffff" stroke="#b25e00" stroke-width="2" stroke-dasharray="7 4"/>
+  <text x="36" y="408" font-weight="bold" fill="#b25e00">作用の側（区間への更新）</text>
+  <text x="36" y="440">F：更新の型（足す値など）</text>
+  <text x="36" y="468">composition(f, g)：g の後に f を施す更新</text>
+  <text x="36" y="496">id()：何もしない更新</text>
+  <text x="36" y="520" font-size="15" fill="#333">apply(l, r, f) が受け取るのは F</text>
+
+  <text x="20" y="552" font-size="14" fill="#333">実線＝値の側、破線＝作用の側、点線＝mapping</text>
 </svg>

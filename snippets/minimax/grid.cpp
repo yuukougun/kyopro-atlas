@@ -17,7 +17,7 @@ int main() {
     for (int i = h - 1; i >= 0; i--) {
         for (int j = w - 1; j >= 0; j--) {
             if (i == h - 1 && j == w - 1) continue;
-            int best = INT_MIN;  // 動ける手が少なくとも 1 つあるので必ず更新される
+            int best = INT_MIN;  // 動ける手が少なくとも 1 つあるので必ず更新され、INT_MIN のまま反転されることはない
             if (i + 1 < h) best = max(best, gain(i + 1, j) - f[i + 1][j]);
             if (j + 1 < w) best = max(best, gain(i, j + 1) - f[i][j + 1]);
             f[i][j] = best;

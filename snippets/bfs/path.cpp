@@ -32,14 +32,16 @@ int main() {
             que.push(v);
         }
     }
+    // --8<-- [end:core]
 
+    // --8<-- [start:restore]
     // 経路復元：t から親をたどって s まで戻り、最後に反転する
     vector<int> path;
     if (dist[t] != -1) {
         for (int v = t; v != -1; v = par[v]) path.push_back(v);
         reverse(path.begin(), path.end());
     }
-    // --8<-- [end:core]
+    // --8<-- [end:restore]
 
     cout << dist[t] << '\n';
     if (dist[t] != -1) {

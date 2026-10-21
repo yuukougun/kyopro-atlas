@@ -1,0 +1,10 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # N = 2：1 人で足りる。当たりが 2 番（番号 1）なら "1"
+  - {input: "2\n1\n", output: "1\n1 2\n2\n"}
+  # N = 5：3 人。当たりが 5 番（番号 4 = 100）なら "001"
+  - {input: "5\n001\n", output: "3\n2 2 4\n2 3 4\n1 5\n5\n"}
+  # N = 8：3 人。当たりが 1 番（番号 0）なら全員 0
+  - {input: "8\n000\n", output: "3\n4 2 4 6 8\n4 3 4 7 8\n4 5 6 7 8\n1\n"}

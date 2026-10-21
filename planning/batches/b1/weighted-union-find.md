@@ -36,3 +36,9 @@
 - 「経路圧縮だけ、または union by size だけでも、ならし $O(\log N)$」「$\alpha$ は実用上 4 以下」は記憶に基づく（Union-Find のページと同じ内容になるはず）。union-find のページが draft になったら、計算量の節（`../ds/union-find.md#complexity`）へのリンクに置き換えるとよい
 - 一般化の節で Library Checker の Unionfind with Potential（Non-Commutative Group）に触れたが、judge.yosupo.jp の問題ページは開いていない。題名と内容（可換でない演算のポテンシャル）は front matter の verify の id から書いた。確認を検証役に頼みたい
 - 前提の union-find・関連の bipartite-graph・difference-constraints・dfs・union-find-applications・small-to-large はどれも stub なので、節へのリンクは張らずページへのリンクだけにした
+
+## 検証の指摘への対応
+
+- 直した：指摘 1（乱数の試験を $n \le 40$・質問 80 回に広げた）、指摘 2（compression.svg の左右の題をそれぞれ 2 行に分け、右の題を x = 370 に移した。中身が空の text 3 つを消した）、指摘 4（結合法則の説明を「どこで区切ってまとめても同じ」に直した）、指摘 5（$M$ を定義し、$Q$ を「情報と質問を合わせた数」とした）、指摘 6（Library Checker の問題が $2 \times 2$ 行列の積であることを書いた）、指摘 7（merge.svg の題の添字を tspan の下付きにした）
+- 採らなかった：指摘 3（`#potential` のリンク）は用語集が共有ファイルで執筆者は書けないため、リンクは残した。上の「用語集への提案」のポテンシャルをメインがバッチの終わりに用語集へ足してほしい（足さない場合はリンクを外す必要がある）
+- 再検査：check_pages（エラー 0・警告 0）、fix_problems --check（直すべき行 0）、check_snippets（2 件一致）、textlint（エラー 0・警告 6。前と同じ箇所）

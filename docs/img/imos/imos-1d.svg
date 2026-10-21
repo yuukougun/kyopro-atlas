@@ -2,16 +2,16 @@
 <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#333"/></marker></defs>
 <rect width="100%" height="100%" fill="#ffffff"/>
 <text x="20" y="26" fill="#222">操作 1：[1, 5) に +1　　操作 2：[3, 7) に +2（N = 8、0-indexed）</text>
-<text x="146.0" y="56" text-anchor="middle" fill="#555" font-size="12">0</text>
-<text x="198.0" y="56" text-anchor="middle" fill="#555" font-size="12">1</text>
-<text x="250.0" y="56" text-anchor="middle" fill="#555" font-size="12">2</text>
-<text x="302.0" y="56" text-anchor="middle" fill="#555" font-size="12">3</text>
-<text x="354.0" y="56" text-anchor="middle" fill="#555" font-size="12">4</text>
-<text x="406.0" y="56" text-anchor="middle" fill="#555" font-size="12">5</text>
-<text x="458.0" y="56" text-anchor="middle" fill="#555" font-size="12">6</text>
-<text x="510.0" y="56" text-anchor="middle" fill="#555" font-size="12">7</text>
-<text x="562.0" y="56" text-anchor="middle" fill="#555" font-size="12">8</text>
-<text x="20" y="56" fill="#555" font-size="12">添字 i</text>
+<text x="146.0" y="56" text-anchor="middle" fill="#555" font-size="14">0</text>
+<text x="198.0" y="56" text-anchor="middle" fill="#555" font-size="14">1</text>
+<text x="250.0" y="56" text-anchor="middle" fill="#555" font-size="14">2</text>
+<text x="302.0" y="56" text-anchor="middle" fill="#555" font-size="14">3</text>
+<text x="354.0" y="56" text-anchor="middle" fill="#555" font-size="14">4</text>
+<text x="406.0" y="56" text-anchor="middle" fill="#555" font-size="14">5</text>
+<text x="458.0" y="56" text-anchor="middle" fill="#555" font-size="14">6</text>
+<text x="510.0" y="56" text-anchor="middle" fill="#555" font-size="14">7</text>
+<text x="562.0" y="56" text-anchor="middle" fill="#555" font-size="14">8</text>
+<text x="20" y="56" fill="#555" font-size="14">添字 i</text>
 <line x1="176" y1="80" x2="376" y2="80" stroke="#1f4e9a" stroke-width="4" />
 <line x1="176" y1="73" x2="176" y2="87" stroke="#1f4e9a" stroke-width="2"/>
 <circle cx="380" cy="80" r="5" fill="#ffffff" stroke="#1f4e9a" stroke-width="2"/>
@@ -39,7 +39,7 @@
 <text x="510.0" y="156" text-anchor="middle" fill="#222" font-weight="bold">−2</text>
 <rect x="536" y="130" width="52" height="40" fill="#ffffff" stroke="#b25b00" stroke-width="1.5"/>
 <text x="562.0" y="156" text-anchor="middle" fill="#222" font-weight="normal">0</text>
-<text x="120" y="194" fill="#555" font-size="12">D[1] += 1、D[5] −= 1、D[3] += 2、D[7] −= 2（D は N + 1 = 9 個）</text>
+<text x="120" y="194" fill="#555" font-size="14">D[1] += 1、D[5] −= 1、D[3] += 2、D[7] −= 2（D は N + 1 = 9 個）</text>
 <line x1="146.0" y1="204" x2="146.0" y2="226" stroke="#333" stroke-width="1.2" marker-end="url(#ar)"/>
 <line x1="198.0" y1="204" x2="198.0" y2="226" stroke="#333" stroke-width="1.2" marker-end="url(#ar)"/>
 <line x1="250.0" y1="204" x2="250.0" y2="226" stroke="#333" stroke-width="1.2" marker-end="url(#ar)"/>
@@ -48,7 +48,7 @@
 <line x1="406.0" y1="204" x2="406.0" y2="226" stroke="#333" stroke-width="1.2" marker-end="url(#ar)"/>
 <line x1="458.0" y1="204" x2="458.0" y2="226" stroke="#333" stroke-width="1.2" marker-end="url(#ar)"/>
 <line x1="510.0" y1="204" x2="510.0" y2="226" stroke="#333" stroke-width="1.2" marker-end="url(#ar)"/>
-<text x="542" y="222" fill="#555" font-size="12">左から累積</text>
+<text x="542" y="222" fill="#555" font-size="14">左から累積</text>
 <text x="20" y="258" fill="#222">A（累積和）</text>
 <rect x="120" y="232" width="52" height="40" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.5"/>
 <text x="146.0" y="258" text-anchor="middle" fill="#222" font-weight="normal">0</text>
@@ -66,6 +66,6 @@
 <text x="458.0" y="258" text-anchor="middle" fill="#222" font-weight="bold">2</text>
 <rect x="484" y="232" width="52" height="40" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.5"/>
 <text x="510.0" y="258" text-anchor="middle" fill="#222" font-weight="normal">0</text>
-<text x="20" y="300" fill="#555" font-size="12">A[i] = D[0] + … + D[i]。[1, 5) と [3, 7) が重なる 3・4 は 1 + 2 = 3、</text>
-<text x="20" y="318" fill="#555" font-size="12">どちらにも入らない 0・7 は 0。D[8] は累積に使わない（番兵）</text>
+<text x="20" y="300" fill="#555" font-size="14">A[i] = D[0] + … + D[i]。[1, 5) と [3, 7) が重なる 3・4 は 1 + 2 = 3、</text>
+<text x="20" y="318" fill="#555" font-size="14">どちらにも入らない 0・7 は 0。D[8] は累積に使わない（番兵）</text>
 </svg>

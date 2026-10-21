@@ -13,7 +13,7 @@ search:
 
 ## インタラクティブ問題（interactive） {#interactive}
 
-- id：`interactive`　レベル：基礎　段階：stub　type：technique
+- id：`interactive`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/misc/interactive/
 - 別名：対話型、インタラクティブ、ジャッジとの対話、質問回数、インタラクティブの二分探索、interactive problem
 - 種類：二分探索、実装・C++

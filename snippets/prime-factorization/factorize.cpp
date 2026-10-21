@@ -15,7 +15,7 @@ vector<pair<long long, int>> factorize(long long n) {
         }
         res.push_back({i, e});  // ここで見つかる i は必ず素数
     }
-    if (n > 1) res.push_back({n, 1});  // 残りは √(元の n) を超える素数 1 個
+    if (n > 1) res.push_back({n, 1});  // 残りが 1 より大きければ素数 1 個（指数 1）
     return res;
 }
 // --8<-- [end:core]

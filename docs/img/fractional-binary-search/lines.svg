@@ -32,7 +32,7 @@
 <circle cx="494.0" cy="217.5" r="5" fill="#ffffff" stroke="#222" stroke-width="2"/>
 <text x="604.0" y="208.4" fill="#1f4e9a" font-size="13">A</text>
 <text x="604.0" y="243.4" fill="#b5462a" font-size="13">B</text>
-<text x="319.8" y="217.1" fill="#2a7a3b" font-size="13">C</text>
+<text x="96" y="150" fill="#2a7a3b" font-size="13">C</text>
 <line x1="90" y1="268" x2="120" y2="268" stroke="#1f4e9a" stroke-width="2"/>
 <text x="128" y="273" fill="#222" font-size="12">A：4 − x</text>
 <line x1="90" y1="288" x2="120" y2="288" stroke="#b5462a" stroke-width="2" stroke-dasharray="8 4"/>

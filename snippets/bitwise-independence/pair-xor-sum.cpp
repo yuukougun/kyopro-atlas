@@ -1,6 +1,7 @@
 // bit ごとの寄与：すべてのペアの XOR の和と、長さ 2 以上のすべての区間の XOR の和。
 // 入力：n と a[0..n-1]（0 <= a[i] < 2^60）。出力：1 行目にペアの和を 10^9+7 で割った余り、
-// 2 行目に区間の和（a[i] < 2^30・n <= 2×10^5 程度なら long long に収まる範囲で使う）。
+// 2 行目に区間の和。区間の和は最大で約 (n+1)^2/4 × 2^30 になるので、long long に収まる
+// a[i] < 2^30 かつ n <= 10^5 のときだけ計算し、それ以外は -1 を出す。
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -49,25 +50,28 @@ int main() {
     vector<long long> a(n);
     for (int i = 0; i < n; i++) cin >> a[i];
 
+    // 区間の和が long long に収まる範囲か
+    bool small = n <= 100000;
+    for (long long x : a) small = small && x < (1LL << 30);
+
     // 小さい入力では素朴な計算と照らし合わせる
     if (n <= 300) {
-        long long naive_pair = 0, naive_range = 0;
+        long long naive_pair = 0;
         for (int i = 0; i < n; i++)
             for (int j = i + 1; j < n; j++) naive_pair = (naive_pair + (a[i] ^ a[j]) % MOD) % MOD;
-        for (int l = 0; l < n; l++) {
-            long long x = a[l];
-            for (int r = l + 1; r < n; r++) {
-                x ^= a[r];
-                naive_range += x;
-            }
-        }
         assert(pair_xor_sum(a) == naive_pair);
-        bool small = true;
-        for (long long x : a) small = small && x < (1LL << 30);
-        if (small) assert(range_xor_sum(a) == naive_range);
+        if (small) {
+            long long naive_range = 0;
+            for (int l = 0; l < n; l++) {
+                long long x = a[l];
+                for (int r = l + 1; r < n; r++) {
+                    x ^= a[r];
+                    naive_range += x;
+                }
+            }
+            assert(range_xor_sum(a) == naive_range);
+        }
     }
     cout << pair_xor_sum(a) << '\n';
-    bool small = true;
-    for (long long x : a) small = small && x < (1LL << 30);
     cout << (small ? range_xor_sum(a) : -1) << '\n';
 }

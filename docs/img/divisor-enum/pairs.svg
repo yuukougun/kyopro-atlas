@@ -25,10 +25,10 @@
 <line x1="440" y1="112" x2="440" y2="186" stroke="#222" stroke-width="1.5"/>
 <text x="440" y="99" text-anchor="middle" fill="#222">4</text>
 <text x="440" y="209" text-anchor="middle" fill="#222">9</text>
+<line x1="520" y1="56" x2="520" y2="228" stroke="#555" stroke-width="1.5" stroke-dasharray="3 3"/>
+<text x="520" y="50" text-anchor="middle" font-size="13" fill="#555">√36 = 6</text>
 <rect x="496" y="76" width="48" height="146" fill="#f3f3f3" stroke="#222" stroke-width="2" stroke-dasharray="6 4"/>
 <text x="520" y="154" text-anchor="middle" font-size="18" fill="#222">6</text>
-<line x1="480" y1="56" x2="480" y2="228" stroke="#555" stroke-width="1.5" stroke-dasharray="3 3"/>
-<text x="480" y="50" text-anchor="middle" font-size="13" fill="#555">√36 = 6</text>
 <text x="520" y="246" text-anchor="middle" font-size="13" fill="#222">d = N/d</text>
 <text x="520" y="264" text-anchor="middle" font-size="13" fill="#222">1 回だけ数える</text>
 <text x="320.0" y="282" text-anchor="middle" font-size="13" fill="#222">i = 1〜6 だけ試せば、上の段から下の段が N/i で決まる</text>

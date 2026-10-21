@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 280" font-family="sans-serif" font-size="16">
+  <rect width="640" height="280" fill="#ffffff"/>
+  <!-- tree edges -->
+  <g stroke="#333333" stroke-width="2.5">
+    <line x1="80" y1="190" x2="200" y2="110"/>
+    <line x1="200" y1="110" x2="270" y2="190"/>
+    <line x1="200" y1="110" x2="350" y2="110"/>
+    <line x1="350" y1="110" x2="480" y2="190"/>
+  </g>
+  <!-- non-tree pair -->
+  <path d="M 80 190 Q 280 300 480 190" fill="none" stroke="#c0392b" stroke-width="2" stroke-dasharray="7 5"/>
+  <!-- weights -->
+  <g fill="#333333">
+    <text x="125" y="140">2</text>
+    <text x="245" y="142">1</text>
+    <text x="268" y="100">3</text>
+    <text x="422" y="140">2</text>
+  </g>
+  <text x="250" y="270" fill="#c0392b">d(0, 4) = 2 + 3 + 2 = 7</text>
+  <!-- vertices -->
+  <g fill="#ffffff" stroke="#333333" stroke-width="2">
+    <circle cx="80" cy="190" r="18"/>
+    <circle cx="200" cy="110" r="18"/>
+    <circle cx="270" cy="190" r="18"/>
+    <circle cx="350" cy="110" r="18"/>
+    <circle cx="480" cy="190" r="18"/>
+  </g>
+  <g text-anchor="middle" fill="#000000">
+    <text x="80" y="196">0</text>
+    <text x="200" y="116">1</text>
+    <text x="270" y="196">2</text>
+    <text x="350" y="116">3</text>
+    <text x="480" y="196">4</text>
+  </g>
+  <!-- legend -->
+  <g font-size="16" fill="#333333">
+    <line x1="500" y1="40" x2="540" y2="40" stroke="#333333" stroke-width="2.5"/>
+    <text x="548" y="45">木の辺</text>
+    <line x1="500" y1="66" x2="540" y2="66" stroke="#c0392b" stroke-width="2" stroke-dasharray="7 5"/>
+    <text x="548" y="71">木にない組</text>
+  </g>
+  <text x="20" y="34" font-size="16" fill="#333333">木にない組の距離は道の辺の和なので、道のどの辺よりも長い</text>
+</svg>

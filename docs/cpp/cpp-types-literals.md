@@ -42,13 +42,13 @@ atcoder: true
 別名：整数の型・long long・LL・ULL・桁区切り・2 進リテラル・0uz・auto の推論・using ll = long long・static_cast・INF・numeric_limits・LLONG_MAX・INT_MAX・0x3f3f3f3f・1LL << 60・double・long double・1e18・浮動小数点数の型
 <!-- textlint-enable -->
 
-数の型とリテラルは、C++ で値を持つときの土台である。型を誤ると、コンパイルは通っても値があふれたり丸められたりして WA になる。このページは、AtCoder の GCC 15.2（`-std=gnu++23`）と手元の g++-13・g++-15 で確かめた、型の選び方と型のずれの典型を並べる。あふれたときに何が起きるかと防ぎ方の一覧は[整数オーバーフローと型の落とし穴](../cpp/cpp-integer-overflow.md)に任せる。
+数の型とリテラルは、C++ で値を持つときの土台である。型を誤ると、コンパイルは通っても値があふれたり丸められたりして WA になる。このページは、AtCoder と同じ GCC 15.2 の g++-15（`-std=gnu++23`）と g++-13 で確かめた、型の選び方と型のずれの典型を並べる。あふれたときに何が起きるかと防ぎ方の一覧は[整数のオーバーフローと __int128](../cpp/cpp-integer-overflow.md)に任せる。
 
 このページのコードは `#include <bits/stdc++.h>` と `using namespace std;` を前提にする。型の大きさは、AtCoder と手元の 64 bit の Linux（x86-64）でのものである。
 
 ## 整数の型と表せる範囲（int・long long・unsigned・size_t・int64_t） {#integer-types}
 
-競技プログラミングで使う整数の型は、ほぼ `int`（32 bit）と `long long`（64 bit）の 2 つである。目安は、値と途中の計算結果がすべて約 $2 \times 10^9$ 以内なら `int`、そうでなければ `long long` である。和や積が $10^9$ を超えそうなら、初めから `long long` で持つ。
+競技プログラミングで使う整数の型は、ほぼ `int`（32 bit）と `long long`（64 bit）の 2 つである。目安は、値と途中の計算結果がすべて `int` の上限（約 $2.1 \times 10^9$）以内なら `int`、そうでなければ `long long` である。入力が $10^9$ 以下でも、2 つ足すだけで上限を超えうるので、和や積は初めから `long long` で持つ。
 
 ![型ごとに正確に表せる整数の上限を対数の数直線に並べた図。int は約 2.1×10^9、double は 2^53、long long は約 9.2×10^18、__int128 は約 1.7×10^38。INF の候補 0x3f3f3f3f と 1LL << 60 は 2 倍しても型に収まる](../img/cpp-types-literals/ranges.svg)
 
@@ -65,9 +65,11 @@ atcoder: true
 | `unsigned`・`unsigned long long` | 32・64 bit | $0$ 〜 約 $4.3 \times 10^9$・$1.8 \times 10^{19}$ | bit 演算・ハッシュ |
 | `size_t` | 64 bit | $0$ 〜 約 $1.8 \times 10^{19}$ | `size()` の戻り値 |
 
+64 bit を超える値は、GCC の拡張の `__int128` で持てる（[整数のオーバーフローと __int128](../cpp/cpp-integer-overflow.md#int128)）。
+
 符号なしの型（`unsigned`・`size_t`）は、0 から 1 を引くと最大値に回り込む。bit 演算やハッシュのように回り込みを使う場面のほかは、符号付きの型で計算する。
 
-`size_t` と `int64_t` は別名で、64 bit の Linux では `size_t` が `unsigned long`、`int64_t` が `long` である。`long` と `long long` はどちらも 64 bit だが、C++ では別の型として扱われる。そのため、`int64_t` と `long long` を `max` に渡すとコンパイルエラーになる（`max` は 2 つの引数が同じ型であることを求める）。
+`size_t` と `int64_t` は型の別名（ほかの型に付けた名前）で、64 bit の Linux では `size_t` が `unsigned long`、`int64_t` が `long` である。`long` と `long long` はどちらも 64 bit だが、C++ では別の型として扱われる。そのため、`int64_t` と `long long` を `max` に渡すとコンパイルエラーになる（`max` は 2 つの引数が同じ型であることを求める）。
 
 ```cpp
 --8<-- "cpp-types-literals/int64-max-ng.cpp:core"
@@ -78,7 +80,7 @@ atcoder: true
 
 ## リテラルの書き方：1LL・ULL、桁区切り 1'000'000'007、2 進 0b1010、size_t の 0uz（C++23） {#literals}
 
-数をそのまま書いたもの（リテラル）にも型がある。接尾辞のない整数は `int` で、`int` に収まらなければ `long`、`long long` の順に広がる。`3000000000` は自動で `long` になるので、それ自体はあふれない。問題になるのは、小さな数どうしの計算が `int` のまま行われるときである。`1 << 40` は `int` のシフトで、`1LL << 40` と書いて初めて `long long` で計算される。
+数をそのまま書いたもの（リテラル）にも型がある。接尾辞のない 10 進の整数は `int` で、`int` に収まらなければ `long`、`long long` の順に広がる。16 進・8 進・2 進のリテラルは、`int` に収まらないとき、先に `unsigned int` を試す（`0x80000000` は `unsigned int`）。`3000000000` は自動で `long` になるので、それ自体はあふれない。問題になるのは、小さな数どうしの計算が `int` のまま行われるときである。`1 << 40` は `int` のシフトで、`1LL << 40` と書いて初めて `long long` で計算される。
 
 ```cpp
 --8<-- "cpp-types-literals/literals.cpp:core"
@@ -136,7 +138,7 @@ g++-15 のエラーは `expected primary-expression before 'long'` である。`
 
 キャストは値を別の型に変える書き方である。`static_cast<long long>(x)`・`(long long)x`・`(long long)(x)`（`using` の別名なら `ll(x)`）は、数の型の変換ではどれも同じ意味になる。`static_cast` は長いが、ポインタなど危ない変換を誤って書くとエラーにしてくれる。解説コードでは短い `(long long)x` が多い。
 
-大事なのは、どこで型を変えるかである。キャストは `*` より先に効くので、`(long long)a * b` は「`a` を `long long` にしてから掛ける」になり、積が正しく求まる。`(long long)(a * b)` は `int` のまま掛けてから広げるので、あふれた後では遅い。
+大事なのは、どこで型を変えるかである。キャストは `*` より先に効くので、`(long long)a * b` は「`a` を `long long` にしてから掛ける」になり、積が正しく求まる。`(long long)(a * b)` は `int` のまま掛けてから広げるので、あふれた後では遅い（[整数のオーバーフローと __int128](../cpp/cpp-integer-overflow.md#int-product)）。
 
 ```cpp
 --8<-- "cpp-types-literals/cast.cpp:core"
@@ -144,15 +146,15 @@ g++-15 のエラーは `expected primary-expression before 'long'` である。`
 
 入力 `100000 100000` に対して、3 つの書き方とも `10000000000`（$10^{10}$）を出す。
 
-- **小数から整数へ**：`(int)2.9` は 2、`(int)-2.9` は -2 で、0 に向かって切り捨てる（床関数ではない）。四捨五入は `llround(x)`、床は `floor(x)` を使う（[数の関数](../cpp/cpp-math-functions.md)）。変換先の型に収まらない値を変換するのは[未定義動作](../cpp/cpp-undefined-behavior.md)である
+- **小数から整数へ**：`(int)2.9` は 2、`(int)-2.9` は -2 で、0 に向かって切り捨てる（床関数ではない）。四捨五入は `llround(x)`、床は `floor(x)` を使う（[数・ビット・乱数の関数](../cpp/cpp-math-functions.md)）。変換先の型に収まらない値を変換するのは[未定義動作](../cpp/cpp-undefined-behavior.md)である
 - **版**：どの書き方も C++ の最初からある。g++-13・g++-15 で、上の出力は同じだった
 - **落とし穴**：`(long long)(a * b)` のように、計算の結果だけを広げても直らない。広げるのは計算に入る前の値である
 
 ## INF の決め方：numeric_limits<T>::max()・1LL << 60・0x3f3f3f3f と、INF + INF があふれるか（ライブラリの雛形の値の比較も） {#inf}
 
-INF は、最短路の「まだ到達していない」や、最小値を求める DP の初期値に置く大きな値である。INF に辺の重みや別の INF を足すことがあるので、選ぶ基準は 2 つある。1 つは、本物の答えより確実に大きいこと。もう 1 つは、INF + INF（INF に答え程度の値を足したもの）が型の上限を超えないことである。
+INF は、最短路の「まだ到達していない」や、最小値を求める DP の初期値に置く大きな値である。INF に辺の重みや別の INF を足すことがあるので、選ぶ基準は 2 つある。1 つは、本物の答えより確実に大きいこと。もう 1 つは、INF に辺の重みや別の INF を足しても型の上限を超えないことで、目安は INF + INF である。
 
-[ダイクストラ法](../graph/dijkstra.md)の更新 `if (dist[u] + w < dist[v])` を、`dist[u]` が INF のまま行う実装は珍しくない。INF に型の最大値を使うと、ここで足し算があふれる。符号付き整数のあふれは未定義動作で、`-O2` では比較の結果が狂う。
+[ダイクストラ法](../graph/dijkstra.md)の更新 `if (dist[u] + w < dist[v])` を、`dist[u]` が INF のまま行う実装は珍しくない。INF に型の最大値を使うと、ここで足し算があふれる。符号付き整数のあふれは未定義動作で、多くは負の数に回り込んで比較が真になり、最適化によっては別の壊れ方もする（[未定義動作とダングリング](../cpp/cpp-undefined-behavior.md#what-is-ub)、[INF + INF のあふれ](../cpp/cpp-integer-overflow.md#edge-values)）。
 
 | 書き方 | 値 | INF + INF | 備考 |
 | --- | --- | --- | --- |
@@ -160,13 +162,13 @@ INF は、最短路の「まだ到達していない」や、最小値を求め�
 | `0x3f3f3f3f` | $1061109567$ | `int` に収まる | `memset` で配列を埋められる |
 | `1LL << 60` | 約 $1.15 \times 10^{18}$ | `long long` に収まる | 7 倍まで収まる |
 | `LLONG_MAX`（`numeric_limits<long long>::max()`） | 約 $9.2 \times 10^{18}$ | あふれる | 足さない用途だけ |
-| `1e18` | `double` | — | `long long INF = 1e18;` と型を書けば正確 |
+| `1e18` | $10^{18}$（`double`） | `long long` にすれば収まる（$2 \times 10^{18}$） | `long long INF = 1e18;` と型を書けば正確 |
 
 ```cpp
 --8<-- "cpp-types-literals/inf.cpp:core"
 ```
 
-`0x3f3f3f3f` は各バイトが同じ `0x3f` である。そのため、`memset(d, 0x3f, sizeof d)` で `int` の配列全体を INF で埋められる（`memset` はバイト単位で埋めるので、普通の値では使えない。[初期化の書き方](../cpp/cpp-initialization.md)）。
+`0x3f3f3f3f` は各バイトが同じ `0x3f` である。そのため、`memset(d, 0x3f, sizeof d)` で `int` の配列全体を INF で埋められる（`memset` はバイト単位で埋めるので、普通の値では使えない。[初期化と CTAD](../cpp/cpp-initialization.md#refill)）。
 
 `vector` なら `vector<long long> dist(n, INF)` で埋めればよいので、こだわる必要はない。
 
@@ -208,7 +210,7 @@ $2^{53} + 1$ を `double` にすると、+1 が消えて $2^{53}$ になる。`l
 
 - **使い分け**：答えが小数なら `double` を基本にする。`long double` は精度が 3 桁ほど増えるが遅い。`long long` の値どうしの比較を浮動小数点数で行うのは避け、整数のまま計算する
 - **版**：`long double` の大きさは環境で違う（Visual C++ では `double` と同じ 64 bit）。AtCoder と手元の g++ は x86-64 なので 64 bit の仮数部を持つ
-- **落とし穴**：`sqrt`・`pow` は `double` で計算するので、大きな整数に使うと誤差が出る（[数の関数](../cpp/cpp-math-functions.md)）。小数の出力は、`cout` の既定では有効数字 6 桁になる（[入出力](../cpp/cpp-io.md)）
+- **落とし穴**：`sqrt`・`pow` は `double` で計算するので、大きな整数に使うと誤差が出る（[数・ビット・乱数の関数](../cpp/cpp-math-functions.md#pow-sqrt)）。小数の出力は、`cout` の既定では有効数字 6 桁になる（[入出力と定数倍](../cpp/cpp-io.md#float-output)）
 
 ## 1e18 は double：(long long)1e18 + 1 は正確だが (long long)(1e18 + 1) は丸められる、auto INF = 1e18 も double {#double-1e18}
 
@@ -241,10 +243,10 @@ $2^{53} + 1$ を `double` にすると、+1 が消えて $2^{53}$ になる。`l
 
 対処は 2 つある。
 
-- **誤差を許す**：`abs(x - y) < EPS` なら等しいとみなす。`EPS` は値の大きさに合わせて決める（値が $10^9$ なら `double` の誤差は $10^{-7}$ 程度ある）。決め方は[誤差と整数での判定](../geometry/geometry-precision.md)に任せる
+- **誤差を許す**：`abs(x - y) < EPS` なら等しいとみなす。`EPS` は値の大きさに合わせて決める（値が $10^9$ なら `double` の誤差は $10^{-7}$ 程度ある）。決め方は[誤差の扱いと整数での処理](../geometry/geometry-precision.md#eps)に任せる
 - **整数で計算する**：入力が小数点以下 2 桁までなら、100 倍して整数で持つ。比べたい式を両辺に掛けて割り算をなくす（$a / b < c / d$ を $a d < c b$ にする）。誤差の心配がなくなるので、できるならこちらを選ぶ
 
-- **落とし穴**：小数の入力を `double` で読んでから `(long long)(x * 100)` で整数にすると、切り捨てで 1 小さくなることがある。`0.29 * 100` は `28.999…` になり、28 になる（g++-13・g++-15 で確かめた）。文字列で読んで小数点を除くか、`llround(x * 100)` で四捨五入する（手順は[誤差と整数での判定](../geometry/geometry-precision.md)）
+- **落とし穴**：小数の入力を `double` で読んでから `(long long)(x * 100)` で整数にすると、切り捨てで 1 小さくなることがある。`0.29 * 100` は `28.999…` になり、28 になる（g++-13・g++-15 で確かめた）。文字列で読んで小数点を除くか、`llround(x * 100)` で四捨五入する（手順は[誤差の扱いと整数での処理](../geometry/geometry-precision.md#scale-to-integer)）
 
 ```cpp
 --8<-- "cpp-types-literals/scale-round.cpp:core"
@@ -258,13 +260,13 @@ $2^{53} + 1$ を `double` にすると、+1 が消えて $2^{53}$ になる。`l
 --8<-- "cpp-types-literals/float128.cpp:core"
 ```
 
-- **版**：C++23。g++-13・g++-15 とも `-std=gnu++23` で使え、`-std=gnu++20` では `'float128_t' was not declared` でエラーになる。AtCoder の GCC 15.2 でも使える
+- **版**：C++23。AtCoder と同じ GCC 15.2 の g++-15 と g++-13 のどちらでも、`-std=gnu++23` で使える。`-std=gnu++20` では `'float128_t' was not declared` でエラーになる
 - **落とし穴**：`cout << x` は g++-13・g++-15 とも `ambiguous overload for 'operator<<'` でコンパイルエラーになった。`format("{:.30f}", x)` か、`double` に変換して出力する
 
 ## 確認問題 {#quiz}
 
 ??? question "確認問題：`int a = 100000, b = 100000;` のとき、`long long p = a * b;` は正しいか？"
-    正しくない。右辺の `a * b` は `int` どうしの積で、`int` のまま計算される。$10^{10}$ は上限を超えるのであふれる（未定義動作）。あふれた後で `long long` に入れても直らない。`(long long)a * b` か `1LL * a * b` と書き、掛ける前に広げる。
+    正しくない。右辺の `a * b` は `int` どうしの積で、`int` のまま計算される。$10^{10}$ は上限を超えるのであふれる（未定義動作）。あふれた後で `long long` に入れても直らない。`(long long)a * b` か `1LL * a * b` と書き、掛ける前に広げる（[整数のオーバーフローと __int128](../cpp/cpp-integer-overflow.md#int-product)）。
 
 ??? question "確認問題：`#define ll long long` の環境で、`ll(x)` の代わりに型を変えるにはどう書くか？"
     `(ll)x` か `static_cast<ll>(x)` と書く。`(long long)x` に置き換わるので通る。`ll(x)` は `long long(x)` になり、2 語の型名に関数形式のキャストは使えないのでエラーになる。`using ll = long long;` に変えれば `ll(x)` も通る。

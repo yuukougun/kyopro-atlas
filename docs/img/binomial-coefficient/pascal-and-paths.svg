@@ -1,75 +1,75 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 345" width="780" height="345" font-family="sans-serif">
-<rect x="0" y="0" width="780" height="345" fill="#ffffff"/>
-<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker></defs>
-<text x="240" y="28" font-size="17" text-anchor="middle" fill="#222">パスカルの三角形（行 n、左から k = 0, 1, …）</text>
-<text x="16" y="70" font-size="14" fill="#555">n = 0</text>
-<text x="16" y="118" font-size="14" fill="#555">n = 1</text>
-<text x="16" y="166" font-size="14" fill="#555">n = 2</text>
-<text x="16" y="214" font-size="14" fill="#555">n = 3</text>
-<text x="16" y="262" font-size="14" fill="#555">n = 4</text>
-<text x="16" y="310" font-size="14" fill="#555">n = 5</text>
-<line x1="192.6" y1="271.7" x2="202.4" y2="288.6" stroke="#c0392b" stroke-width="2.5" marker-end="url(#ar)"/>
-<line x1="231.4" y1="271.7" x2="221.6" y2="288.6" stroke="#c0392b" stroke-width="2.5" marker-end="url(#ar)"/>
-<text x="240.0" y="70.0" font-size="15" text-anchor="middle" fill="#222">1</text>
-<text x="212.0" y="118.0" font-size="15" text-anchor="middle" fill="#222">1</text>
-<text x="268.0" y="118.0" font-size="15" text-anchor="middle" fill="#222">1</text>
-<text x="184.0" y="166.0" font-size="15" text-anchor="middle" fill="#222">1</text>
-<text x="240.0" y="166.0" font-size="15" text-anchor="middle" fill="#222">2</text>
-<text x="296.0" y="166.0" font-size="15" text-anchor="middle" fill="#222">1</text>
-<text x="156.0" y="214.0" font-size="15" text-anchor="middle" fill="#222">1</text>
-<text x="212.0" y="214.0" font-size="15" text-anchor="middle" fill="#222">3</text>
-<text x="268.0" y="214.0" font-size="15" text-anchor="middle" fill="#222">3</text>
-<text x="324.0" y="214.0" font-size="15" text-anchor="middle" fill="#222">1</text>
-<text x="128.0" y="262.0" font-size="15" text-anchor="middle" fill="#222">1</text>
-<circle cx="184.0" cy="257.0" r="16" fill="#ffffff" stroke="#c0392b" stroke-width="2" stroke-dasharray="4 3"/>
-<text x="184.0" y="262.0" font-size="15" text-anchor="middle" fill="#222">4</text>
-<circle cx="240.0" cy="257.0" r="16" fill="#ffffff" stroke="#c0392b" stroke-width="2" stroke-dasharray="4 3"/>
-<text x="240.0" y="262.0" font-size="15" text-anchor="middle" fill="#222">6</text>
-<text x="296.0" y="262.0" font-size="15" text-anchor="middle" fill="#222">4</text>
-<text x="352.0" y="262.0" font-size="15" text-anchor="middle" fill="#222">1</text>
-<text x="100.0" y="310.0" font-size="15" text-anchor="middle" fill="#222">1</text>
-<text x="156.0" y="310.0" font-size="15" text-anchor="middle" fill="#222">5</text>
-<circle cx="212.0" cy="305.0" r="17" fill="#fdecea" stroke="#c0392b" stroke-width="2.5"/>
-<text x="212.0" y="310.0" font-size="15" text-anchor="middle" fill="#222">10</text>
-<text x="268.0" y="310.0" font-size="15" text-anchor="middle" fill="#222">10</text>
-<text x="324.0" y="310.0" font-size="15" text-anchor="middle" fill="#222">5</text>
-<text x="380.0" y="310.0" font-size="15" text-anchor="middle" fill="#222">1</text>
-<text x="240" y="337" font-size="14" text-anchor="middle" fill="#222">C(5, 2) = C(4, 1) + C(4, 2) = 4 + 6 = 10</text>
-<text x="600" y="28" font-size="17" text-anchor="middle" fill="#222">格子路の数（右か上に 1 歩ずつ）</text>
-<line x1="480" y1="265" x2="480" y2="105" stroke="#999" stroke-width="1.5"/>
-<line x1="560" y1="265" x2="560" y2="105" stroke="#999" stroke-width="1.5"/>
-<line x1="640" y1="265" x2="640" y2="105" stroke="#999" stroke-width="1.5"/>
-<line x1="720" y1="265" x2="720" y2="105" stroke="#999" stroke-width="1.5"/>
-<line x1="480" y1="265" x2="720" y2="265" stroke="#999" stroke-width="1.5"/>
-<line x1="480" y1="185" x2="720" y2="185" stroke="#999" stroke-width="1.5"/>
-<line x1="480" y1="105" x2="720" y2="105" stroke="#999" stroke-width="1.5"/>
-<line x1="657.0" y1="105.0" x2="701.0" y2="105.0" stroke="#c0392b" stroke-width="2.5" marker-end="url(#ar)"/>
-<line x1="720.0" y1="168.0" x2="720.0" y2="124.0" stroke="#c0392b" stroke-width="2.5" marker-end="url(#ar)"/>
-<circle cx="480.0" cy="265.0" r="15" fill="#ffffff" stroke="#888" stroke-width="1.2"/>
-<text x="480.0" y="270.0" font-size="15" text-anchor="middle" fill="#222">1</text>
-<circle cx="480.0" cy="185.0" r="15" fill="#ffffff" stroke="#888" stroke-width="1.2"/>
-<text x="480.0" y="190.0" font-size="15" text-anchor="middle" fill="#222">1</text>
-<circle cx="480.0" cy="105.0" r="15" fill="#ffffff" stroke="#888" stroke-width="1.2"/>
-<text x="480.0" y="110.0" font-size="15" text-anchor="middle" fill="#222">1</text>
-<circle cx="560.0" cy="265.0" r="15" fill="#ffffff" stroke="#888" stroke-width="1.2"/>
-<text x="560.0" y="270.0" font-size="15" text-anchor="middle" fill="#222">1</text>
-<circle cx="560.0" cy="185.0" r="15" fill="#ffffff" stroke="#888" stroke-width="1.2"/>
-<text x="560.0" y="190.0" font-size="15" text-anchor="middle" fill="#222">2</text>
-<circle cx="560.0" cy="105.0" r="15" fill="#ffffff" stroke="#888" stroke-width="1.2"/>
-<text x="560.0" y="110.0" font-size="15" text-anchor="middle" fill="#222">3</text>
-<circle cx="640.0" cy="265.0" r="15" fill="#ffffff" stroke="#888" stroke-width="1.2"/>
-<text x="640.0" y="270.0" font-size="15" text-anchor="middle" fill="#222">1</text>
-<circle cx="640.0" cy="185.0" r="15" fill="#ffffff" stroke="#888" stroke-width="1.2"/>
-<text x="640.0" y="190.0" font-size="15" text-anchor="middle" fill="#222">3</text>
-<circle cx="640.0" cy="105.0" r="16" fill="#ffffff" stroke="#c0392b" stroke-width="2" stroke-dasharray="4 3"/>
-<text x="640.0" y="110.0" font-size="15" text-anchor="middle" fill="#222">6</text>
-<circle cx="720.0" cy="265.0" r="15" fill="#ffffff" stroke="#888" stroke-width="1.2"/>
-<text x="720.0" y="270.0" font-size="15" text-anchor="middle" fill="#222">1</text>
-<circle cx="720.0" cy="185.0" r="16" fill="#ffffff" stroke="#c0392b" stroke-width="2" stroke-dasharray="4 3"/>
-<text x="720.0" y="190.0" font-size="15" text-anchor="middle" fill="#222">4</text>
-<circle cx="720.0" cy="105.0" r="17" fill="#fdecea" stroke="#c0392b" stroke-width="2.5"/>
-<text x="720.0" y="110.0" font-size="15" text-anchor="middle" fill="#222">10</text>
-<text x="480" y="303" font-size="13" text-anchor="middle" fill="#555">(0, 0)</text>
-<text x="720" y="79" font-size="13" text-anchor="middle" fill="#555">(3, 2)</text>
-<text x="600" y="337" font-size="14" text-anchor="middle" fill="#222">(3, 2) への経路 ＝ 左から 6 ＋ 下から 4 ＝ C(5, 2)</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 370" width="620" height="370" font-family="sans-serif">
+<rect x="0" y="0" width="620" height="370" fill="#ffffff"/>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker></defs>
+<text x="196" y="30" font-size="17" text-anchor="middle" fill="#222">パスカルの三角形（行 n・列 k）</text>
+<text x="6" y="75" font-size="15" fill="#555">n = 0</text>
+<text x="6" y="123" font-size="15" fill="#555">n = 1</text>
+<text x="6" y="171" font-size="15" fill="#555">n = 2</text>
+<text x="6" y="219" font-size="15" fill="#555">n = 3</text>
+<text x="6" y="267" font-size="15" fill="#555">n = 4</text>
+<text x="6" y="315" font-size="15" fill="#555">n = 5</text>
+<line x1="154.7" y1="275.4" x2="163.5" y2="293.0" stroke="#c0392b" stroke-width="2.5" marker-end="url(#ar)"/>
+<line x1="189.3" y1="275.4" x2="180.5" y2="293.0" stroke="#c0392b" stroke-width="2.5" marker-end="url(#ar)"/>
+<text x="196.0" y="76.0" font-size="18" text-anchor="middle" fill="#222">1</text>
+<text x="172.0" y="124.0" font-size="18" text-anchor="middle" fill="#222">1</text>
+<text x="220.0" y="124.0" font-size="18" text-anchor="middle" fill="#222">1</text>
+<text x="148.0" y="172.0" font-size="18" text-anchor="middle" fill="#222">1</text>
+<text x="196.0" y="172.0" font-size="18" text-anchor="middle" fill="#222">2</text>
+<text x="244.0" y="172.0" font-size="18" text-anchor="middle" fill="#222">1</text>
+<text x="124.0" y="220.0" font-size="18" text-anchor="middle" fill="#222">1</text>
+<text x="172.0" y="220.0" font-size="18" text-anchor="middle" fill="#222">3</text>
+<text x="220.0" y="220.0" font-size="18" text-anchor="middle" fill="#222">3</text>
+<text x="268.0" y="220.0" font-size="18" text-anchor="middle" fill="#222">1</text>
+<text x="100.0" y="268.0" font-size="18" text-anchor="middle" fill="#222">1</text>
+<circle cx="148.0" cy="262.0" r="17" fill="#ffffff" stroke="#c0392b" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="148.0" y="268.0" font-size="18" text-anchor="middle" fill="#222">4</text>
+<circle cx="196.0" cy="262.0" r="17" fill="#ffffff" stroke="#c0392b" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="196.0" y="268.0" font-size="18" text-anchor="middle" fill="#222">6</text>
+<text x="244.0" y="268.0" font-size="18" text-anchor="middle" fill="#222">4</text>
+<text x="292.0" y="268.0" font-size="18" text-anchor="middle" fill="#222">1</text>
+<text x="76.0" y="316.0" font-size="18" text-anchor="middle" fill="#222">1</text>
+<text x="124.0" y="316.0" font-size="18" text-anchor="middle" fill="#222">5</text>
+<circle cx="172.0" cy="310.0" r="19" fill="#fdecea" stroke="#c0392b" stroke-width="2.5"/>
+<text x="172.0" y="316.0" font-size="18" text-anchor="middle" fill="#222">10</text>
+<text x="220.0" y="316.0" font-size="18" text-anchor="middle" fill="#222">10</text>
+<text x="268.0" y="316.0" font-size="18" text-anchor="middle" fill="#222">5</text>
+<text x="316.0" y="316.0" font-size="18" text-anchor="middle" fill="#222">1</text>
+<text x="196" y="350" font-size="16" text-anchor="middle" fill="#222">C(5, 2) = 4 + 6 = 10</text>
+<text x="488.0" y="30" font-size="17" text-anchor="middle" fill="#222">格子路の数（右か上へ）</text>
+<line x1="392" y1="265" x2="392" y2="105" stroke="#999" stroke-width="1.5"/>
+<line x1="456" y1="265" x2="456" y2="105" stroke="#999" stroke-width="1.5"/>
+<line x1="520" y1="265" x2="520" y2="105" stroke="#999" stroke-width="1.5"/>
+<line x1="584" y1="265" x2="584" y2="105" stroke="#999" stroke-width="1.5"/>
+<line x1="392" y1="265" x2="584" y2="265" stroke="#999" stroke-width="1.5"/>
+<line x1="392" y1="185" x2="584" y2="185" stroke="#999" stroke-width="1.5"/>
+<line x1="392" y1="105" x2="584" y2="105" stroke="#999" stroke-width="1.5"/>
+<line x1="539.0" y1="105.0" x2="563.0" y2="105.0" stroke="#c0392b" stroke-width="2.5" marker-end="url(#ar)"/>
+<line x1="584.0" y1="166.0" x2="584.0" y2="126.0" stroke="#c0392b" stroke-width="2.5" marker-end="url(#ar)"/>
+<circle cx="392" cy="265" r="16" fill="#ffffff" stroke="#888" stroke-width="1.2"/>
+<text x="392.0" y="271.0" font-size="18" text-anchor="middle" fill="#222">1</text>
+<circle cx="392" cy="185" r="16" fill="#ffffff" stroke="#888" stroke-width="1.2"/>
+<text x="392.0" y="191.0" font-size="18" text-anchor="middle" fill="#222">1</text>
+<circle cx="392" cy="105" r="16" fill="#ffffff" stroke="#888" stroke-width="1.2"/>
+<text x="392.0" y="111.0" font-size="18" text-anchor="middle" fill="#222">1</text>
+<circle cx="456" cy="265" r="16" fill="#ffffff" stroke="#888" stroke-width="1.2"/>
+<text x="456.0" y="271.0" font-size="18" text-anchor="middle" fill="#222">1</text>
+<circle cx="456" cy="185" r="16" fill="#ffffff" stroke="#888" stroke-width="1.2"/>
+<text x="456.0" y="191.0" font-size="18" text-anchor="middle" fill="#222">2</text>
+<circle cx="456" cy="105" r="16" fill="#ffffff" stroke="#888" stroke-width="1.2"/>
+<text x="456.0" y="111.0" font-size="18" text-anchor="middle" fill="#222">3</text>
+<circle cx="520" cy="265" r="16" fill="#ffffff" stroke="#888" stroke-width="1.2"/>
+<text x="520.0" y="271.0" font-size="18" text-anchor="middle" fill="#222">1</text>
+<circle cx="520" cy="185" r="16" fill="#ffffff" stroke="#888" stroke-width="1.2"/>
+<text x="520.0" y="191.0" font-size="18" text-anchor="middle" fill="#222">3</text>
+<circle cx="520" cy="105" r="17" fill="#ffffff" stroke="#c0392b" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="520.0" y="111.0" font-size="18" text-anchor="middle" fill="#222">6</text>
+<circle cx="584" cy="265" r="16" fill="#ffffff" stroke="#888" stroke-width="1.2"/>
+<text x="584.0" y="271.0" font-size="18" text-anchor="middle" fill="#222">1</text>
+<circle cx="584" cy="185" r="17" fill="#ffffff" stroke="#c0392b" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="584.0" y="191.0" font-size="18" text-anchor="middle" fill="#222">4</text>
+<circle cx="584" cy="105" r="19" fill="#fdecea" stroke="#c0392b" stroke-width="2.5"/>
+<text x="584.0" y="111.0" font-size="18" text-anchor="middle" fill="#222">10</text>
+<text x="392" y="305" font-size="15" text-anchor="middle" fill="#555">(0, 0)</text>
+<text x="584" y="77" font-size="15" text-anchor="middle" fill="#555">(3, 2)</text>
+<text x="488.0" y="350" font-size="16" text-anchor="middle" fill="#222">左 6 ＋ 下 4 ＝ 10</text>
 </svg>

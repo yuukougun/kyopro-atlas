@@ -40,3 +40,14 @@
 - 「番号の小さい頂点をできるだけ前に置く」順列は、逆向きのグラフで大きい順に取り出して末尾から並べる、と本文に書いた。よく知られた事実だが、今回は出典で確かめていない（確認問題の小さい例は手で確かめた）。検証役に確かめてほしい
 - 関連ページ（subsequence-matching・topological-sort・binomial-coefficient・dp-reconstruction）はまだ stub なので、節（#lexicographically-smallest など）ではなくページへリンクした。draft になったら節へのリンクに直せる
 - 図の見た目（文字のはみ出し）は未確認
+
+## 検証の指摘への対応（2026-10-21）
+
+- 指摘 1（直すべき）：落とし穴の例を S = bacbab・K = 5 に替えた（判定なしは a(1)→a(4)→b(5) で 3 文字で行き止まり、判定ありは acbab）。「最も前の出現」の話は S = abab・K = 2（位置 2 の a で ab、正しくは aa）の別段落に分けた。64 行は「行き止まることがある」とした
+- 指摘 2：「知られている」を消し、末尾から決める理由の直感と、前から小さい順で 1 が遅れる理由を足した。正しさは全探索で確かめられる、と書いた
+- 指摘 3：draft になったページの節へリンクを直した（string-basics#lexicographic-order・topological-sort#lexicographic・binomial-coefficient#kth・dp-reconstruction#dp-kth-lexicographic / #lexicographic-min・greedy-basics#counterexamples）。使い分けの連結の項に string-basics#concat-order を足した。167 行の「トポロジカルソートのページ」はリンクなしのまま（98 行で節へリンク済み）
+- 指摘 4：図を幅 440 に組み直した（注記を各段の箱の下へ、凡例を 3 行に、位置の番号を 13px に）。見た目の画像での確認はしていない（文字幅の見積もりでは右端に余白あり）
+- 指摘 5：範囲外の箱の枠線を灰色（#999）にし、説明を「青く塗った実線の箱」とした
+- 指摘 6：例を $\binom{199}{99}$ ≈ 4.5×10^58（a・b が 100 個ずつ）に替え、LIMIT のコメントに前提（K ≤ 10^18 < LIMIT、2 × LIMIT が long long に収まる）を書いた
+- 採らなかった指摘：なし
+- 台帳への提案（上の「台帳への提案」）は検証役も賛成。変更なし

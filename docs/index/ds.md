@@ -47,7 +47,6 @@ search:
     - `ordered-set#rows-and-columns` 行ごと・列ごとの set（グリッドで次の壁を探し、両方から消す）（水）：https://yuukougun.github.io/kyopro-atlas/ds/ordered-set/#rows-and-columns
     - `ordered-set#pareto` パレート境界を map で持つ（支配される点を消す。ならし O(log N)）（水）：https://yuukougun.github.io/kyopro-atlas/ds/ordered-set/#pareto
     - `ordered-set#adjacent-pairs` ソート順で隣り合う組の集合（2 番目に大きい値の寄与。最小 XOR の組は Binary Trie のページ）（青）：https://yuukougun.github.io/kyopro-atlas/ds/ordered-set/#adjacent-pairs
-    - `ordered-set#pitfalls` 落とし穴（multiset の erase・end と begin の前の参照・イテレータの無効化）：https://yuukougun.github.io/kyopro-atlas/ds/ordered-set/#pitfalls
 
 ## 優先度付きキュー（priority-queue） {#priority-queue}
 
@@ -109,7 +108,6 @@ search:
     - `interval-set#split` split(x)（区間の分割）を先に書き、代入・削除はその組み合わせで書く：https://yuukougun.github.io/kyopro-atlas/ds/interval-set/#split
     - `interval-set#amortized` なぜならしで速いか（新しくできる区間は O(1) 個、消える区間は一度だけ）と、走査だけの操作が混ざると崩れる理由：https://yuukougun.github.io/kyopro-atlas/ds/interval-set/#amortized
     - `interval-set#applications` 応用（mex・塗り分け・和集合の長さ・値ごとの合計の差分更新）：https://yuukougun.github.io/kyopro-atlas/ds/interval-set/#applications
-    - `interval-set#choosing` 使い分け（次の空きへ飛ぶ Union-Find・遅延セグメント木）：https://yuukougun.github.io/kyopro-atlas/ds/interval-set/#choosing
     - `interval-set#valued-intervals` 値つきの区間の分割・統合（黄）：https://yuukougun.github.io/kyopro-atlas/ds/interval-set/#valued-intervals
 
 ## 全体への操作を変数で持つ（global-offset） {#global-offset}
@@ -401,8 +399,6 @@ search:
     - `segment-tree-binary-search#predicate-patterns` 条件の書き方の型（初めて x 以上・和が w 以下・mex）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-binary-search/#predicate-patterns
     - `segment-tree-binary-search#kth-one` 和が K に達する位置（K 番目の 1・空きの K 番目）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-binary-search/#kth-one
     - `segment-tree-binary-search#boundaries` 境界（l = N・返り値が N・f(e()) が偽になる条件・1-indexed）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-binary-search/#boundaries
-    - `segment-tree-binary-search#choosing` 使い分け（BIT 上の二分探索・外側の二分探索・set の lower_bound）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-binary-search/#choosing
-    - `segment-tree-binary-search#pitfalls` 落とし穴（min_left の返り値・単調でない条件）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-binary-search/#pitfalls
     - `segment-tree-binary-search#on-lazy-segment-tree` 遅延セグメント木の上の二分探索（単調な列への区間作用）（青）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-binary-search/#on-lazy-segment-tree
 
 ## 値を添字にする BIT・セグメント木（segment-tree-on-values） {#segment-tree-on-values}

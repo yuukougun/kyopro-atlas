@@ -7,7 +7,7 @@ int main() {
     int q;
     cin >> q;
     // --8<-- [start:core]
-    priority_queue<long long> pq;  // 中身は「実際の値 − 入れた時点からの加算を除いた値」
+    priority_queue<long long> pq;  // 中身は「実際の値 − add」（add は今までの全体への加算の合計）
     long long add = 0;             // これまでの全体への加算の合計
     while (q--) {
         int type;

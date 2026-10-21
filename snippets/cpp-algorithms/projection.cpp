@@ -17,7 +17,7 @@ int main() {
     ranges::sort(ps, {}, &P::score);         // score で比べて、P ごと並べ替える（{} は ranges::less{}）
     for (const auto& p : ps) cout << p.name << ' ';
     cout << '\n';
-    const P& best = ranges::max(ps, {}, &P::score);  // score が最大の要素そのもの
+    P best = ranges::max(ps, {}, &P::score);  // score が最大の要素のコピー（位置は ranges::max_element）
     cout << best.name << '\n';
 
     vector<pair<int, int>> pr = {{1, 5}, {2, 9}, {3, 7}};

@@ -11,7 +11,7 @@ int main() {
     for (int i = 0; i < n; i++) assert(0 <= a[i] && a[i] <= 1000000);
 
     // --8<-- [start:core]
-    vector<int> cnt(1000001, 0);  // cnt[v]：区間 [l, r] に v が何個あるか
+    vector<int> cnt(1000001, 0);  // cnt[v]：区間 [l, r]（a[r] を入れた後）に v が何個あるか
     int kinds = 0;                // 区間の値の種類数
     long long ans = 0;
     int l = 0;

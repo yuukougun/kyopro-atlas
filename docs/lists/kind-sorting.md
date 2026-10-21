@@ -37,5 +37,5 @@ type: generated
 
 | ページ | レベル | 要約 |
 | --- | --- | --- |
-| [比較関数と順序](../cpp/cpp-comparators.md) | 基礎 | sort・set・priority_queue に渡す比較関数を約束（厳密弱順序）と向きを守って書き、構造体に operator< や <=> で順序を持たせる。比較関数に <= を書いて sort が落ちるような事故を防ぐ。 |
+| [比較関数と順序](../cpp/cpp-comparators.md) | 基礎 | sort・set・priority_queue に渡す比較関数を約束（狭義の弱順序）と向きを守って書き、構造体に operator< や <=> で順序を持たせる。比較関数に <= を書いて sort が落ちるような事故を防ぐ。 |
 | [アルゴリズム関数と ranges 版](../cpp/cpp-algorithms.md) | 基礎 | sort・unique・lower_bound・accumulate などの定型と、射影も使える ranges 版（C++20）を使い分ける。accumulate の初期値の型や、unique だけでは要素が減らない点に気をつける。 |

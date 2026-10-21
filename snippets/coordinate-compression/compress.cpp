@@ -23,6 +23,8 @@ int main() {
     // --8<-- [end:core]
 
     for (int i = 0; i < n; i++) assert(vals[id[i]] == a[i]);  // 元の値に戻せる
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++) assert((a[i] < a[j]) == (id[i] < id[j]));  // 大小が保たれる
     cout << k << '\n';
     for (int i = 0; i < n; i++) cout << id[i] << (i + 1 < n ? ' ' : '\n');
     if (n == 0) cout << '\n';

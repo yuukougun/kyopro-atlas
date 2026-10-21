@@ -34,3 +34,10 @@
 - frequency_evidence の recent 4（abc457_e・abc476_d・abc480_d・abc480_e）は、abc457_e が台帳で interval の練習（summary が「（執筆時に確かめる）」）で、残り 3 問は台帳に見当たらなかった。このページには載せていない
 - 図 bounds.svg は描画して目で確かめる道具がなく、XML として読めることと座標の計算だけを確かめた。表示の確認を検証役に頼みたい
 - `std::midpoint` が C++20 であること、`std::set` に `std::lower_bound` を使うとイテレータの前進が O(N) になることは、記憶に基づく（research/01-basics の記述とも一致）。cpprefjp での確認を検証役に頼みたい
+
+## 検証の指摘への対応（verify/binary-search.md）
+
+- 直すべき 1〜5 はすべて直した。1：sections から pitfalls を外し、見出しを `## 落とし穴 {#pitfalls}` にした（手引きへの提案の 1 つ目はこれで解消）。2：あふれの閾値と `ok + (ng - ok) / 2` の条件・`std::midpoint` を直した。3：本文の番兵の段落を直し、count.cpp の番兵を `1e18` にした（cases の出力は変わらない）。4：「各行に印が高々 1 つ」「閉区間 $[1, m]$（1-indexed）」の条件と単調になる理由を足した。5：bounds.svg の marker を右向きの三角・`orient="auto"`・`refX="8" refY="4"` にし、線ごとに青・茶の marker に分け、upper_bound のラベルを上げて矢印と重ならないようにした（描画での目視は未確認）
+- 直すとよい 6〜10 もすべて採った。6：番兵では check を呼ばない話と、実在の位置に置いた ok を先に確かめる話を分けた。7：count は素朴な走査、triangles は $N \le 200$ で 3 重ループと assert で比べるようにした。8：#interactive の最初にめぐる式へのリンクと一言、両端が番兵として使える理由を足した。9：「$x$ 未満で最大」にした。10：「よく出る」にし、「高々 1 回（番兵まで含めればちょうど 1 回）」とした
+- 採らなかった指摘：なし
+- 検査：check_pages（エラー 0・警告 0）、fix_problems --check（直すべき行 0）、check_snippets（3 片・期待と違う 0）、textlint（エラー 0・警告 4。前回と同じ 58・96・195 行の誤検出）

@@ -8,3 +8,4 @@ cases:
   - {input: "2 1\n", output: "499122178\n"}
   - {input: "3 1\n", output: "665496237\n"}
   - {input: "5 100000\n", output: "268406416\n"}
+  - {input: "998244352 3\n", output: "27\n"}

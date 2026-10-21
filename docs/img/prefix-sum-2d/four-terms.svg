@@ -1,39 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 320" width="660" height="320" font-family="sans-serif" font-size="15">
-  <rect x="0" y="0" width="660" height="320" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 540" width="420" height="540" font-family="sans-serif" font-size="15">
+  <rect x="0" y="0" width="420" height="540" fill="#ffffff"/>
   <defs>
     <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
       <rect width="8" height="8" fill="#fde2b8"/>
       <line x1="0" y1="0" x2="0" y2="8" stroke="#d98a1c" stroke-width="2"/>
     </pattern>
   </defs>
-  <!-- axes labels -->
-  <text x="60" y="28" fill="#333">列 j →</text>
-  <text x="18" y="70" fill="#333" transform="rotate(90 18 70)">行 i →</text>
-  <!-- regions: origin (50,50); y1 at 150, y2 at 290 (columns); x1 at 130, x2 at 260 (rows) -->
-  <rect x="50" y="50" width="100" height="80" fill="#e6eef8" stroke="#333" stroke-width="1.5"/>
-  <rect x="150" y="50" width="140" height="80" fill="#eef6e6" stroke="#333" stroke-width="1.5"/>
-  <rect x="50" y="130" width="100" height="130" fill="#f3e8f5" stroke="#333" stroke-width="1.5"/>
-  <rect x="150" y="130" width="140" height="130" fill="url(#hatch)" stroke="#333" stroke-width="2.5"/>
-  <text x="100" y="95" text-anchor="middle" font-size="22" fill="#222">A</text>
-  <text x="220" y="95" text-anchor="middle" font-size="22" fill="#222">B</text>
-  <text x="100" y="200" text-anchor="middle" font-size="22" fill="#222">C</text>
-  <text x="220" y="192" text-anchor="middle" font-size="22" font-weight="bold" fill="#222">D</text>
-  <text x="220" y="215" text-anchor="middle" font-size="13" fill="#222">求める長方形</text>
+  <!-- axes labels (both horizontal) -->
+  <text x="6" y="22" font-size="14" fill="#333">行 i ↓</text>
+  <text x="120" y="22" font-size="14" fill="#333">列 j →</text>
+  <!-- regions: origin (80,50); y1 at 180, y2 at 380 (columns); x1 at 130, x2 at 260 (rows) -->
+  <rect x="80" y="50" width="100" height="80" fill="#e6eef8" stroke="#333" stroke-width="1.5"/>
+  <rect x="180" y="50" width="200" height="80" fill="#eef6e6" stroke="#333" stroke-width="1.5"/>
+  <rect x="80" y="130" width="100" height="130" fill="#f3e8f5" stroke="#333" stroke-width="1.5"/>
+  <rect x="180" y="130" width="200" height="130" fill="url(#hatch)" stroke="#333" stroke-width="2.5"/>
+  <text x="130" y="97" text-anchor="middle" font-size="22" fill="#222">A</text>
+  <text x="280" y="97" text-anchor="middle" font-size="22" fill="#222">B</text>
+  <text x="130" y="202" text-anchor="middle" font-size="22" fill="#222">C</text>
+  <text x="280" y="192" text-anchor="middle" font-size="22" font-weight="bold" fill="#222">D</text>
+  <text x="280" y="216" text-anchor="middle" font-size="14" fill="#222">求める長方形</text>
   <!-- tick labels -->
-  <text x="50" y="45" text-anchor="middle" font-size="13" fill="#333">0</text>
-  <text x="150" y="45" text-anchor="middle" font-size="13" fill="#333">y1</text>
-  <text x="290" y="45" text-anchor="middle" font-size="13" fill="#333">y2</text>
-  <text x="40" y="54" text-anchor="end" font-size="13" fill="#333">0</text>
-  <text x="40" y="134" text-anchor="end" font-size="13" fill="#333">x1</text>
-  <text x="40" y="264" text-anchor="end" font-size="13" fill="#333">x2</text>
-  <text x="170" y="292" text-anchor="middle" font-size="13" fill="#333">D ＝ 行 [x1, x2)・列 [y1, y2)</text>
+  <text x="80" y="45" text-anchor="middle" font-size="14" fill="#333">0</text>
+  <text x="180" y="45" text-anchor="middle" font-size="14" fill="#333">y1</text>
+  <text x="380" y="45" text-anchor="middle" font-size="14" fill="#333">y2</text>
+  <text x="70" y="55" text-anchor="end" font-size="14" fill="#333">0</text>
+  <text x="70" y="135" text-anchor="end" font-size="14" fill="#333">x1</text>
+  <text x="70" y="265" text-anchor="end" font-size="14" fill="#333">x2</text>
+  <text x="230" y="290" text-anchor="middle" font-size="14" fill="#333">D ＝ 行 [x1, x2)・列 [y1, y2)</text>
   <!-- equations -->
-  <text x="330" y="80" fill="#222">S[x2][y2] ＝ A + B + C + D</text>
-  <text x="330" y="112" fill="#222">S[x1][y2] ＝ A + B</text>
-  <text x="330" y="144" fill="#222">S[x2][y1] ＝ A + C</text>
-  <text x="330" y="176" fill="#222">S[x1][y1] ＝ A</text>
-  <line x1="330" y1="192" x2="640" y2="192" stroke="#888" stroke-width="1" stroke-dasharray="4 3"/>
-  <text x="330" y="222" fill="#222" font-weight="bold">D ＝ S[x2][y2] − S[x1][y2]</text>
-  <text x="372" y="248" fill="#222" font-weight="bold">− S[x2][y1] + S[x1][y1]</text>
-  <text x="330" y="282" font-size="13" fill="#444">A は 2 回引かれるので 1 回足し戻す</text>
+  <text x="40" y="330" fill="#222">S[x2][y2] ＝ A + B + C + D</text>
+  <text x="40" y="360" fill="#222">S[x1][y2] ＝ A + B</text>
+  <text x="40" y="390" fill="#222">S[x2][y1] ＝ A + C</text>
+  <text x="40" y="420" fill="#222">S[x1][y1] ＝ A</text>
+  <line x1="40" y1="438" x2="380" y2="438" stroke="#888" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="40" y="466" fill="#222" font-weight="bold">D ＝ S[x2][y2] − S[x1][y2]</text>
+  <text x="82" y="492" fill="#222" font-weight="bold">− S[x2][y1] + S[x1][y1]</text>
+  <text x="40" y="522" font-size="14" fill="#444">A は 2 回引かれるので 1 回足し戻す</text>
 </svg>

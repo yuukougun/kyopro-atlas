@@ -38,7 +38,7 @@ atcoder: true
 !!! abstract "要点"
     - **何ができるか**：その場で関数を作るラムダ式で、比較関数・判定関数・DFS を書く。外側の変数を参照（`[&]`）かコピー（`[=]`）で取り込めるので、配列を引数で渡さずに済む。再帰は `auto&& self` か deducing this で書くと、普通の関数と同じ速さになる。
     - **いつ使うか**：`sort` や `priority_queue` に独自の順序を渡したいとき。二分探索の判定や DFS を `main` の中で書き、入力の配列をそのまま使いたいとき。解説コードに `[&]`・`self(self, to)`・`this auto&& self` が出てきて読みたいとき。
-    - **計算量**：ラムダを作るのは $O(1)$（`[=]` や初期化キャプチャはコピー・ムーブの分だけかかる）。呼び出しは普通の関数と同じで、`std::function` を通すと間接呼び出しの定数倍がかかる
+    - **計算量**：ラムダを作るのは $O(1)$（`[=]` や初期化キャプチャはコピー・ムーブの分だけかかる）。呼び出しは普通の関数と同じ速さで、`std::function` を通すと間接呼び出しの定数倍がかかる
     - **前提**：[参照と範囲 for](../cpp/cpp-range-for.md)
 
 <!-- textlint-disable -->
@@ -96,7 +96,7 @@ atcoder: true
 --8<-- "cpp-lambda/generic.cpp:core"
 ```
 
-- **版**：`auto` 引数は C++14、テンプレート構文は C++20、`static` ラムダは C++23。`static` ラムダは g++-13・g++-15 の `-std=gnu++23` で通る。`-std=gnu++20` ではどちらも「‘static’ only valid in lambda with ‘-std=c++23’」という警告になる
+- **版**：`auto` 引数は C++14、テンプレート構文は C++20、`static` ラムダは C++23。`static` ラムダは g++-13・g++-15 の `-std=gnu++23` で通る。`-std=gnu++20` ではどちらも「‘static’ only valid in lambda with ‘-std=c++23’ or ‘-std=gnu++23’」という警告になる
 - **落とし穴**：`static` ラムダはキャプチャを書くとコンパイルエラーになる。`[&]` が要るなら `static` を付けない
 
 ## その場で呼ぶラムダ：const int k = [&] { ... }(); で複雑な初期化をした値を const にする {#immediately-invoked}
@@ -162,7 +162,7 @@ ACL の `segtree<S, op, e>` は、演算 `op` と単位元を返す `e` を、�
 --8<-- "cpp-lambda/segtree.cpp:core"
 ```
 
-テンプレート引数は、コンパイル時に値が決まっていなければならない。キャプチャのないラムダは中身を持たない空のオブジェクトなので、コンパイル時に決まった値として扱える（C++20 から、クラス型の値もテンプレート引数として使える）。キャプチャのあるラムダは、実行時に取り込んだ変数を持つので渡せない。
+テンプレート引数は、コンパイル時に値が決まっていなければならない。GCC では、キャプチャのないラムダは中身を持たない空のオブジェクトとして、コンパイル時に決まった値のように扱われ、テンプレート引数に渡せる（AtCoder の GCC 15.2 でも通る）。ただし規格では、2023 年の欠陥報告（CWG2542）でラムダの型をテンプレート引数の型に使えないと決めたので、Clang などほかのコンパイラでは通らないことがある。確実にするなら、普通の関数を書いて `segtree<int, op, e>` と渡す。キャプチャのあるラムダは、実行時に取り込んだ変数を持つので、GCC でも渡せない。
 
 ```cpp
 --8<-- "cpp-lambda/segtree-capture-ng.cpp:core"
@@ -170,7 +170,7 @@ ACL の `segtree<S, op, e>` は、演算 `op` と単位元を返す `e` を、�
 
 g++-15 では `the value of ‘op’ is not usable in a constant expression` というエラーになる。演算が実行時の値（上の `lower`）に依存するなら、その値を `S` の要素に入れるか、グローバル変数にする。ACL の segtree の引数の決め方は [ACL の読み方](../cpp/acl-reading.md)で扱う。
 
-- **版**：C++20。g++-13・g++-15 の `-std=gnu++23` で、キャプチャのないラムダは通り、キャプチャのあるラムダはエラーになった
+- **版**：GCC の拡張的な扱い（規格上は CWG2542 で不可）。g++-13・g++-15 の `-std=gnu++23` で、キャプチャのないラムダは通り、キャプチャのあるラムダはエラーになった。`-std=gnu++17` では、ACL の宣言の `auto op` にクラス型の値を渡せないのでエラーになる
 - **混同**：`seg.max_right(l, f)` の `f` は普通の関数の引数なので、キャプチャのあるラムダを渡せる。テンプレート引数（`<...>` の中）に入るものだけが、キャプチャのないものに限られる
 
 ## ラムダがそのままでは再帰できない理由（use of ‘f’ before deduction of ‘auto’） {#recursive-lambda}
@@ -282,9 +282,9 @@ C++23 の deducing this は、最初の引数に `this` を付けると、そこ
 | フィボナッチ数の素朴な再帰 fib(40) | 108〜163 ms | 528〜639 ms | 108〜165 ms | 106〜156 ms |
 | 頂点数 $2 \times 10^6$ の完全二分木の DFS | — | 9〜11 ms | 5〜15 ms | 6〜8 ms |
 
-- 1 回の処理が軽い再帰ほど、呼び出しの差がそのまま出る。fib(40) は足し算だけを約 $3 \times 10^8$ 回呼ぶので、`std::function` が約 5 倍遅かった
-- 木の DFS では、`std::function` が約 1.5 倍遅かった（`auto&& self` の 15 ms は 1 回だけの外れ値）。親をランダムに選んだ木では、どの書き方も 200〜1400 ms とばらつき、差は測定のぶれに埋もれた。隣接リストをランダムな順に読むメモリの待ち時間が、呼び出しの差より大きいからである
-- [不動点コンビネータ](#fixpoint)は、fib(40) で 16〜23 ms とかえって速かった。この例では GCC の最適化がよく効いただけで、いつも速いとは限らない。遅くはならないと考えてよい
+- 1 回の処理が軽い再帰ほど、呼び出しの差がそのまま出る。fib(40) は中身が足し算だけの呼び出しを約 $3.3 \times 10^8$ 回行うので、`std::function` が約 5 倍遅かった
+- 木の DFS では、`std::function` が約 1.5 倍遅かった（`auto&& self` の 15 ms は 1 回だけの外れ値）。親をランダムに選んだ木では、どの書き方も 200〜1400 ms とばらつき、差は測定のぶれに埋もれた。隣接リストをランダムな順に読むメモリの待ち時間が、呼び出しの差より大きいためと考えられる
+- [不動点コンビネータ](#fixpoint)は、fib(40) では GCC が再帰の形ごと変えてしまい（手元で 1 ms 未満）、呼び出しの速さの比較にならなかった。木の DFS では `auto&& self` と同じ程度だった
 
 深い再帰では、スタックの上限にも注意する。頂点が一直線に並んだ木（パス）を根から DFS し、スタックを 8 MiB（`ulimit -s 8192`。Linux の多くの環境の既定）にして、落ちる深さを調べた。
 
@@ -293,6 +293,8 @@ C++23 の deducing this は、最初の引数に `this` を付けると、そこ
 | `std::function` | $8 \times 10^4$ | $9 \times 10^4$ |
 | `auto&& self` | $2.2 \times 10^5$ | $2.4 \times 10^5$ |
 | deducing this | $2.4 \times 10^5$ | $2.6 \times 10^5$ |
+
+落ちる深さは関数の中身（局所変数の数）とコンパイラ・最適化によって変わる目安である。別の計測では `auto&& self` が $2.2 \times 10^5$ で落ちた。比べてほしいのは書き方どうしの比である。
 
 `std::function` は 1 段で使うスタックが 2〜3 倍大きく、手元では $N = 10^5$ のパスで Segmentation fault になった。AtCoder はスタックの上限が大きいとされ、提出では通ることが多い。手元で試すときに落ちやすい。手元のスタックの広げ方と、再帰を使わない書き直しは [AtCoder の環境と手元の環境](../cpp/cpp-environment.md)で扱う。
 
@@ -320,7 +322,8 @@ C++23 の deducing this は、最初の引数に `this` を付けると、そこ
 - [cpprefjp「キャプチャ式での初期化」](https://cpprefjp.github.io/lang/cpp14/initialize_capture.html)：初期化キャプチャと `std::move` での移動
 - [cpprefjp「ジェネリックラムダのテンプレート構文」](https://cpprefjp.github.io/lang/cpp20/familiar_template_syntax_for_generic_lambdas.html)：`[]<class T>(...)` の書き方
 - [cpprefjp「状態を持たないラムダ式を、デフォルト構築可能、代入可能とする」](https://cpprefjp.github.io/lang/cpp20/default_constructible_and_assignable_stateless_lambdas.html)：`decltype(cmp)` だけで `set` を作れる理由
-- [cpprefjp「非型テンプレートパラメータとしてクラス型を許可する」](https://cpprefjp.github.io/lang/cpp20/class_types_in_non-type_template_parameters.html)：キャプチャのないラムダをテンプレート引数に渡せる理由
+- [cpprefjp「非型テンプレートパラメータとしてクラス型を許可する」](https://cpprefjp.github.io/lang/cpp20/class_types_in_non-type_template_parameters.html)：C++20 でクラス型の値もテンプレート引数として使えるようになった変更
+- [C++ 標準化委員会のコア言語の issue 2542（CWG2542）](https://cplusplus.github.io/CWG/issues/2542.html)：クロージャ型を構造的型としない欠陥報告。2023 年 6 月の会議で DR として採択された
 - [cpprefjp「static operator()」](https://cpprefjp.github.io/lang/cpp23/static_operator.html)：`static` ラムダ
 - [cpprefjp「自身のオブジェクトを明示的にパラメータとして指定する」](https://cpprefjp.github.io/lang/cpp23/deducing_this.html)：deducing this と再帰ラムダ
 - [cppreference「std::function」](https://en.cppreference.com/w/cpp/utility/functional/function)：`std::function` が型を隠して呼び出す入れ物であること

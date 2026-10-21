@@ -42,3 +42,10 @@ catalog の数（例題 1・練習 3）で足りており、力試しは 0。ど
 ## 使用量の目安
 
 - 道具の呼び出し約 25 回、Web 取得 7 回（drken 3・github 3・zenn 1）
+
+## 検証の指摘への対応
+
+- 直すべき 1〜4、直すとよい 6〜12 を直した。6 はコード片 covered-length の変数名 `xs` を `vals` にそろえ、本文も vals に統一した（#intervals で「3 段の節と同じく vals と呼ぶ」と定義）。12 は compress に全対の大小の assert、covered-length に座標が ±1000 以内のときの素朴な数え上げとの比較を足した
+- 採らなかったもの：5（#vs-map を `## 使い分け {#comparison}` にする）。vs-map は骨格由来の anchor で、§2.1 の「既存の anchor は変えない」とぶつかり、docs/index/basics.md からも `coordinate-compression#vs-map` で参照されている。どちらに寄せるかはメインの判断に任せる
+- 提案（メイン）：#vs-map を残すなら「骨格由来の使い分けの節は anchor を保つ」旨を決定事項に書く。寄せるなら anchor を comparison に変え、docs/index/basics.md の参照を直す
+- textlint の警告は 15（数式の括弧の誤検出と文の長さ。エラー 0）

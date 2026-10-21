@@ -169,7 +169,6 @@ search:
     - `binary-search#meguru` めぐる式（ok と ng の不変条件・初期値は判定しない番兵）：https://yuukougun.github.io/kyopro-atlas/basics/binary-search/#meguru
     - `binary-search#lower-bound` lower_bound・upper_bound と個数の数え方：https://yuukougun.github.io/kyopro-atlas/basics/binary-search/#lower-bound
     - `binary-search#fix-one-side` 片方を固定してもう片方を二分探索する：https://yuukougun.github.io/kyopro-atlas/basics/binary-search/#fix-one-side
-    - `binary-search#pitfalls` 落とし穴（(ok + ng) / 2 のあふれ・負の数の丸め・set に std::lower_bound）：https://yuukougun.github.io/kyopro-atlas/basics/binary-search/#pitfalls
     - `binary-search#interactive` 質問で二分探索する（インタラクティブ問題へ）：https://yuukougun.github.io/kyopro-atlas/basics/binary-search/#interactive
 
 ## 答えで二分探索（binary-search-answer） {#binary-search-answer}
@@ -265,7 +264,7 @@ search:
     - `prefix-sum-counting#equal-k` S_r − S_l = K となる l を数える（S_0 を入れ忘れない）：https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum-counting/#equal-k
     - `prefix-sum-counting#same-remainder` 余りが等しい組（M の倍数の区間・負の余りの正規化）：https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum-counting/#same-remainder
     - `prefix-sum-counting#suffix` 後ろからの累積（数字列の倍数）：https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum-counting/#suffix
-    - `prefix-sum-counting#circular` 円環を伸ばして数える：https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum-counting/#circular
+    - `prefix-sum-counting#circular` 円環上の組を数える：https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum-counting/#circular
     - `prefix-sum-counting#length-limited` 長さの制限付き（窓の中だけで数える）（青）：https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum-counting/#length-limited
     - `prefix-sum-counting#vs-two-pointers` 尺取りとの使い分け（負の値）：https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum-counting/#vs-two-pointers
     - `prefix-sum-counting#next-steps` XOR・不等式・最長の区間へのつながり：https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum-counting/#next-steps

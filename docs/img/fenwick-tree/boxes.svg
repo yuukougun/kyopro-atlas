@@ -1,45 +1,44 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 626 336" width="626" height="336" font-family="sans-serif">
-<rect x="0" y="0" width="626" height="336" fill="#ffffff"/>
-<text x="10" y="48.0" font-size="13" fill="#333">長さ 8</text>
-<text x="10" y="94.0" font-size="13" fill="#333">長さ 4</text>
-<text x="10" y="140.0" font-size="13" fill="#333">長さ 2</text>
-<text x="10" y="186.0" font-size="13" fill="#333">長さ 1</text>
-<rect x="113" y="164" width="56" height="34" rx="4" fill="#ffffff" stroke="#1f3b63" stroke-width="1.5"/>
-<text x="141.0" y="186.0" font-size="12" text-anchor="middle" fill="#111">t[1]</text>
-<rect x="113" y="118" width="118" height="34" rx="4" fill="#ffffff" stroke="#1f3b63" stroke-width="1.5"/>
-<text x="172.0" y="140.0" font-size="13" text-anchor="middle" fill="#111">t[2] = a1..a2</text>
-<rect x="237" y="164" width="56" height="34" rx="4" fill="#ffffff" stroke="#1f3b63" stroke-dasharray="6 3" stroke-width="3"/>
-<text x="265.0" y="186.0" font-size="12" text-anchor="middle" fill="#111">t[3]</text>
-<rect x="113" y="72" width="242" height="34" rx="4" fill="#d0d7e2" stroke="#1f3b63" stroke-dasharray="6 3" stroke-width="3"/>
-<text x="234.0" y="94.0" font-size="13" text-anchor="middle" fill="#111">t[4] = a1..a4</text>
-<rect x="361" y="164" width="56" height="34" rx="4" fill="#ffffff" stroke="#1f3b63" stroke-width="1.5"/>
-<text x="389.0" y="186.0" font-size="12" text-anchor="middle" fill="#111">t[5]</text>
-<rect x="361" y="118" width="118" height="34" rx="4" fill="#d0d7e2" stroke="#1f3b63" stroke-width="1.5"/>
-<text x="420.0" y="140.0" font-size="13" text-anchor="middle" fill="#111">t[6] = a5..a6</text>
-<rect x="485" y="164" width="56" height="34" rx="4" fill="#d0d7e2" stroke="#1f3b63" stroke-width="1.5"/>
-<text x="513.0" y="186.0" font-size="12" text-anchor="middle" fill="#111">t[7]</text>
-<rect x="113" y="26" width="490" height="34" rx="4" fill="#ffffff" stroke="#1f3b63" stroke-dasharray="6 3" stroke-width="3"/>
-<text x="358.0" y="48.0" font-size="13" text-anchor="middle" fill="#111">t[8] = a1..a8</text>
-<text x="10" y="226" font-size="13" fill="#333">i</text>
-<text x="10" y="246" font-size="13" fill="#333">2 進数</text>
-<text x="141.0" y="226" font-size="14" text-anchor="middle" fill="#111">1</text>
-<text x="141.0" y="246" font-size="13" text-anchor="middle" fill="#333">0001</text>
-<text x="203.0" y="226" font-size="14" text-anchor="middle" fill="#111">2</text>
-<text x="203.0" y="246" font-size="13" text-anchor="middle" fill="#333">0010</text>
-<text x="265.0" y="226" font-size="14" text-anchor="middle" fill="#111">3</text>
-<text x="265.0" y="246" font-size="13" text-anchor="middle" fill="#333">0011</text>
-<text x="327.0" y="226" font-size="14" text-anchor="middle" fill="#111">4</text>
-<text x="327.0" y="246" font-size="13" text-anchor="middle" fill="#333">0100</text>
-<text x="389.0" y="226" font-size="14" text-anchor="middle" fill="#111">5</text>
-<text x="389.0" y="246" font-size="13" text-anchor="middle" fill="#333">0101</text>
-<text x="451.0" y="226" font-size="14" text-anchor="middle" fill="#111">6</text>
-<text x="451.0" y="246" font-size="13" text-anchor="middle" fill="#333">0110</text>
-<text x="513.0" y="226" font-size="14" text-anchor="middle" fill="#111">7</text>
-<text x="513.0" y="246" font-size="13" text-anchor="middle" fill="#333">0111</text>
-<text x="575.0" y="226" font-size="14" text-anchor="middle" fill="#111">8</text>
-<text x="575.0" y="246" font-size="13" text-anchor="middle" fill="#333">1000</text>
-<rect x="110" y="261" width="28" height="16" fill="#d0d7e2" stroke="#1f3b63" stroke-width="1.5"/>
-<text x="146" y="274" font-size="13" fill="#111">塗り：sum(7) で足す箱（7 → 6 → 4）</text>
-<rect x="110" y="285" width="28" height="16" fill="#ffffff" stroke="#1f3b63" stroke-width="3" stroke-dasharray="6 3"/>
-<text x="146" y="298" font-size="13" fill="#111">破線：add(3) で直す箱（3 → 4 → 8）</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 352" width="440" height="352" font-family="sans-serif">
+<rect x="0" y="0" width="440" height="352" fill="#ffffff"/>
+<rect x="22" y="166" width="46" height="44" rx="4" fill="#ffffff" stroke="#1f3b63" stroke-width="1.5"/>
+<text x="45.0" y="194" font-size="14" text-anchor="middle" fill="#111">t[1]</text>
+<rect x="22" y="114" width="96" height="44" rx="4" fill="#ffffff" stroke="#1f3b63" stroke-width="1.5"/>
+<text x="70.0" y="133" font-size="14" text-anchor="middle" fill="#111">t[2]</text>
+<text x="70.0" y="150" font-size="13" text-anchor="middle" fill="#111">a1..a2</text>
+<rect x="122" y="166" width="46" height="44" rx="4" fill="#ffffff" stroke="#1f3b63" stroke-dasharray="6 3" stroke-width="3"/>
+<text x="145.0" y="194" font-size="14" text-anchor="middle" fill="#111">t[3]</text>
+<rect x="22" y="62" width="196" height="44" rx="4" fill="#d0d7e2" stroke="#1f3b63" stroke-dasharray="6 3" stroke-width="3"/>
+<text x="120.0" y="81" font-size="14" text-anchor="middle" fill="#111">t[4]</text>
+<text x="120.0" y="98" font-size="13" text-anchor="middle" fill="#111">a1..a4</text>
+<rect x="222" y="166" width="46" height="44" rx="4" fill="#ffffff" stroke="#1f3b63" stroke-width="1.5"/>
+<text x="245.0" y="194" font-size="14" text-anchor="middle" fill="#111">t[5]</text>
+<rect x="222" y="114" width="96" height="44" rx="4" fill="#d0d7e2" stroke="#1f3b63" stroke-width="1.5"/>
+<text x="270.0" y="133" font-size="14" text-anchor="middle" fill="#111">t[6]</text>
+<text x="270.0" y="150" font-size="13" text-anchor="middle" fill="#111">a5..a6</text>
+<rect x="322" y="166" width="46" height="44" rx="4" fill="#d0d7e2" stroke="#1f3b63" stroke-width="1.5"/>
+<text x="345.0" y="194" font-size="14" text-anchor="middle" fill="#111">t[7]</text>
+<rect x="22" y="10" width="396" height="44" rx="4" fill="#ffffff" stroke="#1f3b63" stroke-dasharray="6 3" stroke-width="3"/>
+<text x="220.0" y="29" font-size="14" text-anchor="middle" fill="#111">t[8]</text>
+<text x="220.0" y="46" font-size="13" text-anchor="middle" fill="#111">a1..a8</text>
+<text x="45.0" y="236" font-size="15" text-anchor="middle" fill="#111">1</text>
+<text x="45.0" y="256" font-size="13" text-anchor="middle" fill="#333">0001</text>
+<text x="95.0" y="236" font-size="15" text-anchor="middle" fill="#111">2</text>
+<text x="95.0" y="256" font-size="13" text-anchor="middle" fill="#333">0010</text>
+<text x="145.0" y="236" font-size="15" text-anchor="middle" fill="#111">3</text>
+<text x="145.0" y="256" font-size="13" text-anchor="middle" fill="#333">0011</text>
+<text x="195.0" y="236" font-size="15" text-anchor="middle" fill="#111">4</text>
+<text x="195.0" y="256" font-size="13" text-anchor="middle" fill="#333">0100</text>
+<text x="245.0" y="236" font-size="15" text-anchor="middle" fill="#111">5</text>
+<text x="245.0" y="256" font-size="13" text-anchor="middle" fill="#333">0101</text>
+<text x="295.0" y="236" font-size="15" text-anchor="middle" fill="#111">6</text>
+<text x="295.0" y="256" font-size="13" text-anchor="middle" fill="#333">0110</text>
+<text x="345.0" y="236" font-size="15" text-anchor="middle" fill="#111">7</text>
+<text x="345.0" y="256" font-size="13" text-anchor="middle" fill="#333">0111</text>
+<text x="395.0" y="236" font-size="15" text-anchor="middle" fill="#111">8</text>
+<text x="395.0" y="256" font-size="13" text-anchor="middle" fill="#333">1000</text>
+<text x="20" y="282" font-size="13" fill="#333">段は上から長さ 8・4・2・1。下の数は i とその 2 進数</text>
+<rect x="20" y="296" width="28" height="16" fill="#d0d7e2" stroke="#1f3b63" stroke-width="1.5"/>
+<text x="56" y="309" font-size="13" fill="#111">塗り：sum(7) で足す箱（7 → 6 → 4）</text>
+<rect x="20" y="322" width="28" height="16" fill="#ffffff" stroke="#1f3b63" stroke-width="3" stroke-dasharray="6 3"/>
+<text x="56" y="335" font-size="13" fill="#111">破線：add(3) で直す箱（3 → 4 → 8）</text>
 </svg>

@@ -1,5 +1,5 @@
 // 線形篩：各合成数 x を「最小素因数 × 残り」の形でちょうど 1 回だけ作り、
-// 最小素因数 lp と同時にオイラーの φ 関数・メビウス関数 μ の表を O(m) で作る。
+// 最小素因数 spf と同時にオイラーの φ 関数・メビウス関数 μ の表を O(m) で作る。
 // 入力：m と q 個の x。出力：m 以下の素数の個数と、各 x の「x φ(x) μ(x)」。
 #include <bits/stdc++.h>
 using namespace std;
@@ -10,22 +10,22 @@ int main() {
     assert(1 <= m && m <= 10000000);
 
     // --8<-- [start:core]
-    vector<int> lp(m + 1, 0), phi(m + 1, 0), mu(m + 1, 0), primes;
+    vector<int> spf(m + 1, 0), phi(m + 1, 0), mu(m + 1, 0), primes;
     phi[1] = 1;
     mu[1] = 1;
     for (int i = 2; i <= m; i++) {
-        if (lp[i] == 0) {  // まだ作られていなければ素数
-            lp[i] = i;
+        if (spf[i] == 0) {  // まだ作られていなければ素数
+            spf[i] = i;
             phi[i] = i - 1;
             mu[i] = -1;
             primes.push_back(i);
         }
-        // x = p * i を作る。p は lp[i] 以下の素数だけ（p が x の最小素因数になる）
+        // x = p * i を作る。p は spf[i] 以下の素数だけ（p が x の最小素因数になる）
         for (int p : primes) {
-            if (p > lp[i] || (long long)p * i > m) break;
+            if (p > spf[i] || (long long)p * i > m) break;
             int x = p * i;
-            lp[x] = p;
-            if (p == lp[i]) {  // p が i を割り切る：指数が 1 増える
+            spf[x] = p;
+            if (p == spf[i]) {  // p が i を割り切る：指数が 1 増える
                 phi[x] = phi[i] * p;
                 mu[x] = 0;
             } else {           // p は i の素因数でない：新しい素因数が 1 つ増える
@@ -53,7 +53,7 @@ int main() {
             mo = -mo;
         }
         assert(phi[x] == ph && mu[x] == mo);
-        if (x >= 2) assert(lp[x] == small);
+        if (x >= 2) assert(spf[x] == small);
     }
 
     cout << primes.size() << '\n';

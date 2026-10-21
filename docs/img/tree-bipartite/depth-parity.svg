@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" font-family="sans-serif" font-size="14">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="20" y="22" fill="#222">深さの偶奇で塗った木（根は 0。白は深さが偶数、黒は奇数）</text>
+<text x="20" y="55" fill="#555" font-size="12">深さ 0</text>
+<line x1="70" y1="50" x2="520" y2="50" stroke="#e3e3e3" stroke-dasharray="2 4"/>
+<text x="20" y="125" fill="#555" font-size="12">深さ 1</text>
+<line x1="70" y1="120" x2="520" y2="120" stroke="#e3e3e3" stroke-dasharray="2 4"/>
+<text x="20" y="195" fill="#555" font-size="12">深さ 2</text>
+<line x1="70" y1="190" x2="520" y2="190" stroke="#e3e3e3" stroke-dasharray="2 4"/>
+<text x="20" y="265" fill="#555" font-size="12">深さ 3</text>
+<line x1="70" y1="260" x2="520" y2="260" stroke="#e3e3e3" stroke-dasharray="2 4"/>
+<g stroke="#444" stroke-width="2">
+<line x1="300" y1="50" x2="200" y2="120"/>
+<line x1="300" y1="50" x2="400" y2="120"/>
+<line x1="200" y1="120" x2="150" y2="190"/>
+<line x1="200" y1="120" x2="250" y2="190"/>
+<line x1="400" y1="120" x2="400" y2="190"/>
+<line x1="150" y1="190" x2="150" y2="260"/>
+<line x1="400" y1="190" x2="400" y2="260"/>
+</g>
+<g stroke="#c0392b" stroke-width="5" stroke-dasharray="9 6" fill="none">
+<line x1="150" y1="260" x2="150" y2="190"/>
+<line x1="150" y1="190" x2="200" y2="120"/>
+<line x1="200" y1="120" x2="250" y2="190"/>
+</g>
+<g stroke="#1e8449" stroke-width="7" stroke-opacity="0.75">
+<line x1="400" y1="120" x2="400" y2="190"/>
+<line x1="400" y1="190" x2="400" y2="260"/>
+</g>
+<g stroke="#333333" stroke-width="2">
+<circle cx="300" cy="50" r="17" fill="#ffffff"/>
+<circle cx="200" cy="120" r="17" fill="#333333"/>
+<circle cx="400" cy="120" r="17" fill="#333333"/>
+<circle cx="150" cy="190" r="17" fill="#ffffff"/>
+<circle cx="250" cy="190" r="17" fill="#ffffff"/>
+<circle cx="400" cy="190" r="17" fill="#ffffff"/>
+<circle cx="150" cy="260" r="17" fill="#333333"/>
+<circle cx="400" cy="260" r="17" fill="#333333"/>
+</g>
+<g text-anchor="middle">
+<text x="300" y="55" fill="#222">0</text>
+<text x="200" y="125" fill="#ffffff">1</text>
+<text x="400" y="125" fill="#ffffff">2</text>
+<text x="150" y="195" fill="#222">3</text>
+<text x="250" y="195" fill="#222">4</text>
+<text x="400" y="195" fill="#222">5</text>
+<text x="150" y="265" fill="#ffffff">6</text>
+<text x="400" y="265" fill="#ffffff">7</text>
+</g>
+<text x="430" y="200" fill="#1e8449" font-size="13">太線</text>
+<text x="95" y="225" fill="#c0392b" font-size="13">破線</text>
+<text x="20" y="310" fill="#c0392b">破線 d(6, 4) = 3（奇数）。dep 3 + dep 2 = 5 も奇数で、6 と 4 は色が違う</text>
+<text x="20" y="334" fill="#1e8449">太線 d(2, 7) = 2（偶数）。dep 1 + dep 3 = 4 も偶数で、2 と 7 は色が同じ</text>
+<text x="20" y="358" fill="#222">白 4 個（0・3・4・5）、黒 4 個（1・2・6・7）。色の違う組は 4 × 4 = 16</text>
+<text x="20" y="382" fill="#222">そのうち 7 組は木の辺なので、二部グラフのまま足せる辺は 16 − 7 = 9 本</text>
+</svg>

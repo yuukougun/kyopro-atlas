@@ -24,7 +24,6 @@ search:
     - `graph-basics#representations` 隣接リスト・隣接行列・辺リストとアルゴリズムごとの使い分け：https://yuukougun.github.io/kyopro-atlas/graph/graph-basics/#representations
     - `graph-basics#terms` 用語（次数・パスとウォーク・単純グラフ・連結・木・DAG・二部グラフ・補グラフ）：https://yuukougun.github.io/kyopro-atlas/graph/graph-basics/#terms
     - `graph-basics#handshake` 握手補題（次数の和は 2M）：https://yuukougun.github.io/kyopro-atlas/graph/graph-basics/#handshake
-    - `graph-basics#pitfalls` 落とし穴（1-indexed・無向グラフは両方向に追加・多重辺・重みの和のあふれ）：https://yuukougun.github.io/kyopro-atlas/graph/graph-basics/#pitfalls
 
 ## グラフへの帰着（graph-modeling） {#graph-modeling}
 
@@ -74,7 +73,7 @@ search:
     - `bfs#why-shortest` 最初に見つけた距離が最短になる理由：https://yuukougun.github.io/kyopro-atlas/graph/bfs/#why-shortest
     - `bfs#mark-on-push` 印は push のときに付ける・dist を −1 で初期化して訪問済みの印を兼ねる：https://yuukougun.github.io/kyopro-atlas/graph/bfs/#mark-on-push
     - `bfs#path-restoration` 経路復元（発見したときの親を記録して終点からたどる）：https://yuukougun.github.io/kyopro-atlas/graph/bfs/#path-restoration
-    - `bfs#multi-source` 多始点 BFS（超始点から距離 0 の辺を張るのと同じ）：https://yuukougun.github.io/kyopro-atlas/graph/bfs/#multi-source
+    - `bfs#multi-source` 多始点 BFS（超頂点から距離 0 の辺を張るのと同じ）：https://yuukougun.github.io/kyopro-atlas/graph/bfs/#multi-source
     - `bfs#weighted` 重みが 1 と 2 なら辺を割る・重み付きなら 01-BFS かダイクストラ法：https://yuukougun.github.io/kyopro-atlas/graph/bfs/#weighted
 
 ## グリッドグラフ（grid-graph） {#grid-graph}
@@ -111,7 +110,6 @@ search:
 - 節：
     - `connected-components#three-methods` DFS・BFS・Union-Find の 3 つの求め方と使い分け：https://yuukougun.github.io/kyopro-atlas/graph/connected-components/#three-methods
     - `connected-components#per-component` 成分ごとの集計（頂点数と辺数で木・なもり・それ以外を見分ける）：https://yuukougun.github.io/kyopro-atlas/graph/connected-components/#per-component
-    - `connected-components#pitfalls` 落とし穴（孤立点・多重辺・自己ループ・再帰の深さ）：https://yuukougun.github.io/kyopro-atlas/graph/connected-components/#pitfalls
     - `connected-components#forest` 森の連結成分の数は N − M：https://yuukougun.github.io/kyopro-atlas/graph/connected-components/#forest
     - `connected-components#values-as-vertices` 座標や値を頂点にして成分を考える（青）：https://yuukougun.github.io/kyopro-atlas/graph/connected-components/#values-as-vertices
     - `connected-components#next-steps` 上位の手法とのつながり：https://yuukougun.github.io/kyopro-atlas/graph/connected-components/#next-steps

@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" width="600" height="500" font-family="sans-serif" font-size="14">
 <rect x="0" y="0" width="600" height="500" fill="#ffffff"/>
-<text x="300.0" y="22" text-anchor="middle" font-size="15" fill="#222">N = 12：d の行に d の倍数 k を ● で打つ</text>
+<text x="300.0" y="22" text-anchor="middle" font-size="15" fill="#222">M = 12：d の行に d の倍数 k を ● で打つ</text>
 <text x="105.0" y="50" text-anchor="middle" fill="#222">1</text>
 <text x="135.0" y="50" text-anchor="middle" fill="#222">2</text>
 <text x="165.0" y="50" text-anchor="middle" fill="#222">3</text>
@@ -191,5 +191,5 @@
 <text x="470" y="410.0" fill="#222">1</text>
 <rect x="90" y="60" width="360" height="360" fill="none" stroke="#888"/>
 <text x="90" y="450" fill="#222">● の合計は 35 個で、12 × (1 + 1/2 + … + 1/12) ≈ 37 に近い</text>
-<text x="90" y="474" fill="#222">144 マスを全部調べると O(N²)、● だけなら O(N log N)</text>
+<text x="90" y="474" fill="#222">144 マスを全部調べると O(M²)、● だけなら O(M log M)</text>
 </svg>

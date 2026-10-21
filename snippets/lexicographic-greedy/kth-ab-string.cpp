@@ -10,7 +10,8 @@ int main() {
     assert(0 <= A && A <= 100 && 0 <= B && B <= 100 && A + B >= 1 && K >= 1);
 
     // --8<-- [start:core]
-    // C[n][r]：二項係数。K を超える値は意味がないので LIMIT で頭打ちにする（あふれ対策）
+    // C[n][r]：二項係数。K <= 10^18 なので、それより大きい LIMIT で頭打ちにしても K との比較は変わらない（あふれ対策）。
+    // 頭打ちの値どうしの和 2 * LIMIT も long long に収まる
     const long long LIMIT = 2'000'000'000'000'000'000LL;
     int n = A + B;
     vector<vector<long long>> C(n + 1, vector<long long>(n + 1, 0));

@@ -43,3 +43,14 @@
 - abc217_d で、長さのクエリの x がちょうど切れ目に一致することがあるかを第三者の解説で確かめられなかった（kanpurin の記事の制約の記載にはない）。本文は lower_bound とその 1 つ前の差とだけ書き、保証には触れていない
 - sections の「落とし穴（…）」は §13.1 では定型の節（sections に載せない）だが、骨格で sections にあるので残し、見出しを title と同じにした（binary-search と同じ扱い）
 - frequency_evidence の abc466_f・abc475_e はこのページの問題にしていない（abc466_f は台帳で reverse-thinking の力試し、abc475_e は台帳を見ていない）
+
+## 検証の指摘への対応（2026-10-21）
+
+- 指摘 1（直すべき）：sections から pitfalls の行を消し、見出しを `## 落とし穴 {#pitfalls}` にした（style-guide §13.1 どおり。anchor は同じ）。binary-search ほか骨格で pitfalls を sections に持つページが多い（bit-operations・bit-full-search・kth-value・prefix-sum・digit-dp など）ので、メインが一括で揃えるかを判断するとよい
+- 指摘 2（直すべき）：#rows-and-columns の「探す」に「$(r, c)$ に壁がないとき」の前提を足し、自身が壁なら `*it == c` を先に調べる・自身を含めないなら `upper_bound(c)` と添えた
+- 指摘 3：線分の段落で記号を $(x, y)$・$x_1$・$x_2$ に改め、`row[y]`・`col[x]` の意味を 1 文で足した。擬似コードも `x1`・`x2` に直した
+- 指摘 4：支配の定義を「別の点 $q$」とし、同じ点が 2 つあれば 1 つだけ残すと添えた。用語集への提案の定義も、同じ点の扱い（別の組で、同じ組は 1 つだけ残す）を足して採ってほしい
+- 指摘 5：#near-kth の計算量を $O(\log N + K)$（続けて $K$ 歩動かす手間は合計 $O(K + \log N)$）に直した
+- 指摘 6：`contains`（C++20）とし、cpp-container-idioms#contains へリンクした
+- 指摘 7（このページの外）：提案として残す。docs/cpp/cpp-container-idioms.md 166 行の「set で x 未満の個数が要るとき」のリンク先を ordered-set から kth-element（BIT）か pb-ds の節に変える
+- 採らなかったもの：なし

@@ -1,15 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 538 358" width="538" height="358" font-family="sans-serif" font-size="15">
 <rect width="538" height="358" fill="#ffffff"/>
 <text x="80" y="18" font-size="14" fill="#333">和が 4 以下の区間：各 l に対する最大の r</text>
-<text x="68" y="50" text-anchor="end" fill="#555" font-size="13">添字</text>
-<text x="80" y="50" text-anchor="middle" fill="#555" font-size="13">0</text>
-<text x="124" y="50" text-anchor="middle" fill="#555" font-size="13">1</text>
-<text x="168" y="50" text-anchor="middle" fill="#555" font-size="13">2</text>
-<text x="212" y="50" text-anchor="middle" fill="#555" font-size="13">3</text>
-<text x="256" y="50" text-anchor="middle" fill="#555" font-size="13">4</text>
-<text x="300" y="50" text-anchor="middle" fill="#555" font-size="13">5</text>
-<text x="344" y="50" text-anchor="middle" fill="#555" font-size="13">6</text>
-<text x="388" y="50" text-anchor="middle" fill="#555" font-size="13">7</text>
+<text x="68" y="50" text-anchor="end" fill="#555" font-size="15">境界</text>
+<text x="80" y="50" text-anchor="middle" fill="#555" font-size="15">0</text>
+<text x="124" y="50" text-anchor="middle" fill="#555" font-size="15">1</text>
+<text x="168" y="50" text-anchor="middle" fill="#555" font-size="15">2</text>
+<text x="212" y="50" text-anchor="middle" fill="#555" font-size="15">3</text>
+<text x="256" y="50" text-anchor="middle" fill="#555" font-size="15">4</text>
+<text x="300" y="50" text-anchor="middle" fill="#555" font-size="15">5</text>
+<text x="344" y="50" text-anchor="middle" fill="#555" font-size="15">6</text>
+<text x="388" y="50" text-anchor="middle" fill="#555" font-size="15">7</text>
 <text x="68" y="79" text-anchor="end" fill="#333">A</text>
 <rect x="80" y="58" width="44" height="30" fill="#f4f4f4" stroke="#333"/>
 <text x="102.0" y="79" text-anchor="middle" fill="#111">1</text>

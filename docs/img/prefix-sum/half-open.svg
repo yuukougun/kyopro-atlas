@@ -1,74 +1,77 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 510" font-family="sans-serif" font-size="15">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 565 600" font-family="sans-serif" font-size="18">
 <defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#1f4e9a" stroke-width="2"/></pattern><marker id="ar" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#b03a2e"/></marker></defs>
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="20" y="26" fill="#222">上：a[i]（棒）。網掛けは半開区間 [2, 5) の 3 本で、和は 4 + 1 + 5 = 10</text>
-<line x1="60" y1="170" x2="500" y2="170" stroke="#333"/>
-<rect x="82" y="128" width="46" height="42" fill="#e8e8e8" stroke="#333" stroke-width="1.2"/>
-<text x="105.0" y="122" text-anchor="middle" fill="#222">3</text>
-<text x="105.0" y="190" text-anchor="middle" fill="#555" font-size="13">a[0]</text>
-<rect x="152" y="156" width="46" height="14" fill="#e8e8e8" stroke="#333" stroke-width="1.2"/>
-<text x="175.0" y="150" text-anchor="middle" fill="#222">1</text>
-<text x="175.0" y="190" text-anchor="middle" fill="#555" font-size="13">a[1]</text>
-<rect x="222" y="114" width="46" height="56" fill="url(#hatch)" stroke="#333" stroke-width="1.2"/>
-<text x="245.0" y="108" text-anchor="middle" fill="#222">4</text>
-<text x="245.0" y="190" text-anchor="middle" fill="#555" font-size="13">a[2]</text>
-<rect x="292" y="156" width="46" height="14" fill="url(#hatch)" stroke="#333" stroke-width="1.2"/>
-<text x="315.0" y="150" text-anchor="middle" fill="#222">1</text>
-<text x="315.0" y="190" text-anchor="middle" fill="#555" font-size="13">a[3]</text>
-<rect x="362" y="100" width="46" height="70" fill="url(#hatch)" stroke="#333" stroke-width="1.2"/>
-<text x="385.0" y="94" text-anchor="middle" fill="#222">5</text>
-<text x="385.0" y="190" text-anchor="middle" fill="#555" font-size="13">a[4]</text>
-<rect x="432" y="142" width="46" height="28" fill="#e8e8e8" stroke="#333" stroke-width="1.2"/>
-<text x="455.0" y="136" text-anchor="middle" fill="#222">2</text>
-<text x="455.0" y="190" text-anchor="middle" fill="#555" font-size="13">a[5]</text>
-<text x="20" y="213" fill="#222">境界の番号 k（S[k] は境界 k より左にある棒の和）</text>
-<line x1="70" y1="225" x2="70" y2="233" stroke="#333"/>
-<text x="70" y="249" text-anchor="middle" fill="#222">0</text>
-<line x1="140" y1="225" x2="140" y2="233" stroke="#333"/>
-<text x="140" y="249" text-anchor="middle" fill="#222">1</text>
-<line x1="210" y1="225" x2="210" y2="233" stroke="#333"/>
-<text x="210" y="249" text-anchor="middle" fill="#222">2</text>
-<line x1="280" y1="225" x2="280" y2="233" stroke="#333"/>
-<text x="280" y="249" text-anchor="middle" fill="#222">3</text>
-<line x1="350" y1="225" x2="350" y2="233" stroke="#333"/>
-<text x="350" y="249" text-anchor="middle" fill="#222">4</text>
-<line x1="420" y1="225" x2="420" y2="233" stroke="#333"/>
-<text x="420" y="249" text-anchor="middle" fill="#222">5</text>
-<line x1="490" y1="225" x2="490" y2="233" stroke="#333"/>
-<text x="490" y="249" text-anchor="middle" fill="#222">6</text>
-<line x1="70" y1="225" x2="490" y2="225" stroke="#333"/>
-<text x="20" y="277" fill="#222">下：S[k]（折れ線）。S[5] − S[2] = 14 − 4 = 10 が上の網掛けの和</text>
-<line x1="60" y1="480" x2="500" y2="480" stroke="#333"/>
-<polyline points="70,480 140,447 210,436 280,392 350,381 420,326 490,304" fill="none" stroke="#1f4e9a" stroke-width="2"/>
-<line x1="70" y1="480" x2="70" y2="480" stroke="#bbb" stroke-dasharray="3,3"/>
-<circle cx="70" cy="480" r="4.5" fill="#1f4e9a"/>
-<text x="62" y="471" text-anchor="end" fill="#1f4e9a" font-size="14">0</text>
-<text x="70" y="500" text-anchor="middle" fill="#555" font-size="13">S[0]</text>
-<line x1="140" y1="480" x2="140" y2="447" stroke="#bbb" stroke-dasharray="3,3"/>
-<circle cx="140" cy="447" r="4.5" fill="#1f4e9a"/>
-<text x="132" y="438" text-anchor="end" fill="#1f4e9a" font-size="14">3</text>
-<text x="140" y="500" text-anchor="middle" fill="#555" font-size="13">S[1]</text>
-<line x1="210" y1="480" x2="210" y2="436" stroke="#bbb" stroke-dasharray="3,3"/>
-<circle cx="210" cy="436" r="4.5" fill="#1f4e9a"/>
-<text x="202" y="427" text-anchor="end" fill="#1f4e9a" font-size="14">4</text>
-<text x="210" y="500" text-anchor="middle" fill="#555" font-size="13">S[2]</text>
-<line x1="280" y1="480" x2="280" y2="392" stroke="#bbb" stroke-dasharray="3,3"/>
-<circle cx="280" cy="392" r="4.5" fill="#1f4e9a"/>
-<text x="272" y="383" text-anchor="end" fill="#1f4e9a" font-size="14">8</text>
-<text x="280" y="500" text-anchor="middle" fill="#555" font-size="13">S[3]</text>
-<line x1="350" y1="480" x2="350" y2="381" stroke="#bbb" stroke-dasharray="3,3"/>
-<circle cx="350" cy="381" r="4.5" fill="#1f4e9a"/>
-<text x="342" y="372" text-anchor="end" fill="#1f4e9a" font-size="14">9</text>
-<text x="350" y="500" text-anchor="middle" fill="#555" font-size="13">S[4]</text>
-<line x1="420" y1="480" x2="420" y2="326" stroke="#bbb" stroke-dasharray="3,3"/>
-<circle cx="420" cy="326" r="4.5" fill="#1f4e9a"/>
-<text x="412" y="317" text-anchor="end" fill="#1f4e9a" font-size="14">14</text>
-<text x="420" y="500" text-anchor="middle" fill="#555" font-size="13">S[5]</text>
-<line x1="490" y1="480" x2="490" y2="304" stroke="#bbb" stroke-dasharray="3,3"/>
-<circle cx="490" cy="304" r="4.5" fill="#1f4e9a"/>
-<text x="482" y="295" text-anchor="end" fill="#1f4e9a" font-size="14">16</text>
-<text x="490" y="500" text-anchor="middle" fill="#555" font-size="13">S[6]</text>
-<line x1="210" y1="436" x2="450" y2="436" stroke="#b03a2e" stroke-dasharray="6,4" stroke-width="1.5"/>
-<line x1="450" y1="432" x2="450" y2="332" stroke="#b03a2e" stroke-width="2" marker-end="url(#ar)"/>
-<text x="458" y="386.0" fill="#b03a2e" font-weight="bold">差 10</text>
+<text x="16" y="28" fill="#222">上：a[i]（棒）。網掛けは半開区間 [2, 5) の 3 本</text>
+<text x="16" y="52" fill="#222">網掛けの和は 4 + 1 + 5 = 10</text>
+<line x1="30" y1="200" x2="470" y2="200" stroke="#333"/>
+<rect x="50" y="158" width="50" height="42" fill="#e8e8e8" stroke="#333" stroke-width="1.2"/>
+<text x="75" y="151" text-anchor="middle" fill="#222">3</text>
+<text x="75" y="222" text-anchor="middle" fill="#555" font-size="17">a[0]</text>
+<rect x="120" y="186" width="50" height="14" fill="#e8e8e8" stroke="#333" stroke-width="1.2"/>
+<text x="145" y="179" text-anchor="middle" fill="#222">1</text>
+<text x="145" y="222" text-anchor="middle" fill="#555" font-size="17">a[1]</text>
+<rect x="190" y="144" width="50" height="56" fill="url(#hatch)" stroke="#333" stroke-width="1.2"/>
+<text x="215" y="137" text-anchor="middle" fill="#222">4</text>
+<text x="215" y="222" text-anchor="middle" fill="#555" font-size="17">a[2]</text>
+<rect x="260" y="186" width="50" height="14" fill="url(#hatch)" stroke="#333" stroke-width="1.2"/>
+<text x="285" y="179" text-anchor="middle" fill="#222">1</text>
+<text x="285" y="222" text-anchor="middle" fill="#555" font-size="17">a[3]</text>
+<rect x="330" y="130" width="50" height="70" fill="url(#hatch)" stroke="#333" stroke-width="1.2"/>
+<text x="355" y="123" text-anchor="middle" fill="#222">5</text>
+<text x="355" y="222" text-anchor="middle" fill="#555" font-size="17">a[4]</text>
+<rect x="400" y="172" width="50" height="28" fill="#e8e8e8" stroke="#333" stroke-width="1.2"/>
+<text x="425" y="165" text-anchor="middle" fill="#222">2</text>
+<text x="425" y="222" text-anchor="middle" fill="#555" font-size="17">a[5]</text>
+<text x="16" y="252" fill="#222">境界の番号 k（S[k] は境界 k より左にある棒の和）</text>
+<line x1="40" y1="266" x2="460" y2="266" stroke="#333"/>
+<line x1="40" y1="266" x2="40" y2="274" stroke="#333"/>
+<text x="40" y="294" text-anchor="middle" fill="#222">0</text>
+<line x1="110" y1="266" x2="110" y2="274" stroke="#333"/>
+<text x="110" y="294" text-anchor="middle" fill="#222">1</text>
+<line x1="180" y1="266" x2="180" y2="274" stroke="#333"/>
+<text x="180" y="294" text-anchor="middle" fill="#222">2</text>
+<line x1="250" y1="266" x2="250" y2="274" stroke="#333"/>
+<text x="250" y="294" text-anchor="middle" fill="#222">3</text>
+<line x1="320" y1="266" x2="320" y2="274" stroke="#333"/>
+<text x="320" y="294" text-anchor="middle" fill="#222">4</text>
+<line x1="390" y1="266" x2="390" y2="274" stroke="#333"/>
+<text x="390" y="294" text-anchor="middle" fill="#222">5</text>
+<line x1="460" y1="266" x2="460" y2="274" stroke="#333"/>
+<text x="460" y="294" text-anchor="middle" fill="#222">6</text>
+<text x="16" y="330" fill="#222">下：S[k]（折れ線）</text>
+<text x="16" y="354" fill="#222">S[5] − S[2] = 14 − 4 = 10 が網掛けの和</text>
+<line x1="30" y1="560" x2="470" y2="560" stroke="#333"/>
+<polyline points="40,560 110,527 180,516 250,472 320,461 390,406 460,384" fill="none" stroke="#1f4e9a" stroke-width="2"/>
+<circle cx="40" cy="560" r="4.5" fill="#1f4e9a"/>
+<text x="32" y="551" text-anchor="end" fill="#1f4e9a" font-size="17">0</text>
+<text x="40" y="584" text-anchor="middle" fill="#555" font-size="17">S[0]</text>
+<line x1="110" y1="560" x2="110" y2="527" stroke="#bbb" stroke-dasharray="3,3"/>
+<circle cx="110" cy="527" r="4.5" fill="#1f4e9a"/>
+<text x="102" y="518" text-anchor="end" fill="#1f4e9a" font-size="17">3</text>
+<text x="110" y="584" text-anchor="middle" fill="#555" font-size="17">S[1]</text>
+<line x1="180" y1="560" x2="180" y2="516" stroke="#bbb" stroke-dasharray="3,3"/>
+<circle cx="180" cy="516" r="4.5" fill="#1f4e9a"/>
+<text x="172" y="507" text-anchor="end" fill="#1f4e9a" font-size="17">4</text>
+<text x="180" y="584" text-anchor="middle" fill="#555" font-size="17">S[2]</text>
+<line x1="250" y1="560" x2="250" y2="472" stroke="#bbb" stroke-dasharray="3,3"/>
+<circle cx="250" cy="472" r="4.5" fill="#1f4e9a"/>
+<text x="242" y="463" text-anchor="end" fill="#1f4e9a" font-size="17">8</text>
+<text x="250" y="584" text-anchor="middle" fill="#555" font-size="17">S[3]</text>
+<line x1="320" y1="560" x2="320" y2="461" stroke="#bbb" stroke-dasharray="3,3"/>
+<circle cx="320" cy="461" r="4.5" fill="#1f4e9a"/>
+<text x="312" y="452" text-anchor="end" fill="#1f4e9a" font-size="17">9</text>
+<text x="320" y="584" text-anchor="middle" fill="#555" font-size="17">S[4]</text>
+<line x1="390" y1="560" x2="390" y2="406" stroke="#bbb" stroke-dasharray="3,3"/>
+<circle cx="390" cy="406" r="4.5" fill="#1f4e9a"/>
+<text x="382" y="397" text-anchor="end" fill="#1f4e9a" font-size="17">14</text>
+<text x="390" y="584" text-anchor="middle" fill="#555" font-size="17">S[5]</text>
+<line x1="460" y1="560" x2="460" y2="384" stroke="#bbb" stroke-dasharray="3,3"/>
+<circle cx="460" cy="384" r="4.5" fill="#1f4e9a"/>
+<text x="452" y="375" text-anchor="end" fill="#1f4e9a" font-size="17">16</text>
+<text x="460" y="584" text-anchor="middle" fill="#555" font-size="17">S[6]</text>
+<line x1="180" y1="516" x2="508" y2="516" stroke="#b03a2e" stroke-dasharray="6,4" stroke-width="1.5"/>
+<line x1="390" y1="406" x2="508" y2="406" stroke="#b03a2e" stroke-dasharray="6,4" stroke-width="1.5"/>
+<line x1="500" y1="513" x2="500" y2="413" stroke="#b03a2e" stroke-width="2" marker-end="url(#ar)"/>
+<text x="508" y="467" fill="#b03a2e" font-weight="bold">差</text>
+<text x="508" y="489" fill="#b03a2e" font-weight="bold">10</text>
 </svg>

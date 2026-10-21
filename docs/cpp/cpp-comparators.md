@@ -10,7 +10,7 @@ level: 基礎
 kind: [実装・C++, ソート・座標圧縮]
 prerequisites: [cpp-lambda]
 related: [cpp-container-idioms, cpp-algorithms, cpp-structured-bindings, cpp-undefined-behavior, sorting-techniques, priority-queue, dijkstra]
-summary: sort・set・priority_queue に渡す比較関数を約束（厳密弱順序）と向きを守って書き、構造体に operator< や <=> で順序を持たせる。比較関数に <= を書いて sort が落ちるような事故を防ぐ。
+summary: sort・set・priority_queue に渡す比較関数を約束（狭義の弱順序）と向きを守って書き、構造体に operator< や <=> で順序を持たせる。比較関数に <= を書いて sort が落ちるような事故を防ぐ。
 complexity: '比較関数は sort で O(N log N) 回、set・map・priority_queue の 1 回の操作で O(log N) 回呼ばれる'
 signs: []
 acl: []
@@ -23,7 +23,7 @@ sections:
   - {title: '複数のキーで比べる：pair・tuple の辞書順、tie(a.x, a.y) < tie(b.x, b.y)', anchor: multiple-keys}
   - {title: 'ラムダの比較関数を型として渡す：set<T, decltype(cmp)>（C++20。C++17 では pq(cmp) と渡す）', anchor: lambda-comparator-type}
   - {title: 構造体に operator< を持たせる（メンバ関数に const が要る）, anchor: operator-less}
-  - {title: auto operator<=>(const T&) const = default で 6 つの比較をメンバの宣言順の辞書順で作る（C++20）, anchor: spaceship}
+  - {title: auto operator<=>(const T&) const = default で 6 つの比較をメンバの宣言順の辞書順で使えるようにする（C++20）, anchor: spaceship}
 stage: draft
 updated: 2026-10-21
 cpp_std: null
@@ -61,7 +61,7 @@ atcoder: true
 
 入力 `ccc b aa d ee` なら `b d aa ee ccc` と出る。長さ 1 の `b`・`d`、長さ 2 の `aa`・`ee` は、それぞれ入力の順のまま並ぶ。
 
-- **素朴に書くと**：比較関数を渡さない `sort(v.begin(), v.end())` は、要素の `<` を使う。`cmp` を渡すと、その `<` を `cmp` に置き換えて並べる
+- **既定では**：比較関数を渡さない `sort(v.begin(), v.end())` は、要素の `<` を使う。`cmp` を渡すと、その `<` を `cmp` に置き換えて並べる
 - **落とし穴**：比較関数の中で重い計算をしない。`sort` では $O(N \log N)$ 回呼ばれる。キーは先に計算して配列で持ち、引数は `const T&` で受ける
 
 ## 比較関数に <= を書くと sort が壊れる（同じ値が多いと Segmentation fault。_GLIBCXX_DEBUG で見つかる） {#less-equal-pitfall}
@@ -72,17 +72,17 @@ atcoder: true
 --8<-- "cpp-comparators/less-equal.cpp:core"
 ```
 
-手元で、同じ値 `1` だけが並ぶ配列を `<=` の比較関数で `sort` した（g++-13・g++-15、`-O2`）。結果は要素の数で変わり、小さな入力の試しでは気づけない（表の 17〜3×10^4 は 17・1000・3×10^4 などで試した）。
+手元で、同じ値 `1` だけが並ぶ配列を `<=` の比較関数で `sort` した（g++-13・g++-15、`-O2`）。結果は要素の数で変わり、小さな入力の試しでは気づけない（表の 17〜3×10^4 は 17・1000・3×10^4 などで、最後の行は 3.5×10^4・4×10^4・10^5 などで試した）。
 
 | 要素の数 | 普通にコンパイル | `-fsanitize=address` | `-D_GLIBCXX_DEBUG` |
 | --- | --- | --- | --- |
 | 1〜16 | 正常に終わる | 正常に終わる | 止まる（1 個でも） |
 | 17〜3×10^4 | 正常に終わる | 配列外の読み込みで止まる | 止まる |
-| 10^5 | Segmentation fault | 止まる | 止まる |
+| 3.5×10^4〜10^5 | 異常終了（Segmentation fault など） | 止まる | 止まる |
 
 落ちる理由は、`sort` の中の分割の手順にある。`sort` は基準の値を 1 つ選び、「基準より前に来るべき間は進む」ループで配列を進む。`<=` だと基準と等しい要素でも true が返るので、同じ値が続くとループが止まらず、配列の終わりを越えて読む。16 個以下では別の手順（挿入ソート）だけを使うので、この読み越しが起きなかった。
 
-`-D_GLIBCXX_DEBUG` を付けてコンパイルすると、`sort` は始めに比較関数を確かめる。約束を破っていれば `Error: comparison doesn't meet irreflexive requirements, assert(!(a < a)).` と出して止まる。手元で試すときに付けておくと見つかる（付け方は[未定義動作](../cpp/cpp-undefined-behavior.md)）。
+`-D_GLIBCXX_DEBUG` を付けてコンパイルすると、`sort` は始めに、先頭の要素を自分自身と比べて false になるかを確かめる。`<=` や `>=` の比較関数はここで必ず引っかかり、`Error: comparison doesn't meet irreflexive requirements, assert(!(a < a)).` と出して止まる。手元で試すときに付けておくと見つかる（付け方は[未定義動作](../cpp/cpp-undefined-behavior.md#debug-build)）。ただし、推移しないなどのほかの破り方は、この検査では見つからないことがある（手元では、推移しない比較関数で sort しても止まらなかった）。
 
 - **直し方**：昇順は `<`、降順は `>` を書く。`=` を付けない
 - **落とし穴**：`set`・`map` に `<=` の比較関数を渡すと、同じ値を何度でも入れられてしまい、`find` で見つからなくなる。どのコンテナでも、比較関数は `<` か `>` で書く
@@ -147,7 +147,7 @@ atcoder: true
 
 `second` だけで比べる `set` に `{1, 5}` と `{2, 5}` を入れると、`{2, 5}` は `{1, 5}` に等しいとみなされ、入らない。`count({9, 5})` も 1 を返す。等しいときの比べ方（ここでは `first`）を後ろに足して全部のメンバを比べると、両方が残る。
 
-- **使い分け**：同じキーを重ねて持ちたいなら `multiset` を使う。ただし `multiset` でも「同じ」の判定は比較関数で行うので、`erase(x)` は比較関数で同じとみなされる要素をすべて消す（1 個だけ消す書き方は[コンテナの定型](../cpp/cpp-container-idioms.md)）
+- **使い分け**：同じキーを重ねて持ちたいなら `multiset` を使う。ただし `multiset` でも「同じ」の判定は比較関数で行うので、`erase(x)` は比較関数で同じとみなされる要素をすべて消す（1 個だけ消す書き方は[コンテナの定型](../cpp/cpp-container-idioms.md#multiset-erase-one)）
 - **落とし穴**：`sort` では「同じ」要素は並ぶだけで消えない。同じ比較関数を `set` に移すと要素が減るので、移す前に、比較関数がすべてのメンバを見ているかを確かめる
 
 ## 複数のキーで比べる：pair・tuple の辞書順、tie(a.x, a.y) &lt; tie(b.x, b.y) {#multiple-keys}
@@ -215,9 +215,9 @@ g++-13・g++-15 では `no match for 'operator<' (operand types are 'const Seg' 
 - **素朴に書くと**：`sort(v.begin(), v.end(), [](const Seg& a, const Seg& b) { return a.r < b.r; });` と同じ順である。順序がその構造体で 1 つに決まるなら `operator<`、場面ごとに違う順で並べるならラムダの比較関数を使う
 - **落とし穴**：`operator<` を右端 `r` だけで書くと、`set<Seg>` では右端の等しい区間が 1 つしか入らない（[set・map の比較関数は「同じ」も決める](#set-equivalence)）
 
-## auto operator&lt;=&gt;(const T&amp;) const = default で 6 つの比較をメンバの宣言順の辞書順で作る（C++20） {#spaceship}
+## auto operator&lt;=&gt;(const T&amp;) const = default で 6 つの比較をメンバの宣言順の辞書順で使えるようにする（C++20） {#spaceship}
 
-`auto operator<=>(const T&) const = default;` を書くと、コンパイラが `<`・`<=`・`>`・`>=`・`==`・`!=` の 6 つを作る。比べ方はメンバの宣言順の辞書順である。1 つ目のメンバで比べ、等しければ 2 つ目で比べる。`<=>` を三方比較演算子（宇宙船演算子）という。
+`auto operator<=>(const T&) const = default;` を書くと、`<`・`<=`・`>`・`>=`・`==`・`!=` の 6 つの比較が使えるようになる。`==` はコンパイラが合わせて作り、`<` などは `<=>` を使う式に、`!=` は `==` を使う式に書き換えられる。比べ方はメンバの宣言順の辞書順である。1 つ目のメンバで比べ、等しければ 2 つ目で比べる。`<=>` を三方比較演算子（宇宙船演算子）という。
 
 ```cpp
 --8<-- "cpp-comparators/spaceship.cpp:core"
@@ -243,7 +243,7 @@ g++-13・g++-15 では `no match for 'operator<' (operand types are 'const Seg' 
     1 である。`cmp({1, 5}, {2, 5})` と `cmp({2, 5}, {1, 5})` がどちらも false なので、2 つは同じキーとみなされ、後から入れた `{2, 5}` は入らない。両方残すには、`second` が等しいときに `first` で比べるよう比較関数を直す。
 
 ??? question "確認問題：降順にしたくて `sort(v.begin(), v.end(), [](int a, int b) { return a >= b; })` と書いた。何が起きうるか？"
-    等しい値の組で true を返すので、比較関数の約束（自分自身と比べたら false）を破る。同じ値が多いと配列の外を読み、手元では同じ値 10^5 個で Segmentation fault になった。`a > b` か `greater<>()` に直す。
+    等しい値の組で true を返すので、比較関数の約束（自分自身と比べたら false）を破る。同じ値が多いと配列の外を読み、手元では同じ値 3.5×10^4 個から異常終了した（10^5 個では Segmentation fault）。`a > b` か `greater<>()` に直す。
 
 ??? question "確認問題：`struct P { int y, x; auto operator<=>(const P&) const = default; };` の配列を `sort` すると、どの順に並ぶか？"
     `y` の小さい順、`y` が等しければ `x` の小さい順である。`= default` の `<=>` は、メンバを宣言した順（ここでは `y`・`x`）の辞書順で比べる。
@@ -257,4 +257,4 @@ g++-13・g++-15 では `no match for 'operator<' (operand types are 'const Seg' 
 - [cpprefjp「std::set」](https://cpprefjp.github.io/reference/set/set.html)：比較関数による要素の同値の扱い
 - [cpprefjp「状態を持たないラムダ式を、デフォルト構築可能、代入可能とする」](https://cpprefjp.github.io/lang/cpp20/default_constructible_and_assignable_stateless_lambdas.html)：C++20 で `set<T, decltype(cmp)>` を比較関数なしで作れること
 - [cpprefjp「<=>/==による比較演算子の自動定義」](https://cpprefjp.github.io/lang/cpp20/consistent_comparison.html)：`= default` の `<=>` がメンバの宣言順に比べること
-- [GCC「libstdc++ Debug Mode: Semantics」](https://gcc.gnu.org/onlinedocs/libstdc++/manual/debug_mode_semantics.html)：`_GLIBCXX_DEBUG` が検査する内容
+- [GCC「Chapter 18. Debug Mode」](https://gcc.gnu.org/onlinedocs/libstdc++/manual/debug_mode.html)：`_GLIBCXX_DEBUG` がアルゴリズムの前提（比較関数など）を検査すること。irreflexive の検査の文面と、検査で見つからない破り方は手元で確かめた

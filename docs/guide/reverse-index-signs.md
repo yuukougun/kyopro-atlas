@@ -94,9 +94,9 @@ updated: 2026-10-21
 | 区間 [L, R] の品物だけを使うナップサックを多数のクエリで答える | [分割統治](../basics/divide-and-conquer.md)（準備中） | 黄 |
 | 条件が複雑で直接は数えにくい・判定しにくい | [言い換えの典型](../thinking/reformulation.md) | 水 |
 | x 方向と y 方向・bit ごと・連結成分ごとに結果が独立に決まる | [言い換えの典型](../thinking/reformulation.md) | 水 |
-| 3 つ組 (i < j < k) を数える | [一部を固定して数える](../thinking/fix-variable.md)（準備中） | 基礎 |
-| 2 つの値の組で、片方を決めればもう片方の条件が単純になる | [一部を固定して数える](../thinking/fix-variable.md)（準備中） | 基礎 |
-| 最大値（最小値）を決めて残りを最適化する | [一部を固定して数える](../thinking/fix-variable.md)（準備中） | 基礎 |
+| 3 つ組 (i < j < k) を数える | [一部を固定して数える](../thinking/fix-variable.md) | 基礎 |
+| 2 つの値の組で、片方を決めればもう片方の条件が単純になる | [一部を固定して数える](../thinking/fix-variable.md) | 基礎 |
+| 最大値（最小値）を決めて残りを最適化する | [一部を固定して数える](../thinking/fix-variable.md) | 基礎 |
 | すべての組・区間・部分集合についての総和 | [主客転倒・寄与](../thinking/contribution.md) | 水 |
 | 各要素が答えに何回足されるか | [主客転倒・寄与](../thinking/contribution.md) | 水 |
 | 全区間の最小値（2 番目に大きい値）の和 | [主客転倒・寄与](../thinking/contribution.md) | 水 |
@@ -110,8 +110,8 @@ updated: 2026-10-21
 | 操作を好きな回数・好きな順に行える | [不変量・単調に変わる量](../thinking/invariant.md) | 基礎 |
 | 目標の状態に到達できるか・最終状態の最大値 | [不変量・単調に変わる量](../thinking/invariant.md) | 基礎 |
 | 操作の前後で変わらない量（和・偶奇・余り）がありそう | [不変量・単調に変わる量](../thinking/invariant.md) | 基礎 |
-| 辺・要素の削除のクエリ | [後ろから・逆順に考える](../thinking/reverse-thinking.md)（準備中） | 基礎 |
-| 操作列を復元する・操作の結果から元を求める | [後ろから・逆順に考える](../thinking/reverse-thinking.md)（準備中） | 基礎 |
+| 辺・要素の削除のクエリ | [後ろから・逆順に考える](../thinking/reverse-thinking.md) | 基礎 |
+| 操作列を復元する・操作の結果から元を求める | [後ろから・逆順に考える](../thinking/reverse-thinking.md) | 基礎 |
 | 条件を満たすものを 1 つ出力せよ（存在しなければ −1） | [構築問題の考え方](../thinking/construction.md) | 基礎 |
 | 操作手順を出力せよ（回数の上限が与えられている） | [構築問題の考え方](../thinking/construction.md) | 基礎 |
 | 最大値を求めるが、答えに自然な上限がありそう | [構築問題の考え方](../thinking/construction.md) | 基礎 |
@@ -214,13 +214,13 @@ updated: 2026-10-21
 | 全ての組 (i, j)（i < j）について〜を足した和を求める | [Σ の変形](../math/sigma-manipulation.md) | 基礎 |
 | 割り切る・割り切られる関係にある組を数える | [調和級数と倍数の列挙](../math/harmonic-sum.md) | 水 |
 | 各 d について、d の倍数である要素の個数や和を求める | [調和級数と倍数の列挙](../math/harmonic-sum.md) | 水 |
-| 操作を好きなだけ繰り返したとき、最後に残る値や作れる値を答える | [整数の証明の型](../math/proof-patterns.md)（準備中） | 基礎 |
-| 大きい方から小さい方を引く・余りに置き換える操作を繰り返す | [整数の証明の型](../math/proof-patterns.md)（準備中） | 基礎 |
-| 区間の幅が法 m 以上なら答えが決まる（余りは m 種類しかない） | [整数の証明の型](../math/proof-patterns.md)（準備中） | 基礎 |
+| 操作を好きなだけ繰り返したとき、最後に残る値や作れる値を答える | [整数の証明の型](../math/proof-patterns.md) | 基礎 |
+| 大きい方から小さい方を引く・余りに置き換える操作を繰り返す | [整数の証明の型](../math/proof-patterns.md) | 基礎 |
+| 区間の幅が法 m 以上なら答えが決まる（余りは m 種類しかない） | [整数の証明の型](../math/proof-patterns.md) | 基礎 |
 | 長さ N の文字列のうち、どのパターンも部分文字列に含まないものの数 | [照合オートマトン上の DP](../string/string-automaton-dp.md)（準備中） | 青 |
 | 与えられた文字列をすべて含む長さ L の文字列の数 | [照合オートマトン上の DP](../string/string-automaton-dp.md)（準備中） | 青 |
-| 問題文に「インタラクティブ」「質問は Q 回まで」とある | [インタラクティブ問題](../misc/interactive.md)（準備中） | 基礎 |
-| 質問の答えが入力として返ってくる・入出力例が対話の形 | [インタラクティブ問題](../misc/interactive.md)（準備中） | 基礎 |
+| 問題文に「インタラクティブ」「質問は Q 回まで」とある | [インタラクティブ問題](../misc/interactive.md) | 基礎 |
+| 質問の答えが入力として返ってくる・入出力例が対話の形 | [インタラクティブ問題](../misc/interactive.md) | 基礎 |
 
 ### 区間・列・データ構造 {#signs-phrase-sequence}
 
@@ -245,9 +245,9 @@ updated: 2026-10-21
 | 条件を満たす最長（最短）の連続区間・連続区間の個数 | [尺取り法](../basics/two-pointers.md) | 基礎 |
 | 区間を縮めても（広げても）条件が保たれる | [尺取り法](../basics/two-pointers.md) | 基礎 |
 | 長さ M の範囲に入るものの最大個数 | [尺取り法](../basics/two-pointers.md) | 基礎 |
-| グループの併合と、グループ内の種類数・個数の問い合わせ | [マージテク](../tree/small-to-large.md)（準備中） | 水 |
-| 部分木ごとに集合（map）を持って併合する | [マージテク](../tree/small-to-large.md)（準備中） | 水 |
-| すべての部分木について、色の種類数・最頻値を求める | [マージテク](../tree/small-to-large.md)（準備中） | 水 |
+| グループの併合と、グループ内の種類数・個数の問い合わせ | [マージテク](../tree/small-to-large.md) | 水 |
+| 部分木ごとに集合（map）を持って併合する | [マージテク](../tree/small-to-large.md) | 水 |
+| すべての部分木について、色の種類数・最頻値を求める | [マージテク](../tree/small-to-large.md) | 水 |
 | 要素の追加・削除と、検索・最小値の取り出しのクエリが混ざる | [STL コンテナの使い分け](../ds/stl-containers.md) | 基礎 |
 | x 以上で最小の値・最も近い値を、追加・削除しながら何度も答える | [set・multiset・map の応用](../ds/ordered-set.md) | 基礎 |
 | まだ使われていない最小の値（mex）を更新のたびに答える | [set・multiset・map の応用](../ds/ordered-set.md) | 基礎 |
@@ -447,25 +447,25 @@ updated: 2026-10-21
 | この辺には少なくとも L だけ流す | [最小流量制約付きフロー](../graph/flow-lower-bounds.md)（準備中） | 発展 |
 | 必ず使う・使ってもよい・使ってはいけないものが混在する割当 | [最小流量制約付きフロー](../graph/flow-lower-bounds.md)（準備中） | 発展 |
 | 二部グラフでないグラフでペアを作る最大数 | [一般グラフのマッチング](../graph/general-matching.md)（準備中） | 発展 |
-| 辺を 1 本取り除く・1 本足す・閉路をなくして森にする | [木の基本性質と表現](../tree/tree-basics.md)（準備中） | 基礎 |
-| 森として残せる辺の数・消す辺の数 | [木の基本性質と表現](../tree/tree-basics.md)（準備中） | 基礎 |
+| 辺を 1 本取り除く・1 本足す・閉路をなくして森にする | [木の基本性質と表現](../tree/tree-basics.md) | 基礎 |
+| 森として残せる辺の数・消す辺の数 | [木の基本性質と表現](../tree/tree-basics.md) | 基礎 |
 | 頂点 1 を根とする根付き木で、部分木の頂点数・和・最大を求める | [根付き木と走査順](../tree/tree-traversal.md) | 基礎 |
 | 子孫・祖先・訪問順を答える | [根付き木と走査順](../tree/tree-traversal.md) | 基礎 |
 | p_i < i（親の番号が自分より小さい）形で木が与えられる | [根付き木と走査順](../tree/tree-traversal.md) | 基礎 |
-| 距離の偶奇・2 人が同時に動いて出会う場所 | [木の 2 色塗り分けと距離の偶奇](../tree/tree-bipartite.md)（準備中） | 基礎 |
-| 辺の重みの偶奇で頂点を塗り分ける | [木の 2 色塗り分けと距離の偶奇](../tree/tree-bipartite.md)（準備中） | 基礎 |
-| 独立集合を N/2 個以上選ぶ・二部グラフのまま辺を足す | [木の 2 色塗り分けと距離の偶奇](../tree/tree-bipartite.md)（準備中） | 基礎 |
-| 頂点 K を経由する最短距離 | [木の上の距離](../tree/tree-distance.md)（準備中） | 基礎 |
-| 2 人の追いかけっこ・どちらが先に着くか | [木の上の距離](../tree/tree-distance.md)（準備中） | 基礎 |
-| パス上の辺の重みの XOR | [木の上の距離](../tree/tree-distance.md)（準備中） | 基礎 |
-| 部分木の全頂点に x を加算するクエリがたくさん来て、最後に全頂点の値を出力する | [木の上の累積和・いもす法](../tree/tree-imos.md)（準備中） | 基礎 |
-| 辺のどちら側かの頂点すべてに加算する | [木の上の累積和・いもす法](../tree/tree-imos.md)（準備中） | 基礎 |
-| 多数のパスに沿って +1 し、各辺・各頂点を通った回数を求める | [木の上の累積和・いもす法](../tree/tree-imos.md)（準備中） | 基礎 |
-| 指定した K 頂点をすべて連結に保つのに必要な最小の頂点数・辺数 | [指定頂点を結ぶ最小の部分木](../tree/steiner-subtree.md)（準備中） | 基礎 |
-| 頂点 i と ⌊i/2⌋ を結ぶ・L/R/U の移動の列 | [完全二分木](../tree/complete-binary-tree.md)（準備中） | 基礎 |
-| 木を K 頂点ずつのパスに分ける | [葉から考える](../tree/leaf-first.md)（準備中） | 水 |
-| 辺をすべて使う・すべて覆う | [葉から考える](../tree/leaf-first.md)（準備中） | 水 |
-| 葉を消していく操作 | [葉から考える](../tree/leaf-first.md)（準備中） | 水 |
+| 距離の偶奇・2 人が同時に動いて出会う場所 | [木の 2 色塗り分けと距離の偶奇](../tree/tree-bipartite.md) | 基礎 |
+| 辺の重みの偶奇で頂点を塗り分ける | [木の 2 色塗り分けと距離の偶奇](../tree/tree-bipartite.md) | 基礎 |
+| 独立集合を N/2 個以上選ぶ・二部グラフのまま辺を足す | [木の 2 色塗り分けと距離の偶奇](../tree/tree-bipartite.md) | 基礎 |
+| 頂点 K を経由する最短距離 | [木の上の距離](../tree/tree-distance.md) | 基礎 |
+| 2 人の追いかけっこ・どちらが先に着くか | [木の上の距離](../tree/tree-distance.md) | 基礎 |
+| パス上の辺の重みの XOR | [木の上の距離](../tree/tree-distance.md) | 基礎 |
+| 部分木の全頂点に x を加算するクエリがたくさん来て、最後に全頂点の値を出力する | [木の上の累積和・いもす法](../tree/tree-imos.md) | 基礎 |
+| 辺のどちら側かの頂点すべてに加算する | [木の上の累積和・いもす法](../tree/tree-imos.md) | 基礎 |
+| 多数のパスに沿って +1 し、各辺・各頂点を通った回数を求める | [木の上の累積和・いもす法](../tree/tree-imos.md) | 基礎 |
+| 指定した K 頂点をすべて連結に保つのに必要な最小の頂点数・辺数 | [指定頂点を結ぶ最小の部分木](../tree/steiner-subtree.md) | 基礎 |
+| 頂点 i と ⌊i/2⌋ を結ぶ・L/R/U の移動の列 | [完全二分木](../tree/complete-binary-tree.md) | 基礎 |
+| 木を K 頂点ずつのパスに分ける | [葉から考える](../tree/leaf-first.md) | 水 |
+| 辺をすべて使う・すべて覆う | [葉から考える](../tree/leaf-first.md) | 水 |
+| 葉を消していく操作 | [葉から考える](../tree/leaf-first.md) | 水 |
 | 各頂点の次数を決めて木を作る・次数の和が 2N−2 | [木の次数列と Prüfer 列](../tree/tree-degree.md)（準備中） | 青 |
 | 次数が○以下の木・星や雪の結晶など次数で決まる形 | [木の次数列と Prüfer 列](../tree/tree-degree.md)（準備中） | 青 |
 | 最も遠い 2 頂点・最長のパス | [木の直径と最遠点](../tree/tree-diameter.md) | 水 |
@@ -474,11 +474,11 @@ updated: 2026-10-21
 | K 個の頂点を選んで通る辺の総長を最大化する（K = 1, 2, … のすべてについて） | [木の直径と最遠点](../tree/tree-diameter.md) | 水 |
 | ペアを作ってパスの長さの和を最大化する | [木の重心](../tree/tree-centroid.md)（準備中） | 黄 |
 | どの成分も半分以下になるように分ける | [木の重心](../tree/tree-centroid.md)（準備中） | 黄 |
-| すべての i < j について f(i, j) の総和 | [辺で切って数える](../tree/tree-edge-contribution.md)（準備中） | 水 |
-| 全ペアのパス上の最大値（最小値）の和 | [辺で切って数える](../tree/tree-edge-contribution.md)（準備中） | 水 |
-| 条件を満たす木を 1 つ出力せよ（なければ −1） | [木の構築・復元](../tree/tree-construction.md)（準備中） | 水 |
-| 距離の情報から木を復元できるか | [木の構築・復元](../tree/tree-construction.md)（準備中） | 水 |
-| 訪問順（DFS 順）から元の木が何通りあるか | [木の構築・復元](../tree/tree-construction.md)（準備中） | 水 |
+| すべての i < j について f(i, j) の総和 | [辺で切って数える](../tree/tree-edge-contribution.md) | 水 |
+| 全ペアのパス上の最大値（最小値）の和 | [辺で切って数える](../tree/tree-edge-contribution.md) | 水 |
+| 条件を満たす木を 1 つ出力せよ（なければ −1） | [木の構築・復元](../tree/tree-construction.md) | 水 |
+| 距離の情報から木を復元できるか | [木の構築・復元](../tree/tree-construction.md) | 水 |
+| 訪問順（DFS 順）から元の木が何通りあるか | [木の構築・復元](../tree/tree-construction.md) | 水 |
 | 形が同じ部分木の種類数 | [木の同型判定と木のハッシュ](../tree/tree-isomorphism.md)（準備中） | 発展 |
 | 2 つの木が同じ形か（根あり・根なし） | [木の同型判定と木のハッシュ](../tree/tree-isomorphism.md)（準備中） | 発展 |
 | 木の 2 頂点の距離をクエリでたくさん聞かれる | [最小共通祖先（LCA）](../tree/lca.md) | 青 |
@@ -579,8 +579,8 @@ updated: 2026-10-21
 | X ← AX + B (mod P) を繰り返して G が最初に現れる番号 | [位数・原始根・離散対数](../math/multiplicative-order.md)（準備中） | 黄 |
 | x^n ≡ y (mod P) となる組を数える | [位数・原始根・離散対数](../math/multiplicative-order.md)（準備中） | 黄 |
 | mod P での積の値ごとに個数を数える | [位数・原始根・離散対数](../math/multiplicative-order.md)（準備中） | 黄 |
-| a^b（b ≥ 2）の形で表せる N 以下の数 | [整数の平方根・K 乗根と累乗数](../math/integer-root.md)（準備中） | 基礎 |
-| 2^a × b² のように累乗を組み合わせた数を数える | [整数の平方根・K 乗根と累乗数](../math/integer-root.md)（準備中） | 基礎 |
+| a^b（b ≥ 2）の形で表せる N 以下の数 | [整数の平方根・K 乗根と累乗数](../math/integer-root.md) | 基礎 |
+| 2^a × b² のように累乗を組み合わせた数を数える | [整数の平方根・K 乗根と累乗数](../math/integer-root.md) | 基礎 |
 | b 進法・−2 進法で表す | [N 進法](../math/base-conversion.md) | 基礎 |
 | a, b, …, z, aa, ab, … と続く名前の n 番目 | [N 進法](../math/base-conversion.md) | 基礎 |
 | 文字列を n 進数とみた値が M 以下になる n を数える | [N 進法](../math/base-conversion.md) | 基礎 |
@@ -774,16 +774,16 @@ updated: 2026-10-21
 | 条件を満たす文字列のうち辞書順で最小（最大）のものを出力する | [文字列の基本操作と辞書順](../string/string-basics.md) | 基礎 |
 | 文字を一斉に別の文字へ置き換える操作を繰り返して一致させられるか | [文字列の基本操作と辞書順](../string/string-basics.md) | 基礎 |
 | 先頭の文字を末尾に移す（回転する）操作を何回か行う | [文字列の基本操作と辞書順](../string/string-basics.md) | 基礎 |
-| T を部分列として含むか（連続でなくてよい） | [部分列の判定と次の出現位置の表](../string/subsequence-matching.md)（準備中） | 基礎 |
-| 長さ K の部分列のうち辞書順で最小のもの | [部分列の判定と次の出現位置の表](../string/subsequence-matching.md)（準備中） | 基礎 |
-| S の部分列として現れない最短の文字列 | [部分列の判定と次の出現位置の表](../string/subsequence-matching.md)（準備中） | 基礎 |
-| S を何回も繰り返した文字列の部分列として入るか | [部分列の判定と次の出現位置の表](../string/subsequence-matching.md)（準備中） | 基礎 |
+| T を部分列として含むか（連続でなくてよい） | [部分列の判定と次の出現位置の表](../string/subsequence-matching.md) | 基礎 |
+| 長さ K の部分列のうち辞書順で最小のもの | [部分列の判定と次の出現位置の表](../string/subsequence-matching.md) | 基礎 |
+| S の部分列として現れない最短の文字列 | [部分列の判定と次の出現位置の表](../string/subsequence-matching.md) | 基礎 |
+| S を何回も繰り返した文字列の部分列として入るか | [部分列の判定と次の出現位置の表](../string/subsequence-matching.md) | 基礎 |
 | 部分文字列どうしが等しいかを大量に判定する | [ローリングハッシュ](../string/rolling-hash.md) | 水 |
 | 重ならずに 2 回現れる部分文字列の最大の長さ | [ローリングハッシュ](../string/rolling-hash.md) | 水 |
 | 1 文字の更新と、区間が回文か（一致するか）のクエリ | [ローリングハッシュ](../string/rolling-hash.md) | 水 |
-| 先頭 x 項の集合と先頭 y 項の集合が等しいか | [集合・多重集合のハッシュ](../string/hashing-for-sets.md)（準備中） | 水 |
-| 2 つの区間を並べ替えると一致するか（多重集合として等しいか） | [集合・多重集合のハッシュ](../string/hashing-for-sets.md)（準備中） | 水 |
-| 区間内の各値が偶数個（3 の倍数個）か・区間の積が平方数（立方数）か | [集合・多重集合のハッシュ](../string/hashing-for-sets.md)（準備中） | 水 |
+| 先頭 x 項の集合と先頭 y 項の集合が等しいか | [集合・多重集合のハッシュ](../string/hashing-for-sets.md) | 水 |
+| 2 つの区間を並べ替えると一致するか（多重集合として等しいか） | [集合・多重集合のハッシュ](../string/hashing-for-sets.md) | 水 |
+| 区間内の各値が偶数個（3 の倍数個）か・区間の積が平方数（立方数）か | [集合・多重集合のハッシュ](../string/hashing-for-sets.md) | 水 |
 | ハッシュ値を set や map に大量に入れて重複を数える | [ハッシュの衝突と安全な設計](../string/hash-safety.md)（準備中） | 青 |
 | 1000 桁程度の巨大な数の積や和が一致するかを判定する | [ハッシュの衝突と安全な設計](../string/hash-safety.md)（準備中） | 青 |
 | 各位置から、文字列の先頭と何文字一致するか | [Z-algorithm](../string/z-algorithm.md) | 水 |
@@ -929,7 +929,7 @@ updated: 2026-10-21
 | 区間の最大値の位置で左右に分けると、それぞれが同じ形の問題になる | [分割統治](../basics/divide-and-conquer.md)（準備中） | 黄 |
 | 式を変形すると i の項と j の項に分離できる | [言い換えの典型](../thinking/reformulation.md) | 水 |
 | 直接数えると場合分けが多いが、条件を満たさない側は数えやすい | [余事象](../thinking/complement.md) | 基礎 |
-| 後ろから決めると選択肢が 1 つに決まる | [後ろから・逆順に考える](../thinking/reverse-thinking.md)（準備中） | 基礎 |
+| 後ろから決めると選択肢が 1 つに決まる | [後ろから・逆順に考える](../thinking/reverse-thinking.md) | 基礎 |
 | dp[i] が dp[i−1]・dp[i−2] など定数個の前の状態から決まる | [DP の基本](../dp/dp-basics.md) | 基礎 |
 | dp[x] が x より小さい値の dp で決まるが、どの値が現れるかを前もって列挙しにくい | [メモ化再帰](../dp/memoized-recursion.md) | 基礎 |
 | dp[i] が dp[j]（j > i）から決まる（i 番目以降で最適に行動したときの値） | [DP の計算順序](../dp/dp-order.md) | 水 |

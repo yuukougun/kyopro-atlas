@@ -94,7 +94,7 @@ updated: 2026-10-21
 | [エラトステネスの篩](../math/sieve-eratosthenes.md) | 整数論・代数 | [enumerate_primes](https://judge.yosupo.jp/problem/enumerate_primes) |
 | [大きな数の素数判定と素因数分解](../math/miller-rabin.md)（準備中） | 整数論・代数 | [primality_test](https://judge.yosupo.jp/problem/primality_test)、[factorize](https://judge.yosupo.jp/problem/factorize) |
 | [位数・原始根・離散対数](../math/multiplicative-order.md)（準備中） | 整数論・代数 | [discrete_logarithm_mod](https://judge.yosupo.jp/problem/discrete_logarithm_mod)、[primitive_root](https://judge.yosupo.jp/problem/primitive_root)、[sqrt_mod](https://judge.yosupo.jp/problem/sqrt_mod)、[kth_root_mod](https://judge.yosupo.jp/problem/kth_root_mod) |
-| [整数の平方根・K 乗根と累乗数](../math/integer-root.md)（準備中） | 整数論・代数 | [kth_root_integer](https://judge.yosupo.jp/problem/kth_root_integer) |
+| [整数の平方根・K 乗根と累乗数](../math/integer-root.md) | 整数論・代数 | [kth_root_integer](https://judge.yosupo.jp/problem/kth_root_integer) |
 | [商の列挙](../math/floor-quotient-enum.md) | 整数論・代数 | [enumerate_quotients](https://judge.yosupo.jp/problem/enumerate_quotients) |
 | [乗法的関数の和と素数の個数](../math/multiplicative-function.md)（準備中） | 整数論・代数 | [counting_primes](https://judge.yosupo.jp/problem/counting_primes)、[sum_of_totient_function](https://judge.yosupo.jp/problem/sum_of_totient_function)、[sum_of_multiplicative_function](https://judge.yosupo.jp/problem/sum_of_multiplicative_function) |
 | [floor sum](../math/floor-sum.md) | 整数論・代数 | [sum_of_floor_of_linear](https://judge.yosupo.jp/problem/sum_of_floor_of_linear)、[min_of_mod_of_linear](https://judge.yosupo.jp/problem/min_of_mod_of_linear) |

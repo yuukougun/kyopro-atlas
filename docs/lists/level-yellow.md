@@ -111,10 +111,10 @@ difficulty 2000〜2399 の帯で主に必要になるページ（37 ページ）
 | 4-サイクルの検出（鳩の巣原理で打ち切る） | [次数による平方分割](../graph/degree-sqrt.md)（青）（準備中） | グラフ |
 | 中心と半径・直径の個数 | [木の直径と最遠点](../tree/tree-diameter.md#center)（水） | 木 |
 | 長鎖分解（最も深い子へつなぐ分解と、最も遠い葉を順に選ぶ貪欲） | [木の直径と最遠点](../tree/tree-diameter.md#long-path-decomposition)（水） | 木 |
-| 期待値・特定の色を通らないパスへの応用 | [辺で切って数える](../tree/tree-edge-contribution.md)（水）（準備中） | 木 |
-| 森に辺を足すとき小さい方を根付け直す | [マージテク](../tree/small-to-large.md)（水）（準備中） | 木 |
-| 部分木ごとの集合の併合（木 DP での使い方は DP の章） | [マージテク](../tree/small-to-large.md)（水）（準備中） | 木 |
-| DSU on Tree（重い子の結果を残す） | [マージテク](../tree/small-to-large.md)（水）（準備中） | 木 |
+| 期待値・特定の色を通らないパスへの応用 | [辺で切って数える](../tree/tree-edge-contribution.md#expectation)（水） | 木 |
+| 森に辺を足すとき小さい方を根付け直す | [マージテク](../tree/small-to-large.md#reroot-smaller)（水） | 木 |
+| 部分木ごとの集合の併合（木 DP での使い方は DP の章） | [マージテク](../tree/small-to-large.md#subtree-merge)（水） | 木 |
+| DSU on Tree（重い子の結果を残す） | [マージテク](../tree/small-to-large.md#dsu-on-tree)（水） | 木 |
 | \|x − a\| + b を足していく関数の最小値（中央値の更新の応用。Slope Trick の入口） | [上位 K 個の和と中央値の管理](../ds/top-k-multiset.md#absolute-sum-function)（水） | データ構造 |
 | 値つきの区間の分割・統合 | [区間を set で管理する](../ds/interval-set.md#valued-intervals)（水） | データ構造 |
 | Cartesian tree（最大値で区間を割る再帰を O(N) で作る） | [単調スタックとスライド最小値](../ds/monotonic-stack.md#cartesian-tree)（水） | データ構造 |
@@ -137,7 +137,7 @@ difficulty 2000〜2399 の帯で主に必要になるページ（37 ページ）
 | 同じ遷移を多数回行うときは行列累乗へ | [確率 DP](../comb/probability-dp.md#matrix-power)（水） | 数え上げ・確率・ゲーム |
 | 木の上のゲーム | [ミニマックス](../comb/minimax.md#tree)（水） | 数え上げ・確率・ゲーム |
 | 答えを決め打ちして勝敗に直す | [ミニマックス](../comb/minimax.md#binary-search)（水） | 数え上げ・確率・ゲーム |
-| 各値が偶数個・k の倍数個かの判定（指数 mod k を乱数で符号化） | [集合・多重集合のハッシュ](../string/hashing-for-sets.md)（水）（準備中） | 文字列 |
+| 各値が偶数個・k の倍数個かの判定（指数 mod k を乱数で符号化） | [集合・多重集合のハッシュ](../string/hashing-for-sets.md#multiplicity-mod-k)（水） | 文字列 |
 | S＋区切り＋T で各位置から S の接頭辞が何文字続くか（DP の材料） | [Z-algorithm](../string/z-algorithm.md#prefix-extension)（水） | 文字列 |
 | Trie 上の確率・期待値 | [Trie](../string/trie.md#expectation-on-trie)（水） | 文字列 |
 | 禁止語の貪欲：一致したら書き換えて状態を根に戻す | [Aho-Corasick 法](../string/aho-corasick.md)（青）（準備中） | 文字列 |

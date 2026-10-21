@@ -33,7 +33,7 @@ search:
 
 ## 部分列の判定と次の出現位置の表（subsequence-matching） {#subsequence-matching}
 
-- id：`subsequence-matching`　レベル：基礎　段階：stub　type：technique
+- id：`subsequence-matching`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/subsequence-matching/
 - 別名：部分列判定、次の出現位置、nxt 配列、部分列オートマトン、序列自動機、部分列として含むか、subsequence automaton
 - 種類：文字列
@@ -76,7 +76,7 @@ search:
 
 ## 集合・多重集合のハッシュ（hashing-for-sets） {#hashing-for-sets}
 
-- id：`hashing-for-sets`　レベル：水　段階：stub　type：technique
+- id：`hashing-for-sets`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/hashing-for-sets/
 - 別名：Zobrist hashing、集合のハッシュ、多重集合のハッシュ、XOR ハッシュ、和のハッシュ、乱択ハッシュ、並べ替えて一致するか
 - 種類：ハッシュ・乱択、累積和・差分

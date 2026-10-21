@@ -21,7 +21,7 @@ int main() {
     cout << c[0] << '\n';
     // --8<-- [start:fill]
     fill(begin(c), end(c), 1);                    // 1 次元の C 配列
-    fill(&grid[0][0], &grid[0][0] + 3 * 5, 7);    // 2 次元の C 配列を先頭から 15 個
+    for (auto& row : grid) ranges::fill(row, 7);  // 2 次元の C 配列は行ごとに
     vector<vector<long long>> dp(n, vector<long long>(m));
     for (auto& row : dp) ranges::fill(row, -1);   // 大きさを変えずに埋める
     dp.assign(n + 1, vector<long long>(m + 1, 0)); // 大きさごと作り直す

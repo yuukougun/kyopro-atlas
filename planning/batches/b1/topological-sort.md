@@ -43,3 +43,18 @@ abc291_e は本文の unique の節で問題 ID を出さず型だけを書い�
 - 「番号の小さい頂点をできるだけ前に置く」の解き方（辺を逆にして大きい順に末尾から）は lexicographic-greedy#topological の記述に合わせ、ここではリンクだけにした
 - cycle-detection の節 kahn-leftover は stub なのでリンクしていない（ページへのリンクだけ）。draft になったら「残った頂点」の段落から節へ張るとよい
 - frequency_evidence の abc478_e は scc の練習で、このページには載せていない（catalog のとおり）
+
+## 検証の指摘への対応（verify/topological-sort.md）
+
+- 1（直すべき）：(b) で直した。導入の宣言を「図・表・確認問題では頂点を 1 から番号付けし、コードでは入力から 1 を引いて 0-indexed で持つ」に変え、確認問題（#unique）の頂点を 1〜3 に振り直した（辺 3→1・1→2・3→2、答え 3, 1, 2 と 3, 2, 1）
+- 2（直すべき）：典型90 071 の方針の最後を「見つかった並びが K 個に届かなければ −1 を出す（閉路があれば 1 個も作れない）」に直した
+- 3〜6・8：指摘の直し方のとおりに直した（6 は cycle-detection#kahn-leftover へ節のリンクを足した）
+- 7：cpp-environment は stub なので、ページへのリンク（`../cpp/cpp-environment.md`）に変えた。メインへの申し送り：cpp-environment が draft になり `#stack-depth` ができたら節へ張り直す
+- 採らなかったもの：なし
+
+## 台帳への提案（検証を受けて追加）
+
+| 問題 ID | 項目 | 新しい値 | 根拠 |
+| --- | --- | --- | --- |
+| typical90_bs | note | 順が K 個未満でも −1（閉路のときだけではない） | https://github.com/E869120/kyopro_educational_90/blob/main/sol/071-03.cpp の最後 `if (answer_list.size() != K)` |
+| abc223_d | checked | 2026-10-21 | 検証役が drken の記事で制約 N, M ≤ 2×10^5 を確かめた |

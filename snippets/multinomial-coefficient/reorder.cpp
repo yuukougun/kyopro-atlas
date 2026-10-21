@@ -29,6 +29,9 @@ mint multinomial(const vector<int>& a) {
     }
     return fact[n] * res;
 }
+// --8<-- [end:core]
+
+// --8<-- [start:merge]
 
 // 文字ごとの個数の上限 c[0], …, c[m-1] のもとで作れる、空でない文字列の個数。
 // dp[len] ＝ ここまでの文字だけで作る長さ len の文字列の個数
@@ -51,7 +54,7 @@ mint count_strings(const vector<int>& c) {
     for (int len = 1; len <= total; len++) sum += dp[len];
     return sum;
 }
-// --8<-- [end:core]
+// --8<-- [end:merge]
 
 int main() {
     init();

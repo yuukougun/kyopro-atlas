@@ -37,3 +37,15 @@
 - 同じ理由で expected-value-dp（自己ループの移項・状態の設計）と expectation-tail-sum（waiting-time）もページへのリンクにとどめた。draft になったら `expected-value-dp#self-loop`・`expectation-tail-sum#waiting-time` へ直すとよい
 - 調和級数のページ（math/harmonic-sum）への「同じ和」のリンクは、harmonic-sum が O(N log N) の根拠の話なので、つながりとしては弱いかもしれない（メインの判断に任せる）
 - 使用量の目安：道具の呼び出し 約 30 回、Web 取得 3 回（ikatakos・drken・GitHub raw）と題名の確認 2 回
+
+## 検証の指摘への対応（2026-10-21）
+
+- 1（直すべき）：要点と front matter の complexity の法を $P$ にした（$O(N \log P)$、法 $P = 998244353$）
+- 2（直すべき）：stages.svg の font-size を 16（見出し 17）に上げた。幅 560 のまま収まることを画像にして確かめた
+- 3：#geometric と #next-steps の期待値 DP へのリンクを `expected-value-dp.md#self-loop` にした。inclusion-exclusion・expectation-tail-sum は stub なのでページへのリンクのまま
+- 4：min-max 包除の「N が大きくても」に、確率を小さい整数 $W$ で $w_i / W$ と書けるときという条件を書いた
+- 5：#staged に「$E[X + Y] = E[X] + E[Y]$ は独立でなくても成り立つ」の 1 文を足した。prerequisites に linearity-of-expectation を足すかは order との兼ね合いがあるので、メインの判断に任せる（提案）
+- 6：記法と用語の約束へのリンクを確率・期待値の記法の文の末尾へ移し、`#probability` を付けた
+- 7：#failures の表を 2 行にし、3 行目の内容は表の後の段落で具体例（$s = N$ 種類から始めると 0 回）を添えて述べた
+- 8：「段階ごとに確率の形が違う」の例を、$M$ 通りから引くとき $p_k = (N-k)/M$・答え $M H_N$ にした
+- 採らなかった指摘：なし。textlint の警告 2 件（33 行・165 行の文の長さ）は前と同じで、165 行は台帳の arc085_a の summary の短縮の提案（上）で解ける

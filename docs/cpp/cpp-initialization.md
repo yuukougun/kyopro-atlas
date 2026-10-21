@@ -45,7 +45,7 @@ atcoder: true
 
 初期化は、変数を作るときに大きさと最初の値を決める書き方である。C++ では丸括弧 `()` と波括弧 `{}` で意味が変わり、書かなければ 0 になる場所とならない場所がある。どちらも間違えるとコンパイルは通ったまま答えが変わるので、形ごとに覚えておく。
 
-このページのコードは `#include <bits/stdc++.h>` と `using namespace std;` を前提にする。版は AtCoder の GCC 15.2（`-std=gnu++23`）と、手元の g++-13・g++-15 で確かめた。
+このページのコードは `#include <bits/stdc++.h>` と `using namespace std;` を前提にする。版は手元の g++-13・g++-15（`-std=gnu++23`）で確かめた。AtCoder の GCC 15.2（`-std=gnu++23`）では、このページの書き方はすべて使える。
 
 ## vector の初期化：(n) は 0 が n 個、(n, x) は x が n 個、{n} は値 n が 1 個 {#vector-init}
 
@@ -100,7 +100,7 @@ atcoder: true
 
 ## グローバル変数は 0 で初期化され、関数の中の変数・配列は初期化されない {#global-vs-local}
 
-関数の外（グローバル）で宣言した変数と配列は、何も書かなくても 0 で始まる。関数の中で宣言した `int`・`long long`・C 配列・`array` は、初期化を書かないと値が決まらない。決まらない値を読むのは未定義動作である。`vector` は `(n)` だけで 0 が入るので、この問題は起きない。
+関数の外（グローバル）で宣言した変数と配列は、何も書かなくても 0 で始まる。関数の中で（`static` を付けずに）宣言した `int`・`long long`・C 配列・`array` は、初期化を書かないと値が決まらない。決まらない値を読むのは未定義動作である。`vector` は `(n)` だけで 0 が入るので、この問題は起きない。
 
 次の関数は `s` と `cnt` を初期化せずに足し始めている。
 
@@ -108,7 +108,7 @@ atcoder: true
 --8<-- "cpp-initialization/uninit-ng.cpp:core"
 ```
 
-入力 `3` と `1 2 3` に対して、手元の g++-13 では 105842398323404453 のような値が出た。正しい答えは 6001 である。`-Wall -Wextra` は `s` について `'s' may be used uninitialized` と警告したが、配列 `cnt` については何も言わなかった。
+入力 `3` と `1 2 3` に対して、手元の g++-13 では 105842398323404453 のような値が出た。正しい答えは 6001 である。`-O2 -Wall -Wextra` では `s` について `'s' may be used uninitialized` と警告したが（`-O2` を付けないと `s` にも警告は出ない）、配列 `cnt` については何も言わなかった。
 
 AtCoder の GCC には `-ftrivial-auto-var-init=zero`（初期化していない関数の中の変数を 0 で埋めるオプション）が付いている。同じコードを手元でこのオプションを付けて試すと 6001 が出た。そのため「AtCoder では AC、手元では答えが合わない」ということが起こる（[AtCoder の C++ 環境](../cpp/cpp-environment.md)）。規格の上では未定義動作のままなので、初期化を書いて防ぐ。
 
@@ -116,7 +116,7 @@ AtCoder の GCC には `-ftrivial-auto-var-init=zero`（初期化していない
 --8<-- "cpp-initialization/uninit-ok.cpp:core"
 ```
 
-- **版**：C++ のどの版でも同じ。g++-13・g++-15 で、どちらも `s` だけを警告した
+- **版**：C++ のどの版でも同じ。g++-13・g++-15 で、どちらも `-O2` 付きで `s` だけを警告した
 - **落とし穴**：配列の未初期化は警告に頼れない。関数の中の配列と `array` には `{}` を付ける習慣にする
 
 ## 構造体のメンバの既定値と指示付き初期化 Edge{.to = v, .cost = c}（C++20。メンバの宣言順に書く） {#designated-init}
@@ -144,7 +144,7 @@ AtCoder の GCC には `-ftrivial-auto-var-init=zero`（初期化していない
 エラーは `designator order for field 'Edge::to' does not match declaration order in 'Edge'` と出る（g++-13・g++-15）。
 
 - **素朴に書くと**：`Edge e2; e2.to = v; e2.cost = c;` と 1 つずつ代入するのと同じ中身になる
-- **版**：指示付き初期化は C++20。GCC は `-std=gnu++17` でも拡張として黙って通す。`-std=c++17 -Wpedantic` なら `C++ designated initializers only available with '-std=c++20'` と警告する（g++-13・g++-15）
+- **版**：指示付き初期化は C++20。GCC は `-std=gnu++17` でも拡張として黙って通す。`-std=c++17 -Wpedantic` なら `C++ designated initializers only available with '-std=c++20' or '-std=gnu++20'` と警告する（g++-13・g++-15）
 - **落とし穴**：使えるのは、コンストラクタを書いていない構造体（[集成体](../guide/glossary.md#aggregate)）だけである。コンストラクタを足すと集成体でなくなる。このとき指示付き初期化はエラー（`designated initializers cannot be used with a non-aggregate type`）になる。`{}` に値を並べる書き方は、コンストラクタの呼び出しになる（g++-13・g++-15 で確かめた）
 
 ## コンストラクタのない構造体（集成体）にも emplace_back(to, cost) が使える（C++20。C++17 ではエラー） {#aggregate-emplace}
@@ -161,7 +161,7 @@ C++17 までは丸括弧で集成体を作れないので、`emplace_back(v, c)`
 --8<-- "cpp-initialization/aggregate-emplace-17-ng.cpp:core"
 ```
 
-- **版**：C++20。g++-13・g++-15 とも `-std=gnu++20` 以降で通る。`-std=gnu++17` では `no matching function for call to 'Edge::Edge(long long int)'` などのエラーになる
+- **版**：C++20。g++-13・g++-15 とも `-std=gnu++20` 以降で通る。`-std=gnu++17` では `new initializer expression list treated as compound expression` に続いて `no matching function for call to 'Edge::Edge(long long int)'` などのエラーになる。丸括弧の中の `1, 10LL` がカンマ演算子として 1 つの値 `10LL` に読まれるためである
 - **落とし穴**：丸括弧の初期化は、波括弧と違って[縮小変換](../guide/glossary.md#narrowing-conversion)（`double` から `int` のように値が変わりうる変換）を止めない。次の `emplace_back(1.9, 2)` は `to` が 1 になり、`-Wall -Wextra` でも警告は出なかった（g++-13・g++-15）。同じ値を `Edge{1.9, 2}` と波括弧で書くとコンパイルエラーになる
 
 ```cpp
@@ -202,7 +202,7 @@ C++17 までは丸括弧で集成体を作れないので、`emplace_back(v, c)`
 --8<-- "cpp-initialization/refill.cpp:memset-ng"
 ```
 
-1 にしたいときや、INF に `1LL << 60` などを使うときは `fill` を使う。2 次元の C 配列は要素が行の順に続いて並ぶので、先頭の要素の位置から全要素の数だけ埋める。vector の vector は各行が別の領域にあるので、行ごとに埋めるか、`assign` で作り直す。
+1 にしたいときや、INF に `1LL << 60` などを使うときは `fill` を使う。2 次元の C 配列は行ごとに `fill` する。要素は行の順に続いて並ぶので `&grid[0][0]` から全要素の数だけ埋める書き方もよく見かけるが、規格の上では行をまたぐポインタの演算になり、保証されない。vector の vector は各行が別の領域にあるので、行ごとに埋めるか、`assign` で作り直す。
 
 ```cpp
 --8<-- "cpp-initialization/refill.cpp:fill"

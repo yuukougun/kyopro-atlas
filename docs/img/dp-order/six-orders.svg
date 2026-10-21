@@ -1,12 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 640" font-family="sans-serif" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 940" font-family="sans-serif" font-size="13">
 <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f4e9a"/></marker></defs>
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="390.0" y="22" text-anchor="middle" fill="#222" font-size="14">矢印は「先に確定させる値 → それを使う値」</text>
+<text x="260.0" y="22" text-anchor="middle" fill="#222" font-size="14">矢印は「先に確定させる値 → それを使う値」</text>
+<g transform="translate(0,0)">
 <rect x="6" y="40" width="248" height="288" rx="6" fill="none" stroke="#999" stroke-dasharray="4 3"/>
 <text x="130.0" y="62" text-anchor="middle" fill="#222" font-size="15" font-weight="bold">① 添字の昇順</text>
-<text x="130.0" y="284" text-anchor="middle" fill="#444" font-size="12">dp[i] は dp[i−1]・dp[i−2] から</text>
-<text x="130.0" y="302" text-anchor="middle" fill="#444" font-size="12">順序：i = 0, 1, 2, …</text>
-<text x="130.0" y="320" text-anchor="middle" fill="#444" font-size="12">減る量：添字 i</text>
+<text x="130.0" y="284" text-anchor="middle" fill="#444" font-size="13">dp[i] は dp[i−1]・dp[i−2] から</text>
+<text x="130.0" y="302" text-anchor="middle" fill="#444" font-size="13">順序：i = 0, 1, 2, …</text>
+<text x="130.0" y="320" text-anchor="middle" fill="#444" font-size="13">減る量：添字 i</text>
 <circle cx="30" cy="156" r="15" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
 <text x="30" y="160.5" text-anchor="middle" fill="#222">0</text>
 <circle cx="80" cy="156" r="15" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
@@ -24,11 +25,13 @@
 <path d="M45.0,156.0 Q80.0,130.0 115.0,156.0" fill="none" stroke="#1f4e9a" stroke-width="1.4" marker-end="url(#ar)"/>
 <path d="M95.0,156.0 Q130.0,130.0 165.0,156.0" fill="none" stroke="#1f4e9a" stroke-width="1.4" marker-end="url(#ar)"/>
 <path d="M145.0,156.0 Q180.0,130.0 215.0,156.0" fill="none" stroke="#1f4e9a" stroke-width="1.4" marker-end="url(#ar)"/>
+</g>
+<g transform="translate(0,0)">
 <rect x="266" y="40" width="248" height="288" rx="6" fill="none" stroke="#999" stroke-dasharray="4 3"/>
 <text x="390.0" y="62" text-anchor="middle" fill="#222" font-size="15" font-weight="bold">② 逆順（後ろから）</text>
-<text x="390.0" y="284" text-anchor="middle" fill="#444" font-size="12">dp[i] は dp[i+1]・dp[i+2] から</text>
-<text x="390.0" y="302" text-anchor="middle" fill="#444" font-size="12">順序：i = N, N−1, …, 0</text>
-<text x="390.0" y="320" text-anchor="middle" fill="#444" font-size="12">dp[N]（終わり）の値が分かっている</text>
+<text x="390.0" y="284" text-anchor="middle" fill="#444" font-size="13">dp[i] は dp[i+1]・dp[i+2] から</text>
+<text x="390.0" y="302" text-anchor="middle" fill="#444" font-size="13">順序：i = N, N−1, …, 0</text>
+<text x="390.0" y="320" text-anchor="middle" fill="#444" font-size="13">dp[N]（終わり）の値が分かっている</text>
 <circle cx="290" cy="156" r="15" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
 <text x="290" y="160.5" text-anchor="middle" fill="#222">0</text>
 <circle cx="340" cy="156" r="15" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
@@ -46,11 +49,13 @@
 <path d="M375.0,156.0 Q340.0,182.0 305.0,156.0" fill="none" stroke="#1f4e9a" stroke-width="1.4" marker-end="url(#ar)"/>
 <path d="M425.0,156.0 Q390.0,182.0 355.0,156.0" fill="none" stroke="#1f4e9a" stroke-width="1.4" marker-end="url(#ar)"/>
 <path d="M475.0,156.0 Q440.0,182.0 405.0,156.0" fill="none" stroke="#1f4e9a" stroke-width="1.4" marker-end="url(#ar)"/>
+</g>
+<g transform="translate(-520,300)">
 <rect x="526" y="40" width="248" height="288" rx="6" fill="none" stroke="#999" stroke-dasharray="4 3"/>
 <text x="650.0" y="62" text-anchor="middle" fill="#222" font-size="15" font-weight="bold">③ 値の順</text>
-<text x="650.0" y="284" text-anchor="middle" fill="#444" font-size="12">値の小さい頂点へしか移れない</text>
-<text x="650.0" y="302" text-anchor="middle" fill="#444" font-size="12">順序：値の小さい順にソート</text>
-<text x="650.0" y="320" text-anchor="middle" fill="#444" font-size="12">減る量：頂点の値</text>
+<text x="650.0" y="284" text-anchor="middle" fill="#444" font-size="13">値の小さい頂点へしか移れない</text>
+<text x="650.0" y="302" text-anchor="middle" fill="#444" font-size="13">順序：値の小さい順にソート</text>
+<text x="650.0" y="320" text-anchor="middle" fill="#444" font-size="13">減る量：頂点の値</text>
 <circle cx="580" cy="206" r="15" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
 <text x="580" y="210.5" text-anchor="middle" fill="#222">2</text>
 <circle cx="710" cy="201" r="15" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
@@ -67,11 +72,13 @@
 <line x1="662.2" y1="147.3" x2="707.8" y2="114.7" stroke="#1f4e9a" stroke-width="1.4" marker-end="url(#ar)"/>
 <line x1="711.6" y1="186.1" x2="718.4" y2="120.9" stroke="#1f4e9a" stroke-width="1.4" marker-end="url(#ar)"/>
 <line x1="580.0" y1="191.0" x2="580.0" y2="126.0" stroke="#1f4e9a" stroke-width="1.4" marker-end="url(#ar)"/>
+</g>
+<g transform="translate(260,0)">
 <rect x="6" y="340" width="248" height="288" rx="6" fill="none" stroke="#999" stroke-dasharray="4 3"/>
 <text x="130.0" y="362" text-anchor="middle" fill="#222" font-size="15" font-weight="bold">④ 区間の長さ順</text>
-<text x="130.0" y="584" text-anchor="middle" fill="#444" font-size="12">dp[l][r) は短い区間から</text>
-<text x="130.0" y="602" text-anchor="middle" fill="#444" font-size="12">順序：長さ 1, 2, 3, …</text>
-<text x="130.0" y="620" text-anchor="middle" fill="#444" font-size="12">減る量：区間の長さ r − l</text>
+<text x="130.0" y="584" text-anchor="middle" fill="#444" font-size="13">dp[l][r]（区間 [l, r)）は短い区間から</text>
+<text x="130.0" y="602" text-anchor="middle" fill="#444" font-size="13">順序：長さ 1, 2, 3, …</text>
+<text x="130.0" y="620" text-anchor="middle" fill="#444" font-size="13">減る量：区間の長さ r − l</text>
 <rect x="30.0" y="513.0" width="56" height="26" rx="3" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
 <text x="58.0" y="530.5" text-anchor="middle" fill="#222" font-size="12">[0,1)</text>
 <rect x="102.0" y="513.0" width="56" height="26" rx="3" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
@@ -90,11 +97,13 @@
 <line x1="137.2" y1="514.0" x2="158.8" y2="478.0" stroke="#1f4e9a" stroke-width="1.4" marker-end="url(#ar)"/>
 <line x1="158.8" y1="454.0" x2="137.2" y2="418.0" stroke="#1f4e9a" stroke-width="1.4" marker-end="url(#ar)"/>
 <line x1="101.2" y1="454.0" x2="122.8" y2="418.0" stroke="#1f4e9a" stroke-width="1.4" marker-end="url(#ar)"/>
+</g>
+<g transform="translate(-260,300)">
 <rect x="266" y="340" width="248" height="288" rx="6" fill="none" stroke="#999" stroke-dasharray="4 3"/>
 <text x="390.0" y="362" text-anchor="middle" fill="#222" font-size="15" font-weight="bold">⑤ 集合の昇順（bitDP）</text>
-<text x="390.0" y="584" text-anchor="middle" fill="#444" font-size="12">dp[S] は S から 1 つ除いた集合から</text>
-<text x="390.0" y="602" text-anchor="middle" fill="#444" font-size="12">順序：整数 0, 1, 2, …, 2^N − 1</text>
-<text x="390.0" y="620" text-anchor="middle" fill="#444" font-size="12">S ⊊ T なら整数でも S &lt; T</text>
+<text x="390.0" y="584" text-anchor="middle" fill="#444" font-size="13">dp[S] は S から 1 つ除いた集合から</text>
+<text x="390.0" y="602" text-anchor="middle" fill="#444" font-size="13">順序：整数 0, 1, 2, …, 2^N − 1</text>
+<text x="390.0" y="620" text-anchor="middle" fill="#444" font-size="13">S ⊊ T なら整数でも S &lt; T</text>
 <circle cx="390" cy="536" r="17" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
 <text x="390" y="540.5" text-anchor="middle" fill="#222">000</text>
 <circle cx="320" cy="486" r="17" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
@@ -123,11 +132,13 @@
 <line x1="334.0" y1="426.4" x2="376.0" y2="397.6" stroke="#1f4e9a" stroke-width="1.4" marker-end="url(#ar)"/>
 <line x1="390.0" y1="419.0" x2="390.0" y2="405.0" stroke="#1f4e9a" stroke-width="1.4" marker-end="url(#ar)"/>
 <line x1="446.0" y1="426.4" x2="404.0" y2="397.6" stroke="#1f4e9a" stroke-width="1.4" marker-end="url(#ar)"/>
+</g>
+<g transform="translate(-260,300)">
 <rect x="526" y="340" width="248" height="288" rx="6" fill="none" stroke="#999" stroke-dasharray="4 3"/>
 <text x="650.0" y="362" text-anchor="middle" fill="#222" font-size="15" font-weight="bold">⑥ 木の帰りがけ順</text>
-<text x="650.0" y="584" text-anchor="middle" fill="#444" font-size="12">dp[v] は子の dp から</text>
-<text x="650.0" y="602" text-anchor="middle" fill="#444" font-size="12">順序：子をすべて終えてから親</text>
-<text x="650.0" y="620" text-anchor="middle" fill="#444" font-size="12">減る量：部分木の大きさ</text>
+<text x="650.0" y="584" text-anchor="middle" fill="#444" font-size="13">dp[v] は子の dp から</text>
+<text x="650.0" y="602" text-anchor="middle" fill="#444" font-size="13">順序：子をすべて終えてから親</text>
+<text x="650.0" y="620" text-anchor="middle" fill="#444" font-size="13">減る量：部分木の大きさ</text>
 <circle cx="650" cy="396" r="15" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
 <text x="650" y="400.5" text-anchor="middle" fill="#222">r</text>
 <circle cx="595" cy="456" r="15" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
@@ -145,4 +156,5 @@
 <line x1="571.7" y1="502.6" x2="588.3" y2="469.4" stroke="#1f4e9a" stroke-width="1.4" marker-end="url(#ar)"/>
 <line x1="618.3" y1="502.6" x2="601.7" y2="469.4" stroke="#1f4e9a" stroke-width="1.4" marker-end="url(#ar)"/>
 <line x1="705.0" y1="501.0" x2="705.0" y2="471.0" stroke="#1f4e9a" stroke-width="1.4" marker-end="url(#ar)"/>
+</g>
 </svg>

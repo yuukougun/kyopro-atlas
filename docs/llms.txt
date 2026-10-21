@@ -2,8 +2,8 @@
 
 > AtCoder で黄色（レート 2000）を目指す学習者向けの、辞書として引く競技プログラミングの教材。手法・考察・データ構造・数学・C++ のページを分野ごとに置く。
 
-- 版：b6a9eac27fba（updated の最大：2026-10-21）。tools/gen_site.py が生成する
-- ページ数：353（準備中 181）
+- 版：001e24a88b25（updated の最大：2026-10-21）。tools/gen_site.py が生成する
+- ページ数：353（準備中 164）
 - 1 行が 1 ページ：「- [タイトル](URL)（id・レベル・分野・段階）：要約」
 - レベルは difficulty の帯：基礎 〜1199・水 1200〜1599・青 1600〜1999・黄 2000〜2399・発展 2400〜（概要だけ）。「—」はレベルを持たないページ
 - 段階：stub は準備中（要約と前提しかないので根拠にしない）、draft は執筆中、reviewed は検証済み、done は完成
@@ -89,12 +89,12 @@
 ## 考察
 
 - [言い換えの典型](https://yuukougun.github.io/kyopro-atlas/thinking/reformulation/)（reformulation・水・thinking・draft）：条件や目的関数を、数えやすい・判定しやすい形に書き直す。区間和が M の倍数 ⇔ 累積和の余りが等しい、平均 ≥ x ⇔ Σ(a − x) ≥ 0 のように、手法に結びつく言い換えの型を表で引ける。
-- [一部を固定して数える](https://yuukougun.github.io/kyopro-atlas/thinking/fix-variable/)（fix-variable・基礎・thinking・stub）：変数の一部（3 つ組の真ん中・最大値・余りなど）を固定すると、残りの条件が単純になって独立に数えられる。固定したあとは二分探索・累積和・連想配列で残りを速く数える。
+- [一部を固定して数える](https://yuukougun.github.io/kyopro-atlas/thinking/fix-variable/)（fix-variable・基礎・thinking・draft）：変数の一部（3 つ組の真ん中・最大値・余りなど）を固定すると、残りの条件が単純になって独立に数えられる。固定したあとは二分探索・累積和・連想配列で残りを速く数える。
 - [主客転倒・寄与](https://yuukougun.github.io/kyopro-atlas/thinking/contribution/)（contribution・水・thinking・draft）：全ペア・全区間・全部分集合についての総和を、「各要素が何回数えられるか × 値」の和に入れ替えて求める。各要素が最大・最小になる回数や各桁が現れる回数を数えれば、対象を 1 つずつ列挙しなくて済む。
 - [余事象](https://yuukougun.github.io/kyopro-atlas/thinking/complement/)（complement・基礎・thinking・draft）：「少なくとも 1 つ」「〜でない」ものは、全体から数えやすい補集合を引いて数える。条件が 2〜3 個なら包除原理で重なりを足し引きし、mod での引き算は負にならないように直す。
 - [偶奇に着目する](https://yuukougun.github.io/kyopro-atlas/thinking/parity/)（parity・基礎・thinking・draft）：1 歩ごとに (x + y) の偶奇が入れ替わる、±1 をちょうど K 回なら差と K の偶奇がそろう、など偶奇の必要条件から可否を判定する。グリッドでは市松模様の色の偶奇が不変量になる。
 - [不変量・単調に変わる量](https://yuukougun.github.io/kyopro-atlas/thinking/invariant/)（invariant・基礎・thinking・draft）：操作で変わらない量（和の余り・個数の偶奇・XOR）を見つけて必要条件を得て、十分性は構築で示す。操作で必ず減る量（単調量）は操作回数の上界や停止性の証明に使う。
-- [後ろから・逆順に考える](https://yuukougun.github.io/kyopro-atlas/thinking/reverse-thinking/)（reverse-thinking・基礎・thinking・stub）：後ろから決めると選択肢が一意になる、最後の操作が特定できれば逆再生で取り除ける、削除を逆にすると追加になる、など時間の向きを逆にして考える。
+- [後ろから・逆順に考える](https://yuukougun.github.io/kyopro-atlas/thinking/reverse-thinking/)（reverse-thinking・基礎・thinking・draft）：後ろから決めると選択肢が一意になる、最後の操作が特定できれば逆再生で取り除ける、削除を逆にすると追加になる、など時間の向きを逆にして考える。
 - [構築問題の考え方](https://yuukougun.github.io/kyopro-atlas/thinking/construction/)（construction・基礎・thinking・draft）：条件を満たすものを 1 つ作る問題は、小さい N で手で作って規則を見つけ、不可能な場合の必要条件を先に挙げてから一般化する。最大値を求める問題では、上界を示してそれを達成する例を作る。
 - [対称性・鳩の巣原理・場合分け](https://yuukougun.github.io/kyopro-atlas/thinking/symmetry-pigeonhole-casework/)（symmetry-pigeonhole-casework・基礎・thinking・draft）：対称性で計算や場合を半分に減らし、鳩の巣原理で「必ず一致が起きる」ことから探索の回数の上限を得る。端の場合（N = 1 など）や大小関係で場合を分けて、それぞれを単純な問題にする。
 
@@ -170,7 +170,7 @@
 - [なもりグラフ](https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/)（namori-graph・水・graph・draft）：N 頂点 N 辺の連結グラフは木に辺を 1 本足した形で、閉路がちょうど 1 つあり、閉路上の各頂点から木がぶら下がる。次数 1 の頂点を削り続けると閉路だけが残る。
 - [2-SAT](https://yuukougun.github.io/kyopro-atlas/graph/two-sat/)（two-sat・発展・graph・stub）：各変数が真か偽で、条件がすべて「2 つのリテラルの OR」のとき、全条件を満たす割当を含意グラフの SCC で O(N+M) で求める。ACL の two_sat で書けるので、条件を節に直すモデル化が中心になる。
 - [Union-Find で連結性を扱う](https://yuukougun.github.io/kyopro-atlas/graph/union-find-connectivity/)（union-find-connectivity・水・graph・draft）：辺や頂点の削除を時間の逆順の追加に直したり、しきい値の順に辺を足したりして、連結成分の数・大きさや 2 点の連結を Union-Find で答える。答えは逆順に記録してから反転する。
-- [最小全域木](https://yuukougun.github.io/kyopro-atlas/graph/minimum-spanning-tree/)（minimum-spanning-tree・水・graph・draft）：連結グラフの全域木のうち辺の重みの和が最小のものを、辺を重みの昇順に見て閉路を作らない辺だけを採る Kruskal 法か、頂点を 1 つずつ伸ばす Prim 法で求める。候補の辺を減らせば完全グラフにも使える。
+- [最小全域木](https://yuukougun.github.io/kyopro-atlas/graph/minimum-spanning-tree/)（minimum-spanning-tree・水・graph・draft）：連結グラフの全域木のうち辺の重みの和が最小のものを、辺を重みの昇順に見て閉路を作らない辺だけを採る クラスカル法か、頂点を 1 つずつ伸ばすプリム法で求める。候補の辺を減らせば完全グラフにも使える。
 - [最小ボトルネック路](https://yuukougun.github.io/kyopro-atlas/graph/bottleneck-path/)（bottleneck-path・青・graph・stub）：経路上の辺の最大値を最小にする経路は最小全域木の上で実現でき、Kruskal 法で辺を足して 2 点が初めてつながったときの重みが答えになる。多数の 2 点の質問は、成分にクエリを持たせる併合か併合過程の木で答える。
 - [橋・関節点・二重連結成分](https://yuukougun.github.io/kyopro-atlas/graph/lowlink/)（lowlink・黄・graph・stub）：DFS 木の行きがけ番号 ord と、部分木から後退辺を 1 本使って戻れる最小の番号 low から、取り除くと非連結になる辺（橋）と頂点（関節点）を O(N+M) で求める。橋や関節点で分けた成分を縮約すると木になる。
 - [辺の追加と削除が混ざる連結性](https://yuukougun.github.io/kyopro-atlas/graph/offline-dynamic-connectivity/)（offline-dynamic-connectivity・発展・graph・stub）：辺の追加と削除が混ざる連結性の質問に、各辺が存在する時間の区間を時間軸のセグ木の O(log Q) 個のノードに載せ、DFS で入るときに併合・出るときに取り消してオフラインで答える。
@@ -191,19 +191,19 @@
 
 ## 木
 
-- [木の基本性質と表現](https://yuukougun.github.io/kyopro-atlas/tree/tree-basics/)（tree-basics・基礎・tree・stub）：連結で辺が N−1 本・閉路がない・2 点間のパスがちょうど 1 本、の 3 つは同値で、辺を 1 本除くと 2 つに分かれ、1 本足すと閉路が 1 つできる。根の決め方と、辺の値を子の頂点に寄せる小技が多くの問題の出発点になる。
+- [木の基本性質と表現](https://yuukougun.github.io/kyopro-atlas/tree/tree-basics/)（tree-basics・基礎・tree・draft）：連結で辺が N−1 本・閉路がない・2 点間のパスがちょうど 1 本、の 3 つは同値で、辺を 1 本除くと 2 つに分かれ、1 本足すと閉路が 1 つできる。根の決め方と、辺の値を子の頂点に寄せる小技が多くの問題の出発点になる。
 - [根付き木と走査順](https://yuukougun.github.io/kyopro-atlas/tree/tree-traversal/)（tree-traversal・基礎・tree・draft）：根を決めて DFS か BFS をすると、親・深さ・部分木サイズ・行きがけ順・帰りがけ順が O(N) で求まる。帰りがけ順（または BFS 順の逆）で子の結果を親へ集約するのが木 DP の土台になる。
-- [木の 2 色塗り分けと距離の偶奇](https://yuukougun.github.io/kyopro-atlas/tree/tree-bipartite/)（tree-bipartite・基礎・tree・stub）：木は閉路がないので深さの偶奇で必ず 2 色に塗れ、2 点の距離の偶奇は深さの和の偶奇で分かる。多い方の色が N/2 個以上あることや、色の違う組の数を使う問題に効く。
-- [木の上の距離](https://yuukougun.github.io/kyopro-atlas/tree/tree-distance/)（tree-distance・基礎・tree・stub）：木では 2 点間のパスが一意なので、重み付きでも DFS 1 回で 1 点からの距離が求まる。2 点からの距離を比べる型と、根からの累積値で 2 点間の値を表す型（XOR なら LCA がいらない）がある。
-- [木の上の累積和・いもす法](https://yuukougun.github.io/kyopro-atlas/tree/tree-imos/)（tree-imos・基礎・tree・stub）：部分木への加算をまとめて受けてから値を出力するなら、部分木の根に印を置いて根から下へ累積する。パスへの加算は端点と LCA に印を置いて葉から上へ累積し、途中で値を聞かれるならオイラーツアーを使う。
-- [指定頂点を結ぶ最小の部分木](https://yuukougun.github.io/kyopro-atlas/tree/steiner-subtree/)（steiner-subtree・基礎・tree・stub）：指定した K 頂点をすべて含む最小の連結な部分グラフは一意な部分木で、指定頂点の 1 つを根にして、部分木に指定頂点を含む頂点を残せば求まる。指定されていない葉を削り続けても同じになる。
-- [完全二分木](https://yuukougun.github.io/kyopro-atlas/tree/complete-binary-tree/)（complete-binary-tree・基礎・tree・stub）：頂点 i の子が 2i と 2i+1、親が ⌊i/2⌋ の木は深さが log N 程度しかないので、N が 10^18 でも祖先を全部たどれる。番号の 2 進表記が根からの道順を表し、LCA と距離も番号だけで求まる。
-- [葉から考える](https://yuukougun.github.io/kyopro-atlas/tree/leaf-first/)（leaf-first・水・tree・stub）：葉は辺が 1 本しかないので選択肢が少なく、葉から順に決めると貪欲が正しくなりやすい。次数 1 の頂点をキューで削るか帰りがけ順に情報を上へ送り、正しさは交換論法で示す。
+- [木の 2 色塗り分けと距離の偶奇](https://yuukougun.github.io/kyopro-atlas/tree/tree-bipartite/)（tree-bipartite・基礎・tree・draft）：木は閉路がないので深さの偶奇で必ず 2 色に塗れ、2 点の距離の偶奇は深さの和の偶奇で分かる。多い方の色が N/2 個以上あることや、色の違う組の数を使う問題に効く。
+- [木の上の距離](https://yuukougun.github.io/kyopro-atlas/tree/tree-distance/)（tree-distance・基礎・tree・draft）：木では 2 点間のパスが一意なので、重み付きでも DFS 1 回で 1 点からの距離が求まる。2 点からの距離を比べる型と、根からの累積値で 2 点間の値を表す型（XOR なら LCA がいらない）がある。
+- [木の上の累積和・いもす法](https://yuukougun.github.io/kyopro-atlas/tree/tree-imos/)（tree-imos・基礎・tree・draft）：部分木への加算をまとめて受けてから値を出力するなら、部分木の根に印を置いて根から下へ累積する。パスへの加算は端点と LCA に印を置いて葉から上へ累積し、途中で値を聞かれるならオイラーツアーを使う。
+- [指定頂点を結ぶ最小の部分木](https://yuukougun.github.io/kyopro-atlas/tree/steiner-subtree/)（steiner-subtree・基礎・tree・draft）：指定した K 頂点をすべて含む最小の連結な部分グラフは一意な部分木で、指定頂点の 1 つを根にして、部分木に指定頂点を含む頂点を残せば求まる。指定されていない葉を削り続けても同じになる。
+- [完全二分木](https://yuukougun.github.io/kyopro-atlas/tree/complete-binary-tree/)（complete-binary-tree・基礎・tree・draft）：頂点 i の子が 2i と 2i+1、親が ⌊i/2⌋ の木は深さが log N 程度しかないので、N が 10^18 でも祖先を全部たどれる。番号の 2 進表記が根からの道順を表し、LCA と距離も番号だけで求まる。
+- [葉から考える](https://yuukougun.github.io/kyopro-atlas/tree/leaf-first/)（leaf-first・水・tree・draft）：葉は辺が 1 本しかないので選択肢が少なく、葉から順に決めると貪欲が正しくなりやすい。次数 1 の頂点をキューで削るか帰りがけ順に情報を上へ送り、正しさは交換論法で示す。
 - [木の次数列と Prüfer 列](https://yuukougun.github.io/kyopro-atlas/tree/tree-degree/)（tree-degree・青・tree・stub）：各次数が 1 以上で和が 2N−2 なら、その次数列の木が必ず作れる。Prüfer 列（最小番号の葉を消して隣を記録する列）が木と一対一に対応し、各頂点の出現回数が次数 − 1 になることが理由である。
 - [木の直径と最遠点](https://yuukougun.github.io/kyopro-atlas/tree/tree-diameter/)（tree-diameter・水・tree・draft）：直径（最も遠い 2 点を結ぶパス）は、任意の点から最も遠い点 a を求め、a から最も遠い点 b を求めれば a–b になる（重みが非負のとき）。各点の最遠点は直径の端点のどちらかになる。
 - [木の重心](https://yuukougun.github.io/kyopro-atlas/tree/tree-centroid/)（tree-centroid・黄・tree・stub）：重心は取り除いたときに残る成分の大きさがすべて N/2 以下になる頂点で、1 個か隣接する 2 個ある。部分木サイズから O(N) で求まり、全ペアが重心を通るペアの作り方や重心分解に使う。
-- [辺で切って数える](https://yuukougun.github.io/kyopro-atlas/tree/tree-edge-contribution/)（tree-edge-contribution・水・tree・stub）：全ペアのパスについての量の和を、各辺（頂点）が何ペアのパスに含まれるかで数え直す。辺で切った両側の大きさが s と N−s なら、その辺を通るペアは s(N−s) 個になる。
-- [木の構築・復元](https://yuukougun.github.io/kyopro-atlas/tree/tree-construction/)（tree-construction・水・tree・stub）：距離の情報・訪問順・次数の条件などから、条件を満たす木を作るか、ないと判定する（何通りあるかを数えることもある）。作った木が本当に条件を満たすかを最後に確かめることが要になる。
+- [辺で切って数える](https://yuukougun.github.io/kyopro-atlas/tree/tree-edge-contribution/)（tree-edge-contribution・水・tree・draft）：全ペアのパスについての量の和を、各辺（頂点）が何ペアのパスに含まれるかで数え直す。辺で切った両側の大きさが s と N−s なら、その辺を通るペアは s(N−s) 個になる。
+- [木の構築・復元](https://yuukougun.github.io/kyopro-atlas/tree/tree-construction/)（tree-construction・水・tree・draft）：距離の情報・訪問順・次数の条件などから、条件を満たす木を作るか、ないと判定する（何通りあるかを数えることもある）。作った木が本当に条件を満たすかを最後に確かめることが要になる。
 - [木の同型判定と木のハッシュ](https://yuukougun.github.io/kyopro-atlas/tree/tree-isomorphism/)（tree-isomorphism・発展・tree・stub）：根付き木の同型は、葉から順に「子の部分木の名前の多重集合」に名前を付ける AHU 法か、多重集合のハッシュで判定する。根のない木は中心（1〜2 個）を根にして比べる。
 - [最小共通祖先（LCA）](https://yuukougun.github.io/kyopro-atlas/tree/lca/)（lca・青・tree・draft）：根付き木で 2 頂点の共通の祖先のうち最も深いものを、各頂点の 2^k 個上の祖先の表（ダブリング）で、前処理 O(N log N)・1 回 O(log N) で求める。2 点間の距離・K 個上の祖先・パス上の最大値にそのまま使える。
 - [木の上のパスの判定と分解](https://yuukougun.github.io/kyopro-atlas/tree/tree-path/)（tree-path・青・tree・stub）：パス u–v を「u から LCA へ上る」と「LCA から v へ下る」に分け、点がパス上にあるか・3 点の合流点・2 本のパスの交差・パス上の K 番目の頂点を、LCA と距離の式で判定する。
@@ -212,7 +212,7 @@
 - [HL 分解](https://yuukougun.github.io/kyopro-atlas/tree/hld/)（hld・発展・tree・draft）：各頂点で部分木が最大の子へ重い辺を引き、重いパスごとに番号が連続するように振ると、任意のパスが O(log N) 個の区間に分かれる。パスへの一括更新や逆元のない演算の集約を、セグメント木と組んで O(log^2 N) で処理できる。
 - [Static Top Tree と木 DP の動的更新](https://yuukougun.github.io/kyopro-atlas/tree/static-top-tree/)（static-top-tree・発展・tree・stub）：頂点の値を書き換えるたびに、木 DP の根の値を O(log N) 程度で更新する。HL 分解の重いパスの上で DP をセグメント木に載せる方法と、木をパスの圧縮と部分木の併合で平衡に組み直す Static Top Tree がある。
 - [動的木](https://yuukougun.github.io/kyopro-atlas/tree/dynamic-tree/)（dynamic-tree・発展・tree・stub）：辺の追加と削除がある森で、パスのクエリや根の付け替えを償却 O(log N) で処理する Link-Cut Tree と、部分木のクエリ向けの Euler Tour Tree、両方に使える Top Tree がある。
-- [マージテク](https://yuukougun.github.io/kyopro-atlas/tree/small-to-large/)（small-to-large・水・tree・stub）：2 つの集合を併合するとき小さい方の要素を大きい方へ移すと、1 つの要素が移るのは高々 log N 回なので全体で O(N log N) になる。グループの併合と種類数の問い合わせや、部分木ごとの集計（DSU on Tree）に使う。
+- [マージテク](https://yuukougun.github.io/kyopro-atlas/tree/small-to-large/)（small-to-large・水・tree・draft）：2 つの集合を併合するとき小さい方の要素を大きい方へ移すと、1 つの要素が移るのは高々 log N 回なので全体で O(N log N) になる。グループの併合と種類数の問い合わせや、部分木ごとの集計（DSU on Tree）に使う。
 - [重心分解](https://yuukougun.github.io/kyopro-atlas/tree/centroid-decomposition/)（centroid-decomposition・黄・tree・stub）：重心を取り、重心を通るパスを一度に処理してから重心を消し、残った各成分で再帰する。成分の大きさが半分以下になるので深さは O(log N) で、距離がちょうど K のペアの数など、辺ごとに分けられない全ペアの量を数えられる。
 - [Auxiliary Tree](https://yuukougun.github.io/kyopro-atlas/tree/auxiliary-tree/)（auxiliary-tree・発展・tree・stub）：色ごと・クエリごとに少数の頂点だけが関わる木の問題で、指定頂点と DFS 順で隣り合う 2 点の LCA だけからなる圧縮木を作って木 DP をする。関わる頂点数の合計が O(N) なら全体で O(N log N) になる。
 - [併合過程の木](https://yuukougun.github.io/kyopro-atlas/tree/merge-process-tree/)（merge-process-tree・発展・tree・stub）：Union-Find の併合のたびに新しい頂点を作って 2 つの成分を子にした木を作ると、ある時点のグループが DFS 順の区間になる。辺を重みの順に併合すれば、2 点の LCA の重みが経路の最大の辺の最小値になる。
@@ -284,8 +284,8 @@
 - [GCD の性質](https://yuukougun.github.io/kyopro-atlas/math/gcd-properties/)（gcd-properties・青・math・stub）：全体に同じ数を足したときの gcd を隣接差の gcd に直し、左端を固定した区間 gcd が O(log A) 種類しかないことで区間 gcd を速く求める。mod N で A ずつ進むと gcd(A, N) の倍数だけを回ることも使う。
 - [中国剰余定理](https://yuukougun.github.io/kyopro-atlas/math/crt/)（crt・青・math・draft）：複数の合同式 x ≡ r_i (mod m_i) を同時に満たす x を、拡張ユークリッドで2式ずつ合わせて mod lcm でただ1つに求める。解があるのは r1 ≡ r2 (mod gcd(m1, m2)) のときだけである。
 - [位数・原始根・離散対数](https://yuukougun.github.io/kyopro-atlas/math/multiplicative-order/)（multiplicative-order・黄・math・stub）：a^k ≡ 1 となる最小の k（位数）を φ(m) の約数から求め、原始根で掛け算を指数の足し算に直す。a^x ≡ b を満たす x（離散対数）は Baby-step Giant-step で O(√m) で求める。
-- [整数の証明の型](https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/)（proof-patterns・基礎・math・stub）：実験で見つけた整数の規則が正しいかを、定番の筋道で確かめる。操作で gcd が変わらない、a, 2a, … が余りを並べ替える、余りの鳩の巣、mod での矛盾などを使う。
-- [整数の平方根・K 乗根と累乗数](https://yuukougun.github.io/kyopro-atlas/math/integer-root/)（integer-root・基礎・math・stub）：⌊√N⌋ を double の sqrt で求めると 10^18 付近で ±1 ずれるので、r² ≤ N < (r+1)² になるまで整数で補正するか二分探索で求める。a^b ≤ N となる a の上限や、累乗数を重複なく数えるのに使う。
+- [整数の証明の型](https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/)（proof-patterns・基礎・math・draft）：実験で見つけた整数の規則が正しいかを、定番の筋道で確かめる。操作で gcd が変わらない、a, 2a, … が余りを並べ替える、余りの鳩の巣、mod での矛盾などを使う。
+- [整数の平方根・K 乗根と累乗数](https://yuukougun.github.io/kyopro-atlas/math/integer-root/)（integer-root・基礎・math・draft）：⌊√N⌋ を double の sqrt で求めると 10^18 付近で ±1 ずれるので、r² ≤ N < (r+1)² になるまで整数で補正するか二分探索で求める。a^b ≤ N となる a の上限や、累乗数を重複なく数えるのに使う。
 - [N 進法](https://yuukougun.github.io/kyopro-atlas/math/base-conversion/)（base-conversion・基礎・math・draft）：N を b で割った余りを並べて b 進表記にし、Horner 法で数に戻す。負の基数（−2 進）や 1 始まりの 26 進（a..z, aa..）、基数を変数とみた二分探索といった変形にも使う。
 - [商の列挙](https://yuukougun.github.io/kyopro-atlas/math/floor-quotient-enum/)（floor-quotient-enum・水・math・draft）：Σ_{i=1}^{N} f(⌊N/i⌋) を、⌊N/i⌋ の値が高々 2√N 種類で同じ値の i が区間をなすことを使って O(√N) で求める。√N を境に「i が小さい側」と「商が小さい側」に分けて考える型にも使う。
 - [乗法的関数の和と素数の個数](https://yuukougun.github.io/kyopro-atlas/math/multiplicative-function/)（multiplicative-function・発展・math・stub）：N ≤ 10^10 程度で、φ・μ などの乗法的関数の和 Σ_{n≤N} f(n) や N 以下の素数の個数を、商の列挙を使って O(N^{3/4}/log N) などで求める。関数どうしの関係はディリクレ積で表す。
@@ -358,9 +358,9 @@
 ## 文字列
 
 - [文字列の基本操作と辞書順](https://yuukougun.github.io/kyopro-atlas/string/string-basics/)（string-basics・基礎・string・draft）：辞書順の最小・回転・文字の一斉置換を問う文字列の問題を、定義に沿った全探索と比較で解く。辞書順は最初に異なる位置の文字で決まり、片方が尽きたら短い方が小さい。
-- [部分列の判定と次の出現位置の表](https://yuukougun.github.io/kyopro-atlas/string/subsequence-matching/)（subsequence-matching・基礎・string・stub）：T が S の部分列かを、S を左から見て T の文字をできるだけ早く拾う貪欲で判定する。各位置から各文字が次に現れる位置の表を作れば、多数の判定や辞書順最小の部分列も速く求まる。
+- [部分列の判定と次の出現位置の表](https://yuukougun.github.io/kyopro-atlas/string/subsequence-matching/)（subsequence-matching・基礎・string・draft）：T が S の部分列かを、S を左から見て T の文字をできるだけ早く拾う貪欲で判定する。各位置から各文字が次に現れる位置の表を作れば、多数の判定や辞書順最小の部分列も速く求まる。
 - [ローリングハッシュ](https://yuukougun.github.io/kyopro-atlas/string/rolling-hash/)（rolling-hash・水・string・draft）：文字列を B 進数の値（mod p）とみなし、接頭辞のハッシュから任意の部分文字列のハッシュを O(1) で取り出して、部分文字列どうしの一致を確率的に判定する。二分探索と組めば LCP や辞書順の比較もできる。
-- [集合・多重集合のハッシュ](https://yuukougun.github.io/kyopro-atlas/string/hashing-for-sets/)（hashing-for-sets・水・string・stub）：値ごとに独立な 64 ビットの乱数を割り当て、集合は XOR、多重集合は和で表すと、2 つの集合が等しいかを順序に関係なく O(1) で比べられる。累積と組めば、区間どうしが並べ替えで一致するかも判定できる。
+- [集合・多重集合のハッシュ](https://yuukougun.github.io/kyopro-atlas/string/hashing-for-sets/)（hashing-for-sets・水・string・draft）：値ごとに独立な 64 ビットの乱数を割り当て、集合は XOR、多重集合は和で表すと、2 つの集合が等しいかを順序に関係なく O(1) で比べられる。累積と組めば、区間どうしが並べ替えで一致するかも判定できる。
 - [ハッシュの衝突と安全な設計](https://yuukougun.github.io/kyopro-atlas/string/hash-safety/)（hash-safety・青・string・stub）：比べるハッシュの組の数から衝突確率を見積もり、固定のテストでも落ちない mod と基数を選ぶ。mod 10^9 程度の 1 つでは全ペアの比較に耐えないので、mod 2^61−1 と実行時に乱択した基数（値のハッシュなら素数）を使う。
 - [Z-algorithm](https://yuukougun.github.io/kyopro-atlas/string/z-algorithm/)（z-algorithm・水・string・draft）：Z 配列 z[i]（S と S[i:] の最長共通接頭辞の長さ）を O(N) で求める。P＋区切り＋T の Z 配列でパターンの全出現を決定的に見つけられ、回転の検索や周期の判定にも使える。
 - [KMP 法と文字列の周期](https://yuukougun.github.io/kyopro-atlas/string/kmp/)（kmp・青・string・draft）：π[i]（先頭 i+1 文字の、接頭辞でも接尾辞でもある最長の真の部分の長さ）を O(N) で求める。π をたどると全 border と最小周期が分かり、照合に失敗したときのずらし方や照合オートマトンの遷移にも使える。
@@ -384,7 +384,7 @@
 
 ## その他の技法
 
-- [インタラクティブ問題](https://yuukougun.github.io/kyopro-atlas/misc/interactive/)（interactive・基礎・misc・stub）：質問を出力してジャッジの答えを受け取る形式の問題で、質問回数の上限から方針を逆算する（2 択の質問なら ⌈log2 候補数⌉ 回）。出力のたびに flush し、二分探索や 2 進表記で質問を設計する。
+- [インタラクティブ問題](https://yuukougun.github.io/kyopro-atlas/misc/interactive/)（interactive・基礎・misc・draft）：質問を出力してジャッジの答えを受け取る形式の問題で、質問回数の上限から方針を逆算する（2 択の質問なら ⌈log2 候補数⌉ 回）。出力のたびに flush し、二分探索や 2 進表記で質問を設計する。
 - [乱択アルゴリズム](https://yuukougun.github.io/kyopro-atlas/misc/randomized/)（randomized・青・misc・stub）：乱数を使って、一定の確率で誤るが速い方法（モンテカルロ法）や、常に正しいが時間が確率的な方法（ラスベガス法）を作る。成功確率 p の試行を k 回繰り返すと失敗確率は (1 − p)^k になるので、回数を見積もって決める。
 - [bitset による高速化](https://yuukougun.github.io/kyopro-atlas/misc/bitset-speedup/)（bitset-speedup・青・misc・stub）：bool を 64 個ずつ 1 語に詰め、AND・OR・XOR・シフトを語単位で行って計算量をおよそ 1/64 にする。部分和 DP のシフト OR、共通の隣接頂点・三角形の数え上げ、偶奇の集計、DAG の到達可能性に使う。
 - [構文解析](https://yuukougun.github.io/kyopro-atlas/misc/parsing/)（parsing・青・misc・stub）：+・*・括弧を含む式の文字列を、演算子の優先順位どおりに評価・解析する。文法の規則（式・項・因子）ごとに関数を作り、読み取り位置を共有して再帰的に読む（再帰下降構文解析）。
@@ -415,7 +415,7 @@
 - [関数テンプレートと constexpr](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-templates-constexpr/)（cpp-templates-constexpr・基礎・cpp・draft）：型を引数にした関数（テンプレート・auto 引数・コンセプト）と、コンパイル時に値を決める constexpr・static_assert を読み書きする。chmin(a, 3) が通らないような型推論の失敗を避ける。
 - [マクロと雛形](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-macros-template-file/)（cpp-macros-template-file・基礎・cpp・draft）：解説コードの先頭に並ぶ #include・using namespace std・マクロ・chmin・#pragma の意味と落とし穴が分かる。自作のヘッダを使うコードを、提出前に 1 ファイルに展開する方法も示す。
 - [コンテナ操作とイテレータ](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-container-idioms/)（cpp-container-idioms・基礎・cpp・draft）：set・map・multiset の定型の操作（erase_if・contains・1 個だけ消す）とイテレータを正しく書く。map の [] が要素を作る、set に std::lower_bound を使うと遅い、などの事故を防ぐ。
-- [比較関数と順序](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-comparators/)（cpp-comparators・基礎・cpp・draft）：sort・set・priority_queue に渡す比較関数を約束（厳密弱順序）と向きを守って書き、構造体に operator< や <=> で順序を持たせる。比較関数に <= を書いて sort が落ちるような事故を防ぐ。
+- [比較関数と順序](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-comparators/)（cpp-comparators・基礎・cpp・draft）：sort・set・priority_queue に渡す比較関数を約束（狭義の弱順序）と向きを守って書き、構造体に operator< や <=> で順序を持たせる。比較関数に <= を書いて sort が落ちるような事故を防ぐ。
 - [アルゴリズム関数と ranges 版](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/)（cpp-algorithms・基礎・cpp・draft）：sort・unique・lower_bound・accumulate などの定型と、射影も使える ranges 版（C++20）を使い分ける。accumulate の初期値の型や、unique だけでは要素が減らない点に気をつける。
 - [文字列の操作](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-string-api/)（cpp-string-api・基礎・cpp・draft）：std::string の操作（substr・find・+=・数との変換）と string_view を、計算量と寿命に気をつけて書く。s = s + c が全体をコピーして遅いことや、cin >> の後の getline の罠を防ぐ。
 - [ACL の読み方](https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/)（acl-reading・基礎・cpp・draft）：AtCoder Library（ACL）を使う解説コードを、共通の約束（0 始まり・半開区間）とともに読む。modint の val() と出力、segtree・lazy_segtree のテンプレート引数にラムダを渡す書き方が分かる。

@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 440" width="540" height="440" font-family="sans-serif">
 <rect width="540" height="440" fill="#ffffff"/>
-<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1a1a1a"/></marker></defs>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1a1a1a"/></marker><marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1a1a1a"/></marker></defs>
 <line x1="76.8" y1="164.2" x2="181.5" y2="96.9" stroke="#1a1a1a" stroke-width="3.5" marker-end="url(#arr)"/>
 <text x="137.0" y="145.9" font-size="15" text-anchor="middle" fill="#a0461e">1</text>
 <line x1="77.9" y1="183.9" x2="180.3" y2="235.2" stroke="#1a1a1a" stroke-width="3.5" marker-end="url(#arr)"/>
@@ -19,7 +19,7 @@
 <text x="411.8" y="221.1" font-size="15" text-anchor="middle" fill="#a0461e">1</text>
 <line x1="340.0" y1="105.0" x2="340.0" y2="223.0" stroke="#1a1a1a" stroke-width="3.5" marker-end="url(#arr)"/>
 <text x="327.0" y="170.0" font-size="15" text-anchor="middle" fill="#a0461e">1</text>
-<line x1="72.7" y1="190.4" x2="186.0" y2="328.0" stroke="#1a1a1a" stroke-width="3.5" marker-end="url(#arr)"/>
+<line x1="72.7" y1="190.4" x2="186.0" y2="328.0" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#arr2)"/>
 <text x="120.0" y="273.3" font-size="15" text-anchor="middle" fill="#a0461e">1</text>
 <circle cx="60" cy="175" r="20" fill="#ffffff" stroke="#1a1a1a" stroke-width="2"/>
 <text x="60" y="181" font-size="17" text-anchor="middle" fill="#1a1a1a">s</text>
@@ -38,10 +38,11 @@
 <text x="340" y="285" font-size="13" text-anchor="middle" fill="#1a4f8a">d=4・本数 3</text>
 <circle cx="470" cy="165" r="20" fill="#ffffff" stroke="#1a1a1a" stroke-width="2"/>
 <text x="470" y="171" font-size="17" text-anchor="middle" fill="#1a1a1a">t</text>
-<text x="470" y="137" font-size="13" text-anchor="middle" fill="#1a4f8a">d=5・本数 6</text>
+<text x="478" y="212" font-size="13" text-anchor="middle" fill="#1a4f8a">d=5・本数 6</text>
 <circle cx="200" cy="345" r="20" fill="#ffffff" stroke="#1a1a1a" stroke-width="2"/>
 <text x="200" y="351" font-size="17" text-anchor="middle" fill="#1a1a1a">e</text>
 <text x="200" y="385" font-size="13" text-anchor="middle" fill="#1a4f8a">d=1・本数 1</text>
-<line x1="30" y1="415" x2="70" y2="415" stroke="#1a1a1a" stroke-width="3.5" marker-end="url(#arr)"/><text x="78" y="420" font-size="13" fill="#1a1a1a">最短路 DAG の辺（d(u)+w=d(v)）</text>
-<line x1="300" y1="415" x2="340" y2="415" stroke="#888888" stroke-width="1.5" stroke-dasharray="6 4"/><text x="348" y="420" font-size="13" fill="#1a1a1a">残さない辺</text>
+<line x1="20" y1="405" x2="60" y2="405" stroke="#1a1a1a" stroke-width="3.5" marker-end="url(#arr)"/><text x="68" y="410" font-size="13" fill="#1a1a1a">s-t 最短路に乗る DAG の辺</text>
+<line x1="290" y1="405" x2="330" y2="405" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#arr2)"/><text x="338" y="410" font-size="13" fill="#1a1a1a">DAG の辺だが t へ続かない</text>
+<line x1="20" y1="428" x2="60" y2="428" stroke="#888888" stroke-width="1.5" stroke-dasharray="6 4"/><text x="68" y="433" font-size="13" fill="#1a1a1a">残さない辺（d(u)+w&gt;d(v)）</text>
 </svg>

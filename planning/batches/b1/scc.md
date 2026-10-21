@@ -38,3 +38,11 @@
 - related にある functional-graph・two-sat・lowlink・dilworth-path-cover・bitset-speedup・topological-sort・cycle-detection は stub なので、ページへのリンクだけにした（節へのリンクは draft の dfs#pre-post-order・dfs#iterative・dp-dag#find-dag だけ）
 - dp-dag の related に `scc#dp-on-dag` があり、本文の dp-on-dag の節はこれに対応する
 - 使用量の目安：道具の呼び出し 約 35 回、Web 取得 6 回
+
+## 検証の指摘への対応（verify/scc.md）
+
+- 1〜8：すべて直した（非負の条件を問題設定・dp の理由・コード片の先頭に書いた。問題設定を「好きなだけ動き、どこで止めてもよい。各頂点の価値は初めて訪れたときに 1 回だけ得る」に直した。Kahn 法の例を外した。辞書順最小は「なるとは限らない」に。low の説明・最短路の理由・無向グラフの向き付け・同値関係の説明を直した）
+- 9：「成分 3」「成分 4」のラベルを枠の下へ移した
+- 10：左右に並べていた 2 つの図を上下に並べた縦長の図（幅 430）にした。代替テキストと本文の「左・右」を「上・下」に直した。スマホの幅で倍率は約 0.83 になる
+- 11：condense-dp に「出口の先が価値 0」のケースを足し、w の非負と DAG の辺の向き（c < d）を assert にした。kosaraju にすべての辺で comp[u] <= comp[v] の assert、on-cycle に cnt の範囲の assert を足した（どれも core の外か、core の中でも本文の主張を確かめる 1〜3 行）
+- 採らなかったもの：なし

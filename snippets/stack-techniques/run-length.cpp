@@ -18,7 +18,7 @@ int main() {
         total++;
         if (st.back().second == st.back().first) {  // 値 k が k 個そろった
             total -= st.back().second;
-            st.pop_back();  // 塊ごと消す。下の塊とは値が違うので連鎖は起きない
+            st.pop_back();  // 塊ごと消す。新しい先頭は個数が値より少ないままなので、連鎖は起きない
         }
         cout << total << '\n';
     }

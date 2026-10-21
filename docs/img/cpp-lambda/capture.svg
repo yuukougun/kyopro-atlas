@@ -4,6 +4,9 @@
     <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#333333"/>
     </marker>
+    <marker id="arr-copy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#b36b00"/>
+    </marker>
   </defs>
   <text x="20" y="28" font-size="15" font-weight="bold" fill="#111111">int k = 10; ラムダを 2 つ作ってから k = 20; とした後</text>
   <!-- outer variable -->
@@ -23,7 +26,7 @@
   <rect x="445" y="218" width="100" height="30" rx="4" fill="#fff4e0" stroke="#b36b00"/>
   <text x="495" y="238" text-anchor="middle" fill="#111111">k = 10</text>
   <text x="495" y="266" text-anchor="middle" font-size="12" fill="#555555">by_copy() は 11（中のコピーを読む）</text>
-  <line x1="194" y1="170" x2="440" y2="232" stroke="#b36b00" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arr)"/>
+  <line x1="194" y1="170" x2="440" y2="232" stroke="#b36b00" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arr-copy)"/>
   <text x="282" y="228" text-anchor="middle" font-size="12" fill="#b36b00">作った時点の値をコピー（点線）</text>
   <text x="282" y="244" text-anchor="middle" font-size="12" fill="#b36b00">後で k が変わっても届かない</text>
 </svg>

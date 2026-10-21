@@ -17,7 +17,7 @@ int main() {
     long long rem = 0, ans = 0;     // rem = S_r を m で割った余り（0 以上 m 未満）
     for (int i = 0; i < n; i++) {
         rem = ((rem + a[i]) % m + m) % m;  // C++ の % は負になりうるので m を足して直す
-        ans += cnt[rem];  // 余りが等しい S_l の個数
+        ans += cnt[rem];  // 余りが等しい S_l の個数（直後に同じキーを記録するので [] で引いてよい）
         cnt[rem]++;
     }
     cout << ans << '\n';

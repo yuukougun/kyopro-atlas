@@ -17,7 +17,6 @@ int main() {
         g[a].push_back({b, w, i});
         g[b].push_back({a, w, i});
     }
-    // --8<-- [start:core]
     vector<long long> dist(n, INF);
     vector<int> par_edge(n, -1);  // v に入る最短路木の辺
     priority_queue<pair<long long, int>, vector<pair<long long, int>>, greater<>> pq;
@@ -27,6 +26,7 @@ int main() {
         auto [d, u] = pq.top();
         pq.pop();
         if (d > dist[u]) continue;
+        // --8<-- [start:core]
         for (auto [v, w, id] : g[u]) {
             if (dist[u] + w < dist[v]) {  // 真に短くなったときだけ親の辺を付け替える
                 dist[v] = dist[u] + w;
@@ -34,12 +34,12 @@ int main() {
                 pq.push({dist[v], v});
             }
         }
+        // --8<-- [end:core]
     }
     vector<int> tree;
     for (int v = 1; v < n; v++) {
         if (par_edge[v] >= 0) tree.push_back(par_edge[v]);
     }
-    // --8<-- [end:core]
     sort(tree.begin(), tree.end());
     for (int i = 0; i < (int)tree.size(); i++) cout << tree[i] + 1 << (i + 1 < (int)tree.size() ? " " : "");
     cout << '\n';

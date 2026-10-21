@@ -6,7 +6,7 @@
 <line x1="250" y1="215" x2="470" y2="215" stroke="#1f4e8c" stroke-width="4"/>
 <line x1="30" y1="215" x2="250" y2="215" stroke="#8c3b1f" stroke-width="3" stroke-dasharray="8 5"/>
 <line x1="250" y1="40" x2="250" y2="395" stroke="#999" stroke-width="1"/>
-<text x="470" y="205" text-anchor="end" fill="#1f4e8c" font-size="13">正の x 軸（実線）は前半</text>
+<text x="470" y="250" text-anchor="end" fill="#1f4e8c" font-size="13">正の x 軸（実線）は前半</text>
 <text x="34" y="250" fill="#8c3b1f" font-size="13">負の x 軸（破線）は後半</text>
 <circle cx="250" cy="215" r="4" fill="#fff" stroke="#000" stroke-width="1.5"/>
 <text x="242" y="233" text-anchor="end" font-size="13">原点</text>
@@ -31,7 +31,7 @@
 <text x="306" y="123" fill="#333" font-size="12">(1, 2)</text>
 <circle cx="330" cy="55" r="13" fill="#fff" stroke="#1f4e8c" stroke-width="2"/>
 <text x="330" y="60" text-anchor="middle" fill="#1f4e8c" font-weight="bold">3</text>
-<text x="346" y="43" fill="#333" font-size="12">(2, 4)</text>
+<text x="348" y="60" fill="#333" font-size="12">(2, 4)</text>
 <circle cx="90" cy="135" r="13" fill="#fff" stroke="#1f4e8c" stroke-width="2"/>
 <text x="90" y="140" text-anchor="middle" fill="#1f4e8c" font-weight="bold">4</text>
 <text x="106" y="123" fill="#333" font-size="12">(-4, 2)</text>

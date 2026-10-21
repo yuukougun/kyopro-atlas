@@ -39,8 +39,8 @@ struct IntervalSet {
             auto [a, b] = *it;
             total -= b - a;
             it = mp.erase(it);
-            if (a < l) mp[a] = l, total += l - a;
-            if (r < b) mp[r] = b, total += b - r;
+            if (a < l) { mp[a] = l; total += l - a; }
+            if (r < b) { mp[r] = b; total += b - r; }
         }
     }
     // x 以上で覆われていない最小の値

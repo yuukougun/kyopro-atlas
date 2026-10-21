@@ -19,7 +19,7 @@ vector<int> bipartite_coloring(const vector<vector<int>>& g) {
             q.pop();
             for (int v : g[u]) {
                 if (color[v] == -1) {
-                    color[v] = color[u] ^ 1;  // 隣は反対の色
+                    color[v] = 1 - color[u];  // 隣は反対の色
                     q.push(v);
                 } else if (color[v] == color[u]) {
                     return {};  // 同じ色どうしの辺（自己ループも含む）

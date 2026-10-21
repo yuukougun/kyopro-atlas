@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" font-family="sans-serif" font-size="16">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="20" y="28" fill="#222">S = ABACBC から A, B, C の順に選ぶ組</text>
+<text x="20" y="52" fill="#222">真ん中 j = 4（B）を固定する</text>
+<rect x="70" y="95" width="60" height="60" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2"/>
+<text x="100" y="133" text-anchor="middle" fill="#222" font-size="24" font-weight="bold">A</text>
+<text x="100" y="86" text-anchor="middle" fill="#555" font-size="14">0</text>
+<rect x="130" y="95" width="60" height="60" fill="#f2f2f2" stroke="#999" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="160" y="133" text-anchor="middle" fill="#222" font-size="24" font-weight="bold">B</text>
+<text x="160" y="86" text-anchor="middle" fill="#555" font-size="14">1</text>
+<rect x="190" y="95" width="60" height="60" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2"/>
+<text x="220" y="133" text-anchor="middle" fill="#222" font-size="24" font-weight="bold">A</text>
+<text x="220" y="86" text-anchor="middle" fill="#555" font-size="14">2</text>
+<rect x="250" y="95" width="60" height="60" fill="#f2f2f2" stroke="#999" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="280" y="133" text-anchor="middle" fill="#222" font-size="24" font-weight="bold">C</text>
+<text x="280" y="86" text-anchor="middle" fill="#555" font-size="14">3</text>
+<rect x="310" y="95" width="60" height="60" fill="#ffe8a8" stroke="#8a5a00" stroke-width="4"/>
+<text x="340" y="133" text-anchor="middle" fill="#222" font-size="24" font-weight="bold">B</text>
+<text x="340" y="86" text-anchor="middle" fill="#555" font-size="14" font-weight="bold">j = 4</text>
+<rect x="370" y="95" width="60" height="60" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2"/>
+<text x="400" y="133" text-anchor="middle" fill="#222" font-size="24" font-weight="bold">C</text>
+<text x="400" y="86" text-anchor="middle" fill="#555" font-size="14">5</text>
+<text x="60" y="86" text-anchor="end" fill="#555" font-size="14">添字</text>
+<path d="M74 165 L74 173 L306 173 L306 165" fill="none" stroke="#1f4e9a" stroke-width="2"/>
+<text x="190" y="196" text-anchor="middle" fill="#1f4e9a" font-weight="bold">左の A：2 個（0, 2）</text>
+<text x="190" y="218" text-anchor="middle" fill="#555" font-size="14">i の候補</text>
+<path d="M374 165 L374 173 L426 173 L426 165" fill="none" stroke="#1f4e9a" stroke-width="2"/>
+<text x="400" y="196" text-anchor="middle" fill="#1f4e9a" font-weight="bold">右の C：1 個</text>
+<text x="400" y="218" text-anchor="middle" fill="#555" font-size="14">k の候補</text>
+<text x="20" y="258" fill="#222">j = 4：2 × 1 = 2、j = 1：1 × 2 = 2</text>
+<text x="20" y="282" fill="#222">合計 4 は 3 重ループの全列挙と一致する</text>
+</svg>

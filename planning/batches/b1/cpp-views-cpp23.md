@@ -31,3 +31,13 @@
 - cartesian_product が遅い理由は「ベクトル化が効かないため」と推測で書いた（-fno-tree-vectorize で普通の for が 40→80 ms になり、g++-13 の cartesian_product 160 ms・g++-15 の 610 ms には届かないので、ベクトル化以外の損もある）。本文は「と考えられる」とした
 - 用語集・related の提案：cpp-structured-bindings の節 #enumerate-reference と内容が重なる。あちらを書くときは、このページの #reference-tuples へリンクして短くするとよい
 - 使用量の目安：道具の呼び出し 約 35 回、Web 取得 6 回
+
+## 検証の指摘への対応（planning/batches/b1/verify/cpp-views-cpp23.md）
+
+- 指摘 1（直すべき）：直した。#int-index の「ほかの直し方」を `best` を `ptrdiff_t` にする、に替え、「`long long` にしても通らない」を落とし穴 1 として足した
+- 指摘 2（直すべき）：直した。`to_string` をしているのは例の `views::transform` であると分かる書き方にした
+- 指摘 3（直すとよい）：直した。比べる相手を `i < a.size() - 1` の符号なしの引き算にし、cpp-integer-overflow#unsigned-size へリンクした
+- 指摘 4（直すとよい）：直した。`cartesian_product(iota(0, n), iota(0, n))` で添字を回した測り方を書いた（文の長さのため 2 文に分けた）
+- 指摘 5（直すとよい）：直した。図の右側の注記を font-size 13 から 15 にした（見出しとの間隔は文字幅の見積もりで確かめた。画像にしての確認はしていない）
+- 指摘 6（直すとよい）：#chunk-slide-stride の版に「`stride` は GCC 13 の一覧にないが手元の g++-13 で使えた」と添えた。cppreference の compiler support の表での裏付けは今回は取っていない
+- 直した後の検査：check_pages エラー0・警告0、fix_problems --check 0 行、check_snippets 22 片・期待と違う 0、textlint エラー0（警告 10、誤検出または以前からのもの）

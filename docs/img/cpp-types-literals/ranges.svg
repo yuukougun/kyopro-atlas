@@ -19,7 +19,8 @@
 <text x="752.5" y="169" text-anchor="end" fill="#000">2^64 ≈ 1.8×10^19</text>
 <rect x="60" y="215" width="770" height="16" fill="#937860" fill-opacity="0.35" stroke="#937860"/>
 <text x="66" y="228" fill="#000">__int128</text>
-<text x="940" y="228" text-anchor="end" fill="#000">… 2^127−1 ≈ 1.7×10^38</text>
+<text x="836" y="228" fill="#000">…</text>
+<text x="830" y="250" text-anchor="end" fill="#000">2^127−1 ≈ 1.7×10^38</text>
 <line x1="60" y1="275" x2="804" y2="275" stroke="#000" stroke-width="1.5"/>
 <line x1="60" y1="270" x2="60" y2="280" stroke="#000"/>
 <text x="60" y="295" text-anchor="middle" font-size="12" fill="#000">10^8</text>
@@ -58,7 +59,7 @@
 <text x="674.0" y="375" text-anchor="end" fill="#000">1e18（10^18）</text>
 <line x1="683.8" y1="275" x2="683.8" y2="389" stroke="#000"/>
 <circle cx="683.8" cy="275" r="4" fill="#fff" stroke="#000" stroke-width="2"/>
-<text x="677.8" y="401" text-anchor="end" fill="#000">INF = 1LL << 60 ≈ 1.15×10^18</text>
+<text x="677.8" y="401" text-anchor="end" fill="#000">INF = 1LL &lt;&lt; 60 ≈ 1.15×10^18</text>
 <line x1="702.5" y1="275" x2="702.5" y2="415" stroke="#000" stroke-dasharray="4 3"/>
 <circle cx="702.5" cy="275" r="4" fill="#fff" stroke="#000" stroke-width="2"/>
 <text x="696.5" y="427" text-anchor="end" fill="#000">INF + INF ≈ 2.31×10^18（long long に収まる）</text>

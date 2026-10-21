@@ -3,10 +3,10 @@
 using namespace std;
 
 // --8<-- [start:core]
-using Mat = array<array<long long, 3>, 3>;
-
-Mat mul(const Mat& a, const Mat& b) {  // a * b（b を先に施し、a を後に施す）
-    Mat c{};
+// a * b（b を先に施し、a を後に施す）
+array<array<long long, 3>, 3> mul(const array<array<long long, 3>, 3>& a,
+                                  const array<array<long long, 3>, 3>& b) {
+    array<array<long long, 3>, 3> c{};
     for (int i = 0; i < 3; i++)
         for (int k = 0; k < 3; k++)
             for (int j = 0; j < 3; j++) c[i][j] += a[i][k] * b[k][j];
@@ -15,23 +15,24 @@ Mat mul(const Mat& a, const Mat& b) {  // a * b（b を先に施し、a を後�
 
 // 操作を 3×3 行列にする。t = 1：時計回りに 90 度、2：反時計回りに 90 度、
 // 3：直線 x = p で反転、4：直線 y = p で反転（どれも原点まわり・整数のまま）
-Mat op_matrix(int t, long long p) {
-    if (t == 1) return Mat{{{0, 1, 0}, {-1, 0, 0}, {0, 0, 1}}};
-    if (t == 2) return Mat{{{0, -1, 0}, {1, 0, 0}, {0, 0, 1}}};
-    if (t == 3) return Mat{{{-1, 0, 2 * p}, {0, 1, 0}, {0, 0, 1}}};
-    return Mat{{{1, 0, 0}, {0, -1, 2 * p}, {0, 0, 1}}};
+array<array<long long, 3>, 3> op_matrix(int t, long long p) {
+    if (t == 1) return {{{0, 1, 0}, {-1, 0, 0}, {0, 0, 1}}};
+    if (t == 2) return {{{0, -1, 0}, {1, 0, 0}, {0, 0, 1}}};
+    if (t == 3) return {{{-1, 0, 2 * p}, {0, 1, 0}, {0, 0, 1}}};
+    return {{{1, 0, 0}, {0, -1, 2 * p}, {0, 0, 1}}};
 }
 
 // pre[k] = k 回目までの合成（pre[0] は単位行列）。後の操作を左から掛ける
-vector<Mat> build_prefix(const vector<pair<int, long long>>& ops) {
+vector<array<array<long long, 3>, 3>> build_prefix(const vector<pair<int, long long>>& ops) {
     int m = ops.size();
-    vector<Mat> pre(m + 1);
-    pre[0] = Mat{{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}};
+    vector<array<array<long long, 3>, 3>> pre(m + 1);
+    pre[0] = {{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}};
     for (int k = 0; k < m; k++) pre[k + 1] = mul(op_matrix(ops[k].first, ops[k].second), pre[k]);
     return pre;
 }
 
-pair<long long, long long> apply(const Mat& a, long long x, long long y) {  // a * (x, y, 1)^T
+// a * (x, y, 1)^T
+pair<long long, long long> apply(const array<array<long long, 3>, 3>& a, long long x, long long y) {
     return {a[0][0] * x + a[0][1] * y + a[0][2], a[1][0] * x + a[1][1] * y + a[1][2]};
 }
 // --8<-- [end:core]
@@ -50,7 +51,7 @@ int main() {
         p = 0;
         if (t >= 3) cin >> p;
     }
-    vector<Mat> pre = build_prefix(ops);
+    vector<array<array<long long, 3>, 3>> pre = build_prefix(ops);
 
     // 確かめ：1 つずつ素朴に動かした結果と一致する
     for (int i = 0; i < n; i++) {

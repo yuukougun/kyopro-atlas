@@ -18,8 +18,8 @@ int main() {
     auto f = [&](long long x, long long y) {
         long long qx = x / n, rx = x % n, qy = y / n, ry = y % n;
         return qx * qy * t[n][n]      // 丸ごと入るタイル
-             + qx * t[n][ry]          // 右端の余りの帯（qx 枚分）
              + qy * t[rx][n]          // 下端の余りの帯（qy 枚分）
+             + qx * t[n][ry]          // 右端の余りの帯（qx 枚分）
              + t[rx][ry];             // 右下の角
     };
     // --8<-- [end:core]

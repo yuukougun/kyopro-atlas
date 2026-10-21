@@ -86,7 +86,6 @@ search:
     - `mod-pow#binary-expansion` 指数を 2 進展開して必要な a&#94;(2&#94;k) だけ掛ける：https://yuukougun.github.io/kyopro-atlas/math/mod-pow/#binary-expansion
     - `mod-pow#recursive-iterative` 再帰版と反復版：https://yuukougun.github.io/kyopro-atlas/math/mod-pow/#recursive-iterative
     - `mod-pow#monoid-power` 結合法則を満たす演算の累乗（行列・写像の合成）：https://yuukougun.github.io/kyopro-atlas/math/mod-pow/#monoid-power
-    - `mod-pow#pitfalls` 落とし穴：指数を m で割ってしまう・0^0・掛け算のあふれ：https://yuukougun.github.io/kyopro-atlas/math/mod-pow/#pitfalls
     - `mod-pow#acl` ACL の pow_mod と modint::pow：https://yuukougun.github.io/kyopro-atlas/math/mod-pow/#acl
     - `mod-pow#building-block` 繰り返し二乗法を部品にする手法：https://yuukougun.github.io/kyopro-atlas/math/mod-pow/#building-block
 
@@ -256,7 +255,7 @@ search:
     - `spf-sieve#many-numbers` 多数の数をまとめて分解する（試し割りとの比較）：https://yuukougun.github.io/kyopro-atlas/math/spf-sieve/#many-numbers
     - `spf-sieve#after-factor` 分解した後の使い方（異なる素因数・指数・約数）：https://yuukougun.github.io/kyopro-atlas/math/spf-sieve/#after-factor
     - `spf-sieve#linear-sieve` 線形篩：各合成数を1回だけ作り、φ・μ の表を同時に作る（青）：https://yuukougun.github.io/kyopro-atlas/math/spf-sieve/#linear-sieve
-    - `spf-sieve#memory` メモリの見積もり（int で 10^7 個は 40MB）：https://yuukougun.github.io/kyopro-atlas/math/spf-sieve/#memory
+    - `spf-sieve#memory` メモリの見積もり（int で 10^7 個は 40 MB）：https://yuukougun.github.io/kyopro-atlas/math/spf-sieve/#memory
 
 ## 調和級数と倍数の列挙（harmonic-sum） {#harmonic-sum}
 
@@ -277,7 +276,6 @@ search:
     - `harmonic-sum#decide-from-back` 倍数の箱を後ろから決める：https://yuukougun.github.io/kyopro-atlas/math/harmonic-sum/#decide-from-back
     - `harmonic-sum#quotient-ranges` 商が同じ範囲を倍数で区切って数える：https://yuukougun.github.io/kyopro-atlas/math/harmonic-sum/#quotient-ranges
     - `harmonic-sum#vs-sieve` 素数の倍数だけをたどる篩（M log log M）との違い：https://yuukougun.github.io/kyopro-atlas/math/harmonic-sum/#vs-sieve
-    - `harmonic-sum#pitfalls` 落とし穴：https://yuukougun.github.io/kyopro-atlas/math/harmonic-sum/#pitfalls
 
 ## 約数の個数の上界と高度合成数（divisor-count-bound） {#divisor-count-bound}
 
@@ -293,7 +291,6 @@ search:
 - 節：
     - `divisor-count-bound#table` 約数の個数・素因数の種類数の最大値の表（10&#94;3〜10&#94;18）：https://yuukougun.github.io/kyopro-atlas/math/divisor-count-bound/#table
     - `divisor-count-bound#pairs` 約数の組を全部試す見積もり（1344² ≈ 1.8×10^6）：https://yuukougun.github.io/kyopro-atlas/math/divisor-count-bound/#pairs
-    - `divisor-count-bound#pitfalls` 落とし穴（約数の個数を √N と見積もる・10^18 の約数の列挙に O(√N) かかる）：https://yuukougun.github.io/kyopro-atlas/math/divisor-count-bound/#pitfalls
     - `divisor-count-bound#divisor-dp` 約数を状態にした DP（約数の個数が少ないことを使う）（青）：https://yuukougun.github.io/kyopro-atlas/math/divisor-count-bound/#divisor-dp
     - `divisor-count-bound#enumerate-hcn` 高度合成数の列挙（小さい素数の指数が単調に減る形を DFS で）（黄）：https://yuukougun.github.io/kyopro-atlas/math/divisor-count-bound/#enumerate-hcn
 
@@ -476,7 +473,7 @@ search:
 
 ## 整数の証明の型（proof-patterns） {#proof-patterns}
 
-- id：`proof-patterns`　レベル：基礎　段階：stub　type：thinking
+- id：`proof-patterns`　レベル：基礎　段階：draft　type：thinking
 - URL：https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/
 - 別名：整数問題の証明、並べ替え論法、余りの鳩の巣、gcd が不変、mod での矛盾
 - 種類：考察、整数論
@@ -489,13 +486,13 @@ search:
     - `proof-patterns#gcd-invariant` 操作で gcd が変わらない（互除法の不変量）：https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/#gcd-invariant
     - `proof-patterns#mutual-divisibility` 互いに割り切り合うことで等号を示す：https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/#mutual-divisibility
     - `proof-patterns#rearrangement` 並べ替え論法（a, 2a, …, (p−1)a が余りの並べ替えになる）：https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/#rearrangement
-    - `proof-patterns#pigeonhole-remainder` 余りの鳩の巣（m+1 個のうち2つは同じ余り）：https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/#pigeonhole-remainder
+    - `proof-patterns#pigeonhole-remainder` 余りの鳩の巣（m + 1 個のうち 2 つは同じ余り）：https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/#pigeonhole-remainder
     - `proof-patterns#contradiction-mod` mod での矛盾で「できない」を示す：https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/#contradiction-mod
     - `proof-patterns#necessary-sufficient` 必要条件と十分条件（実験の結果を信じてよいか）：https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/#necessary-sufficient
 
 ## 整数の平方根・K 乗根と累乗数（integer-root） {#integer-root}
 
-- id：`integer-root`　レベル：基礎　段階：stub　type：technique
+- id：`integer-root`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/integer-root/
 - 別名：isqrt、integer square root、整数平方根、累乗数、perfect power、誤差のない平方根、sqrt の誤差
 - 種類：整数論、二分探索
@@ -509,6 +506,7 @@ search:
     - `integer-root#kth-root` 二分探索による整数の K 乗根（途中の累乗のあふれ）：https://yuukougun.github.io/kyopro-atlas/math/integer-root/#kth-root
     - `integer-root#perfect-powers` 累乗数の数え上げ（b ≥ 3 は列挙、b = 2 は ⌊√N⌋、重複を除く）：https://yuukougun.github.io/kyopro-atlas/math/integer-root/#perfect-powers
     - `integer-root#compare-sqrt` √ を含む式の大小を整数で比べる：https://yuukougun.github.io/kyopro-atlas/math/integer-root/#compare-sqrt
+    - `integer-root#next-steps` 約数列挙・商の列挙・素因数の指数へのつながり：https://yuukougun.github.io/kyopro-atlas/math/integer-root/#next-steps
 
 ## N 進法（base-conversion） {#base-conversion}
 

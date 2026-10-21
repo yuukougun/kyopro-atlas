@@ -2,7 +2,7 @@
 using namespace std;
 
 // --8<-- [start:core]
-// 数字列 s の部分文字列のうち、整数とみて p の倍数になるものの個数（p は素数）
+// 数字列 s の部分文字列のうち、整数とみて p の倍数になるものの個数（p は 2・5 か、10 と互いに素な数）
 long long count_multiples(const string& s, int p) {
     int n = s.size();
     long long ans = 0;

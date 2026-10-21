@@ -11,7 +11,7 @@ kind: [実装・C++]
 prerequisites: [cpp-environment, cpp-integer-overflow, cpp-structured-bindings]
 related: [cpp-range-for, cpp-comparators, cpp-container-idioms, cpp-macros-template-file, debugging-checklist, stress-testing, dijkstra, cpp-reverse-index#symptoms]
 summary: あふれ・範囲外・未初期化変数・ダングリングなどの未定義動作が、-O2 や手元と AtCoder で結果を変える仕組みを知り、デバッグ用のビルドで見つける。ダングリングの 4 つの型も示す。
-complexity: 'どれも実行時の費用はない。見つける道具を付けたビルドは遅い（手元の例で -O2 の約 10 倍、_GLIBCXX_DEBUG を足すと約 200 倍）'
+complexity: '避ける書き方（初期値を書く・値で受ける・添字で書く）に実行時の費用はない。見つける道具を付けたビルドは遅い（書き方で変わるが、手元の例で -O2 の数倍〜十数倍、_GLIBCXX_DEBUG を足すと数十〜数百倍）'
 signs: []
 acl: []
 sections:
@@ -41,7 +41,7 @@ atcoder: null
         - 手元と AtCoder で結果が違う。`-O0` と `-O2` で結果が違う。
         - 答えに関係のない行や `cerr` の出力を足すと答えが変わる。
         - ダイクストラの距離がおかしい、`push_back` の後で値が壊れる。
-    - **計算量**：どれも実行時の費用はない。見つける道具を付けたビルドは遅い（手元の例で `-O2` の約 10 倍、`_GLIBCXX_DEBUG` を足すと約 200 倍）
+    - **計算量**：避ける書き方（初期値を書く・値で受ける・添字で書く）に実行時の費用はない。見つける道具を付けたビルドは遅い（書き方で変わるが、手元の例で `-O2` の数倍〜十数倍、`_GLIBCXX_DEBUG` を足すと数十〜数百倍）
     - **前提**：[AtCoder と手元の C++ 環境](../cpp/cpp-environment.md)、[整数のオーバーフローと \_\_int128](../cpp/cpp-integer-overflow.md)、[構造化束縛と pair・tuple・optional](../cpp/cpp-structured-bindings.md)
 
 <!-- textlint-disable -->
@@ -103,9 +103,9 @@ $x = 1$ のとき、`-O0` では 31 回で止まり 31 と出る。`-O2` では�
 
 ## 未初期化変数：手元では不定、AtCoder では -ftrivial-auto-var-init=zero で 0 になる（-Wall は配列の未初期化を警告しない） {#uninitialized}
 
-関数の中で宣言した変数と配列（自動変数）は、初期値を書かなければ値が決まらない。読むと未定義動作で、手元ではゴミの値になる。グローバル変数と `vector<int> a(n)` は 0 で初期化されるので、この問題はない。
+関数の中で宣言した `int`・`long long`・`double` などの変数と、その配列（自動変数）は、初期値を書かなければ値が決まらない。読むと未定義動作で、手元ではゴミの値になる。グローバル変数と `vector<int> a(n)` は 0 で初期化されるので、この問題はない。`string s;` や `vector<int> v;` も空で作られる。
 
-AtCoder の GCC には `-ftrivial-auto-var-init=zero` が付いていて、初期値のない自動変数を 0 で埋める。そのため、初期化を忘れたコードが AtCoder では AC し、手元では答えが合わない（逆に、手元に合わせて直すと AtCoder でも通る）。次の関数は文字の出現回数の配列 `cnt` を初期化していない。
+AtCoder の GCC には `-ftrivial-auto-var-init=zero` が付いていて、初期値のない自動変数を 0 で埋める。そのため、初期化を忘れたコードが AtCoder では AC し、手元では答えが合わない。初期値を書けば、手元でも AtCoder でも同じ答えになる。次の関数は文字の出現回数の配列 `cnt` を初期化していない。
 
 ```cpp
 --8<-- "cpp-undefined-behavior/uninit-array.cpp:core"
@@ -118,7 +118,7 @@ AtCoder の GCC には `-ftrivial-auto-var-init=zero` が付いていて、初�
 | `-O2`（g++-13・g++-15） | 3956798619723922246 などのゴミの値 | なし |
 | `-O2 -ftrivial-auto-var-init=zero`（AtCoder と同じ） | 9 | なし |
 
-配列の初期化忘れは `-Wall -Wextra` でも警告されない。配列でない変数なら、`-O2` で `'s' may be used uninitialized` と警告される（`-O0` では出ない）。
+配列を `cnt[c - 'a']++` のように実行時に決まる添字で使うと、`-Wall -Wextra` でも警告されない（添字が定数で、読むだけなら警告される）。次のようにループの中で足していく変数は、`-O2` でだけ `'s' may be used uninitialized` と警告される（`-O0` では出ない。宣言の直後に読むだけなら `-O0` でも警告される）。
 
 ```cpp
 --8<-- "cpp-undefined-behavior/uninit-scalar.cpp:core"
@@ -172,7 +172,7 @@ AtCoder の GCC には `-ftrivial-auto-var-init=zero` が付いていて、初�
 
 `vector` は、容量が足りなくなると、より大きな領域を新しく確保して要素を移し、古い領域を解放する（再確保）。再確保の前に取った参照・イテレータは古い領域を指したまま残る。
 
-![vector の再確保の図。左は auto& row = g[0] の直後で、row が g の唯一の要素 g[0] を指している。右は g.push_back({2}) の後で、要素は容量 2 の新しい領域へ移り、古い領域は解放済みになったが、row は古い領域を指したまま](../img/cpp-undefined-behavior/reallocation.svg)
+![vector の再確保の図。上は auto& row = g[0] の直後で、row が g の唯一の要素 g[0] を指している。下は g.push_back({2}) の後で、要素は容量 2 の新しい領域へ移り、古い領域は解放済みになったが、row は古い領域を指したまま](../img/cpp-undefined-behavior/reallocation.svg)
 
 ```cpp
 --8<-- "cpp-undefined-behavior/reallocation.cpp:bad"
@@ -208,7 +208,7 @@ AtCoder では動くが、古い環境や解説の写し方によっては壊れ
 --8<-- "cpp-undefined-behavior/temporary-range.cpp:core"
 ```
 
-- **安全な形**：関数の戻り値そのものを回す `for (int x : make(n))` は、どの版でも安全である。危ないのは、戻り値の「中身」（`[0]`・`.first`・メンバ関数の戻り値）を回すときだけ
+- **安全な形**：関数の戻り値そのものを回す `for (int x : make(n))` は、どの版でも安全である。危ないのは、戻り値の「中身」（`[0]`・`.first`・参照を返すメンバ関数の戻り値）を回すときだけ
 - **関連**：寿命が延びる規則の詳しい説明は[範囲に一時オブジェクトの中身を渡すとき](../cpp/cpp-range-for.md#temporary-range)にある
 
 ## ダングリング④：string_view に一時的な string を入れる {#dangling-string-view}
@@ -219,7 +219,7 @@ AtCoder では動くが、古い環境や解説の写し方によっては壊れ
 --8<-- "cpp-undefined-behavior/string-view.cpp:bad"
 ```
 
-手元では、`-O2` で先頭が化けた文字列が出て正常に終わった。`-fsanitize=address` を付けると、長い文字列は `heap-use-after-free`、短い文字列は `stack-use-after-scope` と出た（短い `string` は文字を自分の中に持つため）。文字列そのものは `string` の変数に持ち、`string_view` はその変数が生きている間だけ使う。
+手元の `-O2` では、長い文字列は先頭が化けて出たが、短い文字列は正しく出た（たまたまである）。どちらも正常に終わった。`-fsanitize=address` を付けると、長い文字列は `heap-use-after-free`、短い文字列は `stack-use-after-scope` と出た（短い `string` は文字を自分の中に持つため）。文字列そのものは `string` の変数に持ち、`string_view` はその変数が生きている間だけ使う。
 
 ```cpp
 --8<-- "cpp-undefined-behavior/string-view.cpp:core"
@@ -252,19 +252,18 @@ AtCoder では動くが、古い環境や解説の写し方によっては壊れ
 
 道具ごとに見つけられるものが違う。このページの例を手元の g++-13・g++-15 で試した結果は次のとおりで、両者は同じだった（○は止まるか警告が出た、×は何も出なかった）。
 
-| 例 | `-Wall -Wextra` | `_GLIBCXX_ASSERTIONS` | `_GLIBCXX_DEBUG` | address | undefined |
-| --- | --- | --- | --- | --- | --- |
-| 符号付き整数のあふれ | × | × | × | × | ○ |
-| `vector` の範囲外 | × | ○ | ○ | ○ | × |
-| 生の配列の範囲外 | × | × | × | ○ | ○ |
-| 配列の未初期化 | × | × | × | × | × |
-| 変数の未初期化 | ○（`-O2`） | × | × | × | × |
-| 比較関数の `<=` | × | × | ○ | ○（要素が多いとき） | × |
-| シフトの幅・`__builtin_ctz(0)` | × | × | × | × | ○ |
-| ダングリング②③④ | × | × | × | ○ | × |
-| ダングリング①（`pq.top()`） | × | × | × | × | × |
+| 例 | `_GLIBCXX_ASSERTIONS` | `_GLIBCXX_DEBUG` | address | undefined |
+| --- | --- | --- | --- | --- |
+| 符号付き整数のあふれ | × | × | × | ○ |
+| `vector` の範囲外 | ○ | ○ | ○ | × |
+| 生の配列の範囲外 | × | × | ○ | ○ |
+| 未初期化の変数・配列 | × | × | × | × |
+| 比較関数の `<=` | × | ○ | ○（要素が多いとき） | × |
+| シフトの幅・`__builtin_ctz(0)` | × | × | × | ○ |
+| ダングリング②③④ | × | × | ○ | × |
+| ダングリング①（`pq.top()`） | × | × | × | × |
 
-表の列の address は `-fsanitize=address`、undefined は `-fsanitize=undefined` である。範囲外の添字が定数のときだけは、`-Wall` が `array subscript 3 is above array bounds` と警告することもある。
+表の列の address は `-fsanitize=address`、undefined は `-fsanitize=undefined` である。`-Wall -Wextra` が警告するのは、単純な未初期化の読み出し（ループで足す変数は `-O2` でだけ）と、定数の添字の範囲外（`array subscript 3 is above array bounds`）くらいである。実行時の添字で使う配列の未初期化、あふれ、ダングリングは、このページの例ではどれも警告されなかった。
 
 - **`-D_GLIBCXX_ASSERTIONS`**：標準ライブラリの前提の検査（`vector` の `[]` の範囲・空の `front` など）を有効にする。遅くなりにくい
 - **`-D_GLIBCXX_DEBUG`**：コンテナとイテレータを検査付きのものに置き換える。`ASSERTIONS` の検査に加えて、比較関数の誤りや無効になったイテレータも見つけるが、とても遅くなる
@@ -286,9 +285,9 @@ g++-15 -std=gnu++23 -O1 -g -Wall -Wextra -D_GLIBCXX_DEBUG -fsanitize=address,und
 - `-DLOCAL`：`#ifdef LOCAL` で囲んだデバッグ出力を有効にする（[手元だけのデバッグ出力](../cpp/cpp-macros-template-file.md#ifdef-local)）
 - 加えてよいもの：`-fno-sanitize-recover=all`（UndefinedBehaviorSanitizer の最初の報告で止める）と `-ftrivial-auto-var-init=pattern`（[未初期化変数](#uninitialized)を目立つ値で埋める）。手元では、すべてを合わせたビルドも動いた
 
-**遅くなる**：手元で、長さ $2 \times 10^5$ の配列のソートと $4 \times 10^8$ 回のループを含むコードを比べた。ふだんの `-O2` で 0.08 秒、上のビルドで約 15 秒、`_GLIBCXX_DEBUG` を `_GLIBCXX_ASSERTIONS` に替えて約 0.9 秒だった。大きいケースではなく、落ちる小さいケースを探してから動かす。
+**遅くなる**：手元で、長さ $2 \times 10^5$ の配列のソートと $4 \times 10^8$ 回のループを含むコードを比べた。ふだんの `-O2` で 0.08 秒、上のビルドで約 15 秒、`_GLIBCXX_DEBUG` を `_GLIBCXX_ASSERTIONS` に替えて約 0.9 秒だった。倍率は書き方で大きく変わり、別の例では約 3 倍と約 65 倍だった。目安は、`ASSERTIONS` 版で数倍〜十数倍、`_GLIBCXX_DEBUG` 版で数十〜数百倍である。大きいケースではなく、落ちる小さいケースを探してから動かす。
 
-- **落とし穴**：プリコンパイル済みヘッダ（`~/pch`）は作ったときと同じオプションでしか使われないので、このビルドではコンパイルに毎回 1 秒ほどかかる
+- **落とし穴**：プリコンパイル済みヘッダ（`~/pch`）は作ったときと同じオプションでしか使われない。そのため、このビルドではコンパイルに毎回数秒かかる（[プリコンパイル済みヘッダ](../cpp/cpp-environment.md#pch)）
 - **落とし穴**：深い再帰で落ちるのは未定義動作ではなくスタックの不足である。手元で試す前に `ulimit -s unlimited` を実行する（[AtCoder と手元の C++ 環境](../cpp/cpp-environment.md)）
 
 ## assert で WA を RE に変えて気づく（AtCoder では NDEBUG が付かない） {#assert}

@@ -14,7 +14,7 @@
   <rect x="470" y="35" width="130" height="44" rx="6" fill="#eef4fb" stroke="#2f6db5" stroke-width="1.5"/>
   <text x="535" y="63" font-size="18" text-anchor="middle" fill="#111111">5/6</text>
   <line x1="244" y1="57" x2="466" y2="57" stroke="#333333" stroke-width="1.5" marker-end="url(#arr)"/>
-  <text x="355" y="47" font-size="14" text-anchor="middle" fill="#333333">足す（通分して 3/6 + 2/6）</text>
+  <text x="355" y="47" font-size="16" text-anchor="middle" fill="#333333">足す（通分して 3/6 + 2/6）</text>
   <!-- 下の行：mod -->
   <rect x="100" y="205" width="170" height="54" rx="6" fill="#fdf3e7" stroke="#b5651d" stroke-width="1.5" stroke-dasharray="6 3"/>
   <text x="185" y="228" font-size="15" text-anchor="middle" fill="#111111">499122177,</text>
@@ -22,13 +22,11 @@
   <rect x="460" y="205" width="150" height="54" rx="6" fill="#fdf3e7" stroke="#b5651d" stroke-width="1.5" stroke-dasharray="6 3"/>
   <text x="535" y="238" font-size="16" text-anchor="middle" fill="#111111">831870295</text>
   <line x1="274" y1="232" x2="456" y2="232" stroke="#333333" stroke-width="1.5" marker-end="url(#arr)"/>
-  <text x="365" y="222" font-size="14" text-anchor="middle" fill="#333333">足して mod p</text>
+  <text x="365" y="222" font-size="16" text-anchor="middle" fill="#333333">足して mod p</text>
   <!-- 縦の矢印：a/b → a × b^(−1) -->
   <line x1="185" y1="83" x2="185" y2="200" stroke="#333333" stroke-width="1.5" marker-end="url(#arr)"/>
   <line x1="535" y1="83" x2="535" y2="200" stroke="#333333" stroke-width="1.5" marker-end="url(#arr)"/>
-  <text x="195" y="135" font-size="13" fill="#333333">a/b を</text>
-  <text x="195" y="153" font-size="13" fill="#333333">a × b^(−1) mod p に</text>
-  <text x="545" y="135" font-size="13" fill="#333333">5 × 6^(−1)</text>
-  <text x="545" y="153" font-size="13" fill="#333333">mod p</text>
-  <text x="320" y="290" font-size="13" text-anchor="middle" fill="#555555">p = 998244353。どちらの道を通っても、右下の値は同じになる</text>
+  <text x="195" y="147" font-size="16" fill="#333333">a × b^(−1)</text>
+  <text x="545" y="147" font-size="16" fill="#333333">5 × 6^(−1)</text>
+  <text x="320" y="290" font-size="15" text-anchor="middle" fill="#555555">p = 998244353</text>
 </svg>

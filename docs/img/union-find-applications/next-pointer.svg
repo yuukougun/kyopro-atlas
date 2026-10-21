@@ -1,59 +1,61 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" font-family="sans-serif" font-size="14">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 365" font-family="sans-serif" font-size="14">
 <rect width="100%" height="100%" fill="#ffffff"/>
 <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1f4e9a"/></marker></defs>
-<text x="40" y="35" fill="#222">塗った直後：塗ったマスは右隣を指す</text>
-<rect x="40" y="95" width="60" height="36" fill="#ffffff" stroke="#222" stroke-width="1.2"/>
-<text x="70.0" y="151" text-anchor="middle" fill="#555" font-size="12">0</text>
-<rect x="100" y="95" width="60" height="36" fill="#ffffff" stroke="#222" stroke-width="1.2"/>
-<text x="130.0" y="151" text-anchor="middle" fill="#555" font-size="12">1</text>
-<rect x="160" y="95" width="60" height="36" fill="#c9c9c9" stroke="#222" stroke-width="1.2"/>
-<text x="190.0" y="151" text-anchor="middle" fill="#555" font-size="12">2</text>
-<text x="190.0" y="118" text-anchor="middle" fill="#222" font-size="12">済</text>
-<rect x="220" y="95" width="60" height="36" fill="#c9c9c9" stroke="#222" stroke-width="1.2"/>
-<text x="250.0" y="151" text-anchor="middle" fill="#555" font-size="12">3</text>
-<text x="250.0" y="118" text-anchor="middle" fill="#222" font-size="12">済</text>
-<rect x="280" y="95" width="60" height="36" fill="#c9c9c9" stroke="#222" stroke-width="1.2"/>
-<text x="310.0" y="151" text-anchor="middle" fill="#555" font-size="12">4</text>
-<text x="310.0" y="118" text-anchor="middle" fill="#222" font-size="12">済</text>
-<rect x="340" y="95" width="60" height="36" fill="#ffffff" stroke="#222" stroke-width="1.2"/>
-<text x="370.0" y="151" text-anchor="middle" fill="#555" font-size="12">5</text>
-<rect x="400" y="95" width="60" height="36" fill="#c9c9c9" stroke="#222" stroke-width="1.2"/>
-<text x="430.0" y="151" text-anchor="middle" fill="#555" font-size="12">6</text>
-<text x="430.0" y="118" text-anchor="middle" fill="#222" font-size="12">済</text>
-<rect x="460" y="95" width="60" height="36" fill="#ffffff" stroke="#222" stroke-width="1.2"/>
-<text x="490.0" y="151" text-anchor="middle" fill="#555" font-size="12">7</text>
-<rect x="520" y="95" width="60" height="36" fill="#ffffff" stroke="#222" stroke-width="1.2" stroke-dasharray="4 3"/>
-<text x="550.0" y="151" text-anchor="middle" fill="#555" font-size="12">8（番兵）</text>
-<path d="M 190.0 95 C 190.0 73, 246.0 73, 246.0 93" fill="none" stroke="#1f4e9a" stroke-width="1.8" marker-end="url(#ar)"/>
-<path d="M 250.0 95 C 250.0 73, 306.0 73, 306.0 93" fill="none" stroke="#1f4e9a" stroke-width="1.8" marker-end="url(#ar)"/>
-<path d="M 310.0 95 C 310.0 73, 366.0 73, 366.0 93" fill="none" stroke="#1f4e9a" stroke-width="1.8" marker-end="url(#ar)"/>
-<path d="M 430.0 95 C 430.0 73, 486.0 73, 486.0 93" fill="none" stroke="#1f4e9a" stroke-width="1.8" marker-end="url(#ar)"/>
-<text x="40" y="165" fill="#222">find(2) の後：たどった 2 が 1 つ飛ばして 4 を指す（経路の半分化）</text>
-<rect x="40" y="225" width="60" height="36" fill="#ffffff" stroke="#222" stroke-width="1.2"/>
-<text x="70.0" y="281" text-anchor="middle" fill="#555" font-size="12">0</text>
-<rect x="100" y="225" width="60" height="36" fill="#ffffff" stroke="#222" stroke-width="1.2"/>
-<text x="130.0" y="281" text-anchor="middle" fill="#555" font-size="12">1</text>
-<rect x="160" y="225" width="60" height="36" fill="#c9c9c9" stroke="#222" stroke-width="1.2"/>
-<text x="190.0" y="281" text-anchor="middle" fill="#555" font-size="12">2</text>
-<text x="190.0" y="248" text-anchor="middle" fill="#222" font-size="12">済</text>
-<rect x="220" y="225" width="60" height="36" fill="#c9c9c9" stroke="#222" stroke-width="1.2"/>
-<text x="250.0" y="281" text-anchor="middle" fill="#555" font-size="12">3</text>
-<text x="250.0" y="248" text-anchor="middle" fill="#222" font-size="12">済</text>
-<rect x="280" y="225" width="60" height="36" fill="#c9c9c9" stroke="#222" stroke-width="1.2"/>
-<text x="310.0" y="281" text-anchor="middle" fill="#555" font-size="12">4</text>
-<text x="310.0" y="248" text-anchor="middle" fill="#222" font-size="12">済</text>
-<rect x="340" y="225" width="60" height="36" fill="#ffffff" stroke="#222" stroke-width="1.2"/>
-<text x="370.0" y="281" text-anchor="middle" fill="#555" font-size="12">5</text>
-<rect x="400" y="225" width="60" height="36" fill="#c9c9c9" stroke="#222" stroke-width="1.2"/>
-<text x="430.0" y="281" text-anchor="middle" fill="#555" font-size="12">6</text>
-<text x="430.0" y="248" text-anchor="middle" fill="#222" font-size="12">済</text>
-<rect x="460" y="225" width="60" height="36" fill="#ffffff" stroke="#222" stroke-width="1.2"/>
-<text x="490.0" y="281" text-anchor="middle" fill="#555" font-size="12">7</text>
-<rect x="520" y="225" width="60" height="36" fill="#ffffff" stroke="#222" stroke-width="1.2" stroke-dasharray="4 3"/>
-<text x="550.0" y="281" text-anchor="middle" fill="#555" font-size="12">8（番兵）</text>
-<path d="M 190.0 225 C 190.0 191, 300.0 191, 300.0 223" fill="none" stroke="#1f4e9a" stroke-width="1.8" marker-end="url(#ar)"/>
-<path d="M 250.0 225 C 250.0 205, 290.0 205, 290.0 223" fill="none" stroke="#1f4e9a" stroke-width="1.8" marker-end="url(#ar)"/>
-<path d="M 320.0 225 C 320.0 203, 366.0 203, 366.0 223" fill="none" stroke="#1f4e9a" stroke-width="1.8" marker-end="url(#ar)"/>
-<path d="M 430.0 225 C 430.0 203, 486.0 203, 486.0 223" fill="none" stroke="#1f4e9a" stroke-width="1.8" marker-end="url(#ar)"/>
-<text x="40" y="292" fill="#555" font-size="12">灰色（済）：塗ったマス　白：空き（自分を指す根）　矢印：nxt　find(i) は i 以降で最初の空きを返す</text>
+<text x="20" y="30" fill="#222">塗った直後：塗ったマスは右隣を指す</text>
+<rect x="40" y="80" width="50" height="36" fill="#ffffff" stroke="#222" stroke-width="1.2"/>
+<text x="65.0" y="136" text-anchor="middle" fill="#555">0</text>
+<rect x="90" y="80" width="50" height="36" fill="#ffffff" stroke="#222" stroke-width="1.2"/>
+<text x="115.0" y="136" text-anchor="middle" fill="#555">1</text>
+<rect x="140" y="80" width="50" height="36" fill="#c9c9c9" stroke="#222" stroke-width="1.2"/>
+<text x="165.0" y="136" text-anchor="middle" fill="#555">2</text>
+<text x="165.0" y="103" text-anchor="middle" fill="#222" font-size="13">済</text>
+<rect x="190" y="80" width="50" height="36" fill="#c9c9c9" stroke="#222" stroke-width="1.2"/>
+<text x="215.0" y="136" text-anchor="middle" fill="#555">3</text>
+<text x="215.0" y="103" text-anchor="middle" fill="#222" font-size="13">済</text>
+<rect x="240" y="80" width="50" height="36" fill="#c9c9c9" stroke="#222" stroke-width="1.2"/>
+<text x="265.0" y="136" text-anchor="middle" fill="#555">4</text>
+<text x="265.0" y="103" text-anchor="middle" fill="#222" font-size="13">済</text>
+<rect x="290" y="80" width="50" height="36" fill="#ffffff" stroke="#222" stroke-width="1.2"/>
+<text x="315.0" y="136" text-anchor="middle" fill="#555">5</text>
+<rect x="340" y="80" width="50" height="36" fill="#c9c9c9" stroke="#222" stroke-width="1.2"/>
+<text x="365.0" y="136" text-anchor="middle" fill="#555">6</text>
+<text x="365.0" y="103" text-anchor="middle" fill="#222" font-size="13">済</text>
+<rect x="390" y="80" width="50" height="36" fill="#ffffff" stroke="#222" stroke-width="1.2"/>
+<text x="415.0" y="136" text-anchor="middle" fill="#555">7</text>
+<rect x="440" y="80" width="50" height="36" fill="#ffffff" stroke="#222" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="465.0" y="136" text-anchor="middle" fill="#555">8（番兵）</text>
+<path d="M 165.0 80 C 165.0 58, 211.0 58, 211.0 78" fill="none" stroke="#1f4e9a" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M 215.0 80 C 215.0 58, 261.0 58, 261.0 78" fill="none" stroke="#1f4e9a" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M 265.0 80 C 265.0 58, 311.0 58, 311.0 78" fill="none" stroke="#1f4e9a" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M 365.0 80 C 365.0 58, 411.0 58, 411.0 78" fill="none" stroke="#1f4e9a" stroke-width="1.8" marker-end="url(#ar)"/>
+<text x="20" y="180" fill="#222">find(2) の後：たどった 2 が 1 つ飛ばして 4 を指す</text>
+<text x="20" y="198" fill="#222">（経路の半分化）</text>
+<rect x="40" y="250" width="50" height="36" fill="#ffffff" stroke="#222" stroke-width="1.2"/>
+<text x="65.0" y="306" text-anchor="middle" fill="#555">0</text>
+<rect x="90" y="250" width="50" height="36" fill="#ffffff" stroke="#222" stroke-width="1.2"/>
+<text x="115.0" y="306" text-anchor="middle" fill="#555">1</text>
+<rect x="140" y="250" width="50" height="36" fill="#c9c9c9" stroke="#222" stroke-width="1.2"/>
+<text x="165.0" y="306" text-anchor="middle" fill="#555">2</text>
+<text x="165.0" y="273" text-anchor="middle" fill="#222" font-size="13">済</text>
+<rect x="190" y="250" width="50" height="36" fill="#c9c9c9" stroke="#222" stroke-width="1.2"/>
+<text x="215.0" y="306" text-anchor="middle" fill="#555">3</text>
+<text x="215.0" y="273" text-anchor="middle" fill="#222" font-size="13">済</text>
+<rect x="240" y="250" width="50" height="36" fill="#c9c9c9" stroke="#222" stroke-width="1.2"/>
+<text x="265.0" y="306" text-anchor="middle" fill="#555">4</text>
+<text x="265.0" y="273" text-anchor="middle" fill="#222" font-size="13">済</text>
+<rect x="290" y="250" width="50" height="36" fill="#ffffff" stroke="#222" stroke-width="1.2"/>
+<text x="315.0" y="306" text-anchor="middle" fill="#555">5</text>
+<rect x="340" y="250" width="50" height="36" fill="#c9c9c9" stroke="#222" stroke-width="1.2"/>
+<text x="365.0" y="306" text-anchor="middle" fill="#555">6</text>
+<text x="365.0" y="273" text-anchor="middle" fill="#222" font-size="13">済</text>
+<rect x="390" y="250" width="50" height="36" fill="#ffffff" stroke="#222" stroke-width="1.2"/>
+<text x="415.0" y="306" text-anchor="middle" fill="#555">7</text>
+<rect x="440" y="250" width="50" height="36" fill="#ffffff" stroke="#222" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="465.0" y="306" text-anchor="middle" fill="#555">8（番兵）</text>
+<path d="M 165.0 250 C 165.0 212, 255.0 212, 255.0 248" fill="none" stroke="#1f4e9a" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M 215.0 250 C 215.0 230, 245.0 230, 245.0 248" fill="none" stroke="#1f4e9a" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M 275.0 250 C 275.0 228, 311.0 228, 311.0 248" fill="none" stroke="#1f4e9a" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M 365.0 250 C 365.0 228, 411.0 228, 411.0 248" fill="none" stroke="#1f4e9a" stroke-width="1.8" marker-end="url(#ar)"/>
+<text x="20" y="338" fill="#555" font-size="13">灰色（済）：塗ったマス　白：空き（自分を指す根）</text>
+<text x="20" y="356" fill="#555" font-size="13">矢印：nxt　find(i) は i 以降で最初の空きを返す</text>
 </svg>

@@ -20,6 +20,7 @@ int main() {
     for (const auto& grp : g.scc()) {
         if (grp.size() >= 2 || self_loop[grp[0]]) cnt += grp.size();
     }
-    cout << cnt << '\n';
     // --8<-- [end:core]
+    assert(0 <= cnt && cnt <= n);
+    cout << cnt << '\n';
 }

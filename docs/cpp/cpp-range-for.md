@@ -15,9 +15,9 @@ complexity: 'コピーは要素数に比例（vector なら O(N)）。参照で�
 signs: []
 acl: []
 sections:
-  - {title: 参照 T& と const 参照 const T&：別名を付けてコピーしない, anchor: references}
+  - {title: 参照 T& と const 参照 const T&：別名を付けてコピーしない, anchor: reference-basics}
   - {title: 関数の引数：値渡しは呼ぶたびにコピー（再帰では O(N) × 呼び出し回数）、大きなものは const& で渡す, anchor: pass-by-reference}
-  - {title: 'ムーブと swap：swap(dp, ndp) は中身を入れ替えるだけで O(1)、dp = ndp は O(N) のコピー', anchor: move-swap}
+  - {title: 'ムーブと swap：swap(dp, ndp) は中身を入れ替えるだけで O(1)、dp = ndp は長さに比例するコピー', anchor: move-swap}
   - {title: auto&&：何でも受けられる参照, anchor: forwarding-reference}
   - {title: 範囲 for の 4 通りの受け方：コピーが起きるか・元を書き換えられるか, anchor: range-for-forms}
   - {title: 'vector<bool> の要素は代わりの小さな物（プロキシ）：auto& で回すとエラー、auto y = vb[0] でも元が書き換わる', anchor: vector-bool}
@@ -43,13 +43,13 @@ atcoder: true
 
 参照は、すでにある変数に別の名前を付ける仕組みである。C++ では、変数の受け渡しは何も書かなければコピーになり、`&` を付けると参照になる。範囲 for の受け方と関数の引数の書き方は、どちらもこの選択であり、速さ（コピーするか）と正しさ（元を書き換えるか）の両方を決める。
 
-このページのコードは `#include <bits/stdc++.h>` と `using namespace std;` を前提にする。範囲 for・参照・ムーブは C++11 からあり、AtCoder の GCC 15.2（`-std=gnu++23`）でも手元の g++-13 でも使える。版が新しいものは、各節の「版」に書く。
+このページのコードは `#include <bits/stdc++.h>` と `using namespace std;` を前提にする。参照は C++98 から、範囲 for とムーブは C++11 からあり、AtCoder の GCC 15.2（`-std=gnu++23`）でも手元の g++-13 でも使える。版が新しいものは、各節の「版」に書く。
 
-## 参照 T& と const 参照 const T&：別名を付けてコピーしない {#references}
+## 参照 T& と const 参照 const T&：別名を付けてコピーしない {#reference-basics}
 
 `T& r = x;` と書くと、`r` は `x` の別名になる。新しい箱（メモリ）は作られず、`r` を書き換えると `x` が変わる。`T y = x;` は新しい箱を作って中身を写すコピーで、`y` を変えても `x` は変わらない。`const T& c = x;` は「読むだけの別名」で、コピーをせず、`c` から書き換えるとコンパイルエラーになる。
 
-![コピーは箱が増え、参照は同じ箱を指す矢印、ムーブは中身が移って元が空になる様子を並べた図](../img/cpp-range-for/copy-ref-move.svg)
+![コピーは箱が増え、参照は同じ箱を指す矢印、ムーブは中身が移って元が空になる様子を縦に並べた図](../img/cpp-range-for/copy-ref-move.svg)
 
 コピーは `vector` や `string` なら要素数に比例する時間とメモリを使い、参照は大きさによらず $O(1)$ である。
 
@@ -69,7 +69,7 @@ atcoder: true
 --8<-- "cpp-range-for/pass-by-reference.cpp:core"
 ```
 
-手元の g++-15（`-O2`）で長さ $10^4$ の配列を渡して深さ $10^4$ の再帰をすると、値渡しは 172 ms・最大メモリ 395 MB、`const&` は 1 ms 未満・4 MB 未満だった。長さ $2 \times 10^5$ なら値渡しは確実に TLE か MLE になる。
+手元の g++-15（`-O2`）で長さ $10^4$ の配列を渡して深さ $10^4$ の再帰をすると、値渡しは 172 ms・最大メモリ 395 MB、`const&` は 1 ms 未満・4 MB 未満だった。長さ・深さとも $2 \times 10^5$ なら値渡しは確実に TLE か MLE になる。
 
 | 引数の書き方 | コピー | 呼び出し元を書き換え | 使いどころ |
 | --- | --- | --- | --- |
@@ -81,9 +81,9 @@ atcoder: true
 - **落とし穴**：`int`・`long long`・`pair<int, int>` のような小さな値は、値渡しで構わない（コピーの手間は参照と変わらない）。気にするのは `vector`・`string`・`set` などの、中身の数だけ大きくなるものである
 - **関連**：ラムダ式の DFS では、`[&]` で受ければ外の `vector` はコピーされない。`[=]` は作った時点で丸ごとコピーする（[ラムダ式と再帰ラムダ](../cpp/cpp-lambda.md)）
 
-## ムーブと swap：swap(dp, ndp) は中身を入れ替えるだけで O(1)、dp = ndp は O(N) のコピー {#move-swap}
+## ムーブと swap：swap(dp, ndp) は中身を入れ替えるだけで O(1)、dp = ndp は長さに比例するコピー {#move-swap}
 
-`vector` は、本体の小さな箱（中身の置き場所・長さ・確保した大きさ）と、別の場所にある中身からできている。`swap(dp, ndp)` は本体どうしの置き場所の情報を交換するだけで、中身には触れないので $O(1)$ である。`dp = ndp;` は中身を 1 つずつ写すので $O(N)$ かかる。
+`vector` は、本体の小さな箱（中身の置き場所・長さ・確保した大きさ）と、別の場所にある中身からできている。`swap(dp, ndp)` は本体どうしの置き場所の情報を交換するだけで、中身には触れないので $O(1)$ である。`dp = ndp;` は中身を 1 つずつ写すので、長さに比例する時間がかかる（下のコードでは長さ $W + 1$ なので $O(W)$）。
 
 DP を 2 本の配列で回すとき（[0-1 ナップサック](../dp/knapsack-01.md)の配列を使い回す形など）に、この差が効く。
 
@@ -117,6 +117,8 @@ DP を 2 本の配列で回すとき（[0-1 ナップサック](../dp/knapsack-0
 - 再帰ラムダの `auto&& self`：自分自身を参照で受ける（[ラムダ式と再帰ラムダ](../cpp/cpp-lambda.md)）
 - views を受ける関数の引数 `auto&& r`：`const auto&` では回せない view があるため（[views の基本](../cpp/cpp-views-basics.md#filter-transform)）
 
+どれも、受けたものをコピーせずに、そのまま使うための書き方である。
+
 - **版**：C++11 から。g++-13・g++-15 で使える
 - **落とし穴**：寿命が延びるのは、一時オブジェクトそのものを受けたときだけである。`auto&& e = make(n)[0];` のように一時オブジェクトの中身を受けると、文の終わりで `vector` が消えて `e` は消えた場所を指す
 
@@ -129,7 +131,7 @@ DP を 2 本の配列で回すとき（[0-1 ナップサック](../dp/knapsack-0
 | `for (auto x : v)` | する | できない | `int` などの小さな値を読む |
 | `for (auto& x : v)` | しない | できる | 要素を書き換える・入力を読み込む |
 | `for (const auto& x : v)` | しない | できない | `string`・`vector` などの大きな要素を読むだけ |
-| `for (auto&& x : v)` | しない | できる | 何でも受ける（`vector<bool>`・views も） |
+| `for (auto&& x : v)` | しない | できる（元が書き換えられる範囲なら） | 何でも受ける（`vector<bool>`・views も） |
 
 ```cpp
 --8<-- "cpp-range-for/range-for-forms.cpp:core"
@@ -173,13 +175,13 @@ C++20 から、範囲 for の前に変数の宣言を 1 つ書ける。添字も
 
 ## ループの中で同じ vector に追加しない（再確保で壊れる） {#modify-in-loop}
 
-`vector` は、確保した場所が埋まると、より大きな場所を確保し直して中身を移す（再確保）。範囲 for は、ループの最初に `v.begin()` と `v.end()` を覚えて、その位置を進めながら回る。ループの中で `v.push_back(…)` して再確保が起きると、覚えた位置は解放された古い場所を指したままになる。これは[未定義動作](../cpp/cpp-undefined-behavior.md)である。
+`vector` は、確保した場所が埋まると、より大きな場所を確保し直して中身を移す（再確保）。範囲 for は、ループの最初に `v.begin()` と `v.end()` を覚えて、その位置を進めながら回る。ループの中で `v.push_back(…)` して再確保が起きると、覚えた位置は解放された古い場所を指したままになる。これは[未定義動作](../cpp/cpp-undefined-behavior.md)である。再確保が起きなくても、`push_back` で覚えた `v.end()` は無効になるので、先に `reserve` しておいても未定義動作のままである。
 
 ```cpp
 --8<-- "cpp-range-for/modify-in-loop.cpp:bad"
 ```
 
-`v = {2, 3, 4, 8}` で上の行を動かすと、手元の g++-13・g++-15 とも `-Wall -Wextra` で警告は出なかった。AddressSanitizer（`-fsanitize=address`）を付けると `heap-use-after-free` で止まった。付けずに `-O2` で動かすと、g++-13 は長さ 6、g++-15 は長さ 7 を出した（本来は偶数 3 個を足して 7 になる）。黙って誤った答えを出すことがある。
+`v = {2, 3, 4, 8}` で上の行を動かすと、手元の g++-13・g++-15 とも `-Wall -Wextra` で警告は出なかった。AddressSanitizer（`-fsanitize=address`）を付けると `heap-use-after-free` で止まった。付けずに `-O2` で動かすと、長さは実行のたびに 5〜8 と変わった（本来は偶数 3 個を足して 7 になる）。たまたま正しい 7 が出ることもあり、黙って誤った答えを出す。
 
 回す前の長さを覚えて、添字で回せば安全である。`v[i]` は毎回 `v` から引き直すので、再確保の後も正しい場所を読む。
 
@@ -192,7 +194,7 @@ C++20 から、範囲 for の前に変数の宣言を 1 つ書ける。添字も
 
 ## 範囲に一時オブジェクトの中身を渡すとき：for (int v : d.groups()[0]) は C++23・GCC 15〜でだけ安全、関数の戻り値そのものを回すのはどの版でも安全 {#temporary-range}
 
-範囲 for は、内部で `auto&& range = 範囲の式;` と受けてから回す。範囲の式が関数の戻り値そのもの（`for (int x : make(n))`）なら、[auto&&](#forwarding-reference) の規則で寿命が延びるので、どの版でも安全である。
+範囲 for は、内部で `auto&& range = 範囲の式;` と受けてから回す。範囲の式が値で返す関数の戻り値そのもの（`for (int x : make(n))`）なら、[auto&&](#forwarding-reference) の規則で寿命が延びるので、どの版でも安全である。
 
 一方、`for (int v : d.groups()[0])` は、`groups()` が返した一時的な `vector<vector<int>>` の `[0]` を受ける。C++20 までの規則では、`range` が受けるのは `[0]` が返した要素への参照だけである。外側の `vector` は寿命が延びず、ループの前に消える。C++23 の規則（P2718）は、範囲の式の中の一時オブジェクトをループの終わりまで生かすように変わった。GCC では 15 から入った。
 
@@ -211,7 +213,7 @@ g++-15 でも `-fno-range-for-ext-temps` を付けると古い規則に戻り、
 ```
 
 - **版**：延長の規則は C++23 で、GCC 15 から。AtCoder の GCC 15.2（`-std=gnu++23`）では安全だが、手元の g++-13 では壊れる
-- **落とし穴**：AtCoder で通ったコードが手元で落ちる（逆に、新しいコンパイラで通ったコードが古い環境で落ちる）。警告は出ない。版に頼らず、変数で受けてから回す書き方にそろえる
+- **落とし穴**：AtCoder（GCC 15・C++23）で通ったコードが、手元の g++-13 や C++20 の環境で落ちる。警告は出ない。版に頼らず、変数で受けてから回す書き方にそろえる
 
 ## 確認問題 {#quiz}
 
@@ -233,7 +235,7 @@ g++-15 でも `-fno-range-for-ext-temps` を付けると古い規則に戻り、
 - [cppreference「Reference declaration」](https://en.cppreference.com/w/cpp/language/reference)：左辺値の参照と `auto&&` の型の決まり方
 - [cppreference「std::vector&lt;bool&gt;」](https://en.cppreference.com/w/cpp/container/vector_bool)：要素がプロキシ（`reference`）で返ること
 - [cpprefjp「範囲for文」](https://cpprefjp.github.io/lang/cpp11/range_based_for.html)：日本語で読める範囲 for の説明
-- [cpprefjp「範囲for文に初期化式を記述できるようにする」](https://cpprefjp.github.io/lang/cpp20/range-based_for_statements_with_initializer.html)：C++20 の初期化式
+- [cpprefjp「初期化式をともなう範囲for文」](https://cpprefjp.github.io/lang/cpp20/range-based_for_statements_with_initializer.html)：C++20 の初期化式
 - [cpprefjp「範囲for文が範囲初期化子内で生じた一時オブジェクトを延命することを規定」](https://cpprefjp.github.io/lang/cpp23/lifetime_extension_in_range_based_for_loop.html)：C++23 の P2718
 - [cpprefjp「右辺値参照・ムーブセマンティクス」](https://cpprefjp.github.io/lang/cpp11/rvalue_ref_and_move_semantics.html)：`move` が中身を移すこと
 - [cpprefjp「vector::swap」](https://cpprefjp.github.io/reference/vector/vector/swap.html)：`swap` が定数時間であること

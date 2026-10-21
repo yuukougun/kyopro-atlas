@@ -43,3 +43,10 @@ catalog の数（例題 1・練習 2）は手引きの目安の下限。次の�
 - abc216_e の制約（N・K・A_i の上限）は evidence で確かめきれなかった。本文では「K が 10^9 を超えると」「値と回数がどちらも 2×10^9 なら」と一般論として書き、問題の制約としては書いていない。batch-same-values の等差数列の積の途中値は、値・回数が 2×10^9 程度まで long long に収まる（最大の場合をケースに入れた）
 - 「日本の硬貨は大きい順の貪欲で正しい」は既知の事実として書いた（出典は付けていない）。必要なら検証役に確かめてほしい
 - interval-scheduling・exchange-argument・greedy-priority-queue・lexicographic-greedy・minimum-spanning-tree・stress-testing・knapsack-01・dp-basics は stub なので、ページへのリンクだけにした（節へのリンクは draft の sorting-techniques#greedy-order と binary-search-answer#greedy-check だけ）
+
+## 検証の指摘への対応（2026-10-21）
+
+- 1〜8 はすべて直した。1 は「空集合は選んでよい」も足して条件を 3 つにし、負の重みがあれば負になったところで止めると書いた。2 は #proof を「辺を軽い順に足すのがクラスカル法（符号を反転すれば重い順と同じ）」にし、#next-steps の見出しを「マトロイドの貪欲」にした。3 は何を入れて何を出すかで書き、図と alt の注記を「G だけが選んだ最初の値」にそろえた。4 は viewBox を 520×312 に詰め、文字を 14〜16 にし、下の説明文を短くした。7 は見出しを「等号の扱い」にした
+- 採らなかったもの：なし
+- 8 の別解（答えで二分探索）の出典：evidence（hamayan）には別解がない。裏付けが要るなら、abc216_e の evidence に二分探索の別解を書いた記事の URL を足すことを提案する（私は探していない）。本文の別解の式は、値 x 以上の回の数え方を本文に書いたので、読者が自分で確かめられる
+- textlint の警告は 6（no-doubled-joshi・max-comma。エラー 0）

@@ -34,7 +34,7 @@ type: generated
 | --- | --- | --- |
 | [Static Top Tree と木 DP の動的更新](../tree/static-top-tree.md)（準備中） | 発展 | 頂点の値を書き換えるたびに、木 DP の根の値を O(log N) 程度で更新する。HL 分解の重いパスの上で DP をセグメント木に載せる方法と、木をパスの圧縮と部分木の併合で平衡に組み直す Static Top Tree がある。 |
 | [動的木](../tree/dynamic-tree.md)（準備中） | 発展 | 辺の追加と削除がある森で、パスのクエリや根の付け替えを償却 O(log N) で処理する Link-Cut Tree と、部分木のクエリ向けの Euler Tour Tree、両方に使える Top Tree がある。 |
-| [マージテク](../tree/small-to-large.md)（準備中） | 水 | 2 つの集合を併合するとき小さい方の要素を大きい方へ移すと、1 つの要素が移るのは高々 log N 回なので全体で O(N log N) になる。グループの併合と種類数の問い合わせや、部分木ごとの集計（DSU on Tree）に使う。 |
+| [マージテク](../tree/small-to-large.md) | 水 | 2 つの集合を併合するとき小さい方の要素を大きい方へ移すと、1 つの要素が移るのは高々 log N 回なので全体で O(N log N) になる。グループの併合と種類数の問い合わせや、部分木ごとの集計（DSU on Tree）に使う。 |
 
 ## データ構造
 

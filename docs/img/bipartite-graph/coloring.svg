@@ -46,7 +46,7 @@
 <text x="550" y="85" fill="#222">s</text>
 <text x="480" y="175" fill="#ffffff">u</text>
 <text x="620" y="175" fill="#ffffff">v</text>
-<text x="550" y="198" fill="#c0392b">同じ色どうしの辺（破線）</text>
+<text x="550" y="212" fill="#c0392b">同じ色どうしの辺（破線）</text>
 <text x="550" y="238" fill="#222">s → u → v → s は長さ 3 の閉路</text>
 </g>
 <text x="600" y="75" fill="#555" font-size="12">深さ 0</text>

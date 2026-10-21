@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 370" font-family="sans-serif" font-size="14">
-  <rect x="0" y="0" width="640" height="370" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 520" font-family="sans-serif" font-size="16">
+  <rect x="0" y="0" width="480" height="520" fill="#ffffff"/>
   <defs>
     <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#c62828"/>
@@ -8,31 +8,36 @@
       <path d="M0,0 L10,5 L0,10 z" fill="#555555"/>
     </marker>
   </defs>
-  <!-- 文字盤 -->
-  <circle cx="250" cy="180" r="120" fill="none" stroke="#333333" stroke-width="2"/>
+  <!-- 文字盤（中心 (200,180)、半径 120） -->
+  <circle cx="200" cy="180" r="120" fill="none" stroke="#333333" stroke-width="2"/>
   <!-- 正の側（右半分）：実線、負の側（左半分）：破線で区別 -->
-  <path d="M250,60 A120,120 0 0,1 250,300" fill="none" stroke="#1565c0" stroke-width="6"/>
-  <path d="M250,300 A120,120 0 0,1 250,60" fill="none" stroke="#6a1b9a" stroke-width="6" stroke-dasharray="10 6"/>
+  <path d="M200,60 A120,120 0 0,1 200,300" fill="none" stroke="#1565c0" stroke-width="6"/>
+  <path d="M200,300 A120,120 0 0,1 200,60" fill="none" stroke="#6a1b9a" stroke-width="6" stroke-dasharray="10 6"/>
   <!-- 目盛り -->
-  <line x1="250" y1="52" x2="250" y2="68" stroke="#333333" stroke-width="2"/>
-  <line x1="250" y1="292" x2="250" y2="308" stroke="#333333" stroke-width="2"/>
-  <text x="250" y="44" text-anchor="middle">0</text>
-  <text x="380" y="185" font-size="13">正：0 から時計回りに増える</text>
-  <text x="122" y="185" font-size="13" text-anchor="end">負</text>
-  <text x="298" y="322" font-size="13">2147483647（INT_MAX）</text>
-  <text x="202" y="322" font-size="13" text-anchor="end">−2147483648（INT_MIN）</text>
-  <!-- 回り込み -->
-  <path d="M284,292 C276,340 224,340 216,292" fill="none" stroke="#c62828" stroke-width="2.5" marker-end="url(#arr)"/>
-  <text x="250" y="358" text-anchor="middle" fill="#c62828">+1 で負の端へ回り込む</text>
+  <line x1="200" y1="52" x2="200" y2="68" stroke="#333333" stroke-width="2"/>
+  <line x1="200" y1="292" x2="200" y2="308" stroke="#333333" stroke-width="2"/>
+  <text x="200" y="42" text-anchor="middle">0</text>
+  <text x="338" y="130">正</text>
+  <text x="66" y="186" text-anchor="end">負</text>
+  <text x="212" y="326">2147483647</text>
+  <text x="212" y="346">（INT_MAX）</text>
+  <text x="188" y="326" text-anchor="end">−2147483648</text>
+  <text x="188" y="346" text-anchor="end">（INT_MIN）</text>
   <!-- 時計回りの向き -->
-  <path d="M315,85 A115,115 0 0,1 355,135" fill="none" stroke="#555555" stroke-width="1.5" marker-end="url(#arr2)"/>
-  <!-- 凡例 -->
-  <line x1="410" y1="40" x2="450" y2="40" stroke="#1565c0" stroke-width="6"/>
-  <text x="458" y="45">0 以上（実線）</text>
-  <line x1="410" y1="66" x2="450" y2="66" stroke="#6a1b9a" stroke-width="6" stroke-dasharray="10 6"/>
-  <text x="458" y="71">負（破線）</text>
-  <text x="410" y="240" font-size="13">int は 2^32 個の値の輪。</text>
-  <text x="410" y="260" font-size="13">10^10 は輪を 2 周して余る</text>
-  <text x="410" y="280" font-size="13">1410065408 の位置に来る</text>
-  <text x="410" y="300" font-size="13">（手元の観測。規格上は未定義）</text>
+  <path d="M259,46 A146,146 0 0,1 312,86" fill="none" stroke="#555555" stroke-width="1.5" marker-end="url(#arr2)"/>
+  <!-- 10^10 の行き先：1410065408 / 2^32 ≈ 0.328 周 ≈ 0 から時計回りに 118° -->
+  <circle cx="306" cy="236" r="7" fill="#e65100" stroke="#ffffff" stroke-width="2"/>
+  <text x="318" y="250" fill="#e65100" font-weight="bold">1410065408</text>
+  <text x="318" y="270" fill="#e65100">（10^10 の行き先）</text>
+  <!-- 回り込み -->
+  <path d="M232,300 C226,368 174,368 168,300" fill="none" stroke="#c62828" stroke-width="2.5" marker-end="url(#arr)"/>
+  <text x="200" y="384" text-anchor="middle" fill="#c62828">+1 で負の端へ回り込む</text>
+  <!-- 凡例と注記 -->
+  <line x1="24" y1="418" x2="64" y2="418" stroke="#1565c0" stroke-width="6"/>
+  <text x="72" y="424">0 以上（実線）</text>
+  <line x1="244" y1="418" x2="284" y2="418" stroke="#6a1b9a" stroke-width="6" stroke-dasharray="10 6"/>
+  <text x="292" y="424">負（破線）</text>
+  <text x="24" y="456">int は 2^32 個の値の輪。10^10 は輪を 2 周</text>
+  <text x="24" y="478">して余る 1410065408 の位置に来る</text>
+  <text x="24" y="500">（手元の観測。規格上は未定義）</text>
 </svg>

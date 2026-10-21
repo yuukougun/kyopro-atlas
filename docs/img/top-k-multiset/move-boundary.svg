@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 420" width="660" height="420" font-family="sans-serif">
 <rect x="0" y="0" width="660" height="420" fill="#ffffff"/>
 <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker></defs>
-<circle cx="40" cy="22" r="10" fill="#2f5fb3" stroke="#2f5fb3" stroke-width="2"/><text x="58" y="27" font-size="14" fill="#222">L（小さい方の K = 3 個。和を持つ）</text>
-<circle cx="330" cy="22" r="10" fill="#ffffff" stroke="#c26a00" stroke-width="2" stroke-dasharray="4 3"/><text x="348" y="27" font-size="14" fill="#222">R（残り）</text>
-<line x1="450" y1="12" x2="450" y2="32" stroke="#555" stroke-width="2" stroke-dasharray="6 4"/><text x="460" y="27" font-size="14" fill="#222">境界</text>
-<text x="20" y="55" font-size="14" fill="#222">① 初め：L = {1, 4, 5}（和 10）、R = {7, 9}</text>
+<circle cx="40" cy="22" r="10" fill="#2f5fb3" stroke="#2f5fb3" stroke-width="2"/><text x="58" y="28" font-size="16" fill="#222">L（小さい K 個。和を持つ）</text>
+<circle cx="330" cy="22" r="10" fill="#ffffff" stroke="#c26a00" stroke-width="2" stroke-dasharray="4 3"/><text x="348" y="28" font-size="16" fill="#222">R（残り）</text>
+<line x1="450" y1="12" x2="450" y2="32" stroke="#555" stroke-width="2" stroke-dasharray="6 4"/><text x="460" y="28" font-size="16" fill="#222">境界</text>
+<text x="20" y="57" font-size="16" fill="#222">① 初め（K = 3）：L = {1, 4, 5}（和 10）、R = {7, 9}</text>
 <line x1="50" y1="95" x2="610" y2="95" stroke="#888" stroke-width="1.5"/>
 <line x1="70" y1="111" x2="70" y2="117" stroke="#888"/><text x="70" y="131" font-size="11" fill="#666" text-anchor="middle">0</text>
 <line x1="122" y1="111" x2="122" y2="117" stroke="#888"/><text x="122" y="131" font-size="11" fill="#666" text-anchor="middle">1</text>
@@ -23,7 +23,7 @@
 <circle cx="330" cy="95" r="14" fill="#2f5fb3" stroke="#2f5fb3" stroke-width="2"/><text x="330" y="100" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="bold">5</text>
 <circle cx="434" cy="95" r="14" fill="#ffffff" stroke="#c26a00" stroke-width="2" stroke-dasharray="4 3"/><text x="434" y="100" font-size="14" fill="#222" text-anchor="middle">7</text>
 <circle cx="538" cy="95" r="14" fill="#ffffff" stroke="#c26a00" stroke-width="2" stroke-dasharray="4 3"/><text x="538" y="100" font-size="14" fill="#222" text-anchor="middle">9</text>
-<text x="20" y="170" font-size="14" fill="#222">② 3 を追加：L に入って 4 個になるので、L の最大 5 を R へ移す（和 8）</text>
+<text x="20" y="170" font-size="16" fill="#222">② 3 を追加 → L が 4 個に。L の最大 5 を R へ（和 8）</text>
 <line x1="50" y1="210" x2="610" y2="210" stroke="#888" stroke-width="1.5"/>
 <line x1="70" y1="226" x2="70" y2="232" stroke="#888"/><text x="70" y="246" font-size="11" fill="#666" text-anchor="middle">0</text>
 <line x1="122" y1="226" x2="122" y2="232" stroke="#888"/><text x="122" y="246" font-size="11" fill="#666" text-anchor="middle">1</text>
@@ -44,8 +44,8 @@
 <circle cx="434" cy="210" r="14" fill="#ffffff" stroke="#c26a00" stroke-width="2" stroke-dasharray="4 3"/><text x="434" y="215" font-size="14" fill="#222" text-anchor="middle">7</text>
 <circle cx="538" cy="210" r="14" fill="#ffffff" stroke="#c26a00" stroke-width="2" stroke-dasharray="4 3"/><text x="538" y="215" font-size="14" fill="#222" text-anchor="middle">9</text>
 <text x="226" y="190" font-size="12" fill="#222" text-anchor="middle">追加</text>
-<text x="350" y="192" font-size="12" fill="#222" font-weight="bold">L → R</text>
-<text x="20" y="285" font-size="14" fill="#222">③ 1 を削除：L が 2 個になるので、R の最小 5 を L へ移す（和 12）</text>
+<line x1="288" y1="190" x2="320" y2="190" stroke="#333" stroke-width="2" marker-end="url(#ah)"/><text x="350" y="194" font-size="13" fill="#222" font-weight="bold">L → R</text>
+<text x="20" y="285" font-size="16" fill="#222">③ 1 を削除 → L が 2 個に。R の最小 5 を L へ（和 12）</text>
 <line x1="50" y1="325" x2="610" y2="325" stroke="#888" stroke-width="1.5"/>
 <line x1="70" y1="341" x2="70" y2="347" stroke="#888"/><text x="70" y="361" font-size="11" fill="#666" text-anchor="middle">0</text>
 <line x1="122" y1="341" x2="122" y2="347" stroke="#888"/><text x="122" y="361" font-size="11" fill="#666" text-anchor="middle">1</text>
@@ -67,5 +67,5 @@
 <circle cx="122" cy="325" r="14" fill="#ffffff" stroke="#aaa" stroke-width="1.5" stroke-dasharray="2 3"/><text x="122" y="330" font-size="14" fill="#aaa" text-anchor="middle">1</text>
 <line x1="112" y1="315" x2="132" y2="335" stroke="#aaa" stroke-width="2"/><line x1="112" y1="335" x2="132" y2="315" stroke="#aaa" stroke-width="2"/>
 <text x="122" y="305" font-size="12" fill="#222" text-anchor="middle">削除</text>
-<text x="350" y="307" font-size="12" fill="#222" font-weight="bold">R → L</text>
+<line x1="394" y1="305" x2="342" y2="305" stroke="#333" stroke-width="2" marker-end="url(#ah)"/><text x="402" y="309" font-size="13" fill="#222" font-weight="bold">R → L</text>
 </svg>

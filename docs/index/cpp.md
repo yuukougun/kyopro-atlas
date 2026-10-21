@@ -104,7 +104,7 @@ search:
     - `cpp-math-functions#integer-division` 整数の / と % は 0 に向かって切り捨てる（-7 / 2 は -3、-7 % 2 は -1。負の数の床関数・切り上げの書き方は integer-division のページ）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-math-functions/#integer-division
     - `cpp-math-functions#pow-sqrt` pow・sqrt は double で計算する：整数のべき乗に pow を使わない、大きな long long の sqrt は誤差が出る（整数の平方根は標準になく、補正の仕方は integer-root のページ）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-math-functions/#pow-sqrt
     - `cpp-math-functions#pi` 円周率：numbers::pi（C++20）・M_PI・acos(-1)：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-math-functions/#pi
-    - `cpp-math-functions#bit-functions` &lt;bit> の関数：popcount・countr_zero・countl_zero・bit_width・bit_ceil・bit_floor・has_single_bit（C++20）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-math-functions/#bit-functions
+    - `cpp-math-functions#bit-functions` \`&lt;bit>\` の関数：popcount・countr_zero・countl_zero・bit_width・bit_ceil・bit_floor・has_single_bit（C++20）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-math-functions/#bit-functions
     - `cpp-math-functions#bit-unsigned-only` std::popcount などは符号なし整数しか受けない（popcount(int) はエラー、負の int を unsigned long long にすると上位が 1 で埋まる）（C++20）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-math-functions/#bit-unsigned-only
     - `cpp-math-functions#builtins` 組み込み関数：\_\_builtin_popcount・\_\_builtin_popcountll・\_\_builtin_ctz・\_\_builtin_clzll・\_\_lg（ctz・clz・\_\_lg に 0 を渡すと未定義。std:: の関数は 0 でも値が決まっている）（GCC の拡張）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-math-functions/#builtins
     - `cpp-math-functions#bit-tricks` ビットの小技：x & -x（最下位の 1）・x & (x - 1)・部分集合を大きい順に回す for（考え方は bit 演算のページ）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-math-functions/#bit-tricks
@@ -119,9 +119,9 @@ search:
 - 別名：参照、参照渡し、const 参照、値渡し、コピー、ムーブ、std::move、std::swap、範囲 for、range-based for、auto&&、const auto&、for (auto& x : v)、vector&lt;bool>
 - 種類：実装・C++
 - 節：
-    - `cpp-range-for#references` 参照 T& と const 参照 const T&：別名を付けてコピーしない：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-range-for/#references
+    - `cpp-range-for#reference-basics` 参照 T& と const 参照 const T&：別名を付けてコピーしない：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-range-for/#reference-basics
     - `cpp-range-for#pass-by-reference` 関数の引数：値渡しは呼ぶたびにコピー（再帰では O(N) × 呼び出し回数）、大きなものは const& で渡す：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-range-for/#pass-by-reference
-    - `cpp-range-for#move-swap` ムーブと swap：swap(dp, ndp) は中身を入れ替えるだけで O(1)、dp = ndp は O(N) のコピー：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-range-for/#move-swap
+    - `cpp-range-for#move-swap` ムーブと swap：swap(dp, ndp) は中身を入れ替えるだけで O(1)、dp = ndp は長さに比例するコピー：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-range-for/#move-swap
     - `cpp-range-for#forwarding-reference` auto&&：何でも受けられる参照：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-range-for/#forwarding-reference
     - `cpp-range-for#range-for-forms` 範囲 for の 4 通りの受け方：コピーが起きるか・元を書き換えられるか：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-range-for/#range-for-forms
     - `cpp-range-for#vector-bool` vector&lt;bool> の要素は代わりの小さな物（プロキシ）：auto& で回すとエラー、auto y = vb[0] でも元が書き換わる：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-range-for/#vector-bool
@@ -142,7 +142,7 @@ search:
     - `cpp-structured-bindings#hidden-variable` 見えない変数：auto はコピー、auto& は参照。名前はメンバの宣言順に付き、数が合わないとエラー（C++17）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-structured-bindings/#hidden-variable
     - `cpp-structured-bindings#map-loop` map を回すとき：キーは const、auto& [k, v] で値を書き換えると map が変わる（C++17）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-structured-bindings/#map-loop
     - `cpp-structured-bindings#if-init` 初期化式付き if・switch：if (auto it = mp.find(k); it != mp.end())、if (auto [it, ok] = st.insert(x); ok)（C++17）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-structured-bindings/#if-init
-    - `cpp-structured-bindings#pq-top-reference` const auto& [d, v] = pq.top(); pq.pop(); で値が変わる（ダイクストラで起きる。値で受ける。理由は cpp-undefined-behavior のダングリング）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-structured-bindings/#pq-top-reference
+    - `cpp-structured-bindings#pq-top-reference` const auto& [d, v] = pq.top(); pq.pop(); で値が変わる（ダイクストラで起きる。値で受ける。要素が 1 個ならダングリング）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-structured-bindings/#pq-top-reference
     - `cpp-structured-bindings#enumerate-reference` views::enumerate・zip の要素は参照を含む組：auto [i, x] と書いても x は元の要素を指す：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-structured-bindings/#enumerate-reference
     - `cpp-structured-bindings#capture-and-placeholder` 構造化束縛した名前のラムダでのキャプチャ（C++20）と、使わない名前 \_（同じ場所で 2 回使うのは C++26。AtCoder の GCC 15 では警告つきで通る）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-structured-bindings/#capture-and-placeholder
     - `cpp-structured-bindings#tie` tie：既存の変数にまとめて代入・比較する（tie(x1, y1) < tie(x2, y2)・std::ignore）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-structured-bindings/#tie
@@ -218,7 +218,7 @@ search:
 - 別名：erase_if、contains、emplace_back、map の []、multiset の削除、ms.erase(ms.find(x))、イテレータ、iterator、std::prev、std::next、rbegin、it - v.begin()、イテレータの無効化、unordered_map のハッシュ、pb_ds、order_of_key、find_by_order
 - 種類：実装・C++、データ構造
 - 節：
-    - `cpp-container-idioms#erase-if` erase(v, x)・erase_if(v, pred)：消した個数を返し、set・map にも使える（C++20）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-container-idioms/#erase-if
+    - `cpp-container-idioms#erase-if` erase(v, x)・erase_if(v, pred)：消した個数を返す。erase_if は set・map にも使える（C++20）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-container-idioms/#erase-if
     - `cpp-container-idioms#contains` contains（C++20）と find・count：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-container-idioms/#contains
     - `cpp-container-idioms#map-subscript` map の [] はキーがなければ既定値で要素を作る（存在を調べるだけなら contains・find、at はなければ例外）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-container-idioms/#map-subscript
     - `cpp-container-idioms#multiset-erase-one` multiset から 1 個だけ消す：ms.erase(ms.find(x))（ms.erase(x) は全部消す。find が end() でないことを確かめる）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-container-idioms/#multiset-erase-one
@@ -247,7 +247,7 @@ search:
     - `cpp-comparators#multiple-keys` 複数のキーで比べる：pair・tuple の辞書順、tie(a.x, a.y) < tie(b.x, b.y)：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-comparators/#multiple-keys
     - `cpp-comparators#lambda-comparator-type` ラムダの比較関数を型として渡す：set&lt;T, decltype(cmp)>（C++20。C++17 では pq(cmp) と渡す）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-comparators/#lambda-comparator-type
     - `cpp-comparators#operator-less` 構造体に operator< を持たせる（メンバ関数に const が要る）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-comparators/#operator-less
-    - `cpp-comparators#spaceship` auto operator<=>(const T&) const = default で 6 つの比較をメンバの宣言順の辞書順で作る（C++20）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-comparators/#spaceship
+    - `cpp-comparators#spaceship` auto operator<=>(const T&) const = default で 6 つの比較をメンバの宣言順の辞書順で使えるようにする（C++20）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-comparators/#spaceship
 
 ## アルゴリズム関数と ranges 版（cpp-algorithms） {#cpp-algorithms}
 
@@ -305,7 +305,7 @@ search:
     - `acl-reading#modint` modint の読み方：using mint = modint998244353; で法が自動で取られる：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#modint
     - `acl-reading#modint-val` modint の値と出力：.val() を出す、v1.6 で val() は int、< はない：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#modint-val
     - `acl-reading#segtree-args` segtree&lt;S, op, e> の読み方：S は要素の型、op は結合的な演算、e は単位元を返す関数（水）：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#segtree-args
-    - `acl-reading#passing-functions` 関数の渡し方：関数の名前か、キャプチャのないラムダ（C++20・ACL v1.5〜）（水）：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#passing-functions
+    - `acl-reading#passing-functions` 関数の渡し方：関数の名前か、キャプチャのないラムダ（C++20）（水）：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#passing-functions
     - `acl-reading#capturing-lambda` キャプチャのあるラムダは op・e に渡せない（max_right・min_left の判定関数には渡せる）（水）：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#capturing-lambda
     - `acl-reading#lazy-segtree-args` lazy_segtree の 7 つの引数：composition(f, g) は g の後に f（水）：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#lazy-segtree-args
     - `acl-reading#template-arg-errors` テンプレート引数の形が合わないときの static_assert（mapping must work as S(F, S) など）（水）：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/#template-arg-errors

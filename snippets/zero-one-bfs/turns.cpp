@@ -22,10 +22,10 @@ int main() {
         dq.push_back({0, id(sr, sc, d)});
     }
     while (!dq.empty()) {
-        auto [cost, s] = dq.front();
+        auto [cost, st] = dq.front();
         dq.pop_front();
-        if (cost > dist[s]) continue;
-        int d = s % 4, i = s / 4 / w, j = s / 4 % w;
+        if (cost > dist[st]) continue;
+        int d = st % 4, i = st / 4 / w, j = st / 4 % w;
         // 同じ向きに 1 マス進む：重み 0
         int ni = i + dx[d], nj = j + dy[d];
         if (0 <= ni && ni < h && 0 <= nj && nj < w && grid[ni][nj] == '.' && cost < dist[id(ni, nj, d)]) {
@@ -33,10 +33,10 @@ int main() {
             dq.push_front({cost, id(ni, nj, d)});
         }
         // その場で向きを変える：重み 1
-        for (int nd = 0; nd < 4; nd++) {
-            if (nd == d || cost + 1 >= dist[id(i, j, nd)]) continue;
-            dist[id(i, j, nd)] = cost + 1;
-            dq.push_back({cost + 1, id(i, j, nd)});
+        for (int e = 0; e < 4; e++) {  // e：向きを変えた先
+            if (e == d || cost + 1 >= dist[id(i, j, e)]) continue;
+            dist[id(i, j, e)] = cost + 1;
+            dq.push_back({cost + 1, id(i, j, e)});
         }
     }
     int ans = INF;

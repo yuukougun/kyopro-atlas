@@ -134,7 +134,7 @@ updated: 2026-10-21
 | N ≤ 2×10^5 本の区間で、座標は 10^9 まで | [区間スケジューリング・区間の串刺し](../basics/interval-scheduling.md) | 基礎 |
 | K ≤ 2×10^5 程度で、小さい順に K 個取り出せば足りる | [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md) | 水 |
 | N, Q ≤ 2×10^5 で、区間ごとに計算し直すと間に合わない | [分割統治](../basics/divide-and-conquer.md)（準備中） | 黄 |
-| N ≤ 2×10^5 で 3 つ組は N^3 通りあり、全部は試せない | [一部を固定して数える](../thinking/fix-variable.md)（準備中） | 基礎 |
+| N ≤ 2×10^5 で 3 つ組は N^3 通りあり、全部は試せない | [一部を固定して数える](../thinking/fix-variable.md) | 基礎 |
 | N ≤ 2×10^5 で、組・区間は N^2 個あり列挙できない | [主客転倒・寄与](../thinking/contribution.md) | 水 |
 | N ≤ 2×10^5 で「部分列」「単調増加」 | [最長増加部分列](../dp/lis.md) | 水 |
 | 文字の種類 26 程度、\|S\| ≤ 2×10^5 | [部分列 DP](../dp/subsequence-dp.md)（準備中） | 黄 |
@@ -145,7 +145,7 @@ updated: 2026-10-21
 | 完全グラフで N ≤ 2×10^5（辺が N^2 本あり、候補の辺を減らす必要がある） | [最小全域木](../graph/minimum-spanning-tree.md) | 水 |
 | N, M ≤ 2×10^5 で、辺を 1 本ずつ除いて調べる O(M(N+M)) は間に合わない | [橋・関節点・二重連結成分](../graph/lowlink.md)（準備中） | 黄 |
 | N, M, Q ≤ 2×10^5 で、1 つの頂点の次数が N 近くになりうる | [次数による平方分割](../graph/degree-sqrt.md)（準備中） | 青 |
-| N ≤ 2×10^5 の木で、全ペア（N^2/2 組）についての和を求める | [辺で切って数える](../tree/tree-edge-contribution.md)（準備中） | 水 |
+| N ≤ 2×10^5 の木で、全ペア（N^2/2 組）についての和を求める | [辺で切って数える](../tree/tree-edge-contribution.md) | 水 |
 | パス u–v に関するクエリが Q ≤ 2×10^5 個 | [最小共通祖先（LCA）](../tree/lca.md) | 青 |
 | N, Q ≤ 2×10^5 で、部分木への更新と質問が交互に来る | [オイラーツアー](../tree/euler-tour.md) | 青 |
 | クエリごとに K_i 個の頂点が指定され、ΣK_i ≤ 2×10^5 | [Auxiliary Tree](../tree/auxiliary-tree.md)（準備中） | 発展 |
@@ -165,7 +165,7 @@ updated: 2026-10-21
 | \|S\| ≤ 2×10^5 の数字列で、部分文字列を全部試すと間に合わない | [桁と mod](../math/digit-and-mod.md) | 水 |
 | N, Q ≤ 2×10^5 で区間 gcd のクエリ | [GCD の性質](../math/gcd-properties.md)（準備中） | 青 |
 | N ≤ 2×10^5 程度で C(n,k) を何度も求める | [二項係数の前計算](../comb/binomial-precompute.md) | 基礎 |
-| N, Q ≤ 2×10^5 で区間の多重集合を毎回比べる | [集合・多重集合のハッシュ](../string/hashing-for-sets.md)（準備中） | 水 |
+| N, Q ≤ 2×10^5 で区間の多重集合を毎回比べる | [集合・多重集合のハッシュ](../string/hashing-for-sets.md) | 水 |
 | 操作が M ≤ 2×10^5 回、各クエリは途中の時点での点の位置 | [回転・平行移動・アフィン変換](../geometry/rotation-transform.md) | 水 |
 | N ≤ 2×10^5 点の全ペアのマンハッタン距離の和や最大を問い、全組 O(N^2) が間に合わない | [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md) | 水 |
 | A_i ≤ 10^9 を N ≤ 2×10^5 個足す、または 2 つ掛ける（int に収まらない） | [整数のオーバーフローと \_\_int128](../cpp/cpp-integer-overflow.md) | 基礎 |
@@ -182,7 +182,7 @@ updated: 2026-10-21
 | 値の上限 ≤ 10^6 程度で、すべての g について数える | [約数包除](../comb/divisor-inclusion-exclusion.md)（準備中） | 青 |
 | 値の上限 ≤ 10^6 程度で、gcd・lcm ごとに集計する | [約数・倍数のゼータ変換とメビウス変換](../comb/zeta-mobius-divisor.md)（準備中） | 青 |
 | N ≤ 10^6 程度で、μ を篩で前計算できる | [メビウス関数とメビウス反転](../comb/mobius-function.md)（準備中） | 黄 |
-| \|S\| ≤ 10&#94;5〜10&#94;6、文字は英小文字で 26×(N+1) の表が持てる | [部分列の判定と次の出現位置の表](../string/subsequence-matching.md)（準備中） | 基礎 |
+| \|S\| ≤ 10&#94;5〜10&#94;6、文字は英小文字で 26×(N+1) の表が持てる | [部分列の判定と次の出現位置の表](../string/subsequence-matching.md) | 基礎 |
 | N ≤ 10&#94;5〜10&#94;6 で、任意の 2 区間の一致判定が Q ≤ 2×10&#94;5 回 | [ローリングハッシュ](../string/rolling-hash.md) | 水 |
 | \|S\|, \|T\| ≤ 10^6 で、ずらし方ごとに比べる O(\|S\|\|T\|) が間に合わない | [Z-algorithm](../string/z-algorithm.md) | 水 |
 | \|S\| ≤ 10^6 で、すべての接頭辞について周期や一致する長さを問う | [KMP 法と文字列の周期](../string/kmp.md) | 青 |
@@ -224,13 +224,13 @@ updated: 2026-10-21
 | N ≤ 10^18 で、⌊N/2⌋・⌊N/3⌋ のような値しか現れない | [メモ化再帰](../dp/memoized-recursion.md) | 基礎 |
 | N ≤ 10^18、または N が 10^4 桁の文字列 | [桁 DP](../dp/digit-dp.md) | 水 |
 | K 回（K ≤ 10^18）移動した後の位置 | [Functional graph（出次数 1 のグラフ）](../graph/functional-graph.md) | 水 |
-| N ≤ 10^18 の木 | [完全二分木](../tree/complete-binary-tree.md)（準備中） | 基礎 |
+| N ≤ 10^18 の木 | [完全二分木](../tree/complete-binary-tree.md) | 基礎 |
 | 入力に負の数（\|X\| ≤ 10^18 など）があり、割り算・余り・切り上げを使う | [整数の割り算と余り](../math/integer-division.md) | 基礎 |
 | 指数・繰り返しの回数が N ≤ 10^18 | [繰り返し二乗法](../math/mod-pow.md) | 基礎 |
 | 項数 N ≤ 10&#94;12〜10&#94;18 の等比数列の和を、素数とは限らない法 M ≤ 10&#94;9 で求める | [等比数列の和を mod で求める](../math/geometric-series-mod.md) | 基礎 |
 | N ≤ 10&#94;12〜10&#94;18 で、約数の組を全探索して間に合うかを見積もる | [約数の個数の上界と高度合成数](../math/divisor-count-bound.md) | 水 |
 | N ≤ 10^18 の素数判定・素因数分解（√N の試し割りでは間に合わない） | [大きな数の素数判定と素因数分解](../math/miller-rabin.md)（準備中） | 発展 |
-| N ≤ 10^18 で平方数・平方根を扱う | [整数の平方根・K 乗根と累乗数](../math/integer-root.md)（準備中） | 基礎 |
+| N ≤ 10^18 で平方数・平方根を扱う | [整数の平方根・K 乗根と累乗数](../math/integer-root.md) | 基礎 |
 | 線形漸化式の項数 K が数百〜数千で、N ≤ 10^18 | [線形漸化式の高速化](../math/linear-recurrence-fast.md)（準備中） | 発展 |
 | N ≤ 10^18 で、答えが段階ごとの選択肢の数の積になる | [和・積の法則と順列・組合せ](../comb/counting-basics.md) | 基礎 |
 | 置換を K ≤ 10^18 回繰り返した結果を求める | [置換の巡回分解](../comb/permutation-cycles.md) | 基礎 |
@@ -269,7 +269,7 @@ updated: 2026-10-21
 | パターンの長さの総和が 10&#94;5〜10&#94;6 で、パターンの個数も多い | [Aho-Corasick 法](../string/aho-corasick.md)（準備中） | 青 |
 | 座標が 10^9 規模の整数で、傾きや角度を比べる | [誤差の扱いと整数での処理](../geometry/geometry-precision.md) | 水 |
 | 座標が 10^9 規模の整数で、角度の大小や一致を正確に比べる | [偏角ソート](../geometry/argument-sort.md) | 水 |
-| 質問回数の上限が 20 回など log2 N 程度 | [インタラクティブ問題](../misc/interactive.md)（準備中） | 基礎 |
+| 質問回数の上限が 20 回など log2 N 程度 | [インタラクティブ問題](../misc/interactive.md) | 基礎 |
 | N が 5×10^4 程度で N^2/64 の計算が間に合う | [bitset による高速化](../misc/bitset-speedup.md)（準備中） | 青 |
 | 式の長さが 2×10^5 程度で、括弧の入れ子が深くなりうる | [構文解析](../misc/parsing.md)（準備中） | 青 |
 | 入力や出力が 10^6 個程度ある（入出力の書き方で実行時間に差が出る） | [入出力と定数倍](../cpp/cpp-io.md) | 基礎 |

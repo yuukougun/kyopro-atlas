@@ -45,3 +45,13 @@
 - 「Ubuntu の g++ は既定で -fstack-protector-strong が付き、局所配列を壊すと stack smashing detected で止まることがある」ことは確かめたが、AtCoder の GCC で同じかは分からないので本文に書かなかった
 - 図 reallocation.svg は手元に SVG を描画する道具がなく、表示を目で確かめていない。検証役に確認を頼みたい
 - 使用量の目安：道具の呼び出し 約 40 回、Web 取得 8 回（URL の生存確認と GCC の文書 2 件の確認）
+
+## 検証の指摘への対応（2026-10-21）
+
+- 直したもの：1（未初期化の警告の言い過ぎ。本文を例の形に限り、表の未初期化を「未初期化の変数・配列」の 1 行にまとめた）、2（complexity と要点の主語）、3（shift-ctz の場合分けを外した）、4（string_view の短い文字列は正しく出た）、5（倍率を幅で書き、別の例の約 3 倍・約 65 倍を足した。コンパイルは「毎回数秒」にし #pch へリンク）、6（表から `-Wall -Wextra` の列を外し、表の下の文で述べた）、7、8、9（図を上下に積む 360×500 にし、代替テキストの「左・右」を「上・下」に）、10（`string`・`vector` は空で作られることも足した）
+- 採らなかったもの：なし
+- 検査：check_pages エラー 0・警告 0、fix_problems --check 0 行、check_snippets 14 組・28 回で期待と違う 0、textlint エラー 0（警告 10。前と同じ種類）
+
+### メインへの提案（sections の title の変更。front matter の sections と本文の見出しを一緒に変える）
+
+- anchor: uninitialized の title を「未初期化変数：手元では不定、AtCoder では -ftrivial-auto-var-init=zero で 0 になる（-Wall は配列の未初期化を見落とす）」に変える（検証の指摘 1。「警告しない」は添字が定数のときに言い過ぎになる）

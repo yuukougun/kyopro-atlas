@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 250" font-family="sans-serif" font-size="14">
-<defs><marker id="ar" markerWidth="8" markerHeight="8" refX="4" refY="8" orient="auto-start-reverse"><path d="M0,0 L8,0 L4,8 z" fill="#333"/></marker></defs>
+<defs><marker id="arb" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 z" fill="#1f4e9a"/></marker><marker id="arr" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 z" fill="#9a4e1f"/></marker></defs>
 <rect width="100%" height="100%" fill="#ffffff"/>
 <text x="40" y="26" fill="#222">ソート済みの列 a と x = 5</text>
 <rect x="60" y="90" width="56" height="40" fill="#f2f2f2" stroke="#666" stroke-width="1.5" stroke-dasharray="4 3"/>
@@ -24,11 +24,11 @@
 <text x="424.0" y="116" text-anchor="middle" fill="#222" font-weight="bold">8</text>
 <text x="424.0" y="148" text-anchor="middle" fill="#555" font-size="12">6</text>
 <text x="52" y="148" text-anchor="end" fill="#555" font-size="12">添字</text>
-<line x1="228" y1="50" x2="228" y2="86" stroke="#1f4e9a" stroke-width="2" marker-end="url(#ar)"/>
+<line x1="228" y1="50" x2="228" y2="86" stroke="#1f4e9a" stroke-width="2" marker-end="url(#arb)"/>
 <text x="228" y="46" text-anchor="middle" fill="#1f4e9a">lower_bound = 3（5 以上の最初）</text>
-<line x1="396" y1="72" x2="396" y2="86" stroke="#9a4e1f" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#ar)"/>
-<text x="402" y="70" fill="#9a4e1f">upper_bound = 6</text>
-<text x="402" y="84" fill="#9a4e1f" font-size="12">（5 より大きい最初）</text>
+<line x1="396" y1="58" x2="396" y2="86" stroke="#9a4e1f" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#arr)"/>
+<text x="404" y="56" fill="#9a4e1f">upper_bound = 6</text>
+<text x="404" y="72" fill="#9a4e1f" font-size="12">（5 より大きい最初）</text>
 <path d="M62,158 L62,166 L226,166 L226,158" fill="none" stroke="#333" stroke-width="1.5"/>
 <text x="144.0" y="184" text-anchor="middle" fill="#222" font-size="13">5 未満：3 個</text>
 <path d="M230,158 L230,166 L394,166 L394,158" fill="none" stroke="#333" stroke-width="1.5"/>

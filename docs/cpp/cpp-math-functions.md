@@ -11,7 +11,7 @@ kind: [実装・C++, ビット演算]
 prerequisites: [cpp-types-literals]
 related: [cpp-integer-overflow, integer-division, gcd-lcm, integer-root, bit-operations, bitset-speedup, randomized, stress-testing]
 summary: gcd・割り算・sqrt などの数の関数、popcount・bitset などのビットの関数、乱数と時間計測を正しく使う。整数の割り算が 0 に向かって切り捨てることや、sqrt の誤差に気をつける。
-complexity: 'gcd・lcm は O(log min(a, b))、<bit> の関数と組み込み関数は O(1)、bitset<N> のシフト・論理演算・count は O(N/64)'
+complexity: 'gcd・lcm は O(log min(a, b))、`<bit>` の関数と組み込み関数は O(1)、`bitset<N>` のシフト・論理演算・count は O(N/64)'
 signs: []
 acl: []
 sections:
@@ -20,7 +20,7 @@ sections:
   - {title: 整数の / と % は 0 に向かって切り捨てる（-7 / 2 は -3、-7 % 2 は -1。負の数の床関数・切り上げの書き方は integer-division のページ）, anchor: integer-division}
   - {title: pow・sqrt は double で計算する：整数のべき乗に pow を使わない、大きな long long の sqrt は誤差が出る（整数の平方根は標準になく、補正の仕方は integer-root のページ）, anchor: pow-sqrt}
   - {title: '円周率：numbers::pi（C++20）・M_PI・acos(-1)', anchor: pi}
-  - {title: <bit> の関数：popcount・countr_zero・countl_zero・bit_width・bit_ceil・bit_floor・has_single_bit（C++20）, anchor: bit-functions}
+  - {title: '`<bit>` の関数：popcount・countr_zero・countl_zero・bit_width・bit_ceil・bit_floor・has_single_bit（C++20）', anchor: bit-functions}
   - {title: 'std::popcount などは符号なし整数しか受けない（popcount(int) はエラー、負の int を unsigned long long にすると上位が 1 で埋まる）（C++20）', anchor: bit-unsigned-only}
   - {title: '組み込み関数：__builtin_popcount・__builtin_popcountll・__builtin_ctz・__builtin_clzll・__lg（ctz・clz・__lg に 0 を渡すと未定義。std:: の関数は 0 でも値が決まっている）（GCC の拡張）', anchor: builtins}
   - {title: ビットの小技：x & -x（最下位の 1）・x & (x - 1)・部分集合を大きい順に回す for（考え方は bit 演算のページ）, anchor: bit-tricks}
@@ -56,9 +56,9 @@ atcoder: true
 --8<-- "cpp-math-functions/gcd-lcm.cpp:core"
 ```
 
-- **素朴に書くと**：ユークリッドの互除法 `b == 0 ? a : gcd(b, a % b)` と同じである（理論は [GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md)）
+- **素朴に書くと**：0 以上の引数では、ユークリッドの互除法 `b == 0 ? a : gcd(b, a % b)` と同じである。負の数ではこの再帰は負の値を返しうる（落とし穴 3 の `__gcd` も同じ理由）（理論は [GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md)）
 - **版**：C++17。`-std=gnu++14` ではコンパイルエラーになる。g++-13・g++-15 とも `-std=gnu++17` から使える
-- **落とし穴 1**：`lcm` の戻り値の型は引数の共通の型である。`lcm(100003, 100019)` は `int` 同士なので `int` で返り、本当の値 $10002200057$ が入らない。手元では g++-13・g++-15 とも `1412265465` と出た（`-D_GLIBCXX_ASSERTIONS` を付けると検査で止まる）。どちらかを `long long` にする
+- **落とし穴 1**：`lcm` の戻り値の型は引数の共通の型である。`lcm(100003, 100019)` は `int` 同士なので `int` で返り、本当の値 $10002200057$ は `int` で表せない。結果がその型で表せないときは[未定義動作](../cpp/cpp-undefined-behavior.md)で、手元では g++-13・g++-15 とも `1412265465` と出た（`-D_GLIBCXX_ASSERTIONS` を付けると検査で止まる）。どちらかを `long long` にする
 - **落とし穴 2**：自分で書くときは `a / gcd(a, b) * b` の順にする。`a * b / gcd(a, b)` は、割る前の $a \times b$ があふれる。`std::lcm` は中で先に割っている。多数の数の lcm は、途中で $10^{18}$ を超えうる。上限を超えるかを掛ける前に割り算で判定する書き方は [整数の割り算と余り](../math/integer-division.md) で、あふれの全般は [整数のオーバーフローと __int128](../cpp/cpp-integer-overflow.md) で扱う
 - **落とし穴 3**：古い解説コードの `__gcd(a, b)` は GCC の内部の関数である。2 つの引数が同じ型でないと通らず（`__gcd(12, 18LL)` はコンパイルエラー）、負の数では負の値を返すことがある（手元で `__gcd(12, -18)` は $-6$）。いまは `gcd` を使う
 
@@ -86,7 +86,7 @@ C++ の整数の `a / b` は、実数の商を 0 に向かって切り捨てる�
 
 ![数直線の上で、−7 / 2 = −3.5 を C++ の / は 0 に向かって −3 に、floor は負の無限大に向かって −4 に切り捨てる。正の 3.5 はどちらも 3 になる](../img/cpp-math-functions/division.svg)
 
-| 式 | C++ の結果 | 数学の $\lfloor a / b \rfloor$ と $a \bmod b$ |
+| 式 | C++ の結果 | 数学の $\lfloor a / b \rfloor$ と $a - b \lfloor a / b \rfloor$ |
 | --- | --- | --- |
 | `7 / 2`・`7 % 2` | 3・1 | 3・1 |
 | `-7 / 2`・`-7 % 2` | −3・−1 | −4・1 |
@@ -103,7 +103,7 @@ C++ の整数の `a / b` は、実数の商を 0 に向かって切り捨てる�
 
 ## pow・sqrt は double で計算する：整数のべき乗に pow を使わない、大きな long long の sqrt は誤差が出る（整数の平方根は標準になく、補正の仕方は integer-root のページ） {#pow-sqrt}
 
-`pow` と `sqrt` は、引数を double に変えて計算し、double を返す（`<cmath>`）。double の仮数部は 53 bit なので、$2^{53} \approx 9 \times 10^{15}$ を超えると表せない整数が出てくる（[浮動小数点数の型](../cpp/cpp-types-literals.md)）。
+`pow` と `sqrt` は、引数を double に変えて計算し、double を返す（`<cmath>`）。double の仮数部は 53 bit なので、$2^{53} \approx 9 \times 10^{15}$ を超えると表せない整数が出てくる（[浮動小数点数の型](../cpp/cpp-types-literals.md#floating-point)）。
 
 ```cpp
 --8<-- "cpp-math-functions/pow-sqrt.cpp:core"
@@ -113,7 +113,7 @@ $3^{35} = 50031545098999707$ は奇数で、double では表せない。`pow(3, 
 
 - **整数のべき乗**：ループで掛けるか、[繰り返し二乗法](../math/mod-pow.md)を使う。mod を取るなら modint の `pow` を使う
 - **整数の平方根**：C++ に整数の平方根の関数はない。`(long long)sqrt(x)` を求めた後、$r^2 > x$ なら減らし、$(r+1)^2 \le x$ なら増やして直す（[整数の平方根・K 乗根と累乗数](../math/integer-root.md)）
-- **sqrtl**：long double（x86-64 では仮数部 64 bit）で計算するので、上の $10^{18} - 1$ は正しく出る。ただし $2^{64}$ 近くまで常に正しいとは限らないので、補正をやめる理由にはならない
+- **sqrtl**：long double（[x86-64 の GCC では仮数部 64 bit](../cpp/cpp-types-literals.md#floating-point)）で計算するので、上の $10^{18} - 1$ は正しく出る。AtCoder・手元の x86-64 の GCC では、$2^{64}$ 未満の整数で `(unsigned long long)sqrtl(x)` が正しい床になる。ただし long double が double と同じ処理系（MSVC など）では `sqrt` と同じく誤るので、どの環境でも正しくするには補正を書く
 - **落とし穴**：`(int)pow(x, 2)` のように double の結果を整数に変えると、小数部が切り捨てられる。計算結果が真の値よりわずかに小さいと、1 小さい整数になる。規格は `pow` の誤差を決めていないので、小さな値で合っても整数の計算に double を混ぜない
 
 ## 円周率：numbers::pi（C++20）・M_PI・acos(-1) {#pi}
@@ -129,7 +129,7 @@ $3^{35} = 50031545098999707$ は奇数で、double では表せない。`pow(3, 
 - **acos(-1)**：昔からの書き方で、関数呼び出しになる。long double の精度が要るなら `acosl(-1)` にする
 - **版**：`numbers::pi` は C++20。`-std=gnu++17` ではコンパイルエラーになる
 
-## <bit> の関数：popcount・countr_zero・countl_zero・bit_width・bit_ceil・bit_floor・has_single_bit（C++20） {#bit-functions}
+## `<bit>` の関数：popcount・countr_zero・countl_zero・bit_width・bit_ceil・bit_floor・has_single_bit（C++20） {#bit-functions}
 
 `<bit>` の関数は、2 進表記の 1 の個数や、端から続く 0 の個数を数える。$x = 12$（2 進で $1100$）を `unsigned`（32 桁）で数えると、次の図のようになる。
 
@@ -195,10 +195,10 @@ $3^{35} = 50031545098999707$ は奇数で、double では表せない。`pow(3, 
 --8<-- "cpp-math-functions/bit-tricks.cpp:core"
 ```
 
-- `x & -x`：最下位の 1 だけを残した値。BIT の添字の移動 `i += i & -i` に出る。`x` が符号なしなら `1u << countr_zero(x)` とも書ける
+- `x & -x`：最下位の 1 だけを残した値。BIT の添字の移動 `i += i & -i` に出る。`x` が 0 でない `unsigned` なら `1u << countr_zero(x)`（`unsigned long long` なら `1ULL << countr_zero(x)`）とも書ける
 - `x & (x - 1)`：最下位の 1 を消した値。`(x & (x - 1)) == 0` は「$x$ が 0 か 2 のべき乗」の判定になる
 - `s = (s - 1) & m`：$m$ の部分集合を大きい順に回す。$m = 5$（$101$）なら 5, 4, 1, 0 と進む
-- **落とし穴**：`for (int s = m; s > 0; s = (s - 1) & m)` は空集合 0 を処理しない。止める条件を書かないと、0 の次に $m$ に戻って回り続ける。0 を処理してから `break` する形にする
+- **落とし穴**：`for (int s = m; s > 0; s = (s - 1) & m)` のように `s > 0` を条件にすると、空集合 0 を処理しない。条件を外すと、`(0 - 1) & m` が $m$ に戻って回り続ける。0 を処理してから `break` する形（上のコード）にする
 
 ## bitset：大きさはコンパイル時の定数、count・シフト・dp |= dp << w、_Find_first・_Find_next（後の 2 つは GCC の拡張） {#bitset}
 
@@ -232,8 +232,8 @@ $w = \{3, 5\}$ なら、作れる和は 0・3・5・8 の 4 個である。`dp <
 - **random_device{}()**：実行ごとに違う種を作る。`chrono::steady_clock::now().time_since_epoch().count()` を種にする解説コードもある
 - **uniform_int_distribution<long long>(l, r)**：閉区間 $[l, r]$ の整数を一様に返す。半開区間ではない。`l > r` は未定義動作である
 - **shuffle(v.begin(), v.end(), rng)**：配列を一様にかき混ぜる。C++17 で消えた `random_shuffle` は、GCC では残っているが非推奨の警告が出る
-- **落とし穴 1**：`rand()` は使わない。最大値 `RAND_MAX` は処理系ごとに違い（手元の GCC では $2^{31} - 1$、32767 の処理系もある）、`rand() % n` は偏る
-- **落とし穴 2**：種を定数にすると、毎回同じ列になる。失敗を再現するには便利だが、その種と相性の悪い入力では何度提出しても同じように失敗する。デバッグ中だけ種を固定し、提出では `random_device` を使う
+- **落とし穴 1**：`rand()` は使わない。最大値 `RAND_MAX` は処理系ごとに違い（規格は 32767 以上とだけ決めていて、手元の GCC では $2^{31} - 1$）、`rand() % n` は偏る
+- **落とし穴 2**：種を定数にすると、毎回同じ列になる。失敗を再現するには便利だが、その種と相性の悪い入力では何度提出しても同じように失敗する。デバッグ中だけ種を固定し、提出では `random_device` を使う。同じ列になるのはエンジンの値で、`uniform_int_distribution`・`shuffle` を通した値は、標準ライブラリが違うと同じ種でも変わりうる
 
 ## 時間計測：chrono::steady_clock::now() {#chrono}
 
@@ -267,10 +267,11 @@ $w = \{3, 5\}$ なら、作れる和は 0・3・5・8 の 4 個である。`dp <
 - [cppreference「std::lcm」](https://en.cppreference.com/cpp/numeric/lcm)：結果が表せないときの扱い
 - [cppreference「std::midpoint」](https://en.cppreference.com/cpp/numeric/midpoint)：整数の和が奇数のとき第 1 引数の側に丸めること
 - [cpprefjp「clamp」](https://cpprefjp.github.io/reference/algorithm/clamp.html)：引数の型と $lo > hi$ の扱い
-- [cpprefjp「<numbers>」](https://cpprefjp.github.io/reference/numbers.html)：`numbers::pi` などの数学定数
-- [cpprefjp「<bit>」](https://cpprefjp.github.io/reference/bit.html)：`<bit>` の関数の一覧
+- [cpprefjp「`<numbers>`」](https://cpprefjp.github.io/reference/numbers.html)：`numbers::pi` などの数学定数
+- [cpprefjp「`<bit>`」](https://cpprefjp.github.io/reference/bit.html)：`<bit>` の関数の一覧
 - [cppreference「std::bit_ceil」](https://en.cppreference.com/cpp/numeric/bit_ceil)：結果が表せないと未定義動作であること
 - [GCC「Bit Operation Builtins」](https://gcc.gnu.org/onlinedocs/gcc/Bit-Operation-Builtins.html)：組み込み関数の引数の型と、0 を渡したときの扱い
 - [cpprefjp「bitset」](https://cpprefjp.github.io/reference/bitset/bitset.html)：`bitset` の操作の一覧
+- [cppreference「RAND_MAX」](https://en.cppreference.com/cpp/numeric/random/RAND_MAX)：値は処理系が決め、32767 以上であること
 - [cppreference「std::uniform_int_distribution」](https://en.cppreference.com/cpp/numeric/random/uniform_int_distribution)：閉区間 $[a, b]$ の整数を返すこと
 - [cpprefjp「steady_clock」](https://cpprefjp.github.io/reference/chrono/steady_clock.html)：時刻が戻らない時計であること

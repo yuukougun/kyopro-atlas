@@ -8,11 +8,11 @@ using namespace std;
 pair<long long, long long> geo_sum(long long r, long long n, long long m) {
     if (n == 0) return {0, 1 % m};                  // S(0) = 0、r^0 = 1（m = 1 なら 0）
     if (n % 2 == 1) {                               // S(n) = 1 + r·S(n−1)
-        auto [s, p] = geo_sum(r, n - 1, m);
-        return {(1 + r % m * s) % m, r % m * p % m};
+        auto [s, pw] = geo_sum(r, n - 1, m);
+        return {(1 + r % m * s) % m, r % m * pw % m};
     }
-    auto [s, p] = geo_sum(r, n / 2, m);             // k = n/2：S(2k) = S(k)·(1 + r^k)
-    return {s * ((1 + p) % m) % m, p * p % m};      // 積は 10^18 未満に収まる
+    auto [s, pw] = geo_sum(r, n / 2, m);            // k = n/2：S(2k) = S(k)·(1 + r^k)
+    return {s * ((1 + pw) % m) % m, pw * pw % m};   // 積は 10^18 未満に収まる
 }
 // --8<-- [end:core]
 

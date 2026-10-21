@@ -11,11 +11,11 @@ kind: [実装・C++, データ構造]
 prerequisites: []
 related: [stl-containers, ordered-set, cpp-comparators, cpp-algorithms, cpp-undefined-behavior, hash-safety, kth-element]
 summary: set・map・multiset の定型の操作（erase_if・contains・1 個だけ消す）とイテレータを正しく書く。map の [] が要素を作る、set に std::lower_bound を使うと遅い、などの事故を防ぐ。
-complexity: 'set・map の検索・挿入・削除と lower_bound は O(log N)。erase・erase_if は O(N)。set に std::lower_bound・distance を使うと O(N)'
+complexity: 'set・map の検索・挿入・削除と lower_bound は O(log N)。自由関数の erase・erase_if は O(N)。set に std::lower_bound・distance を使うと O(N)'
 signs: []
 acl: []
 sections:
-  - {title: 'erase(v, x)・erase_if(v, pred)：消した個数を返し、set・map にも使える（C++20）', anchor: erase-if}
+  - {title: 'erase(v, x)・erase_if(v, pred)：消した個数を返す。erase_if は set・map にも使える（C++20）', anchor: erase-if}
   - {title: contains（C++20）と find・count, anchor: contains}
   - {title: 'map の [] はキーがなければ既定値で要素を作る（存在を調べるだけなら contains・find、at はなければ例外）', anchor: map-subscript}
   - {title: multiset から 1 個だけ消す：ms.erase(ms.find(x))（ms.erase(x) は全部消す。find が end() でないことを確かめる）, anchor: multiset-erase-one}
@@ -37,7 +37,7 @@ atcoder: true
 !!! abstract "要点"
     - **何ができるか**：set・map・multiset の定型の操作（erase_if・contains・1 個だけ消す）とイテレータを正しく書く。map の `[]` が要素を作る、set に `std::lower_bound` を使うと遅い、などの事故を防ぐ。
     - **いつ使うか**：解説コードに `erase_if`・`contains`・`ms.erase(ms.find(x))`・`*prev(st.end())`・`it = st.erase(it)` が出てきて読みたいとき。set・map を使った解法が TLE・RE・WA になり、書き方を疑うとき。
-    - **計算量**：set・map の検索・挿入・削除と `lower_bound` は $O(\log N)$。`erase`・`erase_if` は全体を 1 回見るので $O(N)$。set に `std::lower_bound`・`distance` を使うと $O(N)$
+    - **計算量**：set・map の検索・挿入・削除と `lower_bound` は $O(\log N)$。自由関数の `erase(v, x)`・`erase_if` は全体を 1 回見るので $O(N)$（set・map のメンバの `erase` は $O(\log N)$）。set に `std::lower_bound`・`distance` を使うと $O(N)$
     - **前提**：なし
 
 <!-- textlint-disable -->
@@ -46,11 +46,11 @@ atcoder: true
 
 コンテナ操作とイテレータは、set・map・vector を使う解法で毎回出てくる定型の書き方である。どのコンテナを選ぶか・各操作の計算量は [STL コンテナの使い分け](../ds/stl-containers.md)に任せ、ここでは書き方と、書き間違えたときに起きる事故を扱う。
 
-このページのコードは `#include <bits/stdc++.h>` と `using namespace std;` を前提にする。書き方はすべて AtCoder の GCC 15.2（`-std=gnu++23`）と手元の g++-13・g++-15（`-std=gnu++23`）で確かめた。
+このページのコードは `#include <bits/stdc++.h>` と `using namespace std;` を前提にする。書き方はすべて手元の g++-13・g++-15（`-std=gnu++23`）で確かめた。AtCoder の GCC 15.2（`-std=gnu++23`）でも使える。
 
-## erase(v, x)・erase_if(v, pred)：消した個数を返し、set・map にも使える（C++20） {#erase-if}
+## erase(v, x)・erase_if(v, pred)：消した個数を返す。erase_if は set・map にも使える（C++20） {#erase-if}
 
-`erase(v, x)` は `v` から `x` に等しい要素をすべて消し、`erase_if(v, pred)` は `pred` が真になる要素をすべて消す。どちらも消した個数を返す。vector・deque・string のほか、set・multiset・map にも使える。map の `pred` は `(キー, 値)` の組を受け取る。
+`erase(v, x)` は `v` から `x` に等しい要素をすべて消し、`erase_if(v, pred)` は `pred` が真になる要素をすべて消す。どちらも消した個数を返す。`erase(v, x)` は vector・deque・string・list で使う。`erase_if(v, pred)` はそれらに加えて set・multiset・map・unordered_map にも使える。set・map で値を消すなら、メンバの `st.erase(x)` を使う。map の `pred` は `(キー, 値)` の組を受け取る。
 
 ```cpp
 --8<-- "cpp-container-idioms/erase-if.cpp:core"
@@ -146,7 +146,7 @@ set・multiset・map で「$x$ 以上の最小の要素」を探すときは、�
 --8<-- "cpp-container-idioms/iterators.cpp:core"
 ```
 
-入力 25 なら、30 以上の最小が 30、25 未満の最大が 20、その次が 40 と出る。入力 5 では `it == st.begin()` なので「未満の最大」はなく、入力 50 では `it == st.end()` なので「以上の最小」はない。
+入力 25 なら、25 以上の最小が 30、25 未満の最大が 20、その次が 40 と出る。入力 5 では `it == st.begin()` なので「未満の最大」はなく、入力 50 では `it == st.end()` なので「以上の最小」はない。
 
 - **落とし穴 1**：`*st.end()` と、`begin()` での `prev(it)` は未定義動作である。`prev(it)` の前に `it != st.begin()`、`*it` と `next(it)` の前に `it != st.end()` を確かめる。空のコンテナでは、`*st.begin()` と `*prev(st.end())` のどちらも読めない
 - **落とし穴 2**：`st.end() - 1` は set ではコンパイルエラーになる（vector では通る）。set・map のイテレータは 1 つずつしか動けないので、`prev`・`next` を使う
@@ -164,7 +164,7 @@ vector・deque・string のイテレータは引き算ができ、`it - v.begin(
 
 - **落とし穴 1**：set のイテレータは引き算できず、`st.lower_bound(x) - st.begin()` は `no match for 'operator-'` でコンパイルエラーになる。`distance(st.begin(), it)` なら通るが、1 つずつ数えるので $O(N)$ かかる。クエリごとに書くと全体で $O(NQ)$ になって TLE する
 - **set で「$x$ 未満の個数」が要るとき**：[座標圧縮](../basics/coordinate-compression.md)して BIT で数えるか、[set・multiset・map の応用](../ds/ordered-set.md)の方法を使う。GCC の拡張でよければ [pb_ds の tree](#pb-ds) で $O(\log N)$ になる
-- **型**：`it - v.begin()` は `ptrdiff_t`（64 bit の Linux では `long`）を返す。`int` に入れても困らない大きさだが、`max(i, it - v.begin())` のように `int` と直接比べると型が合わずコンパイルエラーになる
+- **型**：`it - v.begin()` は `ptrdiff_t`（64 bit の Linux では `long`）を返す。値は `int` に収まる大きさである。ただし `max(i, it - v.begin())` のように `int` と一緒に `max`・`min` へ渡すと、型が合わずコンパイルエラーになる。`int` の変数に入れてから渡す
 
 ## erase は次のイテレータを返す（it = st.erase(it)） {#erase-returns-next}
 
@@ -176,7 +176,7 @@ vector・deque・string のイテレータは引き算ができ、`it - v.begin(
 
 入力 `1 2 3 4 6` なら、偶数の 2・4・6 が消えて `1 3` が残る。消したときは戻り値で次へ進み、消さないときだけ `++it` で進める。条件で消すだけなら、[erase_if](#erase-if) の 1 行で書ける。
 
-- **落とし穴**：`for (auto it = st.begin(); it != st.end(); ++it) if (...) st.erase(it);` は、消して無効になった `it` を `++it` で進める未定義動作である。手元の g++-13・g++-15 では、上と同じ入力で Segmentation fault になった。AddressSanitizer（`-fsanitize=address`）を付けると `heap-use-after-free` で止まる
+- **落とし穴**：`for (auto it = st.begin(); it != st.end(); ++it) if (...) st.erase(it);` は、消して無効になった `it` を `++it` で進める未定義動作である。手元の g++-13・g++-15 では、上と同じ入力で Segmentation fault になった。AddressSanitizer（`-fsanitize=address`）では見つからないことがある（set の `++` は計測されないライブラリの中で動くため）。`-D_GLIBCXX_DEBUG` を付けると `attempt to increment a singular iterator` で止まる
 - **vector では**：vector の `v.erase(it)` も次のイテレータを返すが、後ろの要素を 1 つずつ前に詰めるので 1 回 $O(N)$ かかる。たくさん消すなら `erase_if` でまとめて消す
 
 ## イテレータと参照の無効化：vector の再確保はすべてを無効にし、set・map は消した要素だけ {#invalidation}
@@ -187,19 +187,19 @@ vector は要素を連続したメモリに置く。`push_back` で容量（`cap
 --8<-- "cpp-container-idioms/invalidation.cpp:bad"
 ```
 
-このコードは g++-13・g++-15 とも `-Wall -Wextra` で警告が出ず、普通の実行では何事もなく終わった。AddressSanitizer を付けると `heap-use-after-free` で止まる。libstdc++ では容量が足りなくなるたびに倍増するので、再確保は前触れなく起きる。手元の g++-13・g++-15 で 20 回 `push_back` すると、容量は 1・2・4・8・16・32 と増えた。増えた回ごとに再確保が起きている。
+このコードは g++-13・g++-15 とも `-Wall -Wextra` で警告が出ず、普通の実行では何事もなく終わった。AddressSanitizer を付けると `heap-use-after-free` で止まる。libstdc++ では容量が足りなくなるたびに倍増する。再確保は `push_back` の見た目からは分からず、前触れなく起きる。手元の g++-13・g++-15 で 20 回 `push_back` すると、容量は 1・2・4・8・16・32 と増えた。増えた回ごとに再確保が起きている。
 
-- **起きやすい形 1**：`for (int x : a) a.push_back(...)` のように、範囲 for で回している vector に足す。範囲 for は内部でイテレータを使うので、再確保で壊れる。手元では、`{1, 2, 3}` の奇数ごとに 10 倍を足すコードが、普通の実行では `1 2 3 10` と 30 を落として終わり、AddressSanitizer では `heap-use-after-free` で止まった。添字で回し、毎回 `a[i]` を読み直せば安全である
+- **起きやすい形 1**：`for (int x : a) a.push_back(...)` のように、範囲 for で回している vector に足す。範囲 for は内部でイテレータを使うので、再確保で壊れる。手元では、`{1, 2, 3}` の奇数ごとに 10 倍を足すコードが、手元の g++-15（`-O2`）では `1 2 3 10` と 30 を落とし、g++-13 では `1 2 3 10 50` と元にない値が出た。どちらも正しい `1 2 3 10 30` ではない。AddressSanitizer では `heap-use-after-free` で止まった。添字で回し、毎回 `a[i]` を読み直せば安全である
 
 ```cpp
---8<-- "cpp-container-idioms/reserve.cpp:loop"
+--8<-- "cpp-container-idioms/capacity.cpp:loop"
 ```
 
 - **起きやすい形 2**：`auto& row = g[u];` のように参照を取った後で `g.push_back(...)` する。木を作りながら頂点を足す処理などで起きる。参照を取るのは足し終えてからにするか、添字で持つ。足す数の上限が分かっているなら、先に `v.reserve(上限)` で容量を確保すれば、その数までは再確保が起きない
 - **set・map**：挿入では何も無効にならず、消したときも消した要素を指すイテレータ・参照だけが無効になる。ほかの要素を指すイテレータは使い続けられる
 
 ```cpp
---8<-- "cpp-container-idioms/reserve.cpp:set"
+--8<-- "cpp-container-idioms/capacity.cpp:set"
 ```
 
 - **unordered_map・unordered_set**：挿入で要素数が増えて作り直し（rehash）が起きると、イテレータはすべて無効になる。ただし要素への参照とポインタは無効にならない
@@ -209,7 +209,7 @@ vector は要素を連続したメモリに置く。`push_back` で容量（`cap
 
 ## unordered_map：pair のキーにはハッシュがない（コンパイルエラー）、自作のハッシュの渡し方、衝突を狙った入力（安全な設計は hash-safety） {#unordered-map}
 
-unordered_map はキーのハッシュ値で置き場所を決めるので、キーの型にハッシュ関数 `hash<キーの型>` が要る。`int`・`long long`・`string` にはあるが、`pair` と `tuple` にはない。`unordered_map<pair<int, int>, int>` は、g++-13・g++-15 とも `use of deleted function` でコンパイルエラーになる。エラーの中に `_Hash = std::hash<std::pair<int, int> >` と出ていれば、この原因である。
+unordered_map はキーのハッシュ値で置き場所を決めるので、キーの型にハッシュ関数 `hash<キーの型>` が要る。`int`・`long long`・`string` にはあるが、`pair` と `tuple` にはない。`unordered_map<pair<int, int>, int>` は、g++-13・g++-15 とも `use of deleted function` でコンパイルエラーになる。g++-15 では、その前に `hash function must be copy constructible` が出る。エラーの中に `_Hash = std::hash<std::pair<int, int> >` と出ていれば、この原因である。
 
 ```cpp
 --8<-- "cpp-container-idioms/unordered-pair-ng.cpp:core"

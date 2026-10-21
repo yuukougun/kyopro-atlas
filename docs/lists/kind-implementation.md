@@ -33,7 +33,7 @@ type: generated
 
 | ページ | レベル | 要約 |
 | --- | --- | --- |
-| [インタラクティブ問題](../misc/interactive.md)（準備中） | 基礎 | 質問を出力してジャッジの答えを受け取る形式の問題で、質問回数の上限から方針を逆算する（2 択の質問なら ⌈log2 候補数⌉ 回）。出力のたびに flush し、二分探索や 2 進表記で質問を設計する。 |
+| [インタラクティブ問題](../misc/interactive.md) | 基礎 | 質問を出力してジャッジの答えを受け取る形式の問題で、質問回数の上限から方針を逆算する（2 択の質問なら ⌈log2 候補数⌉ 回）。出力のたびに flush し、二分探索や 2 進表記で質問を設計する。 |
 
 ## C++
 
@@ -50,7 +50,7 @@ type: generated
 | [関数テンプレートと constexpr](../cpp/cpp-templates-constexpr.md) | 基礎 | 型を引数にした関数（テンプレート・auto 引数・コンセプト）と、コンパイル時に値を決める constexpr・static_assert を読み書きする。chmin(a, 3) が通らないような型推論の失敗を避ける。 |
 | [マクロと雛形](../cpp/cpp-macros-template-file.md) | 基礎 | 解説コードの先頭に並ぶ #include・using namespace std・マクロ・chmin・#pragma の意味と落とし穴が分かる。自作のヘッダを使うコードを、提出前に 1 ファイルに展開する方法も示す。 |
 | [コンテナ操作とイテレータ](../cpp/cpp-container-idioms.md) | 基礎 | set・map・multiset の定型の操作（erase_if・contains・1 個だけ消す）とイテレータを正しく書く。map の [] が要素を作る、set に std::lower_bound を使うと遅い、などの事故を防ぐ。 |
-| [比較関数と順序](../cpp/cpp-comparators.md) | 基礎 | sort・set・priority_queue に渡す比較関数を約束（厳密弱順序）と向きを守って書き、構造体に operator< や <=> で順序を持たせる。比較関数に <= を書いて sort が落ちるような事故を防ぐ。 |
+| [比較関数と順序](../cpp/cpp-comparators.md) | 基礎 | sort・set・priority_queue に渡す比較関数を約束（狭義の弱順序）と向きを守って書き、構造体に operator< や <=> で順序を持たせる。比較関数に <= を書いて sort が落ちるような事故を防ぐ。 |
 | [アルゴリズム関数と ranges 版](../cpp/cpp-algorithms.md) | 基礎 | sort・unique・lower_bound・accumulate などの定型と、射影も使える ranges 版（C++20）を使い分ける。accumulate の初期値の型や、unique だけでは要素が減らない点に気をつける。 |
 | [文字列の操作](../cpp/cpp-string-api.md) | 基礎 | std::string の操作（substr・find・+=・数との変換）と string_view を、計算量と寿命に気をつけて書く。s = s + c が全体をコピーして遅いことや、cin >> の後の getline の罠を防ぐ。 |
 | [ACL の読み方](../cpp/acl-reading.md) | 基礎 | AtCoder Library（ACL）を使う解説コードを、共通の約束（0 始まり・半開区間）とともに読む。modint の val() と出力、segtree・lazy_segtree のテンプレート引数にラムダを渡す書き方が分かる。 |

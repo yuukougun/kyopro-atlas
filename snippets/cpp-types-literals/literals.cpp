@@ -7,6 +7,7 @@ int main() {
     static_assert(is_same_v<decltype(1ULL), unsigned long long>);
     static_assert(is_same_v<decltype(0uz), size_t>);   // C++23
     static_assert(is_same_v<decltype(3000000000), long>);  // int に収まらない数は自動で広がる
+    static_assert(is_same_v<decltype(0x80000000), unsigned>);  // 16 進は unsigned int を経る
     static_assert(is_same_v<decltype(1e9), double>);   // 指数表記は整数でも double
     static_assert(1'000'000'007 == 1000000007);        // 桁区切り（C++14）
     static_assert(0b1010 == 10);                       // 2 進（C++14）

@@ -47,12 +47,12 @@ struct WeightedUnionFind {
 void random_test() {
     mt19937 rng(12345);
     for (int iter = 0; iter < 300; iter++) {
-        int n = rng() % 8 + 1;
+        int n = rng() % 40 + 1;  // 高さ 3 以上の木が残る大きさまで広げる（圧縮の順序の誤りを検出する）
         vector<long long> x(n);
         for (auto& v : x) v = (long long)(rng() % 21) - 10;
         WeightedUnionFind uf(n);
         vector<vector<pair<int, long long>>> g(n);  // 採用した情報（x_to − x_from = w）
-        for (int q = 0; q < 20; q++) {
+        for (int q = 0; q < 80; q++) {
             int u = rng() % n, v = rng() % n;
             long long w = x[v] - x[u];
             if (rng() % 4 == 0) w += (long long)(rng() % 3) - 1;  // ときどき誤らせる

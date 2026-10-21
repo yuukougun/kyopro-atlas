@@ -47,3 +47,25 @@ abc148_c 以外は台帳で確認済みで、ページの割り当て（pages）
 - 例題 ABC109 C で「都市の座標は X と異なる」という制約を書くか迷い、確かめられなかったので書かなかった（解法は差が 0 でも変わらない）
 - frequency_evidence の recent 1（abc460_e）は、台帳の approach（桁数ごとの式変形）からは gcd-lcm との関係が読み取れない。根拠として妥当か確かめてほしい
 - 互除法の最悪回数（10^9 で 42 回、10^18 で 85 回、long long で 90 回）は手元の Python で数えた値で、research/06 §6.3 と一致した
+
+## 検証の指摘への対応（verify/gcd-lcm.md）
+
+- 指摘 1（回数の上限の条件）：直した。「$a \ge b$ なら、2 回の置き換えで…」とし、「$a < b$ から始めても、1 回目で $(b, a)$ に入れ替わって $a \ge b$ になる」を足した
+- 指摘 2（取り込みの範囲）：直した。euclid.cpp の印を `gcd`（my_gcd）と `lcm`（lcm_capped）に分け、#euclid は `gcd`、#lcm-overflow の段落の後に `lcm` を取り込んだ。「上の `lcm_capped`」は「次の `lcm_capped`」にした
+- 指摘 3（落とし穴の見出し）：直した。「gcd で割ると 0 除算になる」にした
+- 指摘 4（「1つ」「全て」の表記）：本文の見出しは front matter の sections の title と対になるので、本文だけでは直さなかった。メインへの提案は下の「front matter への提案」
+- 指摘 5（frequency_evidence の abc460_e）：front matter と台帳にかかわるので直さず、下の提案に回した
+- 指摘 6（既約の定義）：用語集の反映がまだなので、手順 1 に「（分子と分母の gcd が 1、すなわち互いに素な状態を既約という）」を足した。用語集に互いに素・既約分数が入ったら、リンクに置き換えてよい
+
+## front matter への提案（検証の指摘 4・5）
+
+| 項目 | いまの値 | 新しい値 |
+| --- | --- | --- |
+| summary | …1つ除いた gcd を累積 gcd で求め… | …1 つ除いた gcd を累積 gcd で求め… |
+| signs の 2 つ目 | 等間隔に移動して全ての点を訪れられる最大の幅（gcd） | 等間隔に移動してすべての点を訪れられる最大の幅（gcd） |
+| signs の 3 つ目 | 1つだけ書き換え（取り除い）たときの gcd の最大 | 1 つだけ書き換え（取り除い）たときの gcd の最大 |
+| sections の 4 つ目の title | 左右からの累積 gcd（1つ除いた gcd） | 左右からの累積 gcd（1 つ除いた gcd） |
+| frequency_evidence | recent 1（abc460_e）・… | abc460_e は gcd を道具として使う程度（中身は gcd-properties の「mod の周期」に近い）。A の判断は「前提として 14 ページに届く」を主にし、abc460_e は gcd-properties の frequency_evidence に移す（または両方に書く）ことを検討 |
+
+- sections の title を直したら、本文の見出し「## 左右からの累積 gcd（1つ除いた gcd） {#prefix-suffix-gcd}」も「1 つ」にそろえる（メインの反映時か、次の直しで執筆者が行う）
+- 台帳の abc460_e は `checked` の日付と summary（いまは「（執筆時に確かめる）」）を、担当のページの執筆時に入れる必要がある

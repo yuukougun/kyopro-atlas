@@ -9,7 +9,7 @@ using namespace std;
 long long count_at_most(const vector<int>& a, int m, long long k) {
     if (k < 0) return 0;
     int n = a.size();
-    atcoder::fenwick_tree<int> bit(m);  // 窓 [l, r] に入っている値の個数
+    atcoder::fenwick_tree<int> bit(m);  // 窓（閉区間 [l, r]）に入っている値の個数
     long long inv = 0, res = 0;
     int l = 0;
     for (int r = 0; r < n; r++) {

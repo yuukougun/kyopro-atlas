@@ -13,7 +13,7 @@ search:
 
 ## 木の基本性質と表現（tree-basics） {#tree-basics}
 
-- id：`tree-basics`　レベル：基礎　段階：stub　type：technique
+- id：`tree-basics`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-basics/
 - 別名：木の定義、森、根付き木、木の性質、親の番号が自分より小さい入力、tree、forest
 - 種類：木
@@ -28,6 +28,7 @@ search:
     - `tree-basics#forest` 森の連結成分の数 = 頂点数 − 辺数：https://yuukougun.github.io/kyopro-atlas/tree/tree-basics/#forest
     - `tree-basics#edge-to-child` 辺の値を子の頂点に寄せる：https://yuukougun.github.io/kyopro-atlas/tree/tree-basics/#edge-to-child
     - `tree-basics#extremes` 形の両極端（パスと星）でテストする：https://yuukougun.github.io/kyopro-atlas/tree/tree-basics/#extremes
+    - `tree-basics#next-steps` 上位の手法とのつながり：https://yuukougun.github.io/kyopro-atlas/tree/tree-basics/#next-steps
 
 ## 根付き木と走査順（tree-traversal） {#tree-traversal}
 
@@ -50,7 +51,7 @@ search:
 
 ## 木の 2 色塗り分けと距離の偶奇（tree-bipartite） {#tree-bipartite}
 
-- id：`tree-bipartite`　レベル：基礎　段階：stub　type：technique
+- id：`tree-bipartite`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-bipartite/
 - 別名：木は二部グラフ、深さの偶奇、距離の偶奇、tree bipartition
 - 種類：木
@@ -64,10 +65,11 @@ search:
     - `tree-bipartite#distance-parity` 距離の偶奇は深さだけで分かる：https://yuukougun.github.io/kyopro-atlas/tree/tree-bipartite/#distance-parity
     - `tree-bipartite#majority-color` 多い方の色は N/2 個以上：https://yuukougun.github.io/kyopro-atlas/tree/tree-bipartite/#majority-color
     - `tree-bipartite#cross-pairs` 色の違う組の数（二部グラフのまま足せる辺）：https://yuukougun.github.io/kyopro-atlas/tree/tree-bipartite/#cross-pairs
+    - `tree-bipartite#next-steps` 上位の手法とのつながり：https://yuukougun.github.io/kyopro-atlas/tree/tree-bipartite/#next-steps
 
 ## 木の上の距離（tree-distance） {#tree-distance}
 
-- id：`tree-distance`　レベル：基礎　段階：stub　type：technique
+- id：`tree-distance`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-distance/
 - 別名：木の距離、根からの累積、XOR 距離、追いかけっこ、2 点からの距離、distance on a tree
 - 種類：木
@@ -80,10 +82,11 @@ search:
     - `tree-distance#from-one` 1 点からの距離（ダイクストラはいらない）：https://yuukougun.github.io/kyopro-atlas/tree/tree-distance/#from-one
     - `tree-distance#from-two` 2 点からの距離を比べる：https://yuukougun.github.io/kyopro-atlas/tree/tree-distance/#from-two
     - `tree-distance#root-prefix` 根からの累積値で 2 点間を表す（XOR は LCA が不要、和は LCA が要る）：https://yuukougun.github.io/kyopro-atlas/tree/tree-distance/#root-prefix
+    - `tree-distance#next-steps` LCA・直径・全方位木 DP へのつながり：https://yuukougun.github.io/kyopro-atlas/tree/tree-distance/#next-steps
 
 ## 木の上の累積和・いもす法（tree-imos） {#tree-imos}
 
-- id：`tree-imos`　レベル：基礎　段階：stub　type：technique
+- id：`tree-imos`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-imos/
 - 別名：木上のいもす法、部分木加算、パス加算、木上の累積和、prefix sums on a tree
 - 種類：木、累積和・差分
@@ -101,7 +104,7 @@ search:
 
 ## 指定頂点を結ぶ最小の部分木（steiner-subtree） {#steiner-subtree}
 
-- id：`steiner-subtree`　レベル：基礎　段階：stub　type：technique
+- id：`steiner-subtree`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/steiner-subtree/
 - 別名：指定頂点を含む最小の部分木、必要な辺の数、木の上のシュタイナー木、Steiner tree on a tree
 - 種類：木
@@ -112,10 +115,11 @@ search:
     - `steiner-subtree#root-at-terminal` 指定頂点を根にして、部分木に指定頂点を含むかで判定する：https://yuukougun.github.io/kyopro-atlas/tree/steiner-subtree/#root-at-terminal
     - `steiner-subtree#prune-leaves` 指定されていない葉を削り続ける：https://yuukougun.github.io/kyopro-atlas/tree/steiner-subtree/#prune-leaves
     - `steiner-subtree#vs-graph` 一般のグラフのシュタイナー木は別物（グラフの章）：https://yuukougun.github.io/kyopro-atlas/tree/steiner-subtree/#vs-graph
+    - `steiner-subtree#next-steps` 上位の手法とのつながり：https://yuukougun.github.io/kyopro-atlas/tree/steiner-subtree/#next-steps
 
 ## 完全二分木（complete-binary-tree） {#complete-binary-tree}
 
-- id：`complete-binary-tree`　レベル：基礎　段階：stub　type：technique
+- id：`complete-binary-tree`　レベル：基礎　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/complete-binary-tree/
 - 別名：ヒープ番号、親は i/2、K 分木、heap numbering、perfect binary tree
 - 種類：木、ビット演算
@@ -129,10 +133,11 @@ search:
     - `complete-binary-tree#lca-by-index` 番号だけで LCA を求める（大きい方を 2 で割る）：https://yuukougun.github.io/kyopro-atlas/tree/complete-binary-tree/#lca-by-index
     - `complete-binary-tree#k-ary` K 分木への一般化：https://yuukougun.github.io/kyopro-atlas/tree/complete-binary-tree/#k-ary
     - `complete-binary-tree#count-at-distance` 距離 K の頂点の数（部分木の深さの範囲を N で切る）（青）：https://yuukougun.github.io/kyopro-atlas/tree/complete-binary-tree/#count-at-distance
+    - `complete-binary-tree#next-steps` 上位の手法とのつながり：https://yuukougun.github.io/kyopro-atlas/tree/complete-binary-tree/#next-steps
 
 ## 葉から考える（leaf-first） {#leaf-first}
 
-- id：`leaf-first`　レベル：水　段階：stub　type：technique
+- id：`leaf-first`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/leaf-first/
 - 別名：葉から貪欲、葉を刈る、次数 1 の頂点を削る、葉から決める貪欲、greedy from leaves
 - 種類：木、貪欲
@@ -142,9 +147,9 @@ search:
     - 言い回し：辺をすべて使う・すべて覆う
     - 言い回し：葉を消していく操作
 - 節：
+    - `leaf-first#why-greedy` 葉の唯一の辺を今使ってよい理由（交換論法）：https://yuukougun.github.io/kyopro-atlas/tree/leaf-first/#why-greedy
     - `leaf-first#peel-leaves` 次数 1 の頂点をキューで削る：https://yuukougun.github.io/kyopro-atlas/tree/leaf-first/#peel-leaves
     - `leaf-first#send-up` 帰りがけ順に葉から情報を上へ送る：https://yuukougun.github.io/kyopro-atlas/tree/leaf-first/#send-up
-    - `leaf-first#why-greedy` 葉の唯一の辺を今使ってよい理由（交換論法）：https://yuukougun.github.io/kyopro-atlas/tree/leaf-first/#why-greedy
     - `leaf-first#tree-matching` 木の最大マッチング（葉と親を組む）：https://yuukougun.github.io/kyopro-atlas/tree/leaf-first/#tree-matching
 
 ## 木の次数列と Prüfer 列（tree-degree） {#tree-degree}
@@ -204,7 +209,7 @@ search:
 
 ## 辺で切って数える（tree-edge-contribution） {#tree-edge-contribution}
 
-- id：`tree-edge-contribution`　レベル：水　段階：stub　type：technique
+- id：`tree-edge-contribution`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-edge-contribution/
 - 別名：辺の寄与、木の主客転倒、全点対の距離の和、全ペアのパスの寄与、contribution of edges
 - 種類：木、考察
@@ -221,7 +226,7 @@ search:
 
 ## 木の構築・復元（tree-construction） {#tree-construction}
 
-- id：`tree-construction`　レベル：水　段階：stub　type：technique
+- id：`tree-construction`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-construction/
 - 別名：木の構築、木の復元、距離の表から木、訪問順から木、tree construction
 - 種類：木、考察
@@ -382,7 +387,7 @@ search:
 
 ## マージテク（small-to-large） {#small-to-large}
 
-- id：`small-to-large`　レベル：水　段階：stub　type：technique
+- id：`small-to-large`　レベル：水　段階：draft　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/small-to-large/
 - 別名：small-to-large、小さい方を大きい方へ移す、データ構造をマージする一般的なテク、weighted union heuristic、DSU on Tree、Sack
 - 種類：データ構造、木
@@ -396,6 +401,7 @@ search:
     - `small-to-large#why-log` 要素が移るのは高々 log N 回の理由：https://yuukougun.github.io/kyopro-atlas/tree/small-to-large/#why-log
     - `small-to-large#swap` swap で入れ替える・大きい方を代表に残す：https://yuukougun.github.io/kyopro-atlas/tree/small-to-large/#swap
     - `small-to-large#map-on-root` Union-Find の代表元に map を持たせる：https://yuukougun.github.io/kyopro-atlas/tree/small-to-large/#map-on-root
+    - `small-to-large#relabel-smaller` 小さい方の要素だけを書き換える（ずれ・クエリの集合）：https://yuukougun.github.io/kyopro-atlas/tree/small-to-large/#relabel-smaller
     - `small-to-large#reroot-smaller` 森に辺を足すとき小さい方を根付け直す（黄）：https://yuukougun.github.io/kyopro-atlas/tree/small-to-large/#reroot-smaller
     - `small-to-large#subtree-merge` 部分木ごとの集合の併合（木 DP での使い方は DP の章）（黄）：https://yuukougun.github.io/kyopro-atlas/tree/small-to-large/#subtree-merge
     - `small-to-large#dsu-on-tree` DSU on Tree（重い子の結果を残す）（黄）：https://yuukougun.github.io/kyopro-atlas/tree/small-to-large/#dsu-on-tree

@@ -23,7 +23,7 @@ sections:
   - {title: modint の読み方：using mint = modint998244353; で法が自動で取られる, anchor: modint}
   - {title: 'modint の値と出力：.val() を出す、v1.6 で val() は int、< はない', anchor: modint-val}
   - {title: 'segtree<S, op, e> の読み方：S は要素の型、op は結合的な演算、e は単位元を返す関数', anchor: segtree-args, level: 水}
-  - {title: 関数の渡し方：関数の名前か、キャプチャのないラムダ（C++20・ACL v1.5〜）, anchor: passing-functions, level: 水}
+  - {title: 関数の渡し方：関数の名前か、キャプチャのないラムダ（C++20）, anchor: passing-functions, level: 水}
   - {title: キャプチャのあるラムダは op・e に渡せない（max_right・min_left の判定関数には渡せる）, anchor: capturing-lambda, level: 水}
   - {title: 'lazy_segtree の 7 つの引数：composition(f, g) は g の後に f', anchor: lazy-segtree-args, level: 水}
   - {title: 'テンプレート引数の形が合わないときの static_assert（mapping must work as S(F, S) など）', anchor: template-arg-errors, level: 水}
@@ -86,13 +86,13 @@ ACL の部品のコンストラクタは、modint 以外すべて `explicit` が
 
 ## 版：AtCoder は v1.6、v1.5 との違いは modint::val() の型など {#version}
 
-AtCoder の提出環境（2025-10 の言語アップデート以降）の ACL は v1.6（2025-05 公開）である。v1.5 との違いは次のとおりで、手元で 2 つの版のソースを比べて確かめた。
+AtCoder の提出環境（2025-10 の言語アップデート以降）の ACL は v1.6（2025-05 公開）である。v1.5 とのおもな違いは次のとおりで、手元で 2 つの版のソースを比べて確かめた。
 
 - `modint::val()` の戻り値が `unsigned int` から `int` になった。互換性のない唯一の変更で、[modint の値と出力](#modint-val)で扱う
 - `lazy_segtree` の `static_assert` のメッセージの誤記が直った（v1.5 は `mapping must work as F(F, S)` と誤って出す。正しくは `S(F, S)`）
-- `lcp_array` に `assert` が足され、`dsu::leader` の `assert` の重複が減った。使い方は変わらない
+- `lcp_array` に `assert` が足され、`dsu::leader` の `assert` の重複が減った。ほかに `convolution` の内部の修正と `expander.py` の改良がある。どれも使い方は変わらない
 
-segtree・lazy_segtree が関数の名前に加えてラムダなども受け取るようになったのは v1.5（2023-04）からで、それより前の版ではラムダを直接渡せない（[関数の渡し方](#passing-functions)）。
+v1.5（2023-04）から、segtree・lazy_segtree は `S op(const S& a, const S& b)` のように `S(S, S)` として呼べる物を広く受け取るようになった。それより前の版は関数ポインタ `S (*)(S, S)` で受け取るので、型がちょうど `S(S, S)` の関数か、それに変換できるキャプチャのないラムダ（C++20）に限る（[関数の渡し方](#passing-functions)）。
 
 - **手元を合わせる**：手元の ACL が v1.5 以前だと、`x.val() - 1` の結果や `max(x.val(), 0)` の可否が AtCoder と食い違う。手元も v1.6 にそろえる。古い版を入れているかは、`atcoder/modint.hpp` の `val()` の型で見分けられる
 - **他のジャッジ**：AtCoder 以外に提出するときは、ACL の `expander.py` で 1 ファイルにまとめる（[バンドル](../cpp/cpp-macros-template-file.md#bundling)）
@@ -111,10 +111,10 @@ segtree・lazy_segtree が関数の名前に加えてラムダなども受け取
 | `fenwick_tree<T>` | `fenwick_tree<long long> fw(n);` | `add(p, x)` は一点加算、`sum(l, r)` は半開区間 | [BIT](../ds/fenwick-tree.md) |
 | `scc_graph` | `scc_graph g(n);` | `scc()` の成分はトポロジカル順 | [強連結成分分解](../graph/scc.md) |
 | `two_sat` | `two_sat ts(n);` | `add_clause(i, f, j, g)` は「$x_i = f$ または $x_j = g$」 | [2-SAT](../graph/two-sat.md) |
-| `mf_graph<Cap>` | `mf_graph<long long> g(n);` | `flow(s, t)` は流した量を返し、グラフに残る | [最大流](../graph/max-flow.md) |
+| `mf_graph<Cap>` | `mf_graph<long long> g(n);` | `flow(s, t)` は流した量を返す。流した状態はグラフに残り、`edges()` で辺ごとの流量を読める | [最大流](../graph/max-flow.md) |
 | `mcf_graph<Cap, Cost>` | `mcf_graph<int, long long> g(n);` | `flow(s, t, 上限)` は `{流量, 費用}` の組 | [最小費用流](../graph/min-cost-flow.md) |
 | `convolution` | `convolution(a, b)` | 既定の法は 998244353。法なしの整数は `convolution_ll` | [畳み込みの使い方](../math/convolution-ntt.md) |
-| `suffix_array`・`lcp_array` | `suffix_array(s)` | 開始位置の列を返す | [Suffix Array](../string/suffix-array.md) |
+| `suffix_array`・`lcp_array` | `suffix_array(s)`・`lcp_array(s, sa)` | sa は接尾辞を辞書順に並べた開始位置の列、lcp は隣どうしの最長共通接頭辞の長さ（長さ $N - 1$） | [Suffix Array](../string/suffix-array.md) |
 | `z_algorithm` | `z_algorithm(s)` | `z[0]` は $\lvert S \rvert$ | [Z-algorithm](../string/z-algorithm.md) |
 | `floor_sum` | `floor_sum(n, m, a, b)` | $\sum_{i=0}^{n-1} \lfloor (ai + b) / m \rfloor$ | [floor sum](../math/floor-sum.md) |
 | `crt` | `crt(r, m)` | 解がなければ `{0, 0}` を返す | [中国剰余定理](../math/crt.md) |
@@ -150,12 +150,12 @@ segtree・lazy_segtree が関数の名前に加えてラムダなども受け取
 
 - `vector<mint> dp(n + 1);` の要素は 0 で始まる
 - `mint(-1)` は 998244352 に直されるので、引き算で負になる心配がない
-- `/` は逆元を掛ける。法が素数で、割る数が法の倍数でないときだけ使える（0 で割ると `assert` で止まる）
+- `/` は逆元を掛ける。割る数が法と互いに素のときだけ使える（法が 998244353 のような素数なら、法の倍数でなければよい）。そうでなければ `assert` で止まる
 - `modint1000000007` は法が $10^9 + 7$ の型である。法を自分で決めるときは `static_modint<M>`（コンパイル時に決まる法）か `modint`（実行時に `modint::set_mod(m)` で決める法）を使う。使い分けと、割り算の条件は [modint](../math/modint.md) にある
 
 ## modint の値と出力：.val() を出す、v1.6 で val() は int、< はない {#modint-val}
 
-`mint` は `cout <<` でも `println` でも出力できない。どちらもコンパイルエラーになる。整数の値は `.val()` で取り出して出力する。
+`mint` は `cout <<` でも `println` でも出力できない。どちらもコンパイルエラーになる。整数の値は `.val()` で取り出して出力する（[そのままでは出力できない型](../cpp/cpp-io.md#unprintable-types)）。
 
 ```cpp
 --8<-- "acl-reading/modint-cout-ng.cpp:core"
@@ -174,7 +174,7 @@ segtree・lazy_segtree が関数の名前に加えてラムダなども受け取
 --8<-- "acl-reading/modint-sort-ng.cpp:core"
 ```
 
-並べる必要があるなら、`val()` の値で比べる。ただし並ぶのは余りの大小で、元の整数の大小ではない（`mint(-1)` は最後に来る）。
+並べる必要があるなら、`val()` の値で比べる。`ranges::sort` の第 3 引数は、比べる値を要素から取り出す関数である（[射影](../cpp/cpp-algorithms.md#projection)）。ただし並ぶのは余りの大小で、元の整数の大小ではない（`mint(-1)` は最後に来る）。
 
 ```cpp
 --8<-- "acl-reading/modint-sort-ok.cpp:core"
@@ -197,6 +197,8 @@ segtree・lazy_segtree が関数の名前に加えてラムダなども受け取
 
 ```cpp
 --8<-- "acl-reading/segtree-args.cpp:core"
+
+--8<-- "acl-reading/segtree-args.cpp:use"
 ```
 
 - **e の選び方**：区間 min なら `INT_MAX`（大きい方の端）、区間 max なら小さい方の端、区間和なら 0 である。`e()` は空区間の `prod(l, l)` の答えにもなり、`segtree<…> seg(n);` で作ったときの全要素の初期値にもなる
@@ -206,28 +208,28 @@ segtree・lazy_segtree が関数の名前に加えてラムダなども受け取
 ??? question "確認問題：区間 max の `segtree<int, op, e>` で、要素がすべて 0 以上なら `e()` は何を返せばよいか？"
     0 以下の値なら何でもよく、要素の範囲で最小の 0 や `INT_MIN` を返す。`op(e(), x) = max(e(), x) = x` がすべての要素 $x$ で成り立てばよい。1 以上の値を返すと、空区間や `seg(n)` で作った初期値が要素より大きくなり、答えが狂う。
 
-## 関数の渡し方：関数の名前か、キャプチャのないラムダ（C++20・ACL v1.5〜） {#passing-functions}
+## 関数の渡し方：関数の名前か、キャプチャのないラムダ（C++20） {#passing-functions}
 
 `op` と `e` の渡し方は 2 通りある。ACL のドキュメントと多くの解説コードは、関数を定義してその名前を渡す（[segtree の読み方](#segtree-args)のコード）。
 
-C++20 からは、キャプチャのない[ラムダ式](../cpp/cpp-lambda.md)をテンプレート引数に直接書ける。ACL も v1.5 から、関数の名前に限らず呼び出せる物を受け取る。次の 1 行は、名前を渡す形の区間 min と同じ意味である。
+C++20 からは、キャプチャのない[ラムダ式](../cpp/cpp-lambda.md)をテンプレート引数に直接書ける。ACL のどの版でも、`S(S, S)` の形のキャプチャのないラムダは渡せる。v1.5 からは `const S&` を受け取る形なども受け取る。次の 1 行は、名前を渡す形の区間 min と同じ意味である。
 
 ```cpp
 --8<-- "acl-reading/segtree-lambda.cpp:core"
 ```
 
-ラムダに名前を付けてから渡してもよい。名前空間の変数にするなら `constexpr` を付けておく（テンプレート引数はコンパイル時に決まる値でなければならないため）。
+ラムダに名前を付けてから渡してもよい。`constexpr` を付けておくと、コンパイル時に使う値だと分かりやすい。キャプチャのないラムダは付けなくても通る。通らないのはキャプチャのあるラムダで、[次の節](#capturing-lambda)のとおりである。
 
 ```cpp
 --8<-- "acl-reading/segtree-lambda.cpp:named"
 ```
 
-- **版**：ラムダを直接書く形は C++20 から。`-std=gnu++17` では g++-13・g++-15 とも `lambda-expression in template-argument only available with '-std=c++20'` でエラーになる。AtCoder の `-std=gnu++23` では使える。ACL v1.4 以前は関数の名前しか受け取らない
+- **版**：ラムダを直接書く形は C++20 から。`-std=gnu++17` では g++-13・g++-15 とも `lambda-expression in template-argument only available with '-std=c++20'` でエラーになる。AtCoder の `-std=gnu++23` では使える。ACL v1.4 以前は関数ポインタ `S (*)(S, S)` で受け取るので、`[](const int& x, const int& y) { … }` のように引数の型が違うラムダはエラーになる
 - **読み方**：`segtree<int, [](int x, int y) { return min(x, y); }, [] { return INT_MAX; }>` は長いが、カンマで 3 つに分ければ `S`・`op`・`e` の順である。`[] { … }` は引数のないラムダ（`e`）である
 
 ## キャプチャのあるラムダは op・e に渡せない（max_right・min_left の判定関数には渡せる） {#capturing-lambda}
 
-`op` と `e` はテンプレート引数なので、コンパイル時に中身が決まっている必要がある。外の変数をキャプチャするラムダは、実行時の値を抱えた物なので渡せない。
+`op` と `e` はテンプレート引数なので、コンパイル時に中身が決まっている必要がある。外の変数をキャプチャするラムダは、実行時の値を抱えた物なので渡せない（理由は[ラムダ式の節](../cpp/cpp-lambda.md#template-argument)にもある）。
 
 ```cpp
 --8<-- "acl-reading/capturing-ng.cpp:core"
@@ -272,6 +274,8 @@ g++-13・g++-15 とも `error: '<lambda closure object>main()::<lambda(int, int)
 
 ```cpp
 --8<-- "acl-reading/lazy-args.cpp:core"
+
+--8<-- "acl-reading/lazy-args.cpp:use"
 ```
 
 - **葉の長さ**：`vector<S>(n, {0, 1})` から作る。`lazy_segtree<…> seg(n);` は全要素を `e()`（長さ 0）で作るので、区間加算をしても和が増えない

@@ -1,0 +1,18 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 頂点 1 つ
+  - {input: "1\n0\n", output: "Yes\n"}
+  # 頂点 2 つ
+  - {input: "2\n0 5\n5 0\n", output: "Yes\n"}
+  # 星（中心 0、重み 1・2・3）
+  - {input: "4\n0 1 2 3\n1 0 3 4\n2 3 0 5\n3 4 5 0\n", output: "Yes\n"}
+  # 三角形の距離 1・1・1 は木で実現できない（作った木では 2 になる）
+  - {input: "3\n0 1 1\n1 0 1\n1 1 0\n", output: "No\n"}
+  # パス 0-1-2-3（重み 2・1・4）、同じ距離の組を含む
+  - {input: "4\n0 2 3 7\n2 0 1 5\n3 1 0 4\n7 5 4 0\n", output: "Yes\n"}
+  # 対称でない表
+  - {input: "2\n0 3\n4 0\n", output: "No\n"}
+  # 大きな重み（long long が要る）
+  - {input: "3\n0 1000000000000 2000000000000\n1000000000000 0 1000000000000\n2000000000000 1000000000000 0\n", output: "Yes\n"}

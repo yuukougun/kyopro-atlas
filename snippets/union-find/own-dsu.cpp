@@ -18,7 +18,7 @@ struct UnionFind {
         int x = find(a), y = find(b);  // 必ず根どうしをつなぐ
         if (x == y) return false;
         if (-par[x] < -par[y]) swap(x, y);  // x を大きい方にする
-        par[x] += par[y];  // サイズを足す（どちらも負の数）
+        par[x] += par[y];  // 大きさを足す（どちらも負の数）
         par[y] = x;        // 小さい方の根を大きい方の根の下へ
         return true;
     }

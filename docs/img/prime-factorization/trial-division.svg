@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 270" font-family="sans-serif" font-size="15">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 270" font-family="sans-serif" font-size="15">
 <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#333"/></marker></defs>
 <rect width="100%" height="100%" fill="#ffffff"/>
 <text x="20" y="30" fill="#222">試し割り：i = 2, 3, … の順に、n を割れるだけ割る（i² &gt; n になったら止める）</text>
@@ -6,36 +6,32 @@
 <text x="59.0" y="108" text-anchor="middle" fill="#222" font-size="17">360</text>
 <line x1="100" y1="102" x2="126" y2="102" stroke="#333" stroke-width="1.5" marker-end="url(#ar)"/>
 <text x="113.0" y="70" text-anchor="middle" fill="#222" font-size="14">÷2</text>
-<text x="113.0" y="146" text-anchor="middle" fill="#555" font-size="12">i = 2</text>
+<text x="113.0" y="146" text-anchor="middle" fill="#555" font-size="14">i = 2</text>
 <rect x="128" y="80" width="78" height="44" rx="6" fill="#dbe8fb" stroke="#1f4e9a" stroke-width="2"/>
 <text x="167.0" y="108" text-anchor="middle" fill="#222" font-size="17">180</text>
 <line x1="208" y1="102" x2="234" y2="102" stroke="#333" stroke-width="1.5" marker-end="url(#ar)"/>
 <text x="221.0" y="70" text-anchor="middle" fill="#222" font-size="14">÷2</text>
-<text x="221.0" y="146" text-anchor="middle" fill="#555" font-size="12">i = 2</text>
+<text x="221.0" y="146" text-anchor="middle" fill="#555" font-size="14">i = 2</text>
 <rect x="236" y="80" width="78" height="44" rx="6" fill="#dbe8fb" stroke="#1f4e9a" stroke-width="2"/>
 <text x="275.0" y="108" text-anchor="middle" fill="#222" font-size="17">90</text>
 <line x1="316" y1="102" x2="342" y2="102" stroke="#333" stroke-width="1.5" marker-end="url(#ar)"/>
 <text x="329.0" y="70" text-anchor="middle" fill="#222" font-size="14">÷2</text>
-<text x="329.0" y="146" text-anchor="middle" fill="#555" font-size="12">i = 2</text>
+<text x="329.0" y="146" text-anchor="middle" fill="#555" font-size="14">i = 2</text>
 <rect x="344" y="80" width="78" height="44" rx="6" fill="#dbe8fb" stroke="#1f4e9a" stroke-width="2"/>
 <text x="383.0" y="108" text-anchor="middle" fill="#222" font-size="17">45</text>
 <line x1="424" y1="102" x2="450" y2="102" stroke="#333" stroke-width="1.5" marker-end="url(#ar)"/>
 <text x="437.0" y="70" text-anchor="middle" fill="#222" font-size="14">÷3</text>
-<text x="437.0" y="146" text-anchor="middle" fill="#555" font-size="12">i = 3</text>
+<text x="437.0" y="146" text-anchor="middle" fill="#555" font-size="14">i = 3</text>
 <rect x="452" y="80" width="78" height="44" rx="6" fill="#dbe8fb" stroke="#1f4e9a" stroke-width="2"/>
 <text x="491.0" y="108" text-anchor="middle" fill="#222" font-size="17">15</text>
 <line x1="532" y1="102" x2="558" y2="102" stroke="#333" stroke-width="1.5" marker-end="url(#ar)"/>
 <text x="545.0" y="70" text-anchor="middle" fill="#222" font-size="14">÷3</text>
-<text x="545.0" y="146" text-anchor="middle" fill="#555" font-size="12">i = 3</text>
+<text x="545.0" y="146" text-anchor="middle" fill="#555" font-size="14">i = 3</text>
 <rect x="560" y="80" width="78" height="44" rx="6" fill="#fbe9d9" stroke="#9a4a1f" stroke-width="2"/>
 <text x="599.0" y="108" text-anchor="middle" fill="#222" font-size="17">5</text>
-<line x1="640" y1="102" x2="666" y2="102" stroke="#333" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ar)"/>
-<text x="653.0" y="70" text-anchor="middle" fill="#222" font-size="14">÷5</text>
-<text x="653.0" y="146" text-anchor="middle" fill="#555" font-size="12">残り</text>
-<rect x="668" y="80" width="78" height="44" rx="6" fill="#f4f4f4" stroke="#888" stroke-width="2" stroke-dasharray="5 4"/>
-<text x="707.0" y="108" text-anchor="middle" fill="#222" font-size="17">1</text>
-<text x="599.0" y="170" text-anchor="middle" fill="#9a4a1f" font-size="13">i = 4 で 4² = 16 &gt; 5</text>
-<text x="599.0" y="188" text-anchor="middle" fill="#9a4a1f" font-size="13">なので止める</text>
+<text x="599.0" y="146" text-anchor="middle" fill="#9a4a1f" font-size="14">残り（素数）</text>
+<text x="599.0" y="172" text-anchor="middle" fill="#9a4a1f" font-size="13">i = 4 で 4² = 16 &gt; 5</text>
+<text x="599.0" y="190" text-anchor="middle" fill="#9a4a1f" font-size="13">なので止める</text>
 <text x="20" y="225" fill="#222">止めた時点の残り 5 は 1 より大きいので、素数として加える</text>
 <text x="20" y="252" fill="#222" font-weight="bold">360 = 2³ × 3² × 5</text>
 </svg>

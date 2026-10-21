@@ -20,7 +20,9 @@ long long mod_pow(long long a, long long n, long long m) {
 long long inv_fermat(long long a, long long p) {
     return mod_pow(a, p - 2, p);
 }
+// --8<-- [end:core]
 
+// --8<-- [start:extgcd]
 // 一般の m（m >= 1）。gcd(a, m) != 1 なら逆元はないので -1 を返す
 long long inv_extgcd(long long a, long long m) {
     a = (a % m + m) % m;            // 負の a も 0 以上に直す
@@ -34,7 +36,7 @@ long long inv_extgcd(long long a, long long m) {
     if (r0 != 1) return -1;          // r0 = gcd(a, m)
     return (x0 % m + m) % m;
 }
-// --8<-- [end:core]
+// --8<-- [end:extgcd]
 
 bool is_prime(long long n) {
     if (n < 2) return false;

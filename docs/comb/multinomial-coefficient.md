@@ -11,7 +11,7 @@ kind: [数え上げ]
 prerequisites: [binomial-precompute]
 related: [stars-and-bars, counting-dedup, permutation-parity, cayley-pruefer, insertion-dp]
 summary: 種類ごとの個数が a_1, …, a_m の並べ方は (Σa_i)!/(a_1! … a_m!) 通りで、全部を区別した並べ方を同じ種類の入れ替えで割って得る。大きさを指定したグループ分けも同じ式で数える。
-complexity: 階乗・逆階乗の前計算 O(N + log p) のあと 1 回 O(m)（m は種類数）。個数を決めながら合流する DP は O(N^2)（N は全体の個数）
+complexity: 階乗・逆階乗の前計算 O(N + log p) のあと 1 回 O(m)（m は種類数）。個数を決めながら合流する DP は O(N^2 + mN)（N は全体の個数。m ≤ N なら O(N^2)）
 signs:
   - {type: phrase, text: 文字を並べ替えてできる文字列の個数}
   - {type: phrase, text: 各種類を使う個数が決まっている並べ方}
@@ -35,7 +35,7 @@ updated: 2026-10-21
         - 文字を並べ替えてできる文字列の個数を求める。
         - 各種類を使う個数が決まっている並べ方を数える。
         - 大きさを指定してグループに分ける方法の数を求める。
-    - **計算量**：階乗・逆階乗を $O(N + \log p)$ で前計算すれば 1 回 $O(m)$（$N$ は全体の個数、$m$ は種類数）。各種類の個数を決めながら合流する DP は $O(N^2)$。
+    - **計算量**：階乗・逆階乗を $O(N + \log p)$ で前計算すれば 1 回 $O(m)$（$N$ は全体の個数、$m$ は種類数）。各種類の個数を決めながら合流する DP は $O(N^2 + mN)$（$m \le N$ なら $O(N^2)$）。
     - **前提**：[二項係数の前計算](../comb/binomial-precompute.md)
 
 <!-- textlint-disable -->
@@ -71,8 +71,6 @@ mod $p$ では $\mathrm{fact}[n] \cdot \mathrm{ifact}[a_1] \cdots \mathrm{ifact}
 ```cpp
 --8<-- "multinomial-coefficient/reorder.cpp:core"
 ```
-
-上のコードの `count_strings` は[合流の節](#dp-merge)で使う。
 
 ??? question "確認問題：MISSISSIPPI"
     MISSISSIPPI の 11 文字を並べ替えてできる文字列は何通りか。
@@ -113,7 +111,11 @@ $$
 
 長さ 3 の 3 通りは AAB・ABA・BAA で、[式の意味の節](#meaning)の例と一致する。
 
-計算量は、種類 $j$ の段で $(\text{それまでの長さの最大} + 1) \times (c_j + 1)$ なので、合計で $O(N^2)$（$N = \sum c_j$）である。コードは[式の意味の節](#meaning)の `count_strings` で、空でない列の個数を返す。
+計算量は、種類 $j$ の段で $(\text{それまでの長さの最大} + 1) \times (c_j + 1)$ なので、合計で $O(N^2 + mN)$（$N = \sum c_j$、$m$ は種類数）である。$m \le N$ なら $O(N^2)$ で、個数 0 の種類を飛ばしてもよい。次の `count_strings` は、空でない列の個数を返す。
+
+```cpp
+--8<-- "multinomial-coefficient/reorder.cpp:merge"
+```
 
 この DP は、各種類の $\sum_{k} \frac{x^k}{k!}$ を掛け合わせた多項式の $x^\ell$ の係数に $\ell!$ を掛ける計算と同じである。$N$ が大きいときは、この積を畳み込みで速く求める（[母関数による数え上げ](../comb/generating-function-counting.md)）。
 
@@ -152,6 +154,7 @@ $$
 
 - **状態**：$\mathrm{dp}[s][i]$ ＝ 大きさ $s$ 未満のグループだけで $i$ 人を分け終えた方法の数
 - **遷移**：大きさ $s$ のグループを $k$ 個作るなら、まだ分けていない $n - i$ 人から $sk$ 人を選び、名前のない $k$ 個のグループに分ける。$\mathrm{dp}[s + 1][i + sk] \mathrel{+}= \mathrm{dp}[s][i] \cdot \binom{n - i}{sk} \cdot \dfrac{(sk)!}{(s!)^k \, k!}$
+- **初期値と答え**：$\mathrm{dp}[1][0] = 1$。答えは $\mathrm{dp}[n + 1][n]$（大きさに制限があれば、その範囲の $s$ だけで遷移する）
 - **計算量**：大きさ $s$ では $k \le n / s$ なので、遷移の数は $\sum_s n \cdot \frac{n}{s} = O(n^2 \log n)$（調和級数）
 
 大きさの小さい順に決めるので、同じ分け方を 2 回数えることはない。どの大きさのグループを何個作るかが決まれば、分け方は上の式のとおり一意に数えられる。$(s!)^k$ の逆元は $\mathrm{ifact}[s]$ の $k$ 乗で、$k$ を 1 つずつ増やしながら掛けていけば毎回累乗を計算しなくて済む。
@@ -199,7 +202,8 @@ $$
     - $c_j$ を S の中の $j$ 番目の文字の個数とする。$\mathrm{dp}[\ell]$ ＝ これまでの文字だけで作る長さ $\ell$ の文字列の個数とし、$\mathrm{dp}[0] = 1$ から始める。
     - 文字を 1 種類ずつ足す。その文字を $k$ 個（$0 \le k \le c_j$）使うなら $\mathrm{dp}'[\ell + k] \mathrel{+}= \mathrm{dp}[\ell] \cdot \binom{\ell + k}{k}$。
     - 26 文字を足し終えたら、$\ell \ge 1$ の $\mathrm{dp}[\ell]$ の和が答えである（空文字列を除く）。
-    - 計算量は $O(\lvert S \rvert^2)$。二項係数は前計算した階乗で $O(1)$ に求める。コードは[式の意味の節](#meaning)の `count_strings` と同じ形である。
+    - 計算量は $O(\lvert S \rvert^2)$。二項係数は前計算した階乗で $O(1)$ に求める。コードは[合流の節](#dp-merge)の `count_strings` と同じ形である。
+    - 各文字の $\sum_{k \le c_j} \frac{x^k}{k!}$ を掛け合わせ、$x^\ell$ の係数に $\ell!$ を掛けても同じ値になる（参考の記事はこの形で数えている）。
 
 ## 練習問題 {#practice}
 
@@ -211,7 +215,7 @@ $$
 </div>
 
 ??? note "練習の方針"
-    - **ABC470 F**：swap できる位置の組を辺としたグラフの連結成分ごとに、文字を自由に並べ替えられる。並べ方の総数は、成分ごとの多項係数の積である。ただし swap の回数が決まっているので、置換の偶奇が片方に限られる。どこかの成分に同じ文字が 2 個以上あれば、その 2 つの swap で偶奇を調整できる。このときは総数のままで、なければ半分になる（[置換の偶奇](../comb/permutation-parity.md)）
+    - **ABC470 F**：swap できる位置の組を辺としたグラフの連結成分ごとに、文字を自由に並べ替えられる。並べ方の総数は、成分ごとの多項係数の積である。ただし swap の回数が決まっているので、置換の偶奇が片方に限られる。どこかの成分に同じ文字が 2 個以上あれば、その 2 つの swap で偶奇を調整できる。このときは総数のままである。なければ半分になる。辺は 1 本以上あるので大きさ 2 以上の成分が必ずあり、偶奇の両方が同数ずつ現れる（[置換の偶奇](../comb/permutation-parity.md)）
     - **ABC266 G**：G と B を先に並べ（$\binom{G + B}{G}$ 通り）、RG を作る $K$ 個の G を選んで直前に R を置く。残りの $R - K$ 個の R は、新しい RG を作らない隙間（B の直前・末尾・置いた R の直前の $K + B + 1$ か所）に重複組合せで配る
 
 ## 力試し {#challenge}

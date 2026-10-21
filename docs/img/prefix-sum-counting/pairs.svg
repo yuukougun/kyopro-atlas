@@ -1,6 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 345" width="640" height="345" font-family="sans-serif" font-size="15">
-<rect x="0" y="0" width="640" height="345" fill="#ffffff"/>
-<text x="20" y="28" font-size="14" fill="#222">A = (2, −1, 1, 2, −2)、K = 2。弧は S_r − S_l = 2 となる組 (l, r)＝和が 2 の区間 [l, r)</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 36 640 309" width="640" height="309" font-family="sans-serif" font-size="15">
+<rect x="0" y="36" width="640" height="309" fill="#ffffff"/>
 <text x="20" y="77" fill="#222">a</text>
 <rect x="72" y="55" width="80" height="34" fill="#f2f2f2" stroke="#555"/>
 <text x="112" y="77" text-anchor="middle" fill="#222">2</text>
@@ -42,16 +41,16 @@
 <circle cx="580" cy="142" r="17" fill="#ffffff" stroke="#333" stroke-width="1"/>
 <text x="580" y="147" text-anchor="middle" fill="#222">2</text>
 <text x="580" y="122" text-anchor="middle" font-size="12" fill="#666">S5</text>
-<path d="M 60 162 Q 112.0 238 164 162" fill="none" stroke="#b45309" stroke-width="2" stroke-dasharray="7 5"/>
-<text x="112.0" y="216" text-anchor="middle" font-size="12" fill="#b45309">[0, 1)</text>
-<path d="M 372 162 Q 424.0 238 476 162" fill="none" stroke="#1d4ed8" stroke-width="2"/>
-<text x="424.0" y="216" text-anchor="middle" font-size="12" fill="#1d4ed8">[3, 4)</text>
-<path d="M 60 162 Q 216.0 310 372 162" fill="none" stroke="#b45309" stroke-width="2" stroke-dasharray="7 5"/>
-<text x="208.0" y="252" text-anchor="middle" font-size="12" fill="#b45309">[0, 3)</text>
-<path d="M 164 162 Q 320.0 310 476 162" fill="none" stroke="#1d4ed8" stroke-width="2"/>
-<text x="328.0" y="252" text-anchor="middle" font-size="12" fill="#1d4ed8">[1, 4)</text>
-<path d="M 60 162 Q 320.0 382 580 162" fill="none" stroke="#b45309" stroke-width="2" stroke-dasharray="7 5"/>
-<text x="320.0" y="288" text-anchor="middle" font-size="12" fill="#b45309">[0, 5)</text>
-<line x1="40" y1="312" x2="80" y2="312" stroke="#b45309" stroke-width="2" stroke-dasharray="7 5"/><text x="88" y="317" font-size="13" fill="#222">S0 から出る組（3 個）：S0 = 0 を入れないと数え落とす</text>
-<line x1="40" y1="334" x2="80" y2="334" stroke="#1d4ed8" stroke-width="2"/><text x="88" y="339" font-size="13" fill="#222">そのほか（2 個）</text>
+<path d="M 60 162 Q 112.0 218 164 162" fill="none" stroke="#b45309" stroke-width="2" stroke-dasharray="7 5"/>
+<text x="112.0" y="185" text-anchor="middle" font-size="14" font-weight="bold" fill="#b45309" paint-order="stroke" stroke="#fff" stroke-width="4" stroke-linejoin="round">[0, 1)</text>
+<path d="M 372 162 Q 424.0 218 476 162" fill="none" stroke="#1d4ed8" stroke-width="2"/>
+<text x="424.0" y="185" text-anchor="middle" font-size="14" font-weight="bold" fill="#1d4ed8" paint-order="stroke" stroke="#fff" stroke-width="4" stroke-linejoin="round">[3, 4)</text>
+<path d="M 60 162 Q 216.0 298 372 162" fill="none" stroke="#b45309" stroke-width="2" stroke-dasharray="7 5"/>
+<text x="216.0" y="225" text-anchor="middle" font-size="14" font-weight="bold" fill="#b45309" paint-order="stroke" stroke="#fff" stroke-width="4" stroke-linejoin="round">[0, 3)</text>
+<path d="M 164 162 Q 320.0 298 476 162" fill="none" stroke="#1d4ed8" stroke-width="2"/>
+<text x="320.0" y="225" text-anchor="middle" font-size="14" font-weight="bold" fill="#1d4ed8" paint-order="stroke" stroke="#fff" stroke-width="4" stroke-linejoin="round">[1, 4)</text>
+<path d="M 60 162 Q 320.0 378 580 162" fill="none" stroke="#b45309" stroke-width="2" stroke-dasharray="7 5"/>
+<text x="320.0" y="265" text-anchor="middle" font-size="14" font-weight="bold" fill="#b45309" paint-order="stroke" stroke="#fff" stroke-width="4" stroke-linejoin="round">[0, 5)</text>
+<line x1="40" y1="312" x2="80" y2="312" stroke="#b45309" stroke-width="2" stroke-dasharray="7 5"/><text x="88" y="317" font-size="14" fill="#222">S0 から出る組（3 個）：S0 = 0 を入れないと数え落とす</text>
+<line x1="40" y1="334" x2="80" y2="334" stroke="#1d4ed8" stroke-width="2"/><text x="88" y="339" font-size="14" fill="#222">そのほか（2 個）</text>
 </svg>

@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// --8<-- [start:core]
+// --8<-- [start:gcd]
 // a, b は 0 以上
 long long my_gcd(long long a, long long b) {
     while (b != 0) {
@@ -11,14 +11,16 @@ long long my_gcd(long long a, long long b) {
     }
     return a;  // gcd(a, 0) = a
 }
+// --8<-- [end:gcd]
 
+// --8<-- [start:lcm]
 // a, b は 1 以上。lcm(a, b) が limit を超えるなら -1 を返す
 long long lcm_capped(long long a, long long b, long long limit) {
     long long x = a / my_gcd(a, b);  // 先に割る
     if (x > limit / b) return -1;    // x * b > limit を、掛けずに判定する
     return x * b;
 }
-// --8<-- [end:core]
+// --8<-- [end:lcm]
 
 int main() {
     int n;

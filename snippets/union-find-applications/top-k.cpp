@@ -17,7 +17,7 @@ int main() {
     auto unite = [&](int a, int b) {
         int ra = d.leader(a), rb = d.leader(b);  // 併合の前に両方の根を取る
         if (ra == rb) return;                      // 同じ成分なら情報は変わらない
-        int r = d.merge(ra, rb);                   // 新しい根（大きい方の成分の根）
+        int r = d.merge(ra, rb);                   // 新しい根
         int c = (r == ra) ? rb : ra;               // 根でなくなった方
         vector<int> merged;
         merge(top[r].begin(), top[r].end(), top[c].begin(), top[c].end(),

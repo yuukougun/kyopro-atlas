@@ -49,7 +49,7 @@ updated: 2026-10-21
 
 迷路で「歩く移動は無料、壁を壊す移動は 1 回ごとに 1」のように無料の移動と有料の移動が混ざると、[幅優先探索](../graph/bfs.md)をそのまま使えない。BFS は「辺を 1 本たどるごとに距離が 1 増える」ことを前提に、最初に見つけた距離を確定させる。重み 0 の辺があると、辺の本数が多い経路の方が短いこともある。だから最初に見つけた距離が最短とは限らない。
 
-ダイクストラ法なら正しく求まるが、$O((N + M) \log N)$ かかる。グリッドでマスが $10^6$ 個、1 マスから出る辺が 25 本といった規模では、ヒープの log と定数倍が重くなる。01-BFS は重みが 0 と 1 だけという性質を使い、同じ答えを $O(N + M)$ で出す。
+ダイクストラ法なら正しく求まるが、$O((N + M) \log N)$ かかる。グリッドでマスが $10^6$ 個、1 マスから 5×5 の範囲へ辺が出るといった規模では、ヒープの log と定数倍が重くなる。01-BFS は重みが 0 と 1 だけという性質を使い、同じ答えを $O(N + M)$ で出す。
 
 ## deque の中の距離が 2 種類に保たれる理由 {#deque-invariant}
 
@@ -155,7 +155,7 @@ BFS では、頂点を初めて見つけたときに距離を書き込み、訪�
 
 ## 向きを状態に持つ（頂点数が 4 倍になる） {#direction-state}
 
-「曲がる回数の最小」「同じ向きに何マス進んでも 1 手と数える移動の手数」では、コストはマスだけでなく、直前に進んでいた向きでも決まる。そこで頂点を（行, 列, 向き）の組にする。上下左右なら頂点数はマスの数の 4 倍、つまり $4HW$ になる（状態を頂点にする考え方は[拡張ダイクストラ法](../graph/extended-dijkstra.md#parity-mod-direction)）。
+「曲がる回数の最小」「同じ向きに何マス進んでも 1 手と数える移動の手数」では、コストはマスだけでなく、直前に進んでいた向きでも決まる。そこで頂点を（行, 列, 向き）の組にする。上下左右なら頂点数はマスの数の 4 倍、つまり $4HW$ になる（状態を頂点にする考え方は[状態を頂点にする](../graph/extended-dijkstra.md#parity-mod-direction)の「偶奇・mod・向きを持つ」）。
 
 状態 $(i, j, d)$ からの辺は次の 2 種類である。
 
@@ -275,4 +275,5 @@ BFS では、頂点を初めて見つけたときに距離を書き込み、訪�
 - [oraclesqlpuzzle「ABC176-D Wizard in Maze」](https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc176-d.html)：例題の方針（歩く移動を重み 0、ワープを重み 1）
 - [E869120「競プロ典型 90 問 043 の想定解」](https://github.com/E869120/kyopro_educational_90/blob/main/sol/043.cpp)：向きを状態に持つ 01-BFS と、始点の 4 つの向きを距離 0 にする初期化
 - [hamayan「Stronger Takahashi [AtCoder Beginner Contest 213 E]」](https://blog.hamayanhamayan.com/entry/2021/08/09/010308)：練習の方針（パンチで届く範囲と、重み 1 の辺を余分に張ってもよい理由）
-- [hamayan「Bishop 2 [AtCoder Beginner Contest 246 E]」](https://blog.hamayanhamayan.com/entry/2022/04/03/015208)：練習の方針（向きを状態に持つ）と盤面の大きさ
+- [hamayan「Bishop 2 [AtCoder Beginner Contest 246 E]」](https://blog.hamayanhamayan.com/entry/2022/04/03/015208)：練習の方針（向きを状態に持つ）
+- [Wikipedia（英語）「Bucket queue」](https://en.wikipedia.org/wiki/Bucket_queue)：距離ごとのキュー（Dial の方法）と、$C + 1$ 個を使い回せる理由

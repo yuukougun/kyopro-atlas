@@ -133,7 +133,7 @@ atcoder: true
 
 - **素朴に書くと**：`for (int i = 0; i < n; i++) s[i + 1] = s[i] + a[i];` と同じである
 - **版**：`partial_sum`・`adjacent_difference` は C++98、`inclusive_scan` は C++17
-- **落とし穴**：`partial_sum` は、途中の和を入力の要素の型で持つ。出力先が `long long` でも、`a` が `int` なら和は `int` で計算される。手元で $2 \times 10^9$ を 2 つ並べた `int` の配列に使うと、2 つ目の和が $-294967296$ になった（符号付き整数のあふれなので[未定義動作](../cpp/cpp-integer-overflow.md#signed-overflow-ub)である）。初期値 `0LL` を渡せる `inclusive_scan` を使うか、素朴なループで書く
+- **落とし穴**：`partial_sum` は、途中の和を入力の要素の型で持つ。出力先が `long long` でも、`a` が `int` なら和は `int` で計算される。手元の g++-13・g++-15（`-O2`）で $2 \times 10^9$ を 2 つ並べた `int` の配列に使うと、2 つ目の和が $-294967296$ になった（符号付き整数のあふれなので[未定義動作](../cpp/cpp-integer-overflow.md#signed-overflow-ub)である）。初期値 `0LL` を渡せる `inclusive_scan` を使うか、素朴なループで書く
 
 ```cpp
 --8<-- "cpp-algorithms/partial-sum.cpp:ng"
@@ -168,7 +168,7 @@ atcoder: true
 --8<-- "cpp-algorithms/next-permutation.cpp:core"
 ```
 
-入力 `3 1 2` なら `2 6` と出る。ソートせずに `3 1 2` から始めると、それより辞書順で後ろの `3 1 2` と `3 2 1` の 2 通りしか見ない。入力 `1 2 2` なら `3 3` で、等しい要素を入れ替えただけの並びは 1 回しか出てこない。
+入力 `3 1 2` なら `2 6` と出る。ソートせずに `3 1 2` から始めると、`3 1 2` 自身と、辞書順でその次の `3 2 1` の 2 通りしか見ない。入力 `1 2 2` なら `3 3` で、等しい要素を入れ替えただけの並びは 1 回しか出てこない。
 
 - **素朴に書くと**：使った要素の印を持ちながら再帰で並びを作るのと同じである（[再帰による全列挙](../basics/recursive-enumeration.md)）。$N \le 8$〜$10$ 程度で使う（[順列全探索](../basics/bit-full-search.md#permutations)）
 - **版**：C++98 から。g++-13・g++-15 で使える
@@ -193,7 +193,7 @@ atcoder: true
 --8<-- "cpp-algorithms/min-ng.cpp:core"
 ```
 
-- **落とし穴 3**：`count` と `ranges::count` の戻り値は `ptrdiff_t`（64 bit の Linux では `long`）である。`int` の変数と `max` で比べると、同じ理由でコンパイルエラーになる。`(int)` で直すか、受ける変数を `long long` にする
+- **落とし穴 3**：`count` と `ranges::count` の戻り値は `ptrdiff_t`（64 bit の Linux では `long`）である。`int` の変数と `max` で比べると、同じ理由でコンパイルエラーになる。`max` に渡すなら `(int)ranges::count(v, 1)` のように型をそろえる。`best` を `long long` にしても `long` とは別の型なので、エラーのままである。代入するだけなら `long long c = count(…);` で受けてよい
 
 ```cpp
 --8<-- "cpp-algorithms/count-ng.cpp:core"
@@ -226,7 +226,7 @@ ranges 版のアルゴリズムは、`v.begin(), v.end()` の代わりにコン�
 --8<-- "cpp-algorithms/projection.cpp:core"
 ```
 
-入力が `alice 70`・`bob 90`・`carol 50` なら、`carol alice bob` の順に並び、最大は `bob` になる。`ranges::max(ps, {}, &P::score)` は score の値ではなく、score が最大の要素そのものを返す。
+入力が `alice 70`・`bob 90`・`carol 50` なら、`carol alice bob` の順に並び、最大は `bob` になる。`ranges::max(ps, {}, &P::score)` は score の値ではなく、score が最大の要素（のコピー）を返す。位置が要るなら `ranges::max_element(ps, {}, &P::score)` を使う。
 
 - **素朴に書くと**：`sort(ps.begin(), ps.end(), [](const P& x, const P& y) { return x.score < y.score; });` と同じである。比較を 2 引数のラムダ式で書く代わりに、「何で比べるか」だけを書ける
 - 射影にはメンバへのポインタ（`&P::score`・`&pair<int, int>::second`）のほか、1 引数のラムダ式も渡せる
@@ -273,7 +273,7 @@ C++23 で、`ranges::fold_left`（初期値から左に向かって畳み込む�
 
 ## 一時オブジェクトを渡すと戻り値が ranges::dangling になる（使うとコンパイルエラー） {#ranges-dangling}
 
-ranges 版に関数の戻り値などの[一時オブジェクト](../guide/glossary.md#temporary-object)を渡すと、イテレータを返す関数の戻り値は `ranges::dangling` という型になる。一時オブジェクトは文が終わると消えるので、その中を指すイテレータを使わせないための安全装置である。`*` で読もうとした時点でコンパイルエラーになる。
+ranges 版に、関数の戻り値の `vector` のような、要素を自分で持つコンテナの[一時オブジェクト](../guide/glossary.md#temporary-object)を渡すと、イテレータを返す関数の戻り値は `ranges::dangling` という型になる。一時オブジェクトは文が終わると消えるので、その中を指すイテレータを使わせないための安全装置である。`*` で読もうとした時点でコンパイルエラーになる。
 
 ```cpp
 --8<-- "cpp-algorithms/dangling-ng.cpp:core"

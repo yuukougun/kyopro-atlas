@@ -38,3 +38,8 @@
 - 「値が 10^9 なら double の誤差は 10^-7 程度」は 10^9 付近の隣の数との間隔（2^-23 ≈ 1.19×10^-7）からの見積もり。geometry-precision の double-precision 節と数値をそろえてほしい
 - 関連のページ（cpp-integer-overflow・cpp-initialization・cpp-math-functions・cpp-io・cpp-undefined-behavior・cpp-macros-template-file・geometry-precision）はまだ stub なので、節ではなくページへリンクした。draft になったら、たとえば cpp-integer-overflow#int-product・#edge-values、cpp-initialization#refill、geometry-precision#scale-to-integer・#eps、cpp-io#float-output へのリンクに変えるとよい
 - 使用量の目安：道具の呼び出し 約 30 回、Web 取得 6 回
+
+## 検証の指摘への対応（2026-10-21）
+
+- 直したもの：1（SVG の `<` を `&lt;` に。整形式を確かめた）・2（10 進とそれ以外のリテラルの型の規則を分け、literals.cpp に `0x80000000` の static_assert を追加）・3（「AtCoder と同じ GCC 15.2 の g++-15」と書く形に）・4・5・6・7・8・9・11（__int128 のラベルを棒の下へ移し、本文に __int128 への 1 文とリンクを追加）・12（リンクの文字を題名にそろえ、節へのリンクに。#cast と確認問題 1 問目から cpp-integer-overflow#int-product へ）
+- 採らなかったもの：10（幅 390px での文字の小ささ）。文字を大きくすると長いラベル（INF + INF の 2 本、下端の注記）が重なり、図の組み直しが要る。数値は本文の表にもあるので、今回は見送った。直すなら viewBox を幅 640 前後に詰め直す（メインの判断に任せる）

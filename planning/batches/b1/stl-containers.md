@@ -29,3 +29,9 @@
 
 - unordered_map が「AtCoder ではまれだが、入力を参加者が作れるコンテストでは狙われる」と書いた。AtCoder の after_contest のテストで狙われた実例は確かめていない（hash-safety の執筆時に合わせて確かめたい）
 - vector の伸長が 2 倍なのは libstdc++ の実装（規格は定めない）として書いた。g++-15 で容量が 1・2・4・…・128 と倍になることを一時置き場で確かめた（コード片は置いていない）
+
+## 検証の指摘への対応（2026-10-21）
+
+- 直した：指摘 2（「数倍から 10 倍ほど重い」）、3（`begin()` に `prev` を使うこと自体が未定義動作）、4（表に `multiset` の `erase(x)` の計算量）、5（`contains(x)` に C++20）、6（`greater<int>` の型を全部書き落とし穴へリンク、「キーの範囲が狭ければ配列」）、7（count-pairs.yaml に空の入力）
+- 採らなかった：指摘 1（sections から pitfalls を外し見出しを `## 落とし穴 {#pitfalls}` にする）は、front matter の行を消すのが執筆者の変更の範囲外のため、メインに委ねる。**提案**：sections から pitfalls の行を消し、見出しを `## 落とし穴 {#pitfalls}` にする（anchor は同じ）
+- 採らなかった：指摘 8（unordered_map の「AtCoder ではまれだが」）は、代わりの言い方も確かめられる根拠がないので今のまま残し、hash-safety の執筆時にそろえる

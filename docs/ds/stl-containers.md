@@ -55,7 +55,7 @@ STL コンテナの使い分けは、クエリで何度も行う操作を書き�
 | `deque` | 添字アクセス $O(1)$、両端の追加・削除 $O(1)$ | 途中への挿入と削除 $O(N)$ |
 | `stack`・`queue` | 端の追加・削除・参照 $O(1)$ | 端以外は見られない |
 | `priority_queue` | 追加・最大の取り出し $O(\log N)$、最大を見る $O(1)$ | 任意の要素の削除・検索、値の書き換え |
-| `set`・`multiset` | 追加・削除・検索・`lower_bound` $O(\log N)$、最小・最大 $O(1)$、小さい順の走査 | K 番目の取得、`multiset` の `count(x)` は $O(\log N + x \text{ の個数})$ |
+| `set`・`multiset` | 追加・削除・検索・`lower_bound` $O(\log N)$、最小・最大 $O(1)$、小さい順の走査 | K 番目の取得、`multiset` の `erase(x)`・`count(x)` は $O(\log N + x \text{ の個数})$ |
 | `map` | キーで追加・削除・検索・`lower_bound` $O(\log N)$、キーの小さい順の走査 | K 番目の取得 |
 | `unordered_set`・`unordered_map` | 追加・削除・検索 平均 $O(1)$ | 順序がない（`lower_bound`・最小がない）、最悪 $O(N)$ |
 
@@ -71,15 +71,15 @@ set・map は平衡二分探索木（libstdc++ では赤黒木）で、木の高
 
 | 繰り返す操作 | 選ぶもの | 理由 |
 | --- | --- | --- |
-| 最大（最小）の取り出しと追加だけ | `priority_queue` | 定数倍が軽い。最小は `greater<>` を渡す |
+| 最大（最小）の取り出しと追加だけ | `priority_queue` | 定数倍が軽い。最小は `priority_queue<int, vector<int>, greater<int>>`（[落とし穴](#pitfalls)） |
 | 追加・削除と最小・最大の両方 | `multiset` | ヒープは任意の要素を消せない |
 | 追加・削除と「$x$ 以上で最小」 | `set`・`multiset` | メンバの `lower_bound` が $O(\log N)$ |
-| 値ごとの個数・名前ごとの値 | `map`（値が小さければ配列） | キーが大きい・文字列でも使える |
+| 値ごとの個数・名前ごとの値 | `map`（キーの範囲が狭ければ配列） | キーが大きい・文字列でも使える |
 | 先頭と末尾の両方から出し入れ | `deque` | `vector` の先頭への挿入は $O(N)$ |
 
 選ぶときの考え方は 3 つある。
 
-- **できる操作が多いほど遅い**：`priority_queue` でできることは `multiset` でもできるが、`multiset` は木の節点を 1 つずつ確保するので定数倍が数倍重い。最大の取り出しと追加だけなら `priority_queue` を使う。逆に、任意の要素の削除が要るのに `priority_queue` を選ぶと、遅延削除という工夫が要る（[優先度付きキュー](../ds/priority-queue.md)）
+- **できる操作が多いほど遅い**：`priority_queue` でできることは `multiset` でもできるが、`multiset` は木の節点を 1 つずつ確保するので定数倍が数倍から 10 倍ほど重い。最大の取り出しと追加だけなら `priority_queue` を使う。逆に、任意の要素の削除が要るのに `priority_queue` を選ぶと、遅延削除という工夫が要る（[優先度付きキュー](../ds/priority-queue.md)）
 - **値の範囲が狭ければ配列**：値が $10^6$ 以下の整数なら、`map<int, int>` より `vector<int> cnt(V)` の方が速く、$O(1)$ で数えられる。値が $10^9$ まであるなら map を使うか、先に[座標圧縮](../basics/coordinate-compression.md)して配列にする
 - **標準にない操作は別のデータ構造へ**：「小さい方から K 番目」「$x$ 未満の要素の個数」は set では速く求まらない（イテレータを K 歩進めると $O(K)$）。[K 番目の値を求めるデータ構造](../ds/kth-element.md)の BIT や pb_ds を使う
 
@@ -87,7 +87,7 @@ set・map は平衡二分探索木（libstdc++ では赤黒木）で、木の高
     `set<int> s` で、$x$ 未満で最大の要素を $O(\log N)$ で得るにはどう書くか。そのような要素がないときはどう判定するか。
 
     ??? success "答え"
-        `auto it = s.lower_bound(x);` で $x$ 以上の最小の要素を指し、その 1 つ前 `prev(it)` が $x$ 未満の最大である。`it == s.begin()` なら $x$ 未満の要素はないので、`prev` を取る前に判定する（`begin()` の前を参照すると未定義動作）。
+        `auto it = s.lower_bound(x);` で $x$ 以上の最小の要素を指し、その 1 つ前 `prev(it)` が $x$ 未満の最大である。`it == s.begin()` なら $x$ 未満の要素はないので、`prev` を取る前に判定する（`begin()` に `prev` を使うこと自体が未定義動作）。
 
 ## map で数えながら走査する（→ 累積和と連想配列で区間を数える） {#counting-map}
 
@@ -107,7 +107,7 @@ set・map は平衡二分探索木（libstdc++ では赤黒木）で、木の高
 
 ## 落とし穴（multiset の erase(x)・set に std::lower_bound・map の []・空の size() − 1・無効化・ハッシュ） {#pitfalls}
 
-**multiset の `erase(x)` は等しい要素を全部消す**。`ms.erase(5)` は 5 を 1 個ではなく全部消し、消した個数を返す。1 個だけ消すなら、`find` で得たイテレータを渡す。`find` が `end()` を返したまま `erase` すると未定義動作なので、先に確かめる（[1 個だけ消す書き方](../cpp/cpp-container-idioms.md#multiset-erase-one)）。また `count(x)` は $x$ の個数に比例する時間がかかる。同じ値が大量にあるときに毎回呼ぶと遅いので、有無だけなら `contains(x)` を使う。
+**multiset の `erase(x)` は等しい要素を全部消す**。`ms.erase(5)` は 5 を 1 個ではなく全部消し、消した個数を返す。1 個だけ消すなら、`find` で得たイテレータを渡す。`find` が `end()` を返したまま `erase` すると未定義動作なので、先に確かめる（[1 個だけ消す書き方](../cpp/cpp-container-idioms.md#multiset-erase-one)）。また `count(x)` は $x$ の個数に比例する時間がかかる。同じ値が大量にあるときに毎回呼ぶと遅いので、有無だけなら `contains(x)`（C++20）を使う。
 
 ```cpp
 --8<-- "stl-containers/multiset-erase.cpp:core"

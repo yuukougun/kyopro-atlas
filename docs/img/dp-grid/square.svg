@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 330" font-family="sans-serif" font-size="14">
 <rect width="100%" height="100%" fill="#ffffff"/>
-<defs><marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker><marker id="ab" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1f4e9a"/></marker></defs>
 <text x="40" y="30" fill="#222">各マスの数：そのマスを右下の角とする、壁を含まない最大の正方形の一辺</text>
 <rect x="40" y="50" width="46" height="46" fill="#ffffff" stroke="#333" stroke-width="1"/>
 <text x="63.0" y="79.0" text-anchor="middle" fill="#222" font-size="18">1</text>
@@ -56,6 +55,6 @@
 <text x="330" y="90" fill="#222">黄のマス：上 2・左 3・左上 3</text>
 <text x="330" y="118" fill="#222">その min に 1 を足して 一辺 3</text>
 <text x="330" y="146" fill="#222">赤の破線：一辺 3 の正方形</text>
-<text x="330" y="174" fill="#222">3 方向のどれかが短いと、</text>
-<text x="330" y="202" fill="#222">そちら側に壁がはみ出す</text>
+<text x="330" y="174" fill="#222">一辺 4 にすると、短い向き</text>
+<text x="330" y="202" fill="#222">（上）の側で壁が入る</text>
 </svg>

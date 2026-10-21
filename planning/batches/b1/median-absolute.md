@@ -30,3 +30,9 @@
 - abc330_f の座標の範囲は第三者の解説の読んだ範囲に書かれていなかったので、本文ではオーバーフローの見積もりを「点の数 × 座標の幅」と書いた
 - with-binary-search の「外側から組にする」判定（g(l) = Σ max(0, a_{N−1−i} − a_i − l)）は解説の方法（2N 点の中央値）と別の書き方で、全探索で確かめたもの。出典はない
 - related の manhattan-chebyshev#axis-independence・top-k-multiset#median は相手が stub なので、本文からは節でなくページへリンクした
+
+## 検証の指摘への対応（2026-10-21）
+
+- 1〜8 はすべて直した（1：差だけではあふれないと訂正、2：「a_i が整数なら」を追加、3：導入を 0-indexed の a_0..a_{N-1} にし証明にも明記、4：入れ子の理由を 1 文追加、5：top-k-multiset#median と manhattan-chebyshev#axis-independence へ節リンク、6：\text 内の x を数式に、7：図の文字を 14px にし a_i を「点 a」に、8：閉区間と明記）
+- 採らなかったもの：なし
+- 台帳への提案（検証から）：arc100_a・typical90_br・abc330_f に checked: 2026-10-21 を入れてよい

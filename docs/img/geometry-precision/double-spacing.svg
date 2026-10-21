@@ -1,49 +1,49 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 330" font-family="sans-serif" font-size="14">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 372" font-family="sans-serif" font-size="16">
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="30" y="26" fill="#222">仮数を 2 ビットにした小さな浮動小数点数で表せる値（縦線）</text>
-<line x1="40" y1="90" x2="610" y2="90" stroke="#333" stroke-width="1.5"/>
-<line x1="75.0" y1="76" x2="75.0" y2="104" stroke="#1f4e9a" stroke-width="2"/>
-<line x1="83.8" y1="76" x2="83.8" y2="104" stroke="#1f4e9a" stroke-width="2"/>
-<line x1="92.5" y1="76" x2="92.5" y2="104" stroke="#1f4e9a" stroke-width="2"/>
-<line x1="101.2" y1="76" x2="101.2" y2="104" stroke="#1f4e9a" stroke-width="2"/>
-<line x1="110.0" y1="76" x2="110.0" y2="104" stroke="#1f4e9a" stroke-width="2"/>
-<line x1="127.5" y1="76" x2="127.5" y2="104" stroke="#1f4e9a" stroke-width="2"/>
-<line x1="145.0" y1="76" x2="145.0" y2="104" stroke="#1f4e9a" stroke-width="2"/>
-<line x1="162.5" y1="76" x2="162.5" y2="104" stroke="#1f4e9a" stroke-width="2"/>
-<line x1="180.0" y1="76" x2="180.0" y2="104" stroke="#1f4e9a" stroke-width="2"/>
-<line x1="215.0" y1="76" x2="215.0" y2="104" stroke="#1f4e9a" stroke-width="2"/>
-<line x1="250.0" y1="76" x2="250.0" y2="104" stroke="#1f4e9a" stroke-width="2"/>
-<line x1="285.0" y1="76" x2="285.0" y2="104" stroke="#1f4e9a" stroke-width="2"/>
-<line x1="320.0" y1="76" x2="320.0" y2="104" stroke="#1f4e9a" stroke-width="2"/>
-<line x1="390.0" y1="76" x2="390.0" y2="104" stroke="#1f4e9a" stroke-width="2"/>
-<line x1="460.0" y1="76" x2="460.0" y2="104" stroke="#1f4e9a" stroke-width="2"/>
-<line x1="530.0" y1="76" x2="530.0" y2="104" stroke="#1f4e9a" stroke-width="2"/>
-<line x1="600.0" y1="76" x2="600.0" y2="104" stroke="#1f4e9a" stroke-width="2"/>
-<text x="40.0" y="124" text-anchor="middle" fill="#222">0</text>
-<text x="75.0" y="124" text-anchor="middle" fill="#222">1</text>
-<text x="110.0" y="124" text-anchor="middle" fill="#222">2</text>
-<text x="180.0" y="124" text-anchor="middle" fill="#222">4</text>
-<text x="320.0" y="124" text-anchor="middle" fill="#222">8</text>
-<text x="600.0" y="124" text-anchor="middle" fill="#222">16</text>
-<path d="M77.0,70 L77.0,64 L108.0,64 L108.0,70" fill="none" stroke="#777"/>
-<text x="92.5" y="58" text-anchor="middle" fill="#555" font-size="12">間隔 1/4</text>
-<path d="M112.0,70 L112.0,64 L178.0,64 L178.0,70" fill="none" stroke="#777"/>
-<text x="145.0" y="58" text-anchor="middle" fill="#555" font-size="12">間隔 1/2</text>
-<path d="M182.0,70 L182.0,64 L318.0,64 L318.0,70" fill="none" stroke="#777"/>
-<text x="250.0" y="58" text-anchor="middle" fill="#555" font-size="12">間隔 1</text>
-<path d="M322.0,70 L322.0,64 L598.0,64 L598.0,70" fill="none" stroke="#777"/>
-<text x="460.0" y="58" text-anchor="middle" fill="#555" font-size="12">間隔 2</text>
-<text x="30" y="152" fill="#222">2 の冪を 1 つ越えるごとに、表せる値の間隔が 2 倍になる（相対的な細かさは一定）</text>
-<text x="30" y="190" fill="#222" font-weight="bold">double（仮数 53 ビット）での隣の値との間隔</text>
-<text x="60" y="218" fill="#222" font-weight="bold">値の大きさ</text>
-<text x="240" y="218" fill="#222" font-weight="bold">隣の値との間隔</text>
-<line x1="50" y1="226" x2="460" y2="226" stroke="#999"/>
-<text x="60" y="244" fill="#222" font-weight="normal">1</text>
-<text x="240" y="244" fill="#222" font-weight="normal">約 2.2×10^-16</text>
-<text x="60" y="270" fill="#222" font-weight="normal">10^6</text>
-<text x="240" y="270" fill="#222" font-weight="normal">約 1.2×10^-10</text>
-<text x="60" y="296" fill="#222" font-weight="normal">10^9</text>
-<text x="240" y="296" fill="#222" font-weight="normal">約 1.2×10^-7</text>
-<text x="60" y="322" fill="#222" font-weight="normal">10^18</text>
-<text x="240" y="322" fill="#222" font-weight="normal">128</text>
+<text x="20" y="26" fill="#222">小数部 2 ビットの浮動小数点数で表せる値（縦線）</text>
+<line x1="30" y1="110" x2="470" y2="110" stroke="#333" stroke-width="1.5"/>
+<line x1="56.9" y1="96" x2="56.9" y2="124" stroke="#1f4e9a" stroke-width="2"/>
+<line x1="63.6" y1="96" x2="63.6" y2="124" stroke="#1f4e9a" stroke-width="2"/>
+<line x1="70.3" y1="96" x2="70.3" y2="124" stroke="#1f4e9a" stroke-width="2"/>
+<line x1="77.0" y1="96" x2="77.0" y2="124" stroke="#1f4e9a" stroke-width="2"/>
+<line x1="83.8" y1="96" x2="83.8" y2="124" stroke="#1f4e9a" stroke-width="2"/>
+<line x1="97.2" y1="96" x2="97.2" y2="124" stroke="#1f4e9a" stroke-width="2"/>
+<line x1="110.6" y1="96" x2="110.6" y2="124" stroke="#1f4e9a" stroke-width="2"/>
+<line x1="124.1" y1="96" x2="124.1" y2="124" stroke="#1f4e9a" stroke-width="2"/>
+<line x1="137.5" y1="96" x2="137.5" y2="124" stroke="#1f4e9a" stroke-width="2"/>
+<line x1="164.4" y1="96" x2="164.4" y2="124" stroke="#1f4e9a" stroke-width="2"/>
+<line x1="191.2" y1="96" x2="191.2" y2="124" stroke="#1f4e9a" stroke-width="2"/>
+<line x1="218.1" y1="96" x2="218.1" y2="124" stroke="#1f4e9a" stroke-width="2"/>
+<line x1="245.0" y1="96" x2="245.0" y2="124" stroke="#1f4e9a" stroke-width="2"/>
+<line x1="298.8" y1="96" x2="298.8" y2="124" stroke="#1f4e9a" stroke-width="2"/>
+<line x1="352.5" y1="96" x2="352.5" y2="124" stroke="#1f4e9a" stroke-width="2"/>
+<line x1="406.2" y1="96" x2="406.2" y2="124" stroke="#1f4e9a" stroke-width="2"/>
+<line x1="460.0" y1="96" x2="460.0" y2="124" stroke="#1f4e9a" stroke-width="2"/>
+<text x="30.0" y="146" text-anchor="middle" fill="#222">0</text>
+<text x="56.9" y="146" text-anchor="middle" fill="#222">1</text>
+<text x="83.8" y="146" text-anchor="middle" fill="#222">2</text>
+<text x="137.5" y="146" text-anchor="middle" fill="#222">4</text>
+<text x="245.0" y="146" text-anchor="middle" fill="#222">8</text>
+<text x="460.0" y="146" text-anchor="middle" fill="#222">16</text>
+<path d="M58.9,64 L58.9,58 L81.8,58 L81.8,64" fill="none" stroke="#777"/>
+<text x="70.3" y="52" text-anchor="middle" fill="#555" font-size="14">間隔 1/4</text>
+<path d="M85.8,90 L85.8,84 L135.5,84 L135.5,90" fill="none" stroke="#777"/>
+<text x="110.6" y="78" text-anchor="middle" fill="#555" font-size="14">間隔 1/2</text>
+<path d="M139.5,90 L139.5,84 L243.0,84 L243.0,90" fill="none" stroke="#777"/>
+<text x="191.2" y="78" text-anchor="middle" fill="#555" font-size="14">間隔 1</text>
+<path d="M247.0,90 L247.0,84 L458.0,84 L458.0,90" fill="none" stroke="#777"/>
+<text x="352.5" y="78" text-anchor="middle" fill="#555" font-size="14">間隔 2</text>
+<text x="20" y="178" fill="#222">2 の冪を越えるたびに間隔が 2 倍（相対的な細かさは一定）</text>
+<text x="20" y="214" fill="#222" font-weight="bold">double（仮数 53 ビット）での隣の値との間隔</text>
+<text x="40" y="242" fill="#222" font-weight="bold">値の大きさ</text>
+<text x="200" y="242" fill="#222" font-weight="bold">隣の値との間隔</text>
+<line x1="30" y1="250" x2="440" y2="250" stroke="#999"/>
+<text x="40" y="272" fill="#222">1</text>
+<text x="200" y="272" fill="#222">約 2.2×10<tspan baseline-shift="super" font-size="11">−16</tspan></text>
+<text x="40" y="300" fill="#222">10<tspan baseline-shift="super" font-size="11">6</tspan></text>
+<text x="200" y="300" fill="#222">約 1.2×10<tspan baseline-shift="super" font-size="11">−10</tspan></text>
+<text x="40" y="328" fill="#222">10<tspan baseline-shift="super" font-size="11">9</tspan></text>
+<text x="200" y="328" fill="#222">約 1.2×10<tspan baseline-shift="super" font-size="11">−7</tspan></text>
+<text x="40" y="356" fill="#222">10<tspan baseline-shift="super" font-size="11">18</tspan></text>
+<text x="200" y="356" fill="#222">128</text>
 </svg>

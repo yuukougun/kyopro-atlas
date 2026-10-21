@@ -30,7 +30,7 @@ search:
 
 ## 一部を固定して数える（fix-variable） {#fix-variable}
 
-- id：`fix-variable`　レベル：基礎　段階：stub　type：thinking
+- id：`fix-variable`　レベル：基礎　段階：draft　type：thinking
 - URL：https://yuukougun.github.io/kyopro-atlas/thinking/fix-variable/
 - 別名：決め打ち、固定して全探索、真ん中を固定、片方を固定、最大値を固定、fix one variable
 - 種類：考察、全探索
@@ -117,7 +117,7 @@ search:
 
 ## 後ろから・逆順に考える（reverse-thinking） {#reverse-thinking}
 
-- id：`reverse-thinking`　レベル：基礎　段階：stub　type：thinking
+- id：`reverse-thinking`　レベル：基礎　段階：draft　type：thinking
 - URL：https://yuukougun.github.io/kyopro-atlas/thinking/reverse-thinking/
 - 別名：逆から考える、操作を逆再生、クエリを逆順に処理、削除を追加に、work backwards
 - 種類：考察、クエリ処理の工夫

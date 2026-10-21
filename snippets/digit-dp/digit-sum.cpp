@@ -10,26 +10,26 @@ long long count_digit_sum(const string& k, int d) {
     // dp[t][r]：上から i 桁を決めた数のうち、
     //   t = 1 ならここまで K と一致、t = 0 なら K より小さいことが確定していて、
     //   桁和を d で割った余りが r のものの個数
-    vector<array<long long, 2>> dp(d, {0, 0});
-    dp[0][1] = 1;  // 何も決めていない数は K と一致している
+    vector dp(2, vector<long long>(d, 0));
+    dp[1][0] = 1;  // 何も決めていない数は K と一致している
     for (char c : k) {
         int lim = c - '0';
-        vector<array<long long, 2>> nd(d, {0, 0});
-        for (int r = 0; r < d; r++) {
-            for (int t = 0; t < 2; t++) {
-                if (dp[r][t] == 0) continue;
+        vector nd(2, vector<long long>(d, 0));
+        for (int t = 0; t < 2; t++) {
+            for (int r = 0; r < d; r++) {
+                if (dp[t][r] == 0) continue;
                 int hi = t ? lim : 9;  // 一致していれば K の桁まで、未満なら 9 まで
                 for (int x = 0; x <= hi; x++) {
                     int nt = (t && x == lim) ? 1 : 0;  // K の桁と同じ数字を選んだときだけ一致が続く
                     int nr = (r + x) % d;
-                    nd[nr][nt] = (nd[nr][nt] + dp[r][t]) % MOD;
+                    nd[nt][nr] = (nd[nt][nr] + dp[t][r]) % MOD;
                 }
             }
         }
         dp = nd;
     }
     // 0 も「桁和 0」として数えているので 1 を引く
-    return (dp[0][0] + dp[0][1] - 1 + MOD) % MOD;
+    return (dp[0][0] + dp[1][0] - 1 + MOD) % MOD;
 }
 // --8<-- [end:core]
 

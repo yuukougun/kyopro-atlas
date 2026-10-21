@@ -146,7 +146,7 @@ note:   deduced conflicting types for parameter 'const T' ('long long int' and '
 
 `add(x, 1)` が通るのは、`a` と `b` の型が別々に決まるからである。[型推論の失敗](#deduction-failure)の 2 つの型引数を取る形と同じことが、短く書ける。戻り値の型の `auto` は、`return` の式から決まる（`add(1, 2.5)` は `double`）。ラムダ式の `[](auto x) { … }`（C++14）も、同じ考え方で型ごとに作られる（[ラムダ式](../cpp/cpp-lambda.md)）。
 
-- **版**：C++20。g++-13・g++-15 で使える。`-std=gnu++17` でも、GCC は `use of 'auto' in parameter declaration only available with '-std=c++20'` という警告つきで通す。これは GNU の拡張で、`-std=c++17 -pedantic-errors` ではエラーになる
+- **版**：C++20。g++-13・g++-15 で使える。`-std=gnu++17` でも GCC は通す。ただし `use of 'auto' in parameter declaration only available with '-std=c++20' or '-fconcepts'` という警告が出る。これは GNU の拡張で、`-std=c++17 -pedantic-errors` ではエラーになる
 - **落とし穴**：`auto` を書いた引数どうしの型をそろえたいとき（`a` と `b` を同じ型にしたいとき）は、`template <class T>` の形で書く
 
 ## コンセプトと requires：template <integral T>（C++20） {#concepts}
@@ -163,14 +163,14 @@ note:   deduced conflicting types for parameter 'const T' ('long long int' and '
 --8<-- "cpp-templates-constexpr/concepts-ng.cpp:core"
 ```
 
-エラーは `no matching function for call to 'floor_div(double, double)'` の後に `constraints not satisfied` と出る（g++-13・g++-15 で同じ）。条件がないと、`double` に `%` を使った行で、意味の分かりにくいエラーになる。
+エラーは `no matching function for call to 'floor_div(double, double)'` の後に `constraints not satisfied` と出る（g++-13・g++-15 で同じ）。エラーは呼んだ行に出て、どの条件を満たさないかが示される。条件がないと、エラーは関数の中の `%` を使った行に出る。この短い例なら読めるが、ライブラリの関数なら深いところの行になり、どこで誤った型を渡したかが分かりにくい。
 
 - **版**：C++20。`integral`・`floating_point`・`same_as` などのコンセプトは `<concepts>` にある。g++-13・g++-15 で使える
 - **読み方**：解説コードでは、自分で書くより読むことが多い。`template <integral T>` は「`T` は整数型」、`requires` の後ろは「この条件を満たす型だけ」と読めば足りる
 
 ## constexpr の定数と関数、コンパイル時に表を作る constexpr auto table = [] { ... }(); {#constexpr}
 
-`constexpr` を付けた変数は、コンパイル時に値が決まる定数になる。配列の大きさや、テンプレートの引数に使える。`constexpr` を付けた関数は、引数がコンパイル時に決まっていればコンパイル時に計算され、実行時の値で呼べば普通の関数として動く。
+`constexpr` を付けた変数は、コンパイル時に値が決まる定数になる。配列の大きさや、テンプレートの引数に使える。`constexpr` を付けた関数は、定数式が要る場所（`constexpr` の変数の初期化や `static_assert`）で呼べばコンパイル時に計算され、実行時の値で呼べば普通の関数として動く。普通の式の中で呼んだとき、コンパイル時に計算するかはコンパイラが決める。必ずコンパイル時に計算したい値は、`constexpr` の変数に入れる。
 
 表を作るときは、ラムダ式を書いてその場で呼ぶ（最後の `()`）。ラムダの中でループを回して `array` を埋め、返した `array` が定数になる。
 
@@ -201,7 +201,7 @@ note:   deduced conflicting types for parameter 'const T' ('long long int' and '
 --8<-- "cpp-templates-constexpr/if-constexpr.cpp:assert"
 ```
 
-`if constexpr (条件)` は、条件をコンパイル時に判定し、選ばれなかった側の枝をコンパイルしない。関数テンプレートの中で、型によって書き方を変えるときに使う。次の `print` は、数なら 1 つ出し、それ以外なら範囲として要素を並べる。
+`if constexpr (条件)` は、条件をコンパイル時に判定する。関数テンプレートを型ごとに作るとき、選ばれなかった側の枝は作らない。関数テンプレートの中で、型によって書き方を変えるときに使う。次の `print` は、数なら 1 つ出し、それ以外なら範囲として要素を並べる。
 
 ```cpp
 --8<-- "cpp-templates-constexpr/if-constexpr.cpp:core"
@@ -214,7 +214,7 @@ note:   deduced conflicting types for parameter 'const T' ('long long int' and '
 ```
 
 - **版**：`static_assert` は C++11、メッセージの省略と `if constexpr` は C++17。g++-13・g++-15 で使える
-- **落とし穴**：`if constexpr` で枝を捨てられるのは、条件が型引数に依存しているときだけである。テンプレートでない普通の関数の中では、捨てた枝もコンパイルされる
+- **落とし穴**：`if constexpr` で捨てた枝がコンパイルされないのは、関数テンプレートの中で、枝の中身が型引数（`T` や `x`）に依存しているときだけである。テンプレートでない普通の関数の中や、`T` に関係しない誤り（たとえば `int y` を範囲 for で回す行）は、捨てた枝でもエラーになる
 
 ## 畳み込み式で可変長引数を展開する：((cerr << xs << ' '), ...) のデバッグ出力（C++17） {#fold-expression}
 
@@ -254,6 +254,12 @@ note:   deduced conflicting types for parameter 'const T' ('long long int' and '
 --8<-- "cpp-templates-constexpr/attributes.cpp:core"
 ```
 
+```cpp
+--8<-- "cpp-templates-constexpr/attributes.cpp:body"
+```
+
+`[[assume(g >= 0)]]` は、入力の値が 0 以上だから書ける。負の値があると `gcd_ll` は負の数を返しうる（`%` の結果は割られる数の符号になる）ので、前提が本当に成り立つときだけ書く。
+
 `[[nodiscard]]` の関数の戻り値を捨てると、g++-13・g++-15 とも `-Wall` なしで次の警告が出た。
 
 ```cpp
@@ -264,7 +270,7 @@ note:   deduced conflicting types for parameter 'const T' ('long long int' and '
 warning: ignoring return value of 'long long int gcd_ll(long long int, long long int)', declared with attribute 'nodiscard' [-Wunused-result]
 ```
 
-- **版**：`[[maybe_unused]]`・`[[nodiscard]]` は C++17、`[[likely]]`・`[[unlikely]]` は C++20、`[[assume]]` は C++23 で GCC 13 から。手元の g++-13・g++-15 では、4 つとも `-std=gnu++17` でも警告なしで通った（GCC の拡張）
+- **版**：`[[maybe_unused]]`・`[[nodiscard]]` は C++17、`[[likely]]`・`[[unlikely]]` は C++20、`[[assume]]` は C++23 で GCC 13 から。手元の g++-13・g++-15 では、4 つとも `-std=c++17 -pedantic` でも警告なしで通った。ただし規格の版にない属性の扱いはコンパイラ次第なので、AtCoder と同じ `-std=gnu++23` で使う
 - **落とし穴**：`[[assume]]` は確かめる仕組みではなく、偽なら何が起きるか決まっていない。確かめたいなら `assert` を使う（`-DNDEBUG` を付けなければ実行時に検査される）
 
 ## 確認問題 {#quiz}

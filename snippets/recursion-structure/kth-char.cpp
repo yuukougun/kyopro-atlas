@@ -7,7 +7,7 @@ using namespace std;
 // --8<-- [start:core]
 long long len[61];  // len[n] = |S_n| = 2^n - 1（n <= 60 なら long long に収まる）
 
-// S_n の k 文字目（1-indexed）
+// S_n の k 文字目（1-indexed、1 <= k <= len[n]。n = 1 で必ず止まる）
 char rec(int n, long long k) {
     long long half = len[n - 1];
     if (k <= half) return rec(n - 1, k);          // 前の S_{n-1}

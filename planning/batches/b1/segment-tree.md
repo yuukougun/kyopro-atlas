@@ -34,3 +34,22 @@
 - 図の SVG は手元に描画の道具がなく、表示を目で確かめていない（座標を手で調べ、XML として読めることだけ確かめた）。検証役に表示の確認を頼みたい
 - 本文で節へリンクしたのは acl-reading#segtree-args と rolling-hash#hash-segment-tree（どちらも draft で見出しがある）。fenwick-tree・sparse-table・segment-tree-monoids・segment-tree-binary-search・dp-segment-tree・segment-tree-on-values・complete-binary-tree はまだ stub なので、ページへのリンクだけにした
 - 使用量の目安：道具の呼び出し 約 35 回、Web 取得 8 回（WebFetch 7 回・題名の確認の curl 1 回）
+
+## 検証の指摘への対応（verify/segment-tree.md）
+
+- 1（直すべき）：例題 abc157_e の解法の詳細を `popcount((unsigned)prod(l - 1, r))` にそろえた。文字列へのクエリの節に、`std::popcount` は C++20 から・符号なしの型だけを受け取ることと [popcount](../basics/bit-operations.md#popcount) へのリンクを添えた
+- 2：証明を、両端でない 1 個 v の兄弟が区間に入る、という形に直した
+- 3：prod のループで保たれる性質（$s_L \cdot$ 今の段の積 $\cdot s_R$ が総積）と、偶数の端をそのまま親へ引き継げる理由・l = r で止めてよい理由を 1 段落足した
+- 4：追跡の前に列を書き直し、§complexity の図へリンクした
+- 5：own.cpp の `sml`・`smr` を `sL`・`sR` に改め、本文の記号とそろえた（check_snippets で一致を確認）
+- 6：擬似コードの set を、ループの中で `k ← k / 2` する形に書き直した
+- 7：表の再帰型の拡張の欄を「伝わり方を追いやすい」にし、最後の段落に「遅延セグメント木も非再帰で書ける（ACL の lazy_segtree は非再帰）ので好みの問題」と添えた
+- 8：「閉区間 $[l, r]$（1-indexed）」とした
+- 9：本文の行は fix_problems が作るので本文は変えず、下の台帳への提案を更新した
+- 10：2 枚の SVG の区間・ノード番号・説明の文字を 13 に上げた（ノード幅 60〜64 に収まる。表示は未確認なので、次の検証で幅 390px の見え方を確かめてほしい）
+- 11（採らなかった）：anchor を choosing と comparison のどちらにそろえるかはメインの決定待ちなので、このページは変えていない
+
+## 台帳への提案（追加・差し替え）
+
+- abc461_e｜summary｜最初はすべて白い N×N のマス目で、行を黒く塗る操作と列を白く塗る操作のたびに、黒いマスの数を答える。｜https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0606_abc461（上の提案の summary をこれに差し替える。検証の指摘 9）
+- abc461_e・abc476_e｜checked｜2026-10-21（検証役が問いと方針を確認。abc476_e の制約は未確認）

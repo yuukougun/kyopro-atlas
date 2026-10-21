@@ -41,7 +41,7 @@ atcoder: true
 別名：string・substr・string::find・npos・to_string・stoi・stoll・starts_with・ends_with・string_view・s += c・getline・c - 'a'・文字と数の変換
 <!-- textlint-enable -->
 
-文字列の操作は、`std::string` のメンバ関数と、文字を小さな整数として扱う書き方の組み合わせである。どれも短く書けるが、コピーが起きる所と起きない所を区別しないと、$N = 2 \times 10^5$ で TLE になったり、消えた文字列を読んだりする。版の注記のない書き方は C++11 までにあり、g++-13・g++-15 と AtCoder の GCC 15.2（`-std=gnu++23`）のどれでも使える。
+文字列の操作は、`std::string` のメンバ関数と、文字を小さな整数として扱う書き方の組み合わせである。どれも短く書けるが、コピーが起きる所と起きない所を区別しないと、$N$ が大きいと TLE になったり、消えた文字列を読んだりする。版の注記のない書き方は C++11 までにあり、g++-13・g++-15 と AtCoder の GCC 15.2（`-std=gnu++23`）のどれでも使える。
 
 このページのコードは `#include <bits/stdc++.h>` と `using namespace std;` を前提にする。添字は 0-indexed である。
 
@@ -78,6 +78,8 @@ atcoder: true
 | `s = c + s`（先頭に足す） | 566 ms | 578 ms |
 | `s.insert(s.begin(), c)` | 255 ms | 253 ms |
 
+$N = 2 \times 10^5$ ではメモリのコピーが速く 1 秒を切るが、$O(N^2)$ なので $N$ が 5 倍になると時間は約 25 倍になり、$N = 10^6$ の `s = s + c` は 20 秒を超えた。1 回に何文字も足す形（下の確認問題）では、$N = 2 \times 10^5$ でも数十秒かかる。C++ 側で TLE になるほかの書き方は[入出力と定数倍](../cpp/cpp-io.md#tle-causes)にまとめてある。
+
 先頭に足していく処理は、後ろに足して最後に 1 回 `reverse` すれば $O(N)$ で済む。
 
 ```cpp
@@ -106,7 +108,8 @@ atcoder: true
 --8<-- "cpp-string-api/char-print.cpp:core"
 ```
 
-- **落とし穴 2**：英大文字は `c - 'A'` で、大文字と小文字は連続していない（`'Z'` と `'a'` の間に記号がある）。英字を 52 通りにまとめるなら `isupper(c) ? c - 'A' + 26 : c - 'a'` のように分ける。数字の文字列を `stoi` で数に直すのは、1 文字ずつなら `c - '0'` で足りる
+- **落とし穴 2**：英大文字は `c - 'A'` で、大文字と小文字は連続していない（`'Z'` と `'a'` の間に記号がある）。英字を 52 通りにまとめるなら `isupper(c) ? c - 'A' + 26 : c - 'a'` のように分ける
+- **使い分け**：1 文字の数字を数にするなら、`stoi(string(1, c))` ではなく `c - '0'` でよい
 - **混同**：`'0'` は文字（コード 48）で、`0` は数である。`s[i] == 0` は「数字の 0」ではなく「コード 0 の文字」との比較になる
 
 ## to_string（double は小数点以下 6 桁）・stoi・stoll {#to-string}
@@ -117,8 +120,8 @@ atcoder: true
 --8<-- "cpp-string-api/to-string.cpp:core"
 ```
 
-- **落とし穴 1**：`to_string(double)` は C の `printf` の `%f` と同じ書式で、小数点以下が常に 6 桁になる。`1e-7` は `0.000000` になって値が消え、`1e20` は 21 桁の整数部で出る。小数を出力するなら `cout << fixed << setprecision(15)` か `printf` で桁を指定する（[入出力と定数倍](../cpp/cpp-io.md)）。なお C++26 では `std::format` と同じ書式へ変わる予定で、AtCoder の `-std=gnu++23` では 6 桁のままである
-- **落とし穴 2**：`stoi` は先頭の空白を飛ばし、数として読めない文字の手前で止まる（`"12ab"` は 12）。先頭から読めなければ `invalid_argument`、`int` に入らなければ `out_of_range` の例外が投げられ、捕まえなければ RE になる。$2^{31}$ 以上になりうるなら `stoll` を使う。$10^{18}$ を超える 19 桁以上の数は `stoll` でも入らないので、文字列のまま扱う
+- **落とし穴 1**：`to_string(double)` は C の `printf` の `%f` と同じ書式で、小数点以下が常に 6 桁になる。`1e-7` は `0.000000` になって値が消え、`1e20` は 21 桁の整数部で出る。小数を出力するなら `cout << fixed << setprecision(15)` か `printf` で桁を指定する（[入出力と定数倍](../cpp/cpp-io.md#float-output)）。なお C++26 では `std::format` と同じ書式へ変わる予定で、AtCoder の `-std=gnu++23` では 6 桁のままである
+- **落とし穴 2**：`stoi` は先頭の空白を飛ばし、数として読めない文字の手前で止まる（`"12ab"` は 12）。先頭から読めなければ `invalid_argument`、`int` に入らなければ `out_of_range` の例外が投げられ、捕まえなければ RE になる。$2^{31}$ 以上になりうるなら `stoll` を使う。$2^{63} - 1$（約 $9.2 \times 10^{18}$）を超える数（20 桁以上は必ず超える）は `stoll` でも入らないので、文字列のまま扱う。`unsigned long long` を返す `stoull` なら約 $1.8 \times 10^{19}$ まで読める
 
 ## starts_with・ends_with（C++20）、contains（C++23） {#starts-with}
 
@@ -134,7 +137,7 @@ atcoder: true
 
 ## string(n, c)・reverse・辞書順の比較 {#construct-compare}
 
-`string(n, c)` は文字 `c` を $n$ 個並べた文字列を作る。`reverse(s.begin(), s.end())` は `s` をその場で反転する。`<`・`==` などの比較は[辞書順](../string/string-basics.md)で、先頭から 1 文字ずつ比べ、最初に違う文字で決まる。片方がもう片方の接頭辞なら短い方が小さい。比較は $O(\min(\lvert s \rvert, \lvert t \rvert))$ かかる（`==` は長さが違えばすぐ偽になる）。
+`string(n, c)` は文字 `c` を $n$ 個並べた文字列を作る。`reverse(s.begin(), s.end())` は `s` をその場で反転する。`<`・`==` などの比較は[辞書順](../string/string-basics.md#lexicographic-order)で、先頭から 1 文字ずつ比べ、最初に違う文字で決まる。片方がもう片方の接頭辞なら短い方が小さい。比較は $O(\min(\lvert s \rvert, \lvert t \rvert))$ かかる（`==` は長さが違えばすぐ偽になる）。
 
 ```cpp
 --8<-- "cpp-string-api/construct-compare.cpp:core"
@@ -161,7 +164,7 @@ atcoder: true
 --8<-- "cpp-string-api/string-view-ng.cpp:core"
 ```
 
-- **落とし穴 2**：元の `string` に `+=` などで書き足すと、中身が別の場所へ移ることがあり、前に作った `string_view` は壊れる（`vector` の再確保と同じ）。`string_view` は、元を変えない間にその場で使い切る（寿命の罠の全体は[未定義動作](../cpp/cpp-undefined-behavior.md)）
+- **落とし穴 2**：元の `string` に `+=` などで書き足すと、中身が別の場所へ移ることがあり、前に作った `string_view` は壊れる（`vector` の再確保と同じ）。`string_view` は、元を変えない間にその場で使い切る（寿命の罠の全体は[未定義動作](../cpp/cpp-undefined-behavior.md#dangling-string-view)）
 - **落とし穴 3**：`string_view` から `string` には暗黙に変わらない。`map<string, int>` のキーにするなど、`string` が要る所では `string(sv)` と書く。末尾にヌル文字がある保証もないので、C の関数（`printf("%s")` など）に渡さない
 
 ??? question "確認問題：`string_view f() { string s = "abc"; return s; }` の戻り値を使うと何が起きるか？"
@@ -196,7 +199,7 @@ atcoder: true
 --8<-- "cpp-string-api/getline.cpp:core"
 ```
 
-- **落とし穴 1**：`ws` は空の行も行頭の空白も飛ばす。空の行や行頭の空白に意味があるなら、`cin.ignore()` で改行を 1 文字だけ捨ててから `getline` を呼ぶ
+- **落とし穴 1**：`ws` は空の行も行頭の空白も飛ばす。空の行や行頭の空白に意味があるなら、`cin.ignore()` で次の 1 文字を捨ててから `getline` を呼ぶ。これは数のすぐ後が改行であることを前提にする（行末に空白があると、空白だけが捨てられて空の行が返る）。AtCoder の入力は行末に空白がないので、この前提を満たす
 - **落とし穴 2**：手元で作った入力ファイルの改行が `\r\n`（Windows の形）だと、`getline` で読んだ行の末尾に `\r` が残る。AtCoder の入力は `\n` なので起きないが、手元の試験で比較が合わないときは疑う。入出力の全体は[入出力と定数倍](../cpp/cpp-io.md)で扱う
 
 ## 確認問題 {#quiz}

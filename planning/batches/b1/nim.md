@@ -42,3 +42,15 @@
 - 逆形 Nim の結論は Wikipedia とコード片の全探索で確かめたが、ABC・ARC での出題はない（research §7.2 と同じ）。発展の節として短く置いた
 - 前提の game-basics・grundy-number・partizan-games・hadamard-transform・xor-basis はまだ stub なので、ページへのリンクだけにし、節へはリンクしていない。draft になったら、asymmetric の節から game-basics の「手番を状態に入れる」節（turn）へ、bounded の節から grundy-number の patterns へリンクを足すとよい
 - 使用量の目安：道具の呼び出し約 25 回、Web 取得 5 回
+
+## 検証の指摘への対応（verify/nim.md）
+
+- 指摘 1（直すべき・台帳）：ページ側は直し済み（本文は正しい向き）。台帳の arc168_b の summary を上の「台帳への提案」どおりに直してから fix_problems を流すよう、改めて提案する
+- 指摘 2：直した。$D$ を「出現回数が奇数の正の値」と定め（0 個の山はどの $k$ でも余り 0 で効かない）、「異なる正の値 1 つや 2 つの XOR は 0 にならない」を理由として書いた。制約に頼らない形にした
+- 指摘 3：直した。(a)「ちょうど $X$ 個・ちょうど $Y$ 個」と書いた。(b) 2 つ目の箇条を、複数の山から取れるルールで $X \le Y$ のとき先手が余り $X$ 以上の山をまとめて取って戻す側に回れる例に具体化し、場合分けは練習の ARC143 C に任せた
+- 指摘 4：直した。#bouton → game-basics#win-lose、#asymmetric → #turn、確認問題の真似戦略 → #mirror-strategy。あわせて「勝敗の DP」のリンク（導入・asymmetric の最後・misere）を #game-dp にした
+- 指摘 5：直した。自己検査への言及を消し、「小さい局面なら勝敗の DP で全局面を調べて確かめられる」に言い換えた
+- 指摘 6：直した。winning-move.svg の説明文を表の下に移し、viewBox を 340×400 にした（表の文字は 15px のまま、幅 390px の画面でほぼ等倍）。説明は 6 行に分けて短くした。描画しての目視は未確認なので、メインか検証役に一度見てほしい
+- 指摘 7（台帳）：上の「台帳への提案」の arc143_c の summary を改めて提案する
+- 指摘 8（台帳・メイン）：ページ側では直さない。上の「問題の補充の候補」（arc105_d・arc091_d）の裏付けをメインが取るか、grundy-number と配分を決めてほしい
+- 検査：check_pages（エラー 0・警告 0）、fix_problems --check（0）、check_snippets（期待と違う 0）、textlint（エラー 0・警告 11。直す前と同じ種類）

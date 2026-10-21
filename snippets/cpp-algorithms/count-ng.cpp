@@ -6,7 +6,7 @@ int main() {
     // --8<-- [start:core]
     int best = 0;
     best = max(best, ranges::count(v, 1));  // int と ptrdiff_t：コンパイルエラー
-    // 直し方：max(best, (int)ranges::count(v, 1))
+    // 直し方：max(best, (int)ranges::count(v, 1))（best を long long にしてもエラー）
     // --8<-- [end:core]
     cout << best << '\n';
 }

@@ -43,3 +43,12 @@
 - related に memoized-recursion・dp/tree-dp がないが、本文からリンクしている。related に足すかはメインの判断に任せる（front matter の related は変えていない）
 - tree-basics・namori-graph・scc・mod-pow は stub なので、ページへのリンクだけにした（節へのリンクは draft 以降に足せる。tree-basics#remove-add-edge、scc#on-cycle、mod-pow#binary-expansion、namori-graph#directed-version が候補）
 - SVG は描画して目で確かめていない（手元に描画の道具がない）。座標は計算して置いた
+
+## 検証の指摘への対応（verify/functional-graph.md）
+
+- 1（直すべき）：確認問題の答えを「頂点 0 や 8 へは行けない」に直した
+- 2（直すべき）：Union-Find の別解を「コスト $C_i$ の大きい順に辺 $i$–$X_i$ をつなぐ」に直した
+- 3：「一番上（今の頂点）から $K$ 個下の要素 `stk[stk.size() - 1 - K]`」に直した
+- 4：#one-cycle の ρ 形の導入に「しっぽは周期性のページでいう尾で、長さを $\mu$ と書く」を足した。語の統一（用語集・prh）は提案として残す：「しっぽ」と「尾」、「ρ 形」と「ρ 型」をどちらかにそろえるかはメインが決める
+- 5：囲みの文を「`add_edge` はならし $O(1)$、`scc()` は $O(N + M)$」に直した。置き場所は手引きへの提案（上の「手引きへの提案」）のとおりメインの判断に任せる
+- 6（採らなかった）：rho.svg の下の 3 行は残した。同じ内容が本文（#k-steps の例・#per-cycle）と代替テキストにあり、スマホで読みにくくても情報は失われない。図を描き直すと座標の見直しと再度の描画確認が要るため、今回は見送る

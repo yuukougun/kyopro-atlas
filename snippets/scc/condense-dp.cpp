@@ -2,12 +2,16 @@
 #include <atcoder/scc>
 using namespace std;
 
-// 頂点 1 から辺をたどって動く。各頂点の価値 w は最初に訪れたときだけ得る。得られる価値の和の最大を求める
+// 頂点 1 から辺をたどって好きなだけ動く（どこで止めてもよい）。各頂点の非負の価値 w は初めて訪れたときに 1 回だけ得る。
+// 得られる価値の和の最大を求める（価値が非負なので、成分に入ったら全部回っても損をしない）
 int main() {
     int n, m;
     cin >> n >> m;
     vector<long long> w(n);
-    for (int i = 0; i < n; i++) cin >> w[i];
+    for (int i = 0; i < n; i++) {
+        cin >> w[i];
+        assert(w[i] >= 0);  // 非負が前提
+    }
     vector<pair<int, int>> edges(m);
     // --8<-- [start:core]
     atcoder::scc_graph g(n);
@@ -30,6 +34,9 @@ int main() {
     vector<vector<int>> dag(k);
     for (auto [u, v] : edges) {
         if (comp[u] != comp[v]) dag[comp[u]].push_back(comp[v]);
+    }
+    for (int c = 0; c < k; c++) {
+        for (int d : dag[c]) assert(c < d);  // scc() の順はトポロジカル順
     }
     // dp[c] ＝ 成分 c に入ってから得られる価値の和の最大。後ろの成分から順に決まる
     vector<long long> dp(k, 0);

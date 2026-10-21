@@ -23,8 +23,8 @@ string to_str(__int128 x) {
 __int128 parse(const string& s) {
     __int128 x = 0;
     size_t i = (s[0] == '-') ? 1 : 0;
-    for (; i < s.size(); i++) x = x * 10 + (s[i] - '0');
-    return s[0] == '-' ? -x : x;
+    for (; i < s.size(); i++) x = x * 10 - (s[i] - '0');  // 負の側に積み上げる
+    return s[0] == '-' ? x : -x;  // -2^127 も読める
 }
 // --8<-- [end:read]
 

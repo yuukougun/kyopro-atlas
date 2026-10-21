@@ -43,22 +43,8 @@ int main() {
         g[b].push_back({a, w});
     }
     int s = 0, t = n - 1;
-    // --8<-- [start:core]
+    // --8<-- [start:on-path]
     vector<long long> ds = dijkstra(n, g, s), dt = dijkstra(n, g, t);
-
-    // 最短路の本数：距離の小さい順は最短路 DAG のトポロジカル順（重みが正なので）
-    vector<int> order;
-    for (int v = 0; v < n; v++) {
-        if (ds[v] < INF) order.push_back(v);
-    }
-    sort(order.begin(), order.end(), [&](int x, int y) { return ds[x] < ds[y]; });
-    vector<long long> cnt(n, 0);
-    cnt[s] = 1;
-    for (int u : order) {
-        for (auto [v, w] : g[u]) {
-            if (ds[u] + w == ds[v]) cnt[v] = (cnt[v] + cnt[u]) % MOD;  // u → v は最短路 DAG の辺
-        }
-    }
 
     long long D = ds[t];
     // 辺 a → b が s-t 最短路に乗る ⇔ ds[a] + w + dt[b] == D（両方の向きを調べる）
@@ -78,6 +64,8 @@ int main() {
             xs.push_back(seg[i].second);
         }
     }
+    // --8<-- [end:on-path]
+    // --8<-- [start:classify]
     sort(xs.begin(), xs.end());
     xs.erase(unique(xs.begin(), xs.end()), xs.end());
     auto idx = [&](long long x) { return int(lower_bound(xs.begin(), xs.end(), x) - xs.begin()); };
@@ -99,7 +87,21 @@ int main() {
         int l = idx(seg[i].first), r = idx(seg[i].second);
         kind[i] = (extra[r] - extra[l] == 0) ? 2 : 1;  // ほかの辺と重ならなければ、すべての最短路に乗る
     }
-    // --8<-- [end:core]
+    // --8<-- [end:classify]
+
+    // 最短路の本数：距離の小さい順は最短路 DAG のトポロジカル順（重みが正なので）
+    vector<int> order;
+    for (int v = 0; v < n; v++) {
+        if (ds[v] < INF) order.push_back(v);
+    }
+    sort(order.begin(), order.end(), [&](int x, int y) { return ds[x] < ds[y]; });
+    vector<long long> cnt(n, 0);
+    cnt[s] = 1;
+    for (int u : order) {
+        for (auto [v, w] : g[u]) {
+            if (ds[u] + w == ds[v]) cnt[v] = (cnt[v] + cnt[u]) % MOD;  // u → v は最短路 DAG の辺
+        }
+    }
 
     cout << (D < INF ? D : -1) << ' ' << cnt[t] << '\n';
     for (int i = 0; i < m; i++) cout << kind[i] << '\n';

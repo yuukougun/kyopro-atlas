@@ -33,3 +33,15 @@
 - reduce の「足す順序が決まっていないので、浮動小数点数では結果がわずかに変わりうる」は cpprefjp の reduce の効果（順不同に集計）に基づく。手元では差の出る例を作っていない
 - partial_sum のあふれは符号付き整数のあふれ（未定義動作）で、snippets の期待の出力 -294967296 は g++-13・g++-15 の -O2 で観測した値である。コンパイラの版が変わると出力が変わりうる
 - cpp-container-idioms#member-lower-bound と内容が重なる（set の lower_bound）。本文では計測結果を 1 行にしてリンクした。計測値は cpp-container-idioms の計測（research の約 2 秒）とほぼ同じ
+
+## 検証の指摘への対応（verify/cpp-algorithms.md）
+
+- 指摘 1（直すべき）：196 行を「`max` に渡すなら `(int)` で型をそろえる。`long long` にしても `long` とは別の型でエラーのまま。代入だけなら `long long c = count(…);` でよい」に直した。count-ng.cpp のコメントも合わせた
+- 指摘 2（直すべき）：unique-erase.svg の marker を x 軸の向きの三角形（`M0,0 L10,5 L0,10`、refX=9・refY=5、orient="auto"）にした
+- 指摘 3：projection.cpp を `P best = ranges::max(…)` にし、本文を「score が最大の要素（のコピー）を返す。位置が要るなら `ranges::max_element`」とした
+- 指摘 4：#ranges-dangling の 1 文目を「`vector` のような、要素を自分で持つコンテナの一時オブジェクト」に限定した
+- 指摘 5：partial-sum.yaml から UB の case を外し、yaml にコメントで観測値を残した。本文は「手元の g++-13・g++-15（`-O2`）で」と添えた。確かめ用の片は増やしていない
+- 指摘 6：「`3 1 2` 自身と、辞書順でその次の `3 2 1` の 2 通り」に直した
+- 指摘 7：採らなかった（ページは変えない）。cpp_std・gcc_min を執筆者が埋めてよいか、cpp_std を主な書き方の版にするかはメインが §2.1・§5 で決める点なので、上の「手引きへの提案」と合わせて判断してほしい
+- 指摘 8：accumulate.cpp（0LL の和が 3000000000）と unique-erase.cpp（erase の後に重複がない）に `assert` を 1 行ずつ足した
+- 検査：check_pages（エラー 0・警告 0）、fix_problems --check（0）、check_snippets（21 片・42 回・違い 0）、textlint（エラー 0・警告 4。前と同じ誤検出）

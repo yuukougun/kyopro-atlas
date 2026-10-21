@@ -25,7 +25,7 @@ int main() {
         // --8<-- [start:core]
         // [l, r) の 1 の個数が k 未満である最大の r を探す（k ≥ 1 なので f(e()) = (0 < k) は真）
         int r = seg.max_right(l, [&](int s) { return s < k; });
-        // r < n なら [l, r] にちょうど k 個の 1 があり、B_r が k 番目の 1。r == n なら k 個ない
+        // r < n なら閉区間 [l, r] にちょうど k 個の 1 があり、B_r が k 番目の 1。r == n なら k 個ない
         int pos = (r < n ? r : -1);
         // --8<-- [end:core]
         int expected = -1, cnt = 0;

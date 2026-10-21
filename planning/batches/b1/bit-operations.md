@@ -45,3 +45,23 @@
 ## 使用量の目安
 
 - 道具の呼び出し 約 25 回、Web 取得 4 回（drken の解説）＋題名の確認に curl 4 回
+
+## 検証の指摘への対応（2026-10-21）
+
+- 1（直すべき）：確認問題「和と XOR」の 1 問目を $a + b = 10$、$a \oplus b = 4$（AND は 3、例 $a = 3, b = 7$）に替えた。2 問目を $a \oplus b = 6$ にし、偶奇は合うが AND＝2 と XOR＝6 が bit 1 で重なるので解がない、と答えに書いた。解がある条件 $S \ge X$・$S - X$ が偶数・$((S - X)/2) \text{ AND } X = 0$ と、偶奇は必要条件にすぎないことも書いた。本文の等号の段落に「AND と XOR は同じ桁に 1 を持たない」の 1 文を足した
+- 2：#submask の文を「$s = m$ から始めて」にした
+- 3：ABC356 D の方針に、60 桁分を足すと long long を超えるので足すたびに余りを取る、を足した
+- 4：#pitfalls の 1 段落目を、手元の値（定数の `1 << 40` は 0、変数の `1 << n`（n = 40）は 256）で書き直した。確認問題「どこが誤りか」の答えも「手元では 0 になった」にそろえた
+- 5：`std::bit_width` も符号なしだけ、の注記とリンク（cpp-math-functions#bit-unsigned-only）を足した
+- 6：std::popcount の文を cpp-math-functions#bit-unsigned-only へ、1 << k の文を cpp-integer-overflow#shift-width へのリンクに直した。#next-steps の bitwise-independence・bit-full-search は節を指す文ではないのでページへのリンクのままにした。subset-enumeration-dp・xor-basis は stub なので今のまま
+- 7：front matter の complexity を「すべての集合とその部分集合の組は合計 O(3^N)」にした
+- 8：submask-steps.svg の注記を「点線の行：s − 1 で立った bit 2 の 1 を & m が消し、011 が残る。」にした。提案の文は字幅の見積もりで 480 を超えるおそれがあったので、主語（& m）を明示したまま短くした。字幅の見積もりは元の文と同程度
+- 9：採らなかった。落とし穴の見出しを定型にそろえるかは、ほかのページとの統一を含めてメインが判断する事項なので（手引き §13.1）。そろえる場合は sections から pitfalls の行を外し、見出しを `## 落とし穴 {#pitfalls}` にすればよい（anchor は同じ）
+
+### 台帳への提案（追加）
+
+- 検証役の確認に基づき、abc269_c・abc213_a・abc356_d・abc121_d の checked に 2026-10-21 を入れる
+
+### 検査（対応後）
+
+- check_pages エラー 0・警告 0、fix_problems --check 0 行、check_snippets 5 片・期待と違う 0、textlint エラー 0（警告 18）

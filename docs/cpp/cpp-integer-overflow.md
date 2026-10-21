@@ -12,7 +12,7 @@ kind: [実装・C++]
 prerequisites: [cpp-types-literals]
 related: [cpp-undefined-behavior, integer-division, integer-root, cpp-math-functions, cpp-algorithms, cpp-views-basics]
 summary: int どうしの積・1 << k・size() の符号なしなど、型の幅を超えて値が壊れる書き方を見分けて直す。64 bit を超える中間値は GCC の拡張 __int128 で持てるが、入出力などに制限がある。
-complexity: 'どれも 1 回 O(1)。__int128 の割り算は関数の呼び出し（__divti3）になるが、手元で 10^7 回の積・割り算は long long の 2.5 倍以内だった'
+complexity: 'どれも 1 回 O(1)。__int128 の割り算は関数の呼び出し（__divti3 など）になり、手元の計測では long long の 1〜3 倍程度だった（割る数が 64 bit を超えると遅い）'
 signs:
   - {type: constraint, text: A_i ≤ 10^9 を N ≤ 2×10^5 個足す、または 2 つ掛ける（int に収まらない）}
 acl: []
@@ -40,14 +40,14 @@ atcoder: true
     - **いつ使うか**：
         - $A_i \le 10^9$ を $N \le 2 \times 10^5$ 個足す、または 2 つ掛ける（`int` に収まらない）。
         - 小さい入力は合うのに大きい入力で WA になる、答えが負になる。
-    - **計算量**：どれも 1 回 $O(1)$。`__int128` の割り算は関数の呼び出し（`__divti3`）になるが、手元で $10^7$ 回の積・割り算は `long long` の 2.5 倍以内だった
+    - **計算量**：どれも 1 回 $O(1)$。`__int128` の割り算は関数の呼び出し（`__divti3` など）になり、手元の計測では `long long` の 1〜3 倍程度だった（割る数が 64 bit を超えると遅い）
     - **前提**：[数の型とリテラル](../cpp/cpp-types-literals.md)
 
 <!-- textlint-disable -->
 別名：オーバーフロー・integer overflow・あふれ・int の掛け算・1LL * a * b・1 << 40・符号なし整数・v.size() - 1・ssize・__int128・i128・128bit 整数・__builtin_mul_overflow
 <!-- textlint-enable -->
 
-整数の[オーバーフロー](../guide/glossary.md#overflow)は、計算の結果がその型で表せる範囲を超えることである。`int` は約 $\pm 2.1 \times 10^9$、`long long` は約 $\pm 9.2 \times 10^{18}$ までしか表せない（[整数の型と表せる範囲](../cpp/cpp-types-literals.md)）。あふれは「答えを入れる変数の型」ではなく「計算する式の型」で起きるので、変数を `long long` にしただけでは防げない。このページの例はすべて、手元の g++-13 と g++-15（`-std=gnu++23 -O2 -Wall -Wextra`）で確かめた。
+整数の[オーバーフロー](../guide/glossary.md#overflow)は、計算の結果がその型で表せる範囲を超えることである。`int` は約 $\pm 2.1 \times 10^9$、`long long` は約 $\pm 9.2 \times 10^{18}$ までしか表せない（[整数の型と表せる範囲](../cpp/cpp-types-literals.md)）。あふれは「答えを入れる変数の型」ではなく「計算する式の型」で起きるので、変数を `long long` にしただけでは防げない。このページの例は、断りのないかぎり手元の g++-13 と g++-15（`-std=gnu++23 -O2 -Wall -Wextra`）で確かめた。
 
 このページのコードは `#include <bits/stdc++.h>` と `using namespace std;` を前提にする。
 
@@ -112,7 +112,7 @@ $a = b = 10^5$ なら正しい積は $10^{10}$ だが、手元では `1410065408
 ```
 
 - `v.size() - 1`：`v` が空だと $2^{64} - 1 = 18446744073709551615$ になる。`for (int i = 0; i < v.size() - 1; i++)` は、空の `v` で範囲外を読み続ける
-- `-1 < v.size()`：符号付きと符号なしを比べると、`-1` が `size_t` に直されて最大値になり、偽になる。`-Wall -Wextra` なら `comparison of integer expressions of different signedness` の警告が出る（`-Wsign-compare`）。`v.size() - 1` には警告が出ない
+- `-1 < v.size()`：符号付きと符号なしを比べると、`-1` が `size_t` に直されて最大値になり、偽になる。`-Wall -Wextra` なら `comparison of integer expressions of different signedness` の警告が出る（`-Wsign-compare`）。上の `i < v.size() - 1` の比較にも同じ警告が出るが、`v.size() - 1` の引き算そのものには警告が出ず、`size_t i` で書くと何も出ない
 - **直し方**：符号付きの大きさで計算する。`ssize(v)` は `ptrdiff_t`（64 bit の Linux では `long`）を返す。`(int)v.size()` でもよい
 
 ```cpp
@@ -137,6 +137,7 @@ $a = b = 10^5$ なら正しい積は $10^{10}$ だが、手元では `1410065408
 --8<-- "cpp-integer-overflow/min-max-ok.cpp:core"
 ```
 
+- `max({0LL, x, 2 * x})` のような初期化子リストでも、要素の型がすべてそろっていないとコンパイルエラーになる（`max({0, x})` は誤り）
 - **落とし穴**：`min<int>(…)` と明示すると、`long long` の値が `int` に直されて切り捨てられる（エラーにならない）。型を明示するなら広い方の型にする
 - **関連**：`a = min(a, b)` を `chmin` で書く雛形でも、`a` と `b` の型をそろえる必要がある
 
@@ -208,7 +209,7 @@ $a = b = 10^5$ を入れると、`c` は `1410065408`、`p` は `10000000000` �
 --8<-- "cpp-integer-overflow/int128.cpp:print"
 ```
 
-入力は `string` で読み、先頭から `x = x * 10 + 桁` で組み立てる。
+入力は `string` で読み、先頭から `x = x * 10 - 桁` で負の側に積み上げ、最後に符号を決める。正の側に積み上げると、$-2^{127}$ を読むときに途中の $2^{127}$ であふれる（`to_str` と同じ理由）。
 
 ```cpp
 --8<-- "cpp-integer-overflow/int128.cpp:read"
@@ -258,7 +259,7 @@ $10^{18} \times 10^{18}$ と $(10^{18} + 1)(10^{18} - 1) = 10^{36} - 1$ は、`l
 ## 確認問題 {#quiz}
 
 ??? question "確認問題：`a`・`b` が `int` で、`long long x = a * b;` と書いた。何が起きるか。どう直すか。"
-    `a * b` は `int` どうしの積として計算され、$2^{31} - 1$ を超えるとあふれる（未定義動作）。その後で `long long` に広げても値は戻らない。`1LL * a * b` か `(long long)a * b` と書き、掛ける前に片方を `long long` にする。
+    `a * b` は `int` どうしの積として計算され、`int` の範囲（約 $\pm 2.1 \times 10^9$）を外れるとあふれる（未定義動作）。その後で `long long` に広げても値は戻らない。`1LL * a * b` か `(long long)a * b` と書き、掛ける前に片方を `long long` にする。
 
 ??? question "確認問題：答えに関係のない行を消したら、答えが変わった。何を疑うか。"
     未定義動作、特に符号付き整数のあふれを疑う。コンパイラはあふれが起きないと仮定して最適化するので、あふれる式があると別の行の結果まで変わる。`-fsanitize=undefined` を付けて実行し、あふれた行を探す。

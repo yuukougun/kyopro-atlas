@@ -36,10 +36,10 @@ updated: 2026-10-21
 | 問題 | 位置 | diff | 使う手法のページ |
 | --- | --- | --- | --- |
 | abc451_d Concat Power of 2 | D | 856 | [全探索の設計](../basics/brute-force.md) |
-| abc451_e Tree Distance | E | 1215 | [最小全域木](../graph/minimum-spanning-tree.md#kruskal-prim) › クラスカル法とプリム法（密なら O(N^2) のプリム法）、[Union-Find](../ds/union-find.md)、[木の上の距離](../tree/tree-distance.md) › 1 点からの距離（ダイクストラはいらない）、[木の構築・復元](../tree/tree-construction.md) › 距離の情報から作る（最も近い頂点とは辺で結ばれる） |
+| abc451_e Tree Distance | E | 1215 | [最小全域木](../graph/minimum-spanning-tree.md#kruskal-prim) › クラスカル法とプリム法（密なら O(N^2) のプリム法）、[Union-Find](../ds/union-find.md)、[木の上の距離](../tree/tree-distance.md#from-one) › 1 点からの距離（ダイクストラはいらない）、[木の構築・復元](../tree/tree-construction.md#from-distances) › 距離の情報から作る（最も近い頂点とは辺で結ばれる） |
 | abc451_f Make Bipartite 3 | F | 1540 | [重み付き Union-Find](../ds/weighted-union-find.md#generalization) › 一般化（XOR で偶奇・二部グラフ、頂点を 2 倍にする）、[二部グラフ判定](../graph/bipartite-graph.md#union-find) › Union-Find（頂点を 2 倍にする・偶奇を持つ）で判定する |
 | abc451_g Minimum XOR Walk | G | 2221 | [XOR 基底](../math/xor-basis.md) › グラフのウォークの XOR（全域木の根からの XOR と、閉路の XOR の基底）、[分割統治](../basics/divide-and-conquer.md) |
-| abc452_d No-Subsequence Substring | D | 903 | [部分列の判定と次の出現位置の表](../string/subsequence-matching.md) › 次の出現位置の表 nxt\[i][c]（後ろから作る・番兵 N） |
+| abc452_d No-Subsequence Substring | D | 903 | [部分列の判定と次の出現位置の表](../string/subsequence-matching.md#next-occurrence) › 次の出現位置の表 nxt\[i][c]（後ろから作る・番兵 N） |
 | abc452_e You WILL Like Sigma Problem | E | 1318 | [周期性の検出](../basics/periodicity.md#periodic-patterns) › 盤面・剰余の周期を割り算で数える、[調和級数と倍数の列挙](../math/harmonic-sum.md#mark-multiples) › 値の倍数に印を付ける、[累積和](../basics/prefix-sum.md) |
 | abc452_f Interval Inversion Count | F | 1630 | [尺取り法](../basics/two-pointers.md)、[転倒数](../ds/inversion-number.md#sliding-window) › 窓を伸縮しながら転倒数を増減する（尺取り・期待値と組む）、[BIT（Fenwick Tree）](../ds/fenwick-tree.md) |
 | abc452_g 221 Substring | G | 2255 | [ランレングス圧縮](../basics/run-length-encoding.md#keep-compressed) › ランレングスのまま処理する、[Suffix Automaton と発展の文字列アルゴリズム](../string/suffix-automaton.md) › Suffix Automaton（状態数 2N−1 以下・遷移数 3N−4 以下。文字の追加に強い）、[Suffix Array と LCP 配列](../string/suffix-array.md#distinct-substrings) › 異なる部分文字列の数 = N(N+1)/2 − Σlcp |
@@ -50,11 +50,11 @@ updated: 2026-10-21
 | abc454_d (xx) | D | 706 | [スタック・キュー・deque の使いどころ](../ds/stack-techniques.md#cancel) › 直前と打ち消し合うものを消す（末尾を見て pop） |
 | abc454_e LRUD Moving | E | 1627 | [偶奇に着目する](../thinking/parity.md#checkerboard) › 市松模様の偶奇、[構築問題の考え方](../thinking/construction.md) |
 | abc454_f Make it Palindrome 2 | F | 2169 | [差分列への言い換え](../basics/difference-sequence.md) › 回文にする操作は左右の差の列に直してから差分を取る、[言い換えの典型](../thinking/reformulation.md#operations) › 操作の言い換え（区間操作を差分列で・隣接 swap を転倒数で）、[貪欲法の考え方と正当性](../basics/greedy-basics.md) |
-| abc454_g Mode in the Subtree | G | 2253 | [マージテク](../tree/small-to-large.md) › DSU on Tree（重い子の結果を残す） |
+| abc454_g Mode in the Subtree | G | 2253 | [マージテク](../tree/small-to-large.md#dsu-on-tree) › DSU on Tree（重い子の結果を残す） |
 | abc455_d Card Pile Query | D | 796 | [配列で作る連結リスト](../ds/linked-list.md#operations) › 挿入・削除・付け替えの手順 |
 | abc455_e Unbalanced ABC Substrings | E | 1157 | [余事象](../thinking/complement.md#two-conditions) › 2〜3 条件の包除（重なりを足し戻す）、[累積和と連想配列で区間を数える](../basics/prefix-sum-counting.md#equal-k) › S_r − S_l = K となる l を数える（S_0 を入れ忘れない） |
 | abc455_f Merge Slimes 2 | F | 1549 | [主客転倒・寄与](../thinking/contribution.md)、[Σ の変形](../math/sigma-manipulation.md#formulas) › よく使う和の公式と Σ_{i≠j} a_i a_j = (Σa)² − Σa²、[遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md) › 設計の手順と載せられる条件（S はモノイド・F は恒等写像を含み合成で閉じる・f(x·y) = f(x)·f(y)） |
-| abc455_g Balanced Subarrays | G | 3092 | [集合・多重集合のハッシュ](../string/hashing-for-sets.md) › 接頭辞・区間のハッシュ（集合の接頭辞は初めて出た値だけ入れる）、[尺取り法](../basics/two-pointers.md) |
+| abc455_g Balanced Subarrays | G | 3092 | [集合・多重集合のハッシュ](../string/hashing-for-sets.md#prefix-hash) › 接頭辞・区間のハッシュ（集合の接頭辞は初めて出た値だけ入れる）、[尺取り法](../basics/two-pointers.md) |
 | abc456_d Not Adjacent 2 | D | 586 | [DP の状態の設計](../dp/dp-state-design.md#last-characters) › 末尾の数文字を状態にする（禁止された並び・回文を避ける） |
 | abc456_e Endless Holidays | E | 1214 | [状態を頂点にする](../graph/extended-dijkstra.md#layered-graph) › 頂点倍化（層を作り、層の間の辺でコストを表す）、[閉路の検出と復元](../graph/cycle-detection.md#directed) › 有向グラフ：3 色の DFS（探索中の頂点への辺だけが閉路） |
 | abc456_f Plan Holidays | F | 1888 | [セグメント木に何を載せるか](../ds/segment-tree-monoids.md) › 行列を載せる（(min,+)・(max,+) の半環も。行列の積は行列累乗のページ、1 点更新のたびに DP を求め直すなら動的 DP）、[行列累乗](../math/matrix-power.md#semiring) › (min,+)・(max,+) などの半環の行列と単位元・零元 |
@@ -68,10 +68,10 @@ updated: 2026-10-21
 | abc458_f Critical Misread | F | 1744 | [Aho-Corasick 法](../string/aho-corasick.md) › 照合オートマトンとして使う（DP・行列累乗）、[照合オートマトン上の DP](../string/string-automaton-dp.md) › N が巨大なとき：遷移行列の累乗・ダブリング、[行列累乗](../math/matrix-power.md#dp-transition) › DP の遷移を行列にする（照合の状態・末尾の数文字・グリッドの境界の状態） |
 | abc458_g Children Yearn for the Evil Kindergarten | G | 2831 | [答えで二分探索](../basics/binary-search-answer.md#dp-check) › 判定を DP で作る（決め打ちごとに初期化し直す）、[Monge 性による DP の高速化](../dp/monge.md) › 凸な列どうしの (max,+) 畳み込み（差分のマージ）、[Slope Trick](../dp/slope-trick.md) › 凸関数を傾きの変わる点の集まりで表す |
 | abc459_d Adjacent Distinct String | D | 701 | [貪欲法の考え方と正当性](../basics/greedy-basics.md#strongest-first) › 基準を決めて強い順に使う、[対称性・鳩の巣原理・場合分け](../thinking/symmetry-pigeonhole-casework.md#pigeonhole) › 鳩の巣原理（必ず一致が起きる・探索の打ち切り回数） |
-| abc459_e Select from Subtrees | E | 1298 | [葉から考える](../tree/leaf-first.md) › 帰りがけ順に葉から情報を上へ送る、[根付き木と走査順](../tree/tree-traversal.md#pre-post-order) › 行きがけ順と帰りがけ順（子から親へ集約する）、[二項係数の前計算](../comb/binomial-precompute.md) |
+| abc459_e Select from Subtrees | E | 1298 | [葉から考える](../tree/leaf-first.md#send-up) › 帰りがけ順に葉から情報を上へ送る、[根付き木と走査順](../tree/tree-traversal.md#pre-post-order) › 行きがけ順と帰りがけ順（子から親へ集約する）、[二項係数の前計算](../comb/binomial-precompute.md) |
 | abc459_f -1, +1 | F | 2163 | [差分列への言い換え](../basics/difference-sequence.md) › 狭義の条件は a_i − i で広義に直してから差分を取る、[言い換えの典型](../thinking/reformulation.md#operations) › 操作の言い換え（区間操作を差分列で・隣接 swap を転倒数で） |
 | abc459_g Golf 2 | G | 3123 | [偶奇に着目する](../thinking/parity.md#checkerboard) › 市松模様の偶奇、[拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md#general-solution) › ax + by = c の解の存在条件と一般解 x = x0 + k·b/g |
-| abc460_d Repeatedly Repainting | D | 1216 | [幅優先探索（BFS）と無重み最短路](../graph/bfs.md#multi-source) › 多始点 BFS（超始点から距離 0 の辺を張るのと同じ）、[グリッドグラフ](../graph/grid-graph.md#neighbors) › 4 近傍・8 近傍と dx・dy の配列、[偶奇に着目する](../thinking/parity.md#alternating) › 1 歩ごとに偶奇が入れ替わる |
+| abc460_d Repeatedly Repainting | D | 1216 | [幅優先探索（BFS）と無重み最短路](../graph/bfs.md#multi-source) › 多始点 BFS（超頂点から距離 0 の辺を張るのと同じ）、[グリッドグラフ](../graph/grid-graph.md#neighbors) › 4 近傍・8 近傍と dx・dy の配列、[偶奇に着目する](../thinking/parity.md#alternating) › 1 歩ごとに偶奇が入れ替わる |
 | abc460_e x + y ≡ x + y | E | 1362 | [桁と mod](../math/digit-and-mod.md#concatenation) › 数の連結：x の後ろに d 桁の y を付けると x·10^d + y、[整数の割り算と余り](../math/integer-division.md#count-multiples) › 区間 [L, R] の K の倍数の個数と、x 以上で m で割って r 余る最小の数、[GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md) |
 | abc460_f Farthest Pair Query | F | 1987 | [木の直径と最遠点](../tree/tree-diameter.md)、[セグメント木に何を載せるか](../ds/segment-tree-monoids.md)、[最小共通祖先（LCA）](../tree/lca.md#distance) › 距離 = dep(u) + dep(v) − 2 dep(lca) |
 | abc460_g Vertex Flip Query | G | 2838 | [HL 分解](../tree/hld.md)、[セグメント木](../ds/segment-tree.md) |
@@ -91,7 +91,7 @@ updated: 2026-10-21
 | abc464_e Fill-Rect Query | E | 1075 | [いもす法](../basics/imos.md#imos-2d) › 2 次元いもす法（四隅に ±1、横と縦に累積） |
 | abc464_f Random Vault Heist | F | 2225 | [対称性で確率を求める](../comb/probability-symmetry.md#random-permutation) › 残りから一様に選ぶ = ランダムな順列、[期待値の線形性と指示確率変数](../comb/linearity-of-expectation.md)、[半分全列挙](../basics/meet-in-the-middle.md#combine-halves) › 前半・後半を列挙して突き合わせる（ソート＋二分探索・尺取り）、[尺取り法](../basics/two-pointers.md) |
 | abc464_g Celester 2 | G | 2592 | [Alien DP](../dp/alien-dp.md) › 取り消し付きの貪欲で解ける場合（優先度付きキュー）、[優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md#regret) › 選んだものを後から入れ替える（後悔付き貪欲。一般形は Alien DP のページ） |
-| abc465_d X to Y | D | 839 | [完全二分木](../tree/complete-binary-tree.md) › 番号だけで LCA を求める（大きい方を 2 で割る）、[完全二分木](../tree/complete-binary-tree.md) › K 分木への一般化 |
+| abc465_d X to Y | D | 839 | [完全二分木](../tree/complete-binary-tree.md#lca-by-index) › 番号だけで LCA を求める（大きい方を 2 で割る）、[完全二分木](../tree/complete-binary-tree.md#k-ary) › K 分木への一般化 |
 | abc465_e Digit Circus | E | 1417 | [桁 DP](../dp/digit-dp.md#extra-state) › 問題の情報を状態に足す（桁和の余り・個数） |
 | abc465_f Sjeltzer? | F | 1754 | [2 次元累積和](../basics/prefix-sum-2d.md#higher-dimensions) › 3 次元以上（項の数と符号の決め方）、[いもす法](../basics/imos.md) |
 | abc465_g Sum of Mex of Mod of Linear | G | 3082 | —（対応するページがない） |
@@ -119,7 +119,7 @@ updated: 2026-10-21
 | abc471_e Sum of Square of Sum | E | 990 | [Σ の変形](../math/sigma-manipulation.md#formulas) › よく使う和の公式と Σ_{i≠j} a_i a_j = (Σa)² − Σa²、[数え上げの考え方](../comb/counting-mindset.md#contribution-with-binomial) › 二項係数と組み合わせた寄与（残りの選び方を掛ける）、[二項係数の前計算](../comb/binomial-precompute.md) |
 | abc471_f Concat (maximize) | F | 1895 | [交換論法と比較関数の設計](../basics/exchange-argument.md) › 連結の比較（a+b と b+a）、[貪欲法の考え方と正当性](../basics/greedy-basics.md) |
 | abc471_g Caeser Syllables | G | 2464 | [主客転倒・寄与](../thinking/contribution.md#swap-roles) › 数える対象を入れ替える（表の行と列。式の規則は Σ の変形のページ）、[畳み込みの使い方](../math/convolution-ntt.md) |
-| abc472_d Bomber Mad | D | 605 | [幅優先探索（BFS）と無重み最短路](../graph/bfs.md#multi-source) › 多始点 BFS（超始点から距離 0 の辺を張るのと同じ） |
+| abc472_d Bomber Mad | D | 605 | [幅優先探索（BFS）と無重み最短路](../graph/bfs.md#multi-source) › 多始点 BFS（超頂点から距離 0 の辺を張るのと同じ） |
 | abc472_e Odd Cycle | E | 1029 | [二部グラフ判定](../graph/bipartite-graph.md#odd-cycle) › 二部グラフでないことと奇閉路があることは同じ |
 | abc472_f Centroid of a Slice | F | 1707 | [ベクトルと外積](../geometry/geometry-vectors.md#polygon-area) › 三角形・多角形の面積：座標の公式（面積の 2 倍を整数のまま扱う）、[累積和](../basics/prefix-sum.md) |
 | abc472_g Cascading Grid | G | 2018 | [燃やす埋める](../graph/project-selection.md) › 最大重み閉包（依存関係）、[最小カット](../graph/min-cut.md) |
@@ -139,16 +139,16 @@ updated: 2026-10-21
 | abc476_e Min-Max Swap | E | 964 | [セグメント木](../ds/segment-tree.md) |
 | abc476_f Chebyshev Cafe | F | 1728 | [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md#remove-abs) › 絶対値の外し方：向きを固定して場合分けし、盤面を反転してもう一度、[グリッド上の DP](../dp/dp-grid.md#directional-prefix) › 方向ごとの累積和で遷移をまとめる |
 | abc476_g Increasing Popcount | G | 2477 | [最長増加部分列](../dp/lis.md#dilworth) › Dilworth の定理（増加列への最小分割数＝最長減少部分列の長さ）、[bit 演算の基本と XOR の性質](../basics/bit-operations.md#popcount) › popcount・最下位ビット、[再帰的な構造](../basics/recursion-structure.md)、[二項係数の意味と性質](../comb/binomial-coefficient.md) |
-| abc477_d Masking Tape | D | 946 | [後ろから・逆順に考える](../thinking/reverse-thinking.md) › 後ろから決めると一意になる |
+| abc477_d Masking Tape | D | 946 | [後ろから・逆順に考える](../thinking/reverse-thinking.md#decide-from-back) › 後ろから決めると一意になる |
 | abc477_e Wheel Distance | E | 1235 | [ダイクストラ法](../graph/dijkstra.md)、[累積和](../basics/prefix-sum.md#circular) › 円環は 2 周分に伸ばす |
 | abc477_f Count Cells in a Window | F | 1629 | [クエリの先読み](../ds/offline-queries.md)、[平面走査](../ds/sweep-line-2d.md) › 支配点の数え上げ・長方形内の点の数（4 つの接頭辞の包除、上端での値 − 下端の 1 つ前での値）、[遅延セグメント木](../ds/lazy-segment-tree.md) |
 | abc477_g Frequency Query on Tree | G | 2226 | [Mo's algorithm](../ds/mo-algorithm.md) › 木上の Mo（入りと出の両方を記録した列で、パスを区間にする。LCA を別に足す）、[オイラーツアー](../tree/euler-tour.md#mo-on-tree) › 木上の Mo（データ構造の章）、[最小共通祖先（LCA）](../tree/lca.md) |
 | abc478_d Range Set Insertion Query | D | 729 | [イベントソートと平面走査の基本](../basics/event-sort.md#make-events) › イベントの作り方と同じ座標での処理順 |
 | abc478_e lt and le | E | 1376 | [強連結成分分解（SCC）](../graph/scc.md#condensation) › 縮約したグラフが DAG になる理由、[トポロジカルソート](../graph/topological-sort.md) |
-| abc478_f Min-First Search | F | 1588 | [木の構築・復元](../tree/tree-construction.md) › 訪問順から親の候補を数える、[セグメント木上の二分探索](../ds/segment-tree-binary-search.md) |
+| abc478_f Min-First Search | F | 1588 | [木の構築・復元](../tree/tree-construction.md#from-order) › 訪問順から親の候補を数える、[セグメント木上の二分探索](../ds/segment-tree-binary-search.md) |
 | abc478_g Division Point Hull | G | 2582 | [分割統治](../basics/divide-and-conquer.md)、[凸包と凸多角形](../geometry/convex-hull.md) › Andrew 法（monotone chain）：下側と上側を作る、[発展の幾何](../geometry/advanced-geometry.md) › ミンコフスキー和（凸包の和） |
 | abc479_d Back and Forth Distance | D | 563 | [累積和](../basics/prefix-sum.md#left-right) › 左右からの累積（1 つ除いた gcd・max） |
-| abc479_e Cut and Add | E | 1000 | [辺で切って数える](../tree/tree-edge-contribution.md) › 辺を通るペアは s(N−s) 個、[根付き木と走査順](../tree/tree-traversal.md#parent-depth-size) › 親・深さ・部分木サイズを求める |
+| abc479_e Cut and Add | E | 1000 | [辺で切って数える](../tree/tree-edge-contribution.md#edge-pairs) › 辺を通るペアは s(N−s) 個、[根付き木と走査順](../tree/tree-traversal.md#parent-depth-size) › 親・深さ・部分木サイズを求める |
 | abc479_f Narrow Passage | F | 1938 | [転倒数](../ds/inversion-number.md#adjacent-swaps) › なぜ隣接 swap の最小回数か（1 回の隣接 swap で転倒数はちょうど 1 増減する）、[言い換えの典型](../thinking/reformulation.md#operations) › 操作の言い換え（区間操作を差分列で・隣接 swap を転倒数で） |
 | abc479_g Tuning | G | 2386 | [偏角ソート](../geometry/argument-sort.md#range-count) › 並べた後に：角度の範囲の点の数（累積和）、[累積和](../basics/prefix-sum.md) |
 | abc480_d Concatenation of Prefixes | D | 864 | [累積和](../basics/prefix-sum.md#with-binary-search) › 累積和の上で二分探索・尺取り、[二分探索](../basics/binary-search.md) |
@@ -170,7 +170,7 @@ updated: 2026-10-21
 | 典型90 002. Encyclopedia of Parentheses（★3） | — | [再帰的な構造](../basics/recursion-structure.md)（練習） |
 | 典型90 003. Longest Circular Road（★4） | — | [木の直径と最遠点](../tree/tree-diameter.md)（練習） |
 | 典型90 005. Restricted Digits（★7） | — | [行列累乗](../math/matrix-power.md)（力試し） |
-| 典型90 006. Smallest Subsequence（★5） | — | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md)（練習） |
+| 典型90 006. Smallest Subsequence（★5） | — | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md)（練習）、[部分列の判定と次の出現位置の表](../string/subsequence-matching.md)（練習） |
 | 典型90 009. Three Point Angle（★6） | — | [偏角ソート](../geometry/argument-sort.md)（例題） |
 | 典型90 012. Red Painting（★4） | — | [グリッドグラフ](../graph/grid-graph.md)（練習）、[Union-Find](../ds/union-find.md)（練習） |
 | 典型90 013. Passing（★5） | — | [ダイクストラ法](../graph/dijkstra.md)（練習） |
@@ -180,11 +180,13 @@ updated: 2026-10-21
 | 典型90 022. Cubic Cake（★2） | — | [GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md)（練習） |
 | 典型90 024. Select +／- One（★2） | — | [偶奇に着目する](../thinking/parity.md)（練習） |
 | 典型90 025. Digit Product Equation（★7） | — | [素因数の指数で考える](../math/prime-exponent-vector.md)（力試し） |
+| 典型90 026. Independent Set on a Tree（★4） | — | [木の 2 色塗り分けと距離の偶奇](../tree/tree-bipartite.md)（練習） |
 | 典型90 028. Cluttered Paper（★4） | — | [いもす法](../basics/imos.md)（練習） |
 | 典型90 029. Long Bricks（★5） | — | [座標圧縮](../basics/coordinate-compression.md)（練習）、[遅延セグメント木](../ds/lazy-segment-tree.md)（練習） |
 | 典型90 030. K Factors（★5） | — | [エラトステネスの篩](../math/sieve-eratosthenes.md)（練習） |
 | 典型90 034. There are few types of elements（★4） | — | [尺取り法](../basics/two-pointers.md)（練習） |
 | 典型90 038. Large LCM（★3） | — | [整数の割り算と余り](../math/integer-division.md)（練習） |
+| 典型90 039. Tree Distance（★5） | — | [辺で切って数える](../tree/tree-edge-contribution.md)（例題） |
 | 典型90 042. Multiple of 9（★4） | — | [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md)（練習） |
 | 典型90 043. Maze Challenge with Lack of Sleep（★4） | — | [01-BFS](../graph/zero-one-bfs.md)（練習） |
 | 典型90 044. Shift and Swapping（★3） | — | [全体への操作を変数で持つ](../ds/global-offset.md)（練習） |
@@ -328,6 +330,12 @@ updated: 2026-10-21
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
 | KEYENCE2020 C. Subarray Sum | 625 | [構築問題の考え方](../thinking/construction.md)（練習） |
+
+### PRACTICE {#problem-sets-practice}
+
+| 問題 | diff | ページ（役割） |
+| --- | --- | --- |
+| PRACTICE B. Interactive Sorting | — | [インタラクティブ問題](../misc/interactive.md)（練習） |
 
 ### SOUNDHOUND2018-SUMMER-QUAL {#problem-sets-soundhound2018-summer-qual}
 

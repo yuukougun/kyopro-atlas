@@ -14,13 +14,15 @@ using F = long long;                                           // 作用：区�
 S mapping(F f, S x) { return {x.sum + f * x.len, x.len}; }     // 作用 f を値 x に施す
 F composition(F f, F g) { return f + g; }                      // g を施した後に f を施す
 F id() { return 0; }                                           // 何もしない作用（0 を足す）
+// --8<-- [end:core]
 
 int main() {
     int n, q;
     cin >> n >> q;
+    // --8<-- [start:use]
     vector<S> init(n, {0, 1});  // 葉の長さは 1
     lazy_segtree<S, op, e, F, mapping, composition, id> seg(init);
-    // --8<-- [end:core]
+    // --8<-- [end:use]
     for (int i = 0; i < q; i++) {
         int t, l, r;
         cin >> t >> l >> r;

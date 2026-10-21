@@ -109,7 +109,6 @@ search:
     - `dp-state-design#bracket-dp` 括弧列の DP（開き括弧の残り数を状態にする）：https://yuukougun.github.io/kyopro-atlas/dp/dp-state-design/#bracket-dp
     - `dp-state-design#dp-cyclic` 環状の列（1 か所で切り、最初の状態を固定して DP を回す）：https://yuukougun.github.io/kyopro-atlas/dp/dp-state-design/#dp-cyclic
     - `dp-state-design#state-count` 状態数の見積もり（(P+1)&#94;K・2&#94;K・末尾の数文字の組の数）：https://yuukougun.github.io/kyopro-atlas/dp/dp-state-design/#state-count
-    - `dp-state-design#pitfalls` 落とし穴（最適値だけを持って状態を潰しすぎる）：https://yuukougun.github.io/kyopro-atlas/dp/dp-state-design/#pitfalls
 
 ## 余り・個数を状態に持つ DP（dp-mod-state） {#dp-mod-state}
 

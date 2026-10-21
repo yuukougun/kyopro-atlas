@@ -48,3 +48,12 @@
 ## 使用量の目安
 
 - 道具の呼び出し 約 22 回、Web 取得 2 回（cpprefjp）＋URL の確認に curl 5 回
+
+## 検証の指摘への対応（2026-10-21）
+
+- 指摘 1（直すべき）：stoll の範囲を「$2^{63} - 1$（約 $9.2 \times 10^{18}$）を超える数（20 桁以上は必ず超える）」に直し、stoull の範囲を足した
+- 指摘 2：to_string の落とし穴 1 を cpp-io#float-output、辞書順を string-basics#lexicographic-order、string_view の落とし穴 2 を cpp-undefined-behavior#dangling-string-view へ張り替えた。#append の表の後に cpp-io#tle-causes へのリンクを足した（3 つの anchor は現時点で各ページにあることを確かめた。メインは反映時に再確認してほしい）
+- 指摘 3：導入を「$N$ が大きいと TLE」にし、#append の表の後に $N = 10^6$ で 20 秒超・確認問題の形で数十秒になることを足した
+- 指摘 4：stoi の 1 文を落とし穴 2 から外し、独立の「使い分け」の 1 行にした
+- 指摘 5：cin.ignore() は次の 1 文字を捨てるだけで、数のすぐ後が改行であることを前提にする旨と、AtCoder ではその前提を満たすことを書いた
+- 指摘 6：string-view.cpp の main に、素朴な方法（substr と比較の繰り返し）との assert を足した。出力を見せるだけの片は採らなかった（検証の指摘どおり、出力の比較で確かめており assert で比べる相手がないため）。C++ の章で手引き §9 の「assert を持つ」をどう扱うかはメインの判断に任せる

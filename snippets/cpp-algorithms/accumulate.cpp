@@ -13,6 +13,7 @@ int main() {
     cout << accumulate(d.begin(), d.end(), 0.0) << '\n';  // 1.5
     // --8<-- [end:core]
 
+    assert(accumulate(a.begin(), a.end(), 0LL) == 3000000000LL);
     vector<int> e;
     cout << accumulate(e.begin(), e.end(), 0) << '\n';  // 空なら初期値そのもの
 }

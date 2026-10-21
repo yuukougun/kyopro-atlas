@@ -54,12 +54,12 @@ atcoder: true
 `using namespace std;` は、名前空間 `std` の名前を `std::` なしで書けるようにする宣言である。`std::vector<int>` を `vector<int>`、`std::views::iota` を `views::iota` と書ける。
 
 - **素朴に書くと**：使うヘッダを 1 つずつ `#include` し、名前に `std::` を付ける
-- **コンパイル時間**：すべてのヘッダを読むので、1 回のコンパイルが 1〜3 秒ほど長くなる。手元ではプリコンパイル済みヘッダで縮められる（[AtCoder と手元の環境](../cpp/cpp-environment.md)）
+- **コンパイル時間**：すべてのヘッダを読むので、1 回のコンパイルが 1〜3 秒ほど長くなる。手元ではプリコンパイル済みヘッダで縮められる（[AtCoder と手元の環境](../cpp/cpp-environment.md#pch)）
 - **落とし穴**：`std` の名前がすべてグローバルから見えるので、自分の変数や関数の名前とぶつかりうる。次の節で扱う
 
 ## 名前の衝突：count・y1 をグローバル変数の名前にするとエラー、std:: を省かない流儀、using namespace atcoder {#namespaces}
 
-`#include <bits/stdc++.h>` と `using namespace std;` のもとで、グローバル変数に `count` や `y1` という名前を付けると、コンパイルエラーになる。`count` はアルゴリズムの `std::count` と区別できず、`y1` は `<cmath>` の数学関数 `y1`（第 2 種ベッセル関数）と同じ名前だからである。
+`#include <bits/stdc++.h>` と `using namespace std;` のもとで、グローバル変数に `count` や `y1` という名前を付けると、コンパイルエラーになる。`count` はアルゴリズムの `std::count` と区別できず、`y1` は `<cmath>` が読み込む C の数学関数 `y1`（第 2 種ベッセル関数。POSIX の拡張）と同じ名前だからである。`count` は `std` の中にあるので名前が曖昧になり、`y1` はグローバルに宣言されているので同じ名前の宣言が重なる。そのため、エラーの種類が違う。
 
 ```cpp
 --8<-- "cpp-macros-template-file/names-ng.cpp:core"
@@ -74,7 +74,7 @@ g++-13・g++-15 とも、`count` は `reference to 'count' is ambiguous`、`y1` 
 ```
 
 - **避け方**：グローバルの変数と関数には、標準ライブラリにない名前（`cnt`・`ys` など）を付ける。変数は `main` の中に置く
-- **std:: を省かない流儀**：現代的な解説コードは `using namespace std;` を書かず、`std::vector`・`std::ranges::sort` と書くことが多い。衝突は起きないが長くなる。読むときは `std::` を外して読めばよい
+- **std:: を省かない流儀**：`using namespace std;` を書かず、`std::vector`・`std::ranges::sort` と書く解説コードもある。衝突は起きないが長くなる。読むときは `std::` を外して読めばよい
 - **ACL**：ACL の名前は名前空間 `atcoder` の中にある。`using namespace atcoder;` と書くと `atcoder::dsu` を `dsu` と書ける。書かないコードでは `atcoder::` が付く（[ACL の読み方](../cpp/acl-reading.md)）
 
 ??? question "確認問題：`int count;` を `main` の中に移すとエラーは消えるか？"
@@ -82,9 +82,9 @@ g++-13・g++-15 とも、`count` は `reference to 'count' is ambiguous`、`y1` 
 
 ## import std;：#include の代わりに標準ライブラリを読む。INT_MAX・assert などのマクロは来ない、手元では std モジュールを先に作る（C++23・GCC 15〜） {#import-std}
 
-`import std;` は、C++23 のモジュールの機能で、標準ライブラリ全体を読み込む。解説コードに出てきたら、`#include <bits/stdc++.h>` の代わりと読めば足りる。`using namespace std;` の役割は持たないので、`import std;` だけのコードは `std::` を付けて書かれている。
+`import std;` は、C++23 のモジュールの機能で、標準ライブラリ全体を読み込む。解説コードに出てきたら、`#include <bits/stdc++.h>` の代わりと読めば足りる。`using namespace std;` の役割は持たないので、`using namespace std;` がなければ `std::` を付けて書く。
 
-違いは、モジュールがマクロを持ち込まないことである。`INT_MAX`・`assert`・`LLONG_MAX` などはマクロなので、`import std;` だけでは使えない。手元の g++-15 で `'INT_MAX' was not declared in this scope`・`'assert' was not declared in this scope` になった。`std::numeric_limits<int>::max()` はマクロではないので使える。マクロが要るなら、`#include <climits>`・`#include <cassert>` を `import std;` より前に書く（`import` の後に `#include` を置く書き方は GCC がまだ対応していない）。
+違いは、モジュールがマクロを持ち込まないことである。`INT_MAX`・`assert`・`LLONG_MAX` などはマクロなので、`import std;` だけでは使えない。手元の g++-15 で `'INT_MAX' was not declared in this scope`・`'assert' was not declared in this scope` になった。`std::numeric_limits<int>::max()` はマクロではないので使える。マクロが要るなら、`#include <climits>`・`#include <cassert>` を `import std;` より前に書く。`<vector>`・`<cmath>` などを `import std;` の後に `#include` すると、手元の g++-15 ではエラーになる。GCC はこの順にまだ対応していないので、`#include` は前に書く。
 
 手元の g++-15 では、先に `std` モジュールをコンパイルしておく必要がある。作業用のフォルダで次を 1 回実行すると `gcm.cache/std.gcm` ができ（手元で 3 秒ほど）、同じフォルダで `-fmodules` を付けたコンパイルが通る。作っていないと `failed to read compiled module` で止まる。
 
@@ -148,7 +148,7 @@ g++-13・g++-15 とも `'::main' must return 'int'` と出る。`signed` は `in
 入力 `3000000000` に対して `9000000000000000000` と出る（`x` は `long long`）。
 
 - **素朴に書くと**：`#define` を使わず、必要な変数だけ `long long` と書く（[オーバーフロー](../cpp/cpp-integer-overflow.md)）
-- **落とし穴 1（書式）**：`printf("%d")`・`scanf("%d")` の書式は置き換わらない。`int` が `long long` になったのに書式が `%d` のままだと食い違う。`-Wall` で `format '%d' expects argument of type 'int', but argument 2 has type 'long long int'` の警告が出る。手元では `3000000000` を読んで `printf("%d")` で出すと `-1294967296` と出た。`%lld` に直すか、`cin`・`cout` を使う
+- **落とし穴 1（書式）**：`printf("%d")`・`scanf("%d")` の書式は置き換わらない。`int` が `long long` になったのに書式が `%d` のままだと食い違う。`-Wall` で `format '%d' expects argument of type 'int', but argument 2 has type 'long long int'` の警告が出る。手元では `3000000000` を読んで `printf("%d")` で出すと `-1294967296` と出た（未定義動作なので、いつもこうなるとは限らない）。`%lld` に直すか、`cin`・`cout` を使う
 
 ```cpp
 --8<-- "cpp-macros-template-file/define-int-printf.cpp:core"
@@ -200,14 +200,14 @@ g++-13・g++-15 とも `'::main' must return 'int'` と出る。`signed` は `in
 
 `#x` は引数の文字をそのまま文字列にするマクロの機能で、`debug(s)` は `cerr << "s" << " = " << (s) << endl` になる。`g++-15 -DLOCAL` でコンパイルすると標準エラー出力に `s = 1`・`s = 3` と出て、付けなければ何も出ない。
 
-- **ONLINE_JUDGE**：AtCoder はコンパイルのときに `-DATCODER -DONLINE_JUDGE` を付ける（[AtCoder と手元の環境](../cpp/cpp-environment.md)）。`#ifndef ONLINE_JUDGE` と書けば、手元で何も付けなくてもデバッグ出力が有効になり、ジャッジでは消える。ただし、`ONLINE_JUDGE` を定義するかはジャッジごとに違う
+- **ONLINE_JUDGE**：AtCoder はコンパイルのときに `-DATCODER -DONLINE_JUDGE` を付ける（[AtCoder と手元の環境](../cpp/cpp-environment.md#judge-macros)）。`#ifndef ONLINE_JUDGE` と書けば、手元で何も付けなくてもデバッグ出力が有効になり、ジャッジでは消える。ただし、`ONLINE_JUDGE` を定義するかはジャッジごとに違う
 - **落とし穴**：デバッグ用の部分に副作用（変数の書き換え・入力の読み込み）を入れない。手元と提出で動きが変わる。また、標準エラー出力でも大量に出すと遅くなるので、手元で時間を測るときは `-DLOCAL` を外す
 
 ## #pragma GCC optimize・target：AtCoder は -march=native なので target は要らない、g++-13 では #include より前に書くとエラー、Ofast は浮動小数点の約束を変える {#pragma}
 
 `#pragma GCC optimize("O3,unroll-loops")` は、コンパイルのオプション（最適化の段階・ループの展開）をソースの中で指定する。`#pragma GCC target("avx2")` は、使ってよい CPU の命令を指定する。どちらも定数倍を変えるだけで、計算量は変わらない。
 
-- **target は AtCoder では要らない**：AtCoder の GCC は `-march=native` 付きでコンパイルするので、ジャッジの CPU の命令（AVX2 など）はもともと使われる
+- **target は AtCoder では要らない**：AtCoder の GCC は `-march=native` 付きでコンパイルするので、ジャッジの CPU の命令（AVX2 など）はもともと使われる（[AtCoder と手元の環境](../cpp/cpp-environment.md#march-native)）
 - **g++-13 では置き場所でエラー**：`#pragma GCC target` を `#include <bits/stdc++.h>` より前に書くと、g++-13 では `string` などを使うだけでコンパイルエラーになる。g++-15 では通った
 
 ```cpp
@@ -220,7 +220,7 @@ g++-13・g++-15 とも `'::main' must return 'int'` と出る。`signed` は `in
 --8<-- "cpp-macros-template-file/pragma-after-include.cpp:core"
 ```
 
-- **Ofast は浮動小数点の約束を変える**：`Ofast` は `O3` に `-ffast-math` を加えたものである。`-ffast-math` は「NaN や無限大は現れない」「足し算の順序を入れ替えてよい」と仮定して速くする。そのため、NaN の判定が消えたり、誤差の出方が変わったりする。手元の g++-13・g++-15 では、`sqrt(-1)` の結果に `isnan` を使うと、`Ofast` を付けたときだけ「NaN ではない」と判定された
+- **Ofast は浮動小数点の約束を変える**：`Ofast` は `O3` に、規格に厳密に従わない最適化（`-ffast-math` など）を加えたものである。`-ffast-math` は「NaN や無限大は現れない」「足し算の順序を入れ替えてよい」と仮定して速くする。そのため、NaN の判定が消えたり、誤差の出方が変わったりする。手元の g++-13・g++-15 では、`sqrt(-1)` の結果に `isnan` を使うと、`Ofast` を付けたときだけ「NaN ではない」と判定された
 
 ```cpp
 --8<-- "cpp-macros-template-file/ofast.cpp:core"
@@ -255,13 +255,13 @@ ACL は AtCoder のジャッジに入っているので、`#include <atcoder/dsu
 
 | 道具 | 展開するもの | 残すもの |
 | --- | --- | --- |
-| cph（このリポジトリの利用者のフォーク）の「提出用にコピー」 | `#include "..."` | `#include <...>`（ACL を含む） |
+| cph の改造版（公式の cph にはない機能）の「提出用にコピー」 | `#include "..."` | `#include <...>`（ACL を含む） |
 | ACL の `expander.py` | `<atcoder/...>`・`"atcoder/..."` | それ以外（自作のヘッダを含む） |
 | `oj-bundle`（online-judge-verify-helper） | `#include "..."`（`-I` で探す場所を指定） | `#include <...>` |
 
-- **cph の「提出用にコピー」**：コマンドパレットの `cph.copyForSubmit` か、判定パネルのボタンで呼ぶ。保存していない編集中の内容も使い、結果をクリップボードに入れる。ヘッダはソースのフォルダ、次に設定 `cph.bundle.includePaths` から探す。展開した部分の前後に `// ===== begin: ...` などの印を入れる。見つからない include は残して警告する。`#ifdef LOCAL` の中で include したファイルは、条件の外に出ないようにその場に展開する
+- **cph の「提出用にコピー」**：公式の cph（Competitive Programming Helper）にはなく、この教材の作者が改造した版にだけある機能である。`#include "..."` だけを展開し、`// @impl` で分ける仕組みの例として読めばよい。コマンドパレットの `cph.copyForSubmit` か、判定パネルのボタンで呼ぶ。保存していない編集中の内容も使い、結果をクリップボードに入れる。ヘッダはソースのフォルダ、次に設定 `cph.bundle.includePaths` から探す。展開した部分の前後に `// ===== begin: ...` などの印を入れる。見つからない include は残して警告する。`#ifdef LOCAL` の中で include したファイルは、条件の外に出ないようにその場に展開する
 - **ACL の expander.py**：`python3 expander.py --lib <ACL の場所> main.cpp` で `combined.cpp` を出す（`-c` で標準出力）。ACL のファイルからはインクルードガードと `//` のコメント行を除く。自作のヘッダの `#include "..."` は展開しない。自作のヘッダと ACL の両方を展開するなら、道具を組み合わせる。v1.6 で加わった `--origname main.cpp` を付けると、展開した部分の直後に `#line 3 "main.cpp"` のような行が入る。コンパイルエラーの行番号が元のファイルの行で出る（手元の v1.6 で確かめた。v1.5 にはない）
-- **oj-bundle**：ライブラリを自動で検証する道具（`oj-verify`）と組で使う。`#pragma once` で書いたヘッダを前提にしている
+- **oj-bundle**：ライブラリを自動で検証する道具 verification-helper に含まれる（`oj-bundle` だけでも使える）。`#pragma once` かインクルードガードで、同じファイルを 1 回だけ展開する。`#ifdef LOCAL` などの条件の中の `#include "..."` はエラーになる（cph の改造版はその場に展開する）
 
 ## // @impl で main の後ろに回せるもの・回せないもの（auto を返す関数・定数式で使う constexpr 関数・クラスの定義は前に置く） {#impl-marker}
 
@@ -284,7 +284,6 @@ C++ では、使う場所より前に宣言があれば、定義は後ろにあ�
 | クラスのメンバ関数の、クラスの外での定義 | 通る |
 | 戻り値が `auto` の関数の定義 | エラー |
 | 定数式の中で使う `constexpr` 関数の定義 | エラー |
-| クラスの定義・定数・インライン変数 | 目印より上に置く |
 
 戻り値が `auto` の関数は、定義を見るまで戻り値の型が決まらない。宣言だけでは呼べない。
 
@@ -300,7 +299,7 @@ C++ では、使う場所より前に宣言があれば、定義は後ろにあ�
 
 エラーは `'constexpr int twice(int)' used before its definition` と出る。
 
-- **避け方**：戻り値の型を書く（`auto` を使わない）か、その関数を目印より上に置く。クラスはメンバ関数の宣言だけをクラスの中に書き、定義をクラスの外（目印より下）に書く
+- **避け方**：戻り値の型を書く（`auto` を使わない）か、その関数を目印より上に置く。クラスの定義・定数・インライン変数も、使う場所より前に定義が要るので目印より上に置く。クラスはメンバ関数の宣言だけをクラスの中に書き、定義をクラスの外（目印より下）に書く
 - **落とし穴**：目印を `#if` の中に置くと、分けた部分が条件の外に出てしまう。cph は目印が `#if` の中にあれば分けずに警告する
 
 ## 確認問題 {#quiz}
@@ -318,7 +317,7 @@ C++ では、使う場所より前に宣言があれば、定義は後ろにあ�
 - [maspy「library」の my_template.hpp](https://github.com/maspypy/library/blob/main/my_template.hpp)：雛形のマクロ・型の別名・2 つの型を取る `chmin`・`#pragma` の例
 - [NyaanNyaan「library」の template](https://github.com/NyaanNyaan/library/tree/master/template)：`long long` で回す `rep` など、雛形の例
 - [ei1333「library」の template.hpp](https://github.com/ei1333/library/blob/master/template/template.hpp)：雛形の例
-- [online-judge-tools「verification-helper」](https://github.com/online-judge-tools/verification-helper)：`oj-bundle` の展開と `#pragma once` の前提
+- [online-judge-tools「verification-helper」](https://github.com/online-judge-tools/verification-helper)：`oj-bundle` の展開と、1 回だけ展開する条件（`#pragma once`・インクルードガード）
 - [atcoder「ac-library」の document_ja](https://github.com/atcoder/ac-library/tree/master/document_ja)：ACL の名前空間 `atcoder` と `expander.py` の使い方
 - [GCC「Optimize Options」](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html)：`-Ofast` と `-ffast-math` が仮定すること
 - [GCC「Function Specific Option Pragmas」](https://gcc.gnu.org/onlinedocs/gcc/Function-Specific-Option-Pragmas.html)：`#pragma GCC optimize`・`target` の意味

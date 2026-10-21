@@ -2,25 +2,25 @@
 using namespace std;
 
 // 反転フラグつきの deque。
-// 保つ性質：rev が false なら d の並びが実際の列、true なら d を逆から読んだものが実際の列
+// 保つ性質：rev が false なら dq の並びが実際の列、true なら dq を逆から読んだものが実際の列
 struct FlipDeque {
-    deque<int> d;
+    deque<int> dq;
     bool rev = false;
     // --8<-- [start:core]
     void reverse_all() { rev = !rev; }
-    void push_front(int x) {          // 実際の先頭は、rev のとき d の末尾
-        if (!rev) d.push_front(x);
-        else d.push_back(x);
+    void push_front(int x) {          // 実際の先頭は、rev のとき dq の末尾
+        if (!rev) dq.push_front(x);
+        else dq.push_back(x);
     }
     void push_back(int x) {
-        if (!rev) d.push_back(x);
-        else d.push_front(x);
+        if (!rev) dq.push_back(x);
+        else dq.push_front(x);
     }
     int at(int i) const {             // 実際の i 番目（0-indexed）
-        return !rev ? d[i] : d[d.size() - 1 - i];
+        return !rev ? dq[i] : dq[dq.size() - 1 - i];
     }
     vector<int> finish() const {      // 最後に向きを直す
-        vector<int> res(d.begin(), d.end());
+        vector<int> res(dq.begin(), dq.end());
         if (rev) reverse(res.begin(), res.end());
         return res;
     }
@@ -49,7 +49,7 @@ int main() {
         } else {
             int i;
             cin >> i;
-            assert(0 <= i && i < (int)fd.d.size());
+            assert(0 <= i && i < (int)fd.dq.size());
             cout << fd.at(i) << '\n';
         }
     }

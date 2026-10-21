@@ -8,7 +8,6 @@ int main() {
     cout << "? 21" << endl;  // endl は改行してから書き出す（フラッシュ）
     int r;
     cin >> r;                // 書き出していないと、相手は質問を受け取れず待ち続ける
-    println("! {}", r);
-    fflush(stdout);          // println・printf の後は fflush(stdout) で書き出す
+    cout << "! " << r << endl;  // 答えも endl で書き出す
     // --8<-- [end:core]
 }
