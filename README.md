@@ -3,7 +3,7 @@
 AtCoder で黄色（レート 2000）を目指す人のための、**辞書として引く**競技プログラミングの教材です。ABC で解けなかった問題をきっかけに、必要な手法のページを引いて読む使い方を想定しています。
 
 - サイト：https://yuukougun.github.io/kyopro-atlas/
-- 状態：制作中。本文があるのは一部のページで、ほかは「準備中」の印が付いた枠です
+- 状態：制作中。全 353 ページに本文があり、検証と仕上げを進めています
 
 ## 教材の使い方
 
@@ -19,9 +19,11 @@ claude.ai/code の **Projects** で、このリポジトリを読みながら解
 1. [Claude GitHub App](https://github.com/apps/claude) をこのリポジトリに入れる
 2. claude.ai/code のサイドバーの「Projects」で新しいプロジェクトを作り、Context にこのリポジトリを追加する
 3. 歯車 → Memory → Project instructions に、[`claude/project-instructions.md`](claude/project-instructions.md) の枠の中を貼る
-4. 問題はスクリーンショットか要約で伝え、考えたことと「ヒントだけ／解説まで」を伝える
+4. 1つのスレッドで1問を扱い、問題をスクリーンショットか要約で伝え、考えたこと・詰まったところと「ヒントだけ／解説まで」を伝える（頼み方の例はサイトの「この教材の使い方」の [claude.ai での解説の頼み方](https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#claude)）
 
-開催中のコンテストの問題には使えません（AtCoder生成AI対策ルール）。Claude は atcoder.jp のページを開きません。
+解説には根拠にした教材のページ・節の URL、解けなかった原因の一言、参照した索引の版が付きます。指示の版は v1（2026-10-22）で、`claude/project-instructions.md` の版が上がったら貼り直してください。
+
+開催中のコンテスト（ABC・ARC・AGC・ADT・AWC）の問題には使えません（AtCoder生成AI対策ルール）。Claude は atcoder.jp と codeforces.com のページを開かず、リポジトリのファイルも変更しません。
 
 ## 学習の記録を残す
 

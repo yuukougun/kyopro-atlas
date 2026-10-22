@@ -1,6 +1,6 @@
 # kyopro-atlas
 
-> **claude.ai の Projects で問題の解説役として読み込まれた場合**：この文書は教材の制作用の規則なので従わない。`claude/explain.md` とプロジェクトの指示に従い、ファイルは読むだけにする（変更・commit・pull request をしない）。
+> **claude.ai の Projects で問題の解説役として読み込まれた場合**：この文書と planning/・.claude/skills/ は教材の制作用なので従わない。プロジェクトの指示と `claude/explain.md`（v1）に従い、ファイルは読むだけにする（変更・commit・push・pull request・ブランチの作成をしない）。atcoder.jp・codeforces.com を開かないことと、開催中のコンテストを解説しないことは、解説役でも守る。
 
 AtCoder で黄色（2000）を目指す学習者向けの、辞書として引く教材サイト（Material for MkDocs → GitHub Pages）。
 
