@@ -45,7 +45,7 @@ updated: 2026-10-21
 | N ≤ 8〜10 で並び順・割り当て・頂点の対応を決める | [bit 全探索と順列全探索](../basics/bit-full-search.md) | 基礎 |
 | N ≤ 10 程度で、経路を全部列挙できる | [深さ優先探索（DFS）](../graph/dfs.md) | 基礎 |
 | N ≤ 8〜10 で頂点の対応や辺の部分集合を全部試せる | [小さいグラフの全探索](../graph/small-graph-brute-force.md) | 基礎 |
-| 指定した K 点（K ≤ 10 程度）をすべて連結にする最小コスト | [最小シュタイナー木](../graph/steiner-tree.md)（準備中） | 発展 |
+| 指定した K 点（K ≤ 10 程度）をすべて連結にする最小コスト | [最小シュタイナー木](../graph/steiner-tree.md) | 発展 |
 | K ≤ 10 程度の少数の要素を選ぶ条件で、要素の種類が多い | [乱択アルゴリズム](../misc/randomized.md) | 青 |
 
 ### 上限が 20 以下 {#signs-constraint-20}
@@ -57,7 +57,7 @@ updated: 2026-10-21
 | N ≤ 10〜12 で、グループ分けを全部試す | [第 2 種スターリング数とベル数](../comb/bell-number.md) | 青 |
 | グリッドの短い辺 ≤ 6〜14 | [プロファイル DP](../dp/broken-profile-dp.md) | 黄 |
 | 2N ≤ 16 人を 2 人組に分ける（(2N−1)!! 通り） | [再帰による全列挙](../basics/recursive-enumeration.md) | 水 |
-| N ≤ 16 程度の一般グラフでペアを作る | [一般グラフのマッチング](../graph/general-matching.md)（準備中） | 発展 |
+| N ≤ 16 程度の一般グラフでペアを作る | [一般グラフのマッチング](../graph/general-matching.md) | 発展 |
 | 特別な地点が K ≤ 17 個（ほかの地点はグラフで結ばれている） | [bitDP](../dp/bit-dp.md) | 水 |
 | N ≤ 17 程度の頂点数で、条件を満たす辺の選び方を数える | [連結なグラフの数え上げ](../comb/counting-labeled-graphs.md) | 黄 |
 | N ≤ 18 程度で、集合とその部分集合の組をすべて調べる（全体で 3^N） | [bit 演算の基本と XOR の性質](../basics/bit-operations.md) | 基礎 |
@@ -75,7 +75,7 @@ updated: 2026-10-21
 | --- | --- | --- |
 | N ≤ 40 で部分集合を選ぶ（2^N は無理だが 2^(N/2) は間に合う） | [半分全列挙](../basics/meet-in-the-middle.md) | 水 |
 | H + W ≤ 40 程度のグリッドで、左上から右下への経路をすべて考える | [半分全列挙](../basics/meet-in-the-middle.md) | 水 |
-| N ≤ 20〜40 の一般グラフで、独立集合・彩色・クリークを求める | [彩色数・最大独立集合・最大クリーク](../graph/chromatic-number.md)（準備中） | 発展 |
+| N ≤ 20〜40 の一般グラフで、独立集合・彩色・クリークを求める | [彩色数・最大独立集合・最大クリーク](../graph/chromatic-number.md) | 発展 |
 
 ### 上限が 80 以下 {#signs-constraint-80}
 
@@ -119,7 +119,7 @@ updated: 2026-10-21
 | --- | --- | --- |
 | 法 P が 10^9 程度で、√P ≈ 3×10^4 個の表なら持てる | [位数・原始根・離散対数](../math/multiplicative-order.md) | 黄 |
 | N ≤ 10^5 程度で、各位置の選択肢が数通り（全探索だと K^N 通り） | [DP の基本](../dp/dp-basics.md) | 基礎 |
-| N ≤ 10^5 の列を K（数十）個の区間に分ける | [Monge 性による DP の高速化](../dp/monge.md)（準備中） | 発展 |
+| N ≤ 10^5 の列を K（数十）個の区間に分ける | [Monge 性による DP の高速化](../dp/monge.md) | 発展 |
 | A_i < 2^60 で N ≤ 10^5 程度 | [XOR 基底](../math/xor-basis.md) | 黄 |
 | H, W ≤ 10^5 のグリッドで、左上から右下への経路の数を求める | [格子路の数え上げ](../comb/lattice-paths.md) | 基礎 |
 | H, W ≤ 10^5 のグリッドに障害物が N ≤ 3000 個 | [包除 DP](../comb/inclusion-exclusion-dp.md) | 黄 |
@@ -148,7 +148,7 @@ updated: 2026-10-21
 | N ≤ 2×10^5 の木で、全ペア（N^2/2 組）についての和を求める | [辺で切って数える](../tree/tree-edge-contribution.md) | 水 |
 | パス u–v に関するクエリが Q ≤ 2×10^5 個 | [最小共通祖先（LCA）](../tree/lca.md) | 青 |
 | N, Q ≤ 2×10^5 で、部分木への更新と質問が交互に来る | [オイラーツアー](../tree/euler-tour.md) | 青 |
-| クエリごとに K_i 個の頂点が指定され、ΣK_i ≤ 2×10^5 | [Auxiliary Tree](../tree/auxiliary-tree.md)（準備中） | 発展 |
+| クエリごとに K_i 個の頂点が指定され、ΣK_i ≤ 2×10^5 | [Auxiliary Tree](../tree/auxiliary-tree.md) | 発展 |
 | N, Q ≤ 2×10^5 で、追加・削除・検索のクエリが来る | [STL コンテナの使い分け](../ds/stl-containers.md) | 基礎 |
 | Q ≤ 2×10^5 で、更新のたびに上位 K 個の和や中央値を答える | [上位 K 個の和と中央値の管理](../ds/top-k-multiset.md) | 水 |
 | Q ≤ 2×10^5 で、全体への操作を毎回 O(N) で行うと間に合わない | [全体への操作を変数で持つ](../ds/global-offset.md) | 基礎 |
@@ -208,7 +208,7 @@ updated: 2026-10-21
 | n ≤ 10^9 で k ≤ 10^6 程度 | [二項係数の前計算](../comb/binomial-precompute.md) | 基礎 |
 | 座標が整数で \|x\|, \|y\| ≤ 10^9（外積は long long にぎりぎり収まる） | [ベクトルと外積](../geometry/geometry-vectors.md) | 基礎 |
 | A_i < 2^30 で、追加・削除・質問が合わせて 2×10^5 回程度 | [Binary Trie](../ds/binary-trie.md) | 青 |
-| N ≤ 10&#94;10〜10&#94;11 で Σ_{n≤N} f(n)（f は φ・約数の個数など）を求める | [乗法的関数の和と素数の個数](../math/multiplicative-function.md)（準備中） | 発展 |
+| N ≤ 10&#94;10〜10&#94;11 で Σ_{n≤N} f(n)（f は φ・約数の個数など）を求める | [乗法的関数の和と素数の個数](../math/multiplicative-function.md) | 発展 |
 | K ≤ 10^12 で約数を扱う（約数の個数は最大 6720） | [全探索の設計](../basics/brute-force.md) | 基礎 |
 | N ≤ 10^12 程度（√N ≤ 10^6）の約数・素数判定 | [約数列挙と素数判定](../math/divisor-enum.md) | 基礎 |
 | N ≤ 10^12 程度の数を1つだけ素因数分解する | [素因数分解とルジャンドルの公式](../math/prime-factorization.md) | 基礎 |
@@ -230,9 +230,9 @@ updated: 2026-10-21
 | 指数・繰り返しの回数が N ≤ 10^18 | [繰り返し二乗法](../math/mod-pow.md) | 基礎 |
 | 項数 N ≤ 10&#94;12〜10&#94;18 の等比数列の和を、素数とは限らない法 M ≤ 10&#94;9 で求める | [等比数列の和を mod で求める](../math/geometric-series-mod.md) | 基礎 |
 | N ≤ 10&#94;12〜10&#94;18 で、約数の組を全探索して間に合うかを見積もる | [約数の個数の上界と高度合成数](../math/divisor-count-bound.md) | 水 |
-| N ≤ 10^18 の素数判定・素因数分解（√N の試し割りでは間に合わない） | [大きな数の素数判定と素因数分解](../math/miller-rabin.md)（準備中） | 発展 |
+| N ≤ 10^18 の素数判定・素因数分解（√N の試し割りでは間に合わない） | [大きな数の素数判定と素因数分解](../math/miller-rabin.md) | 発展 |
 | N ≤ 10^18 で平方数・平方根を扱う | [整数の平方根・K 乗根と累乗数](../math/integer-root.md) | 基礎 |
-| 線形漸化式の項数 K が数百〜数千で、N ≤ 10^18 | [線形漸化式の高速化](../math/linear-recurrence-fast.md)（準備中） | 発展 |
+| 線形漸化式の項数 K が数百〜数千で、N ≤ 10^18 | [線形漸化式の高速化](../math/linear-recurrence-fast.md) | 発展 |
 | N ≤ 10^18 で、答えが段階ごとの選択肢の数の積になる | [和・積の法則と順列・組合せ](../comb/counting-basics.md) | 基礎 |
 | 置換を K ≤ 10^18 回繰り返した結果を求める | [置換の巡回分解](../comb/permutation-cycles.md) | 基礎 |
 | N ≤ 10&#94;9〜10&#94;18 で、パターンの長さの総和が小さい | [照合オートマトン上の DP](../string/string-automaton-dp.md) | 青 |
@@ -249,10 +249,10 @@ updated: 2026-10-21
 | レベルは 50 程度まででも、全体の長さが 10^15 を超える | [再帰的な構造](../basics/recursion-structure.md) | 基礎 |
 | 余りや状態が M 種類しかなく、M + 1 個以上の候補がある | [対称性・鳩の巣原理・場合分け](../thinking/symmetry-pigeonhole-casework.md) | 基礎 |
 | クエリの数 Q と目標の和 K がともに 5000 程度（O(QK) が通る） | [戻す DP](../dp/knapsack-undo.md) | 青 |
-| K が 10&#94;5〜10&#94;6 程度 | [剰余を頂点にする最短路](../graph/modular-shortest-path.md)（準備中） | 発展 |
+| K が 10&#94;5〜10&#94;6 程度 | [剰余を頂点にする最短路](../graph/modular-shortest-path.md) | 発展 |
 | 頂点数が数百〜数千、辺数が 10^5 程度まで（フローが間に合う規模） | [最大流](../graph/max-flow.md) | 黄 |
 | 要素の数 N が 100〜数百程度で、選び方は 2^N 通りある | [燃やす埋める](../graph/project-selection.md) | 黄 |
-| 種類が 20 程度以下で、部分集合ごとに供給と需要を比べられる | [最小パス被覆と Hall の定理](../graph/dilworth-path-cover.md)（準備中） | 発展 |
+| 種類が 20 程度以下で、部分集合ごとに供給と需要を比べられる | [最小パス被覆と Hall の定理](../graph/dilworth-path-cover.md) | 発展 |
 | 値が 10^9 まであり、配列の添字にできない | [set・multiset・map の応用](../ds/ordered-set.md) | 基礎 |
 | 追加と取り出しが合わせて 2×10^5 回程度 | [優先度付きキュー](../ds/priority-queue.md) | 水 |
 | 座標が 10^9 まで（配列の添字にできない） | [区間を set で管理する](../ds/interval-set.md) | 水 |
@@ -263,7 +263,7 @@ updated: 2026-10-21
 | 指数が 10^18 をさらに累乗した大きさになる | [フェルマーの小定理と指数の mod](../math/exponent-mod.md) | 水 |
 | 変数・式の数が数百〜2000 程度で O(n³) や O(n³/64) | [掃き出し法](../math/gaussian-elimination.md) | 青 |
 | 値の範囲や列の長さが 10&#94;5〜10&#94;6 程度で、組の全探索 O(N²) が間に合わない | [畳み込みの使い方](../math/convolution-ntt.md) | 青 |
-| 値が 2&#94;16〜2&#94;20 程度で、添字の XOR で畳み込む | [XOR 畳み込み](../math/hadamard-transform.md)（準備中） | 発展 |
+| 値が 2&#94;16〜2&#94;20 程度で、添字の XOR で畳み込む | [XOR 畳み込み](../math/hadamard-transform.md) | 発展 |
 | 山の大きさが 10^18 程度まであり、小さい山から全部の局面を調べられない | [Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md) | 青 |
 | 比べ合うハッシュが 10^5 個以上（組が 5×10^9 以上） | [ハッシュの衝突と安全な設計](../string/hash-safety.md) | 青 |
 | 文字列の個数が多く、長さの総和が 5×10^5 程度まで | [Trie](../string/trie.md) | 水 |

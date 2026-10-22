@@ -37,7 +37,7 @@ type: generated
 | [Aho-Corasick 法](../string/aho-corasick.md) | 青 | パターンの Trie に失敗リンク（Trie にある最長の真の接尾辞へのリンク）を BFS 順に張り、全文字の遷移を埋めたオートマトンにする。テキストを 1 回流すだけで、多数のパターンの出現をまとめて数えられる。 |
 | [照合オートマトン上の DP](../string/string-automaton-dp.md) | 青 | KMP や Aho-Corasick の状態（いまの接尾辞のうちパターンの接頭辞になっている最長のもの）を DP の状態にして、パターンを含まない・すべて含む長さ N の文字列を数える。N が巨大なら遷移を行列にして累乗する。 |
 | [Suffix Array と LCP 配列](../string/suffix-array.md) | 黄 | 全接尾辞を辞書順に並べた添字の列（SA）と隣どうしの最長共通接頭辞（LCP 配列）を作る。異なる部分文字列の数・任意の 2 接尾辞の LCP・パターンの出現回数が求まり、ACL の suffix_array・lcp_array で使える。 |
-| [Suffix Automaton と発展の文字列アルゴリズム](../string/suffix-automaton.md)（準備中） | 発展 | Suffix Automaton は全部分文字列を状態数 2N−1 以下の DFA で表し、文字を足しながら異なる部分文字列の数を答える。回文木・Lyndon 分解なども、ABC では SA・Z・Manacher で代えられることが多い。 |
+| [Suffix Automaton と発展の文字列アルゴリズム](../string/suffix-automaton.md) | 発展 | Suffix Automaton は全部分文字列を状態数 2N−1 以下の DFA で表し、文字を足しながら異なる部分文字列の数を答える。回文木・Lyndon 分解なども、ABC では SA・Z・Manacher で代えられることが多い。 |
 
 ## その他の技法
 

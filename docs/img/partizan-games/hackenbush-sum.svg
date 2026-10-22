@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 240" width="380" height="240" font-family="sans-serif">
+<rect width="380" height="240" fill="#ffffff"/>
+<line x1="20" y1="170" x2="360" y2="170" stroke="#222" stroke-width="3"/>
+<text x="360" y="188" font-size="12" text-anchor="end" fill="#333">地面</text>
+<!-- stalk 1: B then R -->
+<line x1="70" y1="170" x2="70" y2="110" stroke="#1f5fbf" stroke-width="6"/>
+<line x1="70" y1="110" x2="70" y2="50" stroke="#c0392b" stroke-width="4" stroke-dasharray="8 5"/>
+<circle cx="70" cy="110" r="4" fill="#222"/><circle cx="70" cy="50" r="4" fill="#222"/>
+<text x="80" y="145" font-size="12" fill="#1f5fbf">左</text>
+<text x="80" y="85" font-size="12" fill="#c0392b">右</text>
+<text x="70" y="212" font-size="16" text-anchor="middle" fill="#000">1/2</text>
+<!-- stalk 2 -->
+<line x1="170" y1="170" x2="170" y2="110" stroke="#1f5fbf" stroke-width="6"/>
+<line x1="170" y1="110" x2="170" y2="50" stroke="#c0392b" stroke-width="4" stroke-dasharray="8 5"/>
+<circle cx="170" cy="110" r="4" fill="#222"/><circle cx="170" cy="50" r="4" fill="#222"/>
+<text x="180" y="145" font-size="12" fill="#1f5fbf">左</text>
+<text x="180" y="85" font-size="12" fill="#c0392b">右</text>
+<text x="170" y="212" font-size="16" text-anchor="middle" fill="#000">1/2</text>
+<!-- stalk 3: R -->
+<line x1="270" y1="170" x2="270" y2="110" stroke="#c0392b" stroke-width="4" stroke-dasharray="8 5"/>
+<circle cx="270" cy="110" r="4" fill="#222"/>
+<text x="280" y="145" font-size="12" fill="#c0392b">右</text>
+<text x="270" y="212" font-size="16" text-anchor="middle" fill="#000">−1</text>
+<text x="120" y="212" font-size="16" text-anchor="middle" fill="#000">+</text>
+<text x="220" y="212" font-size="16" text-anchor="middle" fill="#000">+</text>
+<text x="330" y="212" font-size="16" text-anchor="middle" fill="#000">= 0</text>
+<text x="20" y="24" font-size="12" fill="#333">実線：左だけが切れる辺　破線：右だけが切れる辺</text>
+</svg>

@@ -554,10 +554,10 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 1 | [平均・中央値の最大化](../basics/fractional-binary-search.md#dinkelbach) › Dinkelbach 法（水のページの節） | 基本テクニック | 準必修 |
 | 2 | [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md#connected-component-dp) › 連結成分 DP（ブロックを作る・端に付ける・つなぐ）（黄のページの節） | 動的計画法 | 必修 |
 | 3 | [プロファイル DP](../dp/broken-profile-dp.md#connectivity) › 連結性を持つ（フロンティア法）（黄のページの節） | 動的計画法 | 準必修 |
-| 4 | [Monge 性による DP の高速化](../dp/monge.md)（準備中） | 動的計画法 | 準必修 |
-| 5 | [Slope Trick](../dp/slope-trick.md)（準備中） | 動的計画法 | 準必修 |
-| 6 | [動的 DP](../dp/dynamic-dp.md)（準備中） | 動的計画法 | 余裕があれば |
-| 7 | [Convex Hull Trick と Li Chao Tree](../dp/cht.md)（準備中） | 動的計画法 | 余裕があれば |
+| 4 | [Monge 性による DP の高速化](../dp/monge.md) | 動的計画法 | 準必修 |
+| 5 | [Slope Trick](../dp/slope-trick.md) | 動的計画法 | 準必修 |
+| 6 | [動的 DP](../dp/dynamic-dp.md) | 動的計画法 | 余裕があれば |
+| 7 | [Convex Hull Trick と Li Chao Tree](../dp/cht.md) | 動的計画法 | 余裕があれば |
 | 8 | [最小ボトルネック路](../graph/bottleneck-path.md#reconstruction-tree) › 併合過程の木（Kruskal 再構築木）でオンラインに答える（木の章へ）（青のページの節） | グラフ | 準必修 |
 | 9 | [橋・関節点・二重連結成分](../graph/lowlink.md#block-cut-tree) › 二重頂点連結成分とブロックカット木（黄のページの節） | グラフ | 準必修 |
 | 10 | [最小カット](../graph/min-cut.md#cut-shape) › カットの形を決め打つ（黄のページの節） | グラフ | 準必修 |
@@ -565,75 +565,75 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 12 | [二部マッチング](../graph/bipartite-matching.md#edge-coloring) › 正則二部グラフの分解・辺彩色（黄のページの節） | グラフ | 準必修 |
 | 13 | [König の定理](../graph/konig-theorem.md#lp-half-integrality) › 頂点を 2 倍にして二部グラフにする（LP の半整数性）（黄のページの節） | グラフ | 準必修 |
 | 14 | [最小費用流](../graph/min-cost-flow.md#hungarian) › 割当問題とハンガリアン法（黄のページの節） | グラフ | 準必修 |
-| 15 | [最小パス被覆と Hall の定理](../graph/dilworth-path-cover.md)（準備中） | グラフ | 準必修 |
-| 16 | [彩色数・最大独立集合・最大クリーク](../graph/chromatic-number.md)（準備中） | グラフ | 余裕があれば |
-| 17 | [剰余を頂点にする最短路](../graph/modular-shortest-path.md)（準備中） | グラフ | 余裕があれば |
-| 18 | [区間に辺を張る](../graph/segment-tree-graph.md)（準備中） | グラフ | 余裕があれば |
-| 19 | [K 番目の最短路](../graph/k-shortest-paths.md)（準備中） | グラフ | 余裕があれば |
-| 20 | [最小シュタイナー木](../graph/steiner-tree.md)（準備中） | グラフ | 余裕があれば |
-| 21 | [2-SAT](../graph/two-sat.md)（準備中） | グラフ | 余裕があれば |
-| 22 | [特殊な最小全域木](../graph/spanning-tree-advanced.md)（準備中） | グラフ | 余裕があれば |
-| 23 | [最小流量制約付きフロー](../graph/flow-lower-bounds.md)（準備中） | グラフ | 余裕があれば |
-| 24 | [一般グラフのマッチング](../graph/general-matching.md)（準備中） | グラフ | 余裕があれば |
+| 15 | [最小パス被覆と Hall の定理](../graph/dilworth-path-cover.md) | グラフ | 準必修 |
+| 16 | [彩色数・最大独立集合・最大クリーク](../graph/chromatic-number.md) | グラフ | 余裕があれば |
+| 17 | [剰余を頂点にする最短路](../graph/modular-shortest-path.md) | グラフ | 余裕があれば |
+| 18 | [区間に辺を張る](../graph/segment-tree-graph.md) | グラフ | 余裕があれば |
+| 19 | [K 番目の最短路](../graph/k-shortest-paths.md) | グラフ | 余裕があれば |
+| 20 | [最小シュタイナー木](../graph/steiner-tree.md) | グラフ | 余裕があれば |
+| 21 | [2-SAT](../graph/two-sat.md) | グラフ | 余裕があれば |
+| 22 | [特殊な最小全域木](../graph/spanning-tree-advanced.md) | グラフ | 余裕があれば |
+| 23 | [最小流量制約付きフロー](../graph/flow-lower-bounds.md) | グラフ | 余裕があれば |
+| 24 | [一般グラフのマッチング](../graph/general-matching.md) | グラフ | 余裕があれば |
 | 25 | [オイラーツアー](../tree/euler-tour.md#to-hld) › 逆元がない演算・パスへの一括更新は HL 分解（青のページの節） | 木 | 必修 |
 | 26 | [木の上のパスの判定と分解](../tree/tree-path.md#to-hld) › パスへの一括更新があるなら HL 分解（青のページの節） | 木 | 準必修 |
 | 27 | [HL 分解](../tree/hld.md) | 木 | 準必修 |
-| 28 | [木の同型判定と木のハッシュ](../tree/tree-isomorphism.md)（準備中） | 木 | 余裕があれば |
+| 28 | [木の同型判定と木のハッシュ](../tree/tree-isomorphism.md) | 木 | 余裕があれば |
 | 29 | [重心分解](../tree/centroid-decomposition.md#with-convolution) › 距離の頻度表は畳み込みと組む（黄のページの節） | 木 | 余裕があれば |
-| 30 | [Auxiliary Tree](../tree/auxiliary-tree.md)（準備中） | 木 | 余裕があれば |
-| 31 | [併合過程の木](../tree/merge-process-tree.md)（準備中） | 木 | 余裕があれば |
-| 32 | [比で親に併合する貪欲](../tree/tree-ratio-greedy.md)（準備中） | 木 | 余裕があれば |
+| 30 | [Auxiliary Tree](../tree/auxiliary-tree.md) | 木 | 余裕があれば |
+| 31 | [併合過程の木](../tree/merge-process-tree.md) | 木 | 余裕があれば |
+| 32 | [比で親に併合する貪欲](../tree/tree-ratio-greedy.md) | 木 | 余裕があれば |
 | 33 | [単調スタックとスライド最小値](../ds/monotonic-stack.md#swag) › SWAG：スタック 2 本で作る総積つきキュー（水のページの節） | データ構造 | 準必修 |
 | 34 | [Mo's algorithm](../ds/mo-algorithm.md#variants) › 時間付き Mo・ロールバック Mo（青のページの節） | データ構造 | 準必修 |
 | 35 | [永続データ構造](../ds/persistent-data-structures.md#prefix-versions) › 接頭辞ごとの版で区間の K 番目・x 以下の個数をオンラインで求める（青のページの節） | データ構造 | 準必修 |
 | 36 | [マージソート木](../ds/merge-sort-tree.md#bit-per-level) › 各段に BIT を持たせる（先読みと組む）（青のページの節） | データ構造 | 準必修 |
-| 37 | [部分永続 Union-Find](../ds/partially-persistent-union-find.md)（準備中） | データ構造 | 余裕があれば |
-| 38 | [ロールバックできる Union-Find](../ds/rollback-union-find.md)（準備中） | データ構造 | 余裕があれば |
+| 37 | [部分永続 Union-Find](../ds/partially-persistent-union-find.md) | データ構造 | 余裕があれば |
+| 38 | [ロールバックできる Union-Find](../ds/rollback-union-find.md) | データ構造 | 余裕があれば |
 | 39 | [Sparse Table](../ds/sparse-table.md#disjoint-sparse-table) › 冪等でない演算（2 べきに分けて O(log N)、Disjoint Sparse Table）（青のページの節） | データ構造 | 余裕があれば |
-| 40 | [Segment Tree Beats](../ds/segment-tree-beats.md)（準備中） | データ構造 | 余裕があれば |
-| 41 | [並列二分探索](../ds/parallel-binary-search.md)（準備中） | データ構造 | 余裕があれば |
-| 42 | [CDQ 分割統治](../ds/cdq-divide-and-conquer.md)（準備中） | データ構造 | 余裕があれば |
-| 43 | [Wavelet Matrix](../ds/wavelet-matrix.md)（準備中） | データ構造 | 余裕があれば |
-| 44 | [平衡二分探索木と pb_ds の tree](../ds/balanced-bst.md)（準備中） | データ構造 | 余裕があれば |
+| 40 | [Segment Tree Beats](../ds/segment-tree-beats.md) | データ構造 | 余裕があれば |
+| 41 | [並列二分探索](../ds/parallel-binary-search.md) | データ構造 | 余裕があれば |
+| 42 | [CDQ 分割統治](../ds/cdq-divide-and-conquer.md) | データ構造 | 余裕があれば |
+| 43 | [Wavelet Matrix](../ds/wavelet-matrix.md) | データ構造 | 余裕があれば |
+| 44 | [平衡二分探索木と pb_ds の tree](../ds/balanced-bst.md) | データ構造 | 余裕があれば |
 | 45 | [位数・原始根・離散対数](../math/multiplicative-order.md#mod-root) › 平方剰余と mod の K 乗根（オイラーの規準・Tonelli-Shanks・Cipolla）（黄のページの節） | 整数論・代数 | 準必修 |
 | 46 | [floor sum](../math/floor-sum.md#applications) › 応用の型：bit ごとの popcount・一次式の mod の積（黄のページの節） | 整数論・代数 | 準必修 |
-| 47 | [分割統治 FFT・オンライン畳み込み](../math/online-convolution.md)（準備中） | 整数論・代数 | 準必修 |
-| 48 | [形式的冪級数と多項式の演算](../math/fps-basics.md)（準備中） | 整数論・代数 | 準必修 |
-| 49 | [大きな数の素数判定と素因数分解](../math/miller-rabin.md)（準備中） | 整数論・代数 | 余裕があれば |
-| 50 | [乗法的関数の和と素数の個数](../math/multiplicative-function.md)（準備中） | 整数論・代数 | 余裕があれば |
-| 51 | [Stern-Brocot 木と連分数](../math/stern-brocot.md)（準備中） | 整数論・代数 | 余裕があれば |
-| 52 | [行列式](../math/determinant.md)（準備中） | 整数論・代数 | 余裕があれば |
-| 53 | [FFT・NTT の仕組みと任意 mod の畳み込み](../math/fft-ntt.md)（準備中） | 整数論・代数 | 余裕があれば |
-| 54 | [XOR 畳み込み](../math/hadamard-transform.md)（準備中） | 整数論・代数 | 余裕があれば |
-| 55 | [ラグランジュ補間とべき乗和](../math/lagrange-interpolation.md)（準備中） | 整数論・代数 | 余裕があれば |
+| 47 | [分割統治 FFT・オンライン畳み込み](../math/online-convolution.md) | 整数論・代数 | 準必修 |
+| 48 | [形式的冪級数と多項式の演算](../math/fps-basics.md) | 整数論・代数 | 準必修 |
+| 49 | [大きな数の素数判定と素因数分解](../math/miller-rabin.md) | 整数論・代数 | 余裕があれば |
+| 50 | [乗法的関数の和と素数の個数](../math/multiplicative-function.md) | 整数論・代数 | 余裕があれば |
+| 51 | [Stern-Brocot 木と連分数](../math/stern-brocot.md) | 整数論・代数 | 余裕があれば |
+| 52 | [行列式](../math/determinant.md) | 整数論・代数 | 余裕があれば |
+| 53 | [FFT・NTT の仕組みと任意 mod の畳み込み](../math/fft-ntt.md) | 整数論・代数 | 余裕があれば |
+| 54 | [XOR 畳み込み](../math/hadamard-transform.md) | 整数論・代数 | 余裕があれば |
+| 55 | [ラグランジュ補間とべき乗和](../math/lagrange-interpolation.md) | 整数論・代数 | 余裕があれば |
 | 56 | [包除原理](../comb/inclusion-exclusion.md#min-max) › min-max 包除（全種類がそろうまでの期待値）（青のページの節） | 数え上げ・確率・ゲーム | 必修 |
-| 57 | [母関数の考え方](../comb/generating-function-counting.md)（準備中） | 数え上げ・確率・ゲーム | 準必修 |
+| 57 | [母関数の考え方](../comb/generating-function-counting.md) | 数え上げ・確率・ゲーム | 準必修 |
 | 58 | [整数の分割と分割数](../comb/partition-number.md#partition-dp) › 分割数型の DP（黄のページの節） | 数え上げ・確率・ゲーム | 準必修 |
-| 59 | [Burnside の補題](../comb/burnside-lemma.md)（準備中） | 数え上げ・確率・ゲーム | 余裕があれば |
-| 60 | [二項係数の部分和](../comb/binomial-prefix-sum.md)（準備中） | 数え上げ・確率・ゲーム | 余裕があれば |
+| 59 | [Burnside の補題](../comb/burnside-lemma.md) | 数え上げ・確率・ゲーム | 余裕があれば |
+| 60 | [二項係数の部分和](../comb/binomial-prefix-sum.md) | 数え上げ・確率・ゲーム | 余裕があれば |
 | 61 | [鏡像法とカタラン数](../comb/reflection-principle.md#two-sided) › 両端を越えない場合（黄のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
 | 62 | [包除 DP](../comb/inclusion-exclusion-dp.md#tree) › 符号付きの木 DP（黄のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
 | 63 | [メビウス関数とメビウス反転](../comb/mobius-function.md#quotient) › 商の列挙で同じ値の範囲を束ねる（黄のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
-| 64 | [第 1 種スターリング数](../comb/stirling-first.md)（準備中） | 数え上げ・確率・ゲーム | 余裕があれば |
-| 65 | [Young 図形とフック長公式](../comb/young-tableaux.md)（準備中） | 数え上げ・確率・ゲーム | 余裕があれば |
+| 64 | [第 1 種スターリング数](../comb/stirling-first.md) | 数え上げ・確率・ゲーム | 余裕があれば |
+| 65 | [Young 図形とフック長公式](../comb/young-tableaux.md) | 数え上げ・確率・ゲーム | 余裕があれば |
 | 66 | [ラベル付き木の数え上げ](../comb/cayley-pruefer.md#with-polynomials) › 多項式（母関数）と組み合わせる（黄のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
 | 67 | [期待値と確率の変換](../comb/expectation-tail-sum.md#continuous) › 連続値の場合（積分）（黄のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
-| 68 | [連続値の確率](../comb/continuous-probability.md)（準備中） | 数え上げ・確率・ゲーム | 余裕があれば |
+| 68 | [連続値の確率](../comb/continuous-probability.md) | 数え上げ・確率・ゲーム | 余裕があれば |
 | 69 | [Nim と XOR](../comb/nim.md#misere) › 逆形 Nim（最後に取った方が負け）（水のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
 | 70 | [Nim と XOR](../comb/nim.md#counting) › 必勝局面の数え上げ（XOR 畳み込み）（水のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
 | 71 | [後退解析](../comb/game-retrograde-analysis.md#weighted) › 得点のあるゲームはダイクストラの要領で確定させる（黄のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
-| 72 | [非不偏ゲーム](../comb/partizan-games.md)（準備中） | 数え上げ・確率・ゲーム | 余裕があれば |
+| 72 | [非不偏ゲーム](../comb/partizan-games.md) | 数え上げ・確率・ゲーム | 余裕があれば |
 | 73 | [Suffix Array と LCP 配列](../string/suffix-array.md#kth-substring) › 部分文字列の辞書順 K 番目（黄のページの節） | 文字列 | 準必修 |
-| 74 | [Suffix Automaton と発展の文字列アルゴリズム](../string/suffix-automaton.md)（準備中） | 文字列 | 準必修 |
-| 75 | [発展の幾何](../geometry/advanced-geometry.md)（準備中） | 幾何 | 準必修 |
+| 74 | [Suffix Automaton と発展の文字列アルゴリズム](../string/suffix-automaton.md) | 文字列 | 準必修 |
+| 75 | [発展の幾何](../geometry/advanced-geometry.md) | 幾何 | 準必修 |
 | 76 | [構文解析](../misc/parsing.md#substring-sum) › 式の部分文字列の総和（青のページの節） | その他の技法 | 準必修 |
-| 77 | [Alien DP](../dp/alien-dp.md)（準備中） | 動的計画法 | 準必修 |
-| 78 | [辺の追加と削除が混ざる連結性](../graph/offline-dynamic-connectivity.md)（準備中） | グラフ | 余裕があれば |
-| 79 | [行列木定理](../graph/matrix-tree-theorem.md)（準備中） | グラフ | 余裕があれば |
-| 80 | [Static Top Tree と木 DP の動的更新](../tree/static-top-tree.md)（準備中） | 木 | 余裕があれば |
-| 81 | [動的木](../tree/dynamic-tree.md)（準備中） | 木 | 余裕があれば |
-| 82 | [線形漸化式の高速化](../math/linear-recurrence-fast.md)（準備中） | 整数論・代数 | 余裕があれば |
-| 83 | [LGV 補題](../comb/lgv-lemma.md)（準備中） | 数え上げ・確率・ゲーム | 余裕があれば |
+| 77 | [Alien DP](../dp/alien-dp.md) | 動的計画法 | 準必修 |
+| 78 | [辺の追加と削除が混ざる連結性](../graph/offline-dynamic-connectivity.md) | グラフ | 余裕があれば |
+| 79 | [行列木定理](../graph/matrix-tree-theorem.md) | グラフ | 余裕があれば |
+| 80 | [Static Top Tree と木 DP の動的更新](../tree/static-top-tree.md) | 木 | 余裕があれば |
+| 81 | [動的木](../tree/dynamic-tree.md) | 木 | 余裕があれば |
+| 82 | [線形漸化式の高速化](../math/linear-recurrence-fast.md) | 整数論・代数 | 余裕があれば |
+| 83 | [LGV 補題](../comb/lgv-lemma.md) | 数え上げ・確率・ゲーム | 余裕があれば |
 
 <!-- textlint-enable -->
 <!-- gen:end roadmap-order -->

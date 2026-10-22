@@ -1,0 +1,11 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "0\n", output: "\nsum 0\nSecond\n"}
+  - {input: "1\nB\n", output: "1\nsum 1\nLeft\n"}
+  - {input: "3\nBR BR R\n", output: "1/2 1/2 -1\nsum 0\nSecond\n"}
+  - {input: "2\nBR R\n", output: "1/2 -1\nsum -1/2\nRight\n"}
+  - {input: "3\nBRR RB RBB\n", output: "1/4 -1/2 -1/4\nsum -1/2\nRight\n"}
+  - {input: "3\nBBRB RRBR BRBR\n", output: "7/4 -7/4 5/8\nsum 5/8\nLeft\n"}
+  - {input: "2\nBBBRRR RRRBBB\n", output: "17/8 -17/8\nsum 0\nSecond\n"}

@@ -1,0 +1,16 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 変数 1 個・節なし（割当は何でもよいが、ACL は x_0 = 0 を返す）
+  - {input: "1 0\n", output: "Yes\n0\n"}
+  # x_0 を真に固定する：(x_0 ∨ x_0)
+  - {input: "1 1\n0 1 0 1\n", output: "Yes\n1\n"}
+  # x_0 を真にも偽にも固定する：充足不能
+  - {input: "1 2\n0 1 0 1\n0 0 0 0\n", output: "No\n"}
+  # (a ∨ b)・(¬a ∨ b)・(a ∨ ¬b)・(¬a ∨ ¬b)：4 通りの割当をすべて禁じる
+  - {input: "2 4\n0 1 1 1\n0 0 1 1\n0 1 1 0\n0 0 1 0\n", output: "No\n"}
+  # x_0 = 1 に固定し、「x_0 なら x_1」「x_1 なら ¬x_2」：割当はただ 1 つ 110
+  - {input: "3 3\n0 1 0 1\n0 0 1 1\n1 0 2 0\n", output: "Yes\n110\n"}
+  # 「x_0 と x_1 は違う」「x_1 と x_2 は違う」「x_0 は偽」：割当はただ 1 つ 010
+  - {input: "3 5\n0 1 1 1\n0 0 1 0\n1 1 2 1\n1 0 2 0\n0 0 0 0\n", output: "Yes\n010\n"}

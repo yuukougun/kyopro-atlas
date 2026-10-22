@@ -269,7 +269,7 @@ search:
 
 ## Suffix Automaton と発展の文字列アルゴリズム（suffix-automaton） {#suffix-automaton}
 
-- id：`suffix-automaton`　レベル：発展　段階：stub　type：overview
+- id：`suffix-automaton`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/string/suffix-automaton/
 - 別名：SAM、接尾辞オートマトン、DAWG、回文木、eertree、Palindromic Tree、Lyndon 分解、Duval、最小回転、Run の列挙、Main-Lorentz、逆 Manacher、逆 Z
 - 種類：文字列

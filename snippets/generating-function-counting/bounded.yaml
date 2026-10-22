@@ -1,0 +1,21 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 空の積：(…)^0 = 1 なので x^0 の係数は 1、x^1 の係数は 0
+  - {input: "0 3 0\n", output: "1\n"}
+  - {input: "0 3 1\n", output: "0\n"}
+  # 1 変数：0..c に入れば 1 通り
+  - {input: "1 3 3\n", output: "1\n"}
+  - {input: "1 3 4\n", output: "0\n"}
+  # c = 0：どの変数も 0 だけ
+  - {input: "5 0 0\n", output: "1\n"}
+  - {input: "5 0 2\n", output: "0\n"}
+  # 2 個のサイコロの目を 0..5 にずらした和 5（目の和 7）は 6 通り
+  - {input: "2 5 5\n", output: "6\n"}
+  # 3 変数・各 0..2・和 3：(1 + x + x^2)^3 の x^3 の係数は 7
+  - {input: "3 2 3\n", output: "7\n"}
+  # 上限が効かない（c ≥ k）なら重複組合せ C(k + n - 1, n - 1) = C(12, 3) = 220
+  - {input: "4 100 9\n", output: "220\n"}
+  # 大きい値：繰り返し二乗法と閉じた式が一致することを assert で確かめる
+  - {input: "200000 9 200000\n", output: "44809982\n"}

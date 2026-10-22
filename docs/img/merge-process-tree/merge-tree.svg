@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 360" width="400" height="360" font-family="sans-serif">
+  <rect x="0" y="0" width="400" height="360" fill="#ffffff"/>
+  <text x="200" y="22" font-size="13" text-anchor="middle" fill="#222">併合の順：1–2、3–4、4–5、2–3（四角の数は時刻）</text>
+  <text x="392" y="60" font-size="12" text-anchor="end" fill="#c46a00">橙：x = 4、t = 3 の例</text>
+  <g stroke="#222" stroke-width="1.5">
+    <line x1="195" y1="55" x2="100" y2="125"/>
+    <line x1="195" y1="55" x2="290" y2="125"/>
+    <line x1="100" y1="125" x2="60" y2="240"/>
+    <line x1="100" y1="125" x2="140" y2="240"/>
+    <line x1="290" y1="125" x2="240" y2="185"/>
+    <line x1="290" y1="125" x2="340" y2="240"/>
+    <line x1="240" y1="185" x2="200" y2="240"/>
+    <line x1="240" y1="185" x2="280" y2="240"/>
+  </g>
+  <g font-size="14" text-anchor="middle">
+    <rect x="173" y="40" width="44" height="30" rx="4" fill="#eef3fb" stroke="#1f5fbf" stroke-width="1.5"/><text x="195" y="60">4</text>
+    <rect x="78" y="110" width="44" height="30" rx="4" fill="#eef3fb" stroke="#1f5fbf" stroke-width="1.5"/><text x="100" y="130">1</text>
+    <rect x="268" y="110" width="44" height="30" rx="4" fill="#fde9c8" stroke="#c46a00" stroke-width="3"/><text x="290" y="130">3</text>
+    <rect x="218" y="170" width="44" height="30" rx="4" fill="#eef3fb" stroke="#1f5fbf" stroke-width="1.5"/><text x="240" y="190">2</text>
+  </g>
+  <g font-size="15" text-anchor="middle">
+    <circle cx="60" cy="245" r="15" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="60" y="250">1</text>
+    <circle cx="140" cy="245" r="15" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="140" y="250">2</text>
+    <circle cx="200" cy="245" r="15" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="200" y="250">3</text>
+    <circle cx="280" cy="245" r="15" fill="#fff" stroke="#c46a00" stroke-width="3"/><text x="280" y="250">4</text>
+    <circle cx="340" cy="245" r="15" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="340" y="250">5</text>
+  </g>
+  <g font-size="12" text-anchor="middle" fill="#555">
+    <text x="20" y="282" text-anchor="start">順</text>
+    <text x="60" y="282">0</text><text x="140" y="282">1</text><text x="200" y="282">2</text><text x="280" y="282">3</text><text x="340" y="282">4</text>
+  </g>
+  <g font-size="12" text-anchor="middle">
+    <rect x="42" y="292" width="116" height="20" rx="3" fill="#eef3fb" stroke="#1f5fbf" stroke-width="1.5"/>
+    <text x="100" y="306">時刻 1 の頂点 [0, 2)</text>
+    <rect x="182" y="292" width="176" height="20" rx="3" fill="#fde9c8" stroke="#c46a00" stroke-width="3"/>
+    <text x="270" y="306">時刻 3 の頂点 [2, 5)</text>
+    <rect x="42" y="320" width="316" height="20" rx="3" fill="#ffffff" stroke="#1f5fbf" stroke-width="1.5" stroke-dasharray="5 3"/>
+    <text x="200" y="334">時刻 4 の頂点（根）[0, 5)</text>
+  </g>
+</svg>

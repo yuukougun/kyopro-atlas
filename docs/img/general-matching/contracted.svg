@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 200" width="380" height="200" font-family="sans-serif" font-size="14">
+  <rect width="380" height="200" fill="#ffffff"/>
+  <line x1="150" y1="90" x2="284" y2="90" stroke="#555" stroke-width="1.5"/>
+  <line x1="150" y1="84" x2="284" y2="84" stroke="#d9730d" stroke-width="3" stroke-dasharray="8 5"/>
+  <circle cx="100" cy="90" r="50" fill="#ffffff" stroke="#333" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <circle cx="300" cy="90" r="16" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+  <g fill="#333" text-anchor="middle">
+    <text x="100" y="86" font-size="18">B</text>
+    <text x="100" y="108" font-size="12">r, a, b, c, d</text>
+    <text x="300" y="95">t</text>
+    <text x="100" y="164" font-size="12">B：空き（底 r が空き）</text>
+    <text x="300" y="130" font-size="12">t：空き</text>
+  </g>
+  <text x="20" y="190" font-size="12" fill="#333">縮約すると辺 B-t がそのまま長さ 1 の増加路になる</text>
+</svg>

@@ -1,0 +1,13 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 1 文字
+  - {input: "a\n", output: "0 1\n0 a\n"}
+  # 狭義に減る列：1 文字ずつに分かれる
+  - {input: "ba\n", output: "0 1 2\n1 ab\n"}
+  # 周期的な文字列：同じ片が続き、最小の巡回シフトの位置は複数ある（後ろの方を返す）
+  - {input: "abab\n", output: "0 2 4\n2 abab\n"}
+  - {input: "aaa\n", output: "0 1 2 3\n2 aaa\n"}
+  - {input: "cbacba\n", output: "0 1 2 5 6\n5 acbacb\n"}
+  - {input: "abaab\n", output: "0 2 5\n2 aabab\n"}

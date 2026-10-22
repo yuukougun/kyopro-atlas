@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 352" width="360" height="352" font-family="sans-serif">
+  <rect x="0" y="0" width="360" height="352" fill="#ffffff"/>
+  <!-- 調べる 1 つの領域 -->
+  <polygon points="180,150 320,150 320,10" fill="#dbeafe" stroke="none"/>
+  <!-- 8 つの領域の境目 -->
+  <g stroke="#6b7280" stroke-width="1.2">
+    <line x1="40" y1="150" x2="320" y2="150"/>
+    <line x1="180" y1="10" x2="180" y2="290"/>
+    <line x1="40" y1="290" x2="320" y2="10"/>
+    <line x1="40" y1="10" x2="320" y2="290"/>
+  </g>
+  <!-- x + y が一定の線 -->
+  <line x1="217.5" y1="112.5" x2="255" y2="150" stroke="#2563eb" stroke-width="2.5" stroke-dasharray="6 3"/>
+  <!-- 辺 -->
+  <line x1="180" y1="150" x2="230" y2="125" stroke="#111827" stroke-width="2.5"/>
+  <line x1="180" y1="150" x2="290" y2="70" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <!-- 点 -->
+  <circle cx="180" cy="150" r="6" fill="#111827"/>
+  <circle cx="230" cy="125" r="5" fill="#2563eb"/>
+  <circle cx="290" cy="70" r="5" fill="#ffffff" stroke="#6b7280" stroke-width="1.5"/>
+  <circle cx="120" cy="80" r="5" fill="#ffffff" stroke="#6b7280" stroke-width="1.5"/>
+  <circle cx="110" cy="220" r="5" fill="#ffffff" stroke="#6b7280" stroke-width="1.5"/>
+  <!-- 座標の向き -->
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#111827"/>
+    </marker>
+  </defs>
+  <g stroke="#111827" stroke-width="1.5" marker-end="url(#arr)">
+    <line x1="220" y1="280" x2="262" y2="280"/>
+    <line x1="220" y1="280" x2="220" y2="238"/>
+  </g>
+  <text x="268" y="285" font-size="13" fill="#111827">x</text>
+  <text x="226" y="244" font-size="13" fill="#111827">y</text>
+  <!-- ラベル -->
+  <text x="160" y="172" font-size="14" fill="#111827">p</text>
+  <text x="216" y="146" font-size="13" fill="#1d4ed8">q</text>
+  <text x="298" y="66" font-size="13" fill="#4b5563">r</text>
+  <text x="262" y="146" font-size="11" fill="#1d4ed8">x+y 一定</text>
+  <text x="30" y="310" font-size="13" fill="#111827">塗った領域：0 ≤ (y の差) ≤ (x の差)</text>
+  <text x="30" y="330" font-size="13" fill="#111827">q：領域で最も近い点（実線の辺を候補にする）</text>
+  <text x="30" y="344" font-size="13" fill="#111827">r：同じ領域で遠い点（破線の辺は候補にしない）</text>
+</svg>

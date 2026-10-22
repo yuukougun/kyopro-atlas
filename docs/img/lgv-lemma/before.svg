@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 250" width="240" height="250" font-family="sans-serif">
+<rect width="240" height="250" fill="#ffffff"/>
+<text x="120" y="22" text-anchor="middle" font-size="13" fill="#222">σ = 恒等（符号 +）</text>
+<line x1="50" y1="190" x2="170" y2="190" stroke="#ccc" stroke-width="1"/>
+<line x1="50" y1="190" x2="50" y2="70" stroke="#ccc" stroke-width="1"/>
+<line x1="50" y1="130" x2="170" y2="130" stroke="#ccc" stroke-width="1"/>
+<line x1="110" y1="190" x2="110" y2="70" stroke="#ccc" stroke-width="1"/>
+<line x1="50" y1="70" x2="170" y2="70" stroke="#ccc" stroke-width="1"/>
+<line x1="170" y1="190" x2="170" y2="70" stroke="#ccc" stroke-width="1"/>
+<polyline points="50,130 110,130 110,70" fill="none" stroke="#1f5fbf" stroke-width="4"/>
+<polyline points="110,190 110,130 170,130" fill="none" stroke="#c0392b" stroke-width="4" stroke-dasharray="7,5"/>
+<circle cx="50" cy="190" r="3" fill="#888"/>
+<circle cx="50" cy="130" r="3" fill="#888"/>
+<circle cx="50" cy="70" r="3" fill="#888"/>
+<circle cx="110" cy="190" r="3" fill="#888"/>
+<circle cx="110" cy="130" r="3" fill="#888"/>
+<circle cx="110" cy="70" r="3" fill="#888"/>
+<circle cx="170" cy="190" r="3" fill="#888"/>
+<circle cx="170" cy="130" r="3" fill="#888"/>
+<circle cx="170" cy="70" r="3" fill="#888"/>
+<circle cx="110" cy="130" r="9" fill="none" stroke="#222" stroke-width="2"/>
+<text x="122" y="148" font-size="13" fill="#222">v</text>
+<circle cx="50" cy="130" r="6" fill="#ffffff" stroke="#222" stroke-width="2"/>
+<text x="20" y="135" font-size="15" fill="#222">a₁</text>
+<circle cx="110" cy="190" r="6" fill="#ffffff" stroke="#222" stroke-width="2"/>
+<text x="100" y="214" font-size="15" fill="#222">a₂</text>
+<circle cx="110" cy="70" r="6" fill="#ffffff" stroke="#222" stroke-width="2"/>
+<text x="100" y="58" font-size="15" fill="#222">b₁</text>
+<circle cx="170" cy="130" r="6" fill="#ffffff" stroke="#222" stroke-width="2"/>
+<text x="180" y="135" font-size="15" fill="#222">b₂</text>
+<text x="12" y="238" font-size="12" fill="#1f5fbf">実線：a₁ → b₁</text>
+<text x="126" y="238" font-size="12" fill="#c0392b">破線：a₂ → b₂</text>
+</svg>

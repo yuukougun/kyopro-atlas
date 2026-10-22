@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" font-family="sans-serif">
+<rect x="0" y="0" width="400" height="300" fill="#ffffff"/>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#000"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#777"/></marker></defs>
+<text x="10" y="20" font-size="13">S = abb の Suffix Automaton（状態 5・遷移 5）</text>
+<path d="M60.0,110.0 Q90.0,90.0 120.0,70.0" fill="none" stroke="#000" stroke-width="1.6" marker-end="url(#ar)"/>
+<text x="82.0" y="84.0" font-size="14" font-weight="bold" text-anchor="middle">a</text>
+<path d="M153.0,60.0 Q185.0,60.0 217.0,60.0" fill="none" stroke="#000" stroke-width="1.6" marker-end="url(#ar)"/>
+<text x="185.0" y="54.0" font-size="14" font-weight="bold" text-anchor="middle">b</text>
+<path d="M250.8,68.6 Q290.0,90.0 329.2,111.4" fill="none" stroke="#000" stroke-width="1.6" marker-end="url(#ar)"/>
+<text x="298.0" y="84.0" font-size="14" font-weight="bold" text-anchor="middle">b</text>
+<path d="M61.5,127.2 Q120.0,152.5 178.5,177.8" fill="none" stroke="#000" stroke-width="1.6" marker-end="url(#ar)"/>
+<text x="112.0" y="162.5" font-size="14" font-weight="bold" text-anchor="middle">b</text>
+<path d="M211.5,177.8 Q270.0,152.5 328.5,127.2" fill="none" stroke="#000" stroke-width="1.6" marker-end="url(#ar)"/>
+<text x="264.0" y="144.5" font-size="14" font-weight="bold" text-anchor="middle">b</text>
+<path d="M126.7,76.0 Q106.6,115.0 62.9,118.5" fill="none" stroke="#777" stroke-width="1.4" stroke-dasharray="5,4" marker-end="url(#ag)"/>
+<path d="M229.5,77.1 Q215.0,122.5 200.5,167.9" fill="none" stroke="#777" stroke-width="1.4" stroke-dasharray="5,4" marker-end="url(#ag)"/>
+<path d="M331.7,132.1 Q281.1,178.2 212.9,183.6" fill="none" stroke="#777" stroke-width="1.4" stroke-dasharray="5,4" marker-end="url(#ag)"/>
+<path d="M177.0,185.8 Q104.1,189.2 56.7,133.7" fill="none" stroke="#777" stroke-width="1.4" stroke-dasharray="5,4" marker-end="url(#ag)"/>
+<circle cx="45" cy="120" r="18" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text x="45" y="125" font-size="14" text-anchor="middle">0</text>
+<circle cx="135" cy="60" r="18" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text x="135" y="65" font-size="14" text-anchor="middle">1</text>
+<circle cx="235" cy="60" r="18" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text x="235" y="65" font-size="14" text-anchor="middle">2</text>
+<circle cx="345" cy="120" r="18" fill="#fff" stroke="#000" stroke-width="2.5"/>
+<text x="345" y="125" font-size="14" text-anchor="middle">3</text>
+<circle cx="195" cy="185" r="18" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text x="195" y="190" font-size="14" text-anchor="middle">4</text>
+<text x="45" y="156" font-size="12" text-anchor="middle" fill="#333">{空文字列}</text>
+<text x="135" y="34" font-size="12" text-anchor="middle" fill="#333">{a}</text>
+<text x="235" y="34" font-size="12" text-anchor="middle" fill="#333">{ab}</text>
+<text x="355" y="164" font-size="12" text-anchor="middle" fill="#333">{abb, bb}</text>
+<text x="195" y="226" font-size="12" text-anchor="middle" fill="#333">{b}</text>
+<line x1="20" y1="258" x2="60" y2="258" stroke="#000" stroke-width="1.6" marker-end="url(#ar)"/><text x="68" y="262" font-size="12">遷移（文字を末尾に足す）</text>
+<line x1="20" y1="282" x2="60" y2="282" stroke="#777" stroke-width="1.4" stroke-dasharray="5,4" marker-end="url(#ag)"/><text x="68" y="286" font-size="12">接尾辞リンク</text>
+<text x="230" y="262" font-size="12">{ } は状態が表す部分文字列</text>
+<text x="230" y="286" font-size="12">太い円は last（S 全体）</text>
+</svg>

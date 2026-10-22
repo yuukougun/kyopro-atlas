@@ -42,7 +42,7 @@ updated: 2026-10-21
 | abc452_d No-Subsequence Substring | D | 903 | [部分列の判定と次の出現位置の表](../string/subsequence-matching.md#next-occurrence) › 次の出現位置の表（後ろから作る・番兵 N） |
 | abc452_e You WILL Like Sigma Problem | E | 1318 | [周期性の検出](../basics/periodicity.md#periodic-patterns) › 盤面・剰余の周期を割り算で数える、[調和級数と倍数の列挙](../math/harmonic-sum.md#mark-multiples) › 値の倍数に印を付ける、[累積和](../basics/prefix-sum.md) |
 | abc452_f Interval Inversion Count | F | 1630 | [尺取り法](../basics/two-pointers.md)、[転倒数](../ds/inversion-number.md#sliding-window) › 窓を伸縮しながら転倒数を増減する（尺取り・期待値と組む）、[BIT（Fenwick Tree）](../ds/fenwick-tree.md) |
-| abc452_g 221 Substring | G | 2255 | [ランレングス圧縮](../basics/run-length-encoding.md#keep-compressed) › ランレングスのまま処理する、[Suffix Automaton と発展の文字列アルゴリズム](../string/suffix-automaton.md) › Suffix Automaton（状態数 2N−1 以下・遷移数 3N−4 以下。文字の追加に強い）、[Suffix Array と LCP 配列](../string/suffix-array.md#distinct-substrings) › 異なる部分文字列の数 = N(N+1)/2 − Σlcp |
+| abc452_g 221 Substring | G | 2255 | [ランレングス圧縮](../basics/run-length-encoding.md#keep-compressed) › ランレングスのまま処理する、[Suffix Automaton と発展の文字列アルゴリズム](../string/suffix-automaton.md#suffix-automaton) › Suffix Automaton（状態数 2N−1 以下・遷移数 3N−4 以下。文字の追加に強い）、[Suffix Array と LCP 配列](../string/suffix-array.md#distinct-substrings) › 異なる部分文字列の数 = N(N+1)/2 − Σlcp |
 | abc453_d Go Straight | D | 1011 | [状態を頂点にする](../graph/extended-dijkstra.md#parity-mod-direction) › 偶奇・mod・向きを持つ、[幅優先探索（BFS）と無重み最短路](../graph/bfs.md)、[グリッドグラフ](../graph/grid-graph.md) |
 | abc453_e Team Division | E | 1513 | [一部を固定して数える](../thinking/fix-variable.md)、[二項係数の前計算](../comb/binomial-precompute.md)、[いもす法](../basics/imos.md#imos-1d) › 1 次元のいもす法（閉区間なら右端 + 1 に −x） |
 | abc453_f Avoid Division | F | 2811 | [木の重心](../tree/tree-centroid.md#pair-across) › 重心で分けて別の枝どうしを組む、[構築問題の考え方](../thinking/construction.md) |
@@ -66,7 +66,7 @@ updated: 2026-10-21
 | abc458_d Chalkboard Median | D | 450 | [上位 K 個の和と中央値の管理](../ds/top-k-multiset.md#median) › 中央値を保つ（個数の差を 1 以内に。削除がなければヒープ 2 本）と Σ\|x − a_i\| の更新 |
 | abc458_e Count 123 | E | 1309 | [一部を固定して数える](../thinking/fix-variable.md)、[二項係数の前計算](../comb/binomial-precompute.md) |
 | abc458_f Critical Misread | F | 1744 | [Aho-Corasick 法](../string/aho-corasick.md#as-automaton) › 照合オートマトンとして使う（DP・行列累乗）、[照合オートマトン上の DP](../string/string-automaton-dp.md#matrix-power) › N が巨大なとき：遷移行列の累乗・ダブリング、[行列累乗](../math/matrix-power.md#dp-transition) › DP の遷移を行列にする（照合の状態・末尾の数文字・グリッドの境界の状態） |
-| abc458_g Children Yearn for the Evil Kindergarten | G | 2831 | [答えで二分探索](../basics/binary-search-answer.md#dp-check) › 判定を DP で作る（決め打ちごとに初期化し直す）、[Monge 性による DP の高速化](../dp/monge.md) › 凸な列どうしの (max,+) 畳み込み（差分のマージ）、[Slope Trick](../dp/slope-trick.md) › 凸関数を傾きの変わる点の集まりで表す |
+| abc458_g Children Yearn for the Evil Kindergarten | G | 2831 | [答えで二分探索](../basics/binary-search-answer.md#dp-check) › 判定を DP で作る（決め打ちごとに初期化し直す）、[Monge 性による DP の高速化](../dp/monge.md#convex-max-plus-convolution) › 凸な列どうしの (max,+) 畳み込み（差分のマージ）、[Slope Trick](../dp/slope-trick.md#breakpoints) › 凸関数を傾きの変わる点の集まりで表す |
 | abc459_d Adjacent Distinct String | D | 701 | [貪欲法の考え方と正当性](../basics/greedy-basics.md#strongest-first) › 基準を決めて強い順に使う、[対称性・鳩の巣原理・場合分け](../thinking/symmetry-pigeonhole-casework.md#pigeonhole) › 鳩の巣原理（必ず一致が起きる・探索の打ち切り回数） |
 | abc459_e Select from Subtrees | E | 1298 | [葉から考える](../tree/leaf-first.md#send-up) › 帰りがけ順に葉から情報を上へ送る、[根付き木と走査順](../tree/tree-traversal.md#pre-post-order) › 行きがけ順と帰りがけ順（子から親へ集約する）、[二項係数の前計算](../comb/binomial-precompute.md) |
 | abc459_f -1, +1 | F | 2163 | [差分列への言い換え](../basics/difference-sequence.md#strict-to-weak) › 狭義の条件は a_i − i で広義に直してから差分を取る、[言い換えの典型](../thinking/reformulation.md#operations) › 操作の言い換え（区間操作を差分列で・隣接 swap を転倒数で） |
@@ -82,7 +82,7 @@ updated: 2026-10-21
 | abc462_d Accomplice | D | 798 | [いもす法](../basics/imos.md#imos-1d) › 1 次元のいもす法（閉区間なら右端 + 1 に −x） |
 | abc462_e Alternating Costs | E | 1226 | [対称性・鳩の巣原理・場合分け](../thinking/symmetry-pigeonhole-casework.md#symmetry-cases) › 対称性で場合を減らす（N ≤ M に入れ替える） |
 | abc462_f More ABC | F | 1952 | [DP の状態の設計](../dp/dp-state-design.md#last-characters) › 末尾の数文字を状態にする（禁止された並び・回文を避ける） |
-| abc462_g Completely Wrong | G | 2232 | [包除原理](../comb/inclusion-exclusion.md#derangement) › 撹乱順列（完全順列）、[分割統治 FFT・オンライン畳み込み](../math/online-convolution.md) › 多数の多項式の積（次数の小さいものから掛ける・分割統治） |
+| abc462_g Completely Wrong | G | 2232 | [包除原理](../comb/inclusion-exclusion.md#derangement) › 撹乱順列（完全順列）、[分割統治 FFT・オンライン畳み込み](../math/online-convolution.md#product-of-many) › 多数の多項式の積（次数の小さいものから掛ける・分割統治） |
 | abc463_d Maximize the Gap | D | 838 | [答えで二分探索](../basics/binary-search-answer.md#greedy-check) › 判定を貪欲・探索で作る |
 | abc463_e Roads and Gates | E | 1055 | [状態を頂点にする](../graph/extended-dijkstra.md#super-vertex) › 超頂点・補助頂点で辺の数を減らす、[ダイクストラ法](../graph/dijkstra.md) |
 | abc463_f Senshuraku | F | 2127 | [確率の基本](../comb/probability-basics.md#conditional) › 条件付き確率と全確率の公式、[対称性・鳩の巣原理・場合分け](../thinking/symmetry-pigeonhole-casework.md#casework) › 場合分け（端の場合・大小関係・操作の順序によらないこと）、[二項係数の前計算](../comb/binomial-precompute.md) |
@@ -90,7 +90,7 @@ updated: 2026-10-21
 | abc464_d Celester | D | 752 | [DP の状態の設計](../dp/dp-state-design.md#typical-summaries) › 典型の要約（直前の値・on/off・偶奇・個数・上限で打ち切った値） |
 | abc464_e Fill-Rect Query | E | 1075 | [いもす法](../basics/imos.md#imos-2d) › 2 次元いもす法（四隅に ±1、横と縦に累積） |
 | abc464_f Random Vault Heist | F | 2225 | [対称性で確率を求める](../comb/probability-symmetry.md#random-permutation) › 残りから一様に選ぶ = ランダムな順列、[期待値の線形性と指示確率変数](../comb/linearity-of-expectation.md)、[半分全列挙](../basics/meet-in-the-middle.md#combine-halves) › 前半・後半を列挙して突き合わせる（ソート＋二分探索・尺取り）、[尺取り法](../basics/two-pointers.md) |
-| abc464_g Celester 2 | G | 2592 | [Alien DP](../dp/alien-dp.md) › 取り消し付きの貪欲で解ける場合（優先度付きキュー）、[優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md#regret) › 選んだものを後から入れ替える（後悔付き貪欲。一般形は Alien DP のページ） |
+| abc464_g Celester 2 | G | 2592 | [Alien DP](../dp/alien-dp.md#undoable-greedy) › 取り消し付きの貪欲で解ける場合（優先度付きキュー）、[優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md#regret) › 選んだものを後から入れ替える（後悔付き貪欲。一般形は Alien DP のページ） |
 | abc465_d X to Y | D | 839 | [完全二分木](../tree/complete-binary-tree.md#lca-by-index) › 番号だけで LCA を求める（大きい方を 2 で割る）、[完全二分木](../tree/complete-binary-tree.md#k-ary) › K 分木への一般化 |
 | abc465_e Digit Circus | E | 1417 | [桁 DP](../dp/digit-dp.md#extra-state) › 問題の情報を状態に足す（桁和の余り・個数） |
 | abc465_f Sjeltzer? | F | 1754 | [2 次元累積和](../basics/prefix-sum-2d.md#higher-dimensions) › 3 次元以上（項の数と符号の決め方）、[いもす法](../basics/imos.md) |
@@ -146,7 +146,7 @@ updated: 2026-10-21
 | abc478_d Range Set Insertion Query | D | 729 | [イベントソートと平面走査の基本](../basics/event-sort.md#make-events) › イベントの作り方と同じ座標での処理順 |
 | abc478_e lt and le | E | 1376 | [強連結成分分解（SCC）](../graph/scc.md#condensation) › 縮約したグラフが DAG になる理由、[トポロジカルソート](../graph/topological-sort.md) |
 | abc478_f Min-First Search | F | 1588 | [木の構築・復元](../tree/tree-construction.md#from-order) › 訪問順から親の候補を数える、[セグメント木上の二分探索](../ds/segment-tree-binary-search.md) |
-| abc478_g Division Point Hull | G | 2582 | [分割統治](../basics/divide-and-conquer.md)、[凸包と凸多角形](../geometry/convex-hull.md#andrew) › Andrew 法（monotone chain）：下側と上側を作る、[発展の幾何](../geometry/advanced-geometry.md) › ミンコフスキー和（凸包の和） |
+| abc478_g Division Point Hull | G | 2582 | [分割統治](../basics/divide-and-conquer.md)、[凸包と凸多角形](../geometry/convex-hull.md#andrew) › Andrew 法（monotone chain）：下側と上側を作る、[発展の幾何](../geometry/advanced-geometry.md#minkowski-sum) › ミンコフスキー和（凸包の和） |
 | abc479_d Back and Forth Distance | D | 563 | [累積和](../basics/prefix-sum.md#left-right) › 左右からの累積（1 つ除いた gcd・max） |
 | abc479_e Cut and Add | E | 1000 | [辺で切って数える](../tree/tree-edge-contribution.md#edge-pairs) › 辺を通るペアは s(N−s) 個、[根付き木と走査順](../tree/tree-traversal.md#parent-depth-size) › 親・深さ・部分木サイズを求める |
 | abc479_f Narrow Passage | F | 1938 | [転倒数](../ds/inversion-number.md#adjacent-swaps) › なぜ隣接 swap の最小回数か（1 回の隣接 swap で転倒数はちょうど 1 増減する）、[言い換えの典型](../thinking/reformulation.md#operations) › 操作の言い換え（区間操作を差分列で・隣接 swap を転倒数で） |
@@ -190,6 +190,7 @@ updated: 2026-10-21
 | 典型90 030. K Factors（★5） | — | [エラトステネスの篩](../math/sieve-eratosthenes.md)（練習） |
 | 典型90 031. VS AtCoder（★6） | — | [Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md)（練習） |
 | 典型90 034. There are few types of elements（★4） | — | [尺取り法](../basics/two-pointers.md)（練習） |
+| 典型90 035. Preserve Connectivity（★7） | — | [Auxiliary Tree](../tree/auxiliary-tree.md)（例題） |
 | 典型90 037. Don't Leave the Spice（★5） | — | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md)（例題） |
 | 典型90 038. Large LCM（★3） | — | [整数の割り算と余り](../math/integer-division.md)（練習） |
 | 典型90 039. Tree Distance（★5） | — | [辺で切って数える](../tree/tree-edge-contribution.md)（例題） |
@@ -258,6 +259,7 @@ updated: 2026-10-21
 | EDPC W. Intervals | — | [インライン DP](../dp/inline-dp.md)（例題） |
 | EDPC X. Tower | — | [並べ替えてから DP する](../dp/exchange-argument-dp.md)（例題） |
 | EDPC Y. Grid 2 | — | [包除 DP](../comb/inclusion-exclusion-dp.md)（例題） |
+| EDPC Z. Frog 3 | — | [Convex Hull Trick と Li Chao Tree](../dp/cht.md)（例題） |
 
 ### TDPC（Typical DP Contest） {#problem-sets-tdpc}
 
@@ -275,6 +277,7 @@ updated: 2026-10-21
 | TDPC O. 文字列 | — | [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md)（練習） |
 | TDPC P. うなぎ | — | [二乗の木 DP](../dp/tree-dp-square.md)（練習） |
 | TDPC S. マス目 | — | [プロファイル DP](../dp/broken-profile-dp.md)（力試し） |
+| TDPC T. フィボナッチ | — | [線形漸化式の高速化](../math/linear-recurrence-fast.md)（例題） |
 
 ### ACL Practice（AtCoder Library Practice Contest） {#problem-sets-practice2}
 
@@ -287,6 +290,7 @@ updated: 2026-10-21
 | PRACTICE2 E. MinCostFlow | — | [最小費用流](../graph/min-cost-flow.md)（例題） |
 | PRACTICE2 F. Convolution | — | [畳み込みの使い方](../math/convolution-ntt.md)（例題） |
 | PRACTICE2 G. SCC | — | [強連結成分分解（SCC）](../graph/scc.md)（例題） |
+| PRACTICE2 H. Two SAT | — | [2-SAT](../graph/two-sat.md)（例題） |
 | PRACTICE2 I. Number of Substrings | — | [Suffix Array と LCP 配列](../string/suffix-array.md)（例題） |
 | PRACTICE2 J. Segment Tree | — | [セグメント木上の二分探索](../ds/segment-tree-binary-search.md)（例題） |
 | PRACTICE2 K. Range Affine Range Sum | — | [遅延セグメント木](../ds/lazy-segment-tree.md)（例題） |
@@ -340,6 +344,12 @@ updated: 2026-10-21
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
 | CODE-FESTIVAL-2017-QUALB C. 3 Steps | 1883 | [二部グラフ判定](../graph/bipartite-graph.md)（力試し） |
+
+### CODE-THANKS-FESTIVAL-2017 {#problem-sets-code-thanks-festival-2017}
+
+| 問題 | diff | ページ（役割） |
+| --- | --- | --- |
+| CODE-THANKS-FESTIVAL-2017 H. Union Sets | — | [部分永続 Union-Find](../ds/partially-persistent-union-find.md)（例題）、[並列二分探索](../ds/parallel-binary-search.md)（練習） |
 
 ### DIVERTA2019 {#problem-sets-diverta2019}
 

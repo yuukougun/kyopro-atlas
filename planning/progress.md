@@ -13,7 +13,7 @@
 | 5 | 決定の提示 | 完了（2026-10-21） | ユーザーの承認（decisions.md の「工程5での確認」） |
 | 6 | 土台作り | 完了（2026-10-21） | [interfaces.md](interfaces.md)・公開 https://yuukougun.github.io/kyopro-atlas/ |
 | 7 | 試作 | 完了（2026-10-21） | 試作9ページ（下の表） |
-| 8 | 本制作 | 進行中（8a 骨格は完了、8b 本文は基礎・水・青・黄の254ページが draft） | [batches/b1/STATE.md](batches/b1/STATE.md) |
+| 8 | 本制作 | 進行中（8a 骨格は完了、8b 本文は基礎・水・青・黄・発展の304ページが draft） | [batches/b1/STATE.md](batches/b1/STATE.md) |
 | 9 | スキル作成 | 未着手 | |
 | 10 | 全体の検証 | 未着手 | |
 
@@ -97,9 +97,9 @@
 1. ~~ユーザーに試作を見てもらい、見本の2枚を決める~~ 完了（見本は basics/binary-search-answer と ds/lazy-segment-tree。C++ は cpp/cpp-views-basics）
 2. ~~9b：claude.ai の実機確認~~ 完了（2026-10-21）：新しい Projects で、索引からのページ・節の URL、atcoder.jp を開かない、開催中のコンテストを断る、ファイルを変更しない、記録用まとめ、のすべてをユーザーが確認した
 3. 工程8b（本文）：基礎・水（b1 173）・青（b2 46）・黄（b3 35）が draft（2026-10-22。本文のあるページは 270/353）。動く図は置き場のあった19個すべてを作成・検証・直し（batches/viz/）。残りと次の順：
-   1. b2・b3 の提案（planning/batches/b2/・b3/ の各 `<id>.md`：台帳・用語集・手引き）を、b1 と同じ流れ（集める → 反映 → 別の担当が検証）で反映する
-   2. b1/handoff.md §1 の「節へ張り替えるリンク」を、相手が draft になったものについて張り替える（b2・b3 の執筆者が残した同種の申し送りも）
-   3. 発展の概要50ページ（batches/b4）と横断ページ33（guide・start・patterns・hub。記法の提案は handoff §3）
+   1. ~~b2・b3 の提案の反映~~ 完了（2026-10-22。台帳・用語集117語・手引き §15。方針は batches/b3/decisions.md）
+   2. ~~節へのリンクの張り替え~~ 完了（2026-10-22。324か所。相手がまだ stub のものは、そのページを書いた後に同じ手順で）
+   3. ~~発展の概要50ページ（batches/b4）~~ 完了（2026-10-22。本文のあるページは 320/353）。残りは横断ページ33（guide・start・patterns・hub。記法の提案は b1/handoff §3・b3/handoff-b2b3 §3）。b4 の提案（batches/b4/*.md）の反映も
    4. 9c（解説手順の確定）と問題の補充、工程9（スキル）・10（全体の検証）
    - 並列の進め方：ワークフローの args はページの front matter から機械的に作り、expect（件数）を渡す。commit は動いている担当と混ざらないよう、別の作業ツリー（git worktree）でその分だけを生成・検査してから行うか、すべて止めてから行う。ビルドの確認は `mkdocs build --strict` に -q を付けない
 

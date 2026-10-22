@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 236" width="300" height="236" font-family="sans-serif">
+<rect x="0" y="0" width="300" height="236" fill="#ffffff"/>
+<rect x="30" y="30" width="48" height="48" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<text x="54.0" y="61.0" font-size="20" text-anchor="middle" fill="#111111">6</text>
+<rect x="78" y="30" width="48" height="48" fill="#d9d9d9" stroke="#333333" stroke-width="1.5"/>
+<text x="102.0" y="61.0" font-size="20" text-anchor="middle" fill="#111111">4</text>
+<rect x="126" y="30" width="48" height="48" fill="#d9d9d9" stroke="#333333" stroke-width="1.5"/>
+<text x="150.0" y="61.0" font-size="20" text-anchor="middle" fill="#111111">3</text>
+<rect x="174" y="30" width="48" height="48" fill="#d9d9d9" stroke="#333333" stroke-width="1.5"/>
+<text x="198.0" y="61.0" font-size="20" text-anchor="middle" fill="#111111">1</text>
+<rect x="30" y="78" width="48" height="48" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<text x="54.0" y="109.0" font-size="20" text-anchor="middle" fill="#111111">4</text>
+<rect x="78" y="78" width="48" height="48" fill="#d9d9d9" stroke="#333333" stroke-width="1.5"/>
+<text x="102.0" y="109.0" font-size="20" text-anchor="middle" fill="#111111">2</text>
+<rect x="126" y="78" width="48" height="48" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<text x="150.0" y="109.0" font-size="20" text-anchor="middle" fill="#111111">1</text>
+<rect x="30" y="126" width="48" height="48" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<text x="54.0" y="157.0" font-size="20" text-anchor="middle" fill="#111111">1</text>
+<rect x="81" y="33" width="42" height="42" fill="none" stroke="#111111" stroke-width="3" stroke-dasharray="6 3"/>
+<text x="16" y="196" font-size="13" fill="#111111">灰色の 4 箱：1 行 2 列目（点線）のフック</text>
+<text x="16" y="216" font-size="13" fill="#111111">右に 2 個・下に 1 個・自分で 4</text>
+</svg>

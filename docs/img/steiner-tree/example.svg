@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 310" width="400" height="310" font-family="sans-serif" font-size="14">
+  <rect width="400" height="310" fill="#ffffff"/>
+  <!-- 指定頂点どうしの辺（重み 4、使わない） -->
+  <g stroke="#888" stroke-width="1.5" stroke-dasharray="6 4">
+    <line x1="200" y1="45" x2="70" y2="245"/>
+    <line x1="70" y1="245" x2="330" y2="245"/>
+    <line x1="330" y1="245" x2="200" y2="45"/>
+  </g>
+  <g fill="#666" text-anchor="middle">
+    <text x="122" y="140">4</text>
+    <text x="278" y="140">4</text>
+    <text x="200" y="266">4</text>
+  </g>
+  <!-- 最小シュタイナー木の辺（重み 2） -->
+  <g stroke="#1f5fa8" stroke-width="4">
+    <line x1="200" y1="45" x2="200" y2="170"/>
+    <line x1="70" y1="245" x2="200" y2="170"/>
+    <line x1="330" y1="245" x2="200" y2="170"/>
+  </g>
+  <g fill="#1f5fa8" text-anchor="middle" font-weight="bold">
+    <text x="213" y="112">2</text>
+    <text x="128" y="196">2</text>
+    <text x="272" y="196">2</text>
+  </g>
+  <!-- 指定頂点（四角）と指定されていない頂点（丸） -->
+  <g fill="#fde9c8" stroke="#333" stroke-width="2">
+    <rect x="184" y="29" width="32" height="32"/>
+    <rect x="54" y="229" width="32" height="32"/>
+    <rect x="314" y="229" width="32" height="32"/>
+  </g>
+  <circle cx="200" cy="170" r="17" fill="#ffffff" stroke="#333" stroke-width="2"/>
+  <g fill="#333" text-anchor="middle" font-weight="bold">
+    <text x="200" y="50">0</text>
+    <text x="70" y="250">1</text>
+    <text x="330" y="250">2</text>
+    <text x="200" y="175">3</text>
+  </g>
+  <g fill="#333" font-size="13">
+    <rect x="20" y="284" width="14" height="14" fill="#fde9c8" stroke="#333" stroke-width="1.5"/>
+    <text x="40" y="296">指定頂点</text>
+    <line x1="120" y1="291" x2="150" y2="291" stroke="#1f5fa8" stroke-width="4"/>
+    <text x="156" y="296">使う辺（計 6）</text>
+    <line x1="262" y1="291" x2="292" y2="291" stroke="#888" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <text x="298" y="296">使わない辺</text>
+  </g>
+</svg>

@@ -173,7 +173,7 @@ search:
 
 ## 発展の幾何（advanced-geometry） {#advanced-geometry}
 
-- id：`advanced-geometry`　レベル：発展　段階：stub　type：overview
+- id：`advanced-geometry`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/geometry/advanced-geometry/
 - 別名：回転キャリパー、rotating calipers、最遠点対、最近点対、closest pair、半平面交差、動的凸包、ミンコフスキー和、Minkowski sum、ボロノイ図、ドロネー三角形分割、円の反転
 - 種類：幾何

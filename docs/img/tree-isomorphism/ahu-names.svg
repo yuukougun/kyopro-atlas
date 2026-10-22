@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" width="400" height="260" font-family="sans-serif" font-size="13">
+  <rect x="0" y="0" width="400" height="260" fill="#ffffff"/>
+  <text x="200" y="20" text-anchor="middle" font-size="14" fill="#222">葉から順に、子の名前の多重集合に名前を付ける</text>
+  <!-- 辺 -->
+  <g stroke="#555" stroke-width="2">
+    <line x1="130" y1="60" x2="50" y2="130"/>
+    <line x1="130" y1="60" x2="130" y2="130"/>
+    <line x1="130" y1="60" x2="210" y2="130"/>
+    <line x1="50" y1="130" x2="25" y2="200"/>
+    <line x1="50" y1="130" x2="75" y2="200"/>
+    <line x1="130" y1="130" x2="130" y2="200"/>
+    <line x1="210" y1="130" x2="185" y2="200"/>
+    <line x1="210" y1="130" x2="235" y2="200"/>
+  </g>
+  <!-- 頂点（1 と 3 は同じ名前なので二重の円） -->
+  <g fill="#ffffff" stroke="#333" stroke-width="2">
+    <circle cx="130" cy="60" r="14"/>
+    <circle cx="50" cy="130" r="14"/>
+    <circle cx="50" cy="130" r="18" fill="none" stroke-dasharray="4 3"/>
+    <circle cx="130" cy="130" r="14"/>
+    <circle cx="210" cy="130" r="14"/>
+    <circle cx="210" cy="130" r="18" fill="none" stroke-dasharray="4 3"/>
+    <circle cx="25" cy="200" r="14"/>
+    <circle cx="75" cy="200" r="14"/>
+    <circle cx="130" cy="200" r="14"/>
+    <circle cx="185" cy="200" r="14"/>
+    <circle cx="235" cy="200" r="14"/>
+  </g>
+  <g text-anchor="middle" fill="#222">
+    <text x="130" y="65">0</text>
+    <text x="50" y="135">1</text>
+    <text x="130" y="135">2</text>
+    <text x="210" y="135">3</text>
+    <text x="25" y="205">4</text>
+    <text x="75" y="205">5</text>
+    <text x="130" y="205">6</text>
+    <text x="185" y="205">7</text>
+    <text x="235" y="205">8</text>
+  </g>
+  <!-- 名前（多重集合 → 名前） -->
+  <g font-size="12" fill="#1a4f8a">
+    <text x="150" y="52">{1,1,2} → 3</text>
+    <text x="10" y="106">{0,0} → 1</text>
+    <text x="144" y="160">{0} → 2</text>
+    <text x="232" y="126">{0,0} → 1</text>
+    <g text-anchor="middle">
+      <text x="25" y="232">{} → 0</text>
+      <text x="75" y="232">0</text>
+      <text x="130" y="232">0</text>
+      <text x="185" y="232">0</text>
+      <text x="235" y="232">0</text>
+    </g>
+  </g>
+  <!-- 名前の表 -->
+  <rect x="290" y="70" width="102" height="128" fill="#f6f6f6" stroke="#888" stroke-width="1"/>
+  <g font-size="12" fill="#222">
+    <text x="341" y="90" text-anchor="middle">名前の表</text>
+    <text x="300" y="114">{} → 0</text>
+    <text x="300" y="138">{0,0} → 1</text>
+    <text x="300" y="162">{0} → 2</text>
+    <text x="300" y="186">{1,1,2} → 3</text>
+  </g>
+  <text x="200" y="254" text-anchor="middle" font-size="12" fill="#222">破線の円の 1 と 3 は名前が同じ 1 なので、部分木が同型</text>
+</svg>

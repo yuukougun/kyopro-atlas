@@ -168,7 +168,7 @@ search:
 
 ## 彩色数・最大独立集合・最大クリーク（chromatic-number） {#chromatic-number}
 
-- id：`chromatic-number`　レベル：発展　段階：stub　type：overview
+- id：`chromatic-number`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/chromatic-number/
 - 別名：彩色数、頂点彩色、最大クリーク、一般グラフの最大独立集合、chromatic number、maximum independent set
 - 種類：DP、数え上げ
@@ -176,9 +176,11 @@ search:
 - サイン：
     - 制約：N ≤ 20〜40 の一般グラフで、独立集合・彩色・クリークを求める
 - 節：
+    - `chromatic-number#relations` 3 つの量の関係と難しさ：https://yuukougun.github.io/kyopro-atlas/graph/chromatic-number/#relations
     - `chromatic-number#chromatic-number` 彩色数（包除原理で O(2^N N)）：https://yuukougun.github.io/kyopro-atlas/graph/chromatic-number/#chromatic-number
     - `chromatic-number#independent-set` 最大独立集合（分枝・半分全列挙）：https://yuukougun.github.io/kyopro-atlas/graph/chromatic-number/#independent-set
     - `chromatic-number#bipartite-case` 二部グラフなら König の定理：https://yuukougun.github.io/kyopro-atlas/graph/chromatic-number/#bipartite-case
+    - `chromatic-number#library` 計算量と自作するときの要点：https://yuukougun.github.io/kyopro-atlas/graph/chromatic-number/#library
 
 ## ダイクストラ法（dijkstra） {#dijkstra}
 
@@ -356,7 +358,7 @@ search:
 
 ## 剰余を頂点にする最短路（modular-shortest-path） {#modular-shortest-path}
 
-- id：`modular-shortest-path`　レベル：発展　段階：stub　type：overview
+- id：`modular-shortest-path`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/modular-shortest-path/
 - 別名：同余最短路、剰余グラフ、mod を頂点に
 - 種類：最短路、整数論
@@ -371,7 +373,7 @@ search:
 
 ## 区間に辺を張る（segment-tree-graph） {#segment-tree-graph}
 
-- id：`segment-tree-graph`　レベル：発展　段階：stub　type：overview
+- id：`segment-tree-graph`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/segment-tree-graph/
 - 別名：区間に辺を張るテク、セグ木グラフ、セグメント木の形の補助頂点、segment tree graph
 - 種類：最短路、データ構造
@@ -381,10 +383,11 @@ search:
 - 節：
     - `segment-tree-graph#two-trees` 下向きの木と上向きの木（コスト 0 の辺）：https://yuukougun.github.io/kyopro-atlas/graph/segment-tree-graph/#two-trees
     - `segment-tree-graph#cover` 区間を O(log N) 個のノードで覆う：https://yuukougun.github.io/kyopro-atlas/graph/segment-tree-graph/#cover
+    - `segment-tree-graph#library` 自作するときの要点と Library Checker：https://yuukougun.github.io/kyopro-atlas/graph/segment-tree-graph/#library
 
 ## K 番目の最短路（k-shortest-paths） {#k-shortest-paths}
 
-- id：`k-shortest-paths`　レベル：発展　段階：stub　type：overview
+- id：`k-shortest-paths`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/k-shortest-paths/
 - 別名：k shortest paths、K 番目に短い経路、Eppstein、Yen
 - 種類：最短路
@@ -393,11 +396,11 @@ search:
     - 言い回し：K 番目に短い経路・歩道の長さ
 - 節：
     - `k-shortest-paths#k-times` 各頂点を K 回まで取り出すダイクストラ：https://yuukougun.github.io/kyopro-atlas/graph/k-shortest-paths/#k-times
-    - `k-shortest-paths#yen-eppstein` 単純パス（Yen）と歩道（Eppstein）：https://yuukougun.github.io/kyopro-atlas/graph/k-shortest-paths/#yen-eppstein
+    - `k-shortest-paths#yen-eppstein` 単純パス（Yen）とウォークの高速な列挙（Eppstein）：https://yuukougun.github.io/kyopro-atlas/graph/k-shortest-paths/#yen-eppstein
 
 ## 最小シュタイナー木（steiner-tree） {#steiner-tree}
 
-- id：`steiner-tree`　レベル：発展　段階：stub　type：overview
+- id：`steiner-tree`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/steiner-tree/
 - 別名：シュタイナー木、Steiner tree、Dreyfus-Wagner
 - 種類：最短路、DP
@@ -409,6 +412,7 @@ search:
     - `steiner-tree#merge` 部分集合を 2 つに分けて合わせる遷移：https://yuukougun.github.io/kyopro-atlas/graph/steiner-tree/#merge
     - `steiner-tree#dijkstra-step` ダイクストラで v を動かす遷移：https://yuukougun.github.io/kyopro-atlas/graph/steiner-tree/#dijkstra-step
     - `steiner-tree#on-tree` 木の上なら易しい（木の章の「指定頂点を結ぶ最小の部分木」）：https://yuukougun.github.io/kyopro-atlas/graph/steiner-tree/#on-tree
+    - `steiner-tree#library` 自作するときの要点と確かめ方：https://yuukougun.github.io/kyopro-atlas/graph/steiner-tree/#library
 
 ## トポロジカルソート（topological-sort） {#topological-sort}
 
@@ -490,7 +494,7 @@ search:
 
 ## 2-SAT（two-sat） {#two-sat}
 
-- id：`two-sat`　レベル：発展　段階：stub　type：overview
+- id：`two-sat`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/two-sat/
 - 別名：2SAT、充足可能性、含意グラフ、2-satisfiability
 - 種類：グラフ探索
@@ -501,11 +505,12 @@ search:
     - 言い回し：条件を満たす 2 択の割当があるか、あれば 1 つ出力する
     - 式の形：条件がすべて (x_i ∨ x_j) の形（2 つのリテラルの OR）に書ける
 - 節：
+    - `two-sat#when-to-use` 使える形と使えない形：https://yuukougun.github.io/kyopro-atlas/graph/two-sat/#when-to-use
     - `two-sat#implication` 節を含意の辺 ¬a→b・¬b→a に直す：https://yuukougun.github.io/kyopro-atlas/graph/two-sat/#implication
     - `two-sat#unsatisfiable` x と ¬x が同じ SCC なら充足不能・答えの復元：https://yuukougun.github.io/kyopro-atlas/graph/two-sat/#unsatisfiable
     - `two-sat#cheatsheet` モデル化の早見表（同時に選べない・どちらかは必ず・a なら b）：https://yuukougun.github.io/kyopro-atlas/graph/two-sat/#cheatsheet
     - `two-sat#at-most-one` 「高々 1 つ」を補助変数で O(K) 本の節にする：https://yuukougun.github.io/kyopro-atlas/graph/two-sat/#at-most-one
-    - `two-sat#acl` ACL では（two_sat の囲み）：https://yuukougun.github.io/kyopro-atlas/graph/two-sat/#acl
+    - `two-sat#acl` ACL の two_sat と自作するときの要点：https://yuukougun.github.io/kyopro-atlas/graph/two-sat/#acl
 
 ## Union-Find で連結性を扱う（union-find-connectivity） {#union-find-connectivity}
 
@@ -587,7 +592,7 @@ search:
 
 ## 辺の追加と削除が混ざる連結性（offline-dynamic-connectivity） {#offline-dynamic-connectivity}
 
-- id：`offline-dynamic-connectivity`　レベル：発展　段階：stub　type：overview
+- id：`offline-dynamic-connectivity`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/offline-dynamic-connectivity/
 - 別名：Offline Dynamic Connectivity、オフライン動的連結性、時間軸のセグ木、辺の削除がある連結判定
 - 種類：連結性・全域木、クエリ処理の工夫
@@ -601,7 +606,7 @@ search:
 
 ## 特殊な最小全域木（spanning-tree-advanced） {#spanning-tree-advanced}
 
-- id：`spanning-tree-advanced`　レベル：発展　段階：stub　type：overview
+- id：`spanning-tree-advanced`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/spanning-tree-advanced/
 - 別名：Borůvka 法、Boruvka、Manhattan MST、Chu-Liu/Edmonds、最小有向全域木、第 2 最小全域木、directed MST
 - 種類：連結性・全域木
@@ -618,7 +623,7 @@ search:
 
 ## 行列木定理（matrix-tree-theorem） {#matrix-tree-theorem}
 
-- id：`matrix-tree-theorem`　レベル：発展　段階：stub　type：overview
+- id：`matrix-tree-theorem`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/matrix-tree-theorem/
 - 別名：Kirchhoff の定理、全域木の個数、全域木の数え上げ、BEST 定理、matrix-tree theorem
 - 種類：数え上げ、線形代数・行列、連結性・全域木
@@ -631,6 +636,8 @@ search:
     - `matrix-tree-theorem#directed` 有向グラフの版（根付き全域木の数）：https://yuukougun.github.io/kyopro-atlas/graph/matrix-tree-theorem/#directed
     - `matrix-tree-theorem#best-theorem` BEST 定理（有向オイラー閉路の数）：https://yuukougun.github.io/kyopro-atlas/graph/matrix-tree-theorem/#best-theorem
     - `matrix-tree-theorem#subset-dp` 頂点集合ごとに数えて部分集合の DP と組む：https://yuukougun.github.io/kyopro-atlas/graph/matrix-tree-theorem/#subset-dp
+    - `matrix-tree-theorem#library` 計算量と自作するときの要点：https://yuukougun.github.io/kyopro-atlas/graph/matrix-tree-theorem/#library
+    - `matrix-tree-theorem#resources` 学ぶための資料：https://yuukougun.github.io/kyopro-atlas/graph/matrix-tree-theorem/#resources
 
 ## DFS 木・BFS 木とグラフの構築（graph-construction） {#graph-construction}
 
@@ -803,7 +810,7 @@ search:
 
 ## 最小パス被覆と Hall の定理（dilworth-path-cover） {#dilworth-path-cover}
 
-- id：`dilworth-path-cover`　レベル：発展　段階：stub　type：overview
+- id：`dilworth-path-cover`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/dilworth-path-cover/
 - 別名：最小パス被覆、最大反鎖、最小鎖被覆、結婚定理、マッチングの双対、path cover、Hall's theorem
 - 種類：フロー・マッチング
@@ -820,7 +827,7 @@ search:
 
 ## 最小流量制約付きフロー（flow-lower-bounds） {#flow-lower-bounds}
 
-- id：`flow-lower-bounds`　レベル：発展　段階：stub　type：overview
+- id：`flow-lower-bounds`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/flow-lower-bounds/
 - 別名：下限付きフロー、最小流量制約、flow with demands、flow with lower bounds
 - 種類：フロー・マッチング
@@ -835,7 +842,7 @@ search:
 
 ## 一般グラフのマッチング（general-matching） {#general-matching}
 
-- id：`general-matching`　レベル：発展　段階：stub　type：overview
+- id：`general-matching`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/general-matching/
 - 別名：Edmonds、blossom、花のアルゴリズム、一般グラフの最大マッチング、general matching
 - 種類：フロー・マッチング
@@ -846,4 +853,6 @@ search:
 - 節：
     - `general-matching#odd-cycles` 二部グラフとの違い（奇閉路）：https://yuukougun.github.io/kyopro-atlas/graph/general-matching/#odd-cycles
     - `general-matching#edmonds` Edmonds のアルゴリズムの概要：https://yuukougun.github.io/kyopro-atlas/graph/general-matching/#edmonds
+    - `general-matching#tutte-matrix` 大きさだけなら乱択（Tutte 行列の階数）：https://yuukougun.github.io/kyopro-atlas/graph/general-matching/#tutte-matrix
     - `general-matching#bitdp` 小さければ bitDP：https://yuukougun.github.io/kyopro-atlas/graph/general-matching/#bitdp
+    - `general-matching#library` 自作するときの要点と確かめ方：https://yuukougun.github.io/kyopro-atlas/graph/general-matching/#library

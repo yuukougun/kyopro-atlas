@@ -1,0 +1,12 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+# 出力は「初めて同じ集合になった時刻」と「時刻 M/2（切り捨て）での x の集合の大きさ」
+cases:
+  # 図の例：5 要素を 4 回併合する
+  - {input: "5 4\n1 2\n3 4\n1 3\n4 5\n4\n1 2\n2 4\n1 5\n3 3\n", output: "1 2\n3 2\n4 2\n0 2\n"}
+  # 最後まで別の集合（-1）と、同じ集合どうしの併合でも時刻が進むこと
+  - {input: "3 3\n1 2\n2 1\n2 3\n2\n1 3\n3 1\n", output: "3 2\n3 1\n"}
+  - {input: "2 0\n1\n1 2\n", output: "-1 1\n"}
+  # 1 要素
+  - {input: "1 1\n1 1\n1\n1 1\n", output: "0 1\n"}

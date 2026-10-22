@@ -1,0 +1,12 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # 1 頂点
+  - {input: "1\n\n", output: "1\n0\n"}
+  # 本文の図の木：0 の子が 1・2・3、1 の子が 4・5、2 の子が 6、3 の子が 7・8
+  - {input: "9\n0 0 0 1 1 2 3 3\n", output: "4\n3 1 2 1 0 0 0 0 0\n"}
+  # 一直線（どの部分木も形が違う）
+  - {input: "4\n0 1 2\n", output: "4\n3 2 1 0\n"}
+  # 星（葉はすべて同じ形）
+  - {input: "4\n0 0 0\n", output: "2\n1 0 0 0\n"}

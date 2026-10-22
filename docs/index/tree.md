@@ -240,7 +240,7 @@ search:
 
 ## 木の同型判定と木のハッシュ（tree-isomorphism） {#tree-isomorphism}
 
-- id：`tree-isomorphism`　レベル：発展　段階：stub　type：overview
+- id：`tree-isomorphism`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-isomorphism/
 - 別名：木の同型、木のハッシュ、AHU、rooted tree hash、tree isomorphism
 - 種類：木、ハッシュ・乱択
@@ -353,7 +353,7 @@ search:
 
 ## Static Top Tree と木 DP の動的更新（static-top-tree） {#static-top-tree}
 
-- id：`static-top-tree`　レベル：発展　段階：stub　type：overview
+- id：`static-top-tree`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/static-top-tree/
 - 別名：Static Top Tree、動的木 DP、重軽再帰 DP、dynamic tree DP
 - 種類：木、DP、データ構造
@@ -363,10 +363,11 @@ search:
 - 節：
     - `static-top-tree#heavy-path-dp` 重いパスの上で DP をセグ木に載せる：https://yuukougun.github.io/kyopro-atlas/tree/static-top-tree/#heavy-path-dp
     - `static-top-tree#compress-rake` Static Top Tree（圧縮と併合）：https://yuukougun.github.io/kyopro-atlas/tree/static-top-tree/#compress-rake
+    - `static-top-tree#library` 自作するときの要点と検証：https://yuukougun.github.io/kyopro-atlas/tree/static-top-tree/#library
 
 ## 動的木（dynamic-tree） {#dynamic-tree}
 
-- id：`dynamic-tree`　レベル：発展　段階：stub　type：overview
+- id：`dynamic-tree`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/dynamic-tree/
 - 別名：Link-Cut Tree、LCT、Euler Tour Tree、Top Tree、dynamic tree
 - 種類：木、データ構造
@@ -378,6 +379,7 @@ search:
     - `dynamic-tree#link-cut` Link-Cut Tree でできること：https://yuukougun.github.io/kyopro-atlas/tree/dynamic-tree/#link-cut
     - `dynamic-tree#ett-top-tree` Euler Tour Tree・Top Tree：https://yuukougun.github.io/kyopro-atlas/tree/dynamic-tree/#ett-top-tree
     - `dynamic-tree#add-only` 辺の追加だけならマージテク：https://yuukougun.github.io/kyopro-atlas/tree/dynamic-tree/#add-only
+    - `dynamic-tree#library` 自作するときの要点と Library Checker：https://yuukougun.github.io/kyopro-atlas/tree/dynamic-tree/#library
 
 ## マージテク（small-to-large） {#small-to-large}
 
@@ -419,7 +421,7 @@ search:
 
 ## Auxiliary Tree（auxiliary-tree） {#auxiliary-tree}
 
-- id：`auxiliary-tree`　レベル：発展　段階：stub　type：overview
+- id：`auxiliary-tree`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/auxiliary-tree/
 - 別名：Virtual Tree、虚樹、圧縮木、LCA 木、指定頂点の圧縮木
 - 種類：木
@@ -432,11 +434,12 @@ search:
     - `auxiliary-tree#steiner-queries` 指定頂点を結ぶ部分木の大きさ（DFS 順で隣り合う 2 点の距離の和の半分）：https://yuukougun.github.io/kyopro-atlas/tree/auxiliary-tree/#steiner-queries
     - `auxiliary-tree#build` DFS 順に並べて隣り合う 2 点の LCA を足す：https://yuukougun.github.io/kyopro-atlas/tree/auxiliary-tree/#build
     - `auxiliary-tree#stack-build` スタックで組み立てる：https://yuukougun.github.io/kyopro-atlas/tree/auxiliary-tree/#stack-build
+    - `auxiliary-tree#usage` 圧縮木で木 DP をするときの要点と学ぶための資料：https://yuukougun.github.io/kyopro-atlas/tree/auxiliary-tree/#usage
     - `auxiliary-tree#alternatives` マージテク・平方分割で代用できる場合：https://yuukougun.github.io/kyopro-atlas/tree/auxiliary-tree/#alternatives
 
 ## 併合過程の木（merge-process-tree） {#merge-process-tree}
 
-- id：`merge-process-tree`　レベル：発展　段階：stub　type：overview
+- id：`merge-process-tree`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/merge-process-tree/
 - 別名：クラスカル再構築木、Kruskal 再構築木、Kruskal reconstruction tree、KRT、DSU-tree、Union-Find の併合の過程を表す木
 - 種類：木、連結性・全域木
@@ -451,10 +454,11 @@ search:
     - `merge-process-tree#group-as-interval` ある時点のグループは DFS 順の区間：https://yuukougun.github.io/kyopro-atlas/tree/merge-process-tree/#group-as-interval
     - `merge-process-tree#bottleneck` ボトルネックは LCA の重み：https://yuukougun.github.io/kyopro-atlas/tree/merge-process-tree/#bottleneck
     - `merge-process-tree#alternatives` マージテク・部分永続 Union-Find・並列二分探索との使い分け：https://yuukougun.github.io/kyopro-atlas/tree/merge-process-tree/#alternatives
+    - `merge-process-tree#library` 自作するときの要点と Library Checker：https://yuukougun.github.io/kyopro-atlas/tree/merge-process-tree/#library
 
 ## 比で親に併合する貪欲（tree-ratio-greedy） {#tree-ratio-greedy}
 
-- id：`tree-ratio-greedy`　レベル：発展　段階：stub　type：overview
+- id：`tree-ratio-greedy`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-ratio-greedy/
 - 別名：01 on Tree、木の上の順序最適化、比による併合、親を先に選ぶ制約つきの並べ方
 - 種類：木、貪欲
@@ -463,5 +467,7 @@ search:
 - サイン：
     - 言い回し：親を子より先に選ぶ制約つきで、順番による重み付きの和を最適化する
 - 節：
+    - `tree-ratio-greedy#formulation` 何を最小にするか（3 つの言い換え）：https://yuukougun.github.io/kyopro-atlas/tree/tree-ratio-greedy/#formulation
     - `tree-ratio-greedy#why-ratio` 比が最大の塊は親の直後に来てよい理由：https://yuukougun.github.io/kyopro-atlas/tree/tree-ratio-greedy/#why-ratio
     - `tree-ratio-greedy#merge-with-heap` Union-Find と優先度付きキューで併合する：https://yuukougun.github.io/kyopro-atlas/tree/tree-ratio-greedy/#merge-with-heap
+    - `tree-ratio-greedy#library` 計算量と自作するときの要点：https://yuukougun.github.io/kyopro-atlas/tree/tree-ratio-greedy/#library

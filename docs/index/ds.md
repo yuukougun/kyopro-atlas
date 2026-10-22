@@ -249,7 +249,7 @@ search:
 
 ## 部分永続 Union-Find（partially-persistent-union-find） {#partially-persistent-union-find}
 
-- id：`partially-persistent-union-find`　レベル：発展　段階：stub　type：overview
+- id：`partially-persistent-union-find`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/partially-persistent-union-find/
 - 別名：部分永続 UF、時刻つき Union-Find、partially persistent union-find
 - 種類：データ構造、連結性・全域木
@@ -265,7 +265,7 @@ search:
 
 ## ロールバックできる Union-Find（rollback-union-find） {#rollback-union-find}
 
-- id：`rollback-union-find`　レベル：発展　段階：stub　type：overview
+- id：`rollback-union-find`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/rollback-union-find/
 - 別名：ロールバック UF、Undo つき Union-Find、undoable union-find、rollback union-find
 - 種類：データ構造、連結性・全域木
@@ -484,7 +484,7 @@ search:
 
 ## Segment Tree Beats（segment-tree-beats） {#segment-tree-beats}
 
-- id：`segment-tree-beats`　レベル：発展　段階：stub　type：overview
+- id：`segment-tree-beats`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-beats/
 - 別名：beats、Ji Driver Segment Tree、吉司机线段树、区間 chmin 区間和、区間 chmin・chmax
 - 種類：データ構造、区間クエリ
@@ -580,7 +580,7 @@ search:
 
 ## 並列二分探索（parallel-binary-search） {#parallel-binary-search}
 
-- id：`parallel-binary-search`　レベル：発展　段階：stub　type：overview
+- id：`parallel-binary-search`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/parallel-binary-search/
 - 別名：parallel binary search、整体二分、全クエリの二分探索を同時に進める
 - 種類：クエリ処理の工夫、二分探索
@@ -596,7 +596,7 @@ search:
 
 ## CDQ 分割統治（cdq-divide-and-conquer） {#cdq-divide-and-conquer}
 
-- id：`cdq-divide-and-conquer`　レベル：発展　段階：stub　type：overview
+- id：`cdq-divide-and-conquer`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/cdq-divide-and-conquer/
 - 別名：CDQ divide and conquer、時系列の分割統治、オフラインの分割統治、3 次元の支配点の数え上げ
 - 種類：クエリ処理の工夫、ダブリング・分割統治
@@ -607,6 +607,7 @@ search:
 - 節：
     - `cdq-divide-and-conquer#what-it-does` 何ができるか（時系列の分割統治で 1 次元を消す）：https://yuukougun.github.io/kyopro-atlas/ds/cdq-divide-and-conquer/#what-it-does
     - `cdq-divide-and-conquer#procedure` 手順（左の更新 → 右のクエリを平面走査で処理する）と計算量 O(N log^2 N)：https://yuukougun.github.io/kyopro-atlas/ds/cdq-divide-and-conquer/#procedure
+    - `cdq-divide-and-conquer#library` 自作するときの要点と Library Checker：https://yuukougun.github.io/kyopro-atlas/ds/cdq-divide-and-conquer/#library
     - `cdq-divide-and-conquer#alternatives` 代わりの手（座標が小さいなら 2 次元 BIT、更新がなければ平面走査）：https://yuukougun.github.io/kyopro-atlas/ds/cdq-divide-and-conquer/#alternatives
 
 ## 永続データ構造（persistent-data-structures） {#persistent-data-structures}
@@ -645,7 +646,7 @@ search:
 
 ## Wavelet Matrix（wavelet-matrix） {#wavelet-matrix}
 
-- id：`wavelet-matrix`　レベル：発展　段階：stub　type：overview
+- id：`wavelet-matrix`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/wavelet-matrix/
 - 別名：ウェーブレット行列、Wavelet Tree、区間の K 番目
 - 種類：データ構造、区間クエリ、ビット演算
@@ -678,7 +679,7 @@ search:
 
 ## 平衡二分探索木と pb_ds の tree（balanced-bst） {#balanced-bst}
 
-- id：`balanced-bst`　レベル：発展　段階：stub　type：overview
+- id：`balanced-bst`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/balanced-bst/
 - 別名：平衡二分木、balanced binary search tree、treap、implicit treap、RBST、splay、pb_ds tree、order statistics tree
 - 種類：データ構造
@@ -689,7 +690,8 @@ search:
 - 節：
     - `balanced-bst#what-it-does` 何ができるか（位置で分割・結合する列の構造）：https://yuukougun.github.io/kyopro-atlas/ds/balanced-bst/#what-it-does
     - `balanced-bst#treap` treap の split・merge と、深さが期待 O(log N) になる理由：https://yuukougun.github.io/kyopro-atlas/ds/balanced-bst/#treap
-    - `balanced-bst#pbds` pb_ds の tree（order_of_key・find_by_order。重複は (値, 通し番号) にする）（→ C++ 章）：https://yuukougun.github.io/kyopro-atlas/ds/balanced-bst/#pbds
+    - `balanced-bst#library` 自作するときの要点と Library Checker：https://yuukougun.github.io/kyopro-atlas/ds/balanced-bst/#library
+    - `balanced-bst#pbds` pb_ds の tree（order_of_key・find_by_order。重複は値と通し番号の組にする）：https://yuukougun.github.io/kyopro-atlas/ds/balanced-bst/#pbds
     - `balanced-bst#alternatives` 代わりの手（BIT 上の二分探索・連結リスト・逆順の処理と BIT）：https://yuukougun.github.io/kyopro-atlas/ds/balanced-bst/#alternatives
 
 ## 見慣れないデータ構造の名前と用途（advanced-ds-catalog） {#advanced-ds-catalog}

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 220" width="400" height="220" font-family="sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333"/>
+    </marker>
+  </defs>
+  <rect width="400" height="220" fill="#ffffff"/>
+  <text x="200" y="28" font-size="17" text-anchor="middle" fill="#222">節 a ∨ b（a か b の少なくとも一方は真）</text>
+  <!-- 1 本目 -->
+  <circle cx="90" cy="85" r="24" fill="#fde8e8" stroke="#b03030" stroke-width="2" stroke-dasharray="5 3"/>
+  <text x="90" y="91" font-size="18" text-anchor="middle" fill="#222">¬a</text>
+  <circle cx="250" cy="85" r="24" fill="#e6f0fb" stroke="#2a5ea8" stroke-width="2"/>
+  <text x="250" y="91" font-size="18" text-anchor="middle" fill="#222">b</text>
+  <line x1="116" y1="85" x2="222" y2="85" stroke="#333" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="290" y="80" font-size="14" fill="#222">a が偽なら</text>
+  <text x="290" y="98" font-size="14" fill="#222">b は真</text>
+  <!-- 2 本目 -->
+  <circle cx="90" cy="165" r="24" fill="#fde8e8" stroke="#b03030" stroke-width="2" stroke-dasharray="5 3"/>
+  <text x="90" y="171" font-size="18" text-anchor="middle" fill="#222">¬b</text>
+  <circle cx="250" cy="165" r="24" fill="#e6f0fb" stroke="#2a5ea8" stroke-width="2"/>
+  <text x="250" y="171" font-size="18" text-anchor="middle" fill="#222">a</text>
+  <line x1="116" y1="165" x2="222" y2="165" stroke="#333" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="290" y="160" font-size="14" fill="#222">b が偽なら</text>
+  <text x="290" y="178" font-size="14" fill="#222">a は真</text>
+  <text x="200" y="212" font-size="13" text-anchor="middle" fill="#555">点線の円は否定のリテラル。辺 u → v は「u が真なら v も真」</text>
+</svg>

@@ -7,7 +7,7 @@ type: generated
 
 # 文字列
 
-ハッシュ、Z・KMP・Manacher、Trie、Suffix Array、Aho-Corasick。13 ページ（準備中 1）。
+ハッシュ、Z・KMP・Manacher、Trie、Suffix Array、Aho-Corasick。13 ページ。
 
 ## 文字列の基本
 
@@ -45,4 +45,4 @@ type: generated
 | ページ | レベル | 要約 |
 | --- | --- | --- |
 | [Suffix Array と LCP 配列](suffix-array.md) | 黄 | 全接尾辞を辞書順に並べた添字の列（SA）と隣どうしの最長共通接頭辞（LCP 配列）を作る。異なる部分文字列の数・任意の 2 接尾辞の LCP・パターンの出現回数が求まり、ACL の suffix_array・lcp_array で使える。 |
-| [Suffix Automaton と発展の文字列アルゴリズム](suffix-automaton.md)（準備中） | 発展 | Suffix Automaton は全部分文字列を状態数 2N−1 以下の DFA で表し、文字を足しながら異なる部分文字列の数を答える。回文木・Lyndon 分解なども、ABC では SA・Z・Manacher で代えられることが多い。 |
+| [Suffix Automaton と発展の文字列アルゴリズム](suffix-automaton.md) | 発展 | Suffix Automaton は全部分文字列を状態数 2N−1 以下の DFA で表し、文字を足しながら異なる部分文字列の数を答える。回文木・Lyndon 分解なども、ABC では SA・Z・Manacher で代えられることが多い。 |

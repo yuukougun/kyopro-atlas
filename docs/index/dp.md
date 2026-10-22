@@ -636,7 +636,7 @@ search:
 
 ## 動的 DP（dynamic-dp） {#dynamic-dp}
 
-- id：`dynamic-dp`　レベル：発展　段階：stub　type：overview
+- id：`dynamic-dp`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dynamic-dp/
 - 別名：Dynamic DP、DDP、遷移行列のセグメント木
 - 種類：DP、線形代数・行列、区間クエリ
@@ -654,7 +654,7 @@ search:
 
 ## Convex Hull Trick と Li Chao Tree（cht） {#cht}
 
-- id：`cht`　レベル：発展　段階：stub　type：overview
+- id：`cht`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/cht/
 - 別名：CHT、傾き最適化、斜率优化、李超线段树、直線の最小値
 - 種類：DP、データ構造
@@ -671,7 +671,7 @@ search:
 
 ## Monge 性による DP の高速化（monge） {#monge}
 
-- id：`monge`　レベル：発展　段階：stub　type：overview
+- id：`monge`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/monge/
 - 別名：Monge、四角不等式、四辺形不等式、Quadrangle Inequality、monotone minima、分割統治 DP、Divide and Conquer DP、SMAWK、LARSCH、Knuth-Yao、Knuth's optimization、(max,+) 畳み込み、min-plus 畳み込み、DP の凸性
 - 種類：DP、ダブリング・分割統治
@@ -692,7 +692,7 @@ search:
 
 ## Alien DP（alien-dp） {#alien-dp}
 
-- id：`alien-dp`　レベル：発展　段階：stub　type：overview
+- id：`alien-dp`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/alien-dp/
 - 別名：Aliens trick、WQS 二分、Lagrangian Relaxation、Lagrange 緩和、取り消し付きの貪欲
 - 種類：DP、二分探索
@@ -706,10 +706,11 @@ search:
     - `alien-dp#binary-search-lambda` λ の二分探索と、同じ値が並ぶときの扱い：https://yuukougun.github.io/kyopro-atlas/dp/alien-dp/#binary-search-lambda
     - `alien-dp#undoable-greedy` 取り消し付きの貪欲で解ける場合（優先度付きキュー）：https://yuukougun.github.io/kyopro-atlas/dp/alien-dp/#undoable-greedy
     - `alien-dp#with-monge` Monge な区間分割と組み合わせる：https://yuukougun.github.io/kyopro-atlas/dp/alien-dp/#with-monge
+    - `alien-dp#library` 自作するときの要点と確かめ方：https://yuukougun.github.io/kyopro-atlas/dp/alien-dp/#library
 
 ## Slope Trick（slope-trick） {#slope-trick}
 
-- id：`slope-trick`　レベル：発展　段階：stub　type：overview
+- id：`slope-trick`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/slope-trick/
 - 別名：スロープトリック、区分線形凸関数、区分線形凸関数の管理
 - 種類：DP、データ構造
@@ -723,3 +724,4 @@ search:
     - `slope-trick#two-heaps` 2 つのヒープで中央値を管理する（入口）：https://yuukougun.github.io/kyopro-atlas/dp/slope-trick/#two-heaps
     - `slope-trick#operations` |x − a| を足す・累積 min・平行移動：https://yuukougun.github.io/kyopro-atlas/dp/slope-trick/#operations
     - `slope-trick#on-trees` 木の上で凸関数をマージする（マージテクと組む）：https://yuukougun.github.io/kyopro-atlas/dp/slope-trick/#on-trees
+    - `slope-trick#library` 自作ライブラリでの扱い：https://yuukougun.github.io/kyopro-atlas/dp/slope-trick/#library

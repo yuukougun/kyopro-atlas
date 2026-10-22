@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 315" width="380" height="315" font-family="sans-serif">
+<defs>
+<marker id="ah" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#000"/></marker>
+</defs>
+<rect width="380" height="315" fill="#ffffff"/>
+<text x="190" y="20" font-size="13" text-anchor="middle" fill="#000">元の辺：u から v へ L 以上 R 以下</text>
+<circle cx="110" cy="60" r="16" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text x="110" y="65" font-size="14" text-anchor="middle" fill="#000">u</text>
+<circle cx="270" cy="60" r="16" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text x="270" y="65" font-size="14" text-anchor="middle" fill="#000">v</text>
+<line x1="126" y1="60" x2="254" y2="60" stroke="#000" stroke-width="1.5" marker-end="url(#ah)"/>
+<text x="190" y="52" font-size="13" text-anchor="middle" fill="#000">[L, R]</text>
+<line x1="20" y1="100" x2="360" y2="100" stroke="#999" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="190" y="124" font-size="13" text-anchor="middle" fill="#000">L を先に流したことにした後</text>
+<circle cx="110" cy="205" r="16" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text x="110" y="210" font-size="14" text-anchor="middle" fill="#000">u</text>
+<circle cx="270" cy="205" r="16" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text x="270" y="210" font-size="14" text-anchor="middle" fill="#000">v</text>
+<line x1="126" y1="205" x2="254" y2="205" stroke="#000" stroke-width="1.5" marker-end="url(#ah)"/>
+<text x="190" y="197" font-size="13" text-anchor="middle" fill="#000">容量 R − L</text>
+<circle cx="270" cy="285" r="16" fill="#fff" stroke="#000" stroke-width="1.5" stroke-dasharray="3 2"/>
+<text x="270" y="290" font-size="14" text-anchor="middle" fill="#000">S</text>
+<line x1="270" y1="269" x2="270" y2="221" stroke="#000" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#ah)"/>
+<text x="280" y="249" font-size="13" fill="#000">容量 L</text>
+<circle cx="110" cy="285" r="16" fill="#fff" stroke="#000" stroke-width="1.5" stroke-dasharray="3 2"/>
+<text x="110" y="290" font-size="14" text-anchor="middle" fill="#000">T</text>
+<line x1="110" y1="221" x2="110" y2="269" stroke="#000" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#ah)"/>
+<text x="120" y="249" font-size="13" fill="#000">容量 L</text>
+<text x="20" y="142" font-size="12" fill="#000">u は L だけ多く出した（L 多く受け取り T へ）</text>
+<text x="20" y="158" font-size="12" fill="#000">v は L だけ多く受け取った（S から補う）</text>
+</svg>

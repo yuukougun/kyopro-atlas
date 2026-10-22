@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 290" width="400" height="290" font-family="sans-serif">
+  <rect x="0" y="0" width="400" height="290" fill="#ffffff"/>
+  <!-- 木 -->
+  <text x="10" y="20" font-size="13">木（頂点 v で辺 e<tspan baseline-shift="sub" font-size="9">v</tspan> を併合）</text>
+  <line x1="60" y1="48" x2="30" y2="92" stroke="#000" stroke-width="1.5"/>
+  <line x1="60" y1="48" x2="90" y2="92" stroke="#000" stroke-width="1.5"/>
+  <circle cx="60" cy="45" r="14" fill="#fff" stroke="#000" stroke-width="1.5"/>
+  <text x="60" y="50" font-size="13" text-anchor="middle">1</text>
+  <circle cx="30" cy="100" r="14" fill="#fff" stroke="#000" stroke-width="1.5"/>
+  <text x="30" y="105" font-size="13" text-anchor="middle">2</text>
+  <circle cx="90" cy="100" r="14" fill="#fff" stroke="#000" stroke-width="1.5"/>
+  <text x="90" y="105" font-size="13" text-anchor="middle">3</text>
+  <!-- 説明 -->
+  <text x="140" y="50" font-size="12">履歴のスタック（下が古い）の 1 段は</text>
+  <text x="140" y="68" font-size="12">併合 1 回の記録（書き換えた 2 か所の</text>
+  <text x="140" y="86" font-size="12">元の値）。中身はいつも、根から今の</text>
+  <text x="140" y="104" font-size="12">頂点までのパス上の辺になる</text>
+
+  <!-- 履歴のスタック（4 時点） -->
+  <rect x="25" y="176" width="70" height="28" fill="#e8eef8" stroke="#000"/>
+  <text x="60" y="195" font-size="12" text-anchor="middle">e1</text>
+  <text x="60" y="224" font-size="12" text-anchor="middle">1 に入った</text>
+
+  <rect x="120" y="176" width="70" height="28" fill="#e8eef8" stroke="#000"/>
+  <text x="155" y="195" font-size="12" text-anchor="middle">e1</text>
+  <rect x="120" y="148" width="70" height="28" fill="#fff4d6" stroke="#000" stroke-width="2"/>
+  <text x="155" y="167" font-size="12" text-anchor="middle">e2 を積む</text>
+  <text x="155" y="224" font-size="12" text-anchor="middle">2 に入った</text>
+
+  <rect x="215" y="176" width="70" height="28" fill="#e8eef8" stroke="#000"/>
+  <text x="250" y="195" font-size="12" text-anchor="middle">e1</text>
+  <rect x="215" y="148" width="70" height="28" fill="none" stroke="#888" stroke-dasharray="4 3"/>
+  <text x="250" y="167" font-size="12" text-anchor="middle" fill="#555">e2 を戻す</text>
+  <text x="250" y="224" font-size="12" text-anchor="middle">2 を出た</text>
+
+  <rect x="310" y="176" width="70" height="28" fill="#e8eef8" stroke="#000"/>
+  <text x="345" y="195" font-size="12" text-anchor="middle">e1</text>
+  <rect x="310" y="148" width="70" height="28" fill="#fff4d6" stroke="#000" stroke-width="2"/>
+  <text x="345" y="167" font-size="12" text-anchor="middle">e3 を積む</text>
+  <text x="345" y="224" font-size="12" text-anchor="middle">3 に入った</text>
+
+  <line x1="15" y1="205" x2="390" y2="205" stroke="#000" stroke-width="1"/>
+  <text x="10" y="258" font-size="12">この後 3 を出ると e3、1 を出ると e1 を戻し、</text>
+  <text x="10" y="276" font-size="12">スタックは空になる</text>
+</svg>

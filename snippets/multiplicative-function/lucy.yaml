@@ -1,0 +1,9 @@
+# main の中で、n <= 20000 の全通りについてエラトステネスの篩で数えた値と一致することを assert で確かめる
+# π(10^10) = 455052511、π(10^11) = 4118054813 は Wikipedia「Prime-counting function」の表の値
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "3\n1\n2\n3\n", output: "0\n1\n2\n"}
+  - {input: "3\n10\n100\n1000000\n", output: "4\n25\n78498\n"}
+  - {input: "2\n10000000000\n100000000000\n", output: "455052511\n4118054813\n"}

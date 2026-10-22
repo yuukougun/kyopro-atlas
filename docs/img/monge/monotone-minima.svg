@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 348 348" width="348" height="348" font-family="sans-serif">
+<rect width="348" height="348" fill="#ffffff"/>
+<text x="192.0" y="16" font-size="13" text-anchor="middle" fill="#222">列 j →</text>
+<text x="73.0" y="34" font-size="12" text-anchor="middle" fill="#222">0</text>
+<text x="107.0" y="34" font-size="12" text-anchor="middle" fill="#222">1</text>
+<text x="141.0" y="34" font-size="12" text-anchor="middle" fill="#222">2</text>
+<text x="175.0" y="34" font-size="12" text-anchor="middle" fill="#222">3</text>
+<text x="209.0" y="34" font-size="12" text-anchor="middle" fill="#222">4</text>
+<text x="243.0" y="34" font-size="12" text-anchor="middle" fill="#222">5</text>
+<text x="277.0" y="34" font-size="12" text-anchor="middle" fill="#222">6</text>
+<text x="311.0" y="34" font-size="12" text-anchor="middle" fill="#222">7</text>
+<text x="12" y="159.0" font-size="13" text-anchor="middle" fill="#222" transform="rotate(-90 12 159.0)">行 i →</text>
+<text x="48" y="61.0" font-size="12" text-anchor="end" fill="#222">0</text>
+<rect x="56" y="40" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="90" y="40" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="124" y="40" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="158" y="40" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="192" y="40" width="34" height="34" fill="#d9d9d9" stroke="#888" stroke-width="1"/>
+<line x1="196" y1="70" x2="222" y2="44" stroke="#aaa" stroke-width="1"/>
+<rect x="226" y="40" width="34" height="34" fill="#d9d9d9" stroke="#888" stroke-width="1"/>
+<line x1="230" y1="70" x2="256" y2="44" stroke="#aaa" stroke-width="1"/>
+<rect x="260" y="40" width="34" height="34" fill="#d9d9d9" stroke="#888" stroke-width="1"/>
+<line x1="264" y1="70" x2="290" y2="44" stroke="#aaa" stroke-width="1"/>
+<rect x="294" y="40" width="34" height="34" fill="#d9d9d9" stroke="#888" stroke-width="1"/>
+<line x1="298" y1="70" x2="324" y2="44" stroke="#aaa" stroke-width="1"/>
+<text x="48" y="95.0" font-size="12" text-anchor="end" fill="#222">1</text>
+<rect x="56" y="74" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="90" y="74" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="124" y="74" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="158" y="74" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="192" y="74" width="34" height="34" fill="#d9d9d9" stroke="#888" stroke-width="1"/>
+<line x1="196" y1="104" x2="222" y2="78" stroke="#aaa" stroke-width="1"/>
+<rect x="226" y="74" width="34" height="34" fill="#d9d9d9" stroke="#888" stroke-width="1"/>
+<line x1="230" y1="104" x2="256" y2="78" stroke="#aaa" stroke-width="1"/>
+<rect x="260" y="74" width="34" height="34" fill="#d9d9d9" stroke="#888" stroke-width="1"/>
+<line x1="264" y1="104" x2="290" y2="78" stroke="#aaa" stroke-width="1"/>
+<rect x="294" y="74" width="34" height="34" fill="#d9d9d9" stroke="#888" stroke-width="1"/>
+<line x1="298" y1="104" x2="324" y2="78" stroke="#aaa" stroke-width="1"/>
+<text x="48" y="129.0" font-size="12" text-anchor="end" fill="#222">2</text>
+<rect x="56" y="108" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="90" y="108" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="124" y="108" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="158" y="108" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="192" y="108" width="34" height="34" fill="#d9d9d9" stroke="#888" stroke-width="1"/>
+<line x1="196" y1="138" x2="222" y2="112" stroke="#aaa" stroke-width="1"/>
+<rect x="226" y="108" width="34" height="34" fill="#d9d9d9" stroke="#888" stroke-width="1"/>
+<line x1="230" y1="138" x2="256" y2="112" stroke="#aaa" stroke-width="1"/>
+<rect x="260" y="108" width="34" height="34" fill="#d9d9d9" stroke="#888" stroke-width="1"/>
+<line x1="264" y1="138" x2="290" y2="112" stroke="#aaa" stroke-width="1"/>
+<rect x="294" y="108" width="34" height="34" fill="#d9d9d9" stroke="#888" stroke-width="1"/>
+<line x1="298" y1="138" x2="324" y2="112" stroke="#aaa" stroke-width="1"/>
+<text x="48" y="163.0" font-size="12" text-anchor="end" fill="#222">3</text>
+<rect x="56" y="142" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="90" y="142" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="124" y="142" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="158" y="142" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="192" y="142" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="226" y="142" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="260" y="142" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="294" y="142" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<text x="48" y="197.0" font-size="12" text-anchor="end" fill="#222">4</text>
+<rect x="56" y="176" width="34" height="34" fill="#d9d9d9" stroke="#888" stroke-width="1"/>
+<line x1="60" y1="206" x2="86" y2="180" stroke="#aaa" stroke-width="1"/>
+<rect x="90" y="176" width="34" height="34" fill="#d9d9d9" stroke="#888" stroke-width="1"/>
+<line x1="94" y1="206" x2="120" y2="180" stroke="#aaa" stroke-width="1"/>
+<rect x="124" y="176" width="34" height="34" fill="#d9d9d9" stroke="#888" stroke-width="1"/>
+<line x1="128" y1="206" x2="154" y2="180" stroke="#aaa" stroke-width="1"/>
+<rect x="158" y="176" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="192" y="176" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="226" y="176" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="260" y="176" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="294" y="176" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<text x="48" y="231.0" font-size="12" text-anchor="end" fill="#222">5</text>
+<rect x="56" y="210" width="34" height="34" fill="#d9d9d9" stroke="#888" stroke-width="1"/>
+<line x1="60" y1="240" x2="86" y2="214" stroke="#aaa" stroke-width="1"/>
+<rect x="90" y="210" width="34" height="34" fill="#d9d9d9" stroke="#888" stroke-width="1"/>
+<line x1="94" y1="240" x2="120" y2="214" stroke="#aaa" stroke-width="1"/>
+<rect x="124" y="210" width="34" height="34" fill="#d9d9d9" stroke="#888" stroke-width="1"/>
+<line x1="128" y1="240" x2="154" y2="214" stroke="#aaa" stroke-width="1"/>
+<rect x="158" y="210" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="192" y="210" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="226" y="210" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="260" y="210" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="294" y="210" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<text x="48" y="265.0" font-size="12" text-anchor="end" fill="#222">6</text>
+<rect x="56" y="244" width="34" height="34" fill="#d9d9d9" stroke="#888" stroke-width="1"/>
+<line x1="60" y1="274" x2="86" y2="248" stroke="#aaa" stroke-width="1"/>
+<rect x="90" y="244" width="34" height="34" fill="#d9d9d9" stroke="#888" stroke-width="1"/>
+<line x1="94" y1="274" x2="120" y2="248" stroke="#aaa" stroke-width="1"/>
+<rect x="124" y="244" width="34" height="34" fill="#d9d9d9" stroke="#888" stroke-width="1"/>
+<line x1="128" y1="274" x2="154" y2="248" stroke="#aaa" stroke-width="1"/>
+<rect x="158" y="244" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="192" y="244" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="226" y="244" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="260" y="244" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="294" y="244" width="34" height="34" fill="#ffffff" stroke="#888" stroke-width="1"/>
+<rect x="56" y="142" width="272" height="34" fill="none" stroke="#1f5fbf" stroke-width="3" stroke-dasharray="6 3"/>
+<circle cx="73.0" cy="57.0" r="10" fill="#c0392b"/>
+<circle cx="107.0" cy="91.0" r="10" fill="#c0392b"/>
+<circle cx="107.0" cy="125.0" r="10" fill="#c0392b"/>
+<rect x="164.0" y="148.0" width="22" height="22" fill="#1f5fbf"/>
+<circle cx="209.0" cy="193.0" r="10" fill="#c0392b"/>
+<circle cx="209.0" cy="227.0" r="10" fill="#c0392b"/>
+<circle cx="277.0" cy="261.0" r="10" fill="#c0392b"/>
+<polyline points="73.0,57.0 107.0,91.0 107.0,125.0 175.0,159.0 209.0,193.0 209.0,227.0 277.0,261.0" fill="none" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="3 3"/>
+<rect x="56" y="287" width="14" height="14" fill="#1f5fbf"/><text x="76" y="298" font-size="12" fill="#222">真ん中の行 3 を全部調べた最小の位置</text>
+<circle cx="63" cy="316" r="7" fill="#c0392b"/><text x="76" y="320" font-size="12" fill="#222">ほかの行の最小の位置（右下へ単調）</text>
+<rect x="56" y="331" width="14" height="14" fill="#d9d9d9" stroke="#888"/><text x="76" y="342" font-size="12" fill="#222">行 3 の結果から調べなくてよい範囲</text>
+</svg>

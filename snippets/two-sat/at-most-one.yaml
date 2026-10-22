@@ -1,0 +1,10 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  # K = 0 だけ（2 通りの向き × 空集合）
+  - {input: "0\n", output: "2\n"}
+  # K = 0..1：2 × (1 + 2)
+  - {input: "1\n", output: "6\n"}
+  # K = 0..8：2 × (2^9 − 1)
+  - {input: "8\n", output: "1022\n"}

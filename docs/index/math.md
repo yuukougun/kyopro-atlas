@@ -344,7 +344,7 @@ search:
 
 ## 大きな数の素数判定と素因数分解（miller-rabin） {#miller-rabin}
 
-- id：`miller-rabin`　レベル：発展　段階：stub　type：overview
+- id：`miller-rabin`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/math/miller-rabin/
 - 別名：ミラー・ラビン、Miller-Rabin、ポラード・ロー、Pollard's rho、Montgomery 乗算、64bit の素数判定
 - 種類：整数論、ハッシュ・乱択
@@ -354,10 +354,11 @@ search:
     - 言い回し：非常に大きい数が素数かを多数判定する
 - 節：
     - `miller-rabin#miller-rabin` Miller-Rabin の判定の仕組み（フェルマーの小定理と −1 の現れ方）：https://yuukougun.github.io/kyopro-atlas/math/miller-rabin/#miller-rabin
-    - `miller-rabin#deterministic-bases` 決定的な底（32bit は {2, 7, 61}、64bit は 7 個の底）：https://yuukougun.github.io/kyopro-atlas/math/miller-rabin/#deterministic-bases
+    - `miller-rabin#deterministic-bases` 決定的な底（32bit は 2・7・61、64bit は 7 個の底）：https://yuukougun.github.io/kyopro-atlas/math/miller-rabin/#deterministic-bases
     - `miller-rabin#pollard-rho` Pollard's rho（x ← x² + c の周期と gcd）：https://yuukougun.github.io/kyopro-atlas/math/miller-rabin/#pollard-rho
-    - `miller-rabin#mulmod` 64bit の法での掛け算（\_\_int128・Montgomery・Barrett）：https://yuukougun.github.io/kyopro-atlas/math/miller-rabin/#mulmod
+    - `miller-rabin#mulmod` 64bit の法での掛け算（128 bit 整数・Montgomery・Barrett）：https://yuukougun.github.io/kyopro-atlas/math/miller-rabin/#mulmod
     - `miller-rabin#acl-internal` ACL の内部実装（internal::is_prime_constexpr）：https://yuukougun.github.io/kyopro-atlas/math/miller-rabin/#acl-internal
+    - `miller-rabin#library` 自作するときの要点と確かめ方：https://yuukougun.github.io/kyopro-atlas/math/miller-rabin/#library
 
 ## GCD・LCM とユークリッドの互除法（gcd-lcm） {#gcd-lcm}
 
@@ -537,7 +538,7 @@ search:
 
 ## 乗法的関数の和と素数の個数（multiplicative-function） {#multiplicative-function}
 
-- id：`multiplicative-function`　レベル：発展　段階：stub　type：overview
+- id：`multiplicative-function`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/math/multiplicative-function/
 - 別名：ディリクレ積、Dirichlet convolution、杜教筛、Min_25、乗法的関数の prefix sum、素数計数、prime counting、Lucy DP、Meissel-Lehmer
 - 種類：整数論
@@ -547,8 +548,8 @@ search:
     - 言い回し：N 以下の素数の個数・素数の和
 - 節：
     - `multiplicative-function#dirichlet` 乗法的関数（φ・μ・d・σ）とディリクレ積（φ \* 1 = id など）：https://yuukougun.github.io/kyopro-atlas/math/multiplicative-function/#dirichlet
-    - `multiplicative-function#prefix-sums` 和の求め方の概要（杜教筛・Lucy DP・Min_25）：https://yuukougun.github.io/kyopro-atlas/math/multiplicative-function/#prefix-sums
     - `multiplicative-function#prime-counting` 素数の個数・素数の和（Lucy DP）：https://yuukougun.github.io/kyopro-atlas/math/multiplicative-function/#prime-counting
+    - `multiplicative-function#prefix-sums` 和の求め方の概要（杜教篩・Lucy DP・Min_25 篩）：https://yuukougun.github.io/kyopro-atlas/math/multiplicative-function/#prefix-sums
 
 ## floor sum（floor-sum） {#floor-sum}
 
@@ -574,7 +575,7 @@ search:
 
 ## Stern-Brocot 木と連分数（stern-brocot） {#stern-brocot}
 
-- id：`stern-brocot`　レベル：発展　段階：stub　type：overview
+- id：`stern-brocot`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/math/stern-brocot/
 - 別名：Stern-Brocot tree、continued fraction、最良近似、最良有理近似、Farey 数列、有理数の二分探索
 - 種類：整数論、二分探索
@@ -585,7 +586,8 @@ search:
 - 節：
     - `stern-brocot#tree` Stern-Brocot 木と既約分数：https://yuukougun.github.io/kyopro-atlas/math/stern-brocot/#tree
     - `stern-brocot#continued-fraction` 同じ方向の移動を一度に進める（連分数）：https://yuukougun.github.io/kyopro-atlas/math/stern-brocot/#continued-fraction
-    - `stern-brocot#best-approximation` 最良有理近似と比較の精度（128bit 整数）：https://yuukougun.github.io/kyopro-atlas/math/stern-brocot/#best-approximation
+    - `stern-brocot#best-approximation` 最良有理近似と比較の精度（128 bit 整数）：https://yuukougun.github.io/kyopro-atlas/math/stern-brocot/#best-approximation
+    - `stern-brocot#library` 自作するときの要点と Library Checker：https://yuukougun.github.io/kyopro-atlas/math/stern-brocot/#library
 
 ## 行列累乗（matrix-power） {#matrix-power}
 
@@ -653,7 +655,7 @@ search:
 
 ## 行列式（determinant） {#determinant}
 
-- id：`determinant`　レベル：発展　段階：stub　type：overview
+- id：`determinant`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/math/determinant/
 - 別名：determinant、行列式 mod p
 - 種類：線形代数・行列
@@ -665,6 +667,7 @@ search:
     - `determinant#by-elimination` 掃き出しで行列式を求める（行の交換で符号が変わる）：https://yuukougun.github.io/kyopro-atlas/math/determinant/#by-elimination
     - `determinant#modulus` mod p での計算と、法が素数でない場合（互除法による掃き出し）：https://yuukougun.github.io/kyopro-atlas/math/determinant/#modulus
     - `determinant#applications` 行列木定理・LGV 補題への入口：https://yuukougun.github.io/kyopro-atlas/math/determinant/#applications
+    - `determinant#library` 計算量と自作するときの要点：https://yuukougun.github.io/kyopro-atlas/math/determinant/#library
 
 ## 畳み込みの使い方（convolution-ntt） {#convolution-ntt}
 
@@ -691,7 +694,7 @@ search:
 
 ## FFT・NTT の仕組みと任意 mod の畳み込み（fft-ntt） {#fft-ntt}
 
-- id：`fft-ntt`　レベル：発展　段階：stub　type：overview
+- id：`fft-ntt`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/math/fft-ntt/
 - 別名：FFT、NTT、高速フーリエ変換、fast Fourier transform、数論変換、number theoretic transform、任意 mod 畳み込み、3 素数 NTT
 - 種類：畳み込み・多項式
@@ -708,7 +711,7 @@ search:
 
 ## XOR 畳み込み（hadamard-transform） {#hadamard-transform}
 
-- id：`hadamard-transform`　レベル：発展　段階：stub　type：overview
+- id：`hadamard-transform`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/math/hadamard-transform/
 - 別名：アダマール変換、Walsh-Hadamard、FWHT、XOR convolution、添字の XOR の畳み込み
 - 種類：畳み込み・多項式、ビット演算
@@ -721,10 +724,11 @@ search:
     - `hadamard-transform#transform` アダマール変換と逆変換（各 bit で (x + y, x − y)）：https://yuukougun.github.io/kyopro-atlas/math/hadamard-transform/#transform
     - `hadamard-transform#power` 同じ配列を K 回 XOR 畳み込みする（変換後の累乗）：https://yuukougun.github.io/kyopro-atlas/math/hadamard-transform/#power
     - `hadamard-transform#index-operations` 添字の演算と変換の対応（和は FFT、AND/OR は高速ゼータ変換、gcd/lcm は約数のゼータ変換）：https://yuukougun.github.io/kyopro-atlas/math/hadamard-transform/#index-operations
+    - `hadamard-transform#library` 自作するときの要点と Library Checker：https://yuukougun.github.io/kyopro-atlas/math/hadamard-transform/#library
 
 ## 分割統治 FFT・オンライン畳み込み（online-convolution） {#online-convolution}
 
-- id：`online-convolution`　レベル：発展　段階：stub　type：overview
+- id：`online-convolution`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/math/online-convolution/
 - 別名：online convolution、relaxed convolution、多項式の積の分割統治、FFT DP、多項式で DP
 - 種類：畳み込み・多項式、DP、ダブリング・分割統治
@@ -741,7 +745,7 @@ search:
 
 ## 形式的冪級数と多項式の演算（fps-basics） {#fps-basics}
 
-- id：`fps-basics`　レベル：発展　段階：stub　type：overview
+- id：`fps-basics`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/math/fps-basics/
 - 別名：FPS、formal power series、多項式の逆元、多項式の割り算、Taylor shift、多点評価、冪級数の log・exp
 - 種類：畳み込み・多項式、数え上げ
@@ -752,12 +756,13 @@ search:
     - 言い回し：次数の条件つきの木や個数の分布を、多項式の累乗の係数として数える
     - 式の形：答えが多項式 f の 1/f・log f・exp f・f^K の係数で書ける
 - 節：
+    - `fps-basics#signs` 式の形から使う演算を選ぶ：https://yuukougun.github.io/kyopro-atlas/math/fps-basics/#signs
     - `fps-basics#operations` 演算の一覧と計算量（inv・log・exp・pow・sqrt）：https://yuukougun.github.io/kyopro-atlas/math/fps-basics/#operations
     - `fps-basics#polynomial-ops` 多項式の割り算・Taylor shift・多点評価：https://yuukougun.github.io/kyopro-atlas/math/fps-basics/#polynomial-ops
 
 ## 線形漸化式の高速化（linear-recurrence-fast） {#linear-recurrence-fast}
 
-- id：`linear-recurrence-fast`　レベル：発展　段階：stub　type：overview
+- id：`linear-recurrence-fast`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/math/linear-recurrence-fast/
 - 別名：きたまさ法、Bostan-Mori、Berlekamp-Massey、Fiduccia、線形漸化式の第 N 項
 - 種類：線形代数・行列、畳み込み・多項式
@@ -777,7 +782,7 @@ search:
 
 ## ラグランジュ補間とべき乗和（lagrange-interpolation） {#lagrange-interpolation}
 
-- id：`lagrange-interpolation`　レベル：発展　段階：stub　type：overview
+- id：`lagrange-interpolation`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/math/lagrange-interpolation/
 - 別名：Lagrange interpolation、多項式補間、補間、べき乗和、Faulhaber、答えが多項式になる
 - 種類：畳み込み・多項式
@@ -792,3 +797,4 @@ search:
     - `lagrange-interpolation#linear-time` x = 0..d のときの O(d) の補間（階乗の逆元）：https://yuukougun.github.io/kyopro-atlas/math/lagrange-interpolation/#linear-time
     - `lagrange-interpolation#applications` べき乗和・多項式になる DP への応用：https://yuukougun.github.io/kyopro-atlas/math/lagrange-interpolation/#applications
     - `lagrange-interpolation#coefficients` 係数の復元（O(d²)）：https://yuukougun.github.io/kyopro-atlas/math/lagrange-interpolation/#coefficients
+    - `lagrange-interpolation#library` 自作するときの要点と Library Checker：https://yuukougun.github.io/kyopro-atlas/math/lagrange-interpolation/#library

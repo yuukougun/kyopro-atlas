@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 300" width="380" height="300" font-family="sans-serif" font-size="14">
+  <rect width="380" height="300" fill="#ffffff"/>
+  <!-- 組でない辺（細い線） -->
+  <g stroke="#555" stroke-width="1.5">
+    <line x1="140" y1="60" x2="64" y2="115"/>
+    <line x1="93" y1="205" x2="187" y2="205"/>
+    <line x1="216" y1="115" x2="140" y2="60"/>
+    <line x1="187" y1="205" x2="300" y2="205"/>
+  </g>
+  <!-- 組の辺（太い線） -->
+  <g stroke="#1f5fa8" stroke-width="6" stroke-linecap="round">
+    <line x1="64" y1="115" x2="93" y2="205"/>
+    <line x1="187" y1="205" x2="216" y2="115"/>
+  </g>
+  <!-- 増加路 r-d-c-t（橙の破線） -->
+  <polyline points="140,60 216,115 187,205 300,205" fill="none" stroke="#d9730d" stroke-width="3" stroke-dasharray="8 5" transform="translate(6,-6)"/>
+  <!-- 頂点 -->
+  <g stroke="#333" stroke-width="1.5" fill="#ffffff">
+    <circle cx="140" cy="60" r="16"/>
+    <circle cx="216" cy="115" r="16"/>
+    <circle cx="187" cy="205" r="16"/>
+    <circle cx="93" cy="205" r="16"/>
+    <circle cx="64" cy="115" r="16"/>
+    <circle cx="300" cy="205" r="16"/>
+  </g>
+  <g fill="#333" text-anchor="middle">
+    <text x="140" y="65">r</text>
+    <text x="216" y="120">d</text>
+    <text x="187" y="210">c</text>
+    <text x="93" y="210">b</text>
+    <text x="64" y="120">a</text>
+    <text x="300" y="210">t</text>
+    <text x="140" y="32">r：空き</text>
+    <text x="300" y="242">t：空き</text>
+  </g>
+  <!-- 凡例 -->
+  <g font-size="12" fill="#333">
+    <line x1="20" y1="262" x2="50" y2="262" stroke="#1f5fa8" stroke-width="6"/>
+    <text x="58" y="266">組の辺</text>
+    <line x1="120" y1="262" x2="150" y2="262" stroke="#555" stroke-width="1.5"/>
+    <text x="158" y="266">組でない辺</text>
+    <line x1="245" y1="262" x2="275" y2="262" stroke="#d9730d" stroke-width="3" stroke-dasharray="8 5"/>
+    <text x="283" y="266">増加路</text>
+    <text x="20" y="288">奇閉路 r-a-b-c-d-r（長さ 5）に組の辺が 2 本ある</text>
+  </g>
+</svg>

@@ -204,7 +204,7 @@ search:
 
 ## Burnside の補題（burnside-lemma） {#burnside-lemma}
 
-- id：`burnside-lemma`　レベル：発展　段階：stub　type：overview
+- id：`burnside-lemma`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/burnside-lemma/
 - 別名：Pólya の数え上げ定理、ネックレス、数珠順列、回転で同一視して数える、Burnside's lemma
 - 種類：数え上げ
@@ -219,6 +219,7 @@ search:
     - `burnside-lemma#necklace` 数珠（回転のみ）の式：https://yuukougun.github.io/kyopro-atlas/comb/burnside-lemma/#necklace
     - `burnside-lemma#by-period` 最短周期で分類して割る方法（約数包除の形）：https://yuukougun.github.io/kyopro-atlas/comb/burnside-lemma/#by-period
     - `burnside-lemma#cube` 立方体の 24 通りの回転：https://yuukougun.github.io/kyopro-atlas/comb/burnside-lemma/#cube
+    - `burnside-lemma#library` 自作するときの要点と検証：https://yuukougun.github.io/kyopro-atlas/comb/burnside-lemma/#library
 
 ## 多項係数（multinomial-coefficient） {#multinomial-coefficient}
 
@@ -261,7 +262,7 @@ search:
 
 ## 二項係数の部分和（binomial-prefix-sum） {#binomial-prefix-sum}
 
-- id：`binomial-prefix-sum`　レベル：発展　段階：stub　type：overview
+- id：`binomial-prefix-sum`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/binomial-prefix-sum/
 - 別名：二項係数の累積和、Σ_{k≤K} C(n,k)
 - 種類：数え上げ
@@ -273,6 +274,7 @@ search:
     - `binomial-prefix-sum#update` n と K を 1 ずつ動かす更新式：https://yuukougun.github.io/kyopro-atlas/comb/binomial-prefix-sum/#update
     - `binomial-prefix-sum#order` Mo のように動かす順番を工夫する：https://yuukougun.github.io/kyopro-atlas/comb/binomial-prefix-sum/#order
     - `binomial-prefix-sum#with-inclusion-exclusion` 包除と組み合わせる例：https://yuukougun.github.io/kyopro-atlas/comb/binomial-prefix-sum/#with-inclusion-exclusion
+    - `binomial-prefix-sum#library` 自作するときの要点：https://yuukougun.github.io/kyopro-atlas/comb/binomial-prefix-sum/#library
 
 ## 鏡像法とカタラン数（reflection-principle） {#reflection-principle}
 
@@ -296,7 +298,7 @@ search:
 
 ## LGV 補題（lgv-lemma） {#lgv-lemma}
 
-- id：`lgv-lemma`　レベル：発展　段階：stub　type：overview
+- id：`lgv-lemma`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/lgv-lemma/
 - 別名：Lindström-Gessel-Viennot の補題、交わらない経路の組、LGV lemma
 - 種類：数え上げ、線形代数・行列
@@ -309,10 +311,11 @@ search:
     - `lgv-lemma#why-signed` 符号付きで数える理由（交わる組が打ち消し合う）：https://yuukougun.github.io/kyopro-atlas/comb/lgv-lemma/#why-signed
     - `lgv-lemma#with-lattice-paths` 格子路と組み合わせる：https://yuukougun.github.io/kyopro-atlas/comb/lgv-lemma/#with-lattice-paths
     - `lgv-lemma#bitdp` 行列式を bitDP で展開する例：https://yuukougun.github.io/kyopro-atlas/comb/lgv-lemma/#bitdp
+    - `lgv-lemma#library` 計算量と自作するときの要点：https://yuukougun.github.io/kyopro-atlas/comb/lgv-lemma/#library
 
 ## 母関数の考え方（generating-function-counting） {#generating-function-counting}
 
-- id：`generating-function-counting`　レベル：発展　段階：stub　type：overview
+- id：`generating-function-counting`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/generating-function-counting/
 - 別名：母関数、生成関数、数え上げの多項式表現、形式的冪級数で数える、generating function
 - 種類：数え上げ、畳み込み・多項式
@@ -326,8 +329,8 @@ search:
     - `generating-function-counting#coefficients` 係数 = 数え方（積は独立な選択、累乗は繰り返し）：https://yuukougun.github.io/kyopro-atlas/comb/generating-function-counting/#coefficients
     - `generating-function-counting#formulas` 重複組合せ・上限つきの選び方を式で書く：https://yuukougun.github.io/kyopro-atlas/comb/generating-function-counting/#formulas
     - `generating-function-counting#dp-as-polynomial` DP の遷移を多項式の積・商として見る：https://yuukougun.github.io/kyopro-atlas/comb/generating-function-counting/#dp-as-polynomial
-    - `generating-function-counting#examples` 例：Prüfer 列と多項式の累乗、上昇階乗：https://yuukougun.github.io/kyopro-atlas/comb/generating-function-counting/#examples
     - `generating-function-counting#to-fps` 多項式の演算（逆元・log・exp）は FPS のページへ：https://yuukougun.github.io/kyopro-atlas/comb/generating-function-counting/#to-fps
+    - `generating-function-counting#examples` 例題：Prüfer 列と累乗、上限つきの桁の和：https://yuukougun.github.io/kyopro-atlas/comb/generating-function-counting/#examples
 
 ## 包除原理（inclusion-exclusion） {#inclusion-exclusion}
 
@@ -484,7 +487,7 @@ search:
 
 ## 第 1 種スターリング数（stirling-first） {#stirling-first}
 
-- id：`stirling-first`　レベル：発展　段階：stub　type：overview
+- id：`stirling-first`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/stirling-first/
 - 別名：巡回の個数ごとの順列の数、上昇階乗、Stirling numbers of the first kind
 - 種類：数え上げ、畳み込み・多項式
@@ -537,7 +540,7 @@ search:
 
 ## Young 図形とフック長公式（young-tableaux） {#young-tableaux}
 
-- id：`young-tableaux`　レベル：発展　段階：stub　type：overview
+- id：`young-tableaux`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/young-tableaux/
 - 別名：ヤング図形、標準タブロー、フック長公式、Robinson-Schensted 対応、Young tableau、hook length formula
 - 種類：数え上げ
@@ -802,7 +805,7 @@ search:
 
 ## 連続値の確率（continuous-probability） {#continuous-probability}
 
-- id：`continuous-probability`　レベル：発展　段階：stub　type：overview
+- id：`continuous-probability`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/continuous-probability/
 - 別名：連続確率、一様乱数、確率と積分、長さ・面積・角度の比、continuous probability
 - 種類：確率・期待値
@@ -815,6 +818,7 @@ search:
     - `continuous-probability#ratio` 長さ・面積・角度の比：https://yuukougun.github.io/kyopro-atlas/comb/continuous-probability/#ratio
     - `continuous-probability#integral` 積分と tail sum：https://yuukougun.github.io/kyopro-atlas/comb/continuous-probability/#integral
     - `continuous-probability#piecewise` 区分的な多項式の積分：https://yuukougun.github.io/kyopro-atlas/comb/continuous-probability/#piecewise
+    - `continuous-probability#library` 自作するときの要点：https://yuukougun.github.io/kyopro-atlas/comb/continuous-probability/#library
 
 ## ゲームの基本と勝敗の DP（game-basics） {#game-basics}
 
@@ -918,7 +922,7 @@ search:
 
 ## 非不偏ゲーム（partizan-games） {#partizan-games}
 
-- id：`partizan-games`　レベル：発展　段階：stub　type：overview
+- id：`partizan-games`　レベル：発展　段階：draft　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/partizan-games/
 - 別名：超現実数、組合せゲーム理論、Hackenbush、partizan game、combinatorial game theory
 - 種類：ゲーム

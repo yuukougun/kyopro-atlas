@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" width="400" height="260" font-family="sans-serif">
+<rect width="400" height="260" fill="#ffffff"/>
+<!-- 辺 -->
+<line x1="200" y1="52" x2="105" y2="112" stroke="#555" stroke-width="1.5"/>
+<line x1="200" y1="52" x2="295" y2="112" stroke="#222" stroke-width="4"/>
+<line x1="105" y1="132" x2="55" y2="182" stroke="#555" stroke-width="1.5"/>
+<line x1="105" y1="132" x2="155" y2="182" stroke="#555" stroke-width="1.5"/>
+<line x1="295" y1="132" x2="245" y2="182" stroke="#222" stroke-width="4"/>
+<line x1="295" y1="132" x2="345" y2="182" stroke="#555" stroke-width="1.5"/>
+<!-- 根 -->
+<rect x="130" y="22" width="140" height="30" rx="5" fill="#fff4cc" stroke="#222" stroke-width="2.5" stroke-dasharray="6 3"/>
+<text x="200" y="43" font-size="15" text-anchor="middle" fill="#000">T₀ T₁ T₂ T₃</text>
+<text x="280" y="42" font-size="12" fill="#333">求め直す</text>
+<!-- 中間 -->
+<rect x="70" y="112" width="70" height="30" rx="5" fill="#eeeeee" stroke="#222" stroke-width="1.5"/>
+<text x="105" y="133" font-size="15" text-anchor="middle" fill="#000">T₀ T₁</text>
+<rect x="260" y="112" width="70" height="30" rx="5" fill="#fff4cc" stroke="#222" stroke-width="2.5" stroke-dasharray="6 3"/>
+<text x="295" y="133" font-size="15" text-anchor="middle" fill="#000">T₂ T₃</text>
+<text x="336" y="132" font-size="12" fill="#333">求め直す</text>
+<!-- 葉 -->
+<rect x="30" y="182" width="50" height="30" rx="5" fill="#eeeeee" stroke="#222" stroke-width="1.5"/>
+<text x="55" y="203" font-size="15" text-anchor="middle" fill="#000">T₀</text>
+<rect x="130" y="182" width="50" height="30" rx="5" fill="#eeeeee" stroke="#222" stroke-width="1.5"/>
+<text x="155" y="203" font-size="15" text-anchor="middle" fill="#000">T₁</text>
+<rect x="220" y="182" width="50" height="30" rx="5" fill="#ffd6d6" stroke="#222" stroke-width="3"/>
+<text x="245" y="203" font-size="15" text-anchor="middle" fill="#000">T₂</text>
+<rect x="320" y="182" width="50" height="30" rx="5" fill="#eeeeee" stroke="#222" stroke-width="1.5"/>
+<text x="345" y="203" font-size="15" text-anchor="middle" fill="#000">T₃</text>
+<text x="245" y="232" font-size="12" text-anchor="middle" fill="#333">書き換えた位置</text>
+<!-- 位置の番号 -->
+<text x="55" y="250" font-size="12" text-anchor="middle" fill="#555">位置 0</text>
+<text x="155" y="250" font-size="12" text-anchor="middle" fill="#555">位置 1</text>
+<text x="245" y="250" font-size="12" text-anchor="middle" fill="#555">位置 2</text>
+<text x="345" y="250" font-size="12" text-anchor="middle" fill="#555">位置 3</text>
+</svg>
