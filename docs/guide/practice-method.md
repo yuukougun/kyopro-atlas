@@ -23,7 +23,7 @@ sections:
   - {title: 演習の量と難しさの選び方, anchor: choosing-problems}
   - {title: 速さの訓練, anchor: speed}
   - {title: AtCoder Problems の使い方, anchor: atcoder-problems}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 

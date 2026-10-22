@@ -18,13 +18,13 @@ signs:
   - {type: shape, text: 'dp[x] が x より小さい値の dp で決まるが、どの値が現れるかを前もって列挙しにくい'}
 acl: []
 frequency: B
-frequency_evidence: recent 1（abc470_e）・前提として 8 ページに届く（直接 2）・古い ABC 6 問
+frequency_evidence: recent 1（abc470_e）・前提として 8 ページに届く（直接 2）・古い ABC 5 問
 sections:
   - {title: 再帰とメモの書き方（未計算の印と答えの値の衝突を避ける）, anchor: write-memo}
   - {title: ボトムアップとの使い分け（速さ・スタック・高速化の載せやすさ）, anchor: vs-bottom-up}
   - {title: 到達する状態だけを持つ（map でメモ化・現れる値の個数の見積もり）, anchor: dp-map-sparse}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -211,6 +211,6 @@ $$
 - [drken「動的計画法超入門！ Educational DP Contest の A ～ E 問題の解説と類題集」](https://qiita.com/drken/items/dc53c683d6de8aeacf5a)：配る DP・貰う DP・メモ化再帰の関係
 - [プログラミング広場「ABC340 C問題（Divide and Divide）を解く」](https://programming-hiroba.com/abc340-c/)：例題の漸化式と、現れる値が各段に 2 個であること
 - [プログラミング広場「ABC275 D問題（Yet Another Recursive Function）を解く」](https://programming-hiroba.com/abc275-d/)：練習の方針（map によるメモ化）
-- [drken「AtCoder ABC 357 E - Reachability in Functional Graph (1Q, 水色, 450 点)」](https://drken1215.hatenablog.com/entry/2024/06/09/231700)：練習の方針（閉路を先に処理してから残りを再帰で求める）
-- [drken「AtCoder ABC 300 E - Dice Product 3 (1Q, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2023/05/03/212600)：練習の方針（自己ループの移項と約数だけのメモ化）
-- [torus711「AtCoder Beginner Contest 380 : F - Exchange Game」](https://torus711.hatenablog.com/entry/2024/11/17/144754)：力試しの方針（カードの所在を状態にしたメモ化再帰）
+- [drken「AtCoder ABC 357 E - Reachability in Functional Graph (1D, 水色, 450 点)」](https://drken1215.hatenablog.com/entry/2024/06/09/231700)：練習の方針（閉路を先に処理してから残りを再帰で求める）
+- [drken「AtCoder ABC 300 E - Dice Product 3 (1D, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2023/05/03/212600)：練習の方針（自己ループの移項と約数だけのメモ化）
+- [torus711「AtCoder Beginner Contest 380, F : Exchange Game」](https://torus711.hatenablog.com/entry/2024/11/17/144754)：力試しの方針（カードの所在を状態にしたメモ化再帰）

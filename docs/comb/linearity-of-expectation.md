@@ -28,8 +28,8 @@ sections:
   - {title: ペアごとの確率と対称性, anchor: pairs, level: 青}
   - {title: 総和と期待値の行き来, anchor: sum-vs-expectation}
   - {title: 線形性が使えない量（積・二乗・max）, anchor: nonlinear}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -313,9 +313,9 @@ $$
 - [プログラミングのひろば「ABC334 E」](https://programming-hiroba.com/abc334-e/)：ABC334 E で赤マスごとの連結成分の数の変化を数える方針
 - [ikatakos の競プロ Wiki「ABC417」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0802_abc417#f_-_random_gathering)：ABC417 F の期待値の列を区間の平均で上書きする方針と遅延セグメント木の作用（解法の節だけを読んだ）
 - [drken「AGC049 A - Erasing Vertices」](https://drken1215.hatenablog.com/entry/2020/11/15/104400)：AGC049 A の頂点ごとの確率 1 /（到達できる頂点の数）の理由
-- [drken「ABC380 G - Another Shuffle Window」](https://drken1215.hatenablog.com/entry/2024/11/17/113336)：ABC380 G のペアの分け方（ペアごとの確率を BIT で足す、本文とは別の方法）。本文の方針は #pairs の議論から導き、小さい N の全数で確かめた
+- [drken「AtCoder ABC 380 G - Another Shuffle Window (3D, 青色, 575 点)」](https://drken1215.hatenablog.com/entry/2024/11/17/113336)：ABC380 G のペアの分け方（ペアごとの確率を BIT で足す、本文とは別の方法）。本文の方針は #pairs の議論から導き、小さい N の全数で確かめた
 - [drken「ABC215 G - Colorful Candies 2」](https://drken1215.hatenablog.com/entry/2023/09/04/015942)：ABC215 G の色ごとの確率と個数の種類が $O(\sqrt{N})$ になる理由
-- [kmjp「ABC149 F」](https://kmjp.hatenablog.jp/entry/2019/12/30/0930)：ABC149 F の白い頂点が含まれる条件
+- [kmjp「AtCoder ABC #149 : F - Surrounded Nodes」](https://kmjp.hatenablog.jp/entry/2019/12/30/0930)：ABC149 F の白い頂点が含まれる条件
 - [kmjp「ABC199 F」](https://kmjp.hatenablog.jp/entry/2021/04/24/0900)：ABC199 F の平均の行列と行列累乗
-- [gotoki_no_joe「ABC276 の解説」](https://qiita.com/gotoki_no_joe/items/a1f1755cfe99192773d6)：ABC276 F の総和の差分と BIT の使い方
+- [gotoki_no_joe「ABC276 A～F をHaskellで」](https://qiita.com/gotoki_no_joe/items/a1f1755cfe99192773d6)：ABC276 F の総和の差分と BIT の使い方
 - [drken「ABC154 D - Dice in Line」](https://drken1215.hatenablog.com/entry/2020/02/10/235800)：ABC154 D の方針（台帳の裏付け）

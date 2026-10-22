@@ -18,15 +18,15 @@ signs:
   - {type: phrase, text: ある頂点から距離 d 以内の頂点の集計クエリ}
 acl: []
 verify: [frequency_table_of_tree_distance]
-frequency: C
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 2 問
+frequency: B
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 3 問
 sections:
   - {title: 再帰の深さが log N になる理由, anchor: depth}
   - {title: 重心を通るペアを数え、同じ成分の中のペアを引く, anchor: count-through}
   - {title: 木全体の数え上げと、重心木を上にたどるクエリ, anchor: centroid-tree-queries}
   - {title: 距離の頻度表は畳み込みと組む, anchor: with-convolution, level: 発展}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

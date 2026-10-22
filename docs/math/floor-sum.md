@@ -29,8 +29,8 @@ sections:
   - {title: x mod m = x − m⌊x/m⌋ への書き換え, anchor: mod-to-floor}
   - {title: 'ACL の floor_sum（引数の範囲と負の a, b）', anchor: acl}
   - {title: 応用の型：bit ごとの popcount・一次式の mod の積, anchor: applications, level: 発展}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -225,6 +225,15 @@ ACL の `floor_sum(N, M, A, B)` をケースごとに 1 回呼ぶだけである
 
     $A = 0$ や $B = 0$ のとき $A - 1$・$B - 1$ は負になるが、ACL の `floor_sum` は負の $a$・$b$ を受け付けるので場合分けは要らない。自作の非負版を使うなら、$a$・$b$ に $M$ の倍数を足して非負にし、その分を式で引く。各ケース $O(\log M)$ である。コードは [ACL の節](#acl)の `count_mod_greater` にあたる。
 
+## 練習問題 {#practice}
+
+例題以外で練習に置ける AtCoder の問題は確認できなかった。
+
+### Library Checker
+
+- [Sum of Floor of Linear](https://judge.yosupo.jp/problem/sum_of_floor_of_linear)：$T$ 個のケースそれぞれで $\sum_{i=0}^{N-1} \lfloor (Ai + B)/M \rfloor$ を求める。自作した floor sum をそのまま確かめられる。
+- [Min of Mod of Linear](https://judge.yosupo.jp/problem/min_of_mod_of_linear)：$T$ 個のケースそれぞれで $0 \le x < N$ の $(Ax + B) \bmod M$ の最小値を求める。答えが $X$ 未満かは、余りが $X$ 未満の $x$ の個数 $f(N, M, A, B) - f(N, M, A, B - X)$ が正かで判定できる（[書き換えの節](#mod-to-floor)）。$X$ を二分探索すれば 1 ケース $O(\log^2 M)$ になる。$B - X$ は負になりうるので、負の $b$ を受け付ける ACL の `floor_sum` を使うか、自作版で非負に直す（[ACL の節](#acl)）。
+
 ## 力試し {#challenge}
 
 <div class="kp-problems" data-role="challenge" markdown>
@@ -267,10 +276,11 @@ ACL の `floor_sum(N, M, A, B)` をケースごとに 1 回呼ぶだけである
 
 ## 参考 {#references}
 
-- [AtCoder Library「math」（document_ja/math.md）](https://github.com/atcoder/ac-library/blob/master/document_ja/math.md)：`floor_sum` の宣言・要件・計算量。v1.6 のソース `atcoder/math.hpp`・`atcoder/internal_math.hpp` で負の $a$・$b$ の扱いと非負版のくり返しを確かめた
+- [AtCoder Library「Math」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/math.md)：`floor_sum` の宣言・要件・計算量。v1.6 のソース `atcoder/math.hpp`・`atcoder/internal_math.hpp` で負の $a$・$b$ の扱いと非負版のくり返しを確かめた
 - [rsk0315（えびちゃんの日記）「sum of floor of linear の解説するよ」](https://rsk0315.hatenablog.com/entry/2020/12/13/231307)：取り除く操作と縦横の入れ替えの式の導き方、くり返しの回数の考え方を照らし合わせた
 - [drken「AtCoder Library Practice Contest C - Floor Sum (1D)」](https://drken1215.hatenablog.com/entry/2022/12/14/235718)：例題 Practice Contest C の問いと制約、引数の順番の違いへの注意
 - [「ABC 443 A~G 詳解 (solution)」（HackMD、中国語）](https://hackmd.io/@cHW2LTvARJKGTUbciR39fQ/SyLDQFiLWl)：例題 ABC443 G の問いと、余りの条件を floor の差に直す方針
 - [drken「AtCoder ABC 313 G - Redistribution of Piles (橙色, 625 点)」](https://drken1215.hatenablog.com/entry/2023/08/06/203145)：力試し ABC313 G の問いと方針
 - [drken「AtCoder ABC 283 Ex - Popcount Sum (4D, 橙色, 600 点)」](https://drken1215.hatenablog.com/entry/2022/12/26/125416)：力試し ABC283 Ex の問いと、bit ごとに floor sum の差で数える方針
 - [kmjp「AtCoder ARC #111 : E - Simple Math 3」](https://kmjp.hatenablog.jp/entry/2021/01/10/1000)：力試し ARC111 E の上限の絞り方と floor sum 2 回の差
+- [sounansya「floor sum アルゴリズムとその一般化」（Qiita）](https://qiita.com/sounansya/items/51b39e0d7bf5cc194081)：練習の Min of Mod of Linear を、floor sum 2 つの差を判定にした二分探索で解く方針

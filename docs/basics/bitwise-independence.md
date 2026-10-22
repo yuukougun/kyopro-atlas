@@ -10,7 +10,7 @@ level: 水
 kind: [ビット演算, 考察]
 prerequisites: [bit-operations, contribution]
 related: [xor-basis, binary-trie, digit-dp, reformulation]
-summary: XOR・AND・OR の結果は bit ごとに独立に決まるので、bit ごとに 0 と 1 の個数を数えて 2^k を掛けて足す。最大化・最小化は上の bit から決め、繰り上がりで bit が干渉する足し算には使えない。
+summary: XOR・AND・OR の結果は bit ごとに独立に決まるので、bit ごとに 0 と 1 の個数を数えて 2^k を掛けて足す。最大化・最小化は上位 bit から決め、繰り上がりで bit が干渉する足し算には使えない。
 complexity: 値が 2^B 未満のとき、bit ごとに数える集計は O(NB)、上位 bit で分ける再帰も O(NB)
 signs:
   - {type: phrase, text: 全ペア・全区間の XOR の総和}
@@ -27,8 +27,8 @@ sections:
   - {title: 上の bit から決める貪欲（上限は桁 DP の考え方）, anchor: top-down}
   - {title: 上位 bit で 2 つに分けて再帰する, anchor: split-by-top-bit, level: 青}
   - {title: 足し算では使えない理由（繰り上がり）, anchor: addition}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

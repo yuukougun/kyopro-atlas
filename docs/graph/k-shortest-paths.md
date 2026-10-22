@@ -10,7 +10,7 @@ level: 発展
 kind: [最短路]
 prerequisites: [dijkstra]
 related: [extended-dijkstra]
-summary: 始点から終点への経路のうち、短い方から K 番目の長さを求める。歩道なら各頂点を K 回まで取り出すダイクストラで求まり、単純パスは Yen、歩道の列挙は Eppstein の方法を使う。
+summary: 始点から終点への経路のうち、短い方から K 番目の長さを求める。ウォークなら各頂点を K 回まで取り出すダイクストラ法で求まり、単純パスは Yen、ウォークの列挙は Eppstein の方法を使う。
 complexity: 各頂点を K 回まで取り出すダイクストラ法 O(KM log(KM))、Yen O(KN(N + M) log N)、Eppstein O((N + M) log(N + M) + K log K)
 signs:
   - {type: phrase, text: K 番目に短い経路・ウォークの長さ}
@@ -22,7 +22,7 @@ sections:
   - {title: 各頂点を K 回まで取り出すダイクストラ法, anchor: k-times}
   - {title: 単純パス（Yen）とウォークの高速な列挙（Eppstein）, anchor: yen-eppstein}
   - {title: 自作するときの要点と Library Checker, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 

@@ -9,7 +9,7 @@ order: 200
 level: 青
 kind: [数え上げ, 整数論]
 prerequisites: [counting-mindset, gcd-lcm, harmonic-sum]
-related: [mobius-function, zeta-mobius-divisor, euler-phi, burnside-lemma, inclusion-exclusion, divisors-and-multiples]
+related: [mobius-function, zeta-mobius-divisor, euler-phi, burnside-lemma, inclusion-exclusion, divisors-and-multiples, kmp#count-periodic]
 summary: gcd がちょうど g の個数 f(g) を、すべて g の倍数の個数 F(g) から大きい g の順に f(g) = F(g) − f(2g) − f(3g) − … で求める。値の上限を M として O(M log M) になる。
 complexity: 値の上限 M に対して、F(g) がそろっていれば f(1), …, f(M) をまとめて O(M log M)
 signs:
@@ -27,8 +27,8 @@ sections:
   - {title: 周期の数え上げ（約数の周期で重複した分を引く）, anchor: period}
   - {title: 累乗数の重複を指数ごとに除く, anchor: perfect-powers}
   - {title: メビウス関数での書き方との対応, anchor: vs-mobius}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

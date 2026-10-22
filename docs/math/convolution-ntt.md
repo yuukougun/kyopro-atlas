@@ -9,12 +9,12 @@ order: 360
 level: 青
 kind: [畳み込み・多項式]
 prerequisites: [mod-arithmetic]
-related: [fft-ntt, online-convolution, generating-function-counting, hadamard-transform, rolling-hash, z-algorithm]
-summary: c_k = Σ_{i+j=k} a_i b_j（多項式の積）を ACL の convolution で O(N log N) で求める。和が k になる組の数や、ずらしたときの一致数を全ての k について一度に数える。
+related: [fft-ntt, online-convolution, generating-function-counting, hadamard-transform, rolling-hash, z-algorithm, zeta-mobius-subset]
+summary: c_k = Σ_{i+j=k} a_i b_j（多項式の積）を ACL の convolution で O(N log N) で求める。和が k になる組の数や、ずらしたときの一致数をすべての k について一度に数える。
 complexity: 長さ N と M の列の畳み込みは O((N + M) log(N + M))。convolution_ll はその約 3 倍の定数倍
 signs:
-  - {type: phrase, text: 全ての k について、和が k になる組の数を求める}
-  - {type: phrase, text: 列をずらしたときの一致数・不一致の数を、全てのずらし方について求める}
+  - {type: phrase, text: すべての k について、和が k になる組の数を求める}
+  - {type: phrase, text: 列をずらしたときの一致数・不一致の数を、すべてのずらし方について求める}
   - {type: phrase, text: 'ワイルドカード（?）を含むパターンの照合'}
   - {type: constraint, text: 値の範囲や列の長さが 10^5〜10^6 程度で、組の全探索 O(N²) が間に合わない}
   - {type: shape, text: 'c_k = Σ_{i+j=k} a_i b_j の形の和'}
@@ -30,8 +30,8 @@ sections:
   - {title: 文字列の照合：ずらしたときの一致数・ハミング距離・ワイルドカード, anchor: string-matching, level: 黄}
   - {title: bit ごと・文字ごとに分けて畳み込む（OR の和など）, anchor: split-by-bit, level: 黄}
   - {title: ACL の convolution の要件（法の形と長さ）, anchor: acl}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -350,7 +350,7 @@ $B - A = C - B$ は $A + C = 2B$ と同じである。真ん中の $B$ を固定
 - [AtCoder Library「convolution.hpp」](https://github.com/atcoder/ac-library/blob/master/atcoder/convolution.hpp)：要件の `assert`、$\min(N, M) \le 60$ での素朴な方法への切り替え、`convolution_ll` の 3 つの素数
 - [drken「AtCoder Library Practice Contest F - Convolution」](https://drken1215.hatenablog.com/entry/2023/05/24/014903)：例題 practice2_f の制約と要件の確かめ方
 - [merom686「ABC392」](https://merom686.hatenablog.com/entry/2025/02/09/020958)：例題 abc392_g の、指示関数の自己畳み込みと $2B$ の係数の補正
-- [drken「AtCoder ABC 143 D - Triangles」](https://drken1215.hatenablog.com/entry/2019/10/20/032700)：練習 abc143_d の問いと制約
+- [drken「AtCoder ABC 143 D - Triangles (3Q, 茶色, 400 点)」](https://drken1215.hatenablog.com/entry/2019/10/20/032700)：練習 abc143_d の問いと制約
 - [kmjp「AtCoder ABC #291 : G - OR Sum」](https://kmjp.hatenablog.jp/entry/2023/02/26/0900)：練習 abc291_g の bit ごとの分解と、OR を両方 0 の数から求める式
 - [kmjp「AtCoder ABC #196 : F - Substring 2」](https://kmjp.hatenablog.jp/entry/2021/03/20/1000)：練習 abc196_f の $\pm 1$ に置き換えた 1 回の畳み込み
 - [E869120「kyopro_educational_90 sol/065-03.cpp」](https://github.com/E869120/kyopro_educational_90/blob/main/sol/065-03.cpp)：練習 typical90_bm の、下限で切った二項係数の列の畳み込み

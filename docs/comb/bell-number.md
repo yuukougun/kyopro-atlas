@@ -16,14 +16,14 @@ signs:
   - {type: constraint, text: N ≤ 10〜12 で、グループ分けを全部試す}
   - {type: phrase, text: N 人を区別しない K 組に分ける（どの組も空でない）方法の数}
 acl: []
-frequency: C
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 2 問
+frequency: B
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 3 問
 sections:
   - {title: 'S(n,k) の漸化式（最後の要素が新しい組を作るか既存の組に入るか）', anchor: recurrence}
   - {title: ベル数と全列挙の個数の見積もり（B_10 = 115975、B_12 = 4213597）, anchor: size}
   - {title: bitDP・3^N の部分集合 DP との使い分け, anchor: vs-subset-dp}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

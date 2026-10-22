@@ -25,8 +25,8 @@ sections:
   - {title: 1e18 は double：long long に直す位置で値が変わる、auto INF = 1e18 も double, anchor: double-1e18}
   - {title: 浮動小数点数を == で比べない（誤差を許すか、整数で計算する）, anchor: float-compare}
   - {title: float128_t（stdfloat ヘッダ。C++23・GCC 13〜。解説コードではまれ）, anchor: float128}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 cpp_std: 17
 gcc_min: 13
 atcoder: true
@@ -277,6 +277,6 @@ $2^{53} + 1$ を `double` にすると、+1 が消えて $2^{53}$ になる。`l
 - [cppreference「std::numeric_limits」](https://en.cppreference.com/w/cpp/types/numeric_limits)：`max()` と `digits`（仮数部のビット数）
 - [cpprefjp「<stdfloat>」](https://cpprefjp.github.io/reference/stdfloat.html)：`float128_t` が C++23 で入ったこと
 - [GCC「GCC 13 Release Series: Changes」](https://gcc.gnu.org/gcc-13/changes.html)：`<stdfloat>` の `float128_t` などの型が GCC 13 で入ったこと
-- [maspypy「library/my_template.hpp」](https://github.com/maspypy/library/blob/main/my_template.hpp)：雛形の INF（`infty<T>`）の値
+- [maspy「library/my_template.hpp」](https://github.com/maspypy/library/blob/main/my_template.hpp)：雛形の INF（`infty<T>`）の値
 - [NyaanNyaan「library/template/util.hpp」](https://github.com/NyaanNyaan/library/blob/master/template/util.hpp)：雛形の INF（`inf`・`infLL`）の値
 - [ei1333「library/template/template.hpp」](https://github.com/ei1333/library/blob/master/template/template.hpp)：雛形の INF（`inf`・`infll`）の値

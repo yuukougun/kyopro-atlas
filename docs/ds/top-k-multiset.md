@@ -28,8 +28,8 @@ sections:
   - {title: 中央値を保つ（個数の差を 1 以内に。削除がなければヒープ 2 本）と Σ|x − a_i| の更新, anchor: median}
   - {title: 値を添字にした BIT・セグメント木で書く方法（→ 値を添字にする BIT・セグメント木）, anchor: by-index}
   - {title: '|x − a| + b を足していく関数の最小値（中央値の更新の応用。Slope Trick の入口）', anchor: absolute-sum-function, level: 黄}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -264,4 +264,4 @@ $K$ が固定か 1 ずつ動くだけなら 2 つの multiset が手軽である
 - [drken「AtCoder ABC 281 E - Least Elements (1D, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2022/12/14/185200)：窓をずらす問題での 2 つの multiset と、値を添字にする BIT・セグメント木による解き方の比較
 - [drken「AtCoder ABC 062 D - 3N Numbers (ARC 074 D) (1Q, 青色, 500 点)」](https://drken1215.hatenablog.com/entry/2019/04/28/114800)：練習の方針（境目の全探索と、ヒープによる接頭辞の上位 N 個の和）
 - [drken「AtCoder ABC 127 F - Absolute Minima (2D, 黄色, 600 点)」](https://drken1215.hatenablog.com/entry/2019/06/15/114700)：力試しの方針（定数 b を分けて持ち、ヒープ 2 本の和から最小値を求める式）
-- [maspypy「slope trick (1) 解説編」](https://maspypy.com/slope-trick-1-%e8%a7%a3%e8%aa%ac%e7%b7%a8)：Slope Trick の仕組み（2 つのヒープで傾きの変わる点を持つ。[|x − a| + b を足していく関数の最小値](#absolute-sum-function)の最後の段落）
+- [maspy「slope trick (1) 解説編」](https://maspypy.com/slope-trick-1-%e8%a7%a3%e8%aa%ac%e7%b7%a8)：Slope Trick の仕組み（2 つのヒープで傾きの変わる点を持つ。[|x − a| + b を足していく関数の最小値](#absolute-sum-function)の最後の段落）

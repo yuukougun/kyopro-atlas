@@ -19,7 +19,7 @@ sections:
   - {title: 五十音順, anchor: kana}
   - {title: 英字の名前（ABC 順）, anchor: latin}
   - {title: 複数のページに当たる語, anchor: shared-terms}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -1554,7 +1554,6 @@ updated: 2026-10-22
 - 重複を除く → [重複の除き方](../comb/counting-dedup.md)
 - [重複組合せ](../comb/stars-and-bars.md)
 - 重複順列 → [和・積の法則と順列・組合せ](../comb/counting-basics.md)
-- 重軽再帰 DP → [Static Top Tree と木 DP の動的更新](../tree/static-top-tree.md)
 - 重軽分解 → [HL 分解](../tree/hld.md)
 - 鉄則本の問題集 → [問題集と練習用コンテストの案内](problem-sets.md)
 - 鏡像法 → [鏡像法とカタラン数](../comb/reflection-principle.md)

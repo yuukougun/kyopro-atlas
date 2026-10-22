@@ -24,7 +24,7 @@ sections:
   - {title: 局面に数を割り当てて和を取る, anchor: surreal}
   - {title: 手数の貯金として見る, anchor: tempo}
   - {title: 計算量と自作するときの要点, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 

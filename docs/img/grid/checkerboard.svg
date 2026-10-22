@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 450" width="400" height="450" font-family="sans-serif">
-<rect width="400" height="450" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -1 400 451" width="400" height="451" font-family="sans-serif">
+<rect x="0" y="-1" width="400" height="451" fill="#ffffff"/>
 <defs><marker id="ah" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#222"/></marker></defs>
 <line x1="70" y1="30" x2="350" y2="30" stroke="#222" stroke-width="1.5" marker-end="url(#ah)"/>
 <text x="210.0" y="22" font-size="14" text-anchor="middle" fill="#222">j（列）は右へ増える</text>
-<line x1="22" y1="86" x2="22" y2="366" stroke="#222" stroke-width="1.5" marker-end="url(#ah)"/>
-<text x="14" y="226.0" font-size="14" text-anchor="middle" fill="#222" transform="rotate(-90 14 226.0)">i（行）は下へ増える</text>
+<line x1="36" y1="86" x2="36" y2="366" stroke="#222" stroke-width="1.5" marker-end="url(#ah)"/>
+<text x="24" y="226.0" font-size="14" text-anchor="middle" fill="#222" transform="rotate(-90 24 226.0)">i（行）は下へ増える</text>
 <text x="98.0" y="76" font-size="13" text-anchor="middle" fill="#444">0</text>
 <text x="154.0" y="76" font-size="13" text-anchor="middle" fill="#444">1</text>
 <text x="210.0" y="76" font-size="13" text-anchor="middle" fill="#444">2</text>

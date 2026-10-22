@@ -29,8 +29,8 @@ sections:
   - {title: 中点を整数にするために座標を 2 倍する, anchor: double-coordinates}
   - {title: 実数が避けられないとき：long double と、値の大きさに合わせた EPS, anchor: eps}
   - {title: 出力の桁数と、実数の二分探索の打ち切り, anchor: output-and-binary-search}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -304,11 +304,11 @@ $B$ を `double` で読んで $A \times B$ を切り捨てると、2.51 のよ�
 
 - [drken「AtCoder ABC 169 C - Multiplication 3 (緑色, 300 点)」](https://drken1215.hatenablog.com/entry/2020/05/31/224300)：小数を `double` で読んで切り捨てると誤る例と、文字列で読んで 100 倍の整数にする方法
 - [merom686「ABC385 参加記」](https://merom686.hatenablog.com/entry/2024/12/22/165012)：桁落ちで許容誤差を超える原因の分析と、隣り合うビルの傾きを比べる方針
-- [ikatakos「AtCoder Beginner Contest 385 F 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/1221_abc385)：切片を隣り合う組だけで求めてよい理由と、分数のまま扱う方法（解説の部分だけを参照）
+- [ikatakos「ユニークビジョンプログラミングコンテスト2024 クリスマス（AtCoder Beginner Contest 385）E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/1221_abc385)：切片を隣り合う組だけで求めてよい理由と、分数のまま扱う方法（解説の部分だけを参照）
 - [ikatakos「AtCoder Beginner Contest 418 E 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0809_abc418)：方向の正規化と、平行四辺形の重複の引き方（解説の部分だけを参照）
 - [hyouri「ABC467 の解説」](https://qiita.com/hyouri/items/c2d2344566d215b6cae0)：垂直二等分線を整数の係数で持ち、平行と同一直線を判定する方針
 - [comet725「ABC467 D を解いた【垂直二等分線】」](https://qiita.com/comet725/items/6d1da8aae01548d3ebba)：垂直二等分線の係数を gcd と符号で正規化する方法
 - [ikatakos「AtCoder Beginner Contest 248 E 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0416_abc248)：直線を $ax + by + c = 0$ の既約な形で表して数える方法（解説の部分だけを参照）
 - [ikatakos「AtCoder Beginner Contest 191 D 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0206_abc191)：$10^4$ 倍して整数にし、近似の後に整数で補正する方法（解説の部分だけを参照）
-- [merom686「ABC296 参加記」](https://merom686.hatenablog.com/entry/2023/04/01/235440)：実数の偏角で内外判定をして境界で誤った記録
+- [merom686「ABC296」](https://merom686.hatenablog.com/entry/2023/04/01/235440)：実数の偏角で内外判定をして境界で誤った記録
 - [merom686「ABC220 参加記」](https://merom686.hatenablog.com/entry/2021/09/27/012056)：座標を 2 倍して中点を整数にし、方向と中点でまとめる方針

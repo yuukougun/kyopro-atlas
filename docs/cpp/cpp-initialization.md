@@ -26,8 +26,8 @@ sections:
   - {title: 'CTAD：vector dp(n, vector(m, 0LL)) で型を内側から決める（0 と書くと int になる）（C++17）', anchor: ctad}
   - {title: pair・tuple・array・priority_queue の CTAD（C++17）, anchor: ctad-std-types}
   - {title: CTAD の罠：波括弧にイテレータ 2 個を渡すとイテレータの vector になる（C++17）, anchor: ctad-pitfall}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 cpp_std: 20
 gcc_min: 13
 atcoder: true
@@ -295,4 +295,4 @@ CTAD でも、波括弧は「中の値を並べた vector」を作る。`vector 
 - [cppreference「explicit specifier」](https://en.cppreference.com/cpp/language/explicit)：explicit なコンストラクタとコピー初期化
 - [cppreference「std::memset」](https://en.cppreference.com/cpp/string/byte/memset)：バイト単位で埋めること
 - [cppreference「Zero-initialization」](https://en.cppreference.com/cpp/language/zero_initialization)：グローバル変数が 0 で初期化されること
-- [AtCoder Library「DSU」](https://github.com/atcoder/ac-library/blob/master/document_ja/dsu.md)：`dsu` のコンストラクタ
+- [AtCoder Library「DSU」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/dsu.md)：`dsu` のコンストラクタ

@@ -26,8 +26,8 @@ sections:
   - {title: mod の値では大小比較できない（最適戦略は実数で比べる）, anchor: no-compare}
   - {title: 分母が 0 になる式変形に注意する, anchor: zero-denominator}
   - {title: 検算：出力を分数に戻す（有理数復元）, anchor: reconstruct}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

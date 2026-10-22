@@ -13,7 +13,7 @@ search:
 
 ## インタラクティブ問題（interactive） {#interactive}
 
-- id：`interactive`　レベル：基礎　段階：draft　type：technique
+- id：`interactive`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/misc/interactive/
 - 別名：対話型、インタラクティブ、ジャッジとの対話、質問回数、インタラクティブの二分探索、interactive problem
 - 種類：二分探索、実装・C++
@@ -35,7 +35,7 @@ search:
 
 ## 乱択アルゴリズム（randomized） {#randomized}
 
-- id：`randomized`　レベル：青　段階：draft　type：technique
+- id：`randomized`　レベル：青　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/misc/randomized/
 - 別名：乱択、ランダム化、モンテカルロ法、ラスベガス法、過半数、Boyer-Moore の投票、Color Coding、randomized algorithm
 - 種類：ハッシュ・乱択
@@ -55,7 +55,7 @@ search:
 
 ## bitset による高速化（bitset-speedup） {#bitset-speedup}
 
-- id：`bitset-speedup`　レベル：青　段階：draft　type：technique
+- id：`bitset-speedup`　レベル：青　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/misc/bitset-speedup/
 - 別名：bitset、ビット並列、ワード並列、1/64 倍、bitset で部分和、推移閉包、到達可能性クエリ、bitset speedup
 - 種類：ビット演算、計算量、DP
@@ -79,7 +79,7 @@ search:
 
 ## 構文解析（parsing） {#parsing}
 
-- id：`parsing`　レベル：青　段階：draft　type：technique
+- id：`parsing`　レベル：青　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/misc/parsing/
 - 別名：再帰下降構文解析、パーサ、BNF、式の評価、逆ポーランド記法、recursive descent parsing
 - 種類：文字列

@@ -20,7 +20,7 @@ signs:
 acl: []
 verify: []
 frequency: A
-frequency_evidence: recent 1（abc454_d）・前提として 60 ページに届く（直接 3）・古い ABC 5 問
+frequency_evidence: recent 1（abc454_d）・前提として 60 ページに届く（直接 3）・古い ABC 8 問
 sections:
   - {title: 括弧の対応（開き括弧の位置を積む）と括弧列の残高（→ 題材別の括弧列）, anchor: brackets}
   - {title: 直前と打ち消し合うものを消す（末尾を見て pop）, anchor: cancel}
@@ -28,8 +28,8 @@ sections:
   - {title: 直前の操作を取り消す（変更前の値を積んで戻す。任意の版へ戻るなら永続データ構造）, anchor: undo}
   - {title: deque（両端への追加・真ん中への挿入は deque 2 本）, anchor: deque}
   - {title: 円を切り開いて弦の交差判定に帰着する, anchor: chords, level: 水}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

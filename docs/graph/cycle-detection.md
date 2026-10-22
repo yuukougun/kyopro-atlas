@@ -26,8 +26,8 @@ sections:
   - {title: 閉路の復元（親をたどる）, anchor: restore}
   - {title: 出次数 1 のグラフでは同じ頂点に 2 回来るまで進む, anchor: out-degree-one}
   - {title: シミュレーションの周期の検出（基本テクニックの章）との違い, anchor: vs-periodicity}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -226,4 +226,4 @@ while step[x] == -1: step[x] = t; 列に x を足す; x = nxt[x]; t += 1
 - [ikatakos「AtCoder Beginner Contest 456（Promotion of AtCoder Career Design DAY）E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0502_abc456)：力試しの方針（都市と曜日の組を頂点にし、行き止まりから剥がす。解法の部分だけを参照）
 - [AtCoder Library「SCC」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/scc.md)：`scc_graph` の宣言と計算量
 - [AtCoder Library「DSU」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/dsu.md)：`dsu` の宣言と計算量
-- [Library Checker の問題一覧](https://github.com/yosupo06/library-checker-problems)：自作の確認先（cycle_detection・cycle_detection_undirected）
+- [yosupo06「library-checker-problems」](https://github.com/yosupo06/library-checker-problems)：自作の確認先（cycle_detection・cycle_detection_undirected）

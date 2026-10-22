@@ -23,7 +23,7 @@ sections:
   - {title: 色ごとの練習の方法, anchor: practice}
   - {title: 解いた数・理解した数, anchor: progress}
   - {title: シラバスではないこと, anchor: not-a-syllabus}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -160,7 +160,7 @@ abc451〜abc480 の F の 30 問で使われた手法を、ページの種類（
 | 整数論 | 1 | [約数列挙と素数判定](../math/divisor-enum.md)、[約数の個数の上界と高度合成数](../math/divisor-count-bound.md) | abc461_f |
 | 文字列 | 1 | [Aho-Corasick 法](../string/aho-corasick.md) | abc458_f |
 
-### G 問題（黄の帯） {#recent-positions-g}
+### G 問題（黄・発展の帯） {#recent-positions-g}
 
 abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（kind の1つ目）で分けて多い順に並べる。かっこの数は、その位置でそのページを使った問題の数（1 のときは書かない）。
 
@@ -239,7 +239,7 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 24 | [いもす法](../basics/imos.md) | 基本テクニック | 必修 |
 | 25 | [尺取り法](../basics/two-pointers.md) | 基本テクニック | 必修 |
 | 26 | [貪欲法の考え方と正当性](../basics/greedy-basics.md) | 基本テクニック | 必修 |
-| 27 | [絶対値の和の最小化と中央値](../basics/median-absolute.md) | 基本テクニック | 準必修 |
+| 27 | [絶対値の和の最小化と中央値](../basics/median-absolute.md) | 基本テクニック | 余裕があれば |
 | 28 | [深さ優先探索（DFS）](../graph/dfs.md) | グラフ | 必修 |
 | 29 | [set・multiset・map の応用](../ds/ordered-set.md) | データ構造 | 必修 |
 | 30 | [スタック・キュー・deque の使いどころ](../ds/stack-techniques.md) | データ構造 | 必修 |
@@ -257,8 +257,8 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 42 | [bit 全探索と順列全探索](../basics/bit-full-search.md) | 基本テクニック | 必修 |
 | 43 | [答えで二分探索](../basics/binary-search-answer.md) | 基本テクニック | 必修 |
 | 44 | [座標圧縮](../basics/coordinate-compression.md) | 基本テクニック | 準必修 |
-| 45 | [区間スケジューリング・区間の串刺し](../basics/interval-scheduling.md) | 基本テクニック | 準必修 |
-| 46 | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md) | 基本テクニック | 準必修 |
+| 45 | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md) | 基本テクニック | 準必修 |
+| 46 | [区間スケジューリング・区間の串刺し](../basics/interval-scheduling.md) | 基本テクニック | 余裕があれば |
 | 47 | [一部を固定して数える](../thinking/fix-variable.md) | 考察 | 必修 |
 | 48 | [DP の基本](../dp/dp-basics.md) | 動的計画法 | 必修 |
 | 49 | [幅優先探索（BFS）と無重み最短路](../graph/bfs.md) | グラフ | 必修 |
@@ -284,8 +284,8 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 69 | [根付き木と走査順](../tree/tree-traversal.md) | 木 | 必修 |
 | 70 | [完全二分木](../tree/complete-binary-tree.md) | 木 | 準必修 |
 | 71 | [逆元と mod での割り算](../math/mod-inverse.md) | 整数論・代数 | 必修 |
-| 72 | [素因数の指数で考える](../math/prime-exponent-vector.md) | 整数論・代数 | 準必修 |
-| 73 | [最小素因数の篩と線形篩](../math/spf-sieve.md) | 整数論・代数 | 余裕があれば |
+| 72 | [最小素因数の篩と線形篩](../math/spf-sieve.md) | 整数論・代数 | 準必修 |
+| 73 | [素因数の指数で考える](../math/prime-exponent-vector.md) | 整数論・代数 | 準必修 |
 | 74 | [DAG 上の DP](../dp/dp-dag.md) | 動的計画法 | 準必修 |
 | 75 | [木の 2 色塗り分けと距離の偶奇](../tree/tree-bipartite.md) | 木 | 準必修 |
 | 76 | [木の上の距離](../tree/tree-distance.md) | 木 | 準必修 |
@@ -340,8 +340,8 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 38 | [時刻で変わる辺の最短路](../graph/time-dependent-dijkstra.md) | グラフ | 準必修 |
 | 39 | [強連結成分分解（SCC）](../graph/scc.md) | グラフ | 準必修 |
 | 40 | [Functional graph（出次数 1 のグラフ）](../graph/functional-graph.md) | グラフ | 準必修 |
-| 41 | [Union-Find で連結性を扱う](../graph/union-find-connectivity.md) | グラフ | 準必修 |
-| 42 | [なもりグラフ](../graph/namori-graph.md) | グラフ | 余裕があれば |
+| 41 | [なもりグラフ](../graph/namori-graph.md) | グラフ | 準必修 |
+| 42 | [Union-Find で連結性を扱う](../graph/union-find-connectivity.md) | グラフ | 準必修 |
 | 43 | [葉から考える](../tree/leaf-first.md) | 木 | 準必修 |
 | 44 | [木の直径と最遠点](../tree/tree-diameter.md) | 木 | 準必修 |
 | 45 | [マージテク](../tree/small-to-large.md) | 木 | 準必修 |
@@ -360,16 +360,16 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 58 | [調和級数と倍数の列挙](../math/harmonic-sum.md) | 整数論・代数 | 必修 |
 | 59 | [約数の個数の上界と高度合成数](../math/divisor-count-bound.md) | 整数論・代数 | 必修 |
 | 60 | [GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md#reduce-fraction) › 分数・傾きを既約にして map のキーにする（基礎のページの節） | 整数論・代数 | 必修 |
-| 61 | [等比数列の和を mod で求める](../math/geometric-series-mod.md#halving) › 法が任意のとき：S(2k) = S(k)(1 + r^k) で半分に割る（基礎のページの節） | 整数論・代数 | 準必修 |
-| 62 | [桁と mod](../math/digit-and-mod.md) | 整数論・代数 | 準必修 |
-| 63 | [素因数の指数で考える](../math/prime-exponent-vector.md#huge-lcm) › 巨大な lcm を指数の最大で持つ（基礎のページの節） | 整数論・代数 | 準必修 |
-| 64 | [素因数の指数で考える](../math/prime-exponent-vector.md#single-prime) › 特定の素数（2 など）の指数だけを比べる（基礎のページの節） | 整数論・代数 | 準必修 |
-| 65 | [拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md) | 整数論・代数 | 準必修 |
-| 66 | [N 進法](../math/base-conversion.md#negative-base) › 負の基数（余りを 0 以上に直してから割る）（基礎のページの節） | 整数論・代数 | 準必修 |
-| 67 | [N 進法](../math/base-conversion.md#base-binary-search) › 基数の二分探索とオーバーフロー（1 桁の場合分け）（基礎のページの節） | 整数論・代数 | 準必修 |
-| 68 | [フェルマーの小定理と指数の mod](../math/exponent-mod.md) | 整数論・代数 | 余裕があれば |
-| 69 | [区間篩](../math/segmented-sieve.md) | 整数論・代数 | 余裕があれば |
-| 70 | [商の列挙](../math/floor-quotient-enum.md) | 整数論・代数 | 余裕があれば |
+| 61 | [フェルマーの小定理と指数の mod](../math/exponent-mod.md) | 整数論・代数 | 準必修 |
+| 62 | [等比数列の和を mod で求める](../math/geometric-series-mod.md#halving) › 法が任意のとき：S(2k) = S(k)(1 + r^k) で半分に割る（基礎のページの節） | 整数論・代数 | 準必修 |
+| 63 | [桁と mod](../math/digit-and-mod.md) | 整数論・代数 | 準必修 |
+| 64 | [素因数の指数で考える](../math/prime-exponent-vector.md#huge-lcm) › 巨大な lcm を指数の最大で持つ（基礎のページの節） | 整数論・代数 | 準必修 |
+| 65 | [素因数の指数で考える](../math/prime-exponent-vector.md#single-prime) › 特定の素数（2 など）の指数だけを比べる（基礎のページの節） | 整数論・代数 | 準必修 |
+| 66 | [拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md) | 整数論・代数 | 準必修 |
+| 67 | [N 進法](../math/base-conversion.md#negative-base) › 負の基数（余りを 0 以上に直してから割る）（基礎のページの節） | 整数論・代数 | 準必修 |
+| 68 | [N 進法](../math/base-conversion.md#base-binary-search) › 基数の二分探索とオーバーフロー（1 桁の場合分け）（基礎のページの節） | 整数論・代数 | 準必修 |
+| 69 | [商の列挙](../math/floor-quotient-enum.md) | 整数論・代数 | 準必修 |
+| 70 | [区間篩](../math/segmented-sieve.md) | 整数論・代数 | 余裕があれば |
 | 71 | [数え上げの考え方](../comb/counting-mindset.md) | 数え上げ・確率・ゲーム | 必修 |
 | 72 | [対称性で確率を求める](../comb/probability-symmetry.md) | 数え上げ・確率・ゲーム | 必修 |
 | 73 | [重複組合せ](../comb/stars-and-bars.md#applications) › 場合分けしてから配る・素因数ごとに配る（基礎のページの節） | 数え上げ・確率・ゲーム | 準必修 |
@@ -409,7 +409,7 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 107 | [期待値 DP](../comb/expected-value-dp.md) | 数え上げ・確率・ゲーム | 準必修 |
 | 108 | [ゲームの基本と勝敗の DP](../comb/game-basics.md) | 数え上げ・確率・ゲーム | 準必修 |
 | 109 | [ミニマックス](../comb/minimax.md) | 数え上げ・確率・ゲーム | 準必修 |
-| 110 | [Nim と XOR](../comb/nim.md) | 数え上げ・確率・ゲーム | 余裕があれば |
+| 110 | [Nim と XOR](../comb/nim.md) | 数え上げ・確率・ゲーム | 準必修 |
 
 ### 青（difficulty 1600〜1999） {#reading-order-blue}
 
@@ -426,8 +426,8 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 9 | [平均・中央値の最大化](../basics/fractional-binary-search.md#median-2d) › 領域の中央値（2 次元累積和）（水のページの節） | 基本テクニック | 準必修 |
 | 10 | [K 番目の値](../basics/kth-value.md) | 基本テクニック | 準必修 |
 | 11 | [三分探索](../basics/ternary-search.md#marginal-greedy) › 増分が単調なら 1 単位ずつ貪欲に配る（水のページの節） | 基本テクニック | 準必修 |
-| 12 | [絶対値の和の最小化と中央値](../basics/median-absolute.md#with-binary-search) › 距離の和で判定して二分探索する（基礎のページの節） | 基本テクニック | 準必修 |
-| 13 | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md#heavy-check) › 判定が重い型（基礎のページの節） | 基本テクニック | 準必修 |
+| 12 | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md#heavy-check) › 判定が重い型（基礎のページの節） | 基本テクニック | 準必修 |
+| 13 | [絶対値の和の最小化と中央値](../basics/median-absolute.md#with-binary-search) › 距離の和で判定して二分探索する（基礎のページの節） | 基本テクニック | 余裕があれば |
 | 14 | [言い換えの典型](../thinking/reformulation.md#then-data-structure) › 言い換えてからデータ構造に載せる（水のページの節） | 考察 | 必修 |
 | 15 | [偶奇に着目する](../thinking/parity.md#checkerboard) › 市松模様の偶奇（基礎のページの節） | 考察 | 必修 |
 | 16 | [ナップサック DP](../dp/knapsack-01.md#knapsack-bounded) › 個数制限付き（素朴な展開・二進分解・余りごとのスライド最小値）（基礎のページの節） | 動的計画法 | 必修 |
@@ -441,14 +441,14 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 24 | [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md#two-dimensional) › 2 次元の累積（水のページの節） | 動的計画法 | 準必修 |
 | 25 | [部分和 DP](../dp/subset-sum.md#over-all-subsets) › 全部分集合についての和（含む部分集合の数を重みにする）（基礎のページの節） | 動的計画法 | 準必修 |
 | 26 | [DP の状態の削減](../dp/dp-dimension-reduction.md) | 動的計画法 | 準必修 |
-| 27 | [戻す DP](../dp/knapsack-undo.md) | 動的計画法 | 準必修 |
-| 28 | [最長共通部分列と編集距離](../dp/lcs.md#count-pairs) › 共通部分列の組の数（包除で重複を引く・2 次元の累積和）（水のページの節） | 動的計画法 | 準必修 |
-| 29 | [区間 DP](../dp/interval-dp.md) | 動的計画法 | 準必修 |
-| 30 | [bitDP](../dp/bit-dp.md#with-shortest-paths) › ほかの探索と組み合わせる（BFS・ワーシャルフロイド法で距離を前計算してから）（水のページの節） | 動的計画法 | 準必修 |
-| 31 | [部分集合を列挙する DP](../dp/subset-enumeration-dp.md) | 動的計画法 | 準必修 |
-| 32 | [木 DP](../dp/tree-dp.md#greedy-children) › 子ごとの「得」を大きい順に取る（水のページの節） | 動的計画法 | 準必修 |
-| 33 | [全方位木 DP](../dp/rerooting.md) | 動的計画法 | 準必修 |
-| 34 | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md) | 動的計画法 | 準必修 |
+| 27 | [最長共通部分列と編集距離](../dp/lcs.md#count-pairs) › 共通部分列の組の数（包除で重複を引く・2 次元の累積和）（水のページの節） | 動的計画法 | 準必修 |
+| 28 | [区間 DP](../dp/interval-dp.md) | 動的計画法 | 準必修 |
+| 29 | [bitDP](../dp/bit-dp.md#with-shortest-paths) › ほかの探索と組み合わせる（BFS・ワーシャルフロイド法で距離を前計算してから）（水のページの節） | 動的計画法 | 準必修 |
+| 30 | [部分集合を列挙する DP](../dp/subset-enumeration-dp.md) | 動的計画法 | 準必修 |
+| 31 | [木 DP](../dp/tree-dp.md#greedy-children) › 子ごとの「得」を大きい順に取る（水のページの節） | 動的計画法 | 準必修 |
+| 32 | [全方位木 DP](../dp/rerooting.md) | 動的計画法 | 準必修 |
+| 33 | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md) | 動的計画法 | 準必修 |
+| 34 | [戻す DP](../dp/knapsack-undo.md) | 動的計画法 | 余裕があれば |
 | 35 | [区間分割 DP](../dp/dp-sequence-partition.md#block-index) › 区間の番号に依存する条件：番号を状態に足す（水のページの節） | 動的計画法 | 余裕があれば |
 | 36 | [グリッドグラフ](../graph/grid-graph.md#obstacle-dual) › 障害物どうしの 8 近傍の連結で通れるかを判定する（基礎のページの節） | グラフ | 必修 |
 | 37 | [状態を頂点にする](../graph/extended-dijkstra.md#resource-state) › 資源を状態に持ち、上限で打ち切る（水のページの節） | グラフ | 必修 |
@@ -464,7 +464,7 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 47 | [Union-Find で連結性を扱う](../graph/union-find-connectivity.md#binary-search) › 二分探索と連結判定の組合せ（水のページの節） | グラフ | 準必修 |
 | 48 | [最小ボトルネック路](../graph/bottleneck-path.md) | グラフ | 準必修 |
 | 49 | [DFS 木・BFS 木とグラフの構築](../graph/graph-construction.md) | グラフ | 準必修 |
-| 50 | [次数による平方分割](../graph/degree-sqrt.md) | グラフ | 余裕があれば |
+| 50 | [次数による平方分割](../graph/degree-sqrt.md) | グラフ | 準必修 |
 | 51 | [木の構築・復元](../tree/tree-construction.md#from-degrees) › 次数の条件から作る（次数の足りない成分どうしをつなぐ）（水のページの節） | 木 | 必修 |
 | 52 | [木の構築・復元](../tree/tree-construction.md#from-eccentricities) › 最遠距離の列から直径を決める（水のページの節） | 木 | 必修 |
 | 53 | [最小共通祖先（LCA）](../tree/lca.md) | 木 | 必修 |
@@ -482,20 +482,20 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 65 | [Union-Find の応用](../ds/union-find-applications.md#multiple-uf) › しきい値ごと・関係ごとに Union-Find を持つ（水のページの節） | データ構造 | 準必修 |
 | 66 | [セグメント木上の二分探索](../ds/segment-tree-binary-search.md#on-lazy-segment-tree) › 遅延セグメント木の上の二分探索（単調な列への区間作用）（水のページの節） | データ構造 | 準必修 |
 | 67 | [値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md#top-k-sum) › 上位 K 個の和（境界はセグメント木上の二分探索で探す）（水のページの節） | データ構造 | 準必修 |
-| 68 | [平面走査](../ds/sweep-line-2d.md) | データ構造 | 準必修 |
-| 69 | [Mo's algorithm](../ds/mo-algorithm.md) | データ構造 | 準必修 |
-| 70 | [永続データ構造](../ds/persistent-data-structures.md) | データ構造 | 準必修 |
-| 71 | [マージソート木](../ds/merge-sort-tree.md) | データ構造 | 準必修 |
-| 72 | [Binary Trie](../ds/binary-trie.md) | データ構造 | 準必修 |
-| 73 | [Sparse Table](../ds/sparse-table.md) | データ構造 | 余裕があれば |
+| 68 | [Sparse Table](../ds/sparse-table.md) | データ構造 | 準必修 |
+| 69 | [平面走査](../ds/sweep-line-2d.md) | データ構造 | 準必修 |
+| 70 | [Mo's algorithm](../ds/mo-algorithm.md) | データ構造 | 準必修 |
+| 71 | [永続データ構造](../ds/persistent-data-structures.md) | データ構造 | 準必修 |
+| 72 | [マージソート木](../ds/merge-sort-tree.md) | データ構造 | 準必修 |
+| 73 | [Binary Trie](../ds/binary-trie.md) | データ構造 | 準必修 |
 | 74 | [約数の個数の上界と高度合成数](../math/divisor-count-bound.md#divisor-dp) › 約数を状態にした DP（約数の個数が少ないことを使う）（水のページの節） | 整数論・代数 | 必修 |
 | 75 | [行列累乗](../math/matrix-power.md) | 整数論・代数 | 必修 |
 | 76 | [等比数列の和を mod で求める](../math/geometric-series-mod.md#matrix) › 2×2 行列の累乗による別解（基礎のページの節） | 整数論・代数 | 準必修 |
-| 77 | [掃き出し法](../math/gaussian-elimination.md) | 整数論・代数 | 準必修 |
-| 78 | [畳み込みの使い方](../math/convolution-ntt.md) | 整数論・代数 | 準必修 |
-| 79 | [最小素因数の篩と線形篩](../math/spf-sieve.md#linear-sieve) › 線形篩：各合成数を1回だけ作り、φ・μ の表を同時に作る（基礎のページの節） | 整数論・代数 | 余裕があれば |
-| 80 | [GCD の性質](../math/gcd-properties.md) | 整数論・代数 | 余裕があれば |
-| 81 | [中国剰余定理](../math/crt.md) | 整数論・代数 | 余裕があれば |
+| 77 | [最小素因数の篩と線形篩](../math/spf-sieve.md#linear-sieve) › 線形篩：各合成数を1回だけ作り、φ・μ の表を同時に作る（基礎のページの節） | 整数論・代数 | 準必修 |
+| 78 | [中国剰余定理](../math/crt.md) | 整数論・代数 | 準必修 |
+| 79 | [掃き出し法](../math/gaussian-elimination.md) | 整数論・代数 | 準必修 |
+| 80 | [畳み込みの使い方](../math/convolution-ntt.md) | 整数論・代数 | 準必修 |
+| 81 | [GCD の性質](../math/gcd-properties.md) | 整数論・代数 | 余裕があれば |
 | 82 | [二項係数の前計算](../comb/binomial-precompute.md#lucas) › 法が小さい素数で n ≥ p になるとき：Lucas の定理（基礎のページの節） | 数え上げ・確率・ゲーム | 必修 |
 | 83 | [二項係数の前計算](../comb/binomial-precompute.md#parity-pyramid) › p = 2 では (n & k) == k、ピラミッドの係数を二項係数と見抜く（基礎のページの節） | 数え上げ・確率・ゲーム | 必修 |
 | 84 | [格子路の数え上げ](../comb/lattice-paths.md#forbidden-region) › 禁止領域を避ける：境界を越える点で分類する（基礎のページの節） | 数え上げ・確率・ゲーム | 必修 |
@@ -508,23 +508,23 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 91 | [約数包除](../comb/divisor-inclusion-exclusion.md) | 数え上げ・確率・ゲーム | 準必修 |
 | 92 | [置換の巡回分解](../comb/permutation-cycles.md#power) › K 回の合成と元に戻る回数（巡回の長さの lcm）（基礎のページの節） | 数え上げ・確率・ゲーム | 準必修 |
 | 93 | [置換の偶奇](../comb/permutation-parity.md) | 数え上げ・確率・ゲーム | 準必修 |
-| 94 | [期待値の線形性と指示確率変数](../comb/linearity-of-expectation.md#pairs) › ペアごとの確率と対称性（水のページの節） | 数え上げ・確率・ゲーム | 準必修 |
-| 95 | [確率 DP](../comb/probability-dp.md#random-walk) › ランダムウォークと二項係数（水のページの節） | 数え上げ・確率・ゲーム | 準必修 |
-| 96 | [期待値 DP](../comb/expected-value-dp.md#prefix-sum) › 遷移を累積和でまとめる（水のページの節） | 数え上げ・確率・ゲーム | 準必修 |
-| 97 | [閉路のある期待値](../comb/expectation-linear-equations.md) | 数え上げ・確率・ゲーム | 準必修 |
-| 98 | [ゲームの基本と勝敗の DP](../comb/game-basics.md#mirror-strategy) › 真似戦略・ペアリング戦略（真似した手が合法かを確かめる）（水のページの節） | 数え上げ・確率・ゲーム | 準必修 |
-| 99 | [Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md) | 数え上げ・確率・ゲーム | 準必修 |
-| 100 | [対応づけ・数える対象の言い換え](../comb/counting-bijection.md) | 数え上げ・確率・ゲーム | 余裕があれば |
-| 101 | [第 2 種スターリング数とベル数](../comb/bell-number.md) | 数え上げ・確率・ゲーム | 余裕があれば |
-| 102 | [Nim と XOR](../comb/nim.md#bounded) › 上限つき（x mod (k+1)）・範囲つきの変種（水のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
-| 103 | [Nim と XOR](../comb/nim.md#asymmetric) › 先手と後手で取れる数が違うとき（水のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
+| 94 | [第 2 種スターリング数とベル数](../comb/bell-number.md) | 数え上げ・確率・ゲーム | 準必修 |
+| 95 | [期待値の線形性と指示確率変数](../comb/linearity-of-expectation.md#pairs) › ペアごとの確率と対称性（水のページの節） | 数え上げ・確率・ゲーム | 準必修 |
+| 96 | [確率 DP](../comb/probability-dp.md#random-walk) › ランダムウォークと二項係数（水のページの節） | 数え上げ・確率・ゲーム | 準必修 |
+| 97 | [期待値 DP](../comb/expected-value-dp.md#prefix-sum) › 遷移を累積和でまとめる（水のページの節） | 数え上げ・確率・ゲーム | 準必修 |
+| 98 | [閉路のある期待値](../comb/expectation-linear-equations.md) | 数え上げ・確率・ゲーム | 準必修 |
+| 99 | [ゲームの基本と勝敗の DP](../comb/game-basics.md#mirror-strategy) › 真似戦略・ペアリング戦略（真似した手が合法かを確かめる）（水のページの節） | 数え上げ・確率・ゲーム | 準必修 |
+| 100 | [Nim と XOR](../comb/nim.md#bounded) › 上限つき（x mod (k+1)）・範囲つきの変種（水のページの節） | 数え上げ・確率・ゲーム | 準必修 |
+| 101 | [Nim と XOR](../comb/nim.md#asymmetric) › 先手と後手で取れる数が違うとき（水のページの節） | 数え上げ・確率・ゲーム | 準必修 |
+| 102 | [Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md) | 数え上げ・確率・ゲーム | 準必修 |
+| 103 | [対応づけ・数える対象の言い換え](../comb/counting-bijection.md) | 数え上げ・確率・ゲーム | 余裕があれば |
 | 104 | [部分列の判定と次の出現位置の表](../string/subsequence-matching.md#repeated-string) › 繰り返した文字列の部分列（文字ごとの累積個数で位置を飛ばす）（基礎のページの節） | 文字列 | 準必修 |
 | 105 | [ローリングハッシュ](../string/rolling-hash.md#hash-segment-tree) › セグ木に載せるハッシュ：（ハッシュ, B^長さ）の組で更新ありの一致・回文判定（水のページの節） | 文字列 | 準必修 |
-| 106 | [KMP 法と文字列の周期](../string/kmp.md) | 文字列 | 準必修 |
-| 107 | [回文の扱いと Manacher](../string/palindrome.md#build-outside-in) › 外側から組み立てる（回文の式・約数）（水のページの節） | 文字列 | 準必修 |
-| 108 | [回文の扱いと Manacher](../string/palindrome.md#manacher) › Manacher：各中心の最長回文半径を O(N) で（Z と同じく内側をコピーする）（水のページの節） | 文字列 | 準必修 |
-| 109 | [Trie](../string/trie.md#dp-on-trie) › Trie 上の DFS と、節点に値を持つ DP（水のページの節） | 文字列 | 準必修 |
-| 110 | [ハッシュの衝突と安全な設計](../string/hash-safety.md) | 文字列 | 余裕があれば |
+| 106 | [ハッシュの衝突と安全な設計](../string/hash-safety.md) | 文字列 | 準必修 |
+| 107 | [KMP 法と文字列の周期](../string/kmp.md) | 文字列 | 準必修 |
+| 108 | [回文の扱いと Manacher](../string/palindrome.md#build-outside-in) › 外側から組み立てる（回文の式・約数）（水のページの節） | 文字列 | 準必修 |
+| 109 | [回文の扱いと Manacher](../string/palindrome.md#manacher) › Manacher：各中心の最長回文半径を O(N) で（Z と同じく内側をコピーする）（水のページの節） | 文字列 | 準必修 |
+| 110 | [Trie](../string/trie.md#dp-on-trie) › Trie 上の DFS と、節点に値を持つ DP（水のページの節） | 文字列 | 準必修 |
 | 111 | [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md#parity-after-rotation) › 回転後の偶奇：u と v の偶奇がそろう点だけが元の格子点（チェビシェフ → マンハッタンで 1/2 が出る）（水のページの節） | 幾何 | 必修 |
 | 112 | [偏角ソート](../geometry/argument-sort.md#wrap-around) › 一周を扱う：配列を 2 周分にして尺取り（水のページの節） | 幾何 | 準必修 |
 | 113 | [偏角ソート](../geometry/argument-sort.md#opposite-direction) › 反対方向に最も近い点の二分探索（水のページの節） | 幾何 | 準必修 |
@@ -552,29 +552,29 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 2 | [分割統治](../basics/divide-and-conquer.md) | 基本テクニック | 必修 |
 | 3 | [平均・中央値の最大化](../basics/fractional-binary-search.md#median-of-medians) › 全区間の中央値の中央値（転倒数で数える）（水のページの節） | 基本テクニック | 準必修 |
 | 4 | [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md) | 動的計画法 | 必修 |
-| 5 | [戻す DP](../dp/knapsack-undo.md#offline-divide-and-conquer) › 分割統治でオフラインに処理する（青のページの節） | 動的計画法 | 準必修 |
-| 6 | [並べ替えてから DP する](../dp/exchange-argument-dp.md#place-at-ends) › 大きい順に左右の端へ置く（青のページの節） | 動的計画法 | 準必修 |
-| 7 | [グリッド上の DP](../dp/dp-grid.md#top-k-on-path) › 経路上の上位 K 個（K 番目を固定して状態に）（水のページの節） | 動的計画法 | 準必修 |
-| 8 | [最長共通部分列と編集距離](../dp/lcs.md#dp-of-dp) › LCS の値ごとに数える：DP の DP（内側の DP の 1 行を外側の状態にする）（水のページの節） | 動的計画法 | 準必修 |
-| 9 | [部分列 DP](../dp/subsequence-dp.md) | 動的計画法 | 準必修 |
-| 10 | [区間 DP の応用](../dp/interval-dp-advanced.md) | 動的計画法 | 準必修 |
-| 11 | [bitDP](../dp/bit-dp.md#primes) › 素数の使用状況を集合で持つ（水のページの節） | 動的計画法 | 準必修 |
-| 12 | [部分集合を列挙する DP](../dp/subset-enumeration-dp.md#vs-zeta) › 高速ゼータ変換との使い分け（青のページの節） | 動的計画法 | 準必修 |
-| 13 | [プロファイル DP](../dp/broken-profile-dp.md) | 動的計画法 | 準必修 |
-| 14 | [桁 DP の応用](../dp/digit-dp-advanced.md) | 動的計画法 | 準必修 |
-| 15 | [木 DP](../dp/tree-dp.md#with-binary-search) › 二分探索と組み合わせて判定にする（水のページの節） | 動的計画法 | 準必修 |
-| 16 | [木 DP](../dp/tree-dp.md#tree-dp-merge) › 部分木の情報をデータ構造で持ってマージする（マージテク）（水のページの節） | 動的計画法 | 準必修 |
-| 17 | [インライン DP](../dp/inline-dp.md#with-monotonic-stack) › 単調スタックと組み合わせる（青のページの節） | 動的計画法 | 準必修 |
+| 5 | [並べ替えてから DP する](../dp/exchange-argument-dp.md#place-at-ends) › 大きい順に左右の端へ置く（青のページの節） | 動的計画法 | 準必修 |
+| 6 | [グリッド上の DP](../dp/dp-grid.md#top-k-on-path) › 経路上の上位 K 個（K 番目を固定して状態に）（水のページの節） | 動的計画法 | 準必修 |
+| 7 | [最長共通部分列と編集距離](../dp/lcs.md#dp-of-dp) › LCS の値ごとに数える：DP の DP（内側の DP の 1 行を外側の状態にする）（水のページの節） | 動的計画法 | 準必修 |
+| 8 | [部分列 DP](../dp/subsequence-dp.md) | 動的計画法 | 準必修 |
+| 9 | [区間 DP の応用](../dp/interval-dp-advanced.md) | 動的計画法 | 準必修 |
+| 10 | [bitDP](../dp/bit-dp.md#primes) › 素数の使用状況を集合で持つ（水のページの節） | 動的計画法 | 準必修 |
+| 11 | [部分集合を列挙する DP](../dp/subset-enumeration-dp.md#vs-zeta) › 高速ゼータ変換との使い分け（青のページの節） | 動的計画法 | 準必修 |
+| 12 | [プロファイル DP](../dp/broken-profile-dp.md) | 動的計画法 | 準必修 |
+| 13 | [桁 DP の応用](../dp/digit-dp-advanced.md) | 動的計画法 | 準必修 |
+| 14 | [木 DP](../dp/tree-dp.md#with-binary-search) › 二分探索と組み合わせて判定にする（水のページの節） | 動的計画法 | 準必修 |
+| 15 | [木 DP](../dp/tree-dp.md#tree-dp-merge) › 部分木の情報をデータ構造で持ってマージする（マージテク）（水のページの節） | 動的計画法 | 準必修 |
+| 16 | [インライン DP](../dp/inline-dp.md#with-monotonic-stack) › 単調スタックと組み合わせる（青のページの節） | 動的計画法 | 準必修 |
+| 17 | [戻す DP](../dp/knapsack-undo.md#offline-divide-and-conquer) › 分割統治でオフラインに処理する（青のページの節） | 動的計画法 | 余裕があれば |
 | 18 | [二乗の木 DP](../dp/tree-dp-square.md) | 動的計画法 | 余裕があれば |
 | 19 | [最短路 DAG](../graph/shortest-path-dag.md#edge-removal) › 辺を消すと距離が変わるか（水のページの節） | グラフ | 準必修 |
 | 20 | [最小ボトルネック路](../graph/bottleneck-path.md#many-queries) › 多数の 2 点の質問：成分にクエリを持たせて小さい方から移す（青のページの節） | グラフ | 準必修 |
 | 21 | [橋・関節点・二重連結成分](../graph/lowlink.md) | グラフ | 準必修 |
 | 22 | [DFS 木・BFS 木とグラフの構築](../graph/graph-construction.md#parity-walk) › DFS 木をたどって偶奇を合わせる（青のページの節） | グラフ | 準必修 |
-| 23 | [最大流](../graph/max-flow.md) | グラフ | 準必修 |
-| 24 | [補グラフ上の BFS](../graph/complement-graph-bfs.md) | グラフ | 余裕があれば |
-| 25 | [オイラー路（一筆書き）](../graph/euler-path.md) | グラフ | 余裕があれば |
-| 26 | [次数による平方分割](../graph/degree-sqrt.md#triangles) › 三角形の列挙（次数の小さい方から向き付ける）（青のページの節） | グラフ | 余裕があれば |
-| 27 | [次数による平方分割](../graph/degree-sqrt.md#four-cycles) › 長さ 4 の閉路の検出（鳩の巣原理で打ち切る）（青のページの節） | グラフ | 余裕があれば |
+| 23 | [次数による平方分割](../graph/degree-sqrt.md#triangles) › 三角形の列挙（次数の小さい方から向き付ける）（青のページの節） | グラフ | 準必修 |
+| 24 | [次数による平方分割](../graph/degree-sqrt.md#four-cycles) › 長さ 4 の閉路の検出（鳩の巣原理で打ち切る）（青のページの節） | グラフ | 準必修 |
+| 25 | [最大流](../graph/max-flow.md) | グラフ | 準必修 |
+| 26 | [補グラフ上の BFS](../graph/complement-graph-bfs.md) | グラフ | 余裕があれば |
+| 27 | [オイラー路（一筆書き）](../graph/euler-path.md) | グラフ | 余裕があれば |
 | 28 | [木の直径と最遠点](../tree/tree-diameter.md#center) › 中心と半径・直径の個数（水のページの節） | 木 | 準必修 |
 | 29 | [木の直径と最遠点](../tree/tree-diameter.md#long-path-decomposition) › 長鎖分解（最も深い子へつなぐ分解と、最も遠い葉を順に選ぶ貪欲）（水のページの節） | 木 | 準必修 |
 | 30 | [木の重心](../tree/tree-centroid.md) | 木 | 準必修 |
@@ -595,30 +595,30 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 45 | [約数の個数の上界と高度合成数](../math/divisor-count-bound.md#enumerate-hcn) › 高度合成数の列挙（小さい素数の指数が単調に減る形を DFS で）（水のページの節） | 整数論・代数 | 必修 |
 | 46 | [行列累乗](../math/matrix-power.md#doubling-transition) › ダブリングで遷移を合成する（行列にすると大きすぎるとき・桁を倍々に伸ばす）（青のページの節） | 整数論・代数 | 必修 |
 | 47 | [行列累乗](../math/matrix-power.md#profile-dp) › プロファイル DP の遷移行列と状態数の見積もり（青のページの節） | 整数論・代数 | 必修 |
-| 48 | [floor sum](../math/floor-sum.md) | 整数論・代数 | 準必修 |
-| 49 | [XOR 基底](../math/xor-basis.md) | 整数論・代数 | 準必修 |
-| 50 | [畳み込みの使い方](../math/convolution-ntt.md#string-matching) › 文字列の照合：ずらしたときの一致数・ハミング距離・ワイルドカード（青のページの節） | 整数論・代数 | 準必修 |
-| 51 | [畳み込みの使い方](../math/convolution-ntt.md#split-by-bit) › bit ごと・文字ごとに分けて畳み込む（OR の和など）（青のページの節） | 整数論・代数 | 準必修 |
-| 52 | [フェルマーの小定理と指数の mod](../math/exponent-mod.md#euler-theorem) › 一般の法：オイラーの定理と、互いに素でないときの一般化（累乗の塔）（水のページの節） | 整数論・代数 | 余裕があれば |
-| 53 | [オイラーの φ 関数](../math/euler-phi.md) | 整数論・代数 | 余裕があれば |
-| 54 | [中国剰余定理](../math/crt.md#garner) › Garner のアルゴリズム（巨大な解を mod で求める）（青のページの節） | 整数論・代数 | 余裕があれば |
+| 48 | [フェルマーの小定理と指数の mod](../math/exponent-mod.md#euler-theorem) › 一般の法：オイラーの定理と、互いに素でないときの一般化（累乗の塔）（水のページの節） | 整数論・代数 | 準必修 |
+| 49 | [オイラーの φ 関数](../math/euler-phi.md) | 整数論・代数 | 準必修 |
+| 50 | [中国剰余定理](../math/crt.md#garner) › Garner のアルゴリズム（巨大な解を mod で求める）（青のページの節） | 整数論・代数 | 準必修 |
+| 51 | [floor sum](../math/floor-sum.md) | 整数論・代数 | 準必修 |
+| 52 | [XOR 基底](../math/xor-basis.md) | 整数論・代数 | 準必修 |
+| 53 | [畳み込みの使い方](../math/convolution-ntt.md#string-matching) › 文字列の照合：ずらしたときの一致数・ハミング距離・ワイルドカード（青のページの節） | 整数論・代数 | 準必修 |
+| 54 | [畳み込みの使い方](../math/convolution-ntt.md#split-by-bit) › bit ごと・文字ごとに分けて畳み込む（OR の和など）（青のページの節） | 整数論・代数 | 準必修 |
 | 55 | [順序を固定して数える](../comb/counting-fix-order.md#tree-order) › 木の上の順番 n!/Π 部分木の大きさ（水のページの節） | 数え上げ・確率・ゲーム | 準必修 |
 | 56 | [多項係数](../comb/multinomial-coefficient.md#insert-rest) › 一部を先に並べて残りを挿入する（水のページの節） | 数え上げ・確率・ゲーム | 準必修 |
 | 57 | [多項係数](../comb/multinomial-coefficient.md#same-size-groups) › 区別しない同じ大きさのグループを割る（水のページの節） | 数え上げ・確率・ゲーム | 準必修 |
-| 58 | [整数の分割と分割数](../comb/partition-number.md) | 数え上げ・確率・ゲーム | 準必修 |
-| 59 | [連結なグラフの数え上げ](../comb/counting-labeled-graphs.md) | 数え上げ・確率・ゲーム | 準必修 |
-| 60 | [確率 DP](../comb/probability-dp.md#matrix-power) › 同じ遷移を多数回行うときは行列累乗へ（水のページの節） | 数え上げ・確率・ゲーム | 準必修 |
-| 61 | [最適戦略の期待値](../comb/optimal-strategy-expectation.md) | 数え上げ・確率・ゲーム | 準必修 |
-| 62 | [ミニマックス](../comb/minimax.md#tree) › 木の上のゲーム（水のページの節） | 数え上げ・確率・ゲーム | 準必修 |
-| 63 | [ミニマックス](../comb/minimax.md#binary-search) › 答えを決め打ちして勝敗に直す（水のページの節） | 数え上げ・確率・ゲーム | 準必修 |
-| 64 | [鏡像法とカタラン数](../comb/reflection-principle.md) | 数え上げ・確率・ゲーム | 余裕があれば |
-| 65 | [包除 DP](../comb/inclusion-exclusion-dp.md) | 数え上げ・確率・ゲーム | 余裕があれば |
-| 66 | [メビウス関数とメビウス反転](../comb/mobius-function.md) | 数え上げ・確率・ゲーム | 余裕があれば |
-| 67 | [部分集合の高速ゼータ変換とメビウス変換](../comb/zeta-mobius-subset.md) | 数え上げ・確率・ゲーム | 余裕があれば |
-| 68 | [ラベル付き木の数え上げ](../comb/cayley-pruefer.md) | 数え上げ・確率・ゲーム | 余裕があれば |
-| 69 | [期待値と確率の変換](../comb/expectation-tail-sum.md) | 数え上げ・確率・ゲーム | 余裕があれば |
-| 70 | [二乗の期待値・分散](../comb/expectation-of-square.md) | 数え上げ・確率・ゲーム | 余裕があれば |
-| 71 | [後退解析](../comb/game-retrograde-analysis.md) | 数え上げ・確率・ゲーム | 余裕があれば |
+| 58 | [メビウス関数とメビウス反転](../comb/mobius-function.md) | 数え上げ・確率・ゲーム | 準必修 |
+| 59 | [部分集合の高速ゼータ変換とメビウス変換](../comb/zeta-mobius-subset.md) | 数え上げ・確率・ゲーム | 準必修 |
+| 60 | [整数の分割と分割数](../comb/partition-number.md) | 数え上げ・確率・ゲーム | 準必修 |
+| 61 | [連結なグラフの数え上げ](../comb/counting-labeled-graphs.md) | 数え上げ・確率・ゲーム | 準必修 |
+| 62 | [確率 DP](../comb/probability-dp.md#matrix-power) › 同じ遷移を多数回行うときは行列累乗へ（水のページの節） | 数え上げ・確率・ゲーム | 準必修 |
+| 63 | [最適戦略の期待値](../comb/optimal-strategy-expectation.md) | 数え上げ・確率・ゲーム | 準必修 |
+| 64 | [期待値と確率の変換](../comb/expectation-tail-sum.md) | 数え上げ・確率・ゲーム | 準必修 |
+| 65 | [二乗の期待値・分散](../comb/expectation-of-square.md) | 数え上げ・確率・ゲーム | 準必修 |
+| 66 | [ミニマックス](../comb/minimax.md#tree) › 木の上のゲーム（水のページの節） | 数え上げ・確率・ゲーム | 準必修 |
+| 67 | [ミニマックス](../comb/minimax.md#binary-search) › 答えを決め打ちして勝敗に直す（水のページの節） | 数え上げ・確率・ゲーム | 準必修 |
+| 68 | [後退解析](../comb/game-retrograde-analysis.md) | 数え上げ・確率・ゲーム | 準必修 |
+| 69 | [鏡像法とカタラン数](../comb/reflection-principle.md) | 数え上げ・確率・ゲーム | 余裕があれば |
+| 70 | [包除 DP](../comb/inclusion-exclusion-dp.md) | 数え上げ・確率・ゲーム | 余裕があれば |
+| 71 | [ラベル付き木の数え上げ](../comb/cayley-pruefer.md) | 数え上げ・確率・ゲーム | 余裕があれば |
 | 72 | [集合・多重集合のハッシュ](../string/hashing-for-sets.md#multiplicity-mod-k) › 各値が偶数個・k の倍数個かの判定（指数 mod k を乱数で符号化）（水のページの節） | 文字列 | 準必修 |
 | 73 | [Z-algorithm](../string/z-algorithm.md#prefix-extension) › S＋区切り＋T で各位置から S の接頭辞が何文字続くか（DP の材料）（水のページの節） | 文字列 | 準必修 |
 | 74 | [Trie](../string/trie.md#expectation-on-trie) › Trie 上の確率・期待値（水のページの節） | 文字列 | 準必修 |
@@ -635,7 +635,7 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 85 | [最小カット](../graph/min-cut.md) | グラフ | 準必修 |
 | 86 | [二部マッチング](../graph/bipartite-matching.md) | グラフ | 準必修 |
 | 87 | [最小費用流](../graph/min-cost-flow.md) | グラフ | 準必修 |
-| 88 | [重心分解](../tree/centroid-decomposition.md) | 木 | 余裕があれば |
+| 88 | [重心分解](../tree/centroid-decomposition.md) | 木 | 準必修 |
 | 89 | [位数・原始根・離散対数](../math/multiplicative-order.md) | 整数論・代数 | 準必修 |
 | 90 | [燃やす埋める](../graph/project-selection.md) | グラフ | 準必修 |
 | 91 | [König の定理](../graph/konig-theorem.md) | グラフ | 準必修 |
@@ -671,18 +671,18 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 25 | [オイラーツアー](../tree/euler-tour.md#to-hld) › 逆元がない演算・パスへの一括更新は HL 分解（青のページの節） | 木 | 必修 |
 | 26 | [木の上のパスの判定と分解](../tree/tree-path.md#to-hld) › パスへの一括更新があるなら HL 分解（青のページの節） | 木 | 準必修 |
 | 27 | [HL 分解](../tree/hld.md) | 木 | 準必修 |
-| 28 | [木の同型判定と木のハッシュ](../tree/tree-isomorphism.md) | 木 | 余裕があれば |
-| 29 | [重心分解](../tree/centroid-decomposition.md#with-convolution) › 距離の頻度表は畳み込みと組む（黄のページの節） | 木 | 余裕があれば |
+| 28 | [重心分解](../tree/centroid-decomposition.md#with-convolution) › 距離の頻度表は畳み込みと組む（黄のページの節） | 木 | 準必修 |
+| 29 | [木の同型判定と木のハッシュ](../tree/tree-isomorphism.md) | 木 | 余裕があれば |
 | 30 | [Auxiliary Tree](../tree/auxiliary-tree.md) | 木 | 余裕があれば |
 | 31 | [併合過程の木](../tree/merge-process-tree.md) | 木 | 余裕があれば |
 | 32 | [比で親に併合する貪欲](../tree/tree-ratio-greedy.md) | 木 | 余裕があれば |
 | 33 | [単調スタックとスライド最小値](../ds/monotonic-stack.md#swag) › SWAG：スタック 2 本で作る総積つきキュー（水のページの節） | データ構造 | 準必修 |
-| 34 | [Mo's algorithm](../ds/mo-algorithm.md#variants) › 時間付き Mo・ロールバック Mo（青のページの節） | データ構造 | 準必修 |
-| 35 | [永続データ構造](../ds/persistent-data-structures.md#prefix-versions) › 接頭辞ごとの版で区間の K 番目・x 以下の個数をオンラインで求める（青のページの節） | データ構造 | 準必修 |
-| 36 | [マージソート木](../ds/merge-sort-tree.md#bit-per-level) › 各段に BIT を持たせる（先読みと組む）（青のページの節） | データ構造 | 準必修 |
-| 37 | [部分永続 Union-Find](../ds/partially-persistent-union-find.md) | データ構造 | 余裕があれば |
-| 38 | [ロールバックできる Union-Find](../ds/rollback-union-find.md) | データ構造 | 余裕があれば |
-| 39 | [Sparse Table](../ds/sparse-table.md#disjoint-sparse-table) › 冪等でない演算（2 べきに分けて O(log N)、Disjoint Sparse Table）（青のページの節） | データ構造 | 余裕があれば |
+| 34 | [Sparse Table](../ds/sparse-table.md#disjoint-sparse-table) › 冪等でない演算（2 べきに分けて O(log N)、Disjoint Sparse Table）（青のページの節） | データ構造 | 準必修 |
+| 35 | [Mo's algorithm](../ds/mo-algorithm.md#variants) › 時間付き Mo・ロールバック Mo（青のページの節） | データ構造 | 準必修 |
+| 36 | [永続データ構造](../ds/persistent-data-structures.md#prefix-versions) › 接頭辞ごとの版で区間の K 番目・x 以下の個数をオンラインで求める（青のページの節） | データ構造 | 準必修 |
+| 37 | [マージソート木](../ds/merge-sort-tree.md#bit-per-level) › 各段に BIT を持たせる（先読みと組む）（青のページの節） | データ構造 | 準必修 |
+| 38 | [部分永続 Union-Find](../ds/partially-persistent-union-find.md) | データ構造 | 余裕があれば |
+| 39 | [ロールバックできる Union-Find](../ds/rollback-union-find.md) | データ構造 | 余裕があれば |
 | 40 | [Segment Tree Beats](../ds/segment-tree-beats.md) | データ構造 | 余裕があれば |
 | 41 | [並列二分探索](../ds/parallel-binary-search.md) | データ構造 | 余裕があれば |
 | 42 | [CDQ 分割統治](../ds/cdq-divide-and-conquer.md) | データ構造 | 余裕があれば |
@@ -701,20 +701,20 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 55 | [ラグランジュ補間とべき乗和](../math/lagrange-interpolation.md) | 整数論・代数 | 余裕があれば |
 | 56 | [包除原理](../comb/inclusion-exclusion.md#min-max) › min-max 包除（全種類がそろうまでの期待値）（青のページの節） | 数え上げ・確率・ゲーム | 必修 |
 | 57 | [母関数の考え方](../comb/generating-function-counting.md) | 数え上げ・確率・ゲーム | 準必修 |
-| 58 | [整数の分割と分割数](../comb/partition-number.md#partition-dp) › 分割数型の DP（黄のページの節） | 数え上げ・確率・ゲーム | 準必修 |
-| 59 | [Burnside の補題](../comb/burnside-lemma.md) | 数え上げ・確率・ゲーム | 余裕があれば |
-| 60 | [二項係数の部分和](../comb/binomial-prefix-sum.md) | 数え上げ・確率・ゲーム | 余裕があれば |
-| 61 | [鏡像法とカタラン数](../comb/reflection-principle.md#two-sided) › 両端を越えない場合（黄のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
-| 62 | [包除 DP](../comb/inclusion-exclusion-dp.md#tree) › 符号付きの木 DP（黄のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
-| 63 | [メビウス関数とメビウス反転](../comb/mobius-function.md#quotient) › 商の列挙で同じ値の範囲を束ねる（黄のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
-| 64 | [第 1 種スターリング数](../comb/stirling-first.md) | 数え上げ・確率・ゲーム | 余裕があれば |
-| 65 | [Young 図形とフック長公式](../comb/young-tableaux.md) | 数え上げ・確率・ゲーム | 余裕があれば |
-| 66 | [ラベル付き木の数え上げ](../comb/cayley-pruefer.md#with-polynomials) › 多項式（母関数）と組み合わせる（黄のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
-| 67 | [期待値と確率の変換](../comb/expectation-tail-sum.md#continuous) › 連続値の場合（積分）（黄のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
-| 68 | [連続値の確率](../comb/continuous-probability.md) | 数え上げ・確率・ゲーム | 余裕があれば |
-| 69 | [Nim と XOR](../comb/nim.md#misere) › 逆形 Nim（最後に取った方が負け）（水のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
-| 70 | [Nim と XOR](../comb/nim.md#counting) › 必勝局面の数え上げ（XOR 畳み込み）（水のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
-| 71 | [後退解析](../comb/game-retrograde-analysis.md#weighted) › 得点のあるゲームはダイクストラの要領で確定させる（黄のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
+| 58 | [メビウス関数とメビウス反転](../comb/mobius-function.md#quotient) › 商の列挙で同じ値の範囲を束ねる（黄のページの節） | 数え上げ・確率・ゲーム | 準必修 |
+| 59 | [整数の分割と分割数](../comb/partition-number.md#partition-dp) › 分割数型の DP（黄のページの節） | 数え上げ・確率・ゲーム | 準必修 |
+| 60 | [期待値と確率の変換](../comb/expectation-tail-sum.md#continuous) › 連続値の場合（積分）（黄のページの節） | 数え上げ・確率・ゲーム | 準必修 |
+| 61 | [Nim と XOR](../comb/nim.md#misere) › 逆形 Nim（最後に取った方が負け）（水のページの節） | 数え上げ・確率・ゲーム | 準必修 |
+| 62 | [Nim と XOR](../comb/nim.md#counting) › 必勝局面の数え上げ（XOR 畳み込み）（水のページの節） | 数え上げ・確率・ゲーム | 準必修 |
+| 63 | [後退解析](../comb/game-retrograde-analysis.md#weighted) › 得点のあるゲームはダイクストラ法の要領で確定させる（黄のページの節） | 数え上げ・確率・ゲーム | 準必修 |
+| 64 | [Burnside の補題](../comb/burnside-lemma.md) | 数え上げ・確率・ゲーム | 余裕があれば |
+| 65 | [二項係数の部分和](../comb/binomial-prefix-sum.md) | 数え上げ・確率・ゲーム | 余裕があれば |
+| 66 | [鏡像法とカタラン数](../comb/reflection-principle.md#two-sided) › 両端を越えない場合（黄のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
+| 67 | [包除 DP](../comb/inclusion-exclusion-dp.md#tree) › 符号付きの木 DP（黄のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
+| 68 | [第 1 種スターリング数](../comb/stirling-first.md) | 数え上げ・確率・ゲーム | 余裕があれば |
+| 69 | [Young 図形とフック長公式](../comb/young-tableaux.md) | 数え上げ・確率・ゲーム | 余裕があれば |
+| 70 | [ラベル付き木の数え上げ](../comb/cayley-pruefer.md#with-polynomials) › 多項式（母関数）と組み合わせる（黄のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
+| 71 | [連続値の確率](../comb/continuous-probability.md) | 数え上げ・確率・ゲーム | 余裕があれば |
 | 72 | [非不偏ゲーム](../comb/partizan-games.md) | 数え上げ・確率・ゲーム | 余裕があれば |
 | 73 | [Suffix Array と LCP 配列](../string/suffix-array.md#kth-substring) › 部分文字列の辞書順 K 番目（黄のページの節） | 文字列 | 準必修 |
 | 74 | [Suffix Automaton と発展の文字列アルゴリズム](../string/suffix-automaton.md) | 文字列 | 準必修 |
@@ -779,7 +779,7 @@ iPhone や Mac の Safari では、Safari を使った 7 日の間にこのサ�
 
 ## 参考 {#references}
 
-- [AtCoder Problems の time-estimator（function.py）](https://github.com/kenkoooo/AtCoderProblems/blob/master/lambda-functions/time-estimator/function.py)：difficulty と予測解答時間のモデル。到達の目安の表は、このモデルの値を tools/ap.py のデータで集計した
+- [kenkoooo「AtCoderProblems / time-estimator/function.py」](https://github.com/kenkoooo/AtCoderProblems/blob/master/lambda-functions/time-estimator/function.py)：difficulty と予測解答時間のモデル。到達の目安の表は、このモデルの値を tools/ap.py のデータで集計した
 - [E869120「AtCoder での実力アップを目指そう！　～競プロ典型 90 問～」](https://qiita.com/e869120/items/1b2a5f0f07fd927e44e9)：★と difficulty の帯の対応
 - [nouka28「AtCoderで入黄しました！！」](https://qiita.com/nouka28/items/a8b06865331838642ff2)：青から黄で新しく覚えた知識を本番で使った場面
 - [ks2m「AtCoder黄色になるまでにやったこととやっていないこと」](https://ks2m.hatenablog.com/entry/2021/03/08/230503)：学ばないまま黄色に届いた手法と、青 diff の正答率

@@ -24,8 +24,8 @@ sections:
   - {title: 逆変換（メビウス変換）と回す向き, anchor: inverse}
   - {title: GCD 畳み込み・LCM 畳み込み, anchor: gcd-lcm-convolution}
   - {title: 部分集合のゼータ変換との対応（指数ベクトルの累積和）, anchor: vs-subset}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

@@ -19,7 +19,7 @@ signs:
   - {type: phrase, text: 最大の連結成分の大きさがちょうど L}
 acl: []
 frequency: B
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 3 問
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 5 問
 sections:
   - {title: 連結 = 全体 − 非連結, anchor: complement}
   - {title: 頂点 1 を含む成分で分類する（重複を防ぐ代表）, anchor: component-of-1}
@@ -27,8 +27,8 @@ sections:
   - {title: 頂点集合ごとの DP（3^N）, anchor: subset-dp}
   - {title: 距離の層ごとに頂点を配る, anchor: bfs-layers}
   - {title: 「ちょうど L」を「L 以下」の差で数える, anchor: exactly-l}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -230,7 +230,7 @@ $$
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [ABC180 F. Unbranched](https://atcoder.jp/contests/abc180/tasks/abc180_f)（diff 2419）：自己ループのない（多重辺は許す）N 頂点 M 辺の無向グラフで、各連結成分がパスかサイクルで、最大の連結成分の頂点数がちょうど L のものの数を求める。
+- [ABC180 F. Unbranched](https://atcoder.jp/contests/abc180/tasks/abc180_f)（diff 2419）：自己ループのない（多重辺は許す）N 頂点 M 辺の無向グラフで、各連結成分がパスか閉路で、最大の連結成分の頂点数がちょうど L のものの数を求める。
 - [ABC321 G. Electric Circuit](https://atcoder.jp/contests/abc321/tasks/abc321_g)（diff 2439）：N ≤ 17 個の部品の赤い端子と青い端子（どちらも M 個）を一様にランダムに 1 対 1 でつなぐとき、できるグラフの連結成分の個数の期待値を求める。
 
 </div>
@@ -280,7 +280,7 @@ $$
 | 入力のグラフの辺の部分集合で、連結になるもの（$N \le 17$ 程度） | 頂点集合の DP（$O(3^N)$） |
 | 頂点 1 からの距離に条件の付いたグラフ | 距離の層の DP（$O(N^3)$） |
 | 全域木の数（辺をちょうど $N - 1$ 本選んで連結） | [行列木定理](../graph/matrix-tree-theorem.md#laplacian) |
-| 番号の付いた木の数・次数を決めた木の数 | [ラベル付き木の数と Prüfer 列](../comb/cayley-pruefer.md) |
+| 番号の付いた木の数・次数を決めた木の数 | [ラベル付き木の数え上げ](../comb/cayley-pruefer.md) |
 
 頂点集合の DP は、集合べき級数の exp・log（[高速ゼータ変換](../comb/zeta-mobius-subset.md)を発展させたもの）を使うと $O(N^2 2^N)$ にできるが、$N \le 17$ 程度なら $O(3^N)$ で足りる。数えるのではなく、与えられたグラフ 1 つが連結かを判定するだけなら、[連結成分](../graph/connected-components.md)を求めればよい。
 

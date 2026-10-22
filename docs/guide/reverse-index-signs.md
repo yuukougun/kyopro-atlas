@@ -21,7 +21,7 @@ sections:
   - {title: 1 つのサインに複数の手法が当たるとき, anchor: disambiguation}
   - {title: 題材から引く, anchor: by-topic}
   - {title: 状況から引く, anchor: by-situation}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -70,7 +70,7 @@ flowchart TD
 - 「異なる」が値の違いか、添字の違いかを取り違えた。
 - 求めるのが最大か最小かを逆に読んだ。
 - グラフに木や DAG の条件が付いているのを見落とした（逆に、付いていると思い込んだ）。
-- N の上限を読み違えた。入力の頂点番号が 1 始まりか 0 始まりかを確かめていない。
+- N の上限を読み違えた。入力の頂点番号が 1-indexed か 0-indexed かを確かめていない。
 
 表の列の「レベル」は、行のページの帯（基礎・水・青・黄・発展）である。案内や題材のページは帯を持たないので「—」になる。本文がまだないページ（いまはない）には、ページ名の後に「（準備中）」が付く。解いた後で、どの条件がその手法を呼んだのかを一言でメモしておくと、次に同じサインを見たときに思い出しやすい（[精進の仕方の記録](../guide/practice-method.md#records)）。
 
@@ -148,7 +148,7 @@ flowchart TD
 | 長さが 2 倍・3 倍で増える構造の K 番目 | [再帰的な構造](../basics/recursion-structure.md) | 基礎 |
 | フラクタル図形を描く | [再帰的な構造](../basics/recursion-structure.md) | 基礎 |
 | 区間・部分列の全部の組について数える | [分割統治](../basics/divide-and-conquer.md) | 黄 |
-| 区間 [L, R] の品物だけを使うナップサックを多数のクエリで答える | [分割統治](../basics/divide-and-conquer.md) | 黄 |
+| 閉区間 [L, R] の品物だけを使うナップサックを多数のクエリで答える | [分割統治](../basics/divide-and-conquer.md) | 黄 |
 | 条件が複雑で直接は数えにくい・判定しにくい | [言い換えの典型](../thinking/reformulation.md) | 水 |
 | x 方向と y 方向・bit ごと・連結成分ごとに結果が独立に決まる | [言い換えの典型](../thinking/reformulation.md) | 水 |
 | 3 つ組 (i < j < k) を数える | [一部を固定して数える](../thinking/fix-variable.md) | 基礎 |
@@ -628,7 +628,7 @@ flowchart TD
 | 法 M が素数とは限らない一次方程式 a x ≡ b (mod M) | [拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md) | 水 |
 | A_i + B_j の矩形・全体に x を足したときの gcd | [GCD の性質](../math/gcd-properties.md) | 青 |
 | 区間の gcd を多数答える | [GCD の性質](../math/gcd-properties.md) | 青 |
-| mod N で A ずつ進む操作で全ての点に行けるか | [GCD の性質](../math/gcd-properties.md) | 青 |
+| mod N で A ずつ進む操作ですべての点に行けるか | [GCD の性質](../math/gcd-properties.md) | 青 |
 | 周期の違う複数の条件が同時に成り立つ最初の時刻 | [中国剰余定理](../math/crt.md) | 青 |
 | x を m_i で割った余り r_i が複数与えられる | [中国剰余定理](../math/crt.md) | 青 |
 | 法が素数でない数え上げを素因数ごとに分けて最後に戻す | [中国剰余定理](../math/crt.md) | 青 |
@@ -658,16 +658,16 @@ flowchart TD
 | 条件を満たす押し方の数を mod で答える | [掃き出し法](../math/gaussian-elimination.md) | 青 |
 | 各頂点に書いた値の、隣接する頂点の XOR が 0 になるように決める | [掃き出し法](../math/gaussian-elimination.md) | 青 |
 | 部分集合（部分列）の XOR として作れる値の個数・最大値・K 番目 | [XOR 基底](../math/xor-basis.md) | 黄 |
-| 全ての値を XOR で作れるように最小コストで選ぶ | [XOR 基底](../math/xor-basis.md) | 黄 |
+| すべての値を XOR で作れるように最小コストで選ぶ | [XOR 基底](../math/xor-basis.md) | 黄 |
 | 経路の重みが辺の重みの XOR で、同じ辺を何度通ってもよい（ウォーク） | [XOR 基底](../math/xor-basis.md) | 黄 |
 | 行列式を mod p で求める | [行列式](../math/determinant.md) | 発展 |
 | 全域木の個数・交わらない経路の組の数 | [行列式](../math/determinant.md) | 発展 |
-| 全ての k について、和が k になる組の数を求める | [畳み込みの使い方](../math/convolution-ntt.md) | 青 |
-| 列をずらしたときの一致数・不一致の数を、全てのずらし方について求める | [畳み込みの使い方](../math/convolution-ntt.md) | 青 |
+| すべての k について、和が k になる組の数を求める | [畳み込みの使い方](../math/convolution-ntt.md) | 青 |
+| 列をずらしたときの一致数・不一致の数を、すべてのずらし方について求める | [畳み込みの使い方](../math/convolution-ntt.md) | 青 |
 | ワイルドカード（?）を含むパターンの照合 | [畳み込みの使い方](../math/convolution-ntt.md) | 青 |
 | mod 10^9+7 や整数のままで畳み込みたい | [FFT・NTT の仕組みと任意 mod の畳み込み](../math/fft-ntt.md) | 発展 |
 | 畳み込みを自作ライブラリで実装したい・浮動小数の FFT の誤差が心配 | [FFT・NTT の仕組みと任意 mod の畳み込み](../math/fft-ntt.md) | 発展 |
-| i XOR j = k となる組を全ての k について数える | [XOR 畳み込み](../math/hadamard-transform.md) | 発展 |
+| i XOR j = k となる組をすべての k について数える | [XOR 畳み込み](../math/hadamard-transform.md) | 発展 |
 | XOR が 0 でない Nim の盤面の数を数える | [XOR 畳み込み](../math/hadamard-transform.md) | 発展 |
 | Π(1 + a_i x) のような多数の一次式の積の係数 | [分割統治 FFT・オンライン畳み込み](../math/online-convolution.md) | 発展 |
 | (1 + x^v) を掛ける・割るように、集合への追加と削除を繰り返して個数の分布を求める | [形式的冪級数と多項式の演算](../math/fps-basics.md) | 発展 |
@@ -854,7 +854,7 @@ flowchart TD
 | 文字が 1 つずつ来るたびに、パターンが現れたかを判定する | [KMP 法と文字列の周期](../string/kmp.md) | 青 |
 | 回文にするための最小の操作回数（書き換え・一斉置換） | [回文の扱いと Manacher](../string/palindrome.md) | 水 |
 | 回文になる部分文字列の個数 | [回文の扱いと Manacher](../string/palindrome.md) | 水 |
-| グラフの歩道の文字列が回文になる最短の長さ | [回文の扱いと Manacher](../string/palindrome.md) | 水 |
+| グラフのウォークの文字列が回文になる最短の長さ | [回文の扱いと Manacher](../string/palindrome.md) | 水 |
 | 長さ K の回文を部分文字列に含まないように埋める方法の数 | [回文の扱いと Manacher](../string/palindrome.md) | 水 |
 | 全ペアの最長共通接頭辞（LCP）の長さの和 | [Trie](../string/trie.md) | 水 |
 | 各文字列について、ほかの文字列との LCP の最大 | [Trie](../string/trie.md) | 水 |
@@ -1250,5 +1250,5 @@ flowchart TD
 ## 参考 {#references}
 
 - [Motsu_xe「解法キーアイデア集」](https://motsu-xe.hatenablog.com/entry/2019/12/17/173222)：引く前に確かめる誤読の例の一部
-- [algo-logic「競技プログラミングで解法を思いつくための典型的な考え方」](https://algo-logic.info/how-to-think-cp/)：言い回し・題材ごとに考え方を束ねる分け方
+- [アルゴリズムロジック「競技プログラミングで解法を思いつくための典型的な考え方」](https://algo-logic.info/how-to-think-cp/)：言い回し・題材ごとに考え方を束ねる分け方
 - [chokudai「競技プログラミングの強みと「典型力」について」](https://chokudai.hatenablog.com/entry/2018/04/23/165232)：典型の組合せと、解いた後にどの要素がその手法を呼んだかを言葉にする習慣

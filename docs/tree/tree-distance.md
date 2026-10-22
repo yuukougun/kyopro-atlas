@@ -20,11 +20,11 @@ acl: []
 frequency: B
 frequency_evidence: recent 1（abc451_e）・前提として 3 ページに届く（直接 2）・古い ABC 3 問
 sections:
-  - {title: 1 点からの距離（ダイクストラはいらない）, anchor: from-one}
+  - {title: 1 点からの距離（ダイクストラ法はいらない）, anchor: from-one}
   - {title: 2 点からの距離を比べる, anchor: from-two}
   - {title: 根からの累積値で 2 点間を表す（XOR は LCA が不要、和は LCA が要る）, anchor: root-prefix}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -42,7 +42,7 @@ updated: 2026-10-21
 
 木の上の距離は、一般のグラフの最短路より単純に求まる。木では 2 点を結ぶパスがただ 1 本なので、「最短」を選ぶ必要がなく、パスに沿って辺の重みを足すだけで距離になる。この性質を使う型は、1 点から求める距離・2 点からの距離の比較・根からの累積値の 3 つである。頂点は 0-indexed で書き、2 点 $u, v$ の距離を $d(u, v)$、根からの累積を $S[v]$ と書く。
 
-## 1 点からの距離（ダイクストラはいらない） {#from-one}
+## 1 点からの距離（ダイクストラ法はいらない） {#from-one}
 
 始点 $s$ を根とみなして木をたどると、頂点 $v$ からその子 $c$ へ進むときに $\mathrm{dist}[c] = \mathrm{dist}[v] + w(v, c)$ と決めてよい。$s$ から $c$ へのパスは「$s$ から $v$ へのパス」に辺 $(v, c)$ を足したもの 1 本だけで、ほかに比べる道がないからである。
 

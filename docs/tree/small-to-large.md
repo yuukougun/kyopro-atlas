@@ -27,8 +27,8 @@ sections:
   - {title: 森に辺を足すとき小さい方を根付け直す, anchor: reroot-smaller, level: 黄}
   - {title: 部分木ごとの集合の併合（木 DP での使い方は DP の章）, anchor: subtree-merge, level: 黄}
   - {title: DSU on Tree（重い子の結果を残す）, anchor: dsu-on-tree, level: 黄}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -309,10 +309,10 @@ DSU on Tree が使えるのは、答えを部分木ごとに求めればよく�
 
 - [AtCoder Library「DSU」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/dsu.md)：`merge` が新しい代表元を返すこと・計算量（v1.6 の手元の版と `dsu.hpp` で、サイズの大きい方が残ることを確かめた）
 - [drken「AtCoder ABC 329 F - Colored Ball」](https://drken1215.hatenablog.com/entry/2025/03/13/094339)：例題 abc329_f の制約と、入れ替えてから移す方針
-- [drken「AtCoder ABC 183 F - Confluence」](https://drken1215.hatenablog.com/entry/2020/12/20/192100)：例題 abc183_f の制約と、代表元に map を持たせる方針・併合過程の木による別解
+- [drken「AtCoder ABC 183 F - Confluence (水色, 600 点)」](https://drken1215.hatenablog.com/entry/2020/12/20/192100)：例題 abc183_f の制約と、代表元に map を持たせる方針・併合過程の木による別解
 - [Kazun「ABC 314 F」](https://kazun-kyopro.hatenablog.com/entry/ABC/314/F)：練習 abc314_f の基準値とずれの持ち方
-- [kmjp「AtCoder ABC #394 G」](https://kmjp.hatenablog.jp/entry/2025/02/24/1000)：練習 abc394_g の問いと、高い順に併合してクエリの集合を移す方針
-- [drken「AtCoder ABC 350 G - Mediator」](https://drken1215.hatenablog.com/entry/2024/04/21/014200)：練習 abc350_g の問いと、小さい方を根付け直す方針・共通の隣接点の 3 通り
-- [drken「AtCoder ABC 359 G - Sum of Tree Distance」](https://drken1215.hatenablog.com/entry/2024/06/23/025552)：練習 abc359_g の map の持ち方と距離の和の式
+- [kmjp「AtCoder ABC #394 (鹿島建設プログラミングコンテスト2025) : G - Dense Buildings」](https://kmjp.hatenablog.jp/entry/2025/02/24/1000)：練習 abc394_g の問いと、高い順に併合してクエリの集合を移す方針
+- [drken「AtCoder ABC 350 G - Mediator (3D, 黄色, 600 点)」](https://drken1215.hatenablog.com/entry/2024/04/21/014200)：練習 abc350_g の問いと、小さい方を根付け直す方針・共通の隣接点の 3 通り
+- [drken「AtCoder ABC 359 G - Sum of Tree Distance (3D, 黄色, 600 点)」](https://drken1215.hatenablog.com/entry/2024/06/23/025552)：練習 abc359_g の map の持ち方と距離の和の式
 - [kmjp「AtCoder ABC #454 G」](https://kmjp.hatenablog.jp/entry/2026/04/19/0900)：力試し abc454_g の問いと、DSU on Tree で個数の個数を持つ方針
-- [ikatakos「AtCoder Beginner Contest 454」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0418_abc454)：力試し abc454_g の制約と DSU on Tree の手順（解法の部分だけ）
+- [ikatakos「キーサイト・テクノロジープログラミングコンテスト（AtCoder Beginner Contest 454）E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0418_abc454)：力試し abc454_g の制約と DSU on Tree の手順（解法の部分だけ）

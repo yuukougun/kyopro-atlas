@@ -25,7 +25,7 @@ sections:
   - {title: 演算の一覧と計算量（inv・log・exp・pow・sqrt）, anchor: operations}
   - {title: 多項式の割り算・Taylor shift・多点評価, anchor: polynomial-ops}
   - {title: ACL の convolution と自作するときの要点, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 

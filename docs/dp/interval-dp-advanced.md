@@ -9,7 +9,7 @@ order: 210
 level: 黄
 kind: [DP, 数え上げ]
 prerequisites: [interval-dp, binomial-coefficient]
-related: [tree-dp, grundy-number#dp, euler-tour, digit-dp]
+related: [tree-dp, grundy-number#dp, euler-tour, digit-dp, tree-construction#from-order]
 summary: 区間 DP の上で、DFS 順の区間を部分木とみる木の数え上げ、区間ごとの Grundy 数、訪れた範囲の両端を状態にする移動などを解く。区間の内と外を独立に数え、順序を二項係数で混ぜる設計が多い。
 complexity: 状態は区間の O(N^2) 個。部分木や区間の分け方を全探索すると O(N^3)、訪れた範囲を左右に 1 つ伸ばすだけなら O(N^2)
 signs:
@@ -19,14 +19,14 @@ signs:
   - {type: constraint, text: N ≤ 400 前後}
 acl: []
 frequency: B
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 7 問
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 4 問
 sections:
   - {title: DFS 順の区間＝部分木（木の数え上げ）, anchor: dfs-order-trees}
   - {title: 区間ごとの Grundy 数（ゲーム）, anchor: grundy}
   - {title: 訪れた区間の両端と今いる端を状態にする, anchor: visited-range}
   - {title: '桁と区間で分ける（''?'' を含む数の列）', anchor: digits-and-ranges}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -81,6 +81,7 @@ $g$ の和の $m$ は先頭の部分木の終わりで、$m = r$ なら区間全
 - **括弧列と森**：行きがけ順で「入る」を `(`、「出る」を `)` と書くと、森は正しい括弧列と一対一に対応する。部分木は対応する括弧の組で囲まれた区間になる。上の $f$ と $g$ の分け方は、括弧列を「左端の `(` とその相手で閉じた塊」と「残り」に分ける形で、[左端の相手で分ける型](../dp/interval-dp.md#pair-with-left-end)と同じである。「行きがけ順」「括弧列」「区間の入れ子」のどれで書かれていても、同じ DP で数えられる
 - **順序も数えるときは二項係数で混ぜる**：木の形に加えて「親より後に消す」のような頂点の順序まで数えるなら、$g$ の遷移で先頭の部分木と残りの森の順序の混ぜ方を掛ける。2 つの部分の間に制約がなければ、$m - l$ 個と $r - m$ 個の並べ方を混ぜる $\binom{r - l}{m - l}$ 通りである（[二項係数](../comb/binomial-coefficient.md)）。各部分の中の順序は $f$ と $g$ が数えている
 - **帰りがけ順・BFS 順**：帰りがけ順では部分木は根で終わる区間になるので、右端を根にして同じように分ける。BFS 順では部分木が区間にならないので、この型は使えない。与えられた順で部分木が区間になるかを最初に確かめる
+- **区間にならない訪問順**：「訪問済みの頂点に隣接する中で番号が最小の頂点へ進む」のように部分木が区間にならない規則でも、各頂点の親になれる位置が独立に決まるなら、候補の個数の積で数えられる（[訪問順から親の候補を数える](../tree/tree-construction.md#from-order)）
 
 ## 区間ごとの Grundy 数（ゲーム） {#grundy}
 
@@ -230,4 +231,4 @@ h(k, l, r, d):
 - [drken「AtCoder ABC 206 F - Interval Game 2 (黄色, 600 点)」](https://drken1215.hatenablog.com/entry/2021/06/19/224100)：練習 ABC206 F の範囲ごとの Grundy 数と、左右の XOR の mex
 - [Jijidawang「ABC266 ~ 273 题解」](https://www.cnblogs.com/CDOI-24374/p/16792927.html)：練習 ABC273 F の訪れた範囲の両端と今いる端を状態にする DP と $O(N^2)$
 - [kmjp「AtCoder ABC #292 : G - Count Strictly Increasing Sequences」](https://kmjp.hatenablog.jp/entry/2023/03/04/0900)：練習 ABC292 G の区間・桁・数字を状態にしたメモ化再帰と計算量
-- [kanpurin「競技プログラミング　典型問題メモ」](https://kanpurin.hatenablog.com/entry/2020/04/07/182948)：区間 DP の問題の一覧（帯の見当）
+- [かんプリン「競技プログラミング　典型問題メモ」](https://kanpurin.hatenablog.com/entry/2020/04/07/182948)：区間 DP の問題の一覧（帯の見当）

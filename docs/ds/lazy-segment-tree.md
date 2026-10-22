@@ -30,8 +30,8 @@ sections:
   - {title: 境界（葉の長さ・e()・代入の番兵・INF・mod）, anchor: boundaries}
   - {title: 双対セグメント木（区間作用・一点取得）, anchor: dual-segment-tree}
   - {title: 保つ性質と push の手順（自作するとき）, anchor: invariants, level: 青}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -359,6 +359,6 @@ ACL の実装は再帰を使わず、下から上へ書いている。区間作�
 - [AtCoder Library「Lazy Segtree」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/lazysegtree.md)：載せられる条件・関数の約束・計算量（v1.6 の手元の版で確かめた）
 - [AtCoder Library「lazysegtree.hpp」](https://github.com/atcoder/ac-library/blob/master/atcoder/lazysegtree.hpp)：`seg(n)` が `e()` で埋めること、`get` が祖先を push すること、端がそろった段の push を省くこと
 - [drken「ACL Practice Contest K - Range Affine Range Sum」](https://drken1215.hatenablog.com/entry/2023/11/15/021000)：例題 practice2_k の値と作用の設計・制約
-- [ikatakos「AtCoder Beginner Contest 473」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0829_abc473)：例題 abc473_f の言い換えと操作の対応（解法の部分だけ）
+- [ikatakos「AtCoder Beginner Contest 473 D,E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0829_abc473)：例題 abc473_f の言い換えと操作の対応（解法の部分だけ）
 - [merom686「ABC382」](https://merom686.hatenablog.com/entry/2024/12/01/023230)：例題 abc382_f の処理の順序（下の棒から）と、区間最小値・区間 chmin の組
-- [ikatakos「AtCoder Beginner Contest 455」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0425_abc455)：練習 abc455_f の値の持ち方（解法の部分だけ）
+- [ikatakos「Ｓｋｙ株式会社プログラミングコンテスト2026（AtCoder Beginner Contest 455）F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0425_abc455)：練習 abc455_f の値の持ち方（解法の部分だけ）

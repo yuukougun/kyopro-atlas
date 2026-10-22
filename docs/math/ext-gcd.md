@@ -21,7 +21,7 @@ signs:
 acl: [inv_mod]
 verify: []
 frequency: B
-frequency_evidence: recent 1（abc459_g）・前提として 1 ページに届く（直接 1）・古い ABC 2 問
+frequency_evidence: recent 1（abc459_g）・前提として 1 ページに届く（直接 1）・古い ABC 4 問
 sections:
   - {title: 互除法の各段で、余りを a と b の整数係数の組み合わせとして持ち続ける, anchor: procedure}
   - {title: ax + by = c の解の存在条件と一般解 x = x0 + k·b/g, anchor: general-solution}
@@ -29,8 +29,8 @@ sections:
   - {title: 一次合同式 ax ≡ b (mod m) と、gcd で割ること, anchor: linear-congruence}
   - {title: 応用の型（円周の移動・倍数の余り・面積 1 の格子点・CRT）, anchor: applications}
   - {title: ACL では（inv_mod の内部の inv_gcd。拡張ユークリッドそのものは公開 API にない）, anchor: acl}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -270,8 +270,8 @@ $x$ 回進んだ後の位置は玉座から $S + Kx$ 個先なので、玉座に
 - [drken「「998244353 で割ったあまり」の求め方を総特集！ 〜 逆元から離散対数まで 〜」](https://qiita.com/drken/items/3b4fdf0a78e7a138cd9a)：逆元が存在する条件と、C++ の `%` が負を返す問題
 - [drken「AtCoder ABC 186 E - Throne (1D, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2020/12/20/015100)：例題の立式と、gcd で割ってから逆元を求める方針
 - [drken「AtCoder ABC 060 B - Choose Integers (4Q, 茶色, 200 点)」](https://drken1215.hatenablog.com/entry/2024/10/18/025758)：練習の方針（gcd で決まることと全探索）
-- [AtCoder Library のドキュメント（math）](https://github.com/atcoder/ac-library/blob/master/document_ja/math.md)：`inv_mod`・`crt` の要件と計算量
+- [AtCoder Library「Math」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/math.md)：`inv_mod`・`crt` の要件と計算量
 - [AtCoder Library のソース（internal_math.hpp）](https://github.com/atcoder/ac-library/blob/master/atcoder/internal_math.hpp)：`inv_gcd` が返す値の範囲と係数の上界
 - [プロひろ「ABC340 F問題（S = 1）を解く」](https://programming-hiroba.com/abc340-f/)：練習 ABC340 F の行列式による面積と拡張ユークリッドの解の使い方
-- [drken「ACL Contest 1 B - Sum is Multiple (2D, 青色, 600 点)」](https://drken1215.hatenablog.com/entry/2020/09/23/080300)：力試し ACL1 B の 2N の分け方と一次合同式
+- [drken「AtCoder ACL Contest 1 B - Sum is Multiple (2D, 青色, 600 点)」](https://drken1215.hatenablog.com/entry/2020/09/23/080300)：力試し ACL1 B の 2N の分け方と一次合同式
 - [kmjp「AtCoder ABC #315 (キーエンスプログラミングコンテスト2023夏) : G - Ai + Bj + Ck = X (1 <= i, j, k <= N)」](https://kmjp.hatenablog.jp/entry/2023/08/21/0900)：力試し ABC315 G の i の全探索と一般解の範囲の数え方

@@ -28,8 +28,8 @@ sections:
   - {title: 終端の印を失敗リンク先から受け継ぐ, anchor: inherit-terminal}
   - {title: 照合オートマトンとして使う（DP・行列累乗）, anchor: as-automaton}
   - {title: 禁止語の貪欲：一致したら書き換えて状態を根に戻す, anchor: forbidden-greedy, level: 黄}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

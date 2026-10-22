@@ -17,15 +17,15 @@ signs:
   - {type: constraint, text: クエリが 10^6 級で、1 回 O(1) で答えたい}
 acl: []
 verify: [staticrmq]
-frequency: C
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 1 問
+frequency: B
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 3 問
 sections:
   - {title: 何ができるか（静的・冪等な演算なら O(1)）, anchor: what-it-does}
   - {title: なぜ重なってよいか（冪等）と k = ⌊log₂ L⌋, anchor: idempotent}
   - {title: 作り方（長さが 2 のべきの区間の表と log の表）, anchor: build}
   - {title: 冪等でない演算（2 べきに分けて O(log N)、Disjoint Sparse Table）, anchor: disjoint-sparse-table, level: 発展}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

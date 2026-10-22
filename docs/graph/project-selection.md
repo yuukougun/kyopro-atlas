@@ -29,8 +29,8 @@ sections:
   - {title: 表せる項と表せない項（劣モジュラ）, anchor: submodular}
   - {title: 二部グラフで片側の意味を反転する, anchor: flip-side}
   - {title: 多値変数を頂点の列で表す, anchor: multi-valued, level: 発展}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -357,7 +357,7 @@ $$
 - [drken「燃やす埋める問題（最小カット問題）の考え方を総整理！ 前編 〜 カットの定義から現実への応用例まで 〜」](https://qiita.com/drken/items/52aafd8c073b37749539)：s 側と t 側の約束、辺の規則、利得と負の費用の読み替え、表せる条件と表せない条件。例題 typical90_an・abc472_g と練習 tessoku_book_eo の組み方
 - [drken「2 変数劣モジュラ関数のグラフ表現 〜「燃やす埋める」の早見表 〜」](https://drken1215.hatenablog.com/entry/2023/11/24/034300)：1 変数・2 変数の項の早見表、$B + C \ge A + D$ の条件、$K$ 変数の利得の補助頂点
 - [drken「典型 90 問 040 - Get More Money（★7）」](https://drken1215.hatenablog.com/entry/2023/11/25/070850)：例題 typical90_an の問いと条件の向き・制約
-- [kmjp「AtCoder ABC #445 G. Knight Placement」](https://kmjp.hatenablog.jp/entry/2026/02/14/1030)：例題 abc445_g の二部グラフである理由と、片側を反転したグラフ
+- [kmjp「AtCoder ABC #445 : G - Knight Placement」](https://kmjp.hatenablog.jp/entry/2026/02/14/1030)：例題 abc445_g の二部グラフである理由と、片側を反転したグラフ
 - [kmjp「AtCoder ABC #259 G. Grid Card Game」](https://kmjp.hatenablog.jp/entry/2022/07/09/0900)：練習 abc259_g の列の反転と容量
 - [kmjp「AtCoder ABC #326 G. Unlock Achievement」](https://kmjp.hatenablog.jp/entry/2023/10/28/1100)：練習 abc326_g のレベルごとの頂点
 - [kmjp「AtCoder ABC #193 F. Zebraness」](https://kmjp.hatenablog.jp/entry/2021/02/27/1000)：練習 abc193_f の市松模様での反転

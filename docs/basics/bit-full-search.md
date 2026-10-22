@@ -20,15 +20,15 @@ signs:
   - {type: phrase, text: 2 つのグラフが頂点の付け替えで一致するか}
 acl: []
 frequency: A
-frequency_evidence: recent 0・前提として 14 ページに届く（直接 6）・古い ABC 10 問
+frequency_evidence: recent 0・前提として 14 ページに届く（直接 6）・古い ABC 8 問
 sections:
   - {title: bit 全探索の書き方（mask の i ビット目で要素 i を選ぶ）, anchor: bitmask}
   - {title: k 進の全探索（3^N）, anchor: base-k}
   - {title: 決めてから整合性を確かめる型, anchor: assume-and-check}
   - {title: 片側を bit で決めて残りは貪欲, anchor: half-greedy, level: 水}
   - {title: 順列全探索と next_permutation（昇順から始める・重複要素）, anchor: permutations}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

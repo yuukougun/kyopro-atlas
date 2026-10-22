@@ -18,7 +18,7 @@ signs:
 acl: []
 verify: []
 frequency: A
-frequency_evidence: recent 0・前提として 39 ページに届く（直接 6）・古い ABC 2 問
+frequency_evidence: recent 0・前提として 39 ページに届く（直接 6）・古い ABC 3 問
 sections:
   - {title: 途中で余りを取ってよい理由（合同式の性質）, anchor: why-mod}
   - {title: 引き算の後の負の数を 0 以上に直す, anchor: negative}
@@ -26,8 +26,8 @@ sections:
   - {title: 割り算はそのままではできない（→ 逆元）, anchor: division}
   - {title: mod を取った値で大小比較・最大値を考えてはいけない, anchor: no-compare}
   - {title: なぜ 998244353 か（素数で、NTT に向く形）, anchor: why-998244353}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

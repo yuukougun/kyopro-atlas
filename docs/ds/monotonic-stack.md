@@ -21,7 +21,7 @@ signs:
 acl: []
 verify: [queue_operate_all_composite, deque_operate_all_composite]
 frequency: B
-frequency_evidence: recent 1（abc480_g）・前提として届くページなし・古い ABC 5 問
+frequency_evidence: recent 1（abc480_g）・前提として届くページなし・古い ABC 6 問
 sections:
   - {title: 単調スタックの手順と保つ性質, anchor: procedure}
   - {title: ヒストグラムの最大長方形, anchor: histogram}
@@ -31,8 +31,8 @@ sections:
   - {title: DP の遷移の高速化に使う, anchor: dp-transition}
   - {title: Cartesian tree（最大値で区間を割る再帰を O(N) で作る）, anchor: cartesian-tree, level: 黄}
   - {title: SWAG：スタック 2 本で作る総積つきキュー, anchor: swag, level: 発展}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -347,7 +347,7 @@ $B$ から $F$ へ移すとき、$B$ の上（キューの末尾側）から順�
 - [けんちょん「AtCoder ABC 359 E - Water Tank (1D, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2024/11/04/011552)：例題 abc359_e の DP の式と番兵 $H_0 = \infty$
 - [けんちょん「AtCoder AGC 005 B - Minimum Sum (青色, 400 点)」](https://drken1215.hatenablog.com/entry/2019/04/04/210200)：寄与 $(i - L_i)(R_i - i)$ の数え方と、ヒストグラムの最大長方形との関係
 - [けんちょん「Donutsプロコンチャレンジ2015 C - 行列のできるドーナツ屋 (1Q)」](https://drken1215.hatenablog.com/entry/2024/11/02/195011)：練習 donuts_2015_3 の方針（左から走査して大きさを出力）
-- [けんちょん「AtCoder ARC 189 D - Takahashi is Slime (3D, 黄色, 700 点)」](https://drken1215.hatenablog.com/entry/2025/01/04/101100)：力試し arc189_d の最大値で割る分割統治と Cartesian tree、同じ最大値が並ぶ場合
+- [drken「AtCoder ARC 189 D - Takahashi is Slime (3D, 黄色, 700 点)」](https://drken1215.hatenablog.com/entry/2025/01/04/101100)：力試し arc189_d の最大値で割る分割統治と Cartesian tree、同じ最大値が並ぶ場合
 - [けんちょん「AtCoder ABC 311 G - One More Grid Task (3D, 黄色, 575 点)」](https://drken1215.hatenablog.com/entry/2023/07/23/190400)：力試し abc311_g の最小値の決め打ちと行ごとのヒストグラム
 - [atlantis「スライド最小値・最大値アルゴリズム from ABC352」](https://zenn.dev/atlantis/articles/8a4c3d20c05624)：練習 abc352_d を位置の列の窓の最大・最小に言い換えること
 - [ファイ「ABC435 F問題復習 （Cartesian Tree）」](https://note.com/hip_crow3665/n/ne7a656317cea)：練習 abc435_f を Cartesian tree の上の DFS で解くこと

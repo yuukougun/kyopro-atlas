@@ -19,15 +19,15 @@ signs:
   - {type: constraint, text: 'N, M ≤ 2×10^5、またはマスの数 H×W ≤ 10^6 程度'}
 acl: []
 frequency: A
-frequency_evidence: recent 3（abc453_d・abc460_d・abc472_d）・前提として 57 ページに届く（直接 10）・古い ABC 6 問
+frequency_evidence: recent 3（abc453_d・abc460_d・abc472_d）・前提として 57 ページに届く（直接 10）・古い ABC 5 問
 sections:
   - {title: 最初に見つけた距離が最短になる理由, anchor: why-shortest}
   - {title: 印は push のときに付ける・dist を −1 で初期化して訪問済みの印を兼ねる, anchor: mark-on-push}
   - {title: 経路復元（発見したときの親を記録して終点からたどる）, anchor: path-restoration}
   - {title: 多始点 BFS（超頂点から距離 0 の辺を張るのと同じ）, anchor: multi-source}
   - {title: 重みが 1 と 2 なら辺を割る・重み付きなら 01-BFS かダイクストラ法, anchor: weighted}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -227,7 +227,7 @@ BFS が使えるのは、すべての辺の重みが等しいときだけであ�
 ## 参考 {#references}
 
 - [drken「BFS (幅優先探索) 超入門！ 〜 キューを鮮やかに使いこなす 〜」](https://qiita.com/drken/items/996d80bcae64649a6580)：最短距離になる理由の背理法の筋、dist を −1 で初期化して印を兼ねること、push のときに印を付けること
-- [ageprocpp「最短路問題総特集！！！～BFSから拡張ダイクストラまで～」](https://qiita.com/ageprocpp/items/cdf67e828e1b09316f6e)：BFS・01-BFS・ダイクストラ法の使い分けと経路復元
+- [ageprocpp「最短経路問題総特集！！！～BFSから拡張ダイクストラまで～」](https://qiita.com/ageprocpp/items/cdf67e828e1b09316f6e)：BFS・01-BFS・ダイクストラ法の使い分けと経路復元
 - [E869120「レッドコーダーが教える、競プロ・AtCoder上達のガイドライン【中級編：目指せ水色コーダー！】」](https://qiita.com/e869120/items/eb50fdaece12be418faa)：例題の選定
 - [drken「AtCoder ABC 007 C - 幅優先探索 (3Q, 試験管緑色)」](https://drken1215.hatenablog.com/entry/2023/06/11/123536)：例題の問いと解法の確認
 - [Lanly「AtCoder Beginner Contest 383」](https://www.cnblogs.com/Lanly/p/18606772)：練習の方針（ABC383 C の多始点 BFS）

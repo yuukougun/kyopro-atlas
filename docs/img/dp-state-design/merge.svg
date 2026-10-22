@@ -1,5 +1,6 @@
-<svg viewBox="0 0 356 356" width="356" height="356" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="15">
-<rect width="356" height="356" fill="#ffffff"/>
+<svg viewBox="0 0 358 357" width="358" height="357" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="15">
+<g transform="translate(2 0)">
+<rect x="-2" y="0" width="358" height="357" fill="#ffffff"/>
 <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#555"/></marker></defs>
 <text x="8" y="24" font-weight="bold" font-size="14">過去の選び方（2 日目まで）</text>
 <text x="232" y="24" font-weight="bold" font-size="14">要約＝最後の活動</text>
@@ -39,4 +40,5 @@
 <line x1="174" y1="290" x2="228" y2="170" stroke="#555" stroke-dasharray="5,3" marker-end="url(#ar)"/>
 <text x="8" y="326" font-size="13">6 本の枝が 3 つの状態に合流する。</text>
 <text x="8" y="344" font-size="13">3 日目に選べる活動は末尾だけで決まる</text>
+</g>
 </svg>

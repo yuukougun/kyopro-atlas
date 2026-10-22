@@ -26,8 +26,8 @@ sections:
   - {title: 等式・正値・区間の和の条件の書き方, anchor: encodings}
   - {title: 負辺があればベルマンフォード法、なければダイクストラ法, anchor: which-algorithm}
   - {title: 整合性の判定だけなら重み付き Union-Find（データ構造の章）, anchor: consistency}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

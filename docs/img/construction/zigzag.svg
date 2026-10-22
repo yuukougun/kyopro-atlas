@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 330" width="520" height="330" font-family="sans-serif">
-<rect width="520" height="330" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 336" width="520" height="336" font-family="sans-serif">
+<g transform="translate(0 2)">
+<rect x="0" y="-2" width="520" height="336" fill="#ffffff"/>
 <text x="260.0" y="22" text-anchor="middle" font-size="15" fill="#222">N = 6：1, 6, 2, 5, 3, 4 と両端から交互に取る</text>
 <g transform="translate(0, 22)">
 <line x1="40" y1="150" x2="480" y2="150" stroke="#888" stroke-width="1.5"/>
@@ -32,4 +33,5 @@
 <text x="460" y="155" text-anchor="middle" font-size="15" fill="#222">6</text>
 </g>
 <text x="260.0" y="320" text-anchor="middle" font-size="15" fill="#444">実線は上へ、破線は下へ跳ぶ。差は 5, 4, 3, 2, 1 と 1 ずつ減る</text>
+</g>
 </svg>

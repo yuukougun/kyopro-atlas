@@ -26,8 +26,8 @@ sections:
   - {title: Grundy 数を DP で求める（区間・2 種類の石）, anchor: dp}
   - {title: 規則を見つける：小さい局面の表と周期, anchor: patterns}
   - {title: 使えない場合（1 手で複数を動かす・非不偏）, anchor: limitations}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -320,10 +320,10 @@ Grundy 数の XOR で判定できるのは、次をすべて満たすときだ�
 - [「Sprague–Grundy theorem」（Wikipedia 英語版）](https://en.wikipedia.org/wiki/Sprague%E2%80%93Grundy_theorem)：mex と Grundy 数の定義、和の Grundy 数がニム和になること
 - [「Kayles」（Wikipedia 英語版）](https://en.wikipedia.org/wiki/Kayles)：Kayles の Grundy 数が周期 12 でくり返すこと（始まりの位置はコード片の計算で確かめた）
 - [E869120「kyopro-tessoku」answer_A34.cpp](https://github.com/E869120/kyopro-tessoku/blob/main/codes/cpp/chap05/answer_A34.cpp)：例題 鉄則本 A34 の表の作り方（値が 0〜2 に収まる mex）
-- [programming-hiroba「ABC368 F」](https://programming-hiroba.com/abc368-f/)：例題 ABC368 F の問いと、素因数の個数の XOR で判定する方針
-- [hyouri「ABC368 F」（Qiita）](https://qiita.com/hyouri/items/f80a169412d5a969c25d)：例題 ABC368 F を約数への mex で表にする方法
+- [プロひろ「ABC368 F問題（Dividing Game）を解く」](https://programming-hiroba.com/abc368-f/)：例題 ABC368 F の問いと、素因数の個数の XOR で判定する方針
+- [hyouri「ABC368をPythonで（A～D,F）」](https://qiita.com/hyouri/items/f80a169412d5a969c25d)：例題 ABC368 F を約数への mex で表にする方法
 - [kmjp「AtCoder ABC #297 : G - Constrained Nim 2」](https://kmjp.hatenablog.jp/entry/2023/04/19/1000)：例題 ABC297 G の式（実験で見つける方針）
 - [E869120「kyopro_educational_90」031.cpp](https://github.com/E869120/kyopro_educational_90/blob/main/sol/031.cpp)：練習 典型90 031 の表の回し方と大きさ
-- [drken「AtCoder ABC 206 F - Interval Game 2」](https://drken1215.hatenablog.com/entry/2021/06/19/224100)：練習 ABC206 F の区間 DP（左右の XOR の mex）
+- [drken「AtCoder ABC 206 F - Interval Game 2 (黄色, 600 点)」](https://drken1215.hatenablog.com/entry/2021/06/19/224100)：練習 ABC206 F の区間 DP（左右の XOR の mex）
 - [kmjp「AtCoder ABC #278 : G - Generalized Subtraction Game」](https://kmjp.hatenablog.jp/entry/2022/11/24/0900)：力試し ABC278 G の列の長さごとの Grundy 数と、XOR を 0 に保つ方針
 - [kmjp「AtCoder ABC #255 : G - Constrained Nim」](https://kmjp.hatenablog.jp/entry/2022/06/12/0900)：力試し ABC255 G の例外の点だけを持つ方針

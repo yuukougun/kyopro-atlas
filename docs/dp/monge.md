@@ -20,7 +20,7 @@ signs:
 acl: []
 verify: [min_plus_convolution_convex_arbitrary, min_plus_convolution_convex_convex]
 frequency: B
-frequency_evidence: recent 1（abc458_g）・前提として 1 ページに届く（直接 1）・古い ABC 4 問
+frequency_evidence: recent 1（abc458_g）・前提として 1 ページに届く（直接 1）・古い ABC 2 問
 sections:
   - {title: Monge 性の定義と確かめ方, anchor: definition}
   - {title: monotone minima（分割統治で O(N log N)）, anchor: monotone-minima}
@@ -28,8 +28,8 @@ sections:
   - {title: Knuth-Yao（区間 DP の分割点の範囲を絞って O(N^2)）, anchor: knuth-yao}
   - {title: DP の値の凸性（個数について凸な答え）, anchor: dp-convexity}
   - {title: '凸な列どうしの (max,+) 畳み込み（差分のマージ）', anchor: convex-max-plus-convolution}
-  - {title: ライブラリでの検証, anchor: verify}
-stage: draft
+  - {title: ライブラリでの検証, anchor: library}
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -156,7 +156,7 @@ $$
 
 分割統治の各ノードで「左半分の上に凸な列」と「右半分の任意の列」を合成する問題は、各段がこの畳み込みになり、全体で $O(N \log^2 N)$ になる（[例題](#abc348_g)）。
 
-## ライブラリでの検証 {#verify}
+## ライブラリでの検証 {#library}
 
 ACL には Monge に関する機能がない。自作したら Library Checker の次の問題で確かめる。
 
@@ -194,19 +194,19 @@ ACL には Monge に関する機能がない。自作したら Library Checker �
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC383 G. Bar Cover](https://atcoder.jp/contests/abc383/tasks/abc383_g)（diff 3026）：長さ K の区間を重ならないように i 個選ぶときの和の最大を、すべての i について求める。
-- [ABC458 G. Children Yearn for the Evil Kindergarten](https://atcoder.jp/contests/abc458/tasks/abc458_g)（diff 2831）：日ごとの収入と費用が決まっている中で、最終的に脱出できる子どもの人数の最大を求める。
+- [ABC458 G. Children Yearn for the Evil Kindergarten](https://atcoder.jp/contests/abc458/tasks/abc458_g)（diff 2831）：毎日、集めたメダルにその日の分 $A_i$ を足して園児に配り直し、$B_i$ 枚に満たない園児は脱落、残りは $B_i$ 枚を失い、$C_i$ 枚以上を持つ園児は脱出できる。$N$ 日で脱出できる人数の最大を求める。
 
 </div>
 
 ??? note "練習の方針"
     - ABC383 G：長さ $K$ の区間の和を始点ごとの値の列にすると、始点どうしを $K$ 以上離して選ぶ問題になる。列を分割統治で半分に分け、$K$ は小さいので、各区間について「左端と右端で使えない位置がいくつあるか」の組ごとに、選ぶ個数についての最大値の列を持てる。この列は上に凸なので、左右の合成は差分のマージ（凸な列どうしの (max,+) 畳み込み）で行える。境目をまたいで使えない $K - 1$ 個を左右にどう分けるかごとにマージし、要素ごとの最大を取る。
-    - ABC458 G：答えの人数で二分探索し、日ごとに「脱出した人数」についての残りの量の最大値を DP で持つ。この値は人数について上に凸な折れ線で、脱出の遷移は 1 次の列との (max,+) 畳み込みになる。凸性を保つので、折れ線を傾きの列で持って更新すれば 1 回の判定がならし $O(N)$ で済む。
+    - ABC458 G：答えの人数で二分探索し、日ごとに「脱出した人数」についての残りの量の最大値を DP で持つ。この値は人数について上に凸な折れ線で、脱出の遷移は 1 次の列との (max,+) 畳み込みになる。凸性を保つので、折れ線を傾きの列で持って更新すれば 1 回の判定がならし $O(N)$ で済む（[Slope Trick の力試し](slope-trick.md#challenge)）。
 
 ## 参考 {#references}
 
 - [tatyam「Monge の手引書」](https://speakerdeck.com/tatyam_prime/monge-noshou-yin-shu)：学ぶための資料。Monge の定義と確かめ方の規則、monotone minima・SMAWK・LARSCH の計算量、Knuth-Yao と Alien DP との関係
 - [noshi91「簡易版 LARSCH Algorithm」](https://noshi91.hatenablog.com/entry/2023/02/18/005856)：学ぶための資料。段のない DP を $O(N \log N)$ で解く方法
-- [yosupo「Library Checker の問題（min_plus_convolution_convex_arbitrary ほか）」](https://github.com/yosupo06/library-checker-problems/tree/master/convolution)：検証に使う問題の内容（凸の定義と入出力の形）
+- [yosupo06「library-checker-problems/convolution」](https://github.com/yosupo06/library-checker-problems/tree/master/convolution)：検証に使う問題（min_plus_convolution_convex_arbitrary ほか）の内容（凸の定義と入出力の形）
 - [kmjp「AtCoder ABC #348 (トヨタ自動車プログラミングコンテスト2024#4) : G - Max (Sum - Max)」](https://kmjp.hatenablog.jp/entry/2024/04/08/0930)：例題 ABC348 G の方針（凸な列のマージと monotone minima による畳み込み）
 - [kmjp「AtCoder ABC #383 (大和証券プログラミングコンテスト2024) : G - Bar Cover」](https://kmjp.hatenablog.jp/entry/2024/12/13/0930)：練習 ABC383 G の方針
 - [ikatakos「SMBCプログラミングコンテスト #1（AtCoder Beginner Contest 458）F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0516_abc458)：練習 ABC458 G の方針（解法の節だけを読んだ）

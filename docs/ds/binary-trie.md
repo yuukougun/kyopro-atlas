@@ -10,7 +10,7 @@ level: 青
 kind: [データ構造, ビット演算]
 prerequisites: [trie, bit-operations]
 related: [bitwise-independence, ordered-set, kth-element, xor-basis]
-summary: 整数を 2 進数の上位ビットから Trie に入れ、各ノードに部分木の個数を持たせる。x との XOR の最小・最大、K 番目に小さい値、全体に XOR をかける操作を O(ビット数) で処理する。
+summary: 整数を 2 進数の上位 bit から Trie に入れ、各ノードに部分木の個数を持たせる。x との XOR の最小・最大、K 番目に小さい値、全体に XOR をかける操作を O(ビット数) で処理する。
 complexity: 追加・削除・x との XOR の最小と最大・K 番目はどれも O(B)（B はビット数）、領域 O(NB)
 signs:
   - {type: phrase, text: x を選んで XOR の最大値を最小にする・集合の中で x との XOR が最小の要素}
@@ -20,14 +20,14 @@ signs:
 acl: []
 verify: [set_xor_min]
 frequency: B
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 3 問
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 4 問
 sections:
   - {title: 作り方（上位 bit からたどる二分木・ノードに個数）, anchor: build}
   - {title: XOR の最小・最大（同じ側を優先して降りる）, anchor: xor-min-max}
   - {title: K 番目と全体への XOR（bit ごとの反転フラグ）, anchor: kth-and-global-xor}
   - {title: 明示的に作らない Binary Trie（上位 bit で分ける再帰）, anchor: implicit}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

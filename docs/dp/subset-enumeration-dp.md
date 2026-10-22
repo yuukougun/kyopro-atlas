@@ -9,7 +9,7 @@ order: 230
 level: 青
 kind: [DP, ビット演算]
 prerequisites: [bit-dp]
-related: [counting-dedup#min-index, zeta-mobius-subset, recursive-enumeration#partition, steiner-tree]
+related: [counting-dedup#min-index, zeta-mobius-subset, recursive-enumeration#partition, steiner-tree, chromatic-number]
 summary: 集合を部分集合と残りに分ける遷移を T = (T − 1) & S で列挙し、グループ分けの最適値や数を全体 O(3^N) で求める。順序の重複を除くため、最小の要素を含む部分集合だけを列挙する。
 complexity: O(3^N)（グループの値の前計算は別に O(2^N N) など）。グループの数 K を状態に足すと O(K 3^N)
 signs:
@@ -25,8 +25,8 @@ sections:
   - {title: 最小の要素を含むグループから決める（順序の重複を除く）, anchor: fix-minimum}
   - {title: グループの数を状態に足す, anchor: group-count}
   - {title: 高速ゼータ変換との使い分け, anchor: vs-zeta, level: 黄}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -228,7 +228,7 @@ $\mathrm{dp}[j][S]$ は $\lvert S \rvert < j$ のとき使えない。これを�
 </div>
 
 ??? note "方針"
-    期待値の線形性で、答えを「各頂点の集合 $S$ がちょうど 1 つの連結成分になる確率」の和に分ける。$S$ の中の赤と青の端子の数が等しいとき、$S$ の中だけでつなぐ方法の数 $g(S)$ は階乗で決まる。そのうち $S$ が連結になるものの数 $c(S)$ は、$S$ の最小の要素 $v$ を含む連結成分 $T$ で場合を分けて求める。式は $c(S) = g(S) - \sum_{v \in T \subsetneq S} c(T) \, g(S \setminus T)$ で、[ラベル付きグラフの数え上げ](../comb/counting-labeled-graphs.md#complement)の「連結 = 全体 − 非連結」の型である。最小の要素を固定するのは、非連結な場合を 1 回ずつ引くためである。$N \le 17$ で $O(3^N)$ になる。
+    期待値の線形性で、答えを「各頂点の集合 $S$ がちょうど 1 つの連結成分になる確率」の和に分ける。$S$ の中の赤と青の端子の数が等しいとき、$S$ の中だけでつなぐ方法の数 $g(S)$ は階乗で決まる。そのうち $S$ が連結になるものの数 $c(S)$ は、$S$ の最小の要素 $v$ を含む連結成分 $T$ で場合を分けて求める。式は $c(S) = g(S) - \sum_{v \in T \subsetneq S} c(T) \, g(S \setminus T)$ で、[連結なグラフの数え上げ](../comb/counting-labeled-graphs.md#complement)の「連結 = 全体 − 非連結」の型である。最小の要素を固定するのは、非連結な場合を 1 回ずつ引くためである。$N \le 17$ で $O(3^N)$ になる。
 
 ## 確認問題 {#quiz}
 

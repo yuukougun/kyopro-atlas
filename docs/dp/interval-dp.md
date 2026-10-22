@@ -19,7 +19,7 @@ signs:
   - {type: phrase, text: 括弧の対応・回文}
 acl: []
 frequency: B
-frequency_evidence: recent 0・前提として 1 ページに届く（直接 1）・古い ABC 7 問
+frequency_evidence: recent 0・前提として 1 ページに届く（直接 1）・古い ABC 3 問
 sections:
   - {title: 区間を状態にする（状態・遷移・初期値・答え）, anchor: state}
   - {title: 長さ順に埋める理由（l を昇順に回すと困ること）, anchor: by-length}
@@ -27,8 +27,8 @@ sections:
   - {title: 両端型（左端か右端を取る）, anchor: ends}
   - {title: 最後に残す・最後に消すものを決める型, anchor: last-operation}
   - {title: 端の相手で分ける数え上げ（二項係数で操作の順序を混ぜる）, anchor: pair-with-left-end}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -300,10 +300,10 @@ $$
 
 - [Series_205「Educational DP Contest (EDPC) K ~ O 問題 解説」](https://qiita.com/Series_205/items/618b6ad1a22e7401a606)：例題 EDPC N の状態と分割点の遷移、練習 EDPC L の両端型
 - [drken「ゲームを解く！Educational DP Contest K, L 問題の解説」](https://qiita.com/drken/items/4e1bcf8413af16cb62da)：両端型のゲームで得点差を状態の値にする書き方
-- [E869120「競プロ典型 90 問」（GitHub）](https://github.com/E869120/kyopro_educational_90)：例題 典型90 019 の解答コード（両端を最後に取る遷移と境目の遷移）
+- [E869120「kyopro_educational_90」](https://github.com/E869120/kyopro_educational_90)：例題 典型90 019 の解答コード（両端を最後に取る遷移と境目の遷移）
 - [sigma425「Typical DP Contest (TDPC)」](https://sigma425.hatenablog.com/entry/2016/08/02/214547)：練習 TDPC I の全部消せるかの区間 DP
 - [navel_tos「Typical DP Contest 感想・解法メモ」](https://qiita.com/navel_tos/items/4dd0b6dbc88db08a9d57)：練習 TDPC I の方針（両端の 'i' と 'w' の扱い）
 - [m193h「AtCoder ABC217 個人的メモ」](https://zenn.dev/m193h/articles/20210906mon223250m193habc217)：練習 ABC217 F の左端の相手で分ける遷移と二項係数
 - [drken「AtCoder ABC 163 E - Active Infants (2D, 黄色, 500 点)」](https://drken1215.hatenablog.com/entry/2020/04/21/153400)：練習 ABC163 E の大きい順に端へ置く DP
 - [drken「AtCoder ABC 325 G - offence (3D, 黄色, 575 点)」](https://drken1215.hatenablog.com/entry/2023/10/22/202630)：力試し ABC325 G の状態の値の工夫と遷移
-- [kanpurin「競技プログラミング　典型問題メモ」](https://kanpurin.hatenablog.com/entry/2020/04/07/182948)：区間 DP の問題の一覧（帯の見当）
+- [かんプリン「競技プログラミング　典型問題メモ」](https://kanpurin.hatenablog.com/entry/2020/04/07/182948)：区間 DP の問題の一覧（帯の見当）

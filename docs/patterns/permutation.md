@@ -10,7 +10,7 @@ kind: [案内, 数え上げ, 考察]
 prerequisites: []
 related: [permutation-cycles, construction, inversion-number, permutation-parity, functional-graph, doubling, insertion-dp, inclusion-exclusion, binomial-coefficient, bit-full-search, lis]
 summary: 1〜N の順列が与えられる問題で、問われ方から使う手法を引ける。i → P_i の矢印の巡回、swap の回数と偶奇、置換の繰り返し、順列の数え上げ、辞書順の問われ方に分ける。
-complexity: 巡回分解・逆置換の構築 O(N)、転倒数 O(N log N)、辞書順の順位 O(N^2)（BIT で O(N log N)）
+complexity: null
 signs:
   - {type: phrase, text: '(1, 2, …, N) の順列 P が与えられる'}
   - {type: phrase, text: 任意の 2 要素の swap を繰り返してソートする最小回数}
@@ -30,7 +30,7 @@ sections:
   - {title: '条件を満たす順列の数 → 挿入 DP・撹乱順列（insertion-dp, inclusion-exclusion）', anchor: counting}
   - {title: 辞書順で何番目・K 番目の順列 → 残りの並べ方の数・順列全探索, anchor: lexicographic}
   - {title: 増加部分列・いくつの増加部分列に分けるか → LIS（lis）, anchor: increasing}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -174,7 +174,7 @@ $$
 
 $N \le 10$ 程度なら、`next_permutation` で全順列を辞書順に列挙し、何番目かを数えればよい（[順列全探索](../basics/bit-full-search.md#permutations)、[next_permutation](../cpp/cpp-algorithms.md#next-permutation)）。$N$ が大きいときは、前にある順列の個数を先頭から数える。
 
-辞書順では、先頭の値が小さい順列がすべて前に来る。位置 $1$〜$i-1$ が $P$ と同じで、位置 $i$ に $P_i$ より小さい未使用の値を置いた順列を考える。これらはすべて $P$ より前にある。その値の候補の数を $s_i$ とすると、残りの $N - i$ 個は自由に並ぶので $s_i \cdot (N - i)!$ 個ある。$P$ の 1 始まりの順位は次のとおりである。
+辞書順では、先頭の値が小さい順列がすべて前に来る。位置 $1$〜$i-1$ が $P$ と同じで、位置 $i$ に $P_i$ より小さい未使用の値を置いた順列を考える。これらはすべて $P$ より前にある。その値の候補の数を $s_i$ とすると、残りの $N - i$ 個は自由に並ぶので $s_i \cdot (N - i)!$ 個ある。$P$ の 1-indexed の順位は次のとおりである。
 
 $$
 1 + \sum_{i=1}^{N} s_i \cdot (N - i)!
@@ -182,7 +182,7 @@ $$
 
 $P = (2, 4, 1, 3)$ なら $s = (1, 2, 0, 0)$ となり、順位は $1 + 1 \cdot 3! + 2 \cdot 2! = 11$ である。前にあるのは、先頭が 1 の 6 個と、先頭が 2 で 2 番目が 1 か 3 の 4 個である。
 
-$K$ 番目の順列は、この逆に先頭から決める。$K$ は 0 始まりで数える。位置 $i$（1 始まり）では、残りの $K$ を $(N - i)!$ で割った商を $k$ とし、未使用の値のうち小さい方から $k$ 番目（0 始まり）を置く。余りを新しい $K$ にして、次の位置へ進む。
+$K$ 番目の順列は、この逆に先頭から決める。$K$ は 0-indexed で数える。位置 $i$（1-indexed）では、残りの $K$ を $(N - i)!$ で割った商を $k$ とし、未使用の値のうち小さい方から $k$ 番目（0-indexed）を置く。余りを新しい $K$ にして、次の位置へ進む。
 
 ```cpp
 --8<-- "permutation/rank.cpp:core"

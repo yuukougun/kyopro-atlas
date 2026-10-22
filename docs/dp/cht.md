@@ -24,8 +24,8 @@ sections:
   - {title: 下側の包絡線と不要な直線（傾きもクエリも単調なら deque）, anchor: lower-envelope}
   - {title: クエリが単調でないとき（二分探索）, anchor: non-monotone-queries}
   - {title: Li Chao Tree（区間の真ん中で勝つ直線を残す）, anchor: li-chao-tree}
-  - {title: ライブラリでの検証, anchor: verify}
-stage: draft
+  - {title: ライブラリでの検証, anchor: library}
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -122,7 +122,7 @@ Li Chao Tree は、問い合わせうる $x$ の候補 $X$ 個を並べた列の
 - 線分（$x \in [l, r)$ の範囲だけにある直線）を追加するときは、$[l, r)$ をセグメント木と同じく $O(\log X)$ 個のノードに分け、各ノードで上の手順を行う。1 回 $O(\log^2 X)$ になる。
 - $x$ の候補を先に集めて座標圧縮すれば配列で書ける（下の実装）。先に分からないなら、整数の範囲全体（$[-10^9, 10^9]$ など）を受け持つ木を、ノードを使うときだけ作る形にする。ノードは追加 1 回につき $O(\log(\text{範囲}))$ 個しか増えない。
 
-## ライブラリでの検証 {#verify}
+## ライブラリでの検証 {#library}
 
 ACL には CHT も Li Chao Tree もないので、使うなら自作する。自作するときの要点は次のとおりである。
 
@@ -215,7 +215,7 @@ Library Checker の対応は次のとおりである。どちらも $N, Q \le 2 
 <!-- textlint-enable -->
 - [smijake3「Li Chao Treeのメモ」](https://smijake3.hatenablog.com/entry/2018/06/16/144548)：学ぶための資料。Li Chao Tree の追加の手順と、直線 $O(\log N)$・線分 $O(\log^2 N)$ の計算量
 - [cp-algorithms「Convex hull trick and Li Chao tree」](https://cp-algorithms.com/geometry/convex_hull_trick.html)：学ぶための資料（英語。文章・図は使っていない）
-- [yosupo「Library Checker の問題（line_add_get_min・segment_add_get_min）」](https://github.com/yosupo06/library-checker-problems/tree/master/data_structure)：検証に使う問題の内容と制約
+- [yosupo06「library-checker-problems/data_structure」](https://github.com/yosupo06/library-checker-problems/tree/master/data_structure)：検証に使う問題（line_add_get_min・segment_add_get_min）の内容と制約
 - [Series_205「Educational DP Contest (EDPC) X ~ Z 問題 解説」](https://qiita.com/Series_205/items/05bd22a4e78527cb29dc)：例題 EDPC Z の遷移の変形と、傾き・クエリの単調性
 - [kiwamachan「[EDPC-Z問題 Frog 3] Educational DP Contest を Pythonで解く」](https://zenn.dev/kiwamachan/articles/34949d6ab8d049)：例題 EDPC Z の deque による CHT とならし $O(N)$
 - [kmjp「AtCoder ABC #289 (Ｓｋｙ株式会社プログラミングコンテスト2023) : G - Shopping in AtCoder store」](https://kmjp.hatenablog.jp/entry/2023/02/11/0900)：練習 ABC289 G の直線とクエリの置き方

@@ -19,7 +19,7 @@ signs:
   - {type: constraint, text: 文字の種類 26 程度、|S| ≤ 2×10^5}
 acl: []
 frequency: B
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 4 問
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 3 問
 sections:
   - {title: 位置の組を数えるか、異なる文字列を数えるか, anchor: positions-or-strings}
   - {title: 最も左を取る取り出し方が一意な理由, anchor: leftmost}
@@ -27,8 +27,8 @@ sections:
   - {title: 部分列として現れない最短の文字列（後ろから DP して辞書順最小に復元）, anchor: shortest-non-subsequence}
   - {title: 辞書順 K 番目の部分列（後ろからの個数で先頭から決める）, anchor: kth-subsequence}
   - {title: 条件付き・言い換えてから数える（隣り合う位置を選ばない・累積和の列・TT の形）, anchor: with-conditions}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

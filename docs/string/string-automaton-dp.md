@@ -10,7 +10,7 @@ level: 青
 kind: [DP, 文字列]
 prerequisites: [kmp, matrix-power]
 related: [aho-corasick, dp-state-design, bit-dp, digit-dp, lcs, inclusion-exclusion, subsequence-dp]
-summary: KMP や Aho-Corasick の状態（いまの接尾辞のうちパターンの接頭辞になっている最長のもの）を DP の状態にして、パターンを含まない・すべて含む長さ N の文字列を数える。N が巨大なら遷移を行列にして累乗する。
+summary: KMP 法や Aho-Corasick 法の状態（いまの接尾辞のうちパターンの接頭辞になっている最長のもの）を DP の状態にして、パターンを含まない・すべて含む長さ N の文字列を数える。N が巨大なら遷移を行列にして累乗する。
 complexity: 1 パターン O(NσM)、複数パターン O(NσS)（S は Trie の頂点数で長さの総和 + 1 以下）、すべて含むなら O(NσS·2^K)、N が巨大なら O(S^3 log N)
 signs:
   - {type: phrase, text: 長さ N の文字列のうち、どのパターンも部分文字列に含まないものの数}
@@ -29,8 +29,8 @@ sections:
   - {title: すべて含む：含んだパターンの集合を bit で持つ, anchor: contain-all}
   - {title: N が巨大なとき：遷移行列の累乗・ダブリング, anchor: matrix-power}
   - {title: 包除はどこで破綻するか（位置の重なりとパターンの集合）, anchor: why-not-inclusion-exclusion}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -304,6 +304,6 @@ $N$ が $10^9$ なので 1 文字ずつの DP は間に合わない。禁止さ�
 ## 参考 {#references}
 
 - [SayA「AtCoder ABC458 F - Critical Misread」](https://gdst.dev/posts/abc458_f/)：例題 abc458_f の制約（禁止文字列の個数・長さ・総和）と、Aho-Corasick 法の状態の遷移行列を累乗する方針・禁止された状態の判定
-- [KCPC「【ABC419】Aho-Corasick⁉️⁉️⁉️知りません...」](https://kcpc.hatenablog.com/entry/ABC419)：例題 abc419_f の状態（パターンの接頭辞と含んだ集合の bit）と、状態数が 80 程度に収まること
-- [drken「AtCoder ABC 122 D - We Like AGC」](https://drken1215.hatenablog.com/entry/2019/04/23/120400)：練習 abc122_d の禁止される並びの書き出しと、末尾 3 文字を状態にする DP
+- [KCPC ブログ「【ABC419】Aho-Corasick⁉️⁉️⁉️知りません...」](https://kcpc.hatenablog.com/entry/ABC419)：例題 abc419_f の状態（パターンの接頭辞と含んだ集合の bit）と、状態数が 80 程度に収まること
+- [drken「AtCoder ABC 122 D - We Like AGC (1Q, 水色, 400 点)」](https://drken1215.hatenablog.com/entry/2019/04/23/120400)：練習 abc122_d の禁止される並びの書き出しと、末尾 3 文字を状態にする DP
 - [merom686「ABC305」](https://merom686.hatenablog.com/entry/2023/06/11/005610)：練習 abc305_g の末尾 5 文字を状態にした遷移行列の累乗

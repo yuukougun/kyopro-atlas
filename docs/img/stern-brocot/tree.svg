@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" width="400" height="260" font-family="sans-serif">
-<rect width="400" height="260" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 266" width="400" height="266" font-family="sans-serif">
+<rect x="0" y="0" width="400" height="266" fill="#ffffff"/>
 <line x1="200.0" y1="41" x2="100.0" y2="84" stroke="#333" stroke-width="3.5"/>
 <text x="138.0" y="66.5" font-size="13" text-anchor="middle" fill="#000">L</text>
 <line x1="200.0" y1="41" x2="300.0" y2="84" stroke="#333" stroke-width="1"/>

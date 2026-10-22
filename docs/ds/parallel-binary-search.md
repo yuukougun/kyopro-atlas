@@ -25,7 +25,7 @@ sections:
   - {title: 自作するときの要点と Library Checker, anchor: library}
   - {title: Union-Find と組む例（最初の t 本の辺で条件を満たすか）, anchor: with-union-find}
   - {title: 代わりの手（部分永続 Union-Find・併合過程の木）, anchor: alternatives}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -142,7 +142,7 @@ Library Checker で確かめるなら、[練習問題](#practice)の Range Kth S
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [AGC002 D. Stamp Rally](https://atcoder.jp/contests/agc002/tasks/agc002_d)（diff 2514）：最初の t 本の辺だけを使ったとき、x と y の成分の頂点数の合計が z 以上になる最小の t を各クエリで答える。
+- [AGC002 D. Stamp Rally](https://atcoder.jp/contests/agc002/tasks/agc002_d)（diff 2514）：最初の t 本の辺だけを使ったとき、x と y を含む成分の頂点数（同じ成分なら 1 回）が z 以上になる最小の t を各クエリで答える。
 
 </div>
 

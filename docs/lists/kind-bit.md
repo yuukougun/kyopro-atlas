@@ -14,7 +14,7 @@ type: generated
 | ページ | レベル | 要約 |
 | --- | --- | --- |
 | [bit 演算の基本と XOR の性質](../basics/bit-operations.md) | 基礎 | XOR の打ち消し（x xor x = 0）、a + b = (a xor b) + 2(a and b)、0〜n の XOR の周期などで式を簡単にする。部分集合の部分集合は s = (s − 1) & m で列挙できる。 |
-| [bit ごとに独立に考える](../basics/bitwise-independence.md) | 水 | XOR・AND・OR の結果は bit ごとに独立に決まるので、bit ごとに 0 と 1 の個数を数えて 2^k を掛けて足す。最大化・最小化は上の bit から決め、繰り上がりで bit が干渉する足し算には使えない。 |
+| [bit ごとに独立に考える](../basics/bitwise-independence.md) | 水 | XOR・AND・OR の結果は bit ごとに独立に決まるので、bit ごとに 0 と 1 の個数を数えて 2^k を掛けて足す。最大化・最小化は上位 bit から決め、繰り上がりで bit が干渉する足し算には使えない。 |
 | [bit 全探索と順列全探索](../basics/bit-full-search.md) | 基礎 | N ≤ 20 程度なら部分集合 2^N 通りを整数の各 bit で表して全部試し、N ≤ 8〜10 なら順列 N! 通りを next_permutation で全部試す。片側だけを全探索して残りを貪欲で決める型もよく出る。 |
 
 ## 動的計画法
@@ -35,8 +35,8 @@ type: generated
 
 | ページ | レベル | 要約 |
 | --- | --- | --- |
-| [Wavelet Matrix](../ds/wavelet-matrix.md) | 発展 | 区間の K 番目の値・x 未満の個数・和を、オンラインで O(log σ) で答える静的な構造。値を上位ビットから順に安定に 0/1 で振り分けた段を重ね、各段で 0 の個数の累積を持つ。 |
-| [Binary Trie](../ds/binary-trie.md) | 青 | 整数を 2 進数の上位ビットから Trie に入れ、各ノードに部分木の個数を持たせる。x との XOR の最小・最大、K 番目に小さい値、全体に XOR をかける操作を O(ビット数) で処理する。 |
+| [Wavelet Matrix](../ds/wavelet-matrix.md) | 発展 | 区間の K 番目の値・x 未満の個数・和を、オンラインで O(log σ) で答える静的な構造。値を上位 bit から順に安定に 0/1 で振り分けた段を重ね、各段で 0 の個数の累積を持つ。 |
+| [Binary Trie](../ds/binary-trie.md) | 青 | 整数を 2 進数の上位 bit から Trie に入れ、各ノードに部分木の個数を持たせる。x との XOR の最小・最大、K 番目に小さい値、全体に XOR をかける操作を O(ビット数) で処理する。 |
 
 ## 整数論・代数
 

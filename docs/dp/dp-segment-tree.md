@@ -26,8 +26,8 @@ sections:
   - {title: 区間を覆う最小コスト（右端までの最小）, anchor: interval-cover}
   - {title: スライド最小値（単調 deque）と単調スタックによる遷移, anchor: dp-sliding-window}
   - {title: セグメント木・累積和・スライド最小値の使い分け, anchor: which-tool}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

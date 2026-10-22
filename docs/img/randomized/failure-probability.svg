@@ -1,5 +1,6 @@
-<svg width="356" height="356" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 356 356" font-family="sans-serif" font-size="18">
+<svg width="365" height="360" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 365 360" font-family="sans-serif" font-size="18">
 <rect width="100%" height="100%" fill="#ffffff"/>
+<g transform="translate(2 2)">
 <text x="8" y="22" fill="#222" font-size="15">成功確率 p の試行を k 回して、</text>
 <text x="8" y="42" fill="#222" font-size="15">すべて失敗する確率 (1 − p)<tspan dy="-6" font-size="11">k</tspan></text>
 <line x1="58" y1="66.0" x2="340" y2="66.0" stroke="#eee"/>
@@ -47,4 +48,5 @@
 <text x="180.2" y="94.8" fill="#8a4a00" font-size="14">p = 1/64（1316 回）</text>
 <circle cx="128.3" cy="228.0" r="4.5" fill="#1f4e9a"/>
 <circle cx="227.3" cy="228.0" r="4.5" fill="#2a7a2a"/>
+</g>
 </svg>

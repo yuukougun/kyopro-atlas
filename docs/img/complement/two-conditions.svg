@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 280" width="520" height="280" font-family="sans-serif">
-  <rect x="0" y="0" width="520" height="280" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 282" width="520" height="282" font-family="sans-serif">
+<g transform="translate(0 2)">
+  <rect x="0" y="-2" width="520" height="282" fill="#ffffff"/>
   <defs>
     <pattern id="hatch2" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
       <rect width="8" height="8" fill="#dbeafe"/>
@@ -26,4 +27,5 @@
   <text x="265" y="148" font-size="15" text-anchor="middle" fill="#1f2937">どちらも</text>
   <text x="265" y="168" font-size="15" text-anchor="middle" fill="#1f2937">含まない</text>
   <text x="265" y="188" font-size="15" text-anchor="middle" fill="#1f2937">（8<tspan baseline-shift="super" font-size="10">N</tspan>）</text>
+</g>
 </svg>

@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 342" width="320" height="342" font-family="sans-serif">
-  <rect x="0" y="0" width="320" height="342" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-3 0 343 342" width="343" height="342" font-family="sans-serif">
+  <rect x="-3" y="0" width="343" height="342" fill="#ffffff"/>
   <text x="160" y="22" font-size="15" text-anchor="middle" fill="#222">S = 1414、P = 7：境目 i ごとに</text>
   <text x="160" y="42" font-size="15" text-anchor="middle" fill="#222">接尾辞 S[i, N) の余り U_i を書く</text>
   <!-- arcs between boundaries with equal remainder (0) -->

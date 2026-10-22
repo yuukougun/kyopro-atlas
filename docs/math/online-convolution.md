@@ -25,7 +25,7 @@ sections:
   - {title: DP の遷移を多項式の積とみる, anchor: dp-as-polynomial}
   - {title: オンライン畳み込み（左半分を確定させてから右半分へ寄与を足す）, anchor: online}
   - {title: ACL の convolution と自作するときの要点, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -179,7 +179,7 @@ Library Checker では次の問題で確かめられる。オンライン畳み�
 
 - [けんちょん「AtCoder ABC 213 H - Stroll (4D, 赤色, 600 点)」](https://drken1215.hatenablog.com/entry/2021/08/14/184730)：例題の漸化式と、左半分から右半分へ寄与を足す分割統治の流れ・計算量
 - [kmjp「AtCoder ABC #213 : H - Stroll」](https://kmjp.hatenablog.jp/entry/2021/08/15/0930)：例題の時間の軸の分割統治と NTT の方針
-- [けんちょん「AtCoder ABC 352 G - Socks 3 (3D, 橙色, 600 点)」](https://drken1215.hatenablog.com/entry/2024/05/05/023117)：例題の、期待値を確率の和に直して 1 次式の積を分割統治で掛ける方針
+- [drken「AtCoder ABC 352 G - Socks 3 (3D, 橙色, 600 点)」](https://drken1215.hatenablog.com/entry/2024/05/05/023117)：例題の、期待値を確率の和に直して 1 次式の積を分割統治で掛ける方針
 - [kmjp「AtCoder ABC #352 : G - Socks 3」](https://kmjp.hatenablog.jp/entry/2024/05/05/0900)：例題の方針。多項式をキューに入れて 2 つずつ掛ける書き方
 - [けんちょん「AtCoder ABC 281 Ex - Alchemy (赤色, 600 点)」](https://drken1215.hatenablog.com/entry/2023/01/07/162412)：練習の方針。因子が前の答えで決まる積と、平方分割による解き方
 - [Nyaan「Relaxed Convolution | Nyaan's Library」](https://nyaannyaan.github.io/library/ntt/relaxed-convolution.hpp)：学ぶための資料。両側オンラインの畳み込みの使い方と、Library Checker での確かめ

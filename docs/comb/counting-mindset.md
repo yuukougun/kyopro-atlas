@@ -18,15 +18,15 @@ signs:
   - {type: shape, text: 答えが「K 以下」の個数の差 f(K) − f(K−1) で書ける}
 acl: []
 frequency: A
-frequency_evidence: recent 3（abc456_g・abc457_f・abc471_e）・前提として 14 ページに届く（直接 7）・古い ABC 7 問
+frequency_evidence: recent 3（abc456_g・abc457_f・abc471_e）・前提として 14 ページに届く（直接 7）・古い ABC 6 問
 sections:
   - {title: 数え上げの手順と「ちょうど 1 回」, anchor: procedure}
   - {title: 式で数えるか DP で数えるか, anchor: formula-or-dp}
   - {title: 「ちょうど」を「以下」の差で数える, anchor: exactly-vs-at-most}
   - {title: 二項係数と組み合わせた寄与（残りの選び方を掛ける）, anchor: contribution-with-binomial, level: 青}
   - {title: 小さいケースの全探索で式を検算する, anchor: verify-small}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -252,20 +252,20 @@ $$
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [ABC180 F. Unbranched](https://atcoder.jp/contests/abc180/tasks/abc180_f)（diff 2419）：N 頂点 M 辺の単純無向グラフで、各連結成分がパスかサイクルで、最大の連結成分の頂点数がちょうど L のものの数を求める。
+- [ABC180 F. Unbranched](https://atcoder.jp/contests/abc180/tasks/abc180_f)（diff 2419）：自己ループのない（多重辺は許す）N 頂点 M 辺の無向グラフで、各連結成分がパスか閉路で、最大の連結成分の頂点数がちょうど L のものの数を求める。
 
 </div>
 
 ??? note "力試しの方針"
-    - **ABC180 F**：「最大の成分が $L$ 以下」の数から「$L - 1$ 以下」の数を引く。「$L$ 以下」は、まだ使っていない頂点のうち番号が最小のものを含む成分の大きさ $k$ を決めていく DP で数える（最小の頂点を必ず含めることで、同じ分け方を重ねて数えない）。残りから $k - 1$ 頂点を選ぶ二項係数と、$k$ 頂点のパス・閉路の作り方の数を掛けて遷移する。パスは $k = 1$（1 通り）、閉路は $k \le 2$（自己ループ・多重辺になるので 0 通り）の扱いが特別になる
+    - **ABC180 F**：「最大の成分が $L$ 以下」の数から「$L - 1$ 以下」の数を引く。「$L$ 以下」は、まだ使っていない頂点のうち番号が最小のものを含む成分の大きさ $k$ を決めていく DP で数える（最小の頂点を必ず含めることで、同じ分け方を重ねて数えない）。残りから $k - 1$ 頂点を選ぶ二項係数と、$k$ 頂点のパス・閉路の作り方の数を掛けて遷移する。パスは $k = 1$（1 通り）、閉路は $k = 1$（自己ループになるので 0 通り）と $k = 2$（多重辺の 2 本で 1 通り）の扱いが特別になる
 
 ## 参考 {#references}
 
 - [kmjp「AtCoder ABC #167 : E - Colorful Blocks」](https://kmjp.hatenablog.jp/entry/2020/05/10/0900)：例題の式（同じ色の組の位置を選ぶ）
 - [kmjp「AtCoder ABC #156 : E - Roaming」](https://kmjp.hatenablog.jp/entry/2020/02/23/0900)：例題の言い換え（空き部屋の数で場合分け）と k = 1 の扱い
 - [drken「AtCoder ABC 127 E - Cell Distance」](https://drken1215.hatenablog.com/entry/2019/06/15/111500)：例題の寄与と残りの選び方 C(NM−2, K−2)、行と列に分ける数え方
-- [comet725「ABC460 E」](https://qiita.com/comet725/items/7ac6436793b6e5d1ee4f)：練習の方針（y の桁数で場合分けする）
-- [ikatakos「AtCoder Beginner Contest 460 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0530_abc460)：練習の方針（条件から y が消えること。解説の部分だけを参照）
-- [drken「AtCoder ABC 150 E - Change a Little Bit」](https://drken1215.hatenablog.com/entry/2020/01/12/142100)：練習の方針（降順に変えることと各桁の係数）
+- [comet725「ABC460Eを解いた【桁ごとの数え上げ】」](https://qiita.com/comet725/items/7ac6436793b6e5d1ee4f)：練習の方針（y の桁数で場合分けする）
+- [ikatakos「AtCoder Beginner Contest 460 E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0530_abc460)：練習の方針（条件から y が消えること。解説の部分だけを参照）
+- [drken「AtCoder ABC 150 E - Change a Little Bit (1D, 青色, 500 点)」](https://drken1215.hatenablog.com/entry/2020/01/12/142100)：練習の方針（降順に変えることと各桁の係数）
 - [hamayan「Intervals on Tree [AtCoder Beginner Contest 173 F]」](https://blog.hamayanhamayan.com/entry/2020/07/05/235609)：練習の方針（頂点数 − 辺数と辺を含む区間の数）
-- [drken「AtCoder ABC 180 F - Unbranched」](https://drken1215.hatenablog.com/entry/2020/10/21/145700)：力試しの方針（以下の差と、最小の頂点を含む成分を決める DP）
+- [drken「AtCoder ABC 180 F - Unbranched (橙色, 600 点)」](https://drken1215.hatenablog.com/entry/2020/10/21/145700)：力試しの方針（以下の差と、最小の頂点を含む成分を決める DP）

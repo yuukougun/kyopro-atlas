@@ -20,14 +20,14 @@ signs:
   - {type: constraint, text: 座標は 10^9 まで、区間とクエリは合わせて 2×10^5 個程度}
 acl: []
 frequency: A
-frequency_evidence: recent 1（abc478_d）・前提として 1 ページに届く（直接 1）・古い ABC 5 問
+frequency_evidence: recent 2（abc467_e・abc478_d）・前提として 1 ページに届く（直接 1）・古い ABC 5 問
 sections:
   - {title: イベントの作り方と同じ座標での処理順, anchor: make-events}
   - {title: 集合（set・multiset）を更新しながら走査する, anchor: with-set}
   - {title: 平面走査の基本（一方の座標で並べ、もう一方を集合で）, anchor: plane-sweep}
   - {title: BIT・セグ木と組む平面走査へ（データ構造の章）, anchor: to-data-structures}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

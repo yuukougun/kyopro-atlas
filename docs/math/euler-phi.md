@@ -18,15 +18,15 @@ signs:
   - {type: phrase, text: a^k ≡ 1 (mod n) となる最小の k を探す}
 acl: []
 verify: []
-frequency: C
-frequency_evidence: recent 0・前提として 2 ページに届く（直接 2）・古い ABC 2 問
+frequency: B
+frequency_evidence: recent 0・前提として 2 ページに届く（直接 2）・古い ABC 4 問
 sections:
   - {title: 定義と公式 φ(n) = n Π(1 − 1/p)（素因数分解が必要）, anchor: formula}
   - {title: 篩で 1..N の φ をすべて求める, anchor: sieve}
   - {title: オイラーの定理 a^φ(n) ≡ 1 と、位数・指数の mod への応用, anchor: euler-theorem}
   - {title: 約数についての φ の和が n になることと、位数が d の元が φ(d) 個あること, anchor: divisor-sum}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

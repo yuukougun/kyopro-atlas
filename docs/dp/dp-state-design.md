@@ -21,7 +21,7 @@ signs:
   - {type: constraint, text: 制約の一部だけが小さい（K ≤ 5、末尾の K ≤ 10 文字、文字の種類 26）}
 acl: []
 frequency: A
-frequency_evidence: recent 4（abc456_d・abc457_f・abc462_f・abc464_d）・前提として 20 ページに届く（直接 9）・古い ABC 10 問
+frequency_evidence: recent 4（abc456_d・abc457_f・abc462_f・abc464_d）・前提として 20 ページに届く（直接 9）・古い ABC 9 問
 sections:
   - {title: 将来に効く要約だけを持てば合流できる理由, anchor: why-summary-works}
   - {title: 典型の要約（直前の値・on/off・偶奇・個数・上限で打ち切った値）, anchor: typical-summaries}
@@ -29,8 +29,8 @@ sections:
   - {title: 括弧列の DP（開き括弧の残り数を状態にする）, anchor: bracket-dp}
   - {title: 環状の列（1 か所で切り、最初の状態を固定して DP を回す）, anchor: dp-cyclic}
   - {title: 状態数の見積もり（(P+1)^K・2^K・末尾の数文字の組の数）, anchor: state-count}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -325,10 +325,10 @@ $d$ の範囲は $0$ 以上 $N$ 以下なので、状態は $O(N^2)$ 個、遷�
 
 - [drken「動的計画法超入門！ Educational DP Contest の A ～ E 問題の解説と類題集」](https://qiita.com/drken/items/dc53c683d6de8aeacf5a)：例題 EDPC C の状態の足し方と遷移
 - [torus711「AtCoder Beginner Contest 359 : D - Avoid K Palindrome」](https://torus711.hatenablog.com/entry/2024/06/23/180513)：例題 ABC359 D の末尾の文字を bit で持つ状態と計算量
-- [drken「AtCoder ABC 122 D - We Like AGC (400 点)」](https://drken1215.hatenablog.com/entry/2019/04/23/120400)：例題 ABC122 D の禁止する並びの書き出しと末尾 3 文字の状態
+- [drken「AtCoder ABC 122 D - We Like AGC (1Q, 水色, 400 点)」](https://drken1215.hatenablog.com/entry/2019/04/23/120400)：例題 ABC122 D の禁止する並びの書き出しと末尾 3 文字の状態
 - [drken「AtCoder ABC 306 D - Poisonous Full-Course」](https://drken1215.hatenablog.com/entry/2024/07/10/005126)：練習 ABC306 D の体調の 2 状態と初期値
-- [merom686「ABC312 D」](https://merom686.hatenablog.com/entry/2023/07/30/020536)：練習 ABC312 D の開き括弧の数の状態
+- [merom686「ABC312」](https://merom686.hatenablog.com/entry/2023/07/30/020536)：練習 ABC312 D の開き括弧の数の状態
 - [drken「AtCoder ABC 322 E - Product Development」](https://drken1215.hatenablog.com/entry/2023/10/03/010702)：練習 ABC322 E の打ち切った値の状態と状態数
-- [drken「AtCoder ABC 307 E - Distinct Adjacent」](https://drken1215.hatenablog.com/entry/2024/06/10/024932)：練習 ABC307 E の 1 人目と同じかどうかの状態と遷移の係数
+- [drken「AtCoder ABC 307 E - Distinct Adjacent (1Q, 水色, 475 点)」](https://drken1215.hatenablog.com/entry/2024/06/10/024932)：練習 ABC307 E の 1 人目と同じかどうかの状態と遷移の係数
 - [ikatakos「AtCoder Beginner Contest 232 E 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/1219_abc232)：練習 ABC232 E の 4 状態へのまとめ方（解説の部分だけを参照）
 - [ikatakos「AtCoder Beginner Contest 345 E 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0316_abc345)：力試し ABC345 E の上位 2 つを色違いで持つ工夫（解説の部分だけを参照）

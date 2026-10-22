@@ -10,7 +10,7 @@ level: 黄
 kind: [フロー・マッチング]
 prerequisites: [max-flow, dijkstra]
 related: [bipartite-matching, konig-theorem]
-summary: 流量 F を流すときのコストの最小値を、残余グラフ上のコストの最短路に沿って流すことをくり返して求める。逆辺の負のコストはポテンシャルで消してダイクストラを使い、ACL の mcf_graph で書ける。
+summary: 流量 F を流すときのコストの最小値を、残余グラフ上のコストの最短路に沿って流すことをくり返して求める。逆辺の負のコストはポテンシャルで消してダイクストラ法を使い、ACL の mcf_graph で書ける。
 complexity: 流量を F として O(F (N + M) log(N + M))（増加 1 回ごとにダイクストラ法 1 回）。最初から負のコストがあれば、初回のポテンシャルにベルマンフォード法 O(NM) を足す
 signs:
   - {type: phrase, text: K 個選んだときの最大（最小）を K ごとに答える}
@@ -20,7 +20,7 @@ signs:
 acl: [mcf_graph]
 verify: [min_cost_b_flow, assignment]
 frequency: B
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 5 問
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 4 問
 sections:
   - {title: 逐次最短路とポテンシャル, anchor: successive-shortest-path}
   - {title: コストは 0 以上（最大化は「定数 − 利得」に直す）, anchor: nonnegative-cost}
@@ -28,8 +28,8 @@ sections:
   - {title: モデル化の型（重み付き二部マッチング・市松模様・差分列の流れ）, anchor: modeling}
   - {title: ACL の mcf_graph（flow と slope）, anchor: acl}
   - {title: 割当問題とハンガリアン法, anchor: hungarian, level: 発展}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

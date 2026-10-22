@@ -19,7 +19,7 @@ signs:
 acl: [scc_graph]
 verify: [scc]
 frequency: B
-frequency_evidence: recent 1（abc478_e）・前提として 2 ページに届く（直接 2）・古い ABC 3 問
+frequency_evidence: recent 1（abc478_e）・前提として 2 ページに届く（直接 2）・古い ABC 2 問
 sections:
   - {title: 縮約したグラフが DAG になる理由, anchor: condensation}
   - {title: Kosaraju と Tarjan, anchor: algorithms}
@@ -27,8 +27,8 @@ sections:
   - {title: 閉路に含まれる頂点（自己ループに注意）, anchor: on-cycle}
   - {title: 縮約した DAG の上で DP する, anchor: dp-on-dag}
   - {title: 縮約の応用の型（組の数・不等式の割り当て・2-SAT）, anchor: patterns}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -273,7 +273,7 @@ ACL の練習用の問題で、`scc_graph` に辺を足して `scc()` を呼び�
 - [AtCoder Library「internal_scc.hpp」](https://github.com/atcoder/ac-library/blob/master/atcoder/internal_scc.hpp)：中身が Tarjan 法で再帰を使うこと、決まった成分の頂点の ord を n にすること、最後に番号を逆にしていること
 - [AtCoder Library「scc_practice.cpp」](https://github.com/atcoder/ac-library/blob/master/test/example/scc_practice.cpp)：例題 practice2_g の使い方
 - [E869120「kyopro_educational_90 sol/021.cpp」](https://github.com/E869120/kyopro_educational_90/blob/main/sol/021.cpp)：例題 typical90_u の想定解（Kosaraju 法と成分ごとの組の数）
-- [kyo-pro「ABC296 E」](https://kyo-pro.hatenablog.com/entry/ABC296E)：練習 abc296_e の言い換え（閉路に含まれる頂点を数える）
-- [drken「ABC357 E - Reachability in Functional Graph」](https://drken1215.hatenablog.com/entry/2024/06/09/231700)：練習 abc357_e の数え方（閉路の頂点数と、閉路にない頂点の値）
-- [ikatakos「AtCoder Beginner Contest 478」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/1003_abc478)：練習 abc478_e の辺の張り方と矛盾の条件（解法の部分だけ）
-- [torus711「AtCoder Beginner Contest 335 E - Non-Decreasing Colorful Path」](https://torus711.hatenablog.com/entry/2024/01/07/215719)：値が減らない移動を有向辺にして縮約し、DAG 上で DP する型
+- [kyo-pro「ABC296E - Transition Game」](https://kyo-pro.hatenablog.com/entry/ABC296E)：練習 abc296_e の言い換え（閉路に含まれる頂点を数える）
+- [drken「AtCoder ABC 357 E - Reachability in Functional Graph (1D, 水色, 450 点)」](https://drken1215.hatenablog.com/entry/2024/06/09/231700)：練習 abc357_e の数え方（閉路の頂点数と、閉路にない頂点の値）
+- [ikatakos「AtCoder Beginner Contest 478 E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/1003_abc478)：練習 abc478_e の辺の張り方と矛盾の条件（解法の部分だけ）
+- [torus711「AtCoder Beginner Contest 335, E : Non-Decreasing Colorful Path」](https://torus711.hatenablog.com/entry/2024/01/07/215719)：値が減らない移動を有向辺にして縮約し、DAG 上で DP する型

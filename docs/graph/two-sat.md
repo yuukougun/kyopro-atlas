@@ -27,7 +27,7 @@ sections:
   - {title: モデル化の早見表（同時に選べない・どちらかは必ず・a なら b）, anchor: cheatsheet}
   - {title: 「高々 1 つ」を補助変数で O(K) 本の節にする, anchor: at-most-one}
   - {title: ACL の two_sat と自作するときの要点, anchor: acl}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -137,7 +137,7 @@ $l_p$ と $l_q$（$p < q$）がともに真だとすると、$l_p \to s_p \to \d
 - **成分の番号の向き**：Tarjan 法は成分をトポロジカル順の**逆**に見つける。Kosaraju 法や ACL の `scc_graph` はトポロジカル順の番号を付ける。使った方法での向きを確かめ、「後ろの成分にある方を真」に合わせる（[Kosaraju と Tarjan](../graph/scc.md#algorithms)）。
 - **再帰の深さ**：頂点が $2N$ 個あるので、再帰の DFS では深さが $2N$ になりうる。$N$ が $10^5$ を超えるなら非再帰で書くか、スタックの上限に気をつける。
 
-自作したものは Library Checker の [Two-SAT](https://judge.yosupo.jp/problem/two_sat)（$N, M \le 5 \times 10^5$、入力は DIMACS の形式）で確かめる。入力のリテラル $k$ は $k$ 番目の変数を、$-k$ はその否定を表す。変数は 1 始まりなので、本文の $x_0, \dots, x_{N-1}$ に合わせるなら $k$ を $x_{k-1}$ に読み替える。出力は、充足可能なら `s SATISFIABLE` の行と、`v` に続けて各変数を真なら $i$、偽なら $-i$ で並べ 0 で終える行である。
+自作したものは Library Checker の [Two-SAT](https://judge.yosupo.jp/problem/two_sat)（$N, M \le 5 \times 10^5$、入力は DIMACS の形式）で確かめる。入力のリテラル $k$ は $k$ 番目の変数を、$-k$ はその否定を表す。変数は 1-indexed なので、本文の $x_0, \dots, x_{N-1}$ に合わせるなら $k$ を $x_{k-1}$ に読み替える。出力は、充足可能なら `s SATISFIABLE` の行と、`v` に続けて各変数を真なら $i$、偽なら $-i$ で並べ 0 で終える行である。
 
 ## 学ぶための資料 {#resources}
 

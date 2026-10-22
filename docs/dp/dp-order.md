@@ -18,14 +18,14 @@ signs:
   - {type: shape, text: 'dp[i] が dp[j]（j > i）から決まる（i 番目以降で最適に行動したときの値）'}
 acl: []
 frequency: B
-frequency_evidence: recent 0・前提として 11 ページに届く（直接 3）・古い ABC 6 問
+frequency_evidence: recent 0・前提として 11 ページに届く（直接 3）・古い ABC 5 問
 sections:
   - {title: 依存グラフと計算順序の原則（閉路があれば DP にならない）, anchor: dependency}
   - {title: 典型の順序（添字・逆順・値の順・区間の長さ順・集合の昇順・木の帰りがけ順）, anchor: typical-orders}
   - {title: 後ろから解くサイン（終わりの値が分かっている・辞書順最小の復元）, anchor: backward}
   - {title: 期待値 DP・ゲーム DP の計算順序（確率・期待値・ゲームの章へ）, anchor: expectation-and-games}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

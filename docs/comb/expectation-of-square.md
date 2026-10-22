@@ -17,15 +17,15 @@ signs:
   - {type: phrase, text: 分散を求める（最小化する）}
   - {type: phrase, text: スコアの二乗の期待値}
 acl: []
-frequency: C
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 2 問
+frequency: B
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 3 問
 sections:
   - {title: 二乗の期待値と期待値の二乗の違い, anchor: difference}
   - {title: ペアに分ける（i = j の項を忘れない）, anchor: pairs}
   - {title: (x + 1)^2 = x^2 + 2x + 1 で 3 つの量を同時に運ぶ, anchor: carry-three}
   - {title: 分散と二乗和の関係, anchor: variance}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

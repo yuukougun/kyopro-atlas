@@ -10,7 +10,7 @@ level: 発展
 kind: [整数論, 二分探索]
 prerequisites: [gcd-lcm]
 related: [floor-sum, ext-gcd]
-summary: 分母・分子が N 以下で実数に最も近い分数などを、既約分数を全て1回ずつ含む二分木を降りて O(log N) 段で求める。同じ方向への移動を一度に進めるのが連分数にあたる。
+summary: 分母・分子が N 以下で実数に最も近い分数などを、既約分数をすべて 1 回ずつ含む二分木を降りて O(log N) 段で求める。同じ方向への移動を一度に進めるのが連分数にあたる。
 complexity: 最良近似・木の上の道の圧縮表現 O(log N)（N は分子・分母の上限。比較は 128 bit 整数）
 signs:
   - {type: phrase, text: 分母・分子が N 以下で、与えられた実数に最も近い分数}
@@ -24,7 +24,7 @@ sections:
   - {title: 同じ方向の移動を一度に進める（連分数）, anchor: continued-fraction}
   - {title: 最良有理近似と比較の精度（128 bit 整数）, anchor: best-approximation}
   - {title: 自作するときの要点と Library Checker, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -161,7 +161,7 @@ ACL に対応する機能はないので、使うなら自作する。保つ性�
 - [cp-algorithms「The Stern-Brocot tree and Farey sequences」](https://cp-algorithms.com/others/stern_brocot_tree_farey_sequences.html)：$bc - ad = 1$ の不変条件、道と連分数の対応、判定だけで進む対数回の探索とその回数の上限、Farey 数列との関係
 - [Library Checker「Stern–Brocot Tree」](https://judge.yosupo.jp/problem/stern_brocot_tree)：木の上の操作の一覧と制約
 - [Library Checker「Rational Approximation」](https://judge.yosupo.jp/problem/rational_approximation)：最良近似の問いの形と制約、存在しないときの 0/1・1/0 の約束
-- [yosupo06/library-checker-problems](https://github.com/yosupo06/library-checker-problems)：上の 2 問の問題文（task.md）と制約の値（info.toml）
+- [yosupo06「library-checker-problems」](https://github.com/yosupo06/library-checker-problems)：上の 2 問の問題文（task.md）と制約の値（info.toml）
 - [Nyaan「Stern-Brocot Tree」（Nyaan's Library）](https://nyaannyaan.github.io/library/math/stern-brocot-tree.hpp)：自作するときの操作の一覧（LCA・祖先・左右の端）
 - [kmjp「AtCoder ABC #333 (トヨタ自動車プログラミングコンテスト2023#8) : G - Nearest Fraction」](https://kmjp.hatenablog.jp/entry/2023/12/16/0900)：例題の方針（木を降りる・移動をまとめる・128 bit の比較・近い方の選び方）
-- [kanpurin「競技プログラミング 典型問題メモ」](https://kanpurin.hatenablog.com/entry/2020/04/07/182948)：例題が Stern-Brocot 木の典型であることの確認
+- [かんプリン「競技プログラミング　典型問題メモ」](https://kanpurin.hatenablog.com/entry/2020/04/07/182948)：例題が Stern-Brocot 木の典型であることの確認

@@ -19,7 +19,7 @@ signs:
   - {type: constraint, text: 禁止条件が M ≤ 20 個程度}
 acl: []
 frequency: A
-frequency_evidence: recent 3（abc456_g・abc462_g・abc475_f）・前提として 2 ページに届く（直接 2）・古い ABC 7 問
+frequency_evidence: recent 3（abc456_g・abc462_g・abc475_f）・前提として 2 ページに届く（直接 2）・古い ABC 6 問
 sections:
   - {title: 一般形と、N(S) が「少なくとも」である理由, anchor: general}
   - {title: 条件の組を bit 全探索する（M ≤ 20）, anchor: bit-enumeration}
@@ -28,8 +28,8 @@ sections:
   - {title: 全射の数（各色を少なくとも 1 回使う）, anchor: surjection}
   - {title: 使い分け：余事象・包除 DP・約数包除, anchor: when-to-use}
   - {title: min-max 包除（全種類がそろうまでの期待値）, anchor: min-max, level: 発展}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -270,12 +270,14 @@ $A$ を 1 つ固定すると、残りは「$B$ の要素がすべて異なり、
 
 <div class="kp-problems" data-role="practice" markdown>
 
+- [ABC475 F. Rectangle Filling](https://atcoder.jp/contests/abc475/tasks/abc475_f)（diff 1916）：白と黒のマス目で、長方形を 1 つ選んでその中をすべて黒に塗る操作を高々 1 回行うとき、できる盤面の種類の数を求める。
 - [ABC152 F. Tree and Constraints](https://atcoder.jp/contests/abc152/tasks/abc152_f)（diff 1965）：N 頂点の木の各辺を白か黒に塗るとき、指定された M 組（M ≤ 20）の頂点対すべてについて、その間のパスに黒い辺が 1 本以上ある塗り方の数を求める。
 - [ABC297 F. Minimum Bounding Box 2](https://atcoder.jp/contests/abc297/tasks/abc297_f)（diff 1990）：H×W のグリッドから K マスを一様に選んだとき、選んだマスをすべて含む最小の長方形の面積の期待値を求める。
 
 </div>
 
 ??? note "練習の方針"
+    - **ABC475 F**：長方形のある辺がもとからすべて黒なら、その辺を除いた長方形と同じ盤面になる。逆に 4 辺のどれにも白いマスがある長方形なら、塗った白いマスの範囲を囲む最小の長方形がその長方形自身なので、違う長方形からは違う盤面ができる。だから「4 辺のどれも全部は黒でない長方形」の数に、塗らない場合の 1 を足せばよい。条件 $i$ を破るのを「辺 $i$ がすべて黒」として、4 辺について[包除](#general)する。破る辺の数 $k$ ごとの和を $T_k$ とすると、答えは $T_0 - T_1 + T_2 - T_3 + T_4 + 1$ である。$T_0$ は長方形の総数で、ほかは各マスから上下左右に続く黒の長さを前計算し、下の辺の行を決めて累積和で数える。$H \le W$ になるよう転置すると、最も重い $T_4$ も $O(H^2 W)$ で間に合う。
     - **ABC152 F**：条件 $i$ を破るのは「パス $i$ の辺がすべて白」である。各パスの辺を bit 集合（辺は 49 本以下なので 64 bit に収まる）にしておき、$S$ のパスの OR の popcount を $p$ とすると $N(S) = 2^{N - 1 - p}$ である。$M \le 20$ なので $S$ を bit 全探索する。
     - **ABC297 F**：面積を「長方形に含まれるマスの個数」と見て、[期待値の線形性](../comb/linearity-of-expectation.md#indicator)でマスごとの確率の和にする。マス $(i, j)$ が長方形に入らないのは、選んだマスがすべて上側・下側・左側・右側のどれかに収まるときで、この 4 つの和集合を包除で数える。上側と下側のように同時に起きない組は共通部分が 0 なので、残るのは 4 つの角の領域だけである。
 
@@ -325,6 +327,7 @@ $A$ を 1 つ固定すると、残りは「$B$ の要素がすべて異なり、
 - [Wikipedia「包除原理」](https://ja.wikipedia.org/wiki/%E5%8C%85%E9%99%A4%E5%8E%9F%E7%90%86)：一般形の記法の確認
 - [drken「AtCoder ABC 246 F - typewriter (1D, 青色, 500 点)」](https://drken1215.hatenablog.com/entry/2022/04/03/212800)：例題の方針（共通の文字の種類数の累乗を符号付きで足すこと、計算量）
 - [kmjp「AtCoder ABC #172 : E - NEQ」](https://kmjp.hatenablog.jp/entry/2020/06/27/1000)：例題の方針（一致させる位置を指定する包除の式）
+- [ikatakos「AtCoder Beginner Contest 475 E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0912_abc475)：練習 ABC475 F の問いと方針（辺がすべて黒の長方形を除く言い換え、4 辺の包除、黒の連続の長さと累積和。解法の部分だけを参照）
 - [drken「AtCoder ABC 152 F - Tree and Constraints (2D, 青色, 600 点)」](https://drken1215.hatenablog.com/entry/2020/01/26/164200)：練習の方針（パスの辺を bit 集合にして OR を取ること）
 - [kazun「AtCoder Beginner Contest 297 F問題 Minimum Bounding Box 2」](https://kazun-kyopro.hatenablog.com/entry/ABC/297/F)：練習の方針（マスごとの確率と 4 方向の包除）
 - [kmjp「AtCoder ABC #462 (CodeQUEEN 2026 予選) : G - Completely Wrong」](https://kmjp.hatenablog.jp/entry/2026/06/13/0900)：力試しの方針（色ごとの多項式と積）

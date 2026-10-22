@@ -1,5 +1,6 @@
-<svg width="360" height="476" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 476" font-family="sans-serif">
-<rect x="0" y="0" width="360" height="476" fill="#ffffff"/>
+<svg width="360" height="477" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 477" font-family="sans-serif">
+<g transform="translate(0 0)">
+<rect x="0" y="0" width="360" height="477" fill="#ffffff"/>
 <defs><marker id="ar" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#555"/></marker></defs>
 <line x1="180" y1="330" x2="60" y2="267" stroke="#555" stroke-width="1.5" marker-end="url(#ar)"/>
 <text x="142" y="316" font-size="12" fill="#333" text-anchor="end">+0</text>
@@ -56,4 +57,5 @@
 <line x1="16" y1="436" x2="56" y2="436" stroke="#555" stroke-width="1.5" stroke-dasharray="2 3"/>
 <text x="64" y="440" font-size="13" fill="#333">+2：要素 2 を加える（2^2 増）</text>
 <text x="16" y="464" font-size="13" fill="#333">線の種類は加える要素ごとに変えてある</text>
+</g>
 </svg>

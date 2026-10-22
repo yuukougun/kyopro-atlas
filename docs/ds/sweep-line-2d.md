@@ -28,8 +28,8 @@ sections:
   - {title: 固定幅の窓を動かして区間加算・区間最大（遅延セグメント木）, anchor: window-max}
   - {title: 同じ座標での処理順・閉区間と半開区間・座標圧縮, anchor: boundaries}
   - {title: 長方形の和集合の面積（区間加算・最小値とその個数）, anchor: union-area, level: 黄}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

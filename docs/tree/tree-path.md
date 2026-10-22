@@ -28,8 +28,8 @@ sections:
   - {title: 頂点の値と辺の値で LCA の扱いが違う, anchor: vertex-vs-edge}
   - {title: パスを辺の集合として扱う（包除原理）, anchor: edge-set}
   - {title: パスへの一括更新があるなら HL 分解, anchor: to-hld, level: 発展}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -285,6 +285,6 @@ HL 分解は、パスを $O(\log N)$ 個の列の区間に分けるので、列�
 
 - [はまやんはまやんはまやん「競技プログラミングにおけるLCA問題まとめ [auxiliary tree]」](https://blog.hamayanhamayan.com/entry/2017/05/03/131624)：LCA と根からの情報を組み合わせる型、根が変わる場合の LCA という項目の立て方
 - [drken「AtCoder ABC 152 F - Tree and Constraints (2D, 青色, 600 点)」](https://drken1215.hatenablog.com/entry/2020/01/26/164200)：例題 abc152_f の包除原理の組み立てと、パスの辺を整数の bit 集合で持つこと
-- [はまやんはまやんはまやん「ABC133 F - Colorful Tree」](https://blog.hamayanhamayan.com/entry/2019/07/08/213009)：練習 abc133_f の距離の書き換えと、質問を先読みして DFS で色ごとの和と本数を持つこと
+- [hamayan「Colorful Tree [AtCoder Beginner Contest 133 F]」](https://blog.hamayanhamayan.com/entry/2019/07/08/213009)：練習 abc133_f の距離の書き換えと、質問を先読みして DFS で色ごとの和と本数を持つこと
 - [kmjp「AtCoder ABC #298 (トヨタ自動車プログラミングコンテスト2023#1) : Ex - Sum of Min of Length」](https://kmjp.hatenablog.jp/entry/2023/04/16/0930)：力試し abc298_h の境目の頂点を K 個上の祖先で求めることと、部分木の大きさの累積で距離の和を計算すること
 - [merom686「ARC142」](https://merom686.hatenablog.com/entry/2022/06/20/000753)：練習 ARC142 C の距離の和の最小と距離 1 の場合の区別

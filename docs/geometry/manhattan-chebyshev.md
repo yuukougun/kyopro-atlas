@@ -30,8 +30,8 @@ sections:
   - {title: 盤面の斜め：r+c・r−c で斜めの線に番号を付ける（色の偶奇は parity）, anchor: diagonal-coordinates}
   - {title: 回転後の偶奇：u と v の偶奇がそろう点だけが元の格子点（チェビシェフ → マンハッタンで 1/2 が出る）, anchor: parity-after-rotation, level: 青}
   - {title: ひし形の範囲を正方形にして 2 次元累積和, anchor: diamond-range, level: 黄}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -344,4 +344,4 @@ $$
 - [ikatakos「Polaris.AI プログラミングコンテスト 2026（AtCoder Beginner Contest 457）E,F問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0509_abc457)：時刻と位置の回転と、最長減少部分列への帰着（解説の部分だけを参照）
 - [ikatakos「トヨタシステムズプログラミングコンテスト2024（AtCoder Beginner Contest 377) E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/1026_abc377)：力試しの方針（4 種類の線と交点の数え方。解説の部分だけを参照）
 - [drken「AtCoder ABC 265 F - Manhattan Cafe (黄色, 500 点)」](https://drken1215.hatenablog.com/entry/2023/07/15/021500)：力試しの方針（斜め方向の累積和で遷移をまとめる）
-- [AtCoder Library「Segtree」](https://github.com/atcoder/ac-library/blob/master/document_ja/segtree.md)：`segtree` の宣言と計算量
+- [AtCoder Library「Segtree」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/segtree.md)：`segtree` の宣言と計算量

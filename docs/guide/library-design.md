@@ -11,7 +11,7 @@ kind: [案内, 実装・C++]
 prerequisites: []
 related: [acl-reading#segtree-args, cpp-macros-template-file#bundling, segment-tree-monoids, stress-testing, problem-sets#verify-sets]
 summary: 自作ライブラリを何から作るか、ACL を手本にしたインターフェースとヘッダの書き方、Library Checker などでの動作確認の手順がわかる。提出用の展開の仕方と、各ページの確認用の問題の表もある。
-complexity: '自作の部品の計算量は ACL の同じ部品にそろえる（例：BIT は構築 O(N)、加算・区間和 O(log N)）。手元のテストは小さい n の乱数で数千回、確認用の問題は Library Checker の全ケース'
+complexity: null
 signs: []
 acl: []
 sections:
@@ -22,7 +22,7 @@ sections:
   - {title: 不変条件と境界のテスト, anchor: tests}
   - {title: 動作確認の手順, anchor: verify}
   - {title: ページ → 確認用の問題, anchor: verify-table}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -289,7 +289,7 @@ cph の改造版の展開を使い、目印 `// @impl` でヘッダを分ける�
 ## 参考 {#references}
 
 - [AtCoder「AC Library のドキュメント（document_ja）」](https://github.com/atcoder/ac-library/tree/master/document_ja)：共通の約束（制約外の入力は未定義）、関数ごとに制約と計算量を書く形、長さ 0 を許す制約
-- [AtCoder「ac-library」の fenwicktree.hpp](https://github.com/atcoder/ac-library/blob/master/atcoder/fenwicktree.hpp)：explicit なコンストラクタ、assert による前提の確認、符号なし整数で足す工夫、名前空間 `atcoder` と `internal`
+- [AtCoder Library「fenwicktree.hpp」](https://github.com/atcoder/ac-library/blob/master/atcoder/fenwicktree.hpp)：explicit なコンストラクタ、assert による前提の確認、符号なし整数で足す工夫、名前空間 `atcoder` と `internal`
 - [yosupo06「library-checker-problems」](https://github.com/yosupo06/library-checker-problems)：問題の分類と数（categories.toml）、`generate.py` でテストケースを作る手順、point_add_range_sum の入出力と制約
 - [online-judge-tools「verification-helper」](https://github.com/online-judge-tools/verification-helper/blob/master/README.ja.md)：`.test.cpp` の名前と `#define PROBLEM`、`oj-verify run`、`#pragma once` とインクルードガードへの対応
 - [online-judge-tools「verification-helper」の cplusplus_bundle.py](https://github.com/online-judge-tools/verification-helper/blob/master/onlinejudge_verify/languages/cplusplus_bundle.py)：oj-bundle がエラーにする書き方（2 行目以降の `#pragma once`・条件の中の include など）

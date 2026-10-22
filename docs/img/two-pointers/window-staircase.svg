@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 538 358" width="538" height="358" font-family="sans-serif" font-size="15">
-<rect width="538" height="358" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 538 364" width="538" height="364" font-family="sans-serif" font-size="15">
+<g transform="translate(0 6)">
+<rect x="0" y="-6" width="538" height="364" fill="#ffffff"/>
 <text x="80" y="18" font-size="15" fill="#333">和が 4 以下の区間：各 l に対する最大の r</text>
 <text x="68" y="50" text-anchor="end" fill="#555" font-size="15">境界</text>
 <text x="80" y="50" text-anchor="middle" fill="#555" font-size="15">0</text>
@@ -110,4 +111,5 @@
 <rect x="346" y="311" width="40" height="24" rx="4" fill="#cfe3f7" stroke="#1f5f9e" stroke-width="2"/>
 <line x1="388" y1="308" x2="388" y2="338" stroke="#1f5f9e" stroke-width="3"/>
 <text x="402" y="325" fill="#333">r = 7（和 2）</text>
+</g>
 </svg>

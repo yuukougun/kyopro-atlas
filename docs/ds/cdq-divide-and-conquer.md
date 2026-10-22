@@ -24,7 +24,7 @@ sections:
   - {title: 手順（左の更新 → 右のクエリを平面走査で処理する）と計算量 O(N log^2 N), anchor: procedure}
   - {title: 自作するときの要点と Library Checker, anchor: library}
   - {title: 代わりの手（座標が小さいなら 2 次元 BIT、更新がなければ平面走査）, anchor: alternatives}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -129,4 +129,4 @@ CDQ 分割統治より軽い方法で足りるかを先に考える。
 
 - [OI Wiki「CDQ 分治」](https://oi-wiki.org/misc/cdq-divide/)：学ぶための資料。名前の由来、3 つの型、同じ点をまとめる扱い、更新が独立でないときは中間順にすること（文章・図は使っていない）
 - [robert1003「A Simple Introduction to CDQ Divide and Conquer」](https://robert1003.github.io/2020/01/31/cdq-divide-and-conquer.html)：学ぶための資料。枠組みの 4 段と計算量 $T(N) = 2T(N/2) + O(N \log N)$
-- [yosupo「Library Checker の問題（point_add_rectangle_sum・rectangle_add_point_get）」](https://github.com/yosupo06/library-checker-problems/tree/master/data_structure)：検証に使う問題の内容と制約
+- [yosupo06「library-checker-problems/data_structure」](https://github.com/yosupo06/library-checker-problems/tree/master/data_structure)：検証に使う問題（point_add_rectangle_sum・rectangle_add_point_get）の内容と制約

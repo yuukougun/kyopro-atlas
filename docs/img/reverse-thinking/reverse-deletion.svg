@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 574" width="380" height="574" font-family="sans-serif">
-<rect width="380" height="574" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 575" width="380" height="575" font-family="sans-serif">
+<g transform="translate(0 1)">
+<rect x="0" y="-1" width="380" height="575" fill="#ffffff"/>
 <defs><marker id="ah" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#333"/></marker></defs>
 <text x="16" y="22" font-size="14" fill="#222">右の実線：前向き（問題の順）。辺を 1 本ずつ削除</text>
 <text x="16" y="42" font-size="14" fill="#222">左の破線：逆向き（処理の順）。空から辺を 1 本</text>
@@ -68,4 +69,5 @@
 <text x="310" y="456" font-size="13" fill="#222">c を削除</text>
 <line x1="80" y1="468" x2="80" y2="434" stroke="#333" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ah)"/>
 <text x="70" y="456" font-size="13" text-anchor="end" fill="#222">c を追加</text>
+</g>
 </svg>

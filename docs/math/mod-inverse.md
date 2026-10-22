@@ -27,8 +27,8 @@ sections:
   - {title: 有理数 P/Q を P × Q^(−1) で表す計算, anchor: rational}
   - {title: 割れないときの3つの場合（割る数が p の倍数・公比 ≡ 1・法が素数でない）, anchor: not-invertible}
   - {title: 'ACL の inv_mod と modint::inv', anchor: acl}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -257,8 +257,8 @@ $d$ 桁の整数 $x$ を $x$ 回書くと $d \cdot x$ 文字になる。桁数�
 
 - [drken「「998244353 で割ったあまり」の求め方を総特集！ 〜 逆元から離散対数まで 〜」](https://qiita.com/drken/items/3b4fdf0a78e7a138cd9a)：逆元が存在する条件と 2 つの思い込み、フェルマーと拡張ユークリッドの比較、余りを取ってから割ってはいけないこと、逆元の漸化式
 - [drken「フェルマーの小定理の証明と使い方」](https://qiita.com/drken/items/6b4031ccbb2cab7436f3)：並べ替えによる証明の筋道
-- [AtCoder Library「Math」「modint」のドキュメント](https://github.com/atcoder/ac-library/tree/master/document_ja)：`inv_mod`・`inv()`・割り算の要件と計算量
+- [AtCoder「AC Library のドキュメント（document_ja）」](https://github.com/atcoder/ac-library/tree/master/document_ja)：`inv_mod`・`inv()`・割り算の要件と計算量
 - [E869120「kyopro_educational_90 082 の解答コード」](https://github.com/E869120/kyopro_educational_90/blob/main/sol/082a.cpp)：例題の桁数ごとの分け方と 2 の逆元
-- [E869120「math-algorithm-book 4.6 節 問題 3 の解答コード」](https://github.com/E869120/math-algorithm-book/blob/main/editorial/chap4-6/prob4-6-3.cpp)：練習の方針（等比数列の和と 3 の逆元）
+- [E869120「math-algorithm-book の解答例 prob4-6-3.cpp」](https://github.com/E869120/math-algorithm-book/blob/main/editorial/chap4-6/prob4-6-3.cpp)：練習の方針（等比数列の和と 3 の逆元）
 - [drken「AtCoder ABC 357 D - 88888888 (1Q, 緑色, 350 点)」](https://drken1215.hatenablog.com/entry/2024/06/10/000051)：練習の方針（公比 $10^d$ の等比数列の和）
 - [drken「AtCoder ABC 186 E - Throne (1D, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2020/12/20/015100)：練習の方針（gcd で割ってから逆元を取る一次合同式）

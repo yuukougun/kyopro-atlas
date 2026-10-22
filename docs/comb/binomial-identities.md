@@ -19,7 +19,7 @@ signs:
   - {type: shape, text: Σ の中に二項係数があり、N が大きく項ごとには足せない}
 acl: []
 frequency: B
-frequency_evidence: recent 0・前提として 1 ページに届く（直接 1）・古い ABC 3 問
+frequency_evidence: recent 0・前提として 1 ページに届く（直接 1）・古い ABC 5 問
 sections:
   - {title: 二項定理、二項係数の和 2^n と交代和, anchor: binomial-theorem}
   - {title: 偶奇の条件つきの和, anchor: parity-sum}
@@ -28,8 +28,8 @@ sections:
   - {title: '吸収公式 k C(n,k) = n C(n−1, k−1)', anchor: absorption}
   - {title: 二項定理で累乗の和を展開する, anchor: power-sums}
   - {title: 式変形の検算（小さいケース）, anchor: verify}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -281,7 +281,7 @@ mod を取った値どうしの一致でも検算はできるが、まずは正�
 
 ??? note "練習の方針"
     - **ABC405 E**：境目の左にあるバナナの個数 $k$ で場合を分けると、各項が二項係数 2 つの積になる。上の数が動く Vandermonde の形に似ているが、和の範囲が途中で切れるので 1 つの二項係数にはまとまらない。$k$ についての $O(C)$ のループで足せばよい（閉じた式を探しすぎない）
-    - **ABC150 E**：$C$ を降順に並べ、$n$ 番目（0 始まり）の要素の寄与を数える。前の $n$ 個のうち $k$ 個が異なる場合の係数 $\sum_k (k+1) \binom{n}{k}$ が要り、二項定理の $2^n$ と吸収公式の $\sum_k k \binom{n}{k} = n 2^{n-1}$ で $2^n + n 2^{n-1}$ という閉じた式になる。$N = 1$ は別に扱う
+    - **ABC150 E**：$C$ を降順に並べ、$n$ 番目（0-indexed）の要素の寄与を数える。前の $n$ 個のうち $k$ 個が異なる場合の係数 $\sum_k (k+1) \binom{n}{k}$ が要り、二項定理の $2^n$ と吸収公式の $\sum_k k \binom{n}{k} = n 2^{n-1}$ で $2^n + n 2^{n-1}$ という閉じた式になる。$N = 1$ は別に扱う
     - **ARC106 D**：[累乗の和の展開](#power-sums)の形そのものである。累乗の和 $S_0, \dots, S_K$ を前計算し、順序つきの組の和から $i = j$ の項を引いて 2 で割る。二項係数は $x \le K$ の範囲だけなので、パスカルの三角形の表でも足りる
 
 ## 力試し {#challenge}

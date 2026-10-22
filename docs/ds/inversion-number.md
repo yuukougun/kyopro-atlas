@@ -27,8 +27,8 @@ sections:
   - {title: 言い換え（P を Q に並べ替える回数＝Q での位置に置き換えた列の転倒数、累積和の大小の組）, anchor: reformulation}
   - {title: 差分で更新する（先頭を末尾へ回す・全体に足して mod を取る・色ごとの転倒数を引く）, anchor: incremental}
   - {title: 窓を伸縮しながら転倒数を増減する（尺取り・期待値と組む）, anchor: sliding-window, level: 青}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -251,10 +251,10 @@ $N$ 通りを毎回数え直すと $O(N^2 \log N)$ で間に合わない。最�
 ## 参考 {#references}
 
 - [AtCoder Library「Fenwick Tree」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/fenwicktree.md)：`fenwick_tree` の宣言・`add`・`sum` の区間と計算量（v1.6 の手元の版で確かめた）
-- [vain0x「転倒数」（note）](https://note.com/vain0x/n/n0037d6468812)：例題 chokudai_S001_j の問い（バブルソートの交換回数）と、値ごとの個数を BIT で数える方針
+- [vain0x「競プロ参戦記 第10回「転倒数」 Chokudai Speed Run 001 [J]」（note）](https://note.com/vain0x/n/n0037d6468812)：例題 chokudai_S001_j の問い（バブルソートの交換回数）と、値ごとの個数を BIT で数える方針
 - [kmjp「AtCoder ABC #190 F」](https://kmjp.hatenablog.jp/entry/2021/01/30/0900)：例題 abc190_f の値の範囲と、先頭を末尾へ回したときの増減 $N - 1 - 2x$
 - [cutelxy「ABC452 F」（博客园）](https://www.cnblogs.com/cutelxy/p/19831149)：例題 abc452_f の単調性・端の出し入れでの増減・「K 以下」の差に分けること
 - [kcpc「ABC396 F」](https://kcpc.hatenablog.com/entry/2025/03/09/020000)：練習 abc396_f の、$M - 1$ から $0$ に戻る要素の増減の式
 - [kyo-pro「ABC261 F」](https://kyo-pro.hatenablog.com/entry/ABC261F)：練習 abc261_f の、全体の転倒数から同じ色の転倒数を引く方針と、色ごとの BIT で RE になった注意
-- [ikatakos「AtCoder Beginner Contest 479」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/1011_abc479)：力試し abc479_f の、仮の人を置いて隣接 swap に言い換える方針と組の分け方（解法の部分だけ）
-- [drken「ABC380 G」](https://drken1215.hatenablog.com/entry/2024/11/17/113336)：力試し abc380_g の、入力が順列であることと、窓から $K$ 以上離れた組の転倒が変わらないこと（記事は組ごとに転倒する確率を足す別の解き方）
+- [ikatakos「オムロンプログラミングコンテスト2026 （AtCoder Beginner Contest 479）F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/1011_abc479)：力試し abc479_f の、仮の人を置いて隣接 swap に言い換える方針と組の分け方（解法の部分だけ）
+- [drken「AtCoder ABC 380 G - Another Shuffle Window (3D, 青色, 575 点)」](https://drken1215.hatenablog.com/entry/2024/11/17/113336)：力試し abc380_g の、入力が順列であることと、窓から $K$ 以上離れた組の転倒が変わらないこと（記事は組ごとに転倒する確率を足す別の解き方）

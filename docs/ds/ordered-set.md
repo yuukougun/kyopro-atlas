@@ -20,7 +20,7 @@ signs:
 acl: []
 verify: [predecessor_problem, double_ended_priority_queue]
 frequency: A
-frequency_evidence: recent 2（abc466_f・abc475_e）・前提として 8 ページに届く（直接 6）・古い ABC 8 問
+frequency_evidence: recent 2（abc466_f・abc475_e）・前提として 8 ページに届く（直接 6）・古い ABC 7 問
 sections:
   - {title: 前後の要素（lower_bound とその 1 つ前。番兵で端の場合分けを消す）, anchor: neighbors}
   - {title: K 番目付近（イテレータを K 歩動かす。K が小さいときだけ）, anchor: near-kth}
@@ -28,8 +28,8 @@ sections:
   - {title: 行ごと・列ごとの set（グリッドで次の壁を探し、両方から消す）, anchor: rows-and-columns, level: 水}
   - {title: パレート境界を map で持つ（支配される点を消す。ならし O(log N)）, anchor: pareto, level: 水}
   - {title: ソート順で隣り合う組の集合（2 番目に大きい値の寄与。最小 XOR の組は Binary Trie のページ）, anchor: adjacent-pairs, level: 青}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

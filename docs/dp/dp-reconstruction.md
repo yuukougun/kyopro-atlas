@@ -24,8 +24,8 @@ sections:
   - {title: 最適な遷移が複数あるときの選び方, anchor: ties}
   - {title: 辞書順最小の復元（後ろからの DP と前からの貪欲）, anchor: lexicographic-min}
   - {title: 辞書順 K 番目を数え上げで決める（個数が K を超えたら打ち切る）, anchor: dp-kth-lexicographic}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

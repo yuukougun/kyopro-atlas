@@ -29,7 +29,7 @@ sections:
   - {title: C++ の版と GCC の対応表（g++-13 と AtCoder の GCC 15.2）, anchor: version-matrix}
   - {title: GCC 13 で通らない書き方（GCC 14〜・GCC 15〜の C++23 の機能）, anchor: gcc13-limits}
   - {title: AtCoder で使えないもの：C++26 の機能と GCC 16 からの機能, anchor: not-on-atcoder}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 cpp_std: 23
 gcc_min: 15
@@ -307,7 +307,7 @@ GCC 16 から入る機能は、`-std=gnu++26` を付けても g++-15 にはな�
 - AtCoder の GCC 版のオプションの一覧（`-ftrivial-auto-var-init=zero`・`-fmodules` を含む）は、AtCoder の公式の言語の一覧（2025-10 の言語アップデートの時点）による。上の traP の記事の「主要なコンパイルフラグ」には `-ftrivial-auto-var-init=zero` が載っていない
 - [GCC「Options That Control Optimization」](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html)：`-ftrivial-auto-var-init` の意味と、`-ffp-contract` の既定が `fast` であること
 - [GCC「GCC 14 Release Series: Changes」](https://gcc.gnu.org/gcc-14/changes.html)：deducing this・`print`・`ranges::to` が GCC 14 から入ったこと
-- [GCC「GCC 15 Release Series: Changes」](https://gcc.gnu.org/gcc-15/changes.html)：範囲の書式化・`from_range`・`flat_map`・`std` モジュール、最適化なしのビルドで検査が有効になること
+- [GCC「GCC 15 Release Series Changes, New Features, and Fixes」](https://gcc.gnu.org/gcc-15/changes.html)：範囲の書式化・`from_range`・`flat_map`・`std` モジュール、最適化なしのビルドで検査が有効になること
 - [GCC「libstdc++ Implementation Status」](https://gcc.gnu.org/onlinedocs/libstdc++/manual/status.html)：ライブラリの機能ごとの GCC の版
 - [cppreference「C++23 compiler support」](https://en.cppreference.com/cpp/compiler_support/23)：C++23 の機能ごとの GCC の版
-- [AtCoder Library のリリース](https://github.com/atcoder/ac-library/releases)：v1.6 の変更点（`val()` の型）
+- [AtCoder「ac-library Releases」](https://github.com/atcoder/ac-library/releases)：v1.6 の変更点（`val()` の型）

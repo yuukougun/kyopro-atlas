@@ -24,8 +24,8 @@ sections:
   - {title: string_view：コピーしない部分文字列。一時的な string を入れると壊れる（C++17）, anchor: string-view}
   - {title: '区切る：views::split('' '') と string_view(w)（C++20）', anchor: split}
   - {title: cin で読む文字列は空白で区切られる、その後の getline は残った改行を読む, anchor: getline}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 cpp_std: null
 gcc_min: null
 atcoder: true
@@ -215,6 +215,6 @@ $N = 2 \times 10^5$ ではメモリのコピーが速く 1 秒を切るが、$O(
 - [cpprefjp「basic_string::find」](https://cpprefjp.github.io/reference/string/basic_string/find.html)：見つからないときに `npos` を返すこと。計算量の規定がないこと
 - [cpprefjp「to_string」](https://cpprefjp.github.io/reference/string/to_string.html)：`double` が `%f` の書式になること。C++26 から `std::format` と同じ書式になること
 - [cpprefjp「basic_string::starts_with」](https://cpprefjp.github.io/reference/string/basic_string/starts_with.html)：C++20 の前方一致
-- [cpprefjp「basic_string::contains」](https://cpprefjp.github.io/reference/string/basic_string/contains.html)：C++23 の部分文字列の判定
+- [cpprefjp「std::basic_string::contains」](https://cpprefjp.github.io/reference/string/basic_string/contains.html)：C++23 の部分文字列の判定
 - [cpprefjp「basic_string_view」](https://cpprefjp.github.io/reference/string_view/basic_string_view.html)：`string_view` の操作と寿命の注意
 - [cppreference「std::getline」](https://en.cppreference.com/cpp/string/basic_string/getline)：`cin >>` の後に使うときの注意と `std::ws`

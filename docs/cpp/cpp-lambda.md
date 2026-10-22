@@ -28,8 +28,8 @@ sections:
   - {title: 不動点コンビネータ（雛形の FixPoint・MFP）, anchor: fixpoint}
   - {title: 戻り値の型を後置で書く場面（再帰より前に型の決まる return がないとき）, anchor: return-type}
   - {title: '速さの比較：std::function は fib(40) で約 5 倍、木の DFS で約 1.5 倍遅い', anchor: speed}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 cpp_std: null
 gcc_min: null
 atcoder: true
@@ -328,4 +328,4 @@ C++23 の deducing this は、最初の引数に `this` を付けると、そこ
 - [cpprefjp「自身のオブジェクトを明示的にパラメータとして指定する」](https://cpprefjp.github.io/lang/cpp23/deducing_this.html)：deducing this と再帰ラムダ
 - [cppreference「std::function」](https://en.cppreference.com/w/cpp/utility/functional/function)：`std::function` が型を隠して呼び出す入れ物であること
 - [GCC「C++ Standards Support in GCC」](https://gcc.gnu.org/projects/cxx-status.html)：deducing this（P0847）が GCC 14、`static operator()`（P1169）が GCC 13 から使えること
-- [AtCoder Library「Segtree」](https://github.com/atcoder/ac-library/blob/master/document_ja/segtree.md)：`segtree<S, op, e>` のテンプレート引数
+- [AtCoder Library「Segtree」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/segtree.md)：`segtree<S, op, e>` のテンプレート引数

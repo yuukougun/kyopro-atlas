@@ -978,12 +978,12 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: 高さ 0 の花の列に、区間の高さを 1 ずつ上げる水やりを繰り返して目標の高さにするときの、水やりの回数の最小を求める。
   approach: 答えは隣り合う目標の高さの差の正の部分の和（左端は高さ 0 との差）
-  pages:
-  - {id: difference-sequence, role: practice}
+  pages: []
   evidence:
   - https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc116-c.html
   status: 確認済み
   checked: null
+  note: 2026-10-22 に difference-sequence の pages から外した（手引き §17-12。練習としての役割が薄い）。本文には載せていない
 - id: abc116_d
   contest: abc116
   index: D
@@ -1461,11 +1461,11 @@ problems:
   pages:
   - {id: lcs, role: practice}
   - {id: counting-dedup, role: practice}
-  - {id: dp-prefix-sum, role: practice}
   evidence:
   - https://drken1215.hatenablog.com/entry/2019/06/21/230200
   status: 確認済み
   checked: '2026-10-21'
+  note: 2026-10-22 に dp-prefix-sum の pages から外した（手引き §17-12）
 - id: abc130_f
   contest: abc130
   index: F
@@ -1867,7 +1867,7 @@ problems:
   experimental: false
   difficulty_fetched: '2026-10-21'
   summary: L ≤ x ≤ y ≤ R で、y mod x = y xor x を満たす整数の組 (x, y) の個数を求める。
-  approach: 上限と下限のフラグを両方持ち、最上位ビットが立ったかも状態にする（節 lower-and-upper）
+  approach: 上限と下限のフラグを両方持ち、最上位 bit が立ったかも状態にする（節 lower-and-upper）
   pages:
   - {id: digit-dp-advanced, role: challenge}
   evidence:
@@ -3234,7 +3234,7 @@ problems:
   experimental: false
   difficulty_fetched: '2026-10-21'
   summary: 犬に 1 番から a, b, …, z, aa, ab, …, zz, aaa, … と名前を付けるとき、N 番目の犬の名前を求める。
-  approach: 1 を引いてから 26 で割る（1 始まりの 26 進）
+  approach: 1 を引いてから 26 で割る（0 を使わない 26 進）
   pages:
   - {id: base-conversion, role: example}
   evidence:
@@ -3671,16 +3671,16 @@ problems:
   difficulty: 2419
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: 自己ループのない（多重辺は許す）N 頂点 M 辺の無向グラフで、各連結成分がパスかサイクルで、最大の連結成分の頂点数がちょうど L のものの数を求める。
+  summary: 自己ループのない（多重辺は許す）N 頂点 M 辺の無向グラフで、各連結成分がパスか閉路で、最大の連結成分の頂点数がちょうど L のものの数を求める。
   approach: 「最大の成分が L 以下」から「L−1 以下」を引く。頂点 1 を含む成分の大きさで分類する DP
   alternatives:
   - pages:
     - counting-dedup
-    summary: 自己ループのない（多重辺は許す）N 頂点 M 辺の無向グラフで、各連結成分がパスかサイクルで、最大の連結成分の頂点数がちょうど L のものの数を求める。
+    summary: 自己ループのない（多重辺は許す）N 頂点 M 辺の無向グラフで、各連結成分がパスか閉路で、最大の連結成分の頂点数がちょうど L のものの数を求める。
     approach: 最小番号の頂点を含む連結成分から決めて重複を除く。「ちょうど L」は「L 以下」の差で数える
   - pages:
     - counting-labeled-graphs
-    summary: 自己ループのない（多重辺は許す）N 頂点 M 辺の無向グラフで、各連結成分がパスかサイクルで、最大の連結成分の頂点数がちょうど L のものの数を求める。
+    summary: 自己ループのない（多重辺は許す）N 頂点 M 辺の無向グラフで、各連結成分がパスか閉路で、最大の連結成分の頂点数がちょうど L のものの数を求める。
     approach: 頂点 1 を含む成分の大きさで分類する DP。「ちょうど L」は「L 以下」の差で数える
   pages:
   - {id: counting-mindset, role: challenge}
@@ -4472,12 +4472,12 @@ problems:
   difficulty: 1945
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: 各辺に文字が書かれた無向グラフで、頂点 1 から頂点 N への歩道のうち、通った辺の文字列が回文になるものの最短の長さを求める。
+  summary: 各辺に文字が書かれた無向グラフで、頂点 1 から頂点 N へのウォークのうち、通った辺の文字列が回文になるものの最短の長さを求める。
   approach: 両端の頂点の組 (u, v) を状態にし、同じ文字の辺で両側へ同時に伸ばす
   alternatives:
   - pages:
     - palindrome
-    summary: 1 から N への歩道で、辺の文字を並べた文字列が回文になる最短の長さを求める。
+    summary: 1 から N へのウォークで、辺の文字を並べた文字列が回文になる最短の長さを求める。
     approach: 頂点の組から両端で同じ文字の辺をたどる BFS
   pages:
   - {id: extended-dijkstra, role: challenge}
@@ -6632,7 +6632,6 @@ problems:
   - {id: hashing-for-sets, role: practice}
   - {id: randomized, role: practice}
   evidence:
-  - https://trap.jp/post/1594/
   - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0205_abc238
   status: 確認済み
   checked: '2026-10-21'
@@ -6948,7 +6947,7 @@ problems:
   difficulty: 1661
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: 各頂点を通った回数の偶奇を表す 0/1 列 S のすべてについて、その偶奇になる最短の歩道の長さを求め、総和を答える。
+  summary: 各頂点を通った回数の偶奇を表す 0/1 列 S のすべてについて、その偶奇になる最短のウォークの長さを求め、総和を答える。
   approach: (偶奇のビット列, 今の頂点) を状態にした BFS
   pages:
   - {id: extended-dijkstra, role: practice}
@@ -7234,7 +7233,6 @@ problems:
   pages:
   - {id: hashing-for-sets, role: example}
   evidence:
-  - https://trap.jp/post/1594/
   - https://drken1215.hatenablog.com/entry/2022/05/12/105000
   - https://merom686.hatenablog.com/entry/2022/05/09/022850
   status: 確認済み
@@ -8602,12 +8600,12 @@ problems:
   experimental: false
   difficulty_fetched: '2026-10-21'
   summary: x を選んで、全要素と x の XOR の最大値を最小にする。
-  approach: 上位ビットで集合を分ける再帰（明示的に作らない Binary Trie）
+  approach: 上位 bit で集合を分ける再帰（明示的に作らない Binary Trie）
   alternatives:
   - pages:
     - bitwise-independence
     summary: x を選んで max(a_i xor x) を最小化する。
-    approach: 上位ビットから、0 と 1 が混在する桁でグループを 2 つに分けて再帰する
+    approach: 上位 bit から、0 と 1 が混在する桁でグループを 2 つに分けて再帰する
   pages:
   - {id: bitwise-independence, role: challenge}
   - {id: binary-trie, role: example}
@@ -11261,12 +11259,12 @@ problems:
   difficulty: 1835
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: 負の重みの辺がある（負閉路のない）有向グラフで、すべての頂点を 1 回以上通る歩道の重みの最小を求める。
+  summary: 負の重みの辺がある（負閉路のない）有向グラフで、すべての頂点を 1 回以上通るウォークの重みの最小を求める。
   approach: 全点対の最短距離を求めてから bitDP（節 with-shortest-paths）
   alternatives:
   - pages:
     - warshall-floyd
-    summary: 負の辺があり負閉路のない有向グラフで、すべての頂点を 1 回以上訪れる歩道の重みの最小値を求める。
+    summary: 負の辺があり負閉路のない有向グラフで、すべての頂点を 1 回以上訪れるウォークの重みの最小値を求める。
     approach: 全点対の最短距離を前計算し、訪れた頂点の集合で bitDP する
   pages:
   - {id: bit-dp, role: practice}
@@ -12747,7 +12745,7 @@ problems:
   pages:
   - {id: sqrt-decomposition, role: practice}
   evidence:
-  - https://suzukiapple.tumblr.com/post/758965519503228928/abc365g-atcoder-office
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0803_abc365
   status: 確認済み
   checked: null
 - id: abc366_e
@@ -13856,7 +13854,7 @@ problems:
   difficulty: 1403
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: 文字付きの有向グラフで、各頂点対について、たどった文字列が回文になる最短の歩道の長さを求める。
+  summary: 文字付きの有向グラフで、各頂点対について、たどった文字列が回文になる最短のウォークの長さを求める。
   approach: 頂点の組を状態にして両端から BFS する
   pages:
   - {id: palindrome, role: example}
@@ -15472,13 +15470,12 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: （執筆時に確かめる）
   approach: 仕切りの位置を固定して二項係数で数える（research/00 §2.3.8 の分類）
-  pages:
-  - {id: fix-variable, role: practice}
+  pages: []
   evidence:
   - https://qiita.com/comet725/items/3fdcd73125c20e2cc7a2
   status: 未確認
   checked: null
-  note: 問いの条件を第三者の解説で確かめられない（comet725 氏の記事は方針とコードだけ）。fix-variable の本文には載せていない。問いを確かめたら 確認済み に戻す
+  note: 問いの条件を第三者の解説で確かめられない（comet725 氏の記事は方針とコードだけ）。fix-variable の本文には載せていない。2026-10-22 に、ikatakos 氏の ABC458 の記録（F・G だけ）・Konini64 氏の Qiita の記録（E は解いていない）・kmjp 氏のブログ（記事がない）を探したが、問いを書いた第三者の解説は見つからない。fix-variable（practice）の pages から外した。問いを確かめたら 確認済み に戻す（pages にも戻す）
 - id: abc458_f
   contest: abc458
   index: F
@@ -16036,14 +16033,14 @@ problems:
   difficulty: 2052
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: （執筆時に確かめる）
-  approach: 交換論法で順序を決めた貪欲を、座標圧縮したセグ木で速くする（research/00 §2.3.8 の分類）
+  summary: 各メールに書く時間 A_j と返信までの時間 B_j があり、A・B の 1 点更新のたびに、メールを 1 通ずつ好きな順に書いて送るとき、すべての返信が届く最小の時刻を答える。
+  approach: 交換論法で B の大きい順に送るのが最適と分かり、答えは「先頭からの A の和 + B_i」の最大。B を座標圧縮したセグメント木に（A の和, その最大）を載せて更新に答える
   pages:
   - {id: exchange-argument, role: challenge}
   evidence:
   - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0718_abc467
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: abc467_g
   contest: abc467
   index: G
@@ -16507,14 +16504,14 @@ problems:
   difficulty: 1916
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: （執筆時に確かめる）
-  approach: 包除原理と 2 次元累積和（research/00 §2.3.8 の分類）
+  summary: 白と黒のマス目で、長方形を 1 つ選んでその中をすべて黒に塗る操作を高々 1 回行うとき、できる盤面の種類の数を求める。
+  approach: 同じ盤面を重ねて数えないよう「4 辺のどれも全部が黒ではない長方形」を数える。「この辺は全部黒」の条件の集合で包除し、黒の連続の長さと累積和で数える
   pages:
   - {id: inclusion-exclusion, role: practice}
   evidence:
   - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0912_abc475
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: abc475_g
   contest: abc475
   index: G
@@ -16741,13 +16738,12 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: （執筆時に確かめる）
   approach: 左右からの累積 min を前計算する（research/00 §2.3.8 の分類）
-  pages:
-  - {id: prefix-sum, role: practice}
+  pages: []
   evidence:
   - https://qiita.com/comet725/items/0c8bc1e676d535283e84
   status: 未確認
   checked: null
-  note: 問い（L・R の意味、何の最小を問うか）を書いた第三者の解説がない。prefix-sum の本文には載せていない。問いを確かめたら 確認済み に戻す
+  note: 問い（L・R の意味、何の最小を問うか）を書いた第三者の解説がない。prefix-sum の本文には載せていない。2026-10-22 に、ikatakos 氏の ABC479 の記録（F・G だけ）・Konini64 氏の Qiita の記録（方針だけで、問いを書いていない）・kmjp 氏のブログ（G だけ）を探したが、問いを書いた第三者の解説は見つからない。prefix-sum（practice）の pages から外した。問いを確かめたら 確認済み に戻す（pages にも戻す）
 - id: abc479_e
   contest: abc479
   index: E
@@ -16757,13 +16753,12 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: （執筆時に確かめる）
   approach: 木の DFS で部分木サイズを求め、辺の寄与で数える
-  pages:
-  - {id: tree-edge-contribution, role: practice}
+  pages: []
   evidence:
   - https://zenn.dev/takechi_s/articles/atcoder-abc479
   status: 未確認
   checked: null
-  note: evidence（takechi_s 氏の記事）は問題文を載せておらず、問いを確かめられない。tree-edge-contribution の本文には載せていない。問いを確かめたら 確認済み に戻す
+  note: evidence（takechi_s 氏の記事）は問題文を載せておらず、問いを確かめられない。tree-edge-contribution の本文には載せていない。2026-10-22 に、ikatakos 氏の ABC479 の記録（F・G だけ）・Konini64 氏の Qiita の記録（A〜D だけ）・kmjp 氏のブログ（G だけ）を探したが、問いを書いた第三者の解説は見つからない。tree-edge-contribution（practice）の pages から外した。問いを確かめたら 確認済み に戻す（pages にも戻す）
 - id: abc479_f
   contest: abc479
   index: F
@@ -16894,16 +16889,16 @@ problems:
   difficulty: 2514
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: 最初の t 本の辺だけを使ったとき、x と y の成分の頂点数の合計が z 以上になる最小の t を各クエリで答える。
+  summary: 最初の t 本の辺だけを使ったとき、x と y を含む成分の頂点数（同じ成分なら 1 回）が z 以上になる最小の t を各クエリで答える。
   approach: 全クエリの二分探索を同時に進め、各段で辺を先頭から Union-Find に足しながら判定する
   alternatives:
   - pages:
     - merge-process-tree
-    summary: 最初の t 本の辺だけを使ったとき、x と y の成分の頂点数の合計が z 以上になる最小の t を各クエリで答える。
+    summary: 最初の t 本の辺だけを使ったとき、x と y を含む成分の頂点数（同じ成分なら 1 回）が z 以上になる最小の t を各クエリで答える。
     approach: 辺を番号順に併合する過程の木で、条件を満たす最小の番号を求める（並列二分探索でも解ける）
   - pages:
     - partially-persistent-union-find
-    summary: 最初の t 本の辺だけを使ったとき、x と y の成分の頂点数の合計が z 以上になる最小の t を各クエリで答える。
+    summary: 最初の t 本の辺だけを使ったとき、x と y を含む成分の頂点数（同じ成分なら 1 回）が z 以上になる最小の t を各クエリで答える。
     approach: 部分永続 Union-Find と二分探索
   pages:
   - {id: merge-process-tree, role: practice}

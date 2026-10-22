@@ -18,15 +18,15 @@ signs:
   - {type: shape, text: '区間 [l, r] の右端 r で、l 以降の位置の dp にまとめて加算する'}
 acl: [lazy_segtree]
 frequency: B
-frequency_evidence: recent 1（abc480_g）・前提として届くページなし・古い ABC 5 問
+frequency_evidence: recent 1（abc480_g）・前提として届くページなし・古い ABC 3 問
 sections:
   - {title: 2 次元の表で考えてから、行ごとに変わる場所を書き出す, anchor: diff-per-row}
   - {title: 変わる場所だけを更新する（辺を 1 本ずつ緩和する）, anchor: update-changes}
   - {title: 全体のシフトを添字のずらしで表す, anchor: global-shift}
   - {title: 区間加算と区間最大を遅延セグメント木で（区間の右端で加算する）, anchor: lazy-segment-tree}
   - {title: 単調スタックと組み合わせる, anchor: with-monotonic-stack, level: 黄}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -273,12 +273,12 @@ $N, K \le 2 \times 10^5$ なので、時刻ごとに全頂点を作り直す $O(
 
 ## 参考 {#references}
 
-- [かんプリン「競技プログラミング 典型問題メモ」](https://kanpurin.hatenablog.com/entry/2020/04/07/182948)：インライン DP の定義（更新する場所が限られるとき配列を使い回す）と問題の一覧
+- [かんプリン「競技プログラミング　典型問題メモ」](https://kanpurin.hatenablog.com/entry/2020/04/07/182948)：インライン DP の定義（更新する場所が限られるとき配列を使い回す）と問題の一覧
 - [drken「LIS でも大活躍！ DP の配列使いまわしテクニックを特集」](https://qiita.com/drken/items/68b8503ad4ffb469624c)：配列の使い回しから in-place 化してセグメント木に載せる流れと、EDPC W の位置づけ
 - [Kazun「AtCoder Beginner Contest 271 E問題 Subsequence Path」](https://kazun-kyopro.hatenablog.com/entry/ABC/271/E)：例題 abc271_e の状態・遷移・制約と、変わる場所が 1 か所である点
 - [drken「AtCoder ABC 372 F - Teleporting Takahashi 2」](https://drken1215.hatenablog.com/entry/2024/09/22/030233)：例題 abc372_f の設定・制約と、頂点を縮める別解
 - [KCPC「【ABC372】KCPCブログを開設しました！」](https://kcpc.hatenablog.com/entry/2024/09/22/201128)：abc372_f を配列のずらしで解く考え方と、更新後の値を読む誤り
-- [Series_205「Educational DP Contest (EDPC) W 問題 解説」](https://qiita.com/Series_205/items/7d2c57b45179006d0bc6)：例題 dp_w の状態・遷移と区間の右端での加算
+- [Series_205「Educational DP Contest (EDPC) T ~ W 問題 解説」](https://qiita.com/Series_205/items/7d2c57b45179006d0bc6)：例題 dp_w の状態・遷移と区間の右端での加算
 - [drken「EDPC (Educational DP Contest) W - Intervals」](https://drken1215.hatenablog.com/entry/2021/08/11/005634)：例題 dp_w の制約（$a$ は負になりうる）と、すべて非負なら全部 1 が最適である点
 - [かんプリン「ABC203 E - White Pawn」](https://kanpurin.hatenablog.com/entry/2021/05/31/041904)：練習 abc203_e の状態と、黒いポーンのある行だけを更新する方針
 - [kmjp「AtCoder ABC #480 : Div1 G Zonal Score Minimization」](https://kmjp.hatenablog.jp/entry/2026/10/17/0930)：力試し abc480_g の DP と、単調スタックで区間加算する範囲

@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="400" height="320" viewBox="0 0 400 320" font-family="sans-serif" font-size="14">
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="321" viewBox="0 0 400 321" font-family="sans-serif" font-size="14">
 <rect width="100%" height="100%" fill="#ffffff"/>
+<g transform="translate(0 1)">
 <text x="16" y="22" fill="#222">凸な f の差分 d(x) は右へ増える</text>
 <rect x="61" y="74" width="30" height="126" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
 <text x="76" y="68" text-anchor="middle" fill="#1f4e9a">9</text>
@@ -45,4 +46,5 @@
 <line x1="196.0" y1="226" x2="196.0" y2="300" stroke="#333" stroke-width="2"/>
 <text x="188.0" y="284" text-anchor="end" fill="#b03a2e" font-size="13">d &lt; 0（ng の側）</text>
 <text x="204.0" y="284" fill="#2e7d32" font-size="13">d ≥ 0（ok の側）</text>
+</g>
 </svg>

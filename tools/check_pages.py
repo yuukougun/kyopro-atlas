@@ -36,7 +36,10 @@
   推移的に冗長な前提、前提と related の重複、自分への related、level が発展なのに type が overview でない、
   summary の長さ・文の数・禁止語（D10）、要点の項目の欠け（technique・thinking・overview・cpp）、
   stage が draft なのに別名が冒頭にない、draft 以降なのに complexity が null・要点に「（執筆時に書く）」が残る、
-  同じページに同じ問題、2ページ以上で例題（D4）、分野の外のフォルダのページ
+  同じページに同じ問題、2ページ以上で例題（D4）、分野の外のフォルダのページ、
+  定型の節の見出しと anchor の組が違う（§13-1・§16-1）、sections に定型の節がある、
+  guide・hub・pattern の complexity が null でない（§17-1）、発展の概要に ## {#library}・{#resources} がない（§16-1・§16-2）、
+  同じ URL の出典（参考・学ぶための資料の節の「- [題名](URL)」）の題名が違う（§17-10）
 
 このファイルには、gen_site.py・fix_problems.py・make_skeleton.py が使う共通の部品（定数、ページの読み込み、問題の一覧の
 読み取り、台帳と問題の表示名、Markdown の文字のエスケープ、schema の検査器）も置く。MkDocs は import しない。
@@ -927,6 +930,85 @@ def check_links(all_pages: list[Page], rep: Report, docs: Path) -> None:
                           f"{where}: {url}: {q.rel} に {{#{anchor}}} の見出し・要素がない")
 
 
+# 定型の節の見出しと anchor（style-guide §13-1・§16-1）。sections には載せない
+STANDARD_SECTIONS = {"examples": "例題", "practice": "練習問題", "challenge": "力試し", "quiz": "確認問題",
+                     "comparison": "使い分け", "pitfalls": "落とし穴", "references": "参考", "resources": "学ぶための資料"}
+STANDARD_TITLES = {v: k for k, v in STANDARD_SECTIONS.items()}
+# 定型の anchor を別の見出しで使ってよい節（style-guide §17-3：roadmap の practice）
+STANDARD_ANCHOR_EXCEPTIONS = {("roadmap", "practice")}
+# 発展の概要でライブラリの節を別の anchor にしてよいページ（§17-3：two-sat の acl は §15-3 の例外）
+LIBRARY_ANCHOR_EXCEPTIONS = {"two-sat": "acl"}
+NULL_COMPLEXITY_TYPES = {"guide", "hub", "pattern"}          # complexity を null にする type（§17-1）
+SOURCE_SECTIONS = {"references", "resources"}                 # 出典を並べる節（題名の一致を見る。§17-10）
+SOURCE_LINE_RE = re.compile(r"^\s*[-*]\s+\[(?P<title>(?:[^\[\]]|\[[^\[\]]*\])+)\]\((?P<url>https?://[^)\s]+)\)")
+
+
+def h2_sections(p: Page) -> list[tuple[int, str | None, str]]:
+    """本文の ## 見出し（フェンスの外）：(本文の中の行, anchor, attr_list を除いた見出しの文字)。"""
+    out = []
+    for i, raw in enumerate(p.lines):
+        if p.in_fence[i]:
+            continue
+        m = re.match(r"^[ ]{0,3}##\s+(?P<text>.*?)\s*$", raw)
+        if m:
+            an, text = heading_attr(m.group("text"))
+            out.append((i, an, text.strip()))
+    return out
+
+
+def check_conventions(pages: list[Page], rep: Report) -> None:
+    """節の決まり（§13-1・§16-1・§16-2・§17-1・§17-10）の警告。"""
+    sources: dict[str, dict[str, set[str]]] = collections.defaultdict(lambda: collections.defaultdict(set))
+    for p in pages:
+        if p.meta is None:
+            continue
+        w, t = p.rel, p.get("type")
+        heads = h2_sections(p)
+        # 定型の節の見出しと anchor の組
+        for i, an, text in heads:
+            want_an = STANDARD_TITLES.get(text)
+            if want_an and an != want_an:
+                rep.warn("定型の節の見出しと anchor", w, f"{w}:{p.line_no(i)}: 「## {text}」の anchor が "
+                         f"{'{#' + an + '}' if an else 'ない'}（{{#{want_an}}} にする）")
+            elif an in STANDARD_SECTIONS and text != STANDARD_SECTIONS[an] and (p.id, an) not in STANDARD_ANCHOR_EXCEPTIONS:
+                rep.warn("定型の節の見出しと anchor", w, f"{w}:{p.line_no(i)}: {{#{an}}} の見出しが「{text}」"
+                         f"（定型の見出しは「{STANDARD_SECTIONS[an]}」。中身の節なら別の anchor にする）")
+        # sections に定型の anchor を載せない
+        for sec in p.get("sections") or []:
+            an = sec.get("anchor") if isinstance(sec, dict) else None
+            if an in STANDARD_SECTIONS and (p.id, an) not in STANDARD_ANCHOR_EXCEPTIONS:
+                rep.warn("sections に定型の節", w, f"{w}: sections に定型の節 {{#{an}}}（{STANDARD_SECTIONS[an]}）がある"
+                         "（定型の節は sections に載せない）")
+        # guide・hub・pattern の complexity は null
+        if t in NULL_COMPLEXITY_TYPES and p.get("complexity") not in (None, ""):
+            rep.warn("guide・hub・pattern の complexity", w, f"{w}: type が {t} なのに complexity がある（null にする）")
+        # 発展の概要の #library と #resources
+        if t == "overview" and STAGE_RANK.get(p.stage, 0) >= 1:
+            have = {an for _, an, _ in heads}
+            lib = LIBRARY_ANCHOR_EXCEPTIONS.get(p.id, "library")
+            miss = [a for a in (lib, "resources") if a not in have]
+            if miss:
+                rep.warn("発展の概要の定型の節の欠け", w, f"{w}: ## の見出しに " + "・".join("{#" + a + "}" for a in miss)
+                         + " がない（ライブラリの節は library、資料の節は resources）")
+        # 出典の題名を集める
+        bounds = [i for i, _, _ in heads] + [len(p.lines)]
+        for k, (i, an, _) in enumerate(heads):
+            if an not in SOURCE_SECTIONS:
+                continue
+            for j in range(i + 1, bounds[k + 1]):
+                if p.in_fence[j]:
+                    continue
+                m = SOURCE_LINE_RE.match(p.lines[j])
+                if m:
+                    sources[m.group("url")][m.group("title").strip()].add(w)
+    # 同じ URL の出典の題名が違う
+    for url, titles in sorted(sources.items()):
+        if len(titles) > 1:
+            keys = set().union(*titles.values())
+            desc = "・".join(f"「{tt}」（{'、'.join(sorted(ws))}）" for tt, ws in sorted(titles.items()))
+            rep.warn("同じ URL の出典の題名が違う", keys, f"{url}: {desc}")
+
+
 def check_all(pages: list[Page], others: list[Page], rep: Report, ledger: dict[str, dict], validator: Validator,
               snippets: Path, catalog_ids: set[str] | None = None, docs: Path | None = None) -> None:
     catalog_ids = catalog_ids or set()
@@ -935,6 +1017,7 @@ def check_all(pages: list[Page], others: list[Page], rep: Report, ledger: dict[s
         docs = Path(str(q.path)[: -len(q.rel)])
     if docs is not None:
         check_links(pages + others, rep, docs)
+    check_conventions(pages, rep)
     # ---- ページごと
     by_id: dict[str, Page] = {}
     for p in pages:

@@ -18,15 +18,15 @@ signs:
   - {type: phrase, text: 木の頂点に、親が子より先になるように番号を振る方法の数}
 acl: []
 frequency: B
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 3 問
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 5 問
 sections:
   - {title: 相対順序を固定する（n!/k!）, anchor: relative-order}
   - {title: ソートして最大・最小を固定する, anchor: sort-and-fix}
   - {title: 積の法則が使える順番で決める（BFS 順）, anchor: bfs-order}
   - {title: 木の上の順番 n!/Π 部分木の大きさ, anchor: tree-order, level: 黄}
   - {title: 順序を状態に持つ DP（挿入 DP・bitDP）との使い分け, anchor: vs-dp}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -209,7 +209,7 @@ $$
 </div>
 
 ??? note "練習の方針"
-    - **ABC209 C**：$C$ を昇順に並べて小さい順に決めると、$i$ 番目（0 始まり）の選択肢は前の選び方によらず $C_i - i$ 個になる。積の法則で掛け合わせればよい（0 以下になれば 0 通り）
+    - **ABC209 C**：$C$ を昇順に並べて小さい順に決めると、$i$ 番目（0-indexed）の選択肢は前の選び方によらず $C_i - i$ 個になる。積の法則で掛け合わせればよい（0 以下になれば 0 通り）
     - **ARC116 B**：ソートして最小 $a_i$ と最大 $a_j$ を固定すると、間の $j - i - 1$ 個は自由なので寄与は $a_i a_j 2^{j-i-1}$ になる。$i$ ごとに係数をまとめれば $O(N \log N)$ である
     - **ABC151 E**：ソートして、最大値の総和と最小値の総和を別々に求めて引く。$a_i$ が最大になる選び方は $\binom{i}{K-1}$ 通り、最小になる選び方は $\binom{N-1-i}{K-1}$ 通りである。同じ値は添字で区別する（[ソートして最大・最小を固定する](#sort-and-fix)）
     - **ABC216 F**：$A$ の昇順に並べて最大になる要素を固定すると、ほかに選べるのはそれより前の要素だけになる。$B$ の和が $A_i - B_i$ 以下になる選び方を、ナップサックの数え上げ DP で数えればよい

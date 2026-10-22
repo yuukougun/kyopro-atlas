@@ -24,7 +24,7 @@ sections:
   - {title: Euler Tour Tree・Top Tree, anchor: ett-top-tree}
   - {title: 辺の追加だけならマージテク, anchor: add-only}
   - {title: 自作するときの要点と Library Checker, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -173,6 +173,6 @@ expose と、それで書く操作は次のとおりである。
 - [ferin「Link-Cut tree」](https://ferin-tech.hatenablog.com/entry/2020/01/11/012443)：学ぶための資料。splay 木の回転、evert・LCA・パスのクエリ、ぶら下がる部分による部分木のクエリ
 - [ei1333「Luzhiled's Library」](https://ei1333.github.io/library/)：学ぶための資料。structure/dynamic-tree の LCT・Top Tree の操作と計算量
 - [kopricky「Euler Tour Tree」](https://kopricky.github.io/code/DataStructure_OnGraph/euler_tour_tree.html)：学ぶための資料。ETT の列の持ち方、部分木・連結成分の操作、LCT との違い
-- [yosupo「Library Checker の問題（tree・graph）」](https://github.com/yosupo06/library-checker-problems/tree/master/tree)：検証に使う問題の内容
+- [yosupo06「library-checker-problems/tree」](https://github.com/yosupo06/library-checker-problems/tree/master/tree)：検証に使う問題の内容
 - [drken「AtCoder ABC 350 G - Mediator (3D, 黄色, 600 点)」](https://drken1215.hatenablog.com/entry/2024/04/21/014200)：練習 ABC350 G の、小さい方を根付け直す解き方とクエリの復号
 - [No_Play_Yes_Splay「AtCoder Beginner Contest 350 解题报告」](https://www.cnblogs.com/No-play-Yes-splay/p/18148245/atcoder-beginner-contest-350-sol)：練習 ABC350 G の、次数で分けて bitset を使う解き方

@@ -10,7 +10,7 @@ kind: [案内, データ構造, 考察]
 prerequisites: []
 related: [ordered-set, segment-tree-binary-search, interval-set, fix-variable, contribution, two-pointers, lazy-segment-tree, lazy-segment-tree-patterns#reformulate, grundy-number, construction]
 summary: 集合に含まれない最小の非負整数 mex を求める・更新する・総和を取る問題で、問われ方から使う手法を引ける。「N 要素の mex は N 以下」「mex ≥ k+1 ⇔ 0〜k をすべて含む」の 2 つの性質から考える。
-complexity: 1 回の計算 O(N)、更新のたびに答えるなら 1 回 O(log N)
+complexity: null
 signs:
   - {type: phrase, text: 含まれない最小の非負整数（mex）を答える}
   - {type: phrase, text: 1 点を書き換えるたびに数列の mex を答える}
@@ -26,7 +26,7 @@ sections:
   - {title: 全区間・全パスの mex の総和 → mex が k+1 以上の数を足す主客転倒, anchor: sum-of-mex}
   - {title: ゲームの局面の値 → Grundy 数（grundy-number）, anchor: grundy}
   - {title: mex を指定した値にする構築 → 0〜k−1 を入れて k を入れない（construction）, anchor: construction}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -208,7 +208,7 @@ mex がちょうど $k$ になる列や集合を作る問題では、「$0, \dot
 
 ## 参考 {#references}
 
-- [ikatakos「AtCoder Beginner Contest 194」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0306_abc194)：例題 ABC194 E の、値を固定して出現位置の間隔を見る方針と、答えが N になりうる点
+- [ikatakos「AtCoder Beginner Contest 194 C,D,E,F問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0306_abc194)：例題 ABC194 E の、値を固定して出現位置の間隔を見る方針と、答えが N になりうる点
 - [hamayan「Mex Min [AtCoder Beginner Contest 194 E]」](https://blog.hamayanhamayan.com/entry/2021/03/07/000832)：例題 ABC194 E の、答えで二分探索して窓をずらす別解
 - [ikatakos「AtCoder Beginner Contest 438」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/1227_abc438)：練習 ABC438 F の主客転倒と、両端を更新して打ち切る方法
 - [drken「AtCoder ABC 330 E - Mex and Update (1Q, 緑色, 475 点)」](https://drken1215.hatenablog.com/entry/2023/11/26/233800)：mex が N 以下であることと、まだ出ていない値の set

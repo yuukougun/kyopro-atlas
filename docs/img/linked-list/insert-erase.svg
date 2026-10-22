@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 366" width="400" height="366" font-family="sans-serif" font-size="16">
 <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker><marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker></defs>
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="8" y="24" fill="#222" font-size="15">挿入の前：HEAD と TAIL は番兵</text>
+<text x="10" y="24" fill="#222" font-size="15">挿入の前：HEAD と TAIL は番兵</text>
 <rect x="8" y="38" width="54" height="34" rx="4" fill="#f3f3f3" stroke="#1f4e9a" stroke-width="1.5" stroke-dasharray="4 2"/>
 <text x="35.0" y="60" text-anchor="middle" fill="#222" font-size="14">HEAD</text>
 <rect x="92" y="38" width="54" height="34" rx="4" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
@@ -16,8 +16,8 @@
 <line x1="175" y1="61" x2="147" y2="61" stroke="#333" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#ah)"/>
 <line x1="231" y1="49" x2="259" y2="49" stroke="#333" stroke-width="1.5" marker-end="url(#ah)"/>
 <line x1="259" y1="61" x2="231" y2="61" stroke="#333" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#ah)"/>
-<text x="8" y="108" fill="#222" font-size="15">10 の直後に 15 を挿入</text>
-<text x="8" y="128" fill="#222" font-size="15">書き換えるのは 4 本（太線）</text>
+<text x="10" y="108" fill="#222" font-size="15">10 の直後に 15 を挿入</text>
+<text x="10" y="128" fill="#222" font-size="15">書き換えるのは 4 本（太線）</text>
 <rect x="8" y="142" width="54" height="34" rx="4" fill="#f3f3f3" stroke="#1f4e9a" stroke-width="1.5" stroke-dasharray="4 2"/>
 <text x="35.0" y="164" text-anchor="middle" fill="#222" font-size="14">HEAD</text>
 <rect x="92" y="142" width="54" height="34" rx="4" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
@@ -36,8 +36,8 @@
 <line x1="259" y1="165" x2="231" y2="165" stroke="#c0392b" stroke-width="3" stroke-dasharray="5 3" marker-end="url(#ahr)"/>
 <line x1="315" y1="153" x2="343" y2="153" stroke="#333" stroke-width="1.5" marker-end="url(#ah)"/>
 <line x1="343" y1="165" x2="315" y2="165" stroke="#333" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#ah)"/>
-<text x="8" y="212" fill="#222" font-size="15">10 を削除：HEAD と 15 を直接つなぐ</text>
-<text x="8" y="232" fill="#222" font-size="15">2 本だけ書き換える</text>
+<text x="10" y="212" fill="#222" font-size="15">10 を削除：HEAD と 15 を直接つなぐ</text>
+<text x="10" y="232" fill="#222" font-size="15">2 本だけ書き換える</text>
 <rect x="8" y="246" width="54" height="34" rx="4" fill="#f3f3f3" stroke="#1f4e9a" stroke-width="1.5" stroke-dasharray="4 2"/>
 <text x="35.0" y="268" text-anchor="middle" fill="#222" font-size="14">HEAD</text>
 <rect x="92" y="246" width="54" height="34" rx="4" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
@@ -52,7 +52,7 @@
 <line x1="175" y1="269" x2="147" y2="269" stroke="#333" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#ah)"/>
 <line x1="231" y1="257" x2="259" y2="257" stroke="#333" stroke-width="1.5" marker-end="url(#ah)"/>
 <line x1="259" y1="269" x2="231" y2="269" stroke="#333" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#ah)"/>
-<text x="8" y="312" fill="#555" font-size="14">実線（右向き）：nxt　破線（左向き）：prv</text>
-<text x="8" y="332" fill="#555" font-size="14">点線の枠：番兵</text>
-<text x="8" y="352" fill="#555" font-size="14">太い赤線：その操作で書き換えたつながり</text>
+<text x="10" y="312" fill="#555" font-size="14">実線（右向き）：nxt　破線（左向き）：prv</text>
+<text x="10" y="332" fill="#555" font-size="14">点線の枠：番兵</text>
+<text x="10" y="352" fill="#555" font-size="14">太い赤線：その操作で書き換えたつながり</text>
 </svg>

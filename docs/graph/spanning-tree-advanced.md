@@ -26,7 +26,7 @@ sections:
   - {title: 最小有向全域木（Chu-Liu/Edmonds）, anchor: directed}
   - {title: 第 2 最小全域木, anchor: second-best}
   - {title: 自作するときの要点と Library Checker, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -152,7 +152,16 @@ Library Checker の Directed MST（$N, M \le 2 \times 10^5$、根から全頂点
 
 ## 練習問題 {#practice}
 
-ABC で必須になる問題は確認できなかった。自作したものは次の Library Checker で確かめる。
+ABC で必須になる問題は確認できなかった。ほかのコンテストの 1 問と、自作したものを確かめる Library Checker の問題を挙げる。
+
+<div class="kp-problems" data-role="practice" markdown>
+
+- [KEYENCE2019 E. Connecting Cities](https://atcoder.jp/contests/keyence2019/tasks/keyence2019_e)（diff 2623）：一列に並ぶ都市を結ぶ完全グラフで、辺の重みが番号の差と両端の値で決まるときの最小全域木の重みを求める。
+
+</div>
+
+??? note "練習の方針"
+    - **KEYENCE2019 E**：辺が $N^2$ 本あるので、最小全域木に入りうる辺だけを残す。番号の中央で分け、中央をまたぐ辺を反対側の代表との辺に絞って候補を $O(N \log N)$ 本にし、クラスカル法で解く。[Borůvka 法の節](#boruvka)の例がこの重みで、上位 2 件を持つ走査で 1 段を $O(N)$ にしても解ける。
 
 ### Library Checker
 
@@ -169,5 +178,5 @@ ABC で必須になる問題は確認できなかった。自作したものは�
 - [ei1333「Boruvka」（Luzhiled's Library）](https://ei1333.github.io/library/graph/mst/boruvka.hpp)：各成分の最小の辺を利用者が渡す関数の形、段の数と計算量
 - [ei1333「Manhattan MST」（Luzhiled's Library）](https://ei1333.github.io/library/graph/mst/manhattan-mst.hpp)：候補の辺を返す関数の形と 4 回の走査
 - [ei1333「Directed MST」（Luzhiled's Library）](https://ei1333.github.io/library/graph/mst/directed-mst.hpp)：skew heap を使う $O(M \log N)$ の実装と、縮約をほどく復元
-- [drken「キーエンス プログラミング コンテスト 2019 E - Connecting Cities (橙色, 600 点)」](https://drken1215.hatenablog.com/entry/2019/01/15/081500)：番号の差と両端の値で重みが決まる完全グラフの最小全域木（Borůvka 法でも解けるという言及）
-- [Library Checker の問題定義（GitHub）](https://github.com/yosupo06/library-checker-problems)：directedmst（graph）・manhattanmst（geo）・minimum_spanning_tree の内容と制約
+- [drken「キーエンス プログラミング コンテスト 2019 E - Connecting Cities (橙色, 600 点)」](https://drken1215.hatenablog.com/entry/2019/01/15/081500)：番号の差と両端の値で重みが決まる完全グラフの最小全域木（Borůvka 法でも解けるという言及）。練習 KEYENCE2019 E の問いと、中央で割って辺の候補を減らす方針
+- [yosupo06「library-checker-problems」](https://github.com/yosupo06/library-checker-problems)：directedmst（graph）・manhattanmst（geo）・minimum_spanning_tree の内容と制約

@@ -13,7 +13,7 @@ search:
 
 ## DP の基本（dp-basics） {#dp-basics}
 
-- id：`dp-basics`　レベル：基礎　段階：draft　type：technique
+- id：`dp-basics`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-basics/
 - 別名：動的計画法、DP、Dynamic Programming、漸化式、配る DP、貰う DP、push 型、pull 型
 - 種類：DP
@@ -33,7 +33,7 @@ search:
 
 ## メモ化再帰（memoized-recursion） {#memoized-recursion}
 
-- id：`memoized-recursion`　レベル：基礎　段階：draft　type：technique
+- id：`memoized-recursion`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/memoized-recursion/
 - 別名：メモ化、Memoization、再帰 DP、トップダウン DP、map でメモ化、疎な DP
 - 種類：DP
@@ -49,7 +49,7 @@ search:
 
 ## DAG 上の DP（dp-dag） {#dp-dag}
 
-- id：`dp-dag`　レベル：基礎　段階：draft　type：technique
+- id：`dp-dag`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-dag/
 - 別名：DAG DP、DP on DAG、DAG の最長路、経路の数え上げ、トポロジカル順の DP
 - 種類：DP、グラフ探索
@@ -68,7 +68,7 @@ search:
 
 ## DP の計算順序（dp-order） {#dp-order}
 
-- id：`dp-order`　レベル：水　段階：draft　type：technique
+- id：`dp-order`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-order/
 - 別名：計算順序、ループの順番、後ろから DP、逆順 DP
 - 種類：DP
@@ -85,7 +85,7 @@ search:
 
 ## DP の状態の設計（dp-state-design） {#dp-state-design}
 
-- id：`dp-state-design`　レベル：水　段階：draft　type：technique
+- id：`dp-state-design`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-state-design/
 - 別名：状態設計、DP の状態、直前を状態に持つ、末尾の数文字を状態に持つ、環状 DP、円環 DP、括弧列の DP
 - 種類：DP
@@ -107,7 +107,7 @@ search:
 
 ## 余り・個数を状態に持つ DP（dp-mod-state） {#dp-mod-state}
 
-- id：`dp-mod-state`　レベル：水　段階：draft　type：technique
+- id：`dp-mod-state`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-mod-state/
 - 別名：余りを状態に、mod DP、倍数の数え上げ、平均が整数
 - 種類：DP、整数論
@@ -125,7 +125,7 @@ search:
 
 ## フェーズを状態に持つ DP（dp-phase） {#dp-phase}
 
-- id：`dp-phase`　レベル：青　段階：draft　type：technique
+- id：`dp-phase`　レベル：青　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-phase/
 - 別名：耳 DP、段階を状態に持つ DP、最大部分配列和、Kadane、Kadane's algorithm
 - 種類：DP
@@ -143,7 +143,7 @@ search:
 
 ## DP の復元（dp-reconstruction） {#dp-reconstruction}
 
-- id：`dp-reconstruction`　レベル：水　段階：draft　type：technique
+- id：`dp-reconstruction`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-reconstruction/
 - 別名：DP 復元、選び方の出力、DP テーブルからの復元、辞書順最小の復元
 - 種類：DP
@@ -160,7 +160,7 @@ search:
 
 ## 累積和・いもす法による DP の高速化（dp-prefix-sum） {#dp-prefix-sum}
 
-- id：`dp-prefix-sum`　レベル：水　段階：draft　type：technique
+- id：`dp-prefix-sum`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-prefix-sum/
 - 別名：累積和 DP、いもす法 DP、累積和で遷移をまとめる
 - 種類：DP、累積和・差分
@@ -180,7 +180,7 @@ search:
 
 ## ナップサック DP（knapsack-01） {#knapsack-01}
 
-- id：`knapsack-01`　レベル：基礎　段階：draft　type：technique
+- id：`knapsack-01`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/knapsack-01/
 - 別名：0-1 ナップサック、ナップサック、ナップザック、Knapsack Problem、0-1 Knapsack、個数制限なしナップサック、個数無制限ナップサック、Unbounded Knapsack、個数制限付きナップサック、多重ナップサック、コイン問題、配列の使い回し、1 次元化
 - 種類：DP
@@ -200,7 +200,7 @@ search:
 
 ## 部分和 DP（subset-sum） {#subset-sum}
 
-- id：`subset-sum`　レベル：基礎　段階：draft　type：technique
+- id：`subset-sum`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/subset-sum/
 - 別名：部分和、部分和問題、Subset Sum、部分和の数え上げ
 - 種類：DP
@@ -218,7 +218,7 @@ search:
 
 ## DP の状態の削減（dp-dimension-reduction） {#dp-dimension-reduction}
 
-- id：`dp-dimension-reduction`　レベル：青　段階：draft　type：technique
+- id：`dp-dimension-reduction`　レベル：青　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-dimension-reduction/
 - 別名：状態の削減、次元の削減、状態の圧縮、値と添字の入れ替え、キーと値を入れ替える、添字と値を逆に、上限で打ち切る
 - 種類：DP
@@ -234,7 +234,7 @@ search:
 
 ## 戻す DP（knapsack-undo） {#knapsack-undo}
 
-- id：`knapsack-undo`　レベル：青　段階：draft　type：technique
+- id：`knapsack-undo`　レベル：青　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/knapsack-undo/
 - 別名：ナップサックの削除、削除できるナップサック、減らすナップサック
 - 種類：DP、数え上げ
@@ -251,7 +251,7 @@ search:
 
 ## 並べ替えてから DP する（exchange-argument-dp） {#exchange-argument-dp}
 
-- id：`exchange-argument-dp`　レベル：青　段階：draft　type：technique
+- id：`exchange-argument-dp`　レベル：青　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/exchange-argument-dp/
 - 別名：交換論法＋DP、ソートしてから DP、座布団 DP、締切つきナップサック
 - 種類：DP、貪欲
@@ -269,7 +269,7 @@ search:
 
 ## グリッド上の DP（dp-grid） {#dp-grid}
 
-- id：`dp-grid`　レベル：水　段階：draft　type：technique
+- id：`dp-grid`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-grid/
 - 別名：グリッド DP、Grid DP、格子路の DP、最大正方形
 - 種類：DP
@@ -289,7 +289,7 @@ search:
 
 ## 区間分割 DP（dp-sequence-partition） {#dp-sequence-partition}
 
-- id：`dp-sequence-partition`　レベル：水　段階：draft　type：technique
+- id：`dp-sequence-partition`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-sequence-partition/
 - 別名：区間分割型 DP、仕切りを入れる DP、列を区切る DP
 - 種類：DP
@@ -307,7 +307,7 @@ search:
 
 ## 最長増加部分列（lis） {#lis}
 
-- id：`lis`　レベル：水　段階：draft　type：technique
+- id：`lis`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/lis/
 - 別名：LIS、Longest Increasing Subsequence、最長減少部分列、Dilworth の定理、増加列への最小分割
 - 種類：DP、二分探索
@@ -329,7 +329,7 @@ search:
 
 ## 最長共通部分列と編集距離（lcs） {#lcs}
 
-- id：`lcs`　レベル：水　段階：draft　type：technique
+- id：`lcs`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/lcs/
 - 別名：LCS、Longest Common Subsequence、レーベンシュタイン距離、Edit Distance、Levenshtein Distance、最長共通部分文字列、DP の DP
 - 種類：DP、文字列
@@ -350,7 +350,7 @@ search:
 
 ## 部分列 DP（subsequence-dp） {#subsequence-dp}
 
-- id：`subsequence-dp`　レベル：黄　段階：draft　type：technique
+- id：`subsequence-dp`　レベル：黄　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/subsequence-dp/
 - 別名：異なる部分列の数、部分列の個数、Distinct Subsequences
 - 種類：DP、文字列、数え上げ
@@ -370,7 +370,7 @@ search:
 
 ## 区間 DP（interval-dp） {#interval-dp}
 
-- id：`interval-dp`　レベル：青　段階：draft　type：technique
+- id：`interval-dp`　レベル：青　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/interval-dp/
 - 別名：dp\[l][r]、Interval DP、Range DP、区間を状態にする DP
 - 種類：DP
@@ -390,7 +390,7 @@ search:
 
 ## 区間 DP の応用（interval-dp-advanced） {#interval-dp-advanced}
 
-- id：`interval-dp-advanced`　レベル：黄　段階：draft　type：technique
+- id：`interval-dp-advanced`　レベル：黄　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/interval-dp-advanced/
 - 別名：区間 DP で木を数える、区間ゲーム
 - 種類：DP、数え上げ
@@ -408,7 +408,7 @@ search:
 
 ## bitDP（bit-dp） {#bit-dp}
 
-- id：`bit-dp`　レベル：水　段階：draft　type：technique
+- id：`bit-dp`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/bit-dp/
 - 別名：ビット DP、集合 DP、Bitmask DP、巡回セールスマン問題、TSP、Traveling Salesman Problem、ハミルトン路
 - 種類：DP、ビット演算
@@ -429,7 +429,7 @@ search:
 
 ## 部分集合を列挙する DP（subset-enumeration-dp） {#subset-enumeration-dp}
 
-- id：`subset-enumeration-dp`　レベル：青　段階：draft　type：technique
+- id：`subset-enumeration-dp`　レベル：青　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/subset-enumeration-dp/
 - 別名：3^N DP、部分集合の部分集合、Submask Enumeration、グループ分け DP
 - 種類：DP、ビット演算
@@ -447,7 +447,7 @@ search:
 
 ## プロファイル DP（broken-profile-dp） {#broken-profile-dp}
 
-- id：`broken-profile-dp`　レベル：黄　段階：draft　type：technique
+- id：`broken-profile-dp`　レベル：黄　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/broken-profile-dp/
 - 別名：Broken Profile DP、插頭 DP、フロンティア法、連結性 DP、スライド bitDP、敷き詰めの DP
 - 種類：DP、ビット演算
@@ -466,7 +466,7 @@ search:
 
 ## 桁 DP（digit-dp） {#digit-dp}
 
-- id：`digit-dp`　レベル：水　段階：draft　type：technique
+- id：`digit-dp`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/digit-dp/
 - 別名：Digit DP、smaller フラグ、未満フラグ、leading zero
 - 種類：DP、数え上げ
@@ -485,7 +485,7 @@ search:
 
 ## 桁 DP の応用（digit-dp-advanced） {#digit-dp-advanced}
 
-- id：`digit-dp-advanced`　レベル：黄　段階：draft　type：technique
+- id：`digit-dp-advanced`　レベル：黄　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/digit-dp-advanced/
 - 別名：繰り上がりの DP、上限と下限の桁 DP、複数の数の桁 DP
 - 種類：DP、数え上げ
@@ -504,7 +504,7 @@ search:
 
 ## 木 DP（tree-dp） {#tree-dp}
 
-- id：`tree-dp`　レベル：水　段階：draft　type：technique
+- id：`tree-dp`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/tree-dp/
 - 別名：Tree DP、部分木の DP、木の上の DP
 - 種類：DP、木
@@ -527,7 +527,7 @@ search:
 
 ## 全方位木 DP（rerooting） {#rerooting}
 
-- id：`rerooting`　レベル：青　段階：draft　type：technique
+- id：`rerooting`　レベル：青　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/rerooting/
 - 別名：Rerooting、ReRooting DP、換根 DP
 - 種類：DP、木
@@ -545,7 +545,7 @@ search:
 
 ## 二乗の木 DP（tree-dp-square） {#tree-dp-square}
 
-- id：`tree-dp-square`　レベル：黄　段階：draft　type：technique
+- id：`tree-dp-square`　レベル：黄　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/tree-dp-square/
 - 別名：2 乗の木 DP、O(N^2) の木 DP、木の上のナップサック
 - 種類：DP、木
@@ -562,7 +562,7 @@ search:
 
 ## 挿入 DP・箱根駅伝 DP（insertion-dp） {#insertion-dp}
 
-- id：`insertion-dp`　レベル：黄　段階：draft　type：technique
+- id：`insertion-dp`　レベル：黄　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/insertion-dp/
 - 別名：相対順位の DP、順列の DP、箱根 DP、Insertion DP、連結成分 DP、Connected Component DP
 - 種類：DP、数え上げ
@@ -581,7 +581,7 @@ search:
 
 ## DP の高速化の選び方（dp-speedup-overview） {#dp-speedup-overview}
 
-- id：`dp-speedup-overview`　レベル：—　段階：draft　type：hub
+- id：`dp-speedup-overview`　レベル：—　段階：reviewed　type：hub
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-speedup-overview/
 - 別名：DP の高速化、DP 高速化、DP 最適化、DP Optimization、遷移の高速化
 - 種類：DP、案内
@@ -597,7 +597,7 @@ search:
 
 ## セグメント木・スライド最小値による DP の高速化（dp-segment-tree） {#dp-segment-tree}
 
-- id：`dp-segment-tree`　レベル：青　段階：draft　type：technique
+- id：`dp-segment-tree`　レベル：青　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-segment-tree/
 - 別名：セグ木 DP、BIT で DP を速くする、値を添字にした DP、deque DP、単調スタック DP
 - 種類：DP、区間クエリ、尺取り・スライド窓
@@ -617,7 +617,7 @@ search:
 
 ## インライン DP（inline-dp） {#inline-dp}
 
-- id：`inline-dp`　レベル：青　段階：draft　type：technique
+- id：`inline-dp`　レベル：青　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/inline-dp/
 - 別名：in-place DP、Inline DP、配列を使い回して一括更新、遅延セグ木 DP
 - 種類：DP、区間クエリ
@@ -636,7 +636,7 @@ search:
 
 ## 動的 DP（dynamic-dp） {#dynamic-dp}
 
-- id：`dynamic-dp`　レベル：発展　段階：draft　type：overview
+- id：`dynamic-dp`　レベル：発展　段階：reviewed　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dynamic-dp/
 - 別名：Dynamic DP、DDP、遷移行列のセグメント木
 - 種類：DP、線形代数・行列、区間クエリ
@@ -650,11 +650,11 @@ search:
     - `dynamic-dp#matrix-on-segment-tree` 遷移を行列にしてセグメント木に載せる（ACL の segtree の S を行列にする）：https://yuukougun.github.io/kyopro-atlas/dp/dynamic-dp/#matrix-on-segment-tree
     - `dynamic-dp#order-and-identity` 積の向きと単位行列：https://yuukougun.github.io/kyopro-atlas/dp/dynamic-dp/#order-and-identity
     - `dynamic-dp#on-trees` 木の上の動的 DP（Static Top Tree へ）：https://yuukougun.github.io/kyopro-atlas/dp/dynamic-dp/#on-trees
-    - `dynamic-dp#verify` ライブラリでの検証：https://yuukougun.github.io/kyopro-atlas/dp/dynamic-dp/#verify
+    - `dynamic-dp#library` ライブラリでの検証：https://yuukougun.github.io/kyopro-atlas/dp/dynamic-dp/#library
 
 ## Convex Hull Trick と Li Chao Tree（cht） {#cht}
 
-- id：`cht`　レベル：発展　段階：draft　type：overview
+- id：`cht`　レベル：発展　段階：reviewed　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/cht/
 - 別名：CHT、傾き最適化、斜率优化、李超线段树、直線の最小値
 - 種類：DP、データ構造
@@ -667,11 +667,11 @@ search:
     - `cht#lower-envelope` 下側の包絡線と不要な直線（傾きもクエリも単調なら deque）：https://yuukougun.github.io/kyopro-atlas/dp/cht/#lower-envelope
     - `cht#non-monotone-queries` クエリが単調でないとき（二分探索）：https://yuukougun.github.io/kyopro-atlas/dp/cht/#non-monotone-queries
     - `cht#li-chao-tree` Li Chao Tree（区間の真ん中で勝つ直線を残す）：https://yuukougun.github.io/kyopro-atlas/dp/cht/#li-chao-tree
-    - `cht#verify` ライブラリでの検証：https://yuukougun.github.io/kyopro-atlas/dp/cht/#verify
+    - `cht#library` ライブラリでの検証：https://yuukougun.github.io/kyopro-atlas/dp/cht/#library
 
 ## Monge 性による DP の高速化（monge） {#monge}
 
-- id：`monge`　レベル：発展　段階：draft　type：overview
+- id：`monge`　レベル：発展　段階：reviewed　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/monge/
 - 別名：Monge、四角不等式、四辺形不等式、Quadrangle Inequality、monotone minima、分割統治 DP、Divide and Conquer DP、SMAWK、LARSCH、Knuth-Yao、Knuth's optimization、(max,+) 畳み込み、min-plus 畳み込み、DP の凸性
 - 種類：DP、ダブリング・分割統治
@@ -688,11 +688,11 @@ search:
     - `monge#knuth-yao` Knuth-Yao（区間 DP の分割点の範囲を絞って O(N^2)）：https://yuukougun.github.io/kyopro-atlas/dp/monge/#knuth-yao
     - `monge#dp-convexity` DP の値の凸性（個数について凸な答え）：https://yuukougun.github.io/kyopro-atlas/dp/monge/#dp-convexity
     - `monge#convex-max-plus-convolution` 凸な列どうしの (max,+) 畳み込み（差分のマージ）：https://yuukougun.github.io/kyopro-atlas/dp/monge/#convex-max-plus-convolution
-    - `monge#verify` ライブラリでの検証：https://yuukougun.github.io/kyopro-atlas/dp/monge/#verify
+    - `monge#library` ライブラリでの検証：https://yuukougun.github.io/kyopro-atlas/dp/monge/#library
 
 ## Alien DP（alien-dp） {#alien-dp}
 
-- id：`alien-dp`　レベル：発展　段階：draft　type：overview
+- id：`alien-dp`　レベル：発展　段階：reviewed　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/alien-dp/
 - 別名：Aliens trick、WQS 二分、Lagrangian Relaxation、Lagrange 緩和、取り消し付きの貪欲
 - 種類：DP、二分探索
@@ -710,7 +710,7 @@ search:
 
 ## Slope Trick（slope-trick） {#slope-trick}
 
-- id：`slope-trick`　レベル：発展　段階：draft　type：overview
+- id：`slope-trick`　レベル：発展　段階：reviewed　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/slope-trick/
 - 別名：スロープトリック、区分線形凸関数、区分線形凸関数の管理
 - 種類：DP、データ構造

@@ -25,7 +25,7 @@ sections:
   - {title: なぜ経路圧縮をしないのか, anchor: no-path-compression}
   - {title: 時刻の二分探索で「初めて連結になる時刻」を求める, anchor: binary-search-time}
   - {title: 代わりの手（並列二分探索・併合過程の木（Kruskal 再構築木））, anchor: alternatives}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -77,7 +77,7 @@ updated: 2026-10-22
 --8<-- "partially-persistent-union-find/usage.cpp:core"
 ```
 
-ACL には部分永続 Union-Find はない。[Library Checker](https://judge.yosupo.jp/) にもそのまま対応する問題はない（近い [Persistent UnionFind](https://judge.yosupo.jp/problem/persistent_unionfind) は、過去の版から枝分かれして更新する完全永続の問題で、このデータ構造では解けない。[代わりの手](#alternatives)を参照）。
+ACL には部分永続 Union-Find はない。[Library Checker](https://judge.yosupo.jp/) にもそのまま対応する問題はない（近い [Persistent Unionfind](https://judge.yosupo.jp/problem/persistent_unionfind) は、過去の版から枝分かれして更新する完全永続の問題で、このデータ構造では解けない。[代わりの手](#alternatives)を参照）。
 
 ## なぜ経路圧縮をしないのか {#no-path-compression}
 
@@ -115,7 +115,7 @@ $x$ と $y$ が同じ集合かどうかは、時刻について[単調](../guide
 部分永続 Union-Find は、クエリを先に読まなくてよく（オンライン）、普通の Union-Find に 2 つの配列を足すだけで書ける。一方、使えるのは「最新の状態だけを更新し、過去を読む」場合だけである。
 
 - 操作を直前から順に取り消すだけなら、[ロールバックできる Union-Find](../ds/rollback-union-find.md#what-it-does) で足りる。
-- 過去の版から枝分かれして併合する（完全永続）なら、部分永続では足りない。オフラインなら版の木を DFS し、入るとき併合し、出るとき取り消す（[永続データ構造](../ds/persistent-data-structures.md#offline-version-tree)）。Library Checker の [Persistent UnionFind](https://judge.yosupo.jp/problem/persistent_unionfind) はこの方法で解ける。オンラインで答えるには、$\mathrm{par}$ を永続配列で持つ完全永続の Union-Find が要る（1 回 $O(\log^2 N)$）。
+- 過去の版から枝分かれして併合する（完全永続）なら、部分永続では足りない。オフラインなら版の木を DFS し、入るとき併合し、出るとき取り消す（[永続データ構造](../ds/persistent-data-structures.md#offline-version-tree)）。Library Checker の [Persistent Unionfind](https://judge.yosupo.jp/problem/persistent_unionfind) はこの方法で解ける。オンラインで答えるには、$\mathrm{par}$ を永続配列で持つ完全永続の Union-Find が要る（1 回 $O(\log^2 N)$）。
 
 ## 学ぶための資料 {#resources}
 
@@ -144,7 +144,7 @@ $x$ と $y$ が同じ集合かどうかは、時刻について[単調](../guide
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [AGC002 D. Stamp Rally](https://atcoder.jp/contests/agc002/tasks/agc002_d)（diff 2514）：最初の t 本の辺だけを使ったとき、x と y の成分の頂点数の合計が z 以上になる最小の t を各クエリで答える。
+- [AGC002 D. Stamp Rally](https://atcoder.jp/contests/agc002/tasks/agc002_d)（diff 2514）：最初の t 本の辺だけを使ったとき、x と y を含む成分の頂点数（同じ成分なら 1 回）が z 以上になる最小の t を各クエリで答える。
 
 </div>
 
@@ -164,4 +164,4 @@ $x$ と $y$ が同じ集合かどうかは、時刻について[単調](../guide
 - [noshi91「UnionFindTree に関する知見の諸々」](https://noshi91.hatenablog.com/entry/2018/05/30/191943)：union by size だけでも $O(\log N)$ になること、部分永続は効率よく作れるが完全永続は $O(\log^2 N)$ ほどかかること
 - [drken「CODE THANKS FESTIVAL 2017 H - Union Sets (3D, 600 点)」](https://drken1215.hatenablog.com/entry/2018/09/15/193740)：例題の問いの確認と、根でなくなった時刻と大きさの履歴を持つ実装
 - [drken「AtCoder AGC 002 D - Stamp Rally (橙色, 1000 点)」](https://drken1215.hatenablog.com/entry/2018/09/15/193722)：練習の問題の部分永続 Union-Find と並列二分探索の 2 つの解法
-- [Library Checker「Persistent UnionFind」](https://judge.yosupo.jp/problem/persistent_unionfind)：完全永続の Union-Find の問題の内容
+- [Library Checker「Persistent Unionfind」](https://judge.yosupo.jp/problem/persistent_unionfind)：完全永続の Union-Find の問題の内容

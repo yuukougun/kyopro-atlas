@@ -26,7 +26,7 @@ sections:
   - {title: 64bit の法での掛け算（128 bit 整数・Montgomery・Barrett）, anchor: mulmod}
   - {title: 'ACL の内部実装（internal::is_prime_constexpr）', anchor: acl-internal}
   - {title: 自作するときの要点と確かめ方, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -188,5 +188,5 @@ ABC で必須になる問題は確認できなかった。自作の関数は Lib
 - [Wikipedia「Miller–Rabin primality test」](https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test)：底 $2, 7, 61$ が $4{,}759{,}123{,}141$ 未満で十分であること
 - [Wikipedia「Pollard's rho algorithm」](https://en.wikipedia.org/wiki/Pollard%27s_rho_algorithm)：期待の手間が最小の素因数の平方根に比例すること、厳密な解析は未解決であること
 - [Wikipedia「Montgomery modular multiplication」](https://en.wikipedia.org/wiki/Montgomery_modular_multiplication)：Montgomery 形式と還元の考え方
-- [AtCoder「AC Library」internal_math.hpp・modint.hpp](https://github.com/atcoder/ac-library/blob/master/atcoder/internal_math.hpp)：`is_prime_constexpr` の底と `barrett`、`static_modint` の逆元の切り替え
-- [yosupo「Library Checker の問題（primality_test・factorize）」](https://github.com/yosupo06/library-checker-problems/tree/master/number_theory)：制約・制限時間（info.toml）と、固定の乱数を使う解を TLE にするテスト
+- [AtCoder Library のソース（internal_math.hpp）](https://github.com/atcoder/ac-library/blob/master/atcoder/internal_math.hpp)：`is_prime_constexpr` の底と `barrett`、`static_modint` の逆元の切り替え
+- [yosupo「Library Checker の問題（number_theory）」](https://github.com/yosupo06/library-checker-problems/tree/master/number_theory)：制約・制限時間（info.toml）と、固定の乱数を使う解を TLE にするテスト

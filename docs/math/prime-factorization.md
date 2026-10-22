@@ -26,8 +26,8 @@ sections:
   - {title: 素因数ごとに独立に考える（指数の組合せ）, anchor: per-prime}
   - {title: N! の素因数分解とルジャンドルの公式, anchor: legendre}
   - {title: 使い分け：1個なら試し割り、多数なら最小素因数の篩（10^18 は大きな数の素因数分解へ）, anchor: which-method}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

@@ -19,15 +19,15 @@ signs:
   - {type: shape, text: 答えが K(K−1)^(N−1) のような累乗の積の形になる}
 acl: []
 frequency: A
-frequency_evidence: recent 0・前提として 40 ページに届く（直接 2）・古い ABC 2 問
+frequency_evidence: recent 0・前提として 40 ページに届く（直接 2）・古い ABC 3 問
 sections:
   - {title: 和の法則と積の法則（積の法則が使える条件）, anchor: sum-and-product}
   - {title: 順列・組合せ・重複順列・円順列, anchor: permutations}
   - {title: 一列の塗り分けと円環の塗り分け, anchor: coloring}
   - {title: 決める順番を変えて積の法則を使えるようにする, anchor: order-of-choice}
   - {title: 写像 12 相の「玉も箱も区別する」マス（k^n と順列）, anchor: twelvefold-cells}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

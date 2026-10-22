@@ -26,7 +26,7 @@ sections:
   - {title: '混同しやすい書き方の対（std::iota と views::iota、unique と erase など）', anchor: confusing-pairs}
   - {title: 症状から引く：WA・RE・TLE と、手元と AtCoder で結果が違うとき, anchor: symptoms}
   - {title: 'コンパイルエラーのメッセージから引く（最初の error: の行と、required from here で自分の行を探す読み方を含む）', anchor: compile-errors}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -258,7 +258,7 @@ ACL（AtCoder Library）の部品の書き方を引く。各部品が何をす�
 
 | 書き方 | 意味 | ページ |
 | --- | --- | --- |
-| `#include <atcoder/all>`・`using namespace atcoder;` | 取り込みと共通の約束（0 始まり・半開区間） | [include と共通の約束](../cpp/acl-reading.md#conventions) |
+| `#include <atcoder/all>`・`using namespace atcoder;` | 取り込みと共通の約束（0-indexed・半開区間） | [include と共通の約束](../cpp/acl-reading.md#conventions) |
 | `dsu d(n);`・`fenwick_tree<long long> fw(n);`・`scc_graph g(n);` | 部品の作り方と主なメソッド | [部品の一覧](../cpp/acl-reading.md#components) |
 | `dsu d = n;` | explicit なのでエラー | [explicit](../cpp/acl-reading.md#explicit) |
 | `for (auto& g : d.groups())` | groups() の戻り値を回す | [dsu の groups()](../cpp/acl-reading.md#dsu-groups) |

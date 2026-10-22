@@ -29,8 +29,8 @@ sections:
   - {title: ハッシュ＋二分探索：LCP・辞書順の比較・最長の繰り返し, anchor: hash-lcp-binary-search}
   - {title: 'セグ木に載せるハッシュ：（ハッシュ, B^長さ）の組で更新ありの一致・回文判定', anchor: hash-segment-tree, level: 青}
   - {title: ハッシュで代用できる場面とできない場面（Z・Manacher・SA・畳み込みとの使い分け）, anchor: when-to-use}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -310,4 +310,4 @@ $$
 - [E869120「競プロ典型 90 問 047 の解説（画像）」](https://github.com/E869120/kyopro_educational_90/blob/main/editorial/047-02.jpg)：力試しの言い換えと、mod $2^{64}$ への注意
 - [drken「AtCoder ABC 150 F - Xor Shift (3D, 黄色, 600 点)」](https://drken1215.hatenablog.com/entry/2020/01/12/115800)：力試しの方針（隣接 XOR の列への変換と、ローリングハッシュでも解けること）
 - [ikatakos「AtCoder Beginner Contest 135 D,F問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2019/0727_abc135)：力試しの方針（一致位置の遷移と閉路の判定。解説の部分だけを参照）
-- [AtCoder Library「Segment Tree」](https://github.com/atcoder/ac-library/blob/master/document_ja/segtree.md)：`segtree` の宣言・計算量・要件
+- [AtCoder Library「Segtree」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/segtree.md)：`segtree` の宣言・計算量・要件

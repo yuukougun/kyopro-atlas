@@ -16,13 +16,13 @@ signs:
   - {type: phrase, text: 指定した K 頂点をすべて連結に保つのに必要な最小の頂点数・辺数}
 acl: []
 frequency: C
-frequency_evidence: recent 0・前提として 1 ページに届く（直接 1）・古い ABC 1 問
+frequency_evidence: recent 0・前提として 1 ページに届く（直接 1）・古い ABC 2 問
 sections:
   - {title: 指定頂点を根にして、部分木に指定頂点を含むかで判定する, anchor: root-at-terminal}
   - {title: 指定されていない葉を削り続ける, anchor: prune-leaves}
   - {title: 一般のグラフのシュタイナー木は別物（グラフの章）, anchor: vs-graph}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -129,6 +129,10 @@ $$
     - 指定頂点の最初の 1 つ $V_1$ を根にして DFS し、帰りがけに「自分が指定頂点か、子のどれかが残る」なら自分を残す
     - 残した頂点の数を出力する。DFS は各頂点を 1 回ずつ訪れるので $O(N)$
     - コードは[根を指定頂点にする節](#root-at-terminal)のものと同じである。葉を削る方法でも同じ答えになる
+
+## 練習問題 {#practice}
+
+例題のほかに練習に置ける問題は確認できなかった。
 
 ## 力試し {#challenge}
 

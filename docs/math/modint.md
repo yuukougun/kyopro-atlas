@@ -25,8 +25,8 @@ sections:
   - {title: 上位の手法での使われ方（階乗の表・畳み込み・行列・期待値）, anchor: connections}
   - {title: 自作するときの設計（加減の条件分岐・64bit の掛け算・pow と inv・入出力）, anchor: self-made}
   - {title: ACL の中身（Barrett 還元・raw）, anchor: acl-internals}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -182,7 +182,7 @@ ACL の modint の実装には、自作の参考になる工夫が 2 つある�
 
 ## 参考 {#references}
 
-- [AtCoder Library「Modint」（document_ja/modint.md）](https://github.com/atcoder/ac-library/blob/master/document_ja/modint.md)：型の種類・set_mod の制約・割り算と inv の条件と計算量・raw・複数の法
+- [AtCoder Library「modint」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/modint.md)：型の種類・set_mod の制約・割り算と inv の条件と計算量・raw・複数の法
 - [AtCoder Library「modint.hpp」・「internal_math.hpp」](https://github.com/atcoder/ac-library/tree/master/atcoder)：負の数の正規化・既定の法 998244353・inv の分岐・Barrett 還元の実装（v1.6 のソースを手元で確認）
 - [noshi91「modint 構造体を使ってみませんか？ (C++)」](https://noshi91.hatenablog.com/entry/2019/03/31/174006)：自作の設計（加減の条件分岐・法をテンプレート引数にする理由・実行時の法の版）
 - [drken「AtCoder ABC 357 D - 88888888 (1Q, 緑色, 350 点)」](https://drken1215.hatenablog.com/entry/2024/06/10/000051)：練習の方針（等比数列の和を modint の pow と割り算で求める）

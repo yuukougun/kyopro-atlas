@@ -10,7 +10,7 @@ kind: [案内, 整数論]
 prerequisites: []
 related: [divisor-enum, divisor-count-bound, harmonic-sum, spf-sieve, prime-factorization, multiplicative-function, divisor-inclusion-exclusion, mobius-function, zeta-mobius-divisor, prime-exponent-vector, gcd-lcm, gcd-properties, floor-quotient-enum, integer-division]
 summary: 約数・倍数・gcd が出てくる問題で、問われ方から使う手法を引ける。約数の列挙、倍数を回して集める調和級数、素因数分解、gcd がちょうど g の数え上げ、約数の個数の上限の問われ方に分ける。
-complexity: 約数の列挙と 1 個の素因数分解は O(√N)、1〜M の倍数をすべてたどると O(M log M)、最小素因数の篩は前計算 O(M log log M) の後 1 個 O(log M)
+complexity: null
 signs:
   - {type: constraint, text: N ≤ 10^12 で、N の約数や素因数を使う}
   - {type: phrase, text: 1 以上 N 以下のすべての整数について、約数や倍数に関する値の総和を求める}
@@ -31,7 +31,7 @@ sections:
   - {title: 積が平方数・積がちょうど N → 素因数の指数で考える（prime-exponent-vector）, anchor: products}
   - {title: '差の gcd・区間の gcd の値の種類 → gcd の性質（gcd-lcm, gcd-properties）', anchor: gcd}
   - {title: ⌊N/i⌋ の値ごとにまとめる → floor の値の列挙（floor-quotient-enum）, anchor: floor-sums}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 

@@ -26,8 +26,8 @@ sections:
   - {title: 残りから一様に選ぶ = ランダムな順列, anchor: random-permutation}
   - {title: ペアの大小は確率 1/2, anchor: pairs}
   - {title: 対称でない要素（初期位置・特別な要素）に注意する, anchor: asymmetric}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -219,8 +219,8 @@ $f$ と $g$ は [Trie](../string/trie.md) で数える。$1/2$ になるのは�
 
 - [プログラミングのひろば「ABC360 E」](https://programming-hiroba.com/abc360-e/)：ABC360 E の位置 1 にいる確率の漸化式と、その他の位置の確率 $(1 - p)/(N - 1)$、答えの式。閉じた式は本文で導き、コード片で全状態の DP と照らした
 - [kmjp「ABC473 G」](https://kmjp.hatenablog.jp/entry/2026/08/29/0900)：ABC473 G の、外れの回数を多項式の積の係数で求める方針
-- [ikatakos の競プロ Wiki「ABC473」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0829_abc473)：ABC473 G でカードの配置とめくる順を 1 つの一様ランダムな順列にまとめる見方と、挿入 DP・分割統治の積（解法の節だけを読んだ）
-- [ikatakos の競プロ Wiki「ABC464」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0627_abc464#f_-_random_vault_heist)：ABC464 F の順列への置き換え、最後に開ける金庫と前の集合を固定する確率、半分全列挙（解法の節だけを読んだ）
-- [drken「ABC380 G - Another Shuffle Window」](https://drken1215.hatenablog.com/entry/2024/11/17/113336)：ABC380 G の制約。記事はペアごとの確率を BIT で足す、本文とは別の解き方である。本文の方針は[ペアの節](#pairs)の議論から導き、小さい N の全数で確かめた
-- [kmjp「ABC268 G」](https://kmjp.hatenablog.jp/entry/2022/09/10/0900)：ABC268 G の接頭辞の関係による場合分けと順位の期待値の式
+- [ikatakos「AtCoder Beginner Contest 473 D,E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0829_abc473)：ABC473 G でカードの配置とめくる順を 1 つの一様ランダムな順列にまとめる見方と、挿入 DP・分割統治の積（解法の節だけを読んだ）
+- [ikatakos「第七回日本最強プログラマー学生選手権～Advance～ -予選- （AtCoder Beginner Contest 464）F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0627_abc464#f_-_random_vault_heist)：ABC464 F の順列への置き換え、最後に開ける金庫と前の集合を固定する確率、半分全列挙（解法の節だけを読んだ）
+- [drken「AtCoder ABC 380 G - Another Shuffle Window (3D, 青色, 575 点)」](https://drken1215.hatenablog.com/entry/2024/11/17/113336)：ABC380 G の制約。記事はペアごとの確率を BIT で足す、本文とは別の解き方である。本文の方針は[ペアの節](#pairs)の議論から導き、小さい N の全数で確かめた
+- [kmjp「AtCoder ABC #268 (ユニークビジョンプログラミングコンテスト2022 夏) : G - Random Student ID」](https://kmjp.hatenablog.jp/entry/2022/09/10/0900)：ABC268 G の接頭辞の関係による場合分けと順位の期待値の式
 - [merom686「ABC268」](https://merom686.hatenablog.com/entry/2022/09/11/000905)：ABC268 G の接頭辞の関係にない組が半々になる見方

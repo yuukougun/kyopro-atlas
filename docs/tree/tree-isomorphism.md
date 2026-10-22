@@ -18,13 +18,13 @@ signs:
 acl: []
 verify: [rooted_tree_isomorphism_classification]
 frequency: C
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 1 問
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 0 問
 sections:
   - {title: AHU 法（子の名前の多重集合に名前を付ける）, anchor: ahu}
   - {title: 木のハッシュと衝突しにくい設計, anchor: tree-hash}
   - {title: 根のない木は中心を根にする, anchor: unrooted}
   - {title: 公開ライブラリと自作するときの要点, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 

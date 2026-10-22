@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 380" width="580" height="380" font-family="sans-serif">
-<rect width="580" height="380" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 389" width="580" height="389" font-family="sans-serif">
+<g transform="translate(0 0)">
+<rect x="0" y="0" width="580" height="389" fill="#ffffff"/>
 <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker><marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f5fbf"/></marker></defs>
 <text x="20" y="30" font-size="16" fill="#333">和 s</text>
 <text x="192" y="30" font-size="16" text-anchor="middle" fill="#333">0</text>
@@ -81,4 +82,5 @@
 <path d="M416,299 Q472,329 525,301" fill="none" stroke="#1f5fbf" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#ahb)"/>
 <text x="20" y="355" font-size="16" fill="#1f5fbf">削除（s = 2, 3, …, 6 の順）：dp[s] ＝ 新 dp[s] − dp[s − 2]</text>
 <text x="20" y="375" font-size="16" fill="#1f5fbf">点線：戻し終えた値を使う</text>
+</g>
 </svg>

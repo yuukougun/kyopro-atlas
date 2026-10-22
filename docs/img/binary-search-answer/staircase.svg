@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" font-family="sans-serif" font-size="14">
-<defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#999" stroke-width="2"/></pattern><marker id="ar" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#333"/></marker></defs>
+<svg xmlns="http://www.w3.org/2000/svg" width="404" height="300" viewBox="0 0 404 300" font-family="sans-serif" font-size="14">
 <rect width="100%" height="100%" fill="#ffffff"/>
+<g transform="translate(2 0)">
+<defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#999" stroke-width="2"/></pattern><marker id="ar" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#333"/></marker></defs>
 <text x="16" y="24" fill="#222">check(x)：どのピースも x 以上にして</text>
 <text x="16" y="44" fill="#222">K + 1 = 2 個に分けられるか</text>
 <text x="16" y="66" fill="#555" font-size="13">（長さ 10、切れ目の候補 3・5・7、K = 1）</text>
@@ -59,4 +60,5 @@
 <text x="392" y="240" text-anchor="end" fill="#555" font-size="12">（棒より長い）</text>
 <text x="223" y="222" text-anchor="middle" fill="#222" font-size="13">最後の ng</text>
 <text x="193" y="270" text-anchor="middle" fill="#1f4e9a" font-size="13">最後の ok = 答え</text>
+</g>
 </svg>

@@ -27,8 +27,8 @@ sections:
   - {title: bitset：大きさはコンパイル時の定数、count・シフト・_Find_first・_Find_next, anchor: bitset}
   - {title: 乱数：mt19937_64・uniform_int_distribution・shuffle（rand() は使わない）, anchor: random}
   - {title: '時間計測：chrono::steady_clock::now()', anchor: chrono}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 cpp_std: null
 gcc_min: null
 atcoder: true

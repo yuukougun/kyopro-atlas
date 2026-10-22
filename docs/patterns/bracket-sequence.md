@@ -10,7 +10,7 @@ kind: [案内, 文字列, 累積和・差分]
 prerequisites: [prefix-sum]
 related: [stack-techniques, dp-state-design, reflection-principle, lazy-segment-tree, segment-tree-monoids, exchange-argument, greedy-priority-queue, parsing]
 summary: 括弧列が出てくる問題で、判定・数え上げ・区間の判定・並べる順序・価値の最大化の手法を引ける。'(' を +1、')' を −1 とした累積和が途中で負にならず最後に 0 なら正しい、という言い換えが共通の出発点になる。
-complexity: 判定 O(N)、区間の判定は 1 回 O(log N)
+complexity: null
 signs:
   - {type: phrase, text: '''('' と '')'' からなる文字列が正しい括弧列か判定する'}
   - {type: phrase, text: '? を ( か ) に置き換えて正しい括弧列にする方法の数'}
@@ -29,8 +29,8 @@ sections:
   - {title: 複数の括弧列を並べる順序 → 要約して 2 組に分けてソート（exchange-argument）, anchor: ordering}
   - {title: 価値が最大の正しい括弧列 → 先頭からの条件に言い換えて優先度付きキュー（greedy-priority-queue）, anchor: max-value}
   - {title: 数式・入れ子の構造の解析 → 構文解析（parsing）, anchor: parsing}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

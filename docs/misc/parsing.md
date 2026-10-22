@@ -19,7 +19,7 @@ signs:
   - {type: constraint, text: 式の長さが 2×10^5 程度で、括弧の入れ子が深くなりうる}
 acl: []
 frequency: B
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 3 問
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 4 問
 sections:
   - {title: BNF と規則ごとの関数（読み取り位置を参照で共有する）, anchor: bnf}
   - {title: 優先順位と括弧が正しく読める理由（構文木と呼び出しの木）, anchor: why-it-works}
@@ -27,8 +27,8 @@ sections:
   - {title: 深い入れ子と再帰の深さ, anchor: deep-nesting}
   - {title: 文法に沿った DP, anchor: grammar-dp}
   - {title: 式の部分文字列の総和, anchor: substring-sum, level: 発展}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

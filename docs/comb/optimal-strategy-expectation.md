@@ -18,15 +18,15 @@ signs:
   - {type: phrase, text: どれを残すか（どれを選ぶか）を選びながら進む}
 acl: []
 frequency: B
-frequency_evidence: recent 1（abc470_e）・前提として届くページなし・古い ABC 7 問
+frequency_evidence: recent 1（abc470_e）・前提として届くページなし・古い ABC 5 問
 sections:
   - {title: 残すもの・知っている情報を状態にする, anchor: state-design}
   - {title: 止めるタイミングを選ぶ（相手の得点の分布と比べる）, anchor: stopping}
   - {title: 比較は実数で、答えは mod で（比較できない落とし穴）, anchor: compare-real}
   - {title: やり直しがあるときは答えを仮定して二分探索する, anchor: guess-answer}
   - {title: 「最大値の期待値」との違い, anchor: vs-max}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

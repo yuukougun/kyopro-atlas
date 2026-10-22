@@ -18,15 +18,15 @@ signs:
   - {type: phrase, text: 多数のパスに沿って +1 し、各辺・各頂点を通った回数を求める}
 acl: []
 frequency: B
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 3 問
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 4 問
 sections:
   - {title: 部分木への加算（根から下へ累積する）, anchor: subtree-add}
   - {title: 辺の片側への加算を子の部分木への加算に直す, anchor: edge-side}
   - {title: 根から y 世代までに及ぶ値を伝える, anchor: depth-limited}
   - {title: 途中で値を聞かれるならオイラーツアーと BIT, anchor: online-queries}
   - {title: パスへの加算（LCA に印を置いて葉から上へ累積する）, anchor: path-add, level: 青}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -221,5 +221,5 @@ $v$ の側も同じである。頂点版では $l$ がパスに含まれるの�
 
 - [drken「AtCoder ABC 187 E - Through Path (水色, 500 点)」](https://drken1215.hatenablog.com/entry/2021/01/03/162800)：辺の片側への加算を、部分木への加算と「全体に足して部分木から引く」に直す方針
 - [drken「AtCoder ABC 138 D - Ki (緑色, 400 点)」](https://drken1215.hatenablog.com/entry/2020/05/18/174000)：部分木の根に印を置き、根から下へ累積する基本形
-- [hamayan「ABC222 E - Red and Blue Tree」](https://blog.hamayanhamayan.com/entry/2021/10/10/142820)：各辺を通る回数を先に数えて部分和 DP に直す方針と、制約が小さいので素朴に数えてよいこと
+- [hamayan「Red and Blue Tree [エクサウィザーズプログラミングコンテスト2021（AtCoder Beginner Contest 222） E]」](https://blog.hamayanhamayan.com/entry/2021/10/10/142820)：各辺を通る回数を先に数えて部分和 DP に直す方針と、制約が小さいので素朴に数えてよいこと
 - [ZOI_dayo「【AtCoder】黒〜緑のためのABC解説 | ABC309 A~F」](https://qiita.com/ZOI_dayo/items/a55cc4342832efdc23ba)：練習 ABC309 E の親から子へ最大を伝える漸化式

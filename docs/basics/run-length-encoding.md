@@ -26,8 +26,8 @@ sections:
   - {title: 塊の列で尺取りする, anchor: two-pointers-on-runs}
   - {title: 塊ごとに偶奇で振り分ける, anchor: parity-per-run}
   - {title: ランレングスのまま処理する, anchor: keep-compressed, level: 水}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -217,5 +217,5 @@ while i < |X| and j < |Y|:
 - [drken「AtCoder ABC 380 C - Move Segment (300 点)」](https://drken1215.hatenablog.com/entry/2024/11/17/012903)：練習の方針（塊の入れ替えと復元）
 - [Reputeless「tenkei_90 084」](https://github.com/Reputeless/tenkei_90/blob/main/084.md)：練習の方針（塊ごとの区間の数を全体から引く）
 - [drken「AtCoder ABC 136 D - Gathering Children (400 点)」](https://drken1215.hatenablog.com/entry/2020/12/29/190100)：塊の長さの偶奇による振り分けと、ダブリングによる別解
-- [drken「AtCoder ABC 140 D - Face Produces Unhappiness (400 点)」](https://drken1215.hatenablog.com/entry/2020/05/16/005300)：1 回の反転で境界が高々 2 減ることと、答えの式
+- [drken「AtCoder ABC 140 D - Face Produces Unhappiness (1Q, 緑色, 400 点)」](https://drken1215.hatenablog.com/entry/2020/05/16/005300)：1 回の反転で境界が高々 2 減ることと、答えの式
 - [ikatakos「AtCoder Beginner Contest 421 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0830_abc421)：力試しの方針（2 つのランレングスの列を同時に進める処理。解説の部分だけを参照）

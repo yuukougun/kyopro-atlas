@@ -18,7 +18,7 @@ signs:
   - {type: phrase, text: 同じ模様が繰り返し敷き詰められた盤面}
 acl: []
 frequency: B
-frequency_evidence: recent 1（abc452_e）・前提として 9 ページに届く（直接 1）・古い ABC 5 問
+frequency_evidence: recent 1（abc452_e）・前提として 9 ページに届く（直接 1）・古い ABC 4 問
 sections:
   - {title: 尾と周期（ρ 型）と K 回後の求め方, anchor: rho}
   - {title: 途中の和（尾の和＋周期の和 × 回数＋余り）, anchor: partial-sums}
@@ -27,8 +27,8 @@ sections:
   - {title: 盤面・剰余の周期を割り算で数える, anchor: periodic-patterns, level: 水}
   - {title: シミュレーションを速く進める（ずれ・反転は全体への操作を変数で持つページへ）, anchor: simulation-speedup}
   - {title: ダブリング・行列累乗との使い分け, anchor: vs-doubling}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

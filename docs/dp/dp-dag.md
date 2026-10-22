@@ -19,15 +19,15 @@ signs:
   - {type: phrase, text: 依存関係に従って順に決める（閉路があれば −1）}
 acl: []
 frequency: B
-frequency_evidence: recent 0・前提として 1 ページに届く（直接 1）・古い ABC 6 問
+frequency_evidence: recent 0・前提として 1 ページに届く（直接 1）・古い ABC 3 問
 sections:
   - {title: DP は DAG 上の最短路・最長路・数え上げ, anchor: dp-as-dag}
   - {title: 順序の作り方（Kahn 法・DFS の帰りがけ順の逆・メモ化再帰・問題の性質から）, anchor: ordering}
   - {title: DAG だと気づく・作る（値の順・距離の層・同じ値の頂点をまとめる）, anchor: find-dag, level: 水}
   - {title: 最短路の本数（距離が確定した順に配る）, anchor: count-shortest-paths}
   - {title: 閉路があるとき（SCC で縮約する・最短路に切り替える）, anchor: with-cycles}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

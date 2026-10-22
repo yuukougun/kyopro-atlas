@@ -26,7 +26,7 @@ int main() {
         top[r] = move(merged);
         top[c].clear();  // 古い根の情報は使わない（メモリも返す）
     };
-    auto kth = [&](int v, int k) -> int {  // k は 1 始まり
+    auto kth = [&](int v, int k) -> int {  // k は 1-indexed
         const vector<int>& t = top[d.leader(v)];  // 必ず根の情報を見る
         return k <= (int)t.size() ? t[k - 1] : -1;
     };

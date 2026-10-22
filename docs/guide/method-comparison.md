@@ -10,8 +10,8 @@ level: null
 kind: [案内]
 prerequisites: []
 related: [bfs, zero-one-bfs, dijkstra, bellman-ford, warshall-floyd, extended-dijkstra, shortest-path-dag, dp-speedup-overview, kth-and-median#dynamic, subsequence-and-substring#properties, stl-containers, reverse-index-signs, cheatsheet]
-summary: BFS・01-BFS・ダイクストラや累積和・BIT・セグメント木のように混同しやすい手法の組を、できる操作・計算量・前提条件で比べ、条件から選べる。
-complexity: 表の各行に記す（最短路は BFS・01-BFS が O(N+M)、ダイクストラ法が O((N+M) log N)、ベルマンフォード法が O(NM)、ワーシャルフロイド法が O(N^3)）
+summary: BFS・01-BFS・ダイクストラ法や累積和・BIT・セグメント木のように混同しやすい手法の組を、できる操作・計算量・前提条件で比べ、条件から選べる。
+complexity: null
 signs: []
 acl: []
 sections:
@@ -32,7 +32,7 @@ sections:
   - {title: 最適化の方針, anchor: optimization}
   - {title: 名前が似た別物, anchor: similar-names}
   - {title: 数の扱い, anchor: numbers}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -426,7 +426,7 @@ x86-64 の GCC（AtCoder も同じ）の `long double` は仮数部が 64 bit �
 | 1 個で $N \le 10^{12}$ 程度 | [試し割り](../math/divisor-enum.md#primality) | $O(\sqrt{N})$ |
 | 多数で、値が $10^7$ 程度まで、素数かだけ | [エラトステネスの篩](../math/sieve-eratosthenes.md#procedure) | 前計算 $O(V \log \log V)$ |
 | 多数で、値が $10^7$ 程度まで、分解も | [最小素因数の篩](../math/spf-sieve.md#build-and-factor) | 前計算のあと 1 個 $O(\log V)$ |
-| 連続した区間 $[L, R]$ の数（$R \le 10^{12}$、$R - L \le 10^6$ など） | [区間篩](../math/segmented-sieve.md#why-sqrt) | $\sqrt{R}$ までの素数で篩う |
+| 連続した区間 $[L, R]$（閉区間）の数（$R \le 10^{12}$、$R - L \le 10^6$ など） | [区間篩](../math/segmented-sieve.md#why-sqrt) | $\sqrt{R}$ までの素数で篩う |
 | 1 個で $N \le 10^{18}$ | [Miller-Rabin・Pollard's rho](../math/miller-rabin.md#miller-rabin) | 判定 $O(\log N)$、分解 期待 $O(N^{1/4})$ |
 
 表の $V$ は値の上限である。試し割りは 1 個なら速いが、個数が多いと積で効く。値が $10^6$ 以下の数を $2 \times 10^5$ 個試し割りすると、最悪 $2 \times 10^8$ 回の割り算になる。

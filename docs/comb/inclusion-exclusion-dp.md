@@ -26,8 +26,8 @@ sections:
   - {title: 違反の個数を状態に持ち、最後に符号と残りの自由度を掛ける, anchor: count-violations}
   - {title: 「等しい」を区間にまとめる符号付き DP, anchor: equal-blocks}
   - {title: 符号付きの木 DP, anchor: tree, level: 発展}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

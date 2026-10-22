@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 500" width="460" height="500" font-family="sans-serif" font-size="14">
-<rect x="0" y="0" width="460" height="500" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 503" width="460" height="503" font-family="sans-serif" font-size="14">
+<g transform="translate(0 1)">
+<rect x="0" y="-1" width="460" height="503" fill="#ffffff"/>
 <line x1="30" y1="330" x2="445" y2="330" stroke="#555" stroke-width="1"/>
 <line x1="30" y1="330" x2="30" y2="30" stroke="#555" stroke-width="1"/>
 <text x="60" y="350" text-anchor="middle" fill="#333">0</text>
@@ -44,4 +45,5 @@
 <text x="70" y="461" fill="#000">列 3：1（1 点だけ）</text>
 <circle cx="40" cy="484" r="9" fill="none" stroke="#000" stroke-width="2" stroke-dasharray="3 2"/>
 <text x="70" y="489" fill="#000">広義減少列 3, 1, 1（各列に 1 つずつ）</text>
+</g>
 </svg>

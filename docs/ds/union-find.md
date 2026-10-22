@@ -20,7 +20,7 @@ signs:
 acl: [dsu]
 verify: [unionfind]
 frequency: A
-frequency_evidence: recent 1（abc451_e）・前提として 17 ページに届く（直接 9）・古い ABC 5 問
+frequency_evidence: recent 1（abc451_e）・前提として 18 ページに届く（直接 9）・古い ABC 5 問
 sections:
   - {title: 何ができるか（併合と判定。分割・削除はできない）, anchor: what-it-does}
   - {title: 保つ性質（各グループは根付き木で、根が代表元。par は根なら −(大きさ)）, anchor: invariants}
@@ -28,8 +28,8 @@ sections:
   - {title: なぜ速いか（union by size だけで深さ log N、経路圧縮と合わせてならし O(α(N))）, anchor: complexity}
   - {title: 境界（同じグループどうしの併合・自己ループと多重辺・成分数・大きさの積のあふれ）, anchor: boundaries}
   - {title: 根に大きさ・辺数を持たせる（ほかの情報を持たせる型は Union-Find の応用）, anchor: size-and-edges}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -243,9 +243,9 @@ x == y なら edges[x] += 1        # 自己ループ・多重辺もここで数�
 
 - [AtCoder Library「DSU」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/dsu.md)：ACL の `dsu` の操作・計算量・制約
 - [けんちょん「AtCoder ACL Practice Contest A - Disjoint Set Union」](https://drken1215.hatenablog.com/entry/2022/12/14/212330)：計算量 $O(\alpha(N))$ と $\alpha$ の大きさ、自作の Union-Find の書き方
-- [kyo-pro「ABC288 C - Don’t be cycle」](https://kyo-pro.hatenablog.com/entry/2023/02/04/224004)：例題の方針（同じ成分を結ぶ辺を数える）
-- [kyo-pro「ABC292 D - Unicyclic Components」](https://kyo-pro.hatenablog.com/entry/ABC292D)：練習の方針（根に頂点数と辺数を持たせ、辺数は併合のあとで根に足し込む）
+- [kyo-pro「ABC288C - Don’t be cycle」](https://kyo-pro.hatenablog.com/entry/2023/02/04/224004)：例題の方針（同じ成分を結ぶ辺を数える）
+- [kyo-pro「ABC292D - Unicyclic Components」](https://kyo-pro.hatenablog.com/entry/ABC292D)：練習の方針（根に頂点数と辺数を持たせ、辺数は併合のあとで根に足し込む）
 - [けんちょん「AtCoder ABC 177 D - Friends」](https://drken1215.hatenablog.com/entry/2020/10/10/023200)：練習の方針（最大の連結成分の大きさが答えになる理由）
-- [けんちょん「AtCoder ABC 206 D - KAIBUNsyo」](https://drken1215.hatenablog.com/entry/2021/06/26/165800)：練習の方針（値を頂点にし、併合の成功回数を数える）
+- [drken「AtCoder ABC 206 D - KAIBUNsyo (2Q, 緑色, 400 点)」](https://drken1215.hatenablog.com/entry/2021/06/26/165800)：練習の方針（値を頂点にし、併合の成功回数を数える）
 - [けんちょん「AtCoder ABC 157 D - Friend Suggestions」](https://drken1215.hatenablog.com/entry/2020/03/02/022900)：練習の方針（成分の大きさから自分・友達・ブロック相手を引く）
 - [E869120「競プロ典型 90 問 012 の解答例」](https://github.com/E869120/kyopro_educational_90/blob/main/sol/012.cpp)：練習の方針（マスの番号付けと、両方赤かの確認）

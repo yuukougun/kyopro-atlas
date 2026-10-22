@@ -25,8 +25,8 @@ sections:
   - {title: 最短路木（最小全域木との違い）, anchor: shortest-path-tree}
   - {title: 辺が s-t 最短路に乗る条件（両端からの距離）, anchor: edge-on-path}
   - {title: 辺を消すと距離が変わるか, anchor: edge-removal, level: 黄}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

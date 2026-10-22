@@ -112,7 +112,7 @@ difficulty 〜1199 の帯で主に必要になるページ（100 ページ）。
 | [GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md) | 整数論 | gcd(a, b) = gcd(b, a mod b) を繰り返して最大公約数を O(log min(a, b)) で求め、lcm は a / gcd × b で求める。1 つ除いた gcd を累積 gcd で求め、分数を既約にして比べる。 |
 | [整数の証明の型](../math/proof-patterns.md) | 考察・整数論 | 実験で見つけた整数の規則が正しいかを、定番の筋道で確かめる。操作で gcd が変わらない、a, 2a, … が余りを並べ替える、余りの鳩の巣、mod での矛盾などを使う。 |
 | [整数の平方根・K 乗根と累乗数](../math/integer-root.md) | 整数論・二分探索 | ⌊√N⌋ を double の sqrt で求めると 10^18 付近で ±1 ずれるので、r² ≤ N < (r+1)² になるまで整数で補正するか二分探索で求める。a^b ≤ N となる a の上限や、累乗数を重複なく数えるのに使う。 |
-| [N 進法](../math/base-conversion.md) | 整数論 | N を b で割った余りを並べて b 進表記にし、Horner 法で数に戻す。負の基数（−2 進）や 1 始まりの 26 進（a..z, aa..）、基数を変数とみた二分探索といった変形にも使う。 |
+| [N 進法](../math/base-conversion.md) | 整数論 | N を b で割った余りを並べて b 進表記にし、Horner 法で数に戻す。負の基数（−2 進）や 0 を使わない 26 進（a..z, aa..）、基数を変数とみた二分探索といった変形にも使う。 |
 
 ## 数え上げ・確率・ゲーム
 
@@ -163,7 +163,7 @@ difficulty 〜1199 の帯で主に必要になるページ（100 ページ）。
 | [比較関数と順序](../cpp/cpp-comparators.md) | 実装・C++・ソート・座標圧縮 | sort・set・priority_queue に渡す比較関数を約束（狭義の弱順序）と向きを守って書き、構造体に operator< や <=> で順序を持たせる。比較関数に <= を書いて sort が落ちるような事故を防ぐ。 |
 | [アルゴリズム関数と ranges 版](../cpp/cpp-algorithms.md) | 実装・C++・ソート・座標圧縮 | sort・unique・lower_bound・accumulate などの定型と、射影も使える ranges 版（C++20）を使い分ける。accumulate の初期値の型や、unique だけでは要素が減らない点に気をつける。 |
 | [文字列の操作](../cpp/cpp-string-api.md) | 実装・C++ | std::string の操作（substr・find・+=・数との変換）と string_view を、計算量と寿命に気をつけて書く。s = s + c が全体をコピーして遅いことや、cin >> の後の getline の罠を防ぐ。 |
-| [ACL の読み方](../cpp/acl-reading.md) | 実装・C++ | AtCoder Library（ACL）を使う解説コードを、共通の約束（0 始まり・半開区間）とともに読む。modint の val() と出力、segtree・lazy_segtree のテンプレート引数にラムダを渡す書き方が分かる。 |
+| [ACL の読み方](../cpp/acl-reading.md) | 実装・C++ | AtCoder Library（ACL）を使う解説コードを共通の約束（0-indexed・半開区間）とともに読む。modint の val() と出力、segtree・lazy_segtree のテンプレート引数にラムダを渡す書き方を知る。 |
 | [views の基本](../cpp/cpp-views-basics.md) | 実装・C++ | \| でつなぐ views（iota・filter・transform・split など）を、取り出すときに計算する遅延評価として読み書きする。views::iota(0, v.size()) が通らない理由など、型と寿命の罠も分かる。 |
 | [C++23 の views と ranges::to](../cpp/cpp-views-cpp23.md) | 実装・C++ | C++23 の views（enumerate・zip・pairwise・chunk_by など）で添字付きや隣どうしのループを短く書き、ranges::to で結果をコンテナにする。要素は参照を含む組で、受けた変数への代入が元を変える。 |
 | [入出力と定数倍](../cpp/cpp-io.md) | 実装・C++・計算量 | 入出力を速くし（sync_with_stdio・cin.tie）、println・小数の桁の指定・インタラクティブ問題のフラッシュを正しく書く。C++ の書き方が原因で TLE になる例も、計測つきで示す。 |

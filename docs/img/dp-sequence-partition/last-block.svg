@@ -1,5 +1,6 @@
-<svg width="352" height="420" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 420" font-family="sans-serif" font-size="15">
-<rect width="352" height="420" fill="#ffffff"/>
+<svg width="355" height="423" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 355 423" font-family="sans-serif" font-size="15">
+<g transform="translate(3 3)">
+<rect x="-3" y="-3" width="355" height="423" fill="#ffffff"/>
 <text x="8" y="20" font-size="14" fill="#333">(1) 仕切りを入れる：a = (2, 1, 1, 1, 1, 2, 2, 1)、</text>
 <text x="8" y="40" font-size="14" fill="#333">どの区間の和も 4 以下</text>
 <rect x="50" y="58" width="34" height="34" fill="#e3f2fd" stroke="#555"/>
@@ -64,4 +65,5 @@
 <text x="8" y="362" font-size="12" fill="#555">j = 2 は和 5 で不可。点線はまだ求めていない</text>
 <text x="8" y="388" font-size="13" fill="#333">dp[6] = dp[3] + dp[4] + dp[5] は、累積和 T を</text>
 <text x="8" y="406" font-size="13" fill="#333">使えば T[6] − T[3] の 1 回の引き算で求まる</text>
+</g>
 </svg>

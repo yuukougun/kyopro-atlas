@@ -17,15 +17,15 @@ signs:
   - {type: phrase, text: 各 i について、i を使わないときの答え（〜を除いたとき）}
   - {type: constraint, text: クエリの数 Q と目標の和 K がともに 5000 程度（O(QK) が通る）}
 acl: []
-frequency: B
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 3 問
+frequency: C
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 2 問
 sections:
   - {title: 足し算の更新は引き算で戻せる（ループの向きは追加と逆）, anchor: undo-by-subtraction}
   - {title: 戻せない DP（max・min・OR）, anchor: not-undoable}
   - {title: 前後からの DP をマージする, anchor: prefix-and-suffix}
   - {title: 分割統治でオフラインに処理する, anchor: offline-divide-and-conquer, level: 黄}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -113,7 +113,7 @@ $$
 --8<-- "knapsack-undo/prefix-suffix.cpp:core"
 ```
 
-前計算が $O(NW)$、各 $i$ のマージが $O(W)$ なので、全体で $O(NW)$ である。メモリも $O(NW)$ 使い、`long long` の表 2 つで約 $16NW$ バイトになる。$NW = 6.4 \times 10^7$ で 1024MB に達するので、$NW$ が $10^7$ を超えるあたりからはメモリを見積もる。足りなければ、後ろの表だけを全部持ち、前の表は $i$ を進めながら 1 本で更新するとよい（メモリが半分になる）。
+前計算が $O(NW)$、各 $i$ のマージが $O(W)$ なので、全体で $O(NW)$ である。メモリも $O(NW)$ 使い、`long long` の表 2 つで約 $16NW$ バイトになる。$NW = 6.4 \times 10^7$ で約 $1.0 \times 10^9$ バイト（約 980 MiB）になり、よくある制限の 1024 MiB にほぼ達するので、$NW$ が $10^7$ を超えるあたりからはメモリを見積もる。足りなければ、後ろの表だけを全部持ち、前の表は $i$ を進めながら 1 本で更新するとよい（メモリが半分になる）。
 
 マージの形は問いに合わせて変える。
 

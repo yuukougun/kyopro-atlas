@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" font-family="sans-serif" font-size="14">
-<defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#7aa0d8" stroke-width="2"/></pattern><marker id="ar" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#c0392b"/></marker></defs>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="401" viewBox="0 0 400 401" font-family="sans-serif" font-size="14">
 <rect width="100%" height="100%" fill="#ffffff"/>
+<g transform="translate(0 1)">
+<defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#7aa0d8" stroke-width="2"/></pattern><marker id="ar" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#c0392b"/></marker></defs>
 <text x="16" y="22" fill="#222">値の多重集合 {1, 2, 2, 4, 5, 5} の count(x)</text>
 <text x="16" y="42" fill="#222">＝ x 以下の値の個数</text>
 <text x="16" y="64" fill="#555" font-size="13">K = 3 のとき、count(x) ≥ 3 となる最小の x が</text>
@@ -48,4 +49,5 @@
 <line x1="152" y1="372" x2="152" y2="348" stroke="#c0392b" stroke-width="1.5" marker-end="url(#ar)"/>
 <text x="162" y="368" fill="#c0392b" font-size="13">可の最小 x = 2 が答え</text>
 <text x="162" y="386" fill="#c0392b" font-size="13">（K = 2 でも答えは 2）</text>
+</g>
 </svg>

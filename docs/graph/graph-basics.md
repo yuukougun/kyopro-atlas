@@ -17,13 +17,13 @@ signs:
   - {type: constraint, text: N ≤ 2×10^5 では N^2 の隣接行列を持てない（N ≤ 2000 程度なら持てる）}
 acl: []
 frequency: A
-frequency_evidence: recent 0・前提として 84 ページに届く（直接 5）・古い ABC 1 問
+frequency_evidence: recent 0・前提として 84 ページに届く（直接 5）・古い ABC 3 問
 sections:
   - {title: 隣接リスト・隣接行列・辺リストとアルゴリズムごとの使い分け, anchor: representations}
   - {title: 用語（次数・パスとウォーク・単純グラフ・連結・木・DAG・二部グラフ・補グラフ）, anchor: terms}
   - {title: 握手補題（次数の和は 2M）, anchor: handshake}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -190,7 +190,7 @@ $$
 </div>
 
 ??? note "練習の方針"
-    - **ABC343 B**：行 $i$ を左から見て、1 のある列の番号（1 始まりに直す）を拾う。隣接行列から隣接リストへの変換で、全体 $O(N^2)$ である
+    - **ABC343 B**：行 $i$ を左から見て、1 のある列の番号（1-indexed に直す）を拾う。隣接行列から隣接リストへの変換で、全体 $O(N^2)$ である
     - **ABC276 B**：辺 $(A, B)$ ごとに `g[A]` に $B$、`g[B]` に $A$ を入れて、隣接リストを両方向に作る。各 `g[i]` をソートして長さと要素を出力すれば $O(N + M \log M)$ である
     - **ABC284 C**：隣接リストを両方向に作る。連結とは限らないので、まだ訪れていない頂点から深さ優先探索か幅優先探索を始めるたびに 1 を数える。[Union-Find](../graph/union-find-connectivity.md) なら、$N$ から「別の成分どうしをつないだ回数」を引けばよい。どちらも $O(N + M)$ 程度である
 

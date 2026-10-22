@@ -9,7 +9,7 @@ order: 450
 level: 水
 kind: [ゲーム, DP]
 prerequisites: [game-basics]
-related: [interval-dp, optimal-strategy-expectation, tree-dp, binary-search-answer#dp-check, game-retrograde-analysis]
+related: [interval-dp, optimal-strategy-expectation, tree-dp, binary-search-answer#dp-check, game-retrograde-analysis, root-path-dfs]
 summary: 両者が「自分の得点 − 相手の得点」を最大化するゲームで、f(局面) = 手番の人が以後に得る差の最大値とおくと f = max(その手の得点 − f(次の局面)) と 1 本の式で書け、後ろから値が決まる。
 complexity: 局面の数 × 1 局面の手の数（列の両端から取るなら O(N^2)、グリッドを進むなら O(HW)）
 signs:
@@ -27,8 +27,8 @@ sections:
   - {title: 貪欲が最適でない例, anchor: greedy-fails}
   - {title: 木の上のゲーム, anchor: tree, level: 黄}
   - {title: 答えを決め打ちして勝敗に直す, anchor: binary-search, level: 黄}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

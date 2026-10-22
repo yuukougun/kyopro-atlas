@@ -24,7 +24,7 @@ sections:
   - {title: よく使う公式, anchor: formulas}
   - {title: bit 演算の小技, anchor: bit-tricks}
   - {title: C++ の版と GCC・INF の候補, anchor: cpp}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -390,6 +390,6 @@ C++26 の機能（`views::concat` など）は、AtCoder の `-std=gnu++23` で�
 ## 参考 {#references}
 
 - [drken「計算量オーダーの求め方を総整理！ 〜 どこから log が出て来るか 〜」](https://qiita.com/drken/items/872ebc3a2b5caaa4a0d0)：1 秒に $10^8$ 回という目安
-- [drken「ビット演算 (bit 演算) の使い方を総特集！ 〜 マスクビットから bit DP まで 〜」](https://qiita.com/drken/items/7c6ff2aa4d8fce1c9361)：部分集合の列挙と最下位ビットの小技の一覧
+- [drken「ビット演算 (bit 演算) の使い方を総特集！ 〜 マスクビットから bit DP まで 〜」](https://qiita.com/drken/items/7c6ff2aa4d8fce1c9361)：部分集合の列挙と最下位 bit の小技の一覧
 - [cppreference「Fundamental types」](https://en.cppreference.com/cpp/language/types)：整数の型の幅と LP64 のデータモデル
-- [AtCoder Library のドキュメント（日本語）](https://github.com/atcoder/ac-library/tree/master/document_ja)：ACL の各機能の計算量
+- [AtCoder「AC Library のドキュメント（document_ja）」](https://github.com/atcoder/ac-library/tree/master/document_ja)：ACL の各機能の計算量

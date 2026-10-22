@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280" width="400" height="280" font-family="sans-serif" font-size="13">
-  <rect x="0" y="0" width="400" height="280" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 405 292" width="405" height="292" font-family="sans-serif" font-size="13">
+<g transform="translate(0 12)">
+  <rect x="0" y="-12" width="405" height="292" fill="#ffffff"/>
   <!-- 軸 -->
   <line x1="40" y1="230" x2="380" y2="230" stroke="#333" stroke-width="1"/>
   <line x1="40" y1="230" x2="40" y2="10" stroke="#333" stroke-width="1"/>
@@ -24,4 +25,5 @@
   <text x="150" y="262" text-anchor="middle" font-size="12">A と C の交点</text>
   <text x="262" y="262" text-anchor="middle" font-size="12">A と B の交点</text>
   <text x="50" y="24" font-size="12">太い帯：下側の包絡線（最小値）</text>
+</g>
 </svg>

@@ -27,8 +27,8 @@ sections:
   - {title: 二重辺連結成分（橋で分けて縮約すると木になる）, anchor: two-edge-connected}
   - {title: 有向グラフの SCC（同じ ord・low の考え方）との対比, anchor: vs-scc}
   - {title: 二重頂点連結成分とブロックカット木, anchor: block-cut-tree, level: 発展}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -274,5 +274,5 @@ ABC で lowlink をそのまま使う問題は少ない。橋と関節点の実�
 - [algo-logic「グラフにおける関節点(Articulation Points)を検出するアルゴリズム」](https://algo-logic.info/articulation-points/)：根と根以外で関節点の条件が違う理由
 - [はまやん「競技プログラミングにおける無向グラフに関する（橋、関節点、サイクル基底、lowlink）問題まとめ」](https://blog.hamayanhamayan.com/entry/2016/10/18/123552)：応用の型（橋の木の上の道）の確かめ
 - [はまやん「ABC075 C. Bridge」の解説](https://blog.hamayanhamayan.com/entry/2017/10/15/002234)：例題 ABC075 C の問いと全探索の方針
-- [あめんばーど「G - Christmas Color Grid 2 / AtCoder Beginner Contest 334」](https://amentorimaru.hatenablog.com/entry/2025/04/11/210228)：ABC334 G を関節点で切り離される部分木の数で解く方針
+- [あめんばーど「【AtCoder】G - Christmas Color Grid 2 / AtCoder Beginner Contest 334」](https://amentorimaru.hatenablog.com/entry/2025/04/11/210228)：ABC334 G を関節点で切り離される部分木の数で解く方針
 - [codwarm「ABC375 (A~G) 题解」](https://www.cnblogs.com/codwarm/p/18463129)：ABC375 G を最短路に乗る辺の部分グラフの橋で解く方針

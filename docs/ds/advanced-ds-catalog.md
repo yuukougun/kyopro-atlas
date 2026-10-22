@@ -19,7 +19,7 @@ sections:
   - {title: 名前・何ができるか・代わりになる手の表, anchor: table}
   - {title: 併合可能なヒープ（skew heap・leftist heap・ランダム化ヒープ。マージテクで足りることが多い）, anchor: meldable-heap}
   - {title: ほかのページにあるもの（木の動的な構造は木の章、CDQ 分割統治・時間付き Mo・Li Chao Tree は各ページ）, anchor: elsewhere}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -152,7 +152,7 @@ leftist heap は、併合の再帰が右の背骨だけを降りることで速�
 | Link-Cut Tree・LCT | 辺の追加・削除がある森のパスの質問 | [動的木](../tree/dynamic-tree.md#link-cut) |
 | Euler Tour Tree・Top Tree | 辺の追加・削除がある森の部分木の質問 | [動的木](../tree/dynamic-tree.md#ett-top-tree) |
 | Static Top Tree | 頂点の値の更新のたびに木 DP の根の値を求め直す | [Static Top Tree と木 DP の動的更新](../tree/static-top-tree.md) |
-| HLD・重軽分解 | 木のパスを $O(\log N)$ 本の区間に分ける | [HL 分解](../tree/hld.md) |
+| HL 分解（HLD） | 木のパスを $O(\log N)$ 本の区間に分ける | [HL 分解](../tree/hld.md) |
 | 点分治・重心分解 | 木のパスを重心で分割統治して数える | [重心分解](../tree/centroid-decomposition.md) |
 | Virtual Tree・虚樹 | 指定した頂点と LCA だけの圧縮した木 | [Auxiliary Tree](../tree/auxiliary-tree.md) |
 | クラスカル再構築木・KRT | Union-Find の併合の過程を木にする | [併合過程の木](../tree/merge-process-tree.md) |
@@ -180,4 +180,4 @@ leftist heap は、併合の再帰が右の背骨だけを降りることで速�
 - [koosaga「Segment Tree Beats와 Kinetic Segment Tree」](https://koosaga.com/307)：Kinetic Segment Tree の操作（一次関数・区間の最小値・時刻を進める操作）と、更新がないときの全体 $O(N \log^2 N)$
 - [maspypy「library: ds/fastset.hpp」](https://github.com/maspypy/library/blob/main/ds/fastset.hpp)：64 分木の段の持ち方と、メモリがおよそ $N/63$ 語であること
 - [GCC「Policy-Based Data Structures: Design」](https://gcc.gnu.org/onlinedocs/libstdc++/manual/policy_data_structures_design.html)：pb_ds の `priority_queue` の既定が pairing heap で、`join` が $O(1)$ であること
-- [yosupo「Library Checker（predecessor_problem・point_add_rectangle_sum・common_interval_decomposition_tree）」](https://github.com/yosupo06/library-checker-problems)：検証に使う問題の内容
+- [yosupo06「library-checker-problems」](https://github.com/yosupo06/library-checker-problems)：検証に使う問題（predecessor_problem・point_add_rectangle_sum・common_interval_decomposition_tree）の内容

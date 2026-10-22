@@ -19,14 +19,14 @@ signs:
   - {type: constraint, text: N ≤ 100、値の総和 ≤ 10^5 程度}
 acl: []
 frequency: B
-frequency_evidence: recent 0・前提として 1 ページに届く（直接 1）・古い ABC 7 問
+frequency_evidence: recent 0・前提として 1 ページに届く（直接 1）・古い ABC 5 問
 sections:
   - {title: 可否・数え上げ・最大の 3 つの形, anchor: three-forms}
   - {title: 典型の言い換え（2 グループに分ける・± の和・x と y が独立・平均）, anchor: reformulations}
   - {title: 最大値を固定するためにソートしてから数える, anchor: sort-then-count, level: 水}
   - {title: 全部分集合についての和（含む部分集合の数を重みにする）, anchor: over-all-subsets, level: 青}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -212,6 +212,6 @@ dp[0] = 1, ほかは 0
 - [drken「TDPC (Typical DP Contest) A - コンテスト (2Q)」](https://drken1215.hatenablog.com/entry/2020/12/21/153600)：例題の状態・遷移と、0 点を数えること
 - [ikatakos「AtCoder Beginner Contest 204 D,E,F問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0606_abc204)：2 つのグループに分ける言い換えと、ずらして重ねる更新（解説の部分だけを参照）
 - [Kazun「AtCoder Beginner Contest 274 D問題 Robot Arms 2」](https://kazun-kyopro.hatenablog.com/entry/ABC/274/D)：x と y が独立になる理由と ± の部分和の判定
-- [hamayan「Red and Blue Tree［エクサウィザーズプログラミングコンテスト2021（AtCoder Beginner Contest 222） E］」](https://blog.hamayanhamayan.com/entry/2021/10/10/142820)：辺を通る回数への言い換えと、負の和のオフセット
+- [hamayan「Red and Blue Tree [エクサウィザーズプログラミングコンテスト2021（AtCoder Beginner Contest 222） E]」](https://blog.hamayanhamayan.com/entry/2021/10/10/142820)：辺を通る回数への言い換えと、負の和のオフセット
 - [ikatakos「AtCoder Beginner Contest 216 F,G,H問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0829_abc216)：最大値を固定するためのソートと表の幅（解説の部分だけを参照）
 - [ikatakos「AtCoder Beginner Contest 169 D,E,F問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2020/0531_abc169)：重み $2^{N - \lvert U \rvert}$ を遷移の 2 倍に分けること（解説の部分だけを参照）

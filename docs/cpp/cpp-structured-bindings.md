@@ -21,7 +21,7 @@ sections:
   - {title: 見えない変数：auto はコピー、auto& は参照。名前はメンバの宣言順に付き、数が合わないとエラー（C++17）, anchor: hidden-variable}
   - {title: map を回すとき：キーは const、値を参照で受けて書き換えると map が変わる（C++17）, anchor: map-loop}
   - {title: 初期化式付き if・switch：find や insert の結果をその場で受けて調べる（C++17）, anchor: if-init}
-  - {title: pq.top() を参照で受けて pop すると値が変わる（ダイクストラで起きる。値で受ける）, anchor: pq-top-reference}
+  - {title: pq.top() を参照で受けて pop すると値が変わる（ダイクストラ法で起きる。値で受ける）, anchor: pq-top-reference}
   - {title: 'views::enumerate・zip の要素は参照を含む組：構造化束縛でも元の要素を指す', anchor: enumerate-reference}
   - {title: 構造化束縛した名前のキャプチャ（C++20）と、使わない名前 _, anchor: capture-and-placeholder}
   - {title: 'tie：既存の変数にまとめて代入・比較する（std::ignore）', anchor: tie}
@@ -29,8 +29,8 @@ sections:
   - {title: 代入の小技：exchange で代入して前の値を返す、tie と pair でまとめて更新する, anchor: exchange}
   - {title: optional：値がないことを表す（nullopt・has_value・value_or。C++17）, anchor: optional}
   - {title: apply と、同じ型の組としての array（apply は C++17）, anchor: apply}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 cpp_std: 17
 gcc_min: null
 atcoder: true
@@ -153,7 +153,7 @@ g++-15 では `only 2 names provided for structured binding` と、続く `note:
 - **落とし穴**：`if (auto [it, ok] = seen.insert(x))` のように構造化束縛そのものを条件にする書き方は C++26 の機能である。g++-15 は `-std=gnu++23` では `structured bindings in conditions only available with '-std=c++2c'` と警告し、g++-13 は文法エラーにする。しかも条件になるのは組全体を `bool` に変えた値（`ok` ではない）なので、`insert` が返す pair では C++26 でもコンパイルエラーになる。条件は `; ok` と分けて書く
 - `if (auto r = f())` のように宣言だけを書くと、`r` を `bool` に変えた値が条件になる。[optional](#optional) で使う形である
 
-## pq.top() を参照で受けて pop すると値が変わる（ダイクストラで起きる。値で受ける） {#pq-top-reference}
+## pq.top() を参照で受けて pop すると値が変わる（ダイクストラ法で起きる。値で受ける） {#pq-top-reference}
 
 [ダイクストラ法](../graph/dijkstra.md)で、優先度付きキューの先頭を `const auto&` で受けてから `pop` すると、受けた値が別の要素の値に変わる。次のコードは (5, 1)・(7, 2)・(9, 3) を入れたキューで、(5, 1) を取り出したつもりが `7 2` と出る（g++-13・g++-15 で同じ）。
 

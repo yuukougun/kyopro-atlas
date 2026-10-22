@@ -18,16 +18,16 @@ signs:
   - {type: phrase, text: 各要素の素因数の個数（重複込み）を求める}
 acl: []
 verify: []
-frequency: C
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 2 問
+frequency: B
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 5 問
 sections:
   - {title: 最小素因数の表の作り方と、割るたびに半分以下になるので O(log n) で分解できる理由, anchor: build-and-factor}
   - {title: 多数の数をまとめて分解する（試し割りとの比較）, anchor: many-numbers}
   - {title: 分解した後の使い方（異なる素因数・指数・約数）, anchor: after-factor}
   - {title: 線形篩：各合成数を1回だけ作り、φ・μ の表を同時に作る, anchor: linear-sieve, level: 青}
   - {title: メモリの見積もり（int で 10^7 個は 40 MB）, anchor: memory}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

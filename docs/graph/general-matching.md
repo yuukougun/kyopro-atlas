@@ -25,7 +25,7 @@ sections:
   - {title: 大きさだけなら乱択（Tutte 行列の階数）, anchor: tutte-matrix}
   - {title: 小さければ bitDP, anchor: bitdp}
   - {title: 自作するときの要点と確かめ方, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -162,5 +162,5 @@ Library Checker では、最大マッチングを General Matching（general_mat
 - [Wikipedia「Tutte matrix」](https://en.wikipedia.org/wiki/Tutte_matrix)：Tutte 行列の定義と、行列式が 0 でないことと完全マッチングの存在の関係
 - [Nicholas J. A. Harvey「Algebraic Structures and Algorithms for Matching and Matroid Problems (Preliminary Version)」](https://arxiv.org/abs/cs/0601026)：Tutte 行列に乱数を入れた行列の階数が最大マッチングの 2 倍になること（Lovász の結果の引用）
 - [ei1333「Gabow Edmonds (一般グラフの最大マッチング)」](https://ei1333.github.io/library/graph/flow/gabow-edmonds.hpp)：実装の計算量 $O(NM \log N)$ と使い方
-- [yosupo「Library Checker の問題」](https://github.com/yosupo06/library-checker-problems)：general_matching・general_weighted_matching の制約
+- [yosupo06「library-checker-problems」](https://github.com/yosupo06/library-checker-problems)：general_matching・general_weighted_matching の制約
 - [kmjp「AtCoder ABC #412 (日本最強プログラマー学生選手権～Advance～ -予選-) : G - Degree Harmony」](https://kmjp.hatenablog.jp/entry/2025/06/29/0930)：例題 ABC412 G の、複製したグラフの最小重み完全マッチングへの言い換えと、Tutte 行列と補間による解き方

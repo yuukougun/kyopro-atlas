@@ -28,8 +28,8 @@ sections:
   - {title: 見つける道具と見つけられるもの：警告・アサーション・デバッグモード・サニタイザ, anchor: detection-tools}
   - {title: 不具合を探すビルドを cph とは別に用意する, anchor: debug-build}
   - {title: assert で WA を RE に変えて気づく（AtCoder では NDEBUG が付かない）, anchor: assert}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 cpp_std: null
 gcc_min: null
 atcoder: null
@@ -40,7 +40,7 @@ atcoder: null
     - **いつ使うか**：
         - 手元と AtCoder で結果が違う。`-O0` と `-O2` で結果が違う。
         - 答えに関係のない行や `cerr` の出力を足すと答えが変わる。
-        - ダイクストラの距離がおかしい、`push_back` の後で値が壊れる。
+        - ダイクストラ法の距離がおかしい、`push_back` の後で値が壊れる。
     - **計算量**：避ける書き方（初期値を書く・値で受ける・添字で書く）に実行時の費用はない。見つける道具を付けたビルドは遅い（書き方で変わるが、手元の例で `-O2` の数倍〜十数倍、`_GLIBCXX_DEBUG` を足すと数十〜数百倍）
     - **前提**：[AtCoder と手元の C++ 環境](../cpp/cpp-environment.md)、[整数のオーバーフローと \_\_int128](../cpp/cpp-integer-overflow.md)、[構造化束縛と pair・tuple・optional](../cpp/cpp-structured-bindings.md)
 

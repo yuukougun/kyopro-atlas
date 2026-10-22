@@ -21,7 +21,7 @@ sections:
   - {title: 下向きの木と上向きの木（コスト 0 の辺）, anchor: two-trees}
   - {title: 区間を O(log N) 個のノードで覆う, anchor: cover}
   - {title: 自作するときの要点と Library Checker, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -115,4 +115,4 @@ Library Checker にこの手法そのものの問題はない。ふつうの最�
 
 - [OI Wiki「线段树基础」](https://oi-wiki.org/ds/seg/)：学ぶための資料。節「应用：线段树优化建图」の入る木と出る木の作り方と、点から区間・区間から点の辺（文章・図・コードは使っていない）
 - [kmjp「AtCoder ABC #414 (ミラティブ プログラミングコンテスト2025) : G - AtCoder Express 4」](https://kmjp.hatenablog.jp/entry/2025/07/14/0930)：例題の方針。向きごとの木と、補助の辺のコストを負にしない分け方
-- [yosupo「Library Checker の問題（graph）」](https://github.com/yosupo06/library-checker-problems/tree/master/graph)：この手法に対応する問題がないこと、Shortest Path があること
+- [yosupo06「library-checker-problems/graph」](https://github.com/yosupo06/library-checker-problems/tree/master/graph)：この手法に対応する問題がないこと、Shortest Path があること

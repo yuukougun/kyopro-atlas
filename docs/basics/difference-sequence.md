@@ -26,8 +26,8 @@ sections:
   - {title: 狭義の条件は a_i − i で広義に直してから差分を取る, anchor: strict-to-weak}
   - {title: 回文にする操作は左右の差の列に直してから差分を取る, anchor: palindrome}
   - {title: 円環で一斉に行う操作, anchor: circular}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

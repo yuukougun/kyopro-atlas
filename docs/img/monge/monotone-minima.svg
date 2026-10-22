@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 348 348" width="348" height="348" font-family="sans-serif">
-<rect width="348" height="348" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 358 361" width="358" height="361" font-family="sans-serif">
+<g transform="translate(10 6)">
+<rect x="-10" y="-6" width="358" height="361" fill="#ffffff"/>
 <text x="192.0" y="16" font-size="13" text-anchor="middle" fill="#222">列 j →</text>
 <text x="73.0" y="34" font-size="12" text-anchor="middle" fill="#222">0</text>
 <text x="107.0" y="34" font-size="12" text-anchor="middle" fill="#222">1</text>
@@ -106,4 +107,5 @@
 <rect x="56" y="287" width="14" height="14" fill="#1f5fbf"/><text x="76" y="298" font-size="12" fill="#222">真ん中の行 3 を全部調べた最小の位置</text>
 <circle cx="63" cy="316" r="7" fill="#c0392b"/><text x="76" y="320" font-size="12" fill="#222">ほかの行の最小の位置（右下へ単調）</text>
 <rect x="56" y="331" width="14" height="14" fill="#d9d9d9" stroke="#888"/><text x="76" y="342" font-size="12" fill="#222">行 3 の結果から調べなくてよい範囲</text>
+</g>
 </svg>

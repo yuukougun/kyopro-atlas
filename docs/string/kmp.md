@@ -21,7 +21,7 @@ signs:
 acl: []
 verify: []
 frequency: B
-frequency_evidence: recent 0・前提として 2 ページに届く（直接 2）・古い ABC 6 問
+frequency_evidence: recent 0・前提として 2 ページに届く（直接 2）・古い ABC 5 問
 sections:
   - {title: 失敗関数 π（border）の定義と添字の流儀, anchor: failure-function}
   - {title: なぜ O(N) か：照合長は 1 文字で高々 1 増え、ループで減る回数も合計 N 以下, anchor: linear-time}
@@ -31,8 +31,8 @@ sections:
   - {title: 周期と繰り返し：最小周期と、繰り返しで書ける条件（弱周期定理）, anchor: string-period}
   - {title: N の約数の周期を数える：約数ごとに数えて包除（メビウス）, anchor: count-periodic}
   - {title: 照合オートマトン（状態×文字 → 次の状態）を表に埋める, anchor: automaton}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -335,11 +335,11 @@ KMP 法と [Z-algorithm](../string/z-algorithm.md) は、どちらも「先頭�
 - [snuke「文字列の頭良い感じの線形アルゴリズムたち」](https://snuke.hatenablog.com/entry/2014/12/01/235807)：MP 法の配列の定義（$A[0] = -1$ の流儀）と、全体で線形になる理由
 - [cp-algorithms「Prefix function. Knuth–Morris–Pratt algorithm」](https://cp-algorithms.com/string/prefix-function.html)：$\pi[0] = 0$ の流儀と、各接頭辞の出現回数・オートマトンの応用（構成の参考。文章と図は使っていない）
 - [Wikipedia「Knuth–Morris–Pratt algorithm」](https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm)：KMP 法の 1 文字あたりの比較の回数が黄金比を底とする対数で抑えられること
-- [AtCoder Library「String」（document_ja/string.md）](https://github.com/atcoder/ac-library/blob/master/document_ja/string.md)：string の機能の一覧（KMP 法がないこと）と `z_algorithm` の仕様・計算量
-- [drken「AtCoder ABC 304 F - Shift Table」](https://drken1215.hatenablog.com/entry/2023/06/07/153403)：例題 abc304_f の約数ごとの数え方とメビウス関数による包除
-- [drken「AtCoder ABC 150 F - Xor Shift」](https://drken1215.hatenablog.com/entry/2020/01/12/115800)：例題 abc150_f の差分の列への言い換えと、2 周つないだ列での照合
-- [ikatakos「AtCoder Beginner Contest 430」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/1101_abc430)：練習 abc430_e の方針（解法の部分だけ）
-- [ikatakos「AtCoder Beginner Contest 135」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2019/0727_abc135)：練習 abc135_f の出現位置からの遷移と閉路の判定（解法の部分だけ）
+- [AtCoder Library「String」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/string.md)：string の機能の一覧（KMP 法がないこと）と `z_algorithm` の仕様・計算量
+- [drken「AtCoder ABC 304 F - Shift Table (1D, 青色, 525 点)」](https://drken1215.hatenablog.com/entry/2023/06/07/153403)：例題 abc304_f の約数ごとの数え方とメビウス関数による包除
+- [drken「AtCoder ABC 150 F - Xor Shift (3D, 黄色, 600 点)」](https://drken1215.hatenablog.com/entry/2020/01/12/115800)：例題 abc150_f の差分の列への言い換えと、2 周つないだ列での照合
+- [ikatakos「AtCoder Beginner Contest 430 E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/1101_abc430)：練習 abc430_e の方針（解法の部分だけ）
+- [ikatakos「AtCoder Beginner Contest 135 D,F問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2019/0727_abc135)：練習 abc135_f の出現位置からの遷移と閉路の判定（解法の部分だけ）
 - [kmjp「AtCoder ABC #312 Ex - snukesnuke」](https://kmjp.hatenablog.jp/entry/2023/07/30/0930)：力試し abc312_h の問いと、繰り返しの単位ごとに使った回数を管理する方針
 - [merom686「ABC312」](https://merom686.hatenablog.com/entry/2023/07/30/020536)：力試し abc312_h の方針（最小の繰り返し単位への分解と、調べた位置の記録）
 - [drken「AtCoder ARC 060 F - 最良表現」](https://drken1215.hatenablog.com/entry/2018/09/07/190100)：力試し arc060_d の答えが 1・2・N に分かれることと、接頭辞・接尾辞の周期の判定

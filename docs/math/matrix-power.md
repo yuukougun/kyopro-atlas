@@ -32,8 +32,8 @@ sections:
   - {title: 累乗でなく合成として使う（アフィン変換の積）, anchor: composition}
   - {title: ダブリングで遷移を合成する（行列にすると大きすぎるとき・桁を倍々に伸ばす）, anchor: doubling-transition, level: 黄}
   - {title: プロファイル DP の遷移行列と状態数の見積もり, anchor: profile-dp, level: 黄}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -392,16 +392,16 @@ $H = 6$ なら余裕があるが、$H = 8$ では行列のままでは厳しい�
 
 ## 参考 {#references}
 
-- [Series_205「Educational DP Contest (EDPC) P ~ S 問題 解説」（Qiita）](https://qiita.com/Series_205/items/6bad5c32a1fce8dc2914)：例題 dp_r の制約と、隣接行列の累乗の全成分の和で答える方針
+- [Series_205「Educational DP Contest (EDPC) P ~ S 問題 解説」](https://qiita.com/Series_205/items/6bad5c32a1fce8dc2914)：例題 dp_r の制約と、隣接行列の累乗の全成分の和で答える方針
 - [merom686「ABC305」](https://merom686.hatenablog.com/entry/2023/06/11/005610)：例題 abc305_g で最初の数文字を全列挙し、残りを行列累乗する方針
 - [hossie「AtCoder ABC305 A～F の解説スライドを作ってみた (追記: G も)」（Qiita）](https://qiita.com/hossie/items/bb08bf6abe92b2f85269)：例題 abc305_g の末尾の数文字を状態にした遷移と行列（G のスライド画像）
 - [hamayan「ABC199 F」](https://blog.hamayanhamayan.com/entry/2021/04/25/002525)：例題 abc199_f の期待値の遷移の係数と計算量
-- [kmjp「ABC204 F」](https://kmjp.hatenablog.jp/entry/2021/06/06/1000)：練習 abc204_f のはみ出しの集合の状態と 64 次の遷移行列
+- [kmjp「AtCoder ABC #204 : F - Hanjo 2」](https://kmjp.hatenablog.jp/entry/2021/06/06/1000)：練習 abc204_f のはみ出しの集合の状態と 64 次の遷移行列
 - [drken「ABC009 D」](https://drken1215.hatenablog.com/entry/2023/05/05/102300)：練習 abc009_4 の XOR・AND の行列と単位元
 - [drken「ABC256 G」](https://drken1215.hatenablog.com/entry/2023/05/04/181400)：力試し abc256_g の 2×2 行列の作り方と計算量
 - [drken「典型90 005」](https://drken1215.hatenablog.com/entry/2021/10/08/231200)：力試し typical90_e で行列累乗が重い理由と、$O(B^2)$ の合成によるダブリング
-- [ikatakos「AtCoder Beginner Contest 458」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0516_abc458)：練習 abc458_f の状態の数と行列累乗（解法の部分だけ）
-- [ikatakos「AtCoder Beginner Contest 456」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0502_abc456)：練習 abc456_f の問いと (min,+) の行列（解法の部分だけ）
-- [loop0919「ABC456」（Zenn）](https://zenn.dev/loop0919/articles/f779f54ccdfedf)：練習 abc456_f の 2×2 の (min,+) 行列とセグメント木
-- [oraclesqlpuzzle「ABC189 E」](https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc189-e.html)：練習 abc189_e の変換の係数の更新（合成の向き）
+- [ikatakos「SMBCプログラミングコンテスト #1（AtCoder Beginner Contest 458）F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0516_abc458)：練習 abc458_f の状態の数と行列累乗（解法の部分だけ）
+- [ikatakos「AtCoder Beginner Contest 456（Promotion of AtCoder Career Design DAY）E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0502_abc456)：練習 abc456_f の問いと (min,+) の行列（解法の部分だけ）
+- [loop0919「ABC456 F - Plan Holidays 復習勉強メモ」](https://zenn.dev/loop0919/articles/f779f54ccdfedf)：練習 abc456_f の 2×2 の (min,+) 行列とセグメント木
+- [oraclesqlpuzzle「ABC189-E Rotate and Flip」](https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc189-e.html)：練習 abc189_e の変換の係数の更新（合成の向き）
 - [E869120「math-algorithm-book」prob4-7-4.cpp（GitHub）](https://github.com/E869120/math-algorithm-book/blob/main/editorial/chap4-7/prob4-7-4.cpp)：練習 math_and_algorithm_aw の状態数と行列の累乗

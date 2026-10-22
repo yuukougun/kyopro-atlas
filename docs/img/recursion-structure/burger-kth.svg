@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 384" width="400" height="384" font-family="sans-serif">
-<rect x="0" y="0" width="400" height="384" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 386" width="400" height="386" font-family="sans-serif">
+<g transform="translate(0 2)">
+<rect x="0" y="-2" width="400" height="386" fill="#ffffff"/>
 <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#333"/></marker></defs>
 <text x="16" y="22" font-size="15" fill="#333">レベル 2：rec(2, 10)</text>
 <path d="M21 88 V78 H43 V88" fill="none" stroke="#555" stroke-width="1.5"/>
@@ -62,4 +63,5 @@
 <text x="270" y="312" font-size="15" text-anchor="middle" fill="#111">B</text>
 <text x="16" y="350" font-size="14" fill="#333">x が尽きたので止まる。答え 3 + 1 + 1 + 1 = 6</text>
 <text x="16" y="370" font-size="14" fill="#333">（各レベルで降りる先は 1 つだけ）</text>
+</g>
 </svg>

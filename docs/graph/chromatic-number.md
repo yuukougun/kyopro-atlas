@@ -24,7 +24,7 @@ sections:
   - {title: 最大独立集合（分枝・半分全列挙）, anchor: independent-set}
   - {title: 二部グラフなら König の定理, anchor: bipartite-case}
   - {title: 計算量と自作するときの要点, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 

@@ -22,7 +22,7 @@ sections:
   - {title: 下限を先に流したことにする, anchor: pre-flow}
   - {title: 超頂点で過不足を調整して判定する, anchor: super-vertex}
   - {title: 自作するときの要点と Library Checker, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -127,7 +127,7 @@ ACL に下限付きの最大流そのものはなく、`mf_graph` で超頂点�
 - [snuke「最小流量制限付き最大流」](https://snuke.hatenablog.com/entry/2016/07/10/043918)：下限を容量から引き、超頂点で過不足を補う作り方と、辺の流す順序の注意
 - [Luzhiled's Library「Max Flow Lower Bound」](https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.hpp)：判定・最大の流量・最小の流量をまとめたライブラリの形と、最小の流量の求め方
 - [cp-algorithms「Flows with demands」](https://cp-algorithms.com/graph/flow_with_demands.html)：下限で入る分と出る分を超頂点への辺にする作り方と、最小の流量を二分探索で求める方法（文章と図は使っていない）
-- [AtCoder Library「MaxFlow」](https://github.com/atcoder/ac-library/blob/master/document_ja/maxflow.md)：`mf_graph` の `add_edge`・`flow` の仕様と計算量
+- [AtCoder Library「MaxFlow」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/maxflow.md)：`mf_graph` の `add_edge`・`flow` の仕様と計算量
 - [Library Checker「Minimum Cost b-flow」](https://judge.yosupo.jp/problem/min_cost_b_flow)：辺に下限・上限・コスト、頂点に供給量が付いた問題の定義
 - [kmjp「AtCoder ABC #285 : G - Tatami」](https://kmjp.hatenablog.jp/entry/2023/01/22/0900)：例題の市松模様のマッチングと、2 のマスの辺を下限付きにする方針
 - [recuraki「AtCoder ABC285-G Tatami 最小流量制限付き最大流 の解法をそれとなく理解する - 類題ALPC-Dからのアプローチ」](https://qiita.com/recuraki/items/9620eb026a33972df626)：例題で 2 のマスの $s$ 側・$t$ 側の辺に下限 1 を付け、? のマスは下限 0 にするモデル化

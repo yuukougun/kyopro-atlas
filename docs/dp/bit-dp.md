@@ -19,7 +19,7 @@ signs:
   - {type: constraint, text: 特別な地点が K ≤ 17 個（ほかの地点はグラフで結ばれている）}
 acl: []
 frequency: B
-frequency_evidence: recent 1（abc480_f）・前提として 5 ページに届く（直接 3）・古い ABC 13 問
+frequency_evidence: recent 1（abc480_f）・前提として 5 ページに届く（直接 3）・古い ABC 9 問
 sections:
   - {title: 集合を整数で表す・昇順に回してよい理由, anchor: subsets-as-integers}
   - {title: 集合だけを状態にする（マッチングの数）, anchor: set-only}
@@ -28,8 +28,8 @@ sections:
   - {title: ほかの探索と組み合わせる（BFS・ワーシャルフロイド法で距離を前計算してから）, anchor: with-shortest-paths, level: 青}
   - {title: ゲームの状態を集合で持つ, anchor: games}
   - {title: 素数の使用状況を集合で持つ, anchor: primes, level: 黄}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -238,7 +238,7 @@ $N \le 17$ で、[集合と最後に使ったもの](#tsp) の形そのもので
 - [ABC274 E. Booster](https://atcoder.jp/contests/abc274/tasks/abc274_e)（diff 1520）：平面上の町と宝箱のうち、宝箱を拾うたびに速さが 2 倍になるとき、全部の町を回って原点に戻る時間の最小を求める。
 - [ABC190 E. Magical Ornament](https://atcoder.jp/contests/abc190/tasks/abc190_e)（diff 1645）：隣り合ってよい石の組がグラフで与えられたとき、指定された K 種類の石をすべて含む石の列の長さの最小を求める。
 - [ABC301 E. Pac-Takahashi](https://atcoder.jp/contests/abc301/tasks/abc301_e)（diff 1673）：グリッド上でお菓子を拾いながら T 手以内にスタートからゴールへ行くときの、拾えるお菓子の個数の最大を求める。
-- [ABC338 F. Negative Traveling Salesman](https://atcoder.jp/contests/abc338/tasks/abc338_f)（diff 1835）：負の重みの辺がある（負閉路のない）有向グラフで、すべての頂点を 1 回以上通る歩道の重みの最小を求める。
+- [ABC338 F. Negative Traveling Salesman](https://atcoder.jp/contests/abc338/tasks/abc338_f)（diff 1835）：負の重みの辺がある（負閉路のない）有向グラフで、すべての頂点を 1 回以上通るウォークの重みの最小を求める。
 
 </div>
 
@@ -300,7 +300,7 @@ $N \le 17$ で、[集合と最後に使ったもの](#tsp) の形そのもので
 - [drken「AtCoder ABC 180 E - Traveling Salesman among Aerial Cities (1Q, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2020/10/21/172509)：例題 ABC180 E の状態・初期値・答えと、三角不等式を満たすので「1 回以上」をちょうど 1 回と考えてよい点
 - [kmjp「AtCoder ABC #180 : E - Traveling Salesman among Aerial Cities」](https://kmjp.hatenablog.jp/entry/2020/10/17/0900)：例題 ABC180 E の方針の確かめ
 - [drken「AtCoder ABC 142 E - Get Everything (1Q, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2019/09/29/103500)：ABC142 E の集合の和を取る遷移
-- [programming-hiroba「ABC278 F問題（Shiritori）を解く」](https://programming-hiroba.com/abc278-f/)：ABC278 F の状態の持ち方と勝ち負けの決め方
+- [プロひろ「ABC278 F問題（Shiritori）を解く」](https://programming-hiroba.com/abc278-f/)：ABC278 F の状態の持ち方と勝ち負けの決め方
 - [Kazun「AtCoder Beginner Contest 274 E問題 Booster」](https://kazun-kyopro.hatenablog.com/entry/ABC/274/E)：ABC274 E の状態と、拾った数を集合から読む点
 - [ikatakos「AtCoder Beginner Contest 190（解いた記録）」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0130_abc190)：ABC190 E の BFS で距離を求めてからの bitDP（解法の部分だけを読んだ）
 - [drken「AtCoder ABC 301 E - Pac-Takahashi (1D, 青色, 475 点)」](https://drken1215.hatenablog.com/entry/2023/05/14/165900)：ABC301 E の特別な点への縮め方と答えの取り方

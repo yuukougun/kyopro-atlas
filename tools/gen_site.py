@@ -107,7 +107,8 @@ PROBLEM_SETS = [   # 問題集（contest id → 見出し）。ほかの abc・a
     ("math-and-algorithm", "アルゴ数学（アルゴリズムと数学 演習問題集）"), ("fps-24", "FPS 24 題"), ("game-24", "組合せゲーム 24 題"),
 ]
 RECENT_POSITIONS = ["E", "F", "G"]          # 位置ごとの頻出手法は E（水）・F（青）・G（黄）（設計書 §7）
-POSITION_LEVEL = {"D": "基礎", "E": "水", "F": "青", "G": "黄"}
+# 見出しの帯。abc451〜abc480 の G は黄 12 問・発展 14 問・青 4 問なので「黄・発展」（s10 decisions）
+POSITION_LEVEL = {"D": "基礎", "E": "水", "F": "青", "G": "黄・発展"}
 
 # 手書きのページに置ける生成部分：名前 → (中身, 置く想定のページ。None はどこでもよい)
 BLOCKS = {

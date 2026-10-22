@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 290" width="400" height="290" font-family="sans-serif">
-<rect width="400" height="290" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -1 400 293" width="400" height="293" font-family="sans-serif">
+<rect x="0" y="-1" width="400" height="293" fill="#ffffff"/>
 <text x="200" y="18" font-size="12" text-anchor="middle" fill="#000">クエリ A・B・C の答えは t = 2・5・6（t は済んだ操作の数）</text>
 <text x="10" y="96" font-size="12" fill="#000">1 段目</text>
 <line x1="70" y1="92" x2="385" y2="92" stroke="#000" stroke-width="1.5"/>

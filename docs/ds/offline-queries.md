@@ -29,8 +29,8 @@ sections:
   - {title: 答えを 2 時点の差に分ける, anchor: difference-of-times}
   - {title: 先に全部読んで座標圧縮する, anchor: compress}
   - {title: オンライン強制の見分け方と、そのときの構造（永続・マージソート木・動的セグメント木）, anchor: online}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -274,8 +274,8 @@ Union-Find での使い方と、質問の時点のずれ（削除の前に答え
 - [procon-kirokuyou「ABC174 F - Range Set Query (600)」](https://scrapbox.io/procon-kirokuyou/ABC174_F_-_Range_Set_Query_(600))：例題の方針（右端の順のソートと、各色の最も右の位置に 1 を立てる BIT）と計算量
 - [kanpurin「Mo's algorithm」](https://kanpurin.hatenablog.com/entry/2021/04/09/001439)：例題の制約の確認と、Mo's algorithm で解く方法との比較
 - [recuraki「ABC253 F Operations on a Matrix」](https://qiita.com/recuraki/items/57b9f539511ef0876a5f)：例題の方針（上書きの時刻の先読みと、その時刻の BIT の値を記録して差を取ること）
-- [drken「AtCoder ABC 235 E - MST + 1」](https://drken1215.hatenablog.com/entry/2023/06/11/023548)：練習の方針（クエリの辺を元の辺と混ぜてクラスカル法を進めること）
-- [pyteyon「ABC040 D 道路の老朽化対策について」](https://pyteyon.hatenablog.com/entry/2019/09/30/110202)：練習の方針（道路とクエリを年の大きい順に並べること、等号の扱い）
+- [drken「AtCoder ABC 235 E - MST + 1 (1D, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2023/06/11/023548)：練習の方針（クエリの辺を元の辺と混ぜてクラスカル法を進めること）
+- [pyteyon「ABC040: D - 道路の老朽化対策について」](https://pyteyon.hatenablog.com/entry/2019/09/30/110202)：練習の方針（道路とクエリを年の大きい順に並べること、等号の扱い）
 - [drken「AtCoder ABC 128 E - Roadwork (1D, 青色, 500 点)」](https://drken1215.hatenablog.com/entry/2019/06/15/174200)：練習の方針（通行止めを出発時刻の区間に直すこと）
 - [drken「AtCoder ABC 356 F - Distance Component Size Query」](https://drken1215.hatenablog.com/entry/2024/06/08/024017)：力試しの方針（先読みと座標圧縮、BIT と遅延セグメント木で持つもの）
-- [AtCoder Library「Fenwick Tree」](https://github.com/atcoder/ac-library/blob/master/document_ja/fenwicktree.md)：`fenwick_tree` の宣言・メソッド・計算量
+- [AtCoder Library「Fenwick Tree」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/fenwicktree.md)：`fenwick_tree` の宣言・メソッド・計算量

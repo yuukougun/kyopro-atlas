@@ -18,13 +18,13 @@ signs:
 acl: []
 verify: [counting_primes, sum_of_totient_function, sum_of_multiplicative_function]
 frequency: C
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 1 問
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 0 問
 sections:
   - {title: 乗法的関数（φ・μ・d・σ）とディリクレ積（φ * 1 = id など）, anchor: dirichlet}
   - {title: 素数の個数・素数の和（Lucy DP）, anchor: prime-counting}
   - {title: 和の求め方の概要（杜教篩・Lucy DP・Min_25 篩）, anchor: prefix-sums}
   - {title: 公開ライブラリと自作するときの要点, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -200,4 +200,4 @@ ABC で必須になる問題は確認できなかった。
 - [OI Wiki「Min_25 筛」](https://oi-wiki.org/math/number-theory/min-25/)：Min_25 篩の 2 段の構成と計算量（$O(N^{3/4}/\log N)$ と $\Theta(N^{1-\varepsilon})$）の事実だけを参照
 - [Wikipedia「Dirichlet convolution」](https://en.wikipedia.org/wiki/Dirichlet_convolution)：乗法的関数どうしのディリクレ積が乗法的になることと、$1 * 1 = d$・$\varphi * 1 = \mathrm{id}$ などの関係
 - [Wikipedia「Prime-counting function」](https://en.wikipedia.org/wiki/Prime-counting_function)：$\pi(10^{10})$・$\pi(10^{11})$ の値（コード片の期待値）
-- [library-checker-problems「number_theory」](https://github.com/yosupo06/library-checker-problems/tree/master/number_theory)：練習の問題の問いと制約（counting_primes・sum_of_totient_function・sum_of_multiplicative_function・counting_squarefrees の task.md・info.toml）
+- [yosupo「Library Checker の問題（number_theory）」](https://github.com/yosupo06/library-checker-problems/tree/master/number_theory)：練習の問題の問いと制約（counting_primes・sum_of_totient_function・sum_of_multiplicative_function・counting_squarefrees の task.md・info.toml）

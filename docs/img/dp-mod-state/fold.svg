@@ -1,5 +1,6 @@
-<svg viewBox="0 0 344 370" width="344" height="370" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
-<rect width="344" height="370" fill="#ffffff"/>
+<svg viewBox="0 0 344 372" width="344" height="372" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+<g transform="translate(0 1)">
+<rect x="0" y="-1" width="344" height="372" fill="#ffffff"/>
 <defs><marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker></defs>
 <text x="10" y="24" font-size="16" fill="#111">和の数直線を M = 4 ごとに折り返す</text>
 <text x="124" y="52" text-anchor="middle" font-size="13" fill="#333">余り 0</text>
@@ -55,4 +56,5 @@
 <text x="88" y="302" text-anchor="end" font-size="13" fill="#333">4 個</text>
 <text x="10" y="340" font-size="13" fill="#333">同じ列の和は、この先どの数を足しても</text>
 <text x="10" y="358" font-size="13" fill="#333">余りが同じに動く</text>
+</g>
 </svg>

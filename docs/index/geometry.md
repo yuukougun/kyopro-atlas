@@ -13,7 +13,7 @@ search:
 
 ## ベクトルと外積（geometry-vectors） {#geometry-vectors}
 
-- id：`geometry-vectors`　レベル：基礎　段階：draft　type：technique
+- id：`geometry-vectors`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/geometry/geometry-vectors/
 - 別名：外積、内積、cross product、ccw、向き判定、符号付き面積、多角形の面積、靴紐公式、shoelace formula、線分の交差判定、点と直線の距離、3 次元の基本、直方体の共通部分
 - 種類：幾何
@@ -36,7 +36,7 @@ search:
 
 ## 誤差の扱いと整数での処理（geometry-precision） {#geometry-precision}
 
-- id：`geometry-precision`　レベル：水　段階：draft　type：technique
+- id：`geometry-precision`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/geometry/geometry-precision/
 - 別名：浮動小数点の誤差、floating-point error、EPS、整数化、桁落ち、直線の正規化、方向ベクトルの約分、ax+by+c=0
 - 種類：幾何、整数論
@@ -58,7 +58,7 @@ search:
 
 ## 偏角ソート（argument-sort） {#argument-sort}
 
-- id：`argument-sort`　レベル：水　段階：draft　type：technique
+- id：`argument-sort`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/geometry/argument-sort/
 - 別名：偏角、角度でソート、argument sort、atan2、方向の順に並べる、回転する光線
 - 種類：幾何、ソート・座標圧縮
@@ -80,7 +80,7 @@ search:
 
 ## 回転・平行移動・アフィン変換（rotation-transform） {#rotation-transform}
 
-- id：`rotation-transform`　レベル：水　段階：draft　type：technique
+- id：`rotation-transform`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/geometry/rotation-transform/
 - 別名：回転行列、rotation matrix、座標の回転、affine transformation、合同変換、複素数で回転、グリッドの回転、90 度回転、転置、三角関数、ラジアン、余弦定理
 - 種類：幾何、線形代数・行列
@@ -102,7 +102,7 @@ search:
 
 ## マンハッタン距離と 45 度回転（manhattan-chebyshev） {#manhattan-chebyshev}
 
-- id：`manhattan-chebyshev`　レベル：水　段階：draft　type：technique
+- id：`manhattan-chebyshev`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/geometry/manhattan-chebyshev/
 - 別名：45 度回転、マンハッタン距離、Manhattan distance、チェビシェフ距離、Chebyshev distance、L1 距離、L∞ 距離、u=x+y, v=x−y、絶対値を外す、斜めの番号
 - 種類：幾何、考察
@@ -126,7 +126,7 @@ search:
 
 ## 円と幾何の最適化（circle-geometry） {#circle-geometry}
 
-- id：`circle-geometry`　レベル：青　段階：draft　type：technique
+- id：`circle-geometry`　レベル：青　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/geometry/circle-geometry/
 - 別名：円の交差判定、2 円の位置関係、外接円、円と格子点、最小包含円、smallest enclosing circle、Welzl、半径の二分探索、三分探索で幾何、候補点の列挙
 - 種類：幾何、二分探索
@@ -150,7 +150,7 @@ search:
 
 ## 凸包と凸多角形（convex-hull） {#convex-hull}
 
-- id：`convex-hull`　レベル：黄　段階：draft　type：technique
+- id：`convex-hull`　レベル：黄　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/geometry/convex-hull/
 - 別名：凸包、convex hull、Andrew のアルゴリズム、monotone chain、Graham scan、上側凸包、下側凸包、点の内外判定、凸多角形の内外判定、交差数判定、Pick の定理、多角形の格子点、線分上の格子点
 - 種類：幾何
@@ -173,7 +173,7 @@ search:
 
 ## 発展の幾何（advanced-geometry） {#advanced-geometry}
 
-- id：`advanced-geometry`　レベル：発展　段階：draft　type：overview
+- id：`advanced-geometry`　レベル：発展　段階：reviewed　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/geometry/advanced-geometry/
 - 別名：回転キャリパー、rotating calipers、最遠点対、最近点対、closest pair、半平面交差、動的凸包、ミンコフスキー和、Minkowski sum、ボロノイ図、ドロネー三角形分割、円の反転
 - 種類：幾何

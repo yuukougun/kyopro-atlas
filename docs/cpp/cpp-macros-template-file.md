@@ -26,8 +26,8 @@ sections:
   - {title: '自作のヘッダを #include "..." したコードは、提出前に 1 ファイルに展開する（バンドル）', anchor: bundling}
   - {title: 展開の道具：cph の提出用のコピー・ACL の expander.py・oj-bundle, anchor: bundling-tools}
   - {title: '// @impl で main の後ろに回せるもの・回せないもの', anchor: impl-marker}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 cpp_std: null
 gcc_min: null
 atcoder: true
@@ -314,11 +314,11 @@ C++ では、使う場所より前に宣言があれば、定義は後ろにあ�
 
 - [traP「競プロ用マクロ」](https://trap.jp/post/1224/)：引数の数でマクロを切り替える技法
 - [traP「【非公式】[C++] AtCoder ジャッジアップデート (2024–2025) について」](https://trap.jp/post/2589/)：`import std;` の GCC での対応状況と、`#include` と併用するときの順序
-- [maspy「library」の my_template.hpp](https://github.com/maspypy/library/blob/main/my_template.hpp)：雛形のマクロ・型の別名・2 つの型を取る `chmin`・`#pragma` の例
+- [maspy「library/my_template.hpp」](https://github.com/maspypy/library/blob/main/my_template.hpp)：雛形のマクロ・型の別名・2 つの型を取る `chmin`・`#pragma` の例
 - [NyaanNyaan「library」の template](https://github.com/NyaanNyaan/library/tree/master/template)：`long long` で回す `rep` など、雛形の例
-- [ei1333「library」の template.hpp](https://github.com/ei1333/library/blob/master/template/template.hpp)：雛形の例
+- [ei1333「library/template/template.hpp」](https://github.com/ei1333/library/blob/master/template/template.hpp)：雛形の例
 - [online-judge-tools「verification-helper」](https://github.com/online-judge-tools/verification-helper)：`oj-bundle` の展開と、1 回だけ展開する条件（`#pragma once`・インクルードガード）
-- [atcoder「ac-library」の document_ja](https://github.com/atcoder/ac-library/tree/master/document_ja)：ACL の名前空間 `atcoder` と `expander.py` の使い方
-- [GCC「Optimize Options」](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html)：`-Ofast` と `-ffast-math` が仮定すること
+- [AtCoder「AC Library のドキュメント（document_ja）」](https://github.com/atcoder/ac-library/tree/master/document_ja)：ACL の名前空間 `atcoder` と `expander.py` の使い方
+- [GCC「Options That Control Optimization」](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html)：`-Ofast` と `-ffast-math` が仮定すること
 - [GCC「Function Specific Option Pragmas」](https://gcc.gnu.org/onlinedocs/gcc/Function-Specific-Option-Pragmas.html)：`#pragma GCC optimize`・`target` の意味
 - [cpprefjp「モジュール」](https://cpprefjp.github.io/lang/cpp20/modules.html)：モジュールがマクロを持ち込まないこと

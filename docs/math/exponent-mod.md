@@ -18,15 +18,15 @@ signs:
   - {type: constraint, text: 指数が 10^18 をさらに累乗した大きさになる}
 acl: [pow_mod]
 verify: [tetration_mod]
-frequency: C
-frequency_evidence: recent 0・前提として 1 ページに届く（直接 1）・古い ABC 2 問
+frequency: B
+frequency_evidence: recent 0・前提として 1 ページに届く（直接 1）・古い ABC 3 問
 sections:
   - {title: フェルマーの小定理と、指数を p − 1 で割ってよい理由（累乗の周期）, anchor: fermat}
   - {title: 指数の計算は mod (p − 1)（p − 1 は合成数なので割り算はできない）, anchor: exponent-mod-p-1}
   - {title: 底が p の倍数の場合（答えは 0、指数が 0 なら 1）, anchor: base-multiple}
   - {title: 一般の法：オイラーの定理と、互いに素でないときの一般化（累乗の塔）, anchor: euler-theorem, level: 黄}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -214,10 +214,10 @@ $\varphi$ の試し割りは段ごとに $O(\sqrt{m_j})$（$m_j$ はその段の
 ## 参考 {#references}
 
 - [drken「フェルマーの小定理の証明と使い方」](https://qiita.com/drken/items/6b4031ccbb2cab7436f3)：並べ替えによる証明の筋道、累乗の周期、逆元・位数へのつながり
-- [kazun「AtCoder Beginner Contest 228 E Integer Sequence Fair」](https://kazun-kyopro.hatenablog.com/entry/ABC/228/E)：例題の問いと、底が 998244353 の倍数の場合分け
+- [Kazun「AtCoder Beginner Contest 228 E 問題 Integer Sequence Fair」](https://kazun-kyopro.hatenablog.com/entry/ABC/228/E)：例題の問いと、底が 998244353 の倍数の場合分け
 - [kyo-pro「ABC228 E - Integer Sequence Fair」](https://kyo-pro.hatenablog.com/entry/ABC228E)：例題の方針（指数を p − 1 で割る）
-- [kazun「AtCoder Beginner Contest 222 G 222」](https://kazun-kyopro.hatenablog.com/entry/ABC/222/G)：練習の方針（10^n ≡ 1 への言い換えと φ の約数）
+- [Kazun「AtCoder Beginner Contest 222 G 問題 222」](https://kazun-kyopro.hatenablog.com/entry/ABC/222/G)：練習の方針（10^n ≡ 1 への言い換えと φ の約数）
 - [cp-algorithms「Euler's totient function」](https://cp-algorithms.com/algebra/phi-function.html)：互いに素でないときのオイラーの定理の一般化（式の確認だけ）
-- [AtCoder Library「math」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/math.md)：`pow_mod` の制約と計算量
+- [AtCoder Library「Math」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/math.md)：`pow_mod` の制約と計算量
 - [yosupo06「library-checker-problems: Tetration Mod」](https://github.com/yosupo06/library-checker-problems/blob/master/number_theory/tetration_mod/task.md)：累乗の塔の問題の約束（0^0 = 1）と制約
 - [drken「AtCoder ABC 212 G - Power Pair (3D, 黄色, 600 点)」](https://drken1215.hatenablog.com/entry/2021/08/01/163600)：練習 ABC212 G の位数が P − 1 の約数であることと答えの式

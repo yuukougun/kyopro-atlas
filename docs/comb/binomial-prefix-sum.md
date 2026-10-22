@@ -23,7 +23,7 @@ sections:
   - {title: Mo のように動かす順番を工夫する, anchor: order}
   - {title: 包除と組み合わせる例, anchor: with-inclusion-exclusion}
   - {title: 自作するときの要点, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 

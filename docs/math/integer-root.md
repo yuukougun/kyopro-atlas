@@ -25,8 +25,8 @@ sections:
   - {title: 二分探索による整数の K 乗根（途中の累乗のあふれ）, anchor: kth-root}
   - {title: 累乗数の数え上げ（b ≥ 3 は列挙、b = 2 は ⌊√N⌋、重複を除く）, anchor: perfect-powers}
   - {title: √ を含む式の大小を整数で比べる, anchor: compare-sqrt}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -210,8 +210,8 @@ $(a, b)$ の組をすべて数えると、同じ数を何度も数える。た�
 
 - [yuulis「ABC400 C - 2^a b^2」](https://yuulis.hatenablog.com/entry/ABC-400-C)：例題の方針（$b$ を奇数に限って重複を除く、`sqrtl` と補正）
 - [torus711「AtCoder Beginner Contest 400, C : 2^a b^2」](https://torus711.hatenablog.com/entry/2025/04/06/190653)：例題の方針（$a$ を 1 か 2 に限る、二分探索による整数の平方根）
-- [drken「AtCoder ABC 193 C - Unexpressed」](https://drken1215.hatenablog.com/entry/2021/03/02/140000)：練習の方針（$\sqrt{N}$ までの底の列挙と集合による重複の除去）
-- [drken「AtCoder ABC 361 F - x = a^b」](https://drken1215.hatenablog.com/entry/2024/07/07/020716)：練習の方針（指数ごとの包除原理）と、近い値から補正する K 乗根の求め方
+- [drken「AtCoder ABC 193 C - Unexpressed (3Q, 灰色, 300 点)」](https://drken1215.hatenablog.com/entry/2021/03/02/140000)：練習の方針（$\sqrt{N}$ までの底の列挙と集合による重複の除去）
+- [drken「AtCoder ABC 361 F - x = a^b (1D, 青色, 500 点)」](https://drken1215.hatenablog.com/entry/2024/07/07/020716)：練習の方針（指数ごとの包除原理）と、近い値から補正する K 乗根の求め方
 - [kazun「AtCoder Beginner Contest 243 G問題 Sqrt」](https://kazun-kyopro.hatenablog.com/entry/ABC/243/G)：力試しの方針（1 段先で場合分けして $X^{1/4}$ まで前計算する式）
 - [at274「パナソニックコン2020 C - Sqrt Inequality」](https://at274.hatenablog.com/entry/2020/03/15/122125)：練習 panasonic2020_c の方針（√ を含む不等式を、符号を確かめて 2 乗し整数で比べる）
 - [Apple「Writing ARM64 code for Apple platforms」](https://developer.apple.com/documentation/xcode/writing-arm64-code-for-apple-platforms)：Apple Silicon の macOS では long double が double と同じであること

@@ -25,8 +25,8 @@ sections:
   - {title: 約数の組を全部試す見積もり（1344² ≈ 1.8×10^6）, anchor: pairs}
   - {title: 約数を状態にした DP（約数の個数が少ないことを使う）, anchor: divisor-dp, level: 青}
   - {title: 高度合成数の列挙（小さい素数の指数が単調に減る形を DFS で）, anchor: enumerate-hcn, level: 黄}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -212,7 +212,7 @@ $A \le 10^{12}$、$B \le 10^{18}$ なので、$A^B$ の約数は列挙できず�
 
 - [drken「AtCoder ARC 167 B - Product of Divisors (青色, 500 点)」](https://drken1215.hatenablog.com/entry/2024/01/31/220502)：例題の方針（約数の積の公式・偶奇の場合分け・偶奇を mod の前の値で判定すること）
 - [E869120「競プロ典型 90 問 085 の解答例」](https://github.com/E869120/kyopro_educational_90/blob/main/sol/085.cpp)：練習の方針（約数の組を回し、割り算で先に飛ばす）
-- [drken「ACL Contest 1 B - Sum is Multiple」](https://drken1215.hatenablog.com/entry/2020/09/23/080300)：練習の方針（互いに素な 2 数への分け方を全部試す）
+- [drken「AtCoder ACL Contest 1 B - Sum is Multiple (2D, 青色, 600 点)」](https://drken1215.hatenablog.com/entry/2020/09/23/080300)：練習の方針（互いに素な 2 数への分け方を全部試す）
 - [drken「けんちょんの競プロ精進記録」カテゴリ「数量が小さいことの活用：約数の個数」](https://drken1215.hatenablog.com/archive/category/数量が小さいことの活用：約数の個数)：約数の個数が少ないことを使う問題の分類
-- [ikatakos「AtCoder Beginner Contest 461 F 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0606_abc461)：力試しの方針（約数を品物にした DP と長さの上限。解法の部分だけを参照）
-- [ikatakos「AtCoder Beginner Contest 475 G 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0912_abc475)：力試しの方針（指数が単調に減る候補の列挙と、D の倍数を避ける扱い。解法の部分だけを参照）
+- [ikatakos「AtCoder Beginner Contest 461 E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0606_abc461)：力試しの方針（約数を品物にした DP と長さの上限。解法の部分だけを参照）
+- [ikatakos「AtCoder Beginner Contest 475 E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0912_abc475)：力試しの方針（指数が単調に減る候補の列挙と、D の倍数を避ける扱い。解法の部分だけを参照）

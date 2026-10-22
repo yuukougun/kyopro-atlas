@@ -29,8 +29,8 @@ sections:
   - {title: 再帰型と非再帰型, anchor: recursive-vs-iterative}
   - {title: 文字列へのクエリ（文字の集合をビットで持つ）, anchor: string-queries}
   - {title: DP の配列を載せる, anchor: dp}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -324,5 +324,5 @@ DP の遷移が「ある範囲の $\mathrm{dp}[j]$ の最大値（最小値・�
 - [merom686「ABC157」](https://merom686.hatenablog.com/entry/2020/03/01/233522)：例題 abc157_e の、文字の集合をビットで持つセグメント木と popcount
 - [drken「AtCoder ABC 157 E - Simple String Queries」](https://drken1215.hatenablog.com/entry/2020/03/03/071000)：例題 abc157_e の別解（文字ごとの set と BIT 26 本）
 - [aruru88「ABC476参加録」](https://qiita.com/aruru88/items/ca31e5a1e6f9a753cf33)：練習 abc476_e の問いと、最小値・最大値の 2 本のセグメント木
-- [ikatakos「AtCoder Beginner Contest 461」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0606_abc461)：練習 abc461_e の、時刻を添字にした有効な操作の数え方（解法の部分だけ）
+- [ikatakos「AtCoder Beginner Contest 461 E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0606_abc461)：練習 abc461_e の、時刻を添字にした有効な操作の数え方（解法の部分だけ）
 - [recuraki「ABC 285 F - Substring of Sorted String - 考え方メモ」](https://qiita.com/recuraki/items/38a850c4aad563853149)：練習 abc285_f の判定の条件（昇順と、間の文字の個数）

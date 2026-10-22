@@ -8,7 +8,7 @@ order: 30
 level: 青
 kind: [ビット演算, 計算量, DP]
 prerequisites: [bit-operations, complexity-estimation]
-related: [subset-sum, topological-sort, scc#condensation, cpp-math-functions#bitset, gaussian-elimination#mod-2, xor-basis, bit-dp]
+related: [subset-sum, topological-sort, scc#condensation, cpp-math-functions#bitset, gaussian-elimination#mod-2, xor-basis, bit-dp, degree-sqrt#triangles]
 summary: bool を 64 個ずつ 1 語に詰め、AND・OR・XOR・シフトを語単位で行って計算量をおよそ 1/64 にする。部分和 DP のシフト OR、共通の隣接頂点・三角形の数え上げ、偶奇の集計、DAG の到達可能性に使う。
 complexity: 長さ L の AND・OR・XOR・シフト・count はどれも O(L/64)。三角形の数え上げは O(N^3/64)、部分和は O(NS/64)、DAG の到達可能性は O(N(N+M)/64)
 signs:
@@ -30,8 +30,8 @@ sections:
   - {title: メモリの見積もりと 64 個ずつのクエリの処理, anchor: memory-batching, level: 黄}
   - {title: C++ の作法（大きさはコンパイル時の定数・大きな bitset をスタックに置かない）, anchor: cpp}
   - {title: bitDP との違い, anchor: vs-bit-dp}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -54,7 +54,7 @@ bitset による高速化は、0 か 1 の値を並べた列を 64 bit の整数
 
 ## ワード並列の考え方と計算量の目安（N^3/64） {#word-parallel}
 
-ワード並列とは、64 bit の整数（語）を 64 個の bool の入れ物とみて、AND・OR・XOR を 1 回行うだけで 64 か所の論理演算を同時に済ませることである。CPU は 64 bit の AND を 1 命令で行うので、1 個ずつ bool を比べるより約 64 倍速い。1 の個数を数える [popcount](../guide/glossary.md#popcount) も、1 語ずつまとめて数えられる（[popcount・最下位ビット](../basics/bit-operations.md#popcount)）。
+ワード並列とは、64 bit の整数（語）を 64 個の bool の入れ物とみて、AND・OR・XOR を 1 回行うだけで 64 か所の論理演算を同時に済ませることである。CPU は 64 bit の AND を 1 命令で行うので、1 個ずつ bool を比べるより約 64 倍速い。1 の個数を数える [popcount](../guide/glossary.md#popcount) も、1 語ずつまとめて数えられる（[popcount・最下位 bit](../basics/bit-operations.md#popcount)）。
 
 C++ の `bitset<L>` は、長さ $L$ の 0/1 の列を $\lceil L / 64 \rceil$ 個の語に詰めて持ち、AND・OR・XOR・シフト・`count`（1 の個数）を語ごとに行う。だから 1 回の演算は $O(L / 64)$ である。
 
@@ -309,7 +309,7 @@ $N, M, Q \le 10^5$ で、全頂点の到達集合を持つと 1.25 GB かかる�
     $N = M = 5 \times 10^4$ の DAG で、全頂点の到達集合を bitset で持つと時間とメモリはどれくらいか。メモリが足りないとき、クエリが $Q$ 個与えられているならどうするか。
 
     ??? success "答え"
-        時間は $N(N + M) / 64 \approx 7.8 \times 10^7$ 回で間に合うが、メモリは $N^2 / 8 \approx 312$ MB かかる。制限が 1024 MB なら置けるが、制限が小さいと足りない。クエリが分かっているなら、64 個ずつまとめて各頂点に 64 bit の整数だけを持たせ、トポロジカル順に OR で流す。時間は $O((N + M) Q / 64)$、メモリは $O(N + M)$ になる。
+        時間は $N(N + M) / 64 \approx 7.8 \times 10^7$ 回で間に合うが、メモリは $N^2 / 8 \approx 312$ MB かかる。制限が 1024 MiB なら置けるが、制限が小さいと足りない。クエリが分かっているなら、64 個ずつまとめて各頂点に 64 bit の整数だけを持たせ、トポロジカル順に OR で流す。時間は $O((N + M) Q / 64)$、メモリは $O(N + M)$ になる。
 
 ??? question "確認問題：使えない計算"
     $N \le 3000$ 頂点のグラフで、2 頂点の組ごとに「共通の隣接頂点の重みの最大値」を求めたい。行の AND で 1/64 にできるか。

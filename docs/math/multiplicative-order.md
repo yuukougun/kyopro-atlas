@@ -33,8 +33,8 @@ sections:
   - {title: 'gcd(a, m) ≠ 1 の場合と、最小の解の取り方', anchor: bsgs-details}
   - {title: 一次漸化式を不動点で等比数列に直して離散対数に帰着する, anchor: affine-recurrence}
   - {title: 平方剰余と mod の K 乗根（オイラーの規準・Tonelli-Shanks・Cipolla）, anchor: mod-root, level: 発展}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -353,7 +353,7 @@ $P \le 10^9$ の素数で、テストケースは 100 個まである。列の�
 ## 参考 {#references}
 
 - [kazun「AtCoder Beginner Contest 270 G問題 Sequence in mod P」](https://kazun-kyopro.hatenablog.com/entry/ABC/270/G)：例題の制約と、不動点による等比数列への言い換え・場合分け
-- [kazun「AtCoder Beginner Contest 222 G 問題 222」](https://kazun-kyopro.hatenablog.com/entry/ABC/222/G)：例題の制約と、10^n ≡ 1 (mod L) への言い換え・φ の約数を試す方針
+- [Kazun「AtCoder Beginner Contest 222 G 問題 222」](https://kazun-kyopro.hatenablog.com/entry/ABC/222/G)：例題の制約と、10^n ≡ 1 (mod L) への言い換え・φ の約数を試す方針
 - [drken「AtCoder ABC 212 G - Power Pair (3D, 黄色, 600 点)」](https://drken1215.hatenablog.com/entry/2021/08/01/163600)：練習の方針（位数 d の元が φ(d) 個・答えの式）
 - [drken「AtCoder ARC 042 D - あまり (試験管黄色)」](https://drken1215.hatenablog.com/entry/2020/11/04/045400)：練習の方針（位数の倍数の判定と、小さい値から離散対数を引く）
 - [drken「AtCoder AGC 047 C - Product Modulo (3D, 橙色, 800 点)」](https://drken1215.hatenablog.com/entry/2020/11/04/155800)：力試しの方針（原始根で積を指数の和に直して畳み込む）

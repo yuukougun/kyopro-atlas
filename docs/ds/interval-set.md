@@ -28,8 +28,8 @@ sections:
   - {title: なぜならしで速いか（新しくできる区間は O(1) 個、消える区間は一度だけ）と、走査だけの操作が混ざると崩れる理由, anchor: amortized}
   - {title: 応用（mex・塗り分け・和集合の長さ・値ごとの合計の差分更新）, anchor: applications}
   - {title: 値つきの区間の分割・統合, anchor: valued-intervals, level: 黄}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

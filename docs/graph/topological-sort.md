@@ -26,8 +26,8 @@ sections:
   - {title: 出次数 0 の頂点から逆向きに剥がす, anchor: peel-sinks}
   - {title: DAG 上の DP へ（DP の章）, anchor: to-dag-dp}
   - {title: ACL の scc_graph を使う（DAG なら scc() の順がトポロジカル順）, anchor: acl}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -223,10 +223,10 @@ ACL にはトポロジカルソートそのものはないが、強連結成分�
 
 ## 参考 {#references}
 
-- [drken「AtCoder ABC 223 D - Restricted Permutation (緑色, 400 点)」](https://drken1215.hatenablog.com/entry/2025/02/07/003505)：例題の方針（条件を辺にし、優先度付きキューの Kahn 法で辞書順最小を作る）
-- [kyo-pro「ABC315 E」](https://kyo-pro.hatenablog.com/entry/ABC315E)：練習の方針（DFS の帰りがけ順をそのまま出力する）
+- [drken「AtCoder ABC 223 D - Restricted Permutation (1Q, 緑色, 400 点)」](https://drken1215.hatenablog.com/entry/2025/02/07/003505)：例題の方針（条件を辺にし、優先度付きキューの Kahn 法で辞書順最小を作る）
+- [kyo-pro「ABC315E - Prerequisites」](https://kyo-pro.hatenablog.com/entry/ABC315E)：練習の方針（DFS の帰りがけ順をそのまま出力する）
 - [hamayan「Pair of Balls [AtCoder Beginner Contest 216 D]」](https://blog.hamayanhamayan.com/entry/2021/08/29/230959)：練習の方針（一番上の色がそろった筒の組をキューで処理する）
-- [kyo-pro「ABC245 F」](https://kyo-pro.hatenablog.com/entry/ABC245F)：練習の方針（逆辺で出次数 0 の頂点から剥がす）
+- [kyo-pro「ABC245F - Endless Walk」](https://kyo-pro.hatenablog.com/entry/ABC245F)：練習の方針（逆辺で出次数 0 の頂点から剥がす）
 - [E869120「kyopro_educational_90 sol/071-03.cpp」](https://github.com/E869120/kyopro_educational_90/blob/main/sol/071-03.cpp)：力試しの方針（入次数 0 の候補を選ぶバックトラックと打ち切り）
 - [プロひろ「ABC291 E問題（Find Permutation）を解く」](https://programming-hiroba.com/abc291-e/)：順序が一意かの判定（キューに 2 個以上入ったら一意でない）
-- [AtCoder Library「SCC」（document_ja/scc.md）](https://github.com/atcoder/ac-library/blob/master/document_ja/scc.md)：`scc()` の返すリストがトポロジカル順であること
+- [AtCoder Library「SCC」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/scc.md)：`scc()` の返すリストがトポロジカル順であること

@@ -19,14 +19,14 @@ signs:
   - {type: constraint, text: M ≤ 1000 程度、N ≤ 100 程度}
 acl: []
 frequency: B
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 6 問
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 5 問
 sections:
   - {title: 余りを状態にしてよい理由（足し算・掛け算と mod が両立する）, anchor: why-remainder}
   - {title: 個数も状態に持つ（K 個選んで和が D の倍数）, anchor: with-count}
   - {title: 平均の扱い（個数を外側で固定する・平均を引いて和 0 にする）, anchor: average}
   - {title: 後ろから余りごとの勝敗を決めるゲーム, anchor: game-by-remainder, level: 青}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

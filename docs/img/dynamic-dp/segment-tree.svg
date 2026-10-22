@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" width="400" height="260" font-family="sans-serif">
-<rect width="400" height="260" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 263" width="400" height="263" font-family="sans-serif">
+<g transform="translate(0 0)">
+<rect x="0" y="0" width="400" height="263" fill="#ffffff"/>
 <!-- 辺 -->
 <line x1="200" y1="52" x2="105" y2="112" stroke="#555" stroke-width="1.5"/>
 <line x1="200" y1="52" x2="295" y2="112" stroke="#222" stroke-width="4"/>
@@ -32,4 +33,5 @@
 <text x="155" y="250" font-size="12" text-anchor="middle" fill="#555">位置 1</text>
 <text x="245" y="250" font-size="12" text-anchor="middle" fill="#555">位置 2</text>
 <text x="345" y="250" font-size="12" text-anchor="middle" fill="#555">位置 3</text>
+</g>
 </svg>

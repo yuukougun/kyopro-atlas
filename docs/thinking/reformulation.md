@@ -17,15 +17,15 @@ signs:
   - {type: shape, text: 式を変形すると i の項と j の項に分離できる}
 acl: []
 frequency: A
-frequency_evidence: recent 7（abc454_f・abc459_f・abc466_e・abc470_g・abc475_e・abc479_fほか）・前提として届くページなし・古い ABC 4 問
+frequency_evidence: recent 7（abc454_f・abc459_f・abc466_e・abc470_g・abc475_e・abc479_fほか）・前提として届くページなし・古い ABC 3 問
 sections:
   - {title: 言い換えの一覧表（元の条件 → 言い換え → 使う手法のページ）, anchor: table}
   - {title: i と j を分離する（a_i − i などの変数変換）, anchor: separate-indices}
   - {title: 独立に分解する（x と y・bit ごと・連結成分ごと）, anchor: independence}
   - {title: 操作の言い換え（区間操作を差分列で・隣接 swap を転倒数で）, anchor: operations}
   - {title: 言い換えてからデータ構造に載せる, anchor: then-data-structure, level: 青}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

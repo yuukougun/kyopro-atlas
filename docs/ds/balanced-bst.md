@@ -25,7 +25,7 @@ sections:
   - {title: 自作するときの要点と Library Checker, anchor: library}
   - {title: pb_ds の tree（order_of_key・find_by_order。重複は値と通し番号の組にする）, anchor: pbds}
   - {title: 代わりの手（BIT 上の二分探索・連結リスト・逆順の処理と BIT）, anchor: alternatives}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -185,8 +185,8 @@ K が 5 程度に小さいなら、multiset の `lower_bound` からイテレー
 - [hamamu「Implicit Treap解説」](https://qiita.com/hamamu/items/570e7c36bf73913cbeb8)：学ぶための資料。位置で分割・結合する treap と、反転・遅延評価の扱い
 - [ei1333「Luzhiled's Library」](https://ei1333.github.io/library/)：学ぶための資料。平衡二分探索木（structure/bbst）のライブラリの一覧
 - [GCC「Policy-Based Data Structures」](https://gcc.gnu.org/onlinedocs/libstdc++/manual/policy_data_structures.html)：pb_ds の tree と `tree_order_statistics_node_update`
-- [yosupo「Library Checker の問題（range_reverse_range_sum ほか）」](https://github.com/yosupo06/library-checker-problems/tree/master/data_structure)：検証に使う問題の内容
+- [yosupo06「library-checker-problems/data_structure」](https://github.com/yosupo06/library-checker-problems/tree/master/data_structure)：検証に使う問題（range_reverse_range_sum ほか）の内容
 - [Wikipedia「Treap」](https://en.wikipedia.org/wiki/Treap)：treap の定義と、木の形が優先度で一意に決まること
 - [kyo-pro「(C++)ABC241D - Sequence Query」](https://kyo-pro.hatenablog.com/entry/ABC241D-cpp)：練習 ABC241 D の multiset による解き方
 - [recuraki「AtCoder ABC241 D - Sequence Query を __gnu_pbds::treeで解く」](https://qiita.com/recuraki/items/993d08d87084fec671ae)：練習 ABC241 D の pb_ds の tree による解き方
-- [drken「ARC 033 C - データ構造 (1D, 試験管青色)」](https://drken1215.hatenablog.com/entry/2020/02/29/035900)：練習 ARC033 C の値の範囲と解き方
+- [drken「AtCoder ARC 033 C - データ構造 (1D, 試験管青色)」](https://drken1215.hatenablog.com/entry/2020/02/29/035900)：練習 ARC033 C の値の範囲と解き方

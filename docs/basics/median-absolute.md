@@ -17,8 +17,8 @@ signs:
   - {type: phrase, text: マンハッタン距離の和が最小になる点}
   - {type: phrase, text: 全員を 1 か所に集める移動の和}
 acl: []
-frequency: B
-frequency_evidence: 古い ABC で繰り返し出た定番（最近30回の出現は0。手で B にした）
+frequency: C
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 1 問
 sections:
   - {title: なぜ中央値か（傾きの変化）, anchor: why-median}
   - {title: 偶数個のとき（中央の 2 つの間ならどこでもよい）, anchor: even-count}
@@ -26,8 +26,8 @@ sections:
   - {title: x と y に分ける, anchor: separate-axes}
   - {title: 距離の和で判定して二分探索する, anchor: with-binary-search, level: 青}
   - {title: 二乗和の最小（平均）との違い, anchor: vs-squares}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

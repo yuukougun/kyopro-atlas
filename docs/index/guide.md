@@ -13,7 +13,7 @@ search:
 
 ## 逆引き辞典（言い回しから）（reverse-index-signs） {#reverse-index-signs}
 
-- id：`reverse-index-signs`　レベル：—　段階：draft　type：guide
+- id：`reverse-index-signs`　レベル：—　段階：reviewed　type：guide
 - URL：https://yuukougun.github.io/kyopro-atlas/guide/reverse-index-signs/
 - 別名：問題文のサイン、キーワードから解法、典型の言い換え一覧、言い回しから逆引き、式の形から逆引き
 - 種類：案内
@@ -27,7 +27,7 @@ search:
 
 ## 逆引き辞典（制約・計算量から）（reverse-index-constraints） {#reverse-index-constraints}
 
-- id：`reverse-index-constraints`　レベル：—　段階：draft　type：guide
+- id：`reverse-index-constraints`　レベル：—　段階：reviewed　type：guide
 - URL：https://yuukougun.github.io/kyopro-atlas/guide/reverse-index-constraints/
 - 別名：制約から解法を推測する、計算量の目安、制約と計算量の対応表、制約から逆引き、計算量から逆引き
 - 種類：案内
@@ -43,7 +43,7 @@ search:
 
 ## 用語の索引（term-index） {#term-index}
 
-- id：`term-index`　レベル：—　段階：draft　type：guide
+- id：`term-index`　レベル：—　段階：reviewed　type：guide
 - URL：https://yuukougun.github.io/kyopro-atlas/guide/term-index/
 - 別名：索引、五十音順の索引、別名の索引、名前から引く、英語名から引く
 - 種類：案内
@@ -55,7 +55,7 @@ search:
 
 ## 知識マップ（knowledge-map） {#knowledge-map}
 
-- id：`knowledge-map`　レベル：—　段階：draft　type：guide
+- id：`knowledge-map`　レベル：—　段階：reviewed　type：guide
 - URL：https://yuukougun.github.io/kyopro-atlas/guide/knowledge-map/
 - 別名：前提関係のグラフ、前提の地図、依存関係の地図
 - 種類：案内
@@ -69,7 +69,7 @@ search:
 
 ## 似た手法の使い分け（method-comparison） {#method-comparison}
 
-- id：`method-comparison`　レベル：—　段階：draft　type：guide
+- id：`method-comparison`　レベル：—　段階：reviewed　type：guide
 - URL：https://yuukougun.github.io/kyopro-atlas/guide/method-comparison/
 - 別名：手法の比較、どれを使うか、使い分け、混同しやすい手法、最短路の選び方、最短路の比較、最短路アルゴリズムの使い分け
 - 種類：案内
@@ -94,7 +94,7 @@ search:
 
 ## 色別ロードマップ（roadmap） {#roadmap}
 
-- id：`roadmap`　レベル：—　段階：draft　type：guide
+- id：`roadmap`　レベル：—　段階：reviewed　type：guide
 - URL：https://yuukougun.github.io/kyopro-atlas/guide/roadmap/
 - 別名：学習順序、何から学ぶか、水色・青・黄色のロードマップ、推奨ルート、位置ごとの頻出手法
 - 種類：案内
@@ -110,7 +110,7 @@ search:
 
 ## 精進の仕方（practice-method） {#practice-method}
 
-- id：`practice-method`　レベル：—　段階：draft　type：guide
+- id：`practice-method`　レベル：—　段階：reviewed　type：guide
 - URL：https://yuukougun.github.io/kyopro-atlas/guide/practice-method/
 - 別名：upsolve、解説の読み方、復習、精進、練習の方法
 - 種類：案内
@@ -126,7 +126,7 @@ search:
 
 ## 問題集と練習用コンテストの案内（problem-sets） {#problem-sets}
 
-- id：`problem-sets`　レベル：—　段階：draft　type：guide
+- id：`problem-sets`　レベル：—　段階：reviewed　type：guide
 - URL：https://yuukougun.github.io/kyopro-atlas/guide/problem-sets/
 - 別名：典型90問、EDPC、TDPC、NDPC、鉄則本の問題集、アルゴリズムと数学、ACL Practice、AAL、ADT、AWC、NoviSteps、最近の ABC の対応表
 - 種類：案内
@@ -141,7 +141,7 @@ search:
 
 ## コンテストの戦い方（contest-strategy） {#contest-strategy}
 
-- id：`contest-strategy`　レベル：—　段階：draft　type：guide
+- id：`contest-strategy`　レベル：—　段階：reviewed　type：guide
 - URL：https://yuukougun.github.io/kyopro-atlas/guide/contest-strategy/
 - 別名：時間配分、問題を読む順、立ち回り、詰まったときの切り替え
 - 種類：案内
@@ -159,7 +159,7 @@ search:
 
 ## 詰まったときの発想リスト（thinking-checklist） {#thinking-checklist}
 
-- id：`thinking-checklist`　レベル：—　段階：draft　type：guide
+- id：`thinking-checklist`　レベル：—　段階：reviewed　type：guide
 - URL：https://yuukougun.github.io/kyopro-atlas/guide/thinking-checklist/
 - 別名：考察の引き出し、考察の手順、発想の型、方針が立たないとき、考察の型の一覧、典型考察、考察テクニック
 - 種類：案内、考察
@@ -183,7 +183,7 @@ search:
 
 ## WA・TLE・RE・MLE の原因チェックリスト（debugging-checklist） {#debugging-checklist}
 
-- id：`debugging-checklist`　レベル：—　段階：draft　type：guide
+- id：`debugging-checklist`　レベル：—　段階：reviewed　type：guide
 - URL：https://yuukougun.github.io/kyopro-atlas/guide/debugging-checklist/
 - 別名：デバッグ、バグの探し方、WA の原因、TLE の原因、提出前の確認
 - 種類：案内、実装・C++
@@ -199,7 +199,7 @@ search:
 
 ## ストレステストと実験（stress-testing） {#stress-testing}
 
-- id：`stress-testing`　レベル：—　段階：draft　type：guide
+- id：`stress-testing`　レベル：—　段階：reviewed　type：guide
 - URL：https://yuukougun.github.io/kyopro-atlas/guide/stress-testing/
 - 別名：ランダムテスト、愚直解との比較、実験、OEIS、撃墜ケース探し
 - 種類：案内、実装・C++
@@ -213,7 +213,7 @@ search:
 
 ## 早見表（cheatsheet） {#cheatsheet}
 
-- id：`cheatsheet`　レベル：—　段階：draft　type：guide
+- id：`cheatsheet`　レベル：—　段階：reviewed　type：guide
 - URL：https://yuukougun.github.io/kyopro-atlas/guide/cheatsheet/
 - 別名：チートシート、一覧表、1 秒で回る回数、数の目安、公式集
 - 種類：案内
@@ -230,7 +230,7 @@ search:
 
 ## 用語集（glossary） {#glossary}
 
-- id：`glossary`　レベル：—　段階：draft　type：guide
+- id：`glossary`　レベル：—　段階：reviewed　type：guide
 - URL：https://yuukougun.github.io/kyopro-atlas/guide/glossary/
 - 別名：用語、略語、用語の定義、表記の正規形
 - 種類：案内
@@ -246,7 +246,7 @@ search:
 
 ## 自作ライブラリの設計と動作確認（library-design） {#library-design}
 
-- id：`library-design`　レベル：—　段階：draft　type：guide
+- id：`library-design`　レベル：—　段階：reviewed　type：guide
 - URL：https://yuukougun.github.io/kyopro-atlas/guide/library-design/
 - 別名：ライブラリ整備、自作ライブラリ、Library Checker、verify、ライブラリの動作確認
 - 種類：案内、実装・C++

@@ -20,7 +20,7 @@ signs:
 acl: []
 verify: []
 frequency: A
-frequency_evidence: recent 2（abc452_e・abc469_f）・前提として 3 ページに届く（直接 1）・古い ABC 7 問
+frequency_evidence: recent 2（abc452_e・abc469_f）・前提として 3 ページに届く（直接 1）・古い ABC 6 問
 sections:
   - {title: M/1 + M/2 + … + M/M ≈ M ln M の根拠（M = 10^6 で約 1.4×10^7）, anchor: why-n-log-n}
   - {title: 値の倍数に印を付ける, anchor: mark-multiples}
@@ -28,8 +28,8 @@ sections:
   - {title: 倍数の箱を後ろから決める, anchor: decide-from-back}
   - {title: 商が同じ範囲を倍数で区切って数える, anchor: quotient-ranges}
   - {title: 素数の倍数だけをたどる篩（M log log M）との違い, anchor: vs-sieve}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

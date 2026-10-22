@@ -18,13 +18,13 @@ signs:
   - {type: shape, text: 直接数えると場合分けが多いが、条件を満たさない側は数えやすい}
 acl: []
 frequency: B
-frequency_evidence: recent 1（abc455_e）・前提として 3 ページに届く（直接 1）・古い ABC 5 問
+frequency_evidence: recent 1（abc455_e）・前提として 3 ページに届く（直接 1）・古い ABC 4 問
 sections:
   - {title: 全体 − 補集合, anchor: whole-minus-complement}
   - {title: 2〜3 条件の包除（重なりを足し戻す）, anchor: two-conditions}
   - {title: mod の引き算と空集合の扱い, anchor: mod-and-empty}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

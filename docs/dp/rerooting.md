@@ -18,15 +18,15 @@ signs:
   - {type: shape, text: 根を v としたときの木 DP の値を、すべての v について求めたい（N 回の木 DP は O(N^2)）}
 acl: []
 frequency: B
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 4 問
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 3 問
 sections:
   - {title: 根を隣へ移すと変わるのは親側の部分木だけ, anchor: what-changes}
   - {title: 一般の枠組み（子の値の合成と「根を付ける」操作を分ける）, anchor: framework}
   - {title: 自分以外の兄弟の合成（左右からの累積）, anchor: exclude-self}
   - {title: 合成と根を付ける操作の作り方の型, anchor: patterns}
   - {title: 使い分け（最遠点は直径の性質で、距離の総和は根の移動の差分で済む）, anchor: when-to-use}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

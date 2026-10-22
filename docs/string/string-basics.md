@@ -28,8 +28,8 @@ sections:
   - {title: 連結して辞書順最小：長さが違えば 2 通りの連結を比べる, anchor: concat-order}
   - {title: 回転（巡回シフト）の入口：回転回数の全探索と A+A, anchor: rotation}
   - {title: 計算量の落とし穴（substr・+・find は長さに比例する）, anchor: cost-pitfalls}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

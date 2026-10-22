@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 312" width="520" height="312" font-family="sans-serif">
-  <rect x="0" y="0" width="520" height="312" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 314" width="520" height="314" font-family="sans-serif">
+<g transform="translate(0 0)">
+  <rect x="0" y="0" width="520" height="314" fill="#ffffff"/>
   <text x="16" y="28" font-size="16" fill="#222">値 9, 7, 6, 4, 2 から 3 個選び、和を最大にする</text>
   <!-- column highlight: the first value only G chose -->
   <rect x="226" y="44" width="68" height="206" fill="#fff4cc" stroke="#c99a00" stroke-dasharray="6 4"/>
@@ -63,4 +64,5 @@
   </defs>
   <path d="M400,180 C400,194 290,190 272,200" fill="none" stroke="#b03a2e" stroke-width="2" marker-end="url(#ah)"/>
   <text x="16" y="300" font-size="15" fill="#b03a2e">O の 4 を 7 に替える：和は 7 − 4 = 3 増える</text>
+</g>
 </svg>

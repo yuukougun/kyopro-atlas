@@ -28,8 +28,8 @@ sections:
   - {title: 和が K に達する位置（K 番目の 1・空きの K 番目）, anchor: kth-one}
   - {title: 境界（l = N・返り値が N・f(e()) が偽になる条件・1-indexed）, anchor: boundaries}
   - {title: 遅延セグメント木の上の二分探索（単調な列への区間作用）, anchor: on-lazy-segment-tree, level: 青}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -308,7 +308,7 @@ ACL の練習用の問題で、`max_right` の使い方をそのまま問う。m
 - [hibit「憧れの「セグ木上の二分探索」の使い方をABC382-Cで覚えよう」](https://qiita.com/hibit/items/e0ed4e6d2604ff6cec49)：例題 abc382_c の min の木と述語の向き
 - [drken「ACL Practice Contest J - Segment Tree」](https://drken1215.hatenablog.com/entry/2023/11/14/033300)：例題 practice2_j の 1-indexed の扱いと「なければ $N + 1$」
 - [Yuulis「【AtCoder】ABC 392 F - Insert」](https://yuulis.hatenablog.com/entry/ABC-392-F)：例題 abc392_f の逆順の言い換えと和の木の `max_right`
-- [drken「ABC330 E - Mex and Update」](https://drken1215.hatenablog.com/entry/2023/11/26/233800)：練習 abc330_e の mex が $N$ 以下であることと、セグメント木上の二分探索の別解
-- [ikatakos「AtCoder Beginner Contest 478」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/1003_abc478)：練習 abc478_f の親の候補の範囲と `min_left`（解法の部分だけ）
+- [drken「AtCoder ABC 330 E - Mex and Update (1Q, 緑色, 475 点)」](https://drken1215.hatenablog.com/entry/2023/11/26/233800)：練習 abc330_e の mex が $N$ 以下であることと、セグメント木上の二分探索の別解
+- [ikatakos「AtCoder Beginner Contest 478 E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/1003_abc478)：練習 abc478_f の親の候補の範囲と `min_left`（解法の部分だけ）
 - [merom686「ABC478」](https://merom686.hatenablog.com/entry/2026/10/04/013441)：練習 abc478_f をセグメント木上の二分探索で解く方針
 - [drken「ABC307 F - Virus 2」](https://drken1215.hatenablog.com/entry/2023/06/25/130110)：力試し abc307_f の（日, 距離）のダイクストラ法と、翌日以降で初めて通せる日の探索

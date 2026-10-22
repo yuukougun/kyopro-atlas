@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 718" width="340" height="718" font-family="sans-serif" font-size="14">
-<rect width="340" height="718" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 730" width="340" height="730" font-family="sans-serif" font-size="14">
+<rect width="340" height="730" fill="#ffffff"/>
 <text x="12" y="22" fill="#222">頂点 1 を根にした木</text>
 <text x="12" y="42" fill="#222">（隣は番号の小さい順に調べる）</text>
 <g transform="translate(0 20)">

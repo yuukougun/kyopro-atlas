@@ -16,16 +16,16 @@ signs:
   - {type: phrase, text: N 頂点 N 辺の連結グラフ・木に辺を 1 本足したグラフ}
   - {type: phrase, text: 2 頂点間の単純パスが一意か}
 acl: [dsu]
-frequency: C
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 2 問
+frequency: B
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 3 問
 sections:
   - {title: 閉路がちょうど 1 つある理由, anchor: one-cycle}
   - {title: 次数 1 の頂点を削って閉路を求める（Union-Find でも）, anchor: peel-leaves}
   - {title: 閉路の頂点ごとにぶら下がる木に分ける, anchor: hanging-trees}
   - {title: 単純パスが一意になる条件, anchor: unique-path}
   - {title: 有向版は Functional graph, anchor: directed-version}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -193,7 +193,7 @@ deg[v] == 1 の頂点をすべてキューに入れる
 
 ## 参考 {#references}
 
-- [fjnkt98「ABC266 F」](https://zenn.dev/fjnkt98/articles/98c9dfbd0702a4)：例題の方針（葉を削って閉路を求め、閉路の頂点ごとの木を Union-Find でまとめる）
-- [kyo-pro「ABC292 D」](https://kyo-pro.hatenablog.com/entry/ABC292D)：練習の方針（成分ごとの頂点数と辺数）
-- [AtCoder Library「DSU」](https://github.com/atcoder/ac-library/blob/master/document_ja/dsu.md)：`dsu` のメソッドと計算量
+- [fjnkt98「ABC266 F - Well-defined Path Queries on a Namori Python解答例」](https://zenn.dev/fjnkt98/articles/98c9dfbd0702a4)：例題の方針（葉を削って閉路を求め、閉路の頂点ごとの木を Union-Find でまとめる）
+- [kyo-pro「ABC292D - Unicyclic Components」](https://kyo-pro.hatenablog.com/entry/ABC292D)：練習の方針（成分ごとの頂点数と辺数）
+- [AtCoder Library「DSU」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/dsu.md)：`dsu` のメソッドと計算量
 - [drken「AtCoder ABC 378 F - Add One Edge 2 (1D, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2024/11/04/002341)：練習 ABC378 F の次数 3 の成分ごとに次数 2 の頂点から 2 つ選ぶ数え方

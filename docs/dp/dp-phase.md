@@ -19,14 +19,14 @@ signs:
   - {type: shape, text: '区間 [l, r) の両端を全探索すると O(N^2) になり、各位置の扱いが「区間の前・中・後」で変わる'}
 acl: []
 frequency: B
-frequency_evidence: recent 1（abc466_e）・前提として届くページなし・古い ABC 4 問
+frequency_evidence: recent 1（abc466_e）・前提として届くページなし・古い ABC 2 問
 sections:
   - {title: 最大部分配列和（Kadane）：区間を 1 つ選ぶ最も簡単な例, anchor: kadane}
   - {title: 段階の数え方（区間の外側にも段階がある）, anchor: counting-phases}
   - {title: 何文字目まで集めたか（部分列として現れる回数を数える）, anchor: matched-prefix}
   - {title: 区間の反転・変更を段階の切り替えで表す, anchor: flip-interval}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

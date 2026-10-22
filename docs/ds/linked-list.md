@@ -24,8 +24,8 @@ sections:
   - {title: prev・next の配列と番兵（先頭・末尾）, anchor: arrays}
   - {title: 挿入・削除・付け替えの手順, anchor: operations}
   - {title: 最後に先頭からたどって出力する, anchor: output}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -181,6 +181,6 @@ nxt[b] = d, prv[d] = b
 
 - [プロひろ「ABC344 E問題（Insert or Erase）を解く」](https://programming-hiroba.com/abc344-e/)：例題の方針（前後の値を連想配列で持ち、0 と −1 を番兵にする）
 - [torus711「AtCoder Beginner Contest 344, E : Insert or Erase」](https://torus711.hatenablog.com/entry/2024/03/10/192517)：例題の制約と、`std::list` と値からイテレータを引く map を使う方法
-- [shinonome81「AtCoder Beginer Contest 301~350 D or E までの要点・解答（Go）」](https://zenn.dev/shinonome81/articles/3e1c0c8a9c00fc)：練習の方針（前の人から次の人への対応を作ってたどる）
+- [tmsn「AtCoder Beginer Contest 301~350 D or E までの要点・解答（Go）」](https://zenn.dev/shinonome81/articles/3e1c0c8a9c00fc)：練習の方針（前の人から次の人への対応を作ってたどる）
 - [kyo-pro「ABC237D - LR insertion」](https://kyo-pro.hatenablog.com/entry/ABC237D)：練習の方針（左右の隣を配列で持つ方法と、逆順に deque で処理する方法）
 - [comet725「ABC455Dを解いた【双方向リスト】」](https://qiita.com/comet725/items/b8d667d45fc386392f6f)：練習の方針（上下のつながりを 2 本の配列で持ち、土台からたどる）

@@ -25,8 +25,8 @@ sections:
   - {title: 作った木を必ず確かめる, anchor: verify-output}
   - {title: 次数の条件から作る（次数の足りない成分どうしをつなぐ）, anchor: from-degrees, level: 青}
   - {title: 最遠距離の列から直径を決める, anchor: from-eccentricities, level: 青}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -267,6 +267,6 @@ B の組が空でない間：
 - [hyouri「ABC451をPythonで（A～E）」](https://qiita.com/hyouri/items/2b13ca1b70a5735460ee)：例題 ABC451 E の方針（距離の小さい順のクラスカル法と全点対の確かめ）
 - [ikatakos「AtCoder Beginner Contest 478 E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/1003_abc478)：例題 ABC478 F の方針（親の候補が範囲になること、単調スタック・セグメント木上の二分探索）（解説の部分だけを参照）
 - [merom686「ABC478」](https://merom686.hatenablog.com/entry/2026/10/04/013441)：例題 ABC478 F の方針（親の候補を左で自分より大きい値までに絞ること）
-- [kazun「AtCoder Beginner Contest 239 F問題 Construct Highway」](https://kazun-kyopro.hatenablog.com/entry/ABC/239/F)：練習 ABC239 F の方針（作れない場合の条件と成分ごとの残りの次数）
+- [Kazun「AtCoder Beginner Contest 239 F問題 Construct Highway」](https://kazun-kyopro.hatenablog.com/entry/ABC/239/F)：練習 ABC239 F の方針（作れない場合の条件と成分ごとの残りの次数）
 - [drken「AtCoder AGC 005 C - Tree Restoring (青色, 700 点)」](https://drken1215.hatenablog.com/entry/2020/11/06/224900)：練習 AGC005 C の方針（最大値と直径、最小値の個数の条件）
 - [kmjp「AtCoder ABC #252 : G - Pre-Order」](https://kmjp.hatenablog.jp/entry/2022/05/22/0900)：力試し ABC252 G の方針（行きがけ順の区間 DP）

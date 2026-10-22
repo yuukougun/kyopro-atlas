@@ -10,7 +10,7 @@ level: 黄
 kind: [グラフ探索]
 prerequisites: [connected-components]
 related: [bit-dp, graph-modeling, matrix-tree-theorem, euler-tour]
-summary: すべての辺をちょうど 1 回ずつ通る路は、辺のある頂点が連結で、奇数次数の頂点が 0 個か 2 個（有向なら入次数と出次数の条件）のときに限りあり、Hierholzer 法で O(M) で作れる。
+summary: すべての辺をちょうど 1 回ずつ通る路は、辺のある頂点が連結で、奇数次数の頂点が 0 個か 2 個（有向なら入次数と出次数の条件）のときに限りあり、Hierholzer 法で O(N + M) で作れる。
 complexity: 判定・構成とも O(N + M)
 signs:
   - {type: phrase, text: すべての辺をちょうど 1 回ずつ通る・一筆書き}
@@ -24,8 +24,8 @@ sections:
   - {title: Hierholzer 法で構成する, anchor: hierholzer}
   - {title: 応用の型（縮約・辺を足す・向き付け・文字列を辺にする）, anchor: applications}
   - {title: ハミルトン路（頂点をちょうど 1 回、bitDP）との違い, anchor: vs-hamiltonian}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -177,7 +177,7 @@ $\mathrm{ptr}[v]$ を持たずに毎回隣接リストの先頭から未使用�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [ABC286 G. Unique Walk](https://atcoder.jp/contests/abc286/tasks/abc286_g)（diff 2135）：無向グラフで、指定された K 本の辺はそれぞれちょうど 1 回、ほかの辺は何回でも通ってよい歩道があるかを判定する。
+- [ABC286 G. Unique Walk](https://atcoder.jp/contests/abc286/tasks/abc286_g)（diff 2135）：無向グラフで、指定された K 本の辺はそれぞれちょうど 1 回、ほかの辺は何回でも通ってよいウォークがあるかを判定する。
 
 </div>
 
@@ -235,6 +235,6 @@ $\mathrm{ptr}[v]$ を持たずに毎回隣接リストの先頭から未使用�
 - [MichaelChick「青 (←水) 色コーダーが ABC 全問解説する【ABC286】」](https://it.commutty.com/MichaelChick/articles/21b95c9dc0f943829e9ef939cda4fbfb)：例題 abc286_g で元のグラフが連結なので、偶奇だけで判定できること
 - [drken「DFS (深さ優先探索) 超入門！ 〜 グラフ・アルゴリズムの世界への入口 〜【後編】」](https://qiita.com/drken/items/a803d4fc4a727e02f7ba)：オイラー閉路の存在条件と、DFS で構成して十分性を示す筋
 - [kokiymgch「競プロにおけるオイラー路とその応用について」](https://kokiymgch.hatenablog.com/entry/2017/12/07/193238)：オイラー路の構成と応用の型の範囲
-- [Library Checker「Eulerian Trail (Undirected)」・「Eulerian Trail (Directed)」の問題文（library-checker-problems）](https://github.com/yosupo06/library-checker-problems/tree/master/graph)：入出力の形と、多重辺を含むこと
+- [yosupo06「library-checker-problems/graph」](https://github.com/yosupo06/library-checker-problems/tree/master/graph)：入出力の形と、多重辺を含むこと
 - [drken「AtCoder AGC 032 C - Three Circuits (黄色, 800 点)」](https://drken1215.hatenablog.com/entry/2019/03/28/161000)：練習 AGC032 C の次数の偶奇と場合分け
 - [ikatakos「AtCoder Grand Contest 032 A～E 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2019/0323_agc032)：練習 AGC032 C の同じ場合分け（解説の部分だけを参照）

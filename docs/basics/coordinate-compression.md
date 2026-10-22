@@ -18,15 +18,15 @@ signs:
   - {type: shape, text: 値を配列の添字にしたいが、値の範囲が広すぎる}
 acl: []
 frequency: B
-frequency_evidence: recent 1（abc467_f）・前提として 4 ページに届く（直接 2）・古い ABC 4 問
+frequency_evidence: recent 1（abc467_f）・前提として 4 ページに届く（直接 2）・古い ABC 3 問
 sections:
   - {title: sort → unique → lower_bound の 3 段, anchor: three-steps}
   - {title: 区間を扱うときは両端点を入れる, anchor: intervals}
   - {title: 圧縮後の番号で長さを測らない（元の値を残す）, anchor: keep-original}
   - {title: BIT・セグメント木・いもす法と組む, anchor: with-ds}
   - {title: map で足りる場合との使い分け, anchor: vs-map}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

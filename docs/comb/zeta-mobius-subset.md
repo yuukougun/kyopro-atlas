@@ -18,8 +18,8 @@ signs:
   - {type: phrase, text: x ⊆ S となる x についての和を、すべての S で求める}
 acl: []
 verify: [bitwise_and_convolution]
-frequency: C
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 2 問
+frequency: B
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 4 問
 sections:
   - {title: n 次元の累積和として見る（bit ごとに 1 軸ずつ）, anchor: multidimensional}
   - {title: ループの順（bit を外側）, anchor: loop-order}
@@ -28,8 +28,8 @@ sections:
   - {title: OR 畳み込み・AND 畳み込み, anchor: or-and-convolution}
   - {title: 和の代わりに上位 2 つを持つ, anchor: top-two}
   - {title: XOR 畳み込みとの違い, anchor: vs-xor}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

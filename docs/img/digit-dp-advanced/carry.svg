@@ -1,5 +1,6 @@
-<svg viewBox="0 0 400 366" width="400" height="366" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
-  <rect x="0" y="0" width="400" height="366" fill="#ffffff"/>
+<svg viewBox="0 0 404 369" width="404" height="369" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+<g transform="translate(4 2)">
+  <rect x="-4" y="-2" width="404" height="369" fill="#ffffff"/>
 <defs>
     <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#333333"/></marker>
     <marker id="arrb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f5fbf"/></marker>
@@ -46,4 +47,5 @@
 <text x="310.0" y="266" font-size="13" fill="#1f5fbf">4 + 1</text>
 <text x="8" y="334" font-size="14" fill="#555555">太い線が最小の道：100 円 1 枚を払い、10 円</text>
 <text x="8" y="354" font-size="14" fill="#555555">1 枚と 1 円 3 枚のお釣り（87 = 100 − 10 − 3）</text>
+</g>
 </svg>

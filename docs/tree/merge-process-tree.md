@@ -25,7 +25,7 @@ sections:
   - {title: ボトルネックは LCA の重み, anchor: bottleneck}
   - {title: マージテク・部分永続 Union-Find・並列二分探索との使い分け, anchor: alternatives}
   - {title: 自作するときの要点と Library Checker, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -146,7 +146,7 @@ Library Checker に併合過程の木そのものを確かめる問題はない�
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC183 F. Confluence](https://atcoder.jp/contests/abc183/tasks/abc183_f)（diff 1586）：生徒がクラスに属し、2 人の生徒の集団を合流させるクエリと、生徒 x の集団にいるクラス y の生徒の数を問うクエリに答える。
-- [AGC002 D. Stamp Rally](https://atcoder.jp/contests/agc002/tasks/agc002_d)（diff 2514）：最初の t 本の辺だけを使ったとき、x と y の成分の頂点数の合計が z 以上になる最小の t を各クエリで答える。
+- [AGC002 D. Stamp Rally](https://atcoder.jp/contests/agc002/tasks/agc002_d)（diff 2514）：最初の t 本の辺だけを使ったとき、x と y を含む成分の頂点数（同じ成分なら 1 回）が z 以上になる最小の t を各クエリで答える。
 
 </div>
 
@@ -157,8 +157,8 @@ Library Checker に併合過程の木そのものを確かめる問題はない�
 ## 参考 {#references}
 
 - [AtCoder Library「DSU」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/dsu.md)：`merge` が新しい代表元を返すこと・計算量
-- [drken「AtCoder ABC 183 F - Confluence」](https://drken1215.hatenablog.com/entry/2020/12/20/192100)：学ぶための資料。併合の過程を木にして DFS で数える別解と、練習 ABC183 F の方針
-- [drken「AtCoder AGC 002 D - Stamp Rally」](https://drken1215.hatenablog.com/entry/2018/09/15/193722)：練習 AGC002 D の判定の形（部分永続 Union-Find・並列二分探索の解法）
+- [drken「AtCoder ABC 183 F - Confluence (水色, 600 点)」](https://drken1215.hatenablog.com/entry/2020/12/20/192100)：学ぶための資料。併合の過程を木にして DFS で数える別解と、練習 ABC183 F の方針
+- [drken「AtCoder AGC 002 D - Stamp Rally (橙色, 1000 点)」](https://drken1215.hatenablog.com/entry/2018/09/15/193722)：練習 AGC002 D の判定の形（部分永続 Union-Find・並列二分探索の解法）
 - [mzhang2021「Kruskal Reconstruction Tree」](https://mzhang2021.github.io/cp-blog/kruskal/)：学ぶための資料。LCA がボトルネックになること、しきい値以下で行ける頂点が部分木になること
 - [OI Wiki「最小生成树」](https://oi-wiki.org/graph/mst/)：学ぶための資料。Kruskal 重构树の性質の確認（文章・図は使っていない）
-- [yosupo「Library Checker の問題（tree）」](https://github.com/yosupo06/library-checker-problems/tree/master/tree)：対応する問題がないことの確認と、部品の検証に使う問題
+- [yosupo06「library-checker-problems/tree」](https://github.com/yosupo06/library-checker-problems/tree/master/tree)：対応する問題がないことの確認と、部品の検証に使う問題

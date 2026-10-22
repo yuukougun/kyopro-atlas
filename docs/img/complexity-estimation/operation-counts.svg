@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="480" height="400" viewBox="0 0 480 400" font-family="sans-serif" font-size="16">
-<defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#ffd6d6"/><line x1="0" y1="0" x2="0" y2="8" stroke="#b33" stroke-width="2"/></pattern></defs>
+<svg xmlns="http://www.w3.org/2000/svg" width="485" height="408" viewBox="0 0 485 408" font-family="sans-serif" font-size="16">
 <rect width="100%" height="100%" fill="#ffffff"/>
+<g transform="translate(0 2)">
+<defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#ffd6d6"/><line x1="0" y1="0" x2="0" y2="8" stroke="#b33" stroke-width="2"/></pattern></defs>
 <text x="12" y="26" fill="#222" font-size="17">N = 2×10<tspan baseline-shift="super" font-size="0.7em">5</tspan> のときの演算回数（横軸は対数）</text>
 <line x1="250" y1="40" x2="250" y2="312" stroke="#b33" stroke-width="1.8" stroke-dasharray="7,4"/>
 <line x1="320" y1="40" x2="320" y2="312" stroke="#b33" stroke-width="1.8" stroke-dasharray="2,3"/>
@@ -31,4 +32,5 @@
 <text x="460" y="336" text-anchor="middle" fill="#222" font-size="14">10<tspan baseline-shift="super" font-size="0.7em">11</tspan></text>
 <text x="12" y="368" fill="#b33" font-size="15">赤の破線：10<tspan baseline-shift="super" font-size="0.7em">8</tspan> 回。1 秒でまず間に合う</text>
 <text x="12" y="392" fill="#b33" font-size="15">赤の点線：10<tspan baseline-shift="super" font-size="0.7em">9</tspan> 回。単純な処理でも厳しい</text>
+</g>
 </svg>

@@ -24,8 +24,8 @@ sections:
   - {title: BIT 上の二分探索の手順（値が 0 以上であることが前提）, anchor: bit-binary-search}
   - {title: 挿入を逆順に処理して「空きの P 番目」に置く, anchor: reverse-insertion}
   - {title: 答えの二分探索で K 番目を数える方法との違い, anchor: vs-kth-value}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -69,7 +69,7 @@ K 番目を求める方法は多い。問題の条件（値の範囲・先読み
 - **BIT 上の二分探索**：最も定数倍が軽く、コードも短い。値は配列の添字にするので、値が $10^9$ まであるなら、全クエリを先に読んで[座標圧縮](../basics/coordinate-compression.md#with-ds)する（[オフライン](../guide/glossary.md#offline)）。手順は[次の節](#bit-binary-search)で述べる
 - **セグメント木の `max_right`**：個数を載せた和のセグメント木で、`max_right(0, [&](int s) { return s < k; })` が K 番目の位置を返す。ACL だけで書け、和以外の条件にも広げやすい（[セグメント木上の二分探索](../ds/segment-tree-binary-search.md)）
 - **外側の二分探索**：値 $v$ を二分探索し、BIT の接頭辞の和で $v$ 以下の個数を数える。1 回の判定が $O(\log N)$ なので全体で $O(\log^2 N)$ になる。$Q = 2 \times 10^5$ なら $Q \log^2 N$ はおよそ $6 \times 10^7$ で、多くは間に合う
-- **pb_ds の `tree`**：GCC の拡張の順序付き集合で、`find_by_order(k)`（0 始まりの番号 $k$ の要素）と `order_of_key(x)`（$x$ 未満の個数）を持つ。値を先読みできないオンラインの問題でも使える。重複を許すには `(値, 通し番号)` の組にする（[pb_ds の tree](../cpp/cpp-container-idioms.md#pb-ds)・[平衡二分探索木と pb_ds の tree](../ds/balanced-bst.md#pbds)）
+- **pb_ds の `tree`**：GCC の拡張の順序付き集合で、`find_by_order(k)`（0-indexed の番号 $k$ の要素）と `order_of_key(x)`（$x$ 未満の個数）を持つ。値を先読みできないオンラインの問題でも使える。重複を許すには `(値, 通し番号)` の組にする（[pb_ds の tree](../cpp/cpp-container-idioms.md#pb-ds)・[平衡二分探索木と pb_ds の tree](../ds/balanced-bst.md#pbds)）
 - **2 つのヒープ**：K が最後まで変わらないなら、小さい K 個と残りに分けて持てば、K 番目は小さい側の最大値である。削除もあるなら 2 つの `multiset` にする（[上位 K 個の和と中央値の管理](../ds/top-k-multiset.md)）
 - **Binary Trie**：整数を上位 bit から辿る木で、各ノードに個数を持てば K 番目を求められる。全体に XOR をかける操作と組むときに使う（[Binary Trie](../ds/binary-trie.md#kth-and-global-xor)）
 
@@ -133,7 +133,7 @@ C++ では、外から見た位置を 0-indexed にすると、内部の位置 $
 
 ### 境界
 
-- **K の数え方**：`kth` の $k$ は 1 始まりである。0 始まりの $k$ を受け取ったら $k + 1$ を渡す。$k = 0$ を渡すと、どの $t$ も $0$ 未満でないので最初の位置を返してしまう
+- **K の数え方**：`kth` の $k$ は 1-indexed である。0-indexed の $k$ を受け取ったら $k + 1$ を渡す。$k = 0$ を渡すと、どの $t$ も $0$ 未満でないので最初の位置を返してしまう
 - **K 個に満たないとき**：全体の和が $k$ 未満なら、範囲に収まる歩幅ではどれも進むので $\mathrm{pos} = N$ で終わり、外から見た $N$（配列の外）を返す。座標圧縮した値の配列を引く前に、この場合を除く
 - **歩幅の初期値**：$N$ 以下の最大の 2 べき（C++20 の [`bit_floor`](../cpp/cpp-math-functions.md#bit-functions)）にする。歩幅は 2 べきでなければならない。$N$ が 2 べきでないのに $\mathrm{step} = N$ から始めると、$\mathrm{lowbit}(\mathrm{pos} + \mathrm{step}) \ne \mathrm{step}$ となり（$N = 6$ なら $t[6]$ は $(4, 6]$ の和）、$t[\mathrm{pos} + \mathrm{step}]$ が区間 $(\mathrm{pos}, \mathrm{pos} + \mathrm{step}]$ の和でなくなる。半分にしていっても $6 \to 3 \to 1$ と 2 べきでない歩幅が続く。なお $N$ 以上の 2 べきから始めても、条件 $\mathrm{pos} + \mathrm{step} \le N$ があれば正しい。条件 $\mathrm{pos} + \mathrm{step} \le N$ を忘れると配列の外を読む
 - **不等号の向き**：`t[pos + step] < k` を `<=` にすると、接頭辞の和が初めて $k$ を超える位置、すなわち $K + 1$ 番目を返す
@@ -222,8 +222,8 @@ K 番目を求める方法には、もう 1 つ「答え $x$ を二分探索し�
 ## 参考 {#references}
 
 - [drken「k 番目の値を高速に取り出せるデータ構造のまとめ - BIT上二分探索や平衡二分探索木など」](https://qiita.com/drken/items/1b7e6e459c24a83bb7fd)：方法の比較（値の範囲・先読み・K が固定の場合分け）、例題 arc033_3 の制約
-- [drken「AtCoder ARC 033 C - データ構造」](https://drken1215.hatenablog.com/entry/2020/02/29/035900)：例題 arc033_3 の問い（Binary Trie による別解）
-- [drken「AtCoder ABC 281 E - Least Elements」](https://drken1215.hatenablog.com/entry/2022/12/14/185200)：練習 abc281_e の解き方の一覧（座標圧縮した個数と和の BIT、BIT 上の二分探索）
+- [drken「AtCoder ARC 033 C - データ構造 (1D, 試験管青色)」](https://drken1215.hatenablog.com/entry/2020/02/29/035900)：例題 arc033_3 の問い（Binary Trie による別解）
+- [drken「AtCoder ABC 281 E - Least Elements (1D, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2022/12/14/185200)：練習 abc281_e の解き方の一覧（座標圧縮した個数と和の BIT、BIT 上の二分探索）
 - [kyo-pro「(C++)ABC241D - Sequence Query」](https://kyo-pro.hatenablog.com/entry/ABC241D-cpp)：練習 abc241_d の `multiset` での解き方
 - [Yuulis「【AtCoder】ABC 392 F - Insert」](https://yuulis.hatenablog.com/entry/ABC-392-F)：練習 abc392_f の逆順の処理と、空きを 1 とした和のセグメント木の `max_right`
 - [AtCoder Library「Segtree」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/segtree.md)：`max_right` の返り値と要件（v1.6 の手元の版で確かめた）

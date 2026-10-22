@@ -24,8 +24,8 @@ sections:
   - {title: '範囲 for の初期化式 for (int i = 0; auto x : v)（C++20。i の更新は自分で書く）', anchor: range-for-init}
   - {title: ループの中で同じ vector に追加しない（再確保で壊れる）, anchor: modify-in-loop}
   - {title: 範囲に一時オブジェクトの中身を渡すとき（C++23・GCC 15〜でだけ安全な形）, anchor: temporary-range}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 cpp_std: 17
 gcc_min: 13
 atcoder: true
@@ -239,4 +239,4 @@ g++-15 でも `-fno-range-for-ext-temps` を付けると古い規則に戻り、
 - [cpprefjp「範囲for文が範囲初期化子内で生じた一時オブジェクトを延命することを規定」](https://cpprefjp.github.io/lang/cpp23/lifetime_extension_in_range_based_for_loop.html)：C++23 の P2718
 - [cpprefjp「右辺値参照・ムーブセマンティクス」](https://cpprefjp.github.io/lang/cpp11/rvalue_ref_and_move_semantics.html)：`move` が中身を移すこと
 - [cpprefjp「vector::swap」](https://cpprefjp.github.io/reference/vector/vector/swap.html)：`swap` が定数時間であること
-- [GCC「GCC 15 Release Series Changes」](https://gcc.gnu.org/gcc-15/changes.html)：P2718 が GCC 15 で実装されたこと
+- [GCC「GCC 15 Release Series Changes, New Features, and Fixes」](https://gcc.gnu.org/gcc-15/changes.html)：P2718 が GCC 15 で実装されたこと

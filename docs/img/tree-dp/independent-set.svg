@@ -1,5 +1,6 @@
-<svg width="350" height="405" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 405" font-family="sans-serif" font-size="14">
+<svg width="352" height="407" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 407" font-family="sans-serif" font-size="14">
 <rect width="100%" height="100%" fill="#ffffff"/>
+<g transform="translate(0 1)">
 <text x="10" y="22" fill="#222">各頂点の横の (白, 黒)：その頂点を白・黒に</text>
 <text x="10" y="42" fill="#222">塗ったときの部分木の塗り方の数</text>
 <g stroke="#555" stroke-width="2">
@@ -31,4 +32,5 @@
 <text x="10" y="349" fill="#555">頂点 3：白 = 1+1 = 2、黒 = 1</text>
 <text x="10" y="369" fill="#555">頂点 1：白 = (4+1)(2+1) = 15、黒 = 4·2 = 8</text>
 <text x="10" y="393" fill="#c0392b">答え：根の白と黒を足して 15 + 8 = 23 通り</text>
+</g>
 </svg>

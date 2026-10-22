@@ -17,8 +17,8 @@ signs:
   - {type: phrase, text: 1 回に取れる個数に上限（範囲）がある}
   - {type: phrase, text: 先手が勝てるように最初の配置を変えられるか}
 acl: []
-frequency: C
-frequency_evidence: recent 0・前提として 2 ページに届く（直接 1）・古い ABC 2 問
+frequency: B
+frequency_evidence: recent 0・前提として 2 ページに届く（直接 1）・古い ABC 3 問
 sections:
   - {title: Bouton の定理と証明の筋, anchor: bouton}
   - {title: 勝つための手（XOR を 0 にする山の選び方）, anchor: winning-move}
@@ -26,8 +26,8 @@ sections:
   - {title: 先手と後手で取れる数が違うとき, anchor: asymmetric, level: 青}
   - {title: 逆形 Nim（最後に取った方が負け）, anchor: misere, level: 発展}
   - {title: 必勝局面の数え上げ（XOR 畳み込み）, anchor: counting, level: 発展}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -250,7 +250,7 @@ AtCoder でよく出る形では、次の 2 つの考え方で片づくことが
 - [ikatakos「AtCoder Regular Contest 168 B 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2023/1119_arc168)：例題 ARC168 B の方針（奇数回の値の最大を使う。解説の部分だけを参照）
 - [ikatakos「AtCoder Regular Contest 143 C 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0626_arc143)：練習の方針（X + Y で割った余りと場合分け。解説の部分だけを参照）
 - [kmjp「AtCoder ABC #172 : F - Unfair Nim」](https://kmjp.hatenablog.jp/entry/2020/06/27/1030)：力試しの問いの確認（移す個数の範囲）
-- [drken「AtCoder ABC 212 H - Nim Counting」](https://drken1215.hatenablog.com/entry/2021/08/01/025200)：力試しの方針（アダマール変換と等比数列の和）
+- [drken「AtCoder ABC 212 H - Nim Counting (4D, 橙色, 600 点)」](https://drken1215.hatenablog.com/entry/2021/08/01/025200)：力試しの方針（アダマール変換と等比数列の和）
 - [kmyk「AtCoder Regular Contest 046 B - 石取り大作戦」](https://kmyk.github.io/blog/writeups/algo-atcoder-arc_046_b/)：練習 ARC046 B の場合分けの結論
 - [esaka-sandbox「AtCoder Regular Contest 046 - B - 石取り大作戦」](https://scrapbox.io/esaka-sandbox/AtCoder_Regular_Contest_046_-_B_-_%E7%9F%B3%E5%8F%96%E3%82%8A%E5%A4%A7%E4%BD%9C%E6%88%A6)：練習 ARC046 B の A + 1 の倍数を押しつける理由
 - [プロひろ「ABC368 F問題（Dividing Game）を解く」](https://programming-hiroba.com/abc368-f/)：練習 ABC368 F の素因数の個数を山とみる方針

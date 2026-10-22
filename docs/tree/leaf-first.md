@@ -18,14 +18,14 @@ signs:
   - {type: phrase, text: 葉を消していく操作}
 acl: []
 frequency: B
-frequency_evidence: recent 1（abc459_e）・前提として 2 ページに届く（直接 1）・古い ABC 2 問
+frequency_evidence: recent 1（abc459_e）・前提として 2 ページに届く（直接 1）・古い ABC 5 問
 sections:
   - {title: 葉の唯一の辺を今使ってよい理由（交換論法）, anchor: why-greedy}
   - {title: 次数 1 の頂点をキューで削る, anchor: peel-leaves}
   - {title: 帰りがけ順に葉から情報を上へ送る, anchor: send-up}
   - {title: 木の最大マッチング（葉と親を組む）, anchor: tree-matching}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

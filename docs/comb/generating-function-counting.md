@@ -25,7 +25,7 @@ sections:
   - {title: DP の遷移を多項式の積・商として見る, anchor: dp-as-polynomial}
   - {title: 多項式の演算（逆元・log・exp）は FPS のページへ, anchor: to-fps}
   - {title: ライブラリでの使い方, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -229,4 +229,4 @@ $K$ は求めたい係数の次数である。逆元・log・exp・累乗の $O(
 - [kmjp「AtCoder ABC #385 (ユニークビジョンプログラミングコンテスト2024 クリスマス) : G - Counting Buildings」](https://kmjp.hatenablog.jp/entry/2024/12/21/0930)：練習 ABC385 G の挿入 DP と因子の積
 - [drken「AtCoder ABC 321 F - #(subset sum = K) with Add and Erase (青色, 525 点)」](https://drken1215.hatenablog.com/entry/2023/09/25/070100)：練習 ABC321 F
 - [AtCoder「AC Library のドキュメント（document_ja）」](https://github.com/atcoder/ac-library/tree/master/document_ja)：ACL の convolution の宣言と計算量
-- [yosupo「Library Checker の問題（polynomial・enumerative_combinatorics ほか）」](https://github.com/yosupo06/library-checker-problems)：自作したときの確認に使う問題の内容
+- [yosupo06「library-checker-problems」](https://github.com/yosupo06/library-checker-problems)：自作したときの確認に使う問題（polynomial・enumerative_combinatorics ほか）の内容

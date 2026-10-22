@@ -19,15 +19,15 @@ signs:
   - {type: constraint, text: 置換を K ≤ 10^18 回繰り返した結果を求める}
 acl: []
 frequency: B
-frequency_evidence: recent 0・前提として 4 ページに届く（直接 3）・古い ABC 5 問
+frequency_evidence: recent 0・前提として 4 ページに届く（直接 3）・古い ABC 4 問
 sections:
   - {title: 巡回分解の作り方（訪問済みの印を付けてたどる）, anchor: decompose}
   - {title: swap で巡回が割れる・つながる：最小回数は N − 巡回の個数, anchor: min-swaps}
   - {title: 隣接 swap（転倒数）との違い, anchor: vs-adjacent}
   - {title: K 回の合成と元に戻る回数（巡回の長さの lcm）, anchor: power, level: 青}
   - {title: Functional graph との関係, anchor: functional-graph}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

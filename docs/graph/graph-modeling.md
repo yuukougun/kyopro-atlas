@@ -19,7 +19,7 @@ sections:
   - {title: 何を辺にするか（関係・操作・制約・写像）, anchor: what-to-edge}
   - {title: 制約を辺にすると何の問題になるか（二部グラフ・閉路・差分制約）, anchor: constraints-to-edges}
   - {title: 自由に行き来できる部分を 1 点に縮約する（Union-Find・SCC・次数 2 の頂点を消す）, anchor: contraction}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -174,6 +174,6 @@ updated: 2026-10-22
 
 ## 参考 {#references}
 
-- [けんちょん「AtCoder ABC 131 F - Must Be Rectangular! (青色, 600 点)」](https://drken1215.hatenablog.com/entry/2019/06/23/004700)：座標を頂点、点を辺にした二部グラフと、答えの式（成分ごとの積の和から点の数を引く）
+- [drken「AtCoder ABC 131 F - Must Be Rectangular! (青色, 600 点)」](https://drken1215.hatenablog.com/entry/2019/06/23/004700)：座標を頂点、点を辺にした二部グラフと、答えの式（成分ごとの積の和から点の数を引く）
 - [kmjp「AtCoder ABC #286 (ウルシステムズプログラミングコンテスト2023) : G - Unique Walk」](https://kmjp.hatenablog.jp/entry/2023/01/21/1100)：何度でも通れる辺の縮約と、縮約後のオイラー路の条件
 - [Lanly「AtCoder Beginner Contest 377」](https://www.cnblogs.com/Lanly/p/18513188)：ABC377 E の閉路への分解と、2 の累乗の歩数を閉路の長さで割った余りだけ進める方針

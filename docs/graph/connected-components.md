@@ -19,14 +19,14 @@ signs:
   - {type: phrase, text: '点 (x, y) の集合で、同じ x・同じ y を持つ点どうしが関係する'}
 acl: [dsu]
 frequency: B
-frequency_evidence: recent 1（abc470_f）・前提として 5 ページに届く（直接 3）・古い ABC 4 問
+frequency_evidence: recent 1（abc470_f）・前提として 5 ページに届く（直接 3）・古い ABC 5 問
 sections:
   - {title: DFS・BFS・Union-Find の 3 つの求め方と使い分け, anchor: three-methods}
   - {title: 成分ごとの集計（頂点数と辺数で木・なもり・それ以外を見分ける）, anchor: per-component}
   - {title: 森の連結成分の数は N − M, anchor: forest}
   - {title: 座標や値を頂点にして成分を考える, anchor: values-as-vertices, level: 青}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -193,8 +193,8 @@ Union-Find は隣接リストを作らずに辺を読みながら併合でき、
 ## 参考 {#references}
 
 - [けんちょん「AtCoder ABC 177 D - Friends」](https://drken1215.hatenablog.com/entry/2020/10/10/023200)：例題の方針（最大の連結成分の大きさが答えになる理由と、DFS・BFS・Union-Find の 3 通りの求め方）
-- [IsThisAPen「ABC292D - Unicyclic Components」](https://kyo-pro.hatenablog.com/entry/ABC292D)：練習の方針（成分ごとに頂点数と辺数を数える）
+- [kyo-pro「ABC292D - Unicyclic Components」](https://kyo-pro.hatenablog.com/entry/ABC292D)：練習の方針（成分ごとに頂点数と辺数を数える）
 - [kazun「AtCoder Beginner Contest 292 D問題 Unicyclic Components」](https://kazun-kyopro.hatenablog.com/entry/ABC/292/D)：練習の方針と、制約で自己ループがありうること
 - [けんちょん「AtCoder ABC 157 D - Friend Suggestions」](https://drken1215.hatenablog.com/entry/2020/03/02/022900)：練習の方針（成分の大きさから自分・友達・同じ成分のブロック相手を引く）
-- [けんちょん「AtCoder ABC 131 F - Must Be Rectangular!」](https://drken1215.hatenablog.com/entry/2019/06/23/004700)：座標を頂点にした二部グラフと、各成分が完全二部グラフになる理由
+- [drken「AtCoder ABC 131 F - Must Be Rectangular! (青色, 600 点)」](https://drken1215.hatenablog.com/entry/2019/06/23/004700)：座標を頂点にした二部グラフと、各成分が完全二部グラフになる理由
 - [AtCoder Library「DSU」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/dsu.md)：`dsu` の操作と計算量（`groups()` は $O(N)$）

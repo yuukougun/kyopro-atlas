@@ -27,8 +27,8 @@ sections:
   - {title: 円環上の組を数える, anchor: circular}
   - {title: 長さの制限付き（窓の中だけで数える）, anchor: length-limited, level: 青}
   - {title: 尺取りとの使い分け（負の値）, anchor: vs-two-pointers}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

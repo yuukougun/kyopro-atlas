@@ -30,8 +30,8 @@ sections:
   - {title: 計算量とその根拠, anchor: complexity}
   - {title: 一般化（XOR で偶奇・二部グラフ、頂点を 2 倍にする）, anchor: generalization}
   - {title: 応用の型, anchor: applications}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -309,8 +309,8 @@ ACL の `dsu` をそのまま使えるのが利点で、要素数は $2N$ にな
 - [drken「AtCoder ABC 087 D - People on a Line (ARC 090 D)」](https://drken1215.hatenablog.com/entry/2022/12/08/152700)：例題 arc090_b の制約と、重み付き Union-Find・DFS の 2 つの解法
 - [drken「AtCoder ABC 328 F - Good Set Query」](https://drken1215.hatenablog.com/entry/2023/11/12/040700)：例題 abc328_f の条件の向きと、オンラインに判定する理由・マージテクの別解
 - [drken「AtCoder ABC 373 D - Hidden Weights」](https://drken1215.hatenablog.com/entry/2024/09/29/022852)：練習 abc373_d の方針
-- [drken「AtCoder ABC 327 D - Good Tuple Problem」](https://drken1215.hatenablog.com/entry/2023/11/05/161745)：練習 abc327_d の言い換え
-- [ikatakos「AtCoder Beginner Contest 451」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0328_abc451)：練習 abc451_f の根に色ごとの数を持たせる方針（解法の部分だけ）
+- [drken「AtCoder ABC 327 D - Good Tuple Problem (2Q, 茶色, 400 点)」](https://drken1215.hatenablog.com/entry/2023/11/05/161745)：練習 abc327_d の言い換え
+- [ikatakos「AtCoder Beginner Contest 451 F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0328_abc451)：練習 abc451_f の根に色ごとの数を持たせる方針（解法の部分だけ）
 - [enakai00「068 - Paired Information（★5）の解説」](https://enakai00.hatenablog.com/entry/2021/09/06/103720)：練習 typical90_bp の和を差に直す変換
-- [drken「AtCoder ABC 280 F - Pay or Receive」](https://drken1215.hatenablog.com/entry/2022/12/07/231851)：練習 abc280_f の矛盾した成分に印を付ける方針
+- [drken「AtCoder ABC 280 F - Pay or Receive (青色, 500 点)」](https://drken1215.hatenablog.com/entry/2022/12/07/231851)：練習 abc280_f の矛盾した成分に印を付ける方針
 - [drken「AtCoder ARC 188 C - Honest or Liar or Confused」](https://drken1215.hatenablog.com/entry/2025/01/22/023720)：力試し arc188_c の XOR の式と変数の消し方

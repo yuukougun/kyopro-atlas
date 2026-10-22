@@ -1,5 +1,6 @@
-<svg width="320" height="420" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 420" font-family="sans-serif" font-size="14">
+<svg width="320" height="423" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 423" font-family="sans-serif" font-size="14">
 <rect width="100%" height="100%" fill="#ffffff"/>
+<g transform="translate(0 0)">
 <text x="16" y="24" fill="#222">各マスの数：そのマスを右下の角とする、</text>
 <text x="16" y="44" fill="#222">壁を含まない最大の正方形の一辺</text>
 <g transform="translate(-24,16)">
@@ -60,4 +61,5 @@
 <text x="16" y="370" fill="#222">赤の破線：一辺 3 の正方形</text>
 <text x="16" y="390" fill="#222">一辺 4 にすると、短い向き</text>
 <text x="16" y="410" fill="#222">（上）の側で壁が入る</text>
+</g>
 </svg>

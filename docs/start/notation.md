@@ -27,7 +27,7 @@ sections:
   - {title: 文字列の記法, anchor: string}
   - {title: コード片の約束, anchor: code}
   - {title: 用語の表記, anchor: terms}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 

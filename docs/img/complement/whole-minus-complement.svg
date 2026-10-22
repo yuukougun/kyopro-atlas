@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 250" width="480" height="250" font-family="sans-serif">
-  <rect x="0" y="0" width="480" height="250" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 254" width="480" height="254" font-family="sans-serif">
+<g transform="translate(0 4)">
+  <rect x="0" y="-4" width="480" height="254" fill="#ffffff"/>
   <defs>
     <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
       <rect width="8" height="8" fill="#dbeafe"/>
@@ -15,4 +16,5 @@
   <text x="97" y="117" font-size="15" text-anchor="middle" fill="#1f2937">斜線の部分：</text>
   <text x="97" y="137" font-size="15" text-anchor="middle" fill="#1f2937">0 を少なくとも</text>
   <text x="97" y="157" font-size="15" text-anchor="middle" fill="#1f2937">1 つ含む</text>
+</g>
 </svg>

@@ -20,15 +20,15 @@ signs:
   - {type: shape, text: 答えを X に固定すると、可否を貪欲・探索・DP で判定できる形になる}
 acl: []
 frequency: A
-frequency_evidence: recent 3（abc457_d・abc458_g・abc463_d）・前提として 5 ページに届く（直接 5）・古い ABC 8 問
+frequency_evidence: recent 3（abc457_d・abc458_g・abc463_d）・前提として 5 ページに届く（直接 5）・古い ABC 7 問
 sections:
   - {title: 判定の単調性を確かめる（「ちょうど K」は「K 以上」に直す）, anchor: monotonicity}
   - {title: 最大値の最小化・最小値の最大化, anchor: minimax}
   - {title: 判定を貪欲・探索で作る, anchor: greedy-check}
   - {title: 判定を DP で作る（決め打ちごとに初期化し直す）, anchor: dp-check, level: 青}
   - {title: 実数の二分探索（反復回数を固定する）, anchor: real-number, level: 水}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

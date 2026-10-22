@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 330" width="400" height="330" font-family="sans-serif">
-<rect width="400" height="330" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-3 0 400 330" width="400" height="330" font-family="sans-serif">
+<rect x="-3" y="0" width="400" height="330" fill="#ffffff"/>
 <text x="200.0" y="22" font-size="13" text-anchor="middle" fill="#222">係数を偶数番目と奇数番目に分け続ける（N = 8）</text>
 <rect x="57" y="37" width="334" height="34" fill="none" stroke="#777" stroke-dasharray="4 3" rx="4"/>
 <rect x="60" y="40" width="34" height="28" fill="#eef3fb" stroke="#335" rx="3"/>

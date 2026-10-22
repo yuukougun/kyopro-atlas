@@ -1,5 +1,6 @@
-<svg viewBox="0 0 344 408" width="344" height="408" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
-  <rect x="0" y="0" width="344" height="408" fill="#ffffff"/>
+<svg viewBox="0 0 346 411" width="346" height="411" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+<g transform="translate(2 2)">
+  <rect x="-2" y="-2" width="346" height="411" fill="#ffffff"/>
 <text x="8" y="22" font-size="15" fill="#222222">x ≤ A = 1101、y ≤ B = 0111、</text>
 <text x="8" y="42" font-size="15" fill="#222222">x AND y = 0 を上の bit から決める</text>
 <text x="8" y="76" font-size="15" fill="#555555">bit</text>
@@ -48,4 +49,5 @@
 <text x="8" y="356" font-size="14" fill="#1f5fbf">実線の枠：x は bit 2 で A より小さくなる</text>
 <text x="8" y="376" font-size="14" fill="#b5521b">破線の枠：y は bit 1 で B より小さくなる</text>
 <text x="8" y="396" font-size="14" fill="#555555">フラグは数ごとに別々に切り替わる</text>
+</g>
 </svg>

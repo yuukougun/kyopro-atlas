@@ -1,7 +1,7 @@
 ---
 id: static-top-tree
 title: Static Top Tree と木 DP の動的更新
-aliases: [Static Top Tree, 動的木 DP, 重軽再帰 DP, dynamic tree DP]
+aliases: [Static Top Tree, 動的木 DP, dynamic tree DP]
 type: overview
 field: tree
 chapter: 部分木とパスのクエリ
@@ -22,7 +22,7 @@ sections:
   - {title: 重いパスの上で DP をセグ木に載せる, anchor: heavy-path-dp}
   - {title: Static Top Tree（圧縮と併合）, anchor: compress-rake}
   - {title: 自作するときの要点と検証, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -33,7 +33,7 @@ updated: 2026-10-22
     - **前提**：[HL 分解](../tree/hld.md)、[木 DP](../dp/tree-dp.md)
 
 <!-- textlint-disable -->
-別名：Static Top Tree・動的木 DP・重軽再帰 DP・dynamic tree DP
+別名：Static Top Tree・動的木 DP・dynamic tree DP
 <!-- textlint-enable -->
 
 Static Top Tree は、根付き木を「重いパスを縦につなぐ操作」と「軽い子の部分木を横に束ねる操作」の組み立ての手順として表し、その手順を高さ $O(\log N)$ の二分木に並べたものである。二分木の各節点に「その部分の木 DP の要約」を持たせれば、頂点の値を 1 つ変えても、根までの $O(\log N)$ 個の節点を計算し直すだけで根の DP の値が求まる。木の形は変わらない（静的な）前提で、辺の付け替えがあるなら[動的木](../tree/dynamic-tree.md)の領分になる。
@@ -180,7 +180,7 @@ Library Checker では次の 2 問で確かめられる（[練習問題](#practi
 
 ## 参考 {#references}
 
-- [yosupo06「library-checker-problems」](https://github.com/yosupo06/library-checker-problems/tree/master/tree)：point_set_tree_path_composite_sum と point_set_tree_path_composite_sum_fixed_root の問いの確認
+- [yosupo06「library-checker-problems/tree」](https://github.com/yosupo06/library-checker-problems/tree/master/tree)：point_set_tree_path_composite_sum と point_set_tree_path_composite_sum_fixed_root の問いの確認
 - [blue_jam「Static Top Treeの覚書」](https://zenn.dev/blue_jam/articles/0526c70b74f6bb)：学ぶための資料。5 つの操作と、節点の数が $O(N)$ になる理由
 - [noya2「式変形で導出する Static Top Tree」](https://trap.jp/post/2861/)：学ぶための資料。HL 分解の式から同じ構造を導く見方と、例題 ABC351 G の一次関数の形。ABC351 G で Static Top Tree が ABC の想定解として初めて明示的に扱われたこと
 - [maspy「[Library Checker] Point Set Tree Path Composite Sum」](https://maspypy.com/library-checker-point-set-tree-path-composite-sum)：学ぶための資料。根を変える版で部品に持たせる値と、ほかの方法との比較

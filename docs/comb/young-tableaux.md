@@ -22,7 +22,7 @@ sections:
   - {title: フック長公式, anchor: hook-length}
   - {title: Robinson-Schensted 対応と LIS・LDS, anchor: robinson-schensted}
   - {title: 分割数との関係, anchor: partitions}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -155,6 +155,6 @@ $$
 - [Wikipedia「Hook length formula」](https://en.wikipedia.org/wiki/Hook_length_formula)：学ぶための資料。公式の形、カタラン数との関係、証明の種類の確認
 - [Wikipedia「Robinson–Schensted correspondence」](https://en.wikipedia.org/wiki/Robinson%E2%80%93Schensted_correspondence)：学ぶための資料。挿入の手順、LIS が 1 行目・LDS が 1 列目の長さになること、逆順で転置されること、Greene の定理の確認
 - [Wikipedia「ヤング図形」](https://ja.wikipedia.org/wiki/%E3%83%A4%E3%83%B3%E3%82%B0%E5%9B%B3%E5%BD%A2)：学ぶための資料。ヤング図形・標準盤の定義の確認
-- [yosupo「Library Checker の問題（longest_increasing_subsequence・partition_function）」](https://github.com/yosupo06/library-checker-problems)：ライブラリでの使い方の節の、近い問題の確認
+- [yosupo06「library-checker-problems」](https://github.com/yosupo06/library-checker-problems)：ライブラリでの使い方の節の、近い問題（longest_increasing_subsequence・partition_function）の確認
 - [kmjp「AtCoder ABC #378 : G - Everlasting LIDS」](https://kmjp.hatenablog.jp/entry/2024/11/07/1000)：例題の方針（RS 対応で形を決め、追加の条件付きのタブローを形を状態にした DP で数える）
 - [ikatakos「AtCoder Beginner Contest 378 F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/1102_abc378)：例題の方針（$Q$ をフック長公式で数えること、追い出しの連鎖の大小関係）。解法の節だけを読んだ

@@ -23,9 +23,9 @@ sections:
   - {title: 指定頂点を結ぶ部分木の大きさ（DFS 順で隣り合う 2 点の距離の和の半分）, anchor: steiner-queries}
   - {title: DFS 順に並べて隣り合う 2 点の LCA を足す, anchor: build}
   - {title: スタックで組み立てる, anchor: stack-build}
-  - {title: 圧縮木で木 DP をするときの要点, anchor: usage}
+  - {title: 圧縮木で木 DP をするときの要点, anchor: library}
   - {title: マージテク・平方分割で代用できる場合, anchor: alternatives}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -100,7 +100,7 @@ for v in vs:
 
 LCA を[オイラーツアーと Sparse Table](../ds/sparse-table.md) で 1 回 $O(1)$ にすれば、構築はソートの $O(K \log K)$ になる。ソートを 1 回で済ませ、隣り合う 2 点の LCA を求めながら深さで取り除く書き方もある（参考の smijake3 氏の記事に両方がある）。
 
-## 圧縮木で木 DP をするときの要点 {#usage}
+## 圧縮木で木 DP をするときの要点 {#library}
 
 ACL には Auxiliary Tree がなく、Library Checker にも専用の問題はない。構築の中で使う LCA は Library Checker の [Lowest Common Ancestor](https://judge.yosupo.jp/problem/lca) で検証できる。自作するときの要点は次のとおりである。
 

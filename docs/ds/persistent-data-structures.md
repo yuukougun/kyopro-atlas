@@ -19,15 +19,15 @@ signs:
 acl: []
 verify: [persistent_queue, persistent_range_affine_range_sum]
 frequency: B
-frequency_evidence: recent 1（abc453_g）・前提として届くページなし・古い ABC 1 問
+frequency_evidence: recent 1（abc453_g）・前提として届くページなし・古い ABC 4 問
 sections:
   - {title: 版の木（追加は子を作る・削除は親へ戻る・保存は頂点を覚える）, anchor: version-tree}
   - {title: 経路コピー（1 回の更新で O(log N) 個のノードを新しく作る。丸ごとのコピーは根の指し替え）, anchor: path-copying}
   - {title: 部分永続と完全永続, anchor: partial-vs-full}
   - {title: 操作の版を木にしてオフラインで処理する（版の木の DFS と取り消し）, anchor: offline-version-tree}
   - {title: 接頭辞ごとの版で区間の K 番目・x 以下の個数をオンラインで求める, anchor: prefix-versions, level: 発展}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -162,13 +162,13 @@ DFS では、入るときに変更前の値を覚えてから施し、出ると�
 値を座標圧縮し、値ごとの個数を持つセグメント木を考える。版 $i$ を「$A_0, \dots, A_{i-1}$ を入れた木」とし、版 $i + 1$ は版 $i$ に $A_i$ を 1 個足して経路コピーで作る。個数は足し算なので、区間 $[l, r)$ の値ごとの個数は、どのノードでも「版 $r$ の個数 − 版 $l$ の個数」になる。版は $N + 1$ 個、ノードは $O(N \log N)$ 個である。
 
 - **$x$ 以下の個数**：版 $r$ と版 $l$ のそれぞれで、圧縮した値が $x$ 以下の範囲の個数を取って引く。$O(\log N)$
-- **$K$ 番目に小さい値**：2 つの版の根から同時に降りる。$K$ は 0 始まりで数える（最小の値が 0 番目）。左の子の個数の差 $c$ を見て、$K < c$ なら左へ、そうでなければ $K$ から $c$ を引いて右へ進む。葉に着いたらその値が答えで、$O(\log N)$
+- **$K$ 番目に小さい値**：2 つの版の根から同時に降りる。$K$ は 0-indexed で数える（最小の値が 0 番目）。左の子の個数の差 $c$ を見て、$K < c$ なら左へ、そうでなければ $K$ から $c$ を引いて右へ進む。葉に着いたらその値が答えで、$O(\log N)$
 
 ```cpp
 --8<-- "persistent-data-structures/prefix-kth.cpp:core"
 ```
 
-ノードに値の和も持てば、「区間の $x$ 以下の要素の和」も同じ形で求まる。先読みできるなら、右端でソートして BIT を使う方が軽い（[クエリの先読み](../ds/offline-queries.md)）。オンラインで答えるほかの方法に、[マージソート木](../ds/merge-sort-tree.md)と [Wavelet Matrix](../ds/wavelet-matrix.md#usage) がある。マージソート木は $x$ 以下の個数を $O(\log^2 N)$、$K$ 番目を $O(\log^3 N)$ で求め、実装が素直である。Wavelet Matrix はどちらも $O(\log \sigma)$ で、メモリが小さい。
+ノードに値の和も持てば、「区間の $x$ 以下の要素の和」も同じ形で求まる。先読みできるなら、右端でソートして BIT を使う方が軽い（[クエリの先読み](../ds/offline-queries.md)）。オンラインで答えるほかの方法に、[マージソート木](../ds/merge-sort-tree.md)と [Wavelet Matrix](../ds/wavelet-matrix.md#library) がある。マージソート木は $x$ 以下の個数を $O(\log^2 N)$、$K$ 番目を $O(\log^3 N)$ で求め、実装が素直である。Wavelet Matrix はどちらも $O(\log \sigma)$ で、メモリが小さい。
 
 ## 落とし穴 {#pitfalls}
 

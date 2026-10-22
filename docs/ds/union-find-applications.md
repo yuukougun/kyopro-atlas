@@ -20,7 +20,7 @@ signs:
 acl: [dsu]
 verify: []
 frequency: B
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 9 問
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 11 問
 sections:
   - {title: 根に成分の情報を持たせる, anchor: data-on-root}
   - {title: 併合の瞬間に寄与を数える, anchor: count-on-merge}
@@ -28,8 +28,8 @@ sections:
   - {title: 次の空きへ飛ぶ Union-Find, anchor: next-pointer}
   - {title: グラフの章との分担, anchor: vs-graph}
   - {title: しきい値ごと・関係ごとに Union-Find を持つ, anchor: multiple-uf, level: 青}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -289,8 +289,8 @@ $k \le 10$ なので、各成分の頂点番号の上位 10 個だけを根に�
 
 ## 参考 {#references}
 
-- [AtCoder Library「DSU」（document_ja/dsu.md）](https://github.com/atcoder/ac-library/blob/master/document_ja/dsu.md)：`merge` の返り値・`leader`・`size`・`groups` と計算量
-- [Tarjan, van Leeuwen「Worst-case Analysis of Set Union Algorithms」（J. ACM 31(2), 1984）](https://doi.org/10.1145/62.2160)：union by size を使わず経路の圧縮・半分化だけを使うときの計算量の上限
+- [AtCoder Library「DSU」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/dsu.md)：`merge` の返り値・`leader`・`size`・`groups` と計算量
+- Tarjan, van Leeuwen「Worst-case Analysis of Set Union Algorithms」（Journal of the ACM 31(2), 1984, pp. 245–281, doi:10.1145/62.2160）：union by size を使わず経路の圧縮・半分化だけを使うときの計算量の上限
 - [drken「AtCoder ABC 372 E - K-th Largest Connected Components (1Q, 緑色, 475 点)」](https://drken1215.hatenablog.com/entry/2024/09/22/022522)：例題の方針（根に上位 10 個を持ち、併合で切り詰める）
 - [hamayan「Sum of Maximum Weights [AtCoder Beginner Contest 214 D]」](https://blog.hamayanhamayan.com/entry/2021/08/15/034729)：例題の方針（重みの昇順に併合し、併合の前にサイズの積を数える）
 - [Kazun「AtCoder Beginner Contest 238 E問題 Range Sums」](https://kazun-kyopro.hatenablog.com/entry/ABC/238/E)：例題の方針（累積和の添字を頂点にし、0 と N の連結で判定する）

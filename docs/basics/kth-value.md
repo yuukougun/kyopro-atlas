@@ -19,13 +19,13 @@ signs:
   - {type: shape, text: 全部は列挙できないが「x 以下が何個あるか」は数えられる}
 acl: []
 frequency: B
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 6 問
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 5 問
 sections:
   - {title: なぜ count(x) ≥ K となる最小の x が答えか, anchor: why-count}
   - {title: 数え方の型（ソート＋二分探索・尺取り、符号で場合分け、包除）, anchor: counting-patterns}
   - {title: 上位 M 個の和（同じ値の分の調整）, anchor: top-m-sum}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

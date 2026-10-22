@@ -18,8 +18,8 @@ signs:
   - {type: phrase, text: 法が素数でない数え上げを素因数ごとに分けて最後に戻す}
 acl: [crt]
 verify: []
-frequency: C
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 2 問
+frequency: B
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 3 問
 sections:
   - {title: 2式の CRT は一次不定方程式を1回解くこと, anchor: two-equations}
   - {title: 法が互いに素でないときの解の存在条件, anchor: non-coprime}
@@ -27,8 +27,8 @@ sections:
   - {title: 応用の型（範囲を余りに直す・分けて戻す）, anchor: applications}
   - {title: Garner のアルゴリズム（巨大な解を mod で求める）, anchor: garner, level: 黄}
   - {title: 'ACL の crt（解がなければ (0, 0)）', anchor: acl}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

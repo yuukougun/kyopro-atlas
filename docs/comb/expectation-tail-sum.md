@@ -17,16 +17,16 @@ signs:
   - {type: phrase, text: 〜がそろうまでに取り出す回数の期待値}
   - {type: constraint, text: 値の範囲 M ≤ 5000 程度で、各 k について P(X ≥ k) を数える}
 acl: []
-frequency: C
-frequency_evidence: recent 0・前提として 1 ページに届く（直接 1）・古い ABC 2 問
+frequency: B
+frequency_evidence: recent 0・前提として 1 ページに届く（直接 1）・古い ABC 3 問
 sections:
   - {title: X を「X ≥ k」の個数の和に分けて線形性を使う, anchor: identity}
   - {title: 最大値・K 番目の値：「すべて k 未満」の余事象, anchor: kth-value}
   - {title: 「〜になるまでの回数」= Σ P(k 回目までに終わらない), anchor: waiting-time}
   - {title: 連続値の場合（積分）, anchor: continuous, level: 発展}
   - {title: 「ちょうど」と「以上」の行き来, anchor: exactly-vs-at-least}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

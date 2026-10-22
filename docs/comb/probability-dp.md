@@ -19,7 +19,7 @@ signs:
   - {type: phrase, text: N 回ランダムに上下左右へ動いた後の位置}
 acl: [modint]
 frequency: B
-frequency_evidence: recent 1（abc463_g）・前提として届くページなし・古い ABC 5 問
+frequency_evidence: recent 1（abc463_g）・前提として届くページなし・古い ABC 6 問
 sections:
   - {title: 状態に到達する確率を前から配る（和が 1 の検算）, anchor: forward}
   - {title: 状態の設計：まとめる・上限で打ち切る・到達する値だけ持つ, anchor: state-design}
@@ -27,8 +27,8 @@ sections:
   - {title: 期待値 DP との使い分け（前向きと後ろ向き）, anchor: vs-expected-value-dp}
   - {title: ランダムウォークと二項係数, anchor: random-walk, level: 青}
   - {title: 同じ遷移を多数回行うときは行列累乗へ, anchor: matrix-power, level: 黄}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

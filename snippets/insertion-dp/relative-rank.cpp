@@ -12,7 +12,7 @@ int main() {
     const long long MOD = 1000000007;
 
     // --8<-- [start:core]
-    // dp[j] = 先頭 i 個を決めたとき、最後の要素が i 個の中で j 番目に小さい（0 始まり）並べ方の数
+    // dp[j] = 先頭 i 個を決めたとき、最後の要素が i 個の中で j 番目に小さい（0-indexed）並べ方の数
     vector<long long> dp = {1};  // i = 1：1 個だけなら相対順位は 0
     for (int i = 1; i < n; i++) {
         // s[i-1] は i 個目と i+1 個目の関係。前の段の累積和 pre[j] = dp[0] + … + dp[j-1]

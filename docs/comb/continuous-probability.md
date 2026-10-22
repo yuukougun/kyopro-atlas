@@ -24,7 +24,7 @@ sections:
   - {title: 積分と tail sum, anchor: integral}
   - {title: 区分的な多項式の積分, anchor: piecewise}
   - {title: 自作するときの要点, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -174,7 +174,7 @@ Library Checker に、連続値の確率そのものの問題はない（2026-10
 ## 参考 {#references}
 
 - [Wikipedia「Order statistic」](https://en.wikipedia.org/wiki/Order_statistic)：一様乱数の $K$ 番目の値がベータ分布に従い、期待値が $K/(N+1)$ であること
-- [yosupo「Library Checker の問題」](https://github.com/yosupo06/library-checker-problems)：連続値の確率の問題がないことと、凸包・偏角ソートの問題の確認
+- [yosupo06「library-checker-problems」](https://github.com/yosupo06/library-checker-problems)：連続値の確率の問題がないことと、凸包・偏角ソートの問題の確認
 - [drken「AtCoder AGC 021 B - Holes (黄色, 600 点)」](https://drken1215.hatenablog.com/entry/2019/04/02/225600)：例題 AGC021 B の方針（ボロノイ図・凸包の外角）
 - [kmjp「AtCoder ABC #226 : H - Random Kth Max」](https://kmjp.hatenablog.jp/entry/2021/11/08/0930)：例題 ABC226 H の、長さ 1 の区分ごとの個数の DP
 - [ikatakos「AtCoder Beginner Contest 226 F,G,H 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/1107_abc226)：例題 ABC226 H の、区分の中の順位の期待値を使う方法（解法の節だけを読んだ）

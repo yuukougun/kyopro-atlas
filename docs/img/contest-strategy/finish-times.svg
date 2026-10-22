@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 262" width="400" height="262" font-family="sans-serif">
-<rect width="400" height="262" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -5 400 274" width="400" height="274" font-family="sans-serif">
+<rect x="0" y="-5" width="400" height="274" fill="#ffffff"/>
 <text x="200.0" y="16" font-size="12" text-anchor="middle">A から順に解き終える時刻（中央値、分）</text>
 <line x1="58.0" y1="32" x2="58.0" y2="226" stroke="#bbbbbb" stroke-dasharray="2,3"/>
 <text x="58.0" y="29" font-size="11" text-anchor="middle">0</text>
@@ -12,9 +12,9 @@
 <line x1="322.0" y1="32" x2="322.0" y2="226" stroke="#bbbbbb" stroke-dasharray="2,3"/>
 <text x="322.0" y="29" font-size="11" text-anchor="middle">80</text>
 <line x1="388.0" y1="32" x2="388.0" y2="226" stroke="#bbbbbb" stroke-dasharray="2,3"/>
-<text x="388.0" y="29" font-size="11" text-anchor="middle">100</text>
-<text x="8" y="29" font-size="11">P</text>
-<text x="8" y="53" font-size="11">1200</text>
+<text x="390.0" y="29" font-size="11" text-anchor="end">100</text>
+<text x="10" y="29" font-size="11">P</text>
+<text x="10" y="53" font-size="11">1200</text>
 <rect x="58.0" y="40" width="66.0" height="18" fill="#eeeeee" stroke="#333333" stroke-width="0.8"/>
 <text x="91.0" y="53" font-size="11" text-anchor="middle" fill="#000">A〜C</text>
 <text x="124.0" y="70" font-size="11" text-anchor="middle">20</text>
@@ -27,7 +27,7 @@
 <rect x="295.6" y="40" width="92.4" height="18" fill="#6e6e6e" stroke="#333333" stroke-width="0.8"/>
 <text x="341.8" y="53" font-size="11" text-anchor="middle" fill="#fff">F</text>
 <text x="388.0" y="70" font-size="11" text-anchor="end">104（100 超）</text>
-<text x="8" y="91" font-size="11">1400</text>
+<text x="10" y="91" font-size="11">1400</text>
 <rect x="58.0" y="78" width="52.8" height="18" fill="#eeeeee" stroke="#333333" stroke-width="0.8"/>
 <text x="84.4" y="91" font-size="11" text-anchor="middle" fill="#000">A〜C</text>
 <text x="110.8" y="108" font-size="11" text-anchor="middle">16</text>
@@ -40,7 +40,7 @@
 <rect x="269.2" y="78" width="95.7" height="18" fill="#6e6e6e" stroke="#333333" stroke-width="0.8"/>
 <text x="317.0" y="91" font-size="11" text-anchor="middle" fill="#fff">F</text>
 <text x="364.9" y="108" font-size="11" text-anchor="middle">93</text>
-<text x="8" y="129" font-size="11">1600</text>
+<text x="10" y="129" font-size="11">1600</text>
 <rect x="58.0" y="116" width="46.2" height="18" fill="#eeeeee" stroke="#333333" stroke-width="0.8"/>
 <text x="81.1" y="129" font-size="11" text-anchor="middle" fill="#000">A〜C</text>
 <text x="104.2" y="146" font-size="11" text-anchor="middle">14</text>
@@ -53,7 +53,7 @@
 <rect x="242.8" y="116" width="92.4" height="18" fill="#6e6e6e" stroke="#333333" stroke-width="0.8"/>
 <text x="289.0" y="129" font-size="11" text-anchor="middle" fill="#fff">F</text>
 <text x="335.2" y="146" font-size="11" text-anchor="middle">84</text>
-<text x="8" y="167" font-size="11">1800</text>
+<text x="10" y="167" font-size="11">1800</text>
 <rect x="58.0" y="154" width="36.3" height="18" fill="#eeeeee" stroke="#333333" stroke-width="0.8"/>
 <text x="76.2" y="167" font-size="11" text-anchor="middle" fill="#000">A〜C</text>
 <text x="94.3" y="184" font-size="11" text-anchor="middle">11</text>
@@ -66,7 +66,7 @@
 <rect x="219.7" y="154" width="92.4" height="18" fill="#6e6e6e" stroke="#333333" stroke-width="0.8"/>
 <text x="265.9" y="167" font-size="11" text-anchor="middle" fill="#fff">F</text>
 <text x="312.1" y="184" font-size="11" text-anchor="middle">77</text>
-<text x="8" y="205" font-size="11">2000</text>
+<text x="10" y="205" font-size="11">2000</text>
 <rect x="58.0" y="192" width="29.7" height="18" fill="#eeeeee" stroke="#333333" stroke-width="0.8"/>
 <text x="72.8" y="205" font-size="11" text-anchor="middle" fill="#000">A〜C</text>
 <text x="87.7" y="222" font-size="11" text-anchor="middle">9</text>

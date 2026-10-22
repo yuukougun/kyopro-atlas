@@ -19,7 +19,7 @@ signs:
   - {type: constraint, text: NW ≤ 10^7〜10^8（O(NW) が通る）}
 acl: []
 frequency: A
-frequency_evidence: recent 1（abc461_f）・前提として 5 ページに届く（直接 5）・古い ABC 13 問
+frequency_evidence: recent 1（abc461_f）・前提として 5 ページに届く（直接 5）・古い ABC 7 問
 sections:
   - {title: DP の表の意味（「以下」と「ちょうど」で初期値と答えが変わる）, anchor: meaning}
   - {title: 配列の使い回しとループの向き（0-1 は大きい方から、個数制限なしは小さい方から）, anchor: dp-rolling-array}
@@ -27,8 +27,8 @@ sections:
   - {title: 多次元の重さ・上限で打ち切る・グループから 1 つ選ぶ, anchor: variants}
   - {title: 計算量で解法を切り替える（重さ・価値・N のどれが小さいか）, anchor: choose-by-size, level: 水}
   - {title: 個数制限付き（素朴な展開・二進分解・余りごとのスライド最小値）, anchor: knapsack-bounded, level: 青}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

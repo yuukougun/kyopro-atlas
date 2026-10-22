@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 248" width="480" height="248" font-family="sans-serif">
-  <rect x="0" y="0" width="480" height="248" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 483 248" width="483" height="248" font-family="sans-serif">
+<g transform="translate(3 0)">
+  <rect x="-3" y="0" width="483" height="248" fill="#ffffff"/>
   <text x="12" y="26" font-size="17" fill="#222">隣り合う i と j だけを入れ替える</text>
 
   <!-- time axis ticks (shared) -->
@@ -51,4 +52,5 @@
     <text x="289" y="188">i</text>
   </g>
   <text x="64" y="228" font-size="16" fill="#222">変わる項：wⱼ(S + tⱼ) + wᵢ(S + tⱼ + tᵢ)</text>
+</g>
 </svg>

@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 345" width="380" height="345" font-family="sans-serif">
-<rect width="380" height="345" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 356" width="380" height="356" font-family="sans-serif">
+<rect x="0" y="0" width="380" height="356" fill="#ffffff"/>
 <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker></defs>
 <text x="190" y="24" text-anchor="middle" font-size="14" fill="#111">x の列を 13 で割った余り</text>
 <text x="190" y="44" text-anchor="middle" font-size="13" fill="#111">x ← x² + 3（mod 533）、最初の x は 2</text>

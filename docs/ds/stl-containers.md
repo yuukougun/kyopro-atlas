@@ -23,8 +23,8 @@ frequency_evidence: recent 0・前提として 72 ページに届く（直接 5�
 sections:
   - {title: 操作とコンテナの計算量の早見表, anchor: complexity-table}
   - {title: map で数えながら走査する（→ 累積和と連想配列で区間を数える）, anchor: counting-map}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -176,6 +176,6 @@ set・map は平衡二分探索木（libstdc++ では赤黒木）で、木の高
 - [kyo-pro「ABC253C - Max - Min Query」](https://kyo-pro.hatenablog.com/entry/ABC253C)：例題の multiset での 1 個ずつの削除と、map・ヒープによる別解
 - [drken「AtCoder ABC 166 E - This Message Will Self-Destruct in 5s (1Q, 緑色, 500 点)」](https://drken1215.hatenablog.com/entry/2024/11/23/172436)：練習の方針（式を i 側と j 側に分けて map で数える）
 - [E869120「kyopro-tessoku」の第 8 章のコード](https://github.com/E869120/kyopro-tessoku/tree/main/codes/cpp/chap08)：練習の方針（A54 の map、A55 の set）
-- [cpprefjp「multiset::erase」](https://cpprefjp.github.io/reference/set/multiset/erase.html)：キーを渡した erase が等しい要素を全部消し、個数を返すこと
+- [cpprefjp「std::multiset::erase」](https://cpprefjp.github.io/reference/set/multiset/erase.html)：キーを渡した erase が等しい要素を全部消し、個数を返すこと
 - [cpprefjp「multiset::count」](https://cpprefjp.github.io/reference/set/multiset/count.html)：count が対数時間と等しい要素の個数に比例する時間かかること
 - [cppreference「std::lower_bound」](https://en.cppreference.com/w/cpp/algorithm/lower_bound)：ランダムアクセスでないイテレータでは比較が対数回でも移動が線形になり、set・map ではメンバを使うべきこと

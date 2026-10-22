@@ -20,14 +20,14 @@ signs:
 acl: []
 verify: [shift_of_sampling_points_of_polynomial, sum_of_exponential_times_polynomial]
 frequency: C
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 2 問
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 1 問
 sections:
   - {title: d + 1 点で多項式が決まる理由, anchor: uniqueness}
   - {title: x = 0..d のときの O(d) の補間（階乗の逆元）, anchor: linear-time}
   - {title: べき乗和・多項式になる DP への応用, anchor: applications}
   - {title: 係数の復元（O(d²)）, anchor: coefficients}
   - {title: 自作するときの要点と Library Checker, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -170,4 +170,4 @@ Library Checker の対応：
 - [kmjp「AtCoder ABC #137 : F - Polynomial Construction」](https://kmjp.hatenablog.jp/entry/2019/08/10/0930)：例題 ABC137 F の補間公式と組立除法による $O(p^2)$ の方針
 - [rsk0315「AtCoder Beginner Contest 137 F: Polynomial Construction」](https://rsk0315.hatenablog.com/entry/2019/08/28/235335)：例題 ABC137 F の $1 - (x - i)^{p-1}$ による割り算のない方針
 - [ikatakos「AtCoder Beginner Contest 208 E,F問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0704_abc208)：累積和を繰り返した値が多項式になることと次数の見積もり（解法の節だけを読んだ）
-- [yosupo「Library Checker」](https://github.com/yosupo06/library-checker-problems)：対応する問題の名前と制約（polynomial・other のディレクトリ）
+- [yosupo06「library-checker-problems」](https://github.com/yosupo06/library-checker-problems)：対応する問題の名前と制約（polynomial・other のディレクトリ）

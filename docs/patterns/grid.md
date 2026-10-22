@@ -10,7 +10,7 @@ kind: [案内, グラフ探索, DP]
 prerequisites: []
 related: [grid-graph, bfs, zero-one-bfs, extended-dijkstra, union-find, dp-grid, lattice-paths, inclusion-exclusion-dp, prefix-sum-2d, imos, sweep-line-2d, manhattan-chebyshev, coordinate-compression, parity, rotation-transform, brute-force, bipartite-matching, broken-profile-dp, operation-sequence]
 summary: H×W のマス目が出てくる問題で、問われ方から使う手法を引ける。マスを頂点とする最短路、右・下に進む DP、長方形の累積和、行と列の独立、市松模様の偶奇、45 度回転、盤面の回転へつなぐ。
-complexity: 探索・DP・累積和の前計算は O(HW)、長方形の和は 1 回 O(1)
+complexity: null
 signs:
   - {type: phrase, text: H×W のマス目で、スタートからゴールへの最小の移動回数}
   - {type: phrase, text: 右か下にだけ進む経路の数・経路上の値の最大}
@@ -32,7 +32,7 @@ sections:
   - {title: 斜めの移動・マンハッタン距離・ひし形の範囲 → 45 度回転・斜めの座標（manhattan-chebyshev）, anchor: diagonal}
   - {title: '盤面の回転・反転・平行移動 → 添字の対応の式・全部試す（rotation-transform, brute-force）', anchor: rotation}
   - {title: ドミノの配置・隣り合わないマスの選び方 → 二部マッチング・プロファイル DP, anchor: tiling}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 

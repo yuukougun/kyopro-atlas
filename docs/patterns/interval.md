@@ -10,7 +10,7 @@ kind: [案内, 区間クエリ, 累積和・差分]
 prerequisites: []
 related: [prefix-sum, prefix-sum-counting, two-pointers, contribution, monotonic-stack, dp-sequence-partition, interval-dp, imos, fenwick-tree, segment-tree, lazy-segment-tree, sparse-table, difference-sequence, offline-queries, mo-algorithm, interval-scheduling, interval-set, event-sort, sweep-line-2d, subsequence-and-substring]
 summary: 連続部分列や与えられた区間の集合が出てくる問題で、問われ方から使う手法を引ける。連続部分列を数える・選ぶ、区間に操作して質問する、区間の集合を選ぶ・つなぐ、の3つの型に分ける。
-complexity: 手法による。累積和は前計算 O(N)・1 回 O(1)、更新ありの区間の質問は 1 回 O(log N)
+complexity: null
 signs:
   - {type: phrase, text: 和が K（K の倍数）になる連続部分列の個数}
   - {type: phrase, text: すべての連続部分列についての最小値・最大値・2 番目の値の総和}
@@ -37,7 +37,7 @@ sections:
   - {title: 区間の和集合・塗りつぶし・残りの長さ → 区間を set で管理（interval-set）, anchor: union}
   - {title: '含まれる・交差する区間の数 → イベントソート・平面走査（event-sort, sweep-line-2d）', anchor: containment}
   - {title: 数列ではなく文字列の連続部分 → 部分列と部分文字列（subsequence-and-substring）, anchor: substrings}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -245,4 +245,4 @@ updated: 2026-10-22
 
 - [ikatakos「AtCoder Beginner Contest 189」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0123_abc189)：ABC189 C をヒストグラムの最大長方形と見る方針と、$O(N^2)$・単調スタックの解法
 - [oraclesqlpuzzle「ABC265-D Iroha and Haiku (New ABC Edition)」](https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc265-d.html)：ABC265 D の、累積和の上で始点からの和を二分探索する解法
-- [ikatakos「Polaris.AI プログラミングコンテスト 2026（AtCoder Beginner Contest 457）」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0509_abc457)：ABC457 E の 2 通りの形の場合分けと、右端の順に走査して二分探索する解法
+- [ikatakos「Polaris.AI プログラミングコンテスト 2026（AtCoder Beginner Contest 457）E,F問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0509_abc457)：ABC457 E の 2 通りの形の場合分けと、右端の順に走査して二分探索する解法

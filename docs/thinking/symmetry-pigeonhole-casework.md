@@ -18,14 +18,14 @@ signs:
   - {type: phrase, text: N = 1 や N が小さいときだけ答えの形が違う}
 acl: []
 frequency: A
-frequency_evidence: recent 4（abc457_f・abc459_d・abc462_e・abc463_f）・前提として届くページなし・古い ABC 6 問
+frequency_evidence: recent 4（abc457_f・abc459_d・abc462_e・abc463_f）・前提として届くページなし・古い ABC 3 問
 sections:
   - {title: 対称性で計算を半分にする（添字の小さい順の組の和・全体の XOR から 1 つ除く）, anchor: symmetry}
   - {title: 対称性で場合を減らす（N ≤ M に入れ替える）, anchor: symmetry-cases}
   - {title: 鳩の巣原理（必ず一致が起きる・探索の打ち切り回数）, anchor: pigeonhole, level: 水}
   - {title: 場合分け（端の場合・大小関係・操作の順序によらないこと）, anchor: casework}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

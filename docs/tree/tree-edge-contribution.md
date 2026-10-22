@@ -18,14 +18,14 @@ signs:
   - {type: constraint, text: N ≤ 2×10^5 の木で、全ペア（N^2/2 組）についての和を求める}
 acl: []
 frequency: B
-frequency_evidence: recent 1（abc479_e）・前提として届くページなし・古い ABC 4 問
+frequency_evidence: recent 1（abc479_e）・前提として届くページなし・古い ABC 3 問
 sections:
   - {title: 辺を通るペアは s(N−s) 個, anchor: edge-pairs}
   - {title: 森の成分数 = 頂点数 − 辺数 に分けて数える, anchor: forest-count}
   - {title: パス上の最大値の和（重みの小さい順に併合して数える型は Union-Find の応用へ）, anchor: max-on-path}
   - {title: 期待値・特定の色を通らないパスへの応用, anchor: expectation, level: 黄}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

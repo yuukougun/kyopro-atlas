@@ -20,7 +20,7 @@ signs:
   - {type: phrase, text: 答えを mod 2・mod 3 など小さい素数で求める}
 acl: [modint]
 frequency: A
-frequency_evidence: recent 6（abc453_e・abc458_e・abc459_e・abc463_f・abc463_g・abc471_e）・前提として 11 ページに届く（直接 4）・古い ABC 6 問
+frequency_evidence: recent 6（abc453_e・abc458_e・abc459_e・abc463_f・abc463_g・abc471_e）・前提として 11 ページに届く（直接 4）・古い ABC 3 問
 sections:
   - {title: fact を前から、ifact を後ろから作る理由, anchor: fact-ifact}
   - {title: 表の大きさ（H+W・N+K・2N など）と範囲外の 0, anchor: table-size}
@@ -30,8 +30,8 @@ sections:
   - {title: p = 2 では (n & k) == k、ピラミッドの係数を二項係数と見抜く, anchor: parity-pyramid, level: 青}
   - {title: mod を取らない正確な値（掛けてから割る・__int128）, anchor: exact}
   - {title: ACL では modint998244353 の inv()・pow() で自作する, anchor: acl}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -178,7 +178,7 @@ $$
 \binom{n}{k} \text{ が奇数} \iff k \text{ の 1 のビットが、} n \text{ でもすべて 1} \iff (n \text{ AND } k) = k
 $$
 
-C++ では `(n & k) == k` の 1 行で、表も要らない。たとえば $10 = 1010_2$、$3 = 0011_2$ では $3$ の最下位ビットが $10$ にないので、$\binom{10}{3} = 120$ は偶数である。
+C++ では `(n & k) == k` の 1 行で、表も要らない。たとえば $10 = 1010_2$、$3 = 0011_2$ では $3$ の最下位 bit が $10$ にないので、$\binom{10}{3} = 120$ は偶数である。
 
 この判定が効くのは、**隣り合う 2 つから 1 つを作る操作を繰り返すピラミッド** の問題である。長さ $N$ の列 $a_0, \dots, a_{N-1}$ から $b_i = a_i + a_{i+1}$ で長さ $N - 1$ の列を作ることを繰り返すと、最後の 1 つは次の式になる。
 
@@ -310,4 +310,4 @@ $\binom{n}{r} = \dfrac{n!}{r!\,(n-r)!}$ の分母を、$10^9 + 7$ が素数で�
 - [drken「AtCoder ARC 117 C - Tricolor Pyramid (2D, 青色, 600 点)」](https://drken1215.hatenablog.com/entry/2021/06/12/001400)：ピラミッドの係数と mod 3 への言い換え
 - [drken「AtCoder AGC 043 B - 123 Triangle (青色, 700 点)」](https://drken1215.hatenablog.com/entry/2020/03/22/165200)：差の絶対値の偶奇と、1 を含むかの場合分け
 - [drken「AtCoder ABC 281 G - Farthest City (黄色, 600 点)」](https://drken1215.hatenablog.com/entry/2022/12/13/173300)：法が素数とは限らないときのパスカルの三角形
-- [AtCoder Library のドキュメント（modint）](https://github.com/atcoder/ac-library/blob/master/document_ja/modint.md)：`inv()`・`pow()` の計算量と要件
+- [AtCoder Library「modint」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/modint.md)：`inv()`・`pow()` の計算量と要件

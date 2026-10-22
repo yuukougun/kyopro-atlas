@@ -18,15 +18,15 @@ signs:
   - {type: phrase, text: 最初に〜し、その結果に応じて〜するときの確率}
 acl: []
 frequency: A
-frequency_evidence: recent 1（abc463_f）・前提として 12 ページに届く（直接 6）・古い ABC 2 問
+frequency_evidence: recent 1（abc463_f）・前提として 12 ページに届く（直接 6）・古い ABC 4 問
 sections:
   - {title: 同様に確からしいとき：場合の数の比, anchor: ratio}
   - {title: 独立・排反・余事象, anchor: independence}
   - {title: 条件付き確率と全確率の公式, anchor: conditional}
   - {title: 期待値の定義, anchor: expectation}
   - {title: 浮動小数点の誤差と出力の桁数, anchor: precision}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

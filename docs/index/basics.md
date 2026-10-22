@@ -13,7 +13,7 @@ search:
 
 ## 計算量の見積もり（complexity-estimation） {#complexity-estimation}
 
-- id：`complexity-estimation`　レベル：基礎　段階：draft　type：technique
+- id：`complexity-estimation`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/complexity-estimation/
 - 別名：計算量、オーダー、制約から手法を逆算する、制約から考える、TLE の見積もり、ならし計算量、償却計算量、定数倍、time complexity、amortized analysis
 - 種類：計算量
@@ -34,7 +34,7 @@ search:
 
 ## bit 演算の基本と XOR の性質（bit-operations） {#bit-operations}
 
-- id：`bit-operations`　レベル：基礎　段階：draft　type：technique
+- id：`bit-operations`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/bit-operations/
 - 別名：ビット演算、bitwise operations、popcount、submask、最下位ビット、XOR の打ち消し
 - 種類：ビット演算
@@ -51,7 +51,7 @@ search:
 
 ## bit ごとに独立に考える（bitwise-independence） {#bitwise-independence}
 
-- id：`bitwise-independence`　レベル：水　段階：draft　type：technique
+- id：`bitwise-independence`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/bitwise-independence/
 - 別名：bit ごとの寄与、桁ごとに見る、bit ごとに分解、上位ビットから決める、XOR の和、bitwise decomposition
 - 種類：ビット演算、考察
@@ -71,7 +71,7 @@ search:
 
 ## 全探索の設計（brute-force） {#brute-force}
 
-- id：`brute-force`　レベル：基礎　段階：draft　type：technique
+- id：`brute-force`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/brute-force/
 - 別名：全列挙、工夫した全探索、総当たり、何を全探索するか、候補が少ない、盤面の全探索、ポリオミノ、brute force
 - 種類：全探索
@@ -91,7 +91,7 @@ search:
 
 ## bit 全探索と順列全探索（bit-full-search） {#bit-full-search}
 
-- id：`bit-full-search`　レベル：基礎　段階：draft　type：technique
+- id：`bit-full-search`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/bit-full-search/
 - 別名：ビット全探索、部分集合の全列挙、2^N 全探索、3 進全探索、next_permutation、N! 全探索、bit brute force
 - 種類：全探索、ビット演算
@@ -111,7 +111,7 @@ search:
 
 ## 再帰による全列挙（recursive-enumeration） {#recursive-enumeration}
 
-- id：`recursive-enumeration`　レベル：水　段階：draft　type：technique
+- id：`recursive-enumeration`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/recursive-enumeration/
 - 別名：DFS による全列挙、バックトラック、枝刈り、組分けの全列挙、グループ分けの全列挙、集合分割の全列挙、backtracking
 - 種類：全探索
@@ -132,7 +132,7 @@ search:
 
 ## ソートで考える（sorting-techniques） {#sorting-techniques}
 
-- id：`sorting-techniques`　レベル：基礎　段階：draft　type：technique
+- id：`sorting-techniques`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/sorting-techniques/
 - 別名：ソート、安定ソート、ペアのソート、sorting
 - 種類：ソート・座標圧縮、貪欲
@@ -149,7 +149,7 @@ search:
 
 ## 二分探索（binary-search） {#binary-search}
 
-- id：`binary-search`　レベル：基礎　段階：draft　type：technique
+- id：`binary-search`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/binary-search/
 - 別名：二分法、lower_bound、upper_bound、めぐる式二分探索、partition_point、binary search
 - 種類：二分探索
@@ -167,7 +167,7 @@ search:
 
 ## 答えで二分探索（binary-search-answer） {#binary-search-answer}
 
-- id：`binary-search-answer`　レベル：基礎　段階：draft　type：technique
+- id：`binary-search-answer`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/binary-search-answer/
 - 別名：決め打ち二分探索、答えの二分探索、最小値の最大化、最大値の最小化、判定問題、実数の二分探索、判定 DP、二分探索と DP、binary search on the answer、parametric search
 - 種類：二分探索
@@ -187,7 +187,7 @@ search:
 
 ## 座標圧縮（coordinate-compression） {#coordinate-compression}
 
-- id：`coordinate-compression`　レベル：基礎　段階：draft　type：technique
+- id：`coordinate-compression`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/coordinate-compression/
 - 別名：座圧、値の圧縮、離散化、coordinate compression
 - 種類：ソート・座標圧縮
@@ -205,7 +205,7 @@ search:
 
 ## イベントソートと平面走査の基本（event-sort） {#event-sort}
 
-- id：`event-sort`　レベル：水　段階：draft　type：technique
+- id：`event-sort`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/event-sort/
 - 別名：イベントソート、開始と終了をイベントにする、event sorting
 - 種類：ソート・座標圧縮、クエリ処理の工夫
@@ -224,7 +224,7 @@ search:
 
 ## 累積和（prefix-sum） {#prefix-sum}
 
-- id：`prefix-sum`　レベル：基礎　段階：draft　type：technique
+- id：`prefix-sum`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum/
 - 別名：prefix sum、cumulative sum、累積 GCD、累積 XOR、累積 max、左右からの累積
 - 種類：累積和・差分、区間クエリ
@@ -242,7 +242,7 @@ search:
 
 ## 累積和と連想配列で区間を数える（prefix-sum-counting） {#prefix-sum-counting}
 
-- id：`prefix-sum-counting`　レベル：基礎　段階：draft　type：technique
+- id：`prefix-sum-counting`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum-counting/
 - 別名：Zero-Sum Ranges、区間和が K、余りが等しい組を数える、累積和の mod、subarray sum equals K
 - 種類：累積和・差分
@@ -262,7 +262,7 @@ search:
 
 ## 2 次元累積和（prefix-sum-2d） {#prefix-sum-2d}
 
-- id：`prefix-sum-2d`　レベル：水　段階：draft　type：technique
+- id：`prefix-sum-2d`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum-2d/
 - 別名：二次元累積和、2D prefix sum、長方形の和、3 次元累積和、多次元の累積和
 - 種類：累積和・差分、区間クエリ
@@ -282,7 +282,7 @@ search:
 
 ## いもす法（imos） {#imos}
 
-- id：`imos`　レベル：基礎　段階：draft　type：technique
+- id：`imos`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/imos/
 - 別名：imos 法、差分配列、difference array、2 次元いもす法、階差、隣接差、等差数列の区間加算
 - 種類：累積和・差分
@@ -306,7 +306,7 @@ search:
 
 ## 差分列への言い換え（difference-sequence） {#difference-sequence}
 
-- id：`difference-sequence`　レベル：黄　段階：draft　type：technique
+- id：`difference-sequence`　レベル：黄　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/difference-sequence/
 - 別名：差分列、差分で言い換える、区間 ±1 の最小回数、区間操作を 2 点の操作に、difference sequence
 - 種類：累積和・差分、考察
@@ -325,7 +325,7 @@ search:
 
 ## 尺取り法（two-pointers） {#two-pointers}
 
-- id：`two-pointers`　レベル：基礎　段階：draft　type：technique
+- id：`two-pointers`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/two-pointers/
 - 別名：しゃくとり法、two pointers、2 ポインタ、スライディングウィンドウ、固定長の窓
 - 種類：尺取り・スライド窓
@@ -345,7 +345,7 @@ search:
 
 ## ランレングス圧縮（run-length-encoding） {#run-length-encoding}
 
-- id：`run-length-encoding`　レベル：基礎　段階：draft　type：technique
+- id：`run-length-encoding`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/run-length-encoding/
 - 別名：連長圧縮、RLE、塊ごとに考える、run-length encoding
 - 種類：文字列、考察
@@ -363,7 +363,7 @@ search:
 
 ## 半分全列挙（meet-in-the-middle） {#meet-in-the-middle}
 
-- id：`meet-in-the-middle`　レベル：水　段階：draft　type：technique
+- id：`meet-in-the-middle`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/meet-in-the-middle/
 - 別名：Meet in the Middle、半分全探索、折半全列挙
 - 種類：全探索、二分探索
@@ -381,7 +381,7 @@ search:
 
 ## 平均・中央値の最大化（fractional-binary-search） {#fractional-binary-search}
 
-- id：`fractional-binary-search`　レベル：水　段階：draft　type：technique
+- id：`fractional-binary-search`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/fractional-binary-search/
 - 別名：平均の最大化、比の最大化、中央値の最大化、分数計画、濃度の最大化、中央値の二分探索、中央値の中央値、fractional programming、Dinkelbach
 - 種類：二分探索
@@ -405,7 +405,7 @@ search:
 
 ## K 番目の値（kth-value） {#kth-value}
 
-- id：`kth-value`　レベル：青　段階：draft　type：technique
+- id：`kth-value`　レベル：青　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/kth-value/
 - 別名：K 番目を二分探索で求める、順位を数える、N^2 個の K 番目、K-th smallest
 - 種類：二分探索
@@ -422,7 +422,7 @@ search:
 
 ## 三分探索（ternary-search） {#ternary-search}
 
-- id：`ternary-search`　レベル：水　段階：draft　type：technique
+- id：`ternary-search`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/ternary-search/
 - 別名：三分法、黄金分割探索、凸関数の極値、凸関数、離散凸、増分が単調、ternary search
 - 種類：二分探索
@@ -441,7 +441,7 @@ search:
 
 ## 絶対値の和の最小化と中央値（median-absolute） {#median-absolute}
 
-- id：`median-absolute`　レベル：基礎　段階：draft　type：technique
+- id：`median-absolute`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/median-absolute/
 - 別名：中央値で絶対値最小、Σ|x − a_i|、マンハッタン距離の和の最小
 - 種類：ソート・座標圧縮、考察
@@ -460,7 +460,7 @@ search:
 
 ## 貪欲法の考え方と正当性（greedy-basics） {#greedy-basics}
 
-- id：`greedy-basics`　レベル：基礎　段階：draft　type：technique
+- id：`greedy-basics`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/greedy-basics/
 - 別名：グリーディ、Greedy、貪欲、交換しても悪化しない、マトロイド
 - 種類：貪欲
@@ -478,7 +478,7 @@ search:
 
 ## 区間スケジューリング・区間の串刺し（interval-scheduling） {#interval-scheduling}
 
-- id：`interval-scheduling`　レベル：基礎　段階：draft　type：technique
+- id：`interval-scheduling`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/interval-scheduling/
 - 別名：区間スケジューリング問題、区間を点で突く、Activity Selection、interval scheduling
 - 種類：貪欲、ソート・座標圧縮
@@ -496,7 +496,7 @@ search:
 
 ## 優先度付きキューを使う貪欲（greedy-priority-queue） {#greedy-priority-queue}
 
-- id：`greedy-priority-queue`　レベル：水　段階：draft　type：technique
+- id：`greedy-priority-queue`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/greedy-priority-queue/
 - 別名：priority_queue で貪欲、ヒープで貪欲、締め切り付きスケジューリング、後悔付き貪欲、小さい順に K 個を列挙、K-best enumeration
 - 種類：貪欲、データ構造
@@ -518,7 +518,7 @@ search:
 
 ## 交換論法と比較関数の設計（exchange-argument） {#exchange-argument}
 
-- id：`exchange-argument`　レベル：青　段階：draft　type：technique
+- id：`exchange-argument`　レベル：青　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/exchange-argument/
 - 別名：隣接交換、exchange argument、ソートの比較関数を作る、連結して最大・最小、a+b と b+a
 - 種類：貪欲、ソート・座標圧縮
@@ -537,7 +537,7 @@ search:
 
 ## 辞書順最小を前から決める貪欲（lexicographic-greedy） {#lexicographic-greedy}
 
-- id：`lexicographic-greedy`　レベル：基礎　段階：draft　type：technique
+- id：`lexicographic-greedy`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/lexicographic-greedy/
 - 別名：辞書順最小、lexicographically smallest、辞書順 K 番目、先頭から貪欲に決める
 - 種類：貪欲、文字列
@@ -555,7 +555,7 @@ search:
 
 ## 周期性の検出（periodicity） {#periodicity}
 
-- id：`periodicity`　レベル：基礎　段階：draft　type：technique
+- id：`periodicity`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/periodicity/
 - 別名：周期性、周期の検出、ρ 型、ループの検出、シミュレーションの高速化、cycle finding
 - 種類：ダブリング・分割統治
@@ -574,7 +574,7 @@ search:
 
 ## ダブリング（doubling） {#doubling}
 
-- id：`doubling`　レベル：水　段階：draft　type：technique
+- id：`doubling`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/doubling/
 - 別名：binary lifting、倍化、2^k 回後の表、ダブリング上の二分探索、doubling
 - 種類：ダブリング・分割統治
@@ -593,7 +593,7 @@ search:
 
 ## 再帰的な構造（recursion-structure） {#recursion-structure}
 
-- id：`recursion-structure`　レベル：基礎　段階：draft　type：technique
+- id：`recursion-structure`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/recursion-structure/
 - 別名：フラクタル、自己相似、再帰関数、レベル N の構造、recursive structure、fractal
 - 種類：ダブリング・分割統治
@@ -610,14 +610,14 @@ search:
 
 ## 分割統治（divide-and-conquer） {#divide-and-conquer}
 
-- id：`divide-and-conquer`　レベル：黄　段階：draft　type：technique
+- id：`divide-and-conquer`　レベル：黄　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/divide-and-conquer/
 - 別名：divide and conquer、分割統治法、マージソート、中央をまたぐ区間、区間ナップサック
 - 種類：ダブリング・分割統治
 - 前提：`recursion-structure`
 - サイン：
     - 言い回し：区間・部分列の全部の組について数える
-    - 言い回し：区間 [L, R] の品物だけを使うナップサックを多数のクエリで答える
+    - 言い回し：閉区間 [L, R] の品物だけを使うナップサックを多数のクエリで答える
     - 制約：N, Q ≤ 2×10^5 で、区間ごとに計算し直すと間に合わない
     - 式の形：左右に分けたとき、中央をまたぐものだけなら速く数えられる
     - 式の形：区間の最大値の位置で左右に分けると、それぞれが同じ形の問題になる

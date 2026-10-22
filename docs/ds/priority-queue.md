@@ -28,8 +28,8 @@ sections:
   - {title: 全体への加算と組む（入れるときに引き、出すときに足す）, anchor: with-offset}
   - {title: 削除できるヒープ（遅延削除：削除予定のヒープの top と一致したら両方から捨てる）, anchor: lazy-deletion}
   - {title: priority_queue と multiset の使い分け（任意の削除・両端・前後の要素が要るなら multiset）, anchor: vs-multiset}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

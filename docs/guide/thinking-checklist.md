@@ -31,7 +31,7 @@ sections:
   - {title: 有名な手法を当てはめる, anchor: q-known-methods}
   - {title: 一度離れる, anchor: q-step-away}
   - {title: 問題集の考察の型との対応, anchor: book-mapping}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -300,7 +300,7 @@ $N = 1, 2, 3$ や極端な入力（全部同じ値・単調な列・パス状の
 
 - [マイナビ出版『競技プログラミングの鉄則』](https://book.mynavi.jp/ec/products/detail/id=131288)：6 章の節の題名（対応表）
 - [kumonosu「問題解決のための「アルゴリズム×数学」が基礎からしっかり身につく本」の目次](https://kumonosu.cloudsquare.jp/program/table-of-contents/post-6047/)：5 章の節の題名（対応表）
-- [E869120/kyopro-tessoku（GitHub）](https://github.com/E869120/kyopro-tessoku)：6 章の例題 A36〜A45 の解答のコード（対応表）
+- [E869120「kyopro-tessoku」](https://github.com/E869120/kyopro-tessoku)：6 章の例題 A36〜A45 の解答のコード（対応表）
 - [E869120/math-algorithm-book（GitHub）](https://github.com/E869120/math-algorithm-book)：5 章の節末問題の解答のコード（対応表）
 - [Motsu_xe「解法キーアイデア集」](https://motsu-xe.hatenablog.com/entry/2019/12/17/173222)：問いの列の構成（誤読・制約・実験・仮定を足す・必要条件・別の問題を解く）
 - [kmyk「競技プログラミングの問題の解き方、そのマニュアル」](https://kmyk.github.io/blog/blog/2016/06/21/how-to-solve-problems-in-competitive-programming/)：有名な手法を順に当てはめる考え方、解けなかった原因の切り分け

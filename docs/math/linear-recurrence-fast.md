@@ -26,8 +26,8 @@ sections:
   - {title: きたまさ法（x^N mod 特性多項式）, anchor: kitamasa}
   - {title: Bostan-Mori（Q(x)Q(−x) で次数を半分にする）, anchor: bostan-mori}
   - {title: Berlekamp-Massey（漸化式を見つける）, anchor: berlekamp-massey}
-  - {title: ACL の convolution を使った実装, anchor: implementation}
-stage: draft
+  - {title: ACL の convolution を使った実装, anchor: library}
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -131,7 +131,7 @@ Berlekamp-Massey は、数列の最初の $M$ 項 $s_0, \dots, s_{M-1}$ から�
 
 見積もりが立たないまま「それらしい漸化式が出たから」と使うのは危ない。min や max を含む DP、法が素数でない計算、整数のまま大きくなる値には使えない。
 
-## ACL の convolution を使った実装 {#implementation}
+## ACL の convolution を使った実装 {#library}
 
 !!! info "ACL では"
     `atcoder::convolution(a, b)`（`<atcoder/convolution>`）が、2 つの列の畳み込み（法の既定は 998244353。テンプレート引数で NTT に向くほかの素数も指定できる）を $O((\lvert a \rvert + \lvert b \rvert) \log (\lvert a \rvert + \lvert b \rvert))$ で返す。法は NTT に向く素数でなければならない。線形漸化式そのものの関数は ACL にない。
@@ -218,7 +218,7 @@ Berlekamp-Massey は、今の漸化式で次の項を予測したずれ $\delta$
 - [ryuhe1「線形漸化的数列のN項目の計算」（Qiita）](https://qiita.com/ryuhe1/items/da5acbcce4ac1911f47a)：Fiduccia の方法と Bostan-Mori の手順、$P(x)$ の作り方、掛け算の回数の比較（約 2 対 3）
 - [Alin Bostan, Ryuhei Mori「A Simple and Fast Algorithm for Computing the N-th Term of a Linearly Recurrent Sequence」（arXiv:2008.08822）](https://arxiv.org/abs/2008.08822)：手法の原典と計算量 $O(M(d) \log N)$
 - [ikatakos「数列の漸化式の特定と第N項の計算」](https://ikatakos.com/pot/programming_algorithm/number_theory/berlekamp_massey)：Berlekamp-Massey に要る項の数（2d 項）と、Bostan-Mori との組み合わせの流れ
-- [ACL のドキュメント「Convolution」（GitHub）](https://github.com/atcoder/ac-library/blob/master/document_ja/convolution.md)：`convolution` の要件と計算量
+- [AtCoder Library「Convolution」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/convolution.md)：`convolution` の要件と計算量
 - [Library Checker の問題定義（GitHub）](https://github.com/yosupo06/library-checker-problems/tree/master/other)：kth_term_of_linearly_recurrent_sequence・find_linear_recurrence・consecutive_terms_of_linear_recurrent_sequence の内容と制約
 - [drken「TDPC (Typical DP Contest) T - フィボナッチ」](https://drken1215.hatenablog.com/entry/2023/05/02/160300)：例題の問いの確認と、母関数を作って Bostan-Mori を使う方針
 - [rui_er「题解：AT_abc436_g ABC436G Linear Inequation」（中国語）](https://www.cnblogs.com/ruierqwq/p/19355328/abc436g)：例題の母関数と、DP と Berlekamp-Massey と Bostan-Mori を組み合わせる別解

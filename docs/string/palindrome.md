@@ -15,7 +15,7 @@ complexity: 中心から伸ばす O(N^2)、Manacher は前処理 O(N) で区間�
 signs:
   - {type: phrase, text: 回文にするための最小の操作回数（書き換え・一斉置換）}
   - {type: phrase, text: 回文になる部分文字列の個数}
-  - {type: phrase, text: グラフの歩道の文字列が回文になる最短の長さ}
+  - {type: phrase, text: グラフのウォークの文字列が回文になる最短の長さ}
   - {type: phrase, text: 長さ K の回文を部分文字列に含まないように埋める方法の数}
   - {type: constraint, text: N ≤ 10^6 で、すべての中心（区間）について回文かを問う}
 acl: []
@@ -29,8 +29,8 @@ sections:
   - {title: グラフ上の回文：頂点の組を状態にして両端から BFS（出会う位置の偶奇）, anchor: palindrome-path}
   - {title: 外側から組み立てる（回文の式・約数）, anchor: build-outside-in, level: 青}
   - {title: Manacher：各中心の最長回文半径を O(N) で（Z と同じく内側をコピーする）, anchor: manacher, level: 青}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -119,7 +119,7 @@ $N$ が $10^4$ 程度なら $O(N^2)$ で間に合う。$N$ が $10^5$ を超え�
 - **同じ頂点で出会う**：真ん中が頂点で、長さは偶数。$(u, u)$ に距離 $d$ で着いたら長さ $2d$
 - **辺の両端で出会う**：真ん中が 1 本の辺で、長さは奇数。$(u, v)$ に距離 $d$ で着き、$u$ と $v$ を結ぶ辺があれば長さ $2d + 1$
 
-答えは、この 2 種類の候補の最小である。奇数長を忘れると、真ん中に 1 本の辺があるウォークを見落とす。BFS の距離は「両側で進めた回数」で、ウォークの長さはその 2 倍（+1）になる点にも気をつける。2 つの位置の組を状態にする考え方は [拡張ダイクストラの両端から伸ばす節](../graph/extended-dijkstra.md#two-ends) にもある。
+答えは、この 2 種類の候補の最小である。奇数長を忘れると、真ん中に 1 本の辺があるウォークを見落とす。BFS の距離は「両側で進めた回数」で、ウォークの長さはその 2 倍（+1）になる点にも気をつける。2 つの位置の組を状態にする考え方は [状態を頂点にするページの両端から伸ばす節](../graph/extended-dijkstra.md#two-ends) にもある。
 
 ??? question "確認問題：出会い方と長さの偶奇"
     内側へ向かう BFS で、$(u, v)$ に距離 3 で着き、$u$ と $v$ が文字 `x` の辺で結ばれていた。このウォークの長さはいくつか。また $(w, w)$ に距離 3 で着いたときはどうか。
@@ -291,11 +291,11 @@ $S$ を接頭辞に持つ回文は、$S$ のある接尾辞 $S[l, N)$ が回文�
 ## 参考 {#references}
 
 - [snuke「文字列の頭良い感じの線形アルゴリズムたち2」](https://snuke.hatenablog.com/entry/2014/12/02/235837)：Manacher の鏡のコピーと区切り文字、O(N) の理由
-- [ikatakos「AtCoder Beginner Contest 468 メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0725_abc468)：例題 ABC468 D の方針（中心から伸ばす）と文字列の長さの上限（解説の部分だけを参照）
+- [ikatakos「AtCoder Beginner Contest 468 D,E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0725_abc468)：例題 ABC468 D の方針（中心から伸ばす）と文字列の長さの上限（解説の部分だけを参照）
 - [comet725「ABC468 D」](https://qiita.com/comet725/items/72f8f924a4bfdb9e13cd)：例題 ABC468 D の奇数長と偶数長の中心をまとめる書き方
-- [ikatakos「AtCoder Beginner Contest 398 メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0322_abc398)：例題 ABC398 F の方針（最長の回文の接尾辞を Manacher・ハッシュで求める）（解説の部分だけを参照）
+- [ikatakos「ユニークビジョンプログラミングコンテスト2025 春（AtCoder Beginner Contest 398）F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0322_abc398)：例題 ABC398 F の方針（最長の回文の接尾辞を Manacher・ハッシュで求める）（解説の部分だけを参照）
 - [ikatakos「AtCoder Beginner Contest 394 メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0222_abc394)：例題 ABC394 E の状態と始まり（長さ 0 と 1 の回文）（解説の部分だけを参照）
-- [drken「AtCoder ABC 206 D - KAIBUNsyo」](https://drken1215.hatenablog.com/entry/2021/06/26/165800)：練習 ABC206 D の方針と、食い違う組を数えるだけでは誤りになる理由
+- [drken「AtCoder ABC 206 D - KAIBUNsyo (2Q, 緑色, 400 点)」](https://drken1215.hatenablog.com/entry/2021/06/26/165800)：練習 ABC206 D の方針と、食い違う組を数えるだけでは誤りになる理由
 - [merom686「ABC359」](https://merom686.hatenablog.com/entry/2024/06/23/014345)：練習 ABC359 D の方針（直前 K−1 文字の状態）
 - [ikatakos「AtCoder Beginner Contest 290 メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2023/0219_abc290)：練習 ABC290 E の組ごとの寄与と、値の等しい組の数え方（解説の部分だけを参照）
 - [merom686「ABC363」](https://merom686.hatenablog.com/entry/2024/07/21/020359)：力試し ABC363 F の方針（中の回文の数と外側の反転の組がどれも N の約数で 0 を含まないこと、積の途中のあふれ）

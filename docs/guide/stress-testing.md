@@ -21,7 +21,7 @@ sections:
   - {title: 注意, anchor: caveats}
   - {title: 実験で規則を予想する, anchor: experiment}
   - {title: インタラクティブ問題を手元で試す, anchor: interactive}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 

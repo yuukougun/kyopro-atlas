@@ -21,7 +21,7 @@ signs:
   - {type: shape, text: '距離を dist[頂点][向き・残り回数・偶奇] のように 2 次元以上で持ちたくなる'}
 acl: []
 frequency: A
-frequency_evidence: recent 3（abc453_d・abc456_e・abc463_e）・前提として 2 ページに届く（直接 2）・古い ABC 9 問
+frequency_evidence: recent 3（abc453_d・abc456_e・abc463_e）・前提として 2 ページに届く（直接 2）・古い ABC 10 問
 sections:
   - {title: 状態として持つべき情報を決める, anchor: choose-state}
   - {title: 状態数と遷移数の見積もり・状態を整数に詰める（配列で引くか map で持つか）, anchor: state-count}
@@ -34,8 +34,8 @@ sections:
   - {title: 資源を状態に持ち、上限で打ち切る, anchor: resource-state, level: 青}
   - {title: 訪問した集合を持つ（bitDP へのつなぎ）, anchor: visited-set, level: 青}
   - {title: 両端から伸ばす（回文の最短路）, anchor: two-ends, level: 青}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -351,7 +351,7 @@ graph LR
 - [ABC302 F. Merge Set](https://atcoder.jp/contests/abc302/tasks/abc302_f)（diff 1430）：共通の要素をもつ 2 つの集合を和集合に置き換える操作で、1 と M を両方含む集合を作るのに必要な最小の操作回数を求める
 - [典型90 054. Takahashi Number（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_bb)（diff —）：論文ごとの著者の一覧が与えられるとき、共著の関係をたどった研究者 1 からの距離（高橋数）を、各研究者について求める。
 - [ZONE2021 E. Sneaking](https://atcoder.jp/contests/zone2021/tasks/zone2021_e)（diff 1624）：グリッドの左上から右下へ、左右と下へは 1 マスずつ（マスごとに決まったコスト）、上へは i マスまとめて（コスト 1 + i）動けるとき、最小のコストを求める。
-- [ABC244 F. Shortest Good Path](https://atcoder.jp/contests/abc244/tasks/abc244_f)（diff 1661）：各頂点を通った回数の偶奇を表す 0/1 列 S のすべてについて、その偶奇になる最短の歩道の長さを求め、総和を答える
+- [ABC244 F. Shortest Good Path](https://atcoder.jp/contests/abc244/tasks/abc244_f)（diff 1661）：各頂点を通った回数の偶奇を表す 0/1 列 S のすべてについて、その偶奇になる最短のウォークの長さを求め、総和を答える
 
 </div>
 
@@ -371,7 +371,7 @@ graph LR
 <div class="kp-problems" data-role="challenge" markdown>
 
 - [ABC164 E. Two Currencies](https://atcoder.jp/contests/abc164/tasks/abc164_e)（diff 1877）：運賃が銀貨、所要時間が分の路線で、各都市で金貨を銀貨に両替できるとき、都市 1 から各都市への最短時間を求める
-- [ABC197 F. Construct a Palindrome](https://atcoder.jp/contests/abc197/tasks/abc197_f)（diff 1945）：各辺に文字が書かれた無向グラフで、頂点 1 から頂点 N への歩道のうち、通った辺の文字列が回文になるものの最短の長さを求める
+- [ABC197 F. Construct a Palindrome](https://atcoder.jp/contests/abc197/tasks/abc197_f)（diff 1945）：各辺に文字が書かれた無向グラフで、頂点 1 から頂点 N へのウォークのうち、通った辺の文字列が回文になるものの最短の長さを求める
 - [ARC061 E. Snuke's Subway Trip](https://atcoder.jp/contests/arc061/tasks/arc061_c)（diff 2502）：路線ごとに鉄道会社が決まっており、会社を乗り換えるたびに運賃が 1 かかるとき、駅 1 から駅 N への最小運賃を求める
 
 </div>

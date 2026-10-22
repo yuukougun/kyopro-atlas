@@ -24,8 +24,8 @@ sections:
   - {title: 配列の長さを部分木のサイズに合わせる, anchor: size-bounded}
   - {title: サイズを K で打ち切ると O(NK), anchor: cap-k}
   - {title: 頂点の状態と個数を同時に持つ, anchor: state-and-count}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

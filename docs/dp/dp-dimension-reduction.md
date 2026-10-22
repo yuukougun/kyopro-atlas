@@ -18,13 +18,13 @@ signs:
   - {type: shape, text: 'dp[i][a][b] の表が大きすぎ、同じ (i, a) なら b が大きい（小さい）ほど常に良い'}
 acl: []
 frequency: B
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 7 問
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 6 問
 sections:
   - {title: 上限で打ち切る（log 回で十分な量・目標以上をまとめる）, anchor: cap}
   - {title: 値と添字の入れ替え（同じ添字なら値が良い方が常に良いとき）, anchor: dp-swap-key-value}
   - {title: どれを添字に残すか（範囲が小さい量を選ぶ）, anchor: which-to-index}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

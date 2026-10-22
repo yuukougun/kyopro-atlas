@@ -26,7 +26,7 @@ sections:
   - {title: FPS・分割統治で一度に求める, anchor: fps}
   - {title: ライブラリでの使い方, anchor: library}
   - {title: 第 2 種との違い, anchor: vs-second-kind}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -214,8 +214,8 @@ Library Checker で確かめられる問題は[練習問題の節](#practice)に
 
 ## 参考 {#references}
 
-- [kmjp「AtCoder ABC #385 : G - Counting Buildings」](https://kmjp.hatenablog.jp/entry/2024/12/21/0930)：例題の、値を大きい順に挿入して 3 通りに分ける見方と、多項式の積で数える方針
-- [ikatakos「AtCoder Beginner Contest 385 F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/1221_abc385)：例題の方針（解法の節だけを読んだ）。差だけを状態にまとめ、$(y^{-1} + i + y)$ の積を小さい方から畳み込む
+- [kmjp「AtCoder ABC #385 (ユニークビジョンプログラミングコンテスト2024 クリスマス) : G - Counting Buildings」](https://kmjp.hatenablog.jp/entry/2024/12/21/0930)：例題の、値を大きい順に挿入して 3 通りに分ける見方と、多項式の積で数える方針
+- [ikatakos「ユニークビジョンプログラミングコンテスト2024 クリスマス（AtCoder Beginner Contest 385）E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/1221_abc385)：例題の方針（解法の節だけを読んだ）。差だけを状態にまとめ、$(y^{-1} + i + y)$ の積を小さい方から畳み込む
 - [kmjp「AtCoder ABC #247 : Ex - Rearranging Problem」](https://kmjp.hatenablog.jp/entry/2022/04/10/1100)：練習の方針。最小の swap 回数を巡回の個数に直し、上昇階乗を NTT で展開する
 - [ikatakos「AtCoder Beginner Contest 247 E,G,Ex問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0410_abc247)：練習の方針と学ぶための資料（解法の節だけを読んだ）。回数の偶奇と、色ごとの行の畳み込み
 - [Nyaan「Nyaan's Library: 有名な数列（fps/fps-famous-series.hpp）」](https://nyaannyaan.github.io/library/fps/fps-famous-series.hpp)：学ぶための資料。Taylor shift の倍化と、列 $c(n, K)$ を FPS の累乗で求める実装

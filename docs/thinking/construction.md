@@ -17,15 +17,15 @@ signs:
   - {type: phrase, text: 最大値を求めるが、答えに自然な上限がありそう}
 acl: []
 frequency: A
-frequency_evidence: recent 4（abc453_f・abc454_e・abc474_d・abc474_g）・前提として届くページなし・古い ABC 5 問
+frequency_evidence: recent 4（abc453_f・abc454_e・abc474_d・abc474_g）・前提として届くページなし・古い ABC 4 問
 sections:
   - {title: 小さい N で作って規則を一般化する, anchor: small-cases}
   - {title: 必要条件を先に挙げる, anchor: necessary-conditions}
   - {title: 上界・下界を示して達成する例を作る, anchor: bound-and-construct}
   - {title: 出力を検査するプログラムで確かめる, anchor: checker}
   - {title: ABC の構築の型（手順・数列・グラフ）, anchor: abc-patterns, level: 水}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

@@ -18,15 +18,15 @@ signs:
   - {type: phrase, text: チェス盤の塗り分け・ドミノの敷き詰め}
 acl: []
 frequency: A
-frequency_evidence: recent 5（abc454_e・abc459_g・abc460_d・abc467_e・abc474_g）・前提として 1 ページに届く（直接 1）・古い ABC 2 問
+frequency_evidence: recent 5（abc454_e・abc459_g・abc460_d・abc467_e・abc474_g）・前提として 1 ページに届く（直接 1）・古い ABC 1 問
 sections:
   - {title: 1 歩ごとに偶奇が入れ替わる, anchor: alternating}
   - {title: ちょうど K 回なら偶奇がそろうことが必要, anchor: exactly-k}
   - {title: 偶奇の条件でつながった成分（Union-Find）, anchor: components}
   - {title: 市松模様の偶奇, anchor: checkerboard, level: 青}
   - {title: 二部グラフ・ゲームとのつながり, anchor: bipartite-game}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -214,5 +214,5 @@ $L$ マスを通る道筋で、最初のマスの色を灰とすると、
 - [drken「AtCoder ABC 126 E - 1 or 2 (1Q, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2019/05/19/224500_1)：例題の方針（偶奇の関係のグラフと、連結成分の個数が答えになる理由）
 - [Reputeless「tenkei_90」](https://github.com/Reputeless/tenkei_90)：練習の方針（典型90 024 の要点）
 - [E869120「kyopro_educational_90」の 024 の解答](https://github.com/E869120/kyopro_educational_90/blob/main/sol/024.cpp)：練習の方針（差の合計と偶奇の判定）
-- [ikatakos「AtCoder Beginner Contest 454 E問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0418_abc454)：練習の方針（市松模様による可否と構築。解法の部分だけを参照）
+- [ikatakos「キーサイト・テクノロジープログラミングコンテスト（AtCoder Beginner Contest 454）E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0418_abc454)：練習の方針（市松模様による可否と構築。解法の部分だけを参照）
 - [ikatakos「AtCoder Beginner Contest 474 G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0906_abc474)：力試しの方針（N の偶奇・K の範囲と、2 行・2 列ずつ減らす構築。解法の部分だけを参照）

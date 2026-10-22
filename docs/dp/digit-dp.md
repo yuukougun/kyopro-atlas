@@ -19,15 +19,15 @@ signs:
   - {type: phrase, text: K 以下の X について、XOR や AND の条件を満たすものを数える・最大化する}
 acl: []
 frequency: A
-frequency_evidence: recent 2（abc465_e・abc466_g）・前提として 1 ページに届く（直接 1）・古い ABC 6 問
+frequency_evidence: recent 2（abc465_e・abc466_g）・前提として 1 ページに届く（直接 1）・古い ABC 5 問
 sections:
   - {title: N と一致しているかのフラグ（一致したままの道は 1 本だけ）, anchor: tight-flag}
   - {title: 問題の情報を状態に足す（桁和の余り・個数）, anchor: extra-state}
   - {title: leading zero を区別するとき, anchor: leading-zero}
   - {title: 2 進の桁 DP（XOR・AND）, anchor: binary}
   - {title: 割る数を全探索して桁 DP を繰り返す, anchor: fix-divisor}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

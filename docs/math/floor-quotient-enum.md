@@ -19,15 +19,15 @@ signs:
   - {type: shape, text: 'Σ_{i=1}^{N} f(⌊N/i⌋) の形の和'}
 acl: []
 verify: [enumerate_quotients]
-frequency: C
-frequency_evidence: recent 0・前提として 1 ページに届く（直接 1）・古い ABC 2 問
+frequency: B
+frequency_evidence: recent 0・前提として 1 ページに届く（直接 1）・古い ABC 5 問
 sections:
   - {title: 値が O(√N) 種類である理由（i が √N 以下か、√N より大きいか）, anchor: why-sqrt}
   - {title: 同じ商になる区間の右端 ⌊N/⌊N/l⌋⌋, anchor: block-end}
   - {title: √N を境に場合分けする（片方を √N まで全探索）, anchor: split-at-sqrt}
   - {title: 調和級数・floor sum との使い分け, anchor: vs-others}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

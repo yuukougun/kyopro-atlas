@@ -19,15 +19,15 @@ signs:
 acl: []
 verify: [lca]
 frequency: A
-frequency_evidence: recent 2（abc460_f・abc477_g）・前提として 6 ページに届く（直接 4）・古い ABC 5 問
+frequency_evidence: recent 2（abc460_f・abc477_g）・前提として 6 ページに届く（直接 4）・古い ABC 4 問
 sections:
   - {title: 深さをそろえてから同時に跳ぶ, anchor: jump}
   - {title: 距離 = dep(u) + dep(v) − 2 dep(lca), anchor: distance}
   - {title: K 個上の祖先（K を 2 進数に分けて跳ぶ）, anchor: kth-ancestor}
   - {title: パス上の最大値・和を表と一緒に持つ, anchor: path-aggregate}
   - {title: 条件を満たす最も遠い祖先, anchor: farthest-ancestor}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

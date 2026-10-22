@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 452" width="320" height="452" font-family="sans-serif" font-size="14">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 0 322 452" width="322" height="452" font-family="sans-serif" font-size="14">
 <defs><marker id="ar" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker><marker id="arb" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1f4e9a"/></marker></defs>
-<rect width="100%" height="100%" fill="#ffffff"/>
+<rect x="-2" y="0" width="322" height="452" fill="#ffffff"/>
 <text x="10" y="24" fill="#222">K = 13 = 1101（2 進）のとき</text>
 <text x="10" y="46" fill="#222">A を 2 乗していき、bit が 1 の段だけ掛ける</text>
 <text x="10" y="97.0" fill="#777" font-size="13">bit 0：1</text>

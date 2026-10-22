@@ -29,8 +29,8 @@ sections:
   - {title: 候補の数で見積もる（階乗・ベル数・約数の個数の最大）, anchor: count-candidates}
   - {title: 定数倍（配列と set・map の差・メモリの連続性・bitset）, anchor: constant-factor, level: 水}
   - {title: 複数テストケースは合計（ΣN）で見積もる, anchor: multiple-testcases}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

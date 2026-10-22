@@ -14,7 +14,7 @@ summary: 整数の集合から XOR で作れる値の全体を、最上位 bit �
 complexity: 挿入は 1 要素 O(B)（B は bit 数）で N 個なら O(NB)、最大値・最小化 O(B)、K 番目は簡約 O(B^2) の後に 1 回 O(B)
 signs:
   - {type: phrase, text: 部分集合（部分列）の XOR として作れる値の個数・最大値・K 番目}
-  - {type: phrase, text: 全ての値を XOR で作れるように最小コストで選ぶ}
+  - {type: phrase, text: すべての値を XOR で作れるように最小コストで選ぶ}
   - {type: phrase, text: 経路の重みが辺の重みの XOR で、同じ辺を何度通ってもよい（ウォーク）}
   - {type: constraint, text: A_i < 2^60 で N ≤ 10^5 程度}
 acl: []
@@ -28,7 +28,7 @@ sections:
   - {title: 簡約した基底と K 番目に小さい値, anchor: kth}
   - {title: コストの小さい順に基底へ入れる貪欲（線形マトロイド）, anchor: min-cost}
   - {title: グラフのウォークの XOR（全域木の根からの XOR と、閉路の XOR の基底）, anchor: xor-walk}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 

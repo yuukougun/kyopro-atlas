@@ -19,7 +19,7 @@ signs:
   - {type: shape, text: 'dp[i] が dp[i−1]・dp[i−2] など定数個の前の状態から決まる'}
 acl: []
 frequency: A
-frequency_evidence: recent 0・前提として 63 ページに届く（直接 19）・古い ABC 6 問
+frequency_evidence: recent 0・前提として 63 ページに届く（直接 19）・古い ABC 4 問
 sections:
   - {title: 状態・遷移・初期値・答えの 4 つを決める, anchor: four-parts}
   - {title: 最適化・数え上げ・可否判定を同じ骨組みで書く（演算と単位元・到達できない状態の表し方）, anchor: three-kinds}
@@ -27,8 +27,8 @@ sections:
   - {title: 貰う形にすると遷移元が区間になる（累積和でまとめる高速化へ）, anchor: pull-to-prefix-sum, level: 水}
   - {title: 貪欲で解けないことの確かめ方（反例から DP へ）, anchor: greedy-counterexample}
   - {title: DP の型の地図（列・区間・集合・桁・木・順列・確率・ゲーム・高速化）, anchor: map}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

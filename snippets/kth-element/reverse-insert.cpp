@@ -32,7 +32,7 @@ int main() {
     for (int j = 0; j < n; j++) empty.add(j, 1);
     vector<int> ans(n);
     for (int i = n - 1; i >= 0; i--) {           // 後に挿入したものから位置を決める
-        int j = empty.kth(p[i]);                 // 空きのうち p[i] 番目（p[i] は 1 始まり）
+        int j = empty.kth(p[i]);                 // 空きのうち p[i] 番目（p[i] は 1-indexed）
         ans[j] = i + 1;
         empty.add(j, -1);                        // 埋めた位置は空きでなくなる
     }

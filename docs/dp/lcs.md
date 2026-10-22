@@ -28,8 +28,8 @@ sections:
   - {title: 共通部分列の組の数（包除で重複を引く・2 次元の累積和）, anchor: count-pairs, level: 青}
   - {title: 最長回文部分列（S と反転の LCS）, anchor: palindromic-subsequence}
   - {title: LCS の値ごとに数える：DP の DP（内側の DP の 1 行を外側の状態にする）, anchor: dp-of-dp, level: 黄}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

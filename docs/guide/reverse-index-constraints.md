@@ -11,7 +11,7 @@ kind: [案内]
 prerequisites: []
 related: [reverse-index-signs, cheatsheet#complexity-and-constraints, complexity-estimation, harmonic-sum, cpp-io#tle-causes]
 summary: N の上限などの制約から、間に合う計算量と候補の手法を引ける。計算量から手法を引く逆向きの表も持ち、制約の帯ごとの候補のページは各ページの制約のサインから生成する。
-complexity: 目安は C++ の単純な処理で 1 秒に 10^8 回（軽い処理なら 10^9 回近く）。N = 2×10^5 で N log N ≈ 3.5×10^6、N^2 = 4×10^10
+complexity: null
 signs: []
 acl: []
 sections:
@@ -23,7 +23,7 @@ sections:
   - {title: 値や複数の制約から読めるサイン, anchor: value-signs}
   - {title: 見た目より速い・遅い計算量, anchor: deceptive}
   - {title: 計算量から手法を引く, anchor: complexity-to-methods}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -474,7 +474,7 @@ $N$ の上限のほかにも、値の上限や制約の組み合わせ方から�
 
 - [drken「計算量オーダーの求め方を総整理！ 〜 どこから log が出て来るか 〜」](https://qiita.com/drken/items/872ebc3a2b5caaa4a0d0)：1 秒あたりの演算回数の目安（$10^8$ 回）と、制約の大きさと計算量の対応
 - [drken「特集！知らないと損をする計算量の話」](https://qiita.com/drken/items/18b3b3db5735241465ef)：値の範囲と配列の添字、STL の操作の計算量
-- [algo-logic「競技プログラミングで解法を思いつくための典型的な考え方」](https://algo-logic.info/how-to-think-cp/)：制約の帯（$N \approx 1000$ で $O(N^2 \log N)$ など）と、小さい mod や意味ありげな定数から読めること
+- [アルゴリズムロジック「競技プログラミングで解法を思いつくための典型的な考え方」](https://algo-logic.info/how-to-think-cp/)：制約の帯（$N \approx 1000$ で $O(N^2 \log N)$ など）と、小さい mod や意味ありげな定数から読めること
 - [Motsu_xe「解法キーアイデア集」](https://motsu-xe.hatenablog.com/entry/2019/12/17/173222)：制約の帯（$N \lesssim 15$ で $O(3^N)$、$N \gtrsim 10^{12}$ で公式や桁 DP）と、制約に囚われすぎない注意
-- [kanpurin「競技プログラミング 典型問題メモ」](https://kanpurin.hatenablog.com/entry/2020/04/07/182948)：見た目より速い計算量（二乗の木 DP は見た目の O(N^3) ではなく O(N^2) で済む）
+- [かんプリン「競技プログラミング　典型問題メモ」](https://kanpurin.hatenablog.com/entry/2020/04/07/182948)：見た目より速い計算量（二乗の木 DP は見た目の O(N^3) ではなく O(N^2) で済む）
 - [cppreference「std::lower_bound」](https://en.cppreference.com/cpp/algorithm/lower_bound)：ランダムアクセスでないイテレータでは、イテレータの移動が線形になること

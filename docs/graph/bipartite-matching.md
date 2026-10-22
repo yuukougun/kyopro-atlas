@@ -26,8 +26,8 @@ sections:
   - {title: 答えの二分探索と完全マッチングの判定, anchor: binary-search}
   - {title: 構造で貪欲が通る特殊な場合との見分け, anchor: greedy-cases}
   - {title: 正則二部グラフの分解・辺彩色, anchor: edge-coloring, level: 発展}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -279,7 +279,7 @@ ACL があれば Hopcroft-Karp を自分で書く必要はほとんどない。K
 ## 参考 {#references}
 
 - [AtCoder Library「MaxFlow」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/maxflow.md)：`mf_graph` の宣言・計算量・辺の番号と `get_edge`
-- [AtCoder Library「Appendix / FAQ」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/appendix.md)：`flow` を何度も呼んだときの動き
+- [AtCoder Library「Appendix」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/appendix.md)：`flow` を何度も呼んだときの動き
 - [Wikipedia「Hopcroft–Karp algorithm」](https://en.wikipedia.org/wiki/Hopcroft%E2%80%93Karp_algorithm)：フェーズの数が $O(\sqrt{N})$ になる理由と計算量
 - [Wikipedia「Berge's theorem」](https://en.wikipedia.org/wiki/Berge%27s_theorem)：増加路がなければ最大であることの証明の筋
 - [Wikipedia「Edge coloring」](https://en.wikipedia.org/wiki/Edge_coloring)：二部グラフは最大次数の色数で辺を塗れること、正則二部グラフの完全マッチングへの分解、Alon の方法

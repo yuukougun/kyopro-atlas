@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 420" width="400" height="420" font-family="sans-serif" font-size="15">
-<rect x="0" y="0" width="400" height="420" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 427" width="400" height="427" font-family="sans-serif" font-size="15">
+<g transform="translate(0 7)">
+<rect x="0" y="-7" width="400" height="427" fill="#ffffff"/>
 <line x1="166" y1="22" x2="166" y2="164" stroke="#555" stroke-width="1.5" stroke-dasharray="5 4"/>
 <text x="166" y="16" text-anchor="middle" font-size="14">t=4</text>
 <line x1="200" y1="22" x2="200" y2="164" stroke="#555" stroke-width="1.5" stroke-dasharray="5 4"/>
@@ -49,4 +50,5 @@
 <text x="30" y="338" text-anchor="middle">5</text><text x="56" y="338">A 終了 → C 開始 → クエリ</text><text x="262" y="338">{B, C}</text><text x="344" y="338">2 本</text>
 <text x="30" y="366" text-anchor="middle">8</text><text x="56" y="366">B 終了 → クエリ</text><text x="262" y="366">{C}</text><text x="344" y="366">1 本</text>
 <text x="30" y="394" text-anchor="middle">9</text><text x="56" y="394">C 終了</text><text x="262" y="394">{ }</text><text x="344" y="394"></text>
+</g>
 </svg>

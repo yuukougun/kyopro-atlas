@@ -1,5 +1,5 @@
 // 長さ n で 1 がちょうど k 個の 0/1 列を辞書順（0 < 1）に並べたときの、
-// K 番目（1 始まり）の列を作り、逆にその列が何番目かを求める。n ≤ 60 とする。
+// K 番目（1-indexed）の列を作り、逆にその列が何番目かを求める。n ≤ 60 とする。
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -11,7 +11,7 @@ long long binom(int n, int k) {
 }
 
 // --8<-- [start:core]
-// 辞書順で K 番目（1 始まり）の列。1 ≤ K ≤ C(n, k) とする
+// 辞書順で K 番目（1-indexed）の列。1 ≤ K ≤ C(n, k) とする
 string kth(int n, int k, long long K) {
     string s;
     for (int i = 0; i < n; i++) {
@@ -27,7 +27,7 @@ string kth(int n, int k, long long K) {
     return s;
 }
 
-// 列 s が辞書順で何番目か（1 始まり）
+// 列 s が辞書順で何番目か（1-indexed）
 long long rank_of(const string& s) {
     int n = s.size(), k = count(s.begin(), s.end(), '1');
     long long r = 1;

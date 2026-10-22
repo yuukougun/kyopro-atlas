@@ -29,8 +29,8 @@ sections:
   - {title: 2 次元の入れ子（一方は昇順・もう一方は降順に並べる）, anchor: nesting, level: 青}
   - {title: 1 か所だけ変更できる LIS・木の上の LIS, anchor: variants, level: 青}
   - {title: Dilworth の定理（増加列への最小分割数＝最長減少部分列の長さ）, anchor: dilworth, level: 青}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -200,7 +200,7 @@ $a_i$ を含む増加部分列は、「$a_i$ で終わる左側」と「$a_i$ �
 
 - **何色で塗れるか**：同じ色が狭義増加なら、答えは広義減少列の最長で、$-a_i$ の列に `upper_bound` 版を回せば求まる
 - **2 次元の点を何本の鎖で覆えるか**：時刻と位置のように 2 つの座標がどちらも増える向きにしか進めない移動なら、一方でソートしてもう一方の列に直すと、必要な本数は減少列の最長になる。同じ $x$ の点は $y$ の昇順に並べる（[入れ子](#nesting)と同じく、同じ座標の並べ方を鎖の条件に合わせる）。斜めにしか動けない移動は、[45 度回転](../geometry/manhattan-chebyshev.md#rotate-45)で「上か右にしか動けない」形に直してから使う
-- **一般の半順序**：列でなく一般の DAG のパスで覆う問題は、[Dilworth の定理とパス被覆](../graph/dilworth-path-cover.md#path-cover)の二部マッチングを使う
+- **一般の半順序**：列でなく一般の DAG のパスで覆う問題は、[DAG の最小パス被覆](../graph/dilworth-path-cover.md#path-cover)の二部マッチングを使う
 
 ## 落とし穴 {#pitfalls}
 
@@ -302,4 +302,4 @@ $a_i$ を含む増加部分列は、「$a_i$ で終わる左側」と「$a_i$ �
 - [ikatakos「Polaris.AI プログラミングコンテスト 2026（AtCoder Beginner Contest 457）E,F問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0509_abc457)：練習の方針（45 度回転と減少列の最長。解法の部分だけを参照）
 - [ikatakos「JIJプログラミングコンテスト 2026（AtCoder Beginner Contest 476）F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0919_abc476)：力試しの方針（Dilworth の定理と popcount のブロック分け。解法の部分だけを参照）
 - [sigma425「Typical DP Contest (TDPC)」](https://sigma425.hatenablog.com/entry/2016/08/02/214547)：TDPC K が LIS に帰着すること
-- [AtCoder Library「Segment Tree」](https://github.com/atcoder/ac-library/blob/master/document_ja/segtree.md)：ACL の segtree の使い方と計算量
+- [AtCoder Library「Segtree」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/segtree.md)：ACL の segtree の使い方と計算量

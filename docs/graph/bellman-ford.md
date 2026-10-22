@@ -18,15 +18,15 @@ signs:
   - {type: constraint, text: 'N, M ≤ 数千（O(NM) が間に合う）'}
 acl: []
 frequency: B
-frequency_evidence: recent 0・前提として 1 ページに届く（直接 1）・古い ABC 3 問
+frequency_evidence: recent 0・前提として 1 ページに届く（直接 1）・古い ABC 5 問
 sections:
   - {title: N−1 回で十分な理由, anchor: why-n-minus-1}
   - {title: 答えに影響する負閉路だけを判定する（到達可能性で絞る・−∞ を伝える）, anchor: relevant-cycles}
   - {title: 最長路は符号を反転する, anchor: longest-path}
   - {title: SPFA の注意（最悪の計算量は同じ）, anchor: spfa}
   - {title: 負辺があってもダイクストラ法で済む場合との見分け（ポテンシャル）, anchor: vs-potential}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

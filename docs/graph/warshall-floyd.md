@@ -26,8 +26,8 @@ sections:
   - {title: 距離表を作ってから順列全探索・bitDP, anchor: with-enumeration}
   - {title: 距離以外の値を同じ形で求める（到達可能性・ボトルネック・2 つの基準）, anchor: beyond-distance}
   - {title: 迂回できる辺は不要, anchor: redundant-edges, level: 青}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -269,7 +269,7 @@ $d$ はすべての辺を残したグラフでの距離である。条件を満�
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [ABC338 F. Negative Traveling Salesman](https://atcoder.jp/contests/abc338/tasks/abc338_f)（diff 1835）：負の辺があり負閉路のない有向グラフで、すべての頂点を 1 回以上訪れる歩道の重みの最小値を求める
+- [ABC338 F. Negative Traveling Salesman](https://atcoder.jp/contests/abc338/tasks/abc338_f)（diff 1835）：負の辺があり負閉路のない有向グラフで、すべての頂点を 1 回以上訪れるウォークの重みの最小値を求める
 
 </div>
 
@@ -312,4 +312,4 @@ $d$ はすべての辺を残したグラフでの距離である。条件を満�
 - [E869120「競プロ典型 90 問 087 の想定解」（GitHub）](https://github.com/E869120/kyopro_educational_90/blob/main/sol/087.cpp)：練習 typical90_ci の 2 回の二分探索と無限の判定
 - [競プロはじめました「ABC243 E」](https://kyo-pro.hatenablog.com/entry/ABC243E)：練習 abc243_e の判定の条件（等号を含む・端点を除く）
 - [kmjp's blog「AtCoder ABC #143 : E - Travel by Car」](https://kmjp.hatenablog.jp/entry/2019/10/19/0900)：練習 abc143_e の 2 段階のワーシャルフロイド法と、回数から 1 を引くこと
-- [プロひろ「ABC338 F問題（Negative Traveling Salesman）を解く」](https://programming-hiroba.com/abc338-f/)：力試し abc338_f の方針（負の辺のある全点対の距離と bitDP、INF を飛ばす）
+- [programming-hiroba「ABC338 F問題（Negative Traveling Salesman）を解く」](https://programming-hiroba.com/abc338-f/)：力試し abc338_f の方針（負の辺のある全点対の距離と bitDP、INF を飛ばす）

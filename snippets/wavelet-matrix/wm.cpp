@@ -25,7 +25,7 @@ struct WaveletMatrix {
     }
 
     // --8<-- [start:core]
-    // [l, r) の k 番目（0 始まり）に小さい値
+    // [l, r) の k 番目（0-indexed）に小さい値
     int kth_smallest(int l, int r, int k) const {
         int res = 0;
         for (int d = 0; d < lg; d++) {

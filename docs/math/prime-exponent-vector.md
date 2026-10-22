@@ -26,8 +26,8 @@ sections:
   - {title: 平方因子を除いた核で、積が平方数になる組を数える（0 の扱い）, anchor: squarefree-kernel}
   - {title: 巨大な lcm を指数の最大で持つ, anchor: huge-lcm, level: 水}
   - {title: 特定の素数（2 など）の指数だけを比べる, anchor: single-prime, level: 水}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

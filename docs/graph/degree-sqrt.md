@@ -10,7 +10,7 @@ level: 青
 kind: [グラフ探索, クエリ処理の工夫]
 prerequisites: [graph-basics]
 related: [sqrt-decomposition, symmetry-pigeonhole-casework#pigeonhole, bitset-speedup]
-summary: 次数が √M を超える重い頂点は 2√M 個以下しかないことを使い、重い頂点と軽い頂点で処理を分けて、頂点とその隣接頂点すべてへのクエリを O(√M) にする。三角形の列挙や 4-サイクルの検出も同じ考え方で速くなる。
+summary: 次数が √M を超える重い頂点は 2√M 個以下しかないことを使い、重い頂点と軽い頂点で処理を分けて、頂点とその隣接頂点すべてへのクエリを O(√M) にする。三角形の列挙や長さ 4 の閉路の検出も同じ考え方で速くなる。
 complexity: 前処理 O(N + M)、隣接頂点すべてへの更新・質問は 1 回 O(√M)、三角形の列挙と長さ 4 の閉路の数え上げは O(N + M√M)
 signs:
   - {type: phrase, text: 頂点とその隣接頂点すべてに対する操作・質問が大量に来る}
@@ -18,15 +18,15 @@ signs:
   - {type: constraint, text: 'N, M, Q ≤ 2×10^5 で、1 つの頂点の次数が N 近くになりうる'}
 acl: []
 verify: [enumerate_triangles, counting_c4]
-frequency: C
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 1 問
+frequency: B
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 3 問
 sections:
   - {title: 重い頂点は 2√M 個以下, anchor: few-heavy}
   - {title: 配るか取りに行くかを次数で決める, anchor: push-pull}
   - {title: 三角形の列挙（次数の小さい方から向き付ける）, anchor: triangles, level: 黄}
   - {title: 長さ 4 の閉路の検出（鳩の巣原理で打ち切る）, anchor: four-cycles, level: 黄}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -237,12 +237,12 @@ Library Checker の Counting C4's は、辺ごとに「その辺を含む長さ 
 
 ## 参考 {#references}
 
-- [E869120「競プロ典型 90 問 083 解説」（GitHub の画像 083-01〜03）](https://github.com/E869120/kyopro_educational_90/tree/main/editorial)：例題の素朴な方法が遅くなる例（星形）、重い頂点の個数の評価としきい値 $\sqrt{2M}$ の決め方、公式の解説の組み方
+- [E869120「kyopro_educational_90（競プロ典型 90 問の解説とサンプルコード）」](https://github.com/E869120/kyopro_educational_90/tree/main/editorial)：083 の解説の画像（083-01〜03）。例題の素朴な方法が遅くなる例（星形）、重い頂点の個数の評価としきい値 $\sqrt{2M}$ の決め方、公式の解説の組み方
 - [E869120「083-02a.cpp」](https://github.com/E869120/kyopro_educational_90/blob/main/sol/083-02a.cpp)：例題の解答コード（軽い頂点が隣に配り、重い頂点は自分にだけ記録する組み方）
 - [oraclesqlpuzzle「ABC260-F Find 4-cycle」](https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc260-f.html)：練習の方針（T の頂点の組を記録し、T が 3000 頂点以下なので組の種類に上限があること）
 - [Library Checker「Enumerate Triangles」（問題の定義）](https://github.com/yosupo06/library-checker-problems/tree/master/graph/enumerate_triangles)：三角形の列挙の制約（単純グラフ、$N, M \le 10^5$）
 - [Library Checker「Counting C4's」（問題の定義）](https://github.com/yosupo06/library-checker-problems/tree/master/graph/counting_c4)：辺ごとの長さ 4 の閉路の個数（単純とは限らないグラフ、$N, M \le 3 \times 10^5$）
 - [kmjp「AtCoder ABC #350 (Promotion of AtCoderJobs) : G - Mediator」](https://kmjp.hatenablog.jp/entry/2024/04/22/0900)：練習 ABC350 G の次数で分ける解き方と O(N√N)
-- [No-play-Yes-splay「AtCoder Beginner Contest 350 解题报告」](https://www.cnblogs.com/No-play-Yes-splay/p/18148245/atcoder-beginner-contest-350-sol)：練習 ABC350 G の重い頂点だけ bitset を持つ解き方
+- [No_Play_Yes_Splay「AtCoder Beginner Contest 350 解题报告」](https://www.cnblogs.com/No-play-Yes-splay/p/18148245/atcoder-beginner-contest-350-sol)：練習 ABC350 G の重い頂点だけ bitset を持つ解き方
 - [ikatakos「サイシードプログラミングコンテスト2021（AtCoder Beginner Contest 219）F,G,H問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0918_abc219)：力試し ABC219 G の配る・取りに行くの使い分け（解説の部分だけを参照）
 - [kmjp「AtCoder ABC #219 (サイシードプログラミングコンテスト2021) : G - Propagation」](https://kmjp.hatenablog.jp/entry/2021/09/29/0900)：力試し ABC219 G の重い頂点の伝播を遅らせる方針

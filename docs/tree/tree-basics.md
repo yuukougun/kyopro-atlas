@@ -25,8 +25,8 @@ sections:
   - {title: 森の連結成分の数 = 頂点数 − 辺数, anchor: forest}
   - {title: 辺の値を子の頂点に寄せる, anchor: edge-to-child}
   - {title: 形の両極端（パスと星）でテストする, anchor: extremes}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

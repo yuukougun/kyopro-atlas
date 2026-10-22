@@ -1,5 +1,6 @@
-<svg width="460" height="240" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 240" font-family="sans-serif" font-size="15">
+<svg width="460" height="242" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 242" font-family="sans-serif" font-size="15">
 <rect width="100%" height="100%" fill="#ffffff"/>
+<g transform="translate(0 2)">
 <rect x="10" y="30" width="56" height="42" fill="#ffe0b3" stroke="#444" stroke-width="1.5"/>
 <text x="38.0" y="58" text-anchor="middle" fill="#222" font-size="20">1</text>
 <text x="38.0" y="22" text-anchor="middle" fill="#555">0</text>
@@ -42,4 +43,5 @@
 <circle cx="420" cy="176" r="18" fill="#d9f2d0" stroke="#2e7d32" stroke-width="2"/>
 <text x="420" y="182" text-anchor="middle" fill="#222" font-size="18">5</text>
 <text x="380" y="224" text-anchor="middle" fill="#444">対応する木の 1 つ</text>
+</g>
 </svg>

@@ -23,8 +23,8 @@ sections:
   - {title: 未訪問頂点の集合から取り出す, anchor: take-unvisited}
   - {title: 各頂点が 1 回しか取り出されない理由（O(N + M)）, anchor: complexity}
   - {title: 層ごとに最短路の本数を数える, anchor: count-by-layer}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -168,6 +168,14 @@ $\mathrm{cnt}[s] = 1$ から始め、距離の小さい層から順に求める�
     - 頂点 0 から補グラフの BFS をして $\mathrm{dist}$ を求める。$\mathrm{dist}[N-1] = -1$ なら $-1$ を出力する。
     - 頂点を距離ごとの層に分け、$\mathrm{cnt}[0] = 1$ から層の順に、$\mathrm{cnt}[v] = T_{d-1} - \sum \mathrm{cnt}[u]$（$u$ は $G$ での $v$ の隣で距離 $d - 1$ のもの）を mod 998244353 で求める。
     - $\mathrm{cnt}[N-1]$ を出力する。BFS も本数の計算も $O(N + M)$ である。コードは[層ごとに本数を数える節](#count-by-layer)の関数をそのまま使える。
+
+## 練習問題 {#practice}
+
+例題以外で練習に置ける AtCoder の問題は確認できなかった。
+
+### Library Checker
+
+- [Connected Components of Complement Graph](https://judge.yosupo.jp/problem/connected_components_of_complement_graph)：$N$ 頂点 $M$ 辺の単純無向グラフの補グラフを連結成分に分ける。[応用の型](#take-unvisited)のとおり、$\mathrm{rest}$ を共有して BFS をくり返す。
 
 ## 確認問題 {#quiz}
 

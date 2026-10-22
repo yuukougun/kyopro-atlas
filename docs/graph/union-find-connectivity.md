@@ -18,15 +18,15 @@ signs:
   - {type: phrase, text: 答えを決め打つと、つながっているかどうかで判定できる}
 acl: [dsu]
 frequency: B
-frequency_evidence: recent 0・前提として 2 ページに届く（直接 2）・古い ABC 5 問
+frequency_evidence: recent 0・前提として 2 ページに届く（直接 2）・古い ABC 6 問
 sections:
   - {title: 削除を逆順の追加にする（答えは逆順に記録して反転する）, anchor: reverse-deletion}
   - {title: しきい値の順に辺を足してクエリに答える（オフライン）, anchor: threshold}
   - {title: 超頂点と組み合わせる, anchor: super-vertex}
   - {title: 辺の追加と削除が混ざるとき（ロールバック Union-Find・オフライン動的連結性へ）, anchor: mixed-updates}
   - {title: 二分探索と連結判定の組合せ, anchor: binary-search, level: 青}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -273,10 +273,10 @@ Union-Find では、まとめ方が 2 通りある。
 
 - [AtCoder Library「DSU」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/dsu.md)：`dsu` の操作と計算量
 - [kyo-pro「ABC229 E - Graph Destruction」](https://kyo-pro.hatenablog.com/entry/ABC229E)：例題の方針（頂点を逆順に戻し、番号の大きい相手とだけ併合する）
-- [drken「AtCoder ABC 120 D - Decayed Bridges」](https://drken1215.hatenablog.com/entry/2019/03/03/224600)：例題の方針（逆順に橋を架け、大きさの積だけ不便さを減らす）と、答えに 64 ビット整数が要ること
+- [drken「AtCoder ABC 120 D - Decayed Bridges (1Q, 水色, 400 点)」](https://drken1215.hatenablog.com/entry/2019/03/03/224600)：例題の方針（逆順に橋を架け、大きさの積だけ不便さを減らす）と、答えに 64 ビット整数が要ること
 - [kyo-pro「ABC264 E - Blackout 2」](https://kyo-pro.hatenablog.com/entry/ABC264E)：練習の方針（発電所をまとめ、逆順に電線を戻す）
 - [kazun「ABC264 E - Blackout 2」](https://kazun-kyopro.hatenablog.com/entry/ABC/264/E)：練習の方針（成分ごとに都市と発電所の数を持つ）
-- [pyteyon「ABC040 D - 道路の老朽化対策について」](https://pyteyon.hatenablog.com/entry/2019/09/30/110202)：練習の方針（道路とクエリを年の降順に並べ、等号を含めない）
-- [drken「AtCoder ABC 181 F - Silver Woods」](https://drken1215.hatenablog.com/entry/2020/11/02/013900)：力試しの方針（壁を頂点にした連結判定、二分探索と長さの順に足す方法）
+- [pyteyon「ABC040: D - 道路の老朽化対策について」](https://pyteyon.hatenablog.com/entry/2019/09/30/110202)：練習の方針（道路とクエリを年の降順に並べ、等号を含めない）
+- [drken「AtCoder ABC 181 F - Silver Woods (黄色, 600 点)」](https://drken1215.hatenablog.com/entry/2020/11/02/013900)：力試しの方針（壁を頂点にした連結判定、二分探索と長さの順に足す方法）
 - [kmjp「AtCoder ABC 181 F」](https://kmjp.hatenablog.jp/entry/2020/11/01/0930)：力試しの方針（半径の二分探索）
-- [kmjp「AtCoder ABC 413 G」](https://kmjp.hatenablog.jp/entry/2025/07/05/0930)：障害物どうしの連結で通り抜けを判定する型
+- [kmjp「AtCoder ABC #413 (デンソークリエイトプログラミングコンテスト2025) : G - Big Banned Grid」](https://kmjp.hatenablog.jp/entry/2025/07/05/0930)：障害物どうしの連結で通り抜けを判定する型

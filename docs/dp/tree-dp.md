@@ -19,7 +19,7 @@ signs:
   - {type: phrase, text: 木の各頂点からほかの全頂点への距離の総和}
 acl: []
 frequency: B
-frequency_evidence: recent 0・前提として 4 ページに届く（直接 4）・古い ABC 10 問
+frequency_evidence: recent 0・前提として 4 ページに届く（直接 4）・古い ABC 8 問
 sections:
   - {title: 帰りがけ順に子から集める（再帰なしなら BFS 順の逆）, anchor: postorder}
   - {title: 頂点の選択を状態に足す（独立集合型）, anchor: vertex-states}
@@ -30,8 +30,8 @@ sections:
   - {title: 子ごとの「得」を大きい順に取る, anchor: greedy-children, level: 青}
   - {title: 二分探索と組み合わせて判定にする, anchor: with-binary-search, level: 黄}
   - {title: 部分木の情報をデータ構造で持ってマージする（マージテク）, anchor: tree-dp-merge, level: 黄}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -333,14 +333,14 @@ C++ では、子の map を `swap` で親に引き継ぐと、大きい方をコ
 
 ## 参考 {#references}
 
-- [Series_205「EDPC P ~ S 問題 解説」（Qiita）](https://qiita.com/Series_205/items/6bad5c32a1fce8dc2914)：例題 dp_p の白・黒の 2 状態と遷移
-- [ikatakos「AtCoder Beginner Contest 220」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0926_abc220)：例題 abc220_f の解法の節（差分の式はこのページで導いた）
+- [Series_205「Educational DP Contest (EDPC) P ~ S 問題 解説」](https://qiita.com/Series_205/items/6bad5c32a1fce8dc2914)：例題 dp_p の白・黒の 2 状態と遷移
+- [ikatakos「AtCoder Beginner Contest 220 E,F問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0926_abc220)：例題 abc220_f の解法の節（差分の式はこのページで導いた）
 - [merom686「ABC447」](https://merom686.hatenablog.com/entry/2026/03/01/013149)：例題 abc447_f の次数の条件と、パスを最も浅い頂点で場合分けする方針・長さ 1 の見落とし
 - [torus711「Haskell で AtCoder ABC447 A-F」](https://torus711.hatenablog.com/entry/2026/03/01/213520)：例題 abc447_f の 2 つの値（部分木で完結する最大・根の方向へ伸ばせる最大）と次数ごとの場合分け
 - [E869120「典型90 073 の解説」（GitHub）](https://github.com/E869120/kyopro_educational_90/blob/main/editorial/073.jpg)：練習 typical90_bu の 3 状態と、引き算で「両方」を求める遷移
 - [kazun「ABC239 E」](https://kazun-kyopro.hatenablog.com/entry/ABC/239/E)：練習 abc239_e の上位 K 個を集める方針
-- [gotoki_no_joe「ABC348」（Qiita）](https://qiita.com/gotoki_no_joe/items/6a3a10194d5a276281ca)：練習 abc348_e の問い
-- [drken「ABC133 E - Virus Tree 2」](https://drken1215.hatenablog.com/entry/2019/07/08/002700)：練習 abc133_e の根から順に選択肢を掛ける方針
+- [gotoki_no_joe「ABC348 A～F をHaskellで」](https://qiita.com/gotoki_no_joe/items/6a3a10194d5a276281ca)：練習 abc348_e の問い
+- [drken「AtCoder ABC 133 E - Virus Tree 2 (1Q, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2019/07/08/002700)：練習 abc133_e の根から順に選択肢を掛ける方針
 - [drken「ABC259 F - Select Edges」](https://drken1215.hatenablog.com/entry/2023/05/04/015400)：練習 abc259_f の 2 状態と、子の得を貪欲に取る方針
-- [drken「ABC359 G - Sum of Tree Distance」](https://drken1215.hatenablog.com/entry/2024/06/23/025552)：力試し abc359_g の色ごとの（深さの和, 個数）とマージテクでの距離の足し方
-- [drken「ABC246 G - Game on Tree 3」](https://drken1215.hatenablog.com/entry/2022/04/04/023800)：力試し abc246_g の決め打ちと「余裕」を表す木 DP の式
+- [drken「AtCoder ABC 359 G - Sum of Tree Distance (3D, 黄色, 600 点)」](https://drken1215.hatenablog.com/entry/2024/06/23/025552)：力試し abc359_g の色ごとの（深さの和, 個数）とマージテクでの距離の足し方
+- [drken「AtCoder ABC 246 G - Game on Tree 3 (3D, 黄色, 600 点)」](https://drken1215.hatenablog.com/entry/2022/04/04/023800)：力試し abc246_g の決め打ちと「余裕」を表す木 DP の式

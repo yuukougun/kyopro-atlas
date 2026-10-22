@@ -28,8 +28,8 @@ sections:
   - {title: 先に構造を出力してから答える, anchor: output-structure-first, level: 青}
   - {title: 適応的ジャッジ（最悪の場合の回数で考える）, anchor: adaptive-judge}
   - {title: 手元でのテスト（ジャッジ役のプログラムとパイプでつなぐ）, anchor: local-testing}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -277,9 +277,9 @@ $N \le 2 \times 10^5$ に対して上限は 20 回で、$\lceil \log_2 (2 \times
 - [merom686「ABC269」](https://merom686.hatenablog.com/entry/2022/09/17/232100)：練習の方針（行と列の取り違えの注意）
 - [merom686「ABC337」](https://merom686.hatenablog.com/entry/2024/01/21/020110)：練習の方針（番号のビットを友人に割り当てる）
 - [drken「ABC 305 F - Dungeon Explore」](https://drken1215.hatenablog.com/entry/2023/06/12/122200)：未知のグラフの DFS と、DFS 木の辺を 2 回ずつ通るので 2N 回に収まる理由
-- [drken「ABC 313 D - Odd or Even」](https://drken1215.hatenablog.com/entry/2023/08/06/010000)：XOR の質問を連立する方法
+- [drken「AtCoder ABC 313 D - Odd or Even (1D, 青色, 550 点)」](https://drken1215.hatenablog.com/entry/2023/08/06/010000)：XOR の質問を連立する方法
 - [kyopro_friends「AtCoder practice contest B問題 Interactive Sorting」](https://kyopro-friends.hatenablog.com/entry/2020/12/29/133303)：比較ソートの回数と、5 個を 7 回で並べるための情報量の議論
-- [drken「ABC 282 F - Union of Two Sets」](https://drken1215.hatenablog.com/entry/2022/12/29/112939)：先に区間を出力する型と Sparse Table とのつながり
+- [drken「AtCoder ABC 282 F - Union of Two Sets (2D, 青色, 600 点)」](https://drken1215.hatenablog.com/entry/2022/12/29/112939)：先に区間を出力する型と Sparse Table とのつながり
 - [merom686「ABC286」](https://merom686.hatenablog.com/entry/2023/01/21/233759)：互いに素な長さの閉路と、素数の冪を使う工夫
 - [ikatakos「AtCoder Beginner Contest 355 E 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0525_abc355)：区間の端点のグラフの最短路で最少の質問を選ぶ考え方（解説の部分だけを参照）
 - [picomikan「双方向パイプを使ってAtCoderのインタラクティブ問題を実験してみた！」](https://picomikan.net/atcoder-interactive/)：名前付きパイプと tee による手元でのテスト

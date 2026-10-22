@@ -17,14 +17,14 @@ signs:
   - {type: shape, text: 後ろから決めると選択肢が 1 つに決まる}
 acl: []
 frequency: A
-frequency_evidence: recent 2（abc466_f・abc477_d）・前提として届くページなし・古い ABC 3 問
+frequency_evidence: recent 2（abc466_f・abc477_d）・前提として届くページなし・古い ABC 2 問
 sections:
   - {title: 後ろから決めると一意になる, anchor: decide-from-back}
   - {title: 最後の操作を特定して逆再生する, anchor: undo-last}
   - {title: 締め切りを後ろから見る, anchor: deadlines}
   - {title: 削除を逆順の追加にする（Union-Find はグラフの章）, anchor: delete-to-add, level: 水}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

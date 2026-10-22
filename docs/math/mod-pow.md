@@ -26,8 +26,8 @@ sections:
   - {title: 結合法則を満たす演算の累乗（行列・写像の合成）, anchor: monoid-power}
   - {title: 'ACL の pow_mod と modint::pow', anchor: acl}
   - {title: 繰り返し二乗法を部品にする手法, anchor: building-block}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -184,5 +184,5 @@ $M$ で 2 回割るので、$10^N$ を $M^2$ で割った余りを考える。$1
 - [drken「AtCoder ARC 111 A - Simple Math 2 (1Q, 緑色, 300 点)」](https://drken1215.hatenablog.com/entry/2022/12/26/195928)：例題の方針（$10^N \bmod M^2$ を $M$ で割る導出）
 - [E869120「kyopro_educational_90 sol/069.cpp」](https://github.com/E869120/kyopro_educational_90/blob/main/sol/069.cpp)：練習の方針（塗り方の式と境界の場合分け）
 - [Kazun「AtCoder Beginner Contest 228 E 問題 Integer Sequence Fair」](https://kazun-kyopro.hatenablog.com/entry/ABC/228/E)：練習の方針（指数を $p - 1$ で割ること、底が $p$ の倍数の場合）
-- [AtCoder Library「Math」（document_ja/math.md）](https://github.com/atcoder/ac-library/blob/master/document_ja/math.md)：`pow_mod` の宣言・条件・計算量
-- [AtCoder Library「Modint」（document_ja/modint.md）](https://github.com/atcoder/ac-library/blob/master/document_ja/modint.md)：`modint::pow` の条件・計算量
+- [AtCoder Library「Math」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/math.md)：`pow_mod` の宣言・条件・計算量
+- [AtCoder Library「modint」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/modint.md)：`modint::pow` の条件・計算量

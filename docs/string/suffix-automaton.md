@@ -31,7 +31,7 @@ sections:
   - {title: 文字列アルゴリズムの逆問題（逆 Manacher・逆 Z）, anchor: inverse-string-problems}
   - {title: そのほかの名前（2 次元ローリングハッシュ・Suffix Tree・Boyer-Moore の検索）, anchor: others}
   - {title: ライブラリと Library Checker での確かめ方, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -219,4 +219,4 @@ Library Checker では次の問題で確かめられる（[練習問題](#practi
 - [Nyaan「run-enumerate.hpp」](https://nyaannyaan.github.io/library/string/run-enumerate.hpp)：分割統治と Z-algorithm による run の列挙の実装例
 - [maspy「library/string」](https://github.com/maspypy/library/tree/main/string)：inverse_z_algorithm・inverse_manacher（Union-Find で等しい組をまとめ、異なる組を避けて最小の文字を割り当てる）、find_runs・suffix_automaton・palindromic_tree の実装
 - [library-checker-problems「string」](https://github.com/yosupo06/library-checker-problems/tree/master/string)：練習の問題の内容と制約（問題文の定義だけを確かめた）
-- [ikatakos「AtCoder Beginner Contest 452」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0404_abc452)：例題 abc452_g の塊の分類と、一般化 Suffix Automaton・SA と LCP 配列の 2 通りの数え方（解法の部分だけ）
+- [ikatakos「AtCoder Beginner Contest 452 E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0404_abc452)：例題 abc452_g の塊の分類と、一般化 Suffix Automaton・SA と LCP 配列の 2 通りの数え方（解法の部分だけ）

@@ -19,7 +19,7 @@ signs:
   - {type: phrase, text: 2 人が交互に繰り返し、決着がつくまで続ける}
 acl: [modint]
 frequency: B
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 3 問
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 4 問
 sections:
   - {title: 自己ループの移項の一般化（戻る先が 1 か所）, anchor: generalize}
   - {title: 未知数を 1 つ残して a + bX で運ぶ, anchor: unknown}
@@ -27,8 +27,8 @@ sections:
   - {title: 等比級数で閉じる（交互に繰り返す）, anchor: geometric-series}
   - {title: 一般の連立方程式（掃き出し法は math へ）, anchor: linear-system}
   - {title: b = 1 のとき（期待値が無限大）, anchor: infinite}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

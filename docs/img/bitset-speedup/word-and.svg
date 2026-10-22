@@ -1,5 +1,6 @@
-<svg width="344" height="378" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 344 378" font-family="sans-serif" font-size="14">
+<svg width="346" height="379" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 346 379" font-family="sans-serif" font-size="14">
 <rect width="100%" height="100%" fill="#ffffff"/>
+<g transform="translate(2 1)">
 <text x="8" y="22" fill="#222">頂点の番号 k →（1 語は 64 個。</text>
 <text x="8" y="42" fill="#222">図は先頭の 14 個）</text>
 <text x="19" y="66" text-anchor="middle" fill="#555" font-size="12">0</text>
@@ -112,4 +113,5 @@
 <text x="8" y="324" fill="#555">64 個の AND と 1 の数え上げを、それぞれ</text>
 <text x="8" y="344" fill="#555">1 回の語の演算で行う</text>
 <text x="8" y="364" fill="#555">橙のマス：両方が 1（共通の隣接頂点）</text>
+</g>
 </svg>

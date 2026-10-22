@@ -25,7 +25,7 @@ sections:
   - {title: '|x − a| を足す・累積 min・平行移動', anchor: operations}
   - {title: 木の上で凸関数をマージする（マージテクと組む）, anchor: on-trees}
   - {title: 自作ライブラリでの扱い, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -181,6 +181,17 @@ Library Checker には Slope Trick を直接試す問題はない（2026-10-22 �
     - ABC127 F：更新では $\lvert x - a \rvert$ を足して $b$ を定数として足す。質問には $l_0$（最小にする $x$ のうち最も小さいもの）と $\mathrm{min}_f$ を答える。[2 つのヒープで中央値を管理する](#two-heaps)形そのもので、Slope Trick の最初の練習になる
     - ARC123 D：増加の列を $B$、減少の列を $C = A - B$ とし、$\mathrm{dp}[i][x]$ を「$B_i = x$ のときの $i$ 番目までの絶対値の和の最小」とする。$B_{i-1} \le B_i$ と $C_{i-1} \ge C_i$ をまとめると、前の値 $y$ への制約は $y \le x - \max(0, A_i - A_{i-1})$ になる。各 $i$ で「$R$ を空にする → $\max(0, A_i - A_{i-1})$ だけ平行移動 → $\lvert x \rvert$ と $\lvert x - A_i \rvert$ を足す」を行う（$i = 1$ では足すだけ）。B と C を貪欲に作ってから全体をずらし、中央値で調整する解き方もある
 
+## 力試し {#challenge}
+
+<div class="kp-problems" data-role="challenge" markdown>
+
+- [ABC458 G. Children Yearn for the Evil Kindergarten](https://atcoder.jp/contests/abc458/tasks/abc458_g)（diff 2831）：毎日、集めたメダルにその日の分 $A_i$ を足して園児に配り直し、$B_i$ 枚に満たない園児は脱落、残りは $B_i$ 枚を失い、$C_i$ 枚以上を持つ園児は脱出できる。$N$ 日で脱出できる人数の最大を求める。
+
+</div>
+
+??? note "力試しの方針"
+    - **ABC458 G**：メダルは全員の分をまとめて持つとみてよい。$i$ 日目には $A_i$ 枚が入り、残っている 1 人につき $B_i$ 枚を払い、さらに 1 人につき $C_i$ 枚で脱出させられる。答えの人数 $m$ で二分探索し、$m$ 人を脱出させられるかを判定する。$\mathrm{dp}[j]$ を「$j$ 人が脱出済みのときの手元のメダルの最大」とすると、1 日の遷移は「$A_i$ を足す（定数の加算）」「$B_i (m - j)$ を引く（1 次関数を足すので、傾きがすべて $B_i$ 増える）」「傾き $-C_i$ の直線との $(\max, +)$ 畳み込み（$-C_i$ より急な下りの傾きが $-C_i$ にそろう）」の 3 つで、$\mathrm{dp}$ は $j$ について上に凸な折れ線のまま保たれる。傾きは右ほど小さいので、畳み込みで変わるのは右端の側だけである。そこで傾きの変わる点を左から順に（傾き, 長さ）の組でスタックに積み、傾きへの一律の加算は遅延の値 1 つで持つ。各日の操作はスタックの末尾を取り除いて 1 組積むだけになり、日の終わりに値が負になった右端の部分（脱落したことになる）も末尾から削る。判定はならし $O(N)$ で、上の表の 2 つのヒープの代わりに片側のスタックで足りる Slope Trick の変形である
+
 ## 使い分け {#comparison}
 
 - 関数の最小値だけが要り、更新が $\lvert x - a \rvert + b$ だけなら、[2 つのヒープで中央値を保つ](../ds/top-k-multiset.md#median)だけで足りる（[2 つのヒープで中央値を管理する](#two-heaps)）
@@ -192,9 +203,10 @@ Library Checker には Slope Trick を直接試す問題はない（2026-10-22 �
 - [maspy「slope trick (1) 解説編」](https://maspypy.com/slope-trick-1-%e8%a7%a3%e8%aa%ac%e7%b7%a8)：表し方、各操作の更新の式（片側の折れ線を足すときの最小値の増え方、区間の min のずらし方）、遅延の加算
 - [maspy「slope trick (2) 問題編」](https://maspypy.com/slope-trick-2-%e5%95%8f%e9%a1%8c%e7%b7%a8)：数列を単調にする DP、木の上でマージするときの計算量と併合できるヒープの話、練習の問題の一覧
 - [kmjp「AtCoder ABC #217 : H - Snuketoon」](https://kmjp.hatenablog.jp/entry/2021/09/05/0930)：例題の方針（0 をたくさん入れて初期位置を表す、時刻の差で左右のヒープをずらす）
+- [ikatakos「SMBCプログラミングコンテスト #1（AtCoder Beginner Contest 458）F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0516_abc458)：力試し ABC458 G の方針（メダルをまとめて持つ言い換え、人数の二分探索、上に凸な折れ線を傾きのスタックで持つ判定。解法の節だけを参照）
 - [ikatakos「AtCoder Beginner Contest 217 G,H問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0904_abc217)：例題の方針の確認（解法の節だけを読んだ）
 - [drken「AtCoder ABC 127 F - Absolute Minima (2D, 黄色, 600 点)」](https://drken1215.hatenablog.com/entry/2019/06/15/114700)：練習 ABC127 F の方針（定数を分けて持ち、中央値で最小値を求める）
 - [kmjp「AtCoder ARC #123 : D - Inc, Dec - Decomposition」](https://kmjp.hatenablog.jp/entry/2021/09/16/0930)：練習 ARC123 D の別解（貪欲に作ってからずらす解き方）
 - [ei1333「Luzhiled's Library: Slope Trick」](https://ei1333.github.io/library/structure/others/slope-trick.hpp.html)：学ぶための資料。ライブラリの関数の切り分けとマージの計算量
 - [hitonanode「Slope trick（区分線形凸関数に関する特定の更新を高速に扱う手法）」](https://hitonanode.github.io/cplib-cpp/other_algorithms/slope_trick.hpp.html)：学ぶための資料。空のヒープで ±∞ を返す書き方と、値の取得が破壊的になる点
-- [yosupo「library-checker-problems」](https://github.com/yosupo06/library-checker-problems)：Slope Trick を直接試す問題がないことの確認（問題の一覧）
+- [yosupo06「library-checker-problems」](https://github.com/yosupo06/library-checker-problems)：Slope Trick を直接試す問題がないことの確認（問題の一覧）

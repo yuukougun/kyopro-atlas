@@ -30,8 +30,8 @@ sections:
   - {title: 2 つの木をつないだ直径, anchor: join-trees, level: 青}
   - {title: 中心と半径・直径の個数, anchor: center, level: 黄}
   - {title: 長鎖分解（最も深い子へつなぐ分解と、最も遠い葉を順に選ぶ貪欲）, anchor: long-path-decomposition, level: 黄}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -319,7 +319,7 @@ $D$ が奇数なら、両側の個数を $\alpha, \beta$ として $\alpha \beta
 - [drken「AtCoder ABC 361 E - Tree and Hamilton Path 2」](https://drken1215.hatenablog.com/entry/2024/07/07/153129)：例題 ABC361 E の方針と、$2W - D$ になる理由
 - [drken「競プロ典型 90 問 003 - Longest Circular Road（2Q, ★4）」](https://drken1215.hatenablog.com/entry/2021/06/12/181400)：練習 典型90 003 の方針
 - [drken「AtCoder ABC 019 D - 高橋くんと木の直径 (1Q, 試験管水色)」](https://drken1215.hatenablog.com/entry/2021/06/14/001500)：練習 ABC019 D の方針
-- [merom686「ABC447」の参加記](https://merom686.hatenablog.com/entry/2026/03/01/013149)：練習 ABC447 F の木 DP と、次数の条件の場合分け
+- [merom686「ABC447」](https://merom686.hatenablog.com/entry/2026/03/01/013149)：練習 ABC447 F の木 DP と、次数の条件の場合分け
 - [torus711「Haskell で AtCoder ABC447 A-F」](https://torus711.hatenablog.com/entry/2026/03/01/213520)：練習 ABC447 F の問いと DP の 2 つの値
 - [gotoki_no_joe「ABC401」の解説記事](https://qiita.com/gotoki_no_joe/items/36c02a9cff7cf61b3106)：練習 ABC401 F の、つないだ直径の式と和の数え方
 - [ikatakos「AtCoder Beginner Contest 460 E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0530_abc460)：練習 ABC460 F の、最も遠い 2 点の合成とセグメント木（解法の節だけを読んだ）

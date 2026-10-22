@@ -17,16 +17,16 @@ signs:
   - {type: phrase, text: すべての区間を最少の点（串）で突く}
   - {type: constraint, text: N ≤ 2×10^5 本の区間で、座標は 10^9 まで}
 acl: []
-frequency: B
-frequency_evidence: 古い ABC で繰り返し出た定番（最近30回の出現は0。手で B にした）
+frequency: C
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 2 問
 sections:
   - {title: 右端の順に選ぶ理由（交換論法）, anchor: why-right-end}
   - {title: 区間の串刺し（最少の点で突く）, anchor: stabbing}
   - {title: 左端の順・長さの順が失敗する例, anchor: counterexamples}
   - {title: 処理時間と締め切りがある場合（優先度付きキューの貪欲へ）, anchor: deadlines}
   - {title: 区間に重みがあるなら DP, anchor: weighted}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

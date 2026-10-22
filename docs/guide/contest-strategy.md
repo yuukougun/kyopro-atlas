@@ -25,7 +25,7 @@ sections:
   - {title: 終了前の 10〜15 分, anchor: last-minutes}
   - {title: 生成 AI のルール, anchor: ai-rules}
   - {title: 終了後の振り返り, anchor: after-contest}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -217,13 +217,13 @@ AtCoder は、ABC・ARC・AGC の開催中に問題文やその要約を生成 A
 - [E869120「レッドコーダーが教える、競プロ・AtCoder上達のガイドライン【中級編：目指せ水色コーダー！】」](https://qiita.com/e869120/items/eb50fdaece12be418faa)：水色の時間の目安
 - [E869120「レッドコーダーが教える、競プロ・AtCoder上達のガイドライン【上級編：目指せレッドコーダー！】」](https://qiita.com/e869120/items/acba3dd8649d913102b5)：黄色の時間の目安と ABC148 の全完の時刻の例
 - [drken「AtCoder コンテストについての tips」](https://qiita.com/drken/items/8a6f139158cde8a61dce)：完答数とパフォーマンスの目安、同点のときの順位、終了前に問題について書かないこと
-- [「AtCoder」（Wikipedia 日本語版）](https://ja.wikipedia.org/wiki/AtCoder)：ペナルティの時間と数え方、ABC の形式の変遷
+- [日本語版 Wikipedia「AtCoder」](https://ja.wikipedia.org/wiki/AtCoder)：ペナルティの時間と数え方、ABC の形式の変遷
 - [ToastUz「AtCoderで生成AIをフル活用！2025年の競技プログラミング術」](https://qiita.com/ToastUz/items/98a4ff7fd63a061ef18d)：生成 AI のルールの版ごとの変遷
 - [Youteru「数狂、遂に入水達成(入水の心得3つ)」](https://qiita.com/Youteru/items/074eafe7fc7b693aca39)：E と F の選び方（F を最低 3 分読む）
 - [mackerel38「AtCoder 入青しました【色変記事】」](https://qiita.com/poe4294967296/items/0fdb4547eee65d9e751a)：得意な分野の後ろの問題を先に解く
 - [Iroha_3856「入黄するまでに考えたこと」](https://iroha-3856.hatenablog.com/entry/2025/07/06/171457)：順位表を見ない約束、後ろから解く戦略、E・F を 10〜20 分で解く目標
 - [siooisi「入水したのでいろいろ書いた」](https://qiita.com/siooisi/items/e50013e4ee7d615cba37)：4 完の早解きで水のパフォーマンスに届く時間
 - [fken_prime_57「[AtCoder]プログラミング未経験だった大学生が8か月半で入水した方法」](https://qiita.com/Gifken/items/12194b9ab5cf765cfd0d)：水のパフォーマンスには 4 完の早解きか 5 完が要ること
-- [blueberry1001「【Atcoder】高校2年生でAtcoder黄色になりました」](https://qiita.com/bluebery1001/items/3253399ebf287e197346)：7 問体制で黄色を目指す目安
+- [bluebery1001「【Atcoder】高校2年生でAtcoder黄色になりました」](https://qiita.com/bluebery1001/items/3253399ebf287e197346)：7 問体制で黄色を目指す目安
 - [Yoyoyo8128「AtCoderで入黄しました！」](https://qiita.com/Yoyoyo8128/items/57e089cb66f9fdaa864a)：青 diff までをペナルティなしで速く解くこと
 - [kmyk「競技プログラミングの問題の解き方、そのマニュアル」](https://kmyk.github.io/blog/blog/2016/06/21/how-to-solve-problems-in-competitive-programming/)：詰まったときの手順と、解けなかった原因の切り分け

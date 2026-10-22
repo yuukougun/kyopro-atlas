@@ -18,15 +18,15 @@ signs:
   - {type: phrase, text: 奇数長の閉路があるか}
 acl: [dsu]
 frequency: A
-frequency_evidence: recent 2（abc451_f・abc472_e）・前提として 5 ページに届く（直接 2）・古い ABC 3 問
+frequency_evidence: recent 2（abc451_f・abc472_e）・前提として 5 ページに届く（直接 2）・古い ABC 2 問
 sections:
   - {title: BFS・DFS で塗る（非連結なら成分ごとに）, anchor: coloring}
   - {title: 二部グラフでないことと奇閉路があることは同じ, anchor: odd-cycle}
   - {title: 成分ごとの色の数を使う数え上げ, anchor: count-by-color}
   - {title: Union-Find（頂点を 2 倍にする・偶奇を持つ）で判定する, anchor: union-find}
   - {title: 木・4 近傍のグリッドは必ず二部グラフ, anchor: always-bipartite}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

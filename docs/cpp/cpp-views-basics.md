@@ -26,8 +26,8 @@ sections:
   - {title: 'split と join：文字列を区切る、vector の vector を平らにする', anchor: split-join}
   - {title: 'common：イテレータの組を取る古いコンストラクタに渡すとき', anchor: common}
   - {title: 'view の寿命：元のコンテナより長く使わない', anchor: lifetime}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 cpp_std: 20
 gcc_min: 13
 atcoder: true

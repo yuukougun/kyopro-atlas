@@ -29,8 +29,8 @@ sections:
   - {title: 最大値を固定して上位 K 個を保つ, anchor: fix-max-keep-k}
   - {title: 小さい順に K 個を列挙する（取り出したら次の候補を入れる）, anchor: k-best}
   - {title: 選んだものを後から入れ替える（後悔付き貪欲。一般形は Alien DP のページ）, anchor: regret}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

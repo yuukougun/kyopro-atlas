@@ -30,8 +30,8 @@ sections:
   - {title: 選択がある期待値：選択は max、偶然は平均, anchor: choice}
   - {title: 遷移を累積和でまとめる, anchor: prefix-sum, level: 青}
   - {title: 前向きの確率 DP との使い分け, anchor: vs-probability-dp}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -335,4 +335,4 @@ $$
 - [DeltaStruct「ABC314 E」](https://qiita.com/DeltaStruct/items/08a55509095a471c5371)：練習 ABC314 E のルーレットごとの移項と最小の選び方
 - [kmjp「ABC144 F」](https://kmjp.hatenablog.jp/entry/2019/10/28/0930)：力試し ABC144 F の塞ぐ通路の選び方と計算量
 - [kmjp「Typical DP Contest : J - ボール」](https://kmjp.hatenablog.jp/entry/2013/09/09/1030)：力試し TDPC J の問いと、集合の状態・移項・最小の取り方
-- [AC Library の modint のドキュメント](https://github.com/atcoder/ac-library/blob/master/document_ja/modint.md)：割り算の要件と計算量
+- [AtCoder Library「modint」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/modint.md)：割り算の要件と計算量

@@ -30,7 +30,7 @@ sections:
   - {title: ボロノイ図・ドロネー三角形分割, anchor: voronoi}
   - {title: 線分の交点の列挙（Bentley-Ottmann）, anchor: segment-intersections}
   - {title: 自作するときの要点と Library Checker, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -203,7 +203,7 @@ Library Checker に半平面交差の問題はなく、自作したら小さい�
 - [Closest Pair of Points](https://judge.yosupo.jp/problem/closest_pair)：最近点対（このページの検証問題）。複数のテストケースがあり、$N$ の総和は $5 \times 10^5$ まで
 - [Furthest Pair](https://judge.yosupo.jp/problem/furthest_pair)：最遠点対（このページの検証問題）。同じ点や一直線上の点も入る
 - [Euclidean MST](https://judge.yosupo.jp/problem/euclidean_mst)：ユークリッド距離の最小全域木。ドロネー三角形分割の辺から作る
-- [Line Add Get Min](https://judge.yosupo.jp/problem/line_add_get_min)：直線の追加と最小値。動的な凸包の双対で、[CHT のページ](../dp/cht.md#verify)の検証問題
+- [Line Add Get Min](https://judge.yosupo.jp/problem/line_add_get_min)：直線の追加と最小値。動的な凸包の双対で、[CHT のページ](../dp/cht.md#library)の検証問題
 
 ## 参考 {#references}
 

@@ -18,8 +18,8 @@ signs:
   - {type: constraint, text: 比べ合うハッシュが 10^5 個以上（組が 5×10^9 以上）}
 acl: []
 verify: []
-frequency: C
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 2 問
+frequency: B
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 4 問
 sections:
   - {title: 衝突確率の見積もり：比較の回数ではなく組の数（誕生日のパラドックス）, anchor: birthday-bound}
   - {title: mod 2^64 が破られる理由（Thue-Morse 列。奇数のどの基数でも長さ 1024 で衝突する）, anchor: mod-2-64}
@@ -28,8 +28,8 @@ sections:
   - {title: AtCoder で狙われる条件（事前に固定されたテストと、誰でも使う固定の選択）, anchor: atcoder-tests}
   - {title: 二重ハッシュとの比較, anchor: double-hashing}
   - {title: unordered_map への攻撃と、乱数を混ぜたカスタムハッシュ, anchor: unordered-map}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -313,9 +313,9 @@ GCC の標準ライブラリ（libstdc++）では、整数の既定のハッシ�
 - [noshi91「ABC339-F Product Equality の確率を保証する」](https://noshi91.hatenablog.com/entry/2024/02/06/222907)：法の素数を乱択したときに、差を割り切る素数の個数で誤りの確率を抑える議論と、組の数に union bound を使う理由
 - [merom686「ABC339」](https://merom686.hatenablog.com/entry/2024/02/04/021920)：ABC339 F で、固定の mod $2^{61} - 1$・mod $2^{64}$ が WA になり、別の素数 2 つで通った記録
 - [プロひろ「ABC339 F問題（Product Equality）を解く」](https://programming-hiroba.com/abc339-f/)：ABC339 F の制約と、余りの積を map で数える解き方
-- [E869120「競プロ典型 90 問」047 の解説](https://github.com/E869120/kyopro_educational_90/blob/main/editorial/047-02.jpg)：色の言い換えとローリングハッシュ、$p = 2^{64}$ ではどの基数でも衝突させられるという注意（[1 枚目](https://github.com/E869120/kyopro_educational_90/blob/main/editorial/047-01.jpg)と問題文も参照）
+- [E869120「競プロ典型 90 問 047 の解説（画像）」](https://github.com/E869120/kyopro_educational_90/blob/main/editorial/047-02.jpg)：色の言い換えとローリングハッシュ、$p = 2^{64}$ ではどの基数でも衝突させられるという注意（[1 枚目](https://github.com/E869120/kyopro_educational_90/blob/main/editorial/047-01.jpg)と問題文も参照）
 - [perogram「ローリングハッシュの衝突回避と定数倍高速化」](https://perogram.hateblo.jp/entry/2019/09/16/103911)：ABC141 E で 1 本のハッシュが WA になり、法だけを変えても消えず、基数も変えて消えた記録と、一致した候補を直接比べる回避策
-- [けんちょん「AtCoder ABC 141 E - Who Says a Pun? (1D, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2019/09/16/014600)：ABC141 E の問いと、長さの二分探索とハッシュによる解き方
+- [drken「AtCoder ABC 141 E - Who Says a Pun? (1D, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2019/09/16/014600)：ABC141 E の問いと、長さの二分探索とハッシュによる解き方
 - [syamashi「[ABC331] F - Palindrome Query」](https://note.com/syamashi/n/n8e580d4ce59d)：練習 ABC331 F の基数を固定すると WA になった記録
 - [merom686「ABC331」](https://merom686.hatenablog.com/entry/2023/12/03/001625)：練習 ABC331 F の順方向・逆方向のハッシュで区間を比べる方針
 - [kmjp「AtCoder ABC #377 (トヨタシステムズプログラミングコンテスト2024) : G - Edit to Match」](https://kmjp.hatenablog.jp/entry/2024/10/29/0900)：練習 ABC377 G のハッシュでの解き方（二重ハッシュと乱択した基数）

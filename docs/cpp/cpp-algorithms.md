@@ -28,8 +28,8 @@ sections:
   - {title: 'ranges::unique は後ろの不要部分を返す（C++20）', anchor: ranges-unique}
   - {title: fold_left・contains・find_last（C++23・GCC 13〜）と AtCoder にない starts_with, anchor: fold-left}
   - {title: '一時オブジェクトを渡すと戻り値が ranges::dangling になる（使うとコンパイルエラー）', anchor: ranges-dangling}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 cpp_std: 20
 gcc_min: 13
 atcoder: true
@@ -306,7 +306,7 @@ g++-13・g++-15 のエラーは `no match for 'operator*' (operand type is 'std:
 - [cpprefjp「reduce」](https://cpprefjp.github.io/reference/numeric/reduce.html)：初期値を省くと要素の型の `T{}` から集計すること
 - [cppreference「std::partial_sum」](https://en.cppreference.com/w/cpp/algorithm/partial_sum)：途中の和を入力の要素の型で持つこと
 - [cpprefjp「inclusive_scan」](https://cpprefjp.github.io/reference/numeric/inclusive_scan.html)：初期値を渡す形
-- [cpprefjp「next_permutation」](https://cpprefjp.github.io/reference/algorithm/next_permutation.html)：最後の並びで最初に戻して `false` を返すこと
+- [cpprefjp「std::next_permutation」](https://cpprefjp.github.io/reference/algorithm/next_permutation.html)：最後の並びで最初に戻して `false` を返すこと
 - [cpprefjp「ranges::unique」](https://cpprefjp.github.io/reference/algorithm/ranges_unique.html)：戻り値が後ろの部分の `subrange` であること
 - [cpprefjp「ranges::fold_left」](https://cpprefjp.github.io/reference/algorithm/ranges_fold_left.html)：C++23 の畳み込み
 - [cpprefjp「dangling」](https://cpprefjp.github.io/reference/ranges/dangling.html)：一時オブジェクトを渡したときの戻り値の型

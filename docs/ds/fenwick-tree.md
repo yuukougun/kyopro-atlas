@@ -29,8 +29,8 @@ sections:
   - {title: 値を添字にして数える（座標圧縮と組む）, anchor: count-by-value}
   - {title: 変種（差分の BIT・BIT 2 本・2 次元 BIT・接頭辞の max）, anchor: variants}
   - {title: BIT 上の二分探索, anchor: binary-search}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

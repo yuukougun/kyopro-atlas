@@ -20,7 +20,7 @@ signs:
 acl: [dsu]
 verify: [minimum_spanning_tree]
 frequency: A
-frequency_evidence: recent 2（abc451_e・abc469_f）・前提として 3 ページに届く（直接 3）・古い ABC 7 問
+frequency_evidence: recent 2（abc451_e・abc469_f）・前提として 4 ページに届く（直接 4）・古い ABC 7 問
 sections:
   - {title: クラスカル法とプリム法（密なら O(N^2) のプリム法）, anchor: kruskal-prim}
   - {title: 正しさの理由（カット性質・閉路性質）, anchor: why-correct}
@@ -29,8 +29,8 @@ sections:
   - {title: 辺の候補を減らす（ソートした隣どうし・約数で絞る）, anchor: reduce-candidates}
   - {title: 操作を頂点にする・区間を辺にする, anchor: modeling, level: 青}
   - {title: 辺の重みの種類が少ないとき, anchor: few-weights, level: 青}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -301,7 +301,7 @@ $$
 
 ## 参考 {#references}
 
-- [AtCoder Library「DSU」（document_ja/dsu.md）](https://github.com/atcoder/ac-library/blob/master/document_ja/dsu.md)：`merge`・`same` の計算量（v1.6 の手元の版で確かめた）
+- [AtCoder Library「DSU」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/dsu.md)：`merge`・`same` の計算量（v1.6 の手元の版で確かめた）
 - [kyo-pro「ABC218E - Destruction」](https://kyo-pro.hatenablog.com/entry/ABC218E)：例題 abc218_e の方針（報酬が負の辺は残し、昇順のクラスカル法で取り除く辺を決める）
 - [drken「AtCoder ABC 235 E - MST + 1 (1D, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2023/06/11/023548)：例題 abc235_e の方針（クエリの辺を混ぜて重みの順に処理し、クエリの辺は併合しない）と制約
 - [Lanly「AtCoder Beginner Contest 352」](https://www.cnblogs.com/Lanly/p/18173063)：練習 abc352_e の方針（操作の頂点を鎖でつなぐ）

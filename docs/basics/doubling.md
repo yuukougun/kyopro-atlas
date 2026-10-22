@@ -26,8 +26,8 @@ sections:
   - {title: ダブリング上の二分探索（条件を満たす最大の回数）, anchor: binary-search-on-doubling}
   - {title: 置換の K 回合成, anchor: permutation-power}
   - {title: 段数とメモリの見積もり, anchor: memory}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -240,7 +240,7 @@ $$
 ## 参考 {#references}
 
 - [drken「AtCoder ABC 167 D - Teleporter (2Q, 茶色, 400 点)」](https://drken1215.hatenablog.com/entry/2020/06/20/190700)：表の定義と 2 進展開の跳び方、周期の検出による別解（例題）
-- [recuraki「ABC241 E - Putting Candies をダブリング、周期検出、フロイドの循環検出で解く」](https://qiita.com/recuraki/items/e26c220f2bc01f58e185)：位置の表と和の表を一緒に持つ方法（例題）
+- [recuraki「AtCoder ABC241 E - Putting Candies をフロイドの循環検出やダブリングで解く」](https://qiita.com/recuraki/items/e26c220f2bc01f58e185)：位置の表と和の表を一緒に持つ方法（例題）
 - [OI Wiki「倍增」](https://oi-wiki.org/basic/binary-lifting/)：和を持つときに始点を含め終点を含めない持ち方（考え方だけを参考にし、文章と図は使っていない）
 - [oraclesqlpuzzle「ABC367-E Permute K times」](https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc367-e.html)：練習の方針（添字の写像の合成）
 - [oraclesqlpuzzle「ABC258-E Packing Potatoes」](https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc258-e.html)：練習の方針（箱の開始位置を状態にする、累積和と二分探索で 1 箱分を求める）

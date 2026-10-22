@@ -26,8 +26,8 @@ sections:
   - {title: 連結の比較（a+b と b+a）, anchor: concatenation}
   - {title: 順に並べてから DP（DP の章へ）, anchor: then-dp}
   - {title: 入れ替えで改善できるかを考える型, anchor: improve-by-swap}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -230,11 +230,13 @@ $$
 <div class="kp-problems" data-role="challenge" markdown>
 
 - [ABC163 E. Active Infants](https://atcoder.jp/contests/abc163/tasks/abc163_e)（diff 2037）：幼児を並べ替えて、活発度 × 移動距離の和を最大化する。
+- [ABC467 F. Email Scheduling Optimization](https://atcoder.jp/contests/abc467/tasks/abc467_f)（diff 2052）：書くのに $A_j$ 分かかり、送ってから $B_j$ 分後に返信が届くメールを 1 通ずつ書くとき、すべての返信が届く時刻の最小を、$A_i$ か $B_i$ を書き換えるクエリのたびに答える。
 
 </div>
 
 ??? note "力試しの方針"
     - **ABC163 E**：活発度の最も大きい幼児は、空いている位置の左端か右端に置いてよい。活発度の最も大きい幼児 $p$ が端でない位置にいるなら、元の位置から見て遠い側の端にいる幼児と入れ替える。$p$ の距離の増えは相手の距離の減り以上で（三角不等式）、$A_p$ が最大なので値は下がらないからである。端に置くと空いている位置はまた区間になるので、大きい順に同じ議論が続く。「左に $i$ 人・右に $j$ 人置いた」を状態にした $O(N^2)$ の DP で解く
+    - **ABC467 F**：隣り合う $i, j$（$B_i < B_j$）を $i, j$ の順に書くと、遅い方の返信は前の和を $S$ として $S + A_i + A_j + B_j$ になり、$j, i$ の順の 2 つの時刻はどちらもこれ以下である。よって $B$ の大きい順に書けばよく、答えはその順での $\max_i (A_1 + \dots + A_i + B_i)$ になる。書き換えに対応するには、$B$ の値を[座標圧縮](coordinate-compression.md)して大きい順に並べた[セグメント木](../ds/segment-tree.md)に載せ、各ノードに「$A$ の和」と「ノードの中での $(\text{前の } A \text{ の和}) + B_i$ の最大」を持つ。左右の合成は、和は足し、最大は $\max(\text{左の最大}, \text{左の和} + \text{右の最大})$ である。$B$ が等しいメールは同じ葉に $A$ の和をまとめ、その葉に誰もいないときの最大は $-\infty$ にする。クエリは先読みして、現れうる $B$ の値をすべて圧縮しておく
 
 ## 確認問題 {#quiz}
 
@@ -261,4 +263,5 @@ $$
 - [drken「AtCoder ABC 131 D - Megalomania (3Q, 茶色, 400 点)」](https://drken1215.hatenablog.com/entry/2019/06/22/224800)：例題の締め切り順と隣接交換の議論
 - [drken「AtCoder ABC 116 D - Various Sushi (2D, 青色, 400 点)」](https://drken1215.hatenablog.com/entry/2019/05/15/002400)：例題の種類数の固定と入れ替えの順
 - [drken「AtCoder ABC 163 E - Active Infants (2D, 黄色, 500 点)」](https://drken1215.hatenablog.com/entry/2020/04/21/153400)：力試しの端に置く議論と DP
+- [ikatakos「AtCoder Beginner Contest 467 E,F問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0718_abc467)：力試しの ABC467 F の方針（$B$ の降順に書く貪欲と、セグメント木のノードに持つ値。解法の部分だけを参照）
 - [cppreference「C++ named requirements: Compare」](https://en.cppreference.com/cpp/named_req/Compare)：比較関数の要件（狭義の弱順序）

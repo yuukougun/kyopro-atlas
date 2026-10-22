@@ -20,7 +20,7 @@ signs:
 acl: []
 verify: [shortest_path]
 frequency: A
-frequency_evidence: recent 2（abc463_e・abc477_e）・前提として 12 ページに届く（直接 9）・古い ABC 8 問
+frequency_evidence: recent 2（abc463_e・abc477_e）・前提として 12 ページに届く（直接 9）・古い ABC 6 問
 sections:
   - {title: 取り出した頂点の距離が確定する理由, anchor: why-correct}
   - {title: 古い組を読み飛ばす・priority_queue を最小ヒープにする, anchor: skip-stale}
@@ -30,8 +30,8 @@ sections:
   - {title: 最短閉路（ある頂点を含む閉路の最小の長さ）, anchor: shortest-cycle}
   - {title: 逆向きのグラフと両端からの最短路, anchor: reverse-graph, level: 水}
   - {title: ポテンシャルで負辺を消す（Johnson のアイデア）, anchor: potential, level: 水}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

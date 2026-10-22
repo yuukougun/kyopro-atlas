@@ -18,14 +18,14 @@ signs:
 acl: []
 verify: [static_range_sum_with_upper_bound]
 frequency: B
-frequency_evidence: recent 1（abc467_g）・前提として 1 ページに届く（直接 1）・古い ABC 1 問
+frequency_evidence: recent 1（abc467_g）・前提として 1 ページに届く（直接 1）・古い ABC 5 問
 sections:
   - {title: 必要になる場面とアイデア, anchor: idea}
   - {title: 作り方（子の列をマージする）とメモリ O(N log N), anchor: build}
   - {title: クエリの手順（O(log N) 個のノードで二分探索）と累積和で和も, anchor: query}
   - {title: 各段に BIT を持たせる（先読みと組む）, anchor: bit-per-level, level: 発展}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -131,7 +131,7 @@ count_sum_le(l, r, x):
 
 区間の $x$ 以下の個数が答えられると、次の形の質問に言い換えて使える。
 
-- **区間の K 番目に小さい値**：「$x$ 以下が $K$ 個以上」になる最小の $x$ が答えなので、$x$ を[答えで二分探索](../basics/binary-search-answer.md)する。候補は根の列 $\mathrm{val}[1]$（全要素のソート済みの列）の添字で探せばよく、1 回 $O(\log^3 N)$ である。下のコードでは $k$ を 0 始まりにし、「$x$ 以下が $k + 1$ 個以上」を条件にする。速さが要るなら [Wavelet Matrix](../ds/wavelet-matrix.md) で $O(\log \sigma)$ にする（$\sigma$ は値の種類数）。サイン：「区間の K 番目」「区間の中央値」をオンラインで答える
+- **区間の K 番目に小さい値**：「$x$ 以下が $K$ 個以上」になる最小の $x$ が答えなので、$x$ を[答えで二分探索](../basics/binary-search-answer.md)する。候補は根の列 $\mathrm{val}[1]$（全要素のソート済みの列）の添字で探せばよく、1 回 $O(\log^3 N)$ である。下のコードでは $k$ を 0-indexed にし、「$x$ 以下が $k + 1$ 個以上」を条件にする。速さが要るなら [Wavelet Matrix](../ds/wavelet-matrix.md) で $O(\log \sigma)$ にする（$\sigma$ は値の種類数）。サイン：「区間の K 番目」「区間の中央値」をオンラインで答える
 
 ```cpp
 --8<-- "merge-sort-tree/mst.cpp:kth"
@@ -241,7 +241,7 @@ count_sum_le(l, r, x):
 ## 参考 {#references}
 
 - [tayu0110「ABC339G - Smaller Sum」](https://tayu0110.hatenablog.com/entry/2024/02/05/205618)：例題 abc339_g の方針（各ノードにソート済みの列と累積和、二分探索で $O(\log^2 N)$）と、子の列をマージすると構築が $O(N \log N)$ になること
-- [kmjp「AtCoder ABC #339 : G - Smaller Sum」](https://kmjp.hatenablog.jp/entry/2024/02/03/0900)：例題 abc339_g のクエリの復号（前の答えとの XOR）と 1-indexed の閉区間、平方分割による別解
+- [kmjp「AtCoder ABC #339 (日本レジストリサービス（JPRS）プログラミングコンテスト2024) : G - Smaller Sum」](https://kmjp.hatenablog.jp/entry/2024/02/03/0900)：例題 abc339_g のクエリの復号（前の答えとの XOR）と 1-indexed の閉区間、平方分割による別解
 - [viral_8「ABC339の解答[Java]」](https://qiita.com/viral_8/items/674923749d2d6feb775a)：例題 abc339_g の復号と、ノードの列と累積和を使う実装
 - [yuu_kyopro「マージソート木（merge-sort tree）」](https://qiita.com/yuu_kyopro/items/51ad67c3c980bf91c5a6)：対応するクエリ（$x$ 以下の個数・値の範囲の個数）と計算量・メモリ
 - [kmjp「AtCoder ABC #467 : G - Many Sweets Problem」](https://kmjp.hatenablog.jp/entry/2026/07/25/0900)：力試し abc467_g の先読みと、各段に BIT を持たせたマージソート木の上の貪欲

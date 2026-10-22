@@ -19,14 +19,14 @@ signs:
   - {type: phrase, text: 成功率などの比率の大小で並べる}
 acl: []
 frequency: A
-frequency_evidence: recent 2（abc457_e・abc474_e）・前提として 58 ページに届く（直接 9）・古い ABC 3 問
+frequency_evidence: recent 2（abc457_e・abc474_e）・前提として 59 ページに届く（直接 9）・古い ABC 3 問
 sections:
   - {title: ソートで貪欲の順が決まる, anchor: greedy-order}
   - {title: 2 つの列を 1 対 1 に対応させる（両方ソートして順に組む）, anchor: matching-two-lists}
   - {title: 比較関数の要件（狭義の弱順序）, anchor: strict-weak-ordering}
   - {title: 比率は掛け算で比べる・同点の順序（stable_sort）, anchor: ratio-and-ties}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

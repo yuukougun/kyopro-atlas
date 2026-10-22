@@ -26,8 +26,8 @@ sections:
   - {title: ACL の mf_graph で書く, anchor: acl}
   - {title: モデル化の型（行と列を頂点に・頂点の分割・時間の層）, anchor: modeling}
   - {title: 無向の辺・頂点の容量の表し方, anchor: undirected-vertex-capacity}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

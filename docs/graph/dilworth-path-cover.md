@@ -24,7 +24,7 @@ sections:
   - {title: 推移閉包と最大反鎖（数列なら LIS のページの Dilworth の定理へ）, anchor: antichain}
   - {title: Hall の結婚定理, anchor: hall}
   - {title: 自作するときの要点と Library Checker, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -188,5 +188,5 @@ Library Checker には最小パス被覆そのものの問題はないので、�
 - [Wikipedia「Dilworth's theorem」](https://en.wikipedia.org/wiki/Dilworth%27s_theorem)：König の定理からの証明と、二部マッチングで幅が求まること
 - [Wikipedia「Hall's marriage theorem」](https://en.wikipedia.org/wiki/Hall%27s_marriage_theorem)：定理の主張と証明
 - [OI Wiki「序理论」](https://oi-wiki.org/math/order-theory/)：鎖・反鎖の定義と Dilworth の定理・Mirsky の定理（文章と図は使っていない）
-- [ACL「MaxFlow」](https://github.com/atcoder/ac-library/blob/master/document_ja/maxflow.md)：`mf_graph` の `flow`・`min_cut` の計算量
+- [AtCoder Library「MaxFlow」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/maxflow.md)：`mf_graph` の `flow`・`min_cut` の計算量
 - [Library Checker「Matching on Bipartite Graph」](https://judge.yosupo.jp/problem/bipartitematching)：練習の問題の内容

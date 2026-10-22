@@ -10,7 +10,7 @@ kind: [案内, ビット演算, 線形代数・行列]
 prerequisites: [bit-operations]
 related: [bitwise-independence, prefix-sum, fenwick-tree, tree-distance, binary-trie, xor-basis, digit-dp, two-pointers, meet-in-the-middle, nim, grundy-number, hashing-for-sets, hadamard-transform]
 summary: XOR が出てくる問題で、問われ方から使う手法を引ける。桁ごとに独立で、同じ値どうしで打ち消し合う、という 2 つの性質から、桁ごとの数え上げ・累積 XOR・XOR 基底・Binary Trie・Nim・集合のハッシュへつなぐ。
-complexity: 値が 2^B 未満のとき、桁ごとの数え上げ O(NB)、累積 XOR は前計算 O(N) で区間 1 回 O(1)、XOR 基底の挿入と Binary Trie の操作は 1 回 O(B)
+complexity: null
 signs:
   - {type: phrase, text: すべての組・すべての区間の XOR の総和}
   - {type: phrase, text: x を選んで XOR の最大値・最小値を求める}
@@ -24,7 +24,7 @@ sections:
   - {title: 全ペア・全区間の XOR の和 → 桁ごとに 0 と 1 の個数を数える（bitwise-independence）, anchor: sum-of-xor}
   - {title: '区間の XOR → 累積 XOR、更新があれば BIT（prefix-sum, fenwick-tree）', anchor: range-xor}
   - {title: 木の 2 点間のパスの XOR → 根からの XOR どうしの XOR（tree-distance）, anchor: tree-path}
-  - {title: x を選んで XOR の最大・最小、2 要素の XOR の最小 → 上位ビットから決める・Binary Trie, anchor: choose-x}
+  - {title: x を選んで XOR の最大・最小、2 要素の XOR の最小 → 上位 bit から決める・Binary Trie, anchor: choose-x}
   - {title: 選んだ XOR で作れる値・最大値・K 番目 → XOR 基底（xor-basis）, anchor: basis}
   - {title: グラフの経路の XOR の最小 → 閉路の XOR を基底にする（xor-basis）, anchor: path-xor}
   - {title: XOR が絡む条件を満たす数の個数 → 桁 DP（digit-dp）, anchor: digit-dp}
@@ -33,7 +33,7 @@ sections:
   - {title: '石取りゲーム → Nim・Grundy 数（nim, grundy-number）', anchor: games}
   - {title: 2 つの集合が一致するか → 乱数の XOR によるハッシュ（hashing-for-sets）, anchor: set-hash}
   - {title: 添字の XOR で畳み込む → アダマール変換（hadamard-transform）, anchor: xor-convolution}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -127,12 +127,12 @@ XOR の問題で使う性質は、次の 2 つと、そこから出る 2 つの�
 
 こう言い換えると、木の頂点の組の問題が、列 $S$ の 2 要素の組の問題になる。全組の XOR の和は[桁ごとの数え上げ](#sum-of-xor)、XOR が $X$ になる組の数は値ごとの個数で数える。代表は木の距離のページの[練習問題](../tree/tree-distance.md#practice)の ABC201 E と、[力試し](../tree/tree-distance.md#challenge)の ARC045 C である。XOR の最大の組なら [Binary Trie](#choose-x) に載せる。
 
-## x を選んで XOR の最大・最小、2 要素の XOR の最小 → 上位ビットから決める・Binary Trie {#choose-x}
+## x を選んで XOR の最大・最小、2 要素の XOR の最小 → 上位 bit から決める・Binary Trie {#choose-x}
 
 XOR した値の大小は上の bit で決まるので、上の bit から 1 つずつ決める。
 
 - **集合の中から $x$ との XOR が最小の要素を探す**：上の bit から $x$ と同じ側を優先して降りる。値を上の bit から 0・1 で枝分かれする二分木に入れておけば、1 回 $O(B)$ で答えられ、追加・削除もできる（[Binary Trie の XOR の最小・最大](../ds/binary-trie.md#xor-min-max)）。
-- **$x$ を選んで全要素との XOR の最大値を最小にする**：要素を上の bit で 2 組に分ける再帰で $O(NB)$ になる。両方の組が空でない bit では、どちらかの組が必ず 1 になる（[上位ビットで 2 つに分けて再帰する](../basics/bitwise-independence.md#split-by-top-bit)）。代表は [ABC281 F](../ds/binary-trie.md#abc281_f) である。
+- **$x$ を選んで全要素との XOR の最大値を最小にする**：要素を上の bit で 2 組に分ける再帰で $O(NB)$ になる。両方の組が空でない bit では、どちらかの組が必ず 1 になる（[上位 bit で 2 つに分けて再帰する](../basics/bitwise-independence.md#split-by-top-bit)）。代表は [ABC281 F](../ds/binary-trie.md#abc281_f) である。
 - **2 要素の XOR の最小・最大**：最大は、要素を 1 つずつ入れながら入れる前の集合との最大を問う。追加・削除のたびに最小を答えるなら、Binary Trie の各ノードに、その部分木の中の 2 要素の XOR の最小値を持たせ、追加・削除のたびに根まで作り直す。代表は [ABC308 G](../ds/binary-trie.md#abc308_g) である。
 - **$x \le K$ のもとで $\sum_i (x \oplus a_i)$ を最大にする**：目的が bit ごとの寄与の和なので、上の bit を優先する貪欲は誤る。$K$ と初めて食い違う bit で場合分けする（[上の bit から決める貪欲](../basics/bitwise-independence.md#top-down)）。
 
@@ -151,7 +151,7 @@ XOR した値の大小は上の bit で決まるので、上の bit から 1 つ
 
 無向グラフで同じ辺を何度通ってもよいなら、$u$ から $v$ へのウォークの XOR は「全域木での根からの XOR の $d(u) \oplus d(v)$」に「閉路の値をいくつか XOR したもの」を足した形になる。閉路を 1 周して同じ道を戻れば、往復した部分は打ち消し合い、閉路の値だけが加わるからである。そこで、全域木に入らない辺 $(a, b, w)$ のそれぞれについて、閉路の値 $d(a) \oplus d(b) \oplus w$ を XOR 基底へ入れる。ほかの閉路の値は、これらの XOR で作れる。そのうえで $d(u) \oplus d(v)$ を基底で最小化（最大化）する。理由と実装は[グラフのウォークの XOR](../math/xor-basis.md#xor-walk) にある。
 
-代表は XOR 基底のページの[練習問題](../math/xor-basis.md#practice)の ABC451 G である。辺の重みの範囲が小さければ、（頂点, XOR の値）を状態にした探索でもよい（[拡張ダイクストラ](../graph/extended-dijkstra.md#choose-state)）。
+代表は XOR 基底のページの[練習問題](../math/xor-basis.md#practice)の ABC451 G である。辺の重みの範囲が小さければ、（頂点, XOR の値）を状態にした探索でもよい（[状態を頂点にする](../graph/extended-dijkstra.md#choose-state)）。
 
 ## XOR が絡む条件を満たす数の個数 → 桁 DP（digit-dp） {#digit-dp}
 

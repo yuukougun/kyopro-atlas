@@ -24,7 +24,7 @@ sections:
   - {title: ARC・AGC・AHC と ARC の区分, anchor: contests}
   - {title: 練習用のコンテスト, anchor: practice-contests}
   - {title: 生成 AI のルール, anchor: ai-rules}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -238,7 +238,7 @@ AtCoder生成AI対策ルール（20261014 版）は、ABC・ARC・AGC の開催�
 
 ## 参考 {#references}
 
-- [kenkoooo「AtCoderProblems：time-estimator/function.py」](https://github.com/kenkoooo/AtCoderProblems/blob/master/lambda-functions/time-estimator/function.py)：difficulty の推定の式（傾き ln6/400 のロジスティック曲線）、対象を 2 回目以上の参加者に限ること、参加者のレートの 400 以下を縮める前に戻すこと
+- [kenkoooo「AtCoderProblems / time-estimator/function.py」](https://github.com/kenkoooo/AtCoderProblems/blob/master/lambda-functions/time-estimator/function.py)：difficulty の推定の式（傾き ln6/400 のロジスティック曲線）、対象を 2 回目以上の参加者に限ること、参加者のレートの 400 以下を縮める前に戻すこと
 - [kenkoooo「AtCoderProblems：atcoder-problems-frontend/src/utils/index.ts」](https://github.com/kenkoooo/AtCoderProblems/blob/master/atcoder-problems-frontend/src/utils/index.ts)：difficulty の 400 未満を縮めて表示する式（clipDifficulty）
 - [anqooqie「AtCoderのレート計算式」](https://qiita.com/anqooqie/items/92005e337a0d2569bdbd)：レートの計算の 3 段（0.9 の重み・$2^{p/800}$ の平均・参加回数の補正）と補正の値、400 未満の縮め方、パフォーマンスの上限
 - [drken「AtCoder コンテストについての tips」](https://qiita.com/drken/items/8a6f139158cde8a61dce)：順位の決まり方、色の区切り、参加回数による補正がない場合の平均レートの見積もり

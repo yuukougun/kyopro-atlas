@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 282" width="390" height="282" font-family="sans-serif" font-size="14">
-<rect width="390" height="282" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 406 282" width="406" height="282" font-family="sans-serif" font-size="14">
+<rect width="406" height="282" fill="#ffffff"/>
 <text x="8" y="22" fill="#222">説明用に a→1・b→2・c→3、B = 10、</text>
 <text x="8" y="40" fill="#222">mod なしで計算する</text>
 <text x="8" y="58" fill="#222">（ハッシュが 10 進数の数字の並びになる）</text>

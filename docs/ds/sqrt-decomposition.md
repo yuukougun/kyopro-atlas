@@ -26,8 +26,8 @@ sections:
   - {title: 根号で場合分け（合計が抑えられた量の大小で分ける）, anchor: heavy-light}
   - {title: クエリの平方分割（√Q 個ごとに作り直し、未反映の分は愚直に補正する）, anchor: query-buckets}
   - {title: 実装の要点（ブロック番号・同じブロックの場合・タグの押し下げ・B の選び方）, anchor: implementation}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -256,6 +256,6 @@ $d(u, v)$ は [LCA](../tree/lca.md) を使えば $O(\log N)$ で求まる。作�
 - [torus711「AtCoder Beginner Contest 335, F : Hop Sugoroku」](https://torus711.hatenablog.com/entry/2024/01/07/214116)：例題 abc335_f の言い換え、（歩幅, 余り）の表で予約する方法と $\sqrt{N}$ での場合分け
 - [kmjp「AtCoder ABC #219 (サイシードプログラミングコンテスト2021) : G - Propagation」](https://kmjp.hatenablog.jp/entry/2021/09/29/0900)：例題 abc219_g の重い頂点に時刻と値を記録して読む側で確かめる方法
 - [kmjp「AtCoder ABC #403 : G - Odd Position Sum Query」](https://kmjp.hatenablog.jp/entry/2025/04/28/1030)：練習 abc403_g のバケットで整列を保つ方法と、想定解が動的セグメント木であること
-- [suzukiapple「ABC365G AtCoder Office」](https://suzukiapple.tumblr.com/post/758965519503228928/abc365g-atcoder-office)：練習 abc365_g の記録の数での場合分けと前計算
+- [ikatakos「トヨタ自動車プログラミングコンテスト2024#8（AtCoder Beginner Contest 365）G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0803_abc365)：練習 abc365_g の、記録の多い人を基準にした前計算と、イベント順の処理との使い分け（解法の節だけを読んだ）
 - [merom686「ABC259」](https://merom686.hatenablog.com/entry/2022/07/10/002150)：力試し abc259_h の出現数 $N$ を境にした場合分けと $O(N^3)$
 - [Library Checker「Static Range Mode Query」](https://judge.yosupo.jp/problem/static_range_mode_query)：ブロックの組ごとの前計算の型の確かめ先

@@ -10,7 +10,7 @@ level: 発展
 kind: [最短路, DP]
 prerequisites: [dijkstra, subset-enumeration-dp]
 related: [minimum-spanning-tree, steiner-subtree]
-summary: 一般のグラフで指定した K 点（K ≤ 10 程度）をすべてつなぐ最小コストを、端点の集合と頂点を状態にした DP で O(3^K N + 2^K M log N) で求める。部分集合の分割とダイクストラを交互に行う。
+summary: 一般のグラフで指定した K 点（K ≤ 10 程度）をすべてつなぐ最小コストを、端点の集合と頂点を状態にした DP で O(3^K N + 2^K (N + M) log N) で求める。部分集合の分割とダイクストラ法を交互に行う。
 complexity: O(3^K N + 2^K (N + M) log N)（K は指定頂点の数）。密グラフで配列のダイクストラ法を使うなら O(3^K N + 2^K N^2)。メモリ O(2^K N)
 signs:
   - {type: constraint, text: 指定した K 点（K ≤ 10 程度）をすべて連結にする最小コスト}
@@ -24,7 +24,7 @@ sections:
   - {title: ダイクストラ法で v を動かす遷移, anchor: dijkstra-step}
   - {title: 木の上なら易しい（木の章の「指定頂点を結ぶ最小の部分木」）, anchor: on-tree}
   - {title: 自作するときの要点と確かめ方, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 

@@ -32,8 +32,8 @@ sections:
   - {title: 回転どうしの比較：S+S+T+T の SA, anchor: rotations}
   - {title: 部分文字列の辞書順 K 番目, anchor: kth-substring, level: 発展}
   - {title: 自作するなら：ダブリング O(N log^2 N) → O(N log N) → SA-IS, anchor: build-your-own}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -299,4 +299,4 @@ $N \le 10^6$ なので、2 接尾辞の LCP を全ペアで求める $O(N^2)$ �
 - [ikatakos「AtCoder Beginner Contest 362」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0713_abc362)：練習 abc362_g の SA 上の二分探索（解法の部分だけ）
 - [ikatakos「AtCoder Beginner Contest 433」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/1122_abc433)：練習 abc433_g の LCP の大きい順にまとめる方針（解法の部分だけ）
 - [merom686「ABC272」](https://merom686.hatenablog.com/entry/2022/10/09/013149)：練習 abc272_f の S+S+T+T の連結と、等しい回転のまとめ方
-- [ikatakos「AtCoder Beginner Contest 452」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0404_abc452)：練習 abc452_g のランレングスでの切り方と、区切りを入れた SA での数え方（解法の部分だけ）
+- [ikatakos「AtCoder Beginner Contest 452 E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0404_abc452)：練習 abc452_g のランレングスでの切り方と、区切りを入れた SA での数え方（解法の部分だけ）

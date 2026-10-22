@@ -18,14 +18,14 @@ signs:
   - {type: shape, text: K 個選ぶときの答え f(K) が K について凸（1 個増やすときの得が、個数が増えるほど減る）}
 acl: []
 frequency: B
-frequency_evidence: recent 1（abc464_g）・前提として届くページなし・古い ABC 3 問
+frequency_evidence: recent 1（abc464_g）・前提として届くページなし・古い ABC 2 問
 sections:
   - {title: 罰金 λ で個数の制約を外す（凸性が要る理由）, anchor: penalty}
   - {title: λ の二分探索と、同じ値が並ぶときの扱い, anchor: binary-search-lambda}
   - {title: 取り消し付きの貪欲で解ける場合（優先度付きキュー）, anchor: undoable-greedy}
   - {title: Monge な区間分割と組み合わせる, anchor: with-monge}
   - {title: 自作するときの要点と確かめ方, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -190,7 +190,7 @@ Library Checker には、Alien DP そのものを確かめる問題はない（2
 - [noshi91「Monge グラフ上の d-辺最短路長を計算するアルゴリズム」](https://noshi91.github.io/algorithm-encyclopedia/d-edge-shortest-path-monge)：Monge なときの凸性、罰金を足した問題の最大が答えに一致する理由、三分探索の方法、$\lambda$ の範囲（CC BY 4.0。文章は使っていない）
 - [Daniel Rutschmann「Alien Optimization」](https://soi.ch/wiki/alien-optimization/)：罰金と接する直線の見方、同点のときに端点の間を補間する考え方（その節は書きかけ）
 - [かんプリン「競技プログラミング　典型問題メモ」](https://kanpurin.hatenablog.com/entry/2020/04/07/182948)：Alien DP で解く問題の一覧（例題 ABC218 H を含む）
-- [yosupo「Library Checker の問題」](https://github.com/yosupo06/library-checker-problems)：Alien DP そのものの問題がないことの確認
+- [yosupo06「library-checker-problems」](https://github.com/yosupo06/library-checker-problems)：Alien DP そのものの問題がないことの確認
 - [kmjp「AtCoder ABC #218 : H - Red and Blue Lamps」](https://kmjp.hatenablog.jp/entry/2021/09/12/0930)：例題 ABC218 H の、赤を隣り合わせない形への言い換えと貪欲による別解
 - [ikatakos「第七回日本最強プログラマー学生選手権～Advance～ -予選- （AtCoder Beginner Contest 464）F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0627_abc464)：練習 ABC464 G の、隣り合わない選択への言い換えと取り消し付きの貪欲（解法の節だけを読んだ）
 - [kmjp「AtCoder ABC #355 (東京海上日動プログラミングコンテスト2024) : G - Baseball」](https://kmjp.hatenablog.jp/entry/2024/06/05/0900)：練習 ABC355 G の、区間のコストと monotone minima・Alien DP の組み合わせ

@@ -25,6 +25,20 @@ rules:
       - {from: 0-origin で書く, to: 0-indexed で書く}
       - {from: 1 indexed の添字, to: 1-indexed の添字}
       - {from: 0-indexed のまま, to: 0-indexed のまま}
+  # 「0 始まり」の後ろに語が続くときは、半角と全角の間の空白を足す（後ろが句読点・括弧なら足さない）
+  - expected: '$1-indexed '
+    pattern: '/(?<![0-9])([01]) ?始まり(?=[ぁ-んァ-ヶー一-龠A-Za-z0-9])/'
+    specs:
+      - {from: 0 始まりの添字, to: 0-indexed の添字}
+      - {from: 1始まりで数える, to: 1-indexed で数える}
+      - {from: 10 始まりの列, to: 10 始まりの列}
+  - expected: $1-indexed
+    pattern: '/(?<![0-9])([01]) ?始まり(?![ぁ-んァ-ヶー一-龠A-Za-z0-9])/'
+    specs:
+      - {from: 添字は 0 始まり。, to: 添字は 0-indexed。}
+      - {from: 1 始まり（数学の流儀）, to: 1-indexed（数学の流儀）}
+  - expected: 複数テストケース
+    pattern: 多重テストケース
   - expected: Library Checker
     pattern: ライブラリチェッカー
   - expected: K 番目
@@ -60,6 +74,18 @@ rules:
     pattern: ビット演算
   - expected: bit ごと
     pattern: ビットごと
+  # 後ろに語が続くときは空白を足す（「0 始まり」と同じ）
+  - expected: '$1 bit '
+    pattern: '/(最上位|最下位|上位) ?ビット(?=[ぁ-んァ-ヶー一-龠A-Za-z0-9])/'
+    specs:
+      - {from: 上位ビットから決める, to: 上位 bit から決める}
+      - {from: 最下位 ビットを取る, to: 最下位 bit を取る}
+      - {from: 上位 bit から, to: 上位 bit から}
+  - expected: $1 bit
+    pattern: '/(最上位|最下位|上位) ?ビット(?![ぁ-んァ-ヶー一-龠A-Za-z0-9])/'
+    specs:
+      - {from: 最上位ビット。, to: 最上位 bit。}
+      - {from: 最下位 ビット（LSB）, to: 最下位 bit（LSB）}
   - expected: bitDP
     pattern: '/(?:ビット|bit) ?DP/'
     specs:
@@ -126,6 +152,8 @@ rules:
       - 二分グラフ
   - expected: 最短路
     pattern: 最短経路
+  - expected: ウォーク
+    pattern: 歩道
   - expected: 閉路検出
     pattern: サイクル検出
   - expected: 全域木
@@ -176,6 +204,10 @@ rules:
     pattern: '/優先(?:度|順位)つきキュー|優先順位付きキュー|プライオリティ・?キュー/'
   - expected: deque
     pattern: デック
+  - expected: 平衡二分探索木
+    pattern: 平衡二分木
+  - expected: BIT
+    pattern: '/フェニック ?木/'
 
   # ---- 整数論・代数 ----
   - expected: 繰り返し二乗法

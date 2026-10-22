@@ -10,7 +10,7 @@ level: 黄
 kind: [木]
 prerequisites: [tree-traversal]
 related: [centroid-decomposition, tree-diameter, tree-dp#reroot-difference, rerooting, tree-isomorphism]
-summary: 重心は取り除いたときに残る成分の大きさがすべて N/2 以下になる頂点で、1 個か隣接する 2 個ある。部分木サイズから O(N) で求まり、全ペアが重心を通るペアの作り方や重心分解に使う。
+summary: 取り除いたときに残る成分の大きさがすべて N/2 以下になる頂点（重心。1 個か隣り合う 2 個ある）を、部分木サイズから O(N) で求める。全ペアが重心を通るペアの作り方や重心分解に使う。
 complexity: 重心を求めるのは O(N)（部分木サイズを 1 回求める）
 signs:
   - {type: phrase, text: ペアを作ってパスの長さの和を最大化する}
@@ -23,8 +23,8 @@ sections:
   - {title: 重心は 1 個か隣接する 2 個, anchor: one-or-two}
   - {title: 重心で分けて別の枝どうしを組む, anchor: pair-across}
   - {title: 中心との違い, anchor: vs-center}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

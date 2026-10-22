@@ -22,7 +22,7 @@ sections:
   - {title: 練習用のコンテスト, anchor: practice-contests}
   - {title: AtCoder 以外の道具, anchor: tools}
   - {title: ライブラリの確かめ用の問題集, anchor: verify-sets}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -97,7 +97,7 @@ updated: 2026-10-22
 | 問題 | 位置 | diff | 使う手法のページ |
 | --- | --- | --- | --- |
 | abc451_d Concat Power of 2 | D | 856 | [全探索の設計](../basics/brute-force.md) |
-| abc451_e Tree Distance | E | 1215 | [最小全域木](../graph/minimum-spanning-tree.md#kruskal-prim) › クラスカル法とプリム法（密なら O(N^2) のプリム法）、[Union-Find](../ds/union-find.md)、[木の上の距離](../tree/tree-distance.md#from-one) › 1 点からの距離（ダイクストラはいらない）、[木の構築・復元](../tree/tree-construction.md#from-distances) › 距離の情報から作る（最も近い頂点とは辺で結ばれる） |
+| abc451_e Tree Distance | E | 1215 | [最小全域木](../graph/minimum-spanning-tree.md#kruskal-prim) › クラスカル法とプリム法（密なら O(N^2) のプリム法）、[Union-Find](../ds/union-find.md)、[木の上の距離](../tree/tree-distance.md#from-one) › 1 点からの距離（ダイクストラ法はいらない）、[木の構築・復元](../tree/tree-construction.md#from-distances) › 距離の情報から作る（最も近い頂点とは辺で結ばれる） |
 | abc451_f Make Bipartite 3 | F | 1540 | [重み付き Union-Find](../ds/weighted-union-find.md#generalization) › 一般化（XOR で偶奇・二部グラフ、頂点を 2 倍にする）、[二部グラフ判定](../graph/bipartite-graph.md#union-find) › Union-Find（頂点を 2 倍にする・偶奇を持つ）で判定する |
 | abc451_g Minimum XOR Walk | G | 2221 | [XOR 基底](../math/xor-basis.md#xor-walk) › グラフのウォークの XOR（全域木の根からの XOR と、閉路の XOR の基底）、[分割統治](../basics/divide-and-conquer.md) |
 | abc452_d No-Subsequence Substring | D | 903 | [部分列の判定と次の出現位置の表](../string/subsequence-matching.md#next-occurrence) › 次の出現位置の表（後ろから作る・番兵 N） |
@@ -493,7 +493,7 @@ updated: 2026-10-22
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| KEYENCE2019 E. Connecting Cities | 2623 | [分割統治](../basics/divide-and-conquer.md)（力試し）、[重心分解](../tree/centroid-decomposition.md)（力試し） |
+| KEYENCE2019 E. Connecting Cities | 2623 | [分割統治](../basics/divide-and-conquer.md)（力試し）、[特殊な最小全域木](../graph/spanning-tree-advanced.md)（練習）、[重心分解](../tree/centroid-decomposition.md)（力試し） |
 
 ### KEYENCE2020 {#problem-sets-keyence2020}
 
@@ -599,11 +599,11 @@ ARC にも Rated の範囲の違う区分（ARC--・ARC・ARC++）があり、�
 
 ## 参考 {#references}
 
-- [E869120「競プロ典型 90 問」の告知記事（Qiita）](https://qiita.com/e869120/items/1b2a5f0f07fd927e44e9)：★と difficulty の対応、出題の期間、勧める進め方
-- [E869120「kyopro_educational_90」（GitHub）](https://github.com/E869120/kyopro_educational_90)：典型90問の解説の置き場
-- [E869120「kyopro-tessoku」（GitHub）](https://github.com/E869120/kyopro-tessoku)：鉄則本の章立てと、章ごとの解答コード
-- [drken「動的計画法超入門！ Educational DP Contest の A〜E 問題の解説と類題集」（Qiita）](https://qiita.com/drken/items/dc53c683d6de8aeacf5a)：EDPC の位置づけ（DP を初めて学ぶ人向けの問題）
-- [AtCoder Problems の FAQ（GitHub）](https://github.com/kenkoooo/AtCoderProblems/blob/master/doc/faq_ja.md)：difficulty の意味
+- [E869120「AtCoder での実力アップを目指そう！　～競プロ典型 90 問～」](https://qiita.com/e869120/items/1b2a5f0f07fd927e44e9)：★と difficulty の対応、出題の期間、勧める進め方
+- [E869120「kyopro_educational_90」](https://github.com/E869120/kyopro_educational_90)：典型90問の解説の置き場
+- [E869120「kyopro-tessoku」](https://github.com/E869120/kyopro-tessoku)：鉄則本の章立てと、章ごとの解答コード
+- [drken「動的計画法超入門！ Educational DP Contest の A ～ E 問題の解説と類題集」](https://qiita.com/drken/items/dc53c683d6de8aeacf5a)：EDPC の位置づけ（DP を初めて学ぶ人向けの問題）
+- [AtCoder Problems の FAQ（faq_ja.md）](https://github.com/kenkoooo/AtCoderProblems/blob/master/doc/faq_ja.md)：difficulty の意味
 - [AtCoder Problems のガイド（GitHub）](https://github.com/kenkoooo/AtCoderProblems/tree/master/guide/src/ja)：おすすめ問題とバーチャルコンテストの機能
 - [AtCoder NoviSteps「About」](https://atcoder-novisteps.vercel.app/about)：グレードの段階と投票、記録の機能
 - [AtCoder Clans](https://kato-hiro.github.io/AtCoderClans/)：ツールと記事の一覧の構成

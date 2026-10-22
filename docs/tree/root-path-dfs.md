@@ -18,15 +18,15 @@ signs:
   - {type: phrase, text: 操作を元に戻す・保存した状態に戻る}
 acl: []
 frequency: B
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 5 問
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 6 問
 sections:
   - {title: DFS のスタックは根からのパス, anchor: stack-is-path}
   - {title: 変更の記録と巻き戻し（後に変えたものから戻す）, anchor: undo-log}
   - {title: パス上の LIS・中央値・種類数, anchor: path-statistics}
   - {title: 操作の履歴を木にする型は永続データ構造の版の木へ, anchor: to-version-tree}
   - {title: 経路圧縮つきの Union-Find は戻せない（取り消せる Union-Find はデータ構造の章）, anchor: no-path-compression}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -152,13 +152,7 @@ $$
 
 この節は [Union-Find](../ds/union-find.md) の経路圧縮と union by size を前提にする。
 
-Union-Find の併合だけを戻すなら、記録するのは 2 か所でよい。根 $s$ を根 $r$ の下につないだとき、変わるのは $\mathrm{par}[s]$（$s$ 自身を指していたのが $r$ を指すようになる）と $r$ の大きさだけだからである。出るときは、この 2 つを元の値に戻す。
-
-経路圧縮をすると、これでは戻せない。$\mathrm{find}$ が $s$ の下の頂点 $w$ から根までたどると、経路上の頂点の親をすべて $r$ に書き換える。その後で $\mathrm{par}[s]$ だけを戻しても、$w$ は $r$ を直接指したままなので、$s$ の成分に戻らない。$\mathrm{find}$ の書き換えもすべて記録すれば正しく戻せるが、1 回の $\mathrm{find}$ で記録が何件も増える。しかも経路圧縮の「ならし $O(\alpha(N))$」は、圧縮した経路を二度とたどらないことに頼っている。巻き戻すと深い経路が元に戻り、同じ深い $\mathrm{find}$ を何度でもくり返させられる。
-
-そこで、経路圧縮をせず、union by size（小さい方を大きい方の下につなぐ）だけにする。これだけで木の高さは $\log_2 N$ 以下に保たれ、$\mathrm{find}$ は最悪でも $O(\log N)$ である。併合 1 回の記録は 2 件、戻すのは $O(1)$ なので、DFS 全体は $O(N \log N)$ になる。成分ごとに辺の数や答えの合計などを持たせるときは、それらの元の値も同じ記録に積む。
-
-ACL の `dsu` は `leader` の中で経路圧縮をするので、この用途には使えない。取り消せる Union-Find の詳しい作り方は[ロールバックできる Union-Find](../ds/rollback-union-find.md#no-path-compression)にある。
+Union-Find の併合を出るときに戻すには、併合で書き換わる根 2 つの値（根 $s$ を根 $r$ の下につないだときの $\mathrm{par}[s]$ と $r$ の大きさ）を記録し、元の値に書き戻せばよい。経路圧縮をすると $\mathrm{find}$ が経路上の親を書き換えるのでこの記録では戻せず、ならしの保証も崩れるため、union by size だけにして $\mathrm{find}$ を最悪 $O(\log N)$ に保つ。ACL の `dsu` は経路圧縮をするのでこの用途には使えない。理由の詳細と作り方は[ロールバックできる Union-Find の経路圧縮をしない理由](../ds/rollback-union-find.md#no-path-compression)にある。
 
 ## 落とし穴 {#pitfalls}
 
@@ -260,6 +254,6 @@ ACL の `dsu` は `leader` の中で経路圧縮をするので、この用途�
 - [kmjp「AtCoder ABC #218 : G - Game on Tree 2」](https://kmjp.hatenablog.jp/entry/2021/09/12/0900)：力試し abc218_g の BIT（または 2 つの multiset）での出し入れとミニマックス
 - [drken「AtCoder ABC 302 Ex - Ball Collector (橙色, 625 点)」](https://drken1215.hatenablog.com/entry/2023/06/10/032900)：力試し abc302_h のグラフへの言い換えと、取り消せる Union-Find で記録するもの
 - [ikatakos「AtCoder Beginner Contest 453 E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0411_abc453)：練習 ABC453 G の版の木を先読みして DFS する解き方（解説の部分だけを参照）
-- [CR-J「ABC 453 个人题解」](https://www.cnblogs.com/CR-J/p/19853087)：練習 ABC453 G の問題の設定の確認
+- [Billlly「ABC 453 个人题解」](https://www.cnblogs.com/CR-J/p/19853087)：練習 ABC453 G の問題の設定の確認
 - [hamayan「Colorful Tree [AtCoder Beginner Contest 133 F]」](https://blog.hamayanhamayan.com/entry/2019/07/08/213009)：力試し ABC133 F の LCA で 3 頂点に分けて DFS で数える方針
 - [ikatakos「AtCoder Beginner Contest 133 D,E,F 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2019/0707_abc133)：力試し ABC133 F の同じ方針（解説の部分だけを参照）

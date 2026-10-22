@@ -15,7 +15,7 @@ complexity: 区間 gcd は Sparse Table で構築 O(N log N log A)・クエリ O
 signs:
   - {type: phrase, text: A_i + B_j の矩形・全体に x を足したときの gcd}
   - {type: phrase, text: 区間の gcd を多数答える}
-  - {type: phrase, text: mod N で A ずつ進む操作で全ての点に行けるか}
+  - {type: phrase, text: mod N で A ずつ進む操作ですべての点に行けるか}
   - {type: constraint, text: 'N, Q ≤ 2×10^5 で区間 gcd のクエリ'}
 acl: []
 verify: []
@@ -27,8 +27,8 @@ sections:
   - {title: 'mod N で A ずつ進むと gcd(A, N) の倍数だけを回る（周期と連結性）', anchor: step-mod}
   - {title: '線分上の格子点は gcd(|dx|, |dy|) + 1 個', anchor: lattice-on-segment}
   - {title: 'ax + by（x, y ≥ 0）で表せない最大の数 ab − a − b', anchor: frobenius}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

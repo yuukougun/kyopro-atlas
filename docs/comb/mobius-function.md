@@ -17,8 +17,8 @@ signs:
   - {type: phrase, text: Σ gcd や Σ lcm を求める}
   - {type: constraint, text: N ≤ 10^6 程度で、μ を篩で前計算できる}
 acl: []
-frequency: C
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 1 問
+frequency: B
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 4 問
 sections:
   - {title: μ の定義と、約数についての和が n = 1 のときだけ 1 になる性質, anchor: definition}
   - {title: メビウス反転, anchor: inversion}
@@ -26,8 +26,8 @@ sections:
   - {title: μ を篩で作る, anchor: sieve}
   - {title: 商の列挙で同じ値の範囲を束ねる, anchor: quotient, level: 発展}
   - {title: 約数包除との書き換え, anchor: vs-divisor-ie}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

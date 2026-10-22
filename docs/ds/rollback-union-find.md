@@ -25,7 +25,7 @@ sections:
   - {title: なぜ経路圧縮をしないのか（戻すコストとならしの保証が崩れること）, anchor: no-path-compression}
   - {title: 木の DFS と組む（入るとき併合・出るとき取り消し）, anchor: with-dfs}
   - {title: オフライン動的連結性の部品（時間軸のセグメント木に辺を載せる → グラフの章）, anchor: offline-dynamic-connectivity}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -58,7 +58,7 @@ updated: 2026-10-22
 
 - **保つ性質**：各グループは根付き木で、根が代表元である。$\mathrm{par}[v]$ は、根なら $-(\text{大きさ})$、根でなければ親を指す（[Union-Find の保つ性質](../ds/union-find.md#invariants)と同じ）。加えて、記録のスタックを下から順に施せば、どの併合もしていない状態から今の状態が再現できる。
 - **各操作の手順**：$\mathrm{find}$ は根までたどるだけで、経路上の親を書き換えない。merge は 2 つの根 $a, b$ を求め、$(a, \mathrm{par}[a])$ と $(b, \mathrm{par}[b])$ をスタックに積んでから、小さい方を大きい方の下へつなぐ（union by size）。undo はスタックから 2 件取り出し、それぞれの位置へ元の値を書き戻す。
-- **境界**：すでに同じグループの 2 頂点を merge したときも、記録を 2 件積む（par は何も変わらないので、書き戻すだけなら害はない。引き算で戻す値は別で、[オフライン動的連結性](#offline-dynamic-connectivity)の末尾で扱う）。こうしておくと「merge 1 回 ＝ undo 1 回」が常に成り立ち、呼び出し側は merge の結果を見ずに undo できる。積まない作り方にするなら、merge が false を返したときは undo を呼ばないよう呼び出し側で区別する。
+- **境界**：すでに同じグループの 2 頂点を merge したときも、記録を 2 件積む。par は何も変わらないので、書き戻すだけなら害はない。ただし根の合計を引き算で戻す場合は、同じグループどうしの記録を取り消すときに引かない（引くと根の合計が 0 になる。引き算で戻す型は[オフライン動的連結性の DFS の節](../graph/offline-dynamic-connectivity.md#dfs-rollback)）。こうしておくと「merge 1 回 ＝ undo 1 回」が常に成り立ち、呼び出し側は merge の結果を見ずに undo できる。積まない作り方にするなら、merge が false を返したときは undo を呼ばないよう呼び出し側で区別する。
 
 ```cpp
 --8<-- "rollback-union-find/version-tree.cpp:core"
@@ -76,9 +76,9 @@ Library Checker で確かめるなら、[練習問題](#practice)の Persistent 
 
 さらに、経路圧縮の「ならし $O(\alpha(N))$」は、一度圧縮した経路を再びたどらないことに頼っている。取り消すと深い経路が元に戻るので、同じ深い $\mathrm{find}$ を何度でも繰り返させられ、ならしの保証が成り立たない。[ならし計算量](../guide/glossary.md#amortized-complexity)のデータ構造は、一般に巻き戻しと相性が悪い。
 
-そこで union by size だけにする。これだけで木の高さは $\log_2 N$ 以下に保たれるので、$\mathrm{find}$ は 1 回ごとに最悪 $O(\log N)$ で、ならしではない。併合で書き換わるのは根 2 つの $\mathrm{par}$ だけなので、記録は 2 件、undo は $O(1)$ である。同じ説明は[根からのパスを DFS で持ち回る](../tree/root-path-dfs.md#no-path-compression)にもある。
+そこで union by size だけにする。これだけで木の高さは $\log_2 N$ 以下に保たれるので、$\mathrm{find}$ は 1 回ごとに最悪 $O(\log N)$ で、ならしではない。併合で書き換わるのは根 2 つの $\mathrm{par}$ だけなので、記録は 2 件、undo は $O(1)$ である。要点は[根からのパスを DFS で持ち回る](../tree/root-path-dfs.md#no-path-compression)にもある。
 
-成分ごとに辺の数などを根に持たせるときは、それらの元の値も同じスタックに積んで戻す。取り消しの間に値を加える問題では、元の値を書き戻すと加えた分まで消えるので、引き算で戻す（[オフライン動的連結性](#offline-dynamic-connectivity)の末尾）。
+成分ごとに辺の数などを根に持たせるときは、それらの元の値も同じスタックに積んで戻す。取り消しの間に値を加える問題では、元の値を書き戻すと加えた分まで消えるので、引き算で戻す（[オフライン動的連結性の DFS の節](../graph/offline-dynamic-connectivity.md#dfs-rollback)）。
 
 ## 木の DFS と組む（入るとき併合・出るとき取り消し） {#with-dfs}
 
@@ -98,13 +98,11 @@ ABC で出てくるのは、根付き木を DFS しながら、頂点に入る�
 
 ## オフライン動的連結性の部品（時間軸のセグメント木に辺を載せる → グラフの章） {#offline-dynamic-connectivity}
 
-辺の追加と削除が混ざり、ところどころで「2 頂点は連結か」を問われる問題は、クエリをすべて先に読める（[オフライン](../guide/glossary.md#offline)）なら、ロールバックできる Union-Find で解ける。詳しい手順は[オフライン動的連結性](../graph/offline-dynamic-connectivity.md#time-segment-tree)に任せ、ここでは要点だけを書く。
+辺の追加と削除が混ざり、ところどころで「2 頂点は連結か」を問われる問題は、クエリをすべて先に読める（[オフライン](../guide/glossary.md#offline)）なら、ロールバックできる Union-Find で解ける。手順と、頂点の値の加算が混ざる型の扱いは[オフライン動的連結性](../graph/offline-dynamic-connectivity.md)のページが受け持つ。ここでは、このデータ構造から見た要点だけを書く。
 
-1. 各辺について、存在する時刻の区間 $[l, r)$ を求める（追加から削除まで。最後まで消えなければ $r = Q$）。
-2. 時刻 $0, 1, \dots, Q - 1$ を葉とする[セグメント木](../ds/segment-tree.md)を作り、各辺を区間 $[l, r)$ をちょうど覆う $O(\log Q)$ 個のノードに載せる。
-3. セグメント木を根から DFS し、ノードに入るとき載っている辺をすべて併合し、出るとき同じ回数だけ取り消す。葉 $t$ に着いたとき、Union-Find はちょうど時刻 $t$ に存在する辺を併合した状態なので、その時刻の質問に答える。
-
-ノードの入りと出が後入れ先出しになっているので、取り消しは常に最も新しい併合に当たる。辺 1 本は $O(\log Q)$ 個のノードに載り、併合 1 回が $O(\log N)$ なので、全体は $O(Q \log Q \log N)$ である。Library Checker の [Dynamic Graph Vertex Add Component Sum](#practice) は、これに頂点の値への加算と、成分の値の合計の質問を足した問題である。加算は取り消してはいけないので、合計の持ち方を工夫する。各頂点 $u$ に、Union-Find の木で $u$ の下にある頂点の値の合計 $\mathrm{sum}[u]$ を持たせる。併合（$b$ を $a$ の下へ）では $\mathrm{sum}[a] \mathrel{+}= \mathrm{sum}[b]$、取り消しでは $\mathrm{sum}[a] \mathrel{-}= \mathrm{sum}[b]$ とする。ただし同じ成分どうしの併合（$a = b$）の記録を取り消すときは引かない。引くと $\mathrm{sum}[a]$ が 0 になり、成分の合計が消える。葉で頂点 $v$ に $x$ を足すときは、$v$ から根までの経路上のすべての頂点の $\mathrm{sum}$ に $x$ を足す（経路の頂点は $O(\log N)$ 個）。こうすると $\mathrm{sum}[u]$ はいつも $u$ の下の合計に等しく、加えた値が取り消しで消えない。根だけに足すと、取り消しで $v$ が別の根の下に分かれたときに $x$ が元の根に残ってしまう。
+- **辺を時間軸に載せる**：各辺が存在する時刻の区間 $[l, r)$ を、時刻を葉とする[セグメント木](../ds/segment-tree.md)の $O(\log Q)$ 個のノードに載せる（[時間軸のセグ木](../graph/offline-dynamic-connectivity.md#time-segment-tree)）
+- **入るとき併合・出るとき取り消す**：セグメント木を DFS すると、ノードの入りと出が後入れ先出しになるので、取り消しは常に最も新しい併合に当たる。この性質が、最も新しい併合だけを戻せるこのページの構造とかみ合う（[DFS で取り消す](../graph/offline-dynamic-connectivity.md#dfs-rollback)）
+- **計算量**：辺 1 本が $O(\log Q)$ 個のノードに載り、併合 1 回が $O(\log N)$ なので、全体は $O(Q \log Q \log N)$ である
 
 ## 学ぶための資料 {#resources}
 
@@ -134,7 +132,7 @@ ABC で出てくるのは、根付き木を DFS しながら、頂点に入る�
 ### Library Checker
 
 - [Persistent Unionfind](https://judge.yosupo.jp/problem/persistent_unionfind)：版 $k$ のグラフに辺を足して新しい版を作る操作と、版 $k$ で 2 頂点が連結かを答える質問を処理する。[木の DFS と組む](#with-dfs)のコード片がそのまま使える。
-- [Dynamic Graph Vertex Add Component Sum](https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum)：辺の追加・削除と頂点の値への加算が混ざり、頂点を含む成分の値の合計を答える。本文の[オフライン動的連結性の部品](#offline-dynamic-connectivity)が対応する。
+- [Dynamic Graph Vertex Add Component Sum](https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum)：辺の追加・削除と頂点の値への加算が混ざり、頂点を含む成分の値の合計を答える。本文の[オフライン動的連結性の部品](#offline-dynamic-connectivity)の形で、加算の扱いは[オフライン動的連結性の DFS の節](../graph/offline-dynamic-connectivity.md#dfs-rollback)にある。
 
 ## 確認問題 {#quiz}
 

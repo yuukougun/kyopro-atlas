@@ -10,12 +10,12 @@ level: 基礎
 kind: [実装・C++]
 prerequisites: [cpp-templates-constexpr, cpp-lambda]
 related: [cpp-initialization, modint, mod-arithmetic, segment-tree, segment-tree-monoids, lazy-segment-tree, segment-tree-binary-search, library-design]
-summary: AtCoder Library（ACL）を使う解説コードを、共通の約束（0 始まり・半開区間）とともに読む。modint の val() と出力、segtree・lazy_segtree のテンプレート引数にラムダを渡す書き方が分かる。
+summary: AtCoder Library（ACL）を使う解説コードを共通の約束（0-indexed・半開区間）とともに読む。modint の val() と出力、segtree・lazy_segtree のテンプレート引数にラムダを渡す書き方を知る。
 complexity: 'dsu の操作はならし O(α(N))、fenwick_tree・segtree・lazy_segtree は構築 O(N)・操作 O(log N)（op などを O(1) とする）、modint の四則演算は O(1)（割り算だけ O(log mod)）'
 signs: []
 acl: [static_modint, modint, segtree, lazy_segtree, dsu]
 sections:
-  - {title: include と共通の約束：0 始まり・半開区間・引数なしで作った物・assert, anchor: conventions}
+  - {title: include と共通の約束：0-indexed・半開区間・引数なしで作った物・assert, anchor: conventions}
   - {title: コンストラクタは modint 以外 explicit：dsu d(n) と書く（dsu d = n はエラー）, anchor: explicit}
   - {title: '版：AtCoder は v1.6、v1.5 との違いは modint::val() の型など', anchor: version}
   - {title: 部品の呼び出し方の一覧（意味は各手法のページ）, anchor: components}
@@ -27,15 +27,15 @@ sections:
   - {title: キャプチャのあるラムダは op・e に渡せない（max_right・min_left の判定関数には渡せる）, anchor: capturing-lambda, level: 水}
   - {title: 'lazy_segtree の 7 つの引数：composition(f, g) は g の後に f', anchor: lazy-segtree-args, level: 水}
   - {title: 'テンプレート引数の形が合わないときの static_assert（mapping must work as S(F, S) など）', anchor: template-arg-errors, level: 水}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 cpp_std: null
 gcc_min: null
 atcoder: true
 ---
 
 !!! abstract "要点"
-    - **何ができるか**：AtCoder Library（ACL）を使う解説コードを、共通の約束（0 始まり・半開区間）とともに読む。modint の `val()` と出力、segtree・lazy_segtree のテンプレート引数にラムダを渡す書き方が分かる。
+    - **何ができるか**：AtCoder Library（ACL）を使う解説コードを共通の約束（0-indexed・半開区間）とともに読む。modint の `val()` と出力、segtree・lazy_segtree のテンプレート引数にラムダを渡す書き方を知る。
     - **いつ使うか**：解説コードに `#include <atcoder/all>`・`using mint = modint998244353;`・`x.val()`・`segtree<S, op, e>` が出てきて読みたいとき。ACL の呼び出しでコンパイルエラーや RE が出たとき。
     - **計算量**：`dsu` の操作はならし $O(\alpha(N))$。`fenwick_tree`・`segtree`・`lazy_segtree` は構築 $O(N)$・各操作 $O(\log N)$（渡した `op` などが $O(1)$ のとき）。modint の四則演算は $O(1)$ で、割り算だけ $O(\log m)$
     - **前提**：[関数テンプレートと constexpr](../cpp/cpp-templates-constexpr.md)、[ラムダ式と再帰ラムダ](../cpp/cpp-lambda.md)
@@ -48,12 +48,12 @@ ACL は AtCoder が公開している C++ のライブラリで、AtCoder の提
 
 このページのコードは `#include <bits/stdc++.h>`・`#include <atcoder/all>`・`using namespace std;`・`using namespace atcoder;` を前提にする。確かめた環境は ACL v1.6 と g++-13・g++-15（`-std=gnu++23`）である。
 
-## include と共通の約束：0 始まり・半開区間・引数なしで作った物・assert {#conventions}
+## include と共通の約束：0-indexed・半開区間・引数なしで作った物・assert {#conventions}
 
 ACL の部品は、どれも次の約束に従う。解説コードの添字や区間は、この約束で読む。
 
 - **include**：`#include <atcoder/all>` で全部を読み込むか、`#include <atcoder/segtree>` のように部品ごとに読み込む。名前は名前空間 `atcoder` の中にあるので、`using namespace atcoder;` と書くか、`atcoder::segtree` のように付ける
-- **添字は 0 始まり**：問題文の 1-indexed の頂点 $u$ は `u - 1` にして渡す
+- **添字は 0-indexed**：問題文の 1-indexed の頂点 $u$ は `u - 1` にして渡す
 - **区間は半開区間** $[l, r)$：`sum(l, r)` などの区間は $l$ 番目から $r - 1$ 番目までである。問題文の閉区間 $[L, R]$（1-indexed）は `(L - 1, R)` で渡す。`l == r` は空区間で、和なら 0、`prod` なら `e()` を返す
 - **引数なしで作った物は、代入するまで使わない**：`scc_graph g;` はメンバ関数を呼ぶと動作が決まっていない。グローバル変数として宣言し、入力を読んでから `g = scc_graph(n);` と代入する使い方のためにある
 

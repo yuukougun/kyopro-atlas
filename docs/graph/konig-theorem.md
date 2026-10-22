@@ -25,8 +25,8 @@ sections:
   - {title: 二部グラフに作り直す（市松模様・偶奇）, anchor: make-bipartite}
   - {title: 一般グラフでは難しい（彩色数・最大独立集合のページへ）, anchor: general-graph}
   - {title: 頂点を 2 倍にして二部グラフにする（LP の半整数性）, anchor: lp-half-integrality, level: 発展}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

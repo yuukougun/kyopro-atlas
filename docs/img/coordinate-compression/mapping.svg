@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="400" height="370" viewBox="0 0 400 370" font-family="sans-serif" font-size="14">
-<defs><marker id="ar" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#555"/></marker></defs>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="371" viewBox="0 0 400 371" font-family="sans-serif" font-size="14">
 <rect width="100%" height="100%" fill="#ffffff"/>
+<g transform="translate(0 1)">
+<defs><marker id="ar" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#555"/></marker></defs>
 <text x="16" y="22" fill="#222">元の列 a</text>
 <text x="71" y="44" text-anchor="middle" fill="#777" font-size="13">i = 0</text>
 <rect x="40" y="52" width="62" height="34" fill="#f2f2f2" stroke="#666" stroke-width="1.5"/>
@@ -48,4 +49,5 @@
 <text x="351" y="282" text-anchor="middle" fill="#222" font-weight="bold">0</text>
 <text x="16" y="326" fill="#555" font-size="13">id[i] は a[i] より小さい異なる値の個数</text>
 <text x="16" y="346" fill="#555" font-size="13">（lower_bound の位置）。同じ 7 には同じ番号 1</text>
+</g>
 </svg>

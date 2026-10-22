@@ -10,7 +10,7 @@ level: 水
 kind: [最短路]
 prerequisites: [dijkstra]
 related: [extended-dijkstra]
-summary: 辺の所要時間が出発時刻で変わる最短路は、早く着いて損をしない（待てる）なら、各頂点で最も早い到着時刻だけを持つダイクストラで求まる。終点に間に合う最も遅い出発時刻は逆向きに確定させる。
+summary: 辺の所要時間が出発時刻で変わる最短路は、早く着いて損をしない（待てる）なら、各頂点で最も早い到着時刻だけを持つダイクストラ法で求まる。終点に間に合う最も遅い出発時刻は逆向きに確定させる。
 complexity: 辺 1 本の到着時刻を O(1) で計算できれば O((N + M) log N)
 signs:
   - {type: phrase, text: 決まった時刻にしか出発できない・待つことができる}
@@ -18,14 +18,14 @@ signs:
   - {type: phrase, text: 終点に間に合う最も遅い出発時刻}
 acl: []
 frequency: B
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 3 問
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 5 問
 sections:
   - {title: 早く着いて損をしない性質（FIFO 性）, anchor: fifo}
   - {title: 次の出発時刻まで待つ遷移, anchor: wait}
   - {title: 最終電車型：終点から逆向きに最も遅い時刻を確定させる, anchor: latest-departure}
   - {title: 最適な出発時刻を計算してから進む, anchor: optimal-departure, level: 青}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

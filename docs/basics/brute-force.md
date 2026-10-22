@@ -20,15 +20,15 @@ signs:
   - {type: phrase, text: 小さい盤面を回転・平行移動して重ねる・敷き詰める}
 acl: []
 frequency: A
-frequency_evidence: recent 5（abc451_d・abc469_d・abc474_e・abc476_d・abc480_e）・前提として 71 ページに届く（直接 3）・古い ABC 5 問
+frequency_evidence: recent 5（abc451_d・abc469_d・abc474_e・abc476_d・abc480_e）・前提として 71 ページに届く（直接 3）・古い ABC 4 問
 sections:
   - {title: 何を全探索するか（2 つ決めて 3 つ目を計算する）, anchor: what-to-enumerate}
   - {title: 決めてから整合性を確かめる, anchor: decide-then-check}
   - {title: 候補が少ないことに気づく（答えの側・小さい次元・約数の個数・log 回の収束）, anchor: small-candidates}
   - {title: 片側を全探索して残りを速く求める（貪欲・二分探索・累積和）, anchor: half-enumeration}
   - {title: 盤面を動かして全部試す（回転・平行移動）, anchor: move-board, level: 水}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -230,6 +230,6 @@ $L$ と $R$ の境界を半開区間 $[0, k)$ と $[k, N)$ にそろえると、
 - [dvoraker3「競プロ典型 90 問の類題+＠ リンク集」](https://qiita.com/dvoraker3/items/8388ab6e1dc3af55070e)：Lucky PIN を候補の側の全探索として分類
 - [comet725「ABC469Dを解いた【候補の絞り込み】」](https://qiita.com/comet725/items/5783b8e77e3ef99c72c6)：練習の方針（候補を 2 人に絞る・重複を除く）
 - [drken「AtCoder ABC 112 C - Pyramid (2Q, 緑色, 300 点)」](https://drken1215.hatenablog.com/entry/2018/11/06/120500)：決めてから整合性を確かめる型
-- [Reputeless「tenkei_90」（競プロ典型 90 問の一覧）](https://github.com/Reputeless/tenkei_90)：練習の問題の分類
+- [Reputeless「tenkei_90」](https://github.com/Reputeless/tenkei_90)：練習の問題の分類
 - [drken「AtCoder ABC 307 C - Ideal Sheet (2Q, 水色, 300 点)」](https://drken1215.hatenablog.com/entry/2024/06/10/001849)：平行移動の範囲（負の側を含む）とはみ出しの扱い
 - [drken「AtCoder ABC 322 D - Polyomino (1Q, 水色, 400 点)」](https://drken1215.hatenablog.com/entry/2023/10/02/230400)：回転の座標変換と 16 ビットでの表現、シフトの回り込み

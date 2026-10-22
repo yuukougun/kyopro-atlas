@@ -53,7 +53,7 @@ type: generated
 | [比較関数と順序](../cpp/cpp-comparators.md) | 基礎 | sort・set・priority_queue に渡す比較関数を約束（狭義の弱順序）と向きを守って書き、構造体に operator< や <=> で順序を持たせる。比較関数に <= を書いて sort が落ちるような事故を防ぐ。 |
 | [アルゴリズム関数と ranges 版](../cpp/cpp-algorithms.md) | 基礎 | sort・unique・lower_bound・accumulate などの定型と、射影も使える ranges 版（C++20）を使い分ける。accumulate の初期値の型や、unique だけでは要素が減らない点に気をつける。 |
 | [文字列の操作](../cpp/cpp-string-api.md) | 基礎 | std::string の操作（substr・find・+=・数との変換）と string_view を、計算量と寿命に気をつけて書く。s = s + c が全体をコピーして遅いことや、cin >> の後の getline の罠を防ぐ。 |
-| [ACL の読み方](../cpp/acl-reading.md) | 基礎 | AtCoder Library（ACL）を使う解説コードを、共通の約束（0 始まり・半開区間）とともに読む。modint の val() と出力、segtree・lazy_segtree のテンプレート引数にラムダを渡す書き方が分かる。 |
+| [ACL の読み方](../cpp/acl-reading.md) | 基礎 | AtCoder Library（ACL）を使う解説コードを共通の約束（0-indexed・半開区間）とともに読む。modint の val() と出力、segtree・lazy_segtree のテンプレート引数にラムダを渡す書き方を知る。 |
 | [views の基本](../cpp/cpp-views-basics.md) | 基礎 | \| でつなぐ views（iota・filter・transform・split など）を、取り出すときに計算する遅延評価として読み書きする。views::iota(0, v.size()) が通らない理由など、型と寿命の罠も分かる。 |
 | [C++23 の views と ranges::to](../cpp/cpp-views-cpp23.md) | 基礎 | C++23 の views（enumerate・zip・pairwise・chunk_by など）で添字付きや隣どうしのループを短く書き、ranges::to で結果をコンテナにする。要素は参照を含む組で、受けた変数への代入が元を変える。 |
 | [入出力と定数倍](../cpp/cpp-io.md) | 基礎 | 入出力を速くし（sync_with_stdio・cin.tie）、println・小数の桁の指定・インタラクティブ問題のフラッシュを正しく書く。C++ の書き方が原因で TLE になる例も、計測つきで示す。 |

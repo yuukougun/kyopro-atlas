@@ -28,8 +28,8 @@ sections:
   - {title: __int128 の入出力：cin・cout では扱えない、format・println か自作の変換で出す, anchor: int128-io}
   - {title: '-std=c++23 では __int128 が整数型と判定されず gcd・abs に渡せない', anchor: int128-strict-mode}
   - {title: 積が上限を超えるかの判定：割り算で比べる・__builtin_mul_overflow, anchor: overflow-check}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 cpp_std: null
 gcc_min: null
 atcoder: true

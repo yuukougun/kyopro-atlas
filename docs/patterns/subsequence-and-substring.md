@@ -10,7 +10,7 @@ kind: [案内, 文字列, DP]
 prerequisites: []
 related: [subsequence-matching, dp-state-design, dp-mod-state, subsequence-dp, counting-dedup, dp-phase, lcs, lis, rolling-hash, z-algorithm, suffix-array, palindrome, interval-dp, string-automaton-dp, string-basics, interval]
 summary: 部分列（飛び飛びに選ぶ）と部分文字列（連続する部分）が出てくる問題で、問われ方から使う手法を引ける。判定・選び方の数・異なるものの数・最長の共通部分・種類数の問われ方に分ける。
-complexity: 部分列の判定 O(N+M)、選び方の数 O(NM)（N=|S|、M=|T|）
+complexity: null
 signs:
   - {type: phrase, text: T が S の部分列か判定する}
   - {type: phrase, text: S から何文字か選んで順に並べると T になる選び方の数}
@@ -31,7 +31,7 @@ sections:
   - {title: '回文の部分文字列・部分列 → 回文のページと区間 DP（palindrome, interval-dp）', anchor: palindromes}
   - {title: T を部分文字列に含まない文字列の数 → 照合の状態を持つ DP（string-automaton-dp）, anchor: avoid-substring}
   - {title: 数列の連続部分列 → 題材別の区間（interval）, anchor: subarrays}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 

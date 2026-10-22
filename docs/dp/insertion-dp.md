@@ -26,8 +26,8 @@ sections:
   - {title: 値の大きい（小さい）順に挿入していく見方, anchor: insert-by-value}
   - {title: 箱根駅伝 DP（相手が未定の位置と値の数を持つ）, anchor: hakone-ekiden-dp}
   - {title: 連結成分 DP（ブロックを作る・端に付ける・つなぐ）, anchor: connected-component-dp, level: 発展}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -151,7 +151,7 @@ $\lvert p_i - i \rvert$ の和は、次のように隙間ごとの寄与に分�
 ```
 
 - **奇数の和はない**：毎回 $2d'$ を足すので、$\sum \lvert p_i - i \rvert$ は必ず偶数である。$K$ が奇数なら答えは 0 になる
-- **応用の型**：「すべての $i$ で $\lvert p_i - i \rvert \ge X$」のような禁止の条件は、条件を破る位置を選ぶ[包除原理の DP](../comb/inclusion-exclusion-dp.md)と組み合わせる（[練習](#practice)の ABC309 G）
+- **応用の型**：「すべての $i$ で $\lvert p_i - i \rvert \ge X$」のような禁止の条件は、条件を破る位置を選ぶ[包除 DP](../comb/inclusion-exclusion-dp.md)と組み合わせる（[練習](#practice)の ABC309 G）
 
 ## 連結成分 DP（ブロックを作る・端に付ける・つなぐ） {#connected-component-dp}
 
@@ -292,7 +292,7 @@ AtCoder の ABC での出題は確かめられなかった。USACO Guide の DP 
 - [Series_205「Educational DP Contest (EDPC) T ~ W 問題 解説」](https://qiita.com/Series_205/items/7d2c57b45179006d0bc6)：例題 EDPC T の状態と遷移の範囲、累積和で $O(N^2)$ にすること
 - [kmjp「AtCoder ABC #209 : F - Deforestation」](https://kmjp.hatenablog.jp/entry/2021/07/10/0900)：例題 ABC209 F の、高い方を先に切る言い換えと相対順位の DP
 - [drken「AtCoder ABC 134 F - Permutation Oddness (橙色, 600 点)」](https://drken1215.hatenablog.com/entry/2020/12/25/220600)：例題 ABC134 F の、隙間ごとの寄与と箱根駅伝 DP の遷移の係数
-- [kanpurin「競技プログラミング 典型問題メモ」](https://kanpurin.hatenablog.com/entry/2020/04/07/182948)：挿入 DP・箱根駅伝 DP の問題の分類と、箱根駅伝 DP の名前の由来（AOJ 2439）
+- [かんプリン「競技プログラミング　典型問題メモ」](https://kanpurin.hatenablog.com/entry/2020/04/07/182948)：挿入 DP・箱根駅伝 DP の問題の分類と、箱根駅伝 DP の名前の由来（AOJ 2439）
 - [kmjp「AtCoder Beginner Contest 468 : G - Restricted Permutation」](https://kmjp.hatenablog.jp/entry/2026/07/25/0930)：練習 ABC468 G の方針（値の順に置き、区間の長さを状態にする）
 - [kmjp「AtCoder ABC #282 (HHKBプログラミングコンテスト2022 Winter) : G - Similar Permutation」](https://kmjp.hatenablog.jp/entry/2022/12/18/0900)：力試し ABC282 G の方針（2 つの相対順位と 2 次元累積和）
 - [drken「AtCoder ABC 267 G - Increasing K Times (橙色, 600 点)」](https://drken1215.hatenablog.com/entry/2023/05/04/215500)：力試し ABC267 G の、値の順の挿入と同じ値の扱い

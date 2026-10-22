@@ -29,8 +29,8 @@ sections:
   - {title: 区間の中の K の倍数の個数と、x 以上で m で割って r 余る最小の数, anchor: count-multiples}
   - {title: あふれる前に割り算で判定する方法と __int128 への逃げ方, anchor: overflow}
   - {title: double で割らない（10^18 付近の誤差）, anchor: no-double}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

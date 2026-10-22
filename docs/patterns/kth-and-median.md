@@ -10,7 +10,7 @@ kind: [案内, 二分探索, データ構造]
 prerequisites: []
 related: [kth-value, binary-search-answer, priority-queue, top-k-multiset, kth-element, segment-tree-on-values, ordered-set, balanced-bst, offline-queries, wavelet-matrix, fractional-binary-search, median-absolute, binomial-coefficient, dp-reconstruction, xor-basis]
 summary: K 番目に小さい値・上位 K 個の和・中央値を問う問題で、データの動き方から手法を引ける。構造で保つか、「x 以下が K 個以上か」で答えを二分探索するか、小さい順に取り出すかを選ぶ。
-complexity: 答えの二分探索は（x 以下の個数を数える計算量）× O(log V)、構造で保つなら 1 回 O(log N)、小さい順に K 個取り出すなら O(K log K)
+complexity: null
 signs:
   - {type: phrase, text: K 番目に小さい（大きい）値を答える}
   - {type: phrase, text: N² 個の積・和・差の中で K 番目}
@@ -31,7 +31,7 @@ sections:
   - {title: Σ|x − a_i| の最小 → 中央値を選ぶ（median-absolute）, anchor: absolute-sum}
   - {title: 辞書順で K 番目の文字列・順列 → 残りの個数を数えて先頭から決める, anchor: lexicographic-kth}
   - {title: XOR で作れる値の K 番目 → XOR 基底（xor-basis）, anchor: xor-kth}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -190,7 +190,7 @@ $f(x) = \sum_i \lvert x - a_i \rvert$ を最小にする $x$ は、$a$ の中央
 
 - **「ちょうど $K$」で探す**：同じ値が複数あれば、$\mathrm{count}(x) = K$ となる $x$ は存在しないことがある。値 1, 3, 3, 6, 8 で $K = 2$ とすると、$\mathrm{count}$ は 1 から 3 へ飛ぶ（[題材の性質](#properties)）。判定は必ず「$\ge K$」にする。
 - **「以下」と「未満」の取り違え**：「$x$ 未満の個数」で数えたなら、答えは「$x$ 未満の個数 $< K$」となる最大の $x$ である。判定の形と、答えが最小の ok か最大の ok かを組で決める。迷ったら $K = 1$ と $K = T$ を手で確かめる。
-- **$K$ の数え始め**：問題の $K$ は 1 始まりが多いが、pb_ds の `find_by_order` や Wavelet Matrix のライブラリは 0 始まりのことが多い。境目で 1 を足し引きする。
+- **$K$ の数え始め**：問題の $K$ は 1-indexed が多いが、pb_ds の `find_by_order` や Wavelet Matrix のライブラリは 0-indexed のことが多い。境目で 1 を足し引きする。
 - **偶数個の中央値**：中央の 2 つの小さい方・大きい方・平均のどれを取るかで、判定の不等号が変わる。問題文の定義を確かめ、偶数個の小さな例で判定を手で回す。
 - **個数のオーバーフロー**：$N^2$ 個の候補の個数や、辞書順の数え上げの個数は `int` を超える。個数は `long long` で持ち、数え上げは $K$ で頭打ちにする。
 

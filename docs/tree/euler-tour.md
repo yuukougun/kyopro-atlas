@@ -30,8 +30,8 @@ sections:
   - {title: 根からのパスを区間で扱う（辺の重みを子の部分木に配る）, anchor: root-path}
   - {title: 木上の Mo（データ構造の章）, anchor: mo-on-tree}
   - {title: 逆元がない演算・パスへの一括更新は HL 分解, anchor: to-hld, level: 発展}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -326,8 +326,8 @@ HL 分解の番号付けも行きがけ順で、重い子を先に回るだけ�
 - [AtCoder Library「Fenwick Tree」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/fenwicktree.md)：`fenwick_tree` の `add`・`sum` の引数（半開区間）と計算量
 - [merom686「ABC406」](https://merom686.hatenablog.com/entry/2025/05/18/151742)：例題 abc406_f の方針（片側は子の部分木の和）と、辺の端点の片方しか見ない誤り
 - [bfs「【JavaScript】ABC406まとめ（A~F）」](https://qiita.com/bfs/items/8d3f7bf6c8e90b073086)：例題 abc406_f の操作の中身（初期の重み、加算と差の絶対値）
-- [2yuu「AtCoder Beginner Contest E - Count Descendants」](https://qiita.com/2yuu/items/898b95864905dcbc8e7d)：例題 abc202_e の深さごとの列と二分探索
-- [はまやんはまやんはまやん「Count Descendants」](https://blog.hamayanhamayan.com/entry/2021/05/22/225525)：例題 abc202_e の別解（深さの順の平面走査と BIT）
-- [kmjp「AtCoder ABC #294 G」](https://kmjp.hatenablog.jp/entry/2023/04/18/0900)：例題 abc294_g の方針（根からの距離、辺の重みを部分木への区間加算に、LCA）
+- [2yuu「Atcoder解いてみた　AtCoder Beginner Contest E - Count Descendants」](https://qiita.com/2yuu/items/898b95864905dcbc8e7d)：例題 abc202_e の深さごとの列と二分探索
+- [hamayan「Count Descendants [エイシングプログラミングコンテスト2021（AtCoder Beginner Contest 202） E]」](https://blog.hamayanhamayan.com/entry/2021/05/22/225525)：例題 abc202_e の別解（深さの順の平面走査と BIT）
+- [kmjp「AtCoder ABC #294 : G - Distance Queries on a Tree」](https://kmjp.hatenablog.jp/entry/2023/04/18/0900)：例題 abc294_g の方針（根からの距離、辺の重みを部分木への区間加算に、LCA）
 - [Kazun「ABC240 E」](https://kazun-kyopro.hatenablog.com/entry/ABC/240/E)：練習 abc240_e の下限と葉の番号付け
 - [kmjp「AtCoder ABC #337 G」](https://kmjp.hatenablog.jp/entry/2024/01/20/1000)：力試し abc337_g の問いと方針（部分木の補集合への加算）

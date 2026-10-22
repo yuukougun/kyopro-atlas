@@ -25,7 +25,7 @@ sections:
   - {title: 複素数の FFT と誤差、NTT に向く素数（c·2^k + 1）と原始根, anchor: ntt-prime}
   - {title: 任意 mod の畳み込み（3 素数 NTT と Garner、convolution_ll）, anchor: arbitrary-mod}
   - {title: ACL の convolution と自作するときの要点, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -170,4 +170,4 @@ ABC で必須になる問題は確認できなかった。
 - [tayu0110「爆速なNTTを実装したい」](https://tayu0110.hatenablog.com/entry/2023/05/06/023244)：学ぶための資料。周波数間引き・時間間引きと、並べ替えを省く工夫、基数 4
 - [AtCoder Library「Convolution」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/convolution.md)：`convolution` と `convolution_ll` の要件と計算量（v1.6 の手元の版で確かめた）
 - [AtCoder Library「convolution.hpp」](https://github.com/atcoder/ac-library/blob/master/atcoder/convolution.hpp)：`convolution_ll` の 3 つの素数、基数 4 のバタフライ
-- [yosupo「Library Checker の問題（convolution）」](https://github.com/yosupo06/library-checker-problems/tree/master/convolution)：convolution_mod・convolution_mod_1000000007・convolution_mod_2_64 の内容と制約（$N, M \le 524288$）
+- [yosupo06「library-checker-problems/convolution」](https://github.com/yosupo06/library-checker-problems/tree/master/convolution)：convolution_mod・convolution_mod_1000000007・convolution_mod_2_64 の内容と制約（$N, M \le 524288$）

@@ -27,8 +27,8 @@ sections:
   - {title: 部分列として含む文字列は最も左の埋め込みで数える, anchor: leftmost}
   - {title: グループ分けは未使用の最小番号から決める, anchor: min-index}
   - {title: DP の中で代表を決める（何も変えない操作を除く・最初に〜で場合分け・包除で重なりを引く）, anchor: in-dp}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -202,7 +202,7 @@ $$
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [ABC180 F. Unbranched](https://atcoder.jp/contests/abc180/tasks/abc180_f)（diff 2419）：自己ループのない（多重辺は許す）N 頂点 M 辺の無向グラフで、各連結成分がパスかサイクルで、最大の連結成分の頂点数がちょうど L のものの数を求める。
+- [ABC180 F. Unbranched](https://atcoder.jp/contests/abc180/tasks/abc180_f)（diff 2419）：自己ループのない（多重辺は許す）N 頂点 M 辺の無向グラフで、各連結成分がパスか閉路で、最大の連結成分の頂点数がちょうど L のものの数を求める。
 
 </div>
 

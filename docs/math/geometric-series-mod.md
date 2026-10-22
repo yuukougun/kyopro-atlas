@@ -26,8 +26,8 @@ sections:
   - {title: 法が任意のとき：S(2k) = S(k)(1 + r^k) で半分に割る, anchor: halving, level: 水}
   - {title: 2×2 行列の累乗による別解, anchor: matrix, level: 青}
   - {title: 同じ数字列を並べた数は公比 10^d の等比数列の和になる, anchor: repeated-digits}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

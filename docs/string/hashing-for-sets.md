@@ -28,8 +28,8 @@ sections:
   - {title: BIT と組んで点の更新に対応する, anchor: with-fenwick}
   - {title: 衝突確率と乱数の作り方（mt19937_64）, anchor: collision-and-rng}
   - {title: 各値が偶数個・k の倍数個かの判定（指数 mod k を乱数で符号化）, anchor: multiplicity-mod-k, level: 黄}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -263,9 +263,8 @@ $$
 
 ## 参考 {#references}
 
-- [traP「集合をハッシュする (Zobrist hashing)」](https://trap.jp/post/1594/)：XOR による集合のハッシュ、ABC250 E の初めて出た値だけ入れる接頭辞、ABC238 G の（素数, 指数 mod 3）の組への符号化
 - [yamate11「集合・多重集合のハッシュ」](https://yamate11.github.io/blog/posts/2022/02-13-zobrist-hash/)：集合は XOR、多重集合は和という使い分けと、1 つの値に注目する衝突確率の見積もり。ABC367 F が多重集合のハッシュの例であること
 - [merom686「ABC367」](https://merom686.hatenablog.com/entry/2024/08/18/020931)：ABC367 F をハッシュで解いた記録（区間の取り違えによる誤り）
 - [ikatakos「AtCoder × Engineer Guild オンサイトコンテスト ～集結！高レート人材～予選（AtCoder Beginner Contest 424）F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0920_abc424)：弦の両端に同じ乱数を置いて XOR の BIT で交差を判定する方法（解説の部分だけを参照）
 - [ikatakos「Ｓｋｙ株式会社プログラミングコンテスト2026（AtCoder Beginner Contest 455）F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0425_abc455)：k 回の出現で XOR が 0 になる符号化と、和のハッシュを使った種類数の条件の言い換え（解説の部分だけを参照）
-- [AtCoder Library「Fenwick Tree」](https://github.com/atcoder/ac-library/blob/master/document_ja/fenwicktree.md)：`fenwick_tree` の要素の型と、あふれたときに $2^{\mathrm{bit}}$ を法とする値を返すこと
+- [AtCoder Library「Fenwick Tree」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/fenwicktree.md)：`fenwick_tree` の要素の型と、あふれたときに $2^{\mathrm{bit}}$ を法とする値を返すこと

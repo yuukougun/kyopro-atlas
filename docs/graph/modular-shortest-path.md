@@ -22,7 +22,7 @@ frequency_evidence: recent 0・前提として届くページなし・古い ABC
 sections:
   - {title: 余りを頂点、操作を辺にする, anchor: residue-vertices}
   - {title: 同余最短路（最小の数で割った余りごとの最小値）, anchor: congruence}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -128,4 +128,4 @@ Library Checker に同余最短路そのものを問う問題はない（2026-10
 - [drken「AtCoder 版！蟻本 (初級編)」](https://qiita.com/drken/items/e77685614f3c6bf86f44)：例題 ARC084 D をグラフの最短路に帰着する問題として位置づけていること
 - [Heartlessly「题解 P2371 【[国家集训队]墨墨的等式】」](https://www.luogu.com.cn/article/7yfca7t0)：学ぶための資料（中国語）。法を最小の数にすること、辺の張り方と、$[0, x]$ の個数を $\lfloor (x - d_i) / m \rfloor + 1$ の和で数えること
 - [OI Wiki「同余最短路」](https://oi-wiki.org/graph/mod-shortest-path/)：学ぶための資料（中国語。文章・図は使っていない）。跳楼机と ARC084 D の構成、数の種類ごとに閉路を 2 周して緩和する方法（$O(nm)$ はこの方法から数えた計算量）
-- [yosupo「Library Checker：Shortest Path」](https://judge.yosupo.jp/problem/shortest_path)：最短路の部分の検証に使う問題
+- [Library Checker「Shortest Path」](https://judge.yosupo.jp/problem/shortest_path)：最短路の部分の検証に使う問題

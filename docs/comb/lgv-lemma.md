@@ -24,7 +24,7 @@ sections:
   - {title: 格子路と組み合わせる, anchor: with-lattice-paths}
   - {title: 行列式を bitDP で展開する例, anchor: bitdp}
   - {title: 計算量と自作するときの要点, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 

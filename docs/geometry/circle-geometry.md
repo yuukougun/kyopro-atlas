@@ -20,7 +20,7 @@ signs:
 acl: [dsu]
 verify: [minimum_enclosing_circle]
 frequency: B
-frequency_evidence: recent 0・前提として届くページなし・古い ABC 8 問
+frequency_evidence: recent 0・前提として届くページなし・古い ABC 7 問
 sections:
   - {title: 2 円の位置関係（離れる・外接・交わる・内接・内包）を 2 乗した整数で判定, anchor: two-circles}
   - {title: 円と格子点：y ごとに x の範囲を整数で求める, anchor: lattice-points-in-circle}
@@ -30,8 +30,8 @@ sections:
   - {title: 幾何の最適化の選び方：候補の列挙・答えの二分探索（半径・時刻）・三分探索, anchor: geometry-optimization}
   - {title: 三分探索の注意：凸性の確認・入れ子の三分探索・式の変わり目の時刻を列挙する方法, anchor: ternary-search-caveats, level: 黄}
   - {title: 山登り・焼きなましに頼らない（ABC の幾何の最適化は凸性や候補の列挙で解ける）, anchor: no-heuristics}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

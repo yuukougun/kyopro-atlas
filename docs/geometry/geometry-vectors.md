@@ -31,8 +31,8 @@ sections:
   - {title: 線分の交差判定（端点で接する・同一直線上の場合）と点と直線の距離, anchor: segment-intersection, level: 水}
   - {title: 3 次元の基本：軸に平行な直方体の共通部分は軸ごとの区間の積, anchor: 3d-geometry}
   - {title: '点の表し方：整数の構造体と std::complex', anchor: point-representation}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

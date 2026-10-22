@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 482" width="320" height="482" font-family="sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 484" width="320" height="484" font-family="sans-serif">
+<g transform="translate(0 1)">
 <defs><pattern id="h" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#888" stroke-width="2"/></pattern></defs>
-<rect width="320" height="482" fill="#ffffff"/>
+<rect x="0" y="-1" width="320" height="484" fill="#ffffff"/>
 <text x="16" y="22" font-size="14" fill="#222">N = 4 の積 a_i a_j の表</text>
 <text x="16" y="42" font-size="14" fill="#222">（全体の和 = (a_0 + a_1 + a_2 + a_3)^2）</text>
 <text x="86" y="80" font-size="13" text-anchor="middle" fill="#333">j = 0</text>
@@ -52,4 +53,5 @@
 <text x="16" y="428" font-size="13" fill="#222">i &lt; j の和 =（全体 − 対角）÷ 2</text>
 <text x="16" y="452" font-size="13" fill="#444">上の三角と下の三角は対角について対称なので</text>
 <text x="16" y="470" font-size="13" fill="#444">値の和が等しい</text>
+</g>
 </svg>

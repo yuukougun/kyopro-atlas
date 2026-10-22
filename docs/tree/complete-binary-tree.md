@@ -17,15 +17,15 @@ signs:
   - {type: constraint, text: N ≤ 10^18 の木}
 acl: []
 frequency: B
-frequency_evidence: recent 1（abc465_d）・前提として届くページなし・古い ABC 2 問
+frequency_evidence: recent 1（abc465_d）・前提として届くページなし・古い ABC 3 問
 sections:
   - {title: 番号の 2 進表記と根からの道順, anchor: binary-path}
   - {title: L/R/U の移動はスタックで打ち消す, anchor: lru-moves}
   - {title: 番号だけで LCA を求める（大きい方を 2 で割る）, anchor: lca-by-index}
   - {title: K 分木への一般化, anchor: k-ary}
   - {title: 距離 K の頂点の数（部分木の深さの範囲を N で切る）, anchor: count-at-distance, level: 青}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -149,7 +149,7 @@ $c'$ の番号は、$X$ の側の子 $c$ の最後の桁を反転した $c \oplu
 
 **最後の段が欠けていることを忘れる**。頂点 $1, \dots, N$ の木は、すべての段が埋まった木（perfect binary tree）とは限らない。子 $2i$・$2i + 1$ や兄弟 $c \oplus 1$ が $N$ を超えていないか、子孫の範囲を $N$ で切ったかを確かめる。$N$ が $2^d - 1$ の形のときだけ試すと、このバグは見つからない。
 
-**1 始まりと 0 始まりの式を混ぜる**。根を 1 とする流儀では、子は $2i$・$2i + 1$ で、親は $\lfloor i/2 \rfloor$ である。根を 0 とする流儀では、子は $2i + 1$・$2i + 2$ で、親は $\lfloor (i - 1)/2 \rfloor$ になる。片方の子の式ともう片方の親の式を組むと、親子の対応が崩れる。2 進表記と道順が素直に対応する根 1 の流儀を、迷ったときの基準にする。
+**1-indexed と 0-indexed の式を混ぜる**。根を 1 とする流儀では、子は $2i$・$2i + 1$ で、親は $\lfloor i/2 \rfloor$ である。根を 0 とする流儀では、子は $2i + 1$・$2i + 2$ で、親は $\lfloor (i - 1)/2 \rfloor$ になる。片方の子の式ともう片方の親の式を組むと、親子の対応が崩れる。2 進表記と道順が素直に対応する根 1 の流儀を、迷ったときの基準にする。
 
 **根で親へ上がる**。根 1 の親を $\lfloor 1/2 \rfloor = 0$ と計算すると、頂点でない 0 に移る。LCA のループは $x \ne y$ で止まるので問題ないが、祖先を上がるループは「根に着いたら止める」（`c > 1`）条件を必ず付ける。K 分木で頂点 0 を根に使うときも、0 の親は 0 なので止める条件が要る。
 
@@ -207,7 +207,7 @@ $c'$ の番号は、$X$ の側の子 $c$ の最後の桁を反転した $c \oplu
 
 ## 参考 {#references}
 
-- [drken「AtCoder ABC 243 D - Moves on Binary Tree (3Q, 茶色, 400 点)」](https://drken1215.hatenablog.com/entry/2024/09/24/123142)：例題の、L・R の直後の U をスタックで打ち消す方針と、残った移動であふれない理由
+- [drken「AtCoder ABC 243 D - Moves on Binary Tree (2Q, 茶色, 400 点)」](https://drken1215.hatenablog.com/entry/2024/09/24/123142)：例題の、L・R の直後の U をスタックで打ち消す方針と、残った移動であふれない理由
 - [comet725「ABC465Dを解いた【LCA】」](https://qiita.com/comet725/items/ed5414a8d8a200ec863b)：練習の、大きい方を K で割って共通の祖先まで上がる方針
 - [2yuu「Atcoder解いてみた　AtCoder Beginner Contest D - X to Y」](https://qiita.com/2yuu/items/b4d70003b7f311f8b8d1)：練習の問題の操作（⌊x/K⌋ への置き換えとその逆）の確認
 - [drken「AtCoder ABC 321 E - Complete Binary Tree (2D, 青色, 450 点)」](https://drken1215.hatenablog.com/entry/2023/09/24/231639)：力試しの、祖先へ上がりながら反対側の子の部分木を数える方針

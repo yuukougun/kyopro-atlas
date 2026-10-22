@@ -19,15 +19,15 @@ signs:
 acl: [segtree, lazy_segtree]
 verify: [vertex_set_path_composite]
 frequency: B
-frequency_evidence: recent 1（abc460_g）・前提として 2 ページに届く（直接 2）・古い ABC 2 問
+frequency_evidence: recent 1（abc460_g）・前提として 2 ページに届く（直接 2）・古い ABC 1 問
 sections:
   - {title: 重い辺と軽い辺・根からの軽い辺が log N 本以下の理由, anchor: heavy-light}
   - {title: 番号の振り方（重い子を先に）とパスの区間への分解, anchor: numbering}
   - {title: 辺の値は子の頂点に置く・非可換な演算の向き, anchor: edge-values}
   - {title: いつ使うか（オイラーツアーと LCA で足りる場合との使い分け）, anchor: when-to-use}
   - {title: 自作ライブラリでの扱い, anchor: library}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -214,7 +214,7 @@ HL 分解は実装が重いので、軽い方法で足りるかを先に考え�
 ## 参考 {#references}
 
 - [AtCoder「AC Library のドキュメント（document_ja）」](https://github.com/atcoder/ac-library/tree/master/document_ja)：ACL の囲みの宣言・計算量・要件
-- [yosupo「Library Checker の問題（vertex_set_path_composite ほか）」](https://github.com/yosupo06/library-checker-problems/tree/master/tree)：検証に使う問題の内容
+- [yosupo06「library-checker-problems/tree」](https://github.com/yosupo06/library-checker-problems/tree/master/tree)：検証に使う問題の内容
 - [drken「yukicoder 399 動的な領主 (HL分解で通す)」](https://drken1215.hatenablog.com/entry/2018/08/14/014800)：学ぶための資料。パスへの区間加算を HL 分解で処理する実例
 - [ei1333「Luzhiled's Library: Heavy-Light-Decomposition(HL分解)」](https://ei1333.github.io/library/graph/tree/heavy-light-decomposition.hpp)：学ぶための資料。ライブラリの関数の切り分け
 - [cp-algorithms「Heavy-light decomposition」](https://cp-algorithms.com/graph/hld.html)：軽い辺が $\log N$ 本以下であることと計算量の確認（文章・図は使っていない）

@@ -30,8 +30,8 @@ sections:
   - {title: 周期の判定：p が周期であることと Z 配列の値の関係, anchor: period}
   - {title: 反転と連結する：後ろからの一致と回文の接尾辞, anchor: reverse}
   - {title: S＋区切り＋T で各位置から S の接頭辞が何文字続くか（DP の材料）, anchor: prefix-extension, level: 黄}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
@@ -305,11 +305,11 @@ $S$ を $L = S[0, i)$ と $Q' = S[i, N)$ に分けると、$T = L + \mathrm{rev}
 
 ## 参考 {#references}
 
-- [AtCoder Library「String」（document_ja/string.md）](https://github.com/atcoder/ac-library/blob/master/document_ja/string.md)：`z_algorithm` の宣言・制約・計算量
-- [ikatakos「AtCoder Beginner Contest 430 E 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/1101_abc430)：例題の方針（A+A の中で B を探す）と制約（解説の部分だけを参照）
-- [ikatakos「AtCoder Beginner Contest 284 F 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2023/0107_abc284)：例題の制約と、前半と後半の反転を作り、Z 配列で区切り位置ごとの一致を判定する方法（解説の部分だけを参照）。回転への帰着は本文で導いた
-- [ikatakos「AtCoder Beginner Contest 398 F 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0322_abc398)：練習の方針（最長の回文の接尾辞を求めて前を反転して足す）（解説の部分だけを参照）
-- [drken「AtCoder ABC 141 E - Who Says a Pun?」](https://drken1215.hatenablog.com/entry/2019/09/16/014600)：練習の方針（接尾辞ごとの Z と $\min(z, d)$）
+- [AtCoder Library「String」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/string.md)：`z_algorithm` の宣言・制約・計算量
+- [ikatakos「AtCoder Beginner Contest 430 E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/1101_abc430)：例題の方針（A+A の中で B を探す）と制約（解説の部分だけを参照）
+- [ikatakos「AtCoder Beginner Contest 284 E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2023/0107_abc284)：例題の制約と、前半と後半の反転を作り、Z 配列で区切り位置ごとの一致を判定する方法（解説の部分だけを参照）。回転への帰着は本文で導いた
+- [ikatakos「ユニークビジョンプログラミングコンテスト2025 春（AtCoder Beginner Contest 398）F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0322_abc398)：練習の方針（最長の回文の接尾辞を求めて前を反転して足す）（解説の部分だけを参照）
+- [drken「AtCoder ABC 141 E - Who Says a Pun? (1D, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2019/09/16/014600)：練習の方針（接尾辞ごとの Z と $\min(z, d)$）
 - [ikatakos「AtCoder Beginner Contest 257 G 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0625_abc257)：力試しの方針と、届く範囲を広げる貪欲（解説の部分だけを参照）
-- [kmjp「AtCoder ABC #343 G. Compress Strings」](https://kmjp.hatenablog.jp/entry/2024/03/02/0930)：力試しの方針（含まれる文字列の除去と、Z による重なりの計算）
+- [kmjp「AtCoder ABC #343 : G - Compress Strings」](https://kmjp.hatenablog.jp/entry/2024/03/02/0930)：力試しの方針（含まれる文字列の除去と、Z による重なりの計算）
 - [drken「AtCoder ARC 055 C - ABCAC」](https://drken1215.hatenablog.com/entry/2023/08/07/004451)：力試しの方針（S と反転の Z 配列による数え方）

@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="320" height="552" viewBox="0 0 320 552" font-family="sans-serif" font-size="14">
-<defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#999" stroke-width="2"/></pattern></defs>
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="553" viewBox="0 0 320 553" font-family="sans-serif" font-size="14">
 <rect width="100%" height="100%" fill="#ffffff"/>
+<g transform="translate(0 1)">
+<defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#999" stroke-width="2"/></pattern></defs>
 <text x="16" y="22" fill="#222">閉区間 [l, r] に 2 点 m1 &lt; m2 を取り、</text>
 <text x="16" y="42" fill="#222">値の大きい側の外側を捨てる</text>
 <text x="160.0" y="80.0" text-anchor="middle" fill="#222">f(m1) &lt; f(m2) なら (m2, r] を捨てる</text>
@@ -37,4 +38,5 @@
 <text x="217.3" y="497.7" text-anchor="middle" fill="#c0392b" font-size="12" paint-order="stroke" stroke="#ffffff" stroke-width="3">f(m2)</text>
 <line x1="290.0" y1="520.0" x2="290.0" y2="488.8" stroke="#555"/>
 <text x="290.0" y="538.0" text-anchor="middle" fill="#222">r</text>
+</g>
 </svg>

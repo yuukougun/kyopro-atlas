@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 380" width="400" height="380" font-family="sans-serif" font-size="14">
-<rect x="0" y="0" width="400" height="380" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-11 0 420 380" width="420" height="380" font-family="sans-serif" font-size="14">
+<rect x="-11" y="0" width="420" height="380" fill="#ffffff"/>
 <rect x="56" y="40" width="164.0" height="260" fill="#eef3fb"/>
 <text x="62" y="60" fill="#334">ABC でよくある個数</text>
 <text x="62" y="78" fill="#334">（10^6 個まで）</text>

@@ -27,8 +27,8 @@ sections:
   - {title: 全体代入と個別の差分（代入のたびに差分の map を空にする。ならし）, anchor: assign-all}
   - {title: 回転は先頭位置の添字で表す, anchor: rotation}
   - {title: 遅延セグメント木とのつながり（全体への操作を区間への操作に広げる）, anchor: to-lazy-segment-tree, level: 水}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

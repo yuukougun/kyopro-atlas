@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 540" width="420" height="540" font-family="sans-serif" font-size="15">
-  <rect x="0" y="0" width="420" height="540" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 424 541" width="424" height="541" font-family="sans-serif" font-size="15">
+<g transform="translate(4 1)">
+  <rect x="-4" y="-1" width="424" height="541" fill="#ffffff"/>
   <defs>
     <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
       <rect width="8" height="8" fill="#fde2b8"/>
@@ -36,4 +37,5 @@
   <text x="40" y="466" fill="#222" font-weight="bold">D ＝ S[x2][y2] − S[x1][y2]</text>
   <text x="82" y="492" fill="#222" font-weight="bold">− S[x2][y1] + S[x1][y1]</text>
   <text x="40" y="522" font-size="14" fill="#444">A は 2 回引かれるので 1 回足し戻す</text>
+</g>
 </svg>

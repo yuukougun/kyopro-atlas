@@ -13,7 +13,7 @@ related: [zeta-mobius-subset, zeta-mobius-divisor, nim, fft-ntt]
 summary: c_k = Σ_{i XOR j = k} a_i b_j を、アダマール変換で各点の積に直して O(N log N) で求める。添字の演算（和・XOR・AND/OR・gcd/lcm）ごとに使う変換が変わる。
 complexity: 長さ 2^n の列で、変換・逆変換・XOR 畳み込みは O(n 2^n)（長さ N = 2^n なら O(N log N)）。同じ列の K 回の畳み込みは O(2^n (n + log K))
 signs:
-  - {type: phrase, text: i XOR j = k となる組を全ての k について数える}
+  - {type: phrase, text: i XOR j = k となる組をすべての k について数える}
   - {type: phrase, text: XOR が 0 でない Nim の盤面の数を数える}
   - {type: constraint, text: 値が 2^16〜2^20 程度で、添字の XOR で畳み込む}
 acl: []
@@ -25,7 +25,7 @@ sections:
   - {title: 同じ配列を K 回 XOR 畳み込みする（変換後の累乗）, anchor: power}
   - {title: 添字の演算と変換の対応（和は FFT、AND/OR は高速ゼータ変換、gcd/lcm は約数のゼータ変換）, anchor: index-operations}
   - {title: 自作するときの要点と Library Checker, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 

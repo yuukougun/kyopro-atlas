@@ -24,7 +24,7 @@ sections:
   - {title: mod p での計算と、法が素数でない場合（互除法による掃き出し）, anchor: modulus}
   - {title: 行列木定理・LGV 補題への入口, anchor: applications}
   - {title: 計算量と自作するときの要点, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -128,7 +128,7 @@ $\begin{pmatrix} 4 & 1 \\ 6 & 5 \end{pmatrix}$（mod 12）で 0 列目を処理�
 
 どちらも、行列を作るまでがその定理のページの話で、最後の行列式はこのページの手順で求める。ラプラシアン行列のように負の成分がある行列は、mod $m$ に直すときは $m$ を足して $[0, m)$ に入れてから掃き出す。
 
-頂点の部分集合ごとに全域木の数を求める問題では、行列式を $2^N$ 回求める（$N \le 14$ 程度なら $O(2^N N^3)$ で間に合う）。[最小全域木の発展](../graph/spanning-tree-advanced.md)も参照のこと。
+頂点の部分集合ごとに全域木の数を求める問題では、行列式を $2^N$ 回求める（$N \le 14$ 程度なら $O(2^N N^3)$ で間に合う）。[特殊な最小全域木](../graph/spanning-tree-advanced.md)も参照のこと。
 
 ## 計算量と自作するときの要点 {#library}
 

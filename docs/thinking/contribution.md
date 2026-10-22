@@ -18,15 +18,15 @@ signs:
   - {type: constraint, text: N ≤ 2×10^5 で、組・区間は N^2 個あり列挙できない}
 acl: []
 frequency: A
-frequency_evidence: recent 5（abc455_f・abc461_e・abc468_e・abc470_g・abc471_g）・前提として 2 ページに届く（直接 2）・古い ABC 6 問
+frequency_evidence: recent 5（abc455_f・abc461_e・abc468_e・abc470_g・abc471_g）・前提として 2 ページに届く（直接 2）・古い ABC 5 問
 sections:
   - {title: 数える対象を入れ替える（表の行と列。式の規則は Σ の変形のページ）, anchor: swap-roles}
   - {title: ソートで符号を決める（全ペアの差）, anchor: sort-signs}
   - {title: 各桁・各約数の寄与, anchor: digits-divisors}
   - {title: 各要素が最大・最小になる回数（同じ値の扱い）, anchor: max-min-count}
   - {title: 数え上げ・期待値での使い方（数え上げの章へ）, anchor: counting}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"

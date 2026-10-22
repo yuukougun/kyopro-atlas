@@ -17,7 +17,7 @@ pair<int, long long> winning_move(const vector<long long>& a) {
         long long t = a[i] ^ s;           // この山を t にすれば全体の XOR が 0
         if (t < a[i]) return {i, t};      // 減らす向きでなければ取れない
     }
-    return {-1, -1};                      // ここには来ない（s の最上位ビットを持つ山がある）
+    return {-1, -1};                      // ここには来ない（s の最上位 bit を持つ山がある）
 }
 // --8<-- [end:core]
 

@@ -25,7 +25,7 @@ sections:
   - {title: BEST 定理（有向オイラー閉路の数）, anchor: best-theorem}
   - {title: 頂点集合ごとに数えて部分集合の DP と組む, anchor: subset-dp}
   - {title: 計算量と自作するときの要点, anchor: library}
-stage: draft
+stage: reviewed
 updated: 2026-10-22
 ---
 
@@ -183,4 +183,4 @@ ACL に行列式はない。自作したものは Library Checker で確かめ�
 - [「BEST theorem」（英語版 Wikipedia）](https://en.wikipedia.org/wiki/BEST_theorem)：BEST 定理の式と条件、根へ向かう全域木の数が根によらないこと
 - [potato167「BEST theorem を用いることができる競プロの問題例」](https://potato167.hatenablog.com/entry/2024/02/21/100000)：BEST 定理の実装上の注意（多重辺を階乗で割る）と、例題の帰着の確認
 - [kmjp「AtCoder ABC #336 : G - 16 Integers」](https://kmjp.hatenablog.jp/entry/2024/01/16/0930)：例題の問いの確認と、始点と終点を固定して BEST 定理を使う方針
-- [Library Checker の問題定義（GitHub）](https://github.com/yosupo06/library-checker-problems/tree/master/graph)：counting_spanning_tree_undirected・counting_spanning_tree_directed・counting_eulerian_circuits の定義と制約（$N \le 500$）
+- [yosupo06「library-checker-problems/graph」](https://github.com/yosupo06/library-checker-problems/tree/master/graph)：counting_spanning_tree_undirected・counting_spanning_tree_directed・counting_eulerian_circuits の定義と制約（$N \le 500$）

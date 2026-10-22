@@ -2,7 +2,7 @@
 using namespace std;
 
 // --8<-- [start:core]
-// 0〜n-1 の順列 p の前に、辞書順で何個の順列があるか（0 始まりの順位）。n ≤ 20
+// 0〜n-1 の順列 p の前に、辞書順で何個の順列があるか（0-indexed の順位）。n ≤ 20
 long long perm_rank(const vector<int>& p) {
     int n = p.size();
     vector<long long> fact(n + 1, 1);
@@ -20,7 +20,7 @@ long long perm_rank(const vector<int>& p) {
     return r;
 }
 
-// 0 始まりの順位 r の順列を作る（perm_rank の逆）
+// 0-indexed の順位 r の順列を作る（perm_rank の逆）
 vector<int> perm_kth(int n, long long r) {
     vector<long long> fact(n + 1, 1);
     for (int i = 1; i <= n; i++) fact[i] = fact[i - 1] * i;
@@ -28,7 +28,7 @@ vector<int> perm_kth(int n, long long r) {
     iota(rest.begin(), rest.end(), 0);
     for (int i = 0; i < n; i++) {
         long long f = fact[n - 1 - i];
-        int k = r / f;  // 残りの値のうち小さい方から k 番目（0 始まり）を置く
+        int k = r / f;  // 残りの値のうち小さい方から k 番目（0-indexed）を置く
         r %= f;
         p.push_back(rest[k]);
         rest.erase(rest.begin() + k);
@@ -58,5 +58,5 @@ int main() {
     }
     long long r = perm_rank(p);
     assert(perm_kth(n, r) == p);
-    cout << r + 1 << '\n';  // 1 始まりの順位
+    cout << r + 1 << '\n';  // 1-indexed の順位
 }

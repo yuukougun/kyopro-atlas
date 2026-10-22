@@ -27,8 +27,8 @@ sections:
   - {title: 'ranges::to でコンテナに変換する（入れ子も。C++23・GCC 14〜）', anchor: ranges-to}
   - {title: from_range・insert_range・append_range（C++23・GCC 15〜）と GCC 13 での代わり, anchor: from-range}
   - {title: 'views::concat（C++26）は AtCoder では使えない', anchor: concat}
-stage: draft
-updated: 2026-10-21
+stage: reviewed
+updated: 2026-10-22
 cpp_std: 23
 gcc_min: 13
 atcoder: true
@@ -296,7 +296,7 @@ g++-13・g++-15 とも `-std=gnu++23` で `'concat' is not a member of 'std::vie
 
 - [GCC「GCC 13 Release Series: Changes」](https://gcc.gnu.org/gcc-13/changes.html)：GCC 13 で入った C++23 の views（enumerate・zip・chunk・slide・chunk_by・cartesian_product・repeat・as_const・adjacent・pairwise など）
 - [GCC「GCC 14 Release Series: Changes」](https://gcc.gnu.org/gcc-14/changes.html)：`ranges::to` が GCC 14 で入ったこと
-- [GCC「GCC 15 Release Series: Changes」](https://gcc.gnu.org/gcc-15/changes.html)：`from_range` のコンストラクタと `insert_range` など、C++26 の `views::concat`
+- [GCC「GCC 15 Release Series Changes, New Features, and Fixes」](https://gcc.gnu.org/gcc-15/changes.html)：`from_range` のコンストラクタと `insert_range` など、C++26 の `views::concat`
 - [cpprefjp「C++23」](https://cpprefjp.github.io/lang/cpp23.html)：C++23 で入った views と `ranges::to` の日本語の一覧
 - [cppreference「std::ranges::views::enumerate, std::ranges::enumerate_view」](https://en.cppreference.com/cpp/ranges/enumerate_view)：添字の型と要素の組の型
 - [cppreference「std::ranges::views::chunk_by, std::ranges::chunk_by_view」](https://en.cppreference.com/cpp/ranges/chunk_by_view)：隣どうしの判定で区切ること

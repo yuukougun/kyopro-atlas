@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" font-family="sans-serif">
-<rect width="400" height="300" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 301" width="400" height="301" font-family="sans-serif">
+<g transform="translate(0 1)">
+<rect x="0" y="-1" width="400" height="301" fill="#ffffff"/>
 <text x="16" y="22" font-size="14" fill="#222">余り 0, 1, 2（M = 3 個の箱）に、7, 77, 777, 7777</text>
 <text x="16" y="42" font-size="14" fill="#222">を 3 で割った余りを入れる</text>
 <path d="M24,84 L24,210 L124,210 L124,84" fill="none" stroke="#333" stroke-width="1.5"/>
@@ -19,4 +20,5 @@
 <text x="330" y="189" font-size="13" text-anchor="middle" fill="#111">77</text>
 <text x="16" y="264" font-size="13" fill="#444">玉が 4 個（M + 1 個）なら、どう入れても 2 個入る</text>
 <text x="16" y="284" font-size="13" fill="#444">箱が必ずある（太線の箱）</text>
+</g>
 </svg>
