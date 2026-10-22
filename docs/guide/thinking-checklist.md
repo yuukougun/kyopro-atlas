@@ -113,7 +113,7 @@ updated: 2026-10-22
 | $10^{18}$ 回のような巨大な回数 | 状態が有限で、周期に入るか？ | [尾と周期](../basics/periodicity.md#rho) |
 | 状態の数が少ない | 状態を頂点、操作を辺にして BFS できるか？ | [何を頂点にするか](../graph/graph-modeling.md#what-to-vertex) |
 
-不変量から出るのは必要条件だけである。十分であることは、実際に目標を作る手順を示して確かめる（[構築問題の考え方](../thinking/construction.md#necessary-conditions)）。
+[不変量](../guide/glossary.md#invariant)から出るのは必要条件だけである。十分であることは、実際に目標を作る手順を示して確かめる（[構築問題の考え方](../thinking/construction.md#necessary-conditions)）。
 
 ## 最大・最小 {#shape-optimize}
 

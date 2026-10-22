@@ -160,7 +160,7 @@ oj g/i --hack-actual ./a.out --hack-expected ./naive 'python3 generate.py'
 
 出力の比べ方にも注意がいる。
 
-- **答えが複数ある問題**：構築問題などは、文字列として比べても意味がない。出力が条件を満たすかを確かめるプログラム（チェッカー）を書いて判定する（[出力を検査するプログラム](../thinking/construction.md#checker)）。`oj t` では `--judge-command` でチェッカーを渡せる。
+- **答えが複数ある問題**：構築問題などは、文字列として比べても意味がない。出力が条件を満たすかを確かめるプログラム（[チェッカー](../guide/glossary.md#checker)）を書いて判定する（[出力を検査するプログラム](../thinking/construction.md#checker)）。`oj t` では `--judge-command` でチェッカーを渡せる。
 - **誤差が許される問題**：小数の出力は、差の絶対値か相対誤差で比べる（[浮動小数点数の比較](../cpp/cpp-types-literals.md#float-compare)）。`oj t` では `-e 1e-6` のように許す誤差を指定する。
 
 未定義動作の検出と組み合わせると、見つかる誤りが増える。不具合を探すビルドで本解をコンパイルしてからストレステストを回せば、範囲外の読み書きは食い違いが出る前に止まる（[不具合を探すビルド](../cpp/cpp-undefined-behavior.md#debug-build)）。思い込みを `assert` で書いておけば、崩れた入力で止まる（[assert で気づく](../cpp/cpp-undefined-behavior.md#assert)）。

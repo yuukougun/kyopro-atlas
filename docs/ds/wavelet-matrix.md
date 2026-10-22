@@ -128,7 +128,7 @@ ACL には Wavelet Matrix がない。自作するなら、上のコード片か
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [ABC324 G. Generate Arrays](https://atcoder.jp/contests/abc324/tasks/abc324_g)（diff 2501）：順列から始め、「先頭 x 個」「値が x 未満」で列を分割するクエリごとに、新しい列の長さを答える。
+- [ABC324 G. Generate Arrays](https://atcoder.jp/contests/abc324/tasks/abc324_g)（diff 2501）：順列から始め、「先頭 x 個を残す」「値が x 以下のものを残す」で列を 2 つに分けるクエリごとに、新しくできた列の長さを答える。
 
 </div>
 

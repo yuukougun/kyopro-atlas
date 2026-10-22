@@ -35,7 +35,7 @@ updated: 2026-10-22
         - 辺が暗黙に $O(N^2)$ 本ある完全グラフの最小全域木。
         - マンハッタン距離の完全グラフ。
         - 有向グラフで、根から全頂点へ届く最小コストの辺の集合。
-    - **計算量**：Borůvka 法 $O(M \log N)$（暗黙の辺なら 1 段の探索の時間 × $\log N$）、Manhattan MST $O(N \log N)$、最小有向全域木 $O(NM)$（併合できるヒープで $O(M \log N)$）、第 2 最小全域木 $O(M \log N)$
+    - **計算量**：Borůvka 法 $O(M \log N)$（暗黙の辺なら 1 段の探索の時間 × $\log N$）、Manhattan MST $O(N \log N)$、最小[有向全域木](../guide/glossary.md#arborescence) $O(NM)$（併合できるヒープで $O(M \log N)$）、第 2 最小全域木 $O(M \log N)$
     - **前提**：[最小全域木](../graph/minimum-spanning-tree.md)
 
 <!-- textlint-disable -->

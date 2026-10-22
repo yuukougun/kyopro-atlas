@@ -488,7 +488,7 @@ updated: 2026-10-22
 - **AtCoder Daily Training（ADT）**：過去の ABC の問題を組み直して、平日に 60 分で出すコンテストである（ごく一部に CODE QUEEN の問題が混じる）。2023-10-17 から開かれ、2026 年は主に平日に 1 日 2 回開かれている。EASY（5 問）と ALL（9 問）の 2 つのコースがあり、2026-02-05 までは MEDIUM と HARD（各 5 問）もあった。
 - **AtCoder Weekday Contest（AWC）**：2026-02-09 から平日に毎日開かれている Beta のコンテストである。ほとんどの回が 5 問で、制限時間は awc0006 から 60 分（awc0001〜awc0005 は 90 分）。awc0100 と awc0150 は 15 問・150 分の回だった。問題は AWC のために用意されたもので（AtCoder Problems のデータでは、過去の問題を使い回していない）、difficulty は付かない。
 - **アルゴリズム実技検定（PAST）の過去問**：AtCoder Problems のデータに 24 回分（各 15 問）が載っている。1 回分を通しで解くと、典型の当てはめの速さを確かめられる。
-- **過去の ABC のバーチャル参加**：好きな時刻に本番の形で解くなら、AtCoder Problems のバーチャルコンテスト（[AtCoder 以外の道具](#tools)）を使い、過去の ABC を時間を計って解く。
+- **過去の ABC の[バーチャル参加](../guide/glossary.md#virtual-participation)**：好きな時刻に本番の形で解くなら、AtCoder Problems のバーチャルコンテスト（[AtCoder 以外の道具](#tools)）を使い、過去の ABC を時間を計って解く。
 
 ADT の各位置の difficulty の中央値（2023-10〜2026-10 の全回、AtCoder Problems のデータから計算）は次のとおりである。400 未満の値は、AtCoder Problems の表示と同じく縮めた値である（[400 未満は縮めた値](../start/atcoder-system.md#difficulty)）。ALL の A〜E は同じ回の EASY と同じ問題で、ALL にはその後に F〜I が足される。
 

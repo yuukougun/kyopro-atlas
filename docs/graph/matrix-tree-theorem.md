@@ -150,7 +150,7 @@ BEST 定理は、次数と連結性を確かめ、辺のない頂点を除いて
 ACL に行列式はない。自作したものは Library Checker で確かめる（どれも $N \le 500$、答えは mod 998244353）。
 
 - [Counting Spanning Trees (Undirected)](https://judge.yosupo.jp/problem/counting_spanning_tree_undirected)：多重辺・自己ループのある無向グラフの全域木の数。
-- [Counting Spanning Trees (Directed)](https://judge.yosupo.jp/problem/counting_spanning_tree_directed)：根 $r$ から出る有向全域木の数。
+- [Counting Spanning Trees (Directed)](https://judge.yosupo.jp/problem/counting_spanning_tree_directed)：根 $r$ から出る[有向全域木](../guide/glossary.md#arborescence)の数。
 - [Counting Eulerian Circuits](https://judge.yosupo.jp/problem/counting_eulerian_circuits)：有向グラフのオイラー閉路の数（1 本目の辺を固定した数）。
 - [Determinant of Matrix](https://judge.yosupo.jp/problem/matrix_det)：行列式そのもの。
 

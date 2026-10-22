@@ -94,7 +94,7 @@ updated: 2026-10-22
 | 全区間の中央値・mex・転倒数 | 答えの二分探索・主客転倒など | 題材別の各ページ（[節](#other-statistics)） | — |
 | 列を区間に区切る方法の数・最適値 | 区間分割 DP | [区間分割 DP](../dp/dp-sequence-partition.md#last-block) | — |
 | 隣どうしの合体・取り除くと両隣がくっつく | 区間 DP | [区間 DP](../dp/interval-dp.md#split-point) | — |
-| 文字列の連続部分 | 部分文字列の手法 | [部分列と部分文字列](../patterns/subsequence-and-substring.md) | — |
+| 文字列の連続部分 | [部分文字列](../guide/glossary.md#substring)の手法 | [部分列と部分文字列](../patterns/subsequence-and-substring.md) | — |
 
 **区間に操作して質問する**：列の区間に加算・代入をして、値や区間の和を問われる。
 
