@@ -1,0 +1,231 @@
+# b2・b3 のほかのページ・catalog・ツールへの提案と未解決の点
+
+出どころは各 `<id>.md` の「未解決の点」「front matter・catalog への提案」「メインへの提案」と、検証の指摘への対応で採らなかったもの。台帳の問題の確認待ちは ledger.md、リンクの張り替えと内容の重なりは handoff.md、手引きは style.md、練習の不足は candidates.md §3。
+
+## 1. front matter・catalog・生成部分への提案（メインが反映）
+
+執筆者が変えられない項目（signs・summary と要点の対応・related・aliases・catalog 由来の値）と、gen_site で作り直す生成部分。
+
+- **binary-trie**：catalog の sections に残る choosing・pitfalls は本文では定型の節にした（catalog は凍結なら変更不要）
+- **binary-trie**：docs/index/ds.md など生成部分の節名「ビットごとの反転フラグ」は gen_site で「bit ごとの反転フラグ」に変わる（gen_site の実行待ち）
+- **counting-dedup**：骨格の related に inclusion-exclusion-dp・dp-sequence-partition・binomial-precompute・subsequence-matching がないが本文からリンクした。related に足すかはメインの判断
+- **counting-dedup**：#in-dp の見出し・sections の title を変えた。docs/index/comb.md の同じ見出しの行は gen_site で作り直す
+- **difference-constraints**：signs の「位置の差の情報が矛盾しないか」は等式だけなら重み付き Union-Find が主役。「位置の差の不等式（〜以上離れている・〜以内）が矛盾しないか」に変えるか、weighted-union-find 側の sign に寄せる（front matter の signs なので執筆者は変えていない）
+- **divisor-inclusion-exclusion**：related に string/kmp#count-periodic と math/integer-root#perfect-powers を足す（相互に参照）。summary の O(N log N) は検証の直しで「値の上限を M として O(M log M)」に直した
+- **inclusion-exclusion**：related に binomial-precompute・linearity-of-expectation を足す
+- **interval-dp**：front matter：節 last-operation の題「最後に残す・最後に消すものを決める型」の「最後に残す」は本文に出てこない。「最後に消すもの・消える相手を決める型」などに（anchor は変えない）
+- **merge-sort-tree**：abc339_g の制約は未確認。「1〜2 秒の目安」は見積もり（直しで実測 0.4 秒・100 MB を書いた）。catalog の choosing は骨格で外されていたので定型の使い分けにした
+- **mo-algorithm**：front matter：aliases の「クエリ平方分割」を外す（別の手法で sqrt-decomposition#query-buckets が持ち主）。aliases に「ロールバック Mo」を足す
+- **mo-algorithm**：summary と要点の「区間の種類数のように左右を合成できない量」を「区間の同じ値の組の数のように左右を合成できない量」に替える（種類数は同じページで先読みと BIT の方が速いとしている。検証の指摘 6。要点の行も同じ文に）
+- **randomized**：front matter：signs の 2 つ目と要点の「いつ使うか」2 つ目を「K ≤ 7 程度の少数の要素を選ぶ条件で、要素の種類が多い」に変える（K = 10 では成功確率約 1/2756 で δ = 10^-9 に約 57000 回 × 2^10。検証役の計算）
+- **root-path-dfs**：abc218_g の中央値の定義（偶数なら真ん中 2 つの平均）は kmjp のコードから。骨格の「いつ使うか」の 3 つ目を「操作の取り消しや、保存した状態の読み込みがある。」と言い換えた（signs と少し違う）。complexity が長め
+- **sweep-line-2d**：abc477_f の細部（行と列のどちらに区間か・制約・閉区間か）は解説のコードから。abc327_f の記事で D・W が入れ替わった箇所がある（本文は台帳に合わせた）。rectangle-count の title を短くしたので gen_site の生成部分（problem-sets.md など）は作り直しで変わる
+- **cayley-pruefer**：例題 abc290_f（catalog の representative）は実際には木の個数の式を使わない。このページに残すか tree-degree・binomial-identities の例題に移すか（検証の指摘 5 (a)）。練習 0 問
+- **euler-path**：front matter：summary の「O(M)」を「O(N + M)」に直す（complexity・要点・本文と合わせる。検証の指摘 6）
+- **expectation-of-square**：abc450_g の操作の向き（順序付きの 2 つを選ぶか）・N の上限・mod は記事のコードからの推定（検証の指摘 1 は採らずメインへ）。abc277_g の制約は未確認。見出しを「二乗の期待値と期待値の二乗の違い」に変えた（骨格の title を変えたので、別の判断なら戻してよい）
+- **expectation-tail-sum**：例題 abc295_e の制約は未確認。要点の「M ≤ 5000 程度」は骨格の signs のまま。練習の節を置いていない
+- **inclusion-exclusion-dp**：abc309_g の N の上限は未確認（「N = 100 なら」と仮定の形）。frequency_evidence の「古い ABC 2 問」は見つからない。本文から monotonic-stack#dp-transition・knapsack-01・divisor-inclusion-exclusion・modint へリンクしたが related にない（足すかはメイン）。#comparison の箇条書きの句点はほかのページとそろえる判断をメインへ
+- **max-flow**：front matter：signs（「頂点数が数百〜数千…」、catalog 由来）に「流量が定数と分かるなら頂点数が多くても使える」を足すか
+- **project-selection**：front matter：complexity を「最大流 1 回。変数 N 個・2 変数までの項 M 個で頂点・辺は O(N + M)（多くの変数をまとめる項は変数の数だけ辺が増える）。ACL の mf_graph の上限は頂点 V・辺 E で O(V^2 E)（実際はずっと速い）」に（検証の指摘 1）
+- **sqrt-decomposition**：front matter：summary の末尾を「…ブロックごとに集約とタグを持つ方法と、大きいものと小さいもので処理を変える方法と、クエリをまとめて作り直す方法がある。」とし、要点の「何ができるか」の 3 つとそろえる（検証の指摘 8）
+
+## 2. 動く図
+
+- **dp-segment-tree**：動く図（visual priority 2）は作らず静的 SVG 2 枚。作るなら：値を添字にした区間 max のセグ木で各花の [0, h) の max を光らせてから 1 点更新するステップ送り（h = (1, 3, 0, 2)・a = (5, 3, 4, 6)）と、窓 [j − R, j − L] に合わせた deque の出し入れ。div は置いていない
+- **gaussian-elimination**：動く図（visual priority 2）は作らず静的 steps.svg。作るなら：拡大係数行列を 1 列ずつ掃き出すステップ送り（ピボットの行を色付け、引いた行と倍率を caption）。config {"matrix": [[1,1,1,6],[2,1,-1,1],[1,-1,2,5]], "mod": null}（mod 2 の例も）
+- **permutation-parity**：スライドパズルの可解性は en.wikipedia の 15 puzzle による。動く図は作らず静的な図（priority 3）
+- **tree-degree**：動く図（visual priority 2）は作らず静的 pruefer.svg。作るなら data-viz="pruefer"、config {"n": 7, "edges": [[1,4],[4,5],[4,6],[2,6],[3,6],[6,7]], "mode": "encode"}（各ステップで今の葉・消す葉・記録する値、"decode" では列の残りと出現回数）
+- **convex-hull**：動く図（visual priority 2・dynamic）は静的な図で代えた。作るなら config {"points": [[0,2],[1,0],[2,2],[3,1],[4,4],[5,0],[6,2],[7,3]]} で下側→上側のスタックの積み・除きを 1 ステップずつ caption 付きで
+- **max-flow**：動く図 max-flow-residual の JS と試験の作成を頼む（仕様は報告の「動く図の仕様」。検証の指摘 8）
+
+## 3. ツールへの提案
+
+- **tools/render_svg.py**：viewBox だけで width のない SVG は、img が容器の幅（720 近く）まで広がるのに、撮影の高さは固有の幅で計算するため、720px の PNG で図の下が切れる（360px か --scale 2 なら全体が写る）。高さを容器の幅から計算する（width − 2·PAD）か、ウィンドウの高さに余裕を持たせる。報告したページ：counting-bijection・grundy-number・interval-dp（見本の binary-search-answer/staircase.svg でも）・merge-sort-tree・persistent-data-structures・sparse-table・convex-hull・euler-path・game-retrograde-analysis（9 ページ）
+- **tools/check_pages.py**：用語集にない anchor へのリンクをエラーにする（手引き §13-5・§7 と食い違い。style.md §1）。見出しに `{1, 4}` のような波かっこを含むと attr_list の `{#anchor}` を拾えない可能性（hashing-for-sets#random-values。hash-safety）
+- **tools/gen_site.py**：骨格の sections の title にカンマがあると YAML の別項目に割れ、check_pages の schema エラーになっていた（bell-number の S(n,k)）。§14-13 の引用符を骨格の生成にも当てる。sections の title を変えたページ（counting-dedup の in-dp・sweep-line-2d の rectangle-count・binary-trie・expectation-of-square・string-automaton-dp・graph-construction 案など）の docs/index/・problem-sets.md の行は作り直しで変わる
+- **tools/fix_problems.py・台帳の title**：AtCoder Problems の題名の末尾の空白が台帳の title に残る（abc325_f・abc376_f・abc421_g・abc472_g）。fix_problems は空白を落として label を作るので本文には出ない。台帳側で落とすか、取り込み時に strip する（ledger.md）
+- **ikatakos.com の 503**：2026-10-21〜22 に執筆・検証のほぼすべてでメンテナンス中（HTTP 503）。代わりの evidence を使った。復旧したら、evidence が ikatakos だけで checked を保留した問題（ledger.md §5 の保留）を確かめ直す。mathenachia.blog/dp/ も 404（yahoo_procon2019_qual_d・abc296_h・arc130_d・insertion-dp の参考）
+- **WebFetch の要約の誤り**：abc335_g の evidence の要約で向きが逆に出た（multiplicative-order）。arc070_b でも向きが逆に読める箇所（knapsack-undo）。数学の向きは本文と式で確かめる
+- **kmjp の検索が HTTP 429**（subsequence-dp）
+
+
+## 4. ページごとの未解決の点（確かめきれなかった事実・迷った点）
+
+多くは「制約の上限を確かめられず本文に数値を書かなかった」もので、本文は確かめた範囲で書かれている。ikatakos.com が読めるようになったら確かめ直すものを含む。検証役に確かめを頼んだもののうち検証で解決したものは除いた（mobius-function の abc230_g、graph-construction の abc244_g、kth-value の abc149_e、counting-dedup の agc031_b、difference-constraints の式、optimal-strategy-expectation の abc342_f）。
+
+- **aho-corasick**
+    - 例題 abc362_g の制約（|S|・Q・Σ|T_i| の上限）を確かめきれず、本文は計算量の式だけ
+    - 落とし穴の「N = M = 5×10^5 なら約 5×10^8 回」は自作の見積もりで、特定の問題の制約ではない
+- **bell-number**
+    - frequency C のページで練習が 1 問（補充が採られれば 3 問）
+- **bellman-ford**
+    - 例題の制約（N・M の上限）を確かめきれず本文に書いていない。SPFA の最悪ケースは「作った入力では遅くなる」とだけ書いた
+    - 練習が 1 問で目安に届かない（負辺の最短路が本体の ABC は少ない。catalog の problems_note のとおり）
+- **binary-trie**
+    - abc308_g の問いの細部（削除は入っている値だけか、質問の時点で 2 個以上あるか）は未確認
+    - Library Checker の問題名「Set Xor-Min」は JS で描かれるため取得できず記憶で書いた
+- **binomial-identities**
+    - ABC262 E の法（998244353 か）・ARC106 D の制約（K ≤ 300 など）を確かめられず、本文に書いていない
+    - ABC154 F の 4 隅の式 g(x, y) = C(x+y+2, x+1) − 1、ARC110 D の「Vandermonde を N+1 個の因子に広げる」説明は自作（Python で小さい値を確かめた）
+- **bitset-speedup**
+    - ABC348 F の制約（N・M の上限）を確かめられず本文に数値を書かない。ABC258 G の N ≤ 3000 は台帳の summary に従った（merom686 の記事に記載なし）。確認問題の「制限が 1024 MB なら置ける」は条件付きの言い方にした
+- **bottleneck-path**
+    - abc383_e の A_i ≠ B_j の保証・N・M・K の制約は未確認（本文とコードは保証がなくても正しい形）
+    - 例題 abc383_e（diff 1616）は合うが、練習の 2 問はどちらも diff 2000 超（黄の帯）で青のページには難しい
+- **circle-geometry**
+    - abc259_d の制約（N ≤ 3000、10^9）は検索の要約から。本文はぼかした。第三者の記事で確かめるとよい
+    - abc292_f の「1 頂点を角に置き、傾きは 0° 以上 30° 以下でよい」は merom686 の記事で証明されていない（記事は 15° までを調べた）
+    - Welzl のコード片の EPS が座標 10^9 規模で妥当かは未確認
+- **convolution-ntt**
+    - abc471_g の音節の定義・制約（N・K）は未確認。ikatakos が復旧したら再確認
+    - ABC143 D の畳み込みの別解は自作で裏付けなし。計測値（5×10^5 で約 55 ms・180 ms）は手元 g++-15 の 1 回の値（検証の直しで比だけにした）。AtCoder の環境で assert が有効か未確認
+- **counting-bijection**
+    - 水・青のページに abc319 以降の問題が 1 問もない（frequency C・recent 0 とは整合）
+    - 力試し ARC110 D の本文の「位置の選び方」による対応が drken の解説の図の経路の対応と同じかは未確認（自分で全探索して一致）
+- **counting-dedup**
+    - #in-dp の「直前と違う」の型は agc031_b の台帳の要約をもとに書いた（検証役が drken の記事で確かめ、正しいとした）
+- **degree-sqrt**
+    - 典型90 083 の制約は解説の画像（P3 の N, M, Q ≤ 200000）で確かめた。ABC260 F の S 側の頂点数と M の上限は未確認
+- **difference-constraints**
+    - 例題の「1 の個数の累積和を変数にすると負の辺になる」は自作の式（検証役が正しいと確かめた）
+- **divisor-inclusion-exclusion**
+    - abc304_f の問題文の細部（どちらの文字が固定か）は未確認で、練習の方針はぼかした。確認問題の lcm の形は根拠を一文だけ
+- **dp-dimension-reduction**
+    - abc364_e の制約（N ≤ 80、X, Y ≤ 10^4）は計算量の見積もりから逆算（1 記事は 10^5 と書いていた）。abc410_e の H・M の上限は未確認。abc315_f の C ≤ 28 は自作の見積もり（drken は 30〜50）
+- **dp-phase**
+    - ABC466 E の制約は未確認。例題 ABC159 F の本文の DP は drken の 2 つの方法と別の書き方（全探索との assert で確認）。「耳 DP」の語の範囲は人によって違い、別名の行にだけ置いた。力試しが 0 問、abc319 以降は abc466_e の 1 問だけ
+- **dp-segment-tree**
+    - abc410_g の方針の向き（交わる弦はどこかで切ると入れ子に並ぶ）を検証役にも見てほしい。abc353_g の C・P_i の上限、typical90_ak の N・W の上限は未確認。drken の ABC353 G・ARC026 C の記事の題名（h1）は要約から書いた
+- **exchange-argument-dp**
+    - abc366_f の evidence（ikatakos）を読めず、比較の式 B_j(A_i − 1) と B_i(A_j − 1) は自作（全探索で確認）。制約は検索の要約から。ABC163 E の活発度の上限・EDPC X の制約・典型90 011 の表の幅は未確認で本文に数値なし。place-at-ends（黄）の証明は drken の記事に任せた
+- **exchange-argument**
+    - abc467_f（catalog では力試し）は ikatakos が 503 で載せなかった。戻ったら summary を確かめて力試しに足す（外すと力試し 1 問）。abc471_f の練習の方針は選び方の詳細（先頭に 0 がある文字列）を書いていない
+    - 骨格の要点の「何ができるか」の先頭に「並べる順で結果が変わる問題で、」を足した
+- **expectation-linear-equations**
+    - abc333_f の第三者の解説を読めず、本文の解き方は自分の検算だけ。練習 1 問で水・青の目安（abc319 以降 1 問以上）を満たさない
+- **gaussian-elimination**
+    - typical90_be の制約は未確認。「mod p のランクは実数のランク以下」は一般的な事実として出典なし
+- **gcd-properties**
+    - 区間 gcd の右端固定の列挙は O(N log² A) と上から押さえた（O(N log A) に下がる可能性は未確認）。セグ木の取得 O(log N + log A) の注記を検証役に確かめてほしい。(a − 1)(b − 1)/2 の証明は省いた
+- **graph-construction**
+    - abc244_g の「長さ 4N 以下」は検証役が hamayan で確認（列の頂点の個数）。arc083_b の制約は記憶で、本文はぼかした。parity-walk の節（黄）の手順と練習の方針の折りたたみが重なる
+    - 指摘 9 の見出し「DFS 木をたどって偶奇を合わせる」を「全域木をたどって偶奇を合わせる」（anchor parity-walk のまま）に変える提案（sections の変更なのでメインへ）
+    - 練習が 1 問（abc244_g）で abc319 以降なし（指摘 11 は採らず、arc143_d の追加はメインが決める）
+- **grundy-number**
+    - 例題・練習の制約は未確認で本文に上限を書かない。ABC278 G は真似戦略でも解けるはずだが方針は Grundy 数だけ。abc297_g の式は証明なしでコード片で確認。Kayles の周期 12（x = 71 から）は x ≤ 1000 まで確認し以降は Wikipedia に頼った
+- **hash-safety**
+    - unordered_map への攻撃の数値（10^5 個で 3.2 秒、2×10^5 個で 17.5 秒）は手元 g++-15 の 1 回の計測。AtCoder の固定テストに unordered_map を狙う入力が入った問題・典型90 047 に mod 2^64 を落とす入力があるかは未確認
+    - 「1 組あたり 1/p とみなす根拠と限界」は birthday-bound の中の小見出しに書いた（anchor なし）
+- **inclusion-exclusion**
+    - abc475_f を練習から外し練習は 2 問。abc172_e の制約は未確認。min-max 包除の恒等式の証明は自作（出典は navel_tos の式変形）
+- **inline-dp**
+    - abc271_e で到達できないときの出力（-1 と思われる）は未確認。dp_w の a の範囲（負もありうる）は理由から書いた（直しで N, M ≤ 2×10^5、|a| ≤ 10^9 を書いた）。動く図の div は置いていない
+- **interval-dp**
+    - ABC217 F の制約（N の上限）は未確認
+- **knapsack-undo**
+    - abc441_f の制約（N・M）は未確認。arc070_b の「不要なカードは小さい側にまとまる」は条件から自分で確かめた（drken の要約では逆に読める箇所）。黄の節から monotonic-stack#swag（発展の節）へ帯が上がるリンク
+- **kth-value**
+    - abc341_d の制約は記事のコードから推定し本文に数値なし。「二分探索は約 61 回」は V ≈ 2×10^18 の場合で、ほかのページの「約 60 回」（10^18）とは V が違う
+- **lazy-segment-tree-patterns**
+    - abc371_f・abc470_g の方針の一部は自分の導出（abc470_g の「単調なので chmax を区間代入に」は kmjp は Beats）。abc332_f の答えが mod かは未確認。型の表の区間代入・一次関数の合成は O(log² N) の方法だけ書いた
+- **mo-algorithm**
+    - abc293_g の制約は未確認（答えは「10^15 程度」とだけ）。abc477_g の区間の取り方は euler-tour にそろえ乱数で確認。時間付き Mo の「N = 10^5 程度が限度」・std::function の遅さは出典・計測なし
+- **parsing**
+    - abc403_f の N の上限（2000 と推定）。ikatakos が読めるときに確かめ「N ≤ 2000 なので O(N^2) で間に合う」を足す（検証の指摘 7）。abc338_g の入力に演算子が 2 つ並ぶか・0 を含むかは未確認。例題 arc061_a は基礎（1089）で青には易しい
+- **permutation-parity**
+    - ikatakos が 503 で abc470_f の解説を読めず、例題は台帳の approach・研究ノート・検索の抜粋と自分の数学的な確認で書いた。法の値・辺が 0 本の場合の有無は未確認。検証役は ikatakos が戻ったら照合
+- **persistent-data-structures**
+    - abc453_g の問題文の細部（1-indexed の閉区間・更新が代入）は cnblogs のコードからの推測。永続遅延セグ木（persistent_range_affine_range_sum）は 1 段落だけでコード片なし（自作ライブラリ用に足すなら別の作業）
+- **randomized**
+    - ABC422 E・ABC272 G の制約は未確認（本文は N の値を書かない）
+- **segment-tree-monoids**
+    - ikatakos が 503 で abc223_f・abc456_f・abc460_f の記事を読めず。abc460_f は tree-diameter・lca と台帳の approach に合わせた。abc343_f・abc223_f の制約は未確認。SWAG で abc456_f が解けることは自分の推論
+- **sparse-table**
+    - 練習問題の節がない（abc254_f を足したら作る）。abc282_f のクエリ数の上限は要約でしか確かめていない。「左の区間を先に結べば交換法則は要らない」の証明を検証役に確かめてほしい
+- **string-automaton-dp**
+    - abc419_f の制約（L・パターンの長さの上限）は未確認（Trie の頂点数は KCPC の「80 程度」から「100 に届かない程度」）。research の「abc458_f の解説が包除が破綻する理由を説明」は未確認（節の題は直しで「包除はどこで破綻するか（位置の重なりとパターンの集合）」にした）
+- **subset-enumeration-dp**
+    - 典型90 045 の制約は未確認。vs-zeta の「部分集合の畳み込みで O(2^N N^2)」は出典なし
+- **tree-degree**
+    - ABC359 F の A_i の上限・ABC385 E の雪の結晶で先の葉の数が 1 以上を要するかは未確認。Prüfer 列の O(N) の生成は文章だけ
+- **tree-path**
+    - 練習 1 問・abc319 以降なし。abc133_f・abc298_h の制約は書かず。交差の共通部分の両端（4 つの LCA のうち深い 2 つ）は出典でなく全探索で確かめた
+- **zeta-mobius-divisor**
+    - abc474_f の問い・制約（N ≤ 2×10^5、A_i ≤ 10^9）は WineChord の 1 件だけで確かめた（ikatakos が戻ったら 2 件目）。frequency_evidence の「古い ABC 1 問」がどれかは不明
+- **bipartite-matching**
+    - 計算量の書き方：ACL は容量がすべて 1 のとき O((n + m)√m)。Dinic の単位容量で O(M√N) は確かめた資料（Wikipedia）では「Dinic の特殊な場合」まで。本文は ACL の値と Hopcroft-Karp の O(M√N) を分けて書いた
+    - abc401_g の制約は kmjp のコードからの推測（直しで座標 10^18・__int128 にした）
+- **broken-profile-dp**
+    - typical90_w の制約（H, W ≤ 24 か）は未確認。本文の「短い辺は 14 以下」は abc379_g の台帳の H×W ≤ 200 に頼っている
+- **cayley-pruefer**
+    - 連結成分をつなぐ式 N^(k−2) Π s_i・次数 k の木の数・根付き木 N^(N−1)・葉になる木 (N−1)^(N−2) は出典に直接なく snippets の全探索（N ≤ 7）で確かめた
+- **centroid-decomposition**
+    - abc359_g の重心分解での解法は自分で導いた式（(m − 1)s）で、検証役に確かめてほしい。abc291_h の制約は未確認。keyence2019_e は diff 2623 で黄の力試しには重い。count-through の型そのものの例題が ABC にない
+    - 指摘 6 (b)（補助の関数 depth_count・ordered_pairs・prefix をラムダのまま）は採らず。手引きのラムダの範囲「など」に入るかの判断
+- **complement-graph-bfs**
+    - ABC319 G の制約・多重辺の有無、Library Checker の N_MAX・M_MAX は未確認。「隣の値の最大」を値の大きい順に探す応用は裏付けなしの一般的な説明（検証役に正しさを見てほしい）。表・complexity・要点の O((N + M) log N) は上限として残した
+- **convex-hull**
+    - abc341_g・abc296_g の制約、abc296_g の頂点の向きは未確認
+- **counting-labeled-graphs**
+    - abc180_f は頂点を区別して数える前提。ABC281 G は drken と逆向き（全探索で N ≤ 6 を確認）。練習は abc180_f の 1 問だけ（黄の帯で確認済みの問題が台帳にない）
+- **difference-sequence**
+    - ABC459 F の細部（途中で負になってよいか・答えがない場合）は未確認で、ブロックの併合の正しさは証明の筋だけ。ABC454 F の式は BFS と一致を確かめた
+- **digit-dp-advanced**
+    - ABC231 E の制約（最小の額面が 1 か）・ABC208 E の K の上限・ABC317 F が mod かは未確認。frequency_evidence の abc466_g（diff 3347）は発展の帯で扱っていない
+- **divide-and-conquer**
+    - abc426_g の制約はコードからの見当。使い分けの表の「戻す DP と区間の出し入れ」から Mo のページへのリンクは付けていない
+- **euler-path**
+    - 辞書順最小のオイラー路（辺を辞書順に並べて Hierholzer）は出典未確認で書かなかった。応用の型（k 本の路に分ける・向き付け・de Bruijn 列の長さ）は自分で確かめた。練習が台帳に 1 問もない
+- **euler-phi**
+    - 練習が abc222_g の 1 問だけ（補充で 2〜3 問になる）
+- **game-retrograde-analysis**
+    - abc261_h の重みが非負は解法から推した（本文は条件付き）。abc209_e の文字の種類・頂点数の上限は未確認。例題 1・練習 0。参考の節の箇条書きに句点を付けていない（ほかのページにそろえた）
+- **insertion-dp**
+    - abc468_g の方針は kmjp だけで確かめた。連結成分 DP の節は ABC の例題がない。mathenachia の「DP の俗称」は 404 で参考から外した。frequency_evidence の abc473_g は台帳では probability-symmetry の練習で、このページに載らない
+    - 「箱根駅伝」の問題名を確かめられず「AOJ 2439 に由来する」と番号だけにした
+- **interval-dp-advanced**
+    - ABC273 F の練習の方針は状態の定義から組み立てた（cnblogs は遷移を省く）。出発点は台帳どおり「原点」。ABC292 G の制約 N, M ≤ 40 はコードからの推定
+- **konig-theorem**
+    - abc461_g の孤立点の値の上限は未確認。abc274_g の制約は未確認で計算量は空きマスの数 K で書いた。「被覆の復元」は ACL の min_cut の返す集合の一意性に頼る（本文では触れていない）
+- **lowlink**
+    - abc375_g・abc334_g を lowlink の問題の囲みに入れていない（台帳の役割が別ページ）。catalog の problems_note「lowlink が想定の解法だと確かめられた ABC の問題がなく」は第三者の解説で「解ける」ことは裏付けられた（公式の想定解かは未確認）
+    - abc075_c の制約は未確認。block-cut-tree の孤立点の扱いは直しで Library Checker の出力を書いた。メンガーの定理は名前だけ
+- **max-flow**
+    - 例題 abc205_f・practice2_d の制約は未確認。Dinic の容量 1 の計算量は ACL の記載のまま
+- **min-cost-flow**
+    - abc247_g の制約、abc421_g の「できない場合」の出力、Library Checker の assignment の N の上限は未確認。abc231_h の高い辺を通る回数の理由は細かく書いていない
+    - 箇条書きの句点を足した。ほかの draft のページの揺れはメインの判断（検証の指摘 7）
+- **min-cut**
+    - abc010_4 のモデル化（頂点を消すが中継も断つか）は未確認。abc239_g の制約は未確認。「残余グラフで s から届く集合は S が最小の最小カット」は出典で確かめていない。図の 360px の文字（指摘 7）は採らず
+- **mobius-function**
+    - agc039_c の方針は drken の要約だけで確かめ一部自作。杜教篩 O(N^{2/3}) は記憶による一般的な事実（multiplicative-function の執筆で確かめる）。abc230_g の i ≤ j と N の上限は検証で解決
+- **multiplicative-order**
+    - 原始根の存在条件の証明は書かず cp-algorithms を参考に挙げただけ。Tonelli-Shanks・Cipolla の計算量は出典で確かめていない
+- **optimal-strategy-expectation**
+    - ikatakos が執筆中ずっと 503。abc470_e（Concentration）と abc342_f の問いは台帳と検索の抜粋にしか拠らない（abc342_f は検証役が公式解説の要旨で確かめた）。abc470_e の要約と練習の方針は ikatakos が読めるようになったらメインが確かめる（checked は空）。abc412_f の法は未確認
+    - abc421_e の「サイコロ 5 個・3 回まで」は yamanoue に拠る
+- **partition-number**
+    - abc226_f の N ≤ 50・abc404_f の M ≤ 30 は解説からの判断、abc221_h の N は書かない。Library Checker の Partition Function の制約は未確認。ikatakos が保守中で web.archive.org の写しを使った
+- **project-selection**
+    - abc472_g・abc445_g・abc225_g・abc347_g の制約は未確認。abc472_g の閉包の証明・abc445_g の二部グラフの証明は自作（検証役に確かめてほしい）。差の凸関数の向きの制限は自分で確かめた
+- **reflection-principle**
+    - abc309_h の N の上限は未確認。練習問題の節は置いていない
+- **sqrt-decomposition**
+    - abc219_g・abc259_h の制約は未確認。確認問題の「タグを押し下げないと代入が消える」は snippets で未確認。abc219_g の解法の詳細はコード片で突き合わせていない
+- **subsequence-dp**
+    - abc230_f・abc299_f は第三者の詳しい解説がなく、方針は自作（全列挙と照合）。検証の指摘 4 の一部（本文・図・表・確認問題の例 aba）は残した。替えるならメインの判断で abb などで 4 か所をそろえる
+- **tree-centroid**
+    - AGC018 D の方針は tatyam のスライドの文字起こしに基づく（式が画像）。別の解説でも確かめてほしい
+- **tree-dp-square**
+    - TDPC P の制約と「パス」の条件は未確認。cap-k の節の例は特定の問題を指さない。arc171_c は中国語の Luogu と drken のコードで確かめた。図の 360px の文字（指摘 4）は採らず図の見直しの機会に
+- **xor-basis**
+    - abc451_g の制約は未確認。abc141_f の「グループが空でもよいか」は未確認（結果は変わらない）。abc249_g の場合分けは miscalc の要約に基づく
+- **zeta-mobius-subset**
+    - abc295_h がこのページの力試しにふさわしいか（台帳の提案）。練習の囲みがない（abc349_f が入れば足す）
+
+## 5. 解決済み（b1 の決定・手引きで扱いが決まっているもの）
+
+- catalog の sections に残る choosing・comparison・pitfalls（binary-trie・dp-phase・merge-sort-tree・string-automaton-dp）：§14-1・§14-2 のとおり定型の節にした。catalog は凍結なので変更不要
+- 例題の制約が確かめられないときに本文に数値を書かない扱い（多くのページ）：手引き §2（事実は確かめてから書く）のとおり。数値を足すのは確かめられたとき
+- frequency_evidence の値（inclusion-exclusion の abc456_g が台帳にない、divide-and-conquer の recent が abc451_g を外すと 1、zeta-mobius-divisor の「古い ABC 1 問」、inclusion-exclusion-dp の「古い ABC 2 問」、insertion-dp の abc473_g、digit-dp-advanced の abc466_g）：b1 decisions の「frequency の値は変えない。工程10で見直す」に従い、工程10の見直しへ回す
+- 動く図を作らず静的な図で代えたもの（priority 2・3）：手引き §8（priority 3 は静的でよく、2 は余力があれば）と §14-21 のとおり。作るかは動く図のバッチで決める（§2）

@@ -198,7 +198,7 @@ $b$ が $g$ で割り切れなければ、左辺は $g$ の倍数なので解は
 
 $X_0 = S$、$X_{i+1} = (A X_i + B) \bmod P$（$P$ は素数）で決まる列で、$X_i = G$ となる最小の $i$ を求める。列の周期は $P$ 近くになりうるので、シミュレーションでは間に合わない。
 
-$A \ne 0, 1$ のとき、$\gamma = A\gamma + B$ を満たす不動点 $\gamma = B (1 - A)^{-1}$ を取る。漸化式から $\gamma$ の式を引くと $X_{i+1} - \gamma = A (X_i - \gamma)$ なので、$X_i - \gamma$ は公比 $A$ の等比数列になる。
+$A \ne 0, 1$ のとき、$\gamma = A\gamma + B$ を満たす[不動点](../guide/glossary.md#fixed-point) $\gamma = B (1 - A)^{-1}$ を取る。漸化式から $\gamma$ の式を引くと $X_{i+1} - \gamma = A (X_i - \gamma)$ なので、$X_i - \gamma$ は公比 $A$ の等比数列になる。
 
 $$
 X_i - \gamma \equiv A^i (S - \gamma) \pmod{P}
