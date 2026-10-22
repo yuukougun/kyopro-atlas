@@ -170,7 +170,7 @@ $$
 
 すべての $d$ について「$d$ の倍数にわたる和」や「$d$ の約数にわたる和」を求める操作を、約数のゼータ変換という。逆に、累積した値から元の値を戻す操作がメビウス変換である。
 
-- [倍数を回す](#harmonic)二重ループでも $O(M \log M)$ で求まる。素数 $p$ ごとに「$p$ 倍の方向への累積和」を取れば $O(M \log \log M)$ になる（[素数ごとの累積和](../comb/zeta-mobius-divisor.md#per-prime)）
+- [倍数を回す](#harmonic)二重ループでも $O(M \log M)$ で求まる。素数 $p$ ごとに「$p$ 倍の方向への累積和」を取れば $O(M \log \log M)$ になる（[素数ごとの累積和](../comb/zeta-mobius-divisor.md#per-prime)）。
 - 倍数の向きのゼータ変換で両方の列を変換し、添字ごとに掛けて戻すと、$\gcd(i, j) = k$ となる組の積の和（GCD 畳み込み）が求まる。約数の向きなら LCM 畳み込みである（[GCD 畳み込み・LCM 畳み込み](../comb/zeta-mobius-divisor.md#gcd-lcm-convolution)）。
 - 戻す向きと計算の順序を間違えやすい。[逆変換と回す向き](../comb/zeta-mobius-divisor.md#inverse)で確かめる。
 

@@ -160,6 +160,15 @@ $$
 
 **箱を区別しないなら別の数**。重複組合せは箱（変数）を区別する。「グループに分ける」で箱の順番を区別しないなら、分割数など別の数になる（[写像 12 相](../comb/twelvefold-way.md)）。
 
+## 上位の手法へのつながり {#next-steps}
+
+このページの考え方は、次の手法の部品になる。
+
+- **上限つきの配り方**：各変数に上限があるときは、上限を超える変数の組で包除するか、母関数の係数として求める（[包除原理](../comb/inclusion-exclusion.md#symmetric)、[母関数の考え方](../comb/generating-function-counting.md#formulas)）。
+- **写像 12 相**：重複組合せは「玉を区別せず箱を区別する」マスに当たる（[写像 12 相](../comb/twelvefold-way.md#table)）。
+- **対応づけ**：玉と仕切りのように、数えにくい対象を数えやすい列へ 1 対 1 に対応させる考え方は[対応づけ・数える対象の言い換え](../comb/counting-bijection.md#bijection)にある。
+- **多項係数**：箱ごとの個数を決めた後の並べ方は多項係数で数える（[多項係数](../comb/multinomial-coefficient.md#meaning)）。
+
 ## 使い分け {#comparison}
 
 - 玉も区別するなら（区別のある $n$ 個を $k$ 個の箱へ）、制限なしは $k^n$、各箱の個数を決めるなら[多項係数](../comb/multinomial-coefficient.md)である。玉と箱の区別と制限の全体の地図は[写像 12 相](../comb/twelvefold-way.md)にある
@@ -188,6 +197,7 @@ $$
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC178 D. Redistribution](https://atcoder.jp/contests/abc178/tasks/abc178_d)（diff 875）：各項が 3 以上の整数で、総和が S になる数列の個数を求める。
+- [ABC132 D. Blue and Red Balls](https://atcoder.jp/contests/abc132/tasks/abc132_d)（diff 1167）：N 個の玉のうち K 個が青のとき、各 i について、連続する青玉をまとめて回収する操作がちょうど i 回で済む並べ方の数を求める。
 - [ABC156 E. Roaming](https://atcoder.jp/contests/abc156/tasks/abc156_e)（diff 1514）：n 部屋に 1 人ずついる状態から、1 人が別の部屋へ移る移動をちょうど k 回行った後の、各部屋の人数の組としてありうるものの数を求める。
 - [ABC110 D. Factorization](https://atcoder.jp/contests/abc110/tasks/abc110_d)（diff 1695）：積が M になる長さ N の正の整数列の個数を求める。
 - [ABC021 D. 多重ループ](https://atcoder.jp/contests/abc021/tasks/abc021_d)（diff 1704）：1 ≤ a_1 ≤ a_2 ≤ … ≤ a_k ≤ n を満たす整数列の個数を求める。
@@ -197,6 +207,7 @@ $$
 
 ??? note "練習の方針"
     - **ABC178 D**：長さ $m$ を決めると、各項から 2 を引いて和 $S - 2m$ の正の整数解になるので $\binom{S-2m-1}{m-1}$。$m$ を $1$ から $S/3$ まで足す。和を状態にした DP と累積和でも解ける
+    - **ABC132 D**：青玉 $K$ 個を空でない $i$ 個のかたまりに分ける方法は、正の整数解の数え方で $\binom{K-1}{i-1}$。赤玉 $N-K$ 個の間と両端の $N-K+1$ か所から、かたまりを置く $i$ か所を選ぶ $\binom{N-K+1}{i}$ を掛ける
     - **ABC156 E**：ありうる組は「空き部屋が $\min(k, n-1)$ 個以下」の組と言い換えられる。空き部屋 1 つに少なくとも 1 回の移動が要り、余った移動は行って戻るなどで消費できるからである。ただし $n \ge 3$・$k \ge 2$ を仮定する（$k = 1$ なら全員が元の部屋にいる組を除く）。空き部屋の数 $m$ ごとに $\binom{n}{m} \binom{n-1}{m}$ を足す
     - **ABC110 D**：$M$ を素因数分解し、素数ごとに指数 $e$ を $N$ 個へ配る $\binom{e+N-1}{N-1}$ を掛ける
     - **ABC021 D**：広義単調な列の個数そのもので $\binom{n+k-1}{k}$
@@ -206,6 +217,7 @@ $$
 
 - [drken「AtCoder ABC 185 C - Duodecim Ferra (4Q, 灰色, 300 点)」](https://drken1215.hatenablog.com/entry/2020/12/14/015500)：例題の切れ目を選ぶ見方と、掛けて割るのを交互に行う計算
 - [drken「AtCoder ABC 178 D - Redistribution (2Q, 緑色, 400 点)」](https://drken1215.hatenablog.com/entry/2020/10/11/211000)：練習の問い（解説は DP による。重複組合せの式は自分で確かめた）
+- [drken「AtCoder ABC 132 D - Blue and Red Balls (1Q, 緑色, 400 点)」](https://drken1215.hatenablog.com/entry/2019/06/30/183400)：練習 ABC132 D の、青玉のかたまりの分け方と赤玉の間への置き方の積
 - [kmjp「AtCoder ABC #156 : E - Roaming」](https://kmjp.hatenablog.jp/entry/2020/02/23/0900)：練習の方針（空き部屋の数で場合分けして配る）
 - [drken「AtCoder ABC 110 D - Factorization (1D, 青色, 400 点)」](https://drken1215.hatenablog.com/entry/2018/09/23/224100)：素因数ごとに指数を配る見方と、表の大きさの見積もり
 - [drken「「写像12相」を総整理！ 〜 数え上げ問題の学びの宝庫 〜」](https://qiita.com/drken/items/f2ea4b58b0d21621bd51)：玉と仕切りによる重複組合せの説明と、多重ループの問題の位置づけ

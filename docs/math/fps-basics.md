@@ -24,6 +24,7 @@ sections:
   - {title: 式の形から使う演算を選ぶ, anchor: signs}
   - {title: 演算の一覧と計算量（inv・log・exp・pow・sqrt）, anchor: operations}
   - {title: 多項式の割り算・Taylor shift・多点評価, anchor: polynomial-ops}
+  - {title: ACL の convolution と自作するときの要点, anchor: library}
 stage: draft
 updated: 2026-10-22
 ---
@@ -74,27 +75,7 @@ ABC では主に difficulty 2200 以上の G・Ex で現れる。式の立て方
 
 **素朴な方法**。どの演算も、係数を下から 1 つずつ決める $O(N^2)$ の式がある。$g = 1/f$ なら $f g = 1$ の $x^n$ の係数から $g_n = -\frac{1}{a_0} \sum_{k=1}^{n} a_k g_{n-k}$ である。$g = \exp f$ なら $g' = f' g$ から $n g_n = \sum_{k=1}^{n} k a_k g_{n-k}$ になる。$g = f^M$（$a_0 \ne 0$）なら $f g' = M f' g$ の係数を比べる（$'$ は微分）。$N$ が数千までならこれで足りる。$f$ の項が $K$ 個しかないときは $O(NK)$ になり、Library Checker にも項の少ない版（`*_sparse`）がある。ニュートン法を自作したら、この方法と乱数の入力で比べて確かめるとよい。
 
-逆元・log・exp をニュートン法で書くと次のようになる。完全なプログラムは `snippets/fps-basics/newton.cpp` で、素朴な方法との比較も同じファイルにある。
-
-```cpp
---8<-- "fps-basics/newton.cpp:inv"
-```
-
-```cpp
---8<-- "fps-basics/newton.cpp:log-exp"
-```
-
-この exp は反復のたびに log（中で逆元）を呼ぶので、計算量は $O(N \log N)$ だが定数倍が重い。それでも手元では $N = 5 \times 10^5$ で 0.5 秒ほどで、ふつうはこれで足りる。さらに速くしたいときは、資料にある逆元を同時に更新する書き方に替える。
-
-!!! info "ACL では"
-    `#include <atcoder/convolution>`。ACL にあるのは `atcoder::convolution(a, b)`（長さの和を $n$ として $O(n \log n)$、法は NTT 向きの素数）だけで、逆元・log・exp・累乗は自作する。法の条件と長さの上限は [ACL の convolution の要件](../math/convolution-ntt.md#acl)にある。
-
-自作するときの要点は次のとおりである。
-
-- **切り詰め**：掛けるたびに必要な項数に切る。切らないと長さが倍々に増える。反復の中で掛ける $f$ も、今の精度の $2m$ 項に切っておく。
-- **定数項の条件**：$\log$ は $a_0 = 1$ に正規化してから（$a_0 \ne 1$ なら $a_0$ で割った後の log を使う）、$\exp$ は $a_0 = 0$ のときだけ使う。$\log f$ の定数項は 0、$\exp f$ の定数項は 1 である。
-- **累乗で $a_0 = 0$**：$M = 0$ なら $f$ に関係なく答えは $1$ である（空の積）。$M \ge 1$ なら、最初の 0 でない係数を $a_d x^d$ とし、$f = a_d x^d \cdot h$（$h$ の定数項は 1）と分けて $f^M = a_d^M x^{dM} \exp(M \log h)$ とする。$dM \ge N$ なら答えはすべて 0 で、Library Checker では $M$ が $10^{18}$ まであるので $d M$ をそのまま掛けず、割り算で比べる（[オーバーフロー](../guide/glossary.md#overflow)）。$\exp$ に渡す $M$ は $M \bmod p$ でよいが、$a_d^M$ は元の $M$ で繰り返し二乗法をする（$O(\log M)$。指数を縮めるなら $M \bmod (p - 1)$）。比較の $dM \ge N$ も元の $M$ で行う。
-- **平方根**：$f$ の先頭 $N$ 項がすべて 0 なら答えは 0 である。$a_0 = 0$ なら、最初の 0 でない係数の位置 $d$ が偶数でなければ平方根はない。$d$ が偶数なら $x^{d/2}$ をくくり出す。残りの定数項 $b$ は mod $p$ の平方根を持つ必要がある（持たなければ平方根はない）。平方根は [Tonelli-Shanks 法](../math/multiplicative-order.md#mod-root)などで求め、$\pm$ のどちらを選んでも平方根になる。
+ACL にあるのは畳み込みだけで、ここに挙げた演算は自作する。実装と要点は[ライブラリの節](#library)にまとめる。
 
 ## 多項式の割り算・Taylor shift・多点評価 {#polynomial-ops}
 
@@ -119,6 +100,32 @@ $$
 **多点評価と補間**。$N - 1$ 次の $f$ の値を $M$ 個の点 $p_0, \dots, p_{M-1}$ で求める。$f(p) = f \bmod (x - p)$ を使い、点を半分ずつに分けた木の各ノードに $\prod (x - p_i)$ を持たせる（積の木）。根から順に、親の余りを子の積で割った余りを子に渡すと、葉で $f(p_i)$ が得られる。各段の割り算の次数の合計が $O(N + M)$ なので、全体で $O((N + M) \log^2 (N + M))$ になる。逆に $N$ 点の値から係数を戻す補間も、積の木とその微分の多点評価で $O(N \log^2 N)$ である。点が $0, 1, \dots, N - 1$ のように等間隔なら、[ラグランジュ補間](../math/lagrange-interpolation.md#linear-time)のほうが簡単で速い。
 
 どれも定数倍が重く、ABC でそのまま要ることはまれである。$O(N^2)$ で間に合う制約なら素朴な方法を使う。
+
+## ACL の convolution と自作するときの要点 {#library}
+
+!!! info "ACL では"
+    `#include <atcoder/convolution>`。ACL にあるのは `atcoder::convolution(a, b)`（長さの和を $n$ として $O(n \log n)$、法は NTT 向きの素数）だけで、逆元・log・exp・累乗は自作する。法の条件と長さの上限は [ACL の convolution の要件](../math/convolution-ntt.md#acl)にある。
+
+逆元・log・exp をニュートン法で書くと次のようになる。完全なプログラムは `snippets/fps-basics/newton.cpp` で、素朴な方法との比較も同じファイルにある。
+
+```cpp
+--8<-- "fps-basics/newton.cpp:inv"
+```
+
+```cpp
+--8<-- "fps-basics/newton.cpp:log-exp"
+```
+
+この exp は反復のたびに log（中で逆元）を呼ぶので、計算量は $O(N \log N)$ だが定数倍が重い。それでも手元では $N = 5 \times 10^5$ で 0.5 秒ほどで、ふつうはこれで足りる。さらに速くしたいときは、資料にある逆元を同時に更新する書き方に替える。
+
+自作するときの要点は次のとおりである。
+
+- **切り詰め**：掛けるたびに必要な項数に切る。切らないと長さが倍々に増える。反復の中で掛ける $f$ も、今の精度の $2m$ 項に切っておく。
+- **定数項の条件**：$\log$ は $a_0 = 1$ に正規化してから（$a_0 \ne 1$ なら $a_0$ で割った後の log を使う）、$\exp$ は $a_0 = 0$ のときだけ使う。$\log f$ の定数項は 0、$\exp f$ の定数項は 1 である。
+- **累乗で $a_0 = 0$**：$M = 0$ なら $f$ に関係なく答えは $1$ である（空の積）。$M \ge 1$ なら、最初の 0 でない係数を $a_d x^d$ とし、$f = a_d x^d \cdot h$（$h$ の定数項は 1）と分けて $f^M = a_d^M x^{dM} \exp(M \log h)$ とする。$dM \ge N$ なら答えはすべて 0 で、Library Checker では $M$ が $10^{18}$ まであるので $d M$ をそのまま掛けず、割り算で比べる（[オーバーフロー](../guide/glossary.md#overflow)）。$\exp$ に渡す $M$ は $M \bmod p$ でよいが、$a_d^M$ は元の $M$ で繰り返し二乗法をする（$O(\log M)$。指数を縮めるなら $M \bmod (p - 1)$）。比較の $dM \ge N$ も元の $M$ で行う。
+- **平方根**：$f$ の先頭 $N$ 項がすべて 0 なら答えは 0 である。$a_0 = 0$ なら、最初の 0 でない係数の位置 $d$ が偶数でなければ平方根はない。$d$ が偶数なら $x^{d/2}$ をくくり出す。残りの定数項 $b$ は mod $p$ の平方根を持つ必要がある（持たなければ平方根はない）。平方根は [Tonelli-Shanks 法](../math/multiplicative-order.md#mod-root)などで求め、$\pm$ のどちらを選んでも平方根になる。
+
+自作したら、[練習問題](#practice)の Library Checker の問題で演算ごとに確かめる。
 
 ## 学ぶための資料 {#resources}
 

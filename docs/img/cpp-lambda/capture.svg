@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" font-family="sans-serif" font-size="14">
-  <rect width="640" height="300" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" font-family="sans-serif" font-size="14">
+  <rect width="400" height="400" fill="#ffffff"/>
   <defs>
     <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#333333"/>
@@ -8,25 +8,26 @@
       <path d="M0,0 L10,5 L0,10 z" fill="#b36b00"/>
     </marker>
   </defs>
-  <text x="20" y="28" font-size="15" font-weight="bold" fill="#111111">int k = 10; ラムダを 2 つ作ってから k = 20; とした後</text>
-  <!-- outer variable -->
-  <rect x="40" y="110" width="150" height="80" rx="6" fill="#eef4ff" stroke="#1f4e9c" stroke-width="2"/>
-  <text x="115" y="135" text-anchor="middle" fill="#1f4e9c">外側の変数</text>
-  <text x="115" y="168" text-anchor="middle" font-size="20" fill="#111111">k = 20</text>
+  <text x="16" y="24" font-size="15" font-weight="bold" fill="#111111">int k = 10; ラムダを 2 つ作ってから</text>
+  <text x="16" y="44" font-size="15" font-weight="bold" fill="#111111">k = 20; とした後</text>
   <!-- by_ref closure -->
-  <rect x="380" y="55" width="230" height="80" rx="6" fill="#ffffff" stroke="#333333" stroke-width="2"/>
-  <text x="495" y="78" text-anchor="middle" fill="#333333">by_ref のクロージャ [&amp;]</text>
-  <text x="495" y="108" text-anchor="middle" fill="#111111">k への参照</text>
-  <text x="495" y="126" text-anchor="middle" font-size="12" fill="#555555">by_ref() は 21（今の k を読む）</text>
-  <line x1="380" y1="98" x2="194" y2="135" stroke="#333333" stroke-width="2" marker-end="url(#arr)"/>
-  <text x="280" y="102" text-anchor="middle" font-size="12" fill="#333333">参照（実線）</text>
+  <rect x="130" y="62" width="254" height="80" rx="6" fill="#ffffff" stroke="#333333" stroke-width="2"/>
+  <text x="257" y="85" text-anchor="middle" fill="#333333">by_ref のクロージャ [&amp;]</text>
+  <text x="257" y="111" text-anchor="middle" fill="#111111">k への参照</text>
+  <text x="257" y="131" text-anchor="middle" font-size="13" fill="#555555">by_ref() は 21（今の k を読む）</text>
+  <!-- outer variable -->
+  <rect x="16" y="170" width="130" height="70" rx="6" fill="#eef4ff" stroke="#1f4e9c" stroke-width="2"/>
+  <text x="81" y="192" text-anchor="middle" fill="#1f4e9c">外側の変数</text>
+  <text x="81" y="224" text-anchor="middle" font-size="20" fill="#111111">k = 20</text>
+  <line x1="130" y1="104" x2="86" y2="166" stroke="#333333" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="16" y="120" font-size="13" fill="#333333">参照（実線）</text>
   <!-- by_copy closure -->
-  <rect x="380" y="185" width="230" height="90" rx="6" fill="#ffffff" stroke="#333333" stroke-width="2" stroke-dasharray="6 4"/>
-  <text x="495" y="208" text-anchor="middle" fill="#333333">by_copy のクロージャ [=]</text>
-  <rect x="445" y="218" width="100" height="30" rx="4" fill="#fff4e0" stroke="#b36b00"/>
-  <text x="495" y="238" text-anchor="middle" fill="#111111">k = 10</text>
-  <text x="495" y="266" text-anchor="middle" font-size="12" fill="#555555">by_copy() は 11（中のコピーを読む）</text>
-  <line x1="194" y1="170" x2="440" y2="232" stroke="#b36b00" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arr-copy)"/>
-  <text x="282" y="228" text-anchor="middle" font-size="12" fill="#b36b00">作った時点の値をコピー（点線）</text>
-  <text x="282" y="244" text-anchor="middle" font-size="12" fill="#b36b00">後で k が変わっても届かない</text>
+  <rect x="130" y="296" width="254" height="90" rx="6" fill="#ffffff" stroke="#333333" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="257" y="319" text-anchor="middle" fill="#333333">by_copy のクロージャ [=]</text>
+  <rect x="207" y="328" width="100" height="30" rx="4" fill="#fff4e0" stroke="#b36b00"/>
+  <text x="257" y="348" text-anchor="middle" fill="#111111">k = 10</text>
+  <text x="257" y="376" text-anchor="middle" font-size="13" fill="#555555">by_copy() は 11（中のコピーを読む）</text>
+  <line x1="100" y1="240" x2="203" y2="340" stroke="#b36b00" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arr-copy)"/>
+  <text x="168" y="262" font-size="13" fill="#b36b00">作った時点の値をコピー（点線）</text>
+  <text x="168" y="280" font-size="13" fill="#b36b00">後で k が変わっても届かない</text>
 </svg>

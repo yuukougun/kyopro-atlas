@@ -1,55 +1,58 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 340" font-family="sans-serif" font-size="14">
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="423" viewBox="0 0 400 423" font-family="sans-serif" font-size="14">
 <defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#9bbbe0" stroke-width="2"/></pattern></defs>
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="30" y="26" fill="#222">f(x) = |x − 1| + |x − 3| + |x − 6| + |x − 8| のグラフ</text>
-<text x="30" y="46" fill="#555" font-size="14">線分の上の数は傾き ＝（x より左の点の数）−（x より右の点の数）</text>
-<rect x="225" y="166" width="165" height="84" fill="url(#hatch)" stroke="none"/>
-<text x="307.5" y="200" text-anchor="middle" fill="#1f4e9a" font-weight="bold">最小 10</text>
-<text x="307.5" y="218" text-anchor="middle" fill="#1f4e9a" font-size="14">3 ≤ x ≤ 6 ならどこでも</text>
-<line x1="50" y1="250" x2="570" y2="250" stroke="#333" stroke-width="1.5"/>
-<line x1="60" y1="246" x2="60" y2="254" stroke="#333"/>
-<text x="60" y="272" text-anchor="middle" fill="#222" font-size="14">0</text>
-<line x1="115" y1="246" x2="115" y2="254" stroke="#333"/>
-<text x="115" y="272" text-anchor="middle" fill="#222" font-size="14">1</text>
-<line x1="170" y1="246" x2="170" y2="254" stroke="#333"/>
-<text x="170" y="272" text-anchor="middle" fill="#222" font-size="14">2</text>
-<line x1="225" y1="246" x2="225" y2="254" stroke="#333"/>
-<text x="225" y="272" text-anchor="middle" fill="#222" font-size="14">3</text>
-<line x1="280" y1="246" x2="280" y2="254" stroke="#333"/>
-<text x="280" y="272" text-anchor="middle" fill="#222" font-size="14">4</text>
-<line x1="335" y1="246" x2="335" y2="254" stroke="#333"/>
-<text x="335" y="272" text-anchor="middle" fill="#222" font-size="14">5</text>
-<line x1="390" y1="246" x2="390" y2="254" stroke="#333"/>
-<text x="390" y="272" text-anchor="middle" fill="#222" font-size="14">6</text>
-<line x1="445" y1="246" x2="445" y2="254" stroke="#333"/>
-<text x="445" y="272" text-anchor="middle" fill="#222" font-size="14">7</text>
-<line x1="500" y1="246" x2="500" y2="254" stroke="#333"/>
-<text x="500" y="272" text-anchor="middle" fill="#222" font-size="14">8</text>
-<line x1="555" y1="246" x2="555" y2="254" stroke="#333"/>
-<text x="555" y="272" text-anchor="middle" fill="#222" font-size="14">9</text>
-<text x="577" y="255" fill="#222">x</text>
-<circle cx="115" cy="250" r="6" fill="#d9534f" stroke="#7a1f1c"/>
-<circle cx="225" cy="250" r="6" fill="#d9534f" stroke="#7a1f1c"/>
-<circle cx="390" cy="250" r="6" fill="#d9534f" stroke="#7a1f1c"/>
-<circle cx="500" cy="250" r="6" fill="#d9534f" stroke="#7a1f1c"/>
-<text x="30" y="300" fill="#222" font-size="14">● は点 a（1・3・6・8）。点を越えるたびに傾きは 2 増える</text>
-<polyline points="60,106 115,138 225,170 390,170 500,138 555,106" fill="none" stroke="#1f4e9a" stroke-width="2.5"/>
-<circle cx="60" cy="106" r="3" fill="#1f4e9a"/>
-<text x="60" y="98" text-anchor="middle" fill="#555" font-size="14">18</text>
-<circle cx="115" cy="138" r="3" fill="#1f4e9a"/>
-<text x="115" y="130" text-anchor="middle" fill="#555" font-size="14">14</text>
-<circle cx="225" cy="170" r="3" fill="#1f4e9a"/>
-<text x="225" y="162" text-anchor="middle" fill="#555" font-size="14">10</text>
-<circle cx="390" cy="170" r="3" fill="#1f4e9a"/>
-<text x="390" y="162" text-anchor="middle" fill="#555" font-size="14">10</text>
-<circle cx="500" cy="138" r="3" fill="#1f4e9a"/>
-<text x="500" y="130" text-anchor="middle" fill="#555" font-size="14">14</text>
-<circle cx="555" cy="106" r="3" fill="#1f4e9a"/>
-<text x="555" y="98" text-anchor="middle" fill="#555" font-size="14">18</text>
-<text x="101.5" y="112.0" text-anchor="middle" fill="#222" font-weight="bold">−4</text>
-<text x="184.0" y="144.0" text-anchor="middle" fill="#222" font-weight="bold">−2</text>
-<text x="307.5" y="158.0" text-anchor="middle" fill="#222" font-weight="bold">0</text>
-<text x="431.0" y="144.0" text-anchor="middle" fill="#222" font-weight="bold">+2</text>
-<text x="513.5" y="112.0" text-anchor="middle" fill="#222" font-weight="bold">+4</text>
-<text x="30" y="322" fill="#222" font-size="14">傾きが負から 0 以上に変わる所（中央値）で f は最小になる</text>
+<text x="16" y="22" fill="#222">f(x) = |x − 1| + |x − 3| + |x − 6| + |x − 8|</text>
+<text x="16" y="44" fill="#555">線分の上の数は傾き</text>
+<text x="16" y="64" fill="#555">＝（x より左の点の数）−（x より右の点の数）</text>
+<rect x="138" y="194" width="108" height="120" fill="url(#hatch)" stroke="none"/>
+<text x="192" y="234" text-anchor="middle" fill="#1f4e9a" font-weight="bold">最小 10</text>
+<text x="192" y="256" text-anchor="middle" fill="#1f4e9a" font-size="13">3 ≤ x ≤ 6 なら</text>
+<text x="192" y="274" text-anchor="middle" fill="#1f4e9a" font-size="13">どこでも</text>
+<line x1="22" y1="314" x2="364" y2="314" stroke="#333" stroke-width="1.5"/>
+<line x1="30" y1="310" x2="30" y2="318" stroke="#333"/>
+<text x="30" y="336" text-anchor="middle" fill="#222">0</text>
+<line x1="66" y1="310" x2="66" y2="318" stroke="#333"/>
+<text x="66" y="336" text-anchor="middle" fill="#222">1</text>
+<line x1="102" y1="310" x2="102" y2="318" stroke="#333"/>
+<text x="102" y="336" text-anchor="middle" fill="#222">2</text>
+<line x1="138" y1="310" x2="138" y2="318" stroke="#333"/>
+<text x="138" y="336" text-anchor="middle" fill="#222">3</text>
+<line x1="174" y1="310" x2="174" y2="318" stroke="#333"/>
+<text x="174" y="336" text-anchor="middle" fill="#222">4</text>
+<line x1="210" y1="310" x2="210" y2="318" stroke="#333"/>
+<text x="210" y="336" text-anchor="middle" fill="#222">5</text>
+<line x1="246" y1="310" x2="246" y2="318" stroke="#333"/>
+<text x="246" y="336" text-anchor="middle" fill="#222">6</text>
+<line x1="282" y1="310" x2="282" y2="318" stroke="#333"/>
+<text x="282" y="336" text-anchor="middle" fill="#222">7</text>
+<line x1="318" y1="310" x2="318" y2="318" stroke="#333"/>
+<text x="318" y="336" text-anchor="middle" fill="#222">8</text>
+<line x1="354" y1="310" x2="354" y2="318" stroke="#333"/>
+<text x="354" y="336" text-anchor="middle" fill="#222">9</text>
+<text x="368" y="319" fill="#222">x</text>
+<circle cx="66" cy="314" r="6" fill="#d9534f" stroke="#7a1f1c"/>
+<circle cx="138" cy="314" r="6" fill="#d9534f" stroke="#7a1f1c"/>
+<circle cx="246" cy="314" r="6" fill="#d9534f" stroke="#7a1f1c"/>
+<circle cx="318" cy="314" r="6" fill="#d9534f" stroke="#7a1f1c"/>
+<polyline points="30,98 66,146 138,194 246,194 318,146 354,98" fill="none" stroke="#1f4e9a" stroke-width="2.5"/>
+<circle cx="30" cy="98" r="3" fill="#1f4e9a"/>
+<text x="30" y="89" text-anchor="middle" fill="#555" font-size="13">18</text>
+<circle cx="66" cy="146" r="3" fill="#1f4e9a"/>
+<text x="66" y="137" text-anchor="middle" fill="#555" font-size="13">14</text>
+<circle cx="138" cy="194" r="3" fill="#1f4e9a"/>
+<text x="138" y="185" text-anchor="middle" fill="#555" font-size="13">10</text>
+<circle cx="246" cy="194" r="3" fill="#1f4e9a"/>
+<text x="246" y="185" text-anchor="middle" fill="#555" font-size="13">10</text>
+<circle cx="318" cy="146" r="3" fill="#1f4e9a"/>
+<text x="318" y="137" text-anchor="middle" fill="#555" font-size="13">14</text>
+<circle cx="354" cy="98" r="3" fill="#1f4e9a"/>
+<text x="354" y="89" text-anchor="middle" fill="#555" font-size="13">18</text>
+<text x="44" y="142" text-anchor="end" fill="#222" font-weight="bold">−4</text>
+<text x="98" y="190" text-anchor="middle" fill="#222" font-weight="bold">−2</text>
+<text x="192" y="184" text-anchor="middle" fill="#222" font-weight="bold">0</text>
+<text x="286" y="190" text-anchor="middle" fill="#222" font-weight="bold">+2</text>
+<text x="340" y="142" text-anchor="start" fill="#222" font-weight="bold">+4</text>
+<text x="16" y="366" fill="#222" font-size="13">● は点 a（1・3・6・8）。点を越えるたびに</text>
+<text x="16" y="385" fill="#222" font-size="13">傾きは 2 増える。傾きが負から 0 以上に変わる所</text>
+<text x="16" y="404" fill="#222" font-size="13">（中央値）で f は最小になる</text>
 </svg>

@@ -200,7 +200,7 @@ $$
 - グラフが最初から固定で、成分ごとの集計を一度するだけなら、[連結成分](../graph/connected-components.md)を BFS・DFS で求めて数えれば足りる。辺の追加と質問が交互に来るときに Union-Find が要る
 - 値ごとの個数の質問がオフラインで、map のマージテクが重いときは、[併合過程を表す木](../tree/merge-process-tree.md#group-as-interval)で各時点の成分を DFS 順の区間にする方法もある
 - 次の空きを探すだけなら、次の空きへ飛ぶ Union-Find でも `std::set` の `lower_bound` でもよい。区間ごとに色や値を持ち、塗り替えもするなら[区間を set で管理する](../ds/interval-set.md)方法を使う
-- 削除を含むなら、逆順の追加にするか（[Union-Find で連結性を扱う](../graph/union-find-connectivity.md)）、オフラインの発展的な方法に頼る（[Undo 可能な Union-Find](../ds/rollback-union-find.md#offline-dynamic-connectivity)）
+- 削除を含むなら、逆順の追加にするか（[Union-Find で連結性を扱う](../graph/union-find-connectivity.md)）、オフラインの発展的な方法に頼る（[ロールバックできる Union-Find](../ds/rollback-union-find.md#offline-dynamic-connectivity)）
 
 ## 例題 {#examples}
 
@@ -256,6 +256,7 @@ $k \le 10$ なので、各成分の頂点番号の上位 10 個だけを根に�
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC420 E. Reachability Query](https://atcoder.jp/contests/abc420/tasks/abc420_e)（diff 790）：辺の追加と頂点の白黒の反転をしながら、ある頂点から黒い頂点に行けるかを答える。
+- [ABC206 D. KAIBUNsyo](https://atcoder.jp/contests/abc206/tasks/abc206_d)（diff 879）：値を別の値に一括で置き換える操作を繰り返し、数列を回文にするための最小の回数を求める。
 - [ABC228 D. Linear Probing](https://atcoder.jp/contests/abc228/tasks/abc228_d)（diff 1035）：環状の配列で、位置 h から右へ最初の空きに値を書き込むクエリと、値を読み出すクエリを処理する。
 - [ABC409 F. Connecting Points](https://atcoder.jp/contests/abc409/tasks/abc409_f)（diff 1580）：平面上の頂点の追加・最も近い成分どうしの一括併合・連結判定のクエリを処理する。
 - [ABC183 F. Confluence](https://atcoder.jp/contests/abc183/tasks/abc183_f)（diff 1586）：生徒のグループの合流と、グループ内のクラス c の人数の質問を処理する。
@@ -264,6 +265,7 @@ $k \le 10$ なので、各成分の頂点番号の上位 10 個だけを根に�
 
 ??? note "練習の方針"
     - **ABC420 E**：根に成分の黒い頂点の数を持つ。併合で足し、色の反転では根の値を ±1 する。質問は根の値が 1 以上か
+    - **ABC206 D**：値を頂点にし、対称な位置の 2 つの値をつなぐ。置き換えの最小の回数は、併合に成功した回数（成分ごとの「頂点数 − 1」の和）である（[何を頂点にするかの言い換え](#modeling)）
     - **ABC228 D**：次の空きへ飛ぶ Union-Find で、書き込んだ位置を右隣とつなぐ。末尾の番兵に着いたら先頭から探し直す。空きの位置の `set` と `lower_bound` でもよい
     - **ABC409 F**：頂点数が少ないので、全頂点対の距離をヒープに入れる。取り出した組がすでに同じ成分なら捨て、最初に見つかった別の成分の組の距離 $k$ で、距離が $k$ の組をまとめて併合する。頂点の追加では、新しい頂点と既存の全頂点の距離をヒープに足す
     - **ABC183 F**：根ごとに（クラス → 人数）の map を持ち、小さい方の map を大きい方へ移す。質問は根の map を引く
@@ -274,6 +276,7 @@ $k \le 10$ なので、各成分の頂点番号の上位 10 個だけを根に�
 
 - [ABC364 F. Range Connect MST](https://atcoder.jp/contests/abc364/tasks/abc364_f)（diff 1878）：区間内の全頂点と新しい頂点を結ぶ操作をすべて行った後の、最小全域木のコストを求める。
 - [ABC355 F. MST Query](https://atcoder.jp/contests/abc355/tasks/abc355_f)（diff 1924）：木に辺を 1 本ずつ足すたびに、最小全域木の重みを答える（辺の重みは 10 以下）。
+- [ABC131 F. Must Be Rectangular!](https://atcoder.jp/contests/abc131/tasks/abc131_f)（diff 1937）：平面の点の集合に「長方形の 3 隅があれば残りの 1 隅を足す」操作をくり返すとき、できる操作の最大回数を求める。
 - [ARC065 D. Connectivity](https://atcoder.jp/contests/arc065/tasks/arc065_b)（diff 1996）：各都市について、道路でも鉄道でも連結な都市の数を求める。
 
 </div>
@@ -281,6 +284,7 @@ $k \le 10$ なので、各成分の頂点番号の上位 10 個だけを根に�
 ??? note "力試しの方針"
     - **ABC364 F**：操作をコストの小さい順に、クラスカル法のように処理する。区間の中の隣り合う頂点のうち、まだつながっていない境目だけを併合し、併合した回数を $m$ として新しい頂点の辺のコスト $C \times (m + 1)$ を足す。つながった境目は次の空きへ飛ぶ Union-Find で飛ばす。最後に元の頂点がすべて連結かを確かめる
     - **ABC355 F**：重み $c = 1, \dots, 10$ ごとに、重み $c$ 以下の辺だけの Union-Find を持つ。連結成分の数から重みごとの辺の本数を求めて、最小全域木の重みを出す（[しきい値ごと・関係ごとに Union-Find を持つ](#multiple-uf)）
+    - **ABC131 F**：$x$ 座標と $y$ 座標をそれぞれ頂点にし、点 $(x, y)$ を 2 つをつなぐ辺にする（[何を頂点にするかの言い換え](#modeling)）。操作を続けると、成分の中の $x$ と $y$ の組がすべて点になるので、成分ごとに（$x$ の数）×（$y$ の数）を足し、元の点の数を引けば答えになる。根に $x$ と $y$ の数を別々に持てばよい
     - **ARC065 D**：道路用と鉄道用の Union-Find を作り、各都市を（道路の根, 鉄道の根）の組で分類して、組ごとの都市数を数える
 
 ## 参考 {#references}
@@ -293,7 +297,9 @@ $k \le 10$ なので、各成分の頂点番号の上位 10 個だけを根に�
 - [testcampus「【ABC420】AtCoder Beginner Contest 420【C++】」](https://zenn.dev/testcampus/articles/253cc82eb7f980)：練習の方針（根に黒い頂点の数を持つ）
 - [Kazun「AtCoder Beginner Contest 228 D 問題 Linear Probing」](https://kazun-kyopro.hatenablog.com/entry/ABC/228/D)：練習の方針（空きの集合と、Union-Find による別解）
 - [ikatakos「AtCoder Beginner Contest 409 F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0607_abc409)：練習の方針（ヒープと同じ距離の組の一括併合。解説の部分だけを参照）
+- [drken「AtCoder ABC 206 D - KAIBUNsyo (2Q, 緑色, 400 点)」](https://drken1215.hatenablog.com/entry/2021/06/26/165800)：練習の方針（対称な位置の値をつなぎ、併合の回数を数える）
 - [drken「AtCoder ABC 183 F - Confluence (水色, 600 点)」](https://drken1215.hatenablog.com/entry/2020/12/20/192100)：練習の方針（根ごとの map を小さい方から移す）と計算量
 - [Lanly「AtCoder Beginner Contest 364」](https://www.cnblogs.com/Lanly/p/18327726)：力試しの方針（コスト順に処理し、つながった境目を飛ばす）
 - [Lanly「AtCoder Beginner Contest 355」](https://www.cnblogs.com/Lanly/p/18213969)：力試しの方針（重みごとの Union-Find と、連結成分の数から最小全域木の重みを求める式）
+- [drken「AtCoder ABC 131 F - Must Be Rectangular! (青色, 600 点)」](https://drken1215.hatenablog.com/entry/2019/06/23/004700)：力試しの方針（$x$ 座標と $y$ 座標を頂点にした二部グラフの成分ごとの積）
 - [drken「AtCoder ABC 049 D - 連結 (ARC 065 D) (1Q, 青色, 400 点)」](https://drken1215.hatenablog.com/entry/2021/07/28/014400)：力試しの方針（2 つの Union-Find の根の組で分類する）

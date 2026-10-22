@@ -1,56 +1,56 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 490" width="680" height="490" font-family="sans-serif">
-<rect x="0" y="0" width="680" height="490" fill="#ffffff"/>
-<text x="20" y="24" font-size="13" fill="#222">多重集合 {1, 5, 5, 9, 10⁹} を座標圧縮し、値の順位を添字にする。ノードは（個数, 和）</text>
-<!-- edges -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 529" width="400" height="529" font-family="sans-serif">
+<rect x="0" y="0" width="400" height="529" fill="#ffffff"/>
+<text x="16" y="22" font-size="14" fill="#222">多重集合 {1, 5, 5, 9, 10⁹} を座標圧縮し、</text>
+<text x="16" y="40" font-size="14" fill="#222">値の順位を添字にする。ノードは（個数, 和）</text>
 <g stroke="#888" stroke-width="1.5">
-<line x1="340" y1="94" x2="200" y2="134"/><line x1="340" y1="94" x2="480" y2="134"/>
-<line x1="200" y1="184" x2="130" y2="224"/><line x1="200" y1="184" x2="270" y2="224"/>
-<line x1="480" y1="184" x2="410" y2="224"/><line x1="480" y1="184" x2="550" y2="224"/>
+<line x1="200" y1="110" x2="108" y2="140"/>
+<line x1="200" y1="110" x2="292" y2="140"/>
+<line x1="108" y1="190" x2="62" y2="220"/>
+<line x1="108" y1="190" x2="154" y2="220"/>
+<line x1="292" y1="190" x2="246" y2="220"/>
+<line x1="292" y1="190" x2="338" y2="220"/>
 </g>
-<!-- root -->
-<rect x="265" y="44" width="150" height="50" rx="6" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
-<text x="340" y="63" font-size="14" fill="#666" text-anchor="middle">[0, 4)</text>
-<text x="340" y="86" font-size="18" fill="#222" text-anchor="middle">(5, 10⁹ + 20)</text>
-<!-- mid -->
-<rect x="135" y="134" width="130" height="50" rx="6" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
-<text x="200" y="153" font-size="14" fill="#666" text-anchor="middle">[0, 2)</text>
-<text x="200" y="176" font-size="18" fill="#222" text-anchor="middle">(3, 11)</text>
-<rect x="400" y="134" width="160" height="50" rx="6" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
-<text x="480" y="153" font-size="14" fill="#666" text-anchor="middle">[2, 4)</text>
-<text x="480" y="176" font-size="18" fill="#222" text-anchor="middle">(2, 10⁹ + 9)</text>
-<!-- leaves -->
-<rect x="75" y="224" width="110" height="50" rx="6" fill="#dce7f7" stroke="#2f5fb3" stroke-width="3"/>
-<text x="130" y="243" font-size="14" fill="#666" text-anchor="middle">添字 0</text>
-<text x="130" y="266" font-size="18" fill="#222" text-anchor="middle">(1, 1)</text>
-<rect x="215" y="224" width="110" height="50" rx="6" fill="#fff4e5" stroke="#c26a00" stroke-width="2.5" stroke-dasharray="6 4"/>
-<text x="270" y="243" font-size="14" fill="#666" text-anchor="middle">添字 1</text>
-<text x="270" y="266" font-size="18" fill="#222" text-anchor="middle">(2, 10)</text>
-<rect x="355" y="224" width="110" height="50" rx="6" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
-<text x="410" y="243" font-size="14" fill="#666" text-anchor="middle">添字 2</text>
-<text x="410" y="266" font-size="18" fill="#222" text-anchor="middle">(1, 9)</text>
-<rect x="485" y="224" width="130" height="50" rx="6" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
-<text x="550" y="243" font-size="14" fill="#666" text-anchor="middle">添字 3</text>
-<text x="550" y="266" font-size="18" fill="#222" text-anchor="middle">(1, 10⁹)</text>
-<!-- histogram -->
-<line x1="60" y1="380" x2="630" y2="380" stroke="#888" stroke-width="1.5"/>
-<rect x="105" y="350" width="50" height="30" fill="#2f5fb3"/>
-<rect x="245" y="320" width="50" height="60" fill="#ffffff" stroke="#c26a00" stroke-width="2" stroke-dasharray="5 3"/>
-<line x1="245" y1="350" x2="295" y2="350" stroke="#c26a00" stroke-width="1.5"/>
-<rect x="245" y="350" width="50" height="30" fill="#c26a00" fill-opacity="0.35"/>
-<rect x="385" y="350" width="50" height="30" fill="#bbbbbb"/>
-<rect x="525" y="350" width="50" height="30" fill="#bbbbbb"/>
-<text x="130" y="342" font-size="16" fill="#222" text-anchor="middle">1 個</text>
-<text x="270" y="312" font-size="16" fill="#222" text-anchor="middle">2 個</text>
-<text x="410" y="342" font-size="16" fill="#222" text-anchor="middle">1 個</text>
-<text x="550" y="342" font-size="16" fill="#222" text-anchor="middle">1 個</text>
-<text x="130" y="400" font-size="16" fill="#444" text-anchor="middle">値 1</text>
-<text x="270" y="400" font-size="16" fill="#444" text-anchor="middle">値 5</text>
-<text x="410" y="400" font-size="16" fill="#444" text-anchor="middle">値 9</text>
-<text x="550" y="400" font-size="16" fill="#444" text-anchor="middle">値 10⁹</text>
-<!-- legend -->
-<rect x="30" y="418" width="22" height="16" fill="#dce7f7" stroke="#2f5fb3" stroke-width="3"/>
-<text x="60" y="431" font-size="13" fill="#222">K = 2 のとき丸ごと取るノード（個数 1、和 1）</text>
-<rect x="30" y="442" width="22" height="16" fill="#fff4e5" stroke="#c26a00" stroke-width="2.5" stroke-dasharray="6 4"/>
-<text x="60" y="455" font-size="13" fill="#222">境界の値 5 から残り 1 個だけ取る</text>
-<text x="30" y="480" font-size="13" fill="#222">小さい方から 2 個の和 = 1 + 1 × 5 = 6（[0, 2) は個数 3 で多すぎ、max_right は r = 1 を返す）</text>
+<rect x="130.0" y="60" width="140" height="50" rx="6" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="200" y="79" font-size="13" fill="#666" text-anchor="middle">[0, 4)</text>
+<text x="200" y="101" font-size="16" fill="#222" text-anchor="middle">(5, 10⁹ + 20)</text>
+<rect x="48.0" y="140" width="120" height="50" rx="6" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="159" font-size="13" fill="#666" text-anchor="middle">[0, 2)</text>
+<text x="108" y="181" font-size="16" fill="#222" text-anchor="middle">(3, 11)</text>
+<rect x="227.0" y="140" width="130" height="50" rx="6" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="292" y="159" font-size="13" fill="#666" text-anchor="middle">[2, 4)</text>
+<text x="292" y="181" font-size="16" fill="#222" text-anchor="middle">(2, 10⁹ + 9)</text>
+<rect x="20.0" y="220" width="84" height="50" rx="6" fill="#dce7f7" stroke="#2f5fb3" stroke-width="3"/>
+<text x="62" y="239" font-size="13" fill="#666" text-anchor="middle">添字 0</text>
+<text x="62" y="261" font-size="16" fill="#222" text-anchor="middle">(1, 1)</text>
+<rect x="112.0" y="220" width="84" height="50" rx="6" fill="#fff4e5" stroke="#c26a00" stroke-width="2.5" stroke-dasharray="6 4"/>
+<text x="154" y="239" font-size="13" fill="#666" text-anchor="middle">添字 1</text>
+<text x="154" y="261" font-size="16" fill="#222" text-anchor="middle">(2, 10)</text>
+<rect x="204.0" y="220" width="84" height="50" rx="6" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="246" y="239" font-size="13" fill="#666" text-anchor="middle">添字 2</text>
+<text x="246" y="261" font-size="16" fill="#222" text-anchor="middle">(1, 9)</text>
+<rect x="296.0" y="220" width="84" height="50" rx="6" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+<text x="338" y="239" font-size="13" fill="#666" text-anchor="middle">添字 3</text>
+<text x="338" y="261" font-size="16" fill="#222" text-anchor="middle">(1, 10⁹)</text>
+<line x1="16" y1="380" x2="384" y2="380" stroke="#888" stroke-width="1.5"/>
+<rect x="40" y="350" width="44" height="30" fill="#2f5fb3"/>
+<rect x="132" y="320" width="44" height="60" fill="#ffffff" stroke="#c26a00" stroke-width="2" stroke-dasharray="5 3"/>
+<line x1="132" y1="350" x2="176" y2="350" stroke="#c26a00" stroke-width="1.5"/>
+<rect x="132" y="350" width="44" height="30" fill="#c26a00" fill-opacity="0.35"/>
+<rect x="224" y="350" width="44" height="30" fill="#bbbbbb"/>
+<rect x="316" y="350" width="44" height="30" fill="#bbbbbb"/>
+<text x="62" y="342" font-size="14" fill="#222" text-anchor="middle">1 個</text>
+<text x="62" y="400" font-size="14" fill="#444" text-anchor="middle">値 1</text>
+<text x="154" y="312" font-size="14" fill="#222" text-anchor="middle">2 個</text>
+<text x="154" y="400" font-size="14" fill="#444" text-anchor="middle">値 5</text>
+<text x="246" y="342" font-size="14" fill="#222" text-anchor="middle">1 個</text>
+<text x="246" y="400" font-size="14" fill="#444" text-anchor="middle">値 9</text>
+<text x="338" y="342" font-size="14" fill="#222" text-anchor="middle">1 個</text>
+<text x="338" y="400" font-size="14" fill="#444" text-anchor="middle">値 10⁹</text>
+<rect x="16" y="412" width="22" height="16" fill="#dce7f7" stroke="#2f5fb3" stroke-width="3"/>
+<text x="46" y="425" font-size="13" fill="#222">K = 2 のとき丸ごと取るノード（個数 1、和 1）</text>
+<rect x="16" y="436" width="22" height="16" fill="#fff4e5" stroke="#c26a00" stroke-width="2.5" stroke-dasharray="6 4"/>
+<text x="46" y="449" font-size="13" fill="#222">境界の値 5 から残り 1 個だけ取る</text>
+<text x="16" y="476" font-size="13" fill="#222">小さい方から 2 個の和 = 1 + 1 × 5 = 6</text>
+<text x="16" y="495" font-size="13" fill="#222">（[0, 2) は個数 3 で多すぎ、max_right は</text>
+<text x="16" y="514" font-size="13" fill="#222">r = 1 を返す）</text>
 </svg>

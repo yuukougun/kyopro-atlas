@@ -12,14 +12,16 @@
 | --- | --- | --- |
 | `ap.py` | AtCoder Problems の公開データ（キャッシュ）で、問題の実在・題名・difficulty を調べる | `.cache/`（追跡外） |
 | `check_catalog.py` | 目次（planning/catalog/*.yaml）を検査する | なし |
-| `build_ledger.py` | 問題の台帳の下書きを作る。今は `--check`（catalog との食い違い）だけ使う。台帳は手で直したので作り直さない | なし（`--check`） |
+| `build_ledger.py` | 問題の台帳の下書きを作る。台帳は手で直したので作り直さない。骨格（8a）以降は catalog が凍結なので、`--check`（catalog との食い違い）は食い違いを必ず出す（予期したもの。CI では警告だけ）。台帳の確認は `check_pages.py` と `fix_problems.py --check` で行う | なし（`--check`） |
 | `make_skeleton.py` | catalog から骨格のページ（stage: stub）を作る。front matter と要点の囲みだけ。あるページは上書きしない | `docs/<field>/<id>.md` |
 | `gen_site.py` | front matter・本文の問題の一覧・台帳・最近の ABC から生成物を作る。`--check` で鮮度だけを見る | `nav.yml`・`docs/<field>/index.md`・`docs/lists/`・`docs/llms.txt`・`docs/index/`・`overrides/assets/data/graph.json`・手書きのページの目印の中 |
 | `check_pages.py` | ページの検査（front matter の schema・id・参照・循環・レベル・問題の一覧と台帳・囲みの外の問題リンク・```cpp・要点の囲み・draft 以降の節の anchor と別名・本文のリンク） | なし |
-| `fix_problems.py` | 本文の問題の一覧の各行の label・URL・difficulty を台帳から作り直す（要約は変えない）。`- abc300_e：要約` と書けば行を作る | ページ（`--check` では書かない） |
+| `fix_problems.py` | 本文の問題の一覧の各行の label・URL・difficulty を台帳から作り直す（要約は変えない）。`- abc300_e：要約` と書けば行を作る。`--check` は台帳の pages にあるのに本文の囲みにない問題も警告に出す | ページ（`--check` では書かない） |
 | `check_snippets.py` | コード片を設定（compilers・flags・expect・cases）どおりにコンパイル・実行して確かめる | なし |
 | `render_svg.py` | 図の SVG（`docs/img/<id>/`）をヘッドレスの Chrome で幅 360px・720px の PNG にして目で確かめる。日本語のフォントがなければ WSL の Windows のフォントを足す | 一時ディレクトリ（`--out`）の PNG |
+| `check_svg.py` | 図の SVG の width・height の欠けと比、幅（§15-8 の目安）、スマホの幅で 9px 未満になる文字を警告する（`--strict` で終了コード 1） | なし |
 | `check_noai.py` | URL の robots の meta と X-Robots-Tag の noai・noimageai を調べる（atcoder.jp・codeforces.com は取得せず「既知の noai」） | なし |
+| `textlint_targets.py` | textlint の対象の Markdown の一覧を出す（stub と生成物を除く。package.json の `lint:text` が使う） | なし |
 
 front matter の規則は [schema/page.schema.json](../schema/page.schema.json)（JSON Schema Draft-07）。check_pages.py は中の小さな検査器でこれを当てる（jsonschema は要らない）。
 
@@ -27,14 +29,15 @@ check_pages.py は本文のリンクを mkdocs build --strict と同じ見方で
 
 ## 工程ごとの使い方
 
-### 工程6 土台作り・工程7 試作
+### ふだんの検査（工程6 土台作り・工程7 試作から使う）
 
 ```sh
-python3 tools/check_pages.py                 # 試作のページ。catalog にだけある前提・related は「未作成」の警告
+python3 tools/check_pages.py                 # 全ページの検査（エラーがあれば終了コード 1）
 python3 tools/fix_problems.py --check        # 問題の一覧の行が台帳と合っているか（直すときは --check を外す）
 python3 tools/check_snippets.py              # コード片（third_party/ac-library がないときは --acl ~/lib/ac-library-master）
 python3 tools/gen_site.py --check            # 生成物が最新か（書くのはメインのセッション：python3 tools/gen_site.py）
 python3 tools/check_noai.py https://…        # 新しいドメインを資料にする前に。結果は style-guide の記録へ
+python3 tools/check_svg.py --page <id>       # 図の大きさと文字の大きさ（§8・§15-8）。描いたら render_svg.py で目でも確かめる
 ```
 
 ### 工程8a 骨格（メインのセッション）
@@ -79,6 +82,6 @@ python3 tools/check_pages.py && python3 tools/gen_site.py --check && mkdocs buil
 | `verify-table` | ページ → Library Checker の問題 | `guide/library-design.md` |
 | `version`・`fields`・`lists`・`stage-summary` | 索引の版・分野の一覧・一覧へのリンク・制作状況の表（どこに置いてもよい） | 任意 |
 
-- 用語の索引の漢字で始まる語は、読みがないので最初の字の順に並ぶ（読みの表か pykakasi を足すかは未定）
+- 用語の索引の漢字で始まる語は、読みがないので最初の字の順に並ぶ（読みの表か pykakasi を足すかは工程10 の残り。planning/progress.md に記録する）
 - 節（`#anchor`）へのリンクは、相手のページが draft 以降のときだけ付ける（stub のページには見出しがまだない）
 - 生成物の Markdown には atcoder.jp の問題へのリンクを書かない（問題は ID と題名だけ。interfaces.md §3）

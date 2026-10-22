@@ -22,16 +22,16 @@
     <text x="237" y="150">2</text>
   </g>
   <g fill="#555" font-size="15">
-    <text x="262" y="69">← 1 の位（3<tspan baseline-shift="super" font-size="11">0</tspan>）</text>
-    <text x="262" y="109">← 3 の位（3<tspan baseline-shift="super" font-size="11">1</tspan>）</text>
-    <text x="262" y="149">← 9 の位（3<tspan baseline-shift="super" font-size="11">2</tspan>）</text>
+    <text x="262" y="69">← 1 の位（3⁰）</text>
+    <text x="262" y="109">← 3 の位（3¹）</text>
+    <text x="262" y="149">← 9 の位（3²）</text>
   </g>
   <text x="40" y="178" fill="#555" font-size="15">商が 0 になったら止める</text>
   <!-- upward arrow -->
   <line x1="410" y1="150" x2="410" y2="62" stroke="#c0392b" stroke-width="2" stroke-dasharray="6 4"/>
   <polygon points="410,52 404,64 416,64" fill="#c0392b"/>
-  <text x="422" y="100" fill="#c0392b" font-size="14">下から</text>
-  <text x="422" y="118" fill="#c0392b" font-size="14">読む</text>
+  <text x="422" y="100" fill="#c0392b" font-size="15">下から</text>
+  <text x="422" y="118" fill="#c0392b" font-size="15">読む</text>
   <text x="380" y="180" fill="#c0392b" font-weight="bold">23 = 212₃</text>
   <!-- Horner -->
   <line x1="20" y1="200" x2="500" y2="200" stroke="#bbb" stroke-width="1"/>

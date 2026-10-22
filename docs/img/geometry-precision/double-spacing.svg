@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 372" font-family="sans-serif" font-size="16">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 372" width="480" height="372" font-family="sans-serif" font-size="16">
 <rect width="100%" height="100%" fill="#ffffff"/>
 <text x="20" y="26" fill="#222">小数部 2 ビットの浮動小数点数で表せる値（縦線）</text>
 <line x1="30" y1="110" x2="470" y2="110" stroke="#333" stroke-width="1.5"/>

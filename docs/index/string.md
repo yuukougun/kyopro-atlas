@@ -9,7 +9,7 @@ search:
 
 # 文字列の詳細索引
 
-分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。stub（準備中）のページは要約と前提しかなく、節の見出しもまだない。
+分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
 
 ## 文字列の基本操作と辞書順（string-basics） {#string-basics}
 
@@ -237,7 +237,7 @@ search:
 - 節：
     - `string-automaton-dp#matching-state` 照合の状態とマルコフ性：https://yuukougun.github.io/kyopro-atlas/string/string-automaton-dp/#matching-state
     - `string-automaton-dp#kmp-automaton` KMP オートマトンの遷移表を前計算して DP する：https://yuukougun.github.io/kyopro-atlas/string/string-automaton-dp/#kmp-automaton
-    - `string-automaton-dp#multiple-patterns` 複数パターンは Aho-Corasick（終端の印を受け継ぐ）：https://yuukougun.github.io/kyopro-atlas/string/string-automaton-dp/#multiple-patterns
+    - `string-automaton-dp#multiple-patterns` 複数パターンは Aho-Corasick 法（終端の印を受け継ぐ）：https://yuukougun.github.io/kyopro-atlas/string/string-automaton-dp/#multiple-patterns
     - `string-automaton-dp#contain-all` すべて含む：含んだパターンの集合を bit で持つ：https://yuukougun.github.io/kyopro-atlas/string/string-automaton-dp/#contain-all
     - `string-automaton-dp#matrix-power` N が巨大なとき：遷移行列の累乗・ダブリング：https://yuukougun.github.io/kyopro-atlas/string/string-automaton-dp/#matrix-power
     - `string-automaton-dp#why-not-inclusion-exclusion` 包除はどこで破綻するか（位置の重なりとパターンの集合）：https://yuukougun.github.io/kyopro-atlas/string/string-automaton-dp/#why-not-inclusion-exclusion
@@ -287,3 +287,4 @@ search:
     - `suffix-automaton#run-enumeration` Run の列挙（Main-Lorentz）：https://yuukougun.github.io/kyopro-atlas/string/suffix-automaton/#run-enumeration
     - `suffix-automaton#inverse-string-problems` 文字列アルゴリズムの逆問題（逆 Manacher・逆 Z）：https://yuukougun.github.io/kyopro-atlas/string/suffix-automaton/#inverse-string-problems
     - `suffix-automaton#others` そのほかの名前（2 次元ローリングハッシュ・Suffix Tree・Boyer-Moore の検索）：https://yuukougun.github.io/kyopro-atlas/string/suffix-automaton/#others
+    - `suffix-automaton#library` ライブラリと Library Checker での確かめ方：https://yuukougun.github.io/kyopro-atlas/string/suffix-automaton/#library

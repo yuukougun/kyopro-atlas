@@ -16,10 +16,10 @@
 <text x="280" y="196" font-size="17" text-anchor="middle" fill="#111">4</text>
 <circle cx="400" cy="190" r="20" fill="#ffffff" stroke="#333" stroke-width="1.6"/>
 <text x="400" y="196" font-size="17" text-anchor="middle" fill="#111">5</text>
-<text x="60" y="160" font-size="12" text-anchor="middle" fill="#333">取り出せた</text>
-<text x="170" y="160" font-size="12" text-anchor="middle" fill="#333">入次数 1 のまま</text>
-<text x="320" y="58" font-size="12" text-anchor="start" fill="#333">閉路 2→3→4→2</text>
-<text x="400" y="230" font-size="12" text-anchor="middle" fill="#333">閉路の先</text>
-<text x="400" y="246" font-size="12" text-anchor="middle" fill="#333">（閉路上ではない）</text>
+<text x="60" y="160" font-size="13" text-anchor="middle" fill="#333">取り出せた</text>
+<text x="170" y="160" font-size="13" text-anchor="middle" fill="#333">入次数 1 のまま</text>
+<text x="320" y="58" font-size="13" text-anchor="start" fill="#333">閉路 2→3→4→2</text>
+<text x="400" y="230" font-size="13" text-anchor="middle" fill="#333">閉路の先</text>
+<text x="400" y="246" font-size="13" text-anchor="middle" fill="#333">（閉路上ではない）</text>
 <text x="230" y="280" font-size="14" text-anchor="middle" fill="#333">Kahn 法では 1 しか取り出せず、2・3・4・5 が残る</text>
 </svg>

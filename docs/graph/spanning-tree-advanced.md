@@ -25,6 +25,7 @@ sections:
   - {title: Manhattan MST, anchor: manhattan}
   - {title: 最小有向全域木（Chu-Liu/Edmonds）, anchor: directed}
   - {title: 第 2 最小全域木, anchor: second-best}
+  - {title: 自作するときの要点と Library Checker, anchor: library}
 stage: draft
 updated: 2026-10-22
 ---
@@ -63,13 +64,7 @@ Borůvka 法は、「各連結成分から外へ出る最小の辺を、すべ�
 --8<-- "spanning-tree-advanced/boruvka.cpp:core"
 ```
 
-自作するときの要点は次のとおりである。
-
-- **同じ辺を 2 回足さない**：成分 $X$ と $Y$ が互いに同じ辺を選ぶことがよくある。採るときに [Union-Find](../ds/union-find.md) で両端がすでに同じ成分かを確かめれば、1 回だけ数えられる。
-- **非連結の検出**：ある段でどの成分も外へ出る辺を見つけられなければ、グラフは連結でない。そのまま回すと無限ループになる。
-- **成分の番号は段の初めに固定する**：段の途中で併合した結果を探索に混ぜると、上位 2 件の前提が崩れる。段の初めに各頂点の代表を配列に写してから探索する。
-
-ACL に Borůvka 法はない。辺を直接持つ形なら、Library Checker の Minimum Spanning Tree で確かめられる（[練習問題](#practice)）。辺の候補を $O(N \log N)$ 本に減らしてクラスカル法を使う方法（分割統治・[重心分解](../tree/centroid-decomposition.md)）で同じ問題が解けることも多い。
+同じ辺を 2 回足さないことなど、自作するときの注意は[自作するときの要点](#library)にまとめた。辺の候補を $O(N \log N)$ 本に減らしてクラスカル法を使う方法（分割統治・[重心分解](../tree/centroid-decomposition.md)）で同じ問題が解けることも多い。
 
 ## Manhattan MST {#manhattan}
 
@@ -105,15 +100,7 @@ Manhattan MST は、平面上の $N$ 点を[マンハッタン距離](../geometr
 
 **計算量**：縮約は高々 $N - 1$ 回で、1 回は $O(M)$ なので素朴には $O(NM)$ である。頂点ごとに入る辺を[併合可能なヒープ](../ds/advanced-ds-catalog.md#meldable-heap)（skew heap など、全体に値を足す遅延の印を持つもの）に入れ、縮約でヒープを併合すれば $O(M \log N)$ になる。
 
-自作するときの要点は次のとおりである。
-
-- **閉路の検出**：選んだ辺を逆にたどると、根以外の各頂点から出る辺が 1 本のグラフになる。根には自分への辺を足す（または根で止まる）と、[Functional graph](../graph/functional-graph.md) の閉路の見つけ方がそのまま使える。
-- **縮約後の自己ループを捨てる**：閉路の内側どうしの辺は、縮約すると自分から自分への辺になる。これを残すと、手順 1 で自分への辺を入る辺として選んでしまい、答えなしの判定も狂う。縮約のたびに捨てる。
-- **答えなしの判定**：根から届かない頂点があると、その頂点（または縮約した頂点）に入る辺がなくなる。手順 1 で入る辺のない頂点が見つかったら答えなしとする。
-- **根が決まっていないとき**：新しい根を足し、各頂点へ重み $L$（元の辺の重みの絶対値の和より大きい値）の辺を張る。答えの重みが $2L$ 以上なら、元のグラフでは 1 つの根から全体へ届かない。$2L$ 未満なら $L$ の辺を 1 本だけ使っており、結果から $L$ を引いたものが答えで、その $L$ の辺の先の頂点が根になる。
-- **辺の集合の復元**：縮約のたびに「どの元の辺を選んだか」を記録し、最後に縮約を逆順にほどいて元の辺に戻す。重みだけでよいなら復元は要らない。
-
-ACL に最小有向全域木はない。Library Checker の Directed MST（$N, M \le 2 \times 10^5$、根から全頂点に届く。木の親の列も出力する）で確かめる。有向全域木の個数は[行列木定理](../graph/matrix-tree-theorem.md#directed)で数える。
+閉路の検出や縮約後の自己ループなど、自作するときの注意は[自作するときの要点](#library)にまとめた。有向全域木の個数は[行列木定理](../graph/matrix-tree-theorem.md#directed)で数える。
 
 ## 第 2 最小全域木 {#second-best}
 
@@ -129,6 +116,40 @@ ACL に最小有向全域木はない。Library Checker の Directed MST（$N, M
 
 この形は「この辺を必ず使うときの最小全域木」にも使える。辺 $e$ が $T$ に入らないなら、答えは $W - (\text{パス上の最大}) + w_e$ である。パス上の最大の辺が経路のボトルネックになる理由は[最小ボトルネック路](../graph/bottleneck-path.md#why-mst)と同じである。
 
+## 自作するときの要点と Library Checker {#library}
+
+ACL には Borůvka 法・Manhattan MST・最小有向全域木のどれもない。Manhattan MST は候補の辺を作れば、クラスカル法を ACL の `dsu` で書ける。どれも Library Checker に対応する問題がある（[練習問題](#practice)）。
+
+### Borůvka 法
+
+- **同じ辺を 2 回足さない**：成分 $X$ と $Y$ が互いに同じ辺を選ぶことがよくある。採るときに [Union-Find](../ds/union-find.md) で両端がすでに同じ成分かを確かめれば、1 回だけ数えられる。
+- **非連結の検出**：ある段でどの成分も外へ出る辺を見つけられなければ、グラフは連結でない。そのまま回すと無限ループになる。
+- **成分の番号は段の初めに固定する**：段の途中で併合した結果を探索に混ぜると、上位 2 件の前提が崩れる。段の初めに各頂点の代表を配列に写してから探索する。
+
+辺を直接持つ形なら、Library Checker の Minimum Spanning Tree で確かめられる。
+
+### Manhattan MST
+
+候補の辺を返す関数と、その辺でのクラスカル法に分けて書く。同じ座標の点を含む小さい入力で、全点対のクラスカル法と比べて確かめる。Library Checker の Manhattan MST で確かめられる。
+
+### 最小有向全域木
+
+- **閉路の検出**：選んだ辺を逆にたどると、根以外の各頂点から出る辺が 1 本のグラフになる。根には自分への辺を足す（または根で止まる）と、[Functional graph](../graph/functional-graph.md) の閉路の見つけ方がそのまま使える。
+- **縮約後の自己ループを捨てる**：閉路の内側どうしの辺は、縮約すると自分から自分への辺になる。これを残すと、手順 1 で自分への辺を入る辺として選んでしまい、答えなしの判定も狂う。縮約のたびに捨てる。
+- **答えなしの判定**：根から届かない頂点があると、その頂点（または縮約した頂点）に入る辺がなくなる。手順 1 で入る辺のない頂点が見つかったら答えなしとする。
+- **根が決まっていないとき**：新しい根を足し、各頂点へ重み $L$（元の辺の重みの絶対値の和より大きい値）の辺を張る。答えの重みが $2L$ 以上なら、元のグラフでは 1 つの根から全体へ届かない。$2L$ 未満なら $L$ の辺を 1 本だけ使っており、結果から $L$ を引いたものが答えで、その $L$ の辺の先の頂点が根になる。
+- **辺の集合の復元**：縮約のたびに「どの元の辺を選んだか」を記録し、最後に縮約を逆順にほどいて元の辺に戻す。重みだけでよいなら復元は要らない。
+
+Library Checker の Directed MST（$N, M \le 2 \times 10^5$、根から全頂点に届く。木の親の列も出力する）で確かめる。
+
+## 学ぶための資料 {#resources}
+
+- 英語版 Wikipedia の「Borůvka's algorithm」：手順・計算量と、重みが等しいときに全順序で比べる必要。
+- 英語版 Wikipedia の「Edmonds' algorithm」：縮約と重みの直しの手順、Tarjan による $O(M \log N)$ の実装への言及。
+- cp-algorithms の「Manhattan Distance」の Manhattan MST の節：8 つの領域の補題の証明と、$x + y$ の順の走査（文章と図の利用条件は CC BY-SA）。
+- cp-algorithms の「Second Best Minimum Spanning Tree」：1 本だけ入れ替えればよい補題と、ダブリングでパスの最大を求める実装。
+- ei1333 氏のライブラリの Boruvka・Manhattan MST・Directed MST：自作するときの関数の形の例と、Library Checker で確かめたコード。
+
 ## 練習問題 {#practice}
 
 ABC で必須になる問題は確認できなかった。自作したものは次の Library Checker で確かめる。
@@ -138,14 +159,6 @@ ABC で必須になる問題は確認できなかった。自作したものは�
 - [Minimum Spanning Tree](https://judge.yosupo.jp/problem/minimum_spanning_tree)：辺を直接持つ形の Borůvka 法を確かめる。
 - [Manhattan MST](https://judge.yosupo.jp/problem/manhattanmst)：$N \le 2 \times 10^5$ 点のマンハッタン距離の最小全域木の重みと辺を出力する。
 - [Directed MST](https://judge.yosupo.jp/problem/directedmst)：根を指定した最小有向全域木の重みと、各頂点の親を出力する。
-
-## 学ぶための資料 {#resources}
-
-- 英語版 Wikipedia の「Borůvka's algorithm」：手順・計算量と、重みが等しいときに全順序で比べる必要。
-- 英語版 Wikipedia の「Edmonds' algorithm」：縮約と重みの直しの手順、Tarjan による $O(M \log N)$ の実装への言及。
-- cp-algorithms の「Manhattan Distance」の Manhattan MST の節：8 つの領域の補題の証明と、$x + y$ の順の走査（文章と図の利用条件は CC BY-SA）。
-- cp-algorithms の「Second Best Minimum Spanning Tree」：1 本だけ入れ替えればよい補題と、ダブリングでパスの最大を求める実装。
-- ei1333 氏のライブラリの Boruvka・Manhattan MST・Directed MST：自作するときの関数の形の例と、Library Checker で確かめたコード。
 
 ## 参考 {#references}
 

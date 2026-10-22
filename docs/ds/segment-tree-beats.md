@@ -22,6 +22,7 @@ frequency_evidence: recent 0・前提として届くページなし・古い ABC
 sections:
   - {title: 何ができるか（遅延セグメント木に載らない更新）, anchor: what-it-does}
   - {title: ノードに持つもの（最大値・真に 2 番目の最大値・最大値の個数・和）と 3 つの場合, anchor: node-data}
+  - {title: 自作するときの要点と Library Checker, anchor: library}
   - {title: 計算量（chmin と和だけならならし O((N+Q) log N)、区間加算が混ざると log^2）, anchor: complexity}
   - {title: 値が潰れる操作（割り算・mod・平方根）と、区間を set で管理する別解, anchor: shrinking-values}
 stage: draft
@@ -78,7 +79,7 @@ Segment Tree Beats は、ノードに少し多めの情報を持たせ、「こ�
 
 区間 chmax も対称で、最小値・真に 2 番目の最小値・最小値の個数を足して持つ。区間加算は全部の値に同じ数を足すだけなので、ふつうの遅延セグメント木と同じく保留にできる。
 
-### 自作するときの要点
+## 自作するときの要点と Library Checker {#library}
 
 ACL には Segment Tree Beats がない（`lazy_segtree` は作用が必ずノードの情報だけで済む前提で、子へ降りる場合を持たない）。自作するときは、chmin の更新を次の形にする（完全なプログラムは `snippets/segment-tree-beats/beats.cpp`。区間 chmax・区間加算も入れてある）。
 
@@ -100,6 +101,8 @@ ACL には Segment Tree Beats がない（`lazy_segtree` は作用が必ずノ�
 - **和のオーバーフロー**：和は `long long` で持つ。Library Checker の制約（$N \le 2 \times 10^5$、クエリの途中も常に $\lvert a_i \rvert \le 10^{12}$）では和の絶対値は $2 \times 10^{17}$ 以下に収まる。
 
 ACL の `lazy_segtree` を使いたいなら、作用が失敗したら子へ降りる 1 行を `all_apply` に足す方法がある（[学ぶための資料](#resources)の rsm9 氏の記事）。ノードの値に「失敗した」の印を持たせ、印が立ったら保留を子に渡して計算し直す。
+
+Library Checker で確かめるなら、[練習問題](#practice)の Range Chmin Chmax Add Range Sum が使える。
 
 ## 計算量（chmin と和だけならならし O((N+Q) log N)、区間加算が混ざると log^2） {#complexity}
 

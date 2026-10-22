@@ -10,7 +10,7 @@ level: null
 kind: [案内, 実装・C++]
 prerequisites: []
 related: [acl-reading#segtree-args, cpp-macros-template-file#bundling, segment-tree-monoids, stress-testing, problem-sets#verify-sets]
-summary: 自作ライブラリを何から作るか、ACL を手本にしたインターフェースとヘッダの書き方、Library Checker などでの動作確認の手順がわかる。確認用の問題の対応表は各ページの verify から生成する。
+summary: 自作ライブラリを何から作るか、ACL を手本にしたインターフェースとヘッダの書き方、Library Checker などでの動作確認の手順がわかる。提出用の展開の仕方と、各ページの確認用の問題の表もある。
 complexity: '自作の部品の計算量は ACL の同じ部品にそろえる（例：BIT は構築 O(N)、加算・区間和 O(log N)）。手元のテストは小さい n の乱数で数千回、確認用の問題は Library Checker の全ケース'
 signs: []
 acl: []
@@ -39,6 +39,8 @@ updated: 2026-10-22
 自作ライブラリの設計と動作確認は、コンテストで何度も書く部品をヘッダにまとめ、正しいと確かめてから使うまでの流れである。手法そのものの説明は各ページにあり、ここでは部品にするときの約束と確かめ方だけを書く。流れの全体は次の図のとおりで、1 つのヘッダを手元のテストと確認用の問題の両方で確かめ、確かめたヘッダをコンテストの解答から使う。
 
 ![ライブラリの本体のヘッダを、手元のテスト・確認用の解答・コンテストの解答の 3 つが include する。手元のテストは手元で実行し、確認用の解答は oj-verify などが Library Checker の入出力で判定し、コンテストの解答は 1 ファイルに展開して AtCoder に提出する](../img/library-design/workflow.svg)
+
+手元のテストと確認用の解答は、どちらもヘッダを書き換えるたびに回して正しさを確かめる。コンテストの解答だけは提出前に 1 つのファイルへ展開するので、確かめたヘッダがそのまま提出に入る。
 
 ## 何を自作するか {#what-to-build}
 

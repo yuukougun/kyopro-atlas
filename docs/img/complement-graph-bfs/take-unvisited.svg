@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 650" width="640" height="650" font-family="sans-serif">
-<rect width="640" height="650" fill="#ffffff"/>
+<svg viewBox="0 0 480 840" width="480" height="840" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+<rect width="480" height="840" fill="#ffffff"/>
 <line x1="107.7" y1="170.6" x2="242.3" y2="99.4" stroke="#1a1a1a" stroke-width="2.5"/>
 <line x1="110.0" y1="180.0" x2="240.0" y2="180.0" stroke="#1a1a1a" stroke-width="2.5"/>
 <line x1="107.7" y1="189.4" x2="242.3" y2="260.6" stroke="#1a1a1a" stroke-width="2.5"/>
@@ -30,11 +30,12 @@
 <text x="90" y="345" font-size="14" text-anchor="middle" fill="#1a1a1a">距離 0</text>
 <text x="260" y="345" font-size="14" text-anchor="middle" fill="#1a1a1a">距離 1</text>
 <text x="430" y="345" font-size="14" text-anchor="middle" fill="#1a1a1a">距離 2</text>
-<line x1="500" y1="30" x2="530" y2="30" stroke="#1a1a1a" stroke-width="2.5"/><text x="536" y="35" font-size="15">補グラフの辺</text>
-<line x1="500" y1="52" x2="530" y2="52" stroke="#9a9a9a" stroke-width="1.5"/><text x="536" y="57" font-size="15">同じ層の辺</text>
-<line x1="500" y1="74" x2="530" y2="74" stroke="#a0461e" stroke-width="2" stroke-dasharray="7 5"/><text x="536" y="79" font-size="15">元の辺</text>
-<text x="500" y="98" font-size="15">（通れない）</text>
-<line x1="20" y1="365" x2="620" y2="365" stroke="#cccccc"/>
+<line x1="20" y1="378" x2="50" y2="378" stroke="#1a1a1a" stroke-width="2.5"/><text x="56" y="383" font-size="15">補グラフの辺</text>
+<line x1="170" y1="378" x2="200" y2="378" stroke="#9a9a9a" stroke-width="1.5"/><text x="206" y="383" font-size="15">同じ層の辺</text>
+<line x1="310" y1="378" x2="340" y2="378" stroke="#a0461e" stroke-width="2" stroke-dasharray="7 5"/><text x="346" y="383" font-size="15">元の辺</text>
+<text x="346" y="403" font-size="15">（通れない）</text>
+<line x1="20" y1="418" x2="460" y2="418" stroke="#cccccc"/>
+<g transform="translate(0, 55)">
 <text x="20" y="390" font-size="14">取り出した頂点 u と、そのときの未訪問の頂点</text>
 <text x="30" y="437" font-size="15">u = 1</text>
 <rect x="100" y="410" width="40" height="40" rx="4" fill="#ffffff" stroke="#a0461e" stroke-width="2" stroke-dasharray="6 4"/>
@@ -62,8 +63,11 @@
 <text x="30" y="623" font-size="15">u = 6</text>
 <rect x="100" y="596" width="40" height="40" rx="4" fill="#dbe9f7" stroke="#1a1a1a" stroke-width="2"/>
 <text x="120" y="622" font-size="16" text-anchor="middle">2</text>
-<rect x="430" y="410" width="26" height="26" rx="4" fill="#dbe9f7" stroke="#1a1a1a" stroke-width="2"/><text x="464" y="428" font-size="13">取り出す（距離が決まる）</text>
-<rect x="430" y="446" width="26" height="26" rx="4" fill="#ffffff" stroke="#a0461e" stroke-width="2" stroke-dasharray="6 4"/><text x="464" y="464" font-size="13">残す（下は使った元の辺）</text>
-<text x="430" y="506" font-size="13">残した回数 4 ＝ 元の辺 4 本</text>
-<text x="430" y="526" font-size="13">取り出した回数 5 ＝ N − 1</text>
+</g>
+<g transform="translate(-410, 300)">
+<rect x="430" y="410" width="26" height="26" rx="4" fill="#dbe9f7" stroke="#1a1a1a" stroke-width="2"/><text x="464" y="428" font-size="14">取り出す（距離が決まる）</text>
+<rect x="430" y="446" width="26" height="26" rx="4" fill="#ffffff" stroke="#a0461e" stroke-width="2" stroke-dasharray="6 4"/><text x="464" y="464" font-size="14">残す（下は使った元の辺）</text>
+<text x="430" y="506" font-size="14">残した回数 4 ＝ 元の辺 4 本</text>
+<text x="430" y="526" font-size="14">取り出した回数 5 ＝ N − 1</text>
+</g>
 </svg>

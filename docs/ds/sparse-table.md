@@ -9,7 +9,7 @@ order: 240
 level: 青
 kind: [データ構造, 区間クエリ, ダブリング・分割統治]
 prerequisites: [doubling]
-related: [segment-tree, lca, prefix-sum, suffix-array]
+related: [segment-tree, lca, prefix-sum, suffix-array, divide-and-conquer]
 summary: 更新のない列で、冪等な演算（min・max・gcd・and・or）の区間クエリに、前処理 O(N log N)・質問 O(1) で答える。長さ 2^k の区間の答えを持ち、質問は重なってよい 2 つの区間で覆う。
 complexity: 前処理 O(N log N)（メモリも同じ）、冪等な演算の取得 O(1)。冪等でない演算は取得 O(log N)、Disjoint Sparse Table なら前処理 O(N log N)・取得 O(1)。更新はできない
 signs:

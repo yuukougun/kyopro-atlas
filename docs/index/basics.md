@@ -9,7 +9,7 @@ search:
 
 # 基本テクニックの詳細索引
 
-分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。stub（準備中）のページは要約と前提しかなく、節の見出しもまだない。
+分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
 
 ## 計算量の見積もり（complexity-estimation） {#complexity-estimation}
 
@@ -46,7 +46,7 @@ search:
 - 節：
     - `bit-operations#operators` AND・OR・XOR・シフトと演算子の優先順位：https://yuukougun.github.io/kyopro-atlas/basics/bit-operations/#operators
     - `bit-operations#xor-properties` XOR の性質（打ち消し・a + b との関係・0〜n の XOR）：https://yuukougun.github.io/kyopro-atlas/basics/bit-operations/#xor-properties
-    - `bit-operations#popcount` popcount・最下位ビット：https://yuukougun.github.io/kyopro-atlas/basics/bit-operations/#popcount
+    - `bit-operations#popcount` popcount・最下位 bit：https://yuukougun.github.io/kyopro-atlas/basics/bit-operations/#popcount
     - `bit-operations#submask` 部分集合の部分集合の列挙（3^N）：https://yuukougun.github.io/kyopro-atlas/basics/bit-operations/#submask
 
 ## bit ごとに独立に考える（bitwise-independence） {#bitwise-independence}
@@ -66,7 +66,7 @@ search:
     - `bitwise-independence#per-bit-contribution` bit ごとの寄与（0 の個数 × 1 の個数 × 2^k）：https://yuukougun.github.io/kyopro-atlas/basics/bitwise-independence/#per-bit-contribution
     - `bitwise-independence#range-xor` 区間の XOR は累積 XOR の 0・1 の個数で：https://yuukougun.github.io/kyopro-atlas/basics/bitwise-independence/#range-xor
     - `bitwise-independence#top-down` 上の bit から決める貪欲（上限は桁 DP の考え方）：https://yuukougun.github.io/kyopro-atlas/basics/bitwise-independence/#top-down
-    - `bitwise-independence#split-by-top-bit` 上位ビットで 2 つに分けて再帰する（青）：https://yuukougun.github.io/kyopro-atlas/basics/bitwise-independence/#split-by-top-bit
+    - `bitwise-independence#split-by-top-bit` 上位 bit で 2 つに分けて再帰する（青）：https://yuukougun.github.io/kyopro-atlas/basics/bitwise-independence/#split-by-top-bit
     - `bitwise-independence#addition` 足し算では使えない理由（繰り上がり）：https://yuukougun.github.io/kyopro-atlas/basics/bitwise-independence/#addition
 
 ## 全探索の設計（brute-force） {#brute-force}

@@ -141,8 +141,7 @@ drken 氏の記事では、Library Checker の Primality Test で `__uint128_t` 
 
 ACL には 64bit の素数判定も素因数分解もない。内部の関数 `atcoder::internal::is_prime_constexpr(int n)` が、底 $2, 7, 61$ の Miller-Rabin で `int` の範囲の数を判定している。`static_modint` はこれをコンパイル時に呼び、法が素数なら逆元を $x^{m-2}$ で、そうでなければ拡張ユークリッドの互除法で求めるように切り替える。
 
-!!! info "ACL では"
-    公開された素数判定の関数はない。`internal::is_prime_constexpr(n)` は `int` の $n$ を判定する内部の関数で、ドキュメントに載っておらず、版によって変わりうる。$10^{18}$ の判定には自作の関数を使う。
+`internal::is_prime_constexpr` はドキュメントに載っていない内部の関数で、版によって変わりうる。$10^{18}$ の判定には自作の関数を使う。
 
 ACL の実装は $n \in \{2, 7, 61\}$ を先に素数と答えてから底を試している。底が $n$ と等しいと $a \equiv 0$ になる問題を、こうして避けている（[決定的な底](#deterministic-bases)の 7 個の組で底を飛ばすのと同じ理由）。
 
@@ -161,11 +160,9 @@ ACL の実装は $n \in \{2, 7, 61\}$ を先に素数と答えてから底を試
 - cp-algorithms の Primality tests と Integer factorization は、64bit の決定的な底、底が $n$ の倍数の場合の扱い、rho の期待計算量と Brent の改良を英語でまとめている
 - Wikipedia（英語）の Montgomery modular multiplication は、Montgomery 形式と還元の手順を式で説明している
 
-## 例題 {#examples}
-
-ABC でこの手法が必須の問題は見つかっていない。自作の関数は Library Checker で確かめる。
-
 ## 練習問題 {#practice}
+
+ABC で必須になる問題は確認できなかった。自作の関数は Library Checker で確かめる。
 
 ### Library Checker
 

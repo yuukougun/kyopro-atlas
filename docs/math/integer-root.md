@@ -155,7 +155,7 @@ $\sqrt{N}$ は、整数の問題で「小さい側と大きい側の境目」と
 - **約数列挙**：$N$ の約数は $i$ と $N / i$ の組で、小さい方は $\sqrt{N}$ 以下にある。ループの終わりは `i * i <= n` で書く（[約数列挙](../math/divisor-enum.md)）
 - **商の列挙**：$\lfloor N / i \rfloor$ の値は $2\sqrt{N}$ 種類以下で、$i \le \sqrt{N}$ と $i > \sqrt{N}$ で分けて数える（[商の列挙](../math/floor-quotient-enum.md)）
 - **平方因子を除いた核**：「積が平方数」「$2^a \times b^2$ の形」のような条件は、素因数の指数の偶奇で考えると整理できる（[素因数の指数で考える](../math/prime-exponent-vector.md#squarefree-kernel)）
-- **指数ごとの包除**：累乗数の個数は、$\lfloor N^{1/K} \rfloor$ を指数 $K$ ごとに求めて、同じ数を重複して数えた分を指数の倍数関係で除いても求まる（[約数の包除原理](../comb/divisor-inclusion-exclusion.md#perfect-powers)）
+- **指数ごとの包除**：累乗数の個数は、$\lfloor N^{1/K} \rfloor$ を指数 $K$ ごとに求めて、同じ数を重複して数えた分を指数の倍数関係で除いても求まる（[約数包除](../comb/divisor-inclusion-exclusion.md#perfect-powers)）
 
 ## 例題 {#examples}
 
@@ -186,12 +186,14 @@ $(a, b)$ の組をすべて数えると、同じ数を何度も数える。た�
 
 - [ABC193 C. Unexpressed](https://atcoder.jp/contests/abc193/tasks/abc193_c)（diff 379）：1 以上 N 以下の整数のうち、a^b（a, b ≥ 2）と表せないものの個数を求める。
 - [ABC361 F. x = a^b](https://atcoder.jp/contests/abc361/tasks/abc361_f)（diff 1606）：1 以上 N 以下の整数のうち、正の整数 a と 2 以上の整数 b で a^b と書けるものの個数を求める（N ≤ 10^18）。
+- [PANASONIC2020 C. Sqrt Inequality](https://atcoder.jp/contests/panasonic2020/tasks/panasonic2020_c)（diff 701）：正の整数 a, b, c（≤ 10^9）について √a + √b < √c かを判定する。
 
 </div>
 
 ??? note "練習の方針"
     - **ABC193 C**：$N \le 10^{10}$ なので底は $a \le 10^5$ まで。$a^2, a^3, \dots$ を $N$ 以下の間だけ整数で作って集合に入れ、重複を除いた個数を $N$ から引く。$a \ge 2$ なので 1 は表せない側に入る
     - **ABC361 F**：$N \le 10^{18}$ なので平方数を列挙できない。平方数は `isqrt(N)` 個と数だけ求め、指数 3 以上を列挙して平方数でないものだけを残し、ソートで重複を除いて足す（[累乗数の数え上げ](#perfect-powers)）。指数ごとに $\lfloor N^{1/K} \rfloor$ を求めて包除原理で重複を除く方法もある
+    - **パナソニック 2020 C**：`sqrt` を足して比べると、等号に近い入力で誤差のために答えが変わる。$d = c - a - b$ とおくと、両辺を 2 乗した式は $2\sqrt{ab} < d$ になる。$d \le 0$ なら成り立たず、$d > 0$ なら両辺が正なのでもう一度 2 乗して $4ab < d^2$ を整数で比べる（[√ を含む式の大小](#compare-sqrt)）。$4ab$ も $d^2$ も $4 \times 10^{18}$ 以下で `long long` に収まる
 
 ## 力試し {#challenge}
 
@@ -211,5 +213,5 @@ $(a, b)$ の組をすべて数えると、同じ数を何度も数える。た�
 - [drken「AtCoder ABC 193 C - Unexpressed」](https://drken1215.hatenablog.com/entry/2021/03/02/140000)：練習の方針（$\sqrt{N}$ までの底の列挙と集合による重複の除去）
 - [drken「AtCoder ABC 361 F - x = a^b」](https://drken1215.hatenablog.com/entry/2024/07/07/020716)：練習の方針（指数ごとの包除原理）と、近い値から補正する K 乗根の求め方
 - [kazun「AtCoder Beginner Contest 243 G問題 Sqrt」](https://kazun-kyopro.hatenablog.com/entry/ABC/243/G)：力試しの方針（1 段先で場合分けして $X^{1/4}$ まで前計算する式）
-- [at274「パナソニックコン2020 C - Sqrt Inequality」](https://at274.hatenablog.com/entry/2020/03/15/122125)：√ を含む不等式を、符号を確かめて 2 乗し整数で比べる方法
+- [at274「パナソニックコン2020 C - Sqrt Inequality」](https://at274.hatenablog.com/entry/2020/03/15/122125)：練習 panasonic2020_c の方針（√ を含む不等式を、符号を確かめて 2 乗し整数で比べる）
 - [Apple「Writing ARM64 code for Apple platforms」](https://developer.apple.com/documentation/xcode/writing-arm64-code-for-apple-platforms)：Apple Silicon の macOS では long double が double と同じであること

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 660" font-family="sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 660" width="440" height="660" font-family="sans-serif">
 <rect width="440" height="660" fill="#ffffff"/>
 <text x="20" y="30" font-size="16" fill="#222">H = 3, W = 4：番号 = i×W + j</text>
 <text x="20" y="52" font-size="14" fill="#333">（灰色は i + j が奇数）</text>

@@ -36,10 +36,10 @@
     <circle cx="420" cy="140" r="21"/>
   </g>
   <g font-size="17" fill="#222222" text-anchor="middle">
-    <text x="70" y="146">x<tspan font-size="12" dy="4">0</tspan></text>
-    <text x="240" y="56">x<tspan font-size="12" dy="4">1</tspan></text>
-    <text x="240" y="236">x<tspan font-size="12" dy="4">2</tspan></text>
-    <text x="420" y="146">x<tspan font-size="12" dy="4">3</tspan></text>
+    <text x="70" y="146">x<tspan font-size="14" dy="4">0</tspan></text>
+    <text x="240" y="56">x<tspan font-size="14" dy="4">1</tspan></text>
+    <text x="240" y="236">x<tspan font-size="14" dy="4">2</tspan></text>
+    <text x="420" y="146">x<tspan font-size="14" dy="4">3</tspan></text>
   </g>
   <!-- 最短距離 -->
   <g font-size="16" fill="#b03030" text-anchor="middle" font-weight="bold">
@@ -55,8 +55,8 @@
     <text x="70" y="320">最短路の木の辺（等号で効く条件）</text>
     <line x1="20" y1="342" x2="60" y2="342" stroke="#222222" stroke-width="2" stroke-dasharray="6 5"/>
     <text x="70" y="347">ほかの辺（余裕のある条件）</text>
-    <text x="20" y="374">辺 u → v（重み c）は x<tspan font-size="11" dy="4">v</tspan><tspan dy="-4"> − x</tspan><tspan font-size="11" dy="4">u</tspan><tspan dy="-4"> ≤ c を表す</tspan></text>
-    <text x="20" y="399" fill="#b03030" font-weight="bold">d：x<tspan font-size="11" dy="4">0</tspan><tspan dy="-4"> からの最短距離</tspan></text>
-    <text x="20" y="418" fill="#b03030">＝ x<tspan font-size="11" dy="4">0</tspan><tspan dy="-4"> = 0 の下での各変数の最大値</tspan></text>
+    <text x="20" y="374">辺 u → v（重み c）は x<tspan font-size="14" dy="4">v</tspan><tspan dy="-4"> − x</tspan><tspan font-size="14" dy="4">u</tspan><tspan dy="-4"> ≤ c を表す</tspan></text>
+    <text x="20" y="399" fill="#b03030" font-weight="bold">d：x<tspan font-size="14" dy="4">0</tspan><tspan dy="-4"> からの最短距離</tspan></text>
+    <text x="20" y="418" fill="#b03030">＝ x<tspan font-size="14" dy="4">0</tspan><tspan dy="-4"> = 0 の下での各変数の最大値</tspan></text>
   </g>
 </svg>

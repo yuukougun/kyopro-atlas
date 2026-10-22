@@ -9,7 +9,7 @@ order: 330
 level: 青
 kind: [データ構造, 区間クエリ]
 prerequisites: [segment-tree, binary-search]
-related: [wavelet-matrix, sweep-line-2d, persistent-data-structures, offline-queries]
+related: [wavelet-matrix, sweep-line-2d, persistent-data-structures, offline-queries, sqrt-decomposition]
 summary: 区間内の x 以下の要素の個数・和を、オンラインで O(log^2 N) で答える静的な構造。セグメント木の各ノードにその区間をソートした列と累積和を持ち、メモリは O(N log N)。
 complexity: 構築 O(N log N)、区間の x 以下の個数・和 O(log^2 N)、メモリ O(N log N)（静的で、要素の更新はできない）
 signs:
@@ -143,7 +143,7 @@ count_sum_le(l, r, x):
 
 ## 各段に BIT を持たせる（先読みと組む） {#bit-per-level}
 
-この節は発展の内容で、[BIT](../ds/fenwick-tree.md) と[オフラインのクエリ処理](../ds/offline-queries.md)（特に[先に全部読んで座標圧縮する](../ds/offline-queries.md#compress)）を前提にする。
+この節は発展の内容で、[BIT](../ds/fenwick-tree.md) と[クエリの先読み](../ds/offline-queries.md)（特に[先に全部読んで座標圧縮する](../ds/offline-queries.md#compress)）を前提にする。
 
 マージソート木は静的だが、要素の更新があっても、クエリを先に全部読めるなら使える。更新で現れる値を含めて、ありうる「(位置, 値)」の組を先に全部集めておき、それぞれを木の 1 つの枠にするのが要点である。
 

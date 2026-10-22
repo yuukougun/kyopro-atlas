@@ -100,7 +100,7 @@ bit の番号は、最下位を 0 番目と数える（$2^i$ の位が $i$ 番�
 
 - **$N, Q \le 2 \times 10^5$**：$N$ と $Q$ はそれぞれ $2 \times 10^5$ 以下で、同時に最大になりうる。見積もりでは両方の最大値を入れる。
 - **$1 \le A_i \le 10^9$**：各要素の範囲である。和は $N \times 10^9$ になりうるので、`int` に収まるかを別に確かめる（[型の範囲](../guide/cheatsheet.md#type-limits)）。
-- **総和の制約**：多重テストケースで「$N$ の総和は $2 \times 10^5$ 以下」とあれば、ケースごとではなく総和で見積もる（[複数テストケース](../basics/complexity-estimation.md#multiple-testcases)）。
+- **総和の制約**：複数テストケースで「$N$ の総和は $2 \times 10^5$ 以下」とあれば、ケースごとではなく総和で見積もる（[複数テストケース](../basics/complexity-estimation.md#multiple-testcases)）。
 
 文字は、列の長さや頂点数を $N$、辺数を $M$、クエリ数を $Q$、グリッドの大きさを $H \times W$、法を $m$（素数なら $p$）とする。値の上限には決まった文字を当てず、ページの冒頭で定める（辺の出てこないページでは $M$ を使うこともある）。数式の無限大は $\infty$ で、コードでは定数 `INF` を置く（[INF の選び方](../cpp/cpp-types-literals.md#inf)）。
 
@@ -169,7 +169,7 @@ $$
 
 互いに素でないと成り立たない。$2 \cdot 1 \equiv 2 \cdot 4 \pmod{6}$（$2$ と $8$ の差は 6）だが、$1 \not\equiv 4 \pmod{6}$ である。一般には、$g = \gcd(c, m)$ として、法も $g$ で割った $a \equiv b \pmod{m/g}$ までしか言えない。上の例では $g = 2$ で、$1 \equiv 4 \pmod{3}$ は正しい。
 
-法が素数 $p$ なら、$p$ の倍数でない数はどれも $p$ と互いに素なので、0 でない値ではいつでも割れる。$998244353$ や $10^9 + 7$ を法にして分数の答えを求められるのはこのためである（[分数を mod で表す](../math/mod-inverse.md#rational)）。法が合成数のときや、割る数が $p$ の倍数になりうるときは、逆元がない場合を考える（[逆元がない場合](../math/mod-inverse.md#not-invertible)）。$ax \equiv b \pmod{m}$ の形の一次合同式の解き方は[拡張ユークリッドの互除法](../math/ext-gcd.md#linear-congruence)にある。
+法が素数 $p$ なら、$p$ の倍数でない数はどれも $p$ と互いに素なので、0 でない値ではいつでも割れる。$998244353$ や $10^9 + 7$ を法にして分数の答えを求められるのはこのためである（[有理数 P/Q を P × Q^(−1) で表す計算](../math/mod-inverse.md#rational)）。法が合成数のときや、割る数が $p$ の倍数になりうるときは、逆元がない場合を考える（[逆元がない場合](../math/mod-inverse.md#not-invertible)）。$ax \equiv b \pmod{m}$ の形の一次合同式の解き方は[拡張ユークリッドの互除法](../math/ext-gcd.md#linear-congruence)にある。
 
 ## 集合と bit の記法 {#sets-bits}
 

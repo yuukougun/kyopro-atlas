@@ -1,47 +1,50 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 340" font-family="sans-serif" font-size="14">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 410" width="320" height="410" font-family="sans-serif" font-size="14">
 <defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#bbb" stroke-width="2"/></pattern></defs>
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="20" y="24" fill="#222">左端を固定し、右端 r を伸ばしたときの gcd(a₀, …, aᵣ)</text>
-<text x="20" y="46" fill="#555" font-size="14">太枠：値が変わった（真の約数で半分以下）　斜線：変わらない</text>
-<line x1="50" y1="250" x2="572" y2="250" stroke="#333" stroke-width="1.5"/>
-<rect x="60" y="77.2" width="56" height="172.8" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
-<text x="88.0" y="69.2" text-anchor="middle" fill="#1f4e9a" font-weight="bold">48</text>
-<text x="88.0" y="270" text-anchor="middle" fill="#222">r = 0</text>
-<text x="88.0" y="290" text-anchor="middle" fill="#555" font-size="14">a = 48</text>
-<rect x="124" y="163.6" width="56" height="86.4" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
-<text x="152.0" y="155.6" text-anchor="middle" fill="#1f4e9a" font-weight="bold">24</text>
-<text x="152.0" y="137.6" text-anchor="middle" fill="#555" font-size="12">÷2</text>
-<text x="152.0" y="270" text-anchor="middle" fill="#222">r = 1</text>
-<text x="152.0" y="290" text-anchor="middle" fill="#555" font-size="14">a = 72</text>
-<rect x="188" y="206.8" width="56" height="43.2" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
-<text x="216.0" y="198.8" text-anchor="middle" fill="#1f4e9a" font-weight="bold">12</text>
-<text x="216.0" y="180.8" text-anchor="middle" fill="#555" font-size="12">÷2</text>
-<text x="216.0" y="270" text-anchor="middle" fill="#222">r = 2</text>
-<text x="216.0" y="290" text-anchor="middle" fill="#555" font-size="14">a = 36</text>
-<rect x="252" y="206.8" width="56" height="43.2" fill="url(#hatch)" stroke="#666" stroke-width="1.2" stroke-dasharray="4 2"/>
-<text x="280.0" y="198.8" text-anchor="middle" fill="#1f4e9a" font-weight="bold">12</text>
-<text x="280.0" y="180.8" text-anchor="middle" fill="#555" font-size="12">変わらず</text>
-<text x="280.0" y="270" text-anchor="middle" fill="#222">r = 3</text>
-<text x="280.0" y="290" text-anchor="middle" fill="#555" font-size="14">a = 60</text>
-<rect x="316" y="228.4" width="56" height="21.6" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
-<text x="344.0" y="220.4" text-anchor="middle" fill="#1f4e9a" font-weight="bold">6</text>
-<text x="344.0" y="202.4" text-anchor="middle" fill="#555" font-size="12">÷2</text>
-<text x="344.0" y="270" text-anchor="middle" fill="#222">r = 4</text>
-<text x="344.0" y="290" text-anchor="middle" fill="#555" font-size="14">a = 18</text>
-<rect x="380" y="239.2" width="56" height="10.8" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
-<text x="408.0" y="231.2" text-anchor="middle" fill="#1f4e9a" font-weight="bold">3</text>
-<text x="408.0" y="213.2" text-anchor="middle" fill="#555" font-size="12">÷2</text>
-<text x="408.0" y="270" text-anchor="middle" fill="#222">r = 5</text>
-<text x="408.0" y="290" text-anchor="middle" fill="#555" font-size="14">a = 27</text>
-<rect x="444" y="239.2" width="56" height="10.8" fill="url(#hatch)" stroke="#666" stroke-width="1.2" stroke-dasharray="4 2"/>
-<text x="472.0" y="231.2" text-anchor="middle" fill="#1f4e9a" font-weight="bold">3</text>
-<text x="472.0" y="213.2" text-anchor="middle" fill="#555" font-size="12">変わらず</text>
-<text x="472.0" y="270" text-anchor="middle" fill="#222">r = 6</text>
-<text x="472.0" y="290" text-anchor="middle" fill="#555" font-size="14">a = 45</text>
-<rect x="508" y="246.4" width="56" height="3.6" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
-<text x="536.0" y="238.4" text-anchor="middle" fill="#1f4e9a" font-weight="bold">1</text>
-<text x="536.0" y="220.4" text-anchor="middle" fill="#555" font-size="12">÷3</text>
-<text x="536.0" y="270" text-anchor="middle" fill="#222">r = 7</text>
-<text x="536.0" y="290" text-anchor="middle" fill="#555" font-size="14">a = 10</text>
-<text x="20" y="320" fill="#222" font-size="13">8 個の右端に対し、値は 48・24・12・6・3・1 の 6 種類だけ</text>
+<text x="10" y="22" fill="#222">左端を固定し、右端 r を伸ばしたときの</text>
+<text x="10" y="42" fill="#222">gcd(a₀, …, aᵣ)</text>
+<text x="10" y="64" fill="#555" font-size="13">太枠：値が変わった（真の約数で半分以下）</text>
+<text x="10" y="82" fill="#555" font-size="13">斜線：変わらない</text>
+<line x1="112" y1="94" x2="112" y2="356" stroke="#333" stroke-width="1.5"/>
+<text x="10" y="115" fill="#222" font-size="13">r = 0</text>
+<text x="56" y="115" fill="#555" font-size="13">a = 48</text>
+<rect x="112" y="100" width="172.8" height="20" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
+<text x="292.8" y="115" fill="#1f4e9a" font-weight="bold" font-size="14">48</text>
+<text x="10" y="147" fill="#222" font-size="13">r = 1</text>
+<text x="56" y="147" fill="#555" font-size="13">a = 72</text>
+<rect x="112" y="132" width="86.4" height="20" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
+<text x="206.4" y="147" fill="#1f4e9a" font-weight="bold" font-size="14">24</text>
+<text x="230.4" y="147" fill="#555" font-size="12">÷2</text>
+<text x="10" y="179" fill="#222" font-size="13">r = 2</text>
+<text x="56" y="179" fill="#555" font-size="13">a = 36</text>
+<rect x="112" y="164" width="43.2" height="20" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
+<text x="163.2" y="179" fill="#1f4e9a" font-weight="bold" font-size="14">12</text>
+<text x="187.2" y="179" fill="#555" font-size="12">÷2</text>
+<text x="10" y="211" fill="#222" font-size="13">r = 3</text>
+<text x="56" y="211" fill="#555" font-size="13">a = 60</text>
+<rect x="112" y="196" width="43.2" height="20" fill="url(#hatch)" stroke="#666" stroke-width="1.2" stroke-dasharray="4 2"/>
+<text x="163.2" y="211" fill="#1f4e9a" font-weight="bold" font-size="14">12</text>
+<text x="187.2" y="211" fill="#555" font-size="12">変わらず</text>
+<text x="10" y="243" fill="#222" font-size="13">r = 4</text>
+<text x="56" y="243" fill="#555" font-size="13">a = 18</text>
+<rect x="112" y="228" width="21.6" height="20" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
+<text x="141.6" y="243" fill="#1f4e9a" font-weight="bold" font-size="14">6</text>
+<text x="165.6" y="243" fill="#555" font-size="12">÷2</text>
+<text x="10" y="275" fill="#222" font-size="13">r = 5</text>
+<text x="56" y="275" fill="#555" font-size="13">a = 27</text>
+<rect x="112" y="260" width="10.8" height="20" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
+<text x="130.8" y="275" fill="#1f4e9a" font-weight="bold" font-size="14">3</text>
+<text x="154.8" y="275" fill="#555" font-size="12">÷2</text>
+<text x="10" y="307" fill="#222" font-size="13">r = 6</text>
+<text x="56" y="307" fill="#555" font-size="13">a = 45</text>
+<rect x="112" y="292" width="10.8" height="20" fill="url(#hatch)" stroke="#666" stroke-width="1.2" stroke-dasharray="4 2"/>
+<text x="130.8" y="307" fill="#1f4e9a" font-weight="bold" font-size="14">3</text>
+<text x="154.8" y="307" fill="#555" font-size="12">変わらず</text>
+<text x="10" y="339" fill="#222" font-size="13">r = 7</text>
+<text x="56" y="339" fill="#555" font-size="13">a = 10</text>
+<rect x="112" y="324" width="3.6" height="20" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
+<text x="123.6" y="339" fill="#1f4e9a" font-weight="bold" font-size="14">1</text>
+<text x="147.6" y="339" fill="#555" font-size="12">÷3</text>
+<text x="10" y="380" fill="#222" font-size="13">8 個の右端に対し、値は 48・24・12・6・3・1 の</text>
+<text x="10" y="398" fill="#222" font-size="13">6 種類だけ</text>
 </svg>

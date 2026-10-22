@@ -9,6 +9,7 @@
   python3 tools/fix_problems.py --check --page lazy-segment-tree   そのページだけを検査する（書かない）
   python3 tools/fix_problems.py --field ds       その分野だけ（--page がないときだけ効く）
   python3 tools/fix_problems.py --root DIR       DIR/docs のページを直す（試験用。台帳は --ledger）
+--check では、台帳の pages にあるのに本文の囲みにない（問題, ページ）も「警告」として出す（終了コードには入れない）。
 終了コード: --check で直すべき行がある、または直せない行がある（ID が読めない・台帳にない・要約がない）と 1
 
 読める行の形（囲みの中の1行）:
@@ -29,7 +30,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import check_pages as cp  # noqa: E402  （共通の部品）
 
 URL_ID_RE = re.compile(r"https?://atcoder\.jp/contests/[^/\s)]+/tasks/(?P<id>[A-Za-z0-9_]+)")
-LINK_TAIL_RE = re.compile(r"^- \[[^\]]*\]\([^)]*\)\s*(?:（diff[^）]*）)?\s*[：:]\s*(?P<summary>.+)$")
+LINK_TAIL_RE = re.compile(r"^- \[(?:[^\[\]]|\[[^\[\]]*\])*\]\([^)]*\)\s*(?:（diff[^）]*）)?\s*[：:]\s*(?P<summary>.+)$")
 BARE_RE = re.compile(r"^- (?P<id>[a-z][A-Za-z0-9_]*_[A-Za-z0-9]+)\s*(?:（diff[^）]*）)?\s*[：:]\s*(?P<summary>.+)$")
 
 
@@ -83,6 +84,50 @@ def fix_text(text: str, rel: str, ledger: dict[str, dict]) -> tuple[str, list[st
     return "\n".join(lines), changes, problems
 
 
+def body_problem_ids(text: str) -> set[str]:
+    """本文の問題の一覧の囲みに載る問題 ID の集合（フェンスの中は見ない）。"""
+    lines = text.split("\n")
+    infence: set[int] = set()
+    for a, b, _, _ in cp.fence_spans(lines):
+        infence.update(range(a, b + 1))
+    ids: set[str] = set()
+    inside = False
+    for i, raw in enumerate(lines):
+        if i in infence:
+            continue
+        s = raw.strip()
+        if not inside:
+            inside = bool(cp.BLOCK_OPEN_RE.match(s))
+            continue
+        if cp.BLOCK_CLOSE_RE.match(s):
+            inside = False
+            continue
+        u = URL_ID_RE.search(s)
+        b = BARE_RE.match(s)
+        if u:
+            ids.add(u.group("id"))
+        elif b:
+            ids.add(b.group("id"))
+    return ids
+
+
+def ledger_not_in_body(targets: list, ledger: dict[str, dict]) -> list[str]:
+    """台帳の pages にあるのに、そのページの本文の問題の囲みにない（問題, ページ）の説明。status が確認済みでない問題は数えない
+    （逆向きの検査。b5/summary/other.md の提案）。見たページの分だけ調べる。"""
+    by_page = {p.id: p for p in targets if getattr(p, "id", None)}
+    body = {pid: body_problem_ids(p.text) for pid, p in by_page.items()}
+    out = []
+    for qid, e in sorted(ledger.items()):
+        if e.get("status") != cp.CONFIRMED:
+            continue
+        for ref in e.get("pages") or []:
+            pid = ref.get("id") if isinstance(ref, dict) else None
+            if pid in body and qid not in body[pid]:
+                out.append(f"{by_page[pid].rel}: {qid}（台帳の役割 {ref.get('role')}）が本文の問題の囲みにない"
+                           "（本文に足すか、台帳の pages から外す）")
+    return out
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--check", action="store_true", help="直すべき行を出すだけ（書かない）")
@@ -124,8 +169,12 @@ def main() -> None:
             p.path.write_text(text, encoding="utf-8")
     for pr in all_problems:
         print("直せない: " + pr)
+    reverse = ledger_not_in_body(targets, ledger) if args.check else []
+    for w in reverse:
+        print("警告: " + w)
     verb = "直すべき行" if args.check else "直した行"
-    print(f"\n{verb}: {n_changes}（{n_files} ファイル）・直せない行: {len(all_problems)}（見たページ {len(targets)}）")
+    tail = f"・台帳にあって本文にない（警告）: {len(reverse)}" if args.check else ""
+    print(f"\n{verb}: {n_changes}（{n_files} ファイル）・直せない行: {len(all_problems)}{tail}（見たページ {len(targets)}）")
     sys.exit(1 if all_problems or (args.check and n_changes) else 0)
 
 

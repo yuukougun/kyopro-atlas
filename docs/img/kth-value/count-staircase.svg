@@ -1,48 +1,51 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 362" font-family="sans-serif" font-size="14">
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" font-family="sans-serif" font-size="14">
 <defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#7aa0d8" stroke-width="2"/></pattern><marker id="ar" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#c0392b"/></marker></defs>
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="20" y="24" fill="#222">値の多重集合 {1, 2, 2, 4, 5, 5} の count(x) ＝ x 以下の値の個数</text>
-<text x="20" y="44" fill="#555" font-size="12">K = 3 のとき、count(x) ≥ 3 となる最小の x が 3 番目に小さい値（2）</text>
-<line x1="40" y1="270" x2="506" y2="270" stroke="#333" stroke-width="1.5"/>
-<line x1="40" y1="270" x2="40" y2="70" stroke="#333" stroke-width="1.5"/>
-<text x="32" y="275" text-anchor="end" fill="#555" font-size="12">0</text>
-<text x="32" y="245" text-anchor="end" fill="#555" font-size="12">1</text>
-<text x="32" y="215" text-anchor="end" fill="#555" font-size="12">2</text>
-<text x="32" y="185" text-anchor="end" fill="#555" font-size="12">3</text>
-<text x="32" y="155" text-anchor="end" fill="#555" font-size="12">4</text>
-<text x="32" y="125" text-anchor="end" fill="#555" font-size="12">5</text>
-<text x="32" y="95" text-anchor="end" fill="#555" font-size="12">6</text>
-<text x="70" y="264" text-anchor="middle" fill="#222" font-size="13">0</text>
-<text x="70" y="290" text-anchor="middle" fill="#222">0</text>
-<text x="70" y="310" text-anchor="middle" fill="#666666" font-size="12" font-weight="bold">不可</text>
-<rect x="116" y="240" width="40" height="30" fill="#eeeeee" stroke="#888888" stroke-width="1.5"/>
-<text x="136" y="234" text-anchor="middle" fill="#222" font-size="13">1</text>
-<text x="136" y="290" text-anchor="middle" fill="#222">1</text>
-<text x="136" y="310" text-anchor="middle" fill="#666666" font-size="12" font-weight="bold">不可</text>
-<rect x="182" y="180" width="40" height="90" fill="url(#hatch)" stroke="#1f4e9a" stroke-width="1.5"/>
-<text x="202" y="174" text-anchor="middle" fill="#222" font-size="13">3</text>
-<text x="202" y="290" text-anchor="middle" fill="#222">2</text>
-<text x="202" y="310" text-anchor="middle" fill="#1f4e9a" font-size="12" font-weight="bold">可</text>
-<rect x="248" y="180" width="40" height="90" fill="url(#hatch)" stroke="#1f4e9a" stroke-width="1.5"/>
-<text x="268" y="174" text-anchor="middle" fill="#222" font-size="13">3</text>
-<text x="268" y="290" text-anchor="middle" fill="#222">3</text>
-<text x="268" y="310" text-anchor="middle" fill="#1f4e9a" font-size="12" font-weight="bold">可</text>
-<rect x="314" y="150" width="40" height="120" fill="url(#hatch)" stroke="#1f4e9a" stroke-width="1.5"/>
-<text x="334" y="144" text-anchor="middle" fill="#222" font-size="13">4</text>
-<text x="334" y="290" text-anchor="middle" fill="#222">4</text>
-<text x="334" y="310" text-anchor="middle" fill="#1f4e9a" font-size="12" font-weight="bold">可</text>
-<rect x="380" y="90" width="40" height="180" fill="url(#hatch)" stroke="#1f4e9a" stroke-width="1.5"/>
-<text x="400" y="84" text-anchor="middle" fill="#222" font-size="13">6</text>
-<text x="400" y="290" text-anchor="middle" fill="#222">5</text>
-<text x="400" y="310" text-anchor="middle" fill="#1f4e9a" font-size="12" font-weight="bold">可</text>
-<rect x="446" y="90" width="40" height="180" fill="url(#hatch)" stroke="#1f4e9a" stroke-width="1.5"/>
-<text x="466" y="84" text-anchor="middle" fill="#222" font-size="13">6</text>
-<text x="466" y="290" text-anchor="middle" fill="#222">6</text>
-<text x="466" y="310" text-anchor="middle" fill="#1f4e9a" font-size="12" font-weight="bold">可</text>
-<text x="496" y="290" fill="#555" font-size="12">x</text>
-<line x1="40" y1="180" x2="506" y2="180" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="6 4"/>
-<text x="510" y="184" fill="#c0392b" font-size="13">K = 3</text>
-<line x1="202" y1="345" x2="202" y2="320" stroke="#c0392b" stroke-width="1.5" marker-end="url(#ar)"/>
-<text x="212" y="338" fill="#c0392b" font-size="12">可の最小 x = 2 が答え（K = 2 でも答えは 2）</text>
-<text x="36" y="62" fill="#555" font-size="12">count(x)</text>
+<text x="16" y="22" fill="#222">値の多重集合 {1, 2, 2, 4, 5, 5} の count(x)</text>
+<text x="16" y="42" fill="#222">＝ x 以下の値の個数</text>
+<text x="16" y="64" fill="#555" font-size="13">K = 3 のとき、count(x) ≥ 3 となる最小の x が</text>
+<text x="16" y="82" fill="#555" font-size="13">3 番目に小さい値（2）</text>
+<line x1="36" y1="300" x2="350" y2="300" stroke="#333" stroke-width="1.5"/>
+<line x1="36" y1="300" x2="36" y2="118" stroke="#333" stroke-width="1.5"/>
+<text x="40" y="114" fill="#555" font-size="13">count(x)</text>
+<text x="30" y="305" text-anchor="end" fill="#555" font-size="13">0</text>
+<text x="30" y="277" text-anchor="end" fill="#555" font-size="13">1</text>
+<text x="30" y="249" text-anchor="end" fill="#555" font-size="13">2</text>
+<text x="30" y="221" text-anchor="end" fill="#555" font-size="13">3</text>
+<text x="30" y="193" text-anchor="end" fill="#555" font-size="13">4</text>
+<text x="30" y="165" text-anchor="end" fill="#555" font-size="13">5</text>
+<text x="30" y="137" text-anchor="end" fill="#555" font-size="13">6</text>
+<text x="64" y="294" text-anchor="middle" fill="#222" font-size="13">0</text>
+<text x="64" y="320" text-anchor="middle" fill="#222">0</text>
+<text x="64" y="340" text-anchor="middle" fill="#666666" font-size="13" font-weight="bold">不可</text>
+<rect x="92" y="272" width="32" height="28" fill="#eeeeee" stroke="#888888" stroke-width="1.5"/>
+<text x="108" y="266" text-anchor="middle" fill="#222" font-size="13">1</text>
+<text x="108" y="320" text-anchor="middle" fill="#222">1</text>
+<text x="108" y="340" text-anchor="middle" fill="#666666" font-size="13" font-weight="bold">不可</text>
+<rect x="136" y="216" width="32" height="84" fill="url(#hatch)" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="152" y="210" text-anchor="middle" fill="#222" font-size="13">3</text>
+<text x="152" y="320" text-anchor="middle" fill="#222">2</text>
+<text x="152" y="340" text-anchor="middle" fill="#1f4e9a" font-size="13" font-weight="bold">可</text>
+<rect x="180" y="216" width="32" height="84" fill="url(#hatch)" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="196" y="210" text-anchor="middle" fill="#222" font-size="13">3</text>
+<text x="196" y="320" text-anchor="middle" fill="#222">3</text>
+<text x="196" y="340" text-anchor="middle" fill="#1f4e9a" font-size="13" font-weight="bold">可</text>
+<rect x="224" y="188" width="32" height="112" fill="url(#hatch)" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="240" y="182" text-anchor="middle" fill="#222" font-size="13">4</text>
+<text x="240" y="320" text-anchor="middle" fill="#222">4</text>
+<text x="240" y="340" text-anchor="middle" fill="#1f4e9a" font-size="13" font-weight="bold">可</text>
+<rect x="268" y="132" width="32" height="168" fill="url(#hatch)" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="284" y="126" text-anchor="middle" fill="#222" font-size="13">6</text>
+<text x="284" y="320" text-anchor="middle" fill="#222">5</text>
+<text x="284" y="340" text-anchor="middle" fill="#1f4e9a" font-size="13" font-weight="bold">可</text>
+<rect x="312" y="132" width="32" height="168" fill="url(#hatch)" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="328" y="126" text-anchor="middle" fill="#222" font-size="13">6</text>
+<text x="328" y="320" text-anchor="middle" fill="#222">6</text>
+<text x="328" y="340" text-anchor="middle" fill="#1f4e9a" font-size="13" font-weight="bold">可</text>
+<text x="350" y="320" text-anchor="end" fill="#555" font-size="13">x</text>
+<line x1="36" y1="216" x2="350" y2="216" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="354" y="221" fill="#c0392b" font-size="13">K = 3</text>
+<line x1="152" y1="372" x2="152" y2="348" stroke="#c0392b" stroke-width="1.5" marker-end="url(#ar)"/>
+<text x="162" y="368" fill="#c0392b" font-size="13">可の最小 x = 2 が答え</text>
+<text x="162" y="386" fill="#c0392b" font-size="13">（K = 2 でも答えは 2）</text>
 </svg>

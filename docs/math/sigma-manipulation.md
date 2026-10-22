@@ -25,7 +25,7 @@ sections:
   - {title: 二重和の順序交換と添字の範囲（i ≤ j ≤ N を j の側から見る）, anchor: swap-order}
   - {title: 添字の付け替え（i → N − i、k = i + j、約数 d と倍数）, anchor: reindex}
   - {title: 値でまとめ直す（同じ値になる添字の個数を掛ける）, anchor: group-by-value}
-  - {title: 'よく使う和の公式と Σ_{i≠j} a_i a_j = (Σa)² − Σa²', anchor: formulas}
+  - {title: よく使う和の公式と、異なる 2 つの積の和を和の 2 乗で表す式, anchor: formulas}
   - {title: 空の和は 0・空の積は 1 と境界, anchor: empty-sum}
 stage: draft
 updated: 2026-10-21
@@ -74,7 +74,8 @@ $$
 
 二重和は、足す組 $(i, j)$ の集合を表のマスとして描くと見通しがよい。行ごとに足しても列ごとに足しても、同じマスを 1 回ずつ足すので結果は同じである。次の図は $N = 4$ で $1 \le i \le j \le 4$ を満たす組を塗った表である。
 
-![1 ≤ i ≤ j ≤ 4 の組を 4 × 4 の表で塗ったもの。左は行ごとに囲み、i を固定すると j は i から 4 まで動く。右は列ごとに囲み、j を固定すると i は 1 から j まで動く。どちらも同じ 10 マスを足す](../img/sigma-manipulation/swap-grid.svg)
+![1 ≤ i ≤ j ≤ 4 の組を 4 × 4 の表で塗り、行ごとに囲んだもの。i を固定すると j は i から 4 まで動く](../img/sigma-manipulation/swap-grid-rows.svg)
+![同じ表を列ごとに囲んだもの。j を固定すると i は 1 から j まで動き、行ごとと同じ 10 マスを足す](../img/sigma-manipulation/swap-grid-cols.svg)
 
 左の囲み方を式にすると $\sum_{i=1}^{N} \sum_{j=i}^{N}$、右の囲み方は $\sum_{j=1}^{N} \sum_{i=1}^{j}$ である。
 
@@ -130,7 +131,7 @@ $$
 
 値でまとめ直す代表が $\sum_{i=1}^{N} \lfloor N/i \rfloor$ である。$\lfloor N/i \rfloor$ は高々 $2\sqrt{N}$ 種類の値しか取らず（$i \le \sqrt{N}$ の $i$ は $\sqrt{N}$ 個しかなく、$i > \sqrt{N}$ なら値は $\sqrt{N}$ 未満なので）、同じ値になる $i$ は区間をなすので、区間ごとに「値 × 区間の長さ」を足せば $O(\sqrt{N})$ で済む（[商の列挙](../math/floor-quotient-enum.md)）。
 
-## よく使う和の公式と Σ_{i≠j} a_i a_j = (Σa)² − Σa² {#formulas}
+## よく使う和の公式と、異なる 2 つの積の和を和の 2 乗で表す式 {#formulas}
 
 次の公式は、変形の最後に閉じた式へ直すときに使う。
 

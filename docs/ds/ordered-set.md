@@ -184,6 +184,16 @@ $$
 - 上位 $K$ 個の和や中央値を更新のたびに答えるなら、multiset を 2 つに分けて持つ（[上位 K 個の和と中央値の管理](../ds/top-k-multiset.md)）
 - 重ならない区間の集まりを持ち、塗る・併合するなら、左端をキーにした set で持つ（[区間を set で管理する](../ds/interval-set.md)）
 
+## 上位の手法へのつながり {#next-steps}
+
+set・multiset・map の操作は、次の手法の部品になる。
+
+- **区間の集まり**：左端をキーにした set に重ならない区間を持ち、塗る・併合するときに前後の区間を `lower_bound` で探す（[区間を set で管理する](../ds/interval-set.md)）
+- **2 つの multiset**：小さい方の $K$ 個と残りに分けて持ち、境界の 1 個を入れ替えながら和や中央値を保つ（[上位 K 個の和と中央値の管理](../ds/top-k-multiset.md)）
+- **K 番目と個数**：$K$ が大きいときは、値を添字にした BIT か pb_ds の tree に進む（[K 番目の値を求めるデータ構造](../ds/kth-element.md)・[平衡二分探索木と pb_ds の tree](../ds/balanced-bst.md#pbds)）
+- **未訪問の頂点の集合**：まだ訪れていない頂点を set で持ち、訪れたら消す（[補グラフ上の BFS](../graph/complement-graph-bfs.md#take-unvisited)）
+- **集合の併合**：2 つの set をまとめるときは小さい方を大きい方へ入れ直す（[マージテク](../tree/small-to-large.md)）
+
 ## 例題 {#examples}
 
 ### ABC217 D. Cutting Woods {#abc217_d}

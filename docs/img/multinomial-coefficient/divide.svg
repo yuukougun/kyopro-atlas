@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 300" font-family="sans-serif" font-size="14">
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="300" viewBox="0 0 560 300" font-family="sans-serif" font-size="15.5">
 <rect width="100%" height="100%" fill="#ffffff"/>
 <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#444"/></marker></defs>
 <text x="24" y="26" fill="#222">A, A, B の並べ方：区別すると 3! = 6 通り、しないと 3 通り</text>
-<text x="24" y="46" fill="#555" font-size="12">（A₁ と A₂ を入れ替えた 2 通りずつが、同じ文字列にまとまる）</text>
+<text x="24" y="46" fill="#555" font-size="15.5">（A₁ と A₂ を入れ替えた 2 通りずつが、同じ文字列にまとまる）</text>
 <rect x="24" y="64" width="160" height="150" rx="8" fill="none" stroke="#888" stroke-width="1.2"/>
 <rect x="48" y="80" width="32" height="32" rx="4" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5" stroke-dasharray="none"/>
 <text x="64" y="101" text-anchor="middle" fill="#222">A₁</text>
@@ -48,5 +48,5 @@
 <text x="496" y="153" text-anchor="middle" fill="#222">A₁</text>
 <line x1="456" y1="214" x2="456" y2="240" stroke="#444" stroke-width="1.5" marker-end="url(#arr)"/>
 <text x="456" y="266" text-anchor="middle" fill="#222" font-size="16" font-weight="bold">BAA</text>
-<text x="24" y="290" fill="#555" font-size="12">各文字列は、区別した並べ方のちょうど 2! 個から作られる</text>
+<text x="24" y="290" fill="#555" font-size="15.5">各文字列は、区別した並べ方のちょうど 2! 個から作られる</text>
 </svg>

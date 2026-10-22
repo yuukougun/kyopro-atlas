@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 640" width="700" height="640" font-family="sans-serif">
-<rect x="0" y="0" width="700" height="640" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 1270" width="340" height="1270" font-family="sans-serif">
+<rect x="0" y="0" width="340" height="1270" fill="#ffffff"/>
 <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker></defs>
+<g transform="translate(0,0)">
 <text x="175.0" y="28" font-size="17" text-anchor="middle" fill="#222">f（すべて 1）</text>
 <line x1="55" y1="275" x2="220" y2="275" stroke="#999" stroke-width="1.2" stroke-dasharray="5,4"/>
 <line x1="55" y1="275" x2="55" y2="150" stroke="#999" stroke-width="1.2" stroke-dasharray="5,4"/>
@@ -38,6 +39,9 @@
 <circle cx="295" cy="90" r="21" fill="#f4f7fb" stroke="#333" stroke-width="1.4"/>
 <text x="295" y="98" font-size="21" font-weight="bold" text-anchor="middle" fill="#111">1</text>
 <text x="275" y="70" font-size="15" text-anchor="end" fill="#444">111</text>
+</g>
+<line x1="10" y1="320" x2="330" y2="320" stroke="#ddd"/>
+<g transform="translate(-350,320)">
 <text x="525.0" y="28" font-size="17" text-anchor="middle" fill="#222">bit 0 の段の後（横に足す）</text>
 <line x1="429.0" y1="275.0" x2="545.0" y2="275.0" stroke="#c0392b" stroke-width="3" marker-end="url(#ar)"/>
 <line x1="405" y1="275" x2="405" y2="150" stroke="#999" stroke-width="1.2" stroke-dasharray="5,4"/>
@@ -75,6 +79,9 @@
 <circle cx="645" cy="90" r="21" fill="#f4f7fb" stroke="#333" stroke-width="1.4"/>
 <text x="645" y="98" font-size="21" font-weight="bold" text-anchor="middle" fill="#111">2</text>
 <text x="625" y="70" font-size="15" text-anchor="end" fill="#444">111</text>
+</g>
+<line x1="10" y1="640" x2="330" y2="640" stroke="#ddd"/>
+<g transform="translate(0,320)">
 <text x="175.0" y="348" font-size="17" text-anchor="middle" fill="#222">bit 1 の段の後（縦に足す）</text>
 <line x1="55" y1="595" x2="220" y2="595" stroke="#999" stroke-width="1.2" stroke-dasharray="5,4"/>
 <line x1="55.0" y1="571.0" x2="55.0" y2="495.0" stroke="#c0392b" stroke-width="3" marker-end="url(#ar)"/>
@@ -112,6 +119,9 @@
 <circle cx="295" cy="410" r="21" fill="#f4f7fb" stroke="#333" stroke-width="1.4"/>
 <text x="295" y="418" font-size="21" font-weight="bold" text-anchor="middle" fill="#111">4</text>
 <text x="275" y="390" font-size="15" text-anchor="end" fill="#444">111</text>
+</g>
+<line x1="10" y1="960" x2="330" y2="960" stroke="#ddd"/>
+<g transform="translate(-350,640)">
 <text x="525.0" y="348" font-size="17" text-anchor="middle" fill="#222">bit 2 の段の後（奥から足す）</text>
 <line x1="405" y1="595" x2="570" y2="595" stroke="#999" stroke-width="1.2" stroke-dasharray="5,4"/>
 <line x1="405" y1="595" x2="405" y2="470" stroke="#999" stroke-width="1.2" stroke-dasharray="5,4"/>
@@ -149,6 +159,5 @@
 <circle cx="645" cy="410" r="21" fill="#f4f7fb" stroke="#333" stroke-width="1.4"/>
 <text x="645" y="418" font-size="21" font-weight="bold" text-anchor="middle" fill="#111">8</text>
 <text x="625" y="390" font-size="15" text-anchor="end" fill="#444">111</text>
-<line x1="350" y1="10" x2="350" y2="630" stroke="#ddd"/>
-<line x1="10" y1="320" x2="690" y2="320" stroke="#ddd"/>
+</g>
 </svg>

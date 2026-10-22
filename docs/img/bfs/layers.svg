@@ -7,7 +7,7 @@
     <rect x="310" y="40" width="80" height="230" rx="10"/>
     <rect x="450" y="40" width="80" height="230" rx="10"/>
   </g>
-  <g font-size="14" fill="#334155" text-anchor="middle">
+  <g font-size="16" fill="#334155" text-anchor="middle">
     <text x="70" y="28">距離 0</text>
     <text x="210" y="28">距離 1</text>
     <text x="350" y="28">距離 2</text>

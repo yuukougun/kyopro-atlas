@@ -83,7 +83,7 @@ KIND_SLUGS = {
     "幾何": "geometry", "ビット演算": "bit", "考察": "observation", "実装・C++": "implementation", "案内": "guide",
 }
 FREQ_JA = {"A": "必修", "B": "準必修", "C": "余裕があれば"}
-STAGE_JA = {"stub": "準備中", "draft": "執筆中", "reviewed": "検証済み", "done": "完成"}
+STAGE_JA = {"stub": "準備中", "draft": "本文あり・未検証", "reviewed": "検証済み", "done": "完成"}
 # 逆引き（言い回し）の分け方：ページの kind の1つ目で決める
 PHRASE_GROUPS = [
     ("search", "探索・最適化", {"計算量", "全探索", "二分探索", "貪欲", "ソート・座標圧縮", "ダブリング・分割統治", "DP", "考察"}),
@@ -113,7 +113,7 @@ POSITION_LEVEL = {"D": "基礎", "E": "水", "F": "青", "G": "黄"}
 BLOCKS = {
     "home-links": ("ホームの入口（知識マップ・逆引き辞典・ロードマップ・レベル別の一覧・用語の索引）", "index.md"),
     "version": ("索引の版（入力のハッシュと updated の最大値）", None),
-    "fields": ("分野の一覧（入口へのリンク・ページ数・準備中の数）", None),
+    "fields": ("分野の一覧（入口へのリンク・ページ数・準備中があればその数）", None),
     "lists": ("レベル別・種類別の一覧へのリンク", None),
     "stage-summary": ("制作状況の表（分野ごとの stage の集計。設計書 §10.3）", None),
     "signs-phrase": ("逆引き辞典：言い回しから（signs の phrase。kind で分ける）", "guide/reverse-index-signs.md"),
@@ -505,11 +505,11 @@ class Site:
                "> AtCoder で黄色（レート 2000）を目指す学習者向けの、辞書として引く競技プログラミングの教材。"
                "手法・考察・データ構造・数学・C++ のページを分野ごとに置く。", "",
                f"- 版：{self.version_text()}。tools/gen_site.py が生成する",
-               f"- ページ数：{len(self.pages)}（準備中 {n_stub}）",
+               f"- ページ数：{len(self.pages)}" + (f"（準備中 {n_stub}）" if n_stub else ""),
                "- 1 行が 1 ページ：「- [タイトル](URL)（id・レベル・分野・段階）：要約」",
                "- レベルは difficulty の帯：基礎 〜1199・水 1200〜1599・青 1600〜1999・黄 2000〜2399・発展 2400〜（概要だけ）。"
                "「—」はレベルを持たないページ",
-               "- 段階：stub は準備中（要約と前提しかないので根拠にしない）、draft は執筆中、reviewed は検証済み、done は完成",
+               "- 段階：stub は準備中（要約と前提しかないので根拠にしない）、draft は本文あり・未検証、reviewed は検証済み、done は完成",
                "- 別名・問題のサイン・手法の種類・前提・節（アンカー付きの URL）は、下の分野ごとの詳細索引にある", "",
                "## 分野ごとの詳細索引", ""]
         for f in self.fields:
@@ -526,7 +526,8 @@ class Site:
         ps = [p for p in self.pages if p.field == f]
         out = self.front(f"{cp.FIELD_TITLES[f]}の詳細索引", search_exclude=True)
         out += (f"# {cp.FIELD_TITLES[f]}の詳細索引\n\n分野の全ページの id・URL・別名・サイン・種類・前提・節。"
-                f"全分野の1行の一覧と索引の版は {cp.SITE_URL}llms.txt にある。stub（準備中）のページは要約と前提しかなく、節の見出しもまだない。\n")
+                f"全分野の1行の一覧と索引の版は {cp.SITE_URL}llms.txt にある。"
+                + ("stub（準備中）のページは要約と前提しかなく、節の見出しもまだない。" if any(p.stub for p in ps) else "") + "\n")
         for p in ps:
             url = cp.SITE_URL + p.url
             out += f"\n## {cp.md_text(p.title)}（{p.id}） {{#{p.id}}}\n\n"
@@ -597,12 +598,15 @@ class Site:
         return f"索引の版：`{self.version}`（ページの updated の最大：{self.updated or '—'}）"
 
     def b_fields(self, host: str) -> str:
+        # 準備中のページが1つもなければ「準備中」の列を出さない（s10 audit-shared）
+        any_stub = any(p.stub for p in self.pages)
         rows = []
         for f in self.fields:
             ps = [p for p in self.pages if p.field == f]
             rows.append([f"[{cp.FIELD_TITLES[f]}]({cp.rel_link(host, f'{f}/index.md')})", cp.md_text(FIELD_DESCRIPTIONS[f], table=True),
-                         str(len(ps)), str(sum(p.stub for p in ps))])
-        return table(["分野", "中身", "ページ", "準備中"], rows) if rows else "（まだページがない）"
+                         str(len(ps))] + ([str(sum(p.stub for p in ps))] if any_stub else []))
+        head = ["分野", "中身", "ページ"] + (["準備中"] if any_stub else [])
+        return table(head, rows) if rows else "（まだページがない）"
 
     def b_lists(self, host: str) -> str:
         return self.lists_links(host)
@@ -791,6 +795,7 @@ class Site:
                 continue
             kinds: dict[str, dict] = {}
             for e in probs:
+                seen: set[str] = set()   # 同じページの別の anchor（mst#a と mst#b）を 1 問で 2 回と数えない
                 for ref in self.recent_pages(e):
                     p = self.by_id.get(ref.partition("#")[0])
                     if p is None:
@@ -800,7 +805,9 @@ class Site:
                     g = kinds.setdefault(k, {"problems": [], "pages": collections.Counter()})
                     if e["id"] not in g["problems"]:
                         g["problems"].append(e["id"])
-                    g["pages"][p.id] += 1
+                    if p.id not in seen:
+                        seen.add(p.id)
+                        g["pages"][p.id] += 1
             rows = []
             for k, g in sorted(kinds.items(), key=lambda kv: (-len(kv[1]["problems"]), cp.KINDS.index(kv[0]) if kv[0] in cp.KINDS else 99)):
                 pages = sorted(g["pages"].items(), key=lambda kv: (-kv[1], cp.FIELDS.index(self.by_id[kv[0]].field), self.by_id[kv[0]].order))

@@ -72,7 +72,7 @@ $$
 
 外積の絶対値 $\lvert a \rvert \lvert b \rvert \lvert \sin\theta \rvert$ は、$a$ と $b$ を 2 辺とする平行四辺形の面積である。底辺 $\lvert a \rvert$ に高さ $\lvert b \rvert \lvert \sin\theta \rvert$ を掛けたものだからである。
 
-![左：a = (4, 1) と b = (1, 3) では b が a の左にあり、外積は 11 で正。右：b = (3, −2) では b が a の右にあり、外積は −11 で負。どちらも絶対値 11 が 2 つのベクトルの作る平行四辺形の面積](../img/geometry-vectors/cross-sign.svg)
+![上：a = (4, 1) と b = (1, 3) では b が a の左にあり、外積は 11 で正。下：b = (3, −2) では b が a の右にあり、外積は −11 で負。どちらも絶対値 11 が 2 つのベクトルの作る平行四辺形の面積](../img/geometry-vectors/cross-sign.svg)
 
 外積は引数の順を入れ替えると符号が変わる（$\mathrm{cross}(b, a) = -\mathrm{cross}(a, b)$）。内積は入れ替えても変わらない。実装では点とベクトルを同じ構造体で表し、外積と内積を関数にしておく。
 

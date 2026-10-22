@@ -23,7 +23,7 @@ sections:
   - {title: 指定頂点を結ぶ部分木の大きさ（DFS 順で隣り合う 2 点の距離の和の半分）, anchor: steiner-queries}
   - {title: DFS 順に並べて隣り合う 2 点の LCA を足す, anchor: build}
   - {title: スタックで組み立てる, anchor: stack-build}
-  - {title: 圧縮木で木 DP をするときの要点と学ぶための資料, anchor: usage}
+  - {title: 圧縮木で木 DP をするときの要点, anchor: usage}
   - {title: マージテク・平方分割で代用できる場合, anchor: alternatives}
 stage: draft
 updated: 2026-10-22
@@ -100,7 +100,7 @@ for v in vs:
 
 LCA を[オイラーツアーと Sparse Table](../ds/sparse-table.md) で 1 回 $O(1)$ にすれば、構築はソートの $O(K \log K)$ になる。ソートを 1 回で済ませ、隣り合う 2 点の LCA を求めながら深さで取り除く書き方もある（参考の smijake3 氏の記事に両方がある）。
 
-## 圧縮木で木 DP をするときの要点と学ぶための資料 {#usage}
+## 圧縮木で木 DP をするときの要点 {#usage}
 
 ACL には Auxiliary Tree がなく、Library Checker にも専用の問題はない。構築の中で使う LCA は Library Checker の [Lowest Common Ancestor](https://judge.yosupo.jp/problem/lca) で検証できる。自作するときの要点は次のとおりである。
 
@@ -109,12 +109,6 @@ ACL には Auxiliary Tree がなく、Library Checker にも専用の問題は�
 - **配列を毎回 $O(N)$ で初期化しない**：DP の値や印を長さ $N$ の配列に持つなら、使った頂点だけを使い終えたときに戻す。毎回全体を初期化すると、クエリや色ごとに $O(N)$ かかって圧縮した意味がなくなる。
 - **重複を除く**：隣り合う 2 点の LCA は同じ頂点になりやすく、指定頂点そのものになることもある。2 回目のソートの後で重複を除かないと、同じ頂点が 2 回現れて親子関係が壊れる。
 - **根を固定する**：行きがけ順・深さ・LCA は、元の木を 1 つの根（頂点 0 など）で根付けたものを全クエリで共有する。圧縮木の根は集合全体の LCA で、クエリごとに変わる。
-
-学ぶための資料は次の 3 つがよい。
-
-- Kyopro Encyclopedia of Algorithms の項目：定義（2 点の LCA 全体を頂点とする木）、頂点数が $2 \lvert X \rvert - 1$ 以下であること、線形時間の構築まで含む計算量の整理、呼び名の注意。
-- smijake3 氏のブログの記事：行きがけ順にソートして LCA を足す手順と、ソート 1 回・2 回の 2 通りのスタックの組み立てを、図と実装で説明している。
-- ngtkana 氏のブログの記事：LCA を使わず、[マージテク](../tree/small-to-large.md)で色ごとの圧縮木をまとめて作る方法。
 
 ## マージテク・平方分割で代用できる場合 {#alternatives}
 
@@ -125,6 +119,14 @@ ACL には Auxiliary Tree がなく、Library Checker にも専用の問題は�
 - **重心分解**：同じ色の組の距離の和のように「組」を数えるなら、[重心を通る組を数える](../tree/centroid-decomposition.md#count-through)方法も使える。
 
 Auxiliary Tree が向くのは、指定頂点がクエリごとに与えられてマージテクの形にならないときと、色ごとの DP が「枝分かれの点」での場合分けを要するときである。
+
+## 学ぶための資料 {#resources}
+
+次の 3 つがよい（URL は参考の節にある）。
+
+- Kyopro Encyclopedia of Algorithms の項目：定義（2 点の LCA 全体を頂点とする木）、頂点数が $2 \lvert X \rvert - 1$ 以下であること、線形時間の構築まで含む計算量の整理、呼び名の注意。
+- smijake3 氏のブログの記事：行きがけ順にソートして LCA を足す手順と、ソート 1 回・2 回の 2 通りのスタックの組み立てを、図と実装で説明している。
+- ngtkana 氏のブログの記事：LCA を使わず、[マージテク](../tree/small-to-large.md)で色ごとの圧縮木をまとめて作る方法。
 
 ## 例題 {#examples}
 

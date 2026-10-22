@@ -233,6 +233,17 @@ $1 + \dots + k = k(k + 1) / 2$ なので、条件は「$k(k + 1)$ が $2N$ の�
     - **ABC286 F**：長さ $\ell$ の閉路を 1 つ作ると、$N$ 回たどった先から $N \bmod \ell$ が分かる。長さが互いに素な閉路を並べ、長さの合計を使える頂点数（110）以内に、長さの lcm を $10^9$ 以上にする。たとえば $4, 9, 5, 7, 11, 13, 17, 19, 23$ は合計 108、lcm は $1338557220$ である。各余りを CRT でまとめると $N$ が決まる
     - **ABC193 E**：電車は周期 $2(X + Y)$ で、時刻を周期で割った余りが $[X, X + Y)$ のとき目的の駅にいる。乗客は周期 $P + Q$ で、余りが $[P, P + Q)$ のとき起きている。$Y, Q \le 500$ なので余りの組を全探索し（最大 $2.5 \times 10^5$ 組）、組ごとに CRT で解いて最小を取る。法の lcm は約 $2 \times 10^{18}$ までで `long long` に収まる。解が 1 つもなければ infinity を出力する
 
+## 力試し {#challenge}
+
+<div class="kp-problems" data-role="challenge" markdown>
+
+- [ABC371 G. Lexicographically Smallest Permutation](https://atcoder.jp/contests/abc371/tasks/abc371_g)（diff 2348）：列 A に置換 P を何回か適用してできる列のうち、辞書順最小のものを求める。
+
+</div>
+
+??? note "力試しの方針"
+    - **ABC371 G**：置換を $X$ 回適用すると、長さ $\ell$ の巡回の上の値は $X \bmod \ell$ だけ回る。先頭の位置から順に、その位置を含む巡回でまだ見ていないものについて、その位置の値が最小になる回し方を選ぶ。それまでの選択は 1 つの合同式 $X \equiv r \pmod{L}$ にまとまっていて、この巡回の回し方 $t$ が選べるのは $t \equiv r \pmod{\gcd(L, \ell)}$ のときだけである（[法が互いに素でないときの存在条件](#non-coprime)）。選んだら 2 つの式を法 $\operatorname{lcm}(L, \ell)$ の 1 つの式にまとめる。$L$ は数百桁になりうるので、多倍長整数で持つか、条件を素数冪ごとの余り（$X \bmod p^e$、$p^e$ は $L$ を割り切る最大の冪）に分けて持つ
+
 ## 確認問題 {#quiz}
 
 ??? question "確認問題：解を決める法"
@@ -262,3 +273,4 @@ $1 + \dots + k = k(k + 1) / 2$ なので、条件は「$k(k + 1)$ が $2N$ の�
 - [drken「AtCoder ACL Contest 1 B - Sum is Multiple (2D, 青色, 600 点)」](https://drken1215.hatenablog.com/entry/2020/09/23/080300)：例題の方針（2N の互いに素な分け方と CRT）
 - [kazun「ABC286 F - Guess The Number 2」](https://kazun-kyopro.hatenablog.com/entry/ABC/286/F)：練習の方針（互いに素な長さの閉路の選び方）
 - [nullkara「競プロ参加記037 AtCoder Beginner Contest 193」](https://nullkara.jp/2021/02/28/atcoder_abc193/)：練習の方針（余りの組の全探索と CRT）
+- [ikatakos「AtCoder Beginner Contest 371 F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0914_abc371)：力試しの方針（巡回ごとの条件を合同式にして中国剰余定理でまとめること、lcm が数百桁になりうること）（解説の部分だけを参照）

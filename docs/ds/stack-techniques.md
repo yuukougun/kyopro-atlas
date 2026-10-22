@@ -192,6 +192,9 @@ updated: 2026-10-21
 
 <div class="kp-problems" data-role="practice" markdown>
 
+- [ABC283 D. Scope](https://atcoder.jp/contests/abc283/tasks/abc283_d)（diff 453）：括弧と英小文字の列に従って箱に文字を出し入れするとき、同じ文字が箱に 2 つ入ることがないかを判定する。
+- [ABC428 C. Brackets Stack Query](https://atcoder.jp/contests/abc428/tasks/abc428_c)（diff 483）：括弧の文字を末尾に足す・末尾を消すクエリのたびに、文字列が正しい括弧列かを答える。
+- [ABC237 D. LR insertion](https://atcoder.jp/contests/abc237/tasks/abc237_d)（diff 544）：文字列の L・R に従って数を左右へ足していった最終的な列を求める。
 - [ABC240 D. Strange Balls](https://atcoder.jp/contests/abc240/tasks/abc240_d)（diff 570）：同じ数 k のボールが k 個続くと消える筒に順にボールを入れ、毎回のボールの数を答える。
 - [ABC307 D. Mismatched Parentheses](https://atcoder.jp/contests/abc307/tasks/abc307_d)（diff 666）：中に括弧を含まない (…) を消せるだけ消した後の文字列を求める。
 - [ARC108 B. Abbreviate Fox](https://atcoder.jp/contests/arc108/tasks/arc108_b)（diff 681）：文字列から fox を消せるだけ消した後の長さを求める。
@@ -201,6 +204,9 @@ updated: 2026-10-21
 </div>
 
 ??? note "練習の方針"
+    - **ABC283 D**：開き括弧の印と、箱に入れた文字を同じスタックに積む。文字は箱にすでにあれば失敗で、なければ箱に入れて積む。閉じ括弧では、印が出るまで降ろしながら文字を箱から出す（[括弧の対応](#brackets)）
+    - **ABC428 C**：各時点の（残高, 接頭辞の残高の最小値）を積み、末尾を消すクエリでは pop して 1 つ前の状態に戻す。正しい括弧列なのは、残高が 0 で最小値が 0 以上のときである（[直前の操作を取り消す](#undo)）
+    - **ABC237 D**：後ろから見ると、$i$ より後に足した数は $i$ の片側にひとかたまりで並ぶ。$N$ だけの deque から始め、$i = N, \dots, 1$ の順に、$i$ 文字目が L なら $i - 1$ を末尾に、R なら先頭に足す（[deque](#deque)）
     - **ABC240 D**：(値, 末尾に続いている個数) の組を積み、個数が値に等しくなったら組を降ろして玉の数から引く（[ランレングスを積む](#run-length)）
     - **ABC307 D**：結果の文字列をスタックにし、未対応の開き括弧の数を数えておく。閉じ括弧で未対応の開き括弧があれば、末尾から開き括弧までを取り除く。なければ閉じ括弧もそのまま積む（[括弧の対応](#brackets)）
     - **ARC108 B**：文字を積み、末尾の 3 文字が fox になったら取り除く。最後の長さを出力する（[打ち消し](#cancel)）
@@ -221,6 +227,7 @@ updated: 2026-10-21
 ## 参考 {#references}
 
 - [drken「AtCoder ABC 328 D - Take ABC (3Q, 茶色, 425 点)」](https://drken1215.hatenablog.com/entry/2023/11/12/191354)：例題の方針（結果の文字列をスタックにして末尾を照合する）
+- [drken「AtCoder ABC 283 D - Scope (3Q, 茶色, 400 点)」](https://drken1215.hatenablog.com/entry/2024/11/01/130905)：練習の方針（開き括弧と文字を積み、閉じ括弧で降ろす）
 - [drken「AtCoder ABC 240 D - Strange Balls (3Q, 茶色, 400 点)」](https://drken1215.hatenablog.com/entry/2024/07/05/035530)：(値, 連続個数) の組を積む方法
 - [drken「AtCoder ABC 307 D - Mismatched Parentheses (3Q, 茶色, 400 点)」](https://drken1215.hatenablog.com/entry/2024/06/10/020153)：練習の方針（括弧と文字が混ざった列の削除）
 - [drken「AtCoder ARC 108 B - Abbreviate Fox (3Q, 茶色, 400 点)」](https://drken1215.hatenablog.com/entry/2020/11/26/145207)：練習の方針（末尾の fox の削除）

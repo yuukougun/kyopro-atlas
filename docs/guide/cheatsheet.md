@@ -55,7 +55,7 @@ C++ の単純な処理なら、1 秒に $10^8$ 回はまず間に合い、数×$
 | $N \le 10^{12}$ | $O(\sqrt{N})$ | [約数列挙と素数判定](../math/divisor-enum.md#why-sqrt)・[商の列挙](../math/floor-quotient-enum.md) |
 | $N \le 10^{18}$ | $O(\log N)$ | [二分探索](../basics/binary-search.md)・[ダブリング](../basics/doubling.md)・[繰り返し二乗法](../math/mod-pow.md) |
 
-表の境目は目安で、詳しい表と手法の一覧は[制約 → 許される計算量 → 疑う手法の表](../basics/complexity-estimation.md#constraint-table)にある。制約が複数あれば、それぞれの最大値を同時に入れる（$N, Q \le 2 \times 10^5$ でクエリごとに $O(N)$ なら $4 \times 10^{10}$ 回）。多重テストケースは $N$ の総和で見積もる（[複数テストケース](../basics/complexity-estimation.md#multiple-testcases)）。
+表の境目は目安で、詳しい表と手法の一覧は[制約 → 許される計算量 → 疑う手法の表](../basics/complexity-estimation.md#constraint-table)にある。制約が複数あれば、それぞれの最大値を同時に入れる（$N, Q \le 2 \times 10^5$ でクエリごとに $O(N)$ なら $4 \times 10^{10}$ 回）。複数テストケースは $N$ の総和で見積もる（[複数テストケース](../basics/complexity-estimation.md#multiple-testcases)）。
 
 $N = 2 \times 10^5$ のときの回数は次のとおりである（手元で計算した値）。
 
@@ -303,7 +303,7 @@ ACL v1.6 のドキュメントに書かれた計算量である。$n$ は要素�
 | 約数の個数（$n = \prod p_i^{e_i}$） | $\prod (e_i + 1)$ | [約数の個数と総和の公式](../math/divisor-enum.md#count-and-sum) |
 | オイラーの φ 関数 | $\varphi(n) = n \prod_{p \mid n} \left(1 - \frac{1}{p}\right)$ | [定義と公式](../math/euler-phi.md#formula) |
 | $n!$ に含まれる $p$ の指数 | $\sum_{k \ge 1} \lfloor n / p^k \rfloor$ | [ルジャンドルの公式](../math/prime-factorization.md#legendre) |
-| 区間 $[L, R]$ の $K$ の倍数の個数（$L \ge 1$） | $\lfloor R/K \rfloor - \lfloor (L-1)/K \rfloor$ | [区間の中の K の倍数の個数](../math/integer-division.md#count-multiples) |
+| 閉区間 $[L, R]$ の $K$ の倍数の個数（$L \ge 1$） | $\lfloor R/K \rfloor - \lfloor (L-1)/K \rfloor$ | [区間の中の K の倍数の個数](../math/integer-division.md#count-multiples) |
 | 切り上げ $\lceil a/b \rceil$（$b > 0$） | $\lfloor (a + b - 1)/b \rfloor$。C++ の `/` で書くなら $a + b - 1 \ge 0$ なら正しい（負だと誤ることがある） | [切り上げの式が使える条件](../math/integer-division.md#ceil-formula) |
 
 **グラフ・確率・ゲーム・幾何**
@@ -327,8 +327,8 @@ ACL v1.6 のドキュメントに書かれた計算量である。$n$ は要素�
 | --- | --- | --- |
 | `(1 << n) - 1` | $n$ 要素の全体集合 | [AND・OR・XOR・シフト](../basics/bit-operations.md#operators) |
 | `x >> i & 1` | $x$ の bit $i$ が立っているか | [AND・OR・XOR・シフト](../basics/bit-operations.md#operators) |
-| `x & -x` | 最下位の 1 だけを残した値 | [popcount・最下位ビット](../basics/bit-operations.md#popcount) |
-| `x & (x - 1)` | 最下位の 1 を消した値。`== 0` なら $x$ は 0 か 2 のべき乗 | [popcount・最下位ビット](../basics/bit-operations.md#popcount) |
+| `x & -x` | 最下位の 1 だけを残した値 | [popcount・最下位 bit](../basics/bit-operations.md#popcount) |
+| `x & (x - 1)` | 最下位の 1 を消した値。`== 0` なら $x$ は 0 か 2 のべき乗 | [popcount・最下位 bit](../basics/bit-operations.md#popcount) |
 | `s = (s - 1) & m` | $m$ の部分集合を大きい順にたどる | [部分集合の部分集合の列挙](../basics/bit-operations.md#submask) |
 | `__builtin_popcountll(x)` | 1 の個数（`long long` には `ll` 付きを使う） | [組み込み関数](../cpp/cpp-math-functions.md#builtins) |
 | `a ^ b ^ b` | $a$（同じ値の XOR は打ち消し合う） | [XOR の性質](../basics/bit-operations.md#xor-properties) |

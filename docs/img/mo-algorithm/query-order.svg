@@ -1,67 +1,67 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 494 614" width="494" height="614" font-family="sans-serif">
 <rect x="0" y="0" width="494" height="614" fill="#ffffff"/>
-<text x="70" y="26" font-size="15" fill="#000">クエリ [l, r) を点 (l, r) とみる（N = 16、ブロックの大きさ 4）</text>
+<text x="20" y="26" font-size="15" fill="#000">クエリ [l, r) を点 (l, r) とみる（N = 16、ブロックの大きさ 4）</text>
 <rect x="70" y="80" width="96" height="384" fill="#eeeeee" stroke="#999" stroke-dasharray="4 3"/>
-<text x="118.0" y="62" font-size="13" text-anchor="middle" fill="#333">ブロック 0</text>
-<text x="118.0" y="504" font-size="13" text-anchor="middle" fill="#333">r 昇順 ↑</text>
+<text x="118.0" y="62" font-size="14" text-anchor="middle" fill="#333">ブロック 0</text>
+<text x="118.0" y="504" font-size="14" text-anchor="middle" fill="#333">r 昇順 ↑</text>
 <rect x="166" y="80" width="96" height="384" fill="#ffffff" stroke="#999" stroke-dasharray="4 3"/>
-<text x="214.0" y="62" font-size="13" text-anchor="middle" fill="#333">ブロック 1</text>
-<text x="214.0" y="504" font-size="13" text-anchor="middle" fill="#333">r 降順 ↓</text>
+<text x="214.0" y="62" font-size="14" text-anchor="middle" fill="#333">ブロック 1</text>
+<text x="214.0" y="504" font-size="14" text-anchor="middle" fill="#333">r 降順 ↓</text>
 <rect x="262" y="80" width="96" height="384" fill="#eeeeee" stroke="#999" stroke-dasharray="4 3"/>
-<text x="310.0" y="62" font-size="13" text-anchor="middle" fill="#333">ブロック 2</text>
-<text x="310.0" y="504" font-size="13" text-anchor="middle" fill="#333">r 昇順 ↑</text>
+<text x="310.0" y="62" font-size="14" text-anchor="middle" fill="#333">ブロック 2</text>
+<text x="310.0" y="504" font-size="14" text-anchor="middle" fill="#333">r 昇順 ↑</text>
 <rect x="358" y="80" width="96" height="384" fill="#ffffff" stroke="#999" stroke-dasharray="4 3"/>
-<text x="406.0" y="62" font-size="13" text-anchor="middle" fill="#333">ブロック 3</text>
-<text x="406.0" y="504" font-size="13" text-anchor="middle" fill="#333">r 降順 ↓</text>
+<text x="406.0" y="62" font-size="14" text-anchor="middle" fill="#333">ブロック 3</text>
+<text x="406.0" y="504" font-size="14" text-anchor="middle" fill="#333">r 降順 ↓</text>
 <line x1="70" y1="464" x2="454" y2="80" stroke="#999" stroke-width="1"/>
-<text x="424" y="130" font-size="12" text-anchor="end" fill="#666" transform="rotate(-45 424 130)">r = l（空の区間）</text>
+<text x="424" y="130" font-size="14" text-anchor="end" fill="#666" transform="rotate(-45 424 130)">r = l（空の区間）</text>
 <line x1="70" y1="464" x2="464" y2="464" stroke="#000" stroke-width="1.5"/>
 <line x1="70" y1="464" x2="70" y2="76" stroke="#000" stroke-width="1.5"/>
-<text x="70" y="482" font-size="12" text-anchor="middle" fill="#000">0</text>
-<text x="62" y="468" font-size="12" text-anchor="end" fill="#000">0</text>
-<text x="166" y="482" font-size="12" text-anchor="middle" fill="#000">4</text>
-<text x="62" y="372" font-size="12" text-anchor="end" fill="#000">4</text>
-<text x="262" y="482" font-size="12" text-anchor="middle" fill="#000">8</text>
-<text x="62" y="276" font-size="12" text-anchor="end" fill="#000">8</text>
-<text x="358" y="482" font-size="12" text-anchor="middle" fill="#000">12</text>
-<text x="62" y="180" font-size="12" text-anchor="end" fill="#000">12</text>
-<text x="454" y="482" font-size="12" text-anchor="middle" fill="#000">16</text>
-<text x="62" y="84" font-size="12" text-anchor="end" fill="#000">16</text>
+<text x="70" y="482" font-size="14" text-anchor="middle" fill="#000">0</text>
+<text x="62" y="468" font-size="14" text-anchor="end" fill="#000">0</text>
+<text x="166" y="482" font-size="14" text-anchor="middle" fill="#000">4</text>
+<text x="62" y="372" font-size="14" text-anchor="end" fill="#000">4</text>
+<text x="262" y="482" font-size="14" text-anchor="middle" fill="#000">8</text>
+<text x="62" y="276" font-size="14" text-anchor="end" fill="#000">8</text>
+<text x="358" y="482" font-size="14" text-anchor="middle" fill="#000">12</text>
+<text x="62" y="180" font-size="14" text-anchor="end" fill="#000">12</text>
+<text x="454" y="482" font-size="14" text-anchor="middle" fill="#000">16</text>
+<text x="62" y="84" font-size="14" text-anchor="end" fill="#000">16</text>
 <text x="470" y="468" font-size="14" fill="#000">l</text>
 <text x="40" y="62" font-size="14" text-anchor="middle" fill="#000">r</text>
 <polyline points="70,464 70,464 70,344 94,344 94,344 94,344 94,248 142,248 142,248 70,248 70,152 70,152 70,152 70,152 70,104 118,104 118,104 118,104 118,80 214,80 214,80 190,80 190,80 190,80 190,176 190,176 190,176 238,176 238,224 166,224 166,224 166,224 166,296 166,296 166,200 286,200 286,200 286,200 286,128 310,128 310,128 262,128 262,80 262,80 262,80 262,80 262,80 382,80 382,80 358,80 358,80 358,80 358,128" fill="none" stroke="#1565c0" stroke-width="3.5"/>
 <circle cx="94" cy="344" r="11" fill="#ffffff" stroke="#000" stroke-width="1.5"/>
-<text x="94" y="349" font-size="13" text-anchor="middle" fill="#000">1</text>
+<text x="94" y="349" font-size="14" text-anchor="middle" fill="#000">1</text>
 <circle cx="142" cy="248" r="11" fill="#ffffff" stroke="#000" stroke-width="1.5"/>
-<text x="142" y="253" font-size="13" text-anchor="middle" fill="#000">2</text>
+<text x="142" y="253" font-size="14" text-anchor="middle" fill="#000">2</text>
 <circle cx="70" cy="152" r="11" fill="#ffffff" stroke="#000" stroke-width="1.5"/>
-<text x="70" y="157" font-size="13" text-anchor="middle" fill="#000">3</text>
+<text x="70" y="157" font-size="14" text-anchor="middle" fill="#000">3</text>
 <circle cx="118" cy="104" r="11" fill="#ffffff" stroke="#000" stroke-width="1.5"/>
-<text x="118" y="109" font-size="13" text-anchor="middle" fill="#000">4</text>
+<text x="118" y="109" font-size="14" text-anchor="middle" fill="#000">4</text>
 <circle cx="214" cy="80" r="11" fill="#ffffff" stroke="#000" stroke-width="1.5"/>
-<text x="214" y="85" font-size="13" text-anchor="middle" fill="#000">5</text>
+<text x="214" y="85" font-size="14" text-anchor="middle" fill="#000">5</text>
 <circle cx="190" cy="176" r="11" fill="#ffffff" stroke="#000" stroke-width="1.5"/>
-<text x="190" y="181" font-size="13" text-anchor="middle" fill="#000">6</text>
+<text x="190" y="181" font-size="14" text-anchor="middle" fill="#000">6</text>
 <circle cx="238" cy="224" r="11" fill="#ffffff" stroke="#000" stroke-width="1.5"/>
-<text x="238" y="229" font-size="13" text-anchor="middle" fill="#000">7</text>
+<text x="238" y="229" font-size="14" text-anchor="middle" fill="#000">7</text>
 <circle cx="166" cy="296" r="11" fill="#ffffff" stroke="#000" stroke-width="1.5"/>
-<text x="166" y="301" font-size="13" text-anchor="middle" fill="#000">8</text>
+<text x="166" y="301" font-size="14" text-anchor="middle" fill="#000">8</text>
 <circle cx="286" cy="200" r="11" fill="#ffffff" stroke="#000" stroke-width="1.5"/>
-<text x="286" y="205" font-size="13" text-anchor="middle" fill="#000">9</text>
+<text x="286" y="205" font-size="14" text-anchor="middle" fill="#000">9</text>
 <circle cx="310" cy="128" r="11" fill="#ffffff" stroke="#000" stroke-width="1.5"/>
-<text x="310" y="133" font-size="13" text-anchor="middle" fill="#000">10</text>
+<text x="310" y="133" font-size="14" text-anchor="middle" fill="#000">10</text>
 <circle cx="262" cy="80" r="11" fill="#ffffff" stroke="#000" stroke-width="1.5"/>
-<text x="262" y="85" font-size="13" text-anchor="middle" fill="#000">11</text>
+<text x="262" y="85" font-size="14" text-anchor="middle" fill="#000">11</text>
 <circle cx="382" cy="80" r="11" fill="#ffffff" stroke="#000" stroke-width="1.5"/>
-<text x="382" y="85" font-size="13" text-anchor="middle" fill="#000">12</text>
+<text x="382" y="85" font-size="14" text-anchor="middle" fill="#000">12</text>
 <circle cx="358" cy="128" r="11" fill="#ffffff" stroke="#000" stroke-width="1.5"/>
-<text x="358" y="133" font-size="13" text-anchor="middle" fill="#000">13</text>
+<text x="358" y="133" font-size="14" text-anchor="middle" fill="#000">13</text>
 <rect x="66" y="460" width="8" height="8" fill="#000"/>
-<circle cx="70" cy="536" r="11" fill="#fff" stroke="#000" stroke-width="1.5"/><text x="70" y="541" font-size="13" text-anchor="middle">1</text>
-<text x="86" y="541" font-size="13">クエリ（数字は処理の順）</text>
+<circle cx="70" cy="536" r="11" fill="#fff" stroke="#000" stroke-width="1.5"/><text x="70" y="541" font-size="14" text-anchor="middle">1</text>
+<text x="86" y="541" font-size="14">クエリ（数字は処理の順）</text>
 <rect x="266" y="532" width="8" height="8" fill="#000"/>
-<text x="282" y="541" font-size="13">出発（空の区間）</text>
+<text x="282" y="541" font-size="14">出発（空の区間）</text>
 <line x1="60" y1="564" x2="80" y2="564" stroke="#1565c0" stroke-width="3.5"/>
-<text x="86" y="569" font-size="13">区間の動き（伸ばしてから縮める）</text>
-<text x="60" y="596" font-size="13">横の動きは l の伸縮、縦の動きは r の伸縮</text>
+<text x="86" y="569" font-size="14">区間の動き（伸ばしてから縮める）</text>
+<text x="60" y="596" font-size="14">横の動きは l の伸縮、縦の動きは r の伸縮</text>
 </svg>

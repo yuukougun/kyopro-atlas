@@ -1,36 +1,42 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" font-family="sans-serif" font-size="15">
-<defs><marker id="ar" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#333"/></marker></defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 474" width="320" height="474" font-family="sans-serif" font-size="15">
+<defs><marker id="ar" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#333"/></marker><marker id="arb" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#1f4e9a"/></marker></defs>
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="20" y="30" fill="#222">13 を 2 進表記すると 1101₂ = 8 + 4 + 1（下の桁から k = 0, 1, 2, 3）</text>
-<text x="20" y="78" fill="#222">k</text>
-<text x="20" y="118" fill="#222">bit</text>
-<text x="20" y="168" fill="#222">3^(2^k)</text>
-<text x="165" y="78" text-anchor="middle" fill="#222">0</text>
-<text x="165" y="118" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<rect x="110" y="140" width="110" height="44" rx="6" fill="#dbe8fb" stroke="#1f4e9a" stroke-width="2.5"/>
-<text x="165" y="168" text-anchor="middle" fill="#222">3¹ = 3</text>
-<line x1="222" y1="152" x2="238" y2="152" stroke="#333" stroke-width="1.5" marker-end="url(#ar)"/>
-<text x="230.0" y="134" text-anchor="middle" fill="#555" font-size="12">2 乗</text>
-<line x1="165" y1="186" x2="165" y2="226" stroke="#1f4e9a" stroke-width="2" marker-end="url(#ar)"/>
-<text x="295" y="78" text-anchor="middle" fill="#222">1</text>
-<text x="295" y="118" text-anchor="middle" fill="#222" font-weight="normal">0</text>
-<rect x="240" y="140" width="110" height="44" rx="6" fill="#f4f4f4" stroke="#888" stroke-width="1.5" stroke-dasharray="5 4"/>
-<text x="295" y="168" text-anchor="middle" fill="#222">3² = 9</text>
-<line x1="352" y1="152" x2="368" y2="152" stroke="#333" stroke-width="1.5" marker-end="url(#ar)"/>
-<text x="360.0" y="134" text-anchor="middle" fill="#555" font-size="12">2 乗</text>
-<text x="295" y="206" text-anchor="middle" fill="#888" font-size="13">掛けない</text>
-<text x="425" y="78" text-anchor="middle" fill="#222">2</text>
-<text x="425" y="118" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<rect x="370" y="140" width="110" height="44" rx="6" fill="#dbe8fb" stroke="#1f4e9a" stroke-width="2.5"/>
-<text x="425" y="168" text-anchor="middle" fill="#222">3⁴ = 81</text>
-<line x1="482" y1="152" x2="498" y2="152" stroke="#333" stroke-width="1.5" marker-end="url(#ar)"/>
-<text x="490.0" y="134" text-anchor="middle" fill="#555" font-size="12">2 乗</text>
-<line x1="425" y1="186" x2="425" y2="226" stroke="#1f4e9a" stroke-width="2" marker-end="url(#ar)"/>
-<text x="555" y="78" text-anchor="middle" fill="#222">3</text>
-<text x="555" y="118" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<rect x="500" y="140" width="110" height="44" rx="6" fill="#dbe8fb" stroke="#1f4e9a" stroke-width="2.5"/>
-<text x="555" y="168" text-anchor="middle" fill="#222">3⁸ = 6561</text>
-<line x1="555" y1="186" x2="555" y2="226" stroke="#1f4e9a" stroke-width="2" marker-end="url(#ar)"/>
-<text x="20" y="252" fill="#222">bit が 1 の項（実線の枠）だけを掛ける：3 × 81 × 6561 = 3^(1+4+8) = 3^13 = 1594323</text>
-<text x="20" y="280" fill="#555" font-size="13">2 乗は 3 回、答えへの掛け算は 3 回。1 回ずつ掛けると 12 回かかる</text>
+<text x="10" y="24" fill="#222">13 を 2 進表記すると 1101₂ = 8 + 4 + 1</text>
+<text x="10" y="46" fill="#555" font-size="13">下の桁から k = 0, 1, 2, 3。箱は 3^(2^k)</text>
+<text x="10" y="89.0" fill="#222" font-size="13">k = 0</text>
+<text x="10" y="107.0" fill="#222" font-size="13" font-weight="bold">bit 1</text>
+<rect x="70" y="70" width="110" height="44" rx="6" fill="#dbe8fb" stroke="#1f4e9a" stroke-width="2.5"/>
+<text x="125.0" y="97.0" text-anchor="middle" fill="#222" font-size="15">3¹ = 3</text>
+<line x1="125.0" y1="116" x2="125.0" y2="133" stroke="#333" stroke-width="1.5" marker-end="url(#ar)"/>
+<text x="133.0" y="130" fill="#555" font-size="12">2 乗</text>
+<line x1="182" y1="92.0" x2="272" y2="92.0" stroke="#1f4e9a" stroke-width="2"/>
+<text x="226.0" y="85.0" text-anchor="middle" fill="#1f4e9a" font-size="12">掛ける</text>
+<text x="10" y="155.0" fill="#222" font-size="13">k = 1</text>
+<text x="10" y="173.0" fill="#222" font-size="13">bit 0</text>
+<rect x="70" y="136" width="110" height="44" rx="6" fill="#f4f4f4" stroke="#888" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="125.0" y="163.0" text-anchor="middle" fill="#222" font-size="15">3² = 9</text>
+<line x1="125.0" y1="182" x2="125.0" y2="199" stroke="#333" stroke-width="1.5" marker-end="url(#ar)"/>
+<text x="133.0" y="196" fill="#555" font-size="12">2 乗</text>
+<text x="226.0" y="163.0" text-anchor="middle" fill="#888" font-size="13">掛けない</text>
+<text x="10" y="221.0" fill="#222" font-size="13">k = 2</text>
+<text x="10" y="239.0" fill="#222" font-size="13" font-weight="bold">bit 1</text>
+<rect x="70" y="202" width="110" height="44" rx="6" fill="#dbe8fb" stroke="#1f4e9a" stroke-width="2.5"/>
+<text x="125.0" y="229.0" text-anchor="middle" fill="#222" font-size="15">3⁴ = 81</text>
+<line x1="125.0" y1="248" x2="125.0" y2="265" stroke="#333" stroke-width="1.5" marker-end="url(#ar)"/>
+<text x="133.0" y="262" fill="#555" font-size="12">2 乗</text>
+<line x1="182" y1="224.0" x2="272" y2="224.0" stroke="#1f4e9a" stroke-width="2"/>
+<text x="226.0" y="217.0" text-anchor="middle" fill="#1f4e9a" font-size="12">掛ける</text>
+<text x="10" y="287.0" fill="#222" font-size="13">k = 3</text>
+<text x="10" y="305.0" fill="#222" font-size="13" font-weight="bold">bit 1</text>
+<rect x="70" y="268" width="110" height="44" rx="6" fill="#dbe8fb" stroke="#1f4e9a" stroke-width="2.5"/>
+<text x="125.0" y="295.0" text-anchor="middle" fill="#222" font-size="15">3⁸ = 6561</text>
+<line x1="182" y1="290.0" x2="272" y2="290.0" stroke="#1f4e9a" stroke-width="2"/>
+<text x="226.0" y="283.0" text-anchor="middle" fill="#1f4e9a" font-size="12">掛ける</text>
+<line x1="272" y1="92.0" x2="272" y2="336" stroke="#1f4e9a" stroke-width="2" marker-end="url(#arb)"/>
+<rect x="10" y="338" width="300" height="80" rx="6" fill="#f5f5f5" stroke="#555"/>
+<text x="160" y="362" text-anchor="middle" fill="#222" font-size="15">3 × 81 × 6561</text>
+<text x="160" y="384" text-anchor="middle" fill="#222" font-size="15">= 3^(1+4+8) = 3^13</text>
+<text x="160" y="406" text-anchor="middle" fill="#222" font-size="15">= 1594323</text>
+<text x="10" y="442" fill="#555" font-size="13">2 乗は 3 回、答えへの掛け算は 3 回</text>
+<text x="10" y="462" fill="#555" font-size="13">1 回ずつ掛けると 12 回かかる</text>
 </svg>

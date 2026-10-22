@@ -1,83 +1,44 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 192" font-family="sans-serif" font-size="15">
-<rect width="640" height="192" fill="#ffffff"/>
-<text x="32" y="22" font-size="15" fill="#222">x = 12（unsigned、32 桁）の 2 進表記。左が上位、右が下位</text>
-<rect x="32" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="41.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="50" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="59.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="68" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="77.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="86" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="95.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="104" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="113.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="122" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="131.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="140" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="149.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="158" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="167.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="176" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="185.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="194" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="203.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="212" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="221.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="230" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="239.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="248" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="257.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="266" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="275.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="284" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="293.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="302" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="311.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="320" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="329.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="338" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="347.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="356" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="365.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="374" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="383.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="392" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="401.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="410" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="419.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="428" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="437.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="446" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="455.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="464" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="473.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="482" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="491.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="500" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="509.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="518" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="527.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="536" y="78" width="18" height="28" fill="#ffd27f" stroke="#555" stroke-width="1"/>
-<text x="545.0" y="97" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<rect x="554" y="78" width="18" height="28" fill="#ffd27f" stroke="#555" stroke-width="1"/>
-<text x="563.0" y="97" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<rect x="572" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="581.0" y="97" text-anchor="middle" fill="#222">0</text>
-<rect x="590" y="78" width="18" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
-<text x="599.0" y="97" text-anchor="middle" fill="#222">0</text>
-<path d="M33 70 V64 H535 V70" fill="none" stroke="#333" stroke-width="1.5"/>
-<text x="284" y="56" text-anchor="middle" fill="#222">countl_zero = 28（上から続く 0）</text>
-<path d="M537 70 V64 H607 V70" fill="none" stroke="#333" stroke-width="1.5"/>
-<text x="572" y="56" text-anchor="middle" fill="#222">bit_width = 4</text>
-<text x="41.0" y="122" text-anchor="middle" font-size="13" fill="#555">31</text>
-<text x="545.0" y="122" text-anchor="middle" font-size="13" fill="#555">3</text>
-<text x="563.0" y="122" text-anchor="middle" font-size="13" fill="#555">2</text>
-<text x="581.0" y="122" text-anchor="middle" font-size="13" fill="#555">1</text>
-<text x="599.0" y="122" text-anchor="middle" font-size="13" fill="#555">0</text>
-<text x="32" y="122" text-anchor="start" font-size="13" fill="#555" dx="22">← 桁の番号</text>
-<path d="M573 130 V136 H607 V130" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="4 3"/>
-<line x1="590" y1="137" x2="590" y2="164" stroke="#333" stroke-width="1.2"/>
-<text x="608" y="182" text-anchor="end" fill="#222">countr_zero = 2（下から続く 0。破線）</text>
-<text x="528" y="156" text-anchor="end" fill="#222">popcount = 2（色を塗った太字の 1 の個数）</text>
-<path d="M531 150 L538 104" stroke="#333" stroke-width="1.2" fill="none"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 238" width="400" height="238" font-family="sans-serif" font-size="15">
+<rect width="400" height="238" fill="#ffffff"/>
+<text x="16" y="22" font-size="15" fill="#222">x = 12（unsigned、32 桁）の 2 進表記</text>
+<text x="16" y="42" font-size="14" fill="#222">左が上位、右が下位（桁 28〜6 は省略）</text>
+<rect x="20" y="100" width="30" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="35.0" y="120" text-anchor="middle" fill="#222">0</text>
+<text x="35.0" y="146" text-anchor="middle" font-size="13" fill="#555">31</text>
+<rect x="50" y="100" width="30" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="65.0" y="120" text-anchor="middle" fill="#222">0</text>
+<text x="65.0" y="146" text-anchor="middle" font-size="13" fill="#555">30</text>
+<rect x="80" y="100" width="30" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="95.0" y="120" text-anchor="middle" fill="#222">0</text>
+<text x="95.0" y="146" text-anchor="middle" font-size="13" fill="#555">29</text>
+<rect x="110" y="100" width="80" height="28" fill="#f4f4f4" stroke="#555" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="150.0" y="119" text-anchor="middle" fill="#555" font-size="13">…0 が続く…</text>
+<text x="150.0" y="146" text-anchor="middle" font-size="13" fill="#555">…</text>
+<rect x="190" y="100" width="30" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="205.0" y="120" text-anchor="middle" fill="#222">0</text>
+<text x="205.0" y="146" text-anchor="middle" font-size="13" fill="#555">5</text>
+<rect x="220" y="100" width="30" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="235.0" y="120" text-anchor="middle" fill="#222">0</text>
+<text x="235.0" y="146" text-anchor="middle" font-size="13" fill="#555">4</text>
+<rect x="250" y="100" width="30" height="28" fill="#ffd27f" stroke="#555" stroke-width="1"/>
+<text x="265.0" y="120" text-anchor="middle" fill="#222" font-weight="bold">1</text>
+<text x="265.0" y="146" text-anchor="middle" font-size="13" fill="#555">3</text>
+<rect x="280" y="100" width="30" height="28" fill="#ffd27f" stroke="#555" stroke-width="1"/>
+<text x="295.0" y="120" text-anchor="middle" fill="#222" font-weight="bold">1</text>
+<text x="295.0" y="146" text-anchor="middle" font-size="13" fill="#555">2</text>
+<rect x="310" y="100" width="30" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="325.0" y="120" text-anchor="middle" fill="#222">0</text>
+<text x="325.0" y="146" text-anchor="middle" font-size="13" fill="#555">1</text>
+<rect x="340" y="100" width="30" height="28" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="355.0" y="120" text-anchor="middle" fill="#222">0</text>
+<text x="355.0" y="146" text-anchor="middle" font-size="13" fill="#555">0</text>
+<path d="M21 92 V86 H248 V92" fill="none" stroke="#333" stroke-width="1.5"/>
+<text x="135.0" y="78" text-anchor="middle" font-size="13" fill="#222">countl_zero = 28（上から続く 0）</text>
+<path d="M252 92 V86 H369 V92" fill="none" stroke="#333" stroke-width="1.5"/>
+<text x="310.0" y="78" text-anchor="middle" font-size="14" fill="#222">bit_width = 4</text>
+<path d="M311 154 V160 H369 V154" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="4 3"/>
+<line x1="340.0" y1="161" x2="340.0" y2="208" stroke="#333" stroke-width="1.2"/>
+<text x="370" y="224" text-anchor="end" font-size="14" fill="#222">countr_zero = 2（下から続く 0。破線）</text>
+<path d="M265 130 L235 176" stroke="#333" stroke-width="1.2" fill="none"/>
+<text x="16" y="192" font-size="14" fill="#222">popcount = 2（色を塗った太字の 1 の個数）</text>
 </svg>

@@ -101,6 +101,7 @@ difficulty 2000〜2399 の帯で主に必要になるページ（37 ページ）
 | 経路上の上位 K 個（K 番目を固定して状態に） | [グリッド上の DP](../dp/dp-grid.md#top-k-on-path)（水） | 動的計画法 |
 | LCS の値ごとに数える：DP の DP（内側の DP の 1 行を外側の状態にする） | [最長共通部分列と編集距離](../dp/lcs.md#dp-of-dp)（水） | 動的計画法 |
 | 素数の使用状況を集合で持つ | [bitDP](../dp/bit-dp.md#primes)（水） | 動的計画法 |
+| 高速ゼータ変換との使い分け | [部分集合を列挙する DP](../dp/subset-enumeration-dp.md#vs-zeta)（青） | 動的計画法 |
 | 二分探索と組み合わせて判定にする | [木 DP](../dp/tree-dp.md#with-binary-search)（水） | 動的計画法 |
 | 部分木の情報をデータ構造で持ってマージする（マージテク） | [木 DP](../dp/tree-dp.md#tree-dp-merge)（水） | 動的計画法 |
 | 単調スタックと組み合わせる | [インライン DP](../dp/inline-dp.md#with-monotonic-stack)（青） | 動的計画法 |
@@ -108,7 +109,7 @@ difficulty 2000〜2399 の帯で主に必要になるページ（37 ページ）
 | 多数の 2 点の質問：成分にクエリを持たせて小さい方から移す | [最小ボトルネック路](../graph/bottleneck-path.md#many-queries)（青） | グラフ |
 | DFS 木をたどって偶奇を合わせる | [DFS 木・BFS 木とグラフの構築](../graph/graph-construction.md#parity-walk)（青） | グラフ |
 | 三角形の列挙（次数の小さい方から向き付ける） | [次数による平方分割](../graph/degree-sqrt.md#triangles)（青） | グラフ |
-| 4-サイクルの検出（鳩の巣原理で打ち切る） | [次数による平方分割](../graph/degree-sqrt.md#four-cycles)（青） | グラフ |
+| 長さ 4 の閉路の検出（鳩の巣原理で打ち切る） | [次数による平方分割](../graph/degree-sqrt.md#four-cycles)（青） | グラフ |
 | 中心と半径・直径の個数 | [木の直径と最遠点](../tree/tree-diameter.md#center)（水） | 木 |
 | 長鎖分解（最も深い子へつなぐ分解と、最も遠い葉を順に選ぶ貪欲） | [木の直径と最遠点](../tree/tree-diameter.md#long-path-decomposition)（水） | 木 |
 | 期待値・特定の色を通らないパスへの応用 | [辺で切って数える](../tree/tree-edge-contribution.md#expectation)（水） | 木 |

@@ -50,7 +50,8 @@ mod の計算は、本当の答えが巨大になる問題で、答えそのも�
 
 $m$ で割った余りが等しい 2 数を「$m$ を法として[合同](../guide/glossary.md#congruence)」と言い、$a \equiv b \pmod{m}$ と書く。余りだけを見るのは、数直線を長さ $m$ の輪に巻きつけて、同じ位置に来る数を同じとみなすことである。
 
-![左は 0 から 6 を時計のように並べた輪で、内側に 7〜13 と 14〜20 を書き、9 と 16 が 2 と同じ位置にあることを示す。右は 5 から時計回りに 4 歩進むと 2 に着き、5 + 4 = 9 の余りが 2 であることを示す](../img/mod-arithmetic/clock.svg)
+![0 から 6 を時計のように並べた輪で、内側に 7〜13 と 14〜20 を書き、9 と 16 が 2 と同じ位置にあることを示す](../img/mod-arithmetic/clock-congruence.svg)
+![同じ輪で、5 から時計回りに 4 歩進むと 2 に着き、5 + 4 = 9 の余りが 2 であることを示す](../img/mod-arithmetic/clock-addition.svg)
 
 足し算は輪の上で時計回りに進むことなので、出発点を同じ位置の別の数に取り替えても着く位置は変わらない。式で言うと、$a \equiv a'$ かつ $b \equiv b' \pmod{m}$ なら次が成り立つ。
 
@@ -182,12 +183,14 @@ $10^{18}$ の数の積は 64bit に収まらないが、足し算・引き算・
 
 <div class="kp-problems" data-role="practice" markdown>
 
+- [ABC266 B. Modulo Number](https://atcoder.jp/contests/abc266/tasks/abc266_b)（diff 95）：|N| ≤ 10^18 の負もありうる N について、N − x が 998244353 の倍数になる 0 以上 998244353 未満の x を求める。
 - [ABC055 B. Training Camp](https://atcoder.jp/contests/abc055/tasks/abc055_b)（diff 332）：N!（N ≤ 10^5）を 10^9+7 で割った余りを求める。
 - [ARC111 A. Simple Math 2](https://atcoder.jp/contests/arc111/tasks/arc111_a)（diff 1146）：⌊10^N / M⌋ を M で割った余りを求める（N ≤ 10^18、M ≤ 10^4）。
 
 </div>
 
 ??? note "練習の方針"
+    - **ABC266 B**：C++ の `N % 998244353` は $N$ が負のとき負の値（$-998244352$ 以上 0 以下）を返す。負なら $998244353$ を足して 0 以上に直す（[引き算の節](#negative)）
     - **ABC055 B**：1 から $N$ まで順に掛け、掛けるたびに $10^9 + 7$ で割った余りを取る。途中の値は $10^9 + 7$ 未満なので、次の掛け算も `long long` に収まる
     - **ARC111 A**：$\lfloor 10^N / M \rfloor \bmod M$ は割り算を含むので、$10^N \bmod M$ からは求まらない。法を $M^2$ に広げ、$R = 10^N \bmod M^2$ とすると答えは $\lfloor R / M \rfloor$ になる。$10^N = M^2 Q + R$ と書くと、$\lfloor 10^N / M \rfloor = MQ + \lfloor R / M \rfloor$ だからである。$R$ は[繰り返し二乗法](../math/mod-pow.md)で求め、$M^2 \le 10^8$ なので積は `long long` に収まる
 

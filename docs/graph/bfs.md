@@ -162,6 +162,14 @@ BFS が使えるのは、すべての辺の重みが等しいときだけであ�
 
 **状態ごとに印を持たない**。「向き」や「壁を壊した回数」のように位置以外の情報で次の動きが変わるときは、位置だけで印を付けると、別の状態で来た経路を捨ててしまう。$\mathrm{dist}$ を（位置, 状態）の組ごとに持つ（[状態を頂点にする](../graph/extended-dijkstra.md#choose-state)）。
 
+## 上位の手法へのつながり {#next-steps}
+
+- **重みが 0 と 1 だけ**：deque の前と後ろに入れ分けると、BFS と同じ $O(N + M)$ で最短路が求まる（[01-BFS](../graph/zero-one-bfs.md)）。重みが一般の非負の値なら[ダイクストラ法](../graph/dijkstra.md)を使う。
+- **頂点だけでは状況が決まらない**：鍵を持っているか・向き・使った回数などを頂点に足し、状態のグラフで BFS する（[状態を頂点にする](../graph/extended-dijkstra.md)）。
+- **最短路の数・最短路に乗る辺**：$\mathrm{dist}[v] = \mathrm{dist}[u] + 1$ を満たす辺だけを残すと DAG になり、その上で数えたり判定したりできる（[最短路 DAG](../graph/shortest-path-dag.md)）。
+- **辺が「ない」組で与えられる**：補グラフの辺を張らずに、未訪問の頂点の集合から取り出しながら BFS する（[補グラフ上の BFS](../graph/complement-graph-bfs.md)）。
+- **盤面の移動**：マスを頂点にした BFS の書き方と、巨大なグリッドの扱いは[グリッドグラフ](../graph/grid-graph.md)にまとめてある。
+
 ## 使い分け {#comparison}
 
 - 届くかどうか・連結成分だけなら、BFS でも深さ優先探索でもよい。辺を後から足すだけなら [Union-Find で連結性を扱う](../graph/union-find-connectivity.md)

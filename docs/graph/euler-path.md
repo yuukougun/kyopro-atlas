@@ -227,7 +227,7 @@ $\mathrm{ptr}[v]$ を持たずに毎回隣接リストの先頭から未使用�
 | すべての頂点をちょうど 1 回ずつ通る | [bitDP](../dp/bit-dp.md#tsp)（$N$ が小さいとき） |
 | 有向グラフのオイラー閉路の個数を数える | BEST 定理（[行列木定理](../graph/matrix-tree-theorem.md#best-theorem)） |
 | 木の頂点を DFS の順に並べて部分木を区間にする | [オイラーツアー](../tree/euler-tour.md) |
-| 自由に通れる辺がある・グラフを作り直す | [グラフの作り方](../graph/graph-modeling.md#contraction)・[連結成分](../graph/connected-components.md) |
+| 自由に通れる辺がある・グラフを作り直す | [グラフへの帰着](../graph/graph-modeling.md#contraction)・[連結成分](../graph/connected-components.md) |
 
 ## 参考 {#references}
 

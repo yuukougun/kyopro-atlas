@@ -9,7 +9,7 @@ order: 100
 level: 発展
 kind: [DP, 数え上げ]
 prerequisites: [bit-dp, inclusion-exclusion]
-related: [small-graph-brute-force, konig-theorem, meet-in-the-middle, bipartite-graph]
+related: [small-graph-brute-force, konig-theorem, meet-in-the-middle, bipartite-graph, subset-enumeration-dp]
 summary: 一般グラフの彩色数・最大独立集合・最大クリークは NP 困難で、彩色数は包除原理で O(2^N N)、最大独立集合は N ≤ 40 程度なら分枝や半分全列挙で求める。二部グラフなら易しい。
 complexity: 彩色数 O(2^N N)、最大独立集合・最大クリーク O(2^(N/2))（半分全列挙）または分枝でおよそ O(1.38^N)
 signs:

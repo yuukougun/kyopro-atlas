@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 702 324" width="702" height="324" font-family="sans-serif">
-<rect x="0" y="0" width="702" height="324" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 990" width="256" height="990" font-family="sans-serif">
+<rect x="0" y="0" width="256" height="990" fill="#ffffff"/>
 <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker></defs>
+<g transform="translate(6,0)">
 <text x="127.0" y="30" font-size="17" text-anchor="middle" fill="#222">f（すべて 1）</text>
 <text x="69.0" y="62" font-size="13" text-anchor="middle" fill="#555">2^0</text>
 <text x="127.0" y="62" font-size="13" text-anchor="middle" fill="#555">2^1</text>
@@ -36,6 +37,9 @@
 <text x="161" y="201" font-size="12" fill="#666">n=36</text>
 <text x="185.0" y="228.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#111">1</text>
 <text x="127.0" y="292" font-size="14" text-anchor="middle" fill="#222">横は 2 の指数、縦は 3 の指数</text>
+</g>
+<line x1="8" y1="330" x2="248" y2="330" stroke="#ddd"/>
+<g transform="translate(-218,330)">
 <text x="351.0" y="30" font-size="17" text-anchor="middle" fill="#222">素数 2 の段の後</text>
 <text x="293.0" y="62" font-size="13" text-anchor="middle" fill="#555">2^0</text>
 <text x="351.0" y="62" font-size="13" text-anchor="middle" fill="#555">2^1</text>
@@ -73,6 +77,9 @@
 <line x1="272" y1="266" x2="430" y2="266" stroke="#c0392b" stroke-width="2.5" marker-end="url(#ar)"/>
 <text x="351.0" y="292" font-size="14" text-anchor="middle" fill="#222">左から右へ足す</text>
 <text x="351.0" y="312" font-size="14" text-anchor="middle" fill="#222">v[2i] += v[i]</text>
+</g>
+<line x1="8" y1="660" x2="248" y2="660" stroke="#ddd"/>
+<g transform="translate(-442,660)">
 <text x="565.0" y="30" font-size="17" text-anchor="middle" fill="#222">素数 3 の段の後</text>
 <text x="507.0" y="62" font-size="13" text-anchor="middle" fill="#555">2^0</text>
 <text x="565.0" y="62" font-size="13" text-anchor="middle" fill="#555">2^1</text>
@@ -110,4 +117,5 @@
 <line x1="662" y1="78" x2="662" y2="236" stroke="#c0392b" stroke-width="2.5" stroke-dasharray="6 3" marker-end="url(#ar)"/>
 <text x="565.0" y="292" font-size="14" text-anchor="middle" fill="#222">上から下へ足す</text>
 <text x="565.0" y="312" font-size="14" text-anchor="middle" fill="#222">v[3i] += v[i]（約数の個数になる）</text>
+</g>
 </svg>

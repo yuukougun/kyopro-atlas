@@ -1,65 +1,65 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 340" width="760" height="340" font-family="sans-serif">
-<rect x="0" y="0" width="760" height="340" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 384" width="400" height="384" font-family="sans-serif">
+<rect x="0" y="0" width="400" height="384" fill="#ffffff"/>
 <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#333"/></marker></defs>
-<text x="12" y="92" font-size="15" fill="#333">レベル 2</text>
-<text x="12" y="110" font-size="15" fill="#555">rec(2, 10)</text>
-<path d="M153 68 V58 H191 V68" fill="none" stroke="#555" stroke-width="1.5"/>
-<text x="172.0" y="52" font-size="15" text-anchor="middle" fill="#333">B</text>
-<path d="M197 68 V58 H411 V68" fill="none" stroke="#555" stroke-width="1.5"/>
-<text x="304.0" y="52" font-size="15" text-anchor="middle" fill="#333">レベル 1：+3</text>
-<path d="M417 68 V58 H455 V68" fill="none" stroke="#555" stroke-width="1.5"/>
-<text x="436.0" y="52" font-size="15" text-anchor="middle" fill="#333">P：+1</text>
-<path d="M461 68 V58 H675 V68" fill="none" stroke="#555" stroke-width="1.5"/>
-<text x="568.0" y="52" font-size="15" text-anchor="middle" fill="#333">レベル 1 へ</text>
-<path d="M681 68 V58 H719 V68" fill="none" stroke="#555" stroke-width="1.5"/>
-<text x="700.0" y="52" font-size="15" text-anchor="middle" fill="#333">B</text>
-<rect x="150" y="72" width="44" height="36" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
-<text x="172.0" y="96" font-size="16" text-anchor="middle" fill="#111">B</text>
-<rect x="194" y="72" width="44" height="36" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
-<text x="216.0" y="96" font-size="16" text-anchor="middle" fill="#111">B</text>
-<rect x="238" y="72" width="44" height="36" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
-<text x="260.0" y="96" font-size="16" text-anchor="middle" fill="#111">P</text>
-<rect x="282" y="72" width="44" height="36" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
-<text x="304.0" y="96" font-size="16" text-anchor="middle" fill="#111">P</text>
-<rect x="326" y="72" width="44" height="36" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
-<text x="348.0" y="96" font-size="16" text-anchor="middle" fill="#111">P</text>
-<rect x="370" y="72" width="44" height="36" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
-<text x="392.0" y="96" font-size="16" text-anchor="middle" fill="#111">B</text>
-<rect x="414" y="72" width="44" height="36" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
-<text x="436.0" y="96" font-size="16" text-anchor="middle" fill="#111">P</text>
-<rect x="458" y="72" width="44" height="36" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
-<text x="480.0" y="96" font-size="16" text-anchor="middle" fill="#111">B</text>
-<rect x="502" y="72" width="44" height="36" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
-<text x="524.0" y="96" font-size="16" text-anchor="middle" fill="#111">P</text>
-<rect x="546" y="72" width="44" height="36" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
-<text x="568.0" y="96" font-size="16" text-anchor="middle" fill="#111">P</text>
-<rect x="590" y="72" width="44" height="36" fill="#ffffff" stroke="#333" stroke-width="1.5" stroke-dasharray="4 3"/>
-<text x="612.0" y="96" font-size="16" text-anchor="middle" fill="#111">P</text>
-<rect x="634" y="72" width="44" height="36" fill="#ffffff" stroke="#333" stroke-width="1.5" stroke-dasharray="4 3"/>
-<text x="656.0" y="96" font-size="16" text-anchor="middle" fill="#111">B</text>
-<rect x="678" y="72" width="44" height="36" fill="#ffffff" stroke="#333" stroke-width="1.5" stroke-dasharray="4 3"/>
-<text x="700.0" y="96" font-size="16" text-anchor="middle" fill="#111">B</text>
-<text x="150" y="135" font-size="15" fill="#333">下から 10 枚（塗った部分）。残り x = 10 − 1 − 5 − 1 = 3 で上のレベル 1 に入る</text>
-<line x1="568.0" y1="145" x2="420.0" y2="180" stroke="#333" stroke-width="1.5" marker-end="url(#ar)"/>
-<text x="12" y="262" font-size="15" fill="#333">レベル 1</text>
-<text x="12" y="282" font-size="15" fill="#555">rec(1, 3)</text>
-<path d="M173 238 V228 H257 V238" fill="none" stroke="#555" stroke-width="1.5"/>
-<text x="215.0" y="222" font-size="15" text-anchor="middle" fill="#333">B</text>
-<rect x="170" y="242" width="90" height="36" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
-<text x="215.0" y="266" font-size="16" text-anchor="middle" fill="#111">B</text>
-<path d="M263 238 V228 H347 V238" fill="none" stroke="#555" stroke-width="1.5"/>
-<text x="305.0" y="204" font-size="15" text-anchor="middle" fill="#333">レベル 0</text>
-<text x="305.0" y="222" font-size="15" text-anchor="middle" fill="#333">+1</text>
-<rect x="260" y="242" width="90" height="36" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
-<text x="305.0" y="266" font-size="16" text-anchor="middle" fill="#111">P</text>
-<path d="M353 238 V228 H437 V238" fill="none" stroke="#555" stroke-width="1.5"/>
-<text x="395.0" y="204" font-size="15" text-anchor="middle" fill="#333">P</text>
-<text x="395.0" y="222" font-size="15" text-anchor="middle" fill="#333">+1</text>
-<rect x="350" y="242" width="90" height="36" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
-<text x="395.0" y="266" font-size="16" text-anchor="middle" fill="#111">P</text>
-<rect x="440" y="242" width="90" height="36" fill="#ffffff" stroke="#333" stroke-width="1.5" stroke-dasharray="4 3"/>
-<text x="485.0" y="266" font-size="16" text-anchor="middle" fill="#111">P</text>
-<rect x="530" y="242" width="90" height="36" fill="#ffffff" stroke="#333" stroke-width="1.5" stroke-dasharray="4 3"/>
-<text x="575.0" y="266" font-size="16" text-anchor="middle" fill="#111">B</text>
-<text x="150" y="318" font-size="15" fill="#333">x が尽きたので止まる。答え 3 + 1 + 1 + 1 = 6（各レベルで降りる先は 1 つだけ）</text>
+<text x="16" y="22" font-size="15" fill="#333">レベル 2：rec(2, 10)</text>
+<path d="M21 88 V78 H43 V88" fill="none" stroke="#555" stroke-width="1.5"/>
+<text x="32" y="52" font-size="14" text-anchor="middle" fill="#333">B</text>
+<path d="M49 88 V78 H183 V88" fill="none" stroke="#555" stroke-width="1.5"/>
+<text x="116" y="72" font-size="14" text-anchor="middle" fill="#333">レベル 1：+3</text>
+<path d="M189 88 V78 H211 V88" fill="none" stroke="#555" stroke-width="1.5"/>
+<text x="200" y="52" font-size="14" text-anchor="middle" fill="#333">P：+1</text>
+<path d="M217 88 V78 H351 V88" fill="none" stroke="#555" stroke-width="1.5"/>
+<text x="284" y="72" font-size="14" text-anchor="middle" fill="#333">レベル 1 へ</text>
+<path d="M357 88 V78 H379 V88" fill="none" stroke="#555" stroke-width="1.5"/>
+<text x="368" y="52" font-size="14" text-anchor="middle" fill="#333">B</text>
+<rect x="18" y="92" width="28" height="32" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
+<text x="32" y="114" font-size="15" text-anchor="middle" fill="#111">B</text>
+<rect x="46" y="92" width="28" height="32" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
+<text x="60" y="114" font-size="15" text-anchor="middle" fill="#111">B</text>
+<rect x="74" y="92" width="28" height="32" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
+<text x="88" y="114" font-size="15" text-anchor="middle" fill="#111">P</text>
+<rect x="102" y="92" width="28" height="32" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
+<text x="116" y="114" font-size="15" text-anchor="middle" fill="#111">P</text>
+<rect x="130" y="92" width="28" height="32" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
+<text x="144" y="114" font-size="15" text-anchor="middle" fill="#111">P</text>
+<rect x="158" y="92" width="28" height="32" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
+<text x="172" y="114" font-size="15" text-anchor="middle" fill="#111">B</text>
+<rect x="186" y="92" width="28" height="32" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
+<text x="200" y="114" font-size="15" text-anchor="middle" fill="#111">P</text>
+<rect x="214" y="92" width="28" height="32" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
+<text x="228" y="114" font-size="15" text-anchor="middle" fill="#111">B</text>
+<rect x="242" y="92" width="28" height="32" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
+<text x="256" y="114" font-size="15" text-anchor="middle" fill="#111">P</text>
+<rect x="270" y="92" width="28" height="32" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
+<text x="284" y="114" font-size="15" text-anchor="middle" fill="#111">P</text>
+<rect x="298" y="92" width="28" height="32" fill="#ffffff" stroke="#333" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="312" y="114" font-size="15" text-anchor="middle" fill="#111">P</text>
+<rect x="326" y="92" width="28" height="32" fill="#ffffff" stroke="#333" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="340" y="114" font-size="15" text-anchor="middle" fill="#111">B</text>
+<rect x="354" y="92" width="28" height="32" fill="#ffffff" stroke="#333" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="368" y="114" font-size="15" text-anchor="middle" fill="#111">B</text>
+<text x="16" y="148" font-size="14" fill="#333">下から 10 枚（塗った部分）。残り</text>
+<text x="16" y="168" font-size="14" fill="#333">x = 10 − 1 − 5 − 1 = 3 で上のレベル 1 に入る</text>
+<line x1="284" y1="178" x2="234" y2="206" stroke="#333" stroke-width="1.5" marker-end="url(#ar)"/>
+<text x="16" y="222" font-size="15" fill="#333">レベル 1：rec(1, 3)</text>
+<path d="M21 286 V276 H71 V286" fill="none" stroke="#555" stroke-width="1.5"/>
+<text x="46" y="270" font-size="14" text-anchor="middle" fill="#333">B</text>
+<path d="M77 286 V276 H127 V286" fill="none" stroke="#555" stroke-width="1.5"/>
+<text x="102" y="252" font-size="14" text-anchor="middle" fill="#333">レベル 0</text>
+<text x="102" y="270" font-size="14" text-anchor="middle" fill="#333">+1</text>
+<path d="M133 286 V276 H183 V286" fill="none" stroke="#555" stroke-width="1.5"/>
+<text x="158" y="252" font-size="14" text-anchor="middle" fill="#333">P</text>
+<text x="158" y="270" font-size="14" text-anchor="middle" fill="#333">+1</text>
+<rect x="18" y="290" width="56" height="32" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
+<text x="46" y="312" font-size="15" text-anchor="middle" fill="#111">B</text>
+<rect x="74" y="290" width="56" height="32" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
+<text x="102" y="312" font-size="15" text-anchor="middle" fill="#111">P</text>
+<rect x="130" y="290" width="56" height="32" fill="#cfe3ff" stroke="#333" stroke-width="1.5"/>
+<text x="158" y="312" font-size="15" text-anchor="middle" fill="#111">P</text>
+<rect x="186" y="290" width="56" height="32" fill="#ffffff" stroke="#333" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="214" y="312" font-size="15" text-anchor="middle" fill="#111">P</text>
+<rect x="242" y="290" width="56" height="32" fill="#ffffff" stroke="#333" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="270" y="312" font-size="15" text-anchor="middle" fill="#111">B</text>
+<text x="16" y="350" font-size="14" fill="#333">x が尽きたので止まる。答え 3 + 1 + 1 + 1 = 6</text>
+<text x="16" y="370" font-size="14" fill="#333">（各レベルで降りる先は 1 つだけ）</text>
 </svg>

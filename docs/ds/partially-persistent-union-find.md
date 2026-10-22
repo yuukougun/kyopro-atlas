@@ -21,6 +21,7 @@ frequency: C
 frequency_evidence: recent 0・前提として届くページなし・古い ABC 0 問
 sections:
   - {title: 何ができるか（過去の時刻での find）, anchor: what-it-does}
+  - {title: 自作するときの要点と Library Checker, anchor: library}
   - {title: なぜ経路圧縮をしないのか, anchor: no-path-compression}
   - {title: 時刻の二分探索で「初めて連結になる時刻」を求める, anchor: binary-search-time}
   - {title: 代わりの手（並列二分探索・併合過程の木（Kruskal 再構築木））, anchor: alternatives}
@@ -62,6 +63,8 @@ updated: 2026-10-22
 ![今の森は 1 を根とし、2・3・5 が子、4 が 3 の子。辺に子が根でなくなった時刻 1・3・4・2 を書いてある。頂点 4 から時刻 2 の根を求めると、時刻 2 の辺だけを登って 3 で止まる](../img/partially-persistent-union-find/find-at-time.svg)
 
 時刻 $t$ の根が「$\mathrm{tm}$ が $t$ を超える最初の頂点」で求まるのは、根へ向かう道の上で $\mathrm{tm}$ が真に増えていくからである。$y$ を $x$ の下につないだ時刻 $s$ には $x$ は根なので、$x$ が根でなくなるのは $s$ より後である。だから $\mathrm{tm}[y] < \mathrm{tm}[x]$ で、道を登るほど時刻は大きくなる。時刻 $t$ の森は、今の森から時刻 $t$ より後の辺を切ったものにほかならない。
+
+## 自作するときの要点と Library Checker {#library}
 
 自作するときの要点は次の 4 つである。完全なプログラムは `snippets/partially-persistent-union-find/usage.cpp` にある。
 
@@ -111,8 +114,13 @@ $x$ と $y$ が同じ集合かどうかは、時刻について[単調](../guide
 
 部分永続 Union-Find は、クエリを先に読まなくてよく（オンライン）、普通の Union-Find に 2 つの配列を足すだけで書ける。一方、使えるのは「最新の状態だけを更新し、過去を読む」場合だけである。
 
-- 操作を直前から順に取り消すだけなら、[Undo 可能 Union-Find](../ds/rollback-union-find.md#what-it-does) で足りる。
+- 操作を直前から順に取り消すだけなら、[ロールバックできる Union-Find](../ds/rollback-union-find.md#what-it-does) で足りる。
 - 過去の版から枝分かれして併合する（完全永続）なら、部分永続では足りない。オフラインなら版の木を DFS し、入るとき併合し、出るとき取り消す（[永続データ構造](../ds/persistent-data-structures.md#offline-version-tree)）。Library Checker の [Persistent UnionFind](https://judge.yosupo.jp/problem/persistent_unionfind) はこの方法で解ける。オンラインで答えるには、$\mathrm{par}$ を永続配列で持つ完全永続の Union-Find が要る（1 回 $O(\log^2 N)$）。
+
+## 学ぶための資料 {#resources}
+
+- noshi91 氏の Union-Find の知見をまとめた記事：union by size だけでも $O(\log N)$ になること、部分永続は効率よく作れるが完全永続は $O(\log^2 N)$ ほどかかることを、Union-Find の変形の一覧の中で説明している
+- drken 氏の CODE THANKS FESTIVAL 2017 H の解説記事：根でなくなった時刻と大きさの履歴を持つ実装を、問題に沿って示している
 
 ## 例題 {#examples}
 
@@ -153,7 +161,7 @@ $x$ と $y$ が同じ集合かどうかは、時刻について[単調](../guide
 
 ## 参考 {#references}
 
-- [noshi91「UnionFindTree に関する知見の諸々」](https://noshi91.hatenablog.com/entry/2018/05/30/191943)：union by size だけでも $O(\log N)$ になること、部分永続は効率よく作れるが完全永続は $O(\log^2 N)$ ほどかかること（学ぶための資料）
-- [drken「CODE THANKS FESTIVAL 2017 H - Union Sets (3D, 600 点)」](https://drken1215.hatenablog.com/entry/2018/09/15/193740)：例題の問いの確認と、根でなくなった時刻と大きさの履歴を持つ実装（学ぶための資料）
+- [noshi91「UnionFindTree に関する知見の諸々」](https://noshi91.hatenablog.com/entry/2018/05/30/191943)：union by size だけでも $O(\log N)$ になること、部分永続は効率よく作れるが完全永続は $O(\log^2 N)$ ほどかかること
+- [drken「CODE THANKS FESTIVAL 2017 H - Union Sets (3D, 600 点)」](https://drken1215.hatenablog.com/entry/2018/09/15/193740)：例題の問いの確認と、根でなくなった時刻と大きさの履歴を持つ実装
 - [drken「AtCoder AGC 002 D - Stamp Rally (橙色, 1000 点)」](https://drken1215.hatenablog.com/entry/2018/09/15/193722)：練習の問題の部分永続 Union-Find と並列二分探索の 2 つの解法
 - [Library Checker「Persistent UnionFind」](https://judge.yosupo.jp/problem/persistent_unionfind)：完全永続の Union-Find の問題の内容

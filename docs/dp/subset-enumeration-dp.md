@@ -24,7 +24,7 @@ sections:
   - {title: 3^N になる理由（各要素が 3 通り）, anchor: why-3n}
   - {title: 最小の要素を含むグループから決める（順序の重複を除く）, anchor: fix-minimum}
   - {title: グループの数を状態に足す, anchor: group-count}
-  - {title: 高速ゼータ変換との使い分け, anchor: vs-zeta}
+  - {title: 高速ゼータ変換との使い分け, anchor: vs-zeta, level: 黄}
 stage: draft
 updated: 2026-10-21
 ---
@@ -149,7 +149,7 @@ $\mathrm{dp}[j][S]$ は $\lvert S \rvert < j$ のとき使えない。これを�
 
 ## 高速ゼータ変換との使い分け {#vs-zeta}
 
-この節は[高速ゼータ変換](../comb/zeta-mobius-subset.md)を前提にする。どちらも「部分集合をすべて見る」計算なので混同しやすいが、求めるものが違う。
+この節は黄の内容である。前提として[高速ゼータ変換](../comb/zeta-mobius-subset.md)を使う。どちらも「部分集合をすべて見る」計算なので混同しやすいが、求めるものが違う。
 
 - **高速ゼータ変換**：決まった値 $f$ について $g(S) = \sum_{T \subseteq S} f(T)$ を全部の $S$ で求める。右辺に $g$ 自身が出てこないので、bit を 1 つずつ足し込む方法で $O(2^N N)$ になる
 - **部分集合を列挙する DP**：$\mathrm{dp}[S]$ の式の右辺に $\mathrm{dp}[S \setminus T]$ が出てくる。$f(T)$ と $\mathrm{dp}[S \setminus T]$ の両方が $T$ に依存するので、素直には $T$ ごとに組を作って試すことになり、$O(3^N)$ になる（速くする道具は下に述べる）
@@ -210,12 +210,14 @@ $\mathrm{dp}[j][S]$ は $\lvert S \rvert < j$ のとき使えない。これを�
 
 - [ABC310 D. Peaceful Teams](https://atcoder.jp/contests/abc310/tasks/abc310_d)（diff 1368）：N ≤ 10 人を T 個のチームに分ける方法のうち、仲の悪い組が同じチームにならないものの数を求める。
 - [典型90 045. Simple Grouping（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_as)（diff —）：平面上の N 点を K 個のグループに分け、各グループ内の 2 点間の距離の最大の、全グループでの最大を最小化する。
+- [ABC332 E. Lucky bag](https://atcoder.jp/contests/abc332/tasks/abc332_e)（diff 1883）：N ≤ 15 個の品物を D 個の袋に分け（空の袋も許す）、袋ごとの重さの分散を最小にする。
 
 </div>
 
 ??? note "方針"
     - **ABC310 D**：仲の悪い組を含まない集合を前計算し、$\mathrm{dp}[j][S]$ ＝「$S$ をちょうど $j$ 個のチームに分ける方法の数」を最小の要素を含むチームから数える。$N \le 10$ なので、最小番号の人から入るチームを決める全列挙（[組分け型の再帰](../basics/recursive-enumeration.md#partition)）でも解ける
     - **典型90 045**：各部分集合の中の 2 点間の距離の最大（2 乗のまま比べてよい）を前計算し、$\mathrm{dp}[j][S]$ ＝「$S$ を $j$ 個に分けたときの、グループの値の最大の最小」とする。遷移は $\max(f(T), \mathrm{dp}[j - 1][S \setminus T])$ の最小で、[グループの数の節](#group-count)のコードと同じ形である
+    - **ABC332 E**：重さの平均は分け方によらず全体の和 $\div D$ に決まるので、分散の最小は袋の重さの 2 乗の和の最小に直せる。$\mathrm{dp}[j][S]$ ＝「$S$ を $j$ 個の袋に入れたときの 2 乗の和の最小」とし、$j$ 個目の袋に入れる部分集合 $T \subseteq S$（空も許す）を列挙する。最小値を求めるだけなので、袋の順序による重複は気にしなくてよく、最小の要素の固定は要らない。全体 $O(D \cdot 3^N)$
 
 ## 力試し {#challenge}
 

@@ -133,7 +133,7 @@ $r = 3$ で値 1 が再び現れ、1 は位置 0 から位置 2 へ移る。$r =
 
 先読みが要るのは、手順 1 で「最後まで削除されない辺」を知るためである。答えは後ろから求まるので、元の順に戻すのを忘れない。
 
-Union-Find での使い方と、質問の時点のずれ（削除の前に答えるのか後に答えるのか）は、[Union-Find と連結性](../graph/union-find-connectivity.md)で扱う。削除以外にも、「最後に塗った色が残る」のように後ろから見ると決まる問題は[逆から考える](../thinking/reverse-thinking.md)にまとめる。
+Union-Find での使い方と、質問の時点のずれ（削除の前に答えるのか後に答えるのか）は、[Union-Find で連結性を扱う](../graph/union-find-connectivity.md)にある。削除以外にも、「最後に塗った色が残る」のように後ろから見ると決まる問題は[逆から考える](../thinking/reverse-thinking.md)にまとめる。
 
 ## 答えを 2 時点の差に分ける {#difference-of-times}
 

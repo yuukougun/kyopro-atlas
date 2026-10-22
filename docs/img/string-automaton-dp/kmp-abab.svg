@@ -23,28 +23,28 @@
   <text x="300" y="248" text-anchor="middle" font-family="monospace" font-size="17">a</text>
   <circle cx="100" cy="140" r="28" fill="#e8f0fe" stroke="#1a56c4" stroke-width="2"/>
   <text x="100" y="138" text-anchor="middle" font-size="18" font-weight="bold" fill="#000">0</text>
-  <text x="100" y="156" text-anchor="middle" font-family="monospace" font-size="14" fill="#000">""</text>
+  <text x="100" y="156" text-anchor="middle" font-family="monospace" font-size="16" fill="#000">""</text>
   <circle cx="200" cy="140" r="28" fill="#e8f0fe" stroke="#1a56c4" stroke-width="2"/>
   <text x="200" y="138" text-anchor="middle" font-size="18" font-weight="bold" fill="#000">1</text>
-  <text x="200" y="156" text-anchor="middle" font-family="monospace" font-size="14" fill="#000">a</text>
+  <text x="200" y="156" text-anchor="middle" font-family="monospace" font-size="16" fill="#000">a</text>
   <circle cx="300" cy="140" r="28" fill="#e8f0fe" stroke="#1a56c4" stroke-width="2"/>
   <text x="300" y="138" text-anchor="middle" font-size="18" font-weight="bold" fill="#000">2</text>
-  <text x="300" y="156" text-anchor="middle" font-family="monospace" font-size="14" fill="#000">ab</text>
+  <text x="300" y="156" text-anchor="middle" font-family="monospace" font-size="16" fill="#000">ab</text>
   <circle cx="400" cy="140" r="28" fill="#e8f0fe" stroke="#1a56c4" stroke-width="2"/>
   <text x="400" y="138" text-anchor="middle" font-size="18" font-weight="bold" fill="#000">3</text>
-  <text x="400" y="156" text-anchor="middle" font-family="monospace" font-size="14" fill="#000">aba</text>
+  <text x="400" y="156" text-anchor="middle" font-family="monospace" font-size="16" fill="#000">aba</text>
   <circle cx="500" cy="140" r="28" fill="#fdecea" stroke="#c0392b" stroke-width="2" stroke-dasharray="6 4"/>
   <text x="500" y="138" text-anchor="middle" font-size="18" font-weight="bold" fill="#c0392b">4</text>
-  <text x="500" y="156" text-anchor="middle" font-family="monospace" font-size="14" fill="#c0392b">abab</text>
-  <text x="500" y="190" text-anchor="middle" font-size="14" fill="#c0392b">含んだ：捨てる</text>
+  <text x="500" y="156" text-anchor="middle" font-family="monospace" font-size="16" fill="#c0392b">abab</text>
+  <text x="500" y="190" text-anchor="middle" font-size="16" fill="#c0392b">含んだ：捨てる</text>
   <line x1="20" y1="290" x2="560" y2="290" stroke="#bbb"/>
-  <text x="20" y="314" font-size="15">dp[i][j]：長さ i で状態が j の文字列の数（abab を含まないもの）</text>
-  <text x="20" y="344" font-size="15" fill="#555">j =</text>
-  <text x="100" y="344" text-anchor="middle" font-size="15" fill="#555">0</text>
-  <text x="200" y="344" text-anchor="middle" font-size="15" fill="#555">1</text>
-  <text x="300" y="344" text-anchor="middle" font-size="15" fill="#555">2</text>
-  <text x="400" y="344" text-anchor="middle" font-size="15" fill="#555">3</text>
-  <text x="510" y="344" text-anchor="middle" font-size="15" fill="#555">和</text>
+  <text x="20" y="314" font-size="16">dp[i][j]：長さ i で状態が j の文字列の数（abab を含まないもの）</text>
+  <text x="20" y="344" font-size="16" fill="#555">j =</text>
+  <text x="100" y="344" text-anchor="middle" font-size="16" fill="#555">0</text>
+  <text x="200" y="344" text-anchor="middle" font-size="16" fill="#555">1</text>
+  <text x="300" y="344" text-anchor="middle" font-size="16" fill="#555">2</text>
+  <text x="400" y="344" text-anchor="middle" font-size="16" fill="#555">3</text>
+  <text x="510" y="344" text-anchor="middle" font-size="16" fill="#555">和</text>
   <line x1="20" y1="352" x2="560" y2="352" stroke="#ddd"/>
   <line x1="455" y1="326" x2="455" y2="410" stroke="#bbb"/>
   <text x="20" y="376" font-size="16">i = 3</text>

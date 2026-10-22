@@ -11,7 +11,7 @@ kind: [ビット演算, 考察]
 prerequisites: [bit-operations, contribution]
 related: [xor-basis, binary-trie, digit-dp, reformulation]
 summary: XOR・AND・OR の結果は bit ごとに独立に決まるので、bit ごとに 0 と 1 の個数を数えて 2^k を掛けて足す。最大化・最小化は上の bit から決め、繰り上がりで bit が干渉する足し算には使えない。
-complexity: 値が 2^B 未満のとき、bit ごとに数える集計は O(NB)、上位ビットで分ける再帰も O(NB)
+complexity: 値が 2^B 未満のとき、bit ごとに数える集計は O(NB)、上位 bit で分ける再帰も O(NB)
 signs:
   - {type: phrase, text: 全ペア・全区間の XOR の総和}
   - {type: phrase, text: AND・OR・XOR の最大化・最小化}
@@ -25,21 +25,21 @@ sections:
   - {title: bit ごとの寄与（0 の個数 × 1 の個数 × 2^k）, anchor: per-bit-contribution}
   - {title: 区間の XOR は累積 XOR の 0・1 の個数で, anchor: range-xor}
   - {title: 上の bit から決める貪欲（上限は桁 DP の考え方）, anchor: top-down}
-  - {title: 上位ビットで 2 つに分けて再帰する, anchor: split-by-top-bit, level: 青}
+  - {title: 上位 bit で 2 つに分けて再帰する, anchor: split-by-top-bit, level: 青}
   - {title: 足し算では使えない理由（繰り上がり）, anchor: addition}
 stage: draft
 updated: 2026-10-21
 ---
 
 !!! abstract "要点"
-    - **何ができるか**：XOR・AND・OR の結果の bit $k$ は、元の値の bit $k$ だけで決まる。だから bit ごとに 0 と 1 の個数を数え、bit $k$ の答えに $2^k$ を掛けて足せば、全ペア・全区間の集計が $O(N^2)$ から $O(NB)$ になる。値そのものの最大化・最小化は上の bit から決める。繰り上がりで bit どうしが干渉する足し算には、そのままでは使えない。
+    - **何ができるか**：全ペア・全区間の XOR・AND・OR の集計を、bit ごとに 0 と 1 の個数を数えて $O(N^2)$ から $O(NB)$ にする。XOR・AND・OR の結果の bit $k$ は元の値の bit $k$ だけで決まるので、bit $k$ ごとに求めた答えに $2^k$ を掛けて足せばよい。値そのものの最大化・最小化は上の bit から決める。繰り上がりで bit どうしが干渉する足し算には、そのままでは使えない。
     - **いつ使うか**：
         - 全ペア・全区間の XOR の総和を求める。
         - AND・OR・XOR の最大化・最小化。
         - $x$ を選んで $\max_i (a_i \oplus x)$ を最小化する。
         - $a + b = a \oplus b$（繰り上がりがない）という条件がある。
         - $A_i < 2^{30}$〜$2^{60}$ で、全ペア（$N \le 2 \times 10^5$）の値を集計する。
-    - **計算量**：値が $2^B$ 未満のとき、bit ごとに数える集計は $O(NB)$。上位ビットで 2 つに分ける再帰も $O(NB)$。$B$ は 30〜60 なので、$N = 2 \times 10^5$ でも $10^7$ 回程度で済む。
+    - **計算量**：値が $2^B$ 未満のとき、bit ごとに数える集計は $O(NB)$。上位 bit で 2 つに分ける再帰も $O(NB)$。$B$ は 30〜60 なので、$N = 2 \times 10^5$ でも $10^7$ 回程度で済む。
     - **前提**：[bit 演算の基本と XOR の性質](../basics/bit-operations.md)、[主客転倒・寄与](../thinking/contribution.md)
 
 <!-- textlint-disable -->
@@ -137,7 +137,7 @@ for d = B−1 から 0 まで:
     ??? success "答え"
         正しくない。$a = (4, 0, 0)$、$K = 4$ とする。bit 2 を 1 にすると寄与は $1 \cdot 4$ から $2 \cdot 4$ に増えるので貪欲は $X = 4$ を選び、下の bit は $K$ を超えないよう 0 になって $f(4) = 0 + 4 + 4 = 8$。ところが $X = 3$ なら $f(3) = 7 + 3 + 3 = 13$ で大きい。bit 2 で 4 を得る代わりに、bit 1 と bit 0 でそれぞれ 3 個ずつ立つ分（$6 + 3 = 9$）を失っている。和の最大化では、$K$ と食い違う位置で場合分けする。
 
-## 上位ビットで 2 つに分けて再帰する {#split-by-top-bit}
+## 上位 bit で 2 つに分けて再帰する {#split-by-top-bit}
 
 この節は、上の bit から決める考え方（[前の節](#top-down)）と再帰を使う。同じ木を明示的に作るのが [Binary Trie](../ds/binary-trie.md#build) である。
 
@@ -167,7 +167,7 @@ solve(S, k):
 
 再帰の 1 段（同じ $k$）では、各要素はちょうど 1 つの $S$ に入っているので、分ける手間は合わせて $O(N)$ である。段は $B$ 個なので全体で $O(NB)$ になる。$a$ を先にソートしておくと、bit $k$ で分けたグループは配列の連続した区間になり、新しい配列を作らずに添字の範囲で再帰できる。
 
-この再帰は、上位ビットから 0・1 で枝分かれする二分木を深さ優先にたどっているのと同じである。木を明示的に持てば、要素の追加・削除やクエリごとに違う $x$ にも対応できる（[Binary Trie](../ds/binary-trie.md#build)）。
+この再帰は、上位 bit から 0・1 で枝分かれする二分木を深さ優先にたどっているのと同じである。木を明示的に持てば、要素の追加・削除やクエリごとに違う $x$ にも対応できる（[Binary Trie](../ds/binary-trie.md#build)）。
 
 ## 足し算では使えない理由（繰り上がり） {#addition}
 
@@ -206,7 +206,7 @@ XOR は「繰り上がりを無視した足し算」で、AND が繰り上がり
 ## 使い分け {#comparison}
 
 - 要素をいくつでも選んで XOR したときに作れる値（最大値・個数・K 番目）は、bit ごとには分けられない。[XOR 基底](../math/xor-basis.md)で掃き出す
-- 要素の追加・削除をしながら「$x$ との XOR の最小・最大」を何度も答えるなら [Binary Trie](../ds/binary-trie.md#xor-min-max) に載せる。1 回だけなら[上位ビットで分ける再帰](#split-by-top-bit)で足りる
+- 要素の追加・削除をしながら「$x$ との XOR の最小・最大」を何度も答えるなら [Binary Trie](../ds/binary-trie.md#xor-min-max) に載せる。1 回だけなら[上位 bit で分ける再帰](#split-by-top-bit)で足りる
 - $X \le K$ のような上限が、和の最大化や数え上げと組み合わさるなら [桁 DP](../dp/digit-dp.md) の形で書くと場合分けを間違えにくい
 - XOR を含む問題全体の入口は [XOR](../patterns/xor.md#overview)、bit 以外の「独立に分ける」言い換えは[言い換えの典型](../thinking/reformulation.md)にある
 
@@ -251,7 +251,7 @@ $N \le 3 \times 10^5$ なのでペアを全部作ると間に合わない。XOR 
 </div>
 
 ??? note "力試しの方針"
-    - **ABC281 F**：[上位ビットで 2 つに分けて再帰する](#split-by-top-bit)の $f(S, k)$ をそのまま使う。$A_i < 2^{30}$ なので bit 29 から始める。ソートしておけば、分けたグループを添字の区間で表せる
+    - **ABC281 F**：[上位 bit で 2 つに分けて再帰する](#split-by-top-bit)の $f(S, k)$ をそのまま使う。$A_i < 2^{30}$ なので bit 29 から始める。ソートしておけば、分けたグループを添字の区間で表せる
 
 ## 参考 {#references}
 
@@ -260,4 +260,4 @@ $N \le 3 \times 10^5$ なのでペアを全部作ると間に合わない。XOR 
 - [oraclesqlpuzzle「ABC365-E Xor Sigma Problem」](https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc365-e.html)：練習の方針（区間の XOR を bit ごとに数える）
 - [drken「AtCoder ABC 117 D - XXOR (1Q, 水色, 400 点)」](https://drken1215.hatenablog.com/entry/2019/02/03/224200)：上限 K と食い違う bit での場合分けと桁 DP
 - [drken「AtCoder ABC 129 E - Sum Equals Xor (1D, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2019/06/10/150000)：和と XOR が等しい条件の言い換えと、L 以下の数え方
-- [drken「AtCoder ABC 281 F - Xor Minimization (2D, 青色, 500 点)」](https://drken1215.hatenablog.com/entry/2022/12/13/144200)：上位ビットで分ける再帰と、ソートして区間で扱う実装
+- [drken「AtCoder ABC 281 F - Xor Minimization (2D, 青色, 500 点)」](https://drken1215.hatenablog.com/entry/2022/12/13/144200)：上位 bit で分ける再帰と、ソートして区間で扱う実装

@@ -25,7 +25,7 @@ frequency_evidence: recent 1（abc458_f）・前提として届くページな�
 sections:
   - {title: 照合の状態とマルコフ性, anchor: matching-state}
   - {title: KMP オートマトンの遷移表を前計算して DP する, anchor: kmp-automaton}
-  - {title: 複数パターンは Aho-Corasick（終端の印を受け継ぐ）, anchor: multiple-patterns}
+  - {title: 複数パターンは Aho-Corasick 法（終端の印を受け継ぐ）, anchor: multiple-patterns}
   - {title: すべて含む：含んだパターンの集合を bit で持つ, anchor: contain-all}
   - {title: N が巨大なとき：遷移行列の累乗・ダブリング, anchor: matrix-power}
   - {title: 包除はどこで破綻するか（位置の重なりとパターンの集合）, anchor: why-not-inclusion-exclusion}
@@ -34,7 +34,7 @@ updated: 2026-10-21
 ---
 
 !!! abstract "要点"
-    - **何ができるか**：KMP や Aho-Corasick の状態（いまの接尾辞のうちパターンの接頭辞になっている最長のもの）を DP の状態にして、パターンを含まない・すべて含む長さ $N$ の文字列を数える。$N$ が巨大なら遷移を行列にして累乗する。
+    - **何ができるか**：KMP 法や Aho-Corasick 法の状態（いまの接尾辞のうちパターンの接頭辞になっている最長のもの）を DP の状態にして、パターンを含まない・すべて含む長さ $N$ の文字列を数える。$N$ が巨大なら遷移を行列にして累乗する。
     - **いつ使うか**：
         - 長さ $N$ の文字列のうち、どのパターンも部分文字列に含まないものの数。
         - 与えられた文字列をすべて含む長さ $L$ の文字列の数。
@@ -108,19 +108,13 @@ $P = \texttt{abab}$、文字は $\texttt{a}$・$\texttt{b}$ の 2 種類で動�
 - **出現回数の合計を数える**：「すべての文字列にわたる $P$ の出現回数の和」は、$\mathrm{dp}$ と並べて「出現回数の和」の表を持ち、状態 $M$ へ入るたびに文字列の数ぶんを足す。重なった出現も数えるので、状態 $M$ からも $\mathrm{nxt}[M][c]$ で遷移を続ける
 - **最小の書き換え回数**：与えられた文字列を最少の書き換えで「$P$ を含まない」ようにするなら、数の和の代わりに書き換え回数の最小値を持つ。各位置で元の文字ならコスト 0、別の文字ならコスト 1 で遷移する
 
-## 複数パターンは Aho-Corasick（終端の印を受け継ぐ） {#multiple-patterns}
+## 複数パターンは Aho-Corasick 法（終端の印を受け継ぐ） {#multiple-patterns}
 
 パターンが $K$ 個あるときは、パターンを [Trie](../string/trie.md) にまとめ、Trie の頂点を状態にする。頂点 $v$ は根からの文字列 $\mathrm{str}(v)$（どれかのパターンの接頭辞）を表し、状態の意味は 1 パターンのときと同じく「いまの接尾辞のうち、どれかのパターンの接頭辞になっている最長のもの」である。状態数 $S$ は Trie の頂点数で、パターンの長さの総和 + 1 以下になる。
 
 遷移の表は [Aho-Corasick 法](../string/aho-corasick.md#build)で埋める。失敗リンク $\mathrm{fail}[v]$ は「$\mathrm{str}(v)$ の真の接尾辞で、Trie にある最長のもの」の頂点で、KMP 法の $\pi$ にあたる。Aho-Corasick 法のページの $\mathrm{link}(v)$ と同じもので、そのページでは頂点を節点と呼ぶ。頂点を BFS 順（根に近い順）に処理し、Trie にない辺 $\mathrm{nxt}[v][c]$ は $\mathrm{nxt}[\mathrm{fail}[v]][c]$ を写す。$\mathrm{fail}[v]$ は $v$ より浅く、表がすでに埋まっている。
 
-1 パターンとの違いは、「パターンを含んだ」を表す状態が終端の頂点だけでないことである。パターンが $\texttt{bc}$ と $\texttt{abcd}$ なら、頂点 $\texttt{abc}$ は終端ではないが、接尾辞 $\texttt{bc}$ が禁止されている。そこで、各頂点に「$\mathrm{str}(v)$ の接尾辞になっているパターンの集合」$\mathrm{out}[v]$ を持たせ、BFS の中で次のように受け継ぐ（[終端の印を受け継ぐ節](../string/aho-corasick.md#inherit-terminal)と同じ形）。
-
-$$
-\mathrm{out}[v] \leftarrow \mathrm{out}[v] \cup \mathrm{out}[\mathrm{fail}[v]]
-$$
-
-$\mathrm{fail}[v]$ をたどると $\mathrm{str}(v)$ の接尾辞のうち Trie にあるものを長い順にすべて訪れるので、この 1 回の和集合で、接尾辞として現れるパターンがもれなく集まる。$\mathrm{fail}[v]$ は先に処理されているので、その $\mathrm{out}$ はもう受け継ぎを終えている。
+1 パターンとの違いは、「パターンを含んだ」を表す状態が終端の頂点だけでないことである。そこで、各頂点に「$\mathrm{str}(v)$ の接尾辞になっているパターンの集合」を bit で表した $\mathrm{out}[v]$ を持たせ、BFS の中で $\mathrm{out}[v] \leftarrow \mathrm{out}[v] \cup \mathrm{out}[\mathrm{fail}[v]]$ と受け継ぐ。$\mathrm{out}$ は Aho-Corasick 法のページの $\mathrm{mask}$ と同じもので、受け継ぐ理由と見落とす例は[終端の印を失敗リンク先から受け継ぐ節](../string/aho-corasick.md#inherit-terminal)にある。
 
 ```cpp
 --8<-- "string-automaton-dp/aho-dp.cpp:build"
@@ -136,9 +130,9 @@ $\mathrm{fail}[v]$ をたどると $\mathrm{str}(v)$ の接尾辞のうち Trie 
 
 ## すべて含む：含んだパターンの集合を bit で持つ {#contain-all}
 
-「$K$ 個のパターンをすべて含む」ものを数えるときは、Aho-Corasick の頂点に、それまでに含んだパターンの集合を [bit で表した整数](../dp/bit-dp.md#subsets-as-integers)を組にして状態にする。
+「$K$ 個のパターンをすべて含む」ものを数えるときは、Aho-Corasick 法の頂点に、それまでに含んだパターンの集合を [bit で表した整数](../dp/bit-dp.md#subsets-as-integers)を組にして状態にする。
 
-- **状態**：$\mathrm{dp}[i][\mathit{mask}][v]$ ＝ 長さ $i$ の文字列で、含んだパターンの集合が $\mathit{mask}$、Aho-Corasick の状態が $v$ のものの数
+- **状態**：$\mathrm{dp}[i][\mathit{mask}][v]$ ＝ 長さ $i$ の文字列で、含んだパターンの集合が $\mathit{mask}$、Aho-Corasick 法の状態が $v$ のものの数
 - **遷移**：文字 $c$ で $u = \mathrm{nxt}[v][c]$ に移り、集合は $\mathit{mask} \cup \mathrm{out}[u]$ になる。捨てる遷移はない
 - **初期値と答え**：$\mathrm{dp}[0][\emptyset][\text{根}] = 1$。答えは $\sum_v \mathrm{dp}[N][\text{全体}][v]$
 
@@ -198,11 +192,11 @@ $$
 \#(\text{すべて含む}) = \sum_{T \subseteq \{1, \dots, K\}} (-1)^{\lvert T \rvert} f(T)
 $$
 
-各 $f(T)$ は、$T$ だけで作った Aho-Corasick の上で[前の節までの DP](#multiple-patterns)を回せば求まる。重なりが問題になるのは「位置」についての包除で、「パターン」についての包除は $f(T)$ の中で重なりをオートマトンに任せているので壊れない。計算量は $O(2^K \cdot N \sigma S)$ で集合を状態に持つ方法と同じ程度だが、メモリが $O(S)$ で済み、$N$ が巨大でも各 $T$ で $S \times S$ の行列を累乗できる。
+各 $f(T)$ は、$T$ だけで作った Aho-Corasick 法の上で[前の節までの DP](#multiple-patterns)を回せば求まる。重なりが問題になるのは「位置」についての包除で、「パターン」についての包除は $f(T)$ の中で重なりをオートマトンに任せているので壊れない。計算量は $O(2^K \cdot N \sigma S)$ で集合を状態に持つ方法と同じ程度だが、メモリが $O(S)$ で済み、$N$ が巨大でも各 $T$ で $S \times S$ の行列を累乗できる。
 
 ## 落とし穴 {#pitfalls}
 
-**終端の印を失敗リンク先から受け継がない**。Trie の終端の頂点だけを禁止にすると、パターン $\texttt{bc}$・$\texttt{abcd}$ で $\texttt{abc}$ を読んだ状態を見逃し、$\texttt{abce}$ のような $\texttt{bc}$ を含む文字列まで数えてしまう。BFS の中で $\mathrm{out}[v]$ に $\mathrm{out}[\mathrm{fail}[v]]$ を足す。
+**終端の印を失敗リンク先から受け継がない**。Trie の終端の頂点だけを禁止にすると、パターンを含んだ文字列まで数えてしまう（例は [Aho-Corasick 法の落とし穴](../string/aho-corasick.md#pitfalls)）。BFS の中で $\mathrm{out}[v]$ に $\mathrm{out}[\mathrm{fail}[v]]$ を足す。
 
 **遷移の表を埋めずに失敗リンクをたどる**。DP の内側で「Trie に辺がなければ失敗リンクをたどる」と書くと、1 遷移が最悪で $O(\text{深さ})$ になり、KMP 法のならし計算量の議論も使えない（DP では同じ状態から何度も遷移するので、ならしが効かない）。build の段階で全文字の遷移を埋めておく。
 
@@ -224,7 +218,7 @@ $$
 
 </div>
 
-パターンが 8 個以下で短いので、Aho-Corasick の状態（Trie の頂点数はパターンの長さの総和 + 1 以下で、100 に届かない程度）と、含んだパターンの集合 $2^8$ 通りの組を状態にする（[すべて含む](#contain-all)）。問題文では、パターンの個数を $N$、作る文字列の長さを $L$ と書いている。
+パターンが 8 個以下で短いので、Aho-Corasick 法の状態（Trie の頂点数はパターンの長さの総和 + 1 以下で、100 に届かない程度）と、含んだパターンの集合 $2^8$ 通りの組を状態にする（[すべて含む](#contain-all)）。問題文では、パターンの個数を $N$、作る文字列の長さを $L$ と書いている。
 
 ??? note "解法の詳細"
     - **構築**：$N$ 個のパターンを Trie に入れ、$i$ 番目の終端に bit $i$ を立てる。BFS 順に失敗リンクを張り、$\mathrm{out}[v]$ に $\mathrm{out}[\mathrm{fail}[v]]$ を足し、26 文字すべての遷移を埋める。
@@ -241,10 +235,10 @@ $$
 
 </div>
 
-$N$ が $10^9$ なので 1 文字ずつの DP は間に合わない。禁止された文字列は長さの総和が 100 以下なので、Aho-Corasick の状態は 101 個以下に収まる。禁止された状態を除いた遷移を行列にして $N$ 乗する（[遷移行列の累乗](#matrix-power)）。
+$N$ が $10^9$ なので 1 文字ずつの DP は間に合わない。禁止された文字列は長さの総和が 100 以下なので、Aho-Corasick 法の状態は 101 個以下に収まる。禁止された状態を除いた遷移を行列にして $N$ 乗する（[遷移行列の累乗](#matrix-power)）。
 
 ??? note "解法の詳細"
-    - **構築**：$K$ 個（10 個以下、各 10 文字以下）の文字列で Aho-Corasick を作り、終端の印を失敗リンク先から受け継ぐ。印のある頂点が禁止された状態である。
+    - **構築**：$K$ 個（10 個以下、各 10 文字以下）の文字列で Aho-Corasick 法の Trie を作り、終端の印を失敗リンク先から受け継ぐ。印のある頂点が禁止された状態である。
     - **行列**：禁止されていない $v$ と文字 $c$ について、$u = \mathrm{nxt}[v][c]$ が禁止されていなければ $A[u][v]$ に 1 を足す。
     - **累乗**：根だけが 1 のベクトルに $A^N$ を掛け、成分の和を 998244353 で割った余りが答えである。
     - **計算量**：$O(S^3 \log N)$ で、$S \le 101$ なら約 $3 \times 10^7$ 回の掛け算である。行列の積は `long long` で受けて、1 回の積ごとに余りを取るか modint を使う。
@@ -259,8 +253,8 @@ $N$ が $10^9$ なので 1 文字ずつの DP は間に合わない。禁止さ�
 </div>
 
 ??? note "方針"
-    - **ABC122 D**：入れ替えで AGC が現れる並びを長さ 4 以下の禁止された並びとして書き出すと、末尾 3 文字の状態で足りる（照合の状態の簡易版）。例題としての解説は [DP の状態の設計の ABC122 D](../dp/dp-state-design.md#abc122_d) にある。禁止された並びのうち 1 文字を任意とするものを、具体的な文字を入れて展開すれば、Aho-Corasick の状態でも解ける。
-    - **ABC305 G**：禁止された文字列は短いので、末尾の数文字か Aho-Corasick の状態を状態にし、遷移行列を累乗する。末尾の文字を使う解き方は [行列累乗の ABC305 G](../math/matrix-power.md#abc305_g) にある。
+    - **ABC122 D**：入れ替えで AGC が現れる並びを長さ 4 以下の禁止された並びとして書き出すと、末尾 3 文字の状態で足りる（照合の状態の簡易版）。例題としての解説は [DP の状態の設計の ABC122 D](../dp/dp-state-design.md#abc122_d) にある。禁止された並びのうち 1 文字を任意とするものを、具体的な文字を入れて展開すれば、Aho-Corasick 法の状態でも解ける。
+    - **ABC305 G**：禁止された文字列は短いので、末尾の数文字か Aho-Corasick 法の状態を状態にし、遷移行列を累乗する。末尾の文字を使う解き方は [行列累乗の ABC305 G](../math/matrix-power.md#abc305_g) にある。
 
 ## 確認問題 {#quiz}
 
@@ -309,7 +303,7 @@ $N$ が $10^9$ なので 1 文字ずつの DP は間に合わない。禁止さ�
 
 ## 参考 {#references}
 
-- [SayA「AtCoder ABC458 F - Critical Misread」](https://gdst.dev/posts/abc458_f/)：例題 abc458_f の制約（禁止文字列の個数・長さ・総和）と、Aho-Corasick の状態の遷移行列を累乗する方針・禁止された状態の判定
+- [SayA「AtCoder ABC458 F - Critical Misread」](https://gdst.dev/posts/abc458_f/)：例題 abc458_f の制約（禁止文字列の個数・長さ・総和）と、Aho-Corasick 法の状態の遷移行列を累乗する方針・禁止された状態の判定
 - [KCPC「【ABC419】Aho-Corasick⁉️⁉️⁉️知りません...」](https://kcpc.hatenablog.com/entry/ABC419)：例題 abc419_f の状態（パターンの接頭辞と含んだ集合の bit）と、状態数が 80 程度に収まること
 - [drken「AtCoder ABC 122 D - We Like AGC」](https://drken1215.hatenablog.com/entry/2019/04/23/120400)：練習 abc122_d の禁止される並びの書き出しと、末尾 3 文字を状態にする DP
 - [merom686「ABC305」](https://merom686.hatenablog.com/entry/2023/06/11/005610)：練習 abc305_g の末尾 5 文字を状態にした遷移行列の累乗

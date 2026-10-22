@@ -16,7 +16,7 @@ complexity: '構造化束縛・tie・exchange・optional の操作は O(1)。aut
 signs: []
 acl: []
 sections:
-  - {title: 'pair と tuple：get・make_pair・pair{a, b}、辞書順で比べられる', anchor: pair-tuple}
+  - {title: pair と tuple：get・make_pair・波括弧での作成、辞書順で比べられる, anchor: pair-tuple}
   - {title: 構造化束縛の形：pair・構造体・配列・array を名前に分ける、map の範囲 for（C++17）, anchor: structured-binding}
   - {title: 見えない変数：auto はコピー、auto& は参照。名前はメンバの宣言順に付き、数が合わないとエラー（C++17）, anchor: hidden-variable}
   - {title: map を回すとき：キーは const、値を参照で受けて書き換えると map が変わる（C++17）, anchor: map-loop}
@@ -50,7 +50,7 @@ atcoder: true
 
 このページのコードは `#include <bits/stdc++.h>` と `using namespace std;` を前提にする。
 
-## pair と tuple：get・make_pair・pair{a, b}、辞書順で比べられる {#pair-tuple}
+## pair と tuple：get・make_pair・波括弧での作成、辞書順で比べられる {#pair-tuple}
 
 `pair<T, U>` は 2 つの値の組で、`first`・`second` で取り出す。`tuple<T, U, V, …>` は好きな個数の組で、3 つ以上をまとめるのに使う。`get<i>(t)`（$i$ は 0 から数える定数）で要素を取り出す。作るときは `make_pair(a, b)`・`make_tuple(a, b, c)`、または型を書かない `pair{a, b}`・`tuple{a, b, c}` を使う（中身から型を決める CTAD。C++17。[初期化の書き方](../cpp/cpp-initialization.md#ctad-std-types)）。
 

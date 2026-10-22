@@ -171,6 +171,15 @@ C++ の `lower_bound` と `upper_bound` は、昇順に並んだ範囲での二�
 
 質問 1 回で幅は半分にしかならないので、初期の幅 $D$ に対して $\lceil \log_2 D \rceil$ 回が要る。上限ぎりぎりの問題では、番兵の位置を質問しないことで 1〜2 回を節約できるかが効く。質問の出力の後に flush する作法などは[インタラクティブ問題](../misc/interactive.md)のページに任せる。
 
+## 上位の手法へのつながり {#next-steps}
+
+このページの境界の探し方は、次の手法の部品になる。
+
+- **答えの値で探す**：列の位置ではなく「答えを $x$ にできるか」の判定で境界を探すと、最大値の最小化・最小値の最大化が解ける（[答えで二分探索](../basics/binary-search-answer.md#minimax)）。全部は並べられない値の $K$ 番目も、「$x$ 以下の個数 $\ge K$」の境界として求める（[K 番目の値を求める](../basics/kth-value.md#why-count)）
+- **木の上で探す**：値が書き換わる列で「$l$ から足して初めて条件を破る位置」を探すなら、セグメント木を登って降りる手順で 1 回 $O(\log N)$ にする（[セグメント木上の二分探索](../ds/segment-tree-binary-search.md#what-it-does)）
+- **多数の二分探索を同時に進める**：クエリごとに「単調な過程のどの時点で条件を満たすか」を探すなら、全クエリの探索を段ごとにまとめ、過程を段ごとに 1 回だけ流す（[並列二分探索](../ds/parallel-binary-search.md#procedure)）
+- **DP を速くする**：長さごとの末尾の最小値を持つ配列は昇順に保たれるので、更新する場所を二分探索で決められる（[最長増加部分列](../dp/lis.md#binary-search)）
+
 ## 使い分け {#comparison}
 
 - 固定する側を動かすと相手の境界も単調に動くなら、[尺取り法](../basics/two-pointers.md)で $O(N)$ にできる。二分探索は境界が単調に動かなくても使える
@@ -200,6 +209,7 @@ C++ の `lower_bound` と `upper_bound` は、昇順に並んだ範囲での二�
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC302 D. Impartial Gift](https://atcoder.jp/contests/abc302/tasks/abc302_d)（diff 682）：2 つの数列から 1 つずつ選び、差が D 以下になる組の和の最大値を求める。
+- [ABC299 D. Find by Query](https://atcoder.jp/contests/abc299/tasks/abc299_d)（diff 684）：先頭が 0・末尾が 1 の隠れた 0/1 の列について、隣と値が異なる位置を 20 回以内の質問で見つける。
 - [ABC205 D. Kth Excluded](https://atcoder.jp/contests/abc205/tasks/abc205_d)（diff 713）：数列に含まれない正の整数のうち、小さい方から K 番目を答えるクエリに答える。
 - [ABC321 D. Set Menu](https://atcoder.jp/contests/abc321/tasks/abc321_d)（diff 806）：主菜と副菜のすべての組について min(A + B, P) の総和を求める。
 - [ARC084 C. Snuke Festival](https://atcoder.jp/contests/arc084/tasks/arc084_a)（diff 1096）：上段・中段・下段のパーツを 1 つずつ選び、上段 < 中段 < 下段 となる組合せの数を求める。
@@ -208,6 +218,7 @@ C++ の `lower_bound` と `upper_bound` は、昇順に並んだ範囲での二�
 
 ??? note "練習の方針"
     - **ABC302 D**：$B$ をソートし、各 $a$ について `upper_bound` で $a + D$ を超える最初の位置を求める。その 1 つ手前が $a + D$ 以下で最大の候補なので、それが $a - D$ 以上なら和を答えの候補にする。候補がなければ $-1$
+    - **ABC299 D**：$S_l = 0$・$S_r = 1$ を保つ 2 つの位置 $l, r$ を持ち、中点 $m$ を質問して、値が 0 なら $l = m$、1 なら $r = m$ にする。$r = l + 1$ になったら $l$ が答えで、質問は約 $\log_2 N$ 回で済む。配列の代わりに質問で値を読むだけで、形は[めぐる式](#meguru)と同じである（[質問で二分探索する](#interactive)。入出力の作法は[インタラクティブ問題の例題](../misc/interactive.md#abc299_d)）
     - **ABC205 D**：昇順の $A$ について、$A_i$ より小さい「含まれない数」の個数は $A_i - (i + 1)$（0-indexed）で、$i$ について単調に増える。この配列の上で $K$ に対する境界を二分探索し、境界の手前の $A_i$ から残りの分だけ進めた値が答えになる
     - **ABC321 D**：$B$ をソートして累積和を作る。各 $a$ について $P - a$ 以上になる最初の位置を `lower_bound` で求め、手前は $a \times$ 個数 $+$ $B$ の累積和、後ろは $P \times$ 個数で足す。総和は `long long` で持つ
     - **ARC084 C**：3 つの列をソートし、中段の $b$ を固定する。上段で $b$ 未満の個数は `lower_bound`、下段で $b$ より大きい個数は $N -$ `upper_bound` で求め、積を足す

@@ -1,35 +1,34 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" width="640" height="300" font-family="sans-serif" font-size="15">
-<rect x="0" y="0" width="640" height="300" fill="#ffffff"/>
-<text x="320.0" y="26" text-anchor="middle" font-size="16" fill="#222">N = 36 の約数：d と N/d の組（積はどれも 36）</text>
-<text x="20" y="90" fill="#222">小さい方 d</text>
-<text x="20" y="110" font-size="13" fill="#555">（√N 以下）</text>
-<text x="20" y="200" fill="#222">大きい方 N/d</text>
-<text x="20" y="220" font-size="13" fill="#555">（√N 以上）</text>
-<rect x="176" y="76" width="48" height="36" fill="#e8f0fe" stroke="#1a56b0" stroke-width="1.5"/>
-<rect x="176" y="186" width="48" height="36" fill="#fdecea" stroke="#b03a1a" stroke-width="1.5"/>
-<line x1="200" y1="112" x2="200" y2="186" stroke="#222" stroke-width="1.5"/>
-<text x="200" y="99" text-anchor="middle" fill="#222">1</text>
-<text x="200" y="209" text-anchor="middle" fill="#222">36</text>
-<rect x="256" y="76" width="48" height="36" fill="#e8f0fe" stroke="#1a56b0" stroke-width="1.5"/>
-<rect x="256" y="186" width="48" height="36" fill="#fdecea" stroke="#b03a1a" stroke-width="1.5"/>
-<line x1="280" y1="112" x2="280" y2="186" stroke="#222" stroke-width="1.5"/>
-<text x="280" y="99" text-anchor="middle" fill="#222">2</text>
-<text x="280" y="209" text-anchor="middle" fill="#222">18</text>
-<rect x="336" y="76" width="48" height="36" fill="#e8f0fe" stroke="#1a56b0" stroke-width="1.5"/>
-<rect x="336" y="186" width="48" height="36" fill="#fdecea" stroke="#b03a1a" stroke-width="1.5"/>
-<line x1="360" y1="112" x2="360" y2="186" stroke="#222" stroke-width="1.5"/>
-<text x="360" y="99" text-anchor="middle" fill="#222">3</text>
-<text x="360" y="209" text-anchor="middle" fill="#222">12</text>
-<rect x="416" y="76" width="48" height="36" fill="#e8f0fe" stroke="#1a56b0" stroke-width="1.5"/>
-<rect x="416" y="186" width="48" height="36" fill="#fdecea" stroke="#b03a1a" stroke-width="1.5"/>
-<line x1="440" y1="112" x2="440" y2="186" stroke="#222" stroke-width="1.5"/>
-<text x="440" y="99" text-anchor="middle" fill="#222">4</text>
-<text x="440" y="209" text-anchor="middle" fill="#222">9</text>
-<line x1="520" y1="56" x2="520" y2="228" stroke="#555" stroke-width="1.5" stroke-dasharray="3 3"/>
-<text x="520" y="50" text-anchor="middle" font-size="13" fill="#555">√36 = 6</text>
-<rect x="496" y="76" width="48" height="146" fill="#f3f3f3" stroke="#222" stroke-width="2" stroke-dasharray="6 4"/>
-<text x="520" y="154" text-anchor="middle" font-size="18" fill="#222">6</text>
-<text x="520" y="246" text-anchor="middle" font-size="13" fill="#222">d = N/d</text>
-<text x="520" y="264" text-anchor="middle" font-size="13" fill="#222">1 回だけ数える</text>
-<text x="320.0" y="282" text-anchor="middle" font-size="13" fill="#222">i = 1〜6 だけ試せば、上の段から下の段が N/i で決まる</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 350" width="320" height="350" font-family="sans-serif" font-size="15">
+<rect x="0" y="0" width="100%" height="100%" fill="#ffffff"/>
+<text x="10" y="22" font-size="15" fill="#222">N = 36 の約数：d と N/d の組</text>
+<text x="10" y="42" font-size="15" fill="#222">（積はどれも 36）</text>
+<text x="10" y="84" fill="#222">小さい方 d<tspan font-size="13" fill="#555">（√N 以下）</tspan></text>
+<text x="10" y="264" fill="#222">大きい方 N/d<tspan font-size="13" fill="#555">（√N 以上）</tspan></text>
+<rect x="14" y="96" width="44" height="36" fill="#e8f0fe" stroke="#1a56b0" stroke-width="1.5"/>
+<rect x="14" y="206" width="44" height="36" fill="#fdecea" stroke="#b03a1a" stroke-width="1.5"/>
+<line x1="36.0" y1="132" x2="36.0" y2="206" stroke="#222" stroke-width="1.5"/>
+<text x="36.0" y="119" text-anchor="middle" fill="#222">1</text>
+<text x="36.0" y="229" text-anchor="middle" fill="#222">36</text>
+<rect x="72" y="96" width="44" height="36" fill="#e8f0fe" stroke="#1a56b0" stroke-width="1.5"/>
+<rect x="72" y="206" width="44" height="36" fill="#fdecea" stroke="#b03a1a" stroke-width="1.5"/>
+<line x1="94.0" y1="132" x2="94.0" y2="206" stroke="#222" stroke-width="1.5"/>
+<text x="94.0" y="119" text-anchor="middle" fill="#222">2</text>
+<text x="94.0" y="229" text-anchor="middle" fill="#222">18</text>
+<rect x="130" y="96" width="44" height="36" fill="#e8f0fe" stroke="#1a56b0" stroke-width="1.5"/>
+<rect x="130" y="206" width="44" height="36" fill="#fdecea" stroke="#b03a1a" stroke-width="1.5"/>
+<line x1="152.0" y1="132" x2="152.0" y2="206" stroke="#222" stroke-width="1.5"/>
+<text x="152.0" y="119" text-anchor="middle" fill="#222">3</text>
+<text x="152.0" y="229" text-anchor="middle" fill="#222">12</text>
+<rect x="188" y="96" width="44" height="36" fill="#e8f0fe" stroke="#1a56b0" stroke-width="1.5"/>
+<rect x="188" y="206" width="44" height="36" fill="#fdecea" stroke="#b03a1a" stroke-width="1.5"/>
+<line x1="210.0" y1="132" x2="210.0" y2="206" stroke="#222" stroke-width="1.5"/>
+<text x="210.0" y="119" text-anchor="middle" fill="#222">4</text>
+<text x="210.0" y="229" text-anchor="middle" fill="#222">9</text>
+<line x1="282.0" y1="70" x2="282.0" y2="248" stroke="#555" stroke-width="1.5" stroke-dasharray="3 3"/>
+<text x="282.0" y="66" text-anchor="middle" font-size="13" fill="#555">√36 = 6</text>
+<rect x="260" y="96" width="44" height="146" fill="#f3f3f3" stroke="#222" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="282.0" y="175.0" text-anchor="middle" font-size="18" fill="#222">6</text>
+<text x="10" y="298" font-size="13" fill="#222">右端の 6 は d = N/d なので 1 回だけ数える</text>
+<text x="10" y="320" font-size="13" fill="#222">i = 1〜6 だけ試せば、上の段から下の段が</text>
+<text x="10" y="338" font-size="13" fill="#222">N/i で決まる</text>
 </svg>

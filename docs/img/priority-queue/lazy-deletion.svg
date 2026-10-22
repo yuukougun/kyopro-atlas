@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 250" font-family="sans-serif" font-size="14">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 522" width="400" height="522" font-family="sans-serif" font-size="14">
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="20" y="28" fill="#222">erase(9)・erase(7) の後</text>
+<text x="20" y="26" fill="#222">erase(9)・erase(7) の後</text>
 <text x="20" y="60" fill="#222" font-weight="bold">本体 q</text>
 <rect x="20" y="74" width="44" height="26" fill="#cfe3ff" stroke="#555" stroke-width="1.2"/>
 <text x="42" y="92" text-anchor="middle" fill="#222">9</text>
@@ -11,37 +11,39 @@
 <text x="42" y="156" text-anchor="middle" fill="#222">7</text>
 <rect x="20" y="170" width="44" height="26" fill="#cfe3ff" stroke="#555" stroke-width="1.2"/>
 <text x="42" y="188" text-anchor="middle" fill="#222">5</text>
-<text x="150" y="60" fill="#222" font-weight="bold">削除予定 del</text>
-<rect x="150" y="74" width="44" height="26" fill="#ffe9c7" stroke="#555" stroke-width="1.2"/>
-<text x="172" y="92" text-anchor="middle" fill="#222">9</text>
-<text x="202" y="92" fill="#777" font-size="12">← top</text>
-<rect x="150" y="106" width="44" height="26" fill="#ffe9c7" stroke="#555" stroke-width="1.2"/>
-<text x="172" y="124" text-anchor="middle" fill="#222">7</text>
-<text x="250" y="130" fill="#222" font-size="22">→</text>
-<text x="285" y="28" fill="#222">top() を呼ぶと、top が一致する間だけ両方から捨てる</text>
-<text x="300" y="60" fill="#222" font-weight="bold">本体 q</text>
-<rect x="300" y="74" width="44" height="26" fill="#eeeeee" stroke="#555" stroke-width="1.2" stroke-dasharray="4 3"/>
-<text x="322" y="92" text-anchor="middle" fill="#999">9</text>
-<line x1="304" y1="87" x2="340" y2="87" stroke="#c0392b" stroke-width="2"/>
-<text x="352" y="92" fill="#777" font-size="12">← top</text>
-<rect x="300" y="106" width="44" height="26" fill="#eeeeee" stroke="#555" stroke-width="1.2" stroke-dasharray="4 3"/>
-<text x="322" y="124" text-anchor="middle" fill="#999">7</text>
-<line x1="304" y1="119" x2="340" y2="119" stroke="#c0392b" stroke-width="2"/>
-<rect x="300" y="138" width="44" height="26" fill="#cfe3ff" stroke="#555" stroke-width="1.2"/>
-<text x="322" y="156" text-anchor="middle" fill="#222">7</text>
-<rect x="300" y="170" width="44" height="26" fill="#cfe3ff" stroke="#555" stroke-width="1.2"/>
-<text x="322" y="188" text-anchor="middle" fill="#222">5</text>
-<text x="430" y="60" fill="#222" font-weight="bold">削除予定 del</text>
-<rect x="430" y="74" width="44" height="26" fill="#eeeeee" stroke="#555" stroke-width="1.2" stroke-dasharray="4 3"/>
-<text x="452" y="92" text-anchor="middle" fill="#999">9</text>
-<line x1="434" y1="87" x2="470" y2="87" stroke="#c0392b" stroke-width="2"/>
-<text x="482" y="92" fill="#777" font-size="12">← top</text>
-<rect x="430" y="106" width="44" height="26" fill="#eeeeee" stroke="#555" stroke-width="1.2" stroke-dasharray="4 3"/>
-<text x="452" y="124" text-anchor="middle" fill="#999">7</text>
-<line x1="434" y1="119" x2="470" y2="119" stroke="#c0392b" stroke-width="2"/>
-<text x="540" y="100" fill="#222" font-size="13">9 = 9 で捨てる</text>
-<text x="540" y="122" fill="#222" font-size="13">7 = 7 で捨てる</text>
-<text x="540" y="144" fill="#222" font-size="13">del が空で止まる</text>
-<text x="540" y="176" fill="#222" font-size="13">答えは 7（残りの 7）</text>
-<text x="20" y="236" fill="#777" font-size="12">中身は大きい順に並べて表示している（実際の配列の並びは二分ヒープの順）</text>
+<text x="190" y="60" fill="#222" font-weight="bold">削除予定 del</text>
+<rect x="190" y="74" width="44" height="26" fill="#ffe9c7" stroke="#555" stroke-width="1.2"/>
+<text x="212" y="92" text-anchor="middle" fill="#222">9</text>
+<text x="242" y="92" fill="#777" font-size="12">← top</text>
+<rect x="190" y="106" width="44" height="26" fill="#ffe9c7" stroke="#555" stroke-width="1.2"/>
+<text x="212" y="124" text-anchor="middle" fill="#222">7</text>
+<line x1="10" y1="218" x2="390" y2="218" stroke="#ccc"/>
+<text x="20" y="246" fill="#222">top() を呼ぶと、top が一致する間だけ</text>
+<text x="20" y="266" fill="#222">両方から捨てる</text>
+<text x="20" y="300" fill="#222" font-weight="bold">本体 q</text>
+<rect x="20" y="314" width="44" height="26" fill="#eeeeee" stroke="#555" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="42" y="332" text-anchor="middle" fill="#999">9</text>
+<line x1="24" y1="327" x2="60" y2="327" stroke="#c0392b" stroke-width="2"/>
+<text x="72" y="332" fill="#777" font-size="12">← top</text>
+<rect x="20" y="346" width="44" height="26" fill="#eeeeee" stroke="#555" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="42" y="364" text-anchor="middle" fill="#999">7</text>
+<line x1="24" y1="359" x2="60" y2="359" stroke="#c0392b" stroke-width="2"/>
+<rect x="20" y="378" width="44" height="26" fill="#cfe3ff" stroke="#555" stroke-width="1.2"/>
+<text x="42" y="396" text-anchor="middle" fill="#222">7</text>
+<rect x="20" y="410" width="44" height="26" fill="#cfe3ff" stroke="#555" stroke-width="1.2"/>
+<text x="42" y="428" text-anchor="middle" fill="#222">5</text>
+<text x="190" y="300" fill="#222" font-weight="bold">削除予定 del</text>
+<rect x="190" y="314" width="44" height="26" fill="#eeeeee" stroke="#555" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="212" y="332" text-anchor="middle" fill="#999">9</text>
+<line x1="194" y1="327" x2="230" y2="327" stroke="#c0392b" stroke-width="2"/>
+<text x="242" y="332" fill="#777" font-size="12">← top</text>
+<rect x="190" y="346" width="44" height="26" fill="#eeeeee" stroke="#555" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="212" y="364" text-anchor="middle" fill="#999">7</text>
+<line x1="194" y1="359" x2="230" y2="359" stroke="#c0392b" stroke-width="2"/>
+<text x="190" y="396" fill="#222" font-size="13">9 = 9 で捨てる</text>
+<text x="190" y="416" fill="#222" font-size="13">7 = 7 で捨てる</text>
+<text x="190" y="436" fill="#222" font-size="13">del が空で止まる</text>
+<text x="190" y="456" fill="#222" font-size="13">答えは 7（残りの 7）</text>
+<text x="20" y="490" fill="#777" font-size="12">中身は大きい順に並べて表示している</text>
+<text x="20" y="508" fill="#777" font-size="12">（実際の配列の並びは二分ヒープの順）</text>
 </svg>

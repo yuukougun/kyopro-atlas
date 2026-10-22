@@ -9,7 +9,7 @@ order: 90
 level: null
 kind: [案内]
 prerequisites: []
-related: [atcoder-system#difficulty-by-position, roadmap#recent-positions, thinking-checklist, debugging-checklist, stress-testing, practice-method]
+related: [atcoder-system#difficulty-by-position, roadmap#recent-positions, thinking-checklist, debugging-checklist, stress-testing, practice-method, how-to-use#ai-rule-version]
 summary: ABC の 100 分の使い方がわかる。位置ごとの難しさと時間の目安、問題を読む順、取り組む問題の選び方と切り替え、終了前と終了後の過ごし方を示す。
 complexity: null
 signs: []
@@ -43,17 +43,7 @@ updated: 2026-10-22
 
 ## 位置ごとの難しさと色 {#difficulty-by-position}
 
-ABC の問題の難しさは位置（A〜G）でおおよそ決まり、E が水、F が青、G が黄以上の帯に当たる。次の表は abc400〜abc480 の 81 回で、各位置の difficulty（その問題を半々の確率で解けるレート）の分布を AtCoder Problems のデータから数えたものである。
-
-| 位置 | 第 1 四分位 | 中央値 | 第 3 四分位 | 多い帯 |
-| --- | ---: | ---: | ---: | --- |
-| C | 243 | 330 | 458 | 灰・茶 |
-| D | 677 | 821 | 942 | 茶・緑 |
-| E | 1133 | 1286 | 1424 | 緑・水 |
-| F | 1588 | 1744 | 1987 | 水・青 |
-| G | 2167 | 2391 | 2804 | 黄・橙・赤 |
-
-A・B の中央値は 13・48 で、どちらもすべて灰の帯にある。教材のレベル（[difficulty の帯](../start/atcoder-system.md#levels)）に読み替えると次のようになる。
+ABC の問題の難しさは位置（A〜G）でおおよそ決まり、E が水、F が青、G が黄以上の帯に当たる。abc400〜abc480 の 81 回で数えた各位置の difficulty（その問題を半々の確率で解けるレート）の四分位と分布の図は、[AtCoder の仕組みの位置ごとの difficulty](../start/atcoder-system.md#difficulty-by-position) にある。教材のレベル（[difficulty の帯](../start/atcoder-system.md#levels)）に読み替えると次のようになる。
 
 - **D**：93% が基礎（〜1199）で、素直な典型の当てはめが多い。
 - **E**：59% が水（1200〜1599）、31% が基礎、10% が青以上である。
@@ -202,18 +192,12 @@ WA が取れないときは考察ではなく実装の問題であることが�
 
 ## 生成 AI のルール {#ai-rules}
 
-<!-- textlint-disable -->
-
-AtCoder生成AI対策ルール（20261014 版）は、ABC・ARC・AGC の開催中に、問題文やその要約を生成 AI に入力して解法やコードを出力させることを禁じている。過去問の練習には適用されない。ルールは版ごとに変わってきたので、参加する前に AtCoder の告知で最新の版を確かめる。
-
-<!-- textlint-enable -->
-
-この教材との関係では、次のように使い分ける。
+AtCoder は、ABC・ARC・AGC の開催中に問題文やその要約を生成 AI に入力して解法やコードを出力させることを禁じている。ルールの要約と版の履歴は [AtCoder の仕組み](../start/atcoder-system.md#ai-rules)に、この教材の約束（ADT・AWC の扱いを含む）は[この教材の使い方](../start/how-to-use.md#ai-rule-version)にある。コンテスト中のふるまいは次の 2 つである。
 
 - **コンテスト中**：claude.ai に問題文や要約を見せて、解法やコードを頼まない。
 - **コンテストの終了後**：解けなかった問題の解説を claude.ai に頼んでよい。頼み方は[この教材の使い方](../start/how-to-use.md#claude)にある。
 
-ルールの版の扱いと、ABC・ARC の区分は [AtCoder の仕組み](../start/atcoder-system.md#ai-rules)にまとめてある。なお、コンテストの終了前に問題の解法や難しさの感想を SNS に書かないことも、AI とは別の約束として守る（drken 氏の tips）。
+なお、コンテストの終了前に問題の解法や難しさの感想を SNS に書かないことも、AI とは別の約束として守る（drken 氏の tips）。
 
 ## 終了後の振り返り {#after-contest}
 

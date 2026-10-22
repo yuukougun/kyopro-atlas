@@ -24,7 +24,7 @@ sections:
   - {title: 下側の包絡線と不要な直線（傾きもクエリも単調なら deque）, anchor: lower-envelope}
   - {title: クエリが単調でないとき（二分探索）, anchor: non-monotone-queries}
   - {title: Li Chao Tree（区間の真ん中で勝つ直線を残す）, anchor: li-chao-tree}
-  - {title: ライブラリでの検証（Library Checker の line_add_get_min・segment_add_get_min）, anchor: verify}
+  - {title: ライブラリでの検証, anchor: verify}
 stage: draft
 updated: 2026-10-22
 ---
@@ -122,7 +122,7 @@ Li Chao Tree は、問い合わせうる $x$ の候補 $X$ 個を並べた列の
 - 線分（$x \in [l, r)$ の範囲だけにある直線）を追加するときは、$[l, r)$ をセグメント木と同じく $O(\log X)$ 個のノードに分け、各ノードで上の手順を行う。1 回 $O(\log^2 X)$ になる。
 - $x$ の候補を先に集めて座標圧縮すれば配列で書ける（下の実装）。先に分からないなら、整数の範囲全体（$[-10^9, 10^9]$ など）を受け持つ木を、ノードを使うときだけ作る形にする。ノードは追加 1 回につき $O(\log(\text{範囲}))$ 個しか増えない。
 
-## ライブラリでの検証（Library Checker の line_add_get_min・segment_add_get_min） {#verify}
+## ライブラリでの検証 {#verify}
 
 ACL には CHT も Li Chao Tree もないので、使うなら自作する。自作するときの要点は次のとおりである。
 

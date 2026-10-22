@@ -2,7 +2,7 @@
 <rect x="0" y="0" width="480" height="865" fill="#ffffff"/>
 <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#555"/></marker></defs>
 <text x="240" y="28" font-size="16" text-anchor="middle" font-weight="bold" fill="#222">構文木</text>
-<text x="240" y="50" font-size="13" text-anchor="middle" fill="#444">1+2*(3+4)</text>
+<text x="240" y="50" font-size="14" text-anchor="middle" fill="#444">1+2*(3+4)</text>
 <line x1="240" y1="95" x2="170" y2="175" stroke="#555" stroke-width="1.5"/>
 <line x1="240" y1="95" x2="310" y2="175" stroke="#555" stroke-width="1.5"/>
 <line x1="310" y1="175" x2="255" y2="255" stroke="#555" stroke-width="1.5"/>
@@ -23,8 +23,8 @@
 <text x="305" y="341" font-size="18" text-anchor="middle" fill="#222">3</text>
 <rect x="378" y="318" width="34" height="34" rx="4" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
 <text x="395" y="341" font-size="18" text-anchor="middle" fill="#222">4</text>
-<text x="240" y="385" font-size="13" text-anchor="middle" fill="#444">丸：演算子（下の 2 つを結ぶ）</text>
-<text x="240" y="405" font-size="13" text-anchor="middle" fill="#444">四角：数</text>
+<text x="240" y="385" font-size="14" text-anchor="middle" fill="#444">丸：演算子（下の 2 つを結ぶ）</text>
+<text x="240" y="405" font-size="14" text-anchor="middle" fill="#444">四角：数</text>
 <line x1="20" y1="425" x2="460" y2="425" stroke="#bbb" stroke-dasharray="4 4"/>
 <text x="240" y="448" font-size="16" text-anchor="middle" font-weight="bold" fill="#222">関数の呼び出しの木</text>
 <line x1="220" y1="505" x2="65" y2="534" stroke="#555" stroke-width="1.3" marker-end="url(#arr)"/>
@@ -59,6 +59,6 @@
 <text x="315" y="795" font-size="14" text-anchor="middle" fill="#222">factor: 3</text>
 <rect x="385" y="775" width="90" height="30" rx="6" fill="#ffffff" stroke="#777" stroke-width="1.2" stroke-dasharray="5 3"/>
 <text x="430" y="795" font-size="14" text-anchor="middle" fill="#222">factor: 4</text>
-<text x="20" y="852" font-size="13" fill="#444">実線の枠：ループで演算子を読み、構文木の丸を作る呼び出し</text>
-<text x="20" y="832" font-size="13" fill="#444">点線の枠：演算子を読まない呼び出し</text>
+<text x="20" y="852" font-size="14" fill="#444">実線の枠：ループで演算子を読み、構文木の丸を作る呼び出し</text>
+<text x="20" y="832" font-size="14" fill="#444">点線の枠：演算子を読まない呼び出し</text>
 </svg>

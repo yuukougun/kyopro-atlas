@@ -19,10 +19,10 @@
 <text x="565.0" y="87" text-anchor="middle" font-size="18" fill="#222">r⁷</text>
 <path d="M40 106 v10 H320 v-10" fill="none" stroke="#333" stroke-width="1.5"/>
 <line x1="180.0" y1="116" x2="180.0" y2="126" stroke="#333" stroke-width="1.5"/>
-<text x="180.0" y="146" text-anchor="middle" font-size="17" fill="#222">前半：S(4)</text>
+<text x="180.0" y="146" text-anchor="middle" font-size="18" fill="#222">前半：S(4)</text>
 <path d="M320 106 v10 H600 v-10" fill="none" stroke="#333" stroke-width="1.5"/>
 <line x1="460.0" y1="116" x2="460.0" y2="126" stroke="#333" stroke-width="1.5"/>
-<text x="460.0" y="146" text-anchor="middle" font-size="17" fill="#222">後半：r⁴ + … + r⁷ = r⁴·S(4)</text>
+<text x="460.0" y="146" text-anchor="middle" font-size="18" fill="#222">後半：r⁴ + … + r⁷ = r⁴·S(4)</text>
 <text x="328" y="227" text-anchor="end" font-size="18" fill="#222">r⁴ ×</text>
 <rect x="340.0" y="200" width="59.0" height="40" fill="#fde7cf" stroke="#333" stroke-width="1.5" stroke-dasharray="6 3"/>
 <text x="369.5" y="227" text-anchor="middle" font-size="18" fill="#222">r⁰</text>
@@ -32,6 +32,6 @@
 <text x="495.5" y="227" text-anchor="middle" font-size="18" fill="#222">r²</text>
 <rect x="529.0" y="200" width="59.0" height="40" fill="#fde7cf" stroke="#333" stroke-width="1.5" stroke-dasharray="6 3"/>
 <text x="558.5" y="227" text-anchor="middle" font-size="18" fill="#222">r³</text>
-<text x="40" y="227" font-size="17" fill="#222">後半を r⁴ でくくると</text>
+<text x="40" y="227" font-size="18" fill="#222">後半を r⁴ でくくると</text>
 <text x="320.0" y="282" text-anchor="middle" font-size="18" fill="#222">S(8) = S(4) + r⁴·S(4) = S(4)·(1 + r⁴)</text>
 </svg>

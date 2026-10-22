@@ -9,7 +9,7 @@ order: 290
 level: 黄
 kind: [クエリ処理の工夫, データ構造, 計算量]
 prerequisites: [segment-tree]
-related: [mo-algorithm, degree-sqrt, complexity-estimation, lazy-segment-tree]
+related: [mo-algorithm, degree-sqrt, complexity-estimation, lazy-segment-tree, merge-sort-tree]
 summary: セグメント木に載らない区間操作や、合計だけが抑えられた量の処理を、√N を境に分けて O(N√N) 程度で行う。ブロックごとに集約とタグを持つ方法と、大きいものと小さいもので処理を変える方法がある。
 complexity: ブロックの大きさ B ≈ √N で、区間の操作 1 回 O(√N)（ブロックの中を二分探索するなら O(√N log N)）。根号で場合分けは、合計 N の量に対して全体 O(N√N) 程度
 signs:

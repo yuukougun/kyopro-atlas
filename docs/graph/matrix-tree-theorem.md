@@ -25,7 +25,6 @@ sections:
   - {title: BEST 定理（有向オイラー閉路の数）, anchor: best-theorem}
   - {title: 頂点集合ごとに数えて部分集合の DP と組む, anchor: subset-dp}
   - {title: 計算量と自作するときの要点, anchor: library}
-  - {title: 学ぶための資料, anchor: resources}
 stage: draft
 updated: 2026-10-22
 ---
@@ -109,7 +108,7 @@ $\deg^{+}(v)$ は出次数で、積は辺を持つ頂点すべてにわたる。
 
 ## 頂点集合ごとに数えて部分集合の DP と組む {#subset-dp}
 
-追加の前提：[bitDP](../dp/bit-dp.md)、[ラベル付きグラフの数え上げ](../comb/counting-labeled-graphs.md#subset-dp)
+追加の前提：[bitDP](../dp/bit-dp.md)、[連結なグラフの数え上げ](../comb/counting-labeled-graphs.md#subset-dp)
 
 頂点数 $N$ が 15 程度までなら、頂点集合 $S$ ごとに行列木定理を使える。「選んだ辺が森になる」「連結成分がどれも木」のような配置を数えるときの型である。$S$ の内側の辺だけで作ったグラフの全域木の数を $t(S)$ とすると、森は「頂点集合の分割の各部分に 1 本ずつ木を張ったもの」なので、次の DP で数えられる。
 

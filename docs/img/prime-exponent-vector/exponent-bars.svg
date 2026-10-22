@@ -1,47 +1,50 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 376" font-family="sans-serif" font-size="14">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 412" width="320" height="412" font-family="sans-serif" font-size="14">
 <defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#1f4e9a" stroke-width="2"/></pattern></defs>
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="30" y="26" fill="#222">素数ごとの指数を棒の高さにする（1 目盛り ＝ 指数 1）</text>
-<rect x="30" y="40" width="18" height="14" fill="#d9d9d9" stroke="#333"/><text x="54" y="52" fill="#222">a = 360 = 2³·3²·5</text>
-<rect x="210" y="40" width="18" height="14" fill="url(#hatch)" stroke="#1f4e9a"/><text x="234" y="52" fill="#222">b = 84 = 2²·3·7</text>
-<line x1="380" y1="47" x2="410" y2="47" stroke="#c0392b" stroke-width="4"/><text x="416" y="52" fill="#222">高い方 → lcm</text>
-<line x1="380" y1="67" x2="410" y2="67" stroke="#2e7d32" stroke-width="3" stroke-dasharray="6 4"/><text x="416" y="72" fill="#222">低い方 → gcd</text>
-<line x1="60" y1="250" x2="570" y2="250" stroke="#e0e0e0"/>
-<text x="50" y="256" text-anchor="end" fill="#555" font-size="16">0</text>
-<line x1="60" y1="206" x2="570" y2="206" stroke="#e0e0e0"/>
-<text x="50" y="212" text-anchor="end" fill="#555" font-size="16">1</text>
-<line x1="60" y1="162" x2="570" y2="162" stroke="#e0e0e0"/>
-<text x="50" y="168" text-anchor="end" fill="#555" font-size="16">2</text>
-<line x1="60" y1="118" x2="570" y2="118" stroke="#e0e0e0"/>
-<text x="50" y="124" text-anchor="end" fill="#555" font-size="16">3</text>
-<line x1="60" y1="250" x2="570" y2="250" stroke="#333"/>
-<rect x="92" y="118" width="36" height="132" fill="#d9d9d9" stroke="#333" stroke-width="1.5"/>
-<text x="110" y="112" text-anchor="middle" fill="#222" font-size="16">3</text>
-<rect x="138" y="162" width="36" height="88" fill="url(#hatch)" stroke="#1f4e9a" stroke-width="1.5"/>
-<text x="156" y="156" text-anchor="middle" fill="#222" font-size="16">2</text>
-<line x1="82" y1="118" x2="184" y2="118" stroke="#c0392b" stroke-width="4"/>
-<line x1="82" y1="162" x2="184" y2="162" stroke="#2e7d32" stroke-width="3" stroke-dasharray="6 4"/>
-<text x="133" y="272" text-anchor="middle" fill="#222" font-weight="bold" font-size="16">p = 2</text>
-<rect x="217" y="162" width="36" height="88" fill="#d9d9d9" stroke="#333" stroke-width="1.5"/>
-<text x="235" y="156" text-anchor="middle" fill="#222" font-size="16">2</text>
-<rect x="263" y="206" width="36" height="44" fill="url(#hatch)" stroke="#1f4e9a" stroke-width="1.5"/>
-<text x="281" y="200" text-anchor="middle" fill="#222" font-size="16">1</text>
-<line x1="207" y1="162" x2="309" y2="162" stroke="#c0392b" stroke-width="4"/>
-<line x1="207" y1="206" x2="309" y2="206" stroke="#2e7d32" stroke-width="3" stroke-dasharray="6 4"/>
-<text x="258" y="272" text-anchor="middle" fill="#222" font-weight="bold" font-size="16">p = 3</text>
-<rect x="342" y="206" width="36" height="44" fill="#d9d9d9" stroke="#333" stroke-width="1.5"/>
-<text x="360" y="200" text-anchor="middle" fill="#222" font-size="16">1</text>
-<text x="406" y="244" text-anchor="middle" fill="#222" font-size="16">0</text>
-<line x1="332" y1="206" x2="434" y2="206" stroke="#c0392b" stroke-width="4"/>
-<line x1="332" y1="250" x2="434" y2="250" stroke="#2e7d32" stroke-width="3" stroke-dasharray="6 4"/>
-<text x="383" y="272" text-anchor="middle" fill="#222" font-weight="bold" font-size="16">p = 5</text>
-<text x="485" y="244" text-anchor="middle" fill="#222" font-size="16">0</text>
-<rect x="513" y="206" width="36" height="44" fill="url(#hatch)" stroke="#1f4e9a" stroke-width="1.5"/>
-<text x="531" y="200" text-anchor="middle" fill="#222" font-size="16">1</text>
-<line x1="457" y1="206" x2="559" y2="206" stroke="#c0392b" stroke-width="4"/>
-<line x1="457" y1="250" x2="559" y2="250" stroke="#2e7d32" stroke-width="3" stroke-dasharray="6 4"/>
-<text x="508" y="272" text-anchor="middle" fill="#222" font-weight="bold" font-size="16">p = 7</text>
-<text x="30" y="308" fill="#222" font-size="16">lcm(a, b) = 2³·3²·5·7 = 2520（各素数で高い方の指数）</text>
-<text x="30" y="335" fill="#222" font-size="16">gcd(a, b) = 2²·3 = 12（各素数で低い方の指数。5 と 7 は 0）</text>
-<text x="30" y="362" fill="#222" font-size="16">a × b = 2⁵·3³·5·7（各素数で高さの和）</text>
+<text x="10" y="22" fill="#222">素数ごとの指数を棒の高さにする</text>
+<text x="10" y="40" fill="#555" font-size="13">（1 目盛り ＝ 指数 1）</text>
+<rect x="10" y="52" width="18" height="14" fill="#d9d9d9" stroke="#333"/><text x="34" y="64" fill="#222" font-size="13">a = 360 = 2³·3²·5</text>
+<rect x="170" y="52" width="18" height="14" fill="url(#hatch)" stroke="#1f4e9a"/><text x="194" y="64" fill="#222" font-size="13">b = 84 = 2²·3·7</text>
+<line x1="10" y1="83" x2="34" y2="83" stroke="#c0392b" stroke-width="4"/><text x="40" y="88" fill="#222" font-size="13">高い方 → lcm</text>
+<line x1="170" y1="83" x2="194" y2="83" stroke="#2e7d32" stroke-width="3" stroke-dasharray="6 4"/><text x="200" y="88" fill="#222" font-size="13">低い方 → gcd</text>
+<line x1="36" y1="262" x2="316" y2="262" stroke="#e0e0e0"/>
+<text x="28" y="267" text-anchor="end" fill="#555" font-size="14">0</text>
+<line x1="36" y1="222" x2="316" y2="222" stroke="#e0e0e0"/>
+<text x="28" y="227" text-anchor="end" fill="#555" font-size="14">1</text>
+<line x1="36" y1="182" x2="316" y2="182" stroke="#e0e0e0"/>
+<text x="28" y="187" text-anchor="end" fill="#555" font-size="14">2</text>
+<line x1="36" y1="142" x2="316" y2="142" stroke="#e0e0e0"/>
+<text x="28" y="147" text-anchor="end" fill="#555" font-size="14">3</text>
+<line x1="36" y1="262" x2="316" y2="262" stroke="#333"/>
+<rect x="48" y="142" width="22" height="120" fill="#d9d9d9" stroke="#333" stroke-width="1.5"/>
+<text x="59.0" y="136" text-anchor="middle" fill="#222" font-size="14">3</text>
+<rect x="74" y="182" width="22" height="80" fill="url(#hatch)" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="85.0" y="176" text-anchor="middle" fill="#222" font-size="14">2</text>
+<line x1="42" y1="142" x2="100" y2="142" stroke="#c0392b" stroke-width="4"/>
+<line x1="42" y1="182" x2="100" y2="182" stroke="#2e7d32" stroke-width="3" stroke-dasharray="6 4"/>
+<text x="71.0" y="282" text-anchor="middle" fill="#222" font-weight="bold" font-size="14">p = 2</text>
+<rect x="118" y="182" width="22" height="80" fill="#d9d9d9" stroke="#333" stroke-width="1.5"/>
+<text x="129.0" y="176" text-anchor="middle" fill="#222" font-size="14">2</text>
+<rect x="144" y="222" width="22" height="40" fill="url(#hatch)" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="155.0" y="216" text-anchor="middle" fill="#222" font-size="14">1</text>
+<line x1="112" y1="182" x2="170" y2="182" stroke="#c0392b" stroke-width="4"/>
+<line x1="112" y1="222" x2="170" y2="222" stroke="#2e7d32" stroke-width="3" stroke-dasharray="6 4"/>
+<text x="141.0" y="282" text-anchor="middle" fill="#222" font-weight="bold" font-size="14">p = 3</text>
+<rect x="188" y="222" width="22" height="40" fill="#d9d9d9" stroke="#333" stroke-width="1.5"/>
+<text x="199.0" y="216" text-anchor="middle" fill="#222" font-size="14">1</text>
+<text x="225.0" y="256" text-anchor="middle" fill="#222" font-size="14">0</text>
+<line x1="182" y1="222" x2="240" y2="222" stroke="#c0392b" stroke-width="4"/>
+<line x1="182" y1="262" x2="240" y2="262" stroke="#2e7d32" stroke-width="3" stroke-dasharray="6 4"/>
+<text x="211.0" y="282" text-anchor="middle" fill="#222" font-weight="bold" font-size="14">p = 5</text>
+<text x="269.0" y="256" text-anchor="middle" fill="#222" font-size="14">0</text>
+<rect x="284" y="222" width="22" height="40" fill="url(#hatch)" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="295.0" y="216" text-anchor="middle" fill="#222" font-size="14">1</text>
+<line x1="252" y1="222" x2="310" y2="222" stroke="#c0392b" stroke-width="4"/>
+<line x1="252" y1="262" x2="310" y2="262" stroke="#2e7d32" stroke-width="3" stroke-dasharray="6 4"/>
+<text x="281.0" y="282" text-anchor="middle" fill="#222" font-weight="bold" font-size="14">p = 7</text>
+<text x="10" y="312" fill="#222" font-size="14">lcm(a, b) = 2³·3²·5·7 = 2520</text>
+<text x="10" y="330" fill="#222" font-size="14">（各素数で高い方の指数）</text>
+<text x="10" y="356" fill="#222" font-size="14">gcd(a, b) = 2²·3 = 12</text>
+<text x="10" y="374" fill="#222" font-size="14">（各素数で低い方の指数。5 と 7 は 0）</text>
+<text x="10" y="400" fill="#222" font-size="14">a × b = 2⁵·3³·5·7（各素数で高さの和）</text>
 </svg>

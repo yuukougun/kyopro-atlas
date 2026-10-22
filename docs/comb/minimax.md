@@ -9,7 +9,7 @@ order: 450
 level: 水
 kind: [ゲーム, DP]
 prerequisites: [game-basics]
-related: [interval-dp, optimal-strategy-expectation, tree-dp, binary-search-answer#dp-check]
+related: [interval-dp, optimal-strategy-expectation, tree-dp, binary-search-answer#dp-check, game-retrograde-analysis]
 summary: 両者が「自分の得点 − 相手の得点」を最大化するゲームで、f(局面) = 手番の人が以後に得る差の最大値とおくと f = max(その手の得点 − f(次の局面)) と 1 本の式で書け、後ろから値が決まる。
 complexity: 局面の数 × 1 局面の手の数（列の両端から取るなら O(N^2)、グリッドを進むなら O(HW)）
 signs:
@@ -221,7 +221,7 @@ v(u) = min over 子 c ( v(c) )   … 深さが奇数（後手の手番）
     - 遷移：$f[i][j] = \max(g(i+1, j) - f[i+1][j],\ g(i, j+1) - f[i][j+1])$（グリッドの外へは動けない）。右下のマスは終局で $f = 0$。
     - 答え：$f[0][0] > 0$ なら先手の勝ち、$< 0$ なら後手の勝ち、$= 0$ なら引き分け。$O(HW)$。
     - max と min で書くなら、$(i + j)$ の偶奇で手番が決まることを使う。
-    - コードの例（出力の文字列は問題に合わせる）：
+    - コードの例は次のとおりである（出力の文字列は問題に合わせる）。
 
     ```cpp
     --8<-- "minimax/grid.cpp:core"

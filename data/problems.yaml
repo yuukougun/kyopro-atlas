@@ -1,4 +1,5 @@
-# 問題の台帳（design-review D3）。tools/build_ledger.py が catalog と調査レポートから作った下書き。
+# 問題の台帳（design-review D3）。tools/build_ledger.py が catalog と調査レポートから作った下書きが元。
+# 骨格（工程8a）以降はこの台帳が正。手で直し、build_ledger.py では作り直さない（planning/progress.md）。
 # 1問1項目。項目の意味と status の決め方は tools/build_ledger.py の冒頭に書いた。
 # status が 未確認 の問題は本文に使わない。確かめたら status を直し、checked に日付を書く。
 problems:
@@ -14130,7 +14131,7 @@ problems:
   difficulty: 2162
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: （執筆時に確かめる）
+  summary: N 個のボタンのうち 1 つだけが当たりで、ボタンの並びは毎回見分けられないように入れ替わる。1 回に合計 M 回ボタンを押すことを T 回くり返すとき、当たりを合計 K 回以上押せる確率の最大値を求める。
   approach: ボタンの押し方を M の分割として全列挙し、最適な押し方での確率を求める
   pages:
   - {id: partition-number, role: example}
@@ -14361,7 +14362,7 @@ problems:
   difficulty: 2038
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: （執筆時に確かめる）
+  summary: 色ごとの枚数が決まった靴下のうち 1 枚を手に持ち、引き出しから 1 枚ずつ取り出して、手の靴下と同じ色ならやめ、違えばどちらか 1 枚を引き出しへ戻すことを繰り返すとき、戻す靴下を最適に選んだときの取り出す回数の期待値を mod で求める。
   approach: 取り出した靴下のどちらを残すかを期待値の上で決め、残りの回数の期待値を求める
   pages:
   - {id: optimal-strategy-expectation, role: example}
@@ -14719,7 +14720,7 @@ problems:
   difficulty: 654
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: 大小 2 種類の飴を配る方法についての条件を調べる（詳細は執筆時に確かめる）。
+  summary: 2 種類の飴（値 X と Y、X < Y）を各人に決まった個数ずつ配り、全員の合計をそろえるとき、Y の飴の個数の合計の最大値を求める（できなければ -1 を出力する）。
   approach: 必要条件を式にし、切り上げの割り算で境界を求める
   pages:
   - {id: integer-division, role: practice}
@@ -14928,12 +14929,12 @@ problems:
   difficulty: 2250
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: （執筆時に確かめる）
+  summary: 一部のマスが使えない N × N の盤面に、縦横に (A, B) か (B, A) 離れた 2 マスの両方には置けない駒を最も多く置き、置き方を 1 つ出力する。
   approach: 駒の利き合うグラフが二部グラフになることを示し、片側を反転して最小カットにする
   alternatives:
   - pages:
     - konig-theorem
-    summary: （執筆時に確かめる）
+    summary: N×N の盤面の置けないマスを避けて、縦横に (±A, ±B) か (±B, ±A) だけ動く駒を、どの 2 つも互いに 1 手で届かないように最も多く置く置き方を 1 つ求める。
     approach: 二部グラフの最大独立集合を最小カットで求める
   pages:
   - {id: project-selection, role: example}
@@ -15003,7 +15004,7 @@ problems:
   difficulty: 2227
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: （執筆時に確かめる）
+  summary: 整数列から 2 つの要素を一様ランダムに選び、一方から他方を引いた値に置き換える操作を、要素が 1 つになるまで繰り返す。残る値の二乗の期待値を求める。
   approach: ランダムな操作でできる値の二乗の期待値を、全操作についての二乗の総和 / 操作の総数として求める（小さいケースの全探索で規則を見つける）
   pages:
   - {id: expectation-of-square, role: example}
@@ -15512,14 +15513,20 @@ problems:
   difficulty: 2831
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: 日ごとの収入と費用が決まっている中で、最終的に脱出できる子どもの人数の最大を求める。
+  summary: メダルを持たない多数の園児が N 日を過ごす。毎日、集めたメダルにその日の分 A_i を足して配り直し、B_i 枚に満たない園児は脱落し、残りは B_i 枚を失い、C_i 枚以上を持つ園児は脱出できる。脱出できる人数の最大を求める。
   approach: 答えの人数で二分探索し、脱出した人数についての残量の最大を上に凸な折れ線で持つ。脱出の遷移は 1 次の列との (max,+) 畳み込みで、傾きの列（Slope Trick に近い持ち方）でならし O(N) に判定する
+  alternatives:
+  - pages:
+    - slope-trick
+    summary: メダルを持たない多数の園児が N 日を過ごす。毎日、集めたメダルにその日の分 A_i を足して配り直し、B_i 枚に満たない園児は脱落し、残りは B_i 枚を失い、C_i 枚以上を持つ園児は脱出できる。脱出できる人数の最大を求める。
+    approach: 人数 m を二分探索し、「j 人が脱出済みのときの残りのメダルの最大」を上に凸な折れ線として傾きの列で持つ。収入は平行移動、生存の費用は傾きの一律の変更、脱出は傾きを −C_i 以上にそろえる操作で、判定は O(N)
   pages:
   - {id: monge, role: practice}
+  - {id: slope-trick, role: challenge}
   evidence:
   - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0516_abc458
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: abc459_d
   contest: abc459
   index: D
@@ -15560,7 +15567,7 @@ problems:
   difficulty: 2163
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: （執筆時に確かめる）
+  summary: 整数列で、隣り合う 2 項の左を 1 減らし右を 1 増やす操作を繰り返し、列を狭義単調増加にする最小の操作回数を求める。
   approach: A_i から i を引いて狭義単調を広義単調に直し、差分列をすべて非負にする問題として操作回数を数える（research/00 §2.3.8 の分類）
   pages:
   - {id: difference-sequence, role: example}
@@ -15997,7 +16004,7 @@ problems:
   difficulty: 1887
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: （執筆時に確かめる）
+  summary: 数列 A の先頭から順に余りを取っていくと 0 になる、1 以上 X 以下の整数の個数を求める。
   approach: 操作を逆から考え、同じ長さのものを一度に処理する（research/00 §2.3.8 の分類）
   pages:
   - {id: reverse-thinking, role: challenge}
@@ -16078,7 +16085,7 @@ problems:
   difficulty: 1038
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: （執筆時に確かめる）
+  summary: 整数列のすべての区間について平均値を求め、その総和を 998244353 で割った余りを求める。
   approach: 主客転倒（寄与）と前計算（research/00 §2.3.8 の分類）
   pages:
   - {id: contribution, role: practice}
@@ -16128,7 +16135,7 @@ problems:
   difficulty: 1566
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: （執筆時に確かめる）
+  summary: o と x からなる文字列で、o を K 個以上含む連続した区間を選ぶとき、区間に占める o の割合の最大値を求める。
   approach: 連続部分列の平均の最大化に帰着し、答え a を二分探索して、各要素から a を引いた累積和で和が 0 以上の区間があるか判定する（research/00 §2.3.8 の分類）
   pages:
   - {id: fractional-binary-search, role: example}
@@ -16183,7 +16190,7 @@ problems:
   difficulty: 2096
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: （執筆時に確かめる）
+  summary: N 組のカードの神経衰弱で、決まった回数失敗するかすべてのカードを取ると終わるとき、最適にめくったときの、取ったペアの得点の和の期待値を求める。
   approach: 神経衰弱で、取ったペア・場所を知ったカード・未知のカードの数を状態に、最適な行動の期待値をメモ化再帰で求める
   pages:
   - {id: optimal-strategy-expectation, role: practice}
@@ -16199,12 +16206,12 @@ problems:
   difficulty: 1604
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: 許された位置の組の swap をちょうど 10^100 回行ったあとにできる文字列の種類数を求める（詳細は執筆時に確かめる）。
+  summary: 許された位置の組の swap をちょうど 10^100 回行ったあとにできる文字列の種類数を求める。
   approach: swap できる位置の組の連結成分ごとに並べ方を数え、同じ文字がない成分では偶奇の片方しか作れないことを使う
   alternatives:
   - pages:
     - multinomial-coefficient
-    summary: 許された位置の組の swap をちょうど 10^100 回行ったあとにできる文字列の種類数を求める（詳細は執筆時に確かめる）。
+    summary: 許された位置の組の swap をちょうど 10^100 回行ったあとにできる文字列の種類数を求める。
     approach: swap できる位置の組の連結成分ごとに並べ方を多項係数で数え、swap の回数の偶奇で作れないものを除く（permutation-parity の例題）
   pages:
   - {id: multinomial-coefficient, role: practice}
@@ -16401,7 +16408,7 @@ problems:
   difficulty: 966
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: （執筆時に確かめる）
+  summary: 数列をいくつかの連続部分列に分割するとき、和が K の倍数である部分の個数の最大値を求める。
   approach: 累積和 mod K と貪欲（research/00 §2.3.8 の分類）
   pages:
   - {id: prefix-sum-counting, role: practice}
@@ -16551,7 +16558,7 @@ problems:
   difficulty: 1728
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: （執筆時に確かめる）
+  summary: N×N のグリッドの各マスについて、全住民をそのマスに集めるときのチェビシェフ距離の総和を求める。
   approach: チェビシェフ距離を分解し、四隅から DP する（research/00 §2.3.8 の分類による）
   pages:
   - {id: manhattan-chebyshev, role: practice}
@@ -16566,7 +16573,7 @@ problems:
   difficulty: 2477
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: （執筆時に確かめる）
+  summary: L 以上 R 以下の各整数に正の整数を割り当て、同じ値を割り当てた 2 つの整数では小さい方の popcount が大きい方より小さくなるようにするとき、割り当てる値の最大の最小を求める。
   approach: popcount の列を狭義増加の部分列に塗り分ける最小の色数を、最長の広義減少部分列の長さとして求める（Dilworth の定理と popcount の構造）
   pages:
   - {id: lis, role: challenge}
@@ -16764,12 +16771,12 @@ problems:
   difficulty: 1938
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: （執筆時に確かめる）
+  summary: 数直線上の N 人を、1 人を 1 歩動かし、その先に人がいれば入れ替わる操作で、それぞれの目的地へ動かすのに要る操作の最小回数を求める。
   approach: 隣接 swap の回数に言い換え、転倒数で数える（research/00 §2.3.8 の分類）
   alternatives:
   - pages:
     - inversion-number
-    summary: （執筆時に確かめる）
+    summary: 数直線上に並ぶ人々を、隣と位置を入れ替える操作のくり返しで目標の配置にするための最小の操作回数を求める。
     approach: 操作の回数を隣接 swap の回数に言い換え、転倒数で求める（research/00 §2.3.8 の分類）
   pages:
   - {id: reformulation, role: challenge}
@@ -16892,7 +16899,7 @@ problems:
   alternatives:
   - pages:
     - merge-process-tree
-    summary: 辺に番号が付いたグラフで、2 人が頂点 x・y から番号 i 以下の辺だけを使って合わせて z 頂点を訪れられる最小の i を、Q 個の質問に答える。
+    summary: 最初の t 本の辺だけを使ったとき、x と y の成分の頂点数の合計が z 以上になる最小の t を各クエリで答える。
     approach: 辺を番号順に併合する過程の木で、条件を満たす最小の番号を求める（並列二分探索でも解ける）
   - pages:
     - partially-persistent-union-find
@@ -19498,9 +19505,14 @@ problems:
     - divide-and-conquer
     summary: 一列に並ぶ都市を結ぶ完全グラフで、辺の重みが番号の差と両端の値で決まるときの最小全域木の重みを求める。
     approach: 番号の中央で分け、中央をまたぐ辺は反対側の代表 1 点への辺だけ残して O(N log N) 本にし、クラスカル法で解く
+  - pages:
+    - spanning-tree-advanced
+    summary: 一列に並ぶ都市を結ぶ完全グラフで、辺の重みが番号の差と両端の値で決まるときの最小全域木の重みを求める。
+    approach: 辺が N^2 本あるので、最小全域木に入りうる辺だけを残す。番号の中央で分け、中央をまたぐ辺を反対側の代表との辺に絞って候補を O(N log N) 本にし、クラスカル法で解く
   pages:
   - {id: centroid-decomposition, role: challenge}
   - {id: divide-and-conquer, role: challenge}
+  - {id: spanning-tree-advanced, role: practice}
   evidence:
   - https://drken1215.hatenablog.com/entry/2019/01/15/081500
   status: 確認済み

@@ -9,7 +9,7 @@ search:
 
 # 木の詳細索引
 
-分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。stub（準備中）のページは要約と前提しかなく、節の見出しもまだない。
+分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
 
 ## 木の基本性質と表現（tree-basics） {#tree-basics}
 
@@ -252,6 +252,7 @@ search:
     - `tree-isomorphism#ahu` AHU 法（子の名前の多重集合に名前を付ける）：https://yuukougun.github.io/kyopro-atlas/tree/tree-isomorphism/#ahu
     - `tree-isomorphism#tree-hash` 木のハッシュと衝突しにくい設計：https://yuukougun.github.io/kyopro-atlas/tree/tree-isomorphism/#tree-hash
     - `tree-isomorphism#unrooted` 根のない木は中心を根にする：https://yuukougun.github.io/kyopro-atlas/tree/tree-isomorphism/#unrooted
+    - `tree-isomorphism#library` 公開ライブラリと自作するときの要点：https://yuukougun.github.io/kyopro-atlas/tree/tree-isomorphism/#library
 
 ## 最小共通祖先（LCA）（lca） {#lca}
 
@@ -434,7 +435,7 @@ search:
     - `auxiliary-tree#steiner-queries` 指定頂点を結ぶ部分木の大きさ（DFS 順で隣り合う 2 点の距離の和の半分）：https://yuukougun.github.io/kyopro-atlas/tree/auxiliary-tree/#steiner-queries
     - `auxiliary-tree#build` DFS 順に並べて隣り合う 2 点の LCA を足す：https://yuukougun.github.io/kyopro-atlas/tree/auxiliary-tree/#build
     - `auxiliary-tree#stack-build` スタックで組み立てる：https://yuukougun.github.io/kyopro-atlas/tree/auxiliary-tree/#stack-build
-    - `auxiliary-tree#usage` 圧縮木で木 DP をするときの要点と学ぶための資料：https://yuukougun.github.io/kyopro-atlas/tree/auxiliary-tree/#usage
+    - `auxiliary-tree#usage` 圧縮木で木 DP をするときの要点：https://yuukougun.github.io/kyopro-atlas/tree/auxiliary-tree/#usage
     - `auxiliary-tree#alternatives` マージテク・平方分割で代用できる場合：https://yuukougun.github.io/kyopro-atlas/tree/auxiliary-tree/#alternatives
 
 ## 併合過程の木（merge-process-tree） {#merge-process-tree}

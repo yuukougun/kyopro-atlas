@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 300" width="560" height="300" font-family="sans-serif">
-  <rect width="560" height="300" fill="#ffffff"/>
+<svg viewBox="0 0 560 322" width="560" height="322" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect width="560" height="322" fill="#ffffff"/>
   <text x="110" y="28" font-size="16" text-anchor="middle" fill="#222">グラフ G</text>
   <text x="450" y="28" font-size="16" text-anchor="middle" fill="#222">グラフ H</text>
   <!-- G: path 1-2-3-4 -->
@@ -31,16 +31,17 @@
     <text x="400" y="176">3</text><text x="500" y="76">4</text>
   </g>
   <!-- mapping table -->
-  <text x="280" y="105" font-size="14" text-anchor="middle" fill="#222">G の頂点 i を</text>
-  <text x="280" y="125" font-size="14" text-anchor="middle" fill="#222">H の頂点 p(i) へ</text>
+  <text x="280" y="105" font-size="16" text-anchor="middle" fill="#222">G の頂点 i を</text>
+  <text x="280" y="125" font-size="16" text-anchor="middle" fill="#222">H の頂点 p(i) へ</text>
   <path d="M 220 140 L 340 140" stroke="#222" stroke-width="2" stroke-dasharray="6 4" fill="none"/>
   <path d="M 340 140 L 330 134 L 330 146 Z" fill="#222"/>
-  <g font-size="15" fill="#222" text-anchor="middle">
+  <g font-size="16" fill="#222" text-anchor="middle">
     <text x="180" y="225">i</text>
     <text x="230" y="225">1</text><text x="280" y="225">2</text><text x="330" y="225">3</text><text x="380" y="225">4</text>
     <text x="180" y="255">p(i)</text>
     <text x="230" y="255">2</text><text x="280" y="255">4</text><text x="330" y="255">1</text><text x="380" y="255">3</text>
   </g>
   <line x1="155" y1="235" x2="405" y2="235" stroke="#888" stroke-width="1"/>
-  <text x="280" y="288" font-size="13" text-anchor="middle" fill="#444">辺 1–2・2–3・3–4 は、H の辺 2–4・4–1・1–3 に移る（辺のない組も、ない組に移る）</text>
+  <text x="280" y="288" font-size="16" text-anchor="middle" fill="#444">辺 1–2・2–3・3–4 は、H の辺 2–4・4–1・1–3 に移る</text>
+  <text x="280" y="310" font-size="16" text-anchor="middle" fill="#444">（辺のない組も、ない組に移る）</text>
 </svg>

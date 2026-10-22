@@ -9,7 +9,7 @@ order: 300
 level: 黄
 kind: [数え上げ, 木]
 prerequisites: [multinomial-coefficient, tree-degree]
-related: [counting-bijection, matrix-tree-theorem, generating-function-counting, binomial-identities]
+related: [counting-bijection, matrix-tree-theorem, generating-function-counting, binomial-identities, fps-basics]
 summary: 頂点にラベルのある n 頂点の木は n^(n−2) 個で、Prüfer 列に頂点 i がちょうど（次数 − 1）回現れることから、次数を指定した木は (n−2)!/Π(d_i − 1)! 個になる。次数列ごとに数えて総和を取る問題で使う。
 complexity: 階乗・逆階乗の前計算 O(N + log p) のあと、木の総数 N^(N−2) は O(log N)、次数列を決めた木の数は O(N)。次数の条件を多項式の累乗で数えるなら O(N log N)〜O(N log^2 N)
 signs:

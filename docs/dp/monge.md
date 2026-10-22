@@ -28,7 +28,7 @@ sections:
   - {title: Knuth-Yao（区間 DP の分割点の範囲を絞って O(N^2)）, anchor: knuth-yao}
   - {title: DP の値の凸性（個数について凸な答え）, anchor: dp-convexity}
   - {title: '凸な列どうしの (max,+) 畳み込み（差分のマージ）', anchor: convex-max-plus-convolution}
-  - {title: ライブラリでの検証（Library Checker の min_plus_convolution_convex_arbitrary など）, anchor: verify}
+  - {title: ライブラリでの検証, anchor: verify}
 stage: draft
 updated: 2026-10-22
 ---
@@ -156,7 +156,7 @@ $$
 
 分割統治の各ノードで「左半分の上に凸な列」と「右半分の任意の列」を合成する問題は、各段がこの畳み込みになり、全体で $O(N \log^2 N)$ になる（[例題](#abc348_g)）。
 
-## ライブラリでの検証（Library Checker の min_plus_convolution_convex_arbitrary など） {#verify}
+## ライブラリでの検証 {#verify}
 
 ACL には Monge に関する機能がない。自作したら Library Checker の次の問題で確かめる。
 

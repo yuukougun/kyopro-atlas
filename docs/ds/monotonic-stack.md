@@ -236,6 +236,7 @@ for i = 1, 2, …, N:
 <div class="kp-problems" data-role="practice" markdown>
 
 - [鉄則本 A60. Stock Price](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bh)（diff —）：各日について、それより前で株価が高かった最後の日を答える。
+- [ABC189 C. Mandarin Orange](https://atcoder.jp/contests/abc189/tasks/abc189_c)（diff 565）：区間を 1 つ選び、区間の長さと区間の最小値の積の最大値を求める。
 - [ABC352 D. Permutation Subsequence](https://atcoder.jp/contests/abc352/tasks/abc352_d)（diff 714）：順列で、連続する値 K 個の位置の最大 − 最小の最小値を求める。
 - [ABC435 F. Cat exercise](https://atcoder.jp/contests/abc435/tasks/abc435_f)（diff 1385）：最大値の位置で区間を左右に分けて進む過程の、移動距離の合計の最大値を求める。
 - [DONUTS-2015 C. 行列のできるドーナツ屋](https://atcoder.jp/contests/donuts-2015/tasks/donuts_2015_3)（diff 1661）：行列に並ぶ各人から前方に見える人の数を答える。
@@ -245,6 +246,7 @@ for i = 1, 2, …, N:
 
 ??? note "方針"
     - **鉄則本 A60**：[手順](#procedure)そのものである。「左で初めて大きい」なので、株価が今日以下の日を降ろす
+    - **ABC189 C**：[ヒストグラムの最大長方形](#histogram)と同じ問いである。$N$ が小さいので左端を固定して右へ伸ばす $O(N^2)$ の全探索でも通るが、各要素を最小値とする区間の左右の端を単調スタックで求めれば $O(N)$ になる
     - **ABC352 D**：値 $v$ の位置を $Q_v$ とすると、$Q$ の長さ $K$ の窓ごとの「最大 − 最小」の最小値が答えになる。最大と最小をそれぞれスライド最小値の deque で求める（multiset でもよい）
     - **ABC435 F**：最大値の位置で区間を左右に割る再帰の構造を、[Cartesian tree](#cartesian-tree) として作る（level 黄の節の内容を使う）。根から葉までの経路で、移動距離の合計が最大のものを探す
     - **DONUTS-2015 C**：[見えるビルの数](#visible)を左から行う。各人の答えは、その人を積む直前のスタックの大きさである

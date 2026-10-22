@@ -120,7 +120,7 @@ $\Delta A$ と $\Delta B$ は差の列の区間 gcd なので、次の節の Spa
 
 - **区間 gcd のクエリ**（$N, Q \le 2 \times 10^5$）：列が変わらなければ Sparse Table、変わるならセグメント木。
 - **1 つ除いた gcd**：左右からの累積 gcd で $O(1)$ に答える（[左右からの累積 gcd](../math/gcd-lcm.md#prefix-suffix-gcd)）。区間を除いた gcd も、前と後ろの累積の gcd で求まる。
-- **値ごとの区間の数**：上の組の列を使う。gcd が $d$ の倍数になる区間の数を数えて、[約数の包除](../comb/divisor-inclusion-exclusion.md)で「ちょうど $d$」に直す方法もある。
+- **値ごとの区間の数**：上の組の列を使う。gcd が $d$ の倍数になる区間の数を数えて、[約数包除](../comb/divisor-inclusion-exclusion.md)で「ちょうど $d$」に直す方法もある。
 
 ## mod N で A ずつ進むと gcd(A, N) の倍数だけを回る（周期と連結性） {#step-mod}
 
@@ -202,7 +202,7 @@ $\gcd(a, b) = g > 1$ なら、$ax + by$ は $g$ の倍数しか作れないの�
 - 1 つ（または 1 区間）を除いた gcd だけなら、Sparse Table を作らず左右からの累積 gcd で足りる（[左右からの累積 gcd](../math/gcd-lcm.md#prefix-suffix-gcd)）。
 - 区間 gcd で列が変わらないなら Sparse Table（クエリが gcd 1 回）、変わるならセグメント木。
 - 「何回で着くか」「どの値が作れるか」を具体的な解まで求めるなら、[拡張ユークリッドの互除法](../math/ext-gcd.md)で一次合同式・一次不定方程式を解く。ここでの性質は、行けるか・何点あるかの判定に使う。
-- gcd の値ごとに個数を数え、約数について足し引きする問題は[約数の包除](../comb/divisor-inclusion-exclusion.md)の範囲である。
+- gcd の値ごとに個数を数え、約数について足し引きする問題は[約数包除](../comb/divisor-inclusion-exclusion.md)の範囲である。
 
 ## 例題 {#examples}
 

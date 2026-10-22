@@ -180,7 +180,7 @@ ACL に対応がある手法は「ACL では」の囲みに、名前・宣言・
   - bitset で速くなるのは定数倍（1/64）だけで、計算量の次数が 1 つ違う解法は救えない。$N \times N$ の bitset はメモリが $N^2/8$ バイト（$N = 10^5$ で $1.25 \times 10^9$ バイト）になることも見積もる
 - **cpp**：版（`cpp_std`・`gcc_min`・`atcoder`）は g++-13 と g++-15 で確かめる。落とし穴は snippets の期待（`compile-error`・`warning`・`run`）で確かめた実例にする
   - `1 << 31` は「C++20 から規格で値（$-2^{31}$）が決まった。C++14・C++17 では処理系定義で、GCC では同じ値になる。シフト幅が型の bit 数以上なら、どの版でも未定義動作」と書く
-  - AtCoder は `-ftrivial-auto-var-init=zero` でコンパイルするので、関数の中の大きな配列は呼ぶたびに 0 で埋められて遅い（手元で $10^5$ 要素の局所配列を持つ関数を $2 \times 10^5$ 回呼ぶと 0.04 秒が 1.0 秒になった）。作業用の配列はグローバルに置くか使い回す（持ち主は cpp-environment#auto-var-init）
+  - AtCoder は `-ftrivial-auto-var-init=zero` でコンパイルするので、関数の中の大きな配列は呼ぶたびに 0 で埋められて遅い（手元で $10^5$ 要素の局所配列を持つ関数を $2 \times 10^5$ 回呼ぶと 0.05 秒が 1.03 秒になった）。作業用の配列はグローバルに置くか使い回す（持ち主は cpp-environment#auto-var-init）
 
 ## 6. 記法
 
@@ -380,12 +380,29 @@ cases:
 16. **表記の揺れを例に出すページ**：索引・用語集・表記の説明の箇所は `<!-- textlint-disable prh -->`〜`<!-- textlint-enable prh -->` で囲んでよい
 17. **判断待ちの台帳の件**：agc002_d・abc311_h・abc458_g・keyence2019_e・abc189_c・abc197_c（`planning/batches/b5/summary/ledger-result.md`）は工程10で決める。それまで執筆者は役割を変えず、気づいた点を提案に書く
 
+## 17. 工程10で決めたこと（2026-10-22）
+
+全体の検証（`planning/batches/s10/`）で残った判断。§13〜§16 と食い違うときはこちらを優先する。
+
+1. **complexity**：guide・hub・pattern は 17 ページすべて null にそろえる（§16-12 のとおり。見本 bracket-sequence も含む）
+2. **pattern・hub の prerequisites**：持っても持たなくてもよい。持つときは要点の「前提」と一致させる
+3. **ライブラリの節の anchor**：発展の概要は `library` にそろえる（cht・dynamic-dp・monge の `verify`、wavelet-matrix・auxiliary-tree の `usage`、linear-recurrence-fast の `implementation` を改める）。localStorage の鍵は anchor を使わないので転送は要らない。two-sat の `acl` は §15-3 の例外として残す。roadmap の `practice`・string-basics の `cost-pitfalls` も残す
+4. **上位の手法へのつながり**：同じ役の中身の節（modint の `connections`、mod-pow の `building-block`、global-offset の `to-lazy-segment-tree`）があれば定型の `next-steps` は足さない。lazy-segment-tree は境界の節で落とし穴を兼ねてよい
+5. **確認問題の置き場所**：§14-11 を改める。節の理解を確かめる確認問題は本文の途中に置いてよい。末尾の `## 確認問題 {#quiz}` は任意
+6. **図**：§15-8 の「2 枚に分ける」は、別のファイルに分けても、1 枚の SVG の中で縦に積んでもよい（幅 400 程度・360px で文字 9px 以上を守る）。端の文字は viewBox から 10px 以上離す。検査は `tools/check_svg.py`
+7. **frequency**：「古い ABC で繰り返し使われた」は、台帳で ABC の例題・練習・力試しに載る問題が 3 問以上のことにする（工程9の補充の問題も数える）。付け直しは `tools/frequency.py` で行い、evidence の数もこのスクリプトで書き直す
+8. **表記**：付録 A に「最上位 bit」「最下位 bit」を足し、prh に `多重テストケース→複数テストケース`・`歩道→ウォーク`・`上位ビット→上位 bit`・`最上位ビット→最上位 bit`・`最下位ビット→最下位 bit`・`平衡二分木→平衡二分探索木`・`フェニック木→BIT`・`0 始まり→0-indexed`・`1 始まり→1-indexed` を足す。front matter の aliases の検索語は残してよい。summary・signs は本文と同じ表記にする
+9. **本文の問題の行の要約**：台帳の summary を元にし、ページに合わせて言い回しを変えてよい（一字一句の一致は求めない）。事実が食い違うときは台帳を直す
+10. **出典の題名**：同じ URL はサイト全体で同じ題名にする（ページの h1 か記事の題名）。check_pages で警告する
+11. **重なる内容の持ち主**：rollback-union-find と offline-dynamic-connectivity の頂点の追加は offline-dynamic-connectivity、経路圧縮をしない理由は rollback-union-find#no-path-compression。もう一方は要点とリンクに縮める
+12. **練習の数**：§10 の 2〜6 問は目安。台帳の役割どおりに足して 7〜9 問になったページはそのままでよい。役割の薄い問題は台帳から外してよい（abc116_c は difference-sequence から、abc130_e は dp-prefix-sum から外す）
+
 ## 付録 A　用語の正規形
 
 かっこ内は本文で使ってよい別の書き方。
 
 - **全体**：計算量・ならし計算量・定数倍・前計算・クエリ・オフライン・半開区間・0-indexed・1-indexed・単位元・結合法則・番兵・difficulty（diff）・ACL・Library Checker・複数テストケース（多重テストケースは使わない）・Rated・パフォーマンス・レーティング（レート）・色・ARC--・ARC++（2025 年までの区分は空白を入れて「Div. 1」「Div. 2」）
-- **基本**：全探索・bit 全探索・順列全探索・半分全列挙・二分探索・答えで二分探索（答えの二分探索）・三分探索・座標圧縮・累積和・2 次元累積和・いもす法・差分列・尺取り法・ランレングス圧縮・貪欲法・区間スケジューリング・交換論法・辞書順・安定ソート・ダブリング・分割統治・周期性・イベントソート・平面走査（走査線）・bit 演算・bit ごと・上位 bit
+- **基本**：全探索・bit 全探索・順列全探索・半分全列挙・二分探索・答えで二分探索（答えの二分探索）・三分探索・座標圧縮・累積和・2 次元累積和・いもす法・差分列・尺取り法・ランレングス圧縮・貪欲法・区間スケジューリング・交換論法・辞書順・安定ソート・ダブリング・分割統治・周期性・イベントソート・平面走査（走査線）・bit 演算・bit ごと・上位 bit・最上位 bit・最下位 bit
 - **考察**：言い換え・主客転倒・寄与・余事象・偶奇・不変量・構築・対称性・鳩の巣原理
 - **DP**：DP（動的計画法）・状態・遷移・配る DP・貰う DP・メモ化再帰・計算順序・DAG 上の DP・復元・ナップサック・部分和・戻す DP・最長増加部分列（LIS）・最長共通部分列（LCS）・編集距離・区間 DP・bitDP・桁 DP・木 DP・全方位木 DP・二乗の木 DP・挿入 DP・インライン DP・部分列 DP・Convex Hull Trick（CHT）・Monge・monotone minima・(min,+) 畳み込み・Alien DP・Slope Trick
 - **グラフ**：有向グラフ・無向グラフ・隣接リスト・閉路・ウォーク（歩道は使わない）・DAG・深さ優先探索（DFS）・幅優先探索（BFS）・01-BFS・最短路（最短経路は使わない）・ダイクストラ法・ワーシャルフロイド法・ベルマンフォード法・トポロジカルソート・強連結成分分解（SCC）・二部グラフ・連結成分・最大独立集合・最小頂点被覆・最小辺被覆・マッチング・交互路・残余グラフ・最小全域木・クラスカル法・プリム法・橋・関節点・lowlink・オイラー路・最大流・最小カット・燃やす埋める・二部マッチング・König の定理・最小費用流・2-SAT・リテラル・節・含意グラフ・超頂点・なもりグラフ・Functional graph
@@ -402,11 +419,11 @@ cases:
 
 robots の meta と X-Robots-Tag に noai・noimageai がないことを確かめた（2026-10-21。b2〜b5 の分は 2026-10-22）。はてなブログは書き手ごとに設定できるので、ここにないブログは確かめる。
 
-- はてなブログ：drken1215・merom686・kazun-kyopro・kanpurin・kyo-pro・torus711・sigma425・kyopro-friends・noshi91・rsk0315・tayu0110・enakai00・kcpc・miscalc・pyteyon・satanic0258・smijake3・rsm9・chokudai・iroha-3856・potato167・ebisuke33・yuulis（どれも .hatenablog.com）、cirrostratus.hatenablog.com、kmjp.hatenablog.jp・betrue12.hateblo.jp・inamori.hateblo.jp・ei1333.hateblo.jp・buyoh.hateblo.jp・blog.hamayanhamayan.com
-- そのほか：ikatakos.com・qiita.com・zenn.dev・github.com・nyaannyaan.github.io・ei1333.github.io・programming-hiroba.com・oraclesqlpuzzle.ninja-web.net・www.cnblogs.com・atcoder-tags.herokuapp.com・maspypy.com・www.mathenachia.blog・cp-algorithms.com・oi-wiki.org・judge.yosupo.jp・ja.wikipedia.org・hackmd.io・en.cppreference.com・cpprefjp.github.io・gcc.gnu.org・usaco.guide（構成の参考だけ）・dev.to・scrapbox.io（プロジェクトごとに書き手が違う。確かめたのは wafuwafualgorithm・nishio・kani・37zigen-43465887・Atcoder-myReflection・konan-compro・pctsnote）・chokudai.github.io・developer.apple.com・en.wikipedia.org・www.luogu.com.cn・noshi91.github.io・yamate11.github.io・imoz.jp・soi.ch・robert1003.github.io・raw.githubusercontent.com・hcpc-hokudai.github.io（PDF は読んでいない）・mzhang2021.github.io・kmyk.github.io・js.cytoscape.org・competitive-verifier.github.io・online-judge-tools.github.io・hitonanode.github.io・aruma256.dev・onlinejudge.u-aizu.ac.jp（AOJ）・cses.fi
+- はてなブログ：drken1215・merom686・kazun-kyopro・kanpurin・kyo-pro・torus711・sigma425・kyopro-friends・noshi91・rsk0315・tayu0110・enakai00・kcpc・miscalc・pyteyon・satanic0258・smijake3・rsm9・chokudai・iroha-3856・potato167・ebisuke33・yuulis・amentorimaru・at274・ferin-tech・flkanjin・fukuro-hoho・geam1113・kazuma8128・kokiymgch・ks2m・miti-7・mmxsrup・motsu-xe・ngtkana・sapphire15・sen-comp・snuke・tsutaj（どれも .hatenablog.com）、cirrostratus.hatenablog.com、kmjp.hatenablog.jp・betrue12.hateblo.jp・inamori.hateblo.jp・ei1333.hateblo.jp・buyoh.hateblo.jp・bondo.hateblo.jp・emtubasa.hateblo.jp・perogram.hateblo.jp・blog.hamayanhamayan.com
+- そのほか：ikatakos.com・qiita.com・zenn.dev・github.com・nyaannyaan.github.io・ei1333.github.io・programming-hiroba.com・oraclesqlpuzzle.ninja-web.net・www.cnblogs.com・atcoder-tags.herokuapp.com・maspypy.com・www.mathenachia.blog・cp-algorithms.com・oi-wiki.org・judge.yosupo.jp・ja.wikipedia.org・hackmd.io・en.cppreference.com・cpprefjp.github.io・gcc.gnu.org・usaco.guide（構成の参考だけ）・dev.to・scrapbox.io（プロジェクトごとに書き手が違う。確かめたのは wafuwafualgorithm・nishio・kani・37zigen-43465887・Atcoder-myReflection・konan-compro・pctsnote・Kodaman・esaka-sandbox・procon-kirokuyou・kyopuro-ryusuke920）・chokudai.github.io・developer.apple.com・en.wikipedia.org・www.luogu.com.cn・noshi91.github.io・yamate11.github.io・imoz.jp・soi.ch・robert1003.github.io・raw.githubusercontent.com・hcpc-hokudai.github.io（PDF は読んでいない）・mzhang2021.github.io・kmyk.github.io・js.cytoscape.org・competitive-verifier.github.io・online-judge-tools.github.io・hitonanode.github.io・aruma256.dev・onlinejudge.u-aizu.ac.jp（AOJ）・cses.fi・algo-logic.info・arxiv.org・atcoder-novisteps.vercel.app・blog.nishigake.net・blog.tibrella.space・blog.tiramister.net・book.mynavi.jp・code.claude.com・competitive12.blogspot.com・cplusplus.github.io・gdst.dev・it.commutty.com・kato-hiro.github.io・koosaga.com・kopricky.github.io・kumonosu.cloudsquare.jp・nullkara.jp・oeis.org・picomikan.net・webkit.org・yamanoue.tslmuse.com（この行の algo-logic.info 以降と、はてなブログ・scrapbox で足した分は工程10 の洗い出しで確かめた。2026-10-22）
 - github.com のうち yosupo06/library-checker-problems の issue・PR は出典にしてよい（問題の仕様や計算量の議論）
 - speakerdeck.com はスライドごとに書き手が違う（確かめたのは tatyam_prime の「Monge の手引書」）
-- 確かめられなかった：trap.jp（2026-10-22 の check_noai は HTTP 503 で取得できなかった。cpp-environment・static-top-tree が使っている）。yukicoder.me は meta の指定はないが、利用規約を確かめるまで使わない（§16-6）
+- 確かめられなかった：trap.jp（2026-10-22 の check_noai は HTTP 503・タイムアウト・接続拒否で、その後は証明書の検証の失敗で取得できなかった。cpp-environment・cpp-macros-template-file・hashing-for-sets・static-top-tree の 4 ページが使っている）。doi.org（ACM の論文。union-find-applications）と suzukiapple.tumblr.com（sqrt-decomposition）は HTTP 403 で確かめられない。yukicoder.me は meta の指定はないが、利用規約を確かめるまで使わない（§16-6）
 - web.archive.org：ikatakos.com が落ちているときに写しを読むためだけに使う（問題文の節は読まない。§15-6）
-- note.com は meta の指定はないが、利用条件を記事ごとに確かめる（確かめた記事：igasu_7 の n5bd80b1e0eb9・anoconne の n26b5912e1e9c）
+- note.com は meta の指定はないが、利用条件を記事ごとに確かめる（確かめた記事：igasu_7 の n5bd80b1e0eb9・anoconne の n26b5912e1e9c・vain0x の n0037d6468812・syamashi の nb491ffdf0ca3・nc5b5876e0514・n8e580d4ce59d・hip_crow3665 の ne7a656317cea。後の 5 本は 2026-10-22 に meta の指定がなく、本文に転載・引用・AI の利用を断る記述がない無料の記事であることを確かめた）
 - 開かない（noai 指定）：atcoder.jp・codeforces.com

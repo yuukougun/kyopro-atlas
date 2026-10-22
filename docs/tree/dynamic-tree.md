@@ -9,7 +9,7 @@ order: 210
 level: 発展
 kind: [木, データ構造]
 prerequisites: [hld, balanced-bst]
-related: [small-to-large, static-top-tree]
+related: [small-to-large, static-top-tree, euler-tour#in-out]
 summary: 辺の追加と削除がある森で、パスのクエリや根の付け替えを償却 O(log N) で処理する Link-Cut Tree と、部分木のクエリ向けの Euler Tour Tree、両方に使える Top Tree がある。
 complexity: Link-Cut Tree の link・cut・根の付け替え・パスの取得と更新はならし O(log N)（splay 木のとき）。Euler Tour Tree の link・cut・部分木の取得と更新は O(log N)（期待かならし。載せる平衡二分探索木による）
 signs:

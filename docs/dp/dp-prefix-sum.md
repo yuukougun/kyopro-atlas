@@ -255,6 +255,7 @@ $i$ 番目の子に配る個数で場合分けすると、遷移元は前の段�
 
 - [ABC178 D. Redistribution](https://atcoder.jp/contests/abc178/tasks/abc178_d)（diff 875）：各項が 3 以上の整数で、総和が S になる数列の個数を求める。
 - [ABC253 E. Distance Sequence](https://atcoder.jp/contests/abc253/tasks/abc253_e)（diff 1073）：長さ N・各項が 1〜M で、隣り合う項の差の絶対値が K 以上の数列の個数を求める。
+- [ABC183 E. Queen on Grid](https://atcoder.jp/contests/abc183/tasks/abc183_e)（diff 1288）：壁のあるグリッドで、右・下・右下のどれかへ壁の手前まで何マスでも進めるとき、左上から右下へ行く方法の数を求める。
 - [典型90 042. Multiple of 9（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_ap)（diff —）：各桁が 1〜9 で桁の和が K になる正の整数のうち、9 の倍数の個数を求める。
 - [ABC442 F. Diagonal Separation 2](https://atcoder.jp/contests/abc442/tasks/abc442_f)（diff 1295）：グリッドのマスを塗り替えて、各行の左側に並ぶ白の個数が下の行ほど減る形にするときの、塗り替えの最小数を求める。
 - [TDPC F. 準急](https://atcoder.jp/contests/tdpc/tasks/tdpc_semiexp)（diff —）：1 番目と N 番目の駅には止まり、K 駅以上連続しては止まらない停車駅の選び方の数を求める。
@@ -265,6 +266,7 @@ $i$ 番目の子に配る個数で場合分けすると、遷移元は前の段�
 ??? note "練習の方針"
     - **ABC178 D**：「$\mathrm{dp}[v]$ ＝ 総和が $v$ の数列の数」、$\mathrm{dp}[0] = 1$。最後の項で場合分けすると遷移元は $[0, v - 3]$ の接頭辞なので、$v \ge 3$ で $\mathrm{dp}[v] = S[v - 2]$、$v = 1, 2$ は 0。隣の式との差を取って $\mathrm{dp}[v] = \mathrm{dp}[v - 1] + \mathrm{dp}[v - 3]$ としてもよい
     - **ABC253 E**：「$\mathrm{dp}[i][j]$ ＝ 長さ $i$ で最後が $j$」。遷移元は前の段の、$j$ から $K$ 以上離れた値で、内側の範囲の外の 2 区間である。前の段の全体から内側の範囲の和を引く。$K = 0$ では内側が空になるので別に扱う
+    - **ABC183 E**：遷移元はそのマスから左・上・左上へ壁に当たるまでの 3 本の線分である。「$X[i][j]$ ＝ 行の左から $(i, j)$ までの $\mathrm{dp}$ の和（壁で 0 に戻す）」を持つ。列・斜めの同じ和 $Y$・$Z$ も持てば、$\mathrm{dp}[i][j] = X[i][j-1] + Y[i-1][j] + Z[i-1][j-1]$ で $O(1)$ になる。全体 $O(HW)$
     - **典型90 042**：9 の倍数は桁の和が 9 の倍数なので、$K$ が 9 の倍数でなければ 0。「$\mathrm{dp}[s]$ ＝ 桁の和が $s$ の数の個数」は最後の桁で場合分けして直前 9 項の和になり、窓の和か累積和で $O(K)$
     - **ABC442 F**：「$\mathrm{dp}[i][j]$ ＝ $i$ 行目の白を左から $j$ 個にしたときの最小の塗り替え数」。行の中のコストは左右からの累積和で全 $j$ を $O(N)$ で求め、上の行は $k \ge j$ の最小なので後ろからの累積 min で取る。全体 $O(N^2)$
     - **TDPC F**：最後に通過した駅で場合分けすると、遷移元は直前の一定の幅の窓になり、窓の和を累積和で取れる。止まる・止まらないの 2 通りから「直前がすべて停車した場合」を引く $\mathrm{dp}[i + 1] = 2\,\mathrm{dp}[i] - \mathrm{dp}[i - K]$ の形に整理してもよい。最後の駅に止まる条件は余事象で処理する

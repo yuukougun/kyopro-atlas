@@ -160,6 +160,15 @@ updated: 2026-10-21
 
 **数え方の差 1**。部分区間も満たす型の個数は、左端の for なら $r - l$、右端の for なら $r - l + 1$（$r$ を含む閉区間 $[l, r]$ で数えるため）である。どちらの書き方で $r$ が何を指すかを決めてから数える。
 
+## 上位の手法へのつながり {#next-steps}
+
+このページの「右端を戻さずに動かす」は、次の手法の部品になる。
+
+- **固定長の窓の最小値**：幅 $K$ の窓をずらしながら最小値を求めるなら、deque に添字を単調に積んでならし $O(1)$ で更新する（[スライド最小値](../ds/monotonic-stack.md#sliding-window-minimum)）
+- **DP の遷移元の窓**：遷移元の範囲が単調に動く DP は、尺取りと累積和（またはスライド最小値）で速くする（[区間分割 DP](../dp/dp-sequence-partition.md#two-pointers)、[セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md#dp-sliding-window)）
+- **区間を伸び縮みさせて答える**：左右を合成できない量（区間の種類数など）の区間クエリは、クエリを並べ替えて前の区間から 1 要素ずつ伸び縮みさせる（[Mo's algorithm](../ds/mo-algorithm.md#ordering)）
+- **負の値があるとき**：単調性がなくなるので、累積和と連想配列で数える（[累積和と連想配列で区間を数える](../basics/prefix-sum-counting.md#vs-two-pointers)）
+
 ## 例題 {#examples}
 
 ### ABC130 D. Enough Array {#abc130_d}

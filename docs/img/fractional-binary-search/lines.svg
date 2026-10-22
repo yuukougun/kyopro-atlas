@@ -1,44 +1,47 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" font-family="sans-serif" font-size="14">
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="410" viewBox="0 0 400 410" font-family="sans-serif" font-size="14">
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="70" y="24" fill="#222">各要素の値 a − x·b を x の関数として描く（K = 2 個を選ぶ）</text>
-<text x="70" y="44" fill="#555" font-size="12">A = (a 4, b 1)・B = (a 0, b 1)・C = (a 12, b 10)。太線 g(x) は上位 2 個の和</text>
-<line x1="70" y1="217.5" x2="600" y2="217.5" stroke="#888" stroke-width="1"/>
-<line x1="70" y1="60" x2="70" y2="340" stroke="#888" stroke-width="1"/>
-<line x1="70.0" y1="213.5" x2="70.0" y2="221.5" stroke="#888"/>
-<text x="70.0" y="360" text-anchor="middle" fill="#444" font-size="12">0</text>
-<line x1="176.0" y1="213.5" x2="176.0" y2="221.5" stroke="#888"/>
-<text x="176.0" y="360" text-anchor="middle" fill="#444" font-size="12">0.5</text>
-<line x1="282.0" y1="213.5" x2="282.0" y2="221.5" stroke="#888"/>
-<text x="282.0" y="360" text-anchor="middle" fill="#444" font-size="12">1</text>
-<line x1="388.0" y1="213.5" x2="388.0" y2="221.5" stroke="#888"/>
-<text x="388.0" y="360" text-anchor="middle" fill="#444" font-size="12">1.5</text>
-<line x1="494.0" y1="213.5" x2="494.0" y2="221.5" stroke="#888"/>
-<text x="494.0" y="360" text-anchor="middle" fill="#444" font-size="12">2</text>
-<line x1="600.0" y1="213.5" x2="600.0" y2="221.5" stroke="#888"/>
-<text x="600.0" y="360" text-anchor="middle" fill="#444" font-size="12">2.5</text>
-<text x="62" y="309.0" text-anchor="end" fill="#444" font-size="12">-10</text>
-<text x="62" y="221.5" text-anchor="end" fill="#444" font-size="12">0</text>
-<text x="62" y="134.0" text-anchor="end" fill="#444" font-size="12">10</text>
-<text x="600" y="378" text-anchor="end" fill="#444" font-size="12">x（候補の答え）</text>
-<line x1="352.7" y1="60" x2="352.7" y2="340" stroke="#999" stroke-dasharray="3 3"/>
-<line x1="494.0" y1="60" x2="494.0" y2="340" stroke="#999" stroke-dasharray="3 3"/>
-<text x="346.7" y="72" text-anchor="end" fill="#444" font-size="12">x = 4/3：C と B が入れ替わる</text>
-<text x="500.0" y="72" fill="#444" font-size="12">x = 2：g(x) = 0</text>
-<line x1="70.0" y1="182.5" x2="600.0" y2="204.4" stroke="#1f4e9a" stroke-width="2"/>
-<line x1="70.0" y1="217.5" x2="600.0" y2="239.4" stroke="#b5462a" stroke-width="2" stroke-dasharray="8 4"/>
-<line x1="70.0" y1="112.5" x2="600.0" y2="331.2" stroke="#2a7a3b" stroke-width="2" stroke-dasharray="2 3"/>
-<line x1="70.0" y1="77.5" x2="352.7" y2="205.8" stroke="#222" stroke-width="4"/>
-<line x1="352.7" y1="205.8" x2="600.0" y2="226.2" stroke="#222" stroke-width="4"/>
-<circle cx="494.0" cy="217.5" r="5" fill="#ffffff" stroke="#222" stroke-width="2"/>
-<text x="604.0" y="208.4" fill="#1f4e9a" font-size="13">A</text>
-<text x="604.0" y="243.4" fill="#b5462a" font-size="13">B</text>
-<text x="96" y="150" fill="#2a7a3b" font-size="13">C</text>
-<line x1="90" y1="268" x2="120" y2="268" stroke="#1f4e9a" stroke-width="2"/>
-<text x="128" y="273" fill="#222" font-size="12">A：4 − x</text>
-<line x1="90" y1="288" x2="120" y2="288" stroke="#b5462a" stroke-width="2" stroke-dasharray="8 4"/>
-<text x="128" y="293" fill="#222" font-size="12">B：0 − x</text>
-<line x1="90" y1="308" x2="120" y2="308" stroke="#2a7a3b" stroke-width="2" stroke-dasharray="2 3"/>
-<text x="128" y="313" fill="#222" font-size="12">C：12 − 10x</text>
-<line x1="90" y1="328" x2="120" y2="328" stroke="#222" stroke-width="4"/>
-<text x="128" y="333" fill="#222" font-size="12">g(x)：上位 2 個の和</text>
+<text x="16" y="22" fill="#222">各要素の値 a − x·b を x の関数として描く</text>
+<text x="16" y="42" fill="#555" font-size="13">K = 2 個を選ぶ。A = (a 4, b 1)・B = (a 0, b 1)・</text>
+<text x="16" y="60" fill="#555" font-size="13">C = (a 12, b 10)</text>
+<line x1="40" y1="230" x2="370.0" y2="230" stroke="#888"/>
+<line x1="40" y1="70" x2="40" y2="360" stroke="#888"/>
+<line x1="40" y1="226" x2="40" y2="234" stroke="#888"/>
+<text x="40" y="380" text-anchor="middle" fill="#444" font-size="13">0</text>
+<line x1="106" y1="226" x2="106" y2="234" stroke="#888"/>
+<text x="106" y="380" text-anchor="middle" fill="#444" font-size="13">0.5</text>
+<line x1="172" y1="226" x2="172" y2="234" stroke="#888"/>
+<text x="172" y="380" text-anchor="middle" fill="#444" font-size="13">1</text>
+<line x1="238" y1="226" x2="238" y2="234" stroke="#888"/>
+<text x="238" y="380" text-anchor="middle" fill="#444" font-size="13">1.5</text>
+<line x1="304" y1="226" x2="304" y2="234" stroke="#888"/>
+<text x="304" y="380" text-anchor="middle" fill="#444" font-size="13">2</text>
+<line x1="370" y1="226" x2="370" y2="234" stroke="#888"/>
+<text x="370" y="380" text-anchor="middle" fill="#444" font-size="13">2.5</text>
+<text x="35" y="334" text-anchor="end" fill="#444" font-size="13">-10</text>
+<text x="35" y="234" text-anchor="end" fill="#444" font-size="13">0</text>
+<text x="35" y="134" text-anchor="end" fill="#444" font-size="13">10</text>
+<text x="370.0" y="398" text-anchor="end" fill="#444" font-size="13">x（候補の答え）</text>
+<line x1="216.0" y1="70" x2="216.0" y2="360" stroke="#999" stroke-dasharray="3 3"/>
+<line x1="304.0" y1="70" x2="304.0" y2="360" stroke="#999" stroke-dasharray="3 3"/>
+<text x="221.0" y="90" fill="#444" font-size="13">x = 4/3：</text>
+<text x="221.0" y="108.0" fill="#444" font-size="13">C と B が</text>
+<text x="221.0" y="126.0" fill="#444" font-size="13">入れ替わる</text>
+<text x="309.0" y="90" fill="#444" font-size="13">x = 2：</text>
+<text x="309.0" y="108.0" fill="#444" font-size="13">g(x) = 0</text>
+<line x1="40" y1="190.0" x2="370.0" y2="215.0" stroke="#1f4e9a" stroke-width="2"/>
+<line x1="40" y1="230.0" x2="370.0" y2="255.0" stroke="#b5462a" stroke-width="2" stroke-dasharray="8 4"/>
+<line x1="40" y1="110.0" x2="370.0" y2="360.0" stroke="#2a7a3b" stroke-width="2" stroke-dasharray="2 3"/>
+<polyline points="40,70.0 216.0,216.7 370.0,240.0" fill="none" stroke="#222" stroke-width="4"/>
+<circle cx="304" cy="230" r="5" fill="#ffffff" stroke="#222" stroke-width="2"/>
+<text x="374.0" y="220.0" fill="#1f4e9a" font-size="13">A</text>
+<text x="374.0" y="260.0" fill="#b5462a" font-size="13">B</text>
+<text x="70" y="155.0" fill="#2a7a3b" font-size="13">C</text>
+<line x1="52" y1="280" x2="80" y2="280" stroke="#1f4e9a" stroke-width="2"/>
+<text x="86" y="285" fill="#222" font-size="13">A：4 − x</text>
+<line x1="52" y1="300" x2="80" y2="300" stroke="#b5462a" stroke-width="2" stroke-dasharray="8 4"/>
+<text x="86" y="305" fill="#222" font-size="13">B：0 − x</text>
+<line x1="52" y1="320" x2="80" y2="320" stroke="#2a7a3b" stroke-width="2" stroke-dasharray="2 3"/>
+<text x="86" y="325" fill="#222" font-size="13">C：12 − 10x</text>
+<line x1="52" y1="340" x2="80" y2="340" stroke="#222" stroke-width="4"/>
+<text x="86" y="345" fill="#222" font-size="13">g(x)：上位 2 個の和</text>
 </svg>

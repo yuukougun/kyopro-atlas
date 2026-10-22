@@ -11,7 +11,7 @@ kind: [案内, データ構造]
 prerequisites: []
 related: [segment-tree, priority-queue, small-to-large, balanced-bst, wavelet-matrix, dynamic-tree, cdq-divide-and-conquer, mo-algorithm, cht]
 summary: 解説に見慣れない名前のデータ構造が出てきたときに、何ができるかと代わりになる手を 1 行ずつ引く。セグ木のマージ・2 次元セグ木・K-D tree・併合可能なヒープ・Fast Set・析合木などを並べる。
-complexity: 名前ごとに表に書く。併合可能なヒープの併合は O(log N)（skew heap はならし、leftist heap は最悪、ランダム化ヒープは期待）
+complexity: null
 signs: []
 acl: []
 verify: []

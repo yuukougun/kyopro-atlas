@@ -37,14 +37,14 @@
     <text x="480" y="120">4</text>
   </g>
   <!-- 最短距離 -->
-  <g font-size="14" fill="#1f4e9c" text-anchor="middle">
+  <g font-size="16" fill="#1f4e9c" text-anchor="middle">
     <text x="60" y="160">dist 0</text>
     <text x="200" y="20">dist 3</text>
     <text x="200" y="232">dist 1</text>
     <text x="340" y="160">dist 4</text>
     <text x="480" y="160">dist 7</text>
   </g>
-  <g font-size="13" fill="#444444">
+  <g font-size="16" fill="#444444">
     <line x1="380" y1="205" x2="410" y2="205" stroke="#1f4e9c" stroke-width="4"/>
     <text x="418" y="210">最短路の木の辺</text>
     <line x1="380" y1="230" x2="410" y2="230" stroke="#888888" stroke-width="2" stroke-dasharray="6 5"/>

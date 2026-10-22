@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 300" font-family="sans-serif" font-size="14">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 560" width="380" height="560" font-family="sans-serif" font-size="14">
 <rect width="100%" height="100%" fill="#ffffff"/>
 <text x="20" y="30" fill="#222">二部グラフ：成分ごとに色の数 (a, b) が決まる</text>
 <!-- 成分 A：長さ 4 の閉路 -->
@@ -30,7 +30,8 @@
 <text x="110" y="238" fill="#222">(a, b) = (2, 2)</text>
 <text x="285" y="238" fill="#222">(a, b) = (1, 2)</text>
 </g>
-<line x1="380" y1="15" x2="380" y2="285" stroke="#bbb" stroke-dasharray="4 4"/>
+<line x1="15" y1="258" x2="365" y2="258" stroke="#bbb" stroke-dasharray="4 4"/>
+<g transform="translate(-380, 255)">
 <text x="400" y="30" fill="#222">二部グラフでない：BFS で深さの偶奇に塗る</text>
 <g stroke="#444" stroke-width="2">
 <line x1="550" y1="80" x2="480" y2="170"/>
@@ -51,9 +52,10 @@
 </g>
 <text x="600" y="75" fill="#555" font-size="12">深さ 0</text>
 <text x="650" y="175" fill="#555" font-size="12">深さ 1</text>
+</g>
 <!-- 凡例 -->
-<circle cx="40" cy="272" r="9" fill="#ffffff" stroke="#1f4e9a" stroke-width="2"/>
-<text x="56" y="277" fill="#222" font-size="13">色 0（白）</text>
-<circle cx="150" cy="272" r="9" fill="#1f4e9a" stroke="#1f4e9a" stroke-width="2"/>
-<text x="166" y="277" fill="#222" font-size="13">色 1（黒）</text>
+<circle cx="40" cy="532" r="9" fill="#ffffff" stroke="#1f4e9a" stroke-width="2"/>
+<text x="56" y="537" fill="#222" font-size="13">色 0（白）</text>
+<circle cx="150" cy="532" r="9" fill="#1f4e9a" stroke="#1f4e9a" stroke-width="2"/>
+<text x="166" y="537" fill="#222" font-size="13">色 1（黒）</text>
 </svg>

@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/prh/prh/master/prh.schema.json
 # 表記の揺れを直す規則（textlint-rule-prh が読む）。
-# - 正規形は planning/style-guide.md の §7（用語とリンク）と付録 A。その表から機械的に作れる規則だけを置く
+# - 正規形の表は docs/guide/glossary.md#canonical-forms が正（planning/style-guide.md の §7・付録 A はその元の一覧）。
+#   その表の「直す表記」から機械的に作れる規則だけを置き、規則を足したら表にも行を足す
 # - 誤検出しやすい規則は入れない。入れなかった例：
 #     「ダイクストラ」単独 → 「ダイクストラ法」（別名「拡張ダイクストラ」などとぶつかる）
 #     「Segment Tree」→「セグメント木」（題名「Segment Tree Beats」とぶつかる）
@@ -151,10 +152,10 @@ rules:
     patterns:
       - セグメントツリー
       - セグメント・ツリー
+      - セグツリー
     specs:
       - {from: 遅延セグメントツリー, to: 遅延セグメント木}
-  - expected: セグ木
-    pattern: セグツリー
+      - {from: セグツリー, to: セグメント木}
   - expected: Union-Find
     patterns:
       - '/Union[ ・]?Find/'

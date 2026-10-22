@@ -156,7 +156,7 @@ ACL に行列式はないので自作する。計算量は $O(N^3)$ で、$N = 5
 
 ## 練習問題 {#practice}
 
-行列式だけを問う AtCoder の問題は、この帯にはない。行列式を使う問題は、[行列木定理](../graph/matrix-tree-theorem.md#examples)と [LGV 補題](../comb/lgv-lemma.md#examples)のページに置く。
+ABC で必須になる問題は確認できなかった。行列式を使う問題は、[行列木定理](../graph/matrix-tree-theorem.md#examples)と [LGV 補題](../comb/lgv-lemma.md#examples)のページに置く。
 
 ### Library Checker
 

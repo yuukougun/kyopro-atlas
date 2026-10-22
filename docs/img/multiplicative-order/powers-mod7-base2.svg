@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="40 0 260 360" width="260" height="360" font-family="sans-serif">
+<rect width="680" height="370" fill="#ffffff" />
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#333" /></marker></defs>
+<line x1="181.0" y1="129.1" x2="228.3" y2="210.9" stroke="#333" stroke-width="2" marker-end="url(#ar)" />
+<line x1="217.3" y1="230.0" x2="122.7" y2="230.0" stroke="#333" stroke-width="2" marker-end="url(#ar)" />
+<line x1="111.7" y1="210.9" x2="159.0" y2="129.1" stroke="#333" stroke-width="2" marker-end="url(#ar)" />
+<circle cx="170.0" cy="110.0" r="19" fill="#dbe9ff" stroke="#333" stroke-width="1.5" />
+<text x="170.0" y="116.0" font-size="18" text-anchor="middle" fill="#000">1</text>
+<text x="170.0" y="81.0" font-size="13" text-anchor="middle" fill="#444">2⁰</text>
+<circle cx="239.3" cy="230.0" r="19" fill="#dbe9ff" stroke="#333" stroke-width="1.5" />
+<text x="239.3" y="236.0" font-size="18" text-anchor="middle" fill="#000">2</text>
+<text x="268.7" y="252.0" font-size="13" text-anchor="middle" fill="#444">2¹</text>
+<circle cx="100.7" cy="230.0" r="19" fill="#dbe9ff" stroke="#333" stroke-width="1.5" />
+<text x="100.7" y="236.0" font-size="18" text-anchor="middle" fill="#000">4</text>
+<text x="71.3" y="252.0" font-size="13" text-anchor="middle" fill="#444">2²</text>
+<text x="170" y="28" font-size="16" text-anchor="middle">底 2：位数 3（mod 7）</text>
+<text x="170" y="345" font-size="14" text-anchor="middle">3・5・6 には届かない</text>
+</svg>

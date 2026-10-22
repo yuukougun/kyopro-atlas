@@ -201,6 +201,17 @@ $K$ 番目の値は $1$〜$M$ の整数なので、$x = 1, \dots, M$ につい�
     - それ以外は $p = (M - x + 1)/M$ として $\sum_{j=r}^{z} \binom{z}{j} p^j (1 - p)^{z-j}$。$x$ ごとに $p$ と $1 - p$ のべき乗の表を作れば $O(N)$ で、全体で $O(NM)$ である
     - 答えはこの確率の $x = 1, \dots, M$ についての和で、割り算は逆元にする。中心は[最大値・K 番目の値](#kth-value)の節のコード片のとおり
 
+## 練習問題 {#practice}
+
+<div class="kp-problems" data-role="practice" markdown>
+
+- [ABC411 E. E [max]](https://atcoder.jp/contests/abc411/tasks/abc411_e)（diff 1400）：N 個の 6 面のサイコロを振ったときの、出た目の最大値の期待値を mod 998244353 で求める。
+
+</div>
+
+??? note "練習の方針"
+    - **ABC411 E**：目の値は大きいので、現れる値だけを小さい順に並べて（座標圧縮）掃く。$P(\text{最大値} \le v)$ は各サイコロの「$v$ 以下の面の数 $/ 6$」の積で、値を 1 つ進めるごとに変わるサイコロの因子だけを掛け直す。$E[\max] = \sum_v v \cdot (P(\max \le v) - P(\max \le v^-))$（$v^-$ は 1 つ前の値）と差で足す。まだ $v$ 以下の面がないサイコロは因子が 0 なので、0 の因子の個数を別に数え、0 で割る（逆元を取る）ことを避ける。参考の記事は因子の掛け直しを双対セグメント木の区間の掛け算で行っている
+
 ## 力試し {#challenge}
 
 <div class="kp-problems" data-role="challenge" markdown>

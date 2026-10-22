@@ -21,6 +21,7 @@ frequency_evidence: recent 0・前提として届くページなし・古い ABC
 sections:
   - {title: 下限を先に流したことにする, anchor: pre-flow}
   - {title: 超頂点で過不足を調整して判定する, anchor: super-vertex}
+  - {title: 自作するときの要点と Library Checker, anchor: library}
 stage: draft
 updated: 2026-10-22
 ---
@@ -66,6 +67,12 @@ $d(v) > 0$ の頂点は受け取りすぎで、残りの $g$ の流れで $d(v)$
 
 下限を満たす中で $s$-$t$ の流量を最大にしたいときは、判定の後の[残余グラフ](../guide/glossary.md#residual-graph)で $s$ から $t$ へさらに流す。判定で足した $t \to s$ の辺は残したままでよい。この辺の逆辺（$s \to t$、容量はすでに流れた量）も[増加路](../guide/glossary.md#augmenting-path)になるので、2 回目の最大流の返り値がそのまま合計の流量になる。$S$ から出る辺と $T$ へ入る辺は判定で飽和しているので、2 回目の流れが下限を壊すことはない。
 
+コストのある最小費用流でも、下限の分のコスト $\sum L_e c_e$ を定数として足し、同じ超頂点の作り方で帰着できる（[最小費用流](../graph/min-cost-flow.md)）。ACL の `mcf_graph` のコストは非負に限られるので、負のコストの辺は先に上限まで流したことにして、逆向きでコストが正の辺に置き換えてから使う（このページの置き換えと同じ考え方である）。
+
+## 自作するときの要点と Library Checker {#library}
+
+ACL に下限付きの最大流そのものはなく、`mf_graph` で超頂点を足したグラフを作る。
+
 !!! info "ACL では"
     `mf_graph<long long> g(n + 2);` に、元の辺を容量 $R - L$ で、$S$・$T$ への辺を $d(v)$ から、$t \to s$ を大きな容量で足す。`g.flow(S, T)` が $D$ に等しいかで判定し、続けて `g.flow(s, t)` を呼ぶと最大の流量が返る。どちらも Dinic 法で $O(N^2 M)$ が上限である（[ACL の mf_graph](../graph/max-flow.md#acl)）。
 
@@ -80,9 +87,15 @@ $d(v) > 0$ の頂点は受け取りすぎで、残りの $g$ の流れで $d(v)$
 --8<-- "flow-lower-bounds/usage.cpp:core"
 ```
 
-コストのある最小費用流でも、下限の分のコスト $\sum L_e c_e$ を定数として足し、同じ超頂点の作り方で帰着できる（[最小費用流](../graph/min-cost-flow.md)）。ACL の `mcf_graph` のコストは非負に限られるので、負のコストの辺は先に上限まで流したことにして、逆向きでコストが正の辺に置き換えてから使う（このページの置き換えと同じ考え方である）。
+最小の流量は次のように求まる（Luzhiled's Library の方法）。判定で $t \to s$ の辺に流れた量を $X$ とし、この辺の残りの容量を 0 にしてから $t$ から $s$ へ流す。その返り値を $Y$ とすると、最小の流量は $X - Y$ である。判定が通る入力でも、この値は負になることがある。
 
-学ぶための資料としては、超頂点の作り方を説明した snuke 氏の記事と、判定・最大・最小の流量をまとめたライブラリの Luzhiled's Library（[参考](#references)）がある。最小の流量は次のように求まる（Luzhiled's Library の方法）。判定で $t \to s$ の辺に流れた量を $X$ とし、この辺の残りの容量を 0 にしてから $t$ から $s$ へ流す。その返り値を $Y$ とすると、最小の流量は $X - Y$ である。判定が通る入力でも、この値は負になることがある。
+下限付きの流れそのものを確かめる Library Checker の問題は、コストも付いた Minimum Cost b-flow（[練習問題](#practice)）である。
+
+## 学ぶための資料 {#resources}
+
+- snuke 氏の「最小流量制限付き最大流」：下限を容量から引き、超頂点で過不足を補う作り方と、辺を流す順序の注意
+- Luzhiled's Library の「Max Flow Lower Bound」：判定・最大の流量・最小の流量をまとめたライブラリの形
+- cp-algorithms の「Flows with demands」（英語）：下限で入る分と出る分を超頂点への辺にする作り方と、最小の流量を二分探索で求める方法
 
 ## 例題 {#examples}
 
@@ -111,9 +124,9 @@ $d(v) > 0$ の頂点は受け取りすぎで、残りの $g$ の流れで $d(v)$
 
 ## 参考 {#references}
 
-- [snuke「最小流量制限付き最大流」](https://snuke.hatenablog.com/entry/2016/07/10/043918)：下限を容量から引き、超頂点で過不足を補う作り方と、辺の流す順序の注意（学ぶための資料）
-- [Luzhiled's Library「Max Flow Lower Bound」](https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.hpp)：判定・最大の流量・最小の流量をまとめたライブラリの形と、最小の流量の求め方（学ぶための資料）
-- [cp-algorithms「Flows with demands」](https://cp-algorithms.com/graph/flow_with_demands.html)：下限で入る分と出る分を超頂点への辺にする作り方と、最小の流量を二分探索で求める方法（学ぶための資料。文章と図は使っていない）
+- [snuke「最小流量制限付き最大流」](https://snuke.hatenablog.com/entry/2016/07/10/043918)：下限を容量から引き、超頂点で過不足を補う作り方と、辺の流す順序の注意
+- [Luzhiled's Library「Max Flow Lower Bound」](https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.hpp)：判定・最大の流量・最小の流量をまとめたライブラリの形と、最小の流量の求め方
+- [cp-algorithms「Flows with demands」](https://cp-algorithms.com/graph/flow_with_demands.html)：下限で入る分と出る分を超頂点への辺にする作り方と、最小の流量を二分探索で求める方法（文章と図は使っていない）
 - [AtCoder Library「MaxFlow」](https://github.com/atcoder/ac-library/blob/master/document_ja/maxflow.md)：`mf_graph` の `add_edge`・`flow` の仕様と計算量
 - [Library Checker「Minimum Cost b-flow」](https://judge.yosupo.jp/problem/min_cost_b_flow)：辺に下限・上限・コスト、頂点に供給量が付いた問題の定義
 - [kmjp「AtCoder ABC #285 : G - Tatami」](https://kmjp.hatenablog.jp/entry/2023/01/22/0900)：例題の市松模様のマッチングと、2 のマスの辺を下限付きにする方針

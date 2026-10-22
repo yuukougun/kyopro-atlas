@@ -233,12 +233,16 @@ $$
 
 - [ABC141 F. Xor Sum 3](https://atcoder.jp/contests/abc141/tasks/abc141_f)（diff 2342）：N 個の整数を 2 つのグループに分けたとき、それぞれの XOR の和の最大値を求める。
 - [ABC451 G. Minimum XOR Walk](https://atcoder.jp/contests/abc451/tasks/abc451_g)（diff 2221）：辺に重みのある無向グラフで、2 頂点を結ぶウォークの重み（通った辺の重みの XOR）の最小値が K 以下になる頂点の組の数を求める。
+- [AGC045 A. Xor Battle](https://atcoder.jp/contests/agc045/tasks/agc045_a)（diff 2070）：2 人が数列の順に、自分の番の数を手元の値に XOR するかどうかを選ぶゲームで、最後の値を 0 にしたい側が勝てるかを判定する。
+- [ZONE2021 F. Encounter and Farewell](https://atcoder.jp/contests/zone2021/tasks/zone2021_f)（diff 2197）：0〜2^n − 1 の頂点で、XOR が禁止された値になる組の間には辺を張れないとき、全域木を作れるかを判定し、作れるなら 1 つ出力する。
 
 </div>
 
 ??? note "方針"
     - **ABC141 F**：全体の XOR $T$ で 1 の bit は、どう分けても答えに $T$ の分だけ加わる。各数から $T$ の 1 の bit を消した値で基底を作り、作れる値の最大値 $s$ を求めると、答えは $2s + T$ である（[#max](#max) の応用の型）。
     - **ABC451 G**：全域木で根からの XOR $d(v)$ を求め、すべての辺の閉路の値を基底に入れる。各頂点を $e(v) = \mathrm{reduce}(d(v))$ に置き換えると最小値は $e(u) \oplus e(v)$ になるので、XOR が $K$ 以下の組を Binary Trie で数える（[#xor-walk](#xor-walk)）。
+    - **AGC045 A**：後ろから見る。0 にしたい側の数を基底に[挿入](#insert)していき、相手の番の数が今の基底で作れないなら、相手はそれを XOR するかどうかで 0 にさせないようにできるので相手の勝ちである。最後まで作れないものが出なければ 0 にしたい側の勝ちになる。1 ケース $O(NB)$ である。
+    - **ZONe 2021 F**：辺 $(u, v)$ の XOR を $u \oplus v$ とみると、全域木が作れるのは禁止されていない値で $0$〜$2^n - 1$ のすべてを作れるとき、つまり禁止されていない値の基底の大きさが $n$ のときである。基底を $b_1, \dots, b_n$ とし、$b_1, \dots, b_{k-1}$ で作れる値 $x$ のそれぞれと $x \oplus b_k$ を結ぶと、$k$ ごとに $2^{k-1}$ 本、合わせて $2^n - 1$ 本の辺で全域木になる。
 
 ## 力試し {#challenge}
 
@@ -289,3 +293,5 @@ $$
 - [jikei「RustでABC283復習」](https://qiita.com/jikei/items/2d70d727d45ed84c78ba)：例題 abc283_g で空の部分列を含むことと、簡約した基底を番号の 2 進で選ぶ解き方
 - [drken「AtCoder ABC 141 F - Xor Sum 3 (3D, 黄色, 600 点)」](https://drken1215.hatenablog.com/entry/2019/09/16/213700)：練習 abc141_f の問い・制約と、全体の XOR で 1 の bit が答えに固定で加わること
 - [kmjp「AtCoder ABC #451 : G - Minimum XOR Walk」](https://kmjp.hatenablog.jp/entry/2026/03/28/0930)：練習 abc451_g の問いと、全域木の根からの XOR・閉路の XOR の基底・Binary Trie による解き方
+- [maspy「[AtCoder 参加感想] 2020/06/07:AGC045」](https://maspypy.com/atcoder-%E5%8F%82%E5%8A%A0%E6%84%9F%E6%83%B3-2020-06-07agc045)：練習 agc045_a を終局から見て、0 にしたい側の数で割った剰余空間へ移していく考え方（後ろから基底に入れることにあたる）
+- [fairy_lettuce「ZONeエナジー プログラミングコンテスト “HELLO SPACE” F - 出会いと別れ / Encounter and Farewell 解説」](https://fairy-lettuce.hatenadiary.com/entry/2021/05/02/004052)：練習 zone2021_f が禁止されていない値の基底の問題になることと、Union-Find で基底を選んで辺を張る構成

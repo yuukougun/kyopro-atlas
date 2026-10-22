@@ -302,7 +302,7 @@ $$
 
 ## 参考 {#references}
 
-- [drken「よくある「写像12相」を総整理！ 〜 数え上げ問題の学びの宝庫 〜」](https://qiita.com/drken/items/f2ea4b58b0d21621bd51)：分割数の位置づけと漸化式
+- [drken「「写像12相」を総整理！ 〜 数え上げ問題の学びの宝庫 〜」](https://qiita.com/drken/items/f2ea4b58b0d21621bd51)：分割数の位置づけと漸化式
 - [drken「分割数と、問題まとめ」](https://drken1215.hatenablog.com/entry/2018/01/16/222843)：$P(n, k) = P(n, k-1) + P(n-k, k)$ の導出、ちょうど $k$ 個の分割、上限付きの分割の漸化式
 - [ikatakos「AtCoder Beginner Contest 226 F,G,H 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/1107_abc226)：例題 ABC226 F の方針（巡回の長さの lcm、最小番号を入れる DP、lcm の種類数）（解説の部分だけを参照）
 - [sansaqua「ABC 226 F - Score of Permutations」](https://competitive12.blogspot.com/2021/11/abc-226-f-score-of-permutations.html)：例題 ABC226 F の方針（lcm の最大値 $g(50) = 180180$、分割の全列挙で解けること）

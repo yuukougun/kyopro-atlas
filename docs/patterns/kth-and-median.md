@@ -80,16 +80,16 @@ $\mathrm{count}(x)$ は $x$ について広義単調増加なので、$K$ 番目
 
 | よく出る問われ方 | 使う手法 | ページ | 代表の問題 |
 |---|---|---|---|
-| $N^2$ 個の積・和の $K$ 番目、条件を満たす整数の $K$ 番目 | $x$ 以下の個数で答えを二分探索 | [K 番目の値](../basics/kth-value.md) | [ABC155 D](../basics/kth-value.md#abc155_d) |
-| 値を追加しながら $K$ 番目（$K$ は固定） | 大きさ $K$ のヒープ | [優先度付きキュー](../ds/priority-queue.md#patterns) | [ABC234 D](../ds/priority-queue.md#abc234_d) |
-| 更新のたびに上位 $K$ 個の和・中央値 | 2 つの multiset | [上位 K 個の和と中央値の管理](../ds/top-k-multiset.md) | [ABC306 E](../ds/top-k-multiset.md#abc306_e) |
-| 追加と削除があり、毎回違う $K$ を聞く | BIT 上の二分探索・値を添字にするセグメント木 | [K 番目の値を求めるデータ構造](../ds/kth-element.md) | [ARC033 C](../ds/kth-element.md#arc033_3) |
-| 小さい方から $K$ 個を列挙する（$K$ が小さい） | 最小を取り出して次の候補を入れる | [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md#k-best) | [ABC123 D](../ds/priority-queue.md#abc123_d)（大きい方から） |
-| 列の区間の $K$ 番目・$x$ 以下の個数 | 先読みして BIT、Wavelet Matrix | [クエリの先読み](../ds/offline-queries.md#threshold)、[Wavelet Matrix](../ds/wavelet-matrix.md) | [ABC324 G](../ds/wavelet-matrix.md#abc324_g) |
-| 中央値・平均の最大化・最小化 | 値を引く・±1 にして符号で判定 | [平均・中央値の最大化](../basics/fractional-binary-search.md) | [ABC203 D](../basics/fractional-binary-search.md#abc203_d) |
-| $\sum_i \lvert x - a_i \rvert$ の最小 | 中央値を選ぶ | [絶対値の和の最小化と中央値](../basics/median-absolute.md) | [ARC100 C](../basics/median-absolute.md#arc100_a) |
-| 辞書順で $K$ 番目の文字列・順列 | 先頭ごとの個数と $K$ を比べる | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md#kth) | ABC202 D（[練習](../basics/lexicographic-greedy.md#practice)） |
-| XOR で作れる値の $K$ 番目 | 簡約した基底 | [XOR 基底](../math/xor-basis.md#kth) | [ABC283 G](../math/xor-basis.md#abc283_g) |
+| $N^2$ 個の積・和の $K$ 番目、条件を満たす整数の $K$ 番目 | $x$ 以下の個数で答えを二分探索 | [K 番目の値](../basics/kth-value.md) | ABC155 D |
+| 値を追加しながら $K$ 番目（$K$ は固定） | 大きさ $K$ のヒープ | [優先度付きキュー](../ds/priority-queue.md#patterns) | ABC234 D |
+| 更新のたびに上位 $K$ 個の和・中央値 | 2 つの multiset | [上位 K 個の和と中央値の管理](../ds/top-k-multiset.md) | ABC306 E |
+| 追加と削除があり、毎回違う $K$ を聞く | BIT 上の二分探索・値を添字にするセグメント木 | [K 番目の値を求めるデータ構造](../ds/kth-element.md) | ARC033 C |
+| 小さい方から $K$ 個を列挙する（$K$ が小さい） | 最小を取り出して次の候補を入れる | [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md#k-best)、[優先度付きキュー](../ds/priority-queue.md#patterns) | ABC123 D（大きい方から） |
+| 列の区間の $K$ 番目・$x$ 以下の個数 | 先読みして BIT、Wavelet Matrix | [クエリの先読み](../ds/offline-queries.md#threshold)、[Wavelet Matrix](../ds/wavelet-matrix.md) | ABC324 G |
+| 中央値・平均の最大化・最小化 | 値を引く・±1 にして符号で判定 | [平均・中央値の最大化](../basics/fractional-binary-search.md) | ABC203 D |
+| $\sum_i \lvert x - a_i \rvert$ の最小 | 中央値を選ぶ | [絶対値の和の最小化と中央値](../basics/median-absolute.md) | ARC100 C |
+| 辞書順で $K$ 番目の文字列・順列 | 先頭ごとの個数と $K$ を比べる | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md#kth) | ABC202 D |
+| XOR で作れる値の $K$ 番目 | 簡約した基底 | [XOR 基底](../math/xor-basis.md#kth) | ABC283 G |
 
 迷ったら、次の 3 つを順に確かめる。
 

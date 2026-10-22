@@ -23,6 +23,7 @@ sections:
   - {title: DAG の最小パス被覆（頂点を 2 つに分けた二部マッチング）, anchor: path-cover}
   - {title: 推移閉包と最大反鎖（数列なら LIS のページの Dilworth の定理へ）, anchor: antichain}
   - {title: Hall の結婚定理, anchor: hall}
+  - {title: 自作するときの要点と Library Checker, anchor: library}
 stage: draft
 updated: 2026-10-22
 ---
@@ -56,20 +57,11 @@ updated: 2026-10-22
 
 ![出る側の 0〜4 と入る側の 0'〜4' を左右に並べた二部グラフ。辺は 0-2'、1-2'、2-3'、2-4' の 4 本で、マッチングの 0-2' と 2-3' を太い実線、残りの 1-2' と 2-4' を破線で描いている](../img/dilworth-path-cover/split.svg)
 
-自作するときの要点は次の 3 つである。
-
-- **番号の付け方**：出る側を $0, \dots, N - 1$、入る側を $N, \dots, 2N - 1$ にし、始点と終点を $2N$・$2N + 1$ に置く。出る側と入る側を同じ番号にすると、別の頂点が 1 つにつぶれる（[二部マッチングの落とし穴](../graph/bipartite-matching.md#pitfalls)）。
-- **閉路があるとき**：パスでなくウォーク（同じ頂点を何度通ってもよい）で覆うなら、[SCC で縮約](../graph/scc.md#condensation)して DAG にする。1 つの成分は 1 本のウォークで回りきれるので、成分を 1 頂点とみてよい。さらに、ウォークどうしは頂点を共有してよいので、縮約した DAG の[推移閉包](#antichain)を取ってから最小パス被覆を求める。縮約だけで止めると頂点を共有しないパスの本数になり、多く数える。図の DAG なら、ウォークは $0 \to 2 \to 3$・$1 \to 2 \to 4$ の 2 本で足りるが、閉包を取らないと 3 本と答えてしまう。閉路があるまま二部グラフを作ると、マッチングが閉路を拾い、パスに戻せない。
-- **復元**：流量が 1 の「出る側 $u$ → 入る側 $v'$」の辺が、パスでつなぐ辺 $u \to v$ である。入る側に流れのない頂点がパスの先頭になる。
+中心の部分は次のとおりである（完全なプログラムは `snippets/dilworth-path-cover/path-cover.cpp`）。番号の付け方・閉路があるとき・復元の注意は[自作するときの要点](#library)にまとめた。
 
 ```cpp
 --8<-- "dilworth-path-cover/path-cover.cpp:core"
 ```
-
-!!! info "ACL では"
-    `atcoder::mf_graph<int> g(2 * n + 2);`。`g.add_edge(from, to, 1)` で辺を足し、`g.flow(s, t)` が最大マッチングの大きさを返す。容量がすべて 1 なら $O((n + m) \sqrt{m})$（$n$・$m$ は流すグラフの頂点数と辺数）。`g.min_cut(s)` は残余グラフで $s$ から届く頂点を $O(n + m)$ で返す。二部マッチングの形では、`mf_graph` が使う Dinic 法も Hopcroft-Karp と同じく $O(M \sqrt{N})$ で動く（[二部マッチング](../graph/bipartite-matching.md#alternating-path)）。ドキュメントの式はそれより緩い上限である。
-
-Library Checker には最小パス被覆そのものの問題はないので、二部マッチングの部分を [Matching on Bipartite Graph](https://judge.yosupo.jp/problem/bipartitematching) で確かめておくとよい（[練習問題](#practice)）。
 
 ## 推移閉包と最大反鎖（数列なら LIS のページの Dilworth の定理へ） {#antichain}
 
@@ -88,13 +80,6 @@ Library Checker には最小パス被覆そのものの問題はないので、�
 ```cpp
 --8<-- "dilworth-path-cover/path-cover.cpp:antichain"
 ```
-
-自作するときの要点は次のとおりである。
-
-- **推移閉包の計算**：各頂点から DFS すれば $O(N(N + M))$ で、bitset で逆トポロジカル順に OR を取れば $O(N(N + M) / 64)$ で済む（[DAG の到達可能性](../misc/bitset-speedup.md#reachability)）。包含関係のように、比べられるかを 2 つずつ直接判定できるなら、全部の組を判定して辺を張れば、それがすでに推移閉包である。
-- **辺の数**：推移閉包の辺は $N^2 / 2$ 本ほどまで増える。Hopcroft-Karp の上限（`mf_graph` の Dinic 法でも同じ）で $O(N^{2.5})$ なので、$N$ は数千までが目安である。
-- **同じものがあるとき**：「包含する」を辺にすると、同じ文字列どうしは互いに包含して閉路になる。同じものは 1 つにまとめるか、番号の小さい方を小さいとみなして順序を厳密にする。
-- **重み付きの反鎖**：始点から出る側へと入る側から終点へは容量を重みにし、比べられる組は容量 $\infty$ の辺で結ぶ。反鎖の重みの和の最大は「重みの総和 − 最大流」になる（[練習問題](#practice)の ABC354 G）。
 
 数列を増加列に分ける問題（鎖が「左から右へ狭義増加」）では、二部マッチングを使わずに、最長減少部分列の長さとして $O(N \log N)$ で求まる（[LIS の Dilworth の定理](../dp/lis.md#dilworth)）。2 次元の点の鎖も同じである。一般の半順序のときだけ、このページの二部マッチングを使う。
 
@@ -117,6 +102,34 @@ $$
 - **右の部分集合で数える**：右の種類が少ないときは、右の部分集合 $T$ ごとに「受け入れ先がすべて $T$ に入る左の頂点の需要の和」$D(T)$ と、$T$ の供給の和を比べればよい。$N(S) \subseteq T$ となる $S$ は受け入れ先が $T$ に収まる左の頂点だけからなるので、需要の和は $D(T)$ 以下である。逆に、その頂点をすべて集めた $S$ は $N(S) \subseteq T$ を満たす。よって $T$ の供給の和を $a(T)$ として、$T$ ごとに $D(T) \le a(T)$ を確かめればよい。これで、どの $S$ についても $\sum_{i \in S} b_i \le D(N(S)) \le a(N(S))$ が成り立つ。$D(T)$ は、左の頂点 $i$ の需要を受け入れ先の集合の位置に置いて、[部分集合の和の高速ゼータ変換](../comb/zeta-mobius-subset.md#multidimensional)で全部の $T$ について $O(2^K K)$ で求まる。
 - **使いどころ**：判定だけなら最大流を流せば済む。Hall の定理が要るのは、条件を壊す最小の操作や、条件を満たす場合の数のように、「どの部分集合で足りなくなるか」を数える問題である（[練習問題](#practice)の ABC215 H）。
 - **正則二部グラフ**：どの頂点の次数も $k$ の二部グラフに完全マッチングがあることも、この定理からすぐ出る（[正則二部グラフの分解・辺彩色](../graph/bipartite-matching.md#edge-coloring)）。
+
+## 自作するときの要点と Library Checker {#library}
+
+ACL に最小パス被覆そのものはなく、頂点を 2 つに分けた二部グラフを作って `mf_graph` で最大マッチングを求める。
+
+!!! info "ACL では"
+    `atcoder::mf_graph<int> g(2 * n + 2);`。`g.add_edge(from, to, 1)` で辺を足し、`g.flow(s, t)` が最大マッチングの大きさを返す。容量がすべて 1 なら $O((n + m) \sqrt{m})$（$n$・$m$ は流すグラフの頂点数と辺数）。`g.min_cut(s)` は残余グラフで $s$ から届く頂点を $O(n + m)$ で返す。二部マッチングの形では、`mf_graph` が使う Dinic 法も Hopcroft-Karp と同じく $O(M \sqrt{N})$ で動く（[二部マッチング](../graph/bipartite-matching.md#alternating-path)）。ドキュメントの式はそれより緩い上限である。
+
+### 最小パス被覆
+
+- **番号の付け方**：出る側を $0, \dots, N - 1$、入る側を $N, \dots, 2N - 1$ にし、始点と終点を $2N$・$2N + 1$ に置く。出る側と入る側を同じ番号にすると、別の頂点が 1 つにつぶれる（[二部マッチングの落とし穴](../graph/bipartite-matching.md#pitfalls)）。
+- **閉路があるとき**：パスでなくウォーク（同じ頂点を何度通ってもよい）で覆うなら、[SCC で縮約](../graph/scc.md#condensation)して DAG にする。1 つの成分は 1 本のウォークで回りきれるので、成分を 1 頂点とみてよい。さらに、ウォークどうしは頂点を共有してよいので、縮約した DAG の[推移閉包](#antichain)を取ってから最小パス被覆を求める。縮約だけで止めると頂点を共有しないパスの本数になり、多く数える。[最小パス被覆の図](#path-cover)の DAG なら、ウォークは $0 \to 2 \to 3$・$1 \to 2 \to 4$ の 2 本で足りるが、閉包を取らないと 3 本と答えてしまう。閉路があるまま二部グラフを作ると、マッチングが閉路を拾い、パスに戻せない。
+- **復元**：流量が 1 の「出る側 $u$ → 入る側 $v'$」の辺が、パスでつなぐ辺 $u \to v$ である。入る側に流れのない頂点がパスの先頭になる。
+
+### 推移閉包と最大反鎖
+
+- **推移閉包の計算**：各頂点から DFS すれば $O(N(N + M))$ で、bitset で逆トポロジカル順に OR を取れば $O(N(N + M) / 64)$ で済む（[DAG の到達可能性](../misc/bitset-speedup.md#reachability)）。包含関係のように、比べられるかを 2 つずつ直接判定できるなら、全部の組を判定して辺を張れば、それがすでに推移閉包である。
+- **辺の数**：推移閉包の辺は $N^2 / 2$ 本ほどまで増える。Hopcroft-Karp の上限（`mf_graph` の Dinic 法でも同じ）で $O(N^{2.5})$ なので、$N$ は数千までが目安である。
+- **同じものがあるとき**：「包含する」を辺にすると、同じ文字列どうしは互いに包含して閉路になる。同じものは 1 つにまとめるか、番号の小さい方を小さいとみなして順序を厳密にする。
+- **重み付きの反鎖**：始点から出る側へと入る側から終点へは容量を重みにし、比べられる組は容量 $\infty$ の辺で結ぶ。反鎖の重みの和の最大は「重みの総和 − 最大流」になる（[練習問題](#practice)の ABC354 G）。
+
+Library Checker には最小パス被覆そのものの問題はないので、二部マッチングの部分を [Matching on Bipartite Graph](https://judge.yosupo.jp/problem/bipartitematching) で確かめておくとよい（[練習問題](#practice)）。
+
+## 学ぶための資料 {#resources}
+
+- Wikipedia（英語）の「Dilworth's theorem」：König の定理からの証明と、二部マッチングで幅（最大反鎖の大きさ）が求まること
+- Wikipedia（英語）の「Hall's marriage theorem」：定理の主張といくつかの証明
+- OI Wiki の「序理论」（中国語）：鎖・反鎖の定義と、Dilworth の定理・Mirsky の定理
 
 ## 例題 {#examples}
 
@@ -172,8 +185,8 @@ $$
 - [ikatakos「パナソニックグループ プログラミングコンテスト2024（AtCoder Beginner Contest 354）G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0518_abc354)：練習の問いの確認と、同じ文字列を重みの最大のものだけ残す扱い（解法の節だけを参照）
 - [kmjp「AtCoder ABC #215 : H - Cabbage Master」](https://kmjp.hatenablog.jp/entry/2021/08/22/0930)：練習の Hall の条件を部分集合ごとに確かめる方法
 - [ikatakos「AtCoder Beginner Contest 215 H問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0821_abc215)：練習の問いの確認と、取り除き方を数える包除（解法の節だけを参照）
-- [Wikipedia「Dilworth's theorem」](https://en.wikipedia.org/wiki/Dilworth%27s_theorem)：König の定理からの証明と、二部マッチングで幅が求まること（学ぶための資料）
-- [Wikipedia「Hall's marriage theorem」](https://en.wikipedia.org/wiki/Hall%27s_marriage_theorem)：定理の主張と証明（学ぶための資料）
-- [OI Wiki「序理论」](https://oi-wiki.org/math/order-theory/)：鎖・反鎖の定義と Dilworth の定理・Mirsky の定理（学ぶための資料。文章と図は使っていない）
+- [Wikipedia「Dilworth's theorem」](https://en.wikipedia.org/wiki/Dilworth%27s_theorem)：König の定理からの証明と、二部マッチングで幅が求まること
+- [Wikipedia「Hall's marriage theorem」](https://en.wikipedia.org/wiki/Hall%27s_marriage_theorem)：定理の主張と証明
+- [OI Wiki「序理论」](https://oi-wiki.org/math/order-theory/)：鎖・反鎖の定義と Dilworth の定理・Mirsky の定理（文章と図は使っていない）
 - [ACL「MaxFlow」](https://github.com/atcoder/ac-library/blob/master/document_ja/maxflow.md)：`mf_graph` の `flow`・`min_cut` の計算量
 - [Library Checker「Matching on Bipartite Graph」](https://judge.yosupo.jp/problem/bipartitematching)：練習の問題の内容

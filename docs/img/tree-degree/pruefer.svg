@@ -1,59 +1,61 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 680" font-family="sans-serif" font-size="14">
-<rect width="100%" height="100%" fill="#ffffff"/>
-<text x="20" y="30" fill="#222" font-size="15">7 頂点の木（数字は頂点の番号）</text>
-<text x="20" y="52" fill="#c0392b" font-size="13">［k］は k 番目に消す葉</text>
-<line x1="120" y1="330" x2="190" y2="255" stroke="#555" stroke-width="2"/>
-<line x1="180" y1="95" x2="270" y2="170" stroke="#555" stroke-width="2"/>
-<line x1="360" y1="95" x2="270" y2="170" stroke="#555" stroke-width="2"/>
-<line x1="190" y1="255" x2="270" y2="170" stroke="#555" stroke-width="2"/>
-<line x1="190" y1="255" x2="255" y2="335" stroke="#555" stroke-width="2"/>
-<line x1="270" y1="170" x2="370" y2="245" stroke="#555" stroke-width="2"/>
-<circle cx="270" cy="170" r="18" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/><text x="270" y="175" text-anchor="middle" fill="#222" font-size="15">6</text>
-<circle cx="180" cy="95" r="18" fill="#f2f2f2" stroke="#222" stroke-width="1.5"/><text x="180" y="100" text-anchor="middle" fill="#222" font-size="15">2</text>
-<circle cx="360" cy="95" r="18" fill="#f2f2f2" stroke="#222" stroke-width="1.5"/><text x="360" y="100" text-anchor="middle" fill="#222" font-size="15">3</text>
-<circle cx="370" cy="245" r="18" fill="#f2f2f2" stroke="#222" stroke-width="1.5"/><text x="370" y="250" text-anchor="middle" fill="#222" font-size="15">7</text>
-<circle cx="190" cy="255" r="18" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/><text x="190" y="260" text-anchor="middle" fill="#222" font-size="15">4</text>
-<circle cx="120" cy="330" r="18" fill="#f2f2f2" stroke="#222" stroke-width="1.5"/><text x="120" y="335" text-anchor="middle" fill="#222" font-size="15">1</text>
-<circle cx="255" cy="335" r="18" fill="#f2f2f2" stroke="#222" stroke-width="1.5"/><text x="255" y="340" text-anchor="middle" fill="#222" font-size="15">5</text>
-<text x="142" y="316" fill="#c0392b" font-size="13">［1］</text>
-<text x="202" y="81" fill="#c0392b" font-size="13">［2］</text>
-<text x="382" y="81" fill="#c0392b" font-size="13">［3］</text>
-<text x="277" y="321" fill="#c0392b" font-size="13">［4］</text>
-<text x="146" y="236" fill="#c0392b" font-size="13">［5］</text>
-<text x="244" y="175" text-anchor="end" fill="#1f4e9a" font-size="13">次数 4</text>
-<text x="112" y="260" fill="#1f4e9a" font-size="13">次数 3</text>
-<rect x="20" y="368" width="470" height="30" fill="#f2f2f2"/>
-<text x="30" y="390" fill="#222" font-weight="bold">手順</text>
-<text x="90" y="390" fill="#222" font-weight="bold">今の葉（小さい順）</text>
-<text x="280" y="390" fill="#222" font-weight="bold">消す葉</text>
-<text x="370" y="390" fill="#222" font-weight="bold">記録する隣</text>
-<line x1="20" y1="402" x2="490" y2="402" stroke="#ccc"/>
-<text x="30" y="426" fill="#222">1</text>
-<text x="90" y="426" fill="#222">1, 2, 3, 5, 7</text>
-<text x="280" y="426" fill="#222">1</text>
-<text x="370" y="426" fill="#1f4e9a" font-weight="bold">4</text>
-<line x1="20" y1="438" x2="490" y2="438" stroke="#ccc"/>
-<text x="30" y="462" fill="#222">2</text>
-<text x="90" y="462" fill="#222">2, 3, 5, 7</text>
-<text x="280" y="462" fill="#222">2</text>
-<text x="370" y="462" fill="#1f4e9a" font-weight="bold">6</text>
-<line x1="20" y1="474" x2="490" y2="474" stroke="#ccc"/>
-<text x="30" y="498" fill="#222">3</text>
-<text x="90" y="498" fill="#222">3, 5, 7</text>
-<text x="280" y="498" fill="#222">3</text>
-<text x="370" y="498" fill="#1f4e9a" font-weight="bold">6</text>
-<line x1="20" y1="510" x2="490" y2="510" stroke="#ccc"/>
-<text x="30" y="534" fill="#222">4</text>
-<text x="90" y="534" fill="#222">5, 7</text>
-<text x="280" y="534" fill="#222">5</text>
-<text x="370" y="534" fill="#1f4e9a" font-weight="bold">4</text>
-<line x1="20" y1="546" x2="490" y2="546" stroke="#ccc"/>
-<text x="30" y="570" fill="#222">5</text>
-<text x="90" y="570" fill="#222">4</text><text x="103" y="570" fill="#222">, 7</text>
-<text x="280" y="570" fill="#222">4</text>
-<text x="370" y="570" fill="#1f4e9a" font-weight="bold">6</text>
-<rect x="86" y="552" width="14" height="24" fill="none" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="4 2"/>
-<text x="30" y="604" fill="#c0392b" font-size="13">手順 4 で 4 が新しく葉になり、7 より小さいので手順 5 で先に消す</text>
-<text x="30" y="632" fill="#222">残るのは 6 と 7。Prüfer 列 ＝ (4, 6, 6, 4, 6)</text>
-<text x="30" y="658" fill="#222">4 は 2 回 ＝ 次数 3 − 1、6 は 3 回 ＝ 次数 4 − 1、葉は 0 回</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 410 716" width="410" height="716" font-family="sans-serif" font-size="14">
+<rect width="410" height="716" fill="#ffffff"/>
+<text x="14" y="30" fill="#222" font-size="15">7 頂点の木（数字は頂点の番号）</text>
+<text x="14" y="52" fill="#c0392b" font-size="14">［k］は k 番目に消す葉</text>
+<line x1="60" y1="330" x2="130" y2="255" stroke="#555" stroke-width="2"/>
+<line x1="120" y1="95" x2="210" y2="170" stroke="#555" stroke-width="2"/>
+<line x1="300" y1="95" x2="210" y2="170" stroke="#555" stroke-width="2"/>
+<line x1="130" y1="255" x2="210" y2="170" stroke="#555" stroke-width="2"/>
+<line x1="130" y1="255" x2="195" y2="335" stroke="#555" stroke-width="2"/>
+<line x1="210" y1="170" x2="310" y2="245" stroke="#555" stroke-width="2"/>
+<circle cx="210" cy="170" r="18" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/><text x="210" y="175" text-anchor="middle" fill="#222" font-size="15">6</text>
+<circle cx="120" cy="95" r="18" fill="#f2f2f2" stroke="#222" stroke-width="1.5"/><text x="120" y="100" text-anchor="middle" fill="#222" font-size="15">2</text>
+<circle cx="300" cy="95" r="18" fill="#f2f2f2" stroke="#222" stroke-width="1.5"/><text x="300" y="100" text-anchor="middle" fill="#222" font-size="15">3</text>
+<circle cx="310" cy="245" r="18" fill="#f2f2f2" stroke="#222" stroke-width="1.5"/><text x="310" y="250" text-anchor="middle" fill="#222" font-size="15">7</text>
+<circle cx="130" cy="255" r="18" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/><text x="130" y="260" text-anchor="middle" fill="#222" font-size="15">4</text>
+<circle cx="60" cy="330" r="18" fill="#f2f2f2" stroke="#222" stroke-width="1.5"/><text x="60" y="335" text-anchor="middle" fill="#222" font-size="15">1</text>
+<circle cx="195" cy="335" r="18" fill="#f2f2f2" stroke="#222" stroke-width="1.5"/><text x="195" y="340" text-anchor="middle" fill="#222" font-size="15">5</text>
+<text x="82" y="316" fill="#c0392b" font-size="14">［1］</text>
+<text x="142" y="81" fill="#c0392b" font-size="14">［2］</text>
+<text x="322" y="81" fill="#c0392b" font-size="14">［3］</text>
+<text x="217" y="321" fill="#c0392b" font-size="14">［4］</text>
+<text x="86" y="236" fill="#c0392b" font-size="14">［5］</text>
+<text x="184" y="175" text-anchor="end" fill="#1f4e9a" font-size="14">次数 4</text>
+<text x="52" y="260" fill="#1f4e9a" font-size="14">次数 3</text>
+<rect x="20" y="368" width="380" height="30" fill="#f2f2f2"/>
+<text x="24" y="390" fill="#222" font-weight="bold">手順</text>
+<text x="74" y="390" fill="#222" font-weight="bold">今の葉（小さい順）</text>
+<text x="240" y="390" fill="#222" font-weight="bold">消す葉</text>
+<text x="320" y="390" fill="#222" font-weight="bold">記録する隣</text>
+<line x1="20" y1="402" x2="400" y2="402" stroke="#ccc"/>
+<text x="24" y="426" fill="#222">1</text>
+<text x="74" y="426" fill="#222">1, 2, 3, 5, 7</text>
+<text x="240" y="426" fill="#222">1</text>
+<text x="320" y="426" fill="#1f4e9a" font-weight="bold">4</text>
+<line x1="20" y1="438" x2="400" y2="438" stroke="#ccc"/>
+<text x="24" y="462" fill="#222">2</text>
+<text x="74" y="462" fill="#222">2, 3, 5, 7</text>
+<text x="240" y="462" fill="#222">2</text>
+<text x="320" y="462" fill="#1f4e9a" font-weight="bold">6</text>
+<line x1="20" y1="474" x2="400" y2="474" stroke="#ccc"/>
+<text x="24" y="498" fill="#222">3</text>
+<text x="74" y="498" fill="#222">3, 5, 7</text>
+<text x="240" y="498" fill="#222">3</text>
+<text x="320" y="498" fill="#1f4e9a" font-weight="bold">6</text>
+<line x1="20" y1="510" x2="400" y2="510" stroke="#ccc"/>
+<text x="24" y="534" fill="#222">4</text>
+<text x="74" y="534" fill="#222">5, 7</text>
+<text x="240" y="534" fill="#222">5</text>
+<text x="320" y="534" fill="#1f4e9a" font-weight="bold">4</text>
+<line x1="20" y1="546" x2="400" y2="546" stroke="#ccc"/>
+<text x="24" y="570" fill="#222">5</text>
+<text x="74" y="570" fill="#222">4</text><text x="87" y="570" fill="#222">, 7</text>
+<text x="240" y="570" fill="#222">4</text>
+<text x="320" y="570" fill="#1f4e9a" font-weight="bold">6</text>
+<rect x="70" y="552" width="14" height="24" fill="none" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="4 2"/>
+<text x="24" y="604" fill="#c0392b" font-size="14">手順 4 で 4 が新しく葉になり、7 より小さいので</text>
+<text x="24" y="624" fill="#c0392b" font-size="14">手順 5 で先に消す</text>
+<text x="24" y="654" fill="#222">残るのは 6 と 7。Prüfer 列 ＝ (4, 6, 6, 4, 6)</text>
+<text x="24" y="680" fill="#222">4 は 2 回 ＝ 次数 3 − 1、6 は 3 回 ＝ 次数 4 − 1、</text>
+<text x="24" y="700" fill="#222">葉は 0 回</text>
 </svg>

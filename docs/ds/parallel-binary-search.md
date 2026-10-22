@@ -22,6 +22,7 @@ frequency_evidence: recent 0・前提として届くページなし・古い ABC
 sections:
   - {title: 何ができるか（オフラインで全クエリの二分探索を一斉に進める）, anchor: what-it-does}
   - {title: 手順（各段で mid の順にクエリを並べ、過程を 1 回流して判定する）と計算量, anchor: procedure}
+  - {title: 自作するときの要点と Library Checker, anchor: library}
   - {title: Union-Find と組む例（最初の t 本の辺で条件を満たすか）, anchor: with-union-find}
   - {title: 代わりの手（部分永続 Union-Find・併合過程の木）, anchor: alternatives}
 stage: draft
@@ -84,7 +85,9 @@ while ok[i] - ng[i] > 1 のクエリが残っている:
 - 1 段では、状態の初期化を 1 回、操作を $M$ 回、判定を合わせて $Q$ 回行う。クエリを mid ごとのバケットに入れる並べ替えは $O(M + Q)$ で済む（比較のソートなら $O(Q \log Q)$）。
 - よって全体は $O(\log M) \times$（初期化 $+ M$ 回の操作 $+ Q$ 回の判定）になる。
 
-自作するときの要点は次の 4 つである。
+## 自作するときの要点と Library Checker {#library}
+
+ACL に並列二分探索はなく、問題ごとに書く。自作するときの要点は次の 4 つである。
 
 - **判定の時点**：「最初の $t$ 回の操作の後」に判定する。操作の前後を取り違えると答えが 1 ずれる。$t = 0$（操作 0 回）で満たすクエリもあるので、$t$ の範囲は $0$ から $M$ までにする。
 - **初期化の費用**：状態は段ごとに作り直す。Union-Find なら $O(N)$ が段の数だけかかるので、計算量に $N \log M$ が足される。
@@ -98,6 +101,8 @@ while ok[i] - ng[i] > 1 のクエリが残っている:
 ```
 
 判定の関数は、その時点の状態だけを見て答える。状態を書き換える判定を書くと、同じ段の後のクエリが狂う。
+
+Library Checker で確かめるなら、[練習問題](#practice)の Range Kth Smallest（区間の K 番目に小さい値）を BIT と組んで解くとよい。
 
 ## Union-Find と組む例（最初の t 本の辺で条件を満たすか） {#with-union-find}
 
@@ -113,7 +118,7 @@ while ok[i] - ng[i] > 1 のクエリが残っている:
 
 判定に使える量は連結かどうかに限らない。根に成分の頂点数を持たせれば「頂点数が $z$ 以上か」を、辺の数を持たせれば「成分に閉路があるか」を判定できる（[Union-Find の応用](../ds/union-find-applications.md#data-on-root)）。どれも辺を足すほど成り立ちやすくなる量なので、単調性はそのまま保たれる。
 
-クエリが 1 つなら、辺を順に足して条件を満たした瞬間を見れば済む。クエリが多いと、辺を足すたびに全クエリを確かめることになり、$O(MQ)$ 回の判定がかかる。並列二分探索はこれを $O(Q \log M)$ 回に減らす（[Union-Find と連結性](../graph/union-find-connectivity.md#binary-search)）。
+クエリが 1 つなら、辺を順に足して条件を満たした瞬間を見れば済む。クエリが多いと、辺を足すたびに全クエリを確かめることになり、$O(MQ)$ 回の判定がかかる。並列二分探索はこれを $O(Q \log M)$ 回に減らす（[Union-Find で連結性を扱う](../graph/union-find-connectivity.md#binary-search)）。
 
 ## 代わりの手（部分永続 Union-Find・併合過程の木） {#alternatives}
 
@@ -125,6 +130,11 @@ while ok[i] - ng[i] > 1 のクエリが残っている:
 どちらも Union-Find の過程に限った方法である。並列二分探索は、操作を順に行えて判定ができるデータ構造なら何にでも使える。過程が BIT への加算などで、過去の版を持つ構造（[永続データ構造](../ds/persistent-data-structures.md#prefix-versions)）を作るのが重いときは、並列二分探索が手軽である。逆に、クエリが前の答えに依存する問題（オンライン）では並列二分探索は使えず、過去に戻れる構造を使う。
 
 1 次元を時系列の分割統治で消す [CDQ 分割統治](../ds/cdq-divide-and-conquer.md#what-it-does)も、オフラインで再帰的にクエリを分ける点は似ている。ただし並列二分探索が分けるのは各クエリの答えの範囲で、CDQ 分割統治が分けるのは更新とクエリの時刻である。
+
+## 学ぶための資料 {#resources}
+
+- cp-algorithms の「Binary search」の Parallel Binary Search の節（英語）：mid ごとにまとめて判定する考え方と、BIT と組む例が短くまとまっている
+- OI Wiki の「整体二分」（中国語）：再帰の形（整体二分）と、区間の K 番目に小さい値への適用を、例題とともに説明している
 
 ## 例題 {#examples}
 
@@ -176,6 +186,6 @@ while ok[i] - ng[i] > 1 のクエリが残っている:
 - [drken「AtCoder AGC 002 D - Stamp Rally (橙色, 1000 点)」](https://drken1215.hatenablog.com/entry/2018/09/15/193722)：例題の並列二分探索と部分永続 Union-Find の 2 つの解法
 - [buyoh「AtCoder Grand Contest 002 - D Stamp Rally」](https://buyoh.hateblo.jp/entry/2017/12/08/181813)：例題を素朴な二分探索から並列二分探索へ直していく流れと、再帰の形での書き方
 - [drken「CODE THANKS FESTIVAL 2017 H - Union Sets (3D, 600 点)」](https://drken1215.hatenablog.com/entry/2018/09/15/193740)：練習の問いの確認（記事の解法は部分永続 Union-Find）
-- [cp-algorithms「Binary search」](https://cp-algorithms.com/num_methods/binary_search.html)：Parallel Binary Search の節。mid ごとにまとめて判定する考え方と、BIT と組む例（学ぶための資料。文章と図は使っていない）
-- [OI Wiki「整体二分」](https://oi-wiki.org/misc/parallel-binsearch/)：再帰の形（整体二分）と、区間の K 番目に小さい値への適用（学ぶための資料。文章と図は使っていない）
+- [cp-algorithms「Binary search」](https://cp-algorithms.com/num_methods/binary_search.html)：Parallel Binary Search の節。mid ごとにまとめて判定する考え方と、BIT と組む例（文章と図は使っていない）
+- [OI Wiki「整体二分」](https://oi-wiki.org/misc/parallel-binsearch/)：再帰の形（整体二分）と、区間の K 番目に小さい値への適用（文章と図は使っていない）
 - [Library Checker「Range Kth Smallest」](https://judge.yosupo.jp/problem/range_kth_smallest)：練習の問題の内容

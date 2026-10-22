@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 340" font-family="sans-serif" font-size="14">
+<svg viewBox="0 0 400 555" width="400" height="555" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="14">
 <defs>
 <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#b03a2e" stroke-width="1.5"/></pattern>
 </defs>
@@ -17,6 +17,7 @@
 <text x="328" y="184" fill="#222">p1 (7, 3)</text>
 <text x="230" y="50" fill="#222">p2 (5, 6)</text>
 <text x="44" y="136" fill="#222">p3 (2, 4)</text>
+<g transform="translate(-350, 295)">
 <text x="370" y="60" fill="#1f4e9a">青（塗り）：正の三角形</text>
 <text x="370" y="80" fill="#1f4e9a">cross(p0, p1) = 5</text>
 <text x="370" y="100" fill="#1f4e9a">cross(p1, p2) = 27</text>
@@ -26,4 +27,5 @@
 <text x="370" y="210" fill="#222">合計 26 = 面積の 2 倍</text>
 <text x="370" y="230" fill="#222">多角形の外側は、青と赤で</text>
 <text x="370" y="250" fill="#222">1 回ずつ覆われて打ち消し合う</text>
+</g>
 </svg>

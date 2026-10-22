@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 560" font-family="sans-serif" font-size="14">
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="560" viewBox="0 0 460 560" font-family="sans-serif" font-size="14">
 <rect width="100%" height="100%" fill="#ffffff"/>
 <text x="20" y="26" fill="#222" font-size="15">障害物を通る経路を「最初に踏む障害物」で分ける</text>
-<text x="20" y="48" fill="#555" font-size="12">右と下だけで S から G へ。障害物は行・列の辞書順に A・B・C</text>
+<text x="20" y="48" fill="#555" font-size="13">右と下だけで S から G へ。障害物は行・列の辞書順に A・B・C</text>
 <rect x="40" y="70" width="50" height="50" fill="#ffffff" stroke="#999" stroke-width="1"/>
 <rect x="90" y="70" width="50" height="50" fill="#ffffff" stroke="#999" stroke-width="1"/>
 <rect x="140" y="70" width="50" height="50" fill="#ffffff" stroke="#999" stroke-width="1"/>
@@ -50,14 +50,14 @@
 <polyline points="70,100 70,150 70,200 70,250 120,250 120,300 120,350 170,350 220,350 270,350 320,350" fill="none" stroke="#f58518" stroke-width="3.5" stroke-dasharray="8 5" stroke-linecap="round" stroke-linejoin="round"/>
 <polyline points="65,95 65,145 115,145 115,195 165,195 215,195 215,245 215,295 265,295 315,295 315,345" fill="none" stroke="#54a24b" stroke-width="3.5" stroke-dasharray="2 4" stroke-linecap="round" stroke-linejoin="round"/>
 <line x1="20" y1="395" x2="60" y2="395" stroke="#4c78a8" stroke-width="3.5"/>
-<text x="70" y="400" fill="#222" font-size="12.5">実線：最初に A を踏む（後で C も踏むが、A の組に入る）</text>
+<text x="70" y="400" fill="#222" font-size="13">実線：最初に A を踏む（後で C も踏むが、A の組に入る）</text>
 <line x1="20" y1="419" x2="60" y2="419" stroke="#f58518" stroke-width="3.5" stroke-dasharray="8 5"/>
-<text x="70" y="424" fill="#222" font-size="12.5">破線：最初に B を踏む（B の組）</text>
+<text x="70" y="424" fill="#222" font-size="13">破線：最初に B を踏む（B の組）</text>
 <line x1="20" y1="443" x2="60" y2="443" stroke="#54a24b" stroke-width="3.5" stroke-dasharray="2 4"/>
-<text x="70" y="448" fill="#222" font-size="12.5">点線：どの障害物も踏まない（答えに数える）</text>
+<text x="70" y="448" fill="#222" font-size="13">点線：どの障害物も踏まない（答えに数える）</text>
 <g font-size="13" fill="#222">
 <text x="20" y="482">障害物を踏む経路は、最初に踏む障害物がちょうど 1 つ決まる。</text>
 <text x="20" y="504">答え ＝ 全経路 − Σ（障害物 j までの、ほかを踏まない経路）</text>
 <text x="40" y="524">× （j から G への経路）</text>
-<text x="20" y="546" fill="#555" font-size="12">「ほかを踏まない経路」も同じ式で、前にある障害物から順に求める</text>
+<text x="20" y="546" fill="#555" font-size="13">「ほかを踏まない経路」も同じ式で、前にある障害物から順に求める</text>
 </g></svg>

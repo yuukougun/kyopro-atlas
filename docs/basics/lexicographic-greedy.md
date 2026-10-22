@@ -162,6 +162,15 @@ $$
 
 **数の列と文字列の辞書順を混同する**。数の列 (9) と (10) は列としては 9 < 10 だが、文字列 "9" と "10" は 1 文字目の '1' < '9' で "10" の方が小さい。C++ の `vector<int>` どうしの `<` は要素ごとの辞書順で、`string` は文字コードの辞書順である。出力の形がどちらの比較を求めているかを確かめる。
 
+## 上位の手法へのつながり {#next-steps}
+
+このページの「先頭から小さい候補を試して確定する」は、次の手法の部品になる。
+
+- **DP で実現可能性を判定する**：残りで実現できるかの判定に DP の表を使い、最適な選び方の中で辞書順最小を復元する（[DP の復元](../dp/dp-reconstruction.md#lexicographic-min)）。辞書順 $K$ 番目は、先頭ごとの個数を DP で数えて $K$ と比べる（[辞書順 K 番目の復元](../dp/dp-reconstruction.md#dp-kth-lexicographic)）
+- **次の出現位置の表**：部分列の辞書順最小は、各位置から各文字が次に現れる位置の表を使って速く判定する（[部分列の判定](../string/subsequence-matching.md#lexicographically-smallest)）
+- **順序の制約**：「$a$ は $b$ より前」の制約のもとで辞書順最小の順列を作るのは、入次数 0 の頂点を小さい順に取るトポロジカルソートである（[辞書順最小のトポロジカルソート](../graph/topological-sort.md#lexicographic)）
+- **組合せの個数で数える**：残りの並べ方の個数が二項係数で書けるなら、辞書順 $K$ 番目を先頭から決められる（[二項係数](../comb/binomial-coefficient.md#kth)）
+
 ## 使い分け {#comparison}
 
 - 文字列を並べて連結した結果を辞書順最小にするのは、位置ごとに文字を決める問題ではない。2 つの順序を $a + b$ と $b + a$ で比べる[交換論法](../basics/exchange-argument.md#concatenation)を使う（[連結の辞書順](../string/string-basics.md#concat-order)）

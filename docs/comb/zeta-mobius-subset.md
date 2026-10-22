@@ -9,7 +9,7 @@ order: 230
 level: 黄
 kind: [数え上げ, ビット演算, 畳み込み・多項式]
 prerequisites: [bit-full-search, prefix-sum-2d]
-related: [zeta-mobius-divisor, inclusion-exclusion, hadamard-transform, bit-dp, subset-enumeration-dp]
+related: [zeta-mobius-divisor, inclusion-exclusion, hadamard-transform, bit-dp, subset-enumeration-dp, convolution-ntt]
 summary: すべての集合 S について、部分集合（上位集合）にわたる和を bit ごとの累積和として O(n 2^n) で求める（素朴には O(3^n)）。逆変換（メビウス変換）で戻せ、OR・AND 畳み込みは変換 → 各点の積 → 逆変換で求める。
 complexity: 変換・逆変換・OR 畳み込み・AND 畳み込みはどれも O(n 2^n)（n は bit の数。部分集合を列挙する素朴な方法は O(3^n)）
 signs:
@@ -269,9 +269,9 @@ $i \mid j \le K$ を直接扱う代わりに、$i \mid j \subseteq L$ を考え�
 </div>
 
 ??? note "力試しの方針"
-    - **ABC213 G**：頂点集合 $S$ ごとに、両端が $S$ に入る辺の数 $e(S)$ を、各辺の 2 頂点の集合に 1 を置いてゼータ変換して求める（$O(N 2^N)$）。続いて、$S$ の中の辺だけで $S$ 全体が連結になる辺の選び方の数 $c(S)$ を、「全体 $2^{e(S)}$ − 決めた 1 頂点を含む連結成分が $S$ より小さい分」として部分集合を列挙する DP で求める（$O(3^N)$。[ラベル付きグラフの数え上げ](../comb/counting-labeled-graphs.md#component-of-1)）。答えは、頂点 1 と $k$ を含む $S$ について $c(S) \cdot 2^{e(V \setminus S)}$ を足したものである。ゼータ変換が受け持つのは $e(S)$ の前計算である。
+    - **ABC213 G**：頂点集合 $S$ ごとに、両端が $S$ に入る辺の数 $e(S)$ を、各辺の 2 頂点の集合に 1 を置いてゼータ変換して求める（$O(N 2^N)$）。続いて、$S$ の中の辺だけで $S$ 全体が連結になる辺の選び方の数 $c(S)$ を、「全体 $2^{e(S)}$ − 決めた 1 頂点を含む連結成分が $S$ より小さい分」として部分集合を列挙する DP で求める（$O(3^N)$。[連結なグラフの数え上げ](../comb/counting-labeled-graphs.md#component-of-1)）。答えは、頂点 1 と $k$ を含む $S$ について $c(S) \cdot 2^{e(V \setminus S)}$ を足したものである。ゼータ変換が受け持つのは $e(S)$ の前計算である。
     - **ABC295 Ex**：列ごとに「上から 1 が途切れずに続いているか」を bit の集合で持つ DP にする。1 行進むと、この集合は前の集合の部分集合にしかならない。1 マスずつ状態を更新する形にすれば $O(HW 2^W)$ で、変換を使わずに済む（[参考](#references)の kmjp の解説はこの形）。
-    - **ABC215 H**：種類の集合 mask ごとに「mask の中だけで受け入れる会社の需要の和」と「mask の供給の和」を部分集合ゼータ変換で求め、Hall の条件を全 mask で調べる。取り除き方の数は、二項係数をメビウス変換で「ちょうど mask」に直し、不足の起きる mask の印を部分集合の方向へ広げて足す
+    - **ABC215 H**：種類の集合 mask ごとに「mask の中だけで受け入れる会社の需要の和」と「mask の供給の和」を部分集合ゼータ変換で求め、Hall の条件を全 mask で調べる。取り除き方の数は、二項係数をメビウス変換で「ちょうど mask」に直し、不足の起きる mask の印を部分集合の方向へ広げて足す。
 
 ## 確認問題 {#quiz}
 

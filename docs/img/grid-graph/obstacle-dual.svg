@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 392" font-family="sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 392" width="520" height="392" font-family="sans-serif">
 <rect width="520" height="392" fill="#ffffff"/>
 <rect x="90" y="50" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
 <rect x="130" y="50" width="40" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
@@ -59,11 +59,11 @@
 <circle cx="310.0" cy="70.0" r="4" fill="#ffffff"/>
 <polyline points="90,50 90,290 410,290" fill="none" stroke="#000" stroke-width="5"/>
 <polyline points="90,50 410,50 410,290" fill="none" stroke="#000" stroke-width="5" stroke-dasharray="10 6"/>
-<text x="80" y="170.0" font-size="14" text-anchor="end" fill="#111">A</text>
-<text x="250.0" y="314" font-size="14" text-anchor="middle" fill="#111">A（左端・下端：実線）</text>
-<text x="250.0" y="36" font-size="14" text-anchor="middle" fill="#111">B（上端・右端：点線）</text>
-<text x="420" y="170.0" font-size="14" fill="#111">B</text>
-<text x="20" y="342" font-size="14" fill="#333">斜めを含めてつながる障害物の鎖（白い線）が</text>
-<text x="20" y="362" font-size="14" fill="#333">下端（A）と上端（B）を結ぶので、S から G へは行けない</text>
-<text x="20" y="382" font-size="14" fill="#333">鎖に加わらない障害物（右の 1 個）は判定に関係しない</text>
+<text x="80" y="170.0" font-size="15" text-anchor="end" fill="#111">A</text>
+<text x="250.0" y="314" font-size="15" text-anchor="middle" fill="#111">A（左端・下端：実線）</text>
+<text x="250.0" y="36" font-size="15" text-anchor="middle" fill="#111">B（上端・右端：点線）</text>
+<text x="420" y="170.0" font-size="15" fill="#111">B</text>
+<text x="20" y="342" font-size="15" fill="#333">斜めを含めてつながる障害物の鎖（白い線）が</text>
+<text x="20" y="362" font-size="15" fill="#333">下端（A）と上端（B）を結ぶので、S から G へは行けない</text>
+<text x="20" y="382" font-size="15" fill="#333">鎖に加わらない障害物（右の 1 個）は判定に関係しない</text>
 </svg>

@@ -9,7 +9,7 @@ order: 60
 level: 基礎
 kind: [木]
 prerequisites: [tree-traversal]
-related: [lca, euler-tour, auxiliary-tree#steiner-queries, leaf-first, steiner-tree]
+related: [lca, euler-tour, auxiliary-tree#steiner-queries, leaf-first, steiner-tree, tree-edge-contribution#edge-pairs]
 summary: 指定した K 頂点をすべて含む最小の連結な部分グラフは一意な部分木で、指定頂点の 1 つを根にして、部分木に指定頂点を含む頂点を残せば求まる。指定されていない葉を削り続けても同じになる。
 complexity: O(N)（指定頂点の集合 1 つにつき）
 signs:

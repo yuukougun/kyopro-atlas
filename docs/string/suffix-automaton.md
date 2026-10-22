@@ -30,12 +30,13 @@ sections:
   - {title: Run の列挙（Main-Lorentz）, anchor: run-enumeration}
   - {title: 文字列アルゴリズムの逆問題（逆 Manacher・逆 Z）, anchor: inverse-string-problems}
   - {title: そのほかの名前（2 次元ローリングハッシュ・Suffix Tree・Boyer-Moore の検索）, anchor: others}
+  - {title: ライブラリと Library Checker での確かめ方, anchor: library}
 stage: draft
 updated: 2026-10-22
 ---
 
 !!! abstract "要点"
-    - **何ができるか**：Suffix Automaton は文字列 $S$ の全部分文字列をちょうど受理する DFA で、状態数は $2N - 1$ 以下、遷移数は $3N - 4$ 以下に収まる。文字を末尾に足しながら、異なる部分文字列の数・出現回数・2 つの文字列の最長共通部分文字列を答えられる。回文木・Lyndon 分解・Run の列挙・逆 Z などの発展の文字列アルゴリズムも、入口だけをまとめる。ABC では Suffix Array・Z-algorithm・Manacher で代えられることが多い。
+    - **何ができるか**：文字列 $S$ の全部分文字列をちょうど受理する、状態数 $2N - 1$ 以下・遷移数 $3N - 4$ 以下の DFA（Suffix Automaton）を作り、文字を末尾に足しながら、異なる部分文字列の数・出現回数・2 つの文字列の最長共通部分文字列を答える。回文木で異なる回文を数え、Lyndon 分解で最小の巡回シフトを求め、Run を列挙し、Z 配列などから文字列を復元する。ABC では Suffix Array・Z-algorithm・Manacher で代えられることが多い。
     - **いつ使うか**：
         - 文字を 1 つずつ追加しながら、異なる部分文字列の数を答える。
         - 2 つの文字列の最長共通部分文字列を求める。
@@ -86,8 +87,6 @@ Suffix Automaton は、空文字列に当たる状態 0 から文字に沿って
 - 状態は最大 $2N - 1$ 個なので、配列を先に確保するならその大きさにする。遷移を `array<int, 26>` で持つと、$N = 5 \times 10^5$ でおよそ $2N \times 26 \times 4$ バイト $\approx 10^8$ バイトになる。文字の種類が多いときは `map` にして $O(N \log \sigma)$ にする。
 - 構築が $O(N)$ なのは、手順 2 と 4 でたどる回数の合計が $O(N)$ に抑えられるからである（ならし）。証明は資料に任せる。
 - 複数の文字列をまとめて扱うとき（一般化 Suffix Automaton）は、文字列ごとに $\mathrm{last}$ を状態 0 に戻して足していけばよい。すでにある遷移をなぞると中身のない状態ができるが、その状態は $\mathrm{len}$ が接尾辞リンク先と等しく、異なる部分文字列の数には影響しない（手元の総当たりで確かめた）。
-
-ACL には Suffix Automaton がない。異なる部分文字列の数や最長共通部分文字列だけなら、[Suffix Array と LCP 配列](../string/suffix-array.md#distinct-substrings)で同じ答えが出る。Suffix Automaton が要るのは、文字を足すたびに答える場合や、状態の DAG の上で DP をする場合である。Library Checker の [Number of Substrings](#practice) と [Longest Common Substring](#practice) で確かめられる。
 
 ## 回文木（eertree） {#palindromic-tree}
 
@@ -149,6 +148,27 @@ ABC で run の列挙が要る問題はまれで、「平方（同じ文字列�
 - **Suffix Tree**：全接尾辞を入れた Trie の、分岐のない道を 1 本の辺に縮めたものである。競プロでできることは Suffix Array と LCP 配列でほぼ代えられる。$S$ を反転した文字列の Suffix Automaton の接尾辞リンクの木は、$S$ の Suffix Tree の形になる。
 - **Boyer-Moore の文字列検索**：パターンの末尾から比べて大きくずらす検索法で、実用の検索では速いが、競プロでは [KMP 法](../string/kmp.md)や [Z-algorithm](../string/z-algorithm.md) で足りる。多数決の「Boyer-Moore の投票」とは別物である。
 
+## ライブラリと Library Checker での確かめ方 {#library}
+
+ACL には Suffix Automaton も回文木も Lyndon 分解もない。異なる部分文字列の数や最長共通部分文字列だけなら、[Suffix Array と LCP 配列](../string/suffix-array.md#distinct-substrings)（ACL の `suffix_array`・`lcp_array`）で同じ答えが出る。Suffix Automaton が要るのは、文字を足すたびに答える場合や、状態の DAG の上で DP をする場合である。
+
+自作するときの要点は、Suffix Automaton は[自作するときの要点](#build-your-own)、回文木は[回文木の節](#palindromic-tree)に書いた。Lyndon 分解・Run の列挙・逆問題の手順もそれぞれの節にある。公開ライブラリの実装は参考の節に挙げた（Nyaan 氏・ei1333 氏・maspy 氏のライブラリ）。
+
+Library Checker では次の問題で確かめられる（[練習問題](#practice)）。
+
+- Suffix Automaton：Number of Substrings（異なる部分文字列の数）と Longest Common Substring（最長共通部分文字列）。
+- 回文木：Eertree。
+- Lyndon 分解：Lyndon Factorization。
+- Run の列挙：Run Enumerate。
+- 逆 Manacher・逆 Z：対応する問題はない。復元した文字列に Manacher・Z-algorithm をかけ、与えられた配列と照らし合わせて確かめる。
+
+## 学ぶための資料 {#resources}
+
+- cp-algorithms の「Suffix Automaton」：endpos と接尾辞リンク、状態数・遷移数の上限の証明、構築の手順と計算量を、応用（異なる部分文字列の数・出現回数・最長共通部分文字列）まで通して説明している（文章と図の利用条件は CC BY-SA）。
+- OI Wiki の「后缀自动机 (SAM)」と「回文树」（中国語）：Suffix Automaton と回文木の性質と応用の一覧がある（同じく CC BY-SA）。
+- Rubinchik・Shur の論文「EERTREE」：回文木の原論文。構築がならし $O(N)$ になる理由がある。
+- cp-algorithms の「Lyndon factorization」と「Finding repetitions」：Duval のアルゴリズムと、Main-Lorentz 法の分割統治。
+
 ## 例題 {#examples}
 
 ### ABC452 G. 221 Substring {#abc452_g}
@@ -187,15 +207,15 @@ ABC で run の列挙が要る問題はまれで、「平方（同じ文字列�
 
 ## 参考 {#references}
 
-- [cp-algorithms「Suffix Automaton」](https://cp-algorithms.com/string/suffix-automaton.html)：endpos と接尾辞リンク、状態数・遷移数の上限の証明、構築の手順と計算量、異なる部分文字列の数・出現回数・最長共通部分文字列の求め方。学ぶための資料（文章と図は使っていない）
-- [OI Wiki「后缀自动机 (SAM)」](https://oi-wiki.org/string/sam/)：Suffix Automaton の性質と応用の一覧。学ぶための資料（文章と図は使っていない）
+- [cp-algorithms「Suffix Automaton」](https://cp-algorithms.com/string/suffix-automaton.html)：endpos と接尾辞リンク、状態数・遷移数の上限の証明、構築の手順と計算量、異なる部分文字列の数・出現回数・最長共通部分文字列の求め方。文章と図は使っていない
+- [OI Wiki「后缀自动机 (SAM)」](https://oi-wiki.org/string/sam/)：Suffix Automaton の性質と応用の一覧。文章と図は使っていない
 - [Nyaan「Suffix Automaton」](https://nyaannyaan.github.io/library/string/suffix-automaton.hpp)：ライブラリの実装例
 - [M. Rubinchik, A. M. Shur「EERTREE: An Efficient Data Structure for Processing Palindromes in Strings」](https://arxiv.org/abs/1506.04862)：回文木の原論文
-- [OI Wiki「回文树」](https://oi-wiki.org/string/pam/)：回文木の構築と出現回数。学ぶための資料（文章と図は使っていない）
+- [OI Wiki「回文树」](https://oi-wiki.org/string/pam/)：回文木の構築と出現回数。文章と図は使っていない
 - [ei1333「Palindromic Tree (回文木)」](https://ei1333.github.io/library/string/palindromic-tree.hpp)：回文木の構築の計算量、出現回数、位置で終わる回文の数が接尾辞リンクの木の深さに等しいこと
-- [cp-algorithms「Lyndon factorization」](https://cp-algorithms.com/string/lyndon_factorization.html)：Duval のアルゴリズムと、最小の巡回シフトへの応用。学ぶための資料（文章は使っていない）
+- [cp-algorithms「Lyndon factorization」](https://cp-algorithms.com/string/lyndon_factorization.html)：Duval のアルゴリズムと、最小の巡回シフトへの応用。文章は使っていない
 - [H. Bannai ほか「The "Runs" Theorem」](https://arxiv.org/abs/1406.0263)：run の個数が $N$ 未満、指数の和が $3N$ 以下であることと、Lyndon 語による線形時間の列挙
-- [cp-algorithms「Finding repetitions」](https://cp-algorithms.com/string/main_lorentz.html)：Main-Lorentz 法の分割統治と Z-algorithm の使い方、$O(N \log N)$。学ぶための資料（文章は使っていない）
+- [cp-algorithms「Finding repetitions」](https://cp-algorithms.com/string/main_lorentz.html)：Main-Lorentz 法の分割統治と Z-algorithm の使い方、$O(N \log N)$。文章は使っていない
 - [Nyaan「run-enumerate.hpp」](https://nyaannyaan.github.io/library/string/run-enumerate.hpp)：分割統治と Z-algorithm による run の列挙の実装例
 - [maspy「library/string」](https://github.com/maspypy/library/tree/main/string)：inverse_z_algorithm・inverse_manacher（Union-Find で等しい組をまとめ、異なる組を避けて最小の文字を割り当てる）、find_runs・suffix_automaton・palindromic_tree の実装
 - [library-checker-problems「string」](https://github.com/yosupo06/library-checker-problems/tree/master/string)：練習の問題の内容と制約（問題文の定義だけを確かめた）

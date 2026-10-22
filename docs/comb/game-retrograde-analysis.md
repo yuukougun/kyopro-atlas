@@ -9,7 +9,7 @@ order: 480
 level: 黄
 kind: [ゲーム, DP, グラフ探索]
 prerequisites: [game-basics, bfs]
-related: [topological-sort, dijkstra, cycle-detection]
+related: [topological-sort, dijkstra, cycle-detection, minimax]
 summary: 局面の遷移に閉路があり引き分け（終わらない）もありうるゲームで、終局から逆辺をたどって勝敗を確定させる。勝ちと確定していない行き先の数が 0 になれば負け、負け局面へ移れれば勝ちと確定させ、最後まで決まらない局面が引き分けになる。
 complexity: 局面の数 N・手の数 M として O(N + M)。得点のあるゲームは O((N + M) log (N + M))
 signs:

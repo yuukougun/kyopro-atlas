@@ -62,7 +62,8 @@ $$
 
 数直線で見ると、$b$ の倍数に目盛りを打ったとき、$a$ を挟む左の目盛りが $bq$ で、$a$ からそこまでの距離が余り $r$ である。右の目盛りは $b \lceil a/b \rceil$ になる（$a$ が $b$ の倍数なら左右の目盛りは同じ）。
 
-![b = 3 の倍数に目盛りを打った数直線。a = −7 では左の −9 が floor（q = −3、余り 2）、右の −6 が ceil で、C++ の / は 0 に近い −6 側（q = −2）を返す。a = 7 では左の 6 が floor と C++ の /（q = 2、余り 1）、右の 9 が ceil。実線の矢印は floor・ceil、破線の矢印は C++ の / が返す側](../img/integer-division/floor-ceil.svg)
+![b = 3 の倍数に目盛りを打った数直線で a = −7。左の −9 が floor（q = −3、余り 2）、右の −6 が ceil で、C++ の / は 0 に近い −6 側（q = −2）を返す。実線の矢印は floor・ceil、破線の矢印は C++ の / が返す側](../img/integer-division/floor-ceil-negative.svg)
+![同じ数直線で a = 7。左の 6 が floor と C++ の /（q = 2、余り 1）、右の 9 が ceil](../img/integer-division/floor-ceil-positive.svg)
 
 C++ の `a / b` は、実数の商を 0 の向きに切り捨てる。$a \ge 0$ なら 0 の向きは左なので floor と一致するが、$a < 0$ では 0 の向きが右になり、割り切れないときは floor より 1 大きい。`a % b` は `a - (a / b) * b` と決まっているので、$a < 0$ なら余りも 0 以下になる。$-7$ を $3$ で割ると、数学では $q = -3$・$r = 2$、C++ では `-7 / 3` が $-2$、`-7 % 3` が $-1$ である。C++ の側の振る舞いの一覧は [数・ビット・乱数の関数](../cpp/cpp-math-functions.md#integer-division)にある。
 

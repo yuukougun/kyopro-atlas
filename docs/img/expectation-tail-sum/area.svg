@@ -4,23 +4,23 @@
 <text x="250" y="44" text-anchor="middle" fill="#222">横の帯（行）で読むと Σ v·P(X = v)</text>
 <text x="250" y="63" text-anchor="middle" fill="#222">縦の棒（列）で読むと Σ P(X ≥ k)</text>
 <rect x="100" y="80" width="56" height="8" fill="#dbe8f5" stroke="#335" stroke-width="1"/>
-<text x="92" y="83" text-anchor="end" fill="#222" font-size="13">X = 1：1/36</text>
-<text x="164" y="83" fill="#555" font-size="13">幅 1</text>
+<text x="92" y="83" text-anchor="end" fill="#222" font-size="14">X = 1：1/36</text>
+<text x="164" y="83" fill="#555" font-size="14">幅 1</text>
 <rect x="100" y="88" width="112" height="24" fill="#b9d3ec" stroke="#335" stroke-width="1"/>
 <text x="92" y="105.0" text-anchor="end" fill="#222">X = 2：3/36</text>
-<text x="220" y="105.0" fill="#555" font-size="13">幅 2</text>
+<text x="220" y="105.0" fill="#555" font-size="14">幅 2</text>
 <rect x="100" y="112" width="168" height="40" fill="#dbe8f5" stroke="#335" stroke-width="1"/>
 <text x="92" y="137.0" text-anchor="end" fill="#222">X = 3：5/36</text>
-<text x="276" y="137.0" fill="#555" font-size="13">幅 3</text>
+<text x="276" y="137.0" fill="#555" font-size="14">幅 3</text>
 <rect x="100" y="152" width="224" height="56" fill="#b9d3ec" stroke="#335" stroke-width="1"/>
 <text x="92" y="185.0" text-anchor="end" fill="#222">X = 4：7/36</text>
-<text x="332" y="185.0" fill="#555" font-size="13">幅 4</text>
+<text x="332" y="185.0" fill="#555" font-size="14">幅 4</text>
 <rect x="100" y="208" width="280" height="72" fill="#dbe8f5" stroke="#335" stroke-width="1"/>
 <text x="92" y="249.0" text-anchor="end" fill="#222">X = 5：9/36</text>
-<text x="388" y="249.0" fill="#555" font-size="13">幅 5</text>
+<text x="388" y="249.0" fill="#555" font-size="14">幅 5</text>
 <rect x="100" y="280" width="336" height="88" fill="#b9d3ec" stroke="#335" stroke-width="1"/>
 <text x="92" y="329.0" text-anchor="end" fill="#222">X = 6：11/36</text>
-<text x="444" y="329.0" fill="#555" font-size="13">幅 6</text>
+<text x="444" y="329.0" fill="#555" font-size="14">幅 6</text>
 <line x1="156" y1="80" x2="156" y2="368" stroke="#335" stroke-width="1.5" stroke-dasharray="4 3"/>
 <line x1="212" y1="88" x2="212" y2="368" stroke="#335" stroke-width="1.5" stroke-dasharray="4 3"/>
 <line x1="268" y1="112" x2="268" y2="368" stroke="#335" stroke-width="1.5" stroke-dasharray="4 3"/>

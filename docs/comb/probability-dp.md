@@ -244,6 +244,7 @@ $(u, v)$ の変化の 4 通りが確率 $1/4$ ずつ出るので、$u$ と $v$ �
 
 - [ABC323 E. Playlist](https://atcoder.jp/contests/abc323/tasks/abc323_e)（diff 1279）：N 曲の中から一様に選んだ曲を続けて流し続けるとき、時刻 X+0.5 に曲 1 が流れている確率を mod 998244353 で求める。
 - [ABC298 E. Unfair Sugoroku](https://atcoder.jp/contests/abc298/tasks/abc298_e)（diff 1300）：2 人がそれぞれのサイコロですごろくを交互に進めるとき、先手が先にゴールに着く確率を mod 998244353 で求める。
+- [ABC382 E. Expansion Packs](https://atcoder.jp/contests/abc382/tasks/abc382_e)（diff 1671）：カードのパックを開け続けて、レアカードが X 枚集まるまでに開けるパックの数の期待値を求める。
 - [TDPC D. サイコロ](https://atcoder.jp/contests/tdpc/tasks/tdpc_dice)（diff —）：サイコロを N 回振ったときの出目の積が D の倍数になる確率を求める。
 - [ABC011 D. 大ジャンプ](https://atcoder.jp/contests/abc011/tasks/abc011_4)（diff 1843）：1 回に上下左右のどれかへ距離 D だけ等確率で動くことを N 回繰り返したとき、点 (X, Y) にいる確率を求める。
 
@@ -252,6 +253,7 @@ $(u, v)$ の変化の 4 通りが確率 $1/4$ ずつ出るので、$u$ と $v$ �
 ??? note "練習の方針"
     - **ABC323 E**：$\mathrm{dp}[t]$ ＝ 時刻 $t$ にちょうど曲が切り替わる確率を、$\mathrm{dp}[0] = 1$ から $t + T_i$ へ $1/N$ ずつ配る。$X - T_1 < t \le X$ の $\mathrm{dp}[t] / N$ を足す（[時刻ごとに配る](#by-time)）
     - **ABC298 E**：（先手の位置, 後手の位置, 手番）を状態にする。ゴールを超えた位置はゴールにまとめる。前向きに配ってもよいし、「ここから先手が勝つ確率」を位置の大きい方から埋めてもよい
+    - **ABC382 E**：1 パックのレアの枚数が $j$ 枚になる確率 $R_j$ を、カードを 1 枚ずつ足す確率 DP で求める。残りは「あと何枚要るか」ごとの期待値を後ろから埋める[期待値 DP](expected-value-dp.md) で、$j = 0$ の自己ループを移項する
     - **TDPC D**：$D$ を 2・3・5 で割り切れるだけ割り、1 にならなければ答えは 0。積の 2・3・5 の指数を、$D$ に要る数で打ち切って状態にする（[状態の設計](#state-design)）
     - **ABC011 D**：$X$・$Y$ が $D$ の倍数でなければ 0。$D$ で割ってから、横に動く回数で分けるか 45 度回して、1 次元のウォークの確率の積にする。確率のまま計算してあふれを避ける（[ランダムウォークと二項係数](#random-walk)）
 
@@ -274,6 +276,7 @@ $(u, v)$ の変化の 4 通りが確率 $1/4$ ずつ出るので、$u$ と $v$ �
 - [kazun「AtCoder Beginner Contest 275 E問題 Sugoroku 4」](https://kazun-kyopro.hatenablog.com/entry/ABC/275/E)：例題 ABC275 E の、ゴールにとどまらせて「K 回後にゴールにいる確率」に言い換える方針
 - [drken「AtCoder ABC 323 E - Playlist (1D, 水色, 450 点)」](https://drken1215.hatenablog.com/entry/2023/10/14/113816)：練習 ABC323 E の、曲が切り替わる時刻の確率を配る DP
 - [プロひろ「ABC298 E問題（Unfair Sugoroku）を解く」](https://programming-hiroba.com/abc298-e/)：練習 ABC298 E の状態（2 人の位置と手番）と計算順序
+- [ikatakos「ABC382」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/1130_abc382#e_-_expansion_packs)：練習 ABC382 E の 1 パックの分布と後ろ向きの期待値（解法の部分だけを参照）
 - [sigma425「Typical DP Contest (TDPC)」](https://sigma425.hatenablog.com/entry/2016/08/02/214547)：練習 TDPC D の状態（2・3・5 の個数）
 - [wafuwafualgorithm「Typical DP Contest D - サイコロ」](https://scrapbox.io/wafuwafualgorithm/Typical%20DP%20Contest%20D%20-%20%E3%82%B5%E3%82%A4%E3%82%B3%E3%83%AD)：練習 TDPC D の、指数を打ち切ることと、ほかの素因数があれば 0 になること
 - [drken「AtCoder ABC 011 D - 大ジャンプ (1D, 試験管青色)」](https://drken1215.hatenablog.com/entry/2020/11/14/084800)：練習 ABC011 D の、横に動く回数で分ける数え方と、double のあふれへの注意

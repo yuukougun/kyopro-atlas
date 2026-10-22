@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 330" width="320" height="330" font-family="sans-serif" font-size="13">
+<rect width="320" height="330" fill="#ffffff"/>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#333"/></marker></defs>
+<text x="160.0" y="22" text-anchor="middle" font-size="15" fill="#111">a = 7、b = 3</text>
+<line x1="11.0" y1="196" x2="309.0" y2="196" stroke="#333" stroke-width="1.5"/>
+<line x1="25.0" y1="187" x2="25.0" y2="205" stroke="#333" stroke-width="2"/>
+<text x="25.0" y="222" text-anchor="middle" fill="#222">0</text>
+<text x="25.0" y="242" text-anchor="middle" fill="#666" font-size="12">q = 0</text>
+<line x1="55.0" y1="192" x2="55.0" y2="200" stroke="#999"/>
+<line x1="85.0" y1="192" x2="85.0" y2="200" stroke="#999"/>
+<line x1="115.0" y1="187" x2="115.0" y2="205" stroke="#333" stroke-width="2"/>
+<text x="115.0" y="222" text-anchor="middle" fill="#222">3</text>
+<text x="115.0" y="242" text-anchor="middle" fill="#666" font-size="12">q = 1</text>
+<line x1="145.0" y1="192" x2="145.0" y2="200" stroke="#999"/>
+<line x1="175.0" y1="192" x2="175.0" y2="200" stroke="#999"/>
+<line x1="205.0" y1="187" x2="205.0" y2="205" stroke="#333" stroke-width="2"/>
+<text x="205.0" y="222" text-anchor="middle" fill="#222">6</text>
+<text x="205.0" y="242" text-anchor="middle" fill="#666" font-size="12">q = 2</text>
+<line x1="265.0" y1="192" x2="265.0" y2="200" stroke="#999"/>
+<line x1="295.0" y1="187" x2="295.0" y2="205" stroke="#333" stroke-width="2"/>
+<text x="295.0" y="222" text-anchor="middle" fill="#222">9</text>
+<text x="295.0" y="242" text-anchor="middle" fill="#666" font-size="12">q = 3</text>
+<circle cx="235.0" cy="196" r="5" fill="#222"/>
+<text x="235.0" y="222" text-anchor="middle" font-weight="bold" fill="#222">7</text>
+<path d="M205.0 180 L205.0 174 L235.0 174 L235.0 180" fill="none" stroke="#333"/>
+<text x="220.0" y="168" text-anchor="middle" fill="#222" font-size="12">余り 1</text>
+<line x1="235.0" y1="50" x2="235.0" y2="66" stroke="#bbb" stroke-dasharray="2 2"/>
+<text x="227.0" y="63" text-anchor="end" fill="#222" font-size="12">ceil：9、q = 3</text>
+<line x1="235.0" y1="58" x2="293.0" y2="58" stroke="#333" stroke-width="1.5" marker-end="url(#ah)"/>
+<line x1="235.0" y1="90" x2="235.0" y2="106" stroke="#bbb" stroke-dasharray="2 2"/>
+<text x="197.0" y="103" text-anchor="end" fill="#222" font-size="12">C++ の /：6、q = 2</text>
+<line x1="235.0" y1="98" x2="207.0" y2="98" stroke="#333" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#ah)"/>
+<line x1="235.0" y1="130" x2="235.0" y2="146" stroke="#bbb" stroke-dasharray="2 2"/>
+<text x="197.0" y="143" text-anchor="end" fill="#222" font-size="12">floor：6、q = 2</text>
+<line x1="235.0" y1="138" x2="207.0" y2="138" stroke="#333" stroke-width="1.5" marker-end="url(#ah)"/>
+<line x1="235.0" y1="154" x2="235.0" y2="170" stroke="#bbb" stroke-dasharray="2 2"/>
+<text x="160.0" y="272" text-anchor="middle" fill="#444" font-size="12">太い目盛りは b = 3 の倍数</text>
+<text x="160.0" y="290" text-anchor="middle" fill="#444" font-size="12">実線の矢印は floor・ceil、破線は C++ の /</text>
+<text x="160.0" y="308" text-anchor="middle" fill="#444" font-size="12">a と左の目盛りの差が余り（0 以上 b 未満）</text>
+</svg>

@@ -1,67 +1,62 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" width="960" height="480" font-family="sans-serif" font-size="14">
-<rect x="0" y="0" width="960" height="480" fill="#ffffff"/>
-<text x="20" y="28" font-size="16" font-weight="bold" fill="#000">型が正確に表せる整数の上限（対数の目盛り）</text>
-<rect x="60" y="55" width="82.6" height="16" fill="#4c72b0" fill-opacity="0.35" stroke="#4c72b0"/>
-<line x1="142.6" y1="51" x2="142.6" y2="75" stroke="#000" stroke-width="2"/>
-<text x="66" y="68" fill="#000">int</text>
-<text x="148.6" y="68" fill="#000">2^31−1 ≈ 2.1×10^9</text>
-<rect x="60" y="95" width="493.2" height="16" fill="#55a868" fill-opacity="0.35" stroke="#55a868"/>
-<line x1="553.2" y1="91" x2="553.2" y2="115" stroke="#000" stroke-width="2"/>
-<text x="66" y="108" fill="#000">double（整数を正確に表せる範囲）</text>
-<text x="559.2" y="108" fill="#000">2^53 ≈ 9.0×10^15</text>
-<rect x="60" y="135" width="679.8" height="16" fill="#c44e52" fill-opacity="0.35" stroke="#c44e52"/>
-<line x1="739.8" y1="131" x2="739.8" y2="155" stroke="#000" stroke-width="2"/>
-<text x="66" y="148" fill="#000">long long</text>
-<text x="733.8" y="129" text-anchor="end" fill="#000">2^63−1 ≈ 9.2×10^18</text>
-<rect x="60" y="175" width="698.5" height="16" fill="#8172b2" fill-opacity="0.35" stroke="#8172b2"/>
-<line x1="758.5" y1="171" x2="758.5" y2="195" stroke="#000" stroke-width="2"/>
-<text x="66" y="188" fill="#000">unsigned long long・long double の整数</text>
-<text x="752.5" y="169" text-anchor="end" fill="#000">2^64 ≈ 1.8×10^19</text>
-<rect x="60" y="215" width="770" height="16" fill="#937860" fill-opacity="0.35" stroke="#937860"/>
-<text x="66" y="228" fill="#000">__int128</text>
-<text x="836" y="228" fill="#000">…</text>
-<text x="830" y="250" text-anchor="end" fill="#000">2^127−1 ≈ 1.7×10^38</text>
-<line x1="60" y1="275" x2="804" y2="275" stroke="#000" stroke-width="1.5"/>
-<line x1="60" y1="270" x2="60" y2="280" stroke="#000"/>
-<text x="60" y="295" text-anchor="middle" font-size="12" fill="#000">10^8</text>
-<line x1="122" y1="270" x2="122" y2="280" stroke="#000"/>
-<text x="122" y="295" text-anchor="middle" font-size="12" fill="#000">10^9</text>
-<line x1="184" y1="270" x2="184" y2="280" stroke="#000"/>
-<text x="184" y="295" text-anchor="middle" font-size="12" fill="#000">10^10</text>
-<line x1="246" y1="270" x2="246" y2="280" stroke="#000"/>
-<text x="246" y="295" text-anchor="middle" font-size="12" fill="#000">10^11</text>
-<line x1="308" y1="270" x2="308" y2="280" stroke="#000"/>
-<text x="308" y="295" text-anchor="middle" font-size="12" fill="#000">10^12</text>
-<line x1="370" y1="270" x2="370" y2="280" stroke="#000"/>
-<text x="370" y="295" text-anchor="middle" font-size="12" fill="#000">10^13</text>
-<line x1="432" y1="270" x2="432" y2="280" stroke="#000"/>
-<text x="432" y="295" text-anchor="middle" font-size="12" fill="#000">10^14</text>
-<line x1="494" y1="270" x2="494" y2="280" stroke="#000"/>
-<text x="494" y="295" text-anchor="middle" font-size="12" fill="#000">10^15</text>
-<line x1="556" y1="270" x2="556" y2="280" stroke="#000"/>
-<text x="556" y="295" text-anchor="middle" font-size="12" fill="#000">10^16</text>
-<line x1="618" y1="270" x2="618" y2="280" stroke="#000"/>
-<text x="618" y="295" text-anchor="middle" font-size="12" fill="#000">10^17</text>
-<line x1="680" y1="270" x2="680" y2="280" stroke="#000"/>
-<text x="680" y="295" text-anchor="middle" font-size="12" fill="#000">10^18</text>
-<line x1="742" y1="270" x2="742" y2="280" stroke="#000"/>
-<text x="742" y="295" text-anchor="middle" font-size="12" fill="#000">10^19</text>
-<line x1="804" y1="270" x2="804" y2="280" stroke="#000"/>
-<text x="804" y="295" text-anchor="middle" font-size="12" fill="#000">10^20</text>
-<line x1="123.6" y1="275" x2="123.6" y2="311" stroke="#000"/>
-<circle cx="123.6" cy="275" r="4" fill="#fff" stroke="#000" stroke-width="2"/>
-<text x="129.6" y="323" text-anchor="start" fill="#000">INF = 0x3f3f3f3f ≈ 1.06×10^9</text>
-<line x1="142.3" y1="275" x2="142.3" y2="337" stroke="#000" stroke-dasharray="4 3"/>
-<circle cx="142.3" cy="275" r="4" fill="#fff" stroke="#000" stroke-width="2"/>
-<text x="148.3" y="349" text-anchor="start" fill="#000">INF + INF ≈ 2.12×10^9（int の上限より小さい）</text>
-<line x1="680.0" y1="275" x2="680.0" y2="363" stroke="#000"/>
-<circle cx="680.0" cy="275" r="4" fill="#fff" stroke="#000" stroke-width="2"/>
-<text x="674.0" y="375" text-anchor="end" fill="#000">1e18（10^18）</text>
-<line x1="683.8" y1="275" x2="683.8" y2="389" stroke="#000"/>
-<circle cx="683.8" cy="275" r="4" fill="#fff" stroke="#000" stroke-width="2"/>
-<text x="677.8" y="401" text-anchor="end" fill="#000">INF = 1LL &lt;&lt; 60 ≈ 1.15×10^18</text>
-<line x1="702.5" y1="275" x2="702.5" y2="415" stroke="#000" stroke-dasharray="4 3"/>
-<circle cx="702.5" cy="275" r="4" fill="#fff" stroke="#000" stroke-width="2"/>
-<text x="696.5" y="427" text-anchor="end" fill="#000">INF + INF ≈ 2.31×10^18（long long に収まる）</text>
-<text x="20" y="468" font-size="12" fill="#333">実線の丸は INF の値、破線は INF + INF。INT_MAX や LLONG_MAX を INF にすると、INF + INF は上限を超える。</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 594" width="400" height="594" font-family="sans-serif" font-size="14">
+<rect x="0" y="0" width="400" height="594" fill="#ffffff"/>
+<text x="16" y="24" font-size="15" font-weight="bold" fill="#000">型が正確に表せる整数の上限（対数の目盛り）</text>
+<text x="16" y="52" font-size="13" fill="#000">int：2^31−1 ≈ 2.1×10^9</text>
+<rect x="40" y="58" width="33.3" height="14" fill="#4c72b0" fill-opacity="0.35" stroke="#4c72b0"/>
+<line x1="73.3" y1="55" x2="73.3" y2="75" stroke="#000" stroke-width="2"/>
+<text x="16" y="98" font-size="13" fill="#000">double（整数を正確に表せる範囲）</text>
+<text x="16" y="116" font-size="13" fill="#000">　2^53 ≈ 9.0×10^15</text>
+<rect x="40" y="122" width="198.9" height="14" fill="#55a868" fill-opacity="0.35" stroke="#55a868"/>
+<line x1="238.9" y1="119" x2="238.9" y2="139" stroke="#000" stroke-width="2"/>
+<text x="16" y="162" font-size="13" fill="#000">long long：2^63−1 ≈ 9.2×10^18</text>
+<rect x="40" y="168" width="274.1" height="14" fill="#c44e52" fill-opacity="0.35" stroke="#c44e52"/>
+<line x1="314.1" y1="165" x2="314.1" y2="185" stroke="#000" stroke-width="2"/>
+<text x="16" y="208" font-size="13" fill="#000">unsigned long long・long double の整数</text>
+<text x="16" y="226" font-size="13" fill="#000">　2^64 ≈ 1.8×10^19</text>
+<rect x="40" y="232" width="281.6" height="14" fill="#8172b2" fill-opacity="0.35" stroke="#8172b2"/>
+<line x1="321.6" y1="229" x2="321.6" y2="249" stroke="#000" stroke-width="2"/>
+<text x="16" y="272" font-size="13" fill="#000">__int128：2^127−1 ≈ 1.7×10^38</text>
+<rect x="40" y="278" width="330" height="14" fill="#937860" fill-opacity="0.35" stroke="#937860"/>
+<text x="376" y="290" font-size="13" fill="#000">…</text>
+<line x1="40" y1="318" x2="340" y2="318" stroke="#000" stroke-width="1.5"/>
+<line x1="40" y1="314" x2="40" y2="322" stroke="#000"/>
+<text x="40" y="338" text-anchor="middle" font-size="12" fill="#000">10^8</text>
+<line x1="65" y1="314" x2="65" y2="322" stroke="#000"/>
+<line x1="90" y1="314" x2="90" y2="322" stroke="#000"/>
+<text x="90" y="338" text-anchor="middle" font-size="12" fill="#000">10^10</text>
+<line x1="115" y1="314" x2="115" y2="322" stroke="#000"/>
+<line x1="140" y1="314" x2="140" y2="322" stroke="#000"/>
+<text x="140" y="338" text-anchor="middle" font-size="12" fill="#000">10^12</text>
+<line x1="165" y1="314" x2="165" y2="322" stroke="#000"/>
+<line x1="190" y1="314" x2="190" y2="322" stroke="#000"/>
+<text x="190" y="338" text-anchor="middle" font-size="12" fill="#000">10^14</text>
+<line x1="215" y1="314" x2="215" y2="322" stroke="#000"/>
+<line x1="240" y1="314" x2="240" y2="322" stroke="#000"/>
+<text x="240" y="338" text-anchor="middle" font-size="12" fill="#000">10^16</text>
+<line x1="265" y1="314" x2="265" y2="322" stroke="#000"/>
+<line x1="290" y1="314" x2="290" y2="322" stroke="#000"/>
+<text x="290" y="338" text-anchor="middle" font-size="12" fill="#000">10^18</text>
+<line x1="315" y1="314" x2="315" y2="322" stroke="#000"/>
+<line x1="340" y1="314" x2="340" y2="322" stroke="#000"/>
+<text x="340" y="338" text-anchor="middle" font-size="12" fill="#000">10^20</text>
+<line x1="65.6" y1="318" x2="65.6" y2="360" stroke="#000"/>
+<text x="71.6" y="364" text-anchor="start" font-size="13" fill="#000">INF = 0x3f3f3f3f ≈ 1.06×10^9</text>
+<line x1="73.2" y1="318" x2="73.2" y2="386" stroke="#000" stroke-dasharray="4 3"/>
+<text x="79.2" y="390" text-anchor="start" font-size="13" fill="#000">INF + INF ≈ 2.12×10^9</text>
+<text x="79.2" y="408" text-anchor="start" font-size="13" fill="#000">（int の上限より小さい）</text>
+<line x1="290.0" y1="318" x2="290.0" y2="430" stroke="#000"/>
+<text x="284.0" y="434" text-anchor="end" font-size="13" fill="#000">1e18（10^18）</text>
+<line x1="291.5" y1="318" x2="291.5" y2="456" stroke="#000"/>
+<text x="285.5" y="460" text-anchor="end" font-size="13" fill="#000">INF = 1LL &lt;&lt; 60 ≈ 1.15×10^18</text>
+<line x1="299.1" y1="318" x2="299.1" y2="482" stroke="#000" stroke-dasharray="4 3"/>
+<text x="293.1" y="486" text-anchor="end" font-size="13" fill="#000">INF + INF ≈ 2.31×10^18</text>
+<text x="293.1" y="504" text-anchor="end" font-size="13" fill="#000">（long long に収まる）</text>
+<circle cx="65.6" cy="318" r="4" fill="#fff" stroke="#000" stroke-width="2"/>
+<circle cx="73.2" cy="318" r="4" fill="#fff" stroke="#000" stroke-width="2"/>
+<circle cx="290.0" cy="318" r="4" fill="#fff" stroke="#000" stroke-width="2"/>
+<circle cx="291.5" cy="318" r="4" fill="#fff" stroke="#000" stroke-width="2"/>
+<circle cx="299.1" cy="318" r="4" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="16" y="544" font-size="13" fill="#333">実線の丸は INF の値、破線は INF + INF。</text>
+<text x="16" y="562" font-size="13" fill="#333">INT_MAX や LLONG_MAX を INF にすると、</text>
+<text x="16" y="580" font-size="13" fill="#333">INF + INF は上限を超える。</text>
 </svg>

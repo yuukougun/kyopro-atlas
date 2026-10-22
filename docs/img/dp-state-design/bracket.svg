@@ -1,46 +1,46 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" width="640" height="300" font-family="sans-serif" font-size="15">
-<rect width="640" height="300" fill="#ffffff"/>
-<line x1="70" y1="245" x2="490" y2="245" stroke="#ddd" stroke-width="1"/>
-<text x="58" y="250" text-anchor="end" font-size="13">d=-1</text>
-<line x1="70" y1="200" x2="490" y2="200" stroke="#333" stroke-width="2"/>
-<text x="58" y="205" text-anchor="end" font-size="13">d=0</text>
-<line x1="70" y1="155" x2="490" y2="155" stroke="#ddd" stroke-width="1"/>
-<text x="58" y="160" text-anchor="end" font-size="13">d=1</text>
-<line x1="70" y1="110" x2="490" y2="110" stroke="#ddd" stroke-width="1"/>
-<text x="58" y="115" text-anchor="end" font-size="13">d=2</text>
-<line x1="70" y1="65" x2="490" y2="65" stroke="#ddd" stroke-width="1"/>
-<text x="58" y="70" text-anchor="end" font-size="13">d=3</text>
-<rect x="70" y="222.5" width="420" height="45" fill="#000" fill-opacity="0.06"/>
-<text x="498" y="250" font-size="12">禁止</text>
-<text x="70" y="290" text-anchor="middle" font-size="12">i=0</text>
-<text x="140" y="290" text-anchor="middle" font-size="12">i=1</text>
-<text x="210" y="290" text-anchor="middle" font-size="12">i=2</text>
-<text x="280" y="290" text-anchor="middle" font-size="12">i=3</text>
-<text x="350" y="290" text-anchor="middle" font-size="12">i=4</text>
-<text x="420" y="290" text-anchor="middle" font-size="12">i=5</text>
-<text x="490" y="290" text-anchor="middle" font-size="12">i=6</text>
-<polyline points="70,200 140,155 210,110 280,155 350,110 420,155 490,200" fill="none" stroke="#1f5fbf" stroke-width="3"/>
-<circle cx="70" cy="200" r="5" fill="#1f5fbf"/>
-<circle cx="140" cy="155" r="5" fill="#1f5fbf"/>
-<circle cx="210" cy="110" r="5" fill="#1f5fbf"/>
-<circle cx="280" cy="155" r="5" fill="#1f5fbf"/>
-<circle cx="350" cy="110" r="5" fill="#1f5fbf"/>
-<circle cx="420" cy="155" r="5" fill="#1f5fbf"/>
-<circle cx="490" cy="200" r="5" fill="#1f5fbf"/>
-<polyline points="70,200 140,155 210,200 280,245 350,200 420,155 490,200" fill="none" stroke="#c0392b" stroke-width="2.5" stroke-dasharray="7,4"/>
-<text x="280" y="251" text-anchor="middle" font-size="18" fill="#c0392b" font-weight="bold">×</text>
-<text x="105.0" y="30" text-anchor="middle" fill="#1f5fbf">(</text>
-<text x="105.0" y="52" text-anchor="middle" fill="#c0392b">(</text>
-<text x="175.0" y="30" text-anchor="middle" fill="#1f5fbf">(</text>
-<text x="175.0" y="52" text-anchor="middle" fill="#c0392b">)</text>
-<text x="245.0" y="30" text-anchor="middle" fill="#1f5fbf">)</text>
-<text x="245.0" y="52" text-anchor="middle" fill="#c0392b">)</text>
-<text x="315.0" y="30" text-anchor="middle" fill="#1f5fbf">(</text>
-<text x="315.0" y="52" text-anchor="middle" fill="#c0392b">(</text>
-<text x="385.0" y="30" text-anchor="middle" fill="#1f5fbf">)</text>
-<text x="385.0" y="52" text-anchor="middle" fill="#c0392b">(</text>
-<text x="455.0" y="30" text-anchor="middle" fill="#1f5fbf">)</text>
-<text x="455.0" y="52" text-anchor="middle" fill="#c0392b">)</text>
-<text x="504" y="30" font-size="13" fill="#1f5fbf">実線：正しい</text>
-<text x="504" y="52" font-size="13" fill="#c0392b">破線：正しくない</text>
+<svg viewBox="0 0 344 348" width="344" height="348" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="15">
+<rect width="344" height="348" fill="#ffffff"/>
+<line x1="56" y1="245" x2="320" y2="245" stroke="#ddd" stroke-width="1"/>
+<text x="48" y="250" text-anchor="end" font-size="13">d=-1</text>
+<line x1="56" y1="200" x2="320" y2="200" stroke="#333" stroke-width="2"/>
+<text x="48" y="205" text-anchor="end" font-size="13">d=0</text>
+<line x1="56" y1="155" x2="320" y2="155" stroke="#ddd" stroke-width="1"/>
+<text x="48" y="160" text-anchor="end" font-size="13">d=1</text>
+<line x1="56" y1="110" x2="320" y2="110" stroke="#ddd" stroke-width="1"/>
+<text x="48" y="115" text-anchor="end" font-size="13">d=2</text>
+<line x1="56" y1="65" x2="320" y2="65" stroke="#ddd" stroke-width="1"/>
+<text x="48" y="70" text-anchor="end" font-size="13">d=3</text>
+<rect x="56" y="222.5" width="264" height="45" fill="#000" fill-opacity="0.06"/>
+<text x="316" y="262" text-anchor="end" font-size="12">禁止</text>
+<text x="56" y="290" text-anchor="middle" font-size="12">i=0</text>
+<text x="100" y="290" text-anchor="middle" font-size="12">i=1</text>
+<text x="144" y="290" text-anchor="middle" font-size="12">i=2</text>
+<text x="188" y="290" text-anchor="middle" font-size="12">i=3</text>
+<text x="232" y="290" text-anchor="middle" font-size="12">i=4</text>
+<text x="276" y="290" text-anchor="middle" font-size="12">i=5</text>
+<text x="320" y="290" text-anchor="middle" font-size="12">i=6</text>
+<polyline points="56,200 100,155 144,110 188,155 232,110 276,155 320,200" fill="none" stroke="#1f5fbf" stroke-width="3"/>
+<circle cx="56" cy="200" r="5" fill="#1f5fbf"/>
+<circle cx="100" cy="155" r="5" fill="#1f5fbf"/>
+<circle cx="144" cy="110" r="5" fill="#1f5fbf"/>
+<circle cx="188" cy="155" r="5" fill="#1f5fbf"/>
+<circle cx="232" cy="110" r="5" fill="#1f5fbf"/>
+<circle cx="276" cy="155" r="5" fill="#1f5fbf"/>
+<circle cx="320" cy="200" r="5" fill="#1f5fbf"/>
+<polyline points="56,200 100,155 144,200 188,245 232,200 276,155 320,200" fill="none" stroke="#c0392b" stroke-width="2.5" stroke-dasharray="7,4"/>
+<text x="188" y="251" text-anchor="middle" font-size="18" fill="#c0392b" font-weight="bold">×</text>
+<text x="78" y="30" text-anchor="middle" fill="#1f5fbf">(</text>
+<text x="78" y="52" text-anchor="middle" fill="#c0392b">(</text>
+<text x="122" y="30" text-anchor="middle" fill="#1f5fbf">(</text>
+<text x="122" y="52" text-anchor="middle" fill="#c0392b">)</text>
+<text x="166" y="30" text-anchor="middle" fill="#1f5fbf">)</text>
+<text x="166" y="52" text-anchor="middle" fill="#c0392b">)</text>
+<text x="210" y="30" text-anchor="middle" fill="#1f5fbf">(</text>
+<text x="210" y="52" text-anchor="middle" fill="#c0392b">(</text>
+<text x="254" y="30" text-anchor="middle" fill="#1f5fbf">)</text>
+<text x="254" y="52" text-anchor="middle" fill="#c0392b">(</text>
+<text x="298" y="30" text-anchor="middle" fill="#1f5fbf">)</text>
+<text x="298" y="52" text-anchor="middle" fill="#c0392b">)</text>
+<text x="12" y="316" font-size="13" fill="#1f5fbf">実線（上の段の列）：正しい</text>
+<text x="12" y="336" font-size="13" fill="#c0392b">破線（下の段の列）：正しくない</text>
 </svg>

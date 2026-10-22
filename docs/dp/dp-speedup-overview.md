@@ -11,7 +11,7 @@ kind: [DP, 案内]
 prerequisites: [dp-basics]
 related: [dp-prefix-sum, dp-segment-tree, inline-dp, dp-dimension-reduction, bitset-speedup#subset-sum-shift, online-convolution#dp-as-polynomial, fps-basics, matrix-power#dp-transition, cht, monge, alien-dp, slope-trick]
 summary: 素直な DP が間に合わないとき、貰う形の式の右辺の形（区間の和・区間の最小・多項式の積・同じ線形の遷移の繰り返し・一次関数の最小など）から速くする道具を選ぶ。
-complexity: 全体は状態数 × 遷移 1 回の手間。遷移 1 回は累積和 O(1)、セグメント木 O(log N)、スライド最小値 ならし O(1)。ステップ数 T の行列累乗は O(n^3 log T)（n は状態数）
+complexity: null
 signs:
   - {type: shape, text: 素直に書いた DP の遷移が状態 1 つあたり O(N) かかり、全体で O(N^2) になる}
 acl: []

@@ -9,7 +9,7 @@ search:
 
 # グラフの詳細索引
 
-分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。stub（準備中）のページは要約と前提しかなく、節の見出しもまだない。
+分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
 
 ## グラフの表現と用語（graph-basics） {#graph-basics}
 
@@ -258,7 +258,7 @@ search:
     - `bellman-ford#relevant-cycles` 答えに影響する負閉路だけを判定する（到達可能性で絞る・−∞ を伝える）：https://yuukougun.github.io/kyopro-atlas/graph/bellman-ford/#relevant-cycles
     - `bellman-ford#longest-path` 最長路は符号を反転する：https://yuukougun.github.io/kyopro-atlas/graph/bellman-ford/#longest-path
     - `bellman-ford#spfa` SPFA の注意（最悪の計算量は同じ）：https://yuukougun.github.io/kyopro-atlas/graph/bellman-ford/#spfa
-    - `bellman-ford#vs-potential` 負辺があってもダイクストラで済む場合との見分け（ポテンシャル）：https://yuukougun.github.io/kyopro-atlas/graph/bellman-ford/#vs-potential
+    - `bellman-ford#vs-potential` 負辺があってもダイクストラ法で済む場合との見分け（ポテンシャル）：https://yuukougun.github.io/kyopro-atlas/graph/bellman-ford/#vs-potential
 
 ## 最短路 DAG（shortest-path-dag） {#shortest-path-dag}
 
@@ -338,7 +338,7 @@ search:
     - `difference-constraints#direction` 不等式を辺にする向き：https://yuukougun.github.io/kyopro-atlas/graph/difference-constraints/#direction
     - `difference-constraints#why-maximum` 最短距離が最大の解になる理由：https://yuukougun.github.io/kyopro-atlas/graph/difference-constraints/#why-maximum
     - `difference-constraints#encodings` 等式・正値・区間の和の条件の書き方：https://yuukougun.github.io/kyopro-atlas/graph/difference-constraints/#encodings
-    - `difference-constraints#which-algorithm` 負辺があればベルマンフォード、なければダイクストラ：https://yuukougun.github.io/kyopro-atlas/graph/difference-constraints/#which-algorithm
+    - `difference-constraints#which-algorithm` 負辺があればベルマンフォード法、なければダイクストラ法：https://yuukougun.github.io/kyopro-atlas/graph/difference-constraints/#which-algorithm
     - `difference-constraints#consistency` 整合性の判定だけなら重み付き Union-Find（データ構造の章）：https://yuukougun.github.io/kyopro-atlas/graph/difference-constraints/#consistency
 
 ## 補グラフ上の BFS（complement-graph-bfs） {#complement-graph-bfs}
@@ -393,10 +393,11 @@ search:
 - 種類：最短路
 - 前提：`dijkstra`
 - サイン：
-    - 言い回し：K 番目に短い経路・歩道の長さ
+    - 言い回し：K 番目に短い経路・ウォークの長さ
 - 節：
-    - `k-shortest-paths#k-times` 各頂点を K 回まで取り出すダイクストラ：https://yuukougun.github.io/kyopro-atlas/graph/k-shortest-paths/#k-times
+    - `k-shortest-paths#k-times` 各頂点を K 回まで取り出すダイクストラ法：https://yuukougun.github.io/kyopro-atlas/graph/k-shortest-paths/#k-times
     - `k-shortest-paths#yen-eppstein` 単純パス（Yen）とウォークの高速な列挙（Eppstein）：https://yuukougun.github.io/kyopro-atlas/graph/k-shortest-paths/#yen-eppstein
+    - `k-shortest-paths#library` 自作するときの要点と Library Checker：https://yuukougun.github.io/kyopro-atlas/graph/k-shortest-paths/#library
 
 ## 最小シュタイナー木（steiner-tree） {#steiner-tree}
 
@@ -410,7 +411,7 @@ search:
 - 節：
     - `steiner-tree#state` DP の状態の定義（頂点の集合と根の頂点）：https://yuukougun.github.io/kyopro-atlas/graph/steiner-tree/#state
     - `steiner-tree#merge` 部分集合を 2 つに分けて合わせる遷移：https://yuukougun.github.io/kyopro-atlas/graph/steiner-tree/#merge
-    - `steiner-tree#dijkstra-step` ダイクストラで v を動かす遷移：https://yuukougun.github.io/kyopro-atlas/graph/steiner-tree/#dijkstra-step
+    - `steiner-tree#dijkstra-step` ダイクストラ法で v を動かす遷移：https://yuukougun.github.io/kyopro-atlas/graph/steiner-tree/#dijkstra-step
     - `steiner-tree#on-tree` 木の上なら易しい（木の章の「指定頂点を結ぶ最小の部分木」）：https://yuukougun.github.io/kyopro-atlas/graph/steiner-tree/#on-tree
     - `steiner-tree#library` 自作するときの要点と確かめ方：https://yuukougun.github.io/kyopro-atlas/graph/steiner-tree/#library
 
@@ -603,6 +604,7 @@ search:
 - 節：
     - `offline-dynamic-connectivity#time-segment-tree` 各辺の存在する区間を時間軸のセグ木に載せる：https://yuukougun.github.io/kyopro-atlas/graph/offline-dynamic-connectivity/#time-segment-tree
     - `offline-dynamic-connectivity#dfs-rollback` DFS で入るときに併合・出るときに取り消す（ロールバック Union-Find はデータ構造の章）：https://yuukougun.github.io/kyopro-atlas/graph/offline-dynamic-connectivity/#dfs-rollback
+    - `offline-dynamic-connectivity#library` 自作するときの要点と Library Checker：https://yuukougun.github.io/kyopro-atlas/graph/offline-dynamic-connectivity/#library
 
 ## 特殊な最小全域木（spanning-tree-advanced） {#spanning-tree-advanced}
 
@@ -620,6 +622,7 @@ search:
     - `spanning-tree-advanced#manhattan` Manhattan MST：https://yuukougun.github.io/kyopro-atlas/graph/spanning-tree-advanced/#manhattan
     - `spanning-tree-advanced#directed` 最小有向全域木（Chu-Liu/Edmonds）：https://yuukougun.github.io/kyopro-atlas/graph/spanning-tree-advanced/#directed
     - `spanning-tree-advanced#second-best` 第 2 最小全域木：https://yuukougun.github.io/kyopro-atlas/graph/spanning-tree-advanced/#second-best
+    - `spanning-tree-advanced#library` 自作するときの要点と Library Checker：https://yuukougun.github.io/kyopro-atlas/graph/spanning-tree-advanced/#library
 
 ## 行列木定理（matrix-tree-theorem） {#matrix-tree-theorem}
 
@@ -637,7 +640,6 @@ search:
     - `matrix-tree-theorem#best-theorem` BEST 定理（有向オイラー閉路の数）：https://yuukougun.github.io/kyopro-atlas/graph/matrix-tree-theorem/#best-theorem
     - `matrix-tree-theorem#subset-dp` 頂点集合ごとに数えて部分集合の DP と組む：https://yuukougun.github.io/kyopro-atlas/graph/matrix-tree-theorem/#subset-dp
     - `matrix-tree-theorem#library` 計算量と自作するときの要点：https://yuukougun.github.io/kyopro-atlas/graph/matrix-tree-theorem/#library
-    - `matrix-tree-theorem#resources` 学ぶための資料：https://yuukougun.github.io/kyopro-atlas/graph/matrix-tree-theorem/#resources
 
 ## DFS 木・BFS 木とグラフの構築（graph-construction） {#graph-construction}
 
@@ -687,7 +689,7 @@ search:
     - `degree-sqrt#few-heavy` 重い頂点は 2√M 個以下：https://yuukougun.github.io/kyopro-atlas/graph/degree-sqrt/#few-heavy
     - `degree-sqrt#push-pull` 配るか取りに行くかを次数で決める：https://yuukougun.github.io/kyopro-atlas/graph/degree-sqrt/#push-pull
     - `degree-sqrt#triangles` 三角形の列挙（次数の小さい方から向き付ける）（黄）：https://yuukougun.github.io/kyopro-atlas/graph/degree-sqrt/#triangles
-    - `degree-sqrt#four-cycles` 4-サイクルの検出（鳩の巣原理で打ち切る）（黄）：https://yuukougun.github.io/kyopro-atlas/graph/degree-sqrt/#four-cycles
+    - `degree-sqrt#four-cycles` 長さ 4 の閉路の検出（鳩の巣原理で打ち切る）（黄）：https://yuukougun.github.io/kyopro-atlas/graph/degree-sqrt/#four-cycles
 
 ## 最大流（max-flow） {#max-flow}
 
@@ -824,6 +826,7 @@ search:
     - `dilworth-path-cover#path-cover` DAG の最小パス被覆（頂点を 2 つに分けた二部マッチング）：https://yuukougun.github.io/kyopro-atlas/graph/dilworth-path-cover/#path-cover
     - `dilworth-path-cover#antichain` 推移閉包と最大反鎖（数列なら LIS のページの Dilworth の定理へ）：https://yuukougun.github.io/kyopro-atlas/graph/dilworth-path-cover/#antichain
     - `dilworth-path-cover#hall` Hall の結婚定理：https://yuukougun.github.io/kyopro-atlas/graph/dilworth-path-cover/#hall
+    - `dilworth-path-cover#library` 自作するときの要点と Library Checker：https://yuukougun.github.io/kyopro-atlas/graph/dilworth-path-cover/#library
 
 ## 最小流量制約付きフロー（flow-lower-bounds） {#flow-lower-bounds}
 
@@ -839,6 +842,7 @@ search:
 - 節：
     - `flow-lower-bounds#pre-flow` 下限を先に流したことにする：https://yuukougun.github.io/kyopro-atlas/graph/flow-lower-bounds/#pre-flow
     - `flow-lower-bounds#super-vertex` 超頂点で過不足を調整して判定する：https://yuukougun.github.io/kyopro-atlas/graph/flow-lower-bounds/#super-vertex
+    - `flow-lower-bounds#library` 自作するときの要点と Library Checker：https://yuukougun.github.io/kyopro-atlas/graph/flow-lower-bounds/#library
 
 ## 一般グラフのマッチング（general-matching） {#general-matching}
 

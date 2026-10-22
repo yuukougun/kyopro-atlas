@@ -9,7 +9,7 @@ order: 140
 level: 発展
 kind: [木, ハッシュ・乱択]
 prerequisites: [tree-diameter]
-related: [hashing-for-sets, rolling-hash, static-top-tree, tree-traversal]
+related: [hashing-for-sets, rolling-hash, static-top-tree, tree-traversal, tree-centroid#one-or-two]
 summary: 根付き木の同型は、葉から順に「子の部分木の名前の多重集合」に名前を付ける AHU 法か、多重集合のハッシュで判定する。根のない木は中心（1〜2 個）を根にして比べる。
 complexity: AHU 法は子の名前を整列して O(N log N)（深さごとの基数ソートなら O(N)）。木のハッシュは値の計算が O(N)（種類数を数えるなら整列の O(N log N) か期待 O(N) の unordered_set が加わる）で、誤る確率は 1 組あたり N/(2^61−1) 以下。根のない木は中心を求める O(N) が加わる
 signs:
@@ -23,6 +23,7 @@ sections:
   - {title: AHU 法（子の名前の多重集合に名前を付ける）, anchor: ahu}
   - {title: 木のハッシュと衝突しにくい設計, anchor: tree-hash}
   - {title: 根のない木は中心を根にする, anchor: unrooted}
+  - {title: 公開ライブラリと自作するときの要点, anchor: library}
 stage: draft
 updated: 2026-10-22
 ---
@@ -110,6 +111,27 @@ $$
 --8<-- "tree-isomorphism/unrooted-hash.cpp:core"
 ```
 
+## 公開ライブラリと自作するときの要点 {#library}
+
+ACL には木の同型判定も木のハッシュもない。公開ライブラリには次のものがある。
+
+- **Nyaan 氏のライブラリの `RootedTreeHash`**：隣接リスト `g` と根 `root`（既定は 0）を渡して作ると、メンバ `hash[v]` に頂点 $v$ の部分木のハッシュが入る。[木のハッシュ](#tree-hash)の式と同じく、高さごとの乱数と法 $2^{61} - 1$ の積で作り、`depth[v]` には $v$ の高さが入る。根付き木の部分木を比べるなら `hash[u] == hash[v]` を見る。
+- **ei1333 氏のライブラリの `tree_isomorphism(a, b)`**：根のない 2 つの木 `a`・`b` を渡すと、同型かを `bool` で返す。重心を根にし、2 個なら両方を試して、深さごとに子の名前の列を整列して比べる（AHU 法の形）。
+
+自作するときは、次の点を押さえる。
+
+- 根付き木の部分木を分類するなら [AHU 法](#ahu)の名前を使う。名前の表は比べる木すべてで 1 つにし、子の名前の列を整列してから引く。
+- 根のない木は[中心か重心を根にする](#unrooted)。2 個のときの扱いを決めておく。
+- 子を親より先に処理する順で回し、再帰を使わない（一直線の木で深さが $N$ になる）。
+
+Library Checker の [Rooted Tree Isomorphism Classification](https://judge.yosupo.jp/problem/rooted_tree_isomorphism_classification) で根付き木の分類を確かめられる。根のない木の同型は Library Checker に専用の問題がないので、CSES の Tree Isomorphism II（[練習問題](#practice)）で確かめる。
+
+## 学ぶための資料 {#resources}
+
+- OI Wiki の「AHU 算法」（中国語）：深さごとの基数ソートで $O(N)$ にする方法と、文字列を連結すると $O(N^2)$ になることの説明がある（文章と図の利用条件は CC BY-SA）。
+- OI Wiki の「树哈希」（中国語）：整数の写像で写してから和を取る設計と、根のない木を重心か全方位の計算で扱う方法がある（同じく CC BY-SA）。
+- Nyaan 氏のライブラリの Rooted Tree Hash の項：高さごとの乱数と法 $2^{61} - 1$ の積で作る木のハッシュの実装。
+
 ## 落とし穴 {#pitfalls}
 
 **子の名前を整列しない**。子を入力の順に並べたまま名前を引くと、子の順番だけが違う同型な部分木に別の名前が付く。名前の列は必ず整列してから表を引く。
@@ -123,6 +145,8 @@ $$
 **再帰が深くなる**。一直線の木は深さ $N$ になり、再帰の DFS ではスタックがあふれうる。Library Checker のテストにも一直線の大きな木がある。BFS の順の逆で回すなど、再帰を使わない書き方にする（[再帰の深さと非再帰の書き方](../tree/tree-traversal.md#recursion-depth)）。
 
 ## 練習問題 {#practice}
+
+ABC で必須になる問題は確認できなかった。
 
 ### Library Checker
 
@@ -143,10 +167,10 @@ $$
 
 ## 参考 {#references}
 
-- [OI Wiki「树哈希」](https://oi-wiki.org/graph/tree-hash/)：整数の写像で写してから和を取る設計、写す前後に乱数を XOR する工夫、根のない木を重心か全方位の計算で扱う方法。学ぶための資料（文章と図は使っていない）
-- [OI Wiki「AHU 算法」](https://oi-wiki.org/graph/tree-ahu/)：AHU 法の名前付け、深さごとの基数ソートで $O(N)$ にする方法、文字列を連結すると $O(N^2)$ になること、中心による根のない木の扱い。学ぶための資料（文章と図は使っていない）
+- [OI Wiki「树哈希」](https://oi-wiki.org/graph/tree-hash/)：整数の写像で写してから和を取る設計、写す前後に乱数を XOR する工夫、根のない木を重心か全方位の計算で扱う方法。文章と図は使っていない
+- [OI Wiki「AHU 算法」](https://oi-wiki.org/graph/tree-ahu/)：AHU 法の名前付け、深さごとの基数ソートで $O(N)$ にする方法、文字列を連結すると $O(N^2)$ になること、中心による根のない木の扱い。文章と図は使っていない
 - [Florian Ingels「Revisiting Tree Isomorphism: An Algorithmic Bric-à-Brac」](https://arxiv.org/abs/2309.14441)：AHU 法が根付き木の同型を線形時間で判定すること
-- [Nyaan「Rooted Tree Hash」](https://nyaannyaan.github.io/library/tree/rooted-tree-hash.hpp)：高さごとの乱数と mod $2^{61} - 1$ の積で作る木のハッシュの実装例
-- [ei1333「Tree-Isomorphism（木の同型性判定）」](https://ei1333.github.io/library/graph/tree/tree-isomorphism.hpp)：重心を根にし、2 個なら両方を試す根のない木の同型判定の実装例
+- [Nyaan「Rooted Tree Hash」](https://nyaannyaan.github.io/library/tree/rooted-tree-hash.hpp)：高さごとの乱数と mod $2^{61} - 1$ の積で作る木のハッシュの実装例と、`RootedTreeHash` の使い方（ソースの GitHub で確かめた）
+- [ei1333「Tree-Isomorphism（木の同型性判定）」](https://ei1333.github.io/library/graph/tree/tree-isomorphism.hpp)：重心を根にし、2 個なら両方を試す根のない木の同型判定の実装例と、`tree_isomorphism` の引数と返り値（ソースの GitHub で確かめた）
 - [Library Checker「Rooted Tree Isomorphism Classification」](https://judge.yosupo.jp/problem/rooted_tree_isomorphism_classification)：練習の問題の内容と制約（問題文と制約は library-checker-problems のリポジトリで確かめた）
 - [CSES「Tree Isomorphism I」](https://cses.fi/problemset/task/1700)・[「Tree Isomorphism II」](https://cses.fi/problemset/task/1701)：練習の問題の内容と制約

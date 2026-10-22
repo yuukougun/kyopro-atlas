@@ -1,40 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 260" font-family="sans-serif" font-size="14">
-  <rect width="640" height="260" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="290" viewBox="0 0 400 290" font-family="sans-serif" font-size="13">
+  <rect width="400" height="290" fill="#ffffff"/>
   <defs>
     <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#333333"/>
     </marker>
   </defs>
-  <text x="320" y="22" text-anchor="middle" font-size="15">HP h の状態と E[h]（p = 1/2）。実線：確率 1 − p で HP − 1、破線：確率 p で HP − 2</text>
-  <!-- nodes at x = 80,200,320,440,560 ; y = 140 -->
+  <text x="200" y="20" text-anchor="middle" font-size="14">HP h の状態と E[h]（p = 1/2）</text>
+  <text x="200" y="40" text-anchor="middle" font-size="12">実線：確率 1 − p で HP − 1、破線：確率 p で HP − 2</text>
   <g stroke="#333333" stroke-width="1.5">
-    <circle cx="80" cy="140" r="30" fill="#e8f0fe"/>
-    <circle cx="200" cy="140" r="30" fill="#e8f0fe"/>
-    <circle cx="320" cy="140" r="30" fill="#e8f0fe"/>
-    <circle cx="440" cy="140" r="30" fill="#e8f0fe"/>
-    <circle cx="560" cy="140" r="30" fill="#fde7e7" stroke-width="3"/>
+    <circle cx="40" cy="150" r="27" fill="#e8f0fe"/>
+    <circle cx="120" cy="150" r="27" fill="#e8f0fe"/>
+    <circle cx="200" cy="150" r="27" fill="#e8f0fe"/>
+    <circle cx="280" cy="150" r="27" fill="#e8f0fe"/>
+    <circle cx="360" cy="150" r="27" fill="#fde7e7" stroke-width="3"/>
   </g>
   <g text-anchor="middle">
-    <text x="80" y="136">HP 4</text><text x="80" y="154">2.875</text>
-    <text x="200" y="136">HP 3</text><text x="200" y="154">2.25</text>
-    <text x="320" y="136">HP 2</text><text x="320" y="154">1.5</text>
-    <text x="440" y="136">HP 1</text><text x="440" y="154">1</text>
-    <text x="560" y="136">HP 0</text><text x="560" y="154">0</text>
-    <text x="578" y="198">終状態</text>
+    <text x="40" y="146">HP 4</text><text x="40" y="163">2.875</text>
+    <text x="120" y="146">HP 3</text><text x="120" y="163">2.25</text>
+    <text x="200" y="146">HP 2</text><text x="200" y="163">1.5</text>
+    <text x="280" y="146">HP 1</text><text x="280" y="163">1</text>
+    <text x="360" y="146">HP 0</text><text x="360" y="163">0</text>
+    <text x="360" y="204">終状態</text>
   </g>
-  <!-- solid: h -> h-1 -->
   <g stroke="#333333" stroke-width="1.5" fill="none" marker-end="url(#ah)">
-    <line x1="110" y1="140" x2="168" y2="140"/>
-    <line x1="230" y1="140" x2="288" y2="140"/>
-    <line x1="350" y1="140" x2="408" y2="140"/>
-    <line x1="470" y1="140" x2="528" y2="140"/>
+    <line x1="67" y1="150" x2="91" y2="150"/>
+    <line x1="147" y1="150" x2="171" y2="150"/>
+    <line x1="227" y1="150" x2="251" y2="150"/>
+    <line x1="307" y1="150" x2="331" y2="150"/>
   </g>
-  <!-- dashed: h -> h-2 (from 1 goes to 0 as well) -->
   <g stroke="#333333" stroke-width="1.5" fill="none" stroke-dasharray="6 4" marker-end="url(#ah)">
-    <path d="M90,111 Q200,50 310,111"/>
-    <path d="M210,169 Q320,230 430,169"/>
-    <path d="M330,111 Q440,50 550,111"/>
-    <path d="M455,166 Q510,215 548,168"/>
+    <path d="M48,124 Q120,64 192,124"/>
+    <path d="M128,176 Q200,236 272,176"/>
+    <path d="M208,124 Q280,64 352,124"/>
+    <path d="M292,174 Q320,212 346,176"/>
   </g>
-  <text x="320" y="252" text-anchor="middle" font-size="13">HP 1 からは破線も実線も HP 0 へ移る（0 未満は 0 にまとめる）。値は右（HP 0 = 0）から順に埋まる</text>
+  <text x="200" y="256" text-anchor="middle" font-size="12">HP 1 からは破線も実線も HP 0 へ移る（0 未満は 0 にまとめる）</text>
+  <text x="200" y="276" text-anchor="middle" font-size="12">値は右（HP 0 = 0）から順に埋まる</text>
 </svg>

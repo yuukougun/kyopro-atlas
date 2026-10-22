@@ -9,7 +9,7 @@ search:
 
 # 数え上げ・確率・ゲームの詳細索引
 
-分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。stub（準備中）のページは要約と前提しかなく、節の見出しもまだない。
+分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
 
 ## 和・積の法則と順列・組合せ（counting-basics） {#counting-basics}
 
@@ -330,7 +330,7 @@ search:
     - `generating-function-counting#formulas` 重複組合せ・上限つきの選び方を式で書く：https://yuukougun.github.io/kyopro-atlas/comb/generating-function-counting/#formulas
     - `generating-function-counting#dp-as-polynomial` DP の遷移を多項式の積・商として見る：https://yuukougun.github.io/kyopro-atlas/comb/generating-function-counting/#dp-as-polynomial
     - `generating-function-counting#to-fps` 多項式の演算（逆元・log・exp）は FPS のページへ：https://yuukougun.github.io/kyopro-atlas/comb/generating-function-counting/#to-fps
-    - `generating-function-counting#examples` 例題：Prüfer 列と累乗、上限つきの桁の和：https://yuukougun.github.io/kyopro-atlas/comb/generating-function-counting/#examples
+    - `generating-function-counting#library` ライブラリでの使い方：https://yuukougun.github.io/kyopro-atlas/comb/generating-function-counting/#library
 
 ## 包除原理（inclusion-exclusion） {#inclusion-exclusion}
 
@@ -502,6 +502,7 @@ search:
     - `stirling-first#recurrence` 漸化式と上昇階乗：https://yuukougun.github.io/kyopro-atlas/comb/stirling-first/#recurrence
     - `stirling-first#records` 左から見える位置の数との対応：https://yuukougun.github.io/kyopro-atlas/comb/stirling-first/#records
     - `stirling-first#fps` FPS・分割統治で一度に求める：https://yuukougun.github.io/kyopro-atlas/comb/stirling-first/#fps
+    - `stirling-first#library` ライブラリでの使い方：https://yuukougun.github.io/kyopro-atlas/comb/stirling-first/#library
     - `stirling-first#vs-second-kind` 第 2 種との違い：https://yuukougun.github.io/kyopro-atlas/comb/stirling-first/#vs-second-kind
 
 ## 第 2 種スターリング数とベル数（bell-number） {#bell-number}
@@ -935,3 +936,4 @@ search:
     - `partizan-games#why-not-grundy` Grundy 数が使えない理由：https://yuukougun.github.io/kyopro-atlas/comb/partizan-games/#why-not-grundy
     - `partizan-games#surreal` 局面に数を割り当てて和を取る：https://yuukougun.github.io/kyopro-atlas/comb/partizan-games/#surreal
     - `partizan-games#tempo` 手数の貯金として見る：https://yuukougun.github.io/kyopro-atlas/comb/partizan-games/#tempo
+    - `partizan-games#library` 計算量と自作するときの要点：https://yuukougun.github.io/kyopro-atlas/comb/partizan-games/#library

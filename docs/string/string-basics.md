@@ -189,6 +189,16 @@ $A + A$ の中で $B$ を探すのを素朴に行うと $O(N^2)$ かかる。$N$
 
 `std::string` の個々の関数の使い方と注意は [文字列の操作](../cpp/cpp-string-api.md)にまとめる。
 
+## 上位の手法へのつながり {#next-steps}
+
+`std::string` の比較や `find` は 1 回に長さに比例する時間がかかる。同じ文字列の部分を何度も比べるときは、前計算で 1 回の比較を速くする道具に進む。
+
+- **部分文字列どうしの一致を何度も判定する**：[ローリングハッシュ](../string/rolling-hash.md#polynomial-hash)で前計算 $O(N)$、1 回 $O(1)$ にする。
+- **パターンが現れる位置をすべて求める**：[Z-algorithm](../string/z-algorithm.md#pattern-search) か [KMP 法](../string/kmp.md#matching)で $O(\lvert S \rvert + \lvert T \rvert)$ にする。
+- **回転（巡回シフト）を比べる**：$A + A$ の中で $B$ を探すのは [Z-algorithm の巡回シフトの節](../string/z-algorithm.md#cyclic-shift)にある。
+- **部分文字列の辞書順の比較を何度もする**：最長共通接頭辞（LCP）を求めて次の 1 文字を比べる。LCP はハッシュと二分探索（[ハッシュ＋二分探索](../string/rolling-hash.md#hash-lcp-binary-search)）か、[Suffix Array と LCP 配列](../string/suffix-array.md#lcp-rmq)で求める。
+- **部分列の判定・数え上げ**：[部分列の判定と次の出現位置の表](../string/subsequence-matching.md)へ進む。
+
 ## 使い分け {#comparison}
 
 - 条件を満たすもののうち辞書順最小を、先頭から 1 文字ずつ決めるなら[辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md)。辞書順で $K$ 番目も同じページ

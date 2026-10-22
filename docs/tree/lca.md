@@ -206,12 +206,14 @@ K 個上ごとに表を引き直して二分探索すると 1 回 $O(\log^2 N)$ 
 
 - [ABC235 E. MST + 1](https://atcoder.jp/contests/abc235/tasks/abc235_e)（diff 1304）：グラフと Q 本の追加の辺が与えられ、各辺を 1 本だけ足したときにその辺が最小全域木に含まれうるかを判定する
 - [ABC294 G. Distance Queries on a Tree](https://atcoder.jp/contests/abc294/tasks/abc294_g)（diff 1702）：重み付きの木で、辺の重みの変更と 2 頂点間の距離の質問に答える
+- [典型90 035. Preserve Connectivity（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_ai)（diff —）：木と多数のクエリが与えられ、各クエリで指定された頂点をすべてつなぐのに必要な辺の数の最小値を答える
 
 </div>
 
 ??? note "方針"
     - **ABC235 E**：辺の重みはすべて異なる。元のグラフの最小全域木を作り、追加の辺 $(u, v, w)$ について、木の上の $u$–$v$ のパスの最大の辺の重み $h$ を[パス上の最大値](#path-aggregate)の表で求める。$w < h$ なら、その最大の辺と入れ替えて木が軽くなるので含まれる（[閉路性質](../graph/minimum-spanning-tree.md#why-correct)）。質問をまとめて重み順に処理する解き方は[最小全域木](../graph/minimum-spanning-tree.md#query-edges)にある
     - **ABC294 G**：根からの重みの和 $S[v]$ を使うと、距離は $S[u] + S[v] - 2 S[\mathrm{lca}(u, v)]$ である。辺の重みの変更は、子の部分木の $S$ への一律の加算になるので、行きがけ順の列の上の差分の BIT で持つ（[根からのパスを区間で扱う](../tree/euler-tour.md#root-path)）。木の形は変わらないので、LCA の表は最初に 1 回作ればよい
+    - **典型90 035**：指定頂点を行きがけ順に並べ、隣り合う 2 点（最後と最初も）の距離を LCA で求めて足し、半分を答える。行きがけ順に一周すると、つなぐのに要る辺をちょうど 2 回ずつ通るからである。解法の詳細は[圧縮木の例題](../tree/auxiliary-tree.md#typical90_ai)にある
 
 ## 力試し {#challenge}
 

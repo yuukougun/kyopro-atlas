@@ -24,7 +24,7 @@ sections:
   - {title: next_permutation で順列を列挙する（ソートした状態から始める）, anchor: next-permutation}
   - {title: 最大・最小・個数：max_element・max・clamp・count の戻り値, anchor: max-element}
   - {title: 'ranges 版：ranges::sort(v) のようにコンテナを直接渡す（C++20）', anchor: ranges}
-  - {title: '射影：ranges::sort(ps, {}, &P::score) は score で比べて要素ごと並べ替える（C++20）', anchor: projection}
+  - {title: 射影：メンバのポインタを渡して score で比べ、要素ごと並べ替える（C++20）, anchor: projection}
   - {title: 'ranges::unique は後ろの不要部分を返す（C++20）', anchor: ranges-unique}
   - {title: fold_left・contains・find_last（C++23・GCC 13〜）と AtCoder にない starts_with, anchor: fold-left}
   - {title: '一時オブジェクトを渡すと戻り値が ranges::dangling になる（使うとコンパイルエラー）', anchor: ranges-dangling}
@@ -214,7 +214,7 @@ ranges 版のアルゴリズムは、`v.begin(), v.end()` の代わりにコン�
 - **版**：C++20。g++-13・g++-15 とも `-std=gnu++20` から使える
 - **落とし穴**：`ranges::max(v)` を空の `v` に使うのは未定義動作である。`max_element` と違って `end` で知らせる手段がない
 
-## 射影：ranges::sort(ps, {}, &P::score) は score で比べて要素ごと並べ替える（C++20） {#projection}
+## 射影：メンバのポインタを渡して score で比べ、要素ごと並べ替える（C++20） {#projection}
 
 射影は、比べる前に各要素へ適用する関数である。`ranges::sort(ps, {}, &P::score)` は、各要素から `score` を取り出して比べる。並べ替えるのは要素ごと（`name` も一緒）である。2 つ目の引数の `{}` は既定の比較 `ranges::less{}` で、3 つ目が射影である。
 

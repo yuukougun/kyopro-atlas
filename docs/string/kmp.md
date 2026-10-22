@@ -9,7 +9,7 @@ order: 70
 level: 青
 kind: [文字列]
 prerequisites: [string-basics]
-related: [z-algorithm, aho-corasick, string-automaton-dp, rolling-hash, divisor-enum, mobius-function, suffix-automaton]
+related: [z-algorithm, aho-corasick, string-automaton-dp, rolling-hash, divisor-enum, mobius-function, suffix-automaton, divisor-inclusion-exclusion#period]
 summary: π[i]（先頭 i+1 文字の、接頭辞でも接尾辞でもある最長の真の部分の長さ）を O(N) で求める。π をたどると全 border と最小周期が分かり、照合に失敗したときのずらし方や照合オートマトンの遷移にも使える。
 complexity: π の構築 O(N)（ならし）、パターン照合 O(N + M)、照合オートマトンの表 O(σM)
 signs:

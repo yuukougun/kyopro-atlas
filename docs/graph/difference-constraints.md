@@ -24,7 +24,7 @@ sections:
   - {title: 不等式を辺にする向き, anchor: direction}
   - {title: 最短距離が最大の解になる理由, anchor: why-maximum}
   - {title: 等式・正値・区間の和の条件の書き方, anchor: encodings}
-  - {title: 負辺があればベルマンフォード、なければダイクストラ, anchor: which-algorithm}
+  - {title: 負辺があればベルマンフォード法、なければダイクストラ法, anchor: which-algorithm}
   - {title: 整合性の判定だけなら重み付き Union-Find（データ構造の章）, anchor: consistency}
 stage: draft
 updated: 2026-10-21
@@ -110,7 +110,7 @@ $x = d = (0, 4, 5, 6)$ を代入すると、5 つの条件はすべて成り立�
 
 整数の厳密な不等式は $c - 1$ にできるが、実数の変数では直せない。実数の問題で「$<$」が出たら、等号を許しても答えが変わらないかを先に確かめる。
 
-## 負辺があればベルマンフォード、なければダイクストラ {#which-algorithm}
+## 負辺があればベルマンフォード法、なければダイクストラ法 {#which-algorithm}
 
 グラフを作った後は、最短路を求めるだけである。どの方法を使うかは重みの符号で決まる。
 
@@ -216,7 +216,7 @@ $N$・$M$ は $2 \times 10^5$ までなので、$O(NM)$ のベルマンフォー
 | 差の不等式があり、負の重みがある | 差分制約＋[ベルマンフォード法](../graph/bellman-ford.md) |
 | 条件が 2 値の「または」の組 | [2-SAT](../graph/two-sat.md) |
 
-和の条件や「または」が混ざる問題は差分制約にならない。その形の条件が出たら、[グラフへの言い換え](../graph/graph-modeling.md#constraints-to-edges)のほかの型を探す。
+和の条件や「または」が混ざる問題は差分制約にならない。その形の条件が出たら、[グラフへの帰着](../graph/graph-modeling.md#constraints-to-edges)のほかの型を探す。
 
 ## 参考 {#references}
 

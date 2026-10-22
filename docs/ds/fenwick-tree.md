@@ -69,7 +69,7 @@ BIT は、長さ $N$ の列 $a_0, \dots, a_{N-1}$（0-indexed）に対して次�
 
 ## 保つ性質（添字 i は、i で終わる長さ lowbit(i) の区間の和を持つ） {#invariants}
 
-BIT の中身は、1-indexed の配列 $t[1], \dots, t[N]$ である。この節と次の節では、列も 1-indexed で $a_1, \dots, a_N$ と書く。$\mathrm{lowbit}(i)$ を「$i$ の 2 進数で最下位の 1 だけを残した値」とする（C++ では `i & -i`。[popcount・最下位ビット](../basics/bit-operations.md#popcount)）。BIT は次の性質を保つ。
+BIT の中身は、1-indexed の配列 $t[1], \dots, t[N]$ である。この節と次の節では、列も 1-indexed で $a_1, \dots, a_N$ と書く。$\mathrm{lowbit}(i)$ を「$i$ の 2 進数で最下位の 1 だけを残した値」とする（C++ では `i & -i`。[popcount・最下位 bit](../basics/bit-operations.md#popcount)）。BIT は次の性質を保つ。
 
 > $t[i] = a_{i - \mathrm{lowbit}(i) + 1} + \dots + a_i$、すなわち $t[i]$ は区間 $(i - \mathrm{lowbit}(i), i]$ の和である。
 

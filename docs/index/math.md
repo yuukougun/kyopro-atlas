@@ -9,7 +9,7 @@ search:
 
 # 整数論・代数の詳細索引
 
-分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。stub（準備中）のページは要約と前提しかなく、節の見出しもまだない。
+分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
 
 ## Σ の変形（sigma-manipulation） {#sigma-manipulation}
 
@@ -26,7 +26,7 @@ search:
     - `sigma-manipulation#swap-order` 二重和の順序交換と添字の範囲（i ≤ j ≤ N を j の側から見る）：https://yuukougun.github.io/kyopro-atlas/math/sigma-manipulation/#swap-order
     - `sigma-manipulation#reindex` 添字の付け替え（i → N − i、k = i + j、約数 d と倍数）：https://yuukougun.github.io/kyopro-atlas/math/sigma-manipulation/#reindex
     - `sigma-manipulation#group-by-value` 値でまとめ直す（同じ値になる添字の個数を掛ける）：https://yuukougun.github.io/kyopro-atlas/math/sigma-manipulation/#group-by-value
-    - `sigma-manipulation#formulas` よく使う和の公式と Σ_{i≠j} a_i a_j = (Σa)² − Σa²：https://yuukougun.github.io/kyopro-atlas/math/sigma-manipulation/#formulas
+    - `sigma-manipulation#formulas` よく使う和の公式と、異なる 2 つの積の和を和の 2 乗で表す式：https://yuukougun.github.io/kyopro-atlas/math/sigma-manipulation/#formulas
     - `sigma-manipulation#empty-sum` 空の和は 0・空の積は 1 と境界：https://yuukougun.github.io/kyopro-atlas/math/sigma-manipulation/#empty-sum
 
 ## 整数の割り算と余り（integer-division） {#integer-division}
@@ -550,6 +550,7 @@ search:
     - `multiplicative-function#dirichlet` 乗法的関数（φ・μ・d・σ）とディリクレ積（φ \* 1 = id など）：https://yuukougun.github.io/kyopro-atlas/math/multiplicative-function/#dirichlet
     - `multiplicative-function#prime-counting` 素数の個数・素数の和（Lucy DP）：https://yuukougun.github.io/kyopro-atlas/math/multiplicative-function/#prime-counting
     - `multiplicative-function#prefix-sums` 和の求め方の概要（杜教篩・Lucy DP・Min_25 篩）：https://yuukougun.github.io/kyopro-atlas/math/multiplicative-function/#prefix-sums
+    - `multiplicative-function#library` 公開ライブラリと自作するときの要点：https://yuukougun.github.io/kyopro-atlas/math/multiplicative-function/#library
 
 ## floor sum（floor-sum） {#floor-sum}
 
@@ -708,6 +709,7 @@ search:
     - `fft-ntt#butterfly` 1 の N 乗根と分割統治（バタフライ）：https://yuukougun.github.io/kyopro-atlas/math/fft-ntt/#butterfly
     - `fft-ntt#ntt-prime` 複素数の FFT と誤差、NTT に向く素数（c·2^k + 1）と原始根：https://yuukougun.github.io/kyopro-atlas/math/fft-ntt/#ntt-prime
     - `fft-ntt#arbitrary-mod` 任意 mod の畳み込み（3 素数 NTT と Garner、convolution_ll）：https://yuukougun.github.io/kyopro-atlas/math/fft-ntt/#arbitrary-mod
+    - `fft-ntt#library` ACL の convolution と自作するときの要点：https://yuukougun.github.io/kyopro-atlas/math/fft-ntt/#library
 
 ## XOR 畳み込み（hadamard-transform） {#hadamard-transform}
 
@@ -742,6 +744,7 @@ search:
     - `online-convolution#product-of-many` 多数の多項式の積（次数の小さいものから掛ける・分割統治）：https://yuukougun.github.io/kyopro-atlas/math/online-convolution/#product-of-many
     - `online-convolution#dp-as-polynomial` DP の遷移を多項式の積とみる：https://yuukougun.github.io/kyopro-atlas/math/online-convolution/#dp-as-polynomial
     - `online-convolution#online` オンライン畳み込み（左半分を確定させてから右半分へ寄与を足す）：https://yuukougun.github.io/kyopro-atlas/math/online-convolution/#online
+    - `online-convolution#library` ACL の convolution と自作するときの要点：https://yuukougun.github.io/kyopro-atlas/math/online-convolution/#library
 
 ## 形式的冪級数と多項式の演算（fps-basics） {#fps-basics}
 
@@ -759,6 +762,7 @@ search:
     - `fps-basics#signs` 式の形から使う演算を選ぶ：https://yuukougun.github.io/kyopro-atlas/math/fps-basics/#signs
     - `fps-basics#operations` 演算の一覧と計算量（inv・log・exp・pow・sqrt）：https://yuukougun.github.io/kyopro-atlas/math/fps-basics/#operations
     - `fps-basics#polynomial-ops` 多項式の割り算・Taylor shift・多点評価：https://yuukougun.github.io/kyopro-atlas/math/fps-basics/#polynomial-ops
+    - `fps-basics#library` ACL の convolution と自作するときの要点：https://yuukougun.github.io/kyopro-atlas/math/fps-basics/#library
 
 ## 線形漸化式の高速化（linear-recurrence-fast） {#linear-recurrence-fast}
 

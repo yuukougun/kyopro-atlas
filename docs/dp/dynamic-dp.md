@@ -24,7 +24,7 @@ sections:
   - {title: 遷移を行列にしてセグメント木に載せる（ACL の segtree の S を行列にする）, anchor: matrix-on-segment-tree}
   - {title: 積の向きと単位行列, anchor: order-and-identity}
   - {title: 木の上の動的 DP（Static Top Tree へ）, anchor: on-trees}
-  - {title: ライブラリでの検証（Library Checker の point_set_range_composite が土台）, anchor: verify}
+  - {title: ライブラリでの検証, anchor: verify}
 stage: draft
 updated: 2026-10-22
 ---
@@ -140,7 +140,7 @@ $a_v$ を書き換えたときの流れは次のとおりである。
 
 [Static Top Tree](../tree/static-top-tree.md#compress-rake) は、木を「パスの圧縮」と「部分木の併合」の 2 種類の操作で高さ $O(\log N)$ の木に組み直し、同じ更新を $O(\log N)$ 回の合成で済ませる方法である。行列にしなくてよく、圧縮と併合の 2 つの演算を直接書くので、遷移が行列で書きにくい木 DP にも使える。
 
-## ライブラリでの検証（Library Checker の point_set_range_composite が土台） {#verify}
+## ライブラリでの検証 {#verify}
 
 列の動的 DP は、行列のセグメント木が向きも含めて正しいかを確かめれば、あとは遷移の行列を問題ごとに作るだけである。
 

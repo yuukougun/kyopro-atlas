@@ -154,7 +154,7 @@ ACL があれば Hopcroft-Karp を自分で書く必要はほとんどない。K
 
 ## 正則二部グラフの分解・辺彩色 {#edge-coloring}
 
-この節は追加の前提として、Hall の結婚定理（[Dilworth の定理・DAG の最小パス被覆](../graph/dilworth-path-cover.md#hall)のページ）を使う。Hall の結婚定理は「左の頂点の集合 $S$ のどれについても、$S$ とつながる右の頂点が $\lvert S \rvert$ 個以上あれば、左の頂点をすべて組に入れるマッチングがある」というものである。
+この節は追加の前提として、[Hall の結婚定理](../graph/dilworth-path-cover.md#hall)を使う。Hall の結婚定理は「左の頂点の集合 $S$ のどれについても、$S$ とつながる右の頂点が $\lvert S \rvert$ 個以上あれば、左の頂点をすべて組に入れるマッチングがある」というものである。
 
 どの頂点の[次数](../guide/glossary.md#degree)もちょうど $k$（$k \ge 1$）のグラフを $k$ 正則という。同じ組を結ぶ辺が何本あってもよい（多重辺）とする。$k$ 正則の二部グラフには、必ず完全マッチングがある。左の頂点の集合 $S$ から出る辺は $k \lvert S \rvert$ 本で、それを受ける右の頂点はそれぞれ $k$ 本までしか受けられないので、$S$ とつながる右の頂点は $\lvert S \rvert$ 個以上ある。Hall の条件を満たすので、完全マッチングがある。
 
@@ -273,7 +273,7 @@ ACL があれば Hopcroft-Karp を自分で書く必要はほとんどない。K
 - 組ごとに重み（コスト・利得）があり、その合計を最小・最大にするなら[最小費用流](../graph/min-cost-flow.md#modeling)を使う。最大の最小化のように「最も悪い組」だけを見るなら、この節の二分探索で足りる
 - 二部グラフでない（奇数長の閉路がある）なら[一般グラフのマッチング](../graph/general-matching.md#odd-cycles)。頂点が 20 程度までなら、[集合だけを状態にする bitDP](../dp/bit-dp.md#set-only) で数えられる
 - 最大マッチングの大きさではなく、最小頂点被覆や最大独立集合を問われたら [König の定理](../graph/konig-theorem.md#theorem)で言い換える
-- DAG の頂点を最少のパスで覆う問題は、頂点を 2 つに分けた二部マッチングになる（[Dilworth の定理・DAG の最小パス被覆](../graph/dilworth-path-cover.md#path-cover)）
+- DAG の頂点を最少のパスで覆う問題は、頂点を 2 つに分けた二部マッチングになる（[DAG の最小パス被覆](../graph/dilworth-path-cover.md#path-cover)）
 - 辺に区間・しきい値などの構造があって $N$ が大きいなら、[構造で貪欲が通る場合](#greedy-cases)を使う
 
 ## 参考 {#references}

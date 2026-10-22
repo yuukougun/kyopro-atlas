@@ -9,7 +9,7 @@ order: 50
 level: 基礎
 kind: [木, 累積和・差分]
 prerequisites: [tree-traversal, imos]
-related: [euler-tour, lca, tree-path]
+related: [euler-tour, lca, tree-path, root-path-dfs#path-statistics]
 summary: 部分木への加算をまとめて受けてから値を出力するなら、部分木の根に印を置いて根から下へ累積する。パスへの加算は端点と LCA に印を置いて葉から上へ累積し、途中で値を聞かれるならオイラーツアーを使う。
 complexity: 部分木・辺の片側への加算 O(N + Q)、パスへの加算は LCA の計算量を足して O(N log N + Q log N)（ダブリング）
 signs:
@@ -145,6 +145,15 @@ $v$ の側も同じである。頂点版では $l$ がパスに含まれるの�
 **同じ頂点に何度も足すことを忘れる**。印は上書きではなく加算である（`mark[p] = x` ではなく `mark[p] += x`）。値は最大で $Q \times \max x$ になるので、$Q = 2 \times 10^5$・$x = 10^9$ なら `long long` が要る。
 
 **再帰で累積する**。パス状の木では再帰の DFS が深くなり、手元でスタックがあふれることがある。BFS 順を作ってループで累積すれば起きない（[再帰の深さ](../tree/tree-traversal.md#recursion-depth)）。
+
+## 上位の手法へのつながり {#next-steps}
+
+木の上のいもす法は、加算をすべて終えてから 1 回だけ累積して答える。加算と取得が交互に来るときや、パスの値を何度も聞かれるときは、次の道具に進む。
+
+- **部分木・根からのパスに加算しながら値を聞かれる**：[オイラーツアー](../tree/euler-tour.md#in-out)で部分木を行きがけ順の区間にし、BIT で持つ。根からのパスの和は、辺の重みを子の部分木に配って区間の加算に直す（[根からのパスを区間で扱う](../tree/euler-tour.md#root-path)）。
+- **2 頂点を結ぶパスの和・距離を聞かれる**：根からの累積 $S[v]$ と [LCA](../tree/lca.md#distance) で、$S[u] + S[v] - 2 S[\mathrm{lca}(u, v)]$ として求める。
+- **パスへの一括加算とパスの和の取得が交互に来る**：[HL 分解](../tree/hld.md#numbering)でパスを $O(\log N)$ 個の区間に分け、[遅延セグメント木](../ds/lazy-segment-tree.md)で持つ。1 回 $O(\log^2 N)$ になる。
+- **根から届く効果の個数を数える**：最大値ではなく個数を数えるなら、根からのパスの情報を DFS で持ち回る（[根からのパスを DFS で持ち回る](../tree/root-path-dfs.md#path-statistics)）。
 
 ## 例題 {#examples}
 

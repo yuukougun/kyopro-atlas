@@ -97,9 +97,9 @@ PLACEHOLDER = "（執筆時に書く）"          # 骨格の要点の計算量�
 ABSTRACT_ITEMS = ["何ができるか", "いつ使うか", "計算量", "前提"]
 
 ID_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
-# interfaces.md §3 の1行の形（そのまま）
+# interfaces.md §3 の1行の形（そのまま）。label は題名の 1 段の角かっこを許す（abc411_e「E [max]」）
 PROBLEM_LINE_RE = re.compile(
-    r"^- \[(?P<label>[^\]]+)\]\((?P<url>https://atcoder\.jp/contests/(?P<contest>[^/]+)/tasks/(?P<id>[A-Za-z0-9_]+))\)"
+    r"^- \[(?P<label>(?:[^\[\]]|\[[^\[\]]*\])+)\]\((?P<url>https://atcoder\.jp/contests/(?P<contest>[^/]+)/tasks/(?P<id>[A-Za-z0-9_]+))\)"
     r"（diff (?P<diff>\d+|—)）：(?P<summary>.+)$")
 BLOCK_OPEN_RE = re.compile(r'^<div class="kp-problems" data-role="(?P<role>[^"]*)" markdown(?:="(?:1|block)")?>$')
 BLOCK_CLOSE_RE = re.compile(r"^</div>$")

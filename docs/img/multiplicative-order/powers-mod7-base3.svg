@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="365 0 270 360" width="270" height="360" font-family="sans-serif">
+<rect width="680" height="370" fill="#ffffff" />
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#333" /></marker></defs>
+<line x1="519.1" y1="106.0" x2="563.2" y2="131.5" stroke="#333" stroke-width="2" marker-end="url(#ar)" />
+<line x1="582.3" y1="164.5" x2="582.3" y2="215.5" stroke="#333" stroke-width="2" marker-end="url(#ar)" />
+<line x1="563.2" y1="248.5" x2="519.1" y2="274.0" stroke="#333" stroke-width="2" marker-end="url(#ar)" />
+<line x1="480.9" y1="274.0" x2="436.8" y2="248.5" stroke="#333" stroke-width="2" marker-end="url(#ar)" />
+<line x1="417.7" y1="215.5" x2="417.7" y2="164.5" stroke="#333" stroke-width="2" marker-end="url(#ar)" />
+<line x1="436.8" y1="131.5" x2="480.9" y2="106.0" stroke="#333" stroke-width="2" marker-end="url(#ar)" />
+<circle cx="500.0" cy="95.0" r="19" fill="#ffe6c7" stroke="#333" stroke-width="1.5" />
+<text x="500.0" y="101.0" font-size="18" text-anchor="middle" fill="#000">1</text>
+<text x="500.0" y="66.0" font-size="13" text-anchor="middle" fill="#444">3⁰</text>
+<circle cx="582.3" cy="142.5" r="19" fill="#ffe6c7" stroke="#333" stroke-width="1.5" />
+<text x="582.3" y="148.5" font-size="18" text-anchor="middle" fill="#000">3</text>
+<text x="611.7" y="130.5" font-size="13" text-anchor="middle" fill="#444">3¹</text>
+<circle cx="582.3" cy="237.5" r="19" fill="#ffe6c7" stroke="#333" stroke-width="1.5" />
+<text x="582.3" y="243.5" font-size="18" text-anchor="middle" fill="#000">2</text>
+<text x="611.7" y="259.5" font-size="13" text-anchor="middle" fill="#444">3²</text>
+<circle cx="500.0" cy="285.0" r="19" fill="#ffe6c7" stroke="#333" stroke-width="1.5" />
+<text x="500.0" y="291.0" font-size="18" text-anchor="middle" fill="#000">6</text>
+<text x="500.0" y="324.0" font-size="13" text-anchor="middle" fill="#444">3³</text>
+<circle cx="417.7" cy="237.5" r="19" fill="#ffe6c7" stroke="#333" stroke-width="1.5" />
+<text x="417.7" y="243.5" font-size="18" text-anchor="middle" fill="#000">4</text>
+<text x="388.3" y="259.5" font-size="13" text-anchor="middle" fill="#444">3⁴</text>
+<circle cx="417.7" cy="142.5" r="19" fill="#ffe6c7" stroke="#333" stroke-width="1.5" />
+<text x="417.7" y="148.5" font-size="18" text-anchor="middle" fill="#000">5</text>
+<text x="388.3" y="130.5" font-size="13" text-anchor="middle" fill="#444">3⁵</text>
+<text x="500" y="28" font-size="16" text-anchor="middle">底 3：位数 6（原始根、mod 7）</text>
+<text x="500" y="345" font-size="14" text-anchor="middle">1〜6 をちょうど 1 回ずつ通る</text>
+</svg>

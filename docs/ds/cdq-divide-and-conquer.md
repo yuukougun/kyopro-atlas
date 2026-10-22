@@ -116,7 +116,7 @@ CDQ 分割統治より軽い方法で足りるかを先に考える。
 | 点の追加がなく、長方形の質問だけ | [平面走査](../ds/sweep-line-2d.md)と BIT。$O((N + Q) \log N)$ |
 | 点の追加があり、座標が小さい（$HW$ 個の配列が置ける） | [2 次元 BIT](../ds/fenwick-tree.md#variants)。1 回 $O(\log H \log W)$ でオンラインにも答えられる |
 | 点の追加があり、座標は大きいが先読みできる | CDQ 分割統治。または追加される点の座標を先読みし、BIT の各ノードに圧縮した BIT を持たせる（1 回 $O(\log^2 N)$、メモリ $O(N \log N)$） |
-| 先読みできない（[オンライン強制](../guide/glossary.md#forced-online)） | 2 次元セグメント木・平衡二分探索木の入れ子など（[発展的なデータ構造の一覧](../ds/advanced-ds-catalog.md#table)） |
+| 先読みできない（[オンライン強制](../guide/glossary.md#forced-online)） | 2 次元セグメント木・平衡二分探索木の入れ子など（[見慣れないデータ構造の名前と用途](../ds/advanced-ds-catalog.md#table)） |
 
 クエリの先読みで解ける問題の全体は[クエリの先読み](../ds/offline-queries.md)にまとまっている。各質問の答えを二分探索で決める問題を、全部の質問でまとめて分割統治する[並列二分探索](../ds/parallel-binary-search.md#what-it-does)も、オフラインの分割統治の仲間である。CDQ が時刻で分けるのに対し、並列二分探索は答えの値の範囲で分ける。
 

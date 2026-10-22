@@ -29,7 +29,7 @@ updated: 2026-10-22
 ---
 
 !!! abstract "要点"
-    - **何ができるか**：分子・分母が $N$ 以下の分数のうち、与えられた実数を挟む最も近い 2 つを求める。既約分数をすべて 1 回ずつ含む二分木を降り、同じ向きへの移動を 1 回の割り算でまとめて進めると、$O(\log N)$ 段で止まる。まとめた移動の回数の列が連分数にあたる。
+    - **何ができるか**：分子・分母が $N$ 以下の分数のうち、与えられた実数に最も近いもの（実数を挟む最も近い 2 つ）などを求める。既約分数をすべて 1 回ずつ含む二分木を降り、同じ向きへの移動を 1 回の割り算でまとめて進めると、$O(\log N)$ 段で止まる。まとめた移動の回数の列が連分数にあたる。
     - **いつ使うか**：
         - 分母・分子が N 以下で、与えられた実数に最も近い分数
         - 分数の範囲を二分探索する
@@ -133,7 +133,10 @@ ACL に対応する機能はないので、使うなら自作する。保つ性�
 - [Stern–Brocot Tree](https://judge.yosupo.jp/problem/stern_brocot_tree)：分数と道の変換（ENCODE_PATH・DECODE_PATH）、LCA、深さ $k$ の祖先、子孫の範囲を、分子・分母が $10^9$ 以下で答える。
 - [Rational Approximation](https://judge.yosupo.jp/problem/rational_approximation)：$N, x, y \le 10^9$ で、分子・分母が $N$ 以下の分数のうち $x/y$ 以下で最大と $x/y$ 以上で最小を答える。上のコード片はこの入出力の形に合わせてある。
 
-学ぶための資料は、証明と対数回の探索なら cp-algorithms の解説、木の上の操作をまとめた実装なら Nyaan 氏のライブラリが読みやすい（どちらも[参考](#references)）。
+## 学ぶための資料 {#resources}
+
+- cp-algorithms の解説[「The Stern-Brocot tree and Farey sequences」](https://cp-algorithms.com/others/stern_brocot_tree_farey_sequences.html)：木の作り方と $bc - ad = 1$ の不変条件から、道と連分数の対応、判定だけで進む対数回の探索、Farey 数列との関係までを証明とともに追える。
+- Nyaan 氏のライブラリ[「Stern-Brocot Tree」](https://nyaannyaan.github.io/library/math/stern-brocot-tree.hpp)：道の圧縮表現、LCA・祖先・左右の端などの木の上の操作をまとめた実装で、自作するときの関数の切り分けの参考になる。
 
 ## 例題 {#examples}
 

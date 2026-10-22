@@ -1,42 +1,43 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 330" font-family="sans-serif" font-size="15">
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="316" viewBox="0 0 400 316" font-family="sans-serif" font-size="15">
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="30" y="62" fill="#222">bit</text>
-<text x="205.0" y="62" text-anchor="middle" fill="#222">k = 2（4）</text>
-<text x="315.0" y="62" text-anchor="middle" fill="#222">k = 1（2）</text>
-<text x="425.0" y="62" text-anchor="middle" fill="#222">k = 0（1）</text>
-<text x="30" y="96" fill="#222">a = 3</text>
-<rect x="170" y="76" width="70" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.5"/>
-<text x="205.0" y="97" text-anchor="middle" fill="#222" font-weight="normal">0</text>
-<rect x="280" y="76" width="70" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
-<text x="315.0" y="97" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<rect x="390" y="76" width="70" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
-<text x="425.0" y="97" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<text x="30" y="130" fill="#222">a = 5</text>
-<rect x="170" y="110" width="70" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
-<text x="205.0" y="131" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<rect x="280" y="110" width="70" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.5"/>
-<text x="315.0" y="131" text-anchor="middle" fill="#222" font-weight="normal">0</text>
-<rect x="390" y="110" width="70" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
-<text x="425.0" y="131" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<text x="30" y="164" fill="#222">a = 6</text>
-<rect x="170" y="144" width="70" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
-<text x="205.0" y="165" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<rect x="280" y="144" width="70" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
-<text x="315.0" y="165" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<rect x="390" y="144" width="70" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.5"/>
-<text x="425.0" y="165" text-anchor="middle" fill="#222" font-weight="normal">0</text>
-<line x1="20" y1="184" x2="480" y2="184" stroke="#888"/>
-<text x="30" y="212" fill="#222">1 の個数</text>
-<text x="205.0" y="212" text-anchor="middle" fill="#222">2</text>
-<text x="315.0" y="212" text-anchor="middle" fill="#222">2</text>
-<text x="425.0" y="212" text-anchor="middle" fill="#222">2</text>
-<text x="30" y="242" fill="#222">0 の個数</text>
-<text x="205.0" y="242" text-anchor="middle" fill="#222">1</text>
-<text x="315.0" y="242" text-anchor="middle" fill="#222">1</text>
-<text x="425.0" y="242" text-anchor="middle" fill="#222">1</text>
-<text x="30" y="272" fill="#222">寄与</text>
-<text x="205.0" y="272" text-anchor="middle" fill="#222">2×1×4 = 8</text>
-<text x="315.0" y="272" text-anchor="middle" fill="#222">2×1×2 = 4</text>
-<text x="425.0" y="272" text-anchor="middle" fill="#222">2×1×1 = 2</text>
-<text x="30" y="309" fill="#c0392b" font-weight="bold">合計 8 + 4 + 2 = 14 ＝ (3 xor 5) + (3 xor 6) + (5 xor 6) = 6 + 5 + 3</text>
+<text x="16" y="32" fill="#222">bit</text>
+<text x="150" y="32" text-anchor="middle" fill="#222">k = 2（4）</text>
+<text x="250" y="32" text-anchor="middle" fill="#222">k = 1（2）</text>
+<text x="350" y="32" text-anchor="middle" fill="#222">k = 0（1）</text>
+<text x="16" y="66" fill="#222">a = 3</text>
+<rect x="115" y="46" width="70" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="150" y="67" text-anchor="middle" fill="#222" font-weight="normal">0</text>
+<rect x="215" y="46" width="70" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="250" y="67" text-anchor="middle" fill="#222" font-weight="bold">1</text>
+<rect x="315" y="46" width="70" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="350" y="67" text-anchor="middle" fill="#222" font-weight="bold">1</text>
+<text x="16" y="100" fill="#222">a = 5</text>
+<rect x="115" y="80" width="70" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="150" y="101" text-anchor="middle" fill="#222" font-weight="bold">1</text>
+<rect x="215" y="80" width="70" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="250" y="101" text-anchor="middle" fill="#222" font-weight="normal">0</text>
+<rect x="315" y="80" width="70" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="350" y="101" text-anchor="middle" fill="#222" font-weight="bold">1</text>
+<text x="16" y="134" fill="#222">a = 6</text>
+<rect x="115" y="114" width="70" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="150" y="135" text-anchor="middle" fill="#222" font-weight="bold">1</text>
+<rect x="215" y="114" width="70" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="250" y="135" text-anchor="middle" fill="#222" font-weight="bold">1</text>
+<rect x="315" y="114" width="70" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="350" y="135" text-anchor="middle" fill="#222" font-weight="normal">0</text>
+<line x1="16" y1="154" x2="390" y2="154" stroke="#888"/>
+<text x="16" y="182" fill="#222">1 の個数</text>
+<text x="150" y="182" text-anchor="middle" fill="#222">2</text>
+<text x="250" y="182" text-anchor="middle" fill="#222">2</text>
+<text x="350" y="182" text-anchor="middle" fill="#222">2</text>
+<text x="16" y="212" fill="#222">0 の個数</text>
+<text x="150" y="212" text-anchor="middle" fill="#222">1</text>
+<text x="250" y="212" text-anchor="middle" fill="#222">1</text>
+<text x="350" y="212" text-anchor="middle" fill="#222">1</text>
+<text x="16" y="242" fill="#222">寄与</text>
+<text x="150" y="242" text-anchor="middle" fill="#222">2×1×4 = 8</text>
+<text x="250" y="242" text-anchor="middle" fill="#222">2×1×2 = 4</text>
+<text x="350" y="242" text-anchor="middle" fill="#222">2×1×1 = 2</text>
+<text x="16" y="279" fill="#c0392b" font-weight="bold">合計 8 + 4 + 2 = 14</text>
+<text x="16" y="303" fill="#c0392b" font-weight="bold">＝ (3 xor 5) + (3 xor 6) + (5 xor 6) = 6 + 5 + 3</text>
 </svg>

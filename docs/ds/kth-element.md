@@ -71,7 +71,7 @@ K 番目を求める方法は多い。問題の条件（値の範囲・先読み
 - **外側の二分探索**：値 $v$ を二分探索し、BIT の接頭辞の和で $v$ 以下の個数を数える。1 回の判定が $O(\log N)$ なので全体で $O(\log^2 N)$ になる。$Q = 2 \times 10^5$ なら $Q \log^2 N$ はおよそ $6 \times 10^7$ で、多くは間に合う
 - **pb_ds の `tree`**：GCC の拡張の順序付き集合で、`find_by_order(k)`（0 始まりの番号 $k$ の要素）と `order_of_key(x)`（$x$ 未満の個数）を持つ。値を先読みできないオンラインの問題でも使える。重複を許すには `(値, 通し番号)` の組にする（[pb_ds の tree](../cpp/cpp-container-idioms.md#pb-ds)・[平衡二分探索木と pb_ds の tree](../ds/balanced-bst.md#pbds)）
 - **2 つのヒープ**：K が最後まで変わらないなら、小さい K 個と残りに分けて持てば、K 番目は小さい側の最大値である。削除もあるなら 2 つの `multiset` にする（[上位 K 個の和と中央値の管理](../ds/top-k-multiset.md)）
-- **Binary Trie**：整数を上位ビットから辿る木で、各ノードに個数を持てば K 番目を求められる。全体に XOR をかける操作と組むときに使う（[Binary Trie](../ds/binary-trie.md#kth-and-global-xor)）
+- **Binary Trie**：整数を上位 bit から辿る木で、各ノードに個数を持てば K 番目を求められる。全体に XOR をかける操作と組むときに使う（[Binary Trie](../ds/binary-trie.md#kth-and-global-xor)）
 
 区間ごとに K 番目を聞かれる（列の $[l, r)$ の中で K 番目に小さい値）なら、ここの方法では足りない。[Wavelet Matrix](../ds/wavelet-matrix.md) などの区間の構造を使う。
 

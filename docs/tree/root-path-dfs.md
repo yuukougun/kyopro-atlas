@@ -9,7 +9,7 @@ order: 170
 level: 青
 kind: [木, クエリ処理の工夫]
 prerequisites: [tree-traversal]
-related: [euler-tour, persistent-data-structures#version-tree, rollback-union-find, lis]
+related: [euler-tour, persistent-data-structures#version-tree, rollback-union-find, lis, tree-imos#depth-limited, minimax#tree]
 summary: DFS で頂点に入るときにデータ構造へ情報を足し、出るときに元に戻すと、常に根から今の頂点までのパスの情報だけを持てる。パス上の色の数・LIS・中央値などを全頂点について求められる。
 complexity: 全体で O(N × 1 頂点の変更の計算量)。戻すのは変更と同じ回数で、記録 1 件につき O(1)。色の数なら O(N + C)（C は色の範囲）、LIS・中央値なら O(N log N)
 signs:

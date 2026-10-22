@@ -216,7 +216,7 @@ dfs(node, dp):            # dp は親までの品物を入れた表
 - max・min・可否の DP で「各 $i$ を除いたとき」なら、[前後からの DP のマージ](#prefix-and-suffix)
 - max・min の DP に追加と削除が任意の順に来るなら、オフラインで[時間軸の分割統治](#offline-divide-and-conquer)。削除が古い順だけならスタック 2 本
 - 区間の品物だけを使うクエリなら、[分割統治](../basics/divide-and-conquer.md#range-knapsack)で左右の表を合わせる
-- 表の添字にする量が大きすぎるときは、添字と値の入れ替えを先に考える（[DP の次元を減らす](../dp/dp-dimension-reduction.md)）
+- 表の添字にする量が大きすぎるときは、添字と値の入れ替えを先に考える（[DP の状態の削減](../dp/dp-dimension-reduction.md)）
 
 ## 参考 {#references}
 

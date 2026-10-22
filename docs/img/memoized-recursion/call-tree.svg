@@ -1,61 +1,62 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 400" font-family="sans-serif" font-size="15">
-<rect width="680" height="400" fill="#ffffff"/>
-<line x1="360" y1="68" x2="200" y2="94" stroke="#555" stroke-width="1.5"/>
-<text x="266.0" y="81.0" text-anchor="middle" font-size="12" fill="#555">÷2</text>
-<line x1="360" y1="68" x2="540" y2="94" stroke="#555" stroke-width="1.5"/>
-<text x="464.0" y="81.0" text-anchor="middle" font-size="12" fill="#555">÷3</text>
-<line x1="200" y1="130" x2="120" y2="156" stroke="#555" stroke-width="1.5"/>
-<text x="146.0" y="143.0" text-anchor="middle" font-size="12" fill="#555">÷2</text>
-<line x1="200" y1="130" x2="290" y2="156" stroke="#555" stroke-width="1.5"/>
-<text x="259.0" y="143.0" text-anchor="middle" font-size="12" fill="#555">÷3</text>
-<line x1="540" y1="130" x2="480" y2="156" stroke="#555" stroke-width="1.5"/>
-<text x="496.0" y="143.0" text-anchor="middle" font-size="12" fill="#555">÷2</text>
-<line x1="540" y1="130" x2="600" y2="156" stroke="#555" stroke-width="1.5"/>
-<text x="584.0" y="143.0" text-anchor="middle" font-size="12" fill="#555">÷3</text>
-<line x1="120" y1="192" x2="70" y2="218" stroke="#555" stroke-width="1.5"/>
-<text x="81.0" y="205.0" text-anchor="middle" font-size="12" fill="#555">÷2</text>
-<line x1="120" y1="192" x2="170" y2="218" stroke="#555" stroke-width="1.5"/>
-<text x="159.0" y="205.0" text-anchor="middle" font-size="12" fill="#555">÷3</text>
-<line x1="290" y1="192" x2="250" y2="218" stroke="#555" stroke-width="1.5"/>
-<text x="256.0" y="205.0" text-anchor="middle" font-size="12" fill="#555">÷2</text>
-<line x1="290" y1="192" x2="330" y2="218" stroke="#555" stroke-width="1.5"/>
-<text x="324.0" y="205.0" text-anchor="middle" font-size="12" fill="#555">÷3</text>
-<line x1="70" y1="254" x2="35" y2="280" stroke="#555" stroke-width="1.5"/>
-<text x="38.5" y="267.0" text-anchor="middle" font-size="12" fill="#555">÷2</text>
-<line x1="70" y1="254" x2="105" y2="280" stroke="#555" stroke-width="1.5"/>
-<text x="101.5" y="267.0" text-anchor="middle" font-size="12" fill="#555">÷3</text>
-<circle cx="360" cy="50" r="18" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
-<text x="360" y="55" text-anchor="middle" fill="#111">12</text>
-<circle cx="200" cy="112" r="18" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
-<text x="200" y="117" text-anchor="middle" fill="#111">6</text>
-<circle cx="540" cy="112" r="18" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
-<text x="540" y="117" text-anchor="middle" fill="#111">4</text>
-<circle cx="120" cy="174" r="18" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
-<text x="120" y="179" text-anchor="middle" fill="#111">3</text>
-<circle cx="290" cy="174" r="18" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
-<text x="290" y="179" text-anchor="middle" fill="#111">2</text>
-<circle cx="480" cy="174" r="18" fill="#e5e7eb" stroke="#6b7280" stroke-width="2" stroke-dasharray="4 3"/>
-<text x="480" y="208" text-anchor="middle" font-size="12" fill="#4b5563">メモ</text>
-<text x="480" y="179" text-anchor="middle" fill="#111">2</text>
-<circle cx="600" cy="174" r="18" fill="#e5e7eb" stroke="#6b7280" stroke-width="2" stroke-dasharray="4 3"/>
-<text x="600" y="208" text-anchor="middle" font-size="12" fill="#4b5563">メモ</text>
-<text x="600" y="179" text-anchor="middle" fill="#111">1</text>
-<circle cx="70" cy="236" r="18" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
-<text x="70" y="241" text-anchor="middle" fill="#111">1</text>
-<circle cx="170" cy="236" r="18" fill="#e5e7eb" stroke="#6b7280" stroke-width="2" stroke-dasharray="4 3"/>
-<text x="170" y="270" text-anchor="middle" font-size="12" fill="#4b5563">メモ</text>
-<text x="170" y="241" text-anchor="middle" fill="#111">1</text>
-<circle cx="250" cy="236" r="18" fill="#e5e7eb" stroke="#6b7280" stroke-width="2" stroke-dasharray="4 3"/>
-<text x="250" y="270" text-anchor="middle" font-size="12" fill="#4b5563">メモ</text>
-<text x="250" y="241" text-anchor="middle" fill="#111">1</text>
-<rect x="314" y="220" width="32" height="32" fill="#ffffff" stroke="#111" stroke-width="1.5"/>
-<text x="330" y="241" text-anchor="middle" fill="#111">0</text>
-<rect x="19" y="282" width="32" height="32" fill="#ffffff" stroke="#111" stroke-width="1.5"/>
-<text x="35" y="303" text-anchor="middle" fill="#111">0</text>
-<rect x="89" y="282" width="32" height="32" fill="#ffffff" stroke="#111" stroke-width="1.5"/>
-<text x="105" y="303" text-anchor="middle" fill="#111">0</text>
-<circle cx="40" cy="345" r="12" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/><text x="60" y="350" fill="#111">初めて計算する（6 回）</text>
-<circle cx="270" cy="345" r="12" fill="#e5e7eb" stroke="#6b7280" stroke-width="2" stroke-dasharray="4 3"/><text x="290" y="350" fill="#111">メモを返して打ち切る（4 回）</text>
-<rect x="510" y="333" width="24" height="24" fill="#ffffff" stroke="#111" stroke-width="1.5"/><text x="542" y="350" fill="#111">f(0) = 1</text>
-<text x="40" y="385" fill="#111">f(k) = f(⌊k/2⌋) + f(⌊k/3⌋)。メモなしなら呼び出しは 23 回、メモありなら 13 回</text>
+<svg width="344" height="456" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 344 456" font-family="sans-serif" font-size="15">
+<rect width="344" height="456" fill="#ffffff"/>
+<line x1="48" y1="242" x2="26" y2="274" stroke="#555" stroke-width="1.5"/>
+<text x="29" y="260" text-anchor="end" font-size="12" fill="#555">÷2</text>
+<line x1="48" y1="242" x2="70" y2="274" stroke="#555" stroke-width="1.5"/>
+<text x="67" y="260" text-anchor="start" font-size="12" fill="#555">÷3</text>
+<line x1="81" y1="178" x2="48" y2="210" stroke="#555" stroke-width="1.5"/>
+<text x="56.5" y="196" text-anchor="end" font-size="12" fill="#555">÷2</text>
+<line x1="81" y1="178" x2="114" y2="210" stroke="#555" stroke-width="1.5"/>
+<text x="105.5" y="196" text-anchor="start" font-size="12" fill="#555">÷3</text>
+<line x1="180" y1="178" x2="158" y2="210" stroke="#555" stroke-width="1.5"/>
+<text x="161" y="196" text-anchor="end" font-size="12" fill="#555">÷2</text>
+<line x1="180" y1="178" x2="202" y2="210" stroke="#555" stroke-width="1.5"/>
+<text x="199" y="196" text-anchor="start" font-size="12" fill="#555">÷3</text>
+<line x1="130.5" y1="114" x2="81" y2="146" stroke="#555" stroke-width="1.5"/>
+<text x="97.75" y="132" text-anchor="end" font-size="12" fill="#555">÷2</text>
+<line x1="130.5" y1="114" x2="180" y2="146" stroke="#555" stroke-width="1.5"/>
+<text x="163.25" y="132" text-anchor="start" font-size="12" fill="#555">÷3</text>
+<line x1="268" y1="114" x2="246" y2="146" stroke="#555" stroke-width="1.5"/>
+<text x="249" y="132" text-anchor="end" font-size="12" fill="#555">÷2</text>
+<line x1="268" y1="114" x2="290" y2="146" stroke="#555" stroke-width="1.5"/>
+<text x="287" y="132" text-anchor="start" font-size="12" fill="#555">÷3</text>
+<line x1="199.25" y1="50" x2="130.5" y2="82" stroke="#555" stroke-width="1.5"/>
+<text x="156.875" y="68" text-anchor="end" font-size="12" fill="#555">÷2</text>
+<line x1="199.25" y1="50" x2="268" y2="82" stroke="#555" stroke-width="1.5"/>
+<text x="241.625" y="68" text-anchor="start" font-size="12" fill="#555">÷3</text>
+<rect x="11" y="275" width="30" height="30" fill="#ffffff" stroke="#111" stroke-width="1.5"/>
+<text x="26" y="295" text-anchor="middle" fill="#111" font-size="14">0</text>
+<rect x="55" y="275" width="30" height="30" fill="#ffffff" stroke="#111" stroke-width="1.5"/>
+<text x="70" y="295" text-anchor="middle" fill="#111" font-size="14">0</text>
+<circle cx="48" cy="226" r="16" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+<text x="48" y="231" text-anchor="middle" fill="#111" font-size="14">1</text>
+<circle cx="114" cy="226" r="16" fill="#e5e7eb" stroke="#6b7280" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="114" y="258" text-anchor="middle" font-size="12" fill="#4b5563">メモ</text>
+<text x="114" y="231" text-anchor="middle" fill="#111" font-size="14">1</text>
+<circle cx="81" cy="162" r="16" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+<text x="81" y="167" text-anchor="middle" fill="#111" font-size="14">3</text>
+<circle cx="158" cy="226" r="16" fill="#e5e7eb" stroke="#6b7280" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="158" y="258" text-anchor="middle" font-size="12" fill="#4b5563">メモ</text>
+<text x="158" y="231" text-anchor="middle" fill="#111" font-size="14">1</text>
+<rect x="187" y="211" width="30" height="30" fill="#ffffff" stroke="#111" stroke-width="1.5"/>
+<text x="202" y="231" text-anchor="middle" fill="#111" font-size="14">0</text>
+<circle cx="180" cy="162" r="16" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+<text x="180" y="167" text-anchor="middle" fill="#111" font-size="14">2</text>
+<circle cx="130.5" cy="98" r="16" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+<text x="130.5" y="103" text-anchor="middle" fill="#111" font-size="14">6</text>
+<circle cx="246" cy="162" r="16" fill="#e5e7eb" stroke="#6b7280" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="246" y="194" text-anchor="middle" font-size="12" fill="#4b5563">メモ</text>
+<text x="246" y="167" text-anchor="middle" fill="#111" font-size="14">2</text>
+<circle cx="290" cy="162" r="16" fill="#e5e7eb" stroke="#6b7280" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="290" y="194" text-anchor="middle" font-size="12" fill="#4b5563">メモ</text>
+<text x="290" y="167" text-anchor="middle" fill="#111" font-size="14">1</text>
+<circle cx="268" cy="98" r="16" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+<text x="268" y="103" text-anchor="middle" fill="#111" font-size="14">4</text>
+<circle cx="199.25" cy="34" r="16" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+<text x="199.25" y="39" text-anchor="middle" fill="#111" font-size="14">12</text>
+<circle cx="20" cy="335" r="10" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/><text x="38" y="340" fill="#111" font-size="14">初めて計算する（6 回）</text>
+<circle cx="20" cy="361" r="10" fill="#e5e7eb" stroke="#6b7280" stroke-width="2" stroke-dasharray="4 3"/><text x="38" y="366" fill="#111" font-size="14">メモを返して打ち切る（4 回）</text>
+<rect x="10" y="377" width="20" height="20" fill="#ffffff" stroke="#111" stroke-width="1.5"/><text x="38" y="392" fill="#111" font-size="14">f(0) = 1</text>
+<text x="8" y="422" fill="#111" font-size="14">f(k) = f(⌊k/2⌋) + f(⌊k/3⌋)。メモなしなら</text>
+<text x="8" y="442" fill="#111" font-size="14">呼び出しは 23 回、メモありなら 13 回</text>
 </svg>

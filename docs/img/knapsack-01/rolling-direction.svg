@@ -1,48 +1,58 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 330" font-family="sans-serif" font-size="14">
+<svg width="340" height="410" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 410" font-family="sans-serif" font-size="14">
 <rect width="100%" height="100%" fill="#ffffff"/>
 <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1f4e9a"/></marker></defs>
-<text x="20" y="24" fill="#222">品物 1 個（重さ 2・価値 3）、W = 6。更新前の dp はすべて 0</text>
-<text x="178.0" y="52" text-anchor="middle" fill="#555" font-size="12">j = 0</text>
-<text x="234.0" y="52" text-anchor="middle" fill="#555" font-size="12">j = 1</text>
-<text x="290.0" y="52" text-anchor="middle" fill="#555" font-size="12">j = 2</text>
-<text x="346.0" y="52" text-anchor="middle" fill="#555" font-size="12">j = 3</text>
-<text x="402.0" y="52" text-anchor="middle" fill="#555" font-size="12">j = 4</text>
-<text x="458.0" y="52" text-anchor="middle" fill="#555" font-size="12">j = 5</text>
-<text x="514.0" y="52" text-anchor="middle" fill="#555" font-size="12">j = 6</text>
-<text x="20" y="84" fill="#222">小さい方から</text>
-<rect x="150" y="60" width="56" height="36" fill="#ffffff" stroke="#444" stroke-width="1.2"/>
-<text x="178.0" y="84" text-anchor="middle" fill="#222">0</text>
-<rect x="206" y="60" width="56" height="36" fill="#ffffff" stroke="#444" stroke-width="1.2"/>
-<text x="234.0" y="84" text-anchor="middle" fill="#222">0</text>
-<rect x="262" y="60" width="56" height="36" fill="#ffffff" stroke="#444" stroke-width="1.2"/>
-<text x="290.0" y="84" text-anchor="middle" fill="#222">3</text>
-<rect x="318" y="60" width="56" height="36" fill="#ffffff" stroke="#444" stroke-width="1.2"/>
-<text x="346.0" y="84" text-anchor="middle" fill="#222">3</text>
-<rect x="374" y="60" width="56" height="36" fill="#ffe2b8" stroke="#444" stroke-width="1.2"/>
-<text x="402.0" y="84" text-anchor="middle" fill="#222">6</text>
-<rect x="430" y="60" width="56" height="36" fill="#ffe2b8" stroke="#444" stroke-width="1.2"/>
-<text x="458.0" y="84" text-anchor="middle" fill="#222">6</text>
-<rect x="486" y="60" width="56" height="36" fill="#ffe2b8" stroke="#444" stroke-width="1.2"/>
-<text x="514.0" y="84" text-anchor="middle" fill="#222">9</text>
-<path d="M290.0,96 C290.0,130 402.0,130 402.0,100" fill="none" stroke="#1f4e9a" stroke-width="1.8"  marker-end="url(#ar)"/>
-<path d="M402.0,96 C402.0,130 514.0,130 514.0,100" fill="none" stroke="#1f4e9a" stroke-width="1.8"  marker-end="url(#ar)"/>
-<text x="20" y="152" fill="#333" font-size="13">書き換えた dp[2] を dp[4] が読む → 同じ品物を 3 回使う（個数制限なし）</text>
-<text x="20" y="214" fill="#222">大きい方から</text>
-<rect x="150" y="190" width="56" height="36" fill="#ffffff" stroke="#444" stroke-width="1.2"/>
-<text x="178.0" y="214" text-anchor="middle" fill="#222">0</text>
-<rect x="206" y="190" width="56" height="36" fill="#ffffff" stroke="#444" stroke-width="1.2"/>
-<text x="234.0" y="214" text-anchor="middle" fill="#222">0</text>
-<rect x="262" y="190" width="56" height="36" fill="#ffffff" stroke="#444" stroke-width="1.2"/>
-<text x="290.0" y="214" text-anchor="middle" fill="#222">3</text>
-<rect x="318" y="190" width="56" height="36" fill="#ffffff" stroke="#444" stroke-width="1.2"/>
-<text x="346.0" y="214" text-anchor="middle" fill="#222">3</text>
-<rect x="374" y="190" width="56" height="36" fill="#ffffff" stroke="#444" stroke-width="1.2"/>
-<text x="402.0" y="214" text-anchor="middle" fill="#222">3</text>
-<rect x="430" y="190" width="56" height="36" fill="#ffffff" stroke="#444" stroke-width="1.2"/>
-<text x="458.0" y="214" text-anchor="middle" fill="#222">3</text>
-<rect x="486" y="190" width="56" height="36" fill="#ffffff" stroke="#444" stroke-width="1.2"/>
-<text x="514.0" y="214" text-anchor="middle" fill="#222">3</text>
-<path d="M402.0,226 C402.0,260 514.0,260 514.0,230" fill="none" stroke="#1f4e9a" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#ar)"/>
-<path d="M290.0,226 C290.0,260 402.0,260 402.0,230" fill="none" stroke="#1f4e9a" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#ar)"/>
-<text x="20" y="282" fill="#333" font-size="13">dp[6] は更新前の dp[4] = 0 を読む → 品物は 1 回だけ（0-1）</text>
+<text x="8" y="22" fill="#222">品物 1 個（重さ 2・価値 3）、W = 6。</text>
+<text x="8" y="42" fill="#222">更新前の dp はすべて 0</text>
+<text x="8" y="74" fill="#222" font-weight="bold">小さい方から</text>
+<text x="38" y="96" text-anchor="middle" fill="#555" font-size="12">j = 0</text>
+<text x="82" y="96" text-anchor="middle" fill="#555" font-size="12">j = 1</text>
+<text x="126" y="96" text-anchor="middle" fill="#555" font-size="12">j = 2</text>
+<text x="170" y="96" text-anchor="middle" fill="#555" font-size="12">j = 3</text>
+<text x="214" y="96" text-anchor="middle" fill="#555" font-size="12">j = 4</text>
+<text x="258" y="96" text-anchor="middle" fill="#555" font-size="12">j = 5</text>
+<text x="302" y="96" text-anchor="middle" fill="#555" font-size="12">j = 6</text>
+<rect x="16" y="104" width="44" height="36" fill="#ffffff" stroke="#444" stroke-width="1.2"/>
+<text x="38" y="128" text-anchor="middle" fill="#222">0</text>
+<rect x="60" y="104" width="44" height="36" fill="#ffffff" stroke="#444" stroke-width="1.2"/>
+<text x="82" y="128" text-anchor="middle" fill="#222">0</text>
+<rect x="104" y="104" width="44" height="36" fill="#ffffff" stroke="#444" stroke-width="1.2"/>
+<text x="126" y="128" text-anchor="middle" fill="#222">3</text>
+<rect x="148" y="104" width="44" height="36" fill="#ffffff" stroke="#444" stroke-width="1.2"/>
+<text x="170" y="128" text-anchor="middle" fill="#222">3</text>
+<rect x="192" y="104" width="44" height="36" fill="#ffe2b8" stroke="#444" stroke-width="1.2"/>
+<text x="214" y="128" text-anchor="middle" fill="#222">6</text>
+<rect x="236" y="104" width="44" height="36" fill="#ffe2b8" stroke="#444" stroke-width="1.2"/>
+<text x="258" y="128" text-anchor="middle" fill="#222">6</text>
+<rect x="280" y="104" width="44" height="36" fill="#ffe2b8" stroke="#444" stroke-width="1.2"/>
+<text x="302" y="128" text-anchor="middle" fill="#222">9</text>
+<path d="M126,140 C126,174 214,174 214,144" fill="none" stroke="#1f4e9a" stroke-width="1.8" marker-end="url(#ar)"/>
+<path d="M214,140 C214,174 302,174 302,144" fill="none" stroke="#1f4e9a" stroke-width="1.8" marker-end="url(#ar)"/>
+<text x="8" y="196" fill="#333" font-size="13">書き換えた dp[2] を dp[4] が読む →</text>
+<text x="8" y="214" fill="#333" font-size="13">同じ品物を 3 回使う（個数制限なし）</text>
+<text x="8" y="256" fill="#222" font-weight="bold">大きい方から</text>
+<text x="38" y="278" text-anchor="middle" fill="#555" font-size="12">j = 0</text>
+<text x="82" y="278" text-anchor="middle" fill="#555" font-size="12">j = 1</text>
+<text x="126" y="278" text-anchor="middle" fill="#555" font-size="12">j = 2</text>
+<text x="170" y="278" text-anchor="middle" fill="#555" font-size="12">j = 3</text>
+<text x="214" y="278" text-anchor="middle" fill="#555" font-size="12">j = 4</text>
+<text x="258" y="278" text-anchor="middle" fill="#555" font-size="12">j = 5</text>
+<text x="302" y="278" text-anchor="middle" fill="#555" font-size="12">j = 6</text>
+<rect x="16" y="286" width="44" height="36" fill="#ffffff" stroke="#444" stroke-width="1.2"/>
+<text x="38" y="310" text-anchor="middle" fill="#222">0</text>
+<rect x="60" y="286" width="44" height="36" fill="#ffffff" stroke="#444" stroke-width="1.2"/>
+<text x="82" y="310" text-anchor="middle" fill="#222">0</text>
+<rect x="104" y="286" width="44" height="36" fill="#ffffff" stroke="#444" stroke-width="1.2"/>
+<text x="126" y="310" text-anchor="middle" fill="#222">3</text>
+<rect x="148" y="286" width="44" height="36" fill="#ffffff" stroke="#444" stroke-width="1.2"/>
+<text x="170" y="310" text-anchor="middle" fill="#222">3</text>
+<rect x="192" y="286" width="44" height="36" fill="#ffffff" stroke="#444" stroke-width="1.2"/>
+<text x="214" y="310" text-anchor="middle" fill="#222">3</text>
+<rect x="236" y="286" width="44" height="36" fill="#ffffff" stroke="#444" stroke-width="1.2"/>
+<text x="258" y="310" text-anchor="middle" fill="#222">3</text>
+<rect x="280" y="286" width="44" height="36" fill="#ffffff" stroke="#444" stroke-width="1.2"/>
+<text x="302" y="310" text-anchor="middle" fill="#222">3</text>
+<path d="M126,322 C126,356 214,356 214,326" fill="none" stroke="#1f4e9a" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+<path d="M214,322 C214,356 302,356 302,326" fill="none" stroke="#1f4e9a" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+<text x="8" y="378" fill="#333" font-size="13">dp[6] は更新前の dp[4] = 0 を読む →</text>
+<text x="8" y="396" fill="#333" font-size="13">品物は 1 回だけ（0-1）</text>
 </svg>

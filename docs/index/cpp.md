@@ -9,7 +9,7 @@ search:
 
 # C++の詳細索引
 
-分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。stub（準備中）のページは要約と前提しかなく、節の見出しもまだない。
+分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
 
 ## C++ の逆引き（cpp-reverse-index） {#cpp-reverse-index}
 
@@ -79,11 +79,11 @@ search:
 - 種類：実装・C++
 - 前提：`cpp-types-literals`
 - 節：
-    - `cpp-initialization#vector-init` vector の初期化：(n) は 0 が n 個、(n, x) は x が n 個、{n} は値 n が 1 個：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-initialization/#vector-init
+    - `cpp-initialization#vector-init` vector の初期化：(n) は 0 が n 個、(n, x) は x が n 個、波括弧の n は値 n が 1 個：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-initialization/#vector-init
     - `cpp-initialization#multi-dim-vector` 多次元 vector：入れ子の vector で作り、3 次元は 1 段深くする：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-initialization/#multi-dim-vector
-    - `cpp-initialization#array-init` array と {} による 0 初期化：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-initialization/#array-init
+    - `cpp-initialization#array-init` array を空の波括弧で 0 初期化：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-initialization/#array-init
     - `cpp-initialization#global-vs-local` グローバル変数は 0 で初期化され、関数の中の変数・配列は初期化されない：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-initialization/#global-vs-local
-    - `cpp-initialization#designated-init` 構造体のメンバの既定値と指示付き初期化 Edge{.to = v, .cost = c}（C++20。メンバの宣言順に書く）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-initialization/#designated-init
+    - `cpp-initialization#designated-init` 構造体のメンバの既定値と指示付き初期化（C++20。宣言順に書く）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-initialization/#designated-init
     - `cpp-initialization#aggregate-emplace` コンストラクタのない構造体（集成体）にも emplace_back(to, cost) が使える（C++20。C++17 ではエラー）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-initialization/#aggregate-emplace
     - `cpp-initialization#explicit` explicit なコンストラクタは = で初期化できない（ACL の dsu d = 5 はエラーで、dsu d(5) と書く）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-initialization/#explicit
     - `cpp-initialization#refill` 埋め直し：memset はバイト単位、fill・assign・ranges::fill：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-initialization/#refill
@@ -137,7 +137,7 @@ search:
 - 種類：実装・C++
 - 前提：`cpp-range-for`
 - 節：
-    - `cpp-structured-bindings#pair-tuple` pair と tuple：get・make_pair・pair{a, b}、辞書順で比べられる：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-structured-bindings/#pair-tuple
+    - `cpp-structured-bindings#pair-tuple` pair と tuple：get・make_pair・波括弧での作成、辞書順で比べられる：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-structured-bindings/#pair-tuple
     - `cpp-structured-bindings#structured-binding` 構造化束縛の形：pair・構造体・配列・array を名前に分ける、map の範囲 for（C++17）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-structured-bindings/#structured-binding
     - `cpp-structured-bindings#hidden-variable` 見えない変数：auto はコピー、auto& は参照。名前はメンバの宣言順に付き、数が合わないとエラー（C++17）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-structured-bindings/#hidden-variable
     - `cpp-structured-bindings#map-loop` map を回すとき：キーは const、値を参照で受けて書き換えると map が変わる（C++17）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-structured-bindings/#map-loop
@@ -266,7 +266,7 @@ search:
     - `cpp-algorithms#next-permutation` next_permutation で順列を列挙する（ソートした状態から始める）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#next-permutation
     - `cpp-algorithms#max-element` 最大・最小・個数：max_element・max・clamp・count の戻り値：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#max-element
     - `cpp-algorithms#ranges` ranges 版：ranges::sort(v) のようにコンテナを直接渡す（C++20）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#ranges
-    - `cpp-algorithms#projection` 射影：ranges::sort(ps, {}, &P::score) は score で比べて要素ごと並べ替える（C++20）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#projection
+    - `cpp-algorithms#projection` 射影：メンバのポインタを渡して score で比べ、要素ごと並べ替える（C++20）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#projection
     - `cpp-algorithms#ranges-unique` ranges::unique は後ろの不要部分を返す（C++20）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#ranges-unique
     - `cpp-algorithms#fold-left` fold_left・contains・find_last（C++23・GCC 13〜）と AtCoder にない starts_with：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#fold-left
     - `cpp-algorithms#ranges-dangling` 一時オブジェクトを渡すと戻り値が ranges::dangling になる（使うとコンパイルエラー）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/#ranges-dangling

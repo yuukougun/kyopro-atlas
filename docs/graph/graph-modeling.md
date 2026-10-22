@@ -11,7 +11,7 @@ kind: [案内, グラフ探索, 考察]
 prerequisites: [graph-basics]
 related: [reformulation, connected-components, bipartite-graph, cycle-detection, extended-dijkstra, difference-constraints, scc, functional-graph]
 summary: 物・値・座標・状態・時刻・剰余などを頂点に、関係・操作・制約を辺にすると、問題が既知のグラフの問題（連結・二部・閉路・最短路）に変わる。自由に行き来できる部分は 1 点に縮約できる。
-complexity: 作ったグラフの頂点数 V・辺数 E で決まる。BFS・DFS は O(V + E)、Union-Find はならし O((V + E) α(V))、ダイクストラ法は O((V + E) log V)
+complexity: null
 signs: []
 acl: []
 sections:

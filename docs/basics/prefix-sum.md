@@ -189,6 +189,16 @@ for l in 0 .. N-1:
 - **2 次元**：長方形の和は 4 つの累積和の足し引きで求まる（[2 次元累積和](../basics/prefix-sum-2d.md)）
 - **DP の遷移**：$\mathrm{dp}[i]$ が直前の区間の $\mathrm{dp}$ の和で決まるとき、$\mathrm{dp}$ の累積和で遷移を $O(1)$ にする（[累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md)）
 
+## 上位の手法へのつながり {#next-steps}
+
+このページの累積和は、次の手法の部品になる。
+
+- **区間の和の条件で数える**：和がちょうど $K$ の区間や、和が $M$ の倍数の区間の個数を、$S_r$ と $S_l$ の関係に言い換えて連想配列で数える（[累積和と連想配列で区間を数える](../basics/prefix-sum-counting.md#equal-k)）
+- **2 次元の累積和**：長方形の和を 4 項の足し引きで $O(1)$ にする（[2 次元累積和](../basics/prefix-sum-2d.md#formula)）
+- **区間に加算する**：累積和の逆の操作として、区間への加算を両端の印に直して最後に累積する（[いもす法](../basics/imos.md#imos-1d)）
+- **DP を速くする**：遷移元が連続した範囲の和になる DP を、前の段の累積和で 1 回 $O(1)$ にする（[累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md#pull-and-push)）
+- **更新のある列・引き算できない演算**：値が更新されるなら [BIT](../ds/fenwick-tree.md#what-it-does)、静的な区間の min なら [Sparse Table](../ds/sparse-table.md#what-it-does) に進む（[値が更新されるなら BIT](#next-tools)）
+
 ## 例題 {#examples}
 
 ### ABC122 C. GeT AC {#abc122_c}
@@ -214,6 +224,7 @@ for l in 0 .. N-1:
 - [ARC098 C. Attention](https://atcoder.jp/contests/arc098/tasks/arc098_a)（diff 635）：一列に並んだ人のうち 1 人をリーダーに選ぶとき、向きを変える人数の最小値を求める。
 - [ABC172 C. Tsundoku](https://atcoder.jp/contests/abc172/tasks/abc172_c)（diff 930）：2 つの机に積まれた本を上から読むとき、K 分以内に読める最大の冊数を求める。
 - [ABC125 C. GCD on Blackboard](https://atcoder.jp/contests/abc125/tasks/abc125_c)（diff 1197）：1 つだけ好きな値に書き換えたときの、全体の最大公約数の最大値を求める。
+- [典型90 076. Cake Cut（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_bx)（diff —）：円環に並んだケーキのピースから連続する部分を取り、和をちょうど全体の 1/10 にできるかを判定する。
 
 </div>
 
@@ -221,6 +232,7 @@ for l in 0 .. N-1:
     - **ARC098 C**：リーダーを $i$ に決めると、向きを変えるのは左側で西を向いている人と、右側で東を向いている人である。左からの W の個数と右からの E の個数を前計算し、各 $i$ を $O(1)$ で調べる
     - **ABC172 C**：机 A から読む冊数 $i$ を全探索し、残り時間で机 B から読める最大の冊数を、B の累積和の上の二分探索で求める。$i$ を増やすと B の冊数は減るだけなので尺取りでもよい。累積和は最大 $2 \times 10^{14}$ 程度になるので `long long` にする
     - **ABC125 C**：書き換える値は残りの gcd にするのが最もよいので、「1 つ除いた gcd」の最大が答えである。左右からの累積 gcd で各 $i$ を gcd 1 回で求める
+    - **典型90 076**：[円環は 2 周分に伸ばす](#circular)の型そのものである。全体の和が 10 で割り切れなければ不可能。割り切れるなら、2 周分に伸ばした列の累積和の上で、各始点から和が全体の $1/10$ になる終点を二分探索で探す
 
 ## 参考 {#references}
 

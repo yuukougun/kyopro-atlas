@@ -9,7 +9,7 @@ order: 190
 level: null
 kind: [実装・C++]
 prerequisites: []
-related: [cpp-undefined-behavior, cpp-macros-template-file, acl-reading, cpp-lambda, atcoder-system, dfs]
+related: [cpp-undefined-behavior, cpp-macros-template-file, acl-reading, cpp-lambda, atcoder-system, dfs, cpp-views-cpp23]
 summary: 手元の g++ と AtCoder（GCC 15.2・-std=gnu++23）の違いで結果が変わる場面（未初期化変数・スタック・GNU 拡張・ACL の版）を知り、同じ条件で試す。各機能が GCC のどの版から使えるかも分かる。
 complexity: なし（環境の設定の話。深さ D の再帰はスタックを D 段分使う）
 signs:

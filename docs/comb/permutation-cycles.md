@@ -154,6 +154,15 @@ swap できるのが隣り合う 2 要素だけなら、ソートの最小回数
 
 **負の余り**。逆向きに $K$ 歩進むとき、C++ の `%` は負の数に対して負の余りを返す。`((pos - K % len) % len + len) % len` のように正の範囲に戻す。
 
+## 上位の手法へのつながり {#next-steps}
+
+このページの考え方は、次の手法の部品になる。
+
+- **置換の偶奇**：swap の回数の偶奇は、$N$ − 巡回の個数の偶奇で決まる（[置換の偶奇](../comb/permutation-parity.md#compute)）。
+- **巡回の個数ごとの数**：巡回がちょうど $k$ 個の置換の数は第 1 種スターリング数で、巡回の長さの組（巡回型）ごとの数にも式がある（[第 1 種スターリング数](../comb/stirling-first.md#what)、[巡回型ごとの数](../comb/partition-number.md#cycle-type)）。
+- **$K$ 回の合成**：巡回ごとに $K$ を長さで割った余りだけ進めるか、ダブリングで求める（[置換の K 回合成](../basics/doubling.md#permutation-power)）。
+- **出次数 1 のグラフ**：置換は、各成分が閉路だけの Functional graph である（[Functional graph](../graph/functional-graph.md#permutation)）。
+
 ## 例題 {#examples}
 
 ### ABC436 E. Minimum Swap {#abc436_e}

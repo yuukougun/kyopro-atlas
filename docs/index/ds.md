@@ -9,7 +9,7 @@ search:
 
 # データ構造の詳細索引
 
-分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。stub（準備中）のページは要約と前提しかなく、節の見出しもまだない。
+分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
 
 ## STL コンテナの使い分け（stl-containers） {#stl-containers}
 
@@ -259,6 +259,7 @@ search:
     - 言い回し：x と y が初めて同じ集合になるのは何回目の操作か
 - 節：
     - `partially-persistent-union-find#what-it-does` 何ができるか（過去の時刻での find）：https://yuukougun.github.io/kyopro-atlas/ds/partially-persistent-union-find/#what-it-does
+    - `partially-persistent-union-find#library` 自作するときの要点と Library Checker：https://yuukougun.github.io/kyopro-atlas/ds/partially-persistent-union-find/#library
     - `partially-persistent-union-find#no-path-compression` なぜ経路圧縮をしないのか：https://yuukougun.github.io/kyopro-atlas/ds/partially-persistent-union-find/#no-path-compression
     - `partially-persistent-union-find#binary-search-time` 時刻の二分探索で「初めて連結になる時刻」を求める：https://yuukougun.github.io/kyopro-atlas/ds/partially-persistent-union-find/#binary-search-time
     - `partially-persistent-union-find#alternatives` 代わりの手（並列二分探索・併合過程の木（Kruskal 再構築木））：https://yuukougun.github.io/kyopro-atlas/ds/partially-persistent-union-find/#alternatives
@@ -275,6 +276,7 @@ search:
     - 言い回し：辺の追加と削除が混ざり、そのたびに 2 頂点が連結かを答える
 - 節：
     - `rollback-union-find#what-it-does` 何ができるか（後入れ先出しの取り消し）：https://yuukougun.github.io/kyopro-atlas/ds/rollback-union-find/#what-it-does
+    - `rollback-union-find#library` 自作するときの要点と Library Checker：https://yuukougun.github.io/kyopro-atlas/ds/rollback-union-find/#library
     - `rollback-union-find#no-path-compression` なぜ経路圧縮をしないのか（戻すコストとならしの保証が崩れること）：https://yuukougun.github.io/kyopro-atlas/ds/rollback-union-find/#no-path-compression
     - `rollback-union-find#with-dfs` 木の DFS と組む（入るとき併合・出るとき取り消し）：https://yuukougun.github.io/kyopro-atlas/ds/rollback-union-find/#with-dfs
     - `rollback-union-find#offline-dynamic-connectivity` オフライン動的連結性の部品（時間軸のセグメント木に辺を載せる → グラフの章）：https://yuukougun.github.io/kyopro-atlas/ds/rollback-union-find/#offline-dynamic-connectivity
@@ -495,6 +497,7 @@ search:
 - 節：
     - `segment-tree-beats#what-it-does` 何ができるか（遅延セグメント木に載らない更新）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-beats/#what-it-does
     - `segment-tree-beats#node-data` ノードに持つもの（最大値・真に 2 番目の最大値・最大値の個数・和）と 3 つの場合：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-beats/#node-data
+    - `segment-tree-beats#library` 自作するときの要点と Library Checker：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-beats/#library
     - `segment-tree-beats#complexity` 計算量（chmin と和だけならならし O((N+Q) log N)、区間加算が混ざると log^2）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-beats/#complexity
     - `segment-tree-beats#shrinking-values` 値が潰れる操作（割り算・mod・平方根）と、区間を set で管理する別解：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-beats/#shrinking-values
 
@@ -591,6 +594,7 @@ search:
 - 節：
     - `parallel-binary-search#what-it-does` 何ができるか（オフラインで全クエリの二分探索を一斉に進める）：https://yuukougun.github.io/kyopro-atlas/ds/parallel-binary-search/#what-it-does
     - `parallel-binary-search#procedure` 手順（各段で mid の順にクエリを並べ、過程を 1 回流して判定する）と計算量：https://yuukougun.github.io/kyopro-atlas/ds/parallel-binary-search/#procedure
+    - `parallel-binary-search#library` 自作するときの要点と Library Checker：https://yuukougun.github.io/kyopro-atlas/ds/parallel-binary-search/#library
     - `parallel-binary-search#with-union-find` Union-Find と組む例（最初の t 本の辺で条件を満たすか）：https://yuukougun.github.io/kyopro-atlas/ds/parallel-binary-search/#with-union-find
     - `parallel-binary-search#alternatives` 代わりの手（部分永続 Union-Find・併合過程の木）：https://yuukougun.github.io/kyopro-atlas/ds/parallel-binary-search/#alternatives
 
@@ -656,7 +660,7 @@ search:
     - 言い回し：長方形（添字の範囲 × 値の範囲）の中の点の数
 - 節：
     - `wavelet-matrix#what-it-does` 何ができるか（区間の K 番目・x 未満の個数・和）：https://yuukougun.github.io/kyopro-atlas/ds/wavelet-matrix/#what-it-does
-    - `wavelet-matrix#build` 段の作り方（上位ビットから安定に振り分ける）：https://yuukougun.github.io/kyopro-atlas/ds/wavelet-matrix/#build
+    - `wavelet-matrix#build` 段の作り方（上位 bit から安定に振り分ける）：https://yuukougun.github.io/kyopro-atlas/ds/wavelet-matrix/#build
     - `wavelet-matrix#usage` ライブラリでの使い方と、マージソート木・永続セグメント木との比較：https://yuukougun.github.io/kyopro-atlas/ds/wavelet-matrix/#usage
 
 ## Binary Trie（binary-trie） {#binary-trie}

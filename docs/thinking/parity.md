@@ -8,7 +8,7 @@ order: 50
 level: 基礎
 kind: [考察]
 prerequisites: []
-related: [invariant, bipartite-graph, game-basics#move-parity, union-find-applications, interactive, permutation-parity]
+related: [invariant, bipartite-graph, game-basics#move-parity, union-find-applications, weighted-union-find, interactive, permutation-parity]
 summary: 1 歩ごとに (x + y) の偶奇が入れ替わる、±1 をちょうど K 回なら差と K の偶奇がそろう、など偶奇の必要条件から可否を判定する。グリッドでは市松模様の色の偶奇が不変量になる。
 complexity: 判定は O(N)（差や個数の偶奇を数えるだけ）。偶奇の条件の成分は Union-Find で 1 回あたりならし O(α(N))
 signs:
@@ -102,7 +102,7 @@ $$
 - **成分の中は 1 つで決まる**：辺の一方の偶奇が分かれば、もう一方も決まる。これを辺に沿ってたどれば、連結成分の 1 つの偶奇から成分全体の偶奇が決まる
 - **成分どうしは独立**：別の成分の間には条件がないので、ある成分の全員の偶奇を一斉に反転しても、すべての条件は保たれる。だから成分ごとに少なくとも 1 つは別の手段で調べないと値が定まらない
 
-連結成分は [Union-Find](../ds/union-find.md) で数えられる。ここで Union-Find が持つのは「同じ成分か」だけで、偶奇が同じか違うかは持たない。条件どうしの矛盾を見つける必要があるとき、または 2 つの値の偶奇が同じかどうかを答える必要があるときは、根からの偶奇の差も持つ[重み付き Union-Find](../ds/union-find-applications.md) を使う。頂点を「偶の $v$」「奇の $v$」の 2 つに分けて Union-Find をする方法もある。
+連結成分は [Union-Find](../ds/union-find.md) で数えられる。ここで Union-Find が持つのは「同じ成分か」だけで、偶奇が同じか違うかは持たない。条件どうしの矛盾を見つける必要があるとき、または 2 つの値の偶奇が同じかどうかを答える必要があるときは、根からの偶奇の差も持つ[重み付き Union-Find](../ds/weighted-union-find.md#generalization) を使う。頂点を「偶の $v$」「奇の $v$」の 2 つに分けて Union-Find をする方法もある。
 
 ## 市松模様の偶奇 {#checkerboard}
 
@@ -134,7 +134,7 @@ $L$ マスを通る道筋で、最初のマスの色を灰とすると、
 
 偶奇の考え方は、グラフやゲームの問題に形を変えて現れる。
 
-- **二部グラフ**：市松模様に塗ったグリッドは、隣り合う頂点の色が必ず違う[二部グラフ](../graph/bipartite-graph.md)である。二部グラフでは、2 頂点を結ぶ歩道の長さの偶奇が道筋によらず決まる。奇数長の閉路があると二部グラフでなくなり、その閉路を 1 周すれば偶奇を変えられる
+- **二部グラフ**：市松模様に塗ったグリッドは、隣り合う頂点の色が必ず違う[二部グラフ](../graph/bipartite-graph.md)である。二部グラフでは、2 頂点を結ぶウォークの長さの偶奇が道筋によらず決まる。奇数長の閉路があると二部グラフでなくなり、その閉路を 1 周すれば偶奇を変えられる
 - **ちょうど K 歩で着けるか**：一般の無向グラフでは、頂点を「偶数歩で着いた $v$」「奇数歩で着いた $v$」の 2 つに分けて[幅優先探索](../graph/bfs.md)をし、$\mathrm{dist}[v][p]$（$p$ は歩数の偶奇）を求める。$\mathrm{dist}[v][K \bmod 2] \le K$ なら、最後の辺を往復して 2 歩ずつ足せるので、ちょうど $K$ 歩で着ける（出発点に辺が 1 本もないときだけは、どこへも動けないので例外である）
 - **ゲーム**：誰がどう動いても総手数の偶奇が決まっているゲームでは、勝ち負けが偶奇だけで決まる。詳しくは[ゲームの基本](../comb/game-basics.md#move-parity)にある
 - **置換**：swap の回数の偶奇は、どんな swap の列で同じ並べ替えを作っても変わらない（[置換の偶奇](../comb/permutation-parity.md#sign)）

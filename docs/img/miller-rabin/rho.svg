@@ -13,26 +13,26 @@
 <line x1="246.4" y1="182.6" x2="209.9" y2="176.8" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
 <circle cx="60.0" cy="262.0" r="17" fill="#e0ecff" stroke="#333" stroke-width="1.2"/>
 <text x="60.0" y="267.0" text-anchor="middle" font-size="15" fill="#111">2</text>
-<text x="36.0" y="267.0" text-anchor="end" font-size="13" fill="#333">x<tspan font-size="10" dy="4">0</tspan><tspan dy="-4"></tspan></text>
+<text x="36.0" y="267.0" text-anchor="end" font-size="13" fill="#333">x<tspan font-size="11" dy="4">0</tspan><tspan dy="-4"></tspan></text>
 <circle cx="115.0" cy="215.0" r="17" fill="#e0ecff" stroke="#333" stroke-width="1.2"/>
 <text x="115.0" y="220.0" text-anchor="middle" font-size="15" fill="#111">7</text>
-<text x="91.0" y="220.0" text-anchor="end" font-size="13" fill="#333">x<tspan font-size="10" dy="4">1</tspan><tspan dy="-4"></tspan></text>
+<text x="91.0" y="220.0" text-anchor="end" font-size="13" fill="#333">x<tspan font-size="11" dy="4">1</tspan><tspan dy="-4"></tspan></text>
 <circle cx="191.2" cy="173.8" r="17" fill="#e0ecff" stroke="#333" stroke-width="1.2"/>
 <text x="191.2" y="178.8" text-anchor="middle" font-size="15" fill="#111">0</text>
-<text x="191.2" y="214" text-anchor="middle" font-size="13" fill="#333">x<tspan font-size="10" dy="4">2</tspan><tspan dy="-4"></tspan>・x<tspan font-size="10" dy="4">7</tspan><tspan dy="-4"></tspan></text>
+<text x="191.2" y="214" text-anchor="middle" font-size="13" fill="#333">x<tspan font-size="11" dy="4">2</tspan><tspan dy="-4"></tspan>・x<tspan font-size="11" dy="4">7</tspan><tspan dy="-4"></tspan></text>
 <circle cx="179.8" cy="101.9" r="17" fill="#e0ecff" stroke="#333" stroke-width="1.2"/>
 <text x="179.8" y="106.9" text-anchor="middle" font-size="15" fill="#111">3</text>
-<text x="155.8" y="93.9" text-anchor="end" font-size="13" fill="#333">x<tspan font-size="10" dy="4">3</tspan><tspan dy="-4"></tspan>・x<tspan font-size="10" dy="4">8</tspan><tspan dy="-4"></tspan></text>
+<text x="155.8" y="93.9" text-anchor="end" font-size="13" fill="#333">x<tspan font-size="11" dy="4">3</tspan><tspan dy="-4"></tspan>・x<tspan font-size="11" dy="4">8</tspan><tspan dy="-4"></tspan></text>
 <circle cx="244.7" cy="68.8" r="17" fill="#e0ecff" stroke="#333" stroke-width="1.2"/>
 <text x="244.7" y="73.8" text-anchor="middle" font-size="15" fill="#111">12</text>
-<text x="268" y="58" text-anchor="start" font-size="13" fill="#333">x<tspan font-size="10" dy="4">4</tspan><tspan dy="-4"></tspan>・x<tspan font-size="10" dy="4">9</tspan><tspan dy="-4"></tspan></text>
+<text x="268" y="58" text-anchor="start" font-size="13" fill="#333">x<tspan font-size="11" dy="4">4</tspan><tspan dy="-4"></tspan>・x<tspan font-size="11" dy="4">9</tspan><tspan dy="-4"></tspan></text>
 <circle cx="296.2" cy="120.3" r="17" fill="#fde68a" stroke="#333" stroke-width="3"/>
 <text x="296.2" y="125.3" text-anchor="middle" font-size="15" fill="#111">4</text>
-<text x="322.2" y="125.3" text-anchor="start" font-size="13" fill="#333">x<tspan font-size="10" dy="4">5</tspan><tspan dy="-4"></tspan>・x<tspan font-size="10" dy="4">10</tspan><tspan dy="-4"></tspan></text>
+<text x="322.2" y="125.3" text-anchor="start" font-size="13" fill="#333">x<tspan font-size="11" dy="4">5</tspan><tspan dy="-4"></tspan>・x<tspan font-size="11" dy="4">10</tspan><tspan dy="-4"></tspan></text>
 <circle cx="263.1" cy="185.2" r="17" fill="#e0ecff" stroke="#333" stroke-width="1.2"/>
 <text x="263.1" y="190.2" text-anchor="middle" font-size="15" fill="#111">6</text>
-<text x="277.1" y="215.2" text-anchor="start" font-size="13" fill="#333">x<tspan font-size="10" dy="4">6</tspan><tspan dy="-4"></tspan>・x<tspan font-size="10" dy="4">11</tspan><tspan dy="-4"></tspan></text>
-<text x="190" y="300" text-anchor="middle" font-size="12" fill="#111">太枠の 4 で、1 歩ずつの x<tspan font-size="10" dy="4">5</tspan><tspan dy="-4"></tspan> と 2 歩ずつの x<tspan font-size="10" dy="4">10</tspan><tspan dy="-4"></tspan> が出会う</text>
-<text x="190" y="320" text-anchor="middle" font-size="12" fill="#111">mod 533 では x<tspan font-size="10" dy="4">5</tspan><tspan dy="-4"></tspan> = 511、x<tspan font-size="10" dy="4">10</tspan><tspan dy="-4"></tspan> = 433、gcd(78, 533) = 13</text>
+<text x="277.1" y="215.2" text-anchor="start" font-size="13" fill="#333">x<tspan font-size="11" dy="4">6</tspan><tspan dy="-4"></tspan>・x<tspan font-size="11" dy="4">11</tspan><tspan dy="-4"></tspan></text>
+<text x="190" y="300" text-anchor="middle" font-size="12" fill="#111">太枠の 4 で、1 歩ずつの x<tspan font-size="11" dy="4">5</tspan><tspan dy="-4"></tspan> と 2 歩ずつの x<tspan font-size="11" dy="4">10</tspan><tspan dy="-4"></tspan> が出会う</text>
+<text x="190" y="320" text-anchor="middle" font-size="12" fill="#111">mod 533 では x<tspan font-size="11" dy="4">5</tspan><tspan dy="-4"></tspan> = 511、x<tspan font-size="11" dy="4">10</tspan><tspan dy="-4"></tspan> = 433、gcd(78, 533) = 13</text>
 </g>
 </svg>

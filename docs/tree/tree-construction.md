@@ -9,7 +9,7 @@ order: 130
 level: 水
 kind: [木, 考察]
 prerequisites: [tree-traversal, minimum-spanning-tree]
-related: [tree-degree, tree-diameter, graph-construction, construction]
+related: [tree-degree, tree-diameter, graph-construction, construction, interval-dp-advanced#dfs-order-trees]
 summary: 距離の情報・訪問順・次数の条件などから、条件を満たす木を作るか、ないと判定する（何通りあるかを数えることもある）。作った木が本当に条件を満たすかを最後に確かめることが要になる。
 complexity: 距離の表から作る O(N^2 log N)、全点対の距離で確かめる O(N^2)、訪問順から数える O(N)
 signs:
@@ -121,7 +121,7 @@ $L_i$ は「左にある自分より大きい最後の位置」なので、[単�
 
 ## 次数の条件から作る（次数の足りない成分どうしをつなぐ） {#from-degrees}
 
-この節は [Union-Find](../ds/union-find.md) と[次数と木](../tree/tree-degree.md)を前提にする。各頂点の次数 $D_v$ と、すでにある辺 $M$ 本が与えられ、辺を足して「頂点 $v$ の次数がちょうど $D_v$ の木」を作る型である。
+この節は [Union-Find](../ds/union-find.md) と[木の次数列と Prüfer 列](../tree/tree-degree.md)を前提にする。各頂点の次数 $D_v$ と、すでにある辺 $M$ 本が与えられ、辺を足して「頂点 $v$ の次数がちょうど $D_v$ の木」を作る型である。
 
 まず、作れない場合を必要条件で除く。
 
@@ -187,7 +187,7 @@ B の組が空でない間：
 
 - 与えられた情報が全点対の距離なら、最小全域木で候補を作って全点から確かめる。頂点を足しながら道の上に置いていく方法もあるが、確かめの手間は同じである
 - 一般のグラフ（木とは限らない）を距離の表から作る問題では、「迂回できる辺は要らない」という別の考え方を使う（[グラフの構築](../graph/graph-construction.md#from-distances)）
-- 次数の列だけが与えられ、木を数える問題は Prüfer 列で数える（[次数と木](../tree/tree-degree.md#counting-links)）
+- 次数の列だけが与えられ、木を数える問題は Prüfer 列で数える（[木の数え上げへのつながり](../tree/tree-degree.md#counting-links)）
 - 訪問順から数える問題で、親の候補が頂点ごとに独立に決まるなら積、部分木の範囲が絡むなら区間 DP を使う
 
 ## 例題 {#examples}

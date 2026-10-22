@@ -1,38 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 250" font-family="sans-serif" font-size="14">
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="250" viewBox="0 0 400 250" font-family="sans-serif" font-size="14">
 <defs><marker id="arb" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 z" fill="#1f4e9a"/></marker><marker id="arr" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 z" fill="#9a4e1f"/></marker></defs>
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="40" y="26" fill="#222">ソート済みの列 a と x = 5</text>
-<rect x="60" y="90" width="56" height="40" fill="#f2f2f2" stroke="#666" stroke-width="1.5" stroke-dasharray="4 3"/>
-<text x="88.0" y="116" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<text x="88.0" y="148" text-anchor="middle" fill="#555" font-size="12">0</text>
-<rect x="116" y="90" width="56" height="40" fill="#f2f2f2" stroke="#666" stroke-width="1.5" stroke-dasharray="4 3"/>
-<text x="144.0" y="116" text-anchor="middle" fill="#222" font-weight="bold">3</text>
-<text x="144.0" y="148" text-anchor="middle" fill="#555" font-size="12">1</text>
-<rect x="172" y="90" width="56" height="40" fill="#f2f2f2" stroke="#666" stroke-width="1.5" stroke-dasharray="4 3"/>
-<text x="200.0" y="116" text-anchor="middle" fill="#222" font-weight="bold">3</text>
-<text x="200.0" y="148" text-anchor="middle" fill="#555" font-size="12">2</text>
-<rect x="228" y="90" width="56" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
-<text x="256.0" y="116" text-anchor="middle" fill="#222" font-weight="bold">5</text>
-<text x="256.0" y="148" text-anchor="middle" fill="#555" font-size="12">3</text>
-<rect x="284" y="90" width="56" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
-<text x="312.0" y="116" text-anchor="middle" fill="#222" font-weight="bold">5</text>
-<text x="312.0" y="148" text-anchor="middle" fill="#555" font-size="12">4</text>
-<rect x="340" y="90" width="56" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
-<text x="368.0" y="116" text-anchor="middle" fill="#222" font-weight="bold">5</text>
-<text x="368.0" y="148" text-anchor="middle" fill="#555" font-size="12">5</text>
-<rect x="396" y="90" width="56" height="40" fill="#ffe2c4" stroke="#9a4e1f" stroke-width="1.5"/>
-<text x="424.0" y="116" text-anchor="middle" fill="#222" font-weight="bold">8</text>
-<text x="424.0" y="148" text-anchor="middle" fill="#555" font-size="12">6</text>
-<text x="52" y="148" text-anchor="end" fill="#555" font-size="12">添字</text>
-<line x1="228" y1="50" x2="228" y2="86" stroke="#1f4e9a" stroke-width="2" marker-end="url(#arb)"/>
-<text x="228" y="46" text-anchor="middle" fill="#1f4e9a">lower_bound = 3（5 以上の最初）</text>
-<line x1="396" y1="58" x2="396" y2="86" stroke="#9a4e1f" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#arr)"/>
-<text x="404" y="56" fill="#9a4e1f">upper_bound = 6</text>
-<text x="404" y="72" fill="#9a4e1f" font-size="12">（5 より大きい最初）</text>
-<path d="M62,158 L62,166 L226,166 L226,158" fill="none" stroke="#333" stroke-width="1.5"/>
-<text x="144.0" y="184" text-anchor="middle" fill="#222" font-size="13">5 未満：3 個</text>
-<path d="M230,158 L230,166 L394,166 L394,158" fill="none" stroke="#333" stroke-width="1.5"/>
-<text x="312.0" y="184" text-anchor="middle" fill="#222" font-size="13">5 に等しい：6 − 3 = 3 個</text>
-<path d="M62,202 L62,210 L394,210 L394,202" fill="none" stroke="#333" stroke-width="1.5"/>
-<text x="228.0" y="228" text-anchor="middle" fill="#222" font-size="13">5 以下：6 個（upper_bound の位置）</text>
+<text x="16" y="24" fill="#222">ソート済みの列 a と x = 5</text>
+<rect x="52" y="96" width="44" height="36" fill="#f2f2f2" stroke="#666" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="74" y="119" text-anchor="middle" fill="#222" font-weight="bold">1</text>
+<text x="74" y="150" text-anchor="middle" fill="#555" font-size="13">0</text>
+<rect x="96" y="96" width="44" height="36" fill="#f2f2f2" stroke="#666" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="118" y="119" text-anchor="middle" fill="#222" font-weight="bold">3</text>
+<text x="118" y="150" text-anchor="middle" fill="#555" font-size="13">1</text>
+<rect x="140" y="96" width="44" height="36" fill="#f2f2f2" stroke="#666" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="162" y="119" text-anchor="middle" fill="#222" font-weight="bold">3</text>
+<text x="162" y="150" text-anchor="middle" fill="#555" font-size="13">2</text>
+<rect x="184" y="96" width="44" height="36" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="206" y="119" text-anchor="middle" fill="#222" font-weight="bold">5</text>
+<text x="206" y="150" text-anchor="middle" fill="#555" font-size="13">3</text>
+<rect x="228" y="96" width="44" height="36" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="250" y="119" text-anchor="middle" fill="#222" font-weight="bold">5</text>
+<text x="250" y="150" text-anchor="middle" fill="#555" font-size="13">4</text>
+<rect x="272" y="96" width="44" height="36" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.5"/>
+<text x="294" y="119" text-anchor="middle" fill="#222" font-weight="bold">5</text>
+<text x="294" y="150" text-anchor="middle" fill="#555" font-size="13">5</text>
+<rect x="316" y="96" width="44" height="36" fill="#ffe2c4" stroke="#9a4e1f" stroke-width="1.5"/>
+<text x="338" y="119" text-anchor="middle" fill="#222" font-weight="bold">8</text>
+<text x="338" y="150" text-anchor="middle" fill="#555" font-size="13">6</text>
+<text x="46" y="150" text-anchor="end" fill="#555" font-size="13">添字</text>
+<line x1="184" y1="74" x2="184" y2="92" stroke="#1f4e9a" stroke-width="2" marker-end="url(#arb)"/>
+<text x="184" y="50" text-anchor="middle" fill="#1f4e9a">lower_bound = 3</text>
+<text x="184" y="68" text-anchor="middle" fill="#1f4e9a" font-size="13">（5 以上の最初）</text>
+<line x1="316" y1="74" x2="316" y2="92" stroke="#9a4e1f" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#arr)"/>
+<text x="392" y="50" text-anchor="end" fill="#9a4e1f">upper_bound = 6</text>
+<text x="392" y="68" text-anchor="end" fill="#9a4e1f" font-size="13">（5 より大きい最初）</text>
+<path d="M54,160 L54,168 L182,168 L182,160" fill="none" stroke="#333" stroke-width="1.5"/>
+<text x="118" y="186" text-anchor="middle" fill="#222" font-size="13">5 未満：3 個</text>
+<path d="M186,160 L186,168 L314,168 L314,160" fill="none" stroke="#333" stroke-width="1.5"/>
+<text x="250" y="186" text-anchor="middle" fill="#222" font-size="13">5 に等しい：6 − 3 = 3 個</text>
+<path d="M54,202 L54,210 L314,210 L314,202" fill="none" stroke="#333" stroke-width="1.5"/>
+<text x="184" y="228" text-anchor="middle" fill="#222" font-size="13">5 以下：6 個（upper_bound の位置）</text>
 </svg>

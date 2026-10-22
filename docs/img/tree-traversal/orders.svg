@@ -1,16 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 370" font-family="sans-serif" font-size="14">
-<rect width="100%" height="100%" fill="#ffffff"/>
-<text x="20" y="28" fill="#222">頂点 1 を根にした木（隣は番号の小さい順に調べる）</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 718" width="340" height="718" font-family="sans-serif" font-size="14">
+<rect width="340" height="718" fill="#ffffff"/>
+<text x="12" y="22" fill="#222">頂点 1 を根にした木</text>
+<text x="12" y="42" fill="#222">（隣は番号の小さい順に調べる）</text>
+<g transform="translate(0 20)">
 <line x1="70" y1="75" x2="320" y2="75" stroke="#ddd" stroke-width="1" stroke-dasharray="3 3"/>
-<text x="20" y="80" fill="#555" font-size="12">深さ 0</text>
+<text x="4" y="80" fill="#555" font-size="14">深さ 0</text>
 <line x1="70" y1="155" x2="320" y2="155" stroke="#ddd" stroke-width="1" stroke-dasharray="3 3"/>
-<text x="20" y="160" fill="#555" font-size="12">深さ 1</text>
+<text x="4" y="160" fill="#555" font-size="14">深さ 1</text>
 <line x1="70" y1="235" x2="320" y2="235" stroke="#ddd" stroke-width="1" stroke-dasharray="3 3"/>
-<text x="20" y="240" fill="#555" font-size="12">深さ 2</text>
+<text x="4" y="240" fill="#555" font-size="14">深さ 2</text>
 <line x1="70" y1="315" x2="320" y2="315" stroke="#ddd" stroke-width="1" stroke-dasharray="3 3"/>
-<text x="20" y="320" fill="#555" font-size="12">深さ 3</text>
+<text x="4" y="320" fill="#555" font-size="14">深さ 3</text>
 <rect x="58" y="130" width="148" height="210" rx="14" fill="none" stroke="#b26b00" stroke-width="2" stroke-dasharray="7 4"/>
-<text x="62" y="356" fill="#b26b00" font-size="12">点線の枠：頂点 2 の部分木</text>
+<text x="62" y="356" fill="#b26b00" font-size="14">点線の枠：頂点 2 の部分木</text>
 <line x1="200" y1="75" x2="130" y2="155" stroke="#1f4e9a" stroke-width="3"/>
 <line x1="200" y1="75" x2="270" y2="155" stroke="#1f4e9a" stroke-width="3"/>
 <line x1="130" y1="155" x2="85" y2="235" stroke="#1f4e9a" stroke-width="3"/>
@@ -31,6 +33,8 @@
 <text x="270" y="240" text-anchor="middle" fill="#1f4e9a" font-weight="bold">6</text>
 <circle cx="175" cy="315" r="18" fill="#ffe6b3" stroke="#1f4e9a" stroke-width="2"/>
 <text x="175" y="320" text-anchor="middle" fill="#1f4e9a" font-weight="bold">7</text>
+</g>
+<g transform="translate(-340 375)">
 <text x="350" y="60" fill="#222">行きがけ順（入った順）</text>
 <text x="372" y="90" text-anchor="middle" fill="#1f4e9a" font-weight="bold" font-size="17">1</text>
 <text x="408" y="90" text-anchor="middle" fill="#b26b00" font-weight="bold" font-size="17">2</text>
@@ -40,7 +44,7 @@
 <text x="552" y="90" text-anchor="middle" fill="#1f4e9a" font-weight="bold" font-size="17">3</text>
 <text x="588" y="90" text-anchor="middle" fill="#1f4e9a" font-weight="bold" font-size="17">6</text>
 <path d="M394,98 L394,104 L530,104 L530,98" fill="none" stroke="#b26b00" stroke-width="2"/>
-<text x="350" y="122" fill="#555" font-size="12">頂点 2 の部分木は連続した 4 個（区間）に並ぶ</text>
+<text x="350" y="122" fill="#555" font-size="14">頂点 2 の部分木は連続した 4 個（区間）に並ぶ</text>
 <text x="350" y="170" fill="#222">帰りがけ順（出た順）</text>
 <text x="372" y="200" text-anchor="middle" fill="#1f4e9a" font-weight="bold" font-size="17">4</text>
 <text x="408" y="200" text-anchor="middle" fill="#1f4e9a" font-weight="bold" font-size="17">7</text>
@@ -49,7 +53,7 @@
 <text x="516" y="200" text-anchor="middle" fill="#1f4e9a" font-weight="bold" font-size="17">6</text>
 <text x="552" y="200" text-anchor="middle" fill="#1f4e9a" font-weight="bold" font-size="17">3</text>
 <text x="588" y="200" text-anchor="middle" fill="#1f4e9a" font-weight="bold" font-size="17">1</text>
-<text x="350" y="232" fill="#555" font-size="12">どの頂点も、その子孫がすべて並んだ後に来る</text>
+<text x="350" y="232" fill="#555" font-size="14">どの頂点も、その子孫がすべて並んだ後に来る</text>
 <text x="350" y="280" fill="#222">BFS 順（深さの順）</text>
 <text x="372" y="310" text-anchor="middle" fill="#1f4e9a" font-weight="bold" font-size="17">1</text>
 <text x="408" y="310" text-anchor="middle" fill="#1f4e9a" font-weight="bold" font-size="17">2</text>
@@ -58,5 +62,6 @@
 <text x="516" y="310" text-anchor="middle" fill="#1f4e9a" font-weight="bold" font-size="17">5</text>
 <text x="552" y="310" text-anchor="middle" fill="#1f4e9a" font-weight="bold" font-size="17">6</text>
 <text x="588" y="310" text-anchor="middle" fill="#1f4e9a" font-weight="bold" font-size="17">7</text>
-<text x="350" y="342" fill="#555" font-size="12">親は子より前。逆から読めば子が親より前</text>
+<text x="350" y="342" fill="#555" font-size="14">親は子より前。逆から読めば子が親より前</text>
+</g>
 </svg>

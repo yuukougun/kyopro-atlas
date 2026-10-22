@@ -1,46 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 330" width="640" height="330" font-family="sans-serif" font-size="14">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 390" width="400" height="390" font-family="sans-serif" font-size="14">
   <defs>
     <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#333"/>
     </marker>
   </defs>
-  <rect x="0" y="0" width="640" height="330" fill="#ffffff"/>
+  <rect x="0" y="0" width="400" height="390" fill="#ffffff"/>
 
   <!-- 上段：auto -->
-  <text x="20" y="28" font-size="16" font-weight="bold" fill="#111">auto [a, b] = p;（コピー）</text>
-  <text x="20" y="46" fill="#333">p</text>
-  <rect x="20" y="66" width="70" height="34" fill="#e8f0fe" stroke="#333"/>
-  <rect x="90" y="66" width="70" height="34" fill="#e8f0fe" stroke="#333"/>
-  <text x="55" y="88" text-anchor="middle" fill="#111">first 1</text>
-  <text x="125" y="88" text-anchor="middle" fill="#111">second 2</text>
+  <text x="16" y="24" font-size="16" font-weight="bold" fill="#111">auto [a, b] = p;（コピー）</text>
+  <text x="16" y="46" fill="#333">p</text>
+  <rect x="16" y="66" width="64" height="34" fill="#e8f0fe" stroke="#333"/>
+  <rect x="80" y="66" width="64" height="34" fill="#e8f0fe" stroke="#333"/>
+  <text x="48" y="88" text-anchor="middle" fill="#111" font-size="13">first 1</text>
+  <text x="112" y="88" text-anchor="middle" fill="#111" font-size="13">second 2</text>
 
-  <text x="280" y="46" fill="#333">見えない変数 e（p のコピー）</text>
-  <rect x="280" y="66" width="70" height="34" fill="#fff4e0" stroke="#333" stroke-dasharray="5,3"/>
-  <rect x="350" y="66" width="70" height="34" fill="#fff4e0" stroke="#333" stroke-dasharray="5,3"/>
-  <text x="315" y="88" text-anchor="middle" fill="#111">first 1</text>
-  <text x="385" y="88" text-anchor="middle" fill="#111">second 2</text>
-  <line x1="162" y1="83" x2="276" y2="83" stroke="#333" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#ar)"/>
-  <text x="219" y="76" text-anchor="middle" fill="#333" font-size="12">値を写す</text>
+  <text x="196" y="44" fill="#333">見えない変数 e（p のコピー）</text>
+  <rect x="196" y="66" width="64" height="34" fill="#fff4e0" stroke="#333" stroke-dasharray="5,3"/>
+  <rect x="260" y="66" width="64" height="34" fill="#fff4e0" stroke="#333" stroke-dasharray="5,3"/>
+  <text x="228" y="88" text-anchor="middle" fill="#111" font-size="13">first 1</text>
+  <text x="292" y="88" text-anchor="middle" fill="#111" font-size="13">second 2</text>
+  <line x1="146" y1="83" x2="192" y2="83" stroke="#333" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#ar)"/>
+  <text x="170" y="122" text-anchor="middle" fill="#333" font-size="13">値を写す</text>
 
-  <text x="540" y="78" fill="#111" font-weight="bold">a</text>
-  <text x="540" y="128" fill="#111" font-weight="bold">b</text>
-  <path d="M534,74 L450,74 L450,56 L315,56 L315,64" fill="none" stroke="#333" stroke-width="1.5" marker-end="url(#ar)"/>
-  <path d="M534,124 L385,124 L385,102" fill="none" stroke="#333" stroke-width="1.5" marker-end="url(#ar)"/>
-  <text x="20" y="152" fill="#333">a・b は e のメンバの名前。a = 100 でも p は変わらない</text>
+  <text x="362" y="62" fill="#111" font-weight="bold">a</text>
+  <text x="362" y="128" fill="#111" font-weight="bold">b</text>
+  <path d="M356,57 L228,57 L228,63" fill="none" stroke="#333" stroke-width="1.5" marker-end="url(#ar)"/>
+  <path d="M356,124 L292,124 L292,103" fill="none" stroke="#333" stroke-width="1.5" marker-end="url(#ar)"/>
+  <text x="16" y="154" fill="#333">a・b は e のメンバの名前。</text>
+  <text x="16" y="172" fill="#333">a = 100 でも p は変わらない</text>
 
-  <line x1="20" y1="170" x2="620" y2="170" stroke="#999" stroke-width="1"/>
+  <line x1="16" y1="188" x2="384" y2="188" stroke="#999" stroke-width="1"/>
 
   <!-- 下段：auto& -->
-  <text x="20" y="194" font-size="16" font-weight="bold" fill="#111">auto&amp; [a, b] = p;（参照）</text>
-  <text x="20" y="214" fill="#333">p（見えない変数 e は p そのものを指す）</text>
-  <rect x="20" y="238" width="70" height="34" fill="#e8f0fe" stroke="#333" stroke-width="2.5"/>
-  <rect x="90" y="238" width="70" height="34" fill="#e8f0fe" stroke="#333" stroke-width="2.5"/>
-  <text x="55" y="260" text-anchor="middle" fill="#111">first 1</text>
-  <text x="125" y="260" text-anchor="middle" fill="#111">second 2</text>
+  <text x="16" y="214" font-size="16" font-weight="bold" fill="#111">auto&amp; [a, b] = p;（参照）</text>
+  <text x="16" y="236" fill="#333">p（見えない変数 e は p そのものを指す）</text>
+  <rect x="16" y="270" width="64" height="34" fill="#e8f0fe" stroke="#333" stroke-width="2.5"/>
+  <rect x="80" y="270" width="64" height="34" fill="#e8f0fe" stroke="#333" stroke-width="2.5"/>
+  <text x="48" y="292" text-anchor="middle" fill="#111" font-size="13">first 1</text>
+  <text x="112" y="292" text-anchor="middle" fill="#111" font-size="13">second 2</text>
 
-  <text x="540" y="250" fill="#111" font-weight="bold">a</text>
-  <text x="540" y="300" fill="#111" font-weight="bold">b</text>
-  <path d="M534,246 L300,246 L300,226 L55,226 L55,236" fill="none" stroke="#333" stroke-width="2.5" marker-end="url(#ar)"/>
-  <path d="M534,296 L200,296 L130,276" fill="none" stroke="#333" stroke-width="2.5" marker-end="url(#ar)"/>
-  <text x="20" y="320" fill="#333">a・b は p のメンバの名前。a = 100 で p.first が 100 になる</text>
+  <text x="362" y="262" fill="#111" font-weight="bold">a</text>
+  <text x="362" y="332" fill="#111" font-weight="bold">b</text>
+  <path d="M356,258 L48,258 L48,267" fill="none" stroke="#333" stroke-width="2.5" marker-end="url(#ar)"/>
+  <path d="M356,328 L112,328 L112,307" fill="none" stroke="#333" stroke-width="2.5" marker-end="url(#ar)"/>
+  <text x="16" y="358" fill="#333">a・b は p のメンバの名前。</text>
+  <text x="16" y="376" fill="#333">a = 100 で p.first が 100 になる</text>
 </svg>

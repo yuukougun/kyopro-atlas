@@ -114,7 +114,7 @@ updated: 2026-10-22
 | abc454_g Mode in the Subtree | G | 2253 | [マージテク](../tree/small-to-large.md#dsu-on-tree) › DSU on Tree（重い子の結果を残す） |
 | abc455_d Card Pile Query | D | 796 | [配列で作る連結リスト](../ds/linked-list.md#operations) › 挿入・削除・付け替えの手順 |
 | abc455_e Unbalanced ABC Substrings | E | 1157 | [余事象](../thinking/complement.md#two-conditions) › 2〜3 条件の包除（重なりを足し戻す）、[累積和と連想配列で区間を数える](../basics/prefix-sum-counting.md#equal-k) › S_r − S_l = K となる l を数える（S_0 を入れ忘れない） |
-| abc455_f Merge Slimes 2 | F | 1549 | [主客転倒・寄与](../thinking/contribution.md)、[Σ の変形](../math/sigma-manipulation.md#formulas) › よく使う和の公式と Σ_{i≠j} a_i a_j = (Σa)² − Σa²、[遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md#design-steps) › 設計の手順と載せられる条件（S はモノイド・F は恒等写像を含み合成で閉じる・f(x·y) = f(x)·f(y)） |
+| abc455_f Merge Slimes 2 | F | 1549 | [主客転倒・寄与](../thinking/contribution.md)、[Σ の変形](../math/sigma-manipulation.md#formulas) › よく使う和の公式と、異なる 2 つの積の和を和の 2 乗で表す式、[遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md#design-steps) › 設計の手順と載せられる条件（S はモノイド・F は恒等写像を含み合成で閉じる・f(x·y) = f(x)·f(y)） |
 | abc455_g Balanced Subarrays | G | 3092 | [集合・多重集合のハッシュ](../string/hashing-for-sets.md#prefix-hash) › 接頭辞・区間のハッシュ（集合の接頭辞は初めて出た値だけ入れる）、[尺取り法](../basics/two-pointers.md) |
 | abc456_d Not Adjacent 2 | D | 586 | [DP の状態の設計](../dp/dp-state-design.md#last-characters) › 末尾の数文字を状態にする（禁止された並び・回文を避ける） |
 | abc456_e Endless Holidays | E | 1214 | [状態を頂点にする](../graph/extended-dijkstra.md#layered-graph) › 頂点倍化（層を作り、層の間の辺でコストを表す）、[閉路の検出と復元](../graph/cycle-detection.md#directed) › 有向グラフ：3 色の DFS（探索中の頂点への辺だけが閉路） |
@@ -177,7 +177,7 @@ updated: 2026-10-22
 | abc470_f Googol Swaps | F | 1604 | [置換の偶奇](../comb/permutation-parity.md#duplicates) › 同じ値があれば偶奇を調整できる、[連結成分](../graph/connected-components.md)、[多項係数](../comb/multinomial-coefficient.md) |
 | abc470_g Σex | G | 2097 | [主客転倒・寄与](../thinking/contribution.md)、[尺取り法](../basics/two-pointers.md)、[遅延セグメント木](../ds/lazy-segment-tree.md)、[言い換えの典型](../thinking/reformulation.md#then-data-structure) › 言い換えてからデータ構造に載せる |
 | abc471_d Chargers | D | 570 | [優先度付きキュー](../ds/priority-queue.md) |
-| abc471_e Sum of Square of Sum | E | 990 | [Σ の変形](../math/sigma-manipulation.md#formulas) › よく使う和の公式と Σ_{i≠j} a_i a_j = (Σa)² − Σa²、[数え上げの考え方](../comb/counting-mindset.md#contribution-with-binomial) › 二項係数と組み合わせた寄与（残りの選び方を掛ける）、[二項係数の前計算](../comb/binomial-precompute.md) |
+| abc471_e Sum of Square of Sum | E | 990 | [Σ の変形](../math/sigma-manipulation.md#formulas) › よく使う和の公式と、異なる 2 つの積の和を和の 2 乗で表す式、[数え上げの考え方](../comb/counting-mindset.md#contribution-with-binomial) › 二項係数と組み合わせた寄与（残りの選び方を掛ける）、[二項係数の前計算](../comb/binomial-precompute.md) |
 | abc471_f Concat (maximize) | F | 1895 | [交換論法と比較関数の設計](../basics/exchange-argument.md#concatenation) › 連結の比較（a+b と b+a）、[貪欲法の考え方と正当性](../basics/greedy-basics.md) |
 | abc471_g Caeser Syllables | G | 2464 | [主客転倒・寄与](../thinking/contribution.md#swap-roles) › 数える対象を入れ替える（表の行と列。式の規則は Σ の変形のページ）、[畳み込みの使い方](../math/convolution-ntt.md) |
 | abc472_d Bomber Mad | D | 605 | [幅優先探索（BFS）と無重み最短路](../graph/bfs.md#multi-source) › 多始点 BFS（超頂点から距離 0 の辺を張るのと同じ） |
@@ -199,7 +199,7 @@ updated: 2026-10-22
 | abc476_d Automat | D | 860 | [全探索の設計](../basics/brute-force.md)、[累積和](../basics/prefix-sum.md#with-binary-search) › 累積和の上で二分探索・尺取り、[二分探索](../basics/binary-search.md) |
 | abc476_e Min-Max Swap | E | 964 | [セグメント木](../ds/segment-tree.md) |
 | abc476_f Chebyshev Cafe | F | 1728 | [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md#remove-abs) › 絶対値の外し方：向きを固定して場合分けし、盤面を反転してもう一度、[グリッド上の DP](../dp/dp-grid.md#directional-prefix) › 方向ごとの累積和で遷移をまとめる |
-| abc476_g Increasing Popcount | G | 2477 | [最長増加部分列](../dp/lis.md#dilworth) › Dilworth の定理（増加列への最小分割数＝最長減少部分列の長さ）、[bit 演算の基本と XOR の性質](../basics/bit-operations.md#popcount) › popcount・最下位ビット、[再帰的な構造](../basics/recursion-structure.md)、[二項係数の意味と性質](../comb/binomial-coefficient.md) |
+| abc476_g Increasing Popcount | G | 2477 | [最長増加部分列](../dp/lis.md#dilworth) › Dilworth の定理（増加列への最小分割数＝最長減少部分列の長さ）、[bit 演算の基本と XOR の性質](../basics/bit-operations.md#popcount) › popcount・最下位 bit、[再帰的な構造](../basics/recursion-structure.md)、[二項係数の意味と性質](../comb/binomial-coefficient.md) |
 | abc477_d Masking Tape | D | 946 | [後ろから・逆順に考える](../thinking/reverse-thinking.md#decide-from-back) › 後ろから決めると一意になる |
 | abc477_e Wheel Distance | E | 1235 | [ダイクストラ法](../graph/dijkstra.md)、[累積和](../basics/prefix-sum.md#circular) › 円環は 2 周分に伸ばす |
 | abc477_f Count Cells in a Window | F | 1629 | [クエリの先読み](../ds/offline-queries.md)、[平面走査](../ds/sweep-line-2d.md#rectangle-count) › 支配点の数え上げと長方形内の点の数、[遅延セグメント木](../ds/lazy-segment-tree.md) |
@@ -260,7 +260,7 @@ updated: 2026-10-22
 | 典型90 030. K Factors（★5） | — | [エラトステネスの篩](../math/sieve-eratosthenes.md)（練習） |
 | 典型90 031. VS AtCoder（★6） | — | [Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md)（練習） |
 | 典型90 034. There are few types of elements（★4） | — | [尺取り法](../basics/two-pointers.md)（練習） |
-| 典型90 035. Preserve Connectivity（★7） | — | [指定頂点を結ぶ最小の部分木](../tree/steiner-subtree.md)（力試し）、[Auxiliary Tree](../tree/auxiliary-tree.md)（例題） |
+| 典型90 035. Preserve Connectivity（★7） | — | [指定頂点を結ぶ最小の部分木](../tree/steiner-subtree.md)（力試し）、[最小共通祖先（LCA）](../tree/lca.md)（練習）、[Auxiliary Tree](../tree/auxiliary-tree.md)（例題） |
 | 典型90 037. Don't Leave the Spice（★5） | — | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md)（例題） |
 | 典型90 038. Large LCM（★3） | — | [整数の割り算と余り](../math/integer-division.md)（練習） |
 | 典型90 039. Tree Distance（★5） | — | [辺で切って数える](../tree/tree-edge-contribution.md)（例題） |
@@ -273,6 +273,7 @@ updated: 2026-10-22
 | 典型90 047. Monochromatic Diagonal（★7） | — | [ローリングハッシュ](../string/rolling-hash.md)（力試し）、[ハッシュの衝突と安全な設計](../string/hash-safety.md)（例題） |
 | 典型90 049. Flip Digits 2（★6） | — | [最小全域木](../graph/minimum-spanning-tree.md)（練習） |
 | 典型90 051. Typical Shop（★5） | — | [半分全列挙](../basics/meet-in-the-middle.md)（例題） |
+| 典型90 054. Takahashi Number（★6） | — | [状態を頂点にする](../graph/extended-dijkstra.md)（練習） |
 | 典型90 055. Select 5（★2） | — | [計算量の見積もり](../basics/complexity-estimation.md)（例題） |
 | 典型90 056. Lucky Bag（★5） | — | [DP の復元](../dp/dp-reconstruction.md)（例題） |
 | 典型90 057. Flip Flap（★6） | — | [掃き出し法](../math/gaussian-elimination.md)（例題） |
@@ -291,6 +292,7 @@ updated: 2026-10-22
 | 典型90 072. Loop Railway Plan（★4） | — | [計算量の見積もり](../basics/complexity-estimation.md)（練習）、[深さ優先探索（DFS）](../graph/dfs.md)（練習） |
 | 典型90 073. We Need Both a and b（★5） | — | [木 DP](../dp/tree-dp.md)（練習） |
 | 典型90 075. Magic For Balls（★3） | — | [約数と倍数](../patterns/divisors-and-multiples.md)（練習） |
+| 典型90 076. Cake Cut（★3） | — | [累積和](../basics/prefix-sum.md)（練習） |
 | 典型90 077. Planes on a 2D Plane（★7） | — | [二部マッチング](../graph/bipartite-matching.md)（例題） |
 | 典型90 078. Easy Graph Problem（★2） | — | [グラフの表現と用語](../graph/graph-basics.md)（例題） |
 | 典型90 079. Two by Two（★3） | — | [不変量・単調に変わる量](../thinking/invariant.md)（練習） |
@@ -462,6 +464,12 @@ updated: 2026-10-22
 | DWACON2018-PRELIMS C. Kill/Death | — | [整数の分割と分割数](../comb/partition-number.md)（練習） |
 | DWACON2018-PRELIMS E. ニワンゴくんの家探し | — | [木の重心](../tree/tree-centroid.md)（練習） |
 
+### EXAWIZARDS2019 {#problem-sets-exawizards2019}
+
+| 問題 | diff | ページ（役割） |
+| --- | --- | --- |
+| EXAWIZARDS2019 D. Modulo Operations | 2075 | [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md)（練習） |
+
 ### HHKB2020 {#problem-sets-hhkb2020}
 
 | 問題 | diff | ページ（役割） |
@@ -499,6 +507,12 @@ updated: 2026-10-22
 | --- | --- | --- |
 | NIKKEI2019-FINAL G. Greatest Journey | — | [重心分解](../tree/centroid-decomposition.md)（力試し） |
 
+### PANASONIC2020 {#problem-sets-panasonic2020}
+
+| 問題 | diff | ページ（役割） |
+| --- | --- | --- |
+| PANASONIC2020 C. Sqrt Inequality | 701 | [整数の平方根・K 乗根と累乗数](../math/integer-root.md)（練習） |
+
 ### PRACTICE {#problem-sets-practice}
 
 | 問題 | diff | ページ（役割） |
@@ -530,6 +544,13 @@ updated: 2026-10-22
 | --- | --- | --- |
 | YAHOO-PROCON2019-QUAL D. Ears | 1998 | [フェーズを状態に持つ DP](../dp/dp-phase.md)（練習） |
 | YAHOO-PROCON2019-QUAL E. Odd Subrectangles | 2585 | [掃き出し法](../math/gaussian-elimination.md)（力試し） |
+
+### ZONE2021 {#problem-sets-zone2021}
+
+| 問題 | diff | ページ（役割） |
+| --- | --- | --- |
+| ZONE2021 E. Sneaking | 1624 | [状態を頂点にする](../graph/extended-dijkstra.md)（練習） |
+| ZONE2021 F. Encounter and Farewell | 2197 | [XOR 基底](../math/xor-basis.md)（練習） |
 
 <!-- textlint-enable -->
 <!-- gen:end problem-sets -->

@@ -115,7 +115,7 @@ difficulty 1600〜1999 の帯で主に必要になるページ（52 ページ）
 
 | 節 | ページ（レベル） | 分野 |
 | --- | --- | --- |
-| 上位ビットで 2 つに分けて再帰する | [bit ごとに独立に考える](../basics/bitwise-independence.md#split-by-top-bit)（水） | 基本テクニック |
+| 上位 bit で 2 つに分けて再帰する | [bit ごとに独立に考える](../basics/bitwise-independence.md#split-by-top-bit)（水） | 基本テクニック |
 | 判定を DP で作る（決め打ちごとに初期化し直す） | [答えで二分探索](../basics/binary-search-answer.md#dp-check)（基礎） | 基本テクニック |
 | 長さの制限付き（窓の中だけで数える） | [累積和と連想配列で区間を数える](../basics/prefix-sum-counting.md#length-limited)（基礎） | 基本テクニック |
 | 3 次元以上（項の数と符号の決め方） | [2 次元累積和](../basics/prefix-sum-2d.md#higher-dimensions)（水） | 基本テクニック |
@@ -139,7 +139,7 @@ difficulty 1600〜1999 の帯で主に必要になるページ（52 ページ）
 | 1 か所だけ変更できる LIS・木の上の LIS | [最長増加部分列](../dp/lis.md#variants)（水） | 動的計画法 |
 | Dilworth の定理（増加列への最小分割数＝最長減少部分列の長さ） | [最長増加部分列](../dp/lis.md#dilworth)（水） | 動的計画法 |
 | 共通部分列の組の数（包除で重複を引く・2 次元の累積和） | [最長共通部分列と編集距離](../dp/lcs.md#count-pairs)（水） | 動的計画法 |
-| ほかの探索と組み合わせる（BFS・ワーシャルフロイドで距離を前計算してから） | [bitDP](../dp/bit-dp.md#with-shortest-paths)（水） | 動的計画法 |
+| ほかの探索と組み合わせる（BFS・ワーシャルフロイド法で距離を前計算してから） | [bitDP](../dp/bit-dp.md#with-shortest-paths)（水） | 動的計画法 |
 | 子ごとの「得」を大きい順に取る | [木 DP](../dp/tree-dp.md#greedy-children)（水） | 動的計画法 |
 | 障害物どうしの 8 近傍の連結で通れるかを判定する | [グリッドグラフ](../graph/grid-graph.md#obstacle-dual)（基礎） | グラフ |
 | 座標や値を頂点にして成分を考える | [連結成分](../graph/connected-components.md#values-as-vertices)（基礎） | グラフ |

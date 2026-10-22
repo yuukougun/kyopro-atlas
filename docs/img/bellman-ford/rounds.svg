@@ -31,14 +31,14 @@
     <text x="340" y="120">b</text>
     <text x="480" y="120">c</text>
   </g>
-  <text x="280" y="182" font-size="14" fill="#222222" text-anchor="middle">1 回の反復で辺を緩和する順：b→c、a→b、s→a、s→b、s→c</text>
-  <g font-size="15" fill="#222222" text-anchor="middle" dominant-baseline="central">
+  <text x="280" y="182" font-size="16" fill="#222222" text-anchor="middle">1 回の反復で辺を緩和する順：b→c、a→b、s→a、s→b、s→c</text>
+  <g font-size="16" fill="#222222" text-anchor="middle" dominant-baseline="central">
     <text x="215.0" y="232.0" font-weight="bold">dist[s]</text>
     <text x="305.0" y="232.0" font-weight="bold">dist[a]</text>
     <text x="395.0" y="232.0" font-weight="bold">dist[b]</text>
     <text x="485.0" y="232.0" font-weight="bold">dist[c]</text>
   </g>
-  <text x="160" y="266.0" font-size="15" fill="#222222" text-anchor="end" dominant-baseline="central">最初</text>
+  <text x="160" y="266.0" font-size="16" fill="#222222" text-anchor="end" dominant-baseline="central">最初</text>
   <rect x="170" y="249" width="90" height="34" fill="#ffffff" stroke="#888888" stroke-width="1"/>
   <text x="215.0" y="266.0" font-size="16" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
   <rect x="260" y="249" width="90" height="34" fill="#ffffff" stroke="#888888" stroke-width="1"/>
@@ -47,7 +47,7 @@
   <text x="395.0" y="266.0" font-size="16" fill="#222222" text-anchor="middle" dominant-baseline="central">∞</text>
   <rect x="440" y="249" width="90" height="34" fill="#ffffff" stroke="#888888" stroke-width="1"/>
   <text x="485.0" y="266.0" font-size="16" fill="#222222" text-anchor="middle" dominant-baseline="central">∞</text>
-  <text x="160" y="300.0" font-size="15" fill="#222222" text-anchor="end" dominant-baseline="central">1 回目の後</text>
+  <text x="160" y="300.0" font-size="16" fill="#222222" text-anchor="end" dominant-baseline="central">1 回目の後</text>
   <rect x="170" y="283" width="90" height="34" fill="#ffffff" stroke="#888888" stroke-width="1"/>
   <text x="215.0" y="300.0" font-size="16" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
   <rect x="260" y="283" width="90" height="34" fill="#f6d5d5" stroke="#888888" stroke-width="1"/>
@@ -56,7 +56,7 @@
   <text x="395.0" y="300.0" font-size="16" fill="#222222" text-anchor="middle" dominant-baseline="central" font-weight="bold">5</text>
   <rect x="440" y="283" width="90" height="34" fill="#f6d5d5" stroke="#888888" stroke-width="1"/>
   <text x="485.0" y="300.0" font-size="16" fill="#222222" text-anchor="middle" dominant-baseline="central" font-weight="bold">9</text>
-  <text x="160" y="334.0" font-size="15" fill="#222222" text-anchor="end" dominant-baseline="central">2 回目の後</text>
+  <text x="160" y="334.0" font-size="16" fill="#222222" text-anchor="end" dominant-baseline="central">2 回目の後</text>
   <rect x="170" y="317" width="90" height="34" fill="#ffffff" stroke="#888888" stroke-width="1"/>
   <text x="215.0" y="334.0" font-size="16" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
   <rect x="260" y="317" width="90" height="34" fill="#ffffff" stroke="#888888" stroke-width="1"/>
@@ -65,7 +65,7 @@
   <text x="395.0" y="334.0" font-size="16" fill="#222222" text-anchor="middle" dominant-baseline="central" font-weight="bold">2</text>
   <rect x="440" y="317" width="90" height="34" fill="#f6d5d5" stroke="#888888" stroke-width="1"/>
   <text x="485.0" y="334.0" font-size="16" fill="#222222" text-anchor="middle" dominant-baseline="central" font-weight="bold">8</text>
-  <text x="160" y="368.0" font-size="15" fill="#222222" text-anchor="end" dominant-baseline="central">3 回目の後</text>
+  <text x="160" y="368.0" font-size="16" fill="#222222" text-anchor="end" dominant-baseline="central">3 回目の後</text>
   <rect x="170" y="351" width="90" height="34" fill="#ffffff" stroke="#888888" stroke-width="1"/>
   <text x="215.0" y="368.0" font-size="16" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
   <rect x="260" y="351" width="90" height="34" fill="#ffffff" stroke="#888888" stroke-width="1"/>
@@ -74,6 +74,6 @@
   <text x="395.0" y="368.0" font-size="16" fill="#222222" text-anchor="middle" dominant-baseline="central">2</text>
   <rect x="440" y="351" width="90" height="34" fill="#f6d5d5" stroke="#888888" stroke-width="1"/>
   <text x="485.0" y="368.0" font-size="16" fill="#222222" text-anchor="middle" dominant-baseline="central" font-weight="bold">5</text>
-  <text x="280" y="408" font-size="14" fill="#222222" text-anchor="middle">色付きの太字は、その回で更新された値</text>
-  <text x="280" y="430" font-size="14" fill="#222222" text-anchor="middle">k 回目の後には、最短路が辺 k 本以下の頂点の距離が確定している</text>
+  <text x="280" y="408" font-size="16" fill="#222222" text-anchor="middle">色付きの太字は、その回で更新された値</text>
+  <text x="280" y="430" font-size="16" fill="#222222" text-anchor="middle">k 回目の後には、最短路が辺 k 本以下の頂点の距離が確定している</text>
 </svg>

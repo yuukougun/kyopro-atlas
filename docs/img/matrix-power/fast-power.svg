@@ -1,33 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 250" font-family="sans-serif" font-size="14">
-<defs><marker id="ar" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker></defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 452" width="320" height="452" font-family="sans-serif" font-size="14">
+<defs><marker id="ar" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker><marker id="arb" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1f4e9a"/></marker></defs>
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="20" y="26" fill="#222">K = 13 = 1101（2 進）のとき：A を 2 乗していき、bit が 1 の段だけ答えに掛ける</text>
-<text x="85.0" y="60" text-anchor="middle" fill="#777" font-size="12">bit 0：1</text>
-<rect x="40" y="70" width="90" height="50" rx="6" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2"/>
-<text x="85.0" y="101" text-anchor="middle" fill="#222" font-size="18">A¹</text>
-<line x1="134" y1="95.0" x2="184" y2="95.0" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
-<text x="160.0" y="87.0" text-anchor="middle" fill="#555" font-size="12">2 乗</text>
-<line x1="85.0" y1="122" x2="85.0" y2="168" stroke="#1f4e9a" stroke-width="1.6" marker-end="url(#ar)"/>
-<text x="91.0" y="150" fill="#1f4e9a" font-size="12">掛ける</text>
-<text x="235.0" y="60" text-anchor="middle" fill="#777" font-size="12">bit 1：0</text>
-<rect x="190" y="70" width="90" height="50" rx="6" fill="#ffffff" stroke="#999" stroke-width="1.5" stroke-dasharray="6,4"/>
-<text x="235.0" y="101" text-anchor="middle" fill="#222" font-size="18">A²</text>
-<line x1="284" y1="95.0" x2="334" y2="95.0" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
-<text x="310.0" y="87.0" text-anchor="middle" fill="#555" font-size="12">2 乗</text>
-<text x="235.0" y="150" text-anchor="middle" fill="#999" font-size="12">使わない</text>
-<text x="385.0" y="60" text-anchor="middle" fill="#777" font-size="12">bit 2：1</text>
-<rect x="340" y="70" width="90" height="50" rx="6" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2"/>
-<text x="385.0" y="101" text-anchor="middle" fill="#222" font-size="18">A⁴</text>
-<line x1="434" y1="95.0" x2="484" y2="95.0" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
-<text x="460.0" y="87.0" text-anchor="middle" fill="#555" font-size="12">2 乗</text>
-<line x1="385.0" y1="122" x2="385.0" y2="168" stroke="#1f4e9a" stroke-width="1.6" marker-end="url(#ar)"/>
-<text x="391.0" y="150" fill="#1f4e9a" font-size="12">掛ける</text>
-<text x="535.0" y="60" text-anchor="middle" fill="#777" font-size="12">bit 3：1</text>
-<rect x="490" y="70" width="90" height="50" rx="6" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2"/>
-<text x="535.0" y="101" text-anchor="middle" fill="#222" font-size="18">A⁸</text>
-<line x1="535.0" y1="122" x2="535.0" y2="168" stroke="#1f4e9a" stroke-width="1.6" marker-end="url(#ar)"/>
-<text x="541.0" y="150" fill="#1f4e9a" font-size="12">掛ける</text>
-<rect x="40" y="172" width="540" height="40" rx="6" fill="#f5f5f5" stroke="#555"/>
-<text x="310.0" y="198" text-anchor="middle" fill="#222" font-size="16">答え：A¹³ = A¹ · A⁴ · A⁸（1 + 4 + 8 = 13）</text>
-<text x="20" y="236" fill="#555" font-size="12">使う 2 乗 3 回と掛け算 3 回で済む（素朴に掛けると 12 回）。回数は K の bit 数に比例する</text>
+<text x="10" y="24" fill="#222">K = 13 = 1101（2 進）のとき</text>
+<text x="10" y="46" fill="#222">A を 2 乗していき、bit が 1 の段だけ掛ける</text>
+<text x="10" y="97.0" fill="#777" font-size="13">bit 0：1</text>
+<rect x="90" y="70" width="84" height="44" rx="6" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2"/>
+<text x="132.0" y="98.0" text-anchor="middle" fill="#222" font-size="18">A¹</text>
+<line x1="132.0" y1="116" x2="132.0" y2="133" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
+<text x="140.0" y="130" fill="#555" font-size="12">2 乗</text>
+<line x1="176" y1="92.0" x2="268" y2="92.0" stroke="#1f4e9a" stroke-width="1.6"/>
+<text x="221.0" y="85.0" text-anchor="middle" fill="#1f4e9a" font-size="12">掛ける</text>
+<text x="10" y="163.0" fill="#777" font-size="13">bit 1：0</text>
+<rect x="90" y="136" width="84" height="44" rx="6" fill="#ffffff" stroke="#999" stroke-width="1.5" stroke-dasharray="6,4"/>
+<text x="132.0" y="164.0" text-anchor="middle" fill="#222" font-size="18">A²</text>
+<line x1="132.0" y1="182" x2="132.0" y2="199" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
+<text x="140.0" y="196" fill="#555" font-size="12">2 乗</text>
+<text x="221.0" y="163.0" text-anchor="middle" fill="#999" font-size="12">使わない</text>
+<text x="10" y="229.0" fill="#777" font-size="13">bit 2：1</text>
+<rect x="90" y="202" width="84" height="44" rx="6" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2"/>
+<text x="132.0" y="230.0" text-anchor="middle" fill="#222" font-size="18">A⁴</text>
+<line x1="132.0" y1="248" x2="132.0" y2="265" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
+<text x="140.0" y="262" fill="#555" font-size="12">2 乗</text>
+<line x1="176" y1="224.0" x2="268" y2="224.0" stroke="#1f4e9a" stroke-width="1.6"/>
+<text x="221.0" y="217.0" text-anchor="middle" fill="#1f4e9a" font-size="12">掛ける</text>
+<text x="10" y="295.0" fill="#777" font-size="13">bit 3：1</text>
+<rect x="90" y="268" width="84" height="44" rx="6" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2"/>
+<text x="132.0" y="296.0" text-anchor="middle" fill="#222" font-size="18">A⁸</text>
+<line x1="176" y1="290.0" x2="268" y2="290.0" stroke="#1f4e9a" stroke-width="1.6"/>
+<text x="221.0" y="283.0" text-anchor="middle" fill="#1f4e9a" font-size="12">掛ける</text>
+<line x1="268" y1="92.0" x2="268" y2="336" stroke="#1f4e9a" stroke-width="1.6" marker-end="url(#arb)"/>
+<rect x="10" y="338" width="300" height="58" rx="6" fill="#f5f5f5" stroke="#555"/>
+<text x="160" y="363" text-anchor="middle" fill="#222" font-size="16">答え：A¹³ = A¹ · A⁴ · A⁸</text>
+<text x="160" y="385" text-anchor="middle" fill="#222" font-size="14">（1 + 4 + 8 = 13）</text>
+<text x="10" y="422" fill="#555" font-size="12">使う 2 乗 3 回と掛け算 3 回で済む（素朴に掛けると</text>
+<text x="10" y="440" fill="#555" font-size="12">12 回）。回数は K の bit 数に比例する</text>
 </svg>

@@ -262,7 +262,7 @@ Library Checker の Point Set Range Composite (Large Array) は、長さ $N \le 
 | $K$ 番目の値や $x$ の順位だけが要る | [K 番目の値を求めるデータ構造](../ds/kth-element.md)、[set・multiset・map の応用](../ds/ordered-set.md) |
 | 値がオフラインで分かり、個数・和・上位 $K$ 個の和が要る | このページ（座標圧縮 + BIT・セグメント木） |
 | 先読みできず値域が広い | このページの動的セグメント木、または[平方分割](../ds/sqrt-decomposition.md) |
-| 列の区間 $[l, r)$ に限った「$x$ 以下の個数」 | [マージソート木](../ds/merge-sort-tree.md)・[Wavelet Matrix](../ds/wavelet-matrix.md)、またはクエリを並べ替える[オフラインのクエリ処理](../ds/offline-queries.md) |
+| 列の区間 $[l, r)$ に限った「$x$ 以下の個数」 | [マージソート木](../ds/merge-sort-tree.md)・[Wavelet Matrix](../ds/wavelet-matrix.md)、または[クエリの先読み](../ds/offline-queries.md)でクエリを並べ替える |
 
 ## 参考 {#references}
 

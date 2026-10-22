@@ -1,44 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 400" font-family="sans-serif" font-size="14">
-<rect width="100%" height="100%" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 420" width="420" height="420" font-family="sans-serif" font-size="14">
+<rect width="420" height="420" fill="#ffffff"/>
 <text x="24" y="28" fill="#222" font-weight="bold">(1) 途中で異なる文字がある</text>
-<text x="94" y="72" text-anchor="end" fill="#222">S</text>
-<text x="94" y="132" text-anchor="end" fill="#222">T</text>
-<text x="132.0" y="40" text-anchor="middle" font-size="12" fill="#666">0</text>
-<rect x="110" y="44" width="44" height="44" fill="#eeeeee" stroke="#888" stroke-width="1.5"/><text x="132.0" y="73" text-anchor="middle" font-size="20" fill="#555">a</text>
-<rect x="110" y="104" width="44" height="44" fill="#eeeeee" stroke="#888" stroke-width="1.5"/><text x="132.0" y="133" text-anchor="middle" font-size="20" fill="#555">a</text>
-<text x="132.0" y="98" text-anchor="middle" font-size="16" fill="#555">=</text>
-<text x="176.0" y="40" text-anchor="middle" font-size="12" fill="#666">1</text>
-<rect x="154" y="44" width="44" height="44" fill="#eeeeee" stroke="#888" stroke-width="1.5"/><text x="176.0" y="73" text-anchor="middle" font-size="20" fill="#555">b</text>
-<rect x="154" y="104" width="44" height="44" fill="#eeeeee" stroke="#888" stroke-width="1.5"/><text x="176.0" y="133" text-anchor="middle" font-size="20" fill="#555">b</text>
-<text x="176.0" y="98" text-anchor="middle" font-size="16" fill="#555">=</text>
-<text x="220.0" y="40" text-anchor="middle" font-size="12" fill="#666">2</text>
-<rect x="198" y="44" width="44" height="44" fill="#ffe1c4" stroke="#b35900" stroke-width="1.5"/><text x="220.0" y="73" text-anchor="middle" font-size="20" fill="#b35900" font-weight="bold">c</text>
-<rect x="198" y="104" width="44" height="44" fill="#ffe1c4" stroke="#b35900" stroke-width="1.5"/><text x="220.0" y="133" text-anchor="middle" font-size="20" fill="#b35900" font-weight="bold">d</text>
-<text x="264.0" y="40" text-anchor="middle" font-size="12" fill="#666">3</text>
-<rect x="242" y="44" width="44" height="44" fill="#ffffff" stroke="#bbb" stroke-width="1.5"/><text x="264.0" y="73" text-anchor="middle" font-size="20" fill="#999">a</text>
-<rect x="194" y="43" width="52" height="108" fill="none" stroke="#b35900" stroke-width="2.5"/>
-<text x="220.0" y="98" text-anchor="middle" font-size="16" fill="#b35900" font-weight="bold">&lt;</text>
-<text x="360" y="78" fill="#222">S &lt; T</text>
-<text x="360" y="100" fill="#555" font-size="14">位置 2 で c &lt; d。</text>
-<text x="360" y="118" fill="#555" font-size="14">後ろの文字と長さは見ない</text>
+<text x="24" y="72" text-anchor="end" fill="#222">S</text>
+<text x="24" y="132" text-anchor="end" fill="#222">T</text>
+<text x="62" y="40" text-anchor="middle" font-size="13" fill="#666">0</text>
+<rect x="40" y="44" width="44" height="44" fill="#eeeeee" stroke="#888" stroke-width="1.5"/><text x="62" y="73" text-anchor="middle" font-size="20" fill="#555">a</text>
+<rect x="40" y="104" width="44" height="44" fill="#eeeeee" stroke="#888" stroke-width="1.5"/><text x="62" y="133" text-anchor="middle" font-size="20" fill="#555">a</text>
+<text x="62" y="98" text-anchor="middle" font-size="16" fill="#555">=</text>
+<text x="106" y="40" text-anchor="middle" font-size="13" fill="#666">1</text>
+<rect x="84" y="44" width="44" height="44" fill="#eeeeee" stroke="#888" stroke-width="1.5"/><text x="106" y="73" text-anchor="middle" font-size="20" fill="#555">b</text>
+<rect x="84" y="104" width="44" height="44" fill="#eeeeee" stroke="#888" stroke-width="1.5"/><text x="106" y="133" text-anchor="middle" font-size="20" fill="#555">b</text>
+<text x="106" y="98" text-anchor="middle" font-size="16" fill="#555">=</text>
+<text x="150" y="40" text-anchor="middle" font-size="13" fill="#666">2</text>
+<rect x="128" y="44" width="44" height="44" fill="#ffe1c4" stroke="#b35900" stroke-width="1.5"/><text x="150" y="73" text-anchor="middle" font-size="20" fill="#b35900" font-weight="bold">c</text>
+<rect x="128" y="104" width="44" height="44" fill="#ffe1c4" stroke="#b35900" stroke-width="1.5"/><text x="150" y="133" text-anchor="middle" font-size="20" fill="#b35900" font-weight="bold">d</text>
+<text x="194" y="40" text-anchor="middle" font-size="13" fill="#666">3</text>
+<rect x="172" y="44" width="44" height="44" fill="#ffffff" stroke="#bbb" stroke-width="1.5"/><text x="194" y="73" text-anchor="middle" font-size="20" fill="#999">a</text>
+<rect x="124" y="43" width="52" height="108" fill="none" stroke="#b35900" stroke-width="2.5"/>
+<text x="150" y="98" text-anchor="middle" font-size="16" fill="#b35900" font-weight="bold">&lt;</text>
+<text x="230" y="78" fill="#222">S &lt; T</text>
+<text x="230" y="100" fill="#555" font-size="14">位置 2 で c &lt; d。</text>
+<text x="230" y="118" fill="#555" font-size="14">後ろの文字と長さは見ない</text>
 <text x="24" y="218" fill="#222" font-weight="bold">(2) 片方が先に尽きる（接頭辞）</text>
-<text x="94" y="262" text-anchor="end" fill="#222">S</text>
-<text x="94" y="322" text-anchor="end" fill="#222">T</text>
-<text x="132.0" y="230" text-anchor="middle" font-size="12" fill="#666">0</text>
-<rect x="110" y="234" width="44" height="44" fill="#eeeeee" stroke="#888" stroke-width="1.5"/><text x="132.0" y="263" text-anchor="middle" font-size="20" fill="#555">a</text>
-<rect x="110" y="294" width="44" height="44" fill="#eeeeee" stroke="#888" stroke-width="1.5"/><text x="132.0" y="323" text-anchor="middle" font-size="20" fill="#555">a</text>
-<text x="132.0" y="288" text-anchor="middle" font-size="16" fill="#555">=</text>
-<text x="176.0" y="230" text-anchor="middle" font-size="12" fill="#666">1</text>
-<rect x="154" y="234" width="44" height="44" fill="#eeeeee" stroke="#888" stroke-width="1.5"/><text x="176.0" y="263" text-anchor="middle" font-size="20" fill="#555">b</text>
-<rect x="154" y="294" width="44" height="44" fill="#eeeeee" stroke="#888" stroke-width="1.5"/><text x="176.0" y="323" text-anchor="middle" font-size="20" fill="#555">b</text>
-<text x="176.0" y="288" text-anchor="middle" font-size="16" fill="#555">=</text>
-<text x="220.0" y="230" text-anchor="middle" font-size="12" fill="#666">2</text>
-<rect x="198" y="234" width="44" height="44" fill="#ffffff" stroke="#b35900" stroke-width="1.5" stroke-dasharray="4 3"/><text x="220.0" y="263" text-anchor="middle" font-size="20" fill="#b35900" font-weight="bold">空</text>
-<rect x="198" y="294" width="44" height="44" fill="#ffe1c4" stroke="#b35900" stroke-width="1.5"/><text x="220.0" y="323" text-anchor="middle" font-size="20" fill="#b35900" font-weight="bold">c</text>
-<rect x="194" y="233" width="52" height="108" fill="none" stroke="#b35900" stroke-width="2.5"/>
-<text x="220.0" y="288" text-anchor="middle" font-size="16" fill="#b35900" font-weight="bold">&lt;</text>
-<text x="360" y="268" fill="#222">S &lt; T</text>
-<text x="360" y="290" fill="#555" font-size="14">S は位置 2 で尽きる。</text>
-<text x="360" y="308" fill="#555" font-size="14">尽きた方（短い方）が小さい</text>
-<text x="24" y="388" fill="#555" font-size="14">灰色：一致した位置　太枠：最初に異なる位置（ここだけで大小が決まる）</text>
+<text x="24" y="262" text-anchor="end" fill="#222">S</text>
+<text x="24" y="322" text-anchor="end" fill="#222">T</text>
+<text x="62" y="230" text-anchor="middle" font-size="13" fill="#666">0</text>
+<rect x="40" y="234" width="44" height="44" fill="#eeeeee" stroke="#888" stroke-width="1.5"/><text x="62" y="263" text-anchor="middle" font-size="20" fill="#555">a</text>
+<rect x="40" y="294" width="44" height="44" fill="#eeeeee" stroke="#888" stroke-width="1.5"/><text x="62" y="323" text-anchor="middle" font-size="20" fill="#555">a</text>
+<text x="62" y="288" text-anchor="middle" font-size="16" fill="#555">=</text>
+<text x="106" y="230" text-anchor="middle" font-size="13" fill="#666">1</text>
+<rect x="84" y="234" width="44" height="44" fill="#eeeeee" stroke="#888" stroke-width="1.5"/><text x="106" y="263" text-anchor="middle" font-size="20" fill="#555">b</text>
+<rect x="84" y="294" width="44" height="44" fill="#eeeeee" stroke="#888" stroke-width="1.5"/><text x="106" y="323" text-anchor="middle" font-size="20" fill="#555">b</text>
+<text x="106" y="288" text-anchor="middle" font-size="16" fill="#555">=</text>
+<text x="150" y="230" text-anchor="middle" font-size="13" fill="#666">2</text>
+<rect x="128" y="234" width="44" height="44" fill="#ffffff" stroke="#b35900" stroke-width="1.5" stroke-dasharray="4 3"/><text x="150" y="263" text-anchor="middle" font-size="20" fill="#b35900" font-weight="bold">空</text>
+<rect x="128" y="294" width="44" height="44" fill="#ffe1c4" stroke="#b35900" stroke-width="1.5"/><text x="150" y="323" text-anchor="middle" font-size="20" fill="#b35900" font-weight="bold">c</text>
+<rect x="124" y="233" width="52" height="108" fill="none" stroke="#b35900" stroke-width="2.5"/>
+<text x="150" y="288" text-anchor="middle" font-size="16" fill="#b35900" font-weight="bold">&lt;</text>
+<text x="230" y="268" fill="#222">S &lt; T</text>
+<text x="230" y="290" fill="#555" font-size="14">S は位置 2 で尽きる。</text>
+<text x="230" y="308" fill="#555" font-size="14">尽きた方（短い方）が小さい</text>
+<text x="24" y="384" fill="#555" font-size="14">灰色：一致した位置　太枠：最初に異なる位置</text>
+<text x="24" y="404" fill="#555" font-size="14">（ここだけで大小が決まる）</text>
 </svg>

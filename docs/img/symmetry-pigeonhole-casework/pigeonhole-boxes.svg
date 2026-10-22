@@ -1,20 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 260" width="600" height="260" font-family="sans-serif">
-<rect width="600" height="260" fill="#ffffff"/>
-<text x="20" y="26" font-size="14" fill="#222">余り 0, 1, 2（M = 3 個の箱）に、7, 77, 777, 7777 を 3 で割った余りを入れる</text>
-<path d="M50,60 L50,190 L180,190 L180,60" fill="none" stroke="#333" stroke-width="1.5"/>
-<text x="115.0" y="214" font-size="14" text-anchor="middle" fill="#222">余り 0</text>
-<circle cx="115.0" cy="162" r="24" fill="#e6e6e6" stroke="#555"/>
-<text x="115.0" y="167" font-size="12" text-anchor="middle" fill="#111">777</text>
-<path d="M220,60 L220,190 L350,190 L350,60" fill="none" stroke="#333" stroke-width="3" stroke-dasharray="0"/>
-<text x="285.0" y="214" font-size="14" text-anchor="middle" fill="#222">余り 1</text>
-<circle cx="285.0" cy="162" r="24" fill="#f3c98b" stroke="#555"/>
-<text x="285.0" y="167" font-size="12" text-anchor="middle" fill="#111">7</text>
-<circle cx="285.0" cy="110" r="24" fill="#f3c98b" stroke="#555"/>
-<text x="285.0" y="115" font-size="12" text-anchor="middle" fill="#111">7777</text>
-<text x="285.0" y="52" font-size="13" text-anchor="middle" fill="#a0460a">2 個（一致）</text>
-<path d="M390,60 L390,190 L520,190 L520,60" fill="none" stroke="#333" stroke-width="1.5"/>
-<text x="455.0" y="214" font-size="14" text-anchor="middle" fill="#222">余り 2</text>
-<circle cx="455.0" cy="162" r="24" fill="#e6e6e6" stroke="#555"/>
-<text x="455.0" y="167" font-size="12" text-anchor="middle" fill="#111">77</text>
-<text x="20" y="246" font-size="12" fill="#444">玉が 4 個（M + 1 個）なら、どう入れても 2 個入る箱が必ずある（太線の箱）</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" font-family="sans-serif">
+<rect width="400" height="300" fill="#ffffff"/>
+<text x="16" y="22" font-size="14" fill="#222">余り 0, 1, 2（M = 3 個の箱）に、7, 77, 777, 7777</text>
+<text x="16" y="42" font-size="14" fill="#222">を 3 で割った余りを入れる</text>
+<path d="M24,84 L24,210 L124,210 L124,84" fill="none" stroke="#333" stroke-width="1.5"/>
+<text x="74" y="234" font-size="14" text-anchor="middle" fill="#222">余り 0</text>
+<circle cx="74" cy="184" r="23" fill="#e6e6e6" stroke="#555"/>
+<text x="74" y="189" font-size="13" text-anchor="middle" fill="#111">777</text>
+<path d="M152,84 L152,210 L252,210 L252,84" fill="none" stroke="#333" stroke-width="3"/>
+<text x="202" y="234" font-size="14" text-anchor="middle" fill="#222">余り 1</text>
+<circle cx="202" cy="184" r="23" fill="#f3c98b" stroke="#555"/>
+<text x="202" y="189" font-size="13" text-anchor="middle" fill="#111">7</text>
+<circle cx="202" cy="134" r="23" fill="#f3c98b" stroke="#555"/>
+<text x="202" y="139" font-size="13" text-anchor="middle" fill="#111">7777</text>
+<text x="202" y="76" font-size="14" text-anchor="middle" fill="#a0460a">2 個（一致）</text>
+<path d="M280,84 L280,210 L380,210 L380,84" fill="none" stroke="#333" stroke-width="1.5"/>
+<text x="330" y="234" font-size="14" text-anchor="middle" fill="#222">余り 2</text>
+<circle cx="330" cy="184" r="23" fill="#e6e6e6" stroke="#555"/>
+<text x="330" y="189" font-size="13" text-anchor="middle" fill="#111">77</text>
+<text x="16" y="264" font-size="13" fill="#444">玉が 4 個（M + 1 個）なら、どう入れても 2 個入る</text>
+<text x="16" y="284" font-size="13" fill="#444">箱が必ずある（太線の箱）</text>
 </svg>

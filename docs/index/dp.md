@@ -9,7 +9,7 @@ search:
 
 # 動的計画法の詳細索引
 
-分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。stub（準備中）のページは要約と前提しかなく、節の見出しもまだない。
+分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
 
 ## DP の基本（dp-basics） {#dp-basics}
 
@@ -423,7 +423,7 @@ search:
     - `bit-dp#set-only` 集合だけを状態にする（マッチングの数）：https://yuukougun.github.io/kyopro-atlas/dp/bit-dp/#set-only
     - `bit-dp#tsp` 集合と最後に使ったもの（巡回セールスマン・ハミルトン路）：https://yuukougun.github.io/kyopro-atlas/dp/bit-dp/#tsp
     - `bit-dp#complexity` 計算量とメモリの見積もり：https://yuukougun.github.io/kyopro-atlas/dp/bit-dp/#complexity
-    - `bit-dp#with-shortest-paths` ほかの探索と組み合わせる（BFS・ワーシャルフロイドで距離を前計算してから）（青）：https://yuukougun.github.io/kyopro-atlas/dp/bit-dp/#with-shortest-paths
+    - `bit-dp#with-shortest-paths` ほかの探索と組み合わせる（BFS・ワーシャルフロイド法で距離を前計算してから）（青）：https://yuukougun.github.io/kyopro-atlas/dp/bit-dp/#with-shortest-paths
     - `bit-dp#games` ゲームの状態を集合で持つ：https://yuukougun.github.io/kyopro-atlas/dp/bit-dp/#games
     - `bit-dp#primes` 素数の使用状況を集合で持つ（黄）：https://yuukougun.github.io/kyopro-atlas/dp/bit-dp/#primes
 
@@ -443,7 +443,7 @@ search:
     - `subset-enumeration-dp#why-3n` 3^N になる理由（各要素が 3 通り）：https://yuukougun.github.io/kyopro-atlas/dp/subset-enumeration-dp/#why-3n
     - `subset-enumeration-dp#fix-minimum` 最小の要素を含むグループから決める（順序の重複を除く）：https://yuukougun.github.io/kyopro-atlas/dp/subset-enumeration-dp/#fix-minimum
     - `subset-enumeration-dp#group-count` グループの数を状態に足す：https://yuukougun.github.io/kyopro-atlas/dp/subset-enumeration-dp/#group-count
-    - `subset-enumeration-dp#vs-zeta` 高速ゼータ変換との使い分け：https://yuukougun.github.io/kyopro-atlas/dp/subset-enumeration-dp/#vs-zeta
+    - `subset-enumeration-dp#vs-zeta` 高速ゼータ変換との使い分け（黄）：https://yuukougun.github.io/kyopro-atlas/dp/subset-enumeration-dp/#vs-zeta
 
 ## プロファイル DP（broken-profile-dp） {#broken-profile-dp}
 
@@ -650,7 +650,7 @@ search:
     - `dynamic-dp#matrix-on-segment-tree` 遷移を行列にしてセグメント木に載せる（ACL の segtree の S を行列にする）：https://yuukougun.github.io/kyopro-atlas/dp/dynamic-dp/#matrix-on-segment-tree
     - `dynamic-dp#order-and-identity` 積の向きと単位行列：https://yuukougun.github.io/kyopro-atlas/dp/dynamic-dp/#order-and-identity
     - `dynamic-dp#on-trees` 木の上の動的 DP（Static Top Tree へ）：https://yuukougun.github.io/kyopro-atlas/dp/dynamic-dp/#on-trees
-    - `dynamic-dp#verify` ライブラリでの検証（Library Checker の point_set_range_composite が土台）：https://yuukougun.github.io/kyopro-atlas/dp/dynamic-dp/#verify
+    - `dynamic-dp#verify` ライブラリでの検証：https://yuukougun.github.io/kyopro-atlas/dp/dynamic-dp/#verify
 
 ## Convex Hull Trick と Li Chao Tree（cht） {#cht}
 
@@ -667,7 +667,7 @@ search:
     - `cht#lower-envelope` 下側の包絡線と不要な直線（傾きもクエリも単調なら deque）：https://yuukougun.github.io/kyopro-atlas/dp/cht/#lower-envelope
     - `cht#non-monotone-queries` クエリが単調でないとき（二分探索）：https://yuukougun.github.io/kyopro-atlas/dp/cht/#non-monotone-queries
     - `cht#li-chao-tree` Li Chao Tree（区間の真ん中で勝つ直線を残す）：https://yuukougun.github.io/kyopro-atlas/dp/cht/#li-chao-tree
-    - `cht#verify` ライブラリでの検証（Library Checker の line_add_get_min・segment_add_get_min）：https://yuukougun.github.io/kyopro-atlas/dp/cht/#verify
+    - `cht#verify` ライブラリでの検証：https://yuukougun.github.io/kyopro-atlas/dp/cht/#verify
 
 ## Monge 性による DP の高速化（monge） {#monge}
 
@@ -688,7 +688,7 @@ search:
     - `monge#knuth-yao` Knuth-Yao（区間 DP の分割点の範囲を絞って O(N^2)）：https://yuukougun.github.io/kyopro-atlas/dp/monge/#knuth-yao
     - `monge#dp-convexity` DP の値の凸性（個数について凸な答え）：https://yuukougun.github.io/kyopro-atlas/dp/monge/#dp-convexity
     - `monge#convex-max-plus-convolution` 凸な列どうしの (max,+) 畳み込み（差分のマージ）：https://yuukougun.github.io/kyopro-atlas/dp/monge/#convex-max-plus-convolution
-    - `monge#verify` ライブラリでの検証（Library Checker の min_plus_convolution_convex_arbitrary など）：https://yuukougun.github.io/kyopro-atlas/dp/monge/#verify
+    - `monge#verify` ライブラリでの検証：https://yuukougun.github.io/kyopro-atlas/dp/monge/#verify
 
 ## Alien DP（alien-dp） {#alien-dp}
 

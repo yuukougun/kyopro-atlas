@@ -2,11 +2,11 @@
 <rect width="400" height="368" fill="#ffffff"/>
 <text x="8" y="16" font-size="12" font-weight="bold" fill="#222">1 秒に収まる N の上限（定数倍 1 とした値）</text>
 <rect x="8" y="25" width="16" height="9" fill="#3b6ea5"/>
-<text x="28" y="33" font-size="10" fill="#222">10⁸ 回まで</text>
+<text x="28" y="33" font-size="11" fill="#222">10⁸ 回まで</text>
 <rect x="100" y="25" width="16" height="9" fill="#cfdcec" stroke="#3b6ea5" stroke-dasharray="2,2"/>
-<text x="120" y="33" font-size="10" fill="#222">10⁹ 回まで（軽い処理なら）</text>
-<text x="8" y="58" font-size="10" fill="#555">計算量</text>
-<text x="142" y="58" font-size="10" fill="#555" text-anchor="end">N の上限</text>
+<text x="120" y="33" font-size="11" fill="#222">10⁹ 回まで（軽い処理なら）</text>
+<text x="8" y="58" font-size="11" fill="#555">計算量</text>
+<text x="142" y="58" font-size="11" fill="#555" text-anchor="end">N の上限</text>
 <line x1="150.0" y1="60" x2="150.0" y2="324" stroke="#bbb" stroke-width="0.6"/>
 <text x="150.0" y="338" font-size="11" fill="#333" text-anchor="middle">1</text>
 <line x1="189.7" y1="60" x2="189.7" y2="324" stroke="#bbb" stroke-width="0.6"/>
@@ -21,7 +21,7 @@
 <text x="348.3" y="338" font-size="11" fill="#333" text-anchor="middle">10¹⁵</text>
 <line x1="388.0" y1="60" x2="388.0" y2="324" stroke="#bbb" stroke-width="0.6"/>
 <text x="388.0" y="338" font-size="11" fill="#333" text-anchor="middle">10¹⁸</text>
-<text x="269" y="356" font-size="10" fill="#333" text-anchor="middle">N（対数目盛。1 目盛りで 1000 倍）</text>
+<text x="269" y="356" font-size="11" fill="#333" text-anchor="middle">N（対数目盛。1 目盛りで 1000 倍）</text>
 <rect x="4" y="60" width="392" height="24" fill="#f4f4f4"/>
 <text x="8" y="76" font-size="11" fill="#222">O(N!·N)</text>
 <text x="142" y="76" font-size="11" fill="#222" text-anchor="end">10</text>

@@ -9,7 +9,7 @@ order: 120
 level: 水
 kind: [木, 考察]
 prerequisites: [tree-traversal, contribution]
-related: [union-find-applications, rerooting, centroid-decomposition, small-to-large, linearity-of-expectation]
+related: [union-find-applications, rerooting, centroid-decomposition, small-to-large, linearity-of-expectation, steiner-subtree]
 summary: 全ペアのパスについての量の和を、各辺（頂点）が何ペアのパスに含まれるかで数え直す。辺で切った両側の大きさが s と N−s なら、その辺を通るペアは s(N−s) 個になる。
 complexity: 部分木サイズを求めて O(N)。重みの順に併合する型はソートが入って O(N log N)
 signs:
@@ -128,7 +128,7 @@ $$
 
 この節は[期待値の線形性](../comb/linearity-of-expectation.md)と[指示確率変数](../comb/linearity-of-expectation.md#indicator)を前提にする。
 
-**期待値は辺ごとの確率の和になる**。「ランダムに選んだ頂点を結ぶ最小の木の辺の数」の期待値は、各辺がその木に入る確率の和である。たとえば各頂点を独立に確率 $1/2$ で黒に塗り、黒い頂点をすべて含む最小の連結な部分（以下「黒を結ぶ木」と呼ぶ）を考える。辺 $e$ が黒を結ぶ木に入るのは、$e$ で切った両側にどちらも黒い頂点があるときに限る。片側の頂点数を $s$ とすると、その確率は次の式になる。
+**期待値は辺ごとの確率の和になる**。「ランダムに選んだ頂点を結ぶ最小の木の辺の数」の期待値は、各辺がその木に入る確率の和である。たとえば各頂点を独立に確率 $1/2$ で黒に塗り、黒い頂点をすべて含む最小の連結な部分（[指定頂点を結ぶ最小の部分木](../tree/steiner-subtree.md)。以下「黒を結ぶ木」と呼ぶ）を考える。辺 $e$ が黒を結ぶ木に入るのは、$e$ で切った両側にどちらも黒い頂点があるときに限る。片側の頂点数を $s$ とすると、その確率は次の式になる。
 
 $$
 P(e \text{ が入る}) = \left(1 - 2^{-s}\right)\left(1 - 2^{-(N - s)}\right)

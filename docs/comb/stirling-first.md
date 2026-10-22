@@ -24,6 +24,7 @@ sections:
   - {title: 漸化式と上昇階乗, anchor: recurrence}
   - {title: 左から見える位置の数との対応, anchor: records}
   - {title: FPS・分割統治で一度に求める, anchor: fps}
+  - {title: ライブラリでの使い方, anchor: library}
   - {title: 第 2 種との違い, anchor: vs-second-kind}
 stage: draft
 updated: 2026-10-22
@@ -126,9 +127,6 @@ $n = 3$ では、見える位置が 1 個のものは 312・321、2 個のもの
 --8<-- "stirling-first/rising.cpp:core"
 ```
 
-!!! info "ACL では"
-    `vector<mint> c = atcoder::convolution(a, b);`（`mint` は `atcoder::modint998244353`）。長さの和を $n$ として $O(n \log n)$ で、法は $998244353$ のような NTT 向きの素数に限る（[ACL の convolution の要件](../math/convolution-ntt.md#acl)）。上昇階乗そのものの機能はないので、分割統治はコード片のように自分で書く。
-
 **Taylor shift で倍々にする**。$f_m(x) = x(x+1)\cdots(x+m-1)$ とすると $f_m(x + m) = (x + m)\cdots(x + 2m - 1)$ なので、$f_{2m}(x) = f_m(x) \cdot f_m(x + m)$ である。$f_m(x + m)$ の係数は、多項式の平行移動（Taylor shift）によって $O(m \log m)$ で求まる。$N$ を上の bit から読み、奇数のときは $(x + 2m)$ を 1 つ掛ければ、全体は $O(N \log N)$ になる。ただし Taylor shift の実装が要るので、自作するなら分割統治から作り、速さが足りないときに倍化へ替えるとよい。
 
 **列 $c(n, K)$（$K$ を固定）**。巡回 1 個の指数型母関数は $\sum_{m \ge 1} (m-1)! \frac{x^m}{m!} = -\log(1 - x)$ で、順列は巡回の集まり（巡回どうしは区別しない）なので
@@ -139,7 +137,12 @@ $$
 
 になる。$\sum_{m \ge 1} x^m / m$ の $K$ 乗を FPS の累乗で求め、$n! / K!$ を掛ければ、$n \le N$ の値が $O(N \log N)$ でそろう（[母関数の考え方](../comb/generating-function-counting.md)）。
 
-**自作するときの要点**。
+## ライブラリでの使い方 {#library}
+
+!!! info "ACL では"
+    `vector<mint> c = atcoder::convolution(a, b);`（`mint` は `atcoder::modint998244353`）。長さの和を $n$ として $O(n \log n)$ で、法は $998244353$ のような NTT 向きの素数に限る（[ACL の convolution の要件](../math/convolution-ntt.md#acl)）。上昇階乗そのものの機能はないので、分割統治は[前の節](#fps)のコード片のように自分で書く。
+
+自作するときの要点は次のとおりである。
 
 - $n = 0$ の上昇階乗は空の積の $1$ で、$c(0, 0) = 1$ である。分割統治の再帰に区間の長さ 0 を渡さないよう、先に分ける。
 - 符号付きが欲しいときは、最後に $n - k$ が奇数の項の符号を反転する（下降階乗を直接掛けてもよい）。

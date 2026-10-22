@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 330" font-family="sans-serif" font-size="15">
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="330" viewBox="0 0 480 330" font-family="sans-serif" font-size="15">
 <rect width="100%" height="100%" fill="#ffffff"/>
 <text x="16" y="26" fill="#222" font-size="16">頂点 1 からの距離で頂点を層に分ける</text>
-<text x="60" y="56" fill="#666" text-anchor="middle" font-size="13">距離 0</text>
-<text x="170" y="56" fill="#666" text-anchor="middle" font-size="13">距離 1</text>
-<text x="280" y="56" fill="#666" text-anchor="middle" font-size="13">距離 2</text>
-<text x="400" y="56" fill="#666" text-anchor="middle" font-size="13">距離 3</text>
+<text x="60" y="56" fill="#666" text-anchor="middle" font-size="13.5">距離 0</text>
+<text x="170" y="56" fill="#666" text-anchor="middle" font-size="13.5">距離 1</text>
+<text x="280" y="56" fill="#666" text-anchor="middle" font-size="13.5">距離 2</text>
+<text x="400" y="56" fill="#666" text-anchor="middle" font-size="13.5">距離 3</text>
 <rect x="30" y="66" width="60" height="190" rx="10" fill="#f4f4f4" stroke="#999"/>
 <rect x="140" y="66" width="60" height="190" rx="10" fill="#f4f4f4" stroke="#999"/>
 <rect x="250" y="66" width="60" height="190" rx="10" fill="#f4f4f4" stroke="#999"/>
@@ -35,8 +35,8 @@
 <circle cx="400" cy="160" r="16" fill="#ffffff" stroke="#1f4e9a" stroke-width="2"/>
 <text x="400" y="166" fill="#222" text-anchor="middle" font-weight="bold">7</text>
 <line x1="24" y1="276" x2="60" y2="276" stroke="#1f4e9a" stroke-width="2.5"/>
-<text x="68" y="281" fill="#222" font-size="13">前の層への辺：各頂点が 1 本以上（2^j − 1 通りずつ）</text>
+<text x="68" y="281" fill="#222" font-size="13.5">前の層への辺：各頂点が 1 本以上（2^j − 1 通りずつ）</text>
 <line x1="24" y1="300" x2="60" y2="300" stroke="#2a7a2a" stroke-width="2" stroke-dasharray="6 4"/>
-<text x="68" y="305" fill="#222" font-size="13">同じ層の中の辺：自由（2^C(k,2) 通り）</text>
-<text x="68" y="325" fill="#666" font-size="13">2 層以上離れた頂点の間には辺がない</text>
+<text x="68" y="305" fill="#222" font-size="13.5">同じ層の中の辺：自由（2^C(k,2) 通り）</text>
+<text x="68" y="325" fill="#666" font-size="13.5">2 層以上離れた頂点の間には辺がない</text>
 </svg>

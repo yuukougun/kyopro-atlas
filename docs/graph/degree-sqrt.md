@@ -11,7 +11,7 @@ kind: [グラフ探索, クエリ処理の工夫]
 prerequisites: [graph-basics]
 related: [sqrt-decomposition, symmetry-pigeonhole-casework#pigeonhole, bitset-speedup]
 summary: 次数が √M を超える重い頂点は 2√M 個以下しかないことを使い、重い頂点と軽い頂点で処理を分けて、頂点とその隣接頂点すべてへのクエリを O(√M) にする。三角形の列挙や 4-サイクルの検出も同じ考え方で速くなる。
-complexity: 前処理 O(N + M)、隣接頂点すべてへの更新・質問は 1 回 O(√M)、三角形の列挙と 4-サイクルの数え上げは O(N + M√M)
+complexity: 前処理 O(N + M)、隣接頂点すべてへの更新・質問は 1 回 O(√M)、三角形の列挙と長さ 4 の閉路の数え上げは O(N + M√M)
 signs:
   - {type: phrase, text: 頂点とその隣接頂点すべてに対する操作・質問が大量に来る}
   - {type: phrase, text: 長さ 3・4 の閉路を見つける・数える}
@@ -24,18 +24,18 @@ sections:
   - {title: 重い頂点は 2√M 個以下, anchor: few-heavy}
   - {title: 配るか取りに行くかを次数で決める, anchor: push-pull}
   - {title: 三角形の列挙（次数の小さい方から向き付ける）, anchor: triangles, level: 黄}
-  - {title: 4-サイクルの検出（鳩の巣原理で打ち切る）, anchor: four-cycles, level: 黄}
+  - {title: 長さ 4 の閉路の検出（鳩の巣原理で打ち切る）, anchor: four-cycles, level: 黄}
 stage: draft
 updated: 2026-10-21
 ---
 
 !!! abstract "要点"
-    - **何ができるか**：次数が $\sqrt{M}$ を超える重い頂点は $2\sqrt{M}$ 個以下しかないことを使い、重い頂点と軽い頂点で処理を分けて、頂点とその隣接頂点すべてへのクエリを 1 回 $O(\sqrt{M})$ にする。三角形の列挙や 4-サイクルの数え上げも、次数の大小で向きや順序を決めると $O(M\sqrt{M})$ で済む。
+    - **何ができるか**：次数が $\sqrt{M}$ を超える重い頂点は $2\sqrt{M}$ 個以下しかないことを使い、重い頂点と軽い頂点で処理を分けて、頂点とその隣接頂点すべてへのクエリを 1 回 $O(\sqrt{M})$ にする。三角形の列挙や長さ 4 の閉路の数え上げも、次数の大小で向きや順序を決めると $O(M\sqrt{M})$ で済む。
     - **いつ使うか**：
         - 頂点とその隣接頂点すべてに対する操作・質問が大量に来る。
         - 長さ 3・4 の閉路を見つける・数える。
         - $N, M, Q \le 2 \times 10^5$ で、1 つの頂点の次数が $N$ 近くになりうる。
-    - **計算量**：前処理 $O(N + M)$、隣接頂点すべてへの更新・質問は 1 回 $O(\sqrt{M})$（ならしではなく 1 回ごとの上限）。三角形の列挙と 4-サイクルの数え上げは $O(N + M\sqrt{M})$。
+    - **計算量**：前処理 $O(N + M)$、隣接頂点すべてへの更新・質問は 1 回 $O(\sqrt{M})$（ならしではなく 1 回ごとの上限）。三角形の列挙と長さ 4 の閉路の数え上げは $O(N + M\sqrt{M})$。
     - **前提**：[グラフの表現と用語](../graph/graph-basics.md)
 
 <!-- textlint-disable -->
@@ -125,7 +125,7 @@ $$
 
 各頂点に値があり、三角形ごとの積の和などを求める問題も、報告する代わりにその場で足せばよい（Library Checker の Enumerate Triangles）。頂点数が数千で辺が密なら、三角形が $10^9$ 個を超えることもあり、1 つずつ列挙すると間に合わない。個数だけなら、隣接行列の行を bitset にして共通の隣を数える方が速い（[bitset による高速化](../misc/bitset-speedup.md)）。
 
-## 4-サイクルの検出（鳩の巣原理で打ち切る） {#four-cycles}
+## 長さ 4 の閉路の検出（鳩の巣原理で打ち切る） {#four-cycles}
 
 この節は[鳩の巣原理](../thinking/symmetry-pigeonhole-casework.md#pigeonhole)と[三角形の列挙](#triangles)の順位の考え方を前提にする。長さ 4 の閉路 $a - v - b - s - a$ は、「頂点の組 $\{a, b\}$ の両方に隣接する頂点が 2 つ（$v$ と $s$）ある」と言い換えられる。
 
@@ -149,7 +149,7 @@ $$
 --8<-- "degree-sqrt/four-cycle.cpp:count"
 ```
 
-Library Checker の Counting C4's は、辺ごとに「その辺を含む 4-サイクルの個数」を求める発展版で、多重辺を含みうる（自己ループはない）。
+Library Checker の Counting C4's は、辺ごとに「その辺を含む長さ 4 の閉路の個数」を求める発展版で、多重辺を含みうる（自己ループはない）。
 
 ## 落とし穴 {#pitfalls}
 
@@ -159,7 +159,7 @@ Library Checker の Counting C4's は、辺ごとに「その辺を含む 4-サ�
 
 **中心の頂点を忘れる**。「$x$ とその隣接頂点すべて」を塗るとき、軽い $x$ が隣に配るだけで $x$ 自身に書かないと、次に $x$ を聞いたとき古い色が出る。重い $x$ なら、質問で $\mathrm{own}[x]$ を見るのを忘れやすい。
 
-**多重辺と自己ループ**。多重辺は次数を水増しするだけで計算量は崩さないが、三角形や 4-サイクルを数えると同じ閉路を何度も数える。4-サイクルの検出では、同じ頂点が 2 回現れて組 $\{a, a\}$ ができ、閉路でないものを報告する。自己ループ $\{v, v\}$ があると、塗る問題では隣に自分が入り、4-サイクルの検出では組に $v$ 自身が入って、これも閉路でないものを報告しうる。入力が単純と限らないなら、先に辺を重複なく並べ直す。
+**多重辺と自己ループ**。多重辺は次数を水増しするだけで計算量は崩さないが、三角形や長さ 4 の閉路を数えると同じ閉路を何度も数える。長さ 4 の閉路の検出では、同じ頂点が 2 回現れて組 $\{a, a\}$ ができ、閉路でないものを報告する。自己ループ $\{v, v\}$ があると、塗る問題では隣に自分が入り、長さ 4 の閉路の検出では組に $v$ 自身が入って、これも閉路でないものを報告しうる。入力が単純と限らないなら、先に辺を重複なく並べ直す。
 
 **次数が等しい頂点の向きを決めていない**。次数だけで比べると、等しい 2 頂点の間の辺が両方向に張られるか、どちらにも張られない。前者では同じ三角形を何度も数え（最大 6 回）、後者では落とす。$(\deg v, v)$ の組で比べて全順序にする。
 
@@ -195,7 +195,7 @@ Library Checker の Counting C4's は、辺ごとに「その辺を含む 4-サ�
 
 ??? note "練習の方針"
     - **ABC260 F**：S の各頂点について、隣接する T の頂点の組を列挙し、組ごとに最初に現れた S の頂点を表に記録する。同じ組が 2 回出たら閉路が見つかる。T は 3000 頂点以下なので組は約 $4.5 \times 10^6$ 種類で、表への記録がそれを超える前に必ず止まる。S がどれだけ多くても、列挙の総数はこの上限で抑えられる。
-    - **ABC350 G**：しきい値 $B \approx \sqrt{N}$ で次数を分ける。どちらかの端点が軽ければ、その隣接リストを走査してもう一方との隣接を辺の集合で調べる。両方が重いときは、重い頂点の隣接集合だけを持った bitset の AND か、重い頂点 2 つ以上に隣接する $O(N / B)$ 個の候補の走査で答える。想定解はマージテクで、次数による平方分割は別解である
+    - **ABC350 G**：しきい値 $B \approx \sqrt{N}$ で次数を分ける。どちらかの端点が軽ければ、その隣接リストを走査してもう一方との隣接を辺の集合で調べる。両方が重いときは、重い頂点の隣接集合だけを持った bitset の AND か、重い頂点 2 つ以上に隣接する $O(N / B)$ 個の候補の走査で答える。想定解はマージテクで、次数による平方分割は別解である。
 
 ## 力試し {#challenge}
 
@@ -233,7 +233,7 @@ Library Checker の Counting C4's は、辺ごとに「その辺を含む 4-サ�
 - 列を長さ $\sqrt{N}$ のブロックに分けて区間を処理するのは[平方分割](../ds/sqrt-decomposition.md)で、次数による平方分割は「何を重いとみなすか」を次数で決める版である
 - クエリが木の上で、隣接頂点が「親と子」なら、子の分は親に記録して配らずに済むことが多い（各頂点で親は 1 つ）。次数による平方分割は、親子の区別がない一般のグラフで使う
 - 頂点数が数千で密なグラフの三角形の個数や共通の隣の数は、[bitset による高速化](../misc/bitset-speedup.md)で 1/64 にする方が速い
-- 4-サイクルを 1 つ見つけるだけなら、鳩の巣原理による打ち切りで $O(N^2 + M)$。$N$ が大きく表を持てないときや、個数を数えるときは順位による $O(M\sqrt{M})$ を使う
+- 長さ 4 の閉路を 1 つ見つけるだけなら、鳩の巣原理による打ち切りで $O(N^2 + M)$。$N$ が大きく表を持てないときや、個数を数えるときは順位による $O(M\sqrt{M})$ を使う
 
 ## 参考 {#references}
 
@@ -241,7 +241,7 @@ Library Checker の Counting C4's は、辺ごとに「その辺を含む 4-サ�
 - [E869120「083-02a.cpp」](https://github.com/E869120/kyopro_educational_90/blob/main/sol/083-02a.cpp)：例題の解答コード（軽い頂点が隣に配り、重い頂点は自分にだけ記録する組み方）
 - [oraclesqlpuzzle「ABC260-F Find 4-cycle」](https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc260-f.html)：練習の方針（T の頂点の組を記録し、T が 3000 頂点以下なので組の種類に上限があること）
 - [Library Checker「Enumerate Triangles」（問題の定義）](https://github.com/yosupo06/library-checker-problems/tree/master/graph/enumerate_triangles)：三角形の列挙の制約（単純グラフ、$N, M \le 10^5$）
-- [Library Checker「Counting C4's」（問題の定義）](https://github.com/yosupo06/library-checker-problems/tree/master/graph/counting_c4)：辺ごとの 4-サイクルの個数（単純とは限らないグラフ、$N, M \le 3 \times 10^5$）
+- [Library Checker「Counting C4's」（問題の定義）](https://github.com/yosupo06/library-checker-problems/tree/master/graph/counting_c4)：辺ごとの長さ 4 の閉路の個数（単純とは限らないグラフ、$N, M \le 3 \times 10^5$）
 - [kmjp「AtCoder ABC #350 (Promotion of AtCoderJobs) : G - Mediator」](https://kmjp.hatenablog.jp/entry/2024/04/22/0900)：練習 ABC350 G の次数で分ける解き方と O(N√N)
 - [No-play-Yes-splay「AtCoder Beginner Contest 350 解题报告」](https://www.cnblogs.com/No-play-Yes-splay/p/18148245/atcoder-beginner-contest-350-sol)：練習 ABC350 G の重い頂点だけ bitset を持つ解き方
 - [ikatakos「サイシードプログラミングコンテスト2021（AtCoder Beginner Contest 219）F,G,H問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0918_abc219)：力試し ABC219 G の配る・取りに行くの使い分け（解説の部分だけを参照）

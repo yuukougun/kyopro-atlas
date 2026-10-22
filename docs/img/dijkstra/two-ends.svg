@@ -17,8 +17,8 @@
     <text x="285" y="95">k</text>
     <text x="500" y="140">t</text>
   </g>
-  <text x="40" y="32" font-size="15" fill="#1f4e9c">dS[k]：s から k への距離</text>
-  <text x="330" y="32" font-size="15" fill="#2e7d32">dT[k]：k から t への距離</text>
-  <text x="300" y="192" font-size="15" fill="#222222" text-anchor="middle">k を通る最短路の長さ ＝ dS[k] ＋ dT[k]</text>
-  <text x="300" y="216" font-size="14" fill="#444444" text-anchor="middle">有向グラフなら dT は逆向きのグラフで t から求める</text>
+  <text x="40" y="32" font-size="17" fill="#1f4e9c">dS[k]：s から k への距離</text>
+  <text x="330" y="32" font-size="17" fill="#2e7d32">dT[k]：k から t への距離</text>
+  <text x="300" y="192" font-size="17" fill="#222222" text-anchor="middle">k を通る最短路の長さ ＝ dS[k] ＋ dT[k]</text>
+  <text x="300" y="216" font-size="17" fill="#444444" text-anchor="middle">有向グラフなら dT は逆向きのグラフで t から求める</text>
 </svg>

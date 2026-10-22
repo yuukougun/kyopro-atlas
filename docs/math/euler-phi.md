@@ -150,7 +150,7 @@ $$
 
     $d = p - 1$ で $\psi(p - 1) = \varphi(p - 1) \ge 1$ となり、原始根があることも同時に分かる。「法が素数」は根の個数の上限で使っている。合成数の法では一般に成り立たない。
 
-**応用の型**：「$x^n \equiv y \pmod{P}$ となる組を数える」は、$x$ の位数ごとに分けて $\sum_{d \mid P-1} \varphi(d) \cdot d$ を求める（[例題の ABC212 G](#abc212_g)）。$P - 1$ の約数を素因数分解から作れば、各約数の $\varphi$ も素因数ごとの積として同時に求まる。$n$ 個の玉を円形に並べて $k$ 色で塗る方法を、回転で重なるものを同じとみて数える式 $\frac{1}{n} \sum_{d \mid n} \varphi(d) \, k^{n/d}$ にも $\varphi$ が現れる（[バーンサイドの補題](../comb/burnside-lemma.md#necklace)）。
+**応用の型**：「$x^n \equiv y \pmod{P}$ となる組を数える」は、$x$ の位数ごとに分けて $\sum_{d \mid P-1} \varphi(d) \cdot d$ を求める（[例題の ABC212 G](#abc212_g)）。$P - 1$ の約数を素因数分解から作れば、各約数の $\varphi$ も素因数ごとの積として同時に求まる。$n$ 個の玉を円形に並べて $k$ 色で塗る方法を、回転で重なるものを同じとみて数える式 $\frac{1}{n} \sum_{d \mid n} \varphi(d) \, k^{n/d}$ にも $\varphi$ が現れる（[Burnside の補題](../comb/burnside-lemma.md#necklace)）。
 
 ## 落とし穴 {#pitfalls}
 
@@ -207,9 +207,9 @@ $$
 </div>
 
 ??? note "練習の方針"
-    - **ABC186 E**：$Kx \equiv -S \pmod{N}$ を $\gcd$ で割って $K$ と $N$ を互いに素にする。$N$ は素数とは限らないので、$K$ の逆元をオイラーの定理から $K^{\varphi(N) - 1}$ として求め、$\varphi(N)$ は試し割りの $O(\sqrt{N})$ で求める。主な解き方は拡張ユークリッドの互除法で、ここでは $\varphi$ を使う別解として解く
-    - **ABC162 E**：$d$ の倍数だけからなる列は $\lfloor K/d \rfloor^N$ 個ある。$g = \sum_{d \mid g} \varphi(d)$ を各列の gcd に当てはめて和の順を入れ替えると、答えは $\sum_{d=1}^{K} \varphi(d) \lfloor K/d \rfloor^N$ になり、$\varphi$ の表を篩で作れば $O(K \log N)$ である。解説はどれも約数包除で解いていて、$\varphi$ の形はその書き換えである
-    - **ARC185 E**：答えは $f(n+1) = 2 f(n) + \sum_{x < n} 2^x \gcd(A_x, A_n)$ と更新できる。$\gcd(A_x, A_n) = \sum_{d \mid A_x, d \mid A_n} \varphi(d)$ と分け、約数 $d$ ごとに「$d$ の倍数である前の要素の $2^x$ の和」$p(d)$ を持てば、$A_n$ の約数を回して $\sum_{d \mid A_n} \varphi(d) p(d)$ で更新できる
+    - **ABC186 E**：$Kx \equiv -S \pmod{N}$ を $\gcd$ で割って $K$ と $N$ を互いに素にする。$N$ は素数とは限らないので、$K$ の逆元をオイラーの定理から $K^{\varphi(N) - 1}$ として求め、$\varphi(N)$ は試し割りの $O(\sqrt{N})$ で求める。主な解き方は拡張ユークリッドの互除法で、ここでは $\varphi$ を使う別解として解く。
+    - **ABC162 E**：$d$ の倍数だけからなる列は $\lfloor K/d \rfloor^N$ 個ある。$g = \sum_{d \mid g} \varphi(d)$ を各列の gcd に当てはめて和の順を入れ替えると、答えは $\sum_{d=1}^{K} \varphi(d) \lfloor K/d \rfloor^N$ になり、$\varphi$ の表を篩で作れば $O(K \log N)$ である。解説はどれも約数包除で解いていて、$\varphi$ の形はその書き換えである。
+    - **ARC185 E**：答えは $f(n+1) = 2 f(n) + \sum_{x < n} 2^x \gcd(A_x, A_n)$ と更新できる。$\gcd(A_x, A_n) = \sum_{d \mid A_x, d \mid A_n} \varphi(d)$ と分け、約数 $d$ ごとに「$d$ の倍数である前の要素の $2^x$ の和」$p(d)$ を持てば、$A_n$ の約数を回して $\sum_{d \mid A_n} \varphi(d) p(d)$ で更新できる。
     - **ABC222 G**：2 を $n$ 個並べた数は $\frac{2}{9}(10^n - 1)$ なので、$K$ が奇数なら $L = 9K$、偶数なら $L = 9K/2$ として、条件は $10^n \equiv 1 \pmod{L}$ になる。$\gcd(10, L) \ne 1$ なら答えはない。互いに素なら、$L$ を試し割りして $\varphi(L)$ を求め、その約数を小さい順に試す（[位数は φ(n) の約数](#euler-theorem)）。$L \le 9 \times 10^8$ なので、$10^n \bmod L$ の途中の積は `long long` に収まる。テストケースは複数あるが、1 つあたり $O(\sqrt{K} \log K)$ ほどで間に合う。
 
 ## 確認問題 {#quiz}

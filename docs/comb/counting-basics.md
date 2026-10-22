@@ -9,7 +9,7 @@ order: 10
 level: 基礎
 kind: [数え上げ]
 prerequisites: []
-related: [binomial-coefficient, counting-mindset, counting-fix-order, twelvefold-way, mod-pow, dp-state-design]
+related: [binomial-coefficient, counting-mindset, counting-fix-order, twelvefold-way, mod-pow, dp-state-design, inclusion-exclusion]
 summary: 排反な場合分けは足し、独立な段階の選択は掛けて数える。積の法則は前の段階で何を選んでも次の選択肢の数が同じときだけ使え、円環の塗り分けでは最後の要素の選択肢の数が変わる。
 complexity: 式が段階の数 N の累乗を含むなら、繰り返し二乗法で O(log N)
 signs:
@@ -182,6 +182,16 @@ $k^n$ と $n^k$ を取り違えやすい。「選ぶ側」が 1 つずつ「選�
 **和の法則で重なりを足す**。「0 を含む列」と「9 を含む列」を足すと、両方を含む列を二重に数える。重なりを引くか、「どちらも含まない」の側から数える（[余事象](../thinking/complement.md)）。
 
 **mod の値で大小を比べる**。余りにした後の値は、元の数の大小を表さない。「円環の数が一列の数より小さいはず」のような確かめは、mod を取らない小さい $N$・$K$ で行う。
+
+## 上位の手法へのつながり {#next-steps}
+
+このページの考え方は、次の手法の部品になる。
+
+- **二項係数**：組合せ $\binom{n}{k}$ の 3 つの意味と性質は[二項係数の意味と性質](../comb/binomial-coefficient.md#meanings)にある。
+- **確率**：同様に確からしいときの確率は、場合の数の比で求める（[確率の基本](../comb/probability-basics.md#ratio)）。
+- **順序を固定する**：一部の相対順序が決まっている並べ方は、全体の何分の一かとして数える（[順序を固定して数える](../comb/counting-fix-order.md#relative-order)）。
+- **重なりを引く**：和の法則の場合が重なるときは、包除原理で重なりを足し引きする（[包除原理](../comb/inclusion-exclusion.md#general)）。
+- **数え上げの手順**：対象の確定から検算までの流れは[数え上げの考え方](../comb/counting-mindset.md#procedure)にまとめてある。
 
 ## 使い分け {#comparison}
 

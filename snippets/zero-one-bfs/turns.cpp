@@ -11,7 +11,7 @@ int main() {
     assert(grid[sr][sc] == '.' && grid[gr][gc] == '.');
 
     // --8<-- [start:core]
-    const int dx[4] = {-1, 0, 1, 0}, dy[4] = {0, 1, 0, -1};  // 上・右・下・左
+    const int di[4] = {-1, 0, 1, 0}, dj[4] = {0, 1, 0, -1};  // 上・右・下・左
     const int INF = INT_MAX;
     // 状態 (i, j, d) を (i * w + j) * 4 + d に詰める。頂点数はマスの数の 4 倍
     auto id = [&](int i, int j, int d) { return (i * w + j) * 4 + d; };
@@ -27,7 +27,7 @@ int main() {
         if (cost > dist[st]) continue;
         int d = st % 4, i = st / 4 / w, j = st / 4 % w;
         // 同じ向きに 1 マス進む：重み 0
-        int ni = i + dx[d], nj = j + dy[d];
+        int ni = i + di[d], nj = j + dj[d];
         if (0 <= ni && ni < h && 0 <= nj && nj < w && grid[ni][nj] == '.' && cost < dist[id(ni, nj, d)]) {
             dist[id(ni, nj, d)] = cost;
             dq.push_front({cost, id(ni, nj, d)});

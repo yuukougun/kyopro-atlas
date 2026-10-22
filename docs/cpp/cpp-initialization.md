@@ -15,11 +15,11 @@ complexity: '大きさ N の vector・array を作る・埋め直すのは O(N)�
 signs: []
 acl: []
 sections:
-  - {title: 'vector の初期化：(n) は 0 が n 個、(n, x) は x が n 個、{n} は値 n が 1 個', anchor: vector-init}
+  - {title: 'vector の初期化：(n) は 0 が n 個、(n, x) は x が n 個、波括弧の n は値 n が 1 個', anchor: vector-init}
   - {title: 多次元 vector：入れ子の vector で作り、3 次元は 1 段深くする, anchor: multi-dim-vector}
-  - {title: 'array と {} による 0 初期化', anchor: array-init}
+  - {title: array を空の波括弧で 0 初期化, anchor: array-init}
   - {title: グローバル変数は 0 で初期化され、関数の中の変数・配列は初期化されない, anchor: global-vs-local}
-  - {title: '構造体のメンバの既定値と指示付き初期化 Edge{.to = v, .cost = c}（C++20。メンバの宣言順に書く）', anchor: designated-init}
+  - {title: 構造体のメンバの既定値と指示付き初期化（C++20。宣言順に書く）, anchor: designated-init}
   - {title: 'コンストラクタのない構造体（集成体）にも emplace_back(to, cost) が使える（C++20。C++17 ではエラー）', anchor: aggregate-emplace}
   - {title: explicit なコンストラクタは = で初期化できない（ACL の dsu d = 5 はエラーで、dsu d(5) と書く）, anchor: explicit}
   - {title: '埋め直し：memset はバイト単位、fill・assign・ranges::fill', anchor: refill}
@@ -47,7 +47,7 @@ atcoder: true
 
 このページのコードは `#include <bits/stdc++.h>` と `using namespace std;` を前提にする。版は手元の g++-13・g++-15（`-std=gnu++23`）で確かめた。AtCoder の GCC 15.2（`-std=gnu++23`）では、このページの書き方はすべて使える。
 
-## vector の初期化：(n) は 0 が n 個、(n, x) は x が n 個、{n} は値 n が 1 個 {#vector-init}
+## vector の初期化：(n) は 0 が n 個、(n, x) は x が n 個、波括弧の n は値 n が 1 個 {#vector-init}
 
 `vector` の大きさと初期値は丸括弧で渡す。波括弧は「中に書いた値を並べた vector」を作る。`n` を波括弧に入れると、大きさ `n` ではなく、値 `n` が 1 個の vector になる。
 
@@ -78,7 +78,7 @@ atcoder: true
 - **落とし穴 1**：外側と内側の大きさを逆に渡すと、`dp[i][j]` が範囲外になる。`dp[i][j]` の `i` の範囲を外側に書く、と決めておく
 - **落とし穴 2**：内側の型を外側と合わせて書く必要がある。`vector<vector<long long>> dp(n, vector<int>(m));` はコンパイルエラーになる。型を書く手間は [CTAD](#ctad) で省ける
 
-## array と {} による 0 初期化 {#array-init}
+## array を空の波括弧で 0 初期化 {#array-init}
 
 `array<T, N>` は長さ `N` が固定の配列である。関数の中で `array<int, 26> cnt;` とだけ書くと中身は決まらないが、`{}` を付けると 26 個とも 0 になる。`vector<array<int, 3>> v(n);` の各要素も 0 で埋まる。
 
@@ -119,7 +119,7 @@ AtCoder の GCC には `-ftrivial-auto-var-init=zero`（初期化していない
 - **版**：C++ のどの版でも同じ。g++-13・g++-15 で、どちらも `-O2` 付きで `s` だけを警告した
 - **落とし穴**：配列の未初期化は警告に頼れない。関数の中の配列と `array` には `{}` を付ける習慣にする
 
-## 構造体のメンバの既定値と指示付き初期化 Edge{.to = v, .cost = c}（C++20。メンバの宣言順に書く） {#designated-init}
+## 構造体のメンバの既定値と指示付き初期化（C++20。宣言順に書く） {#designated-init}
 
 構造体のメンバには `= 値` で既定値を書ける。初期化で値を渡さなかったメンバは既定値になる。
 
@@ -127,7 +127,7 @@ AtCoder の GCC には `-ftrivial-auto-var-init=zero`（初期化していない
 --8<-- "cpp-initialization/designated-init.cpp:core"
 ```
 
-値は宣言順に `{}` の中へ並べて渡す。C++20 の指示付き初期化を使うと、`.メンバ名 = 値` と名前を書いて渡せる。書かなかったメンバは既定値（既定値がなければ 0）になる。
+値は宣言順に `{}` の中へ並べて渡す。C++20 の指示付き初期化を使うと、`.メンバ名 = 値` と名前を書いて渡せる（`Edge{.to = v, .cost = c}` の形）。書かなかったメンバは既定値（既定値がなければ 0）になる。
 
 ```cpp
 --8<-- "cpp-initialization/designated-init.cpp:use"

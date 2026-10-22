@@ -1,112 +1,115 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="24 0 640 275" font-family="sans-serif" font-size="14">
+<svg width="344" height="378" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 344 378" font-family="sans-serif" font-size="14">
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="150" y="28" fill="#222">頂点の番号 k →（1 語は 64 個。図は先頭の 14 個）</text>
-<text x="167" y="52" text-anchor="middle" fill="#555" font-size="12">0</text>
-<text x="201" y="52" text-anchor="middle" fill="#555" font-size="12">1</text>
-<text x="235" y="52" text-anchor="middle" fill="#555" font-size="12">2</text>
-<text x="269" y="52" text-anchor="middle" fill="#555" font-size="12">3</text>
-<text x="303" y="52" text-anchor="middle" fill="#555" font-size="12">4</text>
-<text x="337" y="52" text-anchor="middle" fill="#555" font-size="12">5</text>
-<text x="371" y="52" text-anchor="middle" fill="#555" font-size="12">6</text>
-<text x="405" y="52" text-anchor="middle" fill="#555" font-size="12">7</text>
-<text x="439" y="52" text-anchor="middle" fill="#555" font-size="12">8</text>
-<text x="473" y="52" text-anchor="middle" fill="#555" font-size="12">9</text>
-<text x="507" y="52" text-anchor="middle" fill="#555" font-size="12">10</text>
-<text x="541" y="52" text-anchor="middle" fill="#555" font-size="12">11</text>
-<text x="575" y="52" text-anchor="middle" fill="#555" font-size="12">12</text>
-<text x="609" y="52" text-anchor="middle" fill="#555" font-size="12">13</text>
-<text x="138" y="82" text-anchor="end" fill="#222">行 A<tspan baseline-shift="sub" font-size="11">i</tspan></text>
-<rect x="150" y="62" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="167.0" y="82.0" text-anchor="middle" fill="#222">0</text>
-<rect x="184" y="62" width="34" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="201.0" y="82.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<rect x="218" y="62" width="34" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="235.0" y="82.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<rect x="252" y="62" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="269.0" y="82.0" text-anchor="middle" fill="#222">0</text>
-<rect x="286" y="62" width="34" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="303.0" y="82.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<rect x="320" y="62" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="337.0" y="82.0" text-anchor="middle" fill="#222">0</text>
-<rect x="354" y="62" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="371.0" y="82.0" text-anchor="middle" fill="#222">0</text>
-<rect x="388" y="62" width="34" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="405.0" y="82.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<rect x="422" y="62" width="34" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="439.0" y="82.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<rect x="456" y="62" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="473.0" y="82.0" text-anchor="middle" fill="#222">0</text>
-<rect x="490" y="62" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="507.0" y="82.0" text-anchor="middle" fill="#222">0</text>
-<rect x="524" y="62" width="34" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="541.0" y="82.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<rect x="558" y="62" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="575.0" y="82.0" text-anchor="middle" fill="#222">0</text>
-<rect x="592" y="62" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="609.0" y="82.0" text-anchor="middle" fill="#222">0</text>
-<text x="634" y="82" fill="#555">…</text>
-<text x="138" y="126" text-anchor="end" fill="#222">行 A<tspan baseline-shift="sub" font-size="11">j</tspan></text>
-<rect x="150" y="106" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="167.0" y="126.0" text-anchor="middle" fill="#222">0</text>
-<rect x="184" y="106" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="201.0" y="126.0" text-anchor="middle" fill="#222">0</text>
-<rect x="218" y="106" width="34" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="235.0" y="126.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<rect x="252" y="106" width="34" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="269.0" y="126.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<rect x="286" y="106" width="34" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="303.0" y="126.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<rect x="320" y="106" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="337.0" y="126.0" text-anchor="middle" fill="#222">0</text>
-<rect x="354" y="106" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="371.0" y="126.0" text-anchor="middle" fill="#222">0</text>
-<rect x="388" y="106" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="405.0" y="126.0" text-anchor="middle" fill="#222">0</text>
-<rect x="422" y="106" width="34" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="439.0" y="126.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<rect x="456" y="106" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="473.0" y="126.0" text-anchor="middle" fill="#222">0</text>
-<rect x="490" y="106" width="34" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="507.0" y="126.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<rect x="524" y="106" width="34" height="30" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="541.0" y="126.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<rect x="558" y="106" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="575.0" y="126.0" text-anchor="middle" fill="#222">0</text>
-<rect x="592" y="106" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="609.0" y="126.0" text-anchor="middle" fill="#222">0</text>
-<text x="634" y="126" fill="#555">…</text>
-<text x="138" y="170" text-anchor="end" fill="#222">A<tspan baseline-shift="sub" font-size="11">i</tspan> AND A<tspan baseline-shift="sub" font-size="11">j</tspan></text>
-<rect x="150" y="150" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="167.0" y="170.0" text-anchor="middle" fill="#222">0</text>
-<rect x="184" y="150" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="201.0" y="170.0" text-anchor="middle" fill="#222">0</text>
-<rect x="218" y="150" width="34" height="30" fill="#ffd8a8" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="235.0" y="170.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<rect x="252" y="150" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="269.0" y="170.0" text-anchor="middle" fill="#222">0</text>
-<rect x="286" y="150" width="34" height="30" fill="#ffd8a8" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="303.0" y="170.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<rect x="320" y="150" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="337.0" y="170.0" text-anchor="middle" fill="#222">0</text>
-<rect x="354" y="150" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="371.0" y="170.0" text-anchor="middle" fill="#222">0</text>
-<rect x="388" y="150" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="405.0" y="170.0" text-anchor="middle" fill="#222">0</text>
-<rect x="422" y="150" width="34" height="30" fill="#ffd8a8" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="439.0" y="170.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<rect x="456" y="150" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="473.0" y="170.0" text-anchor="middle" fill="#222">0</text>
-<rect x="490" y="150" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="507.0" y="170.0" text-anchor="middle" fill="#222">0</text>
-<rect x="524" y="150" width="34" height="30" fill="#ffd8a8" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="541.0" y="170.0" text-anchor="middle" fill="#222" font-weight="bold">1</text>
-<rect x="558" y="150" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="575.0" y="170.0" text-anchor="middle" fill="#222">0</text>
-<rect x="592" y="150" width="34" height="30" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
-<text x="609.0" y="170.0" text-anchor="middle" fill="#222">0</text>
-<text x="634" y="170" fill="#555">…</text>
-<line x1="150" y1="144" x2="626" y2="144" stroke="#222" stroke-width="2"/>
-<text x="150" y="206" fill="#222">popcount（1 の個数）＝ 4：i と j の共通の隣接頂点の数</text>
-<text x="150" y="234" fill="#555" font-size="14">64 個の AND と 1 の数え上げを、それぞれ 1 回の語の演算で行う</text>
-<text x="150" y="256" fill="#555" font-size="14">橙のマス：両方が 1（共通の隣接頂点）</text>
+<text x="8" y="22" fill="#222">頂点の番号 k →（1 語は 64 個。</text>
+<text x="8" y="42" fill="#222">図は先頭の 14 個）</text>
+<text x="19" y="66" text-anchor="middle" fill="#555" font-size="12">0</text>
+<text x="41" y="66" text-anchor="middle" fill="#555" font-size="12">1</text>
+<text x="63" y="66" text-anchor="middle" fill="#555" font-size="12">2</text>
+<text x="85" y="66" text-anchor="middle" fill="#555" font-size="12">3</text>
+<text x="107" y="66" text-anchor="middle" fill="#555" font-size="12">4</text>
+<text x="129" y="66" text-anchor="middle" fill="#555" font-size="12">5</text>
+<text x="151" y="66" text-anchor="middle" fill="#555" font-size="12">6</text>
+<text x="173" y="66" text-anchor="middle" fill="#555" font-size="12">7</text>
+<text x="195" y="66" text-anchor="middle" fill="#555" font-size="12">8</text>
+<text x="217" y="66" text-anchor="middle" fill="#555" font-size="12">9</text>
+<text x="239" y="66" text-anchor="middle" fill="#555" font-size="12">10</text>
+<text x="261" y="66" text-anchor="middle" fill="#555" font-size="12">11</text>
+<text x="283" y="66" text-anchor="middle" fill="#555" font-size="12">12</text>
+<text x="305" y="66" text-anchor="middle" fill="#555" font-size="12">13</text>
+<text x="8" y="88" fill="#222">行 A<tspan baseline-shift="sub" font-size="11">i</tspan></text>
+<rect x="8" y="96" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="19" y="115" text-anchor="middle" fill="#222" font-size="13">0</text>
+<rect x="30" y="96" width="22" height="28" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="41" y="115" text-anchor="middle" fill="#222" font-size="13" font-weight="bold">1</text>
+<rect x="52" y="96" width="22" height="28" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="63" y="115" text-anchor="middle" fill="#222" font-size="13" font-weight="bold">1</text>
+<rect x="74" y="96" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="85" y="115" text-anchor="middle" fill="#222" font-size="13">0</text>
+<rect x="96" y="96" width="22" height="28" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="107" y="115" text-anchor="middle" fill="#222" font-size="13" font-weight="bold">1</text>
+<rect x="118" y="96" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="129" y="115" text-anchor="middle" fill="#222" font-size="13">0</text>
+<rect x="140" y="96" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="151" y="115" text-anchor="middle" fill="#222" font-size="13">0</text>
+<rect x="162" y="96" width="22" height="28" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="173" y="115" text-anchor="middle" fill="#222" font-size="13" font-weight="bold">1</text>
+<rect x="184" y="96" width="22" height="28" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="195" y="115" text-anchor="middle" fill="#222" font-size="13" font-weight="bold">1</text>
+<rect x="206" y="96" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="217" y="115" text-anchor="middle" fill="#222" font-size="13">0</text>
+<rect x="228" y="96" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="239" y="115" text-anchor="middle" fill="#222" font-size="13">0</text>
+<rect x="250" y="96" width="22" height="28" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="261" y="115" text-anchor="middle" fill="#222" font-size="13" font-weight="bold">1</text>
+<rect x="272" y="96" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="283" y="115" text-anchor="middle" fill="#222" font-size="13">0</text>
+<rect x="294" y="96" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="305" y="115" text-anchor="middle" fill="#222" font-size="13">0</text>
+<text x="320" y="115" fill="#555">…</text>
+<text x="8" y="146" fill="#222">行 A<tspan baseline-shift="sub" font-size="11">j</tspan></text>
+<rect x="8" y="154" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="19" y="173" text-anchor="middle" fill="#222" font-size="13">0</text>
+<rect x="30" y="154" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="41" y="173" text-anchor="middle" fill="#222" font-size="13">0</text>
+<rect x="52" y="154" width="22" height="28" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="63" y="173" text-anchor="middle" fill="#222" font-size="13" font-weight="bold">1</text>
+<rect x="74" y="154" width="22" height="28" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="85" y="173" text-anchor="middle" fill="#222" font-size="13" font-weight="bold">1</text>
+<rect x="96" y="154" width="22" height="28" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="107" y="173" text-anchor="middle" fill="#222" font-size="13" font-weight="bold">1</text>
+<rect x="118" y="154" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="129" y="173" text-anchor="middle" fill="#222" font-size="13">0</text>
+<rect x="140" y="154" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="151" y="173" text-anchor="middle" fill="#222" font-size="13">0</text>
+<rect x="162" y="154" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="173" y="173" text-anchor="middle" fill="#222" font-size="13">0</text>
+<rect x="184" y="154" width="22" height="28" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="195" y="173" text-anchor="middle" fill="#222" font-size="13" font-weight="bold">1</text>
+<rect x="206" y="154" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="217" y="173" text-anchor="middle" fill="#222" font-size="13">0</text>
+<rect x="228" y="154" width="22" height="28" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="239" y="173" text-anchor="middle" fill="#222" font-size="13" font-weight="bold">1</text>
+<rect x="250" y="154" width="22" height="28" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="261" y="173" text-anchor="middle" fill="#222" font-size="13" font-weight="bold">1</text>
+<rect x="272" y="154" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="283" y="173" text-anchor="middle" fill="#222" font-size="13">0</text>
+<rect x="294" y="154" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="305" y="173" text-anchor="middle" fill="#222" font-size="13">0</text>
+<text x="320" y="173" fill="#555">…</text>
+<line x1="8" y1="196" x2="316" y2="196" stroke="#222" stroke-width="2"/>
+<text x="8" y="218" fill="#222">A<tspan baseline-shift="sub" font-size="11">i</tspan> AND A<tspan baseline-shift="sub" font-size="11">j</tspan></text>
+<rect x="8" y="226" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="19" y="245" text-anchor="middle" fill="#222" font-size="13">0</text>
+<rect x="30" y="226" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="41" y="245" text-anchor="middle" fill="#222" font-size="13">0</text>
+<rect x="52" y="226" width="22" height="28" fill="#ffd8a8" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="63" y="245" text-anchor="middle" fill="#222" font-size="13" font-weight="bold">1</text>
+<rect x="74" y="226" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="85" y="245" text-anchor="middle" fill="#222" font-size="13">0</text>
+<rect x="96" y="226" width="22" height="28" fill="#ffd8a8" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="107" y="245" text-anchor="middle" fill="#222" font-size="13" font-weight="bold">1</text>
+<rect x="118" y="226" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="129" y="245" text-anchor="middle" fill="#222" font-size="13">0</text>
+<rect x="140" y="226" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="151" y="245" text-anchor="middle" fill="#222" font-size="13">0</text>
+<rect x="162" y="226" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="173" y="245" text-anchor="middle" fill="#222" font-size="13">0</text>
+<rect x="184" y="226" width="22" height="28" fill="#ffd8a8" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="195" y="245" text-anchor="middle" fill="#222" font-size="13" font-weight="bold">1</text>
+<rect x="206" y="226" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="217" y="245" text-anchor="middle" fill="#222" font-size="13">0</text>
+<rect x="228" y="226" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="239" y="245" text-anchor="middle" fill="#222" font-size="13">0</text>
+<rect x="250" y="226" width="22" height="28" fill="#ffd8a8" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="261" y="245" text-anchor="middle" fill="#222" font-size="13" font-weight="bold">1</text>
+<rect x="272" y="226" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="283" y="245" text-anchor="middle" fill="#222" font-size="13">0</text>
+<rect x="294" y="226" width="22" height="28" fill="#ffffff" stroke="#1f4e9a" stroke-width="1.2"/>
+<text x="305" y="245" text-anchor="middle" fill="#222" font-size="13">0</text>
+<text x="320" y="245" fill="#555">…</text>
+<text x="8" y="284" fill="#222">popcount（1 の個数）＝ 4：i と j の</text>
+<text x="8" y="304" fill="#222">共通の隣接頂点の数</text>
+<text x="8" y="324" fill="#555">64 個の AND と 1 の数え上げを、それぞれ</text>
+<text x="8" y="344" fill="#555">1 回の語の演算で行う</text>
+<text x="8" y="364" fill="#555">橙のマス：両方が 1（共通の隣接頂点）</text>
 </svg>

@@ -21,6 +21,7 @@ frequency: C
 frequency_evidence: recent 0・前提として 1 ページに届く（直接 1）・古い ABC 1 問
 sections:
   - {title: 何ができるか（後入れ先出しの取り消し）, anchor: what-it-does}
+  - {title: 自作するときの要点と Library Checker, anchor: library}
   - {title: なぜ経路圧縮をしないのか（戻すコストとならしの保証が崩れること）, anchor: no-path-compression}
   - {title: 木の DFS と組む（入るとき併合・出るとき取り消し）, anchor: with-dfs}
   - {title: オフライン動的連結性の部品（時間軸のセグメント木に辺を載せる → グラフの章）, anchor: offline-dynamic-connectivity}
@@ -51,6 +52,8 @@ updated: 2026-10-22
 
 取り消せるのは、まだ取り消していない併合のうち最も新しいものだけである。「3 回前の併合だけを取り消す」ことはできない。辺を好きな順で消したいときは、消す順を後入れ先出しに並べ替える工夫（[オフライン動的連結性](#offline-dynamic-connectivity)）と組み合わせる。
 
+## 自作するときの要点と Library Checker {#library}
+
 自作するときの要点は次の 3 つである。
 
 - **保つ性質**：各グループは根付き木で、根が代表元である。$\mathrm{par}[v]$ は、根なら $-(\text{大きさ})$、根でなければ親を指す（[Union-Find の保つ性質](../ds/union-find.md#invariants)と同じ）。加えて、記録のスタックを下から順に施せば、どの併合もしていない状態から今の状態が再現できる。
@@ -62,6 +65,8 @@ updated: 2026-10-22
 ```
 
 ACL の `dsu` は `leader` の中で経路圧縮をするので、取り消しには使えない。上のように自作するか、公開されているライブラリ（[参考](#references)の ei1333 氏・Nyaan 氏のもの）を使う。ただし ei1333 氏のものの snapshot は記録を捨てて今の時点を基準にし、rollback は引数なしでその時点まで戻す形で、上の説明の snapshot（併合の回数を返す）とは意味が違う。
+
+Library Checker で確かめるなら、[練習問題](#practice)の Persistent Unionfind（版の木を DFS でたどる）が使える。
 
 ## なぜ経路圧縮をしないのか（戻すコストとならしの保証が崩れること） {#no-path-compression}
 
@@ -101,6 +106,11 @@ ABC で出てくるのは、根付き木を DFS しながら、頂点に入る�
 
 ノードの入りと出が後入れ先出しになっているので、取り消しは常に最も新しい併合に当たる。辺 1 本は $O(\log Q)$ 個のノードに載り、併合 1 回が $O(\log N)$ なので、全体は $O(Q \log Q \log N)$ である。Library Checker の [Dynamic Graph Vertex Add Component Sum](#practice) は、これに頂点の値への加算と、成分の値の合計の質問を足した問題である。加算は取り消してはいけないので、合計の持ち方を工夫する。各頂点 $u$ に、Union-Find の木で $u$ の下にある頂点の値の合計 $\mathrm{sum}[u]$ を持たせる。併合（$b$ を $a$ の下へ）では $\mathrm{sum}[a] \mathrel{+}= \mathrm{sum}[b]$、取り消しでは $\mathrm{sum}[a] \mathrel{-}= \mathrm{sum}[b]$ とする。ただし同じ成分どうしの併合（$a = b$）の記録を取り消すときは引かない。引くと $\mathrm{sum}[a]$ が 0 になり、成分の合計が消える。葉で頂点 $v$ に $x$ を足すときは、$v$ から根までの経路上のすべての頂点の $\mathrm{sum}$ に $x$ を足す（経路の頂点は $O(\log N)$ 個）。こうすると $\mathrm{sum}[u]$ はいつも $u$ の下の合計に等しく、加えた値が取り消しで消えない。根だけに足すと、取り消しで $v$ が別の根の下に分かれたときに $x$ が元の根に残ってしまう。
 
+## 学ぶための資料 {#resources}
+
+- cp-algorithms の「Deleting from a data structure in O(T(n) log n)」（英語）：時間軸のセグメント木に辺を載せ、経路圧縮なしの Union-Find を DFS で取り消しながら使う手順を、短い実装とともに説明している
+- OI Wiki の「线段树与离线询问」（中国語）：時間軸のセグメント木で取り消しの構造を使う方法と、その応用の例がまとまっている
+
 ## 例題 {#examples}
 
 ### ABC302 Ex. Ball Collector {#abc302_h}
@@ -138,8 +148,8 @@ ABC で出てくるのは、根付き木を DFS しながら、頂点に入る�
 
 - [drken「AtCoder ABC 302 Ex - Ball Collector (橙色, 625 点)」](https://drken1215.hatenablog.com/entry/2023/06/10/032900)：例題の値を頂点にしたグラフ、成分ごとの $\min(\text{頂点数}, \text{辺数})$、DFS と undo つき Union-Find の組み合わせ、経路圧縮をしない注意
 - [ikatakos「AtCoder Beginner Contest 302 Ex 問題」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2023/0520_abc302)：例題の解法の確認（同じ成分どうしの辺でも辺数を数えること。解法の節だけを読んだ）
-- [cp-algorithms「Deleting from a data structure in O(T(n) log n)」](https://cp-algorithms.com/data_structures/deleting_in_log_n.html)：オフライン動的連結性の手順（時間軸のセグメント木・経路圧縮なしの Union-Find）。学ぶための資料（文章と図は使っていない）
-- [OI Wiki「线段树与离线询问」](https://oi-wiki.org/topic/segment-tree-offline/)：時間軸のセグメント木で取り消しの構造を使う方法と、その応用の例。学ぶための資料（文章と図は使っていない）
+- [cp-algorithms「Deleting from a data structure in O(T(n) log n)」](https://cp-algorithms.com/data_structures/deleting_in_log_n.html)：オフライン動的連結性の手順（時間軸のセグメント木・経路圧縮なしの Union-Find）（文章と図は使っていない）
+- [OI Wiki「线段树与离线询问」](https://oi-wiki.org/topic/segment-tree-offline/)：時間軸のセグメント木で取り消しの構造を使う方法と、その応用の例（文章と図は使っていない）
 - [ei1333「union-find-undo.hpp」](https://ei1333.github.io/library/structure/union-find/union-find-undo.hpp)：undo・snapshot・rollback を持つライブラリの例
 - [Nyaan「RollbackつきUnion Find」](https://nyaannyaan.github.io/library/data-structure/rollback-union-find.hpp)：各操作の計算量と、Library Checker での検証の例
 - [Library Checker「Persistent Unionfind」](https://judge.yosupo.jp/problem/persistent_unionfind)・[「Dynamic Graph Vertex Add Component Sum」](https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum)：練習の問題の内容（問題文は library-checker-problems のリポジトリで確かめた）

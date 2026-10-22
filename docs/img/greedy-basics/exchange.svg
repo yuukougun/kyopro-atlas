@@ -3,7 +3,7 @@
   <text x="16" y="28" font-size="16" fill="#222">値 9, 7, 6, 4, 2 から 3 個選び、和を最大にする</text>
   <!-- column highlight: the first value only G chose -->
   <rect x="226" y="44" width="68" height="206" fill="#fff4cc" stroke="#c99a00" stroke-dasharray="6 4"/>
-  <text x="260" y="270" font-size="14" fill="#7a5c00" text-anchor="middle">G だけが選んだ最初の値</text>
+  <text x="260" y="270" font-size="15" fill="#7a5c00" text-anchor="middle">G だけが選んだ最初の値</text>
   <!-- header values -->
   <g font-size="16" fill="#222" text-anchor="middle">
     <text x="190" y="66">9</text><text x="260" y="66">7</text><text x="330" y="66">6</text><text x="400" y="66">4</text><text x="470" y="66">2</text>
@@ -14,7 +14,7 @@
     <text x="16" y="162">ほかの解 O</text>
     <text x="16" y="222">入れ替えた O′</text>
   </g>
-  <g font-size="14" fill="#444">
+  <g font-size="15" fill="#444">
     <text x="16" y="120">和 22</text>
     <text x="16" y="180">和 19</text>
     <text x="16" y="240">和 22（= G）</text>
@@ -50,7 +50,7 @@
     <rect x="444" y="202" width="52" height="38"/>
   </g>
   <!-- labels in boxes -->
-  <g font-size="14" text-anchor="middle" fill="#1f4e8c">
+  <g font-size="15" text-anchor="middle" fill="#1f4e8c">
     <text x="190" y="106">選ぶ</text><text x="260" y="106">選ぶ</text><text x="330" y="106">選ぶ</text>
     <text x="190" y="166">選ぶ</text><text x="330" y="166">選ぶ</text><text x="400" y="166">選ぶ</text>
     <text x="190" y="226">選ぶ</text><text x="260" y="226">選ぶ</text><text x="330" y="226">選ぶ</text>

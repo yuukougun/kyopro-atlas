@@ -21,6 +21,7 @@ frequency_evidence: recent 0・前提として届くページなし・古い ABC
 sections:
   - {title: 各辺の存在する区間を時間軸のセグ木に載せる, anchor: time-segment-tree}
   - {title: DFS で入るときに併合・出るときに取り消す（ロールバック Union-Find はデータ構造の章）, anchor: dfs-rollback}
+  - {title: 自作するときの要点と Library Checker, anchor: library}
 stage: draft
 updated: 2026-10-22
 ---
@@ -92,13 +93,7 @@ dfs(node):
 --8<-- "offline-dynamic-connectivity/usage.cpp:usage"
 ```
 
-自作するときの要点は次のとおりである。
-
-- **時刻の約束**：時刻 $t$ を「$t$ 番目のクエリの直後」と決めると、$l$ 番目で追加・$r$ 番目で削除の辺は $[l, r)$ になる。質問のクエリは状態を変えない。だから、その時刻の葉で答えればよい。$r$ を含めて閉区間にすると、削除の直後の質問にもその辺が残る。
-- **区間の作り方**：今ある辺ごとに追加された時刻を連想配列に持ち、削除のたびに区間を閉じる。$u$ と $v$ の順を入れ替えた削除にも対応できるよう、キーは $(\min(u, v), \max(u, v))$ にそろえる。同じ辺が 2 本以上同時にありうる問題なら、キーごとに追加時刻の列を持つ。
-- **取り消しの回数**：同じ成分どうしで併合が起きなかったときは、記録を 1 つ積むか、成功した併合の回数を数えておく。ノードに載った辺の数だけ取り消すと、何もしなかった併合の分だけ余計に戻してしまう。
-- **連結成分の数**：併合が成功するたびに 1 減らし、取り消すたびに 1 増やしておけば、葉ではその値を読むだけでよい。
-- **再帰の深さ**：DFS の深さは $O(\log Q)$ なので、再帰で書いてよい。
+時刻の約束や取り消しの回数など、自作するときの注意は[自作するときの要点](#library)にまとめた。
 
 頂点の値の加算と、成分の値の合計の質問が加わる型もある。加算は時刻 $[t, Q)$ に存在する操作として同じ木に載せ、入るときにその時点の根の合計に足し、出るときに引けば、併合と同じく後入れ先出しで取り消せる。根には成分の値の合計を持たせ、併合で足し、取り消しで引く。同じノードに辺と加算があるときは、加算を先に引いてから併合を取り消す（逆にすると、引くときの根が足したときの根と変わる）。[ロールバックできる Union-Find の節](../ds/rollback-union-find.md#offline-dynamic-connectivity)は、加算を葉でそのまま行って取り消さない書き方で、値を Union-Find の木の経路に持たせる。そちらで「根だけに足すと崩れる」とあるのはその書き方の話で、ここでの方法とは食い違わない。
 
@@ -109,6 +104,23 @@ dfs(node):
 - 辺の削除だけで、先に全部読めるなら、時間を逆にたどって追加に変える（[Union-Find で連結性を扱う](../graph/union-find-connectivity.md#reverse-deletion)）。ロールバックと $\log$ の分が要らない
 - 辺や頂点を「1 つだけ」除いたときの連結成分の数を、全部の候補について求めるなら、[橋と関節点](../graph/lowlink.md#conditions)で $O(N + M)$ で済む
 - 追加と削除が混ざり、先に全部読めるなら、このページの方法を使う
+
+## 自作するときの要点と Library Checker {#library}
+
+ACL の `dsu` は経路圧縮をするので取り消せず、この方法には使えない。[ロールバックできる Union-Find](../ds/rollback-union-find.md) と時間軸のセグメント木を自作する。
+
+- **時刻の約束**：時刻 $t$ を「$t$ 番目のクエリの直後」と決めると、$l$ 番目で追加・$r$ 番目で削除の辺は $[l, r)$ になる。質問のクエリは状態を変えない。だから、その時刻の葉で答えればよい。$r$ を含めて閉区間にすると、削除の直後の質問にもその辺が残る。
+- **区間の作り方**：今ある辺ごとに追加された時刻を連想配列に持ち、削除のたびに区間を閉じる。$u$ と $v$ の順を入れ替えた削除にも対応できるよう、キーは $(\min(u, v), \max(u, v))$ にそろえる。同じ辺が 2 本以上同時にありうる問題なら、キーごとに追加時刻の列を持つ。
+- **取り消しの回数**：同じ成分どうしで併合が起きなかったときは、記録を 1 つ積むか、成功した併合の回数を数えておく。ノードに載った辺の数だけ取り消すと、何もしなかった併合の分だけ余計に戻してしまう。
+- **連結成分の数**：併合が成功するたびに 1 減らし、取り消すたびに 1 増やしておけば、葉ではその値を読むだけでよい。
+- **再帰の深さ**：DFS の深さは $O(\log Q)$ なので、再帰で書いてよい。
+
+Library Checker の Dynamic Graph Vertex Add Component Sum（[練習問題](#practice)）で、頂点の値の加算まで含めて確かめられる。
+
+## 学ぶための資料 {#resources}
+
+- cp-algorithms の「Deleting from a data structure in O(T(n) log n)」（英語）：時間軸のセグメント木に要素を載せて削除を取り消しに置き換える一般の枠組みと、動的連結性への適用
+- [ロールバックできる Union-Find](../ds/rollback-union-find.md)：取り消しのできる Union-Find の作り方と、この方法での使い方
 
 ## 例題 {#examples}
 
@@ -139,5 +151,5 @@ dfs(node):
 
 - [kmjp「AtCoder ABC #334 (ユニークビジョンプログラミングコンテスト2023 クリスマス) : G - Christmas Color Grid 2」](https://kmjp.hatenablog.jp/entry/2023/12/23/1030)：例題を、各マスが緑である時刻の区間をセグメント木に載せ、ロールバックできる Union-Find で DFS して解く方法
 - [あめんばーど「【AtCoder】G - Christmas Color Grid 2 / AtCoder Beginner Contest 334」](https://amentorimaru.hatenablog.com/entry/2025/04/11/210228)：例題を関節点で解く別解
-- [cp-algorithms「Deleting from a data structure in O(T(n) log n)」](https://cp-algorithms.com/data_structures/deleting_in_log_n.html)：時間軸のセグメント木に要素を載せて削除を取り消しに置き換える一般の枠組みと、動的連結性への適用（学ぶための資料。文章と図は使っていない）
+- [cp-algorithms「Deleting from a data structure in O(T(n) log n)」](https://cp-algorithms.com/data_structures/deleting_in_log_n.html)：時間軸のセグメント木に要素を載せて削除を取り消しに置き換える一般の枠組みと、動的連結性への適用（文章と図は使っていない）
 - [Library Checker「Dynamic Graph Vertex Add Component Sum」](https://github.com/yosupo06/library-checker-problems/tree/master/graph/dynamic_graph_vertex_add_component_sum)：練習の問題の内容（GitHub の問題文で確認）

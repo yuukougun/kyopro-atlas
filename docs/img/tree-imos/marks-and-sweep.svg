@@ -6,24 +6,24 @@
 <text x="20" y="101" font-size="13" text-anchor="start" font-weight="normal" fill="#222">印</text>
 <rect x="110" y="78" width="44" height="36" fill="#fff" stroke="#444"/>
 <text x="132" y="102" font-size="14" text-anchor="middle" font-weight="normal" fill="#222">0</text>
-<text x="132" y="72" font-size="12" text-anchor="middle" font-weight="normal" fill="#555">0</text>
+<text x="132" y="72" font-size="13" text-anchor="middle" font-weight="normal" fill="#555">0</text>
 <rect x="154" y="78" width="44" height="36" fill="#fff" stroke="#444"/>
 <text x="176" y="102" font-size="14" text-anchor="middle" font-weight="normal" fill="#222">+3</text>
-<text x="176" y="72" font-size="12" text-anchor="middle" font-weight="normal" fill="#555">1</text>
+<text x="176" y="72" font-size="13" text-anchor="middle" font-weight="normal" fill="#555">1</text>
 <rect x="198" y="78" width="44" height="36" fill="#fff" stroke="#444"/>
 <text x="220" y="102" font-size="14" text-anchor="middle" font-weight="normal" fill="#222">0</text>
-<text x="220" y="72" font-size="12" text-anchor="middle" font-weight="normal" fill="#555">2</text>
+<text x="220" y="72" font-size="13" text-anchor="middle" font-weight="normal" fill="#555">2</text>
 <rect x="242" y="78" width="44" height="36" fill="#fff" stroke="#444"/>
 <text x="264" y="102" font-size="14" text-anchor="middle" font-weight="normal" fill="#222">0</text>
-<text x="264" y="72" font-size="12" text-anchor="middle" font-weight="normal" fill="#555">3</text>
+<text x="264" y="72" font-size="13" text-anchor="middle" font-weight="normal" fill="#555">3</text>
 <rect x="286" y="78" width="44" height="36" fill="#fff" stroke="#444"/>
 <text x="308" y="102" font-size="14" text-anchor="middle" font-weight="normal" fill="#222">−3</text>
-<text x="308" y="72" font-size="12" text-anchor="middle" font-weight="normal" fill="#555">4</text>
+<text x="308" y="72" font-size="13" text-anchor="middle" font-weight="normal" fill="#555">4</text>
 <rect x="330" y="78" width="44" height="36" fill="#fff" stroke="#444"/>
 <text x="352" y="102" font-size="14" text-anchor="middle" font-weight="normal" fill="#222">0</text>
-<text x="352" y="72" font-size="12" text-anchor="middle" font-weight="normal" fill="#555">5</text>
+<text x="352" y="72" font-size="13" text-anchor="middle" font-weight="normal" fill="#555">5</text>
 <line x1="242" y1="120" x2="242" y2="148" stroke="#444" stroke-width="2" marker-end="url(#ar)"/>
-<text x="256" y="139" font-size="12" text-anchor="start" font-weight="normal" fill="#222">左から右へ累積</text>
+<text x="256" y="139" font-size="13" text-anchor="start" font-weight="normal" fill="#222">左から右へ累積</text>
 <text x="20" y="177" font-size="13" text-anchor="start" font-weight="normal" fill="#222">累積した後</text>
 <rect x="110" y="154" width="44" height="36" fill="#fff" stroke="#444"/>
 <text x="132" y="178" font-size="14" text-anchor="middle" font-weight="normal" fill="#222">0</text>
@@ -79,8 +79,8 @@
 <text x="340" y="425" font-size="14" text-anchor="middle" font-weight="bold" fill="#222">5</text>
 <text x="363" y="425" font-size="14" text-anchor="start" font-weight="normal" fill="#1f4e9a">11</text>
 <line x1="200" y1="332" x2="262" y2="332" stroke="#444" stroke-width="2" marker-end="url(#ar)"/>
-<text x="231" y="322" font-size="12" text-anchor="middle" font-weight="normal" fill="#222">根から下へ</text>
-<text x="231" y="352" font-size="12" text-anchor="middle" font-weight="normal" fill="#222">子 += 親</text>
+<text x="231" y="322" font-size="13" text-anchor="middle" font-weight="normal" fill="#222">根から下へ</text>
+<text x="231" y="352" font-size="13" text-anchor="middle" font-weight="normal" fill="#222">子 += 親</text>
 <text x="110" y="462" font-size="13" text-anchor="middle" font-weight="normal" fill="#222">印（太い円が印のある頂点）</text>
 <text x="350" y="462" font-size="13" text-anchor="middle" font-weight="normal" fill="#222">累積した後の値</text>
 <text x="230" y="496" font-size="13" text-anchor="middle" font-weight="normal" fill="#222">どちらも「印を置く」→「1 回の走査で累積する」の 2 段階</text>

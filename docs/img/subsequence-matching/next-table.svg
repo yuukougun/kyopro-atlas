@@ -1,65 +1,66 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 300" width="560" height="300" font-family="sans-serif" font-size="15">
-<rect x="0" y="0" width="560" height="300" fill="#ffffff"/>
-<text x="20" y="35" fill="#333">i</text>
-<text x="20" y="65" fill="#333">S[i]</text>
-<text x="130" y="35" text-anchor="middle" fill="#555">0</text>
-<text x="130" y="65" text-anchor="middle" fill="#000" font-weight="bold">a</text>
-<text x="190" y="35" text-anchor="middle" fill="#555">1</text>
-<text x="190" y="65" text-anchor="middle" fill="#000" font-weight="bold">b</text>
-<text x="250" y="35" text-anchor="middle" fill="#555">2</text>
-<text x="250" y="65" text-anchor="middle" fill="#000" font-weight="bold">c</text>
-<text x="310" y="35" text-anchor="middle" fill="#555">3</text>
-<text x="310" y="65" text-anchor="middle" fill="#000" font-weight="bold">a</text>
-<text x="370" y="35" text-anchor="middle" fill="#555">4</text>
-<text x="370" y="65" text-anchor="middle" fill="#000" font-weight="bold">b</text>
-<text x="430" y="35" text-anchor="middle" fill="#555">5</text>
-<text x="430" y="65" text-anchor="middle" fill="#777" font-size="12">番兵</text>
-<text x="20" y="116" fill="#333">nxt[i][a]</text>
-<rect x="100" y="90" width="60" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
-<text x="130" y="116" text-anchor="middle" fill="#000">0</text>
-<rect x="160" y="90" width="60" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
-<text x="190" y="116" text-anchor="middle" fill="#000">3</text>
-<rect x="220" y="90" width="60" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
-<text x="250" y="116" text-anchor="middle" fill="#000">3</text>
-<rect x="223" y="93" width="54" height="34" fill="none" stroke="#1a5fb4" stroke-width="3"/>
-<text x="266" y="106" text-anchor="middle" fill="#1a5fb4" font-size="13">②</text>
-<rect x="280" y="90" width="60" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
-<text x="310" y="116" text-anchor="middle" fill="#000">3</text>
-<rect x="340" y="90" width="60" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
-<text x="370" y="116" text-anchor="middle" fill="#000">5</text>
-<rect x="400" y="90" width="60" height="40" fill="#f2f2f2" stroke="#999" stroke-width="1"/>
-<text x="430" y="116" text-anchor="middle" fill="#000">5</text>
-<text x="20" y="156" fill="#333">nxt[i][b]</text>
-<rect x="100" y="130" width="60" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
-<text x="130" y="156" text-anchor="middle" fill="#000">1</text>
-<rect x="103" y="133" width="54" height="34" fill="none" stroke="#1a5fb4" stroke-width="3"/>
-<text x="146" y="146" text-anchor="middle" fill="#1a5fb4" font-size="13">①</text>
-<rect x="160" y="130" width="60" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
-<text x="190" y="156" text-anchor="middle" fill="#000">1</text>
-<rect x="220" y="130" width="60" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
-<text x="250" y="156" text-anchor="middle" fill="#000">4</text>
-<rect x="280" y="130" width="60" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
-<text x="310" y="156" text-anchor="middle" fill="#000">4</text>
-<rect x="340" y="130" width="60" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
-<text x="370" y="156" text-anchor="middle" fill="#000">4</text>
-<rect x="343" y="133" width="54" height="34" fill="none" stroke="#1a5fb4" stroke-width="3"/>
-<text x="386" y="146" text-anchor="middle" fill="#1a5fb4" font-size="13">③</text>
-<rect x="400" y="130" width="60" height="40" fill="#f2f2f2" stroke="#999" stroke-width="1"/>
-<text x="430" y="156" text-anchor="middle" fill="#000">5</text>
-<text x="20" y="196" fill="#333">nxt[i][c]</text>
-<rect x="100" y="170" width="60" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
-<text x="130" y="196" text-anchor="middle" fill="#000">2</text>
-<rect x="160" y="170" width="60" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
-<text x="190" y="196" text-anchor="middle" fill="#000">2</text>
-<rect x="220" y="170" width="60" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
-<text x="250" y="196" text-anchor="middle" fill="#000">2</text>
-<rect x="280" y="170" width="60" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
-<text x="310" y="196" text-anchor="middle" fill="#000">5</text>
-<rect x="340" y="170" width="60" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
-<text x="370" y="196" text-anchor="middle" fill="#000">5</text>
-<rect x="400" y="170" width="60" height="40" fill="#f2f2f2" stroke="#999" stroke-width="1"/>
-<text x="430" y="196" text-anchor="middle" fill="#000">5</text>
-<text x="20" y="240" fill="#000" font-size="14">T = bab の照合（太枠が引いた欄）：</text>
-<text x="20" y="262" fill="#000" font-size="14">① p = 0 で b を引いて 1、② p = 2 で a を引いて 3、</text>
-<text x="20" y="284" fill="#000" font-size="14">③ p = 4 で b を引いて 4。どれも 5（番兵）でないので部分列である</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 330" width="380" height="330" font-family="sans-serif" font-size="15">
+<rect x="0" y="0" width="380" height="330" fill="#ffffff"/>
+<text x="10" y="35" fill="#333">i</text>
+<text x="10" y="65" fill="#333">S[i]</text>
+<text x="113" y="35" text-anchor="middle" fill="#555">0</text>
+<text x="113" y="65" text-anchor="middle" fill="#000" font-weight="bold">a</text>
+<text x="159" y="35" text-anchor="middle" fill="#555">1</text>
+<text x="159" y="65" text-anchor="middle" fill="#000" font-weight="bold">b</text>
+<text x="205" y="35" text-anchor="middle" fill="#555">2</text>
+<text x="205" y="65" text-anchor="middle" fill="#000" font-weight="bold">c</text>
+<text x="251" y="35" text-anchor="middle" fill="#555">3</text>
+<text x="251" y="65" text-anchor="middle" fill="#000" font-weight="bold">a</text>
+<text x="297" y="35" text-anchor="middle" fill="#555">4</text>
+<text x="297" y="65" text-anchor="middle" fill="#000" font-weight="bold">b</text>
+<text x="343" y="35" text-anchor="middle" fill="#555">5</text>
+<text x="343" y="65" text-anchor="middle" fill="#777" font-size="13">番兵</text>
+<text x="10" y="116" fill="#333">nxt[i][a]</text>
+<rect x="90" y="90" width="46" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<text x="113" y="116" text-anchor="middle" fill="#000">0</text>
+<rect x="136" y="90" width="46" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<text x="159" y="116" text-anchor="middle" fill="#000">3</text>
+<rect x="182" y="90" width="46" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<text x="205" y="116" text-anchor="middle" fill="#000">3</text>
+<rect x="184.3" y="93" width="40" height="34" fill="none" stroke="#1a5fb4" stroke-width="3"/>
+<text x="217.267" y="106" text-anchor="middle" fill="#1a5fb4" font-size="13">②</text>
+<rect x="228" y="90" width="46" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<text x="251" y="116" text-anchor="middle" fill="#000">3</text>
+<rect x="274" y="90" width="46" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<text x="297" y="116" text-anchor="middle" fill="#000">5</text>
+<rect x="320" y="90" width="46" height="40" fill="#f2f2f2" stroke="#999" stroke-width="1"/>
+<text x="343" y="116" text-anchor="middle" fill="#000">5</text>
+<text x="10" y="156" fill="#333">nxt[i][b]</text>
+<rect x="90" y="130" width="46" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<text x="113" y="156" text-anchor="middle" fill="#000">1</text>
+<rect x="92.3" y="133" width="40" height="34" fill="none" stroke="#1a5fb4" stroke-width="3"/>
+<text x="125.267" y="146" text-anchor="middle" fill="#1a5fb4" font-size="13">①</text>
+<rect x="136" y="130" width="46" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<text x="159" y="156" text-anchor="middle" fill="#000">1</text>
+<rect x="182" y="130" width="46" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<text x="205" y="156" text-anchor="middle" fill="#000">4</text>
+<rect x="228" y="130" width="46" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<text x="251" y="156" text-anchor="middle" fill="#000">4</text>
+<rect x="274" y="130" width="46" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<text x="297" y="156" text-anchor="middle" fill="#000">4</text>
+<rect x="276.3" y="133" width="40" height="34" fill="none" stroke="#1a5fb4" stroke-width="3"/>
+<text x="309.267" y="146" text-anchor="middle" fill="#1a5fb4" font-size="13">③</text>
+<rect x="320" y="130" width="46" height="40" fill="#f2f2f2" stroke="#999" stroke-width="1"/>
+<text x="343" y="156" text-anchor="middle" fill="#000">5</text>
+<text x="10" y="196" fill="#333">nxt[i][c]</text>
+<rect x="90" y="170" width="46" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<text x="113" y="196" text-anchor="middle" fill="#000">2</text>
+<rect x="136" y="170" width="46" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<text x="159" y="196" text-anchor="middle" fill="#000">2</text>
+<rect x="182" y="170" width="46" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<text x="205" y="196" text-anchor="middle" fill="#000">2</text>
+<rect x="228" y="170" width="46" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<text x="251" y="196" text-anchor="middle" fill="#000">5</text>
+<rect x="274" y="170" width="46" height="40" fill="#ffffff" stroke="#999" stroke-width="1"/>
+<text x="297" y="196" text-anchor="middle" fill="#000">5</text>
+<rect x="320" y="170" width="46" height="40" fill="#f2f2f2" stroke="#999" stroke-width="1"/>
+<text x="343" y="196" text-anchor="middle" fill="#000">5</text>
+<text x="10" y="240" fill="#000" font-size="14">T = bab の照合（太枠が引いた欄）：</text>
+<text x="10" y="262" fill="#000" font-size="14">① p = 0 で b を引いて 1、② p = 2 で a を引いて 3、</text>
+<text x="10" y="284" fill="#000" font-size="14">③ p = 4 で b を引いて 4。</text>
+<text x="10" y="306" fill="#000" font-size="14">どれも 5（番兵）でないので部分列である</text>
 </svg>

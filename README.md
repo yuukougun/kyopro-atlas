@@ -43,7 +43,7 @@ claude.ai/code の **Projects** で、このリポジトリを読みながら解
 
 ## 手元でサイトを見る
 
-[uv](https://docs.astral.sh/uv/) と Node.js が要ります。
+サイトを見るだけなら [uv](https://docs.astral.sh/uv/) だけが要ります（Node.js は表記の検査 textlint にだけ使います）。
 
 ```bash
 uv sync --locked

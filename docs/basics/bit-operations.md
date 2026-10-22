@@ -23,7 +23,7 @@ frequency_evidence: recent 1（abc476_g）・前提として 45 ページに届�
 sections:
   - {title: AND・OR・XOR・シフトと演算子の優先順位, anchor: operators}
   - {title: XOR の性質（打ち消し・a + b との関係・0〜n の XOR）, anchor: xor-properties}
-  - {title: popcount・最下位ビット, anchor: popcount}
+  - {title: popcount・最下位 bit, anchor: popcount}
   - {title: 部分集合の部分集合の列挙（3^N）, anchor: submask}
 stage: draft
 updated: 2026-10-21
@@ -107,7 +107,7 @@ $$
 
         $a \oplus b = 6$ では、偶奇は合い、式からは $a \text{ AND } b = (10 - 6)/2 = 2$ になる。しかし $2 = 010$ と $6 = 110$ は bit 1 で重なる。同じ桁が AND と XOR の両方で 1 になることはないので、そのような $a, b$ はない。和 $S$ と XOR $X$ を満たす非負整数があるのは、$S \ge X$、$S - X$ が偶数、$((S - X)/2) \text{ AND } X = 0$ のときに限る。偶奇（最下位の桁）が合うことは必要条件にすぎない。
 
-## popcount・最下位ビット {#popcount}
+## popcount・最下位 bit {#popcount}
 
 popcount は 2 進表記の 1 の個数で、集合を整数で表したときの要素数にあたる。GCC では `__builtin_popcountll(x)` が `long long` を受け取る。末尾に `ll` のない `__builtin_popcount` は `unsigned int` を受け取るので、`long long` を渡すと上位 32 桁が黙って切り捨てられる（[落とし穴](#pitfalls)）。C++20 の `std::popcount` は符号なし整数しか受け取らない（[符号なしだけ](../cpp/cpp-math-functions.md#bit-unsigned-only)）。
 
@@ -153,7 +153,7 @@ $3^{15} \approx 1.4 \times 10^7$、$3^{16} \approx 4.3 \times 10^7$、$3^{18} \a
 
 ## 落とし穴 {#pitfalls}
 
-**`1 << k` は int で計算される**。`1` は `int` なので、`long long b = 1 << 31;` は `int` で計算してから広げられ、$-2147483648$ になる（C++20 以降は値が決まっているので、警告も出ない）。$k \ge 32$ では未定義動作である。手元の g++ の `-O2` では、定数の `1 << 40` は 0、入力から読んだ変数で `1 << n`（$n = 40$）は 256（$40 \bmod 32 = 8$ だけずらした値）になった。どちらも当てにならない。`long long` の桁を扱うときは `1LL << k` と書く（[シフトの幅](../cpp/cpp-integer-overflow.md#shift-width)）。
+**`1 << k` は int で計算される**。`1` は `int` なので、`long long b = 1 << 31;` は `int` で計算してから広げられ、$-2147483648$ になる（C++20 から規格で値が決まった。C++14・C++17 では処理系定義で、GCC では同じ値になる。どの版でも警告は出ない）。$k \ge 32$ では未定義動作である。手元の g++ の `-O2` では、定数の `1 << 40` は 0、入力から読んだ変数で `1 << n`（$n = 40$）は 256（$40 \bmod 32 = 8$ だけずらした値）になった。どちらも当てにならない。`long long` の桁を扱うときは `1LL << k` と書く（[シフトの幅](../cpp/cpp-integer-overflow.md#shift-width)）。
 
 **`__builtin_popcount` に `long long` を渡す**。`unsigned int` に切り詰められ、上位 32 桁の 1 が数えられない。警告は出ない。`long long` には `__builtin_popcountll` を使う。`__builtin_ctz`・`__builtin_clz` も同じで、さらに 0 を渡すと未定義動作になる。
 

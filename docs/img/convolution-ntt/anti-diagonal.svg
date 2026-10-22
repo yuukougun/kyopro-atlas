@@ -1,55 +1,57 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 370" width="640" height="370" font-family="sans-serif">
-<rect x="0" y="0" width="640" height="370" fill="#ffffff"/>
-<text x="320" y="28" text-anchor="middle" font-size="16" fill="#222">a<tspan baseline-shift="sub" font-size="11">i</tspan> × b<tspan baseline-shift="sub" font-size="11">j</tspan> の表を、i + j が同じ斜めの列ごとに足すと c<tspan baseline-shift="sub" font-size="11">k</tspan> になる</text>
-<text x="185.0" y="56" text-anchor="middle" font-size="14" fill="#555">j = 0</text>
-<text x="185.0" y="76" text-anchor="middle" font-size="16" fill="#222">b<tspan baseline-shift="sub" font-size="12">j</tspan> = 4</text>
-<text x="255.0" y="56" text-anchor="middle" font-size="14" fill="#555">j = 1</text>
-<text x="255.0" y="76" text-anchor="middle" font-size="16" fill="#222">b<tspan baseline-shift="sub" font-size="12">j</tspan> = 5</text>
-<text x="325.0" y="56" text-anchor="middle" font-size="14" fill="#555">j = 2</text>
-<text x="325.0" y="76" text-anchor="middle" font-size="16" fill="#222">b<tspan baseline-shift="sub" font-size="12">j</tspan> = 6</text>
-<text x="70" y="130.0" text-anchor="middle" font-size="14" fill="#555">i = 0</text>
-<text x="122" y="130.0" text-anchor="middle" font-size="16" fill="#222">a<tspan baseline-shift="sub" font-size="12">i</tspan> = 1</text>
-<text x="70" y="200.0" text-anchor="middle" font-size="14" fill="#555">i = 1</text>
-<text x="122" y="200.0" text-anchor="middle" font-size="16" fill="#222">a<tspan baseline-shift="sub" font-size="12">i</tspan> = 2</text>
-<text x="70" y="270.0" text-anchor="middle" font-size="14" fill="#555">i = 2</text>
-<text x="122" y="270.0" text-anchor="middle" font-size="16" fill="#222">a<tspan baseline-shift="sub" font-size="12">i</tspan> = 3</text>
-<rect x="150" y="90" width="70" height="70" fill="#fdebd0" stroke="#555" stroke-width="1.5"/>
-<text x="185.0" y="131.0" text-anchor="middle" font-size="18" fill="#222">4</text>
-<text x="214" y="105" text-anchor="end" font-size="14" fill="#555">k=0</text>
-<rect x="220" y="90" width="70" height="70" fill="#d6eaf8" stroke="#555" stroke-width="1.5"/>
-<text x="255.0" y="131.0" text-anchor="middle" font-size="18" fill="#222">5</text>
-<text x="284" y="105" text-anchor="end" font-size="14" fill="#555">k=1</text>
-<rect x="290" y="90" width="70" height="70" fill="#d5f5e3" stroke="#555" stroke-width="1.5"/>
-<text x="325.0" y="131.0" text-anchor="middle" font-size="18" fill="#222">6</text>
-<text x="354" y="105" text-anchor="end" font-size="14" fill="#555">k=2</text>
-<rect x="150" y="160" width="70" height="70" fill="#d6eaf8" stroke="#555" stroke-width="1.5"/>
-<text x="185.0" y="201.0" text-anchor="middle" font-size="18" fill="#222">8</text>
-<text x="214" y="175" text-anchor="end" font-size="14" fill="#555">k=1</text>
-<rect x="220" y="160" width="70" height="70" fill="#d5f5e3" stroke="#555" stroke-width="1.5"/>
-<text x="255.0" y="201.0" text-anchor="middle" font-size="18" fill="#222">10</text>
-<text x="284" y="175" text-anchor="end" font-size="14" fill="#555">k=2</text>
-<rect x="290" y="160" width="70" height="70" fill="#fadbd8" stroke="#555" stroke-width="1.5"/>
-<text x="325.0" y="201.0" text-anchor="middle" font-size="18" fill="#222">12</text>
-<text x="354" y="175" text-anchor="end" font-size="14" fill="#555">k=3</text>
-<rect x="150" y="230" width="70" height="70" fill="#d5f5e3" stroke="#555" stroke-width="1.5"/>
-<text x="185.0" y="271.0" text-anchor="middle" font-size="18" fill="#222">12</text>
-<text x="214" y="245" text-anchor="end" font-size="14" fill="#555">k=2</text>
-<rect x="220" y="230" width="70" height="70" fill="#fadbd8" stroke="#555" stroke-width="1.5"/>
-<text x="255.0" y="271.0" text-anchor="middle" font-size="18" fill="#222">15</text>
-<text x="284" y="245" text-anchor="end" font-size="14" fill="#555">k=3</text>
-<rect x="290" y="230" width="70" height="70" fill="#e8daef" stroke="#555" stroke-width="1.5"/>
-<text x="325.0" y="271.0" text-anchor="middle" font-size="18" fill="#222">18</text>
-<text x="354" y="245" text-anchor="end" font-size="14" fill="#555">k=4</text>
-<text x="420" y="82" font-size="15" fill="#222">斜めの列ごとの和</text>
-<rect x="420" y="94" width="22" height="22" fill="#fdebd0" stroke="#555"/>
-<text x="452" y="110" font-size="15" fill="#222">c<tspan baseline-shift="sub" font-size="11">0</tspan> = 4</text>
-<rect x="420" y="136" width="22" height="22" fill="#d6eaf8" stroke="#555"/>
-<text x="452" y="152" font-size="15" fill="#222">c<tspan baseline-shift="sub" font-size="11">1</tspan> = 5 + 8 = 13</text>
-<rect x="420" y="178" width="22" height="22" fill="#d5f5e3" stroke="#555"/>
-<text x="452" y="194" font-size="15" fill="#222">c<tspan baseline-shift="sub" font-size="11">2</tspan> = 6 + 10 + 12 = 28</text>
-<rect x="420" y="220" width="22" height="22" fill="#fadbd8" stroke="#555"/>
-<text x="452" y="236" font-size="15" fill="#222">c<tspan baseline-shift="sub" font-size="11">3</tspan> = 12 + 15 = 27</text>
-<rect x="420" y="262" width="22" height="22" fill="#e8daef" stroke="#555"/>
-<text x="452" y="278" font-size="15" fill="#222">c<tspan baseline-shift="sub" font-size="11">4</tspan> = 18</text>
-<text x="320" y="345" text-anchor="middle" font-size="15" fill="#222">(1 + 2x + 3x²)(4 + 5x + 6x²) = 4 + 13x + 28x² + 27x³ + 18x⁴</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="40 0 325 628" width="325" height="628" font-family="sans-serif">
+<rect x="0" y="0" width="640" height="640" fill="#ffffff"/>
+<text x="202" y="24" text-anchor="middle" font-size="15" fill="#222">a<tspan baseline-shift="sub" font-size="11">i</tspan> × b<tspan baseline-shift="sub" font-size="11">j</tspan> の表を、i + j が同じ</text>
+<text x="202" y="44" text-anchor="middle" font-size="15" fill="#222">斜めの列ごとに足すと c<tspan baseline-shift="sub" font-size="11">k</tspan> になる</text>
+<text x="185" y="76" text-anchor="middle" font-size="14" fill="#555">j = 0</text>
+<text x="185" y="96" text-anchor="middle" font-size="16" fill="#222">b<tspan baseline-shift="sub" font-size="12">j</tspan> = 4</text>
+<text x="255" y="76" text-anchor="middle" font-size="14" fill="#555">j = 1</text>
+<text x="255" y="96" text-anchor="middle" font-size="16" fill="#222">b<tspan baseline-shift="sub" font-size="12">j</tspan> = 5</text>
+<text x="325" y="76" text-anchor="middle" font-size="14" fill="#555">j = 2</text>
+<text x="325" y="96" text-anchor="middle" font-size="16" fill="#222">b<tspan baseline-shift="sub" font-size="12">j</tspan> = 6</text>
+<text x="70" y="150" text-anchor="middle" font-size="14" fill="#555">i = 0</text>
+<text x="122" y="150" text-anchor="middle" font-size="16" fill="#222">a<tspan baseline-shift="sub" font-size="12">i</tspan> = 1</text>
+<text x="70" y="220" text-anchor="middle" font-size="14" fill="#555">i = 1</text>
+<text x="122" y="220" text-anchor="middle" font-size="16" fill="#222">a<tspan baseline-shift="sub" font-size="12">i</tspan> = 2</text>
+<text x="70" y="290" text-anchor="middle" font-size="14" fill="#555">i = 2</text>
+<text x="122" y="290" text-anchor="middle" font-size="16" fill="#222">a<tspan baseline-shift="sub" font-size="12">i</tspan> = 3</text>
+<rect x="150" y="110" width="70" height="70" fill="#fdebd0" stroke="#555" stroke-width="1.5"/>
+<text x="185" y="151" text-anchor="middle" font-size="18" fill="#222">4</text>
+<text x="214" y="125" text-anchor="end" font-size="14" fill="#555">k=0</text>
+<rect x="220" y="110" width="70" height="70" fill="#d6eaf8" stroke="#555" stroke-width="1.5"/>
+<text x="255" y="151" text-anchor="middle" font-size="18" fill="#222">5</text>
+<text x="284" y="125" text-anchor="end" font-size="14" fill="#555">k=1</text>
+<rect x="290" y="110" width="70" height="70" fill="#d5f5e3" stroke="#555" stroke-width="1.5"/>
+<text x="325" y="151" text-anchor="middle" font-size="18" fill="#222">6</text>
+<text x="354" y="125" text-anchor="end" font-size="14" fill="#555">k=2</text>
+<rect x="150" y="180" width="70" height="70" fill="#d6eaf8" stroke="#555" stroke-width="1.5"/>
+<text x="185" y="221" text-anchor="middle" font-size="18" fill="#222">8</text>
+<text x="214" y="195" text-anchor="end" font-size="14" fill="#555">k=1</text>
+<rect x="220" y="180" width="70" height="70" fill="#d5f5e3" stroke="#555" stroke-width="1.5"/>
+<text x="255" y="221" text-anchor="middle" font-size="18" fill="#222">10</text>
+<text x="284" y="195" text-anchor="end" font-size="14" fill="#555">k=2</text>
+<rect x="290" y="180" width="70" height="70" fill="#fadbd8" stroke="#555" stroke-width="1.5"/>
+<text x="325" y="221" text-anchor="middle" font-size="18" fill="#222">12</text>
+<text x="354" y="195" text-anchor="end" font-size="14" fill="#555">k=3</text>
+<rect x="150" y="250" width="70" height="70" fill="#d5f5e3" stroke="#555" stroke-width="1.5"/>
+<text x="185" y="291" text-anchor="middle" font-size="18" fill="#222">12</text>
+<text x="214" y="265" text-anchor="end" font-size="14" fill="#555">k=2</text>
+<rect x="220" y="250" width="70" height="70" fill="#fadbd8" stroke="#555" stroke-width="1.5"/>
+<text x="255" y="291" text-anchor="middle" font-size="18" fill="#222">15</text>
+<text x="284" y="265" text-anchor="end" font-size="14" fill="#555">k=3</text>
+<rect x="290" y="250" width="70" height="70" fill="#e8daef" stroke="#555" stroke-width="1.5"/>
+<text x="325" y="291" text-anchor="middle" font-size="18" fill="#222">18</text>
+<text x="354" y="265" text-anchor="end" font-size="14" fill="#555">k=4</text>
+<text x="60" y="354" font-size="15" fill="#222">斜めの列ごとの和</text>
+<rect x="60" y="366" width="22" height="22" fill="#fdebd0" stroke="#555"/>
+<text x="92" y="382" font-size="15" fill="#222">c<tspan baseline-shift="sub" font-size="11">0</tspan> = 4</text>
+<rect x="60" y="408" width="22" height="22" fill="#d6eaf8" stroke="#555"/>
+<text x="92" y="424" font-size="15" fill="#222">c<tspan baseline-shift="sub" font-size="11">1</tspan> = 5 + 8 = 13</text>
+<rect x="60" y="450" width="22" height="22" fill="#d5f5e3" stroke="#555"/>
+<text x="92" y="466" font-size="15" fill="#222">c<tspan baseline-shift="sub" font-size="11">2</tspan> = 6 + 10 + 12 = 28</text>
+<rect x="60" y="492" width="22" height="22" fill="#fadbd8" stroke="#555"/>
+<text x="92" y="508" font-size="15" fill="#222">c<tspan baseline-shift="sub" font-size="11">3</tspan> = 12 + 15 = 27</text>
+<rect x="60" y="534" width="22" height="22" fill="#e8daef" stroke="#555"/>
+<text x="92" y="550" font-size="15" fill="#222">c<tspan baseline-shift="sub" font-size="11">4</tspan> = 18</text>
+<text x="60" y="590" font-size="15" fill="#222">(1 + 2x + 3x²)(4 + 5x + 6x²)</text>
+<text x="60" y="612" font-size="15" fill="#222">= 4 + 13x + 28x² + 27x³ + 18x⁴</text>
 </svg>

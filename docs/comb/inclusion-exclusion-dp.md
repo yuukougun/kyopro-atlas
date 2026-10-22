@@ -144,7 +144,7 @@ $$
 
 状態数は $N \cdot N \cdot 2^{2X-1}$、遷移は $2X$ 通りなので、計算量は $O(N^2 X 4^X)$ である。$X = 5$ のとき $2^{2X-1} = 512$ で、$N = 100$ なら $N^2 \cdot 2X \cdot 512 \approx 5 \times 10^7$ 回ほどである。
 
-- **応用の型**（2 つの順列の両方と異なる）：$r_i \ne p_i$ かつ $r_i \ne q_i$ のように禁止の値が位置ごとに 2 つあるときも、答えは $\sum_k (-1)^k r_k (N - k)!$ である。値 $p_i$ と $q_i$ を辺で結ぶと、グラフはサイクルの集まりになる。$r_k$ は、$k$ 本の辺に端点を 1 つずつ重ならずに割り当てる方法の数である。サイクルごとに DP で数え、サイクルどうしを[ナップサック](../dp/knapsack-01.md)のように畳み込む（力試しの [ABC214 G](#challenge)）。
+- **応用の型**（2 つの順列の両方と異なる）：$r_i \ne p_i$ かつ $r_i \ne q_i$ のように禁止の値が位置ごとに 2 つあるときも、答えは $\sum_k (-1)^k r_k (N - k)!$ である。値 $p_i$ と $q_i$ を辺で結ぶと、グラフは閉路の集まりになる。$r_k$ は、$k$ 本の辺に端点を 1 つずつ重ならずに割り当てる方法の数である。閉路ごとに DP で数え、閉路どうしを[ナップサック](../dp/knapsack-01.md)のように畳み込む（力試しの [ABC214 G](#challenge)）。
 - **応用の型**（違反の個数ごとの表を先に作る）：「ちょうど $t$ 個の位置で条件を破るもの」を問われても、$r_k (N - k)!$ の表から二項係数で戻せる。$r_k (N - k)!$ は $k$ 個の位置を指定して数えた数の和で、ちょうど $t$ 個破るものを $\binom{t}{k}$ 回数えている。そのため $e_t = \sum_{k \ge t} (-1)^{k - t} \binom{k}{t} r_k (N - k)!$ で戻る。
 
 ## 「等しい」を区間にまとめる符号付き DP {#equal-blocks}
@@ -246,7 +246,7 @@ $\lvert P_i - i \rvert < X$ となる位置を「違反」とし、違反を $k$
 </div>
 
 ??? note "練習の方針"
-    - **ABC462 G**：一致する組を $k$ 組指定する包除にする。色 $c$ が玉に $x$ 個、指定に $y$ 個あるとき、一致を $i$ 組指定する方法は $\binom{x}{i} \binom{y}{i} i!$ である。色ごとの多項式を掛けて $r_k$ を作り、$\sum (-1)^k r_k (N - k)! / N!$ を取る。多項式の積は分割統治で掛ける
+    - **ABC462 G**：一致する組を $k$ 組指定する包除にする。色 $c$ が玉に $x$ 個、指定に $y$ 個あるとき、一致を $i$ 組指定する方法は $\binom{x}{i} \binom{y}{i} i!$ である。色ごとの多項式を掛けて $r_k$ を作り、$\sum (-1)^k r_k (N - k)! / N!$ を取る。多項式の積は分割統治で掛ける。
     - **ARC115 E**：等しいと指定した隣接で列を区間に分け、符号 $(-1)^{\ell - 1}$ と区間の $A$ の最小値を掛ける DP にする。$N \le 5 \times 10^5$ なので、符号を $h[i] = (-1)^i \mathrm{dp}[i]$ にまとめ、$\min$ が同じ $j$ を単調スタックでまとめて $O(N)$ にする。
 
 ## 力試し {#challenge}
@@ -260,8 +260,8 @@ $\lvert P_i - i \rvert < X$ となる位置を「違反」とし、違反を $k$
 </div>
 
 ??? note "力試しの方針"
-    - **ARC121 E**：条件を破る頂点を $k$ 個指定する包除にする。部分木ごとに「指定した個数」を状態に持つ木 DP（二乗の木 DP で $O(N^2)$）で $r_k$ を求め、$\sum (-1)^k r_k (N - k)!$ を取る
-    - **ABC214 G**：$p_i$ と $q_i$ を辺で結ぶと、グラフは自己ループとサイクルの集まりになる。違反の $k$ 個の選び方は、各辺にその端点の 1 つを、同じ頂点を 2 回使わないように割り当てる方法の数である。サイクルごとに辺の向きを DP で数え、サイクルどうしをナップサックのように畳み込んで $r_k$ を求め、$\sum_k (-1)^k r_k (N - k)!$ を取る。長さ $L$ のサイクルですべての辺を選ぶ方法は 2 通り（向きが 2 つ）で、一部だけなら選んだ辺がパスに分かれる。
+    - **ARC121 E**：条件を破る頂点を $k$ 個指定する包除にする。部分木ごとに「指定した個数」を状態に持つ木 DP（二乗の木 DP で $O(N^2)$）で $r_k$ を求め、$\sum (-1)^k r_k (N - k)!$ を取る。
+    - **ABC214 G**：$p_i$ と $q_i$ を辺で結ぶと、グラフは自己ループと閉路の集まりになる。違反の $k$ 個の選び方は、各辺にその端点の 1 つを、同じ頂点を 2 回使わないように割り当てる方法の数である。閉路ごとに辺の向きを DP で数え、閉路どうしをナップサックのように畳み込んで $r_k$ を求め、$\sum_k (-1)^k r_k (N - k)!$ を取る。長さ $L$ の閉路ですべての辺を選ぶ方法は 2 通り（向きが 2 つ）で、一部だけなら選んだ辺がパスに分かれる。
     - **ARC101 E**：どのパスにも含まれない辺の集合を切ると決め、[符号付きの木 DP](#tree) で根を含む成分の大きさを状態に持つ。大きさ $s$ の成分の組み方は $s$ が偶数のとき $(s - 1)(s - 3) \cdots 1$ である。
 
 ## 確認問題 {#quiz}
@@ -287,9 +287,9 @@ $\lvert P_i - i \rvert < X$ となる位置を「違反」とし、違反を $k$
 ## 使い分け {#comparison}
 
 - 条件が 20 個程度までなら、$S$ を [bit 全探索](../comb/inclusion-exclusion.md#bit-enumeration)すれば DP は要らない。$N(S)$ が $\lvert S \rvert$ だけで決まるなら、[個数 k ごとにまとめる](../comb/inclusion-exclusion.md#symmetric)方が簡単である。
-- グリッドが小さくて表を作れるなら、障害物のマスを 0 にする[グリッドの DP](../dp/dp-grid.md) の方が簡単である
-- 条件が約数の構造（gcd・周期）なら[約数包除](../comb/divisor-inclusion-exclusion.md)を使う
-- 順列の位置と値の差の条件は、包除を使わずに[挿入 DP](../dp/insertion-dp.md) でも数えられることがある。窓が小さく「違反の個数」で分けやすいなら包除 DP、未確定の個数を持つ方が自然なら挿入 DP を選ぶ
+- グリッドが小さくて表を作れるなら、障害物のマスを 0 にする[グリッドの DP](../dp/dp-grid.md) の方が簡単である。
+- 条件が約数の構造（gcd・周期）なら[約数包除](../comb/divisor-inclusion-exclusion.md)を使う。
+- 順列の位置と値の差の条件は、包除を使わずに[挿入 DP](../dp/insertion-dp.md) でも数えられることがある。窓が小さく「違反の個数」で分けやすいなら包除 DP、未確定の個数を持つ方が自然なら挿入 DP を選ぶ。
 
 ## 参考 {#references}
 
@@ -297,7 +297,7 @@ $\lvert P_i - i \rvert < X$ となる位置を「違反」とし、違反を $k$
 - [tibrella「ABC309G Ban Permutation 题解」](https://blog.tibrella.space/post/abc309g-solution/)：例題の ABC309 G の方針（盤面のルークとみなし、違反の個数と窓の bit 集合を持つ DP）
 - [kmjp「AtCoder ABC #309 (デンソークリエイトプログラミングコンテスト2023) : G - Ban Permutation」](https://kmjp.hatenablog.jp/entry/2023/07/08/1000)：ABC309 G を包除を使わずに数える別の解き方
 - [drken「AtCoder ARC 115 E - LEQ and NEQ (3E, 黄色, 700 点)」](https://drken1215.hatenablog.com/entry/2021/03/21/235000_1)：練習の ARC115 E の方針（区間にまとめる符号付き DP と単調スタック）
-- [kmjp「AtCoder ABC #214 : G - Three Permutations」](https://kmjp.hatenablog.jp/entry/2021/08/16/0900)：力試しの ABC214 G の方針（サイクルごとの DP と包除）
+- [kmjp「AtCoder ABC #214 : G - Three Permutations」](https://kmjp.hatenablog.jp/entry/2021/08/16/0900)：力試しの ABC214 G の方針（閉路ごとの DP と包除）
 - [drken「AtCoder ARC 101 E - Ribbons on Tree (赤色, 900 点)」](https://drken1215.hatenablog.com/entry/2019/06/21/024200)：力試しの ARC101 E の方針（切る辺の集合で包除する木 DP）
 - [kmjp「AtCoder ABC #462 (CodeQUEEN 2026 予選) : G - Completely Wrong」](https://kmjp.hatenablog.jp/entry/2026/06/13/0900)：練習 ABC462 G の色ごとの多項式と包除
 - [ikatakos「CodeQUEEN 2026 予選 (AtCoder Beginner Contest 462)E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0613_abc462)：練習 ABC462 G の同じ方針（解説の部分だけを参照）

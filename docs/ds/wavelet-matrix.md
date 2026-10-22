@@ -21,14 +21,14 @@ frequency: C
 frequency_evidence: recent 0・前提として届くページなし・古い ABC 2 問
 sections:
   - {title: 何ができるか（区間の K 番目・x 未満の個数・和）, anchor: what-it-does}
-  - {title: 段の作り方（上位ビットから安定に振り分ける）, anchor: build}
+  - {title: 段の作り方（上位 bit から安定に振り分ける）, anchor: build}
   - {title: ライブラリでの使い方と、マージソート木・永続セグメント木との比較, anchor: usage}
 stage: draft
 updated: 2026-10-22
 ---
 
 !!! abstract "要点"
-    - **何ができるか**：区間の K 番目の値・x 未満の個数・和を、オンラインで $O(\log \sigma)$ で答える静的な構造。値を上位ビットから順に安定に 0/1 で振り分けた段を重ね、各段で 0 の個数の累積を持つ。
+    - **何ができるか**：区間の K 番目の値・x 未満の個数・和を、オンラインで $O(\log \sigma)$ で答える静的な構造。値を上位 bit から順に安定に 0/1 で振り分けた段を重ね、各段で 0 の個数の累積を持つ。
     - **いつ使うか**：
         - 区間の K 番目に小さい値をオンラインで答える
         - 長方形（添字の範囲 × 値の範囲）の中の点の数
@@ -59,7 +59,7 @@ Wavelet Matrix は、更新のない列 $A$ について「添字が $[l, r)$、
 
 先読みできるなら、値の順に BIT へ足していく[オフライン](../guide/glossary.md#offline)の方法（[クエリの先読み](../ds/offline-queries.md)・[平面走査](../ds/sweep-line-2d.md)）の方が軽い。列に更新があると Wavelet Matrix は作り直しになるので使えない。
 
-## 段の作り方（上位ビットから安定に振り分ける） {#build}
+## 段の作り方（上位 bit から安定に振り分ける） {#build}
 
 Wavelet Matrix は、値の bit 数 $L$ と同じ数の段からなる。段 $0$ の並びは $A$ そのものである。段 $d$ では上から $d$ 番目の bit（bit $L - 1 - d$）を見て、その bit が 0 の要素を前へ、1 の要素を後ろへ、それぞれの順を保って移す（安定な振り分け）。移した後の並びが段 $d + 1$ の並びになる。
 
@@ -116,7 +116,7 @@ ACL には Wavelet Matrix がない。自作するなら、上のコード片か
 
 永続セグメント木は、接頭辞ごとに「値の個数のセグメント木」の版を作り、版 $r$ と版 $l$ の差で区間の分布を見る。Wavelet Matrix とできることはほぼ同じで、ポインタを持つぶん定数倍とメモリが重い。Wavelet Matrix は配列だけで書けるので速い。
 
-学ぶための資料は次の 3 つがよい。
+## 学ぶための資料 {#resources}
 
 - convexineq 氏の Qiita の記事：マージソート木・Fractional Cascading・Wavelet Tree・Wavelet Matrix を 1 つの流れで説明しており、Wavelet Matrix が「段ごとの並びにまとめたマージソート木」であることが分かる。
 - miti-7 氏のブログの記事：K 番目・範囲の個数・前後の値・頻度の上位など、Wavelet Matrix でできる操作を図付きで一覧にしている。

@@ -2,11 +2,11 @@
 
 > AtCoder で黄色（レート 2000）を目指す学習者向けの、辞書として引く競技プログラミングの教材。手法・考察・データ構造・数学・C++ のページを分野ごとに置く。
 
-- 版：2056caa12485（updated の最大：2026-10-22）。tools/gen_site.py が生成する
-- ページ数：353（準備中 0）
+- 版：aee06870c1a7（updated の最大：2026-10-22）。tools/gen_site.py が生成する
+- ページ数：353
 - 1 行が 1 ページ：「- [タイトル](URL)（id・レベル・分野・段階）：要約」
 - レベルは difficulty の帯：基礎 〜1199・水 1200〜1599・青 1600〜1999・黄 2000〜2399・発展 2400〜（概要だけ）。「—」はレベルを持たないページ
-- 段階：stub は準備中（要約と前提しかないので根拠にしない）、draft は執筆中、reviewed は検証済み、done は完成
+- 段階：stub は準備中（要約と前提しかないので根拠にしない）、draft は本文あり・未検証、reviewed は検証済み、done は完成
 - 別名・問題のサイン・手法の種類・前提・節（アンカー付きの URL）は、下の分野ごとの詳細索引にある
 
 ## 分野ごとの詳細索引
@@ -49,7 +49,7 @@
 - [ストレステストと実験](https://yuukougun.github.io/kyopro-atlas/guide/stress-testing/)（stress-testing・—・guide・draft）：WA の原因が見つからないときに、愚直解と本解を小さいランダムな入力で比べて反例を探せる。小さいケースの全探索で表を作り、規則を予想する実験の手順も示す。
 - [早見表](https://yuukougun.github.io/kyopro-atlas/guide/cheatsheet/)（cheatsheet・—・guide・draft）：コンテスト中や解説を読むときに、計算量と制約、型の範囲、数の目安、STL と ACL の計算量、mod の性質、よく使う公式、bit 演算の小技をすぐ引ける。各行から詳しいページへつなぐ。
 - [用語集](https://yuukougun.github.io/kyopro-atlas/guide/glossary/)（glossary・—・guide・draft）：本文で使う用語の短い定義と、表記の正規形（セグ木とセグメント木、DFS と深さ優先探索など）を引ける。本文の用語の最初の出現からリンクされ、表記の検査（prh）の元にもなる。
-- [自作ライブラリの設計と動作確認](https://yuukougun.github.io/kyopro-atlas/guide/library-design/)（library-design・—・guide・draft）：自作ライブラリを何から作るか、ACL を手本にしたインターフェースとヘッダの書き方、Library Checker などでの動作確認の手順がわかる。確認用の問題の対応表は各ページの verify から生成する。
+- [自作ライブラリの設計と動作確認](https://yuukougun.github.io/kyopro-atlas/guide/library-design/)（library-design・—・guide・draft）：自作ライブラリを何から作るか、ACL を手本にしたインターフェースとヘッダの書き方、Library Checker などでの動作確認の手順がわかる。提出用の展開の仕方と、各ページの確認用の問題の表もある。
 
 ## 基本テクニック
 
@@ -340,7 +340,7 @@
 - [幾何分布とコンプリートガチャ](https://yuukougun.github.io/kyopro-atlas/comb/coupon-collector/)（coupon-collector・基礎・comb・draft）：成功確率 p の試行を成功するまで繰り返す回数の期待値は 1/p である。N 種類が等確率で出るとき全種類がそろうまでの回数の期待値は、段階ごとの N/(N−k) を足した N(1 + 1/2 + … + 1/N) になる。
 - [確率・期待値を mod 998244353 で答える](https://yuukougun.github.io/kyopro-atlas/comb/rational-mod/)（rational-mod・水・comb・draft）：確率・期待値の既約分数 P/Q を P × Q^(−1) mod 998244353 で答える。逆元の掛け算でも四則の関係は保たれるので実数の計算をそのまま mod で行ってよいが、mod の値どうしは大小を比べられない。
 - [期待値の線形性と指示確率変数](https://yuukougun.github.io/kyopro-atlas/comb/linearity-of-expectation/)（linearity-of-expectation・水・comb・draft）：E[X + Y] = E[X] + E[Y] は独立でなくても成り立つので、複雑な量を部分の和に分けて各部分の期待値を足せる。個数の期待値は各候補が条件を満たす確率の和で、一様なら「期待値 = 総和 / 総数」になる。
-- [対称性で確率を求める](https://yuukougun.github.io/kyopro-atlas/comb/probability-symmetry/)（probability-symmetry・水・comb・draft）：入れ替えても問題が変わらない対象は、どれも同じ確率を持つ。残りから一様に選んでいく過程は一様ランダムな順列を先頭から見る過程と同じなので、状態を特別な 1 つとその他に縮めたり、ペアの大小を確率 1/2 としたりできる。
+- [対称性で確率を求める](https://yuukougun.github.io/kyopro-atlas/comb/probability-symmetry/)（probability-symmetry・水・comb・draft）：入れ替えても変わらない対象は同じ確率を持つので、1 つの確率・期待値を求めて個数を掛ければよい。一様に選び続ける過程は一様ランダムな順列と同じで、状態を特別な 1 つとその他に縮められる。
 - [確率 DP](https://yuukougun.github.io/kyopro-atlas/comb/probability-dp/)（probability-dp・水・comb・draft）：dp[t][s] = 時刻 t に状態 s にいる確率を、初期状態の 1 から前向きに配って求める。確率の和が 1 に保たれることが検算になり、時刻が決まっている問題や分布そのものが要る問題に向く。
 - [期待値 DP](https://yuukougun.github.io/kyopro-atlas/comb/expected-value-dp/)（expected-value-dp・水・comb・draft）：終わるまでの量の期待値 E[s] を、最初の一手で場合分けした E[s] = c(s) + Σ P(s→t) E[t] で、終状態の E = 0 から後ろ向きに埋める。自己ループは移項して消し、選択がある状態では max を取る。
 - [最適戦略の期待値](https://yuukougun.github.io/kyopro-atlas/comb/optimal-strategy-expectation/)（optimal-strategy-expectation・黄・comb・draft）：選択と偶然が交互に来る確率過程で、期待値を最大（最小）にする戦略のもとでの期待値を、残すものや知っている情報を状態にして後ろから求める。mod で答える問題でも比較は実数で行い、やり直せるなら答えを仮定して二分探索する。
@@ -393,7 +393,7 @@
 
 - [区間](https://yuukougun.github.io/kyopro-atlas/patterns/interval/)（interval・—・patterns・draft）：連続部分列や与えられた区間の集合が出てくる問題で、問われ方から使う手法を引ける。連続部分列を数える・選ぶ、区間に操作して質問する、区間の集合を選ぶ・つなぐ、の3つの型に分ける。
 - [部分列と部分文字列](https://yuukougun.github.io/kyopro-atlas/patterns/subsequence-and-substring/)（subsequence-and-substring・—・patterns・draft）：部分列（飛び飛びに選ぶ）と部分文字列（連続する部分）が出てくる問題で、問われ方から使う手法を引ける。判定・選び方の数・異なるものの数・最長の共通部分・種類数の問われ方に分ける。
-- [順列と置換](https://yuukougun.github.io/kyopro-atlas/patterns/permutation/)（permutation・—・patterns・draft）：1〜N の順列が与えられる問題で、問われ方から使う手法を引ける。i → P_i の矢印のサイクル、swap の回数と偶奇、置換の繰り返し、順列の数え上げ、辞書順の問われ方に分ける。
+- [順列と置換](https://yuukougun.github.io/kyopro-atlas/patterns/permutation/)（permutation・—・patterns・draft）：1〜N の順列が与えられる問題で、問われ方から使う手法を引ける。i → P_i の矢印の巡回、swap の回数と偶奇、置換の繰り返し、順列の数え上げ、辞書順の問われ方に分ける。
 - [括弧列](https://yuukougun.github.io/kyopro-atlas/patterns/bracket-sequence/)（bracket-sequence・—・patterns・draft）：括弧列が出てくる問題で、判定・数え上げ・区間の判定・並べる順序・価値の最大化の手法を引ける。'(' を +1、')' を −1 とした累積和が途中で負にならず最後に 0 なら正しい、という言い換えが共通の出発点になる。
 - [mex](https://yuukougun.github.io/kyopro-atlas/patterns/mex/)（mex・—・patterns・draft）：集合に含まれない最小の非負整数 mex を求める・更新する・総和を取る問題で、問われ方から使う手法を引ける。「N 要素の mex は N 以下」「mex ≥ k+1 ⇔ 0〜k をすべて含む」の 2 つの性質から考える。
 - [K 番目と中央値](https://yuukougun.github.io/kyopro-atlas/patterns/kth-and-median/)（kth-and-median・—・patterns・draft）：K 番目に小さい値・上位 K 個の和・中央値を問う問題で、データの動き方から手法を引ける。構造で保つか、「x 以下が K 個以上か」で答えを二分探索するか、小さい順に取り出すかを選ぶ。

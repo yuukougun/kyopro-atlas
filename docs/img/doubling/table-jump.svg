@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 545" font-family="sans-serif" font-size="17">
+<svg xmlns="http://www.w3.org/2000/svg" width="550" height="545" viewBox="0 0 550 545" font-family="sans-serif" font-size="17">
 <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#333"/></marker></defs>
 <rect width="100%" height="100%" fill="#ffffff"/>
 <text x="20" y="28" fill="#222">遷移 f（v → f(v)）：5 → 0 → 1 → 2 → 3 → 4 → 2</text>
-<text x="20" y="52" fill="#555" font-size="15">（2・3・4 は周期 3）</text>
+<text x="20" y="52" fill="#555" font-size="16">（2・3・4 は周期 3）</text>
 <line x1="188" y1="130" x2="250" y2="130" stroke="#333" stroke-width="1.5" marker-end="url(#ar)"/>
 <line x1="288" y1="130" x2="350" y2="130" stroke="#333" stroke-width="1.5" marker-end="url(#ar)"/>
 <line x1="387" y1="124.1" x2="451.1" y2="101.6" stroke="#333" stroke-width="1.5" marker-end="url(#ar)"/>
@@ -16,14 +16,14 @@
 <circle cx="470" cy="95" r="18" fill="#f4f4f4" stroke="#333" stroke-width="1.5"/><text x="470" y="101" text-anchor="middle" fill="#222">3</text>
 <circle cx="470" cy="165" r="18" fill="#f4f4f4" stroke="#333" stroke-width="1.5"/><text x="470" y="171" text-anchor="middle" fill="#222">4</text>
 <text x="20" y="222" fill="#222">表 nxt[k][v]：v から 2^k 回進んだ先</text>
-<text x="20" y="246" fill="#555" font-size="15">下の段から nxt[k+1][v] = nxt[k][nxt[k][v]] で作る</text>
-<text x="20" y="268" fill="#555" font-size="15">（例：nxt[1][0] = nxt[0][1] = 2）</text>
-<text x="168.0" y="296" text-anchor="middle" fill="#555" font-size="15">v = 0</text>
-<text x="224.0" y="296" text-anchor="middle" fill="#555" font-size="15">v = 1</text>
-<text x="280.0" y="296" text-anchor="middle" fill="#555" font-size="15">v = 2</text>
-<text x="336.0" y="296" text-anchor="middle" fill="#555" font-size="15">v = 3</text>
-<text x="392.0" y="296" text-anchor="middle" fill="#555" font-size="15">v = 4</text>
-<text x="448.0" y="296" text-anchor="middle" fill="#555" font-size="15">v = 5</text>
+<text x="20" y="246" fill="#555" font-size="16">下の段から nxt[k+1][v] = nxt[k][nxt[k][v]] で作る</text>
+<text x="20" y="268" fill="#555" font-size="16">（例：nxt[1][0] = nxt[0][1] = 2）</text>
+<text x="168.0" y="296" text-anchor="middle" fill="#555" font-size="16">v = 0</text>
+<text x="224.0" y="296" text-anchor="middle" fill="#555" font-size="16">v = 1</text>
+<text x="280.0" y="296" text-anchor="middle" fill="#555" font-size="16">v = 2</text>
+<text x="336.0" y="296" text-anchor="middle" fill="#555" font-size="16">v = 3</text>
+<text x="392.0" y="296" text-anchor="middle" fill="#555" font-size="16">v = 4</text>
+<text x="448.0" y="296" text-anchor="middle" fill="#555" font-size="16">v = 5</text>
 <text x="128" y="333" text-anchor="end" fill="#222">k = 0（1 回）</text>
 <rect x="140" y="306" width="56" height="40" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="3"/>
 <text x="168.0" y="333" text-anchor="middle" fill="#1f4e9a" font-weight="bold">1</text>
@@ -66,5 +66,5 @@
 <text x="20" y="452" fill="#222">0 から K = 5 回進む：5 = 101（2 進）なので、</text>
 <text x="20" y="474" fill="#222">1 の桁 k = 0 と k = 2 だけ跳ぶ</text>
 <text x="40" y="500" fill="#1f4e9a" font-weight="bold">0 →（k = 0、1 回）→ 1 →（k = 2、4 回）→ 2</text>
-<text x="40" y="528" fill="#555" font-size="15">1 回ずつ進めても 0 → 1 → 2 → 3 → 4 → 2 で同じ所に着く</text>
+<text x="40" y="528" fill="#555" font-size="16">1 回ずつ進めても 0 → 1 → 2 → 3 → 4 → 2 で同じ所に着く</text>
 </svg>

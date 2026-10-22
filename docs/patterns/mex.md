@@ -8,7 +8,7 @@ order: 50
 level: null
 kind: [案内, データ構造, 考察]
 prerequisites: []
-related: [ordered-set, segment-tree-binary-search, interval-set, fix-variable, contribution, two-pointers, lazy-segment-tree, grundy-number, construction]
+related: [ordered-set, segment-tree-binary-search, interval-set, fix-variable, contribution, two-pointers, lazy-segment-tree, lazy-segment-tree-patterns#reformulate, grundy-number, construction]
 summary: 集合に含まれない最小の非負整数 mex を求める・更新する・総和を取る問題で、問われ方から使う手法を引ける。「N 要素の mex は N 以下」「mex ≥ k+1 ⇔ 0〜k をすべて含む」の 2 つの性質から考える。
 complexity: 1 回の計算 O(N)、更新のたびに答えるなら 1 回 O(log N)
 signs:

@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" width="720" height="360" font-family="sans-serif" font-size="14">
-  <rect x="0" y="0" width="720" height="360" fill="#ffffff"/>
+<svg viewBox="0 0 260 990" width="260" height="990" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="14">
+  <rect x="0" y="0" width="260" height="990" fill="#ffffff"/>
   <defs>
     <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#1c64b0"/>
@@ -8,9 +8,10 @@
       <path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/>
     </marker>
   </defs>
-  <line x1="240" y1="20" x2="240" y2="300" stroke="#ccc" stroke-width="1"/>
-  <line x1="480" y1="20" x2="480" y2="300" stroke="#ccc" stroke-width="1"/>
+  <line x1="10" y1="305" x2="250" y2="305" stroke="#ccc" stroke-width="1"/>
+  <line x1="10" y1="595" x2="250" y2="595" stroke="#ccc" stroke-width="1"/>
 
+<g transform="translate(10, 0)">
   <!-- 1. 軽い頂点を塗る -->
   <text x="120" y="32" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">① 軽い頂点 x を塗る</text>
   <text x="120" y="54" text-anchor="middle" fill="#444">隣すべてに書く（B 個未満）</text>
@@ -34,6 +35,8 @@
   </g>
   <text x="120" y="290" text-anchor="middle" fill="#1c64b0">pushed[u] ← t（u は x と隣）</text>
 
+</g>
+<g transform="translate(-230, 290)">
   <!-- 2. 重い頂点を塗る -->
   <text x="360" y="32" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">② 重い頂点 h を塗る</text>
   <text x="360" y="54" text-anchor="middle" fill="#444">自分の記録だけ書く（O(1)）</text>
@@ -62,6 +65,8 @@
   <text x="360" y="181" text-anchor="middle" font-weight="bold" fill="#222">h</text>
   <text x="360" y="290" text-anchor="middle" fill="#222">own[h] ← t（隣には書かない）</text>
 
+</g>
+<g transform="translate(-470, 580)">
   <!-- 3. 色を聞く -->
   <text x="600" y="32" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">③ 頂点 x の色を聞く</text>
   <text x="600" y="54" text-anchor="middle" fill="#444">自分と隣の重い頂点だけ見る</text>
@@ -93,13 +98,15 @@
   </g>
   <text x="600" y="290" text-anchor="middle" fill="#c2410c">max(pushed[x], own[h₁], own[h₂])</text>
 
+</g>
   <!-- 凡例 -->
-  <g transform="translate(40,325)">
+  <g transform="translate(20,895)">
     <circle cx="10" cy="0" r="10" fill="#ffffff" stroke="#222" stroke-width="2"/>
     <text x="28" y="5" fill="#222">軽い頂点（次数 B 未満）</text>
-    <circle cx="230" cy="0" r="12" fill="#d4d4d4" stroke="#222" stroke-width="2"/>
-    <circle cx="230" cy="0" r="8" fill="none" stroke="#222" stroke-width="1.5"/>
-    <text x="250" y="5" fill="#222">重い頂点（次数 B 以上、2M/B 個以下）</text>
-    <text x="560" y="5" fill="#444">t は塗った時刻</text>
+    <circle cx="10" cy="32" r="12" fill="#d4d4d4" stroke="#222" stroke-width="2"/>
+    <circle cx="10" cy="32" r="8" fill="none" stroke="#222" stroke-width="1.5"/>
+    <text x="28" y="30" fill="#222">重い頂点（次数 B 以上、</text>
+    <text x="28" y="48" fill="#222">2M/B 個以下）</text>
+    <text x="0" y="78" fill="#444">t は塗った時刻</text>
   </g>
 </svg>

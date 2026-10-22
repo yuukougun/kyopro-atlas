@@ -100,7 +100,7 @@ $N$ 個の数 $A_1, \dots, A_N$（どれも $V$ 以下）を分解する全体�
 
 ## 線形篩：各合成数を1回だけ作り、φ・μ の表を同時に作る {#linear-sieve}
 
-この節は[オイラーの φ 関数](../math/euler-phi.md#formula)と[メビウス関数](../comb/mobius-function.md#definition)の定義を前提にする。エラトステネスの篩では、たとえば 30 は 2・3・5 の 3 回の倍数として訪れられる。線形篩は、どの合成数 $x$ も「$x = \mathrm{spf}(x) \times i$」の形で 1 回だけ作る。
+φ と μ はどちらも乗法的な関数（互いに素な $a, b$ で $f(ab) = f(a) f(b)$、$f(1) = 1$）で、素数冪での値 $\varphi(p^e) = p^{e-1}(p-1)$、$\mu(p) = -1$、$\mu(p^e) = 0$（$e \ge 2$）から決まる（詳しくは[オイラーの φ 関数](../math/euler-phi.md#formula)と[メビウス関数](../comb/mobius-function.md#definition)）。エラトステネスの篩では、たとえば 30 は 2・3・5 の 3 回の倍数として訪れられる。線形篩は、どの合成数 $x$ も「$x = \mathrm{spf}(x) \times i$」の形で 1 回だけ作る。
 
 手順は次のとおりである。$i = 2, 3, \dots, V$ の順に見て、まだ作られていない $i$ は素数として素数の列に足す。そのうえで、$\mathrm{spf}(i)$ 以下の素数 $p$ について $x = p \cdot i$ を作り、$\mathrm{spf}(x) = p$ と書く。$p$ を $\mathrm{spf}(i)$ で止めるのが要点である。
 
@@ -145,13 +145,21 @@ ABC の多くはメモリ制限 1024 MiB なので（[計算量の見積もり](
 
 **分解の結果を全要素ぶん保存する**。`vector<vector<pair<int,int>>>` に全要素の分解を入れると、要素数が多いときにメモリと時間を余計に使う。多くの問題では、分解しながらその場で数え上げれば足りる。
 
-**大きな値に使う**。$A_i \le 10^9$ や $10^{12}$ では表が作れない。1 個ずつ試し割りするか、値の範囲が $[L, R]$ の連続した区間なら[区間篩](../math/segmented-sieve.md)、$10^{18}$ の数なら[大きな数の素数判定と素因数分解](../math/miller-rabin.md#pollard-rho)を使う。
+**大きな値に使う**。$A_i \le 10^9$ や $10^{12}$ では表が作れない。1 個ずつ試し割りするか、値の範囲が連続した閉区間 $[L, R]$ なら[区間篩](../math/segmented-sieve.md)、$10^{18}$ の数なら[大きな数の素数判定と素因数分解](../math/miller-rabin.md#pollard-rho)を使う。
+
+## 上位の手法へのつながり {#next-steps}
+
+多数の数を素因数分解できると、数論の関数や指数の条件を要素ごとに扱える。
+
+- **素因数の指数で考える**：平方因子を除いた核をそろえると、積が平方数になる組を数えられる（[素因数の指数で考える](../math/prime-exponent-vector.md#squarefree-kernel)）。
+- **φ・μ の表**：$1$ から $N$ までの $\varphi$ や $\mu$ は篩で一度に求まり、約数についての和の計算に使う（[オイラーの φ 関数](../math/euler-phi.md#sieve)・[メビウス関数](../comb/mobius-function.md#sieve)）。
+- **乗法的関数の和**：$N$ が $10^{10}$ 程度で表が作れないときは、商の値ごとに和を持つ方法に替える（[乗法的関数の和と素数の個数](../math/multiplicative-function.md#prefix-sums)）。
 
 ## 使い分け {#comparison}
 
 - 数が 1 個か少数で、値が $10^{12}$ 程度まで：[試し割り](../math/prime-factorization.md#which-method)
 - 数が多く、値が $10^7$ 程度まで：最小素因数の篩
-- 値の連続した区間 $[L, R]$（$R \le 10^{12}$、$R - L \le 10^6$ など）を分解：[区間篩](../math/segmented-sieve.md)
+- 値の連続した閉区間 $[L, R]$（$R \le 10^{12}$、$R - L \le 10^6$ など）を分解：[区間篩](../math/segmented-sieve.md)
 - 1 個で値が $10^{18}$ 程度：[大きな数の素数判定と素因数分解](../math/miller-rabin.md#pollard-rho)
 - 素数かどうかだけ分かればよい：[エラトステネスの篩](../math/sieve-eratosthenes.md)（メモリが 32 分の 1 で済む）
 
@@ -197,7 +205,7 @@ ABC の多くはメモリ制限 1024 MiB なので（[計算量の見積もり](
 </div>
 
 ??? note "力試しの方針"
-    - **ABC152 E**：共通の値は $\mathrm{lcm}(A_1, \dots, A_N)$ でよい。lcm は大きくなるので、各 $A_i$ を最小素因数の表で分解して素因数ごとの最大の指数で持つ。mod 上で $\mathrm{lcm} / A_i$ の和をとる（割り算は逆元で行う）
+    - **ABC152 E**：共通の値は $\operatorname{lcm}(A_1, \dots, A_N)$ でよい。lcm は大きくなるので、各 $A_i$ を最小素因数の表で分解して素因数ごとの最大の指数で持つ。mod 上で $\operatorname{lcm} / A_i$ の和をとる（割り算は逆元で行う）
 
 ## 参考 {#references}
 

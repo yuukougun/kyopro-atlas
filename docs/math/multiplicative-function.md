@@ -23,6 +23,7 @@ sections:
   - {title: 乗法的関数（φ・μ・d・σ）とディリクレ積（φ * 1 = id など）, anchor: dirichlet}
   - {title: 素数の個数・素数の和（Lucy DP）, anchor: prime-counting}
   - {title: 和の求め方の概要（杜教篩・Lucy DP・Min_25 篩）, anchor: prefix-sums}
+  - {title: 公開ライブラリと自作するときの要点, anchor: library}
 stage: draft
 updated: 2026-10-22
 ---
@@ -100,14 +101,7 @@ $N = 10$ で動かす。商の値は $1, 2, 3, 5, 10$ で、初めの $S$ はそ
 --8<-- "multiplicative-function/lucy.cpp:core"
 ```
 
-自作するときの要点は次のとおりである。
-
-- **大きい $x$ から更新する**：式の右辺は $p - 1$ の段の値なので、1 本の表で書き換えるなら $x$ の大きい方から回す。`hi`（大きい $x$）を先に、`lo` を後に、`lo` は $x$ の大きい方から更新する。
-- **$p$ が素数かの判定**：$p \le \sqrt{N}$ では `lo[p] != lo[p - 1]` なら $p$ は素数である（$p$ が残っている）。別に篩を作らなくてよい。
-- **$\sqrt{N}$ を整数で求める**：`sqrt` の浮動小数点の誤差で $v = \lfloor \sqrt{N} \rfloor$ が 1 ずれると、`lo` と `hi` の境目が崩れる。$v^2 \le N < (v + 1)^2$ になるまで直す。
-- **素数の和**：初めの値を $\sum_{n=2}^{x} n = x(x + 1)/2 - 1$ にし、引く量に $p$ を掛ける（$p \cdot (S(\lfloor x/p \rfloor) - S(p - 1))$）。消える数 $pm$ の和は $p$ と $m$ の和の積になるからで、$n^k$ のような完全乗法的な重みなら同じように使える。初めの値 $x(x + 1)/2$ は $N = 10^{10}$ で約 $5 \times 10^{19}$ になり `long long` を超えるので、mod を取るか `__int128` にする（答えそのものは約 $2.2 \times 10^{18}$ で収まる）。
-
-計算量は、各 $x$ について $p \le \sqrt{x}$ の素数の個数だけ更新するので、$x$ について $\sqrt{x}/\log x$ を足して $O(N^{3/4}/\log N)$ になる。手元では $N = 10^{10}$ と $10^{11}$ を合わせて 0.3 秒以内で終わった。$O(N^{2/3})$ 程度のさらに速い方法もあるが、Library Checker の Counting Primes（$N \le 10^{11}$）は Lucy DP で足りる。
+自作するときの要点は[ライブラリの節](#library)にまとめる。計算量は、各 $x$ について $p \le \sqrt{x}$ の素数の個数だけ更新するので、$x$ について $\sqrt{x}/\log x$ を足して $O(N^{3/4}/\log N)$ になる。手元では $N = 10^{10}$ と $10^{11}$ を合わせて 0.3 秒以内で終わった。$O(N^{2/3})$ 程度のさらに速い方法もあるが、Library Checker の Counting Primes（$N \le 10^{11}$）は Lucy DP で足りる。
 
 ## 和の求め方の概要（杜教篩・Lucy DP・Min_25 篩） {#prefix-sums}
 
@@ -132,11 +126,7 @@ $N^{2/3}$ 以下の値を篩の累積和で前計算し、それより大きい�
 --8<-- "multiplicative-function/phi-sum.cpp:core"
 ```
 
-自作するときの要点は次のとおりである。
-
-- **メモの添字**：$N^{2/3}$ より大きい商の値 $m$ は $k = \lfloor N/m \rfloor$ で一意に決まるので、`map` ではなく長さ $N^{1/3}$ 程度の配列に $k$ を添字にして持てる。
-- **$N(N + 1)/2$ のオーバーフロー**：$N = 10^{10}$ で $N(N + 1)$ は $10^{20}$ になり `long long` を超える。先に mod を取ってから掛け、2 で割る代わりに 2 の逆元を掛ける。
-- **前計算の大きさ**：$N = 10^{10}$ なら $N^{2/3} \approx 4.6 \times 10^6$ で、篩の表は数十 MB に収まる。
+自作するときの要点は[ライブラリの節](#library)にまとめる。
 
 ### Min_25 篩（素数での値が多項式の関数）
 
@@ -147,7 +137,24 @@ Min_25 篩は、$f(p)$ が $p$ の多項式（$\sum_k c_k p^k$）で、$f(p^e)$ 
 
 計算量は $O(N^{3/4}/\log N)$ とされることが多いが、実装しやすい再帰の形では $\Theta(N^{1-\varepsilon})$ と解析されている。Library Checker の Sum of Multiplicative Function（$f(p^e) = ae + bp$）がこの形の確かめになる。
 
+## 公開ライブラリと自作するときの要点 {#library}
+
 ACL には対応するものがない。ライブラリを持つなら、Nyaan 氏のライブラリの `prime_counting(N)`（Lucy DP）、`sum_of_totient<T>(N)`、乗法的関数の和の `mf_prefix_sum`（$f(p^e)$ を返す関数をテンプレート引数に渡し、`pi_table()`・`prime_sum_table()` から作った素数での和の表を `run` に渡す）が読みやすい。
+
+**Lucy DP を自作するときの要点**は次のとおりである。
+
+- **大きい $x$ から更新する**：式の右辺は $p - 1$ の段の値なので、1 本の表で書き換えるなら $x$ の大きい方から回す。`hi`（大きい $x$）を先に、`lo` を後に、`lo` は $x$ の大きい方から更新する。
+- **$p$ が素数かの判定**：$p \le \sqrt{N}$ では `lo[p] != lo[p - 1]` なら $p$ は素数である（$p$ が残っている）。別に篩を作らなくてよい。
+- **$\sqrt{N}$ を整数で求める**：`sqrt` の浮動小数点の誤差で $v = \lfloor \sqrt{N} \rfloor$ が 1 ずれると、`lo` と `hi` の境目が崩れる。$v^2 \le N < (v + 1)^2$ になるまで直す。
+- **素数の和**：初めの値を $\sum_{n=2}^{x} n = x(x + 1)/2 - 1$ にし、引く量に $p$ を掛ける（$p \cdot (S(\lfloor x/p \rfloor) - S(p - 1))$）。消える数 $pm$ の和は $p$ と $m$ の和の積になるからで、$n^k$ のような完全乗法的な重みなら同じように使える。初めの値 $x(x + 1)/2$ は $N = 10^{10}$ で約 $5 \times 10^{19}$ になり `long long` を超えるので、mod を取るか `__int128` にする（答えそのものは約 $2.2 \times 10^{18}$ で収まる）。
+
+**杜教篩を自作するときの要点**は次のとおりである。
+
+- **メモの添字**：$N^{2/3}$ より大きい商の値 $m$ は $k = \lfloor N/m \rfloor$ で一意に決まるので、`map` ではなく長さ $N^{1/3}$ 程度の配列に $k$ を添字にして持てる。
+- **$N(N + 1)/2$ のオーバーフロー**：$N = 10^{10}$ で $N(N + 1)$ は $10^{20}$ になり `long long` を超える。先に mod を取ってから掛け、2 で割る代わりに 2 の逆元を掛ける。
+- **前計算の大きさ**：$N = 10^{10}$ なら $N^{2/3} \approx 4.6 \times 10^6$ で、篩の表は数十 MB に収まる。
+
+Min_25 篩は再帰の枝の扱いが込み入るので、公開ライブラリを使い、Library Checker の Sum of Multiplicative Function で確かめるのが確実である。自作したものは、[練習問題](#practice)の Library Checker の問題と、篩の表の累積和（$N \le 10^7$ 程度）の答えとを比べて確かめる。
 
 ## 使い分け {#comparison}
 
@@ -160,7 +167,13 @@ ACL には対応するものがない。ライブラリを持つなら、Nyaan �
 
 $\sum \varphi$ や $\sum \mu$ は杜教篩でも Min_25 篩でも求まる。杜教篩は関数ごとに $g$・$h$ を探す必要があるが、コードが短い。
 
+## 学ぶための資料 {#resources}
+
+- maspy 氏の記事[「Dirichlet 積と、数論関数の累積和」](https://maspypy.com/dirichlet-%E7%A9%8D%E3%81%A8%E3%80%81%E6%95%B0%E8%AB%96%E9%96%A2%E6%95%B0%E3%81%AE%E7%B4%AF%E7%A9%8D%E5%92%8C)：ディリクレ積の和を商の値ごとに求める考え方から、$\varphi$ の和やメルテンス関数を $O(N^{2/3})$ で求めるまでを、計算量の見積もりとともに追える。
+
 ## 練習問題 {#practice}
+
+ABC で必須になる問題は確認できなかった。
 
 ### Library Checker
 
@@ -179,7 +192,7 @@ $\sum \varphi$ や $\sum \mu$ は杜教篩でも Min_25 篩でも求まる。杜
 
 ## 参考 {#references}
 
-- [maspy「Dirichlet 積と、数論関数の累積和」](https://maspypy.com/dirichlet-%E7%A9%8D%E3%81%A8%E3%80%81%E6%95%B0%E8%AB%96%E9%96%A2%E6%95%B0%E3%81%AE%E7%B4%AF%E7%A9%8D%E5%92%8C)：ディリクレ積の和を商の値で求める方法と計算量、$\varphi$ の和とメルテンス関数を $O(N^{2/3})$ で求めること（学ぶための資料）
+- [maspy「Dirichlet 積と、数論関数の累積和」](https://maspypy.com/dirichlet-%E7%A9%8D%E3%81%A8%E3%80%81%E6%95%B0%E8%AB%96%E9%96%A2%E6%95%B0%E3%81%AE%E7%B4%AF%E7%A9%8D%E5%92%8C)：ディリクレ積の和を商の値で求める方法と計算量、$\varphi$ の和とメルテンス関数を $O(N^{2/3})$ で求めること
 - [Nyaan「素数カウント(O(N^{3/4}/log N))」](https://nyaannyaan.github.io/library/multiplicative-function/prime-counting.hpp)：Lucy DP の計算量と `prime_counting` の使い方
 - [Nyaan「乗法的関数のprefix sum」](https://nyaannyaan.github.io/library/multiplicative-function/sum-of-multiplicative-function.hpp)：Min_25 篩の要件（素数での値が多項式）と計算量の注記、`mf_prefix_sum` の使い方
 - [Nyaan「素数カウント(O(N^{2/3}))」](https://nyaannyaan.github.io/library/multiplicative-function/prime-counting-o2d3.hpp)：素数の個数を $O(N^{2/3})$ で求める方法があること
