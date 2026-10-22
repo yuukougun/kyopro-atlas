@@ -158,7 +158,7 @@ while step[x] == -1: step[x] = t; 列に x を足す; x = nxt[x]; t += 1
 
 ## 使い分け {#comparison}
 
-- 無向グラフで、あるかだけ・辺が増えていく：Union-Find。どの辺が閉路の上にないか（橋）を知りたいなら [lowlink](../graph/lowlink.md)
+- 無向グラフで、あるかだけ・辺が増えていく：Union-Find。どの辺が閉路の上にないか（橋）を知りたいなら [lowlink](../graph/lowlink.md#conditions)
 - 無向グラフで、閉路を取り出す：辺の番号を持った DFS
 - 有向グラフで、あるかだけ：Kahn 法（ついでにトポロジカル順も得られる）か 3 色の DFS
 - 有向グラフで、閉路を取り出す：3 色の DFS

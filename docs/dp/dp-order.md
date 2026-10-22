@@ -55,7 +55,7 @@ DP の計算順序は、漸化式の右辺に出てくる値を、左辺より�
 
 - 辺の重みが非負の最短路：値の小さい順に確定させる[ダイクストラ法](../graph/dijkstra.md)を使う
 - 期待値が自分自身に依存する（自己ループ）：式を移項して自分を消す（[期待値 DP](../comb/expected-value-dp.md#self-loop)）
-- 自分以外の状態へ戻る閉路のある期待値：連立方程式を解く（[期待値の方程式を解く](../comb/expectation-linear-equations.md)）
+- 自分以外の状態へ戻る閉路のある期待値：連立方程式を解く（[期待値の方程式を解く](../comb/expectation-linear-equations.md#linear-system)）
 - 同じ局面に戻れるゲーム：終局から確定させる[後退解析](../comb/game-retrograde-analysis.md)にする
 
 順序を自分で決めたくないときは、[メモ化再帰](../dp/memoized-recursion.md)で書く。再帰は必要な依存先を先に呼ぶので、依存グラフのトポロジカル順を自動でたどる。ただし閉路があると、互いに呼び合って止まらない。for 文なら止まるが、未確定の値を読む。どちらの書き方でも、閉路があれば DP にならない。
@@ -73,7 +73,7 @@ DP の計算順序は、漸化式の右辺に出てくる値を、左辺より�
 | 添字の昇順 | $\mathrm{dp}[i] \leftarrow \mathrm{dp}[j]$（$j < i$） | 添字 | 列・グリッドの DP |
 | 逆順 | $\mathrm{dp}[i] \leftarrow \mathrm{dp}[j]$（$j > i$） | 残りの長さ | 期待値・ゲーム・復元 |
 | 値の順 | $\mathrm{dp}[v] \leftarrow$ 値の真に小さい状態 | 頂点の値 | 増加列・重みの減る移動 |
-| 区間の長さ順 | $\mathrm{dp}[l][r] \leftarrow$ 真に短い区間 | $r - l$ | [区間 DP](../dp/interval-dp.md) |
+| 区間の長さ順 | $\mathrm{dp}[l][r] \leftarrow$ 真に短い区間 | $r - l$ | [区間 DP](../dp/interval-dp.md#by-length) |
 | 集合の昇順 | $\mathrm{dp}[S] \leftarrow \mathrm{dp}[S']$（$S' \subsetneq S$） | 要素の数 | [bitDP](../dp/bit-dp.md) |
 | 木の帰りがけ順 | $\mathrm{dp}[v] \leftarrow$ 子の $\mathrm{dp}$ | 部分木の大きさ | [木 DP](../dp/tree-dp.md) |
 

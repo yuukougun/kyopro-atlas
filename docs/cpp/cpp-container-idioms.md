@@ -229,7 +229,7 @@ unordered_map はキーのハッシュ値で置き場所を決めるので、キ
 --8<-- "cpp-container-idioms/unordered-hash.cpp:core"
 ```
 
-- **衝突を狙った入力**：libstdc++ の `hash<int>` と `hash<long long>` は値をそのまま返す（手元で `hash<int>{}(12345)` は 12345 だった）。そのため、置き場所の数の倍数ばかりを入れる入力を作られると、すべてが同じ場所に集まって 1 回の操作が $O(N)$ になる。上の自作のハッシュは、実行ごとに変わる値を足してから値を混ぜる関数（splitmix64）を通し、狙いを外している。攻撃の仕組みと安全な設計は[ハッシュの衝突と安全な設計](../string/hash-safety.md)で扱う
+- **衝突を狙った入力**：libstdc++ の `hash<int>` と `hash<long long>` は値をそのまま返す（手元で `hash<int>{}(12345)` は 12345 だった）。そのため、置き場所の数の倍数ばかりを入れる入力を作られると、すべてが同じ場所に集まって 1 回の操作が $O(N)$ になる。上の自作のハッシュは、実行ごとに変わる値を足してから値を混ぜる関数（splitmix64）を通し、狙いを外している。攻撃の仕組みと安全な設計は[ハッシュの衝突と安全な設計](../string/hash-safety.md#unordered-map)で扱う
 - **使い分け**：AtCoder では、まず map・ソート・[座標圧縮](../basics/coordinate-compression.md)で書けないかを考える。unordered_map は定数倍が軽いが、反復の順序が決まらず、`lower_bound` も使えない
 
 ## pb_ds の順序付き集合：tree と order_of_key・find_by_order（GCC の拡張） {#pb-ds}

@@ -52,7 +52,7 @@ atcoder: true
 
 ## pair と tuple：get・make_pair・pair{a, b}、辞書順で比べられる {#pair-tuple}
 
-`pair<T, U>` は 2 つの値の組で、`first`・`second` で取り出す。`tuple<T, U, V, …>` は好きな個数の組で、3 つ以上をまとめるのに使う。`get<i>(t)`（$i$ は 0 から数える定数）で要素を取り出す。作るときは `make_pair(a, b)`・`make_tuple(a, b, c)`、または型を書かない `pair{a, b}`・`tuple{a, b, c}` を使う（中身から型を決める CTAD。C++17。[初期化の書き方](../cpp/cpp-initialization.md)）。
+`pair<T, U>` は 2 つの値の組で、`first`・`second` で取り出す。`tuple<T, U, V, …>` は好きな個数の組で、3 つ以上をまとめるのに使う。`get<i>(t)`（$i$ は 0 から数える定数）で要素を取り出す。作るときは `make_pair(a, b)`・`make_tuple(a, b, c)`、または型を書かない `pair{a, b}`・`tuple{a, b, c}` を使う（中身から型を決める CTAD。C++17。[初期化の書き方](../cpp/cpp-initialization.md#ctad-std-types)）。
 
 ```cpp
 --8<-- "cpp-structured-bindings/pair-tuple.cpp:core"
@@ -161,7 +161,7 @@ g++-15 では `only 2 names provided for structured binding` と、続く `note:
 --8<-- "cpp-structured-bindings/pq-top.cpp:core"
 ```
 
-`pq.top()` は、キューが中に持つ `vector` の先頭の要素への参照を返す。`const auto& [d, v]` の見えない変数は、その先頭の場所を指す。`pop` は先頭の要素を末尾に移して取り除き、残りを並べ直すので、先頭の場所には次に小さい (7, 2) が入る。`d`・`v` は同じ場所を見続けるので、新しい値が読めてしまう。キューの要素が 1 個のときは、指していた要素そのものが消えるので[未定義動作](../cpp/cpp-undefined-behavior.md)になる（寿命の切れたものを指す参照、すなわちダングリングである）。
+`pq.top()` は、キューが中に持つ `vector` の先頭の要素への参照を返す。`const auto& [d, v]` の見えない変数は、その先頭の場所を指す。`pop` は先頭の要素を末尾に移して取り除き、残りを並べ直すので、先頭の場所には次に小さい (7, 2) が入る。`d`・`v` は同じ場所を見続けるので、新しい値が読めてしまう。キューの要素が 1 個のときは、指していた要素そのものが消えるので[未定義動作](../cpp/cpp-undefined-behavior.md#dangling-pq-top)になる（寿命の切れたものを指す参照、すなわちダングリングである）。
 
 `auto [d, v] = pq.top();` と値で受ければ、見えない変数は先頭のコピーなので `pop` の影響を受けない。
 

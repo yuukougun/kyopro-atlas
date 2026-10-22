@@ -234,7 +234,7 @@ $\lvert P_i - i \rvert < X$ となる位置を「違反」とし、違反を $k$
     - 行を 1 つ進めるたびに mask を 1 bit 右へずらし、「選ばない」か「窓の空いている列を 1 つ選んで $j + 1$」へ遷移する。
     - $r_k = \sum_{\mathrm{mask}} \mathrm{dp}[k][\mathrm{mask}]$、答えは $\sum_k (-1)^k r_k (N - k)!$ を $998244353$ で割った余り。
     - $O(N^2 X 4^X)$。コードは[違反の個数を状態に持つ](#count-violations)の節のものと同じである。
-    - 包除を使わず、位置と値の両方で「まだ相手が決まっていないもの」を状態に持つ DP でも解ける（[挿入 DP](../dp/insertion-dp.md)）。
+    - 包除を使わず、位置と値の両方で「まだ相手が決まっていないもの」を状態に持つ DP でも解ける（[挿入 DP](../dp/insertion-dp.md#hakone-ekiden-dp)）。
 
 ## 練習問題 {#practice}
 

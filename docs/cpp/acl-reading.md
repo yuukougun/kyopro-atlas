@@ -111,9 +111,9 @@ v1.5（2023-04）から、segtree・lazy_segtree は `S op(const S& a, const S& 
 | `fenwick_tree<T>` | `fenwick_tree<long long> fw(n);` | `add(p, x)` は一点加算、`sum(l, r)` は半開区間 | [BIT](../ds/fenwick-tree.md) |
 | `scc_graph` | `scc_graph g(n);` | `scc()` の成分はトポロジカル順 | [強連結成分分解](../graph/scc.md) |
 | `two_sat` | `two_sat ts(n);` | `add_clause(i, f, j, g)` は「$x_i = f$ または $x_j = g$」 | [2-SAT](../graph/two-sat.md) |
-| `mf_graph<Cap>` | `mf_graph<long long> g(n);` | `flow(s, t)` は流した量を返す。流した状態はグラフに残り、`edges()` で辺ごとの流量を読める | [最大流](../graph/max-flow.md) |
-| `mcf_graph<Cap, Cost>` | `mcf_graph<int, long long> g(n);` | `flow(s, t, 上限)` は `{流量, 費用}` の組 | [最小費用流](../graph/min-cost-flow.md) |
-| `convolution` | `convolution(a, b)` | 既定の法は 998244353。法なしの整数は `convolution_ll` | [畳み込みの使い方](../math/convolution-ntt.md) |
+| `mf_graph<Cap>` | `mf_graph<long long> g(n);` | `flow(s, t)` は流した量を返す。流した状態はグラフに残り、`edges()` で辺ごとの流量を読める | [最大流](../graph/max-flow.md#acl) |
+| `mcf_graph<Cap, Cost>` | `mcf_graph<int, long long> g(n);` | `flow(s, t, 上限)` は `{流量, 費用}` の組 | [最小費用流](../graph/min-cost-flow.md#acl) |
+| `convolution` | `convolution(a, b)` | 既定の法は 998244353。法なしの整数は `convolution_ll` | [畳み込みの使い方](../math/convolution-ntt.md#acl) |
 | `suffix_array`・`lcp_array` | `suffix_array(s)`・`lcp_array(s, sa)` | sa は接尾辞を辞書順に並べた開始位置の列、lcp は隣どうしの最長共通接頭辞の長さ（長さ $N - 1$） | [Suffix Array](../string/suffix-array.md) |
 | `z_algorithm` | `z_algorithm(s)` | `z[0]` は $\lvert S \rvert$ | [Z-algorithm](../string/z-algorithm.md) |
 | `floor_sum` | `floor_sum(n, m, a, b)` | $\sum_{i=0}^{n-1} \lfloor (ai + b) / m \rfloor$ | [floor sum](../math/floor-sum.md) |
@@ -203,7 +203,7 @@ v1.5（2023-04）から、segtree・lazy_segtree は `S op(const S& a, const S& 
 
 - **e の選び方**：区間 min なら `INT_MAX`（大きい方の端）、区間 max なら小さい方の端、区間和なら 0 である。`e()` は空区間の `prod(l, l)` の答えにもなり、`segtree<…> seg(n);` で作ったときの全要素の初期値にもなる
 - **型の幅**：`S = int` の区間和は、要素が $10^9$ 程度でもすぐにあふれる。`long long` にする
-- **関連**：どんな `S` と `op` を設計するか（和と長さ、最大値と個数など）は[セグメント木に何を載せるか](../ds/segment-tree-monoids.md)にある
+- **関連**：どんな `S` と `op` を設計するか（和と長さ、最大値と個数など）は[セグメント木に何を載せるか](../ds/segment-tree-monoids.md#design-steps)にある
 
 ??? question "確認問題：区間 max の `segtree<int, op, e>` で、要素がすべて 0 以上なら `e()` は何を返せばよいか？"
     0 以下の値なら何でもよく、要素の範囲で最小の 0 や `INT_MIN` を返す。`op(e(), x) = max(e(), x) = x` がすべての要素 $x$ で成り立てばよい。1 以上の値を返すと、空区間や `seg(n)` で作った初期値が要素より大きくなり、答えが狂う。
@@ -212,7 +212,7 @@ v1.5（2023-04）から、segtree・lazy_segtree は `S op(const S& a, const S& 
 
 `op` と `e` の渡し方は 2 通りある。ACL のドキュメントと多くの解説コードは、関数を定義してその名前を渡す（[segtree の読み方](#segtree-args)のコード）。
 
-C++20 からは、キャプチャのない[ラムダ式](../cpp/cpp-lambda.md)をテンプレート引数に直接書ける。ACL のどの版でも、`S(S, S)` の形のキャプチャのないラムダは渡せる。v1.5 からは `const S&` を受け取る形なども受け取る。次の 1 行は、名前を渡す形の区間 min と同じ意味である。
+C++20 からは、キャプチャのない[ラムダ式](../cpp/cpp-lambda.md#template-argument)をテンプレート引数に直接書ける。ACL のどの版でも、`S(S, S)` の形のキャプチャのないラムダは渡せる。v1.5 からは `const S&` を受け取る形なども受け取る。次の 1 行は、名前を渡す形の区間 min と同じ意味である。
 
 ```cpp
 --8<-- "acl-reading/segtree-lambda.cpp:core"

@@ -142,7 +142,7 @@ C++ の `std::string` の `<`・`==`・`min`・`sort` は、この辞書順で�
 
     次に、並べた順のどこかで隣り合う $x, y$ が $y + x < x + y$ を満たすなら、2 つを入れ替えても連結の結果は大きくならない。入れ替えで変わるのは $x + y$ の部分だけで、その部分が同じ長さのより小さい文字列 $y + x$ に変わるからである。どんな並べ方からも、この入れ替えを繰り返して $f$ の小さい順に並べ直せる（バブルソートの要領）。したがってソートした順の結果はどの並べ方の結果以下で、最小である。同等なもの（$x + y = y + x$）の順は結果を変えない。
 
-1 回の比較は $O(\lvert a \rvert + \lvert b \rvert)$ で、比較のたびに $a + b$ と $b + a$ の 2 つの文字列を作る。最長の長さを $L$ とすると、ソート全体は $O(L N \log N)$ である。$N$ 個から $K$ 個だけ選んで連結する型は、この順に並べたうえで DP が要り、ソートだけでは解けない（[辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md)・[交換論法](../basics/exchange-argument.md)）。
+1 回の比較は $O(\lvert a \rvert + \lvert b \rvert)$ で、比較のたびに $a + b$ と $b + a$ の 2 つの文字列を作る。最長の長さを $L$ とすると、ソート全体は $O(L N \log N)$ である。$N$ 個から $K$ 個だけ選んで連結する型は、この順に並べたうえで DP が要り、ソートだけでは解けない（[辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md)・[交換論法](../basics/exchange-argument.md#then-dp)）。
 
 ??? question "確認問題：c と ca"
     `c` と `ca` を並べる順を、比較関数 $a + b < b + a$ で決めよ。辞書順のソートではどうなるか。
@@ -166,7 +166,7 @@ C++ の `std::string` の `<`・`==`・`min`・`sort` は、この辞書順で�
 
 ![A = abcd のとき、A + A = abcdabcd の長さ 4 の窓を位置 0・1・2・3 から取ると、abcd・bcda・cdab・dabc の 4 つの回転が並ぶ。位置 4 からの窓は位置 0 と同じなので数えない](../img/string-basics/rotation-window.svg)
 
-$A + A$ の中で $B$ を探すのを素朴に行うと $O(N^2)$ かかる。$N$ が $10^4$ を超えるなら、線形時間の文字列検索（[Z-algorithm](../string/z-algorithm.md)・[KMP 法](../string/kmp.md)・[ローリングハッシュ](../string/rolling-hash.md)）を使う。「何回回転すると一致するか」を求めるときは、$A + A$ の中の開始位置が $N - 1$ 以下の出現だけを数える（位置 $N$ からの出現は 0 回転と同じ）。辞書順で最小の回転も、$A + A$ の [Suffix Array](../string/suffix-array.md) で開始位置が $N$ 未満の接尾辞のうち最小のものを選ぶと、全探索より速く求まる。
+$A + A$ の中で $B$ を探すのを素朴に行うと $O(N^2)$ かかる。$N$ が $10^4$ を超えるなら、線形時間の文字列検索（[Z-algorithm](../string/z-algorithm.md#cyclic-shift)・[KMP 法](../string/kmp.md)・[ローリングハッシュ](../string/rolling-hash.md)）を使う。「何回回転すると一致するか」を求めるときは、$A + A$ の中の開始位置が $N - 1$ 以下の出現だけを数える（位置 $N$ からの出現は 0 回転と同じ）。辞書順で最小の回転も、$A + A$ の [Suffix Array](../string/suffix-array.md) で開始位置が $N$ 未満の接尾辞のうち最小のものを選ぶと、全探索より速く求まる。
 
 ## 計算量の落とし穴（substr・+・find は長さに比例する） {#cost-pitfalls}
 

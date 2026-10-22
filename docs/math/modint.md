@@ -133,7 +133,7 @@ modint は、mod の値を扱う上位の手法の部品として使われる。
 
 - **階乗とその逆元の表**：`vector<mint> fact(n + 1), ifact(n + 1);` を作り、$\binom{n}{k}$ を $O(1)$ で求める（[二項係数の前計算](../comb/binomial-precompute.md)）。法は素数 $p$ で、$n < p$ でなければならない（$n \ge p$ なら $n!$ が 0 になり逆元がない）
 - **DP の値**：数え上げの DP の表を `vector<mint>` にすれば、遷移の足し算・掛け算で余りを書かずに済む。表は 0 で埋まった状態から始まる
-- **畳み込み**：ACL の `convolution` は `vector<static_modint<m>>` を受け取れる（[畳み込み](../math/convolution-ntt.md)）。法は NTT に向く素数でなければならない
+- **畳み込み**：ACL の `convolution` は `vector<static_modint<m>>` を受け取れる（[畳み込み](../math/convolution-ntt.md#acl)）。法は NTT に向く素数でなければならない
 - **行列累乗**：行列の要素を mint にすれば、整数の行列と同じコードで $\bmod m$ の行列累乗になる（[行列累乗](../math/matrix-power.md)）
 - **確率・期待値**：答えが有理数 $P/Q$ のとき、途中の計算をすべて mint で行えば、最後に $P \times Q^{-1}$ が自然に得られる（[有理数を mod で表す](../comb/rational-mod.md)）
 

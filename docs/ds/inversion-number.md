@@ -130,9 +130,9 @@ updated: 2026-10-21
 | 状況 | 使う手法 |
 | --- | --- |
 | 任意の 2 要素を交換できる（順列） | 置換の巡回分解（$N -$ 巡回の個数） |
-| 列全体の転倒数を 1 回求める | BIT（このページの手順）か[分割統治](../basics/divide-and-conquer.md)（マージソート） |
-| 区間ごとの転倒数を多数聞かれる | [Mo's algorithm](../ds/mo-algorithm.md) と BIT で $O(N \sqrt{Q} \log N)$ |
-| 0/1 の列の区間反転と区間の転倒数 | [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md) |
+| 列全体の転倒数を 1 回求める | BIT（このページの手順）か[分割統治](../basics/divide-and-conquer.md#crossing)（マージソート） |
+| 区間ごとの転倒数を多数聞かれる | [Mo's algorithm](../ds/mo-algorithm.md#implementation) と BIT で $O(N \sqrt{Q} \log N)$ |
+| 0/1 の列の区間反転と区間の転倒数 | [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md#flip) |
 | 窓を伸縮させながら転倒数を追う | [尺取り法](../basics/two-pointers.md)と BIT（[窓を伸縮しながら転倒数を増減する](#sliding-window)） |
 
 マージソートで数える方法は、左右の半分をそれぞれソートした後、左の要素が右の要素より大きい組を併合しながら数える。BIT は書くのが短く、1 要素の出し入れの増減にもそのまま使える。よって、差分の更新や窓と組むときは BIT を選ぶ。

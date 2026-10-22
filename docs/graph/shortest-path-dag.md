@@ -85,7 +85,7 @@ $$
 \mathrm{cnt}[s] = 1, \qquad \mathrm{cnt}[v] = \sum_{u \to v \text{ がきつい辺}} \mathrm{cnt}[u]
 $$
 
-重みが正なら、頂点を $\mathrm{dist}$ の小さい順に処理すれば、$\mathrm{cnt}[u]$ はどれも先に確定している。手順は次のとおりで、$\mathrm{dist}$ を求めた後に [DAG 上の DP](../dp/dp-dag.md) として配るだけである。
+重みが正なら、頂点を $\mathrm{dist}$ の小さい順に処理すれば、$\mathrm{cnt}[u]$ はどれも先に確定している。手順は次のとおりで、$\mathrm{dist}$ を求めた後に [DAG 上の DP](../dp/dp-dag.md#count-shortest-paths) として配るだけである。
 
 ```text
 dist を求める
@@ -184,7 +184,7 @@ $$
 
 - 最短路を 1 本だけ出力するなら、経路復元（[BFS の経路復元](../graph/bfs.md#path-restoration)）で足りる。すべての最短路について問われたら最短路 DAG を作る
 - 全点対の最短路について辺を調べるなら、[ワーシャルフロイド法](../graph/warshall-floyd.md)で距離表を作り、辺ごとに $d(u, v) = w$ かを見る
-- 「消すと連結でなくなる辺」は最短距離ではなく連結性の問いなので、[lowlink](../graph/lowlink.md) で橋を求める
+- 「消すと連結でなくなる辺」は最短距離ではなく連結性の問いなので、[lowlink](../graph/lowlink.md#conditions) で橋を求める
 
 ## 例題 {#examples}
 

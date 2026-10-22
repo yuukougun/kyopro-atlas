@@ -143,7 +143,7 @@ $s - 1$ は最下位の 1 を 0 にし、それより下の桁をすべて 1 に
 --8<-- "bit-operations/submask.cpp:all-pairs"
 ```
 
-$3^{15} \approx 1.4 \times 10^7$、$3^{16} \approx 4.3 \times 10^7$、$3^{18} \approx 3.9 \times 10^8$ なので、$N \le 16$ 程度なら軽く、$N = 18$ は中身の軽いループでなければ苦しい。$2^N \times 2^N = 4^N$ と見積もると多すぎて諦めてしまうので、3 通りの数え方を覚えておく。この形は「集合 $t$ を、1 つのグループ $s$ と残り $t \setminus s$ に分ける」DP の遷移にそのまま使う（[部分集合を列挙する DP](../dp/subset-enumeration-dp.md)）。
+$3^{15} \approx 1.4 \times 10^7$、$3^{16} \approx 4.3 \times 10^7$、$3^{18} \approx 3.9 \times 10^8$ なので、$N \le 16$ 程度なら軽く、$N = 18$ は中身の軽いループでなければ苦しい。$2^N \times 2^N = 4^N$ と見積もると多すぎて諦めてしまうので、3 通りの数え方を覚えておく。この形は「集合 $t$ を、1 つのグループ $s$ と残り $t \setminus s$ に分ける」DP の遷移にそのまま使う（[部分集合を列挙する DP](../dp/subset-enumeration-dp.md#submask-loop)）。
 
 ??? question "確認問題：列挙の回数"
     $N = 20$ のとき、すべての集合 $t$ とその部分集合 $s$ の組を列挙すると何回になるか。2 秒の制限で間に合うか。
@@ -175,8 +175,8 @@ $3^{15} \approx 1.4 \times 10^7$、$3^{16} \approx 4.3 \times 10^7$、$3^{18} \a
 
 - **bit ごとに独立に考える**：AND・OR・XOR の結果は桁ごとに独立に決まる。そこで 1 の個数を桁ごとに数え、$2^k$ を掛けて足す。全ペアの XOR の和や、$0$〜$N$ の popcount の和がこの型である（[bit ごとに独立に考える](../basics/bitwise-independence.md)）。足し算は繰り上がりがあるので桁ごとに分けられない
 - **集合を整数で表す**：要素 $i$ を bit $i$ に対応させると、和集合は OR、共通部分は AND、要素数は popcount になる。小さい $N$ の全探索（[bit 全探索と順列全探索](../basics/bit-full-search.md)）と、集合を状態にする DP（[bitDP](../dp/bit-dp.md#subsets-as-integers)）の土台である
-- **部分集合の列挙**：$3^N$ の列挙は、集合をグループに分ける DP の遷移になる（[部分集合を列挙する DP](../dp/subset-enumeration-dp.md)）
-- **XOR を足し算とみなす**：XOR は繰り上がりのない足し算なので、掃き出し法で「選んだ値の XOR で作れる値」を調べられる（[XOR 基底](../math/xor-basis.md)）。XOR が絡む問題の型は [XOR](../patterns/xor.md) のページにまとめてある
+- **部分集合の列挙**：$3^N$ の列挙は、集合をグループに分ける DP の遷移になる（[部分集合を列挙する DP](../dp/subset-enumeration-dp.md#submask-loop)）
+- **XOR を足し算とみなす**：XOR は繰り上がりのない足し算なので、掃き出し法で「選んだ値の XOR で作れる値」を調べられる（[XOR 基底](../math/xor-basis.md#insert)）。XOR が絡む問題の型は [XOR](../patterns/xor.md) のページにまとめてある
 
 ## 例題 {#examples}
 

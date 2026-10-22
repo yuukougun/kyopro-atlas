@@ -86,7 +86,7 @@ search:
     - 言い回し：区間内の各値が偶数個（3 の倍数個）か・区間の積が平方数（立方数）か
     - 制約：N, Q ≤ 2×10^5 で区間の多重集合を毎回比べる
 - 節：
-    - `hashing-for-sets#random-values` 値ごとに乱数を割り当てる理由（値そのものを足すと {1, 4} と {2, 3} が衝突する）：https://yuukougun.github.io/kyopro-atlas/string/hashing-for-sets/#random-values
+    - `hashing-for-sets#random-values` 値ごとに乱数を割り当てる理由（値そのものを足すと、集合 1, 4 と 2, 3 が衝突する）：https://yuukougun.github.io/kyopro-atlas/string/hashing-for-sets/#random-values
     - `hashing-for-sets#xor-vs-sum` 集合は XOR、多重集合は和（XOR は同じ値 2 個で打ち消す）：https://yuukougun.github.io/kyopro-atlas/string/hashing-for-sets/#xor-vs-sum
     - `hashing-for-sets#prefix-hash` 接頭辞・区間のハッシュ（集合の接頭辞は初めて出た値だけ入れる）：https://yuukougun.github.io/kyopro-atlas/string/hashing-for-sets/#prefix-hash
     - `hashing-for-sets#with-fenwick` BIT と組んで点の更新に対応する：https://yuukougun.github.io/kyopro-atlas/string/hashing-for-sets/#with-fenwick

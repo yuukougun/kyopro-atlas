@@ -139,7 +139,7 @@ $N = 2 \times 10^5$ なら $ab$ は最大 $10^{10}$ になり、`int` に収ま�
 
 - **距離そのものが要るとき**：偶奇ではなく距離の値を比べるなら、LCA で $d(u, v)$ を求める（[距離 = dep(u) + dep(v) − 2 dep(lca)](../tree/lca.md#distance)）。重みがなければ、2 点からの距離は BFS でも求まる（[木の上の距離](../tree/tree-distance.md)）
 - **最大の独立集合**：多い方の色は $N/2$ 個以上を保証するだけである。最大を求めるなら木 DP で各頂点を選ぶ・選ばないの 2 状態にする（[頂点の選択を状態に足す](../dp/tree-dp.md#vertex-states)）か、葉から貪欲に選ぶ（[葉から考える](../tree/leaf-first.md)）
-- **マッチング・最小頂点被覆**：木は二部グラフなので、二部グラフでしか使えない手法がそのまま使える（[二部マッチング](../graph/bipartite-matching.md)、[König の定理](../graph/konig-theorem.md)）。色で頂点を左右に分けて最大流のグラフを作る問題もある
+- **マッチング・最小頂点被覆**：木は二部グラフなので、二部グラフでしか使えない手法がそのまま使える（[二部マッチング](../graph/bipartite-matching.md)、[König の定理](../graph/konig-theorem.md#theorem)）。色で頂点を左右に分けて最大流のグラフを作る問題もある
 - **ゲーム**：辺を足していくゲームの総手数が色の違う組の数で決まる（[ゲームの基本](../comb/game-basics.md#move-parity)）
 
 ## 使い分け {#comparison}

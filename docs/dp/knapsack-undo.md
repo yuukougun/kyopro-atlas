@@ -145,7 +145,7 @@ dfs(node, dp):            # dp は親までの品物を入れた表
 同じ形の工夫はほかにもある。
 
 - **削除が古い順だけ**（窓をずらす形）なら、スタック 2 本でキューを作る [SWAG](../ds/monotonic-stack.md#swag) の考え方で、表をスタックに積む。答えは 2 本の一番上の表を[前後からのマージ](#prefix-and-suffix)と同じ式で合わせればよく、各操作はならし $O(K)$ で済む
-- **区間の品物だけを使う**クエリなら、区間の中央で分けて左右の表を合わせる分割統治を使う（[分割統治](../basics/divide-and-conquer.md)）
+- **区間の品物だけを使う**クエリなら、区間の中央で分けて左右の表を合わせる分割統治を使う（[分割統治](../basics/divide-and-conquer.md#range-knapsack)）
 
 ## 落とし穴 {#pitfalls}
 
@@ -215,7 +215,7 @@ dfs(node, dp):            # dp は親までの品物を入れた表
 - 数え上げ（和・個数）の DP から要素を取り除くなら、戻す DP で 1 回 $O(K)$
 - max・min・可否の DP で「各 $i$ を除いたとき」なら、[前後からの DP のマージ](#prefix-and-suffix)
 - max・min の DP に追加と削除が任意の順に来るなら、オフラインで[時間軸の分割統治](#offline-divide-and-conquer)。削除が古い順だけならスタック 2 本
-- 区間の品物だけを使うクエリなら、[分割統治](../basics/divide-and-conquer.md)で左右の表を合わせる
+- 区間の品物だけを使うクエリなら、[分割統治](../basics/divide-and-conquer.md#range-knapsack)で左右の表を合わせる
 - 表の添字にする量が大きすぎるときは、添字と値の入れ替えを先に考える（[DP の次元を減らす](../dp/dp-dimension-reduction.md)）
 
 ## 参考 {#references}

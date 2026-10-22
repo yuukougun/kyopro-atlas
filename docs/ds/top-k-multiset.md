@@ -161,7 +161,7 @@ $$
 
 ## 値を添字にした BIT・セグメント木で書く方法（→ 値を添字にする BIT・セグメント木） {#by-index}
 
-値の候補が前もって分かるなら、2 つの multiset の代わりに、値を添字にした [BIT](../ds/fenwick-tree.md) やセグメント木でも同じことができる。値を[座標圧縮](../basics/coordinate-compression.md)して添字にし、各添字に「その値の個数」と「その値の和」を載せる。小さい方から $K$ 個の和は次のように求まる。
+値の候補が前もって分かるなら、2 つの multiset の代わりに、値を添字にした [BIT](../ds/fenwick-tree.md#count-by-value) やセグメント木でも同じことができる。値を[座標圧縮](../basics/coordinate-compression.md)して添字にし、各添字に「その値の個数」と「その値の和」を載せる。小さい方から $K$ 個の和は次のように求まる。
 
 1. 個数の累積が $K$ 以上になる最小の添字 $t$ を、[BIT 上の二分探索](../ds/fenwick-tree.md#binary-search)（セグメント木なら `max_right`）で $O(\log N)$ で探す
 2. 添字 $t$ 未満の和に、足りない個数ぶん（$K$ − $t$ 未満の個数）の「$t$ の値」を足す

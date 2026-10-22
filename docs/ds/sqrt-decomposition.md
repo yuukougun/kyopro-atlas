@@ -248,7 +248,7 @@ $d(u, v)$ は [LCA](../tree/lca.md) を使えば $O(\log N)$ で求まる。作�
 | 更新のない列で、区間の $x$ 以上の個数 | [マージソート木](../ds/merge-sort-tree.md)・オフラインなら[クエリの先読み](../ds/offline-queries.md) |
 | 更新のない列で、区間の種類数や同じ値の組の数 | [Mo's algorithm](../ds/mo-algorithm.md) |
 | 区間 chmin・区間和 | [Segment Tree Beats](../ds/segment-tree-beats.md) |
-| 頂点とその隣接頂点すべてへの操作 | [次数による平方分割](../graph/degree-sqrt.md) |
+| 頂点とその隣接頂点すべてへの操作 | [次数による平方分割](../graph/degree-sqrt.md#push-pull) |
 | 上のどれにも載らない区間操作、合計だけが抑えられた量 | 平方分割 |
 
 ## 参考 {#references}

@@ -323,7 +323,7 @@ $N, M, Q \le 10^5$ で、全頂点の到達集合を持つと 1.25 GB かかる�
 - **和が大きく要素が少ない部分和**：$N \le 40$ で和が $10^{18}$ などなら、和の値を添字にできないので[半分全列挙](../basics/meet-in-the-middle.md)を使う。
 - **選び方の数を数える部分和**：bitset は使えない。[部分和](../dp/subset-sum.md)の数え上げの DP にする。
 - **閉路のある有向グラフの到達可能性**：[強連結成分分解](../graph/scc.md)で縮約してから、この方法を使う。
-- **0/1 の連立方程式・XOR の最大化**：行を bitset にした[掃き出し法](../math/gaussian-elimination.md#mod-2)や [XOR 基底](../math/xor-basis.md)を使う。
+- **0/1 の連立方程式・XOR の最大化**：行を bitset にした[掃き出し法](../math/gaussian-elimination.md#mod-2)や [XOR 基底](../math/xor-basis.md#max)を使う。
 - **集合を添字にする DP**：[bitDP](../dp/bit-dp.md) を使う（[bitDP との違い](#vs-bit-dp)）。
 
 ## 参考 {#references}

@@ -54,7 +54,7 @@ C++23 の views は、[views の基本](../cpp/cpp-views-basics.md)の部品（`
 
 ## views::enumerate：（添字, 要素への参照）の組を作る、添字は ptrdiff_t（C++23・GCC 13〜） {#enumerate}
 
-`v | views::enumerate` は、各要素に添字を付けた組（添字, 要素への参照）を順に作る view である。添字と値を同時に使うループを、添字の変数なしで書ける。[構造化束縛](../cpp/cpp-structured-bindings.md)で `[i, x]` と受けるのが普通の使い方である。
+`v | views::enumerate` は、各要素に添字を付けた組（添字, 要素への参照）を順に作る view である。添字と値を同時に使うループを、添字の変数なしで書ける。[構造化束縛](../cpp/cpp-structured-bindings.md#enumerate-reference)で `[i, x]` と受けるのが普通の使い方である。
 
 ```cpp
 --8<-- "cpp-views-cpp23/enumerate.cpp:core"

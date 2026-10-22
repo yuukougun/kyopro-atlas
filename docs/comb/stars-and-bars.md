@@ -142,7 +142,7 @@ $$
 \prod_{p \mid M} \binom{e_p + N - 1}{N - 1}
 $$
 
-になる。$e_p \le \log_2 M$ なので、階乗の表は $N + \log_2 M$ まであれば足りる（[素因数の指数ベクトル](../math/prime-exponent-vector.md)・[対応づけ](../comb/counting-bijection.md)）。
+になる。$e_p \le \log_2 M$ なので、階乗の表は $N + \log_2 M$ まであれば足りる（[素因数の指数ベクトル](../math/prime-exponent-vector.md)・[対応づけ](../comb/counting-bijection.md#decompose)）。
 
 ## 落とし穴 {#pitfalls}
 
@@ -154,7 +154,7 @@ $$
 
 **$k = 0$ の境界**。範囲外を 0 とする二項係数の関数だけに任せると、$k = 0$ では式が $\binom{n-1}{-1} = 0$ になり、$n = 0$ の空の組（1 通り）を落とす。$n = 0$・$k \ge 1$ は式のままで正しい。
 
-**変数ごとの上限は単純な式にならない**。$0 \le x_i \le c$ のような上限は、上限を破る変数の集合で[包除原理](../comb/inclusion-exclusion.md)を使うか、和を状態に持つ DP の遷移を[累積和](../dp/dp-prefix-sum.md)で速くする。上限が 1 なら単なる二項係数 $\binom{k}{n}$ である。
+**変数ごとの上限は単純な式にならない**。$0 \le x_i \le c$ のような上限は、上限を破る変数の集合で[包除原理](../comb/inclusion-exclusion.md#symmetric)を使うか、和を状態に持つ DP の遷移を[累積和](../dp/dp-prefix-sum.md)で速くする。上限が 1 なら単なる二項係数 $\binom{k}{n}$ である。
 
 **mod を取らない正確な値**。$\binom{199}{11} \approx 3.7 \times 10^{17}$ のように答えが `long long` に収まる問題では、$r \leftarrow r \times (n - i) / (i + 1)$ を $i = 0, 1, \dots$ の順に行う。各段の値は $\binom{n}{i+1}$ そのものなので、割り算は割り切れる。ただし掛けた直後の値は答えより大きく（この例で約 $4 \times 10^{18}$）、少し大きい問題ではあふれる。
 

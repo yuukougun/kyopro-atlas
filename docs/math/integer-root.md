@@ -155,7 +155,7 @@ $\sqrt{N}$ は、整数の問題で「小さい側と大きい側の境目」と
 - **約数列挙**：$N$ の約数は $i$ と $N / i$ の組で、小さい方は $\sqrt{N}$ 以下にある。ループの終わりは `i * i <= n` で書く（[約数列挙](../math/divisor-enum.md)）
 - **商の列挙**：$\lfloor N / i \rfloor$ の値は $2\sqrt{N}$ 種類以下で、$i \le \sqrt{N}$ と $i > \sqrt{N}$ で分けて数える（[商の列挙](../math/floor-quotient-enum.md)）
 - **平方因子を除いた核**：「積が平方数」「$2^a \times b^2$ の形」のような条件は、素因数の指数の偶奇で考えると整理できる（[素因数の指数で考える](../math/prime-exponent-vector.md#squarefree-kernel)）
-- **指数ごとの包除**：累乗数の個数は、$\lfloor N^{1/K} \rfloor$ を指数 $K$ ごとに求めて、同じ数を重複して数えた分を指数の倍数関係で除いても求まる（[約数の包除原理](../comb/divisor-inclusion-exclusion.md)）
+- **指数ごとの包除**：累乗数の個数は、$\lfloor N^{1/K} \rfloor$ を指数 $K$ ごとに求めて、同じ数を重複して数えた分を指数の倍数関係で除いても求まる（[約数の包除原理](../comb/divisor-inclusion-exclusion.md#perfect-powers)）
 
 ## 例題 {#examples}
 

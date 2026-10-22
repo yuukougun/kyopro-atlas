@@ -202,7 +202,7 @@ $3^{35} = 50031545098999707$ は奇数で、double では表せない。`pow(3, 
 
 ## bitset：大きさはコンパイル時の定数、count・シフト・_Find_first・_Find_next {#bitset}
 
-`bitset<N>` は $N$ 個の 0/1 を 64 個ずつ 1 語にまとめて持つ。シフト・AND・OR・`count` は 64 個ずつまとめて処理するので、$O(N / 64)$ で終わる。部分和の DP で「作れる和の集合」を丸ごと 1 つの bitset に持つと、1 個ずつ更新する場合の約 1/64 の時間になる（[bitset による高速化](../misc/bitset-speedup.md)）。
+`bitset<N>` は $N$ 個の 0/1 を 64 個ずつ 1 語にまとめて持つ。シフト・AND・OR・`count` は 64 個ずつまとめて処理するので、$O(N / 64)$ で終わる。部分和の DP で「作れる和の集合」を丸ごと 1 つの bitset に持つと、1 個ずつ更新する場合の約 1/64 の時間になる（[bitset による高速化](../misc/bitset-speedup.md#subset-sum-shift)）。
 
 ```cpp
 --8<-- "cpp-math-functions/bitset.cpp:core"
@@ -222,7 +222,7 @@ $w = \{3, 5\}$ なら、作れる和は 0・3・5・8 の 4 個である。`dp <
 
 ## 乱数：mt19937_64・uniform_int_distribution・shuffle（rand() は使わない） {#random}
 
-乱数は、乱数を作るエンジン（`mt19937_64`）と、値を範囲に割り振る分布（`uniform_int_distribution`）を組み合わせて使う（`<random>`）。乱択アルゴリズムやハッシュの基数を決めるときに使う（[乱択アルゴリズム](../misc/randomized.md)）。
+乱数は、乱数を作るエンジン（`mt19937_64`）と、値を範囲に割り振る分布（`uniform_int_distribution`）を組み合わせて使う（`<random>`）。乱択アルゴリズムやハッシュの基数を決めるときに使う（[乱択アルゴリズム](../misc/randomized.md#cpp-random)）。
 
 ```cpp
 --8<-- "cpp-math-functions/random.cpp:core"

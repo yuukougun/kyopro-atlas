@@ -66,7 +66,7 @@ atcoder: true
 
 ## 比較関数に「以下」を書くと sort が壊れる（同じ値が多いと Segmentation fault） {#less-equal-pitfall}
 
-比較関数に `<=`（降順なら `>=`）を書くと、等しい 2 つで true を返し、「自分自身と比べたら false」の約束を破る。約束を破った比較関数を `sort` に渡すのは[未定義動作](../cpp/cpp-undefined-behavior.md)で、コンパイラは警告を出さない。
+比較関数に `<=`（降順なら `>=`）を書くと、等しい 2 つで true を返し、「自分自身と比べたら false」の約束を破る。約束を破った比較関数を `sort` に渡すのは[未定義動作](../cpp/cpp-undefined-behavior.md#other-ub)で、コンパイラは警告を出さない。
 
 ```cpp
 --8<-- "cpp-comparators/less-equal.cpp:core"

@@ -259,7 +259,7 @@ ACL の `floor_sum(N, M, A, B)` をケースごとに 1 回呼ぶだけである
 | --- | --- | --- |
 | $\sum_i g(\lfloor N/i \rfloor)$（$i$ が分母） | [商の列挙](../math/floor-quotient-enum.md) | $O(\sqrt{N})$ |
 | $\sum_i \lfloor (ai + b)/m \rfloor$（$i$ が分子に一次） | floor sum | $O(\log m)$ |
-| 多角形の内部・辺上の格子点 | [凸包](../geometry/convex-hull.md)のページの Pick の定理 | $O(N \log C)$ |
+| 多角形の内部・辺上の格子点 | [凸包](../geometry/convex-hull.md#lattice-points)のページの Pick の定理 | $O(N \log C)$ |
 
 表の $N$ は頂点数、$C$ は座標の絶対値の上限である。直線の下の格子点でも、端点が格子点の線分なら gcd と Pick の定理で済むことがある。傾きや切片が整数比で与えられ、$x$ の範囲で切り取られる形なら floor sum を使う。
 

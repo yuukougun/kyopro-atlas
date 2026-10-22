@@ -52,11 +52,11 @@ updated: 2026-10-21
 | 区間 $[l, r)$ の和が $K$ | 累積和で $S_r - S_l = K$ | [累積和と連想配列](../basics/prefix-sum-counting.md) |
 | 区間の和が $M$ の倍数 | $S_r \equiv S_l \pmod{M}$ | [余りが等しい組](../basics/prefix-sum-counting.md#same-remainder) |
 | $A_j - A_i = j - i$ | $A_i - i = A_j - j$ | [i と j を分離する](#separate-indices) |
-| 狭義単調増加（整数） | $A_i - i$ が広義単調増加 | [差分列](../basics/difference-sequence.md) |
+| 狭義単調増加（整数） | $A_i - i$ が広義単調増加 | [差分列](../basics/difference-sequence.md#strict-to-weak) |
 | 平均 $\ge x$ | $\sum (a_i - x) \ge 0$ | [平均の言い換え](../basics/fractional-binary-search.md#average) |
 | 中央値 $\ge x$ | $x$ 以上を $+1$、未満を $-1$ にした和が正 | [中央値の言い換え](../basics/fractional-binary-search.md#median) |
 | 最大値 $\le x$ | すべての要素が $x$ 以下 | [答えで二分探索](../basics/binary-search-answer.md#minimax) |
-| $K$ 番目に小さい値 $\le x$ | $x$ 以下の要素が $K$ 個以上 | [K 番目の値を求める](../basics/kth-value.md) |
+| $K$ 番目に小さい値 $\le x$ | $x$ 以下の要素が $K$ 個以上 | [K 番目の値を求める](../basics/kth-value.md#why-count) |
 | $a + b = a \oplus b$ | $a \text{ AND } b = 0$（同じ bit に 1 が重ならない） | [bit ごとに独立](../basics/bitwise-independence.md) |
 | マンハッタン距離 | $u = x + y$、$v = x - y$ でチェビシェフ距離 | [45 度回転](../geometry/manhattan-chebyshev.md#rotate-45) |
 | 正しい括弧列 | $+1$・$-1$ の累積和が負にならず最後に 0 | [括弧列の判定](../patterns/bracket-sequence.md#check) |
@@ -133,7 +133,7 @@ $$
 
 操作を何回も行う問題では、1 回の操作が「何をどれだけ変えるか」を別の量で見直すと、操作が単純になることがある。代表は次の 3 つである。
 
-**区間への加算を差分列の 2 点の操作にする**。列 $a$ の隣どうしの差 $d_i = a_i - a_{i-1}$ を取ると、区間 $[l, r)$ に $+1$ する操作は、$d_l$ を $+1$ し $d_r$ を $-1$ する 2 点の操作になる。区間の位置や長さの組み合わせを考える代わりに、差分列の各点をいくつ増減させればよいかを考えればよい。たとえば「区間に $+1$ する操作で、全体を 0 から $a$ にする最小回数」は、$d_i > 0$ の総和になる（左端の $a_{-1} = 0$ とする）。1 回の操作で $+1$ される $d$ は 1 点だけなので、正の部分の総和以上は要る。逆に、左から見て $d_i > 0$ の位置で $d_i$ 本の区間を始め、$d_i < 0$ の位置で $-d_i$ 本を終えれば、その回数で作れる（[差分列](../basics/difference-sequence.md)）。
+**区間への加算を差分列の 2 点の操作にする**。列 $a$ の隣どうしの差 $d_i = a_i - a_{i-1}$ を取ると、区間 $[l, r)$ に $+1$ する操作は、$d_l$ を $+1$ し $d_r$ を $-1$ する 2 点の操作になる。区間の位置や長さの組み合わせを考える代わりに、差分列の各点をいくつ増減させればよいかを考えればよい。たとえば「区間に $+1$ する操作で、全体を 0 から $a$ にする最小回数」は、$d_i > 0$ の総和になる（左端の $a_{-1} = 0$ とする）。1 回の操作で $+1$ される $d$ は 1 点だけなので、正の部分の総和以上は要る。逆に、左から見て $d_i > 0$ の位置で $d_i$ 本の区間を始め、$d_i < 0$ の位置で $-d_i$ 本を終えれば、その回数で作れる（[差分列](../basics/difference-sequence.md#min-operations)）。
 
 **区間の反転を切り替え点の 2 つにする**。0 と 1 の列で区間を反転する操作は、隣どうしが異なる位置（切り替え点）の列で見ると、両端の 2 点の有無を反転する操作になる。差分列の XOR 版である。
 

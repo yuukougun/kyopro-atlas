@@ -95,7 +95,7 @@ $r = 3$ で値 1 が再び現れ、1 は位置 0 から位置 2 へ移る。$r =
 !!! info "ACL では"
     `fenwick_tree<T> fw(n);`（全要素 0）。`fw.add(p, x)` で $a_p$ に $x$ を足し、`fw.sum(l, r)` で半開区間 $[l, r)$ の和を返す。どちらも $O(\log N)$。添字は 0-indexed で、`T` は整数型か modint を使う（和だけを扱う）。
 
-同じことを「$[l, r)$ の位置 $i$ のうち、直前の同じ値の位置 $\mathrm{prev}_i$ が $l$ より前のものの個数」とも言える。これは点 $(i, \mathrm{prev}_i)$ の 2 次元の数え上げなので、[平面走査と BIT](../ds/sweep-line-2d.md) と同じ形であり、オンラインで答えるときの出発点にもなる（[オンライン強制](#online)）。
+同じことを「$[l, r)$ の位置 $i$ のうち、直前の同じ値の位置 $\mathrm{prev}_i$ が $l$ より前のものの個数」とも言える。これは点 $(i, \mathrm{prev}_i)$ の 2 次元の数え上げなので、[平面走査と BIT](../ds/sweep-line-2d.md#rectangle-count) と同じ形であり、オンラインで答えるときの出発点にもなる（[オンライン強制](#online)）。
 
 ## しきい値でソート（重み w 以下の辺だけで連結か・X 以下の要素の和） {#threshold}
 
@@ -173,7 +173,7 @@ Union-Find での使い方と、質問の時点のずれ（削除の前に答え
 
 | やりたいこと | 先読みできるとき | オンライン強制のとき |
 | --- | --- | --- |
-| 区間の種類数 | 右端の順に BIT | 接頭辞ごとの版の[永続セグメント木](../ds/persistent-data-structures.md) |
+| 区間の種類数 | 右端の順に BIT | 接頭辞ごとの版の[永続セグメント木](../ds/persistent-data-structures.md#prefix-versions) |
 | 区間の $X$ 以下の個数・和 | しきい値の順に BIT | [マージソート木](../ds/merge-sort-tree.md)・Wavelet Matrix |
 | 値が $10^9$ までの集合 | 座標圧縮して BIT | 動的セグメント木（[値を添字にするセグメント木](../ds/segment-tree-on-values.md)） |
 
@@ -264,7 +264,7 @@ Union-Find での使い方と、質問の時点のずれ（削除の前に答え
 
 ## 使い分け {#comparison}
 
-- **オフラインの BIT と Mo's algorithm**：区間の種類数や $X$ 以下の個数のように BIT に載る量なら、クエリの先読みと BIT が $O((N + Q) \log N)$ で速い。1 要素の出入りでしか更新できない量（区間の中の同じ値の組の数など）は [Mo's algorithm](../ds/mo-algorithm.md) を使う
+- **オフラインの BIT と Mo's algorithm**：区間の種類数や $X$ 以下の個数のように BIT に載る量なら、クエリの先読みと BIT が $O((N + Q) \log N)$ で速い。1 要素の出入りでしか更新できない量（区間の中の同じ値の組の数など）は [Mo's algorithm](../ds/mo-algorithm.md#what-it-does) を使う
 - **先読みとオンラインの構造**：先読みできるなら BIT と Union-Find で足りる。オンライン強制のときだけ、[永続データ構造](../ds/persistent-data-structures.md)・[マージソート木](../ds/merge-sort-tree.md)・動的セグメント木を使う（[オンライン強制の見分け方](#online)）
 - **2 次元の数え上げ**：「位置が $[l, r)$ で値が $X$ 以下」のように条件が 2 つの軸にまたがるなら、[平面走査と BIT](../ds/sweep-line-2d.md) として考えると整理しやすい
 - **イベントの並べ替え**：区間の開始と終了をイベントにして座標の順に処理するのは[イベントソート](../basics/event-sort.md)で、クエリをイベントに混ぜればクエリの先読みになる

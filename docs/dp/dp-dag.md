@@ -153,7 +153,7 @@ DAG 上の DP は、ほかの手法の判定や下ごしらえとしてよく現
 
 - **計算順序**：区間の長さ順・集合の昇順・木の帰りがけ順など、DP の表の回し方はどれも依存グラフのトポロジカル順の特別な場合である（[計算順序](../dp/dp-order.md)）
 - **比の最大化**：DAG の経路で「価値の和 ÷ コストの和」を最大にするなら、答え $x$ を決めて辺の重みを「価値 $- x \times$ コスト」に変え、最長路が 0 以上かを DAG 上の DP で判定する（[平均・中央値の最大化](../basics/fractional-binary-search.md#dp-check)）
-- **到達可能性の大量のクエリ**：各頂点から到達できる頂点の集合を、逆トポロジカル順に bitset の OR で求める（[bitset による高速化](../misc/bitset-speedup.md)）
+- **到達可能性の大量のクエリ**：各頂点から到達できる頂点の集合を、逆トポロジカル順に bitset の OR で求める（[bitset による高速化](../misc/bitset-speedup.md#reachability)）
 - **縮約した DAG での最適化**：SCC で縮約した DAG の上で、最小パス被覆やフローを考える問題もある（[最小パス被覆と Hall の定理](../graph/dilworth-path-cover.md)）
 
 ## 落とし穴 {#pitfalls}

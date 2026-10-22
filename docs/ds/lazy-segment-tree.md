@@ -152,7 +152,7 @@ updated: 2026-10-21
 
 初期値の葉は `{a[i], 1}` のように長さ 1 で作る。長さ 0 の葉にすると、加算しても和が増えない（[境界](#boundaries)）。
 
-値に足すのは長さに限らない。「作用の結果を計算するのに足りない情報を値に足す」のが設計の基本で、区間の反転・転倒数・等差数列の加算なども同じ考え方で載る。型の一覧は[遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md)にまとめる。
+値に足すのは長さに限らない。「作用の結果を計算するのに足りない情報を値に足す」のが設計の基本で、区間の反転・転倒数・等差数列の加算なども同じ考え方で載る。型の一覧は[遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md#pattern-table)にまとめる。
 
 ## ACL の約束（mapping・composition・id） {#acl-conventions}
 
@@ -299,7 +299,7 @@ A を $+1$、B を $-1$ に置き換えて累積和を取ると、部分文字�
 | 全体への加算・代入だけ | [全体への操作を変数で持つ](../ds/global-offset.md) |
 | 区間加算・一点取得だけ | 差分の [BIT](../ds/fenwick-tree.md)、または双対セグメント木 |
 | 区間加算・区間和だけ | BIT 2 本（[BIT](../ds/fenwick-tree.md)） |
-| 値と作用を自分で設計する | [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md) |
+| 値と作用を自分で設計する | [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md#design-steps) |
 | 区間 chmin・区間和、区間の除算など | [Segment Tree Beats](../ds/segment-tree-beats.md)・[平方分割](../ds/sqrt-decomposition.md) |
 | 区間を塗って、同じ値の区間をまとめて扱う | [区間を set で管理する](../ds/interval-set.md) |
 

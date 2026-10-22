@@ -195,8 +195,8 @@ $$
 | 量 | 誤った計算 | 正しい扱い |
 | --- | --- | --- |
 | 積 $XY$ | $E[X]E[Y]$ | 独立なら $E[X]E[Y]$ |
-| 二乗 $X^2$ | $E[X]^2$ | [二乗の期待値](../comb/expectation-of-square.md) |
-| $\max(X, Y)$ | $\max(E[X], E[Y])$ | $\sum_k P(\max \ge k)$（[期待値と確率の変換](../comb/expectation-tail-sum.md)） |
+| 二乗 $X^2$ | $E[X]^2$ | [二乗の期待値](../comb/expectation-of-square.md#difference) |
+| $\max(X, Y)$ | $\max(E[X], E[Y])$ | $\sum_k P(\max \ge k)$（[期待値と確率の変換](../comb/expectation-tail-sum.md#kth-value)） |
 
 たとえばサイコロ 1 個の目 $X$ では $E[X] = 7/2$ なので $E[X]^2 = 49/4$ だが、$E[X^2] = (1 + 4 + 9 + 16 + 25 + 36)/6 = 91/6$ である。サイコロ 2 個の目の大きい方の期待値は $161/36$ で、$\max(7/2, 7/2) = 7/2$ より大きい。
 
@@ -301,7 +301,7 @@ $$
 | 求めるもの | 使う方法 |
 | --- | --- |
 | 和・個数に分けられる量の期待値 | このページ（線形性・指示確率変数） |
-| 最大値・$K$ 番目の値の期待値 | [期待値と確率の変換](../comb/expectation-tail-sum.md) |
+| 最大値・$K$ 番目の値の期待値 | [期待値と確率の変換](../comb/expectation-tail-sum.md#kth-value) |
 | 終わるまでの回数・コストの期待値 | [期待値 DP](../comb/expected-value-dp.md) |
 | 二乗・分散 | [二乗の期待値](../comb/expectation-of-square.md) |
 

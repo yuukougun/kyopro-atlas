@@ -300,7 +300,7 @@ DSU on Tree が使えるのは、答えを部分木ごとに求めればよく�
 | グループ内の種類数・値ごとの個数をオンラインで | マージテク（[代表元に map を持たせる](#map-on-root)） |
 | 併合の過程が先に全部分かっていて、各時点のグループを問う | [併合過程の木](../tree/merge-process-tree.md)＋オイラーツアー |
 | 部分木ごとの種類数・最頻値 | [DSU on Tree](#dsu-on-tree)、またはオイラーツアーの区間で数える（[オイラーツアー](../tree/euler-tour.md)） |
-| 部分木の組を数える（同じ色の組の距離など） | [部分木ごとの集合の併合](#subtree-merge)、[重心分解](../tree/centroid-decomposition.md)、[Auxiliary Tree](../tree/auxiliary-tree.md) |
+| 部分木の組を数える（同じ色の組の距離など） | [部分木ごとの集合の併合](#subtree-merge)、[重心分解](../tree/centroid-decomposition.md#count-through)、[Auxiliary Tree](../tree/auxiliary-tree.md) |
 | 森に辺を足すだけ（削除なし） | [小さい方を根付け直す](#reroot-smaller)。削除もあるなら[動的木](../tree/dynamic-tree.md) |
 
 ## 参考 {#references}

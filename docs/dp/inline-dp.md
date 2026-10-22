@@ -187,11 +187,11 @@ $i$ を 1 つ進めるたびに、始点 $j$ ごとの値 $g_i[j] = \mathrm{dp}[
 | --- | --- |
 | 毎行ほぼすべての値が変わる | 行を 2 本で交互に使う（[配列の使い回し](../dp/knapsack-01.md#dp-rolling-array)） |
 | 範囲の和から貰い、1 行を作り直す | [累積和による DP の高速化](../dp/dp-prefix-sum.md) |
-| 1 点を更新し、範囲の最大・最小から貰う | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md) |
+| 1 点を更新し、範囲の最大・最小から貰う | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md#values-on-segment-tree) |
 | 前の行がほぼ写り、少数の点・範囲加算・シフトだけが入る | インライン DP（このページ） |
 | どの行も同じ線形の遷移で、段数が巨大 | [行列累乗](../math/matrix-power.md) |
 
-状態の次元そのものを減らす工夫は[状態の削減](../dp/dp-dimension-reduction.md)に、遅延セグメント木に載せる値と作用の設計は[遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md)にまとめる。
+状態の次元そのものを減らす工夫は[状態の削減](../dp/dp-dimension-reduction.md)に、遅延セグメント木に載せる値と作用の設計は[遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md#design-steps)にまとめる。
 
 ## 例題 {#examples}
 

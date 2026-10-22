@@ -282,7 +282,7 @@ v(u) = min over 子 c ( v(c) )   … 深さが奇数（後手の手番）
 ## 使い分け {#comparison}
 
 - 勝ち負けだけを問うなら、[ゲームの基本と勝敗の DP](../comb/game-basics.md)の true・false の DP で足りる。得点や値を問うときにミニマックスを使う
-- 独立なゲームをいくつも並べ、どれか 1 つを選んで動かすゲームの勝敗は、[Grundy 数](../comb/grundy-number.md)で分けて考える。ミニマックスで全部の組を状態にすると大きすぎる
+- 独立なゲームをいくつも並べ、どれか 1 つを選んで動かすゲームの勝敗は、[Grundy 数](../comb/grundy-number.md#sum)で分けて考える。ミニマックスで全部の組を状態にすると大きすぎる
 - 手番の人の選択に加えてサイコロなどの偶然が入るなら、偶然の局面では max の代わりに平均を取る（[最適な戦略の期待値](../comb/optimal-strategy-expectation.md)）
 - 同じ局面に戻れるゲームは[後退解析](../comb/game-retrograde-analysis.md)を使う
 
