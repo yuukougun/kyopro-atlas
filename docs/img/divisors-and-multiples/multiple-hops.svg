@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 330" width="400" height="330" font-family="sans-serif" font-size="13">
+<rect x="0" y="0" width="400" height="330" fill="#ffffff"/>
+<text x="200.0" y="20" text-anchor="middle" font-size="14" fill="#222">M = 12：各 d から d ずつ跳んで倍数をたどる</text>
+<text x="62" y="42" text-anchor="middle" fill="#555">1</text>
+<text x="88" y="42" text-anchor="middle" fill="#555">2</text>
+<text x="114" y="42" text-anchor="middle" fill="#555">3</text>
+<text x="140" y="42" text-anchor="middle" fill="#555">4</text>
+<text x="166" y="42" text-anchor="middle" fill="#555">5</text>
+<text x="192" y="42" text-anchor="middle" fill="#555">6</text>
+<text x="218" y="42" text-anchor="middle" fill="#555">7</text>
+<text x="244" y="42" text-anchor="middle" fill="#555">8</text>
+<text x="270" y="42" text-anchor="middle" fill="#555">9</text>
+<text x="296" y="42" text-anchor="middle" fill="#555">10</text>
+<text x="322" y="42" text-anchor="middle" fill="#555">11</text>
+<text x="348" y="42" text-anchor="middle" fill="#555">12</text>
+<text x="392" y="42" text-anchor="end" fill="#555">個数</text>
+<text x="10" y="84" fill="#222">d = 1</text>
+<line x1="62" y1="80" x2="348" y2="80" stroke="#ddd" stroke-width="1"/>
+<path d="M62,80 Q75.0,68 88,80" fill="none" stroke="#1f5fa8" stroke-width="1.5"/>
+<path d="M88,80 Q101.0,68 114,80" fill="none" stroke="#1f5fa8" stroke-width="1.5"/>
+<path d="M114,80 Q127.0,68 140,80" fill="none" stroke="#1f5fa8" stroke-width="1.5"/>
+<path d="M140,80 Q153.0,68 166,80" fill="none" stroke="#1f5fa8" stroke-width="1.5"/>
+<path d="M166,80 Q179.0,68 192,80" fill="none" stroke="#1f5fa8" stroke-width="1.5"/>
+<path d="M192,80 Q205.0,68 218,80" fill="none" stroke="#1f5fa8" stroke-width="1.5"/>
+<path d="M218,80 Q231.0,68 244,80" fill="none" stroke="#1f5fa8" stroke-width="1.5"/>
+<path d="M244,80 Q257.0,68 270,80" fill="none" stroke="#1f5fa8" stroke-width="1.5"/>
+<path d="M270,80 Q283.0,68 296,80" fill="none" stroke="#1f5fa8" stroke-width="1.5"/>
+<path d="M296,80 Q309.0,68 322,80" fill="none" stroke="#1f5fa8" stroke-width="1.5"/>
+<path d="M322,80 Q335.0,68 348,80" fill="none" stroke="#1f5fa8" stroke-width="1.5"/>
+<circle cx="62" cy="80" r="4.5" fill="#1f5fa8"/>
+<circle cx="88" cy="80" r="4.5" fill="#1f5fa8"/>
+<circle cx="114" cy="80" r="4.5" fill="#1f5fa8"/>
+<circle cx="140" cy="80" r="4.5" fill="#1f5fa8"/>
+<circle cx="166" cy="80" r="4.5" fill="#1f5fa8"/>
+<circle cx="192" cy="80" r="4.5" fill="#1f5fa8"/>
+<circle cx="218" cy="80" r="4.5" fill="#1f5fa8"/>
+<circle cx="244" cy="80" r="4.5" fill="#1f5fa8"/>
+<circle cx="270" cy="80" r="4.5" fill="#1f5fa8"/>
+<circle cx="296" cy="80" r="4.5" fill="#1f5fa8"/>
+<circle cx="322" cy="80" r="4.5" fill="#1f5fa8"/>
+<circle cx="348" cy="80" r="4.5" fill="#1f5fa8"/>
+<text x="392" y="84" text-anchor="end" fill="#222">12</text>
+<text x="10" y="120" fill="#222">d = 2</text>
+<line x1="62" y1="116" x2="348" y2="116" stroke="#ddd" stroke-width="1"/>
+<path d="M88,116 Q114.0,100 140,116" fill="none" stroke="#1f5fa8" stroke-width="1.5"/>
+<path d="M140,116 Q166.0,100 192,116" fill="none" stroke="#1f5fa8" stroke-width="1.5"/>
+<path d="M192,116 Q218.0,100 244,116" fill="none" stroke="#1f5fa8" stroke-width="1.5"/>
+<path d="M244,116 Q270.0,100 296,116" fill="none" stroke="#1f5fa8" stroke-width="1.5"/>
+<path d="M296,116 Q322.0,100 348,116" fill="none" stroke="#1f5fa8" stroke-width="1.5"/>
+<circle cx="62" cy="116" r="2" fill="#bbb"/>
+<circle cx="88" cy="116" r="4.5" fill="#1f5fa8"/>
+<circle cx="114" cy="116" r="2" fill="#bbb"/>
+<circle cx="140" cy="116" r="4.5" fill="#1f5fa8"/>
+<circle cx="166" cy="116" r="2" fill="#bbb"/>
+<circle cx="192" cy="116" r="4.5" fill="#1f5fa8"/>
+<circle cx="218" cy="116" r="2" fill="#bbb"/>
+<circle cx="244" cy="116" r="4.5" fill="#1f5fa8"/>
+<circle cx="270" cy="116" r="2" fill="#bbb"/>
+<circle cx="296" cy="116" r="4.5" fill="#1f5fa8"/>
+<circle cx="322" cy="116" r="2" fill="#bbb"/>
+<circle cx="348" cy="116" r="4.5" fill="#1f5fa8"/>
+<text x="392" y="120" text-anchor="end" fill="#222">6</text>
+<text x="10" y="156" fill="#222">d = 3</text>
+<line x1="62" y1="152" x2="348" y2="152" stroke="#ddd" stroke-width="1"/>
+<path d="M114,152 Q153.0,132 192,152" fill="none" stroke="#1f5fa8" stroke-width="1.5"/>
+<path d="M192,152 Q231.0,132 270,152" fill="none" stroke="#1f5fa8" stroke-width="1.5"/>
+<path d="M270,152 Q309.0,132 348,152" fill="none" stroke="#1f5fa8" stroke-width="1.5"/>
+<circle cx="62" cy="152" r="2" fill="#bbb"/>
+<circle cx="88" cy="152" r="2" fill="#bbb"/>
+<circle cx="114" cy="152" r="4.5" fill="#1f5fa8"/>
+<circle cx="140" cy="152" r="2" fill="#bbb"/>
+<circle cx="166" cy="152" r="2" fill="#bbb"/>
+<circle cx="192" cy="152" r="4.5" fill="#1f5fa8"/>
+<circle cx="218" cy="152" r="2" fill="#bbb"/>
+<circle cx="244" cy="152" r="2" fill="#bbb"/>
+<circle cx="270" cy="152" r="4.5" fill="#1f5fa8"/>
+<circle cx="296" cy="152" r="2" fill="#bbb"/>
+<circle cx="322" cy="152" r="2" fill="#bbb"/>
+<circle cx="348" cy="152" r="4.5" fill="#1f5fa8"/>
+<text x="392" y="156" text-anchor="end" fill="#222">4</text>
+<text x="10" y="192" fill="#222">d = 4</text>
+<line x1="62" y1="188" x2="348" y2="188" stroke="#ddd" stroke-width="1"/>
+<path d="M140,188 Q192.0,164 244,188" fill="none" stroke="#1f5fa8" stroke-width="1.5"/>
+<path d="M244,188 Q296.0,164 348,188" fill="none" stroke="#1f5fa8" stroke-width="1.5"/>
+<circle cx="62" cy="188" r="2" fill="#bbb"/>
+<circle cx="88" cy="188" r="2" fill="#bbb"/>
+<circle cx="114" cy="188" r="2" fill="#bbb"/>
+<circle cx="140" cy="188" r="4.5" fill="#1f5fa8"/>
+<circle cx="166" cy="188" r="2" fill="#bbb"/>
+<circle cx="192" cy="188" r="2" fill="#bbb"/>
+<circle cx="218" cy="188" r="2" fill="#bbb"/>
+<circle cx="244" cy="188" r="4.5" fill="#1f5fa8"/>
+<circle cx="270" cy="188" r="2" fill="#bbb"/>
+<circle cx="296" cy="188" r="2" fill="#bbb"/>
+<circle cx="322" cy="188" r="2" fill="#bbb"/>
+<circle cx="348" cy="188" r="4.5" fill="#1f5fa8"/>
+<text x="392" y="192" text-anchor="end" fill="#222">3</text>
+<text x="10" y="228" fill="#222">d = 5</text>
+<line x1="62" y1="224" x2="348" y2="224" stroke="#ddd" stroke-width="1"/>
+<path d="M166,224 Q231.0,196 296,224" fill="none" stroke="#1f5fa8" stroke-width="1.5"/>
+<circle cx="62" cy="224" r="2" fill="#bbb"/>
+<circle cx="88" cy="224" r="2" fill="#bbb"/>
+<circle cx="114" cy="224" r="2" fill="#bbb"/>
+<circle cx="140" cy="224" r="2" fill="#bbb"/>
+<circle cx="166" cy="224" r="4.5" fill="#1f5fa8"/>
+<circle cx="192" cy="224" r="2" fill="#bbb"/>
+<circle cx="218" cy="224" r="2" fill="#bbb"/>
+<circle cx="244" cy="224" r="2" fill="#bbb"/>
+<circle cx="270" cy="224" r="2" fill="#bbb"/>
+<circle cx="296" cy="224" r="4.5" fill="#1f5fa8"/>
+<circle cx="322" cy="224" r="2" fill="#bbb"/>
+<circle cx="348" cy="224" r="2" fill="#bbb"/>
+<text x="392" y="228" text-anchor="end" fill="#222">2</text>
+<text x="10" y="264" fill="#222">d = 6</text>
+<line x1="62" y1="260" x2="348" y2="260" stroke="#ddd" stroke-width="1"/>
+<path d="M192,260 Q270.0,232 348,260" fill="none" stroke="#1f5fa8" stroke-width="1.5"/>
+<circle cx="62" cy="260" r="2" fill="#bbb"/>
+<circle cx="88" cy="260" r="2" fill="#bbb"/>
+<circle cx="114" cy="260" r="2" fill="#bbb"/>
+<circle cx="140" cy="260" r="2" fill="#bbb"/>
+<circle cx="166" cy="260" r="2" fill="#bbb"/>
+<circle cx="192" cy="260" r="4.5" fill="#1f5fa8"/>
+<circle cx="218" cy="260" r="2" fill="#bbb"/>
+<circle cx="244" cy="260" r="2" fill="#bbb"/>
+<circle cx="270" cy="260" r="2" fill="#bbb"/>
+<circle cx="296" cy="260" r="2" fill="#bbb"/>
+<circle cx="322" cy="260" r="2" fill="#bbb"/>
+<circle cx="348" cy="260" r="4.5" fill="#1f5fa8"/>
+<text x="392" y="264" text-anchor="end" fill="#222">2</text>
+<text x="10" y="292" fill="#222">d = 7〜12：自分だけの 1 個ずつ（計 6）</text>
+<text x="10" y="316" fill="#222">合計 12 + 6 + 4 + 3 + 2 + 2 + 6 = 35 個（12 × 12 = 144 より少ない）</text>
+</svg>

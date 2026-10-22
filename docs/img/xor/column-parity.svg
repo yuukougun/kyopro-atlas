@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 270" width="400" height="270" font-family="sans-serif">
+  <rect x="0" y="0" width="400" height="270" fill="#ffffff"/>
+  <g font-size="14" fill="#222" text-anchor="middle">
+    <text x="60" y="30">値</text>
+    <text x="150" y="30">bit 2</text>
+    <text x="200" y="30">bit 1</text>
+    <text x="250" y="30">bit 0</text>
+  </g>
+  <!-- cells with 1 get a gray box -->
+  <g fill="#e3e3e3" stroke="#888" stroke-width="1">
+    <rect x="136" y="46" width="28" height="24"/>
+    <rect x="186" y="46" width="28" height="24"/>
+    <rect x="186" y="76" width="28" height="24"/>
+    <rect x="236" y="76" width="28" height="24"/>
+    <rect x="136" y="106" width="28" height="24"/>
+    <rect x="236" y="106" width="28" height="24"/>
+    <rect x="186" y="136" width="28" height="24"/>
+    <rect x="236" y="136" width="28" height="24"/>
+  </g>
+  <g font-size="16" fill="#222" text-anchor="middle">
+    <text x="60" y="64">6</text><text x="150" y="64">1</text><text x="200" y="64">1</text><text x="250" y="64">0</text>
+    <text x="60" y="94">3</text><text x="150" y="94">0</text><text x="200" y="94">1</text><text x="250" y="94">1</text>
+    <text x="60" y="124">5</text><text x="150" y="124">1</text><text x="200" y="124">0</text><text x="250" y="124">1</text>
+    <text x="60" y="154">3</text><text x="150" y="154">0</text><text x="200" y="154">1</text><text x="250" y="154">1</text>
+  </g>
+  <line x1="30" y1="172" x2="275" y2="172" stroke="#222" stroke-width="1.5"/>
+  <g font-size="13" fill="#222" text-anchor="middle">
+    <text x="60" y="194">1 の個数</text>
+    <text x="150" y="194">2</text><text x="200" y="194">3</text><text x="250" y="194">3</text>
+  </g>
+  <g font-size="16" fill="#222" text-anchor="middle" font-weight="bold">
+    <text x="60" y="226">XOR = 3</text>
+    <text x="150" y="226">0</text><text x="200" y="226">1</text><text x="250" y="226">1</text>
+  </g>
+  <text x="200" y="246" font-size="12" fill="#222" text-anchor="middle">各列の 1 の個数の偶奇が、XOR のその桁になる</text>
+  <text x="200" y="263" font-size="12" fill="#c0392b" text-anchor="middle">印を付けた 2 つの 3 は打ち消し合う</text>
+  <!-- the two 3s get the same dashed mark -->
+  <g fill="none" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="4 2">
+    <circle cx="60" cy="89" r="13"/>
+    <circle cx="60" cy="149" r="13"/>
+  </g>
+  <g font-size="12" fill="#c0392b">
+    <text x="285" y="93">1 つ目の 3</text>
+    <text x="285" y="153">2 つ目の 3</text>
+  </g>
+</svg>

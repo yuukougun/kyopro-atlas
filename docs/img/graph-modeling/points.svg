@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 320" width="360" height="320" font-family="sans-serif" font-size="14">
+  <rect width="360" height="320" fill="#ffffff"/>
+  <text x="180" y="24" text-anchor="middle">平面の点（4 個）</text>
+  <!-- 格子 -->
+  <g stroke="#cccccc" stroke-width="1">
+    <line x1="60" y1="60" x2="60" y2="270"/><line x1="140" y1="60" x2="140" y2="270"/><line x1="220" y1="60" x2="220" y2="270"/><line x1="300" y1="60" x2="300" y2="270"/>
+    <line x1="40" y1="90" x2="320" y2="90"/><line x1="40" y1="170" x2="320" y2="170"/><line x1="40" y1="250" x2="320" y2="250"/>
+  </g>
+  <g fill="#333" font-size="13" text-anchor="middle">
+    <text x="60" y="292">x=1</text><text x="140" y="292">x=2</text><text x="220" y="292">x=3</text><text x="300" y="292">x=4</text>
+  </g>
+  <g fill="#333" font-size="13" text-anchor="end">
+    <text x="34" y="95">y=3</text><text x="34" y="175">y=2</text><text x="34" y="255">y=1</text>
+  </g>
+  <!-- 長方形の 3 隅 -->
+  <polyline points="140,250 60,250 60,90 140,90 140,250" fill="none" stroke="#555" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <g stroke="#333" stroke-width="2" fill="#333">
+    <circle cx="60" cy="250" r="8"/><circle cx="60" cy="90" r="8"/><circle cx="140" cy="90" r="8"/><circle cx="300" cy="170" r="8"/>
+  </g>
+  <circle cx="140" cy="250" r="8" fill="#ffffff" stroke="#333" stroke-width="2" stroke-dasharray="3,2"/>
+  <g font-size="14" fill="#000">
+    <text x="72" y="244">A</text><text x="72" y="84">B</text><text x="152" y="84">C</text><text x="312" y="164">D</text>
+    <text x="152" y="244">足す</text>
+  </g>
+  <text x="180" y="314" text-anchor="middle" font-size="13">A・B・C が 3 隅なので (2, 1) を足せる</text>
+</svg>

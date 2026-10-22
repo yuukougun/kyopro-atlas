@@ -1,0 +1,6 @@
+# judge-macros.cpp と同じコードを、-DATCODER -DONLINE_JUDGE なしでコンパイルして local になることを確かめる（本文には取り込まない）
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "", output: "local\n"}

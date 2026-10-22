@@ -1,0 +1,8 @@
+# 期待出力は、検査を動かす計算機の CPU が FMA を持つことが前提（-march=native は手元の CPU の命令を使う）。FMA のない計算機では fma.cpp と同じ 0 の結果になって失敗する
+compilers: [g++-13, g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra -march=native"
+expect: run
+cases:
+  - {input: "0.1 0.3 0.1 0.3\n", output: "+ 1.66533e-18\n"}
+  - {input: "0.7 0.3 0.7 0.3\n", output: "- -1.33227e-17\n"}
+  - {input: "1 0 0 1\n", output: "+ 1\n"}

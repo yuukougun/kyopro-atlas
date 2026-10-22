@@ -21,13 +21,70 @@ sections:
   - {title: 1 つのサインに複数の手法が当たるとき, anchor: disambiguation}
   - {title: 題材から引く, anchor: by-topic}
   - {title: 状況から引く, anchor: by-situation}
-stage: stub
-updated: 2026-10-21
+stage: draft
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
-    - **何のページか**：問題文の言い回しや求めるもの、立てた式の形から、疑う手法とページを引ける。表は各ページのサインから生成し、どれから疑うかの注記を手で添える。
-    - **使い方**：（執筆時に書く）
+    - **何のページか**：問題文の言い回しや求めるもの、立てた式の形から、疑う手法とページを引ける。同じ言い回しに複数の手法が当たるときの見分け方も添える。
+    - **使い方**：問題文の目立つ語（「K 番目」「削除」「期待値」など）をブラウザのページ内検索で探し、行のページへ進む。式まで立てたなら[式の形の表](#by-shape)を、候補が複数当たったら[見分け方](#disambiguation)を見る。
+    - **ほかの入口**：制約の数字からは[逆引き辞典（制約・計算量から）](../guide/reverse-index-constraints.md)、手法の名前からは[用語の索引](../guide/term-index.md)を引く。
+
+<!-- textlint-disable -->
+別名：問題文のサイン・キーワードから解法・典型の言い換え一覧・言い回しから逆引き・式の形から逆引き
+<!-- textlint-enable -->
+
+逆引き辞典（言い回しから）は、問題文の言い回しや、自分で立てた式の形から、疑うべき手法のページを引く表である。表の行は各ページの冒頭の「いつ使うか」と同じもの（サイン）で、ページが増えると表も自動で増える。行に当たったら、まずそのページの要点を読み、使えるかを判断する。
+
+## 引き方と注意 {#how-to-read}
+
+サインは、手法を疑うきっかけになる問題文の言い回し・求めるものの形・立てた式の形である。この辞典は 3 つの向きから引ける。
+
+- **言い回しから**：問題文に出てくる表現や、求めるもの（個数・最小値・判定・K 番目）から引く。[言い回しの表](#by-phrase)は、ページの種類で 5 つの群に分けてある。
+- **式の形から**：素直な解法や DP の式を立てたが遅いとき、式の形から速くする道具を引く（[式の形の表](#by-shape)）。
+- **題材や状況から**：括弧列・順列・グリッドのような題材は、[題材のページ](#by-topic)に問われ方ごとの一覧がある。「方針が立たない」「WA が取れない」のような状況は[状況の表](#by-situation)から引く。
+
+表は長いので、上から読むより、問題文の目立つ語でページ内検索する方が早い。「区間」「辺」のような短い語では行が多すぎるので、「区間の和」「K 番目」のように 2 語で探す。同じ意味を別の言葉で書いた行もあるので、見つからなければ言い換えて探し直す（「取り除く」と「削除」、「方法の数」と「個数」）。
+
+```mermaid
+flowchart TD
+    A["解けなかった問題"] --> B{"式を立てたか"}
+    B -- "立てたが遅い" --> C["立てた式の形から引く"]
+    B -- "まだ" --> D{"目立つ言い回しがあるか"}
+    D -- "ある" --> E["言い回しから引く"]
+    D -- "題材が目立つ" --> F["題材から引く"]
+    D -- "制約の数字だけ" --> G["制約・計算量の逆引き"]
+    E --> H{"候補が 2 つ以上"}
+    H -- "はい" --> I["見分け方の節"]
+    H -- "いいえ" --> J["行のページの要点を読む"]
+    C --> J
+    F --> J
+    I --> J
+```
+
+サインは「当たれば使える」という保証ではない。同じ言い回しでも制約が違えば別の手法になり、サインのない問題も多い。引いたページでは、要点の「いつ使うか」と制約を見比べ、計算量が制約に収まるかを[計算量の見積もり](../basics/complexity-estimation.md#constraint-table)で確かめる。
+
+引く前に、問題文を誤読していないかを確かめる。解法が浮かばない原因には、次のような読み違いが多い。
+
+- 「ちょうど K 回」と「K 回以下」、操作の回数の上限と下限を取り違えた。
+- 「異なる」が値の違いか、添字の違いかを取り違えた。
+- 求めるのが最大か最小かを逆に読んだ。
+- グラフに木や DAG の条件が付いているのを見落とした（逆に、付いていると思い込んだ）。
+- N の上限を読み違えた。入力の頂点番号が 1 始まりか 0 始まりかを確かめていない。
+
+表の列の「レベル」は、行のページの帯（基礎・水・青・黄・発展）である。案内や題材のページは帯を持たないので「—」になる。ページ名の後の「（準備中）」は、そのページの本文がまだないことを表す。解いた後で、どの条件がその手法を呼んだのかを一言でメモしておくと、次に同じサインを見たときに思い出しやすい（[精進の仕方の記録](../guide/practice-method.md#records)）。
+
+## 言い回しから引く {#by-phrase}
+
+問題文の表現と、求めるものの形から手法を引く表である。行はページの分野で次の 5 つの群に分かれ、同じページの行はまとめて並ぶ。
+
+- **探索・最適化**：計算量・全探索・二分探索・貪欲法・ソート・ダブリング・DP・考察の型。
+- **区間・列・データ構造**：累積和・差分列・尺取り法・区間クエリ・データ構造・クエリの処理の工夫。
+- **グラフ・木**：グラフの探索・最短路・連結性・全域木・フロー・木。
+- **整数・数え上げ・確率**：整数論・行列・畳み込み・数え上げ・確率・期待値・bit 演算。
+- **文字列・幾何・ゲーム・そのほか**：文字列・ハッシュ・乱択・幾何・ゲーム・C++・案内と題材のページ。
+
+似た言い回しが複数の群に出ることがある。「K 番目」は探索の群（K 番目の値）とデータ構造の群（K 番目を答えるデータ構造）の両方にある。どちらを先に疑うかは[見分け方の節](#disambiguation)にまとめた。
 
 <!-- gen:begin signs-phrase -->
 <!-- textlint-disable -->
@@ -750,9 +807,9 @@ updated: 2026-10-21
 | 区間を反転して 1 の連続を最長にする | [ランレングス圧縮](../basics/run-length-encoding.md) | 基礎 |
 | 操作で塊（境界）の数がいくつ減るか | [ランレングス圧縮](../basics/run-length-encoding.md) | 基礎 |
 | ランレングス形式で与えられる入力 | [ランレングス圧縮](../basics/run-length-encoding.md) | 基礎 |
-| 区別しない箱（グループ）に分ける方法の数 | [写像 12 相](../comb/twelvefold-way.md)（準備中） | — |
-| 玉（人・数）を箱（グループ・色）に配る方法の数 | [写像 12 相](../comb/twelvefold-way.md)（準備中） | — |
-| どの箱にも 1 個以上入れる・空の箱を許す | [写像 12 相](../comb/twelvefold-way.md)（準備中） | — |
+| 区別しない箱（グループ）に分ける方法の数 | [写像 12 相](../comb/twelvefold-way.md) | — |
+| 玉（人・数）を箱（グループ・色）に配る方法の数 | [写像 12 相](../comb/twelvefold-way.md) | — |
+| どの箱にも 1 個以上入れる・空の箱を許す | [写像 12 相](../comb/twelvefold-way.md) | — |
 | 先手と後手が交互に操作し、両者が最適に行動したとき勝つのはどちらか | [ゲームの基本と勝敗の DP](../comb/game-basics.md) | 水 |
 | First / Second（Takahashi / Aoki）を出力する | [ゲームの基本と勝敗の DP](../comb/game-basics.md) | 水 |
 | 盤面（配置）が対称・同じものが偶数個ずつある | [ゲームの基本と勝敗の DP](../comb/game-basics.md) | 水 |
@@ -855,60 +912,67 @@ updated: 2026-10-21
 | \+ と \* と括弧の優先順位がある | [構文解析](../misc/parsing.md) | 青 |
 | 式として正しい部分文字列 | [構文解析](../misc/parsing.md) | 青 |
 | 入れ子の構造を持つ文字列 | [構文解析](../misc/parsing.md) | 青 |
-| 和が K（K の倍数）になる連続部分列の個数 | [区間](../patterns/interval.md)（準備中） | — |
-| すべての連続部分列についての最小値・最大値・2 番目の値の総和 | [区間](../patterns/interval.md)（準備中） | — |
-| N 個の区間 [L_i, R_i] から重ならないように最大何個選べるか | [区間](../patterns/interval.md)（準備中） | — |
-| 区間を塗るたびに、塗られていない長さや個数を答える | [区間](../patterns/interval.md)（準備中） | — |
-| 区間に含まれる異なる値の個数を多数答える | [区間](../patterns/interval.md)（準備中） | — |
-| T が S の部分列か判定する | [部分列と部分文字列](../patterns/subsequence-and-substring.md)（準備中） | — |
-| S から何文字か選んで順に並べると T になる選び方の数 | [部分列と部分文字列](../patterns/subsequence-and-substring.md)（準備中） | — |
-| S の部分列として現れる異なる文字列の個数 | [部分列と部分文字列](../patterns/subsequence-and-substring.md)（準備中） | — |
-| S の部分文字列の種類数 | [部分列と部分文字列](../patterns/subsequence-and-substring.md)（準備中） | — |
-| (1, 2, …, N) の順列 P が与えられる | [順列と置換](../patterns/permutation.md)（準備中） | — |
-| 任意の 2 要素の swap を繰り返してソートする最小回数 | [順列と置換](../patterns/permutation.md)（準備中） | — |
-| 隣り合う 2 要素の swap でソートする最小回数 | [順列と置換](../patterns/permutation.md)（準備中） | — |
-| ちょうど K 回の swap（10^100 回など）で作れる列 | [順列と置換](../patterns/permutation.md)（準備中） | — |
-| 置換を K 回（K ≤ 10^18）適用した結果 | [順列と置換](../patterns/permutation.md)（準備中） | — |
-| 条件を満たす順列の個数 | [順列と置換](../patterns/permutation.md)（準備中） | — |
+| 和が K（K の倍数）になる連続部分列の個数 | [区間](../patterns/interval.md) | — |
+| すべての連続部分列についての最小値・最大値・2 番目の値の総和 | [区間](../patterns/interval.md) | — |
+| N 個の区間 [L_i, R_i] から重ならないように最大何個選べるか | [区間](../patterns/interval.md) | — |
+| 区間を塗るたびに、塗られていない長さや個数を答える | [区間](../patterns/interval.md) | — |
+| 区間に含まれる異なる値の個数を多数答える | [区間](../patterns/interval.md) | — |
+| T が S の部分列か判定する | [部分列と部分文字列](../patterns/subsequence-and-substring.md) | — |
+| S から何文字か選んで順に並べると T になる選び方の数 | [部分列と部分文字列](../patterns/subsequence-and-substring.md) | — |
+| S の部分列として現れる異なる文字列の個数 | [部分列と部分文字列](../patterns/subsequence-and-substring.md) | — |
+| S の部分文字列の種類数 | [部分列と部分文字列](../patterns/subsequence-and-substring.md) | — |
+| (1, 2, …, N) の順列 P が与えられる | [順列と置換](../patterns/permutation.md) | — |
+| 任意の 2 要素の swap を繰り返してソートする最小回数 | [順列と置換](../patterns/permutation.md) | — |
+| 隣り合う 2 要素の swap でソートする最小回数 | [順列と置換](../patterns/permutation.md) | — |
+| ちょうど K 回の swap（10^100 回など）で作れる列 | [順列と置換](../patterns/permutation.md) | — |
+| 置換を K 回（K ≤ 10^18）適用した結果 | [順列と置換](../patterns/permutation.md) | — |
+| 条件を満たす順列の個数 | [順列と置換](../patterns/permutation.md) | — |
 | '(' と ')' からなる文字列が正しい括弧列か判定する | [括弧列](../patterns/bracket-sequence.md) | — |
 | ? を ( か ) に置き換えて正しい括弧列にする方法の数 | [括弧列](../patterns/bracket-sequence.md) | — |
 | 文字の入れ替えのたびに、区間が正しい括弧列かを答える | [括弧列](../patterns/bracket-sequence.md) | — |
 | 複数の括弧列を並べて連結し、正しい括弧列にできるか | [括弧列](../patterns/bracket-sequence.md) | — |
 | 長さ 2N の正しい括弧列の個数 | [括弧列](../patterns/bracket-sequence.md) | — |
-| 含まれない最小の非負整数（mex）を答える | [mex](../patterns/mex.md)（準備中） | — |
-| 1 点を書き換えるたびに数列の mex を答える | [mex](../patterns/mex.md)（準備中） | — |
-| 長さ M の全区間の mex の最小値 | [mex](../patterns/mex.md)（準備中） | — |
-| 全区間・全パスの mex の総和 | [mex](../patterns/mex.md)（準備中） | — |
-| K 番目に小さい（大きい）値を答える | [K 番目と中央値](../patterns/kth-and-median.md)（準備中） | — |
-| N² 個の積・和・差の中で K 番目 | [K 番目と中央値](../patterns/kth-and-median.md)（準備中） | — |
-| 値の追加・更新のたびに、大きい方から K 個の和を答える | [K 番目と中央値](../patterns/kth-and-median.md)（準備中） | — |
-| 中央値の最大値・最小値 | [K 番目と中央値](../patterns/kth-and-median.md)（準備中） | — |
-| Σ\|x − a_i\| を最小にする x | [K 番目と中央値](../patterns/kth-and-median.md)（準備中） | — |
-| 辞書順で K 番目のもの | [K 番目と中央値](../patterns/kth-and-median.md)（準備中） | — |
-| すべての組・すべての区間の XOR の総和 | [XOR](../patterns/xor.md)（準備中） | — |
-| x を選んで XOR の最大値・最小値を求める | [XOR](../patterns/xor.md)（準備中） | — |
-| いくつか選んだ XOR で作れる値・作れる値の個数・K 番目 | [XOR](../patterns/xor.md)（準備中） | — |
-| 区間の XOR・木のパスの XOR・経路の XOR | [XOR](../patterns/xor.md)（準備中） | — |
-| 石を取り合うゲームで、山の石の数の XOR | [XOR](../patterns/xor.md)（準備中） | — |
-| 1 以上 N 以下のすべての整数について、約数や倍数に関する値の総和を求める | [約数と倍数](../patterns/divisors-and-multiples.md)（準備中） | — |
-| gcd がちょうど g になる組・部分集合の個数 | [約数と倍数](../patterns/divisors-and-multiples.md)（準備中） | — |
-| 積がちょうど N になる列の個数 | [約数と倍数](../patterns/divisors-and-multiples.md)（準備中） | — |
-| 積が平方数になる組の個数 | [約数と倍数](../patterns/divisors-and-multiples.md)（準備中） | — |
-| H×W のマス目で、スタートからゴールへの最小の移動回数 | [グリッド](../patterns/grid.md)（準備中） | — |
-| 右か下にだけ進む経路の数・経路上の値の最大 | [グリッド](../patterns/grid.md)（準備中） | — |
-| 長方形の範囲の和・黒マスの個数を多数答える | [グリッド](../patterns/grid.md)（準備中） | — |
-| 1×2 のタイル（ドミノ）を敷き詰める・置く | [グリッド](../patterns/grid.md)（準備中） | — |
-| 盤面を 90 度回転・反転させて一致させる | [グリッド](../patterns/grid.md)（準備中） | — |
-| 斜めに動く駒・マンハッタン距離・ひし形の範囲 | [グリッド](../patterns/grid.md)（準備中） | — |
-| 辺や頂点を 1 つずつ削除するたびに、連結成分の数を答える | [操作列とクエリ](../patterns/operation-sequence.md)（準備中） | — |
-| 全体に加算する・全体を反転する操作が混ざる | [操作列とクエリ](../patterns/operation-sequence.md)（準備中） | — |
-| 過去の状態に戻す・ある時点の状態をコピーする | [操作列とクエリ](../patterns/operation-sequence.md)（準備中） | — |
-| 行や列・区間を塗り替える操作の後の最終状態 | [操作列とクエリ](../patterns/operation-sequence.md)（準備中） | — |
-| 同じ操作を 10^18 回繰り返した後の状態 | [操作列とクエリ](../patterns/operation-sequence.md)（準備中） | — |
+| 含まれない最小の非負整数（mex）を答える | [mex](../patterns/mex.md) | — |
+| 1 点を書き換えるたびに数列の mex を答える | [mex](../patterns/mex.md) | — |
+| 長さ M の全区間の mex の最小値 | [mex](../patterns/mex.md) | — |
+| 全区間・全パスの mex の総和 | [mex](../patterns/mex.md) | — |
+| K 番目に小さい（大きい）値を答える | [K 番目と中央値](../patterns/kth-and-median.md) | — |
+| N² 個の積・和・差の中で K 番目 | [K 番目と中央値](../patterns/kth-and-median.md) | — |
+| 値の追加・更新のたびに、大きい方から K 個の和を答える | [K 番目と中央値](../patterns/kth-and-median.md) | — |
+| 中央値の最大値・最小値 | [K 番目と中央値](../patterns/kth-and-median.md) | — |
+| Σ\|x − a_i\| を最小にする x | [K 番目と中央値](../patterns/kth-and-median.md) | — |
+| 辞書順で K 番目のもの | [K 番目と中央値](../patterns/kth-and-median.md) | — |
+| すべての組・すべての区間の XOR の総和 | [XOR](../patterns/xor.md) | — |
+| x を選んで XOR の最大値・最小値を求める | [XOR](../patterns/xor.md) | — |
+| いくつか選んだ XOR で作れる値・作れる値の個数・K 番目 | [XOR](../patterns/xor.md) | — |
+| 区間の XOR・木のパスの XOR・経路の XOR | [XOR](../patterns/xor.md) | — |
+| 石を取り合うゲームで、山の石の数の XOR | [XOR](../patterns/xor.md) | — |
+| 1 以上 N 以下のすべての整数について、約数や倍数に関する値の総和を求める | [約数と倍数](../patterns/divisors-and-multiples.md) | — |
+| gcd がちょうど g になる組・部分集合の個数 | [約数と倍数](../patterns/divisors-and-multiples.md) | — |
+| 積がちょうど N になる列の個数 | [約数と倍数](../patterns/divisors-and-multiples.md) | — |
+| 積が平方数になる組の個数 | [約数と倍数](../patterns/divisors-and-multiples.md) | — |
+| H×W のマス目で、スタートからゴールへの最小の移動回数 | [グリッド](../patterns/grid.md) | — |
+| 右か下にだけ進む経路の数・経路上の値の最大 | [グリッド](../patterns/grid.md) | — |
+| 長方形の範囲の和・黒マスの個数を多数答える | [グリッド](../patterns/grid.md) | — |
+| 1×2 のタイル（ドミノ）を敷き詰める・置く | [グリッド](../patterns/grid.md) | — |
+| 盤面を 90 度回転・反転させて一致させる | [グリッド](../patterns/grid.md) | — |
+| 斜めに動く駒・マンハッタン距離・ひし形の範囲 | [グリッド](../patterns/grid.md) | — |
+| 辺や頂点を 1 つずつ削除するたびに、連結成分の数を答える | [操作列とクエリ](../patterns/operation-sequence.md) | — |
+| 全体に加算する・全体を反転する操作が混ざる | [操作列とクエリ](../patterns/operation-sequence.md) | — |
+| 過去の状態に戻す・ある時点の状態をコピーする | [操作列とクエリ](../patterns/operation-sequence.md) | — |
+| 行や列・区間を塗り替える操作の後の最終状態 | [操作列とクエリ](../patterns/operation-sequence.md) | — |
+| 同じ操作を 10^18 回繰り返した後の状態 | [操作列とクエリ](../patterns/operation-sequence.md) | — |
 | 答えの絶対誤差または相対誤差が 10^-6 以下なら正解とする（小数の桁を指定して出力しないと WA になる） | [入出力と定数倍](../cpp/cpp-io.md) | 基礎 |
 
 <!-- textlint-enable -->
 <!-- gen:end signs-phrase -->
+
+
+## 立てた式の形から引く {#by-shape}
+
+素直な解法や DP の式を書いたが計算量が足りないとき、式の形から速くする道具を引く表である。問題文には現れず、自分で式を立てて初めて見えるサインを集めた。
+
+式を引くときは、DP なら貰う形（$\mathrm{dp}[i]$ を手前の値から求める形）に書き直してから右辺を見る。右辺が「連続した範囲の和」「範囲の最小値」「$i$ と $j$ の積の項を 1 つ含む」のどれに当たるかで道具が決まる。DP の遷移の形は、[DP の高速化の選び方の早見表](../dp/dp-speedup-overview.md#shape-to-tool)に、易しい順に並べた詳しい表がある。
 
 <!-- gen:begin signs-shape -->
 <!-- textlint-disable -->
@@ -941,7 +1005,7 @@ updated: 2026-10-21
 | dp[i] = Σ（または min）\_{j < i, [j, i) が条件を満たす} dp[j] | [区間分割 DP](../dp/dp-sequence-partition.md) | 水 |
 | 根を v としたときの木 DP の値を、すべての v について求めたい（N 回の木 DP は O(N^2)） | [全方位木 DP](../dp/rerooting.md) | 青 |
 | dp\[v][k] を子の dp\[c][j] との (k, j) の組の全探索でマージしていて、O(N^3) に見える | [二乗の木 DP](../dp/tree-dp-square.md) | 黄 |
-| 素直に書いた DP の遷移が状態 1 つあたり O(N) かかり、全体で O(N^2) になる | [DP の高速化の選び方](../dp/dp-speedup-overview.md)（準備中） | — |
+| 素直に書いた DP の遷移が状態 1 つあたり O(N) かかり、全体で O(N^2) になる | [DP の高速化の選び方](../dp/dp-speedup-overview.md) | — |
 | dp[i] = max_{j < i, l ≤ a_j ≤ r} dp[j] + c のように、遷移元が添字や値の範囲の最小・最大 | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md) | 青 |
 | 遷移のコストに \|x_i − x_j\| を含む（x_j < x_i と x_j > x_i で分けられる） | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md) | 青 |
 | dp[i] = min_{i−K ≤ j < i} dp[j] + c（窓が単調に動く） | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md) | 青 |
@@ -997,3 +1061,194 @@ updated: 2026-10-21
 
 <!-- textlint-enable -->
 <!-- gen:end signs-shape -->
+
+
+## 1 つのサインに複数の手法が当たるとき {#disambiguation}
+
+同じ言い回しが、問題の細部によって別の手法を指すことがある。よく出る言い回しについて、まず疑う手法と、ほかの手法に切り替える目印を並べる。どの表も上の行から順に疑う。
+
+### 「K 番目」を求める {#kth}
+
+まず「K 番目は何の中の K 番目か」と「値が変わるか」を確かめる。
+
+| 見分ける点 | 疑う手法 | ページ |
+| --- | --- | --- |
+| 全部は作れない多数の値（$N^2$ 個の積など）の中の K 番目 | 「$x$ 以下が K 個以上か」で答えを二分探索 | [K 番目の値](../basics/kth-value.md#why-count) |
+| 小さい方から K 個すべてが要り、K が小さい | 取り出したら次の候補を入れる優先度付きキュー | [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md#k-best) |
+| 値の追加・削除を挟んで何度も K 番目を聞かれる | 個数の BIT と BIT 上の二分探索など | [K 番目の値を求めるデータ構造](../ds/kth-element.md#comparison) |
+| 条件を満たす文字列・列を辞書順に並べた K 番目 | 先頭ごとの個数と K を比べて 1 文字ずつ決める | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md#kth)、[DP の復元](../dp/dp-reconstruction.md#dp-kth-lexicographic) |
+
+区間ごとの K 番目をオンラインで答えるなら [Wavelet Matrix](../ds/wavelet-matrix.md) まで要る。中央値は K 番目の特別な場合で、[K 番目と中央値](../patterns/kth-and-median.md)の題材のページにまとめてある。
+
+### 「最小値の最大化」「最大値の最小化」 {#maximize-minimum}
+
+まず[答えで二分探索](../basics/binary-search-answer.md#minimax)を疑う。答えを $X$ に決めたとき「$X$ を達成できるか」が判定でき、最大化なら $X$ を小さくするほど、最小化なら大きくするほど達成しやすい（判定が[単調](../guide/glossary.md#monotonicity)な）ことを確かめる。
+
+| 見分ける点 | 疑う手法 | ページ |
+| --- | --- | --- |
+| 決め打ちすると、貪欲や探索で判定できる | 答えで二分探索 | [判定を貪欲・探索で作る](../basics/binary-search-answer.md#greedy-check) |
+| 判定に DP が要る | 決め打ちごとに DP をやり直す | [判定を DP で作る](../basics/binary-search-answer.md#dp-check) |
+| 最大化するのが平均・比・中央値 | 各要素から $X$ を引いて和の判定にする | [平均・中央値の最大化](../basics/fractional-binary-search.md#average) |
+| 判定が作れず、値そのものが山形（最小化なら谷形） | 三分探索 | [三分探索](../basics/ternary-search.md#convexity) |
+| 経路の上の最大の辺を最小にする | 最小全域木の上の経路 | [最小ボトルネック路](../graph/bottleneck-path.md#why-mst) |
+
+### 「答えを実数で出力し、誤差が許される」 {#real-answer}
+
+この一文は手法ではなく出力の形式を言っている。まず、何を求めるかで手法を決め、そのうえで出力の桁に気をつける。
+
+| 見分ける点 | 疑う手法 | ページ |
+| --- | --- | --- |
+| 答えを決めると可否が分かる | 実数の二分探索（反復回数を固定する） | [実数の二分探索](../basics/binary-search-answer.md#real-number) |
+| ある量を 1 つ選んで時間やコストを最小化し、値が谷形 | 実数の三分探索 | [三分探索の実数版](../basics/ternary-search.md#real-and-integer) |
+| 確率を求める | 確率の計算・確率 DP | [確率の基本](../comb/probability-basics.md#precision) |
+| 座標の計算で答えが小数になる | 整数のまま比べられないかを先に考える | [誤差の扱いと整数での処理](../geometry/geometry-precision.md#integer-comparison) |
+
+どの場合も、`cout` の既定の有効数字 6 桁のままでは、値が 1 程度でも桁が足りず WA になりうる（[小数の出力](../cpp/cpp-io.md#float-output)）。
+
+### 「削除」のクエリ {#deletion}
+
+まず、クエリを先に全部読めるか（[オフライン](../guide/glossary.md#offline)か）と、追加と削除が混ざるかを確かめる。
+
+| 見分ける点 | 疑う手法 | ページ |
+| --- | --- | --- |
+| 削除だけが起き、クエリを先に全部読める | 削除を逆順の追加にする | [後ろから・逆順に考える](../thinking/reverse-thinking.md#delete-to-add) |
+| 辺の削除だけが起き、先に全部読める。そのたびに連結成分の数・大きさを答える | 逆順に Union-Find で併合する | [Union-Find で連結性を扱う](../graph/union-find-connectivity.md#reverse-deletion) |
+| 値の追加・削除と、最小値・近い値の質問が混ざる | `multiset` などの順序付きコンテナ | [set・multiset・map の応用](../ds/ordered-set.md#neighbors) |
+| 辺の追加と削除が混ざり、先に全部読める | 辺の存在する時間の区間と、ロールバックできる Union-Find | [辺の追加と削除が混ざる連結性](../graph/offline-dynamic-connectivity.md#time-segment-tree) |
+| 品物の追加・削除のたびに、和が K になる選び方の数を答える | 追加と逆向きに回して取り除く | [戻す DP](../dp/knapsack-undo.md#undo-by-subtraction) |
+| 品物の追加・削除のたびに、価値の最大を答える | 削除は使えない。各品物を除く答えなら前後からの DP のマージ、追加・削除が任意の順なら時間軸の分割統治 | [戻せない DP](../dp/knapsack-undo.md#not-undoable) |
+
+### 「締め切り」がある {#deadline}
+
+まず、選ぶのが「各時刻に 1 つ」なのか、「選んだものを好きな順に処理する」のかを確かめる。
+
+| 見分ける点 | 疑う手法 | ページ |
+| --- | --- | --- |
+| 1 日に 1 つ選び、日が進むと選べるものが変わる | 後ろの日から決めて、最大をキューから取る | [後ろの日から決める](../basics/greedy-priority-queue.md#from-last-day) |
+| 処理できる期間が決まっていて、処理できる個数を最大にする | 時刻順に入れて締め切りの早いものから処理する | [締め切りの早いものから処理する](../basics/greedy-priority-queue.md#earliest-deadline) |
+| 選んだものを好きな順に処理し、価値の和を最大にする | 順序を交換論法で決めてから DP | [選ぶ集合と順序を分けて考える](../dp/exchange-argument-dp.md#set-and-order) |
+| 開始と終了の時刻があるものと、時刻の質問が混ざる | 開始・終了をイベントにして時刻順に処理する | [イベントソートと平面走査の基本](../basics/event-sort.md#make-events) |
+
+### 「最小の手数」「最短距離」 {#shortest}
+
+まず、1 回の移動のコスト（辺の重み）がどんな値をとるかを確かめる。
+
+| 見分ける点 | 疑う手法 | ページ |
+| --- | --- | --- |
+| どの移動もコストが同じ | BFS | [幅優先探索（BFS）と無重み最短路](../graph/bfs.md#why-shortest) |
+| コストが 0 か 1 | 01-BFS | [01-BFS](../graph/zero-one-bfs.md#deque-invariant) |
+| コストが 0 以上 | ダイクストラ法 | [ダイクストラ法](../graph/dijkstra.md#why-correct) |
+| 負のコストがある | ベルマンフォード法 | [ベルマンフォード法](../graph/bellman-ford.md#why-n-minus-1) |
+| 頂点数が数百で、全点対の距離が要る | ワーシャルフロイド法 | [ワーシャルフロイド法](../graph/warshall-floyd.md#k-outer) |
+
+残り回数・向き・時刻の余りのように、位置だけでは次の動きが決まらないなら、それらを頂点に含めたグラフで同じ手法を使う（[グラフへの帰着](../graph/graph-modeling.md)）。
+
+### 「区間の和・最小値を何度も答える」 {#range-query}
+
+まず、値の更新があるかと、更新が 1 点か区間かを確かめる。
+
+| 見分ける点 | 疑う手法 | ページ |
+| --- | --- | --- |
+| 値が変わらず、区間の和を聞かれる | 累積和 | [累積和](../basics/prefix-sum.md#half-open) |
+| 値が変わらず、区間の最小値を聞かれる | Sparse Table（またはセグメント木） | [Sparse Table](../ds/sparse-table.md#what-it-does) |
+| 1 点の更新と区間の和が交互に来る | BIT | [BIT（Fenwick Tree）](../ds/fenwick-tree.md#what-it-does) |
+| 1 点の更新と区間の最小値など（結合法則を満たす演算） | セグメント木 | [セグメント木](../ds/segment-tree.md#what-it-does) |
+| 区間に一律に加算・代入し、区間の和・最小値を聞かれる | 遅延セグメント木 | [遅延セグメント木](../ds/lazy-segment-tree.md#what-it-does) |
+| 区間への加算をすべて終えてから各点の値を聞かれる | いもす法 | [いもす法](../basics/imos.md#imos-1d) |
+
+区間の種類数のように、セグメント木に載せにくい量は、クエリを並べ替える [Mo's algorithm](../ds/mo-algorithm.md#what-it-does) などのオフラインの手法を疑う。
+
+### 「同じ操作を 10^18 回繰り返す」 {#huge-repeat}
+
+まず、状態が 1 つの値（位置・頂点）で表せるか、線形の式で表せるかを確かめる。
+
+| 見分ける点 | 疑う手法 | ページ |
+| --- | --- | --- |
+| 1 つの始点から $K$ 回後の状態、状態の種類が少ない | 周期の検出 | [周期性の検出](../basics/periodicity.md#vs-doubling) |
+| 始点やクエリが多い、途中の最大値・和も要る | ダブリング | [ダブリング](../basics/doubling.md#table) |
+| 各点の行き先が 1 つに決まるグラフでの $K$ 回後 | しっぽと閉路に分ける | [Functional graph](../graph/functional-graph.md#k-steps) |
+| 次の値が今の値の和・定数倍で決まる（線形の遷移） | 行列累乗 | [行列累乗](../math/matrix-power.md#write-as-matrix) |
+| 結合法則を満たす同じ操作の繰り返し | 繰り返し二乗法 | [繰り返し二乗法](../math/mod-pow.md#monoid-power) |
+
+### 「期待値を求めよ」 {#expectation}
+
+まず、求める量が要素ごとの和（個数・回数の和）に分けられるかを確かめる。分けられるなら、状態を持たずに各部分の期待値を足すだけで済む。
+
+| 見分ける点 | 疑う手法 | ページ |
+| --- | --- | --- |
+| 和・個数に分けられる量 | 期待値の線形性・指示確率変数 | [期待値の線形性と指示確率変数](../comb/linearity-of-expectation.md#indicator) |
+| 終わるまでの回数・費用 | 後ろから計算する期待値 DP | [期待値 DP](../comb/expected-value-dp.md#why-backward) |
+| 最大値・K 番目の値の期待値 | 「$X \ge k$ の確率」の和に直す | [期待値と確率の変換](../comb/expectation-tail-sum.md#kth-value) |
+| 選択があり、最適に行動したときの期待値 | 選択を比べる DP（mod ではなく実数で比べる） | [最適戦略の期待値](../comb/optimal-strategy-expectation.md#compare-real) |
+
+答えを mod 998244353 で出す形式なら、分数を mod の値に直す（[確率・期待値を mod 998244353 で答える](../comb/rational-mod.md#why)）。
+
+### 「XOR」が出てくる {#xor}
+
+まず、XOR の各桁が独立に決まる性質を使えるかを考える。
+
+| 見分ける点 | 疑う手法 | ページ |
+| --- | --- | --- |
+| 全ペア・全区間の XOR の総和 | 桁ごとに 0 と 1 の個数を数える | [bit ごとの寄与](../basics/bitwise-independence.md#per-bit-contribution) |
+| AND・OR・XOR の最大化・最小化 | 上の桁から決める | [上の bit から決める貪欲](../basics/bitwise-independence.md#top-down) |
+| 部分集合の XOR として作れる値の個数・最大値 | XOR 基底 | [XOR 基底](../math/xor-basis.md#insert) |
+| ある値との XOR の最小・最大を、追加・削除しながら答える | Binary Trie | [Binary Trie](../ds/binary-trie.md#xor-min-max) |
+| 1 つの山から好きな数を取り合うゲーム（Nim） | 山の大きさの XOR | [Nim と XOR](../comb/nim.md#bouton) |
+| 取り方に制限がある山のゲーム | 各山の Grundy 数の XOR | [Grundy 数](../comb/grundy-number.md#sum) |
+
+ほかの問われ方は [XOR](../patterns/xor.md) の題材のページにまとめてある。
+
+## 題材から引く {#by-topic}
+
+問題に決まった題材（括弧列・順列・グリッドなど）が出てくるときは、題材のページを引く。題材のページには「よく出る問われ方 → 使う手法 → ページ」の一覧がある。題材の性質（括弧列なら ±1 の累積和）を先に知っておくと、言い回しの表で探すより早く手法に届く。
+
+| 題材 | 問われ方の例 | ページ |
+| --- | --- | --- |
+| 区間・連続部分列 | 連続部分列を数える・選ぶ、区間に操作して質問する、区間の集合を選ぶ | [区間](../patterns/interval.md) |
+| 部分列・部分文字列 | 判定、選び方の数、異なるものの数、最長の共通部分 | [部分列と部分文字列](../patterns/subsequence-and-substring.md) |
+| 順列 | $i \to P_i$ のサイクル、swap の回数と偶奇、置換の繰り返し | [順列と置換](../patterns/permutation.md) |
+| 括弧列 | 正しいかの判定、`?` の埋め方の数、区間の判定、並べる順序 | [括弧列](../patterns/bracket-sequence.md#overview) |
+| mex | mex を求める・更新する・総和を取る | [mex](../patterns/mex.md) |
+| K 番目・中央値 | K 番目に小さい値、上位 K 個の和、中央値 | [K 番目と中央値](../patterns/kth-and-median.md) |
+| XOR | 桁ごとの数え上げ、累積 XOR、作れる値、ゲーム | [XOR](../patterns/xor.md) |
+| 約数・倍数・gcd | 約数の列挙、倍数を回して集める、gcd がちょうど g の個数 | [約数と倍数](../patterns/divisors-and-multiples.md) |
+| グリッド | マスの最短路、右・下に進む DP、長方形の和、盤面の回転 | [グリッド](../patterns/grid.md) |
+| 操作列・クエリ | 全体への操作、削除の逆順、過去の版に戻る、周期で打ち切る | [操作列とクエリ](../patterns/operation-sequence.md) |
+| 玉と箱 | 区別の有無と各箱の個数の制限ごとの数え方 | [写像 12 相](../comb/twelvefold-way.md#table) |
+| 物・値・状態の関係 | 何を頂点・辺にすれば既知のグラフの問題になるか | [グラフへの帰着](../graph/graph-modeling.md) |
+
+## 状況から引く {#by-situation}
+
+問題文のサインではなく、今の自分の状況から次に読むページを引く。
+
+| 状況 | 引くページ |
+| --- | --- |
+| 制約の数字（$N \le 20$、$N \le 2 \times 10^5$ など）しか手がかりがない | [逆引き辞典（制約・計算量から）](../guide/reverse-index-constraints.md) |
+| 解説に出てきた手法の名前・略称が分からない | [用語の索引](../guide/term-index.md)、[用語集の略称](../guide/glossary.md#abbreviations) |
+| 解説に見慣れない名前のデータ構造が出てきた | [見慣れないデータ構造の名前と用途](../ds/advanced-ds-catalog.md) |
+| 方針がまったく立たない | [詰まったときの発想リスト](../guide/thinking-checklist.md) |
+| 候補の手法が 2 つあり、どちらを使うか迷う | [似た手法の使い分け](../guide/method-comparison.md) |
+| DP の式は立ったが遅い | [DP の高速化の選び方](../dp/dp-speedup-overview.md#read-the-recurrence) |
+| 計算量が制約に収まるか分からない | [計算量の見積もり](../basics/complexity-estimation.md#how-to-estimate) |
+| 提出が WA・TLE・RE・MLE になった | [WA・TLE・RE・MLE の原因チェックリスト](../guide/debugging-checklist.md) |
+| WA の原因が見つからない、規則を実験で見つけたい | [ストレステストと実験](../guide/stress-testing.md) |
+| 解説のコードの書き方が読めない | [C++ の逆引き](../cpp/cpp-reverse-index.md) |
+| 解説を読んでも分からない | [精進の仕方](../guide/practice-method.md#still-stuck) |
+| 公式や数の目安（素数の個数・型の範囲）をすぐ確かめたい | [早見表](../guide/cheatsheet.md) |
+
+## 確認問題 {#quiz}
+
+??? question "確認問題：1 か所の値の書き換えと区間の和の質問が交互に来る。どの行から引くか"
+    言い回しの表の「区間・列・データ構造」の群で、「一点の値の更新と区間の和の質問が交互に来る」の行から [BIT](../ds/fenwick-tree.md) を引く。書き換えがなければ累積和で足りる。更新が区間への一律の加算なら遅延セグメント木になる（[区間のクエリの見分け方](#range-query)）。
+
+??? question "確認問題：辺を 1 本ずつ取り除くたびに連結成分の数を答える（先に全部読める）。まず何を疑うか"
+    削除を逆順の追加にして、Union-Find で併合しながら答えを後ろから記録する（[削除のクエリの見分け方](#deletion)）。途中で辺が追加されることもあるなら、逆順にしても削除が残るので、辺の存在する時間の区間を使う方法に切り替える。
+
+??? question "確認問題：DP の式が $\mathrm{dp}[i] = \min_{j < i} (\mathrm{dp}[j] + (h_i - h_j)^2)$ になった。どの表から引くか"
+    素直に計算すると $O(N^2)$ になる。問題文ではなく自分で立てた式なので、[式の形の表](#by-shape)を引く。$(h_i - h_j)^2$ を展開すると $i$ と $j$ の積の項 $-2 h_i h_j$ が 1 つだけ残るので、「遷移のコストが i と j の積の項を 1 つだけ含む」の行から [Convex Hull Trick](../dp/cht.md#lines) を引く。
+
+## 参考 {#references}
+
+- [Motsu_xe「解法キーアイデア集」](https://motsu-xe.hatenablog.com/entry/2019/12/17/173222)：引く前に確かめる誤読の例の一部
+- [algo-logic「競技プログラミングで解法を思いつくための典型的な考え方」](https://algo-logic.info/how-to-think-cp/)：言い回し・題材ごとに考え方を束ねる分け方
+- [chokudai「競技プログラミングの強みと「典型力」について」](https://chokudai.hatenablog.com/entry/2018/04/23/165232)：典型の組合せと、解いた後にどの要素がその手法を呼んだかを言葉にする習慣

@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 450" width="400" height="450" font-family="sans-serif">
+<rect width="400" height="450" fill="#ffffff"/>
+<defs><marker id="ah" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#222"/></marker></defs>
+<line x1="70" y1="30" x2="350" y2="30" stroke="#222" stroke-width="1.5" marker-end="url(#ah)"/>
+<text x="210.0" y="22" font-size="14" text-anchor="middle" fill="#222">j（列）は右へ増える</text>
+<line x1="22" y1="86" x2="22" y2="366" stroke="#222" stroke-width="1.5" marker-end="url(#ah)"/>
+<text x="14" y="226.0" font-size="14" text-anchor="middle" fill="#222" transform="rotate(-90 14 226.0)">i（行）は下へ増える</text>
+<text x="98.0" y="76" font-size="13" text-anchor="middle" fill="#444">0</text>
+<text x="154.0" y="76" font-size="13" text-anchor="middle" fill="#444">1</text>
+<text x="210.0" y="76" font-size="13" text-anchor="middle" fill="#444">2</text>
+<text x="266.0" y="76" font-size="13" text-anchor="middle" fill="#444">3</text>
+<text x="322.0" y="76" font-size="13" text-anchor="middle" fill="#444">4</text>
+<text x="58" y="119.0" font-size="13" text-anchor="middle" fill="#444">0</text>
+<text x="58" y="175.0" font-size="13" text-anchor="middle" fill="#444">1</text>
+<text x="58" y="231.0" font-size="13" text-anchor="middle" fill="#444">2</text>
+<text x="58" y="287.0" font-size="13" text-anchor="middle" fill="#444">3</text>
+<text x="58" y="343.0" font-size="13" text-anchor="middle" fill="#444">4</text>
+<rect x="70" y="86" width="56" height="56" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="118" y="102" font-size="11" text-anchor="end" fill="#666">偶</text>
+<rect x="126" y="86" width="56" height="56" fill="#cfcfcf" stroke="#555" stroke-width="1"/>
+<text x="174" y="102" font-size="11" text-anchor="end" fill="#666">奇</text>
+<rect x="182" y="86" width="56" height="56" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="230" y="102" font-size="11" text-anchor="end" fill="#666">偶</text>
+<rect x="238" y="86" width="56" height="56" fill="#cfcfcf" stroke="#555" stroke-width="1"/>
+<text x="286" y="102" font-size="11" text-anchor="end" fill="#666">奇</text>
+<rect x="294" y="86" width="56" height="56" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="342" y="102" font-size="11" text-anchor="end" fill="#666">偶</text>
+<rect x="70" y="142" width="56" height="56" fill="#cfcfcf" stroke="#555" stroke-width="1"/>
+<text x="118" y="158" font-size="11" text-anchor="end" fill="#666">奇</text>
+<rect x="126" y="142" width="56" height="56" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="174" y="158" font-size="11" text-anchor="end" fill="#666">偶</text>
+<rect x="182" y="142" width="56" height="56" fill="#cfcfcf" stroke="#555" stroke-width="1"/>
+<text x="230" y="158" font-size="11" text-anchor="end" fill="#666">奇</text>
+<rect x="238" y="142" width="56" height="56" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="286" y="158" font-size="11" text-anchor="end" fill="#666">偶</text>
+<rect x="294" y="142" width="56" height="56" fill="#cfcfcf" stroke="#555" stroke-width="1"/>
+<text x="342" y="158" font-size="11" text-anchor="end" fill="#666">奇</text>
+<rect x="70" y="198" width="56" height="56" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="118" y="214" font-size="11" text-anchor="end" fill="#666">偶</text>
+<rect x="126" y="198" width="56" height="56" fill="#cfcfcf" stroke="#555" stroke-width="1"/>
+<text x="174" y="214" font-size="11" text-anchor="end" fill="#666">奇</text>
+<rect x="182" y="198" width="56" height="56" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="230" y="214" font-size="11" text-anchor="end" fill="#666">偶</text>
+<rect x="238" y="198" width="56" height="56" fill="#cfcfcf" stroke="#555" stroke-width="1"/>
+<text x="286" y="214" font-size="11" text-anchor="end" fill="#666">奇</text>
+<rect x="294" y="198" width="56" height="56" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="342" y="214" font-size="11" text-anchor="end" fill="#666">偶</text>
+<rect x="70" y="254" width="56" height="56" fill="#cfcfcf" stroke="#555" stroke-width="1"/>
+<text x="118" y="270" font-size="11" text-anchor="end" fill="#666">奇</text>
+<rect x="126" y="254" width="56" height="56" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="174" y="270" font-size="11" text-anchor="end" fill="#666">偶</text>
+<rect x="182" y="254" width="56" height="56" fill="#cfcfcf" stroke="#555" stroke-width="1"/>
+<text x="230" y="270" font-size="11" text-anchor="end" fill="#666">奇</text>
+<rect x="238" y="254" width="56" height="56" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="286" y="270" font-size="11" text-anchor="end" fill="#666">偶</text>
+<rect x="294" y="254" width="56" height="56" fill="#cfcfcf" stroke="#555" stroke-width="1"/>
+<text x="342" y="270" font-size="11" text-anchor="end" fill="#666">奇</text>
+<rect x="70" y="310" width="56" height="56" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="118" y="326" font-size="11" text-anchor="end" fill="#666">偶</text>
+<rect x="126" y="310" width="56" height="56" fill="#cfcfcf" stroke="#555" stroke-width="1"/>
+<text x="174" y="326" font-size="11" text-anchor="end" fill="#666">奇</text>
+<rect x="182" y="310" width="56" height="56" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="230" y="326" font-size="11" text-anchor="end" fill="#666">偶</text>
+<rect x="238" y="310" width="56" height="56" fill="#cfcfcf" stroke="#555" stroke-width="1"/>
+<text x="286" y="326" font-size="11" text-anchor="end" fill="#666">奇</text>
+<rect x="294" y="310" width="56" height="56" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="342" y="326" font-size="11" text-anchor="end" fill="#666">偶</text>
+<text x="210.0" y="236.0" font-size="13" text-anchor="middle" fill="#111">(2, 2)</text>
+<rect x="185" y="145" width="50" height="50" fill="none" stroke="#111" stroke-width="3"/>
+<text x="210.0" y="180.0" font-size="12" text-anchor="middle" fill="#111">(1, 2)</text>
+<rect x="185" y="257" width="50" height="50" fill="none" stroke="#111" stroke-width="3"/>
+<text x="210.0" y="292.0" font-size="12" text-anchor="middle" fill="#111">(3, 2)</text>
+<rect x="129" y="201" width="50" height="50" fill="none" stroke="#111" stroke-width="3"/>
+<text x="154.0" y="236.0" font-size="12" text-anchor="middle" fill="#111">(2, 1)</text>
+<rect x="241" y="201" width="50" height="50" fill="none" stroke="#111" stroke-width="3"/>
+<text x="266.0" y="236.0" font-size="12" text-anchor="middle" fill="#111">(2, 3)</text>
+<rect x="129" y="145" width="50" height="50" fill="none" stroke="#111" stroke-width="2" stroke-dasharray="5,4"/>
+<rect x="241" y="145" width="50" height="50" fill="none" stroke="#111" stroke-width="2" stroke-dasharray="5,4"/>
+<rect x="129" y="257" width="50" height="50" fill="none" stroke="#111" stroke-width="2" stroke-dasharray="5,4"/>
+<rect x="241" y="257" width="50" height="50" fill="none" stroke="#111" stroke-width="2" stroke-dasharray="5,4"/>
+<rect x="20" y="384" width="22" height="14" fill="none" stroke="#111" stroke-width="3"/>
+<text x="50" y="396" font-size="14" fill="#222">上下左右の隣：i + j の偶奇が変わる（色が違う）</text>
+<rect x="20" y="412" width="22" height="14" fill="none" stroke="#111" stroke-width="2" stroke-dasharray="5,4"/>
+<text x="50" y="424" font-size="14" fill="#222">斜めの隣：偶奇が変わらない（同じ色）</text>
+</svg>

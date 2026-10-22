@@ -1,0 +1,3 @@
+compilers: [g++-15]
+flags: "-std=gnu++26 -O2 -Wall -Wextra"
+expect: compile-error

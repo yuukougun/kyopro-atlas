@@ -13,7 +13,7 @@ search:
 
 ## C++ の逆引き（cpp-reverse-index） {#cpp-reverse-index}
 
-- id：`cpp-reverse-index`　レベル：—　段階：stub　type：guide
+- id：`cpp-reverse-index`　レベル：—　段階：draft　type：guide
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-reverse-index/
 - 別名：解説コードの読み方、解説コードが読めない、モダン C++ の読み方、書き方から引く、症状から引く、Segmentation fault、コンパイルエラーの読み方、エラーメッセージ、required from here
 - 種類：実装・C++、案内
@@ -376,7 +376,7 @@ search:
 
 ## AtCoder と手元の C++ 環境（cpp-environment） {#cpp-environment}
 
-- id：`cpp-environment`　レベル：—　段階：stub　type：cpp
+- id：`cpp-environment`　レベル：—　段階：draft　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-environment/
 - 別名：AtCoder の C++、コンパイルオプション、GCC 15.2、-std=gnu++23、-std=c++23、-ftrivial-auto-var-init=zero、言語アップデート、C++ の版、版の対応表、スタックオーバーフロー、ulimit -s、深い再帰、手元と結果が違う
 - 種類：実装・C++
@@ -385,8 +385,8 @@ search:
 - 節：
     - `cpp-environment#options` AtCoder と手元のオプションの比較と、同じ条件で試すコマンド：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-environment/#options
     - `cpp-environment#gnu-mode` -std=gnu++23 と -std=c++23 の違い：GNU 拡張と \_\_int128 の型特性：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-environment/#gnu-mode
-    - `cpp-environment#auto-var-init` -ftrivial-auto-var-init=zero：AtCoder では未初期化の局所変数・配列が 0 になる：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-environment/#auto-var-init
-    - `cpp-environment#march-native` -march=native と #pragma GCC target：AtCoder では target の指定は要らない：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-environment/#march-native
+    - `cpp-environment#auto-var-init` -ftrivial-auto-var-init=zero：未初期化の局所変数が 0 になり、大きな局所配列は遅くなる：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-environment/#auto-var-init
+    - `cpp-environment#march-native` -march=native：pragma の target は要らないが、FMA で小数の結果が変わりうる：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-environment/#march-native
     - `cpp-environment#judge-macros` -DATCODER・-DONLINE_JUDGE：ジャッジでだけ定義されるマクロ：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-environment/#judge-macros
     - `cpp-environment#acl-version` ACL の版：AtCoder は v1.6（modint の val() が int）。手元も v1.6 にそろえる：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-environment/#acl-version
     - `cpp-environment#stack-depth` 再帰の深さとスタック：手元の上限・ulimit -s unlimited・非再帰への書き直し：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-environment/#stack-depth

@@ -1,0 +1,7 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra"
+expect: run
+cases:
+  - {input: "0 1 -5 5\n", output: "no difference in 0 trials\n"}
+  - {input: "1000 7 -5 5\n", output: "seed 7, trial 5\n1\n-5\nsolve 0, naive -5\n"}
+  - {input: "100000 1 1 20\n", output: "no difference in 100000 trials\n"}

@@ -27,13 +27,13 @@ search:
 
 ## グラフへの帰着（graph-modeling） {#graph-modeling}
 
-- id：`graph-modeling`　レベル：—　段階：stub　type：hub
+- id：`graph-modeling`　レベル：—　段階：draft　type：hub
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/graph-modeling/
 - 別名：グラフに言い換える、モデル化、何を頂点にするか、何を辺にするか、グラフの縮約、graph modeling
 - 種類：案内、グラフ探索、考察
 - 前提：`graph-basics`
 - 節：
-    - `graph-modeling#what-to-vertex` 何を頂点にするか（物・値・座標・状態・時刻・剰余・区間の端点 → 行き先のページの表）：https://yuukougun.github.io/kyopro-atlas/graph/graph-modeling/#what-to-vertex
+    - `graph-modeling#what-to-vertex` 何を頂点にするか（物・値・座標・状態・時刻・剰余・区間の端点）：https://yuukougun.github.io/kyopro-atlas/graph/graph-modeling/#what-to-vertex
     - `graph-modeling#what-to-edge` 何を辺にするか（関係・操作・制約・写像）：https://yuukougun.github.io/kyopro-atlas/graph/graph-modeling/#what-to-edge
     - `graph-modeling#constraints-to-edges` 制約を辺にすると何の問題になるか（二部グラフ・閉路・差分制約）：https://yuukougun.github.io/kyopro-atlas/graph/graph-modeling/#constraints-to-edges
     - `graph-modeling#contraction` 自由に行き来できる部分を 1 点に縮約する（Union-Find・SCC・次数 2 の頂点を消す）：https://yuukougun.github.io/kyopro-atlas/graph/graph-modeling/#contraction

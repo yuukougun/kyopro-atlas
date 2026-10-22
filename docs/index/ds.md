@@ -696,7 +696,7 @@ search:
 
 ## 見慣れないデータ構造の名前と用途（advanced-ds-catalog） {#advanced-ds-catalog}
 
-- id：`advanced-ds-catalog`　レベル：—　段階：stub　type：hub
+- id：`advanced-ds-catalog`　レベル：—　段階：draft　type：hub
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/advanced-ds-catalog/
 - 別名：セグ木マージ、segment tree merging、2 次元セグ木、2 次元 BIT、K-D tree、併合可能なヒープ、meldable heap、skew heap、leftist heap、Fast Set、Fractional Cascading、析合木、Kinetic Segment Tree
 - 種類：案内、データ構造

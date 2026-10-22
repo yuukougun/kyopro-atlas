@@ -1,0 +1,5 @@
+compilers: [g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra -DATCODER -DONLINE_JUDGE"
+expect: run
+cases:
+  - {input: "", output: "judge\n"}

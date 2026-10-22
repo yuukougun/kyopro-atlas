@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 352" width="380" height="352" font-family="sans-serif">
+<rect width="380" height="352" fill="#ffffff"/>
+<text x="20" y="32" font-size="14" font-weight="bold">A = (2, 0, 4, 1, 5, 1)</text>
+<rect x="40" y="44" width="40" height="34" fill="#90caf9" stroke="#1565c0" stroke-width="1.5"/>
+<text x="60.0" y="67" font-size="15" text-anchor="middle">0</text>
+<rect x="80" y="44" width="40" height="34" fill="#90caf9" stroke="#1565c0" stroke-width="1.5"/>
+<text x="100.0" y="67" font-size="15" text-anchor="middle">1</text>
+<rect x="120" y="44" width="40" height="34" fill="#90caf9" stroke="#1565c0" stroke-width="1.5"/>
+<text x="140.0" y="67" font-size="15" text-anchor="middle">2</text>
+<rect x="160" y="44" width="40" height="34" fill="#ffffff" stroke="#888" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="180.0" y="67" font-size="15" text-anchor="middle">3</text>
+<rect x="200" y="44" width="40" height="34" fill="#90caf9" stroke="#1565c0" stroke-width="1.5"/>
+<text x="220.0" y="67" font-size="15" text-anchor="middle">4</text>
+<rect x="240" y="44" width="40" height="34" fill="#90caf9" stroke="#1565c0" stroke-width="1.5"/>
+<text x="260.0" y="67" font-size="15" text-anchor="middle">5</text>
+<rect x="280" y="44" width="40" height="34" fill="#ffffff" stroke="#888" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="300.0" y="67" font-size="15" text-anchor="middle">6</text>
+<text x="326" y="67" font-size="13" fill="#666">…</text>
+<rect x="157" y="41" width="46" height="40" fill="none" stroke="#e65100" stroke-width="3"/>
+<text x="180.0" y="100" font-size="13" text-anchor="middle" fill="#e65100" font-weight="bold">▲ mex = 3</text>
+<text x="20" y="137" font-size="14" font-weight="bold">末尾の 1 を 3 に書き換える</text>
+<rect x="40" y="149" width="40" height="34" fill="#90caf9" stroke="#1565c0" stroke-width="1.5"/>
+<text x="60.0" y="172" font-size="15" text-anchor="middle">0</text>
+<rect x="80" y="149" width="40" height="34" fill="#90caf9" stroke="#1565c0" stroke-width="1.5"/>
+<text x="100.0" y="172" font-size="15" text-anchor="middle">1</text>
+<rect x="120" y="149" width="40" height="34" fill="#90caf9" stroke="#1565c0" stroke-width="1.5"/>
+<text x="140.0" y="172" font-size="15" text-anchor="middle">2</text>
+<rect x="160" y="149" width="40" height="34" fill="#90caf9" stroke="#1565c0" stroke-width="1.5"/>
+<text x="180.0" y="172" font-size="15" text-anchor="middle">3</text>
+<rect x="200" y="149" width="40" height="34" fill="#90caf9" stroke="#1565c0" stroke-width="1.5"/>
+<text x="220.0" y="172" font-size="15" text-anchor="middle">4</text>
+<rect x="240" y="149" width="40" height="34" fill="#90caf9" stroke="#1565c0" stroke-width="1.5"/>
+<text x="260.0" y="172" font-size="15" text-anchor="middle">5</text>
+<rect x="280" y="149" width="40" height="34" fill="#ffffff" stroke="#888" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="300.0" y="172" font-size="15" text-anchor="middle">6</text>
+<text x="326" y="172" font-size="13" fill="#666">…</text>
+<rect x="277" y="146" width="46" height="40" fill="none" stroke="#e65100" stroke-width="3"/>
+<text x="300.0" y="205" font-size="13" text-anchor="middle" fill="#e65100" font-weight="bold">▲ mex = 6</text>
+<text x="20" y="242" font-size="14" font-weight="bold">さらに 0 を 7 に書き換える</text>
+<rect x="40" y="254" width="40" height="34" fill="#ffffff" stroke="#888" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="60.0" y="277" font-size="15" text-anchor="middle">0</text>
+<rect x="80" y="254" width="40" height="34" fill="#90caf9" stroke="#1565c0" stroke-width="1.5"/>
+<text x="100.0" y="277" font-size="15" text-anchor="middle">1</text>
+<rect x="120" y="254" width="40" height="34" fill="#90caf9" stroke="#1565c0" stroke-width="1.5"/>
+<text x="140.0" y="277" font-size="15" text-anchor="middle">2</text>
+<rect x="160" y="254" width="40" height="34" fill="#90caf9" stroke="#1565c0" stroke-width="1.5"/>
+<text x="180.0" y="277" font-size="15" text-anchor="middle">3</text>
+<rect x="200" y="254" width="40" height="34" fill="#90caf9" stroke="#1565c0" stroke-width="1.5"/>
+<text x="220.0" y="277" font-size="15" text-anchor="middle">4</text>
+<rect x="240" y="254" width="40" height="34" fill="#90caf9" stroke="#1565c0" stroke-width="1.5"/>
+<text x="260.0" y="277" font-size="15" text-anchor="middle">5</text>
+<rect x="280" y="254" width="40" height="34" fill="#ffffff" stroke="#888" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="300.0" y="277" font-size="15" text-anchor="middle">6</text>
+<text x="326" y="277" font-size="13" fill="#666">…</text>
+<rect x="37" y="251" width="46" height="40" fill="none" stroke="#e65100" stroke-width="3"/>
+<text x="60.0" y="310" font-size="13" text-anchor="middle" fill="#e65100" font-weight="bold">▲ mex = 0</text>
+<rect x="20" y="329" width="14" height="14" fill="#90caf9" stroke="#1565c0"/><text x="40" y="340" font-size="12">出ている値</text>
+<rect x="130" y="329" width="14" height="14" fill="#fff" stroke="#888" stroke-dasharray="3 2"/><text x="150" y="340" font-size="12">出ていない値</text>
+<rect x="250" y="329" width="14" height="14" fill="none" stroke="#e65100" stroke-width="2.5"/><text x="270" y="340" font-size="12">最初の空き</text>
+</svg>

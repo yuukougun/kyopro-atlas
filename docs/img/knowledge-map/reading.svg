@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="400" height="250" font-family="sans-serif">
+  <rect x="0" y="0" width="400" height="250" fill="#ffffff"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <text x="95" y="20" font-size="12" fill="#475569" text-anchor="middle">前提の側（左）</text>
+  <text x="305" y="20" font-size="12" fill="#475569" text-anchor="middle">次に読む側（右）</text>
+  <!-- 辺：前提 → そのページ -->
+  <g stroke="#475569" stroke-width="1.6" fill="none" marker-end="url(#arrow)">
+    <line x1="170" y1="55" x2="228" y2="55"/>
+    <line x1="170" y1="62" x2="228" y2="148"/>
+    <line x1="170" y1="155" x2="228" y2="155"/>
+  </g>
+  <!-- 光る枠（次の候補）の下地 -->
+  <g fill="#3f51b5" fill-opacity="0.4">
+    <rect x="13" y="128" width="164" height="54" rx="12"/>
+    <rect x="223" y="28" width="164" height="54" rx="12"/>
+  </g>
+  <!-- 累積和：基礎・理解した（塗り） -->
+  <rect x="20" y="35" width="150" height="40" rx="8" fill="#008000" stroke="#008000" stroke-width="2"/>
+  <text x="95" y="60" font-size="14" fill="#ffffff" text-anchor="middle">累積和</text>
+  <text x="95" y="93" font-size="11" fill="#1e293b" text-anchor="middle">塗り：理解した</text>
+  <!-- bit 演算：基礎・次の候補 -->
+  <rect x="20" y="135" width="150" height="40" rx="8" fill="#ffffff" stroke="#008000" stroke-width="3"/>
+  <text x="95" y="152" font-size="13" fill="#1e293b" text-anchor="middle">bit 演算の基本と</text>
+  <text x="95" y="168" font-size="13" fill="#1e293b" text-anchor="middle">XOR の性質</text>
+  <text x="95" y="198" font-size="11" fill="#1e293b" text-anchor="middle">光る枠：次の候補（前提なし）</text>
+  <!-- セグメント木：水・次の候補 -->
+  <rect x="230" y="35" width="150" height="40" rx="8" fill="#ffffff" stroke="#00c0c0" stroke-width="3"/>
+  <text x="305" y="60" font-size="14" fill="#1e293b" text-anchor="middle">セグメント木</text>
+  <text x="305" y="98" font-size="11" fill="#1e293b" text-anchor="middle">光る枠：次の候補</text>
+  <!-- BIT：水・まだ候補でない -->
+  <rect x="230" y="135" width="150" height="40" rx="8" fill="#ffffff" stroke="#00c0c0" stroke-width="2"/>
+  <text x="305" y="160" font-size="13" fill="#1e293b" text-anchor="middle">BIT（Fenwick Tree）</text>
+  <text x="305" y="193" font-size="11" fill="#1e293b" text-anchor="middle">枠だけ：前提が残っている</text>
+  <!-- 凡例 -->
+  <text x="20" y="224" font-size="11" fill="#475569">枠の色はレベル（緑＝基礎、水色＝水）。光る枠は藍色。</text>
+  <text x="20" y="240" font-size="11" fill="#475569">矢印は前提からそのページへ向く</text>
+</svg>

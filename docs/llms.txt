@@ -2,8 +2,8 @@
 
 > AtCoder で黄色（レート 2000）を目指す学習者向けの、辞書として引く競技プログラミングの教材。手法・考察・データ構造・数学・C++ のページを分野ごとに置く。
 
-- 版：e9f1cd01998c（updated の最大：2026-10-22）。tools/gen_site.py が生成する
-- ページ数：353（準備中 33）
+- 版：a39b8204c740（updated の最大：2026-10-22）。tools/gen_site.py が生成する
+- ページ数：353（準備中 0）
 - 1 行が 1 ページ：「- [タイトル](URL)（id・レベル・分野・段階）：要約」
 - レベルは difficulty の帯：基礎 〜1199・水 1200〜1599・青 1600〜1999・黄 2000〜2399・発展 2400〜（概要だけ）。「—」はレベルを持たないページ
 - 段階：stub は準備中（要約と前提しかないので根拠にしない）、draft は執筆中、reviewed は検証済み、done は完成
@@ -29,27 +29,27 @@
 
 ## はじめに
 
-- [この教材の使い方](https://yuukougun.github.io/kyopro-atlas/start/how-to-use/)（how-to-use・—・start・stub）：解けなかった ABC の問題から、逆引き辞典 → ページ冒頭の要点 → 前提の順に教材を引ける。レベルの意味、進捗の記録と退避、claude.ai での解説の頼み方も示す。
-- [記法と用語の約束](https://yuukougun.github.io/kyopro-atlas/start/notation/)（notation・—・start・stub）：教材全体で使う記法の約束を引ける。計算量、半開区間、添字、合同式・整除・floor・ceil・Σ などの数学の記法、グラフ・木・文字列の記号を定め、各ページは定義を繰り返さずに参照する。
-- [AtCoder の仕組み](https://yuukougun.github.io/kyopro-atlas/start/atcoder-system/)（atcoder-system・—・start・stub）：レート・パフォーマンス・色、difficulty、ABC の形式と順位、練習用コンテスト、生成 AI のルールがわかる。教材のレベルは difficulty（その問題を半々で解けるレート）の帯で決まる。
+- [この教材の使い方](https://yuukougun.github.io/kyopro-atlas/start/how-to-use/)（how-to-use・—・start・draft）：解けなかった ABC の問題から、逆引き辞典 → ページ冒頭の要点 → 前提の順に教材を引ける。レベルの意味、進捗の記録と退避、claude.ai での解説の頼み方も示す。
+- [記法と用語の約束](https://yuukougun.github.io/kyopro-atlas/start/notation/)（notation・—・start・draft）：教材全体で使う記法の約束を引ける。計算量、半開区間、添字、合同式・整除・floor・ceil・Σ などの数学の記法、グラフ・木・文字列の記号を定め、各ページは定義を繰り返さずに参照する。
+- [AtCoder の仕組み](https://yuukougun.github.io/kyopro-atlas/start/atcoder-system/)（atcoder-system・—・start・draft）：レート・パフォーマンス・色、difficulty、ABC の形式と順位、練習用コンテスト、生成 AI のルールがわかる。教材のレベルは difficulty（その問題を半々で解けるレート）の帯で決まる。
 
 ## 横断ページ
 
-- [逆引き辞典（言い回しから）](https://yuukougun.github.io/kyopro-atlas/guide/reverse-index-signs/)（reverse-index-signs・—・guide・stub）：問題文の言い回しや求めるもの、立てた式の形から、疑う手法とページを引ける。表は各ページのサインから生成し、どれから疑うかの注記を手で添える。
-- [逆引き辞典（制約・計算量から）](https://yuukougun.github.io/kyopro-atlas/guide/reverse-index-constraints/)（reverse-index-constraints・—・guide・stub）：N の上限などの制約から、間に合う計算量と候補の手法を引ける。計算量から手法を引く逆向きの表も持ち、制約の帯ごとの候補のページは各ページの制約のサインから生成する。
-- [用語の索引](https://yuukougun.github.io/kyopro-atlas/guide/term-index/)（term-index・—・guide・stub）：手法の名前・別名・英語名から、そのページを五十音順と ABC 順で引ける。全ページの題名と別名から生成し、サイト内検索の結果に頼らない入口になる。
-- [知識マップ](https://yuukougun.github.io/kyopro-atlas/guide/knowledge-map/)（knowledge-map・—・guide・stub）：ページの前提関係を有向グラフで見て、選んだページの前提と次に読むページをたどれる。「理解した」ページと、前提をすべて理解した次の候補を塗り分ける。
-- [似た手法の使い分け](https://yuukougun.github.io/kyopro-atlas/guide/method-comparison/)（method-comparison・—・guide・stub）：BFS・01-BFS・ダイクストラや累積和・BIT・セグメント木のように混同しやすい手法の組を、できる操作・計算量・前提条件で比べ、条件から選べる。
-- [色別ロードマップ](https://yuukougun.github.io/kyopro-atlas/guide/roadmap/)（roadmap・—・guide・stub）：目標の色ごとに、到達の目安、読むページの順、最近の ABC の位置ごとの頻出手法、解いた数の進捗を見られる。ページの列はレベル・前提・出題頻度から生成する。
-- [精進の仕方](https://yuukougun.github.io/kyopro-atlas/guide/practice-method/)（practice-method・—・guide・stub）：解けなかった問題との付き合い方がわかる。解説を見るまでの時間、解説の読み方、upsolve と復習、記録、演習の量と難しさの選び方を、教材の解説と記録の仕組みにつなげる。
-- [問題集と練習用コンテストの案内](https://yuukougun.github.io/kyopro-atlas/guide/problem-sets/)（problem-sets・—・guide・stub）：典型90問・EDPC・鉄則本・ACL Practice などの問題集と練習用コンテストを、構成とレベルの目安から選べる。最近の ABC と各問題集の問題から、使う手法のページも引ける。
-- [コンテストの戦い方](https://yuukougun.github.io/kyopro-atlas/guide/contest-strategy/)（contest-strategy・—・guide・stub）：ABC の 100 分の使い方がわかる。位置ごとの難しさと時間の目安、問題を読む順、取り組む問題の選び方と切り替え、終了前と終了後の過ごし方を示す。
-- [詰まったときの発想リスト](https://yuukougun.github.io/kyopro-atlas/guide/thinking-checklist/)（thinking-checklist・—・guide・stub）：方針が立たないときに、問題の形から試す考察の型を引き、上から順に問いを当てられる。各型は考察の章と手法のページへつなぐ入口で、型の説明の本体はそちらにある。
-- [WA・TLE・RE・MLE の原因チェックリスト](https://yuukougun.github.io/kyopro-atlas/guide/debugging-checklist/)（debugging-checklist・—・guide・stub）：提出前の確認と、WA・TLE・RE・MLE の症状ごとに疑う原因を順にたどれる。各項目から C++ 章の落とし穴や手法のページへつなぐ。
-- [ストレステストと実験](https://yuukougun.github.io/kyopro-atlas/guide/stress-testing/)（stress-testing・—・guide・stub）：WA の原因が見つからないときに、愚直解と本解を小さいランダムな入力で比べて反例を探せる。小さいケースの全探索で表を作り、規則を予想する実験の手順も示す。
-- [早見表](https://yuukougun.github.io/kyopro-atlas/guide/cheatsheet/)（cheatsheet・—・guide・stub）：コンテスト中や解説を読むときに、計算量と制約、型の範囲、数の目安、STL と ACL の計算量、mod の性質、よく使う公式、bit 演算の小技をすぐ引ける。各行から詳しいページへつなぐ。
-- [用語集](https://yuukougun.github.io/kyopro-atlas/guide/glossary/)（glossary・—・guide・stub）：本文で使う用語の短い定義と、表記の正規形（セグ木とセグメント木、Union-Find と DSU など）を引ける。本文の用語の最初の出現からリンクされ、表記の検査（prh）の元にもなる。
-- [自作ライブラリの設計と動作確認](https://yuukougun.github.io/kyopro-atlas/guide/library-design/)（library-design・—・guide・stub）：自作ライブラリを何から作るか、ACL を手本にしたインターフェースとヘッダの書き方、Library Checker などでの動作確認の手順がわかる。確認用の問題の対応表は各ページの verify から生成する。
+- [逆引き辞典（言い回しから）](https://yuukougun.github.io/kyopro-atlas/guide/reverse-index-signs/)（reverse-index-signs・—・guide・draft）：問題文の言い回しや求めるもの、立てた式の形から、疑う手法とページを引ける。表は各ページのサインから生成し、どれから疑うかの注記を手で添える。
+- [逆引き辞典（制約・計算量から）](https://yuukougun.github.io/kyopro-atlas/guide/reverse-index-constraints/)（reverse-index-constraints・—・guide・draft）：N の上限などの制約から、間に合う計算量と候補の手法を引ける。計算量から手法を引く逆向きの表も持ち、制約の帯ごとの候補のページは各ページの制約のサインから生成する。
+- [用語の索引](https://yuukougun.github.io/kyopro-atlas/guide/term-index/)（term-index・—・guide・draft）：手法の名前・別名・英語名から、そのページを五十音順と ABC 順で引ける。全ページの題名と別名から生成し、サイト内検索の結果に頼らない入口になる。
+- [知識マップ](https://yuukougun.github.io/kyopro-atlas/guide/knowledge-map/)（knowledge-map・—・guide・draft）：ページの前提関係を有向グラフで見て、選んだページの前提と次に読むページをたどれる。「理解した」ページと、前提をすべて理解した次の候補を塗り分ける。
+- [似た手法の使い分け](https://yuukougun.github.io/kyopro-atlas/guide/method-comparison/)（method-comparison・—・guide・draft）：BFS・01-BFS・ダイクストラや累積和・BIT・セグメント木のように混同しやすい手法の組を、できる操作・計算量・前提条件で比べ、条件から選べる。
+- [色別ロードマップ](https://yuukougun.github.io/kyopro-atlas/guide/roadmap/)（roadmap・—・guide・draft）：目標の色ごとに、到達の目安、読むページの順、最近の ABC の位置ごとの頻出手法、解いた数の進捗を見られる。ページの列はレベル・前提・出題頻度から生成する。
+- [精進の仕方](https://yuukougun.github.io/kyopro-atlas/guide/practice-method/)（practice-method・—・guide・draft）：解けなかった問題との付き合い方がわかる。解説を見るまでの時間、解説の読み方、upsolve と復習、記録、演習の量と難しさの選び方を、教材の解説と記録の仕組みにつなげる。
+- [問題集と練習用コンテストの案内](https://yuukougun.github.io/kyopro-atlas/guide/problem-sets/)（problem-sets・—・guide・draft）：典型90問・EDPC・鉄則本・ACL Practice などの問題集と練習用コンテストを、構成とレベルの目安から選べる。最近の ABC と各問題集の問題から、使う手法のページも引ける。
+- [コンテストの戦い方](https://yuukougun.github.io/kyopro-atlas/guide/contest-strategy/)（contest-strategy・—・guide・draft）：ABC の 100 分の使い方がわかる。位置ごとの難しさと時間の目安、問題を読む順、取り組む問題の選び方と切り替え、終了前と終了後の過ごし方を示す。
+- [詰まったときの発想リスト](https://yuukougun.github.io/kyopro-atlas/guide/thinking-checklist/)（thinking-checklist・—・guide・draft）：方針が立たないときに、問題の形から試す考察の型を引き、上から順に問いを当てられる。各型は考察の章と手法のページへつなぐ入口で、型の説明の本体はそちらにある。
+- [WA・TLE・RE・MLE の原因チェックリスト](https://yuukougun.github.io/kyopro-atlas/guide/debugging-checklist/)（debugging-checklist・—・guide・draft）：提出前の確認と、WA・TLE・RE・MLE の症状ごとに疑う原因を順にたどれる。各項目から C++ 章の落とし穴や手法のページへつなぐ。
+- [ストレステストと実験](https://yuukougun.github.io/kyopro-atlas/guide/stress-testing/)（stress-testing・—・guide・draft）：WA の原因が見つからないときに、愚直解と本解を小さいランダムな入力で比べて反例を探せる。小さいケースの全探索で表を作り、規則を予想する実験の手順も示す。
+- [早見表](https://yuukougun.github.io/kyopro-atlas/guide/cheatsheet/)（cheatsheet・—・guide・draft）：コンテスト中や解説を読むときに、計算量と制約、型の範囲、数の目安、STL と ACL の計算量、mod の性質、よく使う公式、bit 演算の小技をすぐ引ける。各行から詳しいページへつなぐ。
+- [用語集](https://yuukougun.github.io/kyopro-atlas/guide/glossary/)（glossary・—・guide・draft）：本文で使う用語の短い定義と、表記の正規形（セグ木とセグメント木、DFS と深さ優先探索など）を引ける。本文の用語の最初の出現からリンクされ、表記の検査（prh）の元にもなる。
+- [自作ライブラリの設計と動作確認](https://yuukougun.github.io/kyopro-atlas/guide/library-design/)（library-design・—・guide・draft）：自作ライブラリを何から作るか、ACL を手本にしたインターフェースとヘッダの書き方、Library Checker などでの動作確認の手順がわかる。確認用の問題の対応表は各ページの verify から生成する。
 
 ## 基本テクニック
 
@@ -130,7 +130,7 @@
 - [全方位木 DP](https://yuukougun.github.io/kyopro-atlas/dp/rerooting/)（rerooting・青・dp・draft）：すべての頂点を根としたときの木 DP の値を、下向きの値と親側の部分木の値を 2 回の DFS で求めて O(N) で出す。兄弟を除いた合成は左右からの累積で作るので逆元が要らない。
 - [二乗の木 DP](https://yuukougun.github.io/kyopro-atlas/dp/tree-dp-square/)（tree-dp-square・黄・dp・draft）：子の配列を順にマージする木の上のナップサックのような DP は、配列の長さを部分木のサイズに合わせると全体 O(N^2) で済む。どの頂点の組も、LCA でのマージで 1 回だけ数えられるからである。
 - [挿入 DP・箱根駅伝 DP](https://yuukougun.github.io/kyopro-atlas/dp/insertion-dp/)（insertion-dp・黄・dp・draft）：順列を、決めた部分の相対順位や「相手が未定の要素の数」だけを状態にして数える。隣り合う大小関係が指定された順列は、最後の要素の相対順位を状態にし累積和で O(N^2) になる。
-- [DP の高速化の選び方](https://yuukougun.github.io/kyopro-atlas/dp/dp-speedup-overview/)（dp-speedup-overview・—・dp・stub）：素直な DP が間に合わないとき、貰う形の式の右辺の形（区間の和・区間の最小・多項式の積・同じ線形の遷移の繰り返し・一次関数の最小など）から速くする道具を選ぶ。
+- [DP の高速化の選び方](https://yuukougun.github.io/kyopro-atlas/dp/dp-speedup-overview/)（dp-speedup-overview・—・dp・draft）：素直な DP が間に合わないとき、貰う形の式の右辺の形（区間の和・区間の最小・多項式の積・同じ線形の遷移の繰り返し・一次関数の最小など）から速くする道具を選ぶ。
 - [セグメント木・スライド最小値による DP の高速化](https://yuukougun.github.io/kyopro-atlas/dp/dp-segment-tree/)（dp-segment-tree・青・dp・draft）：遷移元が添字や値の範囲の最小・最大・和になる DP を、dp の値をセグメント木に載せて 1 回 O(log N) にする。遷移元の窓が単調に動くだけなら、スライド最小値でならし O(1) にできる。
 - [インライン DP](https://yuukougun.github.io/kyopro-atlas/dp/inline-dp/)（inline-dp・青・dp・draft）：dp[i][*] から dp[i+1][*] へほとんどの値がそのまま写るとき、配列を 1 本だけ持って変わる場所だけを書き換える。一律の加算や区間加算は遅延セグメント木で、全体の平行移動は添字のずらしで表す。
 - [動的 DP](https://yuukougun.github.io/kyopro-atlas/dp/dynamic-dp/)（dynamic-dp・発展・dp・draft）：列の各位置の遷移を小さな行列にしてセグメント木に載せると、1 点の書き換えのたびに DP の答えを O(S^3 log N) で求め直せる。行列の積は非可換なので、掛ける向きを最初に決める。
@@ -142,7 +142,7 @@
 ## グラフ
 
 - [グラフの表現と用語](https://yuukougun.github.io/kyopro-atlas/graph/graph-basics/)（graph-basics・基礎・graph・draft）：N 頂点 M 辺のグラフを隣接リスト・隣接行列・辺リストのどれで持つかを選び、次数・パス・連結・木・DAG などの用語をそろえる。アルゴリズムごとに向く表現が決まっている。
-- [グラフへの帰着](https://yuukougun.github.io/kyopro-atlas/graph/graph-modeling/)（graph-modeling・—・graph・stub）：物・値・座標・状態・時刻・剰余などを頂点に、関係・操作・制約を辺にすると、問題が既知のグラフの問題（連結・二部・閉路・最短路）に変わる。自由に行き来できる部分は 1 点に縮約できる。
+- [グラフへの帰着](https://yuukougun.github.io/kyopro-atlas/graph/graph-modeling/)（graph-modeling・—・graph・draft）：物・値・座標・状態・時刻・剰余などを頂点に、関係・操作・制約を辺にすると、問題が既知のグラフの問題（連結・二部・閉路・最短路）に変わる。自由に行き来できる部分は 1 点に縮約できる。
 - [深さ優先探索（DFS）](https://yuukougun.github.io/kyopro-atlas/graph/dfs/)（dfs・基礎・graph・draft）：行けるところまで進んでから戻る探索で、到達可能性・連結成分・閉路検出・トポロジカル順の土台になる。帰りがけで訪問の印を外せば単純パスを全列挙できる。
 - [幅優先探索（BFS）と無重み最短路](https://yuukougun.github.io/kyopro-atlas/graph/bfs/)（bfs・基礎・graph・draft）：始点に近い順に頂点を確定させる探索で、辺の重みがすべて等しいグラフの最短距離を O(N+M) で求める。親を記録すれば経路を復元でき、全始点をキューに入れれば多始点の距離になる。
 - [グリッドグラフ](https://yuukougun.github.io/kyopro-atlas/graph/grid-graph/)（grid-graph・基礎・graph・draft）：マスを頂点、隣り合うマスを辺と見て、BFS・DFS・Union-Find をそのまま使う。(i, j) の 1 次元化・番兵・止まるマスの扱いと、市松模様で二部グラフになることが要点になる。
@@ -256,7 +256,7 @@
 - [Wavelet Matrix](https://yuukougun.github.io/kyopro-atlas/ds/wavelet-matrix/)（wavelet-matrix・発展・ds・draft）：区間の K 番目の値・x 未満の個数・和を、オンラインで O(log σ) で答える静的な構造。値を上位ビットから順に安定に 0/1 で振り分けた段を重ね、各段で 0 の個数の累積を持つ。
 - [Binary Trie](https://yuukougun.github.io/kyopro-atlas/ds/binary-trie/)（binary-trie・青・ds・draft）：整数を 2 進数の上位ビットから Trie に入れ、各ノードに部分木の個数を持たせる。x との XOR の最小・最大、K 番目に小さい値、全体に XOR をかける操作を O(ビット数) で処理する。
 - [平衡二分探索木と pb_ds の tree](https://yuukougun.github.io/kyopro-atlas/ds/balanced-bst/)（balanced-bst・発展・ds・draft）：位置で指定した挿入・削除・区間の反転・区間の総積を、期待 O(log N) で処理する列の構造。treap などで split・merge を基本操作にし、K 番目と順位だけなら GCC の pb_ds の tree で足りる。
-- [見慣れないデータ構造の名前と用途](https://yuukougun.github.io/kyopro-atlas/ds/advanced-ds-catalog/)（advanced-ds-catalog・—・ds・stub）：解説に見慣れない名前のデータ構造が出てきたときに、何ができるかと代わりになる手を 1 行ずつ引く。セグ木のマージ・2 次元セグ木・K-D tree・併合可能なヒープ・Fast Set・析合木などを並べる。
+- [見慣れないデータ構造の名前と用途](https://yuukougun.github.io/kyopro-atlas/ds/advanced-ds-catalog/)（advanced-ds-catalog・—・ds・draft）：解説に見慣れない名前のデータ構造が出てきたときに、何ができるかと代わりになる手を 1 行ずつ引く。セグ木のマージ・2 次元セグ木・K-D tree・併合可能なヒープ・Fast Set・析合木などを並べる。
 
 ## 整数論・代数
 
@@ -310,7 +310,7 @@
 - [二項係数の前計算](https://yuukougun.github.io/kyopro-atlas/comb/binomial-precompute/)（binomial-precompute・基礎・comb・draft）：素数 p を法として階乗と逆階乗を前計算し、C(n,k) を O(1) で求める。n が巨大なら O(k) の積、p が小さく n ≥ p なら Lucas の定理、法が素数でなければパスカルの三角形を使う。
 - [重複組合せ](https://yuukougun.github.io/kyopro-atlas/comb/stars-and-bars/)（stars-and-bars・基礎・comb・draft）：x_1 + … + x_k = n の非負整数解は C(n+k−1, k−1) 個、正の整数解は C(n−1, k−1) 個で、玉と仕切りの並べ方に 1 対 1 に対応する。広義単調な列や間隔を空けて選ぶ方法も、同じ形に直して数える。
 - [格子路の数え上げ](https://yuukougun.github.io/kyopro-atlas/comb/lattice-paths/)（lattice-paths・基礎・comb・draft）：(0,0) から (a,b) への右・上の最短路は C(a+b, a) 通りで、R と U の列に 1 対 1 に対応する。移動の種類が違えば回数の組に直し、禁止領域は境界を越える点で分けて数える。
-- [写像 12 相](https://yuukougun.github.io/kyopro-atlas/comb/twelvefold-way/)（twelvefold-way・—・comb・stub）：n 個の玉を k 個の箱に入れる方法を、玉・箱の区別の有無と各箱の個数の制限で 12 通りに分け、各マスの式と行き先のページを引く。箱を区別しないとき k! で割れるのは、どの箱も空でない場合だけである。
+- [写像 12 相](https://yuukougun.github.io/kyopro-atlas/comb/twelvefold-way/)（twelvefold-way・—・comb・draft）：n 個の玉を k 個の箱に入れる方法を、玉・箱の区別の有無と各箱の個数の制限で 12 通りに分け、各マスの式と行き先のページを引く。箱を区別しないとき k! で割れるのは、どの箱も空でない場合だけである。
 - [数え上げの考え方](https://yuukougun.github.io/kyopro-atlas/comb/counting-mindset/)（counting-mindset・水・comb・draft）：数え上げを、対象の確定 → 数えやすい言い換え → 排反な場合の和と独立な段階の積 → 重複と漏れの確認 → 小さいケースでの検算の順に解く。「ちょうど」は「以下」の差で、全通りの総和は寄与で数える。
 - [対応づけ・数える対象の言い換え](https://yuukougun.github.io/kyopro-atlas/comb/counting-bijection/)（counting-bijection・青・comb・draft）：数えにくい対象を、個数が同じで数えやすい対象に 1 対 1 で対応させて数える。逆向きの写像が作れることが正しさの確かめになり、単射でない対応では同じものを重複して数えてしまう。
 - [順序を固定して数える](https://yuukougun.github.io/kyopro-atlas/comb/counting-fix-order/)（counting-fix-order・水・comb・draft）：並べ方の一部の相対順序を固定して数え、全体の何分の一かを掛ける（k 個の順序が決まっていれば n!/k!）。ソート順や BFS 順など、次の選択肢の数が一定になる順番で決めれば積の法則が使える。
@@ -391,20 +391,20 @@
 
 ## 題材別
 
-- [区間](https://yuukougun.github.io/kyopro-atlas/patterns/interval/)（interval・—・patterns・stub）：連続部分列や与えられた区間の集合が出てくる問題で、問われ方から使う手法を引ける。連続部分列を数える・選ぶ、区間に操作して質問する、区間の集合を選ぶ・つなぐ、の3つの型に分ける。
-- [部分列と部分文字列](https://yuukougun.github.io/kyopro-atlas/patterns/subsequence-and-substring/)（subsequence-and-substring・—・patterns・stub）：部分列（飛び飛びに選ぶ）と部分文字列（連続する部分）が出てくる問題で、問われ方から使う手法を引ける。判定・選び方の数・異なるものの数・最長の共通部分・種類数の問われ方に分ける。
-- [順列と置換](https://yuukougun.github.io/kyopro-atlas/patterns/permutation/)（permutation・—・patterns・stub）：1〜N の順列が与えられる問題で、問われ方から使う手法を引ける。i → P_i の矢印のサイクル、swap の回数と偶奇、置換の繰り返し、順列の数え上げ、辞書順の問われ方に分ける。
+- [区間](https://yuukougun.github.io/kyopro-atlas/patterns/interval/)（interval・—・patterns・draft）：連続部分列や与えられた区間の集合が出てくる問題で、問われ方から使う手法を引ける。連続部分列を数える・選ぶ、区間に操作して質問する、区間の集合を選ぶ・つなぐ、の3つの型に分ける。
+- [部分列と部分文字列](https://yuukougun.github.io/kyopro-atlas/patterns/subsequence-and-substring/)（subsequence-and-substring・—・patterns・draft）：部分列（飛び飛びに選ぶ）と部分文字列（連続する部分）が出てくる問題で、問われ方から使う手法を引ける。判定・選び方の数・異なるものの数・最長の共通部分・種類数の問われ方に分ける。
+- [順列と置換](https://yuukougun.github.io/kyopro-atlas/patterns/permutation/)（permutation・—・patterns・draft）：1〜N の順列が与えられる問題で、問われ方から使う手法を引ける。i → P_i の矢印のサイクル、swap の回数と偶奇、置換の繰り返し、順列の数え上げ、辞書順の問われ方に分ける。
 - [括弧列](https://yuukougun.github.io/kyopro-atlas/patterns/bracket-sequence/)（bracket-sequence・—・patterns・draft）：括弧列が出てくる問題で、判定・数え上げ・区間の判定・並べる順序・価値の最大化の手法を引ける。'(' を +1、')' を −1 とした累積和が途中で負にならず最後に 0 なら正しい、という言い換えが共通の出発点になる。
-- [mex](https://yuukougun.github.io/kyopro-atlas/patterns/mex/)（mex・—・patterns・stub）：集合に含まれない最小の非負整数 mex を求める・更新する・総和を取る問題で、問われ方から使う手法を引ける。「N 要素の mex は N 以下」「mex ≥ k+1 ⇔ 0〜k をすべて含む」の 2 つの性質から考える。
-- [K 番目と中央値](https://yuukougun.github.io/kyopro-atlas/patterns/kth-and-median/)（kth-and-median・—・patterns・stub）：K 番目に小さい値・上位 K 個の和・中央値を問う問題で、データの動き方から手法を引ける。構造で保つか、「x 以下が K 個以上か」で答えを二分探索するか、小さい順に取り出すかを選ぶ。
-- [XOR](https://yuukougun.github.io/kyopro-atlas/patterns/xor/)（xor・—・patterns・stub）：XOR が出てくる問題で、問われ方から使う手法を引ける。桁ごとに独立で、同じ値どうしで打ち消し合う、という 2 つの性質から、桁ごとの数え上げ・累積 XOR・XOR 基底・Binary Trie・Nim・集合のハッシュへつなぐ。
-- [約数と倍数](https://yuukougun.github.io/kyopro-atlas/patterns/divisors-and-multiples/)（divisors-and-multiples・—・patterns・stub）：約数・倍数・gcd が出てくる問題で、問われ方から使う手法を引ける。約数の列挙、倍数を回して集める調和級数、素因数分解、gcd がちょうど g の数え上げ、約数の個数の上限の問われ方に分ける。
-- [グリッド](https://yuukougun.github.io/kyopro-atlas/patterns/grid/)（grid・—・patterns・stub）：H×W のマス目が出てくる問題で、問われ方から使う手法を引ける。マスを頂点とする最短路、右・下に進む DP、長方形の累積和、行と列の独立、市松模様の偶奇、45 度回転、盤面の回転へつなぐ。
-- [操作列とクエリ](https://yuukougun.github.io/kyopro-atlas/patterns/operation-sequence/)（operation-sequence・—・patterns・stub）：操作やクエリが Q 個続く問題で、問われ方から処理の仕方を引ける。全体の操作を変数で持つ、後ろから見る、削除を逆順の追加にする、先読みして並べ替える、過去の版に戻る、周期で打ち切る、などの型に分ける。
+- [mex](https://yuukougun.github.io/kyopro-atlas/patterns/mex/)（mex・—・patterns・draft）：集合に含まれない最小の非負整数 mex を求める・更新する・総和を取る問題で、問われ方から使う手法を引ける。「N 要素の mex は N 以下」「mex ≥ k+1 ⇔ 0〜k をすべて含む」の 2 つの性質から考える。
+- [K 番目と中央値](https://yuukougun.github.io/kyopro-atlas/patterns/kth-and-median/)（kth-and-median・—・patterns・draft）：K 番目に小さい値・上位 K 個の和・中央値を問う問題で、データの動き方から手法を引ける。構造で保つか、「x 以下が K 個以上か」で答えを二分探索するか、小さい順に取り出すかを選ぶ。
+- [XOR](https://yuukougun.github.io/kyopro-atlas/patterns/xor/)（xor・—・patterns・draft）：XOR が出てくる問題で、問われ方から使う手法を引ける。桁ごとに独立で、同じ値どうしで打ち消し合う、という 2 つの性質から、桁ごとの数え上げ・累積 XOR・XOR 基底・Binary Trie・Nim・集合のハッシュへつなぐ。
+- [約数と倍数](https://yuukougun.github.io/kyopro-atlas/patterns/divisors-and-multiples/)（divisors-and-multiples・—・patterns・draft）：約数・倍数・gcd が出てくる問題で、問われ方から使う手法を引ける。約数の列挙、倍数を回して集める調和級数、素因数分解、gcd がちょうど g の数え上げ、約数の個数の上限の問われ方に分ける。
+- [グリッド](https://yuukougun.github.io/kyopro-atlas/patterns/grid/)（grid・—・patterns・draft）：H×W のマス目が出てくる問題で、問われ方から使う手法を引ける。マスを頂点とする最短路、右・下に進む DP、長方形の累積和、行と列の独立、市松模様の偶奇、45 度回転、盤面の回転へつなぐ。
+- [操作列とクエリ](https://yuukougun.github.io/kyopro-atlas/patterns/operation-sequence/)（operation-sequence・—・patterns・draft）：操作やクエリが Q 個続く問題で、問われ方から処理の仕方を引ける。全体の操作を変数で持つ、後ろから見る、削除を逆順の追加にする、先読みして並べ替える、過去の版に戻る、周期で打ち切る、などの型に分ける。
 
 ## C++
 
-- [C++ の逆引き](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-reverse-index/)（cpp-reverse-index・—・cpp・stub）：解説コードの書き方・実行時の症状・コンパイルエラーのメッセージから、意味と C++ 章の該当する節を引く。1 行を「何を回すか・何を受け取るか・どう受け取るか」に分けて読む手順も示す。
+- [C++ の逆引き](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-reverse-index/)（cpp-reverse-index・—・cpp・draft）：解説コードの書き方・実行時の症状・コンパイルエラーのメッセージから、意味と C++ 章の該当する節を引く。1 行を「何を回すか・何を受け取るか・どう受け取るか」に分けて読む手順も示す。
 - [数の型とリテラル](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-types-literals/)（cpp-types-literals・基礎・cpp・draft）：整数・浮動小数点数の型とリテラル、INF の値を、値が収まり意図どおりの型になるように選ぶ。auto x = 0 が int、1e18 が double になるような、型のずれによる誤りを防ぐ。
 - [整数のオーバーフローと __int128](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-integer-overflow/)（cpp-integer-overflow・基礎・cpp・draft）：int どうしの積・1 << k・size() の符号なしなど、型の幅を超えて値が壊れる書き方を見分けて直す。64 bit を超える中間値は GCC の拡張 __int128 で持てるが、入出力などに制限がある。
 - [初期化と CTAD](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-initialization/)（cpp-initialization・基礎・cpp・draft）：vector・多次元 vector・array・構造体を、意図した大きさと初期値で作る。型引数を省いて中身から型を決める CTAD（C++17）と、括弧の種類で意味が変わる罠も分かる。
@@ -422,5 +422,5 @@
 - [views の基本](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-views-basics/)（cpp-views-basics・基礎・cpp・draft）：| でつなぐ views（iota・filter・transform・split など）を、取り出すときに計算する遅延評価として読み書きする。views::iota(0, v.size()) が通らない理由など、型と寿命の罠も分かる。
 - [C++23 の views と ranges::to](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-views-cpp23/)（cpp-views-cpp23・基礎・cpp・draft）：C++23 の views（enumerate・zip・pairwise・chunk_by など）で添字付きや隣どうしのループを短く書き、ranges::to で結果をコンテナにする。要素は参照を含む組で、受けた変数への代入が元を変える。
 - [入出力と定数倍](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-io/)（cpp-io・基礎・cpp・draft）：入出力を速くし（sync_with_stdio・cin.tie）、println・小数の桁の指定・インタラクティブ問題のフラッシュを正しく書く。C++ の書き方が原因で TLE になる例も、計測つきで示す。
-- [AtCoder と手元の C++ 環境](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-environment/)（cpp-environment・—・cpp・stub）：手元の g++ と AtCoder（GCC 15.2・-std=gnu++23）の違いで結果が変わる場面（未初期化変数・スタック・GNU 拡張・ACL の版）を知り、同じ条件で試す。各機能が GCC のどの版から使えるかも分かる。
+- [AtCoder と手元の C++ 環境](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-environment/)（cpp-environment・—・cpp・draft）：手元の g++ と AtCoder（GCC 15.2・-std=gnu++23）の違いで結果が変わる場面（未初期化変数・スタック・GNU 拡張・ACL の版）を知り、同じ条件で試す。各機能が GCC のどの版から使えるかも分かる。
 - [未定義動作とダングリング](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-undefined-behavior/)（cpp-undefined-behavior・基礎・cpp・draft）：あふれ・範囲外・未初期化変数・ダングリングなどの未定義動作が、-O2 や手元と AtCoder で結果を変える仕組みを知り、デバッグ用のビルドで見つける。ダングリングの 4 つの型も示す。

@@ -1,0 +1,8 @@
+compilers: [g++-13, g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra -ftrivial-auto-var-init=zero"
+expect: run
+cases:
+  - {input: "3 2\n", output: "9\n"}
+  - {input: "0 5\n", output: "0\n"}
+  - {input: "4 0\n", output: "0\n"}
+  - {input: "1 100000\n", output: "4999950000\n"}

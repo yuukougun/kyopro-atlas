@@ -581,7 +581,7 @@ search:
 
 ## DP の高速化の選び方（dp-speedup-overview） {#dp-speedup-overview}
 
-- id：`dp-speedup-overview`　レベル：—　段階：stub　type：hub
+- id：`dp-speedup-overview`　レベル：—　段階：draft　type：hub
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-speedup-overview/
 - 別名：DP の高速化、DP 高速化、DP 最適化、DP Optimization、遷移の高速化
 - 種類：DP、案内

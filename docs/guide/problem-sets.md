@@ -22,13 +22,74 @@ sections:
   - {title: 練習用のコンテスト, anchor: practice-contests}
   - {title: AtCoder 以外の道具, anchor: tools}
   - {title: ライブラリの確かめ用の問題集, anchor: verify-sets}
-stage: stub
-updated: 2026-10-21
+stage: draft
+updated: 2026-10-22
 ---
 
 !!! abstract "要点"
-    - **何のページか**：典型90問・EDPC・鉄則本・ACL Practice などの問題集と練習用コンテストを、構成とレベルの目安から選べる。最近の ABC と各問題集の問題から、使う手法のページも引ける。
-    - **使い方**：（執筆時に書く）
+    - **何のページか**：典型90問・EDPC・鉄則本・ACL Practice などの問題集と練習用コンテストを、問題数・中身・レベルの目安から選べる。最近の ABC と各問題集の問題から、使う手法のページも引ける。
+    - **使い方**：問題集を選ぶなら[問題集の一覧](#collections)、典型90問の★を帯に読み替えるなら[典型90問の★とレベル](#typical90-stars)を見る。解けなかった問題の手法を探すなら、[最近の ABC → ページ](#recent-abc)か[問題集の問題 → ページ](#sets-to-pages)の表で問題を探す。
+    - **数の出どころ**：問題数・開催日・difficulty は AtCoder Problems の公開データ（2026-10-21 取得）による。
+
+<!-- textlint-disable -->
+別名：典型90問・EDPC・TDPC・NDPC・鉄則本の問題集・アルゴリズムと数学・ACL Practice・AAL・ADT・AWC・NoviSteps・最近の ABC の対応表
+<!-- textlint-enable -->
+
+問題集と練習用コンテストの案内は、過去の ABC 以外の練習の材料を探すときと、問題集で解けなかった問題の手法をこの教材で引くときに使う。問題集は AtCoder の上にコンテストの形で置かれ、過去問と同じように提出して判定を受けられる。解き方の進め方（解説を見るまでの時間・復習）は[精進の仕方](../guide/practice-method.md)、レートや ABC の形式は [AtCoder の仕組み](../start/atcoder-system.md)に任せる。
+
+## 問題集の一覧 {#collections}
+
+問題集の多くには、AtCoder Problems の difficulty（その問題を半々の確率で解けるレート）が付かない。difficulty は参加者のレートとコンテストの結果から推定する値で、レートの変わらない問題集の問題にはほとんど付かない。そこで次の表の「レベルの目安」は、典型90問は作者の★から、ほかは本文でその問題集の問題を載せたページの帯から書いた。本文でまだ使っていない問題集は、題名から分かる分野だけを書いた。
+
+| 問題集（contest id） | 問題数 | 中身 | レベルの目安 |
+| --- | ---: | --- | --- |
+| [競プロ典型 90 問](#problem-sets-typical90)（typical90） | 90 | 考察と実装の典型を 1 問に 1 つずつ。2021 年に日曜を除く毎日 1 問ずつ出た | ★2〜★7（[次の節](#typical90-stars)）。水以上は 46 問 |
+| [EDPC](#problem-sets-dp)（dp） | 26 | DP の典型の基本形を A〜Z の 1 問ずつ。2019-01 | 基礎〜青が中心。本文では DP の各ページの最初の例題に多く使う |
+| [TDPC](#problem-sets-tdpc)（tdpc） | 20 | DP。2013-08 | 水〜黄のページに多い |
+| NDPC（ndpc） | 20 | DP。2026-05。題名に Knapsack・LIS・Union of Intervals・Independent Set など | 本文ではまだ使っていない |
+| [鉄則本の演習問題集](#problem-sets-tessoku-book)（tessoku-book） | 151 | 『競技プログラミングの鉄則』の章（累積和・二分探索・DP・数学・考察・データ構造・グラフ・ヒューリスティック・総合問題）に沿う | 基礎〜水が多い。最大流・二部マッチング・燃やす埋めるなど黄のページの練習も入る |
+| [アルゴリズムと数学 演習問題集](#problem-sets-math-and-algorithm)（math-and-algorithm） | 104 | 『アルゴリズム×数学』の本に沿う数学の基礎（素数・場合の数・確率・行列累乗など） | 基礎が中心 |
+| [ACL Practice](#problem-sets-practice2)（practice2） | 12 | ACL の主な機能を 1 問ずつ（遅延セグメント木は 2 問） | 機能ごとのページ（水〜黄が多い）の例題 |
+| AAL Contest 001: Let's use segtree!（aalc001） | 24 | セグメント木の問題集。2026-10。題名に Lazy Segment Tree・Binary Search on a Segment Tree・Inversion Count など | 本文ではまだ使っていない |
+| FPS 24 題（fps-24） | 24 | 形式的冪級数。2025-11 | 発展（[形式的冪級数](../math/fps-basics.md)は発展の帯） |
+| 組合せゲーム 24 題（game-24） | 24 | Nim・Grundy 数などのゲーム。2026-10 | 本文ではまだ使っていない |
+| AtCoder Typical Contest 001・002（atc001・atc002） | 3・3 | DFS・Union-Find・FFT と、BFS・繰り返し二乗法・最適二分探索木 | 基本の確かめ（atc002 C の満点は発展） |
+| AtCoder Beginners Selection（abs） | 11 | ABC の A〜C の過去問 10 問と練習問題 1 問の入門 | この教材の範囲より易しい |
+
+表の左の列のリンクは、このページの[問題集の問題 → ページ](#sets-to-pages)の表の、その問題集の部分へ飛ぶ。リンクのない問題集は、本文の問題の一覧にまだ載っていない。
+
+目的ごとの選び方の目安は次のとおりである。
+
+- **典型を一通り知りたい**：典型90問の★5〜★7（水〜黄）を順に解く。1 問ごとに考察の型が違うので、[知識マップ](../guide/knowledge-map.md)で分野の位置を確かめながら進めるとよい。
+- **DP を固めたい**：EDPC で基本形を一通り解き、TDPC・NDPC へ進む。EDPC の各問題がどのページの例題かは[EDPC の表](#problem-sets-dp)にある。
+- **ACL の使い方を覚えたい**：ACL Practice を機能ごとに解き、各機能のページの「ACL では」の囲みと見比べる（[ライブラリの確かめ用の問題集](#verify-sets)）。
+- **本と一緒に進めたい**：鉄則本とアルゴリズムと数学の演習問題集は、本の章の順に並ぶ。本の例題を自分で書いて提出して確かめる。
+
+## 典型90問の★とレベル {#typical90-stars}
+
+典型90問の問題名に付く★は、作者が問題ごとに付けた難しさで、★ごとに difficulty の範囲が決まっている。典型90問には AtCoder Problems の difficulty が付かないので、この教材では★を帯の根拠にする。
+
+| ★ | difficulty の範囲 | この教材の帯 | 問題数 |
+| --- | --- | --- | ---: |
+| ★2 | 150〜399 | 基礎 | 10 |
+| ★3 | 400〜799 | 基礎 | 20 |
+| ★4 | 800〜1199 | 基礎 | 14 |
+| ★5 | 1200〜1599 | 水 | 17 |
+| ★6 | 1600〜1999 | 青 | 14 |
+| ★7 | 2000〜 | 黄以上 | 15 |
+
+- difficulty の範囲は作者の告知記事の表、問題数は AtCoder Problems の問題名から数えた値である。★1（〜149）の問題はない。
+- ★の範囲は difficulty の範囲なので、difficulty と同じく「★5 の問題は、レート 1200〜1599 の人が半々の確率で解ける程度」と読める。
+- 作者の勧める取り組み方は 4 つある。解法が分かったら AC まで実装する。1 日考えても解けなければ解説を読む。解説にある類題をいくつか解く。本番のコンテストにも出て、身につけた典型を使ってみる。解説は作者の GitHub のリポジトリに画像で置かれている。
+- 本文で例題・練習に使った典型90問は、[典型90問の表](#problem-sets-typical90)に問題番号の順で並ぶ。
+
+## 最近の ABC → ページ {#recent-abc}
+
+次の表は、abc451〜abc480 の D〜G の 120 問について、第三者の解説で使われた手法を確かめ、この教材のページに対応させたものである。解いた（解けなかった）最近の ABC の問題から、復習するページを引くのに使う。
+
+- 「位置」は問題の記号、「diff」は AtCoder Problems の difficulty である。最近の ABC では、おおよそ D が基礎、E が水、F が青、G が黄の帯に当たる（[色別ロードマップ](../guide/roadmap.md)）。
+- 「使う手法のページ」の › の後は、そのページの中で特に使う節の題である。
+- 位置ごとにどの手法が多いかの集計は、[色別ロードマップ](../guide/roadmap.md)にある。
 
 <!-- gen:begin recent-abc -->
 <!-- textlint-disable -->
@@ -111,7 +172,7 @@ updated: 2026-10-21
 | abc469_e Pro Exam Eligibility | E | 1566 | [平均・中央値の最大化](../basics/fractional-binary-search.md#average) › 平均の言い換え（x を引いた和の符号で判定する）、[累積和](../basics/prefix-sum.md) |
 | abc469_f GCD Maximum Spanning Tree | F | 1567 | [最小全域木](../graph/minimum-spanning-tree.md#reduce-candidates) › 辺の候補を減らす（ソートした隣どうし・約数で絞る）、[最小全域木](../graph/minimum-spanning-tree.md#maximum) › 最大全域木、[調和級数と倍数の列挙](../math/harmonic-sum.md#collect-multiples) › 倍数を回して集める（d の倍数である要素の個数・和） |
 | abc469_g K-nacci Operations | G | 2804 | [行列累乗](../math/matrix-power.md#write-as-matrix) › 漸化式・状態の遷移を行列で書く（定数項を状態に入れる） |
-| abc470_d Inverse and Swap | D | 777 | [順列と置換](../patterns/permutation.md) › 位置と値の両方から引く操作 → 逆置換を同時に持つ |
+| abc470_d Inverse and Swap | D | 777 | [順列と置換](../patterns/permutation.md#inverse) › 位置と値の両方から引く操作 → 逆置換を同時に持つ |
 | abc470_e Concentration | E | 2096 | [最適戦略の期待値](../comb/optimal-strategy-expectation.md#state-design) › 残すもの・知っている情報を状態にする、[メモ化再帰](../dp/memoized-recursion.md) |
 | abc470_f Googol Swaps | F | 1604 | [置換の偶奇](../comb/permutation-parity.md#duplicates) › 同じ値があれば偶奇を調整できる、[連結成分](../graph/connected-components.md)、[多項係数](../comb/multinomial-coefficient.md) |
 | abc470_g Σex | G | 2097 | [主客転倒・寄与](../thinking/contribution.md)、[尺取り法](../basics/two-pointers.md)、[遅延セグメント木](../ds/lazy-segment-tree.md)、[言い換えの典型](../thinking/reformulation.md#then-data-structure) › 言い換えてからデータ構造に載せる |
@@ -158,6 +219,15 @@ updated: 2026-10-21
 
 <!-- textlint-enable -->
 <!-- gen:end recent-abc -->
+
+## 問題集の問題 → ページ {#sets-to-pages}
+
+次の表は、本文の例題・練習・力試しに載せた問題集の問題を問題集ごとに並べ、載せたページと役割を示したものである。問題集で解けなかった問題から、その手法のページを引くのに使う。
+
+- 「ページ（役割）」の役割は、そのページでの扱い（例題は方針と解法の詳細があり、練習・力試しは問題の一覧だけ）である。例題として載せたページから読むとよい。
+- 問題集の difficulty は付かないので、diff の列はほとんど「—」になる。典型90問は題名の★を見る。
+- 問題集の後に、ABC・ARC・AGC 以外の本番のコンテスト（企業の名前の付いたコンテストなど）の問題も、コンテストごとに並ぶ。
+- 表は本文の問題の一覧から自動で作るので、ページが増えると行も増える。
 
 <!-- gen:begin problem-sets -->
 <!-- textlint-disable -->
@@ -220,6 +290,7 @@ updated: 2026-10-21
 | 典型90 071. Fuzzy Priority（★7） | — | [トポロジカルソート](../graph/topological-sort.md)（力試し） |
 | 典型90 072. Loop Railway Plan（★4） | — | [計算量の見積もり](../basics/complexity-estimation.md)（練習）、[深さ優先探索（DFS）](../graph/dfs.md)（練習） |
 | 典型90 073. We Need Both a and b（★5） | — | [木 DP](../dp/tree-dp.md)（練習） |
+| 典型90 075. Magic For Balls（★3） | — | [約数と倍数](../patterns/divisors-and-multiples.md)（練習） |
 | 典型90 077. Planes on a 2D Plane（★7） | — | [二部マッチング](../graph/bipartite-matching.md)（例題） |
 | 典型90 078. Easy Graph Problem（★2） | — | [グラフの表現と用語](../graph/graph-basics.md)（例題） |
 | 典型90 079. Two by Two（★3） | — | [不変量・単調に変わる量](../thinking/invariant.md)（練習） |
@@ -229,6 +300,7 @@ updated: 2026-10-21
 | 典型90 085. Multiplication 085（★4） | — | [約数の個数の上界と高度合成数](../math/divisor-count-bound.md)（練習） |
 | 典型90 087. Chokudai's Demand（★5） | — | [ワーシャルフロイド法](../graph/warshall-floyd.md)（練習） |
 | 典型90 089. Partitions and Inversions（★7） | — | [区間分割 DP](../dp/dp-sequence-partition.md)（練習） |
+| 典型90 090. Tenkei90's Last Problem（★7） | — | [DP の高速化の選び方](../dp/dp-speedup-overview.md)（力試し） |
 
 ### EDPC（Educational DP Contest） {#problem-sets-dp}
 
@@ -408,3 +480,57 @@ updated: 2026-10-21
 
 <!-- textlint-enable -->
 <!-- gen:end problem-sets -->
+
+## 練習用のコンテスト {#practice-contests}
+
+決まった時刻に始まり、制限時間の中で解く形の練習には、次のコンテストがある。AtCoder Problems のデータでは、どれもレートが変わらない（Rated の範囲が付いていない）。
+
+- **AtCoder Daily Training（ADT）**：過去の ABC の問題を組み直して、平日に 60 分で出すコンテストである（ごく一部に CODE QUEEN の問題が混じる）。2023-10-17 から開かれ、2026 年は主に平日に 1 日 2 回開かれている。EASY（5 問）と ALL（9 問）の 2 つのコースがあり、2026-02-05 までは MEDIUM と HARD（各 5 問）もあった。
+- **AtCoder Weekday Contest（AWC）**：2026-02-09 から平日に毎日開かれている Beta のコンテストである。ほとんどの回が 5 問で、制限時間は awc0006 から 60 分（awc0001〜awc0005 は 90 分）。awc0100 と awc0150 は 15 問・150 分の回だった。問題は AWC のために用意されたもので（AtCoder Problems のデータでは、過去の問題を使い回していない）、difficulty は付かない。
+- **アルゴリズム実技検定（PAST）の過去問**：AtCoder Problems のデータに 24 回分（各 15 問）が載っている。1 回分を通しで解くと、典型の当てはめの速さを確かめられる。
+- **過去の ABC のバーチャル参加**：好きな時刻に本番の形で解くなら、AtCoder Problems のバーチャルコンテスト（[AtCoder 以外の道具](#tools)）を使い、過去の ABC を時間を計って解く。
+
+ADT の各位置の difficulty の中央値（2023-10〜2026-10 の全回、AtCoder Problems のデータから計算）は次のとおりである。400 未満の値は、AtCoder Problems の表示と同じく縮めた値である（[400 未満は縮めた値](../start/atcoder-system.md#difficulty)）。ALL の A〜E は同じ回の EASY と同じ問題で、ALL にはその後に F〜I が足される。
+
+| コース | A〜E | F | G | H | I |
+| --- | --- | ---: | ---: | ---: | ---: |
+| EASY | 12・13・57・60・354 | — | — | — | — |
+| ALL | 12・13・57・60・354 | 357 | 844 | 1295 | 1819 |
+
+中央値で見ると、ALL の H は水、I は青の帯に当たる。レート 1000 前後から黄を目指すなら、ALL を選び、H・I を解き切ることを目標にするとよい。問題は過去の ABC から選ばれるので、解いたことのある問題も混じる。そのときは、解法を思い出す速さと、実装の速さの練習に使う。
+
+ARC にも Rated の範囲の違う区分（ARC--・ARC・ARC++）があり、レートの低い人も出られる回がある。区分の詳しい話は [AtCoder の仕組み](../start/atcoder-system.md)に任せる。
+
+## AtCoder 以外の道具 {#tools}
+
+問題を選ぶ・記録する・時間を計るための、AtCoder の外の道具をまとめる。どれも非公式のサービスである。
+
+- **AtCoder Problems**：AtCoder の問題を一覧にし、解いた問題を表で示すサイトである。difficulty は「その問題を 50% の確率で解けるレート」で、「X 色の問題は X 色の人の半分が解ける問題」という意味であり、「X 色の人なら解ける問題」ではない。
+    - **おすすめ（Recommendation）**：自分のレートから、解ける確率が 80%（Easy）・50%（Moderate）・20%（Difficult）の問題を選んで示す。解いた問題を除くこともできる。
+    - **バーチャルコンテスト**：問題と制限時間を選んで、仮想のコンテストを作る。difficulty の範囲を指定して問題をランダムに選ぶ機能（Bacha Gacha）と、参加者が解いた問題を除く設定がある。過去の ABC を 1 回分選べば、本番と同じ形で練習できる。
+- **NoviSteps**：AtCoder の過去問に、易しい方から 11Q〜1Q・1D〜6D の 17 段階のグレードを付けたサイトである。グレードは利用者の投票でそろえていく仕組みで、解答の状況（AC・解説 AC・挑戦中など）を記録できる。トピックごとの問題集もある。
+- **AtCoder Clans**：AtCoder に関するツール・ライブラリ・記事・書籍などのリンクを、目的と形式ごとに分けて並べたサイトである。ほかの道具を探すときの入口に使う。
+
+解いた問題と理解したページの記録の付け方は、[精進の仕方](../guide/practice-method.md)に任せる。
+
+## ライブラリの確かめ用の問題集 {#verify-sets}
+
+自作のライブラリや ACL の使い方が正しいかは、入力の形が決まった問題に提出して確かめる。確かめ方の手順とページごとの対応は[自作ライブラリの設計と動作確認](../guide/library-design.md)に任せ、ここでは問題集だけを挙げる。
+
+- **ACL Practice（practice2）**：ACL の主な機能を 1 問ずつ（遅延セグメント木は 2 問）、計 12 問が並ぶ。Union-Find・BIT・floor sum・最大流・最小費用流・畳み込み・SCC・2-SAT・Suffix Array・セグメント木・遅延セグメント木を扱う。各問題がどのページの例題かは [ACL Practice の表](#problem-sets-practice2)にある。自作したデータ構造を、ACL と同じ問題で確かめるのにも使える。
+- **Library Checker**（[judge.yosupo.jp](https://judge.yosupo.jp/)）：データ構造・アルゴリズムごとに、確かめ用の問題を集めたジャッジである。問題の一覧には、14 の分野（データ構造・グラフ・木・畳み込み・数論・多項式・文字列・幾何など）に 235 問がある。
+- **AAL Contest 001: Let's use segtree!（aalc001）**：セグメント木の 24 問。題名から、ふつうのセグメント木・遅延セグメント木・セグメント木上の二分探索・転倒数などを順に使う構成と読める。[セグメント木](../ds/segment-tree.md)と[遅延セグメント木](../ds/lazy-segment-tree.md)を自作した後の確かめに向く。
+- **AtCoder Typical Contest 001・002**：DFS・Union-Find・FFT・BFS・繰り返し二乗法など、基本のアルゴリズムを入出力の素直な形で問う。ただし atc002 C（最適二分探索木）は、満点を取るには $O(N \log N)$ の解法（Hu-Tucker など）が要り、基本の確かめの範囲を超える。
+- **ACL Beginner Contest（abl）**：ACL を使うことを想定した本番の ABC（2020-09、6 問）。こちらは本番として開かれたので difficulty が付く。
+
+## 参考 {#references}
+
+- [E869120「競プロ典型 90 問」の告知記事（Qiita）](https://qiita.com/e869120/items/1b2a5f0f07fd927e44e9)：★と difficulty の対応、出題の期間、勧める進め方
+- [E869120「kyopro_educational_90」（GitHub）](https://github.com/E869120/kyopro_educational_90)：典型90問の解説の置き場
+- [E869120「kyopro-tessoku」（GitHub）](https://github.com/E869120/kyopro-tessoku)：鉄則本の章立てと、章ごとの解答コード
+- [drken「動的計画法超入門！ Educational DP Contest の A〜E 問題の解説と類題集」（Qiita）](https://qiita.com/drken/items/dc53c683d6de8aeacf5a)：EDPC の位置づけ（DP を初めて学ぶ人向けの問題）
+- [AtCoder Problems の FAQ（GitHub）](https://github.com/kenkoooo/AtCoderProblems/blob/master/doc/faq_ja.md)：difficulty の意味
+- [AtCoder Problems のガイド（GitHub）](https://github.com/kenkoooo/AtCoderProblems/tree/master/guide/src/ja)：おすすめ問題とバーチャルコンテストの機能
+- [AtCoder NoviSteps「About」](https://atcoder-novisteps.vercel.app/about)：グレードの段階と投票、記録の機能
+- [AtCoder Clans](https://kato-hiro.github.io/AtCoderClans/)：ツールと記事の一覧の構成
+- [yosupo06「library-checker-problems」の categories.toml（GitHub）](https://github.com/yosupo06/library-checker-problems/blob/master/categories.toml)：Library Checker の分野と問題数

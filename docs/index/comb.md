@@ -112,7 +112,7 @@ search:
 
 ## 写像 12 相（twelvefold-way） {#twelvefold-way}
 
-- id：`twelvefold-way`　レベル：—　段階：stub　type：hub
+- id：`twelvefold-way`　レベル：—　段階：draft　type：hub
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/twelvefold-way/
 - 別名：玉と箱、玉と箱の数え上げ、区別する・しない、twelvefold way
 - 種類：案内、数え上げ
