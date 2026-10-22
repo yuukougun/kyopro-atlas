@@ -240,23 +240,27 @@ $\lvert P_i - i \rvert < X$ となる位置を「違反」とし、違反を $k$
 
 <div class="kp-problems" data-role="practice" markdown>
 
+- [ABC462 G. Completely Wrong](https://atcoder.jp/contests/abc462/tasks/abc462_g)（diff 2232）：色の付いた N 個の玉を一様に無作為な順に取り出すとき、どの i 番目に取り出す玉も指定の色 G_i と違う確率を mod 998244353 で求める。
 - [ARC115 E. LEQ and NEQ](https://atcoder.jp/contests/arc115/tasks/arc115_e)（diff 2363）：各項が 1 以上 A_i 以下で、隣り合う項が異なる長さ N の数列の数を求める。
 
 </div>
 
 ??? note "練習の方針"
+    - **ABC462 G**：一致する組を $k$ 組指定する包除にする。色 $c$ が玉に $x$ 個、指定に $y$ 個あるとき、一致を $i$ 組指定する方法は $\binom{x}{i} \binom{y}{i} i!$ である。色ごとの多項式を掛けて $r_k$ を作り、$\sum (-1)^k r_k (N - k)! / N!$ を取る。多項式の積は分割統治で掛ける
     - **ARC115 E**：等しいと指定した隣接で列を区間に分け、符号 $(-1)^{\ell - 1}$ と区間の $A$ の最小値を掛ける DP にする。$N \le 5 \times 10^5$ なので、符号を $h[i] = (-1)^i \mathrm{dp}[i]$ にまとめ、$\min$ が同じ $j$ を単調スタックでまとめて $O(N)$ にする。
 
 ## 力試し {#challenge}
 
 <div class="kp-problems" data-role="challenge" markdown>
 
+- [ARC121 E. Directed Tree](https://atcoder.jp/contests/arc121/tasks/arc121_e)（diff 2645）：頂点 1 を根とする N 頂点の根付き木で、各 i について a_i から辺を 1 本以上たどって i に着かない順列 a の数を数える。
 - [ABC214 G. Three Permutations](https://atcoder.jp/contests/abc214/tasks/abc214_g)（diff 2893）：2 つの順列 p, q が与えられ、すべての i で r_i ≠ p_i かつ r_i ≠ q_i となる順列 r の数を求める。
 - [ARC101 E. Ribbons on Tree](https://atcoder.jp/contests/arc101/tasks/arc101_c)（diff 2913）：N 頂点（N は偶数）の木の頂点を 2 つずつ組にして結ぶとき、すべての辺がどれかの組の間のパスに含まれる組み方の数を求める。
 
 </div>
 
 ??? note "力試しの方針"
+    - **ARC121 E**：条件を破る頂点を $k$ 個指定する包除にする。部分木ごとに「指定した個数」を状態に持つ木 DP（二乗の木 DP で $O(N^2)$）で $r_k$ を求め、$\sum (-1)^k r_k (N - k)!$ を取る
     - **ABC214 G**：$p_i$ と $q_i$ を辺で結ぶと、グラフは自己ループとサイクルの集まりになる。違反の $k$ 個の選び方は、各辺にその端点の 1 つを、同じ頂点を 2 回使わないように割り当てる方法の数である。サイクルごとに辺の向きを DP で数え、サイクルどうしをナップサックのように畳み込んで $r_k$ を求め、$\sum_k (-1)^k r_k (N - k)!$ を取る。長さ $L$ のサイクルですべての辺を選ぶ方法は 2 通り（向きが 2 つ）で、一部だけなら選んだ辺がパスに分かれる。
     - **ARC101 E**：どのパスにも含まれない辺の集合を切ると決め、[符号付きの木 DP](#tree) で根を含む成分の大きさを状態に持つ。大きさ $s$ の成分の組み方は $s$ が偶数のとき $(s - 1)(s - 3) \cdots 1$ である。
 
@@ -295,3 +299,6 @@ $\lvert P_i - i \rvert < X$ となる位置を「違反」とし、違反を $k$
 - [drken「AtCoder ARC 115 E - LEQ and NEQ (3E, 黄色, 700 点)」](https://drken1215.hatenablog.com/entry/2021/03/21/235000_1)：練習の ARC115 E の方針（区間にまとめる符号付き DP と単調スタック）
 - [kmjp「AtCoder ABC #214 : G - Three Permutations」](https://kmjp.hatenablog.jp/entry/2021/08/16/0900)：力試しの ABC214 G の方針（サイクルごとの DP と包除）
 - [drken「AtCoder ARC 101 E - Ribbons on Tree (赤色, 900 点)」](https://drken1215.hatenablog.com/entry/2019/06/21/024200)：力試しの ARC101 E の方針（切る辺の集合で包除する木 DP）
+- [kmjp「AtCoder ABC #462 (CodeQUEEN 2026 予選) : G - Completely Wrong」](https://kmjp.hatenablog.jp/entry/2026/06/13/0900)：練習 ABC462 G の色ごとの多項式と包除
+- [ikatakos「CodeQUEEN 2026 予選 (AtCoder Beginner Contest 462)E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0613_abc462)：練習 ABC462 G の同じ方針（解説の部分だけを参照）
+- [kmjp「AtCoder ARC #121 (NOMURA プログラミングコンテスト 2021) : E - Directed Tree」](https://kmjp.hatenablog.jp/entry/2021/06/20/0930)：力試し ARC121 E の符号付きの木 DP

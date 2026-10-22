@@ -175,11 +175,13 @@ $A_n = \operatorname{lcm}(1, \dots, n)$ とすると、$A_n \ne A_{n-1}$ にな�
 
 <div class="kp-problems" data-role="practice" markdown>
 
+- [アルゴ数学 097. Primes in an Interval](https://atcoder.jp/contests/math-and-algorithm/tasks/math_and_algorithm_bt)（diff —）：L 以上 R 以下の整数のうち素数がいくつあるかを数える（R ≤ 10^12 と大きく、区間の長さは 50 万程度まで）。
 - [ABC227 G. Divisors of Binomial Coefficient](https://atcoder.jp/contests/abc227/tasks/abc227_g)（diff 2207）：N 個から K 個を選ぶ組合せの数 C(N, K) の正の約数の個数を 998244353 で割った余りで求める（N ≤ 10^12、K ≤ 10^6）。
 
 </div>
 
 ??? note "練習の方針"
+    - **アルゴ数学 097**：$\sqrt{R}$ 以下の各数 $p$ について、区間で最初の $p$ の倍数 $\lceil L/p \rceil \cdot p$ から、$p$ 自身を除いて印を付ける。$L = 1$ なら 1 も除き、残った数を数える
     - **ABC227 G**：分子 $N-K+1, \dots, N$ は連続する $K$ 個の数なので、$\sqrt{N}$ までの素数による区間篩で各数を分解し、指数を素数ごとに足す。割り残しは $\sqrt{N}$ より大きい素数として指数 1 を足す。分母の $K!$ は 1〜K を同じように分解して指数を引く。最後に $\prod_p (e_p + 1)$ を 998244353 で割った余りを出力する
 
 ## 確認問題 {#quiz}
@@ -202,3 +204,5 @@ $A_n = \operatorname{lcm}(1, \dots, n)$ とすると、$A_n \ne A_{n-1}$ にな�
 - [gotoki_no_joe「ABC412 A～F をHaskellで」](https://qiita.com/gotoki_no_joe/items/dbd1cf6437edd867afa3)：例題の方針（区間 $[L+1, R]$ を篩い、素数の累乗を別に数える）
 - [Shizen_Tota「ABC412個人的備忘録[A-E]」](https://qiita.com/Shizen_Tota/items/c9ee7d07887c1dd0e935)：例題の実装の形（区間を $[L+1, R]$ にし、素数の累乗に印を付ける）
 - [kazun「ABC227 G」](https://kazun-kyopro.hatenablog.com/entry/ABC/227/G)：練習の方針（分子の連続区間を √N までの素数で分解し、割り残しを素数とする理由）
+- [E869120「math-algorithm-book editorial/chap6-21_25/prob6-23.cpp」](https://github.com/E869120/math-algorithm-book/blob/main/editorial/chap6-21_25/prob6-23.cpp)：練習 アルゴ数学 097 の解答コード（最初の倍数・p 自身・L = 1 の扱い）
+- [bouzuya「blog.bouzuya.net data/2022/03/2022-03-18.md」](https://github.com/bouzuya/blog.bouzuya.net/blob/master/data/2022/03/2022-03-18.md)：練習 アルゴ数学 097 で区間篩にする理由

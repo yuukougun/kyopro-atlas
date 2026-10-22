@@ -202,23 +202,27 @@ ACL の `dsu` は `leader` の中で経路圧縮をするので、この用途�
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC273 E. Notebook](https://atcoder.jp/contests/abc273/tasks/abc273_e)（diff 1624）：末尾への追加・末尾の削除・ページへの保存・ページの読み込みの操作のたびに、列の末尾を答える。
+- [ABC453 G. Copy Query](https://atcoder.jp/contests/abc453/tasks/abc453_g)（diff 1735）：長さ M の数列が N 本あり、ある数列を別の数列へ丸ごと写す・1 点を書き換える・区間の和を答える、の 3 種類のクエリを順に処理する。
 
 </div>
 
 ??? note "方針"
     - **ABC273 E**：列の状態を頂点とする木を作り、今の頂点を指す変数とページから頂点への表を持つ。追加は子を作って移る、削除は親へ移る（根にいるなら動かない）、保存は表に今の頂点を書く、読み込みは表の頂点へ移る。根に $-1$ を置けば空の列を特別に扱わずに済む。詳しくは[永続データ構造の版の木](../ds/persistent-data-structures.md#version-tree)
+    - **ABC453 G**：クエリを先に読み、1 点の書き換えを「数列が今指す版の子を作る」、写しを「版の指し替え」とみなして版の木を作る。セグメント木（BIT）を 1 つだけ持って版の木を DFS し、入るときに書き換えて元の値を覚え、区間の和の質問に答えてから出るときに元へ戻す。オンラインの解き方（永続セグメント木）は永続データ構造のページの例題である
 
 ## 力試し {#challenge}
 
 <div class="kp-problems" data-role="challenge" markdown>
 
 - [ABC218 G. Game on Tree 2](https://atcoder.jp/contests/abc218/tasks/abc218_g)（diff 2217）：根から葉までのパス上の数の中央値をスコアとし、2 人が交互に子へ進むゲームで、先手が最大化・後手が最小化するときのスコアを求める。
+- [ABC133 F. Colorful Tree](https://atcoder.jp/contests/abc133/tasks/abc133_f)（diff 2330）：辺に色と長さがある木で、色 x の辺の長さをすべて y に変えたときの 2 頂点 u, v の距離を、独立な質問それぞれについて答える。
 - [ABC302 Ex. Ball Collector](https://atcoder.jp/contests/abc302/tasks/abc302_h)（diff 2407）：木の根から各頂点へのパス上で各頂点のボールの片方を選ぶとき、書かれた値の種類数の最大値を各頂点について求める。
 
 </div>
 
 ??? note "方針"
     - **ABC218 G**：DFS で根からのパス上の値を BIT（または 2 つの `multiset`）に出し入れし、葉に着いたらパス上の中央値（個数が偶数なら真ん中の 2 つの平均）を求める。同じ DFS の帰りがけで、深さの偶奇に応じて子の値の最大か最小を取る（[木の上のゲーム](../comb/minimax.md#tree)）
+    - **ABC133 F**：距離を「根からの距離（$u$）＋（$v$）− 2 ×（LCA）」に分け、質問を 3 頂点に割り振る。色ごとの辺の本数と長さの和を持って DFS し（入るとき足し、出るとき引く）、各頂点でその色の分だけ長さを差し替えた根からの距離を求める
     - **ABC302 Ex**：値を頂点、各頂点の 2 つのボールを「値と値を結ぶ辺」とするグラフを考える。連結成分ごとに選べる種類数の最大は「頂点数と辺数の小さい方」になる。DFS で入るとき辺を足して併合し、出るとき取り消す。成分ごとの辺数と答えの合計も記録に積み、経路圧縮なしの Union-Find で $O(N \log N)$
 
 ## 確認問題 {#quiz}
@@ -255,3 +259,7 @@ ACL の `dsu` は `leader` の中で経路圧縮をするので、この用途�
 - [kazun「AtCoder Beginner Contest 273 E問題 Notebook」](https://kazun-kyopro.hatenablog.com/entry/ABC/273/E)：練習 abc273_e の状態の木と今の頂点の動かし方
 - [kmjp「AtCoder ABC #218 : G - Game on Tree 2」](https://kmjp.hatenablog.jp/entry/2021/09/12/0900)：力試し abc218_g の BIT（または 2 つの multiset）での出し入れとミニマックス
 - [drken「AtCoder ABC 302 Ex - Ball Collector (橙色, 625 点)」](https://drken1215.hatenablog.com/entry/2023/06/10/032900)：力試し abc302_h のグラフへの言い換えと、取り消せる Union-Find で記録するもの
+- [ikatakos「AtCoder Beginner Contest 453 E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0411_abc453)：練習 ABC453 G の版の木を先読みして DFS する解き方（解説の部分だけを参照）
+- [CR-J「ABC 453 个人题解」](https://www.cnblogs.com/CR-J/p/19853087)：練習 ABC453 G の問題の設定の確認
+- [hamayan「Colorful Tree [AtCoder Beginner Contest 133 F]」](https://blog.hamayanhamayan.com/entry/2019/07/08/213009)：力試し ABC133 F の LCA で 3 頂点に分けて DFS で数える方針
+- [ikatakos「AtCoder Beginner Contest 133 D,E,F 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2019/0707_abc133)：力試し ABC133 F の同じ方針（解説の部分だけを参照）

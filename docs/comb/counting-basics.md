@@ -217,15 +217,34 @@ $k^n$ と $n^k$ を取り違えやすい。「選ぶ側」が 1 つずつ「選�
 
 <div class="kp-problems" data-role="practice" markdown>
 
+- [ABC178 C. Ubiquity](https://atcoder.jp/contests/abc178/tasks/abc178_c)（diff 653）：各要素が 0〜9 の長さ N の列のうち、0 と 9 をどちらも含むものの数を求める。
+- [AGC031 A. Colorful Subsequence](https://atcoder.jp/contests/agc031/tasks/agc031_a)（diff 953）：文字列 S の部分列（取り出す位置が違えば別のものとする）のうち、含まれる文字がすべて異なるものの数を求める。
 - [ABC307 E. Distinct Adjacent](https://atcoder.jp/contests/abc307/tasks/abc307_e)（diff 1240）：円形に並ぶ N 人に 0〜M−1 の整数を、隣り合う人どうしが異なるように配る方法の数を求める。
 
 </div>
 
 ??? note "練習の方針"
+    - **ABC178 C**：全体 $10^N$ から、0 を含まない $9^N$ と 9 を含まない $9^N$ を引き、二重に引いたどちらも含まない $8^N$ を足し戻す。mod を取っているので、引き算の後は負にならないよう法を足す
+    - **AGC031 A**：文字ごとに「使わない」か「$S$ の中の出現位置の 1 つを選ぶ」かで（出現回数 + 1）通りある。文字どうしは独立なので積の法則で掛け、最後に空の部分列の 1 通りを引く。並べ方は $S$ の中の順で決まるので数えなくてよい
     - **ABC307 E**：円環の隣が異なる塗り分けそのものである。[一列と円環の節](#coloring)の漸化式 $C_N = M(M-1)^{N-1} - C_{N-1}$（$C_2 = M(M-1)$）を $N$ まで回すか、閉じた式 $(M-1)^N + (-1)^N (M-1)$ を使う。「1 人目と同じ値か」を状態にした DP でも解ける
+
+## 力試し {#challenge}
+
+<div class="kp-problems" data-role="challenge" markdown>
+
+- [ABC133 E. Virus Tree 2](https://atcoder.jp/contests/abc133/tasks/abc133_e)（diff 1505）：N 頂点の木を K 色で塗り、距離 2 以下のどの 2 頂点も違う色になる塗り方の数を求める。
+
+</div>
+
+??? note "力試しの方針"
+    - **ABC133 E**：根から順に色を決める。根は $K$ 通り、根の子は $K - 1$ 色から、ほかの頂点の子は自分と親の色を除く $K - 2$ 色から、兄弟どうしで違う色を選ぶ。選択肢の数が前の選び方によらず一定なので、全頂点の積で数えられる
 
 ## 参考 {#references}
 
 - [E869120「kyopro_educational_90 sol/069.cpp」](https://github.com/E869120/kyopro_educational_90/blob/main/sol/069.cpp)：例題の式と、$N = 1$・$N = 2$・$K = 1$ の場合分け
 - [drken「AtCoder ABC 307 E - Distinct Adjacent (1Q, 水色, 475 点)」](https://drken1215.hatenablog.com/entry/2024/06/10/024932)：円環の塗り分けを、両端の同じ色をまとめて $N - 1$ 個の円環に帰着する見方と、1 個目と同じかを状態にした DP
 - [tmsn「AtCoder Beginer Contest 301~350 D or E までの要点・解答（Go）」](https://zenn.dev/shinonome81/articles/3e1c0c8a9c00fc)：ABC307 E の項。一列の数 $M(M-1)^{N-1}$ と円環の違い、1 人目と同じかを状態にした DP
+- [drken「AtCoder ABC 178 C - Ubiquity (3Q, 茶色, 300 点)」](https://drken1215.hatenablog.com/entry/2020/10/09/162600)：練習 ABC178 C の全体から引く数え方
+- [drken「AtCoder AGC 031 A - Colorful Subsequence (緑色, 200 点)」](https://drken1215.hatenablog.com/entry/2019/03/18/125300)：練習 AGC031 A の文字ごとの積
+- [ikatakos「AtCoder Grand Contest 031 A,B,C,D 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2019/0316_agc031)：練習 AGC031 A の同じ数え方（解説の部分だけを参照）
+- [drken「AtCoder ABC 133 E - Virus Tree 2 (1Q, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2019/07/08/002700)：力試し ABC133 E の根から決める積

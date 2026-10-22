@@ -161,6 +161,17 @@ $\infty$ は「有限の容量の総和 + 1」にしてある。流した量が�
 ??? note "解法の詳細"
     頂点 $v$（0-indexed）の入口を $2v$、出口を $2v + 1$ とし、$v = 1, \dots, N - 2$ に `add_edge(2v, 2v + 1, C_v)` を張る。無向辺 $\{u, v\}$ には `add_edge(2u + 1, 2v, INF)` と `add_edge(2v + 1, 2u, INF)` を張る。始点を頂点 0 の出口 $1$、終点を頂点 $N - 1$ の入口 $2(N - 1)$ にして流す。`min_cut(1)` で $2v$ が `true`、$2v + 1$ が `false` の頂点を出力する。[頂点カットの節](#vertex-cut)のコード片がこの形である。費用の和と $\infty$ が `int` に収まるとは限らないので、容量は `long long` にしておく。
 
+## 練習問題 {#practice}
+
+<div class="kp-problems" data-role="practice" markdown>
+
+- [ARC074 F. Lotus Leaves](https://atcoder.jp/contests/arc074/tasks/arc074_d)（diff 2208）：グリッド上の葉から同じ行か同じ列にある葉へ跳べる蛙が、始点 S から終点 T の葉に着けないように、S と T 以外の葉を取り除くときの最小の枚数を求める（切り離せなければ −1 を出力する）。
+
+</div>
+
+??? note "練習の方針"
+    - **ARC074 F**：葉ごとに入口から出口への容量 1 の辺を張り、同じ行・列の葉へ跳ぶ移動を容量 ∞ の辺にして、$S$ の出口から $T$ の入口への最大流を求める。$S$ と $T$ が同じ行か列にあれば −1 である。行・列ごとに中継の頂点を置くと、辺の数が $O(HW)$ 程度に減る
+
 ## 力試し {#challenge}
 
 <div class="kp-problems" data-role="challenge" markdown>
@@ -209,3 +220,4 @@ $\infty$ は「有限の容量の総和 + 1」にしてある。流した量が�
 - [kmjp「AtCoder ABC #239 (デンソークリエイトプログラミングコンテスト2022) : G - Builder Takahashi」](https://kmjp.hatenablog.jp/entry/2022/02/22/0900)：例題 abc239_g の頂点の分け方と、残余グラフの到達でのカットの復元
 - [kmjp「AtCoder ABC #332 : G - Not Too Many Balls」](https://kmjp.hatenablog.jp/entry/2024/05/06/0900)：力試し abc332_g の、s 側に残す種類の番号の和で最小カットを DP する方針
 - [kmjp「AtCoder ABC #397 (オムロンプログラミングコンテスト2025) : G - Maximize Distance」](https://kmjp.hatenablog.jp/entry/2025/03/15/0930)：力試し abc397_g の (頂点, 距離) の層グラフと容量 ∞ の辺の張り方
+- [kmjp「AtCoder ARC #074 : F - Lotus Leaves」](https://kmjp.hatenablog.jp/entry/2017/05/20/0930)：練習 ARC074 F の頂点を入口と出口に分ける最大流

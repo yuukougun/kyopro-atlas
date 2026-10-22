@@ -184,6 +184,19 @@ $N = 8$ で $l = 1$、$r = 6$ なら、$1 = 001_{(2)}$、$6 = 110_{(2)}$ で、$
 
     問い $[L, R]$ が来たら、$k = \lfloor \log_2 (R - L + 1) \rfloor$ をとり、組 $(k, L)$ と $(k, R - 2^k + 1)$ の番号を答える。前計算は $O(N \log N)$、1 問 $O(1)$ である。出力のたびに flush する（[対話の作法](../misc/interactive.md#format)）。
 
+## 練習問題 {#practice}
+
+<div class="kp-problems" data-role="practice" markdown>
+
+- [ABC125 C. GCD on Blackboard](https://atcoder.jp/contests/abc125/tasks/abc125_c)（diff 1197）：N 個の整数のうち 1 つを好きな整数に書き換えたとき、全体の最大公約数としてありうる最大値を求める。
+- [ABC254 F. Rectangle GCD](https://atcoder.jp/contests/abc254/tasks/abc254_f)（diff 1764）：(i, j) 成分が A_i + B_j の N×N の表について、指定された長方形の中の値すべての最大公約数を、多数のクエリに答える。
+
+</div>
+
+??? note "練習の方針"
+    - **ABC125 C**：書き換える要素 $i$ を全探索すると、答えは $i$ を除いた gcd である。それは区間 $[0, i)$ と $[i+1, N)$ の 2 つの区間 gcd の gcd なので、Sparse Table で各 $i$ を $O(1)$ 回の gcd で求める。左右からの累積 gcd の方が簡単で、実装の確かめとして解く
+    - **ABC254 F**：gcd は隣り合う項の差に置き換えても変わらないので、長方形の gcd は左上の値と、$A$・$B$ の隣接差の区間 gcd 2 つとの gcd になる。差の列は変わらないので、Sparse Table で区間 gcd を引く（gcd は冪等なので普通の Sparse Table でよい）
+
 ## 確認問題 {#quiz}
 
 ??? question "確認問題：区間の和に、重なった 2 つの区間を使えないのはなぜか"
@@ -216,3 +229,4 @@ $N = 8$ で $l = 1$、$r = 6$ なら、$1 = 001_{(2)}$、$6 = 110_{(2)}$ で、$
 - [cp-algorithms「Sparse Table」](https://cp-algorithms.com/data_structures/sparse-table.html)：冪等な演算に限って取得が $O(1)$ になること・表を段が外側の順に持つとメモリを連続して読めること・Disjoint Sparse Table の存在（文章と図は使っていない）
 - [Library Checker「Static RMQ」](https://judge.yosupo.jp/problem/staticrmq)：区間最小の検証用の問題
 - [cppreference「std::bit_width」](https://en.cppreference.com/cpp/numeric/bit_width)：`bit_width` が C++20 の `<bit>` にあること
+- [hamayan「GCD on Blackboard [AtCoder Beginner Contest 125 C]」](https://blog.hamayanhamayan.com/entry/2019/04/28/085936)：練習 ABC125 C の Sparse Table による区間 gcd と累積 gcd

@@ -215,6 +215,30 @@ DFS では、入るときに変更前の値を覚えてから施し、出ると�
 
     2 つのコード（[経路コピー](#path-copying)と[オフライン](#offline-version-tree)の節）は、同じ入力で同じ答えを出すことを乱択の入力で確かめてある。
 
+## 練習問題 {#practice}
+
+<div class="kp-problems" data-role="practice" markdown>
+
+- [ABC339 G. Smaller Sum](https://atcoder.jp/contests/abc339/tasks/abc339_g)（diff 1792）：列の区間に含まれる X 以下の要素の和を、前の答えで次の質問が決まる形で多数答える。
+- [ABC165 F. LIS on Tree](https://atcoder.jp/contests/abc165/tasks/abc165_f)（diff 1843）：木の各頂点に数が書かれ、頂点 1 から各頂点へのパス上の数を並べた列の最長増加部分列の長さを、すべての頂点について求める。
+
+</div>
+
+??? note "練習の方針"
+    - **ABC339 G**：値を座標圧縮し、接頭辞 $A_0, \dots, A_{i-1}$ を入れた「値ごとの個数と和」のセグメント木を、経路コピーで版 $i$ として残す。版 $r$ と版 $l$ の差で、区間の X 以下の和を $O(\log N)$ で答える。オンライン強制なので先読みはできない。主な解き方はマージソート木である
+    - **ABC165 F**：LIS の末尾の配列を 1 つだけ持って DFS する。頂点に入るときに二分探索で 1 か所を書き換え（または末尾に追加し）て変更前の値を覚え、出るときに元へ戻す。版の木が入力の木として与えられている形で、入るときに施して出るときに取り消す手順がそのまま使える
+
+## 力試し {#challenge}
+
+<div class="kp-problems" data-role="challenge" markdown>
+
+- [ABC133 F. Colorful Tree](https://atcoder.jp/contests/abc133/tasks/abc133_f)（diff 2330）：辺に色と長さがある木で、色 x の辺の長さをすべて y に変えたときの 2 頂点間の距離を、多数の質問に答える。
+
+</div>
+
+??? note "力試しの方針"
+    - **ABC133 F**：根から各頂点までの「色ごとの本数と長さの和」を、親の版から 1 か所だけ変えた永続配列として DFS で作る。LCA で 2 頂点の距離を組み立て、色 $x$ の分だけ差し替える。想定解はオフラインの DFS で数える方法で、永続配列は別解である
+
 ## 確認問題 {#quiz}
 
 ??? question "確認問題：版の木で「末尾の削除」が親へ戻るだけで済むのはなぜか"
@@ -245,3 +269,6 @@ DFS では、入るときに変更前の値を覚えてから施し、出ると�
 - [Billlly「ABC 453 个人题解」](https://www.cnblogs.com/CR-J/p/19853087)：例題 abc453_g の制約と、永続セグメント木での解き方（コピーを根の代入にすること）
 - [hotman78「つくってなぐろ (永続配列/永続Union-Find木/永続セグメント木の作り方と意義、具体例)」](https://qiita.com/hotman78/items/9c643feae1de087e6fc5)：経路コピーの永続配列、経路圧縮をしない永続 Union-Find、接頭辞ごとの版の差で区間を問う使い方
 - [Library Checker「Persistent Queue」](https://judge.yosupo.jp/problem/persistent_queue)・[「Persistent Range Affine Range Sum」](https://judge.yosupo.jp/problem/persistent_range_affine_range_sum)：自作するときの確かめ先
+- [tayu0110「ABC339G - Smaller Sum」](https://tayu0110.hatenablog.com/entry/2024/02/05/205618)：練習 ABC339 G の問いの形とオンライン強制
+- [HackMD「題單收藏」](https://hackmd.io/@rfr9XKMgQ7iE-PzOXscYEw/ry8CYJA7yl)：練習 ABC339 G が永続セグメント木でも解けるという指摘
+- [kmjp「AtCoder ABC #165 : F - LIS on Tree」](https://kmjp.hatenablog.jp/entry/2020/05/02/0930)：練習 ABC165 F の DFS で 1 か所を更新して戻す方針

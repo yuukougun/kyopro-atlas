@@ -203,6 +203,17 @@ $[x^{m}] P(x)$ は $P$ の $x^m$ の係数である。右辺の積の $x^{N-2}$ 
 
     元のプログラムは、$N \le 7$ で木をすべて作り、次数列ごとの直径の最大値を足したものと一致することを確かめている。
 
+## 練習問題 {#practice}
+
+<div class="kp-problems" data-role="practice" markdown>
+
+- [NYC2015 E. ひも](https://atcoder.jp/contests/NYC2015/tasks/nyc2015_5)（diff —）：完全グラフの全域木のうち、各頂点 v の次数がちょうど a_v（1〜3）であるものの数を 10^9+7 で割った余りで求める（N ≤ 10^5）。
+
+</div>
+
+??? note "練習の方針"
+    - **NYC2015 E**：次数の和が $2N - 2$ でなければ 0 通りである。そうでなければ、Prüfer 列での頂点 $v$ の出現回数が $a_v - 1$ になる列の数 $(N-2)! / \prod_v (a_v - 1)!$ が答えで、階乗の前計算で $O(N)$ で求まる
+
 ## 力試し {#challenge}
 
 <div class="kp-problems" data-role="challenge" markdown>
@@ -249,3 +260,4 @@ $[x^{m}] P(x)$ は $P$ の $x^m$ の係数である。右辺の積の $x^{N-2}$ 
 - [cirrostratus「ABC290 F問題 Maximum Diameter」](https://cirrostratus.hatenablog.com/entry/2023/03/05/163234)：例題の直径の最大値の観察と、Vandermonde の恒等式で閉じた式
 - [drken「AtCoder ABC 303 Ex - Constrained Tree Degree (橙色, 600 点)」](https://drken1215.hatenablog.com/entry/2023/05/28/010200)：力試しの方針（次数列の和を多項式の累乗の係数にする）
 - [drken「AtCoder ARC 106 F - Figures (橙色, 800 点)」](https://drken1215.hatenablog.com/entry/2020/10/25/140600)：力試しの方針（穴の選び方を掛けて Vandermonde の恒等式で閉じる）
+- [drken「New Year Contest 2015 E - ひも」](https://drken1215.hatenablog.com/entry/2023/09/07/000919)：練習 NYC2015 E の同じ式

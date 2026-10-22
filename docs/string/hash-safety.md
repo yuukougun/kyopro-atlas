@@ -264,13 +264,15 @@ GCC の標準ライブラリ（libstdc++）では、整数の既定のハッシ�
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC141 E. Who Says a Pun?](https://atcoder.jp/contests/abc141/tasks/abc141_e)（diff 1459）：重ならずに 2 回以上現れる部分文字列の最大の長さを求める（N ≤ 5000）。
+- [ABC331 F. Palindrome Query](https://atcoder.jp/contests/abc331/tasks/abc331_f)（diff 1666）：文字列の 1 文字を書き換える更新と、区間が回文かを問う質問を、合わせて Q 回処理する。
+- [ABC377 G. Edit to Match](https://atcoder.jp/contests/abc377/tasks/abc377_g)（diff 1782）：各文字列 S_k について、末尾の 1 文字の削除と末尾への 1 文字の追加をくり返して、空文字列かそれより前の文字列のどれかに一致させる最小の操作回数を求める。
 
 </div>
 
 ??? note "方針"
-    答えの長さを二分探索し、長さ $m$ の部分文字列のハッシュに、重ならない位置どうしの重複があるかを調べる（[ローリングハッシュの節](../string/rolling-hash.md#hash-lcp-binary-search)）。1 回の判定でハッシュ約 $5000$ 個の全部の組（約 $1.25 \times 10^7$ 組）を比べ、二分探索で約 13 回くり返すので、組は合わせて約 $1.6 \times 10^8$ 組ある。法が約 $10^9$ の 1 つでは、一様とみなしても誤る確率が約 0.16 になる。mod $2^{61} - 1$ と乱択した基数で解き直すとよい。
-
-    ハッシュが一致した候補だけ実際に文字列を比べて確かめれば、衝突しても答えは誤らない。ただし、衝突が多いと確かめる時間がかかる。
+    - **ABC141 E**：答えの長さを二分探索し、長さ $m$ の部分文字列のハッシュに、重ならない位置どうしの重複があるかを調べる（[ローリングハッシュの節](../string/rolling-hash.md#hash-lcp-binary-search)）。1 回の判定でハッシュ約 $5000$ 個の全部の組（約 $1.25 \times 10^7$ 組）を比べ、二分探索で約 13 回くり返すので、組は合わせて約 $1.6 \times 10^8$ 組ある。法が約 $10^9$ の 1 つでは、一様とみなしても誤る確率が約 0.16 になる。mod $2^{61} - 1$ と乱択した基数で解き直すとよい。ハッシュが一致した候補だけ実際に文字列を比べて確かめれば、衝突しても答えは誤らない。ただし、衝突が多いと確かめる時間がかかる
+    - **ABC331 F**：順方向と逆方向の多項式ハッシュを BIT かセグメント木に載せて区間のハッシュを比べる（解き方はローリングハッシュのページの例題と同じ）。基数を 2 に固定すると WA になった記録があり、基数は実行時に乱択する。比べる組は $Q$ 組なので、組の数の見積もりより基数の固定が問題になる例である
+    - **ABC377 G**：前の文字列の長さ $l$ の prefix のハッシュごとに「その prefix を持つ文字列の最短の長さ $f$」を長さごとの `map` に記録し、$S_k$ の各 prefix で $\lvert S_k \rvert + f - 2l$ の最小を取る。prefix のハッシュは総文字数（約 $2 \times 10^5$）個が `map` の中で比べ合うので、組の数の見積もりから法が約 $10^9$ の 1 つでは足りず、mod $2^{61} - 1$ か二重ハッシュと乱択した基数が要る
 
 ## 確認問題 {#quiz}
 
@@ -314,3 +316,7 @@ GCC の標準ライブラリ（libstdc++）では、整数の既定のハッシ�
 - [E869120「競プロ典型 90 問」047 の解説](https://github.com/E869120/kyopro_educational_90/blob/main/editorial/047-02.jpg)：色の言い換えとローリングハッシュ、$p = 2^{64}$ ではどの基数でも衝突させられるという注意（[1 枚目](https://github.com/E869120/kyopro_educational_90/blob/main/editorial/047-01.jpg)と問題文も参照）
 - [perogram「ローリングハッシュの衝突回避と定数倍高速化」](https://perogram.hateblo.jp/entry/2019/09/16/103911)：ABC141 E で 1 本のハッシュが WA になり、法だけを変えても消えず、基数も変えて消えた記録と、一致した候補を直接比べる回避策
 - [けんちょん「AtCoder ABC 141 E - Who Says a Pun? (1D, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2019/09/16/014600)：ABC141 E の問いと、長さの二分探索とハッシュによる解き方
+- [syamashi「[ABC331] F - Palindrome Query」](https://note.com/syamashi/n/n8e580d4ce59d)：練習 ABC331 F の基数を固定すると WA になった記録
+- [merom686「ABC331」](https://merom686.hatenablog.com/entry/2023/12/03/001625)：練習 ABC331 F の順方向・逆方向のハッシュで区間を比べる方針
+- [kmjp「AtCoder ABC #377 (トヨタシステムズプログラミングコンテスト2024) : G - Edit to Match」](https://kmjp.hatenablog.jp/entry/2024/10/29/0900)：練習 ABC377 G のハッシュでの解き方（二重ハッシュと乱択した基数）
+- [ikatakos「トヨタシステムズプログラミングコンテスト2024（AtCoder Beginner Contest 377) E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/1026_abc377)：練習 ABC377 G の問題の設定の確認（解説の部分だけを参照）

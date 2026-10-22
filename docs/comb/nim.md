@@ -215,23 +215,31 @@ AtCoder でよく出る形では、次の 2 つの考え方で片づくことが
 
 <div class="kp-problems" data-role="practice" markdown>
 
+- [ABC368 F. Dividing Game](https://atcoder.jp/contests/abc368/tasks/abc368_f)（diff 1180）：N 個の整数から交互に 1 つを選んで自分以外の約数に置き換え、置き換えられなくなった方が負けのとき、勝つのはどちらかを求める。
+- [ARC046 B. 石取り大作戦](https://atcoder.jp/contests/arc046/tasks/arc046_b)（diff 1260）：N 個の石の山から、先手は 1 個以上 A 個以下、後手は 1 個以上 B 個以下を交互に取り、最後の石を取った方が勝つとき、勝つのはどちらかを求める。
 - [ARC143 C. Piles of Pebbles](https://atcoder.jp/contests/arc143/tasks/arc143_c)（diff 1805）：先手は X 個、後手は Y 個ずつ山から取るゲームで、勝つのはどちらかを求める。
+- [ARC013 C. 笑いをとれるかな？](https://atcoder.jp/contests/arc013/tasks/arc013_3)（diff 1831）：ハバネロの入ったいくつかの直方体の豆腐を、交互に格子面で切って片側を食べ、ハバネロを食べた方が負けのとき、先手が勝つかを求める。
 
 </div>
 
 ??? note "練習の方針"
+    - **ABC368 F**：約数への置き換えは素因数を 1 個以上取り除く操作なので、各整数の素因数の個数（重複を含む）を山とする Nim になる。その XOR が 0 でなければ先手が勝つ
+    - **ARC046 B**：$N \le A$ なら先手が全部取って勝つ。$A = B$ なら $N$ を $A + 1$ で割った余りが 0 かどうかで決まる。$A > B$ なら先手、$A < B$ なら後手が勝つ。単一の山なので XOR は出てこない
     - **ARC143 C**：1 手で選べる山は 1 つ以上で、選んだ山すべてから同じ個数を取る。各山を $X + Y$ で割った余りで考える。すべての余りが $X$ 未満なら、後手は先手が触った山から $Y$ 個ずつ取り返して余りを戻せるので後手が勝つ。余りが $X$ 以上の山があり $X \le Y$ なら、先手がそれらを 1 手でまとめて取ると余りがすべて $Y$ 未満になり、立場が入れ替わって先手が勝つ。$X > Y$ なら、余りが $Y$ 以上 $X$ 未満の山が 1 つでもあると先手は戻す側に回れず、後手が勝つ。そういう山がなければ、先手は余りが $X$ 以上の山をまとめて取って勝つ（[先手と後手で取れる数が違うとき](#asymmetric)）。
+    - **ARC013 C**：ハバネロをすべて含む最小の直方体の外側だけが切れる。各豆腐の 3 軸の両側の厚み 6 つを独立な山とみなし、全部の XOR が 0 でなければ先手が勝つ
 
 ## 力試し {#challenge}
 
 <div class="kp-problems" data-role="challenge" markdown>
 
+- [ARC105 D. Let's Play Nim](https://atcoder.jp/contests/arc105/tasks/arc105_d)（diff 1871）：N 個の袋の硬貨を交互に皿へ移し、袋が空になったら皿から 1 枚以上の硬貨を交互に取り除くゲームで、動けなくなった方が負けのとき、勝つのはどちらかを求める。
 - [ABC172 F. Unfair Nim](https://atcoder.jp/contests/abc172/tasks/abc172_f)（diff 2216）：Nim を始める前に、1 番目の山から 2 番目の山へ何個か石を移して後手必勝にできるとき、移す最小の個数を求める。
 - [ABC212 H. Nim Counting](https://atcoder.jp/contests/abc212/tasks/abc212_h)（diff 2741）：K 種類の整数から長さ 1 以上 N 以下の列（Nim の山の大きさ）を作るとき、先手が勝つものの個数を 998244353 で割った余りで求める。
 
 </div>
 
 ??? note "力試しの方針"
+    - **ARC105 D**：後半は皿を山とする Nim なので、XOR が 0 かどうかで決まる。前半で XOR を 0 にできるかを、$N$ の偶奇と同じ枚数の袋が 2 つずつあるかで判定する（過半数を 1 つの皿に集める戦略と、真似をする戦略）
     - **ABC172 F**：移した後の山 1・山 2 を $a, b$、残りの山のニム和を $X$ とすると、後手必勝の条件は $a \oplus b = X$ である。和 $a + b = S$（元の 2 山の和）は変わらない。$a + b = (a \oplus b) + 2 (a \text{ AND } b)$ なので $a \text{ AND } b = (S - X) / 2$ が決まる。これが非負の整数で、$X$ と共通のビットを持たないことが必要である。$a$ は $a \text{ AND } b$ のビットを必ず持ち、$X$ のビットは $a$ と $b$ のどちらか一方に入る。移すのは山 1 から山 2 なので $1 \le a \le A_1$ の範囲で $a$ をできるだけ大きくし（$X$ のビットを上の位から貪欲に足す）、答えは $A_1 - a$ である。条件を満たす $a$ がなければ、その旨を出力する
     - **ABC212 H**：先手が勝つ列の数は「全体 − ニム和が 0 の列の数」である。1 個の山の分布をアダマール変換し、各点で長さ 1〜$N$ の等比数列の和を取ってから逆変換すると、ニム和ごとの列の数が出る（[必勝局面の数え上げ](#counting)）。等比数列の和は、項の数を半分にする再帰で $O(\log N)$ 回の掛け算で求める
 
@@ -243,3 +251,9 @@ AtCoder でよく出る形では、次の 2 つの考え方で片づくことが
 - [ikatakos「AtCoder Regular Contest 143 C 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0626_arc143)：練習の方針（X + Y で割った余りと場合分け。解説の部分だけを参照）
 - [kmjp「AtCoder ABC #172 : F - Unfair Nim」](https://kmjp.hatenablog.jp/entry/2020/06/27/1030)：力試しの問いの確認（移す個数の範囲）
 - [drken「AtCoder ABC 212 H - Nim Counting」](https://drken1215.hatenablog.com/entry/2021/08/01/025200)：力試しの方針（アダマール変換と等比数列の和）
+- [kmyk「AtCoder Regular Contest 046 B - 石取り大作戦」](https://kmyk.github.io/blog/writeups/algo-atcoder-arc_046_b/)：練習 ARC046 B の場合分けの結論
+- [esaka-sandbox「AtCoder Regular Contest 046 - B - 石取り大作戦」](https://scrapbox.io/esaka-sandbox/AtCoder_Regular_Contest_046_-_B_-_%E7%9F%B3%E5%8F%96%E3%82%8A%E5%A4%A7%E4%BD%9C%E6%88%A6)：練習 ARC046 B の A + 1 の倍数を押しつける理由
+- [プロひろ「ABC368 F問題（Dividing Game）を解く」](https://programming-hiroba.com/abc368-f/)：練習 ABC368 F の素因数の個数を山とみる方針
+- [kmjp「AtCoder ARC #013 : C - 笑いをとれるかな？」](https://kmjp.hatenablog.jp/entry/2013/03/23/0930)：練習 ARC013 C の 6 方向の厚みを山とする方針
+- [kmyk「AtCoder Regular Contest 013」](https://kmyk.github.io/blog/writeups/algo-atcoder-arc_013/)：練習 ARC013 C の 6 方向を独立なゲームとみる方針
+- [drken「AtCoder ARC 105 D - Let's Play Nim (青色, 600 点)」](https://drken1215.hatenablog.com/entry/2020/10/14/120100)：力試し ARC105 D の N の偶奇と値が 2 つずつ等しい場合の場合分け

@@ -231,22 +231,26 @@ $$
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC180 F. Unbranched](https://atcoder.jp/contests/abc180/tasks/abc180_f)（diff 2419）：自己ループのない（多重辺は許す）N 頂点 M 辺の無向グラフで、各連結成分がパスかサイクルで、最大の連結成分の頂点数がちょうど L のものの数を求める。
+- [ABC321 G. Electric Circuit](https://atcoder.jp/contests/abc321/tasks/abc321_g)（diff 2439）：N ≤ 17 個の部品の赤い端子と青い端子（どちらも M 個）を一様にランダムに 1 対 1 でつなぐとき、できるグラフの連結成分の個数の期待値を求める。
 
 </div>
 
 ??? note "方針"
     - **ABC180 F**：[「ちょうど L」を「L 以下」の差](#exactly-l)にし、「どの成分も $x$ 頂点以下」のものを[大きさの節](#by-size)の DP で数える。$\mathrm{dp}[n][m]$ ＝ $n$ 頂点を使って $m$ 本の辺を張った数とし、まだ使っていない最小の頂点を含む成分の大きさ $k$ を選ぶ（係数 $\binom{N-n-1}{k-1}$）。大きさ $k$ のパスは $k = 1$ なら 1 通り、$k \ge 2$ なら $k!/2$ 通りで辺は $k - 1$ 本である。サイクルは $k = 2$ なら二重辺の 1 通り、$k \ge 3$ なら $(k-1)!/2$ 通りで辺は $k$ 本である。多重辺を許すので $k = 2$ のサイクルを忘れない。
+    - **ABC321 G**：期待値の線形性で「頂点集合 $S$ がちょうど 1 つの成分になる」確率の和にする。$S$ の中だけでつなぐ方法の数 $f(S)$ は赤と青の数が等しければその階乗、違えば 0 である。最小の頂点を含む真部分集合 $T$ について $c(T) f(S \setminus T)$ を引いて連結なものの数 $c(S)$ を求め、$O(3^N)$ になる
 
 ## 力試し {#challenge}
 
 <div class="kp-problems" data-role="challenge" markdown>
 
 - [ABC213 G. Connectivity 2](https://atcoder.jp/contests/abc213/tasks/abc213_g)（diff 2663）：N 頂点（N ≤ 17）のグラフで、辺の部分集合を残したとき頂点 1 と頂点 k が連結になる選び方の数を、各 k について求める。
+- [ABC389 G. Odd Even Graph](https://atcoder.jp/contests/abc389/tasks/abc389_g)（diff 2762）：素数 P と N について、辺の数 M ごとに、頂点 1 からの距離が偶数の頂点と奇数の頂点の数が等しい N 頂点の連結な単純無向グラフの数を P で割った余りで求める。
 
 </div>
 
 ??? note "方針"
     - **ABC213 G**：[頂点集合ごとの DP](#subset-dp) で、各頂点集合 $S$ について $S$ の中の辺だけで $S$ が連結になる選び方の数 $c(S)$ を $O(3^N)$ で求める。頂点 1 を含む成分が $S$ になる選び方は $c(S) \cdot 2^{e(V \setminus S)}$ なので、各 $k$ について $S \ni 1, k$ の和を取る。$e(S)$ は全集合について先に求めておく。
+    - **ABC389 G**：頂点 1 からの距離の層ごとに頂点を配る DP に、偶奇の差と辺の数を状態として足す。前の層と新しい層の間の辺の張り方（新しい層の各頂点が前の層に 1 本以上つながる）と層の中の辺を、辺の数ごとに前計算しておく
 
 ## 確認問題 {#quiz}
 
@@ -285,3 +289,6 @@ $$
 - [drken「AtCoder ABC 281 G - Farthest City (黄色, 600 点)」](https://drken1215.hatenablog.com/entry/2022/12/13/173300)：例題 ABC281 G の距離の層ごとの DP と、法が素数でないためのパスカルの三角形
 - [drken「AtCoder ABC 180 F - Unbranched (橙色, 600 点)」](https://drken1215.hatenablog.com/entry/2020/10/21/145700)：練習 ABC180 F の成分の数え方（多重辺を許す大きさ 2 のサイクル）と最小添字規則、「L 以下」の差
 - [drken「AtCoder ABC 213 G - Connectivity 2 (4D, 橙色, 600 点)」](https://drken1215.hatenablog.com/entry/2021/08/12/132500)：力試し ABC213 G の頂点集合ごとの包除の式と答えの集め方
+- [drken「AtCoder ABC 321 G - Electric Circuit (橙色, 600 点)」](https://drken1215.hatenablog.com/entry/2023/09/26/105540)：練習 ABC321 G の期待値の線形性と連結なものの数の部分集合 DP
+- [kmjp「AtCoder ABC #321 (サントリープログラミングコンテスト2023) : G - Electric Circuit」](https://kmjp.hatenablog.jp/entry/2023/09/23/0900)：練習 ABC321 G の同じ方針
+- [kmjp「AtCoder ABC #389 (トヨタ自動車プログラミングコンテスト2025) : G - Odd Even Graph」](https://kmjp.hatenablog.jp/entry/2025/01/19/1000)：力試し ABC389 G の層ごとの DP

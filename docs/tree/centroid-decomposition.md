@@ -208,22 +208,30 @@ $$
 
 <div class="kp-problems" data-role="practice" markdown>
 
+- [YAHOO-PROCON2018-FINAL C. 木の問題](https://atcoder.jp/contests/yahoo-procon2018-final/tasks/yahoo_procon2018_final_c)（diff —）：木の頂点 V_i から距離がちょうど K_i の頂点の個数を、多数のクエリについて答える。
+- [ABC267 F. Exactly K Steps](https://atcoder.jp/contests/abc267/tasks/abc267_f)（diff 1939）：木の頂点 U_i から距離がちょうど K_i の頂点を 1 つ答える（なければ −1）クエリに、Q 回答える。
 - [ABC359 G. Sum of Tree Distance](https://atcoder.jp/contests/abc359/tasks/abc359_g)（diff 2099）：各頂点に色がついた木で、同じ色の頂点の組すべてについての距離の総和を求める。
 
 </div>
 
 ??? note "方針"
+    - **YAHOO-PROCON2018-FINAL C**：重心分解し、各クエリで重心木の祖先 $c$ ごとに「$c$ からの距離が $K_i - d(V_i, c)$ の頂点数」を足す。$V_i$ と同じ子の成分に入る分は二重に数えるので引く。全体は $O((N + Q) \log N)$ である
+    - **ABC267 F**：上の問題と同じく重心木の祖先 $c$ をたどる。個数ではなく具体的な頂点が要るので、各 $c$ について距離ごとに、別の子の成分に属する頂点を高々 2 個持っておき、$U_i$ と別の成分のものを答える。想定解は直径の端点と祖先のたどりで、重心分解は別解である
     - **ABC359 G**：成分の重心 $c$ から BFS し、色ごとに「頂点の個数 $m$ と深さの和 $s$」を数える。$c$ を通る同じ色の組の距離の和は、色ごとの $(m - 1) s$ の総和から、子の成分ごとに同じ式で数えた値を引いたものである（[重心を通るペアを数える](#count-through)の引き算と同じ形）。色ごとの表は `map` か、成分に出てきた色だけを書いて使い終えたら戻す配列で持つ。[マージテク](../tree/small-to-large.md)や [Auxiliary Tree](../tree/auxiliary-tree.md) でも解ける
 
 ## 力試し {#challenge}
 
 <div class="kp-problems" data-role="challenge" markdown>
 
+- [DDCC2016-QUAL D. 道路網](https://atcoder.jp/contests/ddcc2016-qual/tasks/ddcc_2016_qual_d)（diff —）：N 頂点の完全グラフで、N−1 本の辺は木をなして長さが与えられ、残りの辺の長さがすべて X のとき、全頂点対の最短距離の総和を求める。
+- [NIKKEI2019-FINAL G. Greatest Journey](https://atcoder.jp/contests/nikkei2019-final/tasks/nikkei2019_final_g)（diff —）：重み付きの木で、頂点 V_i から始まる長さ L_i のウォークについて、通った辺の重みの和の最大値を多数のクエリについて答える。
 - [KEYENCE2019 E. Connecting Cities](https://atcoder.jp/contests/keyence2019/tasks/keyence2019_e)（diff 2623）：一列に並ぶ都市を結ぶ完全グラフで、辺の重みが番号の差と両端の値で決まるときの最小全域木の重みを求める。
 
 </div>
 
 ??? note "方針"
+    - **DDCC2016-QUAL D**：木の上で別の子の成分にある 2 頂点の距離を $\min(X, D(v) + D(w))$ とみて、重心からの距離ごとの個数と和を 2 本の BIT で持ち、重心分解で総和を数える。そのうえで、長さが $X$ を超える木の辺を経由する組を、別の経路の候補と比べて直す
+    - **NIKKEI2019-FINAL G**：最適なウォークは「$V_i$ から別の頂点へ向かう最短のパス」と「最後にある辺の往復を繰り返す部分」に分けられる。パスを重心を通るものとして重心ごとに集計し、残りの長さに比例する往復の分を直線の最大値の問題として、クエリを並べて処理する
     - **KEYENCE2019 E**：都市 $i, j$ を結ぶ辺の重みは $D \lvert i - j \rvert + A_i + A_j$ である。都市の並びはパスなので、その重心分解は「番号の中央で割る」分割統治になる。中央をまたぐ辺のうち、左右それぞれで「$A_i - D i$ が最小の都市」「$A_j + D j$ が最小の都市」との辺だけを候補に残せば、最小全域木の辺はその中から選べる（閉路のうち最も重い辺は使わなくてよい）。候補は $O(N \log N)$ 本で、[クラスカル法](../graph/minimum-spanning-tree.md)で $O(N \log^2 N)$ である。都市の並びがパスではなく一般の木で、$\lvert i - j \rvert$ が木の上の距離に変わっても、同じ考え方を重心分解で行える
 
 ## 確認問題 {#quiz}
@@ -260,3 +268,6 @@ $$
 - [drken「キーエンス プログラミング コンテスト 2019 E - Connecting Cities (橙色, 600 点)」](https://drken1215.hatenablog.com/entry/2019/01/15/081500)：力試し keyence2019_e の問い、中央で割って辺の候補を減らす方針と、木の場合は重心分解で同じことを行えること
 - [drken「AtCoder ABC 359 G - Sum of Tree Distance (3D, 黄色, 600 点)」](https://drken1215.hatenablog.com/entry/2024/06/23/025552)：練習 abc359_g の問いと制約（記事の本文の解法はマージテク）
 - [Library Checker「Frequency Table of Tree Distance」](https://judge.yosupo.jp/problem/frequency_table_of_tree_distance)：距離の頻度表を求める問題（自作のライブラリの確かめ先）
+- [hamayan「競技プログラミングにおける重心分解問題まとめ」](https://blog.hamayanhamayan.com/entry/2017/12/19/152143)：練習 YAHOO2018 決勝 C の分類
+- [Kazun「AtCoder Beginner Contest 267 F問題 Exactly K Steps」](https://kazun-kyopro.hatenablog.com/entry/ABC/267/F)：練習 ABC267 F の直径を使う想定の解き方
+- [kmjp「DISCO presents ディスカバリーチャンネル コードコンテスト2016 予選 : D - 道路網」](https://kmjp.hatenablog.jp/entry/2016/11/22/0930)：力試し DDCC2016 予選 D の重心分解と 2 本の BIT、長い辺の補正

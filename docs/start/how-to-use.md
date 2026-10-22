@@ -312,7 +312,7 @@ ABCxxx E の解説を頼みたい。終了したコンテストの問題であ�
 <!-- gen:begin version -->
 <!-- textlint-disable -->
 
-索引の版：`a39b8204c740`（ページの updated の最大：2026-10-22）
+索引の版：`2056caa12485`（ページの updated の最大：2026-10-22）
 
 <!-- textlint-enable -->
 <!-- gen:end version -->

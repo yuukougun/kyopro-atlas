@@ -273,11 +273,15 @@ mod を取った値どうしの一致でも検算はできるが、まずは正�
 
 <div class="kp-problems" data-role="practice" markdown>
 
+- [ABC405 E. Fruit Lineup](https://atcoder.jp/contests/abc405/tasks/abc405_e)（diff 1259）：リンゴ A 個・オレンジ B 個・バナナ C 個・ブドウ D 個を、種類どうしの前後の条件を満たして一列に並べる方法の数を 998244353 で割った余りで求める。
+- [ABC150 E. Change a Little Bit](https://atcoder.jp/contests/abc150/tasks/abc150_e)（diff 1851）：長さ N の 0/1 列の相異なる 2 つの組すべてについて、k 回目に位置 i を反転するとコストが k × C_i かかるとして一方を他方に変える最小コストを求め、その総和を 10^9+7 で割った余りで求める。
 - [ARC106 D. Powers](https://atcoder.jp/contests/arc106/tasks/arc106_d)（diff 1988）：長さ N の列 A について、各 x = 1, …, K で全ペア L < R の (A_L + A_R)^x の和を求める。
 
 </div>
 
 ??? note "練習の方針"
+    - **ABC405 E**：境目の左にあるバナナの個数 $k$ で場合を分けると、各項が二項係数 2 つの積になる。上の数が動く Vandermonde の形に似ているが、和の範囲が途中で切れるので 1 つの二項係数にはまとまらない。$k$ についての $O(C)$ のループで足せばよい（閉じた式を探しすぎない）
+    - **ABC150 E**：$C$ を降順に並べ、$n$ 番目（0 始まり）の要素の寄与を数える。前の $n$ 個のうち $k$ 個が異なる場合の係数 $\sum_k (k+1) \binom{n}{k}$ が要り、二項定理の $2^n$ と吸収公式の $\sum_k k \binom{n}{k} = n 2^{n-1}$ で $2^n + n 2^{n-1}$ という閉じた式になる。$N = 1$ は別に扱う
     - **ARC106 D**：[累乗の和の展開](#power-sums)の形そのものである。累乗の和 $S_0, \dots, S_K$ を前計算し、順序つきの組の和から $i = j$ の項を引いて 2 で割る。二項係数は $x \le K$ の範囲だけなので、パスカルの三角形の表でも足りる
 
 ## 力試し {#challenge}
@@ -327,3 +331,7 @@ mod を取った値どうしの一致でも検算はできるが、まずは正�
 - [kmjp「AtCoder ARC #106 : D - Powers」](https://kmjp.hatenablog.jp/entry/2020/10/26/1030)：練習の方針（二項定理による展開と、順序つきの組からの直し方）
 - [drken「AtCoder ARC 110 D - Binomial Coefficient is Fun (3D, 黄色, 600 点)」](https://drken1215.hatenablog.com/entry/2020/12/06/070100)：力試しの方針（答えが 1 つの二項係数になることと、M が大きいときの計算）
 - [cirrostratus「ABC290 F問題 Maximum Diameter」](https://cirrostratus.hatenablog.com/entry/2023/03/05/163234)：力試しの方針（直径の最大値と、Vandermonde の恒等式・吸収公式による和のまとめ方）
+- [drken「AtCoder ABC 150 E - Change a Little Bit (1D, 青色, 500 点)」](https://drken1215.hatenablog.com/entry/2020/01/12/142100)：練習 ABC150 E の寄与の数え方と吸収公式による閉じた式
+- [kmjp「AtCoder ABC #150 : E - Change a Little Bit」](https://kmjp.hatenablog.jp/entry/2020/01/11/0900)：練習 ABC150 E の同じ寄与をパスカルの漸化式で求める別の導き方
+- [testcampus「【ABC405】AtCoder Beginner Contest 405【C++】」](https://qiita.com/testcampus/items/1389257a0c177ceb736a)：練習 ABC405 E の場合分けと二項係数の積の和
+- [rsk0315「ABC 405 E についての雑談」](https://rsk0315.hatenablog.com/entry/2025/05/11/201737)：練習 ABC405 E の和が閉じた式にならないことの検討

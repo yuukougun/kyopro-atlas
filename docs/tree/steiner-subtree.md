@@ -130,7 +130,21 @@ $$
     - 残した頂点の数を出力する。DFS は各頂点を 1 回ずつ訪れるので $O(N)$
     - コードは[根を指定頂点にする節](#root-at-terminal)のものと同じである。葉を削る方法でも同じ答えになる
 
+## 力試し {#challenge}
+
+<div class="kp-problems" data-role="challenge" markdown>
+
+- [典型90 035. Preserve Connectivity（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_ai)（diff —）：木と多数のクエリが与えられ、各クエリで指定された頂点をすべてつなぐのに必要な辺の数の最小値を答える。
+- [ABC149 F. Surrounded Nodes](https://atcoder.jp/contests/abc149/tasks/abc149_f)（diff 2208）：木の各頂点を確率 1/2 で黒に塗り、黒い頂点をすべて含む最小の部分木に含まれる白い頂点の数の期待値を求める。
+
+</div>
+
+??? note "力試しの方針"
+    - **典型90 035**：指定頂点を行きがけ順に並べ、隣り合う 2 点（最後と最初も）の距離を LCA で求めて足し、2 で割る。クエリが 1 つなら本文の $O(N)$ で解けるが、クエリが多いので次の段の考え方が要る
+    - **ABC149 F**：頂点 $v$ が答えの木に入るのは、$v$ を除いた成分のうち 2 つ以上に黒があるときである。各頂点についてその確率を成分の大きさから求め、白である確率を掛けて期待値の線形性で足す
+
 ## 参考 {#references}
 
 - [mattsunkun「ABC368(Atcoder Beginner Contest)のA~F(A,B,C,D,E,F)問題をPythonで解説(復習)」](https://qiita.com/mattsunkun/items/686d98f71383ec29eaf7)：例題の問いと、指定頂点を根にして帰りがけに判定する方針
 - [E869120「kyopro_educational_90 sol/035-04.cpp」](https://github.com/E869120/kyopro_educational_90/blob/main/sol/035-04.cpp)：クエリが多い場合に、行きがけ順で隣り合う 2 点（最後と最初も）の距離の和の半分を使う方法
+- [kmjp「AtCoder ABC #149 : F - Surrounded Nodes」](https://kmjp.hatenablog.jp/entry/2019/12/30/0930)：力試し ABC149 F の成分の 2 つ以上に黒がある条件

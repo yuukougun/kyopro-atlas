@@ -203,16 +203,33 @@ $$
     - 根で $\mathrm{up} = 0$ なら Yes である。全体で $O(NK)$（頂点数に比例）
     - コードは[帰りがけ順に送る節](#send-up)のものと同じ形である
 
+## 練習問題 {#practice}
+
+<div class="kp-problems" data-role="practice" markdown>
+
+- [ABC333 D. Erase Leaves](https://atcoder.jp/contests/abc333/tasks/abc333_d)（diff 704）：木から葉を 1 つずつ消す操作をくり返し、頂点 1 を消すまでに要る操作の最小の回数を求める。
+- [ABC409 E. Pair Annihilation](https://atcoder.jp/contests/abc409/tasks/abc409_e)（diff 973）：辺に重みのある木の各頂点に電子か陽電子が置かれ（合計は打ち消し合う数）、粒子を辺に沿って動かすと重みの分だけ費用がかかるとき、すべてを打ち消すのに要る費用の最小を求める。
+- [ABC266 F. Well-defined Path Queries on a Namori](https://atcoder.jp/contests/abc266/tasks/abc266_f)（diff 1525）：N 頂点 N 辺の連結な無向グラフで、2 頂点の間の単純パスがただ 1 つに決まるかを、多数の質問に答える。
+
+</div>
+
+??? note "練習の方針"
+    - **ABC333 D**：葉を消す操作では枝が外側からしか削れないので、頂点 1 を葉にするには 1 本を残してほかの枝をすべて消すしかない。残すのは最大の枝にして、答えは $N$ から最大の子の部分木の大きさを引いた値になる
+    - **ABC409 E**：帰りがけ順に、各頂点で自分の値と子から届いた余りを足して親へ送り、親との辺の重みと送った量の絶対値の積を足していく。辺を切った片側の和の絶対値の分は必ずその辺を通るので、これが下界でありちょうど達成できる。$O(N)$ である
+    - **ABC266 F**：次数 1 の頂点をキューで削り続けると閉路が残る（一般のグラフでも木の部分が消える）。2 頂点が閉路の同じ頂点からぶら下がる木に入っているときだけ一意と答える。解き方はなもりグラフのページの例題と同じで、ここではキューで葉を削る部分を練習する
+
 ## 力試し {#challenge}
 
 <div class="kp-problems" data-role="challenge" markdown>
 
 - [ABC345 F. Many Lamps](https://atcoder.jp/contests/abc345/tasks/abc345_f)（diff 2157）：グラフの辺をいくつか選んで両端のランプを切り替え、点いているランプをちょうど K 個にする選び方を 1 つ出力する。
+- [AGC014 D. Black and White Tree](https://atcoder.jp/contests/agc014/tasks/agc014_d)（diff 2266）：2 人が交互に木の頂点を白と黒に塗り、塗り終えた後に黒と隣り合う白を黒に変えたとき白が残るかで勝敗が決まるゲームで、勝つのはどちらかを求める。
 
 </div>
 
 ??? note "力試しの方針"
     - **ABC345 F**：1 回の操作で点いている数は偶数だけ変わるので、$K$ が奇数なら不可能である。グラフの全域森を作り、葉から順に「葉のランプが消えていれば、その葉の唯一の辺を使って点ける」と決める。葉のランプを点けられる辺はこの 1 本しかないので、決め方は強制される。点いている数が $K$ に達したら止める。1 回で 0 か 2 だけ増えるので、届く偶数の値は途中で必ず通る。すべての葉を処理しても $K$ に届かなければ不可能である（各連結成分で点けられるのは、頂点数を偶数に切り下げた数まで）
+    - **AGC014 D**：木に完全マッチングがあれば、後手が相手の塗った頂点の相方を塗って勝つ。なければ先手が勝つ。葉から「葉と隣を組む」貪欲で最大マッチングを作り、キューで判定する
 
 ## 参考 {#references}
 
@@ -222,3 +239,7 @@ $$
 - [gotoki_no_joe「ABC345 A～F をHaskellで」](https://qiita.com/gotoki_no_joe/items/f9770e81cc38a70b5300)：力試しの方針（全域森の葉から辺を使うかを決める）
 - [drken「AtCoder AGC 014 D - Black and White Tree (2D, 黄色, 900 点)」](https://drken1215.hatenablog.com/entry/2019/05/30/021200)：葉から貪欲に最大マッチングを作り、キューで実装すること
 - [drken のカテゴリ「葉から考える」](https://drken1215.hatenablog.com/archive/category/%E8%91%89%E3%81%8B%E3%82%89%E8%80%83%E3%81%88%E3%82%8B)：葉から決める問題の型の一覧
+- [drken「AtCoder ABC 333 D - Erase Leaves (2Q, 茶色, 400 点)」](https://drken1215.hatenablog.com/entry/2024/11/02/192645)：練習 ABC333 D の残す枝を最大にする方針
+- [untan「【ABC409】E問題 - Pair Annihilation　考察から実装(c++)まで」](https://qiita.com/untan/items/92f4a5e02356bdb9fae7)：練習 ABC409 E の辺ごとの下界と葉から送る方針
+- [gotoki_no_joe「ABC409 A～F をHaskellで」](https://qiita.com/gotoki_no_joe/items/6431ec91a0bef27665aa)：練習 ABC409 E の帰りがけ順で余りを親へ送る実装
+- [fjnkt98「ABC266 F - Well-defined Path Queries on a Namori Python解答例」](https://zenn.dev/fjnkt98/articles/98c9dfbd0702a4)：練習 ABC266 F の次数 1 の頂点をキューで削る方針

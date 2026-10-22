@@ -226,11 +226,17 @@ $$
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC380 B. Hurdle Parsing](https://atcoder.jp/contests/abc380/tasks/abc380_b)（diff 27）：| と - からなる記号列を区切り、各区間の - の数を順に出力する。
+- [ARC122 A. Many Formulae](https://atcoder.jp/contests/arc122/tasks/arc122_a)（diff 783）：長さ N の非負整数列の間に + か - を入れ、- が 2 つ続かない式すべてについて、値の合計を 10^9+7 で割った余りで求める（N ≤ 10^5）。
+- [JOI2020YO2 E. じゃんけん式 (Rock-Scissors-Paper Expression)](https://atcoder.jp/contests/joi2020yo2/tasks/joi2020_yo2_e)（diff —）：R・S・P と ?・括弧・+・-・* からなる式（* が + と - より先に結びつく）で、? を R・S・P に置き換える方法のうち、式の結果が指定の手になるものの数を 10^9+7 で割った余りで求める。
+- [ABC350 F. Transpose](https://atcoder.jp/contests/abc350/tasks/abc350_f)（diff 1601）：英大文字・英小文字と対応の取れた括弧からなる文字列で、括弧の中を逆順にして大文字と小文字を入れ替え、括弧を消す操作を内側からくり返した後の文字列を求める。
 
 </div>
 
 ??? note "方針"
     - **ABC380 B**：先頭の | を飛ばして左から読み、- なら数を 1 増やし、| なら数を出力して 0 に戻す。区切り記号で文字列を分ける字句解析の最小の形で、`factor` が数字を読むループと同じ書き方になる。
+    - **ARC122 A**：左から数を 1 つずつ読み、「最後の演算子が + か - か」ごとに式の数と値の和を持つ。新しい数 $d$ を足すときの更新は、個数と $d$ の積を足し引きするだけの $O(1)$ になり、全体で $O(N)$ である。例題 ARC061 C と同じく、すべての式の値を和のまま更新する形で、[式の部分文字列の総和](#substring-sum)の易しい版に当たる
+    - **JOI2020YO2 E**：式・項・因子の再帰下降構文解析で、各関数が 1 つの値の代わりに「結果が R・S・P になる置き換え方の数」の三つ組を返す。演算子ごとの表で三つ組を掛け合わせて合成すればよい
+    - **ABC350 F**：括弧の対応を先にスタックで求める。区間と向きを引数にとる再帰で、開き括弧に当たったら中身を逆向きで読み、対応する括弧の先へ飛ぶように走査すれば、各文字を 1 回ずつ読むだけの $O(\lvert S \rvert)$ で済む。大小の入れ替えは囲む括弧の深さの偶奇で決まる。入れ子が深いと再帰も深くなる点に注意する
 
 ## 力試し {#challenge}
 
@@ -275,3 +281,8 @@ $$
 - [Melville「ABC403」](https://www.cnblogs.com/Melville/p/18850810)：例題 abc403_f の式・項・因子の 3 つの表と更新の順
 - [drken「AtCoder ABC 338 G - evall (赤色, 600 点)」](https://drken1215.hatenablog.com/entry/2024/01/29/231906)：力試し abc338_g の制約（長さ $10^6$・mod 998244353）と、寄与に分けて数える方針
 - [drken「AtCoder ABC 380 B - Hurdle Parsing (灰色, 200 点)」](https://drken1215.hatenablog.com/entry/2024/11/17/011832)：練習 abc380_b の問いと、区切り記号で数を出す処理
+- [hal_mat「AtCoder ARC122A "Many Formulae"をRubyで解く」](https://zenn.dev/hal_mat/articles/0c3857b22b6ff1)：練習 ARC122 A の式の数と値の和を持つ DP
+- [ikatakos「東京海上日動 プログラミングコンテスト2021（AtCoder Regular Contest 122) A,C,D,E問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0612_arc122)：練習 ARC122 A の制約（解説の部分だけを参照）
+- [hamayan「じゃんけん式 (Rock-Scissors-Paper Expression) [JOI2019/2020 二次予選ページ E]」](https://blog.hamayanhamayan.com/entry/2019/12/22/002709)：練習 JOI2020 二次予選 E の三つ組を返す再帰下降
+- [torus711「AtCoder Beginner Contest 350, F : Transpose」](https://torus711.hatenablog.com/entry/2024/04/21/194303)：練習 ABC350 F の対応表と向きを切り替える再帰
+- [_mattu34_「ABC350 with Python (A～F)」](https://qiita.com/_mattu34_/items/9eb21e83d9f86aa10d79)：練習 ABC350 F の向きを反転させる再帰の実装

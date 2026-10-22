@@ -186,11 +186,17 @@ $O(2^N N)$ の bitDP は、要素を 1 つずつ足していき、順番や最�
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC310 D. Peaceful Teams](https://atcoder.jp/contests/abc310/tasks/abc310_d)（diff 1368）：N 人（N ≤ 10）を T 個のチームに分ける方法のうち、指定された仲の悪い 2 人の組がどれも同じチームにならないものの数を求める。
+- [EDPC U. Grouping](https://atcoder.jp/contests/dp/tasks/dp_u)（diff —）：N 羽（N ≤ 16）のうさぎをいくつかのグループに分け、同じグループになった 2 羽の組ごとに決まる得点の和の最大を求める。
+- [典型90 045. Simple Grouping（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_as)（diff —）：平面上の N 点を K 個の空でないグループに分け、各グループの中で最も遠い 2 点の距離の、全グループでの最大を最小化する。
+- [ABC217 G. Groups](https://atcoder.jp/contests/abc217/tasks/abc217_g)（diff 2047）：1〜N の番号の N 人を、番号を M で割った余りが等しい 2 人が同じ組に入らないように k 個の空でない組に分ける方法の数を、k = 1, …, N のそれぞれについて 998244353 で割った余りで求める。
 
 </div>
 
 ??? note "練習の方針"
     - **ABC310 D**：チームに名前はないので、人を番号順に「今あるチームに入れる」か「新しいチームを作る」かで決める。仲の悪い人がいるチームには入れない。分け方は全部でも $B_{10} = 115975$ 通りなので、葉で $O(N)$ かけても間に合う。チームの数がちょうど $T$ の葉だけを数える（新しいチームは $T$ 未満のときだけ作ると枝刈りになる）。
+    - **EDPC U**：分け方は $B_{16} \approx 1.0 \times 10^{10}$ 通りで全列挙は間に合わない。$\mathrm{dp}[S]$ ＝ 集合 $S$ を分けたときの最大得点とし、$S$ の部分集合を 1 つの組として選ぶ部分集合の DP にすると $O(3^N)$ で済む
+    - **典型90 045**：組の数がちょうど $K$ の分け方だが、全列挙はしない。各部分集合の直径を前計算し、$\mathrm{dp}[i][S]$ ＝ $S$ を $i$ 組に分けたときの最小値として部分集合の部分集合を列挙すると $O(K \cdot 3^N)$ である
+    - **ABC217 G**：$S(n, k)$ の漸化式と同じく、人 $i$ が新しい組を作るか既存の組に入るかで分ける。既存の組のうち、同じ余りの人がすでにいる $\lfloor (i-1)/M \rfloor$ 個には入れないので、$\mathrm{dp}[i][j] = \mathrm{dp}[i-1][j-1] + (j - \lfloor (i-1)/M \rfloor) \, \mathrm{dp}[i-1][j]$ とし、$O(N^2)$ で求める。係数 $k$ が「入れる組の数」に変わるだけである
 
 ## 確認問題 {#quiz}
 
@@ -226,3 +232,7 @@ $O(2^N N)$ の bitDP は、要素を 1 つずつ足していき、順番や最�
 - [Yuulis「【AtCoder】ABC 390 D - Stone XOR | 緑コーダーが解くAtCoder」](https://yuulis.hatenablog.com/entry/ABC-390-D)：例題の方針（分け方の全列挙と B(12) = 4213597 による見積もり、重複除去の注意）
 - [oraclesqlpuzzle「ABC390-D Stone XOR」](https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc390-d.html)：例題の方針（ハッシュ集合が重く、ソートして数える方法）
 - [drken「AtCoder ABC 310 D - Peaceful Teams (1Q, 水色, 400 点)」](https://drken1215.hatenablog.com/entry/2023/07/17/213800)：練習の方針（最小番号から組を決める全列挙）
+- [bondo「AtCoder Beginner Contest 217（ABC217）」](https://bondo.hateblo.jp/entry/2021/09/05/010120)：練習 ABC217 G の漸化式（入れる組が減る分を係数から引く）
+- [kmjp「AtCoder ABC #217 : G - Groups」](https://kmjp.hatenablog.jp/entry/2021/09/05/0900)：練習 ABC217 G の問いの確認
+- [Series_205「Educational DP Contest (EDPC) T ~ W 問題 解説」](https://qiita.com/Series_205/items/7d2c57b45179006d0bc6)：練習 EDPC U の部分集合の DP（O(3^N)）
+- [E869120「kyopro_educational_90 sol/045.cpp」](https://github.com/E869120/kyopro_educational_90/blob/main/sol/045.cpp)：練習 典型90 045 の dp[i][mask] と部分集合の列挙

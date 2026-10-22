@@ -201,12 +201,18 @@ $$
 
 <div class="kp-problems" data-role="practice" markdown>
 
+- [ABC209 C. Not Equal](https://atcoder.jp/contests/abc209/tasks/abc209_c)（diff 285）：各 i について 1 以上 C_i 以下の整数を、すべて異なるように選ぶ方法の数を求める。
+- [ARC116 B. Products of Min-Max](https://atcoder.jp/contests/arc116/tasks/arc116_b)（diff 816）：整数列の空でない部分列すべてについて、最大値と最小値の積を足し合わせた値を求める。
 - [ABC151 E. Max-Min Sums](https://atcoder.jp/contests/abc151/tasks/abc151_e)（diff 1344）：N 個から K 個を選ぶすべての選び方について、（最大値 − 最小値）の総和を求める。
+- [ABC216 F. Max Sum Counting](https://atcoder.jp/contests/abc216/tasks/abc216_f)（diff 1541）：添字の集合のうち、選んだ要素の A の最大値が B の和以上になるものの個数を求める。
 
 </div>
 
 ??? note "練習の方針"
+    - **ABC209 C**：$C$ を昇順に並べて小さい順に決めると、$i$ 番目（0 始まり）の選択肢は前の選び方によらず $C_i - i$ 個になる。積の法則で掛け合わせればよい（0 以下になれば 0 通り）
+    - **ARC116 B**：ソートして最小 $a_i$ と最大 $a_j$ を固定すると、間の $j - i - 1$ 個は自由なので寄与は $a_i a_j 2^{j-i-1}$ になる。$i$ ごとに係数をまとめれば $O(N \log N)$ である
     - **ABC151 E**：ソートして、最大値の総和と最小値の総和を別々に求めて引く。$a_i$ が最大になる選び方は $\binom{i}{K-1}$ 通り、最小になる選び方は $\binom{N-1-i}{K-1}$ 通りである。同じ値は添字で区別する（[ソートして最大・最小を固定する](#sort-and-fix)）
+    - **ABC216 F**：$A$ の昇順に並べて最大になる要素を固定すると、ほかに選べるのはそれより前の要素だけになる。$B$ の和が $A_i - B_i$ 以下になる選び方を、ナップサックの数え上げ DP で数えればよい
 
 ## 力試し {#challenge}
 
@@ -226,3 +232,5 @@ $$
 - [drken「AtCoder ABC 151 E - Max-Min Sums (1Q, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2020/01/12/224100)：練習の問い（隣り合う差の寄与で数える別の方針）
 - [kmjp「AtCoder ABC #160 : F - Distributing Integers」](https://kmjp.hatenablog.jp/entry/2020/03/28/1030)：力試しの問いと、部分木を多項係数で合わせる全方位木 DP
 - [AKpirion「ABC209 C - Not Equal から学んだ」](https://qiita.com/AKpirion/items/21b1aead96fec77d67ef)：上限の小さい順に決めると選択肢が $C_i - i$ 個になること
+- [ikatakos「AtCoder Regular Contest 116 A,B,C,D,E,F問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0328_arc116)：練習 ARC116 B の最小と最大を固定した寄与（解説の部分だけを参照）
+- [ikatakos「AtCoder Beginner Contest 216 F,G,H問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0829_abc216)：練習 ABC216 F のソートで最大を固定する方針（解説の部分だけを参照）

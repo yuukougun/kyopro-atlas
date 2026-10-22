@@ -196,11 +196,13 @@ $c'$ の番号は、$X$ の側の子 $c$ の最後の桁を反転した $c \oplu
 
 <div class="kp-problems" data-role="challenge" markdown>
 
+- [ABC220 E. Distance on Large Perfect Binary Tree](https://atcoder.jp/contests/abc220/tasks/abc220_e)（diff 1593）：頂点 i の子が 2i と 2i+1 の、2^N − 1 頂点の完全二分木（N ≤ 10^6）で、距離がちょうど D の頂点の順序対の個数を 998244353 で割った余りで求める。
 - [ABC321 E. Complete Binary Tree](https://atcoder.jp/contests/abc321/tasks/abc321_e)（diff 1627）：頂点 i が頂点 ⌊i/2⌋ とつながる N 頂点の木で、頂点 X からの距離がちょうど K の頂点の数を求める
 
 </div>
 
 ??? note "力試しの方針"
+    - **ABC220 E**：2 頂点を結ぶパスの最も浅い頂点（LCA）を深さ $d$ ごとにまとめる。まっすぐ $D$ 段降りる組と、左右の子孫から深さ $l$ と $D - l$ の頂点を 1 個ずつ選ぶ組を数え、深さ $d$ の頂点が $2^d$ 個あることを掛けて足す。$l$ の取れる範囲を $N$ で切れば $O(N)$ である
     - **ABC321 E**：$N$ は $10^{18}$ まであり、テストケースも多い。距離 $K$ の頂点を、$X$ との LCA が $X$ から何段上の祖先かで分類する。各祖先について、$X$ を含まない側の子の部分木で深さが合う頂点の数を、番号の区間を $N$ で切って求める（[距離 K の頂点の数](#count-at-distance)）。$K$ が非常に大きい場合と、$X$ を含まない側の子が $N$ を超える場合に注意する
 
 ## 参考 {#references}
@@ -209,3 +211,4 @@ $c'$ の番号は、$X$ の側の子 $c$ の最後の桁を反転した $c \oplu
 - [comet725「ABC465Dを解いた【LCA】」](https://qiita.com/comet725/items/ed5414a8d8a200ec863b)：練習の、大きい方を K で割って共通の祖先まで上がる方針
 - [2yuu「Atcoder解いてみた　AtCoder Beginner Contest D - X to Y」](https://qiita.com/2yuu/items/b4d70003b7f311f8b8d1)：練習の問題の操作（⌊x/K⌋ への置き換えとその逆）の確認
 - [drken「AtCoder ABC 321 E - Complete Binary Tree (2D, 青色, 450 点)」](https://drken1215.hatenablog.com/entry/2023/09/24/231639)：力試しの、祖先へ上がりながら反対側の子の部分木を数える方針
+- [ikatakos「AtCoder Beginner Contest 220 E,F問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0926_abc220)：力試し ABC220 E の LCA の深さごとの数え方（解説の部分だけを参照）

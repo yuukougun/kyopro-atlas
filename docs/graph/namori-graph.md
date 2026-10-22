@@ -176,11 +176,13 @@ deg[v] == 1 の頂点をすべてキューに入れる
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC292 D. Unicyclic Components](https://atcoder.jp/contests/abc292/tasks/abc292_d)（diff 579）：無向グラフのすべての連結成分で、頂点数と辺数が等しいかを判定する
+- [ABC378 F. Add One Edge 2](https://atcoder.jp/contests/abc378/tasks/abc378_f)（diff 1436）：N 頂点の木に辺を 1 本足して単純グラフを作るとき、できる閉路の上の頂点の次数がすべて 3 になる足し方の数を求める。
 
 </div>
 
 ??? note "練習の方針"
     - **ABC292 D**：Union-Find で成分に分け、成分ごとに頂点数と辺数を数える。辺数は辺の片方の端の根に 1 を足して数え、自己ループや多重辺もそのまま 1 本と数える。すべての成分で等しければ、各成分がなもりグラフである
+    - **ABC378 F**：木に辺を 1 本足すと閉路がちょうど 1 つできる。足す辺の両端は（足す前に）次数 2、間の閉路の頂点は次数 3 であるべきなので、次数 3 の頂点の連結成分ごとに接する次数 2 の頂点の数 $K$ を数え、$K(K-1)/2$ を足す。$O(N)$ である
 
 ## 使い分け {#comparison}
 
@@ -194,3 +196,4 @@ deg[v] == 1 の頂点をすべてキューに入れる
 - [fjnkt98「ABC266 F」](https://zenn.dev/fjnkt98/articles/98c9dfbd0702a4)：例題の方針（葉を削って閉路を求め、閉路の頂点ごとの木を Union-Find でまとめる）
 - [kyo-pro「ABC292 D」](https://kyo-pro.hatenablog.com/entry/ABC292D)：練習の方針（成分ごとの頂点数と辺数）
 - [AtCoder Library「DSU」](https://github.com/atcoder/ac-library/blob/master/document_ja/dsu.md)：`dsu` のメソッドと計算量
+- [drken「AtCoder ABC 378 F - Add One Edge 2 (1D, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2024/11/04/002341)：練習 ABC378 F の次数 3 の成分ごとに次数 2 の頂点から 2 つ選ぶ数え方

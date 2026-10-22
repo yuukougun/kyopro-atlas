@@ -260,7 +260,7 @@ updated: 2026-10-22
 | 典型90 030. K Factors（★5） | — | [エラトステネスの篩](../math/sieve-eratosthenes.md)（練習） |
 | 典型90 031. VS AtCoder（★6） | — | [Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md)（練習） |
 | 典型90 034. There are few types of elements（★4） | — | [尺取り法](../basics/two-pointers.md)（練習） |
-| 典型90 035. Preserve Connectivity（★7） | — | [Auxiliary Tree](../tree/auxiliary-tree.md)（例題） |
+| 典型90 035. Preserve Connectivity（★7） | — | [指定頂点を結ぶ最小の部分木](../tree/steiner-subtree.md)（力試し）、[Auxiliary Tree](../tree/auxiliary-tree.md)（例題） |
 | 典型90 037. Don't Leave the Spice（★5） | — | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md)（例題） |
 | 典型90 038. Large LCM（★3） | — | [整数の割り算と余り](../math/integer-division.md)（練習） |
 | 典型90 039. Tree Distance（★5） | — | [辺で切って数える](../tree/tree-edge-contribution.md)（例題） |
@@ -269,7 +269,7 @@ updated: 2026-10-22
 | 典型90 042. Multiple of 9（★4） | — | [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md)（練習） |
 | 典型90 043. Maze Challenge with Lack of Sleep（★4） | — | [01-BFS](../graph/zero-one-bfs.md)（練習） |
 | 典型90 044. Shift and Swapping（★3） | — | [全体への操作を変数で持つ](../ds/global-offset.md)（練習） |
-| 典型90 045. Simple Grouping（★6） | — | [部分集合を列挙する DP](../dp/subset-enumeration-dp.md)（練習） |
+| 典型90 045. Simple Grouping（★6） | — | [部分集合を列挙する DP](../dp/subset-enumeration-dp.md)（練習）、[第 2 種スターリング数とベル数](../comb/bell-number.md)（練習） |
 | 典型90 047. Monochromatic Diagonal（★7） | — | [ローリングハッシュ](../string/rolling-hash.md)（力試し）、[ハッシュの衝突と安全な設計](../string/hash-safety.md)（例題） |
 | 典型90 049. Flip Digits 2（★6） | — | [最小全域木](../graph/minimum-spanning-tree.md)（練習） |
 | 典型90 051. Typical Shop（★5） | — | [半分全列挙](../basics/meet-in-the-middle.md)（例題） |
@@ -326,7 +326,7 @@ updated: 2026-10-22
 | EDPC R. Walk | — | [行列累乗](../math/matrix-power.md)（例題） |
 | EDPC S. Digit Sum | — | [桁 DP](../dp/digit-dp.md)（例題） |
 | EDPC T. Permutation | — | [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md)（例題） |
-| EDPC U. Grouping | — | [部分集合を列挙する DP](../dp/subset-enumeration-dp.md)（例題） |
+| EDPC U. Grouping | — | [部分集合を列挙する DP](../dp/subset-enumeration-dp.md)（例題）、[第 2 種スターリング数とベル数](../comb/bell-number.md)（練習） |
 | EDPC V. Subtree | — | [全方位木 DP](../dp/rerooting.md)（例題） |
 | EDPC W. Intervals | — | [インライン DP](../dp/inline-dp.md)（例題） |
 | EDPC X. Tower | — | [並べ替えてから DP する](../dp/exchange-argument-dp.md)（例題） |
@@ -391,6 +391,13 @@ updated: 2026-10-22
 | アルゴ数学 026. Coin Gacha | — | [幾何分布とコンプリートガチャ](../comb/coupon-collector.md)（練習） |
 | アルゴ数学 053. Sum of 4^N | — | [逆元と mod での割り算](../math/mod-inverse.md)（練習）、[等比数列の和を mod で求める](../math/geometric-series-mod.md)（練習） |
 | アルゴ数学 057. Domino Tiling | — | [行列累乗](../math/matrix-power.md)（練習） |
+| アルゴ数学 097. Primes in an Interval | — | [区間篩](../math/segmented-sieve.md)（練習） |
+
+### NYC2015 {#problem-sets-NYC2015}
+
+| 問題 | diff | ページ（役割） |
+| --- | --- | --- |
+| NYC2015 E. ひも | — | [ラベル付き木の数え上げ](../comb/cayley-pruefer.md)（練習） |
 
 ### ABL {#problem-sets-abl}
 
@@ -403,7 +410,13 @@ updated: 2026-10-22
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| ACL1 B. Sum is Multiple | 1785 | [約数の個数の上界と高度合成数](../math/divisor-count-bound.md)（練習）、[中国剰余定理](../math/crt.md)（例題） |
+| ACL1 B. Sum is Multiple | 1785 | [約数の個数の上界と高度合成数](../math/divisor-count-bound.md)（練習）、[拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md)（力試し）、[中国剰余定理](../math/crt.md)（例題） |
+
+### BITFLYER2018-FINAL {#problem-sets-bitflyer2018-final}
+
+| 問題 | diff | ページ（役割） |
+| --- | --- | --- |
+| BITFLYER2018-FINAL D. 数列 XOR | — | [掃き出し法](../math/gaussian-elimination.md)（練習） |
 
 ### CHOKUDAI_S001 {#problem-sets-chokudai_S001}
 
@@ -421,7 +434,14 @@ updated: 2026-10-22
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
+| CODE-THANKS-FESTIVAL-2017 F. Limited Xor Subset | — | [掃き出し法](../math/gaussian-elimination.md)（練習） |
 | CODE-THANKS-FESTIVAL-2017 H. Union Sets | — | [部分永続 Union-Find](../ds/partially-persistent-union-find.md)（例題）、[並列二分探索](../ds/parallel-binary-search.md)（練習） |
+
+### DDCC2016-QUAL {#problem-sets-ddcc2016-qual}
+
+| 問題 | diff | ページ（役割） |
+| --- | --- | --- |
+| DDCC2016-QUAL D. 道路網 | — | [重心分解](../tree/centroid-decomposition.md)（力試し） |
 
 ### DIVERTA2019 {#problem-sets-diverta2019}
 
@@ -435,23 +455,49 @@ updated: 2026-10-22
 | --- | --- | --- |
 | DONUTS-2015 C. 行列のできるドーナツ屋 | 1661 | [単調スタックとスライド最小値](../ds/monotonic-stack.md)（練習） |
 
+### DWACON2018-PRELIMS {#problem-sets-dwacon2018-prelims}
+
+| 問題 | diff | ページ（役割） |
+| --- | --- | --- |
+| DWACON2018-PRELIMS C. Kill/Death | — | [整数の分割と分割数](../comb/partition-number.md)（練習） |
+| DWACON2018-PRELIMS E. ニワンゴくんの家探し | — | [木の重心](../tree/tree-centroid.md)（練習） |
+
 ### HHKB2020 {#problem-sets-hhkb2020}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
 | HHKB2020 C. Neq Min | 352 | [計算量の見積もり](../basics/complexity-estimation.md)（練習） |
+| HHKB2020 F. Random Max | 2691 | [期待値と確率の変換](../comb/expectation-tail-sum.md)（力試し） |
+
+### JAG2013SUMMER-DAY4 {#problem-sets-jag2013summer-day4}
+
+| 問題 | diff | ページ（役割） |
+| --- | --- | --- |
+| JAG2013SUMMER-DAY4 F. Graph Automata Player | — | [掃き出し法](../math/gaussian-elimination.md)（練習） |
+
+### JOI2020YO2 {#problem-sets-joi2020yo2}
+
+| 問題 | diff | ページ（役割） |
+| --- | --- | --- |
+| JOI2020YO2 E. じゃんけん式 (Rock-Scissors-Paper Expression) | — | [構文解析](../misc/parsing.md)（練習） |
 
 ### KEYENCE2019 {#problem-sets-keyence2019}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| KEYENCE2019 E. Connecting Cities | 2623 | [重心分解](../tree/centroid-decomposition.md)（力試し） |
+| KEYENCE2019 E. Connecting Cities | 2623 | [分割統治](../basics/divide-and-conquer.md)（力試し）、[重心分解](../tree/centroid-decomposition.md)（力試し） |
 
 ### KEYENCE2020 {#problem-sets-keyence2020}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
 | KEYENCE2020 C. Subarray Sum | 625 | [構築問題の考え方](../thinking/construction.md)（練習） |
+
+### NIKKEI2019-FINAL {#problem-sets-nikkei2019-final}
+
+| 問題 | diff | ページ（役割） |
+| --- | --- | --- |
+| NIKKEI2019-FINAL G. Greatest Journey | — | [重心分解](../tree/centroid-decomposition.md)（力試し） |
 
 ### PRACTICE {#problem-sets-practice}
 
@@ -470,6 +516,13 @@ updated: 2026-10-22
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
 | SUMITRUST2019 D. Lucky PIN | 838 | [全探索の設計](../basics/brute-force.md)（練習） |
+
+### YAHOO-PROCON2018-FINAL {#problem-sets-yahoo-procon2018-final}
+
+| 問題 | diff | ページ（役割） |
+| --- | --- | --- |
+| YAHOO-PROCON2018-FINAL A. Uncommon | — | [約数・倍数のゼータ変換とメビウス変換](../comb/zeta-mobius-divisor.md)（練習） |
+| YAHOO-PROCON2018-FINAL C. 木の問題 | — | [重心分解](../tree/centroid-decomposition.md)（練習） |
 
 ### YAHOO-PROCON2019-QUAL {#problem-sets-yahoo-procon2019-qual}
 

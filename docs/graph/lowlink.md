@@ -200,12 +200,32 @@ DFS で「親へ戻る辺」を飛ばすとき、親の**頂点**で判定する
 
 ## 練習問題 {#practice}
 
-ABC で lowlink をそのまま使う問題は少ない。橋と関節点の実装を確かめるには、次の Library Checker の問題がよい。
+<div class="kp-problems" data-role="practice" markdown>
+
+- [ABC375 G. Road Blocked 2](https://atcoder.jp/contests/abc375/tasks/abc375_g)（diff 2014）：各道路について、その道路だけを通行止めにしたとき都市 1 から都市 N への最短距離が変わるかを判定する。
+- [ABC334 G. Christmas Color Grid 2](https://atcoder.jp/contests/abc334/tasks/abc334_g)（diff 2242）：緑のマスを 1 つ一様に選んで赤に塗り替えたときの、緑のマスの連結成分の数の期待値を求める。
+
+</div>
+
+??? note "練習の方針"
+    - **ABC375 G**：1 と $N$ からの最短距離で $\mathrm{dist}_1[x] + c + \mathrm{dist}_N[y] = \mathrm{dist}_1[N]$ となる辺だけを取り出した部分グラフを作る。その橋になっている辺だけで答えが変わる。部分グラフは多重辺を含みうるので、親を辺の番号で除外する
+    - **ABC334 G**：各マスを除いたときの成分の増分を数える。根でない頂点は $\mathrm{low}(c) \ge \mathrm{ord}(u)$ を満たす子の数、根は子の数 − 1 である。孤立したマスを除くと成分が 1 減る。元の成分数に足した総和をマスの数で割る
+
+ABC で lowlink をそのまま使う問題は少ない。橋と関節点の実装そのものを確かめるには、次の Library Checker の問題がよい。
 
 - [Two-Edge-Connected Components](https://judge.yosupo.jp/problem/two_edge_connected_components)：二重辺連結成分を求め、成分ごとに頂点を出力する。多重辺を含むので、親を辺の番号で除外しているかが試される。
 - [Biconnected Components](https://judge.yosupo.jp/problem/biconnected_components)：二重頂点連結成分を求める（[ブロックカット木の節](#block-cut-tree)）。
 
-ABC の G で、橋や関節点を使って解ける問題として、ABC375 G（[最短路 DAG の力試し](../graph/shortest-path-dag.md#challenge)）と ABC334 G（[オフラインの動的連結性](../graph/offline-dynamic-connectivity.md#abc334_g)の例題）がある。どちらも本文の応用の型で方針を述べた。
+## 力試し {#challenge}
+
+<div class="kp-problems" data-role="challenge" markdown>
+
+- [ARC039 D. 旅行会社高橋君](https://atcoder.jp/contests/arc039/tasks/arc039_d)（diff 2550）：無向グラフで、頂点 A から B を経て C へ、同じ橋を 2 度渡らずに行けるかをクエリごとに答える。
+
+</div>
+
+??? note "力試しの方針"
+    - **ARC039 D**：二重辺連結成分で縮約すると木（橋の木）になる。その上で、$B$ の成分が $A$ の成分と $C$ の成分を結ぶ道に乗るかを、LCA で求めた距離が $\mathrm{dist}(A, B) + \mathrm{dist}(B, C) = \mathrm{dist}(A, C)$ を満たすかで判定する
 
 ## 確認問題 {#quiz}
 

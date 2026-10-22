@@ -243,18 +243,35 @@ $i \mid j \le K$ を直接扱う代わりに、$i \mid j \subseteq L$ を考え�
     --8<-- "zeta-mobius-subset/or-plus-max.cpp:core"
     ```
 
+## 練習問題 {#practice}
+
+<div class="kp-problems" data-role="practice" markdown>
+
+- [ABC472 G. Cascading Grid](https://atcoder.jp/contests/abc472/tasks/abc472_g)（diff 2018）：+・-・# の盤面で、# でないマスと、そこから # を通らずに左右と下へ進んで届くマスを # に変える操作を何度でも行い、残った + の数から - の数を引いた値を最大化する。
+- [ABC349 F. Subsequence LCM](https://atcoder.jp/contests/abc349/tasks/abc349_f)（diff 2169）：長さ N の正整数列と M が与えられ、空でない部分列のうち要素の lcm がちょうど M になるものの数を 998244353 で割った余りで求める。
+- [ARC137 D. Prefix XORs](https://atcoder.jp/contests/arc137/tasks/arc137_d)（diff 2191）：長さ N の整数列について、すべての i で A_i を A_1 から A_i までの XOR に置き換える操作を k 回行った後の末尾の値を、k = 1, …, M のそれぞれについて求める。
+
+</div>
+
+??? note "練習の方針"
+    - **ABC472 G**：各行を左右につながった成分に分け、行ごとに「どの成分を埋めたか」の bit を持つ DP にする。下の行で「少なくとも mask を埋めた」ときの最良値を、和の代わりに max を取る上位集合のゼータ変換で一括して求める。想定の解き方は燃やす埋める（最小カット）で、こちらは別解である
+    - **ABC349 F**：$M$ の約数でない要素を捨て、残りを「指数が $M$ と等しい素因数の集合」の bit（$M \le 10^{16}$ なので高々 13 bit）に潰す。bit ごとの個数を部分集合ゼータ変換して $2^{g(S)}$ にし、メビウス変換で全 bit がちょうど立つ分を取り出す。$M = 1$ は別に扱う
+    - **ARC137 D**：$A_{N-i}$ が $k$ 回後の末尾に効くかは二項係数 $\binom{i+k-1}{k-1}$ の偶奇で決まり、Lucas の定理から「$i$ と $k - 1$ が共通の bit を持たない」とき奇数である。$S$ を $\max(N, M)$ 以上の 2 の冪として $B[S-1-i] = A_{N-i}$ に置き、演算を XOR にした上位集合のゼータ変換をして $B[k-1]$ を答えにする。$O(S \log S)$ である
+
 ## 力試し {#challenge}
 
 <div class="kp-problems" data-role="challenge" markdown>
 
 - [ABC213 G. Connectivity 2](https://atcoder.jp/contests/abc213/tasks/abc213_g)（diff 2663）：N 頂点（N ≤ 17）のグラフで、辺の部分集合を残したとき頂点 1 と頂点 k が連結になる選び方の数を、各 k について求める。
 - [ABC295 Ex. E or m](https://atcoder.jp/contests/abc295/tasks/abc295_h)（diff 2728）：H×W のマス目の各マスが 0・1・? のどれかで与えられる。? を 0 か 1 に決める方法のうち、全部 0 のマス目から「ある行の左から何マスかを 1 にする」「ある列の上から何マスかを 1 にする」操作で作れるマス目になるものの数を、998244353 で割った余りで求める。
+- [ABC215 H. Cabbage Master](https://atcoder.jp/contests/abc215/tasks/abc215_h)（diff 3101）：キャベツの種類ごとの個数と、各会社の必要数と受け入れる種類の集合が与えられ、全社の要求を満たす配り方がなくなるように取り除く個数の最小値と、その個数での取り除き方の数を求める。
 
 </div>
 
 ??? note "力試しの方針"
     - **ABC213 G**：頂点集合 $S$ ごとに、両端が $S$ に入る辺の数 $e(S)$ を、各辺の 2 頂点の集合に 1 を置いてゼータ変換して求める（$O(N 2^N)$）。続いて、$S$ の中の辺だけで $S$ 全体が連結になる辺の選び方の数 $c(S)$ を、「全体 $2^{e(S)}$ − 決めた 1 頂点を含む連結成分が $S$ より小さい分」として部分集合を列挙する DP で求める（$O(3^N)$。[ラベル付きグラフの数え上げ](../comb/counting-labeled-graphs.md#component-of-1)）。答えは、頂点 1 と $k$ を含む $S$ について $c(S) \cdot 2^{e(V \setminus S)}$ を足したものである。ゼータ変換が受け持つのは $e(S)$ の前計算である。
     - **ABC295 Ex**：列ごとに「上から 1 が途切れずに続いているか」を bit の集合で持つ DP にする。1 行進むと、この集合は前の集合の部分集合にしかならない。1 マスずつ状態を更新する形にすれば $O(HW 2^W)$ で、変換を使わずに済む（[参考](#references)の kmjp の解説はこの形）。
+    - **ABC215 H**：種類の集合 mask ごとに「mask の中だけで受け入れる会社の需要の和」と「mask の供給の和」を部分集合ゼータ変換で求め、Hall の条件を全 mask で調べる。取り除き方の数は、二項係数をメビウス変換で「ちょうど mask」に直し、不足の起きる mask の印を部分集合の方向へ広げて足す
 
 ## 確認問題 {#quiz}
 
@@ -297,3 +314,8 @@ $i \mid j \le K$ を直接扱う代わりに、$i \mid j \subseteq L$ を考え�
 - [kmjp「AtCoder ABC #295 : Ex - E or m」](https://kmjp.hatenablog.jp/entry/2023/03/26/0930)：力試しの ABC295 Ex の問いと、列の状態を bit で持つ DP の方針
 - [merom686「ABC349」](https://merom686.hatenablog.com/entry/2024/04/14/011833)：OR がちょうど $S$ になる部分列の数を、ゼータ変換 → 2 の冪 → メビウス変換で数える型
 - [Library Checker「Bitwise And Convolution」](https://judge.yosupo.jp/problem/bitwise_and_convolution)：AND 畳み込みの実装の確かめ方
+- [kmjp「AtCoder ABC #472 (AtCoder Talent Quest 〜 今から28卒には脱出してもらいます〜予選) : G - Cascading Grid」](https://kmjp.hatenablog.jp/entry/2026/08/22/0930)：練習 ABC472 G の行ごとの bitDP と max の上位集合の変換
+- [MoyouSayuki「[ABC349] AtCoder Beginner Contest 349 题解」](https://www.cnblogs.com/MoyouSayuki/p/18134468)：練習 ABC349 F の要素の捨て方と M = 1 の扱い
+- [kmjp「AtCoder ARC #137 : D - Prefix XORs」](https://kmjp.hatenablog.jp/entry/2022/03/26/0930)：練習 ARC137 D の二項係数の偶奇と XOR の上位集合のゼータ変換
+- [Atcoder-myReflection「ARC137 D. Prefix XORs」](https://scrapbox.io/Atcoder-myReflection/ARC137_D._Prefix_XORs)：練習 ARC137 D の変換が XOR の上位集合であること
+- [kmjp「AtCoder ABC #215 : H - Cabbage Master」](https://kmjp.hatenablog.jp/entry/2021/08/22/0930)：力試し ABC215 Ex の需要・供給の部分集合和と Hall の定理

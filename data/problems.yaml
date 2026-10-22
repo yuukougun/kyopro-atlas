@@ -33,6 +33,22 @@ problems:
   - https://drken1215.hatenablog.com/entry/2023/06/11/123536
   status: 確認済み
   checked: null
+- id: abc008_3
+  contest: abc008
+  index: C
+  title: コイン
+  difficulty: 1836
+  experimental: true
+  difficulty_fetched: '2026-10-21'
+  summary: 数の書かれた N 枚のコインを一様にランダムな順に並べ、左から順に各コインについて右にある倍数のコインを裏返すとき、最後に表のコインの枚数の期待値を求める。
+  approach: コインごとに表の確率を求めて足す。約数のコイン p 枚と自分の並びは同様に確からしいので、確率は（0〜p の偶数の個数）/(p+1)
+  pages:
+  - {id: probability-basics, role: challenge}
+  evidence:
+  - https://kmjp.hatenablog.jp/entry/2014/05/10/0900
+  - https://blog.tiramister.net/posts/abc008-c/
+  status: 確認済み
+  checked: '2026-10-22'
 - id: abc009_3
   contest: abc009
   index: C
@@ -161,6 +177,21 @@ problems:
   - https://scrapbox.io/kyopuro-ryusuke920/%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%A9%E3%82%AF%E3%83%86%E3%82%A3%E3%83%96%E5%95%8F%E9%A1%8C%E3%81%BE%E3%81%A8%E3%82%81
   status: 確認済み
   checked: null
+- id: abc020_d
+  contest: abc020
+  index: D
+  title: LCM Rush
+  difficulty: 2695
+  experimental: true
+  difficulty_fetched: '2026-10-21'
+  summary: 1 ≤ i ≤ N について lcm(i, K) の総和を mod 10^9+7 で求める（N, K ≤ 10^9）。
+  approach: gcd(i, K) = M ごとに分け、K/M と互いに素な i' の和を K/M の素因数の部分集合で符号付きに足す
+  pages:
+  - {id: mobius-function, role: challenge}
+  evidence:
+  - https://tsutaj.hatenablog.com/entry/2017/07/01/073648
+  status: 確認済み
+  checked: '2026-10-22'
 - id: abc021_d
   contest: abc021
   index: D
@@ -206,6 +237,22 @@ problems:
   - https://drken1215.hatenablog.com/entry/2021/07/03/173400
   status: 確認済み
   checked: '2026-10-21'
+- id: abc028_d
+  contest: abc028
+  index: D
+  title: 乱数生成
+  difficulty: 920
+  experimental: true
+  difficulty_fetched: '2026-10-21'
+  summary: 1〜N の整数を独立に一様に 3 回選んだとき、3 つの中央値が K になる確率を求める。
+  approach: 順番を区別した N^3 通りのうち、中央値が K になる並びを 1 + 3(N−1) + 6(K−1)(N−K) 通りと数えて割る
+  pages:
+  - {id: probability-basics, role: practice}
+  evidence:
+  - https://fukuro-hoho.hatenablog.com/entry/2020/11/18/163357
+  - https://mmxsrup.hatenablog.com/entry/2016/09/22/014911
+  status: 確認済み
+  checked: '2026-10-22'
 - id: abc032_c
   contest: abc032
   index: C
@@ -551,12 +598,19 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: 駅を順に結ぶ列車がそれぞれ一定の間隔で発車するとき、各駅から出発して終点に着く最も早い時刻を求める。
   approach: 次の発車時刻を切り上げの割り算で求めてシミュレーションする
+  alternatives:
+  - pages:
+    - time-dependent-dijkstra
+    summary: 一直線に並ぶ N 駅で、駅 i から i+1 へは時刻 S_i から F_i ごとに出る列車で C_i かかるとき、各駅から出発して駅 N に最も早く着く時刻を求める。
+    approach: 各始点から駅を順にたどり、t < S_i なら S_i、そうでなければ ⌈t/F_i⌉·F_i まで待って C_i を足す
   pages:
   - {id: integer-division, role: practice}
+  - {id: time-dependent-dijkstra, role: practice}
   evidence:
   - https://drken1215.hatenablog.com/entry/2025/02/03/023357
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2017/1230_abc084
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: abc084_d
   contest: abc084
   index: D
@@ -1135,13 +1189,19 @@ problems:
     - gcd-lcm
     summary: N 個の整数のうち 1 つを好きな整数に書き換えたときの、全体の最大公約数の最大値を求める。
     approach: 左右からの累積 gcd で、1つ除いた gcd を全て求める
+  - pages:
+    - sparse-table
+    summary: N 個の整数のうち 1 つを好きな整数に書き換えたとき、全体の最大公約数としてありうる最大値を求める。
+    approach: i を除いた gcd を [0, i) と [i+1, N) の区間 gcd の gcd として Sparse Table で求める（累積 gcd でもよい）
   pages:
   - {id: prefix-sum, role: practice}
   - {id: gcd-lcm, role: practice}
+  - {id: sparse-table, role: practice}
   evidence:
   - https://drken1215.hatenablog.com/entry/2019/04/27/224100_1
+  - https://blog.hamayanhamayan.com/entry/2019/04/28/085936
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc125_d
   contest: abc125
   index: D
@@ -1526,6 +1586,21 @@ problems:
   - https://kmjp.hatenablog.jp/entry/2019/06/29/1030
   status: 確認済み
   checked: '2026-10-21'
+- id: abc132_f
+  contest: abc132
+  index: F
+  title: Small Products
+  difficulty: 2143
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 隣り合う 2 数の積がどれも N 以下になる、正の整数 K 個の列の個数を 10^9+7 で割った余りで求める（N ≤ 10^9、K ≤ 100）。
+  approach: √N 以下の値は値ごと、√N を超える値は ⌊N/x⌋ が同じものごとにまとめて DP し、累積和で遷移して O(K√N)
+  pages:
+  - {id: floor-quotient-enum, role: challenge}
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2019/0629_abc132
+  status: 確認済み
+  checked: '2026-10-22'
 - id: abc133_c
   contest: abc133
   index: C
@@ -1563,11 +1638,12 @@ problems:
   - {id: tree-dp, role: practice}
   - {id: tree-traversal, role: challenge}
   - {id: counting-fix-order, role: example}
+  - {id: counting-basics, role: challenge}
   evidence:
   - https://drken1215.hatenablog.com/entry/2019/07/08/002700
   - https://kmjp.hatenablog.jp/entry/2019/07/07/1000
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc133_f
   contest: abc133
   index: F
@@ -1577,12 +1653,25 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: 辺に色と長さがある木で、色 x の辺の長さをすべて y に変えたときの 2 頂点間の距離を、Q 個の質問に答える。
   approach: 距離を根からの距離と LCA で表し、パス上の色 x の辺の本数と長さの和を差し替える（オフラインの DFS で数える）
+  alternatives:
+  - pages:
+    - persistent-data-structures
+    summary: 辺に色と長さがある木で、色 x の辺の長さをすべて y に変えたときの 2 頂点間の距離を、多数の質問に答える。
+    approach: 根から各頂点までの色ごとの本数と長さの和を、親の版から 1 か所だけ変えた永続配列で持ち、LCA で距離を組み立てて色 x の分を差し替える
+  - pages:
+    - root-path-dfs
+    summary: 辺に色と長さがある木で、色 x の辺の長さをすべて y に変えたときの 2 頂点 u, v の距離を、独立な質問それぞれについて答える。
+    approach: 距離を根からの距離と LCA に分けて質問を 3 頂点に割り振り、色ごとの本数と長さの和を DFS で足し引きして求める
   pages:
   - {id: tree-path, role: practice}
+  - {id: persistent-data-structures, role: challenge}
+  - {id: root-path-dfs, role: challenge}
   evidence:
   - https://blog.hamayanhamayan.com/entry/2019/07/08/213009
+  - https://qiita.com/hotman78/items/9c643feae1de087e6fc5
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2019/0707_abc133
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc134_d
   contest: abc134
   index: D
@@ -1768,7 +1857,7 @@ problems:
   evidence:
   - https://drken1215.hatenablog.com/entry/2020/05/18/174000
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: abc138_f
   contest: abc138
   index: F
@@ -2308,13 +2397,18 @@ problems:
     - linearity-of-expectation
     summary: 木の各頂点を確率 1/2 で黒か白に塗り、黒い頂点をすべて含む最小の部分木に含まれる白い頂点の個数の期待値を求める。
     approach: 頂点ごとに「部分木に含まれ白である」確率を求めて足す
+  - pages:
+    - steiner-subtree
+    summary: 木の各頂点を確率 1/2 で黒に塗り、黒い頂点をすべて含む最小の部分木に含まれる白い頂点の数の期待値を求める。
+    approach: 頂点 v が最小の部分木に入るのは v を除いた成分の 2 つ以上に黒があるときなので、各頂点の確率を足す
   pages:
   - {id: tree-edge-contribution, role: challenge}
   - {id: linearity-of-expectation, role: challenge}
+  - {id: steiner-subtree, role: challenge}
   evidence:
   - https://kmjp.hatenablog.jp/entry/2019/12/30/0930
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc150_c
   contest: abc150
   index: C
@@ -2354,12 +2448,19 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: 長さ N の 0/1 列の異なる 2 つの組すべてについて、一方を他方に変える最小コストを求め、その総和を求める。
   approach: コストをソートし、各要素に付く係数（何番目に変えるか × それが起きる組の数）を数える
+  alternatives:
+  - pages:
+    - binomial-identities
+    summary: 長さ N の 0/1 列の相異なる 2 つの組すべてについて、k 回目に位置 i を反転するとコストが k × C_i かかるとして一方を他方に変える最小コストを求め、その総和を 10^9+7 で割った余りで求める。
+    approach: C を降順に並べた寄与の係数 Σ(k+1)C(n,k) を、二項定理と吸収公式で 2^n + n 2^(n−1) にする
   pages:
   - {id: counting-mindset, role: practice}
+  - {id: binomial-identities, role: practice}
   evidence:
   - https://drken1215.hatenablog.com/entry/2020/01/12/142100
+  - https://kmjp.hatenablog.jp/entry/2020/01/11/0900
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: abc150_f
   contest: abc150
   index: F
@@ -2448,12 +2549,18 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: A_1 B_1 = A_2 B_2 = … = A_N B_N を満たす正の整数 B_i を選ぶとき、B_1 + … + B_N の最小値を 10^9+7 で割った余りで求める。
   approach: lcm(A_1, …, A_N) を素因数ごとの最大の指数で持ち、B_i = lcm / A_i とする
+  alternatives:
+  - pages:
+    - spf-sieve
+    summary: 10^6 以下の N 個（N ≤ 10^4）の正の整数 A_i に対し、A_i B_i がすべて等しくなる正の整数列 B の和の最小値を 10^9+7 で割った余りで求める。
+    approach: 各 A_i を最小素因数の表で分解して lcm を素因数ごとの最大の指数で持ち、mod 上で lcm/A_i の和をとる
   pages:
   - {id: prime-exponent-vector, role: practice}
+  - {id: spf-sieve, role: challenge}
   evidence:
   - https://drken1215.hatenablog.com/entry/2020/01/22/071000
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: abc152_f
   contest: abc152
   index: F
@@ -2832,8 +2939,9 @@ problems:
   - {id: euler-phi, role: practice}
   evidence:
   - https://kmjp.hatenablog.jp/entry/2020/04/12/1000
+  - https://maspypy.com/atcoder-参加感想-2020-04-12abc-162
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc163_e
   contest: abc163
   index: E
@@ -2927,13 +3035,18 @@ problems:
     - lis
     summary: 木の各頂点 k について、根から k へのパス上の値の列の最長増加部分列の長さを求める。
     approach: DFS で LIS の配列の 1 か所の変更を記録し、戻るときに元に戻す（節 variants）
+  - pages:
+    - persistent-data-structures
+    summary: 木の各頂点に数が書かれ、頂点 1 から各頂点へのパス上の数を並べた列の最長増加部分列の長さを、すべての頂点について求める。
+    approach: LIS の配列を 1 つだけ持って DFS し、入るときに 1 か所を書き換えて元の値を覚え、出るときに戻す（版の木の DFS）
   pages:
   - {id: lis, role: practice}
   - {id: root-path-dfs, role: example}
+  - {id: persistent-data-structures, role: practice}
   evidence:
   - https://kmjp.hatenablog.jp/entry/2020/05/02/0930
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc166_e
   contest: abc166
   index: E
@@ -3181,14 +3294,21 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: 1 以上 N 以下の各 K について K × (K の約数の個数) を求め、その総和を出力する（N ≤ 10^7）。
   approach: Σ_K K·d(K) を約数 d ごとの和に入れ替え、d の倍数の和として O(N) で数える
+  alternatives:
+  - pages:
+    - floor-quotient-enum
+    summary: x の約数の個数を f(x) とするとき、Σ_{x=1}^{N} x·f(x) を求める（N ≤ 10^7）。
+    approach: 約数 a ごとに a·k(k+1)/2（k = ⌊N/a⌋）を足し、k が同じ a の区間を等差数列の和でまとめて O(√N)
   pages:
   - {id: sigma-manipulation, role: example}
+  - {id: floor-quotient-enum, role: practice}
   evidence:
   - https://qiita.com/dvoraker3/items/8388ab6e1dc3af55070e
   - https://scrapbox.io/wafuwafualgorithm/ABC172_D_-_Sum_of_Divisors
   - https://blog.hamayanhamayan.com/entry/2020/06/27/230811
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2020/0627_abc172
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: abc172_e
   contest: abc172
   index: E
@@ -3280,15 +3400,22 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: 列の区間に含まれる値の種類数を、多数のクエリで答える。
   approach: クエリを右端の順に並べ、各値の最後の出現位置だけに 1 を立てた BIT の区間和
+  alternatives:
+  - pages:
+    - merge-sort-tree
+    summary: 長さ N の列について、区間 [l, r] に含まれる値の種類数を Q 個の質問に答える。
+    approach: prev[i]（同じ値の直前の位置）の列にマージソート木を作り、区間の中で prev[i] < l の個数をオンラインに数える
   pages:
   - {id: offline-queries, role: example}
+  - {id: merge-sort-tree, role: practice}
   evidence:
   - https://scrapbox.io/procon-kirokuyou/ABC174_F_-_Range_Set_Query_(600)
   - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/
   - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2020/0802_abc174
   - https://kanpurin.hatenablog.com/entry/2021/04/09/001439
+  - https://github.com/firiexp/library/issues/158
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: abc175_d
   contest: abc175
   index: D
@@ -3408,7 +3535,7 @@ problems:
   evidence:
   - https://drken1215.hatenablog.com/entry/2020/10/09/162600
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc178_d
   contest: abc178
   index: D
@@ -3854,13 +3981,18 @@ problems:
     - mod-inverse
     summary: N 個の椅子が円形に並び、玉座から S 個先の椅子にいる人が 1 回に K 個ずつ進むとき、玉座に着くまでの最小の回数を求める（着けないなら −1）。
     approach: S + Kx ≡ 0 (mod N) を一次合同式として解く。法が素数でないので gcd で割ってから拡張ユークリッドで逆元を求める
+  - pages:
+    - euler-phi
+    summary: N 個の椅子が円形に並び、玉座から S 個先にいる人が 1 手で K 個ずつ進むとき、玉座に着くまでの手数の最小を求める（着けなければ −1）。
+    approach: Kx ≡ −S (mod N) を gcd で割り、K の逆元をオイラーの定理から K^(φ(N)−1) として求める
   pages:
   - {id: mod-inverse, role: practice}
   - {id: ext-gcd, role: example}
+  - {id: euler-phi, role: practice}
   evidence:
   - https://drken1215.hatenablog.com/entry/2020/12/20/015100
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc186_f
   contest: abc186
   index: F
@@ -4526,7 +4658,7 @@ problems:
   - https://blog.hamayanhamayan.com/entry/2021/05/22/225525
   - https://qiita.com/2yuu/items/898b95864905dcbc8e7d
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc202_f
   contest: abc202
   index: F
@@ -4858,7 +4990,7 @@ problems:
   evidence:
   - https://qiita.com/AKpirion/items/21b1aead96fec77d67ef
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc209_d
   contest: abc209
   index: D
@@ -5042,7 +5174,7 @@ problems:
   evidence:
   - https://drken1215.hatenablog.com/entry/2021/08/01/163600
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: abc212_h
   contest: abc212
   index: H
@@ -5245,6 +5377,22 @@ problems:
   - https://kmjp.hatenablog.jp/entry/2021/08/16/0900
   status: 確認済み
   checked: '2026-10-21'
+- id: abc215_d
+  contest: abc215
+  index: D
+  title: Coprime 2
+  difficulty: 736
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 数列のどの要素とも互いに素であるような M 以下の正の整数をすべて列挙する。
+  approach: 各 A_i を素因数分解して現れた素数を集め、その倍数を 1〜M から消して残りを出力する
+  pages:
+  - {id: spf-sieve, role: practice}
+  evidence:
+  - https://qiita.com/sano192/items/00f6b70dab3bd3323ae6
+  - https://qiita.com/okm-uv/items/240b3fd3d2ff5f9561ab
+  status: 確認済み
+  checked: '2026-10-22'
 - id: abc215_g
   contest: abc215
   index: G
@@ -5269,8 +5417,14 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: キャベツの種類ごとの個数と、各会社の必要数と受け入れる種類が与えられる。全社の要求を満たす配り方がなくなるように取り除く個数の最小値と、その個数での取り除き方の数を求める。
   approach: すべての部分集合について「供給 ≥ 需要」を高速ゼータ変換で確かめる（Hall の定理）
+  alternatives:
+  - pages:
+    - zeta-mobius-subset
+    summary: キャベツの種類ごとの個数と、各会社の必要数と受け入れる種類の集合が与えられ、全社の要求を満たす配り方がなくなるように取り除く個数の最小値と、その個数での取り除き方の数を求める。
+    approach: mask ごとの需要と供給の和を部分集合ゼータ変換で求めて Hall の条件を調べ、取り除き方はメビウス変換と印の伝播で数える
   pages:
   - {id: dilworth-path-cover, role: practice}
+  - {id: zeta-mobius-subset, role: challenge}
   evidence:
   - https://kmjp.hatenablog.jp/entry/2021/08/22/0930
   - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0821_abc215
@@ -5320,13 +5474,18 @@ problems:
     - exchange-argument-dp
     summary: 添字の集合 S のうち、S での A の最大値が S での B の和以上になるものの個数を求める。
     approach: A の昇順に並べると今の要素が最大と決まり、B の和の数え上げ DP にできる（節は subset-sum#sort-then-count）
+  - pages:
+    - counting-fix-order
+    summary: 添字の集合のうち、選んだ要素の A の最大値が B の和以上になるものの個数を求める。
+    approach: A の昇順に並べて最大の要素を固定し、それより前から B の和が A_i − B_i 以下になる選び方をナップサックで数える
   pages:
   - {id: subset-sum, role: practice}
   - {id: exchange-argument-dp, role: practice}
+  - {id: counting-fix-order, role: practice}
   evidence:
   - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0829_abc216
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: abc216_g
   contest: abc216
   index: G
@@ -5407,6 +5566,22 @@ problems:
   - https://zenn.dev/m193h/articles/20210906mon223250m193habc217
   status: 確認済み
   checked: '2026-10-21'
+- id: abc217_g
+  contest: abc217
+  index: G
+  title: Groups
+  difficulty: 2047
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 1〜N の番号の N 人を、番号を M で割った余りが等しい 2 人が同じ組に入らないように k 個の空でない組に分ける方法の数を、k = 1, …, N のそれぞれについて 998244353 で割った余りで求める。
+  approach: S(n,k) の漸化式で、既存の組のうち同じ余りの人がいる組を除いた j − ⌊(i−1)/M⌋ を係数にした O(N^2) の DP
+  pages:
+  - {id: bell-number, role: practice}
+  evidence:
+  - https://bondo.hateblo.jp/entry/2021/09/05/010120
+  - https://kmjp.hatenablog.jp/entry/2021/09/05/0900
+  status: 確認済み
+  checked: '2026-10-22'
 - id: abc217_h
   contest: abc217
   index: H
@@ -5523,12 +5698,19 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: 頂点の値を隣接頂点へ伝播させるクエリを繰り返した後の、全頂点の値を求める。
   approach: 次数が √M 以上の頂点は伝播を保留し、隣が問い合わせのときに参照する
+  alternatives:
+  - pages:
+    - degree-sqrt
+    summary: 頂点 i の値が初め i のグラフで、指定した頂点の今の値を隣接頂点すべてに書き写すクエリを Q 回行った後の、全頂点の値を求める。
+    approach: 軽い頂点は隣に値と時刻を配り、重い頂点は最終時刻と値だけ記録し、値が要るとき隣の重い頂点の記録を取りに行く（O(Q√M)）
   pages:
   - {id: sqrt-decomposition, role: example}
+  - {id: degree-sqrt, role: challenge}
   evidence:
   - https://kmjp.hatenablog.jp/entry/2021/09/29/0900
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0918_abc219
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc220_d
   contest: abc220
   index: D
@@ -5544,6 +5726,21 @@ problems:
   - https://ebisuke33.hatenablog.com/entry/abc220d
   status: 確認済み
   checked: '2026-10-21'
+- id: abc220_e
+  contest: abc220
+  index: E
+  title: Distance on Large Perfect Binary Tree
+  difficulty: 1593
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 頂点 i の子が 2i と 2i+1 の、2^N − 1 頂点の完全二分木（N ≤ 10^6）で、距離がちょうど D の頂点の順序対の個数を 998244353 で割った余りで求める。
+  approach: LCA の深さ d ごとに、まっすぐ D 段降りる組と左右から深さ l と D−l を選ぶ組を数え、2^d を掛けて O(N) で足す
+  pages:
+  - {id: complete-binary-tree, role: challenge}
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0926_abc220
+  status: 確認済み
+  checked: '2026-10-22'
 - id: abc220_f
   contest: abc220
   index: F
@@ -6355,12 +6552,19 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: 標高の差で楽しさが増減する移動で、広場 1 から出発したときの楽しさの最大値を求める。
   approach: 高さをポテンシャルにして負の辺を非負に直し、ダイクストラする
+  alternatives:
+  - pages:
+    - bellman-ford
+    summary: 標高の差で楽しさが増えたり減ったりする無向グラフの移動で、広場 1 から出発したときの楽しさの最大値を求める。
+    approach: 符号を反転すると負辺が出るが、ベルマンフォード法では間に合わないので、標高をポテンシャルにして非負に付け替えダイクストラ法で解く
   pages:
   - {id: dijkstra, role: practice}
+  - {id: bellman-ford, role: practice}
   evidence:
   - https://kyo-pro.hatenablog.com/entry/ABC237E
+  - https://zenn.dev/akiku/articles/akiku-abc237
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: abc237_g
   contest: abc237
   index: G
@@ -6831,14 +7035,20 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: 有向グラフで、そこから無限に移動し続けられる頂点の数を求める。
   approach: 出次数 0 の頂点を逆辺で取り除いていき、残った頂点を数える
+  alternatives:
+  - pages:
+    - game-retrograde-analysis
+    summary: 有向グラフで、そこから辺をたどって無限に移動し続けられる頂点の数を求める。
+    approach: 出次数 0 の頂点から逆辺をたどって出次数のカウンタを減らし、0 になった頂点を取り除き、残った頂点を数える（後退解析の骨組み）
   pages:
   - {id: topological-sort, role: practice}
+  - {id: game-retrograde-analysis, role: practice}
   evidence:
   - https://kyo-pro.hatenablog.com/entry/ABC245F
   status: 確認済み
   unverified_in:
   - 03-graph.md:500（同じ行）
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc246_e
   contest: abc246
   index: E
@@ -6966,6 +7176,21 @@ problems:
   - 06-math-nt.topics.yaml:1170（rational-normalization の level_evidence）
   checked: '2026-10-21'
   note: research/06 は未確認としたが、research/08 が ikatakos 氏の記録で問いと方針を確かめている
+- id: abc248_g
+  contest: abc248
+  index: G
+  title: GCD cost on the tree
+  difficulty: 2514
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 各頂点に正の整数が書かれた木で、すべての 2 頂点の組についての「パス上の値の gcd × パスの頂点数」の総和を求める。
+  approach: d ごとに d の倍数の頂点の森で、gcd が d の倍数のパスの頂点数の和を木 DP で数え、倍数の分を引いて Σ d·f(d) を取る
+  pages:
+  - {id: mobius-function, role: challenge}
+  evidence:
+  - https://kmjp.hatenablog.jp/entry/2022/04/18/0900
+  status: 確認済み
+  checked: '2026-10-22'
 - id: abc249_g
   contest: abc249
   index: G
@@ -7178,7 +7403,7 @@ problems:
   evidence:
   - https://kazun-kyopro.hatenablog.com/entry/ABC/254/F
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc255_g
   contest: abc255
   index: G
@@ -7711,8 +7936,14 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: N 頂点 N 辺の連結な無向グラフで、2 頂点 x・y の間の単純パスがただ 1 つかを Q 個の質問に答える。
   approach: 次数 1 の頂点を削り続けて閉路を求め、2 点が同じ閉路の頂点からぶら下がる木にあるときだけ一意
+  alternatives:
+  - pages:
+    - leaf-first
+    summary: N 頂点 N 辺の連結な無向グラフで、2 頂点の間の単純パスがただ 1 つに決まるかを、多数の質問に答える。
+    approach: 次数 1 の頂点をキューで削り続けて閉路を残し、閉路の各頂点からぶら下がる木をまとめて判定する
   pages:
   - {id: namori-graph, role: example}
+  - {id: leaf-first, role: practice}
   evidence:
   - https://zenn.dev/fjnkt98/articles/98c9dfbd0702a4
   status: 確認済み
@@ -7720,7 +7951,7 @@ problems:
   - 03-graph.md:230（同じ行）
   - 03-graph.md:1259（節「5.3 未確認の候補（設計・執筆の段階で裏付けを取ること）」）
   - 03-graph.topics.yaml:1358（namori-graph の level_evidence）
-  checked: '2026-10-21'
+  checked: '2026-10-22'
   note: research/03 は未確認としたが、research/00・04 が fjnkt98 氏の記事で問いと方針を確かめている
 - id: abc266_g
   contest: abc266
@@ -7746,13 +7977,19 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: 木の頂点 u から距離がちょうど k の頂点を 1 つ答える質問に Q 回答える（なければ −1）。
   approach: 最も遠い点は直径の端点なので、端点を根にした木で k 個上の祖先を求める
+  alternatives:
+  - pages:
+    - centroid-decomposition
+    summary: 木の頂点 U_i から距離がちょうど K_i の頂点を 1 つ答える（なければ −1）クエリに、Q 回答える。
+    approach: 重心木の祖先 c をたどり、距離ごとに別の子の成分の頂点を高々 2 個持って答える（想定解は直径）
   pages:
   - {id: lca, role: example}
   - {id: tree-diameter, role: practice}
+  - {id: centroid-decomposition, role: practice}
   evidence:
   - https://kazun-kyopro.hatenablog.com/entry/ABC/267/F
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc267_g
   contest: abc267
   index: G
@@ -7937,13 +8174,19 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: 1 日の 24 個の時刻ごとに担当（高橋君か青木君）が決まり、毎日各時刻に担当が決まった確率でアクセスするとき、N 回目のアクセスが青木君である確率を求める。
   approach: 状態を直前のアクセスの時刻にし、次のアクセスの時刻への確率（何日もない場合は等比級数でまとめる）を 24×24 の行列にして、行列累乗で N 回分を求める
+  alternatives:
+  - pages:
+    - expectation-linear-equations
+    summary: 1 日の 24 個の時刻ごとに担当が決まり、各時刻に担当が決まった確率でアクセスするとき、N 回目のアクセスが青木君である確率を求める。
+    approach: 丸 1 日アクセスがない分を等比級数 1/(1−P) で閉じて（または連立方程式を掃き出して）遷移確率を作り、24×24 の行列を累乗する
   pages:
   - {id: probability-dp, role: challenge}
+  - {id: expectation-linear-equations, role: challenge}
   evidence:
   - https://kmjp.hatenablog.jp/entry/2022/10/04/1000
   - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/1001_abc271
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc272_f
   contest: abc272
   index: F
@@ -8118,7 +8361,7 @@ problems:
   evidence:
   - https://qiita.com/sano192/items/298c551f0e63c9c93260
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: abc276_f
   contest: abc276
   index: F
@@ -8295,14 +8538,20 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: 逆向きに通ると重みの符号が反転するグラフで、2 点間の最長路を答える（いくらでも大きくできるなら inf）。
   approach: 重み付き Union-Find で差を管理し、矛盾が出た成分は inf
+  alternatives:
+  - pages:
+    - bellman-ford
+    summary: 辺 A→B を長さ C で通ると逆向きは長さ −C になるグラフで、クエリごとに 2 点間の最長路の長さを答え、届かなければ nan、いくらでも大きくできるなら inf と出す。
+    approach: クエリごとのベルマンフォード法は間に合わない。正の閉路がないこととポテンシャルが置けることが同じなので、重み付き Union-Find で矛盾した成分を inf にする
   pages:
   - {id: weighted-union-find, role: practice}
+  - {id: bellman-ford, role: practice}
   evidence:
   - https://drken1215.hatenablog.com/entry/2022/12/07/231851
   status: 確認済み
   unverified_in:
   - 03-graph.md:1259（節「5.3 未確認の候補（設計・執筆の段階で裏付けを取ること）」）
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc281_d
   contest: abc281
   index: D
@@ -8490,7 +8739,7 @@ problems:
   evidence:
   - https://kmjp.hatenablog.jp/entry/2022/12/18/0930
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: abc283_d
   contest: abc283
   index: D
@@ -9492,13 +9741,18 @@ problems:
     - divisor-inclusion-exclusion
     summary: '''.'' と ''#'' からなる予定 S について、条件を満たし、N 未満の N の約数 M を周期に持つ長さ N の勤務表の数を mod 998244353 で求める。'
     approach: 周期 d の文字列の数を求め、d の約数の周期で重複して数えた分を引く
+  - pages:
+    - mobius-function
+    summary: '''.'' と ''#'' からなる長さ N の予定 S について、''#'' の一部を ''.'' に変えてできる列のうち、N 未満の N の約数 M を周期に持つものの数を mod 998244353 で求める。'
+    approach: 周期 d を持つ列の数 F(d) から、最小周期がちょうど d の数をメビウス反転で戻し、答えを −Σ_{d|N, d<N} μ(N/d) F(d) とする
   pages:
   - {id: divisor-inclusion-exclusion, role: practice}
   - {id: kmp, role: example}
+  - {id: mobius-function, role: practice}
   evidence:
   - https://drken1215.hatenablog.com/entry/2023/06/07/153403
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc305_f
   contest: abc305
   index: F
@@ -9698,7 +9952,7 @@ problems:
   evidence:
   - https://qiita.com/ZOI_dayo/items/a55cc4342832efdc23ba
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc309_f
   contest: abc309
   index: F
@@ -10010,6 +10264,21 @@ problems:
   - https://drken1215.hatenablog.com/entry/2023/10/24/040204
   status: 確認済み
   checked: '2026-10-21'
+- id: abc315_g
+  contest: abc315
+  index: G
+  title: Ai + Bj + Ck = X (1 <= i, j, k <= N)
+  difficulty: 2315
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 正の整数 N・A・B・C・X が与えられ、1 ≤ i, j, k ≤ N を満たし Ai + Bj + Ck = X となる組 (i, j, k) の個数を求める。
+  approach: i を全探索して Bj + Ck = X − Ai を解き、一般解のうち 1 ≤ j, k ≤ N を満たす範囲の長さを数える
+  pages:
+  - {id: ext-gcd, role: challenge}
+  evidence:
+  - https://kmjp.hatenablog.jp/entry/2023/08/21/0900
+  status: 確認済み
+  checked: '2026-10-22'
 - id: abc317_d
   contest: abc317
   index: D
@@ -10099,6 +10368,22 @@ problems:
   - {id: fps-basics, role: example}
   evidence:
   - https://drken1215.hatenablog.com/entry/2023/09/03/161400
+  status: 確認済み
+  checked: '2026-10-22'
+- id: abc319_e
+  contest: abc319
+  index: E
+  title: Bus Stops
+  difficulty: 1353
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 家からバス停 1 まで X、バス停 i から i+1 へは P_i（≤ 8）の倍数の時刻に出るバスで T_i、最後のバス停から会社まで Y かかるとき、質問ごとの出発時刻に対して会社へ最も早く着く時刻を答える。
+  approach: 次の P_i の倍数まで待つ遷移をたどり、周期 840 で繰り返すので出発時刻 mod 840 ごとの到着時刻を前計算する
+  pages:
+  - {id: time-dependent-dijkstra, role: practice}
+  evidence:
+  - https://programming-hiroba.com/abc319-e/
+  - https://merom686.hatenablog.com/entry/2023/09/10/022053
   status: 確認済み
   checked: '2026-10-22'
 - id: abc319_g
@@ -10201,12 +10486,19 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: 部品の端子を電線でランダムにつないだときの、連結成分の個数の期待値を求める。
   approach: 連結成分になる部分集合ごとに、その集合がちょうど 1 つの成分になる場合の数を数える
+  alternatives:
+  - pages:
+    - counting-labeled-graphs
+    summary: N ≤ 17 個の部品の赤い端子と青い端子（どちらも M 個）を一様にランダムに 1 対 1 でつなぐとき、できるグラフの連結成分の個数の期待値を求める。
+    approach: S がちょうど 1 成分になる確率の和にし、f(S)（赤と青が同数ならその階乗）から最小の頂点を含む成分で引いて連結なものの数を O(3^N) で求める
   pages:
   - {id: subset-enumeration-dp, role: challenge}
+  - {id: counting-labeled-graphs, role: practice}
   evidence:
   - https://drken1215.hatenablog.com/entry/2023/09/26/105540
+  - https://kmjp.hatenablog.jp/entry/2023/09/23/0900
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc322_d
   contest: abc322
   index: D
@@ -10651,14 +10943,19 @@ problems:
     - segment-tree-monoids
     summary: 文字列の 1 文字の更新と、区間が回文かの判定のクエリを処理する。
     approach: 順方向・逆方向のハッシュ（と長さ）を載せる（例題は rolling-hash）
+  - pages:
+    - hash-safety
+    summary: 文字列の 1 文字を書き換える更新と、区間が回文かを問う質問を、合わせて Q 回処理する。
+    approach: 基数を 2 に固定すると落ちた記録がある。順方向・逆方向のハッシュを BIT に載せ、基数を実行時に乱択する
   pages:
   - {id: segment-tree-monoids, role: practice}
   - {id: rolling-hash, role: example}
+  - {id: hash-safety, role: practice}
   evidence:
   - https://note.com/syamashi/n/n8e580d4ce59d
   - https://merom686.hatenablog.com/entry/2023/12/03/001625
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: abc331_g
   contest: abc331
   index: G
@@ -10691,7 +10988,7 @@ problems:
   - https://qiita.com/rareshana/items/76af4e8d8dcbedfc8714
   - https://qiita.com/navel_tos/items/7d4db517b8a0c3d4d21b
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: abc332_f
   contest: abc332
   index: F
@@ -10731,12 +11028,18 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: 葉を 1 つずつ消す操作で頂点 1 を消すまでの最小の操作回数を求める。
   approach: 頂点 1 の子ごとの部分木サイズを求め、最大のもの以外を消す
+  alternatives:
+  - pages:
+    - leaf-first
+    summary: 木から葉を 1 つずつ消す操作をくり返し、頂点 1 を消すまでに要る操作の最小の回数を求める。
+    approach: 頂点 1 を葉にするには 1 本の枝を残してほかを消すしかないので、最大の子の部分木を残して N からその大きさを引く
   pages:
   - {id: tree-traversal, role: practice}
+  - {id: leaf-first, role: practice}
   evidence:
   - https://drken1215.hatenablog.com/entry/2024/11/02/192645
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc333_f
   contest: abc333
   index: F
@@ -10797,6 +11100,11 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: 緑のマスを 1 つ一様に選んで赤に塗り替えたときの、緑のマスの連結成分の数の期待値を求める。
   approach: 各マスが消えている時刻を区間として持ち、時間軸のセグ木の上でロールバック Union-Find を使う
+  alternatives:
+  - pages:
+    - lowlink
+    summary: 緑のマスを 1 つ一様に選んで赤に塗り替えたときの、緑のマスの連結成分の数の期待値を求める。
+    approach: 各マスを除いたときの成分の増分を ord・low と子の数で数え（根は子の数 − 1、孤立は −1）、総和をマスの数で割る
   pages:
   - {id: offline-dynamic-connectivity, role: example}
   - {id: lowlink, role: practice}
@@ -10804,7 +11112,7 @@ problems:
   - https://kmjp.hatenablog.jp/entry/2023/12/23/1030
   - https://amentorimaru.hatenablog.com/entry/2025/04/11/210228
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: abc335_e
   contest: abc335
   index: E
@@ -11055,14 +11363,20 @@ problems:
     - wavelet-matrix
     summary: 区間内で X 以下の要素の和を、前の答えで次の質問が決まる形で多数答える。
     approach: 区間の x 以下の和を Wavelet Matrix で求める（例題はマージソート木）
+  - pages:
+    - persistent-data-structures
+    summary: 列の区間に含まれる X 以下の要素の和を、前の答えで次の質問が決まる形で多数答える。
+    approach: 接頭辞を入れた値ごとの個数と和のセグメント木を経路コピーで版として残し、2 つの版の差で区間の X 以下の和を答える
   pages:
   - {id: merge-sort-tree, role: example}
   - {id: wavelet-matrix, role: practice}
+  - {id: persistent-data-structures, role: practice}
   evidence:
   - https://tayu0110.hatenablog.com/entry/2024/02/05/205618
   - https://kmjp.hatenablog.jp/entry/2024/02/03/0900
+  - https://hackmd.io/@rfr9XKMgQ7iE-PzOXscYEw/ry8CYJA7yl
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc340_c
   contest: abc340
   index: C
@@ -11114,6 +11428,21 @@ problems:
   - https://tayu0110.hatenablog.com/entry/2024/02/11/015113
   status: 確認済み
   checked: '2026-10-21'
+- id: abc340_f
+  contest: abc340
+  index: F
+  title: S = 1
+  difficulty: 1516
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 整数の点 (X, Y) が与えられ、原点と (X, Y) と (A, B) を頂点とする三角形の面積がちょうど 1 になる整数の点 (A, B) を 1 つ求める（なければ −1 を出す）。
+  approach: 面積の式から YA − XB = ±2 の一次不定方程式にし、gcd が 1 なら拡張ユークリッドの解を 2 倍、2 ならそのまま、それ以外は −1
+  pages:
+  - {id: ext-gcd, role: practice}
+  evidence:
+  - https://programming-hiroba.com/abc340-f/
+  status: 確認済み
+  checked: '2026-10-22'
 - id: abc340_g
   contest: abc340
   index: G
@@ -11203,12 +11532,19 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: 長さ N の非負整数列から i < j を選んだとき、A_i × A_j が平方数になる組の個数を求める。
   approach: 平方因子を除いた核が等しい組を数える。0 は何と掛けても平方数
+  alternatives:
+  - pages:
+    - spf-sieve
+    summary: 0 以上 2×10^5 以下の N 個の整数から、積が平方数になる組 i < j の個数を数える。
+    approach: 最小素因数の表で各 A_i を分解して平方因子を除いた核に直し、核が等しい組を数える（0 は別に数える）
   pages:
   - {id: prime-exponent-vector, role: example}
+  - {id: spf-sieve, role: practice}
   evidence:
   - https://drken1215.hatenablog.com/entry/2024/11/23/160056
+  - https://programming-hiroba.com/abc342-d/
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: abc342_e
   contest: abc342
   index: E
@@ -11268,7 +11604,7 @@ problems:
   evidence:
   - https://www.cnblogs.com/Lanly/p/18058486
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: abc343_f
   contest: abc343
   index: F
@@ -11482,7 +11818,7 @@ problems:
   - https://kanpurin.hatenablog.com/entry/2020/04/07/182948
   - https://qiita.com/gotoki_no_joe/items/6a3a10194d5a276281ca
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: abc348_f
   contest: abc348
   index: F
@@ -11530,6 +11866,22 @@ problems:
   - https://programming-hiroba.com/abc349-e/
   status: 確認済み
   checked: '2026-10-21'
+- id: abc349_f
+  contest: abc349
+  index: F
+  title: Subsequence LCM
+  difficulty: 2169
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 長さ N の正整数列と M が与えられ、空でない部分列のうち要素の lcm がちょうど M になるものの数を 998244353 で割った余りで求める。
+  approach: M の約数でない要素を捨て、指数が M と等しい素因数の集合の bit に潰して、部分集合ゼータ変換 → 2^g → メビウス変換で全 bit の分を取り出す
+  pages:
+  - {id: zeta-mobius-subset, role: practice}
+  evidence:
+  - https://merom686.hatenablog.com/entry/2024/04/14/011833
+  - https://www.cnblogs.com/MoyouSayuki/p/18134468
+  status: 確認済み
+  checked: '2026-10-22'
 - id: abc350_c
   contest: abc350
   index: C
@@ -11562,6 +11914,22 @@ problems:
   - https://programming-hiroba.com/
   status: 確認済み
   checked: null
+- id: abc350_f
+  contest: abc350
+  index: F
+  title: Transpose
+  difficulty: 1601
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 英大文字・英小文字と対応の取れた括弧からなる文字列で、括弧の中を逆順にして大文字と小文字を入れ替え、括弧を消す操作を内側からくり返した後の文字列を求める。
+  approach: 括弧の対応をスタックで求め、区間と向きを引数にとる再帰で各文字を 1 回ずつ読む（大小は深さの偶奇）
+  pages:
+  - {id: parsing, role: practice}
+  evidence:
+  - https://torus711.hatenablog.com/entry/2024/04/21/194303
+  - https://qiita.com/_mattu34_/items/9eb21e83d9f86aa10d79
+  status: 確認済み
+  checked: '2026-10-22'
 - id: abc350_g
   contest: abc350
   index: G
@@ -11580,16 +11948,22 @@ problems:
     - bitset-speedup
     summary: 森への辺の追加と、2 頂点の共通の隣接頂点を答えるクエリを処理する。
     approach: 次数がしきい値（√N 程度）以上の頂点だけ隣接集合を bitset で持ち、両端が大きければ AND、片方が小さければ隣接リストを調べる（全頂点の bitset は N²/8 バイトで置けない）
+  - pages:
+    - degree-sqrt
+    summary: 辺のない N 頂点のグラフに、森であることを保ちながら辺を 1 本ずつ足し、その合間に 2 頂点の両方に隣接する頂点を 1 つ答える質問にオンラインで答える。
+    approach: どちらかの次数が √N 未満ならその隣を走査して隣接を調べ、両方重ければ重い頂点の隣接集合（bitset）か、重い頂点 2 つ以上に隣接する候補だけを調べる
   pages:
   - {id: dynamic-tree, role: practice}
   - {id: small-to-large, role: practice}
   - {id: bitset-speedup, role: practice}
+  - {id: degree-sqrt, role: practice}
   evidence:
   - https://drken1215.hatenablog.com/entry/2024/04/21/014200
   - https://drken1215.hatenablog.com/archive/category/Link-Cut%E6%9C%A8
   - https://www.cnblogs.com/No-play-Yes-splay/p/18148245/atcoder-beginner-contest-350-sol
+  - https://kmjp.hatenablog.jp/entry/2024/04/22/0900
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc351_d
   contest: abc351
   index: D
@@ -12506,14 +12880,19 @@ problems:
     - spf-sieve
     summary: 数列の要素を 1 つ選んでその真の約数に置き換える操作を 2 人が交互に行い、操作できなくなった方が負けるとき、勝者を求める。
     approach: 素因数の個数（重複込み）を Nim の山の大きさとみて XOR する
+  - pages:
+    - nim
+    summary: N 個の整数から交互に 1 つを選んで自分以外の約数に置き換え、置き換えられなくなった方が負けのとき、勝つのはどちらかを求める。
+    approach: 各整数の素因数の個数（重複を含む）を山とする Nim とみて、XOR が 0 でなければ先手の勝ち
   pages:
   - {id: spf-sieve, role: practice}
   - {id: grundy-number, role: example}
+  - {id: nim, role: practice}
   evidence:
   - https://programming-hiroba.com/abc368-f/
   - https://qiita.com/hyouri/items/f80a169412d5a969c25d
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc369_c
   contest: abc369
   index: C
@@ -12769,6 +13148,11 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: 各道路について、その道路だけを通行止めにしたとき都市 1 から都市 N への最短距離が変わるかを判定する。
   approach: 両端からの距離と最短路の本数で、その辺がすべての最短路に含まれるかを調べる（最短路に乗る辺の部分グラフで橋を求めてもよい）
+  alternatives:
+  - pages:
+    - lowlink
+    summary: 各道路について、その道路だけを通行止めにしたとき都市 1 から都市 N への最短距離が変わるかを判定する。
+    approach: 最短路に乗る辺だけの部分グラフを作り、その橋だけで答えが変わる（多重辺に注意）
   pages:
   - {id: shortest-path-dag, role: challenge}
   - {id: lowlink, role: practice}
@@ -12778,7 +13162,7 @@ problems:
   status: 確認済み
   unverified_in:
   - 03-graph.md:444（同じ行）
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc376_d
   contest: abc376
   index: D
@@ -12900,12 +13284,19 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: 末尾の削除と追加で、それより前の文字列のどれかに一致させる最小のコストを、各文字列について求める。
   approach: 各節点に、そこから伸ばして一致させる最小コストを持つ（節 dp-on-trie）
+  alternatives:
+  - pages:
+    - hash-safety
+    summary: 各文字列 S_k について、末尾の 1 文字の削除と末尾への 1 文字の追加をくり返して、空文字列かそれより前の文字列のどれかに一致させる最小の操作回数を求める。
+    approach: prefix のハッシュごとに最短の長さを map に記録して |S_k| + f − 2l の最小を取る。約 2×10^5 個のハッシュが比べ合うので mod 2^61−1 か二重ハッシュと乱択した基数を使う
   pages:
   - {id: trie, role: practice}
+  - {id: hash-safety, role: practice}
   evidence:
   - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/1026_abc377
+  - https://kmjp.hatenablog.jp/entry/2024/10/29/0900
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: abc378_d
   contest: abc378
   index: D
@@ -12945,12 +13336,18 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: 木に辺を 1 本足してできる閉路について、閉路上の頂点の次数がすべて 3 になるような足し方の数を求める。
   approach: 次数 3 の頂点の成分ごとに、接する次数 2 の頂点の組を数える
+  alternatives:
+  - pages:
+    - namori-graph
+    summary: N 頂点の木に辺を 1 本足して単純グラフを作るとき、できる閉路の上の頂点の次数がすべて 3 になる足し方の数を求める。
+    approach: 木に辺を 1 本足すと閉路が 1 つできるので、次数 3 の頂点の成分ごとに接する次数 2 の頂点の数 K から K(K−1)/2 を足す
   pages:
   - {id: tree-basics, role: practice}
+  - {id: namori-graph, role: practice}
   evidence:
   - https://drken1215.hatenablog.com/entry/2024/11/04/002341
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: abc378_g
   contest: abc378
   index: G
@@ -12997,6 +13394,21 @@ problems:
   - https://drken1215.hatenablog.com/entry/2024/11/10/181617
   status: 確認済み
   checked: '2026-10-21'
+- id: abc379_f
+  contest: abc379
+  index: F
+  title: Buildings 2
+  difficulty: 1659
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 高さが相異なる N 棟のビルが一列に並び、l < r の組の質問ごとに、r より東にあるビルのうち l と r の両方から見える（間のビルがすべてそれより低い）ものの数を答える。
+  approach: 左で最も近い高いビルの位置 p(j) の列にマージソート木を作り、区間 (r, N] で p(j) ≤ l の個数を数える
+  pages:
+  - {id: merge-sort-tree, role: practice}
+  evidence:
+  - https://www.cnblogs.com/RomanLin/p/18677191
+  status: 確認済み
+  checked: '2026-10-22'
 - id: abc379_g
   contest: abc379
   index: G
@@ -13295,6 +13707,21 @@ problems:
   - https://blog.nishigake.net/posts/20250120/
   status: 確認済み
   checked: null
+- id: abc389_g
+  contest: abc389
+  index: G
+  title: Odd Even Graph
+  difficulty: 2762
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 素数 P と N について、辺の数 M ごとに、頂点 1 からの距離が偶数の頂点と奇数の頂点の数が等しい N 頂点の連結な単純無向グラフの数を P で割った余りで求める。
+  approach: 距離の層ごとに頂点を配る DP に偶奇の差と辺の数を状態として足し、層の間と層の中の辺の張り方を辺の数ごとに前計算する
+  pages:
+  - {id: counting-labeled-graphs, role: challenge}
+  evidence:
+  - https://kmjp.hatenablog.jp/entry/2025/01/19/1000
+  status: 確認済み
+  checked: '2026-10-22'
 - id: abc390_d
   contest: abc390
   index: D
@@ -13683,13 +14110,19 @@ problems:
     - sqrt-decomposition
     summary: 値を 1 つずつ追加するたびに、昇順に並べたときの奇数番目の和を答える（前の答えで次の値が決まる）。
     approach: 約 √Q 個のバケットで整列を保つ（想定解は動的セグ木）
+  - pages:
+    - binary-trie
+    summary: 空の多重集合に値を 1 つずつ追加し、そのたびに昇順に並べたときの奇数番目の要素の和を答える（追加する値は前の答えから決まる）。
+    approach: 値域 [0, 2^30) の Binary Trie（動的セグメント木）の各ノードに個数・奇数番目の和・偶数番目の和を持ち、左の個数の偶奇で右の和を入れ替えて合成する
   pages:
   - {id: segment-tree-on-values, role: challenge}
   - {id: sqrt-decomposition, role: practice}
+  - {id: binary-trie, role: practice}
   evidence:
   - https://kmjp.hatenablog.jp/entry/2025/04/28/1030
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0427_abc403
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc404_f
   contest: abc404
   index: F
@@ -13727,6 +14160,38 @@ problems:
   - https://kmjp.hatenablog.jp/entry/2025/05/04/0930
   status: 確認済み
   checked: '2026-10-21'
+- id: abc405_e
+  contest: abc405
+  index: E
+  title: Fruit Lineup
+  difficulty: 1259
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: リンゴ A 個・オレンジ B 個・バナナ C 個・ブドウ D 個を、種類どうしの前後の条件を満たして一列に並べる方法の数を 998244353 で割った余りで求める。
+  approach: 境目の左のバナナの個数 k で分けて二項係数 2 つの積の和にし、O(C) のループで足す（和の範囲が切れるので閉じた式にしない）
+  pages:
+  - {id: binomial-identities, role: practice}
+  evidence:
+  - https://qiita.com/testcampus/items/1389257a0c177ceb736a
+  - https://rsk0315.hatenablog.com/entry/2025/05/11/201737
+  status: 確認済み
+  checked: '2026-10-22'
+- id: abc405_f
+  contest: abc405
+  index: F
+  title: Chord Crossing
+  difficulty: 1588
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 円周上の 2N 個の点の間に互いに交わらない M 本の弦が引かれていて、質問ごとに 2 点を結ぶ弦が与えられ、既存の弦のうちそれと交わるものの本数を答える。
+  approach: 円を切って一列にし、相手の端点の位置を書いた列で、区間の中で相手が区間の外にある端点を数える
+  pages:
+  - {id: merge-sort-tree, role: practice}
+  evidence:
+  - https://merom686.hatenablog.com/entry/2025/05/11/021302
+  - https://qiita.com/yuu_kyopro/items/51ad67c3c980bf91c5a6
+  status: 確認済み
+  checked: '2026-10-22'
 - id: abc405_g
   contest: abc405
   index: G
@@ -13789,6 +14254,22 @@ problems:
   - https://kmjp.hatenablog.jp/entry/2025/05/27/0900
   status: 確認済み
   checked: '2026-10-21'
+- id: abc409_e
+  contest: abc409
+  index: E
+  title: Pair Annihilation
+  difficulty: 973
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 辺に重みのある木の各頂点に電子か陽電子が置かれ（合計は打ち消し合う数）、粒子を辺に沿って動かすと重みの分だけ費用がかかるとき、すべてを打ち消すのに要る費用の最小を求める。
+  approach: 帰りがけ順に自分の値と子からの余りを足して親へ送り、送った量の絶対値 × 辺の重みを足す（辺ごとの下界を達成する）
+  pages:
+  - {id: leaf-first, role: practice}
+  evidence:
+  - https://qiita.com/untan/items/92f4a5e02356bdb9fae7
+  - https://qiita.com/gotoki_no_joe/items/6431ec91a0bef27665aa
+  status: 確認済み
+  checked: '2026-10-22'
 - id: abc409_f
   contest: abc409
   index: F
@@ -13855,7 +14336,7 @@ problems:
   - https://qiita.com/Shizen_Tota/items/687ddc17baff09e97176
   - https://kcpc.hatenablog.com/entry/2025/06/28/233000
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: abc412_e
   contest: abc412
   index: E
@@ -13920,6 +14401,22 @@ problems:
   - https://kmjp.hatenablog.jp/entry/2025/07/05/0930
   status: 確認済み
   checked: '2026-10-21'
+- id: abc414_e
+  contest: abc414
+  index: E
+  title: Count A%B=C
+  difficulty: 1296
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 1 以上 N 以下の互いに異なる整数の組 (a, b, c) で、a を b で割った余りが c になるものの個数を 998244353 で割った余りで求める（3 ≤ N ≤ 10^12）。
+  approach: b を固定して Σ(N + 1 − b − ⌊N/b⌋) にまとめ、Σ⌊N/b⌋ を商が同じ区間ごとに O(√N) で求める
+  pages:
+  - {id: floor-quotient-enum, role: practice}
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0712_abc414
+  - https://zenn.dev/nakst_hide/articles/f5b3e3a3473e9d
+  status: 確認済み
+  checked: '2026-10-22'
 - id: abc414_g
   contest: abc414
   index: G
@@ -14564,15 +15061,15 @@ problems:
   experimental: false
   difficulty_fetched: '2026-10-21'
   summary: 辺に重みのある無向グラフで、2 頂点を結ぶウォークの重み（通った辺の重みの XOR）の最小値が K 以下になる頂点の組の数を求める。
-  approach: サイクル基底と XOR 基底を分割統治と組み合わせる（research/00 §2.3.8 の分類）
+  approach: 全域木で根からの XOR を求め、すべての辺の閉路の XOR を基底にする。各頂点の値を基底で最小化すると、ウォークの最小値は 2 頂点の値の XOR になるので、XOR が K 以下の組を Binary Trie で数える
   alternatives:
   - pages:
-    - xor-basis
-    summary: 辺に重みのある無向グラフで、2 頂点を結ぶウォークの重み（通った辺の重みの XOR）の最小値が K 以下になる頂点の組の数を求める。
-    approach: 全域木で根からの XOR を求め、すべての辺の閉路の XOR を基底にする。各頂点の値を基底で最小化すると、ウォークの最小値は 2 頂点の値の XOR になるので、XOR が K 以下の組を Binary Trie で数える
+    - binary-trie
+    summary: 辺に重みのある連結な無向グラフで、2 頂点を結ぶウォークの重み（通った辺の重みの XOR）の最小値が K 以下になる頂点の組の数を求める。
+    approach: 閉路の値の XOR 基底で各頂点の根からの XOR を最小化し、Binary Trie で XOR が K+1 未満の組を数える
   pages:
-  - {id: divide-and-conquer, role: challenge}
   - {id: xor-basis, role: practice}
+  - {id: binary-trie, role: challenge}
   evidence:
   - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0328_abc451
   - https://kmjp.hatenablog.jp/entry/2026/03/28/0930
@@ -14586,7 +15083,7 @@ problems:
   - 06-math-nt.md:1082（同じ行）
   - 06-math-nt.md:1079（節「7.5 未確認の問題と今後」）
   - 06-math-nt.topics.yaml:1909（問題の項目）
-  checked: '2026-10-21'
+  checked: '2026-10-22'
   note: research/06 は未確認としたが、research/00・03 が ikatakos 氏・kmjp 氏の記事で確かめている。ikatakos 氏の記録の解法の節で問いを確かめ、summary を書いた
 - id: abc452_d
   contest: abc452
@@ -14703,15 +15200,21 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: 多数の数列について、丸ごとのコピー・1 点更新・区間和のクエリを処理する。
   approach: 永続セグ木（コピーは根の指し替え）。先読みして版の木をオイラーツアーでたどってもよい
+  alternatives:
+  - pages:
+    - root-path-dfs
+    summary: 長さ M の数列が N 本あり、ある数列を別の数列へ丸ごと写す・1 点を書き換える・区間の和を答える、の 3 種類のクエリを順に処理する。
+    approach: クエリを先読みして版の木を作り、セグメント木を 1 つだけ持って DFS し、入るとき 1 点更新して元の値を覚え、出るときに戻す
   pages:
   - {id: persistent-data-structures, role: example}
+  - {id: root-path-dfs, role: practice}
   evidence:
   - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0411_abc453
   - https://www.cnblogs.com/CR-J/p/19853087
   status: 確認済み
   unverified_in:
   - 00-curriculum.md:763（節「優先度 B（候補。裏付けが未確認、または頻度が低い・発展寄りのもの。担当分野で確認してほしい）」）
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc454_d
   contest: abc454
   index: D
@@ -15267,15 +15770,21 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: 重複を含む列をランダムに並べ替えたとき、どの位置も指定の値と一致しない確率を求める。
   approach: 撹乱順列の包除を一般化し、FPS で項をまとめて計算する
+  alternatives:
+  - pages:
+    - inclusion-exclusion-dp
+    summary: 色の付いた N 個の玉を一様に無作為な順に取り出すとき、どの i 番目に取り出す玉も指定の色 G_i と違う確率を mod 998244353 で求める。
+    approach: 一致を k 組指定する包除で、色ごとの多項式 Σ C(x,i)C(y,i)i! z^i を分割統治で掛けて r_k を作り、Σ(−1)^k r_k (N−k)!/N! を取る
   pages:
   - {id: inclusion-exclusion, role: challenge}
+  - {id: inclusion-exclusion-dp, role: practice}
   evidence:
   - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0613_abc462
   - https://kmjp.hatenablog.jp/entry/2026/06/13/0900
   status: 確認済み
   unverified_in:
   - 00-curriculum.md:763（節「優先度 B（候補。裏付けが未確認、または頻度が低い・発展寄りのもの。担当分野で確認してほしい）」）
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc463_d
   contest: abc463
   index: D
@@ -15854,13 +16363,20 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: '+・-・# の盤面で、# でないマスと、そこから # を通らずに左右と下へ進んで届くマスを # に変える操作を何度でも行い、+ の数から - の数を引いた値を最大化する。'
   approach: DAG 上の選択の条件を最小カットに直す
+  alternatives:
+  - pages:
+    - zeta-mobius-subset
+    summary: '+・-・# の盤面で、# でないマスと、そこから # を通らずに左右と下へ進んで届くマスを # に変える操作を何度でも行い、残った + の数から - の数を引いた値を最大化する。'
+    approach: 行ごとに埋めた成分の bit を持つ DP にし、下の行で少なくとも mask を埋めたときの最良値を max の上位集合のゼータ変換で求める
   pages:
   - {id: project-selection, role: example}
+  - {id: zeta-mobius-subset, role: practice}
   evidence:
   - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0822_abc472
   - https://qiita.com/drken/items/52aafd8c073b37749539
+  - https://kmjp.hatenablog.jp/entry/2026/08/22/0930
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: abc473_d
   contest: abc473
   index: D
@@ -16337,13 +16853,18 @@ problems:
     - divisor-count-bound
     summary: 1 + 2 + … + k が N の倍数になる最小の正の整数 k を求める（N ≤ 10^15）。
     approach: 2N を互いに素な2つの約数に分ける方法を全て試し、それぞれ CRT で解く
+  - pages:
+    - ext-gcd
+    summary: 1 + 2 + … + k が N の倍数になる最小の正の整数 k を求める（N ≤ 10^15）。
+    approach: 2N を互いに素な A·B に分けるごとに、一次合同式 Aq ≡ −1 (mod B) を拡張ユークリッドで解いて最小を取る
   pages:
   - {id: divisor-count-bound, role: practice}
   - {id: crt, role: example}
+  - {id: ext-gcd, role: challenge}
   evidence:
   - https://drken1215.hatenablog.com/entry/2020/09/23/080300
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: agc001_e
   contest: agc001
   index: E
@@ -16470,12 +16991,18 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: 木の頂点を先手が白、後手が黒で交互に塗り、塗り終えた後に黒と隣り合う白を黒に変えたとき、白が残れば先手の勝ちとなるゲームで、勝つのはどちらかを求める。
   approach: 木に完全マッチングがあれば、後手が相手の塗った頂点の相方を塗り続けて勝てる（ペアリング戦略）
+  alternatives:
+  - pages:
+    - leaf-first
+    summary: 2 人が交互に木の頂点を白と黒に塗り、塗り終えた後に黒と隣り合う白を黒に変えたとき白が残るかで勝敗が決まるゲームで、勝つのはどちらかを求める。
+    approach: 完全マッチングがあれば後手の勝ち。葉と隣を組む貪欲で最大マッチングを作って判定する
   pages:
   - {id: game-basics, role: challenge}
+  - {id: leaf-first, role: challenge}
   evidence:
   - https://drken1215.hatenablog.com/entry/2019/05/30/021200
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: agc018_a
   contest: agc018
   index: A
@@ -16587,6 +17114,22 @@ problems:
   - https://drken1215.hatenablog.com/entry/2018/07/18/210000
   status: 確認済み
   checked: '2026-10-21'
+- id: agc031_a
+  contest: agc031
+  index: A
+  title: Colorful Subsequence
+  difficulty: 953
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 文字列 S の部分列（取り出す位置が違えば別のものとする）のうち、含まれる文字がすべて異なるものの数を求める。
+  approach: 文字ごとに（出現回数 + 1）通りを掛け、空の部分列の 1 を引く
+  pages:
+  - {id: counting-basics, role: practice}
+  evidence:
+  - https://drken1215.hatenablog.com/entry/2019/03/18/125300
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2019/0316_agc031
+  status: 確認済み
+  checked: '2026-10-22'
 - id: agc031_b
   contest: agc031
   index: B
@@ -16617,6 +17160,22 @@ problems:
   - https://drken1215.hatenablog.com/entry/2019/03/24/091900
   status: 確認済み
   checked: '2026-10-21'
+- id: agc032_c
+  contest: agc032
+  index: C
+  title: Three Circuits
+  difficulty: 2284
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 単純で連結な無向グラフ（N, M ≤ 10^5）の辺をすべて 1 回ずつ使い、ちょうど 3 つの閉路（頂点の重複は許す閉じたウォーク）に分けられるかを判定する。
+  approach: 全頂点の次数が偶数が必要。次数 6 以上があれば Yes、次数 4 が 3 個以上なら Yes、1 個以下なら No、2 個なら一方から他方を通らずに戻れるかを DFS で調べる
+  pages:
+  - {id: euler-path, role: practice}
+  evidence:
+  - https://drken1215.hatenablog.com/entry/2019/03/28/161000
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2019/0323_agc032
+  status: 確認済み
+  checked: '2026-10-22'
 - id: agc033_a
   contest: agc033
   index: A
@@ -16633,6 +17192,21 @@ problems:
   - https://blog.hamayanhamayan.com/entry/2019/05/05/000255
   status: 確認済み
   checked: null
+- id: agc035_b
+  contest: agc035
+  index: B
+  title: Even Degrees
+  difficulty: 2039
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 連結な単純無向グラフのすべての辺に向きを付け、どの頂点も出次数が偶数になるようにする向き付けを 1 つ出力し、できなければ -1 を出力する。
+  approach: M が奇数なら不可能。DFS で葉から、未処理の辺を頂点を共有する 2 本の組にして外向きにし、余りは親への辺と組にする
+  pages:
+  - {id: graph-construction, role: practice}
+  evidence:
+  - https://kmjp.hatenablog.jp/entry/2019/07/16/0900
+  status: 確認済み
+  checked: '2026-10-22'
 - id: agc038_c
   contest: agc038
   index: C
@@ -16761,6 +17335,22 @@ problems:
   - https://drken1215.hatenablog.com/entry/2018/02/14/121239
   status: 確認済み
   checked: '2026-10-21'
+- id: arc013_3
+  contest: arc013
+  index: C
+  title: 笑いをとれるかな？
+  difficulty: 1831
+  experimental: true
+  difficulty_fetched: '2026-10-21'
+  summary: ハバネロの入ったいくつかの直方体の豆腐を、交互に格子面で切って片側を食べ、ハバネロを食べた方が負けのとき、先手が勝つかを求める。
+  approach: ハバネロを含む最小の直方体の外側の 6 方向の厚みを山とみて、全部の XOR で判定する
+  pages:
+  - {id: nim, role: practice}
+  evidence:
+  - https://kmjp.hatenablog.jp/entry/2013/03/23/0930
+  - https://kmyk.github.io/blog/writeups/algo-atcoder-arc_013/
+  status: 確認済み
+  checked: '2026-10-22'
 - id: arc022_2
   contest: arc022
   index: B
@@ -16835,9 +17425,14 @@ problems:
     - balanced-bst
     summary: 数の集合への追加と、小さい方から x 番目の数を答えて削除するクエリを処理する。
     approach: BIT 上の二分探索でも平衡二分探索木でも解ける
+  - pages:
+    - binary-trie
+    summary: 数の集合に値を追加するクエリと、小さい方から x 番目の値を出力してそれを集合から取り除くクエリを処理する。
+    approach: 各ノードに個数を持つ Binary Trie で、左の子の個数と K を比べて降りて K 番目を取り出し、削除する
   pages:
   - {id: kth-element, role: example}
   - {id: balanced-bst, role: practice}
+  - {id: binary-trie, role: practice}
   evidence:
   - https://drken1215.hatenablog.com/entry/2020/02/29/035900
   status: 確認済み
@@ -16857,6 +17452,37 @@ problems:
   - https://drken1215.hatenablog.com/entry/2021/07/03/041500
   status: 確認済み
   checked: '2026-10-21'
+- id: arc038_d
+  contest: arc038
+  index: D
+  title: 有向グラフと数
+  difficulty: 3009
+  experimental: true
+  difficulty_fetched: '2026-10-21'
+  summary: 各頂点に値のある有向グラフで、頂点 1 の駒を 2 人が交互に辺に沿って動かすか終了を宣言し、終了時（または非常に多くの手で打ち切られた時）の頂点の値を先手は大きく後手は小さくしたいとき、最適に動いたときの値を求める。
+  approach: 答えを二分探索し、（頂点, 手番）の 2N 状態のゲームを逆辺と出次数のカウンタで後退解析する（確定しない状態は先手の勝ちとしない）
+  pages:
+  - {id: game-retrograde-analysis, role: challenge}
+  evidence:
+  - https://drken1215.hatenablog.com/entry/2019/01/28/103000
+  - https://kmjp.hatenablog.jp/entry/2015/05/03/1000
+  status: 確認済み
+  checked: '2026-10-22'
+- id: arc039_d
+  contest: arc039
+  index: D
+  title: 旅行会社高橋君
+  difficulty: 2550
+  experimental: true
+  difficulty_fetched: '2026-10-21'
+  summary: 無向グラフで、頂点 A から B を経て C へ、同じ橋を 2 度渡らずに行けるかをクエリごとに答える。
+  approach: 二重辺連結成分で縮約した木の上で、B の成分が A と C の成分を結ぶ道に乗るかを LCA の距離で判定する
+  pages:
+  - {id: lowlink, role: challenge}
+  evidence:
+  - https://ei1333.github.io/luzhiled/snippets/graph/two-edge-connected-components.html
+  status: 確認済み
+  checked: '2026-10-22'
 - id: arc042_d
   contest: arc042
   index: D
@@ -16872,6 +17498,21 @@ problems:
   - https://drken1215.hatenablog.com/entry/2020/11/04/045400
   status: 確認済み
   checked: null
+- id: arc044_b
+  contest: arc044
+  index: B
+  title: 最短路問題
+  difficulty: 1744
+  experimental: true
+  difficulty_fetched: '2026-10-21'
+  summary: 頂点 1 から各頂点までの最短距離の列が与えられ、その距離を実現する N 頂点の単純無向グラフの個数を 10^9+7 で割った余りで求める。
+  approach: 辺は距離が同じか 1 違う頂点の間だけなので、層ごとに (2^f(d−1) − 1)^f(d) と 2^(f(d)(f(d)−1)/2) を掛ける
+  pages:
+  - {id: graph-construction, role: practice}
+  evidence:
+  - https://kmjp.hatenablog.jp/entry/2015/09/12/1030
+  status: 確認済み
+  checked: '2026-10-22'
 - id: arc045_c
   contest: arc045
   index: C
@@ -16887,6 +17528,22 @@ problems:
   - https://drken1215.hatenablog.com/entry/2019/03/10/195800
   status: 確認済み
   checked: '2026-10-21'
+- id: arc046_b
+  contest: arc046
+  index: B
+  title: 石取り大作戦
+  difficulty: 1260
+  experimental: true
+  difficulty_fetched: '2026-10-21'
+  summary: N 個の石の山から、先手は 1 個以上 A 個以下、後手は 1 個以上 B 個以下を交互に取り、最後の石を取った方が勝つとき、勝つのはどちらかを求める。
+  approach: N ≤ A なら先手。A = B なら N mod (A+1) が 0 かで決まり、A > B なら先手、A < B なら後手が勝つ
+  pages:
+  - {id: nim, role: practice}
+  evidence:
+  - https://kmyk.github.io/blog/writeups/algo-atcoder-arc_046_b/
+  - https://scrapbox.io/esaka-sandbox/AtCoder_Regular_Contest_046_-_B_-_%E7%9F%B3%E5%8F%96%E3%82%8A%E5%A4%A7%E4%BD%9C%E6%88%A6
+  status: 確認済み
+  checked: '2026-10-22'
 - id: arc054_b
   contest: arc054
   index: B
@@ -17163,6 +17820,21 @@ problems:
   - https://drken1215.hatenablog.com/entry/2019/04/28/114800
   status: 確認済み
   checked: null
+- id: arc074_d
+  contest: arc074
+  index: F
+  title: Lotus Leaves
+  difficulty: 2208
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: グリッド上の葉から同じ行か同じ列にある葉へ跳べる蛙が、始点 S から終点 T の葉に着けないように、S と T 以外の葉を取り除くときの最小の枚数を求める（切り離せなければ −1 を出力する）。
+  approach: 葉を入口と出口に分けて容量 1、跳ぶ移動を容量 ∞ にして S から T への最大流を求める（行・列の中継頂点で辺を減らす）
+  pages:
+  - {id: min-cut, role: practice}
+  evidence:
+  - https://kmjp.hatenablog.jp/entry/2017/05/20/0930
+  status: 確認済み
+  checked: '2026-10-22'
 - id: arc075_c
   contest: arc075
   index: E
@@ -17172,12 +17844,19 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: 平均が K 以上の連続部分列の個数を求める。
   approach: A_i − K の累積和で S_l ≤ S_r の組を BIT で数える
+  alternatives:
+  - pages:
+    - divide-and-conquer
+    summary: 平均が K 以上になる連続部分列の個数を求める。
+    approach: K を引いた累積和で S_i ≤ S_j（i < j）の組を数える問題にし、マージソートで左右をまたぐ組を数える
   pages:
   - {id: inversion-number, role: practice}
+  - {id: divide-and-conquer, role: practice}
   evidence:
   - https://drken1215.hatenablog.com/entry/2020/04/24/015400
+  - https://kmjp.hatenablog.jp/entry/2017/06/03/1030
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: arc076_b
   contest: arc076
   index: D
@@ -17588,12 +18267,18 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: N 個の袋の硬貨を交互に皿へ移し、袋が空になったら皿から 1 枚以上の硬貨を交互に取り除くゲームで、動けなくなった方が負けのとき、勝つのはどちらかを求める。
   approach: 同じ枚数の袋が偶数個ずつあるとき後手が相手の手を真似できることを使って勝敗を決める
+  alternatives:
+  - pages:
+    - nim
+    summary: N 個の袋の硬貨を交互に皿へ移し、袋が空になったら皿から 1 枚以上の硬貨を交互に取り除くゲームで、動けなくなった方が負けのとき、勝つのはどちらかを求める。
+    approach: 後半は皿を山とする Nim。前半で XOR を 0 にできるかを N の偶奇と同じ枚数の袋が 2 つずつあるかで判定する
   pages:
   - {id: game-basics, role: practice}
+  - {id: nim, role: challenge}
   evidence:
   - https://drken1215.hatenablog.com/entry/2020/10/14/120100
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: arc106_c
   contest: arc106
   index: C
@@ -17639,6 +18324,22 @@ problems:
   - https://drken1215.hatenablog.com/entry/2020/10/25/140600
   status: 確認済み
   checked: '2026-10-21'
+- id: arc107_d
+  contest: arc107
+  index: D
+  title: Number of Multisets
+  difficulty: 2099
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 1, 1/2, 1/4, … の形の有理数をちょうど N 個選んで和を K にする多重集合の数を求める（K ≤ N ≤ 3000）。
+  approach: 1 を含むかで分け、f(N, K) = f(N−1, K−1) + f(N, 2K) を K の降順に埋めて O(N^2)
+  pages:
+  - {id: partition-number, role: practice}
+  evidence:
+  - https://drken1215.hatenablog.com/entry/2020/11/01/175900
+  - https://kmjp.hatenablog.jp/entry/2020/11/04/0900
+  status: 確認済み
+  checked: '2026-10-22'
 - id: arc108_b
   contest: arc108
   index: B
@@ -17697,6 +18398,37 @@ problems:
   status: 確認済み
   checked: '2026-10-21'
   note: math/mod-pow の例題（代表問題）にしたので drken 氏の記事で問いと方針を確かめ直した。summary・approach は例題のページの値を主にした
+- id: arc111_d
+  contest: arc111
+  index: D
+  title: Orientation
+  difficulty: 2064
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 単純無向グラフと各頂点の値 c_i が与えられ、各頂点から到達できる頂点数（自分を含む）がちょうど c_i になるように辺の向きを決める（答えがあることは保証される）。
+  approach: c が違う辺は大きい側から小さい側へ、c が等しい辺は DFS 木の辺を親から子、後退辺を子孫から祖先へ向ける
+  pages:
+  - {id: graph-construction, role: practice}
+  evidence:
+  - https://kmjp.hatenablog.jp/entry/2021/01/10/0930
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0109_arc111
+  status: 確認済み
+  checked: '2026-10-22'
+- id: arc111_e
+  contest: arc111
+  index: E
+  title: Simple Math 3
+  difficulty: 2541
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 整数 A, B, C, D が与えられ、閉区間 [A + B·i, A + C·i] に D の倍数が 1 つも入らない正の整数 i の個数を求める（複数ケース）。
+  approach: i の上限 m を絞り、区間に入る D の倍数の個数（0 か 1）の和を floor_sum 2 回の差で求めて m から引く
+  pages:
+  - {id: floor-sum, role: challenge}
+  evidence:
+  - https://kmjp.hatenablog.jp/entry/2021/01/10/1000
+  status: 確認済み
+  checked: '2026-10-22'
 - id: arc115_c
   contest: arc115
   index: C
@@ -17727,6 +18459,21 @@ problems:
   - https://drken1215.hatenablog.com/entry/2021/03/21/235000_1
   status: 確認済み
   checked: '2026-10-21'
+- id: arc116_b
+  contest: arc116
+  index: B
+  title: Products of Min-Max
+  difficulty: 816
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 整数列の空でない部分列すべてについて、最大値と最小値の積を足し合わせた値を求める。
+  approach: ソートして最小と最大を固定し、寄与 a_i a_j 2^(j−i−1) を i ごとにまとめる
+  pages:
+  - {id: counting-fix-order, role: practice}
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0328_arc116
+  status: 確認済み
+  checked: '2026-10-22'
 - id: arc117_c
   contest: arc117
   index: C
@@ -17742,6 +18489,53 @@ problems:
   - https://drken1215.hatenablog.com/entry/2021/06/12/001400
   status: 確認済み
   checked: '2026-10-21'
+- id: arc121_e
+  contest: arc121
+  index: E
+  title: Directed Tree
+  difficulty: 2645
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 頂点 1 を根とする N 頂点の根付き木で、各 i について a_i から辺を 1 本以上たどって i に着かない順列 a の数を数える。
+  approach: 条件を破る頂点を k 個指定する包除にし、指定した個数を状態に持つ二乗の木 DP で r_k を求めて Σ(−1)^k r_k (N−k)! を取る
+  pages:
+  - {id: inclusion-exclusion-dp, role: challenge}
+  evidence:
+  - https://kmjp.hatenablog.jp/entry/2021/06/20/0930
+  status: 確認済み
+  checked: '2026-10-22'
+- id: arc122_a
+  contest: arc122
+  index: A
+  title: Many Formulae
+  difficulty: 783
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 長さ N の非負整数列の間に + か - を入れ、- が 2 つ続かない式すべてについて、値の合計を 10^9+7 で割った余りで求める（N ≤ 10^5）。
+  approach: 最後の演算子が + か − かごとに式の数と値の和を持ち、左から O(1) で更新する
+  pages:
+  - {id: parsing, role: practice}
+  evidence:
+  - https://zenn.dev/hal_mat/articles/0c3857b22b6ff1
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0612_arc122
+  status: 確認済み
+  checked: '2026-10-22'
+- id: arc122_d
+  contest: arc122
+  index: D
+  title: XOR Game
+  difficulty: 2331
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 2N 個の整数を 2 人が 1 つずつ交互に取って N 組を作り、組ごとの XOR の最大値を先手は大きく、後手は小さくしたいとき、最適に行動した結果の値を求める。
+  approach: 上位 bit で 2 つに分け、両側が偶数個なら再帰、奇数個なら集合をまたぐ組の XOR の最小を Binary Trie で求める
+  pages:
+  - {id: binary-trie, role: challenge}
+  evidence:
+  - https://kmjp.hatenablog.jp/entry/2021/06/13/0930
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0612_arc122
+  status: 確認済み
+  checked: '2026-10-22'
 - id: arc123_d
   contest: arc123
   index: D
@@ -17774,6 +18568,52 @@ problems:
   - https://kmjp.hatenablog.jp/entry/2021/12/21/0930
   status: 確認済み
   checked: '2026-10-21'
+- id: arc136_b
+  contest: arc136
+  index: B
+  title: Triple Shift
+  difficulty: 1358
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 長さ N の列 A で隣り合う 3 要素を巡回させる操作を繰り返し、列 B に一致させられるかを判定する。
+  approach: 多重集合が違えば No、同じ値があれば Yes、すべて異なれば転倒数の偶奇が一致するときだけ Yes
+  pages:
+  - {id: permutation-parity, role: practice}
+  evidence:
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0227_arc136
+  status: 確認済み
+  checked: '2026-10-22'
+- id: arc137_d
+  contest: arc137
+  index: D
+  title: Prefix XORs
+  difficulty: 2191
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 長さ N の整数列について、すべての i で A_i を A_1 から A_i までの XOR に置き換える操作を k 回行った後の末尾の値を、k = 1, …, M のそれぞれについて求める。
+  approach: 二項係数の偶奇を Lucas の定理で bit の条件にし、添字を反転して置いた列に XOR の上位集合のゼータ変換をかける
+  pages:
+  - {id: zeta-mobius-subset, role: practice}
+  evidence:
+  - https://kmjp.hatenablog.jp/entry/2022/03/26/0930
+  - https://scrapbox.io/Atcoder-myReflection/ARC137_D._Prefix_XORs
+  status: 確認済み
+  checked: '2026-10-22'
+- id: arc142_c
+  contest: arc142
+  index: C
+  title: Tree Queries
+  difficulty: 1347
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 形の分からない木で、2 頂点の距離を尋ねる質問を繰り返して、頂点 1 と頂点 2 の距離を当てるインタラクティブの問題である。
+  approach: 各頂点 x で d(1,x) + d(2,x) を尋ねて最小を答えとし、最小の和が 3 のときだけ和が最小の 2 頂点の距離を尋ねて距離 1 の場合と分ける
+  pages:
+  - {id: tree-path, role: practice}
+  evidence:
+  - https://merom686.hatenablog.com/entry/2022/06/20/000753
+  status: 確認済み
+  checked: '2026-10-22'
 - id: arc143_c
   contest: arc143
   index: C
@@ -17789,6 +18629,22 @@ problems:
   - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0626_arc143#c_-_piles_of_pebbles
   status: 確認済み
   checked: null
+- id: arc143_d
+  contest: arc143
+  index: D
+  title: Bridges
+  difficulty: 2229
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 長さ M の 2 つの列 A・B から、各 i で辺 (A_i, B_i+N) と (B_i, A_i+N) のどちらを張るかを選んで 2N 頂点のグラフを作るとき、橋の数が最小になる選び方を 1 つ出力する。
+  approach: 選び方を辺の向き付けとみて、DFS 木の辺を親から子、後退辺を子孫から祖先へ向ける
+  pages:
+  - {id: graph-construction, role: challenge}
+  evidence:
+  - https://drken1215.hatenablog.com/entry/2023/08/29/221129
+  - https://kmjp.hatenablog.jp/entry/2023/03/16/0900
+  status: 確認済み
+  checked: '2026-10-22'
 - id: arc145_c
   contest: arc145
   index: C
@@ -17803,7 +18659,23 @@ problems:
   evidence:
   - https://kmjp.hatenablog.jp/entry/2023/09/21/1000
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
+- id: arc150_c
+  contest: arc150
+  index: C
+  title: Path and Subsequence
+  difficulty: 1802
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 各頂点に値 A_v がある連結な無向グラフと数列 B（長さ K）について、頂点 1 から N へのどの単純パスでも、通った頂点の A の列が B を部分列に含むかを判定する。
+  approach: 各頂点で B と貪欲に一致した個数の最小値を距離とし、単調な遷移 x → x + [A_v = B_{x+1}] でダイクストラ法（01-BFS）を回す
+  pages:
+  - {id: time-dependent-dijkstra, role: challenge}
+  evidence:
+  - https://miscalc.hatenablog.com/entry/2022/10/10/115348
+  - https://merom686.hatenablog.com/entry/2022/10/10/013513
+  status: 確認済み
+  checked: '2026-10-22'
 - id: arc160_b
   contest: arc160
   index: B
@@ -17880,6 +18752,27 @@ problems:
   - https://drken1215.hatenablog.com/entry/2024/03/17/233040
   status: 確認済み
   checked: null
+- id: arc185_e
+  contest: arc185
+  index: E
+  title: Adjacent GCD
+  difficulty: 2185
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: 数列の長さ M の接頭辞それぞれについて、空でない部分列すべての「隣り合う 2 要素の gcd の和」を合計した値を 998244353 で割った余りで求める。
+  approach: f(n+1) = 2f(n) + Σ 2^x gcd(A_x, A_n) の gcd を Σ_{d|gcd} φ(d) に分け、d ごとに d の倍数である前の要素の 2^x の和を持って更新する
+  alternatives:
+  - pages:
+    - zeta-mobius-divisor
+    summary: 長さ N の列 A の各接頭辞について、空でない部分列すべての「隣り合う要素の gcd の和」の総和を 998244353 で割った余りで求める。
+    approach: gcd を、恒等関数の約数メビウス変換である φ の約数和に分け、d ごとに d の倍数である過去の要素の 2^x の和を持って更新する
+  pages:
+  - {id: euler-phi, role: practice}
+  - {id: zeta-mobius-divisor, role: challenge}
+  evidence:
+  - https://kmjp.hatenablog.jp/entry/2024/10/19/0900
+  status: 確認済み
+  checked: '2026-10-22'
 - id: arc188_c
   contest: arc188
   index: C
@@ -17916,6 +18809,21 @@ problems:
   - https://drken1215.hatenablog.com/entry/2025/01/04/101100
   status: 確認済み
   checked: '2026-10-21'
+- id: bitflyer2018_final_d
+  contest: bitflyer2018-final
+  index: D
+  title: 数列 XOR
+  difficulty: null
+  experimental: null
+  difficulty_fetched: '2026-10-21'
+  summary: 長さ N（N ≤ 10^5）の 60 bit の整数の列 A に、隣り合う 2 項の一方をその 2 項の XOR に置き換える操作を何度でも行って、列 B にできるかを判定する。
+  approach: 操作が mod 2 の行基本変形になることを示し、A と B の簡約階段形が一致するかで判定する
+  pages:
+  - {id: gaussian-elimination, role: practice}
+  evidence:
+  - https://drken1215.hatenablog.com/entry/2018/07/04/070000
+  status: 確認済み
+  checked: '2026-10-22'
 - id: chokudai_S001_j
   contest: chokudai_S001
   index: J
@@ -17952,6 +18860,21 @@ problems:
   - https://qiita.com/drken/items/e77685614f3c6bf86f44
   status: 確認済み
   checked: '2026-10-21'
+- id: code_thanks_festival_2017_f
+  contest: code-thanks-festival-2017
+  index: F
+  title: Limited Xor Subset
+  difficulty: null
+  experimental: null
+  difficulty_fetched: '2026-10-21'
+  summary: N 個（N ≤ 10^5）の正の整数から 0 個以上を選んで XOR が K になる選び方の数を、10^9+7 で割った余りで求める（値は 10^5 以下）。
+  approach: bit ごとの mod 2 の連立方程式を掃き出してランク r を求め、矛盾があれば 0、なければ 2^(N−r)
+  pages:
+  - {id: gaussian-elimination, role: practice}
+  evidence:
+  - https://drken1215.hatenablog.com/entry/2019/03/20/173300
+  status: 確認済み
+  checked: '2026-10-22'
 - id: code_thanks_festival_2017_h
   contest: code-thanks-festival-2017
   index: H
@@ -17971,6 +18894,21 @@ problems:
   - {id: parallel-binary-search, role: practice}
   evidence:
   - https://drken1215.hatenablog.com/entry/2018/09/15/193740
+  status: 確認済み
+  checked: '2026-10-22'
+- id: ddcc_2016_qual_d
+  contest: ddcc2016-qual
+  index: D
+  title: 道路網
+  difficulty: null
+  experimental: null
+  difficulty_fetched: '2026-10-21'
+  summary: N 頂点の完全グラフで、N−1 本の辺は木をなして長さが与えられ、残りの辺の長さがすべて X のとき、全頂点対の最短距離の総和を求める。
+  approach: 距離を min(X, D(v)+D(w)) とみて重心分解で数え（重心からの距離ごとの個数と和を BIT で持つ）、X より長い木の辺を経由する組を補正する
+  pages:
+  - {id: centroid-decomposition, role: challenge}
+  evidence:
+  - https://kmjp.hatenablog.jp/entry/2016/11/22/0930
   status: 確認済み
   checked: '2026-10-22'
 - id: diverta2019_d
@@ -18357,7 +19295,7 @@ problems:
   evidence:
   - https://qiita.com/Series_205/items/7d2c57b45179006d0bc6
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: dp_v
   contest: dp
   index: V
@@ -18454,7 +19392,22 @@ problems:
   - https://drken1215.hatenablog.com/entry/2023/05/07/160611
   - https://drken1215.hatenablog.com/entry/2018/01/16/222843
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
+- id: dwacon2018_prelims_e
+  contest: dwacon2018-prelims
+  index: E
+  title: ニワンゴくんの家探し
+  difficulty: null
+  experimental: null
+  difficulty_fetched: '2026-10-21'
+  summary: 次数が 5 以下の N 頂点（N ≤ 2000）の木で隠された頂点を、「2 頂点 u, v のどちらが近いか（等しければ 0）」を答える質問を 14 回までして当てる対話型の問題である。
+  approach: 残った候補の成分の重心の隣の 2 頂点を質問し、近い枝に絞るか等距離なら 2 つの枝を消して、候補を半分以下に減らす
+  pages:
+  - {id: tree-centroid, role: practice}
+  evidence:
+  - https://drken1215.hatenablog.com/entry/2023/05/07/144739
+  status: 確認済み
+  checked: '2026-10-22'
 - id: exawizards2019_d
   contest: exawizards2019
   index: D
@@ -18485,6 +19438,52 @@ problems:
   - https://drken1215.hatenablog.com/entry/2020/10/11/200000
   status: 確認済み
   checked: null
+- id: hhkb2020_f
+  contest: hhkb2020
+  index: F
+  title: Random Max
+  difficulty: 2691
+  experimental: false
+  difficulty_fetched: '2026-10-21'
+  summary: N 個の実数をそれぞれ区間 [L_i, R_i] から一様に選んだときの最大値の期待値に (N+1)!·Π(R_i − L_i) を掛けた値を mod 10^9+7 で求める。
+  approach: P(最大値 ≤ x) が端点で区切った区分ごとに多項式になることを使い、区分ごとに積分して足す
+  pages:
+  - {id: expectation-tail-sum, role: challenge}
+  evidence:
+  - https://drken1215.hatenablog.com/entry/2020/10/11/145500
+  - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2020/1010_hhkb2020
+  status: 確認済み
+  checked: '2026-10-22'
+- id: icpc2013summer_day4_f
+  contest: jag2013summer-day4
+  index: F
+  title: Graph Automata Player
+  difficulty: null
+  experimental: null
+  difficulty_fetched: '2026-10-21'
+  summary: N 頂点（N ≤ 300）の有向グラフで、各頂点の 0/1 の値が「辺の先で 1 の頂点の数が奇数なら 1」という規則で一斉に変わるとき、T 回後の値から元の値を復元し、解がなければ none、複数あれば ambiguous と答える。
+  approach: 隣接行列の T 乗を mod 2 の繰り返し二乗法で求め、連立方程式を掃き出して解なし・不定・一意を判定する（bitset で速くする）
+  pages:
+  - {id: gaussian-elimination, role: practice}
+  evidence:
+  - https://drken1215.hatenablog.com/entry/2019/03/20/192300
+  status: 確認済み
+  checked: '2026-10-22'
+- id: joi2020_yo2_e
+  contest: joi2020yo2
+  index: E
+  title: じゃんけん式 (Rock-Scissors-Paper Expression)
+  difficulty: null
+  experimental: null
+  difficulty_fetched: '2026-10-21'
+  summary: R・S・P と ?・括弧・+・-・* からなる式（* が + と - より先に結びつく）で、? を R・S・P に置き換える方法のうち、式の結果が指定の手になるものの数を 10^9+7 で割った余りで求める。
+  approach: 式・項・因子の再帰下降で、各関数が結果ごとの置き換え方の数の三つ組を返し、演算子ごとの表で合成する
+  pages:
+  - {id: parsing, role: practice}
+  evidence:
+  - https://blog.hamayanhamayan.com/entry/2019/12/22/002709
+  status: 確認済み
+  checked: '2026-10-22'
 - id: keyence2019_e
   contest: keyence2019
   index: E
@@ -18494,12 +19493,18 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: 一列に並ぶ都市を結ぶ完全グラフで、辺の重みが番号の差と両端の値で決まるときの最小全域木の重みを求める。
   approach: 都市の並び（パス）の重心分解＝中央で割る分割統治で、またぐ辺を各側の代表との辺だけに減らし、候補 O(N log N) 本でクラスカル法。木の上の距離に一般化しても重心分解で同じことができる
+  alternatives:
+  - pages:
+    - divide-and-conquer
+    summary: 一列に並ぶ都市を結ぶ完全グラフで、辺の重みが番号の差と両端の値で決まるときの最小全域木の重みを求める。
+    approach: 番号の中央で分け、中央をまたぐ辺は反対側の代表 1 点への辺だけ残して O(N log N) 本にし、クラスカル法で解く
   pages:
   - {id: centroid-decomposition, role: challenge}
+  - {id: divide-and-conquer, role: challenge}
   evidence:
   - https://drken1215.hatenablog.com/entry/2019/01/15/081500
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: keyence2020_c
   contest: keyence2020
   index: C
@@ -18551,6 +19556,22 @@ problems:
   - https://github.com/E869120/math-algorithm-book/blob/main/editorial/chap4-7/prob4-7-4.cpp
   status: 確認済み
   checked: '2026-10-21'
+- id: math_and_algorithm_bt
+  contest: math-and-algorithm
+  index: 097
+  title: Primes in an Interval
+  difficulty: null
+  experimental: null
+  difficulty_fetched: '2026-10-21'
+  summary: L 以上 R 以下の整数のうち素数がいくつあるかを数える（R ≤ 10^12 と大きく、区間の長さは 50 万程度まで）。
+  approach: √R 以下の各 p で区間の最初の倍数から p 自身を除いて印を付け、L = 1 なら 1 も除いて残りを数える
+  pages:
+  - {id: segmented-sieve, role: practice}
+  evidence:
+  - https://github.com/E869120/math-algorithm-book/blob/main/editorial/chap6-21_25/prob6-23.cpp
+  - https://github.com/bouzuya/blog.bouzuya.net/blob/master/data/2022/03/2022-03-18.md
+  status: 確認済み
+  checked: '2026-10-22'
 - id: math_and_algorithm_z
   contest: math-and-algorithm
   index: '026'
@@ -18566,6 +19587,21 @@ problems:
   - https://github.com/E869120/math-algorithm-book/blob/main/editorial/chap3-4/prob3-4-4.cpp
   status: 確認済み
   checked: null
+- id: nikkei2019_final_g
+  contest: nikkei2019-final
+  index: G
+  title: Greatest Journey
+  difficulty: null
+  experimental: null
+  difficulty_fetched: '2026-10-21'
+  summary: 重み付きの木で、頂点 V_i から始まる長さ L_i のウォークについて、通った辺の重みの和の最大値を多数のクエリについて答える。
+  approach: 最短のパスと辺の往復に分け、パスを重心を通るものとして集計し、往復の分を直線の最大値としてクエリを並べて処理する
+  pages:
+  - {id: centroid-decomposition, role: challenge}
+  evidence:
+  - https://qiita.com/navel_tos/items/d1a2fd2b63e73380eadb
+  status: 確認済み
+  checked: '2026-10-22'
 - id: nyc2015_5
   contest: NYC2015
   index: E
@@ -18579,8 +19615,9 @@ problems:
   - {id: cayley-pruefer, role: practice}
   evidence:
   - https://drken1215.hatenablog.com/entry/2020/10/25/132900
+  - https://drken1215.hatenablog.com/entry/2023/09/07/000919
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: panasonic2020_c
   contest: panasonic2020
   index: C
@@ -19302,9 +20339,15 @@ problems:
   difficulty_fetched: '2026-10-21'
   summary: 木と多数のクエリが与えられ、各クエリで指定された頂点をすべてつなぐのに必要な辺の数の最小値を答える。
   approach: 指定頂点を DFS 順に並べ、隣り合う 2 点（最後と最初も）の距離の和の半分を答える
+  alternatives:
+  - pages:
+    - steiner-subtree
+    summary: 木と多数のクエリが与えられ、各クエリで指定された頂点をすべてつなぐのに必要な辺の数の最小値を答える。
+    approach: 指定頂点を行きがけ順に並べ、隣り合う 2 点（最後と最初も）の距離の和の半分を答える
   pages:
   - {id: auxiliary-tree, role: example}
   - {id: lca, role: practice}
+  - {id: steiner-subtree, role: challenge}
   evidence:
   - https://github.com/E869120/kyopro_educational_90/blob/main/sol/035-04.cpp
   status: 確認済み
@@ -19451,7 +20494,7 @@ problems:
   - https://github.com/E869120/kyopro_educational_90/blob/main/editorial/045.jpg
   - https://github.com/E869120/kyopro_educational_90/blob/main/sol/045.cpp
   status: 確認済み
-  checked: '2026-10-21'
+  checked: '2026-10-22'
 - id: typical90_au
   contest: typical90
   index: '047'
@@ -20297,6 +21340,22 @@ problems:
   - https://github.com/E869120/kyopro_educational_90/blob/main/sol/026.cpp
   status: 確認済み
   checked: '2026-10-21'
+- id: yahoo_procon2018_final_a
+  contest: yahoo-procon2018-final
+  index: A
+  title: Uncommon
+  difficulty: null
+  experimental: null
+  difficulty_fetched: '2026-10-21'
+  summary: 相異なる N 個の整数 a_1, …, a_N（値は 10^5 以下）と M が与えられ、i = 1, …, M のそれぞれについて i と互いに素な a_j の個数を求める。
+  approach: 値ごとの個数を倍数ゼータ変換し、μ を点ごとに掛けて約数ゼータ変換すると、各 i と互いに素な個数が並ぶ
+  pages:
+  - {id: zeta-mobius-divisor, role: practice}
+  evidence:
+  - https://noshi91.hatenablog.com/entry/2020/01/15/185642
+  - https://drken1215.hatenablog.com/entry/2018/07/12/213300
+  status: 確認済み
+  checked: '2026-10-22'
 - id: yahoo_procon2018_final_c
   contest: yahoo-procon2018-final
   index: C
@@ -20310,8 +21369,9 @@ problems:
   - {id: centroid-decomposition, role: practice}
   evidence:
   - https://qiita.com/navel_tos/items/d1a2fd2b63e73380eadb
+  - https://blog.hamayanhamayan.com/entry/2017/12/19/152143
   status: 確認済み
-  checked: null
+  checked: '2026-10-22'
 - id: yahoo_procon2019_qual_d
   contest: yahoo-procon2019-qual
   index: D

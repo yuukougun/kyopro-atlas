@@ -174,11 +174,15 @@ $$
 
 <div class="kp-problems" data-role="practice" markdown>
 
+- [ABC343 B. Adjacency Matrix](https://atcoder.jp/contests/abc343/tasks/abc343_b)（diff 53）：N×N の 0/1 の隣接行列が与えられ、各頂点について、辺でつながる頂点の番号を昇順に出力する。
+- [ABC276 B. Adjacency List](https://atcoder.jp/contests/abc276/tasks/abc276_b)（diff 143）：N 都市と M 本の双方向の道路が組で与えられ、各都市について、つながる都市の個数と番号を昇順に出力する。
 - [ABC284 C. Count Connected Components](https://atcoder.jp/contests/abc284/tasks/abc284_c)（diff 193）：単純無向グラフの連結成分の個数を求める。
 
 </div>
 
 ??? note "練習の方針"
+    - **ABC343 B**：行 $i$ を左から見て、1 のある列の番号（1 始まりに直す）を拾う。隣接行列から隣接リストへの変換で、全体 $O(N^2)$ である
+    - **ABC276 B**：辺 $(A, B)$ ごとに `g[A]` に $B$、`g[B]` に $A$ を入れて、隣接リストを両方向に作る。各 `g[i]` をソートして長さと要素を出力すれば $O(N + M \log M)$ である
     - **ABC284 C**：隣接リストを両方向に作る。連結とは限らないので、まだ訪れていない頂点から深さ優先探索か幅優先探索を始めるたびに 1 を数える。[Union-Find](../graph/union-find-connectivity.md) なら、$N$ から「別の成分どうしをつないだ回数」を引けばよい。どちらも $O(N + M)$ 程度である
 
 ## 参考 {#references}
@@ -186,3 +190,5 @@ $$
 - [E869120「競プロ典型 90 問 078 の解答例（sol/078.cpp）」](https://github.com/E869120/kyopro_educational_90/blob/main/sol/078.cpp)：例題の数える条件と、隣接リストの作り方
 - [drken「AtCoder ABC 284 C - Count Connected Components (3Q, 灰色, 300 点)」](https://drken1215.hatenablog.com/entry/2023/09/28/022105)：練習の方針（DFS・BFS・Union-Find で成分を数える）
 - [AtCoder Library「internal_csr.hpp」](https://github.com/atcoder/ac-library/blob/master/atcoder/internal_csr.hpp)：ACL の内部で使われる、辺を 1 本の配列にまとめる形
+- [Lanly「AtCoder Beginner Contest 343」](https://www.cnblogs.com/Lanly/p/18058486)：練習 ABC343 B の隣接行列の読み取り
+- [sano192「ABC276 A～E問題 ものすごく丁寧でわかりやすい解説 python 灰色～茶色コーダー向け」](https://qiita.com/sano192/items/298c551f0e63c9c93260)：練習 ABC276 B の隣接リストの作り方

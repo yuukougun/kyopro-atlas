@@ -230,12 +230,14 @@ ACL の `floor_sum(N, M, A, B)` をケースごとに 1 回呼ぶだけである
 <div class="kp-problems" data-role="challenge" markdown>
 
 - [ABC313 G. Redistribution of Piles](https://atcoder.jp/contests/abc313/tasks/abc313_g)（diff 2454）：石のある皿すべてから 1 個ずつ袋へ移す操作と、袋から N 個取り出して N 枚の皿に 1 個ずつ置く操作を好きなだけ行う。皿の石の数の並びとしてありうるものの個数を 998244353 で割った余りを求める。
+- [ARC111 E. Simple Math 3](https://atcoder.jp/contests/arc111/tasks/arc111_e)（diff 2541）：整数 A, B, C, D が与えられ、閉区間 [A + B·i, A + C·i] に D の倍数が 1 つも入らない正の整数 i の個数を求める（複数ケース）。
 - [ABC283 Ex. Popcount Sum](https://atcoder.jp/contests/abc283/tasks/abc283_h)（diff 2682）：N 以下の正の整数のうち M で割った余りが R のものについて、2 進表記の 1 の個数の和を求める（複数ケース）。
 
 </div>
 
 ??? note "方針"
     - **ABC313 G**：石を袋へ移した回数ごとに、袋の石の数を $N$ で割った商から並びの数が決まる。並びの数を足し合わせる式が、等差数列を $N$ で割った商の和になる
+    - **ARC111 E**：区間の長さ $(C - B) i$ が $D - 1$ 以上になると必ず倍数が入るので、$i$ の上限 $m$ を決める。$1 \le i \le m$ では区間に入る $D$ の倍数の個数 $\lfloor (A + Ci)/D \rfloor - \lfloor (A - 1 + Bi)/D \rfloor$ が 0 か 1 なので、その和を floor sum 2 回の差で求め、$m$ から引く
     - **ABC283 Ex**：[応用の型](#applications)の bit ごとの数え方をそのまま使う。$x = Mt + R$ と置き、bit ごとに floor sum の差を足す
 
 ## 確認問題 {#quiz}
@@ -271,3 +273,4 @@ ACL の `floor_sum(N, M, A, B)` をケースごとに 1 回呼ぶだけである
 - [「ABC 443 A~G 詳解 (solution)」（HackMD、中国語）](https://hackmd.io/@cHW2LTvARJKGTUbciR39fQ/SyLDQFiLWl)：例題 ABC443 G の問いと、余りの条件を floor の差に直す方針
 - [drken「AtCoder ABC 313 G - Redistribution of Piles (橙色, 625 点)」](https://drken1215.hatenablog.com/entry/2023/08/06/203145)：力試し ABC313 G の問いと方針
 - [drken「AtCoder ABC 283 Ex - Popcount Sum (4D, 橙色, 600 点)」](https://drken1215.hatenablog.com/entry/2022/12/26/125416)：力試し ABC283 Ex の問いと、bit ごとに floor sum の差で数える方針
+- [kmjp「AtCoder ARC #111 : E - Simple Math 3」](https://kmjp.hatenablog.jp/entry/2021/01/10/1000)：力試し ARC111 E の上限の絞り方と floor sum 2 回の差

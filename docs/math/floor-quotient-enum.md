@@ -200,22 +200,28 @@ $\lfloor \cdot \rfloor$ を含む和は、$i$ が式のどこにあるかと、�
 
 <div class="kp-problems" data-role="practice" markdown>
 
+- [ABC172 D. Sum of Divisors](https://atcoder.jp/contests/abc172/tasks/abc172_d)（diff 963）：x の約数の個数を f(x) とするとき、Σ_{x=1}^{N} x·f(x) を求める（N ≤ 10^7）。
 - [ABC296 D. M<=ab](https://atcoder.jp/contests/abc296/tasks/abc296_d)（diff 999）：1 ≤ a, b ≤ N を満たす a × b のうち、M 以上で最小の値を求める（N, M ≤ 10^12、なければ −1）。
+- [ABC414 E. Count A%B=C](https://atcoder.jp/contests/abc414/tasks/abc414_e)（diff 1296）：1 以上 N 以下の互いに異なる整数の組 (a, b, c) で、a を b で割った余りが c になるものの個数を 998244353 で割った余りで求める（3 ≤ N ≤ 10^12）。
 
 </div>
 
 ??? note "練習の方針"
+    - **ABC172 D**：約数 $a$ ごとに倍数の和 $a \cdot k(k+1)/2$（$k = \lfloor N/a \rfloor$）を足す形に直す。$k$ が同じ $a$ の区間を等差数列の和でまとめれば $O(\sqrt{N})$ になる。$N \le 10^7$ なので $O(N)$ の全探索でも通る
     - **ABC296 D**：$a \le b$ としてよい。$a$ を決めると、$b$ は $\lceil M/a \rceil$ が最善である（ただし $b \le N$ のときだけ使える）。$A = \lceil \sqrt{M} \rceil$ とする。$A \le N$ なら $A \times A \ge M$ が候補の 1 つになり、$a > A$ では $ab \ge a^2 > A^2$ なので答えにならない。$A > N$ なら $a \le N$ がもともとの範囲である。よって $a$ は $\min(N, A)$ まで試せば十分である。$b \le N$ の判定と、$a \le b$ の確認を忘れない
+    - **ABC414 E**：$b$ を固定して $c$ を数えると、答えは $\sum_{b=1}^{N} (N + 1 - b - \lfloor N/b \rfloor)$ にまとまる。残る $\sum \lfloor N/b \rfloor$ を、商が同じ区間ごとにまとめて $O(\sqrt{N})$ で求める
 
 ## 力試し {#challenge}
 
 <div class="kp-problems" data-role="challenge" markdown>
 
+- [ABC132 F. Small Products](https://atcoder.jp/contests/abc132/tasks/abc132_f)（diff 2143）：隣り合う 2 数の積がどれも N 以下になる、正の整数 K 個の列の個数を 10^9+7 で割った余りで求める（N ≤ 10^9、K ≤ 100）。
 - [ARC060 D. Digit Sum](https://atcoder.jp/contests/arc060/tasks/arc060_b)（diff 2261）：n の b 進表記の各桁の和が s になる最小の整数 b ≥ 2 を求める（n ≤ 10^11、なければ −1）。
 
 </div>
 
 ??? note "力試しの方針"
+    - **ABC132 F**：$\sqrt{N}$ を超える数どうしは隣り合えない。右端が $\sqrt{N}$ 以下の数のときは値ごとに、$\sqrt{N}$ を超える数のときは $\lfloor N/x \rfloor$ が同じものごとにまとめて DP し、累積和で遷移して $O(K \sqrt{N})$ にする
     - **ARC060 D**：$b \le \sqrt{n}$ は $b$ を全部試して桁和を計算する（1 回 $O(\log n)$）。$b > \sqrt{n}$ では $n$ は 2 桁以下なので、2 桁なら $n = pb + q$、$p + q = s$ と書ける。上の桁 $p$ は $\sqrt{n}$ 未満なので $p$ を全探索し、$q = s - p$、$b = (n - q)/p$ が整数で、$q \ge 0$、$p < b$、$q < b$ を満たすかを確かめる。1 桁になるのは $b > n$ のときで、桁和は $n$ そのものなので、$n = s$ なら $b = n + 1$ が候補になる。$b \le \sqrt{n}$ で見つかればそれが答えで、なければ 2 桁の候補の最小、それもなければ 1 桁の候補を答え、どれもなければ $-1$ を出す
 
 ## 確認問題 {#quiz}
@@ -244,3 +250,7 @@ $\lfloor \cdot \rfloor$ を含む和は、$i$ が式のどこにあるかと、�
 - [drken「AtCoder ARC 160 B - Triple Pair (1D, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2023/05/15/124800)：大小を決めて真ん中の値を $\sqrt{N}$ まで固定し、4 通りに分けて数える方針（例題）
 - [drken「AtCoder ABC 296 D - M<=ab (1Q, 緑色, 400 点)」](https://drken1215.hatenablog.com/entry/2023/05/16/011100)：$a \le b$ として $a$ を $\sqrt{M}$ まで調べれば足りる理由（練習）
 - [drken「AtCoder ABC 044 D - 桁和 (ARC 060 D) (1D, 黄色, 500 点)」](https://drken1215.hatenablog.com/entry/2024/09/14/115435)：$b \le \sqrt{n}$ の全探索と、2 桁の場合の $n = pb + q$ の式（力試し）
+- [ikatakos「AtCoder Beginner Contest 172 D,E,F問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2020/0627_abc172)：練習 ABC172 D の O(N) と O(√N) の解き方（解説の部分だけを参照）
+- [ikatakos「ミラティブ プログラミングコンテスト2025（AtCoder Beginner Contest 414）E,F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0712_abc414)：練習 ABC414 E の式変形と制約（解説の部分だけを参照）
+- [nakst_hide「ABC414: Rustで解く！問題解説」](https://zenn.dev/nakst_hide/articles/f5b3e3a3473e9d)：練習 ABC414 E の商が同じ区間でまとめる実装
+- [ikatakos「AtCoder Beginner Contest 132 D,E,F 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2019/0629_abc132)：力試し ABC132 F の √N を境に 2 つに分ける DP（解説の部分だけを参照）

@@ -235,11 +235,26 @@ $x$ 回進んだ後の位置は玉座から $S + Kx$ 個先なので、玉座に
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC060 B. Choose Integers](https://atcoder.jp/contests/abc060/tasks/abc060_b)（diff 503）：A の倍数をいくつか（1 つ以上）選んだ和を B で割った余りを C にできるかを判定する。
+- [ABC340 F. S = 1](https://atcoder.jp/contests/abc340/tasks/abc340_f)（diff 1516）：整数の点 (X, Y) が与えられ、原点と (X, Y) と (A, B) を頂点とする三角形の面積がちょうど 1 になる整数の点 (A, B) を 1 つ求める（なければ −1 を出す）。
 
 </div>
 
 ??? note "練習の方針"
     - **ABC060 B**：$A$ の倍数の和は $A$ の倍数なので、$Ax \equiv C \pmod{B}$ に $x \ge 1$ の解があるかを問う。解があるのは $\gcd(A, B) \mid C$ のときだけである。$x = 0$ が解でも $x = B/g$ も解なので、「1 つ以上」の条件は答えを変えない。制約が小さいので $x = 1, \dots, B$ の全探索でもよい
+    - **ABC340 F**：面積は $\lvert AY - BX \rvert / 2$ なので、$YA - XB = \pm 2$ という一次不定方程式になる。$g = \gcd(\lvert X \rvert, \lvert Y \rvert)$ が 2 を割り切るときだけ解があり、$g = 1$ なら拡張ユークリッドの解を 2 倍、$g = 2$ ならそのまま使う
+
+## 力試し {#challenge}
+
+<div class="kp-problems" data-role="challenge" markdown>
+
+- [ACL1 B. Sum is Multiple](https://atcoder.jp/contests/acl1/tasks/acl1_b)（diff 1785）：1 + 2 + … + k が N の倍数になる最小の正の整数 k を求める（N ≤ 10^15）。
+- [ABC315 G. Ai + Bj + Ck = X (1 <= i, j, k <= N)](https://atcoder.jp/contests/abc315/tasks/abc315_g)（diff 2315）：正の整数 N・A・B・C・X が与えられ、1 ≤ i, j, k ≤ N を満たし Ai + Bj + Ck = X となる組 (i, j, k) の個数を求める。
+
+</div>
+
+??? note "力試しの方針"
+    - **ACL1 B**：$k(k+1)$ が $2N$ の倍数という条件に直す。$2N$ を互いに素な $A \cdot B$（$A \mid k$、$B \mid k + 1$）に分ける方法ごとに、$k = Aq$ とおいた一次合同式 $Aq \equiv -1 \pmod{B}$（法 $B$ は素数とは限らない）を拡張ユークリッドで解いて最小を取る。係数の掛け算は 64 ビットを超えうるので、先に法で割った余りにしてから掛ける
+    - **ABC315 G**：$i$ を全探索すると $Bj + Ck = X - Ai$ という一次不定方程式になる。$\gcd(B, C)$ で割り切れない $i$ は飛ばし、割り切れれば 1 つの解から一般解 $j = j_0 + t \cdot C/g$ の形にして、$1 \le j, k \le N$ を満たす $t$ の範囲の長さを数える
 
 ## 使い分け {#comparison}
 
@@ -257,3 +272,6 @@ $x$ 回進んだ後の位置は玉座から $S + Kx$ 個先なので、玉座に
 - [drken「AtCoder ABC 060 B - Choose Integers (4Q, 茶色, 200 点)」](https://drken1215.hatenablog.com/entry/2024/10/18/025758)：練習の方針（gcd で決まることと全探索）
 - [AtCoder Library のドキュメント（math）](https://github.com/atcoder/ac-library/blob/master/document_ja/math.md)：`inv_mod`・`crt` の要件と計算量
 - [AtCoder Library のソース（internal_math.hpp）](https://github.com/atcoder/ac-library/blob/master/atcoder/internal_math.hpp)：`inv_gcd` が返す値の範囲と係数の上界
+- [プロひろ「ABC340 F問題（S = 1）を解く」](https://programming-hiroba.com/abc340-f/)：練習 ABC340 F の行列式による面積と拡張ユークリッドの解の使い方
+- [drken「ACL Contest 1 B - Sum is Multiple (2D, 青色, 600 点)」](https://drken1215.hatenablog.com/entry/2020/09/23/080300)：力試し ACL1 B の 2N の分け方と一次合同式
+- [kmjp「AtCoder ABC #315 (キーエンスプログラミングコンテスト2023夏) : G - Ai + Bj + Ck = X (1 <= i, j, k <= N)」](https://kmjp.hatenablog.jp/entry/2023/08/21/0900)：力試し ABC315 G の i の全探索と一般解の範囲の数え方

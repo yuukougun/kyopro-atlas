@@ -206,11 +206,13 @@ $K$ 番目の値は $1$〜$M$ の整数なので、$x = 1, \dots, M$ につい�
 <div class="kp-problems" data-role="challenge" markdown>
 
 - [ABC352 G. Socks 3](https://atcoder.jp/contests/abc352/tasks/abc352_g)（diff 2413）：N 種類の靴下が A_i 枚ずつ袋に入っており、同じ種類の 2 枚がそろうまで 1 枚ずつ取り出すときの、取り出す回数の期待値を 998244353 で割った余りで求める。
+- [HHKB2020 F. Random Max](https://atcoder.jp/contests/hhkb2020/tasks/hhkb2020_f)（diff 2691）：N 個の実数をそれぞれ区間 [L_i, R_i] から一様に選んだときの最大値の期待値に (N+1)!·Π(R_i − L_i) を掛けた値を mod 10^9+7 で求める。
 
 </div>
 
 ??? note "力試しの方針"
     - **ABC352 G**：取り出す回数を $T$ とし、$E[T] = \sum_{k=0}^{N} P(T > k)$ に直す。$T > k$ は最初の $k$ 枚の種類がすべて違うことで、確率は $[x^k] \prod_i (1 + A_i x) \big/ \binom{S}{k}$ である（[「〜になるまでの回数」](#waiting-time)の節）。$N$ 個の 1 次式の積は、分割統治で 2 つずつ畳み込む（NTT）と $O(N \log^2 N)$ で求まる。$\binom{S}{k}$ は $S$ が大きいので、$k$ を 1 つ増やすごとに $\frac{S - k}{k + 1}$ を掛けて作る
+    - **HHKB2020 F**：$P(\text{最大値} \le x)$ は各値の因子の積で、端点で区切った区分ごとに多項式になる。区分ごとに積分して足す（解説は $\int x F'(x) \, dx$ の形で、$\int P(X > t) \, dt$ と部分積分で同じ値になる）
 
 ## 確認問題 {#quiz}
 
@@ -244,3 +246,5 @@ $K$ 番目の値は $1$〜$M$ の整数なので、$x = 1, \dots, M$ につい�
 - [drken「「〜がすべて終わるまでの試行回数の期待値」を求める一般的なフレームワーク」](https://drken1215.hatenablog.com/entry/2019/03/23/214500)：回数の期待値を「$k$ 回以上かかる確率」の和に直し、包除原理と等比級数でまとめる考え方
 - [drken「AtCoder ABC 078 C - HSI (ARC 085 C) (3Q, 茶色, 300 点)」](https://drken1215.hatenablog.com/entry/2019/03/23/175300)：幾何分布の期待値を「$k$ 回以上かかる確率」の等比級数で求める説明
 - [Shizen_Tota「ABC411個人的備忘録[A-C,E]」](https://qiita.com/Shizen_Tota/items/687ddc17baff09e97176)：値の範囲が広いサイコロの最大値の期待値（累積の確率の差と、0 の因子の扱い）
+- [drken「HHKB プログラミングコンテスト 2020 F - Random Max (4D, 橙色, 600 点)」](https://drken1215.hatenablog.com/entry/2020/10/11/145500)：力試し HHKB2020 F の区分ごとの多項式の積分
+- [ikatakos「HHKB プログラミングコンテスト 2020 D,E,F問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2020/1010_hhkb2020)：力試し HHKB2020 F の同じ方針（解説の部分だけを参照）

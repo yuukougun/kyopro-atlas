@@ -185,13 +185,30 @@ $$
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC193 D. Poker](https://atcoder.jp/contests/abc193/tasks/abc193_d)（diff 866）：見えているカードと残りのカードの枚数から、2 人に伏せたカードが 1 枚ずつ配られたときに高橋君が勝つ確率を求める。
+- [ABC028 D. 乱数生成](https://atcoder.jp/contests/abc028/tasks/abc028_d)（diff 920）：1〜N の整数を独立に一様に 3 回選んだとき、3 つの中央値が K になる確率を求める。
 
 </div>
 
 ??? note "練習の方針"
     - **ABC193 D**：伏せた 2 枚の数字の組は 81 通りしかないので、組ごとに勝敗を決め、勝つ組の起こる場合の数を足して全体で割る。2 枚を順に引く並びで数え、同じ数字の 2 枚なら $c(c - 1)$、違う数字なら残り枚数の積にする。場合の数は `long long` で数えて最後に割る
+    - **ABC028 D**：全体を順番を区別した $N^3$ 通りとする。中央値が $K$ になる並びを「3 つとも $K$」「$K$ が 2 つと $K$ 以外が 1 つ」「$K$ 未満・$K$・$K$ より大が 1 つずつ」に分けて $1 + 3(N-1) + 6(K-1)(N-K)$ 通りと数え、$N^3$ で割る。分子も順番を区別して数え、整数のまま割らないよう浮動小数点に直して割る
+
+## 力試し {#challenge}
+
+<div class="kp-problems" data-role="challenge" markdown>
+
+- [ABC008 C. コイン](https://atcoder.jp/contests/abc008/tasks/abc008_3)（diff 1836）：数の書かれた N 枚のコインを一様にランダムな順に並べ、左から順に各コインについて右にある倍数のコインを裏返すとき、最後に表のコインの枚数の期待値を求める。
+
+</div>
+
+??? note "力試しの方針"
+    - **ABC008 C**：コインごとに表になる確率を求めて足す（期待値の線形性）。値 $x$ のコインに効くのは $x$ の約数のコイン $p$ 枚だけで、その $p + 1$ 枚の並びは同様に確からしい。$x$ の左にある約数の枚数は $0, \dots, p$ を等確率でとるので、表の確率は「$0$〜$p$ の偶数の個数 $/ (p + 1)$」になる
 
 ## 参考 {#references}
 
 - [drken「AtCoder ABC 126 C - Dice and Coin (3Q, 茶色, 300 点)」](https://drken1215.hatenablog.com/entry/2019/05/19/224500_2)：例題の方針（最初の目で場合分けし、表が続く確率を足す）
 - [drken「AtCoder ABC 193 D - Poker (2Q, 緑色, 400 点)」](https://drken1215.hatenablog.com/entry/2021/03/02/190700)：練習の方針（順番を区別して数え、同じ数字のときは $c(c-1)$ にする）
+- [fukuro-hoho「AtCoder / 乱数作成」](https://fukuro-hoho.hatenablog.com/entry/2020/11/18/163357)：練習 ABC028 D の場合分けの数え方
+- [mmxsrup「ABC 028 D - 乱数生成」](https://mmxsrup.hatenablog.com/entry/2016/09/22/014911)：練習 ABC028 D の同じ数え方
+- [kmjp「AtCoder ABC #008 : Python練習編」](https://kmjp.hatenablog.jp/entry/2014/05/10/0900)：力試し ABC008 C のコインごとの確率と線形性
+- [tiramister「AtCoder Beginner Contest 008 C - コイン」](https://blog.tiramister.net/posts/abc008-c/)：力試し ABC008 C の同じ方針

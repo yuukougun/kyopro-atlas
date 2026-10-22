@@ -189,11 +189,24 @@ Library Checker の Counting C4's は、辺ごとに「その辺を含む 4-サ�
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC260 F. Find 4-cycle](https://atcoder.jp/contests/abc260/tasks/abc260_f)（diff 1995）：頂点集合が S と T に分かれた二部グラフで、長さ 4 の閉路を 1 つ見つけて出力する（なければ −1）。
+- [ABC350 G. Mediator](https://atcoder.jp/contests/abc350/tasks/abc350_g)（diff 2058）：辺のない N 頂点のグラフに、森であることを保ちながら辺を 1 本ずつ足し、その合間に 2 頂点の両方に隣接する頂点を 1 つ答える質問にオンラインで答える。
 
 </div>
 
 ??? note "練習の方針"
     - **ABC260 F**：S の各頂点について、隣接する T の頂点の組を列挙し、組ごとに最初に現れた S の頂点を表に記録する。同じ組が 2 回出たら閉路が見つかる。T は 3000 頂点以下なので組は約 $4.5 \times 10^6$ 種類で、表への記録がそれを超える前に必ず止まる。S がどれだけ多くても、列挙の総数はこの上限で抑えられる。
+    - **ABC350 G**：しきい値 $B \approx \sqrt{N}$ で次数を分ける。どちらかの端点が軽ければ、その隣接リストを走査してもう一方との隣接を辺の集合で調べる。両方が重いときは、重い頂点の隣接集合だけを持った bitset の AND か、重い頂点 2 つ以上に隣接する $O(N / B)$ 個の候補の走査で答える。想定解はマージテクで、次数による平方分割は別解である
+
+## 力試し {#challenge}
+
+<div class="kp-problems" data-role="challenge" markdown>
+
+- [ABC219 G. Propagation](https://atcoder.jp/contests/abc219/tasks/abc219_g)（diff 2287）：頂点 i の値が初め i のグラフで、指定した頂点の今の値を隣接頂点すべてに書き写すクエリを Q 回行った後の、全頂点の値を求める。
+
+</div>
+
+??? note "力試しの方針"
+    - **ABC219 G**：軽い頂点は隣すべてに値とクエリの時刻を配る。重い頂点は最後に配った時刻と値を自分にだけ記録し、値が要るとき（自分がクエリされたときと最後）に隣の重い頂点の記録のうち新しいものを取りに行く。書き写す値は今の値なので、重い頂点も先に自分の値を取りに行ってから記録する。全体 $O(Q \sqrt{M})$ である
 
 ## 確認問題 {#quiz}
 
@@ -229,3 +242,7 @@ Library Checker の Counting C4's は、辺ごとに「その辺を含む 4-サ�
 - [oraclesqlpuzzle「ABC260-F Find 4-cycle」](https://oraclesqlpuzzle.ninja-web.net/kyoupro/05-atcoder-02-abc/kyoupro-abc260-f.html)：練習の方針（T の頂点の組を記録し、T が 3000 頂点以下なので組の種類に上限があること）
 - [Library Checker「Enumerate Triangles」（問題の定義）](https://github.com/yosupo06/library-checker-problems/tree/master/graph/enumerate_triangles)：三角形の列挙の制約（単純グラフ、$N, M \le 10^5$）
 - [Library Checker「Counting C4's」（問題の定義）](https://github.com/yosupo06/library-checker-problems/tree/master/graph/counting_c4)：辺ごとの 4-サイクルの個数（単純とは限らないグラフ、$N, M \le 3 \times 10^5$）
+- [kmjp「AtCoder ABC #350 (Promotion of AtCoderJobs) : G - Mediator」](https://kmjp.hatenablog.jp/entry/2024/04/22/0900)：練習 ABC350 G の次数で分ける解き方と O(N√N)
+- [No-play-Yes-splay「AtCoder Beginner Contest 350 解题报告」](https://www.cnblogs.com/No-play-Yes-splay/p/18148245/atcoder-beginner-contest-350-sol)：練習 ABC350 G の重い頂点だけ bitset を持つ解き方
+- [ikatakos「サイシードプログラミングコンテスト2021（AtCoder Beginner Contest 219）F,G,H問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0918_abc219)：力試し ABC219 G の配る・取りに行くの使い分け（解説の部分だけを参照）
+- [kmjp「AtCoder ABC #219 (サイシードプログラミングコンテスト2021) : G - Propagation」](https://kmjp.hatenablog.jp/entry/2021/09/29/0900)：力試し ABC219 G の重い頂点の伝播を遅らせる方針

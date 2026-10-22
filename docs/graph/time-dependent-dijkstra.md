@@ -201,12 +201,27 @@ $s$ をすべて試すと間に合わないので、$g_e$ の形を調べて最�
 
 <div class="kp-problems" data-role="practice" markdown>
 
+- [ABC084 C. Special Trains](https://atcoder.jp/contests/abc084/tasks/abc084_c)（diff 908）：一直線に並ぶ N 駅で、駅 i から i+1 へは時刻 S_i から F_i ごとに出る列車で C_i かかるとき、各駅から出発して駅 N に最も早く着く時刻を求める。
+- [ABC319 E. Bus Stops](https://atcoder.jp/contests/abc319/tasks/abc319_e)（diff 1353）：家からバス停 1 まで X、バス停 i から i+1 へは P_i（≤ 8）の倍数の時刻に出るバスで T_i、最後のバス停から会社まで Y かかるとき、質問ごとの出発時刻に対して会社へ最も早く着く時刻を答える。
 - [ABC204 E. Rush Hour 2](https://atcoder.jp/contests/abc204/tasks/abc204_e)（diff 1710）：時刻 t に出発すると通過に C + ⌊D/(t+1)⌋ かかる道路で、都市 1 から都市 N への最も早い到着時刻を求める
 
 </div>
 
 ??? note "練習の方針"
+    - **ABC084 C**：各始点から駅を順にたどる。現在時刻 $t$ が $S_i$ 未満なら $S_i$、そうでなければ $\lceil t / F_i \rceil \cdot F_i$ を出発時刻として $C_i$ を足す。$N \le 500$ なので始点ごとのシミュレーションで間に合う。一本道なのでヒープは要らない
+    - **ABC319 E**：各停留所で「次の $P_i$ の倍数まで待つ」遷移 $\lceil t / P_i \rceil \cdot P_i + T_i$ を順にたどる。待ち方は周期 $\mathrm{lcm}(1, \dots, 8) = 840$ で繰り返すので、出発時刻 mod 840 ごとの到着時刻を前計算し、各質問に $O(1)$ で答える。一本道なのでダイクストラ法そのものは使わない
     - **ABC204 E**：都市では整数の時間だけ待てる。各道路で、最適な出発時刻（$\sqrt{D}$ の付近）まで待つかすぐ出るかを計算して到着時刻を求め、ダイクストラ法で緩和する。[最適な出発時刻を計算してから進む](#optimal-departure)の関数がそのまま使える
+
+## 力試し {#challenge}
+
+<div class="kp-problems" data-role="challenge" markdown>
+
+- [ARC150 C. Path and Subsequence](https://atcoder.jp/contests/arc150/tasks/arc150_c)（diff 1802）：各頂点に値 A_v がある連結な無向グラフと数列 B（長さ K）について、頂点 1 から N へのどの単純パスでも、通った頂点の A の列が B を部分列に含むかを判定する。
+
+</div>
+
+??? note "力試しの方針"
+    - **ARC150 C**：各頂点で「$B$ を先頭から貪欲に何個まで一致させたか」の最小値を距離とする。頂点 $v$ に入ると一致数 $x$ が $x + [A_v = B_{x+1}]$ になり、この遷移は $x$ 以上で $x$ について単調（$x < x'$ なら $f(x) \le x + 1 \le x' \le f(x')$）なので、ダイクストラ法（または 01-BFS）が使える。頂点 $N$ の値が $K$ に届けば Yes である
 
 ## 参考 {#references}
 
@@ -214,3 +229,7 @@ $s$ をすべて試すと間に合わないので、$g_e$ の形を調べて最�
 - [hamayan「Train [AtCoder Beginner Contest 192 E]」](https://blog.hamayanhamayan.com/entry/2021/02/20/233838)：例題の方針（次の倍数の時刻まで待つ遷移と、到着時刻が単調だから正しいこと）
 - [Lanly「AtCoder Beginner Contest 342」](https://www.cnblogs.com/Lanly/p/18032259)：例題の方針（逆向きのグラフと最大ヒープ、最後の便の番号の式）
 - [hamayan「Rush Hour 2 [AtCoder Beginner Contest 204 E]」](https://blog.hamayanhamayan.com/entry/2021/06/07/024520)：練習の方針（最適な出発時刻が √D の付近にあること）
+- [ikatakos「ABC 084」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2017/1230_abc084)：練習 ABC084 C の待ち時間の切り上げと始点ごとのシミュレーション（解説の部分だけを参照）
+- [プロひろ「ABC319 E問題（Bus Stops）を解く」](https://programming-hiroba.com/abc319-e/)：練習 ABC319 E の周期 840 の前計算と切り上げ
+- [merom686「ABC319」](https://merom686.hatenablog.com/entry/2023/09/10/022053)：練習 ABC319 E の mod 840 で引く方針
+- [merom686「ARC150」](https://merom686.hatenablog.com/entry/2022/10/10/013513)：力試し ARC150 C の一致数が最小となるパスをダイクストラ法で求める方針

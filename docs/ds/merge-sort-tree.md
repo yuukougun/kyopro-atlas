@@ -184,6 +184,23 @@ count_sum_le(l, r, x):
 
     全体で構築 $O(N \log N)$、クエリ $O(Q \log^2 N)$ である。ブロックごとにソート済みの列と累積和を持つ平方分割でも解けるが、ブロックの大きさを選ばないと時間がかかる。
 
+## 練習問題 {#practice}
+
+<div class="kp-problems" data-role="practice" markdown>
+
+- [ABC174 F. Range Set Query](https://atcoder.jp/contests/abc174/tasks/abc174_f)（diff 1495）：長さ N の列について、区間 [l, r] に含まれる値の種類数を Q 個の質問に答える。
+- [ABC405 F. Chord Crossing](https://atcoder.jp/contests/abc405/tasks/abc405_f)（diff 1588）：円周上の 2N 個の点の間に互いに交わらない M 本の弦が引かれていて、質問ごとに 2 点を結ぶ弦が与えられ、既存の弦のうちそれと交わるものの本数を答える。
+- [ABC202 E. Count Descendants](https://atcoder.jp/contests/abc202/tasks/abc202_e)（diff 1638）：根付き木で、頂点 U を祖先に持つ（U 自身を含む）深さ D の頂点の数を Q 個の質問に答える。
+- [ABC379 F. Buildings 2](https://atcoder.jp/contests/abc379/tasks/abc379_f)（diff 1659）：高さが相異なる N 棟のビルが一列に並び、l < r の組の質問ごとに、r より東にあるビルのうち l と r の両方から見える（間のビルがすべてそれより低い）ものの数を答える。
+
+</div>
+
+??? note "練習の方針"
+    - **ABC174 F**：各位置 $i$ で同じ値が直前に出た位置を $\mathrm{prev}[i]$（なければ 0）とすると、種類数は「区間 $[l, r]$ の中で $\mathrm{prev}[i] < l$ の $i$ の個数」に等しい。列 prev にマージソート木を作れば、先読みせずに 1 回 $O(\log^2 N)$ で答えられる（標準の解き方は先読みして BIT で数える）
+    - **ABC405 F**：円を 1 か所で切って点を一列に並べると、答えは「質問の区間の中に端点がちょうど 1 つある弦の本数」になる。各端点に相手の端点の位置を書いた列にマージソート木を作り、区間 $(C, D)$ の中で相手が $C$ 未満か $D$ より大きいものの個数を数える
+    - **ABC202 E**：行きがけ順で頂点を並べると $U$ の部分木は区間 $[\mathrm{in}[U], \mathrm{out}[U])$ になる。各位置に深さを書いた列にマージソート木を作り、区間の中で「$D$ 以下の個数」から「$D - 1$ 以下の個数」を引けば答えになる。深さごとの番号の列に二分探索する方が簡単で、ここでは差で「ちょうど $D$」を数える練習として解く
+    - **ABC379 F**：$r$ より東では、$l$ から見えるビルの集合は $r$ から見えるビルの集合に含まれる。ビル $j$ の左で最も近い高いビルの位置を $p(j)$ とすると、答えは「区間 $(r, N]$ の中で $p(j) \le l$ の $j$ の個数」になり、列 $p$ にマージソート木を作れば 1 回 $O(\log^2 N)$ で答えられる
+
 ## 力試し {#challenge}
 
 <div class="kp-problems" data-role="challenge" markdown>
@@ -228,3 +245,9 @@ count_sum_le(l, r, x):
 - [viral_8「ABC339の解答[Java]」](https://qiita.com/viral_8/items/674923749d2d6feb775a)：例題 abc339_g の復号と、ノードの列と累積和を使う実装
 - [yuu_kyopro「マージソート木（merge-sort tree）」](https://qiita.com/yuu_kyopro/items/51ad67c3c980bf91c5a6)：対応するクエリ（$x$ 以下の個数・値の範囲の個数）と計算量・メモリ
 - [kmjp「AtCoder ABC #467 : G - Many Sweets Problem」](https://kmjp.hatenablog.jp/entry/2026/07/25/0900)：力試し abc467_g の先読みと、各段に BIT を持たせたマージソート木の上の貪欲
+- [firiexp「静的区間の種類数を直接返す StaticRangeDistinct helperを追加する（Issue #158）」](https://github.com/firiexp/library/issues/158)：練習 ABC174 F の prev[i] < l の個数への言い換え
+- [ikatakos「AtCoder Beginner Contest 174 C,D,E,F問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2020/0802_abc174)：練習 ABC174 F の先読みして BIT で数える標準の解き方（解説の部分だけを参照）
+- [merom686「ABC405」](https://merom686.hatenablog.com/entry/2025/05/11/021302)：練習 ABC405 F の区間にちょうど 1 個ある弦の数への言い換え
+- [hamayan「Count Descendants [エイシングプログラミングコンテスト2021（AtCoder Beginner Contest 202） E]」](https://blog.hamayanhamayan.com/entry/2021/05/22/225525)：練習 ABC202 E のオイラーツアーによる区間への言い換え
+- [2yuu「Atcoder解いてみた　AtCoder Beginner Contest E - Count Descendants」](https://qiita.com/2yuu/items/898b95864905dcbc8e7d)：練習 ABC202 E の深さごとの列への二分探索
+- [RomanLin「【离线+单调栈】AtCoder ABC379 F. Buildings 2」](https://www.cnblogs.com/RomanLin/p/18677191)：練習 ABC379 F の r より東だけ考えればよいという観察

@@ -226,11 +226,13 @@ $X = a + bX$ で $b = 1$ になるのは、始めの状態から、終わる前�
 
 <div class="kp-problems" data-role="challenge" markdown>
 
+- [ABC271 G. Access Counter](https://atcoder.jp/contests/abc271/tasks/abc271_g)（diff 2323）：1 日の 24 個の時刻ごとに担当が決まり、各時刻に担当が決まった確率でアクセスするとき、N 回目のアクセスが青木君である確率を求める。
 - [ABC224 G. Roll or Increment](https://atcoder.jp/contests/abc224/tasks/abc224_g)（diff 2374）：1〜N の目のサイコロの出目 S を、A 円払って 1 増やすか B 円払って振り直すかを選びながら T にするとき、費用の期待値の最小値を求める。
 
 </div>
 
 ??? note "力試しの方針"
+    - **ABC271 G**：次のアクセスの時刻への遷移確率では「丸 1 日アクセスがない」ことが何度でも繰り返すので、その分を公比 $P$（1 日アクセスがない確率）の等比級数 $1 / (1 - P)$ で閉じる（24 状態の連立方程式を掃き出し法で解いてもよい）。得た 24×24 の遷移行列を行列累乗で $N$ 乗する。主役は行列累乗で、閉路を閉じるのはその前段である
     - **ABC224 G**：振り直した直後の期待値を $R$ とおくと、出目 $s$ の状態の期待値は、$s \le T$ なら $\min(A(T - s), B + R)$、$s > T$ なら $B + R$ で、$R$ はそれらの $s = 1, \dots, N$ での平均である。$R$ が $\min$ の中に入るので 1 次式のまま運べない。最適な行動は「$T$ との差が $x$ 未満なら 1 ずつ増やし、ほかは振り直す」の形になる。$x$ を決めると、$R$ は $R = \frac{1}{N}\left(A \frac{x(x-1)}{2} + (N - x)(B + R)\right)$ の 1 次方程式になり、解くと $x$ の式になる。$x$ について凸なので、三分探索か最適な点の近くを調べて最小を取る。最初の出目 $S$ が増やす範囲にあるなら答えは $A(T - S)$、ないなら $B + R$ である（[最適戦略の期待値](../comb/optimal-strategy-expectation.md)）
 
 ## 確認問題 {#quiz}
@@ -261,3 +263,5 @@ $X = a + bX$ で $b = 1$ になるのは、始めの状態から、終わる前�
 - [drken「AtCoder ARC 174 C - Catastrophic Roulette (青色, 500 点)」](https://drken1215.hatenablog.com/entry/2024/03/17/233040)：例題 ARC174 C の、先手・後手の回ごとに等比級数で足す方法（包除原理による別解）
 - [kmjp「AtCoder ABC #189 : F - Sugoroku2」](https://kmjp.hatenablog.jp/entry/2021/01/23/0900)：練習 ABC189 F の、スタートの期待値を仮定する解き方・累積和・戻るマスが続くときの判定
 - [kmjp「AtCoder ABC #224 : G - Roll or Increment」](https://kmjp.hatenablog.jp/entry/2021/10/26/0900)：力試し ABC224 G の、振り直す範囲を決めて期待値を式にし、凸性で最小を探す方法
+- [ikatakos「京セラプログラミングコンテスト2022（AtCoder Beginner Contest 271）G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/1001_abc271)：力試し ABC271 G の等比級数で閉じる方針（解説の部分だけを参照）
+- [kmjp「AtCoder ABC #271 (京セラプログラミングコンテスト2022) : G - Access Counter」](https://kmjp.hatenablog.jp/entry/2022/10/04/1000)：力試し ABC271 G の循環する系を掃き出す方針

@@ -223,22 +223,28 @@ CDQ 分割統治は[またぐものの数え方](#crossing)の延長である。
 <div class="kp-problems" data-role="practice" markdown>
 
 - [CHOKUDAI_S001 J. 転倒数](https://atcoder.jp/contests/chokudai_S001/tasks/chokudai_S001_j)（diff —）：隣接交換で数列をソートするときの交換回数（転倒数）を求める。
+- [ARC075 E. Meaningful Mean](https://atcoder.jp/contests/arc075/tasks/arc075_c)（diff 1979）：平均が K 以上になる連続部分列の個数を求める。
 
 </div>
 
 ??? note "方針"
     - **CHOKUDAI_S001 J**：交換回数は転倒数に等しい（[転倒数](../ds/inversion-number.md)）。[マージソートで数える](#crossing)と $O(N \log N)$ で求まる。BIT で数えても同じ計算量である
+    - **ARC075 E**：各項から $K$ を引いた累積和 $S$ を作ると、$i < j$ かつ $S_i \le S_j$ の組を数える問題になる。等号の向きが違う転倒数なので、マージソートで左右をまたぐ組を数える方法で $O(N \log N)$ になる（解説はどちらも BIT で数えている）
 
 ## 力試し {#challenge}
 
 <div class="kp-problems" data-role="challenge" markdown>
 
 - [ABC478 G. Division Point Hull](https://atcoder.jp/contests/abc478/tasks/abc478_g)（diff 2582）：N 個の点から番号の小さい点と大きい点を選んで p:q に内分した点をすべて考え、それらの凸包の面積を求める。
+- [ABC282 Ex. Min + Sum](https://atcoder.jp/contests/abc282/tasks/abc282_h)（diff 2621）：2 つの列 A・B について、区間の A の最小値と区間の B の和の合計が S 以下になる区間の個数を求める。
+- [KEYENCE2019 E. Connecting Cities](https://atcoder.jp/contests/keyence2019/tasks/keyence2019_e)（diff 2623）：一列に並ぶ都市を結ぶ完全グラフで、辺の重みが番号の差と両端の値で決まるときの最小全域木の重みを求める。
 
 </div>
 
 ??? note "方針"
     - **ABC478 G**：点を番号で半分に分ける。両方が左・両方が右の組は再帰に任せる。またぐ組の内分点は「左の点を $q$ 倍したもの」と「右の点を $p$ 倍したもの」の和なので、その全体の凸包は左右の凸包の[ミンコフスキー和](../geometry/advanced-geometry.md#minkowski-sum)になる。3 つの凸包をまとめて凸包を取り直す。座標を $p + q$ 倍のまま整数で扱う
+    - **ABC282 Ex**：区間の最小値の位置で分け、左右の短い方の端点を全部試し、長い方の端点を $B$ の累積和の二分探索で数える。短い方だけを試すので、全体で $O(N \log^2 N)$ になる
+    - **KEYENCE2019 E**：番号で半分に分け、中央をまたぐ辺は「各点から反対側の代表 1 点への辺」だけを残す（ほかの辺は閉路の最も重い辺になり不要）。候補は $O(N \log N)$ 本になり、クラスカル法で解ける
 
 ## 確認問題 {#quiz}
 
@@ -278,3 +284,7 @@ CDQ 分割統治は[またぐものの数え方](#crossing)の延長である。
 - [kmjp「AtCoder ABC #426 : G - Range Knapsack Query」](https://kmjp.hatenablog.jp/entry/2025/10/06/1000)：例題 abc426_g の、中央をまたぐクエリを左の接尾辞と右の接頭辞の表で答える方針と計算量
 - [kmjp「AtCoder Beginner Contest 478 : G - Division Point Hull」](https://kmjp.hatenablog.jp/entry/2026/10/08/0900)：力試し abc478_g の、番号で分けてまたぐ組をミンコフスキー和で作る方針
 - [vain0x「競プロ参戦記 第10回「転倒数」 Chokudai Speed Run 001 [J]」（note）](https://note.com/vain0x/n/n0037d6468812)：練習 chokudai_S001_j の問い（バブルソートの交換回数）
+- [drken「AtCoder ARC 075 E - Meaningful Mean (青色, 600 点)」](https://drken1215.hatenablog.com/entry/2020/04/24/015400)：練習 ARC075 E の累積和で転倒数に帰着する方針
+- [kmjp「AtCoder ARC #075 : E - Meaningful Mean」](https://kmjp.hatenablog.jp/entry/2017/06/03/1030)：練習 ARC075 E の S_i ≤ S_j の組の数え上げへの帰着
+- [kmjp「AtCoder ABC #282 (HHKBプログラミングコンテスト2022 Winter) : Ex - Min + Sum」](https://kmjp.hatenablog.jp/entry/2022/12/18/0930)：力試し ABC282 Ex の最小値の範囲で短い側を試す方針
+- [drken「キーエンス プログラミング コンテスト 2019 E - Connecting Cities (橙色, 600 点)」](https://drken1215.hatenablog.com/entry/2019/01/15/081500)：力試し KEYENCE2019 E の中央で分ける分割統治

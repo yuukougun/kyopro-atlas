@@ -177,12 +177,27 @@ ABC の多くはメモリ制限 1024 MiB なので（[計算量の見積もり](
 
 <div class="kp-problems" data-role="practice" markdown>
 
+- [ABC215 D. Coprime 2](https://atcoder.jp/contests/abc215/tasks/abc215_d)（diff 736）：数列のどの要素とも互いに素であるような M 以下の正の整数をすべて列挙する。
+- [ABC342 D. Square Pair](https://atcoder.jp/contests/abc342/tasks/abc342_d)（diff 944）：0 以上 2×10^5 以下の N 個の整数から、積が平方数になる組 i < j の個数を数える。
 - [ABC368 F. Dividing Game](https://atcoder.jp/contests/abc368/tasks/abc368_f)（diff 1180）：数列の要素を 1 つ選んでその真の約数に置き換える操作を 2 人が交互に行い、操作できなくなった方が負けるとき、勝者を求める。
 
 </div>
 
 ??? note "練習の方針"
+    - **ABC215 D**：各 $A_i$ を素因数分解して現れた素数を集め、その素数の倍数を 1〜$M$ から消して残ったものを出力する。分解は最小素因数の表でも試し割りでもよい。倍数を消す処理は調和級数の形で $O(M \log M)$ である
+    - **ABC342 D**：最小素因数の表を前計算して各 $A_i$ を分解し、指数が奇数の素因数だけを掛けた値（平方因子を除いた核）に直す。核が等しい組を数え、0 を含む組は別に数える
     - **ABC368 F**：真の約数に置き換えることは、素因数を 1 個以上取り除くことと同じである。各要素の $\Omega(A_i)$ を Nim の山の大きさとみて XOR し、0 でなければ先手の勝ちである。$\Omega(A_i)$ は最小素因数の表で求める（値が小さいので試し割りでも間に合う）
+
+## 力試し {#challenge}
+
+<div class="kp-problems" data-role="challenge" markdown>
+
+- [ABC152 E. Flatten](https://atcoder.jp/contests/abc152/tasks/abc152_e)（diff 1348）：10^6 以下の N 個（N ≤ 10^4）の正の整数 A_i に対し、A_i B_i がすべて等しくなる正の整数列 B の和の最小値を 10^9+7 で割った余りで求める。
+
+</div>
+
+??? note "力試しの方針"
+    - **ABC152 E**：共通の値は $\mathrm{lcm}(A_1, \dots, A_N)$ でよい。lcm は大きくなるので、各 $A_i$ を最小素因数の表で分解して素因数ごとの最大の指数で持つ。mod 上で $\mathrm{lcm} / A_i$ の和をとる（割り算は逆元で行う）
 
 ## 参考 {#references}
 
@@ -190,3 +205,8 @@ ABC の多くはメモリ制限 1024 MiB なので（[計算量の見積もり](
 - [drken「AtCoder ABC 177 E - Coprime (1Q, 緑色, 500 点)」](https://drken1215.hatenablog.com/entry/2020/10/31/203300)：例題の言い換えと、素因数を数える方法・倍数をたどる方法の比較
 - [プロひろ「ABC368 F問題（Dividing Game）を解く」](https://programming-hiroba.com/abc368-f/)：練習の方針（素因数の個数を Nim の山とみる）
 - [hyouri「ABC368をPythonで（A～D,F）」](https://qiita.com/hyouri/items/f80a169412d5a969c25d)：練習の別解（Grundy 数を倍数に配って求める）
+- [sano192「ABC215 A～D問題 ものすごく丁寧でわかりやすい解説  python 灰色～茶色コーダー向け」](https://qiita.com/sano192/items/00f6b70dab3bd3323ae6)：練習 ABC215 D の素数を集めて倍数を消す方針
+- [okm-uv「ABC215 を Rust で解く (D問題まで)」](https://qiita.com/okm-uv/items/240b3fd3d2ff5f9561ab)：練習 ABC215 D の同じ方針
+- [drken「AtCoder ABC 342 D - Square Pair (1Q, 緑色, 400 点)」](https://drken1215.hatenablog.com/entry/2024/11/23/160056)：練習 ABC342 D の核への言い換えと最小素因数の表での分解
+- [プロひろ「ABC342 D問題（Square Pair）を解く」](https://programming-hiroba.com/abc342-d/)：練習 ABC342 D の同じ言い換え
+- [drken「AtCoder ABC 152 E - Flatten (1Q, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2020/01/22/071000)：力試し ABC152 E の lcm を素因数ごとに持つ方針と最小素因数の表

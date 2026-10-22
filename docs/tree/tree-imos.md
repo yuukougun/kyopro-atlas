@@ -167,11 +167,15 @@ $v$ の側も同じである。頂点版では $l$ がパスに含まれるの�
 
 <div class="kp-problems" data-role="practice" markdown>
 
+- [ABC138 D. Ki](https://atcoder.jp/contests/abc138/tasks/abc138_d)（diff 920）：頂点 1 を根とする木で、部分木の全頂点に x を足す操作を Q 回行った後の、各頂点の値を求める。
+- [ABC309 E. Family and Insurance](https://atcoder.jp/contests/abc309/tasks/abc309_e)（diff 957）：親が子より小さい番号で与えられる家系図で、人 x から y 世代下までの子孫に及ぶ保険がいくつかあるとき、保険の対象になる人の数を求める。
 - [ABC222 E. Red and Blue Tree](https://atcoder.jp/contests/abc222/tasks/abc222_e)（diff 1491）：木の上を決まった順に移動するとき、辺を赤と青に塗り分けて、赤の辺を通った回数と青の辺を通った回数の差がちょうど K になる塗り方の数を求める
 
 </div>
 
 ??? note "練習の方針"
+    - **ABC138 D**：各操作では部分木の根に $x$ を足すだけにし、最後に根から下へ親の値を子に足して累積する。$O(N + Q)$ である
+    - **ABC309 E**：「あと何世代まで及ぶか」の最大を、番号順に $\mathrm{dp}[i] = \max(\mathrm{dp}[p_i] - 1, \text{本人の保険の } y \text{ の最大})$ と親から子へ伝える。保険のない人は $-1$ から始め、$\mathrm{dp}[i] \ge 0$ の人を数える。$O(N + M)$ である
     - **ABC222 E**：まず各辺を通る回数 $D_i$ を求める。移動 1 回をパスへの $+1$ と見て、[パスへの加算](#path-add)の辺版で数えられる。この問題は $N$ と移動回数が小さいので、移動ごとにパスをたどって数えても間に合う。$D_i$ が決まれば、辺 $i$ を赤にすると差に $+D_i$、青にすると $-D_i$ が加わるので、和が $K$ になる選び方を[部分和](../dp/subset-sum.md)の DP で数える。差は負にもなるので、添字をずらして持つ
 
 ## 確認問題 {#quiz}
@@ -209,3 +213,4 @@ $v$ の側も同じである。頂点版では $l$ がパスに含まれるの�
 - [drken「AtCoder ABC 187 E - Through Path (水色, 500 点)」](https://drken1215.hatenablog.com/entry/2021/01/03/162800)：辺の片側への加算を、部分木への加算と「全体に足して部分木から引く」に直す方針
 - [drken「AtCoder ABC 138 D - Ki (緑色, 400 点)」](https://drken1215.hatenablog.com/entry/2020/05/18/174000)：部分木の根に印を置き、根から下へ累積する基本形
 - [hamayan「ABC222 E - Red and Blue Tree」](https://blog.hamayanhamayan.com/entry/2021/10/10/142820)：各辺を通る回数を先に数えて部分和 DP に直す方針と、制約が小さいので素朴に数えてよいこと
+- [ZOI_dayo「【AtCoder】黒〜緑のためのABC解説 | ABC309 A~F」](https://qiita.com/ZOI_dayo/items/a55cc4342832efdc23ba)：練習 ABC309 E の親から子へ最大を伝える漸化式

@@ -202,22 +202,30 @@ if root の回数の偶奇が指定と違う: walk の最後の要素を消す
 
 <div class="kp-problems" data-role="practice" markdown>
 
+- [ARC044 B. 最短路問題](https://atcoder.jp/contests/arc044/tasks/arc044_b)（diff 1744）：頂点 1 から各頂点までの最短距離の列が与えられ、その距離を実現する N 頂点の単純無向グラフの個数を 10^9+7 で割った余りで求める。
+- [AGC035 B. Even Degrees](https://atcoder.jp/contests/agc035/tasks/agc035_b)（diff 2039）：連結な単純無向グラフのすべての辺に向きを付け、どの頂点も出次数が偶数になるようにする向き付けを 1 つ出力し、できなければ -1 を出力する。
+- [ARC111 D. Orientation](https://atcoder.jp/contests/arc111/tasks/arc111_d)（diff 2064）：単純無向グラフと各頂点の値 c_i が与えられ、各頂点から到達できる頂点数（自分を含む）がちょうど c_i になるように辺の向きを決める（答えがあることは保証される）。
 - [ABC244 G. Construct Good Path](https://atcoder.jp/contests/abc244/tasks/abc244_g)（diff 2117）：連結な無向グラフで、各頂点を通る回数の偶奇が指定どおりになる長さ 4N 以下の経路を 1 つ出力する。
 
 </div>
 
 ??? note "方針"
+    - **ARC044 B**：BFS 木の性質から、辺は距離が同じか 1 違う頂点の間にしか張れない。距離 $d$ の頂点数を $f(d)$ として、各頂点が一つ前の層に少なくとも 1 本の辺を持つ $(2^{f(d-1)} - 1)^{f(d)}$ と、同じ層の中の辺の有無 $2^{f(d)(f(d)-1)/2}$ を掛け合わせる。頂点 1 の距離が 0 でないときや、距離 0 の頂点がほかにあるときは 0 通りである
+    - **AGC035 B**：辺の本数 $M$ が奇数なら不可能である。偶数なら DFS で葉の側から処理し、子から上がってきた未処理の辺が 2 本たまればその頂点から 2 本とも外向きにし、1 本余れば親への辺と組にして外向きにする。すべての辺が頂点を共有する 2 本の組に分かれ、出次数が偶数になる
+    - **ARC111 D**：$c$ が違う辺は $c$ の大きい側から小さい側へ向ける。$c$ が等しい辺だけのグラフでは、DFS 木の辺を親から子へ、後退辺を子孫から祖先へ向けて強連結にする（答えの存在の保証から、その成分に橋はない）
     - **ABC244 G**：全域木を 1 つ作り、[DFS 木をたどって偶奇を合わせる](#parity-walk)手順で列を作る。子から戻った直後に偶奇が違えば往復を挟み、最後に根の偶奇を最後の要素の削除で直す。列の頂点の個数は $4N - 3$ 以下に収まる。
 
 ## 力試し {#challenge}
 
 <div class="kp-problems" data-role="challenge" markdown>
 
+- [ARC143 D. Bridges](https://atcoder.jp/contests/arc143/tasks/arc143_d)（diff 2229）：長さ M の 2 つの列 A・B から、各 i で辺 (A_i, B_i+N) と (B_i, A_i+N) のどちらを張るかを選んで 2N 頂点のグラフを作るとき、橋の数が最小になる選び方を 1 つ出力する。
 - [ABC232 H. King's Tour](https://atcoder.jp/contests/abc232/tasks/abc232_h)（diff 2780）：H×W の盤面で、キングが左上から全マスを 1 回ずつ通り、指定のマスで終わる経路を出力する。
 
 </div>
 
 ??? note "方針"
+    - **ARC143 D**：$(A_i, B_i)$ を $N$ 頂点のグラフの辺とみると、選び方は辺の向き付けに当たる。DFS 木の辺を親から子へ、後退辺を子孫から祖先へ向ければ、もとから橋である辺以外はすべて有向閉路に乗るので、橋の数が最小になる
     - **ABC232 H**：端の 1 列（または 1 行）を先に通り切って、残りを小さい盤面の同じ問題にする。盤面の幅が 2 になったら、ジグザグに進んでから指定のマスへ戻る形で直接作る。終点の位置によっては縦と横を入れ替えてから分ける。
 
 ## 確認問題 {#quiz}
@@ -256,3 +264,9 @@ if root の回数の偶奇が指定と違う: walk の最後の要素を消す
 - [E869120「レッドコーダーが教える、競プロ・AtCoder上達のガイドライン【中級編：目指せ水色コーダー！】」](https://qiita.com/e869120/items/eb50fdaece12be418faa)：ARC083 D をワーシャルフロイド法の問題として分類していること。
 - [kmjp「AtCoder ABC #244 : G - Construct Good Path」](https://kmjp.hatenablog.jp/entry/2022/03/22/0900)：練習 ABC244 G で、全域木を DFS でたどり、偶奇の合わない子では往復を挟み、最後に根を直す方針。
 - [kmjp「AtCoder ABC #232 : H - King's Tour」](https://kmjp.hatenablog.jp/entry/2021/12/19/1030)：力試し ABC232 H で、端を通り切って小さい盤面に帰着させる方針。
+- [kmjp「AtCoder ARC #044 : A - 素数判定、B - 最短路問題」](https://kmjp.hatenablog.jp/entry/2015/09/12/1030)：練習 ARC044 B の層の間と層の中の辺の数え方
+- [kmjp「AtCoder AGC #035 : B - Even Degrees」](https://kmjp.hatenablog.jp/entry/2019/07/16/0900)：練習 AGC035 B の DFS で辺を 2 本ずつ組にする方針
+- [kmjp「AtCoder ARC #111 : D - Orientation」](https://kmjp.hatenablog.jp/entry/2021/01/10/0930)：練習 ARC111 D の c の大小と DFS での向き付け
+- [ikatakos「AtCoder Regular Contest 111 A,B,C,D,E問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0109_arc111)：練習 ARC111 D の木の辺と後退辺の向き（解説の部分だけを参照）
+- [drken「AtCoder ARC 143 D - Bridges (黄色, 700 点)」](https://drken1215.hatenablog.com/entry/2023/08/29/221129)：力試し ARC143 D の向き付けへの言い換えと DFS 木での向き付け
+- [kmjp「AtCoder ARC #143 : D - Bridges」](https://kmjp.hatenablog.jp/entry/2023/03/16/0900)：力試し ARC143 D の同じ方針

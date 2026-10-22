@@ -207,12 +207,29 @@ $T$ の bit $b$ が 1 であることは、深さ $B - 1 - b$ のすべてのノ
 
 <div class="kp-problems" data-role="practice" markdown>
 
+- [ARC033 C. データ構造](https://atcoder.jp/contests/arc033/tasks/arc033_3)（diff 1641）：数の集合に値を追加するクエリと、小さい方から x 番目の値を出力してそれを集合から取り除くクエリを処理する。
+- [ABC403 G. Odd Position Sum Query](https://atcoder.jp/contests/abc403/tasks/abc403_g)（diff 2028）：空の多重集合に値を 1 つずつ追加し、そのたびに昇順に並べたときの奇数番目の要素の和を答える（追加する値は前の答えから決まる）。
 - [ABC425 G. Sum of Min of XOR](https://atcoder.jp/contests/abc425/tasks/abc425_g)（diff 2205）：x = 0, 1, …, M − 1 について min_i (x xor A_i) を求め、その総和を答える。
 
 </div>
 
 ??? tip "ヒント"
-    - ABC425 G：$x$ が 2 の冪の範囲を丸ごと動くなら、[明示的に作らない Binary Trie](#implicit) の和の再帰で求まる。$[0, M)$ を上位 bit から、丸ごと入る半分とはみ出す半分に分け、はみ出す側だけ $M$ の bit に沿って降りる。
+    - **ARC033 C**：各ノードに部分木の個数を持つ Binary Trie に値を入れる。K 番目は、全体への XOR が 0 のときの降り方で、左の子の個数と K を比べて降りれば見つかる。見つけた葉の値を削除し、1 回 $O(B)$ である
+    - **ABC403 G**：先読みできないので座標圧縮はできない。値域 $[0, 2^{30})$ の Binary Trie（必要なノードだけ作る値域のセグメント木と同じ形）の各ノードに（個数, 奇数番目の和, 偶数番目の和）を持たせる。左の子の個数が奇数なら右の子の 2 つの和を入れ替えて合成し、追加のたびに葉から根へ作り直す
+    - **ABC425 G**：$x$ が 2 の冪の範囲を丸ごと動くなら、[明示的に作らない Binary Trie](#implicit) の和の再帰で求まる。$[0, M)$ を上位 bit から、丸ごと入る半分とはみ出す半分に分け、はみ出す側だけ $M$ の bit に沿って降りる。
+
+## 力試し {#challenge}
+
+<div class="kp-problems" data-role="challenge" markdown>
+
+- [ABC451 G. Minimum XOR Walk](https://atcoder.jp/contests/abc451/tasks/abc451_g)（diff 2221）：辺に重みのある連結な無向グラフで、2 頂点を結ぶウォークの重み（通った辺の重みの XOR）の最小値が K 以下になる頂点の組の数を求める。
+- [ARC122 D. XOR Game](https://atcoder.jp/contests/arc122/tasks/arc122_d)（diff 2331）：2N 個の整数を 2 人が 1 つずつ交互に取って N 組を作り、組ごとの XOR の最大値を先手は大きく、後手は小さくしたいとき、最適に行動した結果の値を求める。
+
+</div>
+
+??? note "力試しの方針"
+    - **ABC451 G**：全域木で根からの XOR $D(v)$ を求め、木に入らない辺が作る閉路の値で XOR 基底を作って各 $D(v)$ を最小化する。そのあと値を 1 つずつ Binary Trie に入れながら、入っている値との XOR が $K + 1$ 未満のものの個数を数える（$a \oplus x < y$ の個数を数える降り方）
+    - **ARC122 D**：上位 bit で集合を 2 つに分ける。両側が偶数個なら、両側で再帰した値の最大が答えである。奇数個なら、2 つの集合をまたぐ組の XOR の最小が答えで、片方を Binary Trie に入れ、もう片方の各要素について XOR の最小を引けばよい
 
 ## 確認問題 {#quiz}
 
@@ -246,3 +263,9 @@ $T$ の bit $b$ が 1 であることは、深さ $B - 1 - b$ のすべてのノ
 - [drken「AtCoder ABC 281 F - Xor Minimization (2D, 青色, 500 点)」](https://drken1215.hatenablog.com/entry/2022/12/13/144200)：上位 bit から 0・1 で分ける木と再帰（例題 ABC281 F の方針）
 - [merom686「ABC308」](https://merom686.hatenablog.com/entry/2023/07/02/004802)：部分木ごとに 2 要素の XOR の最小値を持ち、根へ持ち上げる方法。個数が 1 のノードに部分木の XOR を持たせる工夫（例題 ABC308 G の方針）
 - [Library Checker「Set Xor-Min」](https://judge.yosupo.jp/problem/set_xor_min)：追加・削除・$x$ との XOR の最小の検証
+- [drken「AtCoder ARC 033 C - データ構造 (1D, 試験管青色)」](https://drken1215.hatenablog.com/entry/2020/02/29/035900)：練習 ARC033 C の K 番目の取得と削除
+- [ikatakos「AtCoder Beginner Contest 403（Promotion of AtCoder Career Design DAY）F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0427_abc403)：練習 ABC403 G の動的セグメント木とノードの持ち方（解説の部分だけを参照）
+- [kmjp「AtCoder ABC #403 : G - Odd Position Sum Query」](https://kmjp.hatenablog.jp/entry/2025/04/28/1030)：練習 ABC403 G の問いの確認
+- [kmjp「AtCoder ABC #451 : G - Minimum XOR Walk」](https://kmjp.hatenablog.jp/entry/2026/03/28/0930)：力試し ABC451 G の XOR 基底と Binary Trie での数え上げ
+- [kmjp「AtCoder ARC #122 (東京海上日動 プログラミングコンテスト2021) : D - XOR Game」](https://kmjp.hatenablog.jp/entry/2021/06/13/0930)：力試し ARC122 D の偶奇の場合分けと Binary Trie での XOR の最小
+- [ikatakos「東京海上日動 プログラミングコンテスト2021（AtCoder Regular Contest 122) A,C,D,E問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/0612_arc122)：力試し ARC122 D の同じ場合分け（解説の部分だけを参照）

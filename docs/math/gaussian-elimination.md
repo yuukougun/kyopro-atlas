@@ -212,11 +212,17 @@ $2^{m-r}$ は $m - r$ が 60 を超えうるので、`1LL << (m - r)` ではな�
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC128 C. Switches](https://atcoder.jp/contests/abc128/tasks/abc128_c)（diff 805）：N 個のスイッチと M 個の電球があり、各電球はつながったスイッチのうち ON の個数の偶奇が決まった値のときに点く。すべての電球が点くスイッチの状態の数を求める（N, M ≤ 10）。
+- [CODE-THANKS-FESTIVAL-2017 F. Limited Xor Subset](https://atcoder.jp/contests/code-thanks-festival-2017/tasks/code_thanks_festival_2017_f)（diff —）：N 個（N ≤ 10^5）の正の整数から 0 個以上を選んで XOR が K になる選び方の数を、10^9+7 で割った余りで求める（値は 10^5 以下）。
+- [JAG2013SUMMER-DAY4 F. Graph Automata Player](https://atcoder.jp/contests/jag2013summer-day4/tasks/icpc2013summer_day4_f)（diff —）：N 頂点（N ≤ 300）の有向グラフで、各頂点の 0/1 の値が「辺の先で 1 の頂点の数が奇数なら 1」という規則で一斉に変わるとき、T 回後の値から元の値を復元し、解がなければ none、複数あれば ambiguous と答える。
+- [BITFLYER2018-FINAL D. 数列 XOR](https://atcoder.jp/contests/bitflyer2018-final/tasks/bitflyer2018_final_d)（diff —）：長さ N（N ≤ 10^5）の 60 bit の整数の列 A に、隣り合う 2 項の一方をその 2 項の XOR に置き換える操作を何度でも行って、列 B にできるかを判定する。
 
 </div>
 
 ??? note "方針"
     - **ABC128 C**：$N \le 10$ なので [bit 全探索](../basics/bit-full-search.md)で足りる。各電球の条件は「つながったスイッチの $x_j$ の XOR ＝ $p_i$」という mod 2 の式なので、掃き出してランク $r$ から $2^{N - r}$（解がなければ 0）としても求まる。$N, M$ が数百でも同じ方法で解ける
+    - **CODE-THANKS-FESTIVAL-2017 F**：選ぶかどうかを $x_i$ とすると、bit ごとに mod 2 の式が十数本並ぶ。掃き出してランク $r$ を求め、矛盾があれば 0、なければ $2^{N-r}$ と数える（値の和が $10^5$ 以下という制約を使う別の解き方もある）
+    - **JAG2013SUMMER-DAY4 F**：1 回の変化は隣接行列 $A$ を掛ける mod 2 の演算なので、$A^T$ を繰り返し二乗法で求める。$A^T x = (\text{T 回後の値})$ を mod 2 で掃き出し、$0 = 1$ が出れば none、ランクが $N$ 未満なら ambiguous、$N$ なら解を出す。行列の積と掃き出しは bitset で速くする
+    - **BITFLYER2018-FINAL D**：操作を組み合わせると、行の入れ替えと「ある行に別の行を XOR する」ができる。各数を 60 bit の行とみると操作は mod 2 の行基本変形そのもので、逆の操作も行基本変形である。$A$ と $B$ をそれぞれ簡約階段形にして（簡約階段形は操作の順によらず一意）、一致するかで判定する
 
 ## 力試し {#challenge}
 
@@ -268,3 +274,6 @@ $2^{m-r}$ は $m - r$ が 60 を超えうるので、`1LL << (m - r)` ではな�
 - [drken「AtCoder ABC 128 C - Switches (3Q, 緑色, 300 点)」](https://drken1215.hatenablog.com/entry/2019/06/15/135300)：練習 abc128_c の bit 全探索と、mod 2 の連立方程式として解く別解
 - [kmjp「AtCoder ABC #366 : G - XOR Neighbors」](https://kmjp.hatenablog.jp/entry/2024/08/16/1000)：力試し abc366_g の、頂点ごとに 1 に固定して解き bit に重ねる方針と制約（N ≤ 60）
 - [drken「みんなのプロコン 2019 E - Odd Subrectangles (3D, 橙色, 800 点)」](https://drken1215.hatenablog.com/entry/2019/02/10/024200)：力試し yahoo_procon2019_qual_e がランクだけで決まること
+- [drken「CODE FESTIVAL THANKS 2017 F - Limited Xor Subset (2D, 500 点)」](https://drken1215.hatenablog.com/entry/2019/03/20/173300)：練習 CODE FESTIVAL 2017 Thanks F の bit ごとの連立方程式とランク
+- [drken「AOJ 2624 Graph Automata Player (JAG 夏合宿 2013 day4-F) (2D, 550 点)」](https://drken1215.hatenablog.com/entry/2019/03/20/192300)：練習 JAG 夏合宿 2013 Day4 F の行列累乗と mod 2 の掃き出し
+- [drken「2018 codeFlyer 本選 D - 数列 XOR (3D, 600 点)」](https://drken1215.hatenablog.com/entry/2018/07/04/070000)：練習 codeFlyer 本選 D の行基本変形への言い換えと簡約階段形の比較

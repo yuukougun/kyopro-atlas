@@ -220,6 +220,17 @@ $$
 
     漸化式に気づかなくても、$N \le 6$ 程度を全探索して $E[c_i c_j]$ を並べれば規則が見える。展開して「ペアの値は 1 種類」と分かっていれば、調べる量が 1 つの数列に絞られる。
 
+## 練習問題 {#practice}
+
+<div class="kp-problems" data-role="practice" markdown>
+
+- [ABC332 E. Lucky bag](https://atcoder.jp/contests/abc332/tasks/abc332_e)（diff 1883）：N ≤ 15 個の品物を D 個の袋に分け（空の袋も許す）、袋ごとの重さの分散の最小値を求める。
+
+</div>
+
+??? note "練習の方針"
+    - **ABC332 E**：どの分け方でも平均は一定なので、分散の最小化は袋の重さの二乗和の最小化に言い換えられる。部分集合の部分集合を列挙する DP で袋を 1 つずつ決める。空の袋の値 0 も二乗和に入れる
+
 ## 力試し {#challenge}
 
 <div class="kp-problems" data-role="challenge" markdown>

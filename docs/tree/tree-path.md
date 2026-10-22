@@ -221,11 +221,13 @@ HL 分解は、パスを $O(\log N)$ 個の列の区間に分けるので、列�
 
 <div class="kp-problems" data-role="practice" markdown>
 
+- [ARC142 C. Tree Queries](https://atcoder.jp/contests/arc142/tasks/arc142_c)（diff 1347）：形の分からない木で、2 頂点の距離を尋ねる質問を繰り返して、頂点 1 と頂点 2 の距離を当てるインタラクティブの問題である。
 - [ABC133 F. Colorful Tree](https://atcoder.jp/contests/abc133/tasks/abc133_f)（diff 2330）：辺に色と長さがある木で、色 x の辺の長さをすべて y に変えたときの 2 頂点間の距離を、Q 個の質問に答える。
 
 </div>
 
 ??? note "方針"
+    - **ARC142 C**：1・2 以外の各頂点 $x$ について $d(1, x)$ と $d(2, x)$ を尋ねる。$x$ がパス 1–2 の上にあるとき和は $d(1, 2)$ になり、外れると大きくなるので、和の最小が答えになる。ただしパス上にほかの頂点がない（$d(1,2) = 1$）場合と区別が付かないとき（最小の和が 3 のとき）だけ、和が最小の 2 頂点の距離を 1 回尋ねて分ける
     - **ABC133 F**：変更後の距離は「元の距離 − パス上の色 $x$ の辺の長さの和 ＋ パス上の色 $x$ の辺の数 × $y$」である。3 つとも辺の値なので、根から頂点 $w$ までの値 $f(w)$ を使って $f(u) + f(v) - 2f(l)$ と書ける（[頂点の値と辺の値](#vertex-vs-edge)）。色ごとの和と本数を全頂点で持つと大きすぎるので、質問を先に読み、各質問を頂点 $u$・$v$・$l$ の 3 か所に係数 $+1$・$+1$・$-2$ で登録する。根から DFS し、色ごとの長さの和と本数を、入るときに足して出るときに戻す（[根からのパスを DFS で持ち回る](../tree/root-path-dfs.md)）。各頂点に着いた時点の値で、登録された質問に足し込む
 
 ## 力試し {#challenge}
@@ -285,3 +287,4 @@ HL 分解は、パスを $O(\log N)$ 個の列の区間に分けるので、列�
 - [drken「AtCoder ABC 152 F - Tree and Constraints (2D, 青色, 600 点)」](https://drken1215.hatenablog.com/entry/2020/01/26/164200)：例題 abc152_f の包除原理の組み立てと、パスの辺を整数の bit 集合で持つこと
 - [はまやんはまやんはまやん「ABC133 F - Colorful Tree」](https://blog.hamayanhamayan.com/entry/2019/07/08/213009)：練習 abc133_f の距離の書き換えと、質問を先読みして DFS で色ごとの和と本数を持つこと
 - [kmjp「AtCoder ABC #298 (トヨタ自動車プログラミングコンテスト2023#1) : Ex - Sum of Min of Length」](https://kmjp.hatenablog.jp/entry/2023/04/16/0930)：力試し abc298_h の境目の頂点を K 個上の祖先で求めることと、部分木の大きさの累積で距離の和を計算すること
+- [merom686「ARC142」](https://merom686.hatenablog.com/entry/2022/06/20/000753)：練習 ARC142 C の距離の和の最小と距離 1 の場合の区別

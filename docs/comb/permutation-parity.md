@@ -178,11 +178,13 @@ swap できる位置の組を辺とするグラフを考えると、連結成分
 
 <div class="kp-problems" data-role="practice" markdown>
 
+- [ARC136 B. Triple Shift](https://atcoder.jp/contests/arc136/tasks/arc136_b)（diff 1358）：長さ N の列 A で隣り合う 3 要素を巡回させる操作を繰り返し、列 B に一致させられるかを判定する。
 - [ABC296 F. Simultaneous Swap](https://atcoder.jp/contests/abc296/tasks/abc296_f)（diff 1811）：2 つの列 A, B に、A の 2 要素の swap と B の 2 要素の swap を同時に行う操作を繰り返して、A と B を一致させられるかを判定する。
 
 </div>
 
 ??? note "練習の方針"
+    - **ARC136 B**：値の多重集合が違えば No である。同じ値が 2 つ以上あれば Yes、値がすべて異なれば $A$ と $B$ の転倒数の偶奇が一致するときだけ Yes とする（3 要素の巡回は偶置換）
     - **ABC296 F**：値の多重集合が違えば No である。同じ値が 2 つあれば、A の側でその 2 つを swap すると A は変わらず、B だけを好きに swap できるので Yes になる。値がすべて異なれば、1 回の操作で A を B にそろえる置換は swap 2 回分変わるので、偶奇は保たれる。A で $i$ と $j$、B で $j$ と $k$ を swap すると、両方で $j$ と $k$ を swap した（組の並ぶ順が変わるだけの）状態と比べて、A だけを 3 要素の巡回で動かしたことになる。だから偶置換なら Yes、奇置換なら No である。
 
 ## 確認問題 {#quiz}
@@ -218,3 +220,4 @@ swap できる位置の組を辺とするグラフを考えると、連結成分
 - [箱星「競プロ er のための群論 (swap と順列と対称群)」](https://zenn.dev/koboshi/articles/e60e2737854c1e)：swap の回数の偶奇が一意に定まることの別の証明（差積の符号）と、隣り合う 3 要素の巡回で偶置換を作れること
 - [syamashi「[ARC136] B - Triple Shift」](https://note.com/syamashi/n/nb491ffdf0ca3)：隣り合う 3 か所の巡回で、重複の有無と転倒数の偶奇で判定する型
 - [Wikipedia「15 puzzle」](https://en.wikipedia.org/wiki/15_puzzle)：スライドパズルの偶奇の不変量と、縦横 2 以上の盤で条件を満たす配置がすべて作れること
+- [ikatakos「AtCoder Regular Contest 136 B,C,D問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0227_arc136)：練習 ARC136 B の多重集合・重複・転倒数の偶奇による判定（解説の部分だけを参照）

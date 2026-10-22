@@ -248,6 +248,19 @@ $$
     - 状態が $O(TK)$ 個、各状態で押し方 $p(M)$ 通りを $O(M)$ ずつ調べて、全体で $O(TK \cdot M \, p(M))$ である。押し方の一覧は最初に 1 回だけ全列挙して配列に持つ。
     - 確率の最大化を状態ごとに選ぶ形は[最適戦略の期待値](../comb/optimal-strategy-expectation.md)と同じである。
 
+## 練習問題 {#practice}
+
+<div class="kp-problems" data-role="practice" markdown>
+
+- [DWACON2018-PRELIMS C. Kill/Death](https://atcoder.jp/contests/dwacon2018-prelims/tasks/dwacon2018_prelims_c)（diff —）：キル数が広義単調減少の 2 チームについて、自分のデス数の合計が相手のキル数の合計に等しく、同じキル数の人どうしではデス数が広義単調減少になるデス数の割り当ての数を求める。
+- [ARC107 D. Number of Multisets](https://atcoder.jp/contests/arc107/tasks/arc107_d)（diff 2099）：1, 1/2, 1/4, … の形の有理数をちょうど N 個選んで和を K にする多重集合の数を求める（K ≤ N ≤ 3000）。
+
+</div>
+
+??? note "練習の方針"
+    - **DWACON2018-PRELIMS C**：同じキル数の人が $n$ 人いるまとまりでは、デス数の合計 $k$ への割り当てが「$k$ を $n$ 個以下の部分に分ける」分割数 $p(k, n)$ になる。これを重みにして、まとまりごとに合計を進める DP で数える
+    - **ARC107 D**：1 を含むかどうかで場合分けする。含むなら 1 を取り除いて $f(N-1, K-1)$、含まないなら全体を 2 倍して $f(N, 2K)$ になる。漸化式 $f(N, K) = f(N-1, K-1) + f(N, 2K)$ を、同じ行の右側を先に埋める順（$K$ の降順）で $O(N^2)$ で求める。分割数の DP と同じく「含まなければ全体を変換して同じ形に戻す」考え方である
+
 ## 力試し {#challenge}
 
 <div class="kp-problems" data-role="challenge" markdown>
@@ -297,3 +310,6 @@ $$
 - [ikatakos「AtCoder Beginner Contest 404（Promotion for Engineer Guild）F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2025/0503_abc404)：例題 ABC404 F の方針（押し方を M の分割として全列挙すること、$p(30) = 5604$、勝率の漸化式）（解説の部分だけを参照）
 - [merom686「ABC404」](https://merom686.hatenablog.com/entry/2025/05/04/203436)：例題 ABC404 F の着眼（ボタンの区別がなくなること、分割数が大きくないこと）
 - [kmjp「AtCoder ABC #221 : H - Count Multiset」](https://kmjp.hatenablog.jp/entry/2021/10/03/1030)：力試し ABC221 H の方針（1 を含む・含まないの場合分けと、M + 1 個目の 1 を引く項）
+- [drken「第4回 ドワンゴからの挑戦状 予選 2018 C - Kill/Death (500 点)」](https://drken1215.hatenablog.com/entry/2023/05/07/160611)：練習 DWACON2018 予選 C の分割数を重みにした DP
+- [drken「AtCoder ARC 107 D - Number of Multisets (黄色, 600 点)」](https://drken1215.hatenablog.com/entry/2020/11/01/175900)：練習 ARC107 D の漸化式と埋める順
+- [kmjp「AtCoder ARC #107 : D - Number of Multisets」](https://kmjp.hatenablog.jp/entry/2020/11/04/0900)：練習 ARC107 D の同じ漸化式

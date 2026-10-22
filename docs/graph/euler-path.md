@@ -194,7 +194,16 @@ $\mathrm{ptr}[v]$ を持たずに毎回隣接リストの先頭から未使用�
 
 ## 練習問題 {#practice}
 
-台帳で確かめた AtCoder の練習問題はまだない。構成を自分で書いたら、Library Checker の [Eulerian Trail (Undirected)](https://judge.yosupo.jp/problem/eulerian_trail_undirected) と [Eulerian Trail (Directed)](https://judge.yosupo.jp/problem/eulerian_trail_directed) で確かめられる。どちらも 1 つの入力に複数のケースがあり、多重辺や自己ループ、辺のない頂点を含むので、[落とし穴](#pitfalls)をひととおり試せる。
+<div class="kp-problems" data-role="practice" markdown>
+
+- [AGC032 C. Three Circuits](https://atcoder.jp/contests/agc032/tasks/agc032_c)（diff 2284）：単純で連結な無向グラフ（N, M ≤ 10^5）の辺をすべて 1 回ずつ使い、ちょうど 3 つの閉路（頂点の重複は許す閉じたウォーク）に分けられるかを判定する。
+
+</div>
+
+??? note "練習の方針"
+    - **AGC032 C**：閉路をつなぐと一筆書きの閉路になるので、全頂点の次数が偶数であることが必要である。そのうえで次数 6 以上の頂点があれば Yes（オイラー閉路をその頂点で 3 つに区切る）、次数 4 の頂点が 3 個以上なら Yes、1 個以下なら No である。ちょうど 2 個（$s, t$）なら、$s$ から $t$ を通らずに $s$ へ戻れるかを DFS で調べる
+
+構成を自分で書いたら、Library Checker の [Eulerian Trail (Undirected)](https://judge.yosupo.jp/problem/eulerian_trail_undirected) と [Eulerian Trail (Directed)](https://judge.yosupo.jp/problem/eulerian_trail_directed) で確かめられる。どちらも 1 つの入力に複数のケースがあり、多重辺や自己ループ、辺のない頂点を含むので、[落とし穴](#pitfalls)をひととおり試せる。
 
 ## 確認問題 {#quiz}
 
@@ -227,3 +236,5 @@ $\mathrm{ptr}[v]$ を持たずに毎回隣接リストの先頭から未使用�
 - [drken「DFS (深さ優先探索) 超入門！ 〜 グラフ・アルゴリズムの世界への入口 〜【後編】」](https://qiita.com/drken/items/a803d4fc4a727e02f7ba)：オイラー閉路の存在条件と、DFS で構成して十分性を示す筋
 - [kokiymgch「競プロにおけるオイラー路とその応用について」](https://kokiymgch.hatenablog.com/entry/2017/12/07/193238)：オイラー路の構成と応用の型の範囲
 - [Library Checker「Eulerian Trail (Undirected)」・「Eulerian Trail (Directed)」の問題文（library-checker-problems）](https://github.com/yosupo06/library-checker-problems/tree/master/graph)：入出力の形と、多重辺を含むこと
+- [drken「AtCoder AGC 032 C - Three Circuits (黄色, 800 点)」](https://drken1215.hatenablog.com/entry/2019/03/28/161000)：練習 AGC032 C の次数の偶奇と場合分け
+- [ikatakos「AtCoder Grand Contest 032 A～E 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2019/0323_agc032)：練習 AGC032 C の同じ場合分け（解説の部分だけを参照）

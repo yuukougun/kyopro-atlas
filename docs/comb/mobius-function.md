@@ -231,23 +231,29 @@ $N \le 2 \times 10^5$、$A_i \le 10^6$ で、答えは mod 998244353 で求め�
 
 <div class="kp-problems" data-role="practice" markdown>
 
+- [ABC304 F. Shift Table](https://atcoder.jp/contests/abc304/tasks/abc304_f)（diff 1619）：'.' と '#' からなる長さ N の予定 S について、'#' の一部を '.' に変えてできる列のうち、N 未満の N の約数 M を周期に持つものの数を mod 998244353 で求める。
 - [AGC039 C. Division by Two with Something](https://atcoder.jp/contests/agc039/tasks/agc039_c)（diff 2379）：N 桁の 2 進数で与えられる X 以下の各整数 k について、「奇数なら 1 引いて 2 で割り、偶数なら 2 で割って 2^(N−1) を足す」操作を何回で k に戻るかを求め、その総和を求める。
 
 </div>
 
 ??? note "練習の方針"
+    - **ABC304 F**：周期 $d$ を持つ列の数 $F(d)$ は $2^{(\text{自由な剰余類の数})}$ である。最小周期がちょうど $d$ の数 $f(d)$ を $F(d) = \sum_{e \mid d} f(e)$ の反転で戻し、答えを $F(N) - f(N) = -\sum_{d \mid N, d < N} \mu(N/d) F(d)$ とする
     - **AGC039 C**：$k$ の $N$ bit の後ろに、その bit を反転した $N$ bit をつなげた $2N$ bit の列を考えると、操作はこの列の巡回シフトになる。戻るまでの回数は $2N$ の約数で、$N/d$ が奇数である $N$ の約数 $d$ について $2d$ の形をとる。「回数が $2d$ の約数になる $k$」の個数 $F(d)$ は、$X$ の上位 $d$ bit を使って $O(N)$ で数えられる。$F(d)$ は回数がちょうど $2e$（$e \mid d$、$d/e$ は奇数）の個数の和なので、[反転](#inversion)で $d$ の小さい順に約数の分を引き、回数ごとに $2d$ を掛けて足す。
 
 ## 力試し {#challenge}
 
 <div class="kp-problems" data-role="challenge" markdown>
 
+- [ABC248 G. GCD cost on the tree](https://atcoder.jp/contests/abc248/tasks/abc248_g)（diff 2514）：各頂点に正の整数が書かれた木で、すべての 2 頂点の組についての「パス上の値の gcd × パスの頂点数」の総和を求める。
 - [ABC230 G. GCD Permutation](https://atcoder.jp/contests/abc230/tasks/abc230_g)（diff 2516）：1〜N の順列 P について、gcd(i, j) ≠ 1 かつ gcd(P_i, P_j) ≠ 1 となる組 (i, j) の数を求める。
+- [ABC020 D. LCM Rush](https://atcoder.jp/contests/abc020/tasks/abc020_d)（diff 2695）：1 ≤ i ≤ N について lcm(i, K) の総和を mod 10^9+7 で求める（N, K ≤ 10^9）。
 
 </div>
 
 ??? note "力試しの方針"
+    - **ABC248 G**：$d$ ごとに値が $d$ の倍数の頂点だけの森を作り、gcd が $d$ の倍数のパスの頂点数の和 $g(d)$ を木 DP で数える。gcd がちょうど $d$ の分 $f(d)$ を倍数について戻して $\sum d \, f(d)$ とする（倍数を引く操作は $\mu$ の和で書いても同じである）
     - **ABC230 G**：[応用の型の「gcd が 1 でない組」](#gcd-one)の $\nu$（$\nu(1) = 0$、$d \ge 2$ で $\nu(d) = -\mu(d)$）で、2 つの条件をどちらも約数の和にする。添字の側の $a$ と値の側の $b$ について、$c(a, b)$ を「$a \mid i$ かつ $b \mid P_i$ となる $i$ の個数」とする。組は $1 \le i \le j \le N$（$i = j$ を含む）なので、答えは $\sum_{a, b} \nu(a)\nu(b) \cdot c(a, b)(c(a, b) + 1)/2$ になる。$a$ ごとに $a$ の倍数の $i$ を回し、$P_i$ の squarefree な約数 $b \ge 2$ ごとに個数を数える。$b$ は $P_i$ の素因数の空でない部分集合の積だけで、$N \le 2 \times 10^5$ なので素因数は 6 個以下、1 個あたり 63 個以下で済む。$a$ の倍数を回す回数の和は $O(N \log N)$ なので、全体で約 $63 N \log N$（$N = 2 \times 10^5$ で $10^8$ 程度）である。
+    - **ABC020 D**：$\gcd(i, K) = M$ ごとに分けて $i = M i'$ とする。$i' \le \lfloor N/M \rfloor$ で $K/M$ と互いに素な $i'$ の和を、$K/M$ の素因数の部分集合（$\mu(d) \ne 0$ の約数 $d$）について符号付きで足す
 
 ## 確認問題 {#quiz}
 
@@ -296,3 +302,6 @@ $N \le 2 \times 10^5$、$A_i \le 10^6$ で、答えは mod 998244353 で求め�
 - [drken「AtCoder AGC 039 C - Division by Two with Something (黄色, 800 点)」](https://drken1215.hatenablog.com/entry/2020/11/11/035400)：練習の方針（ビット列の周期と、約数の周期で重複した分を除くこと）
 - [kmjp「AtCoder ABC #230 : G - GCD Permutation」](https://kmjp.hatenablog.jp/entry/2021/12/08/1000)：力試しの方針（変形した μ で 2 つの gcd の条件を約数の和にし、個数から組の数を作ること）
 - [Kodaman「ABC230 - G. GCD Permutation (600)」](https://scrapbox.io/Kodaman/ABC230_-_G._GCD_Permutation_(600))：力試しの方針の確認（squarefree な約数に絞って数える見積もり）
+- [drken「AtCoder ABC 304 F - Shift Table (1D, 青色, 525 点)」](https://drken1215.hatenablog.com/entry/2023/06/07/153403)：練習 ABC304 F の周期の数え上げとメビウス反転
+- [kmjp「AtCoder ABC #248 (ユニークビジョンプログラミングコンテスト2022) : G - GCD cost on the tree」](https://kmjp.hatenablog.jp/entry/2022/04/18/0900)：力試し ABC248 G の d の倍数の頂点の森と倍数を引く方針
+- [tsutaj「AtCoder Beginner Contest 020 D: LCM Rush」](https://tsutaj.hatenablog.com/entry/2017/07/01/073648)：力試し ABC020 D の gcd で分けて互いに素な数の和を包除で求める方針

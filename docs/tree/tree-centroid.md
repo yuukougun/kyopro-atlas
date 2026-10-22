@@ -172,6 +172,19 @@ $$
     - 列の長さを $2k$ として、$i$ 番目と $i + k$ 番目を組にして出力する。各枝は $k$ 頂点以下で列の中で連続するので、組の 2 頂点が同じ枝に入らない。
     - 距離の値は出力しないが、和は $g$ からの深さの総和になり、上限 $\sum_e \min(s_e, N - s_e)$ に一致する。全体で $O(N)$。
 
+## 練習問題 {#practice}
+
+<div class="kp-problems" data-role="practice" markdown>
+
+- [ABC348 E. Minimize Sum of Distances](https://atcoder.jp/contests/abc348/tasks/abc348_e)（diff 1347）：頂点に重み C_i のついた木で、頂点 v を 1 つ選んだときの Σ C_i·d(v, i) の最小値を求める。
+- [DWACON2018-PRELIMS E. ニワンゴくんの家探し](https://atcoder.jp/contests/dwacon2018-prelims/tasks/dwacon2018_prelims_e)（diff —）：次数が 5 以下の N 頂点（N ≤ 2000）の木で隠された頂点を、「2 頂点 u, v のどちらが近いか（等しければ 0）」を答える質問を 14 回までして当てる対話型の問題である。
+
+</div>
+
+??? note "練習の方針"
+    - **ABC348 E**：根から隣へ動くと、値は「動いた先の側の重みの和」の 2 倍から全体の重みを引いた分だけ減る。重みの和が全体の半分を超える側へ動けなくなるまで進めば、その頂点（重み付き重心）で最小になる
+    - **DWACON2018-PRELIMS E**：残った候補の成分で重心 $c$ を求め、$c$ の隣の 2 頂点を質問する。近い方の枝に絞るか、等距離なら 2 つの枝を候補から消せるので、候補は 1 回で半分以下か 2 回で 1/4 以下に減り、14 回に収まる。成分が変わるたびに部分木の大きさを数え直す
+
 ## 力試し {#challenge}
 
 <div class="kp-problems" data-role="challenge" markdown>
@@ -214,3 +227,5 @@ $$
 
 - [tatyam「高難易度木問題を解くテクニック集」](https://speakerdeck.com/tatyam_prime/gao-nan-yi-du-mu-wen-ti-wojie-kutekunitukuji)：重心の定義と同値な言い換え、2 個のとき辺とみなす見方、移動距離の和の上限を辺ごとに作る議論、力試し AGC018 D の方針
 - [gotoki_no_joe「ABC362をHaskellで」](https://qiita.com/gotoki_no_joe/items/63344a24b906bc9a74c9)：例題 ABC362 F の方針（枝ごとに並べた列を半分に切って前から組むこと、逆順に組むと失敗すること）
+- [gotoki_no_joe「ABC348 A～F をHaskellで」](https://qiita.com/gotoki_no_joe/items/6a3a10194d5a276281ca)：練習 ABC348 E の差分が負の間だけ根を移す方針
+- [drken「第4回 ドワンゴからの挑戦状 予選 2018 E - ニワンゴくんの家探し (1000 点)」](https://drken1215.hatenablog.com/entry/2023/05/07/144739)：練習 DWACON2018 予選 E の重心の隣の 2 頂点を聞く方針

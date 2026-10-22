@@ -199,11 +199,17 @@ $$
 
 <div class="kp-problems" data-role="practice" markdown>
 
+- [ABC186 E. Throne](https://atcoder.jp/contests/abc186/tasks/abc186_e)（diff 1461）：N 個の椅子が円形に並び、玉座から S 個先にいる人が 1 手で K 個ずつ進むとき、玉座に着くまでの手数の最小を求める（着けなければ −1）。
+- [ABC162 E. Sum of gcd of Tuples (Hard)](https://atcoder.jp/contests/abc162/tasks/abc162_e)（diff 1662）：1 以上 K 以下の整数からなる長さ N の数列すべてについて全体の gcd を求め、その総和を 10^9+7 で割った余りで求める。
+- [ARC185 E. Adjacent GCD](https://atcoder.jp/contests/arc185/tasks/arc185_e)（diff 2185）：数列の長さ M の接頭辞それぞれについて、空でない部分列すべての「隣り合う 2 要素の gcd の和」を合計した値を 998244353 で割った余りで求める。
 - [ABC222 G. 222](https://atcoder.jp/contests/abc222/tasks/abc222_g)（diff 2242）：2 を n 個並べた整数が K の倍数になる最小の n を求める（なければ −1、K ≤ 10^8）。
 
 </div>
 
 ??? note "練習の方針"
+    - **ABC186 E**：$Kx \equiv -S \pmod{N}$ を $\gcd$ で割って $K$ と $N$ を互いに素にする。$N$ は素数とは限らないので、$K$ の逆元をオイラーの定理から $K^{\varphi(N) - 1}$ として求め、$\varphi(N)$ は試し割りの $O(\sqrt{N})$ で求める。主な解き方は拡張ユークリッドの互除法で、ここでは $\varphi$ を使う別解として解く
+    - **ABC162 E**：$d$ の倍数だけからなる列は $\lfloor K/d \rfloor^N$ 個ある。$g = \sum_{d \mid g} \varphi(d)$ を各列の gcd に当てはめて和の順を入れ替えると、答えは $\sum_{d=1}^{K} \varphi(d) \lfloor K/d \rfloor^N$ になり、$\varphi$ の表を篩で作れば $O(K \log N)$ である。解説はどれも約数包除で解いていて、$\varphi$ の形はその書き換えである
+    - **ARC185 E**：答えは $f(n+1) = 2 f(n) + \sum_{x < n} 2^x \gcd(A_x, A_n)$ と更新できる。$\gcd(A_x, A_n) = \sum_{d \mid A_x, d \mid A_n} \varphi(d)$ と分け、約数 $d$ ごとに「$d$ の倍数である前の要素の $2^x$ の和」$p(d)$ を持てば、$A_n$ の約数を回して $\sum_{d \mid A_n} \varphi(d) p(d)$ で更新できる
     - **ABC222 G**：2 を $n$ 個並べた数は $\frac{2}{9}(10^n - 1)$ なので、$K$ が奇数なら $L = 9K$、偶数なら $L = 9K/2$ として、条件は $10^n \equiv 1 \pmod{L}$ になる。$\gcd(10, L) \ne 1$ なら答えはない。互いに素なら、$L$ を試し割りして $\varphi(L)$ を求め、その約数を小さい順に試す（[位数は φ(n) の約数](#euler-theorem)）。$L \le 9 \times 10^8$ なので、$10^n \bmod L$ の途中の積は `long long` に収まる。テストケースは複数あるが、1 つあたり $O(\sqrt{K} \log K)$ ほどで間に合う。
 
 ## 確認問題 {#quiz}
@@ -246,3 +252,7 @@ $$
 - [drken「エラトステネスの篩の活用法を総特集！ 〜 高速素因数分解・メビウスの反転公式 〜」](https://qiita.com/drken/items/3beb679e54266f20ab63)：篩の計算量が素数の逆数和で決まること
 - [drken「AtCoder ABC 212 G - Power Pair (3D, 黄色, 600 点)」](https://drken1215.hatenablog.com/entry/2021/08/01/163600)：例題の問いと、位数ごとに数えて $\sum d \cdot \varphi(d) + 1$ にする方針、約数ごとに試し割りしても間に合う見積もり
 - [Kazun「AtCoder Beginner Contest 222 G 問題 222」](https://kazun-kyopro.hatenablog.com/entry/ABC/222/G)：練習の問いと、$10^n \equiv 1 \pmod{L}$ への言い換え、$\varphi(L)$ の約数を試す方針
+- [drken「AtCoder ABC 186 E - Throne (1D, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2020/12/20/015100)：練習 ABC186 E のオイラーの定理で逆元を求める解き方
+- [kmjp「AtCoder ABC #162 : E - Sum of gcd of Tuples (Hard)」](https://kmjp.hatenablog.jp/entry/2020/04/12/1000)：練習 ABC162 E の d の倍数の列の数と約数包除
+- [maspy「[AtCoder 参加感想] 2020/04/12:ABC 162」](https://maspypy.com/atcoder-参加感想-2020-04-12abc-162)：練習 ABC162 E の約数のゼータ・メビウス変換による書き方
+- [kmjp「AtCoder ARC #185 : E - Adjacent GCD」](https://kmjp.hatenablog.jp/entry/2024/10/19/0900)：練習 ARC185 E の φ と d の倍数ごとの 2^i の和による更新

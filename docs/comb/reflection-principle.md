@@ -240,6 +240,17 @@ $N(d)$ は、制約のない $n$ 歩で高さが $d$ 変わる列の数で、$|d
     - $\binom{N + M}{M + K + 1} = \binom{N + M}{N - K - 1}$ なので、$N - K - 1 < 0$ なら引く項は 0 で、どの並べ方も条件を満たす。
     - 階乗の表を $N + M$ まで作り $O(N + M)$。この問題の法は $10^9 + 7$ なので、コード片の `atcoder::modint998244353` を `atcoder::modint1000000007` に書き換える。
 
+## 練習問題 {#practice}
+
+<div class="kp-problems" data-role="practice" markdown>
+
+- [ARC145 C. Split and Maximize](https://atcoder.jp/contests/arc145/tasks/arc145_c)（diff 1697）：1〜2N の順列を、順序を保ったまま長さ N の 2 つの列に分けたときの内積の最大値をその順列の得点とし、得点が全順列の中で最大になる順列の個数を求める。
+
+</div>
+
+??? note "練習の方針"
+    - **ARC145 C**：最大は $2k - 1$ と $2k$ を組にするときである。各組の先に現れる方を開き括弧、後に現れる方を閉じ括弧と見ると、組の位置の並びが正しい括弧列になる。カタラン数 $C_N$ に組の割り当て $N!$ と組の中の順序 $2^N$ を掛ける
+
 ## 力試し {#challenge}
 
 <div class="kp-problems" data-role="challenge" markdown>
@@ -282,3 +293,4 @@ $N(d)$ は、制約のない $n$ 歩で高さが $d$ 変わる列の数で、$|d
 
 - [drken「AtCoder ABC 205 E - White and Black Balls (2D, 黄色, 500 点)」](https://drken1215.hatenablog.com/entry/2024/05/20/005905)：例題の方針（格子路への言い換え、答えの式、N > M + K で 0）
 - [kmjp「AtCoder ABC #309 (デンソークリエイトプログラミングコンテスト2023) : Ex - Simple Path Counting Problem」](https://kmjp.hatenablog.jp/entry/2023/07/08/1030)：力試しの方針（端の外側に符号を反転した初期値を置く鏡像法と、周期で折り返す多項式の累乗）
+- [kmjp「AtCoder ARC #145 : C - Split and Maximize」](https://kmjp.hatenablog.jp/entry/2023/09/21/1000)：練習 ARC145 C の最大の組み方と括弧列への対応

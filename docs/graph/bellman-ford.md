@@ -212,11 +212,15 @@ $\mathrm{cnt}[v]$ は今の $\mathrm{dist}[v]$ を作ったウォークの辺の
 
 <div class="kp-problems" data-role="practice" markdown>
 
+- [ABC237 E. Skiing](https://atcoder.jp/contests/abc237/tasks/abc237_e)（diff 1208）：標高の差で楽しさが増えたり減ったりする無向グラフの移動で、広場 1 から出発したときの楽しさの最大値を求める。
+- [ABC280 F. Pay or Receive](https://atcoder.jp/contests/abc280/tasks/abc280_f)（diff 1819）：辺 A→B を長さ C で通ると逆向きは長さ −C になるグラフで、クエリごとに 2 点間の最長路の長さを答え、届かなければ nan、いくらでも大きくできるなら inf と出す。
 - [ABC404 G. Specified Range Sums](https://atcoder.jp/contests/abc404/tasks/abc404_g)（diff 1894）：数列の区間の和がいくつか指定されているとき、各項が正で条件を満たす数列のうち総和の最小値を求める（なければ −1）。
 
 </div>
 
 ??? note "練習の方針"
+    - **ABC237 E**：符号を反転すると負の辺が出るが、ベルマンフォード法では間に合わない。標高をポテンシャルにして辺の重みを非負に付け替え、ダイクストラ法で求めてから標高の差で戻す
+    - **ABC280 F**：クエリごとにベルマンフォード法を回すと間に合わない。逆向きで符号が反転する構造から、正の閉路がないことと各頂点に $x_B - x_A = C$ を満たす値（ポテンシャル）が置けることが同じになる。重み付き Union-Find で矛盾を見つけた連結成分を inf にする
     - **ABC404 G**：累積和 $B_0 = 0$、$B_i = A_1 + \dots + A_i$ を変数にする。区間の和の条件は $B_R - B_{L-1} = S$、各項が正の条件は $B_i - B_{i-1} \ge 1$ になる。等式を不等式 2 本に分け、$x_v \le x_u + c$ を辺 $u \to v$（重み $c$）にする。負の辺が出るので、ベルマンフォード法で解く（[差分制約](../graph/difference-constraints.md)）。頂点 $N$ を始点にすると、$\mathrm{dist}[0]$ は $B_0 - B_N$ の最大値なので、総和の最小値は $-\mathrm{dist}[0]$ である。辺 $i \to i - 1$ があるので全頂点が始点から届き、どこかに負閉路があれば条件が矛盾して −1 になる
 
 ## 参考 {#references}
@@ -224,3 +228,6 @@ $\mathrm{cnt}[v]$ は今の $\mathrm{dist}[v]$ を作ったウォークの辺の
 - [kmjp「AtCoder ABC #137 : E - Coins Respawn」](https://kmjp.hatenablog.jp/entry/2019/08/10/0900)：例題の方針（辺の重みを $C - P$ にまとめること、頂点 $N$ に届く閉路だけが効くこと、0 との最大）
 - [drken「AtCoder ABC 061 D - Score Attack (1Q, 青色, 400 点)」](https://drken1215.hatenablog.com/entry/2019/02/16/075900)：例題の方針（符号の反転、終点に影響しない負閉路の除外、$-\infty$ の印の伝え方、2N 回で終点の変化を見る方法の反例）
 - [kmjp「AtCoder ABC #404 : G - Specified Range Sums」](https://kmjp.hatenablog.jp/entry/2025/05/04/0930)：練習の方針（累積和の差分制約にして頂点 N を始点にすること、負閉路なら −1）
+- [kyo-pro「ABC237E - Skiing」](https://kyo-pro.hatenablog.com/entry/ABC237E)：練習 ABC237 E のポテンシャルによる付け替え
+- [akiku「ABC237解説：本番でACできた問題＋2問（Python）」](https://zenn.dev/akiku/articles/akiku-abc237)：練習 ABC237 E でベルマンフォード法が間に合わないこと
+- [drken「AtCoder ABC 280 F - Pay or Receive (青色, 500 点)」](https://drken1215.hatenablog.com/entry/2022/12/07/231851)：練習 ABC280 F のポテンシャルと閉路の条件

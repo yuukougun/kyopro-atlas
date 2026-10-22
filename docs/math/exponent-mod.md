@@ -187,11 +187,13 @@ $\varphi$ の試し割りは段ごとに $O(\sqrt{m_j})$（$m_j$ はその段の
 
 <div class="kp-problems" data-role="practice" markdown>
 
+- [ABC212 G. Power Pair](https://atcoder.jp/contests/abc212/tasks/abc212_g)（diff 2150）：素数 P（P ≤ 10^12）について、0 ≤ x, y ≤ P − 1 の組 (x, y) のうち、ある正の整数 n で x^n ≡ y (mod P) となるものの個数を 998244353 で割った余りで求める。
 - [ABC222 G. 222](https://atcoder.jp/contests/abc222/tasks/abc222_g)（diff 2242）：2 を n 個並べた整数が K の倍数になる最小の n を求める（なければ −1、K ≤ 10^8）。
 
 </div>
 
 ??? note "練習の方針"
+    - **ABC212 G**：$x = 0$ は 1 組である。$x \ne 0$ なら到達できる $y$ の個数は $x$ の位数 $d$ で、フェルマーの小定理から $d$ は $P - 1$ の約数である。位数 $d$ の元は $\varphi(d)$ 個あるので、答えは $1 + \sum_{d \mid P-1} d \, \varphi(d)$ になる（$P - 1$ を素因数分解して約数ごとに $\varphi$ を求める）
     - **ABC222 G**：2 を $n$ 個並べた数は $\frac{2}{9}(10^n - 1)$ なので、条件は $10^n \equiv 1 \pmod{L}$（$K$ が奇数なら $L = 9K$、偶数なら $L = 9K/2$）に言い換えられる。$10$ と $L$ が互いに素でなければ答えはない。互いに素なら、オイラーの定理から $n = \varphi(L)$ で必ず成り立つので、最小の $n$ は $\varphi(L)$ の約数の中にある。約数を小さい順に試す（[位数](../math/multiplicative-order.md#find-order)の求め方）
 
 ## 確認問題 {#quiz}
@@ -217,3 +219,4 @@ $\varphi$ の試し割りは段ごとに $O(\sqrt{m_j})$（$m_j$ はその段の
 - [cp-algorithms「Euler's totient function」](https://cp-algorithms.com/algebra/phi-function.html)：互いに素でないときのオイラーの定理の一般化（式の確認だけ）
 - [AtCoder Library「math」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/math.md)：`pow_mod` の制約と計算量
 - [yosupo06「library-checker-problems: Tetration Mod」](https://github.com/yosupo06/library-checker-problems/blob/master/number_theory/tetration_mod/task.md)：累乗の塔の問題の約束（0^0 = 1）と制約
+- [drken「AtCoder ABC 212 G - Power Pair (3D, 黄色, 600 点)」](https://drken1215.hatenablog.com/entry/2021/08/01/163600)：練習 ABC212 G の位数が P − 1 の約数であることと答えの式

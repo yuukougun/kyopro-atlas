@@ -209,21 +209,25 @@ $\{1, \dots, N\}$ は指数の組の「箱」にはならない（$2^{19} \le N$
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC393 E. GCD of Subset](https://atcoder.jp/contests/abc393/tasks/abc393_e)（diff 1253）：長さ N の列 A の各 i について、A_i を含む K 個の要素を選んだときの gcd の最大値を求める。
+- [YAHOO-PROCON2018-FINAL A. Uncommon](https://atcoder.jp/contests/yahoo-procon2018-final/tasks/yahoo_procon2018_final_a)（diff —）：相異なる N 個の整数 a_1, …, a_N（値は 10^5 以下）と M が与えられ、i = 1, …, M のそれぞれについて i と互いに素な a_j の個数を求める。
 
 </div>
 
 ??? note "練習の方針"
     - **ABC393 E**：値ごとの個数を倍数ゼータ変換して、$d$ の倍数の個数 $C(d)$ を求める。次に、$C(d) \ge K$ なら $d$、そうでなければ 0 とした列を、max で約数ゼータ変換する（約数の中の最大）。$A_i$ の位置の値が答えである。倍数を回す素朴な方法は [調和級数の例題](../math/harmonic-sum.md#abc393_e)にある。
+    - **YAHOO-PROCON2018-FINAL A**：値ごとの個数を倍数ゼータ変換して、$d$ の倍数の個数 $C(d)$ を作る。メビウス関数 $\mu(d)$ と点ごとに掛けた $\mu(d) C(d)$ を約数ゼータ変換すると、$i$ の位置に $\sum_{d \mid i} \mu(d) C(d)$、つまり答えが並ぶ。全体 $O(A \log \log A)$ である。素因数ごとの包除（各 $i$ で高々 $2^6$ 通り）でも解ける
 
 ## 力試し {#challenge}
 
 <div class="kp-problems" data-role="challenge" markdown>
 
+- [ARC185 E. Adjacent GCD](https://atcoder.jp/contests/arc185/tasks/arc185_e)（diff 2185）：長さ N の列 A の各接頭辞について、空でない部分列すべての「隣り合う要素の gcd の和」の総和を 998244353 で割った余りで求める。
 - [AGC038 C. LCMs](https://atcoder.jp/contests/agc038/tasks/agc038_c)（diff 2327）：長さ N の列 A について、全ペア i < j の lcm(A_i, A_j) の総和を求める。
 
 </div>
 
 ??? note "力試しの方針"
+    - **ARC185 E**：答えは $f(n+1) = 2 f(n) + \sum_{x < n} 2^x \gcd(A_x, A_n)$ と更新できる。$\gcd(a, b) = \sum_{d \mid \gcd(a, b)} \varphi(d)$（$\varphi$ は恒等関数の約数メビウス変換）と分け、$d$ ごとに「$d$ の倍数である過去の要素の $2^x$ の和」を持てば、$A_n$ の約数を回すだけで更新できる
     - **AGC038 C**：$c[v] = v \cdot \mathrm{cnt}[v]$ とし、$c$ と $c$ の GCD 畳み込み $h(g)$ を求める。$h(g)$ は gcd が $g$ の順序対の $A_i A_j$ の和なので、$\sum_g h(g)/g$ が順序対の lcm の総和である。$i = j$ の分 $\sum A_i$ を引いて 2 で割る。mod 998244353 で求めるので、$g$ の逆元を掛ける
 
 ## 確認問題 {#quiz}
@@ -259,3 +263,6 @@ $\{1, \dots, N\}$ は指数の組の「箱」にはならない（$2^{19} \le N$
 - [noshi91「高速ゼータ変換の約数版 O(N log(log(N)))」](https://noshi91.hatenablog.com/entry/2018/12/27/121649)：素数ごとに累積する形と、各段がエラトステネスの篩と同じ計算量になること
 - [drken「AtCoder AGC 038 C - LCMs (3D, 黄色, 700 点)」](https://drken1215.hatenablog.com/entry/2020/11/06/031600)：GCD 畳み込みの手順（倍数ゼータ → 積 → 倍数メビウス）と、力試しの方針
 - [WineChord「[atcoder] ABC474 F / JSC2026 Advance Final F Increment All Divisors」](https://github.com/WineChord/algo/blob/main/docs/daily/2026-09-14/atcoder-abc474-f.md)：例題の方針（操作回数を目標の値の 1 次式で表し、非負の条件から範囲を求める）。解法の部分だけを参照
+- [noshi91「みんぷろ2018決勝-A Uncommon Θ(Alog(log(A)))」](https://noshi91.hatenablog.com/entry/2020/01/15/185642)：練習 YAHOO2018 決勝 A の倍数ゼータ・μ・約数ゼータの順の計算
+- [drken「みんなのプロコン 2018 決勝 A - Uncommon (600 点)」](https://drken1215.hatenablog.com/entry/2018/07/12/213300)：練習 YAHOO2018 決勝 A の制約と素因数の包除による別解
+- [kmjp「AtCoder ARC #185 : E - Adjacent GCD」](https://kmjp.hatenablog.jp/entry/2024/10/19/0900)：力試し ARC185 E の φ による分解と d ごとの 2^i の和
