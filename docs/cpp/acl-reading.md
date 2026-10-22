@@ -110,7 +110,7 @@ v1.5（2023-04）から、segtree・lazy_segtree は `S op(const S& a, const S& 
 | `dsu` | `dsu d(n);` | `leader` は代表の頂点で、番号の小さい方とは限らない | [Union-Find](../ds/union-find.md) |
 | `fenwick_tree<T>` | `fenwick_tree<long long> fw(n);` | `add(p, x)` は一点加算、`sum(l, r)` は半開区間 | [BIT](../ds/fenwick-tree.md) |
 | `scc_graph` | `scc_graph g(n);` | `scc()` の成分はトポロジカル順 | [強連結成分分解](../graph/scc.md) |
-| `two_sat` | `two_sat ts(n);` | `add_clause(i, f, j, g)` は「$x_i = f$ または $x_j = g$」 | [2-SAT](../graph/two-sat.md) |
+| `two_sat` | `two_sat ts(n);` | `add_clause(i, f, j, g)` は「$x_i = f$ または $x_j = g$」 | [2-SAT](../graph/two-sat.md#acl) |
 | `mf_graph<Cap>` | `mf_graph<long long> g(n);` | `flow(s, t)` は流した量を返す。流した状態はグラフに残り、`edges()` で辺ごとの流量を読める | [最大流](../graph/max-flow.md#acl) |
 | `mcf_graph<Cap, Cost>` | `mcf_graph<int, long long> g(n);` | `flow(s, t, 上限)` は `{流量, 費用}` の組 | [最小費用流](../graph/min-cost-flow.md#acl) |
 | `convolution` | `convolution(a, b)` | 既定の法は 998244353。法なしの整数は `convolution_ll` | [畳み込みの使い方](../math/convolution-ntt.md#acl) |
@@ -307,7 +307,7 @@ g++-13・g++-15 とも `error: static assertion failed: mapping must work as S(F
 
 - **通ってしまう食い違い**：検査は「その形に変換して呼べるか」なので、型が暗黙に変換できれば通る。`S = int` に `long long op(long long, long long)` を渡しても止まらず、結果は `int` に切り詰められる。`S` と関数の型はそろえる
 - **v1.5 の誤記**：v1.5 では `mapping must work as F(F, S)`・`compostiion must work as F(F, F)` と誤って出る。引数の正しい形は v1.6 のとおりである
-- **エラーの読み方**：最初の `error:` の行と、`required from here` で自分のコードの行を探す（[C++ の逆引き](../cpp/cpp-reverse-index.md)）
+- **エラーの読み方**：最初の `error:` の行と、`required from here` で自分のコードの行を探す（[C++ の逆引き](../cpp/cpp-reverse-index.md#compile-errors)）
 
 ## 参考 {#references}
 

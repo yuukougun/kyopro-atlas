@@ -117,7 +117,7 @@ $p$ を除いたとき、子 $c$ の部分木が残りとつながるには、�
 
 **応用の型**：
 
-- **辺・頂点を 1 つ除いたときの連結成分の数**：辺なら「橋なら 1 増え、そうでなければ変わらない」、頂点なら上の `pieces[v]` を使う。サインは「どれか 1 つを壊す（塗り替える）とき」「1 つ一様に選んで除いたときの期待値」。グリッドのマスを頂点にした期待値の問題（[オフラインの動的連結性](../graph/offline-dynamic-connectivity.md)の例題の ABC334 G）は、関節点で切り離される部分木を数えても解ける
+- **辺・頂点を 1 つ除いたときの連結成分の数**：辺なら「橋なら 1 増え、そうでなければ変わらない」、頂点なら上の `pieces[v]` を使う。サインは「どれか 1 つを壊す（塗り替える）とき」「1 つ一様に選んで除いたときの期待値」。グリッドのマスを頂点にした期待値の問題（[オフラインの動的連結性](../graph/offline-dynamic-connectivity.md#abc334_g)の例題の ABC334 G）は、関節点で切り離される部分木を数えても解ける
 - **すべての最短路に含まれる辺**：「1 から $N$ へのすべての最短路が通る辺」は、最短路に乗る辺だけを残した部分グラフの橋である。すべての最短路が辺 $e = \{u, v\}$ を通るなら、ほかの最短路の辺は $u$ より手前か $v$ より先にしかないので、$e$ を除くと 1 の側と $N$ の側が切れるからである（[最短路 DAG の力試し](../graph/shortest-path-dag.md#challenge)の ABC375 G）
 
 ## 多重辺は辺の番号で親を除外する {#multi-edges}
@@ -205,7 +205,7 @@ ABC で lowlink をそのまま使う問題は少ない。橋と関節点の実�
 - [Two-Edge-Connected Components](https://judge.yosupo.jp/problem/two_edge_connected_components)：二重辺連結成分を求め、成分ごとに頂点を出力する。多重辺を含むので、親を辺の番号で除外しているかが試される。
 - [Biconnected Components](https://judge.yosupo.jp/problem/biconnected_components)：二重頂点連結成分を求める（[ブロックカット木の節](#block-cut-tree)）。
 
-ABC の G で、橋や関節点を使って解ける問題として、ABC375 G（[最短路 DAG の力試し](../graph/shortest-path-dag.md#challenge)）と ABC334 G（[オフラインの動的連結性](../graph/offline-dynamic-connectivity.md)の例題）がある。どちらも本文の応用の型で方針を述べた。
+ABC の G で、橋や関節点を使って解ける問題として、ABC375 G（[最短路 DAG の力試し](../graph/shortest-path-dag.md#challenge)）と ABC334 G（[オフラインの動的連結性](../graph/offline-dynamic-connectivity.md#abc334_g)の例題）がある。どちらも本文の応用の型で方針を述べた。
 
 ## 確認問題 {#quiz}
 

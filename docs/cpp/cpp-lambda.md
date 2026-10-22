@@ -296,7 +296,7 @@ C++23 の deducing this は、最初の引数に `this` を付けると、そこ
 
 落ちる深さは関数の中身（局所変数の数）とコンパイラ・最適化によって変わる目安である。別の計測では `auto&& self` が $2.2 \times 10^5$ で落ちた。比べてほしいのは書き方どうしの比である。
 
-`std::function` は 1 段で使うスタックが 2〜3 倍大きく、手元では $N = 10^5$ のパスで Segmentation fault になった。AtCoder はスタックの上限が大きいとされ、提出では通ることが多い。手元で試すときに落ちやすい。手元のスタックの広げ方と、再帰を使わない書き直しは [AtCoder の環境と手元の環境](../cpp/cpp-environment.md)で扱う。
+`std::function` は 1 段で使うスタックが 2〜3 倍大きく、手元では $N = 10^5$ のパスで Segmentation fault になった。AtCoder はスタックの上限が大きいとされ、提出では通ることが多い。手元で試すときに落ちやすい。手元のスタックの広げ方と、再帰を使わない書き直しは [AtCoder の環境と手元の環境](../cpp/cpp-environment.md#stack-depth)で扱う。
 
 - **使い分け**：AtCoder に出すなら deducing this か `auto&& self`。`std::function` は軽い再帰を大量に呼ぶ問題（fib のような全探索・メモ化再帰）で TLE の原因になりうる
 - **木・グラフの再帰**：DFS の考え方は[深さ優先探索](../graph/dfs.md)、メモを取る再帰は[メモ化再帰](../dp/memoized-recursion.md)で扱う

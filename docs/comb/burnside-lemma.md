@@ -157,7 +157,7 @@ ACL に Burnside の補題に当たる関数はない。自作するときの要
 
 コード片では、最短周期で分類する版（`necklace_by_period`）も持ち、$n \le 8$、$k \le 3$ で全列挙（回した列のうち辞書順で最小のものだけを数える）と 3 つの関数を比べて確かめている。
 
-Library Checker に Burnside の補題をそのまま問う問題はない。小さい場合を全列挙と比べて確かめるのが確実である。$n$ が $10^{18}$ 程度まで大きいときは素因数分解が試し割りでは間に合わないので、その部分を Library Checker の Factorize で確かめた方法（[大きな数の素因数分解](../math/miller-rabin.md)）に替える。
+Library Checker に Burnside の補題をそのまま問う問題はない。小さい場合を全列挙と比べて確かめるのが確実である。$n$ が $10^{18}$ 程度まで大きいときは素因数分解が試し割りでは間に合わないので、その部分を Library Checker の Factorize で確かめた方法（[大きな数の素因数分解](../math/miller-rabin.md#pollard-rho)）に替える。
 
 ## 確認問題 {#quiz}
 

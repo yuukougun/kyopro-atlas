@@ -50,7 +50,7 @@ atcoder: null
 
 [未定義動作](../guide/glossary.md#undefined-behavior)は、C++ の規格が「どうなるかを決めない」とした操作である。範囲外の読み書きや符号付き整数のあふれがこれにあたり、手元で合っていても AtCoder で WA になる、という事故の多くはここから来る。未定義動作は書き方で避け、残ったものはデバッグ用のビルドで見つける。
 
-このページのコードは `#include <bits/stdc++.h>` と `using namespace std;` を前提にする。例はすべて手元の g++-13 と g++-15（`-std=gnu++23`）で確かめた。AtCoder の GCC 15.2 のオプションは `-std=gnu++23 -O2 -Wall -Wextra -ftrivial-auto-var-init=zero` などである（[AtCoder と手元の C++ 環境](../cpp/cpp-environment.md)）。
+このページのコードは `#include <bits/stdc++.h>` と `using namespace std;` を前提にする。例はすべて手元の g++-13 と g++-15（`-std=gnu++23`）で確かめた。AtCoder の GCC 15.2 のオプションは `-std=gnu++23 -O2 -Wall -Wextra -ftrivial-auto-var-init=zero` などである（[AtCoder と手元の C++ 環境](../cpp/cpp-environment.md#options)）。
 
 ## 未定義動作とは：何が起きてもよく、最適化の前提に使われる（手元と AtCoder、-O0 と -O2 で結果が変わる） {#what-is-ub}
 
@@ -269,7 +269,7 @@ AtCoder では動くが、古い環境や解説の写し方によっては壊れ
 - **`-D_GLIBCXX_DEBUG`**：コンテナとイテレータを検査付きのものに置き換える。`ASSERTIONS` の検査に加えて、比較関数の誤りや無効になったイテレータも見つけるが、とても遅くなる
 - **`-fsanitize=address`**（AddressSanitizer）：範囲外の読み書きと、解放済みの領域の読み書き（use-after-free）を見つける。`heap-buffer-overflow`・`heap-use-after-free` のように種類と行を出して止まる
 - **`-fsanitize=undefined`**（UndefinedBehaviorSanitizer）：あふれ・シフトの幅・`__builtin_ctz(0)` などを見つける。既定では `runtime error:` を出した後も実行を続けるので、出力の答えだけを見ていると見落とす。`-fno-sanitize-recover=all` を足すと、最初の 1 件で止まる
-- **落とし穴**：道具で何も出なくても、未定義動作がないとは言えない。道具が見るのは、その入力で実際に通った行だけである。小さいケースを大量に試す[ランダムテスト](../guide/stress-testing.md)と組み合わせる
+- **落とし穴**：道具で何も出なくても、未定義動作がないとは言えない。道具が見るのは、その入力で実際に通った行だけである。小さいケースを大量に試す[ランダムテスト](../guide/stress-testing.md#procedure)と組み合わせる
 
 ## 不具合を探すビルドを cph とは別に用意する {#debug-build}
 
@@ -287,8 +287,8 @@ g++-15 -std=gnu++23 -O1 -g -Wall -Wextra -D_GLIBCXX_DEBUG -fsanitize=address,und
 
 **遅くなる**：手元で、長さ $2 \times 10^5$ の配列のソートと $4 \times 10^8$ 回のループを含むコードを比べた。ふだんの `-O2` で 0.08 秒、上のビルドで約 15 秒、`_GLIBCXX_DEBUG` を `_GLIBCXX_ASSERTIONS` に替えて約 0.9 秒だった。倍率は書き方で大きく変わり、別の例では約 3 倍と約 65 倍だった。目安は、`ASSERTIONS` 版で数倍〜十数倍、`_GLIBCXX_DEBUG` 版で数十〜数百倍である。大きいケースではなく、落ちる小さいケースを探してから動かす。
 
-- **落とし穴**：プリコンパイル済みヘッダ（`~/pch`）は作ったときと同じオプションでしか使われない。そのため、このビルドではコンパイルに毎回数秒かかる（[プリコンパイル済みヘッダ](../cpp/cpp-environment.md)）
-- **落とし穴**：深い再帰で落ちるのは未定義動作ではなくスタックの不足である。手元で試す前に `ulimit -s unlimited` を実行する（[AtCoder と手元の C++ 環境](../cpp/cpp-environment.md)）
+- **落とし穴**：プリコンパイル済みヘッダ（`~/pch`）は作ったときと同じオプションでしか使われない。そのため、このビルドではコンパイルに毎回数秒かかる（[プリコンパイル済みヘッダ](../cpp/cpp-environment.md#pch)）
+- **落とし穴**：深い再帰で落ちるのは未定義動作ではなくスタックの不足である。手元で試す前に `ulimit -s unlimited` を実行する（[AtCoder と手元の C++ 環境](../cpp/cpp-environment.md#stack-depth)）
 
 ## assert で WA を RE に変えて気づく（AtCoder では NDEBUG が付かない） {#assert}
 

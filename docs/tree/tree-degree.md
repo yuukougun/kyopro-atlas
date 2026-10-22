@@ -164,7 +164,7 @@ Prüfer 列の全単射は、ラベル付き木の数え上げをそのまま列
 - **頂点 $v$ の次数が $k$ の木の数**：列の $N - 2$ か所のうち $v$ を置く $k - 1$ か所を選び、残りに $v$ 以外の $N - 1$ 通りを置くので $\binom{N-2}{k-1} (N - 1)^{N-1-k}$ 個
 - **次数が集合に入る木の数**：頂点 $v$ の次数が集合 $S_v$ に入る木の数は多項係数の和になるので、頂点ごとの指数型の級数 $\sum_{k \in S_v} x^{k-1}/(k-1)!$ の積（集合が全頂点で同じなら累乗）の $x^{N-2}$ の係数に $(N - 2)!$ を掛けて数える（[ラベル付き木の数と Prüfer 列](../comb/cayley-pruefer.md#with-polynomials)）
 
-Prüfer 列が数えるのは、$N$ 頂点の完全グラフの[全域木](../guide/glossary.md#spanning-tree)である。使える辺が決まったグラフの全域木の数は、Prüfer 列では数えられず、[行列木定理](../graph/matrix-tree-theorem.md)（ラプラシアン行列の行列式）で求める。また、番号を区別しない木（同型な木を同じとみなす）の数は、Prüfer 列の数とは別物である。
+Prüfer 列が数えるのは、$N$ 頂点の完全グラフの[全域木](../guide/glossary.md#spanning-tree)である。使える辺が決まったグラフの全域木の数は、Prüfer 列では数えられず、[行列木定理](../graph/matrix-tree-theorem.md#laplacian)（ラプラシアン行列の行列式）で求める。また、番号を区別しない木（同型な木を同じとみなす）の数は、Prüfer 列の数とは別物である。
 
 ## 落とし穴 {#pitfalls}
 
@@ -245,7 +245,7 @@ Prüfer 列が数えるのは、$N$ 頂点の完全グラフの[全域木](../gu
 - 次数だけが決まっていて木を 1 つ作る：[次数列から木を作れる条件](#realizable)の構築を使う
 - 次数に加えて一部の辺が決まっている：成分ごとに残りの次数をまとめて結ぶ（[木の構築・復元](../tree/tree-construction.md#from-degrees)）
 - 距離や訪問順から木を作る・復元する：[木の構築・復元](../tree/tree-construction.md)
-- 木の個数を数える：番号付きなら Prüfer 列と [Cayley の公式](../comb/cayley-pruefer.md#cayley)、使える辺が決まったグラフなら[行列木定理](../graph/matrix-tree-theorem.md)
+- 木の個数を数える：番号付きなら Prüfer 列と [Cayley の公式](../comb/cayley-pruefer.md#cayley)、使える辺が決まったグラフなら[行列木定理](../graph/matrix-tree-theorem.md#laplacian)
 - 与えられた木を葉から削りながら決める：[葉から考える](../tree/leaf-first.md)
 
 ## 参考 {#references}

@@ -261,7 +261,7 @@ $T_i$ をすべてパターンとして Trie に入れ、$S$ を 1 回流す。�
 | 多数のパターンの出現回数（オフライン） | Aho-Corasick 法、または [Suffix Array](../string/suffix-array.md#pattern-count) の二分探索 |
 | パターンの長さの種類が少ない | [ローリングハッシュ](../string/rolling-hash.md)で長さごとに走査 |
 | 含まない・すべて含む文字列を数える | Aho-Corasick 法の状態で DP（[照合オートマトン上の DP](../string/string-automaton-dp.md)） |
-| テキスト側の全部分文字列を扱う | [Suffix Automaton](../string/suffix-automaton.md) |
+| テキスト側の全部分文字列を扱う | [Suffix Automaton](../string/suffix-automaton.md#suffix-automaton) |
 
 出現回数だけなら、Suffix Array の二分探索は $O(\sum \lvert T_i \rvert \log N)$ で、ACL の `suffix_array` があれば実装が短い。オートマトンとして DP に使うなら、Aho-Corasick 法が要る。ローリングハッシュは長さの種類ごとにテキストを走査するので、長さの総和 $M$ に対して種類は $O(\sqrt{M})$ 個あり、$O(N \sqrt{M})$ かかる。
 

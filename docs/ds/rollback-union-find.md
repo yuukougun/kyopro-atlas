@@ -89,11 +89,11 @@ ABC で出てくるのは、根付き木を DFS しながら、頂点に入る�
 --8<-- "rollback-union-find/version-tree.cpp:dfs"
 ```
 
-質問のたびにすぐ答える必要がある（オンライン）なら、DFS の順に並べ替えられないので、過去の時点の判定ができる[部分永続 Union-Find](../ds/partially-persistent-union-find.md) や[永続データ構造](../ds/persistent-data-structures.md)を使う。
+質問のたびにすぐ答える必要がある（オンライン）なら、DFS の順に並べ替えられないので、過去の時点の判定ができる[部分永続 Union-Find](../ds/partially-persistent-union-find.md#what-it-does) や[永続データ構造](../ds/persistent-data-structures.md)を使う。
 
 ## オフライン動的連結性の部品（時間軸のセグメント木に辺を載せる → グラフの章） {#offline-dynamic-connectivity}
 
-辺の追加と削除が混ざり、ところどころで「2 頂点は連結か」を問われる問題は、クエリをすべて先に読める（[オフライン](../guide/glossary.md#offline)）なら、ロールバックできる Union-Find で解ける。詳しい手順は[オフライン動的連結性](../graph/offline-dynamic-connectivity.md)に任せ、ここでは要点だけを書く。
+辺の追加と削除が混ざり、ところどころで「2 頂点は連結か」を問われる問題は、クエリをすべて先に読める（[オフライン](../guide/glossary.md#offline)）なら、ロールバックできる Union-Find で解ける。詳しい手順は[オフライン動的連結性](../graph/offline-dynamic-connectivity.md#time-segment-tree)に任せ、ここでは要点だけを書く。
 
 1. 各辺について、存在する時刻の区間 $[l, r)$ を求める（追加から削除まで。最後まで消えなければ $r = Q$）。
 2. 時刻 $0, 1, \dots, Q - 1$ を葉とする[セグメント木](../ds/segment-tree.md)を作り、各辺を区間 $[l, r)$ をちょうど覆う $O(\log Q)$ 個のノードに載せる。

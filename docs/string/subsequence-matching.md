@@ -165,7 +165,7 @@ $T$ の各文字を $k$ 回ずつ並べた文字列が入るかは $k$ につい
 - **部分列として何通り取り出せるか・異なる部分列の数**：判定ではなく数え上げなので[部分列 DP](../dp/subsequence-dp.md#positions-or-strings)を使う。異なる部分列を重複なく数えるには、各文字列を「最も左で拾う取り方」で代表させ、$\mathrm{nxt}$ に沿って遷移する
 - **2 つの文字列の共通の部分列の最長**：一方を固定した判定ではないので[最長共通部分列と編集距離](../dp/lcs.md)の DP を使う
 - **辞書順最小の文字列を作る**：表は「残りで足りるか」の判定に使い、決め方は[辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md)に従う
-- **連続する部分の一致**：[KMP 法](../string/kmp.md)・[Z-algorithm](../string/z-algorithm.md)・[ローリングハッシュ](../string/rolling-hash.md)を使う。問われ方ごとの対応は[部分列と部分文字列](../patterns/subsequence-and-substring.md)にまとめてある
+- **連続する部分の一致**：[KMP 法](../string/kmp.md)・[Z-algorithm](../string/z-algorithm.md)・[ローリングハッシュ](../string/rolling-hash.md)を使う。問われ方ごとの対応は[部分列と部分文字列](../patterns/subsequence-and-substring.md#overview)にまとめてある
 
 ## 例題 {#examples}
 

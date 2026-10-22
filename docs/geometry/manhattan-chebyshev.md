@@ -247,7 +247,7 @@ $S$ に $x + y$・$-(x + y)$・$x - y$・$-(x - y)$ の 4 つを持たせ、`op`
 - 距離の和を最小にする 1 点を探すだけなら、回転せずに軸ごとの中央値で済む（[中央値と絶対値の和](../basics/median-absolute.md)）
 - ユークリッド距離の最遠点対は軸に分けられない。[凸包](../geometry/convex-hull.md)の上で探す
 - 一般の角度の回転や、グリッドの 90 度回転は[回転とアフィン変換](../geometry/rotation-transform.md)を使う
-- マンハッタン距離を辺の重みにした最小全域木は、辺の候補を $O(N)$ 本に絞る別の技法が要る（[最小全域木の応用](../graph/spanning-tree-advanced.md)）
+- マンハッタン距離を辺の重みにした最小全域木は、辺の候補を $O(N)$ 本に絞る別の技法が要る（[最小全域木の応用](../graph/spanning-tree-advanced.md#manhattan)）
 
 ## 例題 {#examples}
 

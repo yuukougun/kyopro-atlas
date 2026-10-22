@@ -1078,7 +1078,7 @@ flowchart TD
 | 値の追加・削除を挟んで何度も K 番目を聞かれる | 個数の BIT と BIT 上の二分探索など | [K 番目の値を求めるデータ構造](../ds/kth-element.md#comparison) |
 | 条件を満たす文字列・列を辞書順に並べた K 番目 | 先頭ごとの個数と K を比べて 1 文字ずつ決める | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md#kth)、[DP の復元](../dp/dp-reconstruction.md#dp-kth-lexicographic) |
 
-区間ごとの K 番目をオンラインで答えるなら [Wavelet Matrix](../ds/wavelet-matrix.md) まで要る。中央値は K 番目の特別な場合で、[K 番目と中央値](../patterns/kth-and-median.md)の題材のページにまとめてある。
+区間ごとの K 番目をオンラインで答えるなら [Wavelet Matrix](../ds/wavelet-matrix.md) まで要る。中央値は K 番目の特別な場合で、[K 番目と中央値](../patterns/kth-and-median.md#overview)の題材のページにまとめてある。
 
 ### 「最小値の最大化」「最大値の最小化」 {#maximize-minimum}
 
@@ -1141,7 +1141,7 @@ flowchart TD
 | 負のコストがある | ベルマンフォード法 | [ベルマンフォード法](../graph/bellman-ford.md#why-n-minus-1) |
 | 頂点数が数百で、全点対の距離が要る | ワーシャルフロイド法 | [ワーシャルフロイド法](../graph/warshall-floyd.md#k-outer) |
 
-残り回数・向き・時刻の余りのように、位置だけでは次の動きが決まらないなら、それらを頂点に含めたグラフで同じ手法を使う（[グラフへの帰着](../graph/graph-modeling.md)）。
+残り回数・向き・時刻の余りのように、位置だけでは次の動きが決まらないなら、それらを頂点に含めたグラフで同じ手法を使う（[グラフへの帰着](../graph/graph-modeling.md#what-to-vertex)）。
 
 ### 「区間の和・最小値を何度も答える」 {#range-query}
 
@@ -1196,7 +1196,7 @@ flowchart TD
 | 1 つの山から好きな数を取り合うゲーム（Nim） | 山の大きさの XOR | [Nim と XOR](../comb/nim.md#bouton) |
 | 取り方に制限がある山のゲーム | 各山の Grundy 数の XOR | [Grundy 数](../comb/grundy-number.md#sum) |
 
-ほかの問われ方は [XOR](../patterns/xor.md) の題材のページにまとめてある。
+ほかの問われ方は [XOR](../patterns/xor.md#overview) の題材のページにまとめてある。
 
 ## 題材から引く {#by-topic}
 
@@ -1204,18 +1204,18 @@ flowchart TD
 
 | 題材 | 問われ方の例 | ページ |
 | --- | --- | --- |
-| 区間・連続部分列 | 連続部分列を数える・選ぶ、区間に操作して質問する、区間の集合を選ぶ | [区間](../patterns/interval.md) |
-| 部分列・部分文字列 | 判定、選び方の数、異なるものの数、最長の共通部分 | [部分列と部分文字列](../patterns/subsequence-and-substring.md) |
-| 順列 | $i \to P_i$ のサイクル、swap の回数と偶奇、置換の繰り返し | [順列と置換](../patterns/permutation.md) |
+| 区間・連続部分列 | 連続部分列を数える・選ぶ、区間に操作して質問する、区間の集合を選ぶ | [区間](../patterns/interval.md#overview) |
+| 部分列・部分文字列 | 判定、選び方の数、異なるものの数、最長の共通部分 | [部分列と部分文字列](../patterns/subsequence-and-substring.md#overview) |
+| 順列 | $i \to P_i$ のサイクル、swap の回数と偶奇、置換の繰り返し | [順列と置換](../patterns/permutation.md#overview) |
 | 括弧列 | 正しいかの判定、`?` の埋め方の数、区間の判定、並べる順序 | [括弧列](../patterns/bracket-sequence.md#overview) |
-| mex | mex を求める・更新する・総和を取る | [mex](../patterns/mex.md) |
-| K 番目・中央値 | K 番目に小さい値、上位 K 個の和、中央値 | [K 番目と中央値](../patterns/kth-and-median.md) |
-| XOR | 桁ごとの数え上げ、累積 XOR、作れる値、ゲーム | [XOR](../patterns/xor.md) |
-| 約数・倍数・gcd | 約数の列挙、倍数を回して集める、gcd がちょうど g の個数 | [約数と倍数](../patterns/divisors-and-multiples.md) |
-| グリッド | マスの最短路、右・下に進む DP、長方形の和、盤面の回転 | [グリッド](../patterns/grid.md) |
-| 操作列・クエリ | 全体への操作、削除の逆順、過去の版に戻る、周期で打ち切る | [操作列とクエリ](../patterns/operation-sequence.md) |
+| mex | mex を求める・更新する・総和を取る | [mex](../patterns/mex.md#overview) |
+| K 番目・中央値 | K 番目に小さい値、上位 K 個の和、中央値 | [K 番目と中央値](../patterns/kth-and-median.md#overview) |
+| XOR | 桁ごとの数え上げ、累積 XOR、作れる値、ゲーム | [XOR](../patterns/xor.md#overview) |
+| 約数・倍数・gcd | 約数の列挙、倍数を回して集める、gcd がちょうど g の個数 | [約数と倍数](../patterns/divisors-and-multiples.md#overview) |
+| グリッド | マスの最短路、右・下に進む DP、長方形の和、盤面の回転 | [グリッド](../patterns/grid.md#overview) |
+| 操作列・クエリ | 全体への操作、削除の逆順、過去の版に戻る、周期で打ち切る | [操作列とクエリ](../patterns/operation-sequence.md#overview) |
 | 玉と箱 | 区別の有無と各箱の個数の制限ごとの数え方 | [写像 12 相](../comb/twelvefold-way.md#table) |
-| 物・値・状態の関係 | 何を頂点・辺にすれば既知のグラフの問題になるか | [グラフへの帰着](../graph/graph-modeling.md) |
+| 物・値・状態の関係 | 何を頂点・辺にすれば既知のグラフの問題になるか | [グラフへの帰着](../graph/graph-modeling.md#what-to-vertex) |
 
 ## 状況から引く {#by-situation}
 
@@ -1223,9 +1223,9 @@ flowchart TD
 
 | 状況 | 引くページ |
 | --- | --- |
-| 制約の数字（$N \le 20$、$N \le 2 \times 10^5$ など）しか手がかりがない | [逆引き辞典（制約・計算量から）](../guide/reverse-index-constraints.md) |
+| 制約の数字（$N \le 20$、$N \le 2 \times 10^5$ など）しか手がかりがない | [逆引き辞典（制約・計算量から）](../guide/reverse-index-constraints.md#constraint-table) |
 | 解説に出てきた手法の名前・略称が分からない | [用語の索引](../guide/term-index.md)、[用語集の略称](../guide/glossary.md#abbreviations) |
-| 解説に見慣れない名前のデータ構造が出てきた | [見慣れないデータ構造の名前と用途](../ds/advanced-ds-catalog.md) |
+| 解説に見慣れない名前のデータ構造が出てきた | [見慣れないデータ構造の名前と用途](../ds/advanced-ds-catalog.md#table) |
 | 方針がまったく立たない | [詰まったときの発想リスト](../guide/thinking-checklist.md) |
 | 候補の手法が 2 つあり、どちらを使うか迷う | [似た手法の使い分け](../guide/method-comparison.md) |
 | DP の式は立ったが遅い | [DP の高速化の選び方](../dp/dp-speedup-overview.md#read-the-recurrence) |

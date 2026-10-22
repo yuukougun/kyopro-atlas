@@ -110,7 +110,7 @@ atcoder: true
 
 入力 `3` と `1 2 3` に対して、手元の g++-13 では 105842398323404453 のような値が出た。正しい答えは 6001 である。`-O2 -Wall -Wextra` では `s` について `'s' may be used uninitialized` と警告したが（`-O2` を付けないと `s` にも警告は出ない）、配列 `cnt` については何も言わなかった。
 
-AtCoder の GCC には `-ftrivial-auto-var-init=zero`（初期化していない関数の中の変数を 0 で埋めるオプション）が付いている。同じコードを手元でこのオプションを付けて試すと 6001 が出た。そのため「AtCoder では AC、手元では答えが合わない」ということが起こる（[AtCoder の C++ 環境](../cpp/cpp-environment.md)）。規格の上では未定義動作のままなので、初期化を書いて防ぐ。
+AtCoder の GCC には `-ftrivial-auto-var-init=zero`（初期化していない関数の中の変数を 0 で埋めるオプション）が付いている。同じコードを手元でこのオプションを付けて試すと 6001 が出た。そのため「AtCoder では AC、手元では答えが合わない」ということが起こる（[AtCoder の C++ 環境](../cpp/cpp-environment.md#auto-var-init)）。規格の上では未定義動作のままなので、初期化を書いて防ぐ。
 
 ```cpp
 --8<-- "cpp-initialization/uninit-ok.cpp:core"

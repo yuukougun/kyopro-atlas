@@ -150,7 +150,7 @@ $$
 
     $d = p - 1$ で $\psi(p - 1) = \varphi(p - 1) \ge 1$ となり、原始根があることも同時に分かる。「法が素数」は根の個数の上限で使っている。合成数の法では一般に成り立たない。
 
-**応用の型**：「$x^n \equiv y \pmod{P}$ となる組を数える」は、$x$ の位数ごとに分けて $\sum_{d \mid P-1} \varphi(d) \cdot d$ を求める（[例題の ABC212 G](#abc212_g)）。$P - 1$ の約数を素因数分解から作れば、各約数の $\varphi$ も素因数ごとの積として同時に求まる。$n$ 個の玉を円形に並べて $k$ 色で塗る方法を、回転で重なるものを同じとみて数える式 $\frac{1}{n} \sum_{d \mid n} \varphi(d) \, k^{n/d}$ にも $\varphi$ が現れる（[バーンサイドの補題](../comb/burnside-lemma.md)）。
+**応用の型**：「$x^n \equiv y \pmod{P}$ となる組を数える」は、$x$ の位数ごとに分けて $\sum_{d \mid P-1} \varphi(d) \cdot d$ を求める（[例題の ABC212 G](#abc212_g)）。$P - 1$ の約数を素因数分解から作れば、各約数の $\varphi$ も素因数ごとの積として同時に求まる。$n$ 個の玉を円形に並べて $k$ 色で塗る方法を、回転で重なるものを同じとみて数える式 $\frac{1}{n} \sum_{d \mid n} \varphi(d) \, k^{n/d}$ にも $\varphi$ が現れる（[バーンサイドの補題](../comb/burnside-lemma.md#necklace)）。
 
 ## 落とし穴 {#pitfalls}
 
@@ -237,7 +237,7 @@ $$
 - 指数が巨大な累乗を求めるだけなら、[フェルマーの小定理と指数の mod](../math/exponent-mod.md)を使う。法が合成数のときに $\varphi$ が要る。
 - 位数を速く求める、原始根を見つける、$a^x \equiv b$ を解くなら[位数・原始根・離散対数](../math/multiplicative-order.md)へ進む。
 - 「gcd がちょうど $g$」の個数をすべての $g$ について知りたいなら[約数包除](../comb/divisor-inclusion-exclusion.md)、gcd が 1 の条件を和に直して入れ替えるなら[メビウス関数](../comb/mobius-function.md)を使う。gcd の総和だけなら $\varphi$ の式が短い。
-- $\sum_{n \le N} \varphi(n)$ を $N = 10^{10}$ 以上で求めるなら、篩の表は作れないので[乗法的関数](../math/multiplicative-function.md)の手法を使う。
+- $\sum_{n \le N} \varphi(n)$ を $N = 10^{10}$ 以上で求めるなら、篩の表は作れないので[乗法的関数](../math/multiplicative-function.md#prefix-sums)の手法を使う。
 
 ## 参考 {#references}
 

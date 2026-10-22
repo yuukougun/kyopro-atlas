@@ -244,7 +244,7 @@ DSU on Tree が使えるのは、答えを部分木ごとに求めればよく�
 ??? note "解法の詳細"
     最初は生徒 $i$ の map を $\{C_i : 1\}$ にする。合流のクエリでは、両方の代表元を先に求め、同じなら何もしない。違えば併合し、代表元でなくなった方の map の各項目を新しい代表元の map に足す。問い合わせ $(x, y)$ では、$\mathrm{leader}(x)$ の map で $y$ を `find` し、なければ 0 を答える。map の移動は合計 $O(N \log N)$ 回なので、全体で $O(N \log^2 N + Q \log N)$ になる。
 
-    併合の過程を木にして、オフラインで数える別解もある（[併合過程の木](../tree/merge-process-tree.md)）。
+    併合の過程を木にして、オフラインで数える別解もある（[併合過程の木](../tree/merge-process-tree.md#practice)）。
 
 ## 練習問題 {#practice}
 
@@ -298,7 +298,7 @@ DSU on Tree が使えるのは、答えを部分木ごとに求めればよく�
 | --- | --- |
 | グループの情報が和・最大値・個数で、2 つから合成できる | [Union-Find](../ds/union-find.md) の根に値を持つ（[根に成分の情報を持たせる](../ds/union-find-applications.md#data-on-root)） |
 | グループ内の種類数・値ごとの個数をオンラインで | マージテク（[代表元に map を持たせる](#map-on-root)） |
-| 併合の過程が先に全部分かっていて、各時点のグループを問う | [併合過程の木](../tree/merge-process-tree.md)＋オイラーツアー |
+| 併合の過程が先に全部分かっていて、各時点のグループを問う | [併合過程の木](../tree/merge-process-tree.md#group-as-interval)＋オイラーツアー |
 | 部分木ごとの種類数・最頻値 | [DSU on Tree](#dsu-on-tree)、またはオイラーツアーの区間で数える（[オイラーツアー](../tree/euler-tour.md)） |
 | 部分木の組を数える（同じ色の組の距離など） | [部分木ごとの集合の併合](#subtree-merge)、[重心分解](../tree/centroid-decomposition.md#count-through)、[Auxiliary Tree](../tree/auxiliary-tree.md) |
 | 森に辺を足すだけ（削除なし） | [小さい方を根付け直す](#reroot-smaller)。削除もあるなら[動的木](../tree/dynamic-tree.md) |

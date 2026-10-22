@@ -173,7 +173,7 @@ updated: 2026-10-21
 - 移動のコストがすべて等しいなら BFS、0 と 1 なら [01-BFS](../graph/zero-one-bfs.md)、非負の一般の重みなら[ダイクストラ法](../graph/dijkstra.md)を使う
 - グリッドが固定で、つながりを 1 回だけ調べるなら DFS・BFS で[連結成分](../graph/connected-components.md)に分ける。マスが順に通れるようになり、そのつど「つながったか」を問われるなら [Union-Find で連結性を扱う](../graph/union-find-connectivity.md)
 - 移動が右と下だけなら探索ではなく [グリッド上の DP](../dp/dp-grid.md) で数えたり最適化したりする
-- グリッドの問題の型の一覧は[グリッド](../patterns/grid.md)のページにまとめてある
+- グリッドの問題の型の一覧は[グリッド](../patterns/grid.md#overview)のページにまとめてある
 
 ## 例題 {#examples}
 

@@ -292,7 +292,7 @@ ACL v1.6 のドキュメントに書かれた計算量である。$n$ は要素�
 | $\sum_{i=r}^{n} \binom{i}{r}$ | $\binom{n+1}{r+1}$ | [縦の和](../comb/binomial-identities.md#hockey-stick) |
 | $x_1 + \dots + x_k = n$ の非負整数解 | $\binom{n+k-1}{k-1}$ | [玉と仕切りの対応](../comb/stars-and-bars.md#stars-bars) |
 | カタラン数 $C_n$ | $\frac{1}{n+1}\binom{2n}{n}$ | [カタラン数](../comb/reflection-principle.md#catalan) |
-| 玉と箱の区別と制限ごとの数 | 写像 12 相の表 | [写像 12 相](../comb/twelvefold-way.md) |
+| 玉と箱の区別と制限ごとの数 | 写像 12 相の表 | [写像 12 相](../comb/twelvefold-way.md#table) |
 
 **整数**
 
@@ -350,7 +350,7 @@ ACL v1.6 のドキュメントに書かれた計算量である。$n$ は要素�
 
 ## C++ の版と GCC・INF の候補 {#cpp}
 
-AtCoder の C++ は GCC 15.2 で、`-std=gnu++23 -O2` でコンパイルされる。手元の古い GCC で解説のコードが通らないときは、次の表で機能の版を確かめる。AtCoder と手元の環境の違いは [AtCoder と手元の C++ 環境](../cpp/cpp-environment.md)にある。
+AtCoder の C++ は GCC 15.2 で、`-std=gnu++23 -O2` でコンパイルされる。手元の古い GCC で解説のコードが通らないときは、次の表で機能の版を確かめる。AtCoder と手元の環境の違いは [AtCoder と手元の C++ 環境](../cpp/cpp-environment.md#options)にある。
 
 | 機能 | 規格 | GCC | ページ |
 | --- | --- | --- | --- |

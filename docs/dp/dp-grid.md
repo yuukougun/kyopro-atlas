@@ -291,7 +291,7 @@ $\mathrm{dp}[i][j][k]$ ＝「$(i, j)$ まで進み、数えたマスが $k$ 個�
 - 上下左右に動けて最小の移動回数を問われるなら[幅優先探索](../graph/bfs.md)、マスや移動に費用があるなら[ダイクストラ法](../graph/dijkstra.md)を使う
 - 壁がなく経路の数だけを問われるなら、DP ではなく二項係数で求まる（[格子路の数え上げ](../comb/lattice-paths.md)）。盤面が大きく壁が少ないなら[包除 DP](../comb/inclusion-exclusion-dp.md#first-obstacle) を使う
 - 長方形の中の和や個数を何度も問われるだけなら、経路の DP ではなく[2 次元累積和](../basics/prefix-sum-2d.md)で足りる
-- グリッドの問題の全体の見取り図は[グリッド](../patterns/grid.md)のページにある
+- グリッドの問題の全体の見取り図は[グリッド](../patterns/grid.md#overview)のページにある
 
 ## 参考 {#references}
 

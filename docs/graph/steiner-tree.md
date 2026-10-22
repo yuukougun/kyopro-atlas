@@ -108,7 +108,7 @@ C++ では次のように書く（完全なプログラムは `snippets/steiner-
 
 グラフが木なら、2 頂点を結ぶ道は 1 通りなので、どの道を使うかを選ぶ必要がない。指定頂点をすべて含む最小の部分木は 1 つに決まり、$K$ がいくつでも $O(N)$ で求まる。辺 $(v, \mathrm{par}[v])$ を使うのは、$v$ の部分木の中と外の両方に指定頂点があるときだけだからである。
 
-問題文に「シュタイナー木」とあっても、グラフが木ならこのページの DP は要らない。[指定頂点を結ぶ最小の部分木](../tree/steiner-subtree.md)の方法（[指定頂点を根にして部分木に指定頂点を含むかで判定する](../tree/steiner-subtree.md#root-at-terminal)・[指定されていない葉を削り続ける](../tree/steiner-subtree.md#prune-leaves)）を使う。指定頂点の集合をクエリごとに変えて何度も問われるなら、[Auxiliary Tree](../tree/auxiliary-tree.md) で指定頂点だけの木に縮める。
+問題文に「シュタイナー木」とあっても、グラフが木ならこのページの DP は要らない。[指定頂点を結ぶ最小の部分木](../tree/steiner-subtree.md)の方法（[指定頂点を根にして部分木に指定頂点を含むかで判定する](../tree/steiner-subtree.md#root-at-terminal)・[指定されていない葉を削り続ける](../tree/steiner-subtree.md#prune-leaves)）を使う。指定頂点の集合をクエリごとに変えて何度も問われるなら、[Auxiliary Tree](../tree/auxiliary-tree.md#build) で指定頂点だけの木に縮める。
 
 ## 自作するときの要点と確かめ方 {#library}
 

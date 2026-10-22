@@ -178,7 +178,7 @@ $\mu$ の累積和 $S(k) = \mu(1) + \dots + \mu(k)$（$S(0) = 0$）を前計算�
 
 $\lfloor N/d \rfloor$ は $O(\sqrt{N})$ 種類の値しかとらず、商の組が変わる境目は 2 つの境目を合わせたものなので、区間は $O(\sqrt{N} + \sqrt{M})$ 個である。前計算 $O(\min(N, M))$ の後、1 回の問い合わせは $O(\sqrt{N} + \sqrt{M})$ で済む。「互いに素な組の数を、$N$ と $M$ を変えて $10^5$ 回答える」のように、問い合わせが多いときに効く。
 
-$N$ が $10^9$ 以上で累積和の表が置けないときは、$S(N)$（メルテンス関数）そのものを篩なしで求める必要がある。$\sum_{d \mid n} \mu(d) = [n = 1]$ を使って $S$ を商の値だけの再帰に直す方法（杜教篩）で $O(N^{2/3})$ になる。これは[乗法的関数](../math/multiplicative-function.md)の範囲である。
+$N$ が $10^9$ 以上で累積和の表が置けないときは、$S(N)$（メルテンス関数）そのものを篩なしで求める必要がある。$\sum_{d \mid n} \mu(d) = [n = 1]$ を使って $S$ を商の値だけの再帰に直す方法（杜教篩）で $O(N^{2/3})$ になる。これは[乗法的関数](../math/multiplicative-function.md#prefix-sums)の範囲である。
 
 ## 約数包除との書き換え {#vs-divisor-ie}
 
@@ -287,7 +287,7 @@ $N \le 2 \times 10^5$、$A_i \le 10^6$ で、答えは mod 998244353 で求め�
 - 値の上限 $V$ が $10^7$ を超えて $O(V \log V)$ が重い、あるいは GCD・LCM の畳み込みをするなら、[約数・倍数のゼータ変換とメビウス変換](../comb/zeta-mobius-divisor.md)を使う。
 - gcd の総和だけが要るなら、$w = \varphi$ として[オイラーの φ 関数](../math/euler-phi.md)の式 $\sum_d \varphi(d) C(d)^2$ で書く方が短い。
 - 条件の重なりが約数・倍数ではなく、一般の集合の包含で決まるなら[包除原理](../comb/inclusion-exclusion.md)を使う。
-- $\sum_{n \le N} \mu(n)$ や乗法的関数の和を $N = 10^9$ 以上で求めるなら、[乗法的関数](../math/multiplicative-function.md)の手法（杜教篩など）を使う。
+- $\sum_{n \le N} \mu(n)$ や乗法的関数の和を $N = 10^9$ 以上で求めるなら、[乗法的関数](../math/multiplicative-function.md#prefix-sums)の手法（杜教篩など）を使う。
 
 ## 参考 {#references}
 

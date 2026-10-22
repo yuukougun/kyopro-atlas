@@ -106,12 +106,12 @@ $x$ と $y$ が同じ集合かどうかは、時刻について[単調](../guide
 
 「時刻 $t$ の連結性」を問う問題は、ほかに 2 つの方法でも解ける。
 
-- **[並列二分探索](../ds/parallel-binary-search.md)**：全クエリの二分探索を一斉に進め、各段で普通の Union-Find に辺を先頭から足し直す。[オフライン](../guide/glossary.md#offline)でしか使えないが、併合以外の過程（BIT への加算など）にも使える。全体は $O((N + M + Q) \log M)$ 回の Union-Find の操作である。
-- **[併合過程の木](../tree/merge-process-tree.md)**：併合のたびに新しい頂点を作り、併合した 2 つの根をその子にする木を作る。初めて連結になる時刻は 2 頂点の LCA の時刻になり、「大きさが $z$ 以上になる時刻」も木の上のダブリングで求まる。最小全域木と組む使い方は[最小ボトルネック路](../graph/bottleneck-path.md#reconstruction-tree)にある。
+- **[並列二分探索](../ds/parallel-binary-search.md#with-union-find)**：全クエリの二分探索を一斉に進め、各段で普通の Union-Find に辺を先頭から足し直す。[オフライン](../guide/glossary.md#offline)でしか使えないが、併合以外の過程（BIT への加算など）にも使える。全体は $O((N + M + Q) \log M)$ 回の Union-Find の操作である。
+- **[併合過程の木](../tree/merge-process-tree.md#bottleneck)**：併合のたびに新しい頂点を作り、併合した 2 つの根をその子にする木を作る。初めて連結になる時刻は 2 頂点の LCA の時刻になり、「大きさが $z$ 以上になる時刻」も木の上のダブリングで求まる。最小全域木と組む使い方は[最小ボトルネック路](../graph/bottleneck-path.md#reconstruction-tree)にある。
 
 部分永続 Union-Find は、クエリを先に読まなくてよく（オンライン）、普通の Union-Find に 2 つの配列を足すだけで書ける。一方、使えるのは「最新の状態だけを更新し、過去を読む」場合だけである。
 
-- 操作を直前から順に取り消すだけなら、[Undo 可能 Union-Find](../ds/rollback-union-find.md) で足りる。
+- 操作を直前から順に取り消すだけなら、[Undo 可能 Union-Find](../ds/rollback-union-find.md#what-it-does) で足りる。
 - 過去の版から枝分かれして併合する（完全永続）なら、部分永続では足りない。オフラインなら版の木を DFS し、入るとき併合し、出るとき取り消す（[永続データ構造](../ds/persistent-data-structures.md#offline-version-tree)）。Library Checker の [Persistent UnionFind](https://judge.yosupo.jp/problem/persistent_unionfind) はこの方法で解ける。オンラインで答えるには、$\mathrm{par}$ を永続配列で持つ完全永続の Union-Find が要る（1 回 $O(\log^2 N)$）。
 
 ## 例題 {#examples}

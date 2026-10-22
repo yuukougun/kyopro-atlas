@@ -122,7 +122,7 @@ $$
 
 - **括弧の対応**：正しい括弧列の個数を数える・正しくするための最小の変更回数を求める問題では、$[l, r)$ を「$l$ と対応する括弧 $m - 1$ で閉じた塊」と「残りの $[m, r)$」に分ける。境目 $m$ を「$l$ と対応する括弧の次」に限ると、分割点型は[左端の相手で分ける型](#last-operation)になる
 - **区間の値を再帰的に定める**：「区間 $[l, r)$ を 2 つに割ってそれぞれの値を求め、合わせる」という式が問題文に書かれていれば、そのまま分割点型になる
-- **高速化**：$\mathrm{cost}(l, r)$ が Monge で、区間を広げても減らない（$[b, c) \subseteq [a, d)$ なら $\mathrm{cost}(b, c) \le \mathrm{cost}(a, d)$）とき、最適な境目が $l$・$r$ について単調になり、$O(N^2)$ に落とせる（Knuth-Yao の高速化。[Monge](../dp/monge.md)）。Slimes の区間の和は両方を満たす。Monge だけでは境目が単調にならないことがある。ABC の範囲では $O(N^3)$ のまま通る問題がほとんどである
+- **高速化**：$\mathrm{cost}(l, r)$ が Monge で、区間を広げても減らない（$[b, c) \subseteq [a, d)$ なら $\mathrm{cost}(b, c) \le \mathrm{cost}(a, d)$）とき、最適な境目が $l$・$r$ について単調になり、$O(N^2)$ に落とせる（Knuth-Yao の高速化。[Monge](../dp/monge.md#knuth-yao)）。Slimes の区間の和は両方を満たす。Monge だけでは境目が単調にならないことがある。ABC の範囲では $O(N^3)$ のまま通る問題がほとんどである
 
 ## 両端型（左端か右端を取る） {#ends}
 
@@ -293,7 +293,7 @@ $$
 
 - 列を左から区切って、区切った区間どうしが影響しないなら[区間分割 DP](../dp/dp-sequence-partition.md#vs-interval-dp)（$\mathrm{dp}[i]$、多くは $O(N^2)$ 以下）。合体や削除で隣が変わるなら区間 DP（$\mathrm{dp}[l][r]$）
 - 両端から取るゲームは区間 DP の両端型で、勝ち負けや得点差の扱いは[ミニマックス](../comb/minimax.md)にそろえる
-- 分割点型で $N$ が数千あるなら、コストの性質（Monge と単調性）を調べて Knuth-Yao の高速化を考える（[Monge](../dp/monge.md)）
+- 分割点型で $N$ が数千あるなら、コストの性質（Monge と単調性）を調べて Knuth-Yao の高速化を考える（[Monge](../dp/monge.md#knuth-yao)）
 - 区間を部分木とみる木の数え上げ、区間ごとの Grundy 数、訪れた範囲の両端を状態にする移動は[区間 DP の応用](../dp/interval-dp-advanced.md)
 
 ## 参考 {#references}

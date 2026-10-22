@@ -142,7 +142,7 @@ $$
 E[\max] = \int_0^1 (1 - t^N) \, dt = 1 - \frac{1}{N + 1} = \frac{N}{N + 1}
 $$
 
-値ごとに区間 $[L_i, R_i]$ が違うときは、$P(K \text{ 番目} > t)$ が区間の端点で区切られた区分ごとの多項式になるので、区分ごとに積分して足す。この形の問題は[連続値の確率](../comb/continuous-probability.md)で扱う。
+値ごとに区間 $[L_i, R_i]$ が違うときは、$P(K \text{ 番目} > t)$ が区間の端点で区切られた区分ごとの多項式になるので、区分ごとに積分して足す。この形の問題は[連続値の確率](../comb/continuous-probability.md#piecewise)で扱う。
 
 ## 「ちょうど」と「以上」の行き来 {#exactly-vs-at-least}
 

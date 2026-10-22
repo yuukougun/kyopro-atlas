@@ -392,9 +392,9 @@ graph LR
 - **訪問した集合を持つ**：集合が増えるだけ（各頂点を 1 回ずつ）なら bitDP で計算順序を決めて書ける。偶奇のように集合が行き来するなら BFS
 - **時刻で辺が変わる**：状態に時刻を持つ前に、[時刻で変わる辺](../graph/time-dependent-dijkstra.md)の型（待つ遷移を入れたダイクストラ法）で済まないかを考える
 - **連結かどうかだけ**：最短距離が要らず、グループをまとめて行き来できるかだけなら、超頂点より [Union-Find](../graph/union-find-connectivity.md) で同じグループを併合するほうが短く書ける
-- **区間の全点に辺を張る**：超頂点を何段も重ねた[区間に辺を張る](../graph/segment-tree-graph.md)手法を使う
-- **頂点を剰余にする**：「値の mod を頂点にして、到達できる最小値を求める」型は[同余最短路](../graph/modular-shortest-path.md)
-- **何を頂点にするか自体を考える**：[グラフへの帰着](../graph/graph-modeling.md)
+- **区間の全点に辺を張る**：超頂点を何段も重ねた[区間に辺を張る](../graph/segment-tree-graph.md#two-trees)手法を使う
+- **頂点を剰余にする**：「値の mod を頂点にして、到達できる最小値を求める」型は[同余最短路](../graph/modular-shortest-path.md#residue-vertices)
+- **何を頂点にするか自体を考える**：[グラフへの帰着](../graph/graph-modeling.md#what-to-vertex)
 
 ## 参考 {#references}
 

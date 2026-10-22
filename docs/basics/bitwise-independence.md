@@ -208,7 +208,7 @@ XOR は「繰り上がりを無視した足し算」で、AND が繰り上がり
 - 要素をいくつでも選んで XOR したときに作れる値（最大値・個数・K 番目）は、bit ごとには分けられない。[XOR 基底](../math/xor-basis.md)で掃き出す
 - 要素の追加・削除をしながら「$x$ との XOR の最小・最大」を何度も答えるなら [Binary Trie](../ds/binary-trie.md#xor-min-max) に載せる。1 回だけなら[上位ビットで分ける再帰](#split-by-top-bit)で足りる
 - $X \le K$ のような上限が、和の最大化や数え上げと組み合わさるなら [桁 DP](../dp/digit-dp.md) の形で書くと場合分けを間違えにくい
-- XOR を含む問題全体の入口は [XOR](../patterns/xor.md)、bit 以外の「独立に分ける」言い換えは[言い換えの典型](../thinking/reformulation.md)にある
+- XOR を含む問題全体の入口は [XOR](../patterns/xor.md#overview)、bit 以外の「独立に分ける」言い換えは[言い換えの典型](../thinking/reformulation.md)にある
 
 ## 例題 {#examples}
 

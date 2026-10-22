@@ -191,7 +191,7 @@ AND 畳み込み $h(U) = \sum_{A \cap B = U} f(A) \, g(B)$ も同じ形である
 
 ## XOR 畳み込みとの違い {#vs-xor}
 
-添字の XOR で畳み込む $h(U) = \sum_{A \oplus B = U} f(A) \, g(B)$ は、ゼータ変換では求まらない。$A \oplus B \subseteq S$ は「$A \subseteq S$ かつ $B \subseteq S$」と同じではないからである（$A = B = \{0\}$ なら $A \oplus B = \emptyset$ で、どんな $S$ の部分集合にもなる）。XOR には[アダマール変換](../math/hadamard-transform.md)を使う。
+添字の XOR で畳み込む $h(U) = \sum_{A \oplus B = U} f(A) \, g(B)$ は、ゼータ変換では求まらない。$A \oplus B \subseteq S$ は「$A \subseteq S$ かつ $B \subseteq S$」と同じではないからである（$A = B = \{0\}$ なら $A \oplus B = \emptyset$ で、どんな $S$ の部分集合にもなる）。XOR には[アダマール変換](../math/hadamard-transform.md#transform)を使う。
 
 3 つの変換は、どれも bit $i$ だけが違う組 $(x, y)$（$x$ が bit $i$ が 0 の側）を 1 段ずつ書き換える。違いは 1 段の式である。
 

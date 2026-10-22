@@ -276,7 +276,7 @@ g++-13・g++-15 とも `-std=gnu++23` で `'concat' is not a member of 'std::vie
 ```
 
 - **版**：C++26（GCC 15 の C++26 の実験的な機能）。AtCoder では使えない
-- **落とし穴**：手元で `-std=gnu++26` を付けて試すと通ってしまう。手元のコンパイルの設定は AtCoder と同じ `-std=gnu++23` にそろえる（[AtCoder と手元の環境](../cpp/cpp-environment.md)）
+- **落とし穴**：手元で `-std=gnu++26` を付けて試すと通ってしまう。手元のコンパイルの設定は AtCoder と同じ `-std=gnu++23` にそろえる（[AtCoder と手元の環境](../cpp/cpp-environment.md#options)）
 
 ## 確認問題 {#quiz}
 

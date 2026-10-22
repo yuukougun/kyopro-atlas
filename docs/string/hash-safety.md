@@ -141,9 +141,9 @@ $D_0 = \pm 1$ なので、$D_k = \pm \prod_{i=0}^{k-1} \left(B^{2^i} - 1\right)$
 --8<-- "hash-safety/random-prime.cpp:core"
 ```
 
-素数は、範囲の整数を乱択して素数判定（$2^{64}$ 未満で決定的な [Miller-Rabin](../math/miller-rabin.md)）をくり返して見つける。素数定理から約 42 個に 1 個が素数なので、判定の回数の期待値は約 42 回である。素数を 2 つ独立に選び、両方の余りの組で比べれば、1 組の誤りの確率は約 $(4 \times 10^{-15})^2$ に下がる。
+素数は、範囲の整数を乱択して素数判定（$2^{64}$ 未満で決定的な [Miller-Rabin](../math/miller-rabin.md#deterministic-bases)）をくり返して見つける。素数定理から約 42 個に 1 個が素数なので、判定の回数の期待値は約 42 回である。素数を 2 つ独立に選び、両方の余りの組で比べれば、1 組の誤りの確率は約 $(4 \times 10^{-15})^2$ に下がる。
 
-集合のハッシュの乱数の割り当て方は[集合・多重集合のハッシュ](../string/hashing-for-sets.md)、根付き木のハッシュは[木の同型判定](../tree/tree-isomorphism.md)で扱う。
+集合のハッシュの乱数の割り当て方は[集合・多重集合のハッシュ](../string/hashing-for-sets.md)、根付き木のハッシュは[木の同型判定](../tree/tree-isomorphism.md#tree-hash)で扱う。
 
 ## AtCoder で狙われる条件（事前に固定されたテストと、誰でも使う固定の選択） {#atcoder-tests}
 

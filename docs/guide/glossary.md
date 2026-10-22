@@ -104,7 +104,7 @@ Compilation Error の略で、提出したソースがコンパイルできな�
 
 ## AtCoder の用語 {#atcoder}
 
-コンテストの種類・成績の指標・練習の道具の名前である。成績の指標の定義と数値は[AtCoder の仕組み](../start/atcoder-system.md)で扱う。
+コンテストの種類・成績の指標・練習の道具の名前である。成績の指標の定義と数値は[AtCoder の仕組み](../start/atcoder-system.md#rating)で扱う。
 
 ### ABC・ARC・AGC {#contest-types}
 
@@ -152,7 +152,7 @@ AtCoder Library の略で、AtCoder が公開しているデータ構造とア�
 
 ### verify {#verify}
 
-自作のライブラリを、Library Checker などの問題に提出して AC することで、正しさと速さを確かめることである。手順は[自作ライブラリの設計と動作確認](library-design.md)で扱う。
+自作のライブラリを、Library Checker などの問題に提出して AC することで、正しさと速さを確かめることである。手順は[自作ライブラリの設計と動作確認](library-design.md#verify)で扱う。
 
 ### 典型90 {#typical90}
 
@@ -164,7 +164,7 @@ Educational DP Contest の略で、DP の基本の型を A〜Z の 26 問で学�
 
 ### ADT {#adt}
 
-AtCoder Daily Training の略で、過去の ABC の問題を組み直して、主に平日に開かれる 60 分の練習用のコンテストである。ほかの練習用コンテストと合わせて[問題集と練習用コンテストの案内](problem-sets.md)で扱う。
+AtCoder Daily Training の略で、過去の ABC の問題を組み直して、主に平日に開かれる 60 分の練習用のコンテストである。ほかの練習用コンテストと合わせて[問題集と練習用コンテストの案内](problem-sets.md#practice-contests)で扱う。
 
 ## 慣用句 {#slang}
 

@@ -116,7 +116,7 @@ $$
 
 法 $p$ で $x = 0, 1, \dots, p-1$ の全部の値が分かっているときは、フェルマーの小定理で割り算を避けられる。$a \not\equiv 0$ なら $a^{p-1} \equiv 1$、$a \equiv 0$ なら $0$ なので、$1 - (x - i)^{p-1}$ は $x = i$ で 1、ほかの点で 0 になる。$y_i \bigl(1 - (x - i)^{p-1}\bigr)$ を、$(x - i)^{p-1}$ を二項定理で展開して足せば、やはり $O(p^2)$ で係数が出る（[例題 ABC137 F](#abc137_f)）。
 
-連立 1 次方程式 $\sum_k c_k x_i^k = y_i$ を[掃き出し法](../math/gaussian-elimination.md#mod-p)で解いても係数は出るが $O(d^3)$ である。$d$ が $10^5$ 以上なら $O(d \log^2 d)$ の方法（[形式的冪級数](../math/fps-basics.md)の多点評価・補間）が要る。
+連立 1 次方程式 $\sum_k c_k x_i^k = y_i$ を[掃き出し法](../math/gaussian-elimination.md#mod-p)で解いても係数は出るが $O(d^3)$ である。$d$ が $10^5$ 以上なら $O(d \log^2 d)$ の方法（[形式的冪級数](../math/fps-basics.md#polynomial-ops)の多点評価・補間）が要る。
 
 ## 自作するときの要点と Library Checker {#library}
 

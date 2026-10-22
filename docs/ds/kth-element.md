@@ -69,7 +69,7 @@ K 番目を求める方法は多い。問題の条件（値の範囲・先読み
 - **BIT 上の二分探索**：最も定数倍が軽く、コードも短い。値は配列の添字にするので、値が $10^9$ まであるなら、全クエリを先に読んで[座標圧縮](../basics/coordinate-compression.md#with-ds)する（[オフライン](../guide/glossary.md#offline)）。手順は[次の節](#bit-binary-search)で述べる
 - **セグメント木の `max_right`**：個数を載せた和のセグメント木で、`max_right(0, [&](int s) { return s < k; })` が K 番目の位置を返す。ACL だけで書け、和以外の条件にも広げやすい（[セグメント木上の二分探索](../ds/segment-tree-binary-search.md)）
 - **外側の二分探索**：値 $v$ を二分探索し、BIT の接頭辞の和で $v$ 以下の個数を数える。1 回の判定が $O(\log N)$ なので全体で $O(\log^2 N)$ になる。$Q = 2 \times 10^5$ なら $Q \log^2 N$ はおよそ $6 \times 10^7$ で、多くは間に合う
-- **pb_ds の `tree`**：GCC の拡張の順序付き集合で、`find_by_order(k)`（0 始まりの番号 $k$ の要素）と `order_of_key(x)`（$x$ 未満の個数）を持つ。値を先読みできないオンラインの問題でも使える。重複を許すには `(値, 通し番号)` の組にする（[pb_ds の tree](../cpp/cpp-container-idioms.md#pb-ds)・[平衡二分探索木と pb_ds の tree](../ds/balanced-bst.md)）
+- **pb_ds の `tree`**：GCC の拡張の順序付き集合で、`find_by_order(k)`（0 始まりの番号 $k$ の要素）と `order_of_key(x)`（$x$ 未満の個数）を持つ。値を先読みできないオンラインの問題でも使える。重複を許すには `(値, 通し番号)` の組にする（[pb_ds の tree](../cpp/cpp-container-idioms.md#pb-ds)・[平衡二分探索木と pb_ds の tree](../ds/balanced-bst.md#pbds)）
 - **2 つのヒープ**：K が最後まで変わらないなら、小さい K 個と残りに分けて持てば、K 番目は小さい側の最大値である。削除もあるなら 2 つの `multiset` にする（[上位 K 個の和と中央値の管理](../ds/top-k-multiset.md)）
 - **Binary Trie**：整数を上位ビットから辿る木で、各ノードに個数を持てば K 番目を求められる。全体に XOR をかける操作と組むときに使う（[Binary Trie](../ds/binary-trie.md#kth-and-global-xor)）
 

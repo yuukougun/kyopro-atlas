@@ -234,7 +234,7 @@ GCC は、GNU 拡張を有効にする `-std=gnu++23` と、規格どおりの `
 --8<-- "cpp-integer-overflow/int128-limits.cpp:core"
 ```
 
-- **AtCoder では**：`-std=gnu++23` なので渡せる。手元の設定やエディタの拡張（コード補完）が `-std=c++23` だと、手元だけでエラーになる。手元のオプションは [環境構築](../cpp/cpp-environment.md)でそろえる
+- **AtCoder では**：`-std=gnu++23` なので渡せる。手元の設定やエディタの拡張（コード補完）が `-std=c++23` だと、手元だけでエラーになる。手元のオプションは [環境構築](../cpp/cpp-environment.md#gnu-mode)でそろえる
 
 ## 積が上限を超えるかの判定：割り算で比べる・__builtin_mul_overflow {#overflow-check}
 

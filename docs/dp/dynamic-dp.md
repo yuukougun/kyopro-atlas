@@ -138,7 +138,7 @@ $a_v$ を書き換えたときの流れは次のとおりである。
 
 軽い辺は根までに $O(\log N)$ 本なので、1 回の更新は $O(\log N)$ 本の重いパスでセグメント木を更新し、$O(S^3 \log^2 N)$ になる。軽い子の寄与を引き算で外せない演算（max でまとめるなど）なら、頂点ごとに軽い子の値を集める構造（多重集合やセグメント木）を別に持つ。
 
-[Static Top Tree](../tree/static-top-tree.md) は、木を「パスの圧縮」と「部分木の併合」の 2 種類の操作で高さ $O(\log N)$ の木に組み直し、同じ更新を $O(\log N)$ 回の合成で済ませる方法である。行列にしなくてよく、圧縮と併合の 2 つの演算を直接書くので、遷移が行列で書きにくい木 DP にも使える。
+[Static Top Tree](../tree/static-top-tree.md#compress-rake) は、木を「パスの圧縮」と「部分木の併合」の 2 種類の操作で高さ $O(\log N)$ の木に組み直し、同じ更新を $O(\log N)$ 回の合成で済ませる方法である。行列にしなくてよく、圧縮と併合の 2 つの演算を直接書くので、遷移が行列で書きにくい木 DP にも使える。
 
 ## ライブラリでの検証（Library Checker の point_set_range_composite が土台） {#verify}
 
@@ -153,7 +153,7 @@ $a_v$ を書き換えたときの流れは次のとおりである。
 
 - 列の動的 DP は、[行列累乗](../math/matrix-power.md)と[セグメント木に何を載せるか](../ds/segment-tree-monoids.md#matrix)の組み合わせで足りる。例題の解説（kmjp 氏・ikatakos 氏）は、同じ問題を 3×3 と 4×4 の別の状態の取り方で解いていて、状態の設計の幅を見るのによい。
 - 木の上の動的 DP は、OI Wiki の「动态 DP」（中国語）が HL 分解の重いパスごとに行列のセグメント木を作る方法を、最大重み独立集合を題材に説明している。
-- Static Top Tree は[Static Top Tree のページ](../tree/static-top-tree.md)の資料を参照する。
+- Static Top Tree は[Static Top Tree のページ](../tree/static-top-tree.md#resources)の資料を参照する。
 
 ## 例題 {#examples}
 

@@ -164,7 +164,7 @@ $\varphi$ の試し割りは段ごとに $O(\sqrt{m_j})$（$m_j$ はその段の
 
 - 指数が $10^{18}$ 以下の 1 つの整数なら、指数を小さくする必要はなく、[繰り返し二乗法](../math/mod-pow.md)をそのまま使う
 - 「$a^n \equiv 1$ となる最小の $n$」や「何回で元に戻るか」を問われたら、$p - 1$ や $\varphi(m)$ の約数を調べて[位数](../math/multiplicative-order.md#find-order)を求める
-- $a^{p-1} \equiv 1$ を素数かどうかの判定に使う話は[大きな数の素数判定と素因数分解](../math/miller-rabin.md)にある
+- $a^{p-1} \equiv 1$ を素数かどうかの判定に使う話は[大きな数の素数判定と素因数分解](../math/miller-rabin.md#miller-rabin)にある
 
 ## 例題 {#examples}
 

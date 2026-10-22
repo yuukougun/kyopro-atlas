@@ -173,7 +173,7 @@ $f(x) = \sum_i \lvert x - a_i \rvert$ を最小にする $x$ は、$a$ の中央
 
 個数の数え方で、行き先のページが分かれる。
 
-- **式で数えられる**：a が $A$ 個・b が $B$ 個の並べ方なら二項係数で数える（[二項係数の K 番目](../comb/binomial-coefficient.md#kth)）。順列なら、残りの $r$ 個の並べ方 $r!$ が個数になる（[順列](permutation.md)）。
+- **式で数えられる**：a が $A$ 個・b が $B$ 個の並べ方なら二項係数で数える（[二項係数の K 番目](../comb/binomial-coefficient.md#kth)）。順列なら、残りの $r$ 個の並べ方 $r!$ が個数になる（[順列](permutation.md#lexicographic)）。
 - **式がない**：後ろからの DP で「残りの完成のさせ方の数」を数える（[数え上げで決める](../dp/dp-reconstruction.md#dp-kth-lexicographic)）。
 
 個数はすぐに `long long` を超える。比べたいのは「$K$ 以上か」だけである。足し算のたびに $\min(K, \cdot)$ を取って頭打ちにすればよい。

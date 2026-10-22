@@ -198,9 +198,9 @@ $$
 ## 使い分け {#comparison}
 
 - グラフが最初から固定で、成分ごとの集計を一度するだけなら、[連結成分](../graph/connected-components.md)を BFS・DFS で求めて数えれば足りる。辺の追加と質問が交互に来るときに Union-Find が要る
-- 値ごとの個数の質問がオフラインで、map のマージテクが重いときは、[併合過程を表す木](../tree/merge-process-tree.md)で各時点の成分を DFS 順の区間にする方法もある
+- 値ごとの個数の質問がオフラインで、map のマージテクが重いときは、[併合過程を表す木](../tree/merge-process-tree.md#group-as-interval)で各時点の成分を DFS 順の区間にする方法もある
 - 次の空きを探すだけなら、次の空きへ飛ぶ Union-Find でも `std::set` の `lower_bound` でもよい。区間ごとに色や値を持ち、塗り替えもするなら[区間を set で管理する](../ds/interval-set.md)方法を使う
-- 削除を含むなら、逆順の追加にするか（[Union-Find で連結性を扱う](../graph/union-find-connectivity.md)）、オフラインの発展的な方法に頼る（[Undo 可能な Union-Find](../ds/rollback-union-find.md)）
+- 削除を含むなら、逆順の追加にするか（[Union-Find で連結性を扱う](../graph/union-find-connectivity.md)）、オフラインの発展的な方法に頼る（[Undo 可能な Union-Find](../ds/rollback-union-find.md#offline-dynamic-connectivity)）
 
 ## 例題 {#examples}
 

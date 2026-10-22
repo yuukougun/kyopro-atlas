@@ -163,7 +163,7 @@ $$
 - **$ax + by = \gcd(a, b)$ の解**：互除法の各段で余りを $a$ と $b$ の整数係数の和として持ち続けると、$ax + by = \gcd(a, b)$ の解が求まる。逆元や一次合同式に使う（[拡張ユークリッドの互除法](../math/ext-gcd.md)）
 - **差の gcd・区間 gcd・mod の周期**：$\gcd(a + x, b + x) = \gcd(a + x, b - a)$ のように差に移す。区間 gcd をセグメント木に載せる。mod $N$ で $A$ ずつ進むと $\gcd(A, N)$ の倍数だけを回る（[GCD の性質](../math/gcd-properties.md)）
 - **素因数の指数**：$\gcd$ は素因数ごとの指数の最小、$\operatorname{lcm}$ は最大である。lcm を余りで答える、積の約数を考えるときに使う（[素因数の指数で考える](../math/prime-exponent-vector.md)）
-- **連分数**：互除法の商の列は $a / b$ の連分数になり、最良有理近似などにつながる（[Stern–Brocot 木と連分数](../math/stern-brocot.md)、発展）
+- **連分数**：互除法の商の列は $a / b$ の連分数になり、最良有理近似などにつながる（[Stern–Brocot 木と連分数](../math/stern-brocot.md#continued-fraction)、発展）
 
 ## 例題 {#examples}
 

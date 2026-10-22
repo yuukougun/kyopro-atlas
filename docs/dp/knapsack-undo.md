@@ -82,7 +82,7 @@ $$
 | 0-1（$(1 + z^x)$ を掛ける） | $s$ の大きい方から $+\mathrm{dp}[s - x]$ | 小さい方から $-\mathrm{dp}[s - x]$ |
 | 個数制限なし（$1 / (1 - z^x)$ を掛ける） | $s$ の小さい方から $+\mathrm{dp}[s - x]$ | 大きい方から $-\mathrm{dp}[s - x]$ |
 
-母関数としての見方は[母関数による数え上げ](../comb/generating-function-counting.md)と[形式的冪級数](../math/fps-basics.md)にある。
+母関数としての見方は[母関数による数え上げ](../comb/generating-function-counting.md#dp-as-polynomial)と[形式的冪級数](../math/fps-basics.md)にある。
 
 ## 戻せない DP（max・min・OR） {#not-undoable}
 
@@ -125,7 +125,7 @@ $$
 
 ## 分割統治でオフラインに処理する {#offline-divide-and-conquer}
 
-この節は[オフライン動的連結性](../graph/offline-dynamic-connectivity.md)の考え方（時間軸のセグメント木）を使う。max のナップサックに品物の追加と削除のクエリが任意の順に来て、クエリをすべて先に読める（[オフライン](../guide/glossary.md#offline)）なら、削除を使わずに処理できる。
+この節は[オフライン動的連結性](../graph/offline-dynamic-connectivity.md#time-segment-tree)の考え方（時間軸のセグメント木）を使う。max のナップサックに品物の追加と削除のクエリが任意の順に来て、クエリをすべて先に読める（[オフライン](../guide/glossary.md#offline)）なら、削除を使わずに処理できる。
 
 各品物について、箱に入っている時間を半開区間 $[l, r)$（$l$ 番目のクエリで入り、$r$ 番目で出る）として求める。時刻 $t$ は $t$ 番目のクエリを処理した直後の状態を指し、最後まで残る品物は $r = Q$ とする。時間 $0, \dots, Q - 1$ の上にセグメント木を考え、各品物を、その区間をちょうど覆う $O(\log Q)$ 個のノードに載せる。すると、ある時刻に箱に入っている品物は、その時刻の葉から根までのノードに載っている品物と一致する。
 

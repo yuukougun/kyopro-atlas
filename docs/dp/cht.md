@@ -203,9 +203,9 @@ Library Checker の対応は次のとおりである。どちらも $N, Q \le 2 
 ## 使い分け {#comparison}
 
 - 遷移のコストが $j$ だけの値の和で、範囲の最小を取るだけなら、[セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md)で足りる。$a_j x_i$ のような積の項が残ると範囲の最小では取れず、CHT になる。
-- コストが一次関数の形にならなくても、Monge 性（最適な遷移元の位置が単調）があれば [Monge 性による DP の高速化](../dp/monge.md)の方法が使える。
-- 遷移の個数に制約がある（ちょうど $K$ 回）DP は、[Alien DP](../dp/alien-dp.md) で制約を外してから CHT と組むことがある。
-- 全体の選び方は [DP の高速化の選び方](../dp/dp-speedup-overview.md)にまとめる。
+- コストが一次関数の形にならなくても、Monge 性（最適な遷移元の位置が単調）があれば [Monge 性による DP の高速化](../dp/monge.md#monotone-minima)の方法が使える。
+- 遷移の個数に制約がある（ちょうど $K$ 回）DP は、[Alien DP](../dp/alien-dp.md#penalty) で制約を外してから CHT と組むことがある。
+- 全体の選び方は [DP の高速化の選び方](../dp/dp-speedup-overview.md#shape-to-tool)にまとめる。
 
 ## 参考 {#references}
 

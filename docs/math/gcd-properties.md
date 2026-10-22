@@ -181,7 +181,7 @@ $\gcd(a, b) = g > 1$ なら、$ax + by$ は $g$ の倍数しか作れないの�
 
 - **十分大きい数は必ず作れる**：$ab - a - b$ より大きい数は必ず作れるので、それより小さい範囲だけを全探索や DP で調べればよい。
 - **$n$ を作れるかの判定**：$y_\rho$（$b$ の mod $a$ での逆元を使って $y_\rho = \rho \cdot b^{-1} \bmod a$）を求め、$n \ge b y_\rho$ かを見る。$O(\log a)$ で判定できる（[逆元](../math/mod-inverse.md)）。
-- **3 種類以上の数**：公式はない。最小の数を $a$ として、余り mod $a$ ごとに「作れる最小の値」を[ダイクストラ法](../graph/dijkstra.md)で求める方法がある（[同余最短路](../graph/modular-shortest-path.md)）。
+- **3 種類以上の数**：公式はない。最小の数を $a$ として、余り mod $a$ ごとに「作れる最小の値」を[ダイクストラ法](../graph/dijkstra.md)で求める方法がある（[同余最短路](../graph/modular-shortest-path.md#congruence)）。
 
 ## 落とし穴 {#pitfalls}
 

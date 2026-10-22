@@ -256,7 +256,7 @@ LCA の求め方は、前処理の重さ・1 回の重さ・一緒に手に入�
 - **HL 分解**：[HL 分解](../tree/hld.md)を作ってあれば、重いパスを上る途中で LCA も求まる。パスへの一括の更新があるなど、パスを区間に直す必要があるときに使う
 - **オフライン**：質問が先に全部分かるなら、DFS の帰りがけに [Union-Find](../ds/union-find.md) で頂点を親へ併合しながら答える方法（Tarjan の方法）もある
 
-指定された頂点の集合を、LCA を使って小さな木に縮める手法は [Auxiliary Tree](../tree/auxiliary-tree.md) にある。
+指定された頂点の集合を、LCA を使って小さな木に縮める手法は [Auxiliary Tree](../tree/auxiliary-tree.md#build) にある。
 
 ## 参考 {#references}
 

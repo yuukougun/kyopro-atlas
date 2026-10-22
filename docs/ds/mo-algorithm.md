@@ -177,7 +177,7 @@ $$
 
 を多数の $(X, Y)$ で答えたいとする。$X$ を 1 増やすと $\sum_{j < Y} \lvert A_X - B_j \rvert$ だけ増える。これは $B$ の先頭 $Y$ 項のうち $A_X$ 以下の要素の個数と和、$A_X$ より大きい要素の個数と和が分かれば計算できる。$B$ の先頭 $Y$ 項を値で座標圧縮した BIT（個数と和の 2 本）に持てば、1 回 $O(\log N)$ で直せる。$Y$ を動かすときも、$A$ の側の BIT で同じように直す。$(X, Y)$ を $(l, r)$ と見て Mo's algorithm の順に並べれば、全体は $O(N \sqrt{Q} \log N)$ になる（[ABC384 G](#practice)）。
 
-$(n, k)$ を状態とする二項係数の和 $S(n, k) = \sum_{i \le k} \binom{n}{i}$ も同じ形である。$S(n, k \pm 1)$ は 1 項の増減で、$S(n + 1, k) = 2 S(n, k) - \binom{n}{k}$ なので、どちらの座標も $O(1)$ で動かせる（[二項係数の部分和](../comb/binomial-prefix-sum.md)）。
+$(n, k)$ を状態とする二項係数の和 $S(n, k) = \sum_{i \le k} \binom{n}{i}$ も同じ形である。$S(n, k \pm 1)$ は 1 項の増減で、$S(n + 1, k) = 2 S(n, k) - \binom{n}{k}$ なので、どちらの座標も $O(1)$ で動かせる（[二項係数の部分和](../comb/binomial-prefix-sum.md#update)）。
 
 ## 木上の Mo（入りと出の両方を記録した列で、パスを区間にする。LCA を別に足す） {#mo-on-tree}
 

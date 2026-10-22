@@ -176,7 +176,7 @@ $3^{15} \approx 1.4 \times 10^7$、$3^{16} \approx 4.3 \times 10^7$、$3^{18} \a
 - **bit ごとに独立に考える**：AND・OR・XOR の結果は桁ごとに独立に決まる。そこで 1 の個数を桁ごとに数え、$2^k$ を掛けて足す。全ペアの XOR の和や、$0$〜$N$ の popcount の和がこの型である（[bit ごとに独立に考える](../basics/bitwise-independence.md)）。足し算は繰り上がりがあるので桁ごとに分けられない
 - **集合を整数で表す**：要素 $i$ を bit $i$ に対応させると、和集合は OR、共通部分は AND、要素数は popcount になる。小さい $N$ の全探索（[bit 全探索と順列全探索](../basics/bit-full-search.md)）と、集合を状態にする DP（[bitDP](../dp/bit-dp.md#subsets-as-integers)）の土台である
 - **部分集合の列挙**：$3^N$ の列挙は、集合をグループに分ける DP の遷移になる（[部分集合を列挙する DP](../dp/subset-enumeration-dp.md#submask-loop)）
-- **XOR を足し算とみなす**：XOR は繰り上がりのない足し算なので、掃き出し法で「選んだ値の XOR で作れる値」を調べられる（[XOR 基底](../math/xor-basis.md#insert)）。XOR が絡む問題の型は [XOR](../patterns/xor.md) のページにまとめてある
+- **XOR を足し算とみなす**：XOR は繰り上がりのない足し算なので、掃き出し法で「選んだ値の XOR で作れる値」を調べられる（[XOR 基底](../math/xor-basis.md#insert)）。XOR が絡む問題の型は [XOR](../patterns/xor.md#overview) のページにまとめてある
 
 ## 例題 {#examples}
 

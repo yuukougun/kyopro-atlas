@@ -217,7 +217,7 @@ $p(s) - p(t)$ は道によらない定数なので、$s$ から $t$ への道の
 - **重みが 0 と 1**：ヒープの代わりに deque で $O(N + M)$ にできる（[01-BFS](../graph/zero-one-bfs.md)）
 - **時刻で変わる辺**：「遅く出発すると早く着くことはない」なら、到着時刻を距離にしてそのまま使える（[時刻で変わる辺](../graph/time-dependent-dijkstra.md)）
 - **最短路の数え上げ・最短路に乗る辺**：辺の重みがすべて正なら、$\mathrm{dist}$ が確定した順は最短路 DAG のトポロジカル順なので、DP を重ねられる（重み 0 の辺があるときは[最短路 DAG](../graph/shortest-path-dag.md#build)）
-- **K 番目の最短路**：各頂点を $K$ 回まで取り出すように変える（[K 番目の最短路](../graph/k-shortest-paths.md)）
+- **K 番目の最短路**：各頂点を $K$ 回まで取り出すように変える（[K 番目の最短路](../graph/k-shortest-paths.md#k-times)）
 - **最小費用流**：ポテンシャルで負の残余辺を消しながら最短路を繰り返す（[最小費用流](../graph/min-cost-flow.md#successive-shortest-path)）
 
 自作のダイクストラ法は、Library Checker の [Shortest Path](https://judge.yosupo.jp/problem/shortest_path)（経路の出力つき）で確かめられる。

@@ -94,7 +94,7 @@ updated: 2026-10-22
 | 全区間の中央値・mex・転倒数 | 答えの二分探索・主客転倒など | 題材別の各ページ（[節](#other-statistics)） | — |
 | 列を区間に区切る方法の数・最適値 | 区間分割 DP | [区間分割 DP](../dp/dp-sequence-partition.md#last-block) | — |
 | 隣どうしの合体・取り除くと両隣がくっつく | 区間 DP | [区間 DP](../dp/interval-dp.md#split-point) | — |
-| 文字列の連続部分 | [部分文字列](../guide/glossary.md#substring)の手法 | [部分列と部分文字列](../patterns/subsequence-and-substring.md) | — |
+| 文字列の連続部分 | [部分文字列](../guide/glossary.md#substring)の手法 | [部分列と部分文字列](../patterns/subsequence-and-substring.md#overview) | — |
 
 **区間に操作して質問する**：列の区間に加算・代入をして、値や区間の和を問われる。
 
@@ -146,9 +146,9 @@ updated: 2026-10-22
 
 最小値・最大値以外の統計量は、要素ごとの寄与に分けにくい。統計量ごとに次の言い換えを使う。
 
-- **中央値**：「中央値が $x$ 以上か」は、$x$ 以上を $+1$、未満を $-1$ にした列の和の符号で判定できる。$x$ を二分探索し、各 $x$ で条件を満たす区間を累積和で数える（[中央値の言い換え](../basics/fractional-binary-search.md#median)、全区間の中央値の中央値は[転倒数で数える](../basics/fractional-binary-search.md#median-of-medians)）。題材の全体は [K 番目と中央値](../patterns/kth-and-median.md)にある
-- **mex**：全区間の mex の総和は、「mex が $k$ 以上の区間の数」を $k = 1, 2, \dots$ について足す主客転倒で数える。mex が $k$ 以上であることは、区間が $0, \dots, k-1$ をすべて含むことと同じである（[mex](../patterns/mex.md)）
-- **転倒数**：窓を 1 つずらしたときの転倒数の増減は、出入りする要素より大きい・小さい要素の個数で直せる（[窓を伸縮しながら転倒数を増減する](../ds/inversion-number.md#sliding-window)）。順列についての問われ方は[順列](../patterns/permutation.md)にある
+- **中央値**：「中央値が $x$ 以上か」は、$x$ 以上を $+1$、未満を $-1$ にした列の和の符号で判定できる。$x$ を二分探索し、各 $x$ で条件を満たす区間を累積和で数える（[中央値の言い換え](../basics/fractional-binary-search.md#median)、全区間の中央値の中央値は[転倒数で数える](../basics/fractional-binary-search.md#median-of-medians)）。題材の全体は [K 番目と中央値](../patterns/kth-and-median.md#overview)にある
+- **mex**：全区間の mex の総和は、「mex が $k$ 以上の区間の数」を $k = 1, 2, \dots$ について足す主客転倒で数える。mex が $k$ 以上であることは、区間が $0, \dots, k-1$ をすべて含むことと同じである（[mex](../patterns/mex.md#sum-of-mex)）
+- **転倒数**：窓を 1 つずらしたときの転倒数の増減は、出入りする要素より大きい・小さい要素の個数で直せる（[窓を伸縮しながら転倒数を増減する](../ds/inversion-number.md#sliding-window)）。順列についての問われ方は[順列](../patterns/permutation.md#overview)にある
 
 ## 列を区間に区切る方法の数・最適値 → 区間分割 DP（dp-sequence-partition） {#partition}
 
@@ -215,7 +215,7 @@ updated: 2026-10-22
 
 ## 数列ではなく文字列の連続部分 → 部分列と部分文字列（subsequence-and-substring） {#substrings}
 
-文字列の連続した一部分を部分文字列と呼ぶ。飛び飛びに選ぶ[部分列](../guide/glossary.md#subsequence)とは別物で、問題文がどちらを指しているかを最初に確かめる。部分文字列の一致・比較・種類数は、和や最小値とは別の手法（ローリングハッシュ・Z-algorithm・Suffix Array）を使う。問われ方からの引き方は[部分列と部分文字列](../patterns/subsequence-and-substring.md)にある。文字ごとの出現回数のように数で表せる性質なら、このページの累積和や尺取り法もそのまま使える。
+文字列の連続した一部分を部分文字列と呼ぶ。飛び飛びに選ぶ[部分列](../guide/glossary.md#subsequence)とは別物で、問題文がどちらを指しているかを最初に確かめる。部分文字列の一致・比較・種類数は、和や最小値とは別の手法（ローリングハッシュ・Z-algorithm・Suffix Array）を使う。問われ方からの引き方は[部分列と部分文字列](../patterns/subsequence-and-substring.md#overview)にある。文字ごとの出現回数のように数で表せる性質なら、このページの累積和や尺取り法もそのまま使える。
 
 ## 落とし穴 {#pitfalls}
 

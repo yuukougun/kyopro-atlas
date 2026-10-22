@@ -158,7 +158,7 @@ Union-Find の併合だけを戻すなら、記録するのは 2 か所でよい
 
 そこで、経路圧縮をせず、union by size（小さい方を大きい方の下につなぐ）だけにする。これだけで木の高さは $\log_2 N$ 以下に保たれ、$\mathrm{find}$ は最悪でも $O(\log N)$ である。併合 1 回の記録は 2 件、戻すのは $O(1)$ なので、DFS 全体は $O(N \log N)$ になる。成分ごとに辺の数や答えの合計などを持たせるときは、それらの元の値も同じ記録に積む。
 
-ACL の `dsu` は `leader` の中で経路圧縮をするので、この用途には使えない。取り消せる Union-Find の詳しい作り方は[ロールバックできる Union-Find](../ds/rollback-union-find.md)にある。
+ACL の `dsu` は `leader` の中で経路圧縮をするので、この用途には使えない。取り消せる Union-Find の詳しい作り方は[ロールバックできる Union-Find](../ds/rollback-union-find.md#no-path-compression)にある。
 
 ## 落とし穴 {#pitfalls}
 

@@ -77,7 +77,7 @@ $$
 
 例：フィボナッチ数列（$c_1 = c_2 = 1$、$\Phi = x^2 - x - 1$）では $x^2 \equiv x + 1$ なので、$x^3 \equiv x^2 + x \equiv 2x + 1$ である。よって $a_3 = 2a_1 + a_0$ で、$a_0 = 0$、$a_1 = 1$ なら $a_3 = 2$ になる。
 
-$x^N \bmod \Phi$ は[繰り返し二乗法](../math/mod-pow.md)で求める。次数 $K$ 未満の多項式どうしを掛けて（$O(K^2)$）、次数 $K$ 以上の項を $x^K = c_1 x^{K-1} + \dots + c_K$ で上から順に下げる（$O(K^2)$）。これを $O(\log N)$ 回行うので $O(K^2 \log N)$ である。掛け算を NTT に、余りを多項式の割り算（[形式的冪級数](../math/fps-basics.md)の逆元を使う）に替えると $O(K \log K \log N)$ になり、これを Fiduccia の方法と呼ぶ。速い版は次の Bostan-Mori の方が簡単で、定数倍も小さい。
+$x^N \bmod \Phi$ は[繰り返し二乗法](../math/mod-pow.md)で求める。次数 $K$ 未満の多項式どうしを掛けて（$O(K^2)$）、次数 $K$ 以上の項を $x^K = c_1 x^{K-1} + \dots + c_K$ で上から順に下げる（$O(K^2)$）。これを $O(\log N)$ 回行うので $O(K^2 \log N)$ である。掛け算を NTT に、余りを多項式の割り算（[形式的冪級数](../math/fps-basics.md#polynomial-ops)の逆元を使う）に替えると $O(K \log K \log N)$ になり、これを Fiduccia の方法と呼ぶ。速い版は次の Bostan-Mori の方が簡単で、定数倍も小さい。
 
 ## Bostan-Mori（Q(x)Q(−x) で次数を半分にする） {#bostan-mori}
 
@@ -159,7 +159,7 @@ Berlekamp-Massey は、今の漸化式で次の項を予測したずれ $\delta$
 
 - [Kth term of Linearly Recurrent Sequence](https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence)：$d \le 10^5$ 項の漸化式の第 $k$ 項（$k \le 10^{18}$）。Bostan-Mori をそのまま確かめられる。
 - [Find Linear Recurrence](https://judge.yosupo.jp/problem/find_linear_recurrence)：$N \le 10^4$ 項の列を満たす最短の漸化式。Berlekamp-Massey を確かめる。
-- [Consecutive Terms of Linear Recurrent Sequence](https://judge.yosupo.jp/problem/consecutive_terms_of_linear_recurrent_sequence)：第 $k$ 項から連続する $M$ 項（$M \le 5 \times 10^5$）。第 $k$ 項を $M$ 回求めると間に合わないので、多項式の逆元（[形式的冪級数](../math/fps-basics.md)）と組み合わせる工夫が要る。
+- [Consecutive Terms of Linear Recurrent Sequence](https://judge.yosupo.jp/problem/consecutive_terms_of_linear_recurrent_sequence)：第 $k$ 項から連続する $M$ 項（$M \le 5 \times 10^5$）。第 $k$ 項を $M$ 回求めると間に合わないので、多項式の逆元（[形式的冪級数](../math/fps-basics.md#operations)）と組み合わせる工夫が要る。
 
 ## 学ぶための資料 {#resources}
 

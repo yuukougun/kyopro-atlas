@@ -161,9 +161,9 @@ cross の時間が区間の長さに比例するなら、各段の合計は $O(N
 
 | 手法 | 分けるもの | またぐものの処理 |
 | --- | --- | --- |
-| [Monge](../dp/monge.md)（Monotone minima・分割統治 DP） | DP の行（各行の最小の位置が単調） | 真ん中の行の最小の位置を求め、上下の探索範囲を絞る |
-| [オンライン畳み込み](../math/online-convolution.md)（分割統治 FFT） | 添字（DP の値の確定順） | 左で確定した値が右に与える寄与を FFT でまとめて足す |
-| [CDQ 分割統治](../ds/cdq-divide-and-conquer.md) | 操作の時刻 | 左の更新が右のクエリに与える影響を BIT で処理する |
+| [Monge](../dp/monge.md#monotone-minima)（Monotone minima・分割統治 DP） | DP の行（各行の最小の位置が単調） | 真ん中の行の最小の位置を求め、上下の探索範囲を絞る |
+| [オンライン畳み込み](../math/online-convolution.md#online)（分割統治 FFT） | 添字（DP の値の確定順） | 左で確定した値が右に与える寄与を FFT でまとめて足す |
+| [CDQ 分割統治](../ds/cdq-divide-and-conquer.md#procedure) | 操作の時刻 | 左の更新が右のクエリに与える影響を BIT で処理する |
 | [重心分解](../tree/centroid-decomposition.md) | 木の頂点（重心で割る） | 重心を通るパスを数える |
 | [セグメント木](../ds/segment-tree.md)・[マージソート木](../ds/merge-sort-tree.md) | 添字（再帰木をそのまま持つ） | 各ノードに区間の集約・ソート済みの列を持ち、クエリで使う |
 | [時間軸の分割統治](../dp/knapsack-undo.md#offline-divide-and-conquer) | クエリの時刻 | 区間を覆うノードに要素を載せ、DFS で足して戻す |
@@ -238,7 +238,7 @@ CDQ 分割統治は[またぐものの数え方](#crossing)の延長である。
 </div>
 
 ??? note "方針"
-    - **ABC478 G**：点を番号で半分に分ける。両方が左・両方が右の組は再帰に任せる。またぐ組の内分点は「左の点を $q$ 倍したもの」と「右の点を $p$ 倍したもの」の和なので、その全体の凸包は左右の凸包の[ミンコフスキー和](../geometry/advanced-geometry.md)になる。3 つの凸包をまとめて凸包を取り直す。座標を $p + q$ 倍のまま整数で扱う
+    - **ABC478 G**：点を番号で半分に分ける。両方が左・両方が右の組は再帰に任せる。またぐ組の内分点は「左の点を $q$ 倍したもの」と「右の点を $p$ 倍したもの」の和なので、その全体の凸包は左右の凸包の[ミンコフスキー和](../geometry/advanced-geometry.md#minkowski-sum)になる。3 つの凸包をまとめて凸包を取り直す。座標を $p + q$ 倍のまま整数で扱う
 
 ## 確認問題 {#quiz}
 

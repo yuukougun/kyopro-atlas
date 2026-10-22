@@ -283,7 +283,7 @@ $S$ を接頭辞に持つ回文は、$S$ のある接尾辞 $S[l, N)$ が回文�
 | 各中心の最長回文・任意の区間の判定（更新なし） | Manacher | 前処理 $O(N)$、判定 $O(1)$ |
 | 1 文字の更新があり、区間が回文かを問う | [セグメント木に載せたハッシュ](../string/rolling-hash.md#hash-segment-tree) | 更新・判定 $O(\log N)$ |
 | 最長の回文の接尾辞（接頭辞）だけ | Manacher・[反転と連結した Z](../string/z-algorithm.md#reverse)・ハッシュ | $O(N)$ |
-| 異なる回文の種類・各回文の出現回数 | [回文木](../string/suffix-automaton.md) | $O(N)$ |
+| 異なる回文の種類・各回文の出現回数 | [回文木](../string/suffix-automaton.md#palindromic-tree) | $O(N)$ |
 
 - ハッシュは前向きと後ろ向きの 2 本で判定する（[逆向きのハッシュ](../string/rolling-hash.md#concat-and-reverse)）。衝突の確率があるが、更新がある場合や、不一致を数か所まで許して二分探索で伸ばす場合に強い
 - ABC では Manacher がなくても Z やハッシュで解ける問題が多い。任意の区間の判定を決定的に（衝突なしで）済ませたいなら Manacher を選ぶ。最長の回文の接頭辞・接尾辞だけなら Z でもよい

@@ -44,7 +44,7 @@ updated: 2026-10-22
 
 XOR 畳み込みは、2 つの列から「添字の XOR が $k$ になる組の積の和」を作る演算である。組をすべて試すと長さ $N$ の列で $O(N^2)$ かかるが、アダマール変換をかけると XOR 畳み込みが各点の積になり、$O(N \log N)$ で求まる。仕組みは添字の和の[畳み込み](../math/convolution-ntt.md)と同じ「変換 → 各点の積 → 逆変換」で、変換が bit ごとの和と差に変わる。ACL には入っていないので自作する。
 
-このページで使う記法：列は 0-indexed で長さを $2^n$ とし、添字を $n$ bit の整数とみる。$\oplus$ は XOR、$\operatorname{popcount}(x)$ は $x$ の 2 進表記の 1 の個数（[popcount](../guide/glossary.md#popcount)）である（[記法と用語の約束](../start/notation.md)）。
+このページで使う記法：列は 0-indexed で長さを $2^n$ とし、添字を $n$ bit の整数とみる。$\oplus$ は XOR、$\operatorname{popcount}(x)$ は $x$ の 2 進表記の 1 の個数（[popcount](../guide/glossary.md#popcount)）である（[記法と用語の約束](../start/notation.md#sets-bits)）。
 
 ## アダマール変換と逆変換（各 bit で (x + y, x − y)） {#transform}
 

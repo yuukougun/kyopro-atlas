@@ -165,7 +165,7 @@ ABC でよく出る構築の型（手順を出力する・数列を作る・グ�
 | 追加・削除・検索のクエリ | どの操作を速くしたいか、どのコンテナが合うか？ | [操作とコンテナの計算量の早見表](../ds/stl-containers.md#complexity-table) |
 | 何を全探索するかで迷う | いくつか決めれば残りが計算で決まらないか？ | [何を全探索するか](../basics/brute-force.md#what-to-enumerate) |
 
-問題文の特定の言い回し（「部分列」「mex」「区間」など）から引くときは、題材ごとのページ（[区間](../patterns/interval.md)・[順列と置換](../patterns/permutation.md)など）と[逆引き辞典（言い回しから）](reverse-index-signs.md)の方が早い。
+問題文の特定の言い回し（「部分列」「mex」「区間」など）から引くときは、題材ごとのページ（[区間](../patterns/interval.md)・[順列と置換](../patterns/permutation.md)など）と[逆引き辞典（言い回しから）](reverse-index-signs.md#by-phrase)の方が早い。
 
 ## 誤読を疑う {#q-misreading}
 
@@ -191,7 +191,7 @@ ABC でよく出る構築の型（手順を出力する・数列を作る・グ�
 - **答えの候補は少なくないか**：$N$ ではなく答えの候補や値の種類で全探索すると、速く済むことがある（[候補の数で見積もる](../basics/complexity-estimation.md#count-candidates)）。
 - **複数テストケースの合計は抑えられているか**：$\sum N$ の上限があれば、合計で見積もる（[複数テストケースは合計で見積もる](../basics/complexity-estimation.md#multiple-testcases)）。
 
-ただし、制約に縛られすぎない。制約が緩くても想定より速い解法が素直なことはあるし、ならし計算量で見積もると間に合う解法もある（[ならし計算量](../basics/complexity-estimation.md#amortized)）。制約の帯ごとのページの一覧は[逆引き辞典（制約・計算量から）](reverse-index-constraints.md)にある。
+ただし、制約に縛られすぎない。制約が緩くても想定より速い解法が素直なことはあるし、ならし計算量で見積もると間に合う解法もある（[ならし計算量](../basics/complexity-estimation.md#amortized)）。制約の帯ごとのページの一覧は[逆引き辞典（制約・計算量から）](reverse-index-constraints.md#pages-by-constraint)にある。
 
 ## 小さいケースを試す {#q-small-cases}
 

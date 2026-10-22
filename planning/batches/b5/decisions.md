@@ -34,3 +34,4 @@ b4（発展の概要 50）・b5（横断 33）の提案のまとめ（`summary/s
 | 表記の揺れを例に出すページ | 索引・用語集・表記の説明の箇所を `<!-- textlint-disable prh -->` 〜 `<!-- textlint-enable prh -->` で囲んでよい |
 | 判断待ちの台帳の件 | agc002_d・abc311_h・abc458_g・keyence2019_e・abc189_c・abc197_c（summary/ledger-result.md）は工程10で決める |
 - §16-7 の言い回し：見本 bracket-sequence はページ自身の例題・練習の囲みも持つ。「代表の問題の列は label の文字だけ。pattern のページが自分の囲みを持つのは構わない」と工程10で明記する
+- 張り替え（2回目）の残り：リンクの文字を相手の題名にそろえる6か所（euler-phi:153・bipartite-matching:157・difference-constraints:219・euler-path:221・priority-queue:196・cdq-divide-and-conquer:119。relink-plan.md）は工程10で直す

@@ -126,11 +126,11 @@ $Q$ 組の $(u_i, v_i)$ について $b(u_i, v_i)$ を答えるとき、1 組ず
 同じ質問に別の方法でも答えられる。
 
 - **最小全域木と LCA**：最小全域木を作り、木の上の $u$–$v$ パスの最大の辺を[ダブリングで表と一緒に持つ](../tree/lca.md#path-aggregate)。前計算 $O(M \log M + N \log N)$、1 組 $O(\log N)$ で、質問を先読みできなくても使える。
-- **並列二分探索・部分永続 Union-Find**：「初めて連結になる時刻」でなく「成分の頂点数が $z$ 以上になる時刻」のように、連結以外の条件を問われたときに使う（[並列二分探索](../ds/parallel-binary-search.md)、[部分永続 Union-Find](../ds/partially-persistent-union-find.md)）。
+- **並列二分探索・部分永続 Union-Find**：「初めて連結になる時刻」でなく「成分の頂点数が $z$ 以上になる時刻」のように、連結以外の条件を問われたときに使う（[並列二分探索](../ds/parallel-binary-search.md#with-union-find)、[部分永続 Union-Find](../ds/partially-persistent-union-find.md#binary-search-time)）。
 
 ## 併合過程の木（Kruskal 再構築木）でオンラインに答える（木の章へ） {#reconstruction-tree}
 
-この節は[最小共通祖先（LCA）](../tree/lca.md)を前提にする。木の作り方の詳細は[併合過程の木](../tree/merge-process-tree.md)のページにある。
+この節は[最小共通祖先（LCA）](../tree/lca.md)を前提にする。木の作り方の詳細は[併合過程の木](../tree/merge-process-tree.md#new-vertex)のページにある。
 
 クラスカル法で 2 つの成分を併合するたびに、新しい頂点を 1 つ作る。新しい頂点の重みを併合に使った辺の重み $w$ にし、併合した 2 つの成分を表す頂点を子にする。元の $N$ 頂点が葉になり、連結なら $N - 1$ 回の併合で $2N - 1$ 頂点の二分木ができる。この木を**併合過程の木**（Kruskal 再構築木）と呼ぶ。実装では、Union-Find の代表元ごとに「その成分を表す木の頂点」の番号を持てばよい。
 

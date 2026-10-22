@@ -163,7 +163,7 @@ $$
 ## 使い分け {#comparison}
 
 - 玉も区別するなら（区別のある $n$ 個を $k$ 個の箱へ）、制限なしは $k^n$、各箱の個数を決めるなら[多項係数](../comb/multinomial-coefficient.md)である。玉と箱の区別と制限の全体の地図は[写像 12 相](../comb/twelvefold-way.md)にある
-- 変数ごとに上限や「偶数だけ」のような制限があるときは、[包除原理](../comb/inclusion-exclusion.md)か[母関数](../comb/generating-function-counting.md)で考える。$\frac{1}{(1-x)^k}$ の $x^n$ の係数が $\binom{n+k-1}{k-1}$ であることが、母関数の側から見た重複組合せである
+- 変数ごとに上限や「偶数だけ」のような制限があるときは、[包除原理](../comb/inclusion-exclusion.md)か[母関数](../comb/generating-function-counting.md#formulas)で考える。$\frac{1}{(1-x)^k}$ の $x^n$ の係数が $\binom{n+k-1}{k-1}$ であることが、母関数の側から見た重複組合せである
 - 問題が「和の組」の形に見えないときは、[対応づけ](../comb/counting-bijection.md)で数える対象を言い換える
 
 ## 例題 {#examples}

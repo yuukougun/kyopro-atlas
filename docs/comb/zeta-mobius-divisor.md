@@ -142,7 +142,7 @@ LCM 畳み込み $h(m) = \sum_{\operatorname{lcm}(i, j) = m} a_i b_j$ も同じ�
 --8<-- "zeta-mobius-divisor/transforms.cpp:convolution"
 ```
 
-[畳み込み](../math/convolution-ntt.md)（FFT・NTT）が添字の和 $i + j$ を扱うのと同じく、変換して各点で掛けて戻す。添字の演算が gcd・lcm に変わり、変換が約数・倍数のゼータに変わったものである（XOR は[アダマール変換](../math/hadamard-transform.md)、OR・AND は[部分集合のゼータ変換](../comb/zeta-mobius-subset.md)）。
+[畳み込み](../math/convolution-ntt.md)（FFT・NTT）が添字の和 $i + j$ を扱うのと同じく、変換して各点で掛けて戻す。添字の演算が gcd・lcm に変わり、変換が約数・倍数のゼータに変わったものである（XOR は[アダマール変換](../math/hadamard-transform.md#index-operations)、OR・AND は[部分集合のゼータ変換](../comb/zeta-mobius-subset.md)）。
 
 **応用の型**：列 $A$ の値の上限を $M$ とし、値ごとの個数 $\mathrm{cnt}[v]$ を添字 $1, \dots, M$ の列とみる。
 
@@ -252,7 +252,7 @@ $\{1, \dots, N\}$ は指数の組の「箱」にはならない（$2^{19} \le N$
 - 「gcd がちょうど $g$」を数えるだけなら、[約数包除](../comb/divisor-inclusion-exclusion.md)の大きい方から引く形が直接的である。これは倍数メビウス変換の素朴な形である
 - $N$ が $10^{10}$ のように大きく配列に置けないときは、[メビウス関数](../comb/mobius-function.md)で式を変形し、[商の列挙](../math/floor-quotient-enum.md)で束ねる
 - 添字が bit の集合で OR・AND を扱うなら[部分集合のゼータ変換](../comb/zeta-mobius-subset.md)、XOR なら[アダマール変換](../math/hadamard-transform.md)、和 $i + j$ なら[畳み込み](../math/convolution-ntt.md)を使う
-- 約数・倍数の問題の全体の地図は[約数と倍数](../patterns/divisors-and-multiples.md)にある
+- 約数・倍数の問題の全体の地図は[約数と倍数](../patterns/divisors-and-multiples.md#overview)にある
 
 ## 参考 {#references}
 

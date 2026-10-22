@@ -144,7 +144,7 @@ flowchart TD
 
 - **読む順を決める**：今のレートから次の色を 1 つ決め、その色の列を必修の行から読む（[色ごとのページの列](../guide/roadmap.md#reading-order)）。
 - **前提のつながりを見る**：[知識マップ](../guide/knowledge-map.md)は、ページの前提関係を分野ごとの図で示す。理解したページが塗られ、前提をすべて理解したページが次の候補として光る。
-- **練習する**：問題の選び方と量の目安は[精進の仕方](../guide/practice-method.md#choosing-problems)、問題集の一覧は[問題集と練習用コンテストの案内](../guide/problem-sets.md)にある。
+- **練習する**：問題の選び方と量の目安は[精進の仕方](../guide/practice-method.md#choosing-problems)、問題集の一覧は[問題集と練習用コンテストの案内](../guide/problem-sets.md#collections)にある。
 - **同じレベルのページを一覧で見る**：レベル別・種類別の一覧は次のとおりである。かっこ内はページの数である。
 
 <!-- gen:begin lists -->

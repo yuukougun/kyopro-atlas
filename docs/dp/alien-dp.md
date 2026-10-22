@@ -121,7 +121,7 @@ $A = (1, 9, 1, 1, 9)$ で動かす。まず 2 番目の 9 を取って $f(1) = 9
 --8<-- "alien-dp/nonadjacent.cpp:greedy"
 ```
 
-前から見て選んだものを後で入れ替える貪欲の基本は、[優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md#regret)にある。差分の形がこれほど単純でない問題では、Alien DP や関数の形を直接持つ [Slope Trick](../dp/slope-trick.md) を考える。
+前から見て選んだものを後で入れ替える貪欲の基本は、[優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md#regret)にある。差分の形がこれほど単純でない問題では、Alien DP や関数の形を直接持つ [Slope Trick](../dp/slope-trick.md#breakpoints) を考える。
 
 ## Monge な区間分割と組み合わせる {#with-monge}
 
@@ -133,7 +133,7 @@ $$
 \mathrm{dp}[i] = \min_{j < i} \bigl(\mathrm{dp}[j] + \mathrm{cost}(j, i) + \lambda\bigr)
 $$
 
-の 1 次元の DP になる。$\mathrm{cost}$ に定数を足しても Monge のままなので、この DP は [Monge 性による DP の高速化](../dp/monge.md)で速く解ける。$\mathrm{dp}[j]$ が行列の中に入るオンラインの形なので、monotone minima を 1 回呼ぶだけでは済まない。[LARSCH](../dp/monge.md#smawk-larsch) を使うと $O(N)$、分割統治で左半分を確定させてから右半分へ monotone minima で配ると $O(N \log^2 N)$ になる。$\mathrm{cost}$ が $(S_i - S_j)^2$ のような積の項を 1 つ持つ形なら、[Convex Hull Trick](../dp/cht.md) でもよい。
+の 1 次元の DP になる。$\mathrm{cost}$ に定数を足しても Monge のままなので、この DP は [Monge 性による DP の高速化](../dp/monge.md)で速く解ける。$\mathrm{dp}[j]$ が行列の中に入るオンラインの形なので、monotone minima を 1 回呼ぶだけでは済まない。[LARSCH](../dp/monge.md#smawk-larsch) を使うと $O(N)$、分割統治で左半分を確定させてから右半分へ monotone minima で配ると $O(N \log^2 N)$ になる。$\mathrm{cost}$ が $(S_i - S_j)^2$ のような積の項を 1 つ持つ形なら、[Convex Hull Trick](../dp/cht.md#lines) でもよい。
 
 これに $\lambda$ の探索の $O(\log M)$ が掛かり、全体は $O(N \log M)$ から $O(N \log^2 N \log M)$ になる。同点の個数を正しく扱うのが面倒なら、[λ の二分探索の節](#binary-search-lambda)の終わりの三分探索で $h(\lambda)$ を最小にする。
 

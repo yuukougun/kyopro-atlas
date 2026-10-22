@@ -100,7 +100,7 @@ $l$ は毎回 $r + 1$ に進み、各区間は値の 1 種類に対応するの�
 
 **2 つの商を同時にまとめる場合**。$\lfloor N/i \rfloor$ と $\lfloor M/i \rfloor$ の両方を使う和では、右端を $\min(\lfloor N/\lfloor N/l \rfloor \rfloor, \lfloor M/\lfloor M/l \rfloor \rfloor)$ にする。どちらの商も変わらない範囲だけをまとめるので、区間の数は $O(\sqrt{N} + \sqrt{M})$ である。$i$ の上限は $\min(N, M)$ にする（それより先では片方の商が 0 になる）。
 
-**商の値そのものを使う場合**。$\lfloor N/i \rfloor$ の異なる値の一覧（$N = 20$ なら $1, 2, 3, 4, 5, 6, 10, 20$）は、それ自体が DP の添字の集合として使われる。素数の個数を数える方法など、[乗法的関数](../math/multiplicative-function.md)の和を求める発展的な手法では、この $O(\sqrt{N})$ 個の値についてだけ表を持つ。
+**商の値そのものを使う場合**。$\lfloor N/i \rfloor$ の異なる値の一覧（$N = 20$ なら $1, 2, 3, 4, 5, 6, 10, 20$）は、それ自体が DP の添字の集合として使われる。素数の個数を数える方法など、[乗法的関数](../math/multiplicative-function.md#prime-counting)の和を求める発展的な手法では、この $O(\sqrt{N})$ 個の値についてだけ表を持つ。
 
 ??? question "確認問題：N = 10 の区間"
     $N = 10$ のとき、$\lfloor 10/i \rfloor$ の値は何種類か。それぞれの値になる $i$ の範囲も答えよ。

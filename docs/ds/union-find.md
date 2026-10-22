@@ -134,7 +134,7 @@ $\mathrm{find}$ の手間は、たどる深さで決まる。工夫なしにつ�
 
     ??? success "答え"
         (1) 答えは正しい。つなぎ方はどの根を代表にするかを変えるだけで、「同じ木にいるか」は変わらない。速さはならし $O(\log N)$ になり、間に合うことが多い。ただし一時的に深い鎖ができうるので、再帰の `find` が深くなる。
-        (2) 間に合う。深さが $\log_2 N \approx 18$ 以下なので、1 回 $O(\log N)$、全体で約 $4 \times 10^6$ 回の手間である。経路圧縮を入れない形は、操作を取り消す [Undo 可能 Union-Find](../ds/rollback-union-find.md) で使う。
+        (2) 間に合う。深さが $\log_2 N \approx 18$ 以下なので、1 回 $O(\log N)$、全体で約 $4 \times 10^6$ 回の手間である。経路圧縮を入れない形は、操作を取り消す [Undo 可能 Union-Find](../ds/rollback-union-find.md#no-path-compression) で使う。
 
 ## 境界（同じグループどうしの併合・自己ループと多重辺・成分数・大きさの積のあふれ） {#boundaries}
 
@@ -199,7 +199,7 @@ x == y なら edges[x] += 1        # 自己ループ・多重辺もここで数�
 - **差を持たせる**：親との差 $\mathrm{diff}[v]$ を持たせると、「$x_b - x_a = w$」という条件の矛盾を判定できる（[重み付き Union-Find](../ds/weighted-union-find.md)）。頂点を 2 倍にして二部グラフを判定する型もある（[二部グラフ判定](../graph/bipartite-graph.md)）
 - **最小全域木**：辺を重みの小さい順に見て、両端が別のグループなら採用する（クラスカル法、[最小全域木](../graph/minimum-spanning-tree.md)）。採用の判定がそのまま Union-Find の判定である
 - **小さい方を大きい方へ**：union by size の「小さい方が動くたびに大きさが 2 倍以上になる」という議論は、集合を丸ごと移すときにも使える（[マージテク](../tree/small-to-large.md)）
-- **履歴を残す**：経路圧縮をやめて union by size だけにすると、操作の取り消しや過去の時点の判定ができる（[Undo 可能 Union-Find](../ds/rollback-union-find.md)・[部分永続 Union-Find](../ds/partially-persistent-union-find.md)）
+- **履歴を残す**：経路圧縮をやめて union by size だけにすると、操作の取り消しや過去の時点の判定ができる（[Undo 可能 Union-Find](../ds/rollback-union-find.md#no-path-compression)・[部分永続 Union-Find](../ds/partially-persistent-union-find.md#no-path-compression)）
 
 ## 例題 {#examples}
 

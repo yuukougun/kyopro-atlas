@@ -281,7 +281,7 @@ $H = 6$ なら余裕があるが、$H = 8$ では行列のままでは厳しい�
 - **累乗の回数のずれ**：初期の状態が $t = 0$ か $t = 1$ かで、累乗の回数が 1 変わる。小さい $N$ で素朴な DP と比べる
 - **あふれ**：`int` どうしの積、mod を取らずに足した `long long`、(min,+) の `INF + INF`。$K \le 10^{18}$ を `int` で読む誤りもある
 - **関数名 `identity`**：`using namespace std;` の下で単位行列を返す関数を `identity` と名付けると、C++20 の `std::identity` と衝突して「reference to 'identity' is ambiguous」のコンパイルエラーになる（g++-15・`-std=gnu++23` で確かめた）。別の名前にする
-- **状態数の見積もり忘れ**：$n^3 \log K$ を先に計算する。$n$ が数百を超えるなら、[ダブリングの節](#doubling-transition)の安い合成か、[線形漸化式の高速化](../math/linear-recurrence-fast.md)を考える
+- **状態数の見積もり忘れ**：$n^3 \log K$ を先に計算する。$n$ が数百を超えるなら、[ダブリングの節](#doubling-transition)の安い合成か、[線形漸化式の高速化](../math/linear-recurrence-fast.md#vs-matrix)を考える
 
 ## 例題 {#examples}
 
@@ -388,7 +388,7 @@ $H = 6$ なら余裕があるが、$H = 8$ では行列のままでは厳しい�
 | 遷移が状態から状態への関数（線形でない） | [ダブリング](../basics/doubling.md) |
 | 辺の本数を問わない全点対の最短路 | [ワーシャルフロイド法](../graph/warshall-floyd.md) |
 | 位置ごとに違う行列の区間の積・1 点の書き換え | [セグメント木](../ds/segment-tree-monoids.md#matrix)・[動的 DP](../dp/dynamic-dp.md) |
-| DP の遷移の形から高速化を選ぶ | [DP の高速化の一覧](../dp/dp-speedup-overview.md) |
+| DP の遷移の形から高速化を選ぶ | [DP の高速化の一覧](../dp/dp-speedup-overview.md#shape-to-tool) |
 
 ## 参考 {#references}
 

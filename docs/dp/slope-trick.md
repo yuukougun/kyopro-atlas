@@ -185,7 +185,7 @@ Library Checker には Slope Trick を直接試す問題はない（2026-10-22 �
 
 - 関数の最小値だけが要り、更新が $\lvert x - a \rvert + b$ だけなら、[2 つのヒープで中央値を保つ](../ds/top-k-multiset.md#median)だけで足りる（[2 つのヒープで中央値を管理する](#two-heaps)）
 - $x$ の範囲が狭い（$10^5$ 程度）なら、DP の表をそのまま持ち、累積 min は[累積和と同じ 1 回の走査](../dp/dp-prefix-sum.md)で書ける。凸でない関数でも使える
-- 関数が凸でも、足すものが折れ線でない（2 次関数など）なら Slope Trick では扱えない。答えが選ぶ個数について凸なら [Alien DP](../dp/alien-dp.md)、遷移が Monge なら [Monge](../dp/monge.md) を考える
+- 関数が凸でも、足すものが折れ線でない（2 次関数など）なら Slope Trick では扱えない。答えが選ぶ個数について凸なら [Alien DP](../dp/alien-dp.md#penalty)、遷移が Monge なら [Monge](../dp/monge.md) を考える
 
 ## 参考 {#references}
 
