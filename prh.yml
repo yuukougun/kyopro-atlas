@@ -201,6 +201,11 @@ rules:
       - 畳みこみ
   - expected: 形式的冪級数
     pattern: 形式的べき級数
+  # b4・b5 の提案（fft-ntt・multiplicative-function）。別名の行と aliases は検査の外なので、中国語の表記はそこに残せる
+  - expected: ビット反転
+    pattern: ビットリバース
+  - expected: 杜教篩
+    pattern: 杜教筛
 
   # ---- 数え上げ・確率・ゲーム ----
   - expected: 包除原理
