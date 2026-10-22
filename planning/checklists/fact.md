@@ -64,5 +64,5 @@
 ## F10 front matter と冒頭
 
 - **見るもの**：front matter、要点の囲み、別名の行、導入
-- **確かめ方**：`tools/check_pages.py` の結果を見る。執筆者が変えたのが `complexity`・`stage`・`updated`（と足した節）だけか。要点が summary・signs・prerequisites と食い違わないか、計算量が埋まっているか。別名の行に aliases がすべてあるか
+- **確かめ方**：`tools/check_pages.py` の結果を見る。執筆者が変えたのが `complexity`・`stage`・`updated`（と足した節）だけか。要点が summary・signs・prerequisites と食い違わないか（特に「何ができるか」と summary を並べて読む）、計算量が埋まっているか。別名の行に aliases がすべてあるか
 - **よくある失敗**：`complexity` と要点の計算量が違う。要点に「（執筆時に書く）」が残る。題名・別名・前提を提案にせず直接書き換える。別名の行が最初の `##` より後にある

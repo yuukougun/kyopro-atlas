@@ -265,6 +265,13 @@ rules:
       - {from: Sprague–Grundy の定理, to: Sprague-Grundy の定理}
       - {from: Lindström–Gessel–Viennot, to: Lindström-Gessel-Viennot}
       - {from: A–Z, to: A–Z}
+  # カタカナ書きの Aho-Corasick（b3 aho-corasick の提案）。en dash の「Aho–Corasick」は上の規則で直る
+  - expected: Aho-Corasick 法
+    pattern: '/エイホ[・･\-‐‑–—−－ ]?コラシック(?:法)?/'
+    specs:
+      - {from: エイホ・コラシック法, to: Aho-Corasick 法}
+      - {from: エイホ–コラシックのオートマトン, to: Aho-Corasick 法のオートマトン}
+      - {from: エイホコラシック, to: Aho-Corasick 法}
 
   # ---- ひらがなで書く語 ----
   - expected: すべて
