@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="334 0 280 344" width="280" height="344" font-family="sans-serif">
-<rect x="0" y="0" width="640" height="320" fill="#ffffff" />
+<rect x="334" y="0" width="280" height="344" fill="#ffffff" />
 <text x="486.0" y="28" font-size="15" text-anchor="middle" fill="#000">列ごとに足す（j を外側）</text>
 <text x="414.0" y="60" font-size="13" text-anchor="middle" fill="#333">j=1</text>
 <text x="462.0" y="60" font-size="13" text-anchor="middle" fill="#333">j=2</text>
