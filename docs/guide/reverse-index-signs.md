@@ -1210,6 +1210,7 @@ flowchart TD
 | 部分列・部分文字列 | 判定、選び方の数、異なるものの数、最長の共通部分 | [部分列と部分文字列](../patterns/subsequence-and-substring.md#overview) |
 | 順列 | $i \to P_i$ のサイクル、swap の回数と偶奇、置換の繰り返し | [順列と置換](../patterns/permutation.md#overview) |
 | 括弧列 | 正しいかの判定、`?` の埋め方の数、区間の判定、並べる順序 | [括弧列](../patterns/bracket-sequence.md#overview) |
+| 円環 | 区間が端をまたぐ、最後と最初が隣り合う数え上げ・DP、回転の一致、円周上の点と弦 | [円環](../patterns/circular.md#overview) |
 | mex | mex を求める・更新する・総和を取る | [mex](../patterns/mex.md#overview) |
 | K 番目・中央値 | K 番目に小さい値、上位 K 個の和、中央値 | [K 番目と中央値](../patterns/kth-and-median.md#overview) |
 | XOR | 桁ごとの数え上げ、累積 XOR、作れる値、ゲーム | [XOR](../patterns/xor.md#overview) |
