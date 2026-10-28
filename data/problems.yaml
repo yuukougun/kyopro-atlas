@@ -8764,7 +8764,7 @@ problems:
   summary: 順列の各 i について |P_i − P_j| + |i − j| の最小値を求める。
   approach: 絶対値を外す 4 通りに分け、min のセグ木を 4 回使う
   pages:
-  - {id: segment-tree-monoids, role: practice}
+  - {id: segment-tree-on-values, role: practice}
   evidence:
   - https://www.cnblogs.com/wushansinger/p/17021389.html
   status: 確認済み
@@ -9962,7 +9962,7 @@ problems:
   summary: 回転してよい直方体の箱のうち、別の箱に真に入るものがあるかを判定する。
   approach: 辺をソートして 1 軸で走査し、2 軸目を座圧して 3 軸目の min を持つ
   pages:
-  - {id: segment-tree-monoids, role: practice}
+  - {id: segment-tree-on-values, role: practice}
   evidence:
   - https://qiita.com/ZOI_dayo/items/a55cc4342832efdc23ba
   status: 確認済み
@@ -16037,6 +16037,7 @@ problems:
   approach: 交換論法で B の大きい順に送るのが最適と分かり、答えは「先頭からの A の和 + B_i」の最大。B を座標圧縮したセグメント木に（A の和, その最大）を載せて更新に答える
   pages:
   - {id: exchange-argument, role: challenge}
+  - {id: segment-tree-monoids, role: challenge}
   evidence:
   - https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0718_abc467
   status: 確認済み

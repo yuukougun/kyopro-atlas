@@ -29,7 +29,7 @@ sections:
   - {title: 回転（巡回シフト）の入口：回転回数の全探索と A+A, anchor: rotation}
   - {title: 計算量の落とし穴（substr・+・find は長さに比例する）, anchor: cost-pitfalls}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -232,7 +232,7 @@ $A + A$ の中で $B$ を探すのを素朴に行うと $O(N^2)$ かかる。$N$
 
 - [ABC286 C. Rotate and Palindrome](https://atcoder.jp/contests/abc286/tasks/abc286_c)（diff 565）：先頭を末尾へ移す操作（コスト A）と 1 文字の書き換え（コスト B）で、文字列を回文にする最小のコストを求める。
 - [ABC076 C. Dubious Document 2](https://atcoder.jp/contests/abc076/tasks/abc076_c)（diff 846）：? を埋めて T を部分文字列に含む文字列のうち、辞書順で最小のものを求める。
-- [ABC110 C. String Transformation](https://atcoder.jp/contests/abc110/tasks/abc110_c)（diff 949）：文字を一斉に置き換える操作を繰り返して、S を T にできるかを判定する。
+- [ABC110 C. String Transformation](https://atcoder.jp/contests/abc110/tasks/abc110_c)（diff 949）：2 種類の文字を選んで一斉に入れ替える操作を繰り返して、S を T にできるかを判定する。
 - [ARC097 C. K-th Substring](https://atcoder.jp/contests/arc097/tasks/arc097_a)（diff 1108）：S の異なる部分文字列のうち、辞書順で K 番目（K ≤ 5）のものを求める。
 
 </div>

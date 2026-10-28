@@ -28,7 +28,7 @@ sections:
   - {title: AtCoder生成AI対策ルールの版, anchor: ai-rule-version}
   - {title: 記録用スキル /record-problem, anchor: record-skill}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -170,7 +170,7 @@ flowchart TD
 | 黄 | 2000〜2399 | 難しい F と易しい G | 本格的に |
 | 発展 | 2400〜 | G の上半分 | 概要だけ |
 
-位置の目安は、abc400〜abc480 の 81 回の difficulty の分布から取ったおおよその対応である。位置ごとの詳しい分布は[コンテストの戦い方](../guide/contest-strategy.md#difficulty-by-position)にある。
+位置の目安は、abc400〜abc480 の 81 回の difficulty の分布から取ったおおよその対応である。位置ごとの詳しい分布（箱ひげ図と四分位の表）は [AtCoder の仕組み](atcoder-system.md#difficulty-by-position)にある。
 
 レベルを読むときは、次の 4 点に気をつける。
 
@@ -308,7 +308,7 @@ ABCxxx E の解説を頼みたい。終了したコンテストの問題であ�
 <!-- gen:begin version -->
 <!-- textlint-disable -->
 
-索引の版：`7b4d556d13b9`（ページの updated の最大：2026-10-22）
+索引の版：`ce5bc86bd22f`（ページの updated の最大：2026-10-29）
 
 <!-- textlint-enable -->
 <!-- gen:end version -->

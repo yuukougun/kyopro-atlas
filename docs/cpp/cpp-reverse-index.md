@@ -27,7 +27,7 @@ sections:
   - {title: 症状から引く：WA・RE・TLE と、手元と AtCoder で結果が違うとき, anchor: symptoms}
   - {title: 'コンパイルエラーのメッセージから引く（最初の error: の行と、required from here で自分の行を探す読み方を含む）', anchor: compile-errors}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -86,6 +86,8 @@ C++ の逆引きは、C++ 章の各ページへの索引である。表の 1 行
 | `abs(a - b) < 1e-9` | 浮動小数点数を誤差つきで比べる | [== で比べない](../cpp/cpp-types-literals.md#float-compare) |
 | `__int128`・`i128` | 128 bit 整数（GCC の拡張） | [__int128](../cpp/cpp-integer-overflow.md#int128) |
 | `1LL * a * b` | 積を `long long` で計算する | [int どうしの積](../cpp/cpp-integer-overflow.md#int-product) |
+| `1 << 40`・`1 << k` | `int` の 1 を 32 以上ずらすと未定義動作（`1LL << k` と書く） | [シフトの幅](../cpp/cpp-integer-overflow.md#shift-width) |
+| `__builtin_mul_overflow(a, b, &r)` | 積があふれるかを判定する（GCC の拡張） | [積のあふれの判定](../cpp/cpp-integer-overflow.md#overflow-check) |
 | `vector<int> a(n);`・`vector<int> a(n, x);` | 0 が $n$ 個・$x$ が $n$ 個 | [vector の初期化](../cpp/cpp-initialization.md#vector-init) |
 | `vector dp(n, vector(m, 0LL));` | 型を内側から決める 2 次元の vector（CTAD） | [CTAD](../cpp/cpp-initialization.md#ctad)・[多次元 vector](../cpp/cpp-initialization.md#multi-dim-vector) |
 | `pair p{1, 2};`・`priority_queue pq(v.begin(), v.end());` | 標準の型の CTAD | [pair などの CTAD](../cpp/cpp-initialization.md#ctad-std-types) |
@@ -93,8 +95,10 @@ C++ の逆引きは、C++ 章の各ページへの索引である。表の 1 行
 | `Edge{.to = v, .cost = c}` | 指示付き初期化（C++20） | [指示付き初期化](../cpp/cpp-initialization.md#designated-init) |
 | `memset(d, 0x3f, sizeof d)`・`fill`・`assign` | 表の埋め直し（`memset` はバイト単位） | [埋め直し](../cpp/cpp-initialization.md#refill) |
 | `gcd(a, b)`・`lcm(a, b)`・`__gcd` | 最大公約数・最小公倍数 | [gcd・lcm](../cpp/cpp-math-functions.md#gcd-lcm) |
+| `midpoint(a, b)`・`clamp(x, lo, hi)` | あふれない中点（C++20）・範囲に収めた値（C++17） | [midpoint・clamp](../cpp/cpp-math-functions.md#midpoint-clamp) |
 | `-7 / 2`・`-7 % 2` | 商は 0 に向かって切り捨て、余りは負になりうる | [整数の割り算](../cpp/cpp-math-functions.md#integer-division) |
 | `pow(a, b)`・`sqrt(x)`・`sqrtl(x)` | `double` で計算する | [pow・sqrt](../cpp/cpp-math-functions.md#pow-sqrt) |
+| `numbers::pi`・`M_PI`・`acos(-1)` | 円周率（`double` ではどれも同じ値。`numbers::pi` は C++20） | [円周率](../cpp/cpp-math-functions.md#pi) |
 | `popcount(x)`・`countr_zero(x)`・`bit_width(x)`・`bit_ceil(x)` | bit ヘッダの関数（符号なしだけ） | [bit ヘッダの関数](../cpp/cpp-math-functions.md#bit-functions) |
 | `__builtin_popcountll(x)`・`__builtin_ctz(x)`・`__lg(x)` | GCC の組み込み関数 | [組み込み関数](../cpp/cpp-math-functions.md#builtins) |
 | `x & -x`・`x & (x - 1)`・`s = (s - 1) & m` | 最下位の 1・それを消す・部分集合を回す | [ビットの小技](../cpp/cpp-math-functions.md#bit-tricks) |
@@ -163,9 +167,10 @@ C++ の逆引きは、C++ 章の各ページへの索引である。表の 1 行
 | `#define int long long`・`signed main()` | `int` を丸ごと置き換える | [#define int long long](../cpp/cpp-macros-template-file.md#define-int) |
 | `chmin(a, b)`・`return a > b && (a = b, true);` | 小さければ更新（カンマ演算子の形も） | [chmin・chmax](../cpp/cpp-macros-template-file.md#chmin) |
 | `#ifdef LOCAL`・`debug(x)` | 手元だけのデバッグ出力 | [#ifdef LOCAL](../cpp/cpp-macros-template-file.md#ifdef-local) |
+| `#ifdef ATCODER`・`#ifndef ONLINE_JUDGE` | ジャッジでだけ定義されるマクロで、提出と手元を分ける | [ジャッジのマクロ](../cpp/cpp-environment.md#judge-macros) |
 | `#pragma GCC optimize`・`#pragma GCC target` | 最適化・命令の指定 | [#pragma GCC](../cpp/cpp-macros-template-file.md#pragma) |
 | `#include "graph.hpp"` | 自作のヘッダ（提出前に展開する） | [バンドル](../cpp/cpp-macros-template-file.md#bundling)・[展開の道具](../cpp/cpp-macros-template-file.md#bundling-tools) |
-| `// @impl` | main の後ろに回す印 | [@impl](../cpp/cpp-macros-template-file.md#impl-marker) |
+| `// @impl` | この教材の作者が改造した cph（VS Code の拡張）で、main の後ろに回す部分を分ける印。公式の cph にはない | [@impl](../cpp/cpp-macros-template-file.md#impl-marker)・[cph の改造版](../cpp/cpp-macros-template-file.md#bundling-tools) |
 
 ## 書き方から引く：コンテナ・比較関数・アルゴリズム・文字列 {#lookup-containers}
 
@@ -308,6 +313,8 @@ ACL の版の違い（v1.5 と v1.6）は [ACL の版](../cpp/acl-reading.md#ver
 | `-O0` と `-O2` で答えが違う、関係のない行で答えが変わる | 未定義動作（あふれ・範囲外） | [未定義動作とは](../cpp/cpp-undefined-behavior.md#what-is-ub)・[他の行まで壊す](../cpp/cpp-undefined-behavior.md#breaks-other-lines) |
 | 手元でだけ Segmentation fault（深い再帰） | スタックの上限 | [再帰の深さとスタック](../cpp/cpp-environment.md#stack-depth) |
 | ACL を使うと手元と結果が違う | ACL の版（v1.5 の `val()` は `unsigned int`） | [ACL の版](../cpp/acl-reading.md#version) |
+| 小数の結果が手元と違う（外積の符号・`== 0` の判定） | `-march=native` で FMA が使われ、丸めが変わる | [FMA](../cpp/cpp-environment.md#march-native) |
+| 手元では速いのに AtCoder でだけ TLE | 関数の中の大きな配列（AtCoder では呼ぶたびに 0 で埋まる） | [大きな局所配列は遅くなる](../cpp/cpp-environment.md#auto-var-init) |
 | 小さいケースは合うが大きいケースで WA、答えが負 | `int` どうしの積、INF + INF | [int どうしの積](../cpp/cpp-integer-overflow.md#int-product)・[INF + INF](../cpp/cpp-integer-overflow.md#edge-values) |
 | 空の配列で答えが巨大になる・ループが止まらない | `v.size() - 1` が符号なしで巨大になる | [size() は符号なし](../cpp/cpp-integer-overflow.md#unsigned-size) |
 | 負の数の割り算・余りがずれる | 商は 0 に向かって切り捨て、余りは負になりうる | [整数の割り算](../cpp/cpp-math-functions.md#integer-division) |

@@ -4,8 +4,8 @@ title: なもりグラフ
 aliases: [なもり, unicyclic graph, pseudotree, 閉路が 1 つのグラフ, 木に辺を 1 本足したグラフ, N 頂点 N 辺の連結グラフ]
 type: technique
 field: graph
-chapter: 有向グラフ
-order: 270
+chapter: 基本と探索
+order: 75
 level: 水
 kind: [グラフ探索, 木]
 prerequisites: [connected-components, cycle-detection, tree-basics]
@@ -25,7 +25,7 @@ sections:
   - {title: 単純パスが一意になる条件, anchor: unique-path}
   - {title: 有向版は Functional graph, anchor: directed-version}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"

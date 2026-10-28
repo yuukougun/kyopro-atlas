@@ -42,7 +42,7 @@ search:
     - 言い回し：XOR・AND・OR が問題文に出る
     - 言い回し：自分以外の XOR・同じ値で打ち消す
     - 言い回し：2 進表記の 1 の個数
-    - 制約：N ≤ 18 程度で、集合とその部分集合の組をすべて調べる（全体で 3^N）
+    - 制約：N ≤ 15〜16 程度で、集合とその部分集合の組をすべて調べる（全体で 3^N）
 - 節：
     - `bit-operations#operators` AND・OR・XOR・シフトと演算子の優先順位：https://yuukougun.github.io/kyopro-atlas/basics/bit-operations/#operators
     - `bit-operations#xor-properties` XOR の性質（打ち消し・a + b との関係・0〜n の XOR）：https://yuukougun.github.io/kyopro-atlas/basics/bit-operations/#xor-properties
