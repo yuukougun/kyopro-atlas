@@ -8,8 +8,8 @@ chapter: DP の高速化
 order: 350
 level: 発展
 kind: [DP, データ構造]
-prerequisites: [dp-basics, convex-hull]
-related: [dp-segment-tree, segment-tree, monge, alien-dp, dp-speedup-overview]
+prerequisites: [dp-basics]
+related: [dp-segment-tree, segment-tree, monge, alien-dp, dp-speedup-overview, convex-hull#cht-duality]
 summary: dp[i] = min_j (dp[j] + a_j·x_i + b_j) のように遷移が一次関数の最小になる DP を、下側の包絡線を持って速くする。単調なら deque、そうでなければ Li Chao Tree を使う。
 complexity: 傾きもクエリも単調なら全体 O(N)（ならし）、クエリだけ単調でないなら 1 回 O(log N)、Li Chao Tree は直線の追加と取得が O(log X)・線分の追加が O(log^2 X)（X は x の候補の数）
 signs:
@@ -26,7 +26,7 @@ sections:
   - {title: Li Chao Tree（区間の真ん中で勝つ直線を残す）, anchor: li-chao-tree}
   - {title: ライブラリでの検証, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -35,7 +35,7 @@ updated: 2026-10-22
         - 遷移のコストが $i$ と $j$ の積の項を 1 つだけ含む（$(h_i - h_j)^2$ など）
         - 直線を追加しながら、任意の $x$ での最小値・最大値を答える
     - **計算量**：傾きもクエリも単調なら全体 $O(N)$（ならし）。傾きが単調でクエリだけ単調でないなら 1 回 $O(\log N)$。Li Chao Tree は直線の追加と取得が $O(\log X)$、線分の追加が $O(\log^2 X)$（$X$ は $x$ の候補の数）
-    - **前提**：[DP の基本](../dp/dp-basics.md)、[凸包と凸多角形](../geometry/convex-hull.md)
+    - **前提**：[DP の基本](../dp/dp-basics.md)
 
 <!-- textlint-disable -->
 別名：CHT・傾き最適化・斜率优化・李超线段树・直線の最小値

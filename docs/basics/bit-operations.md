@@ -16,7 +16,7 @@ signs:
   - {type: phrase, text: XOR・AND・OR が問題文に出る}
   - {type: phrase, text: 自分以外の XOR・同じ値で打ち消す}
   - {type: phrase, text: 2 進表記の 1 の個数}
-  - {type: constraint, text: N ≤ 18 程度で、集合とその部分集合の組をすべて調べる（全体で 3^N）}
+  - {type: constraint, text: N ≤ 15〜16 程度で、集合とその部分集合の組をすべて調べる（全体で 3^N）}
 acl: []
 frequency: A
 frequency_evidence: recent 1（abc476_g）・前提として 45 ページに届く（直接 13）・古い ABC 4 問
@@ -26,7 +26,7 @@ sections:
   - {title: popcount・最下位 bit, anchor: popcount}
   - {title: 部分集合の部分集合の列挙（3^N）, anchor: submask}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -35,7 +35,7 @@ updated: 2026-10-22
         - XOR・AND・OR が問題文に出る。
         - 自分以外の XOR・同じ値で打ち消す。
         - 2 進表記の 1 の個数。
-        - $N \le 18$ 程度で、集合とその部分集合の組をすべて調べる（全体で $3^N$）。
+        - $N \le 15$〜$16$ 程度で、集合とその部分集合の組をすべて調べる（全体で $3^N$）。
     - **計算量**：AND・OR・XOR・シフト・popcount はどれも $O(1)$。$m$ の部分集合の列挙は $2^{\mathrm{popcount}(m)}$ 個で、$N$ 要素のすべての集合とその部分集合の組は合計 $3^N$ 個。
     - **前提**：なし
 

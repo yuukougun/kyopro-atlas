@@ -13,7 +13,7 @@ related: [interval-dp, alien-dp, cht, slope-trick, ternary-search#convexity, kna
 summary: コスト c(i, j) が Monge なら各行の最小値を取る位置が単調になり、分割統治（monotone minima）や Knuth-Yao で区間分割 DP・区間 DP を速くできる。凸な列どうしの合成も速い。
 complexity: monotone minima O(N + M log N)（N 行 M 列）、SMAWK O(N + M)、K 個の区間に分ける DP は O(KN log N)、Knuth-Yao O(N^2)、凸な列と任意の列の (min,+) 畳み込み O((N + M) log(N + M))、凸な列どうしは O(N + M)
 signs:
-  - {type: shape, text: '区間分割 DP のコストが c(a, c) + c(b, d) ≤ c(a, d) + c(b, c) を満たす（区間を広げるほど増え方が大きい）'}
+  - {type: shape, text: '区間分割 DP のコストが a ≤ b ≤ c ≤ d について c(a, c) + c(b, d) ≤ c(a, d) + c(b, c) を満たす（区間を広げるほど増え方が大きい）'}
   - {type: shape, text: 最適な区切り位置 opt(i) が i について単調に動く}
   - {type: phrase, text: 区間から k 個選ぶときの最大値を、すべての k について求める}
   - {type: constraint, text: N ≤ 10^5 の列を K（数十）個の区間に分ける}
@@ -30,13 +30,13 @@ sections:
   - {title: '凸な列どうしの (max,+) 畳み込み（差分のマージ）', anchor: convex-max-plus-convolution}
   - {title: ライブラリでの検証, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
     - **何ができるか**：コスト $c(i, j)$ が Monge なら各行の最小値を取る位置が単調になり、分割統治（monotone minima）で区間分割 DP を、Knuth-Yao で区間 DP を速くできる。凸な列と別の列の (min,+) 畳み込みも速く計算できる。
     - **いつ使うか**：
-        - 区間分割 DP のコストが $c(a, c) + c(b, d) \le c(a, d) + c(b, c)$ を満たす（区間を広げるほど増え方が大きい）
+        - 区間分割 DP のコストが $a \le b \le c \le d$ について $c(a, c) + c(b, d) \le c(a, d) + c(b, c)$ を満たす（区間を広げるほど増え方が大きい）
         - 最適な区切り位置 $\mathrm{opt}(i)$ が $i$ について単調に動く
         - 区間から $k$ 個選ぶときの最大値を、すべての $k$ について求める
         - $N \le 10^5$ の列を $K$（数十）個の区間に分ける

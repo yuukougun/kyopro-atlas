@@ -8,8 +8,8 @@ chapter: DP の高速化
 order: 370
 level: 発展
 kind: [DP, 二分探索]
-prerequisites: [monge, binary-search]
-related: [greedy-priority-queue#regret, dp-sequence-partition, ternary-search#convexity, priority-queue, slope-trick]
+prerequisites: [dp-basics, binary-search]
+related: [greedy-priority-queue#regret, dp-sequence-partition, monge, ternary-search#convexity, priority-queue, slope-trick]
 summary: 「ちょうど K 個選ぶ」制約のついた最適化で答えが K について凸なら、1 個あたりの罰金 λ を足して制約を外した問題を解き、選ばれる個数が K になる λ を二分探索する。
 complexity: 罰金つきの問題を 1 回 O(T) で解けるとき O(T log M)（M は λ を探す範囲の幅）。隣り合わない k 個の選択を取り消し付きの貪欲で解くなら、すべての k について O(N log N)
 signs:
@@ -26,7 +26,7 @@ sections:
   - {title: Monge な区間分割と組み合わせる, anchor: with-monge}
   - {title: 自作するときの要点と確かめ方, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -36,7 +36,7 @@ updated: 2026-10-22
         - 隣り合わない k 個を選ぶ和の最大を、すべての k について答える
         - K 個選ぶときの答え $f(K)$ が K について凸（1 個増やすときの得が、個数が増えるほど減る）
     - **計算量**：罰金つきの問題を 1 回 $O(T)$ で解けるとき $O(T \log M)$（$M$ は $\lambda$ を探す範囲の幅）。隣り合わない k 個の選択を取り消し付きの貪欲で解くなら、すべての k について $O(N \log N)$
-    - **前提**：[Monge 性による DP の高速化](../dp/monge.md)、[二分探索](../basics/binary-search.md)
+    - **前提**：[DP の基本](../dp/dp-basics.md)、[二分探索](../basics/binary-search.md)
 
 <!-- textlint-disable -->
 別名：Aliens trick・WQS 二分・Lagrangian Relaxation・Lagrange 緩和・取り消し付きの貪欲
@@ -125,6 +125,8 @@ $A = (1, 9, 1, 1, 9)$ で動かす。まず 2 番目の 9 を取って $f(1) = 9
 
 ## Monge な区間分割と組み合わせる {#with-monge}
 
+この節は [Monge 性による DP の高速化](../dp/monge.md)を前提にする。
+
 列をちょうど $K$ 個の区間に分け、区間のコスト $\mathrm{cost}(j, i)$（半開区間 $[j, i)$ のコスト）の和を最小にする問題は、[数列を区間に分ける DP](../dp/dp-sequence-partition.md) で $\mathrm{dp}[i][k] = \min_j (\mathrm{dp}[j][k-1] + \mathrm{cost}(j, i))$ になり、素朴には $O(KN^2)$ かかる。
 
 $\mathrm{cost}$ が Monge（$a < b < c < d$ で $\mathrm{cost}(a, c) + \mathrm{cost}(b, d) \le \mathrm{cost}(a, d) + \mathrm{cost}(b, c)$）なら、分割の個数 $K$ についての最適値 $f(K)$ は凸になる。区間 1 個ごとに罰金 $\lambda$ を足すと、個数の次元が消えて
@@ -133,7 +135,7 @@ $$
 \mathrm{dp}[i] = \min_{j < i} \bigl(\mathrm{dp}[j] + \mathrm{cost}(j, i) + \lambda\bigr)
 $$
 
-の 1 次元の DP になる。$\mathrm{cost}$ に定数を足しても Monge のままなので、この DP は [Monge 性による DP の高速化](../dp/monge.md)で速く解ける。$\mathrm{dp}[j]$ が行列の中に入るオンラインの形なので、monotone minima を 1 回呼ぶだけでは済まない。[LARSCH](../dp/monge.md#smawk-larsch) を使うと $O(N)$、分割統治で左半分を確定させてから右半分へ monotone minima で配ると $O(N \log^2 N)$ になる。$\mathrm{cost}$ が $(S_i - S_j)^2$ のような積の項を 1 つ持つ形なら、[Convex Hull Trick](../dp/cht.md#lines) でもよい。
+の 1 次元の DP になる。$\mathrm{cost}$ に定数を足しても Monge のままなので、この DP は Monge 性を使って速く解ける。$\mathrm{dp}[j]$ が行列の中に入るオンラインの形なので、monotone minima を 1 回呼ぶだけでは済まない。[LARSCH](../dp/monge.md#smawk-larsch) を使うと $O(N)$、分割統治で左半分を確定させてから右半分へ monotone minima で配ると $O(N \log^2 N)$ になる。$\mathrm{cost}$ が $(S_i - S_j)^2$ のような積の項を 1 つ持つ形なら、[Convex Hull Trick](../dp/cht.md#lines) でもよい。
 
 これに $\lambda$ の探索の $O(\log M)$ が掛かり、全体は $O(N \log M)$ から $O(N \log^2 N \log M)$ になる。同点の個数を正しく扱うのが面倒なら、[λ の二分探索の節](#binary-search-lambda)の終わりの三分探索で $h(\lambda)$ を最小にする。
 
