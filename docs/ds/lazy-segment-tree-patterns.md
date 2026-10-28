@@ -30,7 +30,7 @@ sections:
   - {title: 載らない作用（区間 chmin と区間和・区間の割り算・区間の並べ替え）と逃げ道, anchor: not-applicable}
   - {title: 言い換えてから載せる（しきい値で 0/1 にする・X_i − i・寄与）, anchor: reformulate, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -69,7 +69,7 @@ updated: 2026-10-22
 `mapping` で $q$ を更新するときは、更新する前の $s$ を使う。先に $s$ を書き換えてから $q$ の式に使うと、$2f \cdot (s + f \cdot \mathit{len})$ になり答えがずれる。
 
 !!! info "ACL では"
-    `lazy_segtree<S, op, e, F, mapping, composition, id> seg(v);`。`seg.apply(l, r, f)`・`seg.prod(l, r)` はどちらも $O(\log N)$ で、`mapping` などの中身に $O(T)$ かかれば $O(T \log N)$ になる。`S` と `F` は構造体でも `bool` でもよい。`seg.max_right<g>(l)`・`seg.min_left<g>(r)` で、遅延セグメント木の上の二分探索もできる（[遅延セグメント木の上で使う](../ds/segment-tree-binary-search.md#on-lazy-segment-tree)）。
+    `lazy_segtree<S, op, e, F, mapping, composition, id> seg(v);`。`seg.apply(l, r, f)`・`seg.prod(l, r)` はどちらも $O(\log N)$ で、`mapping` などの中身に $O(T)$ かかれば $O(T \log N)$ になる。`S` と `F` は構造体でも `bool` でもよい。`seg.max_right(l, f)`・`seg.min_left(r, f)` で、遅延セグメント木の上の二分探索もできる（[遅延セグメント木の上で使う](../ds/segment-tree-binary-search.md#on-lazy-segment-tree)）。この `f` は作用ではなく `S` を受け取って `bool` を返す判定の関数で、外の変数を参照するラムダでよい。要件は[セグメント木上の二分探索](../ds/segment-tree-binary-search.md#what-it-does)の ACL の囲みと同じである。
 
 ## 型の表（S・op・e・F・mapping・composition・id） {#pattern-table}
 

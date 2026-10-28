@@ -437,7 +437,7 @@ search:
 - サイン：
     - 言い回し：N 個をいくつかのグループに分ける方法の数・最適値
     - 言い回し：集合を部分集合の和に分割する
-    - 制約：N ≤ 16〜18（3&#94;N ≈ 4×10&#94;7〜4×10&#94;8）
+    - 制約：N ≤ 15〜16 程度（3&#94;N ≈ 1.4×10&#94;7〜4.3×10&#94;7）、内側の処理が軽ければ N = 18 まで
 - 節：
     - `subset-enumeration-dp#submask-loop` 部分集合の部分集合を列挙する（T = (T − 1) & S）：https://yuukougun.github.io/kyopro-atlas/dp/subset-enumeration-dp/#submask-loop
     - `subset-enumeration-dp#why-3n` 3^N になる理由（各要素が 3 通り）：https://yuukougun.github.io/kyopro-atlas/dp/subset-enumeration-dp/#why-3n
@@ -658,7 +658,7 @@ search:
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/cht/
 - 別名：CHT、傾き最適化、斜率优化、李超线段树、直線の最小値
 - 種類：DP、データ構造
-- 前提：`dp-basics`、`convex-hull`
+- 前提：`dp-basics`
 - サイン：
     - 式の形：遷移のコストが i と j の積の項を 1 つだけ含む（(h_i − h_j)^2 など）
     - 言い回し：直線を追加しながら、任意の x での最小値・最大値を答える
@@ -677,7 +677,7 @@ search:
 - 種類：DP、ダブリング・分割統治
 - 前提：`dp-sequence-partition`、`divide-and-conquer`
 - サイン：
-    - 式の形：区間分割 DP のコストが c(a, c) + c(b, d) ≤ c(a, d) + c(b, c) を満たす（区間を広げるほど増え方が大きい）
+    - 式の形：区間分割 DP のコストが a ≤ b ≤ c ≤ d について c(a, c) + c(b, d) ≤ c(a, d) + c(b, c) を満たす（区間を広げるほど増え方が大きい）
     - 式の形：最適な区切り位置 opt(i) が i について単調に動く
     - 言い回し：区間から k 個選ぶときの最大値を、すべての k について求める
     - 制約：N ≤ 10^5 の列を K（数十）個の区間に分ける
@@ -696,7 +696,7 @@ search:
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/alien-dp/
 - 別名：Aliens trick、WQS 二分、Lagrangian Relaxation、Lagrange 緩和、取り消し付きの貪欲
 - 種類：DP、二分探索
-- 前提：`monge`、`binary-search`
+- 前提：`dp-basics`、`binary-search`
 - サイン：
     - 言い回し：ちょうど K 個選ぶ・K 個の区間に分ける（N, K ≤ 2×10^5）
     - 言い回し：隣り合わない k 個を選ぶ和の最大を、すべての k について答える
