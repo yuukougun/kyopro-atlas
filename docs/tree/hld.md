@@ -27,7 +27,7 @@ sections:
   - {title: いつ使うか（オイラーツアーと LCA で足りる場合との使い分け）, anchor: when-to-use}
   - {title: 自作ライブラリでの扱い, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -176,9 +176,9 @@ HL 分解は実装が重いので、軽い方法で足りるかを先に考え�
 
 ## 学ぶための資料 {#resources}
 
-- けんちょん（drken）氏の yukicoder 399 の記事：パスへの区間加算と区間和を HL 分解で処理する実例。区間の処理を関数として渡す書き方が参考になる
-- Luzhiled's Library（ei1333 氏）の HL 分解は、パスの集約・更新・LCA・K 個上の祖先をまとめたライブラリで、自作するときの関数の切り分けの参考になる
-- 正しさと計算量の確認には cp-algorithms の Heavy-light decomposition の記事がある（英語）
+- [drken「yukicoder 399 動的な領主 (HL分解で通す)」](https://drken1215.hatenablog.com/entry/2018/08/14/014800)：パスへの区間加算と区間和を HL 分解で処理する実例。区間の処理を関数として渡す書き方が参考になる
+- [ei1333「Luzhiled's Library: Heavy-Light-Decomposition(HL分解)」](https://ei1333.github.io/library/graph/tree/heavy-light-decomposition.hpp)：パスの集約・更新・LCA・K 個上の祖先をまとめたライブラリで、自作するときの関数の切り分けの参考になる
+- [cp-algorithms「Heavy-light decomposition」](https://cp-algorithms.com/graph/hld.html)（英語）：正しさと計算量の確認に使える
 
 ## 例題 {#examples}
 

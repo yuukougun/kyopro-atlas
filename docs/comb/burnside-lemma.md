@@ -27,7 +27,7 @@ sections:
   - {title: 立方体の 24 通りの回転, anchor: cube}
   - {title: 自作するときの要点と検証, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -167,9 +167,9 @@ Library Checker に Burnside の補題をそのまま問う問題はない。小
 
 ## 学ぶための資料 {#resources}
 
-- Wikipedia（日本語）の「バーンサイドの補題」：補題の正確な形と、軌道と固定点の言葉づかい
-- pctsnote（Scrapbox）の「バーンサイドの補題」：小さな例での確かめと、ABC198 F で立方体の回転を 5 つの型に分ける考え方
-- cp-algorithms の Burnside's lemma / Pólya enumeration theorem（英語）：証明と、ネックレスの式・色の数を変数にした Pólya の数え上げ定理への一般化
+- [Wikipedia「バーンサイドの補題」](https://ja.wikipedia.org/wiki/%E3%83%90%E3%83%BC%E3%83%B3%E3%82%B5%E3%82%A4%E3%83%89%E3%81%AE%E8%A3%9C%E9%A1%8C)（日本語）：補題の正確な形と、軌道と固定点の言葉づかい
+- [pctsnote「バーンサイドの補題」](https://scrapbox.io/pctsnote/%E3%83%90%E3%83%BC%E3%83%B3%E3%82%B5%E3%82%A4%E3%83%89%E3%81%AE%E8%A3%9C%E9%A1%8C)（Scrapbox）：小さな例での確かめと、ABC198 F で立方体の回転を 5 つの型に分ける考え方
+- [cp-algorithms「Burnside's lemma / Pólya enumeration theorem」](https://cp-algorithms.com/combinatorics/burnside.html)（英語）：証明と、ネックレスの式・色の数を変数にした Pólya の数え上げ定理への一般化
 
 ## 例題 {#examples}
 
