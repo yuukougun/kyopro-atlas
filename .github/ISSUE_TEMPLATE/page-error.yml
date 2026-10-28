@@ -1,0 +1,59 @@
+# 教材のページの誤りの報告（Issue #10。planning/interfaces.md §7）。
+# 各ページの最後の行の「このページの誤りを報告する」（overrides/main.html）が、この form を
+#   /issues/new?template=page-error.yml&title=…&page-title=…&page-url=…&page-updated=…
+# で開き、項目に値を入れる（項目の id が URL の引数の名前になる）。id とファイル名を変えるときは main.html も直す。
+# labels は、リポジトリにある名前だけが付く（ない名前は無視される）。
+name: ページの誤りの報告
+description: 教材のページの誤りや分かりにくいところを知らせる
+title: "誤りの報告："
+body:
+  - type: markdown
+    attributes:
+      value: |
+        教材のページの誤り（事実・問題の番号や difficulty・計算量・コード・リンクなど）や、分かりにくいところを知らせる。
+        各ページの最後の行の「このページの誤りを報告する」から開くと、ページの題名・URL・更新日が入っている。
+
+        Issue は公開され、誰でも読める。問題文や解説の文章は写さず（ほかの人の文章の転載になる）、問題は問題 ID（`abc340_e` など）で示す。
+  - type: input
+    id: page-title
+    attributes:
+      label: ページの題名
+      placeholder: 遅延セグメント木
+    validations:
+      required: true
+  - type: input
+    id: page-url
+    attributes:
+      label: ページの URL
+      description: 節の URL でもよい
+      placeholder: https://yuukougun.github.io/kyopro-atlas/ds/lazy-segment-tree/
+  - type: input
+    id: page-updated
+    attributes:
+      label: ページの更新日
+      description: ページの最後の行に出ている日付（報告のリンクから開くと入っている）
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 種類
+      options:
+        - 事実の誤り（定理・計算量・問題の番号・題名・difficulty など）
+        - コードの誤り
+        - 説明が分かりにくい・足りない
+        - リンク切れ・表示の崩れ
+        - 誤字・表記
+        - その他
+    validations:
+      required: true
+  - type: textarea
+    id: where
+    attributes:
+      label: 場所
+      description: 節の見出し・問題の行・コードの行など。該当する本文の 1 文を写してもよい
+  - type: textarea
+    id: what
+    attributes:
+      label: 内容
+      description: どこがどう誤っているか、どこが分かりにくいか。正しいと考える内容と、その根拠（資料の URL など）があれば添える
+    validations:
+      required: true
