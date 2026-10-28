@@ -137,6 +137,7 @@ nav:
           - グリッドグラフ: graph/grid-graph.md
           - 連結成分: graph/connected-components.md
           - 閉路の検出と復元: graph/cycle-detection.md
+          - なもりグラフ: graph/namori-graph.md
           - 二部グラフ判定: graph/bipartite-graph.md
           - 小さいグラフの全探索: graph/small-graph-brute-force.md
           - 彩色数・最大独立集合・最大クリーク: graph/chromatic-number.md
@@ -158,7 +159,6 @@ nav:
           - トポロジカルソート: graph/topological-sort.md
           - 強連結成分分解（SCC）: graph/scc.md
           - Functional graph（出次数 1 のグラフ）: graph/functional-graph.md
-          - なもりグラフ: graph/namori-graph.md
           - 2-SAT: graph/two-sat.md
       - 連結性と全域木:
           - Union-Find で連結性を扱う: graph/union-find-connectivity.md
