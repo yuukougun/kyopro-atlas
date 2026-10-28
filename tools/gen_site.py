@@ -28,7 +28,7 @@ data/recent-abc.yaml（最近の ABC）。front matter が足りないページ�
 front matter の updated の最大値。生成日時は書かないので、入力が同じなら出力も同じ（--check と両立する。T5）。
 リンク: 生成する Markdown のリンクは相対パス（mkdocs build --strict で検査される）。節（#anchor）へのリンクは、相手の
 stage が draft 以降（本文に見出しがあることを check_pages.py が保証する）のときだけ付け、stub のページはページへのリンクにする。
-本文に atcoder.jp の問題へのリンクは書かない（問題は ID と題名だけ。interfaces.md §3）。
+本文に atcoder.jp の問題へのリンクは書かない（問題は「ABC451 D. 題名」の表示名で書く。リンクは問題の囲みの中だけ。interfaces.md §3）。
 共通の部品は check_pages.py にある。
 """
 from __future__ import annotations
@@ -59,7 +59,7 @@ FIELD_DESCRIPTIONS = {   # 設計書 §2.1 の「中身」
     "basics": "計算量の見積もり、全探索、二分探索、累積和・いもす法、尺取り法、ソート・座標圧縮、貪欲、半分全列挙、ダブリング、分割統治、周期性、bit 演算",
     "thinking": "言い換え・主客転倒・寄与・余事象・偶奇・不変量・構築などの考察の型",
     "dp": "DP の考え方、列・区間・集合・桁・木の DP、DP の高速化",
-    "graph": "探索、最短路、有向グラフ、連結性と全域木、フロー",
+    "graph": "探索、最短路、有向グラフ、連結性と全域木、探索木と次数の性質、フロー",
     "tree": "木の性質、直径・LCA・オイラーツアー・マージテク・重心など",
     "ds": "STL の応用、スタック・キュー、Union-Find、BIT・セグメント木、クエリ処理の工夫",
     "math": "mod、素数・約数、GCD と合同式、floor、行列・線形代数、畳み込み",
@@ -98,8 +98,19 @@ CONSTRAINT_BANDS = [
     (5000, "5000 以下", "5000"), (5 * 10 ** 5, "2×10^5 前後（5×10^5 以下）", "2e5"), (10 ** 6, "10^6 以下", "1e6"),
     (10 ** 7, "10^7 以下", "1e7"), (10 ** 12, "10^12 以下", "1e12"), (float("inf"), "10^12 より大きい（10^18 など）", "1e18"),
 ]
+# 制約のサインの上限の数の読み方（constraint_bound）。数は 2×10^5・10^9・2^30・5000・数百 の形で、「a〜b」は b を読む
 NUM_PAT = r"(?:\d+(?:\.\d+)?\s*×\s*10\^\d+|10\^\d+|2\^\d+|\d+(?:,\d{3})*|数[十百千万])"
-BOUND_RE = re.compile(r"(?P<lhs>[^\s、，,（(]{0,12})\s*(?:≤|<|≦|≈)\s*(?P<a>" + NUM_PAT + r")(?:\s*〜\s*(?P<b>" + NUM_PAT + r"))?")
+NUM_RANGE_RE = re.compile(r"(?P<a>" + NUM_PAT + r")(?:\s*〜\s*(?P<b>" + NUM_PAT + r"))?")
+BOUND_OP_RE = re.compile(r"(?P<lhs>[^\s、，,（(]{0,12})\s*(?:≤|<|≦|≈)\s*$")     # 数の直前の不等号と、その左辺
+# 数の直後の語：個・回（個数・回数）→ 程度・前後・規模・級 → 以下・未満・以内・まで（「個程度」「程度まで」も読む）
+BOUND_SUFFIX_RE = re.compile(r"\s*(?:(?P<count>個|回)\s*)?(?:(?:程度|前後|規模|級)\s*)?(?:(?:以下|未満|以内|まで)\s*)?")
+LOWER_BOUND_RE = re.compile(r"以上|超|より大き")                                # 「10^5 個以上」は下限なので読まない
+RANGE_END_RE = re.compile(r"\s*(?:$|[、，,。）)]|で|と|の)")                    # 範囲だけの「10^9〜10^18 と広い」の後ろ（「3〜5 秒」は読まない）
+SUBJECT_RE = re.compile(r"(?P<subj>[^\s、，,（(]{0,12})\s*$")                   # 後ろの語で読んだ数の主語（値か個数かの判定）
+EXPR_BEFORE_RE = re.compile(r"(?:[A-Za-z0-9_^.!]|[+\-−×*/^·]\s*)$")           # 式の一部の数（log2・B12・N^2・M + 1・N^2/64）
+EXPR_AFTER_RE = re.compile(r"[×*^!/·A-Za-z]")                                  # 式の一部の数（3^N・9!・26×(N+1)・64bit）
+COMPUTED_LHS_RE = re.compile(r"[√^!)）]|^O\(")                                 # 見積もりの式（O(N√N) ≈ 10^8・60^4 ≈ 1.3×10^7）
+VALUE_LHS = ("A", "値", "座標", "答", "−", "-")                                 # 値の上限の左辺（A_i ≤ 10^9・座標が 10^9 まで）
 PROBLEM_SETS = [   # 問題集（contest id → 見出し）。ほかの abc・arc・agc 以外のコンテストは最後に「そのほか」
     ("typical90", "競プロ典型 90 問"), ("dp", "EDPC（Educational DP Contest）"), ("tdpc", "TDPC（Typical DP Contest）"),
     ("ndpc", "NDPC（Next DP Contest）"), ("practice2", "ACL Practice（AtCoder Library Practice Contest）"),
@@ -114,7 +125,7 @@ POSITION_LEVEL = {"D": "基礎", "E": "水", "F": "青", "G": "黄・発展"}
 BLOCKS = {
     "home-links": ("ホームの入口（知識マップ・逆引き辞典・ロードマップ・レベル別の一覧・用語の索引）", "index.md"),
     "version": ("索引の版（入力のハッシュと updated の最大値）", None),
-    "fields": ("分野の一覧（入口へのリンク・ページ数・準備中があればその数）", None),
+    "fields": ("章の一覧（分野の入口へのリンク・ページ数・準備中があればその数と、最後の章「一覧」）", None),
     "lists": ("レベル別・種類別の一覧へのリンク", None),
     "stage-summary": ("制作状況の表（分野ごとの stage の集計。設計書 §10.3）", None),
     "signs-phrase": ("逆引き辞典：言い回しから（signs の phrase。kind で分ける）", "guide/reverse-index-signs.md"),
@@ -273,18 +284,70 @@ def parse_num(s: str) -> float:
     return float(s)
 
 
-def constraint_bound(text: str) -> float | None:
-    """制約のサインの上限の数（N・Q などの上限を優先し、A_i などの値の上限は後回し）。"""
-    cands = []
-    for m in BOUND_RE.finditer(text):
-        lhs = m.group("lhs").strip()
+def paren_mask(text: str) -> list[bool]:
+    """文字ごとに、かっこ（（…）・(…)）の中か。かっこの文字そのものも中に数える。"""
+    depth, out = 0, []
+    for ch in text:
+        if ch in "（(":
+            depth += 1
+        out.append(depth > 0)
+        if ch in "）)":
+            depth = max(0, depth - 1)
+    return out
+
+
+def bound_candidates(text: str) -> list[tuple[tuple[bool, bool, int, int], float]]:
+    """制約のサインから上限として読める数：((値の上限か, かっこの中か, 書き方, 位置), 数) の一覧。
+    書き方は 0 が ≤ など、1 が後ろの語、2 が範囲だけ。
+
+    上限として読む数は、直前に ≤・<・≦・≈ がある数（左辺が O(N√N)・60^4・√N のような見積もりの式なら読まない）と、
+    直後に 程度・前後・規模・級・以下・未満・以内・まで・個・回 が続く数（「個以上」「10^18 を超える」の下限は読まない）と、
+    「10^9〜10^18 と広い」のように範囲だけで書いた数の上端（後ろが で・と・の・読点・句点・閉じかっこ・文の終わりのときだけ。
+    「3〜5 秒」のように単位が続くものは読まない）。
+    式の一部の数（N^2・M + 1・log2・3^N）と、2 未満の数（「1 回あたり」）は読まない。
+    値の上限は、左辺・主語が A_i・値・座標・答え で始まるか、_ を含む（ΣK_i は除く）か、主語のない数（「10^9 程度の値」）。
+    個・回の付いた数は値の上限にしない（個数・回数・長さ・総和・N・Q・K などの上限と同じ扱い）。
+    """
+    inside = paren_mask(text)
+    out = []
+    for m in NUM_RANGE_RE.finditer(text):
+        before, after = text[:m.start()], text[m.end():]
+        if EXPR_BEFORE_RE.search(before) or EXPR_AFTER_RE.match(after):
+            continue
         val = parse_num(m.group("b") or m.group("a"))
-        is_value = "_" in lhs or lhs.startswith(("A", "値", "座標", "−", "-")) or lhs == ""
-        cands.append((is_value, val))
-    if not cands:
-        return None
-    pref = [v for is_value, v in cands if not is_value]
-    return pref[0] if pref else cands[0][1]
+        if val < 2:
+            continue
+        op = BOUND_OP_RE.search(before)
+        if op:
+            lhs, written, count = op.group("lhs").strip(), 0, False
+            if COMPUTED_LHS_RE.search(lhs):
+                continue
+        else:
+            sm = BOUND_SUFFIX_RE.match(after)
+            if sm.group(0).strip():
+                if LOWER_BOUND_RE.match(after[sm.end():]):
+                    continue
+                written, count = 1, bool(sm.group("count"))
+            elif m.group("b") and RANGE_END_RE.match(after):
+                written, count = 2, False
+            else:
+                continue
+            lhs = SUBJECT_RE.search(before).group("subj").strip()
+        is_value = not count and (lhs == "" or lhs.startswith(VALUE_LHS) or ("_" in lhs and not lhs.startswith("Σ")))
+        out.append(((is_value, inside[m.start()], written, m.start()), val))
+    return out
+
+
+def constraint_bound(text: str) -> float | None:
+    """制約のサインの上限の数（帯を決める数）。読めなければ None（「数の上限で分けられないもの」に入る）。
+
+    次の順で 1 つ選ぶ（bound_candidates の鍵の順）：個数・回数・長さ・総和・N・Q・K などの上限を、値の上限（A_i・座標など）より先に。
+    同じ種類の中では、かっこの外の数を先に（かっこの中の数は補足や見積もりなので、外に読める数がないときだけ使う）、
+    ≤ などで書いた上限を「程度」「まで」などで読んだ数より先に（「文字の種類 26 程度、|S| ≤ 2×10^5」は 2×10^5）、
+    範囲だけで書いた数をその後に（「頂点数が数百〜数千、辺数が 10^5 程度まで」は 10^5）、最後に最初に書かれた数を使う。
+    """
+    cands = bound_candidates(text)
+    return min(cands)[1] if cands else None
 
 
 # ---------------------------------------------------------------- 生成
@@ -599,6 +662,7 @@ class Site:
         return f"索引の版：`{self.version}`（ページの updated の最大：{self.updated or '—'}）"
 
     def b_fields(self, host: str) -> str:
+        """ナビゲーションの章の表：分野ごとの行と、最後の章「一覧」の行（nav_yml と同じ並び）。"""
         # 準備中のページが1つもなければ「準備中」の列を出さない（s10 audit-shared）
         any_stub = any(p.stub for p in self.pages)
         rows = []
@@ -606,8 +670,14 @@ class Site:
             ps = [p for p in self.pages if p.field == f]
             rows.append([f"[{cp.FIELD_TITLES[f]}]({cp.rel_link(host, f'{f}/index.md')})", cp.md_text(FIELD_DESCRIPTIONS[f], table=True),
                          str(len(ps))] + ([str(sum(p.stub for p in ps))] if any_stub else []))
-        head = ["分野", "中身", "ページ"] + (["準備中"] if any_stub else [])
-        return table(head, rows) if rows else "（まだページがない）"
+        if not rows:
+            return "（まだページがない）"
+        # 「一覧」は分野ではなく、全分野のページを並べ直した生成物の章なので、ページの数は「—」
+        rows.append([f"[一覧]({cp.rel_link(host, 'lists/index.md')})",
+                     f"レベル別の一覧 {len(self.levels_present())} つと種類別の一覧 {len(self.kinds_present())} 個"
+                     "（全分野のページを、レベルと手法の種類で並べ直したもの）", "—"] + (["—"] if any_stub else []))
+        head = ["章", "中身", "ページ"] + (["準備中"] if any_stub else [])
+        return table(head, rows)
 
     def b_lists(self, host: str) -> str:
         return self.lists_links(host)
@@ -732,9 +802,20 @@ class Site:
         return "\n\n".join(out) or "（まだ語がない）"
 
     def b_terms_latin(self, host: str) -> str:
+        """英数字で始まる語：先頭に跳び先の行、数字と A〜Z ごとの小見出し（{#terms-latin-digits}・{#terms-latin-a} など）。"""
         ts = sorted((e for e in self.terms().values() if term_class(e["display"]) == "latin"),
                     key=lambda e: (cp.norm_text(e["display"]), e["display"]))
-        return "\n".join(self.term_line(host, e) for e in ts) or "（まだ語がない）"
+        groups: dict[str, list[dict]] = {}       # 並べ替えの鍵の順なので、数字 → a → … → z の順に入る
+        for e in ts:
+            c = cp.norm_text(e["display"])[:1]
+            groups.setdefault("digits" if c.isdigit() else c, []).append(e)
+        if not groups:
+            return "（まだ語がない）"
+        label = {k: "0〜9" if k == "digits" else k.upper() for k in groups}
+        out = ["・".join(f"[{label[k]}](#terms-latin-{k})" for k in groups)]
+        for k, es in groups.items():
+            out.append(f"### {label[k]} {{#terms-latin-{k}}}\n\n" + "\n".join(self.term_line(host, e) for e in es))
+        return "\n\n".join(out)
 
     def b_terms_shared(self, host: str) -> str:
         ts = sorted((e for e in self.terms().values() if len(e["pages"]) > 1), key=lambda e: (cp.norm_text(e["display"]), e["display"]))
@@ -787,9 +868,21 @@ class Site:
     def recent_pages(self, e: dict) -> list[str]:
         return list(dict.fromkeys(r for r in e.get("pages") or [] if isinstance(r, str)))
 
+    @staticmethod
+    def recent_label(e: dict, short: bool = False) -> str:
+        """最近の ABC の問題の表示名。問題の一覧の label と同じ形（ABC451 D. Concat Power of 2）で、short は ABC451 D。
+        台帳にない問題もあるので、recent-abc.yaml の id・position・title から作る。リンクは付けない（style-guide §2.5）。"""
+        cid, _, idx = e["id"].rpartition("_")
+        index = str(e.get("position") or idx.upper())
+        title = str(e.get("title") or "").strip()
+        if short or not title:
+            return f"{cp.contest_name(cid)} {index}"
+        return cp.problem_label({"contest": cid, "index": index, "title": title})
+
     def b_recent_positions(self, host: str) -> str:
         out = []
         missing = set()
+        by_id = {e["id"]: e for e in self.recent}
         for pos in RECENT_POSITIONS:
             probs = [e for e in self.recent if e.get("position") == pos]
             if not probs:
@@ -813,12 +906,17 @@ class Site:
             for k, g in sorted(kinds.items(), key=lambda kv: (-len(kv[1]["problems"]), cp.KINDS.index(kv[0]) if kv[0] in cp.KINDS else 99)):
                 pages = sorted(g["pages"].items(), key=lambda kv: (-kv[1], cp.FIELDS.index(self.by_id[kv[0]].field), self.by_id[kv[0]].order))
                 links = "、".join(self.link(host, self.by_id[pid], table_cell=True) + (f"（{n}）" if n > 1 else "") for pid, n in pages)
-                rows.append([cp.md_text(k, table=True), str(len(g["problems"])), links, "・".join(g["problems"])])
+                # 幅 390px でも「ABC453 E」を空白で 2 行に割らないよう、改行しない空白でつなぐ（折り返しは「・」の後だけ）。
+                # 表は列ごとに最小 5rem あり、4 列だとスマートフォンの画面の右端を越えるので、数字だけの問題数を最後の列に置き、
+                # 問題の列が画面の内側に来るようにする（右端で切れても、見えなくなるのは問題数の後ろの余白だけ）
+                rows.append([cp.md_text(k, table=True), links,
+                             "・".join(self.recent_label(by_id[q], short=True).replace(" ", "&nbsp;") for q in g["problems"]),
+                             str(len(g["problems"]))])
             lvl = POSITION_LEVEL.get(pos, "")
             out.append(f"### {pos} 問題（{lvl}の帯） {{#recent-positions-{pos.lower()}}}\n\n"
                        f"abc451〜abc480 の {pos} の {len(probs)} 問で使われた手法を、ページの種類（kind の1つ目）で分けて多い順に並べる。"
                        "かっこの数は、その位置でそのページを使った問題の数（1 のときは書かない）。\n\n"
-                       + table(["種類", "問題数", "ページ", "問題"], rows))
+                       + table(["種類", "ページ", "問題", "問題数"], rows))
         if missing:
             self.notes.append("recent-abc.yaml の参照でページのないもの: " + "、".join(sorted(missing)))
         return "\n\n".join(out) or "（data/recent-abc.yaml に問題がない）"
@@ -829,7 +927,7 @@ class Site:
             refs = self.recent_pages(e)
             links = "、".join(self.ref_link(host, r, table_cell=True) for r in refs) or "—（対応するページがない）"
             d = e.get("difficulty")
-            rows.append([f"{e['id']} {cp.md_text(e.get('title') or '', table=True)}", str(e.get("position") or "—"),
+            rows.append([cp.md_text(self.recent_label(e), table=True), str(e.get("position") or "—"),
                          str(d) if isinstance(d, int) else "—", links])
         return table(["問題", "位置", "diff", "使う手法のページ"], rows) if rows else "（data/recent-abc.yaml に問題がない）"
 

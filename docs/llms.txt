@@ -2,7 +2,7 @@
 
 > AtCoder で黄色（レート 2000）を目指す学習者向けの、辞書として引く競技プログラミングの教材。手法・考察・データ構造・数学・C++ のページを分野ごとに置く。
 
-- 版：5992eaa5c05f（updated の最大：2026-10-29）。tools/gen_site.py が生成する
+- 版：9d105969f6d0（updated の最大：2026-10-29）。tools/gen_site.py が生成する
 - ページ数：353
 - 1 行が 1 ページ：「- [タイトル](URL)（id・レベル・分野・段階）：要約」
 - レベルは difficulty の帯：基礎 〜1199・水 1200〜1599・青 1600〜1999・黄 2000〜2399・発展 2400〜（概要だけ）。「—」はレベルを持たないページ
@@ -16,7 +16,7 @@
 - [基本テクニック](https://yuukougun.github.io/kyopro-atlas/index/basics/)：32 ページ。計算量の見積もり、全探索、二分探索、累積和・いもす法、尺取り法、ソート・座標圧縮、貪欲、半分全列挙、ダブリング、分割統治、周期性、bit 演算
 - [考察](https://yuukougun.github.io/kyopro-atlas/index/thinking/)：9 ページ。言い換え・主客転倒・寄与・余事象・偶奇・不変量・構築などの考察の型
 - [動的計画法](https://yuukougun.github.io/kyopro-atlas/index/dp/)：38 ページ。DP の考え方、列・区間・集合・桁・木の DP、DP の高速化
-- [グラフ](https://yuukougun.github.io/kyopro-atlas/index/graph/)：47 ページ。探索、最短路、有向グラフ、連結性と全域木、フロー
+- [グラフ](https://yuukougun.github.io/kyopro-atlas/index/graph/)：47 ページ。探索、最短路、有向グラフ、連結性と全域木、探索木と次数の性質、フロー
 - [木](https://yuukougun.github.io/kyopro-atlas/index/tree/)：26 ページ。木の性質、直径・LCA・オイラーツアー・マージテク・重心など
 - [データ構造](https://yuukougun.github.io/kyopro-atlas/index/ds/)：37 ページ。STL の応用、スタック・キュー、Union-Find、BIT・セグメント木、クエリ処理の工夫
 - [整数論・代数](https://yuukougun.github.io/kyopro-atlas/index/math/)：42 ページ。mod、素数・約数、GCD と合同式、floor、行列・線形代数、畳み込み

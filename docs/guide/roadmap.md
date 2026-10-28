@@ -116,78 +116,78 @@ abc451〜abc480 の D〜G の 120 問について、第三者の解説で使わ�
 
 abc451〜abc480 の E の 30 問で使われた手法を、ページの種類（kind の1つ目）で分けて多い順に並べる。かっこの数は、その位置でそのページを使った問題の数（1 のときは書かない）。
 
-| 種類 | 問題数 | ページ | 問題 |
+| 種類 | ページ | 問題 | 問題数 |
 | --- | --- | --- | --- |
-| 考察 | 11 | [一部を固定して数える](../thinking/fix-variable.md)（3）、[言い換えの典型](../thinking/reformulation.md)（2）、[主客転倒・寄与](../thinking/contribution.md)（2）、[偶奇に着目する](../thinking/parity.md)（2）、[余事象](../thinking/complement.md)、[構築問題の考え方](../thinking/construction.md)、[対称性・鳩の巣原理・場合分け](../thinking/symmetry-pigeonhole-casework.md)、[Σ の変形](../math/sigma-manipulation.md) | abc453_e・abc454_e・abc455_e・abc458_e・abc461_e・abc462_e・abc466_e・abc467_e・abc468_e・abc471_e・abc475_e |
-| 累積和・差分 | 10 | [累積和](../basics/prefix-sum.md)（5）、[いもす法](../basics/imos.md)（3）、[累積和と連想配列で区間を数える](../basics/prefix-sum-counting.md)（2） | abc452_e・abc453_e・abc455_e・abc464_e・abc466_e・abc468_e・abc469_e・abc473_e・abc474_e・abc477_e |
-| データ構造 | 4 | [セグメント木](../ds/segment-tree.md)（2）、[set・multiset・map の応用](../ds/ordered-set.md)、[Union-Find](../ds/union-find.md) | abc451_e・abc461_e・abc475_e・abc476_e |
-| 数え上げ | 4 | [二項係数の前計算](../comb/binomial-precompute.md)（4）、[数え上げの考え方](../comb/counting-mindset.md) | abc453_e・abc458_e・abc459_e・abc471_e |
-| 二分探索 | 3 | [二分探索](../basics/binary-search.md)（2）、[平均・中央値の最大化](../basics/fractional-binary-search.md) | abc457_e・abc469_e・abc480_e |
-| ソート・座標圧縮 | 3 | [ソートで考える](../basics/sorting-techniques.md)（2）、[イベントソートと平面走査の基本](../basics/event-sort.md) | abc457_e・abc467_e・abc474_e |
-| DP | 3 | [メモ化再帰](../dp/memoized-recursion.md)、[フェーズを状態に持つ DP](../dp/dp-phase.md)、[桁 DP](../dp/digit-dp.md) | abc465_e・abc466_e・abc470_e |
-| グラフ探索 | 3 | [閉路の検出と復元](../graph/cycle-detection.md)、[二部グラフ判定](../graph/bipartite-graph.md)、[トポロジカルソート](../graph/topological-sort.md)、[強連結成分分解（SCC）](../graph/scc.md) | abc456_e・abc472_e・abc478_e |
-| 最短路 | 3 | [ダイクストラ法](../graph/dijkstra.md)（2）、[状態を頂点にする](../graph/extended-dijkstra.md)（2） | abc456_e・abc463_e・abc477_e |
-| 木 | 3 | [根付き木と走査順](../tree/tree-traversal.md)（2）、[木の上の距離](../tree/tree-distance.md)、[葉から考える](../tree/leaf-first.md)、[辺で切って数える](../tree/tree-edge-contribution.md)、[木の構築・復元](../tree/tree-construction.md) | abc451_e・abc459_e・abc479_e |
-| 全探索 | 2 | [全探索の設計](../basics/brute-force.md)（2） | abc474_e・abc480_e |
-| 整数論 | 2 | [整数の割り算と余り](../math/integer-division.md)、[逆元と mod での割り算](../math/mod-inverse.md)、[桁と mod](../math/digit-and-mod.md)、[GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md) | abc460_e・abc468_e |
-| 計算量 | 1 | [調和級数と倍数の列挙](../math/harmonic-sum.md) | abc452_e |
-| 貪欲 | 1 | [貪欲法の考え方と正当性](../basics/greedy-basics.md) | abc473_e |
-| ダブリング・分割統治 | 1 | [周期性の検出](../basics/periodicity.md) | abc452_e |
-| 連結性・全域木 | 1 | [最小全域木](../graph/minimum-spanning-tree.md) | abc451_e |
-| 確率・期待値 | 1 | [最適戦略の期待値](../comb/optimal-strategy-expectation.md) | abc470_e |
+| 考察 | [一部を固定して数える](../thinking/fix-variable.md)（3）、[言い換えの典型](../thinking/reformulation.md)（2）、[主客転倒・寄与](../thinking/contribution.md)（2）、[偶奇に着目する](../thinking/parity.md)（2）、[余事象](../thinking/complement.md)、[構築問題の考え方](../thinking/construction.md)、[対称性・鳩の巣原理・場合分け](../thinking/symmetry-pigeonhole-casework.md)、[Σ の変形](../math/sigma-manipulation.md) | ABC453&nbsp;E・ABC454&nbsp;E・ABC455&nbsp;E・ABC458&nbsp;E・ABC461&nbsp;E・ABC462&nbsp;E・ABC466&nbsp;E・ABC467&nbsp;E・ABC468&nbsp;E・ABC471&nbsp;E・ABC475&nbsp;E | 11 |
+| 累積和・差分 | [累積和](../basics/prefix-sum.md)（5）、[いもす法](../basics/imos.md)（3）、[累積和と連想配列で区間を数える](../basics/prefix-sum-counting.md)（2） | ABC452&nbsp;E・ABC453&nbsp;E・ABC455&nbsp;E・ABC464&nbsp;E・ABC466&nbsp;E・ABC468&nbsp;E・ABC469&nbsp;E・ABC473&nbsp;E・ABC474&nbsp;E・ABC477&nbsp;E | 10 |
+| データ構造 | [セグメント木](../ds/segment-tree.md)（2）、[set・multiset・map の応用](../ds/ordered-set.md)、[Union-Find](../ds/union-find.md) | ABC451&nbsp;E・ABC461&nbsp;E・ABC475&nbsp;E・ABC476&nbsp;E | 4 |
+| 数え上げ | [二項係数の前計算](../comb/binomial-precompute.md)（4）、[数え上げの考え方](../comb/counting-mindset.md) | ABC453&nbsp;E・ABC458&nbsp;E・ABC459&nbsp;E・ABC471&nbsp;E | 4 |
+| 二分探索 | [二分探索](../basics/binary-search.md)（2）、[平均・中央値の最大化](../basics/fractional-binary-search.md) | ABC457&nbsp;E・ABC469&nbsp;E・ABC480&nbsp;E | 3 |
+| ソート・座標圧縮 | [ソートで考える](../basics/sorting-techniques.md)（2）、[イベントソートと平面走査の基本](../basics/event-sort.md) | ABC457&nbsp;E・ABC467&nbsp;E・ABC474&nbsp;E | 3 |
+| DP | [メモ化再帰](../dp/memoized-recursion.md)、[フェーズを状態に持つ DP](../dp/dp-phase.md)、[桁 DP](../dp/digit-dp.md) | ABC465&nbsp;E・ABC466&nbsp;E・ABC470&nbsp;E | 3 |
+| グラフ探索 | [閉路の検出と復元](../graph/cycle-detection.md)、[二部グラフ判定](../graph/bipartite-graph.md)、[トポロジカルソート](../graph/topological-sort.md)、[強連結成分分解（SCC）](../graph/scc.md) | ABC456&nbsp;E・ABC472&nbsp;E・ABC478&nbsp;E | 3 |
+| 最短路 | [ダイクストラ法](../graph/dijkstra.md)（2）、[状態を頂点にする](../graph/extended-dijkstra.md)（2） | ABC456&nbsp;E・ABC463&nbsp;E・ABC477&nbsp;E | 3 |
+| 木 | [根付き木と走査順](../tree/tree-traversal.md)（2）、[木の上の距離](../tree/tree-distance.md)、[葉から考える](../tree/leaf-first.md)、[辺で切って数える](../tree/tree-edge-contribution.md)、[木の構築・復元](../tree/tree-construction.md) | ABC451&nbsp;E・ABC459&nbsp;E・ABC479&nbsp;E | 3 |
+| 全探索 | [全探索の設計](../basics/brute-force.md)（2） | ABC474&nbsp;E・ABC480&nbsp;E | 2 |
+| 整数論 | [整数の割り算と余り](../math/integer-division.md)、[逆元と mod での割り算](../math/mod-inverse.md)、[桁と mod](../math/digit-and-mod.md)、[GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md) | ABC460&nbsp;E・ABC468&nbsp;E | 2 |
+| 計算量 | [調和級数と倍数の列挙](../math/harmonic-sum.md) | ABC452&nbsp;E | 1 |
+| 貪欲 | [貪欲法の考え方と正当性](../basics/greedy-basics.md) | ABC473&nbsp;E | 1 |
+| ダブリング・分割統治 | [周期性の検出](../basics/periodicity.md) | ABC452&nbsp;E | 1 |
+| 連結性・全域木 | [最小全域木](../graph/minimum-spanning-tree.md) | ABC451&nbsp;E | 1 |
+| 確率・期待値 | [最適戦略の期待値](../comb/optimal-strategy-expectation.md) | ABC470&nbsp;E | 1 |
 
 ### F 問題（青の帯） {#recent-positions-f}
 
 abc451〜abc480 の F の 30 問で使われた手法を、ページの種類（kind の1つ目）で分けて多い順に並べる。かっこの数は、その位置でそのページを使った問題の数（1 のときは書かない）。
 
-| 種類 | 問題数 | ページ | 問題 |
+| 種類 | ページ | 問題 | 問題数 |
 | --- | --- | --- | --- |
-| データ構造 | 11 | [転倒数](../ds/inversion-number.md)（2）、[遅延セグメント木](../ds/lazy-segment-tree.md)（2）、[セグメント木に何を載せるか](../ds/segment-tree-monoids.md)（2）、[set・multiset・map の応用](../ds/ordered-set.md)、[重み付き Union-Find](../ds/weighted-union-find.md)、[BIT（Fenwick Tree）](../ds/fenwick-tree.md)、[セグメント木](../ds/segment-tree.md)、[セグメント木上の二分探索](../ds/segment-tree-binary-search.md)、[遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md) | abc451_f・abc452_f・abc455_f・abc456_f・abc460_f・abc466_f・abc467_f・abc473_f・abc477_f・abc478_f・abc479_f |
-| 考察 | 9 | [言い換えの典型](../thinking/reformulation.md)（4）、[対称性・鳩の巣原理・場合分け](../thinking/symmetry-pigeonhole-casework.md)（2）、[主客転倒・寄与](../thinking/contribution.md)、[後ろから・逆順に考える](../thinking/reverse-thinking.md)、[構築問題の考え方](../thinking/construction.md)、[Σ の変形](../math/sigma-manipulation.md) | abc453_f・abc454_f・abc455_f・abc457_f・abc459_f・abc463_f・abc466_f・abc479_f・abc480_f |
-| DP | 7 | [DP の状態の設計](../dp/dp-state-design.md)（2）、[ナップサック DP](../dp/knapsack-01.md)、[グリッド上の DP](../dp/dp-grid.md)、[最長増加部分列](../dp/lis.md)、[bitDP](../dp/bit-dp.md)、[照合オートマトン上の DP](../string/string-automaton-dp.md) | abc457_f・abc458_f・abc461_f・abc462_f・abc468_f・abc476_f・abc480_f |
-| 累積和・差分 | 6 | [累積和](../basics/prefix-sum.md)（2）、[2 次元累積和](../basics/prefix-sum-2d.md)（2）、[差分列への言い換え](../basics/difference-sequence.md)（2）、[いもす法](../basics/imos.md) | abc454_f・abc459_f・abc465_f・abc472_f・abc473_f・abc475_f |
-| 数え上げ | 5 | [二項係数の前計算](../comb/binomial-precompute.md)、[数え上げの考え方](../comb/counting-mindset.md)、[多項係数](../comb/multinomial-coefficient.md)、[包除原理](../comb/inclusion-exclusion.md)、[約数・倍数のゼータ変換とメビウス変換](../comb/zeta-mobius-divisor.md)、[置換の偶奇](../comb/permutation-parity.md) | abc457_f・abc463_f・abc470_f・abc474_f・abc475_f |
-| 貪欲 | 4 | [貪欲法の考え方と正当性](../basics/greedy-basics.md)（3）、[交換論法と比較関数の設計](../basics/exchange-argument.md)（2） | abc454_f・abc467_f・abc468_f・abc471_f |
-| 木 | 3 | [木の直径と最遠点](../tree/tree-diameter.md)、[木の重心](../tree/tree-centroid.md)、[木の構築・復元](../tree/tree-construction.md)、[最小共通祖先（LCA）](../tree/lca.md) | abc453_f・abc460_f・abc478_f |
-| 尺取り・スライド窓 | 2 | [尺取り法](../basics/two-pointers.md)（2） | abc452_f・abc464_f |
-| グラフ探索 | 2 | [連結成分](../graph/connected-components.md)、[二部グラフ判定](../graph/bipartite-graph.md) | abc451_f・abc470_f |
-| 線形代数・行列 | 2 | [行列累乗](../math/matrix-power.md)（2） | abc456_f・abc458_f |
-| 確率・期待値 | 2 | [確率の基本](../comb/probability-basics.md)、[期待値の線形性と指示確率変数](../comb/linearity-of-expectation.md)、[対称性で確率を求める](../comb/probability-symmetry.md) | abc463_f・abc464_f |
-| 幾何 | 2 | [ベクトルと外積](../geometry/geometry-vectors.md)、[マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md) | abc472_f・abc476_f |
-| 計算量 | 1 | [調和級数と倍数の列挙](../math/harmonic-sum.md) | abc469_f |
-| 全探索 | 1 | [半分全列挙](../basics/meet-in-the-middle.md) | abc464_f |
-| ソート・座標圧縮 | 1 | [座標圧縮](../basics/coordinate-compression.md) | abc467_f |
-| 連結性・全域木 | 1 | [最小全域木](../graph/minimum-spanning-tree.md) | abc469_f |
-| クエリ処理の工夫 | 1 | [クエリの先読み](../ds/offline-queries.md)、[平面走査](../ds/sweep-line-2d.md) | abc477_f |
-| 整数論 | 1 | [約数列挙と素数判定](../math/divisor-enum.md)、[約数の個数の上界と高度合成数](../math/divisor-count-bound.md) | abc461_f |
-| 文字列 | 1 | [Aho-Corasick 法](../string/aho-corasick.md) | abc458_f |
+| データ構造 | [転倒数](../ds/inversion-number.md)（2）、[遅延セグメント木](../ds/lazy-segment-tree.md)（2）、[セグメント木に何を載せるか](../ds/segment-tree-monoids.md)（2）、[set・multiset・map の応用](../ds/ordered-set.md)、[重み付き Union-Find](../ds/weighted-union-find.md)、[BIT（Fenwick Tree）](../ds/fenwick-tree.md)、[セグメント木](../ds/segment-tree.md)、[セグメント木上の二分探索](../ds/segment-tree-binary-search.md)、[遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md) | ABC451&nbsp;F・ABC452&nbsp;F・ABC455&nbsp;F・ABC456&nbsp;F・ABC460&nbsp;F・ABC466&nbsp;F・ABC467&nbsp;F・ABC473&nbsp;F・ABC477&nbsp;F・ABC478&nbsp;F・ABC479&nbsp;F | 11 |
+| 考察 | [言い換えの典型](../thinking/reformulation.md)（4）、[対称性・鳩の巣原理・場合分け](../thinking/symmetry-pigeonhole-casework.md)（2）、[主客転倒・寄与](../thinking/contribution.md)、[後ろから・逆順に考える](../thinking/reverse-thinking.md)、[構築問題の考え方](../thinking/construction.md)、[Σ の変形](../math/sigma-manipulation.md) | ABC453&nbsp;F・ABC454&nbsp;F・ABC455&nbsp;F・ABC457&nbsp;F・ABC459&nbsp;F・ABC463&nbsp;F・ABC466&nbsp;F・ABC479&nbsp;F・ABC480&nbsp;F | 9 |
+| DP | [DP の状態の設計](../dp/dp-state-design.md)（2）、[ナップサック DP](../dp/knapsack-01.md)、[グリッド上の DP](../dp/dp-grid.md)、[最長増加部分列](../dp/lis.md)、[bitDP](../dp/bit-dp.md)、[照合オートマトン上の DP](../string/string-automaton-dp.md) | ABC457&nbsp;F・ABC458&nbsp;F・ABC461&nbsp;F・ABC462&nbsp;F・ABC468&nbsp;F・ABC476&nbsp;F・ABC480&nbsp;F | 7 |
+| 累積和・差分 | [累積和](../basics/prefix-sum.md)（2）、[2 次元累積和](../basics/prefix-sum-2d.md)（2）、[差分列への言い換え](../basics/difference-sequence.md)（2）、[いもす法](../basics/imos.md) | ABC454&nbsp;F・ABC459&nbsp;F・ABC465&nbsp;F・ABC472&nbsp;F・ABC473&nbsp;F・ABC475&nbsp;F | 6 |
+| 数え上げ | [二項係数の前計算](../comb/binomial-precompute.md)、[数え上げの考え方](../comb/counting-mindset.md)、[多項係数](../comb/multinomial-coefficient.md)、[包除原理](../comb/inclusion-exclusion.md)、[約数・倍数のゼータ変換とメビウス変換](../comb/zeta-mobius-divisor.md)、[置換の偶奇](../comb/permutation-parity.md) | ABC457&nbsp;F・ABC463&nbsp;F・ABC470&nbsp;F・ABC474&nbsp;F・ABC475&nbsp;F | 5 |
+| 貪欲 | [貪欲法の考え方と正当性](../basics/greedy-basics.md)（3）、[交換論法と比較関数の設計](../basics/exchange-argument.md)（2） | ABC454&nbsp;F・ABC467&nbsp;F・ABC468&nbsp;F・ABC471&nbsp;F | 4 |
+| 木 | [木の直径と最遠点](../tree/tree-diameter.md)、[木の重心](../tree/tree-centroid.md)、[木の構築・復元](../tree/tree-construction.md)、[最小共通祖先（LCA）](../tree/lca.md) | ABC453&nbsp;F・ABC460&nbsp;F・ABC478&nbsp;F | 3 |
+| 尺取り・スライド窓 | [尺取り法](../basics/two-pointers.md)（2） | ABC452&nbsp;F・ABC464&nbsp;F | 2 |
+| グラフ探索 | [連結成分](../graph/connected-components.md)、[二部グラフ判定](../graph/bipartite-graph.md) | ABC451&nbsp;F・ABC470&nbsp;F | 2 |
+| 線形代数・行列 | [行列累乗](../math/matrix-power.md)（2） | ABC456&nbsp;F・ABC458&nbsp;F | 2 |
+| 確率・期待値 | [確率の基本](../comb/probability-basics.md)、[期待値の線形性と指示確率変数](../comb/linearity-of-expectation.md)、[対称性で確率を求める](../comb/probability-symmetry.md) | ABC463&nbsp;F・ABC464&nbsp;F | 2 |
+| 幾何 | [ベクトルと外積](../geometry/geometry-vectors.md)、[マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md) | ABC472&nbsp;F・ABC476&nbsp;F | 2 |
+| 計算量 | [調和級数と倍数の列挙](../math/harmonic-sum.md) | ABC469&nbsp;F | 1 |
+| 全探索 | [半分全列挙](../basics/meet-in-the-middle.md) | ABC464&nbsp;F | 1 |
+| ソート・座標圧縮 | [座標圧縮](../basics/coordinate-compression.md) | ABC467&nbsp;F | 1 |
+| 連結性・全域木 | [最小全域木](../graph/minimum-spanning-tree.md) | ABC469&nbsp;F | 1 |
+| クエリ処理の工夫 | [クエリの先読み](../ds/offline-queries.md)、[平面走査](../ds/sweep-line-2d.md) | ABC477&nbsp;F | 1 |
+| 整数論 | [約数列挙と素数判定](../math/divisor-enum.md)、[約数の個数の上界と高度合成数](../math/divisor-count-bound.md) | ABC461&nbsp;F | 1 |
+| 文字列 | [Aho-Corasick 法](../string/aho-corasick.md) | ABC458&nbsp;F | 1 |
 
 ### G 問題（黄・発展の帯） {#recent-positions-g}
 
 abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（kind の1つ目）で分けて多い順に並べる。かっこの数は、その位置でそのページを使った問題の数（1 のときは書かない）。
 
-| 種類 | 問題数 | ページ | 問題 |
+| 種類 | ページ | 問題 | 問題数 |
 | --- | --- | --- | --- |
-| DP | 8 | [最長増加部分列](../dp/lis.md)（2）、[挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md)（2）、[桁 DP](../dp/digit-dp.md)、[桁 DP の応用](../dp/digit-dp-advanced.md)、[インライン DP](../dp/inline-dp.md)、[Monge 性による DP の高速化](../dp/monge.md)、[Alien DP](../dp/alien-dp.md)、[Slope Trick](../dp/slope-trick.md) | abc457_g・abc458_g・abc464_g・abc466_g・abc468_g・abc473_g・abc476_g・abc480_g |
-| データ構造 | 6 | [遅延セグメント木](../ds/lazy-segment-tree.md)（2）、[マージテク](../tree/small-to-large.md)、[単調スタックとスライド最小値](../ds/monotonic-stack.md)、[BIT（Fenwick Tree）](../ds/fenwick-tree.md)、[セグメント木](../ds/segment-tree.md)、[永続データ構造](../ds/persistent-data-structures.md)、[マージソート木](../ds/merge-sort-tree.md) | abc453_g・abc454_g・abc460_g・abc467_g・abc470_g・abc480_g |
-| クエリ処理の工夫 | 4 | [クエリの先読み](../ds/offline-queries.md)（3）、[Mo's algorithm](../ds/mo-algorithm.md) | abc453_g・abc463_g・abc467_g・abc477_g |
-| 数え上げ | 4 | [包除原理](../comb/inclusion-exclusion.md)（2）、[二項係数の意味と性質](../comb/binomial-coefficient.md)、[二項係数の前計算](../comb/binomial-precompute.md)、[重複組合せ](../comb/stars-and-bars.md)、[数え上げの考え方](../comb/counting-mindset.md) | abc456_g・abc462_g・abc463_g・abc476_g |
-| 考察 | 4 | [主客転倒・寄与](../thinking/contribution.md)（2）、[偶奇に着目する](../thinking/parity.md)（2）、[言い換えの典型](../thinking/reformulation.md)、[構築問題の考え方](../thinking/construction.md) | abc459_g・abc470_g・abc471_g・abc474_g |
-| ダブリング・分割統治 | 3 | [分割統治](../basics/divide-and-conquer.md)（2）、[再帰的な構造](../basics/recursion-structure.md) | abc451_g・abc476_g・abc478_g |
-| 木 | 3 | [オイラーツアー](../tree/euler-tour.md)（2）、[最小共通祖先（LCA）](../tree/lca.md)、[HL 分解](../tree/hld.md) | abc453_g・abc460_g・abc477_g |
-| 畳み込み・多項式 | 3 | [畳み込みの使い方](../math/convolution-ntt.md)、[分割統治 FFT・オンライン畳み込み](../math/online-convolution.md)、[形式的冪級数と多項式の演算](../math/fps-basics.md) | abc462_g・abc471_g・abc473_g |
-| 幾何 | 3 | [偏角ソート](../geometry/argument-sort.md)、[マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md)、[凸包と凸多角形](../geometry/convex-hull.md)、[発展の幾何](../geometry/advanced-geometry.md) | abc457_g・abc478_g・abc479_g |
-| 尺取り・スライド窓 | 2 | [尺取り法](../basics/two-pointers.md)（2） | abc455_g・abc470_g |
-| フロー・マッチング | 2 | [最小カット](../graph/min-cut.md)、[燃やす埋める](../graph/project-selection.md)、[二部マッチング](../graph/bipartite-matching.md)、[König の定理](../graph/konig-theorem.md) | abc461_g・abc472_g |
-| 整数論 | 2 | [約数の個数の上界と高度合成数](../math/divisor-count-bound.md)、[拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md) | abc459_g・abc475_g |
-| 線形代数・行列 | 2 | [行列累乗](../math/matrix-power.md)、[XOR 基底](../math/xor-basis.md) | abc451_g・abc469_g |
-| 確率・期待値 | 2 | [対称性で確率を求める](../comb/probability-symmetry.md)、[確率 DP](../comb/probability-dp.md) | abc463_g・abc473_g |
-| 二分探索 | 1 | [答えで二分探索](../basics/binary-search-answer.md) | abc458_g |
-| 累積和・差分 | 1 | [累積和](../basics/prefix-sum.md) | abc479_g |
-| 貪欲 | 1 | [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md) | abc464_g |
-| 文字列 | 1 | [ランレングス圧縮](../basics/run-length-encoding.md)、[Suffix Array と LCP 配列](../string/suffix-array.md)、[Suffix Automaton と発展の文字列アルゴリズム](../string/suffix-automaton.md) | abc452_g |
-| ハッシュ・乱択 | 1 | [集合・多重集合のハッシュ](../string/hashing-for-sets.md) | abc455_g |
-| ビット演算 | 1 | [bit 演算の基本と XOR の性質](../basics/bit-operations.md) | abc476_g |
+| DP | [最長増加部分列](../dp/lis.md)（2）、[挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md)（2）、[桁 DP](../dp/digit-dp.md)、[桁 DP の応用](../dp/digit-dp-advanced.md)、[インライン DP](../dp/inline-dp.md)、[Monge 性による DP の高速化](../dp/monge.md)、[Alien DP](../dp/alien-dp.md)、[Slope Trick](../dp/slope-trick.md) | ABC457&nbsp;G・ABC458&nbsp;G・ABC464&nbsp;G・ABC466&nbsp;G・ABC468&nbsp;G・ABC473&nbsp;G・ABC476&nbsp;G・ABC480&nbsp;G | 8 |
+| データ構造 | [遅延セグメント木](../ds/lazy-segment-tree.md)（2）、[マージテク](../tree/small-to-large.md)、[単調スタックとスライド最小値](../ds/monotonic-stack.md)、[BIT（Fenwick Tree）](../ds/fenwick-tree.md)、[セグメント木](../ds/segment-tree.md)、[永続データ構造](../ds/persistent-data-structures.md)、[マージソート木](../ds/merge-sort-tree.md) | ABC453&nbsp;G・ABC454&nbsp;G・ABC460&nbsp;G・ABC467&nbsp;G・ABC470&nbsp;G・ABC480&nbsp;G | 6 |
+| クエリ処理の工夫 | [クエリの先読み](../ds/offline-queries.md)（3）、[Mo's algorithm](../ds/mo-algorithm.md) | ABC453&nbsp;G・ABC463&nbsp;G・ABC467&nbsp;G・ABC477&nbsp;G | 4 |
+| 数え上げ | [包除原理](../comb/inclusion-exclusion.md)（2）、[二項係数の意味と性質](../comb/binomial-coefficient.md)、[二項係数の前計算](../comb/binomial-precompute.md)、[重複組合せ](../comb/stars-and-bars.md)、[数え上げの考え方](../comb/counting-mindset.md) | ABC456&nbsp;G・ABC462&nbsp;G・ABC463&nbsp;G・ABC476&nbsp;G | 4 |
+| 考察 | [主客転倒・寄与](../thinking/contribution.md)（2）、[偶奇に着目する](../thinking/parity.md)（2）、[言い換えの典型](../thinking/reformulation.md)、[構築問題の考え方](../thinking/construction.md) | ABC459&nbsp;G・ABC470&nbsp;G・ABC471&nbsp;G・ABC474&nbsp;G | 4 |
+| ダブリング・分割統治 | [分割統治](../basics/divide-and-conquer.md)（2）、[再帰的な構造](../basics/recursion-structure.md) | ABC451&nbsp;G・ABC476&nbsp;G・ABC478&nbsp;G | 3 |
+| 木 | [オイラーツアー](../tree/euler-tour.md)（2）、[最小共通祖先（LCA）](../tree/lca.md)、[HL 分解](../tree/hld.md) | ABC453&nbsp;G・ABC460&nbsp;G・ABC477&nbsp;G | 3 |
+| 畳み込み・多項式 | [畳み込みの使い方](../math/convolution-ntt.md)、[分割統治 FFT・オンライン畳み込み](../math/online-convolution.md)、[形式的冪級数と多項式の演算](../math/fps-basics.md) | ABC462&nbsp;G・ABC471&nbsp;G・ABC473&nbsp;G | 3 |
+| 幾何 | [偏角ソート](../geometry/argument-sort.md)、[マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md)、[凸包と凸多角形](../geometry/convex-hull.md)、[発展の幾何](../geometry/advanced-geometry.md) | ABC457&nbsp;G・ABC478&nbsp;G・ABC479&nbsp;G | 3 |
+| 尺取り・スライド窓 | [尺取り法](../basics/two-pointers.md)（2） | ABC455&nbsp;G・ABC470&nbsp;G | 2 |
+| フロー・マッチング | [最小カット](../graph/min-cut.md)、[燃やす埋める](../graph/project-selection.md)、[二部マッチング](../graph/bipartite-matching.md)、[König の定理](../graph/konig-theorem.md) | ABC461&nbsp;G・ABC472&nbsp;G | 2 |
+| 整数論 | [約数の個数の上界と高度合成数](../math/divisor-count-bound.md)、[拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md) | ABC459&nbsp;G・ABC475&nbsp;G | 2 |
+| 線形代数・行列 | [行列累乗](../math/matrix-power.md)、[XOR 基底](../math/xor-basis.md) | ABC451&nbsp;G・ABC469&nbsp;G | 2 |
+| 確率・期待値 | [対称性で確率を求める](../comb/probability-symmetry.md)、[確率 DP](../comb/probability-dp.md) | ABC463&nbsp;G・ABC473&nbsp;G | 2 |
+| 二分探索 | [答えで二分探索](../basics/binary-search-answer.md) | ABC458&nbsp;G | 1 |
+| 累積和・差分 | [累積和](../basics/prefix-sum.md) | ABC479&nbsp;G | 1 |
+| 貪欲 | [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md) | ABC464&nbsp;G | 1 |
+| 文字列 | [ランレングス圧縮](../basics/run-length-encoding.md)、[Suffix Array と LCP 配列](../string/suffix-array.md)、[Suffix Automaton と発展の文字列アルゴリズム](../string/suffix-automaton.md) | ABC452&nbsp;G | 1 |
+| ハッシュ・乱択 | [集合・多重集合のハッシュ](../string/hashing-for-sets.md) | ABC455&nbsp;G | 1 |
+| ビット演算 | [bit 演算の基本と XOR の性質](../basics/bit-operations.md) | ABC476&nbsp;G | 1 |
 
 <!-- textlint-enable -->
 <!-- gen:end recent-positions -->
