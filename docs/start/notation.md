@@ -28,7 +28,7 @@ sections:
   - {title: コード片の約束, anchor: code}
   - {title: 用語の表記, anchor: terms}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -58,7 +58,7 @@ front matter と索引の文字には数式を使わず、`O(N log N)`・`O((N+M
 
 区間は[半開区間](../guide/glossary.md#half-open-interval) $[l, r)$ を基本にする。$[l, r)$ は $l$ 以上 $r$ 未満の整数 $l, l + 1, \dots, r - 1$ を表し、$r$ は含まない。
 
-![長さ 8 の列の位置 2, 3, 4 に色を付け、上に [2, 5) の括弧を付けた図。箱の下に境目の番号 0〜8 を書き、l = 2 と r = 5 は境目を指す。個数は r − l = 3、[2, 3) と [3, 5) に分けても重ならず、l = r なら空の区間になる](../img/notation/half-open.svg)
+![長さ 8 の列の位置 2, 3, 4 に色を付け、上に \[2, 5) の括弧を付けた図。箱の下に境目の番号 0〜8 を書き、l = 2 と r = 5 は境目を指す。個数は r − l = 3、\[2, 3) と \[3, 5) に分けても重ならず、l = r なら空の区間になる](../img/notation/half-open.svg)
 
 半開区間を基本にするのは、境目の計算が場合分けなしで書けるからである。
 

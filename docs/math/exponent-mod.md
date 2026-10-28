@@ -26,7 +26,7 @@ sections:
   - {title: 底が p の倍数の場合（答えは 0、指数が 0 なら 1）, anchor: base-multiple}
   - {title: 一般の法：オイラーの定理と、互いに素でないときの一般化（累乗の塔）, anchor: euler-theorem, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -144,7 +144,7 @@ $a$ と $m$ が互いに素でないときは、この定理は成り立たな�
 --8<-- "exponent-mod/tower-general.cpp:core"
 ```
 
-$\varphi$ の試し割りは段ごとに $O(\sqrt{m_j})$（$m_j$ はその段の法）かかる。法は 2 段ごとに半分以下になるので、合計は等比級数で抑えられて $O(\sqrt{m})$ である。頭打ちの値の計算が $O(k)$ なので、全体で $O(k + \sqrt{m})$ になる。同じ底を $B$ 段積んだ塔（tetration、$A \uparrow\uparrow B$）なら、$A \uparrow\uparrow 0 = 1$ と定める。$A = 0$ なら $B$ の偶奇で 1 か 0（$0 \uparrow\uparrow 2 = 0^0 = 1$、$0 \uparrow\uparrow 3 = 0^1 = 0$）、$A = 1$ なら 1 と先に分けておく。$A \ge 2$ なら頭打ちの値はすぐに上限に達するので、高さを $\min(B, \text{法が 1 になるまでの段数より数段多い段数})$ に縮めても答えは変わらない。塔を配列に展開せず、塔の下（外側）から $O(\log m)$ 段だけを扱えばよい。[Library Checker の Tetration Mod](https://judge.yosupo.jp/problem/tetration_mod) で確かめられる。
+$\varphi$ の試し割りは段ごとに $O(\sqrt{m_j})$（$m_j$ はその段の法）かかる。法は 2 段ごとに半分以下になるので、合計は等比級数で抑えられて $O(\sqrt{m})$ である。頭打ちの値の計算が $O(k)$ なので、全体で $O(k + \sqrt{m})$ になる。同じ底を $B$ 段積んだ塔（tetration、$A \uparrow\uparrow B$）なら、$A \uparrow\uparrow 0 = 1$ と定める。$A = 0$ なら $B$ の偶奇で 1 か 0（$0 \uparrow\uparrow 2 = 0^0 = 1$、$0 \uparrow\uparrow 3 = 0^1 = 0$）、$A = 1$ なら 1 と先に分けておく。$A \ge 2$ なら頭打ちの値はすぐに上限に達する。そのため、法が 1 になるまでの段数より数段多い段数を $B_0$ とすると、高さを $\min(B, B_0)$ に縮めても答えは変わらない。塔を配列に展開せず、塔の下（外側）から $O(\log m)$ 段だけを扱えばよい。[Library Checker の Tetration Mod](https://judge.yosupo.jp/problem/tetration_mod) で確かめられる。
 
 ## 落とし穴 {#pitfalls}
 
