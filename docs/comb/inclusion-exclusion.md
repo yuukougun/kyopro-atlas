@@ -29,7 +29,7 @@ sections:
   - {title: 使い分け：余事象・包除 DP・約数包除, anchor: when-to-use}
   - {title: min-max 包除（全種類がそろうまでの期待値）, anchor: min-max, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -80,7 +80,7 @@ $$
 30 - (15 + 10 + 6) + (5 + 3 + 2) - 1 = 8
 $$
 
-実際に 1・7・11・13・17・19・23・29 の 8 個である。次の動く図では、3 つの集合を順に足し引きして、足しすぎた領域と引きすぎた領域が打ち消し合う様子を 1 段ずつ追える。
+実際に 1・7・11・13・17・19・23・29 の 8 個である。次の動く図では、$\lvert S \rvert$ の小さい順に全体・1 つの集合・2 つの共通部分・3 つの共通部分を足し引きして、足しすぎた領域と引きすぎた領域が打ち消し合う様子を 1 段ずつ追える。
 
 <div class="kp-viz" data-viz="inclusion-exclusion-venn" data-config='{"n": 30, "divisors": [2, 3, 5]}'></div>
 
