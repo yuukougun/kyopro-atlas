@@ -33,7 +33,7 @@ sections:
   - {title: '盤面の回転・反転・平行移動 → 添字の対応の式・全部試す（rotation-transform, brute-force）', anchor: rotation}
   - {title: ドミノの配置・隣り合わないマスの選び方 → 二部マッチング・プロファイル DP, anchor: tiling}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -88,8 +88,8 @@ updated: 2026-10-22
 | 長方形の和・長方形への加算 | 2 次元累積和・2 次元いもす法 | [2 次元累積和](../basics/prefix-sum-2d.md)、[いもす法](../basics/imos.md#imos-2d) | ABC331 D |
 | 行と列を選ぶ・行や列への操作 | 行と列を独立に考える | [座標圧縮](../basics/coordinate-compression.md)、[マンハッタン距離](../geometry/manhattan-chebyshev.md#axis-independence) | ABC213 C |
 | すべてのマスを通れるか・敷き詰められるか | 市松模様の偶奇 | [偶奇](../thinking/parity.md#checkerboard) | ABC454 E |
-| 斜めの移動・ひし形の範囲 | 45 度回転・斜めの番号 | [マンハッタン距離とチェビシェフ距離](../geometry/manhattan-chebyshev.md) | ABC178 E |
-| 回転・平行移動させて一致させる | 添字の式・全部試す | [回転と座標変換](../geometry/rotation-transform.md#grid-rotation)、[全探索](../basics/brute-force.md#move-board) | ABC322 D |
+| 斜めの移動・ひし形の範囲 | 45 度回転・斜めの番号 | [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md) | ABC178 E |
+| 回転・平行移動させて一致させる | 添字の式・全部試す | [回転・平行移動・アフィン変換](../geometry/rotation-transform.md#grid-rotation)、[全探索](../basics/brute-force.md#move-board) | ABC322 D |
 | ドミノの最大配置・隣り合わないマスの選び方 | 二部マッチング・プロファイル DP | [二部マッチング](../graph/bipartite-matching.md)、[プロファイル DP](../dp/broken-profile-dp.md) | ABC204 F |
 
 問題へのリンクは、各ページの例題・練習問題の囲みにある。

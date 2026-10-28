@@ -34,7 +34,7 @@ sections:
   - {title: 2 つの集合が一致するか → 乱数の XOR によるハッシュ（hashing-for-sets）, anchor: set-hash}
   - {title: 添字の XOR で畳み込む → アダマール変換（hadamard-transform）, anchor: xor-convolution}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -98,7 +98,7 @@ XOR の問題で使う性質は、次の 2 つと、そこから出る 2 つの�
 | 小さいグリッドの経路の XOR | 対角線で分ける半分全列挙（打消） | [半分全列挙](../basics/meet-in-the-middle.md#grid-diagonal) | ABC271 F |
 | 石取りゲームの勝敗 | Nim・Grundy 数（独立・偶奇） | [Nim](../comb/nim.md#bouton)、[Grundy 数](../comb/grundy-number.md#sum) | 鉄則本 A33・A34、ABC368 F |
 | 2 つの集合が一致するか | 乱数の XOR によるハッシュ（打消） | [集合のハッシュ](../string/hashing-for-sets.md#xor-vs-sum) | ABC250 E、ABC367 F |
-| 添字の XOR で畳み込む | アダマール変換（線形） | [アダマール変換](../math/hadamard-transform.md#transform) | ABC212 H |
+| 添字の XOR で畳み込む | アダマール変換（線形） | [XOR 畳み込み](../math/hadamard-transform.md#transform) | ABC212 H |
 | 列全体を同じ値で XOR したものを探す | 隣どうしの XOR の列で照合（打消） | [KMP 法](../string/kmp.md#abc150_f) | ABC150 F |
 
 代表の問題は行き先のページの例題・練習・力試しにあり、リンクは行の節から張った。このページに載せた問題は[例題](#examples)と[練習問題](#practice)の囲みにある。

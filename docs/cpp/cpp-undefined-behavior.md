@@ -29,7 +29,7 @@ sections:
   - {title: 不具合を探すビルドを cph とは別に用意する, anchor: debug-build}
   - {title: assert で WA を RE に変えて気づく（AtCoder では NDEBUG が付かない）, anchor: assert}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 cpp_std: null
 gcc_min: null
 atcoder: null
@@ -98,7 +98,7 @@ $x = 1$ のとき、`-O0` では 31 回で止まり 31 と出る。`-O2` では�
 範囲外に書いた値は、隣にある別の変数や、メモリの管理に使う領域を壊す。壊れた場所によって、すぐ落ちる・ずっと後で落ちる・黙って答えが変わる、のどれにもなる。「Segmentation fault にならないから範囲内」とは言えない。
 
 - **見つけ方**：`-D_GLIBCXX_ASSERTIONS` を付けると、`vector` の `[]` で `Assertion '__n < this->size()' failed.` と出て止まる。生の配列（`int c[3]`）はこの検査の対象外である。生の配列は `-fsanitize=address`（`global-buffer-overflow` など）か `-fsanitize=undefined`（`index 3 out of bounds`。大きさが型で分かる配列だけ）で見つかる
-- **版**：GCC 15 から、最適化なし（`-O0`、VS Code の `-g` だけのビルドもこれ）では `_GLIBCXX_ASSERTIONS` が自動で付く。手元の g++-15 の `-O0` では、上のコードが何も付けずに止まった。g++-13 の `-O0` と、`-O2`（AtCoder・cph）では止まらない
+- **版**：GCC 15 から、最適化なし（`-O0`、VS Code の `-g` だけのビルドもこれ）では `_GLIBCXX_ASSERTIONS` が自動で付く。手元の g++-15 の `-O0` では、上のコードが何も付けずに止まった。g++-13 の `-O0` と、AtCoder や手元の [cph](../cpp/cpp-macros-template-file.md#bundling-tools)（VS Code の拡張 Competitive Programming Helper）でふだん使う `-O2` では止まらない
 - **落とし穴**：`a.at(i)` は範囲外で例外を投げるので止まるが、解説コードではほとんど使わない。`[]` のまま、手元でだけ検査を付けるほうが速さを失わない
 
 ## 未初期化変数：手元では不定、AtCoder では 0 になる（-Wall は配列の未初期化を見落とす） {#uninitialized}
@@ -273,7 +273,7 @@ AtCoder では動くが、古い環境や解説の写し方によっては壊れ
 
 ## 不具合を探すビルドを cph とは別に用意する {#debug-build}
 
-ふだんのビルド（cph で AtCoder と同じ `-O2`）とは別に、不具合を探すためのビルドを 1 つ用意しておく。答えが合わない・落ちるときに、同じ入力をこちらで動かす。
+ふだんは [cph](../cpp/cpp-macros-template-file.md#bundling-tools)（VS Code の拡張 Competitive Programming Helper）を使い、AtCoder と同じ `-O2` でビルドして試す。それとは別に、不具合を探すためのビルドを 1 つ用意しておく。答えが合わない・落ちるときに、同じ入力をこちらで動かす。
 
 ```text
 g++-15 -std=gnu++23 -O1 -g -Wall -Wextra -D_GLIBCXX_DEBUG -fsanitize=address,undefined -DLOCAL a.cpp -o a_debug
@@ -330,3 +330,4 @@ AtCoder のオプションには `-DNDEBUG` が含まれないので、`assert` 
 - [GCC「Options That Control Optimization」](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html)：`-ftrivial-auto-var-init` の `zero` と `pattern`
 - [GCC「libstdc++ Macros」](https://gcc.gnu.org/onlinedocs/libstdc++/manual/using_macros.html)：`_GLIBCXX_ASSERTIONS` が最適化なしで自動で付くこと、`_GLIBCXX_DEBUG`
 - [GCC「libstdc++ Debug Mode」](https://gcc.gnu.org/onlinedocs/libstdc++/manual/debug_mode_using.html)：`_GLIBCXX_DEBUG` で検査付きのコンテナに置き換わること
+- [agrawal-d「Competitive Programming Helper (cph)」](https://github.com/agrawal-d/cph)：cph が VS Code の拡張であること
