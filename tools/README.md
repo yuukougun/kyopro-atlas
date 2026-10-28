@@ -14,7 +14,7 @@
 | `check_catalog.py` | 目次（planning/catalog/*.yaml）を検査する | なし |
 | `build_ledger.py` | 問題の台帳の下書きを作る。台帳は手で直したので作り直さない。骨格（8a）以降は catalog が凍結なので、`--check`（catalog との食い違い）は食い違いを必ず出す（予期したもの。CI では警告だけ）。台帳の確認は `check_pages.py` と `fix_problems.py --check` で行う | なし（`--check`） |
 | `make_skeleton.py` | catalog から骨格のページ（stage: stub）を作る。front matter と要点の囲みだけ。あるページは上書きしない | `docs/<field>/<id>.md` |
-| `gen_site.py` | front matter・本文の問題の一覧・台帳・最近の ABC から生成物を作る。`--check` で鮮度だけを見る | `nav.yml`・`docs/<field>/index.md`・`docs/lists/`・`docs/llms.txt`・`docs/index/`・`overrides/assets/data/graph.json`・手書きのページの目印の中 |
+| `gen_site.py` | front matter・本文の問題の一覧・台帳・最近の ABC から生成物を作る。`--check` で鮮度だけを見る。試験は `python3 -m unittest discover -s tests/tools`（test_gen_site.py） | `nav.yml`・`docs/<field>/index.md`・`docs/lists/`・`docs/llms.txt`・`docs/index/`・`overrides/assets/data/graph.json`・手書きのページの目印の中 |
 | `check_pages.py` | ページの検査（front matter の schema・id・参照・循環・レベル・問題の一覧と台帳・囲みの外の問題リンク・```cpp・要点の囲み・draft 以降の節の anchor と別名・本文のリンク） | なし |
 | `fix_problems.py` | 本文の問題の一覧の各行の label・URL・difficulty を台帳から作り直す（要約は変えない）。`- abc300_e：要約` と書けば行を作る。`--check` は台帳の pages にあるのに本文の囲みにない問題も警告に出す | ページ（`--check` では書かない） |
 | `frequency.py` | front matter の frequency・frequency_evidence を最近の ABC（recent-abc.yaml）・台帳の古い ABC の数・前提として届くページの数から付け直す（catalog/README §5・手引き §17-7）。`--check` で差分、`--write` でその 2 行だけを書き換える。試験は `python3 -m unittest discover -s tests/tools` | ページの 2 行（`--write`） |
@@ -82,8 +82,11 @@ python3 tools/check_pages.py && python3 tools/gen_site.py --check && mkdocs buil
 | `roadmap-order`・`recent-positions` | 色ごとのページの列（D17）・位置ごとの頻出手法（最近30回の E・F・G） | `guide/roadmap.md` |
 | `recent-abc`・`problem-sets` | 最近の ABC → ページ・問題集の問題 → ページ | `guide/problem-sets.md` |
 | `verify-table` | ページ → Library Checker の問題 | `guide/library-design.md` |
-| `version`・`fields`・`lists`・`stage-summary` | 索引の版・分野の一覧・一覧へのリンク・制作状況の表（どこに置いてもよい） | 任意 |
+| `version`・`fields`・`lists`・`stage-summary` | 索引の版・章の一覧（15 の分野と最後の章「一覧」）・一覧へのリンク・制作状況の表（どこに置いてもよい） | 任意 |
 
+- `signs-constraint` の帯は、サインの文から読んだ上限の数で決める（`constraint_bound`）。読むのは「≤・<・≦・≈」の後の数と、後ろに 程度・前後・規模・級・以下・未満・以内・まで・個・回 が続く数と、「10^9〜10^18 と広い」のように範囲だけで書いた数の上端（後ろが で・と・の・読点・句点・閉じかっこ・文の終わりのときだけで、「3〜5 秒」は読まない）で、見積もりの式（`O(N√N) ≈ 10^8`・`60^4 ≈ 1.3×10^7`）・下限（「個以上」「を超える」）・式の一部の数（`N^2`・`M + 1`）は読まない。選ぶ順は、個数・回数（N・Q・K・個数・長さ・総和など）の上限を値の上限（A_i・座標・値）より先に → かっこの外の数を中の数より先に → 「≤」などで書いた数 → 後ろの語で読んだ数 → 範囲だけで書いた数 → 最初に書かれた数。読めないサインは「数の上限で分けられないもの」に入る
+- `terms-latin` は、先頭に跳び先の行を置き、数字と A〜Z ごとに小見出し（`{#terms-latin-digits}`・`{#terms-latin-a}` など）を立てる
+- `recent-abc`・`recent-positions` の問題は、問題の一覧の label と同じ表示名（ABC451 D. Concat Power of 2。ロードマップの列は短い ABC451 D）で書く。台帳にない問題もあるので recent-abc.yaml の id・position・title から作る。ロードマップの列の短い表示名は、狭い画面で「ABC451」と「D」が 2 行に割れないよう、間の空白を `&nbsp;` にする。ロードマップの表は 4 列で、列ごとの最小幅（5rem）のためスマートフォンの画面の右端を越えるので、問題の列が画面の内側に来るよう、数字だけの問題数を最後の列に置く
 - 用語の索引の漢字で始まる語は、読みがないので最初の字の順に並ぶ（読みの表か pykakasi を足すかは工程10 の残り。planning/progress.md に記録する）
 - 節（`#anchor`）へのリンクは、相手のページが draft 以降のときだけ付ける（stub のページには見出しがまだない）
-- 生成物の Markdown には atcoder.jp の問題へのリンクを書かない（問題は ID と題名だけ。interfaces.md §3）
+- 生成物の Markdown には atcoder.jp の問題へのリンクを書かない（問題は表示名で書き、リンクは本文の問題の囲みの中だけ。interfaces.md §3・style-guide §2.5）
