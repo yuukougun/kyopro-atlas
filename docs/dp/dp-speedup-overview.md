@@ -22,7 +22,7 @@ sections:
   - {title: 多項式の積・同じ線形の遷移の繰り返し（畳み込み・行列累乗へ）, anchor: algebraic-tools}
   - {title: 凸性を使う高速化（CHT・Monge・Alien DP・Slope Trick）の使いどころ, anchor: convexity}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -69,7 +69,7 @@ $$
 
 次の図は、範囲 $R(i)$ の 3 つの典型を並べたものである。上の 2 つは集約の種類で道具が分かれる。3 つ目は位置が飛び飛びなので、値を添字にした木を使う。
 
-![① 接頭辞 [0, i) から読むなら、和は累積和、min・max は累積 min・max で足りる。② 幅 3 の窓 [i−3, i) が右へ動くだけなら、和は累積和、min・max はスライド最小値。③ A[j] < A[i] を満たす j のように位置が飛び飛びなら、値を添字にしたセグメント木を使う](../img/dp-speedup-overview/read-ranges.svg)
+![① 接頭辞 \[0, i) から読むなら、和は累積和、min・max は累積 min・max で足りる。② 幅 3 の窓 \[i−3, i) が右へ動くだけなら、和は累積和、min・max はスライド最小値。③ A[j] < A[i] を満たす j のように位置が飛び飛びなら、値を添字にしたセグメント木を使う](../img/dp-speedup-overview/read-ranges.svg)
 
 同じ「足場を跳んで進む」DP でも、右辺の形が変わると道具が変わる。足場 $0, 1, \dots, N-1$ を左から進み、足場 $i$ に来る直前の足場を $j$ とする。
 
