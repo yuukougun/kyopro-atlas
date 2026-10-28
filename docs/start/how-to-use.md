@@ -28,7 +28,7 @@ sections:
   - {title: AtCoder生成AI対策ルールの版, anchor: ai-rule-version}
   - {title: 記録用スキル /record-problem, anchor: record-skill}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -55,6 +55,8 @@ updated: 2026-10-22
 最近の ABC では、水の手法がおおよそ E と易しい F、青の手法が F と難しい E、黄の手法が難しい F と易しい G で使われる。F の多くは青までの知識で解けるので、黄色に届くには、黄の知識を増やすことより青までの知識を速く確実に使うことが効く。この教材が水・青を厚く書いているのはそのためである。
 
 この教材は出題範囲の一覧（シラバス）ではない。どのページにも当たらない考察だけで解く問題もあり、G の上半分では発展の手法も使われる（[色別ロードマップ](../guide/roadmap.md#not-a-syllabus)）。
+
+本文は AI（Claude）で書いている。誰がどう書いて確かめたか、他者の記事をどう参考にしたかは[出典と AI 利用の方針](ai-and-sources.md)にある。
 
 ## 章の構成 {#structure}
 
