@@ -77,20 +77,20 @@ updated: 2026-10-29
 
 ## 問われ方と手法の一覧 {#overview}
 
-問題文の形から行を探し、手法のページへ進む。代表の問題は行き先のページにあるもので、このページの練習問題は[練習問題](#practice)の囲みにある。
+問題文の形から行を探し、問われ方のリンクから行の節へ移る。節で言い換えを確かめてから、手法のページへ進む。代表の問題は行き先のページにあるもので、このページの練習問題は[練習問題](#practice)の囲みにある。
 
 | よく出る問われ方 | 使う手法 | ページ | 代表の問題 |
 |---|---|---|---|
-| スタートからゴールへの最小の移動回数 | BFS・01-BFS | [幅優先探索（BFS）と無重み最短路](../graph/bfs.md)、[01-BFS](../graph/zero-one-bfs.md) | ABC007 C、ABC176 D |
-| 向き・壁を壊した回数・2 人の位置で次の動きが変わる | 状態を頂点にする | [状態を頂点にする](../graph/extended-dijkstra.md) | ABC339 D |
-| つながったまとまりの数・塗りつぶし | DFS・BFS・Union-Find | [連結成分](../graph/connected-components.md)、[Union-Find](../ds/union-find.md)、[グリッドグラフ](../graph/grid-graph.md) | ABC325 C |
-| 右か下にだけ進む経路の数・最大値 | グリッドの DP・格子路 | [グリッド上の DP](../dp/dp-grid.md)、[格子路の数え上げ](../comb/lattice-paths.md) | EDPC H |
-| 長方形の和・長方形への加算 | 2 次元累積和・2 次元いもす法 | [2 次元累積和](../basics/prefix-sum-2d.md)、[いもす法](../basics/imos.md#imos-2d) | ABC331 D |
-| 行と列を選ぶ・行や列への操作 | 行と列を独立に考える | [座標圧縮](../basics/coordinate-compression.md)、[マンハッタン距離](../geometry/manhattan-chebyshev.md#axis-independence) | ABC213 C |
-| すべてのマスを通れるか・敷き詰められるか | 市松模様の偶奇 | [偶奇](../thinking/parity.md#checkerboard) | ABC454 E |
-| 斜めの移動・ひし形の範囲 | 45 度回転・斜めの番号 | [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md) | ABC178 E |
-| 回転・平行移動させて一致させる | 添字の式・全部試す | [回転・平行移動・アフィン変換](../geometry/rotation-transform.md#grid-rotation)、[全探索](../basics/brute-force.md#move-board) | ABC322 D |
-| ドミノの最大配置・隣り合わないマスの選び方 | 二部マッチング・プロファイル DP | [二部マッチング](../graph/bipartite-matching.md)、[プロファイル DP](../dp/broken-profile-dp.md) | ABC204 F |
+| [スタートからゴールへの最小の移動回数](#shortest) | BFS・01-BFS | [幅優先探索（BFS）と無重み最短路](../graph/bfs.md)、[01-BFS](../graph/zero-one-bfs.md) | ABC007 C、ABC176 D |
+| [向き・壁を壊した回数・2 人の位置で次の動きが変わる](#states) | 状態を頂点にする | [状態を頂点にする](../graph/extended-dijkstra.md) | ABC339 D |
+| [つながったまとまりの数・塗りつぶし](#components) | DFS・BFS・Union-Find | [連結成分](../graph/connected-components.md)、[Union-Find](../ds/union-find.md)、[グリッドグラフ](../graph/grid-graph.md) | ABC325 C |
+| [右か下にだけ進む経路の数・最大値](#right-down) | グリッドの DP・格子路 | [グリッド上の DP](../dp/dp-grid.md)、[格子路の数え上げ](../comb/lattice-paths.md) | EDPC H |
+| [長方形の和・長方形への加算](#rectangles) | 2 次元累積和・2 次元いもす法 | [2 次元累積和](../basics/prefix-sum-2d.md)、[いもす法](../basics/imos.md#imos-2d) | ABC331 D |
+| [行と列を選ぶ・行や列への操作](#rows-cols) | 行と列を独立に考える | [座標圧縮](../basics/coordinate-compression.md)、[マンハッタン距離](../geometry/manhattan-chebyshev.md#axis-independence) | ABC213 C |
+| [すべてのマスを通れるか・敷き詰められるか](#checkerboard) | 市松模様の偶奇 | [偶奇](../thinking/parity.md#checkerboard) | ABC454 E |
+| [斜めの移動・ひし形の範囲](#diagonal) | 45 度回転・斜めの番号 | [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md) | ABC178 E |
+| [回転・平行移動させて一致させる](#rotation) | 添字の式・全部試す | [回転・平行移動・アフィン変換](../geometry/rotation-transform.md#grid-rotation)、[全探索](../basics/brute-force.md#move-board) | ABC322 D |
+| [ドミノの最大配置・隣り合わないマスの選び方](#tiling) | 二部マッチング・プロファイル DP | [二部マッチング](../graph/bipartite-matching.md)、[プロファイル DP](../dp/broken-profile-dp.md) | ABC204 F |
 
 問題へのリンクは、各ページの例題・練習問題の囲みにある。
 

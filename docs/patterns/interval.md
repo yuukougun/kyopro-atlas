@@ -38,7 +38,7 @@ sections:
   - {title: '含まれる・交差する区間の数 → イベントソート・平面走査（event-sort, sweep-line-2d）', anchor: containment}
   - {title: 数列ではなく文字列の連続部分 → 部分列と部分文字列（subsequence-and-substring）, anchor: substrings}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -81,38 +81,38 @@ updated: 2026-10-22
 
 ## 問われ方と手法の一覧 {#overview}
 
-問題文の形から行を探し、行の節で言い換えを確かめてから手法のページへ進む。代表の問題は、このページの[練習問題](#practice)に載せたものだけを書いた。ほかの問題は行き先のページの例題・練習にある。
+問題文の形から行を探し、問われ方のリンクから行の節へ移る。節で言い換えを確かめてから、手法のページへ進む。代表の問題は、このページの[練習問題](#practice)に載せたものだけを書いた。ほかの問題は行き先のページの例題・練習にある。
 
 **連続部分列を数える・選ぶ**：列の連続部分列そのものが問われる。
 
 | よく出る問われ方 | 使う手法 | ページ | 代表の問題 |
 |---|---|---|---|
-| 区間の和を何度も求める | 累積和の差 | [累積和](../basics/prefix-sum.md#half-open) | ABC265 D |
-| 和が K・K の倍数の区間の個数 | 累積和の値を連想配列で数える | [累積和と連想配列で区間を数える](../basics/prefix-sum-counting.md#equal-k) | — |
-| 和が K 以下・種類数が K 以下の区間の数・最長 | 尺取り法 | [尺取り法](../basics/two-pointers.md#two-types) | — |
-| 全区間の最小値・最大値の総和、最大長方形 | 寄与と単調スタック | [単調スタック](../ds/monotonic-stack.md#contribution) | ABC189 C |
-| 全区間の中央値・mex・転倒数 | 答えの二分探索・主客転倒など | 題材別の各ページ（[節](#other-statistics)） | — |
-| 列を区間に区切る方法の数・最適値 | 区間分割 DP | [区間分割 DP](../dp/dp-sequence-partition.md#last-block) | — |
-| 隣どうしの合体・取り除くと両隣がくっつく | 区間 DP | [区間 DP](../dp/interval-dp.md#split-point) | — |
-| 文字列の連続部分 | [部分文字列](../guide/glossary.md#substring)の手法 | [部分列と部分文字列](../patterns/subsequence-and-substring.md#overview) | — |
+| [区間の和を何度も求める](#sum) | 累積和の差 | [累積和](../basics/prefix-sum.md#half-open) | ABC265 D |
+| [和が K・K の倍数の区間の個数](#count-by-sum) | 累積和の値を連想配列で数える | [累積和と連想配列で区間を数える](../basics/prefix-sum-counting.md#equal-k) | — |
+| [和が K 以下・種類数が K 以下の区間の数・最長](#monotone-window) | 尺取り法 | [尺取り法](../basics/two-pointers.md#two-types) | — |
+| [全区間の最小値・最大値の総和、最大長方形](#sum-over-subarrays) | 寄与と単調スタック | [単調スタック](../ds/monotonic-stack.md#contribution) | ABC189 C |
+| [全区間の中央値・mex・転倒数](#other-statistics) | 答えの二分探索・主客転倒など | 題材別の各ページ | — |
+| [列を区間に区切る方法の数・最適値](#partition) | 区間分割 DP | [区間分割 DP](../dp/dp-sequence-partition.md#last-block) | — |
+| [隣どうしの合体・取り除くと両隣がくっつく](#shrink-and-merge) | 区間 DP | [区間 DP](../dp/interval-dp.md#split-point) | — |
+| [文字列の連続部分](#substrings) | [部分文字列](../guide/glossary.md#substring)の手法 | [部分列と部分文字列](../patterns/subsequence-and-substring.md#overview) | — |
 
 **区間に操作して質問する**：列の区間に加算・代入をして、値や区間の和を問われる。
 
 | よく出る問われ方 | 使う手法 | ページ | 代表の問題 |
 |---|---|---|---|
-| 区間加算をすべて終えてから値を見る | いもす法 | [いもす法](../basics/imos.md#imos-1d) | — |
-| 更新と区間の質問が交互に来る | BIT・セグメント木 | [BIT](../ds/fenwick-tree.md#what-it-does)、[セグメント木](../ds/segment-tree.md#what-it-does)、[遅延セグメント木](../ds/lazy-segment-tree.md#what-it-does) | — |
-| 値が変わらない列の区間の最小値 | Sparse Table | [Sparse Table](../ds/sparse-table.md#what-it-does) | — |
-| 区間に ±1 する操作の最小回数・可否 | 差分列 | [差分列](../basics/difference-sequence.md#min-operations) | — |
-| 区間の種類数・x 以下の個数を多数 | クエリの先読みと BIT、Mo | [クエリの先読み](../ds/offline-queries.md#distinct-count)、[Mo's algorithm](../ds/mo-algorithm.md#what-it-does) | — |
+| [区間加算をすべて終えてから値を見る](#batch-add) | いもす法 | [いもす法](../basics/imos.md#imos-1d) | — |
+| [更新と区間の質問が交互に来る](#online-updates) | BIT・セグメント木 | [BIT](../ds/fenwick-tree.md#what-it-does)、[セグメント木](../ds/segment-tree.md#what-it-does)、[遅延セグメント木](../ds/lazy-segment-tree.md#what-it-does) | — |
+| [値が変わらない列の区間の最小値](#static-min) | Sparse Table | [Sparse Table](../ds/sparse-table.md#what-it-does) | — |
+| [区間に ±1 する操作の最小回数・可否](#difference) | 差分列 | [差分列](../basics/difference-sequence.md#min-operations) | — |
+| [区間の種類数・x 以下の個数を多数](#offline) | クエリの先読みと BIT、Mo | [クエリの先読み](../ds/offline-queries.md#distinct-count)、[Mo's algorithm](../ds/mo-algorithm.md#what-it-does) | — |
 
 **区間の集合を選ぶ・つなぐ**：$[L_i, R_i]$ の形の区間がいくつも与えられる。
 
 | よく出る問われ方 | 使う手法 | ページ | 代表の問題 |
 |---|---|---|---|
-| 重ならない最大個数・全部を突く点の数 | 右端の順の貪欲 | [区間スケジューリング](../basics/interval-scheduling.md#why-right-end) | — |
-| 和集合・塗りつぶし・残りの長さ | 区間を set で管理 | [区間を set で管理](../ds/interval-set.md#applications) | — |
-| 含まれる・交差する区間の数、2 つの区間の組合せ | イベントソート・平面走査 | [イベントソート](../basics/event-sort.md#make-events)、[平面走査](../ds/sweep-line-2d.md#intervals-as-points) | ABC457 E |
+| [重ならない最大個数・全部を突く点の数](#scheduling) | 右端の順の貪欲 | [区間スケジューリング](../basics/interval-scheduling.md#why-right-end) | — |
+| [和集合・塗りつぶし・残りの長さ](#union) | 区間を set で管理 | [区間を set で管理](../ds/interval-set.md#applications) | — |
+| [含まれる・交差する区間の数、2 つの区間の組合せ](#containment) | イベントソート・平面走査 | [イベントソート](../basics/event-sort.md#make-events)、[平面走査](../ds/sweep-line-2d.md#intervals-as-points) | ABC457 E |
 
 問題へのリンクは、[練習問題](#practice)の囲みにある。
 
