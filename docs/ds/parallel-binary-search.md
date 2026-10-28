@@ -26,7 +26,7 @@ sections:
   - {title: Union-Find と組む例（最初の t 本の辺で条件を満たすか）, anchor: with-union-find}
   - {title: 代わりの手（部分永続 Union-Find・併合過程の木）, anchor: alternatives}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -133,8 +133,8 @@ Library Checker で確かめるなら、[練習問題](#practice)の Range Kth S
 
 ## 学ぶための資料 {#resources}
 
-- cp-algorithms の「Binary search」の Parallel Binary Search の節（英語）：mid ごとにまとめて判定する考え方と、BIT と組む例が短くまとまっている
-- OI Wiki の「整体二分」（中国語）：再帰の形（整体二分）と、区間の K 番目に小さい値への適用を、例題とともに説明している
+- [cp-algorithms「Binary search」](https://cp-algorithms.com/num_methods/binary_search.html)の Parallel Binary Search の節（英語）：mid ごとにまとめて判定する考え方と、BIT と組む例が短くまとまっている
+- [OI Wiki「整体二分」](https://oi-wiki.org/misc/parallel-binsearch/)（中国語）：再帰の形（整体二分）と、区間の K 番目に小さい値への適用を、例題とともに説明している
 
 ## 例題 {#examples}
 

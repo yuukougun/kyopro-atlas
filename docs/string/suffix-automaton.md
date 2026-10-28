@@ -32,7 +32,7 @@ sections:
   - {title: そのほかの名前（2 次元ローリングハッシュ・Suffix Tree・Boyer-Moore の検索）, anchor: others}
   - {title: ライブラリと Library Checker での確かめ方, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -164,10 +164,10 @@ Library Checker では次の問題で確かめられる（[練習問題](#practi
 
 ## 学ぶための資料 {#resources}
 
-- cp-algorithms の「Suffix Automaton」：endpos と接尾辞リンク、状態数・遷移数の上限の証明、構築の手順と計算量を、応用（異なる部分文字列の数・出現回数・最長共通部分文字列）まで通して説明している（文章と図の利用条件は CC BY-SA）。
-- OI Wiki の「后缀自动机 (SAM)」と「回文树」（中国語）：Suffix Automaton と回文木の性質と応用の一覧がある（同じく CC BY-SA）。
-- Rubinchik・Shur の論文「EERTREE」：回文木の原論文。構築がならし $O(N)$ になる理由がある。
-- cp-algorithms の「Lyndon factorization」と「Finding repetitions」：Duval のアルゴリズムと、Main-Lorentz 法の分割統治。
+- [cp-algorithms「Suffix Automaton」](https://cp-algorithms.com/string/suffix-automaton.html)：endpos と接尾辞リンク、状態数・遷移数の上限の証明、構築の手順と計算量を、応用（異なる部分文字列の数・出現回数・最長共通部分文字列）まで通して説明している（文章と図の利用条件は CC BY-SA）。
+- [OI Wiki「后缀自动机 (SAM)」](https://oi-wiki.org/string/sam/)と [OI Wiki「回文树」](https://oi-wiki.org/string/pam/)（中国語）：Suffix Automaton と回文木の性質と応用の一覧がある（同じく CC BY-SA）。
+- [M. Rubinchik, A. M. Shur「EERTREE: An Efficient Data Structure for Processing Palindromes in Strings」](https://arxiv.org/abs/1506.04862)：回文木の原論文。構築がならし $O(N)$ になる理由がある。
+- [cp-algorithms「Lyndon factorization」](https://cp-algorithms.com/string/lyndon_factorization.html)と [cp-algorithms「Finding repetitions」](https://cp-algorithms.com/string/main_lorentz.html)：Duval のアルゴリズムと、Main-Lorentz 法の分割統治。
 
 ## 例題 {#examples}
 

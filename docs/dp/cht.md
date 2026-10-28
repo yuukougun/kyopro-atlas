@@ -153,9 +153,11 @@ Library Checker の対応は次のとおりである。どちらも $N, Q \le 2 
 
 ## 学ぶための資料 {#resources}
 
-- 不要な直線の判定と、単調な場合の deque・一般の場合の二分探索の流れは、satanic0258 氏の記事と ageprocpp 氏の記事が日本語で詳しい。
-- Li Chao Tree の追加の手順と、線分の場合に $O(\log^2 X)$ になる理由は、smijake3 氏の Li Chao Tree のメモが短くまとまっている。
-- 英語では cp-algorithms の「Convex hull trick and Li Chao tree」がある。
+<!-- textlint-disable ja-technical-writing/no-mix-dearu-desumasu -->
+- [satanic0258「Convex-Hull Trick」](https://satanic0258.hatenablog.com/entry/2016/08/16/181331)と [ageprocpp「Convex Hull Trickを知っていますか？僕は知っています。」](https://qiita.com/ageprocpp/items/3533b8f5678f9d4a5515)：不要な直線の判定と、単調な場合の deque・一般の場合の二分探索の流れが日本語で詳しい。
+- [smijake3「Li Chao Treeのメモ」](https://smijake3.hatenablog.com/entry/2018/06/16/144548)：Li Chao Tree の追加の手順と、線分の場合に $O(\log^2 X)$ になる理由が短くまとまっている。
+- [cp-algorithms「Convex hull trick and Li Chao tree」](https://cp-algorithms.com/geometry/convex_hull_trick.html)（英語）：CHT と Li Chao Tree の両方を扱っている。
+<!-- textlint-enable ja-technical-writing/no-mix-dearu-desumasu -->
 
 ## 例題 {#examples}
 
@@ -205,7 +207,7 @@ Library Checker の対応は次のとおりである。どちらも $N, Q \le 2 
 - 遷移のコストが $j$ だけの値の和で、範囲の最小を取るだけなら、[セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md)で足りる。$a_j x_i$ のような積の項が残ると範囲の最小では取れず、CHT になる。
 - コストが一次関数の形にならなくても、Monge 性（最適な遷移元の位置が単調）があれば [Monge 性による DP の高速化](../dp/monge.md#monotone-minima)の方法が使える。
 - 遷移の個数に制約がある（ちょうど $K$ 回）DP は、[Alien DP](../dp/alien-dp.md#penalty) で制約を外してから CHT と組むことがある。
-- 全体の選び方は [DP の高速化の選び方](../dp/dp-speedup-overview.md#shape-to-tool)にまとめる。
+- 全体の選び方は [DP の高速化の選び方](../dp/dp-speedup-overview.md#shape-to-tool)に、CHT・Monge・Alien DP・Slope Trick の確かめ方は[凸性を使う高速化の使いどころ](../dp/dp-speedup-overview.md#convexity)にまとめる。
 
 ## 参考 {#references}
 

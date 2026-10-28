@@ -119,7 +119,7 @@ Library Checker の Dynamic Graph Vertex Add Component Sum（[練習問題](#pra
 
 ## 学ぶための資料 {#resources}
 
-- cp-algorithms の「Deleting from a data structure in O(T(n) log n)」（英語）：時間軸のセグメント木に要素を載せて削除を取り消しに置き換える一般の枠組みと、動的連結性への適用
+- [cp-algorithms「Deleting from a data structure in O(T(n) log n)」](https://cp-algorithms.com/data_structures/deleting_in_log_n.html)（英語）：時間軸のセグメント木に要素を載せて削除を取り消しに置き換える一般の枠組みと、動的連結性への適用
 - [ロールバックできる Union-Find](../ds/rollback-union-find.md)：取り消しのできる Union-Find の作り方と、この方法での使い方
 
 ## 例題 {#examples}

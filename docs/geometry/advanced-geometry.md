@@ -31,7 +31,7 @@ sections:
   - {title: 線分の交点の列挙（Bentley-Ottmann）, anchor: segment-intersections}
   - {title: 自作するときの要点と Library Checker, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -165,8 +165,12 @@ Library Checker に半平面交差の問題はなく、自作したら小さい�
 
 ## 学ぶための資料 {#resources}
 
-- cp-algorithms（英語）：ミンコフスキー和・最近点対・半平面交差・ドロネー三角形分割とボロノイ図・交わる線分の組の探索の各記事が、手順と計算量をまとめている。半平面交差の記事は有界にするための正方形と、平行な半平面の扱いに詳しい
-- OI Wiki の「旋转卡壳」（中国語）：回転キャリパーで凸包の直径を求める手順と、囲む長方形の面積の最小への応用
+- [cp-algorithms「Minkowski sum of convex polygons」](https://cp-algorithms.com/geometry/minkowski.html)（英語）：ミンコフスキー和の手順と計算量をまとめている
+- [cp-algorithms「Finding the nearest pair of points」](https://cp-algorithms.com/geometry/nearest_points.html)（英語）：最近点対の手順と計算量をまとめている
+- [cp-algorithms「Half-plane intersection - S&I Algorithm in O(N log N)」](https://cp-algorithms.com/geometry/halfplane-intersection.html)（英語）：半平面交差の手順と計算量をまとめている。有界にするための正方形と、平行な半平面の扱いに詳しい
+- [cp-algorithms「Delaunay triangulation and Voronoi diagram」](https://cp-algorithms.com/geometry/delaunay.html)（英語）：ドロネー三角形分割とボロノイ図の手順と計算量をまとめている
+- [cp-algorithms「Search for a pair of intersecting segments」](https://cp-algorithms.com/geometry/intersecting_segments.html)（英語）：交わる線分の組の探索の手順と計算量をまとめている
+- [OI Wiki「旋转卡壳」](https://oi-wiki.org/geometry/rotating-calipers/)（中国語）：回転キャリパーで凸包の直径を求める手順と、囲む長方形の面積の最小への応用
 
 ## 例題 {#examples}
 
