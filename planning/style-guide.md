@@ -19,6 +19,8 @@
 - 書くのは担当ページ `docs/<field>/<id>.md`、`snippets/<id>/`、そのページの図 `docs/img/<id>/` だけ。動く図の JS と試験は指示で頼まれたときだけ書く（§8）
 - 共有のファイル（用語集・prh.yml・早見表・使い分け・catalog・問題の台帳）は直さず、報告に「提案」として書く。`tools/gen_site.py` の実行と commit はしない。生成部分（`<!-- gen:begin … -->` の間）は書かない（その節の見出しの置き方は §16-11）。例外として、本文の数字を計算したスクリプトは `tools/numbers/` に置く（§16-13）
 - front matter で直すのは `complexity`（プレーンな文字。例：`構築 O(N)、更新・取得 O(log N)`。計算量のない guide・hub・pattern のページは null のまま。§16-12）・`stage`（書き終えたら `draft`）・`updated` だけ。節を足すなら `sections` にも足してよい（level はページと同じ。既存の anchor は変えない）。ほかの項目を変えたいときは提案にする
+- `updated` は、読者に見える中身（本文・問題の行・図・取り込むコード片・誤字）を変えたときに直す。front matter だけ・生成部分だけの変更では直さない。ページの末尾に段階と一緒に表示される（工程11、#9）
+- `related` は近いものから順に書く。書いた順にページ下部の「関連」に出る（20 件まで。工程11、#56）
 
 ### 2.2 冒頭
 
@@ -43,8 +45,8 @@
 
 ### 2.3 見出しと節
 
-- 見出しは `##` から。front matter の `sections` の各節を `## 見出し {#anchor}` の形で必ず置く。見出しに色の印は付けない
-- 節の level はページの level 以上。ページより低い内容は下位のページへのリンクで済ませ、基礎のページの節は青までにする。上位の帯の節は、最初に追加の前提をリンクで示す
+- 見出しは `##` から。front matter の `sections` の各節を `## 見出し {#anchor}` の形で必ず置く。見出しにレベルの印を手で書かない（上の帯の節には、テンプレートが見出しと目次に印を付ける。工程11、#54）
+- 節の level はページの level 以上。ページより低い内容は下位のページへのリンクで済ませ、基礎のページの節は青までにする。上位の帯の節は、最初に追加の前提をリンクで示す（「この節は [X](…) を前提にする。」の形。レベルは書き直さない）
 - 見出しと sections の title に波かっこ `{` `}` を書かない。`集合 {a, b} の和 {#x}` のように組があると attr_list が末尾の `{#anchor}` を拾わず、anchor が変わる（python-markdown で確認）
 
 ### 2.4 文体
@@ -189,7 +191,8 @@ ACL に対応がある手法は「ACL では」の囲みに、名前・宣言・
 
 - 数式は KaTeX。インラインは `$…$`、別行は前後を空行にした `$$…$$`。front matter には KaTeX を使わない（`O(N log N)`、`2×10^5`）
 - 計算量：`$O(N \log N)$`（log の底は書かない）、`$O((N + M) \log N)$`、「ならし $O(\alpha(N))$」「期待 $O(N)$」
-- 区間は半開区間 $[l, r)$ を基本にし、閉区間は「閉区間 $[l, r]$」と明記する
+- 区間は半開区間 $[l, r)$ を基本にし、閉区間は「閉区間 $[l, r]$」と明記する。数式の外（図の代替テキスト・リンクの文字）に区間を書くときは §8 のとおり括弧をエスケープする
+- インラインの数式の `\text{…}` の中に `$…$` を書かない（`$X_i = [i \text{ が条件を満たす}]$` のように数式を外に出す。中に書くと KaTeX が壊れ、赤字のエラーになる）。日本語の長い説明もインラインの数式に入れず、地の文にする（スマホで折り返せず、ページ全体が横にずれる）。どちらも check_pages が見つける（工程11、#31・#33・#61）
 - 添字：問題文は 1-indexed、実装は 0-indexed。どちらで書くかを最初に示し、変換を明示する。例：$a_i = A_{i+1}$、$S_0 = 0$、$S_{i+1} = S_i + a_i$ とすると $[l, r)$ の和は $S_r - S_l$
 - 文字：列の長さ・頂点数 $N$、辺数 $M$、クエリ数 $Q$、列 $A = (A_1, \dots, A_N)$、法 $m$（素数なら $p$）
 - 整数：`$a \equiv b \pmod{m}$`、`$a \bmod m$`、`$\lfloor x \rfloor$`・`$\lceil x \rceil$`、`$a \mid b$`、`$\gcd(a, b)$`・`$\operatorname{lcm}(a, b)$`、`$\binom{n}{k}$`
@@ -220,6 +223,9 @@ ACL に対応がある手法は「ACL では」の囲みに、名前・宣言・
 - **SVG**：`docs/img/<page-id>/<name>.svg` に置き、`![要点を言う代替テキスト](../img/<page-id>/<name>.svg)` で参照する。背景を白で塗る（透明にするとダークモードで読めない）。文字はテキストのまま（`font-family="sans-serif"`）、`viewBox` と、それと同じ比の `width`・`height` を付ける。1 枚の幅は 400 程度までにし、横に並べたいものは 2 枚に分ける（§15-8）。色だけで区別せず、線の種類やラベルも使う
 - **動く図**：`<div class="kp-viz" data-viz="<名前>" data-config='{…}'></div>` で埋め込む。catalog の visual が priority 1 なら必ず作り、2 は余力があれば、3 は静的な図で代えてよい。JS は `overrides/assets/js/viz/<名前>.js` に `states(config)`（各ステップの `caption` を持つ状態の列。DOM を使わない）と `render` を登録し、`tests/viz/<名前>.test.mjs` に試験を書く（見本は binary-search）。色は kp.css の `.kp-v-*` の class で付ける。JS を頼まれていなければ、div と図の仕様を報告に書く
 - 表は横に広げすぎない（スマホで読む。列は 4〜5 まで）
+- **代替テキストとリンクの文字の括弧**（工程11、#50）：区間を書いて対にならない括弧ができるときは逆斜線でエスケープする（`![区間 \[1, 5) に +1](../img/imos/imos-1d.svg)`）。対にならない `[` があると画像として読まれず、図の代わりに文字とリンクが出る。check_pages がエラーにする
+- **SVG の背景**（工程11、#32）：白い背景の rect は viewBox 全体を覆う（viewBox の左上が 0 でないときは x・y も合わせる。`width="100%"` は viewBox の左上からではなく 0 から塗る）。覆わない部分はダークモードで暗い帯になり、文字が読めない。check_svg が警告する
+- **動く図の JS**（工程11、#51）：`data-viz` に書いた名前の JS（`overrides/assets/js/viz/<名前>.js`）がないと、公開中のページに赤字のエラーが出る。置き場だけを先に書かない。check_pages がエラーにする
 
 ## 9. コード片
 
@@ -426,7 +432,7 @@ robots の meta と X-Robots-Tag に noai・noimageai がないことを確か�
 - そのほか：ikatakos.com・qiita.com・zenn.dev・github.com・nyaannyaan.github.io・ei1333.github.io・programming-hiroba.com・oraclesqlpuzzle.ninja-web.net・www.cnblogs.com・atcoder-tags.herokuapp.com・maspypy.com・www.mathenachia.blog・cp-algorithms.com・oi-wiki.org・judge.yosupo.jp・ja.wikipedia.org・hackmd.io・en.cppreference.com・cpprefjp.github.io・gcc.gnu.org・usaco.guide（構成の参考だけ）・dev.to・scrapbox.io（プロジェクトごとに書き手が違う。確かめたのは wafuwafualgorithm・nishio・kani・37zigen-43465887・Atcoder-myReflection・konan-compro・pctsnote・Kodaman・esaka-sandbox・procon-kirokuyou・kyopuro-ryusuke920）・chokudai.github.io・developer.apple.com・en.wikipedia.org・www.luogu.com.cn・noshi91.github.io・yamate11.github.io・imoz.jp・soi.ch・robert1003.github.io・raw.githubusercontent.com・hcpc-hokudai.github.io（PDF は読んでいない）・mzhang2021.github.io・kmyk.github.io・js.cytoscape.org・competitive-verifier.github.io・online-judge-tools.github.io・hitonanode.github.io・aruma256.dev・onlinejudge.u-aizu.ac.jp（AOJ）・cses.fi・algo-logic.info・arxiv.org・atcoder-novisteps.vercel.app・blog.nishigake.net・blog.tibrella.space・blog.tiramister.net・book.mynavi.jp・code.claude.com・competitive12.blogspot.com・cplusplus.github.io・gdst.dev・it.commutty.com・kato-hiro.github.io・koosaga.com・kopricky.github.io・kumonosu.cloudsquare.jp・nullkara.jp・oeis.org・picomikan.net・webkit.org・yamanoue.tslmuse.com（この行の algo-logic.info 以降と、はてなブログ・scrapbox で足した分は工程10 の洗い出しで確かめた。2026-10-22）
 - github.com のうち yosupo06/library-checker-problems の issue・PR は出典にしてよい（問題の仕様や計算量の議論）
 - speakerdeck.com はスライドごとに書き手が違う（確かめたのは tatyam_prime の「Monge の手引書」）
-- trap.jp：2026-10-22 の 2 回目の check_noai で、トップページ（https://trap.jp/）を証明書の検証つきで取得でき（HTTP 200）、robots の meta と X-Robots-Tag に noai・noimageai がないことを確かめた。記事（post/2589・2861・1224・1594）は HTTP 503 か証明書の検証の失敗（自己署名の証明書が返る）で取得できなかった。証明書の検証を外した取得は、この環境の権限で断られたので行っていない。使っているのは cpp-environment・cpp-macros-template-file・static-top-tree の 3 ページ（hashing-for-sets の post/1594 は出典から外した）
+- trap.jp：2026-10-22 の 2 回目の check_noai で、トップページ（https://trap.jp/）を証明書の検証つきで取得でき（HTTP 200）、robots の meta と X-Robots-Tag に noai・noimageai がないことを確かめた。記事（post/2589・2861・1224・1594）は HTTP 503 か証明書の検証の失敗（自己署名の証明書が返る）で取得できなかった。証明書の検証を外した取得は、この環境の権限で断られたので行っていない。使っているのは cpp-environment・cpp-macros-template-file・static-top-tree の 3 ページ（hashing-for-sets の post/1594 は出典から外した）。2026-10-29 の check_noai（工程11 の方針のページの下書きの担当）で、記事 post/1224・2589・2861 も HTTP 200 で取得でき、noai・noimageai がないことを確かめた（post/1594 は出典から外してある）
 - 確かめられなかった：yukicoder.me は meta の指定はないが、利用規約を確かめるまで使わない（§16-6）。doi.org（union-find-applications の Tarjan・van Leeuwen の論文）と suzukiapple.tumblr.com（sqrt-decomposition）は HTTP 403 で確かめられないので、前者は書誌情報だけの出典（リンクなし）にし、後者は ikatakos.com の ABC365 の記録に替えた（2026-10-22）
 - web.archive.org：ikatakos.com が落ちているときに写しを読むためだけに使う（問題文の節は読まない。§15-6）
 - note.com は meta の指定はないが、利用条件を記事ごとに確かめる（確かめた記事：igasu_7 の n5bd80b1e0eb9・anoconne の n26b5912e1e9c・vain0x の n0037d6468812・syamashi の nb491ffdf0ca3・nc5b5876e0514・n8e580d4ce59d・hip_crow3665 の ne7a656317cea。後の 5 本は 2026-10-22 に meta の指定がなく、本文に転載・引用・AI の利用を断る記述がない無料の記事であることを確かめた）

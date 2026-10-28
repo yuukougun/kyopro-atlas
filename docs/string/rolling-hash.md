@@ -30,7 +30,7 @@ sections:
   - {title: 'セグ木に載せるハッシュ：（ハッシュ, B^長さ）の組で更新ありの一致・回文判定', anchor: hash-segment-tree, level: 青}
   - {title: ハッシュで代用できる場面とできない場面（Z・Manacher・SA・畳み込みとの使い分け）, anchor: when-to-use}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -71,7 +71,7 @@ $$
 
 次の図は、説明のために a→1・b→2・c→3、$B = 10$ とし、mod を取らずに計算した例である。ハッシュが 10 進数の数字の並びになるので、引き算の意味が見える。
 
-![S = abcab の接頭辞のハッシュは h = 0, 1, 12, 123, 1231, 12312。S[2, 5) = cab のハッシュは h[5] − h[2]·10^3 = 12312 − 12000 = 312 になる](../img/rolling-hash/prefix-hash.svg)
+![S = abcab の接頭辞のハッシュは h = 0, 1, 12, 123, 1231, 12312。S\[2, 5) = cab のハッシュは h[5] − h[2]·10^3 = 12312 − 12000 = 312 になる](../img/rolling-hash/prefix-hash.svg)
 
 処理の流れは次のとおりである。$h$ と $B$ の冪の表 $\mathrm{pw}[i] = B^i \bmod p$ を $O(N)$ で作れば、あとは 1 回 $O(1)$ で部分文字列のハッシュが出る。添字は[半開区間](../guide/glossary.md#half-open-interval)で、$h$ の添字は文字と文字の間の位置を指す（累積和の $S_0 = 0$ と同じ）。
 

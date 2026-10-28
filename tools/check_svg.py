@@ -13,6 +13,12 @@
   幅が 450 を超える           §15-8「幅 400 程度まで」の目安から大きく外れる
   文字が小さい                スマホの本文の幅（328px）で表示したときに 9px 未満になる文字
                               （倍率 = min(width, 328) / viewBox の幅、文字 = font-size × 倍率。上付き・下付きの tspan は除く）
+  白い背景が viewBox を覆わない
+                              §8「背景を白で塗る」。文書の順で最初の白い rect（defs などの中は除く。親の fill を継ぐ）を背景とみなし、
+                              viewBox（なければ 0 0 width height）を覆うかを見る（#61）。覆わない帯は透けて、ダークモードで地の色が出る。
+                              width="100%" の % は viewBox の幅・高さに対してなので、viewBox の左端が 0 でなければ x も要る。
+                              親と自分の transform は translate だけを足し合わせ、ほかの transform の中の rect は見ない。白い rect が
+                              ないときも警告する
 標準ライブラリだけで動く。
 """
 from __future__ import annotations
@@ -29,6 +35,12 @@ AVAIL = 328.0       # スマホ（360px）で本文に使える幅
 MIN_TEXT = 9.0      # 表示したときの文字の大きさの下限（px）
 MAX_WIDTH = 450.0   # §15-8 の目安（400 程度）から大きく外れる幅
 NS = "{http://www.w3.org/2000/svg}"
+WHITE = {"#fff", "#ffffff", "white", "rgb(255,255,255)"}
+NOT_DRAWN = {"defs", "marker", "pattern", "clipPath", "mask", "symbol", "style", "title", "desc", "metadata",
+             "linearGradient", "radialGradient", "filter"}
+NUMBER = r"[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?"
+TRANSLATE_RE = re.compile(rf"\s*translate\(\s*({NUMBER})(?:\s*,?\s*({NUMBER}))?\s*\)\s*")
+GAP = 0.01          # 背景の rect と viewBox の差をこれより大きいときだけ透けるとみなす（小数の誤差）
 
 
 def num(s: str | None) -> float | None:
@@ -73,6 +85,70 @@ def texts(el: ET.Element, fs: float, scale: float, out: list[tuple[float, str]])
         texts(c, fs, scale, out)
 
 
+def fill_of(el: ET.Element, inherited: str) -> str:
+    """el の fill（style が属性より強い。なければ親の値）。空白を除いた小文字。"""
+    m = re.search(r"(?:^|;)\s*fill\s*:\s*([^;]+)", el.get("style") or "")
+    v = m.group(1) if m else el.get("fill")
+    return re.sub(r"\s+", "", v.lower()) if v is not None else inherited
+
+
+def background(el: ET.Element, fill: str = "", dx: float = 0.0, dy: float = 0.0):
+    """文書の順で最初の白い rect：(要素, 足し合わせた translate の x, y)。translate 以外の transform の中にあれば "transform"、
+    なければ None。"""
+    for c in el:
+        tag = c.tag.replace(NS, "")
+        if tag in NOT_DRAWN:
+            continue
+        f = fill_of(c, fill)
+        tx, ty = dx, dy
+        if c.get("transform"):
+            m = TRANSLATE_RE.fullmatch(c.get("transform"))
+            if not m:
+                if tag == "rect" and f in WHITE or background(c, f) is not None:
+                    return "transform"
+                continue
+            tx, ty = tx + float(m.group(1)), ty + float(m.group(2) or 0)
+        if tag == "rect" and f in WHITE:
+            return c, tx, ty
+        r = background(c, f, tx, ty)
+        if r is not None:
+            return r
+    return None
+
+
+def length(v: str | None, ref: float) -> float | None:
+    """rect の x・y・width・height の長さ（ない属性は 0。% は ref に対して）。px 以外の単位は None。"""
+    if v is None:
+        return 0.0
+    m = re.fullmatch(rf"\s*({NUMBER})\s*(px|%)?\s*", v)
+    if not m:
+        return None
+    x = float(m.group(1))
+    return x * ref / 100 if m.group(2) == "%" else x
+
+
+def background_gaps(root: ET.Element, box: tuple[float, float, float, float]) -> str | None:
+    """白い背景が box（viewBox）を覆わないときの警告の文。"""
+    bg = background(root, fill_of(root, ""))
+    if bg is None:
+        return "白い背景の rect がない（§8：背景を白で塗る。透明だとダークモードで読めない）"
+    if bg == "transform":
+        return None
+    el, tx, ty = bg
+    bx, by, bw, bh = box
+    x, y = length(el.get("x"), bw), length(el.get("y"), bh)
+    w, h = length(el.get("width"), bw), length(el.get("height"), bh)
+    if None in (x, y, w, h):
+        return None
+    x, y = x + tx, y + ty
+    gaps = [("左", x - bx), ("上", y - by), ("右", bx + bw - (x + w)), ("下", by + bh - (y + h))]
+    bad = [f"{k} {round(v, 2):g}" for k, v in gaps if v > GAP]
+    if not bad:
+        return None
+    return (f"最初の白い rect（背景）が viewBox を覆わない（{'・'.join(bad)} が透けて、ダークモードで地の色が出る）。"
+            f'<rect x="{bx:g}" y="{by:g}" width="{bw:g}" height="{bh:g}" fill="#ffffff"/> にする')
+
+
 def check(path: Path) -> tuple[list[str], str | None]:
     """(警告の一覧, 読めないときの理由)。"""
     try:
@@ -82,11 +158,11 @@ def check(path: Path) -> tuple[list[str], str | None]:
     warns = []
     vb = root.get("viewBox")
     w, h = num(root.get("width")), num(root.get("height"))
-    vbw = vbh = None
+    vbx = vby = vbw = vbh = None
     if vb:
         try:
             a = [float(x) for x in re.split(r"[ ,]+", vb.strip())]
-            vbw, vbh = a[2], a[3]
+            vbx, vby, vbw, vbh = a[0], a[1], a[2], a[3]
         except (ValueError, IndexError):
             warns.append(f"viewBox が読めない: {vb}")
     else:
@@ -109,6 +185,9 @@ def check(path: Path) -> tuple[list[str], str | None]:
             mn = min(e for e, _ in small)
             ex = "・".join(t for _, t in small[:3])
             warns.append(f"幅 {AVAIL:g}px で {MIN_TEXT:g}px 未満の文字が {len(small)} 個（最小 {mn:.1f}px。例：{ex}）")
+    box = (vbx, vby, vbw, vbh) if vbw and vbh else ((0.0, 0.0, w, h) if not vb and w and h else None)
+    if box and (msg := background_gaps(root, box)):
+        warns.append(msg)
     return warns, None
 
 
