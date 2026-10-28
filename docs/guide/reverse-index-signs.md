@@ -964,6 +964,11 @@ flowchart TD
 | 過去の状態に戻す・ある時点の状態をコピーする | [操作列とクエリ](../patterns/operation-sequence.md) | — |
 | 行や列・区間を塗り替える操作の後の最終状態 | [操作列とクエリ](../patterns/operation-sequence.md) | — |
 | 同じ操作を 10^18 回繰り返した後の状態 | [操作列とクエリ](../patterns/operation-sequence.md) | — |
+| N 個が円形に並び、N 番目と 1 番目も隣り合う | [円環](../patterns/circular.md) | — |
+| 円環上の連続する区間の和・個数（端をまたぐ区間も含む） | [円環](../patterns/circular.md) | — |
+| 円形に並ぶものを、隣どうしが違う色で塗る方法の数 | [円環](../patterns/circular.md) | — |
+| 列を何回回転させると、もう一方の列に一致するか | [円環](../patterns/circular.md) | — |
+| 円周上に点が並び、時計回りに進む・点どうしを弦で結ぶ | [円環](../patterns/circular.md) | — |
 | 答えの絶対誤差または相対誤差が 10^-6 以下なら正解とする（小数の桁を指定して出力しないと WA になる） | [入出力と定数倍](../cpp/cpp-io.md) | 基礎 |
 
 <!-- textlint-enable -->

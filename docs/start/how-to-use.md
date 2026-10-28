@@ -79,7 +79,7 @@ updated: 2026-10-29
 | [文字列](../string/index.md) | ハッシュ、Z・KMP・Manacher、Trie、Suffix Array、Aho-Corasick | 13 |
 | [幾何](../geometry/index.md) | ベクトルと外積、誤差、凸包、偏角ソート、45 度回転など | 8 |
 | [その他の技法](../misc/index.md) | インタラクティブ、乱択、bitset による高速化、構文解析 | 4 |
-| [題材別](../patterns/index.md) | 括弧列・mex・順列・XOR・区間・グリッドなど、問題に現れる対象から手法を引く案内 | 10 |
+| [題材別](../patterns/index.md) | 括弧列・mex・順列・XOR・区間・グリッドなど、問題に現れる対象から手法を引く案内 | 11 |
 | [C++](../cpp/index.md) | 解説コードに出る書き方、AtCoder と手元の環境、落とし穴、ACL の読み方 | 20 |
 | [一覧](../lists/index.md) | レベル別の一覧 5 つと種類別の一覧 30 個（全分野のページを、レベルと手法の種類で並べ直したもの） | — |
 
@@ -154,7 +154,7 @@ flowchart TD
 <!-- textlint-disable -->
 
 - レベル別：[基礎](../lists/level-basic.md)（100）・[水](../lists/level-cyan.md)（79）・[青](../lists/level-blue.md)（52）・[黄](../lists/level-yellow.md)（37）・[発展](../lists/level-advanced.md)（51）
-- 種類別：[計算量](../lists/kind-complexity.md)（6）・[全探索](../lists/kind-brute-force.md)（7）・[二分探索](../lists/kind-binary-search.md)（16）・[累積和・差分](../lists/kind-prefix-sum.md)（11）・[尺取り・スライド窓](../lists/kind-two-pointers.md)（3）・[貪欲](../lists/kind-greedy.md)（11）・[ソート・座標圧縮](../lists/kind-sorting.md)（11）・[ダブリング・分割統治](../lists/kind-doubling.md)（13）・[DP](../lists/kind-dp.md)（61）・[グラフ探索](../lists/kind-graph-search.md)（24）・[最短路](../lists/kind-shortest-path.md)（13）・[連結性・全域木](../lists/kind-connectivity.md)（14）・[フロー・マッチング](../lists/kind-flow.md)（9）・[木](../lists/kind-tree.md)（31）・[データ構造](../lists/kind-data-structure.md)（46）・[区間クエリ](../lists/kind-range-query.md)（22）・[クエリ処理の工夫](../lists/kind-query-processing.md)（15）・[整数論](../lists/kind-number-theory.md)（39）・[線形代数・行列](../lists/kind-linear-algebra.md)（11）・[畳み込み・多項式](../lists/kind-convolution.md)（11）・[数え上げ](../lists/kind-counting.md)（46）・[確率・期待値](../lists/kind-probability.md)（12）・[ゲーム](../lists/kind-game.md)（6）・[文字列](../lists/kind-string.md)（18）・[ハッシュ・乱択](../lists/kind-hashing.md)（6）・[幾何](../lists/kind-geometry.md)（8）・[ビット演算](../lists/kind-bit.md)（16）・[考察](../lists/kind-observation.md)（31）・[実装・C++](../lists/kind-implementation.md)（26）・[案内](../lists/kind-guide.md)（33）
+- 種類別：[計算量](../lists/kind-complexity.md)（6）・[全探索](../lists/kind-brute-force.md)（7）・[二分探索](../lists/kind-binary-search.md)（16）・[累積和・差分](../lists/kind-prefix-sum.md)（12）・[尺取り・スライド窓](../lists/kind-two-pointers.md)（3）・[貪欲](../lists/kind-greedy.md)（11）・[ソート・座標圧縮](../lists/kind-sorting.md)（11）・[ダブリング・分割統治](../lists/kind-doubling.md)（13）・[DP](../lists/kind-dp.md)（61）・[グラフ探索](../lists/kind-graph-search.md)（24）・[最短路](../lists/kind-shortest-path.md)（13）・[連結性・全域木](../lists/kind-connectivity.md)（14）・[フロー・マッチング](../lists/kind-flow.md)（9）・[木](../lists/kind-tree.md)（31）・[データ構造](../lists/kind-data-structure.md)（46）・[区間クエリ](../lists/kind-range-query.md)（22）・[クエリ処理の工夫](../lists/kind-query-processing.md)（15）・[整数論](../lists/kind-number-theory.md)（39）・[線形代数・行列](../lists/kind-linear-algebra.md)（11）・[畳み込み・多項式](../lists/kind-convolution.md)（11）・[数え上げ](../lists/kind-counting.md)（47）・[確率・期待値](../lists/kind-probability.md)（12）・[ゲーム](../lists/kind-game.md)（6）・[文字列](../lists/kind-string.md)（18）・[ハッシュ・乱択](../lists/kind-hashing.md)（6）・[幾何](../lists/kind-geometry.md)（8）・[ビット演算](../lists/kind-bit.md)（16）・[考察](../lists/kind-observation.md)（31）・[実装・C++](../lists/kind-implementation.md)（26）・[案内](../lists/kind-guide.md)（34）
 
 <!-- textlint-enable -->
 <!-- gen:end lists -->
@@ -338,7 +338,7 @@ ABCxxx E の解説を頼みたい。終了したコンテストの問題であ�
 <!-- gen:begin version -->
 <!-- textlint-disable -->
 
-索引の版：`ea70d47ef119`（ページの updated の最大：2026-10-29）
+索引の版：`8fdf3fe6edfd`（ページの updated の最大：2026-10-29）
 
 <!-- textlint-enable -->
 <!-- gen:end version -->
