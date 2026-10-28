@@ -8,7 +8,8 @@
   python3 tools/check_pages.py --field ds       その分野のページに関わる指摘だけを出す
   python3 tools/check_pages.py --page lazy-segment-tree --page docs/ds/segment-tree.md
                                                 そのページに関わる指摘だけを出す（id かパス。カンマ区切りでもよい）
-  python3 tools/check_pages.py --root DIR       DIR/docs と DIR/snippets を検査する（骨格の試験など。台帳は --ledger）
+  python3 tools/check_pages.py --root DIR       DIR/docs と DIR/snippets を検査する（骨格の試験など。台帳は --ledger）。
+                                                DIR/overrides/assets/js/viz があれば、動く図の JS もそこで確かめる（なければ見ない）
 終了コード: エラーがあれば 1、警告だけなら 0。--field・--page のときは、絞ったページのエラーだけで決める
 
 検査するファイル: docs/<field>/<id>.md（field は15分野）。docs/<field>/index.md・docs/lists/・docs/index/ は生成物なので
@@ -31,6 +32,12 @@
                 mkdocs build --strict の validation と同じ見方で確かめる：先のファイルがない、相対リンクとして解釈できない
                 （生の [&](auto&& self) など）、絶対パス、先に anchor がない（見出しの {#id}・toc が見出しから作る id・
                 attr_list の {#id}・HTML の id・脚注）、用語集に anchor がない、stage が stub のページの節へのリンク
+  描画の崩れ    （#50・#51・#61。フェンス・HTML のコメント・$$ の数式ブロック・行の中のコードの中は見ない）
+                画像にならない ![…](….svg)（Python-Markdown 3.11 と同じ数え方を 1 行の中でまねる：コード・インラインの数式・
+                エスケープ \\[ の中は数えず、先に link を作ってから image を作る。行の中で ![ より後ろの図のファイルを指す
+                ](…) が画像の場所にならなければ崩れ。代替テキストの対にならない [・] で起き、「![…」の文字と図へのリンクが出る）、
+                class="kp-viz" と data-viz="名前" を持つタグの overrides/assets/js/viz/名前.js がない（タグは行をまたいでよい）、
+                インラインの数式 $…$ の中の \\text{…} に $ がある（arithmatex が中の $ で数式を切る）
 警告
   前提のレベルの逆転、節のレベルがページより低い・基礎のページに黄・発展の節、同じ分野の前提が order で後ろ、
   推移的に冗長な前提、前提と related の重複、自分への related、level が発展なのに type が overview でない、
@@ -39,7 +46,9 @@
   同じページに同じ問題、2ページ以上で例題（D4）、分野の外のフォルダのページ、
   定型の節の見出しと anchor の組が違う（§13-1・§16-1）、sections に定型の節がある、
   guide・hub・pattern の complexity が null でない（§17-1）、発展の概要に ## {#library}・{#resources} がない（§16-1・§16-2）、
-  同じ URL の出典（参考・学ぶための資料の節の「- [題名](URL)」）の題名が違う（§17-10）
+  同じ URL の出典（参考・学ぶための資料の節の「- [題名](URL)」）の題名が違う（§17-10）、
+  インラインの数式の折り返せない塊（一番外の関係・二項演算子で区切る）の \\text が、幅 360px の画面の入れ物に入らない
+  （段落 16 字・箇条書き 1 段 14.5 字など。入れ物は字下げで追う。表は見ない。スマホの幅でページが横にずれる。#61）
 
 このファイルには、gen_site.py・fix_problems.py・make_skeleton.py が使う共通の部品（定数、ページの読み込み、問題の一覧の
 読み取り、台帳と問題の表示名、Markdown の文字のエスケープ、schema の検査器）も置く。MkDocs は import しない。
@@ -50,6 +59,7 @@ schema/page.schema.json が使うキーワードだけに対応し、知らな�
 from __future__ import annotations
 
 import argparse
+import bisect
 import collections
 import datetime
 import json
@@ -771,8 +781,8 @@ FOOTNOTE_REF_RE = re.compile(r"\[\^(?P<id>[^\]]+)\](?!:)")
 GLOSSARY_REL = "guide/glossary.md"
 
 
-def prose_lines(p: Page) -> list[tuple[int, str]]:
-    """フェンス・HTML のコメント・$$ の数式ブロックの外の行 (本文の行の番号, 行)。行の中のコード（`…`）と数式（$…$）は空白にする。"""
+def text_lines(p: Page) -> list[tuple[int, str]]:
+    """フェンス・HTML のコメント・$$ の数式ブロックの外の行 (本文の行の番号, 行)。行の中のコメントは除き、コードと数式は残す。"""
     out, in_comment, in_math = [], False, False
     for i, raw in enumerate(p.lines):
         if p.in_fence[i]:
@@ -790,6 +800,14 @@ def prose_lines(p: Page) -> list[tuple[int, str]]:
             continue
         if in_math:
             continue
+        out.append((i, s))
+    return out
+
+
+def prose_lines(p: Page) -> list[tuple[int, str]]:
+    """text_lines の行の中のコード（`…`）と数式（$…$）を空白にしたもの。"""
+    out = []
+    for i, s in text_lines(p):
         s = CODE_SPAN_RE.sub(lambda m: " " * len(m.group(0)), s)
         s = MATH_RE.sub(lambda m: " " * len(m.group(0)), s)
         out.append((i, s))
@@ -930,6 +948,491 @@ def check_links(all_pages: list[Page], rep: Report, docs: Path) -> None:
                           f"{where}: {url}: {q.rel} に {{#{anchor}}} の見出し・要素がない")
 
 
+# ---------------------------------------------------------------- 描画の崩れ（#50・#51・#61。ほかの検査を通っても、描くと崩れるもの）
+
+# 画像の代替テキストの角括弧（#50）。Python-Markdown（3.11）の inline の処理は優先度の順に、コード（`…`。190。
+# pymdownx.inlinehilite が差し替える）→ インラインの数式（pymdownx.arithmatex。189.9）→ エスケープ（\[ など。180）→
+# link（160）→ image（150）で、それぞれ見つけたものを置き換えてから続きを探す。link と image は [ の後ろを getText で
+# [ に +1・] に −1 と数え、0 になった ] の次の ( から getLink で ( と ) を数える。先に置き換わるコード・数式・エスケープの
+# 中の [ ] は数えない。代替テキストに対にならない [ があると、その [ から link が先に作られ、画像の代わりに「![…」の文字と、
+# 代替テキストの後半を文字にした図へのリンクが出る。docs に参照の定義（[id]: url）はないので reference（170）はまねない
+MD_MATH_RE = re.compile(  # arithmatex の inline（smart_dollar の $…$ と \(…\)。RE_SMART_DOLLAR_INLINE・RE_BRACKET_INLINE のまま）
+    r"(?:(?:(?<!\\)((?:\\{2})+)(?=\$)|(?<!\\)(\$)(?!\s)((?:\\.|[^\\$\x02\x03])+?)(?<!\s)(?:\$))"
+    r"|(?:(?<!\\)((?:\\{2})+?)(?=\\\()|(?<!\\)(\\\()((?:\\[^)]|[^\\\x02\x03])+?)(?:\\\))))")
+MD_ESCAPE_RE = re.compile(r"\\(.)")
+MD_ESCAPED = set("\\`*_{}[]()>#+-.!$|")               # Markdown.ESCAPED_CHARS と、arithmatex の $・tables の |
+LINK_START_RE = re.compile(r"(?<!!)\[")
+IMAGE_START_RE = re.compile(r"!\[")
+IMAGE_DEST_RE = re.compile(r"\]\(\s*<?[^()\s<>]*\.(?:svg|png|jpe?g|gif|webp)\b", re.IGNORECASE)   # 図のファイルを指す場所
+# 動く図（#51）。overrides/assets/js/viz.js は .kp-viz[data-viz] に assets/js/viz/<名前>.js を読み込む
+VIZ_DIR_REL = "overrides/assets/js/viz"
+VIZ_NAME_RE = re.compile(r"^[a-z0-9][a-z0-9-]*$")      # viz.js の NAME と同じ
+HTML_TAG_RE = re.compile(r"""<[A-Za-z][\w-]*(?:\s+[^\s"'=<>/]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s"'=<>`]+))?)*\s*/?>""")
+HTML_ATTR_RE = re.compile(r"""\s([^\s"'=<>/]+)(?:\s*=\s*("[^"]*"|'[^']*'|[^\s"'=<>`]+))?""")
+# インラインの数式の \text（#61）。$…$ の中の \text{…$…} は arithmatex が中の $ で数式を切り（#31）、\text の中は折り返せない（#33）
+TEXT_CMD_RE = re.compile(r"\\(?:text(?:rm|sf|tt|bf|it|up|md|normal)?|mbox|hbox)\s*\{")
+# 長い \text の目安。KaTeX はインラインの数式を、一番外（{} と \left … \right の外）の関係・二項演算子の後でだけ折り返す。
+# その折り返せない塊ごとに \text の字数（全角を 1、半角を 0.5。上付き・下付き・\frac の中は 0.7 倍、2 段目から 0.5 倍、
+# \frac は分子と分母の大きいほう）を足し、塊が入れ物の幅に入るかを見る。入れ物の幅は Material の幅 360px の画面のもの：
+# 本文 328px（左右の余白 0.8rem。check_svg.py の AVAIL）・文字 16px、箇条書き 1 段で 1.875em（ul 0.625em＋li 1.25em）狭い、
+# 囲み・折りたたみ（!!!・???）は枠 0.075rem と余白 0.6rem で左右 27px 狭く、中の文字は 0.64rem＝12.8px、引用は 16px 狭い。
+# KaTeX は文字の 1.21 倍なので、入る字数は 幅 ÷（文字 × 1.21）。\text の前後の括弧など 0.9 字ぶんを引いたものを目安にする
+# （段落 16.0 字・箇条書き 1 段 14.5 字・2 段 12.9 字・囲みの中 18.5 字・囲みの中の箇条書き 1 段 17.0 字）。表は表の中で横に
+# 送れるので見ない。2026-10-29 に HEAD のビルドの幅 360px で測った塊は、exponent-mod の段落の 19.5 字が 431px、aho-corasick の
+# 箇条書き 1 段の 17 字が 346px・15 字が 323px（箇条書きの幅 298px を超える）で溢れ、段落の 15.5 字（linearity-of-expectation）
+# は 310px で収まった
+LINE_WIDTH = 328.0           # 幅 360px の画面の本文の幅（px）
+BODY_FONT = 16.0             # 本文の文字（px）
+BOX_FONT = 12.8              # 囲み・折りたたみの中の文字（0.64rem）
+BOX_INSET = 27.0             # 囲み・折りたたみの左右の枠と余白（px）
+LIST_INSET_EM = 1.875        # 箇条書き 1 段の字下げ（em）
+QUOTE_INSET = 16.0           # 引用の左の線と余白（px）
+KATEX_EM = 1.21              # KaTeX の文字の大きさ（本文の倍）
+TEXT_AROUND = 0.9            # \text の前後の数式に見込む全角の字数
+SCRIPT_SCALE, SCRIPT_MIN = 0.7, 0.5
+LIST_ITEM_RE = re.compile(r"(?:[-*+]|\d+[.)])(?:\s|$)")
+BOX_START_RE = re.compile(r"(?:!!!|\?\?\?\+?)\s")
+CMD_RE = re.compile(r"\\([A-Za-z]+|.)")
+FRAC_RE = re.compile(r"\\(?P<name>[dtc]?frac|[dt]?binom)\s*\{")
+MATH_REL_CMDS = {"le", "leq", "ge", "geq", "ne", "neq", "lt", "gt", "leqslant", "geqslant", "equiv", "sim", "simeq",
+                 "approx", "cong", "propto", "to", "rightarrow", "leftarrow", "gets", "mapsto", "longrightarrow",
+                 "longleftarrow", "Rightarrow", "Leftarrow", "Leftrightarrow", "leftrightarrow", "Longrightarrow",
+                 "iff", "implies", "impliedby", "in", "notin", "ni", "subset", "subseteq", "supset", "supseteq",
+                 "mid", "nmid", "parallel", "perp", "prec", "succ", "preceq", "succeq", "ll", "gg", "coloneqq",
+                 "models", "vdash", "allowbreak"}
+MATH_BIN_CMDS = {"cdot", "times", "div", "pm", "mp", "cup", "cap", "setminus", "oplus", "ominus", "otimes", "odot",
+                 "circ", "bullet", "land", "lor", "wedge", "vee", "bmod", "ast", "star", "sqcup", "sqcap", "uplus"}
+
+
+def md_code_spans(s: str) -> list[tuple[int, int]]:
+    """Python-Markdown 3.11 の BacktickInlineProcessor（pymdownx.inlinehilite も同じ）が置き換える範囲 [開始, 終了)：
+    コード（開きの ` の列と同じ長さの列で閉じ、なければその先の最長の列で閉じる。find_code_spans）と、` の前の偶数個の \\
+    （エスケープした \\ になる）。奇数個の \\ の後の ` は開きにならない。"""
+    spans, i, n = [], 0, len(s)
+    while i < n:
+        if s[i] != "`":
+            i += 1
+            continue
+        b = i
+        while b > 0 and s[b - 1] == "\\":
+            b -= 1
+        if (i - b) % 2:
+            i += 1
+            continue
+        if i > b:
+            spans.append((b, i))
+        j = i
+        while j < n and s[j] == "`":
+            j += 1
+        k, longest, end, found = j, 0, 0, None
+        while k < n:
+            if s[k] != "`":
+                k += 1
+                continue
+            r = k
+            while k < n and s[k] == "`":
+                k += 1
+            if k - r == j - i:
+                found = k
+                break
+            if k - r > longest:
+                longest, end = k - r, k
+        if found is None and longest:
+            found = end
+        if found is None:
+            i = j
+            continue
+        spans.append((i, found))
+        i = found
+    return spans
+
+
+def mask_code(s: str, fill: str = "\x02") -> str:
+    """行の中のコード（`…`）を同じ長さの fill で埋める。"""
+    if "`" not in s:
+        return s
+    t = list(s)
+    for a, b in md_code_spans(s):
+        t[a:b] = fill * (b - a)
+    return "".join(t)
+
+
+def replace_each(rx: re.Pattern, s: str, fn) -> str:
+    """rx に当たったところを fn(match) に置き換えてから、その後ろを探す（後ろ読みは置き換えた後の文字を見る。
+    Python-Markdown が見つけたものを置き換えてから続きを探すのと同じ）。"""
+    i = 0
+    while m := rx.search(s, i):
+        r = fn(m)
+        s = s[:m.start()] + r + s[m.end():]
+        i = m.start() + max(len(r), 1)
+    return s
+
+
+def md_inline_mask(s: str) -> str:
+    """Python-Markdown が link・image より先に置き換える inline（コード・インラインの数式・エスケープ）を同じ長さの \\x02 で埋める。"""
+    s = replace_each(MD_MATH_RE, mask_code(s), lambda m: "\x02" * len(m.group(0)))
+    return replace_each(MD_ESCAPE_RE, s, lambda m: "\x02\x02" if m.group(1) in MD_ESCAPED else m.group(0))
+
+
+def md_get_text(s: str, k: int) -> int | None:
+    """LinkInlineProcessor.getText：k から [ に +1・] に −1 と数え、0 になった ] の次の位置（0 にならなければ None）。"""
+    depth = 1
+    while k < len(s):
+        depth += {"[": 1, "]": -1}.get(s[k], 0)
+        k += 1
+        if depth == 0:
+            return k
+    return None
+
+
+def md_get_link(s: str, k: int) -> int | None:
+    """LinkInlineProcessor.getLink：s[k] が ( なら ( に +1・) に −1 と数え、0 になった ) の次の位置（なければ None）。
+    題（"…"）の引用符の中の ( ) を数えない扱いは省く（docs の画像に題はない）。"""
+    if s[k:k + 1] != "(":
+        return None
+    depth, k = 1, k + 1
+    while k < len(s):
+        depth += {"(": 1, ")": -1}.get(s[k], 0)
+        k += 1
+        if depth == 0:
+            return k
+    return None
+
+
+def md_make(rx: re.Pattern, s: str) -> tuple[str, list[tuple[int, bool, int | None]], list[tuple[int, str]]]:
+    """s の中に rx（[ か ![）から link・image を作る。作ったものは置き換えて最初から探し直す（Python-Markdown と同じ）。
+    (置き換えた s, [(位置, 作れたか, 文字を閉じた ] の次の位置)], 作ったものの文字 [(開始, 作ったときの文字)])。"""
+    made, failed, texts, i = [], [], [], 0
+    while m := rx.search(s, i):
+        k = md_get_text(s, m.end())
+        e = md_get_link(s, k) if k is not None else None
+        if e is None:
+            failed.append((m.start(), False, k))
+            i = m.end()
+            continue
+        made.append((m.start(), True, k))
+        texts.append((m.end(), s[m.end():k - 1]))
+        s = s[:m.start()] + "\x02" * (e - m.start()) + s[e:]
+        failed, i = [], 0
+    return s, sorted(made + failed), texts
+
+
+def md_images(s: str) -> list[tuple[int, bool, int | None]]:
+    """1 行の中の ![ ごとに (位置, 画像になるか, 代替テキストを閉じた ] の次の位置)。s は md_inline_mask をかけた行。
+    link（160）を作ってから image（150）を作る。link の文字の中は、image から後の処理だけを別にかける（Python-Markdown と同じ）。"""
+    t, _, links = md_make(LINK_START_RE, s)
+    _, out, _ = md_make(IMAGE_START_RE, t)
+    for a, text in links:
+        _, inner, _ = md_make(IMAGE_START_RE, text)
+        out += [(a + pos, ok, None if k is None else a + k) for pos, ok, k in inner]
+    return sorted(out)
+
+
+def broken_images(s: str) -> list[tuple[int, str]]:
+    """Python-Markdown が画像にしない ![…](…) の (![ の位置, 理由)。s は md_inline_mask をかけた行（1 行の中で数える）。
+    画像のつもりかは図のファイルで決める：行の中で ![ より後ろにある ](….svg など) が、作った画像の場所でなければ崩れている。
+    図のファイルを指さない ![…]（![alt][ref] や、文の中の「![注意]」）は見ない。"""
+    made = {k for _, ok, k in md_images(s) if ok}           # 作った画像の場所の ( の位置
+    out = []
+    for m in IMAGE_DEST_RE.finditer(s):
+        q = m.start() + 1
+        start = s.rfind("![", 0, m.start())
+        if q in made or start < 0:
+            continue
+        alt = s[start + 2:m.start()]
+        d = alt.count("[") - alt.count("]")
+        why = ("閉じない [ がある" if d > 0 else "途中の ] で閉じる" if d < 0 else
+               "図の場所の ( が閉じない" if md_get_link(s, q) is None else "前の画像の代替テキストに入ってしまう")
+        out.append((start, why))
+    return out
+
+
+def html_attrs(tag: str) -> dict[str, str]:
+    """HTML の開始タグの属性（名前は小文字。値の引用符は外す）。"""
+    return {m.group(1).lower(): (m.group(2) or "").strip("\"'") for m in HTML_ATTR_RE.finditer(tag)}
+
+
+def check_viz(p: Page, codes: list[tuple[int, str, str]], rep: Report, viz_dir: Path) -> None:
+    """class に kp-viz があり data-viz を持つタグの、viz_dir/<名前>.js があるか（#51）。codes は (行, 行, コードを埋めた行)。
+    行をつないで読むので、タグを 2 行以上に分けて書いてもよい。"""
+    text = "\n".join(code for _, _, code in codes)
+    if "data-viz" not in text.lower():
+        return
+    starts, pos = [], 0
+    for _, _, code in codes:
+        starts.append(pos)
+        pos += len(code) + 1
+    for m in HTML_TAG_RE.finditer(text):
+        a = html_attrs(m.group(0))
+        if "data-viz" not in a or "kp-viz" not in a.get("class", "").split():
+            continue
+        where = f"{p.rel}:{p.line_no(codes[bisect.bisect_right(starts, m.start()) - 1][0])}"
+        name = a["data-viz"]
+        if not VIZ_NAME_RE.match(name):
+            rep.error("動く図のスクリプトがない", p.rel,
+                      f"{where}: data-viz={name!r} は図の名前の形（英小文字・数字・ハイフン。viz.js の NAME）でない")
+        elif not (viz_dir / f"{name}.js").is_file():
+            rep.error("動く図のスクリプトがない", p.rel,
+                      f"{where}: data-viz=\"{name}\" の {VIZ_DIR_REL}/{name}.js がない（サイトでは図の代わりに"
+                      "「図を表示できなかった」と出る。JS と tests/viz/ の試験を作るか、div を外して静的な図にする）")
+
+
+def brace_end(s: str, k: int) -> int:
+    """s[k] から読み、開いている { 1 つに対応する } の位置（なければ len(s)）。\\ の次の 1 字は数えない。"""
+    depth = 1
+    while k < len(s):
+        c = s[k]
+        if c == "\\":
+            k += 2
+            continue
+        if c == "{":
+            depth += 1
+        elif c == "}":
+            depth -= 1
+            if depth == 0:
+                return k
+        k += 1
+    return len(s)
+
+
+def inline_math(s: str) -> list[tuple[int, int, list[tuple[int, str, str]]]]:
+    """行の中のインラインの数式 $…$ を書いた人の意図で切り出す：(開始の $, 終わりの $, [(\\text の位置, 命令, {} の中身)])。
+    \\text{…} の中の $ では閉じない（arithmatex はそこで切る。それを見つけるため）。1 行の $$…$$（別行の数式）は飛ばし、
+    空白が続く $ は開きにしない（arithmatex の smart_dollar）。s はコードを埋めた行。"""
+    out, i, n = [], 0, len(s)
+    while i < n:
+        c = s[i]
+        if c == "\\":
+            i += 2
+            continue
+        if c != "$":
+            i += 1
+            continue
+        if s.startswith("$$", i):
+            j = s.find("$$", i + 2)
+            if j < 0:
+                break
+            i = j + 2
+            continue
+        if i + 1 >= n or s[i + 1].isspace():
+            i += 1
+            continue
+        j, texts = i + 1, []
+        while j < n and s[j] != "$":
+            if s[j] == "\\":
+                m = TEXT_CMD_RE.match(s, j)
+                if m:
+                    e = brace_end(s, m.end())
+                    texts.append((j, m.group(0)[:-1].rstrip(), s[m.end():e]))
+                    j = e + 1
+                    continue
+                j += 2
+                continue
+            j += 1
+        if j >= n:
+            break
+        out.append((i, j, texts))
+        i = j + 1
+    return out
+
+
+def text_width(s: str) -> float:
+    """全角（East Asian Width が W・F）を 1、ほかを 0.5 と数えた字数。"""
+    return sum(1.0 if unicodedata.east_asian_width(ch) in "WF" else 0.5 for ch in s)
+
+
+def cmd_end(tex: str, j: int) -> int:
+    """tex[j] の \\ から始まる命令（\\alpha・\\, など）の次の位置。"""
+    m = CMD_RE.match(tex, j)
+    return m.end() if m else j + 1
+
+
+def text_extent(tex: str, scale: float = 1.0) -> float:
+    """TeX の断片の中の \\text を描いた幅（全角の字数）。上付き・下付き・\\frac・\\binom の中は 0.7 倍（2 段目から 0.5 倍）で、
+    \\frac・\\binom は上と下の大きいほう（\\dfrac・\\dbinom・\\cfrac は小さくしない）。"""
+    w, j, n = 0.0, 0, len(tex)
+    sub = max(scale * SCRIPT_SCALE, SCRIPT_MIN)
+    while j < n:
+        c = tex[j]
+        if c == "\\":
+            if m := TEXT_CMD_RE.match(tex, j):
+                e = brace_end(tex, m.end())
+                w += text_width(tex[m.end():e]) * scale
+                j = e + 1
+            elif m := FRAC_RE.match(tex, j):
+                e1 = brace_end(tex, m.end())
+                k = e1 + 1
+                while k < n and tex[k].isspace():
+                    k += 1
+                e2 = brace_end(tex, k + 1) if tex[k:k + 1] == "{" else k
+                small = scale if m.group("name") in ("dfrac", "cfrac", "dbinom") else sub
+                w += max(text_extent(tex[m.end():e1], small), text_extent(tex[k + 1:e2], small))
+                j = e2 + 1
+            else:
+                j = cmd_end(tex, j)
+        elif c in "^_":
+            k = j + 1
+            while k < n and tex[k].isspace():
+                k += 1
+            if tex[k:k + 1] == "{":
+                e = brace_end(tex, k + 1)
+                w += text_extent(tex[k + 1:e], sub)
+                j = e + 1
+            elif m := TEXT_CMD_RE.match(tex, k):
+                e = brace_end(tex, m.end())
+                w += text_width(tex[m.end():e]) * sub
+                j = e + 1
+            else:
+                j = cmd_end(tex, k) if tex[k:k + 1] == "\\" else k + 1
+        else:
+            j += 1
+    return w
+
+
+def math_chunks(tex: str) -> list[str]:
+    """インラインの数式を、KaTeX が折り返せる箇所（一番外の関係・二項演算子の後。{} と \\left … \\right の中は除く）で分ける。
+    式の始めと、演算子・開き括弧・コンマの後の + − は単項なので、そこでは分けない。"""
+    out, start, j, n = [], 0, 0, len(tex)
+    depth = left = 0
+    unary = True
+    while j < n:
+        c, cut = tex[j], False
+        if c == "\\":
+            if m := TEXT_CMD_RE.match(tex, j):
+                j, unary = brace_end(tex, m.end()) + 1, False
+                continue
+            m = CMD_RE.match(tex, j)
+            name, j = (m.group(1), m.end()) if m else ("", j + 1)
+            top = depth == 0 and left == 0
+            if name == "left":
+                left += 1
+            elif name == "right":
+                left, unary = max(left - 1, 0), False
+            elif top and name in ("mathrel", "mathbin"):
+                k = j
+                while k < n and tex[k].isspace():
+                    k += 1
+                if tex[k:k + 1] == "{":
+                    j = brace_end(tex, k + 1) + 1
+                cut = name == "mathrel" or not unary
+            elif top and (name in MATH_REL_CMDS or name in MATH_BIN_CMDS and not unary):
+                cut = True
+            elif name not in (",", ";", ":", "!", " ", "quad", "qquad"):
+                unary = name in ("{", "lbrace", "langle", "lvert", "lVert", "lfloor", "lceil")
+        elif c == "{":
+            depth, j, unary = depth + 1, j + 1, True
+        elif c == "}":
+            depth, j, unary = max(depth - 1, 0), j + 1, False
+        elif depth == 0 and left == 0 and (c in "=<>:" or c in "+-*" and not unary):
+            j, cut = j + 1, True
+        else:
+            if not c.isspace():
+                unary = c in "([,;"
+            j += 1
+        if cut:
+            out.append(tex[start:j])
+            start, unary = j, True
+    out.append(tex[start:])
+    return out
+
+
+def line_boxes(p: Page) -> list[tuple[float, float, str] | None]:
+    """本文の行ごとの (入れ物の幅 px, 文字 px, 入れ物の名前)。表の行は None（表は表の中で横に送れる）。
+    字下げ（4 字で 1 段。Python-Markdown の tab_length）で、箇条書き・囲み・折りたたみ・タブの入れ物を追い、行頭の > を引用と数える。
+    空行とフェンスの中の行は前の行と同じにする。"""
+    opens = {a for a, _, _, _ in p.spans}
+    stack: list[tuple[str, int]] = []
+    out: list[tuple[float, float, str] | None] = []
+    cur: tuple[float, float, str] | None = (LINE_WIDTH, BODY_FONT, "段落")
+    for i, raw in enumerate(p.lines):
+        if not raw.strip() or (p.in_fence[i] and i not in opens):
+            out.append(cur)
+            continue
+        s = raw.expandtabs(4)
+        ind = len(s) - len(s.lstrip(" "))
+        while stack and ind < stack[-1][1]:
+            stack.pop()
+        rest = s[ind:]
+        if LIST_ITEM_RE.match(rest):
+            stack.append(("li", ind + 4))
+        elif BOX_START_RE.match(rest):
+            stack.append(("box", ind + 4))
+        elif rest.startswith("=== "):
+            stack.append(("tab", ind + 4))
+        q = re.match(r"(?:>\s?)*", rest)
+        quotes = q.group(0).count(">")
+        width, font = LINE_WIDTH - QUOTE_INSET * quotes, BODY_FONT
+        for kind, _ in stack:
+            if kind == "li":
+                width -= LIST_INSET_EM * font
+            elif kind == "box":
+                width, font = width - BOX_INSET, BOX_FONT
+        kinds = [k for k, _ in stack]
+        boxes, lis = kinds.count("box"), kinds.count("li")
+        name = "の中の".join(x for x in ("引用" if quotes else "", "" if not boxes else "囲み" if boxes == 1 else f"{boxes} 重の囲み",
+                                         f"箇条書き {lis} 段" if lis else "") if x) or "段落"
+        cur = None if rest[q.end():].lstrip().startswith("|") else (width, font, name)
+        out.append(cur)
+    return out
+
+
+def text_room(width: float, font: float) -> float:
+    """入れ物に入る \\text の全角の字数の目安（前後の数式のぶんを引く）。"""
+    return width / (font * KATEX_EM) - TEXT_AROUND
+
+
+def check_rendering(all_pages: list[Page], rep: Report, viz_dir: Path | None) -> None:
+    """描くと崩れる書き方（#50・#51・#61）：画像の代替テキストの角括弧、JS のない動く図、インラインの数式の \\text。
+    フェンス・HTML のコメント・$$ の数式ブロック・行の中のコードの中は見ない。"""
+    def short(t: str, k: int = 48) -> str:
+        t = t.strip()
+        return t if len(t) <= k else t[:k - 1] + "…"
+
+    hints = {"閉じない [ がある": "半開区間などの [ は \\[ にエスケープするか、言葉にする",
+             "途中の ] で閉じる": "(l, r] などの ] は \\] にエスケープするか、言葉にする",
+             "図の場所の ( が閉じない": "図の場所を ) で閉じる",
+             "前の画像の代替テキストに入ってしまう": "前の画像の代替テキストの [・] を \\[・\\] にする"}
+    for p in all_pages:
+        boxes: list[tuple[float, float, str] | None] | None = None      # 行ごとの入れ物（長い \text を見るときだけ作る）
+        codes = [(i, t, mask_code(t, " ")) for i, t in text_lines(p)]
+        if viz_dir is not None:
+            check_viz(p, codes, rep, viz_dir)
+        for i, t, code in codes:
+            where = f"{p.rel}:{p.line_no(i)}"
+            if "![" in t:
+                for pos, why in broken_images(md_inline_mask(t)):
+                    rep.error("画像の代替テキストの角括弧", p.rel,
+                              f"{where}: 画像の記法が Python-Markdown で画像にならない（{why}）: {short(t[pos:])}"
+                              f"（{hints[why]}。代替テキストは 1 行に書く）")
+            if "$" not in code or not TEXT_CMD_RE.search(code):
+                continue
+            for a, b, texts in inline_math(code):
+                broken = False
+                for _, name, body in texts:
+                    if "$" in re.sub(r"\\.", "", body):
+                        broken = True
+                        rep.error("インラインの数式の \\text の中の $", p.rel,
+                                  f"{where}: インラインの数式 $…$ の中の {short(f'{name}{{{body}}}', 40)} に $ がある（arithmatex が"
+                                  "中の $ で数式を切るので、KaTeX のエラーか崩れた表示になる）。数式を \\text の外に出す: "
+                                  "$[i \\text{ が条件を満たす}]$（別行の $$…$$ の中ならよい）")
+                if broken or not texts:
+                    continue
+                if boxes is None:
+                    boxes = line_boxes(p)
+                if boxes[i] is None:
+                    continue
+                width, font, place = boxes[i]
+                room = text_room(width, font)
+                w, chunk = max((text_extent(c), c) for c in math_chunks(code[a + 1:b]))
+                if w > room:
+                    parts = [f"{m.group(0)[:-1].rstrip()}{{{chunk[m.end():brace_end(chunk, m.end())]}}}"
+                             for m in TEXT_CMD_RE.finditer(chunk)]
+                    rep.warn("インラインの数式の長い \\text", p.rel,
+                             f"{where}: インラインの数式の折り返せない塊の \\text が全角 {round(w, 1):g} 字ぶん（{place}の幅 "
+                             f"{width:g}px では {room:.1f} 字まで）: " + "・".join(short(x, 30) for x in parts)
+                             + "。\\text の中は折り返せないので、スマホの幅でページ全体が横にずれる。日本語を数式の外に出す")
+
+
 # 定型の節の見出しと anchor（style-guide §13-1・§16-1）。sections には載せない
 STANDARD_SECTIONS = {"examples": "例題", "practice": "練習問題", "challenge": "力試し", "quiz": "確認問題",
                      "comparison": "使い分け", "pitfalls": "落とし穴", "references": "参考", "resources": "学ぶための資料"}
@@ -1017,6 +1520,8 @@ def check_all(pages: list[Page], others: list[Page], rep: Report, ledger: dict[s
         docs = Path(str(q.path)[: -len(q.rel)])
     if docs is not None:
         check_links(pages + others, rep, docs)
+    viz_dir = docs.parent / VIZ_DIR_REL if docs is not None else None
+    check_rendering(pages + others, rep, viz_dir if viz_dir is not None and viz_dir.is_dir() else None)
     check_conventions(pages, rep)
     # ---- ページごと
     by_id: dict[str, Page] = {}
@@ -1227,7 +1732,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--field", choices=FIELDS, help="その分野のページに関わる指摘だけを出す")
     parser.add_argument("--page", action="append", default=[], help="そのページに関わる指摘だけを出す（id かパス。くり返し・カンマ区切り可）")
-    parser.add_argument("--root", type=Path, default=ROOT, help="docs/ と snippets/ のある場所（既定はリポジトリ）")
+    parser.add_argument("--root", type=Path, default=ROOT,
+                        help="docs/ と snippets/（あれば overrides/assets/js/viz/ も）のある場所（既定はリポジトリ）")
     parser.add_argument("--ledger", type=Path, default=LEDGER_PATH, help="問題の台帳（既定は data/problems.yaml）")
     parser.add_argument("-v", "--verbose", action="store_true", help="警告も全件を出す")
     args = parser.parse_args()

@@ -30,7 +30,7 @@ sections:
   - {title: 実数が避けられないとき：long double と、値の大きさに合わせた EPS, anchor: eps}
   - {title: 出力の桁数と、実数の二分探索の打ち切り, anchor: output-and-binary-search}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -180,6 +180,8 @@ $\varepsilon$ は次の 2 つの間に取る。
 値が $10^9$ 規模なのに $\varepsilon = 10^{-9}$ と固定すると、間隔 $10^{-7}$ より小さいので、誤差で等しいものを「違う」と判定する。値の大きさが場所によって大きく変わるなら、$\lvert a - b \rvert \le \varepsilon \max(1, \lvert a \rvert, \lvert b \rvert)$ のように相対誤差で比べる。
 
 EPS 付きの「等しい」は推移律を満たさない（$a \approx b$ かつ $b \approx c$ でも $a \approx c$ とは限らない）。EPS 付きの比較関数で `sort` したり、`double` を `map` のキーにしたりすると、同じものが別々にまとまったり、並びが壊れたりする。まとめるのが目的なら、整数のキーに直す方法を先に探す。
+
+**手元と提出で結果が変わる**。AtCoder は `-march=native` でコンパイルするので、小数の外積の符号や `== 0` の判定が手元と変わりうる（[FMA](../cpp/cpp-environment.md#march-native)）。整数で計算できるなら外積を整数のまま求め（[外積・内積・距離の 2 乗で比べる](#integer-comparison)）、実数が避けられないなら `== 0` ではなく上の EPS で比べる。
 
 ## 出力の桁数と、実数の二分探索の打ち切り {#output-and-binary-search}
 

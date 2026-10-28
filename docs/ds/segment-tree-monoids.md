@@ -27,7 +27,7 @@ sections:
   - {title: 非可換なモノイド（一次関数の合成・ハッシュの連結。積む順序）, anchor: non-commutative}
   - {title: '行列を載せる（(min,+)・(max,+) の半環も）', anchor: matrix}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -266,29 +266,26 @@ K 日続く休日の始まりの日を決めると、その中の各日を「払
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [ABC309 F. Box in Box](https://atcoder.jp/contests/abc309/tasks/abc309_f)（diff 1619）：回転してよい直方体の箱のうち、別の箱に真に入るものがあるかを判定する。
 - [ABC331 F. Palindrome Query](https://atcoder.jp/contests/abc331/tasks/abc331_f)（diff 1666）：1 文字の更新と、区間が回文かの質問に答える。
-- [ABC283 F. Permutation Distance](https://atcoder.jp/contests/abc283/tasks/abc283_f)（diff 1771）：順列の各 i について |P_i − P_j| + |i − j| の最小値を求める。
 
 </div>
 
 ??? note "方針"
-    - **ABC309 F・ABC283 F** は、載せるのは最小値だけで、工夫は添字の選び方にある。情報を足す型ではなく、値そのものを載せる型（[セグメント木](../ds/segment-tree.md#what-it-does)の表）で足りる
-    - **ABC309 F**：各箱の 3 辺をソートして $(x, y, z)$ とし、$x$ の小さい順に処理する。座標圧縮した $y$ を添字にして $z$ の最小値を持つ。$y$ が小さい側の $z$ の最小値が今の箱の $z$ より小さければ、その箱を中に入れられる。$x$ が等しい箱どうしは入れられないので、同じ $x$ の箱はまとめて判定してから登録する（[値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md)）
     - **ABC331 F**：前向きと後ろ向きのハッシュを（ハッシュ, $B^{\text{長さ}}$）の組でセグメント木に載せ、区間とその反転のハッシュを比べる（[セグ木に載せるハッシュ](../string/rolling-hash.md#hash-segment-tree)）
-    - **ABC283 F**：$i$ と $j$ の大小、$P_i$ と $P_j$ の大小の組み合わせで絶対値を外すと、4 通りとも「$\pm i \pm P_i$」と「$\mp j \mp P_j$ の最小」の和になる。添字を $P_j$ にした最小値のセグメント木を、向きを変えて 4 回走査する
 
 ## 力試し {#challenge}
 
 <div class="kp-problems" data-role="challenge" markdown>
 
 - [ABC460 F. Farthest Pair Query](https://atcoder.jp/contests/abc460/tasks/abc460_f)（diff 1987）：木の頂点の白と黒を切り替えるクエリのたびに、黒い頂点どうしの距離の最大を答える。
+- [ABC467 F. Email Scheduling Optimization](https://atcoder.jp/contests/abc467/tasks/abc467_f)（diff 2052）：各メールに書く時間 A_j と返信までの時間 B_j があり、A・B の 1 点更新のたびに、メールを 1 通ずつ好きな順に書いて送るとき、すべての返信が届く最小の時刻を答える。
 - [ARC008 D. タコヤキオイシクナール](https://atcoder.jp/contests/arc008/tasks/arc008_4)（diff 2430）：一次関数の列を 1 つずつ差し替えながら、すべてを合成した結果の値の最大・最小を求める。
 
 </div>
 
 ??? note "方針"
     - **ABC460 F**：頂点集合の最も遠い 2 点は、2 つの部分集合それぞれの最も遠い 2 点、合わせて 4 頂点の中から選べる（[木の直径と最遠点](../tree/tree-diameter.md)）。頂点番号の順に並べたセグメント木の各区間に「黒い頂点の最も遠い 2 点」を要約として持ち、この性質で結ぶ。黒い頂点がない区間は空の印を持つ単位元にする。結合のたびに 2 点間の距離を [LCA](../tree/lca.md) で求めるので、距離の計算の速さが効く
+    - **ABC467 F**：$B$ の大きい順に書くのが最適で（[交換論法](../basics/exchange-argument.md)）、答えはその順での $\max_i (A_1 + \dots + A_i + B_i)$ になる。クエリを先読みして $B$ の値を座標圧縮し、$B$ の大きい順に並べたセグメント木の各ノードに（$A$ の和 $s$, ノードの中で自分までの $A$ の和に $B_i$ を足した値の最大 $m$）を持つ。結合は[括弧列の要約](#design-steps)の min を max に替えた $(s_x + s_y, \max(m_x, s_x + m_y))$ で、空の葉は $(0, -\infty)$ にする。$B$ が等しいメールは同じ葉に $A$ の和をまとめる
     - **ARC008 D**：差し替えの起きる位置だけを座標圧縮すると、ほかの位置は恒等写像なので無視できる。（傾き, 切片）の合成を[非可換なモノイド](#non-commutative)の式で載せ、初期状態の値 1 と、差し替えのたびに全体の合成を 1 に施した値の、最大と最小を答える
 
 ## 確認問題 {#quiz}
@@ -326,6 +323,5 @@ K 日続く休日の始まりの日を決めると、その中の各日を「払
 - [gotoki_no_joe「ABC343をHaskellで」](https://qiita.com/gotoki_no_joe/items/7446ddde2d6a36eae210)：例題 abc343_f の結合をマージソートのマージのように行う考え方
 - [amoshyc「AtCoder Beginner Contest 223 題解」](https://hackmd.io/@amoshyc/S1yZNoYBF)：例題 abc223_f の別解（累積和の遅延セグメント木）と判定の条件
 - [loop0919「ABC456 F - Plan Holidays 復習勉強メモ」](https://zenn.dev/loop0919/articles/f779f54ccdfedf)：例題 abc456_f の窓を固定した DP、(min,+) の 2×2 行列、窓とその次の日までの 2 回の区間の積
-- [ZOI_dayo「【AtCoder】黒〜緑のためのABC解説 | ABC309 A~F」](https://qiita.com/ZOI_dayo/items/a55cc4342832efdc23ba)：練習 abc309_f の走査の順と、同じ値の箱の扱い
-- [Bellala「abc283 F - Permutation Distance」](https://www.cnblogs.com/wushansinger/p/17021389.html)：練習 abc283_f の 4 通りの場合分けと走査の向き
+- [ikatakos「AtCoder Beginner Contest 467 E,F問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2026/0718_abc467)：力試し abc467_f の、$B$ の大きい順に書く貪欲と、セグメント木のノードに持つ値とその結合（解法の部分だけを参照）
 - [drken「AtCoder ARC 008 D - タコヤキオイシクナール」](https://drken1215.hatenablog.com/entry/2018/02/14/121239)：力試し arc008_4 の座標圧縮と一次関数の合成の向き

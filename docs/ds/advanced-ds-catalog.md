@@ -16,11 +16,11 @@ signs: []
 acl: []
 verify: []
 sections:
+  - {title: ほかのページにあるもの（木の動的な構造は木の章、CDQ 分割統治・時間付き Mo・Li Chao Tree は各ページ）, anchor: elsewhere}
   - {title: 名前・何ができるか・代わりになる手の表, anchor: table}
   - {title: 併合可能なヒープ（skew heap・leftist heap・ランダム化ヒープ。マージテクで足りることが多い）, anchor: meldable-heap}
-  - {title: ほかのページにあるもの（木の動的な構造は木の章、CDQ 分割統治・時間付き Mo・Li Chao Tree は各ページ）, anchor: elsewhere}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -36,6 +36,58 @@ updated: 2026-10-22
 <!-- textlint-enable -->
 
 見慣れないデータ構造の名前と用途は、解説で名前だけ出会う発展的なデータ構造を、何ができるか・計算量・代わりになる手の 3 つで引くための一覧である。ABC で必須になった例はほとんどなく、ほとんどの問題は代わりの列の手で解ける。名前を知っておくと、解説の想定解が自分の知っている手のどれに当たるかを判断しやすくなる。
+
+## ほかのページにあるもの（木の動的な構造は木の章、CDQ 分割統治・時間付き Mo・Li Chao Tree は各ページ） {#elsewhere}
+
+解説で見かける名前のうち、この教材にページか節があるものを並べた。左の列の名前で探し、右の列のページへ進む。
+
+**区間・列のデータ構造**
+
+| 解説で見かける名前 | 何をするものか | ページ |
+| --- | --- | --- |
+| 双対セグ木（Dual Segment Tree） | 区間への作用と一点の取得 | [遅延セグメント木](../ds/lazy-segment-tree.md#dual-segment-tree) |
+| 動的セグ木・sparse segment tree | 添字の範囲が大きいとき、要るノードだけを作る | [値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md#dynamic-segment-tree) |
+| Segment Tree Beats・吉司机线段树 | 区間 chmin・chmax と区間の和 | [Segment Tree Beats](../ds/segment-tree-beats.md) |
+| 永続セグ木・経路コピー | 更新前の版を残したまま更新する | [永続データ構造](../ds/persistent-data-structures.md#path-copying) |
+| マージソート木・領域木・Range Tree | 区間の $x$ 以下の個数・和をオンラインで | [マージソート木](../ds/merge-sort-tree.md) |
+| Wavelet Matrix・Wavelet Tree | 区間の K 番目・$x$ 未満の個数を静的な列で | [Wavelet Matrix](../ds/wavelet-matrix.md) |
+| Disjoint Sparse Table | 冪等でない演算の静的な区間の積を $O(1)$ で | [Sparse Table](../ds/sparse-table.md#disjoint-sparse-table) |
+| ODT・Chtholly Tree・珂朵莉树 | 値が同じ区間をまとめて set で持つ | [区間を set で管理する](../ds/interval-set.md) |
+| treap・splay・RBST・implicit treap | 列の途中への挿入・削除、区間の反転 | [平衡二分探索木と pb_ds の tree](../ds/balanced-bst.md#treap) |
+| pb_ds の tree・order statistics tree | K 番目の要素と $x$ 未満の個数 | [平衡二分探索木と pb_ds の tree](../ds/balanced-bst.md#pbds) |
+| Binary Trie・XOR Trie | XOR の最小・最大、K 番目 | [Binary Trie](../ds/binary-trie.md) |
+| Cartesian Tree・デカルト木 | 最大値の位置で区間を割る再帰の木 | [単調スタックとスライド最小値](../ds/monotonic-stack.md#cartesian-tree) |
+| SWAG（Sliding Window Aggregation） | 総積を答えられるキュー | [単調スタックとスライド最小値](../ds/monotonic-stack.md#swag) |
+| Priority Sum Structure | 上位 K 個の和の管理 | [上位 K 個の和と中央値の管理](../ds/top-k-multiset.md#two-sets) |
+| 部分永続 Union-Find | 過去の時刻での連結判定 | [部分永続 Union-Find](../ds/partially-persistent-union-find.md) |
+| Undo つき Union-Find | 直前の併合を取り消す | [ロールバックできる Union-Find](../ds/rollback-union-find.md) |
+| Li Chao Tree・李超线段树 | 直線の追加と、ある $x$ での最小値 | [Convex Hull Trick と Li Chao Tree](../dp/cht.md#li-chao-tree) |
+
+**クエリの処理の工夫**
+
+| 解説で見かける名前 | 何をするものか | ページ |
+| --- | --- | --- |
+| CDQ 分割統治・オフラインの分割統治 | 時刻で分割統治し、前半の更新が後半の質問に与える影響をまとめて数える | [CDQ 分割統治](../ds/cdq-divide-and-conquer.md) |
+| 整体二分・parallel binary search | 全部の質問の二分探索を同時に進める | [並列二分探索](../ds/parallel-binary-search.md) |
+| 時間付き Mo・ロールバック Mo | 更新つきの Mo、要素を出すのが難しい量の Mo | [Mo's algorithm](../ds/mo-algorithm.md#variants) |
+| 木上の Mo・Mo on tree | 木のパスの質問に Mo を使う | [Mo's algorithm](../ds/mo-algorithm.md#mo-on-tree) |
+| Offline Dynamic Connectivity・時間軸のセグ木 | 辺の追加と削除が混ざる連結判定を先読みで | [辺の追加と削除が混ざる連結性](../graph/offline-dynamic-connectivity.md#time-segment-tree) |
+| 区間に辺を張るテク・セグ木グラフ | 区間の頂点すべてへの辺を $O(\log N)$ 本で表す | [区間に辺を張る](../graph/segment-tree-graph.md) |
+| Dynamic DP・DDP | 値の更新のたびに DP の答えを行列のセグ木で求め直す | [動的 DP](../dp/dynamic-dp.md) |
+
+**木のデータ構造**
+
+| 解説で見かける名前 | 何をするものか | ページ |
+| --- | --- | --- |
+| Link-Cut Tree・LCT | 辺の追加・削除がある森のパスの質問 | [動的木](../tree/dynamic-tree.md#link-cut) |
+| Euler Tour Tree・Top Tree | 辺の追加・削除がある森の部分木の質問 | [動的木](../tree/dynamic-tree.md#ett-top-tree) |
+| Static Top Tree | 頂点の値の更新のたびに木 DP の根の値を求め直す | [Static Top Tree と木 DP の動的更新](../tree/static-top-tree.md) |
+| HL 分解（HLD） | 木のパスを $O(\log N)$ 本の区間に分ける | [HL 分解](../tree/hld.md) |
+| 点分治・重心分解 | 木のパスを重心で分割統治して数える | [重心分解](../tree/centroid-decomposition.md) |
+| Virtual Tree・虚樹 | 指定した頂点と LCA だけの圧縮した木 | [Auxiliary Tree](../tree/auxiliary-tree.md) |
+| クラスカル再構築木・KRT | Union-Find の併合の過程を木にする | [併合過程の木](../tree/merge-process-tree.md) |
+| DSU on Tree・Sack | 重い子の結果を残して部分木の集合を作る | [マージテク](../tree/small-to-large.md#dsu-on-tree) |
+| 長鎖分解 | 深さを添字にする木 DP を線形にする | [木の直径と最遠点](../tree/tree-diameter.md#long-path-decomposition) |
 
 ## 名前・何ができるか・代わりになる手の表 {#table}
 
@@ -106,58 +158,6 @@ leftist heap は、併合の再帰が右の背骨だけを降りることで速�
 ```cpp
 --8<-- "advanced-ds-catalog/pbds-join.cpp:core"
 ```
-
-## ほかのページにあるもの（木の動的な構造は木の章、CDQ 分割統治・時間付き Mo・Li Chao Tree は各ページ） {#elsewhere}
-
-解説で見かける名前のうち、この教材にページか節があるものを並べた。左の列の名前で探し、右の列のページへ進む。
-
-**区間・列のデータ構造**
-
-| 解説で見かける名前 | 何をするものか | ページ |
-| --- | --- | --- |
-| 双対セグ木（Dual Segment Tree） | 区間への作用と一点の取得 | [遅延セグメント木](../ds/lazy-segment-tree.md#dual-segment-tree) |
-| 動的セグ木・sparse segment tree | 添字の範囲が大きいとき、要るノードだけを作る | [値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md#dynamic-segment-tree) |
-| Segment Tree Beats・吉司机线段树 | 区間 chmin・chmax と区間の和 | [Segment Tree Beats](../ds/segment-tree-beats.md) |
-| 永続セグ木・経路コピー | 更新前の版を残したまま更新する | [永続データ構造](../ds/persistent-data-structures.md#path-copying) |
-| マージソート木・領域木・Range Tree | 区間の $x$ 以下の個数・和をオンラインで | [マージソート木](../ds/merge-sort-tree.md) |
-| Wavelet Matrix・Wavelet Tree | 区間の K 番目・$x$ 未満の個数を静的な列で | [Wavelet Matrix](../ds/wavelet-matrix.md) |
-| Disjoint Sparse Table | 冪等でない演算の静的な区間の積を $O(1)$ で | [Sparse Table](../ds/sparse-table.md#disjoint-sparse-table) |
-| ODT・Chtholly Tree・珂朵莉树 | 値が同じ区間をまとめて set で持つ | [区間を set で管理する](../ds/interval-set.md) |
-| treap・splay・RBST・implicit treap | 列の途中への挿入・削除、区間の反転 | [平衡二分探索木と pb_ds の tree](../ds/balanced-bst.md#treap) |
-| pb_ds の tree・order statistics tree | K 番目の要素と $x$ 未満の個数 | [平衡二分探索木と pb_ds の tree](../ds/balanced-bst.md#pbds) |
-| Binary Trie・XOR Trie | XOR の最小・最大、K 番目 | [Binary Trie](../ds/binary-trie.md) |
-| Cartesian Tree・デカルト木 | 最大値の位置で区間を割る再帰の木 | [単調スタックとスライド最小値](../ds/monotonic-stack.md#cartesian-tree) |
-| SWAG（Sliding Window Aggregation） | 総積を答えられるキュー | [単調スタックとスライド最小値](../ds/monotonic-stack.md#swag) |
-| Priority Sum Structure | 上位 K 個の和の管理 | [上位 K 個の和と中央値の管理](../ds/top-k-multiset.md#two-sets) |
-| 部分永続 Union-Find | 過去の時刻での連結判定 | [部分永続 Union-Find](../ds/partially-persistent-union-find.md) |
-| Undo つき Union-Find | 直前の併合を取り消す | [ロールバックできる Union-Find](../ds/rollback-union-find.md) |
-| Li Chao Tree・李超线段树 | 直線の追加と、ある $x$ での最小値 | [Convex Hull Trick と Li Chao Tree](../dp/cht.md#li-chao-tree) |
-
-**クエリの処理の工夫**
-
-| 解説で見かける名前 | 何をするものか | ページ |
-| --- | --- | --- |
-| CDQ 分割統治・オフラインの分割統治 | 時刻で分割統治し、前半の更新が後半の質問に与える影響をまとめて数える | [CDQ 分割統治](../ds/cdq-divide-and-conquer.md) |
-| 整体二分・parallel binary search | 全部の質問の二分探索を同時に進める | [並列二分探索](../ds/parallel-binary-search.md) |
-| 時間付き Mo・ロールバック Mo | 更新つきの Mo、要素を出すのが難しい量の Mo | [Mo's algorithm](../ds/mo-algorithm.md#variants) |
-| 木上の Mo・Mo on tree | 木のパスの質問に Mo を使う | [Mo's algorithm](../ds/mo-algorithm.md#mo-on-tree) |
-| Offline Dynamic Connectivity・時間軸のセグ木 | 辺の追加と削除が混ざる連結判定を先読みで | [辺の追加と削除が混ざる連結性](../graph/offline-dynamic-connectivity.md#time-segment-tree) |
-| 区間に辺を張るテク・セグ木グラフ | 区間の頂点すべてへの辺を $O(\log N)$ 本で表す | [区間に辺を張る](../graph/segment-tree-graph.md) |
-| Dynamic DP・DDP | 値の更新のたびに DP の答えを行列のセグ木で求め直す | [動的 DP](../dp/dynamic-dp.md) |
-
-**木のデータ構造**
-
-| 解説で見かける名前 | 何をするものか | ページ |
-| --- | --- | --- |
-| Link-Cut Tree・LCT | 辺の追加・削除がある森のパスの質問 | [動的木](../tree/dynamic-tree.md#link-cut) |
-| Euler Tour Tree・Top Tree | 辺の追加・削除がある森の部分木の質問 | [動的木](../tree/dynamic-tree.md#ett-top-tree) |
-| Static Top Tree | 頂点の値の更新のたびに木 DP の根の値を求め直す | [Static Top Tree と木 DP の動的更新](../tree/static-top-tree.md) |
-| HL 分解（HLD） | 木のパスを $O(\log N)$ 本の区間に分ける | [HL 分解](../tree/hld.md) |
-| 点分治・重心分解 | 木のパスを重心で分割統治して数える | [重心分解](../tree/centroid-decomposition.md) |
-| Virtual Tree・虚樹 | 指定した頂点と LCA だけの圧縮した木 | [Auxiliary Tree](../tree/auxiliary-tree.md) |
-| クラスカル再構築木・KRT | Union-Find の併合の過程を木にする | [併合過程の木](../tree/merge-process-tree.md) |
-| DSU on Tree・Sack | 重い子の結果を残して部分木の集合を作る | [マージテク](../tree/small-to-large.md#dsu-on-tree) |
-| 長鎖分解 | 深さを添字にする木 DP を線形にする | [木の直径と最遠点](../tree/tree-diameter.md#long-path-decomposition) |
 
 ## 確認問題 {#quiz}
 

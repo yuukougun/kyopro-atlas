@@ -28,7 +28,7 @@ sections:
   - {title: シミュレーションを速く進める（ずれ・反転は全体への操作を変数で持つページへ）, anchor: simulation-speedup}
   - {title: ダブリング・行列累乗との使い分け, anchor: vs-doubling}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -118,7 +118,7 @@ $$
 f(X) = \left\lfloor \frac{X}{P} \right\rfloor c_P + c_{X \bmod P}, \qquad [L, R) \text{ の黒の数} = f(R) - f(L)
 $$
 
-![周期 4 の模様（黒・白・黒・黒）で [0, 10) を数えると、1 周期の黒 3 が 2 回と、余り 2 マスの黒 1 で、合計 7](../img/periodicity/period-count.svg)
+![周期 4 の模様（黒・白・黒・黒）で \[0, 10) を数えると、1 周期の黒 3 が 2 回と、余り 2 マスの黒 1 で、合計 7](../img/periodicity/period-count.svg)
 
 範囲を $f(R) - f(L)$ に分けると、両端がずれた半端な区間を場合分けせずに済む。$L$ が負でも、$\lfloor \cdot \rfloor$ と $0 \le X \bmod P < P$ の約束で計算すれば同じ式でよい。C++ の `/` と `%` は 0 の方向へ丸めるので、負の数では[整数の割り算](../math/integer-division.md)の floor を自分で書く。あるいは $P$ の倍数を全体に足して非負にずらす。
 

@@ -28,7 +28,7 @@ sections:
   - {title: 縮約した DAG の上で DP する, anchor: dp-on-dag}
   - {title: 縮約の応用の型（組の数・不等式の割り当て・2-SAT）, anchor: patterns}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -48,7 +48,7 @@ updated: 2026-10-22
 
 ## 縮約したグラフが DAG になる理由 {#condensation}
 
-有向グラフで、頂点 $u$ から $v$ へも $v$ から $u$ へも辿り着けるとき、$u$ と $v$ は互いに行き来できるという。互いに行き来できることを $u \leftrightarrow v$ と書く。どの頂点も自分自身とは行き来できるとみなす。$u \leftrightarrow v$ なら $v \leftrightarrow u$ であり、$u \leftrightarrow v$ かつ $v \leftrightarrow w$ なら $u \leftrightarrow w$ が成り立つ（推移的である）。この関係は自分自身とも成り立ち、向きを入れ替えても同じで、推移的である。よって頂点全体は重なりのないグループに分かれる。各グループを強連結成分（SCC）と呼ぶ。閉路に乗らない頂点は 1 頂点だけの成分になる。
+有向グラフで、頂点 $u$ から $v$ へも $v$ から $u$ へも辿り着けるとき、$u$ と $v$ は互いに行き来できるという。互いに行き来できることを $u \leftrightarrow v$ と書き、どの頂点も自分自身とは行き来できるとみなす。この関係は、$u \leftrightarrow u$（反射律）、$u \leftrightarrow v$ なら $v \leftrightarrow u$（対称律）、$u \leftrightarrow v$ かつ $v \leftrightarrow w$ なら $u \leftrightarrow w$（推移律）の 3 つを満たす。よって頂点全体は重なりのないグループに分かれる。各グループを強連結成分（SCC）と呼ぶ。閉路に乗らない頂点は 1 頂点だけの成分になる。
 
 成分を 1 つの頂点に縮め、成分をまたぐ辺だけを残したグラフを縮約したグラフ（condensation）と呼ぶ。次の図は 8 頂点・12 辺のグラフと、その縮約である（頂点は 1-indexed）。
 

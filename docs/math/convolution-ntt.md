@@ -31,7 +31,7 @@ sections:
   - {title: bit ごと・文字ごとに分けて畳み込む（OR の和など）, anchor: split-by-bit, level: 黄}
   - {title: ACL の convolution の要件（法の形と長さ）, anchor: acl}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -71,7 +71,7 @@ $$
 
 $a$ を多項式 $1 + 2x + 3x^2$、$b$ を $4 + 5x + 6x^2$ とみると、$a_i x^i \cdot b_j x^j = a_i b_j x^{i+j}$ なので、積の $x^k$ の係数が $c_k$ になる。畳み込みと多項式の積は同じものである。
 
-素朴に計算するなら、$b$ を反転して $a$ の下に置き、1 つずつずらしながら重なった部分の積を足す。ずらし幅が $k$ のとき、重なるのは $i + j = k$ の組だけである。次の図は、この手順を 1 段ずつ進める。
+素朴に計算するなら、$b$ を反転して $a$ の下に置き、1 つずつずらしながら重なった部分の積を足す。ずらし幅が $k$ のとき $b_j$ は $a_{k-j}$ の真下に来るので、重なるのは $i + j = k$ の組だけである。次の図は、この手順を 1 段ずつ進める。
 
 <div class="kp-viz" data-viz="convolution-naive" data-config='{"a": [1, 2, 3], "b": [4, 5, 6]}'></div>
 

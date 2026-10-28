@@ -130,6 +130,24 @@ search:
     - `cycle-detection#out-degree-one` 出次数 1 のグラフでは同じ頂点に 2 回来るまで進む：https://yuukougun.github.io/kyopro-atlas/graph/cycle-detection/#out-degree-one
     - `cycle-detection#vs-periodicity` シミュレーションの周期の検出（基本テクニックの章）との違い：https://yuukougun.github.io/kyopro-atlas/graph/cycle-detection/#vs-periodicity
 
+## なもりグラフ（namori-graph） {#namori-graph}
+
+- id：`namori-graph`　レベル：水　段階：reviewed　type：technique
+- URL：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/
+- 別名：なもり、unicyclic graph、pseudotree、閉路が 1 つのグラフ、木に辺を 1 本足したグラフ、N 頂点 N 辺の連結グラフ
+- 種類：グラフ探索、木
+- 前提：`connected-components`、`cycle-detection`、`tree-basics`
+- ACL：`dsu`
+- サイン：
+    - 言い回し：N 頂点 N 辺の連結グラフ・木に辺を 1 本足したグラフ
+    - 言い回し：2 頂点間の単純パスが一意か
+- 節：
+    - `namori-graph#one-cycle` 閉路がちょうど 1 つある理由：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/#one-cycle
+    - `namori-graph#peel-leaves` 次数 1 の頂点を削って閉路を求める（Union-Find でも）：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/#peel-leaves
+    - `namori-graph#hanging-trees` 閉路の頂点ごとにぶら下がる木に分ける：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/#hanging-trees
+    - `namori-graph#unique-path` 単純パスが一意になる条件：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/#unique-path
+    - `namori-graph#directed-version` 有向版は Functional graph：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/#directed-version
+
 ## 二部グラフ判定（bipartite-graph） {#bipartite-graph}
 
 - id：`bipartite-graph`　レベル：基礎　段階：reviewed　type：technique
@@ -474,24 +492,6 @@ search:
     - `functional-graph#on-cycle` 全頂点について閉路上かを求める（入次数 0 から剥がす・SCC）：https://yuukougun.github.io/kyopro-atlas/graph/functional-graph/#on-cycle
     - `functional-graph#per-cycle` 閉路ごとの集計・到達できる頂点の数：https://yuukougun.github.io/kyopro-atlas/graph/functional-graph/#per-cycle
     - `functional-graph#permutation` 置換は閉路の集まり（巡回分解は数え上げの章）：https://yuukougun.github.io/kyopro-atlas/graph/functional-graph/#permutation
-
-## なもりグラフ（namori-graph） {#namori-graph}
-
-- id：`namori-graph`　レベル：水　段階：reviewed　type：technique
-- URL：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/
-- 別名：なもり、unicyclic graph、pseudotree、閉路が 1 つのグラフ、木に辺を 1 本足したグラフ、N 頂点 N 辺の連結グラフ
-- 種類：グラフ探索、木
-- 前提：`connected-components`、`cycle-detection`、`tree-basics`
-- ACL：`dsu`
-- サイン：
-    - 言い回し：N 頂点 N 辺の連結グラフ・木に辺を 1 本足したグラフ
-    - 言い回し：2 頂点間の単純パスが一意か
-- 節：
-    - `namori-graph#one-cycle` 閉路がちょうど 1 つある理由：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/#one-cycle
-    - `namori-graph#peel-leaves` 次数 1 の頂点を削って閉路を求める（Union-Find でも）：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/#peel-leaves
-    - `namori-graph#hanging-trees` 閉路の頂点ごとにぶら下がる木に分ける：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/#hanging-trees
-    - `namori-graph#unique-path` 単純パスが一意になる条件：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/#unique-path
-    - `namori-graph#directed-version` 有向版は Functional graph：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/#directed-version
 
 ## 2-SAT（two-sat） {#two-sat}
 

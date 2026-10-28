@@ -30,7 +30,7 @@ sections:
   - {title: そのままでは出力できない型：__int128・modint・vector, anchor: unprintable-types}
   - {title: C++ 側で TLE になる書き方の一覧と計測, anchor: tle-causes}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 cpp_std: null
 gcc_min: null
 atcoder: true
@@ -269,6 +269,7 @@ atcoder: true
 | set に `std::lower_bound` | 要素 $2 \times 10^5$ の set に $2 \times 10^4$ 回で約 22 秒 | `st.lower_bound(x)`（1 ms） |
 | `s = s + c` | $2 \times 10^5$ 回で 568 ms | `s += c`（1 ms 未満） |
 | `vector` の値渡し | 長さ $2 \times 10^5$ を $10^4$ 回渡して 141 ms | `const vector<int>&`（1 ms 未満） |
+| 関数の中の大きな配列（`int buf[100000];` の先頭だけ使う） | $2 \times 10^5$ 回呼んで 0.05 秒が、AtCoder と同じ 0 埋めのオプションで 1.03 秒に | グローバルに置くか、外で 1 回だけ確保する（[0 で埋める処理](../cpp/cpp-environment.md#auto-var-init)） |
 
 set への `std::lower_bound` は、計算量の次数が変わる例である。`std::lower_bound` の比べる回数は $O(\log N)$ だが、真ん中へ飛ぶのにイテレータを 1 つずつ進める。set のイテレータは前後にしか動けないので、1 回で $O(N)$ かかる。set・map ではメンバ関数の `st.lower_bound(x)` を使う。
 
