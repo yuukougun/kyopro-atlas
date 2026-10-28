@@ -33,7 +33,7 @@ sections:
   - {title: 名前が似た別物, anchor: similar-names}
   - {title: 数の扱い, anchor: numbers}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -214,7 +214,7 @@ $N$ が 20 や 40 程度と小さいときの全探索は、何を列挙する�
 | $N \le 8$〜$10$ で並べ方を全部見る | [順列全探索](../basics/bit-full-search.md#permutations) | $O(N! \cdot N)$ |
 | $N \le 20$ で各要素が独立な 2 択 | [bit 全探索](../basics/bit-full-search.md#bitmask) | $O(2^N N)$ |
 | $N \le 16$〜$20$ で訪問順など、途中の状態が（集合, 最後の要素）にまとまる | [bitDP](../dp/bit-dp.md#tsp) | $O(2^N N^2)$ |
-| 集合をいくつかのグループに分ける | [部分集合を列挙する DP](../dp/subset-enumeration-dp.md#why-3n) | $O(3^N)$（$N \le 15$ 程度） |
+| 集合をいくつかのグループに分ける | [部分集合を列挙する DP](../dp/subset-enumeration-dp.md#why-3n) | $O(3^N)$（$N \le 15$〜$16$ 程度） |
 | $N \le 40$ で 2 つの半分の結果を突き合わせられる | [半分全列挙](../basics/meet-in-the-middle.md#combine-halves) | $O(2^{N/2} N)$ |
 | 選択肢の数が要素ごとに違う・組分け・途中で打ち切る | [再帰による全列挙](../basics/recursive-enumeration.md#skeleton) | 列挙する数による |
 

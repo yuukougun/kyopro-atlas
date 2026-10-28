@@ -15,7 +15,7 @@ complexity: O(3^N)（グループの値の前計算は別に O(2^N N) など）�
 signs:
   - {type: phrase, text: N 個をいくつかのグループに分ける方法の数・最適値}
   - {type: phrase, text: 集合を部分集合の和に分割する}
-  - {type: constraint, text: N ≤ 16〜18（3^N ≈ 4×10^7〜4×10^8）}
+  - {type: constraint, text: N ≤ 15〜16 程度（3^N ≈ 1.4×10^7〜4.3×10^7）、内側の処理が軽ければ N = 18 まで}
 acl: []
 frequency: B
 frequency_evidence: recent 0・前提として 2 ページに届く（直接 2）・古い ABC 4 問
@@ -26,7 +26,7 @@ sections:
   - {title: グループの数を状態に足す, anchor: group-count}
   - {title: 高速ゼータ変換との使い分け, anchor: vs-zeta, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -34,7 +34,7 @@ updated: 2026-10-22
     - **いつ使うか**：
         - N 個をいくつかのグループに分ける方法の数・最適値。
         - 集合を部分集合の和に分割する。
-        - $N \le 16$〜$18$（$3^N \approx 4 \times 10^7$〜$4 \times 10^8$）。
+        - $N \le 15$〜$16$ 程度（$3^N \approx 1.4 \times 10^7$〜$4.3 \times 10^7$）、内側の処理が軽ければ $N = 18$ まで。
     - **計算量**：遷移は全体で $O(3^N)$。各グループの値（得点・可否）の前計算は別に $O(2^N N)$ などかかる。グループの数 $K$ を状態に足すと $O(K \cdot 3^N)$。
     - **前提**：[bitDP](../dp/bit-dp.md)
 

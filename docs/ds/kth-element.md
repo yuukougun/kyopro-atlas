@@ -25,7 +25,7 @@ sections:
   - {title: 挿入を逆順に処理して「空きの P 番目」に置く, anchor: reverse-insertion}
   - {title: 答えの二分探索で K 番目を数える方法との違い, anchor: vs-kth-value}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -139,7 +139,7 @@ C++ では、外から見た位置を 0-indexed にすると、内部の位置 $
 - **不等号の向き**：`t[pos + step] < k` を `<=` にすると、接頭辞の和が初めて $k$ を超える位置、すなわち $K + 1$ 番目を返す
 
 !!! info "ACL では"
-    ACL の `fenwick_tree<T> fw(n);` は `fw.add(p, x)` と `fw.sum(l, r)`（どちらも $O(\log N)$）しか持たず、内部の配列も private なので、BIT 上の二分探索は書けない。ACL だけで書くなら、個数を載せた `segtree<int, op, e>`（`op` は和、`e()` は 0）で `seg.max_right(0, [&](int s) { return s < k; })` を呼ぶ。返り値 $r$ は $[0, r)$ の和が $k$ 未満で、$[0, r]$ の和が $k$ 以上になる位置なので、0-indexed の K 番目である（K 個に満たなければ $n$）。条件 `f(e())` が真であることが要件なので $k \ge 1$ にする。計算量は $O(\log N)$。
+    ACL の `fenwick_tree<T> fw(n);` は `fw.add(p, x)` と `fw.sum(l, r)`（どちらも $O(\log N)$）しか持たず、内部の配列も private なので、BIT 上の二分探索は書けない。ACL だけで書くなら、個数を載せた `segtree<int, op, e>`（`op` は和、`e()` は 0）で `seg.max_right(0, [&](int s) { return s < k; })` を呼ぶ。返り値 $r$ は $[0, r)$ の和が $k$ 未満で、$[0, r + 1)$ の和が $k$ 以上になる位置なので、0-indexed の K 番目である（K 個に満たなければ $n$）。条件 `f(e())` が真であることが要件なので $k \ge 1$ にする。計算量は $O(\log N)$。
 
 ## 挿入を逆順に処理して「空きの P 番目」に置く {#reverse-insertion}
 

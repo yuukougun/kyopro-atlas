@@ -389,7 +389,7 @@ search:
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-on-values/
 - 別名：値域セグ木、権値線段樹、値を添字にするセグ木、動的セグ木、dynamic segment tree、sparse segment tree
 - 種類：データ構造、区間クエリ、ソート・座標圧縮
-- 前提：`segment-tree`、`coordinate-compression`
+- 前提：`fenwick-tree`、`segment-tree`、`coordinate-compression`
 - ACL：`segtree`、`fenwick_tree`
 - サイン：
     - 言い回し：隣り合う要素の差が D 以下の部分列の最長
@@ -705,6 +705,6 @@ search:
 - 別名：セグ木マージ、segment tree merging、2 次元セグ木、2 次元 BIT、K-D tree、併合可能なヒープ、meldable heap、skew heap、leftist heap、Fast Set、Fractional Cascading、析合木、Kinetic Segment Tree
 - 種類：案内、データ構造
 - 節：
+    - `advanced-ds-catalog#elsewhere` ほかのページにあるもの（木の動的な構造は木の章、CDQ 分割統治・時間付き Mo・Li Chao Tree は各ページ）：https://yuukougun.github.io/kyopro-atlas/ds/advanced-ds-catalog/#elsewhere
     - `advanced-ds-catalog#table` 名前・何ができるか・代わりになる手の表：https://yuukougun.github.io/kyopro-atlas/ds/advanced-ds-catalog/#table
     - `advanced-ds-catalog#meldable-heap` 併合可能なヒープ（skew heap・leftist heap・ランダム化ヒープ。マージテクで足りることが多い）：https://yuukougun.github.io/kyopro-atlas/ds/advanced-ds-catalog/#meldable-heap
-    - `advanced-ds-catalog#elsewhere` ほかのページにあるもの（木の動的な構造は木の章、CDQ 分割統治・時間付き Mo・Li Chao Tree は各ページ）：https://yuukougun.github.io/kyopro-atlas/ds/advanced-ds-catalog/#elsewhere

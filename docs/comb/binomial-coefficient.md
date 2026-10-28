@@ -27,7 +27,7 @@ sections:
   - {title: mod を取らないときの大きさとオーバーフロー, anchor: overflow}
   - {title: 辞書順 K 番目の組合せと順位, anchor: kth}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -167,7 +167,7 @@ $K$ を 1-indexed と 0-indexed のどちらで扱うかを最初に決め、比
 | mod が素数で $n \le 10^7$ 程度、質問が多い | 階乗と逆階乗の前計算（[二項係数の前計算](../comb/binomial-precompute.md)） |
 | mod が素数でない、$n \le 5000$ 程度 | パスカルの三角形の表を mod を取りながら作る |
 
-二項係数どうしの和や積をまとめる公式（ヴァンデルモンドの等式・hockey stick など）は[二項係数の恒等式](../comb/binomial-identities.md)で扱う。
+二項係数どうしの和や積をまとめる公式（[Vandermonde の恒等式](../comb/binomial-identities.md#vandermonde)・hockey stick など）は[二項係数の恒等式](../comb/binomial-identities.md)で扱う。
 
 ## 例題 {#examples}
 

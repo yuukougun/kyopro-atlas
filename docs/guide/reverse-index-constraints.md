@@ -140,12 +140,12 @@ $N \le 10^7$ の行では、計算量より先にメモリを見積もる。`int
 | N ≤ 10〜12 人を組・グループに分ける（ベル数 B12 ≈ 4.2×10^6） | [再帰による全列挙](../basics/recursive-enumeration.md) | 水 |
 | N ≤ 10〜12 で、グループ分けを全部試す | [第 2 種スターリング数とベル数](../comb/bell-number.md) | 青 |
 | グリッドの短い辺 ≤ 6〜14 | [プロファイル DP](../dp/broken-profile-dp.md) | 黄 |
+| N ≤ 15〜16 程度で、集合とその部分集合の組をすべて調べる（全体で 3^N） | [bit 演算の基本と XOR の性質](../basics/bit-operations.md) | 基礎 |
 | 2N ≤ 16 人を 2 人組に分ける（(2N−1)!! 通り） | [再帰による全列挙](../basics/recursive-enumeration.md) | 水 |
+| N ≤ 15〜16 程度（3&#94;N ≈ 1.4×10&#94;7〜4.3×10&#94;7）、内側の処理が軽ければ N = 18 まで | [部分集合を列挙する DP](../dp/subset-enumeration-dp.md) | 青 |
 | N ≤ 16 程度の一般グラフでペアを作る | [一般グラフのマッチング](../graph/general-matching.md) | 発展 |
 | 特別な地点が K ≤ 17 個（ほかの地点はグラフで結ばれている） | [bitDP](../dp/bit-dp.md) | 水 |
 | N ≤ 17 程度の頂点数で、条件を満たす辺の選び方を数える | [連結なグラフの数え上げ](../comb/counting-labeled-graphs.md) | 黄 |
-| N ≤ 18 程度で、集合とその部分集合の組をすべて調べる（全体で 3^N） | [bit 演算の基本と XOR の性質](../basics/bit-operations.md) | 基礎 |
-| N ≤ 16〜18（3&#94;N ≈ 4×10&#94;7〜4×10&#94;8） | [部分集合を列挙する DP](../dp/subset-enumeration-dp.md) | 青 |
 | カードの枚数 N ≤ 18 程度で、残りのカードの集合が局面になる | [ゲームの基本と勝敗の DP](../comb/game-basics.md) | 水 |
 | N ≤ 15〜20 で各要素を「選ぶ／選ばない」 | [bit 全探索と順列全探索](../basics/bit-full-search.md) | 基礎 |
 | N ≤ 16〜20 | [bitDP](../dp/bit-dp.md) | 水 |

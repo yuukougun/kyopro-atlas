@@ -15,18 +15,31 @@
 | `build_ledger.py` | 問題の台帳の下書きを作る。台帳は手で直したので作り直さない。骨格（8a）以降は catalog が凍結なので、`--check`（catalog との食い違い）は食い違いを必ず出す（予期したもの。CI では警告だけ）。台帳の確認は `check_pages.py` と `fix_problems.py --check` で行う | なし（`--check`） |
 | `make_skeleton.py` | catalog から骨格のページ（stage: stub）を作る。front matter と要点の囲みだけ。あるページは上書きしない | `docs/<field>/<id>.md` |
 | `gen_site.py` | front matter・本文の問題の一覧・台帳・最近の ABC から生成物を作る。`--check` で鮮度だけを見る。試験は `python3 -m unittest discover -s tests/tools`（test_gen_site.py） | `nav.yml`・`docs/<field>/index.md`・`docs/lists/`・`docs/llms.txt`・`docs/index/`・`overrides/assets/data/graph.json`・手書きのページの目印の中 |
-| `check_pages.py` | ページの検査（front matter の schema・id・参照・循環・レベル・問題の一覧と台帳・囲みの外の問題リンク・```cpp・要点の囲み・draft 以降の節の anchor と別名・本文のリンク） | なし |
+| `check_pages.py` | ページの検査（front matter の schema・id・参照・循環・レベル・問題の一覧と台帳・囲みの外の問題リンク・```cpp・要点の囲み・draft 以降の節の anchor と別名・本文のリンク・描画の崩れ） | なし |
 | `fix_problems.py` | 本文の問題の一覧の各行の label・URL・difficulty を台帳から作り直す（要約は変えない）。`- abc300_e：要約` と書けば行を作る。`--check` は台帳の pages にあるのに本文の囲みにない問題も警告に出す | ページ（`--check` では書かない） |
 | `frequency.py` | front matter の frequency・frequency_evidence を最近の ABC（recent-abc.yaml）・台帳の古い ABC の数・前提として届くページの数から付け直す（catalog/README §5・手引き §17-7）。`--check` で差分、`--write` でその 2 行だけを書き換える。試験は `python3 -m unittest discover -s tests/tools` | ページの 2 行（`--write`） |
 | `check_snippets.py` | コード片を設定（compilers・flags・expect・cases）どおりにコンパイル・実行して確かめる | なし |
 | `render_svg.py` | 図の SVG（`docs/img/<id>/`）をヘッドレスの Chrome で幅 360px・720px の PNG にして目で確かめる。日本語のフォントがなければ WSL の Windows のフォントを足す | 一時ディレクトリ（`--out`）の PNG |
-| `check_svg.py` | 図の SVG の width・height の欠けと比、幅（§15-8 の目安）、スマホの幅で 9px 未満になる文字を警告する（`--strict` で終了コード 1） | なし |
+| `check_svg.py` | 図の SVG の width・height の欠けと比、幅（§15-8 の目安）、スマホの幅で 9px 未満になる文字、viewBox を覆わない白い背景を警告する（`--strict` で終了コード 1） | なし |
 | `check_noai.py` | URL の robots の meta と X-Robots-Tag の noai・noimageai を調べる（atcoder.jp・codeforces.com は取得せず「既知の noai」） | なし |
 | `textlint_targets.py` | textlint の対象の Markdown の一覧を出す（stub と生成物を除く。package.json の `lint:text` が使う） | なし |
 
 front matter の規則は [schema/page.schema.json](../schema/page.schema.json)（JSON Schema Draft-07）。check_pages.py は中の小さな検査器でこれを当てる（jsonschema は要らない）。
 
 check_pages.py は本文のリンクを mkdocs build --strict と同じ見方で見る：先のファイル・anchor（ほかのページ・同じページ・用語集）があるか、stage が stub のページの節へのリンクでないか、生の `[&](auto&& self)` のような相対リンクとして解釈できない書き方でないか（コードの中は見ない）。
+
+ビルドが通っても描くと崩れる書き方（Issue #50・#51・#61）も見る。どれもフェンス・HTML のコメント・`$$` の数式ブロック・行の中のコードの中は見ない。
+
+| 重さ | 見るもの | 崩れ方 |
+| --- | --- | --- |
+| エラー | `![…](….svg)` が画像にならない。Python-Markdown 3.11 と同じ数え方を 1 行の中でまねる（コード・インラインの数式・`\[` の中は数えない。先に link を作ってから image を作る）。行の中で `![` より後ろの、図のファイルを指す `](…)` が画像の場所にならなければ崩れとする | 代替テキストの対にならない `[`・`]` で起き、図が出ずに「![…」の文字と図へのリンクが出る。半開区間は `\[1, 5)`、`(l, r]` は `(l, r\]` と書き、代替テキストは 1 行に書く |
+| エラー | class に `kp-viz` があり `data-viz="名前"` を持つタグの `overrides/assets/js/viz/名前.js` がない（タグは行をまたいでよい。`--root` の木に overrides/ がなければ見ない） | 「図を表示できなかった」と出る |
+| エラー | インラインの数式 `$…$` の中の `\text{…}` に `$` がある | arithmatex が中の `$` で数式を切り、KaTeX のエラーか崩れた表示になる。別行の `$$…$$` の中ならよい |
+| 警告 | インラインの数式の折り返せない塊（一番外の関係・二項演算子の後で区切る）の `\text` の字数（全角を 1、半角を 0.5。上付き・下付き・分数の中は 0.7 倍）が、幅 360px の画面の入れ物に入らない。目安は段落 16.0 字・箇条書き 1 段 14.5 字・2 段 12.9 字・囲みの中 18.5 字・囲みの中の箇条書き 17.0 字で、入れ物は字下げで追う。表の行は見ない | `\text` は折り返せず、ページ全体が横にずれる |
+
+check_svg.py は、文書の順で最初の白い rect を背景とみなし、viewBox を覆うかを見る（`width="100%"` は viewBox の幅に対してなので、viewBox の左端が 0 でなければ `x` も要る）。
+
+道具の試験は `python3 -m unittest discover -s tests/tools`。Python-Markdown のある Python（`.venv/bin/python` か `uv run python`）では、代替テキストの数え方を本物と突き合わせる試験も走る（ないときは飛ばす）。本物の設定は、MkDocs があれば mkdocs.yml から読む。
 
 ## 工程ごとの使い方
 
@@ -67,7 +80,7 @@ python3 tools/check_pages.py && python3 tools/gen_site.py --check && mkdocs buil
 
 - `frequency.py --check`（台帳・recent-abc・prerequisites を直したあと。差分があれば `--write`）
 - `check_pages.py -v`（警告まで全部）、`check_snippets.py`（すべて）、`gen_site.py --check --diff`
-- CI：check.yml が `check_pages.py` と `check_snippets.py --changed --base <元>`、deploy.yml が `gen_site.py --check --diff` と `mkdocs build --strict`、snippets-weekly.yml が `check_snippets.py`（すべて）を動かす。gcc の公式コンテナには `g++-15` という名前がないので、check_snippets.py は `g++-N` がなければ版が N の `g++` を使う。コンパイラを絞るときは `--compiler g++-15`
+- CI：check.yml が `check_pages.py`・`check_svg.py`（警告は出すだけ）・`python -m unittest discover -s tests/tools` と `check_snippets.py --changed --base <元>`、deploy.yml が `gen_site.py --check --diff` と `mkdocs build --strict`、snippets-weekly.yml が `check_snippets.py`（すべて）を動かす。gcc の公式コンテナには `g++-15` という名前がないので、check_snippets.py は `g++-N` がなければ版が N の `g++` を使う。コンパイラを絞るときは `--compiler g++-15`
 
 ## gen_site.py が書く手書きのページの生成部分
 

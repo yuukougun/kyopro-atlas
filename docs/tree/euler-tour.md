@@ -31,7 +31,7 @@ sections:
   - {title: 木上の Mo（データ構造の章）, anchor: mo-on-tree}
   - {title: 逆元がない演算・パスへの一括更新は HL 分解, anchor: to-hld, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -77,7 +77,7 @@ updated: 2026-10-22
 
 すると、$v$ の部分木の頂点の番号はちょうど $\mathrm{in}[v], \mathrm{in}[v] + 1, \dots, \mathrm{out}[v] - 1$ になる。すなわち部分木は[半開区間](../guide/glossary.md#half-open-interval) $[\mathrm{in}[v], \mathrm{out}[v])$ で、その長さ $\mathrm{out}[v] - \mathrm{in}[v]$ は部分木サイズ $\mathrm{sz}[v]$ に等しい。
 
-![7 頂点の根付き木と、行きがけ順に並べた頂点の列。頂点 2 の部分木（2・3・6・1）は列の位置 1〜4、すなわち区間 [1, 5) にまとまる](../img/euler-tour/subtree-interval.svg)
+![7 頂点の根付き木と、行きがけ順に並べた頂点の列。頂点 2 の部分木（2・3・6・1）は列の位置 1〜4、すなわち区間 \[1, 5) にまとまる](../img/euler-tour/subtree-interval.svg)
 
 図の木で根 0 から子を番号の小さい順に回ると、入る順は $0, 2, 3, 6, 1, 5, 4$ である。頂点 2 には番号 1 で入り、子孫 3・6・1 に番号 2〜4 を振ってから出る。出るときの次の番号は 5 なので、$\mathrm{out}[2] = 5$ である。頂点 2 の部分木は列の区間 $[1, 5)$ になり、ほかの頂点はこの区間に入らない。
 

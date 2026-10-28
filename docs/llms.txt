@@ -2,7 +2,7 @@
 
 > AtCoder で黄色（レート 2000）を目指す学習者向けの、辞書として引く競技プログラミングの教材。手法・考察・データ構造・数学・C++ のページを分野ごとに置く。
 
-- 版：a25f4aa786af（updated の最大：2026-10-29）。tools/gen_site.py が生成する
+- 版：9d105969f6d0（updated の最大：2026-10-29）。tools/gen_site.py が生成する
 - ページ数：353
 - 1 行が 1 ページ：「- [タイトル](URL)（id・レベル・分野・段階）：要約」
 - レベルは difficulty の帯：基礎 〜1199・水 1200〜1599・青 1600〜1999・黄 2000〜2399・発展 2400〜（概要だけ）。「—」はレベルを持たないページ
@@ -148,6 +148,7 @@
 - [グリッドグラフ](https://yuukougun.github.io/kyopro-atlas/graph/grid-graph/)（grid-graph・基礎・graph・reviewed）：マスを頂点、隣り合うマスを辺と見て、BFS・DFS・Union-Find をそのまま使う。(i, j) の 1 次元化・番兵・止まるマスの扱いと、市松模様で二部グラフになることが要点になる。
 - [連結成分](https://yuukougun.github.io/kyopro-atlas/graph/connected-components/)（connected-components・基礎・graph・reviewed）：無向グラフを互いに行き来できる頂点の集まりに分け、成分ごとに頂点数・辺数などを集計する。グラフが固定なら DFS・BFS、辺が増えていくなら Union-Find を使う。
 - [閉路の検出と復元](https://yuukougun.github.io/kyopro-atlas/graph/cycle-detection/)（cycle-detection・基礎・graph・reviewed）：無向グラフでは Union-Find か親以外の訪問済み頂点への辺、有向グラフでは探索中の頂点への辺（3 色の DFS）で閉路を見つけ、親をたどって復元する。シミュレーションの周期の検出とは別物である。
+- [なもりグラフ](https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/)（namori-graph・水・graph・reviewed）：N 頂点 N 辺の連結グラフは木に辺を 1 本足した形で、閉路がちょうど 1 つあり、閉路上の各頂点から木がぶら下がる。次数 1 の頂点を削り続けると閉路だけが残る。
 - [二部グラフ判定](https://yuukougun.github.io/kyopro-atlas/graph/bipartite-graph/)（bipartite-graph・基礎・graph・reviewed）：隣り合う頂点を反対の色で塗っていき、同じ色どうしを結ぶ辺（奇数長の閉路）があれば二部グラフでない。成分ごとの色の数を使う数え上げや、二部マッチング・最小カットの前提になる。
 - [小さいグラフの全探索](https://yuukougun.github.io/kyopro-atlas/graph/small-graph-brute-force/)（small-graph-brute-force・基礎・graph・reviewed）：N ≤ 8〜10 程度の小さいグラフで、頂点の対応（N! 通り）・辺の部分集合・彩色を全部試す。場合の数の見積もりと成分ごとに分ける枝刈りが要で、彩色は塗る順を工夫すれば N ≤ 20 まで届く。
 - [彩色数・最大独立集合・最大クリーク](https://yuukougun.github.io/kyopro-atlas/graph/chromatic-number/)（chromatic-number・発展・graph・reviewed）：一般グラフの彩色数・最大独立集合・最大クリークは NP 困難で、彩色数は包除原理で O(2^N N)、最大独立集合は N ≤ 40 程度なら分枝や半分全列挙で求める。二部グラフなら易しい。
@@ -167,7 +168,6 @@
 - [トポロジカルソート](https://yuukougun.github.io/kyopro-atlas/graph/topological-sort/)（topological-sort・基礎・graph・reviewed）：閉路のない有向グラフの頂点を、すべての辺が前から後ろへ向くように O(N+M) で並べる。入次数 0 の頂点から取り出す Kahn 法か DFS の帰りがけ順の逆で求め、閉路があれば並べられない。
 - [強連結成分分解（SCC）](https://yuukougun.github.io/kyopro-atlas/graph/scc/)（scc・水・graph・reviewed）：有向グラフを互いに行き来できる頂点の極大集合に分け、成分を 1 点に縮めて DAG にする。Kosaraju か Tarjan で O(N+M) で求まり、ACL の scc_graph は成分をトポロジカル順に返す。
 - [Functional graph（出次数 1 のグラフ）](https://yuukougun.github.io/kyopro-atlas/graph/functional-graph/)（functional-graph・水・graph・reviewed）：各頂点から出る辺がちょうど 1 本の有向グラフは、各成分に閉路がちょうど 1 つあり、そこへ木が流れ込む ρ の形になる。K 回進んだ位置は、閉路に入るまでと閉路の周回に分けて求める。
-- [なもりグラフ](https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/)（namori-graph・水・graph・reviewed）：N 頂点 N 辺の連結グラフは木に辺を 1 本足した形で、閉路がちょうど 1 つあり、閉路上の各頂点から木がぶら下がる。次数 1 の頂点を削り続けると閉路だけが残る。
 - [2-SAT](https://yuukougun.github.io/kyopro-atlas/graph/two-sat/)（two-sat・発展・graph・reviewed）：各変数が真か偽で、条件がすべて「2 つのリテラルの OR」のとき、全条件を満たす割当を含意グラフの SCC で O(N+M) で求める。ACL の two_sat で書けるので、条件を節に直すモデル化が中心になる。
 - [Union-Find で連結性を扱う](https://yuukougun.github.io/kyopro-atlas/graph/union-find-connectivity/)（union-find-connectivity・水・graph・reviewed）：辺や頂点の削除を時間の逆順の追加に直したり、しきい値の順に辺を足したりして、連結成分の数・大きさや 2 点の連結を Union-Find で答える。答えは逆順に記録してから反転する。
 - [最小全域木](https://yuukougun.github.io/kyopro-atlas/graph/minimum-spanning-tree/)（minimum-spanning-tree・水・graph・reviewed）：連結グラフの全域木のうち辺の重みの和が最小のものを、辺を重みの昇順に見て閉路を作らない辺だけを採るクラスカル法か、頂点を 1 つずつ伸ばすプリム法で求める。候補の辺を減らせば完全グラフにも使える。
