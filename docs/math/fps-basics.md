@@ -26,7 +26,7 @@ sections:
   - {title: 多項式の割り算・Taylor shift・多点評価, anchor: polynomial-ops}
   - {title: ACL の convolution と自作するときの要点, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -129,9 +129,9 @@ $$
 
 ## 学ぶための資料 {#resources}
 
-- hotman78 氏の記事「形式的冪級数の応用テクニック（前編）」：逆元・log・exp・累乗・平方根をニュートン法で求める流れと計算量、定数項の条件を短くまとめている。和が $t$ になる部分集合の数を log と exp で求める例もある。
-- Nyaan's Library の「多項式/形式的冪級数ライブラリ」：NTT 向きの法での演算をひとまとめにした実装である。多点評価・補間も同じライブラリにあり、自作するときの関数の切り分けの参考になる。
-- けんちょん氏の記事「「Polynomial Taylor Shift」に学ぶ畳み込み芸」：Taylor shift の式を、和の順序を入れ替えて畳み込みに直す流れを丁寧に追っている。
+- [hotman78「【競技プログラミング】形式的冪級数の応用テクニック(前編)」](https://qiita.com/hotman78/items/f0e6d2265badd84d429a)：逆元・log・exp・累乗・平方根をニュートン法で求める流れと計算量、定数項の条件を短くまとめている。和が $t$ になる部分集合の数を log と exp で求める例もある。
+- [Nyaan「多項式/形式的冪級数ライブラリ」](https://nyaannyaan.github.io/library/fps/formal-power-series.hpp)：NTT 向きの法での演算をひとまとめにした実装である。多点評価・補間も同じライブラリにあり、自作するときの関数の切り分けの参考になる。
+- [drken「「Polynomial Taylor Shift」に学ぶ畳み込み芸」](https://drken1215.hatenablog.com/entry/2023/09/08/003100)：Taylor shift の式を、和の順序を入れ替えて畳み込みに直す流れを丁寧に追っている。
 
 ## 例題 {#examples}
 

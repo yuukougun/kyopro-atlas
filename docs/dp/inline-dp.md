@@ -26,7 +26,7 @@ sections:
   - {title: 区間加算と区間最大を遅延セグメント木で（区間の右端で加算する）, anchor: lazy-segment-tree}
   - {title: 単調スタックと組み合わせる, anchor: with-monotonic-stack, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -191,7 +191,7 @@ $i$ を 1 つ進めるたびに、始点 $j$ ごとの値 $g_i[j] = \mathrm{dp}[
 | 前の行がほぼ写り、少数の点・範囲加算・シフトだけが入る | インライン DP（このページ） |
 | どの行も同じ線形の遷移で、段数が巨大 | [行列累乗](../math/matrix-power.md) |
 
-状態の次元そのものを減らす工夫は[状態の削減](../dp/dp-dimension-reduction.md)に、遅延セグメント木に載せる値と作用の設計は[遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md#design-steps)にまとめる。
+状態の次元そのものを減らす工夫は[状態の削減](../dp/dp-dimension-reduction.md)に、遅延セグメント木に載せる値と作用の設計は[遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md#design-steps)にまとめる。表にない形の遷移は、貰う形の式の右辺から [DP の高速化の選び方](../dp/dp-speedup-overview.md#shape-to-tool)の早見表で道具を選ぶ。
 
 ## 例題 {#examples}
 

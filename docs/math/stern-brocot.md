@@ -25,7 +25,7 @@ sections:
   - {title: 最良有理近似と比較の精度（128 bit 整数）, anchor: best-approximation}
   - {title: 自作するときの要点と Library Checker, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -135,8 +135,8 @@ ACL に対応する機能はないので、使うなら自作する。保つ性�
 
 ## 学ぶための資料 {#resources}
 
-- cp-algorithms の解説[「The Stern-Brocot tree and Farey sequences」](https://cp-algorithms.com/others/stern_brocot_tree_farey_sequences.html)：木の作り方と $bc - ad = 1$ の不変条件から、道と連分数の対応、判定だけで進む対数回の探索、Farey 数列との関係までを証明とともに追える。
-- Nyaan 氏のライブラリ[「Stern-Brocot Tree」](https://nyaannyaan.github.io/library/math/stern-brocot-tree.hpp)：道の圧縮表現、LCA・祖先・左右の端などの木の上の操作をまとめた実装で、自作するときの関数の切り分けの参考になる。
+- [cp-algorithms「The Stern-Brocot tree and Farey sequences」](https://cp-algorithms.com/others/stern_brocot_tree_farey_sequences.html)：木の作り方と $bc - ad = 1$ の不変条件から、道と連分数の対応、判定だけで進む対数回の探索、Farey 数列との関係までを証明とともに追える。
+- [Nyaan「Stern-Brocot Tree」（Nyaan's Library）](https://nyaannyaan.github.io/library/math/stern-brocot-tree.hpp)：道の圧縮表現、LCA・祖先・左右の端などの木の上の操作をまとめた実装で、自作するときの関数の切り分けの参考になる。
 
 ## 例題 {#examples}
 

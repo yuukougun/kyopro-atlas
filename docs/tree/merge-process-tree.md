@@ -137,9 +137,9 @@ Library Checker に併合過程の木そのものを確かめる問題はない�
 
 ## 学ぶための資料 {#resources}
 
-- けんちょん（drken）氏の ABC183 F の記事：マージテクの解法と並べて、併合の過程を木にして DFS で数える解法を説明している。木の作り方（代表元ごとに最新の併合の頂点を持つ）が具体的である
-- mzhang2021 氏の Kruskal Reconstruction Tree の記事（英語）：LCA がボトルネックになること、しきい値以下で行ける頂点が部分木になることを、問題の例とともにまとめている
-- OI Wiki の最小全域木のページの「Kruskal 重构树」の節（中国語）：性質の確認に使える
+- [drken「AtCoder ABC 183 F - Confluence (水色, 600 点)」](https://drken1215.hatenablog.com/entry/2020/12/20/192100)：マージテクの解法と並べて、併合の過程を木にして DFS で数える解法を説明している。木の作り方（代表元ごとに最新の併合の頂点を持つ）が具体的である
+- [mzhang2021「Kruskal Reconstruction Tree」](https://mzhang2021.github.io/cp-blog/kruskal/)（英語）：LCA がボトルネックになること、しきい値以下で行ける頂点が部分木になることを、問題の例とともにまとめている
+- [OI Wiki「最小生成树」](https://oi-wiki.org/graph/mst/)の「Kruskal 重构树」の節（中国語）：性質の確認に使える
 
 ## 練習問題 {#practice}
 
