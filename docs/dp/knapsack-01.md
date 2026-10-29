@@ -94,6 +94,9 @@ $\mathrm{dp}[i + 1]$ の行は $\mathrm{dp}[i]$ の行だけから決まるの�
 --8<-- "knapsack-01/zero-one.cpp:core"
 ```
 
+完全なプログラム：[`zero-one.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/knapsack-01/zero-one.cpp)（GitHub）
+{ .kp-code-src }
+
 大きい方からでよい理由は、更新の読み方を見ると分かる。$\mathrm{dp}[j]$ を書き換えるときに読む $\mathrm{dp}[j - w_i]$ は $j$ より左にある。大きい方から進めると、左側はこの品物の更新をまだ受けていないので、そこに残っているのは前の行 $\mathrm{dp}[i][\cdot]$ の値である。2 次元の式をそのまま計算していることになる。
 
 小さい方から進めると、$\mathrm{dp}[j - w_i]$ はすでに品物 $i$ を入れた後の値に変わっている。そこからさらに品物 $i$ を入れるので、同じ品物を何度でも使う問題（個数制限なし）を解いてしまう。
@@ -128,6 +131,9 @@ $\mathrm{dp}[i + 1][j - w_i]$ はすでに品物 $i$ を何個か入れた状態
 ```cpp
 --8<-- "knapsack-01/unbounded-count.cpp:core"
 ```
+
+完全なプログラム：[`unbounded-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/knapsack-01/unbounded-count.cpp)（GitHub）
+{ .kp-code-src }
 
 硬貨 $\{1, 2, 3\}$ で $s = 4$ なら、組合せは $1{+}1{+}1{+}1$・$1{+}1{+}2$・$2{+}2$・$1{+}3$ の 4 通りである。列では $1{+}1{+}2$ の並べ方が 3 通り、$1{+}3$ が 2 通りあるので $1 + 3 + 1 + 2 = 7$ 通りになる。「何通りの払い方」と問われたら、順序を区別するかを問題文で必ず確かめる。
 
@@ -179,6 +185,9 @@ $O(NW)$ が通る目安は $NW$ が $10^8$ 程度まで（$N = 100$ なら $W \l
 ```cpp
 --8<-- "knapsack-01/bounded-binary.cpp:core"
 ```
+
+完全なプログラム：[`bounded-binary.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/knapsack-01/bounded-binary.cpp)（GitHub）
+{ .kp-code-src }
 
 これで正しいのは、0 個から $b_i$ 個までのどの個数 $c$ も、まとまりの選び方でちょうど作れるからである。$c \le 2^t - 1$ なら $c$ の 2 進表記どおりに $1, 2, \dots, 2^{t-1}$ から選べばよい。$c > 2^t - 1$ なら $r$ を必ず使い、残りの $c - r$ は $0 \le c - r \le 2^t - 1$ なので 2 進表記で作れる。逆に、まとまりの合計は $b_i$ を超えないので、使いすぎることもない。
 

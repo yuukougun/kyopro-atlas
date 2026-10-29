@@ -26,7 +26,7 @@ sections:
   - {title: 辺が s-t 最短路に乗る条件（両端からの距離）, anchor: edge-on-path}
   - {title: 辺を消すと距離が変わるか, anchor: edge-removal, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -42,7 +42,7 @@ updated: 2026-10-22
 別名：最短路木・最短経路の数え上げ・最短路に必ず使われる辺・すべての最短路に含まれる辺・shortest path DAG
 <!-- textlint-enable -->
 
-最短路 DAG は、始点からの距離がちょうど辺の重みだけ増える辺だけを集めたグラフである。経路復元が最短路を 1 本だけ取り出すのに対し、最短路 DAG はすべての最短路を一度に表す。最短路についての「何本あるか」「この辺を使うか」「全部がこの辺を通るか」という問いは、この DAG の上の DP と、両端からの距離の比較に帰着する。
+最短路 DAG は、始点からの距離がちょうど辺の重みだけ増える辺だけを集めたグラフである。経路復元が最短路を 1 本だけ取り出すのに対し、最短路 DAG はすべての最短路を一度に表す。最短路についての「何本あるか」「この辺を使うか」「全部がこの辺を通るか」という問いは、この DAG の上の DP と、両端からの距離の比較に帰着する。コード片は頂点を 0-indexed で持ち、問題文の 1-indexed の番号からは 1 を引いて使う（問題文の頂点 1 は頂点 0 になる）。確認問題の頂点は 1 から番号付けする。
 
 ## 最短路 DAG の作り方と性質（重み 0 の辺に注意） {#build}
 
@@ -103,7 +103,7 @@ cnt[s] = 1、ほかは 0
     $\mathrm{dist}$ を `INF = LLONG_MAX` で初期化し、全頂点について `dist[u] + w == dist[v]` を調べた。何が起きうるか。
 
     ??? success "答え"
-        到達できない頂点 $u$ では `dist[u] + w` があふれて未定義動作になる。`INF` を `LLONG_MAX / 4` のようにあふれない大きさにしても、重み 0 の辺では `INF + 0 == INF` が成り立ち、到達できない頂点どうしの辺がきつい辺と判定される。$\mathrm{dist}$ が有限の頂点だけを調べる。
+        到達できない頂点 $u$ では `dist[u] + w` があふれて未定義動作になる。`INF` を `1LL << 60` のようにあふれない大きさにしても、重み 0 の辺では `INF + 0 == INF` が成り立ち、到達できない頂点どうしの辺がきつい辺と判定される。$\mathrm{dist}$ が有限の頂点だけを調べる。
 
 ## 最短路木（最小全域木との違い） {#shortest-path-tree}
 
@@ -114,6 +114,9 @@ cnt[s] = 1、ほかは 0
 ```cpp
 --8<-- "shortest-path-dag/shortest-path-tree.cpp:core"
 ```
+
+完全なプログラム：[`shortest-path-tree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/shortest-path-dag/shortest-path-tree.cpp)（GitHub）
+{ .kp-code-src }
 
 最短路木は**各頂点への距離を同時に最小にする**木であり、**辺の重みの総和を最小にする**[最小全域木](../graph/minimum-spanning-tree.md)とは別物である。重み 2 の辺 $s$-$a$・$s$-$b$ と重み 1 の辺 $a$-$b$ の三角形では、最短路木は $\{s\text{-}a, s\text{-}b\}$（総和 4、距離はどちらも 2）、最小全域木は $\{a\text{-}b\}$ と $s$-$a$ か $s$-$b$ の一方（総和 3、片方の頂点への距離は 3）になる。「残す辺の重みの合計」を問われたら最小全域木、「始点からの距離（の和）」を問われたら最短路木である。
 
@@ -156,11 +159,17 @@ $$
 --8<-- "shortest-path-dag/edge-classify.cpp:on-path"
 ```
 
+完全なプログラム：[`edge-classify.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/shortest-path-dag/edge-classify.cpp)（GitHub）
+{ .kp-code-src }
+
 次に、区間の端（距離の値）を座標圧縮し、いもす法で各小区間を覆う辺の本数を数える。$e$ の区間の中に 2 本以上で覆われる小区間がなければ、$e$ はすべての最短路に乗る。各辺は「0：どの最短路にも乗らない」「1：ある最短路に乗る」「2：すべての最短路に乗る」に分かれる。
 
 ```cpp
 --8<-- "shortest-path-dag/edge-classify.cpp:classify"
 ```
+
+完全なプログラム：[`edge-classify.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/shortest-path-dag/edge-classify.cpp)（GitHub）
+{ .kp-code-src }
 
 全体で $O((N + M) \log N + M \log M)$ である。小さなグラフで、辺を 1 本ずつ消して最短距離を求め直す全探索と結果が一致することを確かめた。
 
@@ -200,7 +209,7 @@ $$
 
 ??? note "解法の詳細"
     - $\mathrm{dist}[0] = 0$、$\mathrm{cnt}[0] = 1$ から BFS をする。頂点 $u$ を取り出したら、隣の $v$ について、未訪問なら $\mathrm{dist}[v] = \mathrm{dist}[u] + 1$・$\mathrm{cnt}[v] = \mathrm{cnt}[u]$ としてキューに入れ、$\mathrm{dist}[v] = \mathrm{dist}[u] + 1$ なら $\mathrm{cnt}[v]$ に $\mathrm{cnt}[u]$ を足す。
-    - 本数は $10^9 + 7$ で割った余りで持つ。頂点 $N$ に届かなければ $\mathrm{cnt}$ は 0 のままで、それが答えになる。
+    - 本数は $10^9 + 7$ で割った余りで持つ。都市 $N$（頂点 $N - 1$）に届かなければ $\mathrm{cnt}$ は 0 のままで、それが答えになる。
     - 全体で $O(N + M)$。
 
 ### ABC252 E. Road Reduction {#abc252_e}

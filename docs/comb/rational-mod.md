@@ -103,6 +103,9 @@ $$
 --8<-- "rational-mod/dice-sum.cpp:core"
 ```
 
+完全なプログラム：[`dice-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rational-mod/dice-sum.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 modint を使えば、`/` と書くだけで逆元の掛け算になる。自分で `long long` で書くときは、掛けるたびに `% p` を取る。引き算の後は、負にならないよう $p$ を足す（[mod の計算の基本](../math/mod-arithmetic.md)）。
 
 !!! info "ACL では"
@@ -117,6 +120,9 @@ modint を使えば、`/` と書くだけで逆元の掛け算になる。自分
 ```cpp
 --8<-- "rational-mod/percent.cpp:core"
 ```
+
+完全なプログラム：[`percent.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rational-mod/percent.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 よくある誤りは次の 2 つである。
 
@@ -170,6 +176,9 @@ mod の値の答えは、見ても正しいか分からない。入力例と合�
 ```cpp
 --8<-- "rational-mod/reconstruct.cpp:core"
 ```
+
+完全なプログラム：[`reconstruct.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rational-mod/reconstruct.cpp)（GitHub）
+{ .kp-code-src }
 
 - **なぜ 1 つに決まるか**：$\lvert a \rvert \le B$・$1 \le q \le B$ の分数 $a/q$ と $a'/q'$ が同じ値 $R$ に移るとする。$aq' \equiv a'q \pmod{p}$ で、$\lvert aq' - a'q \rvert \le 2B^2 < p$ なので、整数として $aq' = a'q$、すなわち同じ分数である。$p = 998244353$ なら $B = 22341$ でこれが成り立つ
 - **計算量**：$O(B)$ で、手元の検算には十分速い

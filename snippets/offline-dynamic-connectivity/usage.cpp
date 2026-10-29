@@ -79,7 +79,7 @@ struct OfflineDynamicConnectivity {
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    // クエリ（0-indexed）：0 u v で辺を追加、1 u v で辺を削除、2 u v で連結か（1 か 0）、3 で連結成分の数
+    // クエリ：0 u v で辺を追加、1 u v で辺を削除、2 u v で連結か（1 か 0）、3 で連結成分の数（頂点は 1-indexed）
     // 追加の直前にその辺はなく、削除の直前にその辺はあるとする
     int n, q;
     cin >> n >> q;
@@ -90,7 +90,10 @@ int main() {
     for (int t = 0; t < q; t++) {
         int type, u = 0, v = 0;
         cin >> type;
-        if (type != 3) cin >> u >> v;
+        if (type != 3) {
+            cin >> u >> v;
+            u--, v--;  // 1-indexed → 0-indexed
+        }
         qs[t] = {type, u, v};
         pair<int, int> e = {min(u, v), max(u, v)};
         if (type == 0) added_at[e] = t;

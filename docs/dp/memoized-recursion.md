@@ -65,6 +65,9 @@ C++ では、ラムダ式で書くと入力や表を引数で渡さずに済む�
 --8<-- "memoized-recursion/floor-memo.cpp:core"
 ```
 
+完全なプログラム：[`floor-memo.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/memoized-recursion/floor-memo.cpp)（GitHub）
+{ .kp-code-src }
+
 **未計算の印**は、答えになりうる値と重ならないように選ぶ。よくある書き方は、表を $-1$ で初期化して「$-1$ なら未計算」とするものだが、次の場合は印と答えが衝突する。
 
 - **答えが負にもなる**：ゲームの得点差や、負の重みのある最長路では $-1$ が正しい答えになりうる。答えが $-1$ の状態は毎回計算し直され、メモが効かなくなる
@@ -132,6 +135,9 @@ $N \le 10^{18}$ のように状態の範囲が広いと、大きさ $N$ の配�
 ```cpp
 --8<-- "memoized-recursion/dag-memo.cpp:core"
 ```
+
+完全なプログラム：[`dag-memo.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/memoized-recursion/dag-memo.cpp)（GitHub）
+{ .kp-code-src }
 
 閉路がある問題は、閉路の部分を先に別の方法で処理する。各頂点から出る辺が 1 本のグラフなら、先に閉路を見つけてその上の値を決め、残りの木の部分をメモ化再帰で求める（[Functional graph](../graph/functional-graph.md)）。期待値で一般の閉路があるなら、未知数を置いて方程式を解く（[期待値の方程式を解く](../comb/expectation-linear-equations.md#unknown)）。
 

@@ -145,6 +145,9 @@ $$
 --8<-- "permutation/inverse.cpp:core"
 ```
 
+完全なプログラム：[`inverse.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/permutation/inverse.cpp)（GitHub）
+{ .kp-code-src }
+
 コードでは $Q$ を `pos` と書く。`swap(p, pos)` は `vector` どうしの中身を交換するだけで、要素はコピーしない。そのため $O(1)$ である。
 
 この 2 つの配列は、ほかの問われ方でもよく使う。
@@ -187,6 +190,9 @@ $K$ 番目の順列は、この逆に先頭から決める。$K$ は 0-indexed �
 ```cpp
 --8<-- "permutation/rank.cpp:core"
 ```
+
+完全なプログラム：[`rank.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/permutation/rank.cpp)（GitHub）
+{ .kp-code-src }
 
 - **計算量**：$s_i$ を素朴に数えると $O(N^2)$ である。値を添字にした BIT で「未使用の値のうち $P_i$ より小さいもの」を数えれば $O(N \log N)$ になる（[値を添字にして数える](../ds/fenwick-tree.md#count-by-value)）
 - **型の範囲**：$20! \approx 2.4 \times 10^{18}$ は `long long` に収まるが、$21! \approx 5.1 \times 10^{19}$ は収まらない。$N \ge 21$ で順位を問われたら、mod で答える形のはずである

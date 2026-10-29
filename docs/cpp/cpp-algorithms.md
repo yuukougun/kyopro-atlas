@@ -57,6 +57,9 @@ atcoder: true
 --8<-- "cpp-algorithms/sort.cpp:core"
 ```
 
+完全なプログラム：[`sort.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-algorithms/sort.cpp)（GitHub）
+{ .kp-code-src }
+
 入力 `3 1 4 1 5` なら、1 行目が `1 1 3 4 5`、2・3 行目が `5 4 3 1 1` と出る。
 
 - **版**：`greater<>()`（型を省く書き方）は C++14 から。どれも g++-13・g++-15 で使える
@@ -75,6 +78,9 @@ atcoder: true
 --8<-- "cpp-algorithms/unique-erase.cpp:core"
 ```
 
+完全なプログラム：[`unique-erase.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-algorithms/unique-erase.cpp)（GitHub）
+{ .kp-code-src }
+
 入力 `3 1 3 2 1 3` なら、`unique` の直後は大きさ 6・新しい終端の添字 3 で、`erase` の後に `1 2 3` が残る。これは[座標圧縮](../basics/coordinate-compression.md#three-steps)の 1 段目で、続けて `lower_bound` で値を添字に直す。
 
 - **素朴に書くと**：`set<int> st(v.begin(), v.end()); v.assign(st.begin(), st.end());` と同じ結果になる。計算量はどちらも $O(N \log N)$ である。`vector` のまま行う方が定数倍は軽い
@@ -90,6 +96,9 @@ atcoder: true
 --8<-- "cpp-algorithms/lower-bound.cpp:core"
 ```
 
+完全なプログラム：[`lower-bound.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-algorithms/lower-bound.cpp)（GitHub）
+{ .kp-code-src }
+
 ソート後の列が `1 3 3 3 5 8` で $x = 3$ なら、`lo = 1`・`hi = 4` で個数は 3 である。$x = 4$ なら `lo = hi = 2` で個数は 0、$x = 9$ なら `lo = hi = 6`（`v.end()` の添字）になる。
 
 - `equal_range` は `lower_bound` と `upper_bound` の組を一度に返す。`binary_search` は $x$ があるかだけを `bool` で返す
@@ -100,6 +109,9 @@ atcoder: true
 ```cpp
 --8<-- "cpp-algorithms/lower-bound.cpp:set"
 ```
+
+完全なプログラム：[`lower-bound.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-algorithms/lower-bound.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：C++98 から。構造化束縛で受ける書き方は C++17
 - **落とし穴 1**：`set` に `std::lower_bound(st.begin(), st.end(), x)` や `ranges::lower_bound(st, x)` を使うと $O(N)$ かかる。`set` のイテレータは 1 つずつしか進めないからである。手元の g++-15（`-O2`）で、要素 $2 \times 10^4$ 個の `set` に $2 \times 10^4$ 回問い合わせた。どちらも約 2.3 秒かかり、メンバ関数は 1 ms だった（[メンバの lower_bound](../cpp/cpp-container-idioms.md#member-lower-bound)）
@@ -113,6 +125,9 @@ atcoder: true
 ```cpp
 --8<-- "cpp-algorithms/accumulate.cpp:core"
 ```
+
+完全なプログラム：[`accumulate.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-algorithms/accumulate.cpp)（GitHub）
+{ .kp-code-src }
 
 `long long` の $10^9$ を 3 つ足すと、初期値 `0` では $-1294967296$ になる。足した結果を毎回 `int` の変数へ戻すとき、$2^{32}$ を法とした値に変わるからである。`double` の配列でも、`0` を渡すと 1 回ごとに小数が切り捨てられて 0 になる。どちらも `-Wall -Wextra` で警告は出なかった（g++-13・g++-15）。
 
@@ -129,6 +144,9 @@ atcoder: true
 --8<-- "cpp-algorithms/partial-sum.cpp:core"
 ```
 
+完全なプログラム：[`partial-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-algorithms/partial-sum.cpp)（GitHub）
+{ .kp-code-src }
+
 入力 `3 1 4 1` なら、`s` は `0 3 4 8 9` になり、`adjacent_difference` で差を取ると `3 1 4 1` に戻る。半開区間 $[l, r)$ の和は `s[r] - s[l]` で求まる。
 
 - **素朴に書くと**：`for (int i = 0; i < n; i++) s[i + 1] = s[i] + a[i];` と同じである
@@ -139,6 +157,9 @@ atcoder: true
 --8<-- "cpp-algorithms/partial-sum.cpp:ng"
 ```
 
+完全なプログラム：[`partial-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-algorithms/partial-sum.cpp)（GitHub）
+{ .kp-code-src }
+
 ## 連番：std::iota で埋める（views::iota・ranges::iota との違い） {#iota}
 
 `iota(v.begin(), v.end(), k)` は、`v` を $k, k+1, k+2, \dots$ で埋める。よく使うのは、添字の配列を作って値の順に並べ替える書き方である。`a` を並べ替えずに、「小さい順に何番目の要素か」が分かる。
@@ -146,6 +167,9 @@ atcoder: true
 ```cpp
 --8<-- "cpp-algorithms/iota.cpp:core"
 ```
+
+完全なプログラム：[`iota.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-algorithms/iota.cpp)（GitHub）
+{ .kp-code-src }
 
 入力 `30 10 40 20` なら `1 3 0 2` と出る。等しい値があっても元の添字の順を保つよう、`stable_sort` を使っている。
 
@@ -168,6 +192,9 @@ atcoder: true
 --8<-- "cpp-algorithms/next-permutation.cpp:core"
 ```
 
+完全なプログラム：[`next-permutation.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-algorithms/next-permutation.cpp)（GitHub）
+{ .kp-code-src }
+
 入力 `3 1 2` なら `2 6` と出る。ソートせずに `3 1 2` から始めると、`3 1 2` 自身と、辞書順でその次の `3 2 1` の 2 通りしか見ない。入力 `1 2 2` なら `3 3` で、等しい要素を入れ替えただけの並びは 1 回しか出てこない。
 
 - **素朴に書くと**：使った要素の印を持ちながら再帰で並びを作るのと同じである（[再帰による全列挙](../basics/recursive-enumeration.md)）。$N \le 8$〜$10$ 程度で使う（[順列全探索](../basics/bit-full-search.md#permutations)）
@@ -183,6 +210,9 @@ atcoder: true
 --8<-- "cpp-algorithms/max-element.cpp:core"
 ```
 
+完全なプログラム：[`max-element.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-algorithms/max-element.cpp)（GitHub）
+{ .kp-code-src }
+
 入力 `3 9 2 9 3` なら `9 1`（値と、最初の 9 の添字）、`7 5`、`2` と出る。
 
 - **版**：`max({a, b, c})` は C++11、`clamp` は C++17。どちらも g++-13・g++-15 で使える
@@ -193,11 +223,17 @@ atcoder: true
 --8<-- "cpp-algorithms/min-ng.cpp:core"
 ```
 
+完全なプログラム：[`min-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-algorithms/min-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 - **落とし穴 3**：`count` と `ranges::count` の戻り値は `ptrdiff_t`（64 bit の Linux では `long`）である。`int` の変数と `max` で比べると、同じ理由でコンパイルエラーになる。`max` に渡すなら `(int)ranges::count(v, 1)` のように型をそろえる。`best` を `long long` にしても `long` とは別の型なので、エラーのままである。代入するだけなら `long long c = count(…);` で受けてよい
 
 ```cpp
 --8<-- "cpp-algorithms/count-ng.cpp:core"
 ```
+
+完全なプログラム：[`count-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-algorithms/count-ng.cpp)（GitHub）
+{ .kp-code-src }
 
 ## ranges 版：ranges::sort(v) のようにコンテナを直接渡す（C++20） {#ranges}
 
@@ -206,6 +242,9 @@ ranges 版のアルゴリズムは、`v.begin(), v.end()` の代わりにコン�
 ```cpp
 --8<-- "cpp-algorithms/ranges.cpp:core"
 ```
+
+完全なプログラム：[`ranges.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-algorithms/ranges.cpp)（GitHub）
+{ .kp-code-src }
 
 入力 `3 -1 4 1 4` なら、降順に並べた後で `-1 4 4`（最小・最大・最大）と `2 1`（先頭の 4 の個数と、負の数があるか）が出る。
 
@@ -226,6 +265,9 @@ ranges 版のアルゴリズムは、`v.begin(), v.end()` の代わりにコン�
 --8<-- "cpp-algorithms/projection.cpp:core"
 ```
 
+完全なプログラム：[`projection.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-algorithms/projection.cpp)（GitHub）
+{ .kp-code-src }
+
 入力が `alice 70`・`bob 90`・`carol 50` なら、`carol alice bob` の順に並び、最大は `bob` になる。`ranges::max(ps, {}, &P::score)` は score の値ではなく、score が最大の要素（のコピー）を返す。位置が要るなら `ranges::max_element(ps, {}, &P::score)` を使う。
 
 - **素朴に書くと**：`sort(ps.begin(), ps.end(), [](const P& x, const P& y) { return x.score < y.score; });` と同じである。比較を 2 引数のラムダ式で書く代わりに、「何で比べるか」だけを書ける
@@ -241,6 +283,9 @@ ranges 版のアルゴリズムは、`v.begin(), v.end()` の代わりにコン�
 --8<-- "cpp-algorithms/ranges-unique.cpp:core"
 ```
 
+完全なプログラム：[`ranges-unique.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-algorithms/ranges-unique.cpp)（GitHub）
+{ .kp-code-src }
+
 入力 `3 1 3 2 1 3` なら、`tail.size()` は消える要素の数 3 で、`1 2 3` が残る。
 
 - **書き方**：1 行にまとめると `v.erase(ranges::unique(v).begin(), v.end());` になる
@@ -255,6 +300,9 @@ C++23 で、`ranges::fold_left`（初期値から左に向かって畳み込む�
 --8<-- "cpp-algorithms/fold-left.cpp:core"
 ```
 
+完全なプログラム：[`fold-left.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-algorithms/fold-left.cpp)（GitHub）
+{ .kp-code-src }
+
 入力が $v = (3, 2 \times 10^9, 3, 2 \times 10^9, 1)$ と $x = 3$ なら、和 4000000007・あり（1）・最後の 3 の添字 2 が出る。`fold_left` も `accumulate` と同じく、初期値 `0LL` の型で計算する。
 
 - `find_last` は最後の $x$ から末尾までの `subrange` を返す。見つからなければ空の `subrange`（`begin()` が `v.end()`）を返す
@@ -265,11 +313,17 @@ C++23 で、`ranges::fold_left`（初期値から左に向かって畳み込む�
 --8<-- "cpp-algorithms/starts-with-ng.cpp:core"
 ```
 
+完全なプログラム：[`starts-with-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-algorithms/starts-with-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 代わりに、長さを確かめてから `equal` で先頭を比べる。
 
 ```cpp
 --8<-- "cpp-algorithms/starts-with-ok.cpp:core"
 ```
+
+完全なプログラム：[`starts-with-ok.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-algorithms/starts-with-ok.cpp)（GitHub）
+{ .kp-code-src }
 
 ## 一時オブジェクトを渡すと戻り値が ranges::dangling になる（使うとコンパイルエラー） {#ranges-dangling}
 
@@ -279,11 +333,17 @@ ranges 版に、関数の戻り値の `vector` のような、要素を自分で
 --8<-- "cpp-algorithms/dangling-ng.cpp:core"
 ```
 
+完全なプログラム：[`dangling-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-algorithms/dangling-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 g++-13・g++-15 のエラーは `no match for 'operator*' (operand type is 'std::ranges::borrowed_iterator_t<std::vector<int> >')` と出る（`borrowed_iterator_t` が、ここでは `dangling` を指す）。値を返す関数なら一時オブジェクトを渡してよい。イテレータが要るなら変数に入れてから渡す。
 
 ```cpp
 --8<-- "cpp-algorithms/dangling-ok.cpp:core"
 ```
+
+完全なプログラム：[`dangling-ok.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-algorithms/dangling-ok.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：C++20。g++-13・g++-15 のどちらでも、`*ranges::max_element(make())` はエラーになり、変数に入れてから渡す書き方は通った
 - **比べると**：従来の版は `make().begin(), make().end()` のように書くと別々の一時オブジェクトを指すが、コンパイルは通る。ranges 版は誤りをコンパイル時に止める（寿命の誤りの全体は[未定義動作](../cpp/cpp-undefined-behavior.md)）

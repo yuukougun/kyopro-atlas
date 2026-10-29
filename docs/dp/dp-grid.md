@@ -68,6 +68,9 @@ updated: 2026-10-29
 --8<-- "dp-grid/grid-paths.cpp:core"
 ```
 
+完全なプログラム：[`grid-paths.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-grid/grid-paths.cpp)（GitHub）
+{ .kp-code-src }
+
 - **壁は「到達できない」にする**：数え上げなら 0、最大化なら $-\infty$ にして、壁から遷移しないようにする。壁の値を書かずに `continue` するだけでも、表を 0 で初期化していれば同じである。最大化で表を 0 で初期化すると、壁の向こうから「0 で来られる」ことになり誤る
 - **出発点が壁のとき**：$\mathrm{dp}[0][0] = 1$ を先に置いてから壁の判定をすると、壁の上に経路が 1 本残る。壁の判定を先にする
 - **最大化への読み替え**：経路上の値の和の最大なら、足し算を $\max$ に、遷移に「そのマスの値を足す」を加え、到達できない状態を $-\infty$ にする。演算の入れ替え方は [DP の基本](../dp/dp-basics.md#three-kinds)と同じである
@@ -117,6 +120,9 @@ updated: 2026-10-29
 --8<-- "dp-grid/queen-paths.cpp:core"
 ```
 
+完全なプログラム：[`queen-paths.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-grid/queen-paths.cpp)（GitHub）
+{ .kp-code-src }
+
 この考え方は、遷移元が区間になる DP を累積和で速くする方法の、グリッド版である（[累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md)）。向きを状態に足して「直前の向きのまま 1 マス延ばす」か「止まって向きを変える」かで遷移を書いても、同じ $O(HW)$ になる。
 
 ## 最大の正方形（左・上・左上の min + 1） {#largest-square}
@@ -141,6 +147,9 @@ $$
 ```cpp
 --8<-- "dp-grid/largest-square.cpp:core"
 ```
+
+完全なプログラム：[`largest-square.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-grid/largest-square.cpp)（GitHub）
+{ .kp-code-src }
 
 - **個数のあふれ**：壁のない $3000 \times 3000$ の盤面では、個数は約 $9 \times 10^9$ で `int` に収まらない。和は `long long` で取る
 - **長方形には使えない**：正方形は「一辺」の 1 つの数で形が決まるので 3 方向の min で済む。長方形の最大面積は、各列の連続する空きマスの高さを求め、行ごとにヒストグラムの最大長方形を[単調スタック](../ds/monotonic-stack.md)で解く

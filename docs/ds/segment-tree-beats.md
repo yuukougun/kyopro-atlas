@@ -81,17 +81,23 @@ Segment Tree Beats は、ノードに少し多めの情報を持たせ、「こ�
 
 ## 自作するときの要点と Library Checker {#library}
 
-ACL には Segment Tree Beats がない（`lazy_segtree` は作用が必ずノードの情報だけで済む前提で、子へ降りる場合を持たない）。自作するときは、chmin の更新を次の形にする（完全なプログラムは `snippets/segment-tree-beats/beats.cpp`。区間 chmax・区間加算も入れてある）。
+ACL には Segment Tree Beats がない（`lazy_segtree` は作用が必ずノードの情報だけで済む前提で、子へ降りる場合を持たない）。自作するときは、chmin の更新を次の形にする（完全なプログラムは [`snippets/segment-tree-beats/beats.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-beats/beats.cpp)。区間 chmax・区間加算も入れてある）。
 
 ```cpp
 --8<-- "segment-tree-beats/beats.cpp:core"
 ```
+
+完全なプログラム：[`beats.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-beats/beats.cpp)（GitHub）
+{ .kp-code-src }
 
 子へ降りる前の保留の受け渡しは、加算を先に、切り詰めを後にする。親の最大値・最小値は加算をすでに含んだ値なので、子にも先に加算を施してから比べる。
 
 ```cpp
 --8<-- "segment-tree-beats/beats.cpp:push"
 ```
+
+完全なプログラム：[`beats.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-beats/beats.cpp)（GitHub）
+{ .kp-code-src }
 
 実装で間違えやすいのは次の点である。
 
@@ -159,7 +165,7 @@ $x$ で割った余りは、最大値が $x$ 未満のノードで止め、そ�
 
 ### Library Checker
 
-- [Range Chmin Chmax Add Range Sum](https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum)：区間 chmin・区間 chmax・区間加算と区間和。`snippets/segment-tree-beats/beats.cpp` はこの入力の形で書いてある。
+- [Range Chmin Chmax Add Range Sum](https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum)：区間 chmin・区間 chmax・区間加算と区間和。[`snippets/segment-tree-beats/beats.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-beats/beats.cpp) はこの入力の形で書いてある。
 
 ## 確認問題 {#quiz}
 

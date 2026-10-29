@@ -112,6 +112,9 @@ $h = 0$ の場合は $\binom{p + q}{q} - \binom{p + q}{q - 1}$ で、ballot 数�
 --8<-- "reflection-principle/below-line.cpp:core"
 ```
 
+完全なプログラム：[`below-line.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/reflection-principle/below-line.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 全体のプログラムは、小さい $a, b, K$ のすべてで格子の DP と答えを比べている。
 
 **応用の型**。並べる要素が 2 種類で個数が決まっていて、条件が「どの接頭辞でも一方の個数が他方の個数 $+ K$ 以下」なら、この式 1 つで答えが出る（[ABC205 E](#abc205_e)）。先頭の一部がすでに決まっているときは、決まった部分を読んだ後の高さを $h$ として、残りに $\pm 1$ の式を使う。
@@ -203,6 +206,9 @@ $N(d)$ は、制約のない $n$ 歩で高さが $d$ 変わる列の数で、$\l
 ```cpp
 --8<-- "reflection-principle/two-sided.cpp:core"
 ```
+
+完全なプログラム：[`two-sided.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/reflection-principle/two-sided.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 全体のプログラムは、$w \le 6$、$n \le 30$ のすべての $(s, t)$ で高さの DP と比べている。$w$ が小さく $n$ が大きいと項が多くなる。そのときは、高さの DP（$O(nw)$）や[行列累乗](../math/matrix-power.md)と計算量を比べて選ぶ。
 

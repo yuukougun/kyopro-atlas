@@ -25,7 +25,7 @@ sections:
   - {title: 最終電車型：終点から逆向きに最も遅い時刻を確定させる, anchor: latest-departure}
   - {title: 最適な出発時刻を計算してから進む, anchor: optimal-departure, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -41,7 +41,7 @@ updated: 2026-10-22
 別名：時刻依存の最短路・待機・最終電車・出発時刻・time-dependent shortest path
 <!-- textlint-enable -->
 
-時刻で変わる辺の最短路は、「頂点 $u$ を時刻 $t$ に出ると、頂点 $v$ に何時に着くか」が $t$ によって変わるグラフについて、最も早い到着時刻を求める方法である。辺の重みが一定でなくても、早く着いて損をしないという性質さえあれば、距離の代わりに時刻を持つ[ダイクストラ法](../graph/dijkstra.md)で解ける。時刻を状態に加える必要はない。
+時刻で変わる辺の最短路は、「頂点 $u$ を時刻 $t$ に出ると、頂点 $v$ に何時に着くか」が $t$ によって変わるグラフについて、最も早い到着時刻を求める方法である。辺の重みが一定でなくても、早く着いて損をしないという性質さえあれば、距離の代わりに時刻を持つ[ダイクストラ法](../graph/dijkstra.md)で解ける。時刻を状態に加える必要はない。コード片は頂点を 0-indexed で持ち、問題文の 1-indexed の番号からは 1 を引いて使う。例題の解説は問題文の番号（駅 $1, \dots, N$）のまま書く。
 
 ## 早く着いて損をしない性質（FIFO 性） {#fifo}
 
@@ -91,6 +91,9 @@ $\mathrm{next}_e(t)$ の計算は、便の並び方で変わる。
 --8<-- "time-dependent-dijkstra/earliest-arrival.cpp:core"
 ```
 
+完全なプログラム：[`earliest-arrival.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/time-dependent-dijkstra/earliest-arrival.cpp)（GitHub）
+{ .kp-code-src }
+
 ヒープから取り出す時刻が「最も早い到着時刻」なので、取り出した時刻のまま次の便を探せばよい。「待ってから遅い便に乗る方がよい」場合は、$\mathrm{next}_e$ が $t$ 以上で最も早い便を選ぶことで自然に含まれる。わざと遅い便に乗っても、同じ辺の早い便より先に着くことはない（所要時間が一定だから）。
 
 便ごとに所要時間が違うと、遅い便の方が早く着くことがある（後から出る特急が先に着く）。このときは $t$ 以上の便のうち到着が最も早いものを選べばよい。$a_e(t) = \min_{s_j \ge t} (s_j + T_j)$ と定めれば $t$ について減らないので、FIFO 性は保たれる。後ろからの最小値を前計算しておけば、`lower_bound` の後に $O(1)$ で引ける。
@@ -114,7 +117,10 @@ $\mathrm{late}[v]$ を「$v$ を出て終点に間に合う最も遅い時刻」
 --8<-- "time-dependent-dijkstra/last-train.cpp:core"
 ```
 
-C++ の `/` は 0 の方向へ切り捨てるので、$t - c - l$ が $-d$ より大きい負の数だと商が 0 になり、間に合わない最初の便を間に合うと誤る。コードのように、割る前に負の場合を除いておく。$+\infty$ は $l + (k - 1)d$ の最大（$10^{18}$ 程度）より大きく、$c$ や $l$ を引いてもあふれない値にする。上のコードでは $2 \times 10^{18}$ を使っている。
+完全なプログラム：[`last-train.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/time-dependent-dijkstra/last-train.cpp)（GitHub）
+{ .kp-code-src }
+
+C++ の `/` は 0 の方向へ切り捨てるので、$t - c - l$ が $-d$ より大きい負の数だと商が 0 になり、間に合わない最初の便を間に合うと誤る。コードのように、割る前に負の場合を除いておく。$+\infty$ は $l + (k - 1)d$ の最大（$10^{18}$ 程度）より大きく、$c$ や $l$ を引いてもあふれない値にする。完全なプログラムでは、引くだけで足さないので `LLONG_MAX` を使っている（[INF の決め方](../cpp/cpp-types-literals.md#inf)）。
 
 ??? question "確認問題：時刻表が一覧で与えられる場合"
     辺 $v \to u$ の便の出発時刻が昇順の一覧 $s_1 < s_2 < \dots < s_k$ で与えられ、所要時間がどれも $c$ のとき、$u$ に時刻 $t$ までに着く最も遅い便の出発時刻はどう求めるか。
@@ -140,6 +146,9 @@ $s$ をすべて試すと間に合わないので、$g_e$ の形を調べて最�
 ```cpp
 --8<-- "time-dependent-dijkstra/best-departure.cpp:core"
 ```
+
+完全なプログラム：[`best-departure.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/time-dependent-dijkstra/best-departure.cpp)（GitHub）
+{ .kp-code-src }
 
 コードの `main` では、$D \le 3000$ と小さい $t$ のすべてで、待つ時刻を全部試した結果と一致することを `assert` で確かめている。$\sqrt{D}$ を浮動小数点で求めると 1 ずれることがあるので、前後を整数の比較で直している。式で解く自信がないときは、$\lfloor \sqrt{D} \rfloor$ の前後の数個の整数と $t$ を候補にして最小を取る書き方でもよい。
 
@@ -195,7 +204,7 @@ $s$ をすべて試すと間に合わないので、$g_e$ の形を調べて最�
     - $\mathrm{late}[N] = +\infty$、ほかは「間に合わない」で始める。逆向きの隣接リストに、列車 $A \to B$ を $B$ から $A$ への辺として入れる。
     - 最大ヒープから $(t, u)$ を取り出し、$u$ に着く各列車で、$t$ までに $u$ に着く最も遅い便を求める。$t - c - l < 0$ なら使えない。そうでなければ $i = \min(k - 1, \lfloor (t - c - l) / d \rfloor)$ で、出発時刻 $l + i d$ で $\mathrm{late}[A]$ を更新する。[最終電車型の節](#latest-departure)のコードがそのまま使える。
     - 乗り換えの時間はかからないので、到着と同時に次の列車に乗れる。不等号は $s + c \le t$ でよい。
-    - 間に合わない駅には `Unreachable` を出力する。$l + (k - 1)d$ は $10^{18}$ 程度になるので、$+\infty$ は $2 \times 10^{18}$ などにする。計算量は $O((N + M) \log N)$。
+    - 間に合わない駅には `Unreachable` を出力する。$l + (k - 1)d$ は $10^{18}$ 程度になるので、$+\infty$ はそれより大きくする。$+\infty$ からは $c$ と $l$ を引くだけで足さないので、`LLONG_MAX` でよい（[INF の決め方](../cpp/cpp-types-literals.md#inf)）。計算量は $O((N + M) \log N)$。
 
 ## 練習問題 {#practice}
 

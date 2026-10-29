@@ -111,6 +111,9 @@ $$
 --8<-- "randomized/random-pair.cpp:core"
 ```
 
+完全なプログラム：[`random-pair.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/randomized/random-pair.cpp)（GitHub）
+{ .kp-code-src }
+
 2 つ目の添字は、1 つ目を除いた $N - 1$ 個から一様に選ぶ（`j >= i` なら 1 つずらす）。2 つを独立に選んで同じなら飛ばす書き方では、飛ばした回も回数に数えると成功確率が $1/4$ を下回ることがある（$N = 3$、$m = 2$ なら $2/9$）。
 
 ### Boyer-Moore の投票
@@ -132,6 +135,9 @@ $$
 ```cpp
 --8<-- "randomized/majority-vote.cpp:core"
 ```
+
+完全なプログラム：[`majority-vote.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/randomized/majority-vote.cpp)（GitHub）
+{ .kp-code-src }
 
 - **応用の型（区間の過半数）**：「区間 $[l, r)$ に過半数の値があるか」のクエリには、(候補, 個数) の組を[セグメント木](../ds/segment-tree.md)に載せる。2 つの組は、候補が同じなら個数を足し、違えば多い方から少ない方を引いてまとめる。違う候補どうしを打ち消すだけなので、どの順にまとめても上の性質は保たれる。こうして区間の候補が得られる。候補の本当の個数は、値ごとの出現位置の列を二分探索して数える
 - **乱択での区間の過半数**：区間からランダムに 20 か所を選び、各値の区間内の個数を出現位置の二分探索で数えてもよい。過半数があれば 1 回で当たる確率は $1/2$ を超えるので、見逃す確率は $(1/2)^{20} \approx 10^{-6}$ 以下である。クエリが多いなら、[和の上界](#failure-probability)で回数を増やす
@@ -158,6 +164,9 @@ $$
 ```cpp
 --8<-- "randomized/color-coding.cpp:core"
 ```
+
+完全なプログラム：[`color-coding.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/randomized/color-coding.cpp)（GitHub）
+{ .kp-code-src }
 
 - **成功確率を上げる工夫**：解の中で互いに異なればよい組が限られているなら、色の数を減らせる。たとえば「グループ A の要素とグループ B の要素は必ず別物」と言えれば、2 色で塗り分けて A を色 0、B を色 1 に限ると、残りの「異なる」条件が少なくなる。成功確率は、関わる要素の数を $t$ として $2^{-t}$ になる
 - **サイン**：$K \le 6$〜$7$ 程度で、選ぶ $K$ 個が互いに異なる条件がある。しかも要素の種類（値・頂点・ジャンル）が多く、集合を状態に持てない。$K$ が 1 増えると、回数はおよそ $e$ 倍、1 回の手間は 2 倍になる（$K = 7$ で約 3400 回 × $2^7$）

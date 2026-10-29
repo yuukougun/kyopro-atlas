@@ -81,6 +81,9 @@ flowchart TD
     --8<-- "debugging-checklist/multitest.cpp:core"
     ```
 
+    完全なプログラム：[`multitest.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/debugging-checklist/multitest.cpp)（GitHub）
+    { .kp-code-src }
+
 ## 一部だけ落ちるか、多くが落ちるか {#partial}
 
 WA が出たら、まず提出の詳細で、落ちたテストケースの数と結果の内訳を見る。割合で疑う場所が変わるからである（E869120 の記事が勧める手順）。

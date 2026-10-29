@@ -102,6 +102,9 @@ $K = N$ なら最大値、$K = 1$ なら最小値の式に戻る。値の範囲�
 --8<-- "expectation-tail-sum/kth-value.cpp:core"
 ```
 
+完全なプログラム：[`kth-value.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/expectation-tail-sum/kth-value.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 **独立でないとき**。$1$〜$M$ から異なる $N$ 個を一様に選ぶ場合は、値どうしが独立でないので積にはできない。それでも「すべて $k$ 未満」は「$1$〜$k - 1$ から $N$ 個を選んだ」と同じなので、$P(\max < k) = \binom{k-1}{N} \Big/ \binom{M}{N}$ と場合の数の比で数えられる。「$k$ 以上」の側の事象は、独立でなくても数えやすい形になることが多い。
 
 **値の範囲が広いとき**。各 $X_i$ が 6 面のサイコロで、面の値が $10^9$ までのように広い場合は、[値がとびとびのとき](#identity)の式を使い、出てくる値だけで足す。$P(\max < v)$ は各サイコロの「$v$ 未満の面の割合」の積で、値を小さい順に見ていくと、1 つのサイコロの割合が変わるのは自分の面の値を通るときだけである。その変わり目ごとに積を更新すればよい（0 を含む積の扱いは[落とし穴](#pitfalls)）。

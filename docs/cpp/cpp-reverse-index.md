@@ -53,6 +53,9 @@ C++ の逆引きは、C++ 章の各ページへの索引である。表の 1 行
 --8<-- "cpp-reverse-index/read-line.cpp:core"
 ```
 
+完全なプログラム：[`read-line.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-reverse-index/read-line.cpp)（GitHub）
+{ .kp-code-src }
+
 範囲 for の 1 行は、次の 3 つの問いに分けて読む。
 
 1. **何を回すか**（`:` の右）：範囲の式を左から読む。`scc.scc()` は ACL の強連結成分分解で、成分をトポロジカル順に並べた `vector<vector<int>>` を返す。それを `| views::enumerate` に流すと、（添字, 成分への参照）の組を順に作る範囲になる
@@ -342,6 +345,9 @@ ACL の版の違い（v1.5 と v1.6）は [ACL の版](../cpp/acl-reading.md#ver
 ```cpp
 --8<-- "cpp-reverse-index/required-from-here-ng.cpp:core"
 ```
+
+完全なプログラム：[`required-from-here-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-reverse-index/required-from-here-ng.cpp)（GitHub）
+{ .kp-code-src }
 
 手元の g++-15 では、このエラーが 132 行出た（g++-13 では 79 行）。読むのは次の 2 か所だけである。以下の抜き出しと表の `'` は、ロケール（`LANG`）が UTF-8 なら `‘` `’` と出る。
 

@@ -73,6 +73,9 @@ $$
 --8<-- "knapsack-undo/add-remove.cpp:core"
 ```
 
+完全なプログラム：[`add-remove.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/knapsack-undo/add-remove.cpp)（GitHub）
+{ .kp-code-src }
+
 追加と削除はどちらも表を 1 回なめるだけなので 1 回 $O(K)$ になり、$Q$ 回のクエリは $O(QK)$ である。
 
 **ほかの更新でも同じ考え方が使える**。表を多項式 $f(z) = \sum_s \mathrm{dp}[s] z^s$ とみると、値 $x$ の追加は $(1 + z^x)$ を掛けること、削除は $(1 + z^x)$ で割ることにあたる。定数項が 1 の多項式で割る操作は、$K$ 次までに限っても一通りに決まる。同じ見方で、個数制限なしの数え上げの更新も戻せる。
@@ -112,6 +115,9 @@ $$
 ```cpp
 --8<-- "knapsack-undo/prefix-suffix.cpp:core"
 ```
+
+完全なプログラム：[`prefix-suffix.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/knapsack-undo/prefix-suffix.cpp)（GitHub）
+{ .kp-code-src }
 
 前計算が $O(NW)$、各 $i$ のマージが $O(W)$ なので、全体で $O(NW)$ である。メモリも $O(NW)$ 使い、`long long` の表 2 つで約 $16NW$ バイトになる。$NW = 6.4 \times 10^7$ で約 $1.0 \times 10^9$ バイト（約 980 MiB）になり、よくある制限の 1024 MiB にほぼ達するので、$NW$ が $10^7$ を超えるあたりからはメモリを見積もる。足りなければ、後ろの表だけを全部持ち、前の表は $i$ を進めながら 1 本で更新するとよい（メモリが半分になる）。
 

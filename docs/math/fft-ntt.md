@@ -97,6 +97,9 @@ $$
 --8<-- "fft-ntt/ntt.cpp:core"
 ```
 
+完全なプログラム：[`ntt.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/fft-ntt/ntt.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 自作するときの要点は[ライブラリの節](#library)にまとめる。
 
 ## 複素数の FFT と誤差、NTT に向く素数（c·2^k + 1）と原始根 {#ntt-prime}

@@ -120,11 +120,17 @@ $P = \texttt{abab}$、文字は $\texttt{a}$・$\texttt{b}$ の 2 種類で動�
 --8<-- "string-automaton-dp/aho-dp.cpp:build"
 ```
 
+完全なプログラム：[`aho-dp.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/string-automaton-dp/aho-dp.cpp)（GitHub）
+{ .kp-code-src }
+
 あとは KMP オートマトンと同じ DP を、$\mathrm{out}[u] \ne \emptyset$ の状態 $u$ に入らないように回せばよい。状態 $S$ 個・遷移 $\sigma$ 通りで $O(N \sigma S)$ である。
 
 ```cpp
 --8<-- "string-automaton-dp/aho-dp.cpp:avoid"
 ```
+
+完全なプログラム：[`aho-dp.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/string-automaton-dp/aho-dp.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 あるパターンが別のパターンを部分文字列に含むときも、この形のままで正しい。$\texttt{abcd}$ を含む文字列は必ず $\texttt{bc}$ も含むので、$\texttt{abcd}$ は条件に何も足さない。頂点 $\texttt{abc}$ で止まるので、頂点 $\texttt{abcd}$ には届かない。
 
@@ -141,6 +147,9 @@ $P = \texttt{abab}$、文字は $\texttt{a}$・$\texttt{b}$ の 2 種類で動�
 ```cpp
 --8<-- "string-automaton-dp/aho-dp.cpp:all"
 ```
+
+完全なプログラム：[`aho-dp.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/string-automaton-dp/aho-dp.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 状態数は $2^K S$、遷移は $\sigma$ 通りで、全体で $O(N \sigma S \cdot 2^K)$ になる。$K = 8$、$S = 81$、$\sigma = 26$ なら 1 文字あたり約 $5.4 \times 10^5$ で、$N$ が数百までなら間に合う。メモリは $\mathrm{dp}$ を 2 段だけ持てば $O(S \cdot 2^K)$ で済む。
 
@@ -166,6 +175,9 @@ $$
 ```cpp
 --8<-- "string-automaton-dp/matrix.cpp:matrix"
 ```
+
+完全なプログラム：[`matrix.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/string-automaton-dp/matrix.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 行列の積 1 回は $O(S^3)$ で、[繰り返し二乗法](../math/matrix-power.md#fast-power)で $O(\log N)$ 回掛けるので、全体で $O(S^3 \log N)$ である。$S = 101$、$N = 10^9$ なら $101^3 \times 30 \approx 3 \times 10^7$ 回の掛け算で済む。ベクトルに掛けるのは行列どうしの積より軽いので、$A^N$ を作ってから掛けるより、bit が 1 の段でベクトルに掛ける方が少し速い。
 

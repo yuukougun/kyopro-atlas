@@ -84,6 +84,9 @@ $$
 --8<-- "lattice-paths/knight.cpp:core"
 ```
 
+完全なプログラム：[`knight.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lattice-paths/knight.cpp)（GitHub）
+{ .kp-code-src }
+
 この形に直せるかは、次の順に確かめる。
 
 - **回数が終点から 1 通りに決まるか**：移動のベクトルが 2 つで 1 次独立なら、回数の組は連立方程式の解として 1 通りに決まる。移動が 3 種類以上なら、回数の組は 1 通りとは限らない。平面なら、自由に選べる回数（3 種類なら 1 つ、4 種類なら 2 つ）でループし、各組の並べ方を[多項係数](../comb/multinomial-coefficient.md)で数えて足す
@@ -108,6 +111,9 @@ $H$ 行 $W$ 列のマスを、左上 $(0, 0)$ を出て右下 $(H-1, W-1)$ ま�
 ```cpp
 --8<-- "lattice-paths/forbidden.cpp:core"
 ```
+
+完全なプログラム：[`forbidden.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lattice-paths/forbidden.cpp)（GitHub）。`mint` は ACL の `modint1000000007`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 分類に使う境目は、どの経路も必ず 1 回だけ通るものを選ぶ。「禁止領域の角の点を通るか」のような分け方では、通らない経路が残ったり、2 回数えたりする。禁止のマスが散らばっているときは、境目ではなく「最初に踏む障害物」で分類する（[包除 DP](../comb/inclusion-exclusion-dp.md#first-obstacle)）。
 

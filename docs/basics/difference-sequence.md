@@ -95,6 +95,9 @@ $$
 --8<-- "difference-sequence/min-ops.cpp:core"
 ```
 
+完全なプログラム：[`min-ops.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/difference-sequence/min-ops.cpp)（GitHub）
+{ .kp-code-src }
+
 1 回の操作で変わる差分の個数と向きが分かれば、「正の部分の和」「鎖ごとの和」のように、点ごとの量に分けて下限と構成を考えられる。可否の判定では、差分列の上の[不変量](../thinking/invariant.md#necessary-and-sufficient)（鎖ごとの和など）が必要条件になることが多い。
 
 ## 狭義の条件は a_i − i で広義に直してから差分を取る {#strict-to-weak}
@@ -187,6 +190,9 @@ $$
     ```cpp
     --8<-- "difference-sequence/level.cpp:core"
     ```
+
+    完全なプログラム：[`level.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/difference-sequence/level.cpp)（GitHub）
+    { .kp-code-src }
 
 ### ABC454 F. Make it Palindrome 2 {#abc454_f}
 

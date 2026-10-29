@@ -64,6 +64,9 @@ $S = \mathrm{ABACBC}$ では、B は添字 1 と 4 にある。$j = 1$ なら左
 --8<-- "fix-variable/middle-abc.cpp:core"
 ```
 
+完全なプログラム：[`middle-abc.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/fix-variable/middle-abc.cpp)（GitHub）
+{ .kp-code-src }
+
 $j$ 自身を左右のどちらにも入れないように、更新の順番に気をつける。上のコードでは、`s[j]` が C なら数える前に右側から外し、A なら数えた後に左側へ入れている。
 
 条件が文字の種類ではなく値の大小（$A_i < A_j < A_k$ など）でも、同じく真ん中を固定する。位置の条件 $i < j < k$ もあるなら、「$j$ より左にあって $A_j$ より小さいもの」の個数は、$j$ を動かしながら [BIT](../ds/fenwick-tree.md) で数える。列全体をソートすると位置の情報が消えるので、二分探索では数えられない。位置の条件がなく、3 つの別の列から 1 つずつ選ぶ（$A_i < B_j < C_k$）なら、各列をソートして[二分探索](../basics/binary-search.md#fix-one-side)で数えられる。
@@ -87,6 +90,9 @@ $j$ 自身を左右のどちらにも入れないように、更新の順番に�
 ```cpp
 --8<-- "fix-variable/remainder-pairs.cpp:core"
 ```
+
+完全なプログラム：[`remainder-pairs.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/fix-variable/remainder-pairs.cpp)（GitHub）
+{ .kp-code-src }
 
 「全要素について余りの個数を数えてから、余り $r$ と $(m - r) \bmod m$ の個数を掛ける」と書くと、$r = 0$ や $2r = m$ のときに自分自身との組を数え、$i, j$ の順序を入れ替えた組も 2 回数える。左から走査し「数えてから入れる」と書けば、相手は必ず自分より左にあるので、この 2 つの誤りが同時に防げる。
 

@@ -70,6 +70,9 @@ updated: 2026-10-22
 --8<-- "tree-construction/from-distances.cpp:core"
 ```
 
+完全なプログラム：[`from-distances.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-construction/from-distances.cpp)（GitHub）
+{ .kp-code-src }
+
 !!! info "ACL では"
     `atcoder::dsu uf(n);` でクラスカル法を書く。`uf.same(a, b)` で閉路になるかを調べ、`uf.merge(a, b)` で辺を採る（どちらもならし $O(\alpha(N))$）。
 
@@ -98,6 +101,9 @@ $L_i$ は「左にある自分より大きい最後の位置」なので、[単�
 ```cpp
 --8<-- "tree-construction/from-order.cpp:core"
 ```
+
+完全なプログラム：[`from-order.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-construction/from-order.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 規則が行きがけ順（子を番号の小さい順にたどる [DFS](../graph/dfs.md)）だと、親の選び方は独立でなくなる。部分木は訪問順の連続した区間になるので、区間を部分木とみる[区間 DP](../dp/interval-dp-advanced.md#dfs-order-trees) で数える（[力試し](#challenge)の ABC252 G）。候補の積で数えられるのは、「親が出てから自分が出るまでの間」の条件が各頂点で閉じている規則に限られる。
 

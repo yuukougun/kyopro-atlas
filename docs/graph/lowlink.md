@@ -109,11 +109,14 @@ $p$ を除いたとき、子 $c$ の部分木が残りとつながるには、�
 - $v$ が根でないとき：$s_v + 1$ 個（切り離される $s_v$ 個の部分木と、親を含む残り）
 - $v$ が根のとき：$s_v$ 個（子の数と同じ。孤立点なら 0 個で、成分が 1 つ消える）
 
-次のコードは、橋と関節点、頂点を除いたときに分かれる個数 `pieces[v]` をまとめて求める。辺の番号を隣接リストに入れるのは、[次の節](#multi-edges)で述べる多重辺のためである。
+次のコードは、橋と関節点、頂点を除いたときに分かれる個数 `pieces[v]` をまとめて求める。辺の番号を隣接リストに入れるのは、[次の節](#multi-edges)で述べる多重辺のためである。入力の頂点は 1-indexed で、読んだ直後に 1 を引く。
 
 ```cpp
 --8<-- "lowlink/lowlink.cpp:core"
 ```
+
+完全なプログラム：[`lowlink.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lowlink/lowlink.cpp)（GitHub）
+{ .kp-code-src }
 
 **応用の型**：
 
@@ -146,6 +149,9 @@ DFS で「親へ戻る辺」を飛ばすとき、親の**頂点**で判定する
 ```cpp
 --8<-- "lowlink/two-edge.cpp:core"
 ```
+
+完全なプログラム：[`two-edge.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lowlink/two-edge.cpp)（GitHub）
+{ .kp-code-src }
 
 **応用の型**：
 

@@ -6,7 +6,7 @@ using namespace std;
 struct Fenwick {
     int n;
     vector<long long> t;
-    Fenwick(int n) : n(n), t(n + 1, 0) {}
+    explicit Fenwick(int n) : n(n), t(n + 1, 0) {}
     void add(int p, long long x) {
         for (int i = p + 1; i <= n; i += i & -i) t[i] += x;
     }

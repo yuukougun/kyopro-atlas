@@ -57,6 +57,9 @@ atcoder: true
 --8<-- "cpp-range-for/references.cpp:core"
 ```
 
+完全なプログラム：[`references.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-range-for/references.cpp)（GitHub）
+{ .kp-code-src }
+
 - **素朴に書くと**：毎回 `g[0]` と書いて `g[0].push_back(100);` とするのと同じ意味である。長い式（`g[par[v]]` など）に短い名前を付けるときに使う
 - **版**：C++98 から。g++-13・g++-15 で使える
 - **落とし穴**：`auto row = g[0];` と `&` を書き忘れると、`row` はコピーになる。`row.push_back(…)` は `g[0]` に入らず、エラーや警告は出ない。書き換えたいのに結果が反映されないときは、まず `&` を確かめる
@@ -68,6 +71,9 @@ atcoder: true
 ```cpp
 --8<-- "cpp-range-for/pass-by-reference.cpp:core"
 ```
+
+完全なプログラム：[`pass-by-reference.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-range-for/pass-by-reference.cpp)（GitHub）
+{ .kp-code-src }
 
 手元の g++-15（`-O2`）で長さ $10^4$ の配列を渡して深さ $10^4$ の再帰をすると、値渡しは 172 ms・最大メモリ 395 MB、`const&` は 1 ms 未満・4 MB 未満だった。長さ・深さとも $2 \times 10^5$ なら値渡しは確実に TLE か MLE になる。
 
@@ -91,6 +97,9 @@ DP を 2 本の配列で回すとき（[0-1 ナップサック](../dp/knapsack-0
 --8<-- "cpp-range-for/move-swap.cpp:core"
 ```
 
+完全なプログラム：[`move-swap.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-range-for/move-swap.cpp)（GitHub）
+{ .kp-code-src }
+
 手元の g++-15（`-O2`）で長さ $10^7$ の `vector<long long>` を 100 回入れ替えると、`swap` は合わせて 1 µs 未満、`dp = ndp` は 572 ms だった。`swap` の後の `ndp` には前の段の値が残っているが、次の段で全部の添字に書き込むので問題ない。
 
 `move(a)` は「`a` の中身を持っていってよい」という印で、`vector<int> b = move(a);` は中身の置き場所を `b` に渡すだけで $O(1)$ である。
@@ -98,6 +107,9 @@ DP を 2 本の配列で回すとき（[0-1 ナップサック](../dp/knapsack-0
 ```cpp
 --8<-- "cpp-range-for/move-swap.cpp:move"
 ```
+
+完全なプログラム：[`move-swap.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-range-for/move-swap.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：`swap` の $O(1)$ は C++98 から、`move` は C++11 から。g++-13・g++-15 で使える
 - **落とし穴 1**：`ndp` を毎段 `vector<long long> ndp(w + 1);` と作り直すと、確保と 0 埋めで $O(W)$ かかる。計算量の式は変わらない。ただし `swap` で使い回すと定数倍は軽い。逆に、`ndp` に前の段の値が残ることを忘れて「書かなかった所は 0」と思い込むと誤る
@@ -110,6 +122,9 @@ DP を 2 本の配列で回すとき（[0-1 ナップサック](../dp/knapsack-0
 ```cpp
 --8<-- "cpp-range-for/forwarding-reference.cpp:core"
 ```
+
+完全なプログラム：[`forwarding-reference.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-range-for/forwarding-reference.cpp)（GitHub）
+{ .kp-code-src }
 
 競プロのコードで `auto&&` が出てくるのは、主に次の 3 か所である。
 
@@ -137,6 +152,9 @@ DP を 2 本の配列で回すとき（[0-1 ナップサック](../dp/knapsack-0
 --8<-- "cpp-range-for/range-for-forms.cpp:core"
 ```
 
+完全なプログラム：[`range-for-forms.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-range-for/range-for-forms.cpp)（GitHub）
+{ .kp-code-src }
+
 入力 `3` と `1 2 3` に対して、`a` は `2 3 4` になる。`x *= 2` はコピーの `x` を変えるだけで、`a` には届かない。
 
 - **素朴に書くと**：`for (auto& x : a) x += 1;` は `for (int i = 0; i < (int)a.size(); i++) a[i] += 1;` と同じ意味である。`for (auto x : a)` は、ループの最初に `auto x = a[i];` とコピーするのと同じである
@@ -157,6 +175,9 @@ DP を 2 本の配列で回すとき（[0-1 ナップサック](../dp/knapsack-0
 --8<-- "cpp-range-for/vector-bool.cpp:core"
 ```
 
+完全なプログラム：[`vector-bool.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-range-for/vector-bool.cpp)（GitHub）
+{ .kp-code-src }
+
 - **版**：C++98 からこの仕様である。g++-13・g++-15 で同じ動きだった
 - **落とし穴**：訪問済みの印など `vector<bool>` をよく使う場面では、`auto` で受けた変数が元を指していることに気づきにくい。プロキシを避けたいなら `vector<char>` か `vector<int>` を使う（メモリは 8 倍・32 倍になるが、普通の参照が使える）
 
@@ -167,6 +188,9 @@ C++20 から、範囲 for の前に変数の宣言を 1 つ書ける。添字も
 ```cpp
 --8<-- "cpp-range-for/range-for-init.cpp:core"
 ```
+
+完全なプログラム：[`range-for-init.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-range-for/range-for-init.cpp)（GitHub）
+{ .kp-code-src }
 
 入力 `5 6 7` なら `0:5 1:6 2:7` と出る。宣言できるだけで、普通の for の `i++` に当たる部分はないので、本体の中で `i++` と書く。
 
@@ -181,6 +205,9 @@ C++20 から、範囲 for の前に変数の宣言を 1 つ書ける。添字も
 --8<-- "cpp-range-for/modify-in-loop.cpp:bad"
 ```
 
+完全なプログラム：[`modify-in-loop.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-range-for/modify-in-loop.cpp)（GitHub）
+{ .kp-code-src }
+
 `v = {2, 3, 4, 8}` で上の行を動かすと、手元の g++-13・g++-15 とも `-Wall -Wextra` で警告は出なかった。AddressSanitizer（`-fsanitize=address`）を付けると `heap-use-after-free` で止まった。付けずに `-O2` で動かすと、長さは実行のたびに 5〜8 と変わった（本来は偶数 3 個を足して 7 になる）。たまたま正しい 7 が出ることもあり、黙って誤った答えを出す。
 
 回す前の長さを覚えて、添字で回せば安全である。`v[i]` は毎回 `v` から引き直すので、再確保の後も正しい場所を読む。
@@ -188,6 +215,9 @@ C++20 から、範囲 for の前に変数の宣言を 1 つ書ける。添字も
 ```cpp
 --8<-- "cpp-range-for/modify-in-loop.cpp:core"
 ```
+
+完全なプログラム：[`modify-in-loop.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-range-for/modify-in-loop.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：どの版でも未定義動作である
 - **落とし穴**：`auto& row = g[0];` と参照を取った後に `g.push_back(…)` しても、同じ理由で `row` が壊れる。再確保の後は、参照とイテレータを使わない。BFS のキューを `vector` で書くときは、範囲 for ではなく添字で回す
@@ -211,6 +241,9 @@ g++-15 でも `-fno-range-for-ext-temps` を付けると古い規則に戻り、
 ```cpp
 --8<-- "cpp-range-for/temporary-range.cpp:core"
 ```
+
+完全なプログラム：[`temporary-range.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-range-for/temporary-range.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：延長の規則は C++23 で、GCC 15 から。AtCoder の GCC 15.2（`-std=gnu++23`）では安全だが、手元の g++-13 では壊れる
 - **落とし穴**：AtCoder（GCC 15・C++23）で通ったコードが、手元の g++-13 や C++20 の環境で落ちる。警告は出ない。版に頼らず、変数で受けてから回す書き方にそろえる

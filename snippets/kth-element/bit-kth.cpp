@@ -7,7 +7,7 @@ using namespace std;
 struct Fenwick {
     int n;
     vector<long long> t;  // t[i] は区間 (i - lowbit(i), i] の和（内部は 1-indexed）
-    Fenwick(int n) : n(n), t(n + 1, 0) {}
+    explicit Fenwick(int n) : n(n), t(n + 1, 0) {}
     void add(int p, long long x) {  // 外から見た 0-indexed の位置 p に x を足す
         for (int i = p + 1; i <= n; i += i & -i) t[i] += x;
     }

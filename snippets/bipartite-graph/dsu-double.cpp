@@ -1,5 +1,5 @@
 // 頂点を 2 倍にした Union-Find（ACL の dsu）で、辺を足すたびに二部グラフかを答える
-// 入力：N M、続く M 行は辺「u v」（0-indexed）。各辺の後に Yes（二部グラフ）か No を出力
+// 入力：N M、続く M 行は辺「u v」（1-indexed）。各辺の後に Yes（二部グラフ）か No を出力
 #include <bits/stdc++.h>
 #include <atcoder/dsu>
 using namespace std;
@@ -14,6 +14,7 @@ int main() {
     for (int i = 0; i < m; i++) {
         int u, v;
         cin >> u >> v;
+        u--, v--;           // 1-indexed → 0-indexed
         d.merge(u, v + n);  // u が色 0 なら v は色 1
         d.merge(u + n, v);  // u が色 1 なら v は色 0
         if (d.same(u, u + n)) bipartite = false;  // 「u が色 0」と「u が色 1」が同時に決まる

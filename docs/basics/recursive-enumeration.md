@@ -107,6 +107,9 @@ $N$ 人をいくつかの組に分ける方法を全部試すとき、「人 $i$
 --8<-- "recursive-enumeration/partition.cpp:core"
 ```
 
+完全なプログラム：[`partition.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/recursive-enumeration/partition.cpp)（GitHub）
+{ .kp-code-src }
+
 問題の条件は、人 $i$ を組 $g$ に入れる直前に確かめる。たとえば「仲の悪い 2 人を同じ組にしない」なら、$j < i$ で `group[j] == g` の人の中に、$i$ と仲の悪い人がいないかを見る。組ごとの和などを持つときは、組ごとの配列を 1 本持ち、入れるときに足して戻るときに引く。
 
 組の数が $T$ に決まっているなら、次の 2 つで枝刈りできる。
@@ -143,6 +146,9 @@ $$
 ```cpp
 --8<-- "recursive-enumeration/tiling.cpp:core"
 ```
+
+完全なプログラム：[`tiling.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/recursive-enumeration/tiling.cpp)（GitHub）
+{ .kp-code-src }
 
 縦に置くとき、真下のマスはまだ空いている。今の時点で置いたタイルの左上の角はどれも今のマスより前にあるので、真下のマスを埋めうるのは真上の行から縦に置いたタイルだけで、その中に今のマスから置いたものはまだないからである。L 字のような長方形でないタイルでは、左上の空きマスを覆うのが形の外接長方形の左上とは限らない。そのときは「形の中で行優先の順で最初のマス」をこの空きマスに合わせて置く。
 

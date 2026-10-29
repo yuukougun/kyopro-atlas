@@ -109,6 +109,9 @@ $$
 --8<-- "linearity-of-expectation/range-average.cpp:core"
 ```
 
+完全なプログラム：[`range-average.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/linearity-of-expectation/range-average.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 **一般の条件**：次の 2 つが成り立てば、期待値の列のまま追える。
 
 - 操作の選び方 $c$ を決めると、操作の後の値が各値の 1 次式 $v'_j = \sum_i a^{(c)}_{ji} v_i + b^{(c)}_j$ になる

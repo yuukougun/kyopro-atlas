@@ -71,6 +71,9 @@ updated: 2026-10-29
 --8<-- "meet-in-the-middle/max-sum.cpp:core"
 ```
 
+完全なプログラム：[`max-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/meet-in-the-middle/max-sum.cpp)（GitHub）
+{ .kp-code-src }
+
 突き合わせの相手の決まり方で、使う道具が変わる。
 
 | 相手の条件 | 例 | 道具 |
@@ -98,6 +101,9 @@ updated: 2026-10-29
 ```cpp
 --8<-- "meet-in-the-middle/by-count.cpp:core"
 ```
+
+完全なプログラム：[`by-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/meet-in-the-middle/by-count.cpp)（GitHub）
+{ .kp-code-src }
 
 このコードは個数を `popcount`（C++20。[<bit> の関数](../cpp/cpp-math-functions.md#bit-functions)）で求め、bit 全探索で列挙してから列ごとにソートしている。列挙は $O(2^{N/2} \cdot N)$ だが、二分探索と同じ重さなので全体は変わらない。
 

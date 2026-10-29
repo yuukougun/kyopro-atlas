@@ -93,6 +93,9 @@ $4{,}759{,}123{,}141 > 2^{32}$ なので、32bit の数は底 3 個で判定で�
 --8<-- "miller-rabin/factorize.cpp:is-prime"
 ```
 
+完全なプログラム：[`factorize.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/miller-rabin/factorize.cpp)（GitHub）
+{ .kp-code-src }
+
 ## Pollard's rho（x ← x² + c の周期と gcd） {#pollard-rho}
 
 Pollard's rho は、合成数 $n$ の 1 でも $n$ でもない約数を 1 つ見つける。$n$ の最小の素因数を $p$ とする。$p$ は分からないが、次の列を $p$ で割った余りを考える。
@@ -122,6 +125,9 @@ x = y = 乱数、c = 乱数
 ```cpp
 --8<-- "miller-rabin/factorize.cpp:rho"
 ```
+
+完全なプログラム：[`factorize.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/miller-rabin/factorize.cpp)（GitHub）
+{ .kp-code-src }
 
 **素数に rho を使わない**。$n$ が素数なら 1 でも $n$ でもない約数がないので、ループが終わらない。再帰の各段で先に素数判定する。
 

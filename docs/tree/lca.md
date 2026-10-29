@@ -78,11 +78,17 @@ $$
 --8<-- "lca/lca.cpp:build"
 ```
 
+完全なプログラム：[`lca.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lca/lca.cpp)（GitHub）
+{ .kp-code-src }
+
 LCA を求める関数は、上の 2 段階をそのまま書いたものである。距離も同じ所に置く（[距離](#distance)）。
 
 ```cpp
 --8<-- "lca/lca.cpp:lca"
 ```
+
+完全なプログラム：[`lca.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lca/lca.cpp)（GitHub）
+{ .kp-code-src }
 
 ## 距離 = dep(u) + dep(v) − 2 dep(lca) {#distance}
 
@@ -108,6 +114,9 @@ $K > \mathrm{dep}[v]$ なら祖先はない。根の親を根自身にした表�
 --8<-- "lca/lca.cpp:kth"
 ```
 
+完全なプログラム：[`lca.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lca/lca.cpp)（GitHub）
+{ .kp-code-src }
+
 K 個上の祖先は、LCA と組み合わせると「パス $u$–$v$ 上で $u$ から $K$ 番目の頂点」にもなる。$l = \mathrm{lca}(u, v)$、$0 \le K \le d(u, v)$ とする。$K \le \mathrm{dep}[u] - \mathrm{dep}[l]$ なら $u$ の K 個上で、そうでなければ $v$ の $d(u, v) - K$ 個上である。
 
 もう 1 つの代表的な使い方は、「頂点 $u$ から距離がちょうど $K$ の頂点」を探す型である。最も遠い頂点は直径の両端のどちらかにとれるので、両端それぞれを根にした 2 つの木を作り、$u$ の深さが $K$ 以上のほうで $u$ の K 個上を求めればよい（[直径の端点を根にして距離 K の頂点を探す](../tree/tree-diameter.md#root-at-end)、[ABC267 F](#abc267_f)）。
@@ -120,11 +129,14 @@ $$
 \mathrm{mx}[k+1][v] = \max\bigl(\mathrm{mx}[k][v],\ \mathrm{mx}[k][\mathrm{up}[k][v]]\bigr)
 $$
 
-前半の $2^k$ 本と後半の $2^k$ 本は辺を共有しないので、和を持つときも同じ形で足せる。これは[途中の和・最小値を同じ表に持つ](../basics/doubling.md#aggregates)の、遷移を親にした場合である。根の $\mathrm{mx}[0]$ は演算の[単位元](../guide/glossary.md#identity-element)（最大値なら重みより小さい値、和なら $0$）にする。
+前半の $2^k$ 本と後半の $2^k$ 本は辺を共有しないので、和を持つときも同じ形で足せる。これは[途中の和・最小値を同じ表に持つ](../basics/doubling.md#aggregates)の、遷移を親にした場合である。根の $\mathrm{mx}[0]$ は演算の[単位元](../guide/glossary.md#identity-element)（最大値なら重みより小さい値、和なら $0$）にする。次のコード片は辺の重みを正と仮定し、最大値の単位元に $0$ を使う（パス $u$–$u$ の答えも $0$ になる）。負の重みがありうるなら、単位元を `LLONG_MIN` にする。
 
 ```cpp
 --8<-- "lca/path-max.cpp:build"
 ```
+
+完全なプログラム：[`path-max.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lca/path-max.cpp)（GitHub）
+{ .kp-code-src }
 
 問い合わせは、LCA を求める手順の中で、跳ぶたびに跳ぶ区間の値を答えに足す。
 
@@ -135,6 +147,9 @@ $$
 ```cpp
 --8<-- "lca/path-max.cpp:path-max"
 ```
+
+完全なプログラム：[`path-max.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lca/path-max.cpp)（GitHub）
+{ .kp-code-src }
 
 順序で結果が変わる演算（アフィン変換の合成など）も持てるが、$u$ 側は「下から上へ」、$v$ 側は「上から下へ」たどる向きになるので、上り用と下り用の 2 種類の表が要る。パスへの一括の更新もあるなら、表では扱えないので [HL 分解](../tree/hld.md#when-to-use)を使う。
 
@@ -152,6 +167,9 @@ $$
 --8<-- "lca/path-max.cpp:farthest"
 ```
 
+完全なプログラム：[`path-max.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lca/path-max.cpp)（GitHub）
+{ .kp-code-src }
+
 K 個上ごとに表を引き直して二分探索すると 1 回 $O(\log^2 N)$ になるが、この方法なら $O(\log N)$ で済む。条件が単調でないと使えない。たとえば重みに負の値がある和で「和が $X$ 以下」を問うと、途中で一度超えてから戻ることがあり、跳ぶかどうかの判断が正しくなくなる。
 
 ## 落とし穴 {#pitfalls}
@@ -166,7 +184,7 @@ K 個上ごとに表を引き直して二分探索すると 1 回 $O(\log^2 N)$ 
 - **表の向きとメモリ**：`up[k][v]` の順（段が外側）にすると、表を作るときに同じ段を続けて読むので速い。大きさは $18 \times 2 \times 10^5$ 個の `int` で約 14 MB に収まる
 
 !!! info "ACL では"
-    ACL には LCA も木のダブリングもない。自作のライブラリは Library Checker の lca（前処理と LCA のクエリ）で確かめられる。
+    ACL には LCA も木のダブリングもない。自作のライブラリは Library Checker の [Lowest Common Ancestor](https://judge.yosupo.jp/problem/lca)（前処理と LCA のクエリ）で確かめられる。
 
 ## 例題 {#examples}
 

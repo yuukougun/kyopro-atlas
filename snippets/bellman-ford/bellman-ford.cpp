@@ -6,7 +6,7 @@
 using namespace std;
 
 // --8<-- [start:core]
-const long long INF = LLONG_MAX / 4;  // INF + 重み でもあふれない大きさ
+const long long INF = 1LL << 60;  // INF + INF でもあふれない大きさ
 
 struct Edge {
     int from, to;

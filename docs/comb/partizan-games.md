@@ -121,11 +121,14 @@ $L$ のある値が $R$ のある値以上のときは、その局面は数に�
 - 局面ごとに $\max L$ と $\min R$ を求め、$\max L < \min R$ を assert で確かめてから最も単純な数を選ぶ。assert が落ちたら、その問題は数だけでは解けない。
 - 部分の局面は DAG なので、メモ化再帰か後ろからの DP で値を埋める。計算量は部分の局面数と手の数の積で、全体の判定は値を足して符号を見るだけである。
 
-次のコード片は、Hackenbush の 1 本の列の値を求める中心部分である（完全なプログラムは `snippets/partizan-games/surreal.cpp`）。プログラムでは、和の符号から決めた勝者が総当たりの勝敗と一致することを assert で確かめている。
+次のコード片は、Hackenbush の 1 本の列の値を求める中心部分である（完全なプログラムは [`snippets/partizan-games/surreal.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/partizan-games/surreal.cpp)）。プログラムでは、和の符号から決めた勝者が総当たりの勝敗と一致することを assert で確かめている。
 
 ```cpp
 --8<-- "partizan-games/surreal.cpp:core"
 ```
+
+完全なプログラム：[`surreal.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/partizan-games/surreal.cpp)（GitHub）
+{ .kp-code-src }
 
 ACL に対応するものはなく、Library Checker にも対応する問題はない。上のプログラムのように、総当たりの勝敗と照らし合わせて確かめる。分母が 2 の累乗の分数と最も単純な数を求める関数は、hitonanode 氏のライブラリ（[参考](#references)）にもある。
 

@@ -12,7 +12,7 @@ int main() {
 
     // --8<-- [start:core]
     const int di[4] = {-1, 0, 1, 0}, dj[4] = {0, 1, 0, -1};  // 上・右・下・左
-    const int INF = INT_MAX;
+    const int INF = INT_MAX;  // INF には足さない（足すのは取り出した状態の距離だけ）のでこの値でよい
     // 状態 (i, j, d) を (i * w + j) * 4 + d に詰める。頂点数はマスの数の 4 倍
     auto id = [&](int i, int j, int d) { return (i * w + j) * 4 + d; };
     vector<int> dist(h * w * 4, INF);

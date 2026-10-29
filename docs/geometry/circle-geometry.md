@@ -77,6 +77,9 @@ $d = \sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2}$ は無理数になりうるので、`
 --8<-- "circle-geometry/relation.cpp:core"
 ```
 
+完全なプログラム：[`relation.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/circle-geometry/relation.cpp)（GitHub）
+{ .kp-code-src }
+
 値の大きさを見積もっておく。座標と半径の絶対値が $10^9$ 以下なら、座標の差は $2 \times 10^9$ 以下で、$D$ は最大 $8 \times 10^{18}$ になる。`long long` の上限（約 $9.2 \times 10^{18}$）にぎりぎり収まる。座標がもう少し大きい問題や、$D$ にさらに足し算をするときは `__int128` を使う。
 
 **点が円周上にあるか**も同じ判定で書ける。点を半径 0 の円とみなすと、$\lvert r - 0 \rvert \le d \le r + 0$ は $d = r$ すなわち $D = r^2$ になる。点と円を同じ関数で扱えるので、点を始点とする探索で場合分けが減る（[円のつながり](#connectivity)）。
@@ -104,6 +107,9 @@ $$
 --8<-- "circle-geometry/lattice.cpp:core"
 ```
 
+完全なプログラム：[`lattice.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/circle-geometry/lattice.cpp)（GitHub）
+{ .kp-code-src }
+
 書くときの要点は 3 つある。
 
 - **整数の平方根**：$m$ は $10^{18}$ 規模になり、`sqrt` の結果は前後に 1 ずれうる。`sqrtl` で見当を付けてから、$w^2 \le m < (w + 1)^2$ になるまで補正する（[sqrt の誤差と補正](../math/integer-root.md#sqrt-correction)）
@@ -119,6 +125,9 @@ $s$ と $t$ を半径 0 の円として頂点に足すと、「$s$ がどの円�
 ```cpp
 --8<-- "circle-geometry/connect.cpp:core"
 ```
+
+完全なプログラム：[`connect.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/circle-geometry/connect.cpp)（GitHub）
+{ .kp-code-src }
 
 !!! info "ACL では"
     `atcoder::dsu d(n);`（ヘッダは `<atcoder/dsu>`）。`d.merge(a, b)`・`d.same(a, b)`・`d.size(a)` はどれもならし $O(\alpha(N))$。
@@ -151,11 +160,17 @@ $N$ 個の点をすべて含む（周上も含む）最小の円を最小包含�
 --8<-- "circle-geometry/enclose.cpp:core"
 ```
 
+完全なプログラム：[`enclose.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/circle-geometry/enclose.cpp)（GitHub）
+{ .kp-code-src }
+
 **Welzl の乱択**。$N$ が大きいときは、点をランダムな順に並べて 1 つずつ足していく方法で、期待 $O(N)$ になる。今の円の外にある点 $p_i$ が来たら、$p_i$ は「最初の $i + 1$ 点の最小包含円」の周上にあるので、$p_i$ を周上に持つ円を作り直す。作り直しの中でも同じことを 2 段目（$p_i$ と $p_j$ が周上）・3 段目（3 点が周上）とくり返す。
 
 ```cpp
 --8<-- "circle-geometry/enclose.cpp:welzl"
 ```
+
+完全なプログラム：[`enclose.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/circle-geometry/enclose.cpp)（GitHub）
+{ .kp-code-src }
 
 速い理由は、作り直しが起きる確率が小さいことにある。最初の $i + 1$ 点の最小包含円を決める点は高々 3 個である。ランダムな順なら、最後の点 $p_i$ がそのどれかである確率は $3 / (i + 1)$ 以下になる。作り直しは $O(i)$ かかるが、確率をかけた期待値は $O(1)$ になり、内側の段も同じ評価ができるので全体で期待 $O(N)$ である。並べ替えを省くと、入力の順によっては $O(N^3)$ かかる。乱数の扱いは[乱択アルゴリズム](../misc/randomized.md)を見る。
 
@@ -183,6 +198,9 @@ $$
 ```cpp
 --8<-- "circle-geometry/enclose.cpp:circumcenter"
 ```
+
+完全なプログラム：[`enclose.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/circle-geometry/enclose.cpp)（GitHub）
+{ .kp-code-src }
 
 ## 幾何の最適化の選び方：候補の列挙・答えの二分探索（半径・時刻）・三分探索 {#geometry-optimization}
 

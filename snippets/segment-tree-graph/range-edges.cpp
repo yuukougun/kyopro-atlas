@@ -36,8 +36,9 @@ struct RangeEdgeGraph {
 };
 // --8<-- [end:core]
 
+const long long INF = 1LL << 60;  // INF + INF でもあふれない大きさ
+
 vector<long long> dijkstra(const vector<vector<pair<int, long long>>>& g, int s) {
-    const long long INF = LLONG_MAX;
     vector<long long> dist(g.size(), INF);
     priority_queue<pair<long long, int>, vector<pair<long long, int>>, greater<>> pq;
     dist[s] = 0;
@@ -99,5 +100,5 @@ int main() {
     for (auto& q : qs) cin >> q.l1 >> q.r1 >> q.l2 >> q.r2 >> q.w;
     vector<long long> d = solve(n, qs);
     assert(d == naive(n, qs));
-    for (int v = 0; v < n; v++) cout << (d[v] == LLONG_MAX ? -1 : d[v]) << (v + 1 < n ? ' ' : '\n');
+    for (int v = 0; v < n; v++) cout << (d[v] == INF ? -1 : d[v]) << (v + 1 < n ? ' ' : '\n');
 }

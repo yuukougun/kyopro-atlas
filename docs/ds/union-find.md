@@ -109,11 +109,21 @@ $\mathrm{find}(7)$ は 7 → 6 → 4 → 0 とたどって根 0 を見つける�
 
 小さい方の根を大きい方の根の下に入れると、深さが 1 増えるのは小さい方の木の要素だけで、大きい方の木の要素の深さは変わらない。だから木全体の深さは増えにくい（[次の節](#complexity)）。
 
-自作するときの全体は次のとおりである。`merge` は併合したかどうかを返すと、成分の数や閉路を作る辺を数えるときに使える。
+??? note "自作するとき：`UnionFind`（ACL の `dsu` に当たる）"
+    `merge`・`same`・`size` の名前と 0-indexed の添字は、ACL の `dsu` にそろえた。ACL と違うのは次の 3 つである。
 
-```cpp
---8<-- "union-find/own-dsu.cpp:core"
-```
+    - 根を求める関数は、本文の手順に合わせて `find` とした（ACL では `leader`）。
+    - `merge` は併合したかどうかを `bool` で返す（ACL は新しい代表元を返す）。成分の数や閉路を作る辺を数えるときに使える。新しい根は、併合のあとで `find(a)` を呼んで求める。
+    - 全グループの一覧の `groups()` と、添字の範囲を確かめる `assert` は省いた。
+
+    ```cpp
+    --8<-- "union-find/own-dsu.cpp:core"
+    ```
+
+    完全なプログラム：[`own-dsu.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/union-find/own-dsu.cpp)（GitHub）
+    { .kp-code-src }
+
+    試験では、併合に成功した回数から数えたグループの数と、根（$\mathrm{par}[v] < 0$ の要素）の数が一致することを確かめている。[練習問題](#practice)の PRACTICE2 A と、Library Checker の [Unionfind](https://judge.yosupo.jp/problem/unionfind) が確認に使える。名前の約束は[インターフェースの決め方](../guide/library-design.md#interface)、確かめ方は[動作確認の手順](../guide/library-design.md#verify)にある。
 
 !!! info "ACL では"
     `atcoder::dsu d(n);`。`d.merge(a, b)`（併合したあとの代表元を返す。もともと同じなら、その代表元）・`d.same(a, b)`・`d.leader(a)`・`d.size(a)` はどれもならし $O(\alpha(n))$、`d.groups()` は全グループの要素の一覧を $O(n)$ で返す（並び順は決まっていない）。中身は union by size と経路圧縮で、根に −(大きさ) を持つ。添字は 0-indexed。
@@ -151,6 +161,9 @@ $\mathrm{find}$ の手間は、たどる深さで決まる。工夫なしにつ�
 ```cpp
 --8<-- "union-find/acl-cycle.cpp:core"
 ```
+
+完全なプログラム：[`acl-cycle.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/union-find/acl-cycle.cpp)（GitHub）
+{ .kp-code-src }
 
 ## 根に大きさ・辺数を持たせる（ほかの情報を持たせる型は Union-Find の応用） {#size-and-edges}
 

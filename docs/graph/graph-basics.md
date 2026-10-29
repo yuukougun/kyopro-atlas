@@ -68,11 +68,17 @@ updated: 2026-10-29
 --8<-- "graph-basics/build.cpp:core"
 ```
 
+完全なプログラム：[`build.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/graph-basics/build.cpp)（GitHub）
+{ .kp-code-src }
+
 辺リストから隣接行列を作るときは、対角（自分から自分）を 0、辺のない組を大きな値（INF）で埋め、多重辺があれば重みの最小を取る。重みが 0 以上なら、自己ループがあっても `min` により対角は 0 のまま残る。ワーシャルフロイド法の初期値はこの形である。
 
 ```cpp
 --8<-- "graph-basics/build.cpp:matrix"
 ```
+
+完全なプログラム：[`build.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/graph-basics/build.cpp)（GitHub）
+{ .kp-code-src }
 
 ### 隣接リストに持たせる情報 {#adjacency-extras}
 
@@ -134,7 +140,7 @@ $$
 - 「隣の頂点の個数」を `g[v].size()` で数えると、多重辺の分だけ多く数える。異なる隣の個数がほしいなら、`sort` と `unique` で重複を除いてから数える
 - 自己ループは、無向グラフとして両方向に足すと $g[u]$ に $u$ 自身が 2 回現れる。「隣の頂点」に自分を含めてよいかを確かめる
 
-**重みの和があふれる**。$N = 2 \times 10^5$、重みが $10^9$ までなら、$N - 1$ 本の辺を通るパスの長さは $2 \times 10^{14}$ に達し、`int` に収まらない。距離は `long long` で持つ。到達できないことを表す INF を `LLONG_MAX` にすると、重みを 1 つ足しただけであふれる。$2^{60}$（約 $1.15 \times 10^{18}$）のように、INF どうしを足しても `long long` からあふれない値を使う（[整数のオーバーフロー](../cpp/cpp-integer-overflow.md)）。
+**重みの和があふれる**。$N = 2 \times 10^5$、重みが $10^9$ までなら、$N - 1$ 本の辺を通るパスの長さは $2 \times 10^{14}$ に達し、`int` に収まらない。距離は `long long` で持つ。到達できないことを表す INF を `LLONG_MAX` にすると、重みを 1 つ足しただけであふれる。$2^{60}$（約 $1.15 \times 10^{18}$）のように、INF どうしを足しても `long long` からあふれない値を使う（[INF の決め方](../cpp/cpp-types-literals.md#inf)、[整数のオーバーフロー](../cpp/cpp-integer-overflow.md)）。グラフの章のコード片は、距離の INF を `1LL << 60` にそろえている。INF に足さない用途で型の最大値（`INT_MAX` など）を使うコード片には、その理由を書き添えている。
 
 **$N$ が大きいのに隣接行列を作る**。`vector<vector<int>> a(n, vector<int>(n))` は $N = 2 \times 10^5$ では確保できない（MLE）。辺の有無を何度も調べたいだけなら、辺を `set<pair<int, int>>` に入れるか、各 $g[v]$ をソートして二分探索する。
 

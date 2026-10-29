@@ -29,7 +29,7 @@ sections:
   - {title: 二項定理で累乗の和を展開する, anchor: power-sums}
   - {title: 式変形の検算（小さいケース）, anchor: verify}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -144,11 +144,14 @@ $$
 
 経路で見ると、右辺は $(0, 0)$ から $(i + 1, c)$ への経路数である。最後の右への移動の直前にいる点 $(i, j)$ で分けると、各項になる（[格子路の総和](../comb/lattice-paths.md#sum-of-paths)）。
 
-長方形 $r_1 \le i \le r_2$、$c_1 \le j \le c_2$ の各点への経路数の総和は、行 $i$ ごとに「$j \le c_2$ の和 − $j \le c_1 - 1$ の和」とすれば、行の数の 1 重ループになる。点の数 $(r_2 - r_1 + 1)(c_2 - c_1 + 1)$ に比例する 2 重ループが、行の数 $r_2 - r_1 + 1$ 回の 1 重ループで済む。ほかに階乗の表の前計算 $O(r_2 + c_2)$ がかかる。
+長方形 $r_1 \le i \le r_2$、$c_1 \le j \le c_2$ の各点への経路数の総和は、行 $i$ ごとに「$j \le c_2$ の和 − $j \le c_1 - 1$ の和」とすれば、行の数の 1 重ループになる。点の数 $(r_2 - r_1 + 1)(c_2 - c_1 + 1)$ に比例する 2 重ループが、行の数 $r_2 - r_1 + 1$ 回の 1 重ループで済む。ほかに階乗の表の前計算 $O(r_2 + c_2)$ がかかる。コードの `binom(n, k)` は、前計算した階乗と逆階乗の表から $\binom{n}{k}$ を $O(1)$ で返す関数で、範囲外では 0 を返す（[二項係数の前計算](../comb/binomial-precompute.md#fact-ifact)）。
 
 ```cpp
 --8<-- "binomial-identities/rect-sum.cpp:core"
 ```
+
+完全なプログラム：[`rect-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binomial-identities/rect-sum.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 階乗の表は、使う上の数の最大 $r_2 + c_2 + 1$ まで要る。$c_1 = 0$ のとき引く項は $\binom{i}{i + 1} = 0$ で、範囲外の約束がそのまま効く。さらに縦の和の公式を $i$ の側にも使えば、4 隅の二項係数の足し引き（$O(1)$）にもできる。
 
@@ -194,11 +197,14 @@ $$
 1. $i = j$ の項 $(2A_i)^x$ の和 $2^x S_x$ を引く
 2. 残りは $i < j$ と $i > j$ で同じ値なので、2 で割る（mod では 2 の逆元を掛ける）
 
-$x = 1, \dots, K$ のすべてについて求めるなら、$S_0, \dots, S_K$ を $O(NK)$ で前計算し、各 $x$ で $O(x)$ かけて全体で $O(NK + K^2)$ になる。
+$x = 1, \dots, K$ のすべてについて求めるなら、$S_0, \dots, S_K$ を $O(NK)$ で前計算し、各 $x$ で $O(x)$ かけて全体で $O(NK + K^2)$ になる。コードの `c[x][t]` は、$x \le K$ の $\binom{x}{t}$ をパスカルの三角形の漸化式から $O(K^2)$ 時間で前計算した表である（[パスカルの三角形で作る](../comb/binomial-precompute.md#composite-mod)）。
 
 ```cpp
 --8<-- "binomial-identities/pair-powers.cpp:core"
 ```
+
+完全なプログラム：[`pair-powers.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binomial-identities/pair-powers.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 同じ展開は、$\sum_i (A_i + c)^x$ のように全体に定数を足した累乗の和にも使える。$\sum_t \binom{x}{t} c^{x-t} S_t$ となるので、$c$ を変えて何度も聞かれても $S_t$ を作り直さずに済む。
 
@@ -211,11 +217,14 @@ $x = 1, \dots, K$ のすべてについて求めるなら、$S_0, \dots, S_K$ �
 1. **恒等式そのもの**：変形に使った式の左辺と右辺を、mod を取らない正確な値で、小さい引数すべてについて比べる。パスカルの三角形の表は $n \le 66$ なら `long long` に収まる（[オーバーフロー](../comb/binomial-coefficient.md#overflow)）
 2. **元の数え上げ**：問題の対象を全列挙した数と、最後の閉じた式の値を比べる。$N \le 8$ 程度なら、部分集合や列をすべて作って数えられる
 
-1 段目の例として、縦の和の公式を $m \le 30$ のすべての $(m, r)$ で確かめるコードを示す。$r = m + 1$ の空の和も入れて、端の扱いまで確かめている。
+1 段目の例として、縦の和の公式を $m \le 30$ のすべての $(m, r)$ で確かめるコードを示す。$r = m + 1$ の空の和も入れて、端の扱いまで確かめている。このコードの `binom(n, k)` は、mod を取らないパスカルの三角形の表（$n \le 63$）から $\binom{n}{k}$ を引く関数で、範囲外では 0 を返す（[パスカルの三角形で作る](../comb/binomial-precompute.md#composite-mod)）。
 
 ```cpp
 --8<-- "binomial-identities/verify.cpp:core"
 ```
+
+完全なプログラム：[`verify.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binomial-identities/verify.cpp)（GitHub）
+{ .kp-code-src }
 
 試す引数には、空の和（$r > m$）・$n = 0$・$k = 0$・$k = n$ の境界を必ず入れる。偶数個の和の $2^{n-1}$ が $n = 0$ で成り立たないように、一般の $n$ で正しい式が端だけ違うことがよくある。
 

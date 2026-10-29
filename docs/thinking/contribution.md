@@ -73,6 +73,9 @@ $$
 --8<-- "contribution/basic.cpp:core"
 ```
 
+完全なプログラム：[`basic.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/contribution/basic.cpp)（GitHub）
+{ .kp-code-src }
+
 ??? question "確認問題：部分集合の和の総和"
     $N$ 個の整数 $a_0, \dots, a_{N-1}$ のすべての部分集合（空集合も含む $2^N$ 個）について、要素の和を求め、その総和を求めたい。$a_i$ は何回足されるか。
 

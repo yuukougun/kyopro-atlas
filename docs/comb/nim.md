@@ -85,6 +85,9 @@ XOR が効くのは、XOR が「各ビットの 1 の個数の偶奇」だから
 --8<-- "nim/nim.cpp:core"
 ```
 
+完全なプログラム：[`nim.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/nim/nim.cpp)（GitHub）
+{ .kp-code-src }
+
 判定も手の構成も、山を 1 回ずつ見るだけなので $O(N)$ である。石の数が $10^{18}$ まであっても、XOR は `long long` のまま計算できる。
 
 ??? question "確認問題：勝つ手を探す"
@@ -108,6 +111,9 @@ XOR が効くのは、XOR が「各ビットの 1 の個数の偶奇」だから
 ```cpp
 --8<-- "nim/nim.cpp:bounded"
 ```
+
+完全なプログラム：[`nim.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/nim/nim.cpp)（GitHub）
+{ .kp-code-src }
 
 $k$ が $\max A_i$ 以上なら余りは $A_i$ そのもので、普通の Nim に戻る。だから「上限 $k$ を自分で選べる」問題では、普通の Nim で先手必勝なら $k$ をいくらでも大きくしてよい（[ARC168 B](#arc168_b) の例題）。
 

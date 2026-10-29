@@ -62,6 +62,9 @@ DFS で頂点 $v$ にいるとき、呼び出し中の頂点（再帰のスタ�
 --8<-- "root-path-dfs/unique-color.cpp:core"
 ```
 
+完全なプログラム：[`unique-color.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/root-path-dfs/unique-color.cpp)（GitHub）
+{ .kp-code-src }
+
 各頂点へは 1 回入って 1 回出るので、$\mathrm{cnt}$ の変更は全体で $2N$ 回である。根からのパスごとに数え直す $O(N^2)$ が、$O(N)$ になる。
 
 この方法が働くのは、知りたい値が「根から $v$ までのパス上の頂点の集まり」だけで決まるときである。言い換えると、祖先の情報だけで決まる値である。子孫や兄弟の部分木の情報が要るなら、部分木を区間にする[オイラーツアー](../tree/euler-tour.md)や[木 DP](../dp/tree-dp.md)を使う。
@@ -74,6 +77,9 @@ DFS で頂点 $v$ にいるとき、呼び出し中の頂点（再帰のスタ�
 ```cpp
 --8<-- "root-path-dfs/unique-color.cpp:iterative"
 ```
+
+完全なプログラム：[`unique-color.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/root-path-dfs/unique-color.cpp)（GitHub）
+{ .kp-code-src }
 
 `~v` は子より先に積むので、子孫がすべて出た後に取り出される。取り出したときに戻せば、再帰版の「子を回り終えてから戻す」と同じ順になる。
 
@@ -116,6 +122,9 @@ $v$ の子 $c$ を回る間に積まれた記録は、$c$ を出るときにす�
 --8<-- "root-path-dfs/lis-on-tree.cpp:core"
 ```
 
+完全なプログラム：[`lis-on-tree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/root-path-dfs/lis-on-tree.cpp)（GitHub）
+{ .kp-code-src }
+
 1 頂点の変更は二分探索 1 回と代入 1 回で $O(\log N)$、戻すのは $O(1)$ なので、全体で $O(N \log N)$ になる。記録は 1 頂点で 1 件だけなので、スタックの代わりに再帰の局所変数（`pos`・`old`）で足りる。局所変数は呼び出しごとに別にあるので、これも新しい順に戻すことになっている。
 
 **中央値・$K$ 番目の値**。値を座標圧縮して、値を添字にした [BIT](../ds/fenwick-tree.md#count-by-value) に個数を持つ。入るとき $+1$、出るとき $-1$ し、$K$ 番目に小さい値は [BIT 上の二分探索](../ds/fenwick-tree.md#binary-search)で $O(\log N)$ で求める。中央値なら、パスの頂点数 $m$（深さ $+ 1$）から $K = \lceil m / 2 \rceil$ とする。
@@ -123,6 +132,9 @@ $v$ の子 $c$ を回る間に積まれた記録は、$c$ を出るときにす�
 ```cpp
 --8<-- "root-path-dfs/median-on-path.cpp:core"
 ```
+
+完全なプログラム：[`median-on-path.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/root-path-dfs/median-on-path.cpp)（GitHub）
+{ .kp-code-src }
 
 BIT の代わりに、小さい半分と大きい半分の 2 つの `multiset` を持ち、個数の差を 1 以内に保ってもよい（[中央値を保つ](../ds/top-k-multiset.md#median)）。出るときは、入るときに入れた値を、どちらかの `multiset` から 1 つだけ消してから個数をそろえ直す。`erase(x)` は同じ値をすべて消すので、`erase(find(x))` と書く。
 
