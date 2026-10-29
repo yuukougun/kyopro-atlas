@@ -2,6 +2,7 @@
 id: cpp-math-functions
 title: 数・ビット・乱数の関数
 aliases: [gcd, lcm, midpoint, clamp, 割り算の切り捨ての向き, pow, sqrt, sqrtl, 'numbers::pi', 'std::popcount', countr_zero, bit_width, __builtin_popcount, __builtin_ctz, __lg, 'std::bitset', _Find_first, mt19937_64, uniform_int_distribution, shuffle, chrono, 乱数, 時間計測]
+tags: [ビット]
 type: cpp
 field: cpp
 chapter: 型と値

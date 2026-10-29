@@ -1,7 +1,7 @@
 ---
 id: suffix-array
 title: Suffix Array と LCP 配列
-aliases: [接尾辞配列, SA, LCP 配列, SA-IS, Kasai 法, suffix_array, lcp_array, 異なる部分文字列の数]
+aliases: [接尾辞配列, SA, LCP 配列, SA-IS, Kasai 法, suffix_array, lcp_array, 異なる部分文字列の数, サフィックスアレイ]
 type: technique
 field: string
 chapter: 接尾辞の構造
@@ -48,7 +48,7 @@ updated: 2026-10-29
     - **前提**：[文字列の基本操作と辞書順](../string/string-basics.md)、[二分探索](../basics/binary-search.md)
 
 <!-- textlint-disable -->
-別名：接尾辞配列・SA・LCP 配列・SA-IS・Kasai 法・suffix_array・lcp_array・異なる部分文字列の数
+別名：接尾辞配列・SA・LCP 配列・SA-IS・Kasai 法・suffix_array・lcp_array・異なる部分文字列の数・サフィックスアレイ
 <!-- textlint-enable -->
 
 Suffix Array は、文字列の接尾辞をすべて辞書順に並べ、その開始位置を並べた列である。辞書順で隣り合う接尾辞の[最長共通接頭辞](../guide/glossary.md#lcp)を並べた LCP 配列と組にすると、「すべての部分文字列」を接尾辞の接頭辞として整理して扱える。ACL を呼ぶだけで作れるので、作り方を知らなくても水色のうちから使える。

@@ -1,7 +1,7 @@
 ---
 id: fps-basics
 title: 形式的冪級数と多項式の演算
-aliases: [FPS, formal power series, 多項式の逆元, 多項式の割り算, Taylor shift, 多点評価, 冪級数の log・exp]
+aliases: [FPS, formal power series, 多項式の逆元, 多項式の割り算, Taylor shift, 多点評価, 冪級数の log・exp, 形式的べき級数]
 type: overview
 field: math
 chapter: 畳み込みと多項式
@@ -39,7 +39,7 @@ updated: 2026-10-29
     - **前提**：[畳み込みの使い方](../math/convolution-ntt.md)、[逆元と mod での割り算](../math/mod-inverse.md)
 
 <!-- textlint-disable -->
-別名：FPS・formal power series・多項式の逆元・多項式の割り算・Taylor shift・多点評価・冪級数の log・exp
+別名：FPS・formal power series・多項式の逆元・多項式の割り算・Taylor shift・多点評価・冪級数の log・exp・形式的べき級数
 <!-- textlint-enable -->
 
 形式的冪級数（FPS）は、数列 $a_0, a_1, a_2, \dots$ を $f(x) = a_0 + a_1 x + a_2 x^2 + \cdots$ という「無限に続く多項式」とみて、掛け算・割り算・log・exp などの演算をする道具である。答えに要るのは $x^{N-1}$ までの係数だけなので、どの演算も先頭 $N$ 項に切り詰めて計算する。法は $998244353$ のような NTT 向きの素数にし、掛け算は[畳み込み](../math/convolution-ntt.md)で行う。

@@ -9,7 +9,7 @@ search:
 
 # 横断ページの詳細索引
 
-分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
+分野の全ページの id・URL・別名・サイン・種類・前提・使い分け・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
 
 ## 逆引き辞典（言い回しから）（reverse-index-signs） {#reverse-index-signs}
 
@@ -273,7 +273,7 @@ search:
 
 - id：`library-design`　レベル：—　段階：reviewed　type：guide
 - URL：https://yuukougun.github.io/kyopro-atlas/guide/library-design/
-- 別名：ライブラリ整備、自作ライブラリ、Library Checker、verify、ライブラリの動作確認
+- 別名：ライブラリ整備、自作ライブラリ、Library Checker、verify、ライブラリの動作確認、ライブラリチェッカー
 - 種類：案内、実装・C++
 - 節：
     - `library-design#what-to-build` 何を自作するか：https://yuukougun.github.io/kyopro-atlas/guide/library-design/#what-to-build

@@ -1,7 +1,7 @@
 ---
 id: priority-queue
 title: 優先度付きキュー
-aliases: [priority_queue, ヒープ, heap, 二分ヒープ, binary heap, 削除できるヒープ, 遅延削除, erasable heap]
+aliases: [priority_queue, ヒープ, heap, 二分ヒープ, binary heap, 削除できるヒープ, 遅延削除, erasable heap, プライオリティキュー, 優先順位付きキュー]
 type: technique
 field: ds
 chapter: 標準コンテナの応用
@@ -29,7 +29,7 @@ sections:
   - {title: 削除できるヒープ（遅延削除：削除予定のヒープの top と一致したら両方から捨てる）, anchor: lazy-deletion}
   - {title: priority_queue と multiset の使い分け（任意の削除・両端・前後の要素が要るなら multiset）, anchor: vs-multiset}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -43,7 +43,7 @@ updated: 2026-10-22
     - **前提**：[STL コンテナの使い分け](../ds/stl-containers.md)
 
 <!-- textlint-disable -->
-別名：priority_queue・ヒープ・heap・二分ヒープ・binary heap・削除できるヒープ・遅延削除・erasable heap
+別名：priority_queue・ヒープ・heap・二分ヒープ・binary heap・削除できるヒープ・遅延削除・erasable heap・プライオリティキュー・優先順位付きキュー
 <!-- textlint-enable -->
 
 優先度付きキューは、入れた要素のうち最大（または最小）のものだけをすぐ取り出せるコンテナである。C++ では `std::priority_queue` が二分ヒープで実装されている。できることは「入れる」「最大を見る」「最大を取り出す」の 3 つだけだが、ソートと組み合わせた貪欲や上位 $K$ 個の列挙など、使い方の型が多い。

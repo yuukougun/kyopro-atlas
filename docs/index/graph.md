@@ -9,7 +9,7 @@ search:
 
 # グラフの詳細索引
 
-分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
+分野の全ページの id・URL・別名・サイン・種類・前提・使い分け・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
 
 ## グラフの表現と用語（graph-basics） {#graph-basics}
 
@@ -62,6 +62,7 @@ search:
 - 別名：幅優先探索、BFS、breadth-first search、無重み最短路、多始点 BFS、最短路の復元、経路復元
 - 種類：グラフ探索、最短路
 - 前提：`graph-basics`、`stack-techniques`
+- 使い分け：`method-comparison#shortest-path`
 - サイン：
     - 言い回し：最小の手数・回数を求める（1 回の移動のコストがすべて同じ）
     - 言い回し：一番近い〇〇までの距離・複数の場所から同時に広がる
@@ -99,6 +100,7 @@ search:
 - 別名：連結成分分解、連結判定、connected components
 - 種類：グラフ探索、連結性・全域木
 - 前提：`dfs`、`union-find`
+- 使い分け：`method-comparison#connectivity`、`method-comparison#similar-names`
 - ACL：`dsu`
 - サイン：
     - 言い回し：つながっているか・グループの数・最大のグループの大きさ
@@ -137,6 +139,7 @@ search:
 - 別名：なもり、unicyclic graph、pseudotree、閉路が 1 つのグラフ、木に辺を 1 本足したグラフ、N 頂点 N 辺の連結グラフ
 - 種類：グラフ探索、木
 - 前提：`connected-components`、`cycle-detection`、`tree-basics`
+- 使い分け：`method-comparison#similar-names`
 - ACL：`dsu`
 - サイン：
     - 言い回し：N 頂点 N 辺の連結グラフ・木に辺を 1 本足したグラフ
@@ -152,9 +155,10 @@ search:
 
 - id：`bipartite-graph`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/bipartite-graph/
-- 別名：二部グラフ、2 彩色、奇閉路、2 色の塗り分け、bipartite graph
+- 別名：二部グラフ、2 彩色、奇閉路、2 色の塗り分け、bipartite graph、2 部グラフ、二分グラフ
 - 種類：グラフ探索
 - 前提：`dfs`、`bfs`
+- 使い分け：`method-comparison#connectivity`
 - ACL：`dsu`
 - サイン：
     - 言い回し：2 つのグループに分ける・隣り合うものは異なる色
@@ -207,6 +211,7 @@ search:
 - 別名：ダイクストラ、Dijkstra、Dijkstra's algorithm、経由点の最短路、両端からのダイクストラ、逆向きのグラフ、最短閉路、ポテンシャルで負辺を消す、Johnson のアイデア
 - 種類：最短路
 - 前提：`bfs`
+- 使い分け：`method-comparison#shortest-path`
 - サイン：
     - 言い回し：非負の重み付きグラフの最短距離・最小コスト（頂点にもコストがある）
     - 制約：N, M ≤ 2×10^5 で辺の重みが非負
@@ -226,9 +231,10 @@ search:
 
 - id：`zero-one-bfs`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/zero-one-bfs/
-- 別名：0-1 BFS、deque BFS
+- 別名：0-1 BFS、deque BFS、01BFS
 - 種類：最短路
 - 前提：`dijkstra`
+- 使い分け：`method-comparison#shortest-path`
 - サイン：
     - 言い回し：壁を壊す回数・向きを変える回数・ワープの回数を最小化する
     - 言い回し：1 回の移動のコストが 0 か 1
@@ -245,9 +251,10 @@ search:
 
 - id：`warshall-floyd`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/warshall-floyd/
-- 別名：ワーシャルフロイド、Floyd-Warshall、全点対最短路、all-pairs shortest paths
+- 別名：ワーシャルフロイド、Floyd-Warshall、全点対最短路、all-pairs shortest paths、フロイドワーシャル法
 - 種類：最短路、DP
 - 前提：`dijkstra`、`dp-basics`
+- 使い分け：`method-comparison#shortest-path`
 - サイン：
     - 制約：N ≤ 400 程度で全点対の距離が要る
     - 言い回し：辺を 1 本ずつ追加（削除）するたびに、距離についての値を答える
@@ -267,6 +274,7 @@ search:
 - 別名：最短路木、最短経路の数え上げ、最短路に必ず使われる辺、すべての最短路に含まれる辺、shortest path DAG
 - 種類：最短路、DP
 - 前提：`dijkstra`、`dp-dag`
+- 使い分け：`method-comparison#shortest-path-properties`
 - サイン：
     - 言い回し：最短路の本数を数える
     - 言い回し：この辺を通らなくても最短距離は変わらないか・最短路に使われない辺
@@ -285,6 +293,7 @@ search:
 - 別名：状態空間の探索、状態空間 BFS、拡張ダイクストラ、頂点倍化、頂点倍加、レイヤー化グラフ、超頂点、仮想頂点、補助頂点、盤面の BFS、state-space search、layered graph、super vertex
 - 種類：最短路、グラフ探索
 - 前提：`dijkstra`
+- 使い分け：`method-comparison#shortest-path-steps`
 - サイン：
     - 言い回し：K 回まで無料・スキップできる、手持ちのお金・燃料・体力がある
     - 言い回し：向き・直前の移動・歩数の偶奇や mod で次の移動が変わる
@@ -312,6 +321,7 @@ search:
 - 別名：時刻依存の最短路、待機、最終電車、出発時刻、time-dependent shortest path
 - 種類：最短路
 - 前提：`dijkstra`
+- 使い分け：`method-comparison#shortest-path-steps`
 - サイン：
     - 言い回し：決まった時刻にしか出発できない・待つことができる
     - 言い回し：出発時刻によって所要時間が変わる
@@ -329,6 +339,7 @@ search:
 - 別名：ベルマンフォード、Bellman-Ford、負閉路検出、SPFA、負辺のある最短路
 - 種類：最短路
 - 前提：`dijkstra`
+- 使い分け：`method-comparison#shortest-path`、`method-comparison#shortest-path-properties`
 - サイン：
     - 言い回し：負の重みの辺がある・得点を最大化する（符号を反転すると負辺になる）
     - 言い回し：いくらでも大きくできるなら inf と出力する
@@ -396,6 +407,7 @@ search:
 - 別名：区間に辺を張るテク、セグ木グラフ、セグメント木の形の補助頂点、segment tree graph
 - 種類：最短路、データ構造
 - 前提：`extended-dijkstra`、`segment-tree`
+- 使い分け：`method-comparison#shortest-path-steps`
 - サイン：
     - 言い回し：頂点から区間内の全頂点へ移動できる・区間から区間へ移動できる
 - 節：
@@ -440,6 +452,7 @@ search:
 - 別名：トポロジカル順序、Kahn 法、入次数、DAG、topological sort
 - 種類：グラフ探索
 - 前提：`dfs`、`bfs`
+- 使い分け：`method-comparison#connectivity`
 - ACL：`scc_graph`
 - サイン：
     - 言い回し：a は b より前・依存関係・前提条件
@@ -460,6 +473,7 @@ search:
 - 別名：強連結成分、SCC、Kosaraju、Tarjan、strongly connected components
 - 種類：グラフ探索
 - 前提：`topological-sort`
+- 使い分け：`method-comparison#connectivity`、`method-comparison#similar-names`
 - ACL：`scc_graph`
 - サイン：
     - 言い回し：互いに行き来できる頂点の組・グループ
@@ -480,6 +494,7 @@ search:
 - 別名：関数グラフ、ρ 形、rho 形、successor graph
 - 種類：グラフ探索
 - 前提：`cycle-detection`
+- 使い分け：`method-comparison#similar-names`
 - ACL：`scc_graph`
 - サイン：
     - 言い回し：各 i から A_i へ移動する
@@ -500,6 +515,7 @@ search:
 - 別名：2SAT、充足可能性、含意グラフ、2-satisfiability
 - 種類：グラフ探索
 - 前提：`scc`
+- 使い分け：`method-comparison#connectivity`
 - ACL：`two_sat`
 - サイン：
     - 言い回し：各要素が 2 択で「この 2 つは同時に選べない」「少なくともどちらか一方」
@@ -520,6 +536,7 @@ search:
 - 別名：逆順 Union-Find、削除を逆順の追加にする、辺の削除を逆から、オフラインの連結判定、offline connectivity
 - 種類：連結性・全域木、クエリ処理の工夫
 - 前提：`connected-components`
+- 使い分け：`method-comparison#connectivity`
 - ACL：`dsu`
 - サイン：
     - 言い回し：辺（頂点）を順に削除し、そのつど連結成分の数・大きさを答える（橋が崩落する・停電）
@@ -536,9 +553,10 @@ search:
 
 - id：`minimum-spanning-tree`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/minimum-spanning-tree/
-- 別名：MST、クラスカル法、プリム法、Kruskal、Prim、最大全域木、minimum spanning tree
+- 別名：MST、クラスカル法、プリム法、Kruskal、Prim、最大全域木、minimum spanning tree、スパニングツリー
 - 種類：連結性・全域木、貪欲
 - 前提：`union-find`、`sorting-techniques`
+- 使い分け：`method-comparison#shortest-path-properties`、`method-comparison#connectivity`
 - ACL：`dsu`
 - サイン：
     - 言い回し：すべての頂点をつなぐ最小コスト
@@ -579,6 +597,7 @@ search:
 - 別名：lowlink、橋、関節点、二重辺連結成分、二重頂点連結成分、ブロックカット木、ord と low、bridge、articulation point、biconnected components、block-cut tree
 - 種類：連結性・全域木、グラフ探索
 - 前提：`dfs`
+- 使い分け：`method-comparison#connectivity`、`method-comparison#similar-names`
 - サイン：
     - 言い回し：その辺（頂点）を取り除くと非連結になるか
     - 言い回し：すべての辺（頂点）について、取り除いたときの連結成分の数を求める
@@ -598,6 +617,7 @@ search:
 - 別名：Offline Dynamic Connectivity、オフライン動的連結性、時間軸のセグ木、辺の削除がある連結判定
 - 種類：連結性・全域木、クエリ処理の工夫
 - 前提：`union-find-connectivity`、`rollback-union-find`、`segment-tree`
+- 使い分け：`method-comparison#connectivity`
 - サイン：
     - 言い回し：辺の追加と削除のクエリが混ざり、そのつど連結性を答える（先に全部読んでよい）
     - 言い回し：各要素が「ない」時刻の区間がいくつかある
@@ -682,6 +702,7 @@ search:
 - 別名：オイラー閉路、一筆書き、Hierholzer、Euler path、Eulerian trail
 - 種類：グラフ探索
 - 前提：`connected-components`
+- 使い分け：`method-comparison#similar-names`
 - サイン：
     - 言い回し：すべての辺をちょうど 1 回ずつ通る・一筆書き
     - 言い回し：同じ道を 2 度通らずにすべての道を通れるか
@@ -735,6 +756,7 @@ search:
 - 別名：Project Selection、最大重み閉包、劣モジュラ、project selection problem
 - 種類：フロー・マッチング
 - 前提：`min-cut`
+- 使い分け：`method-comparison#connectivity`、`method-comparison#optimization`
 - ACL：`mf_graph`
 - サイン：
     - 言い回し：各要素を選ぶ・選ばないの 2 択で、利得とコストの合計を最大化する
@@ -793,9 +815,10 @@ search:
 
 - id：`min-cost-flow`　レベル：黄　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/min-cost-flow/
-- 別名：primal-dual、重み付きマッチング、割当問題、ハンガリアン法、slope、minimum cost flow
+- 別名：primal-dual、重み付きマッチング、割当問題、ハンガリアン法、slope、minimum cost flow、最小費用フロー
 - 種類：フロー・マッチング
 - 前提：`max-flow`、`dijkstra`
+- 使い分け：`method-comparison#optimization`
 - ACL：`mcf_graph`
 - サイン：
     - 言い回し：K 個選んだときの最大（最小）を K ごとに答える

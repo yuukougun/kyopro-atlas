@@ -1,7 +1,8 @@
 ---
 id: grundy-number
 title: Grundy 数と Sprague-Grundy の定理
-aliases: [nimber, Sprague-Grundy の定理, ゲームの和, Grundy 数の周期性, Sprague-Grundy theorem, Grundy number]
+aliases: [nimber, Sprague-Grundy の定理, ゲームの和, Grundy 数の周期性, Sprague-Grundy theorem, Grundy number, グランディ数]
+tags: [グランディ]
 type: technique
 field: comb
 chapter: ゲーム
@@ -40,7 +41,7 @@ updated: 2026-10-29
     - **前提**：[Nim と XOR](../comb/nim.md)
 
 <!-- textlint-disable -->
-別名：nimber・Sprague-Grundy の定理・ゲームの和・Grundy 数の周期性・Sprague-Grundy theorem・Grundy number
+別名：nimber・Sprague-Grundy の定理・ゲームの和・Grundy 数の周期性・Sprague-Grundy theorem・Grundy number・グランディ数
 <!-- textlint-enable -->
 
 Grundy 数は、不偏ゲーム（どちらの手番でも打てる手が同じゲーム）の各局面に、「Nim の山の何個分に当たるか」を表す 0 以上の整数を割り当てたものである。Sprague-Grundy の定理により、独立なゲームを並べて「どれか 1 つを選んで 1 手進める」ゲームの勝敗は、各ゲームの Grundy 数の XOR で決まる。ゲームごとの表は小さな DP で作り、山が大きすぎるときは表の規則を見つけて式にする。

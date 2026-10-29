@@ -1,7 +1,7 @@
 ---
 id: library-design
 title: 自作ライブラリの設計と動作確認
-aliases: [ライブラリ整備, 自作ライブラリ, Library Checker, verify, ライブラリの動作確認]
+aliases: [ライブラリ整備, 自作ライブラリ, Library Checker, verify, ライブラリの動作確認, ライブラリチェッカー]
 type: guide
 field: guide
 chapter: 早見表と資料
@@ -33,7 +33,7 @@ updated: 2026-10-29
     - **関連**：C++ の[雛形と展開](../cpp/cpp-macros-template-file.md#bundling)と[ACL の読み方](../cpp/acl-reading.md#conventions)
 
 <!-- textlint-disable -->
-別名：ライブラリ整備・自作ライブラリ・Library Checker・verify・ライブラリの動作確認
+別名：ライブラリ整備・自作ライブラリ・Library Checker・verify・ライブラリの動作確認・ライブラリチェッカー
 <!-- textlint-enable -->
 
 自作ライブラリの設計と動作確認は、コンテストで何度も書く部品をヘッダにまとめ、正しいと確かめてから使うまでの流れである。手法そのものの説明は各ページにあり、ここでは部品にするときの約束と確かめ方だけを書く。流れの全体は次の図のとおりで、1 つのヘッダを手元のテストと確認用の問題の両方で確かめ、確かめたヘッダをコンテストの解答から使う。

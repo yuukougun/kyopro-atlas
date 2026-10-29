@@ -9,7 +9,7 @@ search:
 
 # 整数論・代数の詳細索引
 
-分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
+分野の全ページの id・URL・別名・サイン・種類・前提・使い分け・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
 
 ## Σ の変形（sigma-manipulation） {#sigma-manipulation}
 
@@ -74,6 +74,7 @@ search:
 - 別名：二分累乗法、高速累乗、binary exponentiation、modpow、pow_mod、モノイドの累乗
 - 種類：整数論、ダブリング・分割統治
 - 前提：`mod-arithmetic`
+- 使い分け：`method-comparison#repetition`
 - ACL：`pow_mod`
 - サイン：
     - 制約：指数・繰り返しの回数が N ≤ 10^18
@@ -93,6 +94,7 @@ search:
 - 別名：モジュラ逆元、modular inverse、modinv、inv_mod、mod での割り算、逆元表
 - 種類：整数論
 - 前提：`mod-pow`
+- 使い分け：`method-comparison#numbers`
 - ACL：`inv_mod`
 - サイン：
     - 言い回し：答えは有理数 P/Q になるので P × Q^(−1) mod 998244353 を出力する
@@ -185,6 +187,7 @@ search:
 - 別名：試し割り、trial division、divisor enumeration、primality test、√N まで調べる、約数の総和
 - 種類：整数論、全探索
 - 前提：`integer-division`
+- 使い分け：`method-comparison#numbers`
 - サイン：
     - 制約：N ≤ 10^12 程度（√N ≤ 10^6）の約数・素数判定
     - 言い回し：a × b = N となる組を調べる
@@ -204,6 +207,7 @@ search:
 - 別名：prime factorization、Legendre's formula、階乗の素因数、末尾の 0 の個数、v_p(n!)
 - 種類：整数論
 - 前提：`divisor-enum`
+- 使い分け：`method-comparison#numbers`
 - サイン：
     - 言い回し：素数ごとに独立に考えられる（積・割り切れる回数）
     - 言い回し：N! の末尾の 0 の個数、N! が K の倍数になる最小の N
@@ -219,9 +223,10 @@ search:
 
 - id：`sieve-eratosthenes`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/sieve-eratosthenes/
-- 別名：篩、sieve of Eratosthenes、素数の列挙、素数表
+- 別名：篩、sieve of Eratosthenes、素数の列挙、素数表、エラトステネスのふるい
 - 種類：整数論
 - 前提：`divisor-enum`
+- 使い分け：`method-comparison#numbers`
 - サイン：
     - 制約：N ≤ 10&#94;6〜10&#94;7 の範囲の素数を全部使う
     - 言い回し：p q³ ≤ N を満たす素数の組を数える
@@ -240,6 +245,7 @@ search:
 - 別名：osa_k 法、最小素因数、smallest prime factor、SPF、高速素因数分解、linear sieve
 - 種類：整数論
 - 前提：`sieve-eratosthenes`、`prime-factorization`
+- 使い分け：`method-comparison#numbers`
 - サイン：
     - 制約：A_i ≤ 10&#94;6（〜10&#94;7）の各要素を素因数分解する
     - 言い回し：すべての組が互いに素か（pairwise coprime）を判定する
@@ -313,6 +319,7 @@ search:
 - 別名：区間ふるい、segmented sieve、区間の素因数分解
 - 種類：整数論
 - 前提：`sieve-eratosthenes`
+- 使い分け：`method-comparison#numbers`
 - サイン：
     - 制約：L, R ≤ 10^12 で R − L ≤ 10^6
     - 言い回し：連続する区間の数をそれぞれ素因数分解する
@@ -349,6 +356,7 @@ search:
 - 別名：ミラー・ラビン、Miller-Rabin、ポラード・ロー、Pollard's rho、Montgomery 乗算、64bit の素数判定
 - 種類：整数論、ハッシュ・乱択
 - 前提：`exponent-mod`、`prime-factorization`
+- 使い分け：`method-comparison#numbers`
 - サイン：
     - 制約：N ≤ 10^18 の素数判定・素因数分解（√N の試し割りでは間に合わない）
     - 言い回し：非常に大きい数が素数かを多数判定する
@@ -597,6 +605,7 @@ search:
 - 別名：行列の累乗、matrix exponentiation、行列累乗 DP、遷移行列、隣接行列の累乗、min-plus 行列、(max,+) 行列、半環の行列
 - 種類：線形代数・行列、DP、ダブリング・分割統治
 - 前提：`mod-pow`、`dp-state-design`
+- 使い分け：`method-comparison#repetition`
 - サイン：
     - 制約：状態数 n ≤ 100 程度で、繰り返しの回数 K が 10&#94;9〜10&#94;18
     - 言い回し：漸化式の第 N 項（N ≤ 10^18）
@@ -677,6 +686,7 @@ search:
 - 別名：畳み込み、convolution、多項式の積、ACL の convolution、convolution_ll、ずらしたときの一致数、全シフトのハミング距離、ワイルドカード照合
 - 種類：畳み込み・多項式
 - 前提：`mod-arithmetic`
+- 使い分け：`method-comparison#strings`
 - ACL：`convolution`、`convolution_ll`
 - サイン：
     - 言い回し：すべての k について、和が k になる組の数を求める
@@ -750,7 +760,7 @@ search:
 
 - id：`fps-basics`　レベル：発展　段階：reviewed　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/math/fps-basics/
-- 別名：FPS、formal power series、多項式の逆元、多項式の割り算、Taylor shift、多点評価、冪級数の log・exp
+- 別名：FPS、formal power series、多項式の逆元、多項式の割り算、Taylor shift、多点評価、冪級数の log・exp、形式的べき級数
 - 種類：畳み込み・多項式、数え上げ
 - 前提：`convolution-ntt`、`mod-inverse`
 - ACL：`convolution`
@@ -771,6 +781,7 @@ search:
 - 別名：きたまさ法、Bostan-Mori、Berlekamp-Massey、Fiduccia、線形漸化式の第 N 項
 - 種類：線形代数・行列、畳み込み・多項式
 - 前提：`matrix-power`、`fps-basics`
+- 使い分け：`method-comparison#repetition`
 - ACL：`convolution`
 - サイン：
     - 制約：線形漸化式の項数 K が数百〜数千で、N ≤ 10^18

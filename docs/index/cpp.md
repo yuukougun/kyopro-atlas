@@ -9,7 +9,7 @@ search:
 
 # C++の詳細索引
 
-分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
+分野の全ページの id・URL・別名・サイン・種類・前提・使い分け・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
 
 ## C++ の逆引き（cpp-reverse-index） {#cpp-reverse-index}
 
@@ -37,6 +37,7 @@ search:
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-types-literals/
 - 別名：整数の型、long long、LL、ULL、桁区切り、2 進リテラル、0uz、auto の推論、using ll = long long、static_cast、INF、numeric_limits、LLONG_MAX、INT_MAX、0x3f3f3f3f、1LL << 60、double、long double、1e18、浮動小数点数の型
 - 種類：実装・C++
+- 使い分け：`method-comparison#numbers`
 - 節：
     - `cpp-types-literals#integer-types` 整数の型と表せる範囲（int・long long・unsigned・size_t・int64_t）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-types-literals/#integer-types
     - `cpp-types-literals#literals` リテラルの書き方：1LL・ULL、桁区切り 1'000'000'007、2 進 0b1010、size_t の 0uz（C++23）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-types-literals/#literals
@@ -217,6 +218,7 @@ search:
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-container-idioms/
 - 別名：erase_if、contains、emplace_back、map の []、multiset の削除、ms.erase(ms.find(x))、イテレータ、iterator、std::prev、std::next、rbegin、it - v.begin()、イテレータの無効化、unordered_map のハッシュ、pb_ds、order_of_key、find_by_order
 - 種類：実装・C++、データ構造
+- 使い分け：`method-comparison#containers`
 - 節：
     - `cpp-container-idioms#erase-if` erase(v, x)・erase_if(v, pred)：消した個数を返す。erase_if は set・map にも使える（C++20）：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-container-idioms/#erase-if
     - `cpp-container-idioms#contains` contains（C++20）と find・count：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-container-idioms/#contains

@@ -9,7 +9,7 @@ search:
 
 # 文字列の詳細索引
 
-分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
+分野の全ページの id・URL・別名・サイン・種類・前提・使い分け・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
 
 ## 文字列の基本操作と辞書順（string-basics） {#string-basics}
 
@@ -18,6 +18,7 @@ search:
 - 別名：辞書順、文字列の比較、文字の一斉置換、文字列の回転、連結して辞書順最小、lexicographical order
 - 種類：文字列
 - 前提：`sorting-techniques`
+- 使い分け：`method-comparison#similar-names`
 - サイン：
     - 言い回し：条件を満たす文字列のうち辞書順で最小（最大）のものを出力する
     - 言い回し：2 種類の文字を一斉に入れ替える操作を繰り返して一致させられるか
@@ -58,6 +59,7 @@ search:
 - 別名：ロリハ、多項式ハッシュ、Rabin-Karp、文字列のハッシュ、部分文字列のハッシュ、ハッシュのセグ木、rolling hash
 - 種類：文字列、ハッシュ・乱択
 - 前提：`mod-arithmetic`、`prefix-sum`、`string-basics`
+- 使い分け：`method-comparison#strings`
 - ACL：`segtree`
 - サイン：
     - 言い回し：部分文字列どうしが等しいかを大量に判定する
@@ -80,6 +82,7 @@ search:
 - 別名：Zobrist hashing、集合のハッシュ、多重集合のハッシュ、XOR ハッシュ、和のハッシュ、乱択ハッシュ、並べ替えて一致するか
 - 種類：ハッシュ・乱択、累積和・差分
 - 前提：`prefix-sum`、`bit-operations`
+- 使い分け：`method-comparison#strings`
 - サイン：
     - 言い回し：先頭 x 項の集合と先頭 y 項の集合が等しいか
     - 言い回し：2 つの区間を並べ替えると一致するか（多重集合として等しいか）
@@ -100,6 +103,7 @@ search:
 - 別名：ハッシュの衝突確率、誕生日のパラドックス、mod 2^61-1、ハッシュの mod の選び方、anti-hash、ハッシュが落とされる、unordered_map の衝突、カスタムハッシュ、hash collision
 - 種類：ハッシュ・乱択
 - 前提：`rolling-hash`
+- 使い分け：`method-comparison#containers`
 - サイン：
     - 言い回し：ハッシュ値を set や map に大量に入れて重複を数える
     - 言い回し：1000 桁程度の巨大な数の積や和が一致するかを判定する
@@ -117,9 +121,10 @@ search:
 
 - id：`z-algorithm`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/z-algorithm/
-- 別名：Z 法、Z 配列、Z function、拡張 KMP、z_algorithm、各位置からの最長共通接頭辞、巡回シフト、A+A の技
+- 別名：Z 法、Z 配列、Z function、拡張 KMP、z_algorithm、各位置からの最長共通接頭辞、巡回シフト、A+A の技、Z アルゴリズム
 - 種類：文字列
 - 前提：`string-basics`
+- 使い分け：`method-comparison#strings`
 - ACL：`z_algorithm`
 - サイン：
     - 言い回し：各位置から、文字列の先頭と何文字一致するか
@@ -143,6 +148,7 @@ search:
 - 別名：KMP、MP 法、Knuth-Morris-Pratt、失敗関数、prefix function、π 配列、border、最小周期、繰り返し単位
 - 種類：文字列
 - 前提：`string-basics`
+- 使い分け：`method-comparison#strings`
 - サイン：
     - 言い回し：接頭辞と接尾辞が一致する最長の長さ
     - 言い回し：最小周期・何かの繰り返しで書けるか
@@ -163,9 +169,10 @@ search:
 
 - id：`palindrome`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/palindrome/
-- 別名：回文、palindrome、回文判定、Manacher's algorithm、回文半径、中心から伸ばす、両端から作る
+- 別名：回文、palindrome、回文判定、Manacher's algorithm、回文半径、中心から伸ばす、両端から作る、マナカー
 - 種類：文字列
 - 前提：`string-basics`
+- 使い分け：`method-comparison#strings`
 - サイン：
     - 言い回し：回文にするための最小の操作回数（書き換え・一斉置換）
     - 言い回し：回文になる部分文字列の個数
@@ -187,6 +194,7 @@ search:
 - 別名：トライ木、接頭辞木、prefix tree、全ペアの LCP の和
 - 種類：文字列、データ構造
 - 前提：`string-basics`、`dfs`
+- 使い分け：`method-comparison#strings`
 - サイン：
     - 言い回し：全ペアの最長共通接頭辞（LCP）の長さの和
     - 言い回し：各文字列について、ほかの文字列との LCP の最大
@@ -205,9 +213,10 @@ search:
 
 - id：`aho-corasick`　レベル：青　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/aho-corasick/
-- 別名：AC オートマトン、失敗リンク、複数パターン照合、禁止語、Aho-Corasick algorithm
+- 別名：AC オートマトン、失敗リンク、複数パターン照合、禁止語、Aho-Corasick algorithm、エイホコラシック法
 - 種類：文字列
 - 前提：`trie`、`kmp`、`bfs`
+- 使い分け：`method-comparison#strings`
 - サイン：
     - 言い回し：多数のパターンそれぞれの、テキスト中の出現回数
     - 言い回し：どのパターンも含まない（すべて含む）文字列の数
@@ -246,9 +255,10 @@ search:
 
 - id：`suffix-array`　レベル：黄　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/suffix-array/
-- 別名：接尾辞配列、SA、LCP 配列、SA-IS、Kasai 法、suffix_array、lcp_array、異なる部分文字列の数
+- 別名：接尾辞配列、SA、LCP 配列、SA-IS、Kasai 法、suffix_array、lcp_array、異なる部分文字列の数、サフィックスアレイ
 - 種類：文字列、データ構造
 - 前提：`string-basics`、`binary-search`
+- 使い分け：`method-comparison#strings`
 - ACL：`suffix_array`、`lcp_array`
 - サイン：
     - 言い回し：異なる部分文字列の個数

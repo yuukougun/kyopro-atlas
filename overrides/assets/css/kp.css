@@ -847,3 +847,136 @@
   .md-typeset .kp-wishlist__undo { min-height: 44px; }
   .md-typeset .kp-order__check { min-height: 44px; min-width: 44px; }
 }
+
+/* ---------- 知識マップ：点の説明を地図に重ねる（map.js。#59） ---------- */
+/* 説明は地図（.kp-map__stage）の中に重ねる。点が地図の下半分なら上（--top）、上半分なら下に出し、点を隠さない。
+   上の .kp-map__info の規則（地図の下に出していたときの見た目）は、ここで上書きする */
+.md-typeset .kp-map__stage { position: relative; }
+.md-typeset .kp-map__stage > .kp-map__info {
+  position: absolute;
+  z-index: 2;
+  left: 0.5rem;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  box-sizing: border-box;
+  max-width: 24rem;
+  max-height: 60%;
+  overflow: auto;
+  overscroll-behavior: contain;
+  margin: 0;
+  padding: 0.4em 2.6em 0.4em 0.8em;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-left: 0.2rem solid var(--md-default-fg-color--light);
+  border-radius: 0.2rem;
+  background: var(--md-default-bg-color);
+  box-shadow: var(--md-shadow-z2);
+}
+.md-typeset .kp-map__stage > .kp-map__info--top { top: 0.5rem; bottom: auto; }
+.md-typeset .kp-map__stage > .kp-map__info--pinned { border-left-color: var(--md-accent-fg-color); }
+.md-typeset .kp-map__info .kp-map__close {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.2rem;
+  width: 2em;
+  height: 2em;
+  padding: 0;
+  border: 0;
+  border-radius: 0.2rem;
+  background: transparent;
+  color: var(--md-default-fg-color--light);
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.md-typeset .kp-map__info .kp-map__close:hover,
+.md-typeset .kp-map__info .kp-map__close:focus-visible { color: var(--md-accent-fg-color); }
+.md-typeset .kp-map__acts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4em 1em;
+}
+.md-typeset .kp-map__info .kp-map__acts a { margin-right: 0; }
+.md-typeset .kp-map__acts button,
+.md-typeset .kp-map__alts button {
+  min-height: 2em;
+  padding: 0 0.6em;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 0.2rem;
+  background: transparent;
+  color: var(--md-typeset-a-color);
+  font: inherit;
+  cursor: pointer;
+}
+.md-typeset .kp-map__acts button:hover,
+.md-typeset .kp-map__acts button:focus-visible,
+.md-typeset .kp-map__alts button:hover,
+.md-typeset .kp-map__alts button:focus-visible { border-color: var(--md-accent-fg-color); }
+.md-typeset .kp-map__hint { color: var(--md-default-fg-color--light); font-size: 0.9em; }
+.md-typeset .kp-map__alts { margin-left: 0.5em; }
+.md-typeset .kp-map__alts button { margin: 0.2em 0 0 0.4em; }
+
+/* ---------- 語で行を絞り込む欄（filter.js。#60） ---------- */
+/* 欄はページの題の下（要点の前）に出る。語を入れている間は、当たった行（項目）と、それを含む表・箇条書き・見出しだけを残す */
+.md-typeset .kp-filter { margin: 0 0 1em; }
+.md-typeset .kp-filter__box {
+  display: flex;
+  align-items: stretch;
+  gap: 0.4em;
+}
+.md-typeset .kp-filter__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  box-sizing: border-box;
+  min-height: 2.2rem;
+  margin: 0;
+  padding: 0 0.6em;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 0.2rem;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  font: inherit;
+  font-size: 0.8rem; /* 16px 以上にして、iOS でフォーカスしたときに拡大されないようにする */
+}
+.md-typeset .kp-filter__input::placeholder { color: var(--md-default-fg-color--light); opacity: 1; }
+.md-typeset .kp-filter__input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; } /* 消すボタンは自前の × */
+.md-typeset .kp-filter__input:focus {
+  border-color: var(--md-accent-fg-color);
+  outline: 1px solid var(--md-accent-fg-color);
+}
+.md-typeset .kp-filter__clear {
+  flex: none;
+  min-width: 2.2rem;
+  padding: 0;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 0.2rem;
+  background: transparent;
+  color: var(--md-default-fg-color--light);
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.md-typeset .kp-filter__clear[hidden] { display: none; }
+.md-typeset .kp-filter__clear:hover,
+.md-typeset .kp-filter__clear:focus-visible { border-color: var(--md-accent-fg-color); color: var(--md-accent-fg-color); }
+.md-typeset .kp-filter__status {
+  margin: 0.3em 0 0;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.7rem;
+  line-height: 1.5;
+}
+.md-typeset .kp-filter-off { display: none !important; }
+/* 絞っている間は、欄の後ろの本文のうち残す印（kp-filter-keep）のない要素を隠す。ページ下部の欄（前提・関連など）は残す */
+.md-typeset.kp-filtering > .kp-filter ~ :not(.kp-filter-keep):not(.kp-links):not(.kp-page-info):not(.md-source-file) {
+  display: none !important;
+}
+
+@media (pointer: coarse) {
+  .md-typeset .kp-map__info .kp-map__close { width: 44px; height: 44px; }
+  .md-typeset .kp-map__acts a { display: inline-flex; align-items: center; min-height: 44px; }
+  .md-typeset .kp-map__acts button,
+  .md-typeset .kp-map__alts button { min-height: 44px; }
+  .md-typeset .kp-filter__input { min-height: 44px; }
+  .md-typeset .kp-filter__clear { min-width: 44px; min-height: 44px; }
+}

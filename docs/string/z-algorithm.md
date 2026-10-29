@@ -1,7 +1,7 @@
 ---
 id: z-algorithm
 title: Z-algorithm
-aliases: [Z 法, Z 配列, Z function, 拡張 KMP, z_algorithm, 各位置からの最長共通接頭辞, 巡回シフト, A+A の技]
+aliases: [Z 法, Z 配列, Z function, 拡張 KMP, z_algorithm, 各位置からの最長共通接頭辞, 巡回シフト, A+A の技, Z アルゴリズム]
 type: technique
 field: string
 chapter: 線形時間の照合と回文
@@ -46,7 +46,7 @@ updated: 2026-10-29
     - **前提**：[文字列の基本操作と辞書順](../string/string-basics.md)
 
 <!-- textlint-disable -->
-別名：Z 法・Z 配列・Z function・拡張 KMP・z_algorithm・各位置からの最長共通接頭辞・巡回シフト・A+A の技
+別名：Z 法・Z 配列・Z function・拡張 KMP・z_algorithm・各位置からの最長共通接頭辞・巡回シフト・A+A の技・Z アルゴリズム
 <!-- textlint-enable -->
 
 Z-algorithm は、文字列の各位置から「先頭と何文字一致するか」を、すでに分かった一致を使い回して線形時間で求める手法である。ACL に `z_algorithm` があるので、パターン検索・回転の一致・周期の判定の多くは、うまくつないだ列の Z 配列を 1 回作るだけで済む。

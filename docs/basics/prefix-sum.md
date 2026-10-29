@@ -2,6 +2,7 @@
 id: prefix-sum
 title: 累積和
 aliases: [prefix sum, cumulative sum, 累積 GCD, 累積 XOR, 累積 max, 左右からの累積]
+search: {boost: 1.3}
 type: technique
 field: basics
 chapter: 累積和といもす法

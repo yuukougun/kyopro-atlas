@@ -1,7 +1,9 @@
 ---
 id: union-find
 title: Union-Find
-aliases: [UF, DSU, Disjoint Set Union, disjoint set, 素集合データ構造, 経路圧縮, union by size]
+aliases: [UF, DSU, Disjoint Set Union, disjoint set, 素集合データ構造, 経路圧縮, union by size, ユニオンファインド]
+tags: [UF, DSU]
+search: {boost: 1.05}
 type: technique
 field: ds
 chapter: Union-Find
@@ -43,7 +45,7 @@ updated: 2026-10-29
     - **前提**：[グラフの表現と用語](../graph/graph-basics.md)
 
 <!-- textlint-disable -->
-別名：UF・DSU・Disjoint Set Union・disjoint set・素集合データ構造・経路圧縮・union by size
+別名：UF・DSU・Disjoint Set Union・disjoint set・素集合データ構造・経路圧縮・union by size・ユニオンファインド
 <!-- textlint-enable -->
 
 Union-Find は、グループを根付き木で表し、根を代表として比べることで「2 つのグループをまとめる」と「同じグループか」を速く処理するデータ構造である。無向グラフに辺を 1 本ずつ足しながら、連結かどうかや連結成分の大きさを答えるのが典型的な使い方になる。

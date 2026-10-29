@@ -9,7 +9,7 @@ search:
 
 # 考察の詳細索引
 
-分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
+分野の全ページの id・URL・別名・サイン・種類・前提・使い分け・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
 
 ## 言い換えの典型（reformulation） {#reformulation}
 
@@ -52,6 +52,7 @@ search:
 - URL：https://yuukougun.github.io/kyopro-atlas/thinking/contribution/
 - 別名：主客転倒、寄与、貢献度、contribution technique、足された回数、各要素が何回数えられるか
 - 種類：考察、数え上げ
+- 使い分け：`method-comparison#counting`
 - サイン：
     - 言い回し：すべての組・区間・部分集合についての総和
     - 言い回し：各要素が答えに何回足されるか
@@ -70,6 +71,7 @@ search:
 - URL：https://yuukougun.github.io/kyopro-atlas/thinking/complement/
 - 別名：補集合、全体から引く、少なくとも 1 つ、2 条件の包除、complementary counting
 - 種類：考察、数え上げ
+- 使い分け：`method-comparison#counting`
 - サイン：
     - 言い回し：〜でないもの・少なくとも 1 つ含むもの
     - 言い回し：すべて異なる・条件を 1 つでも満たす

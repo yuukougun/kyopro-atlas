@@ -1,7 +1,7 @@
 ---
 id: warshall-floyd
 title: ワーシャルフロイド法
-aliases: [ワーシャルフロイド, Floyd-Warshall, 全点対最短路, all-pairs shortest paths]
+aliases: [ワーシャルフロイド, Floyd-Warshall, 全点対最短路, all-pairs shortest paths, フロイドワーシャル法]
 type: technique
 field: graph
 chapter: 最短路
@@ -40,7 +40,7 @@ updated: 2026-10-29
     - **前提**：[ダイクストラ法](../graph/dijkstra.md)、[DP の基本](../dp/dp-basics.md)
 
 <!-- textlint-disable -->
-別名：ワーシャルフロイド・Floyd-Warshall・全点対最短路・all-pairs shortest paths
+別名：ワーシャルフロイド・Floyd-Warshall・全点対最短路・all-pairs shortest paths・フロイドワーシャル法
 <!-- textlint-enable -->
 
 ワーシャルフロイド法は、距離の表 $d[i][j]$ を「経由してよい頂点」を 1 つずつ増やしながら更新し、すべての頂点の組の最短距離を求める DP である。中身は 3 重ループの 1 行だけで、負の辺があっても正しく動く。

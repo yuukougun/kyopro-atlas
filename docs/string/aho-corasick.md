@@ -1,7 +1,7 @@
 ---
 id: aho-corasick
 title: Aho-Corasick 法
-aliases: [AC オートマトン, 失敗リンク, 複数パターン照合, 禁止語, Aho-Corasick algorithm]
+aliases: [AC オートマトン, 失敗リンク, 複数パターン照合, 禁止語, Aho-Corasick algorithm, エイホコラシック法]
 type: technique
 field: string
 chapter: Trie と照合オートマトン
@@ -43,7 +43,7 @@ updated: 2026-10-29
     - **前提**：[Trie](../string/trie.md)、[KMP 法と文字列の周期](../string/kmp.md)、[幅優先探索（BFS）と無重み最短路](../graph/bfs.md)
 
 <!-- textlint-disable -->
-別名：AC オートマトン・失敗リンク・複数パターン照合・禁止語・Aho-Corasick algorithm
+別名：AC オートマトン・失敗リンク・複数パターン照合・禁止語・Aho-Corasick algorithm・エイホコラシック法
 <!-- textlint-enable -->
 
 Aho-Corasick 法は、[KMP 法](../string/kmp.md)の[照合オートマトン](../guide/glossary.md#matching-automaton)を複数のパターンに広げたものである。パターンを [Trie](../string/trie.md) にまとめ、各節点に「失敗したらどこへ戻るか」を表す失敗リンクを張ると、テキストを先頭から 1 回読むだけで、各位置で終わるパターンがすべて分かる。状態の遷移を表に埋めておけば、DP や行列累乗の状態としてもそのまま使える。

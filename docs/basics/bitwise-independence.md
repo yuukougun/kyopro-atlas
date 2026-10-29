@@ -2,6 +2,7 @@
 id: bitwise-independence
 title: bit ごとに独立に考える
 aliases: [bit ごとの寄与, 桁ごとに見る, bit ごとに分解, 上位ビットから決める, XOR の和, bitwise decomposition]
+tags: [ビット]
 type: technique
 field: basics
 chapter: 計算量と bit 演算

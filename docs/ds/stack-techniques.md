@@ -1,7 +1,7 @@
 ---
 id: stack-techniques
 title: スタック・キュー・deque の使いどころ
-aliases: [stack, queue, 括弧の対応, 打ち消し, 操作の取り消し]
+aliases: [stack, queue, 括弧の対応, 打ち消し, 操作の取り消し, デック]
 type: technique
 field: ds
 chapter: スタックとキュー
@@ -29,7 +29,7 @@ sections:
   - {title: deque（両端への追加・真ん中への挿入は deque 2 本）, anchor: deque}
   - {title: 円を切り開いて弦の交差判定に帰着する, anchor: chords, level: 水}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -43,7 +43,7 @@ updated: 2026-10-22
     - **前提**：[STL コンテナの使い分け](../ds/stl-containers.md)
 
 <!-- textlint-disable -->
-別名：stack・queue・括弧の対応・打ち消し・操作の取り消し
+別名：stack・queue・括弧の対応・打ち消し・操作の取り消し・デック
 <!-- textlint-enable -->
 
 スタックは最後に入れたものを最初に取り出す入れ物で、キューは最初に入れたものを最初に取り出す入れ物である。deque は両端のどちらからでも出し入れできる。どれも操作自体は易しい。問題を「今の末尾だけを見れば決まる」形に言い換えられるかが本体であり、このページはその型を集めたものである。添字は 0-indexed で書く。

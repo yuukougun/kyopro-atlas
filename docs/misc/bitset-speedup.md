@@ -1,7 +1,8 @@
 ---
 id: bitset-speedup
 title: bitset による高速化
-aliases: [bitset, ビット並列, ワード並列, 1/64 倍, bitset で部分和, 推移閉包, 到達可能性クエリ, bitset speedup]
+aliases: [bitset, ビット並列, ワード並列, 1/64 倍, bitset で部分和, 推移閉包, 到達可能性クエリ, bitset speedup, ビットセット]
+tags: [ビット]
 type: technique
 field: misc
 order: 30
@@ -47,7 +48,7 @@ updated: 2026-10-29
     - **前提**：[bit 演算の基本と XOR の性質](../basics/bit-operations.md)、[計算量の見積もり](../basics/complexity-estimation.md)
 
 <!-- textlint-disable -->
-別名：bitset・ビット並列・ワード並列・1/64 倍・bitset で部分和・推移閉包・到達可能性クエリ・bitset speedup
+別名：bitset・ビット並列・ワード並列・1/64 倍・bitset で部分和・推移閉包・到達可能性クエリ・bitset speedup・ビットセット
 <!-- textlint-enable -->
 
 bitset による高速化は、0 か 1 の値を並べた列を 64 bit の整数に詰め、整数 1 回の演算で 64 個分を同時に計算する方法である。計算量の式は変わらないが、$O(N^3)$ が $N = 3000$ で約 $2.7 \times 10^{10}$ 回から約 $4 \times 10^8$ 回の語の演算に減り、間に合う側に入ることがある。使えるのは、計算の中身が「集合の積・和・対称差」や「ずらして重ねる」の形になっているときである。

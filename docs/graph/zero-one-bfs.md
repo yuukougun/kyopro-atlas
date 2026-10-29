@@ -1,7 +1,7 @@
 ---
 id: zero-one-bfs
 title: 01-BFS
-aliases: [0-1 BFS, deque BFS]
+aliases: [0-1 BFS, deque BFS, 01BFS]
 type: technique
 field: graph
 chapter: 最短路
@@ -40,7 +40,7 @@ updated: 2026-10-29
     - **前提**：[ダイクストラ法](../graph/dijkstra.md)
 
 <!-- textlint-disable -->
-別名：0-1 BFS・deque BFS
+別名：0-1 BFS・deque BFS・01BFS
 <!-- textlint-enable -->
 
 01-BFS は、[ダイクストラ法](../graph/dijkstra.md)の優先度付きキューを deque（両端から出し入れできるキュー）に置き換えたものである。重みが 0 と 1 しかないと、待っている頂点の暫定距離は 2 種類だけになり、ヒープを使わなくても最小のものを先頭に置き続けられる。問題の本体は、何を重み 0、何を重み 1 にしたグラフを作るかである。
