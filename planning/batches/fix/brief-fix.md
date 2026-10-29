@@ -16,7 +16,7 @@ kyopro-atlas（AtCoder で黄色を目指す人のための、辞書として引
 - 用語集・prh.yml・早見表・使い分け（guide/method-comparison）・catalog・台帳 data/problems.yaml・手引き（planning/style-guide.md）を変えたいときは、報告に「提案」として書く（メインがまとめて反映する）。頼まれたときだけ直す
 - 動く図（`overrides/assets/js/viz/`・`tests/viz/`）は頼まれたときだけ作る。共通の部品 `overrides/assets/js/viz.js` と `overrides/assets/css/kp.css` は、頼まれていなければ変えずに提案にする
 - 本文は だ・である調。atcoder.jp・codeforces.com を開かない（WebFetch・curl・ブラウザのどれでも）。問題の実在・題名・difficulty は `python3 tools/ap.py show <ID>` で確かめ、記憶だけで問題番号を書かない
-- `mkdocs build`・`mkdocs serve` は動かさない（site/ を上書きし、ほかの担当とぶつかる）。見た目を確かめるなら、公開中のサイトか、作業用フォルダへのビルド `uv run mkdocs build -q -d <作業用フォルダ>/site` を使う
+- `mkdocs build`・`mkdocs serve` は動かさない（site/ を上書きし、ほかの担当とぶつかる）。見た目を確かめるなら、公開中のサイトか、作業用フォルダへのビルド `uv run mkdocs build -d <作業用フォルダ>/site` を使う
 
 ## 直したあとに確かめること（書き換えない検査）
 

@@ -132,12 +132,20 @@ atcoder: null                          # cpp だけ（true / false）
 
 ## 6. ブラウザに保存するデータ
 
-- localStorage のキーは1つ：`kyopro-atlas:v1`。値は JSON
+- localStorage のキーは1つ：`kyopro-atlas:v1`。値は JSON（2026-10-29 に `wishlist` と `exportedAt` を足した。Issue #1・#74）
 ```json
-{"solved": {"abc340_e": true}, "understood": {"lazy-segment-tree": {"水": true, "青": false}}, "updatedAt": "2026-10-21T12:00:00+09:00"}
+{"solved": {"abc340_e": true},
+ "understood": {"lazy-segment-tree": {"水": true, "青": false}},
+ "wishlist": {"segment-tree": "2026-10-29T12:00:00+09:00"},
+ "updatedAt": "2026-10-29T12:00:00+09:00",
+ "exportedAt": "2026-10-29T12:30:00+09:00"}
 ```
-- 「理解した」はページ×レベル（ページの level と、sections にある上位の level の数だけチェックがある）
-- 書き出し：この JSON をテキストで表示してコピーできるようにする。読み込み：貼り付けた JSON で置き換えるか、合わせる（解いた・理解したのどちらかが true なら true）
+- `solved`：問題 ID → true。`understood`：ページの id → {レベル → true}。「理解した」はページ×レベル（ページの level と、sections にある上位の level の数だけチェックがある）。ロードマップの色ごとの列（生成された表）の行のチェック欄も、行のページの id と列の色の組で同じ記録を使う
+- `wishlist`：勉強したいリスト。ページの id → 入れた時刻（地方時の ISO 8601。日付だけのものと、入れた日の分からない `true` も読める）。ページのテンプレートの `input[data-kp-wish]` と、`guide/study-list` の一覧（`div.kp-wishlist`）が使う
+- `updatedAt`：記録を最後に変えた時刻。`exportedAt`：最後に書き出した（ファイルに保存した・コピーした）時刻。書き出しでは `updatedAt` を変えない。書き出し・読み込みの欄に「最後に書き出した日」として出す
+- 古い形の記録（2026-10-21 版。`wishlist` と `exportedAt` がない）は、localStorage の値も書き出した JSON も、そのまま読める（ない項目は空とみなす）。知らない項目と形の崩れた値は、読むときに捨てる
+- 書き出し：ファイルに保存（`kyopro-atlas-progress-<日付>.json`。中身はこの JSON で、`exportedAt` は書き出した時刻）と、JSON をテキストで表示してコピー。読み込み：ファイルを選ぶか貼り付けた JSON で、置き換えるか合わせる。合わせるときは、解いた・理解した・勉強したいのどれかが true（ある）なら true（ある）にし、勉強したいの入れた時刻は早い方、`exportedAt` は今の記録のものを残す（`updatedAt` は合わせた時刻になる。増えたものがなければ記録を変えない）。置き換えるときは、読み込んだ記録の `updatedAt` と `exportedAt` を使う（中身は読み込んだ記録そのものなので。`updatedAt` のない記録は読み込んだ時刻にする）
+- ページの id を変えるときの読み替え（design.md §9.1・§10.3）は、`understood` と `wishlist` の鍵に当てる
 - 別のタブの変更は storage イベントで反映する。localStorage が使えない環境でもページは壊れないこと（try/catch）
 
 ## 7. テンプレートと JS の受け持ち
