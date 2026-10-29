@@ -15,7 +15,7 @@ complexity: 片側の折れ線・絶対値の加算 O(log N)、累積 min・平�
 signs:
   - {type: phrase, text: 数列を単調（広義増加）にするための、値の変更量の和の最小}
   - {type: phrase, text: 時刻ごとに位置を少しずつ動かせるときの最小コスト}
-  - {type: shape, text: 'dp[i][x] = min_{y ≤ x} dp[i−1][y] + |x − a_i| のように、x について区分線形で凸'}
+  - {type: shape, text: 'dp[i][x] = min dp[i−1][y] + |x − a_i|（y ≤ x）のように、x について区分線形で凸'}
 acl: []
 frequency: B
 frequency_evidence: recent 1（abc458_g）・前提として届くページなし・古い ABC 2 問
@@ -188,7 +188,7 @@ Library Checker には Slope Trick を直接試す問題はない（2026-10-22 �
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [ABC458 G. Children Yearn for the Evil Kindergarten](https://atcoder.jp/contests/abc458/tasks/abc458_g)（diff 2831）：毎日、集めたメダルにその日の分 $A_i$ を足して園児に配り直し、$B_i$ 枚に満たない園児は脱落、残りは $B_i$ 枚を失い、$C_i$ 枚以上を持つ園児は脱出できる。$N$ 日で脱出できる人数の最大を求める。
+- [ABC458 G. Children Yearn for the Evil Kindergarten](https://atcoder.jp/contests/abc458/tasks/abc458_g)（diff 2831）：メダルを持たない多数の園児が N 日を過ごす。毎日、集めたメダルにその日の分 A_i を足して配り直し、B_i 枚に満たない園児は脱落し、残りは B_i 枚を失い、C_i 枚以上を持つ園児は脱出できる。脱出できる人数の最大を求める。
 
 </div>
 

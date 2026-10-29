@@ -141,13 +141,13 @@ updated: 2026-10-29
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [ABC377 E. Permute K times 2](https://atcoder.jp/contests/abc377/tasks/abc377_e)（diff 1685）：順列 P に対して、すべての i で P_i を P_{P_i} に同時に置き換える操作を K 回行った後の列を求める。
+- [ABC377 E. Permute K times 2](https://atcoder.jp/contests/abc377/tasks/abc377_e)（diff 1685）：順列 P に対して、すべての i で P_i を P_(P_i) に同時に置き換える操作を K 回行った後の列を求める。
 - [ABC131 F. Must Be Rectangular!](https://atcoder.jp/contests/abc131/tasks/abc131_f)（diff 1937）：平面の点の集合に「長方形の 3 隅があれば残りの 1 隅を足す」操作をくり返すとき、できる操作の最大回数を求める。
 - [ABC286 G. Unique Walk](https://atcoder.jp/contests/abc286/tasks/abc286_g)（diff 2135）：無向グラフで、指定された K 本の辺はそれぞれちょうど 1 回、ほかの辺は何回でも通ってよいウォークがあるかを判定する。
 
 </div>
 
-??? note "方針"
+??? note "練習の方針"
     - **ABC377 E**：添字 $i$ から $P_i$ への辺を張ると、順列なので閉路だけの集まりになる（[置換は閉路の集まり](../graph/functional-graph.md#permutation)）。今の列を「$i$ から何歩先の頂点か」で表すと、1 回の操作で歩数が 2 倍になるので、$K$ 回後は $i$ から $2^K$ 歩先の頂点が答えになる。長さ $L$ の閉路では $2^K \bmod L$ 歩だけ進めればよく、これは[繰り返し二乗法](../math/mod-pow.md)で求まる。
     - **ABC131 F**：$x$ 座標と $y$ 座標を頂点、点を辺にした二部グラフを作る（[何を頂点にするか](#what-to-vertex)の図）。操作を続けると各成分は完全二部グラフになるので、成分ごとの（$x$ の数）×（$y$ の数）の和から、元の点の数 $N$ を引いたものが答えである。
     - **ABC286 G**：何回でも通ってよい辺で結ばれた頂点を Union-Find で 1 点に縮約する。指定の $K$ 本の辺だけを、縮約後の頂点の間の辺として張り直す。この多重グラフで、辺のある頂点が連結で、次数が奇数の頂点が 0 個か 2 個ならウォークがある（[オイラー路の存在条件](../graph/euler-path.md#conditions)）。
@@ -166,7 +166,7 @@ updated: 2026-10-29
     ??? success "答え"
         $x + y$ の値と $x - y$ の値を頂点にし、点 $(x, y)$ を「$x + y$ の頂点と $x - y$ の頂点を結ぶ辺」にする。2 つの点が同じ $x + y$ か同じ $x - y$ を持つことは、2 本の辺が頂点を共有することにあたるので、辺どうしが同じ成分に入るかで判定できる。辺は $N$ 本で済む。2 種類の値は番号をずらして別の頂点にする（$x + y = 0$ と $x - y = 0$ を同じ頂点にしない）。$x - y$ は負にもなるので、[座標圧縮](../basics/coordinate-compression.md)で番号を振るとよい（[連結成分](../graph/connected-components.md#values-as-vertices)）。
 
-??? question "確認問題：縮約で V ≤ 2k になるのはなぜか"
+??? question "確認問題：縮約で $V \le 2k$ になるのはなぜか"
     次数 1 の頂点を削る操作と、次数 2 の頂点を両隣の辺 1 本にまとめる操作をくり返した。どちらも使えなくなったとき、頂点数 $V$ が $2(E - V)$ 以下になる理由を説明せよ。ただし元のグラフは連結で、木でも閉路 1 つでもない（$E - V \ge 1$）ものとする。
 
     ??? success "答え"

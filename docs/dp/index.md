@@ -52,11 +52,11 @@ DP の考え方、列・区間・集合・桁・木の DP、DP の高速化。38
 
 ## DP の高速化
 
-- [DP の高速化の選び方](dp-speedup-overview.md)：素直な DP が間に合わないとき、貰う形の式の右辺の形（区間の和・区間の最小・多項式の積・同じ線形の遷移の繰り返し・一次関数の最小など）から速くする道具を選ぶ。
+- [DP の高速化の選び方](dp-speedup-overview.md)：素直な DP が間に合わないとき、貰う形の式の右辺の形（区間の和・区間の最小・多項式の積・同じ線形の遷移の繰り返し・1 次関数の最小など）から速くする道具を選ぶ。
 - [セグメント木・スライド最小値による DP の高速化](dp-segment-tree.md) <span class="kp-mini kp-lv-ao" title="difficulty 1600〜1999">青</span>：遷移元が添字や値の範囲の最小・最大・和になる DP を、dp の値をセグメント木に載せて 1 回 O(log N) にする。
 - [インライン DP](inline-dp.md) <span class="kp-mini kp-lv-ao" title="difficulty 1600〜1999">青</span>：dp\[i][\*] から dp\[i+1][\*] へほとんどの値がそのまま写るとき、配列を 1 本だけ持って変わる場所だけを書き換える。
 - [動的 DP](dynamic-dp.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：列の各位置の遷移を小さな行列にしてセグメント木に載せると、1 点の書き換えのたびに DP の答えを O(S^3 log N) で求め直せる。
-- [Convex Hull Trick と Li Chao Tree](cht.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：dp[i] = min_j (dp[j] + a_j·x_i + b_j) のように遷移が一次関数の最小になる DP を、下側の包絡線を持って速くする。
+- [Convex Hull Trick と Li Chao Tree](cht.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：dp[i] = min_j (dp[j] + a_j·x_i + b_j) のように遷移が 1 次関数の最小になる DP を、下側の包絡線を持って速くする。
 - [Monge 性による DP の高速化](monge.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：コスト c(i, j) が Monge なら各行の最小値を取る位置が単調になり、分割統治（monotone minima）や Knuth-Yao で区間分割 DP・区間 DP を速くできる。
 - [Alien DP](alien-dp.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：「ちょうど K 個選ぶ」制約のついた最適化で答えが K について凸なら、1 個あたりの罰金 λ を足して制約を外した問題を解き、選ばれる個数が K になる λ を二分探索する。
 - [Slope Trick](slope-trick.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：dp[x] が x について区分線形で凸なとき、傾きが変わる点を 2 つの優先度付きキューで持ち、「|x − a| を足す」「累積 min を取る」「平行移動」を 1 回 O(log N) で行う。

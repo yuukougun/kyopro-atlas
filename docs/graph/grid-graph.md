@@ -185,13 +185,6 @@ updated: 2026-10-29
 - **隣り合うマスの組を選ぶ・マスを 2 色に分ける**：[市松模様](#checkerboard)の二部グラフで、[二部マッチング](../graph/bipartite-matching.md)や[最小カット](../graph/min-cut.md)に直す。
 - **障害物の追加と連結の質問**：マスを頂点にして辺を足しながら連結かを答える（[Union-Find で連結性を扱う](../graph/union-find-connectivity.md)）。
 
-## 使い分け {#comparison}
-
-- 移動のコストがすべて等しいなら BFS、0 と 1 なら [01-BFS](../graph/zero-one-bfs.md)、非負の一般の重みなら[ダイクストラ法](../graph/dijkstra.md)を使う
-- グリッドが固定で、つながりを 1 回だけ調べるなら DFS・BFS で[連結成分](../graph/connected-components.md)に分ける。マスが順に通れるようになり、そのつど「つながったか」を問われるなら [Union-Find で連結性を扱う](../graph/union-find-connectivity.md)
-- 移動が右と下だけなら探索ではなく [グリッド上の DP](../dp/dp-grid.md) で数えたり最適化したりする
-- グリッドの問題の型の一覧は[グリッド](../patterns/grid.md#overview)のページにまとめてある
-
 ## 例題 {#examples}
 
 ### ABC325 C. Sensors {#abc325_c}
@@ -234,6 +227,13 @@ updated: 2026-10-29
 
 ??? note "力試しの方針"
     - **ABC413 G**：グリッドが大きすぎて探索できないので、障害物の側を見る。障害物を 8 近傍で Union-Find につなぎ、「左端か下端」と「右端か上端」を表す仮想の頂点を足す。2 つの仮想の頂点がつながれば行けない（[障害物の連結の節](#obstacle-dual)）。障害物の座標は `map` などで引く
+
+## 使い分け {#comparison}
+
+- 移動のコストがすべて等しいなら BFS、0 と 1 なら [01-BFS](../graph/zero-one-bfs.md)、非負の一般の重みなら[ダイクストラ法](../graph/dijkstra.md)を使う
+- グリッドが固定で、つながりを 1 回だけ調べるなら DFS・BFS で[連結成分](../graph/connected-components.md)に分ける。マスが順に通れるようになり、そのつど「つながったか」を問われるなら [Union-Find で連結性を扱う](../graph/union-find-connectivity.md)
+- 移動が右と下だけなら探索ではなく [グリッド上の DP](../dp/dp-grid.md) で数えたり最適化したりする
+- グリッドの問題の型の一覧は[グリッド](../patterns/grid.md#overview)のページにまとめてある
 
 ## 参考 {#references}
 

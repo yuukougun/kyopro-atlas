@@ -10,7 +10,7 @@ level: null
 kind: [DP, 案内]
 prerequisites: [dp-basics]
 related: [dp-prefix-sum, dp-segment-tree, inline-dp, dp-dimension-reduction, bitset-speedup#subset-sum-shift, online-convolution#dp-as-polynomial, fps-basics, matrix-power#dp-transition, cht, monge, alien-dp, slope-trick]
-summary: 素直な DP が間に合わないとき、貰う形の式の右辺の形（区間の和・区間の最小・多項式の積・同じ線形の遷移の繰り返し・一次関数の最小など）から速くする道具を選ぶ。
+summary: 素直な DP が間に合わないとき、貰う形の式の右辺の形（区間の和・区間の最小・多項式の積・同じ線形の遷移の繰り返し・1 次関数の最小など）から速くする道具を選ぶ。
 complexity: null
 signs:
   - {type: shape, text: 素直に書いた DP の遷移が状態 1 つあたり O(N) かかり、全体で O(N^2) になる}
@@ -26,7 +26,7 @@ updated: 2026-10-29
 ---
 
 !!! abstract "要点"
-    - **何のページか**：素直な DP が間に合わないとき、貰う形の式の右辺の形（区間の和・区間の最小・多項式の積・同じ線形の遷移の繰り返し・一次関数の最小など）から速くする道具を選ぶ。
+    - **何のページか**：素直な DP が間に合わないとき、貰う形の式の右辺の形（区間の和・区間の最小・多項式の積・同じ線形の遷移の繰り返し・1 次関数の最小など）から速くする道具を選ぶ。
     - **いつ使うか**：素直に書いた DP の遷移が状態 1 つあたり $O(N)$ かかり、全体で $O(N^2)$ になる。
     - **使い方**：まず貰う形の式を書く。右辺の集約（和・min・OR）と遷移元の範囲の動き方を[早見表](#shape-to-tool)で探し、行のページの節へ進む。
     - **計算量**：全体は状態数 × 遷移 1 回の手間。遷移 1 回の手間は、累積和が $O(1)$、セグメント木が $O(\log N)$、スライド最小値がならし $O(1)$。状態数 $n$・ステップ数 $T$ の行列累乗は $O(n^3 \log T)$
@@ -95,7 +95,7 @@ $$
 | 右へ動くだけの窓の min・max | スライド最小値（単調 deque）→ [セグメント木・スライド最小値](../dp/dp-segment-tree.md#dp-sliding-window) | — |
 | 手前で初めて自分より大きい位置の 1 点 | [単調スタック](../ds/monotonic-stack.md#dp-transition) | [ABC359 E](../ds/monotonic-stack.md#abc359_e) |
 | 任意の区間・値の範囲の min・max・和 | セグメント木・BIT（値なら座標圧縮）→ [セグメント木・スライド最小値](../dp/dp-segment-tree.md#values-on-segment-tree) | [EDPC Q](../dp/dp-segment-tree.md#dp_q)・[典型90 037](../dp/dp-segment-tree.md#typical90_ak) |
-| コストが $\lvert x_i - x_j \rvert$ の一次式 | 左右に分けて 2 本のセグメント木 → [セグメント木・スライド最小値](../dp/dp-segment-tree.md#split-abs) | [ABC353 G](../dp/dp-segment-tree.md#abc353_g) |
+| コストが $\lvert x_i - x_j \rvert$ の 1 次式 | 左右に分けて 2 本のセグメント木 → [セグメント木・スライド最小値](../dp/dp-segment-tree.md#split-abs) | [ABC353 G](../dp/dp-segment-tree.md#abc353_g) |
 | 前の段がほぼそのまま写り、一部だけ変わる・範囲に一律に足す | インライン DP（遅延セグメント木）→ [インライン DP](../dp/inline-dp.md#diff-per-row) | [ABC271 E](../dp/inline-dp.md#abc271_e)・[EDPC W](../dp/inline-dp.md#dp_w) |
 | 可否（bool）で、和の値を添字にした表 | bitset のシフト OR → [bitset による高速化](../misc/bitset-speedup.md#subset-sum-shift) | [AGC020 C](../misc/bitset-speedup.md#practice) |
 | 係数が差 $i - j$ だけで決まる和・多項式の積 | 畳み込み・分割統治 FFT・FPS → [分割統治 FFT](../math/online-convolution.md#dp-as-polynomial) | [ABC213 H](../math/online-convolution.md#abc213_h) |
@@ -154,6 +154,20 @@ $$
 - **範囲の端を切り詰め忘れる**：窓 $[i - K, i)$ は $i < K$ で負の添字に出る。下端を $\max(0, i - K)$ に切り詰める。範囲が空になる $i$ の値も、最小化なら $+\infty$、数え上げなら 0 と決めておく。mod の下で累積和の差が負になる落とし穴は [DP と累積和の落とし穴](../dp/dp-prefix-sum.md#pitfalls)にある。
 - **行列累乗の $n^3$ を忘れる**：段の数が巨大だと行列累乗を思い浮かべるが、計算量は状態数 $n$ の 3 乗に効く。$n = 500$ で $T = 10^{18}$ なら約 $7.5 \times 10^9$ 回で間に合わない。状態を減らすか、漸化式が 1 本なら[線形漸化式の高速化](../math/linear-recurrence-fast.md#vs-matrix)を使う。
 
+## 力試し {#challenge}
+
+<div class="kp-problems" data-role="challenge" markdown>
+
+- [典型90 090. Tenkei90's Last Problem（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_cl)（diff なし）：長さ N の 0 以上の整数の列のうち、どの区間でも（区間の最小値）×（区間の長さ）が K 以下になるものの個数を、998244353 で割った余りで求める。
+
+</div>
+
+??? note "力試しの方針"
+    小課題を順に解くと、高速化の道具を段階的に使うことになる。列の値を棒の高さとみると、条件は「棒の下にできるどの長方形も面積が $K$ 以下」と言い換えられる。
+
+    - 高さの大きい順に「区間の値がすべて $h$ 以上である数え方」を求める区間 DP を作る。区間の位置をずらしても条件は変わらないので、区間の端を状態から外し、（高さ $h$, 長さ $m$）だけを状態に持てばよい。$h \cdot m \le K$ の組だけを考えればよい。
+    - 高さ $h$ を固定すると、長さについての値の列が線形漸化式を満たす。$h = 0$ の段では長さ $N$（$10^9$ まで）の項が要るので、行列累乗では状態が多すぎ、[線形漸化式の高速化](../math/linear-recurrence-fast.md#vs-matrix)（きたまさ法・Bostan-Mori）を使う。
+
 ## 確認問題 {#quiz}
 
 ??? question "確認問題：直前 K 個の最小値"
@@ -173,20 +187,6 @@ $$
 
     ??? success "答え"
         $\mathrm{dp}[i] = \sum_{s=1}^{K} \mathrm{dp}[i-s]$ は、どの $i$ でも同じ線形の遷移である。直前 $K$ 個の値 $(\mathrm{dp}[i-1], \dots, \mathrm{dp}[i-K])$ を状態にすると、1 段進める操作が $K \times K$ の行列になる。行列累乗で $O(K^3 \log N)$、$50^3 \times 60 = 7.5 \times 10^6$ 回で求まる（[DP の遷移を行列にする](../math/matrix-power.md#dp-transition)）。
-
-## 力試し {#challenge}
-
-<div class="kp-problems" data-role="challenge" markdown>
-
-- [典型90 090. Tenkei90's Last Problem（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_cl)（diff なし）：長さ N の 0 以上の整数の列のうち、どの区間でも（区間の最小値）×（区間の長さ）が K 以下になるものの個数を、998244353 で割った余りで求める。
-
-</div>
-
-??? note "方針"
-    小課題を順に解くと、高速化の道具を段階的に使うことになる。列の値を棒の高さとみると、条件は「棒の下にできるどの長方形も面積が $K$ 以下」と言い換えられる。
-
-    - 高さの大きい順に「区間の値がすべて $h$ 以上である数え方」を求める区間 DP を作る。区間の位置をずらしても条件は変わらないので、区間の端を状態から外し、（高さ $h$, 長さ $m$）だけを状態に持てばよい。$h \cdot m \le K$ の組だけを考えればよい。
-    - 高さ $h$ を固定すると、長さについての値の列が線形漸化式を満たす。$h = 0$ の段では長さ $N$（$10^9$ まで）の項が要るので、行列累乗では状態が多すぎ、[線形漸化式の高速化](../math/linear-recurrence-fast.md#vs-matrix)（きたまさ法・Bostan-Mori）を使う。
 
 ## 参考 {#references}
 
