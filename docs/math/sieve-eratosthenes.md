@@ -27,7 +27,7 @@ sections:
   - {title: 篩の変形（異なる素因数の個数を数える）, anchor: variants}
   - {title: メモリの見積もり（10^8 までは bit で持つ）, anchor: memory}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -196,7 +196,7 @@ $N$ は $10^{18}$ と大きいが、$q^3 \le p q^3 \le N$ なので $q \le 10^6$
 - [ABC475 D. Alphametic Prime](https://atcoder.jp/contests/abc475/tasks/abc475_d)（diff 741）：文字列 S の各文字を、同じ文字は同じ数字、異なる文字は異なる数字に置き換えて、先頭が 0 でない素数を作れるか判定する。作れるならその素数を、作れなければ -1 を出力する。
 - [ABC300 D. AABCC](https://atcoder.jp/contests/abc300/tasks/abc300_d)（diff 908）：素数 a < b < c を使って a² × b × c² と書ける N 以下の整数の個数を求める（N ≤ 10^12）。
 - [ABC084 D. 2017-like Number](https://atcoder.jp/contests/abc084/tasks/abc084_d)（diff 980）：l_i ≤ x ≤ r_i を満たす奇数 x のうち、x も (x + 1)/2 も素数であるものの個数を、Q 個のクエリについて答える。
-- [典型90 030. K Factors（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_ad)（diff —）：N 以下の正の整数のうち、異なる素因数を K 個以上もつものの個数を求める（N ≤ 10^7）。
+- [典型90 030. K Factors（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_ad)（diff なし）：N 以下の正の整数のうち、異なる素因数を K 個以上もつものの個数を求める（N ≤ 10^7）。
 
 </div>
 

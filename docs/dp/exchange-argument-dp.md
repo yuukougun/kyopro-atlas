@@ -26,7 +26,7 @@ sections:
   - {title: 比は割らずに掛け算で比べる, anchor: compare-ratios}
   - {title: 大きい順に左右の端へ置く, anchor: place-at-ends, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -184,7 +184,7 @@ $A$ の大きい順に $k$ 人を置いたとき、左に $l$ 人・右に $r$ �
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC X. Tower](https://atcoder.jp/contests/dp/tasks/dp_x)（diff —）：重さ・丈夫さ・価値が決まったブロックを積み、各ブロックの上に載る重さの合計が丈夫さ以下になるようにするときの、価値の和の最大を求める。
+- [EDPC X. Tower](https://atcoder.jp/contests/dp/tasks/dp_x)（diff なし）：重さ・丈夫さ・価値が決まったブロックを積み、各ブロックの上に載る重さの合計が丈夫さ以下になるようにするときの、価値の和の最大を求める。
 
 </div>
 
@@ -202,7 +202,7 @@ $A$ の大きい順に $k$ 人を置いたとき、左に $l$ 人・右に $r$ �
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 011. Gravy Jobs（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_k)（diff —）：締切・かかる日数・報酬が決まった仕事を選んで締切までに終えるときの、報酬の和の最大を求める。
+- [典型90 011. Gravy Jobs（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_k)（diff なし）：締切・かかる日数・報酬が決まった仕事を選んで締切までに終えるときの、報酬の和の最大を求める。
 
 </div>
 

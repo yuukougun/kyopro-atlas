@@ -205,7 +205,7 @@ $\mathrm{dp}[c]$ は「成分 $c$ に入ってから得られる価値の和の�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [PRACTICE2 G. SCC](https://atcoder.jp/contests/practice2/tasks/practice2_g)（diff —）：有向グラフの頂点を、互いに行き来できる頂点の極大の集まりに分け、集まりの間の辺が前から後ろへ向く順に出力する
+- [PRACTICE2 G. SCC](https://atcoder.jp/contests/practice2/tasks/practice2_g)（diff なし）：有向グラフの頂点を、互いに行き来できる頂点の極大の集まりに分け、集まりの間の辺が前から後ろへ向く順に出力する
 
 </div>
 
@@ -218,7 +218,7 @@ ACL の練習用の問題で、`scc_graph` に辺を足して `scc()` を呼び�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 021. Come Back in One Piece（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_u)（diff —）：有向グラフで、互いに行き来できる頂点の組の数を求める
+- [典型90 021. Come Back in One Piece（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_u)（diff なし）：有向グラフで、互いに行き来できる頂点の組の数を求める
 
 </div>
 

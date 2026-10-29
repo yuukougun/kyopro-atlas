@@ -228,8 +228,8 @@ x == y なら edges[x] += 1        # 自己ループ・多重辺もここで数�
 - [ABC177 D. Friends](https://atcoder.jp/contests/abc177/tasks/abc177_d)（diff 732）：友達関係から、どのグループにも友達どうしがいないように分けるときの最小のグループ数を求める。
 - [ABC206 D. KAIBUNsyo](https://atcoder.jp/contests/abc206/tasks/abc206_d)（diff 879）：値を別の値に一括で置き換える操作で、数列を回文にする最小回数を求める。
 - [ABC157 D. Friend Suggestions](https://atcoder.jp/contests/abc157/tasks/abc157_d)（diff 1208）：各人について、同じ成分にいて友達でもブロック相手でもない人の数を答える。
-- [典型90 012. Red Painting（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_l)（diff —）：マスを赤く塗るクエリと、2 マスが赤いマスだけで行き来できるかのクエリを処理する。
-- [PRACTICE2 A. Disjoint Set Union](https://atcoder.jp/contests/practice2/tasks/practice2_a)（diff —）：辺の追加と、2 頂点が連結かの判定のクエリを処理する。
+- [典型90 012. Red Painting（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_l)（diff なし）：マスを赤く塗るクエリと、2 マスが赤いマスだけで行き来できるかのクエリを処理する。
+- [PRACTICE2 A. Disjoint Set Union](https://atcoder.jp/contests/practice2/tasks/practice2_a)（diff なし）：辺の追加と、2 頂点が連結かの判定のクエリを処理する。
 
 </div>
 

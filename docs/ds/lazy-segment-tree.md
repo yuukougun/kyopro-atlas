@@ -31,7 +31,7 @@ sections:
   - {title: 双対セグメント木（区間作用・一点取得）, anchor: dual-segment-tree}
   - {title: 保つ性質と push の手順（自作するとき）, anchor: invariants, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -199,7 +199,7 @@ ACL の 3 つの関数の意味と、引数の順序は次のとおりである�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [PRACTICE2 K. Range Affine Range Sum](https://atcoder.jp/contests/practice2/tasks/practice2_k)（diff —）：区間に x → bx + c を作用させる操作と、区間和の質問を処理する。
+- [PRACTICE2 K. Range Affine Range Sum](https://atcoder.jp/contests/practice2/tasks/practice2_k)（diff なし）：区間に x → bx + c を作用させる操作と、区間和の質問を処理する。
 
 </div>
 
@@ -251,7 +251,7 @@ A を $+1$、B を $-1$ に置き換えて累積和を取ると、部分文字�
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC340 E. Mancala 2](https://atcoder.jp/contests/abc340/tasks/abc340_e)（diff 1157）：円環に並ぶ箱の玉を取り出して順に配る操作を繰り返した後の、各箱の玉の数を求める。
-- [典型90 029. Long Bricks（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_ac)（diff —）：区間にレンガを順に積んでいくとき、各レンガが置かれる高さを求める。
+- [典型90 029. Long Bricks（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_ac)（diff なし）：区間にレンガを順に積んでいくとき、各レンガが置かれる高さを求める。
 - [ABC455 F. Merge Slimes 2](https://atcoder.jp/contests/abc455/tasks/abc455_f)（diff 1549）：最初はすべて 0 の列の区間に値を加えるたびに、その区間の値を重さとするスライムを、重さ x と y を合わせるとコスト xy がかかる規則で 1 つにまとめる最小のコストを mod で答える。
 - [ABL E. Replace Digits](https://atcoder.jp/contests/abl/tasks/abl_e)（diff 1706）：数字列の区間を 1 種類の数字で上書きする操作のたびに、整数としての値の mod を答える。
 - [ABC179 F. Simplified Reversi](https://atcoder.jp/contests/abc179/tasks/abc179_f)（diff 1713）：盤の端から白石を置く操作を繰り返した後に残る黒石の数を求める。

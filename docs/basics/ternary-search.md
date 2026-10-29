@@ -27,7 +27,7 @@ sections:
   - {title: 黄金分割探索, anchor: golden-section}
   - {title: 増分が単調なら 1 単位ずつ貪欲に配る, anchor: marginal-greedy, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -225,7 +225,7 @@ $$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [ARC054 B. ムーアの法則](https://atcoder.jp/contests/arc054/tasks/arc054_b)（diff 1269）：x 年後に計算を始めると合計 P/2^(x/1.5) + x 年かかるとき、最短の年数を求める。
+- [ARC054 B. ムーアの法則](https://atcoder.jp/contests/arc054/tasks/arc054_b)（diff 1269・参考値）：x 年後に計算を始めると合計 P/2^(x/1.5) + x 年かかるとき、最短の年数を求める。
 
 </div>
 

@@ -28,7 +28,7 @@ sections:
   - {title: 木の上のゲーム, anchor: tree, level: 黄}
   - {title: 答えを決め打ちして勝敗に直す, anchor: binary-search, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -193,7 +193,7 @@ v(u) = min over 子 c ( v(c) )   … 深さが奇数（後手の手番）
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC L. Deque](https://atcoder.jp/contests/dp/tasks/dp_l)（diff —）：列の両端のどちらかから交互に 1 つずつ取り、先手は (先手の和 − 後手の和) を最大化、後手は最小化するときの値を求める。
+- [EDPC L. Deque](https://atcoder.jp/contests/dp/tasks/dp_l)（diff なし）：列の両端のどちらかから交互に 1 つずつ取り、先手は (先手の和 − 後手の和) を最大化、後手は最小化するときの値を求める。
 
 </div>
 
@@ -231,10 +231,10 @@ v(u) = min over 子 c ( v(c) )   … 深さが奇数（後手の手番）
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [鉄則本 A35. Game 4](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_ai)（diff —）：ピラミッドの頂上の駒を、2 人が交互に左下か右下へ動かし、最下段の値を一方は最大化、他方は最小化するときの値を求める。
-- [TDPC B. ゲーム](https://atcoder.jp/contests/tdpc/tasks/tdpc_game)（diff —）：2 つの山の上から交互に 1 つずつ取り、両者が自分の得る価値の合計を最大にするとき、先手が得る価値の合計を求める。
+- [鉄則本 A35. Game 4](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_ai)（diff なし）：ピラミッドの頂上の駒を、2 人が交互に左下か右下へ動かし、最下段の値を一方は最大化、他方は最小化するときの値を求める。
+- [TDPC B. ゲーム](https://atcoder.jp/contests/tdpc/tasks/tdpc_game)（diff なし）：2 つの山の上から交互に 1 つずつ取り、両者が自分の得る価値の合計を最大にするとき、先手が得る価値の合計を求める。
 - [ABC349 E. Weighted Tic-Tac-Toe](https://atcoder.jp/contests/abc349/tasks/abc349_e)（diff 1464）：3×3 のマスに得点が書かれ、交互に塗って得点を取り合う三目並べで、両者が最適に動いたときに勝つのはどちらかを求める。
-- [ABC025 C. 双子と○×ゲーム](https://atcoder.jp/contests/abc025/tasks/abc025_c)（diff 1640）：3×3 のマスを 2 人が交互に埋めたあと、隣り合うマスの組ごとの得点の決まり方のもとで、両者が自分の得点を最大化するときの両者の得点を求める。
+- [ABC025 C. 双子と○×ゲーム](https://atcoder.jp/contests/abc025/tasks/abc025_c)（diff 1640・参考値）：3×3 のマスを 2 人が交互に埋めたあと、隣り合うマスの組ごとの得点の決まり方のもとで、両者が自分の得点を最大化するときの両者の得点を求める。
 
 </div>
 

@@ -24,7 +24,7 @@ sections:
   - {title: 数学・グラフと木・文字列と幾何・実装, anchor: domains}
   - {title: 表記の正規形と別名の対応表, anchor: canonical-forms}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -132,7 +132,7 @@ AtCoder の定期コンテストの種類で、ABC（AtCoder Beginner Contest）
 
 ### difficulty {#difficulty}
 
-問題の難しさを、その問題を解ける確率がちょうど 50% になるレートで表した推定値である（AtCoder Problems が出す）。本教材の問題の行の「diff」はこの値で、値のない問題（典型90 など）は「diff —」と書く。推定の式は[difficulty の定義](../start/atcoder-system.md#difficulty)で扱う。
+問題の難しさを、その問題を解ける確率がちょうど 50% になるレートで表した推定値である（AtCoder Problems が出す）。本教材の問題の行の「diff」はこの値で、値のない問題（典型90 など）は「diff なし」と書く。[Rated](#rated) のコンテストが始まる前（2016 年 7 月まで）の古いコンテストの値は、AtCoder Problems が試験的に出す参考値なので「diff 1856・参考値」と書く。推定の式と参考値になる理由は[difficulty の定義](../start/atcoder-system.md#difficulty)で扱う。
 
 ### AtCoder Problems {#atcoder-problems}
 

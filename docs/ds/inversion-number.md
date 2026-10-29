@@ -167,7 +167,7 @@ updated: 2026-10-29
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [CHOKUDAI_S001 J. 転倒数](https://atcoder.jp/contests/chokudai_S001/tasks/chokudai_S001_j)（diff —）：数列を隣接交換でソートするときの交換回数を求める。
+- [CHOKUDAI_S001 J. 転倒数](https://atcoder.jp/contests/chokudai_S001/tasks/chokudai_S001_j)（diff なし）：数列を隣接交換でソートするときの交換回数を求める。
 
 </div>
 

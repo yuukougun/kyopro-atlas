@@ -128,7 +128,7 @@ $x$ と $y$ が同じ集合かどうかは、時刻について[単調](../guide
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [CODE-THANKS-FESTIVAL-2017 H. Union Sets](https://atcoder.jp/contests/code-thanks-festival-2017/tasks/code_thanks_festival_2017_h)（diff —）：集合の併合を順に行う列に対し、2 要素が初めて同じ集合になった操作の番号を各クエリで答える。
+- [CODE-THANKS-FESTIVAL-2017 H. Union Sets](https://atcoder.jp/contests/code-thanks-festival-2017/tasks/code_thanks_festival_2017_h)（diff なし）：集合の併合を順に行う列に対し、2 要素が初めて同じ集合になった操作の番号を各クエリで答える。
 
 </div>
 

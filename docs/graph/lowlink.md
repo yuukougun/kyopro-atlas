@@ -232,7 +232,7 @@ ABC で lowlink をそのまま使う問題は少ない。橋と関節点の実�
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [ARC039 D. 旅行会社高橋君](https://atcoder.jp/contests/arc039/tasks/arc039_d)（diff 2550）：無向グラフで、頂点 A から B を経て C へ、同じ橋を 2 度渡らずに行けるかをクエリごとに答える。
+- [ARC039 D. 旅行会社高橋君](https://atcoder.jp/contests/arc039/tasks/arc039_d)（diff 2550・参考値）：無向グラフで、頂点 A から B を経て C へ、同じ橋を 2 度渡らずに行けるかをクエリごとに答える。
 
 </div>
 

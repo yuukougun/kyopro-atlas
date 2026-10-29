@@ -14,8 +14,11 @@
 
 読める行の形（囲みの中の1行）:
   - [ABC300 E. Dice Product 3](https://atcoder.jp/contests/abc300/tasks/abc300_e)（diff 1354）：要約   ← 正しい形
+  - [なんでも](https://atcoder.jp/contests/abc300/tasks/abc300_e)（diff —）：要約                     ← diff・label が違う
   - [なんでも](https://atcoder.jp/contests/abc300/tasks/abc300_e)：要約                               ← diff がない・label が違う
   - abc300_e：要約                                                                                    ← 問題 ID だけ（書くときの近道）
+diff は台帳から作る（check_pages.py の diff_text。#5・#76）：値は（diff 1354）、台帳で参考値（experimental: true）のものは
+（diff 1856・参考値）、値のないものは（diff なし）。前の形（（diff —）や（diff 1856（参考値））など）の行も読んで直す。
 問題 ID は URL の tasks/<ID> か、行頭の ID から読む。台帳で確認済みでない問題も行は作り直すが、check_pages.py がエラーにする。
 フェンス（```）の中は見ない。共通の部品は check_pages.py にある。
 """
@@ -30,8 +33,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import check_pages as cp  # noqa: E402  （共通の部品）
 
 URL_ID_RE = re.compile(r"https?://atcoder\.jp/contests/[^/\s)]+/tasks/(?P<id>[A-Za-z0-9_]+)")
-LINK_TAIL_RE = re.compile(r"^- \[(?:[^\[\]]|\[[^\[\]]*\])*\]\([^)]*\)\s*(?:（diff[^）]*）)?\s*[：:]\s*(?P<summary>.+)$")
-BARE_RE = re.compile(r"^- (?P<id>[a-z][A-Za-z0-9_]*_[A-Za-z0-9]+)\s*(?:（diff[^）]*）)?\s*[：:]\s*(?P<summary>.+)$")
+# 「（diff …）」の部分。どの書き方でも読む（中の 1 段のかっこ「（diff 1856（参考値））」も）
+DIFF_PAREN = r"（diff(?:[^（）]|（[^（）]*）)*）"
+LINK_TAIL_RE = re.compile(rf"^- \[(?:[^\[\]]|\[[^\[\]]*\])*\]\([^)]*\)\s*(?:{DIFF_PAREN})?\s*[：:]\s*(?P<summary>.+)$")
+BARE_RE = re.compile(rf"^- (?P<id>[a-z][A-Za-z0-9_]*_[A-Za-z0-9]+)\s*(?:{DIFF_PAREN})?\s*[：:]\s*(?P<summary>.+)$")
 
 
 def fix_text(text: str, rel: str, ledger: dict[str, dict]) -> tuple[str, list[str], list[str]]:

@@ -278,7 +278,8 @@ cases:
 </div>
 ```
 
-- label は「コンテストの表示名 記号. 題名」（ABC340 E. Mancala 2、典型90 001. Yokan Party（★4）、EDPC A. Frog 1）。label・URL・diff は台帳の値にする（difficulty のない問題は `diff —`）。行を `- abc340_e：要約` と書いて `python3 tools/fix_problems.py --page <id>` で埋めてもよい
+- label は「コンテストの表示名 記号. 題名」（ABC340 E. Mancala 2、典型90 001. Yokan Party（★4）、EDPC A. Frog 1）。label・URL・diff は台帳の値にする（difficulty のない問題は `diff なし`）。行を `- abc340_e：要約` と書いて `python3 tools/fix_problems.py --page <id>` で埋めてもよい
+- difficulty は、ない問題を「（diff なし）」、AtCoder Problems が参考値として出す問題（台帳の `experimental: true`）を「（diff 1856・参考値）」と書く。表の diff の列では、ない値を「—」と書く（工程11、#5・#76）。行は fix_problems.py が台帳から作るので手で書かない
 - 例題は 1 問ずつ `### 例題：ABC382 F. Falling Bars {#abc382_f}`（anchor は問題 ID）を立て、その下に 1 行だけの囲み（`data-role="example"`）、続けて方針を書き、解法の詳細は `??? note "解法の詳細"` に入れる。thinking のページは方針も折りたたむ。練習の方針は一覧の後の折りたたみに書く（一覧で解き方が見えないように）
 - 数の目安：例題 1〜3（基礎は 1、発展は 0〜2、thinking は 2〜4、patterns は 0〜1）、練習 2〜6（patterns は 0〜3）、力試し 0〜3、hub は合わせて 0〜3
 - 例題は 1 問につき 1 ページ（その手法の持ち主）で、ほかのページでは練習か本文の参照にする。catalog で representative の例題は、手法をそのまま使う代表として扱う。並びは易しい順

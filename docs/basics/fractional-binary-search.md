@@ -32,7 +32,7 @@ sections:
   - {title: 実数の精度と分母 0, anchor: precision}
   - {title: Dinkelbach 法, anchor: dinkelbach, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -272,7 +272,7 @@ o を 1、x を 0 とすれば、割合は区間の平均である。平均 $\ge
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [ABC034 D. 食塩水](https://atcoder.jp/contests/abc034/tasks/abc034_d)（diff 1549）：N 個の食塩水から K 個を選んで混ぜたときの濃度の最大値を求める。
+- [ABC034 D. 食塩水](https://atcoder.jp/contests/abc034/tasks/abc034_d)（diff 1549・参考値）：N 個の食塩水から K 個を選んで混ぜたときの濃度の最大値を求める。
 - [ABC294 F. Sugar Water 2](https://atcoder.jp/contests/abc294/tasks/abc294_f)（diff 1891）：砂糖水を 1 つずつ選んで混ぜてできる濃度のうち、大きい方から K 番目を求める。
 - [ABC236 E. Average and Median](https://atcoder.jp/contests/abc236/tasks/abc236_e)（diff 1893）：隣り合う 2 つの少なくとも一方を選ぶとき、選んだ値の平均の最大値と中央値の最大値をそれぞれ求める。
 
@@ -288,7 +288,7 @@ o を 1、x を 0 とすれば、割合は区間の平均である。平均 $\ge
 <div class="kp-problems" data-role="challenge" markdown>
 
 - [ARC101 D. Median of Medians](https://atcoder.jp/contests/arc101/tasks/arc101_b)（diff 2073）：数列のすべての区間の中央値を集めた列の中央値を求める。
-- [ARC026 D. 道を直すお仕事](https://atcoder.jp/contests/arc026/tasks/arc026_4)（diff 2297）：連結を保つように辺を選ぶとき、（コストの和）/（長さの和）の最小値を求める。
+- [ARC026 D. 道を直すお仕事](https://atcoder.jp/contests/arc026/tasks/arc026_4)（diff 2297・参考値）：連結を保つように辺を選ぶとき、（コストの和）/（長さの和）の最小値を求める。
 
 </div>
 

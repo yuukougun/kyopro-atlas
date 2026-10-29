@@ -25,7 +25,7 @@ sections:
   - {title: 数え方の型（ソート＋二分探索・尺取り、符号で場合分け、包除）, anchor: counting-patterns}
   - {title: 上位 M 個の和（同じ値の分の調整）, anchor: top-m-sum}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -166,7 +166,7 @@ $N \le 2 \times 10^5$ で組は約 $2 \times 10^{10}$ 個あり、並べられ�
 
 - [ABC205 D. Kth Excluded](https://atcoder.jp/contests/abc205/tasks/abc205_d)（diff 713）：数列に含まれない正の整数のうち、小さい方から K 番目を答えるクエリに答える。
 - [ABC364 D. K-th Nearest](https://atcoder.jp/contests/abc364/tasks/abc364_d)（diff 1136）：数直線上の N 点と Q 個の質問点について、質問点から K 番目に近い点までの距離を答える。
-- [ARC037 C. 億マス計算](https://atcoder.jp/contests/arc037/tasks/arc037_c)（diff 1824）：a_i × b_j の N^2 個の値のうち、小さい方から K 番目を求める。
+- [ARC037 C. 億マス計算](https://atcoder.jp/contests/arc037/tasks/arc037_c)（diff 1824・参考値）：a_i × b_j の N^2 個の値のうち、小さい方から K 番目を求める。
 
 </div>
 

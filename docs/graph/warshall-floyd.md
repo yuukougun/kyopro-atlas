@@ -27,7 +27,7 @@ sections:
   - {title: 距離以外の値を同じ形で求める（到達可能性・ボトルネック・2 つの基準）, anchor: beyond-distance}
   - {title: 迂回できる辺は不要, anchor: redundant-edges, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -253,7 +253,7 @@ $d$ はすべての辺を残したグラフでの距離である。条件を満�
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC073 D. joisino's travel](https://atcoder.jp/contests/abc073/tasks/abc073_d)（diff 1345）：R 個（8 以下）の町を好きな順に訪れるとき、移動距離の総和の最小値を求める
-- [典型90 087. Chokudai's Demand（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_ci)（diff —）：長さが X の辺を含むグラフで、最短距離が P 以下の頂点の組がちょうど K 組になる X の個数を求める
+- [典型90 087. Chokudai's Demand（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_ci)（diff なし）：長さが X の辺を含むグラフで、最短距離が P 以下の頂点の組がちょうど K 組になる X の個数を求める
 - [ABC243 E. Edge Deletion](https://atcoder.jp/contests/abc243/tasks/abc243_e)（diff 1637）：連結な重み付きグラフで、全点対の距離を変えずに消せる辺の最大数を求める
 - [ABC143 E. Travel by Car](https://atcoder.jp/contests/abc143/tasks/abc143_e)（diff 1695）：燃料タンクの容量が L の車で町を移動するとき、各クエリの 2 町間の最小の給油回数を求める
 

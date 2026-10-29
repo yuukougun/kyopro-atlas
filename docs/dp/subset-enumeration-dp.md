@@ -176,7 +176,7 @@ $\mathrm{dp}[j][S]$ は $\lvert S \rvert < j$ のとき使えない。これを�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC U. Grouping](https://atcoder.jp/contests/dp/tasks/dp_u)（diff —）：N 羽のうさぎをいくつかのグループに分け、同じグループになった組ごとの得点の和を最大化する。
+- [EDPC U. Grouping](https://atcoder.jp/contests/dp/tasks/dp_u)（diff なし）：N 羽のうさぎをいくつかのグループに分け、同じグループになった組ごとの得点の和を最大化する。
 
 </div>
 
@@ -209,7 +209,7 @@ $\mathrm{dp}[j][S]$ は $\lvert S \rvert < j$ のとき使えない。これを�
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC310 D. Peaceful Teams](https://atcoder.jp/contests/abc310/tasks/abc310_d)（diff 1368）：N ≤ 10 人を T 個のチームに分ける方法のうち、仲の悪い組が同じチームにならないものの数を求める。
-- [典型90 045. Simple Grouping（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_as)（diff —）：平面上の N 点を K 個のグループに分け、各グループ内の 2 点間の距離の最大の、全グループでの最大を最小化する。
+- [典型90 045. Simple Grouping（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_as)（diff なし）：平面上の N 点を K 個のグループに分け、各グループ内の 2 点間の距離の最大の、全グループでの最大を最小化する。
 - [ABC332 E. Lucky bag](https://atcoder.jp/contests/abc332/tasks/abc332_e)（diff 1883）：N ≤ 15 個の品物を D 個の袋に分け（空の袋も許す）、袋ごとの重さの分散を最小にする。
 
 </div>

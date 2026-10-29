@@ -30,7 +30,7 @@ sections:
   - {title: 反対方向に最も近い点の二分探索, anchor: opposite-direction, level: 青}
   - {title: 角度の区間のスケジューリング・連続する範囲だけを試す最適化, anchor: angular-intervals, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -223,7 +223,7 @@ $$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 009. Three Point Angle（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_i)（diff —）：N 点から 3 点 A, B, C を選ぶときの ∠ABC の最大を求める。
+- [典型90 009. Three Point Angle（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_i)（diff なし）：N 点から 3 点 A, B, C を選ぶときの ∠ABC の最大を求める。
 
 </div>
 

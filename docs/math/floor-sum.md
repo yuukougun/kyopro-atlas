@@ -30,7 +30,7 @@ sections:
   - {title: 'ACL の floor_sum（引数の範囲と負の a, b）', anchor: acl}
   - {title: 応用の型：bit ごとの popcount・一次式の mod の積, anchor: applications, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -198,7 +198,7 @@ $$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [PRACTICE2 C. Floor Sum](https://atcoder.jp/contests/practice2/tasks/practice2_c)（diff —）：T 個のケースそれぞれで Σ_{i=0}^{N−1} ⌊(A × i + B)/M⌋ を求める。
+- [PRACTICE2 C. Floor Sum](https://atcoder.jp/contests/practice2/tasks/practice2_c)（diff なし）：T 個のケースそれぞれで Σ_{i=0}^{N−1} ⌊(A × i + B)/M⌋ を求める。
 
 </div>
 

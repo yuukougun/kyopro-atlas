@@ -22,7 +22,8 @@
   参照          prerequisites・related の id が docs にも catalog（planning/catalog/*.yaml）にもない、
                 id#anchor の anchor が相手の sections にない、前提の循環
                 （catalog にだけある id は、試作の間はまだページがないので「未作成のページへの参照」の警告にし、anchor は見ない）
-  問題の一覧    囲みの形、1行の書式（interfaces.md §3 の正規表現）、台帳にない・台帳で確認済みでない、
+  問題の一覧    囲みの形、1行の書式（interfaces.md §3 の正規表現。difficulty は「（diff 1354）」、台帳で参考値の
+                ものは「（diff 1856・参考値）」、値のないものは「（diff なし）」。#5・#76）、台帳にない・台帳で確認済みでない、
                 label・URL・difficulty が台帳と違う（tools/fix_problems.py で直せる）、囲みの外の問題リンク
   本文          要点の囲み（!!! abstract "要点"）が本文の最初にない、```cpp に取り込み（--8<--）以外を書いている、
                 取り込むコード片のファイル・範囲（[start:名前]）がない、
@@ -110,10 +111,16 @@ PLACEHOLDER = "（執筆時に書く）"          # 骨格の要点の計算量�
 ABSTRACT_ITEMS = ["何ができるか", "いつ使うか", "計算量", "前提"]
 
 ID_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
-# interfaces.md §3 の1行の形（そのまま）。label は題名の 1 段の角かっこを許す（abc411_e「E [max]」）
+# 問題の行の difficulty の書き方（#5・#76。diff_text）：台帳の値は「diff 1354」、台帳で参考値（experimental: true。
+# AtCoder Problems の is_experimental）のものは「diff 1856・参考値」、値のないものは「diff なし」。
+# 表（問題集の表・最近の ABC の表）の diff の列は gen_site.py が書き、値がなければ「—」のまま
+DIFF_NONE = "なし"
+DIFF_EXPERIMENTAL = "参考値"
+OLD_DIFF_NONE = "（diff —）"              # #5 より前の「値のない問題」の書き方。書式の指摘で今の書き方を案内する
+# interfaces.md §3 の1行の形。label は題名の 1 段の角かっこを許す（abc411_e「E [max]」）
 PROBLEM_LINE_RE = re.compile(
     r"^- \[(?P<label>(?:[^\[\]]|\[[^\[\]]*\])+)\]\((?P<url>https://atcoder\.jp/contests/(?P<contest>[^/]+)/tasks/(?P<id>[A-Za-z0-9_]+))\)"
-    r"（diff (?P<diff>\d+|—)）：(?P<summary>.+)$")
+    rf"（diff (?P<diff>\d+(?:・{DIFF_EXPERIMENTAL})?|{DIFF_NONE})）：(?P<summary>.+)$")
 BLOCK_OPEN_RE = re.compile(r'^<div class="kp-problems" data-role="(?P<role>[^"]*)" markdown(?:="(?:1|block)")?>$')
 BLOCK_CLOSE_RE = re.compile(r"^</div>$")
 TASK_LINK_RE = re.compile(r"atcoder\.jp/contests/[^/\s)\"'>]+/tasks/[A-Za-z0-9_]+")
@@ -246,8 +253,11 @@ def problem_url(e: dict) -> str:
 
 
 def diff_text(e: dict) -> str:
+    """問題の行の「（diff …）」の …（#5・#76）：1354、台帳で参考値なら 1856・参考値、difficulty がなければ なし。"""
     d = e.get("difficulty")
-    return str(d) if isinstance(d, int) and not isinstance(d, bool) else "—"
+    if not isinstance(d, int) or isinstance(d, bool):
+        return DIFF_NONE
+    return f"{d}・{DIFF_EXPERIMENTAL}" if e.get("experimental") is True else str(d)
 
 
 def problem_line(e: dict, summary: str) -> str:
@@ -314,7 +324,7 @@ class ProblemRef:
     label: str
     url: str
     contest: str
-    diff: str
+    diff: str          # 「（diff …）」の …。diff_text と同じ形（1354、1856・参考値、なし）
     summary: str
 
 
@@ -423,8 +433,13 @@ class Page:
             line = raw[len(indent):] if raw.startswith(indent) else raw.lstrip()
             m = PROBLEM_LINE_RE.match(line.rstrip())
             if not m:
-                self.problem_issues.append(Issue(no, "問題の一覧の行の書式が違う（- [ABC300 E. 題名](https://atcoder.jp/"
-                                                     f"contests/abc300/tasks/abc300_e)（diff 1882）：要約）: {s[:80]}"))
+                if OLD_DIFF_NONE in line:
+                    why = (f"difficulty のない問題は{OLD_DIFF_NONE}ではなく（diff {DIFF_NONE}）と書く。"
+                           "tools/fix_problems.py で直せる")
+                else:
+                    why = ("- [ABC300 E. 題名](https://atcoder.jp/contests/abc300/tasks/abc300_e)（diff 1882）：要約。"
+                           f"diff は台帳から作り、参考値は（diff 1856・{DIFF_EXPERIMENTAL}）、値がなければ（diff {DIFF_NONE}）")
+                self.problem_issues.append(Issue(no, f"問題の一覧の行の書式が違う（{why}）: {s[:80]}"))
                 continue
             self.problems.append(ProblemRef(m.group("id"), role, no, line.rstrip(), m.group("label"), m.group("url"),
                                             m.group("contest"), m.group("diff"), m.group("summary")))
@@ -709,7 +724,7 @@ def check_body_common(p: Page, rep: Report, ledger: dict[str, dict], snippets: P
         if q.url != problem_url(e):
             bad.append(f"URL（{problem_url(e)}）")
         if q.diff != diff_text(e):
-            bad.append(f"diff（台帳は {diff_text(e)}）")
+            bad.append(f"diff（台帳から作ると diff {diff_text(e)}）")
         if bad:
             rep.error("台帳と違う（fix_problems.py で直せる）", p.rel, f"{where}:{q.line}: {q.id} の " + "・".join(bad))
     seen = collections.Counter(q.id for q in p.problems)

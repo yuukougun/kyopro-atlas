@@ -172,7 +172,7 @@ K が 5 程度に小さいなら、multiset の `lower_bound` からイテレー
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC241 D. Sequence Query](https://atcoder.jp/contests/abc241/tasks/abc241_d)（diff 1177）：数の追加と、x 以下（以上）の中で大きい（小さい）方から K 番目の値の質問を処理する。
-- [ARC033 C. データ構造](https://atcoder.jp/contests/arc033/tasks/arc033_3)（diff 1641）：数の集合への追加と、小さい方から x 番目の数を答えて削除するクエリを処理する。
+- [ARC033 C. データ構造](https://atcoder.jp/contests/arc033/tasks/arc033_3)（diff 1641・参考値）：数の集合への追加と、小さい方から x 番目の数を答えて削除するクエリを処理する。
 
 </div>
 

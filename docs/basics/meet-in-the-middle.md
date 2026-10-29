@@ -26,7 +26,7 @@ sections:
   - {title: 「片側を全探索して残りは貪欲」との違い, anchor: vs-greedy}
   - {title: 値の範囲が小さければナップサック DP, anchor: vs-knapsack}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -179,7 +179,7 @@ $T$ と各値が $10^9$ まであるので、和を添字にした DP は使え�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 051. Typical Shop（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_ay)（diff —）：N ≤ 40 個の品物からちょうど K 個を選び、合計が P 以下になる選び方の数を求める。
+- [典型90 051. Typical Shop（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_ay)（diff なし）：N ≤ 40 個の品物からちょうど K 個を選び、合計が P 以下になる選び方の数を求める。
 
 </div>
 
