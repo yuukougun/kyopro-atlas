@@ -8,7 +8,7 @@ order: 10
 level: null
 kind: [案内]
 prerequisites: []
-related: [reverse-index-signs, reverse-index-constraints, term-index, knowledge-map, roadmap, notation, atcoder-system, practice-method, glossary, contest-strategy#ai-rules, problem-index, study-list]
+related: [reverse-index-signs, reverse-index-constraints, term-index, knowledge-map, roadmap, notation, atcoder-system, practice-method, glossary, contest-strategy#ai-rules, problem-index, study-list, ai-and-sources]
 summary: 解けなかった ABC の問題から、逆引き辞典 → ページ冒頭の要点 → 前提の順に教材を引ける。レベルの意味、進捗の記録と退避、claude.ai での解説の頼み方も示す。
 complexity: null
 signs: []
@@ -258,7 +258,7 @@ flowchart TD
 
 1 つの問題は、1 つのページでだけ例題になる。ほかのページでは練習か本文の参照になるので、例題の方針はその問題を例題にしたページで読む。問題の並びは易しい順である。
 
-載せた問題は、どれも実在と題名・difficulty を AtCoder Problems の公開データで確かめ、問いと解き方を第三者の解説で確かめている。各行の先頭には「解いた」のチェック欄が付く（[進捗の記録](#progress)）。
+載せた問題は、どれも実在と題名・difficulty を AtCoder Problems の公開データで確かめ、問いと解き方を第三者や出題者が公開している解説などで確かめている（[出典と AI 利用の方針](ai-and-sources.md#citations)）。各行の先頭には「解いた」のチェック欄が付く（[進捗の記録](#progress)）。
 
 ## ページの段階と「準備中」の帯 {#stub}
 
@@ -269,9 +269,9 @@ flowchart TD
 | 準備中 | 骨組みだけで、本文はまだない。ページの上に「準備中」の帯も出る |
 | 下書き | 本文を書いたが、まだ検証していない |
 | 検証済み | 書いた担当とは別の担当が、事実（問題・計算量・定理）・コード・図・説明の分かりやすさを確かめ、見つかった誤りを直した |
-| 完成 | 検証済みのページに、作者が目を通して確かめた |
+| 完成 | 執筆・別の担当の検証・Issue の対応を一通り終え、作者が公開してよいとした。作者がすべての記述を確かめたわけではない |
 
-検証済みのページは、作者が目を通したものから完成にしていく。検証済みでも誤りが残ることはあるので、見つけたときは[誤りの報告](#report)の手順で知らせる。更新日は、そのページの中身を最後に直した日である。
+検証済みのページは、執筆・検証・Issue の対応が一通り終わったところで完成にする（確かめ方は[出典と AI 利用の方針](ai-and-sources.md#ai-writing)）。検証済みや完成のページでも誤りが残ることはあるので、見つけたときは[誤りの報告](#report)の手順で知らせる。更新日は、そのページの中身を最後に直した日である。
 
 いまは、すべてのページに本文がある。ページを新しく足すときは、逆引き辞典・知識マップ・索引が全体で動くように、本文より先に骨組みだけを公開することがある。そのページには「準備中」の帯が出る。
 
@@ -286,6 +286,8 @@ flowchart TD
 3. 画面の下のボタンで送る。
 
 Issue は公開され、誰でも読める。問題文や解説の文章は写さず（ほかの人の文章の転載になる）、問題は問題 ID（`abc340_e` など）で示す。報告を受けて直したページは、更新日が新しくなる。
+
+自分の記事が写されている・参考の行が違うなど、出典についての申し出も同じように Issue で受け付ける（[出典と AI 利用の方針](ai-and-sources.md#contact)）。
 
 ## 進捗の記録（解いた・理解した） {#progress}
 

@@ -4,7 +4,7 @@
 下のファイルを手を加えずに写した。版を上げるときはディレクトリ名ごと替え、
 mkdocs.yml と assets/js/map.js の版の文字列も直す。
 
-katex-0.16.47/  (MIT)
+katex-0.16.47/  (MIT。fonts/ は SIL Open Font License 1.1。ライセンスの表示は各フォントのファイルの中にある)
   https://registry.npmjs.org/katex/-/katex-0.16.47.tgz
   sha512-Eeo8Ys1doU1z+x8AZsPpQu+p/QcZBI5PeOo7QGQdy2x2m0MU/hYagBbGOmXwr5KVbEfVuWv9LpnQWeehogurjg==
   dist/katex.min.js, dist/katex.min.css, dist/fonts/*.woff2（woff・ttf は入れない）, LICENSE

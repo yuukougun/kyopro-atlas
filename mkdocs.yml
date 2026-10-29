@@ -13,6 +13,7 @@ site_description: AtCoder で黄色（2000）を目指す人のための、辞�
 site_url: https://yuukougun.github.io/kyopro-atlas/
 repo_url: https://github.com/yuukougun/kyopro-atlas
 repo_name: yuukougun/kyopro-atlas
+copyright: '&copy; 2026 yuukougun ・ 本文と図は CC BY 4.0、コードは MIT ライセンス（<a href="https://yuukougun.github.io/kyopro-atlas/start/ai-and-sources/#license">ライセンスの説明</a>）'
 edit_uri: edit/main/docs/
 use_directory_urls: true
 
