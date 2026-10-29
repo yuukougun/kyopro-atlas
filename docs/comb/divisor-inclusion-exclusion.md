@@ -130,6 +130,9 @@ $f$ がすべて求まれば、gcd で決まる量の総和はどれも $\sum_g 
 --8<-- "divisor-inclusion-exclusion/subset-gcd.cpp:core"
 ```
 
+完全なプログラム：[`subset-gcd.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/divisor-inclusion-exclusion/subset-gcd.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 $c$ を集めるループと $f$ を決めるループを 1 つにまとめているが、どちらも $g$ の倍数をたどるので、合わせて $O(M \log M + M \log N)$（$N$ は数列の長さ）である。組 $i < j$ だけを数える同じ形のコードは、[倍数の箱を後ろから決める](../math/harmonic-sum.md#decide-from-back)にある。
 
 !!! tip "gcd の総和は φ でも書ける"
@@ -170,6 +173,9 @@ $2^{60} > 10^{18}$ なので指数は 59 までで足りる（下のコードは
 ```cpp
 --8<-- "divisor-inclusion-exclusion/perfect-powers.cpp:core"
 ```
+
+完全なプログラム：[`perfect-powers.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/divisor-inclusion-exclusion/perfect-powers.cpp)（GitHub）
+{ .kp-code-src }
 
 指数 3 以上を列挙して平方数と重複を除く方法は[累乗数の数え上げ](../math/integer-root.md#perfect-powers)にある。列挙の方法はソートに $O(N^{1/3} \log N)$ かかるが、約数包除なら $K$ 乗根を 60 回ほど求めるだけで済む。
 

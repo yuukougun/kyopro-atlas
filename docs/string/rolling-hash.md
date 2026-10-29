@@ -79,6 +79,9 @@ $$
 --8<-- "rolling-hash/substring-hash.cpp:core"
 ```
 
+完全なプログラム：[`substring-hash.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rolling-hash/substring-hash.cpp)（GitHub）
+{ .kp-code-src }
+
 2 つの部分文字列の一致は「長さが等しく、ハッシュが等しい」で判定する。ハッシュが違えば文字列は必ず違う。ハッシュが等しくても文字列が違う（衝突する）ことはありうるが、その確率は次の節で見るとおり十分に小さくできる。
 
 ??? question "確認問題：なぜ B^(r−l) を掛けるのか"
@@ -143,6 +146,9 @@ $$
 --8<-- "rolling-hash/substring-hash.cpp:usage"
 ```
 
+完全なプログラム：[`substring-hash.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rolling-hash/substring-hash.cpp)（GitHub）
+{ .kp-code-src }
+
 - 前向きと後ろ向きは同じ $B$ で作る（$B$ を大域の定数にしておけば自然にそうなる）
 - 添字の対応 $[l, r) \to [N - r, N - l)$ は、長さ 1 の区間 $[i, i + 1) \to [N - 1 - i, N - i)$ で確かめると間違えにくい
 - 回文判定だけが目的で更新がないなら、決定的な [Manacher](../string/palindrome.md#manacher) でも同じことが $O(N)$ の前処理でできる
@@ -160,6 +166,9 @@ $$
 ```cpp
 --8<-- "rolling-hash/longest-repeat.cpp:core"
 ```
+
+完全なプログラム：[`longest-repeat.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rolling-hash/longest-repeat.cpp)（GitHub）
+{ .kp-code-src }
 
 判定は長さ $m$ の窓が $N - m + 1$ 個で、`map` を使って $O(N \log N)$、二分探索で $O(\log N)$ 回呼ぶので全体で $O(N \log^2 N)$ になる。この判定は比べ合うハッシュの組が多い（約 $N^2 / 2$ 組）ので、法の大きさが特に効く。
 
@@ -191,12 +200,18 @@ $$
 --8<-- "rolling-hash/hash-segtree.cpp:core"
 ```
 
+完全なプログラム：[`hash-segtree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rolling-hash/hash-segtree.cpp)（GitHub）
+{ .kp-code-src }
+
 !!! info "ACL では"
     `segtree<S, op, e> seg(v);`（`v` は `vector<S>`）。`seg.set(p, x)` で一点を書き換え、`seg.prod(l, r)` で $[l, r)$ を左から順に `op` でまとめた値を返す。構築は $O(N)$、`set`・`prod` は $O(\log N)$。要件は `op` の結合法則と `e()` が単位元であることで、`l == r` の `prod` は `e()` を返す。
 
 ```cpp
 --8<-- "rolling-hash/hash-segtree.cpp:usage"
 ```
+
+完全なプログラム：[`hash-segtree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rolling-hash/hash-segtree.cpp)（GitHub）
+{ .kp-code-src }
 
 更新が「1 点の書き換え」だけなら、[BIT](../ds/fenwick-tree.md) で $c(S[i]) \cdot B^{N-1-i}$ の和を持つ方法もある。この場合、区間の和は位置によって $B$ の冪の分だけずれているので、比べる 2 つの区間の和に $B$ の冪を掛けて桁をそろえてから比べる。セグメント木の方が長さを組に持つだけで済み、ずれの計算を考えなくてよい。
 

@@ -1,7 +1,7 @@
 ---
 id: bipartite-graph
 title: 二部グラフ判定
-aliases: [二部グラフ, 2 彩色, 奇閉路, 2 色の塗り分け, bipartite graph]
+aliases: [二部グラフ, 2 彩色, 奇閉路, 2 色の塗り分け, bipartite graph, 2 部グラフ, 二分グラフ]
 type: technique
 field: graph
 chapter: 基本と探索
@@ -26,7 +26,7 @@ sections:
   - {title: Union-Find（頂点を 2 倍にする・偶奇を持つ）で判定する, anchor: union-find}
   - {title: 木・4 近傍のグリッドは必ず二部グラフ, anchor: always-bipartite}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -39,7 +39,7 @@ updated: 2026-10-22
     - **前提**：[深さ優先探索（DFS）](../graph/dfs.md)、[幅優先探索（BFS）と無重み最短路](../graph/bfs.md)
 
 <!-- textlint-disable -->
-別名：二部グラフ・2 彩色・奇閉路・2 色の塗り分け・bipartite graph
+別名：二部グラフ・2 彩色・奇閉路・2 色の塗り分け・bipartite graph・2 部グラフ・二分グラフ
 <!-- textlint-enable -->
 
 二部グラフ判定は、無向グラフの頂点を 2 つの組に分けて、どの辺も組をまたぐようにできるかを調べる方法である。2 つの組を白と黒の 2 色と見れば、「隣り合う頂点は違う色」という塗り分けができるかという問題になる。探索で塗るだけなら易しいが、問題文に「二部グラフ」と書かれることは少なく、「異なる値を割り当てる」「2 チームに分ける」といった条件から自分でグラフを作る場面で使う。
@@ -62,6 +62,9 @@ updated: 2026-10-22
 ```cpp
 --8<-- "bipartite-graph/coloring.cpp:core"
 ```
+
+完全なプログラム：[`coloring.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bipartite-graph/coloring.cpp)（GitHub）
+{ .kp-code-src }
 
 各頂点は 1 回だけキューに入り、各辺は両方向から 1 回ずつ見るので、全体で $O(N + M)$ である。DFS で塗っても同じだが、再帰で書くと、パスのような細長いグラフで再帰が $N$ 段の深さになる（[深さ優先探索](../graph/dfs.md)）。BFS かループで書いた DFS なら、その心配がない。
 
@@ -86,6 +89,9 @@ $$
 ```cpp
 --8<-- "bipartite-graph/odd-cycle.cpp:core"
 ```
+
+完全なプログラム：[`odd-cycle.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bipartite-graph/odd-cycle.cpp)（GitHub）
+{ .kp-code-src }
 
 DFS で塗った場合は、無向グラフの DFS 木に含まれない辺は祖先と子孫を結ぶので、矛盾した辺 $(u, v)$ の一方は他方の祖先である。子孫の側から親をたどって祖先に着くまでの道と辺 $(u, v)$ が奇閉路になる。
 
@@ -119,11 +125,14 @@ DFS で塗った場合は、無向グラフの DFS 木に含まれない辺は�
 
 辺が 1 本ずつ追加され、そのたびに二部グラフかを答える問題では、毎回 BFS で塗り直すと $O(M(N + M))$ かかる。[Union-Find](../ds/union-find.md) なら、辺を足すたびにならし $O(\alpha(N))$ で判定できる。
 
-**頂点を 2 倍にする**：各頂点 $v$ に「$v$ が色 0」を表す頂点 $v$ と「$v$ が色 1」を表す頂点 $v + N$ を用意する。同時に成り立つもの同士を併合していく。辺 $(u, v)$ の意味は「$u$ が色 0 なら $v$ は色 1」「$u$ が色 1 なら $v$ は色 0」なので、$u$ と $v + N$、$u + N$ と $v$ を併合する。頂点 $v$ と $v + N$ が同じグループになれば、「$v$ が色 0」と「$v$ が色 1」が同時に成り立つので矛盾である。ACL の `dsu` をそのまま使える。
+**頂点を 2 倍にする**：各頂点 $v$ に「$v$ が色 0」を表す頂点 $v$ と「$v$ が色 1」を表す頂点 $v + N$ を用意する。同時に成り立つもの同士を併合していく。辺 $(u, v)$ の意味は「$u$ が色 0 なら $v$ は色 1」「$u$ が色 1 なら $v$ は色 0」なので、$u$ と $v + N$、$u + N$ と $v$ を併合する。頂点 $v$ と $v + N$ が同じグループになれば、「$v$ が色 0」と「$v$ が色 1」が同時に成り立つので矛盾である。ACL の `dsu` をそのまま使える。次のコードでは、頂点は 0-indexed の $0, \dots, N - 1$ で、入力の 1-indexed の番号は読んだ直後に 1 を引く。
 
 ```cpp
 --8<-- "bipartite-graph/dsu-double.cpp:core"
 ```
+
+完全なプログラム：[`dsu-double.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bipartite-graph/dsu-double.cpp)（GitHub）
+{ .kp-code-src }
 
 それまで矛盾がなければ、足した辺の端点 $u$ だけを調べれば足りる。新しい辺 $(u, v)$ で矛盾が生じるのは、$u$ と $v$ がすでに同じグループ（同じ色に決まっていた）ときだけである。このとき対称性から $u + N$ と $v + N$ も同じグループなので、$u$ と $v + N$ を併合すると $u$ と $u + N$ が同じグループになる。逆に、$u$ を含むグループを $A$、$v$ を含むグループを $B$、それぞれの色を入れ替えたグループを $A'$・$B'$ とすると、併合でできるのは $A \cup B'$ と $A' \cup B$ だけである。$A \ne B$ なら、どの頂点 $x$ についても $x$ と $x + N$ はいつも片方ずつに分かれるので、端点以外で矛盾が生じることはない。
 

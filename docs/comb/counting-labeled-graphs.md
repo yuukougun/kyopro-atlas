@@ -99,6 +99,9 @@ $n = 3$ なら $c(3) = 8 - \bigl(\binom{2}{0} c(1) g(2) + \binom{2}{1} c(2) g(1)
 --8<-- "counting-labeled-graphs/connected-count.cpp:core"
 ```
 
+完全なプログラム：[`connected-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/counting-labeled-graphs/connected-count.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 コード片の全体では、辺の部分集合をすべて試す全探索と $n \le 5$ で一致することを確かめている。値は $c(1), c(2), \dots = 1, 1, 4, 38, 728, 26704, \dots$ になる。
 
 同じ分類は、逆向きにも使える。「どの連結成分も条件 $P$ を満たすグラフ」の数 $a(n)$ は、大きさ $k$ の連結成分で $P$ を満たすものの数 $h(k)$ が分かれば、頂点 1 の成分の大きさで分けて次のように数えられる。
@@ -135,6 +138,9 @@ $$
 ```cpp
 --8<-- "counting-labeled-graphs/subset-connected.cpp:core"
 ```
+
+完全なプログラム：[`subset-connected.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/counting-labeled-graphs/subset-connected.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 $S$ ごとに $S \setminus \{v\}$ の部分集合を回すので、全体の回数は[部分集合の部分集合を回す DP](../dp/subset-enumeration-dp.md#why-3n) と同じく $O(3^N)$ になる。$N = 17$ なら $3^{17} \approx 1.3 \times 10^8$ で、1 回の遷移が掛け算と引き算だけなので間に合う。$v$ を含む集合に限るので、実際の回数はその半分ほどである。
 
@@ -228,6 +234,9 @@ $$
     ```cpp
     --8<-- "counting-labeled-graphs/farthest-layers.cpp:core"
     ```
+
+    完全なプログラム：[`farthest-layers.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/counting-labeled-graphs/farthest-layers.cpp)（GitHub）
+    { .kp-code-src }
 
     コード片の全体では、$N \le 6$ で辺の部分集合をすべて試し、BFS で距離を調べた全探索と一致することを確かめている。
 

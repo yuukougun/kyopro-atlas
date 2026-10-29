@@ -1,7 +1,7 @@
 ---
 id: min-cost-flow
 title: 最小費用流
-aliases: [primal-dual, 重み付きマッチング, 割当問題, ハンガリアン法, slope, minimum cost flow]
+aliases: [primal-dual, 重み付きマッチング, 割当問題, ハンガリアン法, slope, minimum cost flow, 最小費用フロー]
 type: technique
 field: graph
 chapter: フロー・マッチング
@@ -43,7 +43,7 @@ updated: 2026-10-29
     - **前提**：[最大流](../graph/max-flow.md)、[ダイクストラ法](../graph/dijkstra.md)
 
 <!-- textlint-disable -->
-別名：primal-dual・重み付きマッチング・割当問題・ハンガリアン法・slope・minimum cost flow
+別名：primal-dual・重み付きマッチング・割当問題・ハンガリアン法・slope・minimum cost flow・最小費用フロー
 <!-- textlint-enable -->
 
 最小費用流は、各辺に容量と「1 単位流すごとのコスト」を持たせ、始点 $s$ から終点 $t$ へ決まった量を流すときの総コストを最小にする問題である。[最大流](../graph/max-flow.md)が「どれだけ流せるか」だけを問うのに対し、「どの経路で流すと安いか」まで決める。競プロでは、重み付きのマッチングや「$K$ 個選んだときの最大」を、何を頂点・辺・コストにするかのモデル化で解く場面が多い。
@@ -92,6 +92,9 @@ $h$ の更新で $\mathrm{dist}[t]$ を上限にするのは、$t$ より遠い�
     ```cpp
     --8<-- "min-cost-flow/primal-dual.cpp:core"
     ```
+
+    完全なプログラム：[`primal-dual.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/min-cost-flow/primal-dual.cpp)（GitHub）
+    { .kp-code-src }
 
 ## コストは 0 以上（最大化は「定数 − 利得」に直す） {#nonnegative-cost}
 
@@ -152,6 +155,9 @@ ACL の `slope` は折れ線の頂点だけを返し、同じ直線上にある�
 ```cpp
 --8<-- "min-cost-flow/slope.cpp:core"
 ```
+
+完全なプログラム：[`slope.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/min-cost-flow/slope.cpp)（GitHub）
+{ .kp-code-src }
 
 - 流量が決まっている問題で `flow(s, t, limit)` を使うときは、返った流量が `limit` に届いたかを確かめる。届かなければ、その流量は流せない（条件を満たす選び方がない）。
 - 選んだ組を出力するときは、`g.edges()` の中で `flow` が正の辺を読む。`add_edge` の返り値を覚えておけば `g.get_edge(i)` でも読める。

@@ -202,6 +202,9 @@ $$
 --8<-- "expected-value-dp/self-loop.cpp:core"
 ```
 
+完全なプログラム：[`self-loop.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/expected-value-dp/self-loop.cpp)（GitHub）
+{ .kp-code-src }
+
 累積和は「すでに値が決まった区間」の和にしか使えない。後ろから埋めるなら後ろからの累積和を、埋めた値を足しながら作る。遷移先の区間が任意の位置にあり、まだ決まっていない値を含むなら、計算順序から考え直す。
 
 ## 前向きの確率 DP との使い分け {#vs-probability-dp}
@@ -254,6 +257,9 @@ $$
     ```cpp
     --8<-- "expected-value-dp/hp-mod.cpp:core"
     ```
+
+    完全なプログラム：[`hp-mod.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/expected-value-dp/hp-mod.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+    { .kp-code-src }
 
 ### ABC184 D. increment of coins {#abc184_d}
 

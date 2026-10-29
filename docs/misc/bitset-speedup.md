@@ -1,7 +1,8 @@
 ---
 id: bitset-speedup
 title: bitset による高速化
-aliases: [bitset, ビット並列, ワード並列, 1/64 倍, bitset で部分和, 推移閉包, 到達可能性クエリ, bitset speedup]
+aliases: [bitset, ビット並列, ワード並列, 1/64 倍, bitset で部分和, 推移閉包, 到達可能性クエリ, bitset speedup, ビットセット]
+tags: [ビット]
 type: technique
 field: misc
 order: 30
@@ -47,7 +48,7 @@ updated: 2026-10-29
     - **前提**：[bit 演算の基本と XOR の性質](../basics/bit-operations.md)、[計算量の見積もり](../basics/complexity-estimation.md)
 
 <!-- textlint-disable -->
-別名：bitset・ビット並列・ワード並列・1/64 倍・bitset で部分和・推移閉包・到達可能性クエリ・bitset speedup
+別名：bitset・ビット並列・ワード並列・1/64 倍・bitset で部分和・推移閉包・到達可能性クエリ・bitset speedup・ビットセット
 <!-- textlint-enable -->
 
 bitset による高速化は、0 か 1 の値を並べた列を 64 bit の整数に詰め、整数 1 回の演算で 64 個分を同時に計算する方法である。計算量の式は変わらないが、$O(N^3)$ が $N = 3000$ で約 $2.7 \times 10^{10}$ 回から約 $4 \times 10^8$ 回の語の演算に減り、間に合う側に入ることがある。使えるのは、計算の中身が「集合の積・和・対称差」や「ずらして重ねる」の形になっているときである。
@@ -82,6 +83,9 @@ $N = 3000$ の $O(N^3)$ は素朴には約 $2.7 \times 10^{10}$ 回で間に合�
 ```cpp
 --8<-- "bitset-speedup/triangle.cpp:core"
 ```
+
+完全なプログラム：[`triangle.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bitset-speedup/triangle.cpp)（GitHub）
+{ .kp-code-src }
 
 - $N = 3000$ なら、組は約 $4.5 \times 10^6$ 個、1 組は $\lceil 3000 / 64 \rceil = 47$ 語なので、約 $2.1 \times 10^8$ 回の語の演算になる。
 - 3 で割る代わりに、$k > j$ の位置だけを 1 にした列とも AND を取って 1 回ずつ数えてもよい。割るほうが書くことが少ない。
@@ -130,6 +134,9 @@ $$
 --8<-- "bitset-speedup/subset-restore.cpp:core"
 ```
 
+完全なプログラム：[`subset-restore.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bitset-speedup/subset-restore.cpp)（GitHub）
+{ .kp-code-src }
+
 **同じ値がたくさんあるとき**は、値 $v$ が 3 個以上あれば、そのうち 2 個を値 $2v$ の 1 個にまとめ直しても作れる和の集合は変わらない（$v$ を 2 個使う選び方を $2v$ 1 個で表せ、残した 1 個で $v$ 1 個の場合も表せる）。これを小さい値から繰り返すと、各値は 2 個以下になる。要素がすべて正の整数で総和が $S$ の列なら（和の上限も $S$ にとれる）、異なる値は $O(\sqrt{S})$ 種類しかないので、要素は $O(\sqrt{S})$ 個に減り、全体で $O(S \sqrt{S} / 64)$ になる。
 
 ??? note "証明：総和 S の列の異なる値は √(2S) 種類以下"
@@ -148,6 +155,9 @@ $$
 ```cpp
 --8<-- "bitset-speedup/reach-dag.cpp:core"
 ```
+
+完全なプログラム：[`reach-dag.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bitset-speedup/reach-dag.cpp)（GitHub）
+{ .kp-code-src }
 
 - **集合で持つ理由**：到達できる頂点の数を「行き先の値の和」で求めると、ひし形のように 2 通りの道で届く頂点を 2 度数える。集合の OR なら重なりは自然に 1 つになり、数は $R[v]$ の popcount で求まる（[強連結成分分解の落とし穴](../graph/scc.md#pitfalls)と同じ話）。
 - **閉路があるとき**：[強連結成分分解](../graph/scc.md#condensation)で成分を 1 頂点に縮約すると DAG になる。成分の中の頂点は互いに到達できるので、成分ごとに「成分に含まれる頂点の集合」を初期値にして同じ計算をする。
@@ -175,6 +185,9 @@ $N = 10^5$ では、時間（$N(N + M) / 64$）の前にメモリが足りない
 ```cpp
 --8<-- "bitset-speedup/reach-batch.cpp:core"
 ```
+
+完全なプログラム：[`reach-batch.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bitset-speedup/reach-batch.cpp)（GitHub）
+{ .kp-code-src }
 
 64 個ずつまとめる考え方は、到達可能性に限らない。「各クエリについて、同じ順序で同じ OR（AND・XOR）を流す」計算なら、クエリの番号を bit に割り当てて 64 個を同時に進められる。何を bit の添字にするか（頂点か、クエリか）を、メモリの見積もりで選ぶ。
 

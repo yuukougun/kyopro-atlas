@@ -99,6 +99,9 @@ $$
 --8<-- "stirling-first/rising.cpp:table"
 ```
 
+完全なプログラム：[`rising.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/stirling-first/rising.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 **上昇階乗**。漸化式の 2 通りを多項式で書くと、「新しい巡回を作る」に $x$ を、「既存の巡回に入れる」に $n - 1$ を掛けることになる。$f_n(x) = \sum_k c(n, k) x^k$ とおくと $f_n(x) = (x + n - 1) f_{n-1}(x)$ なので、
 
 $$
@@ -133,6 +136,9 @@ $n = 3$ では、見える位置が 1 個のものは 312・321、2 個のもの
 ```cpp
 --8<-- "stirling-first/rising.cpp:core"
 ```
+
+完全なプログラム：[`rising.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/stirling-first/rising.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 **Taylor shift で倍々にする**。$f_m(x) = x(x+1)\cdots(x+m-1)$ とすると $f_m(x + m) = (x + m)\cdots(x + 2m - 1)$ なので、$f_{2m}(x) = f_m(x) \cdot f_m(x + m)$ である。$f_m(x + m)$ の係数は、多項式の平行移動（Taylor shift）によって $O(m \log m)$ で求まる。$N$ を上の bit から読み、奇数のときは $(x + 2m)$ を 1 つ掛ければ、全体は $O(N \log N)$ になる。ただし Taylor shift の実装が要るので、自作するなら分割統治から作り、速さが足りないときに倍化へ替えるとよい。
 
@@ -197,6 +203,9 @@ Library Checker で確かめられる問題は[練習問題の節](#practice)に
     ```cpp
     --8<-- "stirling-first/buildings.cpp:core"
     ```
+
+    完全なプログラム：[`buildings.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/stirling-first/buildings.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+    { .kp-code-src }
 
     元のプログラムは、$N \le 7$ のすべての $K$ で順列の全列挙と一致することを確かめている。
 

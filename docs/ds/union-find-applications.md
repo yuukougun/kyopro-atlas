@@ -77,6 +77,9 @@ Union-Find の応用は、併合と「同じ成分か」の判定だけでなく
 --8<-- "union-find-applications/top-k.cpp:core"
 ```
 
+完全なプログラム：[`top-k.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/union-find-applications/top-k.cpp)（GitHub）
+{ .kp-code-src }
+
 値ごとの個数のように大きな情報は、要素の少ない方の map を多い方へ移す。ある要素が移るたびに、その要素の属する成分のサイズは 2 倍以上になるので、1 つの要素が移るのは $\log_2 N$ 回以下である。全体で移す回数は $O(N \log N)$ で、map の操作が 1 回 $O(\log N)$ なので $O(N \log^2 N)$ になる（[マージテク](../tree/small-to-large.md)）。ACL の v1.6 の実装はサイズの大きい方を根に残すが、ドキュメントはどちらが根になるかを約束していない。併合の前に map の大きさを比べ、小さい方を大きい方へ移してから、大きい方の map を新しい根の情報にする。
 
 !!! info "ACL では"
@@ -101,6 +104,9 @@ Union-Find の応用は、併合と「同じ成分か」の判定だけでなく
 ```cpp
 --8<-- "union-find-applications/pair-max.cpp:core"
 ```
+
+完全なプログラム：[`pair-max.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/union-find-applications/pair-max.cpp)（GitHub）
+{ .kp-code-src }
 
 計算量はソートの $O(N \log N)$ と、併合 $N - 1$ 回のならし $O(N \alpha(N))$ である。
 
@@ -147,6 +153,9 @@ Union-Find の応用は、併合と「同じ成分か」の判定だけでなく
 ```cpp
 --8<-- "union-find-applications/next-pointer.cpp:core"
 ```
+
+完全なプログラム：[`next-pointer.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/union-find-applications/next-pointer.cpp)（GitHub）
+{ .kp-code-src }
 
 - **環状の配列**：位置 $h$ から右へ探して、末尾の番兵 $N$ に着いたら、$\mathrm{find}(0)$ で先頭から探し直す。配列がすべて埋まることがない制約かを確かめておく
 - **区間の頂点をつなぐ**：「区間 $[l, r)$ の頂点をすべてつなぐ」操作をくり返す。すでにつながった境目を飛ばせば、隣どうしの併合は全体で $N - 1$ 回しか起きない。境目 $i$（頂点 $i$ と $i + 1$ の間）を併合したら、境目 $i$ を塗り済みにする

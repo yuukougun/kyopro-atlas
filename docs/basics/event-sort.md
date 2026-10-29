@@ -63,6 +63,9 @@ updated: 2026-10-29
 --8<-- "event-sort/interval-query.cpp:core"
 ```
 
+完全なプログラム：[`interval-query.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/event-sort/interval-query.cpp)（GitHub）
+{ .kp-code-src }
+
 処理順の決め方は区間の端の扱いで変わる。
 
 | 区間の形 | 時刻 $t$ に含まれる条件 | 同じ座標での順 |
@@ -102,6 +105,9 @@ updated: 2026-10-29
 ```cpp
 --8<-- "event-sort/red-blue-pairs.cpp:core"
 ```
+
+完全なプログラム：[`red-blue-pairs.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/event-sort/red-blue-pairs.cpp)（GitHub）
+{ .kp-code-src }
 
 ここでも同じ座標での処理順が効く。条件が「x が真に大きい」なので、同じ x の赤い点はまだ使えない。だから同じ x では青を先に処理する。条件が「x 以上」なら逆に赤を先に入れる。y の側も同じで、「真に小さい」なら `lower_bound(y)` の 1 つ前、「以下」なら `upper_bound(y)` の 1 つ前を取る。
 

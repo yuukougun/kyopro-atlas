@@ -71,11 +71,17 @@ updated: 2026-10-29
 --8<-- "persistent-data-structures/version-tree.cpp:core"
 ```
 
+完全なプログラム：[`version-tree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/persistent-data-structures/version-tree.cpp)（GitHub）
+{ .kp-code-src }
+
 保存の表は名前から頂点番号への `map` にし、まだ保存していない名前は根（空の列）を指すことにする。
 
 ```cpp
 --8<-- "persistent-data-structures/version-tree.cpp:save"
 ```
+
+完全なプログラム：[`version-tree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/persistent-data-structures/version-tree.cpp)（GitHub）
+{ .kp-code-src }
 
 - **末尾以外の値を問う**：各頂点に深さ $\mathrm{dep}[v]$ を持てば列の長さが分かり、根からの累積 $S[v]$ を持てば列の和が分かる。先頭から $k$ 番目の値は、$\mathrm{cur}$ の祖先のうち深さ $k + 1$ の頂点の値なので、[ダブリング](../basics/doubling.md)で祖先を求めれば $O(\log Q)$ で読める。ただし頂点を作るときに祖先の表を埋めるので、追加は $O(\log Q)$ になる。版ごとに取り出した個数も持てば、先頭は深さ（取り出した個数 + 1）の祖先なので、末尾への追加と先頭の取り出しができる永続キュー（Library Checker の persistent_queue）になる
 - **取り消しのスタックとの違い**：[取り消しのスタック](../ds/stack-techniques.md#undo)は、戻ると上の版を捨てる。版の木は捨てずに残すので、一度離れた版へも読み込みで戻れる
@@ -102,11 +108,17 @@ updated: 2026-10-29
 --8<-- "persistent-data-structures/persistent-segtree.cpp:core"
 ```
 
+完全なプログラム：[`persistent-segtree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/persistent-data-structures/persistent-segtree.cpp)（GitHub）
+{ .kp-code-src }
+
 ノード 0 は「子が自分自身で、和が 0」のノードで、どの長さの区間でも「すべて 0 の木」として使える。最初の列がすべて 0 なら、構築をせずに全数列の根を 0 にすればよい。0 でない初期値があるなら、最初に一度だけふつうに構築する（ノードが $2M$ 個ほど増える）。
 
 ```cpp
 --8<-- "persistent-data-structures/persistent-segtree.cpp:main"
 ```
+
+完全なプログラム：[`persistent-segtree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/persistent-data-structures/persistent-segtree.cpp)（GitHub）
+{ .kp-code-src }
 
 メモリは、ノードの数 $1 + Q \times (\text{高さ} + 1)$ に 1 ノードの大きさを掛けて見積もる。$Q = 2 \times 10^5$・$M = 2 \times 10^5$ なら $3.8 \times 10^6$ 個で、`int` 2 つと `long long` 1 つの 16 バイトなら約 61 MB である。
 
@@ -144,11 +156,17 @@ updated: 2026-10-29
 --8<-- "persistent-data-structures/offline-version-tree.cpp:build"
 ```
 
+完全なプログラム：[`offline-version-tree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/persistent-data-structures/offline-version-tree.cpp)（GitHub）
+{ .kp-code-src }
+
 DFS では、入るときに変更前の値を覚えてから施し、出るときに覚えた値へ戻す（[取り消しのスタック](../ds/stack-techniques.md#undo)と同じ）。木の辺 1 本につき施すのと戻すのが 1 回ずつなので、データ構造への操作は全体で $O(Q)$ 回になる。[BIT](../ds/fenwick-tree.md) で持てば $O((M + Q) \log M)$ で、メモリは $O(N + M + Q)$ で済む。経路コピーの $O(Q \log M)$ 個のノードが要らない。
 
 ```cpp
 --8<-- "persistent-data-structures/offline-version-tree.cpp:dfs"
 ```
+
+完全なプログラム：[`offline-version-tree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/persistent-data-structures/offline-version-tree.cpp)（GitHub）
+{ .kp-code-src }
 
 版の木の深さは更新の回数（最大 $Q$）まで伸びるので、DFS は再帰でなく、出るときの印 `~v` を積む非再帰の形で書く。DFS の訪問順で見ると、これは版の木の[オイラーツアー](../tree/euler-tour.md)をたどって、入ると出るで施すと戻すを並べた列を処理していることになる。
 
@@ -167,6 +185,9 @@ DFS では、入るときに変更前の値を覚えてから施し、出ると�
 ```cpp
 --8<-- "persistent-data-structures/prefix-kth.cpp:core"
 ```
+
+完全なプログラム：[`prefix-kth.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/persistent-data-structures/prefix-kth.cpp)（GitHub）
+{ .kp-code-src }
 
 ノードに値の和も持てば、「区間の $x$ 以下の要素の和」も同じ形で求まる。先読みできるなら、右端でソートして BIT を使う方が軽い（[クエリの先読み](../ds/offline-queries.md)）。オンラインで答えるほかの方法に、[マージソート木](../ds/merge-sort-tree.md)と [Wavelet Matrix](../ds/wavelet-matrix.md#library) がある。マージソート木は $x$ 以下の個数を $O(\log^2 N)$、$K$ 番目を $O(\log^3 N)$ で求め、実装が素直である。Wavelet Matrix はどちらも $O(\log \sigma)$ で、メモリが小さい。
 

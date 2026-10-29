@@ -79,6 +79,9 @@ $11$ は $13 \oplus 6$ なので、すでに作れる値であり、0 まで消�
 --8<-- "xor-basis/basis.cpp:core"
 ```
 
+完全なプログラム：[`basis.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/xor-basis/basis.cpp)（GitHub）
+{ .kp-code-src }
+
 `reduce` は、$x$ に基底の要素をいくつか XOR してできる値のうち最小のものを返す。$x$ が作れる値なら $0$ になるので、「$x$ を作れるか」の判定にも使える。`max_value` は次の [#max](#max) で説明する。
 
 !!! info "掃き出し法との関係"
@@ -121,6 +124,9 @@ $n$ 個の整数のランクが $r$ なら、作れる値はちょうど $2^r$ �
 --8<-- "xor-basis/basis.cpp:kth"
 ```
 
+完全なプログラム：[`basis.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/xor-basis/basis.cpp)（GitHub）
+{ .kp-code-src }
+
 - $k \ge 2^r$ なら $k$ 番目は存在しない。最大値は $k = 2^r - 1$、すなわち簡約した基底の全部の XOR である。
 - 0 番目は $0$（0 個選ぶ）である。「1 個以上選ぶ」なら、$0$ を 1 個以上で作れるのは $n > r$ のときだけ（[#count](#count)）なので、$n = r$ なら番号を 1 つずらす。
 - 簡約しない基底で $k$ の 2 進に従って選ぶと、順番が狂う（[落とし穴](#pitfalls)）。
@@ -134,6 +140,9 @@ $n$ 個の整数のランクが $r$ なら、作れる値はちょうど $2^r$ �
 ```cpp
 --8<-- "xor-basis/min-cost.cpp:core"
 ```
+
+完全なプログラム：[`min-cost.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/xor-basis/min-cost.cpp)（GitHub）
+{ .kp-code-src }
 
 この貪欲は、[最小全域木](../graph/minimum-spanning-tree.md)のクラスカル法と同じ形をしている。クラスカル法の「閉路を作らない辺だけ取る」が、ここでは「今まで選んだ数で作れない数だけ取る」になる。どちらも「独立な集合」が交換の性質を持つ（線形[マトロイド](../guide/glossary.md#matroid)・グラフのマトロイド）ので、軽い順の貪欲が最適になる。
 
@@ -166,6 +175,9 @@ $n$ 個の整数のランクが $r$ なら、作れる値はちょうど $2^r$ �
 ```cpp
 --8<-- "xor-basis/xor-walk.cpp:core"
 ```
+
+完全なプログラム：[`xor-walk.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/xor-basis/xor-walk.cpp)（GitHub）
+{ .kp-code-src }
 
 コードは頂点 0 からスタックで訪ねてできる全域木を使うので、図の木とは違う木になることがある（図のグラフでは 1–3 が木の辺になる）。どの全域木でも答えは同じである（[確認問題](#quiz)）。全体の計算量は、探索と挿入を合わせて $O(N + M + MB)$、クエリは 1 回 $O(B)$ である。
 

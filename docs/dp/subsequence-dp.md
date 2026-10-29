@@ -99,6 +99,9 @@ $S =$ `aba` で動かすと次の表になる。$\mathrm{nxt}[0] = (a{:}\,0,\ b{
 --8<-- "subsequence-dp/count.cpp:core"
 ```
 
+完全なプログラム：[`count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/subsequence-dp/count.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 **値の種類が多い列（貰う形）**。整数の列のように値の種類が多いと、$\mathrm{nxt}$ の表は作れない。そのときは $f[i]$ ＝「$a[0, i)$ の異なる部分列（空を含む）の数」を左から求める。$a[0, i+1)$ の部分列は、$a_i$ を使わないもの（$f[i]$ 個）と、$a[0, i)$ の部分列 $X$ の末尾に $a_i$ を付けたもの（$f[i]$ 個）に分かれる。ただし $X a_i$ が $a[0, i)$ の部分列でもあれば、前者と重なる。$a_i$ の直前の出現位置を $l$ とすると、[貪欲な照合](../string/subsequence-matching.md#greedy-matching)により、重なるのは $X$ が $a[0, l)$ の部分列のとき、すなわち $f[l]$ 個である。
 
 $$
@@ -110,6 +113,9 @@ $$
 ```cpp
 --8<-- "subsequence-dp/count.cpp:prev"
 ```
+
+完全なプログラム：[`count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/subsequence-dp/count.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 この式は配る DP と同じものを数えている。$\mathrm{dp}$ で言えば、位置 $i$ で終わる部分列は「直前に使った位置が $l$ 以上」のものに限られる。$l$ より前で終わる部分列から $a_i$ に飛ぶと、$l$ で取る方が左だからである。その数は $a[l, i)$ のどこかで終わるもの（$l$ がなければ空も含む）で $f[i] - f[l]$ 個になり、$a_i$ を使わない $f[i]$ 個と足して $2 f[i] - f[l]$ になる。
 
@@ -129,6 +135,9 @@ $S$ の部分列にならない文字列のうち最短のもの、その中で�
 ```cpp
 --8<-- "subsequence-dp/shortest.cpp:core"
 ```
+
+完全なプログラム：[`shortest.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/subsequence-dp/shortest.cpp)（GitHub）
+{ .kp-code-src }
 
 長さだけなら表なしでも分かる。$\mathrm{len}[i]$ は $i$ について広義単調減少なので、最小は最も遠くへ進む文字で達成される。だから $S$ を前から「すべての文字が 1 回以上現れたら区切る」と区切っていき、区切れた区間の個数に 1 を足した値が最短の長さである。辞書順最小の答えを作るには、上の表と復元が要る。
 
@@ -155,6 +164,9 @@ $$
 ```cpp
 --8<-- "subsequence-dp/kth.cpp:core"
 ```
+
+完全なプログラム：[`kth.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/subsequence-dp/kth.cpp)（GitHub）
+{ .kp-code-src }
 
 最初に $\mathrm{cnt}[0] - 1 < K$ なら、$K$ 番目は存在しない。計算量は表の構築と DP が $O(\sigma N)$、決める段階が答えの長さ × $\sigma$ である。
 
@@ -208,6 +220,9 @@ $$
     ```cpp
     --8<-- "subsequence-dp/nonadjacent.cpp:core"
     ```
+
+    完全なプログラム：[`nonadjacent.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/subsequence-dp/nonadjacent.cpp)（GitHub）。`mint` は ACL の `modint1000000007`（[modint](../math/modint.md)）。
+    { .kp-code-src }
 
 ### ABC230 F. Predilection {#abc230_f}
 

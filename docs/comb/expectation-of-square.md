@@ -165,6 +165,9 @@ $$
 --8<-- "expectation-of-square/combo.cpp:core"
 ```
 
+完全なプログラム：[`combo.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/expectation-of-square/combo.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 更新は $T$ を先に、$S$ を後に書くか、上のように新しい値を別の変数に作ってから入れ替える。$S$ を先に書き換えると、$T$ の更新が新しい $S$ を使ってしまう。
 
 - **応用の型（グラフ上のランダムウォーク）**：頂点を状態にし、辺ごとに $P$・$S$・$T$ を $1/\deg$ 倍して配る。レベルが上がる頂点へ入ったら表の式で更新し、得点の頂点へ入ったら $T$ を答えに足す。時刻 $K$ までなら $O(K(N + M))$ である（[力試し](#challenge)の問題）

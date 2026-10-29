@@ -138,17 +138,23 @@ Berlekamp-Massey は、数列の最初の $M$ 項 $s_0, \dots, s_{M-1}$ から�
 !!! info "ACL では"
     `atcoder::convolution(a, b)`（`<atcoder/convolution>`）が、2 つの列の畳み込み（法の既定は 998244353。テンプレート引数で NTT に向くほかの素数も指定できる）を $O((\lvert a \rvert + \lvert b \rvert) \log (\lvert a \rvert + \lvert b \rvert))$ で返す。法は NTT に向く素数でなければならない。線形漸化式そのものの関数は ACL にない。
 
-Bostan-Mori の 1 回の繰り返しは、$Q(-x)$ を作って畳み込みを 2 回呼び、偶奇で係数を選ぶだけである。最初の $K$ 項と係数から $P$・$Q$ を作る関数と合わせて、次のようになる（完全なプログラムは `snippets/linear-recurrence-fast/recurrence.cpp`。素朴なきたまさ法と、漸化式を直接回した値とで答えを確かめている）。
+Bostan-Mori の 1 回の繰り返しは、$Q(-x)$ を作って畳み込みを 2 回呼び、偶奇で係数を選ぶだけである。最初の $K$ 項と係数から $P$・$Q$ を作る関数と合わせて、次のようになる（完全なプログラムは [`snippets/linear-recurrence-fast/recurrence.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/linear-recurrence-fast/recurrence.cpp)。素朴なきたまさ法と、漸化式を直接回した値とで答えを確かめている）。
 
 ```cpp
 --8<-- "linear-recurrence-fast/recurrence.cpp:bostan-mori"
 ```
+
+完全なプログラム：[`recurrence.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/linear-recurrence-fast/recurrence.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 Berlekamp-Massey は、今の漸化式で次の項を予測したずれ $\delta$ が 0 でなければ、最後に長さが伸びた時点の漸化式を $\delta$ に合わせて倍して引き、ずれを消す。
 
 ```cpp
 --8<-- "linear-recurrence-fast/recurrence.cpp:berlekamp-massey"
 ```
+
+完全なプログラム：[`recurrence.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/linear-recurrence-fast/recurrence.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 自作するときに気をつける点は次のとおりである。
 

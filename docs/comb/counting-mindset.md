@@ -150,6 +150,9 @@ $$
 --8<-- "counting-mindset/verify-small.cpp:core"
 ```
 
+完全なプログラム：[`verify-small.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/counting-mindset/verify-small.cpp)（GitHub）
+{ .kp-code-src }
+
 検算のときは次の点に気をつける。
 
 - **mod を取らない**：小さいケースでは値が `long long` に収まるので、mod を取らずに比べる。mod を取った値は大小比較ができず、規則も見えにくい

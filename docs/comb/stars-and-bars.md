@@ -77,6 +77,9 @@ $$
 --8<-- "stars-and-bars/count.cpp:core"
 ```
 
+完全なプログラム：[`count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/stars-and-bars/count.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 ??? question "確認問題：上限が 1 つ付いたら"
     $x + y + z = 10$ の正の整数解は何個か。さらに $x \le 3$ という条件が付くと何個か。
 

@@ -79,6 +79,9 @@ $$
 --8<-- "partition-number/partition.cpp:core"
 ```
 
+完全なプログラム：[`partition.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/partition-number/partition.cpp)（GitHub）
+{ .kp-code-src }
+
 この表は、[個数制限なしのナップサック](../dp/knapsack-01.md#knapsack-unbounded)で「重さ $1, 2, \dots, k$ の品物を何個でも使って和をちょうど $n$ にする組合せ」を数えるのと同じものである。品物を外側のループに置き、和を小さい方から回す 1 次元の配列 $\mathrm{dp}[s] \mathrel{+}= \mathrm{dp}[s - x]$ で書くと、品物 $x$ まで回した時点の $\mathrm{dp}[s]$ が $p(s, x)$ になる。品物と和のループを入れ替えると順序を区別した和（$1 + 4$ と $4 + 1$ を別に数える）になるので、分割数にはならない。
 
 **ちょうど $k$ 個の部分**：部分の個数がちょうど $k$ 個の分割は、各部分から 1 を引くと「和が $n - k$・部分の個数が $k$ 個以下」の分割になる。1 を引いて 0 になった部分は消えるとすれば、この対応は 1 対 1 である。よって $p(n - k, k)$ 通りである。区別のない $n$ 個の玉を区別のない $k$ 個の箱へ、空の箱を許して入れるなら $p(n, k)$、どの箱も空にしないなら $p(n - k, k)$ になる（[写像 12 相](../comb/twelvefold-way.md#table)）。
@@ -96,6 +99,9 @@ $$
 ```cpp
 --8<-- "partition-number/partition.cpp:enumerate"
 ```
+
+完全なプログラム：[`partition.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/partition-number/partition.cpp)（GitHub）
+{ .kp-code-src }
 
 - **状態**：残りの和 `rest` と、次に置いてよい最大の値 `mx`（直前に置いた値）。最初は `rest = n`、`mx = n` で呼ぶ
 - **葉**：`rest == 0` で 1 つの分割ができあがる。葉の数はちょうど $p(n)$ である
@@ -164,11 +170,14 @@ $N = 4$ で確かめると、巡回型ごとに次のようになり、合計は
 | $2 + 1 + 1$ | $24 / (2 \cdot 1^2 \cdot 2!)$ | $6$ |
 | $1 + 1 + 1 + 1$ | $24 / (1^4 \cdot 4!)$ | $1$ |
 
-**全列挙に組み込む**：降順の列を作る再帰では、同じ長さの部分が続けて置かれる。長さ $x$ を置くたびに $1/x$ を掛ける。それが同じ長さの $c$ 個目なら $1/c$ も掛ける。こうすると葉に着いたときに $1 / \prod_\ell \ell^{m_\ell} m_\ell!$ がそろう。$1/c$ を $c = 1, \dots, m_\ell$ について掛けると $1/m_\ell!$ になるからである。mod で割り算をするには逆元を使い、法は $N$ 以下の数と互いに素（$N$ より大きい素数など）でなければならない。
+**全列挙に組み込む**：降順の列を作る再帰では、同じ長さの部分が続けて置かれる。長さ $x$ を置くたびに $1/x$ を掛ける。それが同じ長さの $c$ 個目なら $1/c$ も掛ける。こうすると葉に着いたときに $1 / \prod_\ell \ell^{m_\ell} m_\ell!$ がそろう。$1/c$ を $c = 1, \dots, m_\ell$ について掛けると $1/m_\ell!$ になるからである。mod で割り算をするには逆元を使い、法は $N$ 以下の数と互いに素（$N$ より大きい素数など）でなければならない。コードの `fact[i]` は $i!$ の表、`inv[i]` は $i$ の逆元の表で、どちらも $N$ まで前計算しておく（[二項係数の前計算](../comb/binomial-precompute.md#fact-ifact)）。
 
 ```cpp
 --8<-- "partition-number/cycle-type.cpp:core"
 ```
+
+完全なプログラム：[`cycle-type.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/partition-number/cycle-type.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 lcm は mod を取らずに整数のまま持つ。長さの和が $N$ の巡回たちの lcm は、$N = 50$ でも最大 $180180$ と小さい（Landau の関数 $g(50)$）。mod を取った値で `lcm` を計算すると、gcd の値が変わって誤る。$N$ が大きく lcm があふれる問題は、全列挙の範囲を外れている。
 
@@ -201,6 +210,9 @@ $$
 ```cpp
 --8<-- "partition-number/count-multiset.cpp:core"
 ```
+
+完全なプログラム：[`count-multiset.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/partition-number/count-multiset.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 コードでは上限 $M$ を入力の `m` で受け取る。最後の項の添字は $k - M - 1 \ge 0$ のときだけ使う。小さい $N$ で全列挙と比べると、引く項の添字のずれに気づける（コード片は $N \le 30$ で全列挙と照合している）。
 

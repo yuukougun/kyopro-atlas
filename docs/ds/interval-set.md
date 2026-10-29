@@ -101,6 +101,9 @@ $x$ を含む区間は、左端が $x$ 以下の区間のうち最も右のも�
 --8<-- "interval-set/paint.cpp:core"
 ```
 
+完全なプログラム：[`paint.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/interval-set/paint.cpp)（GitHub）
+{ .kp-code-src }
+
 `assign` の引数 `f` は、消える区間ごとに呼ぶ関数である。値ごとのマスの数や区間の和を持つときは、ここで消える区間の分を引き、最後に入れる区間の分を足す。
 
 区間の削除（全体を区切る形で「値をなしにする」）も、$\mathrm{split}(l)$ と $\mathrm{split}(r)$ の後に間を消して「なし」の区間を 1 つ入れるだけである。区間の中の一部だけを読みたいときも、先に $\mathrm{split}(l)$ と $\mathrm{split}(r)$ をすると、端の区間がはみ出す場合を考えなくてよい。
@@ -113,6 +116,9 @@ $x$ を含む区間は、左端が $x$ 以下の区間のうち最も右のも�
 ```cpp
 --8<-- "interval-set/cover.cpp:core"
 ```
+
+完全なプログラム：[`cover.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/interval-set/cover.cpp)（GitHub）
+{ .kp-code-src }
 
 追加では「接する」も含めて左端が $r$ 以下（`<=`）の区間をまとめ、削除では重なる区間（`<`）だけを触る。この不等号の違いが、区間の表し方を 1 通りに保つ。
 

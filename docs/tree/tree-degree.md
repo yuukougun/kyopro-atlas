@@ -25,7 +25,7 @@ sections:
   - {title: 次数を配る最適化, anchor: allocate-degrees}
   - {title: 木の数え上げ（Cayley の公式・行列木定理）へのつながり, anchor: counting-links}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -41,7 +41,7 @@ updated: 2026-10-22
 別名：次数列・プリューファー列・Prüfer code・Prüfer sequence・握手補題・星・degree sequence
 <!-- textlint-enable -->
 
-木の次数列と Prüfer 列は、「次数だけを決めたら木が作れるか」に答える道具である。木の形は膨大にあっても、コストや条件が各頂点の[次数](../guide/glossary.md#degree)だけで決まるなら、木を探す代わりに次数列を探せばよい。以下では頂点に 1〜$N$ の番号が付いた木（[ラベル付き木](../guide/glossary.md#labeled-tree)）を考え、頂点 $v$ の次数を $d_v$ と書く。
+木の次数列と Prüfer 列は、「次数だけを決めたら木が作れるか」に答える道具である。木の形は膨大にあっても、コストや条件が各頂点の[次数](../guide/glossary.md#degree)だけで決まるなら、木を探す代わりに次数列を探せばよい。以下では頂点に 1〜$N$ の番号が付いた木（[ラベル付き木](../guide/glossary.md#labeled-tree)）を考え、頂点 $v$ の次数を $d_v$ と書く。コード片は入力から 1 を引いて 0-indexed の $0, \dots, N - 1$ で持ち、出力するときに 1 を足す。
 
 ## 次数だけで分かること（葉の数・星の中心） {#degree-facts}
 
@@ -92,6 +92,9 @@ $$
 --8<-- "tree-degree/from-degrees.cpp:core"
 ```
 
+完全なプログラム：[`from-degrees.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-degree/from-degrees.cpp)（GitHub）
+{ .kp-code-src }
+
 和だけをそろえて、次数の大きい頂点どうしを先に結ぶ作り方は誤りである。$(2, 2, 2, 1, 1)$ で次数 2 の 3 頂点を互いに結ぶと、三角形と「次数 1 の 2 頂点を結んだ辺」に分かれる。次数は合っているが、連結でなく閉路もある。木を作るときは、上の構築か帰納法のように、必ず葉をほかの頂点に付ける形で辺を足す。
 
 **応用の型：次数に上限・下限があるとき**（サイン：「各頂点の次数が $c_v$ 以下の木はあるか」）。$N \ge 2$ で、各頂点の次数を $l_v \le d_v \le c_v$（$1 \le l_v \le c_v$）にしたいなら、木がある条件は $\sum_v l_v \le 2N - 2 \le \sum_v c_v$ である。全員を下限 $l_v$ から始め、上限を超えない頂点の次数を 1 ずつ上げれば和は 1 ずつ増えるので、$2N - 2$ でちょうど止められる。止めた列は条件を満たすので、上の構築で木になる。すでにある辺を含めて木を完成させる型は、閉路と成分の扱いが加わる（[次数の条件から作る](../tree/tree-construction.md#from-degrees)）。
@@ -132,6 +135,9 @@ Prüfer 列は、ラベル付き木を長さ $N - 2$ の列に一対一で写す
 --8<-- "tree-degree/pruefer.cpp:decode"
 ```
 
+完全なプログラム：[`pruefer.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-degree/pruefer.cpp)（GitHub）
+{ .kp-code-src }
+
 - **$O(N)$ にするなら**：最小の葉を指す番号を小さい方から進め、葉を消して隣が新しく葉になり、しかもその番号が指している番号より小さいときは、すぐにその隣を次に消す。こうすると優先度付きキューが要らない
 - **頂点 $N$ は最後まで残る**：葉は常に 2 個以上あり、最小の葉が $N$ になることはないからである。長さ $N - 1$ で定義して末尾が必ず $N$ になる流儀もあるので、資料を読むときは長さを確かめる
 
@@ -148,6 +154,9 @@ $$
 ```cpp
 --8<-- "tree-degree/allocate.cpp:core"
 ```
+
+完全なプログラム：[`allocate.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-degree/allocate.cpp)（GitHub）
+{ .kp-code-src }
 
 上のコードの元のプログラムは、$N \le 7$ のとき長さ $N - 2$ の列をすべて調べた最小値と答えが一致することを assert で確かめている。Prüfer 列で次数が「出現回数 ＋ 1」になることを使えば、すべての木を調べる代わりにすべての列を調べればよい。
 

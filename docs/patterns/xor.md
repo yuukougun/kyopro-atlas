@@ -2,6 +2,7 @@
 id: xor
 title: XOR
 aliases: [排他的論理和, ビットごとの排他的論理和, exclusive or]
+tags: [ビット]
 type: pattern
 field: patterns
 order: 70

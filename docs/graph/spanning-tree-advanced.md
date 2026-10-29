@@ -58,11 +58,14 @@ Borůvka 法は、「各連結成分から外へ出る最小の辺を、すべ�
 - **成分の異なる上位 2 件を持つ**：走査しながら最小値を持つとき、1 位と、1 位と成分が異なる中での最小の 2 件を持つ。1 位が自分と同じ成分なら 2 位を使えばよい。
 - **自分の成分を一時的に除く**：Binary Trie やセグメント木に全頂点を入れておき、成分ごとに「その成分の頂点を消す → 成分の各頂点で問い合わせる → 戻す」を行う。各頂点は 1 段で 1 回ずつ消して戻すので、1 段はデータ構造の操作 $O(N)$ 回で済む。
 
-例として、一列に並ぶ頂点 $i, j$（0-indexed）を重み $D \lvert i - j \rvert + A_i + A_j$ の辺で結ぶ完全グラフを考える。$j < i$ の相手との重みは $(A_j - Dj) + (A_i + Di)$ なので、左から走査して $A_j - Dj$ の上位 2 件を成分が異なるように持てば、各 $i$ の左側の最良の相手が $O(1)$ で分かる。右側も同じで、1 段は $O(N)$、全体で $O(N \log N)$ になる。中心の部分は次のとおりである（完全なプログラムは `snippets/spanning-tree-advanced/boruvka.cpp`。乱数の入力で配列のプリム法と比べている）。
+例として、一列に並ぶ頂点 $i, j$（0-indexed）を重み $D \lvert i - j \rvert + A_i + A_j$ の辺で結ぶ完全グラフを考える。$j < i$ の相手との重みは $(A_j - Dj) + (A_i + Di)$ なので、左から走査して $A_j - Dj$ の上位 2 件を成分が異なるように持てば、各 $i$ の左側の最良の相手が $O(1)$ で分かる。右側も同じで、1 段は $O(N)$、全体で $O(N \log N)$ になる。中心の部分は次のとおりである（完全なプログラムは [`snippets/spanning-tree-advanced/boruvka.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/spanning-tree-advanced/boruvka.cpp)。乱数の入力で配列のプリム法と比べている）。
 
 ```cpp
 --8<-- "spanning-tree-advanced/boruvka.cpp:core"
 ```
+
+完全なプログラム：[`boruvka.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/spanning-tree-advanced/boruvka.cpp)（GitHub）
+{ .kp-code-src }
 
 同じ辺を 2 回足さないことなど、自作するときの注意は[自作するときの要点](#library)にまとめた。辺の候補を $O(N \log N)$ 本に減らしてクラスカル法を使う方法（分割統治・[重心分解](../tree/centroid-decomposition.md)）で同じ問題が解けることも多い。
 
@@ -82,7 +85,10 @@ Manhattan MST は、平面上の $N$ 点を[マンハッタン距離](../geometr
 --8<-- "spanning-tree-advanced/manhattan-mst.cpp:core"
 ```
 
-返した候補の辺でクラスカル法を行えば答えになる（完全なプログラムは `snippets/spanning-tree-advanced/manhattan-mst.cpp`。同じ座標の点を含む乱数の入力で、全点対のクラスカル法と比べている）。「$x$ でソートした隣どうしと $y$ でソートした隣どうし」だけでは足りないことに注意する（反例は[最小全域木の確認問題](../graph/minimum-spanning-tree.md#reduce-candidates)）。自作したものは Library Checker の Manhattan MST で確かめる。
+完全なプログラム：[`manhattan-mst.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/spanning-tree-advanced/manhattan-mst.cpp)（GitHub）
+{ .kp-code-src }
+
+返した候補の辺でクラスカル法を行えば答えになる（完全なプログラムは [`snippets/spanning-tree-advanced/manhattan-mst.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/spanning-tree-advanced/manhattan-mst.cpp)。同じ座標の点を含む乱数の入力で、全点対のクラスカル法と比べている）。「$x$ でソートした隣どうしと $y$ でソートした隣どうし」だけでは足りないことに注意する（反例は[最小全域木の確認問題](../graph/minimum-spanning-tree.md#reduce-candidates)）。自作したものは Library Checker の Manhattan MST で確かめる。
 
 ## 最小有向全域木（Chu-Liu/Edmonds） {#directed}
 

@@ -102,6 +102,9 @@ $k < 0$ や $k > n$ のとき、$n$ 個から $k$ 個を選ぶ方法はないの
 --8<-- "binomial-coefficient/pascal.cpp:core"
 ```
 
+完全なプログラム：[`pascal.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binomial-coefficient/pascal.cpp)（GitHub）
+{ .kp-code-src }
+
 表は $\mathrm{C}[n][0] = 1$ から始め、同じ行の $k > n$ の部分は 0 のままにする。グローバルの配列は 0 で初期化されるので、$\mathrm{C}[n-1][n]$ を参照しても 0 が返り、$\mathrm{C}[n][n] = 1$ が正しく作られる。
 
 ## mod を取らないときの大きさとオーバーフロー {#overflow}
@@ -133,6 +136,9 @@ $n = 4$, $k = 2$, $K = 4$ で動かす。先頭を 0 にすると $\binom{3}{2} 
 ```cpp
 --8<-- "binomial-coefficient/kth.cpp:core"
 ```
+
+完全なプログラム：[`kth.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binomial-coefficient/kth.cpp)（GitHub）
+{ .kp-code-src }
 
 $K$ を 1-indexed と 0-indexed のどちらで扱うかを最初に決め、比べる不等号をそれに合わせる（1-indexed なら $K \le c$、0-indexed なら $K < c$）。問題の K は 1-indexed が多い。0/1 列でなく、a と b のような 2 種類の文字の並べ方でも手順は同じである。これは[辞書順の貪欲](../basics/lexicographic-greedy.md)で「この文字にしたときに作れる数」を二項係数で数えた形である。並べ方の数を表で持てない一般の場合は、DP で数を数えてから同じ手順で復元する（[DP の復元](../dp/dp-reconstruction.md)）。
 

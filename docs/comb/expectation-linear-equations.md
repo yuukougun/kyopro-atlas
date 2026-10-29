@@ -88,6 +88,9 @@ $b$ には意味がある。$b$ は「始めの状態から、終わる前にも
 --8<-- "expectation-linear-equations/restart.cpp:core"
 ```
 
+完全なプログラム：[`restart.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/expectation-linear-equations/restart.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 !!! info "ACL では"
     `using mint = atcoder::modint998244353;` で $a$・$b$ を持てば、組の計算はそのまま書ける。最後の `a / (1 - b)` の割り算は逆元の掛け算で、1 回 $O(\log \mathrm{mod})$ である。終わらないかどうかは `b == 1` の比較ではなく、[b = 1 のとき](#infinite)のとおり終状態に着けるかで判定する。上のコード片では、表の確率が 0（$P = 0$）のときだけ着けない。
 
@@ -116,6 +119,9 @@ $$
 ```cpp
 --8<-- "expectation-linear-equations/ring.cpp:core"
 ```
+
+完全なプログラム：[`ring.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/expectation-linear-equations/ring.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 **検算**：どの $n$ でも、誰か 1 人は必ず最後に残るので、$p[n][0] + \dots + p[n][n-1] = 1$ になる。コード片の `main` はこれを確かめている。円環を閉じる式を立て間違えると、この和が 1 からずれる。
 

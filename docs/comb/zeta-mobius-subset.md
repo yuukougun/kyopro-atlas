@@ -85,6 +85,9 @@ for i = 0, 1, ..., n-1:                 # bit（軸）を外側に回す
 --8<-- "zeta-mobius-subset/transforms.cpp:core"
 ```
 
+完全なプログラム：[`transforms.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/zeta-mobius-subset/transforms.cpp)（GitHub）
+{ .kp-code-src }
+
 **計算量**：$n$ 段それぞれで $2^n$ 個の $S$ を見るので $O(n 2^n)$ である。$n = 20$ で約 $2 \times 10^7$ 回で、加算だけなら十分に速い（[計算量の見積もり](../basics/complexity-estimation.md)）。配列は $2^{20} \approx 10^6$ 要素で、`long long` でも 8 MB に収まる。
 
 **応用の型**：
@@ -137,6 +140,9 @@ $$
 --8<-- "zeta-mobius-subset/transforms.cpp:superset"
 ```
 
+完全なプログラム：[`transforms.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/zeta-mobius-subset/transforms.cpp)（GitHub）
+{ .kp-code-src }
+
 補集合を取って $\overline{S}$ を添字にすると、上位集合の和は部分集合の和に変わる。だから「添字を `S ^ ((1 << n) - 1)` に付け替えて部分集合ゼータ変換し、また付け替える」でも同じ結果になる。専用の関数を書く方が付け替えの誤りが起きにくい。
 
 上位集合の和が要るのは、「$S$ をすべて含む」を数えるときである。たとえば $\widecheck{\mathrm{cnt}}(S)$ は「$A_i \supseteq S$、すなわち $A_i$ が $S$ の bit をすべて持つ $i$ の個数」である。次の節の AND 畳み込みでは、「$A_i$ AND $A_j$ が $S$ を含む」と「$A_i$ と $A_j$ がどちらも $S$ を含む」が同じであることを使う。
@@ -171,6 +177,9 @@ AND 畳み込み $h(U) = \sum_{A \cap B = U} f(A) \, g(B)$ も同じ形である
 --8<-- "zeta-mobius-subset/transforms.cpp:convolution"
 ```
 
+完全なプログラム：[`transforms.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/zeta-mobius-subset/transforms.cpp)（GitHub）
+{ .kp-code-src }
+
 [畳み込み](../math/convolution-ntt.md)（FFT・NTT）が添字の和 $i + j$ を扱うのと同じく、変換して各点で掛けて戻す。添字の演算が OR・AND に変わり、変換が部分集合・上位集合のゼータ変換に変わったものである。Library Checker の「Bitwise And Convolution」で自作の実装を確かめられる。
 
 **応用の型**：
@@ -190,6 +199,9 @@ AND 畳み込み $h(U) = \sum_{A \cap B = U} f(A) \, g(B)$ も同じ形である
 ```cpp
 --8<-- "zeta-mobius-subset/or-plus-max.cpp:top2"
 ```
+
+完全なプログラム：[`or-plus-max.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/zeta-mobius-subset/or-plus-max.cpp)（GitHub）
+{ .kp-code-src }
 
 上位 2 つに限らず、「部分集合の中の上位 $k$ 個」も同じように持てる。1 段の合わせに $O(k)$ かかるので、全体は $O(k n 2^n)$ である。max と同じく引き算で戻せないので、メビウス変換はできない。
 
@@ -246,6 +258,9 @@ $i \mid j \le K$ を直接扱う代わりに、$i \mid j \subseteq L$ を考え�
     ```cpp
     --8<-- "zeta-mobius-subset/or-plus-max.cpp:core"
     ```
+
+    完全なプログラム：[`or-plus-max.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/zeta-mobius-subset/or-plus-max.cpp)（GitHub）
+    { .kp-code-src }
 
 ## 練習問題 {#practice}
 

@@ -8,7 +8,7 @@
 2. 直した箇所が planning/checklists/ の観点（fact・clarity・code・figure のうち関係するもの）と planning/style-guide.md に合っているか。事実（計算量・定義・コード）が正しいか
 3. 直したことで、別の箇所が壊れていないか（リンク・anchor・表・数式・図・生成物への影響）
 4. 書き換えない検査が通るか：`python3 tools/check_pages.py --page <id>`、必要に応じて `fix_problems.py --check`・`check_snippets.py`・`check_svg.py`・`npx textlint <ファイル>`・`node --test "tests/viz/*.test.mjs"`
-5. 表示が要るものは、作業用フォルダへビルドして（`uv run mkdocs build -q -d <作業用フォルダ>/site`）、ヘッドレスの Chrome で幅 390px とダークモードで撮って見る。リポジトリの site/ には書かない。ビルドしたサイトは `file://` で開かず、作業用フォルダで `python3 -m http.server <ポート> --directory <作業用フォルダ>` を立て、`http://127.0.0.1:<ポート>/site/…` で開く（`file://` では KaTeX などの JS が動かず、数式のエラーを見落とす）。ほかの担当とポートがぶつからないよう、10000〜60000 から選び、使い終えたら止める
+5. 表示が要るものは、作業用フォルダへビルドして（`uv run mkdocs build -d <作業用フォルダ>/site`）、ヘッドレスの Chrome で幅 390px とダークモードで撮って見る。リポジトリの site/ には書かない。ビルドしたサイトは `file://` で開かず、作業用フォルダで `python3 -m http.server <ポート> --directory <作業用フォルダ>` を立て、`http://127.0.0.1:<ポート>/site/…` で開く（`file://` では KaTeX などの JS が動かず、数式のエラーを見落とす）。ほかの担当とポートがぶつからないよう、10000〜60000 から選び、使い終えたら止める
 
 差分は `git diff -- <ファイル>` で見る。何を直したかは担当の報告（`planning/batches/fix/<バッチ>/<担当>.md`）にある。
 

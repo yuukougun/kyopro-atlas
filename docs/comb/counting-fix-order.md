@@ -112,6 +112,9 @@ $a = (1, 2, 3, 4)$、$K = 2$ で確かめる。式の値は $1 \cdot 0 + 2 \cdot
 --8<-- "counting-fix-order/bfs-coloring.cpp:core"
 ```
 
+完全なプログラム：[`bfs-coloring.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/counting-fix-order/bfs-coloring.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 大事なのは「どの頂点も親より後に塗る」ことだけである。この順番なら、$v$ を塗る時点で $v$ の子孫はまだ塗られていないので、距離 2 以内で塗り終わっているのは親・祖父・兄弟の一部に限られる。だから BFS 順に限らず、行きがけ順の DFS でも成り立つ。逆に、親より先に子孫を塗る順番では壊れる。たとえばパス $a - b - c - d - e$ で $a$ と $e$ を先に塗ると、$a$ と $e$ は距離 4 なので同じ色と違う色のどちらでもよい。次に $c$ を塗るとき、避ける色は $a$ と $e$ が同じ色なら 1 個、違えば 2 個になり、選択肢の数が一定にならない。
 
 ??? question "確認問題：兄弟の塗り方に依存しない理由"
@@ -155,6 +158,9 @@ $$
 ```cpp
 --8<-- "counting-fix-order/tree-order.cpp:core"
 ```
+
+完全なプログラム：[`tree-order.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/counting-fix-order/tree-order.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 割り算は法 $p$ での逆元を掛けることで行う。$1 \le N - \mathrm{sz}[v] < p$ なので、逆元は必ずある。
 

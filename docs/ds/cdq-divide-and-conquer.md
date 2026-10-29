@@ -96,11 +96,14 @@ ACL に CDQ 分割統治はなく、問題ごとに書く。自作するとき�
 - **座標圧縮は最初に 1 回**：BIT の添字にする $c$（長方形クエリなら $y$）は、全体で 1 回だけ[座標圧縮](../basics/coordinate-compression.md)しておく。
 - **長方形は 4 つの質問に分ける**：長方形 $[x_1, x_2) \times [y_1, y_2)$ の和を、符号 $\pm 1$ つきの 4 つの質問に分ける。各質問は「$x < X$ かつ $y < Y$」の形である。半開区間にそろえれば、$X \in \{x_1, x_2\}$・$Y \in \{y_1, y_2\}$ のどれも「未満」で数えればよい。最初からある点は、時刻が最も前の追加として扱う。
 
-3 次元の支配点の数え上げの中心は次のとおりである（完全なプログラムは `snippets/cdq-divide-and-conquer/dominance.cpp`）。同じ点をまとめた後の列 `u`（辞書順）・重み `w`・圧縮した $c$ の添字 `ci` を使う。コード片では、同じ値が多く出る小さい乱数の入力で、愚直な $O(N^2)$ の数え上げと答えを照らし合わせている。
+3 次元の支配点の数え上げの中心は次のとおりである（完全なプログラムは [`snippets/cdq-divide-and-conquer/dominance.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cdq-divide-and-conquer/dominance.cpp)）。同じ点をまとめた後の列 `u`（辞書順）・重み `w`・圧縮した $c$ の添字 `ci` を使う。コード片では、同じ値が多く出る小さい乱数の入力で、愚直な $O(N^2)$ の数え上げと答えを照らし合わせている。
 
 ```cpp
 --8<-- "cdq-divide-and-conquer/dominance.cpp:core"
 ```
+
+完全なプログラム：[`dominance.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cdq-divide-and-conquer/dominance.cpp)（GitHub）
+{ .kp-code-src }
 
 自作したら、Library Checker で確かめる。
 

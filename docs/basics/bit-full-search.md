@@ -2,6 +2,7 @@
 id: bit-full-search
 title: bit 全探索と順列全探索
 aliases: [ビット全探索, 部分集合の全列挙, 2^N 全探索, 3 進全探索, next_permutation, N! 全探索, bit brute force]
+tags: [ビット]
 type: technique
 field: basics
 chapter: 全探索
@@ -62,6 +63,9 @@ bit 全探索は、$N$ 個の要素それぞれの 2 択を $0$ 以上 $2^N$ 未
 --8<-- "bit-full-search/subsets.cpp:core"
 ```
 
+完全なプログラム：[`subsets.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bit-full-search/subsets.cpp)（GitHub）
+{ .kp-code-src }
+
 全体は $O(2^N N)$ で、$N = 20$ なら約 $2 \times 10^7$ 回の演算で済む。集合の和・差・要素の個数などの書き方は [bitDP の節](../dp/bit-dp.md#subsets-as-integers)の表にまとめてある。
 
 2 択の意味は「選ぶ／選ばない」に限らない。よく出る読み替えは次のとおりである。
@@ -82,6 +86,9 @@ bit 全探索は、$N$ 個の要素それぞれの 2 択を $0$ 以上 $2^N$ 未
 ```cpp
 --8<-- "bit-full-search/base3.cpp:core"
 ```
+
+完全なプログラム：[`base3.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bit-full-search/base3.cpp)（GitHub）
+{ .kp-code-src }
 
 - **$3^N$ は整数で作る**：`pow(3, n)` の戻り値は `double` なので、整数へ直すときに丸めの誤差が入りうる。ループで 3 を掛けて作る
 - **大きさの目安**：$3^{12} = 531441$、$3^{13} \approx 1.6 \times 10^6$、$3^{15} \approx 1.4 \times 10^7$ である。1 通りあたり $O(N)$ の処理なら $N \le 13$ 程度が安心できる範囲である
@@ -139,6 +146,9 @@ $X, Y, Z$ はそれぞれ選んだ要素の値の合計とする。符号 $(s, t
 ```cpp
 --8<-- "bit-full-search/permutations.cpp:core"
 ```
+
+完全なプログラム：[`permutations.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bit-full-search/permutations.cpp)（GitHub）
+{ .kp-code-src }
 
 - **昇順から始める**：`next_permutation` は今の並びより辞書順で後の並びしか作らない。入力の順のまま始めると、それより前の並びが抜ける。必ず `sort` してから `do { … } while (next_permutation(…));` の形で回す
 - **重複要素**：同じ値があると、同じ並びは 1 回だけ出る。`1 1 2` なら $3! = 6$ ではなく 3 通りである。値を区別して数えたいときは、番号 $0, 1, \dots, N - 1$ の順列を回して、番号から値を引く

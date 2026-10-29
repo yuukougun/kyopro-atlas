@@ -84,6 +84,9 @@ updated: 2026-10-29
 --8<-- "segment-tree-on-values/count-sum.cpp:core"
 ```
 
+完全なプログラム：[`count-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-on-values/count-sum.cpp)（GitHub）
+{ .kp-code-src }
+
 ### 境界
 
 - 圧縮に入れた値は `lower_bound` で添字にしてよい。入れていない値（質問にだけ出る $x$ など）は、「以下」なら `upper_bound`、「未満」なら `lower_bound` で境界の位置にする
@@ -127,6 +130,9 @@ $\mathrm{dp}$ を値を添字にした区間 max のセグメント木に持て�
 --8<-- "segment-tree-on-values/top-k.cpp:core"
 ```
 
+完全なプログラム：[`top-k.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-on-values/top-k.cpp)（GitHub）
+{ .kp-code-src }
+
 大きい方から $K$ 個の和は、全体の和から「小さい方から（全体の個数 $- K$）個の和」を引けば求まる。`min_left` で右から探してもよい。[BIT](../ds/fenwick-tree.md) を 2 本（個数と和）使い、[BIT 上の二分探索](../ds/fenwick-tree.md#binary-search)で境界を探しても同じ計算量で、定数倍は軽い。
 
 $K$ が固定で 1 個ずつの追加・削除なら、[上位 K 個の和を保つ（2 つの multiset）](../ds/top-k-multiset.md#two-sets)でも書ける。値を添字にする方法は、$K$ がクエリごとに大きく変わる場合や、1 回の更新で個数がまとめて変わる場合（「値 $x$ のカードを $b$ 枚にする」）にも同じ手順で使える。
@@ -169,6 +175,9 @@ $$
 ```cpp
 --8<-- "segment-tree-on-values/dynamic-odd-sum.cpp:core"
 ```
+
+完全なプログラム：[`dynamic-odd-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-on-values/dynamic-odd-sum.cpp)（GitHub）
+{ .kp-code-src }
 
 **メモリの見積もり**：$Q = 2 \times 10^5$、$C = 10^9$ とする。1 回の追加で作るノードは 31 個以下なので、全体で $Q \times 31 \approx 6.2 \times 10^6$ 個を超えない。実際は根に近い段のノードが多くの値で共有され、深さ $d$ の段には $\min(2^d, Q)$ 個までしかないので、最悪でも約 $2.9 \times 10^6$ 個である。このコードは 1 ノードに `int` 2 個と `long long` 3 個（32 バイト）を持つので、約 90 MB になる。`vector` は伸びるときに一時的に倍近くを使うので、`reserve` で先に確保しておくと安全である。確保する数は上界の $Q \times 31 + 1$ にすれば迷わない。和を持たない（個数だけの）木ならずっと小さい。
 

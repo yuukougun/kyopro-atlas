@@ -6,7 +6,7 @@ using namespace std;
 // --8<-- [start:core]
 long long max_weight_matching(int n, const vector<vector<long long>>& w) {
     // dp[S] = 集合 S の頂点の扱い（組むか、組まないか）を決め終えたときの重みの和の最大
-    vector<long long> dp(1 << n, LLONG_MIN);
+    vector<long long> dp(1 << n, LLONG_MIN);  // まだ作れない印。足す前に飛ばすのでこの値でよい
     dp[0] = 0;
     for (int s = 0; s < (1 << n) - 1; s++) {
         if (dp[s] == LLONG_MIN) continue;

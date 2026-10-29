@@ -54,6 +54,9 @@ updated: 2026-10-29
 --8<-- "integer-root/sqrt-ng.cpp:core"
 ```
 
+完全なプログラム：[`sqrt-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/integer-root/sqrt-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 $n$ そのものは double で正確に表せるのに、平方根の値が丸められて 1 ずれる。$10^{18}$ 近くでは $n$ を double に直す時点でも丸めが起きる（[pow・sqrt は double で計算する](../cpp/cpp-math-functions.md#pow-sqrt)）。
 
 答え $r = \lfloor \sqrt{N} \rfloor$ は、次の不等式を満たすただ 1 つの非負整数である。
@@ -69,6 +72,9 @@ $$
 ```cpp
 --8<-- "integer-root/isqrt.cpp:core"
 ```
+
+完全なプログラム：[`isqrt.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/integer-root/isqrt.cpp)（GitHub）
+{ .kp-code-src }
 
 - **比べ方**：$r^2 > N$ を `r > n / r`、$(r+1)^2 \le N$ を `r + 1 <= n / (r + 1)` と割り算で書いている。$a \times b \le L \iff a \le \lfloor L / b \rfloor$ を使っており（[あふれる前に割り算で判定する](../math/integer-division.md#overflow)）、$N$ が `long long` の上限近くでも 2 乗を作らずに済む
 - **近い値の求め方**：`sqrtl` は long double で計算する。x86-64 の GCC では仮数部が 64 bit ある。$N < 2^{63}$ なら、ずれても 1 程度で補正のループも 0〜1 回で終わる
@@ -90,6 +96,9 @@ $a^K \le N$ となる最大の $a$（$\lfloor N^{1/K} \rfloor$）は、$a$ に�
 --8<-- "integer-root/kth-root.cpp:core"
 ```
 
+完全なプログラム：[`kth-root.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/integer-root/kth-root.cpp)（GitHub）
+{ .kp-code-src }
+
 - **ng の置き場所**：$K \ge 2$ なら答えは $\sqrt{2^{63}} \approx 3.04 \times 10^9$ 未満なので、ng $= 3037000500$ とした。$K = 1$ は答えが $N$ そのものなので先に返す。ng を $N + 1$ にすると、$N$ が上限のときにあふれる
 - **打ち切りの効果**：$a \ge 2$ のとき $a^{64} > 2^{63}$ だから、判定のループは $K$ と関係なく 63 回までで止まる。$a = 1$ を別に扱うのは、何乗しても 1 だからである。判定 1 回の計算量が $O(\min(K, 63))$ で、二分探索の回数が約 32 回である
 - **pow で近い値を求める方法**：平方根と同じく、`pow(n, 1.0 / k)` で近い値を求めてから、$a^K \le N < (a+1)^K$ を上の判定で確かめて直してもよい。$1.0 / k$ そのものに誤差があるので、ずれは 1 より大きいこともあると考え、ループで直す
@@ -109,6 +118,9 @@ $N = 99$ で確かめる。平方数は $1, 4, \dots, 81$ の 9 個である。�
 ```cpp
 --8<-- "integer-root/perfect-powers.cpp:core"
 ```
+
+完全なプログラム：[`perfect-powers.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/integer-root/perfect-powers.cpp)（GitHub）
+{ .kp-code-src }
 
 ソートが列挙した約 $N^{1/3}$ 個に対して $O(N^{1/3} \log N)$ かかり、これが全体の計算量になる。平方数の判定も、前の節の正確な `isqrt` で行う。この範囲の累乗数では `sqrt` でもたまたま誤らないが、それを確かめるより `isqrt` を使う方が安全である。
 

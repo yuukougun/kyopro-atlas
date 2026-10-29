@@ -176,6 +176,9 @@ $x$ の余りを全部試せば確かめられる。法 4 なら $x$ が偶数�
 --8<-- "proof-patterns/difference-closure.cpp:core"
 ```
 
+完全なプログラム：[`difference-closure.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/proof-patterns/difference-closure.cpp)（GitHub）
+{ .kp-code-src }
+
 予想が `assert` で落ちたときの原因は 2 通りある。作れない値まで予想に入れた（「予想の値はすべて作れる」という十分条件の側の主張が誤り。必要条件が足りない）か、作れる値を予想から漏らした（「予想の外の値は作れない」という必要条件の側の主張が誤り。条件を強く取りすぎた）かである。どちらの側で落ちたかを見ると、足りない条件が見つかりやすい。不変量の全探索による確かめ方は[不変量で必要条件を見つける](../thinking/invariant.md#necessary-and-sufficient)、愚直解と比べる一般の方法は[ストレステスト](../guide/stress-testing.md#procedure)にある。
 
 ## 落とし穴 {#pitfalls}

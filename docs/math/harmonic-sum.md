@@ -104,6 +104,9 @@ for d = 1..M:
 --8<-- "harmonic-sum/multiples.cpp:mark"
 ```
 
+完全なプログラム：[`multiples.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/harmonic-sum/multiples.cpp)（GitHub）
+{ .kp-code-src }
+
 印の代わりに数を配れば、「$v$ を割り切る要素の個数」も同じループで数えられる。$\mathrm{cnt}[d]$ を $d$ の倍数すべてに足せば、各 $v$ について「列の中にある $v$ の約数の個数（重複込み）」が求まる。
 
 ## 倍数を回して集める（d の倍数である要素の個数・和） {#collect-multiples}
@@ -122,6 +125,9 @@ $c[d]$ は「すべて $d$ の倍数」という条件で数えた量であり�
 ```cpp
 --8<-- "harmonic-sum/multiples.cpp:collect"
 ```
+
+完全なプログラム：[`multiples.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/harmonic-sum/multiples.cpp)（GitHub）
+{ .kp-code-src }
 
 集めるものは個数に限らない。$\mathrm{cnt}[k]$ の代わりに $k \cdot \mathrm{cnt}[k]$ を集めれば「$d$ の倍数である要素の和」、最大値をとれば「$d$ の倍数である要素の最大」になる。集めた後にもう一度倍数へ配る、という 2 段の処理もよく使う。
 
@@ -154,6 +160,9 @@ $$
 --8<-- "harmonic-sum/multiples.cpp:back"
 ```
 
+完全なプログラム：[`multiples.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/harmonic-sum/multiples.cpp)（GitHub）
+{ .kp-code-src }
+
 この「数えやすい量（すべて $d$ の倍数）から、ちょうど $d$ のものを後ろから引いて求める」形は[約数包除](../comb/divisor-inclusion-exclusion.md#partition)と呼ばれる。答えを mod で求めるときは、引き算で負になった値を法に足して直す。
 
 ??? question "確認問題：前から決めるとどうなるか"
@@ -175,6 +184,9 @@ $$
 ```cpp
 --8<-- "harmonic-sum/multiples.cpp:quotient"
 ```
+
+完全なプログラム：[`multiples.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/harmonic-sum/multiples.cpp)（GitHub）
+{ .kp-code-src }
 
 $q = 1$ の区間だけは $x$ 自身を含むので、下端を $x + 1$ に上げて同じ値を除く。区間の上端 $(q + 1)x - 1$ は $M$ を超えることがあるので、$M$ で打ち切る。
 

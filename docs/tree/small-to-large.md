@@ -89,6 +89,9 @@ $N = 2 \times 10^5$ なら $N \log_2^2 N$ は $6 \times 10^7$ ほどで、`set` 
 --8<-- "small-to-large/swap-sets.cpp:core"
 ```
 
+完全なプログラム：[`swap-sets.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/small-to-large/swap-sets.cpp)（GitHub）
+{ .kp-code-src }
+
 `a == b` の判定は省けない。自分自身へ移すと、`for` で `s[a]` を読みながら同じ集合に挿入し、最後の `clear` で中身が全部消える。Union-Find と組み合わせるなら、同じ成分どうしの併合がこれにあたる。
 
 !!! warning "コピーで移すと O(N) が毎回かかる"
@@ -112,6 +115,9 @@ ACL の `dsu` は、サイズ（頂点数）の大きい方を代表元に残す
 ```cpp
 --8<-- "small-to-large/map-on-root.cpp:core"
 ```
+
+完全なプログラム：[`map-on-root.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/small-to-large/map-on-root.cpp)（GitHub）
+{ .kp-code-src }
 
 問い合わせで `m[y]` と書くと、ない色の項目が作られて map が大きくなる。読むだけなら `find` か `count` を使う。
 
@@ -203,6 +209,9 @@ dfs(v, keep):                          # keep：v の部分木を数えたまま
 ```cpp
 --8<-- "small-to-large/dsu-on-tree.cpp:core"
 ```
+
+完全なプログラム：[`dsu-on-tree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/small-to-large/dsu-on-tree.cpp)（GitHub）
+{ .kp-code-src }
 
 最頻値の出現回数を求めるなら、色ごとの個数 $\mathrm{cnt}[x]$ に加えて、「個数が $k$ の色の数」$\mathrm{freq}[k]$ と最大の個数 $\mathrm{mx}$ を持つ。色 $x$ を足すときは $\mathrm{freq}[\mathrm{cnt}[x]]$ を 1 減らし、$\mathrm{cnt}[x]$ を 1 増やし、$\mathrm{freq}[\mathrm{cnt}[x]]$ を 1 増やして、$\mathrm{mx}$ を必要なら 1 増やす。引くときは $\mathrm{cnt}$ と $\mathrm{freq}$ を同じように 1 つずつ戻す。引くのは部分木を空にするときだけなので、$\mathrm{mx}$ は全部引き終えてから $0$ に戻せばよい。
 

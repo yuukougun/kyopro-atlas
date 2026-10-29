@@ -93,6 +93,9 @@ DAG 上の DP で考えるのは、どの順に頂点を処理するかだけで
 --8<-- "dp-dag/longest-and-count.cpp:core"
 ```
 
+完全なプログラム：[`longest-and-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-dag/longest-and-count.cpp)（GitHub）
+{ .kp-code-src }
+
 メモ化再帰は、貰う形で書くのが自然である。たとえば「$\mathrm{dp}[v]$ ＝ $v$ から始まる最長路の長さ」とおけば、$\mathrm{dp}[v] = \max_{v \to w} (\mathrm{dp}[w] + 1)$ を出る辺だけで書ける。配る for 文と再帰のどちらで書くかで、自然な状態の向き（$v$ で終わるか、$v$ から始まるか）が変わる。
 
 ??? question "確認問題：番号順に回すと"

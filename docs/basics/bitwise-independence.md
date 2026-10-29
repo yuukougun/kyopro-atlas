@@ -2,6 +2,7 @@
 id: bitwise-independence
 title: bit ごとに独立に考える
 aliases: [bit ごとの寄与, 桁ごとに見る, bit ごとに分解, 上位ビットから決める, XOR の和, bitwise decomposition]
+tags: [ビット]
 type: technique
 field: basics
 chapter: 計算量と bit 演算
@@ -68,6 +69,9 @@ bit $k$ が 1 の要素を $c_k$ 個とすると、bit $k$ が異なるペアは
 --8<-- "bitwise-independence/pair-xor-sum.cpp:core"
 ```
 
+完全なプログラム：[`pair-xor-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bitwise-independence/pair-xor-sum.cpp)（GitHub）
+{ .kp-code-src }
+
 AND と OR も同じ形で数えられる。違うのは「bit $k$ が 1 になるペアの数」だけである。
 
 | 演算 | bit $k$ が 1 になる条件 | ペアの数 |
@@ -97,6 +101,9 @@ $$
 ```cpp
 --8<-- "bitwise-independence/pair-xor-sum.cpp:range"
 ```
+
+完全なプログラム：[`pair-xor-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bitwise-independence/pair-xor-sum.cpp)（GitHub）
+{ .kp-code-src }
 
 $a = (3, 5, 6)$ なら $s = (0, 3, 6, 0)$ で、$s$ の全ペアの XOR の和は 23、そこから $3 + 5 + 6 = 14$ を引いた 9 が長さ 2 以上の区間の和（$6 + 3 + 0$）である。
 

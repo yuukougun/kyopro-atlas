@@ -1,7 +1,7 @@
 ---
 id: ternary-search
 title: 三分探索
-aliases: [三分法, 黄金分割探索, 凸関数の極値, 凸関数, 離散凸, 増分が単調, ternary search]
+aliases: [三分法, 黄金分割探索, 凸関数の極値, 凸関数, 離散凸, 増分が単調, ternary search, 3 分探索]
 type: technique
 field: basics
 chapter: 凸と三分探索
@@ -40,7 +40,7 @@ updated: 2026-10-29
     - **前提**：[答えで二分探索](../basics/binary-search-answer.md)
 
 <!-- textlint-disable -->
-別名：三分法・黄金分割探索・凸関数の極値・凸関数・離散凸・増分が単調・ternary search
+別名：三分法・黄金分割探索・凸関数の極値・凸関数・離散凸・増分が単調・ternary search・3 分探索
 <!-- textlint-enable -->
 
 三分探索は、[下に凸](../guide/glossary.md#convex-function)な関数 $f$ の最小値を、区間の中の 2 点の値を比べて区間を縮めながら求める方法である。[答えで二分探索](../basics/binary-search-answer.md)は「$x$ で可能か」という判定が単調なときに使うが、「$x$ を大きくすると一方の量は減り、もう一方は増える」ような最適化では判定が作れない。値そのものが谷形なら、谷の底がどちら側にあるかを 2 点の比較で決められる。整数の範囲なら、差分の符号で二分探索に直すほうが書き間違えにくい。
@@ -64,6 +64,9 @@ updated: 2026-10-29
 --8<-- "ternary-search/ternary-real.cpp:core"
 ```
 
+完全なプログラム：[`ternary-real.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/ternary-search/ternary-real.cpp)（GitHub）
+{ .kp-code-src }
+
 出力するのが最小値なら、最後は $x$ ではなく $f$ の値を出す。谷の底の近くでは $f$ がほとんど変わらないので、$x$ の誤差が大きめでも $f$ の値の誤差は小さい。
 
 **整数版**。$x$ が整数のときは、区間が 3 点以下になったら縮めるのをやめ、残りを全部調べる。$r - l \ge 3$ の間は $l < m_1 < m_2 < r$ となり、1 回で区間が少なくとも 1 縮むので必ず止まる。
@@ -71,6 +74,9 @@ updated: 2026-10-29
 ```cpp
 --8<-- "ternary-search/ternary-int.cpp:core"
 ```
+
+完全なプログラム：[`ternary-int.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/ternary-search/ternary-int.cpp)（GitHub）
+{ .kp-code-src }
 
 1 回で幅がおよそ $2/3$ 倍になるので、反復は $O(\log W)$ 回、評価はその 2 倍である。$W = 10^9$ なら評価は約 100 回になる。
 
@@ -83,6 +89,9 @@ updated: 2026-10-29
 ```cpp
 --8<-- "ternary-search/diff-sign.cpp:core"
 ```
+
+完全なプログラム：[`diff-sign.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/ternary-search/diff-sign.cpp)（GitHub）
+{ .kp-code-src }
 
 - **止まることが明らか**：ok と ng の幅が毎回半分になる二分探索なので、$m_1 = m_2$ になって止まらない、という整数版の三分探索の失敗が起きない
 - **評価が少ない**：1 回の判定で 2 回評価し、幅は $1/2$ 倍になる。三分探索は 2 回の評価で $2/3$ 倍なので、同じ幅を縮めるのに要る評価の回数は約 $\log 2 / \log 1.5 \approx 1.7$ 分の 1 で済む
@@ -157,6 +166,9 @@ $$
 ```cpp
 --8<-- "ternary-search/marginal-greedy.cpp:core"
 ```
+
+完全なプログラム：[`marginal-greedy.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/ternary-search/marginal-greedy.cpp)（GitHub）
+{ .kp-code-src }
 
 - **計算量**：優先度付きキューで $O((N + K) \log N)$
 - **下限があるとき**：$x_i \ge 1$ なら全員に 1 ずつ配ってから、残りの $K - N$ 単位を同じ貪欲で配る

@@ -78,6 +78,9 @@ $O(N^2)$ にするための実装の約束は、**各頂点の配列を、その
 --8<-- "tree-dp-square/tree-knapsack.cpp:core"
 ```
 
+完全なプログラム：[`tree-knapsack.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-dp-square/tree-knapsack.cpp)（GitHub）
+{ .kp-code-src }
+
 ここで守っていることは 3 つある。
 
 - **新しい配列に書く**：$\mathrm{dp}[v][i]$ をその場で書き換えると、同じマージの中で書き換えた値を読み、$c$ の部分木から 2 回選んだことになる。[0-1 ナップサック](../dp/knapsack-01.md)と同じ理由である。添字を大きい方から回す書き方もできるが、新しい配列を作る方が確実である。
@@ -129,6 +132,9 @@ $O(NK)$ になる理由は「$O(N)$ 回のマージ × 1 回 $O(K^2)$」の $O(N
 ```cpp
 --8<-- "tree-dp-square/components.cpp:core"
 ```
+
+完全なプログラム：[`components.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-dp-square/components.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 成分の数は部分木のサイズを超えないので、添字の範囲は $0$〜$\mathrm{sz}$ でよく、[頂点の組の議論](#why-n2)がそのまま使える。
 

@@ -92,6 +92,9 @@ cross の時間が区間の長さに比例するなら、各段の合計は $O(N
 --8<-- "divide-and-conquer/merge-inversion.cpp:core"
 ```
 
+完全なプログラム：[`merge-inversion.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/divide-and-conquer/merge-inversion.cpp)（GitHub）
+{ .kp-code-src }
+
 等しい値の扱いはマージの比較で決まる。$a_i \le a_j$ のときに左を先に出せば、等しい組は数えない（狭義の転倒）。$a_i < a_j$ のときだけ左を出すと、等しい組も数えてしまう。転倒数そのものは BIT で数える方が短く書けることが多い（[転倒数](../ds/inversion-number.md#count-with-bit)）。分割統治の形は、またぐ条件が BIT に載らない形のときに効く。
 
 **区間をまたぐ場合**：「すべての区間 $[i, j)$ について数える・合計する」問題では、中央 $m$ をまたぐ区間は「左の接尾辞 $[i, m)$」と「右の接頭辞 $[m, j)$」の組である。左の接尾辞の和・最大値などは、$m$ から左へ 1 つずつ伸ばしながら求められる。右の接頭辞も同じように求めると、区間の値は 2 つの値の組み合わせで書ける。条件が「左の値 + 右の値 $\le K$」の形なら、ソートと尺取り法で $O(L \log L)$ で数えられる。
@@ -120,6 +123,9 @@ cross の時間が区間の長さに比例するなら、各段の合計は $O(N
 --8<-- "divide-and-conquer/split-at-max.cpp:core"
 ```
 
+完全なプログラム：[`split-at-max.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/divide-and-conquer/split-at-max.cpp)（GitHub）
+{ .kp-code-src }
+
 **応用の型**：
 
 - 区間の最大値（最小値）が条件に入る区間を数える。最大値の位置 $m$ で分けると、$m$ を含む区間 $[i, j)$（$l \le i \le m < j \le r$）は、どれも最大値が $A_m$ である。短い側の端点を全部試し、長い側を累積和の二分探索で数える（合計 $O(N \log^2 N)$）
@@ -145,6 +151,9 @@ cross の時間が区間の長さに比例するなら、各段の合計は $O(N
 ```cpp
 --8<-- "divide-and-conquer/range-knapsack.cpp:core"
 ```
+
+完全なプログラム：[`range-knapsack.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/divide-and-conquer/range-knapsack.cpp)（GitHub）
+{ .kp-code-src }
 
 表を作る時間は各段 $O(NC)$ で、段は $O(\log N)$ 個なので $O(NC \log N)$ である。各クエリはどこか 1 つの区間でだけ答え、1 つ $O(C)$ なので合計 $O(QC)$ である。メモリは表 $N + 1$ 行を使い回して $O(NC)$ で済む。
 

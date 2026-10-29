@@ -2,6 +2,7 @@
 id: cht
 title: Convex Hull Trick と Li Chao Tree
 aliases: [CHT, 傾き最適化, 斜率优化, 李超线段树, 直線の最小値]
+tags: [CHT]
 type: overview
 field: dp
 chapter: DP の高速化
@@ -94,6 +95,9 @@ $$
 --8<-- "cht/monotone.cpp:core"
 ```
 
+完全なプログラム：[`monotone.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cht/monotone.cpp)（GitHub）
+{ .kp-code-src }
+
 直線 $y = ax + b$ を点 $(a, b)$ とみると、下側の包絡線に残る直線は点の集まりの下側凸包の頂点に当たる。この対応は[凸包と CHT の双対](../geometry/convex-hull.md#cht-duality)で扱う。
 
 ## クエリが単調でないとき（二分探索） {#non-monotone-queries}
@@ -130,18 +134,21 @@ ACL には CHT も Li Chao Tree もないので、使うなら自作する。自
 - Li Chao Tree のノードには「直線がない」印を持つ。$+\infty$ の切片で代用すると、$ax$ を足したときに `long long` を超えることがある。
 - 座標圧縮版は、クエリの $x$ が候補の列にあることが前提である。候補にない $x$ を聞くなら、範囲全体の版にする。
 
-座標圧縮版の Li Chao Tree の中心は次のとおりである（完全なプログラムは `snippets/cht/li-chao.cpp` で、乱数で愚直な方法と比べている）。
+座標圧縮版の Li Chao Tree の中心は次のとおりである（完全なプログラムは [`snippets/cht/li-chao.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cht/li-chao.cpp) で、乱数で愚直な方法と比べている）。
 
 ```cpp
 --8<-- "cht/li-chao.cpp:core"
 ```
+
+完全なプログラム：[`li-chao.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cht/li-chao.cpp)（GitHub）
+{ .kp-code-src }
 
 Library Checker の対応は次のとおりである。どちらも $N, Q \le 2 \times 10^5$、$\lvert a \rvert, \lvert x \rvert \le 10^9$、$\lvert b \rvert \le 10^{18}$ で、$ax + b$ は $2 \times 10^{18}$ 以下なので `long long` に収まる。
 
 - Line Add Get Min：直線の追加と $x$ での最小値。傾きの順が単調でないので、deque の CHT では通らず、Li Chao Tree か動的 CHT の確認になる。クエリを先に読めば座標圧縮版が使える。
 - Segment Add Get Min：線分の追加と $x$ での最小値（線分がなければ `INFINITY` と出力）。線分版の Li Chao Tree の確認になる。
 
-単調な deque の CHT は、この 2 問では確かめられない。[例題の EDPC Z](#dp_z) で確かめるか、`snippets/cht/monotone.cpp` のように愚直な $O(N^2)$ の DP と乱数で比べる。
+単調な deque の CHT は、この 2 問では確かめられない。[例題の EDPC Z](#dp_z) で確かめるか、[`snippets/cht/monotone.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cht/monotone.cpp) のように愚直な $O(N^2)$ の DP と乱数で比べる。
 
 ## 落とし穴 {#pitfalls}
 
@@ -174,7 +181,7 @@ Library Checker の対応は次のとおりである。どちらも $N, Q \le 2 
 ??? note "解法の詳細"
     - 高さ $h$ は狭義に増えるので、追加する直線の傾き $-2h_j$ は単調に減り、クエリの $x = h_i$ は単調に増える。deque の CHT がそのまま使え、全体はならし $O(N)$ である。
     - 0-indexed で $\mathrm{dp}[0] = 0$ とし、まず直線 $(-2h_0, h_0^2)$ を追加する。$i = 1, 2, \dots$ の順に、クエリで $\mathrm{dp}[i]$ を求めてから直線 $(-2h_i, \mathrm{dp}[i] + h_i^2)$ を追加する。答えは $\mathrm{dp}[N-1]$。
-    - コード片 `snippets/cht/monotone.cpp` の `solve` がこの流れで、愚直な $O(N^2)$ と乱数で比べている。
+    - コード片 [`snippets/cht/monotone.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cht/monotone.cpp) の `solve` がこの流れで、愚直な $O(N^2)$ と乱数で比べている。
 
 ## 練習問題 {#practice}
 

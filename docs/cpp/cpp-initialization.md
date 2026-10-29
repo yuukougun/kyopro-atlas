@@ -55,6 +55,9 @@ atcoder: true
 --8<-- "cpp-initialization/vector-init.cpp:core"
 ```
 
+完全なプログラム：[`vector-init.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-initialization/vector-init.cpp)（GitHub）
+{ .kp-code-src }
+
 入力 `3` なら、大きさは順に 3・3・1・2 で、`c[0]` は 3 である。`c` に `n` 個の要素があるつもりで `c[i]` を読むと、範囲外の読み出し（[未定義動作](../cpp/cpp-undefined-behavior.md)）になる。
 
 - **素朴に書くと**：`vector<int> a(n);` は、空の vector に `push_back(0)` を `n` 回するのと同じ中身になる。`vector<int> b(n, 7);` は 7 を `n` 回
@@ -68,6 +71,9 @@ atcoder: true
 ```cpp
 --8<-- "cpp-initialization/multi-dim.cpp:core"
 ```
+
+完全なプログラム：[`multi-dim.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-initialization/multi-dim.cpp)（GitHub）
+{ .kp-code-src }
 
 括弧と次元の対応は、外側から順に 1 次元目・2 次元目・3 次元目である。`cnt(n, …(m, …(k, 0)))` で作った表は `cnt[i][j][t]`（$0 \le i < n$、$0 \le j < m$、$0 \le t < k$）と引く。
 
@@ -86,6 +92,9 @@ atcoder: true
 --8<-- "cpp-initialization/array-init.cpp:core"
 ```
 
+完全なプログラム：[`array-init.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-initialization/array-init.cpp)（GitHub）
+{ .kp-code-src }
+
 入力 `banana 3` なら `cnt['a' - 'a']` は 3、`cnt['z' - 'a']` は 0 である。`{}` は C 配列にも使えて、`int cnt[26]{};` も 26 個とも 0 になる。
 
 波括弧に値を書くと、書いた分だけ先頭に入り、残りは 0 になる。全部を同じ値にする書き方ではない。
@@ -93,6 +102,9 @@ atcoder: true
 ```cpp
 --8<-- "cpp-initialization/array-init.cpp:partial"
 ```
+
+完全なプログラム：[`array-init.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-initialization/array-init.cpp)（GitHub）
+{ .kp-code-src }
 
 - **使う場面**：内側の長さが小さな定数のとき（文字の種類 26、状態 2 や 3 の DP）。`vector<vector<long long>> dp(n, vector<long long>(2));` の代わりに `vector<array<long long, 2>> dp(n);` と書けて、要素は 1 つの続いた領域に並ぶ
 - **版**：`array` は C++11 から。g++-13・g++-15 で使える
@@ -108,6 +120,9 @@ atcoder: true
 --8<-- "cpp-initialization/uninit-ng.cpp:core"
 ```
 
+完全なプログラム：[`uninit-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-initialization/uninit-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 入力 `3` と `1 2 3` に対して、手元の g++-13 では 105842398323404453 のような値が出た。正しい答えは 6001 である。`-O2 -Wall -Wextra` では `s` について `'s' may be used uninitialized` と警告したが（`-O2` を付けないと `s` にも警告は出ない）、配列 `cnt` については何も言わなかった。
 
 AtCoder の GCC には `-ftrivial-auto-var-init=zero`（初期化していない関数の中の変数を 0 で埋めるオプション）が付いている。同じコードを手元でこのオプションを付けて試すと 6001 が出た。そのため「AtCoder では AC、手元では答えが合わない」ということが起こる（[AtCoder の C++ 環境](../cpp/cpp-environment.md#auto-var-init)）。規格の上では未定義動作のままなので、初期化を書いて防ぐ。
@@ -115,6 +130,9 @@ AtCoder の GCC には `-ftrivial-auto-var-init=zero`（初期化していない
 ```cpp
 --8<-- "cpp-initialization/uninit-ok.cpp:core"
 ```
+
+完全なプログラム：[`uninit-ok.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-initialization/uninit-ok.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：C++ のどの版でも同じ。g++-13・g++-15 で、どちらも `-O2` 付きで `s` だけを警告した
 - **落とし穴**：配列の未初期化は警告に頼れない。関数の中の配列と `array` には `{}` を付ける習慣にする
@@ -127,11 +145,17 @@ AtCoder の GCC には `-ftrivial-auto-var-init=zero`（初期化していない
 --8<-- "cpp-initialization/designated-init.cpp:core"
 ```
 
+完全なプログラム：[`designated-init.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-initialization/designated-init.cpp)（GitHub）
+{ .kp-code-src }
+
 値は宣言順に `{}` の中へ並べて渡す。C++20 の指示付き初期化を使うと、`.メンバ名 = 値` と名前を書いて渡せる（`Edge{.to = v, .cost = c}` の形）。書かなかったメンバは既定値（既定値がなければ 0）になる。
 
 ```cpp
 --8<-- "cpp-initialization/designated-init.cpp:use"
 ```
+
+完全なプログラム：[`designated-init.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-initialization/designated-init.cpp)（GitHub）
+{ .kp-code-src }
 
 入力 `3 5` なら、`e1` と `e2` はどちらも `to = 3`・`cost = 5`、`e3` は `to = 3`・`cost = 1` である。
 
@@ -140,6 +164,9 @@ AtCoder の GCC には `-ftrivial-auto-var-init=zero`（初期化していない
 ```cpp
 --8<-- "cpp-initialization/designated-order-ng.cpp:core"
 ```
+
+完全なプログラム：[`designated-order-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-initialization/designated-order-ng.cpp)（GitHub）
+{ .kp-code-src }
 
 エラーは `designator order for field 'Edge::to' does not match declaration order in 'Edge'` と出る（g++-13・g++-15）。
 
@@ -155,11 +182,17 @@ C++20 から、コンストラクタを書いていない構造体も丸括弧�
 --8<-- "cpp-initialization/aggregate-emplace.cpp:core"
 ```
 
+完全なプログラム：[`aggregate-emplace.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-initialization/aggregate-emplace.cpp)（GitHub）
+{ .kp-code-src }
+
 C++17 までは丸括弧で集成体を作れないので、`emplace_back(v, c)` はコンパイルエラーになる。`push_back({v, c})` なら C++17 でも通る。
 
 ```cpp
 --8<-- "cpp-initialization/aggregate-emplace-17-ng.cpp:core"
 ```
+
+完全なプログラム：[`aggregate-emplace-17-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-initialization/aggregate-emplace-17-ng.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：C++20。g++-13・g++-15 とも `-std=gnu++20` 以降で通る。`-std=gnu++17` では `new initializer expression list treated as compound expression` に続いて `no matching function for call to 'Edge::Edge(long long int)'` などのエラーになる。丸括弧の中の `1, 10LL` がカンマ演算子として 1 つの値 `10LL` に読まれるためである
 - **落とし穴**：丸括弧の初期化は、波括弧と違って[縮小変換](../guide/glossary.md#narrowing-conversion)（`double` から `int` のように値が変わりうる変換）を止めない。次の `emplace_back(1.9, 2)` は `to` が 1 になり、`-Wall -Wextra` でも警告は出なかった（g++-13・g++-15）。同じ値を `Edge{1.9, 2}` と波括弧で書くとコンパイルエラーになる
@@ -167,6 +200,9 @@ C++17 までは丸括弧で集成体を作れないので、`emplace_back(v, c)`
 ```cpp
 --8<-- "cpp-initialization/aggregate-emplace.cpp:narrow"
 ```
+
+完全なプログラム：[`aggregate-emplace.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-initialization/aggregate-emplace.cpp)（GitHub）
+{ .kp-code-src }
 
 ## explicit なコンストラクタは = で初期化できない（ACL の dsu d = 5 はエラーで、dsu d(5) と書く） {#explicit}
 
@@ -176,11 +212,17 @@ C++17 までは丸括弧で集成体を作れないので、`emplace_back(v, c)`
 --8<-- "cpp-initialization/explicit-ng.cpp:core"
 ```
 
+完全なプログラム：[`explicit-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-initialization/explicit-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 エラーは `conversion from 'int' to non-scalar type 'atcoder::dsu' requested` と出る（g++-13・g++-15）。丸括弧で作るか、右辺に型を書く。
 
 ```cpp
 --8<-- "cpp-initialization/explicit-ok.cpp:core"
 ```
+
+完全なプログラム：[`explicit-ok.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-initialization/explicit-ok.cpp)（GitHub）
+{ .kp-code-src }
 
 最後の形は、大きさが入力を読むまで分からないときに、グローバル変数や構造体のメンバとして先に宣言しておく書き方である。ACL の読み方は [ACL の読み方](../cpp/acl-reading.md)にある。
 
@@ -196,17 +238,26 @@ C++17 までは丸括弧で集成体を作れないので、`emplace_back(v, c)`
 --8<-- "cpp-initialization/refill.cpp:memset"
 ```
 
+完全なプログラム：[`refill.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-initialization/refill.cpp)（GitHub）
+{ .kp-code-src }
+
 0 は全ビットが 0、-1 は全ビットが 1 なので、どの整数型でも 0 と -1 になる。`0x3f` は INF の代わりに使われる値で、`int` では $1061109567$（約 $1.06 \times 10^9$）になり、2 倍しても `int` の範囲に収まる。それ以外の値は思った値にならない。
 
 ```cpp
 --8<-- "cpp-initialization/refill.cpp:memset-ng"
 ```
 
+完全なプログラム：[`refill.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-initialization/refill.cpp)（GitHub）
+{ .kp-code-src }
+
 1 にしたいときや、INF に `1LL << 60` などを使うときは `fill` を使う。2 次元の C 配列は行ごとに `fill` する。要素は行の順に続いて並ぶので `&grid[0][0]` から全要素の数だけ埋める書き方もよく見かけるが、規格の上では行をまたぐポインタの演算になり、保証されない。vector の vector は各行が別の領域にあるので、行ごとに埋めるか、`assign` で作り直す。
 
 ```cpp
 --8<-- "cpp-initialization/refill.cpp:fill"
 ```
+
+完全なプログラム：[`refill.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-initialization/refill.cpp)（GitHub）
+{ .kp-code-src }
 
 - **使い分け**：大きさを変えずに値だけ戻すなら `ranges::fill`（C++20）か `fill`。大きさがケースごとに変わるなら `assign` で作り直す
 - **版**：`memset`・`fill`・`assign` は C++98 から、`ranges::fill` は C++20。g++-13・g++-15 で同じ結果だった
@@ -224,6 +275,9 @@ CTAD（クラステンプレートの実引数推論）は、`vector<long long>`
 --8<-- "cpp-initialization/ctad.cpp:core"
 ```
 
+完全なプログラム：[`ctad.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-initialization/ctad.cpp)（GitHub）
+{ .kp-code-src }
+
 `static_assert` は、コンパイルのときに型が一致するかを確かめている。どれも通る。
 
 - **素朴に書くと**：`vector dp(n, vector(m, 0LL));` は `vector<vector<long long>> dp(n, vector<long long>(m, 0LL));` と同じである。3 次元でも型を 1 回も書かずに済む
@@ -238,6 +292,9 @@ CTAD は `vector` 以外の標準の型にも使える。
 --8<-- "cpp-initialization/ctad-std.cpp:core"
 ```
 
+完全なプログラム：[`ctad-std.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-initialization/ctad-std.cpp)（GitHub）
+{ .kp-code-src }
+
 `priority_queue` は、比較の関数と中身のコンテナを渡すと型が決まる。`priority_queue<int, vector<int>, greater<int>>` と同じ、最小値を取り出す[優先度付きキュー](../ds/priority-queue.md)になる。比較の関数の書き方は [比較関数と順序](../cpp/cpp-comparators.md)にある。
 
 - **版**：C++17。g++-13・g++-15 とも `-std=gnu++17` で同じ型になった
@@ -247,6 +304,9 @@ CTAD は `vector` 以外の標準の型にも使える。
 --8<-- "cpp-initialization/ctad-std.cpp:pair-int"
 ```
 
+完全なプログラム：[`ctad-std.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-initialization/ctad-std.cpp)（GitHub）
+{ .kp-code-src }
+
 ## CTAD の罠：波括弧にイテレータ 2 個を渡すとイテレータの vector になる（C++17） {#ctad-pitfall}
 
 CTAD でも、波括弧は「中の値を並べた vector」を作る。`vector w{v.begin(), v.end()};` は、`v` の要素のコピーではなく、イテレータ 2 個を並べた `vector<vector<int>::iterator>` になる。丸括弧なら、イテレータの組から要素をコピーした `vector<int>` になる。
@@ -254,6 +314,9 @@ CTAD でも、波括弧は「中の値を並べた vector」を作る。`vector 
 ```cpp
 --8<-- "cpp-initialization/ctad-pitfall.cpp:core"
 ```
+
+完全なプログラム：[`ctad-pitfall.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-initialization/ctad-pitfall.cpp)（GitHub）
+{ .kp-code-src }
 
 入力 `3` と `1 2 3` なら、大きさは順に 2・3・3 である。`v` が空でも `w` の大きさは 2 になる。
 

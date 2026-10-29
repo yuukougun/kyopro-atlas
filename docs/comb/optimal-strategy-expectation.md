@@ -113,6 +113,9 @@ $g(s)$ が得点そのものなら、[期待値 DP の例](../comb/expected-valu
 --8<-- "optimal-strategy-expectation/real-and-mod.cpp:core"
 ```
 
+完全なプログラム：[`real-and-mod.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/optimal-strategy-expectation/real-and-mod.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 実数の値は比べるためだけに使い、出力には使わない。誤差が問題になるのは、真の値が近い 2 つの候補を `double` で逆に比べたときである。そのときは選ぶ行動が変わり、mod の答えはまったく違う値になる。分子と分母が小さいなら、分数を整数の組で持って比べる。
 
 2 つ目は、最適な行動を性質から先に決めてしまう方法である。「枚数の多い色を手元に残すのが常によい」のように、どちらがよいかが入力の値の大小だけで決まると示せれば、DP の中で期待値を比べる必要はない。行動が決まれば、残りは mod のままの普通の期待値 DP である（[ABC412 F](#abc412_f)）。性質は、小さい入力で全部の戦略を試す実数の DP と比べて確かめられる。
@@ -145,6 +148,9 @@ $f(y) > y$ なら $y$ を下限に、そうでなければ上限にする二分�
 ```cpp
 --8<-- "optimal-strategy-expectation/restart.cpp:core"
 ```
+
+完全なプログラム：[`restart.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/optimal-strategy-expectation/restart.cpp)（GitHub）
+{ .kp-code-src }
 
 上限には「振り直さずに必ず終える」戦略の期待値 $1 + \frac{1}{6}\sum c_d$ を使える。最適な戦略はこれより悪くないので、$X$ はこれ以下である。反復の回数は[実数の二分探索](../basics/binary-search-answer.md#real-number)と同じく固定する（100 回なら `double` の精度を使い切る）。
 

@@ -84,6 +84,9 @@ $$
 --8<-- "insertion-dp/relative-rank.cpp:core"
 ```
 
+完全なプログラム：[`relative-rank.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/insertion-dp/relative-rank.cpp)（GitHub）
+{ .kp-code-src }
+
 - **範囲の取り違えに注意する**：$j$ と $k$ の不等号に等号が付くのは「$>$」の側（$j \ge k$）である。「$<$」の側は $j < k$ で、$k = 0$ のときは和が空で 0 になる。等号の位置は「順位 $k$ 以上が 1 つ上にずれる」から導く
 - **段ごとに長さが変わる**：$i$ 段目の表の長さは $i$ である。全体を $N \times N$ の表にしてもよいが、使わないマスは 0 のままにしておく
 
@@ -110,6 +113,9 @@ $$
 ```cpp
 --8<-- "insertion-dp/ascents.cpp:core"
 ```
+
+完全なプログラム：[`ascents.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/insertion-dp/ascents.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 $N = 3$ なら $(1, 4, 1)$ で、増える所が 0 個の順列は $(3, 2, 1)$ だけ、2 個は $(1, 2, 3)$ だけ、1 個は残りの 4 通りである。
 
@@ -149,6 +155,9 @@ $\lvert p_i - i \rvert$ の和は、次のように隙間ごとの寄与に分�
 ```cpp
 --8<-- "insertion-dp/hakone.cpp:core"
 ```
+
+完全なプログラム：[`hakone.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/insertion-dp/hakone.cpp)（GitHub）
+{ .kp-code-src }
 
 - **奇数の和はない**：毎回 $2d'$ を足すので、$\sum \lvert p_i - i \rvert$ は必ず偶数である。$K$ が奇数なら答えは 0 になる
 - **応用の型**：「すべての $i$ で $\lvert p_i - i \rvert \ge X$」のような禁止の条件は、条件を破る位置を選ぶ[包除 DP](../comb/inclusion-exclusion-dp.md)と組み合わせる（[練習](#practice)の ABC309 G）

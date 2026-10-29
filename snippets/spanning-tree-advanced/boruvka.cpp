@@ -5,7 +5,7 @@
 #include <atcoder/dsu>
 using namespace std;
 
-const long long INF = LLONG_MAX;
+const long long INF = 1LL << 60;  // INF + INF でもあふれない大きさ
 
 // 成分の異なる上位 2 件を保つ（同じ成分の候補が 2 件を占めないようにする）
 struct Top2 {

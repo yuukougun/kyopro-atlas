@@ -9,7 +9,7 @@ search:
 
 # 題材別の詳細索引
 
-分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
+分野の全ページの id・URL・別名・サイン・種類・前提・使い分け・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
 
 ## 区間（interval） {#interval}
 
@@ -49,6 +49,7 @@ search:
 - URL：https://yuukougun.github.io/kyopro-atlas/patterns/subsequence-and-substring/
 - 別名：部分列、部分文字列、subsequence、substring
 - 種類：案内、文字列、DP
+- 使い分け：`method-comparison#similar-names`
 - サイン：
     - 言い回し：T が S の部分列か判定する
     - 言い回し：S から何文字か選んで順に並べると T になる選び方の数
@@ -146,6 +147,7 @@ search:
 - URL：https://yuukougun.github.io/kyopro-atlas/patterns/kth-and-median/
 - 別名：K 番目、中央値、メディアン、上位 K 個、median
 - 種類：案内、二分探索、データ構造
+- 使い分け：`method-comparison#containers`
 - サイン：
     - 言い回し：K 番目に小さい（大きい）値を答える
     - 言い回し：N² 個の積・和・差の中で K 番目

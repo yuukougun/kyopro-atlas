@@ -77,6 +77,9 @@ $$
 --8<-- "bell-number/stirling.cpp:core"
 ```
 
+完全なプログラム：[`stirling.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bell-number/stirling.cpp)（GitHub）
+{ .kp-code-src }
+
 - **mod を取るとき**：`long long` を modint に変えるだけでよい。割り算がないので、法が素数でなくても使える
 - **$n$ が大きく $k$ が小さいとき**：1 つの $S(n, k)$ だけが要るなら、全射の数を[包除原理](../comb/inclusion-exclusion.md#surjection)で数えて $k!$ で割る式 $S(n, k) = \frac{1}{k!} \sum_{i=0}^{k} (-1)^i \binom{k}{i} (k - i)^n$ を使う。繰り返し二乗法で $O(k \log n)$ になる。$k!$ の逆元が要るので、法は $k!$ と互いに素でなければならない（$k$ より大きい素数なら満たす）
 
@@ -99,6 +102,9 @@ $$
 ```cpp
 --8<-- "bell-number/stirling.cpp:bell"
 ```
+
+完全なプログラム：[`stirling.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bell-number/stirling.cpp)（GitHub）
+{ .kp-code-src }
 
 値は次のように増える（$B_0 = 1$）。
 
@@ -183,6 +189,9 @@ $O(2^N N)$ の bitDP は、要素を 1 つずつ足していき、順番や最�
     ```cpp
     --8<-- "bell-number/partition-xor.cpp:core"
     ```
+
+    完全なプログラム：[`partition-xor.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bell-number/partition-xor.cpp)（GitHub）
+    { .kp-code-src }
 
 ## 練習問題 {#practice}
 

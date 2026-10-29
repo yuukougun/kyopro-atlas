@@ -104,6 +104,9 @@ fix():
 --8<-- "top-k-multiset/bottom-k.cpp:core"
 ```
 
+完全なプログラム：[`bottom-k.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/top-k-multiset/bottom-k.cpp)（GitHub）
+{ .kp-code-src }
+
 **計算量**：1 回の操作で multiset への挿入・削除・端の参照を定数回行うだけなので、$O(\log N)$ である。ならし計算量ではなく 1 回ごとの上限である。領域は要素数の $O(N)$ で済む。
 
 $K$ が途中で変わる問題では、`fix` の `if` を `while` にする。$K$ が 1 ずつ変わるなら移すのは 1 個で済み、$d$ 変われば $d$ 個移すので $O(d \log N)$ かかる。$K$ がクエリごとに大きく飛ぶなら、[値を添字にした BIT・セグメント木](#by-index)の方が向く。
@@ -150,6 +153,9 @@ $$
 ```cpp
 --8<-- "top-k-multiset/running-median.cpp:core"
 ```
+
+完全なプログラム：[`running-median.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/top-k-multiset/running-median.cpp)（GitHub）
+{ .kp-code-src }
 
 削除もあるときは、2 つの multiset で同じ性質を保つ。削除の後に個数の差が崩れたら、上と同じく 1 個移せばよい。
 

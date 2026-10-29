@@ -2,6 +2,7 @@
 id: lis
 title: 最長増加部分列
 aliases: [LIS, Longest Increasing Subsequence, 最長減少部分列, Dilworth の定理, 増加列への最小分割]
+search: {boost: 1.1}
 type: technique
 field: dp
 chapter: 列の DP
@@ -94,6 +95,9 @@ LIS の長さは最後の $L$ の要素数の 4 である。表の右の列の�
 --8<-- "lis/lis.cpp:core"
 ```
 
+完全なプログラム：[`lis.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lis/lis.cpp)（GitHub）
+{ .kp-code-src }
+
 - **減少列**：最長減少部分列は、各要素の符号を反転した列（$-a_i$）の LIS である。列を逆順にして LIS を求めても、元の列の右から左への増加列なので同じ長さになる
 - **$L$ は LIS そのものではない**：最後の $L = (1, 2, 5, 6)$ では、2 が 5 より右にあるので、元の列の部分列になっていない。列そのものが要るときは[復元](#restore)の方法を使う
 
@@ -124,6 +128,9 @@ LIS の長さは最後の $L$ の要素数の 4 である。表の右の列の�
 --8<-- "lis/weighted.cpp:core"
 ```
 
+完全なプログラム：[`weighted.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lis/weighted.cpp)（GitHub）
+{ .kp-code-src }
+
 !!! info "ACL では"
     `segtree<S, op, e> seg(n);`。`seg.prod(l, r)` で $[l, r)$ の集約値、`seg.set(p, x)` で一点の代入、`seg.get(p)` で一点の値を返す。`prod`・`set` は $O(\log N)$、`get`・`all_prod()` は $O(1)$。要件は `op` が結合法則を満たし、`e()` がその単位元であること。最大なら `op` を `max`、`e()` を値の下限にする。
 
@@ -142,6 +149,9 @@ LIS の列そのものを 1 つ出力するには、各要素について「そ�
 ```cpp
 --8<-- "lis/restore.cpp:core"
 ```
+
+完全なプログラム：[`restore.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lis/restore.cpp)（GitHub）
+{ .kp-code-src }
 
 $L$ の中身は後から上書きされるが、$\mathrm{prev}$ は置いた時点の値で固定されるので、たどった列は崩れない。列 $(3, 1, 4, 1, 5, 9, 2, 6)$ では、6 の直前は置いた時点の $L[2]$ の 5、5 の直前は 4、4 の直前は 1 で、$(1, 4, 5, 6)$ が出る。セグメント木版でも、最大を与えた $j$ を値と一緒に持てば同じように復元できる。グリッドを右か下に進んでコインを集める経路を出す問題などは、この形になる。
 

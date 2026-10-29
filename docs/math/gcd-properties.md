@@ -93,6 +93,9 @@ $\Delta A$ と $\Delta B$ は差の列の区間 gcd なので、次の節の Spa
 --8<-- "gcd-properties/rect-gcd.cpp:core"
 ```
 
+完全なプログラム：[`rect-gcd.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/gcd-properties/rect-gcd.cpp)（GitHub）
+{ .kp-code-src }
+
 差は負になりうる。`std::gcd` は引数を絶対値で扱うが、自作の gcd を使うなら絶対値にしてから渡す（[落とし穴](#pitfalls)）。行が 1 つだけ（$h_2 - h_1 = 1$）なら差の区間は空で、単位元の 0 が返るので場合分けは要らない。
 
 応用の型：
@@ -122,6 +125,9 @@ $\Delta A$ と $\Delta B$ は差の列の区間 gcd なので、次の節の Spa
 ```cpp
 --8<-- "gcd-properties/subarray-gcd.cpp:core"
 ```
+
+完全なプログラム：[`subarray-gcd.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/gcd-properties/subarray-gcd.cpp)（GitHub）
+{ .kp-code-src }
 
 組の列は、新しい左端の組を先頭に置くと gcd の大きい順に並ぶ。同じ値は必ず隣り合うので、末尾と比べるだけでまとめられる。
 

@@ -136,6 +136,9 @@ $C_N$ と $(K-1)^N$ の差を $D_N$ とおく。漸化式から $D_N = (K-1)^{N-
 --8<-- "counting-basics/cycle-coloring.cpp:core"
 ```
 
+完全なプログラム：[`cycle-coloring.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/counting-basics/cycle-coloring.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 式を導かずに、「1 個目と同じ色か」を状態に持つ DP でも数えられる。円環を 1 か所で切り、最初の要素の色を固定して DP を回す考え方は、[DP の状態の設計](../dp/dp-state-design.md#dp-cyclic)で扱う。
 
 ## 決める順番を変えて積の法則を使えるようにする {#order-of-choice}
@@ -230,6 +233,9 @@ $k^n$ と $n^k$ を取り違えやすい。「選ぶ側」が 1 つずつ「選�
     ```cpp
     --8<-- "counting-basics/distance2.cpp:core"
     ```
+
+    完全なプログラム：[`distance2.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/counting-basics/distance2.cpp)（GitHub）。`mint` は ACL の `modint1000000007`（[modint](../math/modint.md)）。
+    { .kp-code-src }
 
 ## 練習問題 {#practice}
 

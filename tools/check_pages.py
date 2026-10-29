@@ -17,7 +17,8 @@
 囲みの外の問題リンク・```cpp）だけを行う。
 
 エラー（直すまで CI が通らない）
-  front matter  ない・YAML が読めない・schema/page.schema.json に合わない・status を使っている
+  front matter  ない・YAML が読めない・schema/page.schema.json に合わない・status を使っている、
+                tags（サイト内検索の重み。#52）の語が題名にも aliases にもない、search.boost が 0 以下
   id            ファイル名と違う・field がフォルダと違う・id の重複・節の anchor の重複
   参照          prerequisites・related の id が docs にも catalog（planning/catalog/*.yaml）にもない、
                 id#anchor の anchor が相手の sections にない、前提の循環
@@ -48,6 +49,8 @@
   定型の節の見出しと anchor の組が違う（§13-1・§16-1）、sections に定型の節がある、
   guide・hub・pattern の complexity が null でない（§17-1）、発展の概要に ## {#library}・{#resources} がない（§16-1・§16-2）、
   同じ URL の出典（参考・学ぶための資料の節の「- [題名](URL)」）の題名が違う（§17-10）、
+  search.boost が 2 より大きい、題名か別名の一部の語（ビット）を tags にしたページがあるのに、その語を題名か別名に含む
+  ほかのページの tags にない（#52。別名そのものの tags（UF・DSU）は見ない）、
   インラインの数式の折り返せない塊（一番外の関係・二項演算子で区切る）の \\text が、幅 360px の画面の入れ物に入らない
   （段落 16 字・箇条書き 1 段 14.5 字など。入れ物は字下げで追う。表は見ない。スマホの幅でページが横にずれる。#61）
 
@@ -1527,6 +1530,50 @@ def check_conventions(pages: list[Page], rep: Report) -> None:
             rep.warn("同じ URL の出典の題名が違う", keys, f"{url}: {desc}")
 
 
+def page_names(p: Page) -> list[str]:
+    """照合用の題名と別名（norm_text 済み）。"""
+    return [norm_text(p.get("title") or "")] + [norm_text(a) for a in p.get("aliases") or [] if isinstance(a, str)]
+
+
+def check_search_meta(p: Page, rep: Report) -> None:
+    """サイト内検索の重み（#52）：tags は題名か別名に含まれる語だけ、search.boost は 0 より大きく 2 以下。"""
+    w = p.rel
+    names = page_names(p)
+    tmiss = [x for x in p.get("tags") or [] if isinstance(x, str) and not any(norm_text(x) in n for n in names)]
+    if tmiss:
+        rep.error("tags が題名・別名にない", w, f"{w}: tags の {'、'.join(tmiss)} が題名にも aliases にもない（別名の行に出る語だけを書く）")
+    search = p.get("search")
+    boost = search.get("boost") if isinstance(search, dict) else None
+    if isinstance(boost, (int, float)) and not isinstance(boost, bool):
+        if boost <= 0:
+            rep.error("search.boost", w, f"{w}: search.boost が {boost}（0 より大きくする。検索から外すなら exclude: true）")
+        elif boost > 2:
+            rep.warn("search.boost が大きい", w, f"{w}: search.boost が {boost}（2 以下にする。大きいと、ほかのページの別名の検索で 1 位を奪う）")
+
+
+def check_tag_groups(by_id: dict[str, Page], rep: Report) -> None:
+    """tags の付け方（#52）。題名か別名の一部の語（ビット）を tags にしたら、その語を題名か別名に含むページのすべてに付ける。
+    tags は題名の 1000 倍の重みなので、片方のページだけに付けると、もう片方の別名の検索で 1 位を奪う。
+    別名そのもの（UF・DSU のような略称）は、そのページだけに付けてよい。"""
+    names = {pid: page_names(q) for pid, q in by_id.items()}
+    tags = {pid: {norm_text(x): x for x in q.get("tags") or [] if isinstance(x, str)} for pid, q in by_id.items()}
+    owners: dict[str, list[str]] = collections.defaultdict(list)  # 一部の語の tags → それを持つページ
+    raw_of: dict[str, str] = {}
+    for pid in by_id:
+        for t, raw in tags[pid].items():
+            if t not in names[pid]:
+                owners[t].append(pid)
+                raw_of.setdefault(t, raw)
+    for t, own in sorted(owners.items()):
+        rels = [by_id[x].rel for x in own]
+        shown = "・".join(rels[:3]) + (f" ほか {len(rels) - 3} ページ" if len(rels) > 3 else "")
+        for other, ns in names.items():
+            if t not in tags[other] and any(t in n for n in ns):
+                o = by_id[other]
+                rep.warn("tags の語を含むのに tags にない", (o.rel, *rels),
+                         f"{o.rel}: 題名か別名に「{raw_of[t]}」を含むが tags にない（{shown} の tags にある。一部の語の tags は、その語を題名か別名に含むページのすべてに付ける）")
+
+
 def check_all(pages: list[Page], others: list[Page], rep: Report, ledger: dict[str, dict], validator: Validator,
               snippets: Path, catalog_ids: set[str] | None = None, docs: Path | None = None) -> None:
     catalog_ids = catalog_ids or set()
@@ -1618,6 +1665,8 @@ def check_all(pages: list[Page], others: list[Page], rep: Report, ledger: dict[s
                     rep.error("別名が冒頭にない", w, msg)
                 else:
                     rep.warn("別名が冒頭にない（draft）", w, msg)
+        check_search_meta(p, rep)
+    check_tag_groups(by_id, rep)
     for p in others:
         check_body_common(p, rep, ledger, snippets)
         if not p.rel.startswith("img/") and "/" in p.rel:

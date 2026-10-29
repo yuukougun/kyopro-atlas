@@ -104,6 +104,9 @@ updated: 2026-10-29
 --8<-- "complexity-estimation/amortized-stack.cpp:core"
 ```
 
+完全なプログラム：[`amortized-stack.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/complexity-estimation/amortized-stack.cpp)（GitHub）
+{ .kp-code-src }
+
 ならし計算量の議論が崩れるのは、一方向に進むはずのものが戻るときである。尺取り法で左端を毎回 0 に戻す、mex の候補を毎回 0 から探し直す、一括の書き換えで配列の全体を毎回初期化する、のどれも最悪で $O(N^2)$ や $O(NQ)$ になる。コードを見て「戻る箇所」がないかを確かめる。
 
 ??? question "確認問題：戻るポインタ"

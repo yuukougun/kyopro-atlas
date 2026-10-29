@@ -114,6 +114,9 @@ $$
 --8<-- "functional-graph/peel.cpp:core"
 ```
 
+完全なプログラム：[`peel.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/functional-graph/peel.cpp)（GitHub）
+{ .kp-code-src }
+
 1 本道をたどる方法でも全頂点を $O(N)$ で処理できる。頂点に「未訪問・今たどっている途中・処理済み」の 3 種類の印を付け、未訪問の頂点から印を付けながら進む。印のある頂点に当たったら止め、それが「途中」の頂点なら、そこから先が新しい閉路である。「処理済み」の頂点に当たったなら、すでに見つけた閉路か、その木に合流しただけである。最後に今回たどった頂点をすべて処理済みにする。どの頂点も 1 回しかたどらないので $O(N)$ である。コードは[例題の ABC256 E](#abc256_e) の節に置く。
 
 [強連結成分分解](../graph/scc.md#on-cycle)を使ってもよい。頂点が 2 個以上の強連結成分は閉路そのもので、頂点が 1 個の成分は自己ループを持つときだけ閉路である。一般の有向グラフにも使えるが、Functional graph では上の 2 つの方法の方が軽い。
@@ -124,6 +127,9 @@ $$
 ```cpp
 --8<-- "functional-graph/scc.cpp:core"
 ```
+
+完全なプログラム：[`scc.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/functional-graph/scc.cpp)（GitHub）
+{ .kp-code-src }
 
 ## 閉路ごとの集計・到達できる頂点の数 {#per-cycle}
 
@@ -186,6 +192,9 @@ $a$ が置換（$0, \dots, N-1$ の並べ替え）なら、出次数に加えて
 ```cpp
 --8<-- "functional-graph/walk.cpp:core"
 ```
+
+完全なプログラム：[`walk.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/functional-graph/walk.cpp)（GitHub）
+{ .kp-code-src }
 
 ### ABC357 E. Reachability in Functional Graph {#abc357_e}
 

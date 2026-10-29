@@ -6,11 +6,18 @@
  *
  * - 既定は分野ごとの表示（?field=<分野>）。その分野のページに加え、ほかの分野の直接の前提と次のページを破線の枠で出す
  * - ?focus=<id>：そのページの祖先（前提をすべて）と子孫（次に読む）だけを描く。子孫が多いときは深さを絞って始める
- *   （?depth=<1〜3>、0 はすべて）。related は配置に使わず、配置の後で右に薄く足す
+ *   （?depth=<1〜3>、0 はすべて）。related は配置に使わず、配置の後で選んだページのすぐ下（か上）の空いた所に「関連」の
+ *   囲みとして足す。全体が収まらないときは、選んだページと関連の囲みが入るように寄せる（#59）
  * - ?view=all：分野を頂点にした全体の図。辺の太さは分野をまたぐ前提の本数。分野を押すとその分野の表示になる
  * - 枠の色はレベル（AtCoder の色）。理解したページ（ページのレベルの「理解した」）を塗り、前提をすべて理解した
  *   未読のページ（次の候補）を光らせる。「+青」は上位の帯の節を持つページ
- * - 点を押す（タップする）とそのページへ移る。マウスを乗せる・長押しすると説明を出す
+ * - 点の説明は地図の中に重ねて出す（#59。点が地図の下半分なら上に、上半分なら下に）。点を押す（タップ・クリック）か
+ *   長押しすると説明を固定し、×・Esc・地図の空いた所を押すと閉じる。マウスを乗せると説明を仮に出す（固定した説明は
+ *   替えない）。そのページへは、説明の「ページを開く」か、点のダブルクリック（ダブルタップ）で移る
+ * - 「ページ」欄：題名・短い題名・別名（それぞれのかっこの中と外も）・id を、filter.js の照合の規則（window.KPMatch：
+ *   NFKC・大文字と小文字・空白・カタカナとひらがなの違いを問わない）で比べ、完全一致 → 前方一致 → 部分一致の順に選ぶ。
+ *   同じ段では、当たった名前が短い → frequency（A・B・C）→ レベルの低い → ナビゲーションの順。どれにも当たらなければ
+ *   言い換え（gcd ⇔ 最大公約数 など）でも探す。ほかの候補は上の行にボタンで出す
  * - 色は Material の CSS 変数から取り、ライトとダークの切り替えに追従する
  */
 (function () {
@@ -31,6 +38,12 @@
   var PAD_Y = 6;
   var MAX_LABEL_W = 168;
   var READABLE_ZOOM = 0.8; // 全体を収めると文字がこれより小さくなるときは、この倍率で一部を見せる（指でずらして読む）
+  var MIN_FOCUS_ZOOM = 0.45; // 焦点の表示で、選んだページと関連の囲みを入れるために下げてよい倍率の下限
+  var REL_GAP = 10; // 関連の囲みの中の点の間
+  var REL_PAD = 10; // 関連の囲みの枠と点の間（スタイルの padding と同じ）
+  var REL_LABEL = 22; // 関連の囲みの上の「関連」の文字の分
+  var REL_MARGIN = 36; // 関連の囲みとほかの点の間
+  var FREQ_RANK = { A: 0, B: 1, C: 2 };
   var LAYOUT = { name: "dagre", rankDir: "LR", nodeSep: 14, rankSep: 56, edgeSep: 8, fit: false, animate: false };
   var LAYOUT_FIELDS = { name: "dagre", rankDir: "TB", nodeSep: 30, rankSep: 60, fit: false, animate: false };
 
@@ -93,6 +106,77 @@
     var fieldTitle = new Map(fields.map(function (f) { return [f.id, f.title]; }));
     var hasPages = new Set(pages.map(function (p) { return p.field; }));
     return { pages: pages, byId: byId, children: children, fields: fields, fieldTitle: fieldTitle, hasPages: hasPages };
+  }
+
+  // ---------------------------------------------------------------- 名前で探す（#59）
+
+  // 照合の規則は filter.js の window.KPMatch（#60 の絞り込みと同じ）。読めなかったときだけ、最低限の規則で代える
+  function matcher() {
+    if (window.KPMatch) return window.KPMatch;
+    return {
+      norm: function (s) { return String(s == null ? "" : s).normalize("NFKC").toLowerCase().replace(/[\s\-_・]+/g, ""); },
+      synonyms: function () { return []; },
+    };
+  }
+
+  var PAREN = /[（(]([^（）()]*)[）)]/g;
+
+  // ページの名前（正規化したもの）：題名・短い題名・別名と、それぞれのかっこの中と外（「BIT（Fenwick Tree）」なら
+  // 「BIT」と「Fenwick Tree」も）、id
+  function pageNames(p, norm) {
+    var out = [];
+    [p.title, p.nav_title].concat(p.aliases || []).forEach(function (t) {
+      if (!t) return;
+      out.push(t);
+      var inner = [];
+      var outer = t.replace(PAREN, function (_m, x) { inner.push(x); return ""; });
+      if (inner.length) out = out.concat([outer], inner);
+    });
+    out.push(p.id);
+    var seen = new Set();
+    return out.map(norm).filter(function (n) {
+      if (!n || seen.has(n)) return false;
+      seen.add(n);
+      return true;
+    });
+  }
+
+  function compareKeys(a, b) {
+    for (var i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i] - b[i];
+    return 0;
+  }
+
+  // 語に合うページを、よく合う順に並べる。完全一致（0）→ 前方一致（1）→ 部分一致（2）の段で比べ、同じ段では
+  // 当たった名前が短い → frequency → レベルの低い → ナビゲーションの順（graph.json の pages の順）。
+  // 語そのものに合うページがなければ、言い換え（gcd ⇔ 最大公約数 など）でも探す。言い換えには元の語を渡す
+  // （送り仮名を落とすかを、カタカナをひらがなにする前の形で決めるため）
+  function findPages(G, query) {
+    var M = matcher();
+    if (!G.names) G.names = new Map(G.pages.map(function (p) { return [p.id, pageNames(p, M.norm)]; }));
+    var q = M.norm(query);
+    if (!q) return [];
+    var tries = [[q], M.synonyms(query).map(function (s) { return s.n; })];
+    for (var t = 0; t < tries.length; t++) {
+      var vs = tries[t];
+      var found = [];
+      G.pages.forEach(function (p, i) {
+        var best = null;
+        G.names.get(p.id).forEach(function (n) {
+          vs.forEach(function (v) {
+            var at = n.indexOf(v);
+            if (at < 0) return;
+            var key = [n === v ? 0 : at === 0 ? 1 : 2, n.length, p.frequency in FREQ_RANK ? FREQ_RANK[p.frequency] : 3,
+              LEVELS.indexOf(p.level) >= 0 ? LEVELS.indexOf(p.level) : LEVELS.length, i];
+            if (!best || compareKeys(key, best) < 0) best = key;
+          });
+        });
+        if (best) found.push({ p: p, key: best });
+      });
+      if (found.length) {
+        return found.sort(function (a, b) { return compareKeys(a.key, b.key); }).map(function (x) { return x.p; });
+      }
+    }
+    return [];
   }
 
   function progressState() {
@@ -296,6 +380,7 @@
           label: "data(label)",
           "text-valign": "top",
           "text-halign": "center",
+          "text-margin-x": "data(lx)", // 「関連」の文字は囲みの左の端に寄せる（中央は選んだページからの破線が通る）
           "font-size": 11,
           color: P.fgLight,
           "background-color": P.fgLighter,
@@ -378,7 +463,9 @@
     var findLabel = html("label", null, "ページ");
     var find = document.createElement("input");
     find.type = "search";
-    find.placeholder = "名前で探して中心に";
+    find.placeholder = "名前・略称で探して中心に";
+    find.setAttribute("autocomplete", "off");
+    find.setAttribute("enterkeyhint", "search");
     find.setAttribute("list", "kp-map-pages");
     find.setAttribute("aria-label", "ページを名前で探して、その前後を表示する");
     findLabel.appendChild(find);
@@ -394,12 +481,23 @@
 
     var status = html("p", "kp-map__status");
     status.setAttribute("aria-live", "polite");
+    // 地図と、その上に重ねる点の説明（#59）。説明は地図の中に出すので、狭い画面でも点を押した場所から離れない
+    var stage = html("div", "kp-map__stage");
     var canvas = html("div", "kp-map__canvas");
     canvas.setAttribute("role", "img");
     canvas.setAttribute("aria-label", "ページの前提関係の図。同じ内容はレベル別の一覧と各ページの「前提」「次に読む」にもある");
     var info = html("div", "kp-map__info");
     info.hidden = true;
+    info.setAttribute("role", "region");
+    info.setAttribute("aria-label", "点の説明");
     info.setAttribute("aria-live", "polite");
+    var infoClose = button("×");
+    infoClose.className = "kp-map__close";
+    infoClose.setAttribute("aria-label", "説明を閉じる");
+    infoClose.title = "説明を閉じる（Esc）";
+    var infoBody = html("div", "kp-map__info-body");
+    info.append(infoClose, infoBody);
+    stage.append(canvas, info);
 
     var legend = html("ul", "kp-map__legend");
     function item(sw, text) {
@@ -419,10 +517,11 @@
     item(null, "「+青」など：上位の帯の節がある");
     item("kp-sw--rel", "点線：関連（焦点の表示だけ。配置には使わない）");
 
-    root.append(toolbar, status, canvas, info, legend);
+    root.append(toolbar, status, stage, legend);
     return {
       bField: bField, bAll: bAll, fieldLabel: fieldLabel, fieldSel: fieldSel, find: find, list: list,
       depthLabel: depthLabel, depthSel: depthSel, bFit: bFit, status: status, canvas: canvas, info: info,
+      infoClose: infoClose, infoBody: infoBody,
     };
   }
 
@@ -545,26 +644,74 @@
       return { elements: els };
     }
 
-    // related は配置の後で、図の右に「関連」の囲みとして足す（配置には使わない。T2）
+    // 関連の囲みの中の並び：点を列ごとに上から詰める。列の数は 1〜3 のうち、囲みが地図に最も大きく入るもの
+    // （狭い画面では縦長、広い画面では横に並ぶ）。返すのは囲みの幅・高さと、囲みの左上からの各点の中心
+    function relGrid(nodes) {
+      var best = null;
+      for (var cols = 1; cols <= Math.min(3, nodes.length); cols++) {
+        var rows = Math.ceil(nodes.length / cols);
+        var colW = [];
+        var colH = [];
+        var pos = nodes.map(function (nd, k) {
+          var c = Math.floor(k / rows);
+          var y = colH[c] || 0;
+          colW[c] = Math.max(colW[c] || 0, nd.data.w);
+          colH[c] = y + nd.data.h + REL_GAP;
+          return { c: c, y: y + nd.data.h / 2 };
+        });
+        var xs = [];
+        var x = REL_PAD;
+        colW.forEach(function (w, c) { xs[c] = x + w / 2; x += w + REL_GAP * 2; });
+        var w = x - REL_GAP * 2 + REL_PAD;
+        var h = REL_LABEL + 2 * REL_PAD + Math.max.apply(null, colH) - REL_GAP;
+        var z = Math.min((cy.width() - 48) / w, (cy.height() - 48) / h);
+        if (!best || z > best.z + 1e-9) {
+          best = { z: z, w: w, h: h, at: pos.map(function (q) { return { x: xs[q.c], y: REL_LABEL + REL_PAD + q.y }; }) };
+        }
+      }
+      return best;
+    }
+
+    // related は配置の後で足す（配置には使わない。T2）。図にまだない関連のページは「関連」の囲みに入れ、選んだページの
+    // すぐ下（か上）の空いた所に置く。焦点の表示では、選んだページの段（列）にはほかの点がない（祖先は左、子孫は右の段）
+    // ので、多くは選んだページの真下に入る。ほかの点と重なれば、重なった点の外までずらし、上下で近い方を選ぶ
     function addRelated(id) {
       var p = G.byId.get(id);
       var rel = (p.related || []).filter(function (r, k, arr) { return r !== id && G.byId.has(r) && arr.indexOf(r) === k; });
       if (!rel.length) return;
-      var bb = cy.elements().boundingBox();
-      var fy = cy.getElementById(id).position("y");
+      var f = cy.getElementById(id);
+      var fb = f.boundingBox();
       var missing = rel.filter(function (r) { return cy.getElementById(r).empty(); });
       var nodes = missing.map(function (r) { return pageNode(G.byId.get(r), ["rel"]); });
-      var total = nodes.reduce(function (s, nd) { return s + nd.data.h + 10; }, -10);
-      var y = fy - total / 2;
-      var x = bb.x2 + 90;
       var adds = [];
-      if (nodes.length) adds.push({ group: "nodes", data: { id: "__related", label: "関連", w: 1, h: 1 }, classes: "relbox" });
-      nodes.forEach(function (nd) {
-        nd.data.parent = "__related";
-        nd.position = { x: x + nd.data.w / 2, y: y + nd.data.h / 2 };
-        y += nd.data.h + 10;
-        adds.push(nd);
-      });
+      if (nodes.length) {
+        var grid = relGrid(nodes);
+        var cx = (fb.x1 + fb.x2) / 2;
+        var x1 = cx - grid.w / 2;
+        var x2 = cx + grid.w / 2;
+        var others = cy.nodes().not(f).map(function (n) { return n.boundingBox(); });
+        var half = REL_MARGIN / 2;
+        var clash = function (top) {
+          return others.filter(function (b) {
+            return b.x2 > x1 - half && b.x1 < x2 + half && b.y2 > top - half && b.y1 < top + grid.h + half;
+          });
+        };
+        var below = fb.y2 + REL_MARGIN;
+        var above = fb.y1 - REL_MARGIN - grid.h;
+        for (var k = 0, c; k < 500 && (c = clash(below)).length; k++) {
+          below = Math.max.apply(null, c.map(function (b) { return b.y2; })) + REL_MARGIN;
+        }
+        for (k = 0; k < 500 && (c = clash(above)).length; k++) {
+          above = Math.min.apply(null, c.map(function (b) { return b.y1; })) - REL_MARGIN - grid.h;
+        }
+        var top = below - fb.y2 <= fb.y1 - (above + grid.h) ? below : above;
+        adds.push({ group: "nodes", data: { id: "__related", label: "関連", w: 1, h: 1, lx: REL_PAD + 12 - grid.w / 2 }, classes: "relbox" });
+        nodes.forEach(function (nd, i) {
+          nd.data.parent = "__related";
+          nd.position = { x: x1 + grid.at[i].x, y: top + grid.at[i].y };
+          adds.push(nd);
+        });
+      }
       rel.forEach(function (r) { adds.push(edge(id, r, "rel")); });
       cy.add(adds);
     }
@@ -616,7 +763,12 @@
       var bb = eles.boundingBox();
       var h = cy.height();
       if (state.view === "focus") {
-        cy.center(cy.getElementById(state.focus));
+        // 選んだページと関連の囲みが両方入るように寄せる。読める倍率で入らなければ、MIN_FOCUS_ZOOM まで倍率を下げる
+        var target = cy.getElementById(state.focus).union(cy.getElementById("__related"));
+        var tb = target.boundingBox();
+        var zf = Math.min(READABLE_ZOOM, (cy.width() - 48) / tb.w, (h - 48) / tb.h);
+        cy.zoom(Math.max(MIN_FOCUS_ZOOM, zf));
+        cy.center(target);
       } else {
         // 左（前提の側）から読めるように、左端をそろえ、縦は収まれば中央、収まらなければ上をそろえる
         var z = cy.zoom();
@@ -688,7 +840,7 @@
     function setState(patch) {
       Object.keys(patch).forEach(function (k) { state[k] = patch[k]; });
       if (state.view === "focus" && patch.focus && !("depth" in patch)) state.depth = autoDepth(G, state.focus);
-      ui.info.hidden = true;
+      closeInfo();
       render();
     }
 
@@ -729,10 +881,53 @@
       a.remove();
     }
 
-    function showInfo(p) {
-      var box = ui.info;
-      box.textContent = "";
-      var head = html("p");
+    // ---- 点の説明（地図の中に重ねる。#59）
+    // 固定（pinned）した説明は、×・Esc・地図の空いた所を押すまで残り、マウスを乗せたほかの点の説明に替わらない。
+    // マウスを乗せただけの説明は仮のもので、点と説明の両方から離れると少し待って消える
+    var pinned = false;
+    var overInfo = false;
+    var hideTimer = 0;
+
+    function openInfo(fill, n, pin) {
+      clearTimeout(hideTimer);
+      ui.infoBody.textContent = "";
+      fill(ui.infoBody);
+      if (!pin) ui.infoBody.appendChild(html("p", "kp-map__hint", "点を押すと、この説明を固定する"));
+      pinned = !!pin;
+      ui.info.classList.toggle("kp-map__info--pinned", pinned);
+      // 点が地図の下半分にあれば説明を上に、上半分にあれば下に重ねて、点を隠さない
+      ui.info.classList.toggle("kp-map__info--top", !!n && n.renderedPosition("y") > cy.height() / 2);
+      ui.info.hidden = false;
+      if (pinned) reveal(ui.info);
+    }
+
+    function closeInfo() {
+      clearTimeout(hideTimer);
+      pinned = false;
+      overInfo = false;
+      ui.info.hidden = true;
+      cy.nodes(".src").removeClass("src");
+    }
+
+    function hideSoon() {
+      if (pinned) return;
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(function () { if (!pinned && !overInfo) closeInfo(); }, 400);
+    }
+
+    // 説明が画面の外（固定のヘッダーの下を含む）にあれば、見える所までページを送る（地図が画面から一部はみ出ているとき）
+    function reveal(el) {
+      var r = el.getBoundingClientRect();
+      var header = document.querySelector(".md-header");
+      var top = (header ? Math.max(0, header.getBoundingClientRect().bottom) : 0) + 8;
+      var bottom = window.innerHeight - 8;
+      var dy = r.bottom > bottom ? r.bottom - bottom : 0;
+      if (r.top - dy < top) dy = r.top - top;
+      if (dy) window.scrollBy({ top: dy, behavior: "smooth" });
+    }
+
+    function fillPage(box, p) {
+      var head = html("p", "kp-map__info-head");
       var link = html("a", null, p.title);
       link.href = pageUrl(p);
       var strong = html("strong");
@@ -743,8 +938,8 @@
       if (p.stage === "stub") head.append("（準備中）");
       box.appendChild(head);
       if (p.summary) box.appendChild(html("p", null, p.summary));
-      var acts = html("p");
-      var open = html("a", null, "ページを開く");
+      var acts = html("p", "kp-map__acts");
+      var open = html("a", "kp-map__open", "ページを開く");
       open.href = pageUrl(p);
       acts.appendChild(open);
       if (!(state.view === "focus" && state.focus === p.id)) {
@@ -753,7 +948,11 @@
         acts.appendChild(center);
       }
       box.appendChild(acts);
-      box.hidden = false;
+    }
+
+    function showPage(n, pin) {
+      var p = G.byId.get(n.id());
+      openInfo(function (box) { fillPage(box, p); }, n, pin);
     }
 
     function hover(n, on) {
@@ -761,60 +960,94 @@
       n.connectedEdges().not(".rel").toggleClass("hl", on);
     }
 
+    // 点を押す（クリック・タップ）・長押しで説明を固定する。ダブルクリック（ダブルタップ）でそのページへ移る
     cy.on("tap", "node.page", function (e) {
-      if (Date.now() < holdUntil) return; // 長押しの直後の tap は無視する
-      navigate(pageUrl(G.byId.get(e.target.id())));
+      if (Date.now() < holdUntil) return; // 長押しの直後の tap は、長押しで出した説明をそのままにする
+      showPage(e.target, true);
+    });
+    cy.on("dbltap", "node.page", function (e) { navigate(pageUrl(G.byId.get(e.target.id()))); });
+    cy.on("taphold", "node.page", function (e) {
+      holdUntil = Date.now() + 1000;
+      showPage(e.target, true);
     });
     cy.on("tap", "node.field, node.next", function (e) {
       if (Date.now() < holdUntil) return;
       setState({ view: "field", field: e.target.data("field") });
     });
-    function showNext(n, on) {
+    cy.on("tap", function (e) { if (e.target === cy && pinned) closeInfo(); }); // 地図の空いた所を押すと閉じる
+
+    function showNext(n, on, pin) {
       n.toggleClass("hover", on);
+      if (pinned && !pin) return; // 固定した説明は替えない
+      cy.nodes(".src").removeClass("src");
+      if (!on) { hideSoon(); return; }
       cy.collection(n.data("sources").map(function (id) { return cy.getElementById(id); }).filter(function (x) { return x.nonempty(); }))
-        .toggleClass("src", on);
-      if (!on) return;
+        .addClass("src");
       var titles = n.data("pages").map(function (id) { return G.byId.get(id).title; });
-      ui.info.textContent = "→ " + (G.fieldTitle.get(n.data("field")) || n.data("field")) + "：" + titles.slice(0, 8).join("・") +
+      var text = "→ " + (G.fieldTitle.get(n.data("field")) || n.data("field")) + "：" + titles.slice(0, 8).join("・") +
         (titles.length > 8 ? " ほか " + (titles.length - 8) + " ページ" : "") + "。光っているページが前提になる（押すとその分野の表示）";
-      ui.info.hidden = false;
+      openInfo(function (box) { box.appendChild(html("p", null, text)); }, n, pin);
     }
-    cy.on("mouseover", "node.next", function (e) { showNext(e.target, true); });
-    cy.on("mouseout", "node.next", function (e) { showNext(e.target, false); });
+    cy.on("mouseover", "node.next", function (e) { showNext(e.target, true, false); });
+    cy.on("mouseout", "node.next", function (e) { showNext(e.target, false, false); });
     cy.on("taphold", "node.next", function (e) {
       holdUntil = Date.now() + 1000;
-      cy.nodes(".src").removeClass("src");
-      showNext(e.target, true);
-    });
-    cy.on("taphold", "node.page", function (e) {
-      holdUntil = Date.now() + 1000;
-      showInfo(G.byId.get(e.target.id()));
+      showNext(e.target, true, true);
     });
     cy.on("mouseover", "node.page", function (e) {
       hover(e.target, true);
-      showInfo(G.byId.get(e.target.id()));
+      if (!pinned) showPage(e.target, false);
     });
     cy.on("mouseover", "node.field", function (e) { hover(e.target, true); });
-    cy.on("mouseout", "node", function (e) { hover(e.target, false); });
-    cy.on("mouseover", "edge.agg", function (e) {
-      var d = e.target.data();
-      ui.info.textContent = (G.fieldTitle.get(d.source.slice(6)) || "") + " → " + (G.fieldTitle.get(d.target.slice(6)) || "") +
-        "：分野をまたぐ前提 " + d.n + " 本";
-      ui.info.hidden = false;
+    cy.on("mouseout", "node.page, node.field", function (e) {
+      hover(e.target, false);
+      hideSoon();
     });
+    cy.on("mouseover", "edge.agg", function (e) {
+      if (pinned) return;
+      var d = e.target.data();
+      var text = (G.fieldTitle.get(d.source.slice(6)) || "") + " → " + (G.fieldTitle.get(d.target.slice(6)) || "") +
+        "：分野をまたぐ前提 " + d.n + " 本";
+      openInfo(function (box) { box.appendChild(html("p", null, text)); }, null, false);
+    });
+    cy.on("mouseout", "edge.agg", hideSoon);
+    cy.on("pan zoom", function () { if (!pinned && !ui.info.hidden) closeInfo(); }); // 仮の説明は地図を動かすと消す
 
-    // ツールバー
+    // 点の上から地図の外へ一気に出ると、Cytoscape.js は点の mouseout を出さないので、地図から出たときにも仮の説明を消す
+    ui.canvas.addEventListener("mouseleave", function () {
+      cy.nodes(".hover").removeClass("hover");
+      cy.edges(".hl").removeClass("hl");
+      if (!pinned) cy.nodes(".src").removeClass("src");
+      hideSoon();
+    });
+    ui.info.addEventListener("mouseenter", function () { overInfo = true; clearTimeout(hideTimer); });
+    ui.info.addEventListener("mouseleave", function () { overInfo = false; hideSoon(); });
+    ui.infoClose.addEventListener("click", closeInfo);
+    function onKey(e) {
+      if (e.key === "Escape" && !ui.info.hidden && root.isConnected) closeInfo();
+    }
+    document.addEventListener("keydown", onKey);
+
+    // ツールバー：「ページ」欄の候補は題名と別名（別名は「→ 題名」を添える）。同じ文字の候補は最初の 1 つだけ
     G.fields.forEach(function (f) { if (G.hasPages.has(f.id)) ui.fieldSel.add(new Option(f.title, f.id)); });
-    var byTitle = new Map();
+    var listed = new Set();
+    function addOption(value, label) {
+      if (!value || listed.has(value)) return;
+      listed.add(value);
+      var o = document.createElement("option");
+      o.value = value;
+      if (label) o.label = label;
+      ui.list.appendChild(o);
+    }
     G.fields.forEach(function (f) {
       G.pages.filter(function (p) { return p.field === f.id; })
         .sort(function (a, b) { return a.order - b.order; })
-        .forEach(function (p) {
-          byTitle.set(p.title, p.id);
-          var o = document.createElement("option");
-          o.value = p.title;
-          ui.list.appendChild(o);
-        });
+        .forEach(function (p) { addOption(p.title, null); });
+    });
+    G.fields.forEach(function (f) {
+      G.pages.filter(function (p) { return p.field === f.id; })
+        .sort(function (a, b) { return a.order - b.order; })
+        .forEach(function (p) { (p.aliases || []).forEach(function (a) { addOption(a, "→ " + p.title); }); });
     });
     ui.bField.addEventListener("click", function () {
       var f = state.field || (state.focus && G.byId.get(state.focus).field) || defaultField();
@@ -823,21 +1056,28 @@
     ui.bAll.addEventListener("click", function () { setState({ view: "all" }); });
     ui.fieldSel.addEventListener("change", function () { setState({ view: "field", field: ui.fieldSel.value }); });
     ui.depthSel.addEventListener("change", function () { setState({ depth: Number(ui.depthSel.value) }); });
+    // 「ページ」欄：いちばん合うページを中心にし、ほかの候補（5 件まで）を上の行にボタンで出す
+    function showAlternatives(v, list) {
+      if (!list.length) return;
+      var span = html("span", "kp-map__alts");
+      span.appendChild(document.createTextNode("「" + v + "」のほかの候補："));
+      list.forEach(function (p) {
+        var b = button(p.nav_title || p.title);
+        b.addEventListener("click", function () { setState({ view: "focus", focus: p.id, field: p.field }); });
+        span.appendChild(b);
+      });
+      ui.status.appendChild(span);
+    }
     ui.find.addEventListener("change", function () {
       var v = ui.find.value.trim();
-      var id = byTitle.get(v) || (G.byId.has(v) ? v : null);
-      if (!id) {
-        G.pages.some(function (p) {
-          if ((p.nav_title && p.nav_title === v) || p.title.indexOf(v) >= 0) { id = p.id; return true; }
-          return false;
-        });
-      }
-      if (id) {
+      var found = findPages(G, v);
+      if (found.length) {
         ui.find.value = "";
         ui.find.blur(); // スマホではキーボードを閉じて地図を見せる
-        setState({ view: "focus", focus: id, field: G.byId.get(id).field });
+        setState({ view: "focus", focus: found[0].id, field: found[0].field });
+        showAlternatives(v, found.slice(1, 6));
       } else if (v) {
-        ui.status.textContent = "「" + v + "」に合うページがない。";
+        ui.status.textContent = "「" + v + "」に合うページがない。略称・英語名・名前の一部でも探せる。";
       }
     });
     ui.bFit.addEventListener("click", function () { cy.fit(cy.elements(), 24); });
@@ -883,8 +1123,11 @@
 
     api.start = start;
     api.setState = setState;
+    api.findPages = function (q) { return findPages(G, q).map(function (p) { return p.id; }); };
     api.destroy = function () {
       document.removeEventListener("kp:progress", onProgress);
+      document.removeEventListener("keydown", onKey);
+      clearTimeout(hideTimer);
       observer.disconnect();
       cy.destroy();
     };

@@ -80,6 +80,9 @@ $$
 --8<-- "hadamard-transform/xor-convolution.cpp:core"
 ```
 
+完全なプログラム：[`xor-convolution.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/hadamard-transform/xor-convolution.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 ??? question "確認問題：長さをそろえるとき 2 倍にするか"
     値が $0$ 以上 $V$ 未満の列どうしを XOR 畳み込みする。和の畳み込みでは結果の長さが $2V - 1$ になるので長さを 2 倍に取った。XOR 畳み込みでも 2 倍にする必要があるか。
 
@@ -93,6 +96,9 @@ $$
 ```cpp
 --8<-- "hadamard-transform/xor-convolution.cpp:power"
 ```
+
+完全なプログラム：[`xor-convolution.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/hadamard-transform/xor-convolution.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 **典型の型：XOR が決まった値になる列を数える**。「各要素を候補の集合から選んで長さ $K$ の列を作るとき、全要素の XOR が $x$ になる列はいくつか」は、候補の[指示関数](../guide/glossary.md#indicator) $f$（候補の値に 1 を立てた列）を $K$ 回 XOR 畳み込みした列の第 $x$ 項である。Nim の盤面の数え上げはこの形で、先手必勝の数は XOR が 0 でない列の数になる（[必勝局面の数え上げ](../comb/nim.md#counting)）。
 

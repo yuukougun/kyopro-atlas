@@ -75,6 +75,9 @@ gcd 1 回は多くても 90 回ほどの割り算で済むので、$N = 2 \times
 --8<-- "gcd-lcm/euclid.cpp:gcd"
 ```
 
+完全なプログラム：[`euclid.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/gcd-lcm/euclid.cpp)（GitHub）
+{ .kp-code-src }
+
 ??? question "確認問題：引き算の互除法"
     $\gcd(a, b) = \gcd(a - b, b)$（$a \ge b$）が成り立つことから、互除法が導けるのはなぜか。また、引き算だけで互除法を書くと何が困るか。
 
@@ -91,6 +94,9 @@ gcd 1 回は多くても 90 回ほどの割り算で済むので、$N = 2 \times
 --8<-- "gcd-lcm/euclid.cpp:many"
 ```
 
+完全なプログラム：[`euclid.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/gcd-lcm/euclid.cpp)（GitHub）
+{ .kp-code-src }
+
 問題に gcd・lcm が現れる典型は次の 3 つである。
 
 - **周期がそろう**：「全員が同時に」「すべての周期がそろう最初の時刻」は、周期の lcm である（[練習の ABC070 C](#practice)）
@@ -106,6 +112,9 @@ $\operatorname{lcm}(a, b) = ab / \gcd(a, b)$ だが、この順で計算する�
 ```cpp
 --8<-- "gcd-lcm/euclid.cpp:lcm"
 ```
+
+完全なプログラム：[`euclid.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/gcd-lcm/euclid.cpp)（GitHub）
+{ .kp-code-src }
 
 答えを「lcm を 998244353 で割った余り」で出す問題では、余りを取った値どうしで gcd を取り直せないので、割ってから掛ける方法は使えない。素因数ごとに指数の最大を取る（[素因数の指数で考える](../math/prime-exponent-vector.md)）。
 
@@ -140,6 +149,9 @@ $$
 ```cpp
 --8<-- "gcd-lcm/reduce-fraction.cpp:core"
 ```
+
+完全なプログラム：[`reduce-fraction.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/gcd-lcm/reduce-fraction.cpp)（GitHub）
+{ .kp-code-src }
 
 大小を比べるだけなら既約にしなくてよい。$q_1, q_2 > 0$ なら $p_1 / q_1 < p_2 / q_2 \iff p_1 q_2 < p_2 q_1$ で、積が `long long` に収まるか（値が $3 \times 10^9$ 程度まで）を確かめて使う。傾き $(dx, dy)$ や直線を同じものとしてまとめるときは、$dx = 0$ の向きのそろえ方が加わる（[方向・直線の正規化](../geometry/geometry-precision.md#line-normalization)）。
 

@@ -59,6 +59,9 @@ updated: 2026-10-29
 --8<-- "coordinate-compression/compress.cpp:core"
 ```
 
+完全なプログラム：[`compress.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/coordinate-compression/compress.cpp)（GitHub）
+{ .kp-code-src }
+
 - **`unique` は消さない**：`unique` は残す要素を前に詰め、その終わりの位置を返すだけである。vector の長さは変わらない。`erase` まで書かないと、後ろに残ったごみも番号に数えてしまう
 - **並べてから `unique`**：`unique` が消すのは隣り合う重複だけなので、先に `sort` する
 - **番号は 0 から**：問題が「1 番目から」と数えるなら、出力のときに 1 を足す
@@ -86,6 +89,9 @@ updated: 2026-10-29
 ```cpp
 --8<-- "coordinate-compression/covered-length.cpp:core"
 ```
+
+完全なプログラム：[`covered-length.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/coordinate-compression/covered-length.cpp)（GitHub）
+{ .kp-code-src }
 
 ??? question "確認問題：右端を入れ忘れたら"
     区間 $[2, 9)$ と $[5, 14)$ のうち、左端 2・5 だけを圧縮した。何が困るか。

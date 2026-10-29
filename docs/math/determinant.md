@@ -85,11 +85,14 @@ return res
 
 ### 法が素数のとき
 
-掃き出しの中で割り算をするのは「$a_{rc} / a_{cc}$ 倍を引く」の 1 か所だけで、ピボット $a_{cc}$ は mod $p$ で 0 でないので、[逆元](../math/mod-inverse.md)を掛ければよい。上の手順をそのまま mod $p$ で行える（完全なプログラムは `snippets/determinant/mod-p.cpp`。小さい行列で定義どおりの和と比べている）。
+掃き出しの中で割り算をするのは「$a_{rc} / a_{cc}$ 倍を引く」の 1 か所だけで、ピボット $a_{cc}$ は mod $p$ で 0 でないので、[逆元](../math/mod-inverse.md)を掛ければよい。上の手順をそのまま mod $p$ で行える（完全なプログラムは [`snippets/determinant/mod-p.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/determinant/mod-p.cpp)。小さい行列で定義どおりの和と比べている）。
 
 ```cpp
 --8<-- "determinant/mod-p.cpp:core"
 ```
+
+完全なプログラム：[`mod-p.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/determinant/mod-p.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 「0 でない行を探す」の 0 は mod $p$ での 0 である。成分が $p$ の倍数なら、整数としては 0 でなくてもピボットにできない。
 
@@ -114,6 +117,9 @@ $\begin{pmatrix} 4 & 1 \\ 6 & 5 \end{pmatrix}$（mod 12）で 0 列目を処理�
 ```cpp
 --8<-- "determinant/arbitrary-mod.cpp:core"
 ```
+
+完全なプログラム：[`arbitrary-mod.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/determinant/arbitrary-mod.cpp)（GitHub）
+{ .kp-code-src }
 
 **計算量**：1 回の引き算は 1 行ぶんの $O(N)$ である。列 $c$ を処理する間、ピボット $a_{cc}$ は各行との互除法の結果（2 数の最大公約数）に置き換わり、前の値の約数になる。行 $r$ の処理の前後のピボットを $p_{r-1}, p_r$ とすると、互除法の回数は $\log(p_{r-1}/p_r) + O(1)$ 程度である。$r$ について足すと途中の項が消え、$\log(p_c/p_{N-1}) + O(N) \le \log m + O(N)$ になる。よって列 1 つで $O(N(N + \log m))$、全体で $O(N^3 + N^2 \log m)$ である。
 

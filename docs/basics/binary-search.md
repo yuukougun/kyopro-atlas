@@ -1,7 +1,7 @@
 ---
 id: binary-search
 title: 二分探索
-aliases: [二分法, lower_bound, upper_bound, めぐる式二分探索, partition_point, binary search]
+aliases: [二分法, lower_bound, upper_bound, めぐる式二分探索, partition_point, binary search, にぶたん, バイナリサーチ, 2 分探索]
 type: technique
 field: basics
 chapter: ソートと二分探索
@@ -40,7 +40,7 @@ updated: 2026-10-29
     - **前提**：[ソートで考える](../basics/sorting-techniques.md)
 
 <!-- textlint-disable -->
-別名：二分法・lower_bound・upper_bound・めぐる式二分探索・partition_point・binary search
+別名：二分法・lower_bound・upper_bound・めぐる式二分探索・partition_point・binary search・にぶたん・バイナリサーチ・2 分探索
 <!-- textlint-enable -->
 
 二分探索は、ある位置を境に条件の真偽が 1 回だけ切り替わるとき、その境界を候補の幅の $\log$ 回の判定で見つける方法である。基本の形は「ソート済みの列から $x$ 以上の最初の要素を探す」だが、本当に要るのは列ではなく条件の[単調性](../guide/glossary.md#monotonicity)である。競プロでは、全探索の内側の 1 重のループを二分探索に置き換えて $O(N^2)$ を $O(N \log N)$ にする使い方がよく出る。
@@ -69,6 +69,9 @@ $\lvert \mathrm{ok} - \mathrm{ng} \rvert = 1$ になったとき、ok は「条�
 ```cpp
 --8<-- "binary-search/meguru.cpp:core"
 ```
+
+完全なプログラム：[`meguru.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binary-search/meguru.cpp)（GitHub）
+{ .kp-code-src }
 
 **なぜ速いか**：mid は ok と ng の真ん中にあるので、1 回の判定で幅はおよそ半分になる。幅 $D$ から始めると、幅が 1 になるまでの判定は $\lceil \log_2 D \rceil$ 回である。$D = 2 \times 10^5$ なら 18 回、$D = 10^{18}$ でも 60 回で済む。
 
@@ -113,6 +116,9 @@ C++ の `lower_bound` と `upper_bound` は、昇順に並んだ範囲での二�
 --8<-- "binary-search/count.cpp:query"
 ```
 
+完全なプログラム：[`count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binary-search/count.cpp)（GitHub）
+{ .kp-code-src }
+
 番兵の値は、後で距離などを計算してもあふれない大きさにする。`long long` の上限は約 $9.2 \times 10^{18}$ で、$4 \times 10^{18}$ の番兵でも $x$ との差を 1 回取るだけなら収まる。しかし距離を 2 つ以上足し合わせると（力試しの ABC119 D の「$x$ から番兵まで」＋「番兵から次の地点まで」など）、番兵どうしの距離 $8 \times 10^{18}$ も足されて上限を超える。そこでこのコード片では番兵を $10^{18}$ にしている。
 
 **降順の列**：降順に並べた列では、比較関数に `greater<>()` を渡す。`lower_bound(a.begin(), a.end(), x, greater<>())` は「$x$ 以下の最初の位置」を返す。
@@ -143,6 +149,9 @@ C++ の `lower_bound` と `upper_bound` は、昇順に並んだ範囲での二�
 ```cpp
 --8<-- "binary-search/triangles.cpp:core"
 ```
+
+完全なプログラム：[`triangles.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binary-search/triangles.cpp)（GitHub）
+{ .kp-code-src }
 
 固定する側を小さい順に動かすと、相手の境界も一方向にしか動かないことが多い。そのときは[尺取り法](../basics/two-pointers.md)で $\log$ を外せる。書き間違いは二分探索の方が少ないので、$O(N \log N)$ で間に合うなら二分探索で書いてよい。
 

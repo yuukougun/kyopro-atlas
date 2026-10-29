@@ -1,7 +1,7 @@
 ---
 id: two-pointers
 title: 尺取り法
-aliases: [しゃくとり法, two pointers, 2 ポインタ, スライディングウィンドウ, 固定長の窓]
+aliases: [しゃくとり法, two pointers, 2 ポインタ, スライディングウィンドウ, 固定長の窓, 尺とり法, シャクトリ法]
 type: technique
 field: basics
 chapter: 尺取り法とランレングス圧縮
@@ -42,7 +42,7 @@ updated: 2026-10-29
     - **前提**：[累積和](../basics/prefix-sum.md)、[計算量の見積もり](../basics/complexity-estimation.md)
 
 <!-- textlint-disable -->
-別名：しゃくとり法・two pointers・2 ポインタ・スライディングウィンドウ・固定長の窓
+別名：しゃくとり法・two pointers・2 ポインタ・スライディングウィンドウ・固定長の窓・尺とり法・シャクトリ法
 <!-- textlint-enable -->
 
 尺取り法は、連続する区間 $[l, r)$ を左端と右端の 2 つの添字で表し、どちらの端も右へだけ動かして、すべての左端（または右端）に対する答えを求める方法である。素朴には $O(N^2)$ 個ある区間を、端の動きが単調であることを使って $O(N)$ 回の操作で調べ尽くす。要は手順ではなく、「右端を戻さなくてよい」と言える単調性を問題の条件から見抜くことである。
@@ -101,6 +101,9 @@ updated: 2026-10-29
 --8<-- "two-pointers/at-most-k-kinds.cpp:core"
 ```
 
+完全なプログラム：[`at-most-k-kinds.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/two-pointers/at-most-k-kinds.cpp)（GitHub）
+{ .kp-code-src }
+
 取り除く処理は入れる処理の逆にする。種類数を数えるときは値ごとの個数 `cnt` を持つ。個数が 0 から 1 になったら種類数を増やし、1 から 0 になったら減らす。`set` に値を入れるだけだと、同じ値が 2 個ある区間から 1 個を出したときに値ごと消えて種類数が狂う。値の範囲が広いときは[座標圧縮](../basics/coordinate-compression.md)してから配列で数えると、`map` より速い。
 
 **左端を 1 つずつ進める書き方（より大きい区間も満たす型）**。左端 $l$ の for で、条件を満たすまで右端を伸ばし、満たせば $N - r + 1$ 個を数えてから $a_l$ を出す。右端を端まで伸ばしても満たさなければ、それより右の左端でも満たさないので打ち切る。次のコードは、正の整数列で和が $K$ 以上の区間を数える。
@@ -108,6 +111,9 @@ updated: 2026-10-29
 ```cpp
 --8<-- "two-pointers/at-least-k-sum.cpp:core"
 ```
+
+完全なプログラム：[`at-least-k-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/two-pointers/at-least-k-sum.cpp)（GitHub）
+{ .kp-code-src }
 
 左端の for で書くとき気をつけるのは、区間が空（$l = r$）のまま $a_l$ を出してしまうことである。2 つ目のコードでは $\mathrm{sum} \ge K \ge 1$ のときだけ出すので $r > l$ が保証される。一般には「$l = r$ なら $r$ も 1 つ進め、そうでなければ $a_l$ を出す」と書く。
 

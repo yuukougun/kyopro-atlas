@@ -2,6 +2,7 @@
 id: term-index
 title: 用語の索引
 aliases: [索引, 五十音順の索引, 別名の索引, 名前から引く, 英語名から引く]
+search: {exclude: true}
 type: guide
 field: guide
 chapter: 辞書として引く
@@ -20,17 +21,19 @@ sections:
   - {title: 英字の名前（ABC 順）, anchor: latin}
   - {title: 複数のページに当たる語, anchor: shared-terms}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
     - **何のページか**：手法の名前・別名・英語名から、そのページを五十音順と ABC 順で引ける。全ページの題名と別名から生成するので、サイト内検索の結果に左右されない入口として使える。
-    - **使い方**：最初の字がかななら[五十音順](#kana)、英字か数字なら[英字の名前](#latin)の節で語を探す。漢字や記号で始まる語は、ブラウザのページ内検索で語を打って探す。`_GLIBCXX_DEBUG` のような `_` で始まる C++ の名前も記号の側にある。
+    - **使い方**：ページの上の欄に語を入れると、その語を含む行だけが残る（語の一部でもよい）。並びから探すなら、最初の字がかななら[五十音順](#kana)、英字か数字なら[英字の名前](#latin)の節を見る。漢字や記号で始まる語は五十音順の節の最後にあり、`_GLIBCXX_DEBUG` のような `_` で始まる C++ の名前も記号の側にある。
     - **ほかの入口**：語の意味は[用語集](glossary.md)、問題文の言い回しからは[逆引き辞典（言い回しから）](reverse-index-signs.md)、制約からは[逆引き辞典（制約・計算量から）](reverse-index-constraints.md)で引く。
 
 <!-- textlint-disable -->
 別名：索引・五十音順の索引・別名の索引・名前から引く・英語名から引く
 <!-- textlint-enable -->
+
+<div class="kp-filter" data-kp-units="li" data-kp-sections="kana latin shared-terms"></div>
 
 用語の索引は、各ページの題名・別名（略称・英語名を含む）と、ページで使う ACL の名前を 1 語 1 行に並べ、その語を持つページへつないだものである。名前は知っているがどのページにあるか分からないときや、サイト内検索で目当てのページが出てこないときに使う。行はすべて各ページの題名・別名・ACL の名前から自動で作るので、ページや別名が増えると索引も増える。
 
@@ -46,8 +49,10 @@ updated: 2026-10-22
 語は最初の字の種類で 3 つに分けて並べる。
 
 - **かなで始まる語**は[五十音順](#kana)の節に、あ行からわ行までの見出しを分けて並べる。カタカナはひらがなと同じに扱い、長音「ー」は飛ばして読む（「セグメント木」は「せぐめんと木」として並ぶ）。濁音・半濁音で始まる語は、清音の語のすぐ後に来る（「が」で始まる語は「か」の語の後、「き」の語の前）。2 字目からも文字コードの順で比べるので、語の途中の漢字はどのかなよりも後に来る（「クエリ先読み」は「クエリを逆順に処理」の後）。
-- **漢字・記号で始まる語**は、読みの順には並べられないので、五十音順の節の最後の[漢字・記号で始まる語](#terms-kanji)に、最初の字の文字コードの順で集めてある。「二分探索」や「遅延セグ木」はここにあり、な行・た行にはない。記号で始まる C++ の書き方やコンパイラのオプション（`#define int long long`・`-fsanitize=address` など）もこの見出しの先頭にある。`_GLIBCXX_DEBUG`・`__int128` のような `_` で始まる名前と、Σ・φ などのギリシャ文字で始まる語も同じ並びにある。この見出しの語は、ブラウザのページ内検索（パソコンでは Ctrl+F、スマートフォンではブラウザのメニューにある項目）で探すのが速い。
+- **漢字・記号で始まる語**は、読みの順には並べられないので、五十音順の節の最後の[漢字・記号で始まる語](#terms-kanji)に、最初の字の文字コードの順で集めてある。「二分探索」や「遅延セグ木」はここにあり、な行・た行にはない。記号で始まる C++ の書き方やコンパイラのオプション（`#define int long long`・`-fsanitize=address` など）もこの見出しの先頭にある。`_GLIBCXX_DEBUG`・`__int128` のような `_` で始まる名前と、Σ・φ などのギリシャ文字で始まる語も同じ並びにある。この見出しの語は、ページの上の欄に語を入れて絞り込むのが速い。JS が動かない環境では欄が出ないので、ブラウザのページ内検索（パソコンでは Ctrl+F、スマートフォンではブラウザのメニューにある項目）で探す。
 - **英字・数字で始まる語**は[英字の名前](#latin)の節に、大文字と小文字を区別せずに ABC 順で並べる。数字で始まる語（01-BFS・2-SAT など）は英字の語より前に来る。全角の英数字は半角と同じに扱う。
+
+ページの上の欄は、語を含む行と、その行の見出しだけを残す。大文字と小文字・全角と半角・カタカナとひらがな・空白や「-」の有無の違いは問わないので、「だいくすとら」でも「union find」でも当たる。「セグ木」と「セグメント木」、「最大公約数」と「gcd」のような少数の言い換えは両方の語で探す。空白で区切った語は、すべてを含む行だけが残る。
 
 目当ての語が見つからないときは、次の順に確かめる。
 
@@ -73,6 +78,7 @@ updated: 2026-10-22
 ### あ行 {#terms-a}
 
 - アダマール変換 → [XOR 畳み込み](../math/hadamard-transform.md)
+- あとで読む → [勉強したいリスト](study-list.md)
 - あふれ → [整数のオーバーフローと \_\_int128](../cpp/cpp-integer-overflow.md)
 - アルゴリズムと数学 → [問題集と練習用コンテストの案内](problem-sets.md)
 - [アルゴリズム関数と ranges 版](../cpp/cpp-algorithms.md)
@@ -87,6 +93,8 @@ updated: 2026-10-22
 - [インタラクティブ問題](../misc/interactive.md)
 - [インライン DP](../dp/inline-dp.md)
 - ウェーブレット行列 → [Wavelet Matrix](../ds/wavelet-matrix.md)
+- エイホコラシック法 → [Aho-Corasick 法](../string/aho-corasick.md)
+- エラトステネスのふるい → [エラトステネスの篩](../math/sieve-eratosthenes.md)
 - [エラトステネスの篩](../math/sieve-eratosthenes.md)
 - エラーメッセージ → [C++ の逆引き](../cpp/cpp-reverse-index.md)
 - [オイラーツアー](../tree/euler-tour.md)
@@ -105,6 +113,7 @@ updated: 2026-10-22
 - オフライン処理 → [クエリの先読み](../ds/offline-queries.md)
 - オフライン動的連結性 → [辺の追加と削除が混ざる連結性](../graph/offline-dynamic-connectivity.md)
 - オンライン強制 → [クエリの先読み](../ds/offline-queries.md)
+- お気に入り → [勉強したいリスト](study-list.md)
 
 ### か行 {#terms-ka}
 
@@ -138,6 +147,7 @@ updated: 2026-10-22
 - [グラフへの帰着](../graph/graph-modeling.md)
 - グラフ上のゲーム → [後退解析](../comb/game-retrograde-analysis.md)
 - グラフ同型 → [小さいグラフの全探索](../graph/small-graph-brute-force.md)
+- グランディ数 → [Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md)
 - [グリッド](../patterns/grid.md)
 - グリッド BFS → [グリッドグラフ](../graph/grid-graph.md)
 - グリッド DP → [グリッド上の DP](../dp/dp-grid.md)
@@ -170,10 +180,12 @@ updated: 2026-10-22
 - サイクル基底 → [XOR 基底](../math/xor-basis.md)
 - サイクル検出 → [閉路の検出と復元](../graph/cycle-detection.md)
 - サイクル空間 → [XOR 基底](../math/xor-basis.md)
+- サフィックスアレイ → [Suffix Array と LCP 配列](../string/suffix-array.md)
 - シグマの変形 → [Σ の変形](../math/sigma-manipulation.md)
 - シミュレーション → [操作列とクエリ](../patterns/operation-sequence.md)
 - シミュレーションの高速化 → [周期性の検出](../basics/periodicity.md)
 - しゃくとり法 → [尺取り法](../basics/two-pointers.md)
+- シャクトリ法 → [尺取り法](../basics/two-pointers.md)
 - シュタイナー木 → [最小シュタイナー木](../graph/steiner-tree.md)
 - ジェネリックラムダ → [ラムダ式と再帰ラムダ](../cpp/cpp-lambda.md)
 - ジャッジとの対話 → [インタラクティブ問題](../misc/interactive.md)
@@ -182,11 +194,14 @@ updated: 2026-10-22
 - [スタック・キュー・deque の使いどころ](../ds/stack-techniques.md)
 - [ストレステストと実験](stress-testing.md)
 - スパーステーブル → [Sparse Table](../ds/sparse-table.md)
+- スパニングツリー → [最小全域木](../graph/minimum-spanning-tree.md)
 - すべての最短路に含まれる辺 → [最短路 DAG](../graph/shortest-path-dag.md)
 - スライディングウィンドウ → [尺取り法](../basics/two-pointers.md)
 - スライド bitDP → [プロファイル DP](../dp/broken-profile-dp.md)
 - スロープトリック → [Slope Trick](../dp/slope-trick.md)
 - ずらしたときの一致数 → [畳み込みの使い方](../math/convolution-ntt.md)
+- セグツリー → [セグメント木](../ds/segment-tree.md)
+- セグメントツリー → [セグメント木](../ds/segment-tree.md)
 - [セグメント木](../ds/segment-tree.md)
 - [セグメント木に何を載せるか](../ds/segment-tree-monoids.md)
 - セグメント木の形の補助頂点 → [区間に辺を張る](../graph/segment-tree-graph.md)
@@ -224,6 +239,7 @@ updated: 2026-10-22
 - デカルト木 → [単調スタックとスライド最小値](../ds/monotonic-stack.md)
 - データの書き出し → [この教材の使い方](../start/how-to-use.md)
 - データ構造をマージする一般的なテク → [マージテク](../tree/small-to-large.md)
+- デック → [スタック・キュー・deque の使いどころ](../ds/stack-techniques.md)
 - デバッグ → [WA・TLE・RE・MLE の原因チェックリスト](debugging-checklist.md)
 - デバッグ用ビルド → [未定義動作とダングリング](../cpp/cpp-undefined-behavior.md)
 - トーシェント → [オイラーの φ 関数](../math/euler-phi.md)
@@ -245,6 +261,7 @@ updated: 2026-10-22
 - なもり → [なもりグラフ](../graph/namori-graph.md)
 - [なもりグラフ](../graph/namori-graph.md)
 - ならし計算量 → [計算量の見積もり](../basics/complexity-estimation.md)
+- にぶたん → [二分探索](../basics/binary-search.md)
 - ニム → [Nim と XOR](../comb/nim.md)
 - ニム和 → [Nim と XOR](../comb/nim.md)
 - ネックレス → [Burnside の補題](../comb/burnside-lemma.md)
@@ -258,6 +275,7 @@ updated: 2026-10-22
 - ハッシュの衝突確率 → [ハッシュの衝突と安全な設計](../string/hash-safety.md)
 - ハミルトン路 → [bitDP](../dp/bit-dp.md)
 - ハンガリアン法 → [最小費用流](../graph/min-cost-flow.md)
+- バイナリサーチ → [二分探索](../basics/binary-search.md)
 - バグの探し方 → [WA・TLE・RE・MLE の原因チェックリスト](debugging-checklist.md)
 - バケット法 → [平方分割](../ds/sqrt-decomposition.md)
 - バックトラック → [再帰による全列挙](../basics/recursive-enumeration.md)
@@ -281,6 +299,7 @@ updated: 2026-10-22
 - ビット DP → [bitDP](../dp/bit-dp.md)
 - ビット Trie → [Binary Trie](../ds/binary-trie.md)
 - ビットごとの排他的論理和 → [XOR](../patterns/xor.md)
+- ビットセット → [bitset による高速化](../misc/bitset-speedup.md)
 - ビット並列 → [bitset による高速化](../misc/bitset-speedup.md)
 - ビット全探索 → [bit 全探索と順列全探索](../basics/bit-full-search.md)
 - ビット演算 → [bit 演算の基本と XOR の性質](../basics/bit-operations.md)
@@ -290,8 +309,11 @@ updated: 2026-10-22
 - [フェルマーの小定理と指数の mod](../math/exponent-mod.md)
 - フック長公式 → [Young 図形とフック長公式](../comb/young-tableaux.md)
 - フラクタル → [再帰的な構造](../basics/recursion-structure.md)
+- フロイドワーシャル法 → [ワーシャルフロイド法](../graph/warshall-floyd.md)
 - フロンティア法 → [プロファイル DP](../dp/broken-profile-dp.md)
+- ブックマーク → [勉強したいリスト](study-list.md)
 - ブロックカット木 → [橋・関節点・二重連結成分](../graph/lowlink.md)
+- プライオリティキュー → [優先度付きキュー](../ds/priority-queue.md)
 - プリム法 → [最小全域木](../graph/minimum-spanning-tree.md)
 - プリューファー列 → [木の次数列と Prüfer 列](../tree/tree-degree.md)
 - [プロファイル DP](../dp/broken-profile-dp.md)
@@ -323,6 +345,7 @@ updated: 2026-10-22
 - まだ出ていない最小の値 → [mex](../patterns/mex.md)
 - マッチングの双対 → [最小パス被覆と Hall の定理](../graph/dilworth-path-cover.md)
 - マトロイド → [貪欲法の考え方と正当性](../basics/greedy-basics.md)
+- マナカー → [回文の扱いと Manacher](../string/palindrome.md)
 - マンハッタン距離 → [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md)
 - [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md)
 - マンハッタン距離の和の最小 → [絶対値の和の最小化と中央値](../basics/median-absolute.md)
@@ -343,16 +366,19 @@ updated: 2026-10-22
 - モノイドの累乗 → [繰り返し二乗法](../math/mod-pow.md)
 - モノイドの設計 → [セグメント木に何を載せるか](../ds/segment-tree-monoids.md)
 - モノバリアント → [不変量・単調に変わる量](../thinking/invariant.md)
+- もらう DP → [DP の基本](../dp/dp-basics.md)
 - モンテカルロ法 → [乱択アルゴリズム](../misc/randomized.md)
 - モンモール数 → [包除原理](../comb/inclusion-exclusion.md)
 
 ### や行 {#terms-ya}
 
 - ヤング図形 → [Young 図形とフック長公式](../comb/young-tableaux.md)
+- ユニオンファインド → [Union-Find](../ds/union-find.md)
 
 ### ら行 {#terms-ra}
 
 - ライツアウト → [掃き出し法](../math/gaussian-elimination.md)
+- ライブラリチェッカー → [自作ライブラリの設計と動作確認](library-design.md)
 - ライブラリの動作確認 → [自作ライブラリの設計と動作確認](library-design.md)
 - ライブラリの展開 → [マクロと雛形](../cpp/cpp-macros-template-file.md)
 - ライブラリ整備 → [自作ライブラリの設計と動作確認](library-design.md)
@@ -486,6 +512,7 @@ updated: 2026-10-22
 - [二乗の期待値・分散](../comb/expectation-of-square.md)
 - [二乗の木 DP](../dp/tree-dp-square.md)
 - 二人零和有限確定完全情報ゲーム → [ゲームの基本と勝敗の DP](../comb/game-basics.md)
+- 二分グラフ → [二部グラフ判定](../graph/bipartite-graph.md)
 - 二分トライ → [Binary Trie](../ds/binary-trie.md)
 - 二分ヒープ → [優先度付きキュー](../ds/priority-queue.md)
 - [二分探索](../basics/binary-search.md)
@@ -579,6 +606,7 @@ updated: 2026-10-22
 - 償却計算量 → [計算量の見積もり](../basics/complexity-estimation.md)
 - [優先度付きキュー](../ds/priority-queue.md)
 - [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md)
+- 優先順位付きキュー → [優先度付きキュー](../ds/priority-queue.md)
 - 充足可能性 → [2-SAT](../graph/two-sat.md)
 - 先頭から貪欲に決める → [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md)
 - 入るとき足して出るとき戻す → [根からのパスを DFS で持ち回る](../tree/root-path-dfs.md)
@@ -602,6 +630,7 @@ updated: 2026-10-22
 - 全域木の数え上げ → [行列木定理](../graph/matrix-tree-theorem.md)
 - 全射の数 → [包除原理](../comb/inclusion-exclusion.md)
 - [全探索の設計](../basics/brute-force.md)
+- 全方位 → [全方位木 DP](../dp/rerooting.md)
 - [全方位木 DP](../dp/rerooting.md)
 - 全期待値の公式 → [期待値 DP](../comb/expected-value-dp.md)
 - 全点対の距離の和 → [辺で切って数える](../tree/tree-edge-contribution.md)
@@ -678,6 +707,8 @@ updated: 2026-10-22
 - 割り算の切り捨ての向き → [数・ビット・乱数の関数](../cpp/cpp-math-functions.md)
 - 割当問題 → [最小費用流](../graph/min-cost-flow.md)
 - 劣モジュラ → [燃やす埋める](../graph/project-selection.md)
+- 勉強したいページ → [勉強したいリスト](study-list.md)
+- [勉強したいリスト](study-list.md)
 - [動的 DP](../dp/dynamic-dp.md)
 - 動的な中央値 → [上位 K 個の和と中央値の管理](../ds/top-k-multiset.md)
 - 動的セグ木 → [値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md)
@@ -686,8 +717,10 @@ updated: 2026-10-22
 - 動的木 DP → [Static Top Tree と木 DP の動的更新](../tree/static-top-tree.md)
 - 動的計画法 → [DP の基本](../dp/dp-basics.md)
 - 勝ち局面・負け局面 → [ゲームの基本と勝敗の DP](../comb/game-basics.md)
+- 包含除外原理 → [包除原理](../comb/inclusion-exclusion.md)
 - 包除 → [包除原理](../comb/inclusion-exclusion.md)
 - [包除 DP](../comb/inclusion-exclusion-dp.md)
+- 包除の原理 → [包除原理](../comb/inclusion-exclusion.md)
 - [包除原理](../comb/inclusion-exclusion.md)
 - 包除原理を DP に載せる → [包除 DP](../comb/inclusion-exclusion-dp.md)
 - 区分線形凸関数 → [Slope Trick](../dp/slope-trick.md)
@@ -856,6 +889,7 @@ updated: 2026-10-22
 - 小さい順に K 個を列挙 → [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md)
 - 小数の出力 → [入出力と定数倍](../cpp/cpp-io.md)
 - 少なくとも 1 つ → [余事象](../thinking/complement.md)
+- 尺とり法 → [尺取り法](../basics/two-pointers.md)
 - [尺取り法](../basics/two-pointers.md)
 - 属性 → [関数テンプレートと constexpr](../cpp/cpp-templates-constexpr.md)
 - 巡回の個数ごとの順列の数 → [第 1 種スターリング数](../comb/stirling-first.md)
@@ -902,6 +936,7 @@ updated: 2026-10-22
 - 引き分けのあるゲーム → [後退解析](../comb/game-retrograde-analysis.md)
 - 強連結成分 → [強連結成分分解（SCC）](../graph/scc.md)
 - [強連結成分分解（SCC）](../graph/scc.md)
+- 形式的べき級数 → [形式的冪級数と多項式の演算](../math/fps-basics.md)
 - 形式的冪級数で数える → [母関数の考え方](../comb/generating-function-counting.md)
 - [形式的冪級数と多項式の演算](../math/fps-basics.md)
 - 彩色の全探索 → [小さいグラフの全探索](../graph/small-graph-brute-force.md)
@@ -1020,6 +1055,7 @@ updated: 2026-10-22
 - 時間配分 → [コンテストの戦い方](contest-strategy.md)
 - 書き方から引く → [C++ の逆引き](../cpp/cpp-reverse-index.md)
 - 最下位ビット → [bit 演算の基本と XOR の性質](../basics/bit-operations.md)
+- 最低共通祖先 → [最小共通祖先（LCA）](../tree/lca.md)
 - 最初に踏む障害物で分類 → [包除 DP](../comb/inclusion-exclusion-dp.md)
 - 最大クリーク → [彩色数・最大独立集合・最大クリーク](../graph/chromatic-number.md)
 - 最大フロー → [最大流](../graph/max-flow.md)
@@ -1054,6 +1090,7 @@ updated: 2026-10-22
 - 最小添字規則 → [重複の除き方](../comb/counting-dedup.md)
 - 最小素因数 → [最小素因数の篩と線形篩](../math/spf-sieve.md)
 - [最小素因数の篩と線形篩](../math/spf-sieve.md)
+- 最小費用フロー → [最小費用流](../graph/min-cost-flow.md)
 - [最小費用流](../graph/min-cost-flow.md)
 - 最小辺被覆 → [König の定理](../graph/konig-theorem.md)
 - 最小鎖被覆 → [最小パス被覆と Hall の定理](../graph/dilworth-path-cover.md)
@@ -1657,6 +1694,7 @@ updated: 2026-10-22
 - 0-indexed → [記法と用語の約束](../start/notation.md)
 - 01 on Tree → [比で親に併合する貪欲](../tree/tree-ratio-greedy.md)
 - [01-BFS](../graph/zero-one-bfs.md)
+- 01BFS → [01-BFS](../graph/zero-one-bfs.md)
 - 0uz → [数の型とリテラル](../cpp/cpp-types-literals.md)
 - 0x3f3f3f3f → [数の型とリテラル](../cpp/cpp-types-literals.md)
 - 1 << 40 → [整数のオーバーフローと \_\_int128](../cpp/cpp-integer-overflow.md)
@@ -1678,6 +1716,7 @@ updated: 2026-10-22
 - 2 ポインタ → [尺取り法](../basics/two-pointers.md)
 - 2 乗の木 DP → [二乗の木 DP](../dp/tree-dp-square.md)
 - 2 円の位置関係 → [円と幾何の最適化](../geometry/circle-geometry.md)
+- 2 分探索 → [二分探索](../basics/binary-search.md)
 - 2 周分に伸ばす → [円環](../patterns/circular.md)
 - 2 回の BFS → [木の直径と最遠点](../tree/tree-diameter.md)
 - 2 彩色 → [二部グラフ判定](../graph/bipartite-graph.md)
@@ -1692,6 +1731,7 @@ updated: 2026-10-22
 - 2 色の塗り分け → [二部グラフ判定](../graph/bipartite-graph.md)
 - 2 進 Trie → [Binary Trie](../ds/binary-trie.md)
 - 2 進リテラル → [数の型とリテラル](../cpp/cpp-types-literals.md)
+- 2 部グラフ → [二部グラフ判定](../graph/bipartite-graph.md)
 - 2 頂点間のパス → [木の上のパスの判定と分解](../tree/tree-path.md)
 - [2-SAT](../graph/two-sat.md)
 - 2-satisfiability → [2-SAT](../graph/two-sat.md)
@@ -1700,6 +1740,7 @@ updated: 2026-10-22
 - 2^N 全探索 → [bit 全探索と順列全探索](../basics/bit-full-search.md)
 - 2D prefix sum → [2 次元累積和](../basics/prefix-sum-2d.md)
 - 2SAT → [2-SAT](../graph/two-sat.md)
+- 3 分探索 → [三分探索](../basics/ternary-search.md)
 - 3 次元の基本 → [ベクトルと外積](../geometry/geometry-vectors.md)
 - 3 次元の支配点の数え上げ → [CDQ 分割統治](../ds/cdq-divide-and-conquer.md)
 - 3 次元累積和 → [2 次元累積和](../basics/prefix-sum-2d.md)
@@ -1806,6 +1847,7 @@ updated: 2026-10-22
 - bipartite graph → [二部グラフ判定](../graph/bipartite-graph.md)
 - bipartite matching → [二部マッチング](../graph/bipartite-matching.md)
 - bit brute force → [bit 全探索と順列全探索](../basics/bit-full-search.md)
+- bit DP → [bitDP](../dp/bit-dp.md)
 - bit ごとに分解 → [bit ごとに独立に考える](../basics/bitwise-independence.md)
 - [bit ごとに独立に考える](../basics/bitwise-independence.md)
 - bit ごとの寄与 → [bit ごとに独立に考える](../basics/bitwise-independence.md)
@@ -2787,6 +2829,7 @@ updated: 2026-10-22
 ### Z {#terms-latin-z}
 
 - Z function → [Z-algorithm](../string/z-algorithm.md)
+- Z アルゴリズム → [Z-algorithm](../string/z-algorithm.md)
 - Z 法 → [Z-algorithm](../string/z-algorithm.md)
 - Z 配列 → [Z-algorithm](../string/z-algorithm.md)
 - [Z-algorithm](../string/z-algorithm.md)

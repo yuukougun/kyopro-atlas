@@ -101,11 +101,14 @@ $$
 
 同じ議論は、「段（格子なら $x + y$、時刻なら $t$）ごとに頂点が一列に並び、始点はすべて同じ段、終点もすべて同じ段にあり、1 歩で位置が変わらないか一方向に 1 つだけ進む」形の DAG ならそのまま使える。位置が両向きに動けるときは、隣どうしの 2 つが同時に位置を入れ替えると、頂点を共有せずに順が入れ替わるので使えない。数直線上を動く駒の問題がこの形である。始点や終点が斜めの線にそろっていないときは、$a_i \to b_l$ と $a_j \to b_m$（$i < j$、$l > m$）が必ず交わるかを自分で確かめる。
 
-中心の部分は次のとおりである（完全なプログラムは `snippets/lgv-lemma/grid-paths.cpp`。座標が小さいときは全列挙の符号付きの和と一致することを確かめている）。
+中心の部分は次のとおりである（完全なプログラムは [`snippets/lgv-lemma/grid-paths.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lgv-lemma/grid-paths.cpp)。座標が小さいときは全列挙の符号付きの和と一致することを確かめている）。
 
 ```cpp
 --8<-- "lgv-lemma/grid-paths.cpp:lgv"
 ```
+
+完全なプログラム：[`grid-paths.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lgv-lemma/grid-paths.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 ## 行列式を bitDP で展開する例 {#bitdp}
 
@@ -140,6 +143,9 @@ $$
 ```cpp
 --8<-- "lgv-lemma/grid-paths.cpp:det"
 ```
+
+完全なプログラム：[`grid-paths.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lgv-lemma/grid-paths.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 自作するときに気をつける点は次のとおりである。
 

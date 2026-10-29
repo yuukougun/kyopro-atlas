@@ -76,6 +76,9 @@ $$
 --8<-- "binomial-precompute/binom.cpp:core"
 ```
 
+完全なプログラム：[`binom.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binomial-precompute/binom.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 この方法には **表の最大の添字 $N$ が $p$ より小さい** という条件がある。$N \ge p$ だと $\mathrm{fact}[N]$ が $p$ の倍数になって 0 になり、逆元が存在しない（ACL の `inv()` は assert で止まる）。$p = 998244353$ や $10^9 + 7$ で $N \le 10^7$ 程度なら問題にならない。法が小さい素数の場合は [Lucas の定理](#lucas)を使う。
 
 ??? question "確認問題：前計算の 1 回の逆元"
@@ -118,6 +121,9 @@ $$
 --8<-- "binomial-precompute/large-n.cpp:core"
 ```
 
+完全なプログラム：[`large-n.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binomial-precompute/large-n.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 この式は $n \ge p$ でも正しい。分子は整数として $\binom{n}{k} \cdot k!$ に等しく、$k < p$ なら $k!$ は $p$ で割り切れず逆元を持つからである。分子のどこかの項が $p$ の倍数なら、答えは正しく 0 になる。たとえば $p = 998244353$、$n = p + 5$、$k = 3$ なら分子は $5 \cdot 4 \cdot 3$ と同じ余りで、答えは $\binom{5}{3} = 10$ になる。表を使う方法と違い、条件は $k < p$ だけである。
 
 ## 法が素数でないとき：n が小さければパスカルの三角形で作る {#composite-mod}
@@ -136,6 +142,9 @@ $$
 ```cpp
 --8<-- "binomial-precompute/pascal.cpp:core"
 ```
+
+完全なプログラム：[`pascal.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binomial-precompute/pascal.cpp)（GitHub）
+{ .kp-code-src }
 
 法が入力で与えられる問題では、ACL の `atcoder::modint`（法を `set_mod` で決める型）も使える。ただし逆元がない値で割ると assert で止まる。二項係数は足し算だけで作ると決めておくと安全である。$N$ が大きく法が合成数のときは、法を素数冪に分けて求め、[中国剰余定理](../math/crt.md)で合わせる方法もある。ABC の範囲ではまれである。
 
@@ -172,6 +181,9 @@ $$
 ```cpp
 --8<-- "binomial-precompute/lucas.cpp:core"
 ```
+
+完全なプログラム：[`lucas.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binomial-precompute/lucas.cpp)（GitHub）
+{ .kp-code-src }
 
 $p = 2$ でパスカルの三角形を塗ると、奇数の位置がシェルピンスキーの三角形と呼ばれる自己相似な模様になる。各行の奇数の個数は $2^{(n \text{ の 1 のビットの数})}$ で、Lucas の定理の各桁が $\binom{1}{0}$・$\binom{1}{1}$ の 2 通りずつ選べることに対応する。
 
@@ -221,6 +233,9 @@ $N$ が $10^5$ を超えると、ピラミッドを全部計算すると $O(N^2)
 ```cpp
 --8<-- "binomial-precompute/exact.cpp:core"
 ```
+
+完全なプログラム：[`exact.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binomial-precompute/exact.cpp)（GitHub）
+{ .kp-code-src }
 
 - **どこまで収まるか**：$\binom{66}{33} \approx 7.2 \times 10^{18}$ は `long long` に収まるが、$\binom{67}{33} \approx 1.4 \times 10^{19}$ は収まらない。$n \le 66$ なら答えはどの $k$ でも収まる
 - **途中の値**：答えが収まっても、掛けた直後の $c \cdot (n - i)$ はその $(i + 1)$ 倍になる。`long long` のまま計算して安全なのは $n \le 61$ までなので、途中は `__int128` で持つ（[整数のオーバーフロー](../cpp/cpp-integer-overflow.md)）。$k$ を $\min(k, n - k)$ に直すと、掛ける回数も途中の値も小さくなる

@@ -281,6 +281,22 @@ bit 全探索と bitDP の違いは、集合どうしの間で値を受け渡す
 
 Union-Find と DFS・BFS の違いは、グラフがいつ与えられるかである。グラフが固定なら、どちらでも同じ成分の分け方が得られる。辺の追加と質問が交互に来るなら、毎回探索し直すと間に合わないので Union-Find を使う。Union-Find は連結かどうかしか分からず、距離や道そのものが要るなら探索を使う。
 
+Union-Find を使うと決めたら、問われ方から拡張を選ぶ。基本の Union-Find は併合と「同じ成分か」の判定しかできないので、次の問われ方では、持たせる値か使い方を変える。
+
+| 問われ方 | 使う Union-Find | ページ |
+| --- | --- | --- |
+| 成分の大きさ・辺数・値の和や最大値を答える | 根に成分の情報を持たせ、併合のときに合成する | [根に成分の情報を持たせる](../ds/union-find-applications.md#data-on-root) |
+| 「$x_v - x_u = w$」の形の条件が矛盾しないか、2 つの値の差はいくつか | 重み付き Union-Find（各頂点が親との差を持つ） | [矛盾の判定と差の取得](../ds/weighted-union-find.md#consistency) |
+| 「同じ色」「違う色」の条件で 2 色に塗れるか（条件が増えていく） | 頂点を 2 倍にする。または差を XOR にした重み付き Union-Find | [Union-Find で二部判定](../graph/bipartite-graph.md#union-find)・[XOR で偶奇](../ds/weighted-union-find.md#generalization) |
+| 辺の削除だけが起き、削除の順序が先に分かる | 逆順に見て辺の追加にする | [削除を逆順の追加に](../graph/union-find-connectivity.md#reverse-deletion) |
+| 辺の追加と削除が混ざり、先に全部読める | 時間軸のセグメント木と、ロールバックできる Union-Find | [辺の追加と削除が混ざる連結性](../graph/offline-dynamic-connectivity.md#time-segment-tree) |
+| 直前の併合から順に取り消す（木の DFS で、入るとき併合し、出るとき戻す） | ロールバックできる Union-Find（経路圧縮をしない） | [ロールバックできる Union-Find](../ds/rollback-union-find.md#with-dfs) |
+| 過去の時刻で連結だったか、初めて連結になった時刻を、先読みせずに答える | 部分永続 Union-Find（先に全部読めるなら並列二分探索でもよい） | [部分永続 Union-Find](../ds/partially-persistent-union-find.md#what-it-does)・[代わりの手](../ds/partially-persistent-union-find.md#alternatives) |
+| 区間のまだ塗っていないマスだけを塗る、右へ最初の空きを探す | 次の空きへ飛ぶ Union-Find | [次の空きへ飛ぶ Union-Find](../ds/union-find-applications.md#next-pointer) |
+| 重みが $w$ 以下の辺だけで連結かを、$w$ を変えて何度も問う | しきい値の順に辺とクエリを並べて足す。先読みできなければ併合過程の木 | [しきい値の順に辺を足す](../graph/union-find-connectivity.md#threshold)・[併合過程の木](../tree/merge-process-tree.md#bottleneck) |
+
+辺の重みが数種類しかなく、辺を足すたびに答えるなら、重みのしきい値ごとに Union-Find を 1 つずつ持つ方法もある（[しきい値ごとに Union-Find を持つ](../ds/union-find-applications.md#multiple-uf)）。
+
 トポロジカルソート・DAG 上の DP・強連結成分分解は、有向グラフで順に使われる組である。トポロジカルソートは順序そのものを求め、DAG 上の DP はその順に値を伝える。閉路があるとどちらも使えないので、閉路の中を自由に回れるなら強連結成分分解で閉路を 1 頂点に縮めてから DAG 上の DP にする（[縮約した DAG の上の DP](../graph/scc.md#dp-on-dag)）。
 
 真偽の割り当てを決める問題は、条件の形で分かれる。

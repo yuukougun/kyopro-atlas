@@ -60,13 +60,18 @@ updated: 2026-10-29
 - **各操作の手順**：$\mathrm{find}$ は根までたどるだけで、経路上の親を書き換えない。merge は 2 つの根 $a, b$ を求め、$(a, \mathrm{par}[a])$ と $(b, \mathrm{par}[b])$ をスタックに積んでから、小さい方を大きい方の下へつなぐ（union by size）。undo はスタックから 2 件取り出し、それぞれの位置へ元の値を書き戻す。
 - **境界**：すでに同じグループの 2 頂点を merge したときも、記録を 2 件積む。par は何も変わらないので、書き戻すだけなら害はない。ただし根の合計を引き算で戻す場合は、同じグループどうしの記録を取り消すときに引かない（引くと根の合計が 0 になる。引き算で戻す型は[オフライン動的連結性の DFS の節](../graph/offline-dynamic-connectivity.md#dfs-rollback)）。こうしておくと「merge 1 回 ＝ undo 1 回」が常に成り立ち、呼び出し側は merge の結果を見ずに undo できる。積まない作り方にするなら、merge が false を返したときは undo を呼ばないよう呼び出し側で区別する。
 
+ACL の `dsu` は `leader` の中で経路圧縮をするので、取り消しには使えない。そこで自作する。次のコードは、名前を ACL の `dsu` にそろえ（`leader`・`same`・`size`・`merge`）、取り消しの `undo`・`snapshot`・`rollback` を足したものである。上の $\mathrm{find}$ はコードの `leader` に当たり、ACL の `leader` と違って経路圧縮をしない。`merge` は ACL と違い、併合したかどうかを `bool` で返す（ACL は新しい代表元を返す）。
+
 ```cpp
 --8<-- "rollback-union-find/version-tree.cpp:core"
 ```
 
-ACL の `dsu` は `leader` の中で経路圧縮をするので、取り消しには使えない。上のように自作するか、公開されているライブラリ（[参考](#references)の ei1333 氏・Nyaan 氏のもの）を使う。ただし ei1333 氏のものの snapshot は記録を捨てて今の時点を基準にし、rollback は引数なしでその時点まで戻す形で、上の説明の snapshot（併合の回数を返す）とは意味が違う。
+完全なプログラム：[`version-tree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rollback-union-find/version-tree.cpp)（GitHub）
+{ .kp-code-src }
 
-Library Checker で確かめるなら、[練習問題](#practice)の Persistent Unionfind（版の木を DFS でたどる）が使える。
+自作のほかに、公開されているライブラリ（[参考](#references)の ei1333 氏・Nyaan 氏のもの）も使える。ただし ei1333 氏のものの snapshot は記録を捨てて今の時点を基準にし、rollback は引数なしでその時点まで戻す形で、上の説明の snapshot（併合の回数を返す）とは意味が違う。
+
+Library Checker で確かめるなら、[練習問題](#practice)の Persistent Unionfind（版の木を DFS でたどる）が使える。名前の約束は[インターフェースの決め方](../guide/library-design.md#interface)、確かめ方は[動作確認の手順](../guide/library-design.md#verify)にある。
 
 ## なぜ経路圧縮をしないのか（戻すコストとならしの保証が崩れること） {#no-path-compression}
 
@@ -93,6 +98,9 @@ ABC で出てくるのは、根付き木を DFS しながら、頂点に入る�
 ```cpp
 --8<-- "rollback-union-find/version-tree.cpp:dfs"
 ```
+
+完全なプログラム：[`version-tree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rollback-union-find/version-tree.cpp)（GitHub）
+{ .kp-code-src }
 
 質問のたびにすぐ答える必要がある（オンライン）なら、DFS の順に並べ替えられないので、過去の時点の判定ができる[部分永続 Union-Find](../ds/partially-persistent-union-find.md#what-it-does) や[永続データ構造](../ds/persistent-data-structures.md)を使う。
 

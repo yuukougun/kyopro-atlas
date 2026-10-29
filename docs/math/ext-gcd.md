@@ -86,6 +86,9 @@ $r_{i+1} = 0$ になったら止める。そのときの $r_i$ が $g$ で、$(x
 --8<-- "ext-gcd/ext-gcd.cpp:core"
 ```
 
+完全なプログラム：[`ext-gcd.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/ext-gcd/ext-gcd.cpp)（GitHub）
+{ .kp-code-src }
+
 再帰で書く形もよく見かける。$\gcd(b, a \bmod b)$ の解 $(x', y')$ から、$a \bmod b = a - \lfloor a/b \rfloor b$ を代入して $(x, y) = (y', x' - \lfloor a/b \rfloor y')$ と戻す。中身は表を下から読み返すのと同じで、どちらで書いてもよい。
 
 **計算量**：ループの回数は互除法と同じで $O(\log \min(a, b))$ である。互除法が最も遅いのは隣り合うフィボナッチ数を入れたときで、$10^{18}$ 以下の数なら 90 回に満たない（[GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md)）。
@@ -167,6 +170,9 @@ $a/g$ と $m/g$ は互いに素なので、$a/g$ には法 $m/g$ での[逆元](
 ```cpp
 --8<-- "ext-gcd/linear-congruence.cpp:core"
 ```
+
+完全なプログラム：[`linear-congruence.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/ext-gcd/linear-congruence.cpp)（GitHub）
+{ .kp-code-src }
 
 **gcd で割ることを忘れない**：$g > 1$ のとき、$a$ は法 $m$ で逆元をもたない。「両辺に $a$ の逆元を掛ける」は使えず、`inv_mod(a, m)` は止まる。両辺だけでなく法も $g$ で割る必要がある。法を割り忘れて $(a/g) x \equiv b/g \pmod{m}$ を解くと、間違え方は 2 通りある。$a/g$ と $m$ が互いに素でなければ、解があるのに「解なし」と判定してしまう。互いに素でも、解の周期を $m$ と取り違えて最小の解を逃す。たとえば $6x \equiv 3 \pmod{9}$ の最小の解は 2 だが、$2x \equiv 1 \pmod{9}$ を解くと 5 が返る。
 

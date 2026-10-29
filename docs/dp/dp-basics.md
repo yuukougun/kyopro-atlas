@@ -1,7 +1,7 @@
 ---
 id: dp-basics
 title: DP の基本
-aliases: [動的計画法, DP, Dynamic Programming, 漸化式, 配る DP, 貰う DP, push 型, pull 型]
+aliases: [動的計画法, DP, Dynamic Programming, 漸化式, 配る DP, 貰う DP, push 型, pull 型, もらう DP]
 type: technique
 field: dp
 chapter: DP の考え方
@@ -42,7 +42,7 @@ updated: 2026-10-29
     - **前提**：[全探索の設計](../basics/brute-force.md)
 
 <!-- textlint-disable -->
-別名：動的計画法・DP・Dynamic Programming・漸化式・配る DP・貰う DP・push 型・pull 型
+別名：動的計画法・DP・Dynamic Programming・漸化式・配る DP・貰う DP・push 型・pull 型・もらう DP
 <!-- textlint-enable -->
 
 DP（動的計画法）は、全探索の途中で同じ「途中の状況」に何度もたどり着くとき、その状況ごとの答えを表に 1 回だけ書いて使い回す方法である。指数通りある選び方を、状況の数 × [遷移](../guide/glossary.md#transition)の数の計算にまとめる。このページでは、どの DP にも共通する骨組みと、配る形・貰う形の書き分け、よくあるバグを扱う。
@@ -119,6 +119,9 @@ DP で求めるものは、最小・最大（最適化）、場合の数（数�
 --8<-- "dp-basics/frog.cpp:push"
 ```
 
+完全なプログラム：[`frog.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-basics/frog.cpp)（GitHub）
+{ .kp-code-src }
+
 状態を頂点・遷移を辺としたグラフで考える。どちらの形も、各辺を 1 回ずつ使って「$\mathrm{dp}[\text{先}] \leftarrow \min(\mathrm{dp}[\text{先}], \mathrm{dp}[\text{元}] + \text{コスト})$」と更新するだけである。使う辺の集合が同じなので、計算量も結果も同じになる。違うのは、各辺を「先の側から数えるか、元の側から数えるか」だけである。
 
 正しさの条件も共通で、辺を使うときに遷移元の値が確定していればよい。配る形では、$\mathrm{dp}[i]$ を配る時点で $i$ へのすべての遷移が済んでいる必要がある。添字の昇順に回すなら、$i$ への遷移はすべて $i$ より小さい添字から来るので、この条件は満たされる。
@@ -150,6 +153,9 @@ $$
 ```cpp
 --8<-- "dp-basics/range-pull.cpp:core"
 ```
+
+完全なプログラム：[`range-pull.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-basics/range-pull.cpp)（GitHub）
+{ .kp-code-src }
 
 配る形で書くと、$\mathrm{dp}[i]$ の値を閉区間 $[i + L, i + R]$ のすべて（$N - 1$ を超える分は捨てる）へ足すことになる。これも[いもす法](../basics/imos.md)で区間の両端に印を付け、昇順に回しながら印を足し込めば $O(N)$ にできる。どちらでも書けるが、貰う形の方が「区間の和を 1 回で読む」形になって見通しがよい。
 

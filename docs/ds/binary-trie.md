@@ -2,6 +2,7 @@
 id: binary-trie
 title: Binary Trie
 aliases: [二分トライ, 2 進 Trie, ビット Trie, XOR Trie, XOR の最小化]
+tags: [ビット]
 type: technique
 field: ds
 chapter: そのほかのデータ構造
@@ -69,6 +70,9 @@ Binary Trie では、値を $0 \le a < 2^B$ の範囲に限り、$a$ を bit $B-
 ```cpp
 --8<-- "binary-trie/trie.cpp:core"
 ```
+
+完全なプログラム：[`trie.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binary-trie/trie.cpp)（GitHub）
+{ .kp-code-src }
 
 ### 境界
 
@@ -139,6 +143,9 @@ $T$ の bit $b$ が 1 であることは、深さ $B - 1 - b$ のすべてのノ
 --8<-- "binary-trie/implicit.cpp:core"
 ```
 
+完全なプログラム：[`implicit.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binary-trie/implicit.cpp)（GitHub）
+{ .kp-code-src }
+
 再帰の 1 段で、各要素はちょうど 1 つの区間に入るので、分ける手間は段ごとに合わせて $O(N)$、全体で $O(NB)$ である。$x$ の範囲が $[0, M)$ のように 2 の冪でないときは、上限 $M$（ABC425 G の記号）を上位 bit から見て、丸ごと入る半分にはこの関数を使い、はみ出す半分だけ再帰を続ける（[練習問題](#practice)の ABC425 G）。
 
 木を明示的に作るか再帰で済ませるかは、次の基準で選ぶ。
@@ -200,6 +207,9 @@ $T$ の bit $b$ が 1 であることは、深さ $B - 1 - b$ のすべてのノ
     ```cpp
     --8<-- "binary-trie/min-pair.cpp:core"
     ```
+
+    完全なプログラム：[`min-pair.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binary-trie/min-pair.cpp)（GitHub）
+    { .kp-code-src }
 
     別解として、XOR が最小の組は昇順で隣り合う 2 要素の中にあるので、隣り合う組の XOR を multiset で持つ方法もある（[使い分け](#comparison)）。
 

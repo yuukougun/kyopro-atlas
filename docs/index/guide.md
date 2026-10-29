@@ -9,7 +9,7 @@ search:
 
 # 横断ページの詳細索引
 
-分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
+分野の全ページの id・URL・別名・サイン・種類・前提・使い分け・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
 
 ## 逆引き辞典（言い回しから）（reverse-index-signs） {#reverse-index-signs}
 
@@ -121,6 +121,17 @@ search:
     - `roadmap#practice` 色ごとの練習の方法：https://yuukougun.github.io/kyopro-atlas/guide/roadmap/#practice
     - `roadmap#progress` 解いた数・理解した数：https://yuukougun.github.io/kyopro-atlas/guide/roadmap/#progress
     - `roadmap#not-a-syllabus` シラバスではないこと：https://yuukougun.github.io/kyopro-atlas/guide/roadmap/#not-a-syllabus
+
+## 勉強したいリスト（study-list） {#study-list}
+
+- id：`study-list`　レベル：—　段階：draft　type：guide
+- URL：https://yuukougun.github.io/kyopro-atlas/guide/study-list/
+- 別名：お気に入り、あとで読む、ブックマーク、勉強したいページ
+- 種類：案内
+- 節：
+    - `study-list#list` リストの中身：https://yuukougun.github.io/kyopro-atlas/guide/study-list/#list
+    - `study-list#how` 入れ方と外し方：https://yuukougun.github.io/kyopro-atlas/guide/study-list/#how
+    - `study-list#storage` 記録の保存と退避：https://yuukougun.github.io/kyopro-atlas/guide/study-list/#storage
 
 ## 精進の仕方（practice-method） {#practice-method}
 
@@ -262,7 +273,7 @@ search:
 
 - id：`library-design`　レベル：—　段階：reviewed　type：guide
 - URL：https://yuukougun.github.io/kyopro-atlas/guide/library-design/
-- 別名：ライブラリ整備、自作ライブラリ、Library Checker、verify、ライブラリの動作確認
+- 別名：ライブラリ整備、自作ライブラリ、Library Checker、verify、ライブラリの動作確認、ライブラリチェッカー
 - 種類：案内、実装・C++
 - 節：
     - `library-design#what-to-build` 何を自作するか：https://yuukougun.github.io/kyopro-atlas/guide/library-design/#what-to-build

@@ -1,7 +1,8 @@
 ---
 id: bit-dp
 title: bitDP
-aliases: [ビット DP, 集合 DP, Bitmask DP, 巡回セールスマン問題, TSP, Traveling Salesman Problem, ハミルトン路]
+aliases: [ビット DP, 集合 DP, Bitmask DP, 巡回セールスマン問題, TSP, Traveling Salesman Problem, ハミルトン路, bit DP]
+tags: [ビット]
 type: technique
 field: dp
 chapter: 状態の形で分かれる DP
@@ -43,7 +44,7 @@ updated: 2026-10-29
     - **前提**：[DP の状態の設計](../dp/dp-state-design.md)、[bit 全探索と順列全探索](../basics/bit-full-search.md)
 
 <!-- textlint-disable -->
-別名：ビット DP・集合 DP・Bitmask DP・巡回セールスマン問題・TSP・Traveling Salesman Problem・ハミルトン路
+別名：ビット DP・集合 DP・Bitmask DP・巡回セールスマン問題・TSP・Traveling Salesman Problem・ハミルトン路・bit DP
 <!-- textlint-enable -->
 
 bitDP は、$N$ 個のものの部分集合を $0$ 以上 $2^N$ 未満の整数で表し、その整数を DP の添字にする手法である。$N!$ 通りの順番を調べる代わりに、将来に効く情報だけを集合として持つので、$N \le 20$ 程度まで扱える。
@@ -94,6 +95,9 @@ bitDP の遷移は、ほとんどが「集合 $S$ から、それより大きい
 --8<-- "bit-dp/matching.cpp:core"
 ```
 
+完全なプログラム：[`matching.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bit-dp/matching.cpp)（GitHub）
+{ .kp-code-src }
+
 状態は $2^N$ 個、各状態の遷移は $N$ 通りなので $O(2^N N)$ である。男性の番号まで状態に持つと $\mathrm{dp}[i][S]$ になるが、$i = \lvert S \rvert$ でない組は使われないので、持つだけ無駄になる。
 
 集合だけを状態にする別の形に、「集合の和を取る」遷移がある。品物 $k$ が集合 $c_k$ を覆い、費用 $a_k$ で買えるとする。$\mathrm{dp}[S]$ ＝ 覆った集合が $S$ になる最小費用として、$\mathrm{dp}[S \cup c_k] \gets \min(\mathrm{dp}[S \cup c_k], \mathrm{dp}[S] + a_k)$ と配る。$S \cup c_k \ge S$ なので、これも昇順でよい（$S \cup c_k = S$ のときは値が良くならないだけである）。
@@ -123,6 +127,9 @@ $N = 3$ で一度動かす。$c(0, 1) = 1$、$c(1, 2) = 2$、$c(2, 0) = 3$、$c(
 ```cpp
 --8<-- "bit-dp/tsp.cpp:core"
 ```
+
+完全なプログラム：[`tsp.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bit-dp/tsp.cpp)（GitHub）
+{ .kp-code-src }
 
 **その状態で足りる理由**：$(S, v)$ から先の最適な回り方は、残りの頂点の集合 $V \setminus S$ と、いまいる $v$ だけで決まる。ここまでの順番は、残りの回り方の選択肢とコストのどちらも変えない。だから同じ $(S, v)$ に来る経路のうち最小のものだけを残してよい。
 

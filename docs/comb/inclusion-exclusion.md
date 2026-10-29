@@ -1,7 +1,7 @@
 ---
 id: inclusion-exclusion
 title: 包除原理
-aliases: [包除, 撹乱順列, 完全順列, モンモール数, 全射の数, min-max 包除, inclusion-exclusion principle, derangement]
+aliases: [包除, 撹乱順列, 完全順列, モンモール数, 全射の数, min-max 包除, inclusion-exclusion principle, derangement, 包含除外原理, 包除の原理]
 type: technique
 field: comb
 chapter: 包除の系統
@@ -43,7 +43,7 @@ updated: 2026-10-29
     - **前提**：[数え上げの考え方](../comb/counting-mindset.md)、[余事象](../thinking/complement.md)、[bit 全探索と順列全探索](../basics/bit-full-search.md)
 
 <!-- textlint-disable -->
-別名：包除・撹乱順列・完全順列・モンモール数・全射の数・min-max 包除・inclusion-exclusion principle・derangement
+別名：包除・撹乱順列・完全順列・モンモール数・全射の数・min-max 包除・inclusion-exclusion principle・derangement・包含除外原理・包除の原理
 <!-- textlint-enable -->
 
 包除原理は、「どの条件も破らない」ものを直接数える代わりに、「指定した条件を少なくとも破る」ものの個数を足し引きして求める方法である。直接数えると条件どうしが絡み合うのに、条件を破る側に固定すると残りが自由になり、積の法則で数えられることが多い。2〜3 条件の足し引きは[余事象](../thinking/complement.md#two-conditions)で済むので、ここでは条件が多い場合と、条件が対称な場合の式を扱う。
@@ -113,6 +113,9 @@ $N(S)$ の求め方は、条件を同時に破ったときに何が「共通部�
 --8<-- "inclusion-exclusion/none-divisible.cpp:core"
 ```
 
+完全なプログラム：[`none-divisible.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/inclusion-exclusion/none-divisible.cpp)（GitHub）
+{ .kp-code-src }
+
 計算量は、$S$ ごとに $O(M)$ 個の要素を見るので $O(2^M M)$ である（gcd の分の $O(\log)$ を除く）。$N(S)$ を mask から 1 ビット外した集合の値から $O(1)$ で更新できるなら、[lowbit](../guide/glossary.md#lowbit) を使って $O(2^M)$ にできる。
 
 - **応用の型**（木のパスの条件）：木の辺を白か黒に塗り、指定した $M$ 本のパスのどれにも黒い辺がある塗り方を数える。条件 $i$ を破るのは「パス $i$ の辺がすべて白」で、$S$ のパスの辺の和集合が $p$ 本なら $N(S) = 2^{N - 1 - p}$ である。パスの辺を bit 集合にしておけば和集合は OR で求まる（練習の [ABC152 F](#practice)）。
@@ -153,6 +156,9 @@ $D_0, D_1, \dots, D_6$ は $1, 0, 1, 2, 9, 44, 265$ である。$n = 3$ なら $
 --8<-- "inclusion-exclusion/derangement.cpp:core"
 ```
 
+完全なプログラム：[`derangement.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/inclusion-exclusion/derangement.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 同じ値は漸化式 $D_n = (n - 1)(D_{n-1} + D_{n-2})$（$D_0 = 1$、$D_1 = 0$）でも求まる。$p_1 = j$（$j \ne 1$ の $n - 1$ 通り）と決め、$p_j = 1$ なら残り $n - 2$ 個の撹乱順列、$p_j \ne 1$ なら $j$ に「1 を取らない」制約を移した $n - 1$ 個の撹乱順列になるからである。上のコード片では、両方の値が一致することを assert で確かめている。
 
 $D_n / n!$ は $n$ が大きくなると $1/e \approx 0.368$ に近づく。ランダムな順列に固定点がない確率は、$n$ が 4 程度以上なら $n$ によらずほぼ 37% である。
@@ -172,6 +178,9 @@ $n = 3$、$k = 2$ なら $8 - 2 \cdot 1 + 0 = 6$ で、$2^3 = 8$ 通りから 1 
 ```cpp
 --8<-- "inclusion-exclusion/surjection.cpp:core"
 ```
+
+完全なプログラム：[`surjection.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/inclusion-exclusion/surjection.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 計算量は、二項係数の前計算のあと各項の累乗に $O(\log n)$ かかるので $O(k \log n)$ である。境界では $0^0 = 1$ に注意する。$n = k = 0$ のとき答えは 1（空の塗り方）で、modint の `pow(0)` は 1 を返すのでそのまま正しい。
 

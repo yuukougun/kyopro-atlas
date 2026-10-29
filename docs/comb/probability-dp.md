@@ -84,6 +84,9 @@ $$
 --8<-- "probability-dp/coins.cpp:core"
 ```
 
+完全なプログラム：[`coins.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/probability-dp/coins.cpp)（GitHub）
+{ .kp-code-src }
+
 検算の `assert` は時刻ごとに $O(N)$ かかるが、全体の計算量は変わらない。提出前に外してもよい。
 
 ??? question "確認問題：公平なコイン 3 枚"
@@ -105,6 +108,9 @@ $$
 ```cpp
 --8<-- "probability-dp/sugoroku.cpp:core"
 ```
+
+完全なプログラム：[`sugoroku.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/probability-dp/sugoroku.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 吸収状態から確率を流し出さないことと、吸収状態の確率を次の時刻へ持ち越すこと（`nxt[n] += dp[n]`）の両方が要る。持ち越しを忘れると、和が 1 から減っていくので検算で気づける。
 

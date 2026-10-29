@@ -92,6 +92,9 @@ deg[v] == 1 の頂点をすべてキューに入れる
 --8<-- "namori-graph/peel-leaves.cpp:core"
 ```
 
+完全なプログラム：[`peel-leaves.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/namori-graph/peel-leaves.cpp)（GitHub）
+{ .kp-code-src }
+
 **Union-Find で求める**。辺を順に Union-Find で結んでいくと、両端がすでに同じ成分にある辺がちょうど 1 本見つかる。それを $(u, v)$ とすると、閉路は「残りの $N - 1$ 本の辺でできた木の上の $u$ から $v$ への道」と辺 $(u, v)$ でできている。閉路の頂点を列挙したいときは、残りの辺で $u$ から BFS して親を記録し、$v$ から親をたどる（[閉路の検出と復元](../graph/cycle-detection.md)）。辺を読みながら閉路を作る辺を見つけたいときや、閉路の長さや閉路の頂点の並び順が要るときに向く。並び順は、葉を削る方法でも閉路の頂点から隣の閉路の頂点へ 1 周たどれば得られる。
 
 ## 閉路の頂点ごとにぶら下がる木に分ける {#hanging-trees}

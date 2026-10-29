@@ -1,7 +1,8 @@
 ---
 id: segment-tree
 title: セグメント木
-aliases: [セグ木, segtree, Segment Tree, RMQ, 非再帰セグ木, 区間最小値, 文字の集合を持つセグ木]
+aliases: [セグ木, segtree, Segment Tree, RMQ, 非再帰セグ木, 区間最小値, 文字の集合を持つセグ木, セグメントツリー, セグツリー]
+search: {boost: 1.1}
 type: technique
 field: ds
 chapter: 区間クエリ
@@ -43,7 +44,7 @@ updated: 2026-10-29
     - **前提**：[累積和](../basics/prefix-sum.md)
 
 <!-- textlint-disable -->
-別名：セグ木・segtree・Segment Tree・RMQ・非再帰セグ木・区間最小値・文字の集合を持つセグ木
+別名：セグ木・segtree・Segment Tree・RMQ・非再帰セグ木・区間最小値・文字の集合を持つセグ木・セグメントツリー・セグツリー
 <!-- textlint-enable -->
 
 セグメント木は、列を 2 の冪の長さの区間に階層的に区切り、各区間の総積を完全二分木のノードに持たせたデータ構造である。どの区間も $O(\log N)$ 個のノードに分けられるので区間の取得が速く、一点を変えても作り直すのは葉から根までの $O(\log N)$ 個のノードで済む。
@@ -81,6 +82,9 @@ updated: 2026-10-29
 ```cpp
 --8<-- "segment-tree/usage.cpp:core"
 ```
+
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree/usage.cpp)（GitHub）
+{ .kp-code-src }
 
 ## なぜ O(log N) か（各段で高々 2 個のノード） {#complexity}
 
@@ -159,12 +163,17 @@ $s_L$ には右から、$s_R$ には左から付け足すのは、演算が可�
 - 1 つ上がって $l = 5$、$r = 7$ になる。ノード 5（$[2, 4)$）を $s_L$ に、ノード 6（$[4, 6)$）を $s_R$ に積む
 - 上がると $l = r = 3$ で止まる。$s_L = \min(3, 2) = 2$、$s_R = \min(4, 8) = 4$ で、答えは $2$ である
 
-??? note "C++ の実装例（非再帰。ACL と同じ配置）"
+??? note "自作するとき：`SegTree`（ACL の `segtree` に当たる）"
+    ACL の `segtree` と同じ配置にした。メンバ関数の名前は `set`・`get`・`prod`・`all_prod`・`max_right`・`min_left` で、コンストラクタも含めて ACL と同じである。引数の約束（0-indexed・半開区間・前提を `assert` で確かめる）もそろえた。判定の関数は `max_right(l, f)`・`min_left(r, f)` の引数で渡す。ACL にある `max_right<f>(l)`・`min_left<f>(r)` の形（判定の関数をテンプレートの引数で渡す書き方）はない。`max_right`・`min_left` の手順（登る段階と降りる段階）は[セグメント木上の二分探索](../ds/segment-tree-binary-search.md#complexity)にある。
+
     ```cpp
     --8<-- "segment-tree/own.cpp:core"
     ```
 
-    試験では可換でない演算（1 次関数の合成）を載せ、素朴に左から施した結果と照らし合わせている。Library Checker の Point Set Range Composite が同じ形の問題である。
+    完全なプログラム：[`own.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree/own.cpp)（GitHub）
+    { .kp-code-src }
+
+    試験では可換でない演算（1 次関数の合成）を載せ、素朴に左から施した結果と照らし合わせている。`max_right`・`min_left` は、和と「区間が昇順か」（可換でない）の 2 つの演算で確かめた。乱数の列で、境目を素朴に求めた値と比べている。Library Checker の [Point Set Range Composite](https://judge.yosupo.jp/problem/point_set_range_composite) が同じ形の問題である。名前の約束は[インターフェースの決め方](../guide/library-design.md#interface)、確かめ方は[動作確認の手順](../guide/library-design.md#verify)にある。
 
 ## 境界（半開区間・空区間・単位元） {#boundaries}
 
@@ -212,6 +221,9 @@ prod(l, r, k, [kl, kr)):
 ```cpp
 --8<-- "segment-tree/char-set.cpp:core"
 ```
+
+完全なプログラム：[`char-set.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree/char-set.cpp)（GitHub）
+{ .kp-code-src }
 
 更新と取得はどちらも $O(\log N)$ で、26 種類の文字を 1 本のセグメント木で扱える。
 

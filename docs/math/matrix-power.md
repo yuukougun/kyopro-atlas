@@ -112,6 +112,9 @@ mod 998244353 で書くと次のようになる。
 --8<-- "matrix-power/matpow.cpp:core"
 ```
 
+完全なプログラム：[`matpow.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/matrix-power/matpow.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 **積の向き**：行列の積は一般に $AB \ne BA$ である。ただし同じ行列の累乗どうしは $A^a A^b = A^{a+b} = A^b A^a$ なので、`r = mul(r, a)` と `r = mul(a, r)` のどちらで書いても $A^K$ は同じになる。向きが答えを変えるのは、違う行列を掛け合わせるとき（[合成の節](#composition)）と、行ベクトル $v' = vA$ の流儀と列ベクトル $v' = Av$ の流儀を混ぜたときである。行ベクトルの流儀では $a_{ij}$ が「$i$ から $j$ へ」の係数になり、行列は列ベクトルの流儀の転置になる。解説によって流儀が違うので、どちらで書くかを最初に決める。
 
 **単位行列**：$R$ の初期値は単位行列にする。0 で埋めた行列から始めると、何を掛けても 0 のままである。$K = 0$ のときは単位行列がそのまま答えになる。
@@ -196,6 +199,9 @@ $$
 ```cpp
 --8<-- "matrix-power/min-plus.cpp:core"
 ```
+
+完全なプログラム：[`min-plus.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/matrix-power/min-plus.cpp)（GitHub）
+{ .kp-code-src }
 
 (min,+) の積では、$+\infty$ を大きな数 `INF` で表すと `INF + INF` があふれる。$\bar 0$ どうしの和を飛ばすか、`INF` を $2^{60}$ 程度にして、和を `long long` の範囲に収める。重みの最大 × $K$ が `INF` を超えないかも確かめる。
 

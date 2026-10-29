@@ -58,6 +58,9 @@ atcoder: true
 --8<-- "cpp-structured-bindings/pair-tuple.cpp:core"
 ```
 
+完全なプログラム：[`pair-tuple.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-structured-bindings/pair-tuple.cpp)（GitHub）
+{ .kp-code-src }
+
 pair・tuple は辞書順で比べられる。まず 0 番目どうしを比べ、等しければ 1 番目、… と進む。`sort` すると第 1 キーの昇順、同じなら第 2 キーの昇順になるのはこのためである。ダイクストラ法で (距離, 頂点) の順に入れるのも、距離で比べたいからである（頂点を先に入れると頂点番号の順になる）。
 
 - **版**：pair・tuple・`make_pair` は C++11 以前から。`pair{a, b}` の CTAD は C++17
@@ -82,6 +85,9 @@ pair・tuple は辞書順で比べられる。まず 0 番目どうしを比べ�
 --8<-- "cpp-structured-bindings/bindings.cpp:core"
 ```
 
+完全なプログラム：[`bindings.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-structured-bindings/bindings.cpp)（GitHub）
+{ .kp-code-src }
+
 素朴に書くと、`for (auto e : es) { int to = e.to; long long cost = e.cost; … }` とほぼ同じ意味である。ただし名前 `to`・`cost` は新しい変数ではなく、見えない変数 `e` のメンバの別名である（[見えない変数](#hidden-variable)）。
 
 - **版**：C++17。g++-13・g++-15 の `-std=gnu++17` 以降で使える
@@ -102,11 +108,17 @@ pair・tuple は辞書順で比べられる。まず 0 番目どうしを比べ�
 --8<-- "cpp-structured-bindings/hidden-variable.cpp:core"
 ```
 
+完全なプログラム：[`hidden-variable.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-structured-bindings/hidden-variable.cpp)（GitHub）
+{ .kp-code-src }
+
 名前の数は要素の数とちょうど同じでなければならない。過不足があればコンパイルエラーになり、「一部だけ受ける」ことはできない（要らない要素には名前 `_` を付けるか、[tie と ignore](#tie) を使う）。
 
 ```cpp
 --8<-- "cpp-structured-bindings/count-ng.cpp:core"
 ```
+
+完全なプログラム：[`count-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-structured-bindings/count-ng.cpp)（GitHub）
+{ .kp-code-src }
 
 g++-15 では `only 2 names provided for structured binding` と、続く `note: while 'std::tuple<int, int, int>' decomposes into 3 elements` で要素の数が示される。
 
@@ -121,11 +133,17 @@ g++-15 では `only 2 names provided for structured binding` と、続く `note:
 --8<-- "cpp-structured-bindings/map-loop.cpp:core"
 ```
 
+完全なプログラム：[`map-loop.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-structured-bindings/map-loop.cpp)（GitHub）
+{ .kp-code-src }
+
 キー `k` は、`auto&` でも `auto` でも `const` である（コピーしても要素の型が `pair<const K, V>` のままだから）。キーを書き換えようとするとコンパイルエラーになる。`map` はキーの順に並べて持っているので、キーをその場で変えると並びが壊れるからである。
 
 ```cpp
 --8<-- "cpp-structured-bindings/map-key-ng.cpp:core"
 ```
+
+完全なプログラム：[`map-key-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-structured-bindings/map-key-ng.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：C++17。`unordered_map` も同じ（要素は `pair<const K, V>`）
 - **落とし穴 1**：「各値を 10 倍する」つもりで `auto [k, v]` と書くと、何も変わらないのにコンパイルは通る。書き換えるループは `auto&` にする
@@ -139,6 +157,9 @@ g++-15 では `only 2 names provided for structured binding` と、続く `note:
 ```cpp
 --8<-- "cpp-structured-bindings/if-init.cpp:core"
 ```
+
+完全なプログラム：[`if-init.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-structured-bindings/if-init.cpp)（GitHub）
+{ .kp-code-src }
 
 `set::insert` と `map::insert`・`emplace` は (位置, 入ったか) の pair を返す。`if (auto [it, ok] = seen.insert(x); ok)` は「初めて出た値のときだけ」を 1 行で書く定型である。素朴に書くと次と同じ意味になる。
 
@@ -161,6 +182,9 @@ g++-15 では `only 2 names provided for structured binding` と、続く `note:
 --8<-- "cpp-structured-bindings/pq-top.cpp:core"
 ```
 
+完全なプログラム：[`pq-top.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-structured-bindings/pq-top.cpp)（GitHub）
+{ .kp-code-src }
+
 `pq.top()` は、キューが中に持つ `vector` の先頭の要素への参照を返す。`const auto& [d, v]` の見えない変数は、その先頭の場所を指す。`pop` は先頭の要素を末尾に移して取り除き、残りを並べ直すので、先頭の場所には次に小さい (7, 2) が入る。`d`・`v` は同じ場所を見続けるので、新しい値が読めてしまう。キューの要素が 1 個のときは、指していた要素そのものが消えるので[未定義動作](../cpp/cpp-undefined-behavior.md#dangling-pq-top)になる（寿命の切れたものを指す参照、すなわちダングリングである）。
 
 `auto [d, v] = pq.top();` と値で受ければ、見えない変数は先頭のコピーなので `pop` の影響を受けない。
@@ -168,6 +192,9 @@ g++-15 では `only 2 names provided for structured binding` と、続く `note:
 ```cpp
 --8<-- "cpp-structured-bindings/pq-top-ok.cpp:core"
 ```
+
+完全なプログラム：[`pq-top-ok.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-structured-bindings/pq-top-ok.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：C++17（構造化束縛を使わない `const auto& t = pq.top(); pq.pop();` でも同じことが起きる）
 - **落とし穴**：手元の g++-13・g++-15 で、`-Wall -Wextra`・`-D_GLIBCXX_DEBUG`・`-fsanitize=address,undefined` のどれを付けた場合も警告や停止はなく、同じ `7 2` が出た。道具では見つからないので、`top()` は必ず値で受けてから `pop` する、と決めておく。(距離, 頂点) は 16 バイト程度なので、コピーの費用は気にしなくてよい
@@ -183,6 +210,9 @@ g++-15 では `only 2 names provided for structured binding` と、続く `note:
 --8<-- "cpp-structured-bindings/enumerate-ref.cpp:core"
 ```
 
+完全なプログラム：[`enumerate-ref.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-structured-bindings/enumerate-ref.cpp)（GitHub）
+{ .kp-code-src }
+
 [見えない変数](#hidden-variable)の規則どおり、`auto` が決めるのは「組をコピーするか」だけで、組の中身が値か参照かは組の型が決める。`map` を `auto [k, v]` で回すと `v` が値のコピーになるのは、`map` の要素が値を持つ pair だからである。
 
 - **版**：`views::enumerate`・`views::zip` は C++23。g++-13・g++-15 の `-std=gnu++23` で使える（詳しくは [C++23 の views](../cpp/cpp-views-cpp23.md)）
@@ -196,11 +226,17 @@ g++-15 では `only 2 names provided for structured binding` と、続く `note:
 --8<-- "cpp-structured-bindings/capture.cpp:core"
 ```
 
+完全なプログラム：[`capture.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-structured-bindings/capture.cpp)（GitHub）
+{ .kp-code-src }
+
 使わない要素には `_` という名前を付ける習慣がある。`_` が 1 個だけなら普通の変数名なので、C++17 から通る。同じ場所で `_` を 2 回使う（`auto [_, x, _] = t;`）のは、C++26 で「使わない変数」として `_` を特別扱いするようになってからの書き方である。
 
 ```cpp
 --8<-- "cpp-structured-bindings/placeholder-twice.cpp:core"
 ```
+
+完全なプログラム：[`placeholder-twice.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-structured-bindings/placeholder-twice.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版（キャプチャ）**：C++20。ただし g++-13・g++-15 は、`-std=gnu++17 -pedantic` でも警告なしで通した（規格より先に許している）
 - **版（`_` を 2 回）**：g++-15 は `-std=gnu++23` で `name-independent declarations only available with '-std=c++2c'` の警告を出して通す。AtCoder の GCC 15.2 も同じ版・同じ `-std=gnu++23` を使い、警告をエラーにしないので通るはずである（AtCoder の上では試していない）。g++-13 では `redeclaration of 'auto _'` のコンパイルエラーになる
@@ -213,6 +249,9 @@ g++-15 では `only 2 names provided for structured binding` と、続く `note:
 ```cpp
 --8<-- "cpp-structured-bindings/tie.cpp:core"
 ```
+
+完全なプログラム：[`tie.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-structured-bindings/tie.cpp)（GitHub）
+{ .kp-code-src }
 
 `tie(x1, y1) < tie(x2, y2)` は、2 つの組を辞書順で比べる。比較関数で「$x$ の昇順、同じなら $y$ の昇順」を書くとき、`if` を重ねずに 1 行で書ける（`return tie(a.x, a.y) < tie(b.x, b.y);`。[比較関数と順序](../cpp/cpp-comparators.md)）。
 
@@ -227,11 +266,17 @@ g++-15 では `only 2 names provided for structured binding` と、続く `note:
 --8<-- "cpp-structured-bindings/tie-swap.cpp:bad"
 ```
 
+完全なプログラム：[`tie-swap.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-structured-bindings/tie-swap.cpp)（GitHub）
+{ .kp-code-src }
+
 右辺を値の組 `pair{b, a}` にすれば、元の値のコピーを先に作ってから代入するので入れ替わる。2 つの入れ替えなら `swap(a, b)` がいちばん分かりやすい。
 
 ```cpp
 --8<-- "cpp-structured-bindings/tie-swap.cpp:good"
 ```
+
+完全なプログラム：[`tie-swap.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-structured-bindings/tie-swap.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：g++-13・g++-15 で同じ結果（`2 2`）だった。警告なしでコンパイルが通る
 - **見分け方**：右辺に `tie` を置くのは比べるときだけにし、代入の右辺は `pair{…}`・`tuple{…}` にする
@@ -246,6 +291,9 @@ g++-15 では `only 2 names provided for structured binding` と、続く `note:
 ```cpp
 --8<-- "cpp-structured-bindings/exchange.cpp:core"
 ```
+
+完全なプログラム：[`exchange.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-structured-bindings/exchange.cpp)（GitHub）
+{ .kp-code-src }
 
 $n = 10$ なら $F_{10} = 55$ と出る。素朴に書くと `long long nf = f0 + f1; f0 = f1; f1 = nf;` である。
 
@@ -264,6 +312,9 @@ $n = 10$ なら $F_{10} = 55$ と出る。素朴に書くと `long long nf = f0 
 --8<-- "cpp-structured-bindings/optional.cpp:core"
 ```
 
+完全なプログラム：[`optional.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-structured-bindings/optional.cpp)（GitHub）
+{ .kp-code-src }
+
 - `if (auto r = f())`：値があるときだけ真になり、中で `*r` で値を読む
 - `o.has_value()`・`o.value_or(d)`：値があるか、値（なければ `d`）
 - `o.value()`：値がなければ例外 `bad_optional_access` を投げる。`*o` は検査しない
@@ -279,6 +330,9 @@ $n = 10$ なら $F_{10} = 55$ と出る。素朴に書くと `long long nf = f0 
 ```cpp
 --8<-- "cpp-structured-bindings/apply.cpp:core"
 ```
+
+完全なプログラム：[`apply.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-structured-bindings/apply.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：`apply` は C++17、`array` は C++11。g++-13・g++-15 で使える
 - **使い分け**：型が混ざる（`long long` の重みと `int` の頂点）なら tuple か構造体、全部同じ型なら `array`

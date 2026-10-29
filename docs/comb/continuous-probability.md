@@ -104,11 +104,14 @@ $$
 
 初期値は $f_0 = 1$ である。各区分で多項式を $\int t^d \, dt = t^{d+1}/(d+1)$ で積分し、区分ごとの値を足せば期待値になる。区分の数を $S$（端点が $2N$ 個なら $S \le 2N - 1$）とすると、1 区分で状態 $O(N)$ 個 × 多項式の次数 $O(N)$ を $N$ 回更新するので、全体は $O(S N^3)$ になる。
 
-端点が整数で値の範囲が小さいなら、長さ 1 の区分 $[x, x + 1)$ ごとに処理してもよい。区分の中で $t = x + u$（$0 \le u \le 1$）と置くと、$u^d$ を $[0, 1]$ で積分すると $1/(d+1)$ なので、積分は各係数を $d + 1$ で割った値の和になる。次のコード片はこの形である（完全なプログラムは `snippets/continuous-probability/kth-max.cpp`）。
+端点が整数で値の範囲が小さいなら、長さ 1 の区分 $[x, x + 1)$ ごとに処理してもよい。区分の中で $t = x + u$（$0 \le u \le 1$）と置くと、$u^d$ を $[0, 1]$ で積分すると $1/(d+1)$ なので、積分は各係数を $d + 1$ で割った値の和になる。次のコード片はこの形である（完全なプログラムは [`snippets/continuous-probability/kth-max.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/continuous-probability/kth-max.cpp)）。
 
 ```cpp
 --8<-- "continuous-probability/kth-max.cpp:core"
 ```
+
+完全なプログラム：[`kth-max.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/continuous-probability/kth-max.cpp)（GitHub）
+{ .kp-code-src }
 
 長さ 1 の区分ごとに処理する場合は、多項式を使わない方法もある。区分に入った $j$ 個は区分の中で一様なので、[積分と tail sum](#integral) の $K/(N+1)$ が使える。「区分に入る個数 $j$」と「区分より上にある個数 $k$」の確率を DP で求め、$k < K \le j + k$ のとき、$K$ 番目の値の条件付きの期待値を $x + 1 - (K - k)/(j + 1)$ とする。コード片では 2 つの方法の値が一致することを `assert` で確かめている。
 
@@ -116,6 +119,9 @@ $$
     ```cpp
     --8<-- "continuous-probability/kth-max.cpp:order"
     ```
+
+    完全なプログラム：[`kth-max.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/continuous-probability/kth-max.cpp)（GitHub）
+    { .kp-code-src }
 
 ## 自作するときの要点 {#library}
 
