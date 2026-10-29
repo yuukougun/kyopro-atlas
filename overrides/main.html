@@ -267,6 +267,15 @@
     {%- set badge = '<span class="kp-mini kp-lv-' ~ LV_CLASS[s.level] ~ ' kp-sec-lv" title="' ~ s.level ~ 'の節（difficulty ' ~ LV_RANGE[s.level] ~ '）">' ~ s.level ~ '</span>' -%}
     {%- set body_ns.html = body_ns.html | replace(hl, badge ~ hl) -%}
   {%- endfor -%}
+  {#- 見出し（h1）：nav に短い名前（nav_title）を書いたページでは、MkDocs も Zensical も page.title に nav の名前を使い、
+      partials/content.html が <h1>{{ page.title }}</h1> を出す。h1 だけを front matter の title（正式な題名）に戻す（#91）。
+      サイドバー・前後のページ・パンくずは短い名前のまま。ブラウザのタブ（<title>）・ヘッダの題・検索の結果の題は、
+      テーマが page.meta.title を先に使うので元から正式な題名。page.title は Material では生のまま、Zensical では
+      エスケープして出るので、両方の形を置き換える -#}
+  {%- if m.nav_title and m.title and page.title and m.nav_title != m.title -%}
+    {%- set h1_new = "<h1>" ~ (m.title | e) ~ "</h1>" -%}
+    {%- set body_ns.html = body_ns.html | replace("<h1>" ~ page.title ~ "</h1>", h1_new) | replace("<h1>" ~ (page.title | e) ~ "</h1>", h1_new) -%}
+  {%- endif -%}
 {%- endif %}
 {{ body_ns.html | safe }}
 {%- if m.id %}
