@@ -57,7 +57,7 @@ search:
 
 - id：`bitset-speedup`　レベル：青　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/misc/bitset-speedup/
-- 別名：bitset、ビット並列、ワード並列、1/64 倍、bitset で部分和、推移閉包、到達可能性クエリ、bitset speedup
+- 別名：bitset、ビット並列、ワード並列、1/64 倍、bitset で部分和、推移閉包、到達可能性クエリ、bitset speedup、ビットセット
 - 種類：ビット演算、計算量、DP
 - 前提：`bit-operations`、`complexity-estimation`
 - 使い分け：`method-comparison#small-n`

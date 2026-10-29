@@ -109,6 +109,9 @@ dfs(v):
 --8<-- "euler-tour/subtree-sum.cpp:core"
 ```
 
+完全なプログラム：[`subtree-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/euler-tour/subtree-sum.cpp)（GitHub）
+{ .kp-code-src }
+
 ### 計算量とその根拠
 
 番号付けの DFS は各頂点に 1 回ずつ入るので $O(N)$ である。その後の部分木の操作は列の区間の操作そのものなので、載せたデータ構造の 1 回分の計算量になる。
@@ -137,6 +140,9 @@ $$
 ```cpp
 --8<-- "euler-tour/depth-count.cpp:core"
 ```
+
+完全なプログラム：[`depth-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/euler-tour/depth-count.cpp)（GitHub）
+{ .kp-code-src }
 
 1 回の質問は $O(\log N)$ である。条件が「値が $x$ 以下」のように深さ以外なら、同じく値ごとの列を作るか、質問を値の順に並べて BIT に頂点を足していく[オフライン](../guide/glossary.md#offline)の処理にする（[ABC202 E](#abc202_e) の別解）。
 
@@ -175,6 +181,9 @@ $$
 ```cpp
 --8<-- "euler-tour/root-path.cpp:core"
 ```
+
+完全なプログラム：[`root-path.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/euler-tour/root-path.cpp)（GitHub）
+{ .kp-code-src }
 
 差分の BIT では、$+w$ を位置 $\mathrm{in}[c]$、$-w$ を位置 $\mathrm{out}[c]$ に足す。これは (d) の入りと出の両方を記録した列で、$+w$ を $c$ の入りの位置、$-w$ を出の位置に置いて累積和を取るのと同じである。資料によってはこちらの形で説明する。
 

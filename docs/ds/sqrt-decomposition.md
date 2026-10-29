@@ -76,6 +76,9 @@ updated: 2026-10-29
 --8<-- "sqrt-decomposition/bucket-add-count.cpp:core"
 ```
 
+完全なプログラム：[`bucket-add-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/sqrt-decomposition/bucket-add-count.cpp)（GitHub）
+{ .kp-code-src }
+
 **応用の型**：ブロックに何を持たせるかを変えれば、同じ枠組みでいろいろな操作が載る。
 
 - **ブロックごとにソート済みの列**：区間の $y$ 以上の個数・$y$ 以下の和（累積和も持つ）。値の更新があって先読みできないとき、[マージソート木](../ds/merge-sort-tree.md)の代わりになる。サインは「区間加算と、区間内の $x$ 以上の要素の個数」。
@@ -112,6 +115,9 @@ $$
 ```cpp
 --8<-- "sqrt-decomposition/step-dp.cpp:core"
 ```
+
+完全なプログラム：[`step-dp.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/sqrt-decomposition/step-dp.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 予約が $j$ に届くのは、予約した位置 $i$ より後（$i < j$）だけである。$i$ を処理するときは、先に $\mathrm{pend}$ から $\mathrm{dp}[i]$ を受け取ってから $\mathrm{dp}[i]$ を予約するので、自分自身には届かない。1 マスあたり受け取り $O(B)$ と配る $O(N/B)$ で、全体 $O(N\sqrt{N})$ になる（例題の [ABC335 F](#abc335_f)）。
 

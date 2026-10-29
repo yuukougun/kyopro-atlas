@@ -118,6 +118,9 @@ $\mathrm{lo}$ は全体で $N$ 回しか進まないので、全体は $O(N)$ �
 --8<-- "dp-sequence-partition/sum-at-most-k.cpp:core"
 ```
 
+完全なプログラム：[`sum-at-most-k.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-sequence-partition/sum-at-most-k.cpp)（GitHub）
+{ .kp-code-src }
+
 同じ考え方の変形がいくつかある。
 
 - **転倒数のように出し入れに手間がかかる量**：右端に $a_{i-1}$ を入れると、窓の中の $a_{i-1}$ より大きい要素の数だけ[転倒数](../ds/inversion-number.md)が増える。左端の $a_{\mathrm{lo}}$ を出すと、窓の中の $a_{\mathrm{lo}}$ より小さい要素の数だけ減る。どちらも値で数えるので、[座標圧縮](../basics/coordinate-compression.md)した値の [BIT](../ds/fenwick-tree.md) で $O(\log N)$ になり、全体は $O(N \log N)$

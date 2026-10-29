@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const long long INF = 1LL << 60;
+const long long INF = 1LL << 60;  // INF + INF でもあふれない大きさ
 
 void floyd_warshall(vector<vector<long long>>& d) {
     int n = d.size();

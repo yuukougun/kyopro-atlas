@@ -1,7 +1,8 @@
 // 橋と関節点：ord と low を DFS 1 回で求め、橋の辺の番号と関節点を出力する。
 // 頂点 v を除いたときに v の連結成分がいくつに分かれるか（pieces[v]）も求め、
 // 辺・頂点を 1 つずつ除いて連結成分を数える素朴な方法と assert で比べる。
-// 入力は N M と辺 (a, b)（0-indexed、無向。多重辺・自己ループ・非連結を許す）。
+// 入力は N M と辺 (a, b)（1-indexed、無向。多重辺・自己ループ・非連結を許す）。
+// 出力の辺の番号（入力の順）と頂点も 1-indexed にする。
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -41,6 +42,7 @@ int main() {
     for (int i = 0; i < m; i++) {
         int a, b;
         cin >> a >> b;
+        a--, b--;  // 1-indexed → 0-indexed
         es[i] = {a, b};
         g[a].push_back({b, i});
         g[b].push_back({a, i});
@@ -88,8 +90,8 @@ int main() {
         if (is_cut[v]) cuts.push_back(v);
     }
     cout << bridges.size();
-    for (int i : bridges) cout << ' ' << i;
+    for (int i : bridges) cout << ' ' << i + 1;
     cout << '\n' << cuts.size();
-    for (int v : cuts) cout << ' ' << v;
+    for (int v : cuts) cout << ' ' << v + 1;
     cout << '\n';
 }

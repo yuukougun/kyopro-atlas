@@ -93,6 +93,9 @@ Aho-Corasick 法は、[KMP 法](../string/kmp.md)の[照合オートマトン](.
 --8<-- "aho-corasick/count.cpp:core"
 ```
 
+完全なプログラム：[`count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/aho-corasick/count.cpp)（GitHub）
+{ .kp-code-src }
+
 `build` は、各節点を取り出したときに失敗リンク先の行を写して自分の行を埋め、同時に子の失敗リンクを決める。行は $\sigma$ 個の欄からなり、節点は $M + 1$ 個以下なので、時間も領域も $O(\sigma M)$ である。表を埋めた後は、テキストの 1 文字ごとに表を 1 回引くだけなので、走査は 1 文字 $O(1)$ になる。
 
 表を埋めずに、子がなければ失敗リンクをたどる書き方もある。テキストを 1 回流すだけなら、KMP 法と同じ議論（状態の深さは 1 文字で高々 1 増え、たどるたびに減る）で走査はならし $O(N)$ になる。ただし 1 文字あたりは最悪 $O(M)$ かかるので、DP で全状態から遷移を引く場合や、状態を戻しながら読む場合には使えない。迷ったら表を埋める。
@@ -122,6 +125,9 @@ $\sigma = 26$、$M = 10^6$ のとき、表は 32 bit 整数が $2.6 \times 10^7$
 ```cpp
 --8<-- "aho-corasick/count.cpp:count"
 ```
+
+完全なプログラム：[`count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/aho-corasick/count.cpp)（GitHub）
+{ .kp-code-src }
 
 計算量は、走査が $O(N)$、足し込みが $O(M)$ で、構築を合わせて $O(\sigma M + N)$ である。同じパターンが 2 回入力されても同じ節点を指すので、パターンごとに終端の節点の番号を覚えておけばよい。
 
@@ -155,6 +161,9 @@ Trie を作った直後の「ちょうどこの節点で終わる」印だけで
 --8<-- "aho-corasick/avoid-dp.cpp:dp"
 ```
 
+完全なプログラム：[`avoid-dp.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/aho-corasick/avoid-dp.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 この状態で足りるのは、今後どのパターンが現れるかが、テキストの末尾のうち Trie にある最長の接尾辞だけで決まるからである。それより前の文字は、どのパターンの出現にも関わりえない。計算量は $O(L \sigma M)$ である。
 
 捨てる判定には、受け継いだ印を使う（[前の節](#inherit-terminal)）。Trie の終端の節点だけを捨てると、パターンを途中に含む状態から先へ進んでしまい、多く数える。
@@ -179,6 +188,9 @@ Trie を作った直後の「ちょうどこの節点で終わる」印だけで
 ```cpp
 --8<-- "aho-corasick/taboo-greedy.cpp:greedy"
 ```
+
+完全なプログラム：[`taboo-greedy.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/aho-corasick/taboo-greedy.cpp)（GitHub）
+{ .kp-code-src }
 
 **状態を根に戻してよい理由**。書き換えた位置を含む出現はすべて突かれたので、残る出現は書き換えた位置より後で始まるものだけである。書き換えた文字はどのパターンにも現れないので、それをまたぐ接尾辞は Trie にない。よって次の位置からは、空の文字列から照合をやり直すのと同じになる。根に戻さずに走査を続けると、書き換えた文字をまたいだ一致を数えてしまい、答えが多くなる。
 

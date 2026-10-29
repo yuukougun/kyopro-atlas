@@ -8,7 +8,7 @@ using namespace std;
 // 完全グラフの最小全域木の重みの和。cost(i, j) は辺 (i, j) の重みを返す関数
 template <class F>
 long long prim_dense(int n, F cost) {
-    const long long INF = LLONG_MAX;
+    const long long INF = 1LL << 60;  // INF + INF でもあふれない大きさ
     vector<long long> mind(n, INF);  // mind[v]：木の頂点から v への辺の重みの最小
     vector<bool> in_tree(n, false);
     mind[0] = 0;  // 頂点 0 から木を伸ばす

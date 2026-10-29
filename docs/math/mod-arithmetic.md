@@ -78,6 +78,9 @@ C++ の `%` は、左の数が負なら 0 以下の余りを返す。たとえ�
 --8<-- "mod-arithmetic/mod-ops.cpp:core"
 ```
 
+完全なプログラム：[`mod-ops.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mod-arithmetic/mod-ops.cpp)（GitHub）
+{ .kp-code-src }
+
 引き算を含む式は、最後に 1 回だけ直しても構わない。ただし途中の値を配列の添字に使う（[余り・個数を状態に持つ DP](../dp/dp-mod-state.md)）なら、そのたびに直す。
 
 ??? question "確認問題：引き算の余り"

@@ -89,6 +89,9 @@ $p = 998244353$ なら、手順 2 の法は $998244352$ である。2 つの法�
 --8<-- "exponent-mod/tower-prime.cpp:core"
 ```
 
+完全なプログラム：[`tower-prime.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/exponent-mod/tower-prime.cpp)（GitHub）
+{ .kp-code-src }
+
 **指数の計算では割り算ができない**。手順 2 の法 $p - 1$ は、$p \ge 5$ なら偶数の合成数である。たとえば $998244352 = 2^{23} \times 7 \times 17$ なので、2・7・17 の倍数には $\bmod (p - 1)$ での逆元がない。指数が $\binom{n}{2} = n(n-1)/2$ や $\binom{n}{k}$ のように割り算を含む式なら、「2 の逆元を掛ける」は使えない。次のどれかで避ける。
 
 - **割り切れる側を先に割る**：$n(n-1)/2$ なら、$n$ と $n - 1$ のうち偶数のほうを 2 で割ってから $\bmod (p-1)$ で掛ける。`__int128` で積を作ってから割ってもよい（[整数のオーバーフロー](../cpp/cpp-integer-overflow.md)）
@@ -143,6 +146,9 @@ $a$ と $m$ が互いに素でないときは、この定理は成り立たな�
 ```cpp
 --8<-- "exponent-mod/tower-general.cpp:core"
 ```
+
+完全なプログラム：[`tower-general.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/exponent-mod/tower-general.cpp)（GitHub）
+{ .kp-code-src }
 
 $\varphi$ の試し割りは段ごとに $O(\sqrt{m_j})$（$m_j$ はその段の法）かかる。法は 2 段ごとに半分以下になるので、合計は等比級数で抑えられて $O(\sqrt{m})$ である。頭打ちの値の計算が $O(k)$ なので、全体で $O(k + \sqrt{m})$ になる。同じ底を $B$ 段積んだ塔（tetration、$A \uparrow\uparrow B$）なら、$A \uparrow\uparrow 0 = 1$ と定める。$A = 0$ なら $B$ の偶奇で 1 か 0（$0 \uparrow\uparrow 2 = 0^0 = 1$、$0 \uparrow\uparrow 3 = 0^1 = 0$）、$A = 1$ なら 1 と先に分けておく。$A \ge 2$ なら頭打ちの値はすぐに上限に達する。そのため、法が 1 になるまでの段数より数段多い段数を $B_0$ とすると、高さを $\min(B, B_0)$ に縮めても答えは変わらない。塔を配列に展開せず、塔の下（外側）から $O(\log m)$ 段だけを扱えばよい。[Library Checker の Tetration Mod](https://judge.yosupo.jp/problem/tetration_mod) で確かめられる。
 

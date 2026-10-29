@@ -337,7 +337,7 @@ search:
 
 - id：`inclusion-exclusion`　レベル：青　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/inclusion-exclusion/
-- 別名：包除、撹乱順列、完全順列、モンモール数、全射の数、min-max 包除、inclusion-exclusion principle、derangement
+- 別名：包除、撹乱順列、完全順列、モンモール数、全射の数、min-max 包除、inclusion-exclusion principle、derangement、包含除外原理、包除の原理
 - 種類：数え上げ
 - 前提：`counting-mindset`、`complement`、`bit-full-search`
 - 使い分け：`method-comparison#counting`
@@ -901,7 +901,7 @@ search:
 
 - id：`grundy-number`　レベル：青　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/grundy-number/
-- 別名：nimber、Sprague-Grundy の定理、ゲームの和、Grundy 数の周期性、Sprague-Grundy theorem、Grundy number
+- 別名：nimber、Sprague-Grundy の定理、ゲームの和、Grundy 数の周期性、Sprague-Grundy theorem、Grundy number、グランディ数
 - 種類：ゲーム
 - 前提：`nim`
 - 使い分け：`method-comparison#games`

@@ -114,6 +114,9 @@ ACL の `composition(f, g)` の $f$ は新しく届いた作用、$g$ はノー�
 --8<-- "lazy-segment-tree-patterns/assign-add.cpp:core"
 ```
 
+完全なプログラム：[`assign-add.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lazy-segment-tree-patterns/assign-add.cpp)（GitHub）
+{ .kp-code-src }
+
 代入のある問題では、和以外の値でも長さを使うことがある。たとえば「最小値とその個数」に区間代入が来ると、代入後の個数は区間の長さになる。$S$ に長さを足しておかないと `mapping` が書けない。
 
 ## 0/1 反転・転倒数・最長の連続（0 と 1 の情報を入れ替える） {#flip}
@@ -140,6 +143,9 @@ ACL の `composition(f, g)` の $f$ は新しく届いた作用、$g$ はノー�
 --8<-- "lazy-segment-tree-patterns/flip-run.cpp:core"
 ```
 
+完全なプログラム：[`flip-run.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lazy-segment-tree-patterns/flip-run.cpp)（GitHub）
+{ .kp-code-src }
+
 **応用の型**：符号の反転（$-1$ 倍）と区間最大値も同じ考え方である。（最大, 最小）を持てば、$-1$ 倍の後は（$-$最小, $-$最大）になる。括弧列の `(` と `)` の入れ替えも、両方の向きの情報を持てば載る（[括弧列をモノイドにする](../patterns/bracket-sequence.md#monoid)）。サインは「反転」「入れ替え」と、区間の個数・最長・転倒数の質問が並ぶことである。
 
 ## 等差数列の加算・2 列の積の和（添字の和や Σa・Σb を S に足す） {#arithmetic-add}
@@ -153,6 +159,9 @@ ACL の `composition(f, g)` の $f$ は新しく届いた作用、$g$ はノー�
 ```cpp
 --8<-- "lazy-segment-tree-patterns/arith-add.cpp:core"
 ```
+
+完全なプログラム：[`arith-add.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lazy-segment-tree-patterns/arith-add.cpp)（GitHub）
+{ .kp-code-src }
 
 取得が一点だけなら、[差分列](../basics/difference-sequence.md)を 2 回取ると等差数列の加算は数点の更新になる。取得がすべての更新の後に来るなら、一点の値は 2 回の累積和で戻せる（更新と取得が交互に来るなら、累積和を BIT で持つ）。遅延セグメント木を使うのは、区間和の取得が混ざるときである。
 
@@ -169,6 +178,9 @@ $$
 ```cpp
 --8<-- "lazy-segment-tree-patterns/two-seq.cpp:core"
 ```
+
+完全なプログラム：[`two-seq.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lazy-segment-tree-patterns/two-seq.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 **応用の型**：取得したい量が「作用の多項式」で書けるとき、その係数になる量を $S$ に足す。二乗和なら和と長さ（[設計の手順](#design-steps)の例）、相異なる 2 要素の積の和なら和と長さが要る。サインは、取得したい量が $\sum a_i b_i$・$\sum a_i^2$ のような積の和であることである。
 

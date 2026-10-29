@@ -223,7 +223,7 @@ search:
 
 - id：`sieve-eratosthenes`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/sieve-eratosthenes/
-- 別名：篩、sieve of Eratosthenes、素数の列挙、素数表
+- 別名：篩、sieve of Eratosthenes、素数の列挙、素数表、エラトステネスのふるい
 - 種類：整数論
 - 前提：`divisor-enum`
 - 使い分け：`method-comparison#numbers`
@@ -760,7 +760,7 @@ search:
 
 - id：`fps-basics`　レベル：発展　段階：reviewed　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/math/fps-basics/
-- 別名：FPS、formal power series、多項式の逆元、多項式の割り算、Taylor shift、多点評価、冪級数の log・exp
+- 別名：FPS、formal power series、多項式の逆元、多項式の割り算、Taylor shift、多点評価、冪級数の log・exp、形式的べき級数
 - 種類：畳み込み・多項式、数え上げ
 - 前提：`convolution-ntt`、`mod-inverse`
 - ACL：`convolution`

@@ -86,7 +86,7 @@ search:
 
 - id：`priority-queue`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/priority-queue/
-- 別名：priority_queue、ヒープ、heap、二分ヒープ、binary heap、削除できるヒープ、遅延削除、erasable heap
+- 別名：priority_queue、ヒープ、heap、二分ヒープ、binary heap、削除できるヒープ、遅延削除、erasable heap、プライオリティキュー、優先順位付きキュー
 - 種類：データ構造、貪欲
 - 前提：`stl-containers`
 - 使い分け：`method-comparison#containers`
@@ -147,7 +147,7 @@ search:
 
 - id：`stack-techniques`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/stack-techniques/
-- 別名：stack、queue、括弧の対応、打ち消し、操作の取り消し
+- 別名：stack、queue、括弧の対応、打ち消し、操作の取り消し、デック
 - 種類：データ構造
 - 前提：`stl-containers`
 - 使い分け：`method-comparison#containers`
@@ -192,7 +192,7 @@ search:
 
 - id：`union-find`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/union-find/
-- 別名：UF、DSU、Disjoint Set Union、disjoint set、素集合データ構造、経路圧縮、union by size
+- 別名：UF、DSU、Disjoint Set Union、disjoint set、素集合データ構造、経路圧縮、union by size、ユニオンファインド
 - 種類：データ構造、連結性・全域木
 - 前提：`graph-basics`
 - 使い分け：`method-comparison#connectivity`
@@ -357,7 +357,7 @@ search:
 
 - id：`segment-tree`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree/
-- 別名：セグ木、segtree、Segment Tree、RMQ、非再帰セグ木、区間最小値、文字の集合を持つセグ木
+- 別名：セグ木、segtree、Segment Tree、RMQ、非再帰セグ木、区間最小値、文字の集合を持つセグ木、セグメントツリー、セグツリー
 - 種類：データ構造、区間クエリ
 - 前提：`prefix-sum`
 - 使い分け：`method-comparison#range-queries`

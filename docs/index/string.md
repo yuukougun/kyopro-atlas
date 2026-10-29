@@ -121,7 +121,7 @@ search:
 
 - id：`z-algorithm`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/z-algorithm/
-- 別名：Z 法、Z 配列、Z function、拡張 KMP、z_algorithm、各位置からの最長共通接頭辞、巡回シフト、A+A の技
+- 別名：Z 法、Z 配列、Z function、拡張 KMP、z_algorithm、各位置からの最長共通接頭辞、巡回シフト、A+A の技、Z アルゴリズム
 - 種類：文字列
 - 前提：`string-basics`
 - 使い分け：`method-comparison#strings`
@@ -169,7 +169,7 @@ search:
 
 - id：`palindrome`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/palindrome/
-- 別名：回文、palindrome、回文判定、Manacher's algorithm、回文半径、中心から伸ばす、両端から作る
+- 別名：回文、palindrome、回文判定、Manacher's algorithm、回文半径、中心から伸ばす、両端から作る、マナカー
 - 種類：文字列
 - 前提：`string-basics`
 - 使い分け：`method-comparison#strings`
@@ -213,7 +213,7 @@ search:
 
 - id：`aho-corasick`　レベル：青　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/aho-corasick/
-- 別名：AC オートマトン、失敗リンク、複数パターン照合、禁止語、Aho-Corasick algorithm
+- 別名：AC オートマトン、失敗リンク、複数パターン照合、禁止語、Aho-Corasick algorithm、エイホコラシック法
 - 種類：文字列
 - 前提：`trie`、`kmp`、`bfs`
 - 使い分け：`method-comparison#strings`
@@ -255,7 +255,7 @@ search:
 
 - id：`suffix-array`　レベル：黄　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/suffix-array/
-- 別名：接尾辞配列、SA、LCP 配列、SA-IS、Kasai 法、suffix_array、lcp_array、異なる部分文字列の数
+- 別名：接尾辞配列、SA、LCP 配列、SA-IS、Kasai 法、suffix_array、lcp_array、異なる部分文字列の数、サフィックスアレイ
 - 種類：文字列、データ構造
 - 前提：`string-basics`、`binary-search`
 - 使い分け：`method-comparison#strings`

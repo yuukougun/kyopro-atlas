@@ -28,6 +28,7 @@ search:
     - `how-to-use#stub` ページの段階と「準備中」の帯：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#stub
     - `how-to-use#report` 誤りの報告：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#report
     - `how-to-use#progress` 進捗の記録（解いた・理解した）：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#progress
+    - `how-to-use#wishlist` 勉強したいリスト：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#wishlist
     - `how-to-use#backup` 書き出しと読み込み（手動の退避）：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#backup
     - `how-to-use#claude` claude.ai での解説の頼み方：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#claude
     - `how-to-use#ai-rule-version` AtCoder生成AI対策ルールの版：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#ai-rule-version

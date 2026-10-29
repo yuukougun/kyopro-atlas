@@ -116,6 +116,9 @@ $$
 --8<-- "game-basics/stones.cpp:core"
 ```
 
+完全なプログラム：[`stones.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/game-basics/stones.cpp)（GitHub）
+{ .kp-code-src }
+
 答えは $\mathrm{win}[K]$ で、true なら先手、false なら後手が勝つ。取れる個数の集合 $a$ の大きさを $N$、石の数を $K$ とすると、$O(NK)$ である。
 
 計算順序が分かりにくい局面では、[メモ化再帰](../dp/memoized-recursion.md)で書くのが確実である。初期の局面から再帰で行き先を調べ、結果を表に残す。有限なゲームなら再帰は必ず止まり、到達しない局面は計算しない。表は「未計算」「勝ち」「負け」の 3 値で持つ（`vector<int>` で -1 を未計算にする）。`vector<bool>` だと未計算と負けを区別できない。
@@ -138,6 +141,9 @@ $$
 ```cpp
 --8<-- "game-basics/set-game.cpp:core"
 ```
+
+完全なプログラム：[`set-game.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/game-basics/set-game.cpp)（GitHub）
+{ .kp-code-src }
 
 $N = 18$ なら局面は $2^{18} \approx 2.6 \times 10^5$ 個、組は $\binom{18}{2} = 153$ 組なので、合わせて約 $4 \times 10^7$ 回の判定で済む。
 
@@ -214,6 +220,9 @@ $N = 18$ なら局面は $2^{18} \approx 2.6 \times 10^5$ 個、組は $\binom{1
 ```cpp
 --8<-- "game-basics/stones.cpp:move"
 ```
+
+完全なプログラム：[`stones.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/game-basics/stones.cpp)（GitHub）
+{ .kp-code-src }
 
 総手数の偶奇で決まるゲームなら、どの合法な手を打っても総手数は変わらないので、合法な手を 1 つ選べばよい。ただし、合法かの判定は自分で正しく行う。不正な手を出力するとその時点で不正解になる。真似戦略なら、相手の手に対応する手を計算して打つ。
 

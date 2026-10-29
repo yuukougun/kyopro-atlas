@@ -89,6 +89,9 @@ P ← 空の接頭辞
 --8<-- "lexicographic-greedy/smallest-subsequence.cpp:core"
 ```
 
+完全なプログラム：[`smallest-subsequence.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lexicographic-greedy/smallest-subsequence.cpp)（GitHub）
+{ .kp-code-src }
+
 表を作らずに毎回 $S$ を走査して候補を探すと、1 文字ごとに $O(N)$ かかり全体で $O(NK)$ になる。$N, K$ が $10^5$ なら間に合わない。
 
 判定を作るときは、確定した接頭辞の影響を必ず含める。たとえば「元の文字列と異なる位置が $K$ 個以下」という条件なら、接頭辞の中ですでに生じた違いの数を差し引いた残りの上限で、残りの部分を判定する。
@@ -121,6 +124,9 @@ a が $A$ 個、b が $B$ 個の文字列の $K$ 番目なら、先頭を a に�
 ```cpp
 --8<-- "lexicographic-greedy/kth-ab-string.cpp:core"
 ```
+
+完全なプログラム：[`kth-ab-string.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lexicographic-greedy/kth-ab-string.cpp)（GitHub）
+{ .kp-code-src }
 
 個数はすぐに巨大になる。a・b が 100 個ずつなら、先頭を a にしたときの個数 $\binom{199}{99}$ は約 $4.5 \times 10^{58}$ で、`long long` に収まらない。$K$ を超えた個数は「$K$ 以上」とさえ分かれば比較の結果が変わらないので、コードのように上限で頭打ちにして足し算する。個数を DP で数えるときも同じである（[DP の復元](../dp/dp-reconstruction.md#dp-kth-lexicographic)）。
 

@@ -1,6 +1,6 @@
 # 検査（design.md §8.6、interfaces.md §10）。push と pull request のたびに動き、デプロイ（deploy.yml）とは別。
-# - ページ（check_pages.py）・台帳と目次（build_ledger.py・check_catalog.py）・表記（textlint）・動く図の単体試験・
-#   変わったコード片（check_snippets.py --changed。gcc:15.2.0 のコンテナ）
+# - ページ（check_pages.py）・コードの下の行（fix_code_links.py --check）・台帳と目次（build_ledger.py・check_catalog.py）・
+#   表記（textlint）・動く図の単体試験・変わったコード片（check_snippets.py --changed。gcc:15.2.0 のコンテナ）
 # - 生成物の鮮度と mkdocs build --strict は deploy.yml、すべてのコード片は snippets-weekly.yml（週1回）、
 #   外部リンクは links.yml（週1回）、Zensical の試験ビルドは zensical.yml
 name: check
@@ -32,6 +32,10 @@ jobs:
         run: uv sync --locked
       - name: front matter・前提・問題の一覧・本文の規則
         run: python tools/check_pages.py
+      # コードの下の行（完全なプログラムへのリンク・mint の注記）と地の文の snippets/… のリンクは道具が作る（手引き §9）。
+      # 取り込みと合わないか、リンクの先のファイルがなければ落ちる。直すときは python3 tools/fix_code_links.py --page <id>
+      - name: コードの下の行と snippets/… のリンクが最新か
+        run: python tools/fix_code_links.py --check --stat
       - name: 図の SVG（警告は出すだけ。読めない SVG だけエラー）
         run: python tools/check_svg.py
       - name: 道具の試験（Python-Markdown との突き合わせを含む）

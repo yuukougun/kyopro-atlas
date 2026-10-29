@@ -90,6 +90,9 @@ $$
 --8<-- "palindrome/expand-center.cpp:core"
 ```
 
+完全なプログラム：[`expand-center.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/palindrome/expand-center.cpp)（GitHub）
+{ .kp-code-src }
+
 $N$ が $10^4$ 程度なら $O(N^2)$ で間に合う。$N$ が $10^5$ を超えると間に合わないので、各中心の最長の回文を [Manacher](#manacher) で求めるか、[ローリングハッシュ](../string/rolling-hash.md)と二分探索で伸ばせる長さを求める。
 
 ## 直前 K−1 文字を状態にした DP（長さ K の回文を作らない） {#avoid-k-palindrome}
@@ -165,6 +168,9 @@ $\mathrm{len}$ を 1 回求めれば、任意の区間が回文かを $O(1)$ で
 ```cpp
 --8<-- "palindrome/manacher.cpp:core"
 ```
+
+完全なプログラム：[`manacher.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/palindrome/manacher.cpp)（GitHub）
+{ .kp-code-src }
 
 ??? question "確認問題：r − j で頭打ちにする理由"
     $j < r$ のとき、`min(d[2 * c - j], r - j)` から比べ始めている。`min` を取らずに `d[2 * c - j]` から始めると何が起きるか。

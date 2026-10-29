@@ -4,7 +4,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const long long INF = LLONG_MAX / 4;
+const long long INF = 1LL << 60;  // INF + INF でもあふれない大きさ
 
 // --8<-- [start:core]
 // c[u][v] は u から v への重み（辺がなければ INF）。ヒープを使わず、未確定の最小を毎回探す

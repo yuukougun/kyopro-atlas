@@ -65,6 +65,9 @@ updated: 2026-10-29
 --8<-- "invariant/reachable-bfs.cpp:core"
 ```
 
+完全なプログラム：[`reachable-bfs.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/invariant/reachable-bfs.cpp)（GitHub）
+{ .kp-code-src }
+
 $N = 1$ では操作が 1 回もできないので、すべて正の状態にしかいられない。不変量の予想は、操作ができない小さな場合で崩れやすい。
 
 よく使う不変量を挙げる。

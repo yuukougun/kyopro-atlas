@@ -108,6 +108,9 @@ $$
 --8<-- "sweep-line-2d/rectangle-sum.cpp:core"
 ```
 
+完全なプログラム：[`rectangle-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/sweep-line-2d/rectangle-sum.cpp)（GitHub）
+{ .kp-code-src }
+
 !!! info "ACL では"
     `atcoder::fenwick_tree<long long> bit(n);`。`bit.add(p, x)` で $a_p$ に $x$ を加え、`bit.sum(l, r)` で $[l, r)$ の和を返す。どちらも $O(\log N)$ で、添字は 0-indexed、`l == r` なら 0 を返す。
 
@@ -167,6 +170,9 @@ $s$ をすべての整数で試す必要はない。最適な枠を、いちば�
 --8<-- "sweep-line-2d/window-max.cpp:core"
 ```
 
+完全なプログラム：[`window-max.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/sweep-line-2d/window-max.cpp)（GitHub）
+{ .kp-code-src }
+
 !!! info "ACL では"
     `atcoder::lazy_segtree<int, op, e, int, mapping, composition, id> seg(v);`。`seg.apply(l, r, f)` で $[l, r)$ に $f$ を加え、`seg.all_prod()` で全体の最大値を $O(1)$ で返す。区間加算・区間最大の 7 つの関数の書き方は[遅延セグメント木](../ds/lazy-segment-tree.md#acl-standard)にある。
 
@@ -207,6 +213,9 @@ y は長方形の上下の辺で座標圧縮し、葉 $i$ を帯 $[y_i, y_{i+1})
 ```cpp
 --8<-- "sweep-line-2d/union-area.cpp:core"
 ```
+
+完全なプログラム：[`union-area.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/sweep-line-2d/union-area.cpp)（GitHub）
+{ .kp-code-src }
 
 イベントは $2N$ 個で、各イベントの区間加算が $O(\log N)$、全体の取得が $O(1)$ なので、全体で $O(N \log N)$ である。座標が $10^9$ なら面積は $10^{18}$ に届くので、`long long` で持つ。
 

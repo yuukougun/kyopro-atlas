@@ -84,6 +84,9 @@ Andrew 法は、下側凸包を次の手順で作る。
 --8<-- "convex-hull/hull.cpp:core"
 ```
 
+完全なプログラム：[`hull.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/convex-hull/hull.cpp)（GitHub）
+{ .kp-code-src }
+
 上側の繰り返しで「スタックの大きさが下側の終わりの大きさより大きい間だけ取り除く」としているのは、下側の点を消さないためである。最後に戻ってくる左端の点は先頭と同じなので取り除く。外積の値は、座標が $\lvert x \rvert, \lvert y \rvert \le 10^9$ なら `long long` に収まる（[オーバーフローの見積もり](../geometry/geometry-vectors.md#overflow)）。
 
 !!! note "Graham scan との違い"
@@ -112,6 +115,9 @@ Andrew 法は、下側凸包を次の手順で作る。
 --8<-- "convex-hull/hull.cpp:collinear"
 ```
 
+完全なプログラム：[`hull.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/convex-hull/hull.cpp)（GitHub）
+{ .kp-code-src }
+
 ??? question "確認問題：不等号の向き"
     点 $(0, 0), (1, 0), (2, 0), (1, 1)$ の凸包を、取り除く条件を `<= 0` と `< 0` にしてそれぞれ作ると、頂点はどうなるか。
 
@@ -139,6 +145,9 @@ $$
 ```cpp
 --8<-- "convex-hull/max-slope.cpp:core"
 ```
+
+完全なプログラム：[`max-slope.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/convex-hull/max-slope.cpp)（GitHub）
+{ .kp-code-src }
 
 傾きの比較は割り算をせず、外積の符号で行う（$P_t$ と $P_u$ はどちらも $P_i$ の右にあるので、$\mathrm{cross}(P_t - P_i, P_u - P_i) \ge 0$ なら $P_u$ への傾きの方が大きいか等しい）。各点は 1 回積まれて高々 1 回除かれるので、全体は $O(N)$ である。$\lvert a_i \rvert \le 10^6$、$N \le 2 \times 10^5$ なら $S_j$ は $2 \times 10^{11}$ 以下で、外積は $10^{17}$ 程度に収まる。
 
@@ -186,6 +195,9 @@ $a_i x + b_i$ は、点 $(a_i, b_i)$ とベクトル $(x, 1)$ の内積である
 --8<-- "convex-hull/inside.cpp:convex"
 ```
 
+完全なプログラム：[`inside.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/convex-hull/inside.cpp)（GitHub）
+{ .kp-code-src }
+
 境界を正しく分けるには、角度を `atan2` で求めず、すべて外積の符号で判定する。実数の偏角で扇形を探すと、境界の近くで探す扇形を誤ることがある（[誤差の扱い](../geometry/geometry-precision.md)）。座標が $\lvert x \rvert, \lvert y \rvert \le 10^9$ なら、外積も長さの 2 乗も `long long` に収まる。
 
 この関数は、頂点が反時計回りで、一直線に並ぶ 3 頂点がない凸多角形を前提にする。入力が時計回りなら逆順にし、一直線に並ぶ頂点があるなら `<= 0` の凸包を作り直して除く。$p_0, p_1, p_2$ が一直線に並んでいると、手順 2 で $p_1$ より先の辺の上の点を外部と判定してしまう。
@@ -201,6 +213,9 @@ $a_i x + b_i$ は、点 $(a_i, b_i)$ とベクトル $(x, 1)$ の内積である
 ```cpp
 --8<-- "convex-hull/inside.cpp:general"
 ```
+
+完全なプログラム：[`inside.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/convex-hull/inside.cpp)（GitHub）
+{ .kp-code-src }
 
 境界の上の点は、交差を数える前に「外積が 0 で、内積が 0 以下」（辺の上にある）で判定して返す。交点の $x$ 座標は割り算で求めず、辺の向きと外積の符号で「交点が $q$ より右か」を判定する。1 点 $O(N)$ である。
 
@@ -225,6 +240,9 @@ $$
 ```cpp
 --8<-- "convex-hull/hull.cpp:lattice"
 ```
+
+完全なプログラム：[`hull.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/convex-hull/hull.cpp)（GitHub）
+{ .kp-code-src }
 
 凸多角形の $2S$ は、$p_0$ からの扇形の外積 $\mathrm{cross}(p_j - p_0, p_{j+1} - p_0)$ の和で求めると、各項が正で途中の和が単調に増える。原点を基準にした公式では途中の和が `long long` を超えうるが、この形なら $2S$ 自身が収まれば途中もあふれない（座標の幅が $2 \times 10^9$ なら $2S \le 8 \times 10^{18}$）。
 

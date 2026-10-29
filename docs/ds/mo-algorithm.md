@@ -111,6 +111,9 @@ Mo's algorithm の本体は、クエリを並べ替えて端を動かすだけ�
 --8<-- "mo-algorithm/mo-basic.cpp:core"
 ```
 
+完全なプログラム：[`mo-basic.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mo-algorithm/mo-basic.cpp)（GitHub）
+{ .kp-code-src }
+
 **伸ばしてから縮める**。端を動かす 4 つのループは、区間を広げる 2 つ（$l$ を減らす・$r$ を増やす）を先に、狭める 2 つ（$l$ を増やす・$r$ を減らす）を後に置く。逆にすると、途中で $l > r$ になることがある。たとえば今の区間が $[0, 2)$ で次が $[5, 8)$ のとき、先に左端を縮めると $l = 5$・$r = 2$ になる。このとき、区間に入っていない位置 2〜4 の要素を remove してしまう。値ごとの個数が負になるので、個数を配列の添字に使う実装（出現回数が $k$ の値の数を持つ配列など）では範囲外を触る。広げる方を先にすれば、区間は常に $l \le r$ を保つ。
 
 **奇数ブロックで $r$ を逆順にする**。偶数番目のブロックでは $r$ の昇順、奇数番目では降順に並べると、ブロックが変わるときに右端を $N$ から $0$ 近くまで戻す動きがなくなる（[クエリの並べ方と計算量](#ordering)の図の上下の往復）。計算量の式は変わらないが、右端の動きがおよそ半分になり、実際に速くなる。
@@ -121,11 +124,17 @@ Mo's algorithm の本体は、クエリを並べ替えて端を動かすだけ�
 --8<-- "mo-algorithm/mo-basic.cpp:triple"
 ```
 
+完全なプログラム：[`mo-basic.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mo-algorithm/mo-basic.cpp)（GitHub）
+{ .kp-code-src }
+
 **左右で変化が違うとき**。転倒数のように、要素が左端から入るか右端から入るかで答えの変化が違う量もある。左端から入る要素は区間の中の自分より小さい要素と、右端から入る要素は自分より大きい要素と転倒の組を作る。この場合は出し入れを 4 つの関数に分ける。次の例は、値を座標圧縮して BIT で個数を持ち、区間の転倒数を 1 回の伸縮 $O(\log N)$ で直す。Library Checker の [Static Range Inversions Query](https://judge.yosupo.jp/problem/static_range_inversions_query) で確かめられる形である。
 
 ```cpp
 --8<-- "mo-algorithm/mo-inversions.cpp:core"
 ```
+
+完全なプログラム：[`mo-inversions.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mo-algorithm/mo-inversions.cpp)（GitHub）
+{ .kp-code-src }
 
 **取得を重くしてよい（値の平方分割）**。伸縮は $O(N \sqrt{Q})$ 回あるのに対し、answer は $Q$ 回しかない。伸縮を $O(1)$ に軽くするかわりに answer を $O(\sqrt{V})$ に重くすると、全体が速くなる（$V$ は値の範囲。座標圧縮すれば $V \le N$）。たとえば「区間の中で値が $x$ 未満の要素の数」を BIT で持つと、伸縮も取得も $O(\log N)$ で、全体は $O(N \sqrt{Q} \log N)$ である。値の範囲 $[0, V)$ を大きさ $\sqrt{V}$ のブロックに分ける。値ごとの個数とブロックごとの個数の合計を持てば、伸縮は 2 か所を直すだけの $O(1)$ になる。取得は、$x$ 未満の完全なブロックの合計と、端のブロックの値ごとの個数を足して $O(\sqrt{V})$ になる。全体は $O(N \sqrt{Q} + Q \sqrt{V})$ で、$\log$ が消える。この考え方は[平方分割](../ds/sqrt-decomposition.md)と同じである。
 
@@ -198,6 +207,9 @@ DFS で頂点に入るときと出るときの両方で頂点を列に記録し�
 ```cpp
 --8<-- "mo-algorithm/mo-tree.cpp:core"
 ```
+
+完全なプログラム：[`mo-tree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mo-algorithm/mo-tree.cpp)（GitHub）
+{ .kp-code-src }
 
 列の長さが $2N$ なので、ブロックの大きさは $2N / \sqrt{Q}$ にし、伸縮は $O(N \sqrt{Q})$ 回である。LCA は前処理 $O(N \log N)$・1 回 $O(\log N)$ のダブリングなどで求める（コードの LCA は確かめ用の素朴な版）。
 

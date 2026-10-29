@@ -8,7 +8,7 @@ using namespace std;
 struct WeightedUnionFind {
     vector<int> par;         // par[v]：親。根なら −(成分の大きさ)
     vector<long long> diff;  // diff[v] = x_v − x_{par[v]}（根では 0）
-    WeightedUnionFind(int n) : par(n, -1), diff(n, 0) {}
+    explicit WeightedUnionFind(int n) : par(n, -1), diff(n, 0) {}
 
     int find(int v) {
         if (par[v] < 0) return v;

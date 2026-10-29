@@ -79,11 +79,17 @@ flowchart LR
 --8<-- "stress-testing/compare-random.cpp:funcs"
 ```
 
+完全なプログラム：[`compare-random.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/stress-testing/compare-random.cpp)（GitHub）
+{ .kp-code-src }
+
 比べる部分は次のとおりである。乱数は `mt19937_64` で作り（[乱数の作り方](../cpp/cpp-math-functions.md#random)）、食い違ったら入力と両方の答えを出して止める。
 
 ```cpp
 --8<-- "stress-testing/compare-random.cpp:core"
 ```
+
+完全なプログラム：[`compare-random.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/stress-testing/compare-random.cpp)（GitHub）
+{ .kp-code-src }
 
 値の範囲を $-5$ 以上 $5$ 以下にして種 7 で回すと、6 回目に長さ 1 の列 $(-5)$ で止まる。本解は 0、愚直解は $-5$ を返すので、値がすべて負のときに最大値の初期値 0 が残る誤りだと分かる。種を出力しておけば、同じ乱数の列を後で再現できる（同じ種で同じ列になるのは、標準ライブラリが同じときに限る）。
 
@@ -96,6 +102,9 @@ flowchart LR
 ```cpp
 --8<-- "stress-testing/exhaustive.cpp:core"
 ```
+
+完全なプログラム：[`exhaustive.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/stress-testing/exhaustive.cpp)（GitHub）
+{ .kp-code-src }
 
 長さ 4 以下・値 $-2$ 以上 $2$ 以下で試すと、最初の入力の長さ 1 の列 $(-2)$ で止まる。長さ $n$ の列は $(2v + 1)^n$ 通りあるので、試せるのは長さか値の範囲がごく小さいときだけである。$v = 2$ で長さ 8 なら $5^8 \approx 3.9 \times 10^5$ 通りで、愚直解が軽ければ一瞬で終わる。
 
@@ -144,6 +153,9 @@ oj g/i --hack-actual ./a.out --hack-expected ./naive 'python3 generate.py'
 --8<-- "stress-testing/generators.cpp:tree"
 ```
 
+完全なプログラム：[`generators.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/stress-testing/generators.cpp)（GitHub）
+{ .kp-code-src }
+
 `random_tree` は、どの頂点も自分より前の頂点を親に持つので、閉路ができず必ず木になる。番号をかき混ぜるのは、頂点 0 が根に近いといった偏りを消すためである。どんな形の木も作れるが、すべての木が同じ確率で出るわけではない。
 
 答えが偏る問題では、生成の向きを逆にする。たとえば「操作を繰り返して列 $A$ を列 $B$ にできるか」は、$A$ と $B$ を別々に作るとほとんど No になる。先に $A$ を作り、ランダムな操作を何回か施して $B$ を作れば、答えが必ず Yes の入力になる（betrue12 氏の例）。ただしこの入力では、Yes を No と誤る誤りしか見つからない。
@@ -182,6 +194,9 @@ GCC 9.2 より前の Windows の MinGW では、`random_device` が実行ごと�
 --8<-- "stress-testing/experiment.cpp:count"
 ```
 
+完全なプログラム：[`experiment.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/stress-testing/experiment.cpp)（GitHub）
+{ .kp-code-src }
+
 $k = 1, \dots, 10$ の表は $2, 3, 5, 8, 13, 21, 34, 55, 89, 144$ になる。前の 2 項の和になっていると気づけば、漸化式を予想できる。この列を OEIS で検索すると、フィボナッチ数（A000045）が見つかる。コードの最後の `assert` は、予想した漸化式が表のすべてで成り立つかを確かめる。
 
 2 つ目は、石の山から 1・3・4 個を交互に取り、取れなくなった方が負けのゲームである。石が $i$ 個の局面で手番の人が勝てるかを、小さい $i$ から順に決める（負けの局面へ動かせれば勝ち）。
@@ -189,6 +204,9 @@ $k = 1, \dots, 10$ の表は $2, 3, 5, 8, 13, 21, 34, 55, 89, 144$ になる。�
 ```cpp
 --8<-- "stress-testing/experiment.cpp:game"
 ```
+
+完全なプログラム：[`experiment.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/stress-testing/experiment.cpp)（GitHub）
+{ .kp-code-src }
 
 $i = 0, \dots, 20$ の表は `LWLWWWWLWLWWWWLWLWWWW` で、負け（L）は $i = 0, 2, 7, 9, 14, 16$ に現れる。7 ごとに同じ並びが繰り返すので、「$i \bmod 7$ が 0 か 2 なら負け」と予想できる。負けの位置の列 $0, 2, 7, 9, 14, 16$ を OEIS で検索すると、7 で割った余りが 0 か 2 の数の列（A047352）が見つかる。ゲームの表と周期の扱いは [Grundy 数の規則を見つける節](../comb/grundy-number.md#patterns)、数え上げの式の検算は[小さいケースの全探索で式を検算する](../comb/counting-mindset.md#verify-small)にもある。
 

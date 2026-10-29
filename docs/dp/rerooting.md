@@ -107,11 +107,17 @@ $\mathrm{up}[c]$ の式の最後の項は $p$ が根 $r$ のときはなく、$\
 --8<-- "rerooting/subtree-count.cpp:core"
 ```
 
+完全なプログラム：[`subtree-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rerooting/subtree-count.cpp)（GitHub）
+{ .kp-code-src }
+
 上の連結な頂点集合の数え上げなら、部品を次のように渡す。$\mathrm{ans}[v]$ は「$v$ を含む連結な頂点集合の数」になる。
 
 ```cpp
 --8<-- "rerooting/subtree-count.cpp:usage"
 ```
+
+完全なプログラム：[`subtree-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rerooting/subtree-count.cpp)（GitHub）
+{ .kp-code-src }
 
 **計算量**：頂点 $v$ では、隣の数 $k_v$ に比例する回数だけ $\oplus$ と $\mathrm{add\_root}$ を呼ぶ。$\sum_v k_v = 2(N - 1)$ なので、どちらの呼び出しも全体で $O(N)$ 回である。それぞれが $O(1)$ なら全体で $O(N)$、合成が $O(T)$ かかるなら $O(NT)$ になる。作業用の配列は頂点ごとに作り直すので、メモリは $O(N)$ で済む。
 

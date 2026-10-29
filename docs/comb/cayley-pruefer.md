@@ -72,6 +72,9 @@ $$
 --8<-- "cayley-pruefer/count.cpp:trees"
 ```
 
+完全なプログラム：[`count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cayley-pruefer/count.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 上のコードの元のプログラムは、$N \le 7$ で辺の選び方をすべて試して木を数え、この関数と次の節の `count_with_degrees` のどちらとも一致することを assert で確かめている。
 
 **数える対象が少し違うとき**。よく出る変種は、Cayley の公式から 1 行で直せる。
@@ -106,6 +109,9 @@ $$
 ```cpp
 --8<-- "cayley-pruefer/count.cpp:degrees"
 ```
+
+完全なプログラム：[`count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cayley-pruefer/count.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 この式をすべての次数列について足すと $N^{N-2}$ に戻る。[多項定理](../comb/multinomial-coefficient.md#meaning)で $(1 + 1 + \cdots + 1)^{N-2}$（$1$ が $N$ 個）を展開した係数の和がちょうどこの和だからである。前の節の公式の検算になる。
 
@@ -148,6 +154,9 @@ $k = 1$ なら足す辺はなく 1 通りで、指数が負になるので分け
 ```cpp
 --8<-- "cayley-pruefer/count.cpp:components"
 ```
+
+完全なプログラム：[`count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cayley-pruefer/count.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 元のプログラムは、$N \le 7$ で連続する番号を成分にした分け方をすべて試し、辺の選び方を全探索した数と一致することを確かめている。
 
@@ -200,6 +209,9 @@ $[x^{m}] P(x)$ は $P$ の $x^m$ の係数である。右辺の積の $x^{N-2}$ 
     ```cpp
     --8<-- "cayley-pruefer/max-diameter.cpp:core"
     ```
+
+    完全なプログラム：[`max-diameter.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cayley-pruefer/max-diameter.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+    { .kp-code-src }
 
     元のプログラムは、$N \le 7$ で木をすべて作り、次数列ごとの直径の最大値を足したものと一致することを確かめている。
 

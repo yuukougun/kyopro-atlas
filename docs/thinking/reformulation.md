@@ -98,6 +98,9 @@ $$
 --8<-- "reformulation/separate-indices.cpp:core"
 ```
 
+完全なプログラム：[`separate-indices.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/reformulation/separate-indices.cpp)（GitHub）
+{ .kp-code-src }
+
 よく出る形をまとめる。
 
 - **等式**：$f(i) = g(j)$ の形にできれば、左から $f(i)$ の個数を連想配列で数え、各 $j$ で $g(j)$ の個数を足す。両辺が同じ形（$f = g$）なら「鍵が等しい組」になる

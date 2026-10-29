@@ -96,6 +96,9 @@ Edmonds のアルゴリズムは、奇閉路を見つけたらそれを 1 つの
 --8<-- "general-matching/tutte-rank.cpp:core"
 ```
 
+完全なプログラム：[`tutte-rank.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/general-matching/tutte-rank.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 - 乱数は 0 を避け、毎回の実行で種を変える（固定の種では、狙った入力で外れうる）。
 - 間違えるのは「階数が小さく出る」向きだけである。乱数を入れた行列の階数が、変数のままの階数を超えることはない。
 - 完全マッチングがあるかだけなら、行列式が 0 でないかを見れば足りる。変数のままの行列式が多項式として 0 でないことと、完全マッチングがあることが同値だからである（Tutte, 1947）。
@@ -115,6 +118,9 @@ Edmonds のアルゴリズムは、奇閉路を見つけたらそれを 1 つの
 --8<-- "general-matching/bitdp.cpp:core"
 ```
 
+完全なプログラム：[`bitdp.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/general-matching/bitdp.cpp)（GitHub）
+{ .kp-code-src }
+
 状態は $2^N$ 個、遷移は各 $N$ 通りなので $O(2^N N)$ である。完全マッチングだけを考えるなら「組まない」遷移を外せばよい。決める順を固定して状態を集合だけにするのは、[集合だけを状態にする節](../dp/bit-dp.md#set-only)と同じ考え方である。
 
 ## 自作するときの要点と確かめ方 {#library}
@@ -126,12 +132,12 @@ ACL に一般グラフのマッチングはないので、必要なら自作す�
 - Edmonds のアルゴリズムを書くなら、花の縮約は「頂点 → 属する花の底」の対応（Union-Find か配列）で表し、グラフを作り直さない。増加路の反転は、木の親と花を閉じた辺をたどって元のグラフの辺に戻す。
 - 重み付きは実装が長く間違えやすいので、確かめ済みのライブラリを使う。
 
-Library Checker では、最大マッチングを General Matching（general_matching）、最大重みマッチングを General Weighted Matching（general_weighted_matching）で確かめられる。どちらも単純グラフ（自己ループなし）で $N \le 500$、General Weighted Matching の重みは 1 以上 $10^6$ 以下である（2026-10-22 に問題の一覧で確かめた）。最大重みマッチングは完全マッチングとは限らない（重みの和が最大になる、本数の少ないマッチングもありうる）。自作したら、小さい乱数のグラフで [bitDP](#bitdp) と比べる。奇閉路が入るよう、辺を密にした入力も混ぜるとよい。
+Library Checker では、最大マッチングを [Matching on General Graph](https://judge.yosupo.jp/problem/general_matching)、最大重みマッチングを [General Weighted Matching](https://judge.yosupo.jp/problem/general_weighted_matching) で確かめられる。どちらも単純グラフ（自己ループなし）で $N \le 500$、General Weighted Matching の重みは 1 以上 $10^6$ 以下である（2026-10-22 に問題の一覧で確かめた）。最大重みマッチングは完全マッチングとは限らない（重みの和が最大になる、本数の少ないマッチングもありうる）。自作したら、小さい乱数のグラフで [bitDP](#bitdp) と比べる。奇閉路が入るよう、辺を密にした入力も混ぜるとよい。
 
 ## 学ぶための資料 {#resources}
 
 - [Wikipedia「Blossom algorithm」](https://en.wikipedia.org/wiki/Blossom_algorithm)（英語）：花の定義・縮約したグラフで増加路が保たれる理由・増加路を元のグラフに戻す方法を、図と擬似コードで説明している。
-- [ei1333「Gabow Edmonds (一般グラフの最大マッチング)」](https://ei1333.github.io/library/graph/flow/gabow-edmonds.hpp)：一般グラフの最大マッチングの実装例で、Library Checker の General Matching で確かめられている。
+- [ei1333「Gabow Edmonds (一般グラフの最大マッチング)」](https://ei1333.github.io/library/graph/flow/gabow-edmonds.hpp)：一般グラフの最大マッチングの実装例で、Library Checker の [Matching on General Graph](https://judge.yosupo.jp/problem/general_matching) で確かめられている。
 - [Nicholas J. A. Harvey「Algebraic Structures and Algorithms for Matching and Matroid Problems (Preliminary Version)」](https://arxiv.org/abs/cs/0601026)（英語の論文）：Tutte 行列に乱数を入れて最大マッチングを求める代数的な方法を扱い、階数と最大マッチングの関係（Lovász）にも触れている。
 
 ## 例題 {#examples}

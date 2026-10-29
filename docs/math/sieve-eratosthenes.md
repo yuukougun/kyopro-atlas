@@ -73,6 +73,9 @@ $N = 100$ では、消し始める位置は 2 が 4、3 が 9、5 が 25、7 が
 --8<-- "sieve-eratosthenes/sieve.cpp:core"
 ```
 
+完全なプログラム：[`sieve.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/sieve-eratosthenes/sieve.cpp)（GitHub）
+{ .kp-code-src }
+
 ??? question "確認問題：p² から消す理由"
     $p = 7$ の番で、$7 \times 4 = 28$ や $7 \times 6 = 42$ を消さなくてよいのはなぜか。$7 \times 11 = 77$ はどうか。
 
@@ -107,6 +110,9 @@ $p^2$ から始めても $2p$ から始めても、回数はほとんど変わ�
 --8<-- "sieve-eratosthenes/sieve.cpp:prefix"
 ```
 
+完全なプログラム：[`sieve.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/sieve-eratosthenes/sieve.cpp)（GitHub）
+{ .kp-code-src }
+
 数える条件は素数そのものでなくてよい。「$x$ と $(x + 1) / 2$ がどちらも素数」のような条件でも、篩の表を引いて 0/1 を決めてから累積和を取ればよい。$\pi(x) = s_{x+1}$ なので、「$x$ 以下の素数の個数」を何度も引く問題（[例題](#abc250_d)の $p$ の数え方）にも同じ表が使える。
 
 素数の一覧が欲しいときは、篩の後に $\mathrm{is\_prime}[x]$ が true の $x$ を小さい順に集める。素数の個数は $\pi(10^6) = 78498$、$\pi(10^7) = 664579$ で、一覧の上を二分探索するのは $O(\log \pi(N))$ である。
@@ -118,6 +124,9 @@ $p^2$ から始めても $2p$ から始めても、回数はほとんど変わ�
 ```cpp
 --8<-- "sieve-eratosthenes/omega.cpp:core"
 ```
+
+完全なプログラム：[`omega.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/sieve-eratosthenes/omega.cpp)（GitHub）
+{ .kp-code-src }
 
 - **素数の見分け方**：$\omega[p] = 0$ のまま $p$ まで来たら、$p$ 未満のどの素数の倍数でもないので素数である。消すための別の表は要らない
 - **倍数は $p$ から回す**：素数の判定だけなら $p^2$ から消せばよいが、ここでは $p$ の倍数すべてに「素因数 $p$ を持つ」と数える必要がある。$p^2$ から始めると、$2p$ や $3p$ に $p$ が数えられない

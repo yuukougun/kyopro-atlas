@@ -155,7 +155,7 @@ search:
 
 - id：`bipartite-graph`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/bipartite-graph/
-- 別名：二部グラフ、2 彩色、奇閉路、2 色の塗り分け、bipartite graph
+- 別名：二部グラフ、2 彩色、奇閉路、2 色の塗り分け、bipartite graph、2 部グラフ、二分グラフ
 - 種類：グラフ探索
 - 前提：`dfs`、`bfs`
 - 使い分け：`method-comparison#connectivity`
@@ -231,7 +231,7 @@ search:
 
 - id：`zero-one-bfs`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/zero-one-bfs/
-- 別名：0-1 BFS、deque BFS
+- 別名：0-1 BFS、deque BFS、01BFS
 - 種類：最短路
 - 前提：`dijkstra`
 - 使い分け：`method-comparison#shortest-path`
@@ -251,7 +251,7 @@ search:
 
 - id：`warshall-floyd`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/warshall-floyd/
-- 別名：ワーシャルフロイド、Floyd-Warshall、全点対最短路、all-pairs shortest paths
+- 別名：ワーシャルフロイド、Floyd-Warshall、全点対最短路、all-pairs shortest paths、フロイドワーシャル法
 - 種類：最短路、DP
 - 前提：`dijkstra`、`dp-basics`
 - 使い分け：`method-comparison#shortest-path`
@@ -553,7 +553,7 @@ search:
 
 - id：`minimum-spanning-tree`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/minimum-spanning-tree/
-- 別名：MST、クラスカル法、プリム法、Kruskal、Prim、最大全域木、minimum spanning tree
+- 別名：MST、クラスカル法、プリム法、Kruskal、Prim、最大全域木、minimum spanning tree、スパニングツリー
 - 種類：連結性・全域木、貪欲
 - 前提：`union-find`、`sorting-techniques`
 - 使い分け：`method-comparison#shortest-path-properties`、`method-comparison#connectivity`
@@ -815,7 +815,7 @@ search:
 
 - id：`min-cost-flow`　レベル：黄　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/min-cost-flow/
-- 別名：primal-dual、重み付きマッチング、割当問題、ハンガリアン法、slope、minimum cost flow
+- 別名：primal-dual、重み付きマッチング、割当問題、ハンガリアン法、slope、minimum cost flow、最小費用フロー
 - 種類：フロー・マッチング
 - 前提：`max-flow`、`dijkstra`
 - 使い分け：`method-comparison#optimization`

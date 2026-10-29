@@ -259,7 +259,7 @@ search:
 
 - id：`lca`　レベル：青　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/lca/
-- 別名：LCA、Lowest Common Ancestor、最近共通祖先、木のダブリング、K 個上の祖先、level ancestor
+- 別名：LCA、Lowest Common Ancestor、最近共通祖先、木のダブリング、K 個上の祖先、level ancestor、最低共通祖先
 - 種類：木、ダブリング・分割統治
 - 前提：`tree-traversal`、`doubling`
 - 使い分け：`method-comparison#repetition`、`method-comparison#trees`

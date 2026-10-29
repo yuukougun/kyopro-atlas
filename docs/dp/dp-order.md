@@ -106,6 +106,9 @@ DP の計算順序は、漸化式の右辺に出てくる値を、左辺より�
 --8<-- "dp-order/backward.cpp:core"
 ```
 
+完全なプログラム：[`backward.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-order/backward.cpp)（GitHub）
+{ .kp-code-src }
+
 $u$ で買って $u$ で売ることはできないので、利益は「$u$ 以外の行き先の $\mathrm{best}$ の最大」から計算し、その後で $\mathrm{best}[u]$ に $u$ 自身の売値を含める。この順を逆にすると、同じ町で売買した 0 円の利益が混ざる。計算量は $O(N + M)$ である。
 
 後ろからが唯一の解き方とは限らない。この例は「$v$ に来られる町の買値の最小」を前から求めても解ける。大事なのは、選んだ定義と回す向きをそろえることである。
@@ -196,6 +199,9 @@ $u$ で買って $u$ で売ることはできないので、利益は「$u$ 以�
     ```cpp
     --8<-- "dp-order/traveler.cpp:core"
     ```
+
+    完全なプログラム：[`traveler.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-order/traveler.cpp)（GitHub）
+    { .kp-code-src }
 
 ## 練習問題 {#practice}
 

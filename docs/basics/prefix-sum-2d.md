@@ -79,6 +79,9 @@ $S[x_1][y_2]$ と $S[x_2][y_1]$ を引くと、左上の A を 2 回引いてし
 --8<-- "prefix-sum-2d/rect-sum.cpp:core"
 ```
 
+完全なプログラム：[`rect-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/prefix-sum-2d/rect-sum.cpp)（GitHub）
+{ .kp-code-src }
+
 問題文の座標は 1-indexed の閉区間で与えられることが多い。行 $r_1$〜$r_2$・列 $c_1$〜$c_2$（1-indexed、両端を含む）なら、0-indexed の半開区間では $x_1 = r_1 - 1$、$x_2 = r_2$、$y_1 = c_1 - 1$、$y_2 = c_2$ になる。0-indexed の閉区間 $[l, r]$ なら $x_1 = l$、$x_2 = r + 1$ である。
 
 この方法で求められるのは、引き算で取り除ける量（和・個数・XOR）だけである。最大値や最小値は、A の部分を「引いて取り除く」ことができないので、4 項の組合せでは求まらない。
@@ -147,6 +150,9 @@ $$
 ```cpp
 --8<-- "prefix-sum-2d/periodic.cpp:core"
 ```
+
+完全なプログラム：[`periodic.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/prefix-sum-2d/periodic.cpp)（GitHub）
+{ .kp-code-src }
 
 前計算は $O(N^2)$、1 回のクエリは $O(1)$ である。座標が $10^9$ なら答えは $10^{18}$ 近くになるので、`long long` で計算する。周期で割る考え方は、1 次元の「周期的な列の区間の和」でも同じである。
 

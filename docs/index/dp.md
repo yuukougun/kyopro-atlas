@@ -15,7 +15,7 @@ search:
 
 - id：`dp-basics`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/dp-basics/
-- 別名：動的計画法、DP、Dynamic Programming、漸化式、配る DP、貰う DP、push 型、pull 型
+- 別名：動的計画法、DP、Dynamic Programming、漸化式、配る DP、貰う DP、push 型、pull 型、もらう DP
 - 種類：DP
 - 前提：`brute-force`
 - サイン：
@@ -414,7 +414,7 @@ search:
 
 - id：`bit-dp`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/bit-dp/
-- 別名：ビット DP、集合 DP、Bitmask DP、巡回セールスマン問題、TSP、Traveling Salesman Problem、ハミルトン路
+- 別名：ビット DP、集合 DP、Bitmask DP、巡回セールスマン問題、TSP、Traveling Salesman Problem、ハミルトン路、bit DP
 - 種類：DP、ビット演算
 - 前提：`dp-state-design`、`bit-full-search`
 - 使い分け：`method-comparison#shortest-path-steps`、`method-comparison#small-n`
@@ -536,7 +536,7 @@ search:
 
 - id：`rerooting`　レベル：青　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/dp/rerooting/
-- 別名：Rerooting、ReRooting DP、換根 DP
+- 別名：Rerooting、ReRooting DP、換根 DP、全方位
 - 種類：DP、木
 - 前提：`tree-dp`、`prefix-sum`
 - 使い分け：`method-comparison#trees`

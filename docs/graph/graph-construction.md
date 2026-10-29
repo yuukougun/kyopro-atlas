@@ -66,11 +66,17 @@ DFS 木・BFS 木は、探索で「まだ見ていない頂点へ進んだ辺」
 --8<-- "graph-construction/spanning-trees.cpp:dfs-tree"
 ```
 
+完全なプログラム：[`spanning-trees.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/graph-construction/spanning-trees.cpp)（GitHub）
+{ .kp-code-src }
+
 再帰が深すぎるときの非再帰版は、[落とし穴](#pitfalls)の 1 つ目に注意して書く。スタックには（頂点, 積んだときの親）の組を積み、取り出したときに印と親を決める。同じ頂点が何度も積まれるが、最後に積まれた組が先に取り出されるので、再帰と同じ木になる。[DFS のページ](../graph/dfs.md)の非再帰版は `v` と `~v` を積む形だが、ここでは親を記録したいので、（頂点, 親）の組を積む。
 
 ```cpp
 --8<-- "graph-construction/spanning-trees.cpp:dfs-tree-iterative"
 ```
+
+完全なプログラム：[`spanning-trees.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/graph-construction/spanning-trees.cpp)（GitHub）
+{ .kp-code-src }
 
 **有向グラフでは事情が違う**。有向グラフの DFS では、「先に調べ終えた別の枝へ向かう辺」（横断辺）も木に入らない辺として現れる。横断辺がないのは、辺を両向きに通れる無向グラフだけの性質である。有向グラフの辺の分類は[閉路の検出](../graph/cycle-detection.md#directed)で使う。
 
@@ -93,6 +99,9 @@ DFS 木・BFS 木は、探索で「まだ見ていない頂点へ進んだ辺」
 ```cpp
 --8<-- "graph-construction/spanning-trees.cpp:bfs-tree"
 ```
+
+完全なプログラム：[`spanning-trees.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/graph-construction/spanning-trees.cpp)（GitHub）
+{ .kp-code-src }
 
 応用の型：
 
@@ -118,6 +127,9 @@ DFS 木・BFS 木は、探索で「まだ見ていない頂点へ進んだ辺」
 ```cpp
 --8<-- "graph-construction/restore.cpp:core"
 ```
+
+完全なプログラム：[`restore.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/graph-construction/restore.cpp)（GitHub）
+{ .kp-code-src }
 
 **張らなかった辺がすべて同時になくてもよい理由**。2 段目では、辺を 1 本ずつ外さず、「迂回できる辺」を一度に全部外している。外した辺 $(i, j)$ の迂回路 $i \to k \to j$ も外した辺を含みうるが、迂回路の 2 本はどちらも $A[i][j]$ より真に短い（長さはすべて正）。短い順に帰納法を使うと、外した辺はすべて残した辺だけの経路に置き換わる。この議論は[迂回できる辺は不要](../graph/warshall-floyd.md#redundant-edges)に詳しい。長さ 0 の辺を許す問題では、2 本の辺が互いの迂回路になりうるので、この議論が成り立たない。
 

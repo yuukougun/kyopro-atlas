@@ -93,17 +93,23 @@ $$
 
 $N = 3$、$c = 2$、$K = 3$ で確かめる。各変数が 0〜2 で和が 3 の組は、$(1, 1, 1)$ と $(0, 1, 2)$ の並べ替え 6 通りで 7 個である。式は $j = 0$ で $\binom{5}{2} = 10$、$j = 1$ で $-3 \binom{2}{2} = -3$ になり、合わせて 7 になる。
 
-次のコード片は、同じ係数を「多項式の累乗を $K$ 次まで計算する方法」と「閉じた式」の 2 通りで求め、一致を確かめている（完全なプログラムは `snippets/generating-function-counting/bounded.cpp`）。閉じた式の方では、$N = 0$ を先に分けている。式のままでは $\binom{K - 1}{-1}$ になり、範囲外を 0 とする約束では空の積の 1 を落とすからである。
+次のコード片は、同じ係数を「多項式の累乗を $K$ 次まで計算する方法」と「閉じた式」の 2 通りで求め、一致を確かめている（完全なプログラムは [`snippets/generating-function-counting/bounded.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/generating-function-counting/bounded.cpp)）。閉じた式の方では、$N = 0$ を先に分けている。式のままでは $\binom{K - 1}{-1}$ になり、範囲外を 0 とする約束では空の積の 1 を落とすからである。
 
 ```cpp
 --8<-- "generating-function-counting/bounded.cpp:closed"
 ```
+
+完全なプログラム：[`bounded.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/generating-function-counting/bounded.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 閉じた式に直せないとき（変数ごとに許される値がばらばらなど）は、多項式を $K$ 次までに切り詰めて掛ける。同じ多項式の $N$ 乗なら、繰り返し二乗法で掛け算は $O(\log N)$ 回で済む。
 
 ```cpp
 --8<-- "generating-function-counting/bounded.cpp:power"
 ```
+
+完全なプログラム：[`bounded.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/generating-function-counting/bounded.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 ## DP の遷移を多項式の積・商として見る {#dp-as-polynomial}
 

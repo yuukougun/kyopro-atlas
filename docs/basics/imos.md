@@ -76,6 +76,9 @@ $$
 --8<-- "imos/imos-1d.cpp:core"
 ```
 
+完全なプログラム：[`imos-1d.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/imos/imos-1d.cpp)（GitHub）
+{ .kp-code-src }
+
 境界で迷いやすいのは次の 3 点である。
 
 - **配列の長さ**：$r = N$ のとき $D[N]$ に書くので、$D$ は $N + 1$ 個取る。$D[N]$ は累積に使わない[番兵](../guide/glossary.md#sentinel)である
@@ -159,6 +162,9 @@ $$
 --8<-- "imos/second-order.cpp:core"
 ```
 
+完全なプログラム：[`second-order.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/imos/second-order.cpp)（GitHub）
+{ .kp-code-src }
+
 初項 $s$・公差 $c$ の等差数列 $s, s + c, s + 2c, \dots$ を足すときは、$s + c(k - 1) = (s - c) + c \cdot k$ と分ける。定数 $s - c$ の部分は 1 段のいもす法で、$c \cdot (1, 2, 3, \dots)$ の部分は上の 4 か所の印を $c$ 倍して置けばよい。一般に $k$ 次の多項式を区間に足すには $k + 1$ 段の差分を取り、累積和を $k + 1$ 回取る（いもす法の原典の「次数の拡張」の節）。
 
 ## 2 次元いもす法（四隅に ±1、横と縦に累積） {#imos-2d}
@@ -176,6 +182,9 @@ $$
 ```cpp
 --8<-- "imos/imos-2d.cpp:core"
 ```
+
+完全なプログラム：[`imos-2d.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/imos/imos-2d.cpp)（GitHub）
+{ .kp-code-src }
 
 長方形 1 つの記録が $O(1)$、累積が $O(HW)$ なので、長方形が $N$ 個なら全体は $O(N + HW)$ である。横と縦はどちらを先に累積してもよい。ただし両方を必ず行う。片方だけでは帯のままになる。
 

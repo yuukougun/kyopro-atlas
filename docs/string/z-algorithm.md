@@ -69,6 +69,9 @@ $$
 --8<-- "z-algorithm/find-all.cpp:core"
 ```
 
+完全なプログラム：[`find-all.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/z-algorithm/find-all.cpp)（GitHub）
+{ .kp-code-src }
+
 ## なぜ O(N) か：Z-box の内側は値をコピーでき、比較のたびに右端が進む {#linear-time}
 
 $z[i]$ を位置ごとに先頭から比べ直すと、$S = \texttt{aa}\dots\texttt{a}$ のような入力で合計 $O(N^2)$ になる。Z-algorithm は、すでに見つけた一致区間を使って比較を省く。
@@ -99,6 +102,9 @@ $1 \le i' < i$ の位置のうち、一致区間 $[i', i' + z[i'])$ の右端が
 --8<-- "z-algorithm/own-z.cpp:core"
 ```
 
+完全なプログラム：[`own-z.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/z-algorithm/own-z.cpp)（GitHub）
+{ .kp-code-src }
+
 ??? question "確認問題：r − i で頭打ちにする理由"
     $i < r$ のとき、初期値を `min(r - i, z[i - l])` にしている。`min` を取らずに `z[i - l]` から比べ始めると何が起きるか。
 
@@ -126,6 +132,9 @@ $V = B + \# + A + A$ の Z 配列を作り、$k = 0, 1, \dots, N - 1$ の順に 
 --8<-- "z-algorithm/rotation.cpp:core"
 ```
 
+完全なプログラム：[`rotation.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/z-algorithm/rotation.cpp)（GitHub）
+{ .kp-code-src }
+
 $A + A$ の位置 $N$ から始まる窓は $A$ 自身で、0 回転と同じである。「$B$ に一致する回転は何通りか」を数えるときに $k = N$ まで見ると、0 回転を二重に数える。見る範囲を $0 \le k < N$ に限るか、$A + A$ の最後の 1 文字を落とした長さ $2N - 1$ の列を使う。
 
 回転どうしの辞書順の比較は、Z 配列ではなく [Suffix Array の回転の節](../string/suffix-array.md#rotations)の方法を使う。
@@ -143,6 +152,9 @@ $p = N$ はいつでも周期である。Z 配列を 1 回作れば、すべて�
 ```cpp
 --8<-- "z-algorithm/period.cpp:core"
 ```
+
+完全なプログラム：[`period.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/z-algorithm/period.cpp)（GitHub）
+{ .kp-code-src }
 
 周期と「繰り返し」は違う。$S = \texttt{abcab}$ は周期 3 を持つが、長さ 3 の文字列の繰り返しではない。$S$ が長さ $p$ の文字列の繰り返しであるのは、$p$ が周期で、かつ $p \mid N$ のときである。さらに、最小の周期 $p_0$ が $N$ を割り切らなければ、$S$ は $N$ より短いどの文字列の繰り返しでもない。
 
@@ -193,6 +205,9 @@ $$
 ```cpp
 --8<-- "z-algorithm/prefix-concat.cpp:core"
 ```
+
+完全なプログラム：[`prefix-concat.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/z-algorithm/prefix-concat.cpp)（GitHub）
+{ .kp-code-src }
 
 同じつなぎ方で、2 つの文字列の重なりも測れる。$V = b + \# + a$ の Z 配列を作る。$a$ の位置 $j$ の値が $\lvert a \rvert - j$ なら、$a$ の接尾辞 $a[j, \lvert a \rvert)$ は $b$ の接頭辞と一致する。そのような $j$ のうち $\lvert a \rvert - j$ の最大が、$a$ の後ろに $b$ を重ねてつなぐときの重なりである。また、値が $\lvert b \rvert$ 以上の位置があれば $b$ は $a$ に含まれる。複数の文字列をすべて含む最短の文字列は、この重なりを前計算して [bitDP](../dp/bit-dp.md) で並べ順を決める。
 

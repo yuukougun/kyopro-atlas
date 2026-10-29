@@ -90,6 +90,9 @@ $$
 --8<-- "segment-tree-monoids/second-largest.cpp:core"
 ```
 
+完全なプログラム：[`second-largest.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-monoids/second-largest.cpp)（GitHub）
+{ .kp-code-src }
+
 `op` の中では、4 組を大きい順に入れていく。上位 2 つの値は入れるたびに大きくなる一方なので、一度落ちた値が後から上位に戻ることはない。左右の中では値が異なるので、同じ値が出るのは左右に 1 つずつのときだけで、そのとき個数を足す。
 
 ## 型の表（和・min/max・gcd・最小値と個数・括弧列・最大部分配列和など） {#pattern-table}
@@ -126,6 +129,9 @@ $$
 --8<-- "segment-tree-monoids/max-subarray.cpp:core"
 ```
 
+完全なプログラム：[`max-subarray.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-monoids/max-subarray.cpp)（GitHub）
+{ .kp-code-src }
+
 単位元の $-\infty$ は「空の区間には空でない部分配列がない」を表す。`NEG` を `LLONG_MIN` にすると、`a.suf + b.pre` が負の側にあふれる。和が型に収まるように $-2^{60}$ 程度にする。空の部分配列（和 0）を認める問題なら、単位元を $(0, 0, 0, 0)$ にし、葉を $(v, \max(v, 0), \max(v, 0), \max(v, 0))$ にする。
 
 **最長の連続する 1**：先頭から続く 1 の長さ $\mathrm{pre}$ は、$x$ が全部 1（$\mathrm{pre}_x = \mathrm{len}_x$）なら $\mathrm{len}_x + \mathrm{pre}_y$、そうでなければ $\mathrm{pre}_x$ である。末尾も左右を入れ替えて同じで、最長は $\max(\mathrm{best}_x, \mathrm{best}_y, \mathrm{suf}_x + \mathrm{pre}_y)$ である。「全部 1 か」を判定するために長さを持つ。最大部分配列和の和が、ここでは長さに替わっている。
@@ -148,6 +154,9 @@ $$
 ```cpp
 --8<-- "segment-tree-monoids/affine.cpp:core"
 ```
+
+完全なプログラム：[`affine.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-monoids/affine.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 順序を取り違えると答えが変わる。$f_0(t) = 2t + 1$、$f_1(t) = 3t$ で $t = 1$ なら、$f_0$ を先に施すと $3(2 + 1) = 9$、$f_1$ を先に施すと $2 \cdot 3 + 1 = 7$ である。
 
@@ -185,6 +194,9 @@ $$
 ```cpp
 --8<-- "segment-tree-monoids/min-plus.cpp:core"
 ```
+
+完全なプログラム：[`min-plus.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-monoids/min-plus.cpp)（GitHub）
+{ .kp-code-src }
 
 区間の積 $P = T_l \otimes \cdots \otimes T_{r-1}$ の $(0, 1)$ 成分は、「窓の手前は費用なしの状態」とみなして始め、窓の最後を払って終える費用の最小である。手前を費用なしとみなすと、窓の先頭は払うしかない。
 
@@ -259,6 +271,9 @@ K 日続く休日の始まりの日を決めると、その中の各日を「払
     ```cpp
     --8<-- "segment-tree-monoids/min-plus.cpp:query"
     ```
+
+    完全なプログラム：[`min-plus.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-monoids/min-plus.cpp)（GitHub）
+    { .kp-code-src }
 
     更新のない問題なので、セグメント木の代わりに固定長の窓の総積を求める方法（[SWAG](../ds/monotonic-stack.md#swag)）でも解ける。要約の設計は同じである。
 

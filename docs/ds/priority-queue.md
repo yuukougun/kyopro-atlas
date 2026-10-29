@@ -66,6 +66,9 @@ updated: 2026-10-29
 --8<-- "priority-queue/usage.cpp:core"
 ```
 
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/priority-queue/usage.cpp)（GitHub）
+{ .kp-code-src }
+
 比較関数の向きが `sort` と逆に見える理由や、ラムダを比較関数に渡す書き方は [比較関数の書き方](../cpp/cpp-comparators.md#priority-queue-order) にまとめてある。
 
 ## 二分ヒープの仕組み（保つ性質「親 ≤ 子」・push で上げる・pop で下げる・heapify は O(N)） {#binary-heap}
@@ -104,6 +107,9 @@ updated: 2026-10-29
 --8<-- "priority-queue/binary-heap.cpp:core"
 ```
 
+完全なプログラム：[`binary-heap.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/priority-queue/binary-heap.cpp)（GitHub）
+{ .kp-code-src }
+
 **まとめて構築（heapify）が $O(N)$ である理由**：配列をそのまま木と見て、子を持つ頂点を添字の大きい方から順に下げる。各頂点を下げる手間は、その頂点から葉までの高さ $h$ に比例する。高さ $h$ の頂点は $N / 2^{h+1}$ 個程度しかなく、ほとんどの頂点は葉の近くにある。よって合計は次のように $O(N)$ で抑えられる。
 
 $$
@@ -126,6 +132,9 @@ $$
 --8<-- "priority-queue/kth-prefix.cpp:core"
 ```
 
+完全なプログラム：[`kth-prefix.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/priority-queue/kth-prefix.cpp)（GitHub）
+{ .kp-code-src }
+
 $K$ 番目に大きい値を最大ヒープで探そうとすると、上位 $K - 1$ 個を一度取り出して戻す必要があり遅い。「大きい方の $K$ 個を残し、その中の最小を見る」ので最小ヒープを使う。削除もある場合や $K$ が変わる場合は、[2 つのヒープで上位 K 個を管理する](../ds/top-k-multiset.md)方法に進む。
 
 ??? question "確認問題：上位 K 個の列挙で重複を除かないと"
@@ -147,6 +156,9 @@ $K$ 番目に大きい値を最大ヒープで探そうとすると、上位 $K 
 ```cpp
 --8<-- "priority-queue/offset-heap.cpp:core"
 ```
+
+完全なプログラム：[`offset-heap.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/priority-queue/offset-heap.cpp)（GitHub）
+{ .kp-code-src }
 
 時刻とともにすべての値が同じ速さで増える問題も、この形に直せる。時刻 $t$ に値 $w$ で入った要素は、時刻 $s$ には $w + (s - t)$ になるので、$w - t$ を入れておき、時刻 $s$ に取り出したら $s$ を足せばよい（$\mathit{add}$ が時刻そのものになる）。上限 $V$ で止まる値でも、$\min(\cdot, V)$ は大小の順序を崩さないので、取り出した後に $\min$ を取ればよい。ヒープ以外にも使える考え方の全体は [全体への操作を変数で持つ](../ds/global-offset.md) にある。
 
@@ -172,6 +184,9 @@ $K$ 番目に大きい値を最大ヒープで探そうとすると、上位 $K 
 ```cpp
 --8<-- "priority-queue/erasable-heap.cpp:core"
 ```
+
+完全なプログラム：[`erasable-heap.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/priority-queue/erasable-heap.cpp)（GitHub）
+{ .kp-code-src }
 
 **計算量**：push と erase はそれぞれ 1 回の push で、捨てる処理では、入れた要素をそれぞれ高々 1 回しか pop しない。よって追加と削除の回数の合計を $M$ とすると全体で $O(M \log M)$、1 回あたりならし $O(\log M)$ である。消した要素もしばらく残るので、ヒープの大きさは今の要素数ではなく、入れた回数で抑える。
 

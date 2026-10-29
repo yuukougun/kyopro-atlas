@@ -7,7 +7,7 @@ using namespace std;
 struct ParityUnionFind {
     vector<int> par;  // 根なら −(成分の大きさ)
     vector<int> col;  // col[v] = (v の色) XOR (親の色)。圧縮の後は根との XOR
-    ParityUnionFind(int n) : par(n, -1), col(n, 0) {}
+    explicit ParityUnionFind(int n) : par(n, -1), col(n, 0) {}
     int find(int v) {
         if (par[v] < 0) return v;
         int r = find(par[v]);

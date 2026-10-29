@@ -74,7 +74,10 @@ $$
 --8<-- "young-tableaux/hook.cpp:core"
 ```
 
-コード片（`snippets/young-tableaux/hook.cpp`）では、$N \le 7$ のすべての形で「最大の値 $N$ は角の箱に入るので、角を 1 つ外した形の数を足す」漸化式と一致することを確かめている。この漸化式は、形の数が少ないときにフック長公式の代わりに使えるうえ、形に追加の条件があるときにも DP として拡張できる。
+完全なプログラム：[`hook.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/young-tableaux/hook.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
+コード片（[`snippets/young-tableaux/hook.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/young-tableaux/hook.cpp)）では、$N \le 7$ のすべての形で「最大の値 $N$ は角の箱に入るので、角を 1 つ外した形の数を足す」漸化式と一致することを確かめている。この漸化式は、形の数が少ないときにフック長公式の代わりに使えるうえ、形に追加の条件があるときにも DP として拡張できる。
 
 ## Robinson-Schensted 対応と LIS・LDS {#robinson-schensted}
 
@@ -94,6 +97,9 @@ insert(x):
 ```cpp
 --8<-- "young-tableaux/hook.cpp:rs"
 ```
+
+完全なプログラム：[`hook.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/young-tableaux/hook.cpp)（GitHub）
+{ .kp-code-src }
 
 コード片では、$N \le 7$ のすべての順列で、1 行目の長さが LIS、行数が LDS に一致すること、形 $\lambda$ を作る順列の数が $(f^\lambda)^2$ になることを確かめている。順列を逆順にすると $P$ が転置される（行と列が入れ替わる）ので、LIS と LDS の役割も入れ替わる。
 

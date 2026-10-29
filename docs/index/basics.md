@@ -153,7 +153,7 @@ search:
 
 - id：`binary-search`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/binary-search/
-- 別名：二分法、lower_bound、upper_bound、めぐる式二分探索、partition_point、binary search
+- 別名：二分法、lower_bound、upper_bound、めぐる式二分探索、partition_point、binary search、にぶたん、バイナリサーチ、2 分探索
 - 種類：二分探索
 - 前提：`sorting-techniques`
 - 使い分け：`method-comparison#binary-search`
@@ -334,7 +334,7 @@ search:
 
 - id：`two-pointers`　レベル：基礎　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/two-pointers/
-- 別名：しゃくとり法、two pointers、2 ポインタ、スライディングウィンドウ、固定長の窓
+- 別名：しゃくとり法、two pointers、2 ポインタ、スライディングウィンドウ、固定長の窓、尺とり法、シャクトリ法
 - 種類：尺取り・スライド窓
 - 前提：`prefix-sum`、`complexity-estimation`
 - 使い分け：`method-comparison#binary-search`
@@ -454,7 +454,7 @@ search:
 
 - id：`ternary-search`　レベル：水　段階：reviewed　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/ternary-search/
-- 別名：三分法、黄金分割探索、凸関数の極値、凸関数、離散凸、増分が単調、ternary search
+- 別名：三分法、黄金分割探索、凸関数の極値、凸関数、離散凸、増分が単調、ternary search、3 分探索
 - 種類：二分探索
 - 前提：`binary-search-answer`
 - 使い分け：`method-comparison#binary-search`

@@ -65,6 +65,9 @@ $$
 --8<-- "tree-edge-contribution/distance-sum.cpp:core"
 ```
 
+完全なプログラム：[`distance-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-edge-contribution/distance-sum.cpp)（GitHub）
+{ .kp-code-src }
+
 このコードは根から BFS した順を逆から読んで部分木サイズを確定させ、確定した瞬間にその頂点と親の間の辺の寄与を足している。再帰を使わないので、パス状の木でもスタックが溢れない（[再帰の深さ](../tree/tree-traversal.md#recursion-depth)）。
 
 同じ数え方は、辺ごとに足せる量なら何にでも使える。

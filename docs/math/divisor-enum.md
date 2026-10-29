@@ -67,6 +67,9 @@ $N \ge 2$ が素数であるとは、約数が $1$ と $N$ だけであること
 --8<-- "divisor-enum/divisors.cpp:prime"
 ```
 
+完全なプログラム：[`divisors.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/divisor-enum/divisors.cpp)（GitHub）
+{ .kp-code-src }
+
 - **1 は素数ではない**：$N = 1$ ではループが 1 回も回らないので、先に `n < 2` を弾かないと素数と判定してしまう
 - **終了条件は `i * i <= n`**：$\sqrt{N}$ を浮動小数点で求めると誤差でずれる（[落とし穴](#pitfalls)）。`i` を `long long` にしておけば、$N \le 10^{18}$ の範囲で `i * i` はあふれない
 - **見つかった時点で止める**：合成数なら最小の素因数 $p \le \sqrt{N}$ で止まる。最悪は $N$ が素数のときで、そのとき $\sqrt{N}$ 回かかる
@@ -82,6 +85,9 @@ $N \ge 2$ が素数であるとは、約数が $1$ と $N$ だけであること
 ```cpp
 --8<-- "divisor-enum/divisors.cpp:divisors"
 ```
+
+完全なプログラム：[`divisors.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/divisor-enum/divisors.cpp)（GitHub）
+{ .kp-code-src }
 
 この手順で気をつけるのは 2 点である。
 

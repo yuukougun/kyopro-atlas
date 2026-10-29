@@ -81,6 +81,9 @@ $N - c$ は $P$ だけで決まるので、$P$ をどんな swap の列で作っ
 --8<-- "permutation-parity/parity.cpp:core"
 ```
 
+完全なプログラム：[`parity.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/permutation-parity/parity.cpp)（GitHub）
+{ .kp-code-src }
+
 値が $1$〜$N$ の並べ替えでない列（値が大きい・飛び飛び）では、先に値を順位に置き換える。列 $A$ を列 $B$ に並べ替えるときは、両方を値でソートした添字の列を作り、$k$ 番目に小さい値の $A$ での位置から $B$ での位置への対応を $p$ にする。ソートがあるので $O(N \log N)$ になる。
 
 ## 3 要素の巡回は偶置換 {#three-cycle}
@@ -117,6 +120,9 @@ $N - c$ は $P$ だけで決まるので、$P$ をどんな swap の列で作っ
 ```cpp
 --8<-- "permutation-parity/parity.cpp:judge"
 ```
+
+完全なプログラム：[`parity.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/permutation-parity/parity.cpp)（GitHub）
+{ .kp-code-src }
 
 偶奇を調整できるのは、同じ値の 2 つが同じ範囲の中で動けるときだけである。swap できる位置の組が決まっていて列がいくつかの部分に分かれる問題では、同じ値が別々の部分にあっても調整に使えない（[落とし穴](#pitfalls)）。
 

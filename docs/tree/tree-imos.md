@@ -68,6 +68,9 @@ $p$ の印 $x$ が $v$ まで届くのは、$p$ が $v$ の祖先のとき、す
 --8<-- "tree-imos/subtree-add.cpp:core"
 ```
 
+完全なプログラム：[`subtree-add.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-imos/subtree-add.cpp)（GitHub）
+{ .kp-code-src }
+
 ## 辺の片側への加算を子の部分木への加算に直す {#edge-side}
 
 「辺 $(a, b)$ を切ったとき、$a$ の側に残る頂点すべてに $x$ を足す」形は、根を決めると部分木への加算に直せる。辺 $(a, b)$ を取り除くと、木は子の側の部分木と残りの 2 つに分かれる（[辺を 1 本取り除くと 2 つの成分](../tree/tree-basics.md#remove-add-edge)）。
@@ -129,6 +132,9 @@ $v$ の側も同じである。頂点版では $l$ がパスに含まれるの�
 ```cpp
 --8<-- "tree-imos/path-add.cpp:core"
 ```
+
+完全なプログラム：[`path-add.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-imos/path-add.cpp)（GitHub）
+{ .kp-code-src }
 
 計算量は、LCA をダブリングで求めるなら前計算 $O(N \log N)$、クエリ 1 本 $O(\log N)$、累積 $O(N)$ である。「決まった順に頂点を訪ねる移動で各辺を何回通るか」は、移動 1 回をパスへの $+1$ と見れば辺版で数えられる（練習の [ABC222 E](#practice)）。
 

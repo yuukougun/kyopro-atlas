@@ -87,6 +87,9 @@ front matter と索引の文字には数式を使わず、`O(N log N)`・`O((N+M
 --8<-- "notation/conventions.cpp:core"
 ```
 
+完全なプログラム：[`conventions.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/notation/conventions.cpp)（GitHub）
+{ .kp-code-src }
+
 bit の番号は、最下位を 0 番目と数える（$2^i$ の位が $i$ 番目の bit）。グリッドのマス $(i, j)$ は $i$ 行目・$j$ 列目で、0-indexed の $0 \le i < H$、$0 \le j < W$ にする。移動量の配列は行と列の取り違えを避けて di・dj と書く（[グリッドの 4 近傍](../graph/grid-graph.md#neighbors)）。
 
 ## 数と制約の書き方 {#numbers}
@@ -259,7 +262,7 @@ $\mathrm{out}[v]$ は「最後に振った番号」ではなく「次に振る�
 - **入出力**：改行は `'\n'` で書く（[endl と改行文字の違い](../cpp/cpp-io.md#endl)）。
 - **再帰**：DFS は `auto dfs = [&](auto&& self, int v, int p) -> void { … };` の形にし、`-> void` を省かない。
 
-コード片は本文に全体を載せず、要点の数行だけを取り込む。完全なプログラムは手元でコンパイルと実行を確かめてある。
+コード片は本文に全体を載せず、要点の数行だけを取り込む。完全なプログラムは手元でコンパイルと実行を確かめてある。各コードの下のリンクから GitHub で見られる（[ページの構成と読み方](how-to-use.md#page-anatomy)）。
 
 ## 用語の表記 {#terms}
 

@@ -113,10 +113,14 @@ deque が空でない間：
 - **縮んだら push する**：同じ頂点が deque に 2 回入ってよい。上の例の頂点 2 のように、重み 1 の辺で入った後に重み 0 の辺で縮むことがある
 - **古い組を読み飛ばす**：組に push したときの距離を持たせ、$\mathrm{dist}[u]$ より大きければ何もしない。確定済みの印（`done[u]`）で判定してもよい
 - **更新は真に小さいときだけ**：`<` を `<=` にすると、等しい距離でも push し直すので、重み 0 の閉路があると止まらない
+- **INF は `INT_MAX` でよい**：重みを足すのは取り出した組の距離 $d$（有限）だけで、INF には足さないからである。届かない頂点の距離に足す処理を書き加えるなら、[ダイクストラ法の落とし穴](../graph/dijkstra.md#pitfalls)のとおり、足してもあふれない値にする（[INF の決め方](../cpp/cpp-types-literals.md#inf)）
 
 ```cpp
 --8<-- "zero-one-bfs/graph.cpp:core"
 ```
+
+完全なプログラム：[`graph.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/zero-one-bfs/graph.cpp)（GitHub）
+{ .kp-code-src }
 
 **計算量**。各頂点の暫定距離が縮むのは高々 2 回なので、deque に入るのも高々 2 回である。読み飛ばしにより、各頂点から出る辺を調べるのは 1 回だけになる。よって全体は $O(N + M)$ である。
 
@@ -167,6 +171,9 @@ BFS では、頂点を初めて見つけたときに距離を書き込み、訪�
 ```cpp
 --8<-- "zero-one-bfs/turns.cpp:core"
 ```
+
+完全なプログラム：[`turns.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/zero-one-bfs/turns.cpp)（GitHub）
+{ .kp-code-src }
 
 - **頂点数と辺数**：頂点は $4HW$、各頂点から出る辺は 1 + 3 本なので、全体で $O(HW)$ である。$H = W = 1500$ でも頂点は約 $9 \times 10^6$ 個で、`int` の配列なら約 36 MB に収まる。状態は `map` ではなく、整数に詰めて配列で引く
 - **斜めの 4 方向でも同じ**：ビショップのように斜めに進む駒でも、向きを斜めの 4 つにすれば同じ形になる

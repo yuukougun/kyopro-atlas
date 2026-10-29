@@ -2,8 +2,8 @@
 
 > AtCoder で黄色（レート 2000）を目指す学習者向けの、辞書として引く競技プログラミングの教材。手法・考察・データ構造・数学・C++ のページを分野ごとに置く。
 
-- 版：8e7017772747（updated の最大：2026-10-29）。tools/gen_site.py が生成する
-- ページ数：355
+- 版：cd915e2635bb（updated の最大：2026-10-29）。tools/gen_site.py が生成する
+- ページ数：356
 - 1 行が 1 ページ：「- [タイトル](URL)（id・レベル・分野・段階）：要約」
 - レベルは difficulty の帯：基礎 〜1199・水 1200〜1599・青 1600〜1999・黄 2000〜2399・発展 2400〜（概要だけ）。「—」はレベルを持たないページ
 - 段階：stub は準備中（要約と前提しかないので根拠にしない）、draft は本文あり・未検証、reviewed は検証済み、done は完成
@@ -12,7 +12,7 @@
 ## 分野ごとの詳細索引
 
 - [はじめに](https://yuukougun.github.io/kyopro-atlas/index/start/)：3 ページ。この教材の使い方、記法と用語の約束、AtCoder の仕組み
-- [横断ページ](https://yuukougun.github.io/kyopro-atlas/index/guide/)：16 ページ。逆引き辞典、用語の索引、問題番号の索引、使い分け、知識マップ、ロードマップ、早見表、戦い方など
+- [横断ページ](https://yuukougun.github.io/kyopro-atlas/index/guide/)：17 ページ。逆引き辞典、用語の索引、問題番号の索引、使い分け、知識マップ、ロードマップ、早見表、戦い方など
 - [基本テクニック](https://yuukougun.github.io/kyopro-atlas/index/basics/)：32 ページ。計算量の見積もり、全探索、二分探索、累積和・いもす法、尺取り法、ソート・座標圧縮、貪欲、半分全列挙、ダブリング、分割統治、周期性、bit 演算
 - [考察](https://yuukougun.github.io/kyopro-atlas/index/thinking/)：9 ページ。言い換え・主客転倒・寄与・余事象・偶奇・不変量・構築などの考察の型
 - [動的計画法](https://yuukougun.github.io/kyopro-atlas/index/dp/)：38 ページ。DP の考え方、列・区間・集合・桁・木の DP、DP の高速化
@@ -42,6 +42,7 @@
 - [知識マップ](https://yuukougun.github.io/kyopro-atlas/guide/knowledge-map/)（knowledge-map・—・guide・reviewed）：ページの前提関係を有向グラフで見て、選んだページの前提と次に読むページをたどれる。「理解した」ページと、前提をすべて理解した次の候補を塗り分ける。
 - [似た手法の使い分け](https://yuukougun.github.io/kyopro-atlas/guide/method-comparison/)（method-comparison・—・guide・reviewed）：BFS・01-BFS・ダイクストラ法や累積和・BIT・セグメント木のように混同しやすい手法の組を、できる操作・計算量・前提条件で比べ、条件から選べる。
 - [色別ロードマップ](https://yuukougun.github.io/kyopro-atlas/guide/roadmap/)（roadmap・—・guide・reviewed）：目標の色ごとに、到達の目安、読むページの順、最近の ABC の位置ごとの頻出手法、解いた数の進捗を見られる。ページの列はレベル・前提・出題頻度から生成する。
+- [勉強したいリスト](https://yuukougun.github.io/kyopro-atlas/guide/study-list/)（study-list・—・guide・draft）：各ページの「勉強したい」で入れたページを、題名・レベル・分野・入れた日の一覧で見られる。読み終えたページや要らなくなったページは、一覧から外せる。
 - [精進の仕方](https://yuukougun.github.io/kyopro-atlas/guide/practice-method/)（practice-method・—・guide・reviewed）：解けなかった問題との付き合い方がわかる。解説を見るまでの時間、解説の読み方、upsolve と復習、記録、演習の量と難しさの選び方を、教材の解説と記録の仕組みにつなげる。
 - [問題集と練習用コンテストの案内](https://yuukougun.github.io/kyopro-atlas/guide/problem-sets/)（problem-sets・—・guide・reviewed）：典型90問・EDPC・鉄則本・ACL Practice などの問題集と練習用コンテストを、構成とレベルの目安から選べる。最近の ABC と各問題集の問題から、使う手法のページも引ける。
 - [コンテストの戦い方](https://yuukougun.github.io/kyopro-atlas/guide/contest-strategy/)（contest-strategy・—・guide・reviewed）：ABC の 100 分の使い方がわかる。位置ごとの難しさと時間の目安、問題を読む順、取り組む問題の選び方と切り替え、終了前と終了後の過ごし方を示す。

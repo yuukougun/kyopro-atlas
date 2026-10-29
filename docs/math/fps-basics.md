@@ -106,7 +106,7 @@ $$
 !!! info "ACL では"
     `#include <atcoder/convolution>`。ACL にあるのは `atcoder::convolution(a, b)`（長さの和を $n$ として $O(n \log n)$、法は NTT 向きの素数）だけで、逆元・log・exp・累乗は自作する。法の条件と長さの上限は [ACL の convolution の要件](../math/convolution-ntt.md#acl)にある。
 
-逆元・log・exp をニュートン法で書くと次のようになる。完全なプログラムは `snippets/fps-basics/newton.cpp` で、素朴な方法との比較も同じファイルにある。
+逆元・log・exp をニュートン法で書くと次のようになる。完全なプログラムは [`snippets/fps-basics/newton.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/fps-basics/newton.cpp) で、素朴な方法との比較も同じファイルにある。
 
 ```cpp
 --8<-- "fps-basics/newton.cpp:inv"
@@ -115,6 +115,9 @@ $$
 ```cpp
 --8<-- "fps-basics/newton.cpp:log-exp"
 ```
+
+完全なプログラム：[`newton.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/fps-basics/newton.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 この exp は反復のたびに log（中で逆元）を呼ぶので、計算量は $O(N \log N)$ だが定数倍が重い。それでも手元では $N = 5 \times 10^5$ で 0.5 秒ほどで、ふつうはこれで足りる。さらに速くしたいときは、資料にある逆元を同時に更新する書き方に替える。
 
