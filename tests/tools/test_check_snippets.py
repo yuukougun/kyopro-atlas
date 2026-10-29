@@ -225,8 +225,10 @@ class RealCompilerTest(unittest.TestCase):
         self.assertEqual(set(blocks), {"x/clean-run", "x/unused-run", "x/clean-warning"}, r.stdout)
         st, msg, detail = blocks["x/clean-run"]
         self.assertEqual((st, msg), ("OK", "1 case 一致"))
-        self.assertTrue(detail and all(x.startswith(cs.NOTE + "cc1plus: warning: ") and "-mavx10.1" in x for x in detail),
-                        detail)
+        # AVX10.1 を持つ計算機（CI）では、-march=native が広げた -mavx10.1 に -Wp,-mno-avx10.1 が重なり、
+        # ‘-mno-avx10.1-256, -mno-avx10.1-512’ cannot disable AVX512 … の警告も出る。どれも -m のオプションへの cc1plus の警告である
+        self.assertTrue(detail and all(x.startswith(cs.NOTE) and cs.M_OPTION_WARNING_RE.match(x[len(cs.NOTE):])
+                                       for x in detail), detail)
         st, msg, detail = blocks["x/unused-run"]
         self.assertEqual(st, "NG")
         self.assertIn("警告が出た", msg)
