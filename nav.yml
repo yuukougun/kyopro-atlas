@@ -7,6 +7,7 @@ nav:
       - この教材の使い方: start/how-to-use.md
       - 記法と用語の約束: start/notation.md
       - AtCoder の仕組み: start/atcoder-system.md
+      - 出典と AI 利用の方針: start/ai-and-sources.md
   - 横断ページ:
       - guide/index.md
       - 辞書として引く:

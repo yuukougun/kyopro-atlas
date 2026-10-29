@@ -1,0 +1,32 @@
+kyopro-atlas の本文と図のライセンス
+
+Copyright (c) 2026 yuukougun
+
+kyopro-atlas（https://yuukougun.github.io/kyopro-atlas/）の本文と図は、
+クリエイティブ・コモンズ 表示 4.0 国際 パブリック・ライセンス（CC BY 4.0）で提供する。
+
+対象
+  - docs/ のファイル：ページの本文（Markdown。生成した索引・一覧と llms.txt を含む）と、
+    docs/img/ の図（SVG）
+
+対象でないもの
+  - コードと、そのほかのファイル：MIT License（LICENSE）。snippets/ のプログラム（ページに載る
+    コード片を含む）、tools/・tests/ のプログラム、overrides/ のテンプレート・CSS・JavaScript
+    （動く図を含む）、設定のファイル、planning/・claude/・data/ など
+  - 同梱している外部のもの：それぞれのライセンスに従う。third_party/ac-library/（AtCoder Library）は
+    CC0 1.0、overrides/assets/vendor/ の KaTeX・Cytoscape.js・cytoscape-dagre は MIT License、
+    KaTeX のフォント（katex-0.16.47/fonts/）は SIL Open Font License 1.1。ライセンスの文書は
+    同じディレクトリに置いている（KaTeX のフォントは、フォントのファイルの中にライセンスの表示がある）
+  - ページやファイルに出る他者のもの（問題の題名、参考に挙げた資料の題名、制作の記録に引用した文など）。
+    この告知と LICENSE のどちらの対象でもない
+
+使うときは、出典（kyopro-atlas、作者 yuukougun、ページの題名と URL）と CC BY 4.0 へのリンクを示し、
+手を加えたときはその旨を書く。
+
+コモンズ証（要約）：https://creativecommons.org/licenses/by/4.0/deed.ja
+リーガル・コード（法的な全文）：https://creativecommons.org/licenses/by/4.0/legalcode.ja
+
+The text and figures of kyopro-atlas (files under docs/) are licensed under the Creative Commons
+Attribution 4.0 International License (CC BY 4.0): https://creativecommons.org/licenses/by/4.0/
+The code and the other files are licensed under the MIT License (see LICENSE), except bundled
+third-party files (third_party/ and overrides/assets/vendor/), which keep their own licenses.

@@ -6,6 +6,7 @@
 name: ページの誤りの報告
 description: 教材のページの誤りや分かりにくいところを知らせる
 title: "誤りの報告："
+labels: ["誤りの報告"]
 body:
   - type: markdown
     attributes:
@@ -14,6 +15,8 @@ body:
         各ページの最後の行の「このページの誤りを報告する」から開くと、ページの題名・URL・更新日が入っている。
 
         Issue は公開され、誰でも読める。問題文や解説の文章は写さず（ほかの人の文章の転載になる）、問題は問題 ID（`abc340_e` など）で示す。
+
+        自分の記事が写されている・参考の書き方が違う・AI の利用を断るサイトが資料になっている、などの申し出もここで受ける（[掲載内容についての連絡と対応](https://yuukougun.github.io/kyopro-atlas/start/ai-and-sources/#contact)）。
   - type: input
     id: page-title
     attributes:
@@ -42,6 +45,7 @@ body:
         - 説明が分かりにくい・足りない
         - リンク切れ・表示の崩れ
         - 誤字・表記
+        - 出典・転載・AI の利用についての申し出
         - その他
     validations:
       required: true
