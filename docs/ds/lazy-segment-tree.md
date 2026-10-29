@@ -31,7 +31,7 @@ sections:
   - {title: 双対セグメント木（区間作用・一点取得）, anchor: dual-segment-tree}
   - {title: 保つ性質と push の手順（自作するとき）, anchor: invariants, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -349,10 +349,14 @@ ACL の実装は再帰を使わず、下から上へ書いている。区間作�
 - 演算が可換でないときは、`prod` で左の子の結果を先に結ぶ
 - push を忘れて子を読むと、上の保留が施されていない値を返す。取得の関数でも push する
 
-??? note "C++ の実装例（再帰。区間加算・区間最小値）"
+??? note "自作するとき：`LazySegTree`（ACL の `lazy_segtree` に当たる）"
+    ACL の `lazy_segtree` と同じ 7 つの部品を受け取る。部品は `S`・`op`・`e`・`F`・`mapping`・`composition`・`id` で、意味も同じである。コンストラクタとメンバ関数の名前（`set`・`get`・`prod`・`all_prod`・`apply`）と引数の約束も ACL にそろえた。ACL との違いは 2 つある。区間の操作をこの節の手順のとおり再帰で書いたことと、`max_right`・`min_left`・一点への `apply(p, f)` を持たないことである。区間加算・区間最小値では、`mapping(f, x)` が $x + f$、`composition(f, g)` が $f + g$、`id()` が $0$、`e()` が大きい番兵を返す（[標準の型の表](#acl-standard)）。
+
     ```cpp
-    --8<-- "lazy-segment-tree/own-add-min.cpp:core"
+    --8<-- "lazy-segment-tree/own.cpp:core"
     ```
+
+    試験では、区間加算・区間最小値と、作用が可換でない区間アフィン・区間和の 2 つで、乱数の操作の列を素朴な方法と比べた。`all_apply` の合成の向きを逆にしたり、`set` の前の push を忘れたりすると、この試験で見つかる。`max_right` を足すなら、[セグメント木上の二分探索](../ds/segment-tree-binary-search.md#complexity)の再帰の `search` で、子を探す前に `push(k)` を呼ぶ。祖先の保留を降ろしてから子の値を読むためである。名前の約束は[インターフェースの決め方](../guide/library-design.md#interface)、確かめ方は[動作確認の手順](../guide/library-design.md#verify)にある。
 
 ## 参考 {#references}
 

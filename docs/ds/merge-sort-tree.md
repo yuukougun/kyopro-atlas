@@ -25,7 +25,7 @@ sections:
   - {title: クエリの手順（O(log N) 個のノードで二分探索）と累積和で和も, anchor: query}
   - {title: 各段に BIT を持たせる（先読みと組む）, anchor: bit-per-level, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -81,6 +81,8 @@ updated: 2026-10-22
 ### 構築の手順
 
 葉には要素を 1 つだけ置く。余りの葉（$i \ge N$）は空の列にする。内部ノードは添字の大きい方から順に、2 つの子の列をマージして作る。子の列はどちらもソート済みなので、マージソートの 1 段と同じく、長さの和に比例する時間で 1 本のソート済みの列にできる。
+
+ACL にはないので自作する。区間は ACL と同じく 0-indexed の半開区間で受け取る。`count_sum_le(l, r, x)` は、区間の $x$ 以下の要素の個数と和の組を返す。名前の約束は[インターフェースの決め方](../guide/library-design.md#interface)、確かめ方は[動作確認の手順](../guide/library-design.md#verify)にある。
 
 ```cpp
 --8<-- "merge-sort-tree/mst.cpp:core"

@@ -636,3 +636,20 @@
 @media (pointer: coarse) {
   .md-typeset a.kp-check__jump { width: 44px; height: 44px; }
 }
+
+/* ---------- ページ下部：自作の確認（#53） ---------- */
+/* front matter の verify（Library Checker の問題名）を 1 行で出す。問題名は長い 1 語なので、狭い画面では途中で折り返す */
+.md-typeset .kp-links__verify {
+  grid-column: 1 / -1;
+  margin: 0.3em 0 0;
+}
+.md-typeset .kp-links__verify-label { font-weight: 700; }
+.md-typeset .kp-links__verify a { overflow-wrap: anywhere; }
+
+/* ---------- コードの下の行：完全なプログラムへのリンクと mint の注記（#8・#62） ---------- */
+/* tools/fix_code_links.py が取り込んだコードの後に置く段落（{ .kp-code-src }）。小さく薄い字にし、直前のコードの塊（pre の下の 1em）に寄せる */
+.md-typeset .kp-code-src {
+  margin-top: -0.6em;
+  font-size: 0.85em;
+  color: var(--md-default-fg-color--light);
+}

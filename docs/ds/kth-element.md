@@ -127,6 +127,8 @@ kth(k):                          # k ≥ 1。接頭辞の和が初めて k 以�
 
 C++ では、外から見た位置を 0-indexed にすると、内部の位置 $\mathrm{pos} + 1$ がそのまま外の $\mathrm{pos}$ になる。
 
+ACL の `fenwick_tree` は BIT 上の二分探索を持たないので、BIT ごと自作する（ACL だけで書く方法は、この節の最後の「ACL では」にある）。`add(p, x)` の名前と 0-indexed の位置は ACL にそろえた。`sum(r)` は先頭から $r$ 個の和で、ACL の `sum(0, r)` に当たる。`kth(k)` は [BIT の自作](../ds/fenwick-tree.md#operations)の `lower_bound(w)` と同じ探索で、返り値も同じ 0-indexed の位置である（全体の和が $k$ 未満なら $N$）。名前の約束は[インターフェースの決め方](../guide/library-design.md#interface)、確かめ方は[動作確認の手順](../guide/library-design.md#verify)にある。
+
 ```cpp
 --8<-- "kth-element/bit-kth.cpp:core"
 ```

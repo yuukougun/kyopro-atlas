@@ -31,7 +31,7 @@ sections:
   - {title: 一般化（XOR で偶奇・二部グラフ、頂点を 2 倍にする）, anchor: generalization}
   - {title: 応用の型, anchor: applications}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -116,13 +116,13 @@ $W = 4 + 3 - 5 = 2$ なので、$\mathrm{diff}[2] = 2$ として $2$ を $0$ の
 
 同じ成分の $u, v$ について、$x_v - x_u = p_v - p_u$ を返す。$p_u$ と $p_v$ はそれぞれ find を呼んだ後の $\mathrm{diff}$ である。違う成分なら差は決まらない。
 
-C++ では次のように書ける（完全なプログラムは乱数の試験つきで snippets に置く）。
+ACL の `dsu` は差を持てないので、重み付き Union-Find は自作する。名前は [Union-Find の自作](../ds/union-find.md#operations)にそろえ、根を求める `find`（ACL の `dsu` では `leader`）と、同じ成分かを答える `same` を持つ。`merge(u, v, w)` は「$x_v - x_u = w$」を加え、矛盾しなければ `true` を返す（ACL の `dsu` の `merge` は代表元を返すので、意味が違う）。差は `get_diff(u, v)`（$x_v - x_u$）、根との差は `potential(v)` で読む。C++ では次のように書ける（完全なプログラムは乱数の試験つきで snippets に置く）。
 
 ```cpp
 --8<-- "weighted-union-find/weighted-union-find.cpp:core"
 ```
 
-ACL の `dsu` は差を持てないので、重み付き Union-Find は自作する。偶奇だけなら、ACL の `dsu` で頂点を 2 倍にする書き方（[頂点を 2 倍にする Union-Find](#generalization)）も使える。
+偶奇だけなら、ACL の `dsu` で頂点を 2 倍にする書き方（[頂点を 2 倍にする Union-Find](#generalization)）も使える。名前の約束は[インターフェースの決め方](../guide/library-design.md#interface)、確かめ方は[動作確認の手順](../guide/library-design.md#verify)にある。
 
 ## 境界（根の差は 0・同じ成分の merge・値の範囲） {#boundaries}
 

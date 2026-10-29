@@ -4,11 +4,11 @@ using namespace std;
 // --8<-- [start:core]
 // 冪等な演算 op（min・max・gcd・AND・OR）の Sparse Table。区間は半開 [l, r)
 template <class T, T (*op)(T, T)>
-struct sparse_table {
+struct SparseTable {
     vector<int> lg;          // lg[L] = floor(log2 L)
     vector<vector<T>> st;    // st[k][i] = [i, i + 2^k) の op の結果
 
-    sparse_table(const vector<T>& a) {
+    explicit SparseTable(const vector<T>& a) {
         int n = a.size();
         lg.assign(n + 1, 0);
         for (int L = 2; L <= n; L++) lg[L] = lg[L / 2] + 1;
@@ -25,7 +25,7 @@ struct sparse_table {
     }
 
     // l < r が前提（空の区間には答えを持たない）
-    T query(int l, int r) const {
+    T prod(int l, int r) const {  // [l, r) の op の結果
         assert(0 <= l && l < r && r <= (int)st[0].size());
         int k = lg[r - l];
         return op(st[k][l], st[k][r - (1 << k)]);  // 重なってよい 2 区間
@@ -43,15 +43,15 @@ int main() {
     cin >> n >> q;
     vector<long long> a(n);
     for (auto& x : a) cin >> x;
-    sparse_table<long long, op_min> mn(a);
-    sparse_table<long long, op_gcd> g(a);
+    SparseTable<long long, op_min> mn(a);
+    SparseTable<long long, op_gcd> g(a);
     for (int i = 0; i < q; i++) {
         int l, r;
         cin >> l >> r;
         // 素朴な計算と比べる
         long long m = a[l], h = a[l];
         for (int j = l; j < r; j++) m = min(m, a[j]), h = gcd(h, a[j]);
-        assert(mn.query(l, r) == m && g.query(l, r) == h);
-        cout << mn.query(l, r) << ' ' << g.query(l, r) << '\n';
+        assert(mn.prod(l, r) == m && g.prod(l, r) == h);
+        cout << mn.prod(l, r) << ' ' << g.prod(l, r) << '\n';
     }
 }

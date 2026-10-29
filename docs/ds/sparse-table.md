@@ -25,7 +25,7 @@ sections:
   - {title: 作り方（長さが 2 のべきの区間の表と log の表）, anchor: build}
   - {title: 冪等でない演算（2 べきに分けて O(log N)、Disjoint Sparse Table）, anchor: disjoint-sparse-table, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -112,10 +112,12 @@ build(a):                          # N = |a|
         i + 2^k ≤ N のすべての i について:
             st[k][i] ← op(st[k-1][i], st[k-1][i + 2^(k-1)])
 
-query(l, r):                       # 0 ≤ l < r ≤ N
+prod(l, r):                        # 0 ≤ l < r ≤ N
     k ← lg[r - l]
     return op(st[k][l], st[k][r - 2^k])
 ```
+
+ACL には Sparse Table がないので自作する。取得の関数の名前と引数は、ACL の `segtree` の `prod(l, r)`（0-indexed・半開区間）にそろえた。ただし ACL の `prod` と違い、空の区間（$l = r$）は渡せない（この節の境界の項）。名前の約束は[インターフェースの決め方](../guide/library-design.md#interface)、確かめ方は[動作確認の手順](../guide/library-design.md#verify)にある。
 
 C++ では次のように書く。演算を関数で渡し、min と gcd の表を同じ形で作れるようにした。
 

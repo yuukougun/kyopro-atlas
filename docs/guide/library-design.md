@@ -23,7 +23,7 @@ sections:
   - {title: 動作確認の手順, anchor: verify}
   - {title: ページ → 確認用の問題, anchor: verify-table}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -76,7 +76,26 @@ updated: 2026-10-22
 ```
 
 - **ACL の工夫**：ACL の `fenwick_tree` は、中の配列を符号なし整数（`T = long long` なら `unsigned long long`）で持って足している。符号なし整数のあふれは $2^{64}$ を法とした値になり、[未定義動作](../guide/glossary.md#undefined-behavior)にならない。途中の和があふれても、最後の差が `long long` に収まれば正しい値が返る
-- **名前**：メンバ関数の名前（`add`・`sum`・`prod`・`merge`・`same`）も ACL にそろえると、解説コードと読み比べやすい
+- **名前**：メンバ関数の名前（`add`・`sum`・`prod`・`merge`・`same`）も ACL にそろえると、解説コードと読み比べやすい。この教材の自作の例と ACL の名前の対応は[次の表](#acl-names)にある
+
+### この教材の自作と ACL の名前 {#acl-names}
+
+データ構造のページの自作の例は、ACL にある部品なら名前と引数の約束を ACL にそろえている。そろえていない名前と返り値は、各ページの「自作するとき」の囲み（ACL にない部品はコードの前の文）に書いた。まとめると次のとおりである。確認の問題は Library Checker の問題で、各ページの末尾の「自作の確認」にも出る（発展の概要では、本文のライブラリの節や練習問題の「Library Checker」などにある）。
+
+| 部品 | ACL | この教材の自作 | ACL との違い | 確認の問題 |
+| --- | --- | --- | --- | --- |
+| [Union-Find](../ds/union-find.md#operations) | `dsu`・`leader` | `UnionFind`・`find` | 根を求める関数の名前が違う。`merge` は併合したかの `bool` を返す（ACL は新しい代表元）。`groups` はない | [unionfind](https://judge.yosupo.jp/problem/unionfind) |
+| [重み付き Union-Find](../ds/weighted-union-find.md#operations) | なし | `WeightedUnionFind`・`find` | `merge(u, v, w)` は矛盾しなければ `true` を返す。差は `get_diff(u, v)` で読む | [unionfind_with_potential](https://judge.yosupo.jp/problem/unionfind_with_potential) |
+| [ロールバックできる Union-Find](../ds/rollback-union-find.md#library) | なし | `RollbackUnionFind`・`leader` | `merge` は併合したかの `bool` を返す。`undo`・`snapshot`・`rollback` を足した | [dynamic_graph_vertex_add_component_sum](https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum) |
+| [BIT](../ds/fenwick-tree.md#operations) | `fenwick_tree` | `BIT` | コンストラクタ `BIT()`・`BIT(n)` は ACL と同じ。配列から $O(N)$ で作る `BIT(a)`・先頭からの和 `sum(r)`・`lower_bound(w)` を足した。中身は `long long` のまま足す | [point_add_range_sum](https://judge.yosupo.jp/problem/point_add_range_sum) |
+| [K 番目の値（BIT）](../ds/kth-element.md#bit-binary-search) | なし（`segtree` の `max_right` で書く） | `Fenwick`・`kth(k)` | `kth(k)` は BIT の `lower_bound(w)` と同じ探索 | [ordered_set](https://judge.yosupo.jp/problem/ordered_set) |
+| [セグメント木](../ds/segment-tree.md#operations) | `segtree` | `SegTree` | `max_right<f>(l)`・`min_left<f>(r)` の形がない。ほかは同じ | [point_set_range_composite](https://judge.yosupo.jp/problem/point_set_range_composite) |
+| [遅延セグメント木](../ds/lazy-segment-tree.md#invariants) | `lazy_segtree` | `LazySegTree` | 区間の操作を再帰で書いた。`max_right`・`min_left`・一点への `apply(p, f)` がない | [range_affine_range_sum](https://judge.yosupo.jp/problem/range_affine_range_sum) |
+| [Sparse Table](../ds/sparse-table.md#build) | なし | `SparseTable`・`prod` | 取得の名前を `segtree` の `prod` にそろえた。空の区間は渡せない | [staticrmq](https://judge.yosupo.jp/problem/staticrmq) |
+
+- **find と leader**：Union-Find の `find` は、本文の手順と図で使う名前に合わせて残した。ライブラリにするなら ACL の `leader` にそろえると、ACL から乗り換えても呼び出し側を直さずに済む
+- **merge の返り値**：`bool` か代表元かは、乗り換えるときに気づきにくい違いである。`if (uf.merge(a, b))` は、ACL の `dsu` では代表元が 0 でないかを見るだけになる（[Union-Find の ACL の囲み](../ds/union-find.md#operations)）
+- **assert**：Union-Find と BIT の例は、短く見せるため添字の範囲の `assert` を省いた（セグメント木・遅延セグメント木・Sparse Table の例には入れた）。ライブラリにするときは、[インターフェースの決め方](#interface)の 3 のとおり関数の入口で確かめる
 
 ## ヘッダの書き方 {#headers}
 
@@ -151,7 +170,7 @@ cph の改造版の展開を使い、目印 `// @impl` でヘッダを分ける�
 
 手順は次のとおりである。
 
-1. **問題を選ぶ**：[表](#verify-table)から、部品の手法のページの行を探す。BIT なら `point_add_range_sum`、セグメント木なら非可換の演算も確かめられる `point_set_range_composite` である
+1. **問題を選ぶ**：[表](#verify-table)から、部品の手法のページの行を探す。BIT なら `point_add_range_sum`、セグメント木なら非可換の演算も確かめられる `point_set_range_composite` である。同じ問題は、手法のページの末尾の「自作の確認」の行にも出る（発展の概要では、本文のライブラリの節や練習問題の「Library Checker」などにある）
 2. **確認用の解答を書く**：問題の入力を読み、自作のヘッダだけを使って答える。Library Checker の問題文は多くが 0-indexed・半開区間なので、ACL にそろえた部品はそのまま使える
 3. **提出するか、道具で全ケースを回す**：サイトで提出して判定を受けてもよい。テストケースは問題のリポジトリ（library-checker-problems）の `generate.py` で手元に作れる（例：`./generate.py -p unionfind`）
 4. **ヘッダを直したら回し直す**：一度通った部品も、直した後に確かめ直す。次の道具を使うと、これを自動にできる
