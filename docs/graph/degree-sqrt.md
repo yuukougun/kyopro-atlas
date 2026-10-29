@@ -5,7 +5,7 @@ aliases: [次数の平方分割, 重い頂点と軽い頂点, 三角形の列挙
 type: technique
 field: graph
 chapter: 探索木と次数の性質
-order: 380
+order: 365
 level: 青
 kind: [グラフ探索, クエリ処理の工夫]
 prerequisites: [graph-basics]

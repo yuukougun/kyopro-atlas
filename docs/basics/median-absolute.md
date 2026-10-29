@@ -5,7 +5,7 @@ aliases: [中央値で絶対値最小, Σ|x − a_i|, マンハッタン距離�
 type: technique
 field: basics
 chapter: 凸と三分探索
-order: 230
+order: 215
 level: 基礎
 kind: [ソート・座標圧縮, 考察]
 prerequisites: [sorting-techniques]

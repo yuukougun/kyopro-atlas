@@ -5,7 +5,7 @@ aliases: [global offset, オフセット, 全体加算, 反転フラグ, 回転�
 type: technique
 field: ds
 chapter: 標準コンテナの応用
-order: 60
+order: 24
 level: 基礎
 kind: [データ構造, クエリ処理の工夫]
 prerequisites: [stl-containers]

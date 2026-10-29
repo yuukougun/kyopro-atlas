@@ -5,7 +5,7 @@ aliases: [指数ベクトル, 平方因子, squarefree, smooth 数, 平方数の
 type: technique
 field: math
 chapter: 素数と約数
-order: 170
+order: 135
 level: 基礎
 kind: [整数論]
 prerequisites: [prime-factorization]
