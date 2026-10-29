@@ -134,7 +134,7 @@ atcoder: true
 --8<-- "cpp-io/printf-ng.cpp:core"
 ```
 
-- **落とし穴 2**：手元の Ubuntu の g++-13・g++-15 では、`-O2` を付けると、`scanf` の戻り値を使わないだけで警告が出た（`ignoring return value of 'int scanf(const char*, ...)'`。`-O0` では出ない）。動作には影響しない。気になるなら、上のように読めた個数（戻り値）を確かめる
+- **落とし穴 2**：環境によっては、`scanf` の戻り値を使わないと `-O2` で警告（`ignoring return value of 'int scanf(const char*, ...)'`）が出る。glibc（Ubuntu・Debian の C の標準ライブラリ）の `_FORTIFY_SOURCE` は、関数に安全のための検査を足すマクロである。これを有効にして最適化したときだけ、glibc は `scanf` に戻り値を使うよう求める印（`warn_unused_result`）を付ける。手元の Ubuntu の g++-13・g++-15 は `-O0` 以外の最適化で `-D_FORTIFY_SOURCE=2` を自動で足すので、`-O2` だけで警告が出た（`-O0` では出ない）。Debian の g++-13 と Docker のイメージ `gcc:15.2.0` の g++ は自動で足さないので、`-D_FORTIFY_SOURCE=2` を付けたときだけ出る。警告が出ても `scanf` の動作は変わらない。気になるなら、上のように読めた個数（戻り値）を確かめる
 - **落とし穴 3**：`printf`・`scanf` と `cin`・`cout` は、同期を切った後に混ぜない（[混ぜたとき](#mixing-streams)）
 
 ## std::format（C++20・GCC 13〜）と std::print・println（C++23・GCC 14〜） {#format-println}
