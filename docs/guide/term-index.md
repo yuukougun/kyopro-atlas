@@ -9,7 +9,7 @@ order: 30
 level: null
 kind: [案内]
 prerequisites: []
-related: [glossary, reverse-index-signs, how-to-use#lookup]
+related: [glossary, reverse-index-signs, how-to-use#lookup, problem-index]
 summary: 手法の名前・別名・英語名から、そのページを五十音順と ABC 順で引ける。全ページの題名と別名から生成し、サイト内検索の結果に頼らない入口になる。
 complexity: null
 signs: []
@@ -778,8 +778,11 @@ updated: 2026-10-22
 - [和・積の法則と順列・組合せ](../comb/counting-basics.md)
 - [商の列挙](../math/floor-quotient-enum.md)
 - 商列挙 → [商の列挙](../math/floor-quotient-enum.md)
+- 問題 ID から引く → [問題番号の索引](problem-index.md)
 - 問題を読む順 → [コンテストの戦い方](contest-strategy.md)
 - 問題文のサイン → [逆引き辞典（言い回しから）](reverse-index-signs.md)
+- 問題番号から引く → [問題番号の索引](problem-index.md)
+- [問題番号の索引](problem-index.md)
 - [問題集と練習用コンテストの案内](problem-sets.md)
 - 四角不等式 → [Monge 性による DP の高速化](../dp/monge.md)
 - 四辺形不等式 → [Monge 性による DP の高速化](../dp/monge.md)
@@ -1513,6 +1516,7 @@ updated: 2026-10-22
 - 遅延評価 → [views の基本](../cpp/cpp-views-basics.md)
 - 遅延評価セグメント木 → [遅延セグメント木](../ds/lazy-segment-tree.md)
 - 過半数 → [乱択アルゴリズム](../misc/randomized.md)
+- 過去問の索引 → [問題番号の索引](problem-index.md)
 - 遷移の高速化 → [DP の高速化の選び方](../dp/dp-speedup-overview.md)
 - 遷移行列 → [行列累乗](../math/matrix-power.md)
 - 遷移行列のセグメント木 → [動的 DP](../dp/dynamic-dp.md)

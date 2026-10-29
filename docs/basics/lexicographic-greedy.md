@@ -5,7 +5,7 @@ aliases: [辞書順最小, lexicographically smallest, 辞書順 K 番目, 先�
 type: technique
 field: basics
 chapter: 貪欲
-order: 280
+order: 255
 level: 基礎
 kind: [貪欲, 文字列]
 prerequisites: [greedy-basics]

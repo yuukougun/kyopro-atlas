@@ -5,7 +5,7 @@ aliases: [重心, centroid, 重み付き重心, tree centroid]
 type: technique
 field: tree
 chapter: 木全体の形
-order: 110
+order: 135
 level: 黄
 kind: [木]
 prerequisites: [tree-traversal]

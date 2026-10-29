@@ -17,14 +17,21 @@ data/recent-abc.yaml（最近の ABC）。front matter が足りないページ�
                                        あればそれを使う。先頭にホーム（docs/index.md があれば）、最後に「一覧」（lists/ の全ページ。
                                        テンプレートは nav にある一覧にだけバッジのリンクを張るため）。extra.kp に一覧の slug
                                        （levels・kinds）と分野の表示名（fields）を書く（overrides/main.html が引く。interfaces.md の外）
-  docs/<field>/index.md                分野の入口（章ごとの表：題名・レベル・要約・準備中の印）。ページのある分野だけ
+  docs/<field>/index.md                分野の入口。ページのある分野だけ（Issue #58。entrance の注記）：
+                                       説明の 1 文 → 分野の注記（FIELD_NOTES）→ 関連する案内の 1 段落（学ぶ順・使い分け・問題集・自作）
+                                       → 章ごとのページの箇条書き（題名・レベルの小さな印・準備中の印・要約の 1 文目）と、章の後の
+                                       「ほかの章の関連ページ」→ 最後に「ほかの分野にある関連ページ」。章の中は order の順（並べ替えない）
   docs/lists/index.md・level-<…>.md・kind-<…>.md   レベル別・種類別の一覧（ページのあるものだけ。名前は LEVEL_SLUGS・KIND_SLUGS）
   docs/llms.txt                        1行1ページ「- [タイトル](URL)（id・レベル・分野・段階）：要約」と、使い方・版・詳細索引への案内
   docs/index/<field>.md                分野ごとの詳細索引（id・URL・別名・サイン・kind・前提・ACL・節）。サイト内検索からは外す
   overrides/assets/data/graph.json     interfaces.md §5（pages は1行1ページ）
   手書きのページの生成部分             <!-- gen:begin 名前 --> 〜 <!-- gen:end 名前 --> の間（名前は --list-blocks）。
-                                       フェンスの中の目印は無視する。目印のないページ・まだないページは飛ばして知らせる
-版: 入力（全ページの front matter・本文の問題の一覧・使った問題の台帳の値・最近の ABC）の内容の SHA-256 の先頭 12 桁と、
+                                       フェンスの中の目印は無視する。目印のないページ・まだないページは飛ばして知らせる。
+                                       問題番号の索引（guide/problem-index.md の problem-index-*。Issue #6）は、本文の問題の一覧に載せた
+                                       全問題を ABC・ARC・AGC・問題集・そのほかに分けて回の順に並べ、1 行を「表示名 → ページ（役割）」にする
+                                       （例題のページが先。台帳の pages と本文の一致は check_pages・fix_problems が見る）。
+                                       ホームの home-links は目的別の入口（Issue #7）で、対象の読者などの説明は docs/index.md の手書き
+版: 入力（全ページの front matter・本文の問題の一覧とその上の見出しの anchor・使った問題の台帳の値・最近の ABC）の内容の SHA-256 の先頭 12 桁と、
 front matter の updated の最大値。生成日時は書かないので、入力が同じなら出力も同じ（--check と両立する。T5）。
 リンク: 生成する Markdown のリンクは相対パス（mkdocs build --strict で検査される）。節（#anchor）へのリンクは、相手の
 stage が draft 以降（本文に見出しがあることを check_pages.py が保証する）のときだけ付け、stub のページはページへのリンクにする。
@@ -55,7 +62,7 @@ GEN_END_RE = re.compile(r"^<!--\s*gen:end(?:\s+(?P<name>[A-Za-z0-9_-]+))?\s*-->$
 
 FIELD_DESCRIPTIONS = {   # 設計書 §2.1 の「中身」
     "start": "この教材の使い方、記法と用語の約束、AtCoder の仕組み",
-    "guide": "逆引き辞典、用語の索引、使い分け、知識マップ、ロードマップ、早見表、戦い方など",
+    "guide": "逆引き辞典、用語の索引、問題番号の索引、使い分け、知識マップ、ロードマップ、早見表、戦い方など",
     "basics": "計算量の見積もり、全探索、二分探索、累積和・いもす法、尺取り法、ソート・座標圧縮、貪欲、半分全列挙、ダブリング、分割統治、周期性、bit 演算",
     "thinking": "言い換え・主客転倒・寄与・余事象・偶奇・不変量・構築などの考察の型",
     "dp": "DP の考え方、列・区間・集合・桁・木の DP、DP の高速化",
@@ -117,13 +124,47 @@ PROBLEM_SETS = [   # 問題集（contest id → 見出し）。ほかの abc・a
     ("aalc001", "AAL Contest"), ("tessoku-book", "鉄則本（競技プログラミングの鉄則 演習問題集）"),
     ("math-and-algorithm", "アルゴ数学（アルゴリズムと数学 演習問題集）"), ("fps-24", "FPS 24 題"), ("game-24", "組合せゲーム 24 題"),
 ]
+PROBLEM_SET_SHORT = {   # 分野の入口・問題番号の索引の跳び先の行で使う短い名前
+    "typical90": "典型90問", "dp": "EDPC", "tdpc": "TDPC", "ndpc": "NDPC", "practice2": "ACL Practice", "aalc001": "AAL Contest",
+    "tessoku-book": "鉄則本", "math-and-algorithm": "アルゴ数学", "fps-24": "FPS 24 題", "game-24": "組合せゲーム 24 題",
+}
+INDEX_SERIES = ["abc", "arc", "agc"]         # 問題番号の索引で回の順に並べるコンテスト
+SERIES_RE = re.compile(r"(?P<series>" + "|".join(INDEX_SERIES) + r")(?P<num>\d+)")
+INDEX_PARTS = INDEX_SERIES + ["sets", "other"]   # 問題番号の索引の区分（生成部分 problem-index-<区分> と同じ順）
+ABC_RANGE = 50                              # 問題番号の索引の ABC の小見出しの回の幅（abc-001・abc-050・abc-100…）
+LEVEL_CLASS = {"基礎": "kiso", "水": "mizu", "青": "ao", "黄": "ki", "発展": "hatten"}   # overrides/main.html の LV_CLASS と同じ
+# 分野の入口の「使い分け」：guide/method-comparison の節（anchor）。その分野のページへのリンクが多い節を選んだ（2026-10-29）。
+# 節がなくなれば飛ばし、どれもなければページへのリンクにする
+FIELD_COMPARISONS = {
+    "basics": ["binary-search", "small-n", "repetition", "optimization"],
+    "dp": ["optimization", "small-n", "trees"],
+    "graph": ["shortest-path", "connectivity"],
+    "tree": ["trees"],
+    "ds": ["range-queries", "containers"],
+    "math": ["numbers", "repetition"],
+    "comb": ["counting", "games"],
+    "string": ["strings"],
+    "geometry": ["numbers"],
+    "misc": ["small-n"],
+    "cpp": ["containers", "numbers"],
+}
+# 分野の入口の注記（関連する案内の前の 1 行。#65・#75）。{id}・{id#anchor} はページ（節）へのリンクで、文字は題名。
+# {id#anchor|文字} は文字を変える。ページがなければ文字だけにする
+FIELD_NOTES = {
+    "start": "解けなかった問題から引く入口は{how-to-use#lookup|辞書としての引き方}の表に、色ごとに学ぶ順は{roadmap#reading-order|色別ロードマップ}にある。",
+    "thinking": "問題の形から試す型を選ぶときは{thinking-checklist}、言い回しからは{reverse-index-signs#by-phrase}を使う。",
+    "patterns": "問われ方の例から題材を選ぶときは、{reverse-index-signs#by-topic|逆引き辞典の「題材から引く」}の表を使う"
+                "（ほかの分野のページにある題材も載っている）。",
+}
+FIELD_SET_MIN = 3                           # 分野の入口に問題集を出すのは、分野のページに載せた問題がこの数以上の問題集（多い順に 3 つまで）
+NOTE_REF_RE = re.compile(r"\{(?P<id>[a-z0-9-]+)(?:#(?P<anchor>[A-Za-z0-9_-]+))?(?:\|(?P<text>[^{}]+))?\}")
 RECENT_POSITIONS = ["E", "F", "G"]          # 位置ごとの頻出手法は E（水）・F（青）・G（黄）（設計書 §7）
 # 見出しの帯。abc451〜abc480 の G は黄 12 問・発展 14 問・青 4 問なので「黄・発展」（s10 decisions）
 POSITION_LEVEL = {"D": "基礎", "E": "水", "F": "青", "G": "黄・発展"}
 
 # 手書きのページに置ける生成部分：名前 → (中身, 置く想定のページ。None はどこでもよい)
 BLOCKS = {
-    "home-links": ("ホームの入口（知識マップ・逆引き辞典・ロードマップ・レベル別の一覧・用語の索引）", "index.md"),
+    "home-links": ("ホームの目的別の入口（解けなかった問題から引く・色ごとに順に学ぶ・初めて使う の ### と行）", "index.md"),
     "version": ("索引の版（入力のハッシュと updated の最大値）", None),
     "fields": ("章の一覧（分野の入口へのリンク・ページ数・準備中があればその数と、最後の章「一覧」）", None),
     "lists": ("レベル別・種類別の一覧へのリンク", None),
@@ -138,6 +179,11 @@ BLOCKS = {
     "recent-positions": ("ロードマップ：位置ごとの頻出手法（最近30回の E・F・G。recent-abc.yaml）", "guide/roadmap.md"),
     "recent-abc": ("最近の ABC → ページ（recent-abc.yaml）", "guide/problem-sets.md"),
     "problem-sets": ("問題集の問題 → ページ（本文の問題の一覧から）", "guide/problem-sets.md"),
+    "problem-index-abc": ("問題番号の索引：ABC（回の 50 ごとの小見出しと跳び先の行）", "guide/problem-index.md"),
+    "problem-index-arc": ("問題番号の索引：ARC（回の順）", "guide/problem-index.md"),
+    "problem-index-agc": ("問題番号の索引：AGC（回の順）", "guide/problem-index.md"),
+    "problem-index-sets": ("問題番号の索引：問題集（問題集ごとの小見出しと跳び先の行）", "guide/problem-index.md"),
+    "problem-index-other": ("問題番号の索引：ABC・ARC・AGC と問題集のほかのコンテスト（名前の順）", "guide/problem-index.md"),
     "verify-table": ("ページ → Library Checker の問題（verify）", "guide/library-design.md"),
 }
 
@@ -376,6 +422,8 @@ class Site:
         self.by_id = {p.id: p for p in self.pages}
         self.fields = [f for f in cp.FIELDS if any(p.field == f for p in self.pages)]
         self.used_problems = self._used_problems()
+        self.uses = self._problem_uses()
+        self.index_parts = self._index_parts()
         self.version = self._version()
         ups = [p.updated for p in self.pages if p.updated]
         self.updated = max(ups) if ups else None
@@ -396,10 +444,57 @@ class Site:
                     out[q.id] = {"label": q.label, "url": q.url, "difficulty": int(q.diff) if q.diff.isdigit() else None}
         return dict(sorted(out.items()))
 
+    @staticmethod
+    def heading_ids(pg: cp.Page) -> list[tuple[int, str]]:
+        """本文の見出しのうち {#anchor} を持つもの：(本文の中の行の番号, anchor) の列。フェンスの中は見ない。"""
+        out = []
+        for i, raw in enumerate(pg.lines):
+            if pg.in_fence[i]:
+                continue
+            h = cp.HEADING_RE.match(raw)
+            m = cp.ATTR_ID_RE.search(h.group("text")) if h else None
+            if m:
+                out.append((i, m.group("id")))
+        return out
+
+    def _problem_uses(self) -> dict[str, list[tuple[P, str, str | None]]]:
+        """問題 ID → [(載せたページ, 役割, 行の上にある直近の見出しの anchor)]。例題 → 練習 → 力試しの順で、同じ役割は
+        ナビゲーションの順。anchor は例題なら例題の小見出し（{#abc300_e}）、練習・力試しなら一覧の節（{#practice}）になる。
+        stub のページには見出しがないので None。"""
+        uses: dict[str, list[tuple[P, str, str | None]]] = collections.defaultdict(list)
+        for p in self.pages:
+            heads = [] if p.stub else self.heading_ids(p.page)
+            for q in p.page.problems:
+                i = q.line - p.page.body_line
+                anchor = next((a for k, a in reversed(heads) if k < i), None)
+                if not any(u[0] is p and u[1] == q.role for u in uses[q.id]):
+                    uses[q.id].append((p, q.role, anchor))
+        rank = {r: i for i, r in enumerate(cp.ROLES)}
+        for us in uses.values():
+            us.sort(key=lambda u: rank.get(u[1], len(rank)))      # 安定な並べ替えなので、同じ役割はナビゲーションの順のまま
+        return dict(uses)
+
+    def _index_parts(self) -> dict[str, list[str]]:
+        """問題番号の索引の区分（INDEX_PARTS）→ 問題 ID の列。本文の問題の一覧に載せた全問題がどれか 1 つに入る。
+        abc・arc・agc は回の数の順、sets は PROBLEM_SETS の順、other はコンテストの表示名の順で、同じコンテストの中は記号の順。"""
+        known = [c for c, _ in PROBLEM_SETS]
+        parts: dict[str, list[tuple[tuple, str]]] = {k: [] for k in INDEX_PARTS}
+        for qid in self.uses:
+            cid = self.contest_of(qid)
+            m = SERIES_RE.fullmatch(cid)
+            if m:
+                parts[m.group("series")].append(((int(m.group("num")), ""), qid))
+            elif cid in known:
+                parts["sets"].append(((known.index(cid), ""), qid))
+            else:
+                parts["other"].append(((0, cp.contest_name(cid).casefold() + "\0" + cid), qid))
+        return {k: [q for _, q in sorted(v, key=lambda t: (t[0], self.index_key(t[1])))] for k, v in parts.items()}
+
     def _version(self) -> str:
         data = {
             "pages": [{"meta": p.page.meta, "problems": [[q.id, q.role] for q in p.page.problems]}
                       for p in sorted(self.pages, key=lambda p: p.id)],
+            "anchors": {qid: [[p.id, r, a] for p, r, a in us] for qid, us in sorted(self.uses.items())},
             "problems": self.used_problems,
             "recent": cp.plain(self.recent),
         }
@@ -437,6 +532,61 @@ class Site:
     @staticmethod
     def lv(p: P) -> str:
         return p.level or "—"
+
+    @staticmethod
+    def level_mark(p: P) -> str:
+        """レベルの小さな色付きの印（ページ下部の前提と同じ kp-mini）。レベルのないページは空。"""
+        if p.level not in LEVEL_CLASS:
+            return ""
+        return f' <span class="kp-mini kp-lv-{LEVEL_CLASS[p.level]}" title="{LEVEL_RANGES[p.level]}">{p.level}</span>'
+
+    def problem_link(self, host: str, p: P, anchor: str | None, table_cell: bool = False) -> str:
+        """問題を載せたページへのリンク。anchor は _problem_uses が本文の見出しから拾ったものなので、sections になくても付ける。"""
+        href = cp.rel_link(host, p.rel) + (f"#{anchor}" if anchor else "")
+        text = cp.md_text(p.title, table=table_cell).replace("[", "\\[").replace("]", "\\]")
+        return f"[{text}]({href})"
+
+    def note_text(self, host: str, text: str) -> str:
+        """FIELD_NOTES の文の {id}・{id#anchor}・{id#anchor|文字} をリンクにする（ページがなければ文字だけ）。"""
+        def rep(m: re.Match) -> str:
+            p = self.by_id.get(m.group("id"))
+            label = m.group("text")
+            if p is None:
+                self.notes.append(f"分野の入口の注記の参照でページのないもの: {m.group('id')}")
+                return cp.md_text(label or m.group("id"))
+            esc = cp.md_text(label).replace("[", "\\[").replace("]", "\\]") if label else None
+            return self.link(host, p, m.group("anchor"), text=esc)
+        return NOTE_REF_RE.sub(rep, text)
+
+    def contest_of(self, qid: str) -> str:
+        return str((self.ledger.get(qid) or {}).get("contest") or qid.rsplit("_", 1)[0])
+
+    def index_key(self, qid: str) -> tuple[str, str]:
+        """同じコンテストの中の並び：記号を 4 桁にそろえた順（A〜H。Ex は G の後、001・A01 は数の順）。"""
+        return (str((self.ledger.get(qid) or {}).get("index", "")).zfill(4), qid)
+
+    def has_block(self, pid: str, name: str) -> bool:
+        """ページ pid に生成部分 name の目印があるか（あれば、その中の小見出しの anchor は生成のたびに作られる）。"""
+        p = self.by_id.get(pid)
+        if p is None:
+            return False
+        for i, x in enumerate(p.page.lines):
+            m = None if p.page.in_fence[i] else GEN_BEGIN_RE.match(x.strip())
+            if m and m.group("name") == name:
+                return True
+        return False
+
+    def first_sentence(self, s: str) -> str:
+        """かっこの外の最初の「。」までの文（check_pages.count_sentences と同じ数え方）。"""
+        depth = 0
+        for i, ch in enumerate(s):
+            if ch in "（(「『":
+                depth += 1
+            elif ch in "）)」』":
+                depth = max(0, depth - 1)
+            elif ch == "。" and depth == 0:
+                return s[:i + 1]
+        return s
 
     def front(self, title: str, search_exclude: bool = False) -> str:
         fm = f"---\ntitle: {yaml_scalar(title)}\ntype: generated\n"
@@ -491,24 +641,136 @@ class Site:
         lines += [f"      {f}: {yaml_scalar(cp.FIELD_TITLES[f])}" for f in cp.FIELDS]
         return "\n".join(lines) + "\n"
 
-    # ---- 分野の入口
+    # ---- 分野の入口（Issue #58）
+    # 章の中の並びの方針（2026-10-29）：ここでは並べ替えず、front matter の order（ナビゲーションと同じ）のまま出す。入口と
+    # サイドバーの並びを一致させ、並びの正を order の 1 か所にするためである。order は次の順で付ける。
+    #   (1) 同じ章の前提のページを先に置く（check_pages の警告「同じ分野の前提が後ろ」）
+    #   (2) 同じ話題のページ（基本形と、それを前提にする応用・発展）は続けて置き、話題の中はレベルの低い順にする
+    #   (3) 話題どうしは、最初のページのレベルが低い話題を先に置く（同じなら、ほかの話題から前提にされる話題を先に）。
+    #       章の主題から外れる 1 ページだけの話題は、章の終わりに置かず、ふさわしい章へ移すか (3) の位置に置く
+    # レベル順に並べ替えないのは、区間 DP と区間 DP の発展のような同じ話題のページを離さないためである。各行にレベルの印が
+    # あるので、レベルが下がる位置でも易しさは読み取れる。(1) は check_pages が見るが、(2)・(3) は検査しない。2026-10-29 の
+    # 時点では (2)・(3) に合わない章が残るので、読者向けの説明（start/how-to-use #structure）には (1) とレベルの順でないこと
+    # だけを書いた。order を (2)・(3) に合わせたら、説明に (2) を足してよい。
     def entrance(self, f: str) -> str:
         ps = [p for p in self.pages if p.field == f]
         host = f"{f}/index.md"
         n_stub = sum(p.stub for p in ps)
         out = self.front(cp.FIELD_TITLES[f])
-        out += f"# {cp.FIELD_TITLES[f]}\n\n{cp.md_text(FIELD_DESCRIPTIONS[f])}。{len(ps)} ページ" + (f"（準備中 {n_stub}）" if n_stub else "") + "。\n"
-
-        def rows(group: list[P]) -> str:
-            return table(["ページ", "レベル", "要約"], [[self.link(host, p, table_cell=True) + self.mark(p), self.lv(p),
-                                                       cp.md_text(p.summary, table=True)] for p in group])
-
+        lead = f"{cp.md_text(FIELD_DESCRIPTIONS[f])}。{len(ps)} ページ" + (f"（準備中 {n_stub}）" if n_stub else "") + "。"
+        how = self.by_id.get("how-to-use")
+        if any(p.level for p in ps):
+            lead += "ページ名の横の印はレベル" + (f"（{self.link(host, how, 'levels', text='レベルの意味')}）" if how else "") + "である。"
+        out += f"# {cp.FIELD_TITLES[f]}\n\n{lead}\n"
+        for para in self.entrance_guides(f, host):
+            out += f"\n{para}\n"
         top = [p for p in ps if not p.chapter]
         if top:
-            out += "\n" + rows(top) + "\n"
+            out += "\n" + self.entrance_items(host, top) + "\n"
         for ch in dict.fromkeys(p.chapter for p in ps if p.chapter):
-            out += f"\n## {cp.md_text(ch)}\n\n" + rows([p for p in ps if p.chapter == ch]) + "\n"
+            out += f"\n## {cp.md_text(ch)}\n\n" + self.entrance_items(host, [p for p in ps if p.chapter == ch]) + "\n"
+            rel = self.chapter_related(f, ch)
+            if rel:
+                out += "\nほかの章の関連ページ：" + "・".join(
+                    self.link(host, q) + self.level_mark(q) + self.mark(q) + f"（{cp.md_text(q.chapter or cp.FIELD_TITLES[f])}の章）"
+                    for q in rel) + "\n"
+        kinds, others = self.field_related(f)
+        if others:
+            kl = "・".join(f"[{cp.md_text(k)}]({cp.rel_link(host, f'lists/kind-{KIND_SLUGS[k]}.md')})" for k in kinds)
+            out += (f"\n## ほかの分野にある関連ページ {{#elsewhere}}\n\n種類に{kl}" + ("のどれか" if len(kinds) > 1 else "")
+                    + "を持つ、ほかの分野のページ。\n\n")
+            for g in dict.fromkeys(q.field for q in others):
+                items = "・".join(self.link(host, q) + self.level_mark(q) + self.mark(q) for q in others if q.field == g)
+                out += f"- [{cp.FIELD_TITLES[g]}]({cp.rel_link(host, f'{g}/index.md')})：{items}\n"
         return out
+
+    def entrance_items(self, host: str, group: list[P]) -> str:
+        """入口のページの箇条書き：題名・レベルの印・準備中の印・要約の 1 文目（catalog/README §3.5-1 の「何ができるか」）。
+        表にしないのは、幅 390px の画面でも 1 画面に 6 ページ以上を見せるためである（#58。3 列の表は 1 行 240px 前後あった）。"""
+        out = []
+        for p in group:
+            s = self.first_sentence(p.summary.strip())
+            out.append(f"- {self.link(host, p)}{self.level_mark(p)}{self.mark(p)}" + (f"：{cp.md_text(s)}" if s else ""))
+        return "\n".join(out)
+
+    def entrance_guides(self, f: str, host: str) -> list[str]:
+        """入口の説明の後の段落：分野の注記（FIELD_NOTES）と、関連する案内の 1 段落。学ぶ順は level を持つページのある分野に、
+        使い分けは FIELD_COMPARISONS の節を、問題集は分野のページに FIELD_SET_MIN 問以上載せた問題集を多い順に 3 つまで、
+        自作の手引きは verify か acl を持つページのある分野に付ける。"""
+        out = [self.note_text(host, FIELD_NOTES[f])] if f in FIELD_NOTES else []
+        ps = [p for p in self.pages if p.field == f]
+        parts = []
+        rm = self.by_id.get("roadmap")
+        if rm and any(p.level for p in ps):
+            parts.append("学ぶ順：" + self.link(host, rm, "reading-order"))
+        mc = self.by_id.get("method-comparison")
+        if mc and FIELD_COMPARISONS.get(f):
+            titles = {s["anchor"]: s["title"] for s in mc.sections}
+            links = [self.link(host, mc, a, text=cp.md_text(titles[a]).replace("[", "\\[").replace("]", "\\]"))
+                     for a in FIELD_COMPARISONS[f] if a in titles and not mc.stub]
+            parts.append("使い分け：" + ("・".join(links) or self.link(host, mc)))
+        sets = self.field_sets(f)
+        psets = self.by_id.get("problem-sets")
+        if sets and psets:
+            if self.has_block("problem-sets", "problem-sets"):
+                links = [f"[{PROBLEM_SET_SHORT.get(c, cp.contest_name(c))}]({cp.rel_link(host, psets.rel)}#problem-sets-{c})" for c in sets]
+                parts.append("問題集：" + "・".join(links))
+            else:
+                parts.append("問題集：" + self.link(host, psets, "sets-to-pages"))
+        ld = self.by_id.get("library-design")
+        if ld and any(p.verify or p.acl for p in ps):
+            parts.append("自作：" + self.link(host, ld))
+        if parts:
+            out.append("。".join(parts) + "。")
+        return out
+
+    def field_sets(self, f: str) -> list[str]:
+        """分野のページに FIELD_SET_MIN 問以上を載せた問題集（PROBLEM_SETS の contest id）を、問題の多い順に 3 つまで。"""
+        known = [c for c, _ in PROBLEM_SETS]
+        cnt = collections.Counter(self.contest_of(qid) for qid, us in self.uses.items()
+                                  if self.contest_of(qid) in known and any(p.field == f for p, _, _ in us))
+        ranked = sorted((c for c, n in cnt.items() if n >= FIELD_SET_MIN), key=lambda c: (-cnt[c], known.index(c)))
+        return ranked[:3]
+
+    def subject_kinds(self) -> dict[str, list[str]]:
+        """分野 → 主題の種類。種類ごとに、その種類を kind の 1 つ目に持つページが最も多い分野（同数なら分野の並びで前）の主題とする。
+        案内は除く。並びは cp.KINDS の順。例：木 → tree、DP → dp、グラフ探索・最短路・連結性・全域木・フロー・マッチング → graph。"""
+        cnt: dict[str, collections.Counter] = collections.defaultdict(collections.Counter)
+        for p in self.pages:
+            if p.kind and p.kind[0] != "案内":
+                cnt[p.kind[0]][p.field] += 1
+        out: dict[str, list[str]] = collections.defaultdict(list)
+        for k in cp.KINDS:
+            if cnt.get(k):
+                out[min(cnt[k].items(), key=lambda kv: (-kv[1], cp.FIELDS.index(kv[0])))[0]].append(k)
+        return out
+
+    def field_related(self, f: str) -> tuple[list[str], list[P]]:
+        """ほかの分野にある関連ページ：分野の主題の種類のどれかを kind（何番目でもよい）に持つ、ほかの分野のページ。
+        横断の案内（guide・hub・pattern）は除く。例：木の入口に、動的計画法の木 DP・全方位木 DP・二乗の木 DP。"""
+        kinds = self.subject_kinds().get(f, [])
+        others = [q for q in self.pages if q.field != f and q.type not in ("guide", "hub", "pattern") and set(q.kind) & set(kinds)]
+        return kinds, others
+
+    @staticmethod
+    def chapter_main_kind(group: list[P]) -> str | None:
+        """章の主な種類：章のページの過半が kind の 1 つ目に持つ種類（案内は除く）。なければ None。"""
+        c = collections.Counter(p.kind[0] for p in group if p.kind)
+        if not c:
+            return None
+        k, n = c.most_common(1)[0]
+        return k if n * 2 > len(group) and k != "案内" else None
+
+    def chapter_related(self, f: str, ch: str) -> list[P]:
+        """ほかの章の関連ページ：章の主な種類を 2 つ目以降の kind に持つ、同じ分野のほかの章のページ（例：最短路の章に、基本と
+        探索の章の BFS）。主な種類が分野のほかの章の主な種類と同じなら出さない（木の章どうしのように、どれも同じ種類の分野）。"""
+        ps = [p for p in self.pages if p.field == f]
+        chs = list(dict.fromkeys(p.chapter for p in ps if p.chapter))
+        main = {c: self.chapter_main_kind([p for p in ps if p.chapter == c]) for c in chs}
+        k = main.get(ch)
+        if k is None or sum(v == k for v in main.values()) > 1:
+            return []
+        return [q for q in ps if q.chapter != ch and k in q.kind[1:]]
 
     # ---- 一覧
     def level_list(self, lv: str) -> str:
@@ -645,18 +907,33 @@ class Site:
         return getattr(self, "b_" + name.replace("-", "_"))(host)
 
     def b_home_links(self, host: str) -> str:
-        def page(pid: str, text: str | None = None) -> str:
+        """ホームの目的別の入口（Issue #7）。目的ごとに ### の小見出しを立て、最初の行に最初に読むページを置く。
+        ページの題名・節の有無・レベル別の一覧の有無で行が変わる部分をここで作り、目的の説明・対象の読者・ページの読み方は
+        docs/index.md の手書きの部分に書く。"""
+        def page(pid: str, text: str, anchor: str | None = None) -> str:
             p = self.by_id.get(pid)
-            return self.link(host, p, text=text) if p else f"{text or pid}（準備中）"
+            return self.link(host, p, anchor, text=text) if p else f"{text}（準備中）"
 
         lv = "・".join(f"[{x}]({cp.rel_link(host, f'lists/level-{LEVEL_SLUGS[x]}.md')})" for x in self.levels_present()) or "準備中"
-        return "\n".join([
-            f"- {page('knowledge-map', '知識マップ')}：ページの前提関係をたどる",
-            f"- 逆引き辞典：{page('reverse-index-signs', '言い回しから')}・{page('reverse-index-constraints', '制約と計算量から')}",
-            f"- {page('roadmap', '色別ロードマップ')}：色ごとに読むページの順と、最近の ABC の位置ごとの頻出手法",
-            f"- レベル別の一覧：{lv}（[すべての一覧]({cp.rel_link(host, 'lists/index.md')})）",
-            f"- {page('term-index', '用語の索引')}：手法の名前・別名・英語名から引く",
-        ])
+        groups = [
+            ("解けなかった問題から引く", "from-problem", [
+                f"{page('how-to-use', '辞書としての引き方', 'lookup')}：言い回し・制約・手法の名前・問題番号などの手がかりごとに、入口を選ぶ表",
+                f"逆引き辞典：{page('reverse-index-signs', '言い回しから')}・{page('reverse-index-constraints', '制約と計算量から')}",
+                f"{page('term-index', '用語の索引')}：手法の名前・別名・英語名から引く",
+                f"{page('problem-index', '問題番号の索引')}：本文に載せた問題の番号から、その問題を載せたページを引く",
+            ]),
+            ("色ごとに順に学ぶ", "by-color", [
+                f"{page('roadmap', '色別ロードマップ')}：色ごとに読むページの順と、最近の ABC の位置ごとの頻出手法"
+                f"（進め方は{page('how-to-use', '色ごとに学ぶとき', 'by-color')}）",
+                f"レベル別の一覧：{lv}（[すべての一覧]({cp.rel_link(host, 'lists/index.md')})）",
+                f"{page('knowledge-map', '知識マップ')}：ページの前提関係をたどる",
+            ]),
+            ("初めて使う", "first-time", [
+                f"{page('how-to-use', 'この教材の使い方')}：辞書として引く・色ごとに学ぶ・記録を残す・claude.ai に解説を頼む、の 4 つの使い方",
+                f"{page('notation', '記法と用語の約束')}：計算量・半開区間・添字・数学の記号など、全ページで使う記法と用語の表記",
+            ]),
+        ]
+        return "\n\n".join(f"### {title} {{#{anchor}}}\n\n" + "\n".join(f"- {x}" for x in rows) for title, anchor, rows in groups)
 
     def b_version(self, host: str) -> str:
         return f"索引の版：`{self.version}`（ページの updated の最大：{self.updated or '—'}）"
@@ -932,11 +1209,9 @@ class Site:
         return table(["問題", "位置", "diff", "使う手法のページ"], rows) if rows else "（data/recent-abc.yaml に問題がない）"
 
     def b_problem_sets(self, host: str) -> str:
-        uses: dict[str, list[tuple[P, str]]] = collections.defaultdict(list)
-        for p in self.pages:
-            for q in p.page.problems:
-                if (p, q.role) not in uses[q.id]:
-                    uses[q.id].append((p, q.role))
+        """問題集と ABC・ARC・AGC 以外のコンテストの問題 → ページ（役割）。ページは問題番号の索引と同じく例題のページを先にし、
+        例題の小見出し・一覧の節へ跳ぶ（_problem_uses）。"""
+        uses = self.uses
         sets: dict[str, list[str]] = collections.defaultdict(list)
         for qid in uses:
             e = self.ledger.get(qid) or {}
@@ -954,9 +1229,77 @@ class Site:
             for qid in sorted(sets[cid], key=lambda x: (str((self.ledger.get(x) or {}).get("index", "")).zfill(4), x)):
                 info = self.used_problems[qid]
                 rows.append([cp.md_text(info["label"], table=True), str(info["difficulty"] or "—"),
-                             "、".join(self.link(host, p, table_cell=True) + f"（{cp.ROLE_JA.get(r, r)}）" for p, r in uses[qid])])
+                             "、".join(self.problem_link(host, p, a, table_cell=True) + f"（{cp.ROLE_JA.get(r, r)}）" for p, r, a in uses[qid])])
             out.append(f"### {cp.md_text(names.get(cid, cp.contest_name(cid)))} {{#problem-sets-{cid}}}\n\n" + table(["問題", "diff", "ページ（役割）"], rows))
         return "\n\n".join(out) or "（本文の問題の一覧に、問題集の問題がまだない）"
+
+    # ---- 問題番号の索引（Issue #6。guide/problem-index.md の problem-index-<区分>）
+    # 本文の例題・練習・力試しに載せた全問題（台帳で pages を持つ問題と同じ。check_pages・fix_problems が一致を見る）を、
+    # ABC・ARC・AGC・問題集・そのほかに分けて回の順に並べる。1 行は「表示名 → ページ（役割）」で、例題として載せたページを先に
+    # 置く。表示名は問題の一覧の label と同じで、atcoder.jp へのリンクは付けない（style-guide §2.5）。ページへのリンクは、
+    # 例題なら例題の小見出し、練習・力試しなら一覧の節へ跳ぶ（_problem_uses）。狭い画面で列が細らないよう、表ではなく箇条書きにする
+    def index_line(self, host: str, qid: str) -> str:
+        pages = "、".join(self.problem_link(host, p, a) + f"（{cp.ROLE_JA.get(r, r)}）" for p, r, a in self.uses[qid])
+        return f"- {cp.md_text(self.used_problems[qid]['label'])} → {pages}"
+
+    def index_lines(self, host: str, qids: list[str]) -> str:
+        return "\n".join(self.index_line(host, q) for q in qids)
+
+    def recent_note(self, host: str, lo: int, hi: int) -> str | None:
+        """ABC の回 lo〜hi に最近の ABC の表（recent-abc.yaml）の回が入るなら、本文に載せていない問題もその表で引けることの 1 文。"""
+        psets = self.by_id.get("problem-sets")
+        es = []
+        for e in self.recent:
+            m = SERIES_RE.fullmatch(e["id"].rpartition("_")[0])
+            if m and m.group("series") == "abc" and lo <= int(m.group("num")) <= hi:
+                es.append((int(m.group("num")), e))
+        if psets is None or not es:
+            return None
+        pos = sorted({str(e["position"]) for _, e in es if e.get("position")})
+        run = len(pos) > 2 and all(len(x) == 1 for x in pos) and [ord(x) for x in pos] == list(range(ord(pos[0]), ord(pos[0]) + len(pos)))
+        where = (f"の {pos[0]}〜{pos[-1]}" if run else f"の {'・'.join(pos)}" if pos else "") + f"（{len(es)} 問）"
+        a, b = min(n for n, _ in es), max(n for n, _ in es)
+        return (f"ABC{a:03d}" + (f"〜ABC{b:03d}" if b > a else "") + f" {where}は、本文に載せていない問題も"
+                f"{self.link(host, psets, 'recent-abc', text='最近の ABC → ページ')}の表で、使う手法のページを引ける。")
+
+    def b_problem_index_abc(self, host: str) -> str:
+        """ABC：先頭に跳び先の行、回の ABC_RANGE ごとの小見出し（{#abc-001}・{#abc-050}…）。最後の小見出しは載せた最後の回まで。"""
+        qs = self.index_parts["abc"]
+        if not qs:
+            return "（本文の問題の一覧に、ABC の問題がまだない）"
+        num = {q: int(SERIES_RE.fullmatch(self.contest_of(q)).group("num")) for q in qs}
+        top = max(num.values())
+        groups: dict[int, list[str]] = {}
+        for q in qs:
+            groups.setdefault(num[q] // ABC_RANGE * ABC_RANGE, []).append(q)
+        spans = {lo: (max(lo, 1), min(lo + ABC_RANGE - 1, top)) for lo in groups}
+        out = ["・".join(f"[{a:03d}〜{b:03d}](#abc-{a:03d})" for a, b in spans.values())]
+        for lo, g in groups.items():
+            a, b = spans[lo]
+            note = self.recent_note(host, a, b)
+            out.append(f"### ABC{a:03d}〜ABC{b:03d} {{#abc-{a:03d}}}\n\n" + (f"{note}\n\n" if note else "") + self.index_lines(host, g))
+        return "\n\n".join(out)
+
+    def b_problem_index_arc(self, host: str) -> str:
+        return self.index_lines(host, self.index_parts["arc"]) or "（本文の問題の一覧に、ARC の問題がまだない）"
+
+    def b_problem_index_agc(self, host: str) -> str:
+        return self.index_lines(host, self.index_parts["agc"]) or "（本文の問題の一覧に、AGC の問題がまだない）"
+
+    def b_problem_index_sets(self, host: str) -> str:
+        """問題集：先頭に跳び先の行、問題集ごとの小見出し（{#sets-typical90} など。並びと見出しは PROBLEM_SETS）。"""
+        names = dict(PROBLEM_SETS)
+        groups: dict[str, list[str]] = {}
+        for q in self.index_parts["sets"]:
+            groups.setdefault(self.contest_of(q), []).append(q)
+        if not groups:
+            return "（本文の問題の一覧に、問題集の問題がまだない）"
+        out = ["・".join(f"[{cp.md_text(PROBLEM_SET_SHORT.get(c, names[c]))}](#sets-{c})" for c in groups)]
+        out += [f"### {cp.md_text(names[c])} {{#sets-{c}}}\n\n" + self.index_lines(host, g) for c, g in groups.items()]
+        return "\n\n".join(out)
+
+    def b_problem_index_other(self, host: str) -> str:
+        return self.index_lines(host, self.index_parts["other"]) or "（本文の問題の一覧に、そのほかのコンテストの問題がまだない）"
 
     def b_verify_table(self, host: str) -> str:
         rows = [[self.link(host, p, table_cell=True) + self.mark(p), cp.FIELD_TITLES[p.field],

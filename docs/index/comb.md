@@ -145,6 +145,24 @@ search:
     - `counting-mindset#contribution-with-binomial` 二項係数と組み合わせた寄与（残りの選び方を掛ける）（青）：https://yuukougun.github.io/kyopro-atlas/comb/counting-mindset/#contribution-with-binomial
     - `counting-mindset#verify-small` 小さいケースの全探索で式を検算する：https://yuukougun.github.io/kyopro-atlas/comb/counting-mindset/#verify-small
 
+## 順序を固定して数える（counting-fix-order） {#counting-fix-order}
+
+- id：`counting-fix-order`　レベル：水　段階：reviewed　type：technique
+- URL：https://yuukougun.github.io/kyopro-atlas/comb/counting-fix-order/
+- 別名：相対順序の固定、ソートしてから数える、数える順番の工夫、n!/k!
+- 種類：数え上げ、考察
+- 前提：`counting-mindset`
+- サイン：
+    - 言い回し：A は B より先に来る、という順番の制約がある並べ方の数
+    - 言い回し：選んだ K 個の最大値（最小値）の総和
+    - 言い回し：木の頂点に、親が子より先になるように番号を振る方法の数
+- 節：
+    - `counting-fix-order#relative-order` 相対順序を固定する（n!/k!）：https://yuukougun.github.io/kyopro-atlas/comb/counting-fix-order/#relative-order
+    - `counting-fix-order#sort-and-fix` ソートして最大・最小を固定する：https://yuukougun.github.io/kyopro-atlas/comb/counting-fix-order/#sort-and-fix
+    - `counting-fix-order#bfs-order` 積の法則が使える順番で決める（BFS 順）：https://yuukougun.github.io/kyopro-atlas/comb/counting-fix-order/#bfs-order
+    - `counting-fix-order#tree-order` 木の上の順番 n!/Π 部分木の大きさ（黄）：https://yuukougun.github.io/kyopro-atlas/comb/counting-fix-order/#tree-order
+    - `counting-fix-order#vs-dp` 順序を状態に持つ DP（挿入 DP・bitDP）との使い分け：https://yuukougun.github.io/kyopro-atlas/comb/counting-fix-order/#vs-dp
+
 ## 対応づけ・数える対象の言い換え（counting-bijection） {#counting-bijection}
 
 - id：`counting-bijection`　レベル：青　段階：reviewed　type：technique
@@ -163,24 +181,6 @@ search:
     - `counting-bijection#to-lattice-paths` 格子路に帰着できないかを疑う：https://yuukougun.github.io/kyopro-atlas/comb/counting-bijection/#to-lattice-paths
     - `counting-bijection#classic-bijections` 括弧列と格子路、ラベル付き木と Prüfer 列：https://yuukougun.github.io/kyopro-atlas/comb/counting-bijection/#classic-bijections
     - `counting-bijection#non-injective` 単射でない対応は重複する：https://yuukougun.github.io/kyopro-atlas/comb/counting-bijection/#non-injective
-
-## 順序を固定して数える（counting-fix-order） {#counting-fix-order}
-
-- id：`counting-fix-order`　レベル：水　段階：reviewed　type：technique
-- URL：https://yuukougun.github.io/kyopro-atlas/comb/counting-fix-order/
-- 別名：相対順序の固定、ソートしてから数える、数える順番の工夫、n!/k!
-- 種類：数え上げ、考察
-- 前提：`counting-mindset`
-- サイン：
-    - 言い回し：A は B より先に来る、という順番の制約がある並べ方の数
-    - 言い回し：選んだ K 個の最大値（最小値）の総和
-    - 言い回し：木の頂点に、親が子より先になるように番号を振る方法の数
-- 節：
-    - `counting-fix-order#relative-order` 相対順序を固定する（n!/k!）：https://yuukougun.github.io/kyopro-atlas/comb/counting-fix-order/#relative-order
-    - `counting-fix-order#sort-and-fix` ソートして最大・最小を固定する：https://yuukougun.github.io/kyopro-atlas/comb/counting-fix-order/#sort-and-fix
-    - `counting-fix-order#bfs-order` 積の法則が使える順番で決める（BFS 順）：https://yuukougun.github.io/kyopro-atlas/comb/counting-fix-order/#bfs-order
-    - `counting-fix-order#tree-order` 木の上の順番 n!/Π 部分木の大きさ（黄）：https://yuukougun.github.io/kyopro-atlas/comb/counting-fix-order/#tree-order
-    - `counting-fix-order#vs-dp` 順序を状態に持つ DP（挿入 DP・bitDP）との使い分け：https://yuukougun.github.io/kyopro-atlas/comb/counting-fix-order/#vs-dp
 
 ## 重複の除き方（counting-dedup） {#counting-dedup}
 
@@ -260,22 +260,6 @@ search:
     - `binomial-identities#power-sums` 二項定理で累乗の和を展開する：https://yuukougun.github.io/kyopro-atlas/comb/binomial-identities/#power-sums
     - `binomial-identities#verify` 式変形の検算（小さいケース）：https://yuukougun.github.io/kyopro-atlas/comb/binomial-identities/#verify
 
-## 二項係数の部分和（binomial-prefix-sum） {#binomial-prefix-sum}
-
-- id：`binomial-prefix-sum`　レベル：発展　段階：reviewed　type：overview
-- URL：https://yuukougun.github.io/kyopro-atlas/comb/binomial-prefix-sum/
-- 別名：二項係数の累積和、Σ_{k≤K} C(n,k)
-- 種類：数え上げ
-- 前提：`binomial-precompute`
-- サイン：
-    - 式の形：答えの式に Σ_{k≤K} C(n,k) の形の和が、多くの (n, K) について現れる
-- 節：
-    - `binomial-prefix-sum#what` 何ができるか：https://yuukougun.github.io/kyopro-atlas/comb/binomial-prefix-sum/#what
-    - `binomial-prefix-sum#update` n と K を 1 ずつ動かす更新式：https://yuukougun.github.io/kyopro-atlas/comb/binomial-prefix-sum/#update
-    - `binomial-prefix-sum#order` Mo のように動かす順番を工夫する：https://yuukougun.github.io/kyopro-atlas/comb/binomial-prefix-sum/#order
-    - `binomial-prefix-sum#with-inclusion-exclusion` 包除と組み合わせる例：https://yuukougun.github.io/kyopro-atlas/comb/binomial-prefix-sum/#with-inclusion-exclusion
-    - `binomial-prefix-sum#library` 自作するときの要点：https://yuukougun.github.io/kyopro-atlas/comb/binomial-prefix-sum/#library
-
 ## 鏡像法とカタラン数（reflection-principle） {#reflection-principle}
 
 - id：`reflection-principle`　レベル：黄　段階：reviewed　type：technique
@@ -295,6 +279,22 @@ search:
     - `reflection-principle#offset` 折り返す線のずれ（+1）と条件を満たせないときの 0：https://yuukougun.github.io/kyopro-atlas/comb/reflection-principle/#offset
     - `reflection-principle#vs-dp` 括弧列を DP で数えるときとの使い分け：https://yuukougun.github.io/kyopro-atlas/comb/reflection-principle/#vs-dp
     - `reflection-principle#two-sided` 両端を越えない場合（発展）：https://yuukougun.github.io/kyopro-atlas/comb/reflection-principle/#two-sided
+
+## 二項係数の部分和（binomial-prefix-sum） {#binomial-prefix-sum}
+
+- id：`binomial-prefix-sum`　レベル：発展　段階：reviewed　type：overview
+- URL：https://yuukougun.github.io/kyopro-atlas/comb/binomial-prefix-sum/
+- 別名：二項係数の累積和、Σ_{k≤K} C(n,k)
+- 種類：数え上げ
+- 前提：`binomial-precompute`
+- サイン：
+    - 式の形：答えの式に Σ_{k≤K} C(n,k) の形の和が、多くの (n, K) について現れる
+- 節：
+    - `binomial-prefix-sum#what` 何ができるか：https://yuukougun.github.io/kyopro-atlas/comb/binomial-prefix-sum/#what
+    - `binomial-prefix-sum#update` n と K を 1 ずつ動かす更新式：https://yuukougun.github.io/kyopro-atlas/comb/binomial-prefix-sum/#update
+    - `binomial-prefix-sum#order` Mo のように動かす順番を工夫する：https://yuukougun.github.io/kyopro-atlas/comb/binomial-prefix-sum/#order
+    - `binomial-prefix-sum#with-inclusion-exclusion` 包除と組み合わせる例：https://yuukougun.github.io/kyopro-atlas/comb/binomial-prefix-sum/#with-inclusion-exclusion
+    - `binomial-prefix-sum#library` 自作するときの要点：https://yuukougun.github.io/kyopro-atlas/comb/binomial-prefix-sum/#library
 
 ## LGV 補題（lgv-lemma） {#lgv-lemma}
 
@@ -730,24 +730,6 @@ search:
     - `expected-value-dp#prefix-sum` 遷移を累積和でまとめる（青）：https://yuukougun.github.io/kyopro-atlas/comb/expected-value-dp/#prefix-sum
     - `expected-value-dp#vs-probability-dp` 前向きの確率 DP との使い分け：https://yuukougun.github.io/kyopro-atlas/comb/expected-value-dp/#vs-probability-dp
 
-## 最適戦略の期待値（optimal-strategy-expectation） {#optimal-strategy-expectation}
-
-- id：`optimal-strategy-expectation`　レベル：黄　段階：reviewed　type：technique
-- URL：https://yuukougun.github.io/kyopro-atlas/comb/optimal-strategy-expectation/
-- 別名：最適停止、expectimax、期待値の最大化、optimal stopping
-- 種類：確率・期待値、DP
-- 前提：`expected-value-dp`
-- サイン：
-    - 言い回し：最適に行動したときの期待値（勝率）
-    - 言い回し：好きなタイミングでやめられる・最初からやり直せる
-    - 言い回し：どれを残すか（どれを選ぶか）を選びながら進む
-- 節：
-    - `optimal-strategy-expectation#state-design` 残すもの・知っている情報を状態にする：https://yuukougun.github.io/kyopro-atlas/comb/optimal-strategy-expectation/#state-design
-    - `optimal-strategy-expectation#stopping` 止めるタイミングを選ぶ（相手の得点の分布と比べる）：https://yuukougun.github.io/kyopro-atlas/comb/optimal-strategy-expectation/#stopping
-    - `optimal-strategy-expectation#compare-real` 比較は実数で、答えは mod で（比較できない落とし穴）：https://yuukougun.github.io/kyopro-atlas/comb/optimal-strategy-expectation/#compare-real
-    - `optimal-strategy-expectation#guess-answer` やり直しがあるときは答えを仮定して二分探索する：https://yuukougun.github.io/kyopro-atlas/comb/optimal-strategy-expectation/#guess-answer
-    - `optimal-strategy-expectation#vs-max` 「最大値の期待値」との違い：https://yuukougun.github.io/kyopro-atlas/comb/optimal-strategy-expectation/#vs-max
-
 ## 閉路のある期待値（expectation-linear-equations） {#expectation-linear-equations}
 
 - id：`expectation-linear-equations`　レベル：青　段階：reviewed　type：technique
@@ -768,6 +750,24 @@ search:
     - `expectation-linear-equations#geometric-series` 等比級数で閉じる（交互に繰り返す）：https://yuukougun.github.io/kyopro-atlas/comb/expectation-linear-equations/#geometric-series
     - `expectation-linear-equations#linear-system` 一般の連立方程式（掃き出し法は math へ）：https://yuukougun.github.io/kyopro-atlas/comb/expectation-linear-equations/#linear-system
     - `expectation-linear-equations#infinite` b = 1 のとき（期待値が無限大）：https://yuukougun.github.io/kyopro-atlas/comb/expectation-linear-equations/#infinite
+
+## 最適戦略の期待値（optimal-strategy-expectation） {#optimal-strategy-expectation}
+
+- id：`optimal-strategy-expectation`　レベル：黄　段階：reviewed　type：technique
+- URL：https://yuukougun.github.io/kyopro-atlas/comb/optimal-strategy-expectation/
+- 別名：最適停止、expectimax、期待値の最大化、optimal stopping
+- 種類：確率・期待値、DP
+- 前提：`expected-value-dp`
+- サイン：
+    - 言い回し：最適に行動したときの期待値（勝率）
+    - 言い回し：好きなタイミングでやめられる・最初からやり直せる
+    - 言い回し：どれを残すか（どれを選ぶか）を選びながら進む
+- 節：
+    - `optimal-strategy-expectation#state-design` 残すもの・知っている情報を状態にする：https://yuukougun.github.io/kyopro-atlas/comb/optimal-strategy-expectation/#state-design
+    - `optimal-strategy-expectation#stopping` 止めるタイミングを選ぶ（相手の得点の分布と比べる）：https://yuukougun.github.io/kyopro-atlas/comb/optimal-strategy-expectation/#stopping
+    - `optimal-strategy-expectation#compare-real` 比較は実数で、答えは mod で（比較できない落とし穴）：https://yuukougun.github.io/kyopro-atlas/comb/optimal-strategy-expectation/#compare-real
+    - `optimal-strategy-expectation#guess-answer` やり直しがあるときは答えを仮定して二分探索する：https://yuukougun.github.io/kyopro-atlas/comb/optimal-strategy-expectation/#guess-answer
+    - `optimal-strategy-expectation#vs-max` 「最大値の期待値」との違い：https://yuukougun.github.io/kyopro-atlas/comb/optimal-strategy-expectation/#vs-max
 
 ## 期待値と確率の変換（expectation-tail-sum） {#expectation-tail-sum}
 

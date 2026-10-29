@@ -5,7 +5,7 @@ aliases: [等比級数, geometric series, repunit, Σ A^i, 同じ数字を並べ
 type: technique
 field: math
 chapter: mod の計算
-order: 80
+order: 65
 level: 基礎
 kind: [整数論, ダブリング・分割統治]
 prerequisites: [mod-inverse]
