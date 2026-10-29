@@ -27,7 +27,7 @@ sections:
   - {title: K 回の合成と元に戻る回数（巡回の長さの lcm）, anchor: power, level: 青}
   - {title: Functional graph との関係, anchor: functional-graph}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -97,7 +97,7 @@ updated: 2026-10-22
 
 ## 隣接 swap（転倒数）との違い {#vs-adjacent}
 
-swap できるのが隣り合う 2 要素だけなら、ソートの最小回数は巡回では決まらず、[転倒数](../ds/inversion-number.md)（$i < j$ かつ $P_i > P_j$ となる組の数）になる。隣接 swap 1 回では転倒数がちょうど 1 だけ変わるので、転倒数より少ない回数ではソートできない。逆に、ソートされていなければ $P_i > P_{i+1}$ となる隣り合う組があり、それを swap すれば転倒数は 1 減るので、転倒数の回数で足りる。隣接 swap は任意の swap の特別な場合なので、任意の swap の最小回数は転倒数以下になる。
+swap できるのが隣り合う 2 要素だけなら、ソートの最小回数は巡回では決まらず、[転倒数](../ds/inversion-number.md#adjacent-swaps)（$i < j$ かつ $P_i > P_j$ となる組の数）になる。隣接 swap 1 回で転倒数はちょうど 1 だけ変わり、ソートされていなければ隣り合う転倒した組を swap して 1 減らせるからである。隣接 swap は任意の swap の特別な場合なので、任意の swap の最小回数は転倒数以下になる。
 
 | 列 | 巡回の個数 | 任意の swap | 隣接 swap（転倒数） |
 | --- | --- | --- | --- |

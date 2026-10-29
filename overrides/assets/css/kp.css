@@ -222,7 +222,8 @@
 
 /* difficulty の色（AtCoder Problems の帯：灰〜399・茶〜799・緑〜1199・水〜1599・青〜1999・黄〜2399・橙〜2799・赤 2800〜）。
    丸は帯の色で、帯の中の位置まで下から塗る（--kp-diff-fill は progress.js が付ける）。
-   文字は背景に対して読める濃さに直した色（--kp-diff-text）。「diff —」には付けない */
+   文字は背景に対して読める濃さに直した色（--kp-diff-text）。「diff なし」には付けない。
+   参考値の「diff 1856・参考値」では「diff 1856」の部分だけに付ける */
 .md-typeset .kp-diff {
   color: var(--kp-diff-text);
   font-weight: 700;

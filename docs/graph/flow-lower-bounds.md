@@ -23,7 +23,7 @@ sections:
   - {title: 超頂点で過不足を調整して判定する, anchor: super-vertex}
   - {title: 自作するときの要点と Library Checker, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -96,9 +96,9 @@ ACL に下限付きの最大流そのものはなく、`mf_graph` で超頂点�
 
 ## 学ぶための資料 {#resources}
 
-- snuke 氏の「最小流量制限付き最大流」：下限を容量から引き、超頂点で過不足を補う作り方と、辺を流す順序の注意
-- Luzhiled's Library の「Max Flow Lower Bound」：判定・最大の流量・最小の流量をまとめたライブラリの形
-- cp-algorithms の「Flows with demands」（英語）：下限で入る分と出る分を超頂点への辺にする作り方と、最小の流量を二分探索で求める方法
+- [snuke「最小流量制限付き最大流」](https://snuke.hatenablog.com/entry/2016/07/10/043918)：下限を容量から引き、超頂点で過不足を補う作り方と、辺を流す順序の注意
+- [Luzhiled's Library「Max Flow Lower Bound」](https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.hpp)：判定・最大の流量・最小の流量をまとめたライブラリの形
+- [cp-algorithms「Flows with demands」](https://cp-algorithms.com/graph/flow_with_demands.html)（英語）：下限で入る分と出る分を超頂点への辺にする作り方と、最小の流量を二分探索で求める方法
 
 ## 例題 {#examples}
 

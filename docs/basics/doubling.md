@@ -27,7 +27,7 @@ sections:
   - {title: 置換の K 回合成, anchor: permutation-power}
   - {title: 段数とメモリの見積もり, anchor: memory}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -240,7 +240,7 @@ $$
 
 - [ABC367 E. Permute K times](https://atcoder.jp/contests/abc367/tasks/abc367_e)（diff 1370）：各 i について B_i = A_{X_i} とする操作を K ≤ 10^18 回行った後の数列を求める。
 - [ABC258 E. Packing Potatoes](https://atcoder.jp/contests/abc258/tasks/abc258_e)（diff 1545）：じゃがいもを順に箱に詰めていくとき、K 個目の箱に入るじゃがいもの数を答えるクエリに答える。
-- [ABC013 D. 阿弥陀](https://atcoder.jp/contests/abc013/tasks/abc013_4)（diff 1730）：あみだくじを D 回つなげたときの、各縦線の行き先を求める。
+- [ABC013 D. 阿弥陀](https://atcoder.jp/contests/abc013/tasks/abc013_4)（diff 1730・参考値）：あみだくじを D 回つなげたときの、各縦線の行き先を求める。
 
 </div>
 

@@ -5,7 +5,7 @@ aliases: [global offset, オフセット, 全体加算, 反転フラグ, 回転�
 type: technique
 field: ds
 chapter: 標準コンテナの応用
-order: 60
+order: 24
 level: 基礎
 kind: [データ構造, クエリ処理の工夫]
 prerequisites: [stl-containers]
@@ -28,7 +28,7 @@ sections:
   - {title: 回転は先頭位置の添字で表す, anchor: rotation}
   - {title: 遅延セグメント木とのつながり（全体への操作を区間への操作に広げる）, anchor: to-lazy-segment-tree, level: 水}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -197,7 +197,7 @@ $\mathrm{diff}$ を map ではなく長さ $N$ の配列にすると、空にす
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [典型90 044. Shift and Swapping（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_ar)（diff —）：配列の右回転・2 要素の交換・参照のクエリを処理する。
+- [典型90 044. Shift and Swapping（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_ar)（diff なし）：配列の右回転・2 要素の交換・参照のクエリを処理する。
 - [ABC199 C. IPFL](https://atcoder.jp/contests/abc199/tasks/abc199_c)（diff 436）：長さ 2N の文字列に、2 文字の入れ替えと前半・後半の入れ替えを繰り返した後の文字列を求める。
 - [ARC077 C. pushpush](https://atcoder.jp/contests/arc077/tasks/arc077_a)（diff 552）：末尾への追加と全体の反転を繰り返した後の列を求める。
 - [ABC278 D. All Assign Point Add](https://atcoder.jp/contests/abc278/tasks/abc278_d)（diff 559）：全体への一括代入・一点への加算・一点の取得のクエリを処理する。

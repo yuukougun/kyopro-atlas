@@ -27,7 +27,7 @@ sections:
   - {title: ライブラリでの使い方, anchor: library}
   - {title: 第 2 種との違い, anchor: vs-second-kind}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -171,8 +171,8 @@ Library Checker で確かめられる問題は[練習問題の節](#practice)に
 
 ## 学ぶための資料 {#resources}
 
-- いかたこ（ikatakos）氏の ABC247 の記録の Ex の節：swap の最小回数を巡回の個数に直し、第 1 種スターリング数の行を色ごとに畳み込む流れが、表を使って丁寧に書かれている。
-- Nyaan's Library の有名な数列（fps-famous-series）：1 行を Taylor shift の倍化で、列 $c(n, K)$ を FPS の累乗で求める実装。自作するときの関数の分け方の参考になる。
+- [ikatakos「AtCoder Beginner Contest 247 E,G,Ex問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0410_abc247)の Ex の節：swap の最小回数を巡回の個数に直し、第 1 種スターリング数の行を色ごとに畳み込む流れが、表を使って丁寧に書かれている。
+- [Nyaan「Nyaan's Library: 有名な数列（fps/fps-famous-series.hpp）」](https://nyaannyaan.github.io/library/fps/fps-famous-series.hpp)：1 行を Taylor shift の倍化で、列 $c(n, K)$ を FPS の累乗で求める実装。自作するときの関数の分け方の参考になる。
 - Library Checker の 3 問（[練習問題の節](#practice)の一覧）：自作した関数の確かめに使う。問題文の定義は符号付きである。
 
 ## 例題 {#examples}

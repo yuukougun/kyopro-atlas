@@ -16,7 +16,7 @@
 | `make_skeleton.py` | catalog から骨格のページ（stage: stub）を作る。front matter と要点の囲みだけ。あるページは上書きしない | `docs/<field>/<id>.md` |
 | `gen_site.py` | front matter・本文の問題の一覧・台帳・最近の ABC から生成物を作る。`--check` で鮮度だけを見る。試験は `python3 -m unittest discover -s tests/tools`（test_gen_site.py） | `nav.yml`・`docs/<field>/index.md`・`docs/lists/`・`docs/llms.txt`・`docs/index/`・`overrides/assets/data/graph.json`・手書きのページの目印の中 |
 | `check_pages.py` | ページの検査（front matter の schema・id・参照・循環・レベル・問題の一覧と台帳・囲みの外の問題リンク・```cpp・要点の囲み・draft 以降の節の anchor と別名・本文のリンク・描画の崩れ） | なし |
-| `fix_problems.py` | 本文の問題の一覧の各行の label・URL・difficulty を台帳から作り直す（要約は変えない）。`- abc300_e：要約` と書けば行を作る。`--check` は台帳の pages にあるのに本文の囲みにない問題も警告に出す | ページ（`--check` では書かない） |
+| `fix_problems.py` | 本文の問題の一覧の各行の label・URL・difficulty を台帳から作り直す（要約は変えない）。difficulty は `（diff 1354）`、台帳で参考値（`experimental: true`）のものは `（diff 1856・参考値）`、値のないものは `（diff なし）` と書く（#5・#76。前の形の `（diff —）` も読んで直す）。`- abc300_e：要約` と書けば行を作る。`--check` は台帳の pages にあるのに本文の囲みにない問題も警告に出す | ページ（`--check` では書かない） |
 | `fix_code_links.py` | 本文に取り込んだコード片（```` ```cpp ```` の中の `--8<--`）の下に、GitHub の完全なプログラムへのリンクの行を置き、取り込む範囲に `mint` が出れば同じ行に型と modint のページへのリンクを添える。地の文の `` `snippets/<id>/<名前>` `` も同じ URL へのリンクにする（#8・#72・#62。下の節）。`--check` で差分、`--stat` で件数だけ。試験は test_fix_code_links.py | ページ（`--check` では書かない） |
 | `frequency.py` | front matter の frequency・frequency_evidence を最近の ABC（recent-abc.yaml）・台帳の古い ABC の数・前提として届くページの数から付け直す（catalog/README §5・手引き §17-7）。`--check` で差分、`--write` でその 2 行だけを書き換える。試験は `python3 -m unittest discover -s tests/tools` | ページの 2 行（`--write`） |
 | `check_snippets.py` | コード片を設定（compilers・flags・expect・cases）どおりにコンパイル・実行して確かめる | なし |
@@ -76,7 +76,7 @@ python3 tools/check_pages.py && python3 tools/gen_site.py --check && mkdocs buil
 | 検証役 | `check_pages.py --page <id> -v` の警告（別名が冒頭にない、complexity が null、要点の「（執筆時に書く）」など）も見る。reviewed にすると別名の欠けはエラーになる |
 | メイン | バッチの終わりに `check_pages.py`・`gen_site.py`（書く）・`gen_site.py --check`・`mkdocs build --strict` を通して commit・push |
 
-台帳の difficulty を `ap.py` で更新したら、`fix_problems.py` で本文の diff を直し、別の commit にする（設計書 §5.4）。
+台帳の difficulty（参考値かどうかの `experimental` も）を `ap.py` で更新したら、`fix_problems.py` で本文の diff を直し、別の commit にする（設計書 §5.4）。
 
 ### 工程10 全体の検証・定期の検査
 
@@ -111,18 +111,21 @@ python3 tools/check_pages.py && python3 tools/gen_site.py --check && mkdocs buil
 
 | 名前 | 中身 | 置く想定のページ |
 | --- | --- | --- |
-| `home-links` | ホームの入口（知識マップ・逆引き辞典・ロードマップ・レベル別の一覧・用語の索引） | `docs/index.md` |
+| `home-links` | ホームの目的別の入口（解けなかった問題から引く・色ごとに順に学ぶ・初めて使う の小見出しと、最初に読むページを先頭にした行） | `docs/index.md` |
 | `signs-phrase`・`signs-shape` | 逆引き辞典：言い回しから（kind で5つに分ける）・立てた式の形から | `guide/reverse-index-signs.md` |
 | `signs-constraint` | 逆引き辞典：制約の上限の数ごとの候補のページ | `guide/reverse-index-constraints.md` |
 | `terms-kana`・`terms-latin`・`terms-shared` | 用語の索引（題名・別名・acl）：かな・漢字・記号／英数字／複数のページに当たる語 | `guide/term-index.md` |
 | `roadmap-order`・`recent-positions` | 色ごとのページの列（D17）・位置ごとの頻出手法（最近30回の E・F・G） | `guide/roadmap.md` |
 | `recent-abc`・`problem-sets` | 最近の ABC → ページ・問題集の問題 → ページ | `guide/problem-sets.md` |
+| `problem-index-abc`・`problem-index-arc`・`problem-index-agc`・`problem-index-sets`・`problem-index-other` | 問題番号の索引（本文に載せた全問題 → ページ（役割））：ABC（回の 50 ごとの小見出し）・ARC・AGC・問題集（問題集ごとの小見出し）・そのほかのコンテスト | `guide/problem-index.md` |
 | `verify-table` | ページ → Library Checker の問題 | `guide/library-design.md` |
 | `version`・`fields`・`lists`・`stage-summary` | 索引の版・章の一覧（15 の分野と最後の章「一覧」）・一覧へのリンク・制作状況の表（どこに置いてもよい） | 任意 |
 
 - `signs-constraint` の帯は、サインの文から読んだ上限の数で決める（`constraint_bound`）。読むのは「≤・<・≦・≈」の後の数と、後ろに 程度・前後・規模・級・以下・未満・以内・まで・個・回 が続く数と、「10^9〜10^18 と広い」のように範囲だけで書いた数の上端（後ろが で・と・の・読点・句点・閉じかっこ・文の終わりのときだけで、「3〜5 秒」は読まない）で、見積もりの式（`O(N√N) ≈ 10^8`・`60^4 ≈ 1.3×10^7`）・下限（「個以上」「を超える」）・式の一部の数（`N^2`・`M + 1`）は読まない。選ぶ順は、個数・回数（N・Q・K・個数・長さ・総和など）の上限を値の上限（A_i・座標・値）より先に → かっこの外の数を中の数より先に → 「≤」などで書いた数 → 後ろの語で読んだ数 → 範囲だけで書いた数 → 最初に書かれた数。読めないサインは「数の上限で分けられないもの」に入る
 - `terms-latin` は、先頭に跳び先の行を置き、数字と A〜Z ごとに小見出し（`{#terms-latin-digits}`・`{#terms-latin-a}` など）を立てる
 - `recent-abc`・`recent-positions` の問題は、問題の一覧の label と同じ表示名（ABC451 D. Concat Power of 2。ロードマップの列は短い ABC451 D）で書く。台帳にない問題もあるので recent-abc.yaml の id・position・title から作る。ロードマップの列の短い表示名は、狭い画面で「ABC451」と「D」が 2 行に割れないよう、間の空白を `&nbsp;` にする。ロードマップの表は 4 列で、列ごとの最小幅（5rem）のためスマートフォンの画面の右端を越えるので、問題の列が画面の内側に来るよう、数字だけの問題数を最後の列に置く
+- `problem-index-*` の 1 行は「表示名 → ページ（役割）」で、例題として載せたページを先に置く。ページへのリンクは、本文の問題の行の上にある直近の見出しの anchor（例題の小見出し `#abc300_e` か一覧の節 `#practice`・`#challenge`）へ跳ぶ。ABC は先頭に跳び先の行を置き、回の 50 ごとに小見出し（`{#abc-001}`・`{#abc-050}` など）を立て、最近の ABC の表（recent-abc.yaml）の回を含む小見出しには、本文にない問題もその表で引けることの 1 文を添える。問題集は先頭に跳び先の行を置き、問題集ごとに小見出し（`{#sets-typical90}` など）を立てる。`problem-sets` の表のページの並びとリンクも同じにする
+- 分野の入口（`docs/<field>/index.md`）は、章ごとのページを箇条書き（題名・レベルの小さな印 `span.kp-mini`・準備中の印・要約の 1 文目）にし、説明の後に分野の注記（`FIELD_NOTES`）と関連する案内の 1 段落（学ぶ順・使い分けの節 `FIELD_COMPARISONS`・その分野の問題の多い問題集・自作の手引き）を、章の後にほかの章の関連ページを、最後にほかの分野にある関連ページ（分野の主題の kind を持つページ）を出す。章の中は order の順のままで、order の付け方の方針は gen_site.py の entrance の注記にある
 - 用語の索引の漢字で始まる語は、読みがないので最初の字の順に並ぶ（読みの表か pykakasi を足すかは工程10 の残り。planning/progress.md に記録する）
 - 節（`#anchor`）へのリンクは、相手のページが draft 以降のときだけ付ける（stub のページには見出しがまだない）
 - 生成物の Markdown には atcoder.jp の問題へのリンクを書かない（問題は表示名で書き、リンクは本文の問題の囲みの中だけ。interfaces.md §3・style-guide §2.5）

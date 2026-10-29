@@ -24,7 +24,7 @@ sections:
   - {title: 2 点からの距離を比べる, anchor: from-two}
   - {title: 根からの累積値で 2 点間を表す（XOR は LCA が不要、和は LCA が要る）, anchor: root-prefix}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -176,7 +176,7 @@ XOR の形に直せると、木の上の頂点の組の問題が、列 $S$ の 2
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [ARC045 C. エックスオア多橋君](https://atcoder.jp/contests/arc045/tasks/arc045_c)（diff 2022）：重み付きの木で、パス上の辺の重みの XOR がちょうど X になる頂点の組の数を求める。
+- [ARC045 C. エックスオア多橋君](https://atcoder.jp/contests/arc045/tasks/arc045_c)（diff 2022・参考値）：重み付きの木で、パス上の辺の重みの XOR がちょうど X になる頂点の組の数を求める。
 
 </div>
 

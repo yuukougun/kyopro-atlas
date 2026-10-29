@@ -25,7 +25,7 @@ sections:
   - {title: 手数の貯金として見る, anchor: tempo}
   - {title: 計算量と自作するときの要点, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -140,9 +140,9 @@ ACL に対応するものはなく、Library Checker にも対応する問題は
 
 ## 学ぶための資料 {#resources}
 
-- kmjp 氏の ABC229 H の記事は、各列の局面に分母が 2 の累乗の値を割り当てて足す実装の流れが分かる。
-- hitonanode 氏のライブラリの「Dyadic rational number」のページには、値で評価できるゲームの条件と、最も単純な数を求める関数がある。
-- 体系的に学ぶなら、Albert・Nowakowski・Wolfe の教科書『Lessons in Play: An Introduction to Combinatorial Game Theory』がある。超現実数とゲームの関係の概要は Wikipedia の「超現実数」の項目でもつかめる。
+- [kmjp「AtCoder ABC #229 : H - Advance or Eat」](https://kmjp.hatenablog.jp/entry/2021/12/01/0930)：各列の局面に分母が 2 の累乗の値を割り当てて足す実装の流れが分かる。
+- [hitonanode「Dyadic rational number （2進有理数）」](https://hitonanode.github.io/cplib-cpp/number/dyadic_rational.hpp.html)：ライブラリのページに、値で評価できるゲームの条件と、最も単純な数を求める関数がある。
+- 体系的に学ぶなら、Albert・Nowakowski・Wolfe の教科書『Lessons in Play: An Introduction to Combinatorial Game Theory』がある。超現実数とゲームの関係の概要は [Wikipedia「超現実数」](https://ja.wikipedia.org/wiki/%E8%B6%85%E7%8F%BE%E5%AE%9F%E6%95%B0)の項目でもつかめる。
 
 ## 例題 {#examples}
 

@@ -25,7 +25,7 @@ sections:
   - {title: 二部グラフなら König の定理, anchor: bipartite-case}
   - {title: 計算量と自作するときの要点, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -152,9 +152,9 @@ ACL に対応する関数はない。自作するときの要点は次のとお�
 
 ## 学ぶための資料 {#resources}
 
-- 英語版 Wikipedia の「Graph coloring」：厳密なアルゴリズムの節に、包除原理と高速ゼータ変換による $O(2^N N)$ の判定（Björklund・Husfeldt・Koivisto）が載っている。それ以前の DP の計算量との比較もある。
-- 英語版 Wikipedia の「Independent set (graph theory)」：クリーク・頂点被覆との関係と、最大独立集合の厳密なアルゴリズムの計算量の到達点。
-- drken 氏の「AtCoder 版！蟻本 (中級編)」：半分全列挙の節で、一般グラフの最大独立集合が $n \le 40$ 程度なら半分全列挙で解けることと、より速い $O(1.381^n)$ の方法に触れている。
+- [「Graph coloring」（英語版 Wikipedia）](https://en.wikipedia.org/wiki/Graph_coloring)：厳密なアルゴリズムの節に、包除原理と高速ゼータ変換による $O(2^N N)$ の判定（Björklund・Husfeldt・Koivisto）が載っている。それ以前の DP の計算量との比較もある。
+- [「Independent set (graph theory)」（英語版 Wikipedia）](https://en.wikipedia.org/wiki/Independent_set_(graph_theory))：クリーク・頂点被覆との関係と、最大独立集合の厳密なアルゴリズムの計算量の到達点。
+- [drken「AtCoder 版！蟻本 (中級編)」](https://qiita.com/drken/items/2f56925972c1d34e05d8)：半分全列挙の節で、一般グラフの最大独立集合が $n \le 40$ 程度なら半分全列挙で解けることと、より速い $O(1.381^n)$ の方法に触れている。
 
 ## 参考 {#references}
 

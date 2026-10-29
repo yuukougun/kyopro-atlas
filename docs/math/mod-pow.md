@@ -27,7 +27,7 @@ sections:
   - {title: 'ACL の pow_mod と modint::pow', anchor: acl}
   - {title: 繰り返し二乗法を部品にする手法, anchor: building-block}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -185,7 +185,7 @@ $M$ で 2 回割るので、$10^N$ を $M^2$ で割った余りを考える。$1
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [典型90 069. Colorful Blocks 2（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_bq)（diff —）：一列に並んだ N 個のブロックを K 色で塗り、距離 2 以内のブロックがすべて異なる色になる塗り方の数を求める。
+- [典型90 069. Colorful Blocks 2（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_bq)（diff なし）：一列に並んだ N 個のブロックを K 色で塗り、距離 2 以内のブロックがすべて異なる色になる塗り方の数を求める。
 - [ABC228 E. Integer Sequence Fair](https://atcoder.jp/contests/abc228/tasks/abc228_e)（diff 1579）：長さ N で各項が 1 以上 K 以下の数列それぞれに 1 以上 M 以下の点数を付ける方法の数（M^(K^N)）を 998244353 で割った余りで求める（N, K, M ≤ 10^18）。
 
 </div>

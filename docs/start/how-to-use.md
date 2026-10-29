@@ -8,7 +8,7 @@ order: 10
 level: null
 kind: [案内]
 prerequisites: []
-related: [reverse-index-signs, reverse-index-constraints, term-index, knowledge-map, roadmap, notation, atcoder-system, practice-method, glossary, contest-strategy#ai-rules]
+related: [reverse-index-signs, reverse-index-constraints, term-index, knowledge-map, roadmap, notation, atcoder-system, practice-method, glossary, contest-strategy#ai-rules, problem-index]
 summary: 解けなかった ABC の問題から、逆引き辞典 → ページ冒頭の要点 → 前提の順に教材を引ける。レベルの意味、進捗の記録と退避、claude.ai での解説の頼み方も示す。
 complexity: null
 signs: []
@@ -59,7 +59,7 @@ updated: 2026-10-29
 
 ## 章の構成 {#structure}
 
-ページは 15 の分野のどれか 1 つに属し、分野がナビゲーションの章になる。ナビゲーションの最後にある「一覧」の章だけは分野ではなく、全分野のページをレベル別・種類別に並べ直した一覧を集めている。分野をまたいで引くときは、逆引き辞典・用語の索引・種類別の一覧・題材別のページを使う（[辞書としての引き方](#lookup)）。
+ページは 15 の分野のどれか 1 つに属し、分野がナビゲーションの章になる。ナビゲーションの最後にある「一覧」の章だけは分野ではなく、全分野のページをレベル別・種類別に並べ直した一覧を集めている。分野をまたいで引くときは、逆引き辞典・用語の索引・問題番号の索引・種類別の一覧・題材別のページを使う（[辞書としての引き方](#lookup)）。
 
 <!-- gen:begin fields -->
 <!-- textlint-disable -->
@@ -67,7 +67,7 @@ updated: 2026-10-29
 | 章 | 中身 | ページ |
 | --- | --- | --- |
 | [はじめに](index.md) | この教材の使い方、記法と用語の約束、AtCoder の仕組み | 3 |
-| [横断ページ](../guide/index.md) | 逆引き辞典、用語の索引、使い分け、知識マップ、ロードマップ、早見表、戦い方など | 15 |
+| [横断ページ](../guide/index.md) | 逆引き辞典、用語の索引、問題番号の索引、使い分け、知識マップ、ロードマップ、早見表、戦い方など | 16 |
 | [基本テクニック](../basics/index.md) | 計算量の見積もり、全探索、二分探索、累積和・いもす法、尺取り法、ソート・座標圧縮、貪欲、半分全列挙、ダブリング、分割統治、周期性、bit 演算 | 32 |
 | [考察](../thinking/index.md) | 言い換え・主客転倒・寄与・余事象・偶奇・不変量・構築などの考察の型 | 9 |
 | [動的計画法](../dp/index.md) | DP の考え方、列・区間・集合・桁・木の DP、DP の高速化 | 38 |
@@ -79,7 +79,7 @@ updated: 2026-10-29
 | [文字列](../string/index.md) | ハッシュ、Z・KMP・Manacher、Trie、Suffix Array、Aho-Corasick | 13 |
 | [幾何](../geometry/index.md) | ベクトルと外積、誤差、凸包、偏角ソート、45 度回転など | 8 |
 | [その他の技法](../misc/index.md) | インタラクティブ、乱択、bitset による高速化、構文解析 | 4 |
-| [題材別](../patterns/index.md) | 括弧列・mex・順列・XOR・区間・グリッドなど、問題に現れる対象から手法を引く案内 | 10 |
+| [題材別](../patterns/index.md) | 括弧列・mex・順列・XOR・区間・グリッドなど、問題に現れる対象から手法を引く案内 | 11 |
 | [C++](../cpp/index.md) | 解説コードに出る書き方、AtCoder と手元の環境、落とし穴、ACL の読み方 | 20 |
 | [一覧](../lists/index.md) | レベル別の一覧 5 つと種類別の一覧 30 個（全分野のページを、レベルと手法の種類で並べ直したもの） | — |
 
@@ -88,12 +88,14 @@ updated: 2026-10-29
 
 章の並びには意図がある。
 
-- **はじめに・横断ページを先に置く**：辞書として引く入口（逆引き辞典・用語の索引・知識マップ）を最初に見せるためである。
+- **はじめに・横断ページを先に置く**：辞書として引く入口（逆引き辞典・用語の索引・問題番号の索引・知識マップ）を最初に見せるためである。
 - **手法の分野は前提の流れの順に置く**：基本テクニック → 考察 → 動的計画法 → グラフ → 木 → データ構造 → 整数論・代数 → 数え上げ・確率・ゲーム → 文字列 → 幾何 → その他の技法の順である。後の分野は、前の分野の知識を使うことが多い。
 - **題材別と C++ を分野の最後に置く**：題材別は括弧列・mex・順列のような「問題に出てくる対象」から手法を引く案内で、C++ は解説のコードの書き方から引く辞典である。どちらも、手法の分野を横から引くための章である。
 - **一覧を最後に置く**：一覧は手法を説明するページを持たず、分野の章にあるページをレベルと手法の種類で並べ直しただけの章だからである。
 
-分野の中のページは、小さい章（chapter）に分かれて並ぶ。分野の入口のページに、章ごとのページの一覧とレベルと要約がある。
+分野の中のページは、小さい章（chapter）に分かれて並ぶ。章の中では、前提のページがそれを使うページより先に来る。レベルの順ではないので、高いレベルのページの後に低いレベルのページが来ることもある。易しさは各ページのレベルの印で見分ける。
+
+分野の入口のページには、章ごとのページの一覧（題名・レベルの印・要約の最初の文）と、その分野の学ぶ順・使い分け・問題集への案内がある。最後の「ほかの分野にある関連ページ」には、木 DP（動的計画法の章にある）のように、ほかの分野に置いた、その分野の主題に関わるページが並ぶ。
 
 ## 辞書としての引き方 {#lookup}
 
@@ -107,7 +109,7 @@ updated: 2026-10-29
 | 手法の名前・別名・英語名 | [用語の索引](../guide/term-index.md) | その名前のページ |
 | 括弧列・順列・グリッドなどの題材 | [題材別](../patterns/index.md) | 題材ごとの問われ方と手法の表 |
 | 解説に出た手法が 2 つで迷う | [似た手法の使い分け](../guide/method-comparison.md) | 見分け方と、どちらを選ぶか |
-| 問題 ID・問題集の番号 | [問題集の問題 → ページ](../guide/problem-sets.md#sets-to-pages)・[最近の ABC → ページ](../guide/problem-sets.md#recent-abc) | その問題を載せたページ |
+| 問題番号・問題集の番号 | [問題番号の索引](../guide/problem-index.md)・[最近の ABC → ページ](../guide/problem-sets.md#recent-abc) | その問題を載せたページ。最近の ABC は、本文にない問題も使う手法のページを引ける |
 | 解説のコードの 1 行が読めない | [C++ の逆引き](../cpp/cpp-reverse-index.md#how-to-read) | その書き方の説明 |
 | 方針がまったく立たない | [詰まったときの発想リスト](../guide/thinking-checklist.md) | 順にたどる問い |
 | WA・TLE が取れない | [原因チェックリスト](../guide/debugging-checklist.md) | 結果ごとの原因の候補 |
@@ -154,7 +156,7 @@ flowchart TD
 <!-- textlint-disable -->
 
 - レベル別：[基礎](../lists/level-basic.md)（100）・[水](../lists/level-cyan.md)（79）・[青](../lists/level-blue.md)（52）・[黄](../lists/level-yellow.md)（37）・[発展](../lists/level-advanced.md)（51）
-- 種類別：[計算量](../lists/kind-complexity.md)（6）・[全探索](../lists/kind-brute-force.md)（7）・[二分探索](../lists/kind-binary-search.md)（16）・[累積和・差分](../lists/kind-prefix-sum.md)（11）・[尺取り・スライド窓](../lists/kind-two-pointers.md)（3）・[貪欲](../lists/kind-greedy.md)（11）・[ソート・座標圧縮](../lists/kind-sorting.md)（11）・[ダブリング・分割統治](../lists/kind-doubling.md)（13）・[DP](../lists/kind-dp.md)（61）・[グラフ探索](../lists/kind-graph-search.md)（24）・[最短路](../lists/kind-shortest-path.md)（13）・[連結性・全域木](../lists/kind-connectivity.md)（14）・[フロー・マッチング](../lists/kind-flow.md)（9）・[木](../lists/kind-tree.md)（31）・[データ構造](../lists/kind-data-structure.md)（46）・[区間クエリ](../lists/kind-range-query.md)（22）・[クエリ処理の工夫](../lists/kind-query-processing.md)（15）・[整数論](../lists/kind-number-theory.md)（39）・[線形代数・行列](../lists/kind-linear-algebra.md)（11）・[畳み込み・多項式](../lists/kind-convolution.md)（11）・[数え上げ](../lists/kind-counting.md)（46）・[確率・期待値](../lists/kind-probability.md)（12）・[ゲーム](../lists/kind-game.md)（6）・[文字列](../lists/kind-string.md)（18）・[ハッシュ・乱択](../lists/kind-hashing.md)（6）・[幾何](../lists/kind-geometry.md)（8）・[ビット演算](../lists/kind-bit.md)（16）・[考察](../lists/kind-observation.md)（31）・[実装・C++](../lists/kind-implementation.md)（26）・[案内](../lists/kind-guide.md)（33）
+- 種類別：[計算量](../lists/kind-complexity.md)（6）・[全探索](../lists/kind-brute-force.md)（7）・[二分探索](../lists/kind-binary-search.md)（16）・[累積和・差分](../lists/kind-prefix-sum.md)（12）・[尺取り・スライド窓](../lists/kind-two-pointers.md)（3）・[貪欲](../lists/kind-greedy.md)（11）・[ソート・座標圧縮](../lists/kind-sorting.md)（11）・[ダブリング・分割統治](../lists/kind-doubling.md)（13）・[DP](../lists/kind-dp.md)（61）・[グラフ探索](../lists/kind-graph-search.md)（24）・[最短路](../lists/kind-shortest-path.md)（13）・[連結性・全域木](../lists/kind-connectivity.md)（14）・[フロー・マッチング](../lists/kind-flow.md)（9）・[木](../lists/kind-tree.md)（31）・[データ構造](../lists/kind-data-structure.md)（46）・[区間クエリ](../lists/kind-range-query.md)（22）・[クエリ処理の工夫](../lists/kind-query-processing.md)（15）・[整数論](../lists/kind-number-theory.md)（39）・[線形代数・行列](../lists/kind-linear-algebra.md)（11）・[畳み込み・多項式](../lists/kind-convolution.md)（11）・[数え上げ](../lists/kind-counting.md)（47）・[確率・期待値](../lists/kind-probability.md)（12）・[ゲーム](../lists/kind-game.md)（6）・[文字列](../lists/kind-string.md)（18）・[ハッシュ・乱択](../lists/kind-hashing.md)（6）・[幾何](../lists/kind-geometry.md)（8）・[ビット演算](../lists/kind-bit.md)（16）・[考察](../lists/kind-observation.md)（31）・[実装・C++](../lists/kind-implementation.md)（26）・[案内](../lists/kind-guide.md)（35）
 
 <!-- textlint-enable -->
 <!-- gen:end lists -->
@@ -240,7 +242,7 @@ flowchart TD
 ```
 
 - **題名**：「コンテストの表示名 記号. 題名」で、AtCoder の問題ページへのリンクになっている。表示名は ABCNNN・ARCNNN のほか、典型90・EDPC（Educational DP Contest）・鉄則本・アルゴ数学などがある。
-- **diff**：AtCoder Problems の difficulty である。difficulty の付かない問題（典型90 など）は「diff —」と書く。値は取得した時点のもので、後で少し変わることがある。
+- **diff**：AtCoder Problems の difficulty である。difficulty の付かない問題（典型90 など）は「diff なし」と書く。典型90 は題名の★が難しさの目安になる（[典型90問の★とレベル](../guide/problem-sets.md#typical90-stars)）。「diff 1024・参考値」のように「参考値」を添えた値は、2016 年 7 月までの [Rated](../guide/glossary.md#rated) でなかったコンテストの問題に AtCoder Problems が参考として出している値で、ふつうの値より確かさが低い。値は取得した時点のもので、後で少し変わることがある。
 - **要約**：何を問う問題かを、手法名を出さずに 1 文で書いたものである。解き方が見えないように、問いだけを書いている。
 
 問題は役割で 3 つに分けてある。
@@ -344,7 +346,7 @@ ABCxxx E の解説を頼みたい。終了したコンテストの問題であ�
 <!-- gen:begin version -->
 <!-- textlint-disable -->
 
-索引の版：`ea70d47ef119`（ページの updated の最大：2026-10-29）
+索引の版：`3571a7ed10f2`（ページの updated の最大：2026-10-29）
 
 <!-- textlint-enable -->
 <!-- gen:end version -->

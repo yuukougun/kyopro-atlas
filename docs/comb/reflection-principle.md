@@ -5,7 +5,7 @@ aliases: [鏡像法, 反射原理, カタラン数, ballot 数, Dyck path, 正�
 type: technique
 field: comb
 chapter: 二項係数の系統
-order: 150
+order: 135
 level: 黄
 kind: [数え上げ]
 prerequisites: [lattice-paths]

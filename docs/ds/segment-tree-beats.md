@@ -26,7 +26,7 @@ sections:
   - {title: 計算量（chmin と和だけならならし O((N+Q) log N)、区間加算が混ざると log^2）, anchor: complexity}
   - {title: 値が潰れる操作（割り算・mod・平方根）と、区間を set で管理する別解, anchor: shrinking-values}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -138,9 +138,9 @@ $x$ で割った余りは、最大値が $x$ 未満のノードで止め、そ�
 
 ## 学ぶための資料 {#resources}
 
-- 計算量の証明は、ferin 氏の HackMD のメモ「Segment Tree Beats」（原典の Codeforces のブログの和訳）と、37zigen 氏の「Segment Tree Beats の計算量解析」が日本語で読める。どちらもポテンシャルの取り方から追っている
-- 実装は、rsm9 氏の「atcoder::lazy_segtree に 1 行書き足すだけの抽象化 Segment Tree Beats」が、ACL を土台にした書き方を示している。区間 chmin・chmax・加算・和の値と作用の組も載っている
-- 原典の整理は OI Wiki の「吉司机线段树」にある（中国語）
+- [ferin「Segment Tree Beats」](https://hackmd.io/@a4YdmMWJSTa0aHKUX3wNcA/S1MJhbSLV?type=view)（HackMD のメモ。原典の Codeforces のブログの和訳）と [37zigen「Segment Tree Beats の計算量解析」](https://scrapbox.io/37zigen-43465887/Segment_Tree_Beats%E3%81%AE%E8%A8%88%E7%AE%97%E9%87%8F%E8%A7%A3%E6%9E%90)：計算量の証明が日本語で読める。どちらもポテンシャルの取り方から追っている
+- [rsm9（ひとなので）「atcoder::lazy_segtree に1行書き足すだけの抽象化 Segment Tree Beats」](https://rsm9.hatenablog.com/entry/2021/02/01/220408)：ACL を土台にした実装の書き方を示している。区間 chmin・chmax・加算・和の値と作用の組も載っている
+- [OI Wiki「吉司机线段树」](https://oi-wiki.org/ds/seg-beats/)（中国語）：原典の整理がある
 
 ## 例題 {#examples}
 

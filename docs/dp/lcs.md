@@ -29,7 +29,7 @@ sections:
   - {title: 最長回文部分列（S と反転の LCS）, anchor: palindromic-subsequence}
   - {title: LCS の値ごとに数える：DP の DP（内側の DP の 1 行を外側の状態にする）, anchor: dp-of-dp, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -244,7 +244,7 @@ $N = 10$、$M = 100$、$\sigma = 26$ なら、遷移は $26 \cdot 100 \cdot 2^{1
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC F. LCS](https://atcoder.jp/contests/dp/tasks/dp_f)（diff —）：2 つの文字列の最長共通部分列を 1 つ出力する。
+- [EDPC F. LCS](https://atcoder.jp/contests/dp/tasks/dp_f)（diff なし）：2 つの文字列の最長共通部分列を 1 つ出力する。
 
 </div>
 

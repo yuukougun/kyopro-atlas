@@ -9,7 +9,7 @@ order: 30
 level: null
 kind: [案内]
 prerequisites: []
-related: [glossary, reverse-index-signs, how-to-use#lookup]
+related: [glossary, reverse-index-signs, how-to-use#lookup, problem-index]
 summary: 手法の名前・別名・英語名から、そのページを五十音順と ABC 順で引ける。全ページの題名と別名から生成し、サイト内検索の結果に頼らない入口になる。
 complexity: null
 signs: []
@@ -369,6 +369,7 @@ updated: 2026-10-22
 - ランダムな順列に置き換える → [対称性で確率を求める](../comb/probability-symmetry.md)
 - ランダム化 → [乱択アルゴリズム](../misc/randomized.md)
 - [ランレングス圧縮](../basics/run-length-encoding.md)
+- リング → [円環](../patterns/circular.md)
 - ループの検出 → [周期性の検出](../basics/periodicity.md)
 - ループの順番 → [DP の計算順序](../dp/dp-order.md)
 - レイヤー化グラフ → [状態を頂点にする](../graph/extended-dijkstra.md)
@@ -615,6 +616,9 @@ updated: 2026-10-22
 - 円と格子点 → [円と幾何の最適化](../geometry/circle-geometry.md)
 - 円の交差判定 → [円と幾何の最適化](../geometry/circle-geometry.md)
 - 円の反転 → [発展の幾何](../geometry/advanced-geometry.md)
+- 円周上に並ぶ → [円環](../patterns/circular.md)
+- 円形に並ぶ → [円環](../patterns/circular.md)
+- [円環](../patterns/circular.md)
 - 円環 DP → [DP の状態の設計](../dp/dp-state-design.md)
 - 円順列 → [和・積の法則と順列・組合せ](../comb/counting-basics.md)
 - 再帰 DP → [メモ化再帰](../dp/memoized-recursion.md)
@@ -774,8 +778,11 @@ updated: 2026-10-22
 - [和・積の法則と順列・組合せ](../comb/counting-basics.md)
 - [商の列挙](../math/floor-quotient-enum.md)
 - 商列挙 → [商の列挙](../math/floor-quotient-enum.md)
+- 問題 ID から引く → [問題番号の索引](problem-index.md)
 - 問題を読む順 → [コンテストの戦い方](contest-strategy.md)
 - 問題文のサイン → [逆引き辞典（言い回しから）](reverse-index-signs.md)
+- 問題番号から引く → [問題番号の索引](problem-index.md)
+- [問題番号の索引](problem-index.md)
 - [問題集と練習用コンテストの案内](problem-sets.md)
 - 四角不等式 → [Monge 性による DP の高速化](../dp/monge.md)
 - 四辺形不等式 → [Monge 性による DP の高速化](../dp/monge.md)
@@ -1052,6 +1059,7 @@ updated: 2026-10-22
 - 最小鎖被覆 → [最小パス被覆と Hall の定理](../graph/dilworth-path-cover.md)
 - 最小頂点被覆 → [König の定理](../graph/konig-theorem.md)
 - 最左マッチ → [重複の除き方](../comb/counting-dedup.md)
+- 最後と最初が隣り合う → [円環](../patterns/circular.md)
 - 最短経路の数え上げ → [最短路 DAG](../graph/shortest-path-dag.md)
 - [最短路 DAG](../graph/shortest-path-dag.md)
 - 最短路に必ず使われる辺 → [最短路 DAG](../graph/shortest-path-dag.md)
@@ -1232,6 +1240,7 @@ updated: 2026-10-22
 - 玉と箱 → [写像 12 相](../comb/twelvefold-way.md)
 - 玉と箱の数え上げ → [写像 12 相](../comb/twelvefold-way.md)
 - 珂朵莉树 → [区間を set で管理する](../ds/interval-set.md)
+- 環状 → [円環](../patterns/circular.md)
 - 環状 DP → [DP の状態の設計](../dp/dp-state-design.md)
 - 生成 AI のルール → [AtCoder の仕組み](../start/atcoder-system.md)
 - 生成元 → [位数・原始根・離散対数](../math/multiplicative-order.md)
@@ -1450,6 +1459,7 @@ updated: 2026-10-22
 - 距離の表から木 → [木の構築・復元](../tree/tree-construction.md)
 - [転倒数](../ds/inversion-number.md)
 - 転置 → [回転・平行移動・アフィン変換](../geometry/rotation-transform.md)
+- 輪 → [円環](../patterns/circular.md)
 - 辞書の引き方 → [この教材の使い方](../start/how-to-use.md)
 - 辞書順 → [文字列の基本操作と辞書順](../string/string-basics.md)
 - 辞書順 K 番目 → [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md)
@@ -1506,6 +1516,7 @@ updated: 2026-10-22
 - 遅延評価 → [views の基本](../cpp/cpp-views-basics.md)
 - 遅延評価セグメント木 → [遅延セグメント木](../ds/lazy-segment-tree.md)
 - 過半数 → [乱択アルゴリズム](../misc/randomized.md)
+- 過去問の索引 → [問題番号の索引](problem-index.md)
 - 遷移の高速化 → [DP の高速化の選び方](../dp/dp-speedup-overview.md)
 - 遷移行列 → [行列累乗](../math/matrix-power.md)
 - 遷移行列のセグメント木 → [動的 DP](../dp/dynamic-dp.md)
@@ -1667,6 +1678,7 @@ updated: 2026-10-22
 - 2 ポインタ → [尺取り法](../basics/two-pointers.md)
 - 2 乗の木 DP → [二乗の木 DP](../dp/tree-dp-square.md)
 - 2 円の位置関係 → [円と幾何の最適化](../geometry/circle-geometry.md)
+- 2 周分に伸ばす → [円環](../patterns/circular.md)
 - 2 回の BFS → [木の直径と最遠点](../tree/tree-diameter.md)
 - 2 彩色 → [二部グラフ判定](../graph/bipartite-graph.md)
 - 2 条件の包除 → [余事象](../thinking/complement.md)
@@ -1859,6 +1871,7 @@ updated: 2026-10-22
 - Chu-Liu/Edmonds → [特殊な最小全域木](../graph/spanning-tree-advanced.md)
 - cin.tie(nullptr) → [入出力と定数倍](../cpp/cpp-io.md)
 - Cipolla → [位数・原始根・離散対数](../math/multiplicative-order.md)
+- circular → [円環](../patterns/circular.md)
 - clamp → [数・ビット・乱数の関数](../cpp/cpp-math-functions.md)
 - class template argument deduction → [初期化と CTAD](../cpp/cpp-initialization.md)
 - claude.ai での解説の頼み方 → [この教材の使い方](../start/how-to-use.md)
@@ -1895,6 +1908,7 @@ updated: 2026-10-22
 - cycle decomposition → [置換の巡回分解](../comb/permutation-cycles.md)
 - cycle detection → [閉路の検出と復元](../graph/cycle-detection.md)
 - cycle finding → [周期性の検出](../basics/periodicity.md)
+- cyclic → [円環](../patterns/circular.md)
 
 ### D {#terms-latin-d}
 
@@ -2488,6 +2502,7 @@ updated: 2026-10-22
 - ReRooting DP → [全方位木 DP](../dp/rerooting.md)
 - retrograde analysis → [後退解析](../comb/game-retrograde-analysis.md)
 - rho 形 → [Functional graph（出次数 1 のグラフ）](../graph/functional-graph.md)
+- ring → [円環](../patterns/circular.md)
 - RLE → [ランレングス圧縮](../basics/run-length-encoding.md)
 - RMQ → [セグメント木](../ds/segment-tree.md)
 - Robinson-Schensted 対応 → [Young 図形とフック長公式](../comb/young-tableaux.md)

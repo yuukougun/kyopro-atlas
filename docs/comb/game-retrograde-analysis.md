@@ -26,7 +26,7 @@ sections:
   - {title: 決まらない局面 = 引き分け, anchor: draw}
   - {title: 得点のあるゲームはダイクストラ法の要領で確定させる, anchor: weighted, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -198,7 +198,7 @@ C++ では次のようになる。$\mathrm{res}[v]$ は 0 が未確定、1 が�
 <div class="kp-problems" data-role="challenge" markdown>
 
 - [ABC261 Ex. Game on Graph](https://atcoder.jp/contests/abc261/tasks/abc261_h)（diff 2531）：重み付きの有向グラフで 2 人が交互に駒を辺に沿って動かし、動かせなくなると終わる。先手は有限で終わらせて通った辺の重みの和を小さく、後手は終わらせないか和を大きくしたいとき、両者が最適に動いたときの和を求める（終わらないなら、そのことを出力する）。
-- [ARC038 D. 有向グラフと数](https://atcoder.jp/contests/arc038/tasks/arc038_d)（diff 3009）：各頂点に値のある有向グラフで、頂点 1 の駒を 2 人が交互に辺に沿って動かすか終了を宣言し、終了時（または非常に多くの手で打ち切られた時）の頂点の値を先手は大きく後手は小さくしたいとき、最適に動いたときの値を求める。
+- [ARC038 D. 有向グラフと数](https://atcoder.jp/contests/arc038/tasks/arc038_d)（diff 3009・参考値）：各頂点に値のある有向グラフで、頂点 1 の駒を 2 人が交互に辺に沿って動かすか終了を宣言し、終了時（または非常に多くの手で打ち切られた時）の頂点の値を先手は大きく後手は小さくしたいとき、最適に動いたときの値を求める。
 
 </div>
 

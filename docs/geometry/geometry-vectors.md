@@ -32,7 +32,7 @@ sections:
   - {title: 3 次元の基本：軸に平行な直方体の共通部分は軸ごとの区間の積, anchor: 3d-geometry}
   - {title: '点の表し方：整数の構造体と std::complex', anchor: point-representation}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -274,7 +274,7 @@ $N \le 100$ なので 3 点の組は $\binom{100}{3} = 161700$ 通りしかな�
 - [ABC361 B. Intersection of Cuboids](https://atcoder.jp/contests/abc361/tasks/abc361_b)（diff 299）：2 つの直方体の共通部分の体積が正かを判定する。
 - [ABC224 C. Triangle?](https://atcoder.jp/contests/abc224/tasks/abc224_c)（diff 301）：N 点から三角形ができる 3 点の選び方の数を求める。
 - [ABC266 C. Convex Quadrilateral](https://atcoder.jp/contests/abc266/tasks/abc266_c)（diff 516）：4 点を順に結んだ四角形が凸かを判定する。
-- [ABC016 D. 一刀両断](https://atcoder.jp/contests/abc016/tasks/abc016_4)（diff 1305）：多角形を 1 本の線分で切ったとき、いくつに分かれるかを求める。
+- [ABC016 D. 一刀両断](https://atcoder.jp/contests/abc016/tasks/abc016_4)（diff 1305・参考値）：多角形を 1 本の線分で切ったとき、いくつに分かれるかを求める。
 
 </div>
 

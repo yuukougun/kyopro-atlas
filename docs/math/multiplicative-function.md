@@ -25,7 +25,7 @@ sections:
   - {title: 和の求め方の概要（杜教篩・Lucy DP・Min_25 篩）, anchor: prefix-sums}
   - {title: 公開ライブラリと自作するときの要点, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -175,7 +175,7 @@ $\sum \varphi$ や $\sum \mu$ は杜教篩でも Min_25 篩でも求まる。杜
 
 ## 学ぶための資料 {#resources}
 
-- maspy 氏の記事[「Dirichlet 積と、数論関数の累積和」](https://maspypy.com/dirichlet-%E7%A9%8D%E3%81%A8%E3%80%81%E6%95%B0%E8%AB%96%E9%96%A2%E6%95%B0%E3%81%AE%E7%B4%AF%E7%A9%8D%E5%92%8C)：ディリクレ積の和を商の値ごとに求める考え方から、$\varphi$ の和やメルテンス関数を $O(N^{2/3})$ で求めるまでを、計算量の見積もりとともに追える。
+- [maspy「Dirichlet 積と、数論関数の累積和」](https://maspypy.com/dirichlet-%E7%A9%8D%E3%81%A8%E3%80%81%E6%95%B0%E8%AB%96%E9%96%A2%E6%95%B0%E3%81%AE%E7%B4%AF%E7%A9%8D%E5%92%8C)：ディリクレ積の和を商の値ごとに求める考え方から、$\varphi$ の和やメルテンス関数を $O(N^{2/3})$ で求めるまでを、計算量の見積もりとともに追える。
 
 ## 練習問題 {#practice}
 

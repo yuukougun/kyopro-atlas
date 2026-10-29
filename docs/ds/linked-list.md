@@ -5,7 +5,7 @@ aliases: [連結リスト, 双方向リスト, linked list, doubly linked list, 
 type: technique
 field: ds
 chapter: 標準コンテナの応用
-order: 70
+order: 27
 level: 基礎
 kind: [データ構造]
 prerequisites: [stl-containers]

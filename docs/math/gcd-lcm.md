@@ -28,7 +28,7 @@ sections:
   - {title: 左右からの累積 gcd（1 つ除いた gcd）, anchor: prefix-suffix-gcd}
   - {title: 分数・傾きを既約にして map のキーにする, anchor: reduce-fraction, level: 水}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -198,7 +198,7 @@ $X$ から $\pm D$ の移動で止まれる位置は $X + kD$（$k$ は整数）
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [典型90 022. Cubic Cake（★2）](https://atcoder.jp/contests/typical90/tasks/typical90_v)（diff —）：A × B × C の直方体を、すべて同じ大きさの立方体に切り分けるときの最小の切断回数を求める。
+- [典型90 022. Cubic Cake（★2）](https://atcoder.jp/contests/typical90/tasks/typical90_v)（diff なし）：A × B × C の直方体を、すべて同じ大きさの立方体に切り分けるときの最小の切断回数を求める。
 - [ABC070 C. Multiple Clocks](https://atcoder.jp/contests/abc070/tasks/abc070_c)（diff 697）：N 個の時計の針がそれぞれ T_i 秒で一周するとき、すべての針が再び同時に真上を向く最初の時刻を求める。
 - [ABC125 C. GCD on Blackboard](https://atcoder.jp/contests/abc125/tasks/abc125_c)（diff 1197）：N 個の整数のうち 1 つを好きな整数に書き換えたときの、全体の最大公約数の最大値を求める。
 

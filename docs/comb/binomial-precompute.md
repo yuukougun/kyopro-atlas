@@ -31,7 +31,7 @@ sections:
   - {title: mod を取らない正確な値（掛けてから割る・__int128）, anchor: exact}
   - {title: ACL では modint998244353 の inv()・pow() で自作する, anchor: acl}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -278,7 +278,7 @@ ACL に二項係数の関数はない。[modint](../math/modint.md) を使って
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [鉄則本 A30. Combination](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_ad)（diff —）：n と r が与えられ、nCr を 10^9+7 で割った余りを求める。
+- [鉄則本 A30. Combination](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_ad)（diff なし）：n と r が与えられ、nCr を 10^9+7 で割った余りを求める。
 
 </div>
 

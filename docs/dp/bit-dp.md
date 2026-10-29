@@ -29,7 +29,7 @@ sections:
   - {title: ゲームの状態を集合で持つ, anchor: games}
   - {title: 素数の使用状況を集合で持つ, anchor: primes, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -211,7 +211,7 @@ $N = 3$ で一度動かす。$c(0, 1) = 1$、$c(1, 2) = 2$、$c(2, 0) = 3$、$c(
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC O. Matching](https://atcoder.jp/contests/dp/tasks/dp_o)（diff —）：N 人の男性と N 人の女性の相性が分かっているとき、相性の良い組だけで N 組のペアを作る方法の数を求める。
+- [EDPC O. Matching](https://atcoder.jp/contests/dp/tasks/dp_o)（diff なし）：N 人の男性と N 人の女性の相性が分かっているとき、相性の良い組だけで N 組のペアを作る方法の数を求める。
 
 </div>
 

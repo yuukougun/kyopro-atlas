@@ -24,7 +24,7 @@ sections:
   - {title: 段の作り方（上位 bit から安定に振り分ける）, anchor: build}
   - {title: ライブラリでの使い方と、マージソート木・永続セグメント木との比較, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -121,9 +121,9 @@ ACL には Wavelet Matrix がない。自作するなら、上のコード片か
 
 ## 学ぶための資料 {#resources}
 
-- convexineq 氏の Qiita の記事：マージソート木・Fractional Cascading・Wavelet Tree・Wavelet Matrix を 1 つの流れで説明しており、Wavelet Matrix が「段ごとの並びにまとめたマージソート木」であることが分かる。
-- miti-7 氏のブログの記事：K 番目・範囲の個数・前後の値・頻度の上位など、Wavelet Matrix でできる操作を図付きで一覧にしている。
-- ei1333 氏の Luzhiled's Library：座標圧縮を含めた版の実装と、各操作の計算量。
+- [convexineq「Merge sort tree, fractional cascading, 領域木、wavelet tree, wavelet matrix をまとめて理解するお得な記事」](https://qiita.com/convexineq/items/70f36585ae76f70e3abf)（Qiita）：マージソート木・Fractional Cascading・Wavelet Tree・Wavelet Matrix を 1 つの流れで説明しており、Wavelet Matrix が「段ごとの並びにまとめたマージソート木」であることが分かる。
+- [miti-7「ウェーブレット行列(wavelet matrix)」](https://miti-7.hatenablog.com/entry/2018/04/28/152259)：K 番目・範囲の個数・前後の値・頻度の上位など、Wavelet Matrix でできる操作を図付きで一覧にしている。
+- [ei1333「Wavelet Matrix (ウェーブレット行列)」](https://ei1333.github.io/library/structure/wavelet/wavelet-matrix.hpp)（Luzhiled's Library）：座標圧縮を含めた版の実装と、各操作の計算量。
 
 ## 例題 {#examples}
 

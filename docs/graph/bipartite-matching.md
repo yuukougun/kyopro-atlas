@@ -195,7 +195,7 @@ ACL があれば Hopcroft-Karp を自分で書く必要はほとんどない。K
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 077. Planes on a 2D Plane（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_by)（diff —）：N 機の飛行機を時間 T の後に、8 方向のどれかへ（斜めなら x と y の両方を）T だけ動かし、指定の N か所に 1 機ずつ着くようにできるかを判定し、できれば方向を出力する。
+- [典型90 077. Planes on a 2D Plane（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_by)（diff なし）：N 機の飛行機を時間 T の後に、8 方向のどれかへ（斜めなら x と y の両方を）T だけ動かし、指定の N か所に 1 機ずつ着くようにできるかを判定し、できれば方向を出力する。
 
 </div>
 
@@ -227,7 +227,7 @@ ACL があれば Hopcroft-Karp を自分で書く必要はほとんどない。K
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [鉄則本 A69. Bipartite Matching](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bq)（diff —）：N×N の表で、i 行 j 列が # なら左の i 番目と右の j 番目を組にしてよいとき、どの要素も 1 回までしか使わずに作れる組の最大数を求める。
+- [鉄則本 A69. Bipartite Matching](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bq)（diff なし）：N×N の表で、i 行 j 列が # なら左の i 番目と右の j 番目を組にしてよいとき、どの要素も 1 回までしか使わずに作れる組の最大数を求める。
 - [ARC092 C. 2D Plane 2N Points](https://atcoder.jp/contests/arc092/tasks/arc092_a)（diff 1268）：赤い点と青い点が N 個ずつあり、x 座標も y 座標も赤い点の方が小さい組を仲良しとするとき、作れる仲良しの組の最大数を求める。
 - [ABC263 G. Erasing Prime Pairs](https://atcoder.jp/contests/abc263/tasks/abc263_g)（diff 2261）：整数とその個数が与えられ、和が素数になる 2 つを選んで消す操作の最大回数を求める。
 

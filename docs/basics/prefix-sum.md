@@ -223,7 +223,7 @@ for l in 0 .. N-1:
 - [ARC098 C. Attention](https://atcoder.jp/contests/arc098/tasks/arc098_a)（diff 635）：一列に並んだ人のうち 1 人をリーダーに選ぶとき、向きを変える人数の最小値を求める。
 - [ABC172 C. Tsundoku](https://atcoder.jp/contests/abc172/tasks/abc172_c)（diff 930）：2 つの机に積まれた本を上から読むとき、K 分以内に読める最大の冊数を求める。
 - [ABC125 C. GCD on Blackboard](https://atcoder.jp/contests/abc125/tasks/abc125_c)（diff 1197）：1 つだけ好きな値に書き換えたときの、全体の最大公約数の最大値を求める。
-- [典型90 076. Cake Cut（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_bx)（diff —）：円環に並んだケーキのピースから連続する部分を取り、和をちょうど全体の 1/10 にできるかを判定する。
+- [典型90 076. Cake Cut（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_bx)（diff なし）：円環に並んだケーキのピースから連続する部分を取り、和をちょうど全体の 1/10 にできるかを判定する。
 
 </div>
 

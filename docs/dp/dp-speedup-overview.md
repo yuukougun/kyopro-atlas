@@ -178,7 +178,7 @@ $$
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [典型90 090. Tenkei90's Last Problem（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_cl)（diff —）：長さ N の 0 以上の整数の列のうち、どの区間でも（区間の最小値）×（区間の長さ）が K 以下になるものの個数を、998244353 で割った余りで求める。
+- [典型90 090. Tenkei90's Last Problem（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_cl)（diff なし）：長さ N の 0 以上の整数の列のうち、どの区間でも（区間の最小値）×（区間の長さ）が K 以下になるものの個数を、998244353 で割った余りで求める。
 
 </div>
 

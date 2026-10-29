@@ -236,7 +236,7 @@ ABC で二進分解やスライド最小値が必須になる問題は少なく�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC D. Knapsack 1](https://atcoder.jp/contests/dp/tasks/dp_d)（diff —）：重さと価値が決まった N 個の品物から、重さの合計が W 以下になるように選ぶときの価値の和の最大を求める。
+- [EDPC D. Knapsack 1](https://atcoder.jp/contests/dp/tasks/dp_d)（diff なし）：重さと価値が決まった N 個の品物から、重さの合計が W 以下になるように選ぶときの価値の和の最大を求める。
 
 </div>
 
@@ -271,7 +271,7 @@ $N \le 100$、$W \le 10^5$ なので $O(NW) = 10^7$ で間に合う。「重さ 
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [ABC032 D. ナップサック問題](https://atcoder.jp/contests/abc032/tasks/abc032_d)（diff 1731）：N 個の品物の 0-1 ナップサックを、N・重さ・価値のどれか 1 つだけが小さい 3 種類の制約で解く。
+- [ABC032 D. ナップサック問題](https://atcoder.jp/contests/abc032/tasks/abc032_d)（diff 1731・参考値）：N 個の品物の 0-1 ナップサックを、N・重さ・価値のどれか 1 つだけが小さい 3 種類の制約で解く。
 - [ABC373 F. Knapsack with Diminishing Values](https://atcoder.jp/contests/abc373/tasks/abc373_f)（diff 2018）：品物 i を k 個選ぶと価値が k·v_i − k^2 になるとき、重さの合計が W 以下での価値の和の最大を求める。
 
 </div>

@@ -27,7 +27,7 @@ sections:
   - {title: 規則を見つける：小さい局面の表と周期, anchor: patterns}
   - {title: 使えない場合（1 手で複数を動かす・非不偏）, anchor: limitations}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -229,7 +229,7 @@ Grundy 数の XOR で判定できるのは、次をすべて満たすときだ�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [鉄則本 A34. Game 3](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_ah)（diff —）：N 個の山から交互に 1 つを選び、X 個か Y 個の石を取り、取れなくなった方が負けのとき、勝つのはどちらかを求める。
+- [鉄則本 A34. Game 3](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_ah)（diff なし）：N 個の山から交互に 1 つを選び、X 個か Y 個の石を取り、取れなくなった方が負けのとき、勝つのはどちらかを求める。
 
 </div>
 
@@ -275,7 +275,7 @@ Grundy 数の XOR で判定できるのは、次をすべて満たすときだ�
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [典型90 031. VS AtCoder（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_ae)（diff —）：白石と青石の 2 種類が入った山がいくつかあり、決まった取り方で交互に取るゲームで、勝つのはどちらかを求める。
+- [典型90 031. VS AtCoder（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_ae)（diff なし）：白石と青石の 2 種類が入った山がいくつかあり、決まった取り方で交互に取るゲームで、勝つのはどちらかを求める。
 - [ABC206 F. Interval Game 2](https://atcoder.jp/contests/abc206/tasks/abc206_f)（diff 2221）：区間を 1 つ選ぶと重なる区間が使えなくなるゲームで、勝つのはどちらかを求める。
 
 </div>

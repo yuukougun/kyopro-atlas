@@ -27,7 +27,7 @@ sections:
   - {title: スライド最小値（単調 deque）と単調スタックによる遷移, anchor: dp-sliding-window}
   - {title: セグメント木・累積和・スライド最小値の使い分け, anchor: which-tool}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -205,7 +205,7 @@ $$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC Q. Flowers](https://atcoder.jp/contests/dp/tasks/dp_q)（diff —）：高さが相異なる花の列から、高さが左から単調増加になるように選ぶときの美しさの和の最大を求める。
+- [EDPC Q. Flowers](https://atcoder.jp/contests/dp/tasks/dp_q)（diff なし）：高さが相異なる花の列から、高さが左から単調増加になるように選ぶときの美しさの和の最大を求める。
 
 </div>
 
@@ -218,7 +218,7 @@ $$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 037. Don't Leave the Spice（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_ak)（diff —）：N 種類の材料をそれぞれ L_i〜R_i グラム（または使わない）で使い、合計をちょうど W グラムにするときの価値の和の最大を求める。
+- [典型90 037. Don't Leave the Spice（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_ak)（diff なし）：N 種類の材料をそれぞれ L_i〜R_i グラム（または使わない）で使い、合計をちょうど W グラムにするときの価値の和の最大を求める。
 
 </div>
 
@@ -252,7 +252,7 @@ $$
 
 - [ABC339 E. Smooth Subsequence](https://atcoder.jp/contests/abc339/tasks/abc339_e)（diff 1109）：隣り合う要素の差が D 以下であるような部分列の最大の長さを求める。
 - [ABC359 E. Water Tank](https://atcoder.jp/contests/abc359/tasks/abc359_e)（diff 1275）：板で仕切られた水槽に左端から水を入れ続けるとき、各区画に初めて水が入る時刻を答える。
-- [ARC026 C. 蛍光灯](https://atcoder.jp/contests/arc026/tasks/arc026_3)（diff 1930）：区間を照らす蛍光灯を選び、区間全体を照らすときの費用の最小を求める。
+- [ARC026 C. 蛍光灯](https://atcoder.jp/contests/arc026/tasks/arc026_3)（diff 1930・参考値）：区間を照らす蛍光灯を選び、区間全体を照らすときの費用の最小を求める。
 
 </div>
 

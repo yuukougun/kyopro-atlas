@@ -24,7 +24,7 @@ sections:
   - {title: 失敗の回数（1/p − 1）との違い, anchor: failures}
   - {title: 段階に分けて幾何分布の期待値を足す（コンプガチャ）, anchor: staged}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -175,7 +175,7 @@ $$
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [アルゴ数学 026. Coin Gacha](https://atcoder.jp/contests/math-and-algorithm/tasks/math_and_algorithm_z)（diff —）：N 種類のコインが等確率で 1 枚ずつ出るとき、全種類がそろうまでの回数の期待値を求める。
+- [アルゴ数学 026. Coin Gacha](https://atcoder.jp/contests/math-and-algorithm/tasks/math_and_algorithm_z)（diff なし）：N 種類のコインが等確率で 1 枚ずつ出るとき、全種類がそろうまでの回数の期待値を求める。
 - [ARC085 C. HSI](https://atcoder.jp/contests/arc085/tasks/arc085_a)（diff 752）：N 個のテストのうち M 個はそれぞれ確率 1/2 で通る提出を、全部通るまで繰り返すときの総実行時間の期待値を求める。
 
 </div>

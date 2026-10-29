@@ -26,7 +26,7 @@ sections:
   - {title: 最大値を固定するためにソートしてから数える, anchor: sort-then-count, level: 水}
   - {title: 全部分集合についての和（含む部分集合の数を重みにする）, anchor: over-all-subsets, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -179,7 +179,7 @@ dp[0] = 1, ほかは 0
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [TDPC A. コンテスト](https://atcoder.jp/contests/tdpc/tasks/tdpc_contest)（diff —）：N 問の配点が決まったコンテストで、取り得る合計点の種類数を求める。
+- [TDPC A. コンテスト](https://atcoder.jp/contests/tdpc/tasks/tdpc_contest)（diff なし）：N 問の配点が決まったコンテストで、取り得る合計点の種類数を求める。
 
 </div>
 

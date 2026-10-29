@@ -25,7 +25,7 @@ sections:
   - {title: 行きがけ順と帰りがけ順, anchor: pre-post-order}
   - {title: 非再帰の DFS と再帰の深さ, anchor: iterative}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -185,7 +185,7 @@ DFS は多くの手法で、行きがけ順・帰りがけ順・DFS 木の性質
 
 - [ABC378 D. Count Simple Paths](https://atcoder.jp/contests/abc378/tasks/abc378_d)（diff 587）：障害物のあるグリッドで、同じマスを 2 回通らない長さ K の移動経路の数を求める
 - [ABC284 E. Count Simple Paths](https://atcoder.jp/contests/abc284/tasks/abc284_e)（diff 1043）：頂点 1 から始まる単純パスの数を、10^6 を上限として求める
-- [典型90 072. Loop Railway Plan（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_bt)（diff —）：小さいグリッドで、山のマスを避けて同じマスを通らずに戻ってくる最長の経路を求める
+- [典型90 072. Loop Railway Plan（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_bt)（diff なし）：小さいグリッドで、山のマスを避けて同じマスを通らずに戻ってくる最長の経路を求める
 
 </div>
 

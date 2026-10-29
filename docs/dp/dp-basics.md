@@ -234,7 +234,7 @@ DP の型は、主に「何を状態にするか」で分かれる。問題を�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC A. Frog 1](https://atcoder.jp/contests/dp/tasks/dp_a)（diff —）：1 つ先か 2 つ先の足場へ跳ぶたびに高さの差のコストがかかるとき、最後の足場までのコストの和の最小を求める。
+- [EDPC A. Frog 1](https://atcoder.jp/contests/dp/tasks/dp_a)（diff なし）：1 つ先か 2 つ先の足場へ跳ぶたびに高さの差のコストがかかるとき、最後の足場までのコストの和の最小を求める。
 
 </div>
 
@@ -250,7 +250,7 @@ DP の型は、主に「何を状態にするか」で分かれる。問題を�
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [EDPC B. Frog 2](https://atcoder.jp/contests/dp/tasks/dp_b)（diff —）：1〜K 個先の足場へ跳べるときの、最後の足場までのコストの和の最小を求める。
+- [EDPC B. Frog 2](https://atcoder.jp/contests/dp/tasks/dp_b)（diff なし）：1〜K 個先の足場へ跳べるときの、最後の足場までのコストの和の最小を求める。
 - [ABC240 C. Jumping Takahashi](https://atcoder.jp/contests/abc240/tasks/abc240_c)（diff 464）：毎回 a_i か b_i だけ進むとき、N 回後にちょうど座標 X に着けるかを判定する。
 - [ABC129 C. Typical Stairs](https://atcoder.jp/contests/abc129/tasks/abc129_c)（diff 796）：壊れた段を踏まずに 1 段か 2 段ずつ上って N 段目に着く方法の数を求める。
 - [ABC242 C. 1111gal password](https://atcoder.jp/contests/abc242/tasks/abc242_c)（diff 512）：各桁が 1〜9 で隣り合う桁の差が 1 以下の N 桁の整数の個数を 998244353 で割った余りで求める。

@@ -220,7 +220,7 @@ ACL の `slope` は折れ線の頂点だけを返し、同じ直線上にある�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [PRACTICE2 E. MinCostFlow](https://atcoder.jp/contests/practice2/tasks/practice2_e)（diff —）：N×N のマス目から、各行・各列で K 個以下になるようにマスを選び、選んだマスの値の和を最大化して選び方を出力する。
+- [PRACTICE2 E. MinCostFlow](https://atcoder.jp/contests/practice2/tasks/practice2_e)（diff なし）：N×N のマス目から、各行・各列で K 個以下になるようにマスを選び、選んだマスの値の和を最大化して選び方を出力する。
 
 </div>
 

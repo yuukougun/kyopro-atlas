@@ -23,7 +23,7 @@ sections:
   - {title: 単純パス（Yen）とウォークの高速な列挙（Eppstein）, anchor: yen-eppstein}
   - {title: 自作するときの要点と Library Checker, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -118,8 +118,8 @@ Library Checker の K-Shortest Walk（[練習問題](#practice)）で Eppstein �
 
 ## 学ぶための資料 {#resources}
 
-- hotman78 氏の Qiita の Eppstein の方法の解説（C++ の実装つき）：Eppstein の方法の 4 段（逆向きのダイクストラ法・寄り道の費用・頂点ごとの永続ヒープ・最良優先探索）と計算量
-- nariaki3551 氏の Qiita の記事「図解: Yen's algorithm (Find the K shortest paths)」：Yen の方法の流れを図で追える
+- [hotman78「K-最短路をO((V+E)logV+KlogK)で！？Eppstein's Algorithmのわかりやすい解説！！！【C++実装つき】」](https://qiita.com/hotman78/items/42534a01c4bd05ed5e1e)（Qiita）：Eppstein の方法の 4 段（逆向きのダイクストラ法・寄り道の費用・頂点ごとの永続ヒープ・最良優先探索）と計算量
+- [nariaki3551「図解: Yen's algorithm (Find the K shortest paths)」](https://qiita.com/nariaki3551/items/821dc6ffdc552d3d5f22)（Qiita）：Yen の方法の流れを図で追える
 
 ## 練習問題 {#practice}
 

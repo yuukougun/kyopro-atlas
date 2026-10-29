@@ -26,7 +26,7 @@ sections:
   - {title: 区間加算と区間最大を遅延セグメント木で（区間の右端で加算する）, anchor: lazy-segment-tree}
   - {title: 単調スタックと組み合わせる, anchor: with-monotonic-stack, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -203,7 +203,7 @@ $i$ を 1 つ進めるたびに、始点 $j$ ごとの値 $g_i[j] = \mathrm{dp}[
 | 前の行がほぼ写り、少数の点・範囲加算・シフトだけが入る | インライン DP（このページ） |
 | どの行も同じ線形の遷移で、段数が巨大 | [行列累乗](../math/matrix-power.md) |
 
-状態の次元そのものを減らす工夫は[状態の削減](../dp/dp-dimension-reduction.md)に、遅延セグメント木に載せる値と作用の設計は[遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md#design-steps)にまとめる。
+状態の次元そのものを減らす工夫は[状態の削減](../dp/dp-dimension-reduction.md)に、遅延セグメント木に載せる値と作用の設計は[遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md#design-steps)にまとめる。表にない形の遷移は、貰う形の式の右辺から [DP の高速化の選び方](../dp/dp-speedup-overview.md#shape-to-tool)の早見表で道具を選ぶ。
 
 ## 例題 {#examples}
 
@@ -239,7 +239,7 @@ $N, K \le 2 \times 10^5$ なので、時刻ごとに全頂点を作り直す $O(
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC W. Intervals](https://atcoder.jp/contests/dp/tasks/dp_w)（diff —）：長さ N の 0/1 列の得点が、各区間 [l, r] に 1 が含まれれば a を足す形で決まるとき、得点の最大を求める。
+- [EDPC W. Intervals](https://atcoder.jp/contests/dp/tasks/dp_w)（diff なし）：長さ N の 0/1 列の得点が、各区間 [l, r] に 1 が含まれれば a を足す形で決まるとき、得点の最大を求める。
 
 </div>
 
@@ -253,7 +253,7 @@ $N, K \le 2 \times 10^5$ なので、時刻ごとに全頂点を作り直す $O(
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC203 E. White Pawn](https://atcoder.jp/contests/abc203/tasks/abc203_e)（diff 1750）：白いポーンが 1 行ずつ進み、黒いポーンのある列へは斜めにだけ進めるとき、最後の行で到達できる列の数を求める。
-- [TDPC K. ターゲット](https://atcoder.jp/contests/tdpc/tasks/tdpc_target)（diff —）：数直線上に中心を持つ円の集合から、入れ子（次の円の内側にある）の鎖になるように選べる円の個数の最大を求める。
+- [TDPC K. ターゲット](https://atcoder.jp/contests/tdpc/tasks/tdpc_target)（diff なし）：数直線上に中心を持つ円の集合から、入れ子（次の円の内側にある）の鎖になるように選べる円の個数の最大を求める。
 
 </div>
 

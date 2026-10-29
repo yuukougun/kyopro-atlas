@@ -250,11 +250,11 @@ $$
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC369 C. Count Arithmetic Subarrays](https://atcoder.jp/contests/abc369/tasks/abc369_c)（diff 323）：数列の連続部分列のうち、等差数列になっているものの個数を求める。
-- [典型90 064. Uplift（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_bl)（diff —）：区間に一律の値を足すたびに、隣り合う要素の差の絶対値の和を答える。
+- [典型90 064. Uplift（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_bl)（diff なし）：区間に一律の値を足すたびに、隣り合う要素の差の絶対値の和を答える。
 - [ABC462 D. Accomplice](https://atcoder.jp/contests/abc462/tasks/abc462_d)（diff 798）：各人が館にいた時間帯と犯行にかかる時間 D から、犯人 2 人と犯行の開始時刻の組としてありうるものの数を求める。
 - [ABC221 D. Online games](https://atcoder.jp/contests/abc221/tasks/abc221_d)（diff 832）：各プレイヤーのログイン期間から、ちょうど k 人がログインしていた日数を k ごとに求める。
 - [ABC466 E. Range Flip](https://atcoder.jp/contests/abc466/tasks/abc466_e)（diff 1027）：表と裏に数が書かれたカードの列で、区間の裏返しを K 回以下行った後の、上を向いた数の和の最大値を求める。
-- [典型90 028. Cluttered Paper（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_ab)（diff —）：長方形の紙を N 枚置いたとき、ちょうど k 枚が重なっている部分の面積を k ごとに求める。
+- [典型90 028. Cluttered Paper（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_ab)（diff なし）：長方形の紙を N 枚置いたとき、ちょうど k 枚が重なっている部分の面積を k ごとに求める。
 
 </div>
 

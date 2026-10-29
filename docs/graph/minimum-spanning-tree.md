@@ -262,7 +262,7 @@ $$
 - [ABC469 F. GCD Maximum Spanning Tree](https://atcoder.jp/contests/abc469/tasks/abc469_f)（diff 1567）：互いに異なる整数 A_1, …, A_N を頂点とし、2 頂点の間の辺の重みを 2 数の最大公約数とした完全グラフで、全域木の辺の重みの和の最大を求める。
 - [ABC282 E. Choose Two and Eat One](https://atcoder.jp/contests/abc282/tasks/abc282_e)（diff 1604）：ボールを 2 つ選んで得点（x^y + y^x を M で割った余り）を得て片方を捨てる操作をくり返すとき、得点の合計の最大値を求める
 - [ARC076 D. Built?](https://atcoder.jp/contests/arc076/tasks/arc076_b)（diff 1615）：平面上の町を結ぶ費用が min(|Δx|, |Δy|) のとき、すべての町をつなぐ最小費用を求める
-- [典型90 049. Flip Digits 2（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_aw)（diff —）：区間 [L_i, R_i] の 0/1 を費用 C_i で反転できる操作を選び、全部 0 の列からどんな列でも作れるようにするための最小費用を求める
+- [典型90 049. Flip Digits 2（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_aw)（diff なし）：区間 [L_i, R_i] の 0/1 を費用 C_i で反転できる操作を選び、全部 0 の列からどんな列でも作れるようにするための最小費用を求める
 
 </div>
 

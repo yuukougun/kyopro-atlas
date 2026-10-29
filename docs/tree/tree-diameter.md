@@ -279,8 +279,8 @@ $D$ が奇数なら、両側の個数を $\alpha, \beta$ として $\alpha \beta
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [典型90 003. Longest Circular Road（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_c)（diff —）：木に辺を 1 本足してできる閉路の長さの最大値を求める。
-- [ABC019 D. 高橋くんと木の直径](https://atcoder.jp/contests/abc019/tasks/abc019_4)（diff 1378）：2 頂点間の距離を質問できる対話形式で、木の直径を求める。
+- [典型90 003. Longest Circular Road（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_c)（diff なし）：木に辺を 1 本足してできる閉路の長さの最大値を求める。
+- [ABC019 D. 高橋くんと木の直径](https://atcoder.jp/contests/abc019/tasks/abc019_4)（diff 1378・参考値）：2 頂点間の距離を質問できる対話形式で、木の直径を求める。
 - [ABC447 F. Centipede Graph](https://atcoder.jp/contests/abc447/tasks/abc447_f)（diff 1480）：木の部分グラフとして、背骨のパスの各頂点に葉が 2 つずつ付いた形（ムカデ）を取り出すとき、背骨の長さの最大を求める。
 - [ABC401 F. Add One Edge 3](https://atcoder.jp/contests/abc401/tasks/abc401_f)（diff 1666）：2 つの木の頂点を 1 組選んで辺で結んだときの直径を、すべての組について足し合わせる。
 - [ABC267 F. Exactly K Steps](https://atcoder.jp/contests/abc267/tasks/abc267_f)（diff 1939）：木の頂点 u から距離がちょうど k の頂点を 1 つ答える質問に Q 回答える（なければ −1）。

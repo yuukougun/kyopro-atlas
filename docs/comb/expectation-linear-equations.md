@@ -5,7 +5,7 @@ aliases: [期待値の方程式, a + bX の形で持つ, 吸収マルコフ連�
 type: technique
 field: comb
 chapter: 確率・期待値
-order: 400
+order: 385
 level: 青
 kind: [確率・期待値, DP, 線形代数・行列]
 prerequisites: [expected-value-dp]

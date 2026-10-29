@@ -192,7 +192,7 @@ K 個上ごとに表を引き直して二分探索すると 1 回 $O(\log^2 N)$ 
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [ABC014 D. 閉路](https://atcoder.jp/contests/abc014/tasks/abc014_4)（diff 1856）：木に辺 (a, b) を 1 本足したときにできる閉路の長さを、Q 個の質問に答える
+- [ABC014 D. 閉路](https://atcoder.jp/contests/abc014/tasks/abc014_4)（diff 1856・参考値）：木に辺 (a, b) を 1 本足したときにできる閉路の長さを、Q 個の質問に答える
 
 </div>
 
@@ -224,7 +224,7 @@ K 個上ごとに表を引き直して二分探索すると 1 回 $O(\log^2 N)$ 
 
 - [ABC235 E. MST + 1](https://atcoder.jp/contests/abc235/tasks/abc235_e)（diff 1304）：グラフと Q 本の追加の辺が与えられ、各辺を 1 本だけ足したときにその辺が最小全域木に含まれうるかを判定する
 - [ABC294 G. Distance Queries on a Tree](https://atcoder.jp/contests/abc294/tasks/abc294_g)（diff 1702）：重み付きの木で、辺の重みの変更と 2 頂点間の距離の質問に答える
-- [典型90 035. Preserve Connectivity（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_ai)（diff —）：木と多数のクエリが与えられ、各クエリで指定された頂点をすべてつなぐのに必要な辺の数の最小値を答える
+- [典型90 035. Preserve Connectivity（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_ai)（diff なし）：木と多数のクエリが与えられ、各クエリで指定された頂点をすべてつなぐのに必要な辺の数の最小値を答える
 
 </div>
 

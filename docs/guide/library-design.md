@@ -234,8 +234,8 @@ cph の改造版の展開を使い、目印 `// @impl` でヘッダを分ける�
 | [橋・関節点・二重連結成分](../graph/lowlink.md) | グラフ | [two_edge_connected_components](https://judge.yosupo.jp/problem/two_edge_connected_components)、[biconnected_components](https://judge.yosupo.jp/problem/biconnected_components) |
 | [特殊な最小全域木](../graph/spanning-tree-advanced.md) | グラフ | [directedmst](https://judge.yosupo.jp/problem/directedmst)、[manhattanmst](https://judge.yosupo.jp/problem/manhattanmst) |
 | [行列木定理](../graph/matrix-tree-theorem.md) | グラフ | [counting_spanning_tree_undirected](https://judge.yosupo.jp/problem/counting_spanning_tree_undirected)、[counting_spanning_tree_directed](https://judge.yosupo.jp/problem/counting_spanning_tree_directed) |
-| [オイラー路（一筆書き）](../graph/euler-path.md) | グラフ | [eulerian_trail_directed](https://judge.yosupo.jp/problem/eulerian_trail_directed)、[eulerian_trail_undirected](https://judge.yosupo.jp/problem/eulerian_trail_undirected) |
 | [次数による平方分割](../graph/degree-sqrt.md) | グラフ | [enumerate_triangles](https://judge.yosupo.jp/problem/enumerate_triangles)、[counting_c4](https://judge.yosupo.jp/problem/counting_c4) |
+| [オイラー路（一筆書き）](../graph/euler-path.md) | グラフ | [eulerian_trail_directed](https://judge.yosupo.jp/problem/eulerian_trail_directed)、[eulerian_trail_undirected](https://judge.yosupo.jp/problem/eulerian_trail_undirected) |
 | [二部マッチング](../graph/bipartite-matching.md) | グラフ | [bipartitematching](https://judge.yosupo.jp/problem/bipartitematching) |
 | [最小費用流](../graph/min-cost-flow.md) | グラフ | [min_cost_b_flow](https://judge.yosupo.jp/problem/min_cost_b_flow)、[assignment](https://judge.yosupo.jp/problem/assignment) |
 | [一般グラフのマッチング](../graph/general-matching.md) | グラフ | [general_matching](https://judge.yosupo.jp/problem/general_matching)、[general_weighted_matching](https://judge.yosupo.jp/problem/general_weighted_matching) |

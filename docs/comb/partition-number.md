@@ -264,7 +264,7 @@ $$
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [DWACON2018-PRELIMS C. Kill/Death](https://atcoder.jp/contests/dwacon2018-prelims/tasks/dwacon2018_prelims_c)（diff —）：キル数が広義単調減少の 2 チームについて、自分のデス数の合計が相手のキル数の合計に等しく、同じキル数の人どうしではデス数が広義単調減少になるデス数の割り当ての数を求める。
+- [DWACON2018-PRELIMS C. Kill/Death](https://atcoder.jp/contests/dwacon2018-prelims/tasks/dwacon2018_prelims_c)（diff なし）：キル数が広義単調減少の 2 チームについて、自分のデス数の合計が相手のキル数の合計に等しく、同じキル数の人どうしではデス数が広義単調減少になるデス数の割り当ての数を求める。
 - [ARC107 D. Number of Multisets](https://atcoder.jp/contests/arc107/tasks/arc107_d)（diff 2099）：1, 1/2, 1/4, … の形の有理数をちょうど N 個選んで和を K にする多重集合の数を求める（K ≤ N ≤ 3000）。
 
 </div>

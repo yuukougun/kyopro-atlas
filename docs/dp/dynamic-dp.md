@@ -26,7 +26,7 @@ sections:
   - {title: 木の上の動的 DP（Static Top Tree へ）, anchor: on-trees}
   - {title: ライブラリでの検証, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -157,8 +157,9 @@ $a_v$ を書き換えたときの流れは次のとおりである。
 
 ## 学ぶための資料 {#resources}
 
-- 列の動的 DP は、[行列累乗](../math/matrix-power.md)と[セグメント木に何を載せるか](../ds/segment-tree-monoids.md#matrix)の組み合わせで足りる。例題の解説（kmjp 氏・ikatakos 氏）は、同じ問題を 3×3 と 4×4 の別の状態の取り方で解いていて、状態の設計の幅を見るのによい。
-- 木の上の動的 DP は、OI Wiki の「动态 DP」（中国語）が HL 分解の重いパスごとに行列のセグメント木を作る方法を、最大重み独立集合を題材に説明している。
+- 列の動的 DP は、[行列累乗](../math/matrix-power.md)と[セグメント木に何を載せるか](../ds/segment-tree-monoids.md#matrix)の組み合わせで足りる。
+- [kmjp「AtCoder ABC #246 : Ex - 01? Queries」](https://kmjp.hatenablog.jp/entry/2022/04/04/0930)と [ikatakos「AtCoder Beginner Contest 246 Ex問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0402_abc246)：例題の解説。同じ問題を 3×3 と 4×4 の別の状態の取り方で解いていて、状態の設計の幅を見るのによい。
+- [OI Wiki「动态 DP」](https://oi-wiki.org/dp/dynamic/)（中国語）：木の上の動的 DP の解説。HL 分解の重いパスごとに行列のセグメント木を作る方法を、最大重み独立集合を題材に説明している。
 - Static Top Tree は[Static Top Tree のページ](../tree/static-top-tree.md#resources)の資料を参照する。
 
 ## 例題 {#examples}
@@ -189,6 +190,13 @@ $a_v$ を書き換えたときの流れは次のとおりである。
     **答え**：初めのベクトルは $(0, 0, 1)$ なので、全体の積 $P$ の 3 行目（添字 2 の行）が最後の $(x_0, x_1, 1)$ になる。答えは $P_{2,0} + P_{2,1}$ を 998244353 で割った余りである。
 
     **計算量**：構築が $O(3^3 N)$、1 回の書き換えが $O(3^3 \log N)$ である。コード片は[セグメント木に載せる節](#matrix-on-segment-tree)にある。
+
+## 使い分け {#comparison}
+
+- 書き換えがなく、同じ遷移を $10^{18}$ 回のように巨大な回数くり返すだけなら、セグメント木は要らず、[行列累乗](../math/matrix-power.md#dp-transition)で足りる。
+- 入力の書き換えではなく、DP の段を進めるたびに前の段の数か所だけが変わる形なら、[インライン DP](../dp/inline-dp.md#diff-per-row) で 1 本の配列（または遅延セグメント木）を書き換える。
+- 書き換えの回数 $Q$ が少なく、そのたびに DP をやり直す $O(S^2 N Q)$ が間に合うなら、遷移を行列にしなくてよい。
+- 遷移の形からほかの高速化の道具を選ぶときは、[DP の高速化の選び方](../dp/dp-speedup-overview.md#shape-to-tool)の早見表を見る。
 
 ## 参考 {#references}
 

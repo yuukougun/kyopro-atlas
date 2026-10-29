@@ -33,7 +33,7 @@ sections:
   - {title: 部分文字列の辞書順 K 番目, anchor: kth-substring, level: 発展}
   - {title: 自作するなら：ダブリング O(N log^2 N) → O(N log N) → SA-IS, anchor: build-your-own}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -243,7 +243,7 @@ Library Checker の suffixarray で、自作の SA を確かめられる。
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [PRACTICE2 I. Number of Substrings](https://atcoder.jp/contests/practice2/tasks/practice2_i)（diff —）：文字列の異なる部分文字列の個数を求める。
+- [PRACTICE2 I. Number of Substrings](https://atcoder.jp/contests/practice2/tasks/practice2_i)（diff なし）：文字列の異なる部分文字列の個数を求める。
 
 </div>
 

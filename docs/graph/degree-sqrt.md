@@ -5,7 +5,7 @@ aliases: [次数の平方分割, 重い頂点と軽い頂点, 三角形の列挙
 type: technique
 field: graph
 chapter: 探索木と次数の性質
-order: 380
+order: 365
 level: 青
 kind: [グラフ探索, クエリ処理の工夫]
 prerequisites: [graph-basics]
@@ -183,7 +183,7 @@ Library Checker の [Counting C4's](https://judge.yosupo.jp/problem/counting_c4)
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 083. Colorful Graph（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_ce)（diff —）：「頂点 x の今の色を答え、x とその隣接頂点すべてを色 y にする」クエリを順に処理する。
+- [典型90 083. Colorful Graph（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_ce)（diff なし）：「頂点 x の今の色を答え、x とその隣接頂点すべてを色 y にする」クエリを順に処理する。
 
 </div>
 

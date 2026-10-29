@@ -27,7 +27,7 @@ sections:
   - {title: 箱根駅伝 DP（相手が未定の位置と値の数を持つ）, anchor: hakone-ekiden-dp}
   - {title: 連結成分 DP（ブロックを作る・端に付ける・つなぐ）, anchor: connected-component-dp, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -195,7 +195,7 @@ AtCoder の ABC での出題は確かめられなかった。USACO Guide の DP 
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC T. Permutation](https://atcoder.jp/contests/dp/tasks/dp_t)（diff —）：隣り合う要素の大小関係（< と >）が文字列で指定されたとき、それを満たす 1〜N の順列の個数を求める。
+- [EDPC T. Permutation](https://atcoder.jp/contests/dp/tasks/dp_t)（diff なし）：隣り合う要素の大小関係（< と >）が文字列で指定されたとき、それを満たす 1〜N の順列の個数を求める。
 
 </div>
 
@@ -243,7 +243,7 @@ AtCoder の ABC での出題は確かめられなかった。USACO Guide の DP 
 
 - [ABC468 G. Restricted Permutation](https://atcoder.jp/contests/abc468/tasks/abc468_g)（diff 1975）：o と x からなる長さ N の文字列 S について、各 k で「1〜k が連続して並ぶ」かどうかが S_k と一致する、1〜N の順列の数を求める。
 - [ABC309 G. Ban Permutation](https://atcoder.jp/contests/abc309/tasks/abc309_g)（diff 2372）：すべての i で |P_i − i| ≥ X となる 1〜N の順列 P の数を求める。
-- [TDPC O. 文字列](https://atcoder.jp/contests/tdpc/tasks/tdpc_string)（diff —）：各文字の個数が決まった文字を並べる方法のうち、同じ文字が隣り合わないものの個数を求める。
+- [TDPC O. 文字列](https://atcoder.jp/contests/tdpc/tasks/tdpc_string)（diff なし）：各文字の個数が決まった文字を並べる方法のうち、同じ文字が隣り合わないものの個数を求める。
 - [EXAWIZARDS2019 D. Modulo Operations](https://atcoder.jp/contests/exawizards2019/tasks/exawizards2019_d)（diff 2075）：N 個の数を好きな順に使って x を x mod y で置き換えるとき、N! 通りの順番すべてについての最終的な値の和を求める。
 
 </div>

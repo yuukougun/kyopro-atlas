@@ -136,9 +136,9 @@ Library Checker では、最大マッチングを [Matching on General Graph](ht
 
 ## 学ぶための資料 {#resources}
 
-- Wikipedia（英語）の Blossom algorithm の項は、花の定義・縮約したグラフで増加路が保たれる理由・増加路を元のグラフに戻す方法を、図と擬似コードで説明している。
-- ei1333 氏のライブラリの Gabow Edmonds は、一般グラフの最大マッチングの実装例で、Library Checker の [Matching on General Graph](https://judge.yosupo.jp/problem/general_matching) で確かめられている。
-- Harvey の論文「Algebraic Structures and Algorithms for Matching and Matroid Problems (Preliminary Version)」（英語）は、Tutte 行列に乱数を入れて最大マッチングを求める代数的な方法を扱い、階数と最大マッチングの関係（Lovász）にも触れている。
+- [Wikipedia「Blossom algorithm」](https://en.wikipedia.org/wiki/Blossom_algorithm)（英語）：花の定義・縮約したグラフで増加路が保たれる理由・増加路を元のグラフに戻す方法を、図と擬似コードで説明している。
+- [ei1333「Gabow Edmonds (一般グラフの最大マッチング)」](https://ei1333.github.io/library/graph/flow/gabow-edmonds.hpp)：一般グラフの最大マッチングの実装例で、Library Checker の [Matching on General Graph](https://judge.yosupo.jp/problem/general_matching) で確かめられている。
+- [Nicholas J. A. Harvey「Algebraic Structures and Algorithms for Matching and Matroid Problems (Preliminary Version)」](https://arxiv.org/abs/cs/0601026)（英語の論文）：Tutte 行列に乱数を入れて最大マッチングを求める代数的な方法を扱い、階数と最大マッチングの関係（Lovász）にも触れている。
 
 ## 例題 {#examples}
 

@@ -285,7 +285,7 @@ $$
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [PRACTICE2 L. Lazy Segment Tree](https://atcoder.jp/contests/practice2/tasks/practice2_l)（diff —）：0/1 の列の区間反転と、区間の転倒数の質問を処理する。
+- [PRACTICE2 L. Lazy Segment Tree](https://atcoder.jp/contests/practice2/tasks/practice2_l)（diff なし）：0/1 の列の区間反転と、区間の転倒数の質問を処理する。
 - [ABC332 F. Random Update Query](https://atcoder.jp/contests/abc332/tasks/abc332_f)（diff 1786）：区間内の 1 点を等確率で選んで X に書き換える操作を繰り返した後の、各要素の期待値を答える。
 - [ABC237 G. Range Sort Query](https://atcoder.jp/contests/abc237/tasks/abc237_g)（diff 2088）：区間を昇順・降順にソートする操作を繰り返した後の、値 X の位置を求める。
 - [ABC371 F. Takahashi in Narrow Road](https://atcoder.jp/contests/abc371/tasks/abc371_f)（diff 2109）：一列に並ぶ人を順に目的地へ動かすときの、総移動回数を求める。

@@ -29,7 +29,7 @@ sections:
   - {title: 辞書順最小の部分列（残りで足りる範囲の最小の文字を選ぶ）, anchor: lexicographically-smallest, level: 水}
   - {title: 繰り返した文字列の部分列（文字ごとの累積個数で位置を飛ばす）, anchor: repeated-string, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -206,7 +206,7 @@ $T$ の各文字を $k$ 回ずつ並べた文字列が入るかは $k$ につい
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC324 E. Joint Two Strings](https://atcoder.jp/contests/abc324/tasks/abc324_e)（diff 1153）：N 個の文字列から 2 つを順に連結したものが T を部分列に含むような組の数を求める。
-- [典型90 006. Smallest Subsequence（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_f)（diff —）：文字列の長さ K の部分列のうち、辞書順最小のものを求める。
+- [典型90 006. Smallest Subsequence（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_f)（diff なし）：文字列の長さ K の部分列のうち、辞書順最小のものを求める。
 - [ABC346 F. SSttrriinngg in StringString](https://atcoder.jp/contests/abc346/tasks/abc346_f)（diff 1840）：S を N 回並べた文字列に、T の各文字を k 回ずつ並べた文字列が部分列として入る最大の k を求める。
 
 </div>

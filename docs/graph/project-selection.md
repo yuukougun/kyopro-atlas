@@ -263,7 +263,7 @@ $$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 040. Get More Money（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_an)（diff —）：家に入ると得られる利得とかかる費用があり、ある家に入るには別の家にも入る必要があるとき、得られる値の最大値を求める。
+- [典型90 040. Get More Money（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_an)（diff なし）：家に入ると得られる利得とかかる費用があり、ある家に入るには別の家にも入る必要があるとき、得られる値の最大値を求める。
 
 </div>
 
@@ -306,7 +306,7 @@ $$
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [鉄則本 B68. ALGO Express](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_eo)（diff —）：各駅を急行の停車駅にするかを選ぶ。停車駅にすると利益（負もある）が得られ、「駅 A を停車駅にするなら駅 B も停車駅にする」という条件がいくつかあるとき、利益の合計の最大値を求める。
+- [鉄則本 B68. ALGO Express](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_eo)（diff なし）：各駅を急行の停車駅にするかを選ぶ。停車駅にすると利益（負もある）が得られ、「駅 A を停車駅にするなら駅 B も停車駅にする」という条件がいくつかあるとき、利益の合計の最大値を求める。
 - [ABC259 G. Grid Card Game](https://atcoder.jp/contests/abc259/tasks/abc259_g)（diff 2428）：整数の書かれた盤面でいくつかの行と列を選び、選んだ行・列に含まれるマスの和（重なりは 1 回）を最大化する。ただし負のマスを行と列の両方から選んではいけない。
 - [ABC326 G. Unlock Achievement](https://atcoder.jp/contests/abc326/tasks/abc326_g)（diff 2470）：スキルのレベルを上げる費用と、各アチーブメントの達成条件（スキルのレベル）と報酬が与えられ、報酬から費用を引いた値の最大値を求める。
 - [ABC193 F. Zebraness](https://atcoder.jp/contests/abc193/tasks/abc193_f)（diff 2475）：一部が白・黒に決まった盤面の残りのマスを塗り、隣り合う異なる色のマスの組の数を最大化する。

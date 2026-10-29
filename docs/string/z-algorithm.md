@@ -278,7 +278,7 @@ $S$ を $L = S[0, i)$ と $Q' = S[i, N)$ に分けると、$T = L + \mathrm{rev}
 
 - [ABC257 G. Prefix Concatenation](https://atcoder.jp/contests/abc257/tasks/abc257_g)（diff 2078）：T を S の接頭辞の連結に分けるときの最小の個数を求める。
 - [ABC343 G. Compress Strings](https://atcoder.jp/contests/abc343/tasks/abc343_g)（diff 2114）：N 個（≤ 20）の文字列をすべて連続部分文字列として含む文字列の長さの最小を求める。
-- [ARC055 C. ABCAC](https://atcoder.jp/contests/arc055/tasks/arc055_c)（diff 2392）：S を A+B+C+A+C の形に分ける方法の数を求める。
+- [ARC055 C. ABCAC](https://atcoder.jp/contests/arc055/tasks/arc055_c)（diff 2392・参考値）：S を A+B+C+A+C の形に分ける方法の数を求める。
 
 </div>
 

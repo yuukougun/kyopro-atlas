@@ -27,7 +27,7 @@ sections:
   - {title: 決める順番を変えて積の法則を使えるようにする, anchor: order-of-choice}
   - {title: 写像 12 相の「玉も箱も区別する」マス（k^n と順列）, anchor: twelvefold-cells}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -211,7 +211,7 @@ $k^n$ と $n^k$ を取り違えやすい。「選ぶ側」が 1 つずつ「選�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 069. Colorful Blocks 2（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_bq)（diff —）：一列に並んだ N 個のブロックを K 色で塗り、距離 2 以内のブロックがすべて異なる色になる塗り方の数を求める。
+- [典型90 069. Colorful Blocks 2（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_bq)（diff なし）：一列に並んだ N 個のブロックを K 色で塗り、距離 2 以内のブロックがすべて異なる色になる塗り方の数を求める。
 
 </div>
 

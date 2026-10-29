@@ -231,7 +231,7 @@ CDQ 分割統治は[またぐものの数え方](#crossing)の延長である。
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [CHOKUDAI_S001 J. 転倒数](https://atcoder.jp/contests/chokudai_S001/tasks/chokudai_S001_j)（diff —）：隣接交換で数列をソートするときの交換回数（転倒数）を求める。
+- [CHOKUDAI_S001 J. 転倒数](https://atcoder.jp/contests/chokudai_S001/tasks/chokudai_S001_j)（diff なし）：隣接交換で数列をソートするときの交換回数（転倒数）を求める。
 - [ARC075 E. Meaningful Mean](https://atcoder.jp/contests/arc075/tasks/arc075_c)（diff 1979）：平均が K 以上になる連続部分列の個数を求める。
 
 </div>

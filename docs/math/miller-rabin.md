@@ -27,7 +27,7 @@ sections:
   - {title: 'ACL の内部実装（internal::is_prime_constexpr）', anchor: acl-internal}
   - {title: 自作するときの要点と確かめ方, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -162,9 +162,9 @@ ACL の実装は $n \in \{2, 7, 61\}$ を先に素数と答えてから底を試
 
 ## 学ぶための資料 {#resources}
 
-- drken 氏の「ミラー・ラビンの素数判定法」は、フェルマーの小定理から判定の条件を導く流れ、数値例、`__uint128_t` と Montgomery 乗算の 2 通りの実装と速さの比較を載せている
-- cp-algorithms の Primality tests と Integer factorization は、64bit の決定的な底、底が $n$ の倍数の場合の扱い、rho の期待計算量と Brent の改良を英語でまとめている
-- Wikipedia（英語）の Montgomery modular multiplication は、Montgomery 形式と還元の手順を式で説明している
+- [drken「ミラー・ラビンの素数判定法 (Miller-Rabin 法)」](https://drken1215.hatenablog.com/entry/2023/05/23/233000)：フェルマーの小定理から判定の条件を導く流れ、数値例、`__uint128_t` と Montgomery 乗算の 2 通りの実装と速さの比較を載せている
+- [cp-algorithms「Primality tests」](https://cp-algorithms.com/algebra/primality_tests.html)と [cp-algorithms「Integer factorization」](https://cp-algorithms.com/algebra/factorization.html)（英語）：64bit の決定的な底、底が $n$ の倍数の場合の扱い、rho の期待計算量と Brent の改良をまとめている
+- [Wikipedia「Montgomery modular multiplication」](https://en.wikipedia.org/wiki/Montgomery_modular_multiplication)（英語）：Montgomery 形式と還元の手順を式で説明している
 
 ## 練習問題 {#practice}
 

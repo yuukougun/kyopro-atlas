@@ -253,7 +253,7 @@ $$
 
 - 区間に足して最後に各点の値を読むだけなら[いもす法](../basics/imos.md)である。最小回数や可否を問われ、操作の組み合わせを選ぶ必要があるなら差分列への言い換えを使う
 - 境界の数を数えるなら、差分列の 0 でない項の数と見て[ランレングス圧縮](../basics/run-length-encoding.md)で数える
-- 隣り合う要素の入れ替えの回数なら、差分列ではなく転倒数で言い換える（[言い換えの典型の操作の節](../thinking/reformulation.md#operations)）
+- 隣り合う要素の入れ替えの回数なら、差分列ではなく[転倒数](../ds/inversion-number.md#adjacent-swaps)で言い換える。操作をどの量に言い換えるかの気づき方は[言い換えの典型の操作の節](../thinking/reformulation.md#operations)にまとめてある
 
 ## 参考 {#references}
 

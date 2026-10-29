@@ -24,7 +24,7 @@ sections:
   - {title: 包除と組み合わせる例, anchor: with-inclusion-exclusion}
   - {title: 自作するときの要点, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -121,8 +121,8 @@ Library Checker には二項係数の部分和そのものの問題はない。�
 
 ## 学ぶための資料 {#resources}
 
-- ikatakos 氏の ABC235 の記録の G 問題の節：パスカルの三角形で値が下の行へ 2 回ずつ足し込まれることから、$n$ を 1 増やす式を導いている。
-- kmjp 氏の ABC235 G の記事：包除の式と、部分和の表を $n$ の順に埋めるコード。
+- [ikatakos「HHKB Programming Contest 2022（AtCoder Beginner Contest 235）F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0115_abc235)の G 問題の節：パスカルの三角形で値が下の行へ 2 回ずつ足し込まれることから、$n$ を 1 増やす式を導いている。
+- [kmjp「AtCoder ABC #235 : G - Gardens」](https://kmjp.hatenablog.jp/entry/2022/01/17/0900)：包除の式と、部分和の表を $n$ の順に埋めるコード。
 - 2 つの座標を Mo の順に動かす考え方は [Mo's algorithm の 2 つの接頭辞の節](../ds/mo-algorithm.md#two-prefixes)にまとめた。
 
 ## 例題 {#examples}

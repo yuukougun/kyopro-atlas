@@ -25,7 +25,7 @@ sections:
   - {title: 練習用のコンテスト, anchor: practice-contests}
   - {title: 生成 AI のルール, anchor: ai-rules}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -104,10 +104,11 @@ $$
 
 つまり、difficulty 1600 の問題は「青の人なら解ける問題」ではなく、「レート 1600 の人が半々で解ける問題」である。レート 2000 の人でも 7 回に 1 回ほどは解けない。
 
-推定の約束で、知っておくと読み違えないものが 3 つある。
+推定の約束で、知っておくと読み違えないものが 4 つある。
 
 - **使うのは 2 回目以上の参加者の結果だけ**：初めて出た人は、レートがまだ実力を表さないので除く。
-- **difficulty のない問題がある**：Rated のコンテストとして開かれていない問題集（典型90・EDPC など）や、参加者が少ない問題には値が付かない。この教材では「diff —」と書く。
+- **difficulty のない問題がある**：Rated のコンテストとして開かれていない問題集（典型90・EDPC など）や、参加者が少ない問題には値が付かない。この教材の問題の行では「diff なし」と書く（表の diff の列では「—」）。
+- **古いコンテストの値は参考値**：Rated のコンテストが始まる前（2016 年 7 月の abc041・arc057 まで）の ABC・ARC などには、Rated でなくても値が付く。当時の参加者にはレートがないので、AtCoder Problems はそれまでの順位から再現したレートで推定し、試験的な値（experimental）として出している。この教材の問題の行では「diff 1856・参考値」と書く。
 - **400 未満は縮めた値**：レートの表示と同じ式で 0 より大きく 400 以下の値に直してある。A・B の difficulty が 10〜50 ほどなのはこのためで、差を引き算で比べても意味が薄い。
 
 difficulty は参加者のレートを物差しにしているので、参加者全体が強くなって同じ順位を取りにくくなる、という意味の難化はこの数字には表れない。ABC391〜410（2025 年 2〜6 月）の問題は、配点から見込むより difficulty が 100 ほど低く出ていたという分析（sirsoldano 氏）もある。AtCoder Problems のデータで ABC の F の中央値を年ごとに数えると、2024 年 1876・2025 年 1678・2026 年 1864 で、2026 年は 2024 年と同じ程度に戻っている。この教材では時期を区別せずに difficulty を使う。
@@ -238,7 +239,7 @@ AtCoder生成AI対策ルール（20261014 版）は、ABC・ARC・AGC の開催�
 
 ## 参考 {#references}
 
-- [kenkoooo「AtCoderProblems / time-estimator/function.py」](https://github.com/kenkoooo/AtCoderProblems/blob/master/lambda-functions/time-estimator/function.py)：difficulty の推定の式（傾き ln6/400 のロジスティック曲線）、対象を 2 回目以上の参加者に限ること、参加者のレートの 400 以下を縮める前に戻すこと
+- [kenkoooo「AtCoderProblems / time-estimator/function.py」](https://github.com/kenkoooo/AtCoderProblems/blob/master/lambda-functions/time-estimator/function.py)：difficulty の推定の式（傾き ln6/400 のロジスティック曲線）、対象を 2 回目以上の参加者に限ること、参加者のレートの 400 以下を縮める前に戻すこと、Rated が始まる前の ABC・ARC などでは順位から再現したレートを使い、値を experimental とすること
 - [kenkoooo「AtCoderProblems：atcoder-problems-frontend/src/utils/index.ts」](https://github.com/kenkoooo/AtCoderProblems/blob/master/atcoder-problems-frontend/src/utils/index.ts)：difficulty の 400 未満を縮めて表示する式（clipDifficulty）
 - [anqooqie「AtCoderのレート計算式」](https://qiita.com/anqooqie/items/92005e337a0d2569bdbd)：レートの計算の 3 段（0.9 の重み・$2^{p/800}$ の平均・参加回数の補正）と補正の値、400 未満の縮め方、パフォーマンスの上限
 - [drken「AtCoder コンテストについての tips」](https://qiita.com/drken/items/8a6f139158cde8a61dce)：順位の決まり方、色の区切り、参加回数による補正がない場合の平均レートの見積もり

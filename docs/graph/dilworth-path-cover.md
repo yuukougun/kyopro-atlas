@@ -25,7 +25,7 @@ sections:
   - {title: Hall の結婚定理, anchor: hall}
   - {title: 自作するときの要点と Library Checker, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -133,9 +133,9 @@ Library Checker には最小パス被覆そのものの問題はないので、�
 
 ## 学ぶための資料 {#resources}
 
-- Wikipedia（英語）の「Dilworth's theorem」：König の定理からの証明と、二部マッチングで幅（最大反鎖の大きさ）が求まること
-- Wikipedia（英語）の「Hall's marriage theorem」：定理の主張といくつかの証明
-- OI Wiki の「序理论」（中国語）：鎖・反鎖の定義と、Dilworth の定理・Mirsky の定理
+- [Wikipedia「Dilworth's theorem」](https://en.wikipedia.org/wiki/Dilworth%27s_theorem)（英語）：König の定理からの証明と、二部マッチングで幅（最大反鎖の大きさ）が求まること
+- [Wikipedia「Hall's marriage theorem」](https://en.wikipedia.org/wiki/Hall%27s_marriage_theorem)（英語）：定理の主張といくつかの証明
+- [OI Wiki「序理论」](https://oi-wiki.org/math/order-theory/)（中国語）：鎖・反鎖の定義と、Dilworth の定理・Mirsky の定理
 
 ## 例題 {#examples}
 

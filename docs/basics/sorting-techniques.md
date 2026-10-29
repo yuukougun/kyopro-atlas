@@ -26,7 +26,7 @@ sections:
   - {title: 比較関数の要件（狭義の弱順序）, anchor: strict-weak-ordering}
   - {title: 比率は掛け算で比べる・同点の順序（stable_sort）, anchor: ratio-and-ties}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -188,7 +188,7 @@ $$
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [典型90 014. We Used to Sing a Song Together（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_n)（diff —）：N 人の小学生と N 校の学校を 1 対 1 に割り当て、距離の和を最小化する。
+- [典型90 014. We Used to Sing a Song Together（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_n)（diff なし）：N 人の小学生と N 校の学校を 1 対 1 に割り当て、距離の和を最小化する。
 - [ABC308 C. Standings](https://atcoder.jp/contests/abc308/tasks/abc308_c)（diff 605）：コイン投げの成功率の高い順（同率なら番号の小さい順）に人を並べる。
 - [ABC187 D. Choose Me](https://atcoder.jp/contests/abc187/tasks/abc187_d)（diff 650）：演説する町を選んで得票で相手を上回るための、最小の町の数を求める。
 

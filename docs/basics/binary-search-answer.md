@@ -28,7 +28,7 @@ sections:
   - {title: 判定を DP で作る（決め打ちごとに初期化し直す）, anchor: dp-check, level: 青}
   - {title: 実数の二分探索（反復回数を固定する）, anchor: real-number, level: 水}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -184,7 +184,7 @@ DP で判定するときの典型的なバグは、表を前の $x$ の値が残
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 001. Yokan Party（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_a)（diff —）：ようかんの切れ目の候補から K か所を選んで切るとき、最も短いピースの長さの最大値を求める。
+- [典型90 001. Yokan Party（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_a)（diff なし）：ようかんの切れ目の候補から K か所を選んで切るとき、最も短いピースの長さの最大値を求める。
 
 </div>
 
@@ -205,7 +205,7 @@ DP で判定するときの典型的なバグは、表を前の $x$ の値が残
 - [ABC257 D. Jumping Takahashi 2](https://atcoder.jp/contests/abc257/tasks/abc257_d)（diff 1203）：どこか 1 つのジャンプ台から出発してすべてのジャンプ台へ行けるようにするための、最小の訓練回数を求める。
 - [ABC415 E. Hungry Takahashi](https://atcoder.jp/contests/abc415/tasks/abc415_e)（diff 1212）：グリッドを左上から右か下へ進む間、毎日マスのコインを拾ってから食費を払うとき、一度も払えなくならないための最初のコインの枚数の最小値を求める。
 - [ABC174 E. Logs](https://atcoder.jp/contests/abc174/tasks/abc174_e)（diff 1227）：丸太を合計 K 回以下切るとき、最も長い丸太の長さの最小値を求める。
-- [ABC026 D. 高橋君ボール1号](https://atcoder.jp/contests/abc026/tasks/abc026_d)（diff 1406）：f(t) = At + B sin(Ctπ) が 100 になる t を、誤差の範囲で求める。
+- [ABC026 D. 高橋君ボール1号](https://atcoder.jp/contests/abc026/tasks/abc026_d)（diff 1406・参考値）：f(t) = At + B sin(Ctπ) が 100 になる t を、誤差の範囲で求める。
 
 </div>
 

@@ -28,7 +28,7 @@ sections:
   - {title: '区間を点 (l, r) と見て数える', anchor: intervals-as-points}
   - {title: 3 次元以上（項の数と符号の決め方）, anchor: higher-dimensions, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -233,7 +233,7 @@ $$
 
 - [ABC461 D. Count Subgrid Sum = K](https://atcoder.jp/contests/abc461/tasks/abc461_d)（diff 914）：グリッドの部分長方形のうち、書かれた値の和がちょうど K になるものの個数を求める。
 - [ABC311 E. Defect-free Squares](https://atcoder.jp/contests/abc311/tasks/abc311_e)（diff 1293）：穴のあるマスが N 個あるグリッドで、穴を含まない正方形の個数を求める。
-- [ARC025 B. チョコレート](https://atcoder.jp/contests/arc025/tasks/arc025_2)（diff 1369）：市松模様の板チョコから、黒と白の値の和が等しい長方形のうち最大の面積を求める。
+- [ARC025 B. チョコレート](https://atcoder.jp/contests/arc025/tasks/arc025_2)（diff 1369・参考値）：市松模様の板チョコから、黒と白の値の和が等しい長方形のうち最大の面積を求める。
 - [ABC075 D. Axis-Parallel Rectangle](https://atcoder.jp/contests/abc075/tasks/abc075_d)（diff 1470）：K 個以上の点を含む、軸に平行な長方形の最小の面積を求める。
 
 </div>

@@ -28,7 +28,7 @@ sections:
   - {title: 割れないときの3つの場合（割る数が p の倍数・公比 ≡ 1・法が素数でない）, anchor: not-invertible}
   - {title: 'ACL の inv_mod と modint::inv', anchor: acl}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -242,7 +242,7 @@ mod での割り算は、数え上げや確率の答えを余りで求める手�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 082. Counting Numbers（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_cd)（diff —）：L 以上 R 以下の各整数 x を x 回ずつ書いたときの、書いた文字数の合計を 10^9+7 で割った余りで求める（R ≤ 10^18）。
+- [典型90 082. Counting Numbers（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_cd)（diff なし）：L 以上 R 以下の各整数 x を x 回ずつ書いたときの、書いた文字数の合計を 10^9+7 で割った余りで求める（R ≤ 10^18）。
 
 </div>
 
@@ -257,7 +257,7 @@ $d$ 桁の整数 $x$ を $x$ 回書くと $d \cdot x$ 文字になる。桁数�
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [アルゴ数学 053. Sum of 4^N](https://atcoder.jp/contests/math-and-algorithm/tasks/math_and_algorithm_as)（diff —）：4^0 + 4^1 + … + 4^N を 10^9+7 で割った余りで求める（N ≤ 10^18）。
+- [アルゴ数学 053. Sum of 4^N](https://atcoder.jp/contests/math-and-algorithm/tasks/math_and_algorithm_as)（diff なし）：4^0 + 4^1 + … + 4^N を 10^9+7 で割った余りで求める（N ≤ 10^18）。
 - [ABC357 D. 88888888](https://atcoder.jp/contests/abc357/tasks/abc357_d)（diff 970）：正の整数 N を N 回並べてできる整数を 998244353 で割った余りを求める（N ≤ 10^18）。
 - [ABC186 E. Throne](https://atcoder.jp/contests/abc186/tasks/abc186_e)（diff 1461）：N 個の椅子が円形に並び、玉座から S 個先の椅子にいる人が 1 回に K 個ずつ進むとき、玉座に着くまでの最小の回数を求める（着けないなら −1）。
 

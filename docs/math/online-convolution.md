@@ -26,7 +26,7 @@ sections:
   - {title: オンライン畳み込み（左半分を確定させてから右半分へ寄与を足す）, anchor: online}
   - {title: ACL の convolution と自作するときの要点, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -124,9 +124,9 @@ Library Checker では次の問題で確かめられる。オンライン畳み�
 
 ## 学ぶための資料 {#resources}
 
-- Nyaan's Library の Relaxed Convolution：$a_i$ と $b_i$ を 1 項ずつ渡すと $c_i$ を返す、両側オンラインの実装。Library Checker の逆元・exp で確かめられている。
-- けんちょん（drken）氏の ABC213 H の記事：素朴な DP から、なぜ 1 回の畳み込みでは済まないか、左半分から右半分へ寄与を足す分割統治までを順に説明している。
-- kmjp 氏の ABC213 H・ABC352 G の記事：短い記述と実装で、2 つの使い方（オンライン畳み込みと積の分割統治）をそれぞれ確かめられる。
+- [Nyaan「Relaxed Convolution | Nyaan's Library」](https://nyaannyaan.github.io/library/ntt/relaxed-convolution.hpp)：$a_i$ と $b_i$ を 1 項ずつ渡すと $c_i$ を返す、両側オンラインの実装。Library Checker の逆元・exp で確かめられている。
+- [けんちょん「AtCoder ABC 213 H - Stroll (4D, 赤色, 600 点)」](https://drken1215.hatenablog.com/entry/2021/08/14/184730)：素朴な DP から、なぜ 1 回の畳み込みでは済まないか、左半分から右半分へ寄与を足す分割統治までを順に説明している。
+- [kmjp「AtCoder ABC #213 : H - Stroll」](https://kmjp.hatenablog.jp/entry/2021/08/15/0930)と [kmjp「AtCoder ABC #352 : G - Socks 3」](https://kmjp.hatenablog.jp/entry/2024/05/05/0900)：短い記述と実装で、2 つの使い方（オンライン畳み込みと積の分割統治）をそれぞれ確かめられる。
 
 ## 例題 {#examples}
 

@@ -25,7 +25,7 @@ sections:
   - {title: 区分的な多項式の積分, anchor: piecewise}
   - {title: 自作するときの要点, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -139,9 +139,9 @@ Library Checker に、連続値の確率そのものの問題はない（2026-10
 
 ## 学ぶための資料 {#resources}
 
-- 順序統計量（$K$ 番目の値）の分布と期待値 $K/(N+1)$ は、英語版 Wikipedia の Order statistic の記事にまとまっている（一様分布の $K$ 番目はベータ分布に従う）
-- 区分ごとに個数を数える DP は、kmjp 氏と ikatakos 氏の ABC226 H の解説が具体的である
-- 角度の比の型は、けんちょん（drken）氏の AGC021 B の解説が、ボロノイ図から外角に至る筋道を図付きで説明している
+- [Wikipedia「Order statistic」](https://en.wikipedia.org/wiki/Order_statistic)（英語）：順序統計量（$K$ 番目の値）の分布と期待値 $K/(N+1)$ がまとまっている（一様分布の $K$ 番目はベータ分布に従う）
+- [kmjp「AtCoder ABC #226 : H - Random Kth Max」](https://kmjp.hatenablog.jp/entry/2021/11/08/0930)と [ikatakos「AtCoder Beginner Contest 226 F,G,H 問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2021/1107_abc226)：区分ごとに個数を数える DP を、ABC226 H に沿って具体的に説明している
+- [drken「AtCoder AGC 021 B - Holes (黄色, 600 点)」](https://drken1215.hatenablog.com/entry/2019/04/02/225600)：角度の比の型について、ボロノイ図から外角に至る筋道を図付きで説明している
 
 ## 例題 {#examples}
 

@@ -28,7 +28,7 @@ sections:
   - {title: 負の値があるとき（累積和＋連想配列へ）, anchor: negative-values}
   - {title: 二分探索との関係（O(N log N) でも解ける）, anchor: vs-binary-search}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -198,9 +198,9 @@ updated: 2026-10-22
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC326 C. Peak](https://atcoder.jp/contests/abc326/tasks/abc326_c)（diff 292）：数直線上の贈り物を、長さ M の半開区間で最大何個取れるか求める。
-- [典型90 034. There are few types of elements（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_ah)（diff —）：K 種類以下の値からなる連続部分列の最大の長さを求める。
-- [ABC032 C. 列](https://atcoder.jp/contests/abc032/tasks/abc032_c)（diff 1244）：積が K 以下になる連続部分列の最大の長さを求める。
-- [ARC022 B. 細長いお菓子](https://atcoder.jp/contests/arc022/tasks/arc022_2)（diff 1395）：同じ値を 2 つ含まない連続部分列の最大の長さを求める。
+- [典型90 034. There are few types of elements（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_ah)（diff なし）：K 種類以下の値からなる連続部分列の最大の長さを求める。
+- [ABC032 C. 列](https://atcoder.jp/contests/abc032/tasks/abc032_c)（diff 1244・参考値）：積が K 以下になる連続部分列の最大の長さを求める。
+- [ARC022 B. 細長いお菓子](https://atcoder.jp/contests/arc022/tasks/arc022_2)（diff 1395・参考値）：同じ値を 2 つ含まない連続部分列の最大の長さを求める。
 
 </div>
 

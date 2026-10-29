@@ -30,7 +30,7 @@ sections:
   - {title: 環状の列（1 か所で切り、最初の状態を固定して DP を回す）, anchor: dp-cyclic}
   - {title: 状態数の見積もり（(P+1)^K・2^K・末尾の数文字の組の数）, anchor: state-count}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -231,7 +231,7 @@ $d$ の範囲は $0$ 以上 $N$ 以下なので、状態は $O(N^2)$ 個、遷�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC C. Vacation](https://atcoder.jp/contests/dp/tasks/dp_c)（diff —）：N 日間、毎日 3 つの活動から 1 つを選んで幸福度を得るとき、同じ活動を 2 日続けない場合の幸福度の和の最大を求める。
+- [EDPC C. Vacation](https://atcoder.jp/contests/dp/tasks/dp_c)（diff なし）：N 日間、毎日 3 つの活動から 1 つを選んで幸福度を得るとき、同じ活動を 2 日続けない場合の幸福度の和の最大を求める。
 
 </div>
 

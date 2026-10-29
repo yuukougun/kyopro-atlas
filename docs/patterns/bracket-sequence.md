@@ -70,18 +70,18 @@ updated: 2026-10-29
 
 ## 問われ方と手法の一覧 {#overview}
 
-問題文の形から行を探し、手法のページへ進む。代表の問題は、このページに載せたものだけを書いた。
+問題文の形から行を探し、問われ方のリンクから行の節へ移る。節で言い換えを確かめてから、手法のページへ進む。代表の問題は、このページに載せたものだけを書いた。
 
 | よく出る問われ方 | 使う手法 | ページ | 代表の問題 |
 |---|---|---|---|
-| 1 種類の括弧が正しいか | ±1 の累積和 | [累積和](../basics/prefix-sum.md) | — |
-| 複数種類の括弧・入れ子の構造・対応する部分を取り除く・置き換える | スタック | [スタック・キュー・deque の使いどころ](../ds/stack-techniques.md) | ABC394 D、ABC454 D |
-| ? の埋め方の数・長さ 2N の個数 | 開いている数を状態にした DP、カタラン数 | [DP の状態の設計](../dp/dp-state-design.md)、[鏡像法とカタラン数](../comb/reflection-principle.md#catalan) | — |
-| 更新ありで区間が正しいか | 区間加算と区間の最小値 | [遅延セグメント木](../ds/lazy-segment-tree.md) | — |
-| 同上（点の更新で済ませる） | （合計, 最小値）を載せる | [セグメント木に何を載せるか](../ds/segment-tree-monoids.md#pattern-table) | — |
-| 複数の括弧列を並べてつなぐ | 要約して 2 組に分けてソート | [交換論法と比較関数の設計](../basics/exchange-argument.md) | ABC167 F |
-| 価値が最大の正しい括弧列 | 接頭辞の条件と優先度付きキュー | [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md) | ABC407 E |
-| 数式・入れ子の構造を読む | 構文解析 | [構文解析](../misc/parsing.md) | — |
+| [1 種類の括弧が正しいか](#check) | ±1 の累積和 | [累積和](../basics/prefix-sum.md) | — |
+| [複数種類の括弧・入れ子の構造・対応する部分を取り除く・置き換える](#stack) | スタック | [スタック・キュー・deque の使いどころ](../ds/stack-techniques.md) | ABC394 D、ABC454 D |
+| [? の埋め方の数・長さ 2N の個数](#counting) | 開いている数を状態にした DP、カタラン数 | [DP の状態の設計](../dp/dp-state-design.md)、[鏡像法とカタラン数](../comb/reflection-principle.md#catalan) | — |
+| [更新ありで区間が正しいか](#range-check) | 区間加算と区間の最小値 | [遅延セグメント木](../ds/lazy-segment-tree.md) | — |
+| [更新ありで区間が正しいか（点の更新で済ませる）](#monoid) | （合計, 最小値）を載せる | [セグメント木に何を載せるか](../ds/segment-tree-monoids.md#pattern-table) | — |
+| [複数の括弧列を並べてつなぐ](#ordering) | 要約して 2 組に分けてソート | [交換論法と比較関数の設計](../basics/exchange-argument.md) | ABC167 F |
+| [価値が最大の正しい括弧列](#max-value) | 接頭辞の条件と優先度付きキュー | [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md) | ABC407 E |
+| [数式・入れ子の構造を読む](#parsing) | 構文解析 | [構文解析](../misc/parsing.md) | — |
 
 問題へのリンクは、[例題](#examples)と[練習問題](#practice)の囲みにある。
 

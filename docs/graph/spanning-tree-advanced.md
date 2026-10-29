@@ -27,7 +27,7 @@ sections:
   - {title: 第 2 最小全域木, anchor: second-best}
   - {title: 自作するときの要点と Library Checker, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -150,11 +150,11 @@ Library Checker の Directed MST（$N, M \le 2 \times 10^5$、根から全頂点
 
 ## 学ぶための資料 {#resources}
 
-- 英語版 Wikipedia の「Borůvka's algorithm」：手順・計算量と、重みが等しいときに全順序で比べる必要。
-- 英語版 Wikipedia の「Edmonds' algorithm」：縮約と重みの直しの手順、Tarjan による $O(M \log N)$ の実装への言及。
-- cp-algorithms の「Manhattan Distance」の Manhattan MST の節：8 つの領域の補題の証明と、$x + y$ の順の走査（文章と図の利用条件は CC BY-SA）。
-- cp-algorithms の「Second Best Minimum Spanning Tree」：1 本だけ入れ替えればよい補題と、ダブリングでパスの最大を求める実装。
-- ei1333 氏のライブラリの Boruvka・Manhattan MST・Directed MST：自作するときの関数の形の例と、Library Checker で確かめたコード。
+- [「Borůvka's algorithm」（英語版 Wikipedia）](https://en.wikipedia.org/wiki/Bor%C5%AFvka%27s_algorithm)：手順・計算量と、重みが等しいときに全順序で比べる必要。
+- [「Edmonds' algorithm」（英語版 Wikipedia）](https://en.wikipedia.org/wiki/Edmonds%27_algorithm)：縮約と重みの直しの手順、Tarjan による $O(M \log N)$ の実装への言及。
+- [cp-algorithms「Manhattan Distance」](https://cp-algorithms.com/geometry/manhattan-distance.html)の Manhattan MST の節：8 つの領域の補題の証明と、$x + y$ の順の走査（文章と図の利用条件は CC BY-SA）。
+- [cp-algorithms「Second Best Minimum Spanning Tree」](https://cp-algorithms.com/graph/second_best_mst.html)：1 本だけ入れ替えればよい補題と、ダブリングでパスの最大を求める実装。
+- [ei1333「Boruvka」（Luzhiled's Library）](https://ei1333.github.io/library/graph/mst/boruvka.hpp)・[ei1333「Manhattan MST」（Luzhiled's Library）](https://ei1333.github.io/library/graph/mst/manhattan-mst.hpp)・[ei1333「Directed MST」（Luzhiled's Library）](https://ei1333.github.io/library/graph/mst/directed-mst.hpp)：自作するときの関数の形の例と、Library Checker で確かめたコード。
 
 ## 練習問題 {#practice}
 

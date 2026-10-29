@@ -7,15 +7,15 @@ type: generated
 
 # 幾何
 
-ベクトルと外積、誤差、凸包、偏角ソート、45 度回転など。8 ページ。
+ベクトルと外積、誤差、凸包、偏角ソート、45 度回転など。8 ページ。ページ名の横の印はレベル（[レベルの意味](../start/how-to-use.md#levels)）である。
 
-| ページ | レベル | 要約 |
-| --- | --- | --- |
-| [ベクトルと外積](geometry-vectors.md) | 基礎 | 外積 a.x·b.y − a.y·b.x の符号で向き（左・右・一直線上）が、絶対値で平行四辺形の面積が分かる。3 点の一直線判定・凸性・多角形の面積・線分の交差を、整数のまま誤差なく判定できる。 |
-| [誤差の扱いと整数での処理](geometry-precision.md) | 水 | 幾何の計算をできるだけ整数で行い、誤差による判定の誤りを防ぐ。小数の入力は 10^k 倍し、比較は外積・内積・距離の 2 乗で、傾きや直線は gcd で約分して符号をそろえた組で表し、実数は避けられないときだけ使う。 |
-| [偏角ソート](argument-sort.md) | 水 | 点を原点から見た角度の順に並べる。整数座標なら上下の半平面に分け、同じ半平面の中は外積の符号で比べることで、atan2 を使わず誤差なく O(N log N) で並べられる。 |
-| [回転・平行移動・アフィン変換](rotation-transform.md) | 水 | 点の回転・反転・平行移動を式で計算し、操作列を何回か行った後の位置を求める。90 度回転は (−y, x) で整数のまま書け、操作は (x, y, 1) に掛ける 3×3 行列にすると積の累積で合成できる。 |
-| [マンハッタン距離と 45 度回転](manhattan-chebyshev.md) | 水 | u = x+y、v = x−y と座標を変える（45 度回転）と、マンハッタン距離はチェビシェフ距離 max(\|Δu\|, \|Δv\|) になる。ひし形の範囲が正方形に変わり、最遠点対・距離の和・斜め移動を x と y に分けて解ける。 |
-| [円と幾何の最適化](circle-geometry.md) | 青 | 2 円の位置関係は、中心間の距離と半径の和・差を 2 乗して整数のまま判定できる。実数の位置・半径・時刻の最適化は、最適解が少数の点で決まるなら候補を列挙し、判定が単調なら答えで二分探索、凸なら三分探索する。 |
-| [凸包と凸多角形](convex-hull.md) | 黄 | 点を x 座標でソートし、スタックの末尾が凹む間は取り除くことで、全点を囲む最小の凸多角形（凸包）を O(N log N) で作る。凸多角形への多数の点の内外判定（1 点 O(log N)）や、格子点の数（Pick の定理）にも使う。 |
-| [発展の幾何](advanced-geometry.md) | 発展 | 動的な凸包・回転キャリパー（最遠点対）・最近点対・半平面交差・ミンコフスキー和で、点集合と凸図形の最大・最小・共通部分を O(N log N) 前後で求める。ABC での出題はまれで、Library Checker で確かめられる。 |
+学ぶ順：[色別ロードマップ](../guide/roadmap.md#reading-order)。使い分け：[数の扱い](../guide/method-comparison.md#numbers)。自作：[自作ライブラリの設計と動作確認](../guide/library-design.md)。
+
+- [ベクトルと外積](geometry-vectors.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：外積 a.x·b.y − a.y·b.x の符号で向き（左・右・一直線上）が、絶対値で平行四辺形の面積が分かる。
+- [誤差の扱いと整数での処理](geometry-precision.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：幾何の計算をできるだけ整数で行い、誤差による判定の誤りを防ぐ。
+- [偏角ソート](argument-sort.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：点を原点から見た角度の順に並べる。
+- [回転・平行移動・アフィン変換](rotation-transform.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：点の回転・反転・平行移動を式で計算し、操作列を何回か行った後の位置を求める。
+- [マンハッタン距離と 45 度回転](manhattan-chebyshev.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：u = x+y、v = x−y と座標を変える（45 度回転）と、マンハッタン距離はチェビシェフ距離 max(|Δu|, |Δv|) になる。
+- [円と幾何の最適化](circle-geometry.md) <span class="kp-mini kp-lv-ao" title="difficulty 1600〜1999">青</span>：2 円の位置関係は、中心間の距離と半径の和・差を 2 乗して整数のまま判定できる。
+- [凸包と凸多角形](convex-hull.md) <span class="kp-mini kp-lv-ki" title="difficulty 2000〜2399">黄</span>：点を x 座標でソートし、スタックの末尾が凹む間は取り除くことで、全点を囲む最小の凸多角形（凸包）を O(N log N) で作る。
+- [発展の幾何](advanced-geometry.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：動的な凸包・回転キャリパー（最遠点対）・最近点対・半平面交差・ミンコフスキー和で、点集合と凸図形の最大・最小・共通部分を O(N log N) 前後で求める。

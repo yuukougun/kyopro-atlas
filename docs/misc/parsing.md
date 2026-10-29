@@ -28,7 +28,7 @@ sections:
   - {title: 文法に沿った DP, anchor: grammar-dp}
   - {title: 式の部分文字列の総和, anchor: substring-sum, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -242,7 +242,7 @@ $$
 
 - [ABC380 B. Hurdle Parsing](https://atcoder.jp/contests/abc380/tasks/abc380_b)（diff 27）：| と - からなる記号列を区切り、各区間の - の数を順に出力する。
 - [ARC122 A. Many Formulae](https://atcoder.jp/contests/arc122/tasks/arc122_a)（diff 783）：長さ N の非負整数列の間に + か - を入れ、- が 2 つ続かない式すべてについて、値の合計を 10^9+7 で割った余りで求める（N ≤ 10^5）。
-- [JOI2020YO2 E. じゃんけん式 (Rock-Scissors-Paper Expression)](https://atcoder.jp/contests/joi2020yo2/tasks/joi2020_yo2_e)（diff —）：R・S・P と ?・括弧・+・-・* からなる式（* が + と - より先に結びつく）で、? を R・S・P に置き換える方法のうち、式の結果が指定の手になるものの数を 10^9+7 で割った余りで求める。
+- [JOI2020YO2 E. じゃんけん式 (Rock-Scissors-Paper Expression)](https://atcoder.jp/contests/joi2020yo2/tasks/joi2020_yo2_e)（diff なし）：R・S・P と ?・括弧・+・-・* からなる式（* が + と - より先に結びつく）で、? を R・S・P に置き換える方法のうち、式の結果が指定の手になるものの数を 10^9+7 で割った余りで求める。
 - [ABC350 F. Transpose](https://atcoder.jp/contests/abc350/tasks/abc350_f)（diff 1601）：英大文字・英小文字と対応の取れた括弧からなる文字列で、括弧の中を逆順にして大文字と小文字を入れ替え、括弧を消す操作を内側からくり返した後の文字列を求める。
 
 </div>

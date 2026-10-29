@@ -5,7 +5,7 @@ aliases: [相対順序の固定, ソートしてから数える, 数える順番
 type: technique
 field: comb
 chapter: 数え方の考え方
-order: 90
+order: 75
 level: 水
 kind: [数え上げ, 考察]
 prerequisites: [counting-mindset]

@@ -25,7 +25,7 @@ sections:
   - {title: サイズを K で打ち切ると O(NK), anchor: cap-k}
   - {title: 頂点の状態と個数を同時に持つ, anchor: state-and-count}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -183,7 +183,7 @@ $N \le 5000$ の木で、成分の数ごとの個数をすべて出すので、�
 
 - [ARC171 C. Swap on Tree](https://atcoder.jp/contests/arc171/tasks/arc171_c)（diff 2244）：木の頂点 i に駒 i を置き、まだ選んでいない辺を 1 本選んで両端の駒を入れ替える操作を好きな回数行う（各辺は 1 回まで）。最後の駒の並びとしてありうるものの数を求める。
 - [ABC207 F. Tree Patrolling](https://atcoder.jp/contests/abc207/tasks/abc207_f)（diff 2398）：木のいくつかの頂点に見張りを置き、置いた頂点とその隣が見張られるとき、見張られる頂点の数がちょうど k になる置き方の数を k = 0〜N について求める。
-- [TDPC P. うなぎ](https://atcoder.jp/contests/tdpc/tasks/tdpc_eel)（diff —）：木から、互いに共有しない K 本のパスを選ぶ方法の数を求める。
+- [TDPC P. うなぎ](https://atcoder.jp/contests/tdpc/tasks/tdpc_eel)（diff なし）：木から、互いに共有しない K 本のパスを選ぶ方法の数を求める。
 
 </div>
 

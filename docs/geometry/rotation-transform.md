@@ -30,7 +30,7 @@ sections:
   - {title: 三角関数と角度の基本（度とラジアン・π は acos(−1)・余弦定理）, anchor: trig-angle}
   - {title: 点集合の合同判定：重心をそろえて照合する, anchor: congruence, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -276,7 +276,7 @@ $N$ が大きいときは、巡回シフトの照合に直す方法を使う。�
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [ABC298 B. Coloring Matrix](https://atcoder.jp/contests/abc298/tasks/abc298_b)（diff —）：行列 A を 90 度ずつ回転させて、条件を満たすようにできるかを判定する。
+- [ABC298 B. Coloring Matrix](https://atcoder.jp/contests/abc298/tasks/abc298_b)（diff なし）：行列 A を 90 度ずつ回転させて、条件を満たすようにできるかを判定する。
 - [ABC168 C. : (Colon)](https://atcoder.jp/contests/abc168/tasks/abc168_c)（diff 230）：時計の長針と短針の先端の距離を求める。
 - [ABC144 D. Water Bottle](https://atcoder.jp/contests/abc144/tasks/abc144_d)（diff 714）：直方体の水筒を傾けて、水がこぼれない最大の角度を求める。
 - [ABC197 D. Opposite](https://atcoder.jp/contests/abc197/tasks/abc197_d)（diff 831）：正 N 角形の向かい合う 2 頂点の座標から、隣の頂点の座標を求める。

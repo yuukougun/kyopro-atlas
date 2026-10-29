@@ -25,7 +25,7 @@ sections:
   - {title: 行列式を bitDP で展開する例, anchor: bitdp}
   - {title: 計算量と自作するときの要点, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -161,9 +161,9 @@ ACL に行列式はない。自作した行列式は Library Checker で確か�
 
 ## 学ぶための資料 {#resources}
 
-- 英語版 Wikipedia の「Lindström-Gessel-Viennot lemma」：重み付きの一般形の主張と、打ち消し合いによる証明の概略。応用（Schur 多項式など）にも触れている。
-- OI Wiki の「LGV 引理」（中国語）：定義・証明と、格子上の 2 本の経路を数える例題がある（文章と図の利用条件は CC BY-SA）。
-- kmjp 氏の ABC216 H の記事：終点を固定しない場合に、置換の和を集合の DP にまとめる実装の例。
+- [「Lindström–Gessel–Viennot lemma」（英語版 Wikipedia）](https://en.wikipedia.org/wiki/Lindstr%C3%B6m%E2%80%93Gessel%E2%80%93Viennot_lemma)：重み付きの一般形の主張と、打ち消し合いによる証明の概略。応用（Schur 多項式など）にも触れている。
+- [OI Wiki「LGV 引理」](https://oi-wiki.org/graph/lgv/)（中国語）：定義・証明と、格子上の 2 本の経路を数える例題がある（文章と図の利用条件は CC BY-SA）。
+- [kmjp「AtCoder ABC #216 : H - Random Robots」](https://kmjp.hatenablog.jp/entry/2021/09/02/0900)：終点を固定しない場合に、置換の和を集合の DP にまとめる実装の例。
 
 ## 例題 {#examples}
 

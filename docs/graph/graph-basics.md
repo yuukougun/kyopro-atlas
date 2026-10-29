@@ -173,7 +173,7 @@ $$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 078. Easy Graph Problem（★2）](https://atcoder.jp/contests/typical90/tasks/typical90_bz)（diff —）：各頂点の隣接頂点のうち、自分より番号の小さいものの個数についての条件を満たす頂点を数える。
+- [典型90 078. Easy Graph Problem（★2）](https://atcoder.jp/contests/typical90/tasks/typical90_bz)（diff なし）：各頂点の隣接頂点のうち、自分より番号の小さいものの個数についての条件を満たす頂点を数える。
 
 </div>
 

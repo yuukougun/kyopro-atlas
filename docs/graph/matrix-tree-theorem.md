@@ -26,7 +26,7 @@ sections:
   - {title: 頂点集合ごとに数えて部分集合の DP と組む, anchor: subset-dp}
   - {title: 計算量と自作するときの要点, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -164,9 +164,9 @@ ACL に行列式はない。自作したものは Library Checker で確かめ�
 
 ## 学ぶための資料 {#resources}
 
-- 英語版 Wikipedia の「Kirchhoff's theorem」：主張と、接続行列と Cauchy-Binet の公式による証明。重み付き・有向の版にも触れている。
-- 英語版 Wikipedia の「BEST theorem」：BEST 定理の主張と、根へ向かう全域木の数が根によらないこと。
-- potato167 氏の「BEST theorem を用いることができる競プロの問題例」：BEST 定理の実装（多重辺を個数の行列で受ける形）と、BEST 定理に帰着できる問題の一覧。
+- [「Kirchhoff's theorem」（英語版 Wikipedia）](https://en.wikipedia.org/wiki/Kirchhoff%27s_theorem)：主張と、接続行列と Cauchy-Binet の公式による証明。重み付き・有向の版にも触れている。
+- [「BEST theorem」（英語版 Wikipedia）](https://en.wikipedia.org/wiki/BEST_theorem)：BEST 定理の主張と、根へ向かう全域木の数が根によらないこと。
+- [potato167「BEST theorem を用いることができる競プロの問題例」](https://potato167.hatenablog.com/entry/2024/02/21/100000)：BEST 定理の実装（多重辺を個数の行列で受ける形）と、BEST 定理に帰着できる問題の一覧。
 
 ## 例題 {#examples}
 

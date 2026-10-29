@@ -5,7 +5,7 @@ aliases: [整数問題の証明, 並べ替え論法, 余りの鳩の巣, gcd が
 type: thinking
 field: math
 chapter: GCD と合同式
-order: 250
+order: 205
 level: 基礎
 kind: [考察, 整数論]
 prerequisites: [gcd-lcm]

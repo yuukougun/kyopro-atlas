@@ -30,7 +30,7 @@ sections:
   - {title: あふれる前に割り算で判定する方法と __int128 への逃げ方, anchor: overflow}
   - {title: double で割らない（10^18 付近の誤差）, anchor: no-double}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -227,7 +227,7 @@ $X$ が負で 10 で割り切れないとき、C++ の `X / 10` は 0 の向き�
 - [ABC432 C. Candy Tribulation](https://atcoder.jp/contests/abc432/tasks/abc432_c)（diff 654）：2 種類の飴（値 X と Y、X < Y）を各人に決まった個数ずつ配り、全員の合計をそろえるとき、Y の飴の個数の合計の最大値を求める（できなければ -1 を出力する）。
 - [ABC048 B. Between a and b ...](https://atcoder.jp/contests/abc048/tasks/abc048_b)（diff 861）：a 以上 b 以下の整数のうち x で割り切れるものの個数を求める（0 ≤ a ≤ b ≤ 10^18）。
 - [ABC084 C. Special Trains](https://atcoder.jp/contests/abc084/tasks/abc084_c)（diff 908）：駅を順に結ぶ列車がそれぞれ一定の間隔で発車するとき、各駅から出発して終点に着く最も早い時刻を求める。
-- [典型90 038. Large LCM（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_al)（diff —）：2 数の最小公倍数が 10^18 を超えるかを判定し、超えなければその値を出力する。
+- [典型90 038. Large LCM（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_al)（diff なし）：2 数の最小公倍数が 10^18 を超えるかを判定し、超えなければその値を出力する。
 
 </div>
 

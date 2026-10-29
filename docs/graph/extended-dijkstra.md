@@ -352,7 +352,7 @@ graph LR
 - [ABC361 D. Go Stone Puzzle](https://atcoder.jp/contests/abc361/tasks/abc361_d)（diff 1202）：一列に並んだ白と黒の石を、隣り合う 2 個ずつ空きマスへ移す操作で目標の並びにするとき、操作の最小回数を求める
 - [ABC224 D. 8 Puzzle on Graph](https://atcoder.jp/contests/abc224/tasks/abc224_d)（diff 1376）：9 頂点のグラフの 8 頂点に駒が置かれ、空いた頂点へ隣の駒を動かせるとき、すべての駒を目的の頂点へそろえる最小の手数を求める
 - [ABC302 F. Merge Set](https://atcoder.jp/contests/abc302/tasks/abc302_f)（diff 1430）：共通の要素をもつ 2 つの集合を和集合に置き換える操作で、1 と M を両方含む集合を作るのに必要な最小の操作回数を求める
-- [典型90 054. Takahashi Number（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_bb)（diff —）：論文ごとの著者の一覧が与えられるとき、共著の関係をたどった研究者 1 からの距離（高橋数）を、各研究者について求める。
+- [典型90 054. Takahashi Number（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_bb)（diff なし）：論文ごとの著者の一覧が与えられるとき、共著の関係をたどった研究者 1 からの距離（高橋数）を、各研究者について求める。
 - [ZONE2021 E. Sneaking](https://atcoder.jp/contests/zone2021/tasks/zone2021_e)（diff 1624）：グリッドの左上から右下へ、左右と下へは 1 マスずつ（マスごとに決まったコスト）、上へは i マスまとめて（コスト 1 + i）動けるとき、最小のコストを求める。
 - [ABC244 F. Shortest Good Path](https://atcoder.jp/contests/abc244/tasks/abc244_f)（diff 1661）：各頂点を通った回数の偶奇を表す 0/1 列 S のすべてについて、その偶奇になる最短のウォークの長さを求め、総和を答える
 

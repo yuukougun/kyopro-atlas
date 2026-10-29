@@ -123,8 +123,8 @@ difficulty 1600〜1999 の帯で主に必要になるページ（52 ページ）
 | 中央値の言い換え（x 以上を +1、未満を −1）と偶数個のときの不等号 | [平均・中央値の最大化](../basics/fractional-binary-search.md#median)（水） | 基本テクニック |
 | 判定を DP・DAG の最長路・全域木で行う | [平均・中央値の最大化](../basics/fractional-binary-search.md#dp-check)（水） | 基本テクニック |
 | 領域の中央値（2 次元累積和） | [平均・中央値の最大化](../basics/fractional-binary-search.md#median-2d)（水） | 基本テクニック |
-| 増分が単調なら 1 単位ずつ貪欲に配る | [三分探索](../basics/ternary-search.md#marginal-greedy)（水） | 基本テクニック |
 | 距離の和で判定して二分探索する | [絶対値の和の最小化と中央値](../basics/median-absolute.md#with-binary-search)（基礎） | 基本テクニック |
+| 増分が単調なら 1 単位ずつ貪欲に配る | [三分探索](../basics/ternary-search.md#marginal-greedy)（水） | 基本テクニック |
 | 判定が重い型 | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md#heavy-check)（基礎） | 基本テクニック |
 | 言い換えてからデータ構造に載せる | [言い換えの典型](../thinking/reformulation.md#then-data-structure)（水） | 考察 |
 | 市松模様の偶奇 | [偶奇に着目する](../thinking/parity.md#checkerboard)（基礎） | 考察 |

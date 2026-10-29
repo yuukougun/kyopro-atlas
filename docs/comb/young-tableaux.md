@@ -23,7 +23,7 @@ sections:
   - {title: Robinson-Schensted 対応と LIS・LDS, anchor: robinson-schensted}
   - {title: 分割数との関係, anchor: partitions}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -133,9 +133,9 @@ $$
 
 ## 学ぶための資料 {#resources}
 
-- Wikipedia（英語）の Hook length formula の記事：公式の述べ方、$(n, n)$ の形でカタラン数になること、フックウォークによる確率的な証明と全単射による証明の紹介がある
-- Wikipedia（英語）の Robinson-Schensted correspondence の記事：挿入の手順、逆置換で $P$ と $Q$ が入れ替わること、逆順で $P$ が転置されること、LIS・LDS と Greene の定理がまとまっている
-- Wikipedia（日本語）のヤング図形の記事：ヤング図形・ヤング盤（標準盤・半標準盤）の定義を日本語で確かめられる
+- [Wikipedia「Hook length formula」](https://en.wikipedia.org/wiki/Hook_length_formula)（英語）：公式の述べ方、$(n, n)$ の形でカタラン数になること、フックウォークによる確率的な証明と全単射による証明の紹介がある
+- [Wikipedia「Robinson–Schensted correspondence」](https://en.wikipedia.org/wiki/Robinson%E2%80%93Schensted_correspondence)（英語）：挿入の手順、逆置換で $P$ と $Q$ が入れ替わること、逆順で $P$ が転置されること、LIS・LDS と Greene の定理がまとまっている
+- [Wikipedia「ヤング図形」](https://ja.wikipedia.org/wiki/%E3%83%A4%E3%83%B3%E3%82%B0%E5%9B%B3%E5%BD%A2)（日本語）：ヤング図形・ヤング盤（標準盤・半標準盤）の定義を日本語で確かめられる
 
 ## 例題 {#examples}
 

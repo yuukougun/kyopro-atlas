@@ -32,7 +32,7 @@ sections:
   - {title: Cartesian tree（最大値で区間を割る再帰を O(N) で作る）, anchor: cartesian-tree, level: 黄}
   - {title: SWAG：スタック 2 本で作る総積つきキュー, anchor: swag, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -244,11 +244,11 @@ for i = 1, 2, …, N:
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [鉄則本 A60. Stock Price](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bh)（diff —）：各日について、それより前で株価が高かった最後の日を答える。
+- [鉄則本 A60. Stock Price](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bh)（diff なし）：各日について、それより前で株価が高かった最後の日を答える。
 - [ABC189 C. Mandarin Orange](https://atcoder.jp/contests/abc189/tasks/abc189_c)（diff 565）：区間を 1 つ選び、区間の長さと区間の最小値の積の最大値を求める。
 - [ABC352 D. Permutation Subsequence](https://atcoder.jp/contests/abc352/tasks/abc352_d)（diff 714）：順列で、連続する値 K 個の位置の最大 − 最小の最小値を求める。
 - [ABC435 F. Cat exercise](https://atcoder.jp/contests/abc435/tasks/abc435_f)（diff 1385）：最大値の位置で区間を左右に分けて進む過程の、移動距離の合計の最大値を求める。
-- [DONUTS-2015 C. 行列のできるドーナツ屋](https://atcoder.jp/contests/donuts-2015/tasks/donuts_2015_3)（diff 1661）：行列に並ぶ各人から前方に見える人の数を答える。
+- [DONUTS-2015 C. 行列のできるドーナツ屋](https://atcoder.jp/contests/donuts-2015/tasks/donuts_2015_3)（diff 1661・参考値）：行列に並ぶ各人から前方に見える人の数を答える。
 - [AGC005 B. Minimum Sum](https://atcoder.jp/contests/agc005/tasks/agc005_b)（diff 1828）：すべての区間の最小値の総和を求める。
 
 </div>

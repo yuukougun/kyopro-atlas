@@ -25,7 +25,7 @@ sections:
   - {title: 多い方の色は N/2 個以上, anchor: majority-color}
   - {title: 色の違う組の数（二部グラフのまま足せる辺）, anchor: cross-pairs}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -171,7 +171,7 @@ $N = 2 \times 10^5$ なら $ab$ は最大 $10^{10}$ になり、`int` に収ま�
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [典型90 026. Independent Set on a Tree（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_z)（diff —）：N 頂点の木から、どの 2 つも隣り合わない頂点をちょうど N/2 個選んで出力する
+- [典型90 026. Independent Set on a Tree（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_z)（diff なし）：N 頂点の木から、どの 2 つも隣り合わない頂点をちょうど N/2 個選んで出力する
 - [ABC126 D. Even Relation](https://atcoder.jp/contests/abc126/tasks/abc126_d)（diff 1279）：辺に長さがある木の頂点を白と黒に塗り、同じ色の 2 頂点の距離がすべて偶数になるようにする
 
 </div>

@@ -26,7 +26,7 @@ sections:
   - {title: 約数を状態にした DP（約数の個数が少ないことを使う）, anchor: divisor-dp, level: 青}
   - {title: 高度合成数の列挙（小さい素数の指数が単調に減る形を DFS で）, anchor: enumerate-hcn, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -186,7 +186,7 @@ $A \le 10^{12}$、$B \le 10^{18}$ なので、$A^B$ の約数は列挙できず�
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [典型90 085. Multiplication 085（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_cg)（diff —）：a ≤ b ≤ c かつ a × b × c = K を満たす正の整数の組の個数を求める（K ≤ 10^12）。
+- [典型90 085. Multiplication 085（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_cg)（diff なし）：a ≤ b ≤ c かつ a × b × c = K を満たす正の整数の組の個数を求める（K ≤ 10^12）。
 - [ACL1 B. Sum is Multiple](https://atcoder.jp/contests/acl1/tasks/acl1_b)（diff 1785）：1 + 2 + … + k が N の倍数になる最小の正の整数 k を求める（N ≤ 10^15）。
 
 </div>

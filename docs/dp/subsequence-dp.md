@@ -28,7 +28,7 @@ sections:
   - {title: 辞書順 K 番目の部分列（後ろからの個数で先頭から決める）, anchor: kth-subsequence}
   - {title: 条件付き・言い換えてから数える（隣り合う位置を選ばない・累積和の列・TT の形）, anchor: with-conditions}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -245,7 +245,7 @@ $$
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [典型90 006. Smallest Subsequence（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_f)（diff —）：文字列の長さ K の部分列のうち、辞書順最小のものを求める。
+- [典型90 006. Smallest Subsequence（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_f)（diff なし）：文字列の長さ K の部分列のうち、辞書順最小のものを求める。
 - [ARC081 E. Don't Be a Subsequence](https://atcoder.jp/contests/arc081/tasks/arc081_c)（diff 2072）：文字列 A の部分列として現れない最短の文字列のうち、辞書順最小のものを求める。
 - [ABC299 F. Square Subsequence](https://atcoder.jp/contests/abc299/tasks/abc299_f)（diff 2349）：文字列 S の部分列として TT（空でない文字列 T を 2 回並べたもの）が現れるような T の種類数を求める。
 
@@ -260,7 +260,7 @@ $$
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [TDPC G. 辞書順](https://atcoder.jp/contests/tdpc/tasks/tdpc_lexicographical)（diff —）：文字列の空でない異なる部分列のうち、辞書順で K 番目のものを求める。
+- [TDPC G. 辞書順](https://atcoder.jp/contests/tdpc/tasks/tdpc_lexicographical)（diff なし）：文字列の空でない異なる部分列のうち、辞書順で K 番目のものを求める。
 
 </div>
 

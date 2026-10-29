@@ -27,7 +27,7 @@ sections:
   - {title: DAG 上の DP へ（DP の章）, anchor: to-dag-dp}
   - {title: ACL の scc_graph を使う（DAG なら scc() の順がトポロジカル順）, anchor: acl}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -226,7 +226,7 @@ ACL にはトポロジカルソートそのものはないが、強連結成分�
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [典型90 071. Fuzzy Priority（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_bs)（diff —）：依存関係を満たす頂点の並べ方を K 個（なければ −1）出力する
+- [典型90 071. Fuzzy Priority（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_bs)（diff なし）：依存関係を満たす頂点の並べ方を K 個（なければ −1）出力する
 
 </div>
 

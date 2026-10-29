@@ -22,7 +22,7 @@ sections:
   - {title: 区間を O(log N) 個のノードで覆う, anchor: cover}
   - {title: 自作するときの要点と Library Checker, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -90,8 +90,8 @@ Library Checker にこの手法そのものの問題はない。ふつうの最�
 
 ## 学ぶための資料 {#resources}
 
-- OI Wiki の「线段树基础」の節「应用：线段树优化建图」（中国語）：入る木（下向き）と出る木（上向き）の 2 本を作る図と、点から区間・区間から点の辺を張る最短路の例題がまとまっている
-- kmjp 氏の ABC414 G の記録：区間から区間への辺に、移動距離に応じたコストが付く応用。補助の辺のコストを負にしない工夫が要点になる
+- [OI Wiki「线段树基础」](https://oi-wiki.org/ds/seg/)の節「应用：线段树优化建图」（中国語）：入る木（下向き）と出る木（上向き）の 2 本を作る図と、点から区間・区間から点の辺を張る最短路の例題がまとまっている
+- [kmjp「AtCoder ABC #414 (ミラティブ プログラミングコンテスト2025) : G - AtCoder Express 4」](https://kmjp.hatenablog.jp/entry/2025/07/14/0930)：区間から区間への辺に、移動距離に応じたコストが付く応用。補助の辺のコストを負にしない工夫が要点になる
 
 ## 例題 {#examples}
 

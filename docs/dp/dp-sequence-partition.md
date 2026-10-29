@@ -212,7 +212,7 @@ $p = i - 1$（隣が同じ色）を除くのは、塗っても列が変わらず
 
 - [ARC065 C. Daydream](https://atcoder.jp/contests/arc065/tasks/arc065_a)（diff 930）：文字列 S を dream・dreamer・erase・eraser の連結に区切れるかを判定する。
 - [ABC207 E. Mod i](https://atcoder.jp/contests/abc207/tasks/abc207_e)（diff 1820）：数列をいくつかの区間に区切り、各区間の和が、左から数えたその区間の番号で割り切れるようにする方法の数を求める。
-- [典型90 089. Partitions and Inversions（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_ck)（diff —）：数列をいくつかの区間に区切り、各区間の転倒数が K 以下になる区切り方の数を求める。
+- [典型90 089. Partitions and Inversions（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_ck)（diff なし）：数列をいくつかの区間に区切り、各区間の転倒数が K 以下になる区切り方の数を求める。
 
 </div>
 

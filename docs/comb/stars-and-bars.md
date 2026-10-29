@@ -27,7 +27,7 @@ sections:
   - {title: 隣り合わない選び方・間隔 d 以上の選び方, anchor: gaps}
   - {title: 場合分けしてから配る・素因数ごとに配る, anchor: applications, level: 水}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -203,8 +203,8 @@ $$
 - [ABC132 D. Blue and Red Balls](https://atcoder.jp/contests/abc132/tasks/abc132_d)（diff 1167）：N 個の玉のうち K 個が青のとき、各 i について、連続する青玉をまとめて回収する操作がちょうど i 回で済む並べ方の数を求める。
 - [ABC156 E. Roaming](https://atcoder.jp/contests/abc156/tasks/abc156_e)（diff 1514）：n 部屋に 1 人ずついる状態から、1 人が別の部屋へ移る移動をちょうど k 回行った後の、各部屋の人数の組としてありうるものの数を求める。
 - [ABC110 D. Factorization](https://atcoder.jp/contests/abc110/tasks/abc110_d)（diff 1695）：積が M になる長さ N の正の整数列の個数を求める。
-- [ABC021 D. 多重ループ](https://atcoder.jp/contests/abc021/tasks/abc021_d)（diff 1704）：1 ≤ a_1 ≤ a_2 ≤ … ≤ a_k ≤ n を満たす整数列の個数を求める。
-- [典型90 015. Don't be too close（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_o)（diff —）：1〜N からいくつかを選び、選んだどの 2 つの差も k 以上になる選び方の数を、k = 1, …, N のそれぞれについて求める。
+- [ABC021 D. 多重ループ](https://atcoder.jp/contests/abc021/tasks/abc021_d)（diff 1704・参考値）：1 ≤ a_1 ≤ a_2 ≤ … ≤ a_k ≤ n を満たす整数列の個数を求める。
+- [典型90 015. Don't be too close（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_o)（diff なし）：1〜N からいくつかを選び、選んだどの 2 つの差も k 以上になる選び方の数を、k = 1, …, N のそれぞれについて求める。
 
 </div>
 

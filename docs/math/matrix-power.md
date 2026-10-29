@@ -33,7 +33,7 @@ sections:
   - {title: ダブリングで遷移を合成する（行列にすると大きすぎるとき・桁を倍々に伸ばす）, anchor: doubling-transition, level: 黄}
   - {title: プロファイル DP の遷移行列と状態数の見積もり, anchor: profile-dp, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -295,7 +295,7 @@ $H = 6$ なら余裕があるが、$H = 8$ では行列のままでは厳しい�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC R. Walk](https://atcoder.jp/contests/dp/tasks/dp_r)（diff —）：N 頂点の有向グラフ（隣接行列で与えられる）で、長さ K の有向パス（同じ辺を何度通ってもよい）の総数を 10^9+7 で割った余りで求める（N ≤ 50、K ≤ 10^18）。
+- [EDPC R. Walk](https://atcoder.jp/contests/dp/tasks/dp_r)（diff なし）：N 頂点の有向グラフ（隣接行列で与えられる）で、長さ K の有向パス（同じ辺を何度通ってもよい）の総数を 10^9+7 で割った余りで求める（N ≤ 50、K ≤ 10^18）。
 
 </div>
 
@@ -344,12 +344,12 @@ $H = 6$ なら余裕があるが、$H = 8$ では行列のままでは厳しい�
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [アルゴ数学 057. Domino Tiling](https://atcoder.jp/contests/math-and-algorithm/tasks/math_and_algorithm_aw)（diff —）：K × N の盤（K は小さく、N は大きい）を 1 × 2 のドミノで敷き詰める方法の数を求める。
+- [アルゴ数学 057. Domino Tiling](https://atcoder.jp/contests/math-and-algorithm/tasks/math_and_algorithm_aw)（diff なし）：K × N の盤（K は小さく、N は大きい）を 1 × 2 のドミノで敷き詰める方法の数を求める。
 - [ABC189 E. Rotate and Flip](https://atcoder.jp/contests/abc189/tasks/abc189_e)（diff 1526）：平面上の N 個の点に回転・反転の操作を M 回行うとき、「A 回目の操作の後の点 B の座標」を Q 個のクエリについて答える。
 - [ABC458 F. Critical Misread](https://atcoder.jp/contests/abc458/tasks/abc458_f)（diff 1744）：英小文字からなる長さ N（≤ 10^9）の文字列のうち、与えられた K 個の文字列をどれも部分文字列に含まないものの個数を 998244353 で割った余りで求める。
 - [ABC456 F. Plan Holidays](https://atcoder.jp/contests/abc456/tasks/abc456_f)（diff 1888）：各日を費用 A_i で休日にでき、両隣が休日の日は費用なしで休日にできるとき、K 日以上続く休日を作る費用の最小を求める。
 - [ABC204 F. Hanjo 2](https://atcoder.jp/contests/abc204/tasks/abc204_f)（diff 2044）：H × W（H ≤ 6、W ≤ 10^12）の部屋に 1×1 と 1×2 の畳を敷き詰める方法の数を 998244353 で割った余りで求める。
-- [ABC009 D. 漸化式](https://atcoder.jp/contests/abc009/tasks/abc009_4)（diff 2213）：A_{n} = (C_1 AND A_{n−1}) XOR … XOR (C_K AND A_{n−K}) で定まる数列の第 M 項を求める（M ≤ 10^9）。
+- [ABC009 D. 漸化式](https://atcoder.jp/contests/abc009/tasks/abc009_4)（diff 2213・参考値）：A_{n} = (C_1 AND A_{n−1}) XOR … XOR (C_K AND A_{n−K}) で定まる数列の第 M 項を求める（M ≤ 10^9）。
 
 </div>
 
@@ -366,7 +366,7 @@ $H = 6$ なら余裕があるが、$H = 8$ では行列のままでは厳しい�
 <div class="kp-problems" data-role="challenge" markdown>
 
 - [ABC256 G. Black and White Stones](https://atcoder.jp/contests/abc256/tasks/abc256_g)（diff 2250）：正 N 角形の辺の上に等間隔に並べた石を白黒に塗るとき、どの辺の上の白い石の個数も等しくなる塗り方の数を求める（N は非常に大きい）。
-- [典型90 005. Restricted Digits（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_e)（diff —）：使える数字が限られた N 桁（N ≤ 10^18）の正の整数のうち、B の倍数であるものの個数を求める。
+- [典型90 005. Restricted Digits（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_e)（diff なし）：使える数字が限られた N 桁（N ≤ 10^18）の正の整数のうち、B の倍数であるものの個数を求める。
 
 </div>
 

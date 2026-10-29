@@ -301,7 +301,7 @@ $$
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [典型90 047. Monochromatic Diagonal（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_au)（diff —）：R・G・B からなる 2 つの列で各マスの色が決まるマス目について、すべてのマスが同じ色である斜めの線の数を求める。
+- [典型90 047. Monochromatic Diagonal（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_au)（diff なし）：R・G・B からなる 2 つの列で各マスの色が決まるマス目について、すべてのマスが同じ色である斜めの線の数を求める。
 - [ABC150 F. Xor Shift](https://atcoder.jp/contests/abc150/tasks/abc150_f)（diff 2281）：b が、a の巡回シフトの各要素を x で XOR したものになる (k, x) をすべて求める。
 - [ABC135 F. Strings of Eternity](https://atcoder.jp/contests/abc135/tasks/abc135_f)（diff 2388）：t を繰り返した文字列が、s を繰り返した文字列に含まれる最大の回数を求める。
 

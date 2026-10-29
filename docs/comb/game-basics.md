@@ -32,7 +32,7 @@ sections:
   - {title: 真似戦略・ペアリング戦略（真似した手が合法かを確かめる）, anchor: mirror-strategy, level: 青}
   - {title: インタラクティブ：必勝戦略を実行する, anchor: interactive}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -259,7 +259,7 @@ $N = 18$ なら局面は $2^{18} \approx 2.6 \times 10^5$ 個、組は $\binom{1
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC K. Stones](https://atcoder.jp/contests/dp/tasks/dp_k)（diff —）：K 個の石の山から、集合 A のどれかの個数を交互に取り、取れなくなった方が負けのとき、勝つのはどちらかを求める。
+- [EDPC K. Stones](https://atcoder.jp/contests/dp/tasks/dp_k)（diff なし）：K 個の石の山から、集合 A のどれかの個数を交互に取り、取れなくなった方が負けのとき、勝つのはどちらかを求める。
 
 </div>
 

@@ -236,7 +236,7 @@ Union-Find での使い方と、質問の時点のずれ（削除の前に答え
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC235 E. MST + 1](https://atcoder.jp/contests/abc235/tasks/abc235_e)（diff 1304）：グラフに辺を 1 本加えたとき、その辺が最小全域木に使われるかを多数の質問で答える。
-- [ABC040 D. 道路の老朽化対策について](https://atcoder.jp/contests/abc040/tasks/abc040_d)（diff 1656）：年 w より後に作られた道路だけで行ける都市の数を、各クエリについて答える。
+- [ABC040 D. 道路の老朽化対策について](https://atcoder.jp/contests/abc040/tasks/abc040_d)（diff 1656・参考値）：年 w より後に作られた道路だけで行ける都市の数を、各クエリについて答える。
 - [ABC128 E. Roadwork](https://atcoder.jp/contests/abc128/tasks/abc128_e)（diff 1840）：時間帯ごとに通行止めになる地点があり、各人が最初に止まる地点を答える。
 
 </div>

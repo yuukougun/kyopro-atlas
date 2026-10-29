@@ -31,7 +31,7 @@ sections:
   - {title: 辞書順で何番目・K 番目の順列 → 残りの並べ方の数・順列全探索, anchor: lexicographic}
   - {title: 増加部分列・いくつの増加部分列に分けるか → LIS（lis）, anchor: increasing}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -73,19 +73,19 @@ updated: 2026-10-22
 
 ## 問われ方と手法の一覧 {#overview}
 
-問題文の形から行を探し、手法のページへ進む。
+問題文の形から行を探し、問われ方のリンクから行の節へ移る。節で言い換えを確かめてから、手法のページへ進む。
 
 | よく出る問われ方 | 使う手法 | ページ | 代表の問題 |
 |---|---|---|---|
-| 任意の 2 要素の swap でソートする最小回数・手順 | 巡回の個数 $c$ から $N - c$ | [置換の巡回分解](../comb/permutation-cycles.md#min-swaps)、[構築問題の考え方](../thinking/construction.md) | ABC436 E、ABC350 C |
-| 隣り合う 2 要素の swap でソートする最小回数 | 転倒数を BIT で数える | [転倒数](../ds/inversion-number.md#adjacent-swaps) | ABC190 F |
-| ちょうど $K$ 回の swap で作れるか・作れる列の数 | 最小回数と偶奇の両方を確かめる | [置換の偶奇](../comb/permutation-parity.md#exactly-k) | ABC470 F |
-| 置換・写像を $K$ 回適用した結果 | 巡回ごとに $K \bmod \ell$ 歩、一般の写像はダブリング | [置換の巡回分解](../comb/permutation-cycles.md#power)、[ダブリング](../basics/doubling.md#permutation-power) | ABC377 E、ABC367 E |
-| 位置の入れ替えと値の入れ替え・逆置換が混ざる | 位置 → 値と値 → 位置の 2 つの配列 | このページの[節](#inverse) | ABC470 D |
-| 隣の大小・位置と値のずれの条件を満たす順列の数 | 相対順位・未定の数を状態にした DP | [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md) | EDPC T |
-| 固定点のない順列の数 | 包除原理 | [包除原理](../comb/inclusion-exclusion.md#derangement) | — |
-| 辞書順で何番目か・$K$ 番目の順列 | 残りの並べ方の数を足す、小さければ全列挙 | このページの[節](#lexicographic)、[順列全探索](../basics/bit-full-search.md#permutations) | ABC150 C |
-| 最長の増加部分列・増加部分列への最小の分割 | LIS と Dilworth の定理 | [最長増加部分列](../dp/lis.md#dilworth) | ABC134 E |
+| [任意の 2 要素の swap でソートする最小回数・手順](#any-swap) | 巡回の個数 $c$ から $N - c$ | [置換の巡回分解](../comb/permutation-cycles.md#min-swaps)、[構築問題の考え方](../thinking/construction.md) | ABC436 E、ABC350 C |
+| [隣り合う 2 要素の swap でソートする最小回数](#adjacent-swap) | 転倒数を BIT で数える | [転倒数](../ds/inversion-number.md#adjacent-swaps) | ABC190 F |
+| [ちょうど $K$ 回の swap で作れるか・作れる列の数](#swap-parity) | 最小回数と偶奇の両方を確かめる | [置換の偶奇](../comb/permutation-parity.md#exactly-k) | ABC470 F |
+| [置換・写像を $K$ 回適用した結果](#repeat) | 巡回ごとに $K \bmod \ell$ 歩、一般の写像はダブリング | [置換の巡回分解](../comb/permutation-cycles.md#power)、[ダブリング](../basics/doubling.md#permutation-power) | ABC377 E、ABC367 E |
+| [位置の入れ替えと値の入れ替え・逆置換が混ざる](#inverse) | 位置 → 値と値 → 位置の 2 つの配列 | このページ | ABC470 D |
+| [隣の大小・位置と値のずれの条件を満たす順列の数](#counting) | 相対順位・未定の数を状態にした DP | [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md) | EDPC T |
+| [固定点のない順列の数](#counting) | 包除原理 | [包除原理](../comb/inclusion-exclusion.md#derangement) | — |
+| [辞書順で何番目か・$K$ 番目の順列](#lexicographic) | 残りの並べ方の数を足す、小さければ全列挙 | このページ、[順列全探索](../basics/bit-full-search.md#permutations) | ABC150 C |
+| [最長の増加部分列・増加部分列への最小の分割](#increasing) | LIS と Dilworth の定理 | [最長増加部分列](../dp/lis.md#dilworth) | ABC134 E |
 
 代表の問題へのリンクは、行き先のページの例題・練習にある。このページの[練習問題](#practice)に載せたのは ABC150 C と ABC470 D だけである。
 

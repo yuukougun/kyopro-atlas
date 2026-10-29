@@ -5,7 +5,7 @@ aliases: [ベルマンフォード, Bellman-Ford, 負閉路検出, SPFA, 負辺�
 type: technique
 field: graph
 chapter: 最短路
-order: 140
+order: 175
 level: 青
 kind: [最短路]
 prerequisites: [dijkstra]

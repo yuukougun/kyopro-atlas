@@ -261,7 +261,7 @@ ACL の `dsu` をそのまま使えるのが利点で、要素数は $2N$ にな
 - [ABC327 D. Good Tuple Problem](https://atcoder.jp/contests/abc327/tasks/abc327_d)（diff 709）：条件を満たす 0/1 の列が存在するかを判定する。
 - [ABC373 D. Hidden Weights](https://atcoder.jp/contests/abc373/tasks/abc373_d)（diff 765）：各辺 u → v について x_v − x_u = w となる頂点の値を 1 つ求める。
 - [ABC451 F. Make Bipartite 3](https://atcoder.jp/contests/abc451/tasks/abc451_f)（diff 1540）：辺を 1 本ずつ足すたびに、どの辺の両端も違う色になるように頂点を白と黒に塗るときの黒の頂点の数の最小を答える（塗れなくなったら以降は −1）。
-- [典型90 068. Paired Information（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_bp)（diff —）：隣り合う 2 項の和の情報を受け取りながら、A_X = V のときの A_Y を答える（決まらなければ Ambiguous）。
+- [典型90 068. Paired Information（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_bp)（diff なし）：隣り合う 2 項の和の情報を受け取りながら、A_X = V のときの A_Y を答える（決まらなければ Ambiguous）。
 - [ABC280 F. Pay or Receive](https://atcoder.jp/contests/abc280/tasks/abc280_f)（diff 1819）：逆向きに通ると重みの符号が反転するグラフで、2 点間の最長路を答える（いくらでも大きくできるなら inf）。
 
 </div>
