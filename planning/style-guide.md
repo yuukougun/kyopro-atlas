@@ -65,7 +65,8 @@
 
 - atcoder.jp（サブドメインを含む）と codeforces.com は開かない（noai 指定）。問題の題名・difficulty は台帳と `python3 tools/ap.py show <ID>` で確かめ、記憶で問題番号を書かない
 - 新しいドメインは読む前に `python3 tools/check_noai.py <URL>` で確かめ、noai・noimageai の指定や AI の利用を断る規約があれば使わない
-- 他者の文章を転載しない。参考にした資料はページ末尾の「参考」に残す（§11）
+- 他者の文章・図・コードを転載しない。参考にした資料はページ末尾の「参考」に残す（§11）
+- 第三者のサイトにある AtCoder・Codeforces の問題文の写しや訳（洛谷などの問題ページ、コンテストの記録に引用された問題文の節）も読まない。問題文はもとのサイトのものなので、もとのサイトの noai 指定と同じに扱う（工程11、#2。2026-10-29 から）
 
 ### 2.7 コード
 
@@ -311,7 +312,8 @@ cases:
 ## 11. 出典
 
 - ページ末尾に `## 参考 {#references}` を置き、1 行 1 件で「- [著者「題名」](URL)：参考にした点」と書く。例題の方針のために読んだ解説も入れる。ACL は GitHub の document_ja を指す。atcoder.jp・codeforces.com の URL は入れない
-- USACO Guide は規約で複製を禁じるので構成の参考だけ。ikatakos 氏の記録（CC BY 4.0）は問題文を引用した節を読まない・使わない。cp-algorithms・OI Wiki（CC BY-SA）の文章と図は使わない
+- USACO Guide は規約で複製を禁じるので構成の参考だけ。ikatakos 氏の記録（CC BY 4.0）は問題文を引用した節を読まない・使わない。cp-algorithms（CC BY-SA 4.0）・OI Wiki（CC BY-SA 4.0 と SATA）の文章と図は使わない
+- 出題者が公開している資料（解説・解答例。典型90 では問題文も）は資料にしてよい（典型90・鉄則本・アルゴリズムと数学・ACL Practice）。典型90 の作者の GitHub の解説は公式の解説として扱い、参考に挙げる（工程11、#2）
 - 付録 B にないドメインは `tools/check_noai.py` で確かめ、結果を報告に書く（メインが付録 B に足す）
 
 ## 12. 報告の形
@@ -385,7 +387,7 @@ cases:
 4. **使い分けに近い中身の節**：`which-tool`・`when-to-use` など sections にある中身の節は残す（anchor を変えない）。そのページには定型の `## 使い分け {#comparison}` を併せて置かない
 5. **Library Checker の練習**：`## 練習問題 {#practice}` の中に「Library Checker」の小見出しを立て、judge.yosupo.jp へのふつうのリンクの箇条書きで置いてよい。問題の囲み（§10）は atcoder.jp の問題専用のまま（AOJ・CSES への広げ方は §16-6）
    - front matter の verify の問題は、テンプレートがページ下部の「自作の確認」の行に出す。発展の概要以外のページでは、この小見出しは verify にない問題を足すときか、問題ごとの注意を書くときだけでよい。発展の概要の `#library`（§13-10・§16-4）に書く問題名は judge.yosupo.jp へのリンクにする。発展の概要では本文にリンクのある問題をその行に出さないので、名前だけだと 2 か所に並ぶ（工程11、#53）
-6. **evidence の数**：問題の裏付けは 2 つ以上を目標にする。ikatakos.com が落ちているときは web.archive.org の写しを読んでよい（問題文の節は読まない）。GitHub の個人の解説リポジトリも同じ扱いで、問題文（英訳を含む）の部分は読まず、解法の部分だけを参照する
+6. **evidence の数**：問題の裏付けは 2 つ以上を目標にする。ikatakos.com が落ちているときは web.archive.org の写しを読んでよい（問題文の節は読まない）。GitHub の個人の解説リポジトリも同じ扱いで、問題文（英訳を含む）の部分は読まず、解法の部分だけを参照する。洛谷などの問題ページにある問題文の写し・訳も読まない（§2.6）
 7. **level ごとの構成**：執筆の指示の「短く・応用の型と落とし穴に絞る」は基礎のページだけに当たる。水・青・黄のページは level の構成（§4・§14-6）に従う
 8. **図**：1 枚の SVG の幅は 400 程度までにし、横に並べたいものは 2 枚に分ける（幅 760 の図は 360px の画面で文字が 6px ほどになる）。SVG には viewBox と同じ比の `width`・`height` を付ける。値の一覧（$\mu(1), \dots, \mu(12)$ など）は表にせず数式の 1 行で書いてよい
 9. **コード片**：`using namespace std;` の下で std の名前と同じ関数名を作らない（§9）。数論のコード片に限り `using u64 = unsigned long long;`・`using u128 = unsigned __int128;` を使ってよい（§9 の型の別名の例外）。短い補助の関数をラムダで書くのは§9 のラムダの例の「など」に入る
@@ -463,4 +465,7 @@ robots の meta と X-Robots-Tag に noai・noimageai がないことを確か�
 - 確かめられなかった：yukicoder.me は meta の指定はないが、利用規約を確かめるまで使わない（§16-6）。doi.org（union-find-applications の Tarjan・van Leeuwen の論文）と suzukiapple.tumblr.com（sqrt-decomposition）は HTTP 403 で確かめられないので、前者は書誌情報だけの出典（リンクなし）にし、後者は ikatakos.com の ABC365 の記録に替えた（2026-10-22）
 - web.archive.org：ikatakos.com が落ちているときに写しを読むためだけに使う（問題文の節は読まない。§15-6）
 - note.com は meta の指定はないが、利用条件を記事ごとに確かめる（確かめた記事：igasu_7 の n5bd80b1e0eb9・anoconne の n26b5912e1e9c・vain0x の n0037d6468812・syamashi の nb491ffdf0ca3・nc5b5876e0514・n8e580d4ce59d・hip_crow3665 の ne7a656317cea。後の 5 本は 2026-10-22 に meta の指定がなく、本文に転載・引用・AI の利用を断る記述がない無料の記事であることを確かめた）
+- creativecommons.org：ライセンスの deed.ja・legalcode.ja（2026-10-29。方針のページと LICENSE-docs のリンク）
+- kenkoooo.com：AtCoder Problems の公開データ（tools/ap.py が取る JSON。2026-10-29）
+- img.atcoder.jp：AtCoder の言語の一覧（静的ファイル）だけ（2026-10-21 に noai がないことを確かめた。atcoder.jp の問題・解説のページは開かない）
 - 開かない（noai 指定）：atcoder.jp・codeforces.com
