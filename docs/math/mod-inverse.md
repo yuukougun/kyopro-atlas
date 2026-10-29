@@ -123,7 +123,10 @@ $$
 $1$ から $N$ までの逆元が全部欲しいとき、1 つずつフェルマーで求めると $O(N \log p)$ かかる。法が素数 $p$ で $N < p$ なら、次の漸化式で $O(N)$ で作れる。
 
 $$
-\mathrm{inv}[1] = 1, \qquad \mathrm{inv}[i] \equiv -\left\lfloor \frac{p}{i} \right\rfloor \cdot \mathrm{inv}[p \bmod i] \pmod{p}
+\begin{aligned}
+\mathrm{inv}[1] &= 1, \\
+\mathrm{inv}[i] &\equiv -\left\lfloor \frac{p}{i} \right\rfloor \cdot \mathrm{inv}[p \bmod i] \pmod{p}
+\end{aligned}
 $$
 
 **なぜ成り立つか**：$p$ を $i$ で割った商を $q = \lfloor p / i \rfloor$、余りを $r = p \bmod i$ とすると、$p = qi + r$ である。mod $p$ で見ると $qi + r \equiv 0$ になる。$p$ は素数で $1 \le r < i$ なので、$i$ と $r$ はどちらも逆元をもつ（$r = 0$ なら $i$ が $p$ を割り切ってしまうが、$1 < i < p$ ではそれは起きない）。両辺に $i^{-1} r^{-1}$ を掛けると $q r^{-1} + i^{-1} \equiv 0$、すなわち $i^{-1} \equiv -q \cdot r^{-1}$ になる。$r < i$ なので、$\mathrm{inv}[r]$ は $i$ より前に求まっている。

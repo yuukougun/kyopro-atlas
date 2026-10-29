@@ -8,7 +8,7 @@ order: 10
 level: null
 kind: [案内]
 prerequisites: []
-related: [reverse-index-signs, reverse-index-constraints, term-index, knowledge-map, roadmap, notation, atcoder-system, practice-method, glossary, contest-strategy#ai-rules, problem-index, study-list]
+related: [reverse-index-signs, reverse-index-constraints, term-index, knowledge-map, roadmap, notation, atcoder-system, practice-method, glossary, contest-strategy#ai-rules, problem-index, study-list, ai-and-sources]
 summary: 解けなかった ABC の問題から、逆引き辞典 → ページ冒頭の要点 → 前提の順に教材を引ける。レベルの意味、進捗の記録と退避、claude.ai での解説の頼み方も示す。
 complexity: null
 signs: []
@@ -58,6 +58,8 @@ updated: 2026-10-29
 
 この教材は出題範囲の一覧（シラバス）ではない。どのページにも当たらない考察だけで解く問題もあり、G の上半分では発展の手法も使われる（[色別ロードマップ](../guide/roadmap.md#not-a-syllabus)）。
 
+本文は AI（Claude）で書いている。誰がどう書いて確かめたか、他者の記事をどう参考にしたかは[出典と AI 利用の方針](ai-and-sources.md)にある。
+
 ## 章の構成 {#structure}
 
 ページは 15 の分野のどれか 1 つに属し、分野がナビゲーションの章になる。ナビゲーションの最後にある「一覧」の章だけは分野ではなく、全分野のページをレベル別・種類別に並べ直した一覧を集めている。分野をまたいで引くときは、逆引き辞典・用語の索引・問題番号の索引・種類別の一覧・題材別のページを使う（[辞書としての引き方](#lookup)）。
@@ -67,7 +69,7 @@ updated: 2026-10-29
 
 | 章 | 中身 | ページ |
 | --- | --- | --- |
-| [はじめに](index.md) | この教材の使い方、記法と用語の約束、AtCoder の仕組み | 3 |
+| [はじめに](index.md) | この教材の使い方、記法と用語の約束、AtCoder の仕組み、出典と AI 利用の方針 | 4 |
 | [横断ページ](../guide/index.md) | 逆引き辞典、用語の索引、問題番号の索引、使い分け、知識マップ、ロードマップ、早見表、戦い方など | 17 |
 | [基本テクニック](../basics/index.md) | 計算量の見積もり、全探索、二分探索、累積和・いもす法、尺取り法、ソート・座標圧縮、貪欲、半分全列挙、ダブリング、分割統治、周期性、bit 演算 | 32 |
 | [考察](../thinking/index.md) | 言い換え・主客転倒・寄与・余事象・偶奇・不変量・構築などの考察の型 | 9 |
@@ -157,7 +159,7 @@ flowchart TD
 <!-- textlint-disable -->
 
 - レベル別：[基礎](../lists/level-basic.md)（100）・[水](../lists/level-cyan.md)（79）・[青](../lists/level-blue.md)（52）・[黄](../lists/level-yellow.md)（37）・[発展](../lists/level-advanced.md)（51）
-- 種類別：[計算量](../lists/kind-complexity.md)（6）・[全探索](../lists/kind-brute-force.md)（7）・[二分探索](../lists/kind-binary-search.md)（16）・[累積和・差分](../lists/kind-prefix-sum.md)（12）・[尺取り・スライド窓](../lists/kind-two-pointers.md)（3）・[貪欲](../lists/kind-greedy.md)（11）・[ソート・座標圧縮](../lists/kind-sorting.md)（11）・[ダブリング・分割統治](../lists/kind-doubling.md)（13）・[DP](../lists/kind-dp.md)（61）・[グラフ探索](../lists/kind-graph-search.md)（24）・[最短路](../lists/kind-shortest-path.md)（13）・[連結性・全域木](../lists/kind-connectivity.md)（14）・[フロー・マッチング](../lists/kind-flow.md)（9）・[木](../lists/kind-tree.md)（31）・[データ構造](../lists/kind-data-structure.md)（46）・[区間クエリ](../lists/kind-range-query.md)（22）・[クエリ処理の工夫](../lists/kind-query-processing.md)（15）・[整数論](../lists/kind-number-theory.md)（39）・[線形代数・行列](../lists/kind-linear-algebra.md)（11）・[畳み込み・多項式](../lists/kind-convolution.md)（11）・[数え上げ](../lists/kind-counting.md)（47）・[確率・期待値](../lists/kind-probability.md)（12）・[ゲーム](../lists/kind-game.md)（6）・[文字列](../lists/kind-string.md)（18）・[ハッシュ・乱択](../lists/kind-hashing.md)（6）・[幾何](../lists/kind-geometry.md)（8）・[ビット演算](../lists/kind-bit.md)（16）・[考察](../lists/kind-observation.md)（31）・[実装・C++](../lists/kind-implementation.md)（26）・[案内](../lists/kind-guide.md)（36）
+- 種類別：[計算量](../lists/kind-complexity.md)（6）・[全探索](../lists/kind-brute-force.md)（7）・[二分探索](../lists/kind-binary-search.md)（16）・[累積和・差分](../lists/kind-prefix-sum.md)（12）・[尺取り・スライド窓](../lists/kind-two-pointers.md)（3）・[貪欲](../lists/kind-greedy.md)（11）・[ソート・座標圧縮](../lists/kind-sorting.md)（11）・[ダブリング・分割統治](../lists/kind-doubling.md)（13）・[DP](../lists/kind-dp.md)（61）・[グラフ探索](../lists/kind-graph-search.md)（24）・[最短路](../lists/kind-shortest-path.md)（13）・[連結性・全域木](../lists/kind-connectivity.md)（14）・[フロー・マッチング](../lists/kind-flow.md)（9）・[木](../lists/kind-tree.md)（31）・[データ構造](../lists/kind-data-structure.md)（46）・[区間クエリ](../lists/kind-range-query.md)（22）・[クエリ処理の工夫](../lists/kind-query-processing.md)（15）・[整数論](../lists/kind-number-theory.md)（39）・[線形代数・行列](../lists/kind-linear-algebra.md)（11）・[畳み込み・多項式](../lists/kind-convolution.md)（11）・[数え上げ](../lists/kind-counting.md)（47）・[確率・期待値](../lists/kind-probability.md)（12）・[ゲーム](../lists/kind-game.md)（6）・[文字列](../lists/kind-string.md)（18）・[ハッシュ・乱択](../lists/kind-hashing.md)（6）・[幾何](../lists/kind-geometry.md)（8）・[ビット演算](../lists/kind-bit.md)（16）・[考察](../lists/kind-observation.md)（31）・[実装・C++](../lists/kind-implementation.md)（26）・[案内](../lists/kind-guide.md)（37）
 
 <!-- textlint-enable -->
 <!-- gen:end lists -->
@@ -256,7 +258,7 @@ flowchart TD
 
 1 つの問題は、1 つのページでだけ例題になる。ほかのページでは練習か本文の参照になるので、例題の方針はその問題を例題にしたページで読む。問題の並びは易しい順である。
 
-載せた問題は、どれも実在と題名・difficulty を AtCoder Problems の公開データで確かめ、問いと解き方を第三者の解説で確かめている。各行の先頭には「解いた」のチェック欄が付く（[進捗の記録](#progress)）。
+載せた問題は、どれも実在と題名・difficulty を AtCoder Problems の公開データで確かめ、問いと解き方を第三者や出題者が公開している解説などで確かめている（[出典と AI 利用の方針](ai-and-sources.md#citations)）。各行の先頭には「解いた」のチェック欄が付く（[進捗の記録](#progress)）。
 
 ## ページの段階と「準備中」の帯 {#stub}
 
@@ -267,9 +269,9 @@ flowchart TD
 | 準備中 | 骨組みだけで、本文はまだない。ページの上に「準備中」の帯も出る |
 | 下書き | 本文を書いたが、まだ検証していない |
 | 検証済み | 書いた担当とは別の担当が、事実（問題・計算量・定理）・コード・図・説明の分かりやすさを確かめ、見つかった誤りを直した |
-| 完成 | 検証済みのページに、作者が目を通して確かめた |
+| 完成 | 執筆・別の担当の検証・Issue の対応を一通り終え、作者が公開してよいとした。作者がすべての記述を確かめたわけではない |
 
-検証済みのページは、作者が目を通したものから完成にしていく。検証済みでも誤りが残ることはあるので、見つけたときは[誤りの報告](#report)の手順で知らせる。更新日は、そのページの中身を最後に直した日である。
+検証済みのページは、執筆・検証・Issue の対応が一通り終わったところで完成にする（確かめ方は[出典と AI 利用の方針](ai-and-sources.md#ai-writing)）。検証済みや完成のページでも誤りが残ることはあるので、見つけたときは[誤りの報告](#report)の手順で知らせる。更新日は、そのページの中身を最後に直した日である。
 
 いまは、すべてのページに本文がある。ページを新しく足すときは、逆引き辞典・知識マップ・索引が全体で動くように、本文より先に骨組みだけを公開することがある。そのページには「準備中」の帯が出る。
 
@@ -284,6 +286,8 @@ flowchart TD
 3. 画面の下のボタンで送る。
 
 Issue は公開され、誰でも読める。問題文や解説の文章は写さず（ほかの人の文章の転載になる）、問題は問題 ID（`abc340_e` など）で示す。報告を受けて直したページは、更新日が新しくなる。
+
+自分の記事が写されている・参考の行が違うなど、出典についての申し出も同じように Issue で受け付ける（[出典と AI 利用の方針](ai-and-sources.md#contact)）。
 
 ## 進捗の記録（解いた・理解した） {#progress}
 
@@ -364,7 +368,7 @@ ABCxxx E の解説を頼みたい。終了したコンテストの問題であ�
 <!-- gen:begin version -->
 <!-- textlint-disable -->
 
-索引の版：`cd915e2635bb`（ページの updated の最大：2026-10-29）
+索引の版：`50a7b4f1c9ea`（ページの updated の最大：2026-10-29）
 
 <!-- textlint-enable -->
 <!-- gen:end version -->

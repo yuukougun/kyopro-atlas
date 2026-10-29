@@ -53,13 +53,19 @@ updated: 2026-10-29
 **なぜ $1/p$ か（1 回目で場合分け）**：求める期待値を $E$ とおく。1 回目は必ず振るので 1 回を数える。成功すれば（確率 $p$）そこで終わり、失敗すれば（確率 $1 - p$）最初とまったく同じ状況に戻るので、残りの回数の期待値はまた $E$ である。
 
 $$
-E = 1 + p \cdot 0 + (1 - p) \cdot E \quad\Longrightarrow\quad pE = 1 \quad\Longrightarrow\quad E = \frac{1}{p}
+\begin{aligned}
+& E = 1 + p \cdot 0 + (1 - p) \cdot E \\
+\Longrightarrow\quad & pE = 1 \quad\Longrightarrow\quad E = \frac{1}{p}
+\end{aligned}
 $$
 
 この移項は $E$ が有限のときだけ許される。$p > 0$ なら $k$ 回以上かかる確率 $(1 - p)^{k-1}$ は指数的に小さくなるので、$E$ は有限である。実際、「$k$ 回以上かかる確率」を $k = 1, 2, \dots$ について足すと期待値になる（[期待値を「k 以上」の確率の和で求める](../comb/expectation-tail-sum.md#identity)）ので、等比級数で同じ値が出る。
 
 $$
-E[X] = \sum_{k \ge 1} P(X \ge k) = \sum_{k \ge 1} (1 - p)^{k-1} = \frac{1}{1 - (1 - p)} = \frac{1}{p}
+\begin{aligned}
+E[X] &= \sum_{k \ge 1} P(X \ge k) = \sum_{k \ge 1} (1 - p)^{k-1} \\
+&= \frac{1}{1 - (1 - p)} = \frac{1}{p}
+\end{aligned}
 $$
 
 「同じ状況に戻るなら、自分自身の期待値を式に入れて移項する」という操作は、[期待値 DP の自己ループの移項](../comb/expected-value-dp.md#self-loop)と同じものである。幾何分布はその最小の例になっている。
@@ -95,7 +101,11 @@ $N$ 種類のものが毎回等確率 $1/N$ で 1 つずつ出るとき、全種
 - $T = T_0 + T_1 + \dots + T_{N-1}$ なので、[期待値の線形性](../comb/linearity-of-expectation.md#split)から各段階の期待値を足せばよい。$E[X + Y] = E[X] + E[Y]$ は $X, Y$ が独立でなくても成り立つ
 
 $$
-E[T] = \sum_{k=0}^{N-1} \frac{N}{N - k} = N\left(\frac{1}{N} + \frac{1}{N-1} + \dots + \frac{1}{1}\right) = N H_N
+\begin{aligned}
+E[T] &= \sum_{k=0}^{N-1} \frac{N}{N - k} \\
+&= N\left(\frac{1}{N} + \frac{1}{N-1} + \dots + \frac{1}{1}\right) \\
+&= N H_N
+\end{aligned}
 $$
 
 次の図は $N = 4$ の場合である。段階が進むほど新しい種類が出にくくなり、最後の 1 種類を待つ段階だけで全体の約半分の回数を使う。

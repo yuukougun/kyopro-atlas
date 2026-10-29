@@ -103,7 +103,7 @@
    3. ~~発展の概要50ページ（b4）と横断ページ33（b5）~~ 完了（2026-10-22。全353ページが draft）。b4・b5 の提案の反映（手引き §16、batches/b5/decisions.md）と2回目のリンクの張り替え（326か所）も完了
    4. ~~問題の補充~~ 完了（2026-10-22。練習0〜1問の52ページに116行、新しい問題51。batches/b6/）。9c（解説手順の確定）も完了（2026-10-22。claude/ の v1。ユーザーが Project instructions を貼り直す）。残りは下の「工程10：全体の検証」へ移した
 4. ~~工程10（全体の検証）~~ 完了（2026-10-22。全353ページが reviewed）
-5. ユーザーがページに目を通し、よければ stage を done にする。直したい点はメインが手引きと照らして直す
+5. 一通りの作業（執筆・別の担当の検証・Issue の対応）が終わったら、全ページの stage を done にする（decisions.md の 2026-10-29「段階「完成」の意味」。作者がすべての記述を確かめたという意味ではない）。直したい点はメインが手引きと照らして直す
 6. 工程11（Issue の対応）：GitHub の Issue をグループに分けて直している。グループと状態は [batches/fix/README.md](batches/fix/README.md)、決定は decisions.md の 2026-10-29 の節
    - 並列の進め方：ワークフローの args はページの front matter から機械的に作り、expect（件数）を渡す。commit は動いている担当と混ざらないよう、別の作業ツリー（git worktree）でその分だけを生成・検査してから行うか、すべて止めてから行う。ビルドの確認は `mkdocs build --strict` に -q を付けない
 
@@ -111,7 +111,7 @@
 
 - 1巡目：5観点（構成・関係・事実・図・共有ファイル）の洗い出し（batches/s10/audit-*.md）→ 分野ごとの直し（fixed-*.md）→ 別の担当の検証（verify-*.md）。commit 2c6db97
 - 2巡目：残り（left-*.md）へのメインの判断（batches/s10/decisions.md・手引き §17）→ 直し（fixed2-*.md）→ 検証（verify2-*.md）。tools/frequency.py・tools/check_svg.py・check_pages の構造と出典の題名の警告を足した
-- 全353ページの stage を reviewed にした。done はユーザーが目を通してから付ける
+- 全353ページの stage を reviewed にした。done は Issue の対応が一通り終わってから付ける（decisions.md の 2026-10-29「段階「完成」の意味」）
 - 残り（急がない）：
   - ~~trap.jp の 4 か所~~ 済み（2026-10-29 に check_noai で記事 3 本とも noai なしを確かめ、付録 B に記録した）
   - 台帳の未確認 3 問（abc458_e・abc479_d・abc479_e）：第三者の解説が見つかれば確かめてページに足す。ABC193 E（floor-sum の練習の候補）も同じ

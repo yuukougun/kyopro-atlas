@@ -69,7 +69,10 @@ ABC では ACL の `convolution` を呼べば足り、仕組みが要る問題�
 変換は、多項式 $a(x)$（長さ $N$）の値 $a(\omega^0), a(\omega^1), \dots, a(\omega^{N-1})$ をすべて求めることである。$\omega$ は 1 の原始 $N$ 乗根とする。係数を偶数番目と奇数番目に分けて、次の 2 つの多項式（長さ $N/2$）を作る。
 
 $$
-a_{\text{even}}(y) = a_0 + a_2 y + a_4 y^2 + \cdots, \qquad a_{\text{odd}}(y) = a_1 + a_3 y + a_5 y^2 + \cdots
+\begin{aligned}
+a_{\text{even}}(y) &= a_0 + a_2 y + a_4 y^2 + \cdots, \\
+a_{\text{odd}}(y) &= a_1 + a_3 y + a_5 y^2 + \cdots
+\end{aligned}
 $$
 
 すると $a(x) = a_{\text{even}}(x^2) + x \, a_{\text{odd}}(x^2)$ が成り立つ。$x = \omega^k$ を入れると次の式になる。

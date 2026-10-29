@@ -28,7 +28,7 @@ sections:
   - {title: 括弧列を DP で数えるときとの使い分け, anchor: vs-dp}
   - {title: 両端を越えない場合, anchor: two-sided, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -193,7 +193,10 @@ $$
 **像の並び**。下の線 $-1$ で折り返すと点 $x$ は $-2 - x$ へ、上の線 $w + 1$ で折り返すと $2w + 2 - x$ へ移る。2 つを続けると $x \mapsto x + 2D$ の平行移動になる。だから終点 $t$ の像は、$t + 2jD$（偶数回折り返した点）と $-2 - t + 2jD$（奇数回折り返した点）の 2 列に並ぶ（$j$ は整数）。答えは、偶数回の像への経路の数を足し、奇数回の像への経路の数を引いたものである。
 
 $$
-\sum_{j \in \mathbb{Z}} \Bigl( N(t - s + 2jD) - N(-2 - t - s + 2jD) \Bigr)
+\begin{aligned}
+\sum_{j \in \mathbb{Z}} \Bigl( & N(t - s + 2jD) \\
+& - N(-2 - t - s + 2jD) \Bigr)
+\end{aligned}
 $$
 
 $N(d)$ は、制約のない $n$ 歩で高さが $d$ 変わる列の数で、$\lvert d \rvert \le n$ かつ $n + d$ が偶数なら $\binom{n}{(n + d)/2}$、それ以外は 0 である。0 でない項は $\lvert d \rvert \le n$ のものだけなので、項の数は $O(n / w + 1)$ である。

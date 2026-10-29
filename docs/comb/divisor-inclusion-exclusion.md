@@ -28,7 +28,7 @@ sections:
   - {title: 累乗数の重複を指数ごとに除く, anchor: perfect-powers}
   - {title: メビウス関数での書き方との対応, anchor: vs-mobius}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -65,7 +65,10 @@ $F$ と $f$ をつなぐのが次の性質である。
 1 つ目の ⇔ は、公約数がすべて gcd の約数になることから従う（[GCD・LCM](../math/gcd-lcm.md)）。gcd はただ 1 つに決まるので、$F(g)$ が数える対象は「gcd が $g$」「gcd が $2g$」「gcd が $3g$」… へ[排反に](../guide/glossary.md#disjoint)分かれる。よって次の式が成り立つ。
 
 $$
-F(g) = f(g) + f(2g) + f(3g) + \cdots = \sum_{k \ge 1,\ kg \le M} f(kg)
+\begin{aligned}
+F(g) &= f(g) + f(2g) + f(3g) + \cdots \\
+&= \sum_{k \ge 1,\ kg \le M} f(kg)
+\end{aligned}
 $$
 
 この式を $f(g)$ について解いたものが、このページの中心の式である。

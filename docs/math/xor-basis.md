@@ -29,7 +29,7 @@ sections:
   - {title: コストの小さい順に基底へ入れる貪欲（線形マトロイド）, anchor: min-cost}
   - {title: グラフのウォークの XOR（全域木の根からの XOR と、閉路の XOR の基底）, anchor: xor-walk}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -160,11 +160,7 @@ $n$ 個の整数のランクが $r$ なら、作れる値はちょうど $2^r$ �
 
 ## グラフのウォークの XOR（全域木の根からの XOR と、閉路の XOR の基底） {#xor-walk}
 
-この節は[深さ優先探索](../graph/dfs.md)を前提にする。連結な無向グラフで、[ウォーク](../guide/glossary.md#path-walk)の重みを「通った辺の重みの XOR（同じ辺を 2 回通れば打ち消す）」とする。$u$ から $v$ へのウォークの重みとしてありうる値は、次の形で書ける。
-
-$$
-d(u) \oplus d(v) \oplus (\text{閉路の値をいくつか XOR したもの})
-$$
+この節は[深さ優先探索](../graph/dfs.md)を前提にする。連結な無向グラフで、[ウォーク](../guide/glossary.md#path-walk)の重みを「通った辺の重みの XOR（同じ辺を 2 回通れば打ち消す）」とする。$u$ から $v$ へのウォークの重みとしてありうる値は、$d(u) \oplus d(v)$ に閉路の値をいくつか XOR したものである。
 
 ここで $d(v)$ は、1 つの[全域木](../guide/glossary.md#spanning-tree)で根から $v$ へ木の辺だけをたどった XOR である。閉路の値は、木に入らない辺 $(a, b, w)$ ごとに $d(a) \oplus d(b) \oplus w$ と決める。これは「$a$ から木をたどって $b$ へ行き、辺 $(a, b)$ で戻る」閉路の XOR である。
 

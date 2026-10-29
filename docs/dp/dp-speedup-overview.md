@@ -42,12 +42,12 @@ DP の高速化の選び方は、間に合わない DP を前にして、どの�
 
 DP の計算量は「状態数 × 遷移 1 回の手間」である（[状態](../guide/glossary.md#state)・[遷移](../guide/glossary.md#transition)の数え方は [DP の基本](../dp/dp-basics.md#four-parts)）。だから速くする道は 2 つしかない。状態の数を減らすか、1 つの状態の値を求める手間を減らすかである。
 
-| 何が多いか | 見るところ | 道具 | ページ |
-| --- | --- | --- | --- |
-| 状態数（表が大きすぎる） | 添字の範囲は答えに効く分だけで足りるか | 上限で打ち切る | [状態の削減](../dp/dp-dimension-reduction.md#cap) |
-| 状態数（添字の範囲が $10^9$ など） | 値と添字を入れ替えられるか | 値と添字の入れ替え | [状態の削減](../dp/dp-dimension-reduction.md#dp-swap-key-value) |
-| 状態数（何を持つか自体が多い） | 将来に効く要約だけを持っているか | 状態の設計の見直し | [状態の設計](../dp/dp-state-design.md#state-count) |
-| 遷移 1 回の手間（1 つの値に $O(N)$ 個の遷移元） | 貰う形の式の右辺の形 | 累積和・セグメント木・CHT など | [次の節](#read-the-recurrence)と[早見表](#shape-to-tool) |
+| 何が多いか | 見るところ | 道具 → ページ |
+| --- | --- | --- |
+| 状態数（表が大きすぎる） | 添字の範囲は答えに効く分だけで足りるか | 上限で打ち切る → [状態の削減](../dp/dp-dimension-reduction.md#cap) |
+| 状態数（添字の範囲が $10^9$ など） | 値と添字を入れ替えられるか | 値と添字の入れ替え → [状態の削減](../dp/dp-dimension-reduction.md#dp-swap-key-value) |
+| 状態数（何を持つか自体が多い） | 将来に効く要約だけを持っているか | 状態の設計の見直し → [状態の設計](../dp/dp-state-design.md#state-count) |
+| 遷移 1 回の手間（1 つの値に $O(N)$ 個の遷移元） | 貰う形の式の右辺の形 | 累積和・セグメント木・CHT など → [次の節](#read-the-recurrence)と[早見表](#shape-to-tool) |
 
 たとえば $N = 2 \times 10^5$ 個の状態がそれぞれ直前 $K = 2 \times 10^5$ 個から値を集めると、$NK = 4 \times 10^{10}$ 回で間に合わない（1 秒に $10^8$ 回の目安は[計算量の見積もり](../basics/complexity-estimation.md#how-to-estimate)）。状態数 $N$ は減らせないことが多いので、遷移の $K$ を $1$ や $\log N$ に縮める道を探す。逆に、ナップサックの重さの上限が $10^9$ のように表そのものが作れないときは、遷移を速くしても意味がなく、状態の側を直す（[EDPC E](../dp/dp-dimension-reduction.md#dp_e)）。
 
@@ -88,25 +88,25 @@ $$
 
 貰う形の式の右辺から行を探し、ページの節へ進む。おおむね上の行ほど易しく、ABC でよく出る。例題の列は、そのページに例題・練習として載せた問題である。
 
-| 右辺の形（遷移元の範囲・項） | 道具 | ページ | 例題 |
-| --- | --- | --- | --- |
-| 連続区間の和 | 累積和（配る形ならいもす法） | [DP と累積和](../dp/dp-prefix-sum.md#pull-and-push) | [EDPC M](../dp/dp-prefix-sum.md#dp_m)・[ABC179 D](../dp/dp-prefix-sum.md#abc179_d) |
-| 接頭辞（$j < i$ すべて）の min・max | 累積 min・max | [DP と累積和](../dp/dp-prefix-sum.md#prefix-min) | — |
-| 右へ動くだけの窓の min・max | スライド最小値（単調 deque） | [セグメント木・スライド最小値](../dp/dp-segment-tree.md#dp-sliding-window) | — |
-| 手前で初めて自分より大きい位置の 1 点 | 単調スタック | [単調スタック](../ds/monotonic-stack.md#dp-transition) | [ABC359 E](../ds/monotonic-stack.md#abc359_e) |
-| 任意の区間・値の範囲の min・max・和 | セグメント木・BIT（値なら座標圧縮） | [セグメント木・スライド最小値](../dp/dp-segment-tree.md#values-on-segment-tree) | [EDPC Q](../dp/dp-segment-tree.md#dp_q)・[典型90 037](../dp/dp-segment-tree.md#typical90_ak) |
-| コストが $\lvert x_i - x_j \rvert$ の一次式 | 左右に分けて 2 本のセグメント木 | [セグメント木・スライド最小値](../dp/dp-segment-tree.md#split-abs) | [ABC353 G](../dp/dp-segment-tree.md#abc353_g) |
-| 前の段がほぼそのまま写り、一部だけ変わる・範囲に一律に足す | インライン DP（遅延セグメント木） | [インライン DP](../dp/inline-dp.md#diff-per-row) | [ABC271 E](../dp/inline-dp.md#abc271_e)・[EDPC W](../dp/inline-dp.md#dp_w) |
-| 可否（bool）で、和の値を添字にした表 | bitset のシフト OR | [bitset による高速化](../misc/bitset-speedup.md#subset-sum-shift) | [AGC020 C](../misc/bitset-speedup.md#practice) |
-| 係数が差 $i - j$ だけで決まる和・多項式の積 | 畳み込み・分割統治 FFT・FPS | [分割統治 FFT](../math/online-convolution.md#dp-as-polynomial) | [ABC213 H](../math/online-convolution.md#abc213_h) |
-| 毎回同じ線形の遷移を巨大な回数くり返す | 行列累乗・ダブリング・線形漸化式の高速化 | [行列累乗](../math/matrix-power.md#dp-transition) | [EDPC R](../math/matrix-power.md#dp_r)・[ABC305 G](../math/matrix-power.md#abc305_g) |
-| $\min_j (\mathrm{dp}[j] + a_j x_i + b_j)$ | CHT・Li Chao Tree | [CHT](../dp/cht.md#lines) | [EDPC Z](../dp/cht.md#dp_z) |
-| $\min_j (\mathrm{dp}_{k-1}[j] + c(j, i))$ で $c$ が Monge（前の段が確定している） | monotone minima | [Monge](../dp/monge.md#monotone-minima) | [ABC348 G](../dp/monge.md#abc348_g) |
-| $\min_j (\mathrm{dp}[j] + c(j, i))$ で $c$ が Monge（段のない形） | LARSCH・左半分を先に確定させる分割統治 | [Monge](../dp/monge.md#smawk-larsch) | — |
-| 区間 DP $\mathrm{dp}[l][r] = \min_m (\mathrm{dp}[l][m] + \mathrm{dp}[m][r]) + w(l, r)$ で $w$ が Monge かつ区間を広げても減らない | Knuth-Yao | [Monge](../dp/monge.md#knuth-yao) | — |
-| ちょうど $K$ 個選び、最適値が $K$ について凸 | Alien DP | [Alien DP](../dp/alien-dp.md#penalty) | [ABC218 H](../dp/alien-dp.md#abc218_h) |
-| $\mathrm{dp}[x]$ が $x$ の凸な折れ線で、$\lvert x - a \rvert$ を足す・累積 min を取る | Slope Trick | [Slope Trick](../dp/slope-trick.md#breakpoints) | [ABC217 H](../dp/slope-trick.md#abc217_h) |
-| 1 点を書き換えるたびに DP の答えを聞く | 遷移の行列をセグメント木に載せる | [動的 DP](../dp/dynamic-dp.md#what-it-does) | [ABC246 Ex](../dp/dynamic-dp.md#abc246_h) |
+| 右辺の形（遷移元の範囲・項） | 道具 → ページ | 例題 |
+| --- | --- | --- |
+| 連続区間の和 | 累積和（配る形ならいもす法）→ [DP と累積和](../dp/dp-prefix-sum.md#pull-and-push) | [EDPC M](../dp/dp-prefix-sum.md#dp_m)・[ABC179 D](../dp/dp-prefix-sum.md#abc179_d) |
+| 接頭辞（$j < i$ すべて）の min・max | 累積 min・max → [DP と累積和](../dp/dp-prefix-sum.md#prefix-min) | — |
+| 右へ動くだけの窓の min・max | スライド最小値（単調 deque）→ [セグメント木・スライド最小値](../dp/dp-segment-tree.md#dp-sliding-window) | — |
+| 手前で初めて自分より大きい位置の 1 点 | [単調スタック](../ds/monotonic-stack.md#dp-transition) | [ABC359 E](../ds/monotonic-stack.md#abc359_e) |
+| 任意の区間・値の範囲の min・max・和 | セグメント木・BIT（値なら座標圧縮）→ [セグメント木・スライド最小値](../dp/dp-segment-tree.md#values-on-segment-tree) | [EDPC Q](../dp/dp-segment-tree.md#dp_q)・[典型90 037](../dp/dp-segment-tree.md#typical90_ak) |
+| コストが $\lvert x_i - x_j \rvert$ の一次式 | 左右に分けて 2 本のセグメント木 → [セグメント木・スライド最小値](../dp/dp-segment-tree.md#split-abs) | [ABC353 G](../dp/dp-segment-tree.md#abc353_g) |
+| 前の段がほぼそのまま写り、一部だけ変わる・範囲に一律に足す | インライン DP（遅延セグメント木）→ [インライン DP](../dp/inline-dp.md#diff-per-row) | [ABC271 E](../dp/inline-dp.md#abc271_e)・[EDPC W](../dp/inline-dp.md#dp_w) |
+| 可否（bool）で、和の値を添字にした表 | bitset のシフト OR → [bitset による高速化](../misc/bitset-speedup.md#subset-sum-shift) | [AGC020 C](../misc/bitset-speedup.md#practice) |
+| 係数が差 $i - j$ だけで決まる和・多項式の積 | 畳み込み・分割統治 FFT・FPS → [分割統治 FFT](../math/online-convolution.md#dp-as-polynomial) | [ABC213 H](../math/online-convolution.md#abc213_h) |
+| 毎回同じ線形の遷移を巨大な回数くり返す | 行列累乗・ダブリング・線形漸化式の高速化 → [行列累乗](../math/matrix-power.md#dp-transition) | [EDPC R](../math/matrix-power.md#dp_r)・[ABC305 G](../math/matrix-power.md#abc305_g) |
+| $\min_j (\mathrm{dp}[j] + a_j x_i + b_j)$ | CHT・Li Chao Tree → [CHT](../dp/cht.md#lines) | [EDPC Z](../dp/cht.md#dp_z) |
+| $\min_j (\mathrm{dp}_{k-1}[j] + c(j, i))$ で $c$ が Monge（前の段が確定している） | monotone minima → [Monge](../dp/monge.md#monotone-minima) | [ABC348 G](../dp/monge.md#abc348_g) |
+| $\min_j (\mathrm{dp}[j] + c(j, i))$ で $c$ が Monge（段のない形） | LARSCH・左半分を先に確定させる分割統治 → [Monge](../dp/monge.md#smawk-larsch) | — |
+| 区間 DP $\mathrm{dp}[l][r] = \min_m (\mathrm{dp}[l][m] + \mathrm{dp}[m][r]) + w(l, r)$ で $w$ が Monge かつ区間を広げても減らない | Knuth-Yao → [Monge](../dp/monge.md#knuth-yao) | — |
+| ちょうど $K$ 個選び、最適値が $K$ について凸 | [Alien DP](../dp/alien-dp.md#penalty) | [ABC218 H](../dp/alien-dp.md#abc218_h) |
+| $\mathrm{dp}[x]$ が $x$ の凸な折れ線で、$\lvert x - a \rvert$ を足す・累積 min を取る | [Slope Trick](../dp/slope-trick.md#breakpoints) | [ABC217 H](../dp/slope-trick.md#abc217_h) |
+| 1 点を書き換えるたびに DP の答えを聞く | 遷移の行列をセグメント木に載せる → [動的 DP](../dp/dynamic-dp.md#what-it-does) | [ABC246 Ex](../dp/dynamic-dp.md#abc246_h) |
 
 表の読み方には 3 つの注意がある。
 
@@ -118,13 +118,13 @@ $$
 
 右辺が和で、各項が「前の値 × 係数」の線形な形なら、DP を多項式や行列の計算とみて速くできる。分かれ目は、係数が何で決まるかと、段の数がどれだけ大きいかである。
 
-| 式の形 | 規模の目安 | 道具 | ページ |
-| --- | --- | --- | --- |
-| $\mathrm{dp}[i] = \sum_{j<i} \mathrm{dp}[j]\, g[i - j]$（係数が差だけで決まる） | $N \le 2 \times 10^5$ 程度 | FPS の逆元・オンライン畳み込み | [DP の遷移を多項式の積とみる](../math/online-convolution.md#dp-as-polynomial) |
-| 段ごとに決まった多項式を掛ける（「値 $v$ を使う・使わない」の $(1 + x^v)$ など） | 段も次数も $10^5$ 程度 | 畳み込み（NTT）を分割統治で | [多数の多項式の積](../math/online-convolution.md#product-of-many)・[畳み込み](../math/convolution-ntt.md#sum-pairs) |
-| $\mathrm{dp}[t+1] = A\, \mathrm{dp}[t]$（どの段でも同じ遷移） | 段 $T \le 10^{18}$、状態 $n$ が 100 程度まで | 行列累乗 $O(n^3 \log T)$ | [DP の遷移を行列にする](../math/matrix-power.md#dp-transition) |
-| 同じ遷移だが、行列にすると大きすぎる | $n^3$ が重いとき | 遷移の形を使ったダブリング | [ダブリングで遷移を合成する](../math/matrix-power.md#doubling-transition) |
-| 1 本の $K$ 項の線形漸化式 | $K$ が数千〜$10^5$、$N \le 10^{18}$ | きたまさ法・Bostan-Mori | [線形漸化式の高速化](../math/linear-recurrence-fast.md#vs-matrix) |
+| 式の形 | 規模の目安 | 道具 → ページ |
+| --- | --- | --- |
+| $\mathrm{dp}[i] = \sum_{j<i} \mathrm{dp}[j]\, g[i - j]$（係数が差だけで決まる） | $N \le 2 \times 10^5$ 程度 | FPS の逆元・オンライン畳み込み → [DP の遷移を多項式の積とみる](../math/online-convolution.md#dp-as-polynomial) |
+| 段ごとに決まった多項式を掛ける（「値 $v$ を使う・使わない」の $(1 + x^v)$ など） | 段も次数も $10^5$ 程度 | 畳み込み（NTT）を分割統治で → [多数の多項式の積](../math/online-convolution.md#product-of-many)・[畳み込み](../math/convolution-ntt.md#sum-pairs) |
+| $\mathrm{dp}[t+1] = A\, \mathrm{dp}[t]$（どの段でも同じ遷移） | 段 $T \le 10^{18}$、状態 $n$ が 100 程度まで | 行列累乗 $O(n^3 \log T)$ → [DP の遷移を行列にする](../math/matrix-power.md#dp-transition) |
+| 同じ遷移だが、行列にすると大きすぎる | $n^3$ が重いとき | 遷移の形を使ったダブリング → [ダブリングで遷移を合成する](../math/matrix-power.md#doubling-transition) |
+| 1 本の $K$ 項の線形漸化式 | $K$ が数千〜$10^5$、$N \le 10^{18}$ | きたまさ法・Bostan-Mori → [線形漸化式の高速化](../math/linear-recurrence-fast.md#vs-matrix) |
 
 **畳み込みに乗る条件**は、係数が添字の差 $i - j$ だけで決まることである。たとえば「歩幅 $s$ で跳ぶ方法が $g[s]$ 通り」のとき、$\mathrm{dp}[i] = \sum_{j<i} \mathrm{dp}[j]\, g[i-j]$ になる。素朴には $O(N^2)$ だが、多項式で $P = \mathrm{dp}[0] / (1 - G)$ と書けるので、FPS の逆元で $O(N \log N)$ になる（式の導き方は[分割統治 FFT のページ](../math/online-convolution.md#dp-as-polynomial)）。係数が $i$ や $j$ そのものにもよるなら、畳み込みには乗らない。
 
@@ -136,12 +136,12 @@ $$
 
 ここに並ぶ 4 つの手法は、どれも発展のページである。ABC では難しい G や Ex でまれに出る程度なので、黄を目指す段階では「式がこの形なら名前を思い出せる」ことを目標にし、ライブラリを用意して使う。どれも式の変形で形を確かめてから使う。
 
-| 確かめる形 | 確かめ方 | 道具 | ページ |
-| --- | --- | --- | --- |
-| コストを展開すると $i$ だけの項・$j$ だけの項と、積の項 1 つに分かれる | $(h_i - h_j)^2 = h_i^2 - 2h_i h_j + h_j^2$ のように展開する | CHT・Li Chao Tree | [CHT](../dp/cht.md#lines) |
-| 区間のコスト $c(l, r)$ が、交差する 2 区間の和 ≤ 外側と内側の和を満たす | 定義の不等式を確かめるか、小さい入力で全探索して確かめる | monotone minima・LARSCH・Knuth-Yao | [Monge 性の定義と確かめ方](../dp/monge.md#definition) |
-| 「ちょうど $K$ 個」の最適値 $f(K)$ が $K$ について凸 | $f(K+1) - f(K)$ が単調になるかを小さい入力で確かめる | Alien DP | [罰金で個数の制約を外す](../dp/alien-dp.md#penalty) |
-| $\mathrm{dp}[x]$ を $x$ の関数とみると凸な折れ線で、遷移が折れ線の足し算・累積 min | 足す関数が凸か（$\lvert x - a \rvert$ など）を見る | Slope Trick | [凸関数を傾きの変わる点で表す](../dp/slope-trick.md#breakpoints) |
+| 確かめる形 | 確かめ方 | 道具 → ページ |
+| --- | --- | --- |
+| コストを展開すると $i$ だけの項・$j$ だけの項と、積の項 1 つに分かれる | $(h_i - h_j)^2 = h_i^2 - 2h_i h_j + h_j^2$ のように展開する | CHT・Li Chao Tree → [CHT](../dp/cht.md#lines) |
+| 区間のコスト $c(l, r)$ が、交差する 2 区間の和 ≤ 外側と内側の和を満たす | 定義の不等式を確かめるか、小さい入力で全探索して確かめる | monotone minima・LARSCH・Knuth-Yao → [Monge 性の定義と確かめ方](../dp/monge.md#definition) |
+| 「ちょうど $K$ 個」の最適値 $f(K)$ が $K$ について凸 | $f(K+1) - f(K)$ が単調になるかを小さい入力で確かめる | Alien DP → [罰金で個数の制約を外す](../dp/alien-dp.md#penalty) |
+| $\mathrm{dp}[x]$ を $x$ の関数とみると凸な折れ線で、遷移が折れ線の足し算・累積 min | 足す関数が凸か（$\lvert x - a \rvert$ など）を見る | Slope Trick → [凸関数を傾きの変わる点で表す](../dp/slope-trick.md#breakpoints) |
 
 凸性は「たぶん凸」で使うと、誤った答えを静かに返す。小さい入力で素朴な DP の値を全部出し、差が単調に並ぶかを確かめてから使うのが安全である（[凸関数](../guide/glossary.md#convex-function)の定義は用語集）。ABC の制約では、Monge 性があっても $O(N^2)$ や $O(N^3)$ のまま通ることも多い。まず素朴な計算量で間に合うかを見積もり、間に合わないときだけこれらを持ち出す。
 

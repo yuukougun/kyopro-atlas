@@ -3,7 +3,7 @@
 AtCoder で黄色（レート 2000）を目指す人のための、**辞書として引く**競技プログラミングの教材です。ABC で解けなかった問題をきっかけに、必要な手法のページを引いて読む使い方を想定しています。
 
 - サイト：https://yuukougun.github.io/kyopro-atlas/
-- 状態：全 353 ページを書き終え、全体の検証を済ませました（段階は「検証済み」）。作者が目を通したページから「完成」にしていきます
+- 状態：全ページに本文があり、Issue の対応を進めています。執筆・別の担当の検証・Issue の対応が一通り終わったら「完成」にします（作者がすべての記述を確かめたという意味ではありません）
 
 ## 教材の使い方
 
@@ -40,6 +40,7 @@ claude.ai/code の **Projects** で、このリポジトリを読みながら解
 | `tools/` | 骨格・索引の生成と、各種の検査（使い方は `tools/README.md`） |
 | `overrides/` | サイトのテンプレート・CSS・JS |
 | `planning/` | 要件・決定事項・調査・設計・進捗（制作の記録） |
+| `LICENSE`・`LICENSE-docs` | ライセンスの文書（`LICENSE` は MIT、`LICENSE-docs` は `docs/` の本文と図の CC BY 4.0。下の「ライセンス」） |
 
 ## 手元でサイトを見る
 
@@ -51,3 +52,11 @@ uv run mkdocs serve        # http://127.0.0.1:8000/kyopro-atlas/
 ```
 
 検査は `python3 tools/check_pages.py`、`python3 tools/check_snippets.py`、`npm ci && npm run lint:text` で行います。
+
+## ライセンス
+
+- 教材の本文と図（`docs/` のページと図）は [CC BY 4.0](LICENSE-docs)（クリエイティブ・コモンズ 表示 4.0 国際）です。出典（kyopro-atlas、作者 yuukougun、ページの題名と URL）と CC BY 4.0 へのリンクを示し、手を加えたときはその旨を書けば、複製・改変・再配布ができ、営利の目的にも使えます
+- コード（`snippets/` のプログラムとページに載るコード片、`tools/`・`tests/`、`overrides/` のテンプレート・CSS・JavaScript など）と、そのほかのファイルは [MIT License](LICENSE) です
+- 同梱している外部のものは、それぞれのライセンスに従います。`third_party/ac-library/`（AtCoder Library）は CC0 1.0 です。`overrides/assets/vendor/` の KaTeX・Cytoscape.js・cytoscape-dagre は MIT License で、KaTeX のフォントは SIL Open Font License 1.1 です。ライセンスの文書は同じディレクトリに置いています（KaTeX のフォントは、フォントのファイルの中にライセンスの表示があります）
+
+問題の題名、参考に挙げた資料の題名、制作の記録に引用した文など、ページやファイルに出る他者のものは、これらのライセンスの対象ではありません。考え方はサイトの[出典と AI 利用の方針](https://yuukougun.github.io/kyopro-atlas/start/ai-and-sources/#license)にあります。
