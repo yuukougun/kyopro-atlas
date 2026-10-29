@@ -2,7 +2,7 @@
 
 工程6（土台作り）で、サイト・生成スクリプト・検査・CI・執筆の手引きを別々の担当が作るので、その間の約束をここに決める。上位の決定は設計書（[design.md](design.md)）と [design-review.md](design-review.md)。この文書と食い違ったら、この文書を直してから作る。
 
-- 版：2026-10-21 初版。2026-10-29 ページの部品を足した（§2 の related の表示、§7 の段階と更新日・誤りの報告・関連・節のレベルの印。Issue #9・#10・#54・#56）
+- 版：2026-10-21 初版。2026-10-29 ページの部品を足した（§2 の related の表示、§7 の段階と更新日・誤りの報告・関連・節のレベルの印。Issue #9・#10・#54・#56）。2026-10-29 引く仕組みを足した（§5 の aliases、§7 の似た手法の使い分けの欄・知識マップの説明と「ページ」欄・語で行を絞り込む欄、§8 の nav.yml の extra.kp。Issue #57・#59・#60）
 
 ## 1. ファイルの置き場所と URL
 
@@ -114,7 +114,7 @@ atcoder: null                          # cpp だけ（true / false）
   "levels": ["基礎", "水", "青", "黄", "発展"],
   "fields": [{"id": "basics", "title": "基本テクニック", "order": 3}],
   "pages": [{
-    "id": "lazy-segment-tree", "title": "遅延セグメント木", "nav_title": null,
+    "id": "lazy-segment-tree", "title": "遅延セグメント木", "nav_title": null, "aliases": ["遅延セグ木", "Lazy Segment Tree"],
     "field": "ds", "chapter": "区間クエリ", "order": 120, "type": "technique",
     "level": "水", "kind": ["データ構造", "区間クエリ"], "frequency": "A", "stage": "stub",
     "url": "ds/lazy-segment-tree/", "summary": "…",
@@ -129,6 +129,7 @@ atcoder: null                          # cpp だけ（true / false）
 - url はサイトのルートからの相対パス（JS が base の URL を付ける）
 - pages[].problems は本文の問題の一覧から拾ったもの（骨格では空）
 - related は配置に使わない（design-review T2）。`id#anchor` の anchor は外して持つ
+- aliases は front matter の別名そのまま（知識マップの「ページ」欄が題名と同じく照合に使う。#59）
 
 ## 6. ブラウザに保存するデータ
 
@@ -148,9 +149,11 @@ atcoder: null                          # cpp だけ（true / false）
 | 「理解した」のチェック | テンプレートがページ×レベルのチェック欄の HTML を出し、`progress.js` が localStorage と結ぶ。チェック欄（`label.kp-check`）はどれも（ページのレベルの欄も）`span.kp-understood__item` で包む。上の帯の節の欄（「青の節」など）にだけ、横にその帯の最初の節（sections の順）へ移るリンク（`a.kp-check__jump`。矢印は CSS で、上では↓・下では↑）を置く。準備中のページは本文に節の見出しがないので置かない |
 | 節のレベルの印 | sections に level のある節の見出しと目次の項目に、テンプレートが `span.kp-mini.kp-lv-<色>.kp-sec-lv` を入れる。見出しは本文の HTML の `<a class="headerlink" href="#<anchor>"` の前（toc の permalink が前提）、目次は `site_nav` ブロックの HTML の `<a href="#<anchor>" class="md-nav__link">` の直後（CSS の order で題の後ろに出す）。どちらも文字列の置き換えで、JS を使わない（HTML に書かれるので instant navigation でも出る。目次の部分テンプレートは上書きしない） |
 | 前提・次に読む・関連 | テンプレートが `nav.pages` の各ページの meta を引いて出す（次に読むは同じレベルと1つ上を優先して8件まで。残りは知識マップの焦点の表示へのリンク）。関連は related を書いた順に20件まで（超えた分は知識マップの焦点の表示へのリンク）。`id#anchor` は「ページの題名 › 節の題」で、レベルの印は節の level（なければページの level）。相手のページが stub なら、本文に節の見出しがないので、節ではなくページへのリンクにする（印はページの level）。前提・出した次に読む・関連にすでに出たページは、関連に重ねて出さない（節への関連は出す） |
+| 似た手法の使い分け | 次に読むと関連の間の欄（`div.kp-links__col--compare`。#57）。`tools/gen_site.py` が nav.yml の `extra.kp.compare` に「ページ id → 似た手法の使い分け（guide/method-comparison）の節のうち、そのページへリンクする節の anchor」を書き（§8）、テンプレートが使い分けのページの sections から節の題を引いて、そのページの節の順にリンクを並べる。欄があるときは、related に書いた使い分けのページ（ページ全体と、欄に出した節）を関連に重ねて出さない。使い分けのページが stub なら出さない |
 | 段階・更新日・誤りの報告 | テンプレートがページの最後の行（`div.kp-page-info`）に出す。段階と更新日は id のあるページだけ（段階は「この教材の使い方」の #stub へのリンク）。「このページの誤りを報告する」はどのページにも出し、GitHub の新しい Issue を `?template=page-error.yml&title=誤りの報告：<題名>&page-title=<題名>&page-url=<URL>&page-updated=<updated>` で開く（ひな形は `.github/ISSUE_TEMPLATE/page-error.yml`。項目の id が引数の名前。題名は front matter の title、URL は page.canonical_url）。labels などの引数は権限のない人には 404 になるので付けない |
 | 解いたチェック | `progress.js` が `.kp-problems` の各行の先頭にチェック欄を付ける |
-| 知識マップ | `docs/guide/knowledge-map.md` の `<div id="kp-map"></div>`。`map.js` が graph.json を読み、既定は分野ごとの表示、`?focus=<id>` で祖先と子孫だけ、全体は分野を頂点にした図。理解したページを塗る |
+| 知識マップ | `docs/guide/knowledge-map.md` の `<div id="kp-map"></div>`。`map.js` が graph.json を読み、既定は分野ごとの表示、`?focus=<id>` で祖先と子孫だけ、全体は分野を頂点にした図。理解したページを塗る。点の説明は地図（`div.kp-map__stage`）の中に重ね（`div.kp-map__info`。点が下半分なら上、上半分なら下）、点を押す・長押しで固定し、×・Esc・地図の空いた所で閉じる。そのページへは説明の「ページを開く」か点のダブルクリック（ダブルタップ）で移る。焦点の表示の関連は、選んだページのすぐ下（か上）の空いた所に囲みで足し、全体が収まらなければ選んだページと囲みが入るように寄せる。「ページ」欄は題名・nav_title・aliases（かっこの中と外も）・id を `window.KPMatch` の規則で照合し、完全一致 → 前方一致 → 部分一致の順に選ぶ（#59） |
+| 語で行を絞り込む欄 | 本文の `<div class="kp-filter"></div>`（逆引き辞典の 2 ページと用語の索引。#60）。`filter.js` が欄をページの題の下（要点の囲みの前）に移して出し、語を含む表の行（`data-kp-units="li"` なら article の直下の箇条書きの項目。`data-kp-sections` に ## の id を書けばその節の中だけ）と、それを含む表・見出しだけを残す。語はアドレスの `?filter=` に入れる。照合の規則は `window.KPMatch`（NFKC で全角と半角をそろえ、小文字にし、カタカナをひらがなにし、空白と区切りの記号を除く。gcd ⇔ 最大公約数 のような少数の言い換えも探し、組のどの語でも同じものが当たる。組の語の後ろが語の終わりまでひらがなだけなら、その送り仮名・助詞を落として言い換える（「取り除いた」は「削除」でも探す）。空白で区切った語はすべてを含むものだけ）。JS が動かなければ欄は出ず、表はそのまま見える |
 | ロードマップの集計 | `progress.js` が graph.json と localStorage から、レベル・分野ごとの解いた数・理解した数を出す（`<div class="kp-roadmap-stats"></div>`） |
 | 動く図 | `<div class="kp-viz" data-viz="<名前>" data-config='{…}'></div>`。`viz.js`（共通の部品）が `overrides/assets/js/viz/<名前>.js` を読み、`window.KPViz.register(名前, {states(config) → 状態の配列, render(svg, state, config)})` で登録された図を、ステップ送りの操作（最初・前・次・最後・自動再生・速度、キーボード、スワイプ）付きで描く |
 | 初期化 | すべての JS は Material の `document$` を購読して、instant navigation のたびに取り付け直す |
@@ -162,11 +165,11 @@ atcoder: null                          # cpp だけ（true / false）
 
 | 生成物 | 中身 |
 | --- | --- |
-| `nav.yml` | 分野の順（§1）→ 分野の入口 → chapter ごと（order の順）。chapter のないページは分野の先頭。nav_title があればそれを使う |
+| `nav.yml` | 分野の順（§1）→ 分野の入口 → chapter ごと（order の順）。chapter のないページは分野の先頭。nav_title があればそれを使う。`extra.kp` にテンプレートが引く値を書く：一覧の slug（levels・kinds）、分野の表示名（fields）、似た手法の使い分けへの戻り道（compare：ページ id → 使い分けの節の anchor の列。比べる観点の節と、横断ページ・はじめにへのリンクは数えない。#57） |
 | `docs/<field>/index.md` | 分野の入口：説明の 1 文と、学ぶ順・使い分け・問題集・自作の手引きのうち関係するものへの案内（分野によっては注記の 1 行も）、章ごとのページの箇条書き（題名・レベルの小さな印 `span.kp-mini.kp-lv-<色>`・準備中の印・要約の 1 文目。章の中は order の順）、章の後のほかの章の関連ページ、最後のほかの分野にある関連ページ（`#elsewhere`。工程11、#58・#65・#75） |
 | `docs/lists/` | レベル別（`level-<基礎…>`）と種類別（`kind-<…>`）の一覧。ファイル名は英字の短い名前にし、対応を gen_site.py に持つ |
 | `docs/llms.txt` | 1行「- [タイトル](URL)（id・レベル・分野・段階）：要約」。冒頭に使い方と分野ごとの詳細索引への案内、版（入力の内容のハッシュと updated の最大値） |
-| `docs/index/<field>.md` | 分野ごとの詳細索引：ページごとに id・URL・別名・サイン・kind・節（`id#anchor` と URL） |
+| `docs/index/<field>.md` | 分野ごとの詳細索引：ページごとに id・URL・別名・サイン・kind・前提・使い分け（`method-comparison#anchor`）・節（`id#anchor` と URL） |
 | `overrides/assets/data/graph.json` | §5 |
 | 手書きのページの生成部分 | `<!-- gen:begin 名前 -->` 〜 `<!-- gen:end 名前 -->` の間：逆引き辞典（constraint・phrase・shape）、ロードマップの列（色ごとに前提の順の1本の列。上位の節を含む）、位置ごとの頻出手法（recent-abc.yaml から）、問題 → ページ・最近の ABC → ページの表、問題番号の索引（`guide/problem-index.md`。本文に載せた全問題を ABC・ARC・AGC・問題集・そのほかに分けて回の順に並べ、1 行は「表示名 → ページ（役割）」。例題のページが先。工程11、#6）、ホームの目的別の入口（工程11、#7）、Library Checker の対応表（verify から）、用語の索引（題名・別名・acl から） |
 

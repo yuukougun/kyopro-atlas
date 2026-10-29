@@ -7,7 +7,8 @@
   - ページ上部：準備中の帯（stage が stub）、バッジ（レベル＝AtCoder の色・分野・種類）、「理解した」のチェック欄。
     上の帯の節のチェック欄（「青の節」など）の横に、その帯の最初の節へ移るリンク（kp-check__jump）
   - 本文と目次：sections に level のある節の見出しと目次の項目に、レベルの印（kp-sec-lv。#54）
-  - ページ下部：前提・次に読む・関連（related。#56）・知識マップの焦点の表示へのリンク、「理解した」のチェック欄（もう一度）
+  - ページ下部：前提・次に読む・似た手法の使い分け（#57）・関連（related。#56）・知識マップの焦点の表示へのリンク、
+    「理解した」のチェック欄（もう一度）
   どのページにも、最後の行に段階（stage）と更新日（updated）（id を持つページだけ。#9）と、
   「このページの誤りを報告する」（GitHub の新しい Issue。.github/ISSUE_TEMPLATE/page-error.yml。#10）を出す。
 
@@ -69,9 +70,9 @@
   {#- related を探すための文字列。",a,b#x," の形で、"," ~ id ~ "," か "," ~ id ~ "#" を含めば related にある -#}
   {%- set rel_str = "," ~ ((m.related or []) | join(",")) ~ "," -%}
 
-  {#- nav を1回だけ見て、一覧・分野の入口・知識マップ・前提・次に読む・関連を集める。
+  {#- nav を1回だけ見て、一覧・分野の入口・知識マップ・似た手法の使い分け・前提・次に読む・関連を集める。
       ページは URL（lists/kind-dp/ のようなサイトのルートからの相対）で見分ける。p.file は Zensical にないので使わない -#}
-  {%- set ns = namespace(lists=[], field_url=none, map_url=none, howto_url=none, prereqs=[], near=[], far=[], rel=[]) -%}
+  {%- set ns = namespace(lists=[], field_url=none, map_url=none, howto_url=none, cmp_page=none, prereqs=[], near=[], far=[], rel=[]) -%}
   {%- for p in nav.pages -%}
     {%- set pm = p.meta or {} -%}
     {%- set pu = (p.url or "")[1:] if (p.url or "")[:1] == "/" else (p.url or "") -%}
@@ -83,6 +84,7 @@
     {%- if pm.id -%}
       {%- if pm.id == "knowledge-map" -%}{%- set ns.map_url = p.url -%}{%- endif -%}
       {%- if pm.id == "how-to-use" -%}{%- set ns.howto_url = p.url -%}{%- endif -%}
+      {%- if pm.id == "method-comparison" -%}{%- set ns.cmp_page = p -%}{%- endif -%}
       {%- if pm.id in (m.prerequisites or []) -%}
         {%- set ns.prereqs = ns.prereqs + [p] -%}
       {%- endif -%}
@@ -100,9 +102,21 @@
   {%- endfor -%}
   {%- set nexts = ns.near + ns.far -%}
 
+  {#- 似た手法の使い分け（#57）：tools/gen_site.py が nav.yml の extra.kp.compare に「ページ id → 使い分けのページの節のうち、
+      このページへリンクする節の anchor」を書く。節の題は使い分けのページの sections から引き、そのページの節の順に並べる。
+      使い分けのページが準備中なら本文に節の見出しがないので出さない -#}
+  {%- set cmp_anchors = (kp.compare[m.id] or []) if kp.compare else [] -%}
+  {%- set cmp_ns = namespace(items=[]) -%}
+  {%- if ns.cmp_page and cmp_anchors and ns.cmp_page.meta.stage != "stub" -%}
+    {%- for s in (ns.cmp_page.meta.sections or []) if s.anchor in cmp_anchors -%}
+      {%- set cmp_ns.items = cmp_ns.items + [s] -%}
+    {%- endfor -%}
+  {%- endif -%}
+
   {#- 関連：related を front matter の順に並べる。id#anchor は相手の sections の節の題と level を添える。
       相手が準備中（stub）なら本文に節の見出しがないので、id#anchor も節ではなくページへのリンクにする（印はページの level）。
-      前提・次に読む（出す8件）・関連に出したページは重ねて出さない（節への関連は出す） -#}
+      前提・次に読む（出す8件）・関連に出したページは重ねて出さない（節への関連は出す）。
+      似た手法の使い分けの欄があるときは、related の使い分けのページ（ページ全体と、欄に出した節）も重ねて出さない -#}
   {%- set shown_ns = namespace(ids=[]) -%}
   {%- for q in ns.prereqs -%}{%- set shown_ns.ids = shown_ns.ids + [q.meta.id] -%}{%- endfor -%}
   {%- for q in nexts[:8] -%}{%- set shown_ns.ids = shown_ns.ids + [q.meta.id] -%}{%- endfor -%}
@@ -112,7 +126,9 @@
       {%- set qid = q.meta.id -%}
       {%- set qn = qid | length -%}
       {%- set is_sec = r[:qn + 1] == qid ~ "#" -%}
-      {%- if r == qid or (is_sec and q.meta.stage == "stub") -%}
+      {%- set in_cmp = cmp_ns.items and ns.cmp_page and qid == ns.cmp_page.meta.id and (r == qid or (is_sec and r[qn + 1:] in cmp_anchors)) -%}
+      {%- if in_cmp -%}
+      {%- elif r == qid or (is_sec and q.meta.stage == "stub") -%}
         {%- if qid not in shown_ns.ids -%}
           {%- set rel_ns.items = rel_ns.items + [{"page": q, "anchor": "", "title": "", "level": q.meta.level}] -%}
           {%- set shown_ns.ids = shown_ns.ids + [qid] -%}
@@ -235,7 +251,7 @@
   {%- set show_prereq = ns.prereqs or (m.level in LV_RANK) %}
   {#- 次に読むが8件を超えるときは「ほか N ページ」が同じリンクになるので、まとめのリンクは出さない -#}
   {%- set show_map = ns.map_url and m.id != "knowledge-map" and (ns.prereqs or nexts) and nexts | length <= 8 %}
-  {%- if show_prereq or nexts or rel_ns.items or show_map or lv_ns.levels %}
+  {%- if show_prereq or nexts or cmp_ns.items or rel_ns.items or show_map or lv_ns.levels %}
   <nav class="kp-links" aria-label="このページの前後と関連">
     {%- if show_prereq %}
     <div class="kp-links__col">
@@ -268,6 +284,16 @@
       {%- elif nexts | length > 8 %}
       <p class="kp-links__more">ほか {{ nexts | length - 8 }} ページ</p>
       {%- endif %}
+    </div>
+    {%- endif %}
+    {%- if cmp_ns.items %}
+    <div class="kp-links__col kp-links__col--compare">
+      <p class="kp-links__heading">似た手法の使い分け</p>
+      <ul class="kp-links__list">
+        {%- for s in cmp_ns.items %}
+        <li><a href="{{ ns.cmp_page.url | url }}#{{ s.anchor | e }}" title="似た手法の使い分けの「{{ s.title | e }}」の表">{{ s.title | e }}</a></li>
+        {%- endfor %}
+      </ul>
     </div>
     {%- endif %}
     {%- if rel_ns.items %}
