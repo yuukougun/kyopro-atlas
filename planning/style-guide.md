@@ -470,5 +470,5 @@ robots の meta と X-Robots-Tag に noai・noimageai がないことを確か�
 - note.com は meta の指定はないが、利用条件を記事ごとに確かめる（確かめた記事：igasu_7 の n5bd80b1e0eb9・anoconne の n26b5912e1e9c・vain0x の n0037d6468812・syamashi の nb491ffdf0ca3・nc5b5876e0514・n8e580d4ce59d・hip_crow3665 の ne7a656317cea。後の 5 本は 2026-10-22 に meta の指定がなく、本文に転載・引用・AI の利用を断る記述がない無料の記事であることを確かめた）
 - creativecommons.org：ライセンスの deed.ja・legalcode.ja（2026-10-29。方針のページと LICENSE-docs のリンク）
 - kenkoooo.com：AtCoder Problems の公開データ（tools/ap.py が取る JSON。2026-10-29）
-- img.atcoder.jp：AtCoder の言語の一覧（静的ファイル）だけ（2026-10-21 に noai がないことを確かめた。atcoder.jp の問題・解説のページは開かない）
+- img.atcoder.jp（確かめた記録）：制作の始め（2026-10-21）に、AtCoder の言語の一覧（静的ファイル）に noai がないことを確かめた。執筆と検証では §2.6 のとおり開かない（check_noai.py も atcoder.jp のサブドメインを既知の noai として扱う）
 - 開かない（noai 指定）：atcoder.jp・codeforces.com

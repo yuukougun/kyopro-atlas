@@ -28,4 +28,5 @@ kyopro-atlas（https://yuukougun.github.io/kyopro-atlas/）の本文と図は、
 
 The text and figures of kyopro-atlas (files under docs/) are licensed under the Creative Commons
 Attribution 4.0 International License (CC BY 4.0): https://creativecommons.org/licenses/by/4.0/
-The code and the other files are licensed under the MIT License (see LICENSE).
+The code and the other files are licensed under the MIT License (see LICENSE), except bundled
+third-party files (third_party/ and overrides/assets/vendor/), which keep their own licenses.
