@@ -26,7 +26,7 @@ sections:
   - {title: 累乗数の数え上げ（b ≥ 3 は列挙、b = 2 は ⌊√N⌋、重複を除く）, anchor: perfect-powers}
   - {title: √ を含む式の大小を整数で比べる, anchor: compare-sqrt}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -137,9 +137,11 @@ $N = 99$ で確かめる。平方数は $1, 4, \dots, 81$ の 9 個である。�
 正の整数 $a, b, c$ について、$\sqrt{a} + \sqrt{b} < \sqrt{c}$ のような比較も、double で計算すると等号に近い場合を誤る。両辺が 0 以上なら、2 乗しても大小は変わらない。2 乗を繰り返して $\sqrt{}$ を消し、整数の比較にする。
 
 $$
-\sqrt{a} + \sqrt{b} < \sqrt{c}
-\iff a + b + 2\sqrt{ab} < c
-\iff 2\sqrt{ab} < c - a - b
+\begin{aligned}
+& \sqrt{a} + \sqrt{b} < \sqrt{c} \\
+\iff & a + b + 2\sqrt{ab} < c \\
+\iff & 2\sqrt{ab} < c - a - b
+\end{aligned}
 $$
 
 ここで右辺 $c - a - b$ の符号を先に見る。$c - a - b \le 0$ なら、左辺は正なので成り立たない。$c - a - b > 0$ なら両辺とも正なので、もう一度 2 乗して $4ab < (c - a - b)^2$ を整数で調べる。$a, b, c \le 10^9$ なら右辺は $10^{18}$ 程度で、`long long` に収まる。

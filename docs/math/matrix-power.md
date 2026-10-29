@@ -219,11 +219,10 @@ $$
 **平面の点の回転・反転**：点 $(x, y)$ を $(x, y, 1)$ と 3 次の列ベクトルにすると、平行移動を含む変換（アフィン変換）が 3×3 行列で書ける。
 
 $$
-\text{時計回りに 90 度：}
-\begin{pmatrix} 0 & 1 & 0 \\ -1 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix}
-\qquad
-\text{直線 } x = p \text{ で反転：}
-\begin{pmatrix} -1 & 0 & 2p \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix}
+\begin{aligned}
+\text{時計回りに 90 度：}\ & \begin{pmatrix} 0 & 1 & 0 \\ -1 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix} \\[1ex]
+\text{直線 } x = p \text{ で反転：}\ & \begin{pmatrix} -1 & 0 & 2p \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix}
+\end{aligned}
 $$
 
 1 つ目は $(x, y) \to (y, -x)$、2 つ目は $(x, y) \to (2p - x, y)$ である。3 行目の $(0, 0, 1)$ は、定数 1 を状態に入れた[漸化式の節](#write-as-matrix)と同じ役目をする。
@@ -243,7 +242,10 @@ $k$ 回目までの合成を $M_k$ とすると、$M_0$ は単位行列で、$M_
 ここで、$L$ 桁の数を後ろにつなぐ遷移は、余り $r$ を $r \cdot 10^L + x$（$x$ はつないだ $L$ 桁の余り）に移す。つなぐ側の余りの分布 $\mathrm{dp}_L[x]$（$L$ 桁で余りが $x$ の数の個数）と $10^L \bmod B$ さえあれば、遷移全体が決まる。行列の $B^2$ 個の成分を持たず、長さ $B$ のベクトルで足りる。$i$ 桁と $j$ 桁を合成するときは次のようにする。
 
 $$
-\mathrm{dp}_{i+j}\bigl[(p \cdot 10^j + q) \bmod B\bigr] \mathrel{+}= \mathrm{dp}_i[p] \cdot \mathrm{dp}_j[q]
+\begin{aligned}
+&\mathrm{dp}_{i+j}\bigl[(p \cdot 10^j + q) \bmod B\bigr] \\
+&\mathrel{+}= \mathrm{dp}_i[p] \cdot \mathrm{dp}_j[q]
+\end{aligned}
 $$
 
 合成 1 回は $O(B^2)$ で、$\mathrm{dp}_1, \mathrm{dp}_2, \mathrm{dp}_4, \dots$ を作り、$N$ の bit が 1 の段を合成すれば、全体で $O(B^2 \log N)$ になる。

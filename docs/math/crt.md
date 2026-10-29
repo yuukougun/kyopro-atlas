@@ -28,7 +28,7 @@ sections:
   - {title: Garner のアルゴリズム（巨大な解を mod で求める）, anchor: garner, level: 黄}
   - {title: 'ACL の crt（解がなければ (0, 0)）', anchor: acl}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -63,7 +63,10 @@ updated: 2026-10-22
 解の作り方は、1 本目を満たす形 $x = r_0 + m_0 t$（$t$ は整数）を 2 本目に代入することである。
 
 $$
-r_0 + m_0 t \equiv r_1 \pmod{m_1} \iff m_0 t \equiv r_1 - r_0 \pmod{m_1}
+\begin{aligned}
+& r_0 + m_0 t \equiv r_1 \pmod{m_1} \\
+\iff & m_0 t \equiv r_1 - r_0 \pmod{m_1}
+\end{aligned}
 $$
 
 これは $t$ についての一次合同式で、$m_0 t + m_1 s = r_1 - r_0$ という一次不定方程式と同じである。[拡張ユークリッドの互除法](../math/ext-gcd.md)で $m_0 p + m_1 q = 1$ となる $p$ を求めれば、$p$ は $m_0$ の $\bmod m_1$ での逆元なので $t \equiv (r_1 - r_0) p \pmod{m_1}$ と決まる。
@@ -144,13 +147,20 @@ CRT が使える問題では、問題文に合同式が書かれていること�
 Garner のアルゴリズムは、$x$ を次の形（混合基数表示）で書き、係数 $t_i$ を前から 1 つずつ決める。
 
 $$
-x = t_0 + t_1 m_0 + t_2 m_0 m_1 + \dots + t_{K-1} m_0 m_1 \cdots m_{K-2} \quad (0 \le t_i < m_i)
+\begin{aligned}
+x &= t_0 + t_1 m_0 + t_2 m_0 m_1 + \dots \\
+&\quad + t_{K-1} m_0 m_1 \cdots m_{K-2} \\
+&(0 \le t_i < m_i)
+\end{aligned}
 $$
 
 この形を $\bmod m_i$ で見ると、$t_{i+1}$ 以降の項はすべて $m_i$ を因数に持つので消える。残るのは $t_0, \dots, t_i$ だけで、$t_0, \dots, t_{i-1}$ が決まっていれば、$t_i$ についての一次合同式
 
 $$
-\underbrace{t_0 + t_1 m_0 + \dots + t_{i-1} m_0 \cdots m_{i-2}}_{\text{確定した部分}} + t_i \cdot m_0 \cdots m_{i-1} \equiv r_i \pmod{m_i}
+\begin{aligned}
+&\underbrace{t_0 + t_1 m_0 + \dots + t_{i-1} m_0 \cdots m_{i-2}}_{\text{確定した部分}} \\
+&\quad + t_i \cdot m_0 \cdots m_{i-1} \equiv r_i \pmod{m_i}
+\end{aligned}
 $$
 
 になる。法が互いに素なので $m_0 \cdots m_{i-1}$ は $\bmod m_i$ で逆元を持ち、$t_i$ がただ 1 つに決まる。

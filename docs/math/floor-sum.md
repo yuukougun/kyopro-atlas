@@ -73,7 +73,11 @@ $$
 これを $i = 0, \dots, n-1$ で足すと、$\sum_{i=0}^{n-1} i = n(n-1)/2$ より次の式になる。
 
 $$
-f(n, m, a, b) = q_a \cdot \frac{n(n-1)}{2} + q_b \cdot n + f(n, m, a \bmod m, b \bmod m)
+\begin{aligned}
+&f(n, m, a, b) \\
+&= q_a \cdot \frac{n(n-1)}{2} + q_b \cdot n \\
+&\quad + f(n, m, a \bmod m, b \bmod m)
+\end{aligned}
 $$
 
 図で見ると、和は直線 $y = (ax + b)/m$ と $x$ 軸の間にある格子点（$0 \le i < n$、$1 \le j \le \lfloor (ai+b)/m \rfloor$ の点 $(i, j)$）の数である。$a = 5, b = 1, m = 3, n = 4$ では $q_a = 1$、$q_b = 0$ で、$y \le x$ にある 6 個の点を式で数えると、残りの 4 個は直線 $y = (2x + 1)/3$ の下の格子点になる。
@@ -89,13 +93,21 @@ $f(n, m, a, b) = \sum_{i=0}^{n-1} \lfloor (ai + b)/m \rfloor$ は、直線 $y = 
 $y_{\max} \ge m$ なら $a \ge 1$ である。高さ $j$ の行にある点は、$jm \le ai + b$ を満たす $0 \le i < n$ である。高さ $j$ で直線は $x = (jm - b)/a$ を通るので、$x = n$ の縦線までの横の距離は $n - (jm - b)/a = (y_{\max} - jm)/a$ である。点の個数はこの距離を切り捨てた値になる。
 
 $$
-\#\{\, i \mid 0 \le i < n,\ jm \le ai + b \,\} = \left\lfloor \frac{y_{\max} - jm}{a} \right\rfloor \quad (1 \le j \le J,\ J = \lfloor y_{\max}/m \rfloor)
+\begin{aligned}
+&\#\{\, i \mid 0 \le i < n,\ jm \le ai + b \,\} \\
+&= \left\lfloor \frac{y_{\max} - jm}{a} \right\rfloor \\
+&(1 \le j \le J,\ J = \lfloor y_{\max}/m \rfloor)
+\end{aligned}
 $$
 
 行を上から $k = J - j$（$k = 0, \dots, J-1$）と番号を振ると、$y_{\max} - jm = km + (y_{\max} \bmod m)$ なので、和は次の形に書き直せる。
 
 $$
-f(n, m, a, b) = \sum_{k=0}^{J-1} \left\lfloor \frac{mk + (y_{\max} \bmod m)}{a} \right\rfloor = f\bigl(\lfloor y_{\max}/m \rfloor,\ a,\ m,\ y_{\max} \bmod m\bigr)
+\begin{aligned}
+&f(n, m, a, b) \\
+&= \sum_{k=0}^{J-1} \left\lfloor \frac{mk + (y_{\max} \bmod m)}{a} \right\rfloor \\
+&= f\bigl(\lfloor y_{\max}/m \rfloor,\ a,\ m,\ y_{\max} \bmod m\bigr)
+\end{aligned}
 $$
 
 $f(6, 5, 3, 2)$ で確かめる。列ごとの点の数は $0, 1, 1, 2, 2, 3$ で合計 $9$ である。$y_{\max} = 20$・$J = 4$ で、行ごとの数は下から $5, 3, 1, 0$ になる。上から読んだ $0, 1, 3, 5$ は $\lfloor 5k/3 \rfloor$（$k = 0, 1, 2, 3$）である。確かに $f(4, 3, 5, 0) = 9$ になる。図の下の段を右上の角から見ると、傾き $m/a = 5/3$ の直線の下の格子点になっている。
@@ -154,7 +166,10 @@ loop:
 余りの和は、$x \bmod m = x - m \lfloor x/m \rfloor$（$x \ge 0$）で floor の和 $f(n, m, a, b) = \sum_{i=0}^{n-1} \lfloor (ai + b)/m \rfloor$ に直せる。$a, b \ge 0$ なら次のとおりである。
 
 $$
-\sum_{i=0}^{n-1} \bigl( (ai + b) \bmod m \bigr) = a \cdot \frac{n(n-1)}{2} + bn - m \cdot f(n, m, a, b)
+\begin{aligned}
+&\sum_{i=0}^{n-1} \bigl( (ai + b) \bmod m \bigr) \\
+&= a \cdot \frac{n(n-1)}{2} + bn - m \cdot f(n, m, a, b)
+\end{aligned}
 $$
 
 右辺の各項は $2^{64}$ を超えうるが、左辺は $nm$ 未満で小さい。`unsigned long long` で計算すれば $2^{64}$ で割った余りどうしの計算になり、途中のあふれは打ち消し合って正しい値が出る。
@@ -162,7 +177,10 @@ $$
 余りについての条件を数えるときは、次の形が基本になる。$0 \le c \le m$ とし、$x = qm + r$（$0 \le r < m$）と割る。$\lfloor (x - c)/m \rfloor = q + \lfloor (r - c)/m \rfloor$ で、$r - c$ は $-m$ 以上 $m$ 未満なので、右の floor は $r < c$ のとき $-1$、そうでなければ $0$ である。
 
 $$
-[\, x \bmod m < c \,] = \left\lfloor \frac{x}{m} \right\rfloor - \left\lfloor \frac{x - c}{m} \right\rfloor \qquad (0 \le c \le m)
+\begin{gathered}
+[\, x \bmod m < c \,] = \left\lfloor \frac{x}{m} \right\rfloor - \left\lfloor \frac{x - c}{m} \right\rfloor \\
+(0 \le c \le m)
+\end{gathered}
 $$
 
 左辺の $[\cdot]$ は、条件が成り立つとき $1$、成り立たないとき $0$ を表す。$x$ と $c$ がどちらも $i$ の一次式なら、右辺を $i$ について足したものは floor sum 2 つの差になる。[例題の ABC443 G](#abc443_g) は、$c = k + 1$ が添字とともに動く場合である。
@@ -224,7 +242,10 @@ ACL の `floor_sum(N, M, A, B)` をケースごとに 1 回呼ぶだけである
     $x_k = Ak + B$ と置く。$k \ge M$ なら余りは $M$ 未満で $k$ を超えないので、数えるのは $0 \le k < n$（$n = \min(N, M)$）でよい。このとき $c = k + 1 \le M$ で、条件 $0 \le c \le M$ を満たす。
 
     $$
-    [\, x_k \bmod M \le k \,] = \left\lfloor \frac{Ak + B}{M} \right\rfloor - \left\lfloor \frac{(A-1)k + (B-1)}{M} \right\rfloor
+    \begin{aligned}
+    &[\, x_k \bmod M \le k \,] \\
+    &= \left\lfloor \frac{Ak + B}{M} \right\rfloor - \left\lfloor \frac{(A-1)k + (B-1)}{M} \right\rfloor
+    \end{aligned}
     $$
 
     を $k = 0, \dots, n-1$ で足すと、条件を満たさない個数は $f(n, M, A, B) - f(n, M, A - 1, B - 1)$ である。答えは $n$ からこれを引いた値になる。
@@ -261,7 +282,11 @@ ACL の `floor_sum(N, M, A, B)` をケースごとに 1 回呼ぶだけである
     $i = i' + 1$（$i' = 0, \dots, N-1$）と置くと $(Ai) \bmod M = (Ai' + A) \bmod M$ なので、[書き換えの節](#mod-to-floor)の式で $a = A$・$b = A$ とする。
 
     $$
-    \sum_{i=1}^{N} (Ai) \bmod M = A \cdot \frac{N(N-1)}{2} + AN - M \cdot f(N, M, A, A) = A \cdot \frac{N(N+1)}{2} - M \cdot f(N, M, A, A)
+    \begin{aligned}
+    &\sum_{i=1}^{N} (Ai) \bmod M \\
+    &= A \cdot \frac{N(N-1)}{2} + AN - M \cdot f(N, M, A, A) \\
+    &= A \cdot \frac{N(N+1)}{2} - M \cdot f(N, M, A, A)
+    \end{aligned}
     $$
 
 ??? question "確認問題：f(n, m, 0, b) と、b ≥ m のときのくり返しの最初の 1 回は？"

@@ -20,7 +20,7 @@ sections:
   - {title: 制約を辺にすると何の問題になるか（二部グラフ・閉路・差分制約）, anchor: constraints-to-edges}
   - {title: 自由に行き来できる部分を 1 点に縮約する（Union-Find・SCC・次数 2 の頂点を消す）, anchor: contraction}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -90,16 +90,16 @@ updated: 2026-10-22
 
 「$X_u$ と $X_v$ は異なる」「$u$ は $v$ より前」のような 2 変数の制約は、変数を頂点、制約を辺にすると、満たす割り当てがあるかがグラフの性質の判定に変わる。制約の形ごとに、判定する性質と道具が決まる。
 
-| 制約の形 | 辺の張り方 | 判定する性質（道具） | ページ |
-| --- | --- | --- | --- |
-| $X_u = X_v$ | 無向 | 連結成分ごとに値が 1 つ（Union-Find） | [Union-Find](../ds/union-find.md#what-it-does)・[連結成分](../graph/connected-components.md#three-methods) |
-| 2 値で $X_u \ne X_v$ | 無向 | 二部グラフか（2 色に塗る） | [二部グラフ判定](../graph/bipartite-graph.md#coloring) |
-| 2 値で「等しい」と「異なる」が混ざる | 偶奇の重みを付ける | 偶奇の矛盾がないか | [重み付き Union-Find](../ds/weighted-union-find.md#generalization)・[二部グラフ判定](../graph/bipartite-graph.md#union-find) |
-| $x_v - x_u = d$ | 重み $d$ と $-d$ の辺 | 差の矛盾がないか | [重み付き Union-Find](../ds/weighted-union-find.md#consistency) |
-| $x_v - x_u \le w$ | $u \to v$（重み $w$） | 負閉路がないか、最短距離が解（差分制約） | [差分制約](../graph/difference-constraints.md#direction) |
-| $u$ は $v$ より前 | $u \to v$ | 閉路がないか、順序はトポロジカル順 | [閉路の検出](../graph/cycle-detection.md#directed)・[トポロジカルソート](../graph/topological-sort.md#kahn-dfs) |
-| $x_u \le x_v$ と $x_u < x_v$ | $u \to v$ | 同じ強連結成分の中に $<$ がないか | [強連結成分分解](../graph/scc.md#patterns) |
-| 2 択で「$a$ または $b$」 | 含意の辺 2 本 | $x$ と「$x$ でない」が同じ強連結成分にないか（2-SAT） | [2-SAT](../graph/two-sat.md#cheatsheet) |
+| 制約の形 | 辺の張り方 | 判定する性質（道具）→ ページ |
+| --- | --- | --- |
+| $X_u = X_v$ | 無向 | 連結成分ごとに値が 1 つ（Union-Find）→ [Union-Find](../ds/union-find.md#what-it-does)・[連結成分](../graph/connected-components.md#three-methods) |
+| 2 値で $X_u \ne X_v$ | 無向 | 二部グラフか（2 色に塗る）→ [二部グラフ判定](../graph/bipartite-graph.md#coloring) |
+| 2 値で「等しい」と「異なる」が混ざる | 偶奇の重みを付ける | 偶奇の矛盾がないか → [重み付き Union-Find](../ds/weighted-union-find.md#generalization)・[二部グラフ判定](../graph/bipartite-graph.md#union-find) |
+| $x_v - x_u = d$ | 重み $d$ と $-d$ の辺 | 差の矛盾がないか → [重み付き Union-Find](../ds/weighted-union-find.md#consistency) |
+| $x_v - x_u \le w$ | $u \to v$（重み $w$） | 負閉路がないか、最短距離が解（差分制約）→ [差分制約](../graph/difference-constraints.md#direction) |
+| $u$ は $v$ より前 | $u \to v$ | 閉路がないか、順序はトポロジカル順 → [閉路の検出](../graph/cycle-detection.md#directed)・[トポロジカルソート](../graph/topological-sort.md#kahn-dfs) |
+| $x_u \le x_v$ と $x_u < x_v$ | $u \to v$ | 同じ強連結成分の中に $<$ がないか → [強連結成分分解](../graph/scc.md#patterns) |
+| 2 択で「$a$ または $b$」 | 含意の辺 2 本 | $x$ と「$x$ でない」が同じ強連結成分にないか（2-SAT）→ [2-SAT](../graph/two-sat.md#cheatsheet) |
 
 判定の行（1 行目を除く各行）は、制約を満たせないことがグラフの「悪い形」と同じになる、という対応で成り立っている。
 
@@ -115,14 +115,14 @@ updated: 2026-10-22
 
 [縮約](../guide/glossary.md#contraction)は、いくつかの頂点を 1 つの頂点にまとめて、グラフを小さく単純にする操作である。互いに自由に行き来できる頂点どうしは、答えに関しては区別しなくてよいことが多い。まとめた後のグラフが木や DAG のような扱いやすい形になれば、その上で既知の手法が使える。
 
-| まとめるもの | 道具 | まとめた後の形・使い方 | ページ |
-| --- | --- | --- | --- |
-| 何度でも通れる辺でつながった頂点（無向） | Union-Find | 残りの辺だけの多重グラフで判定する | [オイラー路の応用の型](../graph/euler-path.md#applications) |
-| 互いに行き来できる頂点（有向） | 強連結成分分解 | DAG になり、DAG 上の DP ができる | [強連結成分分解](../graph/scc.md#condensation)・[DAG 上の DP](../dp/dp-dag.md#with-cycles) |
-| 橋を通らずに行き来できる頂点（無向） | lowlink | 木（森）になる | [二重辺連結成分](../graph/lowlink.md#two-edge-connected) |
-| 答えに効く重要な点の間の経路 | 重要な点ごとの BFS | 重要な点だけのグラフに作り直す | [状態を頂点にする](../graph/extended-dijkstra.md#key-points) |
-| 次数 1 の頂点（葉） | キューで削る | 閉路と、閉路どうしをつなぐ部分が残る（なもりグラフなら閉路だけ） | [なもりグラフ](../graph/namori-graph.md#peel-leaves)・[葉から考える](../tree/leaf-first.md#peel-leaves) |
-| 次数 2 の頂点 | 両隣の辺を 1 本にまとめる | 次数 3 以上の頂点だけが残る | このページの下の説明 |
+| まとめるもの | 道具 | まとめた後の形・使い方 → ページ |
+| --- | --- | --- |
+| 何度でも通れる辺でつながった頂点（無向） | Union-Find | 残りの辺だけの多重グラフで判定する → [オイラー路の応用の型](../graph/euler-path.md#applications) |
+| 互いに行き来できる頂点（有向） | 強連結成分分解 | DAG になり、DAG 上の DP ができる → [強連結成分分解](../graph/scc.md#condensation)・[DAG 上の DP](../dp/dp-dag.md#with-cycles) |
+| 橋を通らずに行き来できる頂点（無向） | lowlink | 木（森）になる → [二重辺連結成分](../graph/lowlink.md#two-edge-connected) |
+| 答えに効く重要な点の間の経路 | 重要な点ごとの BFS | 重要な点だけのグラフに作り直す → [状態を頂点にする](../graph/extended-dijkstra.md#key-points) |
+| 次数 1 の頂点（葉） | キューで削る | 閉路と、閉路どうしをつなぐ部分が残る（なもりグラフなら閉路だけ）→ [なもりグラフ](../graph/namori-graph.md#peel-leaves)・[葉から考える](../tree/leaf-first.md#peel-leaves) |
+| 次数 2 の頂点 | 両隣の辺を 1 本にまとめる | 次数 3 以上の頂点だけが残る → このページの下の説明 |
 
 頂点をまとめる縮約（表の上 3 行）では、まとめた頂点の中の移動はコスト 0 とみなされる。何度でも通れる辺を Union-Find でまとめると、通る回数が決まった辺の両端が同じ頂点になることがある。その辺も通らなければならないので、ふつうの[縮約](../guide/glossary.md#contraction)のように消さずに、自己ループとして残す。オイラー路の判定では、自己ループは次数の偶奇を変えない。強連結成分を縮約したときは、成分の中の頂点数や重みの和を新しい頂点の値として持たせ、DAG の上で足し合わせる。
 

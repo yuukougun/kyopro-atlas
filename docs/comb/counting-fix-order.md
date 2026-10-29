@@ -26,7 +26,7 @@ sections:
   - {title: 木の上の順番 n!/Π 部分木の大きさ, anchor: tree-order, level: 黄}
   - {title: 順序を状態に持つ DP（挿入 DP・bitDP）との使い分け, anchor: vs-dp}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -139,7 +139,10 @@ $$
     $v$ は部分木の中で最初でなければならないので、$v$ が最小の番号を取る。残りの $\mathrm{sz}[v] - 1$ 個の番号を、子 $c_1, \dots, c_m$ の部分木に配る。どの番号をどの部分木に配るかは多項係数で $(\mathrm{sz}[v] - 1)! / \prod_j \mathrm{sz}[c_j]!$ 通りある。部分木どうしの間には制約がないので、配った後は各部分木の中で独立に $f(c_j)$ 通りずつ決められる。
 
     $$
-    f(v) = \frac{(\mathrm{sz}[v] - 1)!}{\prod_j \mathrm{sz}[c_j]!} \prod_j \frac{\mathrm{sz}[c_j]!}{\prod_{u \in c_j \text{ の部分木}} \mathrm{sz}[u]} = \frac{\mathrm{sz}[v]!}{\mathrm{sz}[v] \prod_{u \ne v} \mathrm{sz}[u]}
+    \begin{aligned}
+    f(v) &= \frac{(\mathrm{sz}[v] - 1)!}{\prod_j \mathrm{sz}[c_j]!} \prod_j \frac{\mathrm{sz}[c_j]!}{\prod_{u \in c_j \text{ の部分木}} \mathrm{sz}[u]} \\
+    &= \frac{\mathrm{sz}[v]!}{\mathrm{sz}[v] \prod_{u \ne v} \mathrm{sz}[u]}
+    \end{aligned}
     $$
 
     最後の式は示したい形そのものである。根で $\mathrm{sz} = N$ とすれば全体の式になる。

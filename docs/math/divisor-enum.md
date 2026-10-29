@@ -28,7 +28,7 @@ sections:
   - {title: 約数の個数 Π(e+1) と約数の総和の公式, anchor: count-and-sum}
   - {title: 答えの候補が約数に限られる型（gcd の最大・商と余り・割るか引くか）, anchor: candidates}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -107,8 +107,10 @@ $N$ が大きいとき、約数の個数は $\sqrt{N}$ よりずっと少ない�
 $N$ を素因数分解して $N = p_1^{e_1} p_2^{e_2} \cdots p_k^{e_k}$ と書けるとき、約数の個数と総和は次の式で求まる。
 
 $$
-d(N) = \prod_{i=1}^{k} (e_i + 1), \qquad
-\sigma(N) = \prod_{i=1}^{k} \left(1 + p_i + p_i^2 + \cdots + p_i^{e_i}\right)
+\begin{aligned}
+d(N) &= \prod_{i=1}^{k} (e_i + 1), \\
+\sigma(N) &= \prod_{i=1}^{k} \left(1 + p_i + p_i^2 + \cdots + p_i^{e_i}\right)
+\end{aligned}
 $$
 
 **なぜか**。$N$ の約数は $p_1^{f_1} p_2^{f_2} \cdots p_k^{f_k}$（$0 \le f_i \le e_i$）の形の数と一対一に対応する。各素数の指数 $f_i$ を $e_i + 1$ 通りから独立に選べるので、個数は積 $\prod (e_i + 1)$ になる。総和の式の右辺を展開すると、各かっこから $p_i^{f_i}$ を 1 つずつ選んだ積がすべて 1 回ずつ現れ、それはちょうど約数を 1 つずつ足したものである。
