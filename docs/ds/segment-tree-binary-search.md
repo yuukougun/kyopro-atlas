@@ -74,6 +74,9 @@ $f$ が単調なら、これは「$f(\mathrm{prod}(l, r))$ が真になる最小
 --8<-- "segment-tree-binary-search/first-at-least.cpp:left"
 ```
 
+完全なプログラム：[`first-at-least.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-binary-search/first-at-least.cpp)（GitHub）
+{ .kp-code-src }
+
 $f$ には次の 3 つの条件がある。ACL のドキュメントが要件として挙げるのは 1 と 2 で、3 は返り値を「最大の $r$」と読むために要る。
 
 1. **副作用がない**：同じ引数なら同じ値を返す。中で外の変数を書き換えたり、呼ばれた回数を数えたりしない
@@ -131,6 +134,9 @@ ACL と同じく、葉の数を $N$ 以上の最小の 2 の冪 $\mathrm{size}$ 
     --8<-- "segment-tree-binary-search/own-max-right.cpp:core"
     ```
 
+    完全なプログラム：[`own-max-right.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-binary-search/own-max-right.cpp)（GitHub）
+    { .kp-code-src }
+
     試験では、和のセグメント木で「和が $w$ 以下」の境目を、素朴に右へ伸ばした結果と照らし合わせている。名前の約束は[インターフェースの決め方](../guide/library-design.md#interface)、確かめ方は[動作確認の手順](../guide/library-design.md#verify)にある。
 
 ## 条件の書き方の型（初めて x 以上・和が w 以下・mex） {#predicate-patterns}
@@ -157,6 +163,9 @@ mex では、値 $0, 1, \dots, N$ を添字にして各値の出現回数を持�
 ```cpp
 --8<-- "segment-tree-binary-search/kth-one.cpp:core"
 ```
+
+完全なプログラム：[`kth-one.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-binary-search/kth-one.cpp)（GitHub）
+{ .kp-code-src }
 
 1 の代わりに「空いている場所」を 1 にすれば、空きの K 番目が求まる。埋めたら 0 に更新する。指定の位置への挿入をくり返す問題は、後ろから処理すると「まだ埋まっていない位置のうち K 番目に置く」に言い換えられ、この形になる（[ABC392 F](#abc392_f)）。
 
@@ -192,6 +201,9 @@ mex では、値 $0, 1, \dots, N$ を添字にして各値の出現回数を持�
 ```cpp
 --8<-- "segment-tree-binary-search/lazy-monotone.cpp:core"
 ```
+
+完全なプログラム：[`lazy-monotone.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-binary-search/lazy-monotone.cpp)（GitHub）
+{ .kp-code-src }
 
 この方法の要は、$[i, j)$ に $+1$ しても単調さが崩れないことである。値が $L$ 未満の要素は変わらず、$[L, R]$ の要素は $R + 1$ 以下になり、$R$ を超えていた要素は $R + 1$ 以上である。よって並びは広義単調増加のままで、次の操作でも同じ探し方ができる。
 

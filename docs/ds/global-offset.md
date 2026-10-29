@@ -70,6 +70,9 @@ $$
 --8<-- "global-offset/offset-heap.cpp:core"
 ```
 
+完全なプログラム：[`offset-heap.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/global-offset/offset-heap.cpp)（GitHub）
+{ .kp-code-src }
+
 格納値と実際の値を 1 つの変数で行き来できれば、足し算以外の全体への操作にも同じ考え方が使える。ただし大小の順を保たない操作では、ヒープや set の順序を格納値のまま使えない。
 
 - **全体を XOR $x$ する**：格納値 $\oplus$ $d$ が実際の値になるように $d \leftarrow d \oplus x$ とし、入れるときは $v \oplus d$ を格納する。XOR は大小の順を保たないので、ヒープや set の順序は使えない。値ごとの個数を数える用途や、bit ごとに見る構造と組む
@@ -100,6 +103,9 @@ $$
 ```cpp
 --8<-- "global-offset/flip-deque.cpp:core"
 ```
+
+完全なプログラム：[`flip-deque.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/global-offset/flip-deque.cpp)（GitHub）
+{ .kp-code-src }
 
 反転の回数は数えなくてよい。反転を 2 回行うと元に戻るので、偶奇だけが効く。これを使うと「末尾に追加してから全体を反転する」を $N$ 回繰り返す形は、追加する側が先頭と末尾で交互に入れ替わるだけになる。最後の 1 回の反転の向きだけを、$N$ の偶奇で直せばよい。
 

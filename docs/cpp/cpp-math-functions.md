@@ -56,6 +56,9 @@ atcoder: true
 --8<-- "cpp-math-functions/gcd-lcm.cpp:core"
 ```
 
+完全なプログラム：[`gcd-lcm.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-math-functions/gcd-lcm.cpp)（GitHub）
+{ .kp-code-src }
+
 - **素朴に書くと**：0 以上の引数では、ユークリッドの互除法 `b == 0 ? a : gcd(b, a % b)` と同じである。負の数ではこの再帰は負の値を返しうる（落とし穴 3 の `__gcd` も同じ理由）（理論は [GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md)）
 - **版**：C++17。`-std=gnu++14` ではコンパイルエラーになる。g++-13・g++-15 とも `-std=gnu++17` から使える
 - **落とし穴 1**：`lcm` の戻り値の型は引数の共通の型である。`lcm(100003, 100019)` は `int` 同士なので `int` で返り、本当の値 $10002200057$ は `int` で表せない。結果がその型で表せないときは[未定義動作](../cpp/cpp-undefined-behavior.md)で、手元では g++-13・g++-15 とも `1412265465` と出た（`-D_GLIBCXX_ASSERTIONS` を付けると検査で止まる）。どちらかを `long long` にする
@@ -70,6 +73,9 @@ atcoder: true
 --8<-- "cpp-math-functions/midpoint-clamp.cpp:core"
 ```
 
+完全なプログラム：[`midpoint-clamp.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-math-functions/midpoint-clamp.cpp)（GitHub）
+{ .kp-code-src }
+
 入力 `1 4 15` なら `2 3 10` と出る。`midpoint(2147483647, 2147483645)` も `2147483646` になり、`(a + b) / 2` のようにあふれない。
 
 - **版**：`midpoint` は C++20、`clamp` は C++17。g++-13・g++-15 とも、`midpoint` は `-std=gnu++20` から使える
@@ -79,6 +85,9 @@ atcoder: true
 ```cpp
 --8<-- "cpp-math-functions/clamp-ng.cpp:core"
 ```
+
+完全なプログラム：[`clamp-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-math-functions/clamp-ng.cpp)（GitHub）
+{ .kp-code-src }
 
 ## 整数の / と % は 0 に向かって切り捨てる（-7 / 2 は -3、-7 % 2 は -1） {#integer-division}
 
@@ -96,6 +105,9 @@ C++ の整数の `a / b` は、実数の商を 0 に向かって切り捨てる�
 --8<-- "cpp-math-functions/division.cpp:core"
 ```
 
+完全なプログラム：[`division.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-math-functions/division.cpp)（GitHub）
+{ .kp-code-src }
+
 - **素朴に書くと**：`floor(-7 / 2.0)` は $-4$ になるが、double を経るので $10^{18}$ 付近では誤差が出る。整数のまま床関数・切り上げ・非負の余りを求める関数は [整数の割り算と余り](../math/integer-division.md) で扱う
 - **落とし穴 1**：`x % 2 == 1` は負の奇数で偽になる（`-7 % 2` は $-1$）。奇数の判定は `x % 2 != 0` か `x & 1` で書く
 - **落とし穴 2**：負になりうる値の mod を取るとき、`a % m` は負のまま残る。配列の添字や modint の引数として使う前に、0 以上 $m$ 未満へ直す
@@ -108,6 +120,9 @@ C++ の整数の `a / b` は、実数の商を 0 に向かって切り捨てる�
 ```cpp
 --8<-- "cpp-math-functions/pow-sqrt.cpp:core"
 ```
+
+完全なプログラム：[`pow-sqrt.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-math-functions/pow-sqrt.cpp)（GitHub）
+{ .kp-code-src }
 
 $3^{35} = 50031545098999707$ は奇数で、double では表せない。`pow(3, 35)` は近くの偶数 `50031545098999704` になる。$10^{18} - 1$ も double では $10^{18}$ に丸まるので、`sqrt` は 1 大きい $10^9$ を返す。
 
@@ -124,6 +139,9 @@ $3^{35} = 50031545098999707$ は奇数で、double では表せない。`pow(3, 
 --8<-- "cpp-math-functions/pi.cpp:core"
 ```
 
+完全なプログラム：[`pi.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-math-functions/pi.cpp)（GitHub）
+{ .kp-code-src }
+
 - **numbers::pi**：C++20 の `<numbers>` にある定数である。`numbers::pi_v<long double>` で long double の精度の値になる
 - **M_PI**：POSIX の `<math.h>` のマクロで、C++ の規格にはない。GCC では `-std=c++23`（GNU 拡張なし）でも使えた
 - **acos(-1)**：昔からの書き方で、関数呼び出しになる。long double の精度が要るなら `acosl(-1)` にする
@@ -138,6 +156,9 @@ $3^{35} = 50031545098999707$ は奇数で、double では表せない。`pow(3, 
 ```cpp
 --8<-- "cpp-math-functions/bit-functions.cpp:core"
 ```
+
+完全なプログラム：[`bit-functions.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-math-functions/bit-functions.cpp)（GitHub）
+{ .kp-code-src }
 
 | 関数 | 意味 | $x = 12$ | $x = 0$ |
 | --- | --- | --- | --- |
@@ -159,11 +180,17 @@ $3^{35} = 50031545098999707$ は奇数で、double では表せない。`pow(3, 
 --8<-- "cpp-math-functions/popcount-int-ng.cpp:core"
 ```
 
+完全なプログラム：[`popcount-int-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-math-functions/popcount-int-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 キャストして渡すときは、どの幅の符号なし整数にするかで、負の数の結果が変わる。$-1$ は `unsigned` では 32 個、`unsigned long long` では 64 個の 1 になる。
 
 ```cpp
 --8<-- "cpp-math-functions/popcount-unsigned.cpp:core"
 ```
+
+完全なプログラム：[`popcount-unsigned.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-math-functions/popcount-unsigned.cpp)（GitHub）
+{ .kp-code-src }
 
 - **素朴に書くと**：組み込み関数 `__builtin_popcount(s)` は `int` をそのまま受ける（[組み込み関数](#builtins)）
 - **落とし穴**：負の数になりうる値を数えるときは、何桁として数えたいかを決めてからキャストする。bit 全探索の集合は 0 以上なので、`unsigned` にしてよい
@@ -183,6 +210,9 @@ $3^{35} = 50031545098999707$ は奇数で、double では表せない。`pow(3, 
 --8<-- "cpp-math-functions/builtins.cpp:core"
 ```
 
+完全なプログラム：[`builtins.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-math-functions/builtins.cpp)（GitHub）
+{ .kp-code-src }
+
 - **落とし穴 1**：`long long` に `ll` のない `__builtin_popcount` を使うと、`unsigned int` に変わって上位 32 桁が消える。$2^{40} + 1$ で 2 ではなく 1 を返し、`-Wall -Wextra` でも警告は出なかった（[bit 演算](../basics/bit-operations.md#popcount)）
 - **落とし穴 2**：`ctz`・`clz`・`__lg` に 0 を渡したときの結果は決まっていない。手元でたまたま 32 が出ても、ほかの環境で同じになるとは限らない。0 になりうるなら前もって場合分けするか、0 でも値が決まっている `<bit>` の関数を使う
 - **使い分け**：C++20 が使える AtCoder では `<bit>` の関数を使えばよい。`__lg` は `int` と `long long` のどちらも受けて短いので、解説コードでは今もよく見る
@@ -194,6 +224,9 @@ $3^{35} = 50031545098999707$ は奇数で、double では表せない。`pow(3, 
 ```cpp
 --8<-- "cpp-math-functions/bit-tricks.cpp:core"
 ```
+
+完全なプログラム：[`bit-tricks.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-math-functions/bit-tricks.cpp)（GitHub）
+{ .kp-code-src }
 
 - `x & -x`：最下位の 1 だけを残した値。BIT の添字の移動 `i += i & -i` に出る。`x` が 0 でない `unsigned` なら `1u << countr_zero(x)`（`unsigned long long` なら `1ULL << countr_zero(x)`）とも書ける
 - `x & (x - 1)`：最下位の 1 を消した値。`(x & (x - 1)) == 0` は「$x$ が 0 か 2 のべき乗」の判定になる
@@ -208,6 +241,9 @@ $3^{35} = 50031545098999707$ は奇数で、double では表せない。`pow(3, 
 --8<-- "cpp-math-functions/bitset.cpp:core"
 ```
 
+完全なプログラム：[`bitset.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-math-functions/bitset.cpp)（GitHub）
+{ .kp-code-src }
+
 $w = \{3, 5\}$ なら、作れる和は 0・3・5・8 の 4 個である。`dp << x` は「すでに作れる和すべてに $x$ を足したもの」で、OR を取ると「$x$ を使う・使わない」を同時に反映する。上にはみ出した桁は捨てられる。
 
 - **大きさ**：$N$ はコンパイル時の定数でなければならない。`bitset<n + 1> dp;`（`n` は入力）は `the value of 'n' is not usable in a constant expression` でコンパイルエラーになる。制約の最大値から `const int` の定数を決める
@@ -215,6 +251,9 @@ $w = \{3, 5\}$ なら、作れる和は 0・3・5・8 の 4 個である。`dp <
 ```cpp
 --8<-- "cpp-math-functions/bitset-ng.cpp:core"
 ```
+
+完全なプログラム：[`bitset-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-math-functions/bitset-ng.cpp)（GitHub）
+{ .kp-code-src }
 
 - **_Find_first・_Find_next**：GCC の拡張である。`b._Find_first()` は最初の 1 の位置、`b._Find_next(i)` は $i$ より後ろの最初の 1 の位置を返す。1 がなければ $N$ を返すので、ループは `s < N` で止める
 - **落とし穴 1**：`b[i]` は範囲を調べない。範囲外を読むと未定義動作になる。`b.test(i)` は範囲外で例外を投げる
@@ -227,6 +266,9 @@ $w = \{3, 5\}$ なら、作れる和は 0・3・5・8 の 4 個である。`dp <
 ```cpp
 --8<-- "cpp-math-functions/random.cpp:core"
 ```
+
+完全なプログラム：[`random.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-math-functions/random.cpp)（GitHub）
+{ .kp-code-src }
 
 - **mt19937_64**：64 bit の値を返すメルセンヌ・ツイスタである。`rng()` を直接呼ぶと、0 以上 $2^{64}$ 未満の値が出る。32 bit で足りるなら `mt19937`
 - **random_device{}()**：実行ごとに違う種を作る。`chrono::steady_clock::now().time_since_epoch().count()` を種にする解説コードもある
@@ -242,6 +284,9 @@ $w = \{3, 5\}$ なら、作れる和は 0・3・5・8 の 4 個である。`dp <
 ```cpp
 --8<-- "cpp-math-functions/chrono.cpp:core"
 ```
+
+完全なプログラム：[`chrono.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-math-functions/chrono.cpp)（GitHub）
+{ .kp-code-src }
 
 - **steady_clock を選ぶ理由**：`system_clock` は時刻合わせで戻ることがあり、経過時間に向かない
 - **落とし穴**：経過時間を毎回測ると、それ自体に時間がかかる。軽い試行なら 100 回に 1 回だけ測るなど、間を空ける

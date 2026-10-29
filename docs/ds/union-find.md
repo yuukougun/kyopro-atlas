@@ -120,6 +120,9 @@ $\mathrm{find}(7)$ は 7 → 6 → 4 → 0 とたどって根 0 を見つける�
     --8<-- "union-find/own-dsu.cpp:core"
     ```
 
+    完全なプログラム：[`own-dsu.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/union-find/own-dsu.cpp)（GitHub）
+    { .kp-code-src }
+
     試験では、併合に成功した回数から数えたグループの数と、根（$\mathrm{par}[v] < 0$ の要素）の数が一致することを確かめている。[練習問題](#practice)の PRACTICE2 A と、Library Checker の [Unionfind](https://judge.yosupo.jp/problem/unionfind) が確認に使える。名前の約束は[インターフェースの決め方](../guide/library-design.md#interface)、確かめ方は[動作確認の手順](../guide/library-design.md#verify)にある。
 
 !!! info "ACL では"
@@ -158,6 +161,9 @@ $\mathrm{find}$ の手間は、たどる深さで決まる。工夫なしにつ�
 ```cpp
 --8<-- "union-find/acl-cycle.cpp:core"
 ```
+
+完全なプログラム：[`acl-cycle.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/union-find/acl-cycle.cpp)（GitHub）
+{ .kp-code-src }
 
 ## 根に大きさ・辺数を持たせる（ほかの情報を持たせる型は Union-Find の応用） {#size-and-edges}
 

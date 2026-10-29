@@ -97,6 +97,9 @@ LCS そのものを出力するには、表を埋めた後に $(N, M)$ から出
 --8<-- "lcs/lcs.cpp:core"
 ```
 
+完全なプログラム：[`lcs.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lcs/lcs.cpp)（GitHub）
+{ .kp-code-src }
+
 最適な LCS は複数あることが多く、上を先に見るか左を先に見るかで出力が変わる。どれを出してもよい問題ならどちらでもよい。辞書順最小などの指定があるときの決め方は [DP の復元](../dp/dp-reconstruction.md#ties)にまとめてある。
 
 ??? question "確認問題：文字を先頭に足していくと何が起きるか"
@@ -127,6 +130,9 @@ $[\cdot]$ は中が真なら 1、偽なら 0 である。3 方向で足りる理
 ```cpp
 --8<-- "lcs/edit-distance.cpp:core"
 ```
+
+完全なプログラム：[`edit-distance.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lcs/edit-distance.cpp)（GitHub）
+{ .kp-code-src }
 
 コストの付け方を変えると、ほかの問題も同じ表で解ける。
 
@@ -210,6 +216,9 @@ $S = \texttt{ab}$ では行は 4 通りで、右端が 2 になる行 $(0, 1, 2)
 ```cpp
 --8<-- "lcs/lcs-row-dp.cpp:core"
 ```
+
+完全なプログラム：[`lcs-row-dp.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lcs/lcs-row-dp.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 $N = 10$、$M = 100$、$\sigma = 26$ なら、遷移は $26 \cdot 100 \cdot 2^{10} \approx 2.7 \times 10^6$ 回である。前計算をせずに毎回行を作り直すと $N$ 倍の手間になるので、遷移は表にしておく。$S$ に現れない文字はどれも同じ遷移なので、1 つにまとめて個数を掛けてもよい。
 

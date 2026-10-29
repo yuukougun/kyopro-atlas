@@ -79,6 +79,9 @@ C++ の作法で必ず守るのは次の 3 つである。
 --8<-- "interactive/boundary.cpp:core"
 ```
 
+完全なプログラム：[`boundary.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/interactive/boundary.cpp)（GitHub）
+{ .kp-code-src }
+
 ## 回数の上限から方針を逆算する（情報量の下界） {#query-budget}
 
 インタラクティブ問題では、問題文を読んだら最初に「候補の数」と「質問回数の上限」を比べる。上限は、想定解の回数に少しだけ余裕を足した値になっていることが多いので、上限から想定解の形がかなり絞れる。
@@ -131,6 +134,9 @@ $$
 ```cpp
 --8<-- "interactive/bits.cpp:core"
 ```
+
+完全なプログラム：[`bits.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/interactive/bits.cpp)（GitHub）
+{ .kp-code-src }
 
 この $M$ 人は[情報量の下界](#query-budget)と一致するので、人数としても最少である。候補の数が 2 の冪なら、二分探索の質問も「答えの番号のビットを上から 1 つずつ決めている」と見ることができる。前の答えで質問を変えられるかどうかが違うだけで、どちらも 1 回の質問で 1 ビットを得ている。
 

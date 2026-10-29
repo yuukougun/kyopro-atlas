@@ -124,6 +124,9 @@ $a \le b$ に絞れば半分になる。$10^{12}$ までは「組を全部試し
 --8<-- "divisor-count-bound/divisor-dp.cpp:core"
 ```
 
+完全なプログラム：[`divisor-dp.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/divisor-count-bound/divisor-dp.cpp)（GitHub）
+{ .kp-code-src }
+
 $N = 12$ なら、約数は $1, 2, 3, 4, 6, 12$ で、$\mathrm{dp}$ は順に $1, 1, 1, 2, 3, 8$ になる。12 の分け方は $12$、$2 \cdot 6$、$6 \cdot 2$、$3 \cdot 4$、$4 \cdot 3$、$2 \cdot 2 \cdot 3$、$2 \cdot 3 \cdot 2$、$3 \cdot 2 \cdot 2$ の 8 通りで一致する。計算量は約数の組を全部見るので $O(\sqrt N + d(N)^2)$ で、$N \le 10^{12}$ まで間に合う。
 
 **品物が約数のナップサック**。「相異なる約数をいくつか選んで積を $N$ にする」なら、約数を 1 つずつ品物として見て、$\mathrm{dp}[\text{積の番号}]$ を 0-1 ナップサックと同じ向き（大きい番号から）で更新する。ただし品物 1 は積を変えないので、番号の向きだけで回し、$c$ を小さい方から回すと 1 を何度も使ってしまう。$c$ も大きい方から回すか、1 は DP の後で「入れる・入れない」を別に足す。選んだ個数 $c$ が答えに効く（並べ方が $c!$ 通りになるなど）なら、$c$ も状態に足す。相異なる 2 以上の整数 $k$ 個の積は $2 \cdot 3 \cdots (k + 1) = (k + 1)!$ 以上なので、$N \le 10^{10}$ なら $k \le 12$ で、1 を含めても $c \le 13$ と小さい。状態数は $c \times d(N)$、遷移は品物 $d(N)$ 個ごとに全状態を見るので $O(c \cdot d(N)^2)$ で、$N \le 10^{10}$ なら $13 \times 2304^2 \approx 7 \times 10^7$ である（[力試しの ABC461 F](#challenge)がこの型）。
@@ -152,6 +155,9 @@ $N = 12$ なら、約数は $1, 2, 3, 4, 6, 12$ で、$\mathrm{dp}$ は順に $1
 ```cpp
 --8<-- "divisor-count-bound/hcn.cpp:core"
 ```
+
+完全なプログラム：[`hcn.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/divisor-count-bound/hcn.cpp)（GitHub）
+{ .kp-code-src }
 
 [表](#table)の値は、このプログラムで $N = 10^3, \dots, 10^{18}$ について求めたものである。
 

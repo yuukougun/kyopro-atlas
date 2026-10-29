@@ -122,6 +122,9 @@ ACL の `dsu` は差を持てないので、重み付き Union-Find は自作す
 --8<-- "weighted-union-find/weighted-union-find.cpp:core"
 ```
 
+完全なプログラム：[`weighted-union-find.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/weighted-union-find/weighted-union-find.cpp)（GitHub）
+{ .kp-code-src }
+
 偶奇だけなら、ACL の `dsu` で頂点を 2 倍にする書き方（[頂点を 2 倍にする Union-Find](#generalization)）も使える。名前の約束は[インターフェースの決め方](../guide/library-design.md#interface)、確かめ方は[動作確認の手順](../guide/library-design.md#verify)にある。
 
 ## 境界（根の差は 0・同じ成分の merge・値の範囲） {#boundaries}
@@ -177,6 +180,9 @@ find の手間は、ふつうの Union-Find の find に、要素ごとの足し
 ```cpp
 --8<-- "weighted-union-find/parity.cpp:core"
 ```
+
+完全なプログラム：[`parity.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/weighted-union-find/parity.cpp)（GitHub）
+{ .kp-code-src }
 
 正直者と嘘つきの問題も、「$A$ が $B$ を正直者と言う」が「$A$ と $B$ は同じ種類」になる（正直者の証言なら $B$ は正直者、嘘つきの証言なら $B$ は嘘つき）ので、同じく XOR の情報になる。
 

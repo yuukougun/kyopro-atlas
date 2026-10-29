@@ -68,6 +68,9 @@ DP の[状態](../guide/glossary.md#state)には、次の要素を足すとき�
 --8<-- "exchange-argument-dp/tower.cpp:core"
 ```
 
+完全なプログラム：[`tower.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/exchange-argument-dp/tower.cpp)（GitHub）
+{ .kp-code-src }
+
 重さの合計は「下に置いたブロックの $s$」以下の重さに、そのブロックの重さを足したものなので、$\max s + \max w$ を超えない。表の幅はそこで打ち切れる。計算量はソートの $O(N \log N)$ と DP の $O(N \max s)$ である。DP の手間を決めるのは、遷移で回す $t$ の範囲（$0$ 〜 $s_i$）である。表の幅 $\max s + \max w$ はメモリの量にかかわる。
 
 この手順が正しいためには、基準 $g$ が**選ぶ集合によらない**ことが要る。入れ替えの損得が、まわりに何を選んだか（上に載る重さ、開始の時刻など）で向きを変えるなら、全体を 1 つの順に並べることはできない。次の節で、その確かめ方を書く。
@@ -112,6 +115,9 @@ DP の状態は「ここまでの関数から $c$ 個を選び、並べた順に
 ```cpp
 --8<-- "exchange-argument-dp/composition.cpp:core"
 ```
+
+完全なプログラム：[`composition.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/exchange-argument-dp/composition.cpp)（GitHub）
+{ .kp-code-src }
 
 比較関数は割り算をしない。`double` で $(A_i - 1) / B_i$ を求めると、値が大きいときに違う 2 つの比が同じ値に丸められ、順を取り違えて誤答になる（例は[ソートで考える](../basics/sorting-techniques.md#ratio-and-ties)）。掛け算なら整数のままで誤差がない。掛け算で比べるときの注意は 3 つある。
 

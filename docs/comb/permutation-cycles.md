@@ -60,6 +60,9 @@ updated: 2026-10-22
 --8<-- "permutation-cycles/decompose.cpp:core"
 ```
 
+完全なプログラム：[`decompose.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/permutation-cycles/decompose.cpp)（GitHub）
+{ .kp-code-src }
+
 巡回の大きさだけが要るなら、[Union-Find](../ds/union-find.md) で $i$ と $p_i$ を併合しても同じ分け方が得られる。たどる順番（巡回の中の並び）は失われるので、$K$ 歩先を求めるときは、コードの `cycles` と `pos` のように巡回を配列で持つ。
 
 ??? question "確認問題：印を付けないとどうなるか"
@@ -115,6 +118,9 @@ swap できるのが隣り合う 2 要素だけなら、ソートの最小回数
 ```cpp
 --8<-- "permutation-cycles/power.cpp:core"
 ```
+
+完全なプログラム：[`power.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/permutation-cycles/power.cpp)（GitHub）
+{ .kp-code-src }
 
 [ダブリング](../basics/doubling.md#permutation-power)でも $O(N \log K)$ で求まるが、置換なら巡回を使う方が速く、表も要らない。$p$ が置換でない一般の写像なら、巡回に入る前の部分があるのでダブリングか [Functional graph](../graph/functional-graph.md) の方法を使う。
 

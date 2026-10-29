@@ -66,7 +66,7 @@ updated: 2026-10-22
 
 ## 自作するときの要点と Library Checker {#library}
 
-自作するときの要点は次の 4 つである。完全なプログラムは `snippets/partially-persistent-union-find/usage.cpp` にある。
+自作するときの要点は次の 4 つである。完全なプログラムは [`snippets/partially-persistent-union-find/usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/partially-persistent-union-find/usage.cpp) にある。
 
 - **時刻の約束**：併合の前に時刻を 1 進め、その時刻を $\mathrm{tm}$ と履歴に書く。すると「最初の $t$ 回の併合の後」が時刻 $t$ に当たり、find の条件は $\mathrm{tm}[x] \le t$ になる。$<$ と取り違えると答えが 1 ずれる。
 - **根の印**：$\mathrm{tm}$ の初期値を $\infty$（`INT_MAX`）にすれば、find のループの条件だけで根で止まる。
@@ -76,6 +76,9 @@ updated: 2026-10-22
 ```cpp
 --8<-- "partially-persistent-union-find/usage.cpp:core"
 ```
+
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/partially-persistent-union-find/usage.cpp)（GitHub）
+{ .kp-code-src }
 
 ACL には部分永続 Union-Find はない。[Library Checker](https://judge.yosupo.jp/) にもそのまま対応する問題はない（近い [Persistent Unionfind](https://judge.yosupo.jp/problem/persistent_unionfind) は、過去の版から枝分かれして更新する完全永続の問題で、このデータ構造では解けない。[代わりの手](#alternatives)を参照）。
 
@@ -97,11 +100,17 @@ $x$ と $y$ が同じ集合かどうかは、時刻について[単調](../guide
 --8<-- "partially-persistent-union-find/usage.cpp:first-same"
 ```
 
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/partially-persistent-union-find/usage.cpp)（GitHub）
+{ .kp-code-src }
+
 二分探索をしない方法もある。今の森で $x$ と $y$ からそれぞれ根へ向かう道が初めて出会う頂点を $w$ とすると、2 頂点が同じ集合になるのは、$x$ から $w$ と $y$ から $w$ の道の辺がすべてそろったときである。各辺の時刻はその子の $\mathrm{tm}$（子が根でなくなった時刻）なので、答えは 2 本の道の辺の時刻の最大になる。道の上で時刻は真に増えるので、$\mathrm{tm}$ の小さい側から 1 歩ずつ登れば、2 本の道を時刻順に合わせるように $w$ で出会える。手間は 2 本の道の長さで $O(\log N)$ である。
 
 ```cpp
 --8<-- "partially-persistent-union-find/usage.cpp:climb"
 ```
+
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/partially-persistent-union-find/usage.cpp)（GitHub）
+{ .kp-code-src }
 
 条件が連結に限らないときは二分探索が便利である。「$x$ と $y$ の成分の大きさの和が $z$ 以上か」のような条件も、時刻について単調なら same を size に替えて同じように探せる（[練習問題](#practice)の Stamp Rally）。
 

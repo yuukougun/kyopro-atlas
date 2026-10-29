@@ -66,6 +66,9 @@ $f(T)$ の前計算も遅くしない工夫が要る。「同じグループに�
 --8<-- "subset-enumeration-dp/grouping.cpp:precompute"
 ```
 
+完全なプログラム：[`grouping.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/subset-enumeration-dp/grouping.cpp)（GitHub）
+{ .kp-code-src }
+
 ## 3^N になる理由（各要素が 3 通り） {#why-3n}
 
 $S$ ごとに部分集合 $T$ を全部列挙するとき、内側のループの回数は $\lvert S \rvert$ 個の要素からなる $S$ について $2^{\lvert S \rvert}$ 回である。$S$ も $2^N$ 通りあるので $2^N \times 2^N = 4^N$ と見積もりたくなるが、組 $(S, T)$ を要素ごとに見ると数え方が変わる。
@@ -103,6 +106,9 @@ $$
 --8<-- "subset-enumeration-dp/partition-count.cpp:core"
 ```
 
+完全なプログラム：[`partition-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/subset-enumeration-dp/partition-count.cpp)（GitHub）
+{ .kp-code-src }
+
 コード片の全体では、`fixed` がベル数 $1, 1, 2, 5, 15, \dots$ に、`naive` が順序を区別した分け方の数 $1, 1, 3, 13, 75, \dots$ に一致することを $N \le 10$ で確かめている。
 
 最大化・最小化でもこの形にしておくとよい。答えは同じで、内側のループが $2^{\lvert S \rvert - 1}$ 回に減るので全体で $\sum_{S \ne \varnothing} 2^{\lvert S \rvert - 1} = (3^N - 1)/2$ 回になる。最大化の遷移は次のようになる（要素の組ごとの得点の和を最大にする例）。
@@ -110,6 +116,9 @@ $$
 ```cpp
 --8<-- "subset-enumeration-dp/grouping.cpp:core"
 ```
+
+完全なプログラム：[`grouping.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/subset-enumeration-dp/grouping.cpp)（GitHub）
+{ .kp-code-src }
 
 ??? question "確認問題：最小の要素の代わりに最大の要素を使ってよいか"
     「$S$ の最小の要素を含むグループ」を「$S$ の最大の要素を含むグループ」に変えても、分け方を重複なく数えられるか。
@@ -130,6 +139,9 @@ $$
 ```cpp
 --8<-- "subset-enumeration-dp/k-groups.cpp:core"
 ```
+
+完全なプログラム：[`k-groups.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/subset-enumeration-dp/k-groups.cpp)（GitHub）
+{ .kp-code-src }
 
 グループの数の扱いは問題文で次のように分かれる。
 

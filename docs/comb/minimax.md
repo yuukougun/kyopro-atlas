@@ -89,6 +89,9 @@ $$
 --8<-- "minimax/deque.cpp:core"
 ```
 
+完全なプログラム：[`deque.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/minimax/deque.cpp)（GitHub）
+{ .kp-code-src }
+
 問題が「先手の得点」を問うときは、差から戻す。得点の総和 $S$ が戦略によらず一定なら、先手の得点 $X$ と後手の得点 $Y$ は $X + Y = S$、$X - Y = f$ を満たすので、$X = (S + f) / 2$ である。総和が一定でないゲーム（費用を払う手があるなど）では、この戻し方は使えない。
 
 ## max と min を手番で使い分ける書き方 {#max-min}
@@ -226,6 +229,9 @@ v(u) = min over 子 c ( v(c) )   … 深さが奇数（後手の手番）
     ```cpp
     --8<-- "minimax/grid.cpp:core"
     ```
+
+    完全なプログラム：[`grid.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/minimax/grid.cpp)（GitHub）
+    { .kp-code-src }
 
 ## 練習問題 {#practice}
 

@@ -107,6 +107,9 @@ $$
 --8<-- "probability-basics/first-move.cpp:core"
 ```
 
+完全なプログラム：[`first-move.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/probability-basics/first-move.cpp)（GitHub）
+{ .kp-code-src }
+
 場合の数は $N$ 通りで、各場合の $t$ は $O(\log K)$ 回の倍加で求まるので、全体で $O(N \log K)$ である。場合を分けたら、$\sum_i P(B_i) = 1$ が成り立つか（漏れや重なりがないか）を確かめるとよい。
 
 ??? question "確認問題：条件の付け方で変わる確率"

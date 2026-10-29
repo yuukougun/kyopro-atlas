@@ -113,6 +113,9 @@ dist[状態] を全部 INF にする
 --8<-- "extended-dijkstra/layered.cpp:core"
 ```
 
+完全なプログラム：[`layered.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/extended-dijkstra/layered.cpp)（GitHub）
+{ .kp-code-src }
+
 ??? question "確認問題：層の間の辺を下向き（k から k+1）だけにするのはなぜか"
     無料を使った回数は増えるだけで、減ることがないからである。上向きの辺を張ると、使った回数を取り消せることになり、$K$ 回を超えて無料にする経路ができてしまう。層の間の辺が一方向なので、状態のグラフで $k$ は経路に沿って単調に増え、各経路が使う無料の回数は終点の層の番号に等しい。
 

@@ -125,6 +125,9 @@ C++ では次のように書く。演算を関数で渡し、min と gcd の表�
 --8<-- "sparse-table/sparse-table.cpp:core"
 ```
 
+完全なプログラム：[`sparse-table.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/sparse-table/sparse-table.cpp)（GitHub）
+{ .kp-code-src }
+
 **計算量**：段は $\lfloor \log_2 N \rfloor + 1$ 個で、各段は $N$ 個以下の値を $O(1)$ ずつで作る。よって前処理は時間・メモリとも $O(N \log N)$ である。取得は表を 2 か所読んで 1 回結ぶだけなので $O(1)$ になる。演算そのものに時間がかかるときは、その分を掛ける。gcd は 1 回 $O(\log \max a)$ なので、取得も $O(\log \max a)$ になる。
 
 ### 境界
@@ -166,6 +169,9 @@ $N = 8$ で $l = 1$、$r = 6$ なら、$1 = 001_{(2)}$、$6 = 110_{(2)}$ で、$
 ```cpp
 --8<-- "sparse-table/disjoint.cpp:core"
 ```
+
+完全なプログラム：[`disjoint.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/sparse-table/disjoint.cpp)（GitHub）
+{ .kp-code-src }
 
 和なら累積和で足りるので、Disjoint Sparse Table が役に立つのは、引き算できない演算を変わらない列の上で何度も聞かれるときである。素数でない法での区間の積や、行列・一次関数の合成などが当たる。クエリを先にすべて読めるなら、分割統治で中点をまたぐクエリをまとめて処理する方法もある。
 

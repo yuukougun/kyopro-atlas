@@ -111,6 +111,9 @@ for col = 0, 1, ..., m-1:
 --8<-- "gaussian-elimination/mod-p.cpp:core"
 ```
 
+完全なプログラム：[`mod-p.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/gaussian-elimination/mod-p.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 `sweep` は上の[手順](#row-reduction)をそのまま書いたもので、`solve` は判定と解の読み取りである。ピボットの列は、行の中で最初に 0 でない成分の位置として探し直している（並べて持っておいてもよい）。期待値の方程式のように答えが 1 つに決まる問題でも、途中のピボットが mod $p$ でたまたま 0 になることはあるので、行の入れ替えは省かない。
 
 法が素数でないとき（$10^9$ など）は、0 でない数でも逆元を持つとは限らないので、この手順はそのままでは使えない。法の素因数ごとに解いて[中国剰余定理](../math/crt.md)で合わせる、行どうしでユークリッドの互除法のように引き算を繰り返して消す、などの工夫が要る。
@@ -127,6 +130,9 @@ mod 2 では値が 0 と 1 だけで、足し算と引き算はどちらも [XOR
 --8<-- "gaussian-elimination/mod2-bitset.cpp:core"
 ```
 
+完全なプログラム：[`mod2-bitset.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/gaussian-elimination/mod2-bitset.cpp)（GitHub）
+{ .kp-code-src }
+
 行 `a[i]` の下位 $m$ bit が係数で、bit $m$ に右辺を入れている。右辺も同じ行に入れておけば、行の XOR で右辺も一緒に更新される。`W` はコンパイル時に決める定数なので、変数の数 $+ 1$ 以上の値にしておく。`bitset` の `[]` は範囲を確かめないので、足りないと黙って配列の外を触る。逆に大きすぎても、1 回の XOR は必ず $W / 64$ 語を処理するので、そのぶん遅くなる。
 
 変数が 64 個以下なら、1 行を `unsigned long long` 1 つに入れても同じことができる。この形は [XOR 基底](../math/xor-basis.md)の挿入とほぼ同じで、XOR 基底は「XOR で作れる値の集合」を扱うときに、掃き出しを 1 行ずつ足しながら行うものとみなせる。
@@ -140,6 +146,9 @@ mod 2 では値が 0 と 1 だけで、足し算と引き算はどちらも [XOR
 ```cpp
 --8<-- "gaussian-elimination/mod2-bitset.cpp:count"
 ```
+
+完全なプログラム：[`mod2-bitset.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/gaussian-elimination/mod2-bitset.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 $2^{m-r}$ は $m - r$ が 60 を超えうるので、`1LL << (m - r)` ではなく mod で[繰り返し二乗法](../math/mod-pow.md)を使う。
 
@@ -161,6 +170,9 @@ $2^{m-r}$ は $m - r$ が 60 を超えうるので、`1LL << (m - r)` ではな�
 ```cpp
 --8<-- "gaussian-elimination/real.cpp:core"
 ```
+
+完全なプログラム：[`real.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/gaussian-elimination/real.cpp)（GitHub）
+{ .kp-code-src }
 
 **0 の判定**：実数では、本当は 0 になる成分が $10^{-17}$ のような値で残る。ピボットを探すときは、絶対値が `EPS` より小さければ 0 とみなす。ランクや「解なし」の判定はこの `EPS` に左右されるので、答えが一意と保証された問題で使うのが安全である。係数が整数で、解が一意かどうかやランクだけを知りたいなら、大きな素数の mod で掃き出す方が誤差の心配がない（ただし mod $p$ のランクは実数のランク以下で、たまたま小さくなることがある）。
 

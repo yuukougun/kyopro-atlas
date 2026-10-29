@@ -58,6 +58,9 @@ $N$ 個の 1 次式の積 $f(x) = (1 + a_0 x)(1 + a_1 x) \cdots (1 + a_{N-1} x)$
 --8<-- "online-convolution/product.cpp:core"
 ```
 
+完全なプログラム：[`product.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/online-convolution/product.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 因子の次数がばらばらでも、次数の合計を $D$ とすれば、添字で半分に分けるだけで $O((N + D) \log (N + D) \log N)$ になる（各因子の次数が 1 以上なら $D \ge N$ なので $O(D \log D \log N)$）。次数の小さい 2 つを優先度付きキューで取り出して掛ける書き方（ハフマン符号と同じ順）もよく使われ、同じ計算量で収まる。避けるべきなのは、大きくなった積に小さい因子を 1 つずつ掛ける順だけである。
 
 応用の型（サイン：「種類の違うものを $k$ 個選ぶ」「各要素を使う・使わない」）：要素ごとの選び方を 1 つの多項式で表せるなら、答えはその積の係数になる。[例題の ABC352 G](#abc352_g) は、期待値を確率の和に直すと $\prod (1 + A_i x)$ の係数が要る。
@@ -94,6 +97,9 @@ $\mathrm{dp}[0] = 1$、$\mathrm{dp}[i] = \sum_{j=0}^{i-1} \mathrm{dp}[j] \, g[i-
 ```cpp
 --8<-- "online-convolution/online.cpp:core"
 ```
+
+完全なプログラム：[`online.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/online-convolution/online.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 自作するときの要点と Library Checker での確かめ方は[ライブラリの節](#library)にまとめる。
 

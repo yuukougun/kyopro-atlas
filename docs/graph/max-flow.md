@@ -126,6 +126,9 @@ dfs(v, up):                  # v まで up だけ届いている。t へ流せ�
     --8<-- "max-flow/own-dinic.cpp:core"
     ```
 
+    完全なプログラム：[`own-dinic.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/max-flow/own-dinic.cpp)（GitHub）
+    { .kp-code-src }
+
 ## ACL の mf_graph で書く {#acl}
 
 最大流は、自分で書かずに ACL の `mf_graph` を使えば足りる。頂点の数を決めてから辺を足し、`flow(s, t)` を呼ぶ。
@@ -136,6 +139,9 @@ dfs(v, up):                  # v まで up だけ届いている。t へ流せ�
 ```cpp
 --8<-- "max-flow/usage.cpp:core"
 ```
+
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/max-flow/usage.cpp)（GitHub）
+{ .kp-code-src }
 
 - **割り当てを読み出す**：`add_edge` の返り値（または足した順）で辺の番号を覚えておき、`get_edge(i).flow` が 1 かどうかで「その割り当てを使ったか」を読む。逆辺は `edges()` に出てこない
 - **流量の上限**：`g.flow(s, t, limit)` は $\mathrm{limit}$ に達したら止まる。「流量が $K$ に届くか」だけを知りたいときは、上限を付けると速く終わる
@@ -186,6 +192,9 @@ dfs(v, up):                  # v まで up だけ届いている。t へ流せ�
 ```cpp
 --8<-- "max-flow/vertex-split.cpp:vertex"
 ```
+
+完全なプログラム：[`vertex-split.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/max-flow/vertex-split.cpp)（GitHub）
+{ .kp-code-src }
 
 たとえば頂点 0 から 4 への道が、0–1–4 と 0–2–1–3–4 の 2 本あるグラフでは、辺を共有しない道は 2 本だが、どちらも頂点 1 を通るので頂点を共有しない道は 1 本になる。
 

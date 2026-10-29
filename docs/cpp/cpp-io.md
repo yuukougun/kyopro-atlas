@@ -60,6 +60,9 @@ atcoder: true
 --8<-- "cpp-io/fast-io.cpp:core"
 ```
 
+完全なプログラム：[`fast-io.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-io/fast-io.cpp)（GitHub）
+{ .kp-code-src }
+
 - `ios::sync_with_stdio(false)`：既定の `cin`・`cout` は、C の `scanf`・`printf` と混ぜても順番が崩れないように、1 文字ずつ C の入出力を通す。これを切ると、`cin`・`cout` が自前のバッファでまとめて読み書きする
 - `cin.tie(nullptr)`：既定では、`cin` で読む前に毎回 `cout` を書き出す。質問を出してから答えを読むプログラムが、そのまま動くようにするためである。これを切ると、読み書きを交互にくり返すときに速くなる
 
@@ -94,6 +97,9 @@ atcoder: true
 --8<-- "cpp-io/separators.cpp:core"
 ```
 
+完全なプログラム：[`separators.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-io/separators.cpp)（GitHub）
+{ .kp-code-src }
+
 入力が `3` と `1 2 1` なら、出力は `1 2 1`・`Yes` の 2 行になる。
 
 - **素朴に書くと**：`if (i == n - 1) cout << '\n'; else cout << ' ';` と同じである
@@ -104,6 +110,9 @@ atcoder: true
 --8<-- "cpp-io/ternary-ng.cpp:core"
 ```
 
+完全なプログラム：[`ternary-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-io/ternary-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 ## 入力の終わりまで読む：読み込みの成否を while の条件にする {#read-until-eof}
 
 個数が書かれていない入力は、読めなくなるまで読む。`cin >> x` は `cin` 自身を返し、`cin` は直前の読み込みが失敗すると条件式の中で `false` になる。入力の終わりに来ると読み込みが失敗するので、ループを抜ける。
@@ -111,6 +120,9 @@ atcoder: true
 ```cpp
 --8<-- "cpp-io/read-until-eof.cpp:core"
 ```
+
+完全なプログラム：[`read-until-eof.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-io/read-until-eof.cpp)（GitHub）
+{ .kp-code-src }
 
 入力 `1 2 3` と `4` なら `4 10` が出る。空の入力なら `0 0`、最後に改行がない入力でも最後の数まで読む。
 
@@ -125,6 +137,9 @@ atcoder: true
 --8<-- "cpp-io/printf.cpp:core"
 ```
 
+完全なプログラム：[`printf.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-io/printf.cpp)（GitHub）
+{ .kp-code-src }
+
 入力 `3 10` なら、`3 10`・`3.3333333333`・`    3|3    |00003` の 3 行が出る。
 
 - **版**：C からある。解説コードでは小数の桁を指定するために `printf("%.10f\n", x)` だけを使う例が多い
@@ -133,6 +148,9 @@ atcoder: true
 ```cpp
 --8<-- "cpp-io/printf-ng.cpp:core"
 ```
+
+完全なプログラム：[`printf-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-io/printf-ng.cpp)（GitHub）
+{ .kp-code-src }
 
 - **落とし穴 2**：手元の Ubuntu の g++-13・g++-15 では、`-O2` を付けると、`scanf` の戻り値を使わないだけで警告が出た（`ignoring return value of 'int scanf(const char*, ...)'`。`-O0` では出ない）。動作には影響しない。気になるなら、上のように読めた個数（戻り値）を確かめる
 - **落とし穴 3**：`printf`・`scanf` と `cin`・`cout` は、同期を切った後に混ぜない（[混ぜたとき](#mixing-streams)）
@@ -145,6 +163,9 @@ atcoder: true
 --8<-- "cpp-io/println.cpp:core"
 ```
 
+完全なプログラム：[`println.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-io/println.cpp)（GitHub）
+{ .kp-code-src }
+
 入力 `3 4` なら、`3 4`・`3+4=7`・空の行・`3 4 3`・`3-4` の 5 行が出る。
 
 - **素朴に書くと**：`println("{} {}", a, b)` は `cout << a << ' ' << b << '\n'` と同じ内容を出す。ただし書き出す先は `cout` ではなく C の `stdout` である（[混ぜたとき](#mixing-streams)）
@@ -156,11 +177,17 @@ atcoder: true
 --8<-- "cpp-io/format-13.cpp:core"
 ```
 
+完全なプログラム：[`format-13.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-io/format-13.cpp)（GitHub）
+{ .kp-code-src }
+
 - **落とし穴**：書式の文字列はコンパイル時に検査される。`{}` の数より引数が少ない・自動の番号 `{}` と手で書いた番号 `{0}` を混ぜる、などはコンパイルエラーになる。実行してから気づくことはない
 
 ```cpp
 --8<-- "cpp-io/format-index-ng.cpp:core"
 ```
+
+完全なプログラム：[`format-index-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-io/format-index-ng.cpp)（GitHub）
+{ .kp-code-src }
 
 ## 書式の指定：幅・左寄せ・0 埋め・2 進・16 進・小数の桁（C++20・GCC 13〜） {#format-spec}
 
@@ -179,6 +206,9 @@ atcoder: true
 --8<-- "cpp-io/format-spec.cpp:core"
 ```
 
+完全なプログラム：[`format-spec.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-io/format-spec.cpp)（GitHub）
+{ .kp-code-src }
+
 入力 `42 3.14159` なら、`[   42] [42   ] [00042]`・`101010 00101010 2a 2A`・`3.142 [    3.14]` の 3 行が出る。
 
 - **素朴に書くと**：2 進の表示は `bitset<8>(n)` を出すのと同じ見た目になる（`bitset` は負の数を 2 の補数で出す。`{:b}` は `-101` のように符号を付ける）。`cout` で幅を指定するなら `setw(5)`・`setfill('0')` を使う
@@ -192,6 +222,9 @@ atcoder: true
 ```cpp
 --8<-- "cpp-io/float-output.cpp:core"
 ```
+
+完全なプログラム：[`float-output.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-io/float-output.cpp)（GitHub）
+{ .kp-code-src }
 
 入力ごとの出力は次のとおりで、手元の g++-15 で確かめた（`y` は `x / 3`）。
 
@@ -215,6 +248,9 @@ atcoder: true
 --8<-- "cpp-io/mixing-streams.cpp:core"
 ```
 
+完全なプログラム：[`mixing-streams.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-io/mixing-streams.cpp)（GitHub）
+{ .kp-code-src }
+
 手元の g++-15 では、出力は 1・4・5・2・3 の順に並んだ。同じプログラムから 2 行を消して同期を切らずに実行すると、1〜5 の順に出た。
 
 - **直し方**：どちらか一方にそろえる。`cout` と一緒に使うなら、`println(cout, "...")` で `cout` に書く
@@ -227,6 +263,9 @@ atcoder: true
 ```cpp
 --8<-- "cpp-io/interactive.cpp:core"
 ```
+
+完全なプログラム：[`interactive.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-io/interactive.cpp)（GitHub）
+{ .kp-code-src }
 
 手元で、質問を受け取ってから答えを返す相手のプログラムとパイプでつないで確かめた。
 
@@ -249,6 +288,9 @@ atcoder: true
 ```cpp
 --8<-- "cpp-io/unprintable.cpp:core"
 ```
+
+完全なプログラム：[`unprintable.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-io/unprintable.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 入力 `2 3` なら、`6`・`6`・`[2, 3]`・`2 3` の 4 行が出る。
 
@@ -277,6 +319,9 @@ set への `std::lower_bound` は、計算量の次数が変わる例である�
 --8<-- "cpp-io/tle-fixes.cpp:set-lower-bound"
 ```
 
+完全なプログラム：[`tle-fixes.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-io/tle-fixes.cpp)（GitHub）
+{ .kp-code-src }
+
 `s = s + c` は、右辺で `s` をコピーした新しい文字列を作ってから代入するので、1 回 $O(\lvert s \rvert)$ かかる。`vector` を値で受ける関数も、呼ぶたびに丸ごとコピーする。どちらも、ループの中や再帰の中にあると全体が $O(N^2)$ になる。
 
 ```cpp
@@ -287,11 +332,17 @@ set への `std::lower_bound` は、計算量の次数が変わる例である�
 --8<-- "cpp-io/tle-fixes.cpp:by-value"
 ```
 
+完全なプログラム：[`tle-fixes.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-io/tle-fixes.cpp)（GitHub）
+{ .kp-code-src }
+
 `std::function` には、どんな関数でも入る。その代わり、呼ぶたびに間接的な呼び出しを挟み、インライン化（呼び出しを中身で置き換える最適化）もされにくい。再帰のように何度も呼ぶと差が出る。ラムダ式の再帰は、自分を引数で受け取る形で書く（[ラムダ式と再帰ラムダ](../cpp/cpp-lambda.md)）。
 
 ```cpp
 --8<-- "cpp-io/tle-fixes.cpp:recursion"
 ```
+
+完全なプログラム：[`tle-fixes.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-io/tle-fixes.cpp)（GitHub）
+{ .kp-code-src }
 
 - **遅くないもの**：`for (int i : views::iota(0, n))` は普通の for と同じ速さである（[views::iota](../cpp/cpp-views-basics.md#iota)）。範囲 for の `for (const auto& x : v)` も、添字のループと変わらない
 - **計測の注意**：時間は手元の計測で、AtCoder とは環境が違う。比の目安として読む。同じ計測を g++-13 でも行い、比はほぼ同じだった

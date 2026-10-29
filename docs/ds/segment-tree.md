@@ -82,6 +82,9 @@ updated: 2026-10-29
 --8<-- "segment-tree/usage.cpp:core"
 ```
 
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree/usage.cpp)（GitHub）
+{ .kp-code-src }
+
 ## なぜ O(log N) か（各段で高々 2 個のノード） {#complexity}
 
 セグメント木が速いのは、どの区間 $[l, r)$ も、各段から高々 2 個ずつ取ったノードへちょうど分けられるからである。段の数は $\lceil \log_2 N \rceil + 1$ なので、使うノードは $O(\log N)$ 個で、その値を順に $\cdot$ で結べば答えになる。
@@ -166,6 +169,9 @@ $s_L$ には右から、$s_R$ には左から付け足すのは、演算が可�
     --8<-- "segment-tree/own.cpp:core"
     ```
 
+    完全なプログラム：[`own.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree/own.cpp)（GitHub）
+    { .kp-code-src }
+
     試験では可換でない演算（1 次関数の合成）を載せ、素朴に左から施した結果と照らし合わせている。`max_right`・`min_left` は、和と「区間が昇順か」（可換でない）の 2 つの演算で確かめた。乱数の列で、境目を素朴に求めた値と比べている。Library Checker の [Point Set Range Composite](https://judge.yosupo.jp/problem/point_set_range_composite) が同じ形の問題である。名前の約束は[インターフェースの決め方](../guide/library-design.md#interface)、確かめ方は[動作確認の手順](../guide/library-design.md#verify)にある。
 
 ## 境界（半開区間・空区間・単位元） {#boundaries}
@@ -214,6 +220,9 @@ prod(l, r, k, [kl, kr)):
 ```cpp
 --8<-- "segment-tree/char-set.cpp:core"
 ```
+
+完全なプログラム：[`char-set.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree/char-set.cpp)（GitHub）
+{ .kp-code-src }
 
 更新と取得はどちらも $O(\log N)$ で、26 種類の文字を 1 本のセグメント木で扱える。
 

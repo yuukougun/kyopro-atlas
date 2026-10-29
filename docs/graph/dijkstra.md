@@ -98,6 +98,9 @@ C++ の `priority_queue` には、入っている組の距離を小さくする�
 --8<-- "dijkstra/dijkstra.cpp:core"
 ```
 
+完全なプログラム：[`dijkstra.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dijkstra/dijkstra.cpp)（GitHub）
+{ .kp-code-src }
+
 - **最小ヒープにする**：`priority_queue` は既定で最大のものを取り出す。`greater<>` を指定するか、距離を負にして入れる（[優先度付きキュー](../ds/priority-queue.md#what-it-does)）。最大ヒープのままでも小さい例では出力が合うことがあり、気づきにくい
 - **組の順序は (距離, 頂点)**：`pair` は第 1 要素から比べるので、距離を先に置く。(頂点, 距離) にすると、頂点の番号の順に取り出してしまう
 - **読み飛ばしを忘れると遅くなる**：古い組から[緩和](../guide/glossary.md#relaxation)しても $d + w \ge \mathrm{dist}[v] + w$ なので更新は起きず、答えは変わらない。ただし辺を見る回数が「頂点に組が入った回数 × 出る辺の数」の和になる。たとえば $N/2$ 個の頂点が 1 つの頂点 $h$ へ順に短い距離を届け、$h$ から $N/2$ 本の辺が出ていると、$h$ の組が $N/2$ 個できて、合わせて約 $N^2/4$ 回辺を見る
@@ -117,6 +120,9 @@ C++ の `priority_queue` には、入っている組の距離を小さくする�
 --8<-- "dijkstra/dijkstra.cpp:path"
 ```
 
+完全なプログラム：[`dijkstra.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dijkstra/dijkstra.cpp)（GitHub）
+{ .kp-code-src }
+
 ## 密グラフの O(N^2) 版 {#dense}
 
 すべての頂点の組に辺がある完全グラフのように $M$ が $N^2$ に近いと、ヒープ版は $O(N^2 \log N)$ になる。ヒープを使わず、毎回「未確定で暫定距離が最小の頂点」を配列から線形に探すと、探索は $N$ 回 × $O(N)$、緩和も合わせて $O(N^2)$ なので、全体は $O(N^2)$ になる。$N$ が数千までの密グラフ（座標から辺の重みが決まる問題など）で使う。
@@ -124,6 +130,9 @@ C++ の `priority_queue` には、入っている組の距離を小さくする�
 ```cpp
 --8<-- "dijkstra/dense.cpp:core"
 ```
+
+完全なプログラム：[`dense.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dijkstra/dense.cpp)（GitHub）
+{ .kp-code-src }
 
 辺を隣接リストに展開する必要もないので、$N^2$ 個の辺を持つメモリも省ける。辺の重みを行列で持つか、座標などからその場で計算する。
 

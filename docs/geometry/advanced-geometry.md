@@ -74,7 +74,10 @@ ABC で必要になった例は、調べた範囲では [ABC478 G](#abc478_g)（
 --8<-- "advanced-geometry/calipers.cpp:core"
 ```
 
-完全なプログラムは `snippets/advanced-geometry/calipers.cpp` で、小さい乱数の入力で全組の比較と照らし合わせている。一直線上の点の扱いなど、自作するときの注意は[自作するときの要点](#library)にまとめた。
+完全なプログラム：[`calipers.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/advanced-geometry/calipers.cpp)（GitHub）
+{ .kp-code-src }
+
+完全なプログラムは [`snippets/advanced-geometry/calipers.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/advanced-geometry/calipers.cpp) で、小さい乱数の入力で全組の比較と照らし合わせている。一直線上の点の扱いなど、自作するときの注意は[自作するときの要点](#library)にまとめた。
 
 ## 最近点対（分割統治・平面走査で O(N log N)） {#closest-pair}
 
@@ -110,7 +113,10 @@ Library Checker に半平面交差の問題はなく、自作したら小さい�
 --8<-- "advanced-geometry/minkowski.cpp:core"
 ```
 
-辺の比べ方は外積の符号である。どちらの列も最も下の頂点から始めると、辺の偏角は $0$ 以上 $2\pi$ 未満の範囲で単調に増える。マージの途中で片方の列が先に進んでいるとき、その列で直前に取った辺は、もう片方の今の辺より偏角が小さい。凸多角形の隣り合う辺の向きは $180$ 度未満しか変わらないので、比べる 2 本の辺の向きの差は $180$ 度未満に収まり、外積の符号で大小が決まる。完全なプログラム（`snippets/advanced-geometry/minkowski.cpp`）では、小さい乱数の凸多角形で全組の和の凸包と照らし合わせている。
+完全なプログラム：[`minkowski.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/advanced-geometry/minkowski.cpp)（GitHub）
+{ .kp-code-src }
+
+辺の比べ方は外積の符号である。どちらの列も最も下の頂点から始めると、辺の偏角は $0$ 以上 $2\pi$ 未満の範囲で単調に増える。マージの途中で片方の列が先に進んでいるとき、その列で直前に取った辺は、もう片方の今の辺より偏角が小さい。凸多角形の隣り合う辺の向きは $180$ 度未満しか変わらないので、比べる 2 本の辺の向きの差は $180$ 度未満に収まり、外積の符号で大小が決まる。完全なプログラム（[`snippets/advanced-geometry/minkowski.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/advanced-geometry/minkowski.cpp)）では、小さい乱数の凸多角形で全組の和の凸包と照らし合わせている。
 
 使いどころは次の 2 つである。
 

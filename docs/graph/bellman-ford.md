@@ -70,6 +70,9 @@ N-1 回くり返す：
 --8<-- "bellman-ford/bellman-ford.cpp:core"
 ```
 
+完全なプログラム：[`bellman-ford.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bellman-ford/bellman-ford.cpp)（GitHub）
+{ .kp-code-src }
+
 途中で更新がなくなったら打ち切るのは、次の回も同じ $\mathrm{dist}$ から同じ辺を見るだけで、何も変わらないからである。負閉路がない入力の多くはこれで早く終わる。
 
 ## 答えに影響する負閉路だけを判定する（到達可能性で絞る・−∞ を伝える） {#relevant-cycles}

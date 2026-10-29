@@ -115,6 +115,9 @@ $p$ を除いたとき、子 $c$ の部分木が残りとつながるには、�
 --8<-- "lowlink/lowlink.cpp:core"
 ```
 
+完全なプログラム：[`lowlink.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lowlink/lowlink.cpp)（GitHub）
+{ .kp-code-src }
+
 **応用の型**：
 
 - **辺・頂点を 1 つ除いたときの連結成分の数**：辺なら「橋なら 1 増え、そうでなければ変わらない」、頂点なら上の `pieces[v]` を使う。サインは「どれか 1 つを壊す（塗り替える）とき」「1 つ一様に選んで除いたときの期待値」。グリッドのマスを頂点にした期待値の問題（[辺の追加と削除が混ざる連結性](../graph/offline-dynamic-connectivity.md#abc334_g)の例題の ABC334 G）は、関節点で切り離される部分木を数えても解ける
@@ -146,6 +149,9 @@ DFS で「親へ戻る辺」を飛ばすとき、親の**頂点**で判定する
 ```cpp
 --8<-- "lowlink/two-edge.cpp:core"
 ```
+
+完全なプログラム：[`two-edge.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lowlink/two-edge.cpp)（GitHub）
+{ .kp-code-src }
 
 **応用の型**：
 

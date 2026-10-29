@@ -88,6 +88,9 @@ ACL にはないので自作する。区間は ACL と同じく 0-indexed の半
 --8<-- "merge-sort-tree/mst.cpp:core"
 ```
 
+完全なプログラム：[`mst.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/merge-sort-tree/mst.cpp)（GitHub）
+{ .kp-code-src }
+
 ### 計算量とメモリ
 
 木の各段では、ノードの区間が $[0, N)$ を重ならずに覆う。よって各段の列の長さの和はちょうど $N$ で、段は $\log_2 \mathrm{size} + 1$ 個ある。
@@ -138,6 +141,9 @@ count_sum_le(l, r, x):
 ```cpp
 --8<-- "merge-sort-tree/mst.cpp:kth"
 ```
+
+完全なプログラム：[`mst.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/merge-sort-tree/mst.cpp)（GitHub）
+{ .kp-code-src }
 
 - **平面上の長方形の中の点の数**：点を $x$ 座標の順に並べ、その順の $y$ 座標の列でマージソート木を作る。$x$ 座標の範囲は列の区間に、$y$ 座標の範囲は値の範囲になる。サイン：点が動かず、長方形の質問がオンラインで来る
 - **区間の種類数**：$\mathrm{prev}_i$ を「$a_i$ と同じ値が $i$ より前で最後に出た位置（なければ $-1$）」とする。$[l, r)$ の種類数は、$[l, r)$ の位置 $i$ のうち $\mathrm{prev}_i < l$ を満たすものの個数である（[区間の種類数](../ds/offline-queries.md#distinct-count)）。$\mathrm{prev}$ の列でマージソート木を作れば、オンラインで $O(\log^2 N)$ になる

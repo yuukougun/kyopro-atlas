@@ -104,11 +104,14 @@ $$
 - **どちらが近いか**：$x/y - a/b$ と $c/d - x/y$ を比べるには、$(bx - ay)\,d$ と $(cy - dx)\,b$ を比べればよい。$R - L = 1/(bd)$ なので、どちらの値も $y$ 未満に収まる。
 - **double を使わない**：double の仮数部は 53 bit（10 進で 15〜16 桁）しかなく、18 桁の小数は正しく表せない。小数の入力は文字列で読み、$10$ の冪を分母とする整数の分数に直す。
 
-$N$ と $x/y$ から $L$ と $R$ を返す関数の中心は次のとおりである（完全なプログラムは `snippets/stern-brocot/approx.cpp`）。
+$N$ と $x/y$ から $L$ と $R$ を返す関数の中心は次のとおりである（完全なプログラムは [`snippets/stern-brocot/approx.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/stern-brocot/approx.cpp)）。
 
 ```cpp
 --8<-- "stern-brocot/approx.cpp:core"
 ```
+
+完全なプログラム：[`approx.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/stern-brocot/approx.cpp)（GitHub）
+{ .kp-code-src }
 
 $L$ が存在しない（$x/y$ が $1/N$ より小さい）ときは $0/1$ が、$R$ が存在しない（$x/y$ が $N$ より大きい）ときは $1/0$ が残る。分母だけに上限がある問題では、分子の上限で回数を切る行を外す。
 

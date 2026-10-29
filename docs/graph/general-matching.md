@@ -96,6 +96,9 @@ Edmonds のアルゴリズムは、奇閉路を見つけたらそれを 1 つの
 --8<-- "general-matching/tutte-rank.cpp:core"
 ```
 
+完全なプログラム：[`tutte-rank.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/general-matching/tutte-rank.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 - 乱数は 0 を避け、毎回の実行で種を変える（固定の種では、狙った入力で外れうる）。
 - 間違えるのは「階数が小さく出る」向きだけである。乱数を入れた行列の階数が、変数のままの階数を超えることはない。
 - 完全マッチングがあるかだけなら、行列式が 0 でないかを見れば足りる。変数のままの行列式が多項式として 0 でないことと、完全マッチングがあることが同値だからである（Tutte, 1947）。
@@ -114,6 +117,9 @@ Edmonds のアルゴリズムは、奇閉路を見つけたらそれを 1 つの
 ```cpp
 --8<-- "general-matching/bitdp.cpp:core"
 ```
+
+完全なプログラム：[`bitdp.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/general-matching/bitdp.cpp)（GitHub）
+{ .kp-code-src }
 
 状態は $2^N$ 個、遷移は各 $N$ 通りなので $O(2^N N)$ である。完全マッチングだけを考えるなら「組まない」遷移を外せばよい。決める順を固定して状態を集合だけにするのは、[集合だけを状態にする節](../dp/bit-dp.md#set-only)と同じ考え方である。
 

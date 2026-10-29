@@ -60,6 +60,9 @@ $$
 --8<-- "steiner-subtree/root-dfs.cpp:core"
 ```
 
+完全なプログラム：[`root-dfs.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/steiner-subtree/root-dfs.cpp)（GitHub）
+{ .kp-code-src }
+
 根を指定頂点にするのが要点である。指定されていない頂点を根にすると、根から指定頂点たちの LCA までのパスも「部分木に指定頂点がある」と判定され、余分に残ってしまう。
 
 根を自由に選びたいときは、辺で判定すればよい。根を任意の頂点にし、$c[v]$ を $v$ の部分木の中の指定頂点の数とする。辺 $(v, \mathrm{par}[v])$ を残すのは、辺の両側に指定頂点があるとき、すなわち $1 \le c[v] \le K - 1$ のときである。辺の数はこの条件を満たす $v$ の個数で、頂点の数はそれに 1 を足したものになる。
@@ -82,6 +85,9 @@ $$
 ```cpp
 --8<-- "steiner-subtree/prune.cpp:core"
 ```
+
+完全なプログラム：[`prune.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/steiner-subtree/prune.cpp)（GitHub）
+{ .kp-code-src }
 
 結果は根から DFS する方法と同じである。葉を削る方法は再帰を使わないので、パス状の木でも再帰の深さを気にしなくてよい。
 

@@ -148,11 +148,14 @@ $$
 - **凸な列どうし**：$a$ と $b$ の差分をそれぞれ小さい順に並べてマージし、$c_0 = a_0 + b_0$ から差分を順に足せばよい。$O(N + M)$ で、結果も凸である。$k$ 個を 2 つの組から合わせて選ぶとき、次の 1 個は増分の小さい方（最大化なら大きい方）から取る、という貪欲と同じである。
 - **凸な列と任意の列**：行 $k$・列 $j$ の値 $a_{k-j} + b_j$ は、$a$ が凸なら Monge になる（範囲外の値を $+\infty$ とみなしても崩れない）。monotone minima で $O((N + M) \log (N + M))$、SMAWK なら $O(N + M)$ である。
 
-次のコード片は、凸な列と任意の列の (min,+) 畳み込みである。行 $k$ で使える列 $[\max(0, k - N + 1), \min(M - 1, k)]$ と、再帰で受け取った範囲の共通部分だけを調べる。完全なプログラムは `snippets/monge/convolution.cpp` で、凸な列どうしのマージも同じファイルにある。
+次のコード片は、凸な列と任意の列の (min,+) 畳み込みである。行 $k$ で使える列 $[\max(0, k - N + 1), \min(M - 1, k)]$ と、再帰で受け取った範囲の共通部分だけを調べる。完全なプログラムは [`snippets/monge/convolution.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/monge/convolution.cpp) で、凸な列どうしのマージも同じファイルにある。
 
 ```cpp
 --8<-- "monge/convolution.cpp:core"
 ```
+
+完全なプログラム：[`convolution.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/monge/convolution.cpp)（GitHub）
+{ .kp-code-src }
 
 分割統治の各ノードで「左半分の上に凸な列」と「右半分の任意の列」を合成する問題は、各段がこの畳み込みになり、全体で $O(N \log^2 N)$ になる（[例題](#abc348_g)）。
 

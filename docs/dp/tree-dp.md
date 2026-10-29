@@ -69,6 +69,9 @@ updated: 2026-10-29
 --8<-- "tree-dp/postorder.cpp:core"
 ```
 
+完全なプログラム：[`postorder.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-dp/postorder.cpp)（GitHub）
+{ .kp-code-src }
+
 集める値は数に限らない。「部分木に含まれる値の大きい方から $K$ 番目」を答えるなら、各頂点に部分木の上位 $K$ 個の列を持たせ、子の列と自分の値をまとめて上位 $K$ 個に切り詰める（練習の ABC239 E）。子の列をまとめてソートすると、子が $k_v$ 人の頂点で $k_v K + 1$ 個を並べるので、全体は $O(NK \log (NK))$ 程度になる。子を 1 人合わせるたびに $K$ 個へ切り詰めれば $O(NK \log K)$ で済む。$K$ が小さければどちらでも間に合う。
 
 ## 頂点の選択を状態に足す（独立集合型） {#vertex-states}
@@ -96,6 +99,9 @@ $$
 ```cpp
 --8<-- "tree-dp/independent-set.cpp:core"
 ```
+
+完全なプログラム：[`independent-set.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-dp/independent-set.cpp)（GitHub）。`mint` は ACL の `modint1000000007`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 同じ形で、最適化も書ける。隣り合わない頂点の重みの和の最大を求めるなら、積を和に、和を $\max$ に置き換える。すなわち $\mathrm{dp}[v][0] = \sum_c \max(\mathrm{dp}[c][0], \mathrm{dp}[c][1])$、$\mathrm{dp}[v][1] = w_v + \sum_c \mathrm{dp}[c][0]$ とする。状態に足す情報は白黒に限らない。「$v$ に接する辺を何本選んだか」「$v$ が見張られているか」のように、親との間の条件を判定するのに要る最小限の情報を選ぶ。
 
@@ -166,6 +172,9 @@ $$
 --8<-- "tree-dp/reroot-difference.cpp:core"
 ```
 
+完全なプログラム：[`reroot-difference.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-dp/reroot-difference.cpp)（GitHub）
+{ .kp-code-src }
+
 頂点に重み $C_i$ があり $\sum_i C_i \, d(v, i)$ を求めるなら、頂点数の代わりに重みの和を使う。部分木の重みの和を $W_c$、全体を $W$ とすると $f(c) = f(p) + W - 2W_c$ である（練習の ABC348 E）。
 
 差分が $\mathrm{sz}$ のような部分木の量だけで書けないとき（「各頂点から最も遠い頂点への距離」で、親側の部分木の最大が要るときなど）は、親側の値を子に渡す一般の枠組みが要る。それが[全方位木 DP](../dp/rerooting.md) である。
@@ -191,6 +200,9 @@ $$
 ```cpp
 --8<-- "tree-dp/greedy-children.cpp:core"
 ```
+
+完全なプログラム：[`greedy-children.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-dp/greedy-children.cpp)（GitHub）
+{ .kp-code-src }
 
 頂点 $v$ で子の得をソートするので、全体は $O(N \log N)$ である。$\mathrm{rest}[c] = -\infty$ の子は得の候補から外す。外さずに $-\infty$ のまま得を計算すると、$-\infty$ の表し方によってはオーバーフローする。選べない辺は得の候補に入れないのが安全である。
 

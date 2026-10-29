@@ -85,6 +85,9 @@ $a$ を多項式 $1 + 2x + 3x^2$、$b$ を $4 + 5x + 6x^2$ とみると、$a_i x
 --8<-- "convolution-ntt/sum-pairs.cpp:core"
 ```
 
+完全なプログラム：[`sum-pairs.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/convolution-ntt/sum-pairs.cpp)（GitHub）
+{ .kp-code-src }
+
 **応用の型**：
 
 - **同じ列を自分と畳み込む**：1 つの集合から 2 つ選ぶときは $f$ と $f$ を畳み込む。結果は順序付きの組で、同じ要素を 2 回選ぶ組も含む。「$x + y = s$ で $x = y$」の組を引き、順序を無視するなら 2 で割る（[ABC392 G](#abc392_g)）
@@ -107,6 +110,9 @@ $$
 ```cpp
 --8<-- "convolution-ntt/sum-pairs.cpp:diff"
 ```
+
+完全なプログラム：[`sum-pairs.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/convolution-ntt/sum-pairs.cpp)（GitHub）
+{ .kp-code-src }
 
 この形は「パターン $T$ を $S$ の位置 $p$ に重ねたときの $\sum_j S_{p+j} T_j$」を、すべての $p$ について求めるときに使う。位置 $p$ で比べる 2 文字の添字 $p + j$ と $M - 1 - j$（反転した $T$ での添字）は、足すと常に $p + M - 1$ になる。
 
@@ -161,6 +167,9 @@ $$
 --8<-- "convolution-ntt/mod-any.cpp:core"
 ```
 
+完全なプログラム：[`mod-any.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/convolution-ntt/mod-any.cpp)（GitHub）
+{ .kp-code-src }
+
 浮動小数点数の FFT（`complex<double>`）でも畳み込めるが、値が大きいと丸めの誤差で整数に戻らない。ACL があるなら NTT の方法を使う。
 
 ## 文字列の照合：ずらしたときの一致数・ハミング距離・ワイルドカード {#string-matching}
@@ -172,6 +181,9 @@ $$
 ```cpp
 --8<-- "convolution-ntt/hamming.cpp:core"
 ```
+
+完全なプログラム：[`hamming.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/convolution-ntt/hamming.cpp)（GitHub）
+{ .kp-code-src }
 
 0 と 1 だけの文字列なら、1 を $+1$、0 を $-1$ に置き換えて 1 回で済ませる方法もある。積は一致なら $+1$、不一致なら $-1$ なので、畳み込みの値 $R$ は「一致数 − 不一致数」になり、不一致数は $(M - R) / 2$ である。$R$ は負になりうるので、`convolution_ll` を使うか、余りを $-M$ 以上 $M$ 以下の値に直してから使う。
 
@@ -186,6 +198,9 @@ $$
 ```cpp
 --8<-- "convolution-ntt/wildcard.cpp:core"
 ```
+
+完全なプログラム：[`wildcard.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/convolution-ntt/wildcard.cpp)（GitHub）
+{ .kp-code-src }
 
 各項は $26^4 < 5 \times 10^5$ 以下なので、$D_p$ は長さ $10^6$ でも $5 \times 10^{11}$ 程度で、`convolution_ll` で正確に求まる。`convolution` の余りで判定すると、0 でない $D_p$ がたまたま $998244353$ の倍数になり、一致と誤判定することがある。余りで済ませたいなら、文字に $1$ から $998244352$ までの乱数を割り当てて誤判定の確率を下げる。
 
@@ -289,6 +304,9 @@ $B - A = C - B$ は $A + C = 2B$ と同じである。真ん中の $B$ を固定
     ```cpp
     --8<-- "convolution-ntt/triplets.cpp:core"
     ```
+
+    完全なプログラム：[`triplets.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/convolution-ntt/triplets.cpp)（GitHub）
+    { .kp-code-src }
 
 ## 練習問題 {#practice}
 

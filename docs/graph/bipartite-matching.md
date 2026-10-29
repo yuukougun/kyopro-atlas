@@ -73,6 +73,9 @@ updated: 2026-10-29
 --8<-- "bipartite-matching/mf-graph.cpp:core"
 ```
 
+完全なプログラム：[`mf-graph.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bipartite-matching/mf-graph.cpp)（GitHub）
+{ .kp-code-src }
+
 頂点の番号は「左 $0..L-1$、右 $L..L+R-1$、$s = L+R$、$t = L+R+1$」のように、重ならないよう先に決めておく。
 
 容量を 1 以外にすると、割り当ての形を広げられる。
@@ -100,6 +103,9 @@ updated: 2026-10-29
 --8<-- "bipartite-matching/kuhn.cpp:core"
 ```
 
+完全なプログラム：[`kuhn.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bipartite-matching/kuhn.cpp)（GitHub）
+{ .kp-code-src }
+
 - 訪れた印は始点ごとに消す（`stamp` を 1 増やす）。1 回の探索の中では、同じ左の頂点を 2 度調べない。調べて失敗した頂点からは、その探索の中で何度来ても失敗するからである
 - 1 回の探索は $O(N + M)$ で、始点は左の頂点の数だけなので、全体で $O(NM)$ である
 - ある始点から増加路が見つからなければ、その後で別の始点から反転しても、その始点から増加路は現れない。だから各始点を 1 回ずつ試せば最大になる
@@ -125,6 +131,9 @@ ACL があれば Hopcroft-Karp を自分で書く必要はほとんどない。K
 ```cpp
 --8<-- "bipartite-matching/bottleneck.cpp:core"
 ```
+
+完全なプログラム：[`bottleneck.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bipartite-matching/bottleneck.cpp)（GitHub）
+{ .kp-code-src }
 
 候補は $N^2$ 個なので、判定は $O(\log N)$ 回で済む。各判定は $N^2$ 本の辺のグラフで最大流を 1 回求める。
 

@@ -67,6 +67,9 @@ updated: 2026-10-29
 --8<-- "geometry-precision/cancellation.cpp:core"
 ```
 
+完全なプログラム：[`cancellation.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/geometry-precision/cancellation.cpp)（GitHub）
+{ .kp-code-src }
+
 各積は $10^{18}$ 以下なので `long long`（約 $9.2 \times 10^{18}$ まで）で正確に計算できる。整数の入力からできる値を整数のまま持てば、桁落ちは起きない。
 
 ## 小数の入力を 10^k 倍して整数にする（文字列で読んで整数にする） {#scale-to-integer}
@@ -79,6 +82,9 @@ updated: 2026-10-29
 --8<-- "geometry-precision/truncation.cpp:core"
 ```
 
+完全なプログラム：[`truncation.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/geometry-precision/truncation.cpp)（GitHub）
+{ .kp-code-src }
+
 `llround`（最も近い整数に丸める）なら正しい値になる。読み込みの誤差は相対 $10^{-16}$ 程度なので、$10^k$ 倍した値が $10^{15}$ より十分小さければ、真の整数から 0.5 以上ずれることはないからである。`long double` に変えても 2.51 は正確に表せないので、切り捨てる限り同じ問題は残る。
 
 最も確実なのは、文字列で読んで数字を拾い、整数を組み立てる方法である。符号を最後に全体へ付けること（`-0.05` は $-5$ で、$0 - 0.05$ を桁ごとに分けない）と、小数点以下の桁が $k$ より少ない入力（`3` や `-12.5`）を 0 で埋めることに注意する。
@@ -86,6 +92,9 @@ updated: 2026-10-29
 ```cpp
 --8<-- "geometry-precision/scale.cpp:core"
 ```
+
+完全なプログラム：[`scale.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/geometry-precision/scale.cpp)（GitHub）
+{ .kp-code-src }
 
 拡大すると値も大きくなる。座標が $10^5$ で小数第 4 位までなら、拡大後は $10^9$ になり、その 2 乗は $10^{18}$ で `long long` にぎりぎり入る。2 乗の和や外積を作る前に、上限を見積もる。
 
@@ -106,6 +115,9 @@ updated: 2026-10-29
 ```cpp
 --8<-- "geometry-precision/compare.cpp:core"
 ```
+
+完全なプログラム：[`compare.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/geometry-precision/compare.cpp)（GitHub）
+{ .kp-code-src }
 
 `atan2` が使えない理由は、角度の差が小さすぎることにある。座標が $10^9$ 規模なら、$(10^9, 10^9 - 1)$ と $(10^9 - 1, 10^9 - 2)$ のように外積が $\pm 1$ の 2 方向は、角度の差が約 $5 \times 10^{-19}$ ラジアンしかない。`double` の `atan2` ではこの 2 つが同じ値になる（g++-15 で確かめた）。外積なら符号で区別できる。
 
@@ -129,6 +141,9 @@ $\sqrt{a} + \sqrt{b}$ と $\sqrt{c}$ の比較のように平方根が残る式�
 ```cpp
 --8<-- "geometry-precision/normalize.cpp:core"
 ```
+
+完全なプログラム：[`normalize.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/geometry-precision/normalize.cpp)（GitHub）
+{ .kp-code-src }
 
 $y = m x + n$ の形は垂直な直線を表せず、$m$ と $n$ が分数になるので使わない。C++ の `std::gcd` は負の引数でも絶対値で計算し、0 以上を返す（[gcd・lcm](../cpp/cpp-math-functions.md#gcd-lcm)）。2 点が同じだと $\gcd(0, 0) = 0$ で割ることになるので、同じ点を含みうる入力では先に除く。
 

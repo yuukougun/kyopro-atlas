@@ -65,6 +65,9 @@ $x$ が $A$ を超えないかは $x$ の bit と $A$ の bit だけで決まり
 --8<-- "digit-dp-advanced/two-numbers.cpp:core"
 ```
 
+完全なプログラム：[`two-numbers.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/digit-dp-advanced/two-numbers.cpp)（GitHub）
+{ .kp-code-src }
+
 **なぜこの状態で足りるか**：残りの bit で $x$ に置けるものは $t_x$ だけで決まり、$y$ に置けるものは $t_y$ だけで決まる。条件の $x \text{ AND } y = 0$ は bit ごとに確かめ終わっているので、この先に影響しない。だから途中の組は $(t_x, t_y)$ の 4 通りに分けて数えれば足りる。
 
 **数を増やすと**：数が $k$ 個なら、フラグの組は $2^k$ 通り、1 桁で置く数字の組は 10 進で $10^k$ 通り（2 進で $2^k$ 通り）になる。条件の情報も数ごとに持つなら掛け算で増える。各数を $m_i$ で割った余りも持つなら、状態は桁ごとに $2^k \prod m_i$ 個である。$k = 3$ 程度までが目安で、状態数と遷移数の積を先に見積もる。
@@ -94,6 +97,9 @@ $x$ が $A$ を超えないかは $x$ の bit と $A$ の bit だけで決まり
 ```cpp
 --8<-- "digit-dp-advanced/lower-upper.cpp:core"
 ```
+
+完全なプログラム：[`lower-upper.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/digit-dp-advanced/lower-upper.cpp)（GitHub）
+{ .kp-code-src }
 
 $x$ と $y$ の一致のフラグは、上限のフラグと同じ形で動く。一致している間は $b_x \le b_y$ しか置けず、$b_x < b_y$ を置いた時点で「$x < y$ が確定」になる。一致のまま最後まで進んだ組は $x = y$ である。
 
@@ -130,6 +136,9 @@ $X = 87$、硬貨 1・10・100 円で動かすと次の図になる。一の位�
 --8<-- "digit-dp-advanced/carry.cpp:core"
 ```
 
+完全なプログラム：[`carry.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/digit-dp-advanced/carry.cpp)（GitHub）
+{ .kp-code-src }
+
 **なぜ繰り上がりは 0 か 1 で足りるか**：同じ額面の硬貨を払いつつお釣りでももらうのは無駄である。そこで額面 $a_i$ の正味の枚数を整数 $n_i$（払えば正、もらえば負）で表すと、$\sum n_i a_i = X$ で $\sum |n_i|$ の最小を求める問題になる。最適解では $i < n - 1$ のすべてで $|n_i| < r_i$ である。$|n_i| \ge r_i$ なら、$a_i$ の $r_i$ 枚を $a_{i+1}$ の 1 枚に置き換えて、枚数を $r_i - 1$ 以上減らせるからである。
 
 ??? note "証明：下の桁の合計は 2 通りしかない"
@@ -160,6 +169,9 @@ $X = 87$、硬貨 1・10・100 円で動かすと次の図になる。一の位�
 --8<-- "digit-dp-advanced/digit-product.cpp:core"
 ```
 
+完全なプログラム：[`digit-product.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/digit-dp-advanced/digit-product.cpp)（GitHub）
+{ .kp-code-src }
+
 このコードでは、一致の道は 1 本だけなので、その積を変数 `tight` に 1 つ持つ。未満が確定した数だけを `map` に持ち、桁ごとに新しい `map` を作って書き込む。
 
 **数字の集合**：「使った数字の種類がちょうど $K$」「指定の数字をすべて含む」のような条件は、使った数字の集合を bit で持つ。10 進なら $2^{10} = 1024$ 通りで、桁数 $L$ が $10^4$ でも状態数は $2 \times 1024 \times L \approx 2 \times 10^7$ である（遷移はその 10 倍）。16 進では $2^{16}$ 通りになり、桁数が多いと持てない。
@@ -185,6 +197,9 @@ $$
 ```cpp
 --8<-- "digit-dp-advanced/count-sum.cpp:core"
 ```
+
+完全なプログラム：[`count-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/digit-dp-advanced/count-sum.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 - **下の桁から決めるとき**：$p$ 桁目（一の位を 0 桁目とする）に $x$ を置くと、各数に $x \cdot 10^p$ が加わる。総和の遷移は「総和 $+ x \cdot 10^p \times$ 個数」になる。$10^p$ は前計算しておく
 - **0 を数えてもよい**：0 は総和に 0 しか足さないので、個数のときと違い、最後に引かなくてよい（ほかの統計量では確かめる）

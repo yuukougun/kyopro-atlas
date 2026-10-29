@@ -65,6 +65,9 @@ atcoder: true
 --8<-- "cpp-macros-template-file/names-ng.cpp:core"
 ```
 
+完全なプログラム：[`names-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-macros-template-file/names-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 g++-13・g++-15 とも、`count` は `reference to 'count' is ambiguous`、`y1` は `'int y1' redeclared as different kind of entity` と出る。同じ理由で `next`・`prev`・`distance`・`data`・`size`・`j0`・`j1` などもグローバルの名前には向かない。
 
 関数の中の変数なら衝突しない。内側の変数が外側の名前を隠すだけだからである。
@@ -72,6 +75,9 @@ g++-13・g++-15 とも、`count` は `reference to 'count' is ambiguous`、`y1` 
 ```cpp
 --8<-- "cpp-macros-template-file/names-ok.cpp:core"
 ```
+
+完全なプログラム：[`names-ok.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-macros-template-file/names-ok.cpp)（GitHub）
+{ .kp-code-src }
 
 - **避け方**：グローバルの変数と関数には、標準ライブラリにない名前（`cnt`・`ys` など）を付ける。変数は `main` の中に置く
 - **std:: を省かない流儀**：`using namespace std;` を書かず、`std::vector`・`std::ranges::sort` と書く解説コードもある。衝突は起きないが長くなる。読むときは `std::` を外して読めばよい
@@ -104,6 +110,9 @@ g++-15 -std=gnu++23 -O2 -fmodules main.cpp
 --8<-- "cpp-macros-template-file/macros.cpp:core"
 ```
 
+完全なプログラム：[`macros.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-macros-template-file/macros.cpp)（GitHub）
+{ .kp-code-src }
+
 | 書き方 | 置き換わった後（素朴な書き方） |
 | --- | --- |
 | `rep(i, n)` | `for (int i = 0; i < (int)(n); i++)` |
@@ -124,6 +133,9 @@ g++-15 -std=gnu++23 -O2 -fmodules main.cpp
 --8<-- "cpp-macros-template-file/macro-text.cpp:core"
 ```
 
+完全なプログラム：[`macro-text.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-macros-template-file/macro-text.cpp)（GitHub）
+{ .kp-code-src }
+
 - **落とし穴 1（括弧）**：`#define SQ(x) x * x` に `1 + 2` を渡すと `1 + 2 * 1 + 2` になり、9 ではなく 5 になる。マクロを書くなら、引数と全体を括弧で囲む。関数で書けるものは関数（テンプレート）にする
 - **落とし穴 2（2 回評価）**：`all(make())` は `make().begin(), make().end()` に置き換わり、`make` が 2 回呼ばれる。2 つの別々の `vector` のイテレータを組にするので未定義動作になる。関数の戻り値は、先に変数へ入れてから `all` に渡す
 - **落とし穴 3（型の固定）**：上の `rep` は `(int)(n)` で `n` を `int` にする。`n` が $2^{31}$ 以上の `long long` だと正しく回らない。雛形によっては `rep` を `long long` で回すものもあり、読むときは定義を確かめる
@@ -139,11 +151,17 @@ g++-15 -std=gnu++23 -O2 -fmodules main.cpp
 --8<-- "cpp-macros-template-file/define-int-ng.cpp:core"
 ```
 
+完全なプログラム：[`define-int-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-macros-template-file/define-int-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 g++-13・g++-15 とも `'::main' must return 'int'` と出る。`signed` は `int` と同じ型の別の書き方で、`int` という語を含まないので置き換えを受けない。そこで `signed main()` と書く。
 
 ```cpp
 --8<-- "cpp-macros-template-file/define-int.cpp:core"
 ```
+
+完全なプログラム：[`define-int.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-macros-template-file/define-int.cpp)（GitHub）
+{ .kp-code-src }
 
 入力 `3000000000` に対して `9000000000000000000` と出る（`x` は `long long`）。
 
@@ -153,6 +171,9 @@ g++-13・g++-15 とも `'::main' must return 'int'` と出る。`signed` は `in
 ```cpp
 --8<-- "cpp-macros-template-file/define-int-printf.cpp:core"
 ```
+
+完全なプログラム：[`define-int-printf.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-macros-template-file/define-int-printf.cpp)（GitHub）
+{ .kp-code-src }
 
 - **落とし穴 2（ほかの場所の int）**：`vector<int>` も `vector<long long>` になるので、メモリが 2 倍になる。ACL など、`int` を受け取る前提の関数に渡す値の型も変わる。メモリの上限が厳しい問題では、`#define int long long` をやめるのが手早い
 
@@ -167,6 +188,9 @@ g++-13・g++-15 とも `'::main' must return 'int'` と出る。`signed` は `in
 --8<-- "cpp-macros-template-file/chmin.cpp:core"
 ```
 
+完全なプログラム：[`chmin.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-macros-template-file/chmin.cpp)（GitHub）
+{ .kp-code-src }
+
 `chmax` の `return a < b && (a = b, true);` は次のように読む。
 
 - `&&` は左が偽なら右を評価しない（短絡評価）。`a < b` が偽なら、書き換えずに `false` を返す
@@ -178,12 +202,18 @@ g++-13・g++-15 とも `'::main' must return 'int'` と出る。`signed` は `in
 --8<-- "cpp-macros-template-file/chmin.cpp:use"
 ```
 
+完全なプログラム：[`chmin.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-macros-template-file/chmin.cpp)（GitHub）
+{ .kp-code-src }
+
 - **素朴に書くと**：`if (x < mn) { mn = x; updates++; }`。戻り値を使わないなら `mn = min(mn, x);` と同じである
 - **2 つの型を取る理由**：型を 1 つにした `template <class T> bool chmin(T& a, const T& b)` を考える。`long long` の変数と `0`（`int`）を渡すと、`T` が `long long` と `int` の両方に推論されて決まらない。そのためコンパイルエラーになる（`deduced conflicting types for parameter 'const T'`）。`T` と `U` に分けると、`chmin(mn, 0)` のように型の違う値を渡せる
 
 ```cpp
 --8<-- "cpp-macros-template-file/chmin-one-type-ng.cpp:core"
 ```
+
+完全なプログラム：[`chmin-one-type-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-macros-template-file/chmin-one-type-ng.cpp)（GitHub）
+{ .kp-code-src }
 
 - **落とし穴**：`a` は参照で受けるので、書き換えたい変数そのものを渡す。`chmin(dp[i] + 1, x)` のように式を渡すとコンパイルエラーになる。比較の向き（`b < a`）は自分で書くと逆にしやすい。雛形の定義を一度確かめる
 
@@ -197,6 +227,9 @@ g++-13・g++-15 とも `'::main' must return 'int'` と出る。`signed` は `in
 ```cpp
 --8<-- "cpp-macros-template-file/debug.cpp:core"
 ```
+
+完全なプログラム：[`debug.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-macros-template-file/debug.cpp)（GitHub）
+{ .kp-code-src }
 
 `#x` は引数の文字をそのまま文字列にするマクロの機能で、`debug(s)` は `cerr << "s" << " = " << (s) << endl` になる。`g++-15 -DLOCAL` でコンパイルすると標準エラー出力に `s = 1`・`s = 3` と出て、付けなければ何も出ない。
 
@@ -214,17 +247,26 @@ g++-13・g++-15 とも `'::main' must return 'int'` と出る。`signed` は `in
 --8<-- "cpp-macros-template-file/pragma-before-include-ng.cpp:core"
 ```
 
+完全なプログラム：[`pragma-before-include-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-macros-template-file/pragma-before-include-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 エラーは `inlining failed in call to 'always_inline' '... allocator ...': target specific option mismatch` と出る。ヘッダの中の関数と自分の関数で、使ってよい命令の指定が食い違うためである。`#include` の後に書けば g++-13 でも通る（雛形によっては `<bits/allocator.h>` を先に読む対策をしている）。
 
 ```cpp
 --8<-- "cpp-macros-template-file/pragma-after-include.cpp:core"
 ```
 
+完全なプログラム：[`pragma-after-include.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-macros-template-file/pragma-after-include.cpp)（GitHub）
+{ .kp-code-src }
+
 - **Ofast は浮動小数点の約束を変える**：`Ofast` は `O3` に、規格に厳密に従わない最適化（`-ffast-math` など）を加えたものである。`-ffast-math` は「NaN や無限大は現れない」「足し算の順序を入れ替えてよい」と仮定して速くする。そのため、NaN の判定が消えたり、誤差の出方が変わったりする。手元の g++-13・g++-15 では、`sqrt(-1)` の結果に `isnan` を使うと、`Ofast` を付けたときだけ「NaN ではない」と判定された
 
 ```cpp
 --8<-- "cpp-macros-template-file/ofast.cpp:core"
 ```
+
+完全なプログラム：[`ofast.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-macros-template-file/ofast.cpp)（GitHub）
+{ .kp-code-src }
 
 - **使い分け**：浮動小数点を使うコード（幾何・確率）には `Ofast` を付けない。付けるなら `O3` までにする。速さが足りないときは、`#pragma` より先に計算量と入出力（[入出力](../cpp/cpp-io.md)）を見直す
 
@@ -275,6 +317,9 @@ ACL は AtCoder のジャッジに入っているので、`#include <atcoder/dsu
 --8<-- "cpp-macros-template-file/impl-ok.cpp:impl"
 ```
 
+完全なプログラム：[`impl-ok.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-macros-template-file/impl-ok.cpp)（GitHub）
+{ .kp-code-src }
+
 C++ では、使う場所より前に宣言があれば、定義は後ろにあってよい。ただし、型や値をコンパイルのときに知る必要があるものは、使う場所より前に定義がなければならない。
 
 | main の後ろ（目印より下）に置いたもの | 結果（g++-13・g++-15） |
@@ -291,11 +336,17 @@ C++ では、使う場所より前に宣言があれば、定義は後ろにあ�
 --8<-- "cpp-macros-template-file/impl-auto-ng.cpp:core"
 ```
 
+完全なプログラム：[`impl-auto-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-macros-template-file/impl-auto-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 エラーは `use of 'auto twice(int)' before deduction of 'auto'` と出る。`constexpr` 関数を配列の長さなどの定数式で使うときも、コンパイルのときに中身を計算するので、使う場所より前に定義が要る。
 
 ```cpp
 --8<-- "cpp-macros-template-file/impl-constexpr-ng.cpp:core"
 ```
+
+完全なプログラム：[`impl-constexpr-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-macros-template-file/impl-constexpr-ng.cpp)（GitHub）
+{ .kp-code-src }
 
 エラーは `'constexpr int twice(int)' used before its definition` と出る。
 

@@ -89,7 +89,7 @@ $$
 
 二分探索を使わない方法もある。どの $\lambda$ でも $g(\lambda) + \lambda K \ge f(K)$ で、凸なら等号になる $\lambda$ がある。$h(\lambda) = g(\lambda) + \lambda K$ は直線の最大なので凸関数で、その最小値が $f(K)$ になる。$h$ を整数の[三分探索](../basics/ternary-search.md)で最小にすれば、個数も同点の決まりも要らない。罰金つきの問題が値しか返せないとき（[Monge な区間分割](#with-monge)など）はこちらが楽である。
 
-隣り合わない要素をちょうど $K$ 個選ぶ和の最大での、罰金つきの DP と二分探索は次のとおりである（完全なプログラムは `snippets/alien-dp/nonadjacent.cpp`）。値と「個数に $-1$ を掛けたもの」の組を `max` で比べると、同点で個数の少ない方が残る。
+隣り合わない要素をちょうど $K$ 個選ぶ和の最大での、罰金つきの DP と二分探索は次のとおりである（完全なプログラムは [`snippets/alien-dp/nonadjacent.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/alien-dp/nonadjacent.cpp)）。値と「個数に $-1$ を掛けたもの」の組を `max` で比べると、同点で個数の少ない方が残る。
 
 ```cpp
 --8<-- "alien-dp/nonadjacent.cpp:penalized"
@@ -98,6 +98,9 @@ $$
 ```cpp
 --8<-- "alien-dp/nonadjacent.cpp:alien"
 ```
+
+完全なプログラム：[`nonadjacent.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/alien-dp/nonadjacent.cpp)（GitHub）
+{ .kp-code-src }
 
 $\lambda$ を探す範囲は、どの得 $f(k+1) - f(k)$ よりも小さい値から大きい値までにする。罰金つきの値は $\lambda$ に個数が掛かって大きくなるので、範囲を広く取りすぎると `long long` を超える。値の上限から得の範囲を見積もり、足りなければ `__int128` を使う。
 
@@ -120,6 +123,9 @@ $A = (1, 9, 1, 1, 9)$ で動かす。まず 2 番目の 9 を取って $f(1) = 9
 ```cpp
 --8<-- "alien-dp/nonadjacent.cpp:greedy"
 ```
+
+完全なプログラム：[`nonadjacent.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/alien-dp/nonadjacent.cpp)（GitHub）
+{ .kp-code-src }
 
 前から見て選んだものを後で入れ替える貪欲の基本は、[優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md#regret)にある。差分の形がこれほど単純でない問題では、Alien DP や関数の形を直接持つ [Slope Trick](../dp/slope-trick.md#breakpoints) を考える。
 
@@ -148,7 +154,7 @@ ACL に Alien DP はない。罰金つきの問題の解き方が問題ごとに
 - $K$ が取りうる個数の範囲を超えていないかを先に確かめる。範囲外の $K$ では二分探索がでたらめな値を返す
 - $\lambda$ の範囲とオーバーフローを見積もる（[λ の二分探索の節](#binary-search-lambda)）
 
-Library Checker には、Alien DP そのものを確かめる問題はない（2026-10-22 に問題の一覧で確かめた）。自作したら、個数を状態に持つ素朴な DP と小さい乱数の入力で比べる。同点がよく起きるように、値の範囲を狭くし、同じ値や負の値を混ぜるとよい。`snippets/alien-dp/nonadjacent.cpp` の `main` はこの比べ方をしている。
+Library Checker には、Alien DP そのものを確かめる問題はない（2026-10-22 に問題の一覧で確かめた）。自作したら、個数を状態に持つ素朴な DP と小さい乱数の入力で比べる。同点がよく起きるように、値の範囲を狭くし、同じ値や負の値を混ぜるとよい。[`snippets/alien-dp/nonadjacent.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/alien-dp/nonadjacent.cpp) の `main` はこの比べ方をしている。
 
 ## 学ぶための資料 {#resources}
 

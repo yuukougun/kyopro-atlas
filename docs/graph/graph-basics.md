@@ -68,11 +68,17 @@ updated: 2026-10-29
 --8<-- "graph-basics/build.cpp:core"
 ```
 
+完全なプログラム：[`build.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/graph-basics/build.cpp)（GitHub）
+{ .kp-code-src }
+
 辺リストから隣接行列を作るときは、対角（自分から自分）を 0、辺のない組を大きな値（INF）で埋め、多重辺があれば重みの最小を取る。重みが 0 以上なら、自己ループがあっても `min` により対角は 0 のまま残る。ワーシャルフロイド法の初期値はこの形である。
 
 ```cpp
 --8<-- "graph-basics/build.cpp:matrix"
 ```
+
+完全なプログラム：[`build.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/graph-basics/build.cpp)（GitHub）
+{ .kp-code-src }
 
 ### 隣接リストに持たせる情報 {#adjacency-extras}
 

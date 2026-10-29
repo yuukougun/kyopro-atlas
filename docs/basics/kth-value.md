@@ -87,6 +87,9 @@ $\mathrm{count}(x)$ の数え方は、値の作られ方で決まる。二分探
 --8<-- "kth-value/pair-product.cpp:core"
 ```
 
+完全なプログラム：[`pair-product.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/kth-value/pair-product.cpp)（GitHub）
+{ .kp-code-src }
+
 **包除（倍数や欠けた数）**。数える対象が「$N$ か $M$ のちょうど一方で割り切れる数」のように集合の演算で決まるなら、$\lfloor x / N \rfloor$ のような式の足し引きで $O(1)$ で数えられる。「列に含まれない正の整数」なら、$x$ 以下の正の整数 $x$ 個から列の中で $x$ 以下のものを引けばよい。どちらも、個数の式が立てば後は同じ二分探索である。
 
 ??? question "確認問題：符号で場合分けの表"
@@ -107,6 +110,9 @@ $\mathrm{count}(x)$ の数え方は、値の作られ方で決まる。二分探
 ```cpp
 --8<-- "kth-value/top-m-sum.cpp:core"
 ```
+
+完全なプログラム：[`top-m-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/kth-value/top-m-sum.cpp)（GitHub）
+{ .kp-code-src }
 
 $c$ を「$t$ 以上の値の個数」で数えると、$t$ に等しい値をすべて足してしまい、$M$ 個を超える。$t$ ちょうどの値が何個あるかは問題によって大きく変わるので、必ず「$t$ より大きい」と「ちょうど $t$」に分ける。
 

@@ -133,6 +133,9 @@ ACL の `fenwick_tree` は BIT 上の二分探索を持たないので、BIT ご
 --8<-- "kth-element/bit-kth.cpp:core"
 ```
 
+完全なプログラム：[`bit-kth.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/kth-element/bit-kth.cpp)（GitHub）
+{ .kp-code-src }
+
 ### 境界
 
 - **K の数え方**：`kth` の $k$ は 1-indexed である。0-indexed の $k$ を受け取ったら $k + 1$ を渡す。$k = 0$ を渡すと、どの $t$ も $0$ 未満でないので最初の位置を返してしまう
@@ -160,6 +163,9 @@ ACL の `fenwick_tree` は BIT 上の二分探索を持たないので、BIT ご
 ```cpp
 --8<-- "kth-element/reverse-insert.cpp:core"
 ```
+
+完全なプログラム：[`reverse-insert.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/kth-element/reverse-insert.cpp)（GitHub）
+{ .kp-code-src }
 
 同じ形は「残っている人のうち前から K 番目を取り除く」操作の繰り返しにも使える。残っている人を 1 とした BIT で K 番目を探し、取り除いた人に $-1$ を加えればよい。
 

@@ -68,6 +68,9 @@ mex は、非負整数の集合に含まれない最小の非負整数である�
 --8<-- "mex/window-min.cpp:mex"
 ```
 
+完全なプログラム：[`window-min.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mex/window-min.cpp)（GitHub）
+{ .kp-code-src }
+
 ??? question "確認問題：長さ 5 の列の mex が 5 になるのはどんなときか"
     mex が 5 なら、$0, 1, 2, 3, 4$ の 5 種類がすべて出ている。要素は 5 個しかないので、列は $0, 1, 2, 3, 4$ を 1 個ずつ並べ替えたものに限られる。値の上限 $N$ がちょうど達成されるのは、この場合だけである。
 
@@ -122,6 +125,9 @@ mex は、非負整数の集合に含まれない最小の非負整数である�
 ```cpp
 --8<-- "mex/window-min.cpp:gaps"
 ```
+
+完全なプログラム：[`window-min.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mex/window-min.cpp)（GitHub）
+{ .kp-code-src }
 
 **最大値**：長さ $M$ の窓の mex の最大値は、[答えで二分探索](../basics/binary-search-answer.md#monotonicity)する。「mex が $x$ 以上の窓があるか」は、$0, \dots, x - 1$ をすべて含む窓があるかと同じで、$x$ について単調である。判定は[固定長の窓をずらし](../basics/two-pointers.md#fixed-window)ながら、$x$ 未満の値の種類数を個数の配列で保てば $O(N)$ で、全体は $O(N \log N)$ になる。長さを決めない区間なら、単調性から列全体の mex が最大である。
 

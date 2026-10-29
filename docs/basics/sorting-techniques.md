@@ -88,6 +88,9 @@ updated: 2026-10-22
 --8<-- "sorting-techniques/matching.cpp:core"
 ```
 
+完全なプログラム：[`matching.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/sorting-techniques/matching.cpp)（GitHub）
+{ .kp-code-src }
+
 同じ考え方は次の形にも使える。
 
 - **積の和**：$\sum A_i B_{\sigma(i)}$ は、両方を同じ向きに並べて組むと最大、逆向きに組むと最小になる（並べ替え不等式）
@@ -139,6 +142,9 @@ $$
 ```cpp
 --8<-- "sorting-techniques/ratio-sort.cpp:core"
 ```
+
+完全なプログラム：[`ratio-sort.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/sorting-techniques/ratio-sort.cpp)（GitHub）
+{ .kp-code-src }
 
 ## 落とし穴 {#pitfalls}
 

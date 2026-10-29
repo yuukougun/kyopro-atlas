@@ -96,6 +96,9 @@ $l$ は毎回 $r + 1$ に進み、各区間は値の 1 種類に対応するの�
 --8<-- "floor-quotient-enum/quotient-blocks.cpp:core"
 ```
 
+完全なプログラム：[`quotient-blocks.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/floor-quotient-enum/quotient-blocks.cpp)（GitHub）
+{ .kp-code-src }
+
 **$f$ が $i$ にもよる場合**。$\sum_{i=1}^{N} g(i) \cdot f(\lfloor N/i \rfloor)$ の形でも、$g$ の区間の和 $\sum_{i=l}^{r} g(i)$ が $O(1)$ で求まれば同じ方法が使える。たとえば $g(i) = i$ なら等差数列の和 $(l + r)(r - l + 1)/2$ を $q$ 倍して足す。$N \bmod i = N - i \lfloor N/i \rfloor$ なので、余りの和 $\sum_{i=1}^{N} (N \bmod i)$ もこれで求まる。
 
 **2 つの商を同時にまとめる場合**。$\lfloor N/i \rfloor$ と $\lfloor M/i \rfloor$ の両方を使う和では、右端を $\min(\lfloor N/\lfloor N/l \rfloor \rfloor, \lfloor M/\lfloor M/l \rfloor \rfloor)$ にする。どちらの商も変わらない範囲だけをまとめるので、区間の数は $O(\sqrt{N} + \sqrt{M})$ である。$i$ の上限は $\min(N, M)$ にする（それより先では片方の商が 0 になる）。
@@ -123,6 +126,9 @@ $$
 ```cpp
 --8<-- "floor-quotient-enum/quotient-blocks.cpp:split"
 ```
+
+完全なプログラム：[`quotient-blocks.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/floor-quotient-enum/quotient-blocks.cpp)（GitHub）
+{ .kp-code-src }
 
 **大小を決めて小さい方を固定する**。対称な条件の組 $(a, b)$ を探すとき、$a \le b$ と決めると $a^2 \le ab$ なので、$ab \le N$ なら $a \le \sqrt{N}$ に限られる。$a$ を $\sqrt{N}$ まで全探索し、$b$ の範囲は式で決める。3 つの値の組でも、真ん中の値を固定すると同じ形になる（[ARC160 B](#arc160_b)）。
 

@@ -92,11 +92,14 @@ for v in vs:
     stack に v を積む
 ```
 
-最初の頂点は全体の LCA で、圧縮木の根になる。各頂点はスタックに 1 回積まれて高々 1 回取り除かれるので、組み立ては頂点数に比例し、全体の時間はソートと LCA の $O(K \log N)$ で決まる。ダブリングの LCA を使ったコード片は次のとおりである（完全なプログラムは `snippets/auxiliary-tree/build.cpp`。図の例で頂点数 7・辺の数 10 を出し、DFS 順の距離の公式と一致することも確かめている）。
+最初の頂点は全体の LCA で、圧縮木の根になる。各頂点はスタックに 1 回積まれて高々 1 回取り除かれるので、組み立ては頂点数に比例し、全体の時間はソートと LCA の $O(K \log N)$ で決まる。ダブリングの LCA を使ったコード片は次のとおりである（完全なプログラムは [`snippets/auxiliary-tree/build.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/auxiliary-tree/build.cpp)。図の例で頂点数 7・辺の数 10 を出し、DFS 順の距離の公式と一致することも確かめている）。
 
 ```cpp
 --8<-- "auxiliary-tree/build.cpp:core"
 ```
+
+完全なプログラム：[`build.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/auxiliary-tree/build.cpp)（GitHub）
+{ .kp-code-src }
 
 LCA を[オイラーツアーと Sparse Table](../ds/sparse-table.md) で 1 回 $O(1)$ にすれば、構築はソートの $O(K \log K)$ になる。ソートを 1 回で済ませ、隣り合う 2 点の LCA を求めながら深さで取り除く書き方もある（参考の smijake3 氏の記事に両方がある）。
 

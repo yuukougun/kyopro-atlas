@@ -63,6 +63,9 @@ updated: 2026-10-29
 --8<-- "bipartite-graph/coloring.cpp:core"
 ```
 
+完全なプログラム：[`coloring.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bipartite-graph/coloring.cpp)（GitHub）
+{ .kp-code-src }
+
 各頂点は 1 回だけキューに入り、各辺は両方向から 1 回ずつ見るので、全体で $O(N + M)$ である。DFS で塗っても同じだが、再帰で書くと、パスのような細長いグラフで再帰が $N$ 段の深さになる（[深さ優先探索](../graph/dfs.md)）。BFS かループで書いた DFS なら、その心配がない。
 
 ## 二部グラフでないことと奇閉路があることは同じ {#odd-cycle}
@@ -86,6 +89,9 @@ $$
 ```cpp
 --8<-- "bipartite-graph/odd-cycle.cpp:core"
 ```
+
+完全なプログラム：[`odd-cycle.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bipartite-graph/odd-cycle.cpp)（GitHub）
+{ .kp-code-src }
 
 DFS で塗った場合は、無向グラフの DFS 木に含まれない辺は祖先と子孫を結ぶので、矛盾した辺 $(u, v)$ の一方は他方の祖先である。子孫の側から親をたどって祖先に着くまでの道と辺 $(u, v)$ が奇閉路になる。
 
@@ -124,6 +130,9 @@ DFS で塗った場合は、無向グラフの DFS 木に含まれない辺は�
 ```cpp
 --8<-- "bipartite-graph/dsu-double.cpp:core"
 ```
+
+完全なプログラム：[`dsu-double.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bipartite-graph/dsu-double.cpp)（GitHub）
+{ .kp-code-src }
 
 それまで矛盾がなければ、足した辺の端点 $u$ だけを調べれば足りる。新しい辺 $(u, v)$ で矛盾が生じるのは、$u$ と $v$ がすでに同じグループ（同じ色に決まっていた）ときだけである。このとき対称性から $u + N$ と $v + N$ も同じグループなので、$u$ と $v + N$ を併合すると $u$ と $u + N$ が同じグループになる。逆に、$u$ を含むグループを $A$、$v$ を含むグループを $B$、それぞれの色を入れ替えたグループを $A'$・$B'$ とすると、併合でできるのは $A \cup B'$ と $A' \cup B$ だけである。$A \ne B$ なら、どの頂点 $x$ についても $x$ と $x + N$ はいつも片方ずつに分かれるので、端点以外で矛盾が生じることはない。
 

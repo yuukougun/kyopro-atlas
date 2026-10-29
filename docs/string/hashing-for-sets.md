@@ -102,11 +102,17 @@ XOR は $z \oplus z = 0$ なので、同じ値が 2 個あると打ち消し合�
 --8<-- "hashing-for-sets/range-multiset.cpp:core"
 ```
 
+完全なプログラム：[`range-multiset.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/hashing-for-sets/range-multiset.cpp)（GitHub）
+{ .kp-code-src }
+
 **集合の接頭辞**は、同じ値が何度出ても 1 個として数える。先頭 $i$ 項の集合のハッシュ $h_i$ は、$a_i$ がそれまでに出ていなければ $h_{i+1} = h_i \oplus z(a_i)$、出ていれば $h_{i+1} = h_i$ とする。初めて出たかどうかは `set` などで記録しながら左から作ればよい。こうすると「$a$ の先頭 $x$ 項と $b$ の先頭 $y$ 項が集合として等しいか」が $h^a_x = h^b_y$ の比較 1 回で済む（[ABC250 E](#abc250_e)）。$a$ と $b$ で同じ値には同じ乱数を使う。
 
 ```cpp
 --8<-- "hashing-for-sets/prefix-set.cpp:core"
 ```
+
+完全なプログラム：[`prefix-set.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/hashing-for-sets/prefix-set.cpp)（GitHub）
+{ .kp-code-src }
 
 ただし、**区間の集合**（重複を除いた中身）は累積の差では取り出せない。「初めて出た」かどうかが区間の左端 $l$ によって変わるからである。区間の種類数や集合の一致は、左端を固定して右へ伸ばす[尺取り法](../basics/two-pointers.md)や、クエリを右端の順に並べ、値ごとに最後の出現位置だけを [BIT](../ds/fenwick-tree.md) に持つ方法（オフライン）、[Mo's algorithm](../ds/mo-algorithm.md#what-it-does) で扱う。
 
@@ -119,6 +125,9 @@ ACL の `fenwick_tree` は `unsigned long long` を要素にでき、和があ�
 ```cpp
 --8<-- "hashing-for-sets/update-fenwick.cpp:core"
 ```
+
+完全なプログラム：[`update-fenwick.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/hashing-for-sets/update-fenwick.cpp)（GitHub）
+{ .kp-code-src }
 
 XOR のハッシュを更新したいときは、ACL の `fenwick_tree` は和しか扱えないので、加算を XOR に置き換えた BIT を自分で書くか、XOR を演算にした[セグメント木](../ds/segment-tree.md)を使う。XOR は自分自身が逆元なので、BIT の接頭辞の XOR 2 つから区間の XOR が求まる。
 
@@ -159,6 +168,9 @@ $$
 ```cpp
 --8<-- "hashing-for-sets/mod-k.cpp:core"
 ```
+
+完全なプログラム：[`mod-k.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/hashing-for-sets/mod-k.cpp)（GitHub）
+{ .kp-code-src }
 
 別の符号化として、値 $v$ の $j$ 回目（$j \bmod k$ で $0$〜$k - 2$）の出現に乱数を割り当て、$k - 1$ 番目の乱数を残りの XOR にしておく方法もある。こうすると $k$ 回の出現の XOR がちょうど 0 になり、累積の XOR がそのまま使える。
 

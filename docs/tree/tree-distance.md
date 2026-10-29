@@ -52,6 +52,9 @@ updated: 2026-10-22
 --8<-- "tree-distance/from-one.cpp:core"
 ```
 
+完全なプログラム：[`from-one.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-distance/from-one.cpp)（GitHub）
+{ .kp-code-src }
+
 親へ戻らないことだけを確かめれば、各頂点を 1 回ずつ訪れ、各辺を 2 回ずつ見るので $O(N)$ である。未訪問の印を $\mathrm{dist} = -1$ にすると、負の重みで距離が $-1$ になった頂点を未訪問と取り違える。上のコードのように親を一緒に持てば、印はいらない。
 
 1 点からの距離をそのまま使う典型は「頂点 $K$ を経由して $x$ から $y$ へ行く最短距離」である。木では $x$ から $K$ へのパスと $K$ から $y$ へのパスがどちらも 1 本に決まるので、答えは $d(x, K) + d(K, y)$ になる。$K$ からの距離を 1 回求めておけば、各質問は $O(1)$ で答えられる（[例題](#abc070_d)）。
@@ -106,6 +109,9 @@ XOR の形に直せると、木の上の頂点の組の問題が、列 $S$ の 2
 ```cpp
 --8<-- "tree-distance/xor-count.cpp:core"
 ```
+
+完全なプログラム：[`xor-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-distance/xor-count.cpp)（GitHub）
+{ .kp-code-src }
 
 頂点を 1 つずつ見て、それより前に見た頂点とだけ組にしている。こうすると、$X = 0$ のときに自分自身と組にすることも、同じ組を 2 回数えることも起きない。連想配列に `map` を使うので $O(N \log N)$ である。
 

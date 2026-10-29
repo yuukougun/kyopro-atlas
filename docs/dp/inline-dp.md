@@ -85,6 +85,9 @@ $$
 --8<-- "inline-dp/relax-edges.cpp:core"
 ```
 
+完全なプログラム：[`relax-edges.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/inline-dp/relax-edges.cpp)（GitHub）
+{ .kp-code-src }
+
 この行で読むのは $\mathrm{dist}[a]$ で、書くのは $\mathrm{dist}[b]$ である。$a \ne b$ なら読む値は前の行のままなので、1 本の配列で正しい。$a = b$ でも、$c \ge 0$ なら値は変わらない。
 
 同じ形は、値を添字にした DP にも現れる。[LIS](../dp/lis.md#binary-search) の二分探索版は「長さ $\ell$ の増加列の末尾の最小」を添字 $\ell$ の配列に持ち、要素を 1 つ読むたびに 1 か所だけを書き換える。重み付きの LIS をセグメント木で解くのも、1 点の更新と範囲の取得だけで行を進める同じ考え方である（[dp の値をセグメント木に載せる](../dp/dp-segment-tree.md#values-on-segment-tree)）。
@@ -113,6 +116,9 @@ $$
 --8<-- "inline-dp/shift.cpp:core"
 ```
 
+完全なプログラム：[`shift.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/inline-dp/shift.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 足し込む値 $\mathrm{dp}[t][x_j]$ は、ずらす前の時刻 $t$ の値である。追加の辺どうしが $y_j = x_{j'}$ のようにつながっていると、先に書き込んだ値を後の辺が読んでしまう。そこで、すべての辺の読み出しを先に済ませ、それから書き込む。コードの 2 つのループはこのためにある。
 
 **応用の型**：添字が時刻とともに一定の速さで動く状態（円環を回る・毎ターン全員が 1 歩進む・毎回 1 ずつ増える値）は、ずらしで写しにできる。全体への一律の加算も同時にあるなら、オフセットの変数をもう 1 つ持つ。逆向き（$v \to v - 1$）なら読み替えを $a[(v + t) \bmod N]$ にする。
@@ -138,6 +144,9 @@ $$
 ```cpp
 --8<-- "inline-dp/intervals.cpp:core"
 ```
+
+完全なプログラム：[`intervals.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/inline-dp/intervals.cpp)（GitHub）
+{ .kp-code-src }
 
 各位置で区間最大と 1 点の書き込みを 1 回ずつ、各区間で区間加算を 1 回行うので、全体 $O((N + M) \log N)$ である。
 
@@ -166,6 +175,9 @@ $i$ を 1 つ進めるたびに、始点 $j$ ごとの値 $g_i[j] = \mathrm{dp}[
     ```cpp
     --8<-- "inline-dp/stack-lazy.cpp:core"
     ```
+
+    完全なプログラム：[`stack-lazy.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/inline-dp/stack-lazy.cpp)（GitHub）
+    { .kp-code-src }
 
 区間の長さに下限 $L$ があるなら、最後に読む範囲を $[0, i - L + 1)$ に縮める。$i < L$ では読む範囲が空になり、`prod` は `e()` ＝ $+\infty$ を返す。これは行けない状態を表すので、そのまま木に書いてよい。後から足される量は最大 − 最小の幅までなので、あふれない。
 

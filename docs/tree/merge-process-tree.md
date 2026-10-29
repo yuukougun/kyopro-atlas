@@ -66,6 +66,9 @@ updated: 2026-10-29
 --8<-- "merge-process-tree/usage.cpp:build"
 ```
 
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/merge-process-tree/usage.cpp)（GitHub）
+{ .kp-code-src }
+
 ## ある時点のグループは DFS 順の区間 {#group-as-interval}
 
 この節は[オイラーツアー](../tree/euler-tour.md#in-out)と[ダブリング](../basics/doubling.md)を前提にする。
@@ -84,6 +87,9 @@ $p$ は「重みが $t$ 以下」という根へ向かって崩れる条件を�
 ```cpp
 --8<-- "merge-process-tree/usage.cpp:query"
 ```
+
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/merge-process-tree/usage.cpp)（GitHub）
+{ .kp-code-src }
 
 合流の操作とグループについての質問が交互に来る問題でも、すべての操作を先に読めば（[オフライン](../guide/glossary.md#offline)）、合流の列から木を作り、各質問を「質問の時点のグループを表す頂点の区間」に置き換えられる。種類ごとの個数なら、種類ごとに葉の番号を並べておけば、区間に入る個数を二分探索で数えられる。
 
@@ -127,7 +133,7 @@ $p$ は「重みが $t$ 以下」という根へ向かって崩れる条件を�
 - **同じ重みの辺**：重みの等しい辺がいくつあっても、併合ごとに頂点を作れば性質は崩れない。重みの等しい親子ができるだけである。
 - **再帰の深さ**：一列に併合すると木の高さが $N$ になる。DFS は非再帰にするか、新しい頂点の番号が子より大きいことを使って番号の大きい順に処理する。
 
-Library Checker に併合過程の木そのものを確かめる問題はない（2026-10-22 に問題の一覧で確かめた）。部品ごとに確かめ、全体は小さなグラフで愚直な方法と比べる。コード片 `snippets/merge-process-tree/usage.cpp` は、乱数のグラフで、重み $t$ 以下の辺だけを Union-Find に入れた結果とグループ・ボトルネックを比べている。
+Library Checker に併合過程の木そのものを確かめる問題はない（2026-10-22 に問題の一覧で確かめた）。部品ごとに確かめ、全体は小さなグラフで愚直な方法と比べる。コード片 [`snippets/merge-process-tree/usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/merge-process-tree/usage.cpp) は、乱数のグラフで、重み $t$ 以下の辺だけを Union-Find に入れた結果とグループ・ボトルネックを比べている。
 
 - [Lowest Common Ancestor](https://judge.yosupo.jp/problem/lca)：LCA の部分
 - [Jump on Tree](https://judge.yosupo.jp/problem/jump_on_tree)：ダブリングで祖先へ跳ぶ部分

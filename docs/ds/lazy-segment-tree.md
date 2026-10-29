@@ -119,11 +119,17 @@ updated: 2026-10-29
 --8<-- "lazy-segment-tree/add-min.cpp:core"
 ```
 
+完全なプログラム：[`add-min.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lazy-segment-tree/add-min.cpp)（GitHub）
+{ .kp-code-src }
+
 区間代入では「何もしない」を表す値が要る。代入されうる値と重ならない番兵を `id()` にする。後から来た代入が前の代入を上書きするので、`composition(f, g)` は $f$ が番兵でなければ $f$ を返す。
 
 ```cpp
 --8<-- "lazy-segment-tree/assign-max.cpp:core"
 ```
+
+完全なプログラム：[`assign-max.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lazy-segment-tree/assign-max.cpp)（GitHub）
+{ .kp-code-src }
 
 最小値と最大値を入れ替えるには、`op` と `e` だけを変える（最小値なら `min` と大きい番兵、最大値なら `max` と小さい番兵）。
 
@@ -149,6 +155,9 @@ updated: 2026-10-29
 ```cpp
 --8<-- "lazy-segment-tree/affine-sum.cpp:core"
 ```
+
+完全なプログラム：[`affine-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lazy-segment-tree/affine-sum.cpp)（GitHub）
+{ .kp-code-src }
 
 初期値の葉は `{a[i], 1}` のように長さ 1 で作る。長さ 0 の葉にすると、加算しても和が増えない（[境界](#boundaries)）。
 
@@ -187,6 +196,9 @@ ACL の 3 つの関数の意味と、引数の順序は次のとおりである�
 ```cpp
 --8<-- "lazy-segment-tree/dual-add.cpp:core"
 ```
+
+完全なプログラム：[`dual-add.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lazy-segment-tree/dual-add.cpp)（GitHub）
+{ .kp-code-src }
 
 代入やアフィン変換のように可換でない作用では、経路上の保留を集める順序が答えを変える。区間作用の前に、区間の両端へ向かう経路の保留を上から push しておくと、新しい作用を置くノードの祖先には保留が残らない。よって経路上では「上ほど新しい作用」という順序が保たれる。一点の値を求めるときは、葉に近い保留から順に初期値へ施し、根の保留を最後に施す。手で書くのが面倒なら、ACL の `lazy_segtree` で `get` だけを使ってもよい。
 
@@ -355,6 +367,9 @@ ACL の実装は再帰を使わず、下から上へ書いている。区間作�
     ```cpp
     --8<-- "lazy-segment-tree/own.cpp:core"
     ```
+
+    完全なプログラム：[`own.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lazy-segment-tree/own.cpp)（GitHub）
+    { .kp-code-src }
 
     試験では、区間加算・区間最小値と、作用が可換でない区間アフィン・区間和の 2 つで、乱数の操作の列を素朴な方法と比べた。`all_apply` の合成の向きを逆にしたり、`set` の前の push を忘れたりすると、この試験で見つかる。`max_right` を足すなら、[セグメント木上の二分探索](../ds/segment-tree-binary-search.md#complexity)の再帰の `search` で、子を探す前に `push(k)` を呼ぶ。祖先の保留を降ろしてから子の値を読むためである。名前の約束は[インターフェースの決め方](../guide/library-design.md#interface)、確かめ方は[動作確認の手順](../guide/library-design.md#verify)にある。
 

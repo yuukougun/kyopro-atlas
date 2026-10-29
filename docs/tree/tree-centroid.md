@@ -59,6 +59,9 @@ $$
 --8<-- "tree-centroid/centroid.cpp:core"
 ```
 
+完全なプログラム：[`centroid.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-centroid/centroid.cpp)（GitHub）
+{ .kp-code-src }
+
 **重心は必ずある**。次の図のように、適当な頂点から始めて「最大の成分の方の隣」へ 1 歩ずつ動くと、いつか重心で止まる。
 
 ![10 頂点の木で、頂点 0（最大の成分 9）から 1（8）へ、1 から 2（4）へ動いて止まる。2 を取り除くと 2・4・3 頂点の成分に分かれ、どれも 5 以下](../img/tree-centroid/walk.svg)
@@ -116,6 +119,9 @@ $$
 ```cpp
 --8<-- "tree-centroid/pair-across.cpp:core"
 ```
+
+完全なプログラム：[`pair-across.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-centroid/pair-across.cpp)（GitHub）
+{ .kp-code-src }
 
 前半と後半を逆順に組む（$i$ 番目と $2k - 1 - i$ 番目）と、列の真ん中をまたぐ枝の頂点どうしが組になりうるので、同じ向きにずらして組む。
 

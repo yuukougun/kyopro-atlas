@@ -55,6 +55,9 @@ updated: 2026-10-22
 --8<-- "construction/small-cases.cpp:core"
 ```
 
+完全なプログラム：[`small-cases.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/construction/small-cases.cpp)（GitHub）
+{ .kp-code-src }
+
 `brute` を $N = 1$ から $8$ まで動かすと、次の列が出る。
 
 ```text
@@ -145,6 +148,9 @@ updated: 2026-10-22
 ```cpp
 --8<-- "construction/checker.cpp:core"
 ```
+
+完全なプログラム：[`checker.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/construction/checker.cpp)（GitHub）
+{ .kp-code-src }
 
 チェッカーは、次の 2 つと組み合わせて使う。
 

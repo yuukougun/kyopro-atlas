@@ -126,12 +126,15 @@ $x = 0, \dots, d$ の値から $f(t)$ を返す関数と、それを使うべき
 --8<-- "lagrange-interpolation/eval.cpp:core"
 ```
 
+完全なプログラム：[`eval.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lagrange-interpolation/eval.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 - $t \le d$ なら $y_t$ をそのまま返す。$t$ が負の場合や $p$ 以上の場合も、$t$ を $p$ で割った余りを使えばよい（多項式の値は $t \bmod p$ だけで決まる）。
 - 分子を「全体の積 $\prod_j (t - j)$ を $(t - i)$ で割る」で求めない。$t \bmod p$ が $0, \dots, d$ のどれかと一致すると 0 で割ることになる（$t = p$ や $t = p + 1$ で起きる）。前後からの積なら割り算がない。
 - 点の数は次数より 1 つ多い。べき乗和 $\sum_{i \le n} i^k$ は $k + 1$ 次なので $k + 2$ 点が要る。1 つ少ないと、値は出るが誤った答えになる。
 - 階乗の逆元を使うので $d < p$ が必要である。法が $10^9 + 7$ や 998244353 なら問題にならない。
 
-完全なプログラム（`snippets/lagrange-interpolation/eval.cpp`）は、小さい $k$・$n$ で愚直な和と比べ、$n = p$ のように $t \bmod p$ が標本点と重なる場合も確かめたものである。
+完全なプログラム（[`snippets/lagrange-interpolation/eval.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lagrange-interpolation/eval.cpp)）は、小さい $k$・$n$ で愚直な和と比べ、$n = p$ のように $t \bmod p$ が標本点と重なる場合も確かめたものである。
 
 Library Checker の対応：
 

@@ -63,6 +63,9 @@ updated: 2026-10-22
 --8<-- "prime-factorization/factorize.cpp:core"
 ```
 
+完全なプログラム：[`factorize.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/prime-factorization/factorize.cpp)（GitHub）
+{ .kp-code-src }
+
 ループの条件に今の $N$ を使うので、割るたびに上限が下がる。最悪は $N$ が素数か、$\sqrt{N}$ に近い 2 つの素数の積のときで、$i$ は $\sqrt{N}$ 付近まで進む。それでも $O(\sqrt{N})$ で、$N = 10^{12}$ なら $10^6$ 回程度で済む。$N = 1$ ならループに入らず、空の分解（素因数なし）を返す。
 
 ??? question "確認問題：残る素因数はいくつまでか"
@@ -107,6 +110,9 @@ $$
 ```cpp
 --8<-- "prime-factorization/legendre.cpp:core"
 ```
+
+完全なプログラム：[`legendre.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/prime-factorization/legendre.cpp)（GitHub）
+{ .kp-code-src }
 
 公式の使い方には次の型がある。
 

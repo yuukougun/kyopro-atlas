@@ -122,6 +122,9 @@ add(i, x):               # a_i ← a_i + x
     --8<-- "fenwick-tree/own-bit.cpp:core"
     ```
 
+    完全なプログラム：[`own-bit.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/fenwick-tree/own-bit.cpp)（GitHub）
+    { .kp-code-src }
+
     試験では、区間の和と `lower_bound` の答えを、素朴に足した値と照らし合わせている。線形時間の構築は、`BIT(n)` から `add` を $N$ 回呼んで作った中の配列と比べている。Library Checker の [Point Add Range Sum](https://judge.yosupo.jp/problem/point_add_range_sum) が同じ形の問題である。名前の約束は[インターフェースの決め方](../guide/library-design.md#interface)、確かめ方は[動作確認の手順](../guide/library-design.md#verify)にある。
 
 ## 境界（添字の変換・i = 0・符号なし整数） {#boundaries}
@@ -142,6 +145,9 @@ BIT のバグは、ほとんどが次の境界で起きる。
 --8<-- "fenwick-tree/acl-usage.cpp:core"
 ```
 
+完全なプログラム：[`acl-usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/fenwick-tree/acl-usage.cpp)（GitHub）
+{ .kp-code-src }
+
 ## 値を添字にして数える（座標圧縮と組む） {#count-by-value}
 
 BIT が最もよく出るのは、列の位置ではなく値を添字にして「これまでに出た値の個数」を持つ使い方である。「$j < i$ かつ $A_j \le A_i$ となる $j$ の個数」を各 $i$ について求めるなら、左から順に次をくり返す。
@@ -156,6 +162,9 @@ BIT が最もよく出るのは、列の位置ではなく値を添字にして�
 ```cpp
 --8<-- "fenwick-tree/count-by-value.cpp:core"
 ```
+
+完全なプログラム：[`count-by-value.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/fenwick-tree/count-by-value.cpp)（GitHub）
+{ .kp-code-src }
 
 この形からいくつかの型に広がる。
 
@@ -183,6 +192,9 @@ $d_k$ を足す BIT と $k \, d_k$ を足す BIT の 2 本を持てば、区間�
 ```cpp
 --8<-- "fenwick-tree/range-add-sum.cpp:core"
 ```
+
+完全なプログラム：[`range-add-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/fenwick-tree/range-add-sum.cpp)（GitHub）
+{ .kp-code-src }
 
 **2 次元 BIT**：$t[i][j]$ を「行 $(i - \mathrm{lowbit}(i), i]$・列 $(j - \mathrm{lowbit}(j), j]$ の長方形の和」とし、add と sum のループを入れ子にする。一点加算と、原点を角とする長方形の和が $O(\log H \log W)$ で、任意の長方形の和は 4 つの長方形の和の足し引き（[2 次元累積和](../basics/prefix-sum-2d.md)と同じ）になる。領域は $O(HW)$ なので、座標が大きいときは使えない。点を先に知っているなら、一方でソートして 1 次元の BIT にする[平面走査](../ds/sweep-line-2d.md)の方が軽い。
 

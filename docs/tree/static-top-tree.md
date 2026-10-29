@@ -113,17 +113,23 @@ HL 分解の方法で $\log$ が 2 つ付くのは、重いパスごとのセグ
 
 ACL に Static Top Tree はない。自作するときは、木の形から二分木を作る部分と、問題ごとの DP の部分を分ける。木の形の部分は一度書けば使い回せ、問題ごとに書くのは 2 種類の値と 5 つの操作の関数だけになる。ei1333 氏の Luzhiled's Library の Static Top Tree DP も、利用者が `vertex`・`add_vertex`・`add_edge`・`rake`・`compress` の 5 つを渡す形になっている。
 
-二分木を作る部分の中心は次のようになる。`add(k, l, r, t)` は節点 $k$（$-1$ なら新しく作る）を、子 $l$・$r$ と種類 $t$ の節点にする関数である。完全なプログラムは `snippets/static-top-tree/stt.cpp` にあり、親の番号が子より小さい入力を前提にし、部分木サイズを番号の逆順で求めて再帰を避けている。頂点 $v$ を表す節点（頂点・頂点を付ける）の番号を $v$ にしておくと、更新のときに出発点を探さずに済む。
+二分木を作る部分の中心は次のようになる。`add(k, l, r, t)` は節点 $k$（$-1$ なら新しく作る）を、子 $l$・$r$ と種類 $t$ の節点にする関数である。完全なプログラムは [`snippets/static-top-tree/stt.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/static-top-tree/stt.cpp) にあり、親の番号が子より小さい入力を前提にし、部分木サイズを番号の逆順で求めて再帰を避けている。頂点 $v$ を表す節点（頂点・頂点を付ける）の番号を $v$ にしておくと、更新のときに出発点を探さずに済む。
 
 ```cpp
 --8<-- "static-top-tree/stt.cpp:build"
 ```
+
+完全なプログラム：[`stt.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/static-top-tree/stt.cpp)（GitHub）
+{ .kp-code-src }
 
 DP の部分は、5 つの操作を `switch` で書き分け、更新では頂点 $v$ の節点から親をたどって計算し直す。上の例のハッシュの場合は次のとおりである。
 
 ```cpp
 --8<-- "static-top-tree/stt.cpp:dp"
 ```
+
+完全なプログラム：[`stt.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/static-top-tree/stt.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 自作するときの要点は次のとおりである。
 

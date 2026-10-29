@@ -102,6 +102,9 @@ $u$ と $v$ の最大・最小の 4 つを 1 回の走査で求めれば $O(N)$ 
 --8<-- "manhattan-chebyshev/farthest-pair.cpp:core"
 ```
 
+完全なプログラム：[`farthest-pair.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/manhattan-chebyshev/farthest-pair.cpp)（GitHub）
+{ .kp-code-src }
+
 **ある点から最も遠い点**も同じ形である。点 $(x, y)$ を $(u_0, v_0)$ に移すと、最も遠い点までの距離は次の 4 つの最大になる。
 
 $$
@@ -120,6 +123,9 @@ $S$ に $x + y$・$-(x + y)$・$x - y$・$-(x - y)$ の 4 つを持たせ、`op`
 ```cpp
 --8<-- "manhattan-chebyshev/segtree-farthest.cpp:core"
 ```
+
+完全なプログラム：[`segtree-farthest.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/manhattan-chebyshev/segtree-farthest.cpp)（GitHub）
+{ .kp-code-src }
 
 `e()` に `LLONG_MIN` そのものを使うと、空の区間で `m.a[1] + (x + y)` などがあふれる。`LLONG_MIN / 4` のように余裕を持たせるか、空の区間を問い合わせないことを確かめる。
 
@@ -140,6 +146,9 @@ $$
 ```cpp
 --8<-- "manhattan-chebyshev/chebyshev-sum.cpp:core"
 ```
+
+完全なプログラム：[`chebyshev-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/manhattan-chebyshev/chebyshev-sum.cpp)（GitHub）
+{ .kp-code-src }
 
 軸に分ける考え方は、和の最小や個数の数え上げにも使える。
 
@@ -206,6 +215,9 @@ $$
 ```cpp
 --8<-- "manhattan-chebyshev/diamond-count.cpp:core"
 ```
+
+完全なプログラム：[`diamond-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/manhattan-chebyshev/diamond-count.cpp)（GitHub）
+{ .kp-code-src }
 
 切り詰めを忘れると、$D$ が大きいときに配列の外を読む。回転後の配列の空のマス（$u$ と $v$ の偶奇が違うマス）は 0 のままなので、正方形が空のマスを含んでも個数は正しい。
 

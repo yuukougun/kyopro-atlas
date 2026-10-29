@@ -90,6 +90,9 @@ $r = 3$ で値 1 が再び現れ、1 は位置 0 から位置 2 へ移る。$r =
 --8<-- "offline-queries/distinct-count.cpp:core"
 ```
 
+完全なプログラム：[`distinct-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/offline-queries/distinct-count.cpp)（GitHub）
+{ .kp-code-src }
+
 計算量は、クエリのソートが $O(Q \log Q)$、右端を伸ばす処理が全体で $N$ 回、区間和が $Q$ 回なので、合わせて $O(Q \log Q + (N + Q) \log N)$ である。領域は $O(N + Q)$ で済む。
 
 !!! info "ACL では"
@@ -106,6 +109,9 @@ $r = 3$ で値 1 が再び現れ、1 は位置 0 から位置 2 へ移る。$r =
 ```cpp
 --8<-- "offline-queries/threshold.cpp:core"
 ```
+
+完全なプログラム：[`threshold.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/offline-queries/threshold.cpp)（GitHub）
+{ .kp-code-src }
 
 同じ形で載るものの例を挙げる。
 

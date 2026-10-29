@@ -88,6 +88,9 @@ $s$ と $t$ の 1 組だけを問われたら、最小全域木を作らずに�
 --8<-- "bottleneck-path/pair.cpp:core"
 ```
 
+完全なプログラム：[`pair.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bottleneck-path/pair.cpp)（GitHub）
+{ .kp-code-src }
+
 ソートが $O(M \log M)$、併合と判定が $M$ 回でならし $O(M \alpha(N))$ なので、全体で $O(M \log M)$ である。[答えで二分探索](../basics/binary-search-answer.md#minimax)して連結判定をくり返す書き方でも解けるが、昇順に足す方が速い。答えが辺の重みそのものなので、実数でも二分探索の打ち切りの誤差が出ない（[二分探索と連結判定の組合せ](../graph/union-find-connectivity.md#binary-search)）。
 
 !!! info "ACL では"
@@ -120,6 +123,9 @@ $Q$ 組の $(u_i, v_i)$ について $b(u_i, v_i)$ を答えるとき、1 組ず
 ```cpp
 --8<-- "bottleneck-path/many-queries.cpp:core"
 ```
+
+完全なプログラム：[`many-queries.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bottleneck-path/many-queries.cpp)（GitHub）
+{ .kp-code-src }
 
 **計算量**：1 回の併合で見る番号の数は 2 つの一覧の短い方の長さで、頂点数の小さい成分の一覧の長さ以下である。見た回数は、頂点数の小さい成分の写し 1 つにつき 1 回として数える。数えられた写しの成分は、併合で頂点数が 2 倍以上になる。頂点数は $N$ を超えないので、1 つの写しが数えられるのは $\log_2 N$ 回までである。写しは $2Q$ 個なので、見る回数は合わせて $O(Q \log N)$ で、全体は $O(M \log M + Q \log N \cdot \alpha(N))$ になる。
 
@@ -173,6 +179,9 @@ $f$ は最小ボトルネックなので、辺を重みの昇順に併合する�
     ```cpp
     --8<-- "bottleneck-path/matching.cpp:core"
     ```
+
+    完全なプログラム：[`matching.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bottleneck-path/matching.cpp)（GitHub）
+    { .kp-code-src }
 
     この貪欲が最適である理由は、しきい値ごとの上限で示せる。重み $x$ 以下の辺だけのグラフを考え、その各成分 $c$ の $A$ の数を $a_c$、$B$ の数を $b_c$ とする。値 $x$ 以下の組は同じ成分の中でしか作れないので、どの組み方でも、その数は $\sum_c \min(a_c, b_c)$ を超えない。貪欲は、各成分で $A$ か $B$ の一方を使い切るので、すべての $x$ でこの上限にちょうど等しい。組の値の和は、しきい値 $x$ ごとに「値が $x$ より大きい組の数」を積み上げたもので、貪欲はどの $x$ でもその数を最小にしている。よって和も最小である。
 

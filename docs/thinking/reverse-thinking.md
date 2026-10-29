@@ -52,6 +52,9 @@ updated: 2026-10-22
 --8<-- "reverse-thinking/multiples-parity.cpp:core"
 ```
 
+完全なプログラム：[`multiples-parity.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/reverse-thinking/multiples-parity.cpp)（GitHub）
+{ .kp-code-src }
+
 内側のループは $N / i$ 回なので、合計は $N / 1 + N / 2 + \cdots + N / N$ で $O(N \log N)$ である（[倍数の箱を後ろから決める](../math/harmonic-sum.md#decide-from-back)）。この例では、どの $i$ でも $b_i$ がちょうど 1 通りに決まる。だから答えは必ず存在し、しかも 1 つしかない。
 
 一意に決まる理由は「依存の向き」にある。条件 $i$ が後ろの値だけを参照するなら、依存の矢印はすべて後ろから前へ向くので、後ろから決める順は依存を壊さない（この矢印の向きでの[トポロジカルソート](../graph/topological-sort.md)の順そのものである）。文字列でも同じことが起きる。単語の連結に区切る問題では、末尾から照合すると、末尾に一致する単語がいつも高々 1 つになる組合せがある（[例題 ARC065 C](#arc065_a)）。前から照合すると「dream」で切るか「dreamer」で切るかが分かれるが、後ろからは分かれない。

@@ -88,6 +88,9 @@ g++-15 -std=gnu++23 -O2 -Wall -Wextra -march=native -ftrivial-auto-var-init=zero
 --8<-- "cpp-environment/gnu-mode.cpp:core"
 ```
 
+完全なプログラム：[`gnu-mode.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-environment/gnu-mode.cpp)（GitHub）
+{ .kp-code-src }
+
 g++-13・g++-15 の `-std=gnu++23` では `3 2 6` と出る。`-std=c++23` では 3 か所ともエラーになる。
 
 - `typeof`：`'typeof' was not declared in this scope`。GNU 拡張で、規格では `decltype` を使う
@@ -110,6 +113,9 @@ g++-13・g++-15 の `-std=gnu++23` では `3 2 6` と出る。`-std=c++23` で�
 --8<-- "cpp-environment/auto-var-init-cost.cpp:core"
 ```
 
+完全なプログラム：[`auto-var-init-cost.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-environment/auto-var-init-cost.cpp)（GitHub）
+{ .kp-code-src }
+
 手元で `f` を $2 \times 10^5$ 回呼ぶと（$k = 1$）、オプションなしの `-O2` で 0.05 秒、`-ftrivial-auto-var-init=zero` を付けて 1.03 秒だった（g++-13・g++-15 で同じ程度）。手元では速いのに AtCoder でだけ TLE する、という形になる。作業用の配列は、グローバルに置くか、外で 1 回だけ確保して使い回す。
 
 - **版**：GCC 12 からのオプションである。g++-13・g++-15 で同じ結果だった
@@ -126,6 +132,9 @@ g++-13・g++-15 の `-std=gnu++23` では `3 2 6` と出る。`-std=c++23` で�
 --8<-- "cpp-environment/fma.cpp:core"
 ```
 
+完全なプログラム：[`fma.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-environment/fma.cpp)（GitHub）
+{ .kp-code-src }
+
 平行な 2 つのベクトル $(0.1, 0.3)$ と $(0.1, 0.3)$ の外積は、手元の `-O2` では `0` になった。同じコードに `-march=native` を付けると（手元の CPU は FMA を持つ）、`1.66533e-18` と正の値になった。$(0.7, 0.3)$ どうしでは `-1.33227e-17` と負になった（g++-13・g++-15 で同じ）。ジャッジの CPU が FMA を持てば、AtCoder でも同じことが起こりうる。
 
 - **影響**：小数の外積の符号で向きを判定するコードは、`== 0` の判定や符号が手元と変わりうる。整数の座標なら整数のまま外積を求める（[誤差の扱い](../geometry/geometry-precision.md#integer-comparison)）
@@ -139,6 +148,9 @@ AtCoder はコンパイルのときに `-DATCODER -DONLINE_JUDGE` を付ける�
 --8<-- "cpp-environment/judge-macros.cpp:core"
 ```
 
+完全なプログラム：[`judge-macros.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-environment/judge-macros.cpp)（GitHub）
+{ .kp-code-src }
+
 AtCoder と同じ `-DATCODER -DONLINE_JUDGE` を付けると `judge`、付けなければ `local` と出る。手元のデバッグ出力を `#ifndef ONLINE_JUDGE` で囲めば、提出では消える。手元で `-DLOCAL` を付けて `#ifdef LOCAL` と書く流儀もある（[#ifdef LOCAL・#ifndef ONLINE_JUDGE](../cpp/cpp-macros-template-file.md#ifdef-local)）。
 
 - **落とし穴**：`ONLINE_JUDGE` を定義するかはジャッジごとに違う。ほかのジャッジでは、デバッグ出力が消えずに WA になることがある。手元でだけ `-DLOCAL` を付ける方法なら、どのジャッジでも確実に消える
@@ -151,6 +163,9 @@ AtCoder の ACL は v1.6（2025-05 公開）である。v1.5 からの互換性�
 --8<-- "cpp-environment/acl-version.cpp:core"
 ```
 
+完全なプログラム：[`acl-version.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-environment/acl-version.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 v1.6 では `-1` と出る。v1.5 以前では `static_assert` で止まる（外せば `4294967295` と出る）。古い版なら、GitHub の atcoder/ac-library の Releases から v1.6 を入れ直す。`atcoder/modint.hpp` の `val()` の宣言を見ても分かる。
 
 ## 再帰の深さとスタック：手元の上限・ulimit -s unlimited・非再帰への書き直し {#stack-depth}
@@ -162,6 +177,9 @@ v1.6 では `-1` と出る。v1.5 以前では `static_assert` で止まる（�
 ```cpp
 --8<-- "cpp-environment/stack-dfs.cpp:core"
 ```
+
+完全なプログラム：[`stack-dfs.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-environment/stack-dfs.cpp)（GitHub）
+{ .kp-code-src }
 
 | ビルド（`ulimit -s 8192`、g++-15） | 通った深さ | 落ちた深さ |
 | --- | --- | --- |
@@ -176,6 +194,9 @@ v1.6 では `-1` と出る。v1.5 以前では `static_assert` で止まる（�
 ```cpp
 --8<-- "cpp-environment/stack-limit.cpp:core"
 ```
+
+完全なプログラム：[`stack-limit.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-environment/stack-limit.cpp)（GitHub）
+{ .kp-code-src }
 
 **AtCoder の上限**。2023-06 の第三者の記事では、AtCoder のコードテストで調べた上限が 1048576 KiB（1 GiB）だった。2025-10 の新ジャッジでの値は、この教材では確かめていない。上のコードをコードテストで動かせば分かる。AtCoder では深い再帰も通ることが多いが、上限は提出先ごとに違うので、深さ $10^6$ を超えるときや上限が分からないときは非再帰に書き直す。
 
@@ -256,6 +277,9 @@ AtCoder の GCC 15.2 で通る C++23 の機能のうち、次のものは g++-13
 --8<-- "cpp-environment/gcc14-15.cpp:core"
 ```
 
+完全なプログラム：[`gcc14-15.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-environment/gcc14-15.cpp)（GitHub）
+{ .kp-code-src }
+
 g++-15 では `6` と `[1, 2, 3] 3 5` と出る。g++-13 で 1 つずつ試したエラーは次のとおりだった。
 
 | 機能 | GCC | g++-13 のエラー | 書き換え |
@@ -280,6 +304,9 @@ AtCoder は `-std=gnu++23` なので、GCC 15 が持っていても C++26 の機
 ```cpp
 --8<-- "cpp-environment/placeholder.cpp:core"
 ```
+
+完全なプログラム：[`placeholder.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-environment/placeholder.cpp)（GitHub）
+{ .kp-code-src }
 
 g++-15 では `name-independent declarations only available with '-std=c++2c'` と警告して `6` と出る。g++-13 では `conflicting declaration` のエラーになる。警告の出るコードは、提出の前に名前を付け直しておく。
 

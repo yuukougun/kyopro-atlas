@@ -66,6 +66,9 @@ ACL の `dsu` は `leader` の中で経路圧縮をするので、取り消し�
 --8<-- "rollback-union-find/version-tree.cpp:core"
 ```
 
+完全なプログラム：[`version-tree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rollback-union-find/version-tree.cpp)（GitHub）
+{ .kp-code-src }
+
 自作のほかに、公開されているライブラリ（[参考](#references)の ei1333 氏・Nyaan 氏のもの）も使える。ただし ei1333 氏のものの snapshot は記録を捨てて今の時点を基準にし、rollback は引数なしでその時点まで戻す形で、上の説明の snapshot（併合の回数を返す）とは意味が違う。
 
 Library Checker で確かめるなら、[練習問題](#practice)の Persistent Unionfind（版の木を DFS でたどる）が使える。名前の約束は[インターフェースの決め方](../guide/library-design.md#interface)、確かめ方は[動作確認の手順](../guide/library-design.md#verify)にある。
@@ -95,6 +98,9 @@ ABC で出てくるのは、根付き木を DFS しながら、頂点に入る�
 ```cpp
 --8<-- "rollback-union-find/version-tree.cpp:dfs"
 ```
+
+完全なプログラム：[`version-tree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rollback-union-find/version-tree.cpp)（GitHub）
+{ .kp-code-src }
 
 質問のたびにすぐ答える必要がある（オンライン）なら、DFS の順に並べ替えられないので、過去の時点の判定ができる[部分永続 Union-Find](../ds/partially-persistent-union-find.md#what-it-does) や[永続データ構造](../ds/persistent-data-structures.md)を使う。
 

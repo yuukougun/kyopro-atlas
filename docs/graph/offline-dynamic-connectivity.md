@@ -81,17 +81,23 @@ dfs(node):
 - ノードの数は $O(Q)$、葉での質問は $Q$ 回以下で、1 回 $O(\log N)$ である。
 - 合わせて時間 $O(N + Q \log Q \log N)$ になる。ノードに載せた辺のメモリは $O(Q \log Q)$ である。
 
-次のコード片は、時刻の区間に辺を載せる関数と DFS である（完全なプログラムは `snippets/offline-dynamic-connectivity/usage.cpp`。ロールバックできる Union-Find も同じファイルにある）。
+次のコード片は、時刻の区間に辺を載せる関数と DFS である（完全なプログラムは [`snippets/offline-dynamic-connectivity/usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/offline-dynamic-connectivity/usage.cpp)。ロールバックできる Union-Find も同じファイルにある）。
 
 ```cpp
 --8<-- "offline-dynamic-connectivity/usage.cpp:core"
 ```
+
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/offline-dynamic-connectivity/usage.cpp)（GitHub）
+{ .kp-code-src }
 
 クエリを読んで辺の区間を作り、葉で答える部分は次のようになる。クエリは「0 u v」（辺の追加）・「1 u v」（辺の削除）・「2 u v」（連結か）・「3」（連結成分の数）の 4 種類とし、頂点は 1-indexed で読んで直後に 1 を引く。
 
 ```cpp
 --8<-- "offline-dynamic-connectivity/usage.cpp:usage"
 ```
+
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/offline-dynamic-connectivity/usage.cpp)（GitHub）
+{ .kp-code-src }
 
 時刻の約束や取り消しの回数など、自作するときの注意は[自作するときの要点](#library)にまとめた。
 

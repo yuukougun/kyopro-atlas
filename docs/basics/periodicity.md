@@ -71,6 +71,9 @@ $K < \mu$ のときは記録した列をそのまま読む。$K \ge \mu$ のと�
 --8<-- "periodicity/rho.cpp:core"
 ```
 
+完全なプログラム：[`rho.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/periodicity/rho.cpp)（GitHub）
+{ .kp-code-src }
+
 ??? question "確認問題：何回で周期が見つかるか"
     状態が $10^5$ 種類のとき、$\mathrm{first}$ に記録しながら進めるループは最大で何回まわるか。
 
@@ -125,6 +128,9 @@ $$
 ```cpp
 --8<-- "periodicity/period-count.cpp:core"
 ```
+
+完全なプログラム：[`period-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/periodicity/period-count.cpp)（GitHub）
+{ .kp-code-src }
 
 - **2 次元の盤面**：模様が縦 $P$・横 $Q$ の周期で敷き詰められているなら、同じ考え方を両方向に使う。長方形 $[0, X) \times [0, Y)$ を、完全な周期の塊・端の帯・角の余りに分け、1 周期分の[2 次元累積和](../basics/prefix-sum-2d.md)で数える。任意の長方形は 4 つの $f$ の足し引きにする
 - **面積が半端な模様**：三角形の模様などで面積が 0.5 単位になるなら、2 倍した面積を整数で数え、最後に 2 で割る（問題が面積の 2 倍を答えさせるなら割らない）

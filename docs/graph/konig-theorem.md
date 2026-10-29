@@ -108,6 +108,9 @@ $$
 --8<-- "konig-theorem/cover.cpp:core"
 ```
 
+完全なプログラム：[`cover.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/konig-theorem/cover.cpp)（GitHub）
+{ .kp-code-src }
+
 コード片では、元の辺の容量を $\infty$ ではなく 1 にしている。重みのない場合はこれでも被覆が正しく取り出せ、容量がすべて 1 なので ACL の計算量の上限 $O((n + m)\sqrt{m})$ がそのまま使える。重みのある場合は 1 にしてはいけない（[落とし穴](#pitfalls)）。
 
 ??? note "証明：元の辺の容量を 1 にしても、取り出した集合が被覆になる理由"
@@ -161,6 +164,9 @@ $$
 ```cpp
 --8<-- "konig-theorem/lp-double.cpp:core"
 ```
+
+完全なプログラム：[`lp-double.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/konig-theorem/lp-double.cpp)（GitHub）
+{ .kp-code-src }
 
 この型が効くのは、「辺の両端の値の和が $c$ 以下」という制約で、0 以上の値の総和を最大にする問題である。辺を持つ頂点の値は、辺の条件から $c$ 以下になる。辺を持たない頂点は、値の上限 $c$ が別にあるときに限ってこの形になる（上限がなければ答えは限りなく大きい）。このとき値を $c$ で割れば LP 緩和になり、半整数の最適解から値は $0$・$c/2$・$c$ に絞れる。$c$ が偶数なら、整数に限っても答えは $\frac{c}{2} \cdot \alpha(B)$ である。$c$ が奇数だと $c/2$ が整数にならないので、この式は整数の答えの上限にすぎない（三角形で $c = 1$ なら LP の値は $3/2$、整数では 1）。練習の [ABC461 G](#practice) がこの形である。
 

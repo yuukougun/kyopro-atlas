@@ -64,6 +64,9 @@ $$
 --8<-- "symmetry-pigeonhole-casework/pair-sum.cpp:core"
 ```
 
+完全なプログラム：[`pair-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/symmetry-pigeonhole-casework/pair-sum.cpp)（GitHub）
+{ .kp-code-src }
+
 同じ形は XOR でも現れる。$N$ 人のそれぞれについて「自分以外の全員の XOR」$B_i$ が与えられたとする。$B_1 \oplus \dots \oplus B_N$ では各人の値が $N - 1$ 回ずつ現れる。$N$ が偶数なら $N - 1$ は奇数なので、これは全員の値の XOR $T$ に等しい。各人の値は $T \oplus B_i$ で求まる（同じ値の XOR は打ち消し合う。[XOR の性質](../basics/bit-operations.md#xor-properties)）。$N$ が奇数なら各人の値は偶数回ずつ現れるので、$B$ の XOR は $0$ になり、この方法では $T$ が求まらない。和の場合も同じで、自分以外の和の総和は全員の和の $N - 1$ 倍になる。
 
 対称性は「全体を数えてから、重複した分で割る・引く」とまとめられる。$i < j$ の組を数えるときは $i \ne j$ の順序付きの組を数えて 2 で割り、円順列は回転で同じになる $N$ 通りで割る。確率の問題で「入れ替えて移り合う事象は同じ確率」とみる考え方は[確率の対称性](../comb/probability-symmetry.md#symmetry)にある。
@@ -105,6 +108,9 @@ $$
 ```cpp
 --8<-- "symmetry-pigeonhole-casework/pigeonhole-subsets.cpp:core"
 ```
+
+完全なプログラム：[`pigeonhole-subsets.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/symmetry-pigeonhole-casework/pigeonhole-subsets.cpp)（GitHub）
+{ .kp-code-src }
 
 鳩の巣原理は「ある」ことを保証するだけで、どれが一致するかは教えてくれない。見つける部分は全探索や記録の配列に任せる。余りについての証明の型は[整数の証明の型](../math/proof-patterns.md#pigeonhole-remainder)にある。グラフで探索を打ち切る応用（長さ 4 の閉路の検出、黄の帯）は[次数で分ける](../graph/degree-sqrt.md#four-cycles)にある。
 

@@ -75,6 +75,9 @@ last = −∞
 --8<-- "interval-scheduling/max-disjoint.cpp:core"
 ```
 
+完全なプログラム：[`max-disjoint.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/interval-scheduling/max-disjoint.cpp)（GitHub）
+{ .kp-code-src }
+
 右端が同じ区間どうしの順は問わない。右端が同じなら、どちらを選んでも last は同じ値になるからである。左右を反転して「左端の大きい順に選ぶ」も同じ理由で正しい。
 
 ## 区間の串刺し（最少の点で突く） {#stabbing}
@@ -94,6 +97,9 @@ last = −∞
 ```cpp
 --8<-- "interval-scheduling/stabbing.cpp:core"
 ```
+
+完全なプログラム：[`stabbing.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/interval-scheduling/stabbing.cpp)（GitHub）
+{ .kp-code-src }
 
 **最大個数と最少の点の数は一致する**。互いに重ならない区間が $k$ 個あれば、1 個の点はそのうち 1 個しか突けないので、点は $k$ 個以上いる。逆に、区間スケジューリングの貪欲で選んだ $k$ 個の区間に 1 個ずつ点を置くと、すべての区間が突ける。点の位置は区間の表し方で決まる。閉区間なら、貪欲（条件 $l > \mathrm{last}$）で選んだ区間の右端 $r$ に置く。整数の半開区間なら、貪欲（条件 $l \ge \mathrm{last}$）で選んだ区間の右端の直前 $r - 1$ に置く。飛ばした区間は、直前に選んだ区間と重なり、右端はそれ以上なので、その選んだ区間に置いた点を含むからである。だから「重ならない区間の最大個数 ＝ すべてを突く点の最少個数」で、2 つの問題は同じ貪欲で解ける。[右端の順に選ぶ理由](#why-right-end)の図の網かけの列がその点である。
 
@@ -156,6 +162,9 @@ $$
 ```cpp
 --8<-- "interval-scheduling/weighted.cpp:core"
 ```
+
+完全なプログラム：[`weighted.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/interval-scheduling/weighted.cpp)（GitHub）
+{ .kp-code-src }
 
 座標が $2 \times 10^5$ 程度までなら、「$\mathrm{dp}[t]$ ＝ 時刻 $t$ までに終わる区間だけを使うときの最大」と時刻を添字にしてもよい。座標が大きいときは[座標圧縮](../basics/coordinate-compression.md)してから同じ DP をする。
 

@@ -115,6 +115,9 @@ cnt[s] = 1、ほかは 0
 --8<-- "shortest-path-dag/shortest-path-tree.cpp:core"
 ```
 
+完全なプログラム：[`shortest-path-tree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/shortest-path-dag/shortest-path-tree.cpp)（GitHub）
+{ .kp-code-src }
+
 最短路木は**各頂点への距離を同時に最小にする**木であり、**辺の重みの総和を最小にする**[最小全域木](../graph/minimum-spanning-tree.md)とは別物である。重み 2 の辺 $s$-$a$・$s$-$b$ と重み 1 の辺 $a$-$b$ の三角形では、最短路木は $\{s\text{-}a, s\text{-}b\}$（総和 4、距離はどちらも 2）、最小全域木は $\{a\text{-}b\}$ と $s$-$a$ か $s$-$b$ の一方（総和 3、片方の頂点への距離は 3）になる。「残す辺の重みの合計」を問われたら最小全域木、「始点からの距離（の和）」を問われたら最短路木である。
 
 ??? question "確認問題：距離の総和を最小にする全域木"
@@ -156,11 +159,17 @@ $$
 --8<-- "shortest-path-dag/edge-classify.cpp:on-path"
 ```
 
+完全なプログラム：[`edge-classify.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/shortest-path-dag/edge-classify.cpp)（GitHub）
+{ .kp-code-src }
+
 次に、区間の端（距離の値）を座標圧縮し、いもす法で各小区間を覆う辺の本数を数える。$e$ の区間の中に 2 本以上で覆われる小区間がなければ、$e$ はすべての最短路に乗る。各辺は「0：どの最短路にも乗らない」「1：ある最短路に乗る」「2：すべての最短路に乗る」に分かれる。
 
 ```cpp
 --8<-- "shortest-path-dag/edge-classify.cpp:classify"
 ```
+
+完全なプログラム：[`edge-classify.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/shortest-path-dag/edge-classify.cpp)（GitHub）
+{ .kp-code-src }
 
 全体で $O((N + M) \log N + M \log M)$ である。小さなグラフで、辺を 1 本ずつ消して最短距離を求め直す全探索と結果が一致することを確かめた。
 

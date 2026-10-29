@@ -105,11 +105,14 @@ X ← 0
 
 頂点の並びは、塊ごとに先頭と末尾を持つ連結リストにすれば $O(1)$ でつなげる。費用は毎回の $d_P c_V$ を足すだけで求まり、最後に並びから計算し直す必要はない。
 
-次のコード片は、Library Checker の [Rooted Tree Topological Order with Minimum Inversions](https://judge.yosupo.jp/problem/rooted_tree_topological_order_with_minimum_inversions) と同じ入出力で、$X$ の最小値と並べ方を返す。完全なプログラムは `snippets/tree-ratio-greedy/merge.cpp` で、小さい木の全順列の最小値と一致することを確かめた。
+次のコード片は、Library Checker の [Rooted Tree Topological Order with Minimum Inversions](https://judge.yosupo.jp/problem/rooted_tree_topological_order_with_minimum_inversions) と同じ入出力で、$X$ の最小値と並べ方を返す。完全なプログラムは [`snippets/tree-ratio-greedy/merge.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-ratio-greedy/merge.cpp) で、小さい木の全順列の最小値と一致することを確かめた。
 
 ```cpp
 --8<-- "tree-ratio-greedy/merge.cpp:core"
 ```
+
+完全なプログラム：[`merge.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-ratio-greedy/merge.cpp)（GitHub）
+{ .kp-code-src }
 
 !!! info "ACL では"
     `dsu uf(n);`。`uf.merge(a, b)` は新しい代表を返すので、その代表に「塊の先頭の頂点」を対応させる配列を別に持つ。`uf.leader(a)` はならし $O(\alpha(N))$。比の順のキューは ACL になく、`std::set` か `std::priority_queue` を使う。

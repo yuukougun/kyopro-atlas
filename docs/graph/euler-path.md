@@ -107,12 +107,18 @@ C++ では次のように書く（無向グラフ。辺の番号の列も返す�
 --8<-- "euler-path/hierholzer.cpp:core"
 ```
 
+完全なプログラム：[`hierholzer.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/euler-path/hierholzer.cpp)（GitHub）
+{ .kp-code-src }
+
 有向グラフでは、各辺が隣接リストに 1 回しか入らないので使用済みの印は要らず、$\mathrm{ptr}[v]$ を進めるだけでよい。始点は $\mathrm{out} - \mathrm{in} = 1$ の頂点にする。取り出した順は路の逆順なので、反転を忘れない。
 
 ??? note "C++ の実装例（有向グラフ）"
     ```cpp
     --8<-- "euler-path/hierholzer.cpp:directed"
     ```
+
+    完全なプログラム：[`hierholzer.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/euler-path/hierholzer.cpp)（GitHub）
+    { .kp-code-src }
 
 ### なぜ正しいか {#hierholzer-proof}
 

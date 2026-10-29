@@ -106,6 +106,9 @@ $x$ を決めると、最適化のままでは見えなかった素直な判定�
 --8<-- "binary-search-answer/cut-greedy.cpp:core"
 ```
 
+完全なプログラム：[`cut-greedy.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binary-search-answer/cut-greedy.cpp)（GitHub）
+{ .kp-code-src }
+
 **探索で判定する**。「移動できる距離を $x$ にしたとき、すべての地点へ行けるか」のように、$x$ を決めると使える辺が決まる問題では、判定はグラフの到達判定になる。辺を張る条件を $x$ で決め、[幅優先探索](../graph/bfs.md)か[深さ優先探索](../graph/dfs.md)で届く頂点を数える。$x$ を大きくすると辺は増えるだけなので、判定は単調である。
 
 貪欲・探索のどちらでも、判定の関数には「何が可なのか」を 1 文のコメントで書いておくとよい。可の意味があいまいなまま書くと、不等号の向きや ok と ng の置き場所を取り違えやすい。
@@ -133,6 +136,9 @@ DP で判定するときの典型的なバグは、表を前の $x$ の値が残
 ```cpp
 --8<-- "binary-search-answer/real-bisection.cpp:core"
 ```
+
+完全なプログラム：[`real-bisection.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binary-search-answer/real-bisection.cpp)（GitHub）
+{ .kp-code-src }
 
 - **単調でなくても解が 1 つ見つかる**：連続な関数 $f$ について $f(\mathrm{lo}) \le c < f(\mathrm{hi})$ を保てば、中間値の定理により区間の中に $f(t) = c$ となる $t$ がある。どの解を答えてもよい問題なら、$f$ が単調でなくても両端の符号だけで二分探索できる。最小の解を求めるときは単調性が要る
 - **出力の桁数**：`cout` の既定は有効数字 6 桁なので、`fixed` と `setprecision` で桁を指定する

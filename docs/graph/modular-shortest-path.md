@@ -81,11 +81,14 @@ $d$ が求まれば、ほかの問いも余りごとの式で答えられる。
 
 $m$ に最小の数を選ぶのは、頂点数 $m$ が最も小さくなるからである。どの $a_j$ を法にしても同じ議論が成り立つ。$n = 2$ では $d[(kb) \bmod a] = kb$（$k = 0, \dots, a-1$）となり、$\max d - a = (a-1)b - a$ から公式 $ab - a - b$ が出る。
 
-頂点 $m$ 個・辺 $nm$ 本なので、ダイクストラ法で $O(nm \log m)$ である（[前の節](#residue-vertices)の $K$ が $m$ にあたる）。ダイクストラ法の中心は次のとおりである（完全なプログラムは `snippets/modular-shortest-path/congruence.cpp` で、個数制限なしのナップサックによる愚直な方法と比べている）。
+頂点 $m$ 個・辺 $nm$ 本なので、ダイクストラ法で $O(nm \log m)$ である（[前の節](#residue-vertices)の $K$ が $m$ にあたる）。ダイクストラ法の中心は次のとおりである（完全なプログラムは [`snippets/modular-shortest-path/congruence.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/modular-shortest-path/congruence.cpp) で、個数制限なしのナップサックによる愚直な方法と比べている）。
 
 ```cpp
 --8<-- "modular-shortest-path/congruence.cpp:core"
 ```
+
+完全なプログラム：[`congruence.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/modular-shortest-path/congruence.cpp)（GitHub）
+{ .kp-code-src }
 
 ## ライブラリでの使い方 {#library}
 

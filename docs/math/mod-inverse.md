@@ -92,6 +92,9 @@ $p - 2$ は $10^9$ 程度の大きな指数だが、[繰り返し二乗法](../m
 --8<-- "mod-inverse/inverse.cpp:core"
 ```
 
+完全なプログラム：[`inverse.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mod-inverse/inverse.cpp)（GitHub）
+{ .kp-code-src }
+
 `inv_fermat` は、$a$ が $p$ の倍数のとき $0^{p-2} = 0$ を返し、エラーにならない。「0 で割った」ことに気づかないまま 0 が答えに混ざるので、割る数が 0 になりうる式では、呼ぶ前に確かめる。法が素数でないときに $a^{m-2}$ を使うと、逆元でない値が黙って返る（たとえば法 10 で $3^{8} \bmod 10 = 1$ だが、3 の逆元は 7）。
 
 ## 拡張ユークリッドによる逆元（法が素数でないとき） {#ext-gcd}
@@ -107,6 +110,9 @@ $$
 ```cpp
 --8<-- "mod-inverse/inverse.cpp:extgcd"
 ```
+
+完全なプログラム：[`inverse.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mod-inverse/inverse.cpp)（GitHub）
+{ .kp-code-src }
 
 `inv_extgcd` は、余りの列 $r_i$ と「$r_i \equiv x_i \cdot a \pmod{m}$」となる係数 $x_i$ を一緒に更新している。互除法が終わったとき $r = \gcd(a, m)$ で、これが 1 なら対応する係数が逆元である。
 
@@ -128,6 +134,9 @@ $$
 --8<-- "mod-inverse/inv-table.cpp:core"
 ```
 
+完全なプログラム：[`inv-table.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mod-inverse/inv-table.cpp)（GitHub）
+{ .kp-code-src }
+
 $-q \cdot r^{-1}$ は負になるので、`p - (q * inv[r] % p)` のように $p$ から引いて 0 以上に保つ。
 
 **階乗の逆元**：二項係数で要る $1/k!$ の表は、この漸化式を使わなくても作れる。$N!$ の逆元を 1 回だけフェルマーで求め、$1/(i-1)! = i \cdot 1/i!$ で後ろへ戻ればよい（[fact を前から、ifact を後ろから作る理由](../comb/binomial-precompute.md#fact-ifact)）。逆に、階乗の表があれば $i^{-1} = (i-1)! \cdot (1/i!)$ で各 $i$ の逆元も $O(1)$ で取れる。逆元の漸化式が役立つのは、階乗は要らず $1/i$ だけが大量に要るとき（調和数 $1 + 1/2 + \dots + 1/N$ や、期待値の式に $1/i$ が並ぶとき）である。
@@ -141,6 +150,9 @@ $-q \cdot r^{-1}$ は負になるので、`p - (q * inv[r] % p)` のように $p
 ```cpp
 --8<-- "mod-inverse/half-sum.cpp:core"
 ```
+
+完全なプログラム：[`half-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mod-inverse/half-sum.cpp)（GitHub）
+{ .kp-code-src }
 
 方法 2 のように、割り切れることが分かっている因数を **余りを取る前に** 整数のまま割る手もある。逆元が要らず、法が素数でなくても使える。ただし分母が 6 や $k!$ のように大きくなると、どの因数で割るかの場合分けが増えるので、法が素数なら逆元を掛ける方が素直である。
 
@@ -189,6 +201,9 @@ $-q \cdot r^{-1}$ は負になるので、`p - (q * inv[r] % p)` のように $p
 ```cpp
 --8<-- "mod-inverse/acl.cpp:core"
 ```
+
+完全なプログラム：[`acl.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mod-inverse/acl.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 `inv_mod` も modint の割り算も、互いに素でないと assert で止まる。止まらずに 0 が返るよりは気づきやすいが、提出では実行時エラーになる。割る数が 0 になりうるなら、呼ぶ前に分岐する。modint の詳しい使い方は [modint](../math/modint.md) にまとめる。
 

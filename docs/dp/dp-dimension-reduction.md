@@ -66,6 +66,9 @@ DP の状態の削減は、正しい[状態](../guide/glossary.md#state)を立�
 --8<-- "dp-dimension-reduction/skip-penalty.cpp:core"
 ```
 
+完全なプログラム：[`skip-penalty.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-dimension-reduction/skip-penalty.cpp)（GitHub）
+{ .kp-code-src }
+
 同じ考え方で、「最大のものの半分より大きいものを全部取り除く」のような半分にする操作は、値の上限を $A$ として $\log_2 A$ 回程度（$A = 10^9$ なら約 30 回）しか起きない。回数を添字にしても 30 程度で済む（[力試し](#challenge)の ABC203 F）。
 
 上限は「何もしない解」「貪欲に作った解」など、すぐに作れる解の値から見積もる。見積もりが甘いと、最適解が範囲の外に出て WA になる。少し余裕を持たせた上限にしても計算量はほとんど変わらないので、見積もりに自信がなければ境界ぎりぎりにしない。上のコードは式で求めた 28 をそのまま使ったが、30 にしてもよい。
@@ -95,6 +98,9 @@ DP の状態の削減は、正しい[状態](../guide/glossary.md#state)を立�
 ```cpp
 --8<-- "dp-dimension-reduction/value-knapsack.cpp:core"
 ```
+
+完全なプログラム：[`value-knapsack.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-dimension-reduction/value-knapsack.cpp)（GitHub）
+{ .kp-code-src }
 
 **ナップサック以外でも同じ形になる**。2 種類の資源を使う問題では、片方の残り（使った量）を添字にし、もう片方の残りの最大（使った量の最小）を値にする。2 種類の道具の個数を決める問題なら、片方の個数を添字にし、もう片方の個数の最小を値にする（[例題](#abc325_f)の ABC325 F）。[最長増加部分列（LIS）](../dp/lis.md#binary-search)の「長さごとの末尾の最小値」も、末尾の値を添字から値に回した入れ替えの例である。
 
@@ -174,6 +180,9 @@ $W \le 10^9$ なので、重さを添字にした表は作れない。品物は 
     ```cpp
     --8<-- "dp-dimension-reduction/sensor.cpp:core"
     ```
+
+    完全なプログラム：[`sensor.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-dimension-reduction/sensor.cpp)（GitHub）
+    { .kp-code-src }
 
 ## 練習問題 {#practice}
 

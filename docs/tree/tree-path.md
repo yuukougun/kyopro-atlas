@@ -67,6 +67,9 @@ $$
 --8<-- "tree-path/path-tools.cpp:on-path"
 ```
 
+完全なプログラム：[`path-tools.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-path/path-tools.cpp)（GitHub）
+{ .kp-code-src }
+
 LCA を 3 回求めるので 1 回 $O(\log N)$ である。同じ判定は祖先の関係でも書ける。$x$ がパスの上にあるのは、「$x$ が $u$ か $v$ の祖先（自分自身を含む）」かつ「$x$ が $l$ の子孫」のときである。[オイラーツアー](../tree/euler-tour.md#ancestor-depth)の $\mathrm{in}$・$\mathrm{out}$ があれば、祖先かどうかは $O(1)$ で判定できる。そのため、$l$ を求めた後の判定は $O(1)$ になる。
 
 辺 $(c, \mathrm{par}[c])$ がパスの上にあるかは、子の側の頂点で判定する。$c$ がパスの上にあり、かつ $c \ne l$ のときだけ、その辺はパスに含まれる。$l$ から親へ向かう辺はパスに含まれない（[頂点の値と辺の値](#vertex-vs-edge)）。
@@ -87,6 +90,9 @@ LCA を 3 回求めるので 1 回 $O(\log N)$ である。同じ判定は祖先
 ```cpp
 --8<-- "tree-path/path-tools.cpp:meet"
 ```
+
+完全なプログラム：[`path-tools.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-path/path-tools.cpp)（GitHub）
+{ .kp-code-src }
 
 合流点から 3 点への距離の和は、3 点を結ぶ最小の部分木の辺の数に等しい。3 本のパスを合わせると、この部分木の各辺をちょうど 2 回ずつ通るので、次の式が成り立つ。
 
@@ -118,6 +124,9 @@ $$
 --8<-- "tree-path/path-tools.cpp:intersect"
 ```
 
+完全なプログラム：[`path-tools.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-path/path-tools.cpp)（GitHub）
+{ .kp-code-src }
+
 このコード片は、9 頂点以下のランダムな木 300 個で、すべての 4 点の組について全探索と比べて確かめている。
 
 **応用の型**：共通部分の頂点の数は $d(p, q) + 1$、辺の数は $d(p, q)$ である（$p, q$ は両端）。「辺を共有するか」を問われたら、交わることに加えて $p \ne q$ かを見る。1 点だけで交わるパスは辺を共有しない。
@@ -133,6 +142,9 @@ $$
 ```cpp
 --8<-- "tree-path/path-tools.cpp:kth"
 ```
+
+完全なプログラム：[`path-tools.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-path/path-tools.cpp)（GitHub）
+{ .kp-code-src }
 
 **どちらの端点に近いかの境目**：$u$ と $v$ のどちらに近いかは、各頂点がパスのどこに付いているかで決まる（[2 点からの距離を比べる](../tree/tree-distance.md#from-two)）。この境目は、K 番目の頂点を使うと部分木の形で書ける。$\mathrm{dep}[u] \ge \mathrm{dep}[v]$、$D = d(u, v) \ge 1$ とし、$m$ をパスの上で $u$ から $\lfloor (D - 1)/2 \rfloor$ 番目の頂点とする。
 
@@ -166,11 +178,17 @@ $u = v$ のときも同じ式でよい。頂点の値なら $a_u$ が 1 つ、�
 --8<-- "tree-path/edge-set.cpp:mask"
 ```
 
+完全なプログラム：[`edge-set.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-path/edge-set.cpp)（GitHub）
+{ .kp-code-src }
+
 bit で持つと、複数のパスの辺の和集合は OR、共通部分は AND、辺の数は [popcount](../guide/glossary.md#popcount) で求まる。そのため、「指定のパスのどれにも〇〇な辺がある」という条件を[包除原理](../comb/inclusion-exclusion.md#bit-enumeration)で数えやすくなる。条件を破る（パスの辺がすべて白い）パスの組 $S$ ごとに、和集合の辺を白に固定し、残りを自由に塗った数を数えて符号付きで足す（[例題の ABC152 F](#abc152_f)）。
 
 ```cpp
 --8<-- "tree-path/edge-set.cpp:count"
 ```
+
+完全なプログラム：[`edge-set.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-path/edge-set.cpp)（GitHub）
+{ .kp-code-src }
 
 `popcount` は C++20 の [`<bit>` の関数](../cpp/cpp-math-functions.md#bit-functions)で、符号なしの型しか受け取らない。そのため、`int` の `S` は `unsigned` に変換して渡す。
 

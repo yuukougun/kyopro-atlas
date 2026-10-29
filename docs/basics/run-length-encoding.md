@@ -58,6 +58,9 @@ updated: 2026-10-22
 --8<-- "run-length-encoding/encode.cpp:core"
 ```
 
+完全なプログラム：[`encode.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/run-length-encoding/encode.cpp)（GitHub）
+{ .kp-code-src }
+
 この形なら、最後の塊もループの中で追加される。「$S[i] \ne S[i+1]$ になったら塊を閉じる」形で書くと、最後の塊はループの後で別に追加しなければならず、よく忘れる。各文字を 1 回ずつ見るので $O(N)$ である。復元は、塊ごとに値を長さの分だけ並べればよい。
 
 **番兵の塊**。0 と 1 の列では、0 の塊と 1 の塊が交互に並ぶ。先頭が 0 か 1 かで「何番目が 1 の塊か」が変わると、場合分けが増えて添字を間違えやすい。先頭が 0 なら長さ 0 の 1 の塊を前に補い、末尾が 0 なら後ろにも補うと、列はいつも「1 の塊で始まって 1 の塊で終わる」形になる。偶数番目が 1 の塊、奇数番目が 0 の塊と決まり、塊の数は奇数になる。長さ 0 の塊は、どんな和や最大にも影響しない[番兵](../guide/glossary.md#sentinel)である。
@@ -94,6 +97,9 @@ updated: 2026-10-22
 ```cpp
 --8<-- "run-length-encoding/handstand.cpp:core"
 ```
+
+完全なプログラム：[`handstand.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/run-length-encoding/handstand.cpp)（GitHub）
+{ .kp-code-src }
 
 $\mathrm{sum}[i] = \mathrm{len}[0] + \dots + \mathrm{len}[i-1]$ とする。窓の和は累積和の差 $\mathrm{sum}[\min(m, \ell + 2K + 1)] - \mathrm{sum}[\ell]$ でも求まる（[累積和](../basics/prefix-sum.md)）。どちらでも、番兵の塊のおかげで、先頭や末尾が 0 の場合を分けずに済む。
 

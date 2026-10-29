@@ -91,6 +91,9 @@ $\mathrm{next}_e(t)$ の計算は、便の並び方で変わる。
 --8<-- "time-dependent-dijkstra/earliest-arrival.cpp:core"
 ```
 
+完全なプログラム：[`earliest-arrival.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/time-dependent-dijkstra/earliest-arrival.cpp)（GitHub）
+{ .kp-code-src }
+
 ヒープから取り出す時刻が「最も早い到着時刻」なので、取り出した時刻のまま次の便を探せばよい。「待ってから遅い便に乗る方がよい」場合は、$\mathrm{next}_e$ が $t$ 以上で最も早い便を選ぶことで自然に含まれる。わざと遅い便に乗っても、同じ辺の早い便より先に着くことはない（所要時間が一定だから）。
 
 便ごとに所要時間が違うと、遅い便の方が早く着くことがある（後から出る特急が先に着く）。このときは $t$ 以上の便のうち到着が最も早いものを選べばよい。$a_e(t) = \min_{s_j \ge t} (s_j + T_j)$ と定めれば $t$ について減らないので、FIFO 性は保たれる。後ろからの最小値を前計算しておけば、`lower_bound` の後に $O(1)$ で引ける。
@@ -113,6 +116,9 @@ $\mathrm{late}[v]$ を「$v$ を出て終点に間に合う最も遅い時刻」
 ```cpp
 --8<-- "time-dependent-dijkstra/last-train.cpp:core"
 ```
+
+完全なプログラム：[`last-train.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/time-dependent-dijkstra/last-train.cpp)（GitHub）
+{ .kp-code-src }
 
 C++ の `/` は 0 の方向へ切り捨てるので、$t - c - l$ が $-d$ より大きい負の数だと商が 0 になり、間に合わない最初の便を間に合うと誤る。コードのように、割る前に負の場合を除いておく。$+\infty$ は $l + (k - 1)d$ の最大（$10^{18}$ 程度）より大きく、$c$ や $l$ を引いてもあふれない値にする。完全なプログラムでは、引くだけで足さないので `LLONG_MAX` を使っている（[INF の決め方](../cpp/cpp-types-literals.md#inf)）。
 
@@ -140,6 +146,9 @@ $s$ をすべて試すと間に合わないので、$g_e$ の形を調べて最�
 ```cpp
 --8<-- "time-dependent-dijkstra/best-departure.cpp:core"
 ```
+
+完全なプログラム：[`best-departure.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/time-dependent-dijkstra/best-departure.cpp)（GitHub）
+{ .kp-code-src }
 
 コードの `main` では、$D \le 3000$ と小さい $t$ のすべてで、待つ時刻を全部試した結果と一致することを `assert` で確かめている。$\sqrt{D}$ を浮動小数点で求めると 1 ずれることがあるので、前後を整数の比較で直している。式で解く自信がないときは、$\lfloor \sqrt{D} \rfloor$ の前後の数個の整数と $t$ を候補にして最小を取る書き方でもよい。
 

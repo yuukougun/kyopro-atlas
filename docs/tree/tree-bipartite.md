@@ -59,6 +59,9 @@ updated: 2026-10-22
 --8<-- "tree-bipartite/coloring.cpp:core"
 ```
 
+完全なプログラム：[`coloring.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-bipartite/coloring.cpp)（GitHub）
+{ .kp-code-src }
+
 親を記録しなくても `color[c] != -1` で親へ戻るのを防げるのは、木では塗り済みの隣が親しかないからである。再帰の DFS でもよいが、パス状の木では再帰が $N$ 段になるので、BFS で書いておくと安心である（[再帰の深さ](../tree/tree-traversal.md#recursion-depth)）。
 
 ## 距離の偶奇は深さだけで分かる {#distance-parity}

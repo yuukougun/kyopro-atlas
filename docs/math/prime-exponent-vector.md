@@ -97,6 +97,9 @@ $$
 --8<-- "prime-exponent-vector/square-pairs.cpp:core"
 ```
 
+完全なプログラム：[`square-pairs.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/prime-exponent-vector/square-pairs.cpp)（GitHub）
+{ .kp-code-src }
+
 **0 の扱い**。0 は素因数分解できないので核がない。一方、0 と何を掛けても 0 で、0 は平方数（$0 = 0^2$）である。0 の個数を $z$ とすると、0 を含む組は $z(N - z) + \binom{z}{2}$ 組あり、これは核の数え上げとは別に足す。0 に核として 0 や 1 を割り当てると、0 でない数との組を数え損ねたり、平方数との組だけを数えたりして誤る。
 
 **相手の形が決まる**。$a$ を固定すると、$ab$ が平方数になる $b$ はちょうど $b = \mathrm{core}(a) \cdot r^2$（$r \ge 1$ の整数）の形の数である。だから「$1 \le b \le N$ で $ab$ が平方数になる $b$ の個数」は $\lfloor \sqrt{N / \mathrm{core}(a)} \rfloor$ で求まる。平方根は浮動小数点の誤差に注意する（[整数の平方根・K 乗根](../math/integer-root.md)）。
@@ -118,6 +121,9 @@ lcm を指数の列で持てば、大きさの問題が消える。各要素を�
 ```cpp
 --8<-- "prime-exponent-vector/lcm-mod.cpp:core"
 ```
+
+完全なプログラム：[`lcm-mod.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/prime-exponent-vector/lcm-mod.cpp)（GitHub）
+{ .kp-code-src }
 
 lcm $L$ を使って $L / A_i$ を求めたいときは、2 つの方法がある。法が素数で $A_i$ がその倍数でなければ、$L \bmod m$ に $A_i$ の逆元を掛ければよい。逆元を使わないなら、指数の列から $v_p(A_i)$ を引いた列を作って掛け直す。こちらは法が素数でなくても使える。
 

@@ -119,6 +119,9 @@ deque が空でない間：
 --8<-- "zero-one-bfs/graph.cpp:core"
 ```
 
+完全なプログラム：[`graph.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/zero-one-bfs/graph.cpp)（GitHub）
+{ .kp-code-src }
+
 **計算量**。各頂点の暫定距離が縮むのは高々 2 回なので、deque に入るのも高々 2 回である。読み飛ばしにより、各頂点から出る辺を調べるのは 1 回だけになる。よって全体は $O(N + M)$ である。
 
 ??? note "証明：各頂点の暫定距離が縮むのは高々 2 回"
@@ -168,6 +171,9 @@ BFS では、頂点を初めて見つけたときに距離を書き込み、訪�
 ```cpp
 --8<-- "zero-one-bfs/turns.cpp:core"
 ```
+
+完全なプログラム：[`turns.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/zero-one-bfs/turns.cpp)（GitHub）
+{ .kp-code-src }
 
 - **頂点数と辺数**：頂点は $4HW$、各頂点から出る辺は 1 + 3 本なので、全体で $O(HW)$ である。$H = W = 1500$ でも頂点は約 $9 \times 10^6$ 個で、`int` の配列なら約 36 MB に収まる。状態は `map` ではなく、整数に詰めて配列で引く
 - **斜めの 4 方向でも同じ**：ビショップのように斜めに進む駒でも、向きを斜めの 4 つにすれば同じ形になる

@@ -126,6 +126,9 @@ $$
 --8<-- "digit-and-mod/substring-multiple.cpp:core"
 ```
 
+完全なプログラム：[`substring-multiple.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/digit-and-mod/substring-multiple.cpp)（GitHub）
+{ .kp-code-src }
+
 計算量は、各位置で定数回の計算をするので $O(N)$、表の初期化に $O(P)$ で、合わせて $O(N + P)$ である。$P$ が大きくて表を作れないときは、`map` で余りを数えれば $O(N \log N)$ になる。
 
 接頭辞の余りで考えることもできるが、$\mathrm{val}(S[l, r)) = \mathrm{val}(S[0, r)) - \mathrm{val}(S[0, l)) \cdot 10^{r-l}$ となり、$r - l$ が組ごとに違うので、そのまま「余りが等しい組」にはならない。両辺を $10^r$ で割り、$10$ の逆元を使えば同じ形に直せる。接尾辞で考えれば、掛かる $10^{N-r}$ は右側の境目だけで決まるので逆元が要らない。

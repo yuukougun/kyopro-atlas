@@ -76,6 +76,9 @@ atcoder: null
 --8<-- "cpp-undefined-behavior/ub-loop.cpp:core"
 ```
 
+完全なプログラム：[`ub-loop.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-undefined-behavior/ub-loop.cpp)（GitHub）
+{ .kp-code-src }
+
 $x = 1$ のとき、`-O0` では 31 回で止まり 31 と出る。`-O2` では止まらず、打ち切りの `loop` が出る（g++-13・g++-15 で同じ。警告は出ない）。コンパイラは「`i` は正の数を 2 倍してもあふれない」と仮定してよいので、「`i` はずっと正」と推論して条件 `i > 0` を消した。条件そのものは正しく書けているのに、あふれる式 `i *= 2` のせいで壊れたのである。
 
 直すには、あふれる前に止める。広い型で計算し、範囲を条件で確かめれば、どの最適化でも 31 になる。
@@ -83,6 +86,9 @@ $x = 1$ のとき、`-O0` では 31 回で止まり 31 と出る。`-O2` では�
 ```cpp
 --8<-- "cpp-undefined-behavior/ub-loop-fixed.cpp:core"
 ```
+
+完全なプログラム：[`ub-loop-fixed.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-undefined-behavior/ub-loop-fixed.cpp)（GitHub）
+{ .kp-code-src }
 
 - **見つけ方**：`-fsanitize=undefined` を付けると、あふれた行を教えてくれる。メッセージは `signed integer overflow: 1073741824 * 2 cannot be represented in type 'int'` である
 - **関連**：あふれる式があると、正しく計算した別の値との比較まで変わる例は[符号付き整数のあふれは未定義動作](../cpp/cpp-integer-overflow.md#signed-overflow-ub)にある。あふれの直し方は同じページ
@@ -94,6 +100,9 @@ $x = 1$ のとき、`-O0` では 31 回で止まり 31 と出る。`-O2` では�
 ```cpp
 --8<-- "cpp-undefined-behavior/out-of-range.cpp:core"
 ```
+
+完全なプログラム：[`out-of-range.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-undefined-behavior/out-of-range.cpp)（GitHub）
+{ .kp-code-src }
 
 範囲外に書いた値は、隣にある別の変数や、メモリの管理に使う領域を壊す。壊れた場所によって、すぐ落ちる・ずっと後で落ちる・黙って答えが変わる、のどれにもなる。「Segmentation fault にならないから範囲内」とは言えない。
 
@@ -111,6 +120,9 @@ AtCoder の GCC には `-ftrivial-auto-var-init=zero` が付いていて、初�
 --8<-- "cpp-undefined-behavior/uninit-array.cpp:core"
 ```
 
+完全なプログラム：[`uninit-array.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-undefined-behavior/uninit-array.cpp)（GitHub）
+{ .kp-code-src }
+
 入力 `abcab` の正しい答えは $2^2 + 2^2 + 1^2 = 9$ である。手元の結果は次のとおりだった。
 
 | ビルド | 結果 | `-Wall -Wextra` の警告 |
@@ -124,11 +136,17 @@ AtCoder の GCC には `-ftrivial-auto-var-init=zero` が付いていて、初�
 --8<-- "cpp-undefined-behavior/uninit-scalar.cpp:core"
 ```
 
+完全なプログラム：[`uninit-scalar.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-undefined-behavior/uninit-scalar.cpp)（GitHub）
+{ .kp-code-src }
+
 どちらも、宣言のときに初期値を書けば直る。`array` と生の配列は `{}` で 0 になる。
 
 ```cpp
 --8<-- "cpp-undefined-behavior/uninit-fixed.cpp:core"
 ```
+
+完全なプログラム：[`uninit-fixed.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-undefined-behavior/uninit-fixed.cpp)（GitHub）
+{ .kp-code-src }
 
 - **見つけ方**：AddressSanitizer と UndefinedBehaviorSanitizer はどちらも未初期化の読み出しを見つけない（手元では、道具を付けたビルドで上の関数がたまたま 9 を返した）。手元で `-ftrivial-auto-var-init=pattern` を付けると、毎回同じ不自然な値（上の例では 7375861463932509）で埋まるので、AtCoder との違いに気づきやすい
 - **落とし穴**：`-ftrivial-auto-var-init=zero` を手元にも付ければ AtCoder と同じ答えになるが、規格の上では未定義動作のままである。0 で埋めることに頼らず、初期値を書く習慣で防ぐ
@@ -157,6 +175,9 @@ AtCoder の GCC には `-ftrivial-auto-var-init=zero` が付いていて、初�
 --8<-- "cpp-undefined-behavior/pq-top.cpp:core"
 ```
 
+完全なプログラム：[`pq-top.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-undefined-behavior/pq-top.cpp)（GitHub）
+{ .kp-code-src }
+
 キューに要素が 2 個以上あれば、指している場所の要素はまだ存在するので、厳密には未定義動作ではない。「別の要素の値に変わる」と決まった動作である。だから AddressSanitizer も `_GLIBCXX_DEBUG` も止めず、いつも同じ間違った値が出る。要素が 1 個なら指す先が消えて未定義動作になる。それでも `vector` の領域は解放されないので、AddressSanitizer などの道具では見つからなかった（g++-15 の `-O2` でだけ `-Wuninitialized` の警告が出た）。
 
 道具に頼れないので、書き方で防ぐ。[ダイクストラ法](../graph/dijkstra.md)のループは、先頭を値で受けてから `pop` する形に決めておく。
@@ -164,6 +185,9 @@ AtCoder の GCC には `-ftrivial-auto-var-init=zero` が付いていて、初�
 ```cpp
 --8<-- "cpp-undefined-behavior/dijkstra-pop.cpp:core"
 ```
+
+完全なプログラム：[`dijkstra-pop.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-undefined-behavior/dijkstra-pop.cpp)（GitHub）
+{ .kp-code-src }
 
 - **費用**：(距離, 頂点) のコピーは 16 バイト程度で、気にしなくてよい
 - **関連**：構造化束縛の見えない変数が参照になる仕組みは[構造化束縛の節](../cpp/cpp-structured-bindings.md#pq-top-reference)にある
@@ -178,6 +202,9 @@ AtCoder の GCC には `-ftrivial-auto-var-init=zero` が付いていて、初�
 --8<-- "cpp-undefined-behavior/reallocation.cpp:bad"
 ```
 
+完全なプログラム：[`reallocation.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-undefined-behavior/reallocation.cpp)（GitHub）
+{ .kp-code-src }
+
 `row.push_back(3)` は解放済みの領域を書き換える。手元では `-O2` で Segmentation fault になり、`-fsanitize=address` では `heap-use-after-free` と出た（`_GLIBCXX_DEBUG` は見つけなかった）。`push_back` のほかに `insert`・`emplace_back`・`resize` も再確保を起こしうる。
 
 参照を持ち続けず、使うたびに添字で `g[0]` と書けば安全である。
@@ -185,6 +212,9 @@ AtCoder の GCC には `-ftrivial-auto-var-init=zero` が付いていて、初�
 ```cpp
 --8<-- "cpp-undefined-behavior/reallocation.cpp:core"
 ```
+
+完全なプログラム：[`reallocation.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-undefined-behavior/reallocation.cpp)（GitHub）
+{ .kp-code-src }
 
 - **応用の型**：BFS のキューを `vector` で書くと、回しながら `push_back` する。範囲 for や参照で回さず、添字 `for (int i = 0; i < (int)q.size(); i++)` で回す（[ループの中で同じ vector に追加しない](../cpp/cpp-range-for.md#modify-in-loop)）
 - **落とし穴**：`reserve` で容量を先に取れば再確保は起きないが、要素数の見積もりを誤ると壊れる。参照を持たない書き方のほうが確実である
@@ -208,6 +238,9 @@ AtCoder では動くが、古い環境や解説の写し方によっては壊れ
 --8<-- "cpp-undefined-behavior/temporary-range.cpp:core"
 ```
 
+完全なプログラム：[`temporary-range.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-undefined-behavior/temporary-range.cpp)（GitHub）
+{ .kp-code-src }
+
 - **安全な形**：関数の戻り値そのものを回す `for (int x : make(n))` は、どの版でも安全である。危ないのは、戻り値の「中身」（`[0]`・`.first`・参照を返すメンバ関数の戻り値）を回すときだけ
 - **関連**：寿命が延びる規則の詳しい説明は[範囲に一時オブジェクトの中身を渡すとき](../cpp/cpp-range-for.md#temporary-range)にある
 
@@ -219,11 +252,17 @@ AtCoder では動くが、古い環境や解説の写し方によっては壊れ
 --8<-- "cpp-undefined-behavior/string-view.cpp:bad"
 ```
 
+完全なプログラム：[`string-view.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-undefined-behavior/string-view.cpp)（GitHub）
+{ .kp-code-src }
+
 手元の `-O2` では、長い文字列は先頭が化けて出たが、短い文字列は正しく出た（たまたまである）。どちらも正常に終わった。`-fsanitize=address` を付けると、長い文字列は `heap-use-after-free`、短い文字列は `stack-use-after-scope` と出た（短い `string` は文字を自分の中に持つため）。文字列そのものは `string` の変数に持ち、`string_view` はその変数が生きている間だけ使う。
 
 ```cpp
 --8<-- "cpp-undefined-behavior/string-view.cpp:core"
 ```
+
+完全なプログラム：[`string-view.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-undefined-behavior/string-view.cpp)（GitHub）
+{ .kp-code-src }
 
 - **落とし穴**：`string_view` を返す関数で、関数の中の `string` を指して返すのも同じ事故である。競プロでは、読むだけの引数を `const string&` の代わりに受ける程度にとどめる
 - **関連**：view を関数から返すときの同じ事故は[view の寿命](../cpp/cpp-views-basics.md#lifetime)にある
@@ -244,6 +283,9 @@ AtCoder では動くが、古い環境や解説の写し方によっては壊れ
 ```cpp
 --8<-- "cpp-undefined-behavior/shift-ctz.cpp:core"
 ```
+
+完全なプログラム：[`shift-ctz.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-undefined-behavior/shift-ctz.cpp)（GitHub）
+{ .kp-code-src }
 
 - **直し方**：シフトは幅の足りる型を使い（`1LL << k`）、$k$ が 64 以上になりうるなら先に場合分けする。最下位の 1 の位置は `countr_zero`（C++20。符号なし整数だけ受ける）で求める。0 を渡すと型の幅を返すと決まっている
 - **見つけ方**：ループ中の `push_back` は `_GLIBCXX_DEBUG` で `attempt to increment a singular iterator` と出て止まった
@@ -297,6 +339,9 @@ g++-15 -std=gnu++23 -O1 -g -Wall -Wextra -D_GLIBCXX_DEBUG -fsanitize=address,und
 ```cpp
 --8<-- "cpp-undefined-behavior/assert.cpp:core"
 ```
+
+完全なプログラム：[`assert.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-undefined-behavior/assert.cpp)（GitHub）
+{ .kp-code-src }
 
 AtCoder のオプションには `-DNDEBUG` が含まれないので、`assert` は提出したコードでも有効である。ジャッジの結果が WA ではなく RE なら、思い込みの崩れるテストケースがあると分かる。
 

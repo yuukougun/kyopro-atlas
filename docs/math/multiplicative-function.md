@@ -95,11 +95,14 @@ $\sqrt{N}$ 以下の素数まで処理すると $S(N, \cdot) = \pi(N)$ になる
 
 $N = 10$ で動かす。商の値は $1, 2, 3, 5, 10$ で、初めの $S$ はそれぞれ $0, 1, 2, 4, 9$ である。$p = 2$ では $p^2 \le x$ の $x = 10, 5$ を更新し、$S(10) = 9 - (S(5) - S(1)) = 9 - 4 = 5$、$S(5) = 4 - (S(2) - S(1)) = 3$ になる。$p = 3$ では $x = 10$ だけを更新し、$S(10) = 5 - (S(3) - S(2)) = 5 - 1 = 4$ になる。$\pi(10) = 4$（2・3・5・7）と一致する。
 
-完全なプログラムは `snippets/multiplicative-function/lucy.cpp` である。$x \le \sqrt{N}$ の値を `lo[x]`、$x = \lfloor N/k \rfloor$ の値を `hi[k]` に持つ。
+完全なプログラムは [`snippets/multiplicative-function/lucy.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/multiplicative-function/lucy.cpp) である。$x \le \sqrt{N}$ の値を `lo[x]`、$x = \lfloor N/k \rfloor$ の値を `hi[k]` に持つ。
 
 ```cpp
 --8<-- "multiplicative-function/lucy.cpp:core"
 ```
+
+完全なプログラム：[`lucy.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/multiplicative-function/lucy.cpp)（GitHub）
+{ .kp-code-src }
 
 自作するときの要点は[ライブラリの節](#library)にまとめる。計算量は、各 $x$ について $p \le \sqrt{x}$ の素数の個数だけ更新するので、$x$ について $\sqrt{x}/\log x$ を足して $O(N^{3/4}/\log N)$ になる。手元では $N = 10^{10}$ と $10^{11}$ を合わせて 0.3 秒以内で終わった。$O(N^{2/3})$ 程度のさらに速い方法もあるが、Library Checker の Counting Primes（$N \le 10^{11}$）は Lucy DP で足りる。
 
@@ -120,11 +123,14 @@ $$
 - $\varphi$ の和：$g = 1$、$h = \mathrm{id}$ として $\Phi(N) = N(N + 1)/2 - \sum_{i=2}^{N} \Phi(\lfloor N/i \rfloor)$。
 - $\mu$ の和（メルテンス関数 $M(N)$）：$g = 1$、$h = \varepsilon$ として $M(N) = 1 - \sum_{i=2}^{N} M(\lfloor N/i \rfloor)$。
 
-$N^{2/3}$ 以下の値を篩の累積和で前計算し、それより大きい商の値だけを[メモ化再帰](../dp/memoized-recursion.md)で求めると $O(N^{2/3})$ になる。前計算なしで $\sqrt{N}$ までの表だけなら $O(N^{3/4})$ である。$\varphi$ の和のプログラムは `snippets/multiplicative-function/phi-sum.cpp` である。
+$N^{2/3}$ 以下の値を篩の累積和で前計算し、それより大きい商の値だけを[メモ化再帰](../dp/memoized-recursion.md)で求めると $O(N^{2/3})$ になる。前計算なしで $\sqrt{N}$ までの表だけなら $O(N^{3/4})$ である。$\varphi$ の和のプログラムは [`snippets/multiplicative-function/phi-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/multiplicative-function/phi-sum.cpp) である。
 
 ```cpp
 --8<-- "multiplicative-function/phi-sum.cpp:core"
 ```
+
+完全なプログラム：[`phi-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/multiplicative-function/phi-sum.cpp)（GitHub）
+{ .kp-code-src }
 
 自作するときの要点は[ライブラリの節](#library)にまとめる。
 

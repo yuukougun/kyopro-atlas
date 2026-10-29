@@ -110,6 +110,9 @@ deg[v] ← v の次数（削られていない隣の数）
 --8<-- "leaf-first/path-split.cpp:core"
 ```
 
+完全なプログラム：[`path-split.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/leaf-first/path-split.cpp)（GitHub）
+{ .kp-code-src }
+
 数え上げでも同じ考え方が使える。各頂点 $v$ が自分の部分木の中から $D_v$ 個の物を、ほかの頂点と重ならないように選ぶとする。葉から決めていくと、$v$ の番が来たとき、子孫はすでに部分木の中の物をちょうど（子孫の $D$ の和）個使っている。どれを使ったかによらず、$v$ が選べる物の個数は
 
 $$
@@ -137,6 +140,9 @@ $$
 ```cpp
 --8<-- "leaf-first/peel-matching.cpp:core"
 ```
+
+完全なプログラム：[`peel-matching.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/leaf-first/peel-matching.cpp)（GitHub）
+{ .kp-code-src }
 
 木は[二部グラフ](../graph/bipartite-graph.md)なので、König の定理により最大マッチングの大きさは最小頂点被覆（辺をすべて覆う頂点の最小数）の大きさに等しい。最小頂点被覆も、葉から見て「葉の隣を選ぶ」貪欲で同じ形に求まる。二部グラフ一般の最大マッチングは[二部マッチング](../graph/bipartite-matching.md)のページで扱う。
 

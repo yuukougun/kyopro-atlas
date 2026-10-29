@@ -101,6 +101,9 @@ for l = N-1 .. 0:
 --8<-- "interval-dp/slimes.cpp:core"
 ```
 
+完全なプログラム：[`slimes.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/interval-dp/slimes.cpp)（GitHub）
+{ .kp-code-src }
+
 ## 分割点型（最後に行う操作で区間を 2 つに割る） {#split-point}
 
 分割点型は、区間 $[l, r)$ の最後の操作が区間を $[l, m)$ と $[m, r)$ の 2 つに分けると見て、境目 $m$ を全探索する型である。遷移の一般形は次のとおりである。
@@ -159,6 +162,9 @@ $$
 --8<-- "interval-dp/erase-pairs.cpp:core"
 ```
 
+完全なプログラム：[`erase-pairs.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/interval-dp/erase-pairs.cpp)（GitHub）
+{ .kp-code-src }
+
 **区間の中で最後に消す要素を決める**。各要素を 1 つずつ消し、消すコストがそのときの両隣で決まる問題では、$\mathrm{dp}[l][r]$ を「外の $a_{l-1}$ と $a_r$ が残ったまま $[l, r)$ を全部消すコストの最小」とし、$[l, r)$ の中で最後に消す要素 $k$ を決める。$k$ が残っている間、$k$ は左右を隔てる壁になるので、$[l, k)$ と $[k+1, r)$ はそれぞれ独立に消える。しかも $k$ を消す瞬間の両隣は、区間の外の $a_{l-1}$ と $a_r$ に決まる。「最初に消すもの」で分けると、消した後に両隣がつながって独立に割れないので、「最後」で分けるのがこつである。
 
 $$
@@ -190,6 +196,9 @@ $$
 ```cpp
 --8<-- "interval-dp/pair-count.cpp:core"
 ```
+
+完全なプログラム：[`pair-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/interval-dp/pair-count.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 二項係数の表は $n \le$ 数百ならパスカルの三角形で $O(n^2)$ に作れる。区間は $O(n^2)$ 個、相手の候補は $O(n)$ 個なので全体で $O(n^3)$ である（[練習](#practice)の ABC217 F）。
 

@@ -75,6 +75,9 @@ updated: 2026-10-29
 --8<-- "library-design/fenwick-tests.cpp:header"
 ```
 
+完全なプログラム：[`fenwick-tests.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/library-design/fenwick-tests.cpp)（GitHub）
+{ .kp-code-src }
+
 - **ACL の工夫**：ACL の `fenwick_tree` は、中の配列を符号なし整数（`T = long long` なら `unsigned long long`）で持って足している。符号なし整数のあふれは $2^{64}$ を法とした値になり、[未定義動作](../guide/glossary.md#undefined-behavior)にならない。途中の和があふれても、最後の差が `long long` に収まれば正しい値が返る
 - **名前**：メンバ関数の名前（`add`・`sum`・`prod`・`merge`・`same`）も ACL にそろえると、解説コードと読み比べやすい。この教材の自作の例と ACL の名前の対応は[次の表](#acl-names)にある
 
@@ -149,11 +152,17 @@ cph の改造版の展開を使い、目印 `// @impl` でヘッダを分ける�
 --8<-- "library-design/fenwick-tests.cpp:boundary"
 ```
 
+完全なプログラム：[`fenwick-tests.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/library-design/fenwick-tests.cpp)（GitHub）
+{ .kp-code-src }
+
 **愚直解と乱数で突き合わせる**。境界を書き尽くしても、思いつかない入力は残る。そこで、配列をそのまま持つ愚直な実装と、乱数で作った操作の列で結果を比べる。長さは 0 を含む小さい値（0〜8 など）にすると、端の場合が何度も出る。乱数の種を固定しておけば、失敗した回を同じ入力で再現できる。
 
 ```cpp
 --8<-- "library-design/fenwick-tests.cpp:stress"
 ```
+
+完全なプログラム：[`fenwick-tests.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/library-design/fenwick-tests.cpp)（GitHub）
+{ .kp-code-src }
 
 突き合わせの考え方（愚直解の作り方・失敗した入力の縮め方）は、コンテスト中の WA を探すときと同じで、[愚直解との比較](../guide/stress-testing.md#procedure)にまとめている。
 
@@ -189,6 +198,9 @@ cph の改造版の展開を使い、目印 `// @impl` でヘッダを分ける�
 ```cpp
 --8<-- "library-design/verify-test.cpp:core"
 ```
+
+完全なプログラム：[`verify-test.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/library-design/verify-test.cpp)（GitHub）
+{ .kp-code-src }
 
 - **確認できないもの**：Library Checker の問題は部品の典型の使い方を確かめる。問題に合わせて中身を変えた版（区間の長さを持たせたなど）は、手元のテストで確かめ直す
 - **入出力の速さ**：入力が $5 \times 10^5$ 行を超える問題もある。`cin` を使うなら `ios::sync_with_stdio(false);` と `cin.tie(nullptr);` を書く。部品が速くても入出力で TLE になることがある

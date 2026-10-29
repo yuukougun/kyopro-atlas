@@ -75,11 +75,17 @@ $$
 --8<-- "mod-pow/pow-mod.cpp:core"
 ```
 
+完全なプログラム：[`pow-mod.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mod-pow/pow-mod.cpp)（GitHub）
+{ .kp-code-src }
+
 **再帰版**は、$a^n = (a^{\lfloor n/2 \rfloor})^2 \times (n \text{ が奇数なら } a)$ をそのまま書く。再帰の深さは $\log_2 n$ 程度（$n \le 10^{18}$ なら 60 段ほど）なので、スタックのあふれは心配ない。
 
 ```cpp
 --8<-- "mod-pow/pow-mod.cpp:recursive"
 ```
+
+完全なプログラム：[`pow-mod.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mod-pow/pow-mod.cpp)（GitHub）
+{ .kp-code-src }
 
 再帰版で `f(a, n / 2) * f(a, n / 2)` と半分の結果を 2 回求めると、呼び出しの数が $n$ に比例して速くならない。半分の結果は 1 回だけ求めて使い回す。2 つの版の違いは書きやすさだけなので、普段は反復版を手元のライブラリに置いておけばよい。
 
@@ -90,6 +96,9 @@ $$
 ```cpp
 --8<-- "mod-pow/monoid-power.cpp:core"
 ```
+
+完全なプログラム：[`monoid-power.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mod-pow/monoid-power.cpp)（GitHub）
+{ .kp-code-src }
 
 交換法則（$x \circ y = y \circ x$）は要らない。掛け合わせるのは同じ $x$ の累乗どうしで、$x^i \circ x^j$ はどちらも $x^{i+j}$ になるからである。ただし演算の向き（「$f$ の後に $g$」か「$g$ の後に $f$」か）は、演算を書く時点で決めて守り通す。
 
@@ -105,6 +114,9 @@ $$
 ```cpp
 --8<-- "mod-pow/monoid-power.cpp:affine"
 ```
+
+完全なプログラム：[`monoid-power.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mod-pow/monoid-power.cpp)（GitHub）
+{ .kp-code-src }
 
 [ダブリング](../basics/doubling.md)も、$2^k$ 回分の結果を 2 乗で作り、$N$ の 2 進表記に沿って組み合わせる点は同じである。違いは、ダブリングが $2^k$ 回分の表を残して多くの始点やクエリで使い回すのに対し、繰り返し二乗法は 1 つの $x$ の累乗だけを求め、今の $x^{2^k}$ しか持たないことにある。
 
@@ -136,6 +148,9 @@ $$
 ```cpp
 --8<-- "mod-pow/acl.cpp:core"
 ```
+
+完全なプログラム：[`acl.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mod-pow/acl.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 `pow_mod` の法 $m$ は `int` なので、$2^{31}$ 以上の法には使えない。ドキュメントには書かれていないが、実装では $x$ を $m$ で割った 0 以上の余りに直すので、負の $x$ もそのまま渡せる。同じく実装では、$m = 1$ なら 0 を返し、$0^0$ は（$m \ge 2$ なら）1 を返す。法が 998244353 や $10^9 + 7$ に決まっている数え上げでは modint の `pow` が手軽で、法が入力で変わるときや、例題のように法 $M^2$ がその場で決まるときは `pow_mod` を使う。
 

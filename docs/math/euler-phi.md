@@ -78,6 +78,9 @@ $$
 --8<-- "euler-phi/phi.cpp:single"
 ```
 
+完全なプログラム：[`phi.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/euler-phi/phi.cpp)（GitHub）
+{ .kp-code-src }
+
 `res -= res / p` は $\mathrm{res}$ に $(1 - 1/p)$ を掛ける操作で、割り算は割り切れる。$\mathrm{res}$ はその時点で「元の $n$ に、すでに見た素因数 $q$ の $(q-1)/q$ を掛けたもの」である。元の $n$ を、すでに見た素因数 $q$ それぞれで 1 回ずつ割った商はまだ $p$ を約数に持つので、$\mathrm{res}$ も $p$ で割り切れる。`res * (p - 1) / p` と書くと、$n = 10^{18}$ 付近で掛け算が `long long` を超える。
 
 **応用の型**：「$1$ 以上 $N$ 以下の整数の組 $(a, b)$ で $a < b$ かつ互いに素なものの個数」は、$b$ ごとに $\varphi(b)$ 個なので $\sum_{b=2}^{N} \varphi(b)$ である。分母が $N$ 以下で $0$ より大きく $1$ 未満の既約分数の個数も、分母 $b$ の分子が $\varphi(b)$ 個なので同じ値になる。$N$ が大きいので 1 つずつ求められないときは、次の[篩](#sieve)で表を作る。
@@ -89,6 +92,9 @@ $\varphi(1), \dots, \varphi(N)$ を全部使う問題では、1 個ずつ試し�
 ```cpp
 --8<-- "euler-phi/phi.cpp:sieve"
 ```
+
+完全なプログラム：[`phi.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/euler-phi/phi.cpp)（GitHub）
+{ .kp-code-src }
 
 - **初期値**：$\mathrm{phi}[i] = i$ とする。まだ何も掛けていない状態である
 - **素数の見分け方**：$p$ を見る時点で $\mathrm{phi}[p] = p$ のままなら、$p$ より小さい素因数を持たないので素数である。合成数なら、自分より小さい素因数の分がすでに掛かっていて $p$ より小さい
@@ -192,6 +198,9 @@ $$
     ```cpp
     --8<-- "euler-phi/power-pair.cpp:core"
     ```
+
+    完全なプログラム：[`power-pair.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/euler-phi/power-pair.cpp)（GitHub）
+    { .kp-code-src }
 
     約数ごとに $\varphi(d)$ を試し割りで求めても間に合うと、drken 氏の解説にある。その場合は $O(D \sqrt{P})$（$D$ は約数の個数）である。試し割りは素因数を取り除くたびに上限 $\sqrt{n}$ が下がるので、小さい素因数ばかりの約数ではすぐ終わり、見積もりより速い。
 

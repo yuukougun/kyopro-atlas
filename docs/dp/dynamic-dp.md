@@ -74,11 +74,17 @@ ACL の `segtree<S, op, e>` の `S` を $S \times S$ の行列にし、`op` を�
 --8<-- "dynamic-dp/usage.cpp:core"
 ```
 
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dynamic-dp/usage.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 更新のたびに葉を差し替えて、根の値（`all_prod`）から答えを読む。
 
 ```cpp
 --8<-- "dynamic-dp/usage.cpp:query"
 ```
+
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dynamic-dp/usage.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 !!! info "ACL では"
     `atcoder::segtree<S, op, e> seg(v);`。`seg.set(p, x)` と `seg.prod(l, r)` は `op` を $O(\log N)$ 回、`seg.all_prod()` は $O(1)$ で呼ぶ。`S` を行列にすると `op` 1 回が $O(S^3)$ なので、`set`・`prod` の計算量は $S^3$ 倍の $O(S^3 \log N)$ になる。`all_prod` は根の行列を返すだけである。`op` は結合法則を満たし、`e()` は単位元である必要がある。

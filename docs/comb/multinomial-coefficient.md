@@ -72,6 +72,9 @@ mod $p$ では $\mathrm{fact}[n] \cdot \mathrm{ifact}[a_1] \cdots \mathrm{ifact}
 --8<-- "multinomial-coefficient/reorder.cpp:core"
 ```
 
+完全なプログラム：[`reorder.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/multinomial-coefficient/reorder.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 ??? question "確認問題：MISSISSIPPI"
     MISSISSIPPI の 11 文字を並べ替えてできる文字列は何通りか。
 
@@ -116,6 +119,9 @@ $$
 ```cpp
 --8<-- "multinomial-coefficient/reorder.cpp:merge"
 ```
+
+完全なプログラム：[`reorder.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/multinomial-coefficient/reorder.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 この DP は、各種類の $\sum_{k} \frac{x^k}{k!}$ を掛け合わせた多項式の $x^\ell$ の係数に $\ell!$ を掛ける計算と同じである。$N$ が大きいときは、この積を畳み込みで速く求める（[母関数による数え上げ](../comb/generating-function-counting.md)）。
 

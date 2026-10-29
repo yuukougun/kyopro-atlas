@@ -75,6 +75,9 @@ for i = N-1, N-2, ..., 0:
 --8<-- "dp-reconstruction/trace-back.cpp:core"
 ```
 
+完全なプログラム：[`trace-back.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-reconstruction/trace-back.cpp)（GitHub）
+{ .kp-code-src }
+
 最適値の DP でも考え方は同じである。最小コストの DP なら、今の状態の値と「遷移元の値 ＋ 遷移のコスト」が等しい遷移を選ぶ。表の値はその式の最小値として決めたので、等しくなる遷移は少なくとも 1 つある。
 
 遷移元を値から逆算する代わりに、表を作るときに「どの遷移で今の値になったか」を別の配列 $\mathrm{par}$ に記録しておく方法もある。2 つは次のように使い分ける。
@@ -125,6 +128,9 @@ for i = 0, 1, ..., N-1:
 --8<-- "dp-reconstruction/lex-min.cpp:core"
 ```
 
+完全なプログラム：[`lex-min.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-reconstruction/lex-min.cpp)（GitHub）
+{ .kp-code-src }
+
 前からの表 $\mathrm{dp}$ は「手前で何ができたか」を持つので、そのまま後ろから使うと、後ろの要素の辞書順しか制御できない。辞書順最小の復元では、決める向き（前から）と表の向き（後ろから）を逆にするのがポイントである。前からの DP しか思いつかないときは、列を反転した問題で DP をすれば、それが元の問題の後ろからの DP になる。
 
 最短手数のように「最適値を保ったまま辞書順最小」を求めるときも同じで、表の値を「$i$ 以降で達成できる最適値」にし、先頭から「この候補を選んでも、残りで最適値が達成できるか」（表の値が 1 だけ減る遷移か）で判定する。[ABC146 F](#abc146_f) がこの型である。
@@ -161,6 +167,9 @@ $\mathrm{cnt}[N][p] = 1$ で、$\mathrm{cnt}[i][0] = \mathrm{cnt}[i+1][0] + \mat
 ```cpp
 --8<-- "dp-reconstruction/kth.cpp:core"
 ```
+
+完全なプログラム：[`kth.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-reconstruction/kth.cpp)（GitHub）
+{ .kp-code-src }
 
 - **足し算の回数が多いとき**：1 つの状態に $c$ 個の遷移から足すなら、途中の和は $cK$ まで増える。足すたびに $\min(K, \cdot)$ を取れば、どの時点でも $2K$ 以下に収まる
 - **全体が $K$ 個に満たないとき**：先頭の個数（この例では $\mathrm{cnt}[0][0]$）が $K$ 未満なら、$K$ 番目は存在しない。決め始める前に確かめる

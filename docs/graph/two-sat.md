@@ -117,6 +117,9 @@ $l_p$ と $l_q$（$p < q$）がともに真だとすると、$l_p \to s_p \to \d
 --8<-- "two-sat/at-most-one.cpp:core"
 ```
 
+完全なプログラム：[`at-most-one.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/two-sat/at-most-one.cpp)（GitHub）
+{ .kp-code-src }
+
 補助変数の番号は `two_sat` を作る前に数えておく必要がある（ACL の `two_sat` は変数の数を後から増やせない）。リテラルの総数を先に数え、元の変数 $N$ 個の後ろに補助変数を並べる。
 
 ## ACL の two_sat と自作するときの要点 {#acl}
@@ -127,6 +130,9 @@ $l_p$ と $l_q$（$p < q$）がともに真だとすると、$l_p \to s_p \to \d
 ```cpp
 --8<-- "two-sat/usage.cpp:core"
 ```
+
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/two-sat/usage.cpp)（GitHub）
+{ .kp-code-src }
 
 `add_clause` の `f`・`g` は「その変数が取るべき値」であり、否定するかどうかの印ではない。「$x_i$ は偽」を言うときは `f = false` を渡す。
 

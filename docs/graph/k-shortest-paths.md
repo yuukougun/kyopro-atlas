@@ -54,11 +54,14 @@ K 番目の最短路は、始点 $s$ から終点 $t$ への経路を長さの�
 
 計算量は、取り出しが各頂点 $K$ 回まで、1 回の取り出しで出る辺をすべて見るので、ヒープへの追加は $KM$ 回以内である。全体で $O(KM \log (KM))$ 時間、ヒープの大きさは最悪 $O(KM)$ になる。
 
-完全なプログラムは `snippets/k-shortest-paths/k-times.cpp` で、ふつうのダイクストラ法との違いは取り出した回数 `cnt` を数えるところだけである。
+完全なプログラムは [`snippets/k-shortest-paths/k-times.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/k-shortest-paths/k-times.cpp) で、ふつうのダイクストラ法との違いは取り出した回数 `cnt` を数えるところだけである。
 
 ```cpp
 --8<-- "k-shortest-paths/k-times.cpp:core"
 ```
+
+完全なプログラム：[`k-times.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/k-shortest-paths/k-times.cpp)（GitHub）
+{ .kp-code-src }
 
 距離の配列で枝刈りしないことなど、自作するときの注意は[自作するときの要点](#library)にまとめた。
 

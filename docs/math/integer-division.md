@@ -83,6 +83,9 @@ C++ の `a / b` は、実数の商を 0 の向きに切り捨てる。$a \ge 0$ 
 --8<-- "integer-division/division.cpp:core"
 ```
 
+完全なプログラム：[`division.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/integer-division/division.cpp)（GitHub）
+{ .kp-code-src }
+
 - **floor_div**：割り切れず（`a % b != 0`）、$a$ と $b$ の符号が違う（商が負）なら、C++ の商は floor より 1 大きいので 1 引く
 - **ceil_div**：割り切れず、符号が同じ（商が正）なら、C++ の商は floor と同じなので 1 足して ceil にする。商が負なら C++ の商がそのまま ceil である
 - **safe_mod**：`a % m` が負なら $m$ を足す。結果は floor_div と組にして $a = m \lfloor a/m \rfloor + (a \bmod m)$ を満たす
@@ -123,6 +126,9 @@ $$
 --8<-- "integer-division/multiples.cpp:core"
 ```
 
+完全なプログラム：[`multiples.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/integer-division/multiples.cpp)（GitHub）
+{ .kp-code-src }
+
 $r = 0$ の場合が「$x$ 以上の最小の $m$ の倍数」で、$m \lceil x/m \rceil$ とも書ける。一定の間隔 $F$ で発車する列車に時刻 $t$ に着いたなら、次の発車は $F \lceil t/F \rceil$ である。最初の発車が時刻 $S$（$S$ は $F$ の倍数）なら、$\max(S, F \lceil t/F \rceil)$ になる。
 
 ??? question "確認問題：0 を含む区間"
@@ -147,6 +153,9 @@ $$
 --8<-- "integer-division/overflow.cpp:core"
 ```
 
+完全なプログラム：[`overflow.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/integer-division/overflow.cpp)（GitHub）
+{ .kp-code-src }
+
 - **上限で止める**：積や累乗を何度も掛けていく計算では、超えたら $L + 1$ を返す関数にしておくと、一度超えた値を「超えた」のまま持ち回れる。$L + 1$ が `long long` に収まるように $L$ を選ぶ（$10^{18}$ なら十分）
 - **lcm は割ってから掛ける**：$\operatorname{lcm}(a, b) = a / \gcd(a, b) \times b$ の順にする。$a \times b / \gcd$ の順では、答えが小さくても途中の $a \times b$ があふれる。さらに $a / \gcd$ と $b$ の積が上限を超えるかも、同じ割り算で判定する（[GCD・LCM](../math/gcd-lcm.md)）
 - **累乗**：$x^k$ が $L$ を超えるかは、1 回掛けるごとに判定し、超えた時点で止める。整数の $K$ 乗根を二分探索するときの判定もこの形である（[整数の平方根・K 乗根](../math/integer-root.md)）
@@ -161,6 +170,9 @@ $$
 ```cpp
 --8<-- "integer-division/double-ng.cpp:core"
 ```
+
+完全なプログラム：[`double-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/integer-division/double-ng.cpp)（GitHub）
+{ .kp-code-src }
 
 $10^{18} - 1$ を `double` にすると、近くの表せる値は $128$ おきにしかなく、$10^{18}$ に丸められる。そのため 10 で割った floor が $10^{17}$ になり、正しい値 $10^{17} - 1$ と 1 ずれる。$\lvert a \rvert \le 10^{18}$ の制約は、この誤差がちょうど表に出る大きさである。
 

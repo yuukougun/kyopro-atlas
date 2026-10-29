@@ -92,6 +92,9 @@ $$
 --8<-- "subsequence-matching/next-table.cpp:core"
 ```
 
+完全なプログラム：[`next-table.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/subsequence-matching/next-table.cpp)（GitHub）
+{ .kp-code-src }
+
 `match_end(nxt, t, p)` は、位置 $p$ から照合して $T$ の最後の文字を拾った位置を返す。この位置を $r$ とすると、「$S[p, e)$ が $T$ を部分列に含む」となるのは $e > r$ のときだけである。照合できないときに $r = N$ を返すと、「$e \le r$ なら含まない」という式が照合できない場合にもそのまま使える。番兵を $N$ にしておく利点である。
 
 ??? question "確認問題：表を前から作れない理由"
@@ -145,6 +148,9 @@ $$
 ```cpp
 --8<-- "subsequence-matching/repeated.cpp:core"
 ```
+
+完全なプログラム：[`repeated.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/subsequence-matching/repeated.cpp)（GitHub）
+{ .kp-code-src }
 
 $T$ の各文字を $k$ 回ずつ並べた文字列が入るかは $k$ について単調なので、この判定で $k$ を二分探索できる（[ABC346 F](#practice) の型）。判定 1 回が $O(\lvert T \rvert \log \lvert S \rvert)$、二分探索が $O(\log V)$ 回（$V$ は $k$ の上限）である。周の番号が $N$ 以上になったら、その時点で不可を返す。続けて掛け算や足し算をすると `long long` があふれるからである。
 

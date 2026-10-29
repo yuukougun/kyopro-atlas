@@ -133,11 +133,14 @@ ACL に Slope Trick はない。自作するときは、次の 4 つを守れば
 - **空のヒープ**：$l_0 = -\infty$・$r_0 = \infty$ を返す。∞ を表す大きな値に遅延の値を足さない（オーバーフローする）
 - **値の型**：$\mathrm{min}_f$ は足した関数の値の和になるので `long long` で持つ
 
-次のコード片は、上の表の操作をそのまま書いたものである。完全なプログラム（`snippets/slope-trick/usage.cpp`）では、乱数の操作の列を、$x$ ごとに値を持つ配列で計算した結果と比べて確かめている。
+次のコード片は、上の表の操作をそのまま書いたものである。完全なプログラム（[`snippets/slope-trick/usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/slope-trick/usage.cpp)）では、乱数の操作の列を、$x$ ごとに値を持つ配列で計算した結果と比べて確かめている。
 
 ```cpp
 --8<-- "slope-trick/usage.cpp:core"
 ```
+
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/slope-trick/usage.cpp)（GitHub）
+{ .kp-code-src }
 
 $f(x)$ の値そのものが要るときは、ヒープの中身を順に取り出して定義の式で足す（$O(N \log N)$。取り出すとヒープが壊れるので、写してから行う）。傾きが 1 より大きく変わる関数（$k \max(0, x - a)$ など）を足すなら、同じ点を $k$ 回入れる。$k$ が大きいなら、ヒープの要素を（点, 個数）の組にした版か、平衡二分探索木を使う版が要る。
 

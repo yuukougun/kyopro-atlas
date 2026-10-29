@@ -70,6 +70,9 @@ $f : X \to Y$ が[全単射](../guide/glossary.md#bijection)（$X$ のどの要�
 --8<-- "counting-bijection/verify.cpp:core"
 ```
 
+完全なプログラム：[`verify.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/counting-bijection/verify.cpp)（GitHub）
+{ .kp-code-src }
+
 ## 素因数ごと・軸ごとに分けて独立な成分の積にする {#decompose}
 
 対象が「いくつかの成分の組」と 1 対 1 に対応し、どの条件も 1 つの成分の中だけで閉じていれば、個数は成分ごとの個数の積になる。$X$ を成分の組の集合 $Y_1 \times Y_2 \times \dots \times Y_m$ と対応させ、$\lvert X \rvert = \lvert Y_1 \rvert \cdots \lvert Y_m \rvert$ とする考え方である（分け方の一般論は[独立に分解する](../thinking/reformulation.md#independence)）。
@@ -79,6 +82,9 @@ $f : X \to Y$ が[全単射](../guide/glossary.md#bijection)（$X$ のどの要�
 ```cpp
 --8<-- "counting-bijection/factorization.cpp:core"
 ```
+
+完全なプログラム：[`factorization.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/counting-bijection/factorization.cpp)（GitHub）。`mint` は ACL の `modint1000000007`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 gcd・lcm の条件も素数ごとに分かれる。gcd は指数の最小値、lcm は指数の最大値になるからである（[素因数の指数ベクトル](../math/prime-exponent-vector.md#exponent-ops)）。たとえば $\operatorname{lcm}(a, b) = M$ となる順序付きの組 $(a, b)$ は、素数 $p$ ごとに $\max(x, y) = e_p$ となる指数の組 $(x, y)$ を選ぶことと対応する。その数は $(e_p + 1)^2 - e_p^2 = 2e_p + 1$ なので、答えは $\prod_p (2e_p + 1)$ である。
 

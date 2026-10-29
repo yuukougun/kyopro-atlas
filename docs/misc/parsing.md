@@ -72,6 +72,9 @@ updated: 2026-10-22
 --8<-- "parsing/eval.cpp:core"
 ```
 
+完全なプログラム：[`eval.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/parsing/eval.cpp)（GitHub）
+{ .kp-code-src }
+
 要は読み取り位置 $i$ をすべての関数で共有することである。$i$ を値渡しにすると、`factor` が括弧の中を読み進めても呼び出し元の $i$ は進まず、同じ部分を何度も読む。参照で渡すか、クラスのメンバ・グローバル変数に置く。`expr` と `factor` は互いに呼び合うので、先に `expr` を宣言しておく。
 
 式の外側で `expr` を呼んだ後は、$i$ が文字列の末尾に来ていることを確かめると、読み残し（`1+2)` の余った括弧など）に気づける。
@@ -106,6 +109,9 @@ updated: 2026-10-22
 --8<-- "parsing/eval-ext.cpp:core"
 ```
 
+完全なプログラム：[`eval-ext.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/parsing/eval-ext.cpp)（GitHub）
+{ .kp-code-src }
+
 単項マイナスを因子に置いたので、`-2*3` は $(-2) \times 3$ と読まれる。値は $-(2 \times 3)$ と同じだが、べき乗のように符号と演算の順で値が変わる演算子を足すときは、単項マイナスをどの規則に置くかを問題の定義に合わせる。
 
 ## 深い入れ子と再帰の深さ {#deep-nesting}
@@ -119,6 +125,9 @@ AtCoder ではスタックの上限が大きく、このくらいの深さなら
 ```cpp
 --8<-- "parsing/stack-eval.cpp:core"
 ```
+
+完全なプログラム：[`stack-eval.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/parsing/stack-eval.cpp)（GitHub）
+{ .kp-code-src }
 
 このコードは 2 項の演算子だけを扱う。単項マイナスも扱うなら、直前が数か `)` でない位置の − を別の記号（優先順位が \* より高い前置の演算子）として積む。
 
@@ -152,6 +161,9 @@ $$
 --8<-- "parsing/shortest-formula.cpp:core"
 ```
 
+完全なプログラム：[`shortest-formula.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/parsing/shortest-formula.cpp)（GitHub）
+{ .kp-code-src }
+
 **応用の型**：「式として正しい文字列を数える」「? を埋めて式にする方法の数」のような問題は、文字列の区間ごとに規則を当てはめる。状態は「区間 $[l, r)$ を式・項・因子として読む方法の数」で、区間 DP になる。演算子の位置で区間を割る形は[区間 DP の分割点型](../dp/interval-dp.md#split-point)と同じである。
 
 ## 式の部分文字列の総和 {#substring-sum}
@@ -177,6 +189,9 @@ $$
 ```cpp
 --8<-- "parsing/substring-sum.cpp:core"
 ```
+
+完全なプログラム：[`substring-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/parsing/substring-sum.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 1 文字ごとに $O(1)$ の更新なので、全体で $O(\lvert S \rvert)$ である。数の途中から始まる部分文字列（`34` の `4`）も、数字の位置で始まりを足すので数えられる。演算子から始まる部分文字列は式にならないので、始まりは数字の位置だけに置く。演算子が 2 つ並ぶ入力では、そこより前の始まりはどれも式にならないので、状態を空に戻す。
 

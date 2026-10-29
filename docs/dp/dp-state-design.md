@@ -129,6 +129,9 @@ $$
 --8<-- "dp-state-design/avoid-palindrome.cpp:core"
 ```
 
+完全なプログラム：[`avoid-palindrome.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-state-design/avoid-palindrome.cpp)（GitHub）
+{ .kp-code-src }
+
 状態は $2^{K-1}$ 個、遷移は 2 通りで、回文の判定に $O(K)$ かかるので、全体で $O(N K 2^K)$ になる。$K \le 10$ なら 1 文字あたり約 $10^4$ 回で済む。
 
 禁止された並びが少し複雑でも、長さが短ければ同じ方法が使える。たとえば「隣り合う 2 文字を 1 回入れ替えると禁止された並びが現れる」という条件も、入れ替えた結果に現れうる並びを長さ 4 以下の禁止された並びとして書き出せば、末尾 3 文字の状態で判定できる（[ABC122 D の例題](#abc122_d)）。
@@ -153,6 +156,9 @@ $$
 --8<-- "dp-state-design/bracket.cpp:core"
 ```
 
+完全なプログラム：[`bracket.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-state-design/bracket.cpp)（GitHub）
+{ .kp-code-src }
+
 $d$ の範囲は $0$ 以上 $N$ 以下なので、状態は $O(N^2)$ 個、遷移は 2 通りで、全体で $O(N^2)$ になる。$N$ が奇数なら答えは 0 である。残りの文字数より $d$ が大きい状態は最後に 0 へ戻れないので、$d \le N - i$ に絞ると定数倍が軽くなる。
 
 括弧列の問われ方（判定・区間の判定・並べる順序など）との関係は[括弧列](../patterns/bracket-sequence.md#counting)のページにまとめてある。並べ替えて正しくする問題は貪欲で解くもので、この DP とは別物である。
@@ -175,6 +181,9 @@ $d$ の範囲は $0$ 以上 $N$ 以下なので、状態は $O(N^2)$ 個、遷�
 ```cpp
 --8<-- "dp-state-design/cyclic-coloring.cpp:core"
 ```
+
+完全なプログラム：[`cyclic-coloring.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-state-design/cyclic-coloring.cpp)（GitHub）
+{ .kp-code-src }
 
 計算量は $O(N)$ である。この数は $(M - 1)^N + (-1)^N (M - 1)$ と等しく、小さい $N, M$ で確かめられる。1 列の塗り分けとの関係は[一列の塗り分けと円環の塗り分け](../comb/counting-basics.md#coloring)を参照。
 

@@ -150,6 +150,9 @@ $$
 --8<-- "binomial-identities/rect-sum.cpp:core"
 ```
 
+完全なプログラム：[`rect-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binomial-identities/rect-sum.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 階乗の表は、使う上の数の最大 $r_2 + c_2 + 1$ まで要る。$c_1 = 0$ のとき引く項は $\binom{i}{i + 1} = 0$ で、範囲外の約束がそのまま効く。さらに縦の和の公式を $i$ の側にも使えば、4 隅の二項係数の足し引き（$O(1)$）にもできる。
 
 **累乗の和の公式にもなる**。$\binom{i}{1} = i$、$\binom{i}{2} = i(i - 1)/2$ なので、縦の和の公式から $\sum_{i=1}^{n} i = \binom{n + 1}{2}$、$\sum_{i=2}^{n} i(i - 1) = 2\binom{n + 1}{3}$ が出る。$i^2 = i(i - 1) + i$ と分ければ 2 乗の和も求まる（[よく使う和の公式](../math/sigma-manipulation.md#formulas)）。
@@ -200,6 +203,9 @@ $x = 1, \dots, K$ のすべてについて求めるなら、$S_0, \dots, S_K$ �
 --8<-- "binomial-identities/pair-powers.cpp:core"
 ```
 
+完全なプログラム：[`pair-powers.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binomial-identities/pair-powers.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 同じ展開は、$\sum_i (A_i + c)^x$ のように全体に定数を足した累乗の和にも使える。$\sum_t \binom{x}{t} c^{x-t} S_t$ となるので、$c$ を変えて何度も聞かれても $S_t$ を作り直さずに済む。
 
 ## 式変形の検算（小さいケース） {#verify}
@@ -216,6 +222,9 @@ $x = 1, \dots, K$ のすべてについて求めるなら、$S_0, \dots, S_K$ �
 ```cpp
 --8<-- "binomial-identities/verify.cpp:core"
 ```
+
+完全なプログラム：[`verify.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binomial-identities/verify.cpp)（GitHub）
+{ .kp-code-src }
 
 試す引数には、空の和（$r > m$）・$n = 0$・$k = 0$・$k = n$ の境界を必ず入れる。偶数個の和の $2^{n-1}$ が $n = 0$ で成り立たないように、一般の $n$ で正しい式が端だけ違うことがよくある。
 

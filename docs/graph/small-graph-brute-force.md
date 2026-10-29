@@ -64,6 +64,9 @@ $$
 --8<-- "small-graph-brute-force/isomorphism.cpp:core"
 ```
 
+完全なプログラム：[`isomorphism.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/small-graph-brute-force/isomorphism.cpp)（GitHub）
+{ .kp-code-src }
+
 **同型にするコストの最小**。「$H$ の辺 $i$–$j$ を足すか消すのに $A_{i,j}$ かかるとき、$H$ を $G$ と同型にする最小コスト」も同じ全探索で求まる。対応 $p$ を 1 つ決めると、$H$ をどう変えるべきかが組ごとに決まる。$G$ と $H$ で辺の有無が食い違う組 $\{i, j\}$ について、$H$ 側の組 $\{p(i), p(j)\}$ を直すコスト $A_{p(i), p(j)}$ を足せばよい。どの $p$ に合わせるかは自由なので、すべての $p$ での合計の最小が答えである。全体で $O(N! \cdot N^2)$ になる。
 
 対応を写像として読むこの型は、同型の判定に限らない。「$G$ の頂点に $H$ の頂点を割り当てて、条件を満たすものがあるか」という問題なら、割り当てを順列として全部試し、各組の条件を隣接行列で確かめればよい。
@@ -81,6 +84,9 @@ $N - 1$ 本の組は、長さ $M$ の 0/1 の列（1 が $N - 1$ 個）を `next
 ```cpp
 --8<-- "small-graph-brute-force/spanning-trees.cpp:core"
 ```
+
+完全なプログラム：[`spanning-trees.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/small-graph-brute-force/spanning-trees.cpp)（GitHub）
+{ .kp-code-src }
 
 1 通りあたり $O(M)$ の確認なので、全体で $O(\binom{M}{N-1} \cdot M)$、$N = 8$ でも約 $3.3 \times 10^7$ 回である。さらに速くしたければ、辺を 1 本ずつ「使う・使わない」と[再帰で決め](../basics/recursive-enumeration.md)、閉路ができる辺は使わないように枝刈りする。こうすると葉は閉路のない辺の集合（森）だけになり、$N = 8$ の完全グラフでも呼び出しは約 $2 \times 10^6$ 回で済む。ただし葉には辺の足りない森も残るので、葉がすべて全域木になるわけではない（$N$ 頂点の完全グラフの全域木は $N^{N-2}$ 個、$N = 8$ で $262144$ 個である）。
 
@@ -102,6 +108,9 @@ $N - 1$ 本の組は、長さ $M$ の 0/1 の列（1 が $N - 1$ 個）を `next
 ```cpp
 --8<-- "small-graph-brute-force/coloring.cpp:core"
 ```
+
+完全なプログラム：[`coloring.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/small-graph-brute-force/coloring.cpp)（GitHub）
+{ .kp-code-src }
 
 2 色なら塗り方は、[二部グラフ判定](../graph/bipartite-graph.md)と同じく、成分ごとに 0 通りか 2 通りに決まる。全部を試す必要はない。3 色以上で塗れるかどうかは一般には難しく、$N$ が大きいなら[彩色数の手法](../graph/chromatic-number.md#chromatic-number)を使う。
 

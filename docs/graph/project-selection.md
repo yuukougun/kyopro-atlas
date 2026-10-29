@@ -109,6 +109,9 @@ updated: 2026-10-29
 --8<-- "project-selection/builder.cpp:core"
 ```
 
+完全なプログラム：[`builder.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/project-selection/builder.cpp)（GitHub）
+{ .kp-code-src }
+
 このコード片の `main`（取り込んでいない部分）は、変数 7 個以下・項 8 個以下のランダムな入力を作り、$2^N$ 通りの全探索と最小値・復元した割り当てが一致することを確かめている。
 
 ## 利得はコストに読み替えて定数を足す {#gains}
@@ -143,6 +146,9 @@ $K$ 個の変数がすべて 1 のときの利得は、補助の頂点 $y$ を 1
 ```cpp
 --8<-- "project-selection/closure.cpp:core"
 ```
+
+完全なプログラム：[`closure.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/project-selection/closure.cpp)（GitHub）
+{ .kp-code-src }
 
 依存関係は推移的につながる。「$a$ なら $b$」「$b$ なら $c$」があれば、$a$ を選ぶと $c$ も選ぶことになるが、辺は隣どうしの 2 本だけでよい。∞ の辺をたどって届く頂点は、どれも s 側でなければならないからである。条件が閉路をなす（互いに必要とする）品物は、まとめて選ぶか選ばないかになる。
 

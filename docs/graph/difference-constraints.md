@@ -127,6 +127,9 @@ $x = d = (0, 4, 5, 6)$ を代入すると、5 つの条件はすべて成り立�
 --8<-- "difference-constraints/max-diff.cpp:core"
 ```
 
+完全なプログラム：[`max-diff.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/difference-constraints/max-diff.cpp)（GitHub）
+{ .kp-code-src }
+
 `relax_all` は、更新が止まれば最短距離を、$N$ 回とも更新が続けば負閉路ありとして `nullopt` を返す。負閉路がなければ、すべての辺を見る走査を $N - 1$ 回行えば値が定まり、次の走査で更新がないことを見て返す。$s$ だけを 0 にした場合は、最短路が単純な道で辺を $N - 1$ 本までしか使わないからである。すべてを 0 から始めた場合は、仮の始点からの最短路が辺を $N$ 本まで使うが、最初の 1 本（仮の始点からの重み 0 の辺）は初期値で済んでいるので、残りは $N - 1$ 本である。
 
 ## 整合性の判定だけなら重み付き Union-Find（データ構造の章） {#consistency}

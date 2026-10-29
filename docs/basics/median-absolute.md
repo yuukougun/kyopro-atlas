@@ -65,6 +65,9 @@ $x$ が点を 1 つ右へ越えるたびに、その点が右から左へ移る�
 --8<-- "median-absolute/median-sum.cpp:core"
 ```
 
+完全なプログラム：[`median-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/median-absolute/median-sum.cpp)（GitHub）
+{ .kp-code-src }
+
 最小値は、ソート済みの $a$ の外側から組にした差の和 $\sum_{i < N/2} (a_{N-1-i} - a_i)$ とも等しい。これを使うと、中央値が最適であることを傾きを使わずに示せる。
 
 ??? note "証明（外側から組にする）"
@@ -142,6 +145,9 @@ $$
 ```cpp
 --8<-- "median-absolute/window-cost.cpp:core"
 ```
+
+完全なプログラム：[`window-cost.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/median-absolute/window-cost.cpp)（GitHub）
+{ .kp-code-src }
 
 移動の合計は「点の数 × 座標の幅」程度まで大きくなり、`int` に収まらない。`long long` で計算し、判定で $K$ と比べる。
 

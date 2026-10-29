@@ -145,6 +145,9 @@ $k$ 回目までの合成を $P_k$ とすると、$P_0$ は単位行列で、$P_
 --8<-- "rotation-transform/affine-compose.cpp:core"
 ```
 
+完全なプログラム：[`affine-compose.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rotation-transform/affine-compose.cpp)（GitHub）
+{ .kp-code-src }
+
 実装では次の点に気をつける。
 
 - **$k = 0$ のクエリ**：操作をしていない時点は単位行列 $P_0$ で答える。配列を $M + 1$ 個取り、$P_k$ を「$k$ 回目の後」と決めておくと添字がずれない
@@ -174,6 +177,9 @@ $k$ 回目までの合成を $P_k$ とすると、$P_0$ は単位行列で、$P_
 ```cpp
 --8<-- "rotation-transform/grid-rotate.cpp:core"
 ```
+
+完全なプログラム：[`grid-rotate.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rotation-transform/grid-rotate.cpp)（GitHub）
+{ .kp-code-src }
 
 - **元の配列を上書きしない**：同じ配列の中で入れ替えると、まだ読んでいないマスを先に書き換えてしまう。新しい配列に書いてから差し替える
 - **4 回回すと元に戻る**：「回す」関数を 4 回呼んで元の盤面に戻るかを `assert` で確かめると、添字の誤りがすぐに見つかる
@@ -210,6 +216,9 @@ $$
 ```cpp
 --8<-- "rotation-transform/congruence.cpp:core"
 ```
+
+完全なプログラム：[`congruence.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rotation-transform/congruence.cpp)（GitHub）
+{ .kp-code-src }
 
 - **重心に重なる点**：重心にある点は回転で動かないので、$a$ に選んではいけない（どの回転でも重なり、回転が決まらない）。照合には含めたままでよい
 - **反転を区別する**：外積の符号が回転の向きを決めるので、鏡に映した形は一致しない。反転も許す問題なら、$S$ を $x$ 軸で反転したものでももう一度判定する
