@@ -100,7 +100,7 @@ $p = 998244353$ なら、手順 2 の法は $998244352$ である。2 つの法�
 
 **指数を modint で計算しない**。`modint998244353` で指数を計算すると、法 $p$ で割った余りになってしまう。指数は `long long` で $\bmod (p-1)$ を取りながら計算し、底の累乗にだけ modint を使う。
 
-??? question "確認問題：3^(10^18) mod 7"
+??? question "確認問題：$3^{10^{18}} \bmod 7$"
     $3^{10^{18}}$ を 7 で割った余りを求めよ。
 
     ??? success "答え"
@@ -167,12 +167,6 @@ $\varphi$ の試し割りは段ごとに $O(\sqrt{m_j})$（$m_j$ はその段の
 !!! info "ACL では"
     `atcoder::pow_mod(x, n, m)` は $x^n \bmod m$ を $O(\log n)$ で返す（`#include <atcoder/math>`）。$0 \le n$、$1 \le m$ で、$m$ は `int` に収まること。$x$ は負でも $10^{18}$ でもよい（内部で $\bmod m$ を取る）。$\bmod (p-1)$ の計算にもそのまま使える。modint の `x.pow(n)` も $0 \le n$ の `long long` を指数に取る。
 
-## 使い分け {#comparison}
-
-- 指数が $10^{18}$ 以下の 1 つの整数なら、指数を小さくする必要はなく、[繰り返し二乗法](../math/mod-pow.md)をそのまま使う
-- 「$a^n \equiv 1$ となる最小の $n$」や「何回で元に戻るか」を問われたら、$p - 1$ や $\varphi(m)$ の約数を調べて[位数](../math/multiplicative-order.md#find-order)を求める
-- $a^{p-1} \equiv 1$ を素数かどうかの判定に使う話は[大きな数の素数判定と素因数分解](../math/miller-rabin.md#miller-rabin)にある
-
 ## 例題 {#examples}
 
 ### ABC228 E. Integer Sequence Fair {#abc228_e}
@@ -216,6 +210,12 @@ $\varphi$ の試し割りは段ごとに $O(\sqrt{m_j})$（$m_j$ はその段の
 
     ??? success "答え"
         2 と 12 は互いに素でないので、余りに直すだけではいけない（$100 \bmod 4 = 0$ から $2^0 = 1$ とすると誤り）。$100 \ge 4$ なので一般化を使い、指数を $4 + 0 = 4$ に直す。$2^4 = 16 \equiv 4 \pmod{12}$ が答えである。確かめると、$2^n \bmod 12$ は $n \ge 2$ で $4, 8, 4, 8, \dots$ と繰り返し、$n$ が偶数なら 4 である。
+
+## 使い分け {#comparison}
+
+- 指数が $10^{18}$ 以下の 1 つの整数なら、指数を小さくする必要はなく、[繰り返し二乗法](../math/mod-pow.md)をそのまま使う
+- 「$a^n \equiv 1$ となる最小の $n$」や「何回で元に戻るか」を問われたら、$p - 1$ や $\varphi(m)$ の約数を調べて[位数](../math/multiplicative-order.md#find-order)を求める
+- $a^{p-1} \equiv 1$ を素数かどうかの判定に使う話は[大きな数の素数判定と素因数分解](../math/miller-rabin.md#miller-rabin)にある
 
 ## 参考 {#references}
 

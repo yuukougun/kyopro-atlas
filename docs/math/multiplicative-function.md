@@ -10,10 +10,10 @@ level: 発展
 kind: [整数論]
 prerequisites: [euler-phi, floor-quotient-enum]
 related: [mobius-function, zeta-mobius-divisor, spf-sieve, sieve-eratosthenes]
-summary: N ≤ 10^10 程度で、φ・μ などの乗法的関数の和 Σ_{n≤N} f(n) や N 以下の素数の個数を、商の列挙を使って O(N^{3/4}/log N) などで求める。関数どうしの関係はディリクレ積で表す。
-complexity: 素数の個数・素数の和は Lucy DP で O(N^{3/4}/log N)、φ・μ の和は杜教篩で O(N^{2/3})（N^{2/3} までの表を前計算）、一般の乗法的関数の和は Min_25 篩で O(N^{3/4}/log N) 程度（再帰の実装は Θ(N^{1−ε}) だが N ≤ 10^11 では十分速い）。どれもメモリは O(√N)〜O(N^{2/3})
+summary: N ≤ 10^10 程度で、φ・μ などの乗法的関数の和（n ≤ N の f(n) の和）や N 以下の素数の個数を、商の列挙を使って O(N^(3/4)/log N) などで求める。関数どうしの関係はディリクレ積で表す。
+complexity: 素数の個数・素数の和は Lucy DP で O(N^(3/4)/log N)、φ・μ の和は杜教篩で O(N^(2/3))（N^(2/3) までの表を前計算）、一般の乗法的関数の和は Min_25 篩で O(N^(3/4)/log N) 程度（再帰の実装は Θ(N^(1−ε)) だが N ≤ 10^11 では十分速い）。どれもメモリは O(√N)〜O(N^(2/3))
 signs:
-  - {type: constraint, text: 'N ≤ 10^10〜10^11 で Σ_{n≤N} f(n)（f は φ・約数の個数など）を求める'}
+  - {type: constraint, text: N ≤ 10^10〜10^11 で n ≤ N の f(n) の和（f は φ・約数の個数など）を求める}
   - {type: phrase, text: N 以下の素数の個数・素数の和}
 acl: []
 verify: [counting_primes, sum_of_totient_function, sum_of_multiplicative_function]
@@ -168,17 +168,6 @@ ACL には対応するものがない。ライブラリを持つなら、Nyaan �
 
 Min_25 篩は再帰の枝の扱いが込み入るので、公開ライブラリを使い、Library Checker の Sum of Multiplicative Function で確かめるのが確実である。自作したものは、[練習問題](#practice)の Library Checker の問題と、篩の表の累積和（$N \le 10^7$ 程度）の答えとを比べて確かめる。
 
-## 使い分け {#comparison}
-
-| 求めるもの | 方法 | 計算量 |
-| --- | --- | --- |
-| 素数の個数・素数の和 | Lucy DP | $O(N^{3/4}/\log N)$ |
-| $\varphi$・$\mu$ など、簡単な $g$・$h$ で $f * g = h$ と書ける関数の和 | 杜教篩 | $O(N^{2/3})$ |
-| $f(p)$ が $p$ の多項式の乗法的関数の和 | Min_25 篩 | $O(N^{3/4}/\log N)$ 程度（再帰の実装は $\Theta(N^{1-\varepsilon})$。[概要](#prefix-sums)を参照） |
-| $N \le 10^7$ 程度の和 | [線形篩](../math/spf-sieve.md#linear-sieve)の表の累積和 | $O(N)$ |
-
-$\sum \varphi$ や $\sum \mu$ は杜教篩でも Min_25 篩でも求まる。杜教篩は関数ごとに $g$・$h$ を探す必要があるが、コードが短い。
-
 ## 学ぶための資料 {#resources}
 
 - [maspy「Dirichlet 積と、数論関数の累積和」](https://maspypy.com/dirichlet-%E7%A9%8D%E3%81%A8%E3%80%81%E6%95%B0%E8%AB%96%E9%96%A2%E6%95%B0%E3%81%AE%E7%B4%AF%E7%A9%8D%E5%92%8C)：ディリクレ積の和を商の値ごとに求める考え方から、$\varphi$ の和やメルテンス関数を $O(N^{2/3})$ で求めるまでを、計算量の見積もりとともに追える。
@@ -201,6 +190,17 @@ ABC で必須になる問題は確認できなかった。
 
 ??? question "確認問題：φ の和を杜教篩で求めるとき、g = 1、h = id を選ぶ理由は何か"
     杜教篩では $G$ と $H$ の和が速く求まる必要がある。$G(x) = x$、$H(x) = x(x + 1)/2$ はどちらも式 1 本で求まり、$\varphi * 1 = \mathrm{id}$ が成り立つ。$g$ に $\mu$ を選ぶと、$G$ がメルテンス関数になって、それ自体を求める手間がかかる。
+
+## 使い分け {#comparison}
+
+| 求めるもの | 方法 | 計算量 |
+| --- | --- | --- |
+| 素数の個数・素数の和 | Lucy DP | $O(N^{3/4}/\log N)$ |
+| $\varphi$・$\mu$ など、簡単な $g$・$h$ で $f * g = h$ と書ける関数の和 | 杜教篩 | $O(N^{2/3})$ |
+| $f(p)$ が $p$ の多項式の乗法的関数の和 | Min_25 篩 | $O(N^{3/4}/\log N)$ 程度（再帰の実装は $\Theta(N^{1-\varepsilon})$。[概要](#prefix-sums)を参照） |
+| $N \le 10^7$ 程度の和 | [線形篩](../math/spf-sieve.md#linear-sieve)の表の累積和 | $O(N)$ |
+
+$\sum \varphi$ や $\sum \mu$ は杜教篩でも Min_25 篩でも求まる。杜教篩は関数ごとに $g$・$h$ を探す必要があるが、コードが短い。
 
 ## 参考 {#references}
 

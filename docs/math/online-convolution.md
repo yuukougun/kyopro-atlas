@@ -13,8 +13,8 @@ related: [divide-and-conquer, fps-basics, dp-speedup-overview]
 summary: 多数の多項式の積を次数の小さいものから2つずつ掛けて O(N log² N) で求める。dp[i] が dp[0..i−1] と既知の列の畳み込みで決まるときは、左半分を確定させてから右半分へ寄与を足す分割統治で求める。
 complexity: N 個の多項式の積は次数の合計を D として O((N + D) log (N + D) log N)（1 次式 N 個なら O(N log^2 N)）、長さ N のオンライン畳み込みは O(N log^2 N)
 signs:
-  - {type: phrase, text: Π(1 + a_i x) のような多数の一次式の積の係数}
-  - {type: shape, text: 'dp[i] = Σ_{j<i} dp[j]·g[i−j] のように、dp が自分より前の値との畳み込みで決まる'}
+  - {type: phrase, text: Π(1 + a_i x) のような多数の 1 次式の積の係数}
+  - {type: shape, text: 'dp[i] が j < i の dp[j]·g[i−j] の和のように、自分より前の値との畳み込みで決まる'}
   - {type: shape, text: 遷移が「和が s になる組の数」の形（多項式の積）}
 acl: [convolution]
 verify: []

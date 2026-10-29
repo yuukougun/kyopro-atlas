@@ -10,8 +10,8 @@ level: 発展
 kind: [整数論, ハッシュ・乱択]
 prerequisites: [exponent-mod, prime-factorization]
 related: [divisor-enum, gcd-lcm, rolling-hash]
-summary: 10^18 程度の数の素数判定を Miller-Rabin で、素因数分解を Pollard's rho で期待 O(N^{1/4}) で行う。64bit の法の掛け算には __int128 か Montgomery 乗算を使う。
-complexity: 素数判定 O(log N)（底 7 個。64bit の法の掛け算を O(1) とみる）、素因数分解 期待 O(N^{1/4}) 回の掛け算（gcd を毎回取ると O(N^{1/4} log N)）
+summary: 10^18 程度の数の素数判定を Miller-Rabin で、素因数分解を Pollard's rho で期待 O(N^(1/4)) で行う。64bit の法の掛け算には __int128 か Montgomery 乗算を使う。
+complexity: 素数判定 O(log N)（底 7 個。64bit の法の掛け算を O(1) とみる）、素因数分解 期待 O(N^(1/4)) 回の掛け算（gcd を毎回取ると O(N^(1/4) log N)）
 signs:
   - {type: constraint, text: N ≤ 10^18 の素数判定・素因数分解（√N の試し割りでは間に合わない）}
   - {type: phrase, text: 非常に大きい数が素数かを多数判定する}

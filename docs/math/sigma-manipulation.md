@@ -14,8 +14,8 @@ summary: 二重和の順序交換・添字の範囲の書き換え・付け替�
 complexity: 式変形そのものに計算量はない。変形の後は、元の式で O(N^2) の二重和が O(N) や O(N log N) になることが多い
 signs:
   - {type: phrase, text: 'すべての組 (i, j)（i < j）について〜を足した和を求める'}
-  - {type: shape, text: 'Σ_{i=1}^{N} Σ_{j=i}^{N} f(i, j) のように、内側の和の範囲が外側の添字で決まる二重和'}
-  - {type: shape, text: 'Σ_{K=1}^{N} K × (K の約数の個数) のように、約数・倍数の関係で書き換えられる和'}
+  - {type: shape, text: 'i = 1..N、j = i..N の f(i, j) の和のように、内側の和の範囲が外側の添字で決まる二重和'}
+  - {type: shape, text: 'K = 1..N の K × (K の約数の個数) の和のように、約数・倍数の関係で書き換えられる和'}
 acl: []
 verify: []
 frequency: A
@@ -235,7 +235,7 @@ $K$ ごとに約数を数えると、試し割りでは $O(N\sqrt{N})$ になり
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [ABC230 E. Fraction Floor Sum](https://atcoder.jp/contests/abc230/tasks/abc230_e)（diff 969）：Σ_{i=1}^{N} ⌊N/i⌋ を求める（N ≤ 10^12）。
+- [ABC230 E. Fraction Floor Sum](https://atcoder.jp/contests/abc230/tasks/abc230_e)（diff 969）：i = 1..N の ⌊N/i⌋ の和を求める（N ≤ 10^12）。
 - [ABC471 E. Sum of Square of Sum](https://atcoder.jp/contests/abc471/tasks/abc471_e)（diff 990）：N 個の整数から K 個を選ぶすべての選び方について、選んだ値の和の 2 乗を足し合わせ、998244353 で割った余りを求める。
 - [ABC356 E. Max/Min](https://atcoder.jp/contests/abc356/tasks/abc356_e)（diff 1506）：長さ N の数列のすべての組 i < j について ⌊max(A_i, A_j) / min(A_i, A_j)⌋ を足した和を求める（A_i ≤ 10^6）。
 
