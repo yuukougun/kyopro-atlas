@@ -245,7 +245,7 @@ $$
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [ABC455 G. Balanced Subarrays](https://atcoder.jp/contests/abc455/tasks/abc455_g)（diff 3092）：各値が同じ回数ずつ現れる連続部分列のうち、各値が $B$ 回ずつのものと、$B$ 種類の値からなるものの個数を、与えられた複数の $B$ ごとに求める。
+- [ABC455 G. Balanced Subarrays](https://atcoder.jp/contests/abc455/tasks/abc455_g)（diff 3092）：各値が同じ回数ずつ現れる連続部分列のうち、各値が B 回ずつのものと、B 種類の値からなるものの個数を、与えられた複数の B ごとに求める。
 
 </div>
 

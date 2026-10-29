@@ -132,12 +132,6 @@ ACL には木の同型判定も木のハッシュもない。公開ライブラ�
 
 Library Checker の [Rooted Tree Isomorphism Classification](https://judge.yosupo.jp/problem/rooted_tree_isomorphism_classification) で根付き木の分類を確かめられる。根のない木の同型は Library Checker に専用の問題がないので、CSES の Tree Isomorphism II（[練習問題](#practice)）で確かめる。
 
-## 学ぶための資料 {#resources}
-
-- [OI Wiki「AHU 算法」](https://oi-wiki.org/graph/tree-ahu/)（中国語）：深さごとの基数ソートで $O(N)$ にする方法と、文字列を連結すると $O(N^2)$ になることの説明がある（文章と図の利用条件は CC BY-SA）。
-- [OI Wiki「树哈希」](https://oi-wiki.org/graph/tree-hash/)（中国語）：整数の写像で写してから和を取る設計と、根のない木を重心か全方位の計算で扱う方法がある（同じく CC BY-SA）。
-- [Nyaan「Rooted Tree Hash」](https://nyaannyaan.github.io/library/tree/rooted-tree-hash.hpp)：高さごとの乱数と法 $2^{61} - 1$ の積で作る木のハッシュの実装。
-
 ## 落とし穴 {#pitfalls}
 
 **子の名前を整列しない**。子を入力の順に並べたまま名前を引くと、子の順番だけが違う同型な部分木に別の名前が付く。名前の列は必ず整列してから表を引く。
@@ -149,6 +143,12 @@ Library Checker の [Rooted Tree Isomorphism Classification](https://judge.yosup
 **固定の式のハッシュ**。和や固定の基数の多項式は衝突させられやすい。乱数は実行時に選び、比べる組の数で誤る確率を見積もる。
 
 **再帰が深くなる**。一直線の木は深さ $N$ になり、再帰の DFS ではスタックがあふれうる。Library Checker のテストにも一直線の大きな木がある。BFS の順の逆で回すなど、再帰を使わない書き方にする（[再帰の深さと非再帰の書き方](../tree/tree-traversal.md#recursion-depth)）。
+
+## 学ぶための資料 {#resources}
+
+- [OI Wiki「AHU 算法」](https://oi-wiki.org/graph/tree-ahu/)（中国語）：深さごとの基数ソートで $O(N)$ にする方法と、文字列を連結すると $O(N^2)$ になることの説明がある（文章と図の利用条件は CC BY-SA）。
+- [OI Wiki「树哈希」](https://oi-wiki.org/graph/tree-hash/)（中国語）：整数の写像で写してから和を取る設計と、根のない木を重心か全方位の計算で扱う方法がある（同じく CC BY-SA）。
+- [Nyaan「Rooted Tree Hash」](https://nyaannyaan.github.io/library/tree/rooted-tree-hash.hpp)：高さごとの乱数と法 $2^{61} - 1$ の積で作る木のハッシュの実装。
 
 ## 練習問題 {#practice}
 

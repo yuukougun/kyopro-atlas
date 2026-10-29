@@ -30,7 +30,7 @@ sections:
   - {title: N が巨大なとき：遷移行列の累乗・ダブリング, anchor: matrix-power}
   - {title: 包除はどこで破綻するか（位置の重なりとパターンの集合）, anchor: why-not-inclusion-exclusion}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -264,7 +264,7 @@ $N$ が $10^9$ なので 1 文字ずつの DP は間に合わない。禁止さ�
 
 </div>
 
-??? note "方針"
+??? note "練習の方針"
     - **ABC122 D**：入れ替えで AGC が現れる並びを長さ 4 以下の禁止された並びとして書き出すと、末尾 3 文字の状態で足りる（照合の状態の簡易版）。例題としての解説は [DP の状態の設計の ABC122 D](../dp/dp-state-design.md#abc122_d) にある。禁止された並びのうち 1 文字を任意とするものを、具体的な文字を入れて展開すれば、Aho-Corasick 法の状態でも解ける。
     - **ABC305 G**：禁止された文字列は短いので、末尾の数文字か Aho-Corasick 法の状態を状態にし、遷移行列を累乗する。末尾の文字を使う解き方は [行列累乗の ABC305 G](../math/matrix-power.md#abc305_g) にある。
 
