@@ -32,7 +32,7 @@ sections:
   - {title: 2 次元いもす法（四隅に ±1、横と縦に累積）, anchor: imos-2d}
   - {title: 途中で値を読むなら BIT・遅延セグ木, anchor: online}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -63,7 +63,7 @@ $$
 
 すべての操作を記録したら、$A[i] = D[0] + D[1] + \dots + D[i]$ と左から累積する。添字はすべて 0-indexed である。
 
-![操作 1 が区間 [1, 5) に +1、操作 2 が区間 [3, 7) に +2。D は位置 1 に +1、3 に +2、5 に −1、7 に −2 を持ち、左から累積すると A = 0, 1, 1, 3, 3, 2, 2, 0 になる](../img/imos/imos-1d.svg)
+![操作 1 が区間 \[1, 5) に +1、操作 2 が区間 \[3, 7) に +2。D は位置 1 に +1、3 に +2、5 に −1、7 に −2 を持ち、左から累積すると A = 0, 1, 1, 3, 3, 2, 2, 0 になる](../img/imos/imos-1d.svg)
 
 次の動く図では、同じ例で $D$ に印を 1 か所ずつ書き込み、そのあと左から累積して $A$ を 1 マスずつ埋める様子をステップ送りで確かめられる。累積の途中の値 $\mathrm{cur}$ は、カーソルまでの $D$ の和である。
 
@@ -74,6 +74,9 @@ $$
 ```cpp
 --8<-- "imos/imos-1d.cpp:core"
 ```
+
+完全なプログラム：[`imos-1d.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/imos/imos-1d.cpp)（GitHub）
+{ .kp-code-src }
 
 境界で迷いやすいのは次の 3 点である。
 
@@ -158,6 +161,9 @@ $$
 --8<-- "imos/second-order.cpp:core"
 ```
 
+完全なプログラム：[`second-order.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/imos/second-order.cpp)（GitHub）
+{ .kp-code-src }
+
 初項 $s$・公差 $c$ の等差数列 $s, s + c, s + 2c, \dots$ を足すときは、$s + c(k - 1) = (s - c) + c \cdot k$ と分ける。定数 $s - c$ の部分は 1 段のいもす法で、$c \cdot (1, 2, 3, \dots)$ の部分は上の 4 か所の印を $c$ 倍して置けばよい。一般に $k$ 次の多項式を区間に足すには $k + 1$ 段の差分を取り、累積和を $k + 1$ 回取る（いもす法の原典の「次数の拡張」の節）。
 
 ## 2 次元いもす法（四隅に ±1、横と縦に累積） {#imos-2d}
@@ -170,11 +176,14 @@ $$
 
 その後、各行で横に累積し、続けて各列で縦に累積する。横の累積で、行 $x_1$ には列 $[y_1, y_2)$ だけが 1、行 $x_2$ には同じ範囲だけが $-1$ の帯ができる。縦の累積で、この 2 本の帯が行 $[x_1, x_2)$ の間だけ 1 を残す。結果は長方形の中だけが 1 になる。
 
-![4 行 5 列の盤で長方形 [1, 3) × [1, 4) に 1 を足す。① 四隅 (1,1)・(3,4) に +1、(1,4)・(3,1) に −1。② 横に累積すると行 1 の列 1〜3 が 1、行 3 の列 1〜3 が −1。③ 縦に累積すると行 1〜2・列 1〜3 の 6 マスが 1 になる](../img/imos/imos-2d.svg)
+![4 行 5 列の盤で長方形 \[1, 3) × \[1, 4) に 1 を足す。① 四隅 (1,1)・(3,4) に +1、(1,4)・(3,1) に −1。② 横に累積すると行 1 の列 1〜3 が 1、行 3 の列 1〜3 が −1。③ 縦に累積すると行 1〜2・列 1〜3 の 6 マスが 1 になる](../img/imos/imos-2d.svg)
 
 ```cpp
 --8<-- "imos/imos-2d.cpp:core"
 ```
+
+完全なプログラム：[`imos-2d.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/imos/imos-2d.cpp)（GitHub）
+{ .kp-code-src }
 
 長方形 1 つの記録が $O(1)$、累積が $O(HW)$ なので、長方形が $N$ 個なら全体は $O(N + HW)$ である。横と縦はどちらを先に累積してもよい。ただし両方を必ず行う。片方だけでは帯のままになる。
 
@@ -241,11 +250,11 @@ $$
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC369 C. Count Arithmetic Subarrays](https://atcoder.jp/contests/abc369/tasks/abc369_c)（diff 323）：数列の連続部分列のうち、等差数列になっているものの個数を求める。
-- [典型90 064. Uplift（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_bl)（diff —）：区間に一律の値を足すたびに、隣り合う要素の差の絶対値の和を答える。
+- [典型90 064. Uplift（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_bl)（diff なし）：区間に一律の値を足すたびに、隣り合う要素の差の絶対値の和を答える。
 - [ABC462 D. Accomplice](https://atcoder.jp/contests/abc462/tasks/abc462_d)（diff 798）：各人が館にいた時間帯と犯行にかかる時間 D から、犯人 2 人と犯行の開始時刻の組としてありうるものの数を求める。
 - [ABC221 D. Online games](https://atcoder.jp/contests/abc221/tasks/abc221_d)（diff 832）：各プレイヤーのログイン期間から、ちょうど k 人がログインしていた日数を k ごとに求める。
 - [ABC466 E. Range Flip](https://atcoder.jp/contests/abc466/tasks/abc466_e)（diff 1027）：表と裏に数が書かれたカードの列で、区間の裏返しを K 回以下行った後の、上を向いた数の和の最大値を求める。
-- [典型90 028. Cluttered Paper（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_ab)（diff —）：長方形の紙を N 枚置いたとき、ちょうど k 枚が重なっている部分の面積を k ごとに求める。
+- [典型90 028. Cluttered Paper（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_ab)（diff なし）：長方形の紙を N 枚置いたとき、ちょうど k 枚が重なっている部分の面積を k ごとに求める。
 
 </div>
 

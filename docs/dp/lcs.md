@@ -29,7 +29,7 @@ sections:
   - {title: 最長回文部分列（S と反転の LCS）, anchor: palindromic-subsequence}
   - {title: LCS の値ごとに数える：DP の DP（内側の DP の 1 行を外側の状態にする）, anchor: dp-of-dp, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -97,6 +97,9 @@ LCS そのものを出力するには、表を埋めた後に $(N, M)$ から出
 --8<-- "lcs/lcs.cpp:core"
 ```
 
+完全なプログラム：[`lcs.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lcs/lcs.cpp)（GitHub）
+{ .kp-code-src }
+
 最適な LCS は複数あることが多く、上を先に見るか左を先に見るかで出力が変わる。どれを出してもよい問題ならどちらでもよい。辞書順最小などの指定があるときの決め方は [DP の復元](../dp/dp-reconstruction.md#ties)にまとめてある。
 
 ??? question "確認問題：文字を先頭に足していくと何が起きるか"
@@ -127,6 +130,9 @@ $[\cdot]$ は中が真なら 1、偽なら 0 である。3 方向で足りる理
 ```cpp
 --8<-- "lcs/edit-distance.cpp:core"
 ```
+
+完全なプログラム：[`edit-distance.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lcs/edit-distance.cpp)（GitHub）
+{ .kp-code-src }
 
 コストの付け方を変えると、ほかの問題も同じ表で解ける。
 
@@ -211,6 +217,9 @@ $S = \texttt{ab}$ では行は 4 通りで、右端が 2 になる行 $(0, 1, 2)
 --8<-- "lcs/lcs-row-dp.cpp:core"
 ```
 
+完全なプログラム：[`lcs-row-dp.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lcs/lcs-row-dp.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 $N = 10$、$M = 100$、$\sigma = 26$ なら、遷移は $26 \cdot 100 \cdot 2^{10} \approx 2.7 \times 10^6$ 回である。前計算をせずに毎回行を作り直すと $N$ 倍の手間になるので、遷移は表にしておく。$S$ に現れない文字はどれも同じ遷移なので、1 つにまとめて個数を掛けてもよい。
 
 この型が使えるのは、「ある DP で求まる値が $k$ になる入力の数」を問われたときである。ただし、内側の DP の 1 行（または状態全体）の取りうる形が少ない必要がある。行の形は、単調性や差が 0 か 1 であることなどから見積もる。値をそのまま持つと $(N+1)^{N+1}$ 通りに見えるが、差で持てば $2^N$ 通りに減る。
@@ -235,7 +244,7 @@ $N = 10$、$M = 100$、$\sigma = 26$ なら、遷移は $26 \cdot 100 \cdot 2^{1
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC F. LCS](https://atcoder.jp/contests/dp/tasks/dp_f)（diff —）：2 つの文字列の最長共通部分列を 1 つ出力する。
+- [EDPC F. LCS](https://atcoder.jp/contests/dp/tasks/dp_f)（diff なし）：2 つの文字列の最長共通部分列を 1 つ出力する。
 
 </div>
 

@@ -24,7 +24,7 @@ sections:
   - {title: 頂点を入口と出口に分けて頂点カットを表す, anchor: vertex-cut}
   - {title: カットの形を決め打つ, anchor: cut-shape, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -80,6 +80,9 @@ ACL の `mf_graph` の `min_cut(s)` は、この「残余グラフで s から�
 --8<-- "min-cut/restore.cpp:core"
 ```
 
+完全なプログラム：[`restore.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/min-cut/restore.cpp)（GitHub）
+{ .kp-code-src }
+
 !!! info "ACL では"
     `atcoder::mf_graph<long long> g(n);`。`g.add_edge(from, to, cap)` は追加した順の辺の番号を返す。`g.flow(s, t)` で流し、続けて `g.min_cut(s)` を呼ぶと、残余グラフで s から届く頂点が `true` になる（$O(N + M)$）。ドキュメントがカットに対応すると保証するのは、`flow(s, t)` を `flow_limit` なしでちょうど 1 回呼んだ後である。同じ s・t で辺を足して `flow(s, t)` を流し直した後も、残余グラフに s から t への道は残らないので、最小カットに対応する。`g.edges()` で各辺の流量と容量も見られる。
 
@@ -108,6 +111,9 @@ ACL の `mf_graph` の `min_cut(s)` は、この「残余グラフで s から�
 ```cpp
 --8<-- "min-cut/vertex-cut.cpp:core"
 ```
+
+完全なプログラム：[`vertex-cut.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/min-cut/vertex-cut.cpp)（GitHub）
+{ .kp-code-src }
 
 $\infty$ は「有限の容量の総和 + 1」にしてある。流した量がこれ以上なら、$\infty$ の辺を切らないと切り離せない（s と t が隣り合う）ので、答えは「できない」になる。
 
@@ -139,7 +145,7 @@ $\infty$ は「有限の容量の総和 + 1」にしてある。流した量が�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [ABC010 D. 浮気予防](https://atcoder.jp/contests/abc010/tasks/abc010_4)（diff 1777）：頂点 0 から指定された頂点群のどれにも行けなくするのに必要な、最小の操作回数を求める。
+- [ABC010 D. 浮気予防](https://atcoder.jp/contests/abc010/tasks/abc010_4)（diff 1777・参考値）：頂点 0 から指定された頂点群のどれにも行けなくするのに必要な、最小の操作回数を求める。
 
 </div>
 

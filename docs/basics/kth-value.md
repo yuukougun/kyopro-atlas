@@ -25,7 +25,7 @@ sections:
   - {title: 数え方の型（ソート＋二分探索・尺取り、符号で場合分け、包除）, anchor: counting-patterns}
   - {title: 上位 M 個の和（同じ値の分の調整）, anchor: top-m-sum}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -87,6 +87,9 @@ $\mathrm{count}(x)$ の数え方は、値の作られ方で決まる。二分探
 --8<-- "kth-value/pair-product.cpp:core"
 ```
 
+完全なプログラム：[`pair-product.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/kth-value/pair-product.cpp)（GitHub）
+{ .kp-code-src }
+
 **包除（倍数や欠けた数）**。数える対象が「$N$ か $M$ のちょうど一方で割り切れる数」のように集合の演算で決まるなら、$\lfloor x / N \rfloor$ のような式の足し引きで $O(1)$ で数えられる。「列に含まれない正の整数」なら、$x$ 以下の正の整数 $x$ 個から列の中で $x$ 以下のものを引けばよい。どちらも、個数の式が立てば後は同じ二分探索である。
 
 ??? question "確認問題：符号で場合分けの表"
@@ -107,6 +110,9 @@ $\mathrm{count}(x)$ の数え方は、値の作られ方で決まる。二分探
 ```cpp
 --8<-- "kth-value/top-m-sum.cpp:core"
 ```
+
+完全なプログラム：[`top-m-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/kth-value/top-m-sum.cpp)（GitHub）
+{ .kp-code-src }
 
 $c$ を「$t$ 以上の値の個数」で数えると、$t$ に等しい値をすべて足してしまい、$M$ 個を超える。$t$ ちょうどの値が何個あるかは問題によって大きく変わるので、必ず「$t$ より大きい」と「ちょうど $t$」に分ける。
 
@@ -166,7 +172,7 @@ $N \le 2 \times 10^5$ で組は約 $2 \times 10^{10}$ 個あり、並べられ�
 
 - [ABC205 D. Kth Excluded](https://atcoder.jp/contests/abc205/tasks/abc205_d)（diff 713）：数列に含まれない正の整数のうち、小さい方から K 番目を答えるクエリに答える。
 - [ABC364 D. K-th Nearest](https://atcoder.jp/contests/abc364/tasks/abc364_d)（diff 1136）：数直線上の N 点と Q 個の質問点について、質問点から K 番目に近い点までの距離を答える。
-- [ARC037 C. 億マス計算](https://atcoder.jp/contests/arc037/tasks/arc037_c)（diff 1824）：a_i × b_j の N^2 個の値のうち、小さい方から K 番目を求める。
+- [ARC037 C. 億マス計算](https://atcoder.jp/contests/arc037/tasks/arc037_c)（diff 1824・参考値）：a_i × b_j の N^2 個の値のうち、小さい方から K 番目を求める。
 
 </div>
 

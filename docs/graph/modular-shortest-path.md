@@ -23,7 +23,7 @@ sections:
   - {title: 余りを頂点、操作を辺にする, anchor: residue-vertices}
   - {title: 同余最短路（最小の数で割った余りごとの最小値）, anchor: congruence}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -81,17 +81,20 @@ $d$ が求まれば、ほかの問いも余りごとの式で答えられる。
 
 $m$ に最小の数を選ぶのは、頂点数 $m$ が最も小さくなるからである。どの $a_j$ を法にしても同じ議論が成り立つ。$n = 2$ では $d[(kb) \bmod a] = kb$（$k = 0, \dots, a-1$）となり、$\max d - a = (a-1)b - a$ から公式 $ab - a - b$ が出る。
 
-頂点 $m$ 個・辺 $nm$ 本なので、ダイクストラ法で $O(nm \log m)$ である（[前の節](#residue-vertices)の $K$ が $m$ にあたる）。ダイクストラ法の中心は次のとおりである（完全なプログラムは `snippets/modular-shortest-path/congruence.cpp` で、個数制限なしのナップサックによる愚直な方法と比べている）。
+頂点 $m$ 個・辺 $nm$ 本なので、ダイクストラ法で $O(nm \log m)$ である（[前の節](#residue-vertices)の $K$ が $m$ にあたる）。ダイクストラ法の中心は次のとおりである（完全なプログラムは [`snippets/modular-shortest-path/congruence.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/modular-shortest-path/congruence.cpp) で、個数制限なしのナップサックによる愚直な方法と比べている）。
 
 ```cpp
 --8<-- "modular-shortest-path/congruence.cpp:core"
 ```
 
+完全なプログラム：[`congruence.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/modular-shortest-path/congruence.cpp)（GitHub）
+{ .kp-code-src }
+
 ## ライブラリでの使い方 {#library}
 
 ACL に専用の関数はなく、ダイクストラ法か 01-BFS をそのまま書けば足りる。グラフを隣接リストで作る必要もなく、頂点 $r$ から出る辺は、$a_j$ を順に見ながらその場で作れる。自作するときの要点は次のとおりである。
 
-- **値の大きさ**：$d[r]$ は最大で $m \cdot \max_j a_j$ 程度になり、$m$ と $a_j$ が $10^5$ でも `int` を超える。`long long` で持つ。$\infty$ は数の比較だけに使い、$\infty$ に重みを足さない。
+- **値の大きさ**：$d[r]$ は最大で $m \cdot \max_j a_j$ 程度になり、$m$ と $a_j$ が $10^5$ でも `int` を超える。`long long` で持つ。$\infty$ は数の比較だけに使い、$\infty$ に重みを足さない。コード片の $\infty$ は `1LL << 60` で（[INF の決め方](../cpp/cpp-types-literals.md#inf)）、$H$ はそれより大きいことがあるので、個数を数えるときは $\infty$ の余りを先に除く。
 - **自己ループ**：$a_j$ が $m$ の倍数なら辺は自己ループになり、飛ばしてよい。
 - **始点**：同余最短路では頂点 0（何も足さない和の 0）から始める。「正の倍数」のように 0 を除くときは、始点を最初の操作の後の頂点にする（ARC084 D では 1 から始める）。
 - **個数の上限**：数え上げの答えは $H$ 程度まで大きくなるので、`long long` で足す。
@@ -100,9 +103,9 @@ Library Checker に同余最短路そのものを問う問題はない（2026-10
 
 ## 学ぶための資料 {#resources}
 
-- 余りを頂点にして +1 と ×10 の辺で 01-BFS する流れは、けんちょん氏の ARC084 D の解説が詳しい。
-- 同余最短路（法を最小の数にし、$[L, R]$ の個数を数える）は、洛谷の「墨墨的等式」の題解が式までまとめている（中国語）。
-- OI Wiki の「同余最短路」は、跳楼机と ARC084 D を例に構成を説明し、練習の問題の一覧を載せている（中国語）。ダイクストラ法を使わない方法として、数の種類ごとに、同じ数を足す辺が分ける閉路をそれぞれ 2 周して緩和する方法も載っている。数 1 種類あたり $O(m)$ なので、全体で $O(nm)$ になる。
+- [drken「AtCoder ABC 077 D - Small Multiple (ARC 084 D) (3D, 橙色, 700 点)」](https://drken1215.hatenablog.com/entry/2021/07/30/160000)：余りを頂点にして +1 と ×10 の辺で 01-BFS する流れが詳しい。
+- [Heartlessly「题解 P2371 【[国家集训队]墨墨的等式】」](https://www.luogu.com.cn/article/7yfca7t0)（洛谷。中国語）：同余最短路（法を最小の数にし、$[L, R]$ の個数を数える）を式までまとめている。
+- [OI Wiki「同余最短路」](https://oi-wiki.org/graph/mod-shortest-path/)（中国語）：跳楼机と ARC084 D を例に構成を説明し、練習の問題の一覧を載せている。ダイクストラ法を使わない方法として、数の種類ごとに、同じ数を足す辺が分ける閉路をそれぞれ 2 周して緩和する方法も載っている。数 1 種類あたり $O(m)$ なので、全体で $O(nm)$ になる。
 
 ## 例題 {#examples}
 

@@ -24,7 +24,7 @@ sections:
   - {title: 包除と組み合わせる例, anchor: with-inclusion-exclusion}
   - {title: 自作するときの要点, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -108,18 +108,21 @@ ACL に二項係数の部分和はない。自作するときは、状態 $(n, K
 --8<-- "binomial-prefix-sum/mover.cpp:core"
 ```
 
+完全なプログラム：[`mover.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binomial-prefix-sum/mover.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 - $K$ を増やすときは先に $K$ を進めてから $\binom{n}{K}$ を足し、減らすときは先に $\binom{n}{K}$ を引いてから $K$ を戻す。$n$ を動かす式では、増やすときは動かす前の $n$、減らすときは動かした後の $n$ の二項係数を使う。順番を取り違えると 1 つずれた項を足し引きする。
 - 二項係数の表は、たどる範囲の最大の $n$ まで作る。範囲外の $(n, k)$ で 0 を返す関数にしておく（[表の大きさと範囲外の 0](../comb/binomial-precompute.md#table-size)）。
 - 区間の Mo と違って、$(n, K)$ には通ってはいけない状態がない（$K > n$ や $K = -1$ でも式が成り立つ）ので、4 方向はどの順に動かしてもよい。$K$ は目標の値より小さくならないので、クエリに $K = -1$ がなければ $S(n, -1)$ も通らない。
 
-完全なプログラム（`snippets/binomial-prefix-sum/mover.cpp`）は、クエリを Mo の順に並べて処理し、`n_max` が 60 以下のときは各答えを愚直な和と `assert` で比べる。
+完全なプログラム（[`snippets/binomial-prefix-sum/mover.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binomial-prefix-sum/mover.cpp)）は、クエリを Mo の順に並べて処理し、`n_max` が 60 以下のときは各答えを愚直な和と `assert` で比べる。
 
 Library Checker には二項係数の部分和そのものの問題はない。二項係数の部分は Binomial Coefficient (Prime Mod) で確かめられる。部分和は、小さい $n$ で愚直に足した値と比べるのが確実である。
 
 ## 学ぶための資料 {#resources}
 
-- ikatakos 氏の ABC235 の記録の G 問題の節：パスカルの三角形で値が下の行へ 2 回ずつ足し込まれることから、$n$ を 1 増やす式を導いている。
-- kmjp 氏の ABC235 G の記事：包除の式と、部分和の表を $n$ の順に埋めるコード。
+- [ikatakos「HHKB Programming Contest 2022（AtCoder Beginner Contest 235）F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2022/0115_abc235)の G 問題の節：パスカルの三角形で値が下の行へ 2 回ずつ足し込まれることから、$n$ を 1 増やす式を導いている。
+- [kmjp「AtCoder ABC #235 : G - Gardens」](https://kmjp.hatenablog.jp/entry/2022/01/17/0900)：包除の式と、部分和の表を $n$ の順に埋めるコード。
 - 2 つの座標を Mo の順に動かす考え方は [Mo's algorithm の 2 つの接頭辞の節](../ds/mo-algorithm.md#two-prefixes)にまとめた。
 
 ## 例題 {#examples}

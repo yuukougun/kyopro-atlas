@@ -101,6 +101,9 @@ $$
 --8<-- "counting-dedup/leftmost.cpp:core"
 ```
 
+完全なプログラム：[`leftmost.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/counting-dedup/leftmost.cpp)（GitHub）。`mint` は ACL の `modint1000000007`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 最も左の埋め込みは DP でも使える。「$T$ を左から作り、貪欲な照合で $S$ の何文字目まで合わせたか」を状態にすると、各文字で「次に合わせたい文字を置いて 1 進む」（1 通り）か「それ以外を置いて止まる」（$\sigma - 1$ 通り）に分かれる。全部合わせた後は $\sigma$ 通りである。1 つの文字列の異なる部分列の種類数も同じ考え方で数える。[部分列 DP](../dp/subsequence-dp.md#next-table-dp) では、次の出現位置の表を使って最も左の取り出し方だけを数える。
 
 ## グループ分けは未使用の最小番号から決める {#min-index}
@@ -120,6 +123,9 @@ $$
 ```cpp
 --8<-- "counting-dedup/partition-dp.cpp:core"
 ```
+
+完全なプログラム：[`partition-dp.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/counting-dedup/partition-dp.cpp)（GitHub）
+{ .kp-code-src }
 
 **大きさで数える DP**。グループの作り方の数がグループの大きさだけで決まる（どの要素が入るかによらない）なら、状態を「使った要素の数」に縮められる。$\mathrm{dp}[n]$ は、最小番号の規則でグループを順に作り、合わせて $n$ 個を使い終えた途中の状態の数とする（どの $n$ 個を使ったかも区別して数える）。次のグループは残りの最小番号の要素を必ず含む。大きさ $k$ なら、ほかの $k - 1$ 個を残りの $N - n - 1$ 個から選び、$\mathrm{dp}[n + k] \mathrel{+}= \mathrm{dp}[n] \cdot \binom{N - n - 1}{k - 1} \cdot (\text{大きさ } k \text{ のグループの作り方})$ とする。以後の数え方は残りの個数だけで決まるので、どの $n$ 個を使ったかを状態に持たなくてよい。頂点に番号の付いたグラフを連結成分ごとに数えるとき（[力試し ABC180 F](#challenge)）がこの形である。
 

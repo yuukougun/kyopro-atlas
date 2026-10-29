@@ -13,7 +13,7 @@ related: [interval-dp, alien-dp, cht, slope-trick, ternary-search#convexity, kna
 summary: コスト c(i, j) が Monge なら各行の最小値を取る位置が単調になり、分割統治（monotone minima）や Knuth-Yao で区間分割 DP・区間 DP を速くできる。凸な列どうしの合成も速い。
 complexity: monotone minima O(N + M log N)（N 行 M 列）、SMAWK O(N + M)、K 個の区間に分ける DP は O(KN log N)、Knuth-Yao O(N^2)、凸な列と任意の列の (min,+) 畳み込み O((N + M) log(N + M))、凸な列どうしは O(N + M)
 signs:
-  - {type: shape, text: '区間分割 DP のコストが c(a, c) + c(b, d) ≤ c(a, d) + c(b, c) を満たす（区間を広げるほど増え方が大きい）'}
+  - {type: shape, text: '区間分割 DP のコストが a ≤ b ≤ c ≤ d について c(a, c) + c(b, d) ≤ c(a, d) + c(b, c) を満たす（区間を広げるほど増え方が大きい）'}
   - {type: shape, text: 最適な区切り位置 opt(i) が i について単調に動く}
   - {type: phrase, text: 区間から k 個選ぶときの最大値を、すべての k について求める}
   - {type: constraint, text: N ≤ 10^5 の列を K（数十）個の区間に分ける}
@@ -30,13 +30,13 @@ sections:
   - {title: '凸な列どうしの (max,+) 畳み込み（差分のマージ）', anchor: convex-max-plus-convolution}
   - {title: ライブラリでの検証, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
     - **何ができるか**：コスト $c(i, j)$ が Monge なら各行の最小値を取る位置が単調になり、分割統治（monotone minima）で区間分割 DP を、Knuth-Yao で区間 DP を速くできる。凸な列と別の列の (min,+) 畳み込みも速く計算できる。
     - **いつ使うか**：
-        - 区間分割 DP のコストが $c(a, c) + c(b, d) \le c(a, d) + c(b, c)$ を満たす（区間を広げるほど増え方が大きい）
+        - 区間分割 DP のコストが $a \le b \le c \le d$ について $c(a, c) + c(b, d) \le c(a, d) + c(b, c)$ を満たす（区間を広げるほど増え方が大きい）
         - 最適な区切り位置 $\mathrm{opt}(i)$ が $i$ について単調に動く
         - 区間から $k$ 個選ぶときの最大値を、すべての $k$ について求める
         - $N \le 10^5$ の列を $K$（数十）個の区間に分ける
@@ -148,11 +148,14 @@ $$
 - **凸な列どうし**：$a$ と $b$ の差分をそれぞれ小さい順に並べてマージし、$c_0 = a_0 + b_0$ から差分を順に足せばよい。$O(N + M)$ で、結果も凸である。$k$ 個を 2 つの組から合わせて選ぶとき、次の 1 個は増分の小さい方（最大化なら大きい方）から取る、という貪欲と同じである。
 - **凸な列と任意の列**：行 $k$・列 $j$ の値 $a_{k-j} + b_j$ は、$a$ が凸なら Monge になる（範囲外の値を $+\infty$ とみなしても崩れない）。monotone minima で $O((N + M) \log (N + M))$、SMAWK なら $O(N + M)$ である。
 
-次のコード片は、凸な列と任意の列の (min,+) 畳み込みである。行 $k$ で使える列 $[\max(0, k - N + 1), \min(M - 1, k)]$ と、再帰で受け取った範囲の共通部分だけを調べる。完全なプログラムは `snippets/monge/convolution.cpp` で、凸な列どうしのマージも同じファイルにある。
+次のコード片は、凸な列と任意の列の (min,+) 畳み込みである。行 $k$ で使える列 $[\max(0, k - N + 1), \min(M - 1, k)]$ と、再帰で受け取った範囲の共通部分だけを調べる。完全なプログラムは [`snippets/monge/convolution.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/monge/convolution.cpp) で、凸な列どうしのマージも同じファイルにある。
 
 ```cpp
 --8<-- "monge/convolution.cpp:core"
 ```
+
+完全なプログラム：[`convolution.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/monge/convolution.cpp)（GitHub）
+{ .kp-code-src }
 
 分割統治の各ノードで「左半分の上に凸な列」と「右半分の任意の列」を合成する問題は、各段がこの畳み込みになり、全体で $O(N \log^2 N)$ になる（[例題](#abc348_g)）。
 
@@ -167,8 +170,8 @@ ACL には Monge に関する機能がない。自作したら Library Checker �
 
 ## 学ぶための資料 {#resources}
 
-- tatyam 氏のスライド「Monge の手引書」：Monge・全単調の定義と関係、Monge になる行列の作り方、monotone minima・SMAWK・LARSCH、Knuth-Yao、Alien DP までを 1 つにまとめた日本語の資料。このページの節のほとんどについて、証明と図はここで読める。
-- noshi91 氏の記事「簡易版 LARSCH Algorithm」：段のない DP $\mathrm{dp}[i] = \min_{j < i} (\mathrm{dp}[j] + c(j, i))$ を $O(N \log N)$ で解く分割統治。区間の端を少しずつ動かしてコストを求める場合にも使える。
+- [tatyam「Monge の手引書」](https://speakerdeck.com/tatyam_prime/monge-noshou-yin-shu)：Monge・全単調の定義と関係、Monge になる行列の作り方、monotone minima・SMAWK・LARSCH、Knuth-Yao、Alien DP までを 1 つにまとめた日本語のスライド。このページの節のほとんどについて、証明と図はここで読める。
+- [noshi91「簡易版 LARSCH Algorithm」](https://noshi91.hatenablog.com/entry/2023/02/18/005856)：段のない DP $\mathrm{dp}[i] = \min_{j < i} (\mathrm{dp}[j] + c(j, i))$ を $O(N \log N)$ で解く分割統治の記事。区間の端を少しずつ動かしてコストを求める場合にも使える。
 
 ## 例題 {#examples}
 
@@ -201,6 +204,13 @@ ACL には Monge に関する機能がない。自作したら Library Checker �
 ??? note "練習の方針"
     - ABC383 G：長さ $K$ の区間の和を始点ごとの値の列にすると、始点どうしを $K$ 以上離して選ぶ問題になる。列を分割統治で半分に分け、$K$ は小さいので、各区間について「左端と右端で使えない位置がいくつあるか」の組ごとに、選ぶ個数についての最大値の列を持てる。この列は上に凸なので、左右の合成は差分のマージ（凸な列どうしの (max,+) 畳み込み）で行える。境目をまたいで使えない $K - 1$ 個を左右にどう分けるかごとにマージし、要素ごとの最大を取る。
     - ABC458 G：答えの人数で二分探索し、日ごとに「脱出した人数」についての残りの量の最大値を DP で持つ。この値は人数について上に凸な折れ線で、脱出の遷移は 1 次の列との (max,+) 畳み込みになる。凸性を保つので、折れ線を傾きの列で持って更新すれば 1 回の判定がならし $O(N)$ で済む（[Slope Trick の力試し](slope-trick.md#challenge)）。
+
+## 使い分け {#comparison}
+
+- コストを展開したとき、$i$ と $j$ の両方を含む項が積の項 1 つだけなら、[CHT](../dp/cht.md#lines) の方が軽い。区間の和の 2 乗 $(S_i - S_j)^2 = S_i^2 - 2 S_i S_j + S_j^2$（$S$ は累積和）は、要素が非負なら Monge であり、この形にも当てはまる。このとき直線の傾きとクエリはどちらも単調に並ぶので、deque の CHT で遷移 1 回がならし $O(1)$ になる。monotone minima の 1 段 $O(N \log N)$ より速く、実装も短い。
+- Monge でも積の項 1 つにまとまらないコスト（区間の中の同じ値の組の個数など）は CHT では扱えず、このページの方法を使う。逆に積の項がなく、$i$ だけの項と $j$ だけの項の和なら、範囲の最小を取るだけで済む（[セグメント木・累積和・スライド最小値の使い分け](../dp/dp-segment-tree.md#which-tool)）。
+- 区間の個数 $K$ が大きく $K$ 段を回せないなら、[Alien DP](../dp/alien-dp.md#with-monge) で個数の制約を外す。
+- 式の形から道具を選ぶ全体は [DP の高速化の選び方](../dp/dp-speedup-overview.md#shape-to-tool)の早見表に、CHT・Monge・Alien DP・Slope Trick の確かめ方は[凸性を使う高速化の使いどころ](../dp/dp-speedup-overview.md#convexity)にまとめる。
 
 ## 参考 {#references}
 

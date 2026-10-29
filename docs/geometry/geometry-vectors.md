@@ -32,7 +32,7 @@ sections:
   - {title: 3 次元の基本：軸に平行な直方体の共通部分は軸ごとの区間の積, anchor: 3d-geometry}
   - {title: '点の表し方：整数の構造体と std::complex', anchor: point-representation}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -80,6 +80,9 @@ $$
 --8<-- "geometry-vectors/ccw.cpp:point"
 ```
 
+完全なプログラム：[`ccw.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/geometry-vectors/ccw.cpp)（GitHub）
+{ .kp-code-src }
+
 ??? question "確認問題：符号の確かめ"
     $a = (1, 0)$ から見て $b = (0, 1)$ は左か右か。外積と内積の値はいくつか。
 
@@ -93,6 +96,9 @@ $$
 ```cpp
 --8<-- "geometry-vectors/ccw.cpp:ccw"
 ```
+
+完全なプログラム：[`ccw.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/geometry-vectors/ccw.cpp)（GitHub）
+{ .kp-code-src }
 
 ccw から次の判定がすぐに作れる。
 
@@ -150,6 +156,9 @@ $$
 --8<-- "geometry-vectors/polygon.cpp:area"
 ```
 
+完全なプログラム：[`polygon.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/geometry-vectors/polygon.cpp)（GitHub）
+{ .kp-code-src }
+
 - **凹多角形でも使える**：辺が交差しない多角形なら、凹んでいても公式は正しい。打ち消し合いの議論に凸性は使っていない
 - **自己交差する多角形では使えない**：辺が交差すると、向きが逆の部分が引かれてしまう
 - **部分の面積**：頂点 $p_l, \dots, p_r$ を順に結んで閉じた多角形の $2S$ は、$\mathrm{cross}(p_i, p_{i+1})$ の $l \le i < r$ の和に閉じる辺 $\mathrm{cross}(p_r, p_l)$ を足したものである。和を[累積和](../basics/prefix-sum.md)にしておけば、対角線で切った片側の面積が $O(1)$ で求まる。累積和の値は 1 周分で $N$ 項の和になり、`long long` を超えうるので、`__int128` で持つか、座標の制約から和の大きさを見積もる（[オーバーフローの見積もり](#overflow)）
@@ -175,6 +184,9 @@ $$
 ```cpp
 --8<-- "geometry-vectors/polygon.cpp:intersect"
 ```
+
+完全なプログラム：[`polygon.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/geometry-vectors/polygon.cpp)（GitHub）
+{ .kp-code-src }
 
 交わるかどうかだけなら交点の座標は要らない。交点の座標は一般に分数になるので、求めると誤差の扱いが要る。判定だけで済むなら、外積の符号だけで整数のまま終わらせる。
 
@@ -262,7 +274,7 @@ $N \le 100$ なので 3 点の組は $\binom{100}{3} = 161700$ 通りしかな�
 - [ABC361 B. Intersection of Cuboids](https://atcoder.jp/contests/abc361/tasks/abc361_b)（diff 299）：2 つの直方体の共通部分の体積が正かを判定する。
 - [ABC224 C. Triangle?](https://atcoder.jp/contests/abc224/tasks/abc224_c)（diff 301）：N 点から三角形ができる 3 点の選び方の数を求める。
 - [ABC266 C. Convex Quadrilateral](https://atcoder.jp/contests/abc266/tasks/abc266_c)（diff 516）：4 点を順に結んだ四角形が凸かを判定する。
-- [ABC016 D. 一刀両断](https://atcoder.jp/contests/abc016/tasks/abc016_4)（diff 1305）：多角形を 1 本の線分で切ったとき、いくつに分かれるかを求める。
+- [ABC016 D. 一刀両断](https://atcoder.jp/contests/abc016/tasks/abc016_4)（diff 1305・参考値）：多角形を 1 本の線分で切ったとき、いくつに分かれるかを求める。
 
 </div>
 

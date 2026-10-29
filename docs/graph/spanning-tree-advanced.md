@@ -27,7 +27,7 @@ sections:
   - {title: 第 2 最小全域木, anchor: second-best}
   - {title: 自作するときの要点と Library Checker, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -58,11 +58,14 @@ Borůvka 法は、「各連結成分から外へ出る最小の辺を、すべ�
 - **成分の異なる上位 2 件を持つ**：走査しながら最小値を持つとき、1 位と、1 位と成分が異なる中での最小の 2 件を持つ。1 位が自分と同じ成分なら 2 位を使えばよい。
 - **自分の成分を一時的に除く**：Binary Trie やセグメント木に全頂点を入れておき、成分ごとに「その成分の頂点を消す → 成分の各頂点で問い合わせる → 戻す」を行う。各頂点は 1 段で 1 回ずつ消して戻すので、1 段はデータ構造の操作 $O(N)$ 回で済む。
 
-例として、一列に並ぶ頂点 $i, j$（0-indexed）を重み $D \lvert i - j \rvert + A_i + A_j$ の辺で結ぶ完全グラフを考える。$j < i$ の相手との重みは $(A_j - Dj) + (A_i + Di)$ なので、左から走査して $A_j - Dj$ の上位 2 件を成分が異なるように持てば、各 $i$ の左側の最良の相手が $O(1)$ で分かる。右側も同じで、1 段は $O(N)$、全体で $O(N \log N)$ になる。中心の部分は次のとおりである（完全なプログラムは `snippets/spanning-tree-advanced/boruvka.cpp`。乱数の入力で配列のプリム法と比べている）。
+例として、一列に並ぶ頂点 $i, j$（0-indexed）を重み $D \lvert i - j \rvert + A_i + A_j$ の辺で結ぶ完全グラフを考える。$j < i$ の相手との重みは $(A_j - Dj) + (A_i + Di)$ なので、左から走査して $A_j - Dj$ の上位 2 件を成分が異なるように持てば、各 $i$ の左側の最良の相手が $O(1)$ で分かる。右側も同じで、1 段は $O(N)$、全体で $O(N \log N)$ になる。中心の部分は次のとおりである（完全なプログラムは [`snippets/spanning-tree-advanced/boruvka.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/spanning-tree-advanced/boruvka.cpp)。乱数の入力で配列のプリム法と比べている）。
 
 ```cpp
 --8<-- "spanning-tree-advanced/boruvka.cpp:core"
 ```
+
+完全なプログラム：[`boruvka.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/spanning-tree-advanced/boruvka.cpp)（GitHub）
+{ .kp-code-src }
 
 同じ辺を 2 回足さないことなど、自作するときの注意は[自作するときの要点](#library)にまとめた。辺の候補を $O(N \log N)$ 本に減らしてクラスカル法を使う方法（分割統治・[重心分解](../tree/centroid-decomposition.md)）で同じ問題が解けることも多い。
 
@@ -82,7 +85,10 @@ Manhattan MST は、平面上の $N$ 点を[マンハッタン距離](../geometr
 --8<-- "spanning-tree-advanced/manhattan-mst.cpp:core"
 ```
 
-返した候補の辺でクラスカル法を行えば答えになる（完全なプログラムは `snippets/spanning-tree-advanced/manhattan-mst.cpp`。同じ座標の点を含む乱数の入力で、全点対のクラスカル法と比べている）。「$x$ でソートした隣どうしと $y$ でソートした隣どうし」だけでは足りないことに注意する（反例は[最小全域木の確認問題](../graph/minimum-spanning-tree.md#reduce-candidates)）。自作したものは Library Checker の Manhattan MST で確かめる。
+完全なプログラム：[`manhattan-mst.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/spanning-tree-advanced/manhattan-mst.cpp)（GitHub）
+{ .kp-code-src }
+
+返した候補の辺でクラスカル法を行えば答えになる（完全なプログラムは [`snippets/spanning-tree-advanced/manhattan-mst.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/spanning-tree-advanced/manhattan-mst.cpp)。同じ座標の点を含む乱数の入力で、全点対のクラスカル法と比べている）。「$x$ でソートした隣どうしと $y$ でソートした隣どうし」だけでは足りないことに注意する（反例は[最小全域木の確認問題](../graph/minimum-spanning-tree.md#reduce-candidates)）。自作したものは Library Checker の Manhattan MST で確かめる。
 
 ## 最小有向全域木（Chu-Liu/Edmonds） {#directed}
 
@@ -144,11 +150,11 @@ Library Checker の Directed MST（$N, M \le 2 \times 10^5$、根から全頂点
 
 ## 学ぶための資料 {#resources}
 
-- 英語版 Wikipedia の「Borůvka's algorithm」：手順・計算量と、重みが等しいときに全順序で比べる必要。
-- 英語版 Wikipedia の「Edmonds' algorithm」：縮約と重みの直しの手順、Tarjan による $O(M \log N)$ の実装への言及。
-- cp-algorithms の「Manhattan Distance」の Manhattan MST の節：8 つの領域の補題の証明と、$x + y$ の順の走査（文章と図の利用条件は CC BY-SA）。
-- cp-algorithms の「Second Best Minimum Spanning Tree」：1 本だけ入れ替えればよい補題と、ダブリングでパスの最大を求める実装。
-- ei1333 氏のライブラリの Boruvka・Manhattan MST・Directed MST：自作するときの関数の形の例と、Library Checker で確かめたコード。
+- [「Borůvka's algorithm」（英語版 Wikipedia）](https://en.wikipedia.org/wiki/Bor%C5%AFvka%27s_algorithm)：手順・計算量と、重みが等しいときに全順序で比べる必要。
+- [「Edmonds' algorithm」（英語版 Wikipedia）](https://en.wikipedia.org/wiki/Edmonds%27_algorithm)：縮約と重みの直しの手順、Tarjan による $O(M \log N)$ の実装への言及。
+- [cp-algorithms「Manhattan Distance」](https://cp-algorithms.com/geometry/manhattan-distance.html)の Manhattan MST の節：8 つの領域の補題の証明と、$x + y$ の順の走査（文章と図の利用条件は CC BY-SA）。
+- [cp-algorithms「Second Best Minimum Spanning Tree」](https://cp-algorithms.com/graph/second_best_mst.html)：1 本だけ入れ替えればよい補題と、ダブリングでパスの最大を求める実装。
+- [ei1333「Boruvka」（Luzhiled's Library）](https://ei1333.github.io/library/graph/mst/boruvka.hpp)・[ei1333「Manhattan MST」（Luzhiled's Library）](https://ei1333.github.io/library/graph/mst/manhattan-mst.hpp)・[ei1333「Directed MST」（Luzhiled's Library）](https://ei1333.github.io/library/graph/mst/directed-mst.hpp)：自作するときの関数の形の例と、Library Checker で確かめたコード。
 
 ## 練習問題 {#practice}
 

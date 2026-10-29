@@ -30,7 +30,7 @@ sections:
   - {title: あふれる前に割り算で判定する方法と __int128 への逃げ方, anchor: overflow}
   - {title: double で割らない（10^18 付近の誤差）, anchor: no-double}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -83,6 +83,9 @@ C++ の `a / b` は、実数の商を 0 の向きに切り捨てる。$a \ge 0$ 
 --8<-- "integer-division/division.cpp:core"
 ```
 
+完全なプログラム：[`division.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/integer-division/division.cpp)（GitHub）
+{ .kp-code-src }
+
 - **floor_div**：割り切れず（`a % b != 0`）、$a$ と $b$ の符号が違う（商が負）なら、C++ の商は floor より 1 大きいので 1 引く
 - **ceil_div**：割り切れず、符号が同じ（商が正）なら、C++ の商は floor と同じなので 1 足して ceil にする。商が負なら C++ の商がそのまま ceil である
 - **safe_mod**：`a % m` が負なら $m$ を足す。結果は floor_div と組にして $a = m \lfloor a/m \rfloor + (a \bmod m)$ を満たす
@@ -123,6 +126,9 @@ $$
 --8<-- "integer-division/multiples.cpp:core"
 ```
 
+完全なプログラム：[`multiples.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/integer-division/multiples.cpp)（GitHub）
+{ .kp-code-src }
+
 $r = 0$ の場合が「$x$ 以上の最小の $m$ の倍数」で、$m \lceil x/m \rceil$ とも書ける。一定の間隔 $F$ で発車する列車に時刻 $t$ に着いたなら、次の発車は $F \lceil t/F \rceil$ である。最初の発車が時刻 $S$（$S$ は $F$ の倍数）なら、$\max(S, F \lceil t/F \rceil)$ になる。
 
 ??? question "確認問題：0 を含む区間"
@@ -147,6 +153,9 @@ $$
 --8<-- "integer-division/overflow.cpp:core"
 ```
 
+完全なプログラム：[`overflow.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/integer-division/overflow.cpp)（GitHub）
+{ .kp-code-src }
+
 - **上限で止める**：積や累乗を何度も掛けていく計算では、超えたら $L + 1$ を返す関数にしておくと、一度超えた値を「超えた」のまま持ち回れる。$L + 1$ が `long long` に収まるように $L$ を選ぶ（$10^{18}$ なら十分）
 - **lcm は割ってから掛ける**：$\operatorname{lcm}(a, b) = a / \gcd(a, b) \times b$ の順にする。$a \times b / \gcd$ の順では、答えが小さくても途中の $a \times b$ があふれる。さらに $a / \gcd$ と $b$ の積が上限を超えるかも、同じ割り算で判定する（[GCD・LCM](../math/gcd-lcm.md)）
 - **累乗**：$x^k$ が $L$ を超えるかは、1 回掛けるごとに判定し、超えた時点で止める。整数の $K$ 乗根を二分探索するときの判定もこの形である（[整数の平方根・K 乗根](../math/integer-root.md)）
@@ -161,6 +170,9 @@ $$
 ```cpp
 --8<-- "integer-division/double-ng.cpp:core"
 ```
+
+完全なプログラム：[`double-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/integer-division/double-ng.cpp)（GitHub）
+{ .kp-code-src }
 
 $10^{18} - 1$ を `double` にすると、近くの表せる値は $128$ おきにしかなく、$10^{18}$ に丸められる。そのため 10 で割った floor が $10^{17}$ になり、正しい値 $10^{17} - 1$ と 1 ずれる。$\lvert a \rvert \le 10^{18}$ の制約は、この誤差がちょうど表に出る大きさである。
 
@@ -215,7 +227,7 @@ $X$ が負で 10 で割り切れないとき、C++ の `X / 10` は 0 の向き�
 - [ABC432 C. Candy Tribulation](https://atcoder.jp/contests/abc432/tasks/abc432_c)（diff 654）：2 種類の飴（値 X と Y、X < Y）を各人に決まった個数ずつ配り、全員の合計をそろえるとき、Y の飴の個数の合計の最大値を求める（できなければ -1 を出力する）。
 - [ABC048 B. Between a and b ...](https://atcoder.jp/contests/abc048/tasks/abc048_b)（diff 861）：a 以上 b 以下の整数のうち x で割り切れるものの個数を求める（0 ≤ a ≤ b ≤ 10^18）。
 - [ABC084 C. Special Trains](https://atcoder.jp/contests/abc084/tasks/abc084_c)（diff 908）：駅を順に結ぶ列車がそれぞれ一定の間隔で発車するとき、各駅から出発して終点に着く最も早い時刻を求める。
-- [典型90 038. Large LCM（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_al)（diff —）：2 数の最小公倍数が 10^18 を超えるかを判定し、超えなければその値を出力する。
+- [典型90 038. Large LCM（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_al)（diff なし）：2 数の最小公倍数が 10^18 を超えるかを判定し、超えなければその値を出力する。
 
 </div>
 

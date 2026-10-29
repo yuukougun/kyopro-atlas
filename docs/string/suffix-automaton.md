@@ -32,7 +32,7 @@ sections:
   - {title: そのほかの名前（2 次元ローリングハッシュ・Suffix Tree・Boyer-Moore の検索）, anchor: others}
   - {title: ライブラリと Library Checker での確かめ方, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -84,6 +84,9 @@ Suffix Automaton は、空文字列に当たる状態 0 から文字に沿って
 --8<-- "suffix-automaton/sam.cpp:core"
 ```
 
+完全なプログラム：[`sam.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/suffix-automaton/sam.cpp)（GitHub）
+{ .kp-code-src }
+
 - 状態は最大 $2N - 1$ 個なので、配列を先に確保するならその大きさにする。遷移を `array<int, 26>` で持つと、$N = 5 \times 10^5$ でおよそ $2N \times 26 \times 4$ バイト $\approx 10^8$ バイトになる。文字の種類が多いときは `map` にして $O(N \log \sigma)$ にする。
 - 構築が $O(N)$ なのは、手順 2 と 4 でたどる回数の合計が $O(N)$ に抑えられるからである（ならし）。証明は資料に任せる。
 - 複数の文字列をまとめて扱うとき（一般化 Suffix Automaton）は、文字列ごとに $\mathrm{last}$ を状態 0 に戻して足していけばよい。すでにある遷移をなぞると中身のない状態ができるが、その状態は $\mathrm{len}$ が接尾辞リンク先と等しく、異なる部分文字列の数には影響しない（手元の総当たりで確かめた）。
@@ -112,6 +115,9 @@ Duval のアルゴリズムは、Lyndon 分解を $O(N)$ 時間・追加メモ�
 ```cpp
 --8<-- "suffix-automaton/lyndon.cpp:core"
 ```
+
+完全なプログラム：[`lyndon.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/suffix-automaton/lyndon.cpp)（GitHub）
+{ .kp-code-src }
 
 - 内側のループの $j$ は「1 周期前の対応する位置」である。$S[j] < S[k]$ なら、$S[i, k]$ 全体が 1 つの Lyndon 語になるので、周期をその長さに取り直す（$j = i$ に戻す）。$S[j] > S[k]$ なら止めて、周期 $k - j$ の片を切り出す。
 - **辞書順最小の巡回シフト**：$S + S$ を Lyndon 分解し、開始位置が $N$ 未満の片のうち最後のものから始めると、それが最小の巡回シフトの開始位置である。$S$ が周期的（abab など）なら最小の巡回シフトは複数の位置から始まり、コード片はそのうち後ろの位置を返す。
@@ -164,10 +170,10 @@ Library Checker では次の問題で確かめられる（[練習問題](#practi
 
 ## 学ぶための資料 {#resources}
 
-- cp-algorithms の「Suffix Automaton」：endpos と接尾辞リンク、状態数・遷移数の上限の証明、構築の手順と計算量を、応用（異なる部分文字列の数・出現回数・最長共通部分文字列）まで通して説明している（文章と図の利用条件は CC BY-SA）。
-- OI Wiki の「后缀自动机 (SAM)」と「回文树」（中国語）：Suffix Automaton と回文木の性質と応用の一覧がある（同じく CC BY-SA）。
-- Rubinchik・Shur の論文「EERTREE」：回文木の原論文。構築がならし $O(N)$ になる理由がある。
-- cp-algorithms の「Lyndon factorization」と「Finding repetitions」：Duval のアルゴリズムと、Main-Lorentz 法の分割統治。
+- [cp-algorithms「Suffix Automaton」](https://cp-algorithms.com/string/suffix-automaton.html)：endpos と接尾辞リンク、状態数・遷移数の上限の証明、構築の手順と計算量を、応用（異なる部分文字列の数・出現回数・最長共通部分文字列）まで通して説明している（文章と図の利用条件は CC BY-SA）。
+- [OI Wiki「后缀自动机 (SAM)」](https://oi-wiki.org/string/sam/)と [OI Wiki「回文树」](https://oi-wiki.org/string/pam/)（中国語）：Suffix Automaton と回文木の性質と応用の一覧がある（同じく CC BY-SA）。
+- [M. Rubinchik, A. M. Shur「EERTREE: An Efficient Data Structure for Processing Palindromes in Strings」](https://arxiv.org/abs/1506.04862)：回文木の原論文。構築がならし $O(N)$ になる理由がある。
+- [cp-algorithms「Lyndon factorization」](https://cp-algorithms.com/string/lyndon_factorization.html)と [cp-algorithms「Finding repetitions」](https://cp-algorithms.com/string/main_lorentz.html)：Duval のアルゴリズムと、Main-Lorentz 法の分割統治。
 
 ## 例題 {#examples}
 

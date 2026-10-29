@@ -30,7 +30,7 @@ sections:
   - {title: 反対方向に最も近い点の二分探索, anchor: opposite-direction, level: 青}
   - {title: 角度の区間のスケジューリング・連続する範囲だけを試す最適化, anchor: angular-intervals, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -81,6 +81,9 @@ $$
 --8<-- "argument-sort/sort-points.cpp:core"
 ```
 
+完全なプログラム：[`sort-points.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/argument-sort/sort-points.cpp)（GitHub）
+{ .kp-code-src }
+
 比較関数 `arg_less` は、偏角が等しい 2 点に対して false を返す。`sort(p.begin(), p.end(), arg_less)` で並べ、同じ方向の点の並びも入力の順に保ちたいなら `stable_sort` を使う。
 
 ??? question "確認問題：4 方向の順"
@@ -104,6 +107,9 @@ $$
 ```cpp
 --8<-- "argument-sort/atan2-limit.cpp:core"
 ```
+
+完全なプログラム：[`atan2-limit.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/argument-sort/atan2-limit.cpp)（GitHub）
+{ .kp-code-src }
 
 一般に、座標の絶対値が $C$ 以下の整数なら、異なる 2 方向の偏角の差は $1 / (2C^2)$ 程度以上ある（外積は 0 でなければ絶対値 1 以上で、長さは $\sqrt{2} C$ 以下だから）。これは下限で、実際にこの程度まで近い 2 方向も作れる。座標が $10^6$ 程度までなら、この差は `double` の間隔（約 $10^{-16}$）の 1000 倍以上あり、`atan2` で並べても順序は崩れにくい。座標が $10^8$ を超えると差が間隔と並び、順序が崩れる組が出てくる。それでも「同じ方向か」を `==` で判定するのは避け、整数の外積で判定する（[誤差の扱い](../geometry/geometry-precision.md)）。
 
@@ -148,6 +154,9 @@ $$
 --8<-- "argument-sort/range-sum.cpp:core"
 ```
 
+完全なプログラム：[`range-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/argument-sort/range-sum.cpp)（GitHub）
+{ .kp-code-src }
+
 同じ方向の点は `arg_less` で等しいので、$u$ や $v$ と同じ方向の点は両端として含まれる。$u$ と $v$ が同じ方向なら、3 の場合になり、その方向の点だけが数えられる。一周すべてを数えたい問題なら、この場合を別に扱う。
 
 累積和を 2 周分（長さ $2N$）作り、一周をまたぐときは $r$ に $N$ を足す書き方もある（[円環は 2 周分に伸ばす](../basics/prefix-sum.md#circular)）。どちらでも計算量は前計算 $O(N)$（ソートを除く）、クエリごとに $O(\log N)$ である。
@@ -163,6 +172,9 @@ $$
 ```cpp
 --8<-- "argument-sort/half-window.cpp:core"
 ```
+
+完全なプログラム：[`half-window.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/argument-sort/half-window.cpp)（GitHub）
+{ .kp-code-src }
 
 この数は、原点を含む三角形の数え上げなどに使える。どの 2 点も原点と一直線上にないとする。3 点の三角形が原点を含まないのは、3 点のうちの 1 点 $i$ から見て、残りの 2 点がどちらも左側の $\pi$ 未満の範囲に入るときである。このような $i$ は 1 つに決まる。そこで、各点 $i$ について左側の点の数 $k_i$ を求め、$\binom{k_i}{2}$ の和を全体の $\binom{N}{3}$ から引く。ただし、同じ方向の点や原点を通る直線上の点があると「内部」の定義が変わるので、境界は問題に合わせて決める。
 
@@ -223,7 +235,7 @@ $$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 009. Three Point Angle（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_i)（diff —）：N 点から 3 点 A, B, C を選ぶときの ∠ABC の最大を求める。
+- [典型90 009. Three Point Angle（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_i)（diff なし）：N 点から 3 点 A, B, C を選ぶときの ∠ABC の最大を求める。
 
 </div>
 

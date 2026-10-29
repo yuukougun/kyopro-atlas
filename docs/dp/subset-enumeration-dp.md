@@ -15,7 +15,7 @@ complexity: O(3^N)（グループの値の前計算は別に O(2^N N) など）�
 signs:
   - {type: phrase, text: N 個をいくつかのグループに分ける方法の数・最適値}
   - {type: phrase, text: 集合を部分集合の和に分割する}
-  - {type: constraint, text: N ≤ 16〜18（3^N ≈ 4×10^7〜4×10^8）}
+  - {type: constraint, text: N ≤ 15〜16 程度（3^N ≈ 1.4×10^7〜4.3×10^7）、内側の処理が軽ければ N = 18 まで}
 acl: []
 frequency: B
 frequency_evidence: recent 0・前提として 2 ページに届く（直接 2）・古い ABC 4 問
@@ -26,7 +26,7 @@ sections:
   - {title: グループの数を状態に足す, anchor: group-count}
   - {title: 高速ゼータ変換との使い分け, anchor: vs-zeta, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -34,7 +34,7 @@ updated: 2026-10-22
     - **いつ使うか**：
         - N 個をいくつかのグループに分ける方法の数・最適値。
         - 集合を部分集合の和に分割する。
-        - $N \le 16$〜$18$（$3^N \approx 4 \times 10^7$〜$4 \times 10^8$）。
+        - $N \le 15$〜$16$ 程度（$3^N \approx 1.4 \times 10^7$〜$4.3 \times 10^7$）、内側の処理が軽ければ $N = 18$ まで。
     - **計算量**：遷移は全体で $O(3^N)$。各グループの値（得点・可否）の前計算は別に $O(2^N N)$ などかかる。グループの数 $K$ を状態に足すと $O(K \cdot 3^N)$。
     - **前提**：[bitDP](../dp/bit-dp.md)
 
@@ -65,6 +65,9 @@ $f(T)$ の前計算も遅くしない工夫が要る。「同じグループに�
 ```cpp
 --8<-- "subset-enumeration-dp/grouping.cpp:precompute"
 ```
+
+完全なプログラム：[`grouping.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/subset-enumeration-dp/grouping.cpp)（GitHub）
+{ .kp-code-src }
 
 ## 3^N になる理由（各要素が 3 通り） {#why-3n}
 
@@ -103,6 +106,9 @@ $$
 --8<-- "subset-enumeration-dp/partition-count.cpp:core"
 ```
 
+完全なプログラム：[`partition-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/subset-enumeration-dp/partition-count.cpp)（GitHub）
+{ .kp-code-src }
+
 コード片の全体では、`fixed` がベル数 $1, 1, 2, 5, 15, \dots$ に、`naive` が順序を区別した分け方の数 $1, 1, 3, 13, 75, \dots$ に一致することを $N \le 10$ で確かめている。
 
 最大化・最小化でもこの形にしておくとよい。答えは同じで、内側のループが $2^{\lvert S \rvert - 1}$ 回に減るので全体で $\sum_{S \ne \varnothing} 2^{\lvert S \rvert - 1} = (3^N - 1)/2$ 回になる。最大化の遷移は次のようになる（要素の組ごとの得点の和を最大にする例）。
@@ -110,6 +116,9 @@ $$
 ```cpp
 --8<-- "subset-enumeration-dp/grouping.cpp:core"
 ```
+
+完全なプログラム：[`grouping.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/subset-enumeration-dp/grouping.cpp)（GitHub）
+{ .kp-code-src }
 
 ??? question "確認問題：最小の要素の代わりに最大の要素を使ってよいか"
     「$S$ の最小の要素を含むグループ」を「$S$ の最大の要素を含むグループ」に変えても、分け方を重複なく数えられるか。
@@ -130,6 +139,9 @@ $$
 ```cpp
 --8<-- "subset-enumeration-dp/k-groups.cpp:core"
 ```
+
+完全なプログラム：[`k-groups.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/subset-enumeration-dp/k-groups.cpp)（GitHub）
+{ .kp-code-src }
 
 グループの数の扱いは問題文で次のように分かれる。
 
@@ -176,7 +188,7 @@ $\mathrm{dp}[j][S]$ は $\lvert S \rvert < j$ のとき使えない。これを�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC U. Grouping](https://atcoder.jp/contests/dp/tasks/dp_u)（diff —）：N 羽のうさぎをいくつかのグループに分け、同じグループになった組ごとの得点の和を最大化する。
+- [EDPC U. Grouping](https://atcoder.jp/contests/dp/tasks/dp_u)（diff なし）：N 羽のうさぎをいくつかのグループに分け、同じグループになった組ごとの得点の和を最大化する。
 
 </div>
 
@@ -209,7 +221,7 @@ $\mathrm{dp}[j][S]$ は $\lvert S \rvert < j$ のとき使えない。これを�
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC310 D. Peaceful Teams](https://atcoder.jp/contests/abc310/tasks/abc310_d)（diff 1368）：N ≤ 10 人を T 個のチームに分ける方法のうち、仲の悪い組が同じチームにならないものの数を求める。
-- [典型90 045. Simple Grouping（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_as)（diff —）：平面上の N 点を K 個のグループに分け、各グループ内の 2 点間の距離の最大の、全グループでの最大を最小化する。
+- [典型90 045. Simple Grouping（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_as)（diff なし）：平面上の N 点を K 個のグループに分け、各グループ内の 2 点間の距離の最大の、全グループでの最大を最小化する。
 - [ABC332 E. Lucky bag](https://atcoder.jp/contests/abc332/tasks/abc332_e)（diff 1883）：N ≤ 15 個の品物を D 個の袋に分け（空の袋も許す）、袋ごとの重さの分散を最小にする。
 
 </div>

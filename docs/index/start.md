@@ -26,7 +26,9 @@ search:
     - `how-to-use#page-anatomy` ページの構成と読み方：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#page-anatomy
     - `how-to-use#problems` 問題の表示：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#problems
     - `how-to-use#stub` ページの段階と「準備中」の帯：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#stub
+    - `how-to-use#report` 誤りの報告：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#report
     - `how-to-use#progress` 進捗の記録（解いた・理解した）：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#progress
+    - `how-to-use#wishlist` 勉強したいリスト：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#wishlist
     - `how-to-use#backup` 書き出しと読み込み（手動の退避）：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#backup
     - `how-to-use#claude` claude.ai での解説の頼み方：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#claude
     - `how-to-use#ai-rule-version` AtCoder生成AI対策ルールの版：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#ai-rule-version
@@ -70,3 +72,16 @@ search:
     - `atcoder-system#contests` ARC・AGC・AHC と ARC の区分：https://yuukougun.github.io/kyopro-atlas/start/atcoder-system/#contests
     - `atcoder-system#practice-contests` 練習用のコンテスト：https://yuukougun.github.io/kyopro-atlas/start/atcoder-system/#practice-contests
     - `atcoder-system#ai-rules` 生成 AI のルール：https://yuukougun.github.io/kyopro-atlas/start/atcoder-system/#ai-rules
+
+## 出典と AI 利用の方針（ai-and-sources） {#ai-and-sources}
+
+- id：`ai-and-sources`　レベル：—　段階：draft　type：guide
+- URL：https://yuukougun.github.io/kyopro-atlas/start/ai-and-sources/
+- 別名：AI の利用、生成 AI、出典、参考文献、転載、noai、著作権、問い合わせ、連絡先
+- 種類：案内
+- 節：
+    - `ai-and-sources#ai-writing` AI で書いていることと確かめ方：https://yuukougun.github.io/kyopro-atlas/start/ai-and-sources/#ai-writing
+    - `ai-and-sources#no-copying` 他者の記事を転載しない：https://yuukougun.github.io/kyopro-atlas/start/ai-and-sources/#no-copying
+    - `ai-and-sources#citations` 参考にした資料の示し方：https://yuukougun.github.io/kyopro-atlas/start/ai-and-sources/#citations
+    - `ai-and-sources#noai` AI の利用を断るサイトを資料にしない：https://yuukougun.github.io/kyopro-atlas/start/ai-and-sources/#noai
+    - `ai-and-sources#contact` 掲載内容についての連絡と対応：https://yuukougun.github.io/kyopro-atlas/start/ai-and-sources/#contact

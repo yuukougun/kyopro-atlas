@@ -26,7 +26,7 @@ sections:
   - {title: 木の上で凸関数をマージする（マージテクと組む）, anchor: on-trees}
   - {title: 自作ライブラリでの扱い, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -42,7 +42,7 @@ updated: 2026-10-22
 別名：スロープトリック・区分線形凸関数・区分線形凸関数の管理
 <!-- textlint-enable -->
 
-Slope Trick は、DP の表 $\mathrm{dp}[i][\cdot]$ を「$x$ の関数」とみて、その関数を傾きが変わる点の集まりで持つ方法である。遷移が「凸な折れ線を足す」「左右の累積 min を取る」「ずらす」だけでできていれば、表の全体を書き換えずに、点の集まりへの数回の操作で次の段へ進める。この教材で集めた問題では、ABC で必須になったのは H に 1 問（ABC217 H、2021 年）見つかる程度の発展の手法である。ただし、入口の[2 つのヒープで中央値を管理する](#two-heaps)形は黄の帯の問題にも出る。
+Slope Trick は、DP の表 $\mathrm{dp}[i][\cdot]$ を「$x$ の関数」とみて、その関数を傾きが変わる点の集まりで持つ方法である。遷移が「凸な折れ線を足す」「左右の累積 min を取る」「ずらす」だけでできていれば、表の全体を書き換えずに、点の集まりへの数回の操作で次の段へ進める。この教材で集めた問題では、ABC で必須になったのは ABC217 H（2021 年）と、その変形で解く ABC458 G（2026 年。[力試し](#challenge)に載せた）の 2 問が見つかる程度の発展の手法である。ただし、入口の[2 つのヒープで中央値を管理する](#two-heaps)形は黄の帯の問題にも出る。
 
 ## 凸関数を傾きの変わる点の集まりで表す {#breakpoints}
 
@@ -133,11 +133,14 @@ ACL に Slope Trick はない。自作するときは、次の 4 つを守れば
 - **空のヒープ**：$l_0 = -\infty$・$r_0 = \infty$ を返す。∞ を表す大きな値に遅延の値を足さない（オーバーフローする）
 - **値の型**：$\mathrm{min}_f$ は足した関数の値の和になるので `long long` で持つ
 
-次のコード片は、上の表の操作をそのまま書いたものである。完全なプログラム（`snippets/slope-trick/usage.cpp`）では、乱数の操作の列を、$x$ ごとに値を持つ配列で計算した結果と比べて確かめている。
+次のコード片は、上の表の操作をそのまま書いたものである。完全なプログラム（[`snippets/slope-trick/usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/slope-trick/usage.cpp)）では、乱数の操作の列を、$x$ ごとに値を持つ配列で計算した結果と比べて確かめている。
 
 ```cpp
 --8<-- "slope-trick/usage.cpp:core"
 ```
+
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/slope-trick/usage.cpp)（GitHub）
+{ .kp-code-src }
 
 $f(x)$ の値そのものが要るときは、ヒープの中身を順に取り出して定義の式で足す（$O(N \log N)$。取り出すとヒープが壊れるので、写してから行う）。傾きが 1 より大きく変わる関数（$k \max(0, x - a)$ など）を足すなら、同じ点を $k$ 回入れる。$k$ が大きいなら、ヒープの要素を（点, 個数）の組にした版か、平衡二分探索木を使う版が要る。
 
@@ -145,9 +148,9 @@ Library Checker には Slope Trick を直接試す問題はない（2026-10-22 �
 
 ## 学ぶための資料 {#resources}
 
-- maspy 氏の「slope trick (1) 解説編」：表し方と各操作の更新の式、遅延の加算の持ち方がまとまっている。最初に読む資料
-- maspy 氏の「slope trick (2) 問題編」：数列を単調にする問題、区間の min を使う問題、木の上でマージする問題など、操作の組み合わせ方の実例
-- Luzhiled's Library（ei1333 氏）と hitonanode 氏の cplib-cpp の Slope Trick：ライブラリの関数の切り分け（区間の min・マージ・値の取得）の参考になる
+- [maspy「slope trick (1) 解説編」](https://maspypy.com/slope-trick-1-%e8%a7%a3%e8%aa%ac%e7%b7%a8)：表し方と各操作の更新の式、遅延の加算の持ち方がまとまっている。最初に読む資料
+- [maspy「slope trick (2) 問題編」](https://maspypy.com/slope-trick-2-%e5%95%8f%e9%a1%8c%e7%b7%a8)：数列を単調にする問題、区間の min を使う問題、木の上でマージする問題など、操作の組み合わせ方の実例
+- [ei1333「Luzhiled's Library: Slope Trick」](https://ei1333.github.io/library/structure/others/slope-trick.hpp.html)と [hitonanode「Slope trick（区分線形凸関数に関する特定の更新を高速に扱う手法）」](https://hitonanode.github.io/cplib-cpp/other_algorithms/slope_trick.hpp.html)：どちらも公開ライブラリの Slope Trick で、関数の切り分け（区間の min・マージ・値の取得）の参考になる
 
 ## 例題 {#examples}
 
@@ -197,6 +200,7 @@ Library Checker には Slope Trick を直接試す問題はない（2026-10-22 �
 - 関数の最小値だけが要り、更新が $\lvert x - a \rvert + b$ だけなら、[2 つのヒープで中央値を保つ](../ds/top-k-multiset.md#median)だけで足りる（[2 つのヒープで中央値を管理する](#two-heaps)）
 - $x$ の範囲が狭い（$10^5$ 程度）なら、DP の表をそのまま持ち、累積 min は[累積和と同じ 1 回の走査](../dp/dp-prefix-sum.md)で書ける。凸でない関数でも使える
 - 関数が凸でも、足すものが折れ線でない（2 次関数など）なら Slope Trick では扱えない。答えが選ぶ個数について凸なら [Alien DP](../dp/alien-dp.md#penalty)、遷移が Monge なら [Monge](../dp/monge.md) を考える
+- CHT・Monge・Alien DP・Slope Trick の確かめ方と選び方は、[凸性を使う高速化の使いどころ](../dp/dp-speedup-overview.md#convexity)にまとめる
 
 ## 参考 {#references}
 

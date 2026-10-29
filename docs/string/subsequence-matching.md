@@ -29,7 +29,7 @@ sections:
   - {title: 辞書順最小の部分列（残りで足りる範囲の最小の文字を選ぶ）, anchor: lexicographically-smallest, level: 水}
   - {title: 繰り返した文字列の部分列（文字ごとの累積個数で位置を飛ばす）, anchor: repeated-string, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -92,6 +92,9 @@ $$
 --8<-- "subsequence-matching/next-table.cpp:core"
 ```
 
+完全なプログラム：[`next-table.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/subsequence-matching/next-table.cpp)（GitHub）
+{ .kp-code-src }
+
 `match_end(nxt, t, p)` は、位置 $p$ から照合して $T$ の最後の文字を拾った位置を返す。この位置を $r$ とすると、「$S[p, e)$ が $T$ を部分列に含む」となるのは $e > r$ のときだけである。照合できないときに $r = N$ を返すと、「$e \le r$ なら含まない」という式が照合できない場合にもそのまま使える。番兵を $N$ にしておく利点である。
 
 ??? question "確認問題：表を前から作れない理由"
@@ -145,6 +148,9 @@ $$
 ```cpp
 --8<-- "subsequence-matching/repeated.cpp:core"
 ```
+
+完全なプログラム：[`repeated.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/subsequence-matching/repeated.cpp)（GitHub）
+{ .kp-code-src }
 
 $T$ の各文字を $k$ 回ずつ並べた文字列が入るかは $k$ について単調なので、この判定で $k$ を二分探索できる（[ABC346 F](#practice) の型）。判定 1 回が $O(\lvert T \rvert \log \lvert S \rvert)$、二分探索が $O(\log V)$ 回（$V$ は $k$ の上限）である。周の番号が $N$ 以上になったら、その時点で不可を返す。続けて掛け算や足し算をすると `long long` があふれるからである。
 
@@ -200,7 +206,7 @@ $T$ の各文字を $k$ 回ずつ並べた文字列が入るかは $k$ につい
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC324 E. Joint Two Strings](https://atcoder.jp/contests/abc324/tasks/abc324_e)（diff 1153）：N 個の文字列から 2 つを順に連結したものが T を部分列に含むような組の数を求める。
-- [典型90 006. Smallest Subsequence（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_f)（diff —）：文字列の長さ K の部分列のうち、辞書順最小のものを求める。
+- [典型90 006. Smallest Subsequence（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_f)（diff なし）：文字列の長さ K の部分列のうち、辞書順最小のものを求める。
 - [ABC346 F. SSttrriinngg in StringString](https://atcoder.jp/contests/abc346/tasks/abc346_f)（diff 1840）：S を N 回並べた文字列に、T の各文字を k 回ずつ並べた文字列が部分列として入る最大の k を求める。
 
 </div>

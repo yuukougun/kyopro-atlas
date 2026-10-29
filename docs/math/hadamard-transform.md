@@ -26,7 +26,7 @@ sections:
   - {title: 添字の演算と変換の対応（和は FFT、AND/OR は高速ゼータ変換、gcd/lcm は約数のゼータ変換）, anchor: index-operations}
   - {title: 自作するときの要点と Library Checker, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -77,6 +77,9 @@ $$
 --8<-- "hadamard-transform/xor-convolution.cpp:core"
 ```
 
+完全なプログラム：[`xor-convolution.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/hadamard-transform/xor-convolution.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 ??? question "確認問題：長さをそろえるとき 2 倍にするか"
     値が $0$ 以上 $V$ 未満の列どうしを XOR 畳み込みする。和の畳み込みでは結果の長さが $2V - 1$ になるので長さを 2 倍に取った。XOR 畳み込みでも 2 倍にする必要があるか。
 
@@ -90,6 +93,9 @@ $$
 ```cpp
 --8<-- "hadamard-transform/xor-convolution.cpp:power"
 ```
+
+完全なプログラム：[`xor-convolution.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/hadamard-transform/xor-convolution.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 **典型の型：XOR が決まった値になる列を数える**。「各要素を候補の集合から選んで長さ $K$ の列を作るとき、全要素の XOR が $x$ になる列はいくつか」は、候補の[指示関数](../guide/glossary.md#indicator) $f$（候補の値に 1 を立てた列）を $K$ 回 XOR 畳み込みした列の第 $x$ 項である。Nim の盤面の数え上げはこの形で、先手必勝の数は XOR が 0 でない列の数になる（[必勝局面の数え上げ](../comb/nim.md#counting)）。
 
@@ -126,11 +132,9 @@ ACL に対応する関数はない。自作するときの要点は次のとお�
 
 ## 学ぶための資料 {#resources}
 
-<!-- textlint-disable -->
-- sapphire15 氏の「Hadamard 変換とbitwise XOR convolution」：アダマール行列を 2 × 2 の行列の Kronecker 積で定義し、XOR 畳み込みが各点の積になることを符号の偶奇から証明している。剰余で割り算を避ける実装と、AND・OR 畳み込みへの拡張もある。
-- izu_nori 氏の「xor畳み込みと高速Hadamard変換」：$n = 2$ の行列から帰納法で示す流れと、疎な行列の積に分解して $O(N \log N)$ にする説明。付録に、XOR 畳み込みを $(\mathbb{Z}/2\mathbb{Z})^n$ 上のフーリエ変換とみる見方と AND・OR の場合がある。
-<!-- textlint-enable -->
-- kazuma8128 氏の「色々な畳み込み」：添字の和・AND・OR・XOR ごとに使う変換を短くまとめた一覧。
+- [sapphire15「Hadamard 変換とbitwise XOR convolution」](https://sapphire15.hatenablog.com/entry/2021/09/13/114900)：アダマール行列を 2 × 2 の行列の Kronecker 積で定義し、XOR 畳み込みが各点の積になることを符号の偶奇から証明している。剰余で割り算を避ける実装と、AND・OR 畳み込みへの拡張もある。
+- [izu_nori「xor畳み込みと高速Hadamard変換」](https://qiita.com/izu_nori/items/7810fc2bc0423c8d407f)：$n = 2$ の行列から帰納法で示す流れと、疎な行列の積に分解して $O(N \log N)$ にする説明。付録に、XOR 畳み込みを $(\mathbb{Z}/2\mathbb{Z})^n$ 上のフーリエ変換とみる見方と AND・OR の場合がある。
+- [kazuma8128「色々な畳み込み」](https://kazuma8128.hatenablog.com/entry/2018/05/31/144519)：添字の和・AND・OR・XOR ごとに使う変換を短くまとめた一覧。
 
 ## 例題 {#examples}
 

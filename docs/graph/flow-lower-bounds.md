@@ -23,7 +23,7 @@ sections:
   - {title: 超頂点で過不足を調整して判定する, anchor: super-vertex}
   - {title: 自作するときの要点と Library Checker, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -76,7 +76,7 @@ ACL に下限付きの最大流そのものはなく、`mf_graph` で超頂点�
 !!! info "ACL では"
     `mf_graph<long long> g(n + 2);` に、元の辺を容量 $R - L$ で、$S$・$T$ への辺を $d(v)$ から、$t \to s$ を大きな容量で足す。`g.flow(S, T)` が $D$ に等しいかで判定し、続けて `g.flow(s, t)` を呼ぶと最大の流量が返る。どちらも Dinic 法で $O(N^2 M)$ が上限である（[ACL の mf_graph](../graph/max-flow.md#acl)）。
 
-自作するときの要点は次のとおりである。完全なプログラムは `snippets/flow-lower-bounds/usage.cpp` で、小さいグラフで各辺の流量を全通り試した答えと照合してある。
+自作するときの要点は次のとおりである。完全なプログラムは [`snippets/flow-lower-bounds/usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/flow-lower-bounds/usage.cpp) で、小さいグラフで各辺の流量を全通り試した答えと照合してある。
 
 - **$d(v)$ は頂点ごとにまとめる**：辺 1 本ごとに $S \to v$・$u \to T$ を張っても答えは同じだが、辺の数が増える。自己ループ（$u = v$）の下限は $d$ の中で打ち消し合う。
 - **大きな容量はあふれない値にする**：$t \to s$ の容量は、ほかの容量の合計より大きければ足りる。容量は `long long` にし、$t \to s$ の容量は $2^{60}$ などにする。`int` の最大値では、ほかの容量の合計に足りないことがある。
@@ -87,15 +87,18 @@ ACL に下限付きの最大流そのものはなく、`mf_graph` で超頂点�
 --8<-- "flow-lower-bounds/usage.cpp:core"
 ```
 
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/flow-lower-bounds/usage.cpp)（GitHub）
+{ .kp-code-src }
+
 最小の流量は次のように求まる（Luzhiled's Library の方法）。判定で $t \to s$ の辺に流れた量を $X$ とし、この辺の残りの容量を 0 にしてから $t$ から $s$ へ流す。その返り値を $Y$ とすると、最小の流量は $X - Y$ である。判定が通る入力でも、この値は負になることがある。
 
 下限付きの流れそのものを確かめる Library Checker の問題は、コストも付いた Minimum Cost b-flow（[練習問題](#practice)）である。
 
 ## 学ぶための資料 {#resources}
 
-- snuke 氏の「最小流量制限付き最大流」：下限を容量から引き、超頂点で過不足を補う作り方と、辺を流す順序の注意
-- Luzhiled's Library の「Max Flow Lower Bound」：判定・最大の流量・最小の流量をまとめたライブラリの形
-- cp-algorithms の「Flows with demands」（英語）：下限で入る分と出る分を超頂点への辺にする作り方と、最小の流量を二分探索で求める方法
+- [snuke「最小流量制限付き最大流」](https://snuke.hatenablog.com/entry/2016/07/10/043918)：下限を容量から引き、超頂点で過不足を補う作り方と、辺を流す順序の注意
+- [Luzhiled's Library「Max Flow Lower Bound」](https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.hpp)：判定・最大の流量・最小の流量をまとめたライブラリの形
+- [cp-algorithms「Flows with demands」](https://cp-algorithms.com/graph/flow_with_demands.html)（英語）：下限で入る分と出る分を超頂点への辺にする作り方と、最小の流量を二分探索で求める方法
 
 ## 例題 {#examples}
 

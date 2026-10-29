@@ -26,7 +26,7 @@ sections:
   - {title: Union-Find と組む例（最初の t 本の辺で条件を満たすか）, anchor: with-union-find}
   - {title: 代わりの手（部分永続 Union-Find・併合過程の木）, anchor: alternatives}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -94,11 +94,14 @@ ACL に並列二分探索はなく、問題ごとに書く。自作するとき�
 - **段を止める条件**：全クエリで $\mathrm{ok}_i - \mathrm{ng}_i = 1$ になったら止める。段の数を $\lceil \log_2(M + 2) \rceil$ に固定して回してもよい。
 - **再帰の形（整体二分）**：区間 $[l, r)$ と、答えがその区間にあるクエリの組を受け取る書き方もある。$[l, \mathrm{mid})$ の操作だけを足して各クエリを判定し、足した操作を取り消してから、クエリを左右に分けて再帰する。右へ送るクエリには、左半分の寄与を差し引いて渡す（区間の $K$ 番目なら、数えた個数を $K$ から引く）。各深さで操作は合わせて $M$ 回なので、計算量は変わらない。寄与を足し引きできる BIT の型でよく使う。取り消せない Union-Find では、上の反復の形が手軽である。
 
-ライブラリとして持つなら、3 つの関数を受け取る形にしておく。「状態を戻す」「$j$ 番目の操作をする」「クエリ $i$ を判定する」の 3 つで、Union-Find でも BIT でも使い回せる（完全なプログラムは `snippets/parallel-binary-search/usage.cpp`）。
+ライブラリとして持つなら、3 つの関数を受け取る形にしておく。「状態を戻す」「$j$ 番目の操作をする」「クエリ $i$ を判定する」の 3 つで、Union-Find でも BIT でも使い回せる（完全なプログラムは [`snippets/parallel-binary-search/usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/parallel-binary-search/usage.cpp)）。
 
 ```cpp
 --8<-- "parallel-binary-search/usage.cpp:core"
 ```
+
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/parallel-binary-search/usage.cpp)（GitHub）
+{ .kp-code-src }
 
 判定の関数は、その時点の状態だけを見て答える。状態を書き換える判定を書くと、同じ段の後のクエリが狂う。
 
@@ -113,6 +116,9 @@ Library Checker で確かめるなら、[練習問題](#practice)の Range Kth S
 ```cpp
 --8<-- "parallel-binary-search/usage.cpp:usage"
 ```
+
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/parallel-binary-search/usage.cpp)（GitHub）
+{ .kp-code-src }
 
 計算量は、段の数 $O(\log M)$ に、1 段の「作り直し $O(N)$・併合 $M$ 回・判定 $Q$ 回」を掛けて、$O((N + M + Q) \log M)$ 回の操作になる。Union-Find の 1 回はならし $O(\alpha(N))$ である。
 
@@ -133,8 +139,8 @@ Library Checker で確かめるなら、[練習問題](#practice)の Range Kth S
 
 ## 学ぶための資料 {#resources}
 
-- cp-algorithms の「Binary search」の Parallel Binary Search の節（英語）：mid ごとにまとめて判定する考え方と、BIT と組む例が短くまとまっている
-- OI Wiki の「整体二分」（中国語）：再帰の形（整体二分）と、区間の K 番目に小さい値への適用を、例題とともに説明している
+- [cp-algorithms「Binary search」](https://cp-algorithms.com/num_methods/binary_search.html)の Parallel Binary Search の節（英語）：mid ごとにまとめて判定する考え方と、BIT と組む例が短くまとまっている
+- [OI Wiki「整体二分」](https://oi-wiki.org/misc/parallel-binsearch/)（中国語）：再帰の形（整体二分）と、区間の K 番目に小さい値への適用を、例題とともに説明している
 
 ## 例題 {#examples}
 
@@ -159,7 +165,7 @@ Library Checker で確かめるなら、[練習問題](#practice)の Range Kth S
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [CODE-THANKS-FESTIVAL-2017 H. Union Sets](https://atcoder.jp/contests/code-thanks-festival-2017/tasks/code_thanks_festival_2017_h)（diff —）：集合の併合を順に行う列に対し、2 要素が初めて同じ集合になった操作の番号を各クエリで答える。
+- [CODE-THANKS-FESTIVAL-2017 H. Union Sets](https://atcoder.jp/contests/code-thanks-festival-2017/tasks/code_thanks_festival_2017_h)（diff なし）：集合の併合を順に行う列に対し、2 要素が初めて同じ集合になった操作の番号を各クエリで答える。
 
 </div>
 

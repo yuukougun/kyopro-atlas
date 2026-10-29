@@ -5,7 +5,7 @@ aliases: [指数ベクトル, 平方因子, squarefree, smooth 数, 平方数の
 type: technique
 field: math
 chapter: 素数と約数
-order: 170
+order: 135
 level: 基礎
 kind: [整数論]
 prerequisites: [prime-factorization]
@@ -27,7 +27,7 @@ sections:
   - {title: 巨大な lcm を指数の最大で持つ, anchor: huge-lcm, level: 水}
   - {title: 特定の素数（2 など）の指数だけを比べる, anchor: single-prime, level: 水}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -97,6 +97,9 @@ $$
 --8<-- "prime-exponent-vector/square-pairs.cpp:core"
 ```
 
+完全なプログラム：[`square-pairs.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/prime-exponent-vector/square-pairs.cpp)（GitHub）
+{ .kp-code-src }
+
 **0 の扱い**。0 は素因数分解できないので核がない。一方、0 と何を掛けても 0 で、0 は平方数（$0 = 0^2$）である。0 の個数を $z$ とすると、0 を含む組は $z(N - z) + \binom{z}{2}$ 組あり、これは核の数え上げとは別に足す。0 に核として 0 や 1 を割り当てると、0 でない数との組を数え損ねたり、平方数との組だけを数えたりして誤る。
 
 **相手の形が決まる**。$a$ を固定すると、$ab$ が平方数になる $b$ はちょうど $b = \mathrm{core}(a) \cdot r^2$（$r \ge 1$ の整数）の形の数である。だから「$1 \le b \le N$ で $ab$ が平方数になる $b$ の個数」は $\lfloor \sqrt{N / \mathrm{core}(a)} \rfloor$ で求まる。平方根は浮動小数点の誤差に注意する（[整数の平方根・K 乗根](../math/integer-root.md)）。
@@ -118,6 +121,9 @@ lcm を指数の列で持てば、大きさの問題が消える。各要素を�
 ```cpp
 --8<-- "prime-exponent-vector/lcm-mod.cpp:core"
 ```
+
+完全なプログラム：[`lcm-mod.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/prime-exponent-vector/lcm-mod.cpp)（GitHub）
+{ .kp-code-src }
 
 lcm $L$ を使って $L / A_i$ を求めたいときは、2 つの方法がある。法が素数で $A_i$ がその倍数でなければ、$L \bmod m$ に $A_i$ の逆元を掛ければよい。逆元を使わないなら、指数の列から $v_p(A_i)$ を引いた列を作って掛け直す。こちらは法が素数でなくても使える。
 
@@ -195,7 +201,7 @@ $A_i \le 2 \times 10^5$ と小さいので、各要素の核を試し割りで�
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [典型90 025. Digit Product Equation（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_y)（diff —）：1 以上 N 以下の整数 m で、m − f(m) = B（f(m) は m の各桁の積）となるものの個数を求める（N ≤ 10^11）。
+- [典型90 025. Digit Product Equation（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_y)（diff なし）：1 以上 N 以下の整数 m で、m − f(m) = B（f(m) は m の各桁の積）となるものの個数を求める（N ≤ 10^11）。
 - [ABC300 G. P-smooth number](https://atcoder.jp/contests/abc300/tasks/abc300_g)（diff 2343）：素因数がすべて P 以下である N 以下の正の整数の個数を求める（N ≤ 10^16、P ≤ 100）。
 - [AGC003 D. Anticube](https://atcoder.jp/contests/agc003/tasks/agc003_d)（diff 2608）：N 個の整数から、どの 2 つを選んでも積が立方数にならないように選べる最大の個数を求める。
 

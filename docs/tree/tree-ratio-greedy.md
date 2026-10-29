@@ -24,7 +24,7 @@ sections:
   - {title: Union-Find と優先度付きキューで併合する, anchor: merge-with-heap}
   - {title: 計算量と自作するときの要点, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -105,11 +105,14 @@ X ← 0
 
 頂点の並びは、塊ごとに先頭と末尾を持つ連結リストにすれば $O(1)$ でつなげる。費用は毎回の $d_P c_V$ を足すだけで求まり、最後に並びから計算し直す必要はない。
 
-次のコード片は、Library Checker の [Rooted Tree Topological Order with Minimum Inversions](https://judge.yosupo.jp/problem/rooted_tree_topological_order_with_minimum_inversions) と同じ入出力で、$X$ の最小値と並べ方を返す。完全なプログラムは `snippets/tree-ratio-greedy/merge.cpp` で、小さい木の全順列の最小値と一致することを確かめた。
+次のコード片は、Library Checker の [Rooted Tree Topological Order with Minimum Inversions](https://judge.yosupo.jp/problem/rooted_tree_topological_order_with_minimum_inversions) と同じ入出力で、$X$ の最小値と並べ方を返す。完全なプログラムは [`snippets/tree-ratio-greedy/merge.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-ratio-greedy/merge.cpp) で、小さい木の全順列の最小値と一致することを確かめた。
 
 ```cpp
 --8<-- "tree-ratio-greedy/merge.cpp:core"
 ```
+
+完全なプログラム：[`merge.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-ratio-greedy/merge.cpp)（GitHub）
+{ .kp-code-src }
 
 !!! info "ACL では"
     `dsu uf(n);`。`uf.merge(a, b)` は新しい代表を返すので、その代表に「塊の先頭の頂点」を対応させる配列を別に持つ。`uf.leader(a)` はならし $O(\alpha(N))$。比の順のキューは ACL になく、`std::set` か `std::priority_queue` を使う。
@@ -128,9 +131,9 @@ X ← 0
 
 ## 学ぶための資料 {#resources}
 
-- hitonanode 氏のライブラリの「Tree pop order optimization / "01 on Tree"」：01 on Tree を解く関数と使い方がある。比較と結合を差し替えた一般化と、この型の問題の一覧（Library Checker・AGC・ABC・yukicoder など）も載っている。
-- maspy 氏の「01 on Tree / 京都観光 / Train Seats」：見た目の違う問題が 01 列の転倒数の最小化に帰着する様子を、複数の問題でたどっている。解法そのものは省かれているので、帰着の練習に読む。
-- Library Checker の問題案（GitHub の issue #1263「[問題案] 01 on Tree」）：Library Checker の問題が 01 on Tree そのものとして提案された経緯と、問題の定義。
+- [hitonanode「Tree pop order optimization / "01 on Tree"」（GitHub）](https://github.com/hitonanode/cplib-cpp/blob/master/other_algorithms/tree_pop_order_optimization.md)：01 on Tree を解く関数と使い方がある。比較と結合を差し替えた一般化と、この型の問題の一覧（Library Checker・AGC・ABC・yukicoder など）も載っている。
+- [maspy「01 on Tree / 京都観光 / Train Seats」](https://maspypy.com/01-on-tree-%e4%ba%ac%e9%83%bd%e8%a6%b3%e5%85%89-train-seats)：見た目の違う問題が 01 列の転倒数の最小化に帰着する様子を、複数の問題でたどっている。解法そのものは省かれているので、帰着の練習に読む。
+- [yosupo06/library-checker-problems issue #1263「[問題案] 01 on Tree」（GitHub）](https://github.com/yosupo06/library-checker-problems/issues/1263)：Library Checker の問題が 01 on Tree そのものとして提案された経緯と、問題の定義。
 
 ## 例題 {#examples}
 

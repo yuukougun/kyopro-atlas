@@ -26,7 +26,7 @@ sections:
   - {title: 遷移元の範囲が単調に動く：尺取りと累積和, anchor: two-pointers}
   - {title: 区間の番号に依存する条件：番号を状態に足す, anchor: block-index, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -63,7 +63,7 @@ $$
 
 次の図は、$a = (2, 1, 1, 1, 1, 2, 2, 1)$ を「どの区間の和も 4 以下」になるように区切る例である。上段は区切り方の 1 つで、下段は $\mathrm{dp}[6]$ がどの $\mathrm{dp}[j]$ から足し込まれるかを示す。
 
-![上段は列 2, 1, 1, 1, 1, 2, 2, 1 の境界 2・3・6 に仕切りを入れ、区間 [0, 2)・[2, 3)・[3, 6)・[6, 8) に分けた図。下段は dp[0] から dp[8] の表で、最後の区間 [j, 6) の和が 4 以下になる j = 3, 4, 5 の dp[j] が dp[6] に足し込まれる。j = 2 は和が 5 になるので遷移元にならない。点線の dp[7]・dp[8] は、dp[6] を求める時点ではまだ求めていない](../img/dp-sequence-partition/last-block.svg)
+![上段は列 2, 1, 1, 1, 1, 2, 2, 1 の境界 2・3・6 に仕切りを入れ、区間 \[0, 2)・\[2, 3)・\[3, 6)・\[6, 8) に分けた図。下段は dp[0] から dp[8] の表で、最後の区間 \[j, 6) の和が 4 以下になる j = 3, 4, 5 の dp[j] が dp[6] に足し込まれる。j = 2 は和が 5 になるので遷移元にならない。点線の dp[7]・dp[8] は、dp[6] を求める時点ではまだ求めていない](../img/dp-sequence-partition/last-block.svg)
 
 この分け方で重複も漏れもないのは、区切り方と「最後の区間 $[j, i)$ と、先頭 $j$ 個の区切り方」の組が一対一に対応するからである。最後の区間は区切り方ごとにちょうど 1 つ決まり、それを取り除いた残りは先頭 $j$ 個の区切り方になる。逆に、先頭 $j$ 個の区切り方の後ろに $[j, i)$ をつなげれば元の区切り方に戻る。区間の条件がその区間の中身だけで決まるので、前の区切り方が後ろの区間に影響しない。だから $\mathrm{dp}[j]$ という 1 つの数で足りる。
 
@@ -117,6 +117,9 @@ $\mathrm{lo}$ は全体で $N$ 回しか進まないので、全体は $O(N)$ �
 ```cpp
 --8<-- "dp-sequence-partition/sum-at-most-k.cpp:core"
 ```
+
+完全なプログラム：[`sum-at-most-k.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-sequence-partition/sum-at-most-k.cpp)（GitHub）
+{ .kp-code-src }
 
 同じ考え方の変形がいくつかある。
 
@@ -209,7 +212,7 @@ $p = i - 1$（隣が同じ色）を除くのは、塗っても列が変わらず
 
 - [ARC065 C. Daydream](https://atcoder.jp/contests/arc065/tasks/arc065_a)（diff 930）：文字列 S を dream・dreamer・erase・eraser の連結に区切れるかを判定する。
 - [ABC207 E. Mod i](https://atcoder.jp/contests/abc207/tasks/abc207_e)（diff 1820）：数列をいくつかの区間に区切り、各区間の和が、左から数えたその区間の番号で割り切れるようにする方法の数を求める。
-- [典型90 089. Partitions and Inversions（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_ck)（diff —）：数列をいくつかの区間に区切り、各区間の転倒数が K 以下になる区切り方の数を求める。
+- [典型90 089. Partitions and Inversions（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_ck)（diff なし）：数列をいくつかの区間に区切り、各区間の転倒数が K 以下になる区切り方の数を求める。
 
 </div>
 

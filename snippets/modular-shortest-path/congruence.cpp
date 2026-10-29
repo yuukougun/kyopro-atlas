@@ -3,7 +3,7 @@ using namespace std;
 
 // 正の整数 a_1, ..., a_n の非負整数結合（a_1 x_1 + ... + a_n x_n、x_i ≥ 0）で作れる数を調べる。
 // --8<-- [start:core]
-const long long INF = numeric_limits<long long>::max();
+const long long INF = 1LL << 60;  // INF + INF でもあふれない大きさ
 
 // d[r]：作れる数のうち、m = min(a) で割った余りが r の最小値（作れなければ INF）
 vector<long long> min_by_residue(const vector<long long>& a) {
@@ -32,7 +32,7 @@ vector<long long> min_by_residue(const vector<long long>& a) {
 long long count_upto(const vector<long long>& d, long long h) {
     long long m = d.size(), cnt = 0;
     for (long long r = 0; r < m; r++) {
-        if (d[r] <= h) cnt += (h - d[r]) / m + 1;
+        if (d[r] != INF && d[r] <= h) cnt += (h - d[r]) / m + 1;  // 作れない余りは H が大きくても数えない
     }
     return cnt;
 }

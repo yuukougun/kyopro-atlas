@@ -25,7 +25,7 @@ sections:
   - {title: 距離表からの復元（迂回できる辺は不要）, anchor: from-distances}
   - {title: DFS 木をたどって偶奇を合わせる, anchor: parity-walk, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -66,11 +66,17 @@ DFS 木・BFS 木は、探索で「まだ見ていない頂点へ進んだ辺」
 --8<-- "graph-construction/spanning-trees.cpp:dfs-tree"
 ```
 
+完全なプログラム：[`spanning-trees.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/graph-construction/spanning-trees.cpp)（GitHub）
+{ .kp-code-src }
+
 再帰が深すぎるときの非再帰版は、[落とし穴](#pitfalls)の 1 つ目に注意して書く。スタックには（頂点, 積んだときの親）の組を積み、取り出したときに印と親を決める。同じ頂点が何度も積まれるが、最後に積まれた組が先に取り出されるので、再帰と同じ木になる。[DFS のページ](../graph/dfs.md)の非再帰版は `v` と `~v` を積む形だが、ここでは親を記録したいので、（頂点, 親）の組を積む。
 
 ```cpp
 --8<-- "graph-construction/spanning-trees.cpp:dfs-tree-iterative"
 ```
+
+完全なプログラム：[`spanning-trees.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/graph-construction/spanning-trees.cpp)（GitHub）
+{ .kp-code-src }
 
 **有向グラフでは事情が違う**。有向グラフの DFS では、「先に調べ終えた別の枝へ向かう辺」（横断辺）も木に入らない辺として現れる。横断辺がないのは、辺を両向きに通れる無向グラフだけの性質である。有向グラフの辺の分類は[閉路の検出](../graph/cycle-detection.md#directed)で使う。
 
@@ -93,6 +99,9 @@ DFS 木・BFS 木は、探索で「まだ見ていない頂点へ進んだ辺」
 ```cpp
 --8<-- "graph-construction/spanning-trees.cpp:bfs-tree"
 ```
+
+完全なプログラム：[`spanning-trees.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/graph-construction/spanning-trees.cpp)（GitHub）
+{ .kp-code-src }
 
 応用の型：
 
@@ -118,6 +127,9 @@ DFS 木・BFS 木は、探索で「まだ見ていない頂点へ進んだ辺」
 ```cpp
 --8<-- "graph-construction/restore.cpp:core"
 ```
+
+完全なプログラム：[`restore.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/graph-construction/restore.cpp)（GitHub）
+{ .kp-code-src }
 
 **張らなかった辺がすべて同時になくてもよい理由**。2 段目では、辺を 1 本ずつ外さず、「迂回できる辺」を一度に全部外している。外した辺 $(i, j)$ の迂回路 $i \to k \to j$ も外した辺を含みうるが、迂回路の 2 本はどちらも $A[i][j]$ より真に短い（長さはすべて正）。短い順に帰納法を使うと、外した辺はすべて残した辺だけの経路に置き換わる。この議論は[迂回できる辺は不要](../graph/warshall-floyd.md#redundant-edges)に詳しい。長さ 0 の辺を許す問題では、2 本の辺が互いの迂回路になりうるので、この議論が成り立たない。
 
@@ -202,7 +214,7 @@ if root の回数の偶奇が指定と違う: walk の最後の要素を消す
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [ARC044 B. 最短路問題](https://atcoder.jp/contests/arc044/tasks/arc044_b)（diff 1744）：頂点 1 から各頂点までの最短距離の列が与えられ、その距離を実現する N 頂点の単純無向グラフの個数を 10^9+7 で割った余りで求める。
+- [ARC044 B. 最短路問題](https://atcoder.jp/contests/arc044/tasks/arc044_b)（diff 1744・参考値）：頂点 1 から各頂点までの最短距離の列が与えられ、その距離を実現する N 頂点の単純無向グラフの個数を 10^9+7 で割った余りで求める。
 - [AGC035 B. Even Degrees](https://atcoder.jp/contests/agc035/tasks/agc035_b)（diff 2039）：連結な単純無向グラフのすべての辺に向きを付け、どの頂点も出次数が偶数になるようにする向き付けを 1 つ出力し、できなければ -1 を出力する。
 - [ARC111 D. Orientation](https://atcoder.jp/contests/arc111/tasks/arc111_d)（diff 2064）：単純無向グラフと各頂点の値 c_i が与えられ、各頂点から到達できる頂点数（自分を含む）がちょうど c_i になるように辺の向きを決める（答えがあることは保証される）。
 - [ABC244 G. Construct Good Path](https://atcoder.jp/contests/abc244/tasks/abc244_g)（diff 2117）：連結な無向グラフで、各頂点を通る回数の偶奇が指定どおりになる長さ 4N 以下の経路を 1 つ出力する。

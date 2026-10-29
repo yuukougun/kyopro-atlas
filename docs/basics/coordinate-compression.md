@@ -26,7 +26,7 @@ sections:
   - {title: BIT・セグメント木・いもす法と組む, anchor: with-ds}
   - {title: map で足りる場合との使い分け, anchor: vs-map}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -59,6 +59,9 @@ updated: 2026-10-22
 --8<-- "coordinate-compression/compress.cpp:core"
 ```
 
+完全なプログラム：[`compress.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/coordinate-compression/compress.cpp)（GitHub）
+{ .kp-code-src }
+
 - **`unique` は消さない**：`unique` は残す要素を前に詰め、その終わりの位置を返すだけである。vector の長さは変わらない。`erase` まで書かないと、後ろに残ったごみも番号に数えてしまう
 - **並べてから `unique`**：`unique` が消すのは隣り合う重複だけなので、先に `sort` する
 - **番号は 0 から**：問題が「1 番目から」と数えるなら、出力のときに 1 を足す
@@ -86,6 +89,9 @@ updated: 2026-10-22
 ```cpp
 --8<-- "coordinate-compression/covered-length.cpp:core"
 ```
+
+完全なプログラム：[`covered-length.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/coordinate-compression/covered-length.cpp)（GitHub）
+{ .kp-code-src }
 
 ??? question "確認問題：右端を入れ忘れたら"
     区間 $[2, 9)$ と $[5, 14)$ のうち、左端 2・5 だけを圧縮した。何が困るか。
@@ -175,8 +181,8 @@ updated: 2026-10-22
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC113 C. ID](https://atcoder.jp/contests/abc113/tasks/abc113_c)（diff 878）：各市に、所属する県の番号と県の中での誕生順を並べた ID を付ける。
-- [ABC036 C. 座圧](https://atcoder.jp/contests/abc036/tasks/abc036_c)（diff 956）：各値が全体で何番目に小さい値か（同じ値は同じ番号）を出力する。
-- [典型90 029. Long Bricks（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_ac)（diff —）：区間にレンガを順に積んでいくとき、各レンガが置かれる高さを求める。
+- [ABC036 C. 座圧](https://atcoder.jp/contests/abc036/tasks/abc036_c)（diff 956・参考値）：各値が全体で何番目に小さい値か（同じ値は同じ番号）を出力する。
+- [典型90 029. Long Bricks（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_ac)（diff なし）：区間にレンガを順に積んでいくとき、各レンガが置かれる高さを求める。
 
 </div>
 

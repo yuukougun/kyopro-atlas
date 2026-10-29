@@ -25,7 +25,7 @@ sections:
   - {title: 最良有理近似と比較の精度（128 bit 整数）, anchor: best-approximation}
   - {title: 自作するときの要点と Library Checker, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -104,11 +104,14 @@ $$
 - **どちらが近いか**：$x/y - a/b$ と $c/d - x/y$ を比べるには、$(bx - ay)\,d$ と $(cy - dx)\,b$ を比べればよい。$R - L = 1/(bd)$ なので、どちらの値も $y$ 未満に収まる。
 - **double を使わない**：double の仮数部は 53 bit（10 進で 15〜16 桁）しかなく、18 桁の小数は正しく表せない。小数の入力は文字列で読み、$10$ の冪を分母とする整数の分数に直す。
 
-$N$ と $x/y$ から $L$ と $R$ を返す関数の中心は次のとおりである（完全なプログラムは `snippets/stern-brocot/approx.cpp`）。
+$N$ と $x/y$ から $L$ と $R$ を返す関数の中心は次のとおりである（完全なプログラムは [`snippets/stern-brocot/approx.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/stern-brocot/approx.cpp)）。
 
 ```cpp
 --8<-- "stern-brocot/approx.cpp:core"
 ```
+
+完全なプログラム：[`approx.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/stern-brocot/approx.cpp)（GitHub）
+{ .kp-code-src }
 
 $L$ が存在しない（$x/y$ が $1/N$ より小さい）ときは $0/1$ が、$R$ が存在しない（$x/y$ が $N$ より大きい）ときは $1/0$ が残る。分母だけに上限がある問題では、分子の上限で回数を切る行を外す。
 
@@ -135,8 +138,8 @@ ACL に対応する機能はないので、使うなら自作する。保つ性�
 
 ## 学ぶための資料 {#resources}
 
-- cp-algorithms の解説[「The Stern-Brocot tree and Farey sequences」](https://cp-algorithms.com/others/stern_brocot_tree_farey_sequences.html)：木の作り方と $bc - ad = 1$ の不変条件から、道と連分数の対応、判定だけで進む対数回の探索、Farey 数列との関係までを証明とともに追える。
-- Nyaan 氏のライブラリ[「Stern-Brocot Tree」](https://nyaannyaan.github.io/library/math/stern-brocot-tree.hpp)：道の圧縮表現、LCA・祖先・左右の端などの木の上の操作をまとめた実装で、自作するときの関数の切り分けの参考になる。
+- [cp-algorithms「The Stern-Brocot tree and Farey sequences」](https://cp-algorithms.com/others/stern_brocot_tree_farey_sequences.html)：木の作り方と $bc - ad = 1$ の不変条件から、道と連分数の対応、判定だけで進む対数回の探索、Farey 数列との関係までを証明とともに追える。
+- [Nyaan「Stern-Brocot Tree」（Nyaan's Library）](https://nyaannyaan.github.io/library/math/stern-brocot-tree.hpp)：道の圧縮表現、LCA・祖先・左右の端などの木の上の操作をまとめた実装で、自作するときの関数の切り分けの参考になる。
 
 ## 例題 {#examples}
 

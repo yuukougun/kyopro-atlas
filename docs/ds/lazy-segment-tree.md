@@ -31,7 +31,7 @@ sections:
   - {title: 双対セグメント木（区間作用・一点取得）, anchor: dual-segment-tree}
   - {title: 保つ性質と push の手順（自作するとき）, anchor: invariants, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -119,11 +119,17 @@ updated: 2026-10-22
 --8<-- "lazy-segment-tree/add-min.cpp:core"
 ```
 
+完全なプログラム：[`add-min.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lazy-segment-tree/add-min.cpp)（GitHub）
+{ .kp-code-src }
+
 区間代入では「何もしない」を表す値が要る。代入されうる値と重ならない番兵を `id()` にする。後から来た代入が前の代入を上書きするので、`composition(f, g)` は $f$ が番兵でなければ $f$ を返す。
 
 ```cpp
 --8<-- "lazy-segment-tree/assign-max.cpp:core"
 ```
+
+完全なプログラム：[`assign-max.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lazy-segment-tree/assign-max.cpp)（GitHub）
+{ .kp-code-src }
 
 最小値と最大値を入れ替えるには、`op` と `e` だけを変える（最小値なら `min` と大きい番兵、最大値なら `max` と小さい番兵）。
 
@@ -149,6 +155,9 @@ updated: 2026-10-22
 ```cpp
 --8<-- "lazy-segment-tree/affine-sum.cpp:core"
 ```
+
+完全なプログラム：[`affine-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lazy-segment-tree/affine-sum.cpp)（GitHub）
+{ .kp-code-src }
 
 初期値の葉は `{a[i], 1}` のように長さ 1 で作る。長さ 0 の葉にすると、加算しても和が増えない（[境界](#boundaries)）。
 
@@ -188,6 +197,9 @@ ACL の 3 つの関数の意味と、引数の順序は次のとおりである�
 --8<-- "lazy-segment-tree/dual-add.cpp:core"
 ```
 
+完全なプログラム：[`dual-add.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lazy-segment-tree/dual-add.cpp)（GitHub）
+{ .kp-code-src }
+
 代入やアフィン変換のように可換でない作用では、経路上の保留を集める順序が答えを変える。区間作用の前に、区間の両端へ向かう経路の保留を上から push しておくと、新しい作用を置くノードの祖先には保留が残らない。よって経路上では「上ほど新しい作用」という順序が保たれる。一点の値を求めるときは、葉に近い保留から順に初期値へ施し、根の保留を最後に施す。手で書くのが面倒なら、ACL の `lazy_segtree` で `get` だけを使ってもよい。
 
 !!! tip "一点取得だけなら差分の BIT でもよい"
@@ -199,7 +211,7 @@ ACL の 3 つの関数の意味と、引数の順序は次のとおりである�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [PRACTICE2 K. Range Affine Range Sum](https://atcoder.jp/contests/practice2/tasks/practice2_k)（diff —）：区間に x → bx + c を作用させる操作と、区間和の質問を処理する。
+- [PRACTICE2 K. Range Affine Range Sum](https://atcoder.jp/contests/practice2/tasks/practice2_k)（diff なし）：区間に x → bx + c を作用させる操作と、区間和の質問を処理する。
 
 </div>
 
@@ -251,7 +263,7 @@ A を $+1$、B を $-1$ に置き換えて累積和を取ると、部分文字�
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC340 E. Mancala 2](https://atcoder.jp/contests/abc340/tasks/abc340_e)（diff 1157）：円環に並ぶ箱の玉を取り出して順に配る操作を繰り返した後の、各箱の玉の数を求める。
-- [典型90 029. Long Bricks（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_ac)（diff —）：区間にレンガを順に積んでいくとき、各レンガが置かれる高さを求める。
+- [典型90 029. Long Bricks（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_ac)（diff なし）：区間にレンガを順に積んでいくとき、各レンガが置かれる高さを求める。
 - [ABC455 F. Merge Slimes 2](https://atcoder.jp/contests/abc455/tasks/abc455_f)（diff 1549）：最初はすべて 0 の列の区間に値を加えるたびに、その区間の値を重さとするスライムを、重さ x と y を合わせるとコスト xy がかかる規則で 1 つにまとめる最小のコストを mod で答える。
 - [ABL E. Replace Digits](https://atcoder.jp/contests/abl/tasks/abl_e)（diff 1706）：数字列の区間を 1 種類の数字で上書きする操作のたびに、整数としての値の mod を答える。
 - [ABC179 F. Simplified Reversi](https://atcoder.jp/contests/abc179/tasks/abc179_f)（diff 1713）：盤の端から白石を置く操作を繰り返した後に残る黒石の数を求める。
@@ -349,10 +361,17 @@ ACL の実装は再帰を使わず、下から上へ書いている。区間作�
 - 演算が可換でないときは、`prod` で左の子の結果を先に結ぶ
 - push を忘れて子を読むと、上の保留が施されていない値を返す。取得の関数でも push する
 
-??? note "C++ の実装例（再帰。区間加算・区間最小値）"
+??? note "自作するとき：`LazySegTree`（ACL の `lazy_segtree` に当たる）"
+    ACL の `lazy_segtree` と同じ 7 つの部品を受け取る。部品は `S`・`op`・`e`・`F`・`mapping`・`composition`・`id` で、意味も同じである。コンストラクタとメンバ関数の名前（`set`・`get`・`prod`・`all_prod`・`apply`）と引数の約束も ACL にそろえた。ACL との違いは 2 つある。区間の操作をこの節の手順のとおり再帰で書いたことと、`max_right`・`min_left`・一点への `apply(p, f)` を持たないことである。区間加算・区間最小値では、`mapping(f, x)` が $x + f$、`composition(f, g)` が $f + g$、`id()` が $0$、`e()` が大きい番兵を返す（[標準の型の表](#acl-standard)）。
+
     ```cpp
-    --8<-- "lazy-segment-tree/own-add-min.cpp:core"
+    --8<-- "lazy-segment-tree/own.cpp:core"
     ```
+
+    完全なプログラム：[`own.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lazy-segment-tree/own.cpp)（GitHub）
+    { .kp-code-src }
+
+    試験では、区間加算・区間最小値と、作用が可換でない区間アフィン・区間和の 2 つで、乱数の操作の列を素朴な方法と比べた。`all_apply` の合成の向きを逆にしたり、`set` の前の push を忘れたりすると、この試験で見つかる。`max_right` を足すなら、[セグメント木上の二分探索](../ds/segment-tree-binary-search.md#complexity)の再帰の `search` で、子を探す前に `push(k)` を呼ぶ。祖先の保留を降ろしてから子の値を読むためである。名前の約束は[インターフェースの決め方](../guide/library-design.md#interface)、確かめ方は[動作確認の手順](../guide/library-design.md#verify)にある。
 
 ## 参考 {#references}
 

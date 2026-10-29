@@ -53,6 +53,20 @@ search:
     - `term-index#latin` 英字の名前（ABC 順）：https://yuukougun.github.io/kyopro-atlas/guide/term-index/#latin
     - `term-index#shared-terms` 複数のページに当たる語：https://yuukougun.github.io/kyopro-atlas/guide/term-index/#shared-terms
 
+## 問題番号の索引（problem-index） {#problem-index}
+
+- id：`problem-index`　レベル：—　段階：draft　type：guide
+- URL：https://yuukougun.github.io/kyopro-atlas/guide/problem-index/
+- 別名：問題番号から引く、問題 ID から引く、過去問の索引
+- 種類：案内
+- 節：
+    - `problem-index#how-to-read` 引き方：https://yuukougun.github.io/kyopro-atlas/guide/problem-index/#how-to-read
+    - `problem-index#abc` ABC：https://yuukougun.github.io/kyopro-atlas/guide/problem-index/#abc
+    - `problem-index#arc` ARC：https://yuukougun.github.io/kyopro-atlas/guide/problem-index/#arc
+    - `problem-index#agc` AGC：https://yuukougun.github.io/kyopro-atlas/guide/problem-index/#agc
+    - `problem-index#sets` 問題集：https://yuukougun.github.io/kyopro-atlas/guide/problem-index/#sets
+    - `problem-index#others` そのほかのコンテスト：https://yuukougun.github.io/kyopro-atlas/guide/problem-index/#others
+
 ## 知識マップ（knowledge-map） {#knowledge-map}
 
 - id：`knowledge-map`　レベル：—　段階：reviewed　type：guide
@@ -107,6 +121,17 @@ search:
     - `roadmap#practice` 色ごとの練習の方法：https://yuukougun.github.io/kyopro-atlas/guide/roadmap/#practice
     - `roadmap#progress` 解いた数・理解した数：https://yuukougun.github.io/kyopro-atlas/guide/roadmap/#progress
     - `roadmap#not-a-syllabus` シラバスではないこと：https://yuukougun.github.io/kyopro-atlas/guide/roadmap/#not-a-syllabus
+
+## 勉強したいリスト（study-list） {#study-list}
+
+- id：`study-list`　レベル：—　段階：draft　type：guide
+- URL：https://yuukougun.github.io/kyopro-atlas/guide/study-list/
+- 別名：お気に入り、あとで読む、ブックマーク、勉強したいページ
+- 種類：案内
+- 節：
+    - `study-list#list` リストの中身：https://yuukougun.github.io/kyopro-atlas/guide/study-list/#list
+    - `study-list#how` 入れ方と外し方：https://yuukougun.github.io/kyopro-atlas/guide/study-list/#how
+    - `study-list#storage` 記録の保存と退避：https://yuukougun.github.io/kyopro-atlas/guide/study-list/#storage
 
 ## 精進の仕方（practice-method） {#practice-method}
 

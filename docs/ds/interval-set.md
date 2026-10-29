@@ -29,7 +29,7 @@ sections:
   - {title: 応用（mex・塗り分け・和集合の長さ・値ごとの合計の差分更新）, anchor: applications}
   - {title: 値つきの区間の分割・統合, anchor: valued-intervals, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -89,7 +89,7 @@ $x$ を含む区間は、左端が $x$ 以下の区間のうち最も右のも�
 
 次の図は、4 つに区切った $[0, 12)$ へ「$[2, 10)$ を値 4 にする」代入をする様子である。
 
-![上段は [0, 3) が 0・[3, 5) が 2・[5, 9) が 3・[9, 12) が 1。中段は split(2) と split(10) で、値を変えずに 2 と 10 の位置に区切りを足した 6 区間。下段は [2, 10) の 4 区間を消して値 4 の 1 区間を入れた結果で、[0, 2) が 0・[2, 10) が 4・[10, 12) が 1](../img/interval-set/assign.svg)
+![上段は \[0, 3) が 0・\[3, 5) が 2・\[5, 9) が 3・\[9, 12) が 1。中段は split(2) と split(10) で、値を変えずに 2 と 10 の位置に区切りを足した 6 区間。下段は \[2, 10) の 4 区間を消して値 4 の 1 区間を入れた結果で、\[0, 2) が 0・\[2, 10) が 4・\[10, 12) が 1](../img/interval-set/assign.svg)
 
 図の流れを文章で追うと次のとおりである。
 
@@ -100,6 +100,9 @@ $x$ を含む区間は、左端が $x$ 以下の区間のうち最も右のも�
 ```cpp
 --8<-- "interval-set/paint.cpp:core"
 ```
+
+完全なプログラム：[`paint.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/interval-set/paint.cpp)（GitHub）
+{ .kp-code-src }
 
 `assign` の引数 `f` は、消える区間ごとに呼ぶ関数である。値ごとのマスの数や区間の和を持つときは、ここで消える区間の分を引き、最後に入れる区間の分を足す。
 
@@ -113,6 +116,9 @@ $x$ を含む区間は、左端が $x$ 以下の区間のうち最も右のも�
 ```cpp
 --8<-- "interval-set/cover.cpp:core"
 ```
+
+完全なプログラム：[`cover.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/interval-set/cover.cpp)（GitHub）
+{ .kp-code-src }
 
 追加では「接する」も含めて左端が $r$ 以下（`<=`）の区間をまとめ、削除では重なる区間（`<`）だけを触る。この不等号の違いが、区間の表し方を 1 通りに保つ。
 

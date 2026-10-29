@@ -24,7 +24,7 @@ sections:
   - {title: ボトムアップとの使い分け（速さ・スタック・高速化の載せやすさ）, anchor: vs-bottom-up}
   - {title: 到達する状態だけを持つ（map でメモ化・現れる値の個数の見積もり）, anchor: dp-map-sparse}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -64,6 +64,9 @@ C++ では、ラムダ式で書くと入力や表を引数で渡さずに済む�
 ```cpp
 --8<-- "memoized-recursion/floor-memo.cpp:core"
 ```
+
+完全なプログラム：[`floor-memo.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/memoized-recursion/floor-memo.cpp)（GitHub）
+{ .kp-code-src }
 
 **未計算の印**は、答えになりうる値と重ならないように選ぶ。よくある書き方は、表を $-1$ で初期化して「$-1$ なら未計算」とするものだが、次の場合は印と答えが衝突する。
 
@@ -133,6 +136,9 @@ $N \le 10^{18}$ のように状態の範囲が広いと、大きさ $N$ の配�
 --8<-- "memoized-recursion/dag-memo.cpp:core"
 ```
 
+完全なプログラム：[`dag-memo.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/memoized-recursion/dag-memo.cpp)（GitHub）
+{ .kp-code-src }
+
 閉路がある問題は、閉路の部分を先に別の方法で処理する。各頂点から出る辺が 1 本のグラフなら、先に閉路を見つけてその上の値を決め、残りの木の部分をメモ化再帰で求める（[Functional graph](../graph/functional-graph.md)）。期待値で一般の閉路があるなら、未知数を置いて方程式を解く（[期待値の方程式を解く](../comb/expectation-linear-equations.md#unknown)）。
 
 **自己ループは移項してから書く**。サイコロで 1 の目が出ると状態が変わらない問題では、漸化式の右辺に自分自身が現れる。
@@ -182,7 +188,7 @@ $$
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC275 D. Yet Another Recursive Function](https://atcoder.jp/contests/abc275/tasks/abc275_d)（diff 606）：f(0) = 1、f(k) = f(⌊k/2⌋) + f(⌊k/3⌋) で定まる f(N) を求める（N ≤ 10^18）。
-- [EDPC G. Longest Path](https://atcoder.jp/contests/dp/tasks/dp_g)（diff —）：閉路のない有向グラフで、最長の有向路の長さを求める。
+- [EDPC G. Longest Path](https://atcoder.jp/contests/dp/tasks/dp_g)（diff なし）：閉路のない有向グラフで、最長の有向路の長さを求める。
 - [ABC357 E. Reachability in Functional Graph](https://atcoder.jp/contests/abc357/tasks/abc357_e)（diff 1295）：各頂点から出る辺がちょうど 1 本の有向グラフで、u から v へ到達できる組 (u, v) の個数を求める。
 - [ABC300 E. Dice Product 3](https://atcoder.jp/contests/abc300/tasks/abc300_e)（diff 1354）：1〜6 の目のサイコロを振って出た目を掛けていくとき、積がちょうど N になる確率を求める（mod 998244353）。
 

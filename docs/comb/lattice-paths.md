@@ -27,7 +27,7 @@ sections:
   - {title: 経路数の総和と、二項係数の和を経路数として一括で求める, anchor: sum-of-paths, level: 青}
   - {title: 移動を軸ごとの回数に分けて独立にする（45 度回転）, anchor: independent-axes, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -84,6 +84,9 @@ $$
 --8<-- "lattice-paths/knight.cpp:core"
 ```
 
+完全なプログラム：[`knight.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lattice-paths/knight.cpp)（GitHub）
+{ .kp-code-src }
+
 この形に直せるかは、次の順に確かめる。
 
 - **回数が終点から 1 通りに決まるか**：移動のベクトルが 2 つで 1 次独立なら、回数の組は連立方程式の解として 1 通りに決まる。移動が 3 種類以上なら、回数の組は 1 通りとは限らない。平面なら、自由に選べる回数（3 種類なら 1 つ、4 種類なら 2 つ）でループし、各組の並べ方を[多項係数](../comb/multinomial-coefficient.md)で数えて足す
@@ -108,6 +111,9 @@ $H$ 行 $W$ 列のマスを、左上 $(0, 0)$ を出て右下 $(H-1, W-1)$ ま�
 ```cpp
 --8<-- "lattice-paths/forbidden.cpp:core"
 ```
+
+完全なプログラム：[`forbidden.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lattice-paths/forbidden.cpp)（GitHub）。`mint` は ACL の `modint1000000007`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 分類に使う境目は、どの経路も必ず 1 回だけ通るものを選ぶ。「禁止領域の角の点を通るか」のような分け方では、通らない経路が残ったり、2 回数えたりする。禁止のマスが散らばっているときは、境目ではなく「最初に踏む障害物」で分類する（[包除 DP](../comb/inclusion-exclusion-dp.md#first-obstacle)）。
 
@@ -200,7 +206,7 @@ $n + X + Y$ が奇数なら 0 通りで（$n + X - Y$ も同じ偶奇になる�
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC154 F. Many Many Paths](https://atcoder.jp/contests/abc154/tasks/abc154_f)（diff 1775）：r_1 ≤ i ≤ r_2、c_1 ≤ j ≤ c_2 のすべての (i, j) について、原点から (i, j) への右・上の最短路の数を求め、その総和を求める。
-- [ABC011 D. 大ジャンプ](https://atcoder.jp/contests/abc011/tasks/abc011_4)（diff 1843）：1 回に上下左右のどれかへ距離 D だけ等確率で動くことを N 回繰り返したとき、点 (X, Y) にいる確率を求める。
+- [ABC011 D. 大ジャンプ](https://atcoder.jp/contests/abc011/tasks/abc011_4)（diff 1843・参考値）：1 回に上下左右のどれかへ距離 D だけ等確率で動くことを N 回繰り返したとき、点 (X, Y) にいる確率を求める。
 - [ARC058 D. Iroha and a Grid](https://atcoder.jp/contests/arc058/tasks/arc058_b)（diff 1905）：H×W のグリッドの左上から右下へ右と下だけで進むとき、左下の A×B の領域に入らない経路の数を求める。
 
 </div>
@@ -214,7 +220,7 @@ $n + X + Y$ が奇数なら 0 通りで（$n + X - Y$ も同じ偶奇になる�
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [AGC001 E. BBQ Hard](https://atcoder.jp/contests/agc001/tasks/agc001_e)（diff —）：N 組の (A_i, B_i) について、すべての i < j の組の C(A_i+B_i+A_j+B_j, A_i+A_j) の和を求める。
+- [AGC001 E. BBQ Hard](https://atcoder.jp/contests/agc001/tasks/agc001_e)（diff なし）：N 組の (A_i, B_i) について、すべての i < j の組の C(A_i+B_i+A_j+B_j, A_i+A_j) の和を求める。
 - [ABC240 G. Teleporting Takahashi](https://atcoder.jp/contests/abc240/tasks/abc240_g)（diff 2462）：3 次元の格子で、1 回に 6 方向のどれかへ 1 だけ動くことを N 回繰り返して点 (X, Y, Z) に着く方法の数を求める。
 
 </div>

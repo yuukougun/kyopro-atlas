@@ -27,7 +27,7 @@ sections:
   - {title: 2 進の桁 DP（XOR・AND）, anchor: binary}
   - {title: 割る数を全探索して桁 DP を繰り返す, anchor: fix-divisor}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -103,6 +103,9 @@ $X < N$ なら、この桁 $i$ は 1 つに決まる。桁 $i$ より上は $N$ 
 --8<-- "digit-dp/digit-sum.cpp:core"
 ```
 
+完全なプログラム：[`digit-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/digit-dp/digit-sum.cpp)（GitHub）
+{ .kp-code-src }
+
 **計算量**：状態は桁ごとに $2S$ 個で（$S$ は $r$ の種類の数）、各状態から最大 10 本の遷移が出る。全体で $O(10 L S)$ である。桁和が $D$ の倍数のものを数えるなら $S = D$ なので $O(10 L D)$ で、$L = 10^4$、$D = 100$（[例題 EDPC S](#dp_s) の上限）でも約 $10^7$ 回で済む。同じ DP は、桁の位置・フラグ・情報を引数にした[メモ化再帰](../dp/memoized-recursion.md)でも書ける。
 
 ??? question "確認問題：フラグを持たないと何が起きるか"
@@ -152,6 +155,9 @@ $X < N$ なら、この桁 $i$ は 1 つに決まる。桁 $i$ より上は $N$ 
 --8<-- "digit-dp/leading-zero.cpp:core"
 ```
 
+完全なプログラム：[`leading-zero.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/digit-dp/leading-zero.cpp)（GitHub）
+{ .kp-code-src }
+
 フラグ $z$ で状態数は 2 倍になるだけなので、計算量は変わらない。区別が要るか迷ったら、小さい $N$ で全探索の結果と比べるのが確実である。
 
 ??? question "確認問題：leading zero を区別する必要があるか"
@@ -193,6 +199,9 @@ $X < N$ なら、この桁 $i$ は 1 つに決まる。桁 $i$ より上は $N$ 
 --8<-- "digit-dp/digit-sum-divisible.cpp:core"
 ```
 
+完全なプログラム：[`digit-sum-divisible.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/digit-dp/digit-sum-divisible.cpp)（GitHub）
+{ .kp-code-src }
+
 **計算量**：$m$ を決めた DP 1 回は、状態が桁ごとに $2(m + 1)m$ 個で、各状態から最大 10 本の遷移が出るので $O(10 L m^2)$ である。$m \le 9L$ について足すと、$m^2$ の和は約 $(9L)^3 / 3$ なので、全体で $O(10 L \cdot (9L)^3)$ になる。$N \le 10^{14}$ なら $L = 15$ で、多く見積もっても約 $2.5 \times 10^8$ 回である。桁和が $m$ を超える遷移と個数が 0 の状態を飛ばすので、実際はずっと少なく、1 秒もかからない。
 
 割る数を決め打つ考え方は、桁和に限らない。「最後まで決まらない量が状態の定義（割る数・目標の値）に入ってしまう」ときは、その量の候補が少なければ外側で全探索し、内側を固定された条件の DP にする。
@@ -226,7 +235,7 @@ $X < N$ なら、この桁 $i$ は 1 つに決まる。桁 $i$ より上は $N$ 
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC S. Digit Sum](https://atcoder.jp/contests/dp/tasks/dp_s)（diff —）：1 以上 K 以下（K は最大 10^4 桁）の整数のうち、各桁の和が D の倍数になるものの個数を求める。
+- [EDPC S. Digit Sum](https://atcoder.jp/contests/dp/tasks/dp_s)（diff なし）：1 以上 K 以下（K は最大 10^4 桁）の整数のうち、各桁の和が D の倍数になるものの個数を求める。
 
 </div>
 

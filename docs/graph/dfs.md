@@ -25,7 +25,7 @@ sections:
   - {title: 行きがけ順と帰りがけ順, anchor: pre-post-order}
   - {title: 非再帰の DFS と再帰の深さ, anchor: iterative}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -51,6 +51,9 @@ updated: 2026-10-22
 --8<-- "dfs/components.cpp:core"
 ```
 
+完全なプログラム：[`components.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dfs/components.cpp)（GitHub）
+{ .kp-code-src }
+
 再帰するラムダは、自分を引数 `self` で受け取って呼ぶ（理由は[落とし穴](#pitfalls)と[ラムダが再帰できない理由](../cpp/cpp-lambda.md#recursive-lambda)）。
 
 - **なぜ $O(N + M)$ か**：印が付くのは各頂点 1 回なので、`dfs` は各頂点で 1 回しか呼ばれない。呼ばれた頂点 $v$ では隣接リストを 1 周するので、調べる辺の合計は次数の和に等しく、無向グラフなら $2M$（有向グラフなら $M$）である
@@ -66,6 +69,9 @@ updated: 2026-10-22
 ```cpp
 --8<-- "dfs/simple-paths.cpp:core"
 ```
+
+完全なプログラム：[`simple-paths.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dfs/simple-paths.cpp)（GitHub）
+{ .kp-code-src }
 
 - **対応**：`dfs(v)` の呼び出し 1 回が、始点から $v$ までの単純パス 1 本にちょうど対応する。呼び出しの入れ子が経路の形そのものなので、同じパスを二度数えることも、数え漏らすこともない
 - **計算量**：呼び出しの回数は単純パスの数で、完全グラフなら始点 1 つあたり約 $e \cdot (N-1)!$ 本（$N = 10$ で約 $10^6$）まで増える。$N \le 10$ 程度か、マス目が小さく 1 歩ごとの分かれ方が少ないときだけ使える。長さ $K$ の経路をマス目で数えるなら、1 歩目は 4 方向、2 歩目からは来た方向を除く 3 方向なので、始点 1 つあたり $4 \cdot 3^{K-1}$ 本以下である
@@ -91,6 +97,9 @@ updated: 2026-10-22
 --8<-- "dfs/order.cpp:core"
 ```
 
+完全なプログラム：[`order.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dfs/order.cpp)（GitHub）
+{ .kp-code-src }
+
 2 つの順は、それぞれ次の性質を持つ。
 
 - **行きがけ順**：DFS 木の各頂点の部分木は、行きがけ順で連続した区間になる。図では頂点 5 の部分木 $\{5, 3, 6\}$ が、行きがけ順 1 2 4 **5 3 6** の後ろ 3 つに並ぶ。$v$ に入ってから出るまでの間に入る頂点が、ちょうど $v$ の子孫だからである。部分木の集計を区間の集計に直す[オイラーツアー](../tree/euler-tour.md)は、この性質を使う
@@ -113,6 +122,9 @@ updated: 2026-10-22
 ```cpp
 --8<-- "dfs/order.cpp:iterative"
 ```
+
+完全なプログラム：[`order.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dfs/order.cpp)（GitHub）
+{ .kp-code-src }
 
 - **印は取り出したときに確かめる**：同じ頂点は複数回積まれうるので、取り出した時点で印付きなら飛ばす。積んだ時点で印を付けると訪れる順が再帰と変わり、帰りがけ順が正しくならない
 - **隣は逆順に積む**：スタックからは最後に積んだものから出てくる。逆順に積めば、再帰と同じ順で隣を調べる。届く頂点を数えるだけなら順はどうでもよい
@@ -173,7 +185,7 @@ DFS は多くの手法で、行きがけ順・帰りがけ順・DFS 木の性質
 
 - [ABC378 D. Count Simple Paths](https://atcoder.jp/contests/abc378/tasks/abc378_d)（diff 587）：障害物のあるグリッドで、同じマスを 2 回通らない長さ K の移動経路の数を求める
 - [ABC284 E. Count Simple Paths](https://atcoder.jp/contests/abc284/tasks/abc284_e)（diff 1043）：頂点 1 から始まる単純パスの数を、10^6 を上限として求める
-- [典型90 072. Loop Railway Plan（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_bt)（diff —）：小さいグリッドで、山のマスを避けて同じマスを通らずに戻ってくる最長の経路を求める
+- [典型90 072. Loop Railway Plan（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_bt)（diff なし）：小さいグリッドで、山のマスを避けて同じマスを通らずに戻ってくる最長の経路を求める
 
 </div>
 

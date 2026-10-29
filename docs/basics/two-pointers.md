@@ -28,7 +28,7 @@ sections:
   - {title: 負の値があるとき（累積和＋連想配列へ）, anchor: negative-values}
   - {title: 二分探索との関係（O(N log N) でも解ける）, anchor: vs-binary-search}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -99,6 +99,9 @@ updated: 2026-10-22
 --8<-- "two-pointers/at-most-k-kinds.cpp:core"
 ```
 
+完全なプログラム：[`at-most-k-kinds.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/two-pointers/at-most-k-kinds.cpp)（GitHub）
+{ .kp-code-src }
+
 取り除く処理は入れる処理の逆にする。種類数を数えるときは値ごとの個数 `cnt` を持つ。個数が 0 から 1 になったら種類数を増やし、1 から 0 になったら減らす。`set` に値を入れるだけだと、同じ値が 2 個ある区間から 1 個を出したときに値ごと消えて種類数が狂う。値の範囲が広いときは[座標圧縮](../basics/coordinate-compression.md)してから配列で数えると、`map` より速い。
 
 **左端を 1 つずつ進める書き方（より大きい区間も満たす型）**。左端 $l$ の for で、条件を満たすまで右端を伸ばし、満たせば $N - r + 1$ 個を数えてから $a_l$ を出す。右端を端まで伸ばしても満たさなければ、それより右の左端でも満たさないので打ち切る。次のコードは、正の整数列で和が $K$ 以上の区間を数える。
@@ -106,6 +109,9 @@ updated: 2026-10-22
 ```cpp
 --8<-- "two-pointers/at-least-k-sum.cpp:core"
 ```
+
+完全なプログラム：[`at-least-k-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/two-pointers/at-least-k-sum.cpp)（GitHub）
+{ .kp-code-src }
 
 左端の for で書くとき気をつけるのは、区間が空（$l = r$）のまま $a_l$ を出してしまうことである。2 つ目のコードでは $\mathrm{sum} \ge K \ge 1$ のときだけ出すので $r > l$ が保証される。一般には「$l = r$ なら $r$ も 1 つ進め、そうでなければ $a_l$ を出す」と書く。
 
@@ -192,9 +198,9 @@ updated: 2026-10-22
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC326 C. Peak](https://atcoder.jp/contests/abc326/tasks/abc326_c)（diff 292）：数直線上の贈り物を、長さ M の半開区間で最大何個取れるか求める。
-- [典型90 034. There are few types of elements（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_ah)（diff —）：K 種類以下の値からなる連続部分列の最大の長さを求める。
-- [ABC032 C. 列](https://atcoder.jp/contests/abc032/tasks/abc032_c)（diff 1244）：積が K 以下になる連続部分列の最大の長さを求める。
-- [ARC022 B. 細長いお菓子](https://atcoder.jp/contests/arc022/tasks/arc022_2)（diff 1395）：同じ値を 2 つ含まない連続部分列の最大の長さを求める。
+- [典型90 034. There are few types of elements（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_ah)（diff なし）：K 種類以下の値からなる連続部分列の最大の長さを求める。
+- [ABC032 C. 列](https://atcoder.jp/contests/abc032/tasks/abc032_c)（diff 1244・参考値）：積が K 以下になる連続部分列の最大の長さを求める。
+- [ARC022 B. 細長いお菓子](https://atcoder.jp/contests/arc022/tasks/arc022_2)（diff 1395・参考値）：同じ値を 2 つ含まない連続部分列の最大の長さを求める。
 
 </div>
 

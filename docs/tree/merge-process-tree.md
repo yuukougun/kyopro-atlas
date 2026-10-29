@@ -26,7 +26,7 @@ sections:
   - {title: マージテク・部分永続 Union-Find・並列二分探索との使い分け, anchor: alternatives}
   - {title: 自作するときの要点と Library Checker, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -56,7 +56,7 @@ updated: 2026-10-22
 
 すでに同じ成分にある 2 頂点を結ぶ辺は、成分を変えないので頂点を作らない。$N - 1$ 回併合すれば $2N - 1$ 頂点の二分木になり、最後まで連結にならなければ根が複数ある森になる。辺を重みの昇順（時刻の順）に処理するので、頂点の重みは根に近いほど大きい（等しいこともある）。この単調性が以下の性質の土台である。
 
-![併合の順が 1–2、3–4、4–5、2–3 のときの併合過程の木。時刻 1 の頂点の子は 1 と 2、時刻 2 の頂点の子は 3 と 4、時刻 3 の頂点の子は時刻 2 の頂点と 5、根は時刻 4 の頂点。葉の DFS 順は 1・2・3・4・5 で、時刻 3 の頂点の葉は区間 [2, 5) の 3・4・5。橙は x = 4、t = 3 の例で、4 と時刻 3 の頂点を強調している](../img/merge-process-tree/merge-tree.svg)
+![併合の順が 1–2、3–4、4–5、2–3 のときの併合過程の木。時刻 1 の頂点の子は 1 と 2、時刻 2 の頂点の子は 3 と 4、時刻 3 の頂点の子は時刻 2 の頂点と 5、根は時刻 4 の頂点。葉の DFS 順は 1・2・3・4・5 で、時刻 3 の頂点の葉は区間 \[2, 5) の 3・4・5。橙は x = 4、t = 3 の例で、4 と時刻 3 の頂点を強調している](../img/merge-process-tree/merge-tree.svg)
 
 木の頂点は「ある時刻にできたグループ」を表す。たとえば上の図の時刻 3 の頂点は、時刻 3 の併合でできたグループ $\{3, 4, 5\}$ を表す。このグループは時刻 4 まで変わらず、時刻 4 で根のグループに吸収される。
 
@@ -65,6 +65,9 @@ updated: 2026-10-22
 ```cpp
 --8<-- "merge-process-tree/usage.cpp:build"
 ```
+
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/merge-process-tree/usage.cpp)（GitHub）
+{ .kp-code-src }
 
 ## ある時点のグループは DFS 順の区間 {#group-as-interval}
 
@@ -84,6 +87,9 @@ $p$ は「重みが $t$ 以下」という根へ向かって崩れる条件を�
 ```cpp
 --8<-- "merge-process-tree/usage.cpp:query"
 ```
+
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/merge-process-tree/usage.cpp)（GitHub）
+{ .kp-code-src }
 
 合流の操作とグループについての質問が交互に来る問題でも、すべての操作を先に読めば（[オフライン](../guide/glossary.md#offline)）、合流の列から木を作り、各質問を「質問の時点のグループを表す頂点の区間」に置き換えられる。種類ごとの個数なら、種類ごとに葉の番号を並べておけば、区間に入る個数を二分探索で数えられる。
 
@@ -127,7 +133,7 @@ $p$ は「重みが $t$ 以下」という根へ向かって崩れる条件を�
 - **同じ重みの辺**：重みの等しい辺がいくつあっても、併合ごとに頂点を作れば性質は崩れない。重みの等しい親子ができるだけである。
 - **再帰の深さ**：一列に併合すると木の高さが $N$ になる。DFS は非再帰にするか、新しい頂点の番号が子より大きいことを使って番号の大きい順に処理する。
 
-Library Checker に併合過程の木そのものを確かめる問題はない（2026-10-22 に問題の一覧で確かめた）。部品ごとに確かめ、全体は小さなグラフで愚直な方法と比べる。コード片 `snippets/merge-process-tree/usage.cpp` は、乱数のグラフで、重み $t$ 以下の辺だけを Union-Find に入れた結果とグループ・ボトルネックを比べている。
+Library Checker に併合過程の木そのものを確かめる問題はない（2026-10-22 に問題の一覧で確かめた）。部品ごとに確かめ、全体は小さなグラフで愚直な方法と比べる。コード片 [`snippets/merge-process-tree/usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/merge-process-tree/usage.cpp) は、乱数のグラフで、重み $t$ 以下の辺だけを Union-Find に入れた結果とグループ・ボトルネックを比べている。
 
 - [Lowest Common Ancestor](https://judge.yosupo.jp/problem/lca)：LCA の部分
 - [Jump on Tree](https://judge.yosupo.jp/problem/jump_on_tree)：ダブリングで祖先へ跳ぶ部分
@@ -137,9 +143,9 @@ Library Checker に併合過程の木そのものを確かめる問題はない�
 
 ## 学ぶための資料 {#resources}
 
-- けんちょん（drken）氏の ABC183 F の記事：マージテクの解法と並べて、併合の過程を木にして DFS で数える解法を説明している。木の作り方（代表元ごとに最新の併合の頂点を持つ）が具体的である
-- mzhang2021 氏の Kruskal Reconstruction Tree の記事（英語）：LCA がボトルネックになること、しきい値以下で行ける頂点が部分木になることを、問題の例とともにまとめている
-- OI Wiki の最小全域木のページの「Kruskal 重构树」の節（中国語）：性質の確認に使える
+- [drken「AtCoder ABC 183 F - Confluence (水色, 600 点)」](https://drken1215.hatenablog.com/entry/2020/12/20/192100)：マージテクの解法と並べて、併合の過程を木にして DFS で数える解法を説明している。木の作り方（代表元ごとに最新の併合の頂点を持つ）が具体的である
+- [mzhang2021「Kruskal Reconstruction Tree」](https://mzhang2021.github.io/cp-blog/kruskal/)（英語）：LCA がボトルネックになること、しきい値以下で行ける頂点が部分木になることを、問題の例とともにまとめている
+- [OI Wiki「最小生成树」](https://oi-wiki.org/graph/mst/)の「Kruskal 重构树」の節（中国語）：性質の確認に使える
 
 ## 練習問題 {#practice}
 

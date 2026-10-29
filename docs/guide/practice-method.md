@@ -24,7 +24,7 @@ sections:
   - {title: 速さの訓練, anchor: speed}
   - {title: AtCoder Problems の使い方, anchor: atcoder-problems}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -129,7 +129,7 @@ flowchart LR
 | 実装ミス | ミスの種類を書き、その処理の書き方を 1 つに統一する | [原因チェックリスト](debugging-checklist.md) |
 | 時間不足 | [速さの訓練](#speed)をする | [コンテストの戦い方](contest-strategy.md#time-targets) |
 
-原因が重なるときは、いちばん大きいものを選ぶ。終了後の振り返りで原因を切り分ける手順は[コンテストの戦い方](contest-strategy.md#after-contest)に置いた。
+原因が重なるときは、いちばん大きいものを選ぶ。問題文の誤読は、読み直せば防げたミスとして実装ミスに含める。終了後の振り返りで原因を切り分ける手順は[コンテストの戦い方](contest-strategy.md#after-contest)に置いた。
 
 記録の道具として、この教材は記録用スキル `/record-problem` を持つ（詳しくは[この教材の使い方](../start/how-to-use.md#record-skill)）。流れは次のとおりである。
 

@@ -25,7 +25,7 @@ sections:
   - {title: 帰りがけ順に葉から情報を上へ送る, anchor: send-up}
   - {title: 木の最大マッチング（葉と親を組む）, anchor: tree-matching}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -41,7 +41,7 @@ updated: 2026-10-22
 別名：葉から貪欲・葉を刈る・次数 1 の頂点を削る・葉から決める貪欲・greedy from leaves
 <!-- textlint-enable -->
 
-[葉](../guide/glossary.md#leaf)から考えるとは、木の問題で「どの頂点から決めるか」に迷ったとき、葉から順に決めていく考え方である。葉の決め方は親との 1 本の辺しか関わらないので、ほとんど一通りに決まるか、交換論法で「こう決めて損しない」と言える。決めた葉を取り除くと残りもまた木（森）なので、同じ議論をくり返せる。
+[葉](../guide/glossary.md#leaf)から考えるとは、木の問題で「どの頂点から決めるか」に迷ったとき、葉から順に決めていく考え方である。葉の決め方は親との 1 本の辺しか関わらないので、ほとんど一通りに決まるか、交換論法で「こう決めて損しない」と言える。決めた葉を取り除くと残りもまた木（森）なので、同じ議論をくり返せる。例と図は頂点を 1 から番号付けし（問題文と同じ）、コード片は入力から 1 を引いて 0-indexed で持つ（根は頂点 0）。
 
 ## 葉の唯一の辺を今使ってよい理由（交換論法） {#why-greedy}
 
@@ -110,6 +110,9 @@ deg[v] ← v の次数（削られていない隣の数）
 --8<-- "leaf-first/path-split.cpp:core"
 ```
 
+完全なプログラム：[`path-split.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/leaf-first/path-split.cpp)（GitHub）
+{ .kp-code-src }
+
 数え上げでも同じ考え方が使える。各頂点 $v$ が自分の部分木の中から $D_v$ 個の物を、ほかの頂点と重ならないように選ぶとする。葉から決めていくと、$v$ の番が来たとき、子孫はすでに部分木の中の物をちょうど（子孫の $D$ の和）個使っている。どれを使ったかによらず、$v$ が選べる物の個数は
 
 $$
@@ -137,6 +140,9 @@ $$
 ```cpp
 --8<-- "leaf-first/peel-matching.cpp:core"
 ```
+
+完全なプログラム：[`peel-matching.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/leaf-first/peel-matching.cpp)（GitHub）
+{ .kp-code-src }
 
 木は[二部グラフ](../graph/bipartite-graph.md)なので、König の定理により最大マッチングの大きさは最小頂点被覆（辺をすべて覆う頂点の最小数）の大きさに等しい。最小頂点被覆も、葉から見て「葉の隣を選ぶ」貪欲で同じ形に求まる。二部グラフ一般の最大マッチングは[二部マッチング](../graph/bipartite-matching.md)のページで扱う。
 

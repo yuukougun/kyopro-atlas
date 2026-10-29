@@ -25,7 +25,7 @@ sections:
   - {title: 挿入を逆順に処理して「空きの P 番目」に置く, anchor: reverse-insertion}
   - {title: 答えの二分探索で K 番目を数える方法との違い, anchor: vs-kth-value}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -127,9 +127,14 @@ kth(k):                          # k ≥ 1。接頭辞の和が初めて k 以�
 
 C++ では、外から見た位置を 0-indexed にすると、内部の位置 $\mathrm{pos} + 1$ がそのまま外の $\mathrm{pos}$ になる。
 
+ACL の `fenwick_tree` は BIT 上の二分探索を持たないので、BIT ごと自作する（ACL だけで書く方法は、この節の最後の「ACL では」にある）。`add(p, x)` の名前と 0-indexed の位置は ACL にそろえた。`sum(r)` は先頭から $r$ 個の和で、ACL の `sum(0, r)` に当たる。`kth(k)` は [BIT の自作](../ds/fenwick-tree.md#operations)の `lower_bound(w)` と同じ探索で、返り値も同じ 0-indexed の位置である（全体の和が $k$ 未満なら $N$）。名前の約束は[インターフェースの決め方](../guide/library-design.md#interface)、確かめ方は[動作確認の手順](../guide/library-design.md#verify)にある。
+
 ```cpp
 --8<-- "kth-element/bit-kth.cpp:core"
 ```
+
+完全なプログラム：[`bit-kth.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/kth-element/bit-kth.cpp)（GitHub）
+{ .kp-code-src }
 
 ### 境界
 
@@ -139,7 +144,7 @@ C++ では、外から見た位置を 0-indexed にすると、内部の位置 $
 - **不等号の向き**：`t[pos + step] < k` を `<=` にすると、接頭辞の和が初めて $k$ を超える位置、すなわち $K + 1$ 番目を返す
 
 !!! info "ACL では"
-    ACL の `fenwick_tree<T> fw(n);` は `fw.add(p, x)` と `fw.sum(l, r)`（どちらも $O(\log N)$）しか持たず、内部の配列も private なので、BIT 上の二分探索は書けない。ACL だけで書くなら、個数を載せた `segtree<int, op, e>`（`op` は和、`e()` は 0）で `seg.max_right(0, [&](int s) { return s < k; })` を呼ぶ。返り値 $r$ は $[0, r)$ の和が $k$ 未満で、$[0, r]$ の和が $k$ 以上になる位置なので、0-indexed の K 番目である（K 個に満たなければ $n$）。条件 `f(e())` が真であることが要件なので $k \ge 1$ にする。計算量は $O(\log N)$。
+    ACL の `fenwick_tree<T> fw(n);` は `fw.add(p, x)` と `fw.sum(l, r)`（どちらも $O(\log N)$）しか持たず、内部の配列も private なので、BIT 上の二分探索は書けない。ACL だけで書くなら、個数を載せた `segtree<int, op, e>`（`op` は和、`e()` は 0）で `seg.max_right(0, [&](int s) { return s < k; })` を呼ぶ。返り値 $r$ は $[0, r)$ の和が $k$ 未満で、$[0, r + 1)$ の和が $k$ 以上になる位置なので、0-indexed の K 番目である（K 個に満たなければ $n$）。条件 `f(e())` が真であることが要件なので $k \ge 1$ にする。計算量は $O(\log N)$。
 
 ## 挿入を逆順に処理して「空きの P 番目」に置く {#reverse-insertion}
 
@@ -158,6 +163,9 @@ C++ では、外から見た位置を 0-indexed にすると、内部の位置 $
 ```cpp
 --8<-- "kth-element/reverse-insert.cpp:core"
 ```
+
+完全なプログラム：[`reverse-insert.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/kth-element/reverse-insert.cpp)（GitHub）
+{ .kp-code-src }
 
 同じ形は「残っている人のうち前から K 番目を取り除く」操作の繰り返しにも使える。残っている人を 1 とした BIT で K 番目を探し、取り除いた人に $-1$ を加えればよい。
 
@@ -184,7 +192,7 @@ K 番目を求める方法には、もう 1 つ「答え $x$ を二分探索し�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [ARC033 C. データ構造](https://atcoder.jp/contests/arc033/tasks/arc033_3)（diff 1641）：数の集合への追加と、小さい方から x 番目の数を答えて削除するクエリを処理する。
+- [ARC033 C. データ構造](https://atcoder.jp/contests/arc033/tasks/arc033_3)（diff 1641・参考値）：数の集合への追加と、小さい方から x 番目の数を答えて削除するクエリを処理する。
 
 </div>
 

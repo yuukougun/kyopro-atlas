@@ -8,8 +8,8 @@ chapter: DP の高速化
 order: 370
 level: 発展
 kind: [DP, 二分探索]
-prerequisites: [monge, binary-search]
-related: [greedy-priority-queue#regret, dp-sequence-partition, ternary-search#convexity, priority-queue, slope-trick]
+prerequisites: [dp-basics, binary-search]
+related: [greedy-priority-queue#regret, dp-sequence-partition, monge, ternary-search#convexity, priority-queue, slope-trick]
 summary: 「ちょうど K 個選ぶ」制約のついた最適化で答えが K について凸なら、1 個あたりの罰金 λ を足して制約を外した問題を解き、選ばれる個数が K になる λ を二分探索する。
 complexity: 罰金つきの問題を 1 回 O(T) で解けるとき O(T log M)（M は λ を探す範囲の幅）。隣り合わない k 個の選択を取り消し付きの貪欲で解くなら、すべての k について O(N log N)
 signs:
@@ -26,7 +26,7 @@ sections:
   - {title: Monge な区間分割と組み合わせる, anchor: with-monge}
   - {title: 自作するときの要点と確かめ方, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -36,7 +36,7 @@ updated: 2026-10-22
         - 隣り合わない k 個を選ぶ和の最大を、すべての k について答える
         - K 個選ぶときの答え $f(K)$ が K について凸（1 個増やすときの得が、個数が増えるほど減る）
     - **計算量**：罰金つきの問題を 1 回 $O(T)$ で解けるとき $O(T \log M)$（$M$ は $\lambda$ を探す範囲の幅）。隣り合わない k 個の選択を取り消し付きの貪欲で解くなら、すべての k について $O(N \log N)$
-    - **前提**：[Monge 性による DP の高速化](../dp/monge.md)、[二分探索](../basics/binary-search.md)
+    - **前提**：[DP の基本](../dp/dp-basics.md)、[二分探索](../basics/binary-search.md)
 
 <!-- textlint-disable -->
 別名：Aliens trick・WQS 二分・Lagrangian Relaxation・Lagrange 緩和・取り消し付きの貪欲
@@ -89,7 +89,7 @@ $$
 
 二分探索を使わない方法もある。どの $\lambda$ でも $g(\lambda) + \lambda K \ge f(K)$ で、凸なら等号になる $\lambda$ がある。$h(\lambda) = g(\lambda) + \lambda K$ は直線の最大なので凸関数で、その最小値が $f(K)$ になる。$h$ を整数の[三分探索](../basics/ternary-search.md)で最小にすれば、個数も同点の決まりも要らない。罰金つきの問題が値しか返せないとき（[Monge な区間分割](#with-monge)など）はこちらが楽である。
 
-隣り合わない要素をちょうど $K$ 個選ぶ和の最大での、罰金つきの DP と二分探索は次のとおりである（完全なプログラムは `snippets/alien-dp/nonadjacent.cpp`）。値と「個数に $-1$ を掛けたもの」の組を `max` で比べると、同点で個数の少ない方が残る。
+隣り合わない要素をちょうど $K$ 個選ぶ和の最大での、罰金つきの DP と二分探索は次のとおりである（完全なプログラムは [`snippets/alien-dp/nonadjacent.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/alien-dp/nonadjacent.cpp)）。値と「個数に $-1$ を掛けたもの」の組を `max` で比べると、同点で個数の少ない方が残る。
 
 ```cpp
 --8<-- "alien-dp/nonadjacent.cpp:penalized"
@@ -98,6 +98,9 @@ $$
 ```cpp
 --8<-- "alien-dp/nonadjacent.cpp:alien"
 ```
+
+完全なプログラム：[`nonadjacent.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/alien-dp/nonadjacent.cpp)（GitHub）
+{ .kp-code-src }
 
 $\lambda$ を探す範囲は、どの得 $f(k+1) - f(k)$ よりも小さい値から大きい値までにする。罰金つきの値は $\lambda$ に個数が掛かって大きくなるので、範囲を広く取りすぎると `long long` を超える。値の上限から得の範囲を見積もり、足りなければ `__int128` を使う。
 
@@ -121,9 +124,14 @@ $A = (1, 9, 1, 1, 9)$ で動かす。まず 2 番目の 9 を取って $f(1) = 9
 --8<-- "alien-dp/nonadjacent.cpp:greedy"
 ```
 
+完全なプログラム：[`nonadjacent.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/alien-dp/nonadjacent.cpp)（GitHub）
+{ .kp-code-src }
+
 前から見て選んだものを後で入れ替える貪欲の基本は、[優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md#regret)にある。差分の形がこれほど単純でない問題では、Alien DP や関数の形を直接持つ [Slope Trick](../dp/slope-trick.md#breakpoints) を考える。
 
 ## Monge な区間分割と組み合わせる {#with-monge}
+
+この節は [Monge 性による DP の高速化](../dp/monge.md)を前提にする。
 
 列をちょうど $K$ 個の区間に分け、区間のコスト $\mathrm{cost}(j, i)$（半開区間 $[j, i)$ のコスト）の和を最小にする問題は、[数列を区間に分ける DP](../dp/dp-sequence-partition.md) で $\mathrm{dp}[i][k] = \min_j (\mathrm{dp}[j][k-1] + \mathrm{cost}(j, i))$ になり、素朴には $O(KN^2)$ かかる。
 
@@ -133,7 +141,7 @@ $$
 \mathrm{dp}[i] = \min_{j < i} \bigl(\mathrm{dp}[j] + \mathrm{cost}(j, i) + \lambda\bigr)
 $$
 
-の 1 次元の DP になる。$\mathrm{cost}$ に定数を足しても Monge のままなので、この DP は [Monge 性による DP の高速化](../dp/monge.md)で速く解ける。$\mathrm{dp}[j]$ が行列の中に入るオンラインの形なので、monotone minima を 1 回呼ぶだけでは済まない。[LARSCH](../dp/monge.md#smawk-larsch) を使うと $O(N)$、分割統治で左半分を確定させてから右半分へ monotone minima で配ると $O(N \log^2 N)$ になる。$\mathrm{cost}$ が $(S_i - S_j)^2$ のような積の項を 1 つ持つ形なら、[Convex Hull Trick](../dp/cht.md#lines) でもよい。
+の 1 次元の DP になる。$\mathrm{cost}$ に定数を足しても Monge のままなので、この DP は Monge 性を使って速く解ける。$\mathrm{dp}[j]$ が行列の中に入るオンラインの形なので、monotone minima を 1 回呼ぶだけでは済まない。[LARSCH](../dp/monge.md#smawk-larsch) を使うと $O(N)$、分割統治で左半分を確定させてから右半分へ monotone minima で配ると $O(N \log^2 N)$ になる。$\mathrm{cost}$ が $(S_i - S_j)^2$ のような積の項を 1 つ持つ形なら、[Convex Hull Trick](../dp/cht.md#lines) でもよい。
 
 これに $\lambda$ の探索の $O(\log M)$ が掛かり、全体は $O(N \log M)$ から $O(N \log^2 N \log M)$ になる。同点の個数を正しく扱うのが面倒なら、[λ の二分探索の節](#binary-search-lambda)の終わりの三分探索で $h(\lambda)$ を最小にする。
 
@@ -146,13 +154,13 @@ ACL に Alien DP はない。罰金つきの問題の解き方が問題ごとに
 - $K$ が取りうる個数の範囲を超えていないかを先に確かめる。範囲外の $K$ では二分探索がでたらめな値を返す
 - $\lambda$ の範囲とオーバーフローを見積もる（[λ の二分探索の節](#binary-search-lambda)）
 
-Library Checker には、Alien DP そのものを確かめる問題はない（2026-10-22 に問題の一覧で確かめた）。自作したら、個数を状態に持つ素朴な DP と小さい乱数の入力で比べる。同点がよく起きるように、値の範囲を狭くし、同じ値や負の値を混ぜるとよい。`snippets/alien-dp/nonadjacent.cpp` の `main` はこの比べ方をしている。
+Library Checker には、Alien DP そのものを確かめる問題はない（2026-10-22 に問題の一覧で確かめた）。自作したら、個数を状態に持つ素朴な DP と小さい乱数の入力で比べる。同点がよく起きるように、値の範囲を狭くし、同じ値や負の値を混ぜるとよい。[`snippets/alien-dp/nonadjacent.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/alien-dp/nonadjacent.cpp) の `main` はこの比べ方をしている。
 
 ## 学ぶための資料 {#resources}
 
-- noshi91 氏の Kyopro Encyclopedia of Algorithms の「Monge グラフ上の d-辺最短路長を計算するアルゴリズム」は、Monge なときに個数についての凸性が成り立つ証明と、罰金を足した問題の最大が元の答えに一致する理由を、式で丁寧に書いている
-- Swiss Olympiad in Informatics の「Alien Optimization」（英語）は、凸な折れ線に傾き $\lambda$ の直線を当てる見方で、罰金と最適な個数の関係を図で説明している
-- かんプリン氏の「競技プログラミング　典型問題メモ」の AlienDP の項に、この手法で解く問題の一覧がある
+- [noshi91「Monge グラフ上の d-辺最短路長を計算するアルゴリズム」](https://noshi91.github.io/algorithm-encyclopedia/d-edge-shortest-path-monge)：Kyopro Encyclopedia of Algorithms の記事。Monge なときに個数についての凸性が成り立つ証明と、罰金を足した問題の最大が元の答えに一致する理由を、式で丁寧に書いている
+- [Daniel Rutschmann「Alien Optimization」](https://soi.ch/wiki/alien-optimization/)（英語）：Swiss Olympiad in Informatics の解説。凸な折れ線に傾き $\lambda$ の直線を当てる見方で、罰金と最適な個数の関係を図で説明している
+- [かんプリン「競技プログラミング　典型問題メモ」](https://kanpurin.hatenablog.com/entry/2020/04/07/182948)：AlienDP の項に、この手法で解く問題の一覧がある
 
 ## 例題 {#examples}
 
@@ -184,6 +192,13 @@ Library Checker には、Alien DP そのものを確かめる問題はない（2
 ??? note "練習の方針"
     - ABC464 G：位置 $i, i+1$ を「RS」にするのに要る操作の回数を $C_i$ とすると、隣り合う 2 つの位置は同時に「RS」にできない。「隣り合わない $x$ 個を選ぶ $C_i$ の和の最小」をすべての $x$ で求める。各 $k$ の答えは、その最小が $k$ 以下になる最大の $x$ である。すべての $x$ が要るので、Alien DP ではなく[取り消し付きの貪欲](#undoable-greedy)（最小化の向き）を使う
     - ABC355 G：選んだ位置で列を区切り、隣り合う 2 つの選んだ位置の間の点のコストを区間のコストとする。両端に番兵を置き、端の区間は片側の距離だけを数える。中点で左右に分けて累積和で $O(1)$ で求められ、このコストは Monge になる。選ぶ個数を罰金に置き換え、罰金つきの 1 次元の DP を Monge 性で速く解き、$\lambda$ を探す（[Monge な区間分割](#with-monge)）
+
+## 使い分け {#comparison}
+
+- 個数 $K$ が小さく、選んだ個数を状態に持つ DP（状態数が $K$ 倍）でも間に合うなら、Alien DP は要らない。凸性を確かめる手間も、同点の扱いもなくなる。
+- すべての $k$ について答えが要るなら、$K$ ごとに二分探索をくり返す Alien DP は向かない。[取り消し付きの貪欲](#undoable-greedy)か、区間ごとの列を差分のマージで合成する[凸な列どうしの (max,+) 畳み込み](../dp/monge.md#convex-max-plus-convolution)を考える。
+- 凸なのが個数についての答えではなく、DP の値を状態の値 $x$ の関数とみた折れ線なら、[Slope Trick](../dp/slope-trick.md#breakpoints) を考える。罰金つきの問題の遷移が重いときは、コストの形で [CHT](../dp/cht.md#lines) か [Monge](../dp/monge.md#smawk-larsch) を選ぶ（[Monge な区間分割と組み合わせる](#with-monge)）。
+- CHT・Monge・Alien DP・Slope Trick の確かめ方と選び方は、[凸性を使う高速化の使いどころ](../dp/dp-speedup-overview.md#convexity)にまとめる。
 
 ## 参考 {#references}
 

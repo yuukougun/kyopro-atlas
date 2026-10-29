@@ -87,6 +87,9 @@ for d = m-1 downto 0:
 --8<-- "greedy-priority-queue/from-last-day.cpp:core"
 ```
 
+完全なプログラム：[`from-last-day.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/greedy-priority-queue/from-last-day.cpp)（GitHub）
+{ .kp-code-src }
+
 各仕事は 1 回入れて高々 1 回取り出すので、$O((N + m) \log N)$ である。日に関係する量が $10^9$ 程度まで大きいときは、日を 1 つずつ動かさずに、次の節のように「次に何かが起きる日」まで飛ばす。
 
 この節の考え方（選べる候補が増える向きに時間を進める）は、[後ろから・逆順に考える](../thinking/reverse-thinking.md)の典型でもある。前から進めたいときは、[選んだものを後から入れ替える](#regret)の節の書き方を使う。
@@ -137,6 +140,9 @@ $A$ の小さい順に並べ、$i$ 番目を最大値の候補 $A_i$ として�
 ```cpp
 --8<-- "greedy-priority-queue/k-best.cpp:core"
 ```
+
+完全なプログラム：[`k-best.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/greedy-priority-queue/k-best.cpp)（GitHub）
+{ .kp-code-src }
 
 1 回の取り出しで入れる子は高々 2 個なので、キューの大きさは $O(K)$ で、全体は $O(K \log K)$ である。親を 1 つに決めにくいときは、入れた**組** $(i, j)$ を `set` で覚えて、2 回目を飛ばしてもよい。値で覚えると、別の組で同じ和になるものまで飛ばしてしまう。同じ値の候補を 1 つと数える問題（ありうる金額の $K$ 番目など）でだけ、値で重複を除く。
 

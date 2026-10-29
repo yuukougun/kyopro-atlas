@@ -26,7 +26,7 @@ sections:
   - {title: 比較関数の要件（狭義の弱順序）, anchor: strict-weak-ordering}
   - {title: 比率は掛け算で比べる・同点の順序（stable_sort）, anchor: ratio-and-ties}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -88,6 +88,9 @@ updated: 2026-10-22
 --8<-- "sorting-techniques/matching.cpp:core"
 ```
 
+完全なプログラム：[`matching.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/sorting-techniques/matching.cpp)（GitHub）
+{ .kp-code-src }
+
 同じ考え方は次の形にも使える。
 
 - **積の和**：$\sum A_i B_{\sigma(i)}$ は、両方を同じ向きに並べて組むと最大、逆向きに組むと最小になる（並べ替え不等式）
@@ -140,6 +143,9 @@ $$
 --8<-- "sorting-techniques/ratio-sort.cpp:core"
 ```
 
+完全なプログラム：[`ratio-sort.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/sorting-techniques/ratio-sort.cpp)（GitHub）
+{ .kp-code-src }
+
 ## 落とし穴 {#pitfalls}
 
 **効果を 2 つのキーの辞書順で代用する**。選ぶと自分の票が $A_i + B_i$ 増え、相手の票が $A_i$ 減る問題で、$(A_i + B_i, A_i)$ を辞書順で比べて大きい順に取るのは誤りである。たとえば $(A, B) = (0, 10), (6, 3), (6, 3)$ では、最初の差は $\sum A_i = 12$ である。$A + B$ の大きい順だと $(0, 10)$ を先に取り、差は $12 - 10 = 2$ でまだ足りず、2 つ目が要る。差を縮める量 $2A + B$ は $10, 15, 15$ なので、$(6, 3)$ を取れば 1 つで足りる。並べるキーは「目標までの差がいくら縮むか」を式で書いてから決める。
@@ -182,7 +188,7 @@ $$
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [典型90 014. We Used to Sing a Song Together（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_n)（diff —）：N 人の小学生と N 校の学校を 1 対 1 に割り当て、距離の和を最小化する。
+- [典型90 014. We Used to Sing a Song Together（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_n)（diff なし）：N 人の小学生と N 校の学校を 1 対 1 に割り当て、距離の和を最小化する。
 - [ABC308 C. Standings](https://atcoder.jp/contests/abc308/tasks/abc308_c)（diff 605）：コイン投げの成功率の高い順（同率なら番号の小さい順）に人を並べる。
 - [ABC187 D. Choose Me](https://atcoder.jp/contests/abc187/tasks/abc187_d)（diff 650）：演説する町を選んで得票で相手を上回るための、最小の町の数を求める。
 

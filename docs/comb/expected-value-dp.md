@@ -31,7 +31,7 @@ sections:
   - {title: 遷移を累積和でまとめる, anchor: prefix-sum, level: 青}
   - {title: 前向きの確率 DP との使い分け, anchor: vs-probability-dp}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -189,6 +189,9 @@ $$
 --8<-- "expected-value-dp/self-loop.cpp:core"
 ```
 
+完全なプログラム：[`self-loop.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/expected-value-dp/self-loop.cpp)（GitHub）
+{ .kp-code-src }
+
 累積和は「すでに値が決まった区間」の和にしか使えない。後ろから埋めるなら後ろからの累積和を、埋めた値を足しながら作る。遷移先の区間が任意の位置にあり、まだ決まっていない値を含むなら、計算順序から考え直す。
 
 ## 前向きの確率 DP との使い分け {#vs-probability-dp}
@@ -242,6 +245,9 @@ $$
     --8<-- "expected-value-dp/hp-mod.cpp:core"
     ```
 
+    完全なプログラム：[`hp-mod.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/expected-value-dp/hp-mod.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+    { .kp-code-src }
+
 ### ABC184 D. increment of coins {#abc184_d}
 
 <div class="kp-problems" data-role="example" markdown>
@@ -263,7 +269,7 @@ $$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC J. Sushi](https://atcoder.jp/contests/dp/tasks/dp_j)（diff —）：寿司が 1〜3 個乗った N 枚の皿から毎回一様に 1 枚を選び、寿司があれば 1 個食べるとき、すべて食べ終わるまでの操作回数の期待値を求める。
+- [EDPC J. Sushi](https://atcoder.jp/contests/dp/tasks/dp_j)（diff なし）：寿司が 1〜3 個乗った N 枚の皿から毎回一様に 1 枚を選び、寿司があれば 1 個食べるとき、すべて食べ終わるまでの操作回数の期待値を求める。
 
 </div>
 
@@ -302,7 +308,7 @@ $$
 <div class="kp-problems" data-role="challenge" markdown>
 
 - [ABC144 F. Fork in the Road](https://atcoder.jp/contests/abc144/tasks/abc144_f)（diff 2189）：部屋 1 から部屋 N へ向かう DAG で、各部屋から出る通路を一様に選んで進むとき、事前に通路を 1 本だけ塞いで、通る通路の数の期待値を最小にする。
-- [TDPC J. ボール](https://atcoder.jp/contests/tdpc/tasks/tdpc_ball)（diff —）：位置 0〜15 にある的を、位置 x を狙うと x−1・x・x+1 のどれかに等確率でボールが当たる投げ方で倒していくとき、最適に狙ったときの全部倒すまでの投げる回数の期待値を求める。
+- [TDPC J. ボール](https://atcoder.jp/contests/tdpc/tasks/tdpc_ball)（diff なし）：位置 0〜15 にある的を、位置 x を狙うと x−1・x・x+1 のどれかに等確率でボールが当たる投げ方で倒していくとき、最適に狙ったときの全部倒すまでの投げる回数の期待値を求める。
 
 </div>
 

@@ -24,7 +24,7 @@ sections:
   - {title: 締め切りを後ろから見る, anchor: deadlines}
   - {title: 削除を逆順の追加にする（Union-Find はグラフの章）, anchor: delete-to-add, level: 水}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -40,7 +40,9 @@ updated: 2026-10-22
 別名：逆から考える・操作を逆再生・クエリを逆順に処理・削除を追加に・work backwards
 <!-- textlint-enable -->
 
-後ろから・逆順に考えるとは、列や操作を最初から順に追う代わりに、最後の要素や最後の操作から逆向きにたどる考え方である。前から見ると「この先どうなるか」が分からないので選択肢が分かれるが、後ろから見ると「もう決まっているもの」に合わせるだけで選択肢が 1 つに絞れることがある。使える合図は 3 つある。決める順に依存の向きがあること、最後の操作の跡が結果に残ること、後から来たものが前のものを上書き・削除することである。
+後ろから・逆順に考えるとは、列や操作を最初から順に追う代わりに、最後の要素や最後の操作から逆向きにたどる考え方である。前から見ると「この先どうなるか」が分からないので選択肢が分かれるが、後ろから見ると「もう決まっているもの」に合わせるだけで選択肢が 1 つに絞れることがある。
+
+使える合図は 3 つある。「$i$ の倍数番目の和」のように各条件が自分以降の値だけを参照すること、「結果から操作列を求めよ」のように最後の操作の跡が結果に残ること、「辺を削除する」「区間を塗る」のように後の操作が前のものを削除・上書きすることである。操作の問題で、ほかにどの型を試すかは[詰まったときの発想リスト](../guide/thinking-checklist.md#shape-operation)の「操作できるか・最小回数」の表で引ける。
 
 ## 後ろから決めると一意になる {#decide-from-back}
 
@@ -51,6 +53,9 @@ updated: 2026-10-22
 ```cpp
 --8<-- "reverse-thinking/multiples-parity.cpp:core"
 ```
+
+完全なプログラム：[`multiples-parity.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/reverse-thinking/multiples-parity.cpp)（GitHub）
+{ .kp-code-src }
 
 内側のループは $N / i$ 回なので、合計は $N / 1 + N / 2 + \cdots + N / N$ で $O(N \log N)$ である（[倍数の箱を後ろから決める](../math/harmonic-sum.md#decide-from-back)）。この例では、どの $i$ でも $b_i$ がちょうど 1 通りに決まる。だから答えは必ず存在し、しかも 1 つしかない。
 

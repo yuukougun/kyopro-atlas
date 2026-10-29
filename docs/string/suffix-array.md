@@ -33,7 +33,7 @@ sections:
   - {title: 部分文字列の辞書順 K 番目, anchor: kth-substring, level: 発展}
   - {title: 自作するなら：ダブリング O(N log^2 N) → O(N log N) → SA-IS, anchor: build-your-own}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -74,6 +74,9 @@ ACL では次のように作る。
 --8<-- "suffix-array/usage.cpp:core"
 ```
 
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/suffix-array/usage.cpp)（GitHub）
+{ .kp-code-src }
+
 !!! info "ACL では"
     `#include <atcoder/string>`。`suffix_array(s)` は `string` なら $O(N)$、`vector<T>`（`T` は `int`・`unsigned int`・`long long`・`unsigned long long`）なら $O(N \log N)$、`suffix_array(v, upper)`（`vector<int>` で値が $0$ 以上 `upper` 以下）なら $O(N + \mathrm{upper})$。`lcp_array(s, sa)` は長さ $N - 1$ の `vector<int>` を $O(N)$ で返し、$N \ge 1$ が要る。テンプレート引数は書かずに推論させる（`suffix_array<int>(v)` とは書かない）。
 
@@ -105,6 +108,9 @@ Library Checker の number_of_substrings がこの問題で、[PRACTICE2 I](#pra
 --8<-- "suffix-array/lcp-rmq.cpp:core"
 ```
 
+完全なプログラム：[`lcp-rmq.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/suffix-array/lcp-rmq.cpp)（GitHub）
+{ .kp-code-src }
+
 2 つの接尾辞の LCP $h$ が分かると、部分文字列どうしの比較もできる。$S[a, a + k)$ と $S[b, b + k)$ は、$h \ge k$ なら等しく、そうでなければ $S[a + h]$ と $S[b + h]$ の大小で決まる。[ローリングハッシュ](../string/rolling-hash.md)と二分探索でも同じことが $O(\log N)$ でできるが、こちらは衝突がなく 1 回 $O(1)$ である。
 
 ## パターンの出現回数：SA 上の二分探索で範囲を求める {#pattern-count}
@@ -119,6 +125,9 @@ Library Checker の number_of_substrings がこの問題で、[PRACTICE2 I](#pra
 ```cpp
 --8<-- "suffix-array/pattern-count.cpp:core"
 ```
+
+完全なプログラム：[`pattern-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/suffix-array/pattern-count.cpp)（GitHub）
+{ .kp-code-src }
 
 比較 1 回が $O(\lvert T \rvert)$ なので、1 つのパターンにつき $O(\lvert T \rvert \log N)$ である。パターンが多くても合計 $O(\sum \lvert T_i \rvert \log N)$ で済む（[ABC362 G](#practice)）。
 
@@ -141,6 +150,9 @@ $\mathrm{left}$ は次の漸化式で求まる。$h = \mathrm{lcp}[k-1]$ とし�
 --8<-- "suffix-array/lcp-sum.cpp:core"
 ```
 
+完全なプログラム：[`lcp-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/suffix-array/lcp-sum.cpp)（GitHub）
+{ .kp-code-src }
+
 全ペアの LCP の和（$\sum_{p < q}$）だけが欲しいなら、$\sum_k \mathrm{left}[k]$ で求まる。複数の文字列どうしの LCP の和なら、[Trie](../string/trie.md) やソートで済むことが多い。[ABC213 F](#abc213_f) がこの節の代表である。
 
 ## 複数の文字列を連結するときの区切り（int の列と大きな値） {#concat-separator}
@@ -155,6 +167,9 @@ $\mathrm{left}$ は次の漸化式で求まる。$h = \mathrm{lcp}[k-1]$ とし�
 --8<-- "suffix-array/multi-string.cpp:core"
 ```
 
+完全なプログラム：[`multi-string.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/suffix-array/multi-string.cpp)（GitHub）
+{ .kp-code-src }
+
 1 本の列を、ある条件で部分に切ってから数える問題も同じ形になる。[ABC452 G](#practice) は、列を[ランレングス圧縮](../basics/run-length-encoding.md)して切った部分の列について、この数え方をする。
 
 ## 回転どうしの比較：S+S+T+T の SA {#rotations}
@@ -168,6 +183,9 @@ $X$ の位置 $i$（$0 \le i < N$）の接尾辞は、先頭 $N$ 文字が $S$ �
 ```cpp
 --8<-- "suffix-array/rotations.cpp:core"
 ```
+
+完全なプログラム：[`rotations.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/suffix-array/rotations.cpp)（GitHub）
+{ .kp-code-src }
 
 **落とし穴**：SA の順だけで数えてまとまりを作らないと、先頭 $N$ 文字が等しい組の扱いが、$N$ 文字目より後ろの関係のない文字で決まってしまう。「より小さい」と「以下」を取り違えないために、等しいものを先にまとめる。[ABC272 F](#practice) がこの形である。
 
@@ -205,6 +223,9 @@ ACL が使えない場面や、仕組みを理解したいときのために、�
 --8<-- "suffix-array/doubling.cpp:core"
 ```
 
+完全なプログラム：[`doubling.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/suffix-array/doubling.cpp)（GitHub）
+{ .kp-code-src }
+
 Library Checker の suffixarray で、自作の SA を確かめられる。
 
 ## 落とし穴 {#pitfalls}
@@ -222,7 +243,7 @@ Library Checker の suffixarray で、自作の SA を確かめられる。
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [PRACTICE2 I. Number of Substrings](https://atcoder.jp/contests/practice2/tasks/practice2_i)（diff —）：文字列の異なる部分文字列の個数を求める。
+- [PRACTICE2 I. Number of Substrings](https://atcoder.jp/contests/practice2/tasks/practice2_i)（diff なし）：文字列の異なる部分文字列の個数を求める。
 
 </div>
 

@@ -27,7 +27,7 @@ sections:
   - {title: いつ使うか（オイラーツアーと LCA で足りる場合との使い分け）, anchor: when-to-use}
   - {title: 自作ライブラリでの扱い, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -73,7 +73,7 @@ ABC で HL 分解が必須になるのはおおむね difficulty 2400 以上の�
 
 重い子を先に訪れるので、1 本の重いパスの頂点は番号が連続し、浅い方から深い方へ番号が増える。番号は行きがけ順のままなので、[オイラーツアー](../tree/euler-tour.md)と同じく部分木 $v$ は区間 $[\mathrm{in}[v], \mathrm{in}[v] + \mathrm{sz}[v])$ になる。1 つの番号付けで、パスと部分木の両方を扱える。
 
-![重い辺を太線、軽い辺を破線で描いた 10 頂点の木と、重いパスごとに連続する番号の列。パス 7–9 は区間 [0, 3)・[4, 5)・[7, 10) の 3 つに分かれる](../img/hld/decomposition.svg)
+![重い辺を太線、軽い辺を破線で描いた 10 頂点の木と、重いパスごとに連続する番号の列。パス 7–9 は区間 \[0, 3)・\[4, 5)・\[7, 10) の 3 つに分かれる](../img/hld/decomposition.svg)
 
 パス $u$–$v$ を区間に分ける手順は次のとおりである。
 
@@ -142,11 +142,14 @@ HL 分解は実装が重いので、軽い方法で足りるかを先に考え�
 
 境界は半開区間でそろえ、頂点の値か辺の値か（LCA を含めるか）を引数で切り替えられるようにしておくとよい。構築は 2 回の DFS で、パス状の木では再帰が $N$ 段になる。AtCoder ではたいてい通るが、スタックの小さい環境では再帰を使わない走査に書き換える。
 
-構築の中心は次のとおりである（完全なプログラムは `snippets/hld/usage.cpp`）。
+構築の中心は次のとおりである（完全なプログラムは [`snippets/hld/usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/hld/usage.cpp)）。
 
 ```cpp
 --8<-- "hld/usage.cpp:build"
 ```
+
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/hld/usage.cpp)（GitHub）
+{ .kp-code-src }
 
 パスを区間に分ける関数は、区間の列を返す形にしておくと、載せるデータ構造を選ばない。次の `path` は区間の向きを捨てるので、可換な演算（和・最大値など）専用である。
 
@@ -154,31 +157,37 @@ HL 分解は実装が重いので、軽い方法で足りるかを先に考え�
 --8<-- "hld/usage.cpp:path"
 ```
 
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/hld/usage.cpp)（GitHub）
+{ .kp-code-src }
+
 非可換な演算には、$u$ から $v$ への順に並べ、各区間をたどる向きを添えて返す版を別に持つ。コード片では、演算の左右を入れ替えたセグメント木と組み、乱数の木で Vertex Set Path Composite と同じ合成を愚直な方法と比べて確かめている。
 
 ```cpp
 --8<-- "hld/usage.cpp:ordered"
 ```
 
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/hld/usage.cpp)（GitHub）
+{ .kp-code-src }
+
 !!! info "ACL では"
     ACL に HL 分解そのものはない。番号 $\mathrm{in}[v]$ の位置に頂点 $v$ の値を置いた列に、`segtree<S, op, e> seg(n);` を載せる。`seg.set(p, x)`・`seg.prod(l, r)` はどちらも $O(\log N)$ で、`op` は[結合法則](../guide/glossary.md#associativity)を満たし、`e()` は[単位元](../guide/glossary.md#identity-element)である必要がある。パスへの一括更新には `lazy_segtree` の `seg.apply(l, r, f)` を、パスの各区間に対して呼ぶ。
+
+次のコード片は、番号の列に `segtree` を載せて、頂点の値の 1 点変更とパス上の最大値の取得を処理する。入力の頂点は 1-indexed で、読んだ直後に 1 を引く。
 
 ```cpp
 --8<-- "hld/usage.cpp:query"
 ```
 
-自作したら、Library Checker で確かめる。
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/hld/usage.cpp)（GitHub）
+{ .kp-code-src }
 
-- Vertex Add Path Sum：頂点への加算とパスの和（可換な演算の基本）
-- Vertex Add Subtree Sum：同じ番号付けで部分木が区間になることの確認
-- Vertex Set Path Composite：頂点の 1 次関数の変更と、$u$ から $v$ への合成（非可換な演算の向きの確認。このページの検証問題）
-- Lowest Common Ancestor：LCA の部分の確認
+自作したら、Library Checker で確かめる。使う問題は[練習問題](#practice)の Library Checker の節にまとめた。
 
 ## 学ぶための資料 {#resources}
 
-- けんちょん（drken）氏の yukicoder 399 の記事：パスへの区間加算と区間和を HL 分解で処理する実例。区間の処理を関数として渡す書き方が参考になる
-- Luzhiled's Library（ei1333 氏）の HL 分解は、パスの集約・更新・LCA・K 個上の祖先をまとめたライブラリで、自作するときの関数の切り分けの参考になる
-- 正しさと計算量の確認には cp-algorithms の Heavy-light decomposition の記事がある（英語）
+- [drken「yukicoder 399 動的な領主 (HL分解で通す)」](https://drken1215.hatenablog.com/entry/2018/08/14/014800)：パスへの区間加算と区間和を HL 分解で処理する実例。区間の処理を関数として渡す書き方が参考になる
+- [ei1333「Luzhiled's Library: Heavy-Light-Decomposition(HL分解)」](https://ei1333.github.io/library/graph/tree/heavy-light-decomposition.hpp)：パスの集約・更新・LCA・K 個上の祖先をまとめたライブラリで、自作するときの関数の切り分けの参考になる
+- [cp-algorithms「Heavy-light decomposition」](https://cp-algorithms.com/graph/hld.html)（英語）：正しさと計算量の確認に使える
 
 ## 例題 {#examples}
 
@@ -210,6 +219,13 @@ HL 分解は実装が重いので、軽い方法で足りるかを先に考え�
 
 ??? note "練習の方針"
     - ABC294 G：辺の重みを子の頂点に置けば、距離は LCA を除いたパス上の頂点の値の和になる。HL 分解の番号の列に BIT を載せれば、重みの変更は 1 点の更新、距離はパスの区間和で、1 回 $O(\log^2 N)$ になる。和は逆元があるので、根からの距離と LCA を使い、重みの変更をオイラーツアーで部分木への加算にする方法でも解ける（こちらの方が軽い）
+
+### Library Checker
+
+- [Vertex Add Path Sum](https://judge.yosupo.jp/problem/vertex_add_path_sum)：頂点への加算とパスの和（可換な演算の基本）
+- [Vertex Add Subtree Sum](https://judge.yosupo.jp/problem/vertex_add_subtree_sum)：同じ番号付けで部分木が区間になることの確認
+- [Vertex Set Path Composite](https://judge.yosupo.jp/problem/vertex_set_path_composite)：頂点の 1 次関数の変更と、$u$ から $v$ への合成（非可換な演算の向きの確認。このページの検証問題）
+- [Lowest Common Ancestor](https://judge.yosupo.jp/problem/lca)：LCA の部分の確認
 
 ## 参考 {#references}
 

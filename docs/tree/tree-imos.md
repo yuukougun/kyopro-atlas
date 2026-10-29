@@ -26,7 +26,7 @@ sections:
   - {title: 途中で値を聞かれるならオイラーツアーと BIT, anchor: online-queries}
   - {title: パスへの加算（LCA に印を置いて葉から上へ累積する）, anchor: path-add, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -58,7 +58,7 @@ $$
 
 $p$ の印 $x$ が $v$ まで届くのは、$p$ が $v$ の祖先のとき、すなわち $v$ が $p$ の部分木にあるときだけである。だから累積した値は、部分木への加算をすべて行った結果に等しい。
 
-![上段は配列のいもす法で、位置 1 に +3・位置 4 に −3 の印を置いて左から累積すると [1, 4) が 3 になる。下段は 5 頂点の木で、頂点 1 に +1、頂点 2 に +10 の印を置き、根から下へ累積すると頂点 1・3 が 1、頂点 2・4・5 が 11 になる](../img/tree-imos/marks-and-sweep.svg)
+![上段は配列のいもす法で、位置 1 に +3・位置 4 に −3 の印を置いて左から累積すると \[1, 4) が 3 になる。下段は 5 頂点の木で、頂点 1 に +1、頂点 2 に +10 の印を置き、根から下へ累積すると頂点 1・3 が 1、頂点 2・4・5 が 11 になる](../img/tree-imos/marks-and-sweep.svg)
 
 配列のいもす法では区間の右端に $-x$ を置いて打ち消したが、部分木への加算では打ち消しの印が要らない。部分木は「$p$ から下すべて」で、下側に終わりがないからである。配列でいえば「$[l, N)$ に加算」と同じ形である。
 
@@ -67,6 +67,9 @@ $p$ の印 $x$ が $v$ まで届くのは、$p$ が $v$ の祖先のとき、す
 ```cpp
 --8<-- "tree-imos/subtree-add.cpp:core"
 ```
+
+完全なプログラム：[`subtree-add.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-imos/subtree-add.cpp)（GitHub）
+{ .kp-code-src }
 
 ## 辺の片側への加算を子の部分木への加算に直す {#edge-side}
 
@@ -129,6 +132,9 @@ $v$ の側も同じである。頂点版では $l$ がパスに含まれるの�
 ```cpp
 --8<-- "tree-imos/path-add.cpp:core"
 ```
+
+完全なプログラム：[`path-add.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-imos/path-add.cpp)（GitHub）
+{ .kp-code-src }
 
 計算量は、LCA をダブリングで求めるなら前計算 $O(N \log N)$、クエリ 1 本 $O(\log N)$、累積 $O(N)$ である。「決まった順に頂点を訪ねる移動で各辺を何回通るか」は、移動 1 回をパスへの $+1$ と見れば辺版で数えられる（練習の [ABC222 E](#practice)）。
 

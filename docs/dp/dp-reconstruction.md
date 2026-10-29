@@ -25,7 +25,7 @@ sections:
   - {title: 辞書順最小の復元（後ろからの DP と前からの貪欲）, anchor: lexicographic-min}
   - {title: 辞書順 K 番目を数え上げで決める（個数が K を超えたら打ち切る）, anchor: dp-kth-lexicographic}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -74,6 +74,9 @@ for i = N-1, N-2, ..., 0:
 ```cpp
 --8<-- "dp-reconstruction/trace-back.cpp:core"
 ```
+
+完全なプログラム：[`trace-back.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-reconstruction/trace-back.cpp)（GitHub）
+{ .kp-code-src }
 
 最適値の DP でも考え方は同じである。最小コストの DP なら、今の状態の値と「遷移元の値 ＋ 遷移のコスト」が等しい遷移を選ぶ。表の値はその式の最小値として決めたので、等しくなる遷移は少なくとも 1 つある。
 
@@ -125,6 +128,9 @@ for i = 0, 1, ..., N-1:
 --8<-- "dp-reconstruction/lex-min.cpp:core"
 ```
 
+完全なプログラム：[`lex-min.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-reconstruction/lex-min.cpp)（GitHub）
+{ .kp-code-src }
+
 前からの表 $\mathrm{dp}$ は「手前で何ができたか」を持つので、そのまま後ろから使うと、後ろの要素の辞書順しか制御できない。辞書順最小の復元では、決める向き（前から）と表の向き（後ろから）を逆にするのがポイントである。前からの DP しか思いつかないときは、列を反転した問題で DP をすれば、それが元の問題の後ろからの DP になる。
 
 最短手数のように「最適値を保ったまま辞書順最小」を求めるときも同じで、表の値を「$i$ 以降で達成できる最適値」にし、先頭から「この候補を選んでも、残りで最適値が達成できるか」（表の値が 1 だけ減る遷移か）で判定する。[ABC146 F](#abc146_f) がこの型である。
@@ -161,6 +167,9 @@ $\mathrm{cnt}[N][p] = 1$ で、$\mathrm{cnt}[i][0] = \mathrm{cnt}[i+1][0] + \mat
 ```cpp
 --8<-- "dp-reconstruction/kth.cpp:core"
 ```
+
+完全なプログラム：[`kth.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-reconstruction/kth.cpp)（GitHub）
+{ .kp-code-src }
 
 - **足し算の回数が多いとき**：1 つの状態に $c$ 個の遷移から足すなら、途中の和は $cK$ まで増える。足すたびに $\min(K, \cdot)$ を取れば、どの時点でも $2K$ 以下に収まる
 - **全体が $K$ 個に満たないとき**：先頭の個数（この例では $\mathrm{cnt}[0][0]$）が $K$ 未満なら、$K$ 番目は存在しない。決め始める前に確かめる
@@ -213,7 +222,7 @@ $\mathrm{cnt}[N][p] = 1$ で、$\mathrm{cnt}[i][0] = \mathrm{cnt}[i+1][0] + \mat
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 056. Lucky Bag（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_bd)（diff —）：N 日間、毎日 A_i か B_i のどちらかを買って合計をちょうど S にする選び方を 1 つ出力する。
+- [典型90 056. Lucky Bag（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_bd)（diff なし）：N 日間、毎日 A_i か B_i のどちらかを買って合計をちょうど S にする選び方を 1 つ出力する。
 
 </div>
 
@@ -248,7 +257,7 @@ $\mathrm{cnt}[N][p] = 1$ で、$\mathrm{cnt}[i][0] = \mathrm{cnt}[i+1][0] + \mat
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC202 D. aab aba baa](https://atcoder.jp/contests/abc202/tasks/abc202_d)（diff 966）：a が A 個・b が B 個の文字列のうち、辞書順で K 番目のものを求める。
-- [EDPC F. LCS](https://atcoder.jp/contests/dp/tasks/dp_f)（diff —）：2 つの文字列の最長共通部分列を 1 つ出力する。
+- [EDPC F. LCS](https://atcoder.jp/contests/dp/tasks/dp_f)（diff なし）：2 つの文字列の最長共通部分列を 1 つ出力する。
 - [ABC369 F. Gather Coins](https://atcoder.jp/contests/abc369/tasks/abc369_f)（diff 1618）：グリッドを右か下にだけ進んでコインを集めるとき、集める枚数の最大と、そのときの経路を求める。
 
 </div>

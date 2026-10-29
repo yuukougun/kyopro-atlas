@@ -30,7 +30,7 @@ sections:
   - {title: 載らない作用（区間 chmin と区間和・区間の割り算・区間の並べ替え）と逃げ道, anchor: not-applicable}
   - {title: 言い換えてから載せる（しきい値で 0/1 にする・X_i − i・寄与）, anchor: reformulate, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -69,7 +69,7 @@ updated: 2026-10-22
 `mapping` で $q$ を更新するときは、更新する前の $s$ を使う。先に $s$ を書き換えてから $q$ の式に使うと、$2f \cdot (s + f \cdot \mathit{len})$ になり答えがずれる。
 
 !!! info "ACL では"
-    `lazy_segtree<S, op, e, F, mapping, composition, id> seg(v);`。`seg.apply(l, r, f)`・`seg.prod(l, r)` はどちらも $O(\log N)$ で、`mapping` などの中身に $O(T)$ かかれば $O(T \log N)$ になる。`S` と `F` は構造体でも `bool` でもよい。`seg.max_right<g>(l)`・`seg.min_left<g>(r)` で、遅延セグメント木の上の二分探索もできる（[遅延セグメント木の上で使う](../ds/segment-tree-binary-search.md#on-lazy-segment-tree)）。
+    `lazy_segtree<S, op, e, F, mapping, composition, id> seg(v);`。`seg.apply(l, r, f)`・`seg.prod(l, r)` はどちらも $O(\log N)$ で、`mapping` などの中身に $O(T)$ かかれば $O(T \log N)$ になる。`S` と `F` は構造体でも `bool` でもよい。`seg.max_right(l, f)`・`seg.min_left(r, f)` で、遅延セグメント木の上の二分探索もできる（[遅延セグメント木の上で使う](../ds/segment-tree-binary-search.md#on-lazy-segment-tree)）。この `f` は作用ではなく `S` を受け取って `bool` を返す判定の関数で、外の変数を参照するラムダでよい。要件は[セグメント木上の二分探索](../ds/segment-tree-binary-search.md#what-it-does)の ACL の囲みと同じである。
 
 ## 型の表（S・op・e・F・mapping・composition・id） {#pattern-table}
 
@@ -114,6 +114,9 @@ ACL の `composition(f, g)` の $f$ は新しく届いた作用、$g$ はノー�
 --8<-- "lazy-segment-tree-patterns/assign-add.cpp:core"
 ```
 
+完全なプログラム：[`assign-add.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lazy-segment-tree-patterns/assign-add.cpp)（GitHub）
+{ .kp-code-src }
+
 代入のある問題では、和以外の値でも長さを使うことがある。たとえば「最小値とその個数」に区間代入が来ると、代入後の個数は区間の長さになる。$S$ に長さを足しておかないと `mapping` が書けない。
 
 ## 0/1 反転・転倒数・最長の連続（0 と 1 の情報を入れ替える） {#flip}
@@ -140,6 +143,9 @@ ACL の `composition(f, g)` の $f$ は新しく届いた作用、$g$ はノー�
 --8<-- "lazy-segment-tree-patterns/flip-run.cpp:core"
 ```
 
+完全なプログラム：[`flip-run.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lazy-segment-tree-patterns/flip-run.cpp)（GitHub）
+{ .kp-code-src }
+
 **応用の型**：符号の反転（$-1$ 倍）と区間最大値も同じ考え方である。（最大, 最小）を持てば、$-1$ 倍の後は（$-$最小, $-$最大）になる。括弧列の `(` と `)` の入れ替えも、両方の向きの情報を持てば載る（[括弧列をモノイドにする](../patterns/bracket-sequence.md#monoid)）。サインは「反転」「入れ替え」と、区間の個数・最長・転倒数の質問が並ぶことである。
 
 ## 等差数列の加算・2 列の積の和（添字の和や Σa・Σb を S に足す） {#arithmetic-add}
@@ -153,6 +159,9 @@ ACL の `composition(f, g)` の $f$ は新しく届いた作用、$g$ はノー�
 ```cpp
 --8<-- "lazy-segment-tree-patterns/arith-add.cpp:core"
 ```
+
+完全なプログラム：[`arith-add.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lazy-segment-tree-patterns/arith-add.cpp)（GitHub）
+{ .kp-code-src }
 
 取得が一点だけなら、[差分列](../basics/difference-sequence.md)を 2 回取ると等差数列の加算は数点の更新になる。取得がすべての更新の後に来るなら、一点の値は 2 回の累積和で戻せる（更新と取得が交互に来るなら、累積和を BIT で持つ）。遅延セグメント木を使うのは、区間和の取得が混ざるときである。
 
@@ -169,6 +178,9 @@ $$
 ```cpp
 --8<-- "lazy-segment-tree-patterns/two-seq.cpp:core"
 ```
+
+完全なプログラム：[`two-seq.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lazy-segment-tree-patterns/two-seq.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 **応用の型**：取得したい量が「作用の多項式」で書けるとき、その係数になる量を $S$ に足す。二乗和なら和と長さ（[設計の手順](#design-steps)の例）、相異なる 2 要素の積の和なら和と長さが要る。サインは、取得したい量が $\sum a_i b_i$・$\sum a_i^2$ のような積の和であることである。
 
@@ -273,7 +285,7 @@ $$
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [PRACTICE2 L. Lazy Segment Tree](https://atcoder.jp/contests/practice2/tasks/practice2_l)（diff —）：0/1 の列の区間反転と、区間の転倒数の質問を処理する。
+- [PRACTICE2 L. Lazy Segment Tree](https://atcoder.jp/contests/practice2/tasks/practice2_l)（diff なし）：0/1 の列の区間反転と、区間の転倒数の質問を処理する。
 - [ABC332 F. Random Update Query](https://atcoder.jp/contests/abc332/tasks/abc332_f)（diff 1786）：区間内の 1 点を等確率で選んで X に書き換える操作を繰り返した後の、各要素の期待値を答える。
 - [ABC237 G. Range Sort Query](https://atcoder.jp/contests/abc237/tasks/abc237_g)（diff 2088）：区間を昇順・降順にソートする操作を繰り返した後の、値 X の位置を求める。
 - [ABC371 F. Takahashi in Narrow Road](https://atcoder.jp/contests/abc371/tasks/abc371_f)（diff 2109）：一列に並ぶ人を順に目的地へ動かすときの、総移動回数を求める。

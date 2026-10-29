@@ -25,7 +25,7 @@ sections:
   - {title: 出力を検査するプログラムで確かめる, anchor: checker}
   - {title: ABC の構築の型（手順・数列・グラフ）, anchor: abc-patterns, level: 水}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -43,6 +43,8 @@ updated: 2026-10-22
 
 構築問題の考え方は、答えを探すのではなく「必ず条件を満たす作り方」を自分で決める考え方である。作り方が正しいことは、手順そのものが条件を満たす理由で示す。作れない場合があるなら、その場合を[必要条件](../guide/glossary.md#necessary-condition)で切り分け、残りをすべて作り方で覆う。
 
+使える合図は 3 つある。「1 つ出力せよ（なければ −1）」のように答えを 1 つだけ出させること、「$N - 1$ 回以下の操作で」のように回数の上限つきの手順を出力させること、最大値を問われ、各項の上限の和のような自然な上界が見えることである。構築の問題で、ほかにどの型を試すかは[詰まったときの発想リスト](../guide/thinking-checklist.md#shape-construct)の「1 つ作る（構築）」の表で引ける。
+
 ## 小さい N で作って規則を一般化する {#small-cases}
 
 構築の規則は、いきなり一般の $N$ で考えるより、$N = 1, 2, 3, \dots$ で実際に作って並べた方が見つかりやすい。例として、次の問題を考える。
@@ -54,6 +56,9 @@ updated: 2026-10-22
 ```cpp
 --8<-- "construction/small-cases.cpp:core"
 ```
+
+完全なプログラム：[`small-cases.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/construction/small-cases.cpp)（GitHub）
+{ .kp-code-src }
 
 `brute` を $N = 1$ から $8$ まで動かすと、次の列が出る。
 
@@ -145,6 +150,9 @@ updated: 2026-10-22
 ```cpp
 --8<-- "construction/checker.cpp:core"
 ```
+
+完全なプログラム：[`checker.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/construction/checker.cpp)（GitHub）
+{ .kp-code-src }
 
 チェッカーは、次の 2 つと組み合わせて使う。
 

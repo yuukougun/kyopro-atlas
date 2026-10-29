@@ -45,6 +45,41 @@ search:
     - `ordered-set#pareto` パレート境界を map で持つ（支配される点を消す。ならし O(log N)）（水）：https://yuukougun.github.io/kyopro-atlas/ds/ordered-set/#pareto
     - `ordered-set#adjacent-pairs` ソート順で隣り合う組の集合（2 番目に大きい値の寄与。最小 XOR の組は Binary Trie のページ）（青）：https://yuukougun.github.io/kyopro-atlas/ds/ordered-set/#adjacent-pairs
 
+## 全体への操作を変数で持つ（global-offset） {#global-offset}
+
+- id：`global-offset`　レベル：基礎　段階：reviewed　type：technique
+- URL：https://yuukougun.github.io/kyopro-atlas/ds/global-offset/
+- 別名：global offset、オフセット、全体加算、反転フラグ、回転量、全体に反映させる値を別に持つ
+- 種類：データ構造、クエリ処理の工夫
+- 前提：`stl-containers`
+- サイン：
+    - 言い回し：全要素に x を足す・全体に代入する操作がクエリに混ざる
+    - 言い回し：列全体を反転してから先頭・末尾に追加する
+    - 言い回し：配列を回転してから i 番目を参照する
+    - 制約：Q ≤ 2×10^5 で、全体への操作を毎回 O(N) で行うと間に合わない
+- 節：
+    - `global-offset#offset` オフセット（入れるときに引き、出すときに足す）：https://yuukougun.github.io/kyopro-atlas/ds/global-offset/#offset
+    - `global-offset#flip-flag` 反転フラグ（追加する側や添字の読み方を入れ替え、最後に向きを直す）：https://yuukougun.github.io/kyopro-atlas/ds/global-offset/#flip-flag
+    - `global-offset#assign-all` 全体代入と個別の差分（代入のたびに差分の map を空にする。ならし）：https://yuukougun.github.io/kyopro-atlas/ds/global-offset/#assign-all
+    - `global-offset#rotation` 回転は先頭位置の添字で表す：https://yuukougun.github.io/kyopro-atlas/ds/global-offset/#rotation
+    - `global-offset#to-lazy-segment-tree` 遅延セグメント木とのつながり（全体への操作を区間への操作に広げる）（水）：https://yuukougun.github.io/kyopro-atlas/ds/global-offset/#to-lazy-segment-tree
+
+## 配列で作る連結リスト（linked-list） {#linked-list}
+
+- id：`linked-list`　レベル：基礎　段階：reviewed　type：technique
+- URL：https://yuukougun.github.io/kyopro-atlas/ds/linked-list/
+- 別名：連結リスト、双方向リスト、linked list、doubly linked list、prev・next の配列
+- 種類：データ構造
+- 前提：`stl-containers`
+- サイン：
+    - 言い回し：値 x の直後に y を挿入・値 x を削除する操作を繰り返し、最後の列を出力する
+    - 言い回し：カードの山を別のカードの上へ付け替える
+    - 言い回し：列車の連結・切り離し
+- 節：
+    - `linked-list#arrays` prev・next の配列と番兵（先頭・末尾）：https://yuukougun.github.io/kyopro-atlas/ds/linked-list/#arrays
+    - `linked-list#operations` 挿入・削除・付け替えの手順：https://yuukougun.github.io/kyopro-atlas/ds/linked-list/#operations
+    - `linked-list#output` 最後に先頭からたどって出力する：https://yuukougun.github.io/kyopro-atlas/ds/linked-list/#output
+
 ## 優先度付きキュー（priority-queue） {#priority-queue}
 
 - id：`priority-queue`　レベル：水　段階：reviewed　type：technique
@@ -104,41 +139,6 @@ search:
     - `interval-set#amortized` なぜならしで速いか（新しくできる区間は O(1) 個、消える区間は一度だけ）と、走査だけの操作が混ざると崩れる理由：https://yuukougun.github.io/kyopro-atlas/ds/interval-set/#amortized
     - `interval-set#applications` 応用（mex・塗り分け・和集合の長さ・値ごとの合計の差分更新）：https://yuukougun.github.io/kyopro-atlas/ds/interval-set/#applications
     - `interval-set#valued-intervals` 値つきの区間の分割・統合（黄）：https://yuukougun.github.io/kyopro-atlas/ds/interval-set/#valued-intervals
-
-## 全体への操作を変数で持つ（global-offset） {#global-offset}
-
-- id：`global-offset`　レベル：基礎　段階：reviewed　type：technique
-- URL：https://yuukougun.github.io/kyopro-atlas/ds/global-offset/
-- 別名：global offset、オフセット、全体加算、反転フラグ、回転量、全体に反映させる値を別に持つ
-- 種類：データ構造、クエリ処理の工夫
-- 前提：`stl-containers`
-- サイン：
-    - 言い回し：全要素に x を足す・全体に代入する操作がクエリに混ざる
-    - 言い回し：列全体を反転してから先頭・末尾に追加する
-    - 言い回し：配列を回転してから i 番目を参照する
-    - 制約：Q ≤ 2×10^5 で、全体への操作を毎回 O(N) で行うと間に合わない
-- 節：
-    - `global-offset#offset` オフセット（入れるときに引き、出すときに足す）：https://yuukougun.github.io/kyopro-atlas/ds/global-offset/#offset
-    - `global-offset#flip-flag` 反転フラグ（追加する側や添字の読み方を入れ替え、最後に向きを直す）：https://yuukougun.github.io/kyopro-atlas/ds/global-offset/#flip-flag
-    - `global-offset#assign-all` 全体代入と個別の差分（代入のたびに差分の map を空にする。ならし）：https://yuukougun.github.io/kyopro-atlas/ds/global-offset/#assign-all
-    - `global-offset#rotation` 回転は先頭位置の添字で表す：https://yuukougun.github.io/kyopro-atlas/ds/global-offset/#rotation
-    - `global-offset#to-lazy-segment-tree` 遅延セグメント木とのつながり（全体への操作を区間への操作に広げる）（水）：https://yuukougun.github.io/kyopro-atlas/ds/global-offset/#to-lazy-segment-tree
-
-## 配列で作る連結リスト（linked-list） {#linked-list}
-
-- id：`linked-list`　レベル：基礎　段階：reviewed　type：technique
-- URL：https://yuukougun.github.io/kyopro-atlas/ds/linked-list/
-- 別名：連結リスト、双方向リスト、linked list、doubly linked list、prev・next の配列
-- 種類：データ構造
-- 前提：`stl-containers`
-- サイン：
-    - 言い回し：値 x の直後に y を挿入・値 x を削除する操作を繰り返し、最後の列を出力する
-    - 言い回し：カードの山を別のカードの上へ付け替える
-    - 言い回し：列車の連結・切り離し
-- 節：
-    - `linked-list#arrays` prev・next の配列と番兵（先頭・末尾）：https://yuukougun.github.io/kyopro-atlas/ds/linked-list/#arrays
-    - `linked-list#operations` 挿入・削除・付け替えの手順：https://yuukougun.github.io/kyopro-atlas/ds/linked-list/#operations
-    - `linked-list#output` 最後に先頭からたどって出力する：https://yuukougun.github.io/kyopro-atlas/ds/linked-list/#output
 
 ## スタック・キュー・deque の使いどころ（stack-techniques） {#stack-techniques}
 
@@ -389,7 +389,7 @@ search:
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-on-values/
 - 別名：値域セグ木、権値線段樹、値を添字にするセグ木、動的セグ木、dynamic segment tree、sparse segment tree
 - 種類：データ構造、区間クエリ、ソート・座標圧縮
-- 前提：`segment-tree`、`coordinate-compression`
+- 前提：`fenwick-tree`、`segment-tree`、`coordinate-compression`
 - ACL：`segtree`、`fenwick_tree`
 - サイン：
     - 言い回し：隣り合う要素の差が D 以下の部分列の最長
@@ -705,6 +705,6 @@ search:
 - 別名：セグ木マージ、segment tree merging、2 次元セグ木、2 次元 BIT、K-D tree、併合可能なヒープ、meldable heap、skew heap、leftist heap、Fast Set、Fractional Cascading、析合木、Kinetic Segment Tree
 - 種類：案内、データ構造
 - 節：
+    - `advanced-ds-catalog#elsewhere` ほかのページにあるもの（木の動的な構造は木の章、CDQ 分割統治・時間付き Mo・Li Chao Tree は各ページ）：https://yuukougun.github.io/kyopro-atlas/ds/advanced-ds-catalog/#elsewhere
     - `advanced-ds-catalog#table` 名前・何ができるか・代わりになる手の表：https://yuukougun.github.io/kyopro-atlas/ds/advanced-ds-catalog/#table
     - `advanced-ds-catalog#meldable-heap` 併合可能なヒープ（skew heap・leftist heap・ランダム化ヒープ。マージテクで足りることが多い）：https://yuukougun.github.io/kyopro-atlas/ds/advanced-ds-catalog/#meldable-heap
-    - `advanced-ds-catalog#elsewhere` ほかのページにあるもの（木の動的な構造は木の章、CDQ 分割統治・時間付き Mo・Li Chao Tree は各ページ）：https://yuukougun.github.io/kyopro-atlas/ds/advanced-ds-catalog/#elsewhere

@@ -28,7 +28,7 @@ sections:
   - {title: 割れないときの3つの場合（割る数が p の倍数・公比 ≡ 1・法が素数でない）, anchor: not-invertible}
   - {title: 'ACL の inv_mod と modint::inv', anchor: acl}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -92,6 +92,9 @@ $p - 2$ は $10^9$ 程度の大きな指数だが、[繰り返し二乗法](../m
 --8<-- "mod-inverse/inverse.cpp:core"
 ```
 
+完全なプログラム：[`inverse.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mod-inverse/inverse.cpp)（GitHub）
+{ .kp-code-src }
+
 `inv_fermat` は、$a$ が $p$ の倍数のとき $0^{p-2} = 0$ を返し、エラーにならない。「0 で割った」ことに気づかないまま 0 が答えに混ざるので、割る数が 0 になりうる式では、呼ぶ前に確かめる。法が素数でないときに $a^{m-2}$ を使うと、逆元でない値が黙って返る（たとえば法 10 で $3^{8} \bmod 10 = 1$ だが、3 の逆元は 7）。
 
 ## 拡張ユークリッドによる逆元（法が素数でないとき） {#ext-gcd}
@@ -107,6 +110,9 @@ $$
 ```cpp
 --8<-- "mod-inverse/inverse.cpp:extgcd"
 ```
+
+完全なプログラム：[`inverse.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mod-inverse/inverse.cpp)（GitHub）
+{ .kp-code-src }
 
 `inv_extgcd` は、余りの列 $r_i$ と「$r_i \equiv x_i \cdot a \pmod{m}$」となる係数 $x_i$ を一緒に更新している。互除法が終わったとき $r = \gcd(a, m)$ で、これが 1 なら対応する係数が逆元である。
 
@@ -128,6 +134,9 @@ $$
 --8<-- "mod-inverse/inv-table.cpp:core"
 ```
 
+完全なプログラム：[`inv-table.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mod-inverse/inv-table.cpp)（GitHub）
+{ .kp-code-src }
+
 $-q \cdot r^{-1}$ は負になるので、`p - (q * inv[r] % p)` のように $p$ から引いて 0 以上に保つ。
 
 **階乗の逆元**：二項係数で要る $1/k!$ の表は、この漸化式を使わなくても作れる。$N!$ の逆元を 1 回だけフェルマーで求め、$1/(i-1)! = i \cdot 1/i!$ で後ろへ戻ればよい（[fact を前から、ifact を後ろから作る理由](../comb/binomial-precompute.md#fact-ifact)）。逆に、階乗の表があれば $i^{-1} = (i-1)! \cdot (1/i!)$ で各 $i$ の逆元も $O(1)$ で取れる。逆元の漸化式が役立つのは、階乗は要らず $1/i$ だけが大量に要るとき（調和数 $1 + 1/2 + \dots + 1/N$ や、期待値の式に $1/i$ が並ぶとき）である。
@@ -141,6 +150,9 @@ $-q \cdot r^{-1}$ は負になるので、`p - (q * inv[r] % p)` のように $p
 ```cpp
 --8<-- "mod-inverse/half-sum.cpp:core"
 ```
+
+完全なプログラム：[`half-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mod-inverse/half-sum.cpp)（GitHub）
+{ .kp-code-src }
 
 方法 2 のように、割り切れることが分かっている因数を **余りを取る前に** 整数のまま割る手もある。逆元が要らず、法が素数でなくても使える。ただし分母が 6 や $k!$ のように大きくなると、どの因数で割るかの場合分けが増えるので、法が素数なら逆元を掛ける方が素直である。
 
@@ -190,6 +202,9 @@ $-q \cdot r^{-1}$ は負になるので、`p - (q * inv[r] % p)` のように $p
 --8<-- "mod-inverse/acl.cpp:core"
 ```
 
+完全なプログラム：[`acl.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mod-inverse/acl.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 `inv_mod` も modint の割り算も、互いに素でないと assert で止まる。止まらずに 0 が返るよりは気づきやすいが、提出では実行時エラーになる。割る数が 0 になりうるなら、呼ぶ前に分岐する。modint の詳しい使い方は [modint](../math/modint.md) にまとめる。
 
 ## 落とし穴 {#pitfalls}
@@ -227,7 +242,7 @@ mod での割り算は、数え上げや確率の答えを余りで求める手�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 082. Counting Numbers（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_cd)（diff —）：L 以上 R 以下の各整数 x を x 回ずつ書いたときの、書いた文字数の合計を 10^9+7 で割った余りで求める（R ≤ 10^18）。
+- [典型90 082. Counting Numbers（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_cd)（diff なし）：L 以上 R 以下の各整数 x を x 回ずつ書いたときの、書いた文字数の合計を 10^9+7 で割った余りで求める（R ≤ 10^18）。
 
 </div>
 
@@ -242,7 +257,7 @@ $d$ 桁の整数 $x$ を $x$ 回書くと $d \cdot x$ 文字になる。桁数�
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [アルゴ数学 053. Sum of 4^N](https://atcoder.jp/contests/math-and-algorithm/tasks/math_and_algorithm_as)（diff —）：4^0 + 4^1 + … + 4^N を 10^9+7 で割った余りで求める（N ≤ 10^18）。
+- [アルゴ数学 053. Sum of 4^N](https://atcoder.jp/contests/math-and-algorithm/tasks/math_and_algorithm_as)（diff なし）：4^0 + 4^1 + … + 4^N を 10^9+7 で割った余りで求める（N ≤ 10^18）。
 - [ABC357 D. 88888888](https://atcoder.jp/contests/abc357/tasks/abc357_d)（diff 970）：正の整数 N を N 回並べてできる整数を 998244353 で割った余りを求める（N ≤ 10^18）。
 - [ABC186 E. Throne](https://atcoder.jp/contests/abc186/tasks/abc186_e)（diff 1461）：N 個の椅子が円形に並び、玉座から S 個先の椅子にいる人が 1 回に K 個ずつ進むとき、玉座に着くまでの最小の回数を求める（着けないなら −1）。
 

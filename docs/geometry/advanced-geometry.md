@@ -31,7 +31,7 @@ sections:
   - {title: 線分の交点の列挙（Bentley-Ottmann）, anchor: segment-intersections}
   - {title: 自作するときの要点と Library Checker, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -74,7 +74,10 @@ ABC で必要になった例は、調べた範囲では [ABC478 G](#abc478_g)（
 --8<-- "advanced-geometry/calipers.cpp:core"
 ```
 
-完全なプログラムは `snippets/advanced-geometry/calipers.cpp` で、小さい乱数の入力で全組の比較と照らし合わせている。一直線上の点の扱いなど、自作するときの注意は[自作するときの要点](#library)にまとめた。
+完全なプログラム：[`calipers.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/advanced-geometry/calipers.cpp)（GitHub）
+{ .kp-code-src }
+
+完全なプログラムは [`snippets/advanced-geometry/calipers.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/advanced-geometry/calipers.cpp) で、小さい乱数の入力で全組の比較と照らし合わせている。一直線上の点の扱いなど、自作するときの注意は[自作するときの要点](#library)にまとめた。
 
 ## 最近点対（分割統治・平面走査で O(N log N)） {#closest-pair}
 
@@ -110,7 +113,10 @@ Library Checker に半平面交差の問題はなく、自作したら小さい�
 --8<-- "advanced-geometry/minkowski.cpp:core"
 ```
 
-辺の比べ方は外積の符号である。どちらの列も最も下の頂点から始めると、辺の偏角は $0$ 以上 $2\pi$ 未満の範囲で単調に増える。マージの途中で片方の列が先に進んでいるとき、その列で直前に取った辺は、もう片方の今の辺より偏角が小さい。凸多角形の隣り合う辺の向きは $180$ 度未満しか変わらないので、比べる 2 本の辺の向きの差は $180$ 度未満に収まり、外積の符号で大小が決まる。完全なプログラム（`snippets/advanced-geometry/minkowski.cpp`）では、小さい乱数の凸多角形で全組の和の凸包と照らし合わせている。
+完全なプログラム：[`minkowski.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/advanced-geometry/minkowski.cpp)（GitHub）
+{ .kp-code-src }
+
+辺の比べ方は外積の符号である。どちらの列も最も下の頂点から始めると、辺の偏角は $0$ 以上 $2\pi$ 未満の範囲で単調に増える。マージの途中で片方の列が先に進んでいるとき、その列で直前に取った辺は、もう片方の今の辺より偏角が小さい。凸多角形の隣り合う辺の向きは $180$ 度未満しか変わらないので、比べる 2 本の辺の向きの差は $180$ 度未満に収まり、外積の符号で大小が決まる。完全なプログラム（[`snippets/advanced-geometry/minkowski.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/advanced-geometry/minkowski.cpp)）では、小さい乱数の凸多角形で全組の和の凸包と照らし合わせている。
 
 使いどころは次の 2 つである。
 
@@ -165,8 +171,12 @@ Library Checker に半平面交差の問題はなく、自作したら小さい�
 
 ## 学ぶための資料 {#resources}
 
-- cp-algorithms（英語）：ミンコフスキー和・最近点対・半平面交差・ドロネー三角形分割とボロノイ図・交わる線分の組の探索の各記事が、手順と計算量をまとめている。半平面交差の記事は有界にするための正方形と、平行な半平面の扱いに詳しい
-- OI Wiki の「旋转卡壳」（中国語）：回転キャリパーで凸包の直径を求める手順と、囲む長方形の面積の最小への応用
+- [cp-algorithms「Minkowski sum of convex polygons」](https://cp-algorithms.com/geometry/minkowski.html)（英語）：ミンコフスキー和の手順と計算量をまとめている
+- [cp-algorithms「Finding the nearest pair of points」](https://cp-algorithms.com/geometry/nearest_points.html)（英語）：最近点対の手順と計算量をまとめている
+- [cp-algorithms「Half-plane intersection - S&I Algorithm in O(N log N)」](https://cp-algorithms.com/geometry/halfplane-intersection.html)（英語）：半平面交差の手順と計算量をまとめている。有界にするための正方形と、平行な半平面の扱いに詳しい
+- [cp-algorithms「Delaunay triangulation and Voronoi diagram」](https://cp-algorithms.com/geometry/delaunay.html)（英語）：ドロネー三角形分割とボロノイ図の手順と計算量をまとめている
+- [cp-algorithms「Search for a pair of intersecting segments」](https://cp-algorithms.com/geometry/intersecting_segments.html)（英語）：交わる線分の組の探索の手順と計算量をまとめている
+- [OI Wiki「旋转卡壳」](https://oi-wiki.org/geometry/rotating-calipers/)（中国語）：回転キャリパーで凸包の直径を求める手順と、囲む長方形の面積の最小への応用
 
 ## 例題 {#examples}
 

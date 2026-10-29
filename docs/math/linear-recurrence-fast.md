@@ -28,7 +28,7 @@ sections:
   - {title: Berlekamp-Massey（漸化式を見つける）, anchor: berlekamp-massey}
   - {title: ACL の convolution を使った実装, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -136,17 +136,23 @@ Berlekamp-Massey は、数列の最初の $M$ 項 $s_0, \dots, s_{M-1}$ から�
 !!! info "ACL では"
     `atcoder::convolution(a, b)`（`<atcoder/convolution>`）が、2 つの列の畳み込み（法の既定は 998244353。テンプレート引数で NTT に向くほかの素数も指定できる）を $O((\lvert a \rvert + \lvert b \rvert) \log (\lvert a \rvert + \lvert b \rvert))$ で返す。法は NTT に向く素数でなければならない。線形漸化式そのものの関数は ACL にない。
 
-Bostan-Mori の 1 回の繰り返しは、$Q(-x)$ を作って畳み込みを 2 回呼び、偶奇で係数を選ぶだけである。最初の $K$ 項と係数から $P$・$Q$ を作る関数と合わせて、次のようになる（完全なプログラムは `snippets/linear-recurrence-fast/recurrence.cpp`。素朴なきたまさ法と、漸化式を直接回した値とで答えを確かめている）。
+Bostan-Mori の 1 回の繰り返しは、$Q(-x)$ を作って畳み込みを 2 回呼び、偶奇で係数を選ぶだけである。最初の $K$ 項と係数から $P$・$Q$ を作る関数と合わせて、次のようになる（完全なプログラムは [`snippets/linear-recurrence-fast/recurrence.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/linear-recurrence-fast/recurrence.cpp)。素朴なきたまさ法と、漸化式を直接回した値とで答えを確かめている）。
 
 ```cpp
 --8<-- "linear-recurrence-fast/recurrence.cpp:bostan-mori"
 ```
+
+完全なプログラム：[`recurrence.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/linear-recurrence-fast/recurrence.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 Berlekamp-Massey は、今の漸化式で次の項を予測したずれ $\delta$ が 0 でなければ、最後に長さが伸びた時点の漸化式を $\delta$ に合わせて倍して引き、ずれを消す。
 
 ```cpp
 --8<-- "linear-recurrence-fast/recurrence.cpp:berlekamp-massey"
 ```
+
+完全なプログラム：[`recurrence.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/linear-recurrence-fast/recurrence.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 自作するときに気をつける点は次のとおりである。
 
@@ -163,12 +169,9 @@ Berlekamp-Massey は、今の漸化式で次の項を予測したずれ $\delta$
 
 ## 学ぶための資料 {#resources}
 
-<!-- textlint-disable ja-space-between-half-and-full-width -->
-- ryuhe1 氏の「線形漸化的数列のN項目の計算」（Qiita）：Fiduccia の方法と Bostan-Mori の手順を並べて説明し、掛け算の回数を比べている。Bostan-Mori の考案者の 1 人による日本語の解説である。
-- Bostan・Mori の論文「A Simple and Fast Algorithm for Computing the N-th Term of a Linearly Recurrent Sequence」（arXiv）：手法の原典。正しさの証明と計算量の評価がある。
-- ikatakos 氏の「数列の漸化式の特定と第N項の計算」：Berlekamp-Massey で漸化式を見つけてから Bostan-Mori で第 $N$ 項を求める、組み合わせの流れ。
-
-<!-- textlint-enable ja-space-between-half-and-full-width -->
+- [ryuhe1「線形漸化的数列のN項目の計算」（Qiita）](https://qiita.com/ryuhe1/items/da5acbcce4ac1911f47a)：Fiduccia の方法と Bostan-Mori の手順を並べて説明し、掛け算の回数を比べている。Bostan-Mori の考案者の 1 人による日本語の解説である。
+- [Alin Bostan, Ryuhei Mori「A Simple and Fast Algorithm for Computing the N-th Term of a Linearly Recurrent Sequence」（arXiv:2008.08822）](https://arxiv.org/abs/2008.08822)：手法の原典の論文。正しさの証明と計算量の評価がある。
+- [ikatakos「数列の漸化式の特定と第N項の計算」](https://ikatakos.com/pot/programming_algorithm/number_theory/berlekamp_massey)：Berlekamp-Massey で漸化式を見つけてから Bostan-Mori で第 $N$ 項を求める、組み合わせの流れ。
 
 ## 例題 {#examples}
 
@@ -176,7 +179,7 @@ Berlekamp-Massey は、今の漸化式で次の項を予測したずれ $\delta$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [TDPC T. フィボナッチ](https://atcoder.jp/contests/tdpc/tasks/tdpc_fibonacci)（diff —）：a_1 = … = a_K = 1、a_i = a_{i−1} + … + a_{i−K} で定まる数列の第 N 項を 10^9+7 で割った余りで求める（K ≤ 1000、N ≤ 10^9）。
+- [TDPC T. フィボナッチ](https://atcoder.jp/contests/tdpc/tasks/tdpc_fibonacci)（diff なし）：a_1 = … = a_K = 1、a_i = a_{i−1} + … + a_{i−K} で定まる数列の第 N 項を 10^9+7 で割った余りで求める（K ≤ 1000、N ≤ 10^9）。
 
 </div>
 

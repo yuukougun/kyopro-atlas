@@ -26,7 +26,7 @@ sections:
   - {title: 多項式の演算（逆元・log・exp）は FPS のページへ, anchor: to-fps}
   - {title: ライブラリでの使い方, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -93,17 +93,23 @@ $$
 
 $N = 3$、$c = 2$、$K = 3$ で確かめる。各変数が 0〜2 で和が 3 の組は、$(1, 1, 1)$ と $(0, 1, 2)$ の並べ替え 6 通りで 7 個である。式は $j = 0$ で $\binom{5}{2} = 10$、$j = 1$ で $-3 \binom{2}{2} = -3$ になり、合わせて 7 になる。
 
-次のコード片は、同じ係数を「多項式の累乗を $K$ 次まで計算する方法」と「閉じた式」の 2 通りで求め、一致を確かめている（完全なプログラムは `snippets/generating-function-counting/bounded.cpp`）。閉じた式の方では、$N = 0$ を先に分けている。式のままでは $\binom{K - 1}{-1}$ になり、範囲外を 0 とする約束では空の積の 1 を落とすからである。
+次のコード片は、同じ係数を「多項式の累乗を $K$ 次まで計算する方法」と「閉じた式」の 2 通りで求め、一致を確かめている（完全なプログラムは [`snippets/generating-function-counting/bounded.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/generating-function-counting/bounded.cpp)）。閉じた式の方では、$N = 0$ を先に分けている。式のままでは $\binom{K - 1}{-1}$ になり、範囲外を 0 とする約束では空の積の 1 を落とすからである。
 
 ```cpp
 --8<-- "generating-function-counting/bounded.cpp:closed"
 ```
+
+完全なプログラム：[`bounded.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/generating-function-counting/bounded.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 閉じた式に直せないとき（変数ごとに許される値がばらばらなど）は、多項式を $K$ 次までに切り詰めて掛ける。同じ多項式の $N$ 乗なら、繰り返し二乗法で掛け算は $O(\log N)$ 回で済む。
 
 ```cpp
 --8<-- "generating-function-counting/bounded.cpp:power"
 ```
+
+完全なプログラム：[`bounded.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/generating-function-counting/bounded.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 ## DP の遷移を多項式の積・商として見る {#dp-as-polynomial}
 
@@ -161,9 +167,9 @@ $K$ は求めたい係数の次数である。逆元・log・exp・累乗の $O(
 
 ## 学ぶための資料 {#resources}
 
-- hotman78 氏の「形式的冪級数の応用テクニック（前編）」は、逆元・log・exp・累乗をニュートン法で求める流れと計算量をまとめている。和が $t$ になる部分集合の数を $\exp\left(\sum \log(1 + x^{e})\right)$ で求める例もある
-- Nyaan's Library の「多項式/形式的冪級数ライブラリ」は、NTT 向きの法での演算をひとまとめにした実装で、自作するときの関数の切り分けの参考になる
-- 立式の流れは、例題の ABC303 Ex の解説（けんちょん氏）が短く追いやすい。Prüfer 列で木を列に言い換えた後、母関数の累乗の係数に落とす
+- [hotman78「【競技プログラミング】形式的冪級数の応用テクニック(前編)」](https://qiita.com/hotman78/items/f0e6d2265badd84d429a)：逆元・log・exp・累乗をニュートン法で求める流れと計算量をまとめている。和が $t$ になる部分集合の数を $\exp\left(\sum \log(1 + x^{e})\right)$ で求める例もある
+- [Nyaan「多項式/形式的冪級数ライブラリ」](https://nyaannyaan.github.io/library/fps/formal-power-series.hpp)：NTT 向きの法での演算をひとまとめにした実装で、自作するときの関数の切り分けの参考になる
+- [drken「AtCoder ABC 303 Ex - Constrained Tree Degree (橙色, 600 点)」](https://drken1215.hatenablog.com/entry/2023/05/28/010200)：例題 ABC303 Ex の立式の流れが短く追いやすい。Prüfer 列で木を列に言い換えた後、母関数の累乗の係数に落とす
 
 ## 例題 {#examples}
 

@@ -26,7 +26,7 @@ sections:
   - {title: 合成と根を付ける操作の作り方の型, anchor: patterns}
   - {title: 使い分け（最遠点は直径の性質で、距離の総和は根の移動の差分で済む）, anchor: when-to-use}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -106,11 +106,17 @@ $\mathrm{up}[c]$ の式の最後の項は $p$ が根 $r$ のときはなく、$\
 --8<-- "rerooting/subtree-count.cpp:core"
 ```
 
+完全なプログラム：[`subtree-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rerooting/subtree-count.cpp)（GitHub）
+{ .kp-code-src }
+
 上の連結な頂点集合の数え上げなら、部品を次のように渡す。$\mathrm{ans}[v]$ は「$v$ を含む連結な頂点集合の数」になる。
 
 ```cpp
 --8<-- "rerooting/subtree-count.cpp:usage"
 ```
+
+完全なプログラム：[`subtree-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rerooting/subtree-count.cpp)（GitHub）
+{ .kp-code-src }
 
 **計算量**：頂点 $v$ では、隣の数 $k_v$ に比例する回数だけ $\oplus$ と $\mathrm{add\_root}$ を呼ぶ。$\sum_v k_v = 2(N - 1)$ なので、どちらの呼び出しも全体で $O(N)$ 回である。それぞれが $O(1)$ なら全体で $O(N)$、合成が $O(T)$ かかるなら $O(NT)$ になる。作業用の配列は頂点ごとに作り直すので、メモリは $O(N)$ で済む。
 
@@ -197,7 +203,7 @@ $\oplus$ が $\max$ や $\min$ なら、左右の累積の代わりに「上位 
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC V. Subtree](https://atcoder.jp/contests/dp/tasks/dp_v)（diff —）：木の各頂点 v について、v を含み黒の頂点が連結になる塗り方の数を M で割った余りを求める（M は素数とは限らない）。
+- [EDPC V. Subtree](https://atcoder.jp/contests/dp/tasks/dp_v)（diff なし）：木の各頂点 v について、v を含み黒の頂点が連結になる塗り方の数を M で割った余りを求める（M は素数とは限らない）。
 
 </div>
 
@@ -229,7 +235,7 @@ $\oplus$ が $\max$ や $\min$ なら、左右の累積の代わりに「上位 
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC160 F. Distributing Integers](https://atcoder.jp/contests/abc160/tasks/abc160_f)（diff 2048）：木の各頂点 k について、k に 1 を書き、書いた頂点に隣接する頂点へ 2, 3, … と順に書いていく方法の数を求める。
-- [TDPC N. 木](https://atcoder.jp/contests/tdpc/tasks/tdpc_tree)（diff —）：木の辺を、描いた辺がつねに連結になるように 1 本ずつ描く順番の数を求める。
+- [TDPC N. 木](https://atcoder.jp/contests/tdpc/tasks/tdpc_tree)（diff なし）：木の辺を、描いた辺がつねに連結になるように 1 本ずつ描く順番の数を求める。
 
 </div>
 

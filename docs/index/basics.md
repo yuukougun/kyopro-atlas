@@ -42,7 +42,7 @@ search:
     - 言い回し：XOR・AND・OR が問題文に出る
     - 言い回し：自分以外の XOR・同じ値で打ち消す
     - 言い回し：2 進表記の 1 の個数
-    - 制約：N ≤ 18 程度で、集合とその部分集合の組をすべて調べる（全体で 3^N）
+    - 制約：N ≤ 15〜16 程度で、集合とその部分集合の組をすべて調べる（全体で 3^N）
 - 節：
     - `bit-operations#operators` AND・OR・XOR・シフトと演算子の優先順位：https://yuukougun.github.io/kyopro-atlas/basics/bit-operations/#operators
     - `bit-operations#xor-properties` XOR の性質（打ち消し・a + b との関係・0〜n の XOR）：https://yuukougun.github.io/kyopro-atlas/basics/bit-operations/#xor-properties
@@ -420,25 +420,6 @@ search:
     - `kth-value#counting-patterns` 数え方の型（ソート＋二分探索・尺取り、符号で場合分け、包除）：https://yuukougun.github.io/kyopro-atlas/basics/kth-value/#counting-patterns
     - `kth-value#top-m-sum` 上位 M 個の和（同じ値の分の調整）：https://yuukougun.github.io/kyopro-atlas/basics/kth-value/#top-m-sum
 
-## 三分探索（ternary-search） {#ternary-search}
-
-- id：`ternary-search`　レベル：水　段階：reviewed　type：technique
-- URL：https://yuukougun.github.io/kyopro-atlas/basics/ternary-search/
-- 別名：三分法、黄金分割探索、凸関数の極値、凸関数、離散凸、増分が単調、ternary search
-- 種類：二分探索
-- 前提：`binary-search-answer`
-- サイン：
-    - 言い回し：時刻や位置を 1 つ選んで、時間やコストを最小化する（谷形）
-    - 言い回し：答えを実数で出力し、誤差が許される
-    - 式の形：1 つ増やすごとの増分が単調に増える
-- 節：
-    - `ternary-search#real-and-integer` 実数版（反復回数の目安）と整数版（残りを全部調べる）：https://yuukougun.github.io/kyopro-atlas/basics/ternary-search/#real-and-integer
-    - `ternary-search#difference-sign` 差分の符号で二分探索する方法：https://yuukougun.github.io/kyopro-atlas/basics/ternary-search/#difference-sign
-    - `ternary-search#convexity` 凸性の確かめ方（凸関数の和・最大は凸、|x − a| と x^2 は凸）：https://yuukougun.github.io/kyopro-atlas/basics/ternary-search/#convexity
-    - `ternary-search#flat-pitfall` 平らな部分がある関数での失敗：https://yuukougun.github.io/kyopro-atlas/basics/ternary-search/#flat-pitfall
-    - `ternary-search#golden-section` 黄金分割探索：https://yuukougun.github.io/kyopro-atlas/basics/ternary-search/#golden-section
-    - `ternary-search#marginal-greedy` 増分が単調なら 1 単位ずつ貪欲に配る（青）：https://yuukougun.github.io/kyopro-atlas/basics/ternary-search/#marginal-greedy
-
 ## 絶対値の和の最小化と中央値（median-absolute） {#median-absolute}
 
 - id：`median-absolute`　レベル：基礎　段階：reviewed　type：technique
@@ -457,6 +438,25 @@ search:
     - `median-absolute#separate-axes` x と y に分ける：https://yuukougun.github.io/kyopro-atlas/basics/median-absolute/#separate-axes
     - `median-absolute#with-binary-search` 距離の和で判定して二分探索する（青）：https://yuukougun.github.io/kyopro-atlas/basics/median-absolute/#with-binary-search
     - `median-absolute#vs-squares` 二乗和の最小（平均）との違い：https://yuukougun.github.io/kyopro-atlas/basics/median-absolute/#vs-squares
+
+## 三分探索（ternary-search） {#ternary-search}
+
+- id：`ternary-search`　レベル：水　段階：reviewed　type：technique
+- URL：https://yuukougun.github.io/kyopro-atlas/basics/ternary-search/
+- 別名：三分法、黄金分割探索、凸関数の極値、凸関数、離散凸、増分が単調、ternary search
+- 種類：二分探索
+- 前提：`binary-search-answer`
+- サイン：
+    - 言い回し：時刻や位置を 1 つ選んで、時間やコストを最小化する（谷形）
+    - 言い回し：答えを実数で出力し、誤差が許される
+    - 式の形：1 つ増やすごとの増分が単調に増える
+- 節：
+    - `ternary-search#real-and-integer` 実数版（反復回数の目安）と整数版（残りを全部調べる）：https://yuukougun.github.io/kyopro-atlas/basics/ternary-search/#real-and-integer
+    - `ternary-search#difference-sign` 差分の符号で二分探索する方法：https://yuukougun.github.io/kyopro-atlas/basics/ternary-search/#difference-sign
+    - `ternary-search#convexity` 凸性の確かめ方（凸関数の和・最大は凸、|x − a| と x^2 は凸）：https://yuukougun.github.io/kyopro-atlas/basics/ternary-search/#convexity
+    - `ternary-search#flat-pitfall` 平らな部分がある関数での失敗：https://yuukougun.github.io/kyopro-atlas/basics/ternary-search/#flat-pitfall
+    - `ternary-search#golden-section` 黄金分割探索：https://yuukougun.github.io/kyopro-atlas/basics/ternary-search/#golden-section
+    - `ternary-search#marginal-greedy` 増分が単調なら 1 単位ずつ貪欲に配る（青）：https://yuukougun.github.io/kyopro-atlas/basics/ternary-search/#marginal-greedy
 
 ## 貪欲法の考え方と正当性（greedy-basics） {#greedy-basics}
 
@@ -493,6 +493,24 @@ search:
     - `interval-scheduling#counterexamples` 左端の順・長さの順が失敗する例：https://yuukougun.github.io/kyopro-atlas/basics/interval-scheduling/#counterexamples
     - `interval-scheduling#deadlines` 処理時間と締め切りがある場合（優先度付きキューの貪欲へ）：https://yuukougun.github.io/kyopro-atlas/basics/interval-scheduling/#deadlines
     - `interval-scheduling#weighted` 区間に重みがあるなら DP：https://yuukougun.github.io/kyopro-atlas/basics/interval-scheduling/#weighted
+
+## 辞書順最小を前から決める貪欲（lexicographic-greedy） {#lexicographic-greedy}
+
+- id：`lexicographic-greedy`　レベル：基礎　段階：reviewed　type：technique
+- URL：https://yuukougun.github.io/kyopro-atlas/basics/lexicographic-greedy/
+- 別名：辞書順最小、lexicographically smallest、辞書順 K 番目、先頭から貪欲に決める
+- 種類：貪欲、文字列
+- 前提：`greedy-basics`
+- サイン：
+    - 言い回し：辞書順最小（最大）の文字列・列を出力する（なければ −1）
+    - 言い回し：条件を満たす中で最も小さいもの
+    - 言い回し：辞書順で K 番目
+- 節：
+    - `lexicographic-greedy#why-front` 先頭から決める理由（辞書順の性質）：https://yuukougun.github.io/kyopro-atlas/basics/lexicographic-greedy/#why-front
+    - `lexicographic-greedy#feasibility` 残りで実現できるかの判定（次の出現位置の表・個数の数え上げ）：https://yuukougun.github.io/kyopro-atlas/basics/lexicographic-greedy/#feasibility
+    - `lexicographic-greedy#topological` 順序の制約は入次数 0 を小さい順に（トポロジカルソート）：https://yuukougun.github.io/kyopro-atlas/basics/lexicographic-greedy/#topological
+    - `lexicographic-greedy#kth` 辞書順 K 番目（先頭ごとの個数と K を比べる）：https://yuukougun.github.io/kyopro-atlas/basics/lexicographic-greedy/#kth
+    - `lexicographic-greedy#heavy-check` 判定が重い型（青）：https://yuukougun.github.io/kyopro-atlas/basics/lexicographic-greedy/#heavy-check
 
 ## 優先度付きキューを使う貪欲（greedy-priority-queue） {#greedy-priority-queue}
 
@@ -534,24 +552,6 @@ search:
     - `exchange-argument#concatenation` 連結の比較（a+b と b+a）：https://yuukougun.github.io/kyopro-atlas/basics/exchange-argument/#concatenation
     - `exchange-argument#then-dp` 順に並べてから DP（DP の章へ）：https://yuukougun.github.io/kyopro-atlas/basics/exchange-argument/#then-dp
     - `exchange-argument#improve-by-swap` 入れ替えで改善できるかを考える型：https://yuukougun.github.io/kyopro-atlas/basics/exchange-argument/#improve-by-swap
-
-## 辞書順最小を前から決める貪欲（lexicographic-greedy） {#lexicographic-greedy}
-
-- id：`lexicographic-greedy`　レベル：基礎　段階：reviewed　type：technique
-- URL：https://yuukougun.github.io/kyopro-atlas/basics/lexicographic-greedy/
-- 別名：辞書順最小、lexicographically smallest、辞書順 K 番目、先頭から貪欲に決める
-- 種類：貪欲、文字列
-- 前提：`greedy-basics`
-- サイン：
-    - 言い回し：辞書順最小（最大）の文字列・列を出力する（なければ −1）
-    - 言い回し：条件を満たす中で最も小さいもの
-    - 言い回し：辞書順で K 番目
-- 節：
-    - `lexicographic-greedy#why-front` 先頭から決める理由（辞書順の性質）：https://yuukougun.github.io/kyopro-atlas/basics/lexicographic-greedy/#why-front
-    - `lexicographic-greedy#feasibility` 残りで実現できるかの判定（次の出現位置の表・個数の数え上げ）：https://yuukougun.github.io/kyopro-atlas/basics/lexicographic-greedy/#feasibility
-    - `lexicographic-greedy#topological` 順序の制約は入次数 0 を小さい順に（トポロジカルソート）：https://yuukougun.github.io/kyopro-atlas/basics/lexicographic-greedy/#topological
-    - `lexicographic-greedy#kth` 辞書順 K 番目（先頭ごとの個数と K を比べる）：https://yuukougun.github.io/kyopro-atlas/basics/lexicographic-greedy/#kth
-    - `lexicographic-greedy#heavy-check` 判定が重い型（青）：https://yuukougun.github.io/kyopro-atlas/basics/lexicographic-greedy/#heavy-check
 
 ## 周期性の検出（periodicity） {#periodicity}
 

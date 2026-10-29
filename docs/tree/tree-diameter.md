@@ -31,7 +31,7 @@ sections:
   - {title: 中心と半径・直径の個数, anchor: center, level: 黄}
   - {title: 長鎖分解（最も深い子へつなぐ分解と、最も遠い葉を順に選ぶ貪欲）, anchor: long-path-decomposition, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -99,7 +99,10 @@ $$
 --8<-- "tree-diameter/double-sweep.cpp:core"
 ```
 
-探索 1 回は各辺を 2 回ずつ見るだけなので $O(N)$ で、それを 2〜3 回するので全体も $O(N)$ である。Library Checker の Tree Diameter は、直径の長さと頂点列を出力させるので、自作の確かめに使える。
+完全なプログラム：[`double-sweep.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-diameter/double-sweep.cpp)（GitHub）
+{ .kp-code-src }
+
+探索 1 回は各辺を 2 回ずつ見るだけなので $O(N)$ で、それを 2〜3 回するので全体も $O(N)$ である。Library Checker の [Tree Diameter](https://judge.yosupo.jp/problem/tree_diameter) は、直径の長さと頂点列を出力させるので、自作の確かめに使える。
 
 ## 各点の最遠点は直径の端点（離心数） {#eccentricity}
 
@@ -276,8 +279,8 @@ $D$ が奇数なら、両側の個数を $\alpha, \beta$ として $\alpha \beta
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [典型90 003. Longest Circular Road（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_c)（diff —）：木に辺を 1 本足してできる閉路の長さの最大値を求める。
-- [ABC019 D. 高橋くんと木の直径](https://atcoder.jp/contests/abc019/tasks/abc019_4)（diff 1378）：2 頂点間の距離を質問できる対話形式で、木の直径を求める。
+- [典型90 003. Longest Circular Road（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_c)（diff なし）：木に辺を 1 本足してできる閉路の長さの最大値を求める。
+- [ABC019 D. 高橋くんと木の直径](https://atcoder.jp/contests/abc019/tasks/abc019_4)（diff 1378・参考値）：2 頂点間の距離を質問できる対話形式で、木の直径を求める。
 - [ABC447 F. Centipede Graph](https://atcoder.jp/contests/abc447/tasks/abc447_f)（diff 1480）：木の部分グラフとして、背骨のパスの各頂点に葉が 2 つずつ付いた形（ムカデ）を取り出すとき、背骨の長さの最大を求める。
 - [ABC401 F. Add One Edge 3](https://atcoder.jp/contests/abc401/tasks/abc401_f)（diff 1666）：2 つの木の頂点を 1 組選んで辺で結んだときの直径を、すべての組について足し合わせる。
 - [ABC267 F. Exactly K Steps](https://atcoder.jp/contests/abc267/tasks/abc267_f)（diff 1939）：木の頂点 u から距離がちょうど k の頂点を 1 つ答える質問に Q 回答える（なければ −1）。

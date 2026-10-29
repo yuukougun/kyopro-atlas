@@ -30,7 +30,7 @@ sections:
   - {title: 1 か所だけ変更できる LIS・木の上の LIS, anchor: variants, level: 青}
   - {title: Dilworth の定理（増加列への最小分割数＝最長減少部分列の長さ）, anchor: dilworth, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -94,6 +94,9 @@ LIS の長さは最後の $L$ の要素数の 4 である。表の右の列の�
 --8<-- "lis/lis.cpp:core"
 ```
 
+完全なプログラム：[`lis.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lis/lis.cpp)（GitHub）
+{ .kp-code-src }
+
 - **減少列**：最長減少部分列は、各要素の符号を反転した列（$-a_i$）の LIS である。列を逆順にして LIS を求めても、元の列の右から左への増加列なので同じ長さになる
 - **$L$ は LIS そのものではない**：最後の $L = (1, 2, 5, 6)$ では、2 が 5 より右にあるので、元の列の部分列になっていない。列そのものが要るときは[復元](#restore)の方法を使う
 
@@ -124,6 +127,9 @@ LIS の長さは最後の $L$ の要素数の 4 である。表の右の列の�
 --8<-- "lis/weighted.cpp:core"
 ```
 
+完全なプログラム：[`weighted.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lis/weighted.cpp)（GitHub）
+{ .kp-code-src }
+
 !!! info "ACL では"
     `segtree<S, op, e> seg(n);`。`seg.prod(l, r)` で $[l, r)$ の集約値、`seg.set(p, x)` で一点の代入、`seg.get(p)` で一点の値を返す。`prod`・`set` は $O(\log N)$、`get`・`all_prod()` は $O(1)$。要件は `op` が結合法則を満たし、`e()` がその単位元であること。最大なら `op` を `max`、`e()` を値の下限にする。
 
@@ -142,6 +148,9 @@ LIS の列そのものを 1 つ出力するには、各要素について「そ�
 ```cpp
 --8<-- "lis/restore.cpp:core"
 ```
+
+完全なプログラム：[`restore.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lis/restore.cpp)（GitHub）
+{ .kp-code-src }
 
 $L$ の中身は後から上書きされるが、$\mathrm{prev}$ は置いた時点の値で固定されるので、たどった列は崩れない。列 $(3, 1, 4, 1, 5, 9, 2, 6)$ では、6 の直前は置いた時点の $L[2]$ の 5、5 の直前は 4、4 の直前は 1 で、$(1, 4, 5, 6)$ が出る。セグメント木版でも、最大を与えた $j$ を値と一緒に持てば同じように復元できる。グリッドを右か下に進んでコインを集める経路を出す問題などは、この形になる。
 
@@ -238,7 +247,7 @@ $a_i$ を含む増加部分列は、「$a_i$ で終わる左側」と「$a_i$ �
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 060. Chimera（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_bh)（diff —）：数列から部分列を選び、ある位置までは狭義増加・そこからは狭義減少になる山型の部分列の長さの最大を求める。
+- [典型90 060. Chimera（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_bh)（diff なし）：数列から部分列を選び、ある位置までは狭義増加・そこからは狭義減少になる山型の部分列の長さの最大を求める。
 
 </div>
 
@@ -253,9 +262,9 @@ $a_i$ を含む増加部分列は、「$a_i$ で終わる左側」と「$a_i$ �
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [EDPC Q. Flowers](https://atcoder.jp/contests/dp/tasks/dp_q)（diff —）：高さが相異なる花の列から、高さが左から単調増加になるように選ぶときの美しさの和の最大を求める。
+- [EDPC Q. Flowers](https://atcoder.jp/contests/dp/tasks/dp_q)（diff なし）：高さが相異なる花の列から、高さが左から単調増加になるように選ぶときの美しさの和の最大を求める。
 - [ABC354 F. Useless for LIS](https://atcoder.jp/contests/abc354/tasks/abc354_f)（diff 1639）：数列の各要素について、その要素を含む最長増加部分列が存在するかを判定する。
-- [ABC006 D. トランプ挿入ソート](https://atcoder.jp/contests/abc006/tasks/abc006_4)（diff 1696）：トランプの列で「1 枚抜いて好きな位置に差し込む」操作を繰り返して昇順に並べるときの、操作回数の最小を求める。
+- [ABC006 D. トランプ挿入ソート](https://atcoder.jp/contests/abc006/tasks/abc006_4)（diff 1696・参考値）：トランプの列で「1 枚抜いて好きな位置に差し込む」操作を繰り返して昇順に並べるときの、操作回数の最小を求める。
 - [ABC165 F. LIS on Tree](https://atcoder.jp/contests/abc165/tasks/abc165_f)（diff 1843）：木の各頂点 k について、根から k へのパス上の値の列の最長増加部分列の長さを求める。
 - [ABC457 G. Catch All Apples](https://atcoder.jp/contests/abc457/tasks/abc457_g)（diff 1928）：数直線上の決まった時刻・位置に落ちるリンゴを、速さが 1 以下のロボットですべて受け取るとき、ロボットの台数の最小を求める。
 - [ABC360 G. Suitable Edit for LIS](https://atcoder.jp/contests/abc360/tasks/abc360_g)（diff 1982）：数列の要素を 1 つだけ好きな整数に変えてよいとき、最長増加部分列の長さの最大を求める。
@@ -274,7 +283,7 @@ $a_i$ を含む増加部分列は、「$a_i$ で終わる左側」と「$a_i$ �
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [TDPC K. ターゲット](https://atcoder.jp/contests/tdpc/tasks/tdpc_target)（diff —）：数直線上に中心を持つ円の集合から、入れ子（次の円の内側にある）の鎖になるように選べる円の個数の最大を求める。
+- [TDPC K. ターゲット](https://atcoder.jp/contests/tdpc/tasks/tdpc_target)（diff なし）：数直線上に中心を持つ円の集合から、入れ子（次の円の内側にある）の鎖になるように選べる円の個数の最大を求める。
 - [ABC476 G. Increasing Popcount](https://atcoder.jp/contests/abc476/tasks/abc476_g)（diff 2477）：L 以上 R 以下の各整数に正の整数を割り当て、同じ値を割り当てた 2 つの整数では小さい方の popcount が大きい方より小さくなるようにするとき、割り当てる値の最大の最小を求める。
 
 </div>

@@ -26,7 +26,7 @@ sections:
   - {title: 木全体の数え上げと、重心木を上にたどるクエリ, anchor: centroid-tree-queries}
   - {title: 距離の頻度表は畳み込みと組む, anchor: with-convolution, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -68,6 +68,9 @@ $r$ を適当に選ぶと、パス状の木の端を選び続けて成分が 1 �
 --8<-- "centroid-decomposition/count-k.cpp:centroid"
 ```
 
+完全なプログラム：[`count-k.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/centroid-decomposition/count-k.cpp)（GitHub）
+{ .kp-code-src }
+
 部分木サイズは再帰の DFS ではなく、BFS の順を逆にたどって求めている。分解の段の数は $O(\log N)$ でも、成分の中の DFS はパス状の木で深さ $N$ になり、再帰で書くとスタックがあふれることがあるからである。
 
 ## 重心を通るペアを数え、同じ成分の中のペアを引く {#count-through}
@@ -102,6 +105,9 @@ while stack が空でない:
 --8<-- "centroid-decomposition/count-k.cpp:core"
 ```
 
+完全なプログラム：[`count-k.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/centroid-decomposition/count-k.cpp)（GitHub）
+{ .kp-code-src }
+
 頻度表の長さは成分の中の最大の深さ $+1$ で、成分の大きさを超えない。頻度表を長さ $N$ や $K$ で毎回作ると、成分は全部で $O(N)$ 個あるので $O(N^2)$ になる。上のコードは表の範囲の外の $K - d$ を 0 として扱い、長さを成分の大きさに合わせている。各段の BFS と頻度表の計算が成分の大きさに比例するので、全体は $O(N \log N)$ である。
 
 引く代わりに、子の成分を 1 つずつ足していく書き方もある。累積の頻度表 $\mathrm{acc}$ は「$c$ だけ（$\mathrm{acc}[0] = 1$）」から始める。子の成分 $C_i$ ごとに、$C_i$ の各深さ $d$ の頂点数と $\mathrm{acc}[K - d]$ の積を答えに足し、その後で $C_i$ を $\mathrm{acc}$ に加える。前の子の成分とだけ組むので、同じ成分の中の組は最初から入らない。引き算ができない量（最大値など）を扱うときは、この書き方にする。
@@ -135,6 +141,9 @@ $v$ から根へ上りながら、祖先 $c$ ごとに $\mathrm{all}_c[d - d(v, 
 --8<-- "centroid-decomposition/centroid-tree.cpp:query"
 ```
 
+完全なプログラム：[`centroid-tree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/centroid-decomposition/centroid-tree.cpp)（GitHub）
+{ .kp-code-src }
+
 $d(v, c)$ は、分解の途中で各頂点に「段 $l$ の祖先の重心までの距離」を書いておけば $O(1)$ で引ける。頂点 $v$ は自分を含む成分すべて（$O(\log N)$ 個）で BFS されるので、表の大きさは全部で $O(N \log N)$ である。$\mathrm{all}_c$ と $\mathrm{from\_par}_c$ の長さもそれぞれ $c$ の成分の大きさ $+1$ 以下なので、合計 $O(N \log N)$ に収まる。
 
 ??? note "重心木を作るコード"
@@ -143,6 +152,9 @@ $d(v, c)$ は、分解の途中で各頂点に「段 $l$ の祖先の重心ま�
     ```cpp
     --8<-- "centroid-decomposition/centroid-tree.cpp:build"
     ```
+
+    完全なプログラム：[`centroid-tree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/centroid-decomposition/centroid-tree.cpp)（GitHub）
+    { .kp-code-src }
 
 **値の更新があるクエリ**：「頂点 $v$ に印を付ける」と「$v$ から最も近い印の付いた頂点までの距離」の 2 つの操作が交互に来るとする。各重心 $c$ に、$c$ の成分の印の付いた頂点 $u$ についての $d(c, u)$ の最小値 $\mathrm{best}[c]$ を持たせる。$\mathrm{best}$ は $\infty$ で始め、答えが $\infty$ のままなら印の付いた頂点はない。印を付けるときは、$v$ の祖先 $c$ すべてで $\mathrm{best}[c]$ を $d(v, c)$ との小さい方にする。答えは、祖先 $c$ についての $d(v, c) + \mathrm{best}[c]$ の最小値である。このクエリでは同じ側の成分を引かなくてよい。同じ側の頂点を $c$ 経由で見積もった値は、本当の距離以上になる。本当の距離はその 2 頂点を分けた祖先で必ず現れるので、最小値は変わらない。どちらの操作も 1 回 $O(\log N)$ である。
 
@@ -181,7 +193,7 @@ $$
 
 **作業用の配列を毎回大きく作る**。長さ $N$ の配列を成分ごとに確保・初期化すると、成分は $N$ 個あるので $O(N^2)$ になる。表の長さは成分の大きさに合わせるか、使った位置だけを戻す。
 
-**再帰が深くなる**。分解そのものの深さは $O(\log N)$ だが、成分の中で部分木サイズや深さを求める DFS は、パス状の木で深さ $N$ になる。BFS の順を逆にたどるなど、再帰を使わない書き方にする（[木の基本](../tree/tree-basics.md)）。
+**再帰が深くなる**。分解そのものの深さは $O(\log N)$ だが、成分の中で部分木サイズや深さを求める DFS は、パス状の木で深さ $N$ になる。BFS の順を逆にたどるなど、再帰を使わない書き方にする（[BFS 順の逆で集約する](../tree/tree-traversal.md#bfs-order)）。
 
 ## 例題 {#examples}
 
@@ -208,7 +220,7 @@ $$
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [YAHOO-PROCON2018-FINAL C. 木の問題](https://atcoder.jp/contests/yahoo-procon2018-final/tasks/yahoo_procon2018_final_c)（diff —）：木の頂点 V_i から距離がちょうど K_i の頂点の個数を、多数のクエリについて答える。
+- [YAHOO-PROCON2018-FINAL C. 木の問題](https://atcoder.jp/contests/yahoo-procon2018-final/tasks/yahoo_procon2018_final_c)（diff なし）：木の頂点 V_i から距離がちょうど K_i の頂点の個数を、多数のクエリについて答える。
 - [ABC267 F. Exactly K Steps](https://atcoder.jp/contests/abc267/tasks/abc267_f)（diff 1939）：木の頂点 U_i から距離がちょうど K_i の頂点を 1 つ答える（なければ −1）クエリに、Q 回答える。
 - [ABC359 G. Sum of Tree Distance](https://atcoder.jp/contests/abc359/tasks/abc359_g)（diff 2099）：各頂点に色がついた木で、同じ色の頂点の組すべてについての距離の総和を求める。
 
@@ -223,8 +235,8 @@ $$
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [DDCC2016-QUAL D. 道路網](https://atcoder.jp/contests/ddcc2016-qual/tasks/ddcc_2016_qual_d)（diff —）：N 頂点の完全グラフで、N−1 本の辺は木をなして長さが与えられ、残りの辺の長さがすべて X のとき、全頂点対の最短距離の総和を求める。
-- [NIKKEI2019-FINAL G. Greatest Journey](https://atcoder.jp/contests/nikkei2019-final/tasks/nikkei2019_final_g)（diff —）：重み付きの木で、頂点 V_i から始まる長さ L_i のウォークについて、通った辺の重みの和の最大値を多数のクエリについて答える。
+- [DDCC2016-QUAL D. 道路網](https://atcoder.jp/contests/ddcc2016-qual/tasks/ddcc_2016_qual_d)（diff なし）：N 頂点の完全グラフで、N−1 本の辺は木をなして長さが与えられ、残りの辺の長さがすべて X のとき、全頂点対の最短距離の総和を求める。
+- [NIKKEI2019-FINAL G. Greatest Journey](https://atcoder.jp/contests/nikkei2019-final/tasks/nikkei2019_final_g)（diff なし）：重み付きの木で、頂点 V_i から始まる長さ L_i のウォークについて、通った辺の重みの和の最大値を多数のクエリについて答える。
 - [KEYENCE2019 E. Connecting Cities](https://atcoder.jp/contests/keyence2019/tasks/keyence2019_e)（diff 2623）：一列に並ぶ都市を結ぶ完全グラフで、辺の重みが番号の差と両端の値で決まるときの最小全域木の重みを求める。
 
 </div>

@@ -28,7 +28,7 @@ sections:
   - {title: 貪欲で解けないことの確かめ方（反例から DP へ）, anchor: greedy-counterexample}
   - {title: DP の型の地図（列・区間・集合・桁・木・順列・確率・ゲーム・高速化）, anchor: map}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -119,6 +119,9 @@ DP で求めるものは、最小・最大（最適化）、場合の数（数�
 --8<-- "dp-basics/frog.cpp:push"
 ```
 
+完全なプログラム：[`frog.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-basics/frog.cpp)（GitHub）
+{ .kp-code-src }
+
 状態を頂点・遷移を辺としたグラフで考える。どちらの形も、各辺を 1 回ずつ使って「$\mathrm{dp}[\text{先}] \leftarrow \min(\mathrm{dp}[\text{先}], \mathrm{dp}[\text{元}] + \text{コスト})$」と更新するだけである。使う辺の集合が同じなので、計算量も結果も同じになる。違うのは、各辺を「先の側から数えるか、元の側から数えるか」だけである。
 
 正しさの条件も共通で、辺を使うときに遷移元の値が確定していればよい。配る形では、$\mathrm{dp}[i]$ を配る時点で $i$ へのすべての遷移が済んでいる必要がある。添字の昇順に回すなら、$i$ への遷移はすべて $i$ より小さい添字から来るので、この条件は満たされる。
@@ -151,6 +154,9 @@ $$
 --8<-- "dp-basics/range-pull.cpp:core"
 ```
 
+完全なプログラム：[`range-pull.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-basics/range-pull.cpp)（GitHub）
+{ .kp-code-src }
+
 配る形で書くと、$\mathrm{dp}[i]$ の値を閉区間 $[i + L, i + R]$ のすべて（$N - 1$ を超える分は捨てる）へ足すことになる。これも[いもす法](../basics/imos.md)で区間の両端に印を付け、昇順に回しながら印を足し込めば $O(N)$ にできる。どちらでも書けるが、貰う形の方が「区間の和を 1 回で読む」形になって見通しがよい。
 
 進める量が複数の区間の和集合なら区間ごとに引き算を足し、遷移元が「$i$ と同じ余りの添字すべて」なら余りごとの累積和を持つ。こうした型は [DP と累積和](../dp/dp-prefix-sum.md)にまとめてあり、累積和で足りない形（区間の最小値など）は[DP の高速化の全体像](../dp/dp-speedup-overview.md#shape-to-tool)で遷移の式の形から道具を選ぶ。
@@ -176,7 +182,9 @@ DP の型は、主に「何を状態にするか」で分かれる。問題を�
 | 状態の形 | サインの例 | ページ |
 | --- | --- | --- |
 | 列の先頭 $i$ 個と少しの情報 | 前から順に選ぶ、容量・重さの合計 | [0-1 ナップサック](../dp/knapsack-01.md)・[部分和](../dp/subset-sum.md)・[LIS](../dp/lis.md)・[LCS](../dp/lcs.md) |
-| 区間 $[l, r)$ | 隣どうしをまとめる・取り除く | [区間 DP](../dp/interval-dp.md) |
+| グリッドのマス $(i, j)$ | 右か下にだけ進む経路の数・経路上の値の最大 | [グリッド上の DP](../dp/dp-grid.md) |
+| 先頭 $i$ 個の区切り方（最後の区間の左端で分ける） | 列を連続した区間に区切る方法の数・最小コスト | [区間分割 DP](../dp/dp-sequence-partition.md) |
+| 区間 $[l, r)$ | 隣どうしをまとめる・取り除く | [区間 DP](../dp/interval-dp.md)（区切るだけなら区間分割 DP） |
 | 使った要素の集合 | $N \le 20$ 程度、順番を決める | [bitDP](../dp/bit-dp.md) |
 | 上の桁から決めた桁と、上限との大小 | $10^{18}$ 以下の整数のうち条件を満たすものを数える | [桁 DP](../dp/digit-dp.md) |
 | 部分木 | 木の上の選び方の最適・数え上げ | [木 DP](../dp/tree-dp.md) |
@@ -226,7 +234,7 @@ DP の型は、主に「何を状態にするか」で分かれる。問題を�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC A. Frog 1](https://atcoder.jp/contests/dp/tasks/dp_a)（diff —）：1 つ先か 2 つ先の足場へ跳ぶたびに高さの差のコストがかかるとき、最後の足場までのコストの和の最小を求める。
+- [EDPC A. Frog 1](https://atcoder.jp/contests/dp/tasks/dp_a)（diff なし）：1 つ先か 2 つ先の足場へ跳ぶたびに高さの差のコストがかかるとき、最後の足場までのコストの和の最小を求める。
 
 </div>
 
@@ -242,7 +250,7 @@ DP の型は、主に「何を状態にするか」で分かれる。問題を�
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [EDPC B. Frog 2](https://atcoder.jp/contests/dp/tasks/dp_b)（diff —）：1〜K 個先の足場へ跳べるときの、最後の足場までのコストの和の最小を求める。
+- [EDPC B. Frog 2](https://atcoder.jp/contests/dp/tasks/dp_b)（diff なし）：1〜K 個先の足場へ跳べるときの、最後の足場までのコストの和の最小を求める。
 - [ABC240 C. Jumping Takahashi](https://atcoder.jp/contests/abc240/tasks/abc240_c)（diff 464）：毎回 a_i か b_i だけ進むとき、N 回後にちょうど座標 X に着けるかを判定する。
 - [ABC129 C. Typical Stairs](https://atcoder.jp/contests/abc129/tasks/abc129_c)（diff 796）：壊れた段を踏まずに 1 段か 2 段ずつ上って N 段目に着く方法の数を求める。
 - [ABC242 C. 1111gal password](https://atcoder.jp/contests/abc242/tasks/abc242_c)（diff 512）：各桁が 1〜9 で隣り合う桁の差が 1 以下の N 桁の整数の個数を 998244353 で割った余りで求める。

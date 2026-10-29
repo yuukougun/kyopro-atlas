@@ -27,7 +27,7 @@ sections:
   - {title: 規則を見つける：小さい局面の表と周期, anchor: patterns}
   - {title: 使えない場合（1 手で複数を動かす・非不偏）, anchor: limitations}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -122,6 +122,9 @@ Nim と違い、2 の行き先は「石を何個取るか」の式では決ま�
 --8<-- "grundy-number/subtraction.cpp:move"
 ```
 
+完全なプログラム：[`subtraction.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/grundy-number/subtraction.cpp)（GitHub）
+{ .kp-code-src }
+
 [インタラクティブ](../comb/game-basics.md#interactive)でジャッジと対戦する問題では、毎手この探索で XOR を 0 に戻し続ければ勝てる。
 
 ## Grundy 数を DP で求める（区間・2 種類の石） {#dp}
@@ -133,6 +136,9 @@ mex を求めるには、行き先の値に印を付けて、印のない最小�
 ```cpp
 --8<-- "grundy-number/subtraction.cpp:core"
 ```
+
+完全なプログラム：[`subtraction.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/grundy-number/subtraction.cpp)（GitHub）
+{ .kp-code-src }
 
 取れる個数が $k$ 種類なら Grundy 数は $k$ 以下に収まる。Nim のように「何個でも取れる」ゲームでは値が山の大きさまで育つので、表の値の上限は手の数から見積もる。
 
@@ -151,6 +157,9 @@ $$
 ```cpp
 --8<-- "grundy-number/kayles.cpp:core"
 ```
+
+完全なプログラム：[`kayles.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/grundy-number/kayles.cpp)（GitHub）
+{ .kp-code-src }
 
 長さ $x$ の局面の行き先はおよそ $2x$ 個なので、全体で $O(X^2)$ である（$X$ は長さの上限）。XOR した値は手の数を超えることがあるが、mex は手の数以下なので、印の配列からはみ出す値は無視してよい。
 
@@ -172,6 +181,9 @@ $$
 --8<-- "grundy-number/range-formula.cpp:core"
 ```
 
+完全なプログラム：[`range-formula.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/grundy-number/range-formula.cpp)（GitHub）
+{ .kp-code-src }
+
 式が分かれば、山 1 つの値は $O(1)$ で求まる。山の大きさによらず全体が $O(N)$ になる。
 
 **周期が出る理由**：取れる個数の集合が有限で最大が $m$ なら、$g(x)$ は直前の $m$ 個の値 $g(x - m), \dots, g(x - 1)$ だけで決まる。値はどれも手の数以下なので、「直前の $m$ 個の並び」は有限通りしかなく、いつか同じ並びが現れて、その先はくり返す。これは[周期性](../basics/periodicity.md#rho)の「尾と周期」と同じ形で、周期の前に尾（前周期）があってよい。
@@ -181,6 +193,9 @@ $$
 ```cpp
 --8<-- "grundy-number/kayles.cpp:period"
 ```
+
+完全なプログラム：[`kayles.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/grundy-number/kayles.cpp)（GitHub）
+{ .kp-code-src }
 
 周期のほかに、次のような形の規則もある。
 
@@ -214,7 +229,7 @@ Grundy 数の XOR で判定できるのは、次をすべて満たすときだ�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [鉄則本 A34. Game 3](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_ah)（diff —）：N 個の山から交互に 1 つを選び、X 個か Y 個の石を取り、取れなくなった方が負けのとき、勝つのはどちらかを求める。
+- [鉄則本 A34. Game 3](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_ah)（diff なし）：N 個の山から交互に 1 つを選び、X 個か Y 個の石を取り、取れなくなった方が負けのとき、勝つのはどちらかを求める。
 
 </div>
 
@@ -260,7 +275,7 @@ Grundy 数の XOR で判定できるのは、次をすべて満たすときだ�
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [典型90 031. VS AtCoder（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_ae)（diff —）：白石と青石の 2 種類が入った山がいくつかあり、決まった取り方で交互に取るゲームで、勝つのはどちらかを求める。
+- [典型90 031. VS AtCoder（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_ae)（diff なし）：白石と青石の 2 種類が入った山がいくつかあり、決まった取り方で交互に取るゲームで、勝つのはどちらかを求める。
 - [ABC206 F. Interval Game 2](https://atcoder.jp/contests/abc206/tasks/abc206_f)（diff 2221）：区間を 1 つ選ぶと重なる区間が使えなくなるゲームで、勝つのはどちらかを求める。
 
 </div>

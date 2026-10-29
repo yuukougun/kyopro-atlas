@@ -66,6 +66,9 @@ Trie の節点は 0 から番号を付けて配列で持ち、節点 0 を根（
 --8<-- "trie/basic.cpp:core"
 ```
 
+完全なプログラム：[`basic.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/trie/basic.cpp)（GitHub）
+{ .kp-code-src }
+
 子の表の持ち方は、文字の種類 $\sigma$ と節点数で選ぶ。
 
 | 持ち方 | 1 文字の遷移 | 領域 | 向いている場面 |
@@ -120,6 +123,9 @@ $$
 --8<-- "trie/lcp-sum.cpp:core"
 ```
 
+完全なプログラム：[`lcp-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/trie/lcp-sum.cpp)（GitHub）
+{ .kp-code-src }
+
 同じことは、文字列を 1 つずつ入れながら求めることもできる。$S_j$ を入れるとき、根以外の経路上の各節点の通過数（$S_j$ を足す前の値）を足すと、$\sum_{i < j} \mathrm{LCP}(S_i, S_j)$ になる。節点 $v$ の通過数は、それまでに $v$ を通った $S_i$ の数だからである。これを $j = 1, \dots, N$ で足しても同じ答えになる。
 
 和は $\binom{N}{2} \times \max \lvert S_i \rvert$ 程度まで大きくなりうるので、`long long` で持つ。通過数を `int` で持つと、$\mathrm{cnt}[v] \times (\mathrm{cnt}[v] - 1)$ の積が、通過数が約 4.6 万を超えるとあふれる。
@@ -144,11 +150,17 @@ Trie を作らずに、文字列を辞書順にソートして済ませられる
 --8<-- "trie/max-lcp.cpp:sort"
 ```
 
+完全なプログラム：[`max-lcp.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/trie/max-lcp.cpp)（GitHub）
+{ .kp-code-src }
+
 同じ値を Trie で求めるなら、各文字列の経路上で通過数が 2 以上の最も深い節点の深さを答える。通過数が 2 以上なら、自分のほかにもその接頭辞を持つ文字列がある。
 
 ```cpp
 --8<-- "trie/max-lcp.cpp:trie"
 ```
+
+完全なプログラム：[`max-lcp.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/trie/max-lcp.cpp)（GitHub）
+{ .kp-code-src }
 
 ソートで済ませるときの注意は 2 つある。
 

@@ -31,7 +31,7 @@ sections:
   - {title: bit ごと・文字ごとに分けて畳み込む（OR の和など）, anchor: split-by-bit, level: 黄}
   - {title: ACL の convolution の要件（法の形と長さ）, anchor: acl}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -71,7 +71,7 @@ $$
 
 $a$ を多項式 $1 + 2x + 3x^2$、$b$ を $4 + 5x + 6x^2$ とみると、$a_i x^i \cdot b_j x^j = a_i b_j x^{i+j}$ なので、積の $x^k$ の係数が $c_k$ になる。畳み込みと多項式の積は同じものである。
 
-素朴に計算するなら、$b$ を反転して $a$ の下に置き、1 つずつずらしながら重なった部分の積を足す。ずらし幅が $k$ のとき、重なるのは $i + j = k$ の組だけである。次の図は、この手順を 1 段ずつ進める。
+素朴に計算するなら、$b$ を反転して $a$ の下に置き、1 つずつずらしながら重なった部分の積を足す。ずらし幅が $k$ のとき $b_j$ は $a_{k-j}$ の真下に来るので、重なるのは $i + j = k$ の組だけである。次の図は、この手順を 1 段ずつ進める。
 
 <div class="kp-viz" data-viz="convolution-naive" data-config='{"a": [1, 2, 3], "b": [4, 5, 6]}'></div>
 
@@ -84,6 +84,9 @@ $a$ を多項式 $1 + 2x + 3x^2$、$b$ を $4 + 5x + 6x^2$ とみると、$a_i x
 ```cpp
 --8<-- "convolution-ntt/sum-pairs.cpp:core"
 ```
+
+完全なプログラム：[`sum-pairs.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/convolution-ntt/sum-pairs.cpp)（GitHub）
+{ .kp-code-src }
 
 **応用の型**：
 
@@ -107,6 +110,9 @@ $$
 ```cpp
 --8<-- "convolution-ntt/sum-pairs.cpp:diff"
 ```
+
+完全なプログラム：[`sum-pairs.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/convolution-ntt/sum-pairs.cpp)（GitHub）
+{ .kp-code-src }
 
 この形は「パターン $T$ を $S$ の位置 $p$ に重ねたときの $\sum_j S_{p+j} T_j$」を、すべての $p$ について求めるときに使う。位置 $p$ で比べる 2 文字の添字 $p + j$ と $M - 1 - j$（反転した $T$ での添字）は、足すと常に $p + M - 1$ になる。
 
@@ -161,6 +167,9 @@ $$
 --8<-- "convolution-ntt/mod-any.cpp:core"
 ```
 
+完全なプログラム：[`mod-any.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/convolution-ntt/mod-any.cpp)（GitHub）
+{ .kp-code-src }
+
 浮動小数点数の FFT（`complex<double>`）でも畳み込めるが、値が大きいと丸めの誤差で整数に戻らない。ACL があるなら NTT の方法を使う。
 
 ## 文字列の照合：ずらしたときの一致数・ハミング距離・ワイルドカード {#string-matching}
@@ -172,6 +181,9 @@ $$
 ```cpp
 --8<-- "convolution-ntt/hamming.cpp:core"
 ```
+
+完全なプログラム：[`hamming.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/convolution-ntt/hamming.cpp)（GitHub）
+{ .kp-code-src }
 
 0 と 1 だけの文字列なら、1 を $+1$、0 を $-1$ に置き換えて 1 回で済ませる方法もある。積は一致なら $+1$、不一致なら $-1$ なので、畳み込みの値 $R$ は「一致数 − 不一致数」になり、不一致数は $(M - R) / 2$ である。$R$ は負になりうるので、`convolution_ll` を使うか、余りを $-M$ 以上 $M$ 以下の値に直してから使う。
 
@@ -186,6 +198,9 @@ $$
 ```cpp
 --8<-- "convolution-ntt/wildcard.cpp:core"
 ```
+
+完全なプログラム：[`wildcard.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/convolution-ntt/wildcard.cpp)（GitHub）
+{ .kp-code-src }
 
 各項は $26^4 < 5 \times 10^5$ 以下なので、$D_p$ は長さ $10^6$ でも $5 \times 10^{11}$ 程度で、`convolution_ll` で正確に求まる。`convolution` の余りで判定すると、0 でない $D_p$ がたまたま $998244353$ の倍数になり、一致と誤判定することがある。余りで済ませたいなら、文字に $1$ から $998244352$ までの乱数を割り当てて誤判定の確率を下げる。
 
@@ -262,7 +277,7 @@ NTT は長さ $2^c$ の変換に「$2^c$ 乗して初めて 1 になる数」を
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [PRACTICE2 F. Convolution](https://atcoder.jp/contests/practice2/tasks/practice2_f)（diff —）：2 つの数列 a, b について、c_k = Σ_{i+j=k} a_i b_j を 998244353 で割った余りですべての k について求める。
+- [PRACTICE2 F. Convolution](https://atcoder.jp/contests/practice2/tasks/practice2_f)（diff なし）：2 つの数列 a, b について、c_k = Σ_{i+j=k} a_i b_j を 998244353 で割った余りですべての k について求める。
 
 </div>
 
@@ -290,6 +305,9 @@ $B - A = C - B$ は $A + C = 2B$ と同じである。真ん中の $B$ を固定
     --8<-- "convolution-ntt/triplets.cpp:core"
     ```
 
+    完全なプログラム：[`triplets.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/convolution-ntt/triplets.cpp)（GitHub）
+    { .kp-code-src }
+
 ## 練習問題 {#practice}
 
 <div class="kp-problems" data-role="practice" markdown>
@@ -297,7 +315,7 @@ $B - A = C - B$ は $A + C = 2B$ と同じである。真ん中の $B$ を固定
 - [ABC143 D. Triangles](https://atcoder.jp/contests/abc143/tasks/abc143_d)（diff 686）：N 本の棒から 3 本を選んで三角形を作れる組の数を求める。
 - [ABC291 G. OR Sum](https://atcoder.jp/contests/abc291/tasks/abc291_g)（diff 2176）：長さ N の数列 A, B（各値は 32 未満）について、A を巡回シフトしたときの Σ (A_i OR B_i) の最大値を求める。
 - [ABC196 F. Substring 2](https://atcoder.jp/contests/abc196/tasks/abc196_f)（diff 2274）：0/1 の文字列 T を S の連続する部分と比べるとき、一致させるために書き換える文字数の最小値を求める（|S|, |T| ≤ 10^6）。
-- [典型90 065. RGB Balls 2（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_bm)（diff —）：赤・緑・青のボールから個数の条件を満たすように選ぶ方法の数を、998244353 で割った余りで求める。
+- [典型90 065. RGB Balls 2（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_bm)（diff なし）：赤・緑・青のボールから個数の条件を満たすように選ぶ方法の数を、998244353 で割った余りで求める。
 
 </div>
 

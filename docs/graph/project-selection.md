@@ -30,7 +30,7 @@ sections:
   - {title: 二部グラフで片側の意味を反転する, anchor: flip-side}
   - {title: 多値変数を頂点の列で表す, anchor: multi-valued, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -48,7 +48,7 @@ updated: 2026-10-22
 別名：Project Selection・最大重み閉包・劣モジュラ・project selection problem
 <!-- textlint-enable -->
 
-燃やす埋めるは、$N$ 個の 0/1 変数 $x_1, \dots, x_N$ について「選ぶとかかる費用」「選ばないと失う利得」「A を選んで B を選ばないと払う罰」のような項の和を、[最小カット](../graph/min-cut.md)で最小化する方法である。$2^N$ 通りの選び方を調べる代わりに、項を 1 つずつ辺に直したグラフで最大流を 1 回求める。難しいのは最大流の部分ではなく、問題を「どの項が辺にできる形か」に書き直すところである。
+燃やす埋めるは、$N$ 個の 0/1 変数 $x_1, \dots, x_N$ について「選ぶとかかる費用」「選ばないと失う利得」「A を選んで B を選ばないと払う罰」のような項の和を、[最小カット](../graph/min-cut.md)で最小化する方法である。$2^N$ 通りの選び方を調べる代わりに、項を 1 つずつ辺に直したグラフで最大流を 1 回求める。難しいのは最大流の部分ではなく、問題を「どの項が辺にできる形か」に書き直すところである。式では変数を $x_1, \dots, x_N$ と 1 から番号付けし、コード片では 0-indexed で持つ（$x_i$ はコードの `x[i - 1]`、頂点 $i - 1$ に当たる）。
 
 ## 0/1 の選択を s 側と t 側に対応させる {#idea}
 
@@ -109,6 +109,9 @@ updated: 2026-10-22
 --8<-- "project-selection/builder.cpp:core"
 ```
 
+完全なプログラム：[`builder.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/project-selection/builder.cpp)（GitHub）
+{ .kp-code-src }
+
 このコード片の `main`（取り込んでいない部分）は、変数 7 個以下・項 8 個以下のランダムな入力を作り、$2^N$ 通りの全探索と最小値・復元した割り当てが一致することを確かめている。
 
 ## 利得はコストに読み替えて定数を足す {#gains}
@@ -143,6 +146,9 @@ $K$ 個の変数がすべて 1 のときの利得は、補助の頂点 $y$ を 1
 ```cpp
 --8<-- "project-selection/closure.cpp:core"
 ```
+
+完全なプログラム：[`closure.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/project-selection/closure.cpp)（GitHub）
+{ .kp-code-src }
 
 依存関係は推移的につながる。「$a$ なら $b$」「$b$ なら $c$」があれば、$a$ を選ぶと $c$ も選ぶことになるが、辺は隣どうしの 2 本だけでよい。∞ の辺をたどって届く頂点は、どれも s 側でなければならないからである。条件が閉路をなす（互いに必要とする）品物は、まとめて選ぶか選ばないかになる。
 
@@ -246,7 +252,7 @@ $$
 
 - **s 側と t 側の意味の取り違え**：「s 側＝選ぶ」と「s 側＝選ばない」のどちらで約束しても解けるが、辺の向きがすべて逆になる。解説によって約束が違うので、読むときは最初に確かめる。自分では 1 つに決めて、組み立て役の関数に閉じ込める
 - **負の容量**：`add_edge` の容量は 0 以上でなければならない。「$x = 1$ なら $-3$」は、定数 $-3$ と「$x = 0$ なら 3」に直す。罰（2 変数の項）が負になるなら、その項は表せない向きなので、[反転](#flip-side)を考える
-- **∞ の大きさ**：∞ は、有限の容量の合計より大きくする。ただし ∞ どうしや定数を足して `long long` を超えないよう、$2^{50}$ 程度にする（$10^{18}$ を 10 本足すと溢れる）。値の固定などで条件を満たす割り当てがない入力では、最小カットが ∞ 以上になるので、それで判定する
+- **∞ の大きさ**：∞ は、有限の容量の合計より大きくする。ただし ∞ どうしや定数を足して `long long` を超えないよう、$2^{50}$ 程度にする（$10^{18}$ を 10 本足すと溢れ、距離の INF に使う $2^{60}$ も 8 本で溢れる。[INF の決め方](../cpp/cpp-types-literals.md#inf)）。値の固定などで条件を満たす割り当てがない入力では、最小カットが ∞ 以上になるので、それで判定する
 - **答えの定数を忘れる**：負の費用・利得を辺に直すたびに定数が出る。組み立て役の中で定数も一緒に足していくと忘れない
 - **min_cut を flow の前に呼ぶ**：`min_cut(s)` は `flow(s, t)` を 1 回呼んだ後の残余グラフを見る。最適な割り当てが複数あるときは、s 側が最も小さいものが返る
 - **反転を戻し忘れる**：片側を反転したら、復元した値の 0 と 1 をその側だけ戻す
@@ -257,7 +263,7 @@ $$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 040. Get More Money（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_an)（diff —）：家に入ると得られる利得とかかる費用があり、ある家に入るには別の家にも入る必要があるとき、得られる値の最大値を求める。
+- [典型90 040. Get More Money（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_an)（diff なし）：家に入ると得られる利得とかかる費用があり、ある家に入るには別の家にも入る必要があるとき、得られる値の最大値を求める。
 
 </div>
 
@@ -300,7 +306,7 @@ $$
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [鉄則本 B68. ALGO Express](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_eo)（diff —）：各駅を急行の停車駅にするかを選ぶ。停車駅にすると利益（負もある）が得られ、「駅 A を停車駅にするなら駅 B も停車駅にする」という条件がいくつかあるとき、利益の合計の最大値を求める。
+- [鉄則本 B68. ALGO Express](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_eo)（diff なし）：各駅を急行の停車駅にするかを選ぶ。停車駅にすると利益（負もある）が得られ、「駅 A を停車駅にするなら駅 B も停車駅にする」という条件がいくつかあるとき、利益の合計の最大値を求める。
 - [ABC259 G. Grid Card Game](https://atcoder.jp/contests/abc259/tasks/abc259_g)（diff 2428）：整数の書かれた盤面でいくつかの行と列を選び、選んだ行・列に含まれるマスの和（重なりは 1 回）を最大化する。ただし負のマスを行と列の両方から選んではいけない。
 - [ABC326 G. Unlock Achievement](https://atcoder.jp/contests/abc326/tasks/abc326_g)（diff 2470）：スキルのレベルを上げる費用と、各アチーブメントの達成条件（スキルのレベル）と報酬が与えられ、報酬から費用を引いた値の最大値を求める。
 - [ABC193 F. Zebraness](https://atcoder.jp/contests/abc193/tasks/abc193_f)（diff 2475）：一部が白・黒に決まった盤面の残りのマスを塗り、隣り合う異なる色のマスの組の数を最大化する。

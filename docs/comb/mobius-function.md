@@ -27,7 +27,7 @@ sections:
   - {title: 商の列挙で同じ値の範囲を束ねる, anchor: quotient, level: 発展}
   - {title: 約数包除との書き換え, anchor: vs-divisor-ie}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -132,6 +132,9 @@ $d$ を固定すると、$i$ と $j$ の和は独立になり、それぞれ $d$
 --8<-- "mobius-function/coprime-pairs.cpp:coprime"
 ```
 
+完全なプログラム：[`coprime-pairs.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mobius-function/coprime-pairs.cpp)（GitHub）
+{ .kp-code-src }
+
 **gcd の関数の和**。ここからは、長さ $N$ の列 $A$ から 2 つ選ぶ組を考える。$[\gcd = 1]$ は「$f(1) = 1$、ほかは $f(n) = 0$」という関数の値 $f(\gcd)$ である。一般の $f$ でも、[メビウス反転](#inversion)で $w(n) = \sum_{d \mid n} \mu(n/d) f(d)$ を作れば $f(n) = \sum_{d \mid n} w(d)$ なので、同じ置き換えができる。
 
 $$
@@ -160,9 +163,12 @@ $\mu$ の表は、[エラトステネスの篩](../math/sieve-eratosthenes.md)�
 --8<-- "mobius-function/coprime-pairs.cpp:sieve"
 ```
 
+完全なプログラム：[`coprime-pairs.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mobius-function/coprime-pairs.cpp)（GitHub）
+{ .kp-code-src }
+
 計算量は篩と同じ $O(V \log \log V)$ である（$V$ は表を作る値の上限）。$p^2$ の倍数を 0 にする回数は $\sum_p V/p^2$ で、$V$ の定数倍しかない。$V = 10^7$ でも `int` の表で約 40 MB に収まる（[篩のメモリの見積もり](../math/sieve-eratosthenes.md#memory)）。
 
-- **線形篩で作る**：最小素因数の篩と同時に $\mu$ を埋める方法は、[線形篩の節](../math/spf-sieve.md#linear-sieve)にある。$O(M)$ だが、実際の速さはエラトステネスの変形とほぼ変わらない。
+- **線形篩で作る**：最小素因数の篩と同時に $\mu$ を埋める方法は、[線形篩の節](../math/spf-sieve.md#linear-sieve)にある。$O(V)$ だが、実際の速さはエラトステネスの変形とほぼ変わらない。
 - **1 つの数だけなら**：$\mu(n)$ を 1 つだけ求めるなら、$O(\sqrt{n})$ の試し割りで素因数分解し、同じ素数が 2 回出たら 0、そうでなければ素因数の個数の偶奇で決める。
 - **0 でない項だけを回す**：$\mu(d) = 0$ の項は和に効かない。$n$ の約数を回すときは、素因数の部分集合（$n \le 10^6$ なら素因数は 7 個以下なので 128 通り以下）だけを列挙すれば足りる。
 
@@ -175,6 +181,9 @@ $\mu$ の累積和 $S(k) = \mu(1) + \dots + \mu(k)$（$S(0) = 0$）を前計算�
 ```cpp
 --8<-- "mobius-function/coprime-pairs.cpp:quotient"
 ```
+
+完全なプログラム：[`coprime-pairs.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mobius-function/coprime-pairs.cpp)（GitHub）
+{ .kp-code-src }
 
 $\lfloor N/d \rfloor$ は $O(\sqrt{N})$ 種類の値しかとらず、商の組が変わる境目は 2 つの境目を合わせたものなので、区間は $O(\sqrt{N} + \sqrt{M})$ 個である。前計算 $O(\min(N, M))$ の後、1 回の問い合わせは $O(\sqrt{N} + \sqrt{M})$ で済む。「互いに素な組の数を、$N$ と $M$ を変えて $10^5$ 回答える」のように、問い合わせが多いときに効く。
 
@@ -227,6 +236,9 @@ $N \le 2 \times 10^5$、$A_i \le 10^6$ で、答えは mod 998244353 で求め�
     --8<-- "mobius-function/lcm-sum.cpp:core"
     ```
 
+    完全なプログラム：[`lcm-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/mobius-function/lcm-sum.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+    { .kp-code-src }
+
 ## 練習問題 {#practice}
 
 <div class="kp-problems" data-role="practice" markdown>
@@ -246,7 +258,7 @@ $N \le 2 \times 10^5$、$A_i \le 10^6$ で、答えは mod 998244353 で求め�
 
 - [ABC248 G. GCD cost on the tree](https://atcoder.jp/contests/abc248/tasks/abc248_g)（diff 2514）：各頂点に正の整数が書かれた木で、すべての 2 頂点の組についての「パス上の値の gcd × パスの頂点数」の総和を求める。
 - [ABC230 G. GCD Permutation](https://atcoder.jp/contests/abc230/tasks/abc230_g)（diff 2516）：1〜N の順列 P について、gcd(i, j) ≠ 1 かつ gcd(P_i, P_j) ≠ 1 となる組 (i, j) の数を求める。
-- [ABC020 D. LCM Rush](https://atcoder.jp/contests/abc020/tasks/abc020_d)（diff 2695）：1 ≤ i ≤ N について lcm(i, K) の総和を mod 10^9+7 で求める（N, K ≤ 10^9）。
+- [ABC020 D. LCM Rush](https://atcoder.jp/contests/abc020/tasks/abc020_d)（diff 2695・参考値）：1 ≤ i ≤ N について lcm(i, K) の総和を mod 10^9+7 で求める（N, K ≤ 10^9）。
 
 </div>
 

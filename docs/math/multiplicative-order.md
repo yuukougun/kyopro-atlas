@@ -34,7 +34,7 @@ sections:
   - {title: 一次漸化式を不動点で等比数列に直して離散対数に帰着する, anchor: affine-recurrence}
   - {title: 平方剰余と mod の K 乗根（オイラーの規準・Tonelli-Shanks・Cipolla）, anchor: mod-root, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -86,6 +86,9 @@ $\gcd(a, m) \ne 1$ なら、どの $k \ge 1$ でも $a^k \equiv 1$ にはなら�
 --8<-- "multiplicative-order/order.cpp:core"
 ```
 
+完全なプログラム：[`order.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/multiplicative-order/order.cpp)（GitHub）
+{ .kp-code-src }
+
 この方法が正しいのは、「$d$ は位数の倍数」という性質を保つからである。$a^{d/q} \equiv 1$ なら $d/q$ も位数の倍数なので割ってよい。$a^{d/q} \not\equiv 1$ なら、$d$ と位数で $q$ の指数が一致している（一致していなければ $d/q$ も位数の倍数のはずである）。ほかの素因数で割っても $q$ の指数は変わらないので、すべての素因数を処理し終えた $d$ は位数と各素因数の指数が一致し、位数に等しい。累乗の回数は $\varphi(m)$ の素因数の個数（重複を含めて $O(\log m)$）ほどで、全体で $O(\log^2 m)$ になる。
 
 どちらの方法も、先に $\varphi(m)$ とその素因数分解が要る。$m = \prod p_i^{e_i}$ と[素因数分解](../math/prime-factorization.md)すると $\varphi(m) = \prod p_i^{e_i - 1}(p_i - 1)$ で、この $\varphi(m)$ をもう一度試し割りで分解する（$p_i - 1$ をそれぞれ分解して合わせてもよい）。$m \le 10^{12}$ なら試し割りの $O(\sqrt{m})$ が全体の大半を占める。
@@ -103,6 +106,9 @@ $\gcd(a, m) \ne 1$ なら、どの $k \ge 1$ でも $a^k \equiv 1$ にはなら�
 ```cpp
 --8<-- "multiplicative-order/order.cpp:root"
 ```
+
+完全なプログラム：[`order.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/multiplicative-order/order.cpp)（GitHub）
+{ .kp-code-src }
 
 最小の原始根は、$998244353$ と $469762049$ で 3、$10^9 + 7$ で 5、$200003$ で 2 である（コード片で確かめた値）。値を覚えて決め打ちするより、この関数で求めれば法を取り違えない。ACL も `convolution` の中で同じ方法で原始根を求めている（公開の関数ではない）。
 
@@ -186,6 +192,9 @@ $b$ が $g$ で割り切れなければ、左辺は $g$ の倍数なので解は
 ```cpp
 --8<-- "multiplicative-order/bsgs.cpp:core"
 ```
+
+完全なプログラム：[`bsgs.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/multiplicative-order/bsgs.cpp)（GitHub）
+{ .kp-code-src }
 
 最小の解を取りこぼさないために、次の 3 点に気をつける。
 
@@ -303,7 +312,7 @@ $P \le 10^9$ の素数で、テストケースは 100 個まである。列の�
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC212 G. Power Pair](https://atcoder.jp/contests/abc212/tasks/abc212_g)（diff 2150）：素数 P について、0 ≤ x, y ≤ P − 1 の組 (x, y) のうち x^n ≡ y (mod P) を満たす正の整数 n があるものの個数を求める（P ≤ 10^12）。
-- [ARC042 D. あまり](https://atcoder.jp/contests/arc042/tasks/arc042_d)（diff 2247）：素数 P について、A ≤ i ≤ B の範囲での X^i mod P の最小値を求める。
+- [ARC042 D. あまり](https://atcoder.jp/contests/arc042/tasks/arc042_d)（diff 2247・参考値）：素数 P について、A ≤ i ≤ B の範囲での X^i mod P の最小値を求める。
 
 </div>
 

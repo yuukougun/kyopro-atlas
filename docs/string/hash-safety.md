@@ -29,7 +29,7 @@ sections:
   - {title: 二重ハッシュとの比較, anchor: double-hashing}
   - {title: unordered_map への攻撃と、乱数を混ぜたカスタムハッシュ, anchor: unordered-map}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -92,6 +92,9 @@ Thue-Morse 列を、$t_0 = \texttt{a}$、$t_{k+1} = t_k + \overline{t_k}$ で作
 --8<-- "hash-safety/thue-morse.cpp:core"
 ```
 
+完全なプログラム：[`thue-morse.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/hash-safety/thue-morse.cpp)（GitHub）
+{ .kp-code-src }
+
 2 つのハッシュの差 $D_k = H(t_k) - H(\overline{t_k})$ を追う。連結のハッシュは $H(XY) = H(X) \cdot B^{\lvert Y \rvert} + H(Y)$ なので、次が成り立つ。
 
 $$
@@ -105,7 +108,7 @@ $D_0 = \pm 1$ なので、$D_k = \pm \prod_{i=0}^{k-1} \left(B^{2^i} - 1\right)$
 
 指数を足すと $1 + \sum_{i=1}^{k-1} (i + 2)$ で、$k = 10$ のときちょうど $1 + 45 + 18 = 64$ になる。だから長さ $2^{10} = 1024$ の $t_{10}$ と $\overline{t_{10}}$ は、奇数のどの基数でも mod $2^{64}$ で衝突する。基数が偶数なら $B^{64} \equiv 0$ なので、末尾の 64 文字が同じ文字列はすべて衝突する（もっと短い組でも足りる）。
 
-手元で確かめると、乱択した奇数の基数 1000 個のうち、長さ 512 では 227 個、長さ 1024 では 1000 個すべてで衝突した。同じ組を mod $2^{61} - 1$・乱択した基数で比べると、衝突は 0 個だった（`snippets/hash-safety/thue-morse.cpp`）。
+手元で確かめると、乱択した奇数の基数 1000 個のうち、長さ 512 では 227 個、長さ 1024 では 1000 個すべてで衝突した。同じ組を mod $2^{61} - 1$・乱択した基数で比べると、衝突は 0 個だった（[`snippets/hash-safety/thue-morse.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/hash-safety/thue-morse.cpp)）。
 
 !!! warning "mod 2^64 を混ぜた二重ハッシュも同じ"
     mod $2^{64}$ と mod $10^9 + 7$ の 2 つを組にしても、Thue-Morse 列の組では $2^{64}$ の側が必ず一致する。残るのは mod $10^9 + 7$ の 1 つだけで、安全さは 1 つのときと変わらない。
@@ -140,6 +143,9 @@ $D_0 = \pm 1$ なので、$D_k = \pm \prod_{i=0}^{k-1} \left(B^{2^i} - 1\right)$
 ```cpp
 --8<-- "hash-safety/random-prime.cpp:core"
 ```
+
+完全なプログラム：[`random-prime.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/hash-safety/random-prime.cpp)（GitHub）
+{ .kp-code-src }
 
 素数は、範囲の整数を乱択して素数判定（$2^{64}$ 未満で決定的な [Miller-Rabin](../math/miller-rabin.md#deterministic-bases)）をくり返して見つける。素数定理から約 42 個に 1 個が素数なので、判定の回数の期待値は約 42 回である。素数を 2 つ独立に選び、両方の余りの組で比べれば、1 組の誤りの確率は約 $(4 \times 10^{-15})^2$ に下がる。
 
@@ -181,6 +187,9 @@ GCC の標準ライブラリ（libstdc++）では、整数の既定のハッシ�
 --8<-- "hash-safety/unordered-attack.cpp:attack"
 ```
 
+完全なプログラム：[`unordered-attack.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/hash-safety/unordered-attack.cpp)（GitHub）
+{ .kp-code-src }
+
 手元の g++-15（`-O2`）で確かめると、$10^5$ 個入れたときのバケットの数は 172933 だった。その倍数を $10^5$ 個入れると、いちばん混んだバケットに $10^5$ 個すべてが入り、約 3.2 秒かかった。$2 \times 10^5$ 個（バケットの数 351061 の倍数）では約 17.5 秒かかった。連番を入れたときはどちらも 10 ミリ秒以下である。
 
 対策は 2 つある。
@@ -191,6 +200,9 @@ GCC の標準ライブラリ（libstdc++）では、整数の既定のハッシ�
 ```cpp
 --8<-- "hash-safety/unordered-attack.cpp:core"
 ```
+
+完全なプログラム：[`unordered-attack.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/hash-safety/unordered-attack.cpp)（GitHub）
+{ .kp-code-src }
 
 `unordered_map<long long, int, SafeHash>` のように 3 つ目の型引数に渡す。pair をキーにする書き方は [unordered_map の節](../cpp/cpp-container-idioms.md#unordered-map)にある。AtCoder の固定のテストに、こうした攻撃の入力がどれだけ入っているかは問題によるが、入っていれば既定のハッシュでは避けようがない。
 
@@ -236,13 +248,16 @@ GCC の標準ライブラリ（libstdc++）では、整数の既定のハッシ�
     --8<-- "hash-safety/random-prime.cpp:usage"
     ```
 
+    完全なプログラム：[`random-prime.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/hash-safety/random-prime.cpp)（GitHub）
+    { .kp-code-src }
+
     固定の法を避けるだけなら、珍しい素数を選んでも通ることがある。参加記には、mod $2^{61} - 1$ と mod $2^{64}$ で WA になり、約 $1.4 \times 10^9$ の素数 2 つで通った記録がある。ただし、それは対策に当たらなかっただけで、確率の保証はない。
 
 ### 典型90 047. Monochromatic Diagonal（★7） {#typical90_au}
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 047. Monochromatic Diagonal（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_au)（diff —）：R・G・B からなる 2 つの列で各マスの色が決まるマス目について、すべてのマスが同じ色である斜めの線の数を求める。
+- [典型90 047. Monochromatic Diagonal（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_au)（diff なし）：R・G・B からなる 2 つの列で各マスの色が決まるマス目について、すべてのマスが同じ色である斜めの線の数を求める。
 
 </div>
 

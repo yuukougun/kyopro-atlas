@@ -58,6 +58,9 @@ atcoder: true
 --8<-- "cpp-types-literals/int-types.cpp:core"
 ```
 
+完全なプログラム：[`int-types.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-types-literals/int-types.cpp)（GitHub）
+{ .kp-code-src }
+
 | 型 | 大きさ | 範囲 | 使う場面 |
 | --- | --- | --- | --- |
 | `int` | 32 bit | 約 $\pm 2.1 \times 10^9$ | 添字・個数・$10^9$ 以下の値 |
@@ -75,6 +78,9 @@ atcoder: true
 --8<-- "cpp-types-literals/int64-max-ng.cpp:core"
 ```
 
+完全なプログラム：[`int64-max-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-types-literals/int64-max-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 - **版**：`int64_t` は C++11 から。g++-13・g++-15 のどちらでも上の `static_assert` が通る。`max(a, b)` は `no matching function for call to 'max(int64_t&, long long int&)'` で止まった
 - **落とし穴**：`int64_t` と `long long` を混ぜない。教材のコードは `long long` にそろえる。ライブラリが `int64_t` を使うなら、`max<long long>(a, b)` のように型を明示する
 
@@ -85,6 +91,9 @@ atcoder: true
 ```cpp
 --8<-- "cpp-types-literals/literals.cpp:core"
 ```
+
+完全なプログラム：[`literals.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-types-literals/literals.cpp)（GitHub）
+{ .kp-code-src }
 
 - `LL`・`ULL`：`long long`・`unsigned long long` にする。小文字の `ll` も同じだが、`l` は `1` と見分けにくい
 - `'`（桁区切り）：`1'000'000'007`・`998'244'353` のように、値を変えずに読みやすくする（C++14）
@@ -101,6 +110,9 @@ atcoder: true
 ```cpp
 --8<-- "cpp-types-literals/auto-deduction.cpp:core"
 ```
+
+完全なプログラム：[`auto-deduction.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-types-literals/auto-deduction.cpp)（GitHub）
+{ .kp-code-src }
 
 | 書き方 | 推論される型 | 起きうること |
 | --- | --- | --- |
@@ -124,11 +136,17 @@ atcoder: true
 --8<-- "cpp-types-literals/define-ll-ng.cpp:core"
 ```
 
+完全なプログラム：[`define-ll-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-types-literals/define-ll-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 g++-15 のエラーは `expected primary-expression before 'long'` である。`using` なら `ll` は 1 語の型名なので通る。
 
 ```cpp
 --8<-- "cpp-types-literals/using-ll.cpp:core"
 ```
+
+完全なプログラム：[`using-ll.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-types-literals/using-ll.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：`using` による別名は C++11 から。g++-13・g++-15 のどちらでも、`#define` ではエラーになり、`using` なら通る
 - **落とし穴**：`#define int long long` はすべての `int` を置き換える書き方で、`main` の戻り値の型まで変わる（`signed main()` と書く理由）。詳しくは[マクロと雛形](../cpp/cpp-macros-template-file.md)に任せる
@@ -143,6 +161,9 @@ g++-15 のエラーは `expected primary-expression before 'long'` である。`
 ```cpp
 --8<-- "cpp-types-literals/cast.cpp:core"
 ```
+
+完全なプログラム：[`cast.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-types-literals/cast.cpp)（GitHub）
+{ .kp-code-src }
 
 入力 `100000 100000` に対して、3 つの書き方とも `10000000000`（$10^{10}$）を出す。
 
@@ -168,6 +189,9 @@ INF は、最短路の「まだ到達していない」や、最小値を求め�
 --8<-- "cpp-types-literals/inf.cpp:core"
 ```
 
+完全なプログラム：[`inf.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-types-literals/inf.cpp)（GitHub）
+{ .kp-code-src }
+
 `0x3f3f3f3f` は各バイトが同じ `0x3f` である。そのため、`memset(d, 0x3f, sizeof d)` で `int` の配列全体を INF で埋められる（`memset` はバイト単位で埋めるので、普通の値では使えない。[初期化と CTAD](../cpp/cpp-initialization.md#refill)）。
 
 `vector` なら `vector<long long> dist(n, INF)` で埋めればよいので、こだわる必要はない。
@@ -177,6 +201,9 @@ INF は、最短路の「まだ到達していない」や、最小値を求め�
 ```cpp
 --8<-- "cpp-types-literals/inf-overflow-warn.cpp:core"
 ```
+
+完全なプログラム：[`inf-overflow-warn.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-types-literals/inf-overflow-warn.cpp)（GitHub）
+{ .kp-code-src }
 
 有名なライブラリの雛形は、どれも 2 倍しても型に収まる値を選んでいる（2026-10 に GitHub で確かめた）。
 
@@ -200,6 +227,9 @@ INF は、最短路の「まだ到達していない」や、最小値を求め�
 --8<-- "cpp-types-literals/double-precision.cpp:core"
 ```
 
+完全なプログラム：[`double-precision.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-types-literals/double-precision.cpp)（GitHub）
+{ .kp-code-src }
+
 $2^{53} + 1$ を `double` にすると、+1 が消えて $2^{53}$ になる。`long double` なら残る。
 
 | 型 | 仮数部 | 整数が正確な範囲 | 10 進の有効数字の目安 |
@@ -219,6 +249,9 @@ $2^{53} + 1$ を `double` にすると、+1 が消えて $2^{53}$ になる。`l
 ```cpp
 --8<-- "cpp-types-literals/double-1e18.cpp:core"
 ```
+
+完全なプログラム：[`double-1e18.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-types-literals/double-1e18.cpp)（GitHub）
+{ .kp-code-src }
 
 | 書き方 | 計算される型 | 結果 |
 | --- | --- | --- |
@@ -241,6 +274,9 @@ $2^{53} + 1$ を `double` にすると、+1 が消えて $2^{53}$ になる。`l
 --8<-- "cpp-types-literals/float-compare.cpp:core"
 ```
 
+完全なプログラム：[`float-compare.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-types-literals/float-compare.cpp)（GitHub）
+{ .kp-code-src }
+
 対処は 2 つある。
 
 - **誤差を許す**：`abs(x - y) < EPS` なら等しいとみなす。`EPS` は値の大きさに合わせて決める（値が $10^9$ なら `double` の誤差は $10^{-7}$ 程度ある）。決め方は[誤差の扱いと整数での処理](../geometry/geometry-precision.md#eps)に任せる
@@ -252,6 +288,9 @@ $2^{53} + 1$ を `double` にすると、+1 が消えて $2^{53}$ になる。`l
 --8<-- "cpp-types-literals/scale-round.cpp:core"
 ```
 
+完全なプログラム：[`scale-round.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-types-literals/scale-round.cpp)（GitHub）
+{ .kp-code-src }
+
 ## float128_t（stdfloat ヘッダ。C++23・GCC 13〜。解説コードではまれ） {#float128}
 
 `float128_t` は `<stdfloat>` にある 128 bit の浮動小数点数で、仮数部が 113 bit（10 進で約 34 桁）ある。リテラルは `1.0f128` のように接尾辞 `f128` を付ける。`long double` でも精度が足りない計算のための型だが、ソフトウェアで計算するので遅く、解説コードで見ることはまれである。
@@ -259,6 +298,9 @@ $2^{53} + 1$ を `double` にすると、+1 が消えて $2^{53}$ になる。`l
 ```cpp
 --8<-- "cpp-types-literals/float128.cpp:core"
 ```
+
+完全なプログラム：[`float128.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-types-literals/float128.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：C++23。AtCoder と同じ GCC 15.2 の g++-15 と g++-13 のどちらでも、`-std=gnu++23` で使える。`-std=gnu++20` では `'float128_t' was not declared` でエラーになる
 - **落とし穴**：`cout << x` は g++-13・g++-15 とも `ambiguous overload for 'operator<<'` でコンパイルエラーになった。`format("{:.30f}", x)` か、`double` に変換して出力する

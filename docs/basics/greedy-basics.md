@@ -26,7 +26,7 @@ sections:
   - {title: 反例の探し方（小さいケースの全探索と比べる）, anchor: counterexamples}
   - {title: 貪欲が失敗する例と DP への切り替え, anchor: when-greedy-fails}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -68,7 +68,9 @@ $O$ は 7 を選ばず、代わりに 7 以下の 4 を選んでいる。4 を 7
 - 選んでよい集合の部分集合も、選んでよい
 - 選んでよい集合 $A, B$ で $\lvert A \rvert < \lvert B \rvert$ なら、$B$ の要素のうち $A$ に足しても選んでよいままのものがある（交換の性質）
 
-「$K$ 個まで選ぶ」や「閉路を作らない辺の集合」がこの形で、後者で辺を軽い順に足すのがクラスカル法の[最小全域木](../graph/minimum-spanning-tree.md)である（全域木はどれも辺の数が同じなので、重みの符号を反転して重い順に足すのと同じになる）。コンテストでマトロイドを持ち出して証明することは少ないが、「この形なら重い順の貪欲で正しい」という見当として覚えておくとよい。
+「$K$ 個まで選ぶ」や「閉路を作らない辺の集合」がこの形で、後者で辺を軽い順に足すのがクラスカル法の[最小全域木](../graph/minimum-spanning-tree.md)である。重みの和の最小化を重い順に足す貪欲の形に直すには、各辺の重み $w$ を $C - w$（$C$ は重みの最大値以上の定数）に置き換える。置き換えた重みはどれも非負である。全域木はどれも辺の数が同じ（頂点数を $N$ として $N - 1$ 本）なので、置き換えた重みの和は、$C(N - 1)$ から元の重みの和を引いた値になる。よって、置き換えた重みで和が最大の木は、元の重みで和が最小の木である。置き換えた重みの重い順は元の重みの軽い順と同じなので、重い順に足す貪欲は、軽い順に足すクラスカル法と同じ手順になる。
+
+コンテストでマトロイドを持ち出して証明することは少ないが、「この形なら重い順の貪欲で正しい」という見当として覚えておくとよい。
 
 ??? question "確認問題：入れ替えで悪くならない理由"
     $N$ 個の品物の値段 $A_i$ が与えられ、ちょうど $K$ 個を買う。合計の最小は、安い順に $K$ 個を買えばよい。交換論法で理由を説明せよ。
@@ -89,6 +91,9 @@ $O$ は 7 を選ばず、代わりに 7 以下の 4 を選んでいる。4 を 7
 ```cpp
 --8<-- "greedy-basics/strongest-first.cpp:core"
 ```
+
+完全なプログラム：[`strongest-first.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/greedy-basics/strongest-first.cpp)（GitHub）
+{ .kp-code-src }
 
 正しさは交換論法で確かめる。最適な使い方を 1 つ取り、次の入れ替えを順に行う。どれも回数を変えず、合計のダメージを減らさない。
 
@@ -117,6 +122,9 @@ $O$ は 7 を選ばず、代わりに 7 以下の 4 を選んでいる。4 を 7
 --8<-- "greedy-basics/batch-same-values.cpp:core"
 ```
 
+完全なプログラム：[`batch-same-values.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/greedy-basics/batch-same-values.cpp)（GitHub）
+{ .kp-code-src }
+
 $i$ は高々 $N$ 回しか進まないので、ソートを含めて $O(N \log N)$ である。貪欲の正しさは、「どの回も、そのとき使える最大の値を使う」が交換論法で示せることによる。値が 0 になったものは使っても増えないので、番兵の 0 で止めてよい。
 
 同じ問題は、[答えで二分探索](../basics/binary-search-answer.md)でも解ける。値が $a_i$ のものからは値 $a_i, a_i - 1, \dots$ の回が得られるので、値 $x$ 以上の回は全部で $\sum_i \max(0, a_i - x + 1)$ 回あり、$x$ について単調に減る。これが $K$ 以上になる最大の $x$（$x \ge 1$）を二分探索し、$x$ より大きい回をすべて使って残りを $x$ で埋める。$x = 1$ でも $K$ に届かなければ、値が正の回をすべて使う。
@@ -137,6 +145,9 @@ $i$ は高々 $N$ 回しか進まないので、ソートを含めて $O(N \log 
 ```cpp
 --8<-- "greedy-basics/coin-counterexample.cpp:core"
 ```
+
+完全なプログラム：[`coin-counterexample.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/greedy-basics/coin-counterexample.cpp)（GitHub）
+{ .kp-code-src }
 
 日本の硬貨（1・5・10・50・100・500 円）では大きい順の貪欲が正しい。これは硬貨の組がたまたまそうなっているだけで、硬貨の問題一般の性質ではない。
 

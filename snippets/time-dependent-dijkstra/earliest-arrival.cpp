@@ -7,7 +7,7 @@ struct Edge {
     long long t, k;
 };
 
-const long long INF = LLONG_MAX;
+const long long INF = 1LL << 60;  // INF + INF でもあふれない大きさ
 
 // --8<-- [start:core]
 // 時刻 d に辺 e の始点にいるときの、e の終点への到着時刻（次の出発時刻まで待つ）

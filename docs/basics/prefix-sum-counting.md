@@ -77,6 +77,9 @@ for r = 1, 2, ..., N:
 --8<-- "prefix-sum-counting/count-equal-k.cpp:core"
 ```
 
+完全なプログラム：[`count-equal-k.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/prefix-sum-counting/count-equal-k.cpp)（GitHub）
+{ .kp-code-src }
+
 「調べてから記録する」順にするのは、$l < r$（空でない区間）だけを数えるためである。先に $S_r$ を記録すると、$K = 0$ のときに $l = r$ の空区間まで数えてしまう。連想配列を `map` にすると 1 回の検索が $O(\log N)$ なので、全体で $O(N \log N)$ になる。
 
 ??? question "確認問題：和が 0 の区間"
@@ -100,6 +103,9 @@ $S_r - S_l$ が $M$ で割り切れることと、2 つを $M$ で割った余�
 ```cpp
 --8<-- "prefix-sum-counting/count-multiple.cpp:core"
 ```
+
+完全なプログラム：[`count-multiple.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/prefix-sum-counting/count-multiple.cpp)（GitHub）
+{ .kp-code-src }
 
 答えは最大で $\binom{N + 1}{2}$ 個になり、$N = 2 \times 10^5$ なら約 $2 \times 10^{10}$ で `int` に収まらない。個数と答えは `long long` で持つ。
 

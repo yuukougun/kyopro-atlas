@@ -61,6 +61,9 @@ ACL の部品は、どれも次の約束に従う。解説コードの添字や�
 --8<-- "acl-reading/conventions.cpp:core"
 ```
 
+完全なプログラム：[`conventions.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/acl-reading/conventions.cpp)（GitHub）
+{ .kp-code-src }
+
 - **制約の違反は assert で止まる**：範囲外の添字や 0 での割り算は、ACL の中の `assert` で止まる。AtCoder は `NDEBUG` を定義しないので、結果は RE になる。手元で `fenwick_tree<long long> fw(3);` に `fw.sum(2, 4)` を呼ぶと、`Assertion '0 <= l && l <= r && r <= _n' failed.` と出て止まった。ACL のドキュメントは「制約外の入力を入れたときの挙動はすべて未定義」としている。止まってくれるのは親切にすぎず、`-DNDEBUG` を付けると同じコードが黙って誤った値を返した
 - **マクロ名**：`ATCODER_` で始まる名前のマクロを自分で定義しない（ACL が使う）
 
@@ -75,11 +78,17 @@ ACL の部品のコンストラクタは、modint 以外すべて `explicit` が
 --8<-- "acl-reading/explicit-ng.cpp:core"
 ```
 
+完全なプログラム：[`explicit-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/acl-reading/explicit-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 丸括弧で作るか、型名を書いて作った物を入れる。`vector<dsu>` の要素の初期値も `dsu(4)` と型名を書く。modint だけは `explicit` がないので `mint x = 5;` と書ける。
 
 ```cpp
 --8<-- "acl-reading/explicit-ok.cpp:core"
 ```
+
+完全なプログラム：[`explicit-ok.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/acl-reading/explicit-ok.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 - **版**：ACL のすべての版。g++-13・g++-15 のどちらでも、`dsu d = 5;` はエラー、`dsu d(5);` は通る
 - **関連**：`explicit` の意味と、ほかの初期化の書き方は[初期化と CTAD](../cpp/cpp-initialization.md#explicit)にある
@@ -105,6 +114,9 @@ v1.5（2023-04）から、segtree・lazy_segtree は `S op(const S& a, const S& 
 --8<-- "acl-reading/components.cpp:core"
 ```
 
+完全なプログラム：[`components.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/acl-reading/components.cpp)（GitHub）
+{ .kp-code-src }
+
 | 部品 | 作り方 | 読むときの注意 | 手法のページ |
 | --- | --- | --- | --- |
 | `dsu` | `dsu d(n);` | `leader` は代表の頂点で、番号の小さい方とは限らない | [Union-Find](../ds/union-find.md) |
@@ -129,6 +141,9 @@ v1.5（2023-04）から、segtree・lazy_segtree は `S op(const S& a, const S& 
 --8<-- "acl-reading/groups-ng.cpp:core"
 ```
 
+完全なプログラム：[`groups-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/acl-reading/groups-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 手元では、g++-15 の `-std=gnu++23` では `0 2` と正しく出た。g++-15 の `-std=gnu++20` と g++-13 の `-std=gnu++23` では Segmentation fault で止まり、AddressSanitizer では `heap-use-after-free` と出た。どちらも警告は出なかった。AtCoder の GCC 15.2（`-std=gnu++23`）では安全だが、手元が g++-13 だと手元でだけ落ちる。
 
 どの版でも安全なのは、変数に受けてから回す書き方と、`d.groups()` そのものを回す書き方である。
@@ -136,6 +151,9 @@ v1.5（2023-04）から、segtree・lazy_segtree は `S op(const S& a, const S& 
 ```cpp
 --8<-- "acl-reading/groups.cpp:core"
 ```
+
+完全なプログラム：[`groups.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/acl-reading/groups.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：問題の書き方が安全になるのは C++23 かつ GCC 15 以降。g++-13 は `-std=gnu++23` でも危ない
 - **関連**：範囲 for と一時オブジェクトの寿命は[参照と範囲 for](../cpp/cpp-range-for.md#temporary-range)にある。`groups()` は $O(N)$ かかるので、ループの中で何度も呼ばない
@@ -147,6 +165,9 @@ v1.5（2023-04）から、segtree・lazy_segtree は `S op(const S& a, const S& 
 ```cpp
 --8<-- "acl-reading/modint.cpp:core"
 ```
+
+完全なプログラム：[`modint.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/acl-reading/modint.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 - `vector<mint> dp(n + 1);` の要素は 0 で始まる
 - `mint(-1)` は 998244352 に直されるので、引き算で負になる心配がない
@@ -161,11 +182,17 @@ v1.5（2023-04）から、segtree・lazy_segtree は `S op(const S& a, const S& 
 --8<-- "acl-reading/modint-cout-ng.cpp:core"
 ```
 
+完全なプログラム：[`modint-cout-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/acl-reading/modint-cout-ng.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 `.val()` の型は v1.6 で `int` である（v1.5 までは `unsigned int`）。そのため、版によって次の結果が変わる。手元の v1.5 と v1.6 で確かめた。
 
 ```cpp
 --8<-- "acl-reading/modint-val.cpp:core"
 ```
+
+完全なプログラム：[`modint-val.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/acl-reading/modint-val.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 - **v1.5 の落とし穴**：`x.val() - 1` は `unsigned int` の引き算になり、$x = 0$ で 4294967295 になる。`max(x.val(), 0)` は `unsigned int` と `int` で型が合わずコンパイルエラーになる。古い解説コードに `(int)x.val()` や `(long long)x.val()` とあるのは、これを避けるためである
 - **< がない**：mint は `==` と `!=` はあるが `<` がない。`sort` や `set<mint>`・`map<mint, …>` はコンパイルエラーになる
@@ -174,11 +201,17 @@ v1.5（2023-04）から、segtree・lazy_segtree は `S op(const S& a, const S& 
 --8<-- "acl-reading/modint-sort-ng.cpp:core"
 ```
 
+完全なプログラム：[`modint-sort-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/acl-reading/modint-sort-ng.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 並べる必要があるなら、`val()` の値で比べる。`ranges::sort` の第 3 引数は、比べる値を要素から取り出す関数である（[射影](../cpp/cpp-algorithms.md#projection)）。ただし並ぶのは余りの大小で、元の整数の大小ではない（`mint(-1)` は最後に来る）。
 
 ```cpp
 --8<-- "acl-reading/modint-sort-ok.cpp:core"
 ```
+
+完全なプログラム：[`modint-sort-ok.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/acl-reading/modint-sort-ok.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 ??? question "確認問題：`mint` で持った答え $x$ について「$x$ が 0 なら -1 を出力」とするために `x.val() - 1` を使うコードは、どの版でも同じ結果になるか？"
     ならない。v1.6 では `val()` が `int` なので -1 になる。v1.5 以前では `unsigned int` なので 4294967295 になる。ただし `mint` が 0 でも、元の整数が 998244353 の倍数だった可能性があるので、「元の値が 0 か」の判定にはそもそも使えない（[modint](../math/modint.md)）。
@@ -201,6 +234,9 @@ v1.5（2023-04）から、segtree・lazy_segtree は `S op(const S& a, const S& 
 --8<-- "acl-reading/segtree-args.cpp:use"
 ```
 
+完全なプログラム：[`segtree-args.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/acl-reading/segtree-args.cpp)（GitHub）
+{ .kp-code-src }
+
 - **e の選び方**：区間 min なら `INT_MAX`（大きい方の端）、区間 max なら小さい方の端、区間和なら 0 である。`e()` は空区間の `prod(l, l)` の答えにもなり、`segtree<…> seg(n);` で作ったときの全要素の初期値にもなる
 - **型の幅**：`S = int` の区間和は、要素が $10^9$ 程度でもすぐにあふれる。`long long` にする
 - **関連**：どんな `S` と `op` を設計するか（和と長さ、最大値と個数など）は[セグメント木に何を載せるか](../ds/segment-tree-monoids.md#design-steps)にある
@@ -218,11 +254,17 @@ C++20 からは、キャプチャのない[ラムダ式](../cpp/cpp-lambda.md#te
 --8<-- "acl-reading/segtree-lambda.cpp:core"
 ```
 
+完全なプログラム：[`segtree-lambda.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/acl-reading/segtree-lambda.cpp)（GitHub）
+{ .kp-code-src }
+
 ラムダに名前を付けてから渡してもよい。`constexpr` を付けておくと、コンパイル時に使う値だと分かりやすい。キャプチャのないラムダは付けなくても通る。通らないのはキャプチャのあるラムダで、[次の節](#capturing-lambda)のとおりである。
 
 ```cpp
 --8<-- "acl-reading/segtree-lambda.cpp:named"
 ```
+
+完全なプログラム：[`segtree-lambda.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/acl-reading/segtree-lambda.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：ラムダを直接書く形は C++20 から。`-std=gnu++17` では g++-13・g++-15 とも `lambda-expression in template-argument only available with '-std=c++20'` でエラーになる。AtCoder の `-std=gnu++23` では使える。ACL v1.4 以前は関数ポインタ `S (*)(S, S)` で受け取るので、`[](const int& x, const int& y) { … }` のように引数の型が違うラムダはエラーになる
 - **読み方**：`segtree<int, [](int x, int y) { return min(x, y); }, [] { return INT_MAX; }>` は長いが、カンマで 3 つに分ければ `S`・`op`・`e` の順である。`[] { … }` は引数のないラムダ（`e`）である
@@ -235,6 +277,9 @@ C++20 からは、キャプチャのない[ラムダ式](../cpp/cpp-lambda.md#te
 --8<-- "acl-reading/capturing-ng.cpp:core"
 ```
 
+完全なプログラム：[`capturing-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/acl-reading/capturing-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 g++-13・g++-15 とも `error: '<lambda closure object>main()::<lambda(int, int)>{m}' is not a constant expression` と出る。キャプチャしたラムダを `auto op = …;` で変数に入れてから渡しても、`the value of 'op' is not usable in a constant expression` で止まる。
 
 実行時に決まる値（入力で与えられる法 $m$ など）を `op` の中で使いたいときは、次のどちらかにする。
@@ -246,11 +291,17 @@ g++-13・g++-15 とも `error: '<lambda closure object>main()::<lambda(int, int)
 --8<-- "acl-reading/capturing-ok.cpp:core"
 ```
 
+完全なプログラム：[`capturing-ok.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/acl-reading/capturing-ok.cpp)（GitHub）
+{ .kp-code-src }
+
 一方、`max_right(l, f)` と `min_left(r, f)` の判定関数 `f` は普通の関数の引数なので、キャプチャのあるラムダを渡せる。外の値 `k` を使う判定はこう書く。
 
 ```cpp
 --8<-- "acl-reading/max-right.cpp:core"
 ```
+
+完全なプログラム：[`max-right.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/acl-reading/max-right.cpp)（GitHub）
+{ .kp-code-src }
 
 `f` には、`f(e())` が真で、区間を伸ばすと一度偽になったら真に戻らない（単調な）関数を渡す。使い方は[セグメント木上の二分探索](../ds/segment-tree-binary-search.md)にある。
 
@@ -278,6 +329,9 @@ g++-13・g++-15 とも `error: '<lambda closure object>main()::<lambda(int, int)
 --8<-- "acl-reading/lazy-args.cpp:use"
 ```
 
+完全なプログラム：[`lazy-args.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/acl-reading/lazy-args.cpp)（GitHub）
+{ .kp-code-src }
+
 - **葉の長さ**：`vector<S>(n, {0, 1})` から作る。`lazy_segtree<…> seg(n);` は全要素を `e()`（長さ 0）で作るので、区間加算をしても和が増えない
 - **合成の向き**：加算のように順序を入れ替えても同じ作用では、`composition` の向きを間違えても答えは変わらない。代入やアフィン変換では答えが変わる。理由と例は[遅延セグメント木の ACL の約束](../ds/lazy-segment-tree.md#acl-conventions)にある
 - **ラムダ**：7 つの関数引数もキャプチャのないラムダで渡せる（C++20）。ただし 7 つを 1 行に並べると読みにくいので、名前を付けた関数で書く解説が多い
@@ -302,6 +356,9 @@ ACL v1.6 の segtree・lazy_segtree は、渡された関数が期待どおり�
 ```cpp
 --8<-- "acl-reading/template-arg-ng.cpp:core"
 ```
+
+完全なプログラム：[`template-arg-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/acl-reading/template-arg-ng.cpp)（GitHub）
+{ .kp-code-src }
 
 g++-13・g++-15 とも `error: static assertion failed: mapping must work as S(F, S)` と出る（エラーの場所は ACL の `lazysegtree.hpp` の中を指す）。
 

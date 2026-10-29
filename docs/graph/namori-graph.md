@@ -4,8 +4,8 @@ title: なもりグラフ
 aliases: [なもり, unicyclic graph, pseudotree, 閉路が 1 つのグラフ, 木に辺を 1 本足したグラフ, N 頂点 N 辺の連結グラフ]
 type: technique
 field: graph
-chapter: 有向グラフ
-order: 270
+chapter: 基本と探索
+order: 75
 level: 水
 kind: [グラフ探索, 木]
 prerequisites: [connected-components, cycle-detection, tree-basics]
@@ -25,7 +25,7 @@ sections:
   - {title: 単純パスが一意になる条件, anchor: unique-path}
   - {title: 有向版は Functional graph, anchor: directed-version}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -91,6 +91,9 @@ deg[v] == 1 の頂点をすべてキューに入れる
 ```cpp
 --8<-- "namori-graph/peel-leaves.cpp:core"
 ```
+
+完全なプログラム：[`peel-leaves.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/namori-graph/peel-leaves.cpp)（GitHub）
+{ .kp-code-src }
 
 **Union-Find で求める**。辺を順に Union-Find で結んでいくと、両端がすでに同じ成分にある辺がちょうど 1 本見つかる。それを $(u, v)$ とすると、閉路は「残りの $N - 1$ 本の辺でできた木の上の $u$ から $v$ への道」と辺 $(u, v)$ でできている。閉路の頂点を列挙したいときは、残りの辺で $u$ から BFS して親を記録し、$v$ から親をたどる（[閉路の検出と復元](../graph/cycle-detection.md)）。辺を読みながら閉路を作る辺を見つけたいときや、閉路の長さや閉路の頂点の並び順が要るときに向く。並び順は、葉を削る方法でも閉路の頂点から隣の閉路の頂点へ 1 周たどれば得られる。
 

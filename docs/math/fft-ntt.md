@@ -26,7 +26,7 @@ sections:
   - {title: 任意 mod の畳み込み（3 素数 NTT と Garner、convolution_ll）, anchor: arbitrary-mod}
   - {title: ACL の convolution と自作するときの要点, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -97,6 +97,9 @@ $$
 --8<-- "fft-ntt/ntt.cpp:core"
 ```
 
+完全なプログラム：[`ntt.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/fft-ntt/ntt.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 自作するときの要点は[ライブラリの節](#library)にまとめる。
 
 ## 複素数の FFT と誤差、NTT に向く素数（c·2^k + 1）と原始根 {#ntt-prime}
@@ -141,9 +144,9 @@ NTT は整数の計算だけなので誤差がなく、答えを $p$ で割っ�
 
 ## 学ぶための資料 {#resources}
 
-- 51_24_11_ 氏の記事[「行列で理解するFFT（競プロ向け）」](https://qiita.com/51_24_11_/items/11c48395603670ea98d8)：変換を行列の積として書き、偶奇に分ける式の変形、逆変換、ビット反転の順と再帰を使わない実装までを追える。
-- Sen_comp 氏の記事[「NTT(数論変換)のやさしい解説」](https://qiita.com/Sen_comp/items/9401382df736e51564c1)：複素数の FFT の弱点から入り、法 $p$ の世界の原始根、$998244353$ と $10^9 + 7$ の違い、複数の素数と Garner による任意 mod までを説明している。
-- tayu0110 氏の記事[「爆速なNTTを実装したい」](https://tayu0110.hatenablog.com/entry/2023/05/06/023244)：再帰を使わない書き方から、周波数間引き・時間間引き、基数 4、根の前計算、Montgomery 乗算まで、自作の NTT を速くする工夫を順に試している。
+- [51_24_11_「行列で理解するFFT（競プロ向け）」](https://qiita.com/51_24_11_/items/11c48395603670ea98d8)：変換を行列の積として書き、偶奇に分ける式の変形、逆変換、ビット反転の順と再帰を使わない実装までを追える。
+- [Sen_comp「NTT(数論変換)のやさしい解説」](https://qiita.com/Sen_comp/items/9401382df736e51564c1)：複素数の FFT の弱点から入り、法 $p$ の世界の原始根、$998244353$ と $10^9 + 7$ の違い、複数の素数と Garner による任意 mod までを説明している。
+- [tayu0110「爆速なNTTを実装したい」](https://tayu0110.hatenablog.com/entry/2023/05/06/023244)：再帰を使わない書き方から、周波数間引き・時間間引き、基数 4、根の前計算、Montgomery 乗算まで、自作の NTT を速くする工夫を順に試している。
 
 ## 練習問題 {#practice}
 

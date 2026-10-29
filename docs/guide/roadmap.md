@@ -9,7 +9,7 @@ order: 60
 level: null
 kind: [案内]
 prerequisites: []
-related: [knowledge-map, atcoder-system#difficulty-by-position, contest-strategy, practice-method, problem-sets#recent-abc, reformulation]
+related: [knowledge-map, atcoder-system#difficulty-by-position, contest-strategy, practice-method, problem-sets#recent-abc, reformulation, study-list]
 summary: 目標の色ごとに、到達の目安、読むページの順、最近の ABC の位置ごとの頻出手法、解いた数の進捗を見られる。ページの列はレベル・前提・出題頻度から生成する。
 complexity: null
 signs: []
@@ -24,7 +24,7 @@ sections:
   - {title: 解いた数・理解した数, anchor: progress}
   - {title: シラバスではないこと, anchor: not-a-syllabus}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -73,15 +73,17 @@ ABC の位置とレベルは、おおよそ次のように対応する（abc400�
 
 解く確率は difficulty のロジスティック曲線から、時刻は問題ごとの予測解答時間の和から求めた。予測解答時間は解けた人だけから求めた値なので、解く確率の低い位置では「もし解けたなら」の目安になる。
 
-- **水（1200）**：A〜D を約 40 分で解き、E は 5 回に 2 回解く。D を落とさないことが土台で、E は解ければ上振れになる。
+解く確率の列は「難しさが中央値の問題を解く確率」で、そのまま「何回に何回解けるか」ではない。回ごとの見込みは 81 回の確率の平均で言う方がよく、下の「何回に何回」は平均から出した。
+
+- **水（1200）**：A〜D を約 40 分で解き、E は 5 回に 2 回解ける。D を落とさないことが土台で、E は解ければ上振れになる。
 - **青（1600）**：A〜E を約 55 分で解き、E を 8 割の回で落とさない。F は 3 回に 1 回である。
-- **黄（2000）**：A〜E を約 45 分、A〜F を約 70 分で解き、F を 4 回に 3 回解く。G を解くのは 7 回に 1 回ほどである。
+- **黄（2000）**：A〜E を約 45 分、A〜F を約 70 分で解き、F は 3 回に 2 回ほど解ける（3 回に 1 回は落とす）。G を解くのは 5 回に 1 回ほどである。
 
 A〜F まで含めた時刻の表、完答数とパフォーマンスの関係、コンテスト中の判断は[コンテストの戦い方](contest-strategy.md#time-targets)にまとめた。
 
 ## 黄を目指す段の主な条件 {#yellow}
 
-黄のパフォーマンスの主な条件は、黄のページの知識よりも、青までの知識を確実に速く使えることである。abc400〜abc480 の F は 75% が difficulty 2000 未満で、[到達の目安](#targets)のとおり G はまれにしか解けない。黄のページの知識が効くのは、難しい F と易しい G である。
+黄のパフォーマンスの主な条件は、黄のページの知識よりも、青までの知識を確実に速く使えることである。abc400〜abc480 の F は 75% が difficulty 2000 未満で、[到達の目安](#targets)のとおり G を解ける回は多くない。黄のページの知識が効くのは、難しい F と易しい G である。
 
 色変記事にも、同じ趣旨の声が複数ある。
 
@@ -114,78 +116,78 @@ abc451〜abc480 の D〜G の 120 問について、第三者の解説で使わ�
 
 abc451〜abc480 の E の 30 問で使われた手法を、ページの種類（kind の1つ目）で分けて多い順に並べる。かっこの数は、その位置でそのページを使った問題の数（1 のときは書かない）。
 
-| 種類 | 問題数 | ページ | 問題 |
+| 種類 | ページ | 問題 | 問題数 |
 | --- | --- | --- | --- |
-| 考察 | 11 | [一部を固定して数える](../thinking/fix-variable.md)（3）、[言い換えの典型](../thinking/reformulation.md)（2）、[主客転倒・寄与](../thinking/contribution.md)（2）、[偶奇に着目する](../thinking/parity.md)（2）、[余事象](../thinking/complement.md)、[構築問題の考え方](../thinking/construction.md)、[対称性・鳩の巣原理・場合分け](../thinking/symmetry-pigeonhole-casework.md)、[Σ の変形](../math/sigma-manipulation.md) | abc453_e・abc454_e・abc455_e・abc458_e・abc461_e・abc462_e・abc466_e・abc467_e・abc468_e・abc471_e・abc475_e |
-| 累積和・差分 | 10 | [累積和](../basics/prefix-sum.md)（5）、[いもす法](../basics/imos.md)（3）、[累積和と連想配列で区間を数える](../basics/prefix-sum-counting.md)（2） | abc452_e・abc453_e・abc455_e・abc464_e・abc466_e・abc468_e・abc469_e・abc473_e・abc474_e・abc477_e |
-| データ構造 | 4 | [セグメント木](../ds/segment-tree.md)（2）、[set・multiset・map の応用](../ds/ordered-set.md)、[Union-Find](../ds/union-find.md) | abc451_e・abc461_e・abc475_e・abc476_e |
-| 数え上げ | 4 | [二項係数の前計算](../comb/binomial-precompute.md)（4）、[数え上げの考え方](../comb/counting-mindset.md) | abc453_e・abc458_e・abc459_e・abc471_e |
-| 二分探索 | 3 | [二分探索](../basics/binary-search.md)（2）、[平均・中央値の最大化](../basics/fractional-binary-search.md) | abc457_e・abc469_e・abc480_e |
-| ソート・座標圧縮 | 3 | [ソートで考える](../basics/sorting-techniques.md)（2）、[イベントソートと平面走査の基本](../basics/event-sort.md) | abc457_e・abc467_e・abc474_e |
-| DP | 3 | [メモ化再帰](../dp/memoized-recursion.md)、[フェーズを状態に持つ DP](../dp/dp-phase.md)、[桁 DP](../dp/digit-dp.md) | abc465_e・abc466_e・abc470_e |
-| グラフ探索 | 3 | [閉路の検出と復元](../graph/cycle-detection.md)、[二部グラフ判定](../graph/bipartite-graph.md)、[トポロジカルソート](../graph/topological-sort.md)、[強連結成分分解（SCC）](../graph/scc.md) | abc456_e・abc472_e・abc478_e |
-| 最短路 | 3 | [ダイクストラ法](../graph/dijkstra.md)（2）、[状態を頂点にする](../graph/extended-dijkstra.md)（2） | abc456_e・abc463_e・abc477_e |
-| 木 | 3 | [根付き木と走査順](../tree/tree-traversal.md)（2）、[木の上の距離](../tree/tree-distance.md)、[葉から考える](../tree/leaf-first.md)、[辺で切って数える](../tree/tree-edge-contribution.md)、[木の構築・復元](../tree/tree-construction.md) | abc451_e・abc459_e・abc479_e |
-| 全探索 | 2 | [全探索の設計](../basics/brute-force.md)（2） | abc474_e・abc480_e |
-| 整数論 | 2 | [整数の割り算と余り](../math/integer-division.md)、[逆元と mod での割り算](../math/mod-inverse.md)、[桁と mod](../math/digit-and-mod.md)、[GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md) | abc460_e・abc468_e |
-| 計算量 | 1 | [調和級数と倍数の列挙](../math/harmonic-sum.md) | abc452_e |
-| 貪欲 | 1 | [貪欲法の考え方と正当性](../basics/greedy-basics.md) | abc473_e |
-| ダブリング・分割統治 | 1 | [周期性の検出](../basics/periodicity.md) | abc452_e |
-| 連結性・全域木 | 1 | [最小全域木](../graph/minimum-spanning-tree.md) | abc451_e |
-| 確率・期待値 | 1 | [最適戦略の期待値](../comb/optimal-strategy-expectation.md) | abc470_e |
+| 考察 | [一部を固定して数える](../thinking/fix-variable.md)（3）、[言い換えの典型](../thinking/reformulation.md)（2）、[主客転倒・寄与](../thinking/contribution.md)（2）、[偶奇に着目する](../thinking/parity.md)（2）、[余事象](../thinking/complement.md)、[構築問題の考え方](../thinking/construction.md)、[対称性・鳩の巣原理・場合分け](../thinking/symmetry-pigeonhole-casework.md)、[Σ の変形](../math/sigma-manipulation.md) | ABC453&nbsp;E・ABC454&nbsp;E・ABC455&nbsp;E・ABC458&nbsp;E・ABC461&nbsp;E・ABC462&nbsp;E・ABC466&nbsp;E・ABC467&nbsp;E・ABC468&nbsp;E・ABC471&nbsp;E・ABC475&nbsp;E | 11 |
+| 累積和・差分 | [累積和](../basics/prefix-sum.md)（5）、[いもす法](../basics/imos.md)（3）、[累積和と連想配列で区間を数える](../basics/prefix-sum-counting.md)（2） | ABC452&nbsp;E・ABC453&nbsp;E・ABC455&nbsp;E・ABC464&nbsp;E・ABC466&nbsp;E・ABC468&nbsp;E・ABC469&nbsp;E・ABC473&nbsp;E・ABC474&nbsp;E・ABC477&nbsp;E | 10 |
+| データ構造 | [セグメント木](../ds/segment-tree.md)（2）、[set・multiset・map の応用](../ds/ordered-set.md)、[Union-Find](../ds/union-find.md) | ABC451&nbsp;E・ABC461&nbsp;E・ABC475&nbsp;E・ABC476&nbsp;E | 4 |
+| 数え上げ | [二項係数の前計算](../comb/binomial-precompute.md)（4）、[数え上げの考え方](../comb/counting-mindset.md) | ABC453&nbsp;E・ABC458&nbsp;E・ABC459&nbsp;E・ABC471&nbsp;E | 4 |
+| 二分探索 | [二分探索](../basics/binary-search.md)（2）、[平均・中央値の最大化](../basics/fractional-binary-search.md) | ABC457&nbsp;E・ABC469&nbsp;E・ABC480&nbsp;E | 3 |
+| ソート・座標圧縮 | [ソートで考える](../basics/sorting-techniques.md)（2）、[イベントソートと平面走査の基本](../basics/event-sort.md) | ABC457&nbsp;E・ABC467&nbsp;E・ABC474&nbsp;E | 3 |
+| DP | [メモ化再帰](../dp/memoized-recursion.md)、[フェーズを状態に持つ DP](../dp/dp-phase.md)、[桁 DP](../dp/digit-dp.md) | ABC465&nbsp;E・ABC466&nbsp;E・ABC470&nbsp;E | 3 |
+| グラフ探索 | [閉路の検出と復元](../graph/cycle-detection.md)、[二部グラフ判定](../graph/bipartite-graph.md)、[トポロジカルソート](../graph/topological-sort.md)、[強連結成分分解（SCC）](../graph/scc.md) | ABC456&nbsp;E・ABC472&nbsp;E・ABC478&nbsp;E | 3 |
+| 最短路 | [ダイクストラ法](../graph/dijkstra.md)（2）、[状態を頂点にする](../graph/extended-dijkstra.md)（2） | ABC456&nbsp;E・ABC463&nbsp;E・ABC477&nbsp;E | 3 |
+| 木 | [根付き木と走査順](../tree/tree-traversal.md)（2）、[木の上の距離](../tree/tree-distance.md)、[葉から考える](../tree/leaf-first.md)、[辺で切って数える](../tree/tree-edge-contribution.md)、[木の構築・復元](../tree/tree-construction.md) | ABC451&nbsp;E・ABC459&nbsp;E・ABC479&nbsp;E | 3 |
+| 全探索 | [全探索の設計](../basics/brute-force.md)（2） | ABC474&nbsp;E・ABC480&nbsp;E | 2 |
+| 整数論 | [整数の割り算と余り](../math/integer-division.md)、[逆元と mod での割り算](../math/mod-inverse.md)、[桁と mod](../math/digit-and-mod.md)、[GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md) | ABC460&nbsp;E・ABC468&nbsp;E | 2 |
+| 計算量 | [調和級数と倍数の列挙](../math/harmonic-sum.md) | ABC452&nbsp;E | 1 |
+| 貪欲 | [貪欲法の考え方と正当性](../basics/greedy-basics.md) | ABC473&nbsp;E | 1 |
+| ダブリング・分割統治 | [周期性の検出](../basics/periodicity.md) | ABC452&nbsp;E | 1 |
+| 連結性・全域木 | [最小全域木](../graph/minimum-spanning-tree.md) | ABC451&nbsp;E | 1 |
+| 確率・期待値 | [最適戦略の期待値](../comb/optimal-strategy-expectation.md) | ABC470&nbsp;E | 1 |
 
 ### F 問題（青の帯） {#recent-positions-f}
 
 abc451〜abc480 の F の 30 問で使われた手法を、ページの種類（kind の1つ目）で分けて多い順に並べる。かっこの数は、その位置でそのページを使った問題の数（1 のときは書かない）。
 
-| 種類 | 問題数 | ページ | 問題 |
+| 種類 | ページ | 問題 | 問題数 |
 | --- | --- | --- | --- |
-| データ構造 | 11 | [転倒数](../ds/inversion-number.md)（2）、[遅延セグメント木](../ds/lazy-segment-tree.md)（2）、[セグメント木に何を載せるか](../ds/segment-tree-monoids.md)（2）、[set・multiset・map の応用](../ds/ordered-set.md)、[重み付き Union-Find](../ds/weighted-union-find.md)、[BIT（Fenwick Tree）](../ds/fenwick-tree.md)、[セグメント木](../ds/segment-tree.md)、[セグメント木上の二分探索](../ds/segment-tree-binary-search.md)、[遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md) | abc451_f・abc452_f・abc455_f・abc456_f・abc460_f・abc466_f・abc467_f・abc473_f・abc477_f・abc478_f・abc479_f |
-| 考察 | 9 | [言い換えの典型](../thinking/reformulation.md)（4）、[対称性・鳩の巣原理・場合分け](../thinking/symmetry-pigeonhole-casework.md)（2）、[主客転倒・寄与](../thinking/contribution.md)、[後ろから・逆順に考える](../thinking/reverse-thinking.md)、[構築問題の考え方](../thinking/construction.md)、[Σ の変形](../math/sigma-manipulation.md) | abc453_f・abc454_f・abc455_f・abc457_f・abc459_f・abc463_f・abc466_f・abc479_f・abc480_f |
-| DP | 7 | [DP の状態の設計](../dp/dp-state-design.md)（2）、[ナップサック DP](../dp/knapsack-01.md)、[グリッド上の DP](../dp/dp-grid.md)、[最長増加部分列](../dp/lis.md)、[bitDP](../dp/bit-dp.md)、[照合オートマトン上の DP](../string/string-automaton-dp.md) | abc457_f・abc458_f・abc461_f・abc462_f・abc468_f・abc476_f・abc480_f |
-| 累積和・差分 | 6 | [累積和](../basics/prefix-sum.md)（2）、[2 次元累積和](../basics/prefix-sum-2d.md)（2）、[差分列への言い換え](../basics/difference-sequence.md)（2）、[いもす法](../basics/imos.md) | abc454_f・abc459_f・abc465_f・abc472_f・abc473_f・abc475_f |
-| 数え上げ | 5 | [二項係数の前計算](../comb/binomial-precompute.md)、[数え上げの考え方](../comb/counting-mindset.md)、[多項係数](../comb/multinomial-coefficient.md)、[包除原理](../comb/inclusion-exclusion.md)、[約数・倍数のゼータ変換とメビウス変換](../comb/zeta-mobius-divisor.md)、[置換の偶奇](../comb/permutation-parity.md) | abc457_f・abc463_f・abc470_f・abc474_f・abc475_f |
-| 貪欲 | 4 | [貪欲法の考え方と正当性](../basics/greedy-basics.md)（3）、[交換論法と比較関数の設計](../basics/exchange-argument.md)（2） | abc454_f・abc467_f・abc468_f・abc471_f |
-| 木 | 3 | [木の直径と最遠点](../tree/tree-diameter.md)、[木の重心](../tree/tree-centroid.md)、[木の構築・復元](../tree/tree-construction.md)、[最小共通祖先（LCA）](../tree/lca.md) | abc453_f・abc460_f・abc478_f |
-| 尺取り・スライド窓 | 2 | [尺取り法](../basics/two-pointers.md)（2） | abc452_f・abc464_f |
-| グラフ探索 | 2 | [連結成分](../graph/connected-components.md)、[二部グラフ判定](../graph/bipartite-graph.md) | abc451_f・abc470_f |
-| 線形代数・行列 | 2 | [行列累乗](../math/matrix-power.md)（2） | abc456_f・abc458_f |
-| 確率・期待値 | 2 | [確率の基本](../comb/probability-basics.md)、[期待値の線形性と指示確率変数](../comb/linearity-of-expectation.md)、[対称性で確率を求める](../comb/probability-symmetry.md) | abc463_f・abc464_f |
-| 幾何 | 2 | [ベクトルと外積](../geometry/geometry-vectors.md)、[マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md) | abc472_f・abc476_f |
-| 計算量 | 1 | [調和級数と倍数の列挙](../math/harmonic-sum.md) | abc469_f |
-| 全探索 | 1 | [半分全列挙](../basics/meet-in-the-middle.md) | abc464_f |
-| ソート・座標圧縮 | 1 | [座標圧縮](../basics/coordinate-compression.md) | abc467_f |
-| 連結性・全域木 | 1 | [最小全域木](../graph/minimum-spanning-tree.md) | abc469_f |
-| クエリ処理の工夫 | 1 | [クエリの先読み](../ds/offline-queries.md)、[平面走査](../ds/sweep-line-2d.md) | abc477_f |
-| 整数論 | 1 | [約数列挙と素数判定](../math/divisor-enum.md)、[約数の個数の上界と高度合成数](../math/divisor-count-bound.md) | abc461_f |
-| 文字列 | 1 | [Aho-Corasick 法](../string/aho-corasick.md) | abc458_f |
+| データ構造 | [転倒数](../ds/inversion-number.md)（2）、[遅延セグメント木](../ds/lazy-segment-tree.md)（2）、[セグメント木に何を載せるか](../ds/segment-tree-monoids.md)（2）、[set・multiset・map の応用](../ds/ordered-set.md)、[重み付き Union-Find](../ds/weighted-union-find.md)、[BIT（Fenwick Tree）](../ds/fenwick-tree.md)、[セグメント木](../ds/segment-tree.md)、[セグメント木上の二分探索](../ds/segment-tree-binary-search.md)、[遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md) | ABC451&nbsp;F・ABC452&nbsp;F・ABC455&nbsp;F・ABC456&nbsp;F・ABC460&nbsp;F・ABC466&nbsp;F・ABC467&nbsp;F・ABC473&nbsp;F・ABC477&nbsp;F・ABC478&nbsp;F・ABC479&nbsp;F | 11 |
+| 考察 | [言い換えの典型](../thinking/reformulation.md)（4）、[対称性・鳩の巣原理・場合分け](../thinking/symmetry-pigeonhole-casework.md)（2）、[主客転倒・寄与](../thinking/contribution.md)、[後ろから・逆順に考える](../thinking/reverse-thinking.md)、[構築問題の考え方](../thinking/construction.md)、[Σ の変形](../math/sigma-manipulation.md) | ABC453&nbsp;F・ABC454&nbsp;F・ABC455&nbsp;F・ABC457&nbsp;F・ABC459&nbsp;F・ABC463&nbsp;F・ABC466&nbsp;F・ABC479&nbsp;F・ABC480&nbsp;F | 9 |
+| DP | [DP の状態の設計](../dp/dp-state-design.md)（2）、[ナップサック DP](../dp/knapsack-01.md)、[グリッド上の DP](../dp/dp-grid.md)、[最長増加部分列](../dp/lis.md)、[bitDP](../dp/bit-dp.md)、[照合オートマトン上の DP](../string/string-automaton-dp.md) | ABC457&nbsp;F・ABC458&nbsp;F・ABC461&nbsp;F・ABC462&nbsp;F・ABC468&nbsp;F・ABC476&nbsp;F・ABC480&nbsp;F | 7 |
+| 累積和・差分 | [累積和](../basics/prefix-sum.md)（2）、[2 次元累積和](../basics/prefix-sum-2d.md)（2）、[差分列への言い換え](../basics/difference-sequence.md)（2）、[いもす法](../basics/imos.md) | ABC454&nbsp;F・ABC459&nbsp;F・ABC465&nbsp;F・ABC472&nbsp;F・ABC473&nbsp;F・ABC475&nbsp;F | 6 |
+| 数え上げ | [二項係数の前計算](../comb/binomial-precompute.md)、[数え上げの考え方](../comb/counting-mindset.md)、[多項係数](../comb/multinomial-coefficient.md)、[包除原理](../comb/inclusion-exclusion.md)、[約数・倍数のゼータ変換とメビウス変換](../comb/zeta-mobius-divisor.md)、[置換の偶奇](../comb/permutation-parity.md) | ABC457&nbsp;F・ABC463&nbsp;F・ABC470&nbsp;F・ABC474&nbsp;F・ABC475&nbsp;F | 5 |
+| 貪欲 | [貪欲法の考え方と正当性](../basics/greedy-basics.md)（3）、[交換論法と比較関数の設計](../basics/exchange-argument.md)（2） | ABC454&nbsp;F・ABC467&nbsp;F・ABC468&nbsp;F・ABC471&nbsp;F | 4 |
+| 木 | [木の直径と最遠点](../tree/tree-diameter.md)、[木の構築・復元](../tree/tree-construction.md)、[木の重心](../tree/tree-centroid.md)、[最小共通祖先（LCA）](../tree/lca.md) | ABC453&nbsp;F・ABC460&nbsp;F・ABC478&nbsp;F | 3 |
+| 尺取り・スライド窓 | [尺取り法](../basics/two-pointers.md)（2） | ABC452&nbsp;F・ABC464&nbsp;F | 2 |
+| グラフ探索 | [連結成分](../graph/connected-components.md)、[二部グラフ判定](../graph/bipartite-graph.md) | ABC451&nbsp;F・ABC470&nbsp;F | 2 |
+| 線形代数・行列 | [行列累乗](../math/matrix-power.md)（2） | ABC456&nbsp;F・ABC458&nbsp;F | 2 |
+| 確率・期待値 | [確率の基本](../comb/probability-basics.md)、[期待値の線形性と指示確率変数](../comb/linearity-of-expectation.md)、[対称性で確率を求める](../comb/probability-symmetry.md) | ABC463&nbsp;F・ABC464&nbsp;F | 2 |
+| 幾何 | [ベクトルと外積](../geometry/geometry-vectors.md)、[マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md) | ABC472&nbsp;F・ABC476&nbsp;F | 2 |
+| 計算量 | [調和級数と倍数の列挙](../math/harmonic-sum.md) | ABC469&nbsp;F | 1 |
+| 全探索 | [半分全列挙](../basics/meet-in-the-middle.md) | ABC464&nbsp;F | 1 |
+| ソート・座標圧縮 | [座標圧縮](../basics/coordinate-compression.md) | ABC467&nbsp;F | 1 |
+| 連結性・全域木 | [最小全域木](../graph/minimum-spanning-tree.md) | ABC469&nbsp;F | 1 |
+| クエリ処理の工夫 | [クエリの先読み](../ds/offline-queries.md)、[平面走査](../ds/sweep-line-2d.md) | ABC477&nbsp;F | 1 |
+| 整数論 | [約数列挙と素数判定](../math/divisor-enum.md)、[約数の個数の上界と高度合成数](../math/divisor-count-bound.md) | ABC461&nbsp;F | 1 |
+| 文字列 | [Aho-Corasick 法](../string/aho-corasick.md) | ABC458&nbsp;F | 1 |
 
 ### G 問題（黄・発展の帯） {#recent-positions-g}
 
 abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（kind の1つ目）で分けて多い順に並べる。かっこの数は、その位置でそのページを使った問題の数（1 のときは書かない）。
 
-| 種類 | 問題数 | ページ | 問題 |
+| 種類 | ページ | 問題 | 問題数 |
 | --- | --- | --- | --- |
-| DP | 8 | [最長増加部分列](../dp/lis.md)（2）、[挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md)（2）、[桁 DP](../dp/digit-dp.md)、[桁 DP の応用](../dp/digit-dp-advanced.md)、[インライン DP](../dp/inline-dp.md)、[Monge 性による DP の高速化](../dp/monge.md)、[Alien DP](../dp/alien-dp.md)、[Slope Trick](../dp/slope-trick.md) | abc457_g・abc458_g・abc464_g・abc466_g・abc468_g・abc473_g・abc476_g・abc480_g |
-| データ構造 | 6 | [遅延セグメント木](../ds/lazy-segment-tree.md)（2）、[マージテク](../tree/small-to-large.md)、[単調スタックとスライド最小値](../ds/monotonic-stack.md)、[BIT（Fenwick Tree）](../ds/fenwick-tree.md)、[セグメント木](../ds/segment-tree.md)、[永続データ構造](../ds/persistent-data-structures.md)、[マージソート木](../ds/merge-sort-tree.md) | abc453_g・abc454_g・abc460_g・abc467_g・abc470_g・abc480_g |
-| クエリ処理の工夫 | 4 | [クエリの先読み](../ds/offline-queries.md)（3）、[Mo's algorithm](../ds/mo-algorithm.md) | abc453_g・abc463_g・abc467_g・abc477_g |
-| 数え上げ | 4 | [包除原理](../comb/inclusion-exclusion.md)（2）、[二項係数の意味と性質](../comb/binomial-coefficient.md)、[二項係数の前計算](../comb/binomial-precompute.md)、[重複組合せ](../comb/stars-and-bars.md)、[数え上げの考え方](../comb/counting-mindset.md) | abc456_g・abc462_g・abc463_g・abc476_g |
-| 考察 | 4 | [主客転倒・寄与](../thinking/contribution.md)（2）、[偶奇に着目する](../thinking/parity.md)（2）、[言い換えの典型](../thinking/reformulation.md)、[構築問題の考え方](../thinking/construction.md) | abc459_g・abc470_g・abc471_g・abc474_g |
-| ダブリング・分割統治 | 3 | [分割統治](../basics/divide-and-conquer.md)（2）、[再帰的な構造](../basics/recursion-structure.md) | abc451_g・abc476_g・abc478_g |
-| 木 | 3 | [オイラーツアー](../tree/euler-tour.md)（2）、[最小共通祖先（LCA）](../tree/lca.md)、[HL 分解](../tree/hld.md) | abc453_g・abc460_g・abc477_g |
-| 畳み込み・多項式 | 3 | [畳み込みの使い方](../math/convolution-ntt.md)、[分割統治 FFT・オンライン畳み込み](../math/online-convolution.md)、[形式的冪級数と多項式の演算](../math/fps-basics.md) | abc462_g・abc471_g・abc473_g |
-| 幾何 | 3 | [偏角ソート](../geometry/argument-sort.md)、[マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md)、[凸包と凸多角形](../geometry/convex-hull.md)、[発展の幾何](../geometry/advanced-geometry.md) | abc457_g・abc478_g・abc479_g |
-| 尺取り・スライド窓 | 2 | [尺取り法](../basics/two-pointers.md)（2） | abc455_g・abc470_g |
-| フロー・マッチング | 2 | [最小カット](../graph/min-cut.md)、[燃やす埋める](../graph/project-selection.md)、[二部マッチング](../graph/bipartite-matching.md)、[König の定理](../graph/konig-theorem.md) | abc461_g・abc472_g |
-| 整数論 | 2 | [約数の個数の上界と高度合成数](../math/divisor-count-bound.md)、[拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md) | abc459_g・abc475_g |
-| 線形代数・行列 | 2 | [行列累乗](../math/matrix-power.md)、[XOR 基底](../math/xor-basis.md) | abc451_g・abc469_g |
-| 確率・期待値 | 2 | [対称性で確率を求める](../comb/probability-symmetry.md)、[確率 DP](../comb/probability-dp.md) | abc463_g・abc473_g |
-| 二分探索 | 1 | [答えで二分探索](../basics/binary-search-answer.md) | abc458_g |
-| 累積和・差分 | 1 | [累積和](../basics/prefix-sum.md) | abc479_g |
-| 貪欲 | 1 | [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md) | abc464_g |
-| 文字列 | 1 | [ランレングス圧縮](../basics/run-length-encoding.md)、[Suffix Array と LCP 配列](../string/suffix-array.md)、[Suffix Automaton と発展の文字列アルゴリズム](../string/suffix-automaton.md) | abc452_g |
-| ハッシュ・乱択 | 1 | [集合・多重集合のハッシュ](../string/hashing-for-sets.md) | abc455_g |
-| ビット演算 | 1 | [bit 演算の基本と XOR の性質](../basics/bit-operations.md) | abc476_g |
+| DP | [最長増加部分列](../dp/lis.md)（2）、[挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md)（2）、[桁 DP](../dp/digit-dp.md)、[桁 DP の応用](../dp/digit-dp-advanced.md)、[インライン DP](../dp/inline-dp.md)、[Monge 性による DP の高速化](../dp/monge.md)、[Alien DP](../dp/alien-dp.md)、[Slope Trick](../dp/slope-trick.md) | ABC457&nbsp;G・ABC458&nbsp;G・ABC464&nbsp;G・ABC466&nbsp;G・ABC468&nbsp;G・ABC473&nbsp;G・ABC476&nbsp;G・ABC480&nbsp;G | 8 |
+| データ構造 | [遅延セグメント木](../ds/lazy-segment-tree.md)（2）、[マージテク](../tree/small-to-large.md)、[単調スタックとスライド最小値](../ds/monotonic-stack.md)、[BIT（Fenwick Tree）](../ds/fenwick-tree.md)、[セグメント木](../ds/segment-tree.md)、[永続データ構造](../ds/persistent-data-structures.md)、[マージソート木](../ds/merge-sort-tree.md) | ABC453&nbsp;G・ABC454&nbsp;G・ABC460&nbsp;G・ABC467&nbsp;G・ABC470&nbsp;G・ABC480&nbsp;G | 6 |
+| クエリ処理の工夫 | [クエリの先読み](../ds/offline-queries.md)（3）、[Mo's algorithm](../ds/mo-algorithm.md) | ABC453&nbsp;G・ABC463&nbsp;G・ABC467&nbsp;G・ABC477&nbsp;G | 4 |
+| 数え上げ | [包除原理](../comb/inclusion-exclusion.md)（2）、[二項係数の意味と性質](../comb/binomial-coefficient.md)、[二項係数の前計算](../comb/binomial-precompute.md)、[重複組合せ](../comb/stars-and-bars.md)、[数え上げの考え方](../comb/counting-mindset.md) | ABC456&nbsp;G・ABC462&nbsp;G・ABC463&nbsp;G・ABC476&nbsp;G | 4 |
+| 考察 | [主客転倒・寄与](../thinking/contribution.md)（2）、[偶奇に着目する](../thinking/parity.md)（2）、[言い換えの典型](../thinking/reformulation.md)、[構築問題の考え方](../thinking/construction.md) | ABC459&nbsp;G・ABC470&nbsp;G・ABC471&nbsp;G・ABC474&nbsp;G | 4 |
+| ダブリング・分割統治 | [分割統治](../basics/divide-and-conquer.md)（2）、[再帰的な構造](../basics/recursion-structure.md) | ABC451&nbsp;G・ABC476&nbsp;G・ABC478&nbsp;G | 3 |
+| 木 | [オイラーツアー](../tree/euler-tour.md)（2）、[最小共通祖先（LCA）](../tree/lca.md)、[HL 分解](../tree/hld.md) | ABC453&nbsp;G・ABC460&nbsp;G・ABC477&nbsp;G | 3 |
+| 畳み込み・多項式 | [畳み込みの使い方](../math/convolution-ntt.md)、[分割統治 FFT・オンライン畳み込み](../math/online-convolution.md)、[形式的冪級数と多項式の演算](../math/fps-basics.md) | ABC462&nbsp;G・ABC471&nbsp;G・ABC473&nbsp;G | 3 |
+| 幾何 | [偏角ソート](../geometry/argument-sort.md)、[マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md)、[凸包と凸多角形](../geometry/convex-hull.md)、[発展の幾何](../geometry/advanced-geometry.md) | ABC457&nbsp;G・ABC478&nbsp;G・ABC479&nbsp;G | 3 |
+| 尺取り・スライド窓 | [尺取り法](../basics/two-pointers.md)（2） | ABC455&nbsp;G・ABC470&nbsp;G | 2 |
+| フロー・マッチング | [最小カット](../graph/min-cut.md)、[燃やす埋める](../graph/project-selection.md)、[二部マッチング](../graph/bipartite-matching.md)、[König の定理](../graph/konig-theorem.md) | ABC461&nbsp;G・ABC472&nbsp;G | 2 |
+| 整数論 | [約数の個数の上界と高度合成数](../math/divisor-count-bound.md)、[拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md) | ABC459&nbsp;G・ABC475&nbsp;G | 2 |
+| 線形代数・行列 | [行列累乗](../math/matrix-power.md)、[XOR 基底](../math/xor-basis.md) | ABC451&nbsp;G・ABC469&nbsp;G | 2 |
+| 確率・期待値 | [対称性で確率を求める](../comb/probability-symmetry.md)、[確率 DP](../comb/probability-dp.md) | ABC463&nbsp;G・ABC473&nbsp;G | 2 |
+| 二分探索 | [答えで二分探索](../basics/binary-search-answer.md) | ABC458&nbsp;G | 1 |
+| 累積和・差分 | [累積和](../basics/prefix-sum.md) | ABC479&nbsp;G | 1 |
+| 貪欲 | [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md) | ABC464&nbsp;G | 1 |
+| 文字列 | [ランレングス圧縮](../basics/run-length-encoding.md)、[Suffix Array と LCP 配列](../string/suffix-array.md)、[Suffix Automaton と発展の文字列アルゴリズム](../string/suffix-automaton.md) | ABC452&nbsp;G | 1 |
+| ハッシュ・乱択 | [集合・多重集合のハッシュ](../string/hashing-for-sets.md) | ABC455&nbsp;G | 1 |
+| ビット演算 | [bit 演算の基本と XOR の性質](../basics/bit-operations.md) | ABC476&nbsp;G | 1 |
 
 <!-- textlint-enable -->
 <!-- gen:end recent-positions -->
@@ -205,6 +207,10 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 - **余裕があれば**：それ以外である。発展のページの多くがここに入る。
 
 列は番号の順に全部読むためのものではない。まず「必修」の行を前から読み、「準必修」と「余裕があれば」は、例題や本番で出会ったときに読めばよい。節の行は、そのページの下の帯の部分を読んでいれば、節だけを読めば足りる。黄を目指すときは、黄の列と並行して青までの「必修」を復習する（[黄を目指す段の主な条件](#yellow)）。前提のつながりを図で見るときは[知識マップ](knowledge-map.md#focus)を使う。
+
+各行の先頭のチェック欄は、そのページの「理解した」と同じ記録である。節の行は、ページの上の「水の節」のような欄にあたる。ページの上と下の欄で付けても、この列の欄で付けてもよい。次の欄で「理解した行を隠す」を選ぶと、まだ理解していない行だけが残る。
+
+<div class="kp-order-tools"></div>
 
 <!-- gen:begin roadmap-order -->
 <!-- textlint-disable -->
@@ -334,13 +340,13 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 32 | [ダイクストラ法](../graph/dijkstra.md#potential) › ポテンシャルで負辺を消す（Johnson のアイデア）（基礎のページの節） | グラフ | 必修 |
 | 33 | [状態を頂点にする](../graph/extended-dijkstra.md) | グラフ | 必修 |
 | 34 | [最小全域木](../graph/minimum-spanning-tree.md) | グラフ | 必修 |
-| 35 | [01-BFS](../graph/zero-one-bfs.md) | グラフ | 準必修 |
-| 36 | [ワーシャルフロイド法](../graph/warshall-floyd.md) | グラフ | 準必修 |
-| 37 | [最短路 DAG](../graph/shortest-path-dag.md) | グラフ | 準必修 |
-| 38 | [時刻で変わる辺の最短路](../graph/time-dependent-dijkstra.md) | グラフ | 準必修 |
-| 39 | [強連結成分分解（SCC）](../graph/scc.md) | グラフ | 準必修 |
-| 40 | [Functional graph（出次数 1 のグラフ）](../graph/functional-graph.md) | グラフ | 準必修 |
-| 41 | [なもりグラフ](../graph/namori-graph.md) | グラフ | 準必修 |
+| 35 | [なもりグラフ](../graph/namori-graph.md) | グラフ | 準必修 |
+| 36 | [01-BFS](../graph/zero-one-bfs.md) | グラフ | 準必修 |
+| 37 | [ワーシャルフロイド法](../graph/warshall-floyd.md) | グラフ | 準必修 |
+| 38 | [最短路 DAG](../graph/shortest-path-dag.md) | グラフ | 準必修 |
+| 39 | [時刻で変わる辺の最短路](../graph/time-dependent-dijkstra.md) | グラフ | 準必修 |
+| 40 | [強連結成分分解（SCC）](../graph/scc.md) | グラフ | 準必修 |
+| 41 | [Functional graph（出次数 1 のグラフ）](../graph/functional-graph.md) | グラフ | 準必修 |
 | 42 | [Union-Find で連結性を扱う](../graph/union-find-connectivity.md) | グラフ | 準必修 |
 | 43 | [葉から考える](../tree/leaf-first.md) | 木 | 準必修 |
 | 44 | [木の直径と最遠点](../tree/tree-diameter.md) | 木 | 準必修 |
@@ -350,9 +356,9 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 48 | [スタック・キュー・deque の使いどころ](../ds/stack-techniques.md#chords) › 円を切り開いて弦の交差判定に帰着する（基礎のページの節） | データ構造 | 必修 |
 | 49 | [BIT（Fenwick Tree）](../ds/fenwick-tree.md) | データ構造 | 必修 |
 | 50 | [セグメント木](../ds/segment-tree.md) | データ構造 | 必修 |
-| 51 | [優先度付きキュー](../ds/priority-queue.md) | データ構造 | 準必修 |
-| 52 | [区間を set で管理する](../ds/interval-set.md) | データ構造 | 準必修 |
-| 53 | [全体への操作を変数で持つ](../ds/global-offset.md#to-lazy-segment-tree) › 遅延セグメント木とのつながり（全体への操作を区間への操作に広げる）（基礎のページの節） | データ構造 | 準必修 |
+| 51 | [全体への操作を変数で持つ](../ds/global-offset.md#to-lazy-segment-tree) › 遅延セグメント木とのつながり（全体への操作を区間への操作に広げる）（基礎のページの節） | データ構造 | 準必修 |
+| 52 | [優先度付きキュー](../ds/priority-queue.md) | データ構造 | 準必修 |
+| 53 | [区間を set で管理する](../ds/interval-set.md) | データ構造 | 準必修 |
 | 54 | [単調スタックとスライド最小値](../ds/monotonic-stack.md) | データ構造 | 準必修 |
 | 55 | [Union-Find の応用](../ds/union-find-applications.md) | データ構造 | 準必修 |
 | 56 | [重み付き Union-Find](../ds/weighted-union-find.md) | データ構造 | 準必修 |
@@ -360,8 +366,8 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 58 | [調和級数と倍数の列挙](../math/harmonic-sum.md) | 整数論・代数 | 必修 |
 | 59 | [約数の個数の上界と高度合成数](../math/divisor-count-bound.md) | 整数論・代数 | 必修 |
 | 60 | [GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md#reduce-fraction) › 分数・傾きを既約にして map のキーにする（基礎のページの節） | 整数論・代数 | 必修 |
-| 61 | [フェルマーの小定理と指数の mod](../math/exponent-mod.md) | 整数論・代数 | 準必修 |
-| 62 | [等比数列の和を mod で求める](../math/geometric-series-mod.md#halving) › 法が任意のとき：S(2k) = S(k)(1 + r^k) で半分に割る（基礎のページの節） | 整数論・代数 | 準必修 |
+| 61 | [等比数列の和を mod で求める](../math/geometric-series-mod.md#halving) › 法が任意のとき：S(2k) = S(k)(1 + r^k) で半分に割る（基礎のページの節） | 整数論・代数 | 準必修 |
+| 62 | [フェルマーの小定理と指数の mod](../math/exponent-mod.md) | 整数論・代数 | 準必修 |
 | 63 | [桁と mod](../math/digit-and-mod.md) | 整数論・代数 | 準必修 |
 | 64 | [素因数の指数で考える](../math/prime-exponent-vector.md#huge-lcm) › 巨大な lcm を指数の最大で持つ（基礎のページの節） | 整数論・代数 | 準必修 |
 | 65 | [素因数の指数で考える](../math/prime-exponent-vector.md#single-prime) › 特定の素数（2 など）の指数だけを比べる（基礎のページの節） | 整数論・代数 | 準必修 |
@@ -459,8 +465,8 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 42 | [連結成分](../graph/connected-components.md#values-as-vertices) › 座標や値を頂点にして成分を考える（基礎のページの節） | グラフ | 準必修 |
 | 43 | [小さいグラフの全探索](../graph/small-graph-brute-force.md#coloring) › 彩色は成分ごとに DFS で塗って探索を絞る（基礎のページの節） | グラフ | 準必修 |
 | 44 | [ワーシャルフロイド法](../graph/warshall-floyd.md#redundant-edges) › 迂回できる辺は不要（水のページの節） | グラフ | 準必修 |
-| 45 | [ベルマンフォード法](../graph/bellman-ford.md) | グラフ | 準必修 |
-| 46 | [時刻で変わる辺の最短路](../graph/time-dependent-dijkstra.md#optimal-departure) › 最適な出発時刻を計算してから進む（水のページの節） | グラフ | 準必修 |
+| 45 | [時刻で変わる辺の最短路](../graph/time-dependent-dijkstra.md#optimal-departure) › 最適な出発時刻を計算してから進む（水のページの節） | グラフ | 準必修 |
+| 46 | [ベルマンフォード法](../graph/bellman-ford.md) | グラフ | 準必修 |
 | 47 | [Union-Find で連結性を扱う](../graph/union-find-connectivity.md#binary-search) › 二分探索と連結判定の組合せ（水のページの節） | グラフ | 準必修 |
 | 48 | [最小ボトルネック路](../graph/bottleneck-path.md) | グラフ | 準必修 |
 | 49 | [DFS 木・BFS 木とグラフの構築](../graph/graph-construction.md) | グラフ | 準必修 |
@@ -577,8 +583,8 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 27 | [オイラー路（一筆書き）](../graph/euler-path.md) | グラフ | 余裕があれば |
 | 28 | [木の直径と最遠点](../tree/tree-diameter.md#center) › 中心と半径・直径の個数（水のページの節） | 木 | 準必修 |
 | 29 | [木の直径と最遠点](../tree/tree-diameter.md#long-path-decomposition) › 長鎖分解（最も深い子へつなぐ分解と、最も遠い葉を順に選ぶ貪欲）（水のページの節） | 木 | 準必修 |
-| 30 | [木の重心](../tree/tree-centroid.md) | 木 | 準必修 |
-| 31 | [辺で切って数える](../tree/tree-edge-contribution.md#expectation) › 期待値・特定の色を通らないパスへの応用（水のページの節） | 木 | 準必修 |
+| 30 | [辺で切って数える](../tree/tree-edge-contribution.md#expectation) › 期待値・特定の色を通らないパスへの応用（水のページの節） | 木 | 準必修 |
+| 31 | [木の重心](../tree/tree-centroid.md) | 木 | 準必修 |
 | 32 | [マージテク](../tree/small-to-large.md#reroot-smaller) › 森に辺を足すとき小さい方を根付け直す（水のページの節） | 木 | 準必修 |
 | 33 | [マージテク](../tree/small-to-large.md#subtree-merge) › 部分木ごとの集合の併合（木 DP での使い方は DP の章）（水のページの節） | 木 | 準必修 |
 | 34 | [マージテク](../tree/small-to-large.md#dsu-on-tree) › DSU on Tree（重い子の結果を残す）（水のページの節） | 木 | 準必修 |
@@ -648,79 +654,79 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 2 | [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md#connected-component-dp) › 連結成分 DP（ブロックを作る・端に付ける・つなぐ）（黄のページの節） | 動的計画法 | 必修 |
 | 3 | [プロファイル DP](../dp/broken-profile-dp.md#connectivity) › 連結性を持つ（フロンティア法）（黄のページの節） | 動的計画法 | 準必修 |
 | 4 | [Monge 性による DP の高速化](../dp/monge.md) | 動的計画法 | 準必修 |
-| 5 | [Slope Trick](../dp/slope-trick.md) | 動的計画法 | 準必修 |
-| 6 | [動的 DP](../dp/dynamic-dp.md) | 動的計画法 | 余裕があれば |
-| 7 | [Convex Hull Trick と Li Chao Tree](../dp/cht.md) | 動的計画法 | 余裕があれば |
-| 8 | [最小ボトルネック路](../graph/bottleneck-path.md#reconstruction-tree) › 併合過程の木（Kruskal 再構築木）でオンラインに答える（木の章へ）（青のページの節） | グラフ | 準必修 |
-| 9 | [橋・関節点・二重連結成分](../graph/lowlink.md#block-cut-tree) › 二重頂点連結成分とブロックカット木（黄のページの節） | グラフ | 準必修 |
-| 10 | [最小カット](../graph/min-cut.md#cut-shape) › カットの形を決め打つ（黄のページの節） | グラフ | 準必修 |
-| 11 | [燃やす埋める](../graph/project-selection.md#multi-valued) › 多値変数を頂点の列で表す（黄のページの節） | グラフ | 準必修 |
-| 12 | [二部マッチング](../graph/bipartite-matching.md#edge-coloring) › 正則二部グラフの分解・辺彩色（黄のページの節） | グラフ | 準必修 |
-| 13 | [König の定理](../graph/konig-theorem.md#lp-half-integrality) › 頂点を 2 倍にして二部グラフにする（LP の半整数性）（黄のページの節） | グラフ | 準必修 |
-| 14 | [最小費用流](../graph/min-cost-flow.md#hungarian) › 割当問題とハンガリアン法（黄のページの節） | グラフ | 準必修 |
-| 15 | [最小パス被覆と Hall の定理](../graph/dilworth-path-cover.md) | グラフ | 準必修 |
-| 16 | [彩色数・最大独立集合・最大クリーク](../graph/chromatic-number.md) | グラフ | 余裕があれば |
-| 17 | [剰余を頂点にする最短路](../graph/modular-shortest-path.md) | グラフ | 余裕があれば |
-| 18 | [区間に辺を張る](../graph/segment-tree-graph.md) | グラフ | 余裕があれば |
-| 19 | [K 番目の最短路](../graph/k-shortest-paths.md) | グラフ | 余裕があれば |
-| 20 | [最小シュタイナー木](../graph/steiner-tree.md) | グラフ | 余裕があれば |
-| 21 | [2-SAT](../graph/two-sat.md) | グラフ | 余裕があれば |
-| 22 | [特殊な最小全域木](../graph/spanning-tree-advanced.md) | グラフ | 余裕があれば |
-| 23 | [最小流量制約付きフロー](../graph/flow-lower-bounds.md) | グラフ | 余裕があれば |
-| 24 | [一般グラフのマッチング](../graph/general-matching.md) | グラフ | 余裕があれば |
-| 25 | [オイラーツアー](../tree/euler-tour.md#to-hld) › 逆元がない演算・パスへの一括更新は HL 分解（青のページの節） | 木 | 必修 |
-| 26 | [木の上のパスの判定と分解](../tree/tree-path.md#to-hld) › パスへの一括更新があるなら HL 分解（青のページの節） | 木 | 準必修 |
-| 27 | [HL 分解](../tree/hld.md) | 木 | 準必修 |
-| 28 | [重心分解](../tree/centroid-decomposition.md#with-convolution) › 距離の頻度表は畳み込みと組む（黄のページの節） | 木 | 準必修 |
-| 29 | [木の同型判定と木のハッシュ](../tree/tree-isomorphism.md) | 木 | 余裕があれば |
-| 30 | [Auxiliary Tree](../tree/auxiliary-tree.md) | 木 | 余裕があれば |
-| 31 | [併合過程の木](../tree/merge-process-tree.md) | 木 | 余裕があれば |
-| 32 | [比で親に併合する貪欲](../tree/tree-ratio-greedy.md) | 木 | 余裕があれば |
-| 33 | [単調スタックとスライド最小値](../ds/monotonic-stack.md#swag) › SWAG：スタック 2 本で作る総積つきキュー（水のページの節） | データ構造 | 準必修 |
-| 34 | [Sparse Table](../ds/sparse-table.md#disjoint-sparse-table) › 冪等でない演算（2 べきに分けて O(log N)、Disjoint Sparse Table）（青のページの節） | データ構造 | 準必修 |
-| 35 | [Mo's algorithm](../ds/mo-algorithm.md#variants) › 時間付き Mo・ロールバック Mo（青のページの節） | データ構造 | 準必修 |
-| 36 | [永続データ構造](../ds/persistent-data-structures.md#prefix-versions) › 接頭辞ごとの版で区間の K 番目・x 以下の個数をオンラインで求める（青のページの節） | データ構造 | 準必修 |
-| 37 | [マージソート木](../ds/merge-sort-tree.md#bit-per-level) › 各段に BIT を持たせる（先読みと組む）（青のページの節） | データ構造 | 準必修 |
-| 38 | [部分永続 Union-Find](../ds/partially-persistent-union-find.md) | データ構造 | 余裕があれば |
-| 39 | [ロールバックできる Union-Find](../ds/rollback-union-find.md) | データ構造 | 余裕があれば |
-| 40 | [Segment Tree Beats](../ds/segment-tree-beats.md) | データ構造 | 余裕があれば |
-| 41 | [並列二分探索](../ds/parallel-binary-search.md) | データ構造 | 余裕があれば |
-| 42 | [CDQ 分割統治](../ds/cdq-divide-and-conquer.md) | データ構造 | 余裕があれば |
-| 43 | [Wavelet Matrix](../ds/wavelet-matrix.md) | データ構造 | 余裕があれば |
-| 44 | [平衡二分探索木と pb_ds の tree](../ds/balanced-bst.md) | データ構造 | 余裕があれば |
-| 45 | [位数・原始根・離散対数](../math/multiplicative-order.md#mod-root) › 平方剰余と mod の K 乗根（オイラーの規準・Tonelli-Shanks・Cipolla）（黄のページの節） | 整数論・代数 | 準必修 |
-| 46 | [floor sum](../math/floor-sum.md#applications) › 応用の型：bit ごとの popcount・一次式の mod の積（黄のページの節） | 整数論・代数 | 準必修 |
-| 47 | [分割統治 FFT・オンライン畳み込み](../math/online-convolution.md) | 整数論・代数 | 準必修 |
-| 48 | [形式的冪級数と多項式の演算](../math/fps-basics.md) | 整数論・代数 | 準必修 |
-| 49 | [大きな数の素数判定と素因数分解](../math/miller-rabin.md) | 整数論・代数 | 余裕があれば |
-| 50 | [乗法的関数の和と素数の個数](../math/multiplicative-function.md) | 整数論・代数 | 余裕があれば |
-| 51 | [Stern-Brocot 木と連分数](../math/stern-brocot.md) | 整数論・代数 | 余裕があれば |
-| 52 | [行列式](../math/determinant.md) | 整数論・代数 | 余裕があれば |
-| 53 | [FFT・NTT の仕組みと任意 mod の畳み込み](../math/fft-ntt.md) | 整数論・代数 | 余裕があれば |
-| 54 | [XOR 畳み込み](../math/hadamard-transform.md) | 整数論・代数 | 余裕があれば |
-| 55 | [ラグランジュ補間とべき乗和](../math/lagrange-interpolation.md) | 整数論・代数 | 余裕があれば |
-| 56 | [包除原理](../comb/inclusion-exclusion.md#min-max) › min-max 包除（全種類がそろうまでの期待値）（青のページの節） | 数え上げ・確率・ゲーム | 必修 |
-| 57 | [母関数の考え方](../comb/generating-function-counting.md) | 数え上げ・確率・ゲーム | 準必修 |
-| 58 | [メビウス関数とメビウス反転](../comb/mobius-function.md#quotient) › 商の列挙で同じ値の範囲を束ねる（黄のページの節） | 数え上げ・確率・ゲーム | 準必修 |
-| 59 | [整数の分割と分割数](../comb/partition-number.md#partition-dp) › 分割数型の DP（黄のページの節） | 数え上げ・確率・ゲーム | 準必修 |
-| 60 | [期待値と確率の変換](../comb/expectation-tail-sum.md#continuous) › 連続値の場合（積分）（黄のページの節） | 数え上げ・確率・ゲーム | 準必修 |
-| 61 | [Nim と XOR](../comb/nim.md#misere) › 逆形 Nim（最後に取った方が負け）（水のページの節） | 数え上げ・確率・ゲーム | 準必修 |
-| 62 | [Nim と XOR](../comb/nim.md#counting) › 必勝局面の数え上げ（XOR 畳み込み）（水のページの節） | 数え上げ・確率・ゲーム | 準必修 |
-| 63 | [後退解析](../comb/game-retrograde-analysis.md#weighted) › 得点のあるゲームはダイクストラ法の要領で確定させる（黄のページの節） | 数え上げ・確率・ゲーム | 準必修 |
-| 64 | [Burnside の補題](../comb/burnside-lemma.md) | 数え上げ・確率・ゲーム | 余裕があれば |
-| 65 | [二項係数の部分和](../comb/binomial-prefix-sum.md) | 数え上げ・確率・ゲーム | 余裕があれば |
+| 5 | [Alien DP](../dp/alien-dp.md) | 動的計画法 | 準必修 |
+| 6 | [Slope Trick](../dp/slope-trick.md) | 動的計画法 | 準必修 |
+| 7 | [動的 DP](../dp/dynamic-dp.md) | 動的計画法 | 余裕があれば |
+| 8 | [Convex Hull Trick と Li Chao Tree](../dp/cht.md) | 動的計画法 | 余裕があれば |
+| 9 | [最小ボトルネック路](../graph/bottleneck-path.md#reconstruction-tree) › 併合過程の木（Kruskal 再構築木）でオンラインに答える（木の章へ）（青のページの節） | グラフ | 準必修 |
+| 10 | [橋・関節点・二重連結成分](../graph/lowlink.md#block-cut-tree) › 二重頂点連結成分とブロックカット木（黄のページの節） | グラフ | 準必修 |
+| 11 | [最小カット](../graph/min-cut.md#cut-shape) › カットの形を決め打つ（黄のページの節） | グラフ | 準必修 |
+| 12 | [燃やす埋める](../graph/project-selection.md#multi-valued) › 多値変数を頂点の列で表す（黄のページの節） | グラフ | 準必修 |
+| 13 | [二部マッチング](../graph/bipartite-matching.md#edge-coloring) › 正則二部グラフの分解・辺彩色（黄のページの節） | グラフ | 準必修 |
+| 14 | [König の定理](../graph/konig-theorem.md#lp-half-integrality) › 頂点を 2 倍にして二部グラフにする（LP の半整数性）（黄のページの節） | グラフ | 準必修 |
+| 15 | [最小費用流](../graph/min-cost-flow.md#hungarian) › 割当問題とハンガリアン法（黄のページの節） | グラフ | 準必修 |
+| 16 | [最小パス被覆と Hall の定理](../graph/dilworth-path-cover.md) | グラフ | 準必修 |
+| 17 | [彩色数・最大独立集合・最大クリーク](../graph/chromatic-number.md) | グラフ | 余裕があれば |
+| 18 | [剰余を頂点にする最短路](../graph/modular-shortest-path.md) | グラフ | 余裕があれば |
+| 19 | [区間に辺を張る](../graph/segment-tree-graph.md) | グラフ | 余裕があれば |
+| 20 | [K 番目の最短路](../graph/k-shortest-paths.md) | グラフ | 余裕があれば |
+| 21 | [最小シュタイナー木](../graph/steiner-tree.md) | グラフ | 余裕があれば |
+| 22 | [2-SAT](../graph/two-sat.md) | グラフ | 余裕があれば |
+| 23 | [特殊な最小全域木](../graph/spanning-tree-advanced.md) | グラフ | 余裕があれば |
+| 24 | [最小流量制約付きフロー](../graph/flow-lower-bounds.md) | グラフ | 余裕があれば |
+| 25 | [一般グラフのマッチング](../graph/general-matching.md) | グラフ | 余裕があれば |
+| 26 | [オイラーツアー](../tree/euler-tour.md#to-hld) › 逆元がない演算・パスへの一括更新は HL 分解（青のページの節） | 木 | 必修 |
+| 27 | [木の上のパスの判定と分解](../tree/tree-path.md#to-hld) › パスへの一括更新があるなら HL 分解（青のページの節） | 木 | 準必修 |
+| 28 | [HL 分解](../tree/hld.md) | 木 | 準必修 |
+| 29 | [重心分解](../tree/centroid-decomposition.md#with-convolution) › 距離の頻度表は畳み込みと組む（黄のページの節） | 木 | 準必修 |
+| 30 | [木の同型判定と木のハッシュ](../tree/tree-isomorphism.md) | 木 | 余裕があれば |
+| 31 | [Auxiliary Tree](../tree/auxiliary-tree.md) | 木 | 余裕があれば |
+| 32 | [併合過程の木](../tree/merge-process-tree.md) | 木 | 余裕があれば |
+| 33 | [比で親に併合する貪欲](../tree/tree-ratio-greedy.md) | 木 | 余裕があれば |
+| 34 | [単調スタックとスライド最小値](../ds/monotonic-stack.md#swag) › SWAG：スタック 2 本で作る総積つきキュー（水のページの節） | データ構造 | 準必修 |
+| 35 | [Sparse Table](../ds/sparse-table.md#disjoint-sparse-table) › 冪等でない演算（2 べきに分けて O(log N)、Disjoint Sparse Table）（青のページの節） | データ構造 | 準必修 |
+| 36 | [Mo's algorithm](../ds/mo-algorithm.md#variants) › 時間付き Mo・ロールバック Mo（青のページの節） | データ構造 | 準必修 |
+| 37 | [永続データ構造](../ds/persistent-data-structures.md#prefix-versions) › 接頭辞ごとの版で区間の K 番目・x 以下の個数をオンラインで求める（青のページの節） | データ構造 | 準必修 |
+| 38 | [マージソート木](../ds/merge-sort-tree.md#bit-per-level) › 各段に BIT を持たせる（先読みと組む）（青のページの節） | データ構造 | 準必修 |
+| 39 | [部分永続 Union-Find](../ds/partially-persistent-union-find.md) | データ構造 | 余裕があれば |
+| 40 | [ロールバックできる Union-Find](../ds/rollback-union-find.md) | データ構造 | 余裕があれば |
+| 41 | [Segment Tree Beats](../ds/segment-tree-beats.md) | データ構造 | 余裕があれば |
+| 42 | [並列二分探索](../ds/parallel-binary-search.md) | データ構造 | 余裕があれば |
+| 43 | [CDQ 分割統治](../ds/cdq-divide-and-conquer.md) | データ構造 | 余裕があれば |
+| 44 | [Wavelet Matrix](../ds/wavelet-matrix.md) | データ構造 | 余裕があれば |
+| 45 | [平衡二分探索木と pb_ds の tree](../ds/balanced-bst.md) | データ構造 | 余裕があれば |
+| 46 | [位数・原始根・離散対数](../math/multiplicative-order.md#mod-root) › 平方剰余と mod の K 乗根（オイラーの規準・Tonelli-Shanks・Cipolla）（黄のページの節） | 整数論・代数 | 準必修 |
+| 47 | [floor sum](../math/floor-sum.md#applications) › 応用の型：bit ごとの popcount・一次式の mod の積（黄のページの節） | 整数論・代数 | 準必修 |
+| 48 | [分割統治 FFT・オンライン畳み込み](../math/online-convolution.md) | 整数論・代数 | 準必修 |
+| 49 | [形式的冪級数と多項式の演算](../math/fps-basics.md) | 整数論・代数 | 準必修 |
+| 50 | [大きな数の素数判定と素因数分解](../math/miller-rabin.md) | 整数論・代数 | 余裕があれば |
+| 51 | [乗法的関数の和と素数の個数](../math/multiplicative-function.md) | 整数論・代数 | 余裕があれば |
+| 52 | [Stern-Brocot 木と連分数](../math/stern-brocot.md) | 整数論・代数 | 余裕があれば |
+| 53 | [行列式](../math/determinant.md) | 整数論・代数 | 余裕があれば |
+| 54 | [FFT・NTT の仕組みと任意 mod の畳み込み](../math/fft-ntt.md) | 整数論・代数 | 余裕があれば |
+| 55 | [XOR 畳み込み](../math/hadamard-transform.md) | 整数論・代数 | 余裕があれば |
+| 56 | [ラグランジュ補間とべき乗和](../math/lagrange-interpolation.md) | 整数論・代数 | 余裕があれば |
+| 57 | [包除原理](../comb/inclusion-exclusion.md#min-max) › min-max 包除（全種類がそろうまでの期待値）（青のページの節） | 数え上げ・確率・ゲーム | 必修 |
+| 58 | [母関数の考え方](../comb/generating-function-counting.md) | 数え上げ・確率・ゲーム | 準必修 |
+| 59 | [メビウス関数とメビウス反転](../comb/mobius-function.md#quotient) › 商の列挙で同じ値の範囲を束ねる（黄のページの節） | 数え上げ・確率・ゲーム | 準必修 |
+| 60 | [整数の分割と分割数](../comb/partition-number.md#partition-dp) › 分割数型の DP（黄のページの節） | 数え上げ・確率・ゲーム | 準必修 |
+| 61 | [期待値と確率の変換](../comb/expectation-tail-sum.md#continuous) › 連続値の場合（積分）（黄のページの節） | 数え上げ・確率・ゲーム | 準必修 |
+| 62 | [Nim と XOR](../comb/nim.md#misere) › 逆形 Nim（最後に取った方が負け）（水のページの節） | 数え上げ・確率・ゲーム | 準必修 |
+| 63 | [Nim と XOR](../comb/nim.md#counting) › 必勝局面の数え上げ（XOR 畳み込み）（水のページの節） | 数え上げ・確率・ゲーム | 準必修 |
+| 64 | [後退解析](../comb/game-retrograde-analysis.md#weighted) › 得点のあるゲームはダイクストラ法の要領で確定させる（黄のページの節） | 数え上げ・確率・ゲーム | 準必修 |
+| 65 | [Burnside の補題](../comb/burnside-lemma.md) | 数え上げ・確率・ゲーム | 余裕があれば |
 | 66 | [鏡像法とカタラン数](../comb/reflection-principle.md#two-sided) › 両端を越えない場合（黄のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
-| 67 | [包除 DP](../comb/inclusion-exclusion-dp.md#tree) › 符号付きの木 DP（黄のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
-| 68 | [第 1 種スターリング数](../comb/stirling-first.md) | 数え上げ・確率・ゲーム | 余裕があれば |
-| 69 | [Young 図形とフック長公式](../comb/young-tableaux.md) | 数え上げ・確率・ゲーム | 余裕があれば |
-| 70 | [ラベル付き木の数え上げ](../comb/cayley-pruefer.md#with-polynomials) › 多項式（母関数）と組み合わせる（黄のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
-| 71 | [連続値の確率](../comb/continuous-probability.md) | 数え上げ・確率・ゲーム | 余裕があれば |
-| 72 | [非不偏ゲーム](../comb/partizan-games.md) | 数え上げ・確率・ゲーム | 余裕があれば |
-| 73 | [Suffix Array と LCP 配列](../string/suffix-array.md#kth-substring) › 部分文字列の辞書順 K 番目（黄のページの節） | 文字列 | 準必修 |
-| 74 | [Suffix Automaton と発展の文字列アルゴリズム](../string/suffix-automaton.md) | 文字列 | 準必修 |
-| 75 | [発展の幾何](../geometry/advanced-geometry.md) | 幾何 | 準必修 |
-| 76 | [構文解析](../misc/parsing.md#substring-sum) › 式の部分文字列の総和（青のページの節） | その他の技法 | 準必修 |
-| 77 | [Alien DP](../dp/alien-dp.md) | 動的計画法 | 準必修 |
+| 67 | [二項係数の部分和](../comb/binomial-prefix-sum.md) | 数え上げ・確率・ゲーム | 余裕があれば |
+| 68 | [包除 DP](../comb/inclusion-exclusion-dp.md#tree) › 符号付きの木 DP（黄のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
+| 69 | [第 1 種スターリング数](../comb/stirling-first.md) | 数え上げ・確率・ゲーム | 余裕があれば |
+| 70 | [Young 図形とフック長公式](../comb/young-tableaux.md) | 数え上げ・確率・ゲーム | 余裕があれば |
+| 71 | [ラベル付き木の数え上げ](../comb/cayley-pruefer.md#with-polynomials) › 多項式（母関数）と組み合わせる（黄のページの節） | 数え上げ・確率・ゲーム | 余裕があれば |
+| 72 | [連続値の確率](../comb/continuous-probability.md) | 数え上げ・確率・ゲーム | 余裕があれば |
+| 73 | [非不偏ゲーム](../comb/partizan-games.md) | 数え上げ・確率・ゲーム | 余裕があれば |
+| 74 | [Suffix Array と LCP 配列](../string/suffix-array.md#kth-substring) › 部分文字列の辞書順 K 番目（黄のページの節） | 文字列 | 準必修 |
+| 75 | [Suffix Automaton と発展の文字列アルゴリズム](../string/suffix-automaton.md) | 文字列 | 準必修 |
+| 76 | [発展の幾何](../geometry/advanced-geometry.md) | 幾何 | 準必修 |
+| 77 | [構文解析](../misc/parsing.md#substring-sum) › 式の部分文字列の総和（青のページの節） | その他の技法 | 準必修 |
 | 78 | [辺の追加と削除が混ざる連結性](../graph/offline-dynamic-connectivity.md) | グラフ | 余裕があれば |
 | 79 | [行列木定理](../graph/matrix-tree-theorem.md) | グラフ | 余裕があれば |
 | 80 | [Static Top Tree と木 DP の動的更新](../tree/static-top-tree.md) | 木 | 余裕があれば |
@@ -751,20 +757,21 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 
 ## 解いた数・理解した数 {#progress}
 
-下の表は、このブラウザで付けた「理解した」と「解いた」のチェックを、レベル別と分野別に集計したものである。
+下の表は、このブラウザで付けた「理解した」と「解いた」のチェックを集計したものである。レベル別・分野別の表と、問題の difficulty の色別の表がある。
 
-- **理解した**：各ページの上と下にあるチェック欄から数える。チェック欄はページのレベルと、ページの中の上の帯の節のレベルの数だけあり、1 つずつ数える。
-- **解いた問題**：各ページの例題・練習・力試しの一覧の、行の先頭のチェック欄から数える。
+- **理解した**：各ページの上と下にあるチェック欄と、[色ごとのページの列](#reading-order)の行のチェック欄から数える。チェック欄はページのレベルと、ページの中の上の帯の節のレベルの数だけあり、1 つずつ数える。
+- **解いた問題**：各ページの例題・練習・力試しの一覧の、行の先頭のチェック欄から数える。レベル別・分野別の表では、問題を載せたページのレベル・分野で数える。
+- **difficulty の色別**：解いた問題を、問題そのものの difficulty の色（灰・茶・緑・水・青・黄・橙・赤）で数える。基礎のページにも difficulty の高い力試しが載るので、水の difficulty の問題を何問解いたかは、この表で見る。
 
 <div class="kp-roadmap-stats"></div>
 
-記録はこのブラウザの localStorage にだけ保存し、端末どうしで同期しない。別の端末へ移すときや退避するときは、次の欄で書き出し・読み込みをする。
+記録はこのブラウザの localStorage にだけ保存し、端末どうしで同期しない。別の端末へ移すときや退避するときは、次の欄で書き出し・読み込みをする。「ファイルに保存」で記録を JSON のファイルに書き出し、別の端末では「ファイルから読み込む」でそのファイルを選ぶ。欄には、最後に書き出した日も出る。
 
 <div class="kp-progress-io"></div>
 
-iPhone や Mac の Safari では、Safari を使った 7 日の間にこのサイトを一度も操作しないと、localStorage を含む保存データが消える。WebKit の Intelligent Tracking Prevention の仕様である。ホーム画面に追加したウェブアプリは、そのアプリを実際に使った日だけを数えるので消えにくい。Safari で読むときは、ときどき書き出して退避しておく。
+iPhone や Mac の Safari では、Safari を使った 7 日の間にこのサイトを一度も操作しないと、localStorage を含む保存データが消える。WebKit の Intelligent Tracking Prevention の仕様である。ホーム画面に追加したウェブアプリは、そのアプリを実際に使った日だけを数えるので消えにくい。Safari で読むときは、ときどきファイルに保存して退避しておく。
 
-理解したページと前提のつながりは、[知識マップ](knowledge-map.md#progress)で塗り分けて見られる。
+理解したページと前提のつながりは、[知識マップ](knowledge-map.md#progress)で塗り分けて見られる。あとで読みたいページは、各ページの「勉強したい」で[勉強したいリスト](study-list.md)に入れておける。
 
 ## シラバスではないこと {#not-a-syllabus}
 

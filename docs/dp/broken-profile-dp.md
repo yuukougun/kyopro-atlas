@@ -27,7 +27,7 @@ sections:
   - {title: 長さが巨大なら行列累乗と組み合わせる, anchor: with-matrix-power}
   - {title: 連結性を持つ（フロンティア法）, anchor: connectivity, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -95,6 +95,9 @@ $H \times W$ の盤を $1 \times 2$ のドミノで敷き詰める方法の数�
 --8<-- "broken-profile-dp/domino.cpp:core"
 ```
 
+完全なプログラム：[`domino.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/broken-profile-dp/domino.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 行が変わるときに特別な処理は要らない。行 $i$ の最後のマスを処理し終えると、すべての bit が行 $i+1$ のマスを表すようになり、そのまま次の行の最初のマスの状態になる。
 
 **なぜ正しいか**：マス $(i, j)$ を処理するときに置くドミノは、$(i, j)$ と、その下か右のマスを覆う。下のマス $(i+1, j)$ も右のマス $(i, j+1)$ も、処理した後の境界の外側のマスである。よって、未処理のマスのうちすでに覆われているものは、いつも境界の外側の $W$ マスの中にある。この先の置き方は「未処理のマスのどれが覆われているか」だけで決まるので、$S$ が同じ置き方は合流させてよい。
@@ -132,11 +135,17 @@ $$
 --8<-- "broken-profile-dp/coloring.cpp:enumerate"
 ```
 
+完全なプログラム：[`coloring.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/broken-profile-dp/coloring.cpp)（GitHub）
+{ .kp-code-src }
+
 列挙した状態の番号で DP を回す。盤の横幅が長ければ、先に縦横を入れ替えて短い辺を横にする。
 
 ```cpp
 --8<-- "broken-profile-dp/coloring.cpp:dp"
 ```
+
+完全なプログラム：[`coloring.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/broken-profile-dp/coloring.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 **計算量**：状態数を $T$、1 マスの選択肢の数を $c$ として、DP は $O(HW \cdot T \cdot c)$ である。列挙は列ごとに 1 回なので $O(W \cdot T \cdot c \log T)$ で、合わせて $O(HW \cdot T \cdot c + W \cdot T \cdot c \log T)$ になる。3 色の例で $HW \le 200$ なら、DP は $200 \times 49152 \times 3 \approx 2.9 \times 10^7$ 以下で済む。
 
@@ -210,7 +219,7 @@ $H \times W \le 200$ なので、縦横を入れ替えて短い辺を横にす�
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [典型90 023. Avoid War（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_w)（diff —）：H×W の盤の空いたマスに、互いに隣接（8 近傍）しないようにキングを置く方法の数を求める。
+- [典型90 023. Avoid War（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_w)（diff なし）：H×W の盤の空いたマスに、互いに隣接（8 近傍）しないようにキングを置く方法の数を求める。
 - [ABC204 F. Hanjo 2](https://atcoder.jp/contests/abc204/tasks/abc204_f)（diff 2044）：H×W（H ≤ 6、W ≤ 10^12）の部屋に 1×1 と 1×2 の畳を敷き詰める方法の数を求める。
 
 </div>
@@ -223,7 +232,7 @@ $H \times W \le 200$ なので、縦横を入れ替えて短い辺を横にす�
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [TDPC S. マス目](https://atcoder.jp/contests/tdpc/tasks/tdpc_grid)（diff —）：H×W（H ≤ 6）のグリッドを白黒に塗り、左上と右下が黒マスだけを通ってつながるようにする方法の数を求める。
+- [TDPC S. マス目](https://atcoder.jp/contests/tdpc/tasks/tdpc_grid)（diff なし）：H×W（H ≤ 6）のグリッドを白黒に塗り、左上と右下が黒マスだけを通ってつながるようにする方法の数を求める。
 - [ABC296 Ex. Unite](https://atcoder.jp/contests/abc296/tasks/abc296_h)（diff 2822）：白黒のグリッドで、白マスをいくつか黒に塗って黒マス全体を連結にするときの、塗るマスの数の最小を求める。
 
 </div>

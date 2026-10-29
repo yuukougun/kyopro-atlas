@@ -119,6 +119,9 @@ $$
 --8<-- "exchange-argument/weighted-order.cpp:core"
 ```
 
+完全なプログラム：[`weighted-order.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/exchange-argument/weighted-order.cpp)（GitHub）
+{ .kp-code-src }
+
 ## 連結の比較（a+b と b+a） {#concatenation}
 
 数字の文字列をすべて並べて連結し、整数として最大にするなら、隣り合う $a, b$ について $a + b$ と $b + a$（$+$ は連結）を比べ、大きくなる方を先に置く。前後の文字列は入れ替えに関係なく同じ位置に残るので、隣接交換の条件そのものである。
@@ -136,6 +139,9 @@ $$
 ```cpp
 --8<-- "exchange-argument/concat.cpp:core"
 ```
+
+完全なプログラム：[`concat.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/exchange-argument/concat.cpp)（GitHub）
+{ .kp-code-src }
 
 比較 1 回は $O(\lvert a \rvert + \lvert b \rvert)$ なので、全体は文字列の最大の長さを $L$ として $O(L N \log N)$ である。比較のたびに連結した文字列を作るので、定数倍は重い。
 

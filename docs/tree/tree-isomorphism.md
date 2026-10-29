@@ -25,7 +25,7 @@ sections:
   - {title: 根のない木は中心を根にする, anchor: unrooted}
   - {title: 公開ライブラリと自作するときの要点, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -66,6 +66,9 @@ AHU 法（Aho・Hopcroft・Ullman による）は、各頂点 $v$ の部分木�
 ```cpp
 --8<-- "tree-isomorphism/ahu.cpp:core"
 ```
+
+完全なプログラム：[`ahu.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-isomorphism/ahu.cpp)（GitHub）
+{ .kp-code-src }
 
 名前の種類数 `dict.size()` が「形が違う部分木の種類数」で、頂点 $u$ と $v$ の部分木が同型かは `name[u] == name[v]` で判定できる。
 
@@ -111,6 +114,9 @@ $$
 --8<-- "tree-isomorphism/unrooted-hash.cpp:core"
 ```
 
+完全なプログラム：[`unrooted-hash.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-isomorphism/unrooted-hash.cpp)（GitHub）
+{ .kp-code-src }
+
 ## 公開ライブラリと自作するときの要点 {#library}
 
 ACL には木の同型判定も木のハッシュもない。公開ライブラリには次のものがある。
@@ -128,9 +134,9 @@ Library Checker の [Rooted Tree Isomorphism Classification](https://judge.yosup
 
 ## 学ぶための資料 {#resources}
 
-- OI Wiki の「AHU 算法」（中国語）：深さごとの基数ソートで $O(N)$ にする方法と、文字列を連結すると $O(N^2)$ になることの説明がある（文章と図の利用条件は CC BY-SA）。
-- OI Wiki の「树哈希」（中国語）：整数の写像で写してから和を取る設計と、根のない木を重心か全方位の計算で扱う方法がある（同じく CC BY-SA）。
-- Nyaan 氏のライブラリの Rooted Tree Hash の項：高さごとの乱数と法 $2^{61} - 1$ の積で作る木のハッシュの実装。
+- [OI Wiki「AHU 算法」](https://oi-wiki.org/graph/tree-ahu/)（中国語）：深さごとの基数ソートで $O(N)$ にする方法と、文字列を連結すると $O(N^2)$ になることの説明がある（文章と図の利用条件は CC BY-SA）。
+- [OI Wiki「树哈希」](https://oi-wiki.org/graph/tree-hash/)（中国語）：整数の写像で写してから和を取る設計と、根のない木を重心か全方位の計算で扱う方法がある（同じく CC BY-SA）。
+- [Nyaan「Rooted Tree Hash」](https://nyaannyaan.github.io/library/tree/rooted-tree-hash.hpp)：高さごとの乱数と法 $2^{61} - 1$ の積で作る木のハッシュの実装。
 
 ## 落とし穴 {#pitfalls}
 

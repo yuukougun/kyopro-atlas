@@ -1,23 +1,24 @@
-// 自作のセグメント木の max_right（再帰。和のセグメント木で確かめる）
+// 自作のセグメント木の max_right（再帰。演算は部品で受け取り、和のセグメント木で確かめる）
 // 入力：N Q、A_0 … A_{N-1}（非負）、続く Q 行は「l w」（[l, r) の和が w 以下である最大の r。w ≥ 0）
 #include <bits/stdc++.h>
 using namespace std;
 
-struct SegTree {
+template <class S, S (*op)(S, S), S (*e)()>
+struct SegTree {  // 構築はセグメント木のページの自作の SegTree と同じ
     int n, size;
-    vector<long long> d;  // d[k] はノード k の区間の和。余りの葉は単位元 0
-    explicit SegTree(const vector<long long>& a) : n(a.size()), size(1) {
+    vector<S> d;  // d[k] はノード k の区間の総積。余りの葉は単位元
+    explicit SegTree(const vector<S>& a) : n(a.size()), size(1) {
         while (size < n) size *= 2;
-        d.assign(2 * size, 0);
+        d.assign(2 * size, e());
         for (int i = 0; i < n; i++) d[size + i] = a[i];
-        for (int k = size - 1; k >= 1; k--) d[k] = d[2 * k] + d[2 * k + 1];
+        for (int k = size - 1; k >= 1; k--) d[k] = op(d[2 * k], d[2 * k + 1]);
     }
     // --8<-- [start:core]
-    // ノード k（区間 [kl, kr)）の中で、累積 sm に足すと f が偽になる最初の葉を返す。なければ -1
-    template <class F> int search(int k, int kl, int kr, int l, F& f, long long& sm) const {
+    // ノード k（区間 [kl, kr)）の中で、累積 sm に掛けると f が偽になる最初の葉を返す。なければ -1
+    template <class G> int search(int k, int kl, int kr, int l, G& f, S& sm) const {
         if (kr <= l) return -1;                      // l より左のノードは見ない
-        if (l <= kl && f(sm + d[k])) {               // 丸ごと足しても真なら、足して右へ
-            sm += d[k];
+        if (l <= kl && f(op(sm, d[k]))) {            // 丸ごと掛けても真なら、掛けて右へ
+            sm = op(sm, d[k]);
             return -1;
         }
         if (kr - kl == 1) return kl;                 // 葉で偽になった：ここが境界
@@ -26,20 +27,24 @@ struct SegTree {
         if (res != -1) return res;
         return search(2 * k + 1, m, kr, l, f, sm);
     }
-    template <class F> int max_right(int l, F f) const {  // f(0) は真であること
-        long long sm = 0;
+    template <class G> int max_right(int l, G f) const {  // f(e()) が真であること
+        assert(0 <= l && l <= n && f(e()));
+        S sm = e();
         int res = search(1, 0, size, l, f, sm);
         return res == -1 ? n : min(res, n);
     }
     // --8<-- [end:core]
 };
 
+long long op_add(long long x, long long y) { return x + y; }
+long long e_add() { return 0; }
+
 int main() {
     int n, q;
     cin >> n >> q;
     vector<long long> a(n);
     for (int i = 0; i < n; i++) cin >> a[i];
-    SegTree seg(a);
+    SegTree<long long, op_add, e_add> seg(a);
     for (int i = 0; i < q; i++) {
         int l;
         long long w;

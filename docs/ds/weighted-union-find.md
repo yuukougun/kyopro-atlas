@@ -31,7 +31,7 @@ sections:
   - {title: 一般化（XOR で偶奇・二部グラフ、頂点を 2 倍にする）, anchor: generalization}
   - {title: 応用の型, anchor: applications}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -116,13 +116,16 @@ $W = 4 + 3 - 5 = 2$ なので、$\mathrm{diff}[2] = 2$ として $2$ を $0$ の
 
 同じ成分の $u, v$ について、$x_v - x_u = p_v - p_u$ を返す。$p_u$ と $p_v$ はそれぞれ find を呼んだ後の $\mathrm{diff}$ である。違う成分なら差は決まらない。
 
-C++ では次のように書ける（完全なプログラムは乱数の試験つきで snippets に置く）。
+ACL の `dsu` は差を持てないので、重み付き Union-Find は自作する。名前は [Union-Find の自作](../ds/union-find.md#operations)にそろえ、根を求める `find`（ACL の `dsu` では `leader`）と、同じ成分かを答える `same` を持つ。`merge(u, v, w)` は「$x_v - x_u = w$」を加え、矛盾しなければ `true` を返す（ACL の `dsu` の `merge` は代表元を返すので、意味が違う）。差は `get_diff(u, v)`（$x_v - x_u$）、根との差は `potential(v)` で読む。C++ では次のように書ける（完全なプログラムは乱数の試験つきで snippets に置く）。
 
 ```cpp
 --8<-- "weighted-union-find/weighted-union-find.cpp:core"
 ```
 
-ACL の `dsu` は差を持てないので、重み付き Union-Find は自作する。偶奇だけなら、ACL の `dsu` で頂点を 2 倍にする書き方（[頂点を 2 倍にする Union-Find](#generalization)）も使える。
+完全なプログラム：[`weighted-union-find.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/weighted-union-find/weighted-union-find.cpp)（GitHub）
+{ .kp-code-src }
+
+偶奇だけなら、ACL の `dsu` で頂点を 2 倍にする書き方（[頂点を 2 倍にする Union-Find](#generalization)）も使える。名前の約束は[インターフェースの決め方](../guide/library-design.md#interface)、確かめ方は[動作確認の手順](../guide/library-design.md#verify)にある。
 
 ## 境界（根の差は 0・同じ成分の merge・値の範囲） {#boundaries}
 
@@ -177,6 +180,9 @@ find の手間は、ふつうの Union-Find の find に、要素ごとの足し
 ```cpp
 --8<-- "weighted-union-find/parity.cpp:core"
 ```
+
+完全なプログラム：[`parity.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/weighted-union-find/parity.cpp)（GitHub）
+{ .kp-code-src }
 
 正直者と嘘つきの問題も、「$A$ が $B$ を正直者と言う」が「$A$ と $B$ は同じ種類」になる（正直者の証言なら $B$ は正直者、嘘つきの証言なら $B$ は嘘つき）ので、同じく XOR の情報になる。
 
@@ -255,7 +261,7 @@ ACL の `dsu` をそのまま使えるのが利点で、要素数は $2N$ にな
 - [ABC327 D. Good Tuple Problem](https://atcoder.jp/contests/abc327/tasks/abc327_d)（diff 709）：条件を満たす 0/1 の列が存在するかを判定する。
 - [ABC373 D. Hidden Weights](https://atcoder.jp/contests/abc373/tasks/abc373_d)（diff 765）：各辺 u → v について x_v − x_u = w となる頂点の値を 1 つ求める。
 - [ABC451 F. Make Bipartite 3](https://atcoder.jp/contests/abc451/tasks/abc451_f)（diff 1540）：辺を 1 本ずつ足すたびに、どの辺の両端も違う色になるように頂点を白と黒に塗るときの黒の頂点の数の最小を答える（塗れなくなったら以降は −1）。
-- [典型90 068. Paired Information（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_bp)（diff —）：隣り合う 2 項の和の情報を受け取りながら、A_X = V のときの A_Y を答える（決まらなければ Ambiguous）。
+- [典型90 068. Paired Information（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_bp)（diff なし）：隣り合う 2 項の和の情報を受け取りながら、A_X = V のときの A_Y を答える（決まらなければ Ambiguous）。
 - [ABC280 F. Pay or Receive](https://atcoder.jp/contests/abc280/tasks/abc280_f)（diff 1819）：逆向きに通ると重みの符号が反転するグラフで、2 点間の最長路を答える（いくらでも大きくできるなら inf）。
 
 </div>

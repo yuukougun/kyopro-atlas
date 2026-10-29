@@ -5,7 +5,7 @@ aliases: [等比級数, geometric series, repunit, Σ A^i, 同じ数字を並べ
 type: technique
 field: math
 chapter: mod の計算
-order: 80
+order: 65
 level: 基礎
 kind: [整数論, ダブリング・分割統治]
 prerequisites: [mod-inverse]
@@ -27,7 +27,7 @@ sections:
   - {title: 2×2 行列の累乗による別解, anchor: matrix, level: 青}
   - {title: 同じ数字列を並べた数は公比 10^d の等比数列の和になる, anchor: repeated-digits}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -68,6 +68,9 @@ $r^n$ は[繰り返し二乗法](../math/mod-pow.md)を使えば $O(\log n)$ で
 --8<-- "geometric-series-mod/formula.cpp:core"
 ```
 
+完全なプログラム：[`formula.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/geometric-series-mod/formula.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 `mint(n)` は項数 $n$ を mod $p$ に直した値で、$r \equiv 1$ の答えになる。一方、`x.pow(n)` の指数 $n$ は mod $p$ に直さずにそのまま渡す。
 
 ??? question "確認問題：法が 10 のとき"
@@ -99,6 +102,9 @@ $$
 ```cpp
 --8<-- "geometric-series-mod/halving.cpp:core"
 ```
+
+完全なプログラム：[`halving.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/geometric-series-mod/halving.cpp)（GitHub）
+{ .kp-code-src }
 
 - **計算量**：奇数の手順の次は必ず偶数の手順になるので、2 回の呼び出しで $n$ は半分以下になる。呼び出しは高々 $2 \log_2 n + 2$ 回で、各回 $O(1)$ だから全体で $O(\log n)$ である。$r^k$ を毎回求め直す書き方でも $O(\log^2 n)$ で、$n = 10^{12}$ なら十分速い。
 - **掛け算のあふれ**：値はどれも $m$ 未満なので、積は $m^2$ 未満である。$m \le 10^9$ なら `long long` に収まるが、$m$ が $3 \times 10^9$ を超えると $m^2$ が `long long` の上限（約 $9.2 \times 10^{18}$）を超えるので `__int128` で掛ける。
@@ -209,11 +215,14 @@ $N$ の桁数を $d$ とすると、求める数は $N$ を $10^d$ ずつずら�
     --8<-- "geometric-series-mod/repeat.cpp:core"
     ```
 
+    完全なプログラム：[`repeat.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/geometric-series-mod/repeat.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+    { .kp-code-src }
+
 ## 練習問題 {#practice}
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [アルゴ数学 053. Sum of 4^N](https://atcoder.jp/contests/math-and-algorithm/tasks/math_and_algorithm_as)（diff —）：4^0 + 4^1 + … + 4^N を 10^9+7 で割った余りで求める（N ≤ 10^18）。
+- [アルゴ数学 053. Sum of 4^N](https://atcoder.jp/contests/math-and-algorithm/tasks/math_and_algorithm_as)（diff なし）：4^0 + 4^1 + … + 4^N を 10^9+7 で割った余りで求める（N ≤ 10^18）。
 - [ABC293 E. Geometric Progression](https://atcoder.jp/contests/abc293/tasks/abc293_e)（diff 1453）：A^0 + A^1 + … + A^(X−1) を M で割った余りを求める（A, M ≤ 10^9、X ≤ 10^12、M は素数とは限らない）。
 
 </div>

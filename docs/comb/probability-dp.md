@@ -28,7 +28,7 @@ sections:
   - {title: ランダムウォークと二項係数, anchor: random-walk, level: 青}
   - {title: 同じ遷移を多数回行うときは行列累乗へ, anchor: matrix-power, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -81,6 +81,9 @@ $$
 --8<-- "probability-dp/coins.cpp:core"
 ```
 
+完全なプログラム：[`coins.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/probability-dp/coins.cpp)（GitHub）
+{ .kp-code-src }
+
 検算の `assert` は時刻ごとに $O(N)$ かかるが、全体の計算量は変わらない。提出前に外してもよい。
 
 ??? question "確認問題：公平なコイン 3 枚"
@@ -102,6 +105,9 @@ $$
 ```cpp
 --8<-- "probability-dp/sugoroku.cpp:core"
 ```
+
+完全なプログラム：[`sugoroku.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/probability-dp/sugoroku.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 吸収状態から確率を流し出さないことと、吸収状態の確率を次の時刻へ持ち越すこと（`nxt[n] += dp[n]`）の両方が要る。持ち越しを忘れると、和が 1 から減っていくので検算で気づける。
 
@@ -210,7 +216,7 @@ $(u, v)$ の変化の 4 通りが確率 $1/4$ ずつ出るので、$u$ と $v$ �
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC I. Coins](https://atcoder.jp/contests/dp/tasks/dp_i)（diff —）：N 枚（N は奇数）のコインを投げ、i 枚目は確率 p_i で表が出るとき、表の枚数が裏の枚数より多くなる確率を求める。
+- [EDPC I. Coins](https://atcoder.jp/contests/dp/tasks/dp_i)（diff なし）：N 枚（N は奇数）のコインを投げ、i 枚目は確率 p_i で表が出るとき、表の枚数が裏の枚数より多くなる確率を求める。
 
 </div>
 
@@ -245,8 +251,8 @@ $(u, v)$ の変化の 4 通りが確率 $1/4$ ずつ出るので、$u$ と $v$ �
 - [ABC323 E. Playlist](https://atcoder.jp/contests/abc323/tasks/abc323_e)（diff 1279）：N 曲の中から一様に選んだ曲を続けて流し続けるとき、時刻 X+0.5 に曲 1 が流れている確率を mod 998244353 で求める。
 - [ABC298 E. Unfair Sugoroku](https://atcoder.jp/contests/abc298/tasks/abc298_e)（diff 1300）：2 人がそれぞれのサイコロですごろくを交互に進めるとき、先手が先にゴールに着く確率を mod 998244353 で求める。
 - [ABC382 E. Expansion Packs](https://atcoder.jp/contests/abc382/tasks/abc382_e)（diff 1671）：カードのパックを開け続けて、レアカードが X 枚集まるまでに開けるパックの数の期待値を求める。
-- [TDPC D. サイコロ](https://atcoder.jp/contests/tdpc/tasks/tdpc_dice)（diff —）：サイコロを N 回振ったときの出目の積が D の倍数になる確率を求める。
-- [ABC011 D. 大ジャンプ](https://atcoder.jp/contests/abc011/tasks/abc011_4)（diff 1843）：1 回に上下左右のどれかへ距離 D だけ等確率で動くことを N 回繰り返したとき、点 (X, Y) にいる確率を求める。
+- [TDPC D. サイコロ](https://atcoder.jp/contests/tdpc/tasks/tdpc_dice)（diff なし）：サイコロを N 回振ったときの出目の積が D の倍数になる確率を求める。
+- [ABC011 D. 大ジャンプ](https://atcoder.jp/contests/abc011/tasks/abc011_4)（diff 1843・参考値）：1 回に上下左右のどれかへ距離 D だけ等確率で動くことを N 回繰り返したとき、点 (X, Y) にいる確率を求める。
 
 </div>
 

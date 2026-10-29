@@ -31,7 +31,7 @@ sections:
   - {title: 逆向きのグラフと両端からの最短路, anchor: reverse-graph, level: 水}
   - {title: ポテンシャルで負辺を消す（Johnson のアイデア）, anchor: potential, level: 水}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -98,6 +98,9 @@ C++ の `priority_queue` には、入っている組の距離を小さくする�
 --8<-- "dijkstra/dijkstra.cpp:core"
 ```
 
+完全なプログラム：[`dijkstra.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dijkstra/dijkstra.cpp)（GitHub）
+{ .kp-code-src }
+
 - **最小ヒープにする**：`priority_queue` は既定で最大のものを取り出す。`greater<>` を指定するか、距離を負にして入れる（[優先度付きキュー](../ds/priority-queue.md#what-it-does)）。最大ヒープのままでも小さい例では出力が合うことがあり、気づきにくい
 - **組の順序は (距離, 頂点)**：`pair` は第 1 要素から比べるので、距離を先に置く。(頂点, 距離) にすると、頂点の番号の順に取り出してしまう
 - **読み飛ばしを忘れると遅くなる**：古い組から[緩和](../guide/glossary.md#relaxation)しても $d + w \ge \mathrm{dist}[v] + w$ なので更新は起きず、答えは変わらない。ただし辺を見る回数が「頂点に組が入った回数 × 出る辺の数」の和になる。たとえば $N/2$ 個の頂点が 1 つの頂点 $h$ へ順に短い距離を届け、$h$ から $N/2$ 本の辺が出ていると、$h$ の組が $N/2$ 個できて、合わせて約 $N^2/4$ 回辺を見る
@@ -111,11 +114,14 @@ C++ の `priority_queue` には、入っている組の距離を小さくする�
 
 出るときに払う形なら、辺 $u \to v$ に出発側の $A_u$ を足す（始点の距離は 0 から始め、終点の $A_t$ は数えない）。「最初の 1 回だけ払う」も、重みが非負なら最短路は同じ頂点を 2 度通らないので、通るたびに払うのと同じ答えになる。払う額が状態（乗り換えたか・何回目か）で変わるなら、状態を頂点に持たせる（[頂点倍化](../graph/extended-dijkstra.md#layered-graph)）。
 
-経路の復元は BFS と同じで、$\mathrm{dist}[to]$ を更新したときの $v$ を $\mathrm{prev}[to]$ に記録し、終点から始点へたどって反転する。記録は更新のたびに上書きしてよい。最後に残る $\mathrm{prev}$ は、確定した距離を与えた辺を指す。
+経路の復元は BFS と同じで、$\mathrm{dist}[to]$ を更新したときの $v$ を親 $\mathrm{par}[to]$ に記録し、終点から始点へたどって反転する。記録は更新のたびに上書きしてよい。最後に残る $\mathrm{par}$ は、確定した距離を与えた辺を指す。
 
 ```cpp
 --8<-- "dijkstra/dijkstra.cpp:path"
 ```
+
+完全なプログラム：[`dijkstra.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dijkstra/dijkstra.cpp)（GitHub）
+{ .kp-code-src }
 
 ## 密グラフの O(N^2) 版 {#dense}
 
@@ -124,6 +130,9 @@ C++ の `priority_queue` には、入っている組の距離を小さくする�
 ```cpp
 --8<-- "dijkstra/dense.cpp:core"
 ```
+
+完全なプログラム：[`dense.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dijkstra/dense.cpp)（GitHub）
+{ .kp-code-src }
 
 辺を隣接リストに展開する必要もないので、$N^2$ 個の辺を持つメモリも省ける。辺の重みを行列で持つか、座標などからその場で計算する。
 
@@ -203,7 +212,7 @@ $p(s) - p(t)$ は道によらない定数なので、$s$ から $t$ への道の
 
 ## 落とし穴 {#pitfalls}
 
-- **INF の大きさ**：`INT_MAX` や `LLONG_MAX` を INF にして `dist[v] + w` を計算するとあふれる。足してもあふれない `LLONG_MAX / 4` などにし、届かない頂点は出力の前に判定する。重みの和が $2^{31}$ を超えうるなら距離は `long long` にする
+- **INF の大きさ**：`INT_MAX` や `LLONG_MAX` を INF にして `dist[v] + w` を計算するとあふれる。このページのコード片は確定した距離にしか重みを足さないが、届かない頂点の距離に足す処理（すべての辺で `dist[u] + w` を比べるなど）を後で書き加えてもあふれないよう、INF を `1LL << 60` にしてある（[INF の決め方](../cpp/cpp-types-literals.md#inf)）。届かない頂点は出力の前に判定する。重みの和が $2^{31}$ を超えうるなら距離は `long long` にする
 - **無向グラフの辺を片向きにしか入れない**：入力の 1 行ごとに `g[u]` と `g[v]` の両方に入れる。逆に、有向グラフで両向きに入れると、通れない向きの道ができる
 - **到達できない頂点**：$\mathrm{dist}[v] = \mathrm{INF}$ のまま答えに混ぜると、最小値や合計が壊れる。「届かなければ $-1$」の指定にも注意する
 - **頂点ごとにダイクストラ法を回す**：「各頂点から終点への距離」は逆向きのグラフで 1 回で求まる（[逆向きのグラフと両端からの最短路](#reverse-graph)）
@@ -275,7 +284,7 @@ $p(s) - p(t)$ は道によらない定数なので、$s$ から $t$ への道の
 - [ABC325 E. Our clients, please wait a moment](https://atcoder.jp/contests/abc325/tasks/abc325_e)（diff 1093）：社用車から電車へ 1 回だけ乗り換えられるとき、都市 1 から都市 N への最短時間を求める。
 - [ABC237 E. Skiing](https://atcoder.jp/contests/abc237/tasks/abc237_e)（diff 1208）：標高の差で楽しさが増減する移動で、広場 1 から出発したときの楽しさの最大値を求める。
 - [ABC477 E. Wheel Distance](https://atcoder.jp/contests/abc477/tasks/abc477_e)（diff 1235）：外周の閉路と中心の頂点からなる車輪の形の重み付きグラフで、2 頂点の間の最短距離を多数のクエリについて答える。
-- [典型90 013. Passing（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_m)（diff —）：各頂点 k について、頂点 1 から頂点 k を経由して頂点 N へ行く最短距離を求める。
+- [典型90 013. Passing（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_m)（diff なし）：各頂点 k について、頂点 1 から頂点 k を経由して頂点 N へ行く最短距離を求める。
 
 </div>
 
@@ -291,7 +300,7 @@ $p(s) - p(t)$ は道によらない定数なので、$s$ から $t$ への道の
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [ABC035 D. トレジャーハント](https://atcoder.jp/contests/abc035/tasks/abc035_d)（diff 1591）：時間 T 以内に町 1 から出発して 1 つの町に滞在し、町 1 へ戻るとき、滞在で得られるお金の最大値を求める。
+- [ABC035 D. トレジャーハント](https://atcoder.jp/contests/abc035/tasks/abc035_d)（diff 1591・参考値）：時間 T 以内に町 1 から出発して 1 つの町に滞在し、町 1 へ戻るとき、滞在で得られるお金の最大値を求める。
 - [SOUNDHOUND2018-SUMMER-QUAL D. Saving Snuuk](https://atcoder.jp/contests/soundhound2018-summer-qual/tasks/soundhound2018_summer_qual_d)（diff 1637）：円とスヌークの 2 つの運賃がある路線で、両替所が年ごとに閉じていくとき、各年に旅行した場合に手元に残るスヌークの最大値を求める。
 
 </div>

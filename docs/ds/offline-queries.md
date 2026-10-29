@@ -30,7 +30,7 @@ sections:
   - {title: 先に全部読んで座標圧縮する, anchor: compress}
   - {title: オンライン強制の見分け方と、そのときの構造（永続・マージソート木・動的セグメント木）, anchor: online}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -80,7 +80,7 @@ updated: 2026-10-22
 
 次の図は $A = (1, 2, 1, 3, 2)$ で右端を伸ばす様子である。各行が「$r$ 個読んだ後の 0/1 の列」で、赤い破線の枠がその時点で答えるクエリの区間を表す。
 
-![A = (1, 2, 1, 3, 2) で右端を 1 ずつ伸ばすと、値 1 の 1 は位置 0 から 2 へ、値 2 の 1 は位置 1 から 4 へ移る。r = 4 でクエリ [1, 4) の和は 3、r = 5 でクエリ [1, 5) の和は 3](../img/offline-queries/distinct-count-sweep.svg)
+![A = (1, 2, 1, 3, 2) で右端を 1 ずつ伸ばすと、値 1 の 1 は位置 0 から 2 へ、値 2 の 1 は位置 1 から 4 へ移る。r = 4 でクエリ \[1, 4) の和は 3、r = 5 でクエリ \[1, 5) の和は 3](../img/offline-queries/distinct-count-sweep.svg)
 
 $r = 3$ で値 1 が再び現れ、1 は位置 0 から位置 2 へ移る。$r = 5$ では値 2 の 1 が位置 1 から位置 4 へ移る。$[1, 5)$ の値は $2, 1, 3, 2$ の 3 種類で、枠の中の 1 も位置 2・3・4 の 3 個である。位置 1 の値 2 は数えないが、同じ値 2 を位置 4 で数えている。
 
@@ -89,6 +89,9 @@ $r = 3$ で値 1 が再び現れ、1 は位置 0 から位置 2 へ移る。$r =
 ```cpp
 --8<-- "offline-queries/distinct-count.cpp:core"
 ```
+
+完全なプログラム：[`distinct-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/offline-queries/distinct-count.cpp)（GitHub）
+{ .kp-code-src }
 
 計算量は、クエリのソートが $O(Q \log Q)$、右端を伸ばす処理が全体で $N$ 回、区間和が $Q$ 回なので、合わせて $O(Q \log Q + (N + Q) \log N)$ である。領域は $O(N + Q)$ で済む。
 
@@ -106,6 +109,9 @@ $r = 3$ で値 1 が再び現れ、1 は位置 0 から位置 2 へ移る。$r =
 ```cpp
 --8<-- "offline-queries/threshold.cpp:core"
 ```
+
+完全なプログラム：[`threshold.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/offline-queries/threshold.cpp)（GitHub）
+{ .kp-code-src }
 
 同じ形で載るものの例を挙げる。
 
@@ -230,7 +236,7 @@ Union-Find での使い方と、質問の時点のずれ（削除の前に答え
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC235 E. MST + 1](https://atcoder.jp/contests/abc235/tasks/abc235_e)（diff 1304）：グラフに辺を 1 本加えたとき、その辺が最小全域木に使われるかを多数の質問で答える。
-- [ABC040 D. 道路の老朽化対策について](https://atcoder.jp/contests/abc040/tasks/abc040_d)（diff 1656）：年 w より後に作られた道路だけで行ける都市の数を、各クエリについて答える。
+- [ABC040 D. 道路の老朽化対策について](https://atcoder.jp/contests/abc040/tasks/abc040_d)（diff 1656・参考値）：年 w より後に作られた道路だけで行ける都市の数を、各クエリについて答える。
 - [ABC128 E. Roadwork](https://atcoder.jp/contests/abc128/tasks/abc128_e)（diff 1840）：時間帯ごとに通行止めになる地点があり、各人が最初に止まる地点を答える。
 
 </div>

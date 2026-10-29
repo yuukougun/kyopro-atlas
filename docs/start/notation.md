@@ -28,7 +28,7 @@ sections:
   - {title: コード片の約束, anchor: code}
   - {title: 用語の表記, anchor: terms}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -58,7 +58,7 @@ front matter と索引の文字には数式を使わず、`O(N log N)`・`O((N+M
 
 区間は[半開区間](../guide/glossary.md#half-open-interval) $[l, r)$ を基本にする。$[l, r)$ は $l$ 以上 $r$ 未満の整数 $l, l + 1, \dots, r - 1$ を表し、$r$ は含まない。
 
-![長さ 8 の列の位置 2, 3, 4 に色を付け、上に [2, 5) の括弧を付けた図。箱の下に境目の番号 0〜8 を書き、l = 2 と r = 5 は境目を指す。個数は r − l = 3、[2, 3) と [3, 5) に分けても重ならず、l = r なら空の区間になる](../img/notation/half-open.svg)
+![長さ 8 の列の位置 2, 3, 4 に色を付け、上に \[2, 5) の括弧を付けた図。箱の下に境目の番号 0〜8 を書き、l = 2 と r = 5 は境目を指す。個数は r − l = 3、\[2, 3) と \[3, 5) に分けても重ならず、l = r なら空の区間になる](../img/notation/half-open.svg)
 
 半開区間を基本にするのは、境目の計算が場合分けなしで書けるからである。
 
@@ -86,6 +86,9 @@ front matter と索引の文字には数式を使わず、`O(N log N)`・`O((N+M
 ```cpp
 --8<-- "notation/conventions.cpp:core"
 ```
+
+完全なプログラム：[`conventions.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/notation/conventions.cpp)（GitHub）
+{ .kp-code-src }
 
 bit の番号は、最下位を 0 番目と数える（$2^i$ の位が $i$ 番目の bit）。グリッドのマス $(i, j)$ は $i$ 行目・$j$ 列目で、0-indexed の $0 \le i < H$、$0 \le j < W$ にする。移動量の配列は行と列の取り違えを避けて di・dj と書く（[グリッドの 4 近傍](../graph/grid-graph.md#neighbors)）。
 
@@ -259,7 +262,7 @@ $\mathrm{out}[v]$ は「最後に振った番号」ではなく「次に振る�
 - **入出力**：改行は `'\n'` で書く（[endl と改行文字の違い](../cpp/cpp-io.md#endl)）。
 - **再帰**：DFS は `auto dfs = [&](auto&& self, int v, int p) -> void { … };` の形にし、`-> void` を省かない。
 
-コード片は本文に全体を載せず、要点の数行だけを取り込む。完全なプログラムは手元でコンパイルと実行を確かめてある。
+コード片は本文に全体を載せず、要点の数行だけを取り込む。完全なプログラムは手元でコンパイルと実行を確かめてある。各コードの下のリンクから GitHub で見られる（[ページの構成と読み方](how-to-use.md#page-anatomy)）。
 
 ## 用語の表記 {#terms}
 

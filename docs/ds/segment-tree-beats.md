@@ -26,7 +26,7 @@ sections:
   - {title: 計算量（chmin と和だけならならし O((N+Q) log N)、区間加算が混ざると log^2）, anchor: complexity}
   - {title: 値が潰れる操作（割り算・mod・平方根）と、区間を set で管理する別解, anchor: shrinking-values}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -81,17 +81,23 @@ Segment Tree Beats は、ノードに少し多めの情報を持たせ、「こ�
 
 ## 自作するときの要点と Library Checker {#library}
 
-ACL には Segment Tree Beats がない（`lazy_segtree` は作用が必ずノードの情報だけで済む前提で、子へ降りる場合を持たない）。自作するときは、chmin の更新を次の形にする（完全なプログラムは `snippets/segment-tree-beats/beats.cpp`。区間 chmax・区間加算も入れてある）。
+ACL には Segment Tree Beats がない（`lazy_segtree` は作用が必ずノードの情報だけで済む前提で、子へ降りる場合を持たない）。自作するときは、chmin の更新を次の形にする（完全なプログラムは [`snippets/segment-tree-beats/beats.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-beats/beats.cpp)。区間 chmax・区間加算も入れてある）。
 
 ```cpp
 --8<-- "segment-tree-beats/beats.cpp:core"
 ```
+
+完全なプログラム：[`beats.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-beats/beats.cpp)（GitHub）
+{ .kp-code-src }
 
 子へ降りる前の保留の受け渡しは、加算を先に、切り詰めを後にする。親の最大値・最小値は加算をすでに含んだ値なので、子にも先に加算を施してから比べる。
 
 ```cpp
 --8<-- "segment-tree-beats/beats.cpp:push"
 ```
+
+完全なプログラム：[`beats.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-beats/beats.cpp)（GitHub）
+{ .kp-code-src }
 
 実装で間違えやすいのは次の点である。
 
@@ -132,9 +138,9 @@ $x$ で割った余りは、最大値が $x$ 未満のノードで止め、そ�
 
 ## 学ぶための資料 {#resources}
 
-- 計算量の証明は、ferin 氏の HackMD のメモ「Segment Tree Beats」（原典の Codeforces のブログの和訳）と、37zigen 氏の「Segment Tree Beats の計算量解析」が日本語で読める。どちらもポテンシャルの取り方から追っている
-- 実装は、rsm9 氏の「atcoder::lazy_segtree に 1 行書き足すだけの抽象化 Segment Tree Beats」が、ACL を土台にした書き方を示している。区間 chmin・chmax・加算・和の値と作用の組も載っている
-- 原典の整理は OI Wiki の「吉司机线段树」にある（中国語）
+- [ferin「Segment Tree Beats」](https://hackmd.io/@a4YdmMWJSTa0aHKUX3wNcA/S1MJhbSLV?type=view)（HackMD のメモ。原典の Codeforces のブログの和訳）と [37zigen「Segment Tree Beats の計算量解析」](https://scrapbox.io/37zigen-43465887/Segment_Tree_Beats%E3%81%AE%E8%A8%88%E7%AE%97%E9%87%8F%E8%A7%A3%E6%9E%90)：計算量の証明が日本語で読める。どちらもポテンシャルの取り方から追っている
+- [rsm9（ひとなので）「atcoder::lazy_segtree に1行書き足すだけの抽象化 Segment Tree Beats」](https://rsm9.hatenablog.com/entry/2021/02/01/220408)：ACL を土台にした実装の書き方を示している。区間 chmin・chmax・加算・和の値と作用の組も載っている
+- [OI Wiki「吉司机线段树」](https://oi-wiki.org/ds/seg-beats/)（中国語）：原典の整理がある
 
 ## 例題 {#examples}
 
@@ -159,7 +165,7 @@ $x$ で割った余りは、最大値が $x$ 未満のノードで止め、そ�
 
 ### Library Checker
 
-- [Range Chmin Chmax Add Range Sum](https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum)：区間 chmin・区間 chmax・区間加算と区間和。`snippets/segment-tree-beats/beats.cpp` はこの入力の形で書いてある。
+- [Range Chmin Chmax Add Range Sum](https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum)：区間 chmin・区間 chmax・区間加算と区間和。[`snippets/segment-tree-beats/beats.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-beats/beats.cpp) はこの入力の形で書いてある。
 
 ## 確認問題 {#quiz}
 

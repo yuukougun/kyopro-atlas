@@ -59,6 +59,9 @@ atcoder: true
 --8<-- "cpp-integer-overflow/int-product-ng.cpp:core"
 ```
 
+完全なプログラム：[`int-product-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-integer-overflow/int-product-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 $a = b = 10^5$ なら正しい積は $10^{10}$ だが、手元では `1410065408` と出た。`int` は $2^{32}$ 個の値が輪のように並んでいて、最大値を超えると負の端へ回り込む。$10^{10}$ は輪を 2 周して $10^{10} - 2 \times 2^{32} = 1410065408$ の位置に来た。ただし規格ではこの回り込みは決まっておらず、[未定義動作](#signed-overflow-ub)である。
 
 ![int を 2^32 個の値の輪として描いた図。0 から時計回りに正の数が増え、INT_MAX の次は INT_MIN へ回り込む。10^10 は輪を 2 周して 1410065408 の位置に来る](../img/cpp-integer-overflow/wrap-around.svg)
@@ -68,6 +71,9 @@ $a = b = 10^5$ なら正しい積は $10^{10}$ だが、手元では `1410065408
 ```cpp
 --8<-- "cpp-integer-overflow/int-product.cpp:core"
 ```
+
+完全なプログラム：[`int-product.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-integer-overflow/int-product.cpp)（GitHub）
+{ .kp-code-src }
 
 - **なぜ通るか**：`*` は左から計算する。`1LL * a` で `long long` になり、続く `* b` も `long long` どうしの計算になる
 - **落とし穴**：`a * b * 1LL` と `(long long)(a * b)` は誤りである。どちらも `a * b` を `int` で計算した後に広げている。`1LL` は先頭に置き、キャストは掛ける前の変数に付ける
@@ -81,11 +87,17 @@ $a = b = 10^5$ なら正しい積は $10^{10}$ だが、手元では `1410065408
 --8<-- "cpp-integer-overflow/shift.cpp:core"
 ```
 
+完全なプログラム：[`shift.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-integer-overflow/shift.cpp)（GitHub）
+{ .kp-code-src }
+
 シフトの幅が変数だと警告は出ない。bit 全探索で `1 << k` と書くと、`k` が 32 以上の入力でだけ壊れる。
 
 ```cpp
 --8<-- "cpp-integer-overflow/shift.cpp:runtime"
 ```
+
+完全なプログラム：[`shift.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-integer-overflow/shift.cpp)（GitHub）
+{ .kp-code-src }
 
 - **手元の値**：`k = 40` で 256 と出た。x86-64 の 32 bit のシフト命令が幅を 32 で割った余りしか見ないためで、0 になるとは限らない
 - **版**：`1 << 31` は C++20 から `INT_MIN`（$-2^{31}$）と決まった（左シフトが $2^{32}$ を法とする計算になった）。C++14・C++17 では処理系定義で、GCC では同じ値になる。`1 << 32` 以上は、どの版でも未定義である
@@ -99,6 +111,9 @@ $a = b = 10^5$ なら正しい積は $10^{10}$ だが、手元では `1410065408
 --8<-- "cpp-integer-overflow/inferred.cpp:core"
 ```
 
+完全なプログラム：[`inferred.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-integer-overflow/inferred.cpp)（GitHub）
+{ .kp-code-src }
+
 - `auto x = 0;` の `x` は `int`。和や積を入れる変数を `auto` で作るなら `0LL` から始める
 - `accumulate(first, last, init)` は、`init` の型の変数に足し込み、その型で返す（[accumulate](../cpp/cpp-algorithms.md)）。`v` が `vector<long long>` でも `init` が `0` なら、足すたびに `int` へ直される。手元では $10^9$ を 3 個足して `-1294967296` になり、警告は出なかった。`0LL` と書けば `3000000000` になる
 - `views::iota(0, n)` の要素は始まりの `0` の型 `int` になる。`n` が `long long` でも同じで、`for (long long i : …)` と受けても直らない（[views::iota(0, n) は n が long long でも i が int になる](../cpp/cpp-views-basics.md#iota-int)）。`views::iota(0LL, n)` と書く
@@ -111,6 +126,9 @@ $a = b = 10^5$ なら正しい積は $10^{10}$ だが、手元では `1410065408
 --8<-- "cpp-integer-overflow/unsigned-size.cpp:core"
 ```
 
+完全なプログラム：[`unsigned-size.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-integer-overflow/unsigned-size.cpp)（GitHub）
+{ .kp-code-src }
+
 - `v.size() - 1`：`v` が空だと $2^{64} - 1 = 18446744073709551615$ になる。`for (int i = 0; i < v.size() - 1; i++)` は、空の `v` で範囲外を読み続ける
 - `-1 < v.size()`：符号付きと符号なしを比べると、`-1` が `size_t` に直されて最大値になり、偽になる。`-Wall -Wextra` なら `comparison of integer expressions of different signedness` の警告が出る（`-Wsign-compare`）。上の `i < v.size() - 1` の比較にも同じ警告が出るが、`v.size() - 1` の引き算そのものには警告が出ず、`size_t i` で書くと何も出ない
 - **直し方**：符号付きの大きさで計算する。`ssize(v)` は `ptrdiff_t`（64 bit の Linux では `long`）を返す。`(int)v.size()` でもよい
@@ -118,6 +136,9 @@ $a = b = 10^5$ なら正しい積は $10^{10}$ だが、手元では `1410065408
 ```cpp
 --8<-- "cpp-integer-overflow/unsigned-loop.cpp:core"
 ```
+
+完全なプログラム：[`unsigned-loop.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-integer-overflow/unsigned-loop.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：`ssize` は C++20。g++-13・g++-15 の `-std=gnu++23` で使える
 - **落とし穴**：`for (size_t i = n - 1; i >= 0; i--)` は終わらない。符号なしの `i` は常に 0 以上で、0 の次は最大値に回り込む（`-Wextra` で `comparison of unsigned expression in '>= 0' is always true` と警告が出る）。逆順のループは `int` で回す
@@ -131,11 +152,17 @@ $a = b = 10^5$ なら正しい積は $10^{10}$ だが、手元では `1410065408
 --8<-- "cpp-integer-overflow/min-max-ng.cpp:core"
 ```
 
+完全なプログラム：[`min-max-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-integer-overflow/min-max-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 エラーは `no matching function for call to 'min(int, long long int&)'` と出る。定数の側を `1LL` にするか、`min<long long>(…)` と型を明示する。
 
 ```cpp
 --8<-- "cpp-integer-overflow/min-max-ok.cpp:core"
 ```
+
+完全なプログラム：[`min-max-ok.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-integer-overflow/min-max-ok.cpp)（GitHub）
+{ .kp-code-src }
 
 - `max({0LL, x, 2 * x})` のような初期化子リストでも、要素の型がすべてそろっていないとコンパイルエラーになる（`max({0, x})` は誤り）
 - **落とし穴**：`min<int>(…)` と明示すると、`long long` の値が `int` に直されて切り捨てられる（エラーにならない）。型を明示するなら広い方の型にする
@@ -149,6 +176,9 @@ $a = b = 10^5$ なら正しい積は $10^{10}$ だが、手元では `1410065408
 --8<-- "cpp-integer-overflow/edge-values.cpp:core"
 ```
 
+完全なプログラム：[`edge-values.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-integer-overflow/edge-values.cpp)（GitHub）
+{ .kp-code-src }
+
 - **INF + INF**：INF を `INT_MAX` にすると、`dist[u] + w` のように INF に足した時点であふれ、負の値として最小値に選ばれてしまう。INF は 2 つ足しても収まる値にする（`1LL << 60` は 2 つ足して $2^{61}$ で収まる）。値の選び方は [INF の決め方](../cpp/cpp-types-literals.md)にある
 - **abs(INT_MIN)**：$-2^{31}$ の絶対値 $2^{31}$ は `int` に収まらず、未定義動作である。手元では `-2147483648`（負のまま）が返った。入力に $-2^{31}$ が来うるなら、`abs((long long)a)` と広げてから取る
 - **INT_MIN / -1**：商 $2^{31}$ が `int` に収まらず、未定義動作である。手元の x86-64 では、`a = INT_MIN`・`d = -1` を入力から読んで割ると、`Floating point exception` で異常終了した（割り算の命令が例外を出す）。`INT_MIN % -1` も同じく異常終了した
@@ -161,6 +191,9 @@ $a = b = 10^5$ なら正しい積は $10^{10}$ だが、手元では `1410065408
 ```cpp
 --8<-- "cpp-integer-overflow/ub-check.cpp:core"
 ```
+
+完全なプログラム：[`ub-check.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-integer-overflow/ub-check.cpp)（GitHub）
+{ .kp-code-src }
 
 $a = b = 10^5$ を入れると、`c` は `1410065408`、`p` は `10000000000` と、違う値が表示される。それなのに `-O2` では `c == p` が真と判定され、`same` と出た（g++-13・g++-15）。`-O0` では `differ` と出る。「`a * b` はあふれない」と仮定すれば `c` と `p` は常に等しいので、コンパイラが比較を省いたと考えられる。「`int` で計算した値と `long long` で計算した値を比べて、あふれを調べる」書き方は、このように消されうる。
 
@@ -177,6 +210,9 @@ $a = b = 10^5$ を入れると、`c` は `1410065408`、`p` は `10000000000` �
 --8<-- "cpp-integer-overflow/int128.cpp:core"
 ```
 
+完全なプログラム：[`int128.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-integer-overflow/int128.cpp)（GitHub）
+{ .kp-code-src }
+
 - **書き方**：積は `(__int128)a * b` のように片方を広げてから掛ける（[int どうしの積](#int-product)と同じ理由で、`(__int128)(a * b)` は誤り）。比べた後は `long long` に戻してよい
 - **リテラルがない**：GCC は `__int128` の定数を書く方法を持たない。`__int128 x = 1000000000000000000000000000000;` と書くと `integer constant is too large for its type` の警告が出る。手元では値が `5076944270305263616` に化けた。$2^{100}$ は `(__int128)1 << 100`、$10^{30}$ は `(__int128)1'000'000'000'000'000 * 1'000'000'000'000'000` のように組み立てる
 - **符号なし**：`unsigned __int128` もある
@@ -191,15 +227,24 @@ $a = b = 10^5$ を入れると、`c` は `1410065408`、`p` は `10000000000` �
 --8<-- "cpp-integer-overflow/int128-cout-ng.cpp:core"
 ```
 
+完全なプログラム：[`int128-cout-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-integer-overflow/int128-cout-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 エラーは `ambiguous overload for 'operator<<'` と出る（`cin >> x` は `no match for 'operator>>'`）。出力には `format` か `println` を使う。どちらも `__int128` を 10 進で出せた。
 
 ```cpp
 --8<-- "cpp-integer-overflow/int128-format.cpp:core"
 ```
 
+完全なプログラム：[`int128-format.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-integer-overflow/int128-format.cpp)（GitHub）
+{ .kp-code-src }
+
 ```cpp
 --8<-- "cpp-integer-overflow/int128-println.cpp:core"
 ```
+
+完全なプログラム：[`int128-println.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-integer-overflow/int128-println.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：`format` は C++20 で、g++-13・g++-15 で `__int128` を出せた。`println` は C++23 で GCC 14 から入り、g++-13 にはない。AtCoder の GCC 15.2 ではどちらも使える。`println` の使い方は [入出力](../cpp/cpp-io.md)にある
 
@@ -209,11 +254,17 @@ $a = b = 10^5$ を入れると、`c` は `1410065408`、`p` は `10000000000` �
 --8<-- "cpp-integer-overflow/int128.cpp:print"
 ```
 
+完全なプログラム：[`int128.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-integer-overflow/int128.cpp)（GitHub）
+{ .kp-code-src }
+
 入力は `string` で読み、先頭から `x = x * 10 - 桁` で負の側に積み上げ、最後に符号を決める。正の側に積み上げると、$-2^{127}$ を読むときに途中の $2^{127}$ であふれる（`to_str` と同じ理由）。
 
 ```cpp
 --8<-- "cpp-integer-overflow/int128.cpp:read"
 ```
+
+完全なプログラム：[`int128.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-integer-overflow/int128.cpp)（GitHub）
+{ .kp-code-src }
 
 - **落とし穴**：`printf("%lld", x)` も使えない。`-Wformat` の警告が出て、手元では $2^{100}$ が `0` と出た。`long long` に収まる値なら、`(long long)x` に戻してから出す
 
@@ -225,6 +276,9 @@ GCC は、GNU 拡張を有効にする `-std=gnu++23` と、規格どおりの `
 --8<-- "cpp-integer-overflow/int128-strict-ng.cpp:core"
 ```
 
+完全なプログラム：[`int128-strict-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-integer-overflow/int128-strict-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 - `-std=c++23` では、`gcd` と `abs` がコンパイルエラーになった（g++-13・g++-15）。同じコードは `-std=gnu++23` なら `2 6` と出る。メッセージは次のとおりである
     - `gcd`：`static assertion failed: std::gcd arguments must be integers`
     - `abs`：`call of overloaded 'abs(__int128&)' is ambiguous`
@@ -233,6 +287,9 @@ GCC は、GNU 拡張を有効にする `-std=gnu++23` と、規格どおりの `
 ```cpp
 --8<-- "cpp-integer-overflow/int128-limits.cpp:core"
 ```
+
+完全なプログラム：[`int128-limits.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-integer-overflow/int128-limits.cpp)（GitHub）
+{ .kp-code-src }
 
 - **AtCoder では**：`-std=gnu++23` なので渡せる。手元の設定やエディタの拡張（コード補完）が `-std=c++23` だと、手元だけでエラーになる。手元のオプションは [環境構築](../cpp/cpp-environment.md#gnu-mode)でそろえる
 
@@ -244,6 +301,9 @@ GCC は、GNU 拡張を有効にする `-std=gnu++23` と、規格どおりの `
 --8<-- "cpp-integer-overflow/overflow-check.cpp:core"
 ```
 
+完全なプログラム：[`overflow-check.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-integer-overflow/overflow-check.cpp)（GitHub）
+{ .kp-code-src }
+
 - **`__builtin_mul_overflow(a, b, &r)`**：無限の精度で掛けた積を `r` の型に直して入れ、値が変わった（あふれた）なら `true` を返す。GCC の拡張で、`int`・`long long`・`__int128` のどれでも使える
 - **割り算**：$a \times b \le L \iff a \le \lfloor L / b \rfloor$（$a, b \ge 1$ の整数）。負の数や切り上げが混ざるときの式の作り方は [整数の割り算と切り上げ](../math/integer-division.md)にある
 - **`__int128`**：$a, b \le 10^{18}$ なら積が収まるので、そのまま比べられる。$a, b$ が `__int128` 自身の範囲に近いときは使えない
@@ -253,6 +313,9 @@ GCC は、GNU 拡張を有効にする `-std=gnu++23` と、規格どおりの `
 ```cpp
 --8<-- "cpp-integer-overflow/long-double.cpp:core"
 ```
+
+完全なプログラム：[`long-double.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-integer-overflow/long-double.cpp)（GitHub）
+{ .kp-code-src }
 
 $10^{18} \times 10^{18}$ と $(10^{18} + 1)(10^{18} - 1) = 10^{36} - 1$ は、`long double` では等しいと判定され、`__int128` では正しく区別された。分数 $a/b$ と $c/d$ を $ad$ と $bc$ で比べるような場面では、`long double` ではなく `__int128` を使う。累乗があふれる前に止める書き方は [整数の K 乗根](../math/integer-root.md)にある。
 

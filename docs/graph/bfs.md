@@ -27,7 +27,7 @@ sections:
   - {title: 多始点 BFS（超頂点から距離 0 の辺を張るのと同じ）, anchor: multi-source}
   - {title: 重みが 1 と 2 なら辺を割る・重み付きなら 01-BFS かダイクストラ法, anchor: weighted}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -86,6 +86,9 @@ BFS は、[ダイクストラ法](../graph/dijkstra.md#why-correct)と同じ「�
 --8<-- "bfs/path.cpp:core"
 ```
 
+完全なプログラム：[`path.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bfs/path.cpp)（GitHub）
+{ .kp-code-src }
+
 印（距離）は push するときに付ける。こうすると各頂点はキューに 1 回しか入らず、各辺は 1 回（無向なら両端から 1 回ずつ）見るだけなので $O(N + M)$ になる。
 
 印を pop するときに付けると、まだ取り出していない頂点を、隣の頂点を取り出すたびに push してしまう。pop したときに「もう印がある」と見て読み飛ばせば、push の回数は辺の数ほどで済むが、キューが $O(M)$ の大きさになる。読み飛ばしも忘れると、同じ頂点を取り出すたびに隣を調べ直して、push の回数が爆発する。壁のない $12 \times 12$ のグリッドで試すと、push で印を付ければ 144 回の push が、pop で印を付けて読み飛ばさないと約 270 万回になる。
@@ -104,6 +107,9 @@ BFS は、[ダイクストラ法](../graph/dijkstra.md#why-correct)と同じ「�
 --8<-- "bfs/path.cpp:restore"
 ```
 
+完全なプログラム：[`path.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bfs/path.cpp)（GitHub）
+{ .kp-code-src }
+
 - $\mathrm{par}$ を結んだ辺は、始点を根とする木になる（距離の層の図の太い辺）。この木を最短路木と呼ぶ。無向グラフなら、「各頂点から始点へ最短で戻るとき、次に進む頂点を答える」は $\mathrm{par}$ をそのまま出力すればよい（有向グラフなら、辺を逆向きにしたグラフで目的地から BFS する）
 - 復元は終点から始点への向きに行う。始点からは、どの辺を選べば終点に向かうか分からない
 - $\mathrm{dist}[t] = -1$ なら経路はない。たどる前に確かめる
@@ -118,6 +124,9 @@ BFS は、[ダイクストラ法](../graph/dijkstra.md#why-correct)と同じ「�
 ```cpp
 --8<-- "bfs/multi-source.cpp:core"
 ```
+
+完全なプログラム：[`multi-source.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bfs/multi-source.cpp)（GitHub）
+{ .kp-code-src }
 
 - **時間とともに広がる様子**：「毎秒、黒いマスの隣が黒くなる」のような広がり方は、多始点 BFS の距離がそのまま「何秒後に黒くなるか」になる。シミュレーションを毎秒やり直すと $O(HW)$ を秒数の分だけ繰り返すが、BFS なら全体で $O(HW)$ である
 - **どの始点に一番近いか**：距離と一緒に、見つけた元の始点の番号を書き写していくと、各頂点に一番近い始点が分かる
@@ -182,7 +191,7 @@ BFS が使えるのは、すべての辺の重みが等しいときだけであ�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [ABC007 C. 幅優先探索](https://atcoder.jp/contests/abc007/tasks/abc007_3)（diff 1024）：壁と通路からなる迷路で、スタートのマスからゴールのマスまで上下左右に進むときの最小の移動回数を求める。
+- [ABC007 C. 幅優先探索](https://atcoder.jp/contests/abc007/tasks/abc007_3)（diff 1024・参考値）：壁と通路からなる迷路で、スタートのマスからゴールのマスまで上下左右に進むときの最小の移動回数を求める。
 
 </div>
 

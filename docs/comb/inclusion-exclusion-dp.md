@@ -27,7 +27,7 @@ sections:
   - {title: 「等しい」を区間にまとめる符号付き DP, anchor: equal-blocks}
   - {title: 符号付きの木 DP, anchor: tree, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -111,6 +111,9 @@ $$
 --8<-- "inclusion-exclusion-dp/first-obstacle.cpp:core"
 ```
 
+完全なプログラム：[`first-obstacle.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/inclusion-exclusion-dp/first-obstacle.cpp)（GitHub）。`mint` は ACL の `modint1000000007`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 計算量は、前計算が $O(H + W)$、DP が障害物の組ごとに $O(1)$ で $O(N^2)$ である。$N = 3000$ なら約 $4.5 \times 10^6$ 回で間に合う。
 
 - **応用の型**（通ってはいけない点が少ない数え上げ）：グリッドに限らず、「点 $a$ から点 $b$ へ行く方法の数」が式で求まり、通ってはいけない点に半順序（$a$ から $b$ へ行けるなら $a$ が先）があれば、同じ式が使える。3 次元の格子路や、右・下以外の 2 種類の移動（例：$(1, 2)$ と $(2, 1)$）を組み合わせる格子路（[移動を回数の組に直す](../comb/lattice-paths.md#move-counts)）でも、$\mathrm{paths}$ を差し替えるだけである。
@@ -142,6 +145,9 @@ $$
 --8<-- "inclusion-exclusion-dp/ban-permutation.cpp:core"
 ```
 
+完全なプログラム：[`ban-permutation.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/inclusion-exclusion-dp/ban-permutation.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 状態数は $N \cdot N \cdot 2^{2X-1}$、遷移は $2X$ 通りなので、計算量は $O(N^2 X 4^X)$ である。$X = 5$ のとき $2^{2X-1} = 512$ で、$N = 100$ なら $N^2 \cdot 2X \cdot 512 \approx 5 \times 10^7$ 回ほどである。
 
 - **応用の型**（2 つの順列の両方と異なる）：$r_i \ne p_i$ かつ $r_i \ne q_i$ のように禁止の値が位置ごとに 2 つあるときも、答えは $\sum_k (-1)^k r_k (N - k)!$ である。値 $p_i$ と $q_i$ を辺で結ぶと、グラフは閉路の集まりになる。$r_k$ は、$k$ 本の辺に端点を 1 つずつ重ならずに割り当てる方法の数である。閉路ごとに DP で数え、閉路どうしを[ナップサック](../dp/knapsack-01.md)のように畳み込む（力試しの [ABC214 G](#challenge)）。
@@ -162,6 +168,9 @@ $A = (2, 2)$ で確かめる。区間 $[0, 2)$ の 1 つに分けると $-2$、$
 ```cpp
 --8<-- "inclusion-exclusion-dp/equal-blocks.cpp:core"
 ```
+
+完全なプログラム：[`equal-blocks.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/inclusion-exclusion-dp/equal-blocks.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 このままでは $O(N^2)$ で、$N$ が $5 \times 10^5$ 程度だと間に合わない。$h[i] = (-1)^i \mathrm{dp}[i]$ と置くと、式は $h[i] = -\sum_{j < i} h[j] \cdot \min(A_j, \dots, A_{i-1})$ になり、符号が $j$ によらなくなる。$i$ を 1 つ進めると、今の $\min$ が $A_{i-1}$ より大きい $j$ だけが変わり、どれも $A_{i-1}$ になる。そこで「$\min$ の値」と「その値を持つ $j$ の $h[j]$ の和」の組を[単調スタック](../ds/monotonic-stack.md#dp-transition)に積む。$i$ を進めるたびに、$A_{i-1}$ 以上の組を取り出し、それらの $h$ の和に新しく加わる $h[i-1]$ を足して、$(A_{i-1}, \text{和})$ の組を 1 つ積む。全体の $\sum$（値 × $h$ の和）は、取り出した組の分を引き、積んだ組の分を足して保てば、ならし $O(N)$ になる（練習の [ARC115 E](#practice)）。
 
@@ -206,7 +215,7 @@ $$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC Y. Grid 2](https://atcoder.jp/contests/dp/tasks/dp_y)（diff —）：H×W のグリッドに N 個の壁のマスがあるとき、左上から右下へ右と下だけで進み、壁を通らない経路の数を求める。
+- [EDPC Y. Grid 2](https://atcoder.jp/contests/dp/tasks/dp_y)（diff なし）：H×W のグリッドに N 個の壁のマスがあるとき、左上から右下へ右と下だけで進み、壁を通らない経路の数を求める。
 
 </div>
 

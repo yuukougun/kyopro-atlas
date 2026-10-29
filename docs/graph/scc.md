@@ -28,7 +28,7 @@ sections:
   - {title: 縮約した DAG の上で DP する, anchor: dp-on-dag}
   - {title: 縮約の応用の型（組の数・不等式の割り当て・2-SAT）, anchor: patterns}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -48,7 +48,7 @@ updated: 2026-10-22
 
 ## 縮約したグラフが DAG になる理由 {#condensation}
 
-有向グラフで、頂点 $u$ から $v$ へも $v$ から $u$ へも辿り着けるとき、$u$ と $v$ は互いに行き来できるという。互いに行き来できることを $u \leftrightarrow v$ と書く。どの頂点も自分自身とは行き来できるとみなす。$u \leftrightarrow v$ なら $v \leftrightarrow u$ であり、$u \leftrightarrow v$ かつ $v \leftrightarrow w$ なら $u \leftrightarrow w$ が成り立つ（推移的である）。この関係は自分自身とも成り立ち、向きを入れ替えても同じで、推移的である。よって頂点全体は重なりのないグループに分かれる。各グループを強連結成分（SCC）と呼ぶ。閉路に乗らない頂点は 1 頂点だけの成分になる。
+有向グラフで、頂点 $u$ から $v$ へも $v$ から $u$ へも辿り着けるとき、$u$ と $v$ は互いに行き来できるという。互いに行き来できることを $u \leftrightarrow v$ と書き、どの頂点も自分自身とは行き来できるとみなす。この関係は、$u \leftrightarrow u$（反射律）、$u \leftrightarrow v$ なら $v \leftrightarrow u$（対称律）、$u \leftrightarrow v$ かつ $v \leftrightarrow w$ なら $u \leftrightarrow w$（推移律）の 3 つを満たす。よって頂点全体は重なりのないグループに分かれる。各グループを強連結成分（SCC）と呼ぶ。閉路に乗らない頂点は 1 頂点だけの成分になる。
 
 成分を 1 つの頂点に縮め、成分をまたぐ辺だけを残したグラフを縮約したグラフ（condensation）と呼ぶ。次の図は 8 頂点・12 辺のグラフと、その縮約である（頂点は 1-indexed）。
 
@@ -89,6 +89,9 @@ Kosaraju 法は、次の 2 回の DFS で成分を求める。
     ```cpp
     --8<-- "scc/kosaraju.cpp:core"
     ```
+
+    完全なプログラム：[`kosaraju.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/scc/kosaraju.cpp)（GitHub）
+    { .kp-code-src }
 
     `comp[v]` は 0 から始まる成分の番号で、番号の小さい成分から大きい成分へだけ辺が向く。
 
@@ -133,6 +136,9 @@ ACL の `scc_graph` は、強連結成分を「頂点のリストのリスト」
 --8<-- "scc/condense-dp.cpp:core"
 ```
 
+完全なプログラム：[`condense-dp.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/scc/condense-dp.cpp)（GitHub）
+{ .kp-code-src }
+
 - **順の向き**：`scc()` の順は「辺が前から後ろへ向く」順である。「行き先の値から自分の値を決める」DP は後ろの成分から、「来た元の値を配る」DP は前の成分から回す
 - **前にあっても辿り着けるとは限らない**：保証されるのは「辿り着けるなら前」だけである。番号が小さいからといって、大きい番号の成分へ辿り着けるとは限らない
 - **DAG なら頂点の並びそのもの**：閉路のないグラフでは成分が 1 頂点ずつになり、`scc()` の順がそのままトポロジカル順になる。ただし辞書順最小のトポロジカル順になるとは限らない（[トポロジカルソート](../graph/topological-sort.md)）
@@ -150,6 +156,9 @@ ACL の `scc_graph` は、強連結成分を「頂点のリストのリスト」
 ```cpp
 --8<-- "scc/on-cycle.cpp:core"
 ```
+
+完全なプログラム：[`on-cycle.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/scc/on-cycle.cpp)（GitHub）
+{ .kp-code-src }
 
 閉路に含まれる頂点が分かれば、「閉路に辿り着ける頂点」（そこから無限に動き続けられる頂点）も求まる。縮約した DAG で、自分が閉路の成分であるか、行き先に「辿り着ける」成分があれば「辿り着ける」とし、後ろの成分から決めればよい。同じ答えは、出次数 0 の頂点を逆辺で取り除いていく方法でも求まる（[トポロジカルソート](../graph/topological-sort.md)）。
 
@@ -205,7 +214,7 @@ $\mathrm{dp}[c]$ は「成分 $c$ に入ってから得られる価値の和の�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [PRACTICE2 G. SCC](https://atcoder.jp/contests/practice2/tasks/practice2_g)（diff —）：有向グラフの頂点を、互いに行き来できる頂点の極大の集まりに分け、集まりの間の辺が前から後ろへ向く順に出力する
+- [PRACTICE2 G. SCC](https://atcoder.jp/contests/practice2/tasks/practice2_g)（diff なし）：有向グラフの頂点を、互いに行き来できる頂点の極大の集まりに分け、集まりの間の辺が前から後ろへ向く順に出力する
 
 </div>
 
@@ -218,7 +227,7 @@ ACL の練習用の問題で、`scc_graph` に辺を足して `scc()` を呼び�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 021. Come Back in One Piece（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_u)（diff —）：有向グラフで、互いに行き来できる頂点の組の数を求める
+- [典型90 021. Come Back in One Piece（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_u)（diff なし）：有向グラフで、互いに行き来できる頂点の組の数を求める
 
 </div>
 

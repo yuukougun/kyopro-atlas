@@ -25,7 +25,7 @@ sections:
   - {title: 行列式を bitDP で展開する例, anchor: bitdp}
   - {title: 計算量と自作するときの要点, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -101,11 +101,14 @@ $$
 
 同じ議論は、「段（格子なら $x + y$、時刻なら $t$）ごとに頂点が一列に並び、始点はすべて同じ段、終点もすべて同じ段にあり、1 歩で位置が変わらないか一方向に 1 つだけ進む」形の DAG ならそのまま使える。位置が両向きに動けるときは、隣どうしの 2 つが同時に位置を入れ替えると、頂点を共有せずに順が入れ替わるので使えない。数直線上を動く駒の問題がこの形である。始点や終点が斜めの線にそろっていないときは、$a_i \to b_l$ と $a_j \to b_m$（$i < j$、$l > m$）が必ず交わるかを自分で確かめる。
 
-中心の部分は次のとおりである（完全なプログラムは `snippets/lgv-lemma/grid-paths.cpp`。座標が小さいときは全列挙の符号付きの和と一致することを確かめている）。
+中心の部分は次のとおりである（完全なプログラムは [`snippets/lgv-lemma/grid-paths.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lgv-lemma/grid-paths.cpp)。座標が小さいときは全列挙の符号付きの和と一致することを確かめている）。
 
 ```cpp
 --8<-- "lgv-lemma/grid-paths.cpp:lgv"
 ```
+
+完全なプログラム：[`grid-paths.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lgv-lemma/grid-paths.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 ## 行列式を bitDP で展開する例 {#bitdp}
 
@@ -141,6 +144,9 @@ $$
 --8<-- "lgv-lemma/grid-paths.cpp:det"
 ```
 
+完全なプログラム：[`grid-paths.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lgv-lemma/grid-paths.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 自作するときに気をつける点は次のとおりである。
 
 - **始点と終点の番号の付け方**：交わらない組が恒等置換だけになるように並べる。並べ方を誤ると、答えの符号が反転したり、別の置換の項が混ざったりする。小さい例で全列挙と比べると確実である。
@@ -155,9 +161,9 @@ ACL に行列式はない。自作した行列式は Library Checker で確か�
 
 ## 学ぶための資料 {#resources}
 
-- 英語版 Wikipedia の「Lindström-Gessel-Viennot lemma」：重み付きの一般形の主張と、打ち消し合いによる証明の概略。応用（Schur 多項式など）にも触れている。
-- OI Wiki の「LGV 引理」（中国語）：定義・証明と、格子上の 2 本の経路を数える例題がある（文章と図の利用条件は CC BY-SA）。
-- kmjp 氏の ABC216 H の記事：終点を固定しない場合に、置換の和を集合の DP にまとめる実装の例。
+- [「Lindström–Gessel–Viennot lemma」（英語版 Wikipedia）](https://en.wikipedia.org/wiki/Lindstr%C3%B6m%E2%80%93Gessel%E2%80%93Viennot_lemma)：重み付きの一般形の主張と、打ち消し合いによる証明の概略。応用（Schur 多項式など）にも触れている。
+- [OI Wiki「LGV 引理」](https://oi-wiki.org/graph/lgv/)（中国語）：定義・証明と、格子上の 2 本の経路を数える例題がある（文章と図の利用条件は CC BY-SA）。
+- [kmjp「AtCoder ABC #216 : H - Random Robots」](https://kmjp.hatenablog.jp/entry/2021/09/02/0900)：終点を固定しない場合に、置換の和を集合の DP にまとめる実装の例。
 
 ## 例題 {#examples}
 

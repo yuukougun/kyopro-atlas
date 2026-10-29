@@ -27,7 +27,7 @@ sections:
   - {title: 回文にする操作は左右の差の列に直してから差分を取る, anchor: palindrome}
   - {title: 円環で一斉に行う操作, anchor: circular}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -58,7 +58,7 @@ $d$ の和は $A_N - A_{-1} = 0$ である。逆に和が 0 の $d$ からは、
 
 半開区間 $[l, r)$（$0 \le l < r \le N$）のすべての要素に $x$ を足すと、変わるのは $d_l$（$+x$）と $d_r$（$-x$）の 2 つだけである。区間の内側では隣どうしが同じだけ増えるので差は変わらない。
 
-![列 A = (2, 1, 3, 3, 1) の区間 [1, 4) に +1 すると A は (2, 2, 4, 4, 1) になる。長さ 6 の差分列 d は (2, −1, 2, 0, −2, −1) から (2, 0, 2, 0, −3, −1) になり、変わるのは d_1 の +1 と d_4 の −1 だけである](../img/difference-sequence/range-to-points.svg)
+![列 A = (2, 1, 3, 3, 1) の区間 \[1, 4) に +1 すると A は (2, 2, 4, 4, 1) になる。長さ 6 の差分列 d は (2, −1, 2, 0, −2, −1) から (2, 0, 2, 0, −3, −1) になり、変わるのは d_1 の +1 と d_4 の −1 だけである](../img/difference-sequence/range-to-points.svg)
 
 $d$ を両端の外まで含めて $N + 1$ 個取るのが要点である。$l = 0$ や $r = N$ の区間（接頭辞・接尾辞）も、$d_0$ や $d_N$ を変える普通の 2 点の操作として扱える。端の差を省くと、接頭辞への操作が「1 点だけを変える特別な操作」に見えて、場合分けが増える。
 
@@ -94,6 +94,9 @@ $$
 ```cpp
 --8<-- "difference-sequence/min-ops.cpp:core"
 ```
+
+完全なプログラム：[`min-ops.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/difference-sequence/min-ops.cpp)（GitHub）
+{ .kp-code-src }
 
 1 回の操作で変わる差分の個数と向きが分かれば、「正の部分の和」「鎖ごとの和」のように、点ごとの量に分けて下限と構成を考えられる。可否の判定では、差分列の上の[不変量](../thinking/invariant.md#necessary-and-sufficient)（鎖ごとの和など）が必要条件になることが多い。
 
@@ -188,6 +191,9 @@ $$
     --8<-- "difference-sequence/level.cpp:core"
     ```
 
+    完全なプログラム：[`level.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/difference-sequence/level.cpp)（GitHub）
+    { .kp-code-src }
+
 ### ABC454 F. Make it Palindrome 2 {#abc454_f}
 
 <div class="kp-problems" data-role="example" markdown>
@@ -247,7 +253,7 @@ $$
 
 - 区間に足して最後に各点の値を読むだけなら[いもす法](../basics/imos.md)である。最小回数や可否を問われ、操作の組み合わせを選ぶ必要があるなら差分列への言い換えを使う
 - 境界の数を数えるなら、差分列の 0 でない項の数と見て[ランレングス圧縮](../basics/run-length-encoding.md)で数える
-- 隣り合う要素の入れ替えの回数なら、差分列ではなく転倒数で言い換える（[言い換えの典型の操作の節](../thinking/reformulation.md#operations)）
+- 隣り合う要素の入れ替えの回数なら、差分列ではなく[転倒数](../ds/inversion-number.md#adjacent-swaps)で言い換える。操作をどの量に言い換えるかの気づき方は[言い換えの典型の操作の節](../thinking/reformulation.md#operations)にまとめてある
 
 ## 参考 {#references}
 

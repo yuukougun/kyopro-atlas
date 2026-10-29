@@ -26,7 +26,7 @@ sections:
   - {title: 処理時間と締め切りがある場合（優先度付きキューの貪欲へ）, anchor: deadlines}
   - {title: 区間に重みがあるなら DP, anchor: weighted}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -61,7 +61,7 @@ last = −∞
 
 次の図は 8 個の区間を右端の順に並べ、貪欲で選んだ様子である。A・C・E・G の 4 個が選ばれ、ほかの区間は直前に選んだ区間と重なるので飛ばされる。各区間 $[l, r)$ はマス $l$ 〜 $r - 1$ を占め、網かけの列は選んだ区間の右端の直前のマスで、後で述べる[串刺し](#stabbing)の点にあたる。
 
-![8 個の区間 A [1, 3)、B [0, 4)、C [3, 5)、D [2, 6)、E [5, 8)、F [4, 9)、G [8, 10)、H [6, 11) を右端の順に並べ、A・C・E・G を選ぶ。B・D・F・H は直前に選んだ区間と重なるので飛ばす。選んだ区間の右端の直前のマス 2・4・7・9 に置いた 4 個の点で、すべての区間を突ける](../img/interval-scheduling/greedy.svg)
+![8 個の区間 A \[1, 3)、B \[0, 4)、C \[3, 5)、D \[2, 6)、E \[5, 8)、F \[4, 9)、G \[8, 10)、H \[6, 11) を右端の順に並べ、A・C・E・G を選ぶ。B・D・F・H は直前に選んだ区間と重なるので飛ばす。選んだ区間の右端の直前のマス 2・4・7・9 に置いた 4 個の点で、すべての区間を突ける](../img/interval-scheduling/greedy.svg)
 
 **なぜ正しいか**。最初に選ぶ区間を考える。右端が最小の区間 $g$ を選んで損をしないことを示せば、残りは「$g$ の右端以降から始まる区間」だけの同じ問題になり、帰納法で全体が正しいと言える。
 
@@ -74,6 +74,9 @@ last = −∞
 ```cpp
 --8<-- "interval-scheduling/max-disjoint.cpp:core"
 ```
+
+完全なプログラム：[`max-disjoint.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/interval-scheduling/max-disjoint.cpp)（GitHub）
+{ .kp-code-src }
 
 右端が同じ区間どうしの順は問わない。右端が同じなら、どちらを選んでも last は同じ値になるからである。左右を反転して「左端の大きい順に選ぶ」も同じ理由で正しい。
 
@@ -94,6 +97,9 @@ last = −∞
 ```cpp
 --8<-- "interval-scheduling/stabbing.cpp:core"
 ```
+
+完全なプログラム：[`stabbing.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/interval-scheduling/stabbing.cpp)（GitHub）
+{ .kp-code-src }
 
 **最大個数と最少の点の数は一致する**。互いに重ならない区間が $k$ 個あれば、1 個の点はそのうち 1 個しか突けないので、点は $k$ 個以上いる。逆に、区間スケジューリングの貪欲で選んだ $k$ 個の区間に 1 個ずつ点を置くと、すべての区間が突ける。点の位置は区間の表し方で決まる。閉区間なら、貪欲（条件 $l > \mathrm{last}$）で選んだ区間の右端 $r$ に置く。整数の半開区間なら、貪欲（条件 $l \ge \mathrm{last}$）で選んだ区間の右端の直前 $r - 1$ に置く。飛ばした区間は、直前に選んだ区間と重なり、右端はそれ以上なので、その選んだ区間に置いた点を含むからである。だから「重ならない区間の最大個数 ＝ すべてを突く点の最少個数」で、2 つの問題は同じ貪欲で解ける。[右端の順に選ぶ理由](#why-right-end)の図の網かけの列がその点である。
 
@@ -156,6 +162,9 @@ $$
 ```cpp
 --8<-- "interval-scheduling/weighted.cpp:core"
 ```
+
+完全なプログラム：[`weighted.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/interval-scheduling/weighted.cpp)（GitHub）
+{ .kp-code-src }
 
 座標が $2 \times 10^5$ 程度までなら、「$\mathrm{dp}[t]$ ＝ 時刻 $t$ までに終わる区間だけを使うときの最大」と時刻を添字にしてもよい。座標が大きいときは[座標圧縮](../basics/coordinate-compression.md)してから同じ DP をする。
 

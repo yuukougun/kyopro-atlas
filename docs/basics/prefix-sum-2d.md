@@ -28,7 +28,7 @@ sections:
   - {title: '区間を点 (l, r) と見て数える', anchor: intervals-as-points}
   - {title: 3 次元以上（項の数と符号の決め方）, anchor: higher-dimensions, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -78,6 +78,9 @@ $S[x_1][y_2]$ と $S[x_2][y_1]$ を引くと、左上の A を 2 回引いてし
 ```cpp
 --8<-- "prefix-sum-2d/rect-sum.cpp:core"
 ```
+
+完全なプログラム：[`rect-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/prefix-sum-2d/rect-sum.cpp)（GitHub）
+{ .kp-code-src }
 
 問題文の座標は 1-indexed の閉区間で与えられることが多い。行 $r_1$〜$r_2$・列 $c_1$〜$c_2$（1-indexed、両端を含む）なら、0-indexed の半開区間では $x_1 = r_1 - 1$、$x_2 = r_2$、$y_1 = c_1 - 1$、$y_2 = c_2$ になる。0-indexed の閉区間 $[l, r]$ なら $x_1 = l$、$x_2 = r + 1$ である。
 
@@ -147,6 +150,9 @@ $$
 ```cpp
 --8<-- "prefix-sum-2d/periodic.cpp:core"
 ```
+
+完全なプログラム：[`periodic.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/prefix-sum-2d/periodic.cpp)（GitHub）
+{ .kp-code-src }
 
 前計算は $O(N^2)$、1 回のクエリは $O(1)$ である。座標が $10^9$ なら答えは $10^{18}$ 近くになるので、`long long` で計算する。周期で割る考え方は、1 次元の「周期的な列の区間の和」でも同じである。
 
@@ -227,7 +233,7 @@ $$
 
 - [ABC461 D. Count Subgrid Sum = K](https://atcoder.jp/contests/abc461/tasks/abc461_d)（diff 914）：グリッドの部分長方形のうち、書かれた値の和がちょうど K になるものの個数を求める。
 - [ABC311 E. Defect-free Squares](https://atcoder.jp/contests/abc311/tasks/abc311_e)（diff 1293）：穴のあるマスが N 個あるグリッドで、穴を含まない正方形の個数を求める。
-- [ARC025 B. チョコレート](https://atcoder.jp/contests/arc025/tasks/arc025_2)（diff 1369）：市松模様の板チョコから、黒と白の値の和が等しい長方形のうち最大の面積を求める。
+- [ARC025 B. チョコレート](https://atcoder.jp/contests/arc025/tasks/arc025_2)（diff 1369・参考値）：市松模様の板チョコから、黒と白の値の和が等しい長方形のうち最大の面積を求める。
 - [ABC075 D. Axis-Parallel Rectangle](https://atcoder.jp/contests/abc075/tasks/abc075_d)（diff 1470）：K 個以上の点を含む、軸に平行な長方形の最小の面積を求める。
 
 </div>

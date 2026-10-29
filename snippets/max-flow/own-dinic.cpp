@@ -57,6 +57,7 @@ struct Dinic {
         long long total = 0;
         while (bfs(s, t)) {
             fill(iter.begin(), iter.end(), 0);
+            // 始点では上限なし。up は min を取るだけで足さないので LLONG_MAX でよい
             while (long long d = dfs(s, t, LLONG_MAX)) total += d;
         }
         return total;

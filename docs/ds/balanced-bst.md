@@ -26,7 +26,7 @@ sections:
   - {title: pb_ds の tree（order_of_key・find_by_order。重複は値と通し番号の組にする）, anchor: pbds}
   - {title: 代わりの手（BIT 上の二分探索・連結リスト・逆順の処理と BIT）, anchor: alternatives}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -107,17 +107,23 @@ $$
 - 親の優先度は子の優先度以上である（ヒープの条件。優先度はランダムに決める）
 - 各ノードの $\mathrm{sz}$ と集約値は、保留を除いた子の値から正しく作られている。保留は「自分の集約値には反映済みで、子にはまだ配っていない」作用である（反転の保留の扱いは下の「push の位置」）
 
-ノードは配列に置き、子は番号で持つ（$-1$ を空の木とする）と、ポインタを使わずに書ける。各ノードには値 `val`・部分木の和 `sum`・優先度 `pri`・要素数 `sz`・反転の保留 `rev` と左右の子 `l`・`r` を持たせる。中心のコードは次のとおりである（完全なプログラムは `snippets/balanced-bst/implicit-treap.cpp` で、乱数の操作を `vector` の愚直な方法と比べて確かめている）。まず、子から作り直す pull と、保留を降ろす push である。
+ノードは配列に置き、子は番号で持つ（$-1$ を空の木とする）と、ポインタを使わずに書ける。各ノードには値 `val`・部分木の和 `sum`・優先度 `pri`・要素数 `sz`・反転の保留 `rev` と左右の子 `l`・`r` を持たせる。中心のコードは次のとおりである（完全なプログラムは [`snippets/balanced-bst/implicit-treap.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/balanced-bst/implicit-treap.cpp) で、乱数の操作を `vector` の愚直な方法と比べて確かめている）。まず、子から作り直す pull と、保留を降ろす push である。
 
 ```cpp
 --8<-- "balanced-bst/implicit-treap.cpp:node"
 ```
+
+完全なプログラム：[`implicit-treap.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/balanced-bst/implicit-treap.cpp)（GitHub）
+{ .kp-code-src }
 
 `using namespace std;` の下では `merge` が `std::merge` と同じ名前になるので、コード片では `join` と名付けた。
 
 ```cpp
 --8<-- "balanced-bst/implicit-treap.cpp:core"
 ```
+
+完全なプログラム：[`implicit-treap.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/balanced-bst/implicit-treap.cpp)（GitHub）
+{ .kp-code-src }
 
 挿入・削除・反転・区間の和は、[何ができるか](#what-it-does)の表のとおり、split で区間を切り出してから merge で戻す形になる（完全なプログラムの `insert_at`・`erase_at`・`reverse_range`・`range_sum`）。
 
@@ -163,16 +169,16 @@ K が 5 程度に小さいなら、multiset の `lower_bound` からイテレー
 
 ## 学ぶための資料 {#resources}
 
-- hamamu 氏の Qiita の Implicit Treap の解説記事：位置で分割・結合する treap の split・merge、区間の反転、遅延評価による区間の作用と取得を、日本語で順に説明している
-- Luzhiled's Library（ei1333 氏）の平衡二分探索木の一覧：RBST・splay 木・赤黒木などに、遅延評価や反転を付けたライブラリがあり、自作するときの関数の切り分けの参考になる
-- GCC の Policy-Based Data Structures の手引き：pb_ds の tree の型引数と `tree_order_statistics_node_update` の説明（英語）
+- [hamamu「Implicit Treap解説」](https://qiita.com/hamamu/items/570e7c36bf73913cbeb8)（Qiita）：位置で分割・結合する treap の split・merge、区間の反転、遅延評価による区間の作用と取得を、日本語で順に説明している
+- [ei1333「Luzhiled's Library」](https://ei1333.github.io/library/)の平衡二分探索木（structure/bbst）の一覧：RBST・splay 木・赤黒木などに、遅延評価や反転を付けたライブラリがあり、自作するときの関数の切り分けの参考になる
+- [GCC「Policy-Based Data Structures」](https://gcc.gnu.org/onlinedocs/libstdc++/manual/policy_data_structures.html)（英語）：pb_ds の tree の型引数と `tree_order_statistics_node_update` の説明
 
 ## 練習問題 {#practice}
 
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC241 D. Sequence Query](https://atcoder.jp/contests/abc241/tasks/abc241_d)（diff 1177）：数の追加と、x 以下（以上）の中で大きい（小さい）方から K 番目の値の質問を処理する。
-- [ARC033 C. データ構造](https://atcoder.jp/contests/arc033/tasks/arc033_3)（diff 1641）：数の集合への追加と、小さい方から x 番目の数を答えて削除するクエリを処理する。
+- [ARC033 C. データ構造](https://atcoder.jp/contests/arc033/tasks/arc033_3)（diff 1641・参考値）：数の集合への追加と、小さい方から x 番目の数を答えて削除するクエリを処理する。
 
 </div>
 

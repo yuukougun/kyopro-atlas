@@ -25,7 +25,7 @@ sections:
   - {title: サイズを K で打ち切ると O(NK), anchor: cap-k}
   - {title: 頂点の状態と個数を同時に持つ, anchor: state-and-count}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -77,6 +77,9 @@ $O(N^2)$ にするための実装の約束は、**各頂点の配列を、その
 ```cpp
 --8<-- "tree-dp-square/tree-knapsack.cpp:core"
 ```
+
+完全なプログラム：[`tree-knapsack.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-dp-square/tree-knapsack.cpp)（GitHub）
+{ .kp-code-src }
 
 ここで守っていることは 3 つある。
 
@@ -130,6 +133,9 @@ $O(NK)$ になる理由は「$O(N)$ 回のマージ × 1 回 $O(K^2)$」の $O(N
 --8<-- "tree-dp-square/components.cpp:core"
 ```
 
+完全なプログラム：[`components.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-dp-square/components.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 成分の数は部分木のサイズを超えないので、添字の範囲は $0$〜$\mathrm{sz}$ でよく、[頂点の組の議論](#why-n2)がそのまま使える。
 
 状態と個数を同時に持つときに迷うのは、**個数をいつ数えるか**である。部分木の中だけでは決まらず、親との関係で後から決まる量がある。たとえば「見張りを置いた頂点とその隣が見張られる」とき、見張られる頂点の数を数えたいが、見張りのない頂点 $v$ が見張られるかは、$v$ の親に見張りを置くかで後から決まる。こういう量は次のように扱う。
@@ -177,7 +183,7 @@ $N \le 5000$ の木で、成分の数ごとの個数をすべて出すので、�
 
 - [ARC171 C. Swap on Tree](https://atcoder.jp/contests/arc171/tasks/arc171_c)（diff 2244）：木の頂点 i に駒 i を置き、まだ選んでいない辺を 1 本選んで両端の駒を入れ替える操作を好きな回数行う（各辺は 1 回まで）。最後の駒の並びとしてありうるものの数を求める。
 - [ABC207 F. Tree Patrolling](https://atcoder.jp/contests/abc207/tasks/abc207_f)（diff 2398）：木のいくつかの頂点に見張りを置き、置いた頂点とその隣が見張られるとき、見張られる頂点の数がちょうど k になる置き方の数を k = 0〜N について求める。
-- [TDPC P. うなぎ](https://atcoder.jp/contests/tdpc/tasks/tdpc_eel)（diff —）：木から、互いに共有しない K 本のパスを選ぶ方法の数を求める。
+- [TDPC P. うなぎ](https://atcoder.jp/contests/tdpc/tasks/tdpc_eel)（diff なし）：木から、互いに共有しない K 本のパスを選ぶ方法の数を求める。
 
 </div>
 

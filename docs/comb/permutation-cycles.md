@@ -27,7 +27,7 @@ sections:
   - {title: K 回の合成と元に戻る回数（巡回の長さの lcm）, anchor: power, level: 青}
   - {title: Functional graph との関係, anchor: functional-graph}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -59,6 +59,9 @@ updated: 2026-10-22
 ```cpp
 --8<-- "permutation-cycles/decompose.cpp:core"
 ```
+
+完全なプログラム：[`decompose.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/permutation-cycles/decompose.cpp)（GitHub）
+{ .kp-code-src }
 
 巡回の大きさだけが要るなら、[Union-Find](../ds/union-find.md) で $i$ と $p_i$ を併合しても同じ分け方が得られる。たどる順番（巡回の中の並び）は失われるので、$K$ 歩先を求めるときは、コードの `cycles` と `pos` のように巡回を配列で持つ。
 
@@ -94,7 +97,7 @@ updated: 2026-10-22
 
 ## 隣接 swap（転倒数）との違い {#vs-adjacent}
 
-swap できるのが隣り合う 2 要素だけなら、ソートの最小回数は巡回では決まらず、[転倒数](../ds/inversion-number.md)（$i < j$ かつ $P_i > P_j$ となる組の数）になる。隣接 swap 1 回では転倒数がちょうど 1 だけ変わるので、転倒数より少ない回数ではソートできない。逆に、ソートされていなければ $P_i > P_{i+1}$ となる隣り合う組があり、それを swap すれば転倒数は 1 減るので、転倒数の回数で足りる。隣接 swap は任意の swap の特別な場合なので、任意の swap の最小回数は転倒数以下になる。
+swap できるのが隣り合う 2 要素だけなら、ソートの最小回数は巡回では決まらず、[転倒数](../ds/inversion-number.md#adjacent-swaps)（$i < j$ かつ $P_i > P_j$ となる組の数）になる。隣接 swap 1 回で転倒数はちょうど 1 だけ変わり、ソートされていなければ隣り合う転倒した組を swap して 1 減らせるからである。隣接 swap は任意の swap の特別な場合なので、任意の swap の最小回数は転倒数以下になる。
 
 | 列 | 巡回の個数 | 任意の swap | 隣接 swap（転倒数） |
 | --- | --- | --- | --- |
@@ -115,6 +118,9 @@ swap できるのが隣り合う 2 要素だけなら、ソートの最小回数
 ```cpp
 --8<-- "permutation-cycles/power.cpp:core"
 ```
+
+完全なプログラム：[`power.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/permutation-cycles/power.cpp)（GitHub）
+{ .kp-code-src }
 
 [ダブリング](../basics/doubling.md#permutation-power)でも $O(N \log K)$ で求まるが、置換なら巡回を使う方が速く、表も要らない。$p$ が置換でない一般の写像なら、巡回に入る前の部分があるのでダブリングか [Functional graph](../graph/functional-graph.md) の方法を使う。
 

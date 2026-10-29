@@ -27,7 +27,7 @@ sections:
   - {title: K 番目と全体への XOR（bit ごとの反転フラグ）, anchor: kth-and-global-xor}
   - {title: 明示的に作らない Binary Trie（上位 bit で分ける再帰）, anchor: implicit}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -69,6 +69,9 @@ Binary Trie では、値を $0 \le a < 2^B$ の範囲に限り、$a$ を bit $B-
 ```cpp
 --8<-- "binary-trie/trie.cpp:core"
 ```
+
+完全なプログラム：[`trie.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binary-trie/trie.cpp)（GitHub）
+{ .kp-code-src }
 
 ### 境界
 
@@ -139,6 +142,9 @@ $T$ の bit $b$ が 1 であることは、深さ $B - 1 - b$ のすべてのノ
 --8<-- "binary-trie/implicit.cpp:core"
 ```
 
+完全なプログラム：[`implicit.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binary-trie/implicit.cpp)（GitHub）
+{ .kp-code-src }
+
 再帰の 1 段で、各要素はちょうど 1 つの区間に入るので、分ける手間は段ごとに合わせて $O(N)$、全体で $O(NB)$ である。$x$ の範囲が $[0, M)$ のように 2 の冪でないときは、上限 $M$（ABC425 G の記号）を上位 bit から見て、丸ごと入る半分にはこの関数を使い、はみ出す半分だけ再帰を続ける（[練習問題](#practice)の ABC425 G）。
 
 木を明示的に作るか再帰で済ませるかは、次の基準で選ぶ。
@@ -201,13 +207,16 @@ $T$ の bit $b$ が 1 であることは、深さ $B - 1 - b$ のすべてのノ
     --8<-- "binary-trie/min-pair.cpp:core"
     ```
 
+    完全なプログラム：[`min-pair.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binary-trie/min-pair.cpp)（GitHub）
+    { .kp-code-src }
+
     別解として、XOR が最小の組は昇順で隣り合う 2 要素の中にあるので、隣り合う組の XOR を multiset で持つ方法もある（[使い分け](#comparison)）。
 
 ## 練習問題 {#practice}
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [ARC033 C. データ構造](https://atcoder.jp/contests/arc033/tasks/arc033_3)（diff 1641）：数の集合に値を追加するクエリと、小さい方から x 番目の値を出力してそれを集合から取り除くクエリを処理する。
+- [ARC033 C. データ構造](https://atcoder.jp/contests/arc033/tasks/arc033_3)（diff 1641・参考値）：数の集合に値を追加するクエリと、小さい方から x 番目の値を出力してそれを集合から取り除くクエリを処理する。
 - [ABC403 G. Odd Position Sum Query](https://atcoder.jp/contests/abc403/tasks/abc403_g)（diff 2028）：空の多重集合に値を 1 つずつ追加し、そのたびに昇順に並べたときの奇数番目の要素の和を答える（追加する値は前の答えから決まる）。
 - [ABC425 G. Sum of Min of XOR](https://atcoder.jp/contests/abc425/tasks/abc425_g)（diff 2205）：x = 0, 1, …, M − 1 について min_i (x xor A_i) を求め、その総和を答える。
 

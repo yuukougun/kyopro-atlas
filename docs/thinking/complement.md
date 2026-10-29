@@ -24,7 +24,7 @@ sections:
   - {title: 2〜3 条件の包除（重なりを足し戻す）, anchor: two-conditions}
   - {title: mod の引き算と空集合の扱い, anchor: mod-and-empty}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -42,6 +42,8 @@ updated: 2026-10-22
 <!-- textlint-enable -->
 
 余事象は、求めたいものを直接数えず、「全体」と「求めたいものでない側（補集合）」を数えて引く考え方である。「少なくとも 1 つ」は何個含むかで場合が分かれるが、その反対の「1 つも含まない」は場合が 1 つにまとまる。数えにくい側と数えやすい側が入れ替わる、というのがこの考え方の要点である。
+
+使える合図は 3 つある。「少なくとも 1 つ含む」「1 つでも満たす」ものを数えさせること、「A でも B でもない」のように否定の条件が 2〜3 個重なること、「すべて異なる」のように反対の「どこかが等しい」の方が数えやすそうなことである。
 
 ## 全体 − 補集合 {#whole-minus-complement}
 
@@ -122,6 +124,9 @@ $$
 --8<-- "complement/two-conditions-mod.cpp:core"
 ```
 
+完全なプログラム：[`two-conditions-mod.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/complement/two-conditions-mod.cpp)（GitHub）
+{ .kp-code-src }
+
 - **`+ MOD` を 1 回足すだけでは足りないことがある**：`(a - b + MOD) % MOD` は引き算が 1 回なら正しいが、`(a - b - c + MOD) % MOD` は $a - b - c$ が $-\mathrm{MOD}$ より小さいと負のままになる。先に `%` を取ってから負なら足す、という形にしておけば、引く回数によらず正しい（[引き算の後の負の数を 0 以上に直す](../math/mod-arithmetic.md#negative)）
 - **modint を使えば気にしなくてよい**：ACL の modint は引き算の結果を自動で $[0, \mathrm{MOD})$ に戻す（[modint](../math/modint.md#what-is-automatic)）
 - **余りの大小で場合分けしない**：全体の余りが補集合の余りより小さくても、本当の個数が負になったわけではない。「引いた結果が負なら 0 を出す」のような処理は誤りである（[mod を取った値で大小比較・最大値を考えてはいけない](../math/mod-arithmetic.md#no-compare)）
@@ -138,6 +143,7 @@ $$
 - 「ちょうど $K$ 個」は「$K$ 個以下」−「$K - 1$ 個以下」で数えると楽なことがある。全体を「$K$ 個以下」に置きかえた余事象と見られる（[「ちょうど」を「以下」の差で数える](../comb/counting-mindset.md#exactly-vs-at-most)）
 - 確率では「少なくとも 1 回起きる確率」を $1 - (\text{1 回も起きない確率})$ で求める。考え方は同じである（[独立・排反・余事象](../comb/probability-basics.md#independence)）
 - 補集合も場合が分かれて数えにくいなら、余事象をやめて DP で直接数える。真ん中や最大値を固定して数える[一部を固定して数える](../thinking/fix-variable.md)と組み合わせることも多い
+- 個数を数える問題で、ほかにどの型を試すかは[詰まったときの発想リスト](../guide/thinking-checklist.md#shape-count)の「個数を数える」の表で引ける
 
 ## 例題 {#examples}
 

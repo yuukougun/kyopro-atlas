@@ -26,7 +26,7 @@ sections:
   - {title: 「片側を全探索して残りは貪欲」との違い, anchor: vs-greedy}
   - {title: 値の範囲が小さければナップサック DP, anchor: vs-knapsack}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -71,6 +71,9 @@ updated: 2026-10-22
 --8<-- "meet-in-the-middle/max-sum.cpp:core"
 ```
 
+完全なプログラム：[`max-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/meet-in-the-middle/max-sum.cpp)（GitHub）
+{ .kp-code-src }
+
 突き合わせの相手の決まり方で、使う道具が変わる。
 
 | 相手の条件 | 例 | 道具 |
@@ -98,6 +101,9 @@ updated: 2026-10-22
 ```cpp
 --8<-- "meet-in-the-middle/by-count.cpp:core"
 ```
+
+完全なプログラム：[`by-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/meet-in-the-middle/by-count.cpp)（GitHub）
+{ .kp-code-src }
 
 このコードは個数を `popcount`（C++20。[<bit> の関数](../cpp/cpp-math-functions.md#bit-functions)）で求め、bit 全探索で列挙してから列ごとにソートしている。列挙は $O(2^{N/2} \cdot N)$ だが、二分探索と同じ重さなので全体は変わらない。
 
@@ -179,7 +185,7 @@ $T$ と各値が $10^9$ まであるので、和を添字にした DP は使え�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 051. Typical Shop（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_ay)（diff —）：N ≤ 40 個の品物からちょうど K 個を選び、合計が P 以下になる選び方の数を求める。
+- [典型90 051. Typical Shop（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_ay)（diff なし）：N ≤ 40 個の品物からちょうど K 個を選び、合計が P 以下になる選び方の数を求める。
 
 </div>
 

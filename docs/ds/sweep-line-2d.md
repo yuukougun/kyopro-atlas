@@ -29,7 +29,7 @@ sections:
   - {title: 同じ座標での処理順・閉区間と半開区間・座標圧縮, anchor: boundaries}
   - {title: 長方形の和集合の面積（区間加算・最小値とその個数）, anchor: union-area, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -82,7 +82,7 @@ for イベント in 並べた順:
 
 ## 支配点の数え上げと長方形内の点の数 {#rectangle-count}
 
-平面走査のいちばん基本の型は、支配点の数え上げである。点 $j$ が点 $i$ に支配されるとは、$x_j \le x_i$ かつ $y_j \le y_i$ であることをいう（不等号が狭義かどうかは問題による）。各点 $i$ について支配される点の数を数えるには、y を座標圧縮し、点を x の小さい順に処理して BIT の $[0, y_i]$ の和を読めばよい。ただし x が同じ点どうしは 1 点ずつ処理すると、先に処理した点だけを数えてしまう。同じ x の点はまとめて扱い、$x_j \le x_i$ なら同じ x の点をすべて入れてから読んで自分の分の 1 を引き、$x_j < x_i$ なら同じ x の点をすべて読んでから入れる（[同じ座標での処理順](#boundaries)）。[転倒数](../ds/inversion-number.md)は、点を（添字, 値）と見たときの、この数え上げの特別な場合である。
+平面走査のいちばん基本の型は、支配点の数え上げである。点 $j$ が点 $i$ に支配されるとは、$x_j \le x_i$ かつ $y_j \le y_i$ であることをいう（不等号が狭義かどうかは問題による）。各点 $i$ について支配される点の数を数えるには、y を座標圧縮し、点を x の小さい順に処理して BIT の $[0, y_i + 1)$ の和を読めばよい。ただし x が同じ点どうしは 1 点ずつ処理すると、先に処理した点だけを数えてしまう。同じ x の点はまとめて扱い、$x_j \le x_i$ なら同じ x の点をすべて入れてから読んで自分の分の 1 を引き、$x_j < x_i$ なら同じ x の点をすべて読んでから入れる（[同じ座標での処理順](#boundaries)）。[転倒数](../ds/inversion-number.md)は、点を（添字, 値）と見たときの、この数え上げの特別な場合である。
 
 長方形の中の点の数は、原点を角とする 4 つの長方形の足し引きに分けられる。$C(X, Y)$ を「$x < X$ かつ $y < Y$ の点の数」とすると、[2 次元累積和](../basics/prefix-sum-2d.md)と同じ包除で次のようになる。
 
@@ -98,7 +98,7 @@ $$
 
 1 つのクエリを、走査線が $x = r$ へ来たときに読む「$+$」の項と、$x = l$ へ来たときに読む「$-$」の項の 2 つのイベントに分ける。次の図は、長方形 $[3, 7) \times [2, 6)$ の点の数を、この 2 回の読み取りの差として求める様子である。
 
-![長方形 [3, 7) × [2, 6) の中の点の数は、x < 7 で y が [2, 6) の点 5 個から、x < 3 で y が [2, 6) の点 2 個を引いた 3 個になる。走査線は x = 3 と x = 7 で値を読む](../img/sweep-line-2d/rectangle-prefix.svg)
+![長方形 \[3, 7) × \[2, 6) の中の点の数は、x < 7 で y が \[2, 6) の点 5 個から、x < 3 で y が \[2, 6) の点 2 個を引いた 3 個になる。走査線は x = 3 と x = 7 で値を読む](../img/sweep-line-2d/rectangle-prefix.svg)
 
 図の点は $(1, 2)$・$(2, 5)$・$(3, 4)$・$(4, 4)$・$(5, 6)$・$(6, 3)$・$(7, 5)$ の 7 個である。走査線が $x = 3$ に来たとき、BIT には $(1, 2)$ と $(2, 5)$ だけが入っていて、y が $[2, 6)$ のものは 2 個ある。$x = 7$ に来たときは $(7, 5)$ を除く 6 個が入っていて、y が $[2, 6)$ のものは 5 個ある。答えは $5 - 2 = 3$ で、長方形の中の $(3, 4)$・$(4, 4)$・$(6, 3)$ と一致する。
 
@@ -107,6 +107,9 @@ $$
 ```cpp
 --8<-- "sweep-line-2d/rectangle-sum.cpp:core"
 ```
+
+完全なプログラム：[`rectangle-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/sweep-line-2d/rectangle-sum.cpp)（GitHub）
+{ .kp-code-src }
 
 !!! info "ACL では"
     `atcoder::fenwick_tree<long long> bit(n);`。`bit.add(p, x)` で $a_p$ に $x$ を加え、`bit.sum(l, r)` で $[l, r)$ の和を返す。どちらも $O(\log N)$ で、添字は 0-indexed、`l == r` なら 0 を返す。
@@ -167,6 +170,9 @@ $s$ をすべての整数で試す必要はない。最適な枠を、いちば�
 --8<-- "sweep-line-2d/window-max.cpp:core"
 ```
 
+完全なプログラム：[`window-max.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/sweep-line-2d/window-max.cpp)（GitHub）
+{ .kp-code-src }
+
 !!! info "ACL では"
     `atcoder::lazy_segtree<int, op, e, int, mapping, composition, id> seg(v);`。`seg.apply(l, r, f)` で $[l, r)$ に $f$ を加え、`seg.all_prod()` で全体の最大値を $O(1)$ で返す。区間加算・区間最大の 7 つの関数の書き方は[遅延セグメント木](../ds/lazy-segment-tree.md#acl-standard)にある。
 
@@ -207,6 +213,9 @@ y は長方形の上下の辺で座標圧縮し、葉 $i$ を帯 $[y_i, y_{i+1})
 ```cpp
 --8<-- "sweep-line-2d/union-area.cpp:core"
 ```
+
+完全なプログラム：[`union-area.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/sweep-line-2d/union-area.cpp)（GitHub）
+{ .kp-code-src }
 
 イベントは $2N$ 個で、各イベントの区間加算が $O(\log N)$、全体の取得が $O(1)$ なので、全体で $O(N \log N)$ である。座標が $10^9$ なら面積は $10^{18}$ に届くので、`long long` で持つ。
 

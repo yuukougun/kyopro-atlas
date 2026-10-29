@@ -194,6 +194,7 @@ search:
     - `xor#games` 石取りゲーム → Nim・Grundy 数（nim, grundy-number）：https://yuukougun.github.io/kyopro-atlas/patterns/xor/#games
     - `xor#set-hash` 2 つの集合が一致するか → 乱数の XOR によるハッシュ（hashing-for-sets）：https://yuukougun.github.io/kyopro-atlas/patterns/xor/#set-hash
     - `xor#xor-convolution` 添字の XOR で畳み込む → アダマール変換（hadamard-transform）：https://yuukougun.github.io/kyopro-atlas/patterns/xor/#xor-convolution
+    - `xor#adjacent-xor` 列全体を同じ値で XOR したものを探す → 隣どうしの XOR の列で照合（kmp）：https://yuukougun.github.io/kyopro-atlas/patterns/xor/#adjacent-xor
 
 ## 約数と倍数（divisors-and-multiples） {#divisors-and-multiples}
 
@@ -272,3 +273,35 @@ search:
     - `operation-sequence#online` 更新と質問が交互で区間を扱う → セグメント木・遅延セグメント木・平方分割：https://yuukougun.github.io/kyopro-atlas/patterns/operation-sequence/#online
     - `operation-sequence#versions` 過去の版に戻る・版をコピーする → 版の木・永続データ構造：https://yuukougun.github.io/kyopro-atlas/patterns/operation-sequence/#versions
     - `operation-sequence#repeat` 同じ操作を非常に多く繰り返す → 周期で打ち切る・操作の合成をダブリング（periodicity, doubling）：https://yuukougun.github.io/kyopro-atlas/patterns/operation-sequence/#repeat
+
+## 円環（circular） {#circular}
+
+- id：`circular`　レベル：—　段階：draft　type：pattern
+- URL：https://yuukougun.github.io/kyopro-atlas/patterns/circular/
+- 別名：環状、円形に並ぶ、円周上に並ぶ、最後と最初が隣り合う、2 周分に伸ばす、輪、リング、circular、cyclic、ring
+- 種類：案内、累積和・差分、数え上げ
+- サイン：
+    - 言い回し：N 個が円形に並び、N 番目と 1 番目も隣り合う
+    - 言い回し：円環上の連続する区間の和・個数（端をまたぐ区間も含む）
+    - 言い回し：円形に並ぶものを、隣どうしが違う色で塗る方法の数
+    - 言い回し：列を何回回転させると、もう一方の列に一致するか
+    - 言い回し：円周上に点が並び、時計回りに進む・点どうしを弦で結ぶ
+- 節：
+    - `circular#properties` 題材の性質：https://yuukougun.github.io/kyopro-atlas/patterns/circular/#properties
+    - `circular#overview` 問われ方と手法の一覧：https://yuukougun.github.io/kyopro-atlas/patterns/circular/#overview
+    - `circular#sum` 円環上の区間の和 → 2 周分に伸ばした累積和（prefix-sum）：https://yuukougun.github.io/kyopro-atlas/patterns/circular/#sum
+    - `circular#count-pairs` 時計回りの距離が M の倍数になる組 → 端をまたぐかで分けて数える（prefix-sum-counting）：https://yuukougun.github.io/kyopro-atlas/patterns/circular/#count-pairs
+    - `circular#range-add` 更新のある円環の区間加算 → 端で 2 つに分ける（fenwick-tree, lazy-segment-tree）：https://yuukougun.github.io/kyopro-atlas/patterns/circular/#range-add
+    - `circular#difference` 円環で一斉に行う操作の回数・可否 → 円環の差分列（difference-sequence）：https://yuukougun.github.io/kyopro-atlas/patterns/circular/#difference
+    - `circular#coloring` 隣どうしが違う色になる塗り方の数 → 両端の色で場合分け（counting-basics）：https://yuukougun.github.io/kyopro-atlas/patterns/circular/#coloring
+    - `circular#cut` 最後と最初の両方に条件がかかる DP → 1 か所で切り、最初の状態を固定する（dp-state-design）：https://yuukougun.github.io/kyopro-atlas/patterns/circular/#cut
+    - `circular#cyclic-dependency` 円環状に依存し合う確率・期待値 → 1 つを未知数にして解く（expectation-linear-equations）：https://yuukougun.github.io/kyopro-atlas/patterns/circular/#cyclic-dependency
+    - `circular#shift` 全体が毎回 1 つずつ回る遷移 → 添字のずらし（inline-dp）：https://yuukougun.github.io/kyopro-atlas/patterns/circular/#shift
+    - `circular#rotation-match` 何回回転すると一致するか → A+A の中で B を探す（string-basics, z-algorithm）：https://yuukougun.github.io/kyopro-atlas/patterns/circular/#rotation-match
+    - `circular#rotation-order` 回転どうしの辞書順・最小の回転 → S+S の Suffix Array（suffix-array）：https://yuukougun.github.io/kyopro-atlas/patterns/circular/#rotation-order
+    - `circular#all-rotations` すべての回転についての値 → 差分の更新・畳み込み（inversion-number, convolution-ntt）：https://yuukougun.github.io/kyopro-atlas/patterns/circular/#all-rotations
+    - `circular#up-to-rotation` 回転で同一視して数える → 円順列・Burnside の補題（counting-basics, burnside-lemma）：https://yuukougun.github.io/kyopro-atlas/patterns/circular/#up-to-rotation
+    - `circular#angles` 方向が範囲に入る点・半周未満の点・ベクトルの和の長さの最大 → 偏角の列を 2 周分にする（argument-sort）：https://yuukougun.github.io/kyopro-atlas/patterns/circular/#angles
+    - `circular#chords` 円周上の弦が交わるか → 1 か所で切って区間にする（stack-techniques）：https://yuukougun.github.io/kyopro-atlas/patterns/circular/#chords
+    - `circular#step` 円周を K ずつ進む → gcd と一次合同式（gcd-properties, ext-gcd）：https://yuukougun.github.io/kyopro-atlas/patterns/circular/#step
+    - `circular#namori` N 頂点 N 辺の連結グラフ → 閉路とぶら下がる木に分ける（namori-graph）：https://yuukougun.github.io/kyopro-atlas/patterns/circular/#namori

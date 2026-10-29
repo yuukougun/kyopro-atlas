@@ -30,7 +30,7 @@ sections:
   - {title: 実数が避けられないとき：long double と、値の大きさに合わせた EPS, anchor: eps}
   - {title: 出力の桁数と、実数の二分探索の打ち切り, anchor: output-and-binary-search}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -67,6 +67,9 @@ updated: 2026-10-22
 --8<-- "geometry-precision/cancellation.cpp:core"
 ```
 
+完全なプログラム：[`cancellation.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/geometry-precision/cancellation.cpp)（GitHub）
+{ .kp-code-src }
+
 各積は $10^{18}$ 以下なので `long long`（約 $9.2 \times 10^{18}$ まで）で正確に計算できる。整数の入力からできる値を整数のまま持てば、桁落ちは起きない。
 
 ## 小数の入力を 10^k 倍して整数にする（文字列で読んで整数にする） {#scale-to-integer}
@@ -79,6 +82,9 @@ updated: 2026-10-22
 --8<-- "geometry-precision/truncation.cpp:core"
 ```
 
+完全なプログラム：[`truncation.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/geometry-precision/truncation.cpp)（GitHub）
+{ .kp-code-src }
+
 `llround`（最も近い整数に丸める）なら正しい値になる。読み込みの誤差は相対 $10^{-16}$ 程度なので、$10^k$ 倍した値が $10^{15}$ より十分小さければ、真の整数から 0.5 以上ずれることはないからである。`long double` に変えても 2.51 は正確に表せないので、切り捨てる限り同じ問題は残る。
 
 最も確実なのは、文字列で読んで数字を拾い、整数を組み立てる方法である。符号を最後に全体へ付けること（`-0.05` は $-5$ で、$0 - 0.05$ を桁ごとに分けない）と、小数点以下の桁が $k$ より少ない入力（`3` や `-12.5`）を 0 で埋めることに注意する。
@@ -86,6 +92,9 @@ updated: 2026-10-22
 ```cpp
 --8<-- "geometry-precision/scale.cpp:core"
 ```
+
+完全なプログラム：[`scale.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/geometry-precision/scale.cpp)（GitHub）
+{ .kp-code-src }
 
 拡大すると値も大きくなる。座標が $10^5$ で小数第 4 位までなら、拡大後は $10^9$ になり、その 2 乗は $10^{18}$ で `long long` にぎりぎり入る。2 乗の和や外積を作る前に、上限を見積もる。
 
@@ -106,6 +115,9 @@ updated: 2026-10-22
 ```cpp
 --8<-- "geometry-precision/compare.cpp:core"
 ```
+
+完全なプログラム：[`compare.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/geometry-precision/compare.cpp)（GitHub）
+{ .kp-code-src }
 
 `atan2` が使えない理由は、角度の差が小さすぎることにある。座標が $10^9$ 規模なら、$(10^9, 10^9 - 1)$ と $(10^9 - 1, 10^9 - 2)$ のように外積が $\pm 1$ の 2 方向は、角度の差が約 $5 \times 10^{-19}$ ラジアンしかない。`double` の `atan2` ではこの 2 つが同じ値になる（g++-15 で確かめた）。外積なら符号で区別できる。
 
@@ -129,6 +141,9 @@ $\sqrt{a} + \sqrt{b}$ と $\sqrt{c}$ の比較のように平方根が残る式�
 ```cpp
 --8<-- "geometry-precision/normalize.cpp:core"
 ```
+
+完全なプログラム：[`normalize.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/geometry-precision/normalize.cpp)（GitHub）
+{ .kp-code-src }
 
 $y = m x + n$ の形は垂直な直線を表せず、$m$ と $n$ が分数になるので使わない。C++ の `std::gcd` は負の引数でも絶対値で計算し、0 以上を返す（[gcd・lcm](../cpp/cpp-math-functions.md#gcd-lcm)）。2 点が同じだと $\gcd(0, 0) = 0$ で割ることになるので、同じ点を含みうる入力では先に除く。
 
@@ -180,6 +195,8 @@ $\varepsilon$ は次の 2 つの間に取る。
 値が $10^9$ 規模なのに $\varepsilon = 10^{-9}$ と固定すると、間隔 $10^{-7}$ より小さいので、誤差で等しいものを「違う」と判定する。値の大きさが場所によって大きく変わるなら、$\lvert a - b \rvert \le \varepsilon \max(1, \lvert a \rvert, \lvert b \rvert)$ のように相対誤差で比べる。
 
 EPS 付きの「等しい」は推移律を満たさない（$a \approx b$ かつ $b \approx c$ でも $a \approx c$ とは限らない）。EPS 付きの比較関数で `sort` したり、`double` を `map` のキーにしたりすると、同じものが別々にまとまったり、並びが壊れたりする。まとめるのが目的なら、整数のキーに直す方法を先に探す。
+
+**手元と提出で結果が変わる**。AtCoder は `-march=native` でコンパイルするので、小数の外積の符号や `== 0` の判定が手元と変わりうる（[FMA](../cpp/cpp-environment.md#march-native)）。整数で計算できるなら外積を整数のまま求め（[外積・内積・距離の 2 乗で比べる](#integer-comparison)）、実数が避けられないなら `== 0` ではなく上の EPS で比べる。
 
 ## 出力の桁数と、実数の二分探索の打ち切り {#output-and-binary-search}
 

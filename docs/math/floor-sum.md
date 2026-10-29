@@ -30,7 +30,7 @@ sections:
   - {title: 'ACL の floor_sum（引数の範囲と負の a, b）', anchor: acl}
   - {title: 応用の型：bit ごとの popcount・一次式の mod の積, anchor: applications, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -139,6 +139,9 @@ loop:
 --8<-- "floor-sum/floor-sum.cpp:core"
 ```
 
+完全なプログラム：[`floor-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/floor-sum/floor-sum.cpp)（GitHub）
+{ .kp-code-src }
+
 自作のライブラリにするときの要点は次のとおり。
 
 - **型は `unsigned long long`**。答えは $n^2 a / m$ 程度になりうるので、ACL と同じく「あふれたら $2^{64}$ で割った余り」と決めておく。符号付きのあふれは[未定義動作](../cpp/cpp-integer-overflow.md)なので、符号なしで計算する
@@ -192,13 +195,16 @@ $$
 --8<-- "floor-sum/acl-usage.cpp:core"
 ```
 
+完全なプログラム：[`acl-usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/floor-sum/acl-usage.cpp)（GitHub）
+{ .kp-code-src }
+
 ## 例題 {#examples}
 
 ### PRACTICE2 C. Floor Sum {#practice2_c}
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [PRACTICE2 C. Floor Sum](https://atcoder.jp/contests/practice2/tasks/practice2_c)（diff —）：T 個のケースそれぞれで Σ_{i=0}^{N−1} ⌊(A × i + B)/M⌋ を求める。
+- [PRACTICE2 C. Floor Sum](https://atcoder.jp/contests/practice2/tasks/practice2_c)（diff なし）：T 個のケースそれぞれで Σ_{i=0}^{N−1} ⌊(A × i + B)/M⌋ を求める。
 
 </div>
 

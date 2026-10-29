@@ -28,7 +28,7 @@ sections:
   - {title: 計算量とメモリの見積もり, anchor: complexity}
   - {title: 応用の型, anchor: patterns}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -89,6 +89,9 @@ $s = \lfloor \sqrt{R} \rfloor$ は、$(s + 1)^2 \le R$ を確かめて整数で�
 --8<-- "segmented-sieve/sieve.cpp:core"
 ```
 
+完全なプログラム：[`sieve.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segmented-sieve/sieve.cpp)（GitHub）
+{ .kp-code-src }
+
 素因数分解（次の節）では事情が変わる。$p$ 自身も「$p^1$」と分解したいので、開始位置は $p^2$ ではなく $\lceil L / p \rceil \cdot p$ のままにする。判定と分解で開始位置が違うことを覚えておく。
 
 ??? question "確認問題：開始位置を ⌈L/p⌉·p にしたら"
@@ -106,6 +109,9 @@ $s = \lfloor \sqrt{R} \rfloor$ は、$(s + 1)^2 \le R$ を確かめて整数で�
 ```cpp
 --8<-- "segmented-sieve/factorize.cpp:core"
 ```
+
+完全なプログラム：[`factorize.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segmented-sieve/factorize.cpp)（GitHub）
+{ .kp-code-src }
 
 具体例として $x = 999999999999 = 3^3 \cdot 7 \cdot 11 \cdot 13 \cdot 37 \cdot 101 \cdot 9901$ を考える。$\sqrt{R} = 10^6$ までの素数で割ると、3 で 3 回、7・11・13・37・101・9901 で 1 回ずつ割れて、残りは 1 になる。一方 $x = 999999999989$ のように素数なら、どの素数でも割れず、残りの $x$ 自身が素数として加わる。
 
@@ -175,7 +181,7 @@ $A_n = \operatorname{lcm}(1, \dots, n)$ とすると、$A_n \ne A_{n-1}$ にな�
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [アルゴ数学 097. Primes in an Interval](https://atcoder.jp/contests/math-and-algorithm/tasks/math_and_algorithm_bt)（diff —）：L 以上 R 以下の整数のうち素数がいくつあるかを数える（R ≤ 10^12 と大きく、区間の長さは 50 万程度まで）。
+- [アルゴ数学 097. Primes in an Interval](https://atcoder.jp/contests/math-and-algorithm/tasks/math_and_algorithm_bt)（diff なし）：L 以上 R 以下の整数のうち素数がいくつあるかを数える（R ≤ 10^12 と大きく、区間の長さは 50 万程度まで）。
 - [ABC227 G. Divisors of Binomial Coefficient](https://atcoder.jp/contests/abc227/tasks/abc227_g)（diff 2207）：N 個から K 個を選ぶ組合せの数 C(N, K) の正の約数の個数を 998244353 で割った余りで求める（N ≤ 10^12、K ≤ 10^6）。
 
 </div>

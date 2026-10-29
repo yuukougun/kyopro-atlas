@@ -35,7 +35,7 @@ sections:
   - {title: 訪問した集合を持つ（bitDP へのつなぎ）, anchor: visited-set, level: 青}
   - {title: 両端から伸ばす（回文の最短路）, anchor: two-ends, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -54,7 +54,7 @@ updated: 2026-10-22
 別名：状態空間の探索・状態空間 BFS・拡張ダイクストラ・頂点倍化・頂点倍加・レイヤー化グラフ・超頂点・仮想頂点・補助頂点・盤面の BFS・state-space search・layered graph・super vertex
 <!-- textlint-enable -->
 
-状態を頂点にする手法は、「今どの頂点にいるか」に加えて、この先の動きを決めるのに要る情報を組にしたものを 1 つの頂点とみなし、そのグラフで最短路を求める。最短路のアルゴリズム自体は [BFS](../graph/bfs.md)・[01-BFS](../graph/zero-one-bfs.md)・[ダイクストラ法](../graph/dijkstra.md)のままで、変わるのはグラフの作り方だけである。グループ内の全対に辺がある問題では、逆に頂点を 1 つ足して辺を減らす（超頂点）。
+状態を頂点にする手法は、「今どの頂点にいるか」に加えて、この先の動きを決めるのに要る情報を組にしたものを 1 つの頂点とみなし、そのグラフで最短路を求める。最短路のアルゴリズム自体は [BFS](../graph/bfs.md)・[01-BFS](../graph/zero-one-bfs.md)・[ダイクストラ法](../graph/dijkstra.md)のままで、変わるのはグラフの作り方だけである。グループ内の全対に辺がある問題では、逆に頂点を 1 つ足して辺を減らす（超頂点）。このページでは頂点を 0-indexed で書き、問題文の 1-indexed の番号からは 1 を引いて使う（問題文の頂点 1 は頂点 0 になる）。
 
 ## 状態として持つべき情報を決める {#choose-state}
 
@@ -112,6 +112,9 @@ dist[状態] を全部 INF にする
 ```cpp
 --8<-- "extended-dijkstra/layered.cpp:core"
 ```
+
+完全なプログラム：[`layered.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/extended-dijkstra/layered.cpp)（GitHub）
+{ .kp-code-src }
 
 ??? question "確認問題：層の間の辺を下向き（k から k+1）だけにするのはなぜか"
     無料を使った回数は増えるだけで、減ることがないからである。上向きの辺を張ると、使った回数を取り消せることになり、$K$ 回を超えて無料にする経路ができてしまう。層の間の辺が一方向なので、状態のグラフで $k$ は経路に沿って単調に増え、各経路が使う無料の回数は終点の層の番号に等しい。
@@ -349,7 +352,7 @@ graph LR
 - [ABC361 D. Go Stone Puzzle](https://atcoder.jp/contests/abc361/tasks/abc361_d)（diff 1202）：一列に並んだ白と黒の石を、隣り合う 2 個ずつ空きマスへ移す操作で目標の並びにするとき、操作の最小回数を求める
 - [ABC224 D. 8 Puzzle on Graph](https://atcoder.jp/contests/abc224/tasks/abc224_d)（diff 1376）：9 頂点のグラフの 8 頂点に駒が置かれ、空いた頂点へ隣の駒を動かせるとき、すべての駒を目的の頂点へそろえる最小の手数を求める
 - [ABC302 F. Merge Set](https://atcoder.jp/contests/abc302/tasks/abc302_f)（diff 1430）：共通の要素をもつ 2 つの集合を和集合に置き換える操作で、1 と M を両方含む集合を作るのに必要な最小の操作回数を求める
-- [典型90 054. Takahashi Number（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_bb)（diff —）：論文ごとの著者の一覧が与えられるとき、共著の関係をたどった研究者 1 からの距離（高橋数）を、各研究者について求める。
+- [典型90 054. Takahashi Number（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_bb)（diff なし）：論文ごとの著者の一覧が与えられるとき、共著の関係をたどった研究者 1 からの距離（高橋数）を、各研究者について求める。
 - [ZONE2021 E. Sneaking](https://atcoder.jp/contests/zone2021/tasks/zone2021_e)（diff 1624）：グリッドの左上から右下へ、左右と下へは 1 マスずつ（マスごとに決まったコスト）、上へは i マスまとめて（コスト 1 + i）動けるとき、最小のコストを求める。
 - [ABC244 F. Shortest Good Path](https://atcoder.jp/contests/abc244/tasks/abc244_f)（diff 1661）：各頂点を通った回数の偶奇を表す 0/1 列 S のすべてについて、その偶奇になる最短のウォークの長さを求め、総和を答える
 

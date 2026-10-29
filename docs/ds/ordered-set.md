@@ -71,6 +71,9 @@ set の中で $x$ の前後を調べる操作は、すべて `st.lower_bound(x)`
 --8<-- "ordered-set/neighbors.cpp:query"
 ```
 
+完全なプログラム：[`neighbors.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/ordered-set/neighbors.cpp)（GitHub）
+{ .kp-code-src }
+
 答えが番兵だったら「その側に要素がない」と読めばよい。番兵の値は、距離を計算してもあふれない大きさにする。値が $10^{18}$ までで差を取るなら、$2 \times 10^{18}$ の番兵との差は約 $3 \times 10^{18}$ で `long long` に収まる。
 
 問題によっては、番兵に意味のある値を使える。長さ $L$ の棒を切る問題なら、両端 $0$ と $L$ を最初から「切れ目」として入れておけば、点 $x$ を含む木片は `lower_bound(x)` とその 1 つ前の切れ目の間になる（[例題](#abc217_d)）。
@@ -137,6 +140,9 @@ while it が end でなく *it <= x2:
 --8<-- "ordered-set/pareto.cpp:core"
 ```
 
+完全なプログラム：[`pareto.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/ordered-set/pareto.cpp)（GitHub）
+{ .kp-code-src }
+
 1 回の追加で多くの点を消すことがあっても、各点は一度入って一度しか消えない。消す操作は全体で追加の回数以下なので、追加 1 回はならし $O(\log N)$ である。同じ $a$ の点が来たときは、$b$ の大きい方だけを残す。
 
 向きを変えた問題（「$a \le x$ で $b$ の最小」など）は、$a$ や $b$ の符号を反転すれば同じ形になる。削除がある場合は、消した点に支配されていた点が戻るのでこの方法は使えない。値を添字にしたセグメント木などを使う。
@@ -151,6 +157,9 @@ while it が end でなく *it <= x2:
 ```cpp
 --8<-- "ordered-set/adjacent-pairs.cpp:core"
 ```
+
+完全なプログラム：[`adjacent-pairs.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/ordered-set/adjacent-pairs.cpp)（GitHub）
+{ .kp-code-src }
 
 差の multiset には同じ値が何度も入るので、消すときは必ず `gap.erase(gap.find(d))` で 1 個だけ消す。差の代わりに XOR の最小を答える問題も、最小の組がソート順で隣り合う点は同じだが、全体に XOR をかけるなどの変種が多いので [Binary Trie](../ds/binary-trie.md#comparison) で扱う。
 

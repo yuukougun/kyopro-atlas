@@ -25,7 +25,7 @@ sections:
   - {title: 二部グラフなら König の定理, anchor: bipartite-case}
   - {title: 計算量と自作するときの要点, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -76,6 +76,9 @@ $$
 --8<-- "chromatic-number/chromatic.cpp:core"
 ```
 
+完全なプログラム：[`chromatic.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/chromatic-number/chromatic.cpp)（GitHub）
+{ .kp-code-src }
+
 $f(k)$ は最大で $2^{Nk}$ ほどの巨大な数なので、mod で計算する。mod の値は大小を比べられず、正の $f(k)$ の余りが偶然 0 になると「塗れない」と誤判定する。上のコード片は 2 つの素数で計算し、どちらかが 0 でなければ塗れるとしている（$f(k)$ は 0 以上なので、余りが 0 でなければ $f(k) > 0$ は確実である）。気になるなら法を乱択する。
 
 部分集合の部分集合を回す $\mathrm{dp}[S] = \min_{T \subseteq S,\ T \text{ は独立}} \mathrm{dp}[S \setminus T] + 1$ で求める方法もあるが、$O(3^N)$ かかる（[部分集合を列挙する DP](../dp/subset-enumeration-dp.md#vs-zeta)）。$N = 20$ では $3^{20} \approx 3.5 \times 10^9$ で重い。
@@ -104,6 +107,9 @@ $f(k)$ は最大で $2^{Nk}$ ほどの巨大な数なので、mod で計算す�
 ```cpp
 --8<-- "chromatic-number/mis.cpp:core"
 ```
+
+完全なプログラム：[`mis.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/chromatic-number/mis.cpp)（GitHub）
+{ .kp-code-src }
 
 **分枝**：残っているグラフで頂点 $v$ を 1 つ選び、「$v$ を取る（$v$ と隣を消す）」と「$v$ を取らない（$v$ を消す）」に分けて再帰する。工夫なしでは $2^N$ のままなので、次の規則で枝を減らす。
 
@@ -146,9 +152,9 @@ ACL に対応する関数はない。自作するときの要点は次のとお�
 
 ## 学ぶための資料 {#resources}
 
-- 英語版 Wikipedia の「Graph coloring」：厳密なアルゴリズムの節に、包除原理と高速ゼータ変換による $O(2^N N)$ の判定（Björklund・Husfeldt・Koivisto）が載っている。それ以前の DP の計算量との比較もある。
-- 英語版 Wikipedia の「Independent set (graph theory)」：クリーク・頂点被覆との関係と、最大独立集合の厳密なアルゴリズムの計算量の到達点。
-- drken 氏の「AtCoder 版！蟻本 (中級編)」：半分全列挙の節で、一般グラフの最大独立集合が $n \le 40$ 程度なら半分全列挙で解けることと、より速い $O(1.381^n)$ の方法に触れている。
+- [「Graph coloring」（英語版 Wikipedia）](https://en.wikipedia.org/wiki/Graph_coloring)：厳密なアルゴリズムの節に、包除原理と高速ゼータ変換による $O(2^N N)$ の判定（Björklund・Husfeldt・Koivisto）が載っている。それ以前の DP の計算量との比較もある。
+- [「Independent set (graph theory)」（英語版 Wikipedia）](https://en.wikipedia.org/wiki/Independent_set_(graph_theory))：クリーク・頂点被覆との関係と、最大独立集合の厳密なアルゴリズムの計算量の到達点。
+- [drken「AtCoder 版！蟻本 (中級編)」](https://qiita.com/drken/items/2f56925972c1d34e05d8)：半分全列挙の節で、一般グラフの最大独立集合が $n \le 40$ 程度なら半分全列挙で解けることと、より速い $O(1.381^n)$ の方法に触れている。
 
 ## 参考 {#references}
 

@@ -28,7 +28,7 @@ sections:
   - {title: 余りごとの累積, anchor: by-remainder, level: 青}
   - {title: 2 次元の累積, anchor: two-dimensional, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -78,6 +78,9 @@ $$
 --8<-- "dp-prefix-sum/pull.cpp:core"
 ```
 
+完全なプログラム：[`pull.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-prefix-sum/pull.cpp)（GitHub）
+{ .kp-code-src }
+
 **配る形といもす法**。同じ DP を配る形で書くと、確定した $\mathrm{dp}[i]$ を閉区間 $[i + L, i + R]$ のすべてのマスへ足すことになる。これも 1 回に $R - L + 1$ 回かかる。範囲への同じ値の足し込みは、差分の配列 $D$（コードの `diff`）に「$D[i + L] \mathrel{+}= \mathrm{dp}[i]$、$D[i + R + 1] \mathrel{-}= \mathrm{dp}[i]$」と 2 か所書けば済む。$D$ を左から累積した値（コードの `cur`）が、そのマスに配られた合計である。
 
 配る先はいつも自分より右なので、マス $i$ に配られる値は、$i$ を見る時点ですべて書き込み済みである。したがって、累積を最後にまとめて取る必要はない。左から進みながら $D[i]$ を足し込んだ値が、そのまま $\mathrm{dp}[i]$ になる。
@@ -85,6 +88,9 @@ $$
 ```cpp
 --8<-- "dp-prefix-sum/push.cpp:core"
 ```
+
+完全なプログラム：[`push.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-prefix-sum/push.cpp)（GitHub）
+{ .kp-code-src }
 
 **なぜ正しいか**。どちらの形も、素直な DP と同じ値を足している。累積和は「区間の和」を、差分は「区間への同じ値の足し込み」を、それぞれ端の 2 か所の操作で表しただけで、足し合わせる項の集合は変わらない。素直な DP が正しければ、高速化した DP も正しい。
 
@@ -127,6 +133,9 @@ $$
 ```cpp
 --8<-- "dp-prefix-sum/candies.cpp:core"
 ```
+
+完全なプログラム：[`candies.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-prefix-sum/candies.cpp)（GitHub）
+{ .kp-code-src }
 
 例として $a = (1, 2, 3)$、$K = 4$ なら、段は $\mathrm{dp}[1] = (1, 1, 0, 0, 0)$、$\mathrm{dp}[2] = (1, 2, 2, 1, 0)$ と進む。最後は $\mathrm{dp}[3][4] = \mathrm{dp}[2][1] + \dots + \mathrm{dp}[2][4] = 2 + 2 + 1 + 0 = 5$ で、$S_2 = (0, 1, 3, 5, 6, 6)$ から $S_2[5] - S_2[1] = 5$ と同じ値が出る。
 
@@ -237,7 +246,7 @@ $$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC M. Candies](https://atcoder.jp/contests/dp/tasks/dp_m)（diff —）：N 人の子どもに K 個の飴を、i 番目の子には 0〜a_i 個ずつ、余さず配る方法の数を求める。
+- [EDPC M. Candies](https://atcoder.jp/contests/dp/tasks/dp_m)（diff なし）：N 人の子どもに K 個の飴を、i 番目の子には 0〜a_i 個ずつ、余さず配る方法の数を求める。
 
 </div>
 
@@ -256,9 +265,9 @@ $i$ 番目の子に配る個数で場合分けすると、遷移元は前の段�
 - [ABC178 D. Redistribution](https://atcoder.jp/contests/abc178/tasks/abc178_d)（diff 875）：各項が 3 以上の整数で、総和が S になる数列の個数を求める。
 - [ABC253 E. Distance Sequence](https://atcoder.jp/contests/abc253/tasks/abc253_e)（diff 1073）：長さ N・各項が 1〜M で、隣り合う項の差の絶対値が K 以上の数列の個数を求める。
 - [ABC183 E. Queen on Grid](https://atcoder.jp/contests/abc183/tasks/abc183_e)（diff 1288）：壁のあるグリッドで、右・下・右下のどれかへ壁の手前まで何マスでも進めるとき、左上から右下へ行く方法の数を求める。
-- [典型90 042. Multiple of 9（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_ap)（diff —）：各桁が 1〜9 で桁の和が K になる正の整数のうち、9 の倍数の個数を求める。
+- [典型90 042. Multiple of 9（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_ap)（diff なし）：各桁が 1〜9 で桁の和が K になる正の整数のうち、9 の倍数の個数を求める。
 - [ABC442 F. Diagonal Separation 2](https://atcoder.jp/contests/abc442/tasks/abc442_f)（diff 1295）：グリッドのマスを塗り替えて、各行の左側に並ぶ白の個数が下の行ほど減る形にするときの、塗り替えの最小数を求める。
-- [TDPC F. 準急](https://atcoder.jp/contests/tdpc/tasks/tdpc_semiexp)（diff —）：1 番目と N 番目の駅には止まり、K 駅以上連続しては止まらない停車駅の選び方の数を求める。
+- [TDPC F. 準急](https://atcoder.jp/contests/tdpc/tasks/tdpc_semiexp)（diff なし）：1 番目と N 番目の駅には止まり、K 駅以上連続しては止まらない停車駅の選び方の数を求める。
 - [ABC207 E. Mod i](https://atcoder.jp/contests/abc207/tasks/abc207_e)（diff 1820）：数列をいくつかの区間に区切り、K 番目の区間の和が K で割り切れるようにする方法の数を求める。
 
 </div>

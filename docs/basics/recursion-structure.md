@@ -26,7 +26,7 @@ sections:
   - {title: 必要な深さは log K（長さの上限で打ち切る）, anchor: depth}
   - {title: 再帰の深さとスタック, anchor: stack}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -83,6 +83,9 @@ $k$ が部品の途中で尽きるのは 1 か所だけなので、各レベル�
 --8<-- "recursion-structure/burger.cpp:core"
 ```
 
+完全なプログラム：[`burger.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/recursion-structure/burger.cpp)（GitHub）
+{ .kp-code-src }
+
 「$K$ 番目の文字」を問われたときも同じ形で、$\mathrm{all}$ を足す代わりに $k$ を減らすだけになる。$K$ 番目を求める関数と先頭 $K$ 個の集計を求める関数のどちらを書くかは、問われているものに合わせる。
 
 ??? question "確認問題：部品が 3 つに増えたら"
@@ -101,6 +104,9 @@ $k$ が部品の途中で尽きるのは 1 か所だけなので、各レベル�
 --8<-- "recursion-structure/carpet.cpp:core"
 ```
 
+完全なプログラム：[`carpet.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/recursion-structure/carpet.cpp)（GitHub）
+{ .kp-code-src }
+
 1 回の呼び出しは 8 つの呼び出しを生むが、レベル 0 の呼び出しの回数は黒いマスの数 $8^n$ と等しく、呼び出しの総数はその $8/7$ 倍未満である。だから計算量は出力の大きさ $O(9^n)$ に収まる。
 
 再帰を使わずに、マスごとに色を決める方法もある。行 $i$・列 $j$（0-indexed）を 3 進数で書いたとき、同じ桁がどちらも 1 になるところがあれば白、なければ黒である。各桁がどのブロックに入るかを上から決めていくのが再帰の各段に当たるので、2 つの方法は同じことを言っている。再帰の定義を位置の $b$ 進数の桁に読み替えると、どのマスも $O(n)$ で判定できる。
@@ -114,6 +120,9 @@ $k$ が部品の途中で尽きるのは 1 か所だけなので、各レベル�
 ```cpp
 --8<-- "recursion-structure/kth-char.cpp:core"
 ```
+
+完全なプログラム：[`kth-char.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/recursion-structure/kth-char.cpp)（GitHub）
+{ .kp-code-src }
 
 長さの前計算は、そのまま書くとすぐに `long long` をあふれる。$2^{n}$ は $n = 63$ で `long long` の上限を超える。あふれた長さとの比較は意味を持たないので、次のどちらかで防ぐ。
 
@@ -181,7 +190,7 @@ $K$ 番目を探す再帰は、各レベルで自分を 1 回だけ呼び、そ�
 
 - [ABC153 D. Caracal vs Monster](https://atcoder.jp/contests/abc153/tasks/abc153_d)（diff 129）：体力が半分になって 2 体に分裂するモンスターを、すべて倒すための攻撃回数を求める。
 - [ABC357 C. Sierpinski carpet](https://atcoder.jp/contests/abc357/tasks/abc357_c)（diff 371）：レベル N のシェルピンスキーのカーペットを描く。
-- [典型90 002. Encyclopedia of Parentheses（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_b)（diff —）：長さ N の正しい括弧列を辞書順にすべて出力する。
+- [典型90 002. Encyclopedia of Parentheses（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_b)（diff なし）：長さ N の正しい括弧列を辞書順にすべて出力する。
 
 </div>
 

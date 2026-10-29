@@ -32,7 +32,7 @@ sections:
   - {title: 実数の精度と分母 0, anchor: precision}
   - {title: Dinkelbach 法, anchor: dinkelbach, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -97,6 +97,9 @@ $$
 --8<-- "fractional-binary-search/average-subarray.cpp:core"
 ```
 
+完全なプログラム：[`average-subarray.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/fractional-binary-search/average-subarray.cpp)（GitHub）
+{ .kp-code-src }
+
 $r$ を 1 つ進めると、左端の候補が $S_{r-K}$ の 1 つだけ増える。左端の候補は増えるだけで減らないので、尺取り法のように左端を進めて候補を捨てる操作は要らず、最小値を 1 つ持って前の値と比べて更新すれば足りる。「区間に条件を満たす要素が $K$ 個以上」のように左端の候補の範囲が右端とともに広がる制約でも、同じように最小値を持ち続けられる（[例題の ABC469 E](#abc469_e)）。
 
 **個数が決まっているなら上位 $K$ 個**。「$N$ 個から $K$ 個選ぶ」なら、各要素の値 $a_i - x \, b_i$ を計算し、大きい順に $K$ 個取った和が 0 以上かを判定する。個数が $K$ に決まっているので、和を最大にするには値の大きい $K$ 個を取ればよい。判定 1 回はソートで $O(N \log N)$ である（`nth_element` なら $O(N)$）。
@@ -147,6 +150,9 @@ $$
 ```cpp
 --8<-- "fractional-binary-search/median-subarray.cpp:core"
 ```
+
+完全なプログラム：[`median-subarray.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/fractional-binary-search/median-subarray.cpp)（GitHub）
+{ .kp-code-src }
 
 ??? question "確認問題：最小化のとき"
     「中央値の最小値」を求めるときは、どんな判定にすればよいか。
@@ -272,7 +278,7 @@ o を 1、x を 0 とすれば、割合は区間の平均である。平均 $\ge
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [ABC034 D. 食塩水](https://atcoder.jp/contests/abc034/tasks/abc034_d)（diff 1549）：N 個の食塩水から K 個を選んで混ぜたときの濃度の最大値を求める。
+- [ABC034 D. 食塩水](https://atcoder.jp/contests/abc034/tasks/abc034_d)（diff 1549・参考値）：N 個の食塩水から K 個を選んで混ぜたときの濃度の最大値を求める。
 - [ABC294 F. Sugar Water 2](https://atcoder.jp/contests/abc294/tasks/abc294_f)（diff 1891）：砂糖水を 1 つずつ選んで混ぜてできる濃度のうち、大きい方から K 番目を求める。
 - [ABC236 E. Average and Median](https://atcoder.jp/contests/abc236/tasks/abc236_e)（diff 1893）：隣り合う 2 つの少なくとも一方を選ぶとき、選んだ値の平均の最大値と中央値の最大値をそれぞれ求める。
 
@@ -288,7 +294,7 @@ o を 1、x を 0 とすれば、割合は区間の平均である。平均 $\ge
 <div class="kp-problems" data-role="challenge" markdown>
 
 - [ARC101 D. Median of Medians](https://atcoder.jp/contests/arc101/tasks/arc101_b)（diff 2073）：数列のすべての区間の中央値を集めた列の中央値を求める。
-- [ARC026 D. 道を直すお仕事](https://atcoder.jp/contests/arc026/tasks/arc026_4)（diff 2297）：連結を保つように辺を選ぶとき、（コストの和）/（長さの和）の最小値を求める。
+- [ARC026 D. 道を直すお仕事](https://atcoder.jp/contests/arc026/tasks/arc026_4)（diff 2297・参考値）：連結を保つように辺を選ぶとき、（コストの和）/（長さの和）の最小値を求める。
 
 </div>
 

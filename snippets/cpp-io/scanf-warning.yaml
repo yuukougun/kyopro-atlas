@@ -1,4 +1,8 @@
+# 警告は glibc の _FORTIFY_SOURCE を最適化つきで有効にしたときだけ出る（scanf に warn_unused_result が付く）。
+# 手元の Ubuntu の g++-13・g++-15 は -O0 以外で -D_FORTIFY_SOURCE=2 を自動で足すが（g++ -dumpspecs で分かる）、
+# CI のコンテナ（gcc:15.2.0。Debian）の g++ と Debian の g++-13 は足さない。環境によらず同じ結果になるよう明示する（#85）
 compilers: [g++-13, g++-15]
+flags: "-std=gnu++23 -O2 -Wall -Wextra -D_FORTIFY_SOURCE=2"
 expect: warning
 cases:
   - {input: "5\n", output: "5\n"}

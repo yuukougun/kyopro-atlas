@@ -28,7 +28,7 @@ sections:
   - {title: 計算量で解法を切り替える（重さ・価値・N のどれが小さいか）, anchor: choose-by-size, level: 水}
   - {title: 個数制限付き（素朴な展開・二進分解・余りごとのスライド最小値）, anchor: knapsack-bounded, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -94,6 +94,9 @@ $\mathrm{dp}[i + 1]$ の行は $\mathrm{dp}[i]$ の行だけから決まるの�
 --8<-- "knapsack-01/zero-one.cpp:core"
 ```
 
+完全なプログラム：[`zero-one.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/knapsack-01/zero-one.cpp)（GitHub）
+{ .kp-code-src }
+
 大きい方からでよい理由は、更新の読み方を見ると分かる。$\mathrm{dp}[j]$ を書き換えるときに読む $\mathrm{dp}[j - w_i]$ は $j$ より左にある。大きい方から進めると、左側はこの品物の更新をまだ受けていないので、そこに残っているのは前の行 $\mathrm{dp}[i][\cdot]$ の値である。2 次元の式をそのまま計算していることになる。
 
 小さい方から進めると、$\mathrm{dp}[j - w_i]$ はすでに品物 $i$ を入れた後の値に変わっている。そこからさらに品物 $i$ を入れるので、同じ品物を何度でも使う問題（個数制限なし）を解いてしまう。
@@ -129,6 +132,9 @@ $\mathrm{dp}[i + 1][j - w_i]$ はすでに品物 $i$ を何個か入れた状態
 --8<-- "knapsack-01/unbounded-count.cpp:core"
 ```
 
+完全なプログラム：[`unbounded-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/knapsack-01/unbounded-count.cpp)（GitHub）
+{ .kp-code-src }
+
 硬貨 $\{1, 2, 3\}$ で $s = 4$ なら、組合せは $1{+}1{+}1{+}1$・$1{+}1{+}2$・$2{+}2$・$1{+}3$ の 4 通りである。列では $1{+}1{+}2$ の並べ方が 3 通り、$1{+}3$ が 2 通りあるので $1 + 3 + 1 + 2 = 7$ 通りになる。「何通りの払い方」と問われたら、順序を区別するかを問題文で必ず確かめる。
 
 ## 多次元の重さ・上限で打ち切る・グループから 1 つ選ぶ {#variants}
@@ -155,7 +161,7 @@ $$
 
 ## 計算量で解法を切り替える（重さ・価値・N のどれが小さいか） {#choose-by-size}
 
-$O(NW)$ が通る目安は $NW$ が $10^8$ 程度まで（$N \le 100$ なら $W \le 10^5$ 程度）である。重さの上限が $10^9$ のように大きいときは、制約のどれが小さいかで解き方を変える。
+$O(NW)$ が通る目安は $NW$ が $10^8$ 程度まで（$N = 100$ なら $W \le 10^6$ 程度）である。重さの上限が $10^9$ のように大きいときは、制約のどれが小さいかで解き方を変える。
 
 | 小さい量 | 解き方 | 計算量 |
 | --- | --- | --- |
@@ -179,6 +185,9 @@ $O(NW)$ が通る目安は $NW$ が $10^8$ 程度まで（$N \le 100$ なら $W 
 ```cpp
 --8<-- "knapsack-01/bounded-binary.cpp:core"
 ```
+
+完全なプログラム：[`bounded-binary.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/knapsack-01/bounded-binary.cpp)（GitHub）
+{ .kp-code-src }
 
 これで正しいのは、0 個から $b_i$ 個までのどの個数 $c$ も、まとまりの選び方でちょうど作れるからである。$c \le 2^t - 1$ なら $c$ の 2 進表記どおりに $1, 2, \dots, 2^{t-1}$ から選べばよい。$c > 2^t - 1$ なら $r$ を必ず使い、残りの $c - r$ は $0 \le c - r \le 2^t - 1$ なので 2 進表記で作れる。逆に、まとまりの合計は $b_i$ を超えないので、使いすぎることもない。
 
@@ -227,7 +236,7 @@ ABC で二進分解やスライド最小値が必須になる問題は少なく�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC D. Knapsack 1](https://atcoder.jp/contests/dp/tasks/dp_d)（diff —）：重さと価値が決まった N 個の品物から、重さの合計が W 以下になるように選ぶときの価値の和の最大を求める。
+- [EDPC D. Knapsack 1](https://atcoder.jp/contests/dp/tasks/dp_d)（diff なし）：重さと価値が決まった N 個の品物から、重さの合計が W 以下になるように選ぶときの価値の和の最大を求める。
 
 </div>
 
@@ -262,7 +271,7 @@ $N \le 100$、$W \le 10^5$ なので $O(NW) = 10^7$ で間に合う。「重さ 
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [ABC032 D. ナップサック問題](https://atcoder.jp/contests/abc032/tasks/abc032_d)（diff 1731）：N 個の品物の 0-1 ナップサックを、N・重さ・価値のどれか 1 つだけが小さい 3 種類の制約で解く。
+- [ABC032 D. ナップサック問題](https://atcoder.jp/contests/abc032/tasks/abc032_d)（diff 1731・参考値）：N 個の品物の 0-1 ナップサックを、N・重さ・価値のどれか 1 つだけが小さい 3 種類の制約で解く。
 - [ABC373 F. Knapsack with Diminishing Values](https://atcoder.jp/contests/abc373/tasks/abc373_f)（diff 2018）：品物 i を k 個選ぶと価値が k·v_i − k^2 になるとき、重さの合計が W 以下での価値の和の最大を求める。
 
 </div>

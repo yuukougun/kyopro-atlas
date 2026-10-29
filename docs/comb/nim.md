@@ -27,7 +27,7 @@ sections:
   - {title: 逆形 Nim（最後に取った方が負け）, anchor: misere, level: 発展}
   - {title: 必勝局面の数え上げ（XOR 畳み込み）, anchor: counting, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -85,6 +85,9 @@ XOR が効くのは、XOR が「各ビットの 1 の個数の偶奇」だから
 --8<-- "nim/nim.cpp:core"
 ```
 
+完全なプログラム：[`nim.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/nim/nim.cpp)（GitHub）
+{ .kp-code-src }
+
 判定も手の構成も、山を 1 回ずつ見るだけなので $O(N)$ である。石の数が $10^{18}$ まであっても、XOR は `long long` のまま計算できる。
 
 ??? question "確認問題：勝つ手を探す"
@@ -108,6 +111,9 @@ XOR が効くのは、XOR が「各ビットの 1 の個数の偶奇」だから
 ```cpp
 --8<-- "nim/nim.cpp:bounded"
 ```
+
+完全なプログラム：[`nim.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/nim/nim.cpp)（GitHub）
+{ .kp-code-src }
 
 $k$ が $\max A_i$ 以上なら余りは $A_i$ そのもので、普通の Nim に戻る。だから「上限 $k$ を自分で選べる」問題では、普通の Nim で先手必勝なら $k$ をいくらでも大きくしてよい（[ARC168 B](#arc168_b) の例題）。
 
@@ -183,7 +189,7 @@ AtCoder でよく出る形では、次の 2 つの考え方で片づくことが
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [鉄則本 A33. Game 2](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_ag)（diff —）：N 個の山から交互に好きな山の石を 1 個以上取り、最後の石を取った方が勝つとき、勝つのはどちらかを求める。
+- [鉄則本 A33. Game 2](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_ag)（diff なし）：N 個の山から交互に好きな山の石を 1 個以上取り、最後の石を取った方が勝つとき、勝つのはどちらかを求める。
 
 </div>
 
@@ -216,9 +222,9 @@ AtCoder でよく出る形では、次の 2 つの考え方で片づくことが
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC368 F. Dividing Game](https://atcoder.jp/contests/abc368/tasks/abc368_f)（diff 1180）：N 個の整数から交互に 1 つを選んで自分以外の約数に置き換え、置き換えられなくなった方が負けのとき、勝つのはどちらかを求める。
-- [ARC046 B. 石取り大作戦](https://atcoder.jp/contests/arc046/tasks/arc046_b)（diff 1260）：N 個の石の山から、先手は 1 個以上 A 個以下、後手は 1 個以上 B 個以下を交互に取り、最後の石を取った方が勝つとき、勝つのはどちらかを求める。
+- [ARC046 B. 石取り大作戦](https://atcoder.jp/contests/arc046/tasks/arc046_b)（diff 1260・参考値）：N 個の石の山から、先手は 1 個以上 A 個以下、後手は 1 個以上 B 個以下を交互に取り、最後の石を取った方が勝つとき、勝つのはどちらかを求める。
 - [ARC143 C. Piles of Pebbles](https://atcoder.jp/contests/arc143/tasks/arc143_c)（diff 1805）：先手は X 個、後手は Y 個ずつ山から取るゲームで、勝つのはどちらかを求める。
-- [ARC013 C. 笑いをとれるかな？](https://atcoder.jp/contests/arc013/tasks/arc013_3)（diff 1831）：ハバネロの入ったいくつかの直方体の豆腐を、交互に格子面で切って片側を食べ、ハバネロを食べた方が負けのとき、先手が勝つかを求める。
+- [ARC013 C. 笑いをとれるかな？](https://atcoder.jp/contests/arc013/tasks/arc013_3)（diff 1831・参考値）：ハバネロの入ったいくつかの直方体の豆腐を、交互に格子面で切って片側を食べ、ハバネロを食べた方が負けのとき、先手が勝つかを求める。
 
 </div>
 

@@ -31,7 +31,7 @@ sections:
   - {title: 木上の Mo（データ構造の章）, anchor: mo-on-tree}
   - {title: 逆元がない演算・パスへの一括更新は HL 分解, anchor: to-hld, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -77,7 +77,7 @@ updated: 2026-10-22
 
 すると、$v$ の部分木の頂点の番号はちょうど $\mathrm{in}[v], \mathrm{in}[v] + 1, \dots, \mathrm{out}[v] - 1$ になる。すなわち部分木は[半開区間](../guide/glossary.md#half-open-interval) $[\mathrm{in}[v], \mathrm{out}[v])$ で、その長さ $\mathrm{out}[v] - \mathrm{in}[v]$ は部分木サイズ $\mathrm{sz}[v]$ に等しい。
 
-![7 頂点の根付き木と、行きがけ順に並べた頂点の列。頂点 2 の部分木（2・3・6・1）は列の位置 1〜4、すなわち区間 [1, 5) にまとまる](../img/euler-tour/subtree-interval.svg)
+![7 頂点の根付き木と、行きがけ順に並べた頂点の列。頂点 2 の部分木（2・3・6・1）は列の位置 1〜4、すなわち区間 \[1, 5) にまとまる](../img/euler-tour/subtree-interval.svg)
 
 図の木で根 0 から子を番号の小さい順に回ると、入る順は $0, 2, 3, 6, 1, 5, 4$ である。頂点 2 には番号 1 で入り、子孫 3・6・1 に番号 2〜4 を振ってから出る。出るときの次の番号は 5 なので、$\mathrm{out}[2] = 5$ である。頂点 2 の部分木は列の区間 $[1, 5)$ になり、ほかの頂点はこの区間に入らない。
 
@@ -109,6 +109,9 @@ dfs(v):
 --8<-- "euler-tour/subtree-sum.cpp:core"
 ```
 
+完全なプログラム：[`subtree-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/euler-tour/subtree-sum.cpp)（GitHub）
+{ .kp-code-src }
+
 ### 計算量とその根拠
 
 番号付けの DFS は各頂点に 1 回ずつ入るので $O(N)$ である。その後の部分木の操作は列の区間の操作そのものなので、載せたデータ構造の 1 回分の計算量になる。
@@ -137,6 +140,9 @@ $$
 ```cpp
 --8<-- "euler-tour/depth-count.cpp:core"
 ```
+
+完全なプログラム：[`depth-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/euler-tour/depth-count.cpp)（GitHub）
+{ .kp-code-src }
 
 1 回の質問は $O(\log N)$ である。条件が「値が $x$ 以下」のように深さ以外なら、同じく値ごとの列を作るか、質問を値の順に並べて BIT に頂点を足していく[オフライン](../guide/glossary.md#offline)の処理にする（[ABC202 E](#abc202_e) の別解）。
 
@@ -175,6 +181,9 @@ $$
 ```cpp
 --8<-- "euler-tour/root-path.cpp:core"
 ```
+
+完全なプログラム：[`root-path.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/euler-tour/root-path.cpp)（GitHub）
+{ .kp-code-src }
 
 差分の BIT では、$+w$ を位置 $\mathrm{in}[c]$、$-w$ を位置 $\mathrm{out}[c]$ に足す。これは (d) の入りと出の両方を記録した列で、$+w$ を $c$ の入りの位置、$-w$ を出の位置に置いて累積和を取るのと同じである。資料によってはこちらの形で説明する。
 

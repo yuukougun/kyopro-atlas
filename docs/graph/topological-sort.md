@@ -27,7 +27,7 @@ sections:
   - {title: DAG 上の DP へ（DP の章）, anchor: to-dag-dp}
   - {title: ACL の scc_graph を使う（DAG なら scc() の順がトポロジカル順）, anchor: acl}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -84,6 +84,9 @@ updated: 2026-10-22
 --8<-- "topological-sort/dfs-order.cpp:core"
 ```
 
+完全なプログラム：[`dfs-order.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/topological-sort/dfs-order.cpp)（GitHub）
+{ .kp-code-src }
+
 どちらを使うかは目的で決める。辞書順の指定・一意性の判定・閉路の判定には、次に置ける候補を確かめられる Kahn 法が向く。依存するものを先に済ませる順が欲しいだけなら、帰りがけ順そのもの（逆にしない）を使えばよく、DFS の方が短く書ける。辺を「$v$ は $w$ を前提とする」の向き $v \to w$ で張ったなら、帰りがけ順が前提から先に並ぶ順である。
 
 ??? question "確認問題：帰りがけ順を逆にする理由"
@@ -101,6 +104,9 @@ updated: 2026-10-22
 ```cpp
 --8<-- "topological-sort/kahn-lex.cpp:core"
 ```
+
+完全なプログラム：[`kahn-lex.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/topological-sort/kahn-lex.cpp)（GitHub）
+{ .kp-code-src }
 
 DFS の帰りがけ順では辞書順最小は作れない。隣を番号の小さい順に調べても、帰りがけ順を逆にすると「後から調べた頂点ほど前」になり、どの頂点が先頭に来るかを制御できない。「番号の小さい頂点をできるだけ前に置く」という別の問い方もあり、その場合は辺を逆にして大きい順に末尾から並べる（[辞書順の貪欲](../basics/lexicographic-greedy.md#topological)）。
 
@@ -129,6 +135,9 @@ DFS の帰りがけ順では辞書順最小は作れない。隣を番号の小�
 --8<-- "topological-sort/peel-sinks.cpp:core"
 ```
 
+完全なプログラム：[`peel-sinks.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/topological-sort/peel-sinks.cpp)（GitHub）
+{ .kp-code-src }
+
 - **剥がした頂点からは無限に歩けない**：剥がした順の逆に帰納法で示せる。行き止まりは明らかで、行き先がすべて剥がれた頂点からは、どの辺を選んでも無限に歩けない頂点に着く
 - **残った頂点からは無限に歩ける**：残った頂点は、残った頂点への辺を少なくとも 1 本持つ（なければ出次数が 0 になって剥がれている）。だから残った頂点の中だけを永遠に歩ける
 
@@ -154,6 +163,9 @@ ACL にはトポロジカルソートそのものはないが、強連結成分�
 ```cpp
 --8<-- "topological-sort/acl-scc.cpp:core"
 ```
+
+完全なプログラム：[`acl-scc.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/topological-sort/acl-scc.cpp)（GitHub）
+{ .kp-code-src }
 
 閉路の判定には、成分の数が $N$ より少ないかと、自己ループがあるかの両方を見る。自己ループ $v \to v$ だけの閉路では、$v$ は 1 頂点の成分のままだからである。得られる順は辞書順最小とは限らないので、辞書順の指定があれば[優先度付きキューの Kahn 法](#lexicographic)を使う。
 
@@ -214,7 +226,7 @@ ACL にはトポロジカルソートそのものはないが、強連結成分�
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [典型90 071. Fuzzy Priority（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_bs)（diff —）：依存関係を満たす頂点の並べ方を K 個（なければ −1）出力する
+- [典型90 071. Fuzzy Priority（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_bs)（diff なし）：依存関係を満たす頂点の並べ方を K 個（なければ −1）出力する
 
 </div>
 

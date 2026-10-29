@@ -27,7 +27,7 @@ sections:
   - {title: 最短路の本数（距離が確定した順に配る）, anchor: count-shortest-paths}
   - {title: 閉路があるとき（SCC で縮約する・最短路に切り替える）, anchor: with-cycles}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -92,6 +92,9 @@ DAG 上の DP で考えるのは、どの順に頂点を処理するかだけで
 ```cpp
 --8<-- "dp-dag/longest-and-count.cpp:core"
 ```
+
+完全なプログラム：[`longest-and-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-dag/longest-and-count.cpp)（GitHub）
+{ .kp-code-src }
 
 メモ化再帰は、貰う形で書くのが自然である。たとえば「$\mathrm{dp}[v]$ ＝ $v$ から始まる最長路の長さ」とおけば、$\mathrm{dp}[v] = \max_{v \to w} (\mathrm{dp}[w] + 1)$ を出る辺だけで書ける。配る for 文と再帰のどちらで書くかで、自然な状態の向き（$v$ で終わるか、$v$ から始まるか）が変わる。
 
@@ -174,7 +177,7 @@ DAG 上の DP は、ほかの手法の判定や下ごしらえとしてよく現
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC G. Longest Path](https://atcoder.jp/contests/dp/tasks/dp_g)（diff —）：閉路のない有向グラフで、最長の有向路の長さを求める。
+- [EDPC G. Longest Path](https://atcoder.jp/contests/dp/tasks/dp_g)（diff なし）：閉路のない有向グラフで、最長の有向路の長さを求める。
 
 </div>
 

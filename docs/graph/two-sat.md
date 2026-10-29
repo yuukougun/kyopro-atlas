@@ -28,7 +28,7 @@ sections:
   - {title: 「高々 1 つ」を補助変数で O(K) 本の節にする, anchor: at-most-one}
   - {title: ACL の two_sat と自作するときの要点, anchor: acl}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -117,6 +117,9 @@ $l_p$ と $l_q$（$p < q$）がともに真だとすると、$l_p \to s_p \to \d
 --8<-- "two-sat/at-most-one.cpp:core"
 ```
 
+完全なプログラム：[`at-most-one.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/two-sat/at-most-one.cpp)（GitHub）
+{ .kp-code-src }
+
 補助変数の番号は `two_sat` を作る前に数えておく必要がある（ACL の `two_sat` は変数の数を後から増やせない）。リテラルの総数を先に数え、元の変数 $N$ 個の後ろに補助変数を並べる。
 
 ## ACL の two_sat と自作するときの要点 {#acl}
@@ -127,6 +130,9 @@ $l_p$ と $l_q$（$p < q$）がともに真だとすると、$l_p \to s_p \to \d
 ```cpp
 --8<-- "two-sat/usage.cpp:core"
 ```
+
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/two-sat/usage.cpp)（GitHub）
+{ .kp-code-src }
 
 `add_clause` の `f`・`g` は「その変数が取るべき値」であり、否定するかどうかの印ではない。「$x_i$ は偽」を言うときは `f = false` を渡す。
 
@@ -141,9 +147,9 @@ $l_p$ と $l_q$（$p < q$）がともに真だとすると、$l_p \to s_p \to \d
 
 ## 学ぶための資料 {#resources}
 
-- 英語版 Wikipedia の「2-satisfiability」：含意グラフ、強連結成分による Aspvall・Plass・Tarjan の線形時間の解き方と、成分を逆トポロジカル順に見て割当を作る方法の正しさ。
-- Luzhiled's Library（ei1333 氏）の「Two Satisfiability (2-SAT)」：含意グラフと復元の説明に加え、「高々 1 つ」を補助のリテラルで $O(K)$ にする方法と、区間に対する節を減らす方法に触れている。
-- ACL のドキュメント（`document_ja/twosat.md`）と使用例 `twosat_practice.cpp`：`two_sat` の各関数の計算量と、PRACTICE2 H の解答の例。
+- [「2-satisfiability」（英語版 Wikipedia）](https://en.wikipedia.org/wiki/2-satisfiability)：含意グラフ、強連結成分による Aspvall・Plass・Tarjan の線形時間の解き方と、成分を逆トポロジカル順に見て割当を作る方法の正しさ。
+- [Luzhiled's Library「Two Satisfiability (2-SAT)」](https://ei1333.github.io/library/graph/others/two-satisfiability.hpp)：含意グラフと復元の説明に加え、「高々 1 つ」を補助のリテラルで $O(K)$ にする方法と、区間に対する節を減らす方法に触れている。
+- [ACL「2-SAT」のドキュメント（GitHub）](https://github.com/atcoder/ac-library/blob/master/document_ja/twosat.md)と [ACL の使用例 twosat_practice.cpp（GitHub）](https://github.com/atcoder/ac-library/blob/master/test/example/twosat_practice.cpp)：`two_sat` の各関数の計算量と、PRACTICE2 H の解答の例。
 
 ## 例題 {#examples}
 
@@ -151,7 +157,7 @@ $l_p$ と $l_q$（$p < q$）がともに真だとすると、$l_p \to s_p \to \d
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [PRACTICE2 H. Two SAT](https://atcoder.jp/contests/practice2/tasks/practice2_h)（diff —）：N 本の旗をそれぞれ 2 つの候補の座標のどちらかに置き、どの 2 本も距離 D 以上離れるようにできるかを判定し、できれば配置を出力する。
+- [PRACTICE2 H. Two SAT](https://atcoder.jp/contests/practice2/tasks/practice2_h)（diff なし）：N 本の旗をそれぞれ 2 つの候補の座標のどちらかに置き、どの 2 本も距離 D 以上離れるようにできるかを判定し、できれば配置を出力する。
 
 </div>
 

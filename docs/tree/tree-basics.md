@@ -146,6 +146,9 @@ $u$ と $v$ がもともと隣り合っていると、足した辺は多重辺�
 --8<-- "tree-basics/edge-to-child.cpp:core"
 ```
 
+完全なプログラム：[`edge-to-child.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-basics/edge-to-child.cpp)（GitHub）
+{ .kp-code-src }
+
 あふれは 1 辺の寄与ではなく、足し合わせた答え全体の大きさで見積もる。1 辺の寄与 `val[c] * sz[c] * (n - sz[c])` は最大で 重み × $N^2 / 4$ だが、答え全体はパスの形で最大の 重み × $(N^3 - N) / 6$ になる。$N = 2 \times 10^5$ では重みが 1 でも答えは約 $1.3 \times 10^{15}$ で、重みが $10^4$ 程度を超えると `long long` の上限（約 $9.2 \times 10^{18}$）に収まらない。問題が mod を求めるなら各項で mod を取り、そうでなければ `__int128` を使う（[整数のオーバーフロー](../cpp/cpp-integer-overflow.md)）。
 
 ## 形の両極端（パスと星）でテストする {#extremes}

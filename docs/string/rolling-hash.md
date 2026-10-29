@@ -30,7 +30,7 @@ sections:
   - {title: 'セグ木に載せるハッシュ：（ハッシュ, B^長さ）の組で更新ありの一致・回文判定', anchor: hash-segment-tree, level: 青}
   - {title: ハッシュで代用できる場面とできない場面（Z・Manacher・SA・畳み込みとの使い分け）, anchor: when-to-use}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -71,13 +71,16 @@ $$
 
 次の図は、説明のために a→1・b→2・c→3、$B = 10$ とし、mod を取らずに計算した例である。ハッシュが 10 進数の数字の並びになるので、引き算の意味が見える。
 
-![S = abcab の接頭辞のハッシュは h = 0, 1, 12, 123, 1231, 12312。S[2, 5) = cab のハッシュは h[5] − h[2]·10^3 = 12312 − 12000 = 312 になる](../img/rolling-hash/prefix-hash.svg)
+![S = abcab の接頭辞のハッシュは h = 0, 1, 12, 123, 1231, 12312。S\[2, 5) = cab のハッシュは h[5] − h[2]·10^3 = 12312 − 12000 = 312 になる](../img/rolling-hash/prefix-hash.svg)
 
 処理の流れは次のとおりである。$h$ と $B$ の冪の表 $\mathrm{pw}[i] = B^i \bmod p$ を $O(N)$ で作れば、あとは 1 回 $O(1)$ で部分文字列のハッシュが出る。添字は[半開区間](../guide/glossary.md#half-open-interval)で、$h$ の添字は文字と文字の間の位置を指す（累積和の $S_0 = 0$ と同じ）。
 
 ```cpp
 --8<-- "rolling-hash/substring-hash.cpp:core"
 ```
+
+完全なプログラム：[`substring-hash.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rolling-hash/substring-hash.cpp)（GitHub）
+{ .kp-code-src }
 
 2 つの部分文字列の一致は「長さが等しく、ハッシュが等しい」で判定する。ハッシュが違えば文字列は必ず違う。ハッシュが等しくても文字列が違う（衝突する）ことはありうるが、その確率は次の節で見るとおり十分に小さくできる。
 
@@ -143,6 +146,9 @@ $$
 --8<-- "rolling-hash/substring-hash.cpp:usage"
 ```
 
+完全なプログラム：[`substring-hash.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rolling-hash/substring-hash.cpp)（GitHub）
+{ .kp-code-src }
+
 - 前向きと後ろ向きは同じ $B$ で作る（$B$ を大域の定数にしておけば自然にそうなる）
 - 添字の対応 $[l, r) \to [N - r, N - l)$ は、長さ 1 の区間 $[i, i + 1) \to [N - 1 - i, N - i)$ で確かめると間違えにくい
 - 回文判定だけが目的で更新がないなら、決定的な [Manacher](../string/palindrome.md#manacher) でも同じことが $O(N)$ の前処理でできる
@@ -160,6 +166,9 @@ $$
 ```cpp
 --8<-- "rolling-hash/longest-repeat.cpp:core"
 ```
+
+完全なプログラム：[`longest-repeat.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rolling-hash/longest-repeat.cpp)（GitHub）
+{ .kp-code-src }
 
 判定は長さ $m$ の窓が $N - m + 1$ 個で、`map` を使って $O(N \log N)$、二分探索で $O(\log N)$ 回呼ぶので全体で $O(N \log^2 N)$ になる。この判定は比べ合うハッシュの組が多い（約 $N^2 / 2$ 組）ので、法の大きさが特に効く。
 
@@ -191,12 +200,18 @@ $$
 --8<-- "rolling-hash/hash-segtree.cpp:core"
 ```
 
+完全なプログラム：[`hash-segtree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rolling-hash/hash-segtree.cpp)（GitHub）
+{ .kp-code-src }
+
 !!! info "ACL では"
     `segtree<S, op, e> seg(v);`（`v` は `vector<S>`）。`seg.set(p, x)` で一点を書き換え、`seg.prod(l, r)` で $[l, r)$ を左から順に `op` でまとめた値を返す。構築は $O(N)$、`set`・`prod` は $O(\log N)$。要件は `op` の結合法則と `e()` が単位元であることで、`l == r` の `prod` は `e()` を返す。
 
 ```cpp
 --8<-- "rolling-hash/hash-segtree.cpp:usage"
 ```
+
+完全なプログラム：[`hash-segtree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rolling-hash/hash-segtree.cpp)（GitHub）
+{ .kp-code-src }
 
 更新が「1 点の書き換え」だけなら、[BIT](../ds/fenwick-tree.md) で $c(S[i]) \cdot B^{N-1-i}$ の和を持つ方法もある。この場合、区間の和は位置によって $B$ の冪の分だけずれているので、比べる 2 つの区間の和に $B$ の冪を掛けて桁をそろえてから比べる。セグメント木の方が長さを組に持つだけで済み、ずれの計算を考えなくてよい。
 
@@ -286,7 +301,7 @@ $$
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [典型90 047. Monochromatic Diagonal（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_au)（diff —）：R・G・B からなる 2 つの列で各マスの色が決まるマス目について、すべてのマスが同じ色である斜めの線の数を求める。
+- [典型90 047. Monochromatic Diagonal（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_au)（diff なし）：R・G・B からなる 2 つの列で各マスの色が決まるマス目について、すべてのマスが同じ色である斜めの線の数を求める。
 - [ABC150 F. Xor Shift](https://atcoder.jp/contests/abc150/tasks/abc150_f)（diff 2281）：b が、a の巡回シフトの各要素を x で XOR したものになる (k, x) をすべて求める。
 - [ABC135 F. Strings of Eternity](https://atcoder.jp/contests/abc135/tasks/abc135_f)（diff 2388）：t を繰り返した文字列が、s を繰り返した文字列に含まれる最大の回数を求める。
 

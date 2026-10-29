@@ -8,8 +8,8 @@ chapter: DP の高速化
 order: 350
 level: 発展
 kind: [DP, データ構造]
-prerequisites: [dp-basics, convex-hull]
-related: [dp-segment-tree, segment-tree, monge, alien-dp, dp-speedup-overview]
+prerequisites: [dp-basics]
+related: [dp-segment-tree, segment-tree, monge, alien-dp, dp-speedup-overview, convex-hull#cht-duality]
 summary: dp[i] = min_j (dp[j] + a_j·x_i + b_j) のように遷移が一次関数の最小になる DP を、下側の包絡線を持って速くする。単調なら deque、そうでなければ Li Chao Tree を使う。
 complexity: 傾きもクエリも単調なら全体 O(N)（ならし）、クエリだけ単調でないなら 1 回 O(log N)、Li Chao Tree は直線の追加と取得が O(log X)・線分の追加が O(log^2 X)（X は x の候補の数）
 signs:
@@ -26,7 +26,7 @@ sections:
   - {title: Li Chao Tree（区間の真ん中で勝つ直線を残す）, anchor: li-chao-tree}
   - {title: ライブラリでの検証, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -35,7 +35,7 @@ updated: 2026-10-22
         - 遷移のコストが $i$ と $j$ の積の項を 1 つだけ含む（$(h_i - h_j)^2$ など）
         - 直線を追加しながら、任意の $x$ での最小値・最大値を答える
     - **計算量**：傾きもクエリも単調なら全体 $O(N)$（ならし）。傾きが単調でクエリだけ単調でないなら 1 回 $O(\log N)$。Li Chao Tree は直線の追加と取得が $O(\log X)$、線分の追加が $O(\log^2 X)$（$X$ は $x$ の候補の数）
-    - **前提**：[DP の基本](../dp/dp-basics.md)、[凸包と凸多角形](../geometry/convex-hull.md)
+    - **前提**：[DP の基本](../dp/dp-basics.md)
 
 <!-- textlint-disable -->
 別名：CHT・傾き最適化・斜率优化・李超线段树・直線の最小値
@@ -94,6 +94,9 @@ $$
 --8<-- "cht/monotone.cpp:core"
 ```
 
+完全なプログラム：[`monotone.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cht/monotone.cpp)（GitHub）
+{ .kp-code-src }
+
 直線 $y = ax + b$ を点 $(a, b)$ とみると、下側の包絡線に残る直線は点の集まりの下側凸包の頂点に当たる。この対応は[凸包と CHT の双対](../geometry/convex-hull.md#cht-duality)で扱う。
 
 ## クエリが単調でないとき（二分探索） {#non-monotone-queries}
@@ -130,18 +133,21 @@ ACL には CHT も Li Chao Tree もないので、使うなら自作する。自
 - Li Chao Tree のノードには「直線がない」印を持つ。$+\infty$ の切片で代用すると、$ax$ を足したときに `long long` を超えることがある。
 - 座標圧縮版は、クエリの $x$ が候補の列にあることが前提である。候補にない $x$ を聞くなら、範囲全体の版にする。
 
-座標圧縮版の Li Chao Tree の中心は次のとおりである（完全なプログラムは `snippets/cht/li-chao.cpp` で、乱数で愚直な方法と比べている）。
+座標圧縮版の Li Chao Tree の中心は次のとおりである（完全なプログラムは [`snippets/cht/li-chao.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cht/li-chao.cpp) で、乱数で愚直な方法と比べている）。
 
 ```cpp
 --8<-- "cht/li-chao.cpp:core"
 ```
+
+完全なプログラム：[`li-chao.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cht/li-chao.cpp)（GitHub）
+{ .kp-code-src }
 
 Library Checker の対応は次のとおりである。どちらも $N, Q \le 2 \times 10^5$、$\lvert a \rvert, \lvert x \rvert \le 10^9$、$\lvert b \rvert \le 10^{18}$ で、$ax + b$ は $2 \times 10^{18}$ 以下なので `long long` に収まる。
 
 - Line Add Get Min：直線の追加と $x$ での最小値。傾きの順が単調でないので、deque の CHT では通らず、Li Chao Tree か動的 CHT の確認になる。クエリを先に読めば座標圧縮版が使える。
 - Segment Add Get Min：線分の追加と $x$ での最小値（線分がなければ `INFINITY` と出力）。線分版の Li Chao Tree の確認になる。
 
-単調な deque の CHT は、この 2 問では確かめられない。[例題の EDPC Z](#dp_z) で確かめるか、`snippets/cht/monotone.cpp` のように愚直な $O(N^2)$ の DP と乱数で比べる。
+単調な deque の CHT は、この 2 問では確かめられない。[例題の EDPC Z](#dp_z) で確かめるか、[`snippets/cht/monotone.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cht/monotone.cpp) のように愚直な $O(N^2)$ の DP と乱数で比べる。
 
 ## 落とし穴 {#pitfalls}
 
@@ -153,9 +159,11 @@ Library Checker の対応は次のとおりである。どちらも $N, Q \le 2 
 
 ## 学ぶための資料 {#resources}
 
-- 不要な直線の判定と、単調な場合の deque・一般の場合の二分探索の流れは、satanic0258 氏の記事と ageprocpp 氏の記事が日本語で詳しい。
-- Li Chao Tree の追加の手順と、線分の場合に $O(\log^2 X)$ になる理由は、smijake3 氏の Li Chao Tree のメモが短くまとまっている。
-- 英語では cp-algorithms の「Convex hull trick and Li Chao tree」がある。
+<!-- textlint-disable ja-technical-writing/no-mix-dearu-desumasu -->
+- [satanic0258「Convex-Hull Trick」](https://satanic0258.hatenablog.com/entry/2016/08/16/181331)と [ageprocpp「Convex Hull Trickを知っていますか？僕は知っています。」](https://qiita.com/ageprocpp/items/3533b8f5678f9d4a5515)：不要な直線の判定と、単調な場合の deque・一般の場合の二分探索の流れが日本語で詳しい。
+- [smijake3「Li Chao Treeのメモ」](https://smijake3.hatenablog.com/entry/2018/06/16/144548)：Li Chao Tree の追加の手順と、線分の場合に $O(\log^2 X)$ になる理由が短くまとまっている。
+- [cp-algorithms「Convex hull trick and Li Chao tree」](https://cp-algorithms.com/geometry/convex_hull_trick.html)（英語）：CHT と Li Chao Tree の両方を扱っている。
+<!-- textlint-enable ja-technical-writing/no-mix-dearu-desumasu -->
 
 ## 例題 {#examples}
 
@@ -163,7 +171,7 @@ Library Checker の対応は次のとおりである。どちらも $N, Q \le 2 
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC Z. Frog 3](https://atcoder.jp/contests/dp/tasks/dp_z)（diff —）：足場を前から順に跳んで進み、i から j へ跳ぶと (h_j − h_i)^2 + C のコストがかかるとき、最後の足場までのコストの和の最小を求める。
+- [EDPC Z. Frog 3](https://atcoder.jp/contests/dp/tasks/dp_z)（diff なし）：足場を前から順に跳んで進み、i から j へ跳ぶと (h_j − h_i)^2 + C のコストがかかるとき、最後の足場までのコストの和の最小を求める。
 
 </div>
 
@@ -172,7 +180,7 @@ Library Checker の対応は次のとおりである。どちらも $N, Q \le 2 
 ??? note "解法の詳細"
     - 高さ $h$ は狭義に増えるので、追加する直線の傾き $-2h_j$ は単調に減り、クエリの $x = h_i$ は単調に増える。deque の CHT がそのまま使え、全体はならし $O(N)$ である。
     - 0-indexed で $\mathrm{dp}[0] = 0$ とし、まず直線 $(-2h_0, h_0^2)$ を追加する。$i = 1, 2, \dots$ の順に、クエリで $\mathrm{dp}[i]$ を求めてから直線 $(-2h_i, \mathrm{dp}[i] + h_i^2)$ を追加する。答えは $\mathrm{dp}[N-1]$。
-    - コード片 `snippets/cht/monotone.cpp` の `solve` がこの流れで、愚直な $O(N^2)$ と乱数で比べている。
+    - コード片 [`snippets/cht/monotone.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cht/monotone.cpp) の `solve` がこの流れで、愚直な $O(N^2)$ と乱数で比べている。
 
 ## 練習問題 {#practice}
 
@@ -205,7 +213,7 @@ Library Checker の対応は次のとおりである。どちらも $N, Q \le 2 
 - 遷移のコストが $j$ だけの値の和で、範囲の最小を取るだけなら、[セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md)で足りる。$a_j x_i$ のような積の項が残ると範囲の最小では取れず、CHT になる。
 - コストが一次関数の形にならなくても、Monge 性（最適な遷移元の位置が単調）があれば [Monge 性による DP の高速化](../dp/monge.md#monotone-minima)の方法が使える。
 - 遷移の個数に制約がある（ちょうど $K$ 回）DP は、[Alien DP](../dp/alien-dp.md#penalty) で制約を外してから CHT と組むことがある。
-- 全体の選び方は [DP の高速化の選び方](../dp/dp-speedup-overview.md#shape-to-tool)にまとめる。
+- 全体の選び方は [DP の高速化の選び方](../dp/dp-speedup-overview.md#shape-to-tool)に、CHT・Monge・Alien DP・Slope Trick の確かめ方は[凸性を使う高速化の使いどころ](../dp/dp-speedup-overview.md#convexity)にまとめる。
 
 ## 参考 {#references}
 

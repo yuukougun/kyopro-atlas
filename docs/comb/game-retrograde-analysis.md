@@ -26,7 +26,7 @@ sections:
   - {title: 決まらない局面 = 引き分け, anchor: draw}
   - {title: 得点のあるゲームはダイクストラ法の要領で確定させる, anchor: weighted, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -103,6 +103,9 @@ C++ では次のようになる。$\mathrm{res}[v]$ は 0 が未確定、1 が�
 --8<-- "game-retrograde-analysis/retrograde.cpp:core"
 ```
 
+完全なプログラム：[`retrograde.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/game-retrograde-analysis/retrograde.cpp)（GitHub）
+{ .kp-code-src }
+
 各局面は確定したときに 1 回だけキューに入り、取り出したときに逆辺を 1 回ずつ見る。よって計算量は局面の数 $N$ と手の数 $M$ について $O(N + M)$ である。$\mathrm{cnt}$ は辺の本数で数えるので、同じ行き先への手が 2 本ある（多重辺）なら 2 と数え、逆辺にも 2 本入れる。数え方と減らし方がそろっていれば正しく動く。
 
 出次数を減らしながら確定させる形は、[トポロジカルソートの、出次数 0 の頂点から逆向きに剥がす操作](../graph/topological-sort.md#peel-sinks)と同じである。違いは、負けと確定した局面が、手前の局面をカウンタを待たずにすぐ勝ちと確定させる点である。
@@ -138,6 +141,9 @@ C++ では次のようになる。$\mathrm{res}[v]$ は 0 が未確定、1 が�
 ```cpp
 --8<-- "game-retrograde-analysis/weighted.cpp:core"
 ```
+
+完全なプログラム：[`weighted.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/game-retrograde-analysis/weighted.cpp)（GitHub）
+{ .kp-code-src }
 
 最後まで確定しない先手の局面は、後手が終わらせない戦略を持つ局面である。各局面はキューから 1 回だけ確定し、辺ごとに候補を高々 1 回積むので、キューに入る要素は $O(N + M)$ 個で、計算量は $O((N + M) \log (N + M))$ である。
 
@@ -192,7 +198,7 @@ C++ では次のようになる。$\mathrm{res}[v]$ は 0 が未確定、1 が�
 <div class="kp-problems" data-role="challenge" markdown>
 
 - [ABC261 Ex. Game on Graph](https://atcoder.jp/contests/abc261/tasks/abc261_h)（diff 2531）：重み付きの有向グラフで 2 人が交互に駒を辺に沿って動かし、動かせなくなると終わる。先手は有限で終わらせて通った辺の重みの和を小さく、後手は終わらせないか和を大きくしたいとき、両者が最適に動いたときの和を求める（終わらないなら、そのことを出力する）。
-- [ARC038 D. 有向グラフと数](https://atcoder.jp/contests/arc038/tasks/arc038_d)（diff 3009）：各頂点に値のある有向グラフで、頂点 1 の駒を 2 人が交互に辺に沿って動かすか終了を宣言し、終了時（または非常に多くの手で打ち切られた時）の頂点の値を先手は大きく後手は小さくしたいとき、最適に動いたときの値を求める。
+- [ARC038 D. 有向グラフと数](https://atcoder.jp/contests/arc038/tasks/arc038_d)（diff 3009・参考値）：各頂点に値のある有向グラフで、頂点 1 の駒を 2 人が交互に辺に沿って動かすか終了を宣言し、終了時（または非常に多くの手で打ち切られた時）の頂点の値を先手は大きく後手は小さくしたいとき、最適に動いたときの値を求める。
 
 </div>
 

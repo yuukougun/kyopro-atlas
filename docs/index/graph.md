@@ -130,6 +130,24 @@ search:
     - `cycle-detection#out-degree-one` 出次数 1 のグラフでは同じ頂点に 2 回来るまで進む：https://yuukougun.github.io/kyopro-atlas/graph/cycle-detection/#out-degree-one
     - `cycle-detection#vs-periodicity` シミュレーションの周期の検出（基本テクニックの章）との違い：https://yuukougun.github.io/kyopro-atlas/graph/cycle-detection/#vs-periodicity
 
+## なもりグラフ（namori-graph） {#namori-graph}
+
+- id：`namori-graph`　レベル：水　段階：reviewed　type：technique
+- URL：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/
+- 別名：なもり、unicyclic graph、pseudotree、閉路が 1 つのグラフ、木に辺を 1 本足したグラフ、N 頂点 N 辺の連結グラフ
+- 種類：グラフ探索、木
+- 前提：`connected-components`、`cycle-detection`、`tree-basics`
+- ACL：`dsu`
+- サイン：
+    - 言い回し：N 頂点 N 辺の連結グラフ・木に辺を 1 本足したグラフ
+    - 言い回し：2 頂点間の単純パスが一意か
+- 節：
+    - `namori-graph#one-cycle` 閉路がちょうど 1 つある理由：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/#one-cycle
+    - `namori-graph#peel-leaves` 次数 1 の頂点を削って閉路を求める（Union-Find でも）：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/#peel-leaves
+    - `namori-graph#hanging-trees` 閉路の頂点ごとにぶら下がる木に分ける：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/#hanging-trees
+    - `namori-graph#unique-path` 単純パスが一意になる条件：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/#unique-path
+    - `namori-graph#directed-version` 有向版は Functional graph：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/#directed-version
+
 ## 二部グラフ判定（bipartite-graph） {#bipartite-graph}
 
 - id：`bipartite-graph`　レベル：基礎　段階：reviewed　type：technique
@@ -242,24 +260,6 @@ search:
     - `warshall-floyd#beyond-distance` 距離以外の値を同じ形で求める（到達可能性・ボトルネック・2 つの基準）：https://yuukougun.github.io/kyopro-atlas/graph/warshall-floyd/#beyond-distance
     - `warshall-floyd#redundant-edges` 迂回できる辺は不要（青）：https://yuukougun.github.io/kyopro-atlas/graph/warshall-floyd/#redundant-edges
 
-## ベルマンフォード法（bellman-ford） {#bellman-ford}
-
-- id：`bellman-ford`　レベル：青　段階：reviewed　type：technique
-- URL：https://yuukougun.github.io/kyopro-atlas/graph/bellman-ford/
-- 別名：ベルマンフォード、Bellman-Ford、負閉路検出、SPFA、負辺のある最短路
-- 種類：最短路
-- 前提：`dijkstra`
-- サイン：
-    - 言い回し：負の重みの辺がある・得点を最大化する（符号を反転すると負辺になる）
-    - 言い回し：いくらでも大きくできるなら inf と出力する
-    - 制約：N, M ≤ 数千（O(NM) が間に合う）
-- 節：
-    - `bellman-ford#why-n-minus-1` N−1 回で十分な理由：https://yuukougun.github.io/kyopro-atlas/graph/bellman-ford/#why-n-minus-1
-    - `bellman-ford#relevant-cycles` 答えに影響する負閉路だけを判定する（到達可能性で絞る・−∞ を伝える）：https://yuukougun.github.io/kyopro-atlas/graph/bellman-ford/#relevant-cycles
-    - `bellman-ford#longest-path` 最長路は符号を反転する：https://yuukougun.github.io/kyopro-atlas/graph/bellman-ford/#longest-path
-    - `bellman-ford#spfa` SPFA の注意（最悪の計算量は同じ）：https://yuukougun.github.io/kyopro-atlas/graph/bellman-ford/#spfa
-    - `bellman-ford#vs-potential` 負辺があってもダイクストラ法で済む場合との見分け（ポテンシャル）：https://yuukougun.github.io/kyopro-atlas/graph/bellman-ford/#vs-potential
-
 ## 最短路 DAG（shortest-path-dag） {#shortest-path-dag}
 
 - id：`shortest-path-dag`　レベル：水　段階：reviewed　type：technique
@@ -321,6 +321,24 @@ search:
     - `time-dependent-dijkstra#wait` 次の出発時刻まで待つ遷移：https://yuukougun.github.io/kyopro-atlas/graph/time-dependent-dijkstra/#wait
     - `time-dependent-dijkstra#latest-departure` 最終電車型：終点から逆向きに最も遅い時刻を確定させる：https://yuukougun.github.io/kyopro-atlas/graph/time-dependent-dijkstra/#latest-departure
     - `time-dependent-dijkstra#optimal-departure` 最適な出発時刻を計算してから進む（青）：https://yuukougun.github.io/kyopro-atlas/graph/time-dependent-dijkstra/#optimal-departure
+
+## ベルマンフォード法（bellman-ford） {#bellman-ford}
+
+- id：`bellman-ford`　レベル：青　段階：reviewed　type：technique
+- URL：https://yuukougun.github.io/kyopro-atlas/graph/bellman-ford/
+- 別名：ベルマンフォード、Bellman-Ford、負閉路検出、SPFA、負辺のある最短路
+- 種類：最短路
+- 前提：`dijkstra`
+- サイン：
+    - 言い回し：負の重みの辺がある・得点を最大化する（符号を反転すると負辺になる）
+    - 言い回し：いくらでも大きくできるなら inf と出力する
+    - 制約：N, M ≤ 数千（O(NM) が間に合う）
+- 節：
+    - `bellman-ford#why-n-minus-1` N−1 回で十分な理由：https://yuukougun.github.io/kyopro-atlas/graph/bellman-ford/#why-n-minus-1
+    - `bellman-ford#relevant-cycles` 答えに影響する負閉路だけを判定する（到達可能性で絞る・−∞ を伝える）：https://yuukougun.github.io/kyopro-atlas/graph/bellman-ford/#relevant-cycles
+    - `bellman-ford#longest-path` 最長路は符号を反転する：https://yuukougun.github.io/kyopro-atlas/graph/bellman-ford/#longest-path
+    - `bellman-ford#spfa` SPFA の注意（最悪の計算量は同じ）：https://yuukougun.github.io/kyopro-atlas/graph/bellman-ford/#spfa
+    - `bellman-ford#vs-potential` 負辺があってもダイクストラ法で済む場合との見分け（ポテンシャル）：https://yuukougun.github.io/kyopro-atlas/graph/bellman-ford/#vs-potential
 
 ## 差分制約（牛ゲー）（difference-constraints） {#difference-constraints}
 
@@ -474,24 +492,6 @@ search:
     - `functional-graph#on-cycle` 全頂点について閉路上かを求める（入次数 0 から剥がす・SCC）：https://yuukougun.github.io/kyopro-atlas/graph/functional-graph/#on-cycle
     - `functional-graph#per-cycle` 閉路ごとの集計・到達できる頂点の数：https://yuukougun.github.io/kyopro-atlas/graph/functional-graph/#per-cycle
     - `functional-graph#permutation` 置換は閉路の集まり（巡回分解は数え上げの章）：https://yuukougun.github.io/kyopro-atlas/graph/functional-graph/#permutation
-
-## なもりグラフ（namori-graph） {#namori-graph}
-
-- id：`namori-graph`　レベル：水　段階：reviewed　type：technique
-- URL：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/
-- 別名：なもり、unicyclic graph、pseudotree、閉路が 1 つのグラフ、木に辺を 1 本足したグラフ、N 頂点 N 辺の連結グラフ
-- 種類：グラフ探索、木
-- 前提：`connected-components`、`cycle-detection`、`tree-basics`
-- ACL：`dsu`
-- サイン：
-    - 言い回し：N 頂点 N 辺の連結グラフ・木に辺を 1 本足したグラフ
-    - 言い回し：2 頂点間の単純パスが一意か
-- 節：
-    - `namori-graph#one-cycle` 閉路がちょうど 1 つある理由：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/#one-cycle
-    - `namori-graph#peel-leaves` 次数 1 の頂点を削って閉路を求める（Union-Find でも）：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/#peel-leaves
-    - `namori-graph#hanging-trees` 閉路の頂点ごとにぶら下がる木に分ける：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/#hanging-trees
-    - `namori-graph#unique-path` 単純パスが一意になる条件：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/#unique-path
-    - `namori-graph#directed-version` 有向版は Functional graph：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/#directed-version
 
 ## 2-SAT（two-sat） {#two-sat}
 
@@ -658,22 +658,6 @@ search:
     - `graph-construction#from-distances` 距離表からの復元（迂回できる辺は不要）：https://yuukougun.github.io/kyopro-atlas/graph/graph-construction/#from-distances
     - `graph-construction#parity-walk` DFS 木をたどって偶奇を合わせる（黄）：https://yuukougun.github.io/kyopro-atlas/graph/graph-construction/#parity-walk
 
-## オイラー路（一筆書き）（euler-path） {#euler-path}
-
-- id：`euler-path`　レベル：黄　段階：reviewed　type：technique
-- URL：https://yuukougun.github.io/kyopro-atlas/graph/euler-path/
-- 別名：オイラー閉路、一筆書き、Hierholzer、Euler path、Eulerian trail
-- 種類：グラフ探索
-- 前提：`connected-components`
-- サイン：
-    - 言い回し：すべての辺をちょうど 1 回ずつ通る・一筆書き
-    - 言い回し：同じ道を 2 度通らずにすべての道を通れるか
-- 節：
-    - `euler-path#conditions` 存在条件（無向・有向）：https://yuukougun.github.io/kyopro-atlas/graph/euler-path/#conditions
-    - `euler-path#hierholzer` Hierholzer 法で構成する：https://yuukougun.github.io/kyopro-atlas/graph/euler-path/#hierholzer
-    - `euler-path#applications` 応用の型（縮約・辺を足す・向き付け・文字列を辺にする）：https://yuukougun.github.io/kyopro-atlas/graph/euler-path/#applications
-    - `euler-path#vs-hamiltonian` ハミルトン路（頂点をちょうど 1 回、bitDP）との違い：https://yuukougun.github.io/kyopro-atlas/graph/euler-path/#vs-hamiltonian
-
 ## 次数による平方分割（degree-sqrt） {#degree-sqrt}
 
 - id：`degree-sqrt`　レベル：青　段階：reviewed　type：technique
@@ -690,6 +674,22 @@ search:
     - `degree-sqrt#push-pull` 配るか取りに行くかを次数で決める：https://yuukougun.github.io/kyopro-atlas/graph/degree-sqrt/#push-pull
     - `degree-sqrt#triangles` 三角形の列挙（次数の小さい方から向き付ける）（黄）：https://yuukougun.github.io/kyopro-atlas/graph/degree-sqrt/#triangles
     - `degree-sqrt#four-cycles` 長さ 4 の閉路の検出（鳩の巣原理で打ち切る）（黄）：https://yuukougun.github.io/kyopro-atlas/graph/degree-sqrt/#four-cycles
+
+## オイラー路（一筆書き）（euler-path） {#euler-path}
+
+- id：`euler-path`　レベル：黄　段階：reviewed　type：technique
+- URL：https://yuukougun.github.io/kyopro-atlas/graph/euler-path/
+- 別名：オイラー閉路、一筆書き、Hierholzer、Euler path、Eulerian trail
+- 種類：グラフ探索
+- 前提：`connected-components`
+- サイン：
+    - 言い回し：すべての辺をちょうど 1 回ずつ通る・一筆書き
+    - 言い回し：同じ道を 2 度通らずにすべての道を通れるか
+- 節：
+    - `euler-path#conditions` 存在条件（無向・有向）：https://yuukougun.github.io/kyopro-atlas/graph/euler-path/#conditions
+    - `euler-path#hierholzer` Hierholzer 法で構成する：https://yuukougun.github.io/kyopro-atlas/graph/euler-path/#hierholzer
+    - `euler-path#applications` 応用の型（縮約・辺を足す・向き付け・文字列を辺にする）：https://yuukougun.github.io/kyopro-atlas/graph/euler-path/#applications
+    - `euler-path#vs-hamiltonian` ハミルトン路（頂点をちょうど 1 回、bitDP）との違い：https://yuukougun.github.io/kyopro-atlas/graph/euler-path/#vs-hamiltonian
 
 ## 最大流（max-flow） {#max-flow}
 

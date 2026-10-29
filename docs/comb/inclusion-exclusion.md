@@ -29,7 +29,7 @@ sections:
   - {title: 使い分け：余事象・包除 DP・約数包除, anchor: when-to-use}
   - {title: min-max 包除（全種類がそろうまでの期待値）, anchor: min-max, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -80,7 +80,7 @@ $$
 30 - (15 + 10 + 6) + (5 + 3 + 2) - 1 = 8
 $$
 
-実際に 1・7・11・13・17・19・23・29 の 8 個である。次の動く図では、3 つの集合を順に足し引きして、足しすぎた領域と引きすぎた領域が打ち消し合う様子を 1 段ずつ追える。
+実際に 1・7・11・13・17・19・23・29 の 8 個である。次の動く図では、$\lvert S \rvert$ の小さい順に全体・1 つの集合・2 つの共通部分・3 つの共通部分を足し引きして、足しすぎた領域と引きすぎた領域が打ち消し合う様子を 1 段ずつ追える。
 
 <div class="kp-viz" data-viz="inclusion-exclusion-venn" data-config='{"n": 30, "divisors": [2, 3, 5]}'></div>
 
@@ -109,6 +109,9 @@ $N(S)$ の求め方は、条件を同時に破ったときに何が「共通部�
 ```cpp
 --8<-- "inclusion-exclusion/none-divisible.cpp:core"
 ```
+
+完全なプログラム：[`none-divisible.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/inclusion-exclusion/none-divisible.cpp)（GitHub）
+{ .kp-code-src }
 
 計算量は、$S$ ごとに $O(M)$ 個の要素を見るので $O(2^M M)$ である（gcd の分の $O(\log)$ を除く）。$N(S)$ を mask から 1 ビット外した集合の値から $O(1)$ で更新できるなら、[lowbit](../guide/glossary.md#lowbit) を使って $O(2^M)$ にできる。
 
@@ -150,6 +153,9 @@ $D_0, D_1, \dots, D_6$ は $1, 0, 1, 2, 9, 44, 265$ である。$n = 3$ なら $
 --8<-- "inclusion-exclusion/derangement.cpp:core"
 ```
 
+完全なプログラム：[`derangement.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/inclusion-exclusion/derangement.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 同じ値は漸化式 $D_n = (n - 1)(D_{n-1} + D_{n-2})$（$D_0 = 1$、$D_1 = 0$）でも求まる。$p_1 = j$（$j \ne 1$ の $n - 1$ 通り）と決め、$p_j = 1$ なら残り $n - 2$ 個の撹乱順列、$p_j \ne 1$ なら $j$ に「1 を取らない」制約を移した $n - 1$ 個の撹乱順列になるからである。上のコード片では、両方の値が一致することを assert で確かめている。
 
 $D_n / n!$ は $n$ が大きくなると $1/e \approx 0.368$ に近づく。ランダムな順列に固定点がない確率は、$n$ が 4 程度以上なら $n$ によらずほぼ 37% である。
@@ -169,6 +175,9 @@ $n = 3$、$k = 2$ なら $8 - 2 \cdot 1 + 0 = 6$ で、$2^3 = 8$ 通りから 1 
 ```cpp
 --8<-- "inclusion-exclusion/surjection.cpp:core"
 ```
+
+完全なプログラム：[`surjection.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/inclusion-exclusion/surjection.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 計算量は、二項係数の前計算のあと各項の累乗に $O(\log n)$ かかるので $O(k \log n)$ である。境界では $0^0 = 1$ に注意する。$n = k = 0$ のとき答えは 1（空の塗り方）で、modint の `pow(0)` は 1 を返すのでそのまま正しい。
 

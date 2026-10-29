@@ -27,7 +27,7 @@ sections:
   - {title: 累積和の上で二分探索・尺取り, anchor: with-binary-search}
   - {title: 値が更新されるなら BIT、静的な区間 min なら Sparse Table, anchor: next-tools}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -75,6 +75,9 @@ $$
 --8<-- "prefix-sum/range-sum.cpp:core"
 ```
 
+完全なプログラム：[`range-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/prefix-sum/range-sum.cpp)（GitHub）
+{ .kp-code-src }
+
 このコードは $Q$ 個の区間の和に答える。前計算が $O(N)$、各クエリが $O(1)$ なので、全体は $O(N + Q)$ である。
 
 累積和の応用は、「区間の量を、両端の境界での値の差に直す」という見方にまとまる。たとえば「区間に含まれる条件を満たす要素の個数」なら、条件を満たす位置を 1、それ以外を 0 にした列の累積和を取ればよい。数える対象が 2 文字にまたがる（"AC" の出現など）ときは、どの位置に 1 を置くかを先に決める（[例題](#abc122_c)）。
@@ -100,6 +103,9 @@ $$
 ```cpp
 --8<-- "prefix-sum/exclude-one.cpp:core"
 ```
+
+完全なプログラム：[`exclude-one.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/prefix-sum/exclude-one.cpp)（GitHub）
+{ .kp-code-src }
 
 前計算は左右それぞれ $O(N)$ 回の gcd で、各 $i$ の値は gcd 1 回で求まる（gcd 1 回は値の上限を $V$ として $O(\log V)$）。素朴に「$a_i$ を除いて全体を計算し直す」と $O(N^2)$ 回の演算になる。
 
@@ -169,7 +175,7 @@ for l in 0 .. N-1:
 
 ## 値が更新されるなら BIT、静的な区間 min なら Sparse Table {#next-tools}
 
-累積和は、列が途中で変わらず、引き算できる演算に使う道具である。前提が崩れたときに使う手法と、累積和の考え方が広がる先をまとめる。
+累積和は、列が途中で変わらず、引き算できる演算に使う道具である。この前提が崩れたときに使う手法をまとめる。
 
 | 状況 | 使う手法 | 計算量 |
 | --- | --- | --- |
@@ -181,13 +187,6 @@ for l in 0 .. N-1:
 累積和は、1 点の更新があると更新した位置より後ろの $S$ をすべて直すことになり、1 回 $O(N)$ かかる。更新と区間の和が混ざるなら BIT を使う。min・max は 1 つ除くだけなら左右からの累積で足りるが、任意の区間 $[l, r)$ を聞かれるなら Sparse Table を使う。min・max は同じ要素を 2 回数えても結果が変わらないので、重なる 2 つの区間を合わせて $O(1)$ で答えられる。
 
 演算によっては累積和と同じ引き算が使える。XOR は $x \oplus x = 0$ なので、自分自身が逆の操作になる。$P$ を累積 XOR とすると、$[l, r)$ の XOR は $P_r \oplus P_l$ で求まる。積は逆元があれば割り算で戻せる。ただし 0 を含むと割れない。mod の積は、1 つ除いた積なら左右からの累積で求め、任意の区間の積ならセグメント木を使う。
-
-累積和の考え方は、次のページで広がる。
-
-- **区間の個数を数える**：「区間の和が $K$」「$M$ の倍数」を $S_r$ と $S_l$ の関係に直して数える（[累積和と連想配列で区間を数える](../basics/prefix-sum-counting.md)）
-- **差分との往復**：いもす法は、差分の列を作ってから累積和で元に戻す。累積和と差分は互いに逆の操作である（[いもす法](../basics/imos.md)）
-- **2 次元**：長方形の和は 4 つの累積和の足し引きで求まる（[2 次元累積和](../basics/prefix-sum-2d.md)）
-- **DP の遷移**：$\mathrm{dp}[i]$ が直前の区間の $\mathrm{dp}$ の和で決まるとき、$\mathrm{dp}$ の累積和で遷移を $O(1)$ にする（[累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md)）
 
 ## 上位の手法へのつながり {#next-steps}
 
@@ -224,7 +223,7 @@ for l in 0 .. N-1:
 - [ARC098 C. Attention](https://atcoder.jp/contests/arc098/tasks/arc098_a)（diff 635）：一列に並んだ人のうち 1 人をリーダーに選ぶとき、向きを変える人数の最小値を求める。
 - [ABC172 C. Tsundoku](https://atcoder.jp/contests/abc172/tasks/abc172_c)（diff 930）：2 つの机に積まれた本を上から読むとき、K 分以内に読める最大の冊数を求める。
 - [ABC125 C. GCD on Blackboard](https://atcoder.jp/contests/abc125/tasks/abc125_c)（diff 1197）：1 つだけ好きな値に書き換えたときの、全体の最大公約数の最大値を求める。
-- [典型90 076. Cake Cut（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_bx)（diff —）：円環に並んだケーキのピースから連続する部分を取り、和をちょうど全体の 1/10 にできるかを判定する。
+- [典型90 076. Cake Cut（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_bx)（diff なし）：円環に並んだケーキのピースから連続する部分を取り、和をちょうど全体の 1/10 にできるかを判定する。
 
 </div>
 

@@ -27,7 +27,7 @@ sections:
   - {title: クエリの平方分割（√Q 個ごとに作り直し、未反映の分は愚直に補正する）, anchor: query-buckets}
   - {title: 実装の要点（ブロック番号・同じブロックの場合・タグの押し下げ・B の選び方）, anchor: implementation}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -56,7 +56,7 @@ updated: 2026-10-22
 
 次の図は、長さ 16 の列（$B = 4$）で区間 $[2, 13)$ に $x$ を加える様子である。
 
-![長さ 16 の列を 4 つずつ 4 ブロックに分け、区間 [2, 13) に x を加える図。ブロック 0 の添字 2・3 とブロック 3 の添字 12 は斜線で「要素ごと」に足し、丸ごと入るブロック 1・2 は塗りで tag[1] += x・tag[2] += x とする](../img/sqrt-decomposition/buckets.svg)
+![長さ 16 の列を 4 つずつ 4 ブロックに分け、区間 \[2, 13) に x を加える図。ブロック 0 の添字 2・3 とブロック 3 の添字 12 は斜線で「要素ごと」に足し、丸ごと入るブロック 1・2 は塗りで tag[1] += x・tag[2] += x とする](../img/sqrt-decomposition/buckets.svg)
 
 **保つ性質**：ブロック $b$ について、次の 2 つを常に成り立たせる。
 
@@ -75,6 +75,9 @@ updated: 2026-10-22
 ```cpp
 --8<-- "sqrt-decomposition/bucket-add-count.cpp:core"
 ```
+
+完全なプログラム：[`bucket-add-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/sqrt-decomposition/bucket-add-count.cpp)（GitHub）
+{ .kp-code-src }
 
 **応用の型**：ブロックに何を持たせるかを変えれば、同じ枠組みでいろいろな操作が載る。
 
@@ -112,6 +115,9 @@ $$
 ```cpp
 --8<-- "sqrt-decomposition/step-dp.cpp:core"
 ```
+
+完全なプログラム：[`step-dp.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/sqrt-decomposition/step-dp.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 予約が $j$ に届くのは、予約した位置 $i$ より後（$i < j$）だけである。$i$ を処理するときは、先に $\mathrm{pend}$ から $\mathrm{dp}[i]$ を受け取ってから $\mathrm{dp}[i]$ を予約するので、自分自身には届かない。1 マスあたり受け取り $O(B)$ と配る $O(N/B)$ で、全体 $O(N\sqrt{N})$ になる（例題の [ABC335 F](#abc335_f)）。
 

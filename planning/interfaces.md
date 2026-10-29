@@ -2,7 +2,7 @@
 
 工程6（土台作り）で、サイト・生成スクリプト・検査・CI・執筆の手引きを別々の担当が作るので、その間の約束をここに決める。上位の決定は設計書（[design.md](design.md)）と [design-review.md](design-review.md)。この文書と食い違ったら、この文書を直してから作る。
 
-- 版：2026-10-21 初版
+- 版：2026-10-21 初版。2026-10-29 ページの部品を足した（§2 の related・verify の表示、§7 の段階と更新日・誤りの報告・関連・節のレベルの印・自作の確認・コードの下の行。Issue #8・#9・#10・#53・#54・#56・#62）
 
 ## 1. ファイルの置き場所と URL
 
@@ -48,7 +48,7 @@ complexity: null                       # 本文を書くときに入れる（骨
 signs:
   - {type: phrase, text: 区間に一括で加算・代入し、区間の和や最小値を何度も答える}
 acl: [lazy_segtree]
-verify: [range_affine_range_sum]
+verify: [range_affine_range_sum]       # Library Checker の問題名。ページ下部の「自作の確認」に出る（§7）
 frequency: A                           # technique・thinking・overview だけ
 frequency_evidence: "recent 3（…）"
 sections:                              # 上位の帯の節の扱いと、アンカーの一覧
@@ -65,6 +65,10 @@ atcoder: null                          # cpp だけ（true / false）
 - `status` は使わない（Material の予約キー）
 - 本文の見出しには、sections の anchor を `## 区間の長さを S に持たせる {#size-in-node}` の形で付ける。stage が draft 以降なら、sections の全 anchor が本文にあることを検査する
 - 骨格（stub）のページの本文は、冒頭の要点の囲みだけ（§4）
+- related は、知識マップのほかに、ページの下の「関連」の欄に書いた順で出る（§7）。書いた順が表示の順になるので、近いものから書く。`id#anchor` は「ページの題名 › 節の題」で節へリンクする（節の題は相手の sections の title。相手が stub の間は、節ではなくページへリンクする）
+- verify（Library Checker の問題名）は、ページ下部の「自作の確認」の行に judge.yosupo.jp の問題へのリンクとして出る（§7）。発展の概要では、本文にリンクのある問題を出さない
+- sections の level は、見出しと目次の項目のレベルの印と、「理解した」のチェック欄になる（§7）。見出しに色の印を手で書かない
+- stage と updated は、ページの最後の行に出る（§7。stage の表示名は stub＝準備中・draft＝下書き・reviewed＝検証済み・done＝完成）
 
 ## 3. 問題の一覧の書式
 
@@ -79,7 +83,7 @@ atcoder: null                          # cpp だけ（true / false）
 ```
 
 - `data-role` は example・practice・challenge のどれか
-- 1行の形（正規表現）：`^- \[(?P<label>[^\]]+)\]\((?P<url>https://atcoder\.jp/contests/(?P<contest>[^/]+)/tasks/(?P<id>[A-Za-z0-9_]+))\)（diff (?P<diff>\d+|—)）：(?P<summary>.+)$`
+- 1行の形（正規表現）：`^- \[(?P<label>[^\]]+)\]\((?P<url>https://atcoder\.jp/contests/(?P<contest>[^/]+)/tasks/(?P<id>[A-Za-z0-9_]+))\)（diff (?P<diff>\d+(?:・参考値)?|なし)）：(?P<summary>.+)$`
 - label・url・diff は台帳（`data/problems.yaml`）から機械的に作れる形にする。label は「コンテストの表示名＋空白＋記号. 題名」。表示名：abcNNN → `ABCNNN`、arcNNN → `ARCNNN`、agcNNN → `AGCNNN`、typical90 → `典型90`、dp → `EDPC`、tdpc → `TDPC`、math-and-algorithm → `アルゴ数学`、tessoku-book → `鉄則本`、ほかは contest id を大文字にしたもの
 - 例題は、ページの中で1問ずつ小見出しを立て、その下に1行だけの囲み（`data-role="example"`）を置き、続けて方針を書く。解法の詳細は折りたたみ（`??? note "解法の詳細"`）
 - 本文の atcoder.jp の問題へのリンクは、すべてこの囲みの中に置く（本文中で問題に触れるときは、ページの id かその小見出しへのリンクにする）
@@ -129,12 +133,20 @@ atcoder: null                          # cpp だけ（true / false）
 
 ## 6. ブラウザに保存するデータ
 
-- localStorage のキーは1つ：`kyopro-atlas:v1`。値は JSON
+- localStorage のキーは1つ：`kyopro-atlas:v1`。値は JSON（2026-10-29 に `wishlist` と `exportedAt` を足した。Issue #1・#74）
 ```json
-{"solved": {"abc340_e": true}, "understood": {"lazy-segment-tree": {"水": true, "青": false}}, "updatedAt": "2026-10-21T12:00:00+09:00"}
+{"solved": {"abc340_e": true},
+ "understood": {"lazy-segment-tree": {"水": true, "青": false}},
+ "wishlist": {"segment-tree": "2026-10-29T12:00:00+09:00"},
+ "updatedAt": "2026-10-29T12:00:00+09:00",
+ "exportedAt": "2026-10-29T12:30:00+09:00"}
 ```
-- 「理解した」はページ×レベル（ページの level と、sections にある上位の level の数だけチェックがある）
-- 書き出し：この JSON をテキストで表示してコピーできるようにする。読み込み：貼り付けた JSON で置き換えるか、合わせる（解いた・理解したのどちらかが true なら true）
+- `solved`：問題 ID → true。`understood`：ページの id → {レベル → true}。「理解した」はページ×レベル（ページの level と、sections にある上位の level の数だけチェックがある）。ロードマップの色ごとの列（生成された表）の行のチェック欄も、行のページの id と列の色の組で同じ記録を使う
+- `wishlist`：勉強したいリスト。ページの id → 入れた時刻（地方時の ISO 8601。日付だけのものと、入れた日の分からない `true` も読める）。ページのテンプレートの `input[data-kp-wish]` と、`guide/study-list` の一覧（`div.kp-wishlist`）が使う
+- `updatedAt`：記録を最後に変えた時刻。`exportedAt`：最後に書き出した（ファイルに保存した・コピーした）時刻。書き出しでは `updatedAt` を変えない。書き出し・読み込みの欄に「最後に書き出した日」として出す
+- 古い形の記録（2026-10-21 版。`wishlist` と `exportedAt` がない）は、localStorage の値も書き出した JSON も、そのまま読める（ない項目は空とみなす）。知らない項目と形の崩れた値は、読むときに捨てる
+- 書き出し：ファイルに保存（`kyopro-atlas-progress-<日付>.json`。中身はこの JSON で、`exportedAt` は書き出した時刻）と、JSON をテキストで表示してコピー。読み込み：ファイルを選ぶか貼り付けた JSON で、置き換えるか合わせる。合わせるときは、解いた・理解した・勉強したいのどれかが true（ある）なら true（ある）にし、勉強したいの入れた時刻は早い方、`exportedAt` は今の記録のものを残す（`updatedAt` は合わせた時刻になる。増えたものがなければ記録を変えない）。置き換えるときは、読み込んだ記録の `updatedAt` と `exportedAt` を使う（中身は読み込んだ記録そのものなので。`updatedAt` のない記録は読み込んだ時刻にする）
+- ページの id を変えるときの読み替え（design.md §9.1・§10.3）は、`understood` と `wishlist` の鍵に当てる
 - 別のタブの変更は storage イベントで反映する。localStorage が使えない環境でもページは壊れないこと（try/catch）
 
 ## 7. テンプレートと JS の受け持ち
@@ -142,8 +154,12 @@ atcoder: null                          # cpp だけ（true / false）
 | 表示 | 作り方 |
 | --- | --- |
 | ページ上部のバッジ（レベル・分野・kind・準備中） | `overrides/main.html` が `page.meta` から出す。レベルは AtCoder の色。kind は種類別の一覧（`lists/kind-<…>`）へのリンク。stage が stub なら「準備中」の帯 |
-| 「理解した」のチェック | テンプレートがページ×レベルのチェック欄の HTML を出し、`progress.js` が localStorage と結ぶ |
-| 前提・次に読む | テンプレートが `nav.pages` の各ページの meta を引いて出す（次に読むは同じレベルと1つ上を優先して8件まで。残りは知識マップの焦点の表示へのリンク） |
+| 「理解した」のチェック | テンプレートがページ×レベルのチェック欄の HTML を出し、`progress.js` が localStorage と結ぶ。チェック欄（`label.kp-check`）はどれも（ページのレベルの欄も）`span.kp-understood__item` で包む。上の帯の節の欄（「青の節」など）にだけ、横にその帯の最初の節（sections の順）へ移るリンク（`a.kp-check__jump`。矢印は CSS で、上では↓・下では↑）を置く。準備中のページは本文に節の見出しがないので置かない |
+| 節のレベルの印 | sections に level のある節の見出しと目次の項目に、テンプレートが `span.kp-mini.kp-lv-<色>.kp-sec-lv` を入れる。見出しは本文の HTML の `<a class="headerlink" href="#<anchor>"` の前（toc の permalink が前提）、目次は `site_nav` ブロックの HTML の `<a href="#<anchor>" class="md-nav__link">` の直後（CSS の order で題の後ろに出す）。どちらも文字列の置き換えで、JS を使わない（HTML に書かれるので instant navigation でも出る。目次の部分テンプレートは上書きしない） |
+| 前提・次に読む・関連 | テンプレートが `nav.pages` の各ページの meta を引いて出す（次に読むは同じレベルと1つ上を優先して8件まで。残りは知識マップの焦点の表示へのリンク）。関連は related を書いた順に20件まで（超えた分は知識マップの焦点の表示へのリンク）。`id#anchor` は「ページの題名 › 節の題」で、レベルの印は節の level（なければページの level）。相手のページが stub なら、本文に節の見出しがないので、節ではなくページへのリンクにする（印はページの level）。前提・出した次に読む・関連にすでに出たページは、関連に重ねて出さない（節への関連は出す） |
+| 自作の確認 | テンプレートが front matter の `verify` から、関連の欄の後（知識マップへのリンクの前）に `p.kp-links__verify` の 1 行「自作の確認：Library Checker の <問題名>、…（確かめ方）」を出す。問題名は `https://judge.yosupo.jp/problem/<名前>`、「確かめ方」は library-design の #verify へのリンク。type が overview のページでは、本文の HTML に `judge.yosupo.jp/problem/<名前>"` がある問題を出さない（本文の #library に書く決まり。手引き §13-10・§16-4）。出す問題がなければ行もない（工程11、#53） |
+| コードの下の行 | テンプレートでも JS でもなく、`tools/fix_code_links.py` が本文に書く。取り込みのフェンス（```` ```cpp ````）の後に空行を挟んで、``完全なプログラム：[`<名前>`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/<id>/<名前>)（GitHub）`` と `{ .kp-code-src }` の 2 行の段落（attr_list で `p.kp-code-src`。見た目は kp.css）を置く。範囲に `mint` が出れば、同じ行に型と modint のページへのリンクを添える。同じファイルのフェンスが空行だけを挟んで続くときは最後の下だけに置く。地の文の `` `snippets/<id>/<名前>` `` も同じ URL へのリンクにする。check.yml が `--check` で確かめる（手引き §9。工程11、#8・#62・#72） |
+| 段階・更新日・誤りの報告 | テンプレートがページの最後の行（`div.kp-page-info`）に出す。段階と更新日は id のあるページだけ（段階は「この教材の使い方」の #stub へのリンク）。「このページの誤りを報告する」はどのページにも出し、GitHub の新しい Issue を `?template=page-error.yml&title=誤りの報告：<題名>&page-title=<題名>&page-url=<URL>&page-updated=<updated>` で開く（ひな形は `.github/ISSUE_TEMPLATE/page-error.yml`。項目の id が引数の名前。題名は front matter の title、URL は page.canonical_url）。labels などの引数は権限のない人には 404 になるので付けない |
 | 解いたチェック | `progress.js` が `.kp-problems` の各行の先頭にチェック欄を付ける |
 | 知識マップ | `docs/guide/knowledge-map.md` の `<div id="kp-map"></div>`。`map.js` が graph.json を読み、既定は分野ごとの表示、`?focus=<id>` で祖先と子孫だけ、全体は分野を頂点にした図。理解したページを塗る |
 | ロードマップの集計 | `progress.js` が graph.json と localStorage から、レベル・分野ごとの解いた数・理解した数を出す（`<div class="kp-roadmap-stats"></div>`） |
@@ -158,12 +174,12 @@ atcoder: null                          # cpp だけ（true / false）
 | 生成物 | 中身 |
 | --- | --- |
 | `nav.yml` | 分野の順（§1）→ 分野の入口 → chapter ごと（order の順）。chapter のないページは分野の先頭。nav_title があればそれを使う |
-| `docs/<field>/index.md` | 分野の入口：章ごとのページの一覧（題名・レベル・要約・準備中の印） |
+| `docs/<field>/index.md` | 分野の入口：説明の 1 文と、学ぶ順・使い分け・問題集・自作の手引きのうち関係するものへの案内（分野によっては注記の 1 行も）、章ごとのページの箇条書き（題名・レベルの小さな印 `span.kp-mini.kp-lv-<色>`・準備中の印・要約の 1 文目。章の中は order の順）、章の後のほかの章の関連ページ、最後のほかの分野にある関連ページ（`#elsewhere`。工程11、#58・#65・#75） |
 | `docs/lists/` | レベル別（`level-<基礎…>`）と種類別（`kind-<…>`）の一覧。ファイル名は英字の短い名前にし、対応を gen_site.py に持つ |
 | `docs/llms.txt` | 1行「- [タイトル](URL)（id・レベル・分野・段階）：要約」。冒頭に使い方と分野ごとの詳細索引への案内、版（入力の内容のハッシュと updated の最大値） |
 | `docs/index/<field>.md` | 分野ごとの詳細索引：ページごとに id・URL・別名・サイン・kind・節（`id#anchor` と URL） |
 | `overrides/assets/data/graph.json` | §5 |
-| 手書きのページの生成部分 | `<!-- gen:begin 名前 -->` 〜 `<!-- gen:end 名前 -->` の間：逆引き辞典（constraint・phrase・shape）、ロードマップの列（色ごとに前提の順の1本の列。上位の節を含む）、位置ごとの頻出手法（recent-abc.yaml から）、問題 → ページ・最近の ABC → ページの表、Library Checker の対応表（verify から）、用語の索引（題名・別名・acl から） |
+| 手書きのページの生成部分 | `<!-- gen:begin 名前 -->` 〜 `<!-- gen:end 名前 -->` の間：逆引き辞典（constraint・phrase・shape）、ロードマップの列（色ごとに前提の順の1本の列。上位の節を含む）、位置ごとの頻出手法（recent-abc.yaml から）、問題 → ページ・最近の ABC → ページの表、問題番号の索引（`guide/problem-index.md`。本文に載せた全問題を ABC・ARC・AGC・問題集・そのほかに分けて回の順に並べ、1 行は「表示名 → ページ（役割）」。例題のページが先。工程11、#6）、ホームの目的別の入口（工程11、#7）、Library Checker の対応表（verify から）、用語の索引（題名・別名・acl から） |
 
 ## 9. コード片
 

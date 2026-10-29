@@ -28,7 +28,7 @@ sections:
   - {title: シミュレーションを速く進める（ずれ・反転は全体への操作を変数で持つページへ）, anchor: simulation-speedup}
   - {title: ダブリング・行列累乗との使い分け, anchor: vs-doubling}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -70,6 +70,9 @@ $K < \mu$ のときは記録した列をそのまま読む。$K \ge \mu$ のと�
 ```cpp
 --8<-- "periodicity/rho.cpp:core"
 ```
+
+完全なプログラム：[`rho.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/periodicity/rho.cpp)（GitHub）
+{ .kp-code-src }
 
 ??? question "確認問題：何回で周期が見つかるか"
     状態が $10^5$ 種類のとき、$\mathrm{first}$ に記録しながら進めるループは最大で何回まわるか。
@@ -118,13 +121,16 @@ $$
 f(X) = \left\lfloor \frac{X}{P} \right\rfloor c_P + c_{X \bmod P}, \qquad [L, R) \text{ の黒の数} = f(R) - f(L)
 $$
 
-![周期 4 の模様（黒・白・黒・黒）で [0, 10) を数えると、1 周期の黒 3 が 2 回と、余り 2 マスの黒 1 で、合計 7](../img/periodicity/period-count.svg)
+![周期 4 の模様（黒・白・黒・黒）で \[0, 10) を数えると、1 周期の黒 3 が 2 回と、余り 2 マスの黒 1 で、合計 7](../img/periodicity/period-count.svg)
 
 範囲を $f(R) - f(L)$ に分けると、両端がずれた半端な区間を場合分けせずに済む。$L$ が負でも、$\lfloor \cdot \rfloor$ と $0 \le X \bmod P < P$ の約束で計算すれば同じ式でよい。C++ の `/` と `%` は 0 の方向へ丸めるので、負の数では[整数の割り算](../math/integer-division.md)の floor を自分で書く。あるいは $P$ の倍数を全体に足して非負にずらす。
 
 ```cpp
 --8<-- "periodicity/period-count.cpp:core"
 ```
+
+完全なプログラム：[`period-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/periodicity/period-count.cpp)（GitHub）
+{ .kp-code-src }
 
 - **2 次元の盤面**：模様が縦 $P$・横 $Q$ の周期で敷き詰められているなら、同じ考え方を両方向に使う。長方形 $[0, X) \times [0, Y)$ を、完全な周期の塊・端の帯・角の余りに分け、1 周期分の[2 次元累積和](../basics/prefix-sum-2d.md)で数える。任意の長方形は 4 つの $f$ の足し引きにする
 - **面積が半端な模様**：三角形の模様などで面積が 0.5 単位になるなら、2 倍した面積を整数で数え、最後に 2 で割る（問題が面積の 2 倍を答えさせるなら割らない）
@@ -197,7 +203,7 @@ $K$ 回の遷移を速く進める手法は 3 つあり、遷移の形と問い�
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC106 C. To Infinity](https://atcoder.jp/contests/abc106/tasks/abc106_c)（diff 441）：1〜9 の数字列に「各数字 d を d 個並べる」置換を 5000 兆回行った後の、K 文字目を求める。
-- [典型90 058. Original Calculator（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_bf)（diff —）：各桁の和を足す操作を K 回行った後の値を求める。
+- [典型90 058. Original Calculator（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_bf)（diff なし）：各桁の和を足す操作を K 回行った後の値を求める。
 - [ABC354 D. AtCoder Wallpaper](https://atcoder.jp/contests/abc354/tasks/abc354_d)（diff 1259）：無限に続く白黒の模様のうち、長方形の範囲にある黒い部分の面積を求める。
 - [ABC452 E. You WILL Like Sigma Problem](https://atcoder.jp/contests/abc452/tasks/abc452_e)（diff 1318）：長さ N の数列 A と長さ M の数列 B について、すべての組 (i, j) の A_i × B_j × (i mod j) の和を 998244353 で割った余りを求める。
 

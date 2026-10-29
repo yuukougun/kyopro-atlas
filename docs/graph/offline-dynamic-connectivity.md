@@ -23,7 +23,7 @@ sections:
   - {title: DFS で入るときに併合・出るときに取り消す（ロールバック Union-Find はデータ構造の章）, anchor: dfs-rollback}
   - {title: 自作するときの要点と Library Checker, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -48,7 +48,7 @@ updated: 2026-10-22
 
 時刻を葉とするセグメント木を考え、各辺の区間を、それをちょうど覆う $O(\log Q)$ 個のノードに載せる。載せ方はセグメント木の区間取得と同じ分け方である（[なぜ O(log N) か](../ds/segment-tree.md#complexity)）。次の図は、葉が 8 個の木に、時刻 $[1, 6)$ に存在する辺 $e$ を載せた様子である。
 
-![時刻 0 から 7 を葉とするセグメント木。辺 e の存在する時刻 [1, 6) は、葉 [1, 2) と、ノード [2, 4)・[4, 6) の 3 個にちょうど分かれ、その 3 個にだけ e を載せる](../img/offline-dynamic-connectivity/time-segment-tree.svg)
+![時刻 0 から 7 を葉とするセグメント木。辺 e の存在する時刻 \[1, 6) は、葉 \[1, 2) と、ノード \[2, 4)・\[4, 6) の 3 個にちょうど分かれ、その 3 個にだけ e を載せる](../img/offline-dynamic-connectivity/time-segment-tree.svg)
 
 こう載せると、次のことが成り立つ。
 
@@ -81,17 +81,23 @@ dfs(node):
 - ノードの数は $O(Q)$、葉での質問は $Q$ 回以下で、1 回 $O(\log N)$ である。
 - 合わせて時間 $O(N + Q \log Q \log N)$ になる。ノードに載せた辺のメモリは $O(Q \log Q)$ である。
 
-次のコード片は、時刻の区間に辺を載せる関数と DFS である（完全なプログラムは `snippets/offline-dynamic-connectivity/usage.cpp`。ロールバックできる Union-Find も同じファイルにある）。
+次のコード片は、時刻の区間に辺を載せる関数と DFS である（完全なプログラムは [`snippets/offline-dynamic-connectivity/usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/offline-dynamic-connectivity/usage.cpp)。ロールバックできる Union-Find も同じファイルにある）。
 
 ```cpp
 --8<-- "offline-dynamic-connectivity/usage.cpp:core"
 ```
 
-クエリを読んで辺の区間を作り、葉で答える部分は次のようになる。
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/offline-dynamic-connectivity/usage.cpp)（GitHub）
+{ .kp-code-src }
+
+クエリを読んで辺の区間を作り、葉で答える部分は次のようになる。クエリは「0 u v」（辺の追加）・「1 u v」（辺の削除）・「2 u v」（連結か）・「3」（連結成分の数）の 4 種類とし、頂点は 1-indexed で読んで直後に 1 を引く。
 
 ```cpp
 --8<-- "offline-dynamic-connectivity/usage.cpp:usage"
 ```
+
+完全なプログラム：[`usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/offline-dynamic-connectivity/usage.cpp)（GitHub）
+{ .kp-code-src }
 
 時刻の約束や取り消しの回数など、自作するときの注意は[自作するときの要点](#library)にまとめた。
 
@@ -119,7 +125,7 @@ Library Checker の Dynamic Graph Vertex Add Component Sum（[練習問題](#pra
 
 ## 学ぶための資料 {#resources}
 
-- cp-algorithms の「Deleting from a data structure in O(T(n) log n)」（英語）：時間軸のセグメント木に要素を載せて削除を取り消しに置き換える一般の枠組みと、動的連結性への適用
+- [cp-algorithms「Deleting from a data structure in O(T(n) log n)」](https://cp-algorithms.com/data_structures/deleting_in_log_n.html)（英語）：時間軸のセグメント木に要素を載せて削除を取り消しに置き換える一般の枠組みと、動的連結性への適用
 - [ロールバックできる Union-Find](../ds/rollback-union-find.md)：取り消しのできる Union-Find の作り方と、この方法での使い方
 
 ## 例題 {#examples}

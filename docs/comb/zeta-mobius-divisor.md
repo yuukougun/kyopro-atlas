@@ -25,7 +25,7 @@ sections:
   - {title: GCD 畳み込み・LCM 畳み込み, anchor: gcd-lcm-convolution}
   - {title: 部分集合のゼータ変換との対応（指数ベクトルの累積和）, anchor: vs-subset}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -86,6 +86,9 @@ $i$ を小さい順に回すので、$v[ip]$ に足すときの $v[i]$ は、同
 --8<-- "zeta-mobius-divisor/transforms.cpp:multiple"
 ```
 
+完全なプログラム：[`transforms.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/zeta-mobius-divisor/transforms.cpp)（GitHub）
+{ .kp-code-src }
+
 **計算量**：素数 $p$ の段は $\lfloor N/p \rfloor$ 回なので、全体で $\sum_{p \le N} N/p = O(N \log \log N)$ である（素数の逆数和。[エラトステネスの篩](../math/sieve-eratosthenes.md#complexity)と同じ見積もり）。$N = 10^6$ では約 $2.9 \times 10^6$ 回で、素朴な方法の 5 分の 1 ほどになる（[調和級数との比較](../math/harmonic-sum.md#vs-sieve)）。素数の表は篩で作り、これも $O(N \log \log N)$ である。
 
 **応用の型**：
@@ -141,6 +144,9 @@ LCM 畳み込み $h(m) = \sum_{\operatorname{lcm}(i, j) = m} a_i b_j$ も同じ�
 ```cpp
 --8<-- "zeta-mobius-divisor/transforms.cpp:convolution"
 ```
+
+完全なプログラム：[`transforms.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/zeta-mobius-divisor/transforms.cpp)（GitHub）
+{ .kp-code-src }
 
 [畳み込み](../math/convolution-ntt.md)（FFT・NTT）が添字の和 $i + j$ を扱うのと同じく、変換して各点で掛けて戻す。添字の演算が gcd・lcm に変わり、変換が約数・倍数のゼータに変わったものである（XOR は[アダマール変換](../math/hadamard-transform.md#index-operations)、OR・AND は[部分集合のゼータ変換](../comb/zeta-mobius-subset.md)）。
 
@@ -204,12 +210,15 @@ $\{1, \dots, N\}$ は指数の組の「箱」にはならない（$2^{19} \le N$
     --8<-- "zeta-mobius-divisor/increment-divisors.cpp:core"
     ```
 
+    完全なプログラム：[`increment-divisors.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/zeta-mobius-divisor/increment-divisors.cpp)（GitHub）
+    { .kp-code-src }
+
 ## 練習問題 {#practice}
 
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC393 E. GCD of Subset](https://atcoder.jp/contests/abc393/tasks/abc393_e)（diff 1253）：長さ N の列 A の各 i について、A_i を含む K 個の要素を選んだときの gcd の最大値を求める。
-- [YAHOO-PROCON2018-FINAL A. Uncommon](https://atcoder.jp/contests/yahoo-procon2018-final/tasks/yahoo_procon2018_final_a)（diff —）：相異なる N 個の整数 a_1, …, a_N（値は 10^5 以下）と M が与えられ、i = 1, …, M のそれぞれについて i と互いに素な a_j の個数を求める。
+- [YAHOO-PROCON2018-FINAL A. Uncommon](https://atcoder.jp/contests/yahoo-procon2018-final/tasks/yahoo_procon2018_final_a)（diff なし）：相異なる N 個の整数 a_1, …, a_N（値は 10^5 以下）と M が与えられ、i = 1, …, M のそれぞれについて i と互いに素な a_j の個数を求める。
 
 </div>
 

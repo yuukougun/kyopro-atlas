@@ -16,6 +16,7 @@
 | 8 | 本制作 | 完了（2026-10-22。8a 骨格・8b 本文。全 353 ページが draft） | [batches/b1/STATE.md](batches/b1/STATE.md) |
 | 9 | スキル作成 | 完了（2026-10-22） | .claude/skills/record-problem・claude/（解説の手順 v1） |
 | 10 | 全体の検証 | 完了（2026-10-22。2巡。全353ページを reviewed に） | [batches/s10/](batches/s10/)（audit-*.md・fixed-*.md・left-*.md） |
+| 11 | Issue の対応 | 進行中（2026-10-29〜。調査で作った Issue #4〜#77 と #1・#2 を、似た Issue ごとのブランチと pull request で直す） | [batches/fix/](batches/fix/README.md)（グループの表・担当への指示・報告） |
 
 ## 工程2：調査
 
@@ -96,13 +97,14 @@
 
 1. ~~ユーザーに試作を見てもらい、見本の2枚を決める~~ 完了（見本は basics/binary-search-answer と ds/lazy-segment-tree。C++ は cpp/cpp-views-basics）
 2. ~~9b：claude.ai の実機確認~~ 完了（2026-10-21）：新しい Projects で、索引からのページ・節の URL、atcoder.jp を開かない、開催中のコンテストを断る、ファイルを変更しない、記録用まとめ、のすべてをユーザーが確認した
-3. 工程8b（本文）：完了（2026-10-22。全 353 ページが draft。b1 基礎・水 173、b2 青 46、b3 黄 35、b4 発展の概要 50、b5 横断 33）。動く図は置き場のあった19個すべてを作成・検証・直し（batches/viz/）。残りと次の順：
+3. 工程8b（本文）：完了（2026-10-22。全 353 ページが draft。b1 基礎・水 173、b2 青 46、b3 黄 35、b4 発展の概要 50、b5 横断 33）。動く図は置き場のあった19個すべてを作成・検証・直し（batches/viz/。置き場だけで JS のなかった 4 つは工程11 の #51 で作り、計 25 個）。残りと次の順：
    1. ~~b2・b3 の提案の反映~~ 完了（2026-10-22。台帳・用語集117語・手引き §15。方針は batches/b3/decisions.md）
    2. ~~節へのリンクの張り替え~~ 完了（2026-10-22。324か所。相手がまだ stub だったものは 2 回目の張り替えで済み）
    3. ~~発展の概要50ページ（b4）と横断ページ33（b5）~~ 完了（2026-10-22。全353ページが draft）。b4・b5 の提案の反映（手引き §16、batches/b5/decisions.md）と2回目のリンクの張り替え（326か所）も完了
    4. ~~問題の補充~~ 完了（2026-10-22。練習0〜1問の52ページに116行、新しい問題51。batches/b6/）。9c（解説手順の確定）も完了（2026-10-22。claude/ の v1。ユーザーが Project instructions を貼り直す）。残りは下の「工程10：全体の検証」へ移した
 4. ~~工程10（全体の検証）~~ 完了（2026-10-22。全353ページが reviewed）
 5. ユーザーがページに目を通し、よければ stage を done にする。直したい点はメインが手引きと照らして直す
+6. 工程11（Issue の対応）：GitHub の Issue をグループに分けて直している。グループと状態は [batches/fix/README.md](batches/fix/README.md)、決定は decisions.md の 2026-10-29 の節
    - 並列の進め方：ワークフローの args はページの front matter から機械的に作り、expect（件数）を渡す。commit は動いている担当と混ざらないよう、別の作業ツリー（git worktree）でその分だけを生成・検査してから行うか、すべて止めてから行う。ビルドの確認は `mkdocs build --strict` に -q を付けない
 
 ## 工程10：全体の検証（完了 2026-10-22）
@@ -111,7 +113,7 @@
 - 2巡目：残り（left-*.md）へのメインの判断（batches/s10/decisions.md・手引き §17）→ 直し（fixed2-*.md）→ 検証（verify2-*.md）。tools/frequency.py・tools/check_svg.py・check_pages の構造と出典の題名の警告を足した
 - 全353ページの stage を reviewed にした。done はユーザーが目を通してから付ける
 - 残り（急がない）：
-  - trap.jp の 4 か所（cpp-environment・cpp-macros-template-file・static-top-tree）：2026-10-22 はサイトが 503 で noai を確かめられなかった。時間を置いて tools/check_noai.py で確かめ、付録 B に記録する
+  - ~~trap.jp の 4 か所~~ 済み（2026-10-29 に check_noai で記事 3 本とも noai なしを確かめ、付録 B に記録した）
   - 台帳の未確認 3 問（abc458_e・abc479_d・abc479_e）：第三者の解説が見つかれば確かめてページに足す。ABC193 E（floor-sum の練習の候補）も同じ
   - 用語の索引の漢字の読み（五十音順にするか。tools/README.md にも記録）
   - 幅 400 を超える図 120 枚（文字は 360px で 9px 以上なので急がない）、端から 10px 未満の文字の図 154 枚

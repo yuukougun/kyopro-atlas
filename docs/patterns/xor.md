@@ -8,7 +8,7 @@ order: 70
 level: null
 kind: [案内, ビット演算, 線形代数・行列]
 prerequisites: [bit-operations]
-related: [bitwise-independence, prefix-sum, fenwick-tree, tree-distance, binary-trie, xor-basis, digit-dp, two-pointers, meet-in-the-middle, nim, grundy-number, hashing-for-sets, hadamard-transform]
+related: [bitwise-independence, prefix-sum, fenwick-tree, tree-distance, binary-trie, xor-basis, digit-dp, two-pointers, meet-in-the-middle, nim, grundy-number, hashing-for-sets, hadamard-transform, kmp]
 summary: XOR が出てくる問題で、問われ方から使う手法を引ける。桁ごとに独立で、同じ値どうしで打ち消し合う、という 2 つの性質から、桁ごとの数え上げ・累積 XOR・XOR 基底・Binary Trie・Nim・集合のハッシュへつなぐ。
 complexity: null
 signs:
@@ -33,8 +33,9 @@ sections:
   - {title: '石取りゲーム → Nim・Grundy 数（nim, grundy-number）', anchor: games}
   - {title: 2 つの集合が一致するか → 乱数の XOR によるハッシュ（hashing-for-sets）, anchor: set-hash}
   - {title: 添字の XOR で畳み込む → アダマール変換（hadamard-transform）, anchor: xor-convolution}
+  - {title: 列全体を同じ値で XOR したものを探す → 隣どうしの XOR の列で照合（kmp）, anchor: adjacent-xor}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -83,23 +84,23 @@ XOR の問題で使う性質は、次の 2 つと、そこから出る 2 つの�
 
 ## 問われ方と手法の一覧 {#overview}
 
-問題文の形から行を探し、手法のページへ進む。手法の後の括弧は、上の 2 つの性質と 2 つの見方のどれを主に使うかを示す（独立＝桁ごとに独立、打消＝同じ値で打ち消し合う、線形＝繰り上がりのない足し算、上位＝上の bit で大小が決まる）。
+問題文の形から行を探し、問われ方のリンクから行の節へ移る。節で使う性質を確かめてから、手法のページへ進む。手法の後の括弧は、上の 2 つの性質と 2 つの見方のどれを主に使うかを示す（独立＝桁ごとに独立、打消＝同じ値で打ち消し合う、線形＝繰り上がりのない足し算、上位＝上の bit で大小が決まる）。
 
 | よく出る問われ方 | 使う手法（性質） | ページ | 代表の問題 |
 |---|---|---|---|
-| 全ペア・全区間の XOR の和 | 桁ごとに 0 と 1 の個数を数える（独立） | [bit ごとに独立に考える](../basics/bitwise-independence.md#per-bit-contribution) | ABC147 D、ABC365 E |
-| 区間の XOR（更新あり・なし） | 累積 XOR、BIT（打消） | [累積和](../basics/prefix-sum.md)、[BIT](../ds/fenwick-tree.md#what-it-does) | ABC185 F |
-| 木のパスの XOR | 根からの XOR どうしの XOR（打消） | [木の距離](../tree/tree-distance.md#root-prefix) | ABC201 E、ARC045 C |
-| $x$ を選んで XOR の最大・最小、2 要素の XOR の最小 | 上の bit から決める、Binary Trie（上位） | [Binary Trie](../ds/binary-trie.md#xor-min-max) | ABC281 F、ABC308 G |
-| 選んだ XOR で作れる値・最大値・K 番目 | XOR 基底（線形） | [XOR 基底](../math/xor-basis.md) | ABC283 G、ABC236 F |
-| グラフのウォークの XOR の最小・最大 | 閉路の XOR を基底に入れる（打消・線形） | [XOR 基底](../math/xor-basis.md#xor-walk) | ABC451 G |
-| 上限 $K$ 以下で XOR の条件を満たす数 | 2 進の桁 DP（独立・上位） | [桁 DP](../dp/digit-dp.md#binary) | ABC117 D、ABC129 E |
-| XOR と和が等しい区間の数 | 尺取り法（独立） | [尺取り法](../basics/two-pointers.md#monotonicity) | ARC098 D |
-| 小さいグリッドの経路の XOR | 対角線で分ける半分全列挙（打消） | [半分全列挙](../basics/meet-in-the-middle.md#grid-diagonal) | ABC271 F |
-| 石取りゲームの勝敗 | Nim・Grundy 数（独立・偶奇） | [Nim](../comb/nim.md#bouton)、[Grundy 数](../comb/grundy-number.md#sum) | 鉄則本 A33・A34、ABC368 F |
-| 2 つの集合が一致するか | 乱数の XOR によるハッシュ（打消） | [集合のハッシュ](../string/hashing-for-sets.md#xor-vs-sum) | ABC250 E、ABC367 F |
-| 添字の XOR で畳み込む | アダマール変換（線形） | [アダマール変換](../math/hadamard-transform.md#transform) | ABC212 H |
-| 列全体を同じ値で XOR したものを探す | 隣どうしの XOR の列で照合（打消） | [KMP 法](../string/kmp.md#abc150_f) | ABC150 F |
+| [全ペア・全区間の XOR の和](#sum-of-xor) | 桁ごとに 0 と 1 の個数を数える（独立） | [bit ごとに独立に考える](../basics/bitwise-independence.md#per-bit-contribution) | ABC147 D、ABC365 E |
+| [区間の XOR（更新あり・なし）](#range-xor) | 累積 XOR、BIT（打消） | [累積和](../basics/prefix-sum.md)、[BIT](../ds/fenwick-tree.md#what-it-does) | ABC185 F |
+| [木のパスの XOR](#tree-path) | 根からの XOR どうしの XOR（打消） | [木の距離](../tree/tree-distance.md#root-prefix) | ABC201 E、ARC045 C |
+| [$x$ を選んで XOR の最大・最小、2 要素の XOR の最小](#choose-x) | 上の bit から決める、Binary Trie（上位） | [Binary Trie](../ds/binary-trie.md#xor-min-max) | ABC281 F、ABC308 G |
+| [選んだ XOR で作れる値・最大値・K 番目](#basis) | XOR 基底（線形） | [XOR 基底](../math/xor-basis.md) | ABC283 G、ABC236 F |
+| [グラフのウォークの XOR の最小・最大](#path-xor) | 閉路の XOR を基底に入れる（打消・線形） | [XOR 基底](../math/xor-basis.md#xor-walk) | ABC451 G |
+| [上限 $K$ 以下で XOR の条件を満たす数](#digit-dp) | 2 進の桁 DP（独立・上位） | [桁 DP](../dp/digit-dp.md#binary) | ABC117 D、ABC129 E |
+| [XOR と和が等しい区間の数](#xor-equals-sum) | 尺取り法（独立） | [尺取り法](../basics/two-pointers.md#monotonicity) | ARC098 D |
+| [小さいグリッドの経路の XOR](#meet-in-the-middle) | 対角線で分ける半分全列挙（打消） | [半分全列挙](../basics/meet-in-the-middle.md#grid-diagonal) | ABC271 F |
+| [石取りゲームの勝敗](#games) | Nim・Grundy 数（独立・偶奇） | [Nim](../comb/nim.md#bouton)、[Grundy 数](../comb/grundy-number.md#sum) | 鉄則本 A33・A34、ABC368 F |
+| [2 つの集合が一致するか](#set-hash) | 乱数の XOR によるハッシュ（打消） | [集合のハッシュ](../string/hashing-for-sets.md#xor-vs-sum) | ABC250 E、ABC367 F |
+| [添字の XOR で畳み込む](#xor-convolution) | アダマール変換（線形） | [XOR 畳み込み](../math/hadamard-transform.md#transform) | ABC212 H |
+| [列全体を同じ値で XOR したものを探す](#adjacent-xor) | 隣どうしの XOR の列で照合（打消） | [KMP 法](../string/kmp.md#abc150_f) | ABC150 F |
 
 代表の問題は行き先のページの例題・練習・力試しにあり、リンクは行の節から張った。このページに載せた問題は[例題](#examples)と[練習問題](#practice)の囲みにある。
 
@@ -190,6 +191,14 @@ $a + b = a \oplus b$ のような足し算との組み合わせは、「同じ b
 $c_k = \sum_{i \oplus j = k} a_i b_j$ の形の畳み込みは、長さ $2^n$ の配列なら、アダマール変換で $O(n 2^n)$ で計算できる。各 bit で $(x, y) \to (x + y, x - y)$ と変換すると、XOR の畳み込みが要素ごとの積になる（[アダマール変換と逆変換](../math/hadamard-transform.md#transform)）。同じ配列を何度も畳み込むなら、変換後の値を累乗すればよい。
 
 Nim の山の大きさの列のうち、XOR が 0 でないものを数える問題がこの形になる。代表は [ABC212 H](../math/hadamard-transform.md#abc212_h) である。
+
+## 列全体を同じ値で XOR したものを探す → 隣どうしの XOR の列で照合（kmp） {#adjacent-xor}
+
+列 $a$ を巡回シフトし、すべての要素を同じ値 $x$ で XOR して列 $b$ に一致させる、シフト量 $k$ と $x$ の組を探す形である。$k$ を決めれば $x = a_k \oplus b_0$ に決まる。しかし、$k$ ごとに $N$ 個を比べると $O(N^2)$ かかる。
+
+隣どうしの XOR を取ると $x$ が消える。$(a_i \oplus x) \oplus (a_{i+1} \oplus x) = a_i \oplus a_{i+1}$ で、$x$ が 2 回現れて打ち消し合うからである。そこで両方の列を、隣どうしの XOR の列 $a'$・$b'$ に直す（巡回シフトなので、末尾と先頭の組も入れる）。$a'$ を 2 周つないだ列の中で $b'$ の出現をすべて求めれば、一致させられるシフト量がすべて分かる。照合は KMP 法の[パターン照合](../string/kmp.md#matching)を整数の列に使えばよく、全体で $O(N)$ である。
+
+$b'$ が位置 $k$ から現れたら、$x = a_k \oplus b_0$ とする。先頭の 1 組がそろい、隣どうしの XOR も等しいので、残りの要素も順にそろう。巡回シフトでなく長い列の連続部分と一致させる問題でも、両方を隣どうしの XOR の列に直して照合すればよい。代表は [KMP 法の例題 ABC150 F](../string/kmp.md#abc150_f) である。
 
 ## 落とし穴 {#pitfalls}
 

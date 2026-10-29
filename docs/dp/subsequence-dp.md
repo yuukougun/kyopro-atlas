@@ -28,7 +28,7 @@ sections:
   - {title: 辞書順 K 番目の部分列（後ろからの個数で先頭から決める）, anchor: kth-subsequence}
   - {title: 条件付き・言い換えてから数える（隣り合う位置を選ばない・累積和の列・TT の形）, anchor: with-conditions}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -99,6 +99,9 @@ $S =$ `aba` で動かすと次の表になる。$\mathrm{nxt}[0] = (a{:}\,0,\ b{
 --8<-- "subsequence-dp/count.cpp:core"
 ```
 
+完全なプログラム：[`count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/subsequence-dp/count.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 **値の種類が多い列（貰う形）**。整数の列のように値の種類が多いと、$\mathrm{nxt}$ の表は作れない。そのときは $f[i]$ ＝「$a[0, i)$ の異なる部分列（空を含む）の数」を左から求める。$a[0, i+1)$ の部分列は、$a_i$ を使わないもの（$f[i]$ 個）と、$a[0, i)$ の部分列 $X$ の末尾に $a_i$ を付けたもの（$f[i]$ 個）に分かれる。ただし $X a_i$ が $a[0, i)$ の部分列でもあれば、前者と重なる。$a_i$ の直前の出現位置を $l$ とすると、[貪欲な照合](../string/subsequence-matching.md#greedy-matching)により、重なるのは $X$ が $a[0, l)$ の部分列のとき、すなわち $f[l]$ 個である。
 
 $$
@@ -110,6 +113,9 @@ $$
 ```cpp
 --8<-- "subsequence-dp/count.cpp:prev"
 ```
+
+完全なプログラム：[`count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/subsequence-dp/count.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 この式は配る DP と同じものを数えている。$\mathrm{dp}$ で言えば、位置 $i$ で終わる部分列は「直前に使った位置が $l$ 以上」のものに限られる。$l$ より前で終わる部分列から $a_i$ に飛ぶと、$l$ で取る方が左だからである。その数は $a[l, i)$ のどこかで終わるもの（$l$ がなければ空も含む）で $f[i] - f[l]$ 個になり、$a_i$ を使わない $f[i]$ 個と足して $2 f[i] - f[l]$ になる。
 
@@ -129,6 +135,9 @@ $S$ の部分列にならない文字列のうち最短のもの、その中で�
 ```cpp
 --8<-- "subsequence-dp/shortest.cpp:core"
 ```
+
+完全なプログラム：[`shortest.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/subsequence-dp/shortest.cpp)（GitHub）
+{ .kp-code-src }
 
 長さだけなら表なしでも分かる。$\mathrm{len}[i]$ は $i$ について広義単調減少なので、最小は最も遠くへ進む文字で達成される。だから $S$ を前から「すべての文字が 1 回以上現れたら区切る」と区切っていき、区切れた区間の個数に 1 を足した値が最短の長さである。辞書順最小の答えを作るには、上の表と復元が要る。
 
@@ -155,6 +164,9 @@ $$
 ```cpp
 --8<-- "subsequence-dp/kth.cpp:core"
 ```
+
+完全なプログラム：[`kth.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/subsequence-dp/kth.cpp)（GitHub）
+{ .kp-code-src }
 
 最初に $\mathrm{cnt}[0] - 1 < K$ なら、$K$ 番目は存在しない。計算量は表の構築と DP が $O(\sigma N)$、決める段階が答えの長さ × $\sigma$ である。
 
@@ -209,6 +221,9 @@ $$
     --8<-- "subsequence-dp/nonadjacent.cpp:core"
     ```
 
+    完全なプログラム：[`nonadjacent.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/subsequence-dp/nonadjacent.cpp)（GitHub）。`mint` は ACL の `modint1000000007`（[modint](../math/modint.md)）。
+    { .kp-code-src }
+
 ### ABC230 F. Predilection {#abc230_f}
 
 <div class="kp-problems" data-role="example" markdown>
@@ -230,7 +245,7 @@ $$
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [典型90 006. Smallest Subsequence（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_f)（diff —）：文字列の長さ K の部分列のうち、辞書順最小のものを求める。
+- [典型90 006. Smallest Subsequence（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_f)（diff なし）：文字列の長さ K の部分列のうち、辞書順最小のものを求める。
 - [ARC081 E. Don't Be a Subsequence](https://atcoder.jp/contests/arc081/tasks/arc081_c)（diff 2072）：文字列 A の部分列として現れない最短の文字列のうち、辞書順最小のものを求める。
 - [ABC299 F. Square Subsequence](https://atcoder.jp/contests/abc299/tasks/abc299_f)（diff 2349）：文字列 S の部分列として TT（空でない文字列 T を 2 回並べたもの）が現れるような T の種類数を求める。
 
@@ -245,7 +260,7 @@ $$
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [TDPC G. 辞書順](https://atcoder.jp/contests/tdpc/tasks/tdpc_lexicographical)（diff —）：文字列の空でない異なる部分列のうち、辞書順で K 番目のものを求める。
+- [TDPC G. 辞書順](https://atcoder.jp/contests/tdpc/tasks/tdpc_lexicographical)（diff なし）：文字列の空でない異なる部分列のうち、辞書順で K 番目のものを求める。
 
 </div>
 

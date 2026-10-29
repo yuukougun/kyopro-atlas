@@ -27,7 +27,7 @@ sections:
   - {title: 置換の K 回合成, anchor: permutation-power}
   - {title: 段数とメモリの見積もり, anchor: memory}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -72,6 +72,9 @@ $K$ 回進んだ先は、$K$ を 2 進展開して $K = 2^{k_1} + 2^{k_2} + \cdo
 --8<-- "doubling/kth-next.cpp:core"
 ```
 
+完全なプログラム：[`kth-next.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/doubling/kth-next.cpp)（GitHub）
+{ .kp-code-src }
+
 桁の判定は `K >> k & 1` と書く。`1 << k` と書くと `int` のシフトになり、$k \ge 31$ で壊れる（[bit 演算の落とし穴](../basics/bit-operations.md#pitfalls)）。
 
 ??? question "確認問題：何段必要か"
@@ -100,6 +103,9 @@ $$
 --8<-- "doubling/sum-table.cpp:core"
 ```
 
+完全なプログラム：[`sum-table.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/doubling/sum-table.cpp)（GitHub）
+{ .kp-code-src }
+
 両端を含む閉区間で持つと、つなぎ目の状態（時刻 $2^k$）を前半と後半の両方で数えてしまう。最小値・最大値なら、同じ値を 2 回見ても結果が変わらないので害はない。一方、和や個数では二重に数える。半開で持てば、和と最小値のどちらも同じ形で書ける。
 
 持てる値は、和・最小値・最大値のように[結合法則](../guide/glossary.md#associativity)を満たす演算で 2 つの区間の値をまとめられるものである。アフィン変換の合成のように順序で結果が変わる演算も持てるが、そのときは「先に通る区間」と「後に通る区間」の順に合わせる。表を作るときは $\mathrm{sum}[k][v]$ が前、$\mathrm{sum}[k][\mathrm{nxt}[k][v]]$ が後である。問い合わせでは、ここまでの累積の後ろに今の跳躍の値をつなぐ。跳ぶ順番が下の桁からでも上の桁からでも、跳躍は道の順に並ぶので結果は同じになる。
@@ -120,6 +126,9 @@ $$
 --8<-- "doubling/max-steps.cpp:core"
 ```
 
+完全なプログラム：[`max-steps.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/doubling/max-steps.cpp)（GitHub）
+{ .kp-code-src }
+
 これは答えの $t$ を 2 進表記で上の桁から決めていることにあたる。条件を満たす最大の回数を $t^*$ とする。段 $k$ に来たとき、ここまでに跳んだ回数 $t$ は $t^*$ の $k$ より上の桁と一致している（不変条件）。
 
 - $t + 2^k \le t^*$ なら、単調性から $t + 2^k$ 回でも条件を満たすので跳ぶ。$t^*$ の桁 $k$ は 1 である
@@ -138,6 +147,9 @@ $$
 ```cpp
 --8<-- "doubling/func-power.cpp:core"
 ```
+
+完全なプログラム：[`func-power.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/doubling/func-power.cpp)（GitHub）
+{ .kp-code-src }
 
 この書き方は $X$ が置換（全単射）でなくても使える。写像の合成は結合法則を満たし、同じ写像のべき乗どうしは順序を入れ替えても結果が変わらないからである。置換なら別の解き方もある。置換は互いに素な巡回に分かれるので、長さ $\ell$ の巡回の上では $K \bmod \ell$ 回だけ進めばよく、全体を $O(N)$ で求められる（[Functional graph](../graph/functional-graph.md)）。
 
@@ -228,7 +240,7 @@ $$
 
 - [ABC367 E. Permute K times](https://atcoder.jp/contests/abc367/tasks/abc367_e)（diff 1370）：各 i について B_i = A_{X_i} とする操作を K ≤ 10^18 回行った後の数列を求める。
 - [ABC258 E. Packing Potatoes](https://atcoder.jp/contests/abc258/tasks/abc258_e)（diff 1545）：じゃがいもを順に箱に詰めていくとき、K 個目の箱に入るじゃがいもの数を答えるクエリに答える。
-- [ABC013 D. 阿弥陀](https://atcoder.jp/contests/abc013/tasks/abc013_4)（diff 1730）：あみだくじを D 回つなげたときの、各縦線の行き先を求める。
+- [ABC013 D. 阿弥陀](https://atcoder.jp/contests/abc013/tasks/abc013_4)（diff 1730・参考値）：あみだくじを D 回つなげたときの、各縦線の行き先を求める。
 
 </div>
 

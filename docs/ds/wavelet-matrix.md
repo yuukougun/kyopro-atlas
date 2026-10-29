@@ -24,7 +24,7 @@ sections:
   - {title: 段の作り方（上位 bit から安定に振り分ける）, anchor: build}
   - {title: ライブラリでの使い方と、マージソート木・永続セグメント木との比較, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -89,11 +89,14 @@ Wavelet Matrix は、値の bit 数 $L$ と同じ数の段からなる。段 $0$
 - **メモリ**：$\mathrm{zero}_d$ を `int` の配列で持つと $4 N L$ バイトほどで、$N = 2 \times 10^5$、$L = 18$ なら 15 MB ほどである。和の累積は `long long` で段が $L + 1$ 本要る。bit 列を 64 bit ごとにまとめ、ブロックごとの累積と popcount で $\mathrm{zero}_d$ を求めれば、64 bit ごとに 32 bit の累積を持っても 1 要素あたり 1.5 bit で、メモリは 1/20 ほどになる（簡潔ビットベクトル）。
 - **点の値の変更**：値が変わる更新はできない。値を変えずに重みだけを変えるなら、累積和の代わりに各段へ BIT を置けば $O(\log \sigma \log N)$ で対応できる（[マージソート木の各段の BIT](../ds/merge-sort-tree.md#bit-per-level) と同じ考え）。
 
-K 番目と x 未満の個数・和を答える部分は次のようになる。`zero[d][i]` が $\mathrm{zero}_d(i)$、`nz[d]` が $Z_d$、`sum[d][i]` が段 $d$ の並びの先頭 $i$ 個の値の和である（段を作る部分を含めた完全なプログラムは `snippets/wavelet-matrix/wm.cpp`。累積を `int` の配列で持つ素朴な版）。
+K 番目と x 未満の個数・和を答える部分は次のようになる。`zero[d][i]` が $\mathrm{zero}_d(i)$、`nz[d]` が $Z_d$、`sum[d][i]` が段 $d$ の並びの先頭 $i$ 個の値の和である（段を作る部分を含めた完全なプログラムは [`snippets/wavelet-matrix/wm.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/wavelet-matrix/wm.cpp)。累積を `int` の配列で持つ素朴な版）。
 
 ```cpp
 --8<-- "wavelet-matrix/wm.cpp:core"
 ```
+
+完全なプログラム：[`wm.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/wavelet-matrix/wm.cpp)（GitHub）
+{ .kp-code-src }
 
 ## ライブラリでの使い方と、マージソート木・永続セグメント木との比較 {#library}
 
@@ -118,9 +121,9 @@ ACL には Wavelet Matrix がない。自作するなら、上のコード片か
 
 ## 学ぶための資料 {#resources}
 
-- convexineq 氏の Qiita の記事：マージソート木・Fractional Cascading・Wavelet Tree・Wavelet Matrix を 1 つの流れで説明しており、Wavelet Matrix が「段ごとの並びにまとめたマージソート木」であることが分かる。
-- miti-7 氏のブログの記事：K 番目・範囲の個数・前後の値・頻度の上位など、Wavelet Matrix でできる操作を図付きで一覧にしている。
-- ei1333 氏の Luzhiled's Library：座標圧縮を含めた版の実装と、各操作の計算量。
+- [convexineq「Merge sort tree, fractional cascading, 領域木、wavelet tree, wavelet matrix をまとめて理解するお得な記事」](https://qiita.com/convexineq/items/70f36585ae76f70e3abf)（Qiita）：マージソート木・Fractional Cascading・Wavelet Tree・Wavelet Matrix を 1 つの流れで説明しており、Wavelet Matrix が「段ごとの並びにまとめたマージソート木」であることが分かる。
+- [miti-7「ウェーブレット行列(wavelet matrix)」](https://miti-7.hatenablog.com/entry/2018/04/28/152259)：K 番目・範囲の個数・前後の値・頻度の上位など、Wavelet Matrix でできる操作を図付きで一覧にしている。
+- [ei1333「Wavelet Matrix (ウェーブレット行列)」](https://ei1333.github.io/library/structure/wavelet/wavelet-matrix.hpp)（Luzhiled's Library）：座標圧縮を含めた版の実装と、各操作の計算量。
 
 ## 例題 {#examples}
 

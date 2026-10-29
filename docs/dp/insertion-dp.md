@@ -27,7 +27,7 @@ sections:
   - {title: 箱根駅伝 DP（相手が未定の位置と値の数を持つ）, anchor: hakone-ekiden-dp}
   - {title: 連結成分 DP（ブロックを作る・端に付ける・つなぐ）, anchor: connected-component-dp, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -84,6 +84,9 @@ $$
 --8<-- "insertion-dp/relative-rank.cpp:core"
 ```
 
+完全なプログラム：[`relative-rank.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/insertion-dp/relative-rank.cpp)（GitHub）
+{ .kp-code-src }
+
 - **範囲の取り違えに注意する**：$j$ と $k$ の不等号に等号が付くのは「$>$」の側（$j \ge k$）である。「$<$」の側は $j < k$ で、$k = 0$ のときは和が空で 0 になる。等号の位置は「順位 $k$ 以上が 1 つ上にずれる」から導く
 - **段ごとに長さが変わる**：$i$ 段目の表の長さは $i$ である。全体を $N \times N$ の表にしてもよいが、使わないマスは 0 のままにしておく
 
@@ -110,6 +113,9 @@ $$
 ```cpp
 --8<-- "insertion-dp/ascents.cpp:core"
 ```
+
+完全なプログラム：[`ascents.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/insertion-dp/ascents.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 $N = 3$ なら $(1, 4, 1)$ で、増える所が 0 個の順列は $(3, 2, 1)$ だけ、2 個は $(1, 2, 3)$ だけ、1 個は残りの 4 通りである。
 
@@ -150,6 +156,9 @@ $\lvert p_i - i \rvert$ の和は、次のように隙間ごとの寄与に分�
 --8<-- "insertion-dp/hakone.cpp:core"
 ```
 
+完全なプログラム：[`hakone.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/insertion-dp/hakone.cpp)（GitHub）
+{ .kp-code-src }
+
 - **奇数の和はない**：毎回 $2d'$ を足すので、$\sum \lvert p_i - i \rvert$ は必ず偶数である。$K$ が奇数なら答えは 0 になる
 - **応用の型**：「すべての $i$ で $\lvert p_i - i \rvert \ge X$」のような禁止の条件は、条件を破る位置を選ぶ[包除 DP](../comb/inclusion-exclusion-dp.md)と組み合わせる（[練習](#practice)の ABC309 G）
 
@@ -186,7 +195,7 @@ AtCoder の ABC での出題は確かめられなかった。USACO Guide の DP 
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC T. Permutation](https://atcoder.jp/contests/dp/tasks/dp_t)（diff —）：隣り合う要素の大小関係（< と >）が文字列で指定されたとき、それを満たす 1〜N の順列の個数を求める。
+- [EDPC T. Permutation](https://atcoder.jp/contests/dp/tasks/dp_t)（diff なし）：隣り合う要素の大小関係（< と >）が文字列で指定されたとき、それを満たす 1〜N の順列の個数を求める。
 
 </div>
 
@@ -234,7 +243,7 @@ AtCoder の ABC での出題は確かめられなかった。USACO Guide の DP 
 
 - [ABC468 G. Restricted Permutation](https://atcoder.jp/contests/abc468/tasks/abc468_g)（diff 1975）：o と x からなる長さ N の文字列 S について、各 k で「1〜k が連続して並ぶ」かどうかが S_k と一致する、1〜N の順列の数を求める。
 - [ABC309 G. Ban Permutation](https://atcoder.jp/contests/abc309/tasks/abc309_g)（diff 2372）：すべての i で |P_i − i| ≥ X となる 1〜N の順列 P の数を求める。
-- [TDPC O. 文字列](https://atcoder.jp/contests/tdpc/tasks/tdpc_string)（diff —）：各文字の個数が決まった文字を並べる方法のうち、同じ文字が隣り合わないものの個数を求める。
+- [TDPC O. 文字列](https://atcoder.jp/contests/tdpc/tasks/tdpc_string)（diff なし）：各文字の個数が決まった文字を並べる方法のうち、同じ文字が隣り合わないものの個数を求める。
 - [EXAWIZARDS2019 D. Modulo Operations](https://atcoder.jp/contests/exawizards2019/tasks/exawizards2019_d)（diff 2075）：N 個の数を好きな順に使って x を x mod y で置き換えるとき、N! 通りの順番すべてについての最終的な値の和を求める。
 
 </div>

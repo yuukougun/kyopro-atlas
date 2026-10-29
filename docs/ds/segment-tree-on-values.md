@@ -8,8 +8,8 @@ chapter: 区間クエリ
 order: 200
 level: 水
 kind: [データ構造, 区間クエリ, ソート・座標圧縮]
-prerequisites: [segment-tree, coordinate-compression]
-related: [fenwick-tree, kth-element, top-k-multiset, dp-segment-tree, segment-tree-binary-search, offline-queries]
+prerequisites: [fenwick-tree, segment-tree, coordinate-compression]
+related: [kth-element, top-k-multiset, dp-segment-tree, segment-tree-binary-search, offline-queries]
 summary: 値（必要なら座標圧縮した値）を添字にした BIT・セグメント木に個数や和を載せ、「x 以下の個数・和」「上位 K 個の和」を O(log N) で求める。DP の「その値で終わる最良」も値の添字で持てる。
 complexity: 座標圧縮 O(M log M)（M は集めた値の個数）、値の追加・削除と x 以下の個数・和・小さい方から K 個の和はどれも O(log N)（N は値の種類数で N ≤ M）。動的セグメント木は 1 回 O(log C)（vector に足していくのでならし。reserve すれば最悪でも同じ）、ノード数 O(Q log C)（C は値域の幅）
 signs:
@@ -29,7 +29,7 @@ sections:
   - {title: 左の個数の偶奇で右の読み方が変わる量（ソート後の奇数番目の和）, anchor: odd-position-sum, level: 黄}
   - {title: 動的セグメント木（必要なノードだけ作る）, anchor: dynamic-segment-tree, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -41,7 +41,7 @@ updated: 2026-10-22
         - $\mathrm{dp}[v] = \max(\mathrm{dp}[v - D..v + D]) + 1$ のように、値の範囲から最大を取る遷移
         - 値が $10^9$ まで、$N, Q \le 2 \times 10^5$
     - **計算量**：座標圧縮は、集めた値の個数を $M$ として $O(M \log M)$。値の追加・削除、$x$ 以下の個数・和、小さい方から $K$ 個の和はどれも 1 回 $O(\log N)$（$N$ は値の種類数で $N \le M$。ならしではない）。先読みできないときの動的セグメント木は 1 回 $O(\log C)$（`vector` に足していくのでならし。先に `reserve` すれば最悪でも同じ）で、ノードは $O(Q \log C)$ 個（$C$ は値域の幅）
-    - **前提**：[セグメント木](../ds/segment-tree.md)、[座標圧縮](../basics/coordinate-compression.md)
+    - **前提**：[BIT（Fenwick Tree）](../ds/fenwick-tree.md)、[セグメント木](../ds/segment-tree.md)、[座標圧縮](../basics/coordinate-compression.md)
 
 <!-- textlint-disable -->
 別名：値域セグ木・権値線段樹・値を添字にするセグ木・動的セグ木・dynamic segment tree・sparse segment tree
@@ -84,6 +84,9 @@ updated: 2026-10-22
 --8<-- "segment-tree-on-values/count-sum.cpp:core"
 ```
 
+完全なプログラム：[`count-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-on-values/count-sum.cpp)（GitHub）
+{ .kp-code-src }
+
 ### 境界
 
 - 圧縮に入れた値は `lower_bound` で添字にしてよい。入れていない値（質問にだけ出る $x$ など）は、「以下」なら `upper_bound`、「未満」なら `lower_bound` で境界の位置にする
@@ -121,11 +124,14 @@ $\mathrm{dp}$ を値を添字にした区間 max のセグメント木に持て�
 2. $[0, r)$ の（個数 $c$, 和 $s$）を取る。値の小さい方から $c$ 個は丸ごと取れる
 3. $K = c$ なら答えは $s$ である。そうでなければ、足りない $K - c$ 個を境界の値 $\mathrm{vals}[r]$ から取り、答えは $s + (K - c) \cdot \mathrm{vals}[r]$ になる。$r = N$（$\mathrm{vals}[r]$ が配列の外）になるのは $c = K$ のときだけなので、$K = c$ を先に判定してから $\mathrm{vals}[r]$ を読む
 
-**なぜ正しいか**：$f$ は $r$ を増やすと true から false に一度だけ変わる（個数は減らない）。$r$ が最大なので、$[0, r]$ まで広げると個数が $K$ を超える。よって $K - c$ は添字 $r$ の個数より少なく、境界の値から取る個数として足りる。同じ値が複数あっても、どれを取っても和は同じなので、個数だけ分かればよい。図の例（多重集合 $\{1, 5, 5, 9, 10^9\}$、$K = 2$）では、$r = 1$、$(c, s) = (1, 1)$ で、答えは $1 + 1 \times 5 = 6$ になる。
+**なぜ正しいか**：$f$ は $r$ を増やすと true から false に一度だけ変わる（個数は減らない）。$r$ が最大なので、$[0, r + 1)$ まで広げると個数が $K$ を超える。よって $K - c$ は添字 $r$ の個数より少なく、境界の値から取る個数として足りる。同じ値が複数あっても、どれを取っても和は同じなので、個数だけ分かればよい。図の例（多重集合 $\{1, 5, 5, 9, 10^9\}$、$K = 2$）では、$r = 1$、$(c, s) = (1, 1)$ で、答えは $1 + 1 \times 5 = 6$ になる。
 
 ```cpp
 --8<-- "segment-tree-on-values/top-k.cpp:core"
 ```
+
+完全なプログラム：[`top-k.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-on-values/top-k.cpp)（GitHub）
+{ .kp-code-src }
 
 大きい方から $K$ 個の和は、全体の和から「小さい方から（全体の個数 $- K$）個の和」を引けば求まる。`min_left` で右から探してもよい。[BIT](../ds/fenwick-tree.md) を 2 本（個数と和）使い、[BIT 上の二分探索](../ds/fenwick-tree.md#binary-search)で境界を探しても同じ計算量で、定数倍は軽い。
 
@@ -169,6 +175,9 @@ $$
 ```cpp
 --8<-- "segment-tree-on-values/dynamic-odd-sum.cpp:core"
 ```
+
+完全なプログラム：[`dynamic-odd-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-on-values/dynamic-odd-sum.cpp)（GitHub）
+{ .kp-code-src }
 
 **メモリの見積もり**：$Q = 2 \times 10^5$、$C = 10^9$ とする。1 回の追加で作るノードは 31 個以下なので、全体で $Q \times 31 \approx 6.2 \times 10^6$ 個を超えない。実際は根に近い段のノードが多くの値で共有され、深さ $d$ の段には $\min(2^d, Q)$ 個までしかないので、最悪でも約 $2.9 \times 10^6$ 個である。このコードは 1 ノードに `int` 2 個と `long long` 3 個（32 バイト）を持つので、約 90 MB になる。`vector` は伸びるときに一時的に倍近くを使うので、`reserve` で先に確保しておくと安全である。確保する数は上界の $Q \times 31 + 1$ にすれば迷わない。和を持たない（個数だけの）木ならずっと小さい。
 
@@ -220,12 +229,16 @@ Library Checker の Point Set Range Composite (Large Array) は、長さ $N \le 
 
 - [ABL D. Flat Subsequence](https://atcoder.jp/contests/abl/tasks/abl_d)（diff 1283）：隣り合う要素の差が K 以下であるような部分列の最大の長さを求める。
 - [ABC276 F. Double Chance](https://atcoder.jp/contests/abc276/tasks/abc276_f)（diff 1562）：先頭 K 枚から 2 枚を復元抽出したときの最大値の期待値を、各 K について求める。
+- [ABC309 F. Box in Box](https://atcoder.jp/contests/abc309/tasks/abc309_f)（diff 1619）：回転してよい直方体の箱のうち、別の箱に真に入るものがあるかを判定する。
+- [ABC283 F. Permutation Distance](https://atcoder.jp/contests/abc283/tasks/abc283_f)（diff 1771）：順列の各 i について |P_i − P_j| + |i − j| の最小値を求める。
 
 </div>
 
 ??? note "方針"
     - **ABL D**：例題 ABC339 E と同じ型である。値の上限が小さいので、値をそのまま添字にする。$\mathrm{dp}$ は区間 max のセグメント木で更新する
     - **ABC276 F**：先頭 $K$ 枚での最大値の総和（$K^2$ 通りの組）を $S_K$ とすると、$S_K = S_{K-1} + A_K + 2 \sum_{i<K} \max(A_i, A_K)$ である。$A_K$ 以下の値は $A_K$ を、より大きい値はその値を足すので、値で座標圧縮した BIT で「$A_K$ 以下の個数」と「$A_K$ より大きい値の和」を持つ。期待値は $S_K / K^2$ を mod で計算する
+    - **ABC309 F**：各箱の 3 辺をソートして $(x, y, z)$ とし、$x$ の小さい順に処理する。座標圧縮した $y$ を添字にして $z$ の最小値を持つ。今の箱の $y$ の添字を $\mathrm{id}$ とすると、$[0, \mathrm{id})$（$y$ が真に小さい箱）の $z$ の最小値が今の箱の $z$ より小さければ、その箱を中に入れられる。$x$ が等しい箱どうしは入れられないので、同じ $x$ の箱はまとめて判定してから登録する
+    - **ABC283 F**：$i$ と $j$ の大小、$P_i$ と $P_j$ の大小の組み合わせで絶対値を外すと、4 通りとも「$\pm i \pm P_i$」と「$\mp j \mp P_j$ の最小」の和になる。値 $P_j$ を添字にした最小値のセグメント木を、向きを変えて 4 回走査する
 
 ## 力試し {#challenge}
 
@@ -272,6 +285,8 @@ Library Checker の Point Set Range Composite (Large Array) は、長さ $N \le 
 - [drken「AtCoder ABC 281 E - Least Elements (1D, 水色, 500 点)」](https://drken1215.hatenablog.com/entry/2022/12/14/185200)：例題 abc281_e の制約と、2 つの multiset・BIT 上の二分探索・（個数, 和）のセグメント木による解き方
 - [drken「ACL Beginner Contest D - Flat Subsequence (1D, 水色, 400 点)」](https://drken1215.hatenablog.com/entry/2020/09/27/080300)：練習 abl_d の DP の配列を使い回す理由
 - [gotoki_no_joe「ABC276 A～F をHaskellで」](https://qiita.com/gotoki_no_joe/items/a1f1755cfe99192773d6)：練習 abc276_f の総和の漸化式と、個数・和の 2 本の木
+- [ZOI_dayo「【AtCoder】黒〜緑のためのABC解説 | ABC309 A~F」](https://qiita.com/ZOI_dayo/items/a55cc4342832efdc23ba)：練習 abc309_f の走査の順と、同じ値の箱の扱い
+- [Bellala「abc283 F - Permutation Distance」](https://www.cnblogs.com/wushansinger/p/17021389.html)：練習 abc283_f の 4 通りの場合分けと走査の向き
 - [kmjp「AtCoder ABC #403 : G - Odd Position Sum Query」](https://kmjp.hatenablog.jp/entry/2025/04/28/1030)：力試し abc403_g の入力の復号と、想定解が動的セグメント木であること、平方分割による別解
 - [Library Checker「Point Set Range Composite (Large Array)」](https://judge.yosupo.jp/problem/point_set_range_composite_large_array)：添字の範囲が大きい一点更新・区間取得の確認用（問題文と制約 $N \le 10^9$・$Q \le 5 \times 10^5$ は GitHub の library-checker-problems の task.md・info.toml で確かめた）
 - [kmjp「AtCoder ABC #287 : G - Balance Update Query」](https://kmjp.hatenablog.jp/entry/2023/01/28/0900)：力試し abc287_g の先読みによる座標圧縮と、（枚数, 和）の BIT 2 本と二分探索

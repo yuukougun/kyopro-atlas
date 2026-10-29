@@ -5,7 +5,7 @@ aliases: [連結リスト, 双方向リスト, linked list, doubly linked list, 
 type: technique
 field: ds
 chapter: 標準コンテナの応用
-order: 70
+order: 27
 level: 基礎
 kind: [データ構造]
 prerequisites: [stl-containers]
@@ -71,6 +71,9 @@ updated: 2026-10-22
 --8<-- "linked-list/insert-erase.cpp:core"
 ```
 
+完全なプログラム：[`insert-erase.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/linked-list/insert-erase.cpp)（GitHub）
+{ .kp-code-src }
+
 **付け替え**は、ひと続きの区間を切り取って別の場所へつなぐ操作である。$a$ から $b$ までの区間（$\mathrm{nxt}$ でたどって $a$ から $b$ に着く）を $c$ の直後へ移すなら、区間の外側の 2 か所をつなぎ直してから、$c$ と $\mathrm{nxt}[c]$ の間に区間の両端をつなぐ。区間の中のつながりは変わらないので、区間の長さによらず $O(1)$ である。
 
 ```text
@@ -94,6 +97,9 @@ nxt[b] = d, prv[d] = b
 ```cpp
 --8<-- "linked-list/insert-erase.cpp:output"
 ```
+
+完全なプログラム：[`insert-erase.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/linked-list/insert-erase.cpp)（GitHub）
+{ .kp-code-src }
 
 列が何本もあるとき（カードの山・列車）は、各列の先頭からたどる。先頭は「前がない要素」で、山なら土台である。各要素はちょうど 1 本の列に属するので、全部の列をたどっても合計 $O(N)$ で済む。
 

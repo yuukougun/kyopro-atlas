@@ -5,7 +5,7 @@ aliases: [辞書順最小, lexicographically smallest, 辞書順 K 番目, 先�
 type: technique
 field: basics
 chapter: 貪欲
-order: 280
+order: 255
 level: 基礎
 kind: [貪欲, 文字列]
 prerequisites: [greedy-basics]
@@ -26,7 +26,7 @@ sections:
   - {title: 辞書順 K 番目（先頭ごとの個数と K を比べる）, anchor: kth}
   - {title: 判定が重い型, anchor: heavy-check, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -89,6 +89,9 @@ P ← 空の接頭辞
 --8<-- "lexicographic-greedy/smallest-subsequence.cpp:core"
 ```
 
+完全なプログラム：[`smallest-subsequence.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lexicographic-greedy/smallest-subsequence.cpp)（GitHub）
+{ .kp-code-src }
+
 表を作らずに毎回 $S$ を走査して候補を探すと、1 文字ごとに $O(N)$ かかり全体で $O(NK)$ になる。$N, K$ が $10^5$ なら間に合わない。
 
 判定を作るときは、確定した接頭辞の影響を必ず含める。たとえば「元の文字列と異なる位置が $K$ 個以下」という条件なら、接頭辞の中ですでに生じた違いの数を差し引いた残りの上限で、残りの部分を判定する。
@@ -121,6 +124,9 @@ a が $A$ 個、b が $B$ 個の文字列の $K$ 番目なら、先頭を a に�
 ```cpp
 --8<-- "lexicographic-greedy/kth-ab-string.cpp:core"
 ```
+
+完全なプログラム：[`kth-ab-string.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lexicographic-greedy/kth-ab-string.cpp)（GitHub）
+{ .kp-code-src }
 
 個数はすぐに巨大になる。a・b が 100 個ずつなら、先頭を a にしたときの個数 $\binom{199}{99}$ は約 $4.5 \times 10^{58}$ で、`long long` に収まらない。$K$ を超えた個数は「$K$ 以上」とさえ分かれば比較の結果が変わらないので、コードのように上限で頭打ちにして足し算する。個数を DP で数えるときも同じである（[DP の復元](../dp/dp-reconstruction.md#dp-kth-lexicographic)）。
 
@@ -202,7 +208,7 @@ $$
 - [ABC202 D. aab aba baa](https://atcoder.jp/contests/abc202/tasks/abc202_d)（diff 966）：a が A 個・b が B 個の文字列のうち、辞書順で K 番目のものを求める。
 - [ABC223 D. Restricted Permutation](https://atcoder.jp/contests/abc223/tasks/abc223_d)（diff 1069）：「a は b より前」の条件をすべて満たす順列のうち、辞書順最小のものを求める。
 - [ARC097 C. K-th Substring](https://atcoder.jp/contests/arc097/tasks/arc097_a)（diff 1108）：文字列の異なる部分文字列のうち、辞書順で K 番目（K ≤ 5）を求める。
-- [典型90 006. Smallest Subsequence（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_f)（diff —）：文字列の長さ K の部分列のうち、辞書順最小のものを求める。
+- [典型90 006. Smallest Subsequence（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_f)（diff なし）：文字列の長さ K の部分列のうち、辞書順最小のものを求める。
 
 </div>
 
@@ -216,7 +222,7 @@ $$
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [ABC009 C. 辞書式順序ふたたび](https://atcoder.jp/contests/abc009/tasks/abc009_3)（diff 1915）：文字列を並べ替え、元と異なる位置が K 個以下になるもののうち辞書順最小を求める。
+- [ABC009 C. 辞書式順序ふたたび](https://atcoder.jp/contests/abc009/tasks/abc009_3)（diff 1915・参考値）：文字列を並べ替え、元と異なる位置が K 個以下になるもののうち辞書順最小を求める。
 
 </div>
 

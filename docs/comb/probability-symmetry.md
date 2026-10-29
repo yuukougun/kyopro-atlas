@@ -93,6 +93,9 @@ $$
 --8<-- "probability-symmetry/two-states.cpp:core"
 ```
 
+完全なプログラム：[`two-states.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/probability-symmetry/two-states.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 漸化式を整理すると $p' = (1 - 2/N)\,p + 2/N^2$ で、$p - 1/N$ が毎回 $1 - 2/N$ 倍になる。よって $p_K = \frac{1}{N} + \left(1 - \frac{1}{N}\right)\left(1 - \frac{2}{N}\right)^K$ と閉じた式になり、[繰り返し二乗法](../math/mod-pow.md)で $O(\log K)$ でも求まる。コード片は、$N, K \le 6$ のすべてで $N$ 個の位置の確率を全部持つ DP と閉じた式の両方に一致することを確かめている。
 
 縮めた後の状態の数は、入れ替えで移り合う状態のまとまりの数である。特別な要素が 2 つあれば「特別な 1」「特別な 2」「その他」の 3 状態、2 種類のものの個数だけが効くなら個数を状態にする、というように一般化できる。状態がいくつか残っても遷移が毎回同じなら、[行列累乗](../math/matrix-power.md)で $K$ 回後を求められる。

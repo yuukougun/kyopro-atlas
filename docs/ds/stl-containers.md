@@ -24,7 +24,7 @@ sections:
   - {title: 操作とコンテナの計算量の早見表, anchor: complexity-table}
   - {title: map で数えながら走査する（→ 累積和と連想配列で区間を数える）, anchor: counting-map}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -96,6 +96,9 @@ set・map は平衡二分探索木（libstdc++ では赤黒木）で、木の高
 --8<-- "stl-containers/count-pairs.cpp:core"
 ```
 
+完全なプログラム：[`count-pairs.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/stl-containers/count-pairs.cpp)（GitHub）
+{ .kp-code-src }
+
 - **調べてから記録する**：$j$ 自身を先に記録すると、$i = j$ の組まで数える。検索を先にすれば、記録にあるのは常に $j$ より前の添字だけになる
 - **符号付きで大きめの型**：$A_j - j$ は負にもなるので、キーは符号付きにする。組の数は最大 $N(N-1)/2 \approx 2 \times 10^{10}$ なので、答えを `long long` で持つ
 - **検索に `[]` を使わない**：`cnt[key]` で検索すると、ない値の要素が作られて map が膨らむ。答えは変わらないが、メモリと時間を余計に使う
@@ -109,6 +112,9 @@ set・map は平衡二分探索木（libstdc++ では赤黒木）で、木の高
 ```cpp
 --8<-- "stl-containers/multiset-erase.cpp:core"
 ```
+
+完全なプログラム：[`multiset-erase.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/stl-containers/multiset-erase.cpp)（GitHub）
+{ .kp-code-src }
 
 **set に `std::lower_bound` を使うと $O(N)$**。`std::lower_bound(s.begin(), s.end(), x)` は比較こそ $O(\log N)$ 回だが、set のイテレータは 1 歩ずつしか進めないので、中点へ移動するだけで $O(N)$ かかる。正しい結果が返るので気づきにくく、TLE で初めて分かる。set・map ではメンバの `s.lower_bound(x)` を使う（[メンバの lower_bound](../cpp/cpp-container-idioms.md#member-lower-bound)）。
 
@@ -160,8 +166,8 @@ set・map は平衡二分探索木（libstdc++ では赤黒木）で、木の高
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [鉄則本 A54. Map](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bb)（diff —）：名前ごとの点数の登録と参照のクエリを処理する。
-- [鉄則本 A55. Set](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bc)（diff —）：整数の追加・削除と「x 以上で最小の値」のクエリを処理する。
+- [鉄則本 A54. Map](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bb)（diff なし）：名前ごとの点数の登録と参照のクエリを処理する。
+- [鉄則本 A55. Set](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bc)（diff なし）：整数の追加・削除と「x 以上で最小の値」のクエリを処理する。
 - [ABC166 E. This Message Will Self-Destruct in 5s](https://atcoder.jp/contests/abc166/tasks/abc166_e)（diff 1062）：j − i = A_i + A_j を満たす組 (i, j) の数を求める。
 
 </div>

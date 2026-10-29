@@ -30,7 +30,7 @@ sections:
   - {title: 操作を頂点にする・区間を辺にする, anchor: modeling, level: 青}
   - {title: 辺の重みの種類が少ないとき, anchor: few-weights, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -68,6 +68,9 @@ updated: 2026-10-22
 --8<-- "minimum-spanning-tree/kruskal.cpp:core"
 ```
 
+完全なプログラム：[`kruskal.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/minimum-spanning-tree/kruskal.cpp)（GitHub）
+{ .kp-code-src }
+
 採った辺が $N - 1$ 本に届かなければ、グラフは連結でなく、全域木はない。このとき採った辺は、各連結成分の最小全域木を集めた最小全域森になる。
 
 **プリム法**：1 つの頂点から始め、「いま木にある頂点」と「まだない頂点」を結ぶ辺のうち最も軽いものを採って、木を 1 頂点ずつ伸ばす。実装は[ダイクストラ法](../graph/dijkstra.md)とほぼ同じ形で、優先度付きキューに入れる値が「始点からの距離」ではなく「木から 1 本の辺の重み」になる。キューから取り出した頂点がすでに木にあれば読み飛ばす。
@@ -78,10 +81,13 @@ updated: 2026-10-22
 --8<-- "minimum-spanning-tree/prim-dense.cpp:core"
 ```
 
+完全なプログラム：[`prim-dense.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/minimum-spanning-tree/prim-dense.cpp)（GitHub）
+{ .kp-code-src }
+
 **計算量**：クラスカル法はソートに $O(M \log M)$、Union-Find の操作が $M$ 回でならし $O(M \alpha(N))$ なので、全体で $O(M \log M)$ である。単純グラフなら $M < N^2$ より $\log M < 2 \log N$ なので、$O(M \log N)$ と書いても同じである。優先度付きキューのプリム法は、各辺で高々 2 回（両向き）push するので $O(M \log M) = O(M \log N)$、配列のプリム法は $N$ 回の各段で $O(N)$ かかるので $O(N^2)$ である。
 
 !!! info "ACL では"
-    最小全域木の関数はない。クラスカル法の成分の管理に `dsu d(n);` を使い、`d.same(a, b)` で同じ成分かを判定し、`d.merge(a, b)` で併合する。どちらもならし $O(\alpha(N))$ である。自作のライブラリは Library Checker の minimum_spanning_tree で確かめられる。
+    最小全域木の関数はない。クラスカル法の成分の管理に `dsu d(n);` を使い、`d.same(a, b)` で同じ成分かを判定し、`d.merge(a, b)` で併合する。どちらもならし $O(\alpha(N))$ である。自作のライブラリは Library Checker の [Minimum Spanning Tree](https://judge.yosupo.jp/problem/minimum_spanning_tree) で確かめられる。
 
 ## 正しさの理由（カット性質・閉路性質） {#why-correct}
 
@@ -135,6 +141,9 @@ $$
 ```cpp
 --8<-- "minimum-spanning-tree/query-edges.cpp:core"
 ```
+
+完全なプログラム：[`query-edges.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/minimum-spanning-tree/query-edges.cpp)（GitHub）
+{ .kp-code-src }
 
 全体の計算量は $O((M + Q) \log (M + Q))$ である。この「クエリを元の辺と混ぜて重みの順に処理する」形は、[クエリの先読み](../ds/offline-queries.md)の代表例である。オンラインに答える必要があれば、最小全域木を作ってから、$u$–$v$ の木の上のパスの最大の辺と $w$ を比べる方法もある（パスの最大は [LCA](../tree/lca.md) のダブリングで求める）。
 
@@ -253,7 +262,7 @@ $$
 - [ABC469 F. GCD Maximum Spanning Tree](https://atcoder.jp/contests/abc469/tasks/abc469_f)（diff 1567）：互いに異なる整数 A_1, …, A_N を頂点とし、2 頂点の間の辺の重みを 2 数の最大公約数とした完全グラフで、全域木の辺の重みの和の最大を求める。
 - [ABC282 E. Choose Two and Eat One](https://atcoder.jp/contests/abc282/tasks/abc282_e)（diff 1604）：ボールを 2 つ選んで得点（x^y + y^x を M で割った余り）を得て片方を捨てる操作をくり返すとき、得点の合計の最大値を求める
 - [ARC076 D. Built?](https://atcoder.jp/contests/arc076/tasks/arc076_b)（diff 1615）：平面上の町を結ぶ費用が min(|Δx|, |Δy|) のとき、すべての町をつなぐ最小費用を求める
-- [典型90 049. Flip Digits 2（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_aw)（diff —）：区間 [L_i, R_i] の 0/1 を費用 C_i で反転できる操作を選び、全部 0 の列からどんな列でも作れるようにするための最小費用を求める
+- [典型90 049. Flip Digits 2（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_aw)（diff なし）：区間 [L_i, R_i] の 0/1 を費用 C_i で反転できる操作を選び、全部 0 の列からどんな列でも作れるようにするための最小費用を求める
 
 </div>
 

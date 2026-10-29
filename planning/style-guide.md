@@ -19,6 +19,9 @@
 - 書くのは担当ページ `docs/<field>/<id>.md`、`snippets/<id>/`、そのページの図 `docs/img/<id>/` だけ。動く図の JS と試験は指示で頼まれたときだけ書く（§8）
 - 共有のファイル（用語集・prh.yml・早見表・使い分け・catalog・問題の台帳）は直さず、報告に「提案」として書く。`tools/gen_site.py` の実行と commit はしない。生成部分（`<!-- gen:begin … -->` の間）は書かない（その節の見出しの置き方は §16-11）。例外として、本文の数字を計算したスクリプトは `tools/numbers/` に置く（§16-13）
 - front matter で直すのは `complexity`（プレーンな文字。例：`構築 O(N)、更新・取得 O(log N)`。計算量のない guide・hub・pattern のページは null のまま。§16-12）・`stage`（書き終えたら `draft`）・`updated` だけ。節を足すなら `sections` にも足してよい（level はページと同じ。既存の anchor は変えない）。ほかの項目を変えたいときは提案にする
+- `updated` は、読者に見える中身（本文・問題の行・図・取り込むコード片・誤字）を変えたときに直す。front matter だけ・生成部分だけの変更では直さない。道具 `fix_code_links.py` が作る所（コードの下の行と地の文の `snippets/…` のリンク。§9）の変更でも直さない。ページの末尾に段階と一緒に表示される（工程11、#9）
+- `related` は近いものから順に書く。書いた順にページ下部の「関連」に出る（20 件まで。工程11、#56）
+- `order`（章の中の並び）は、前提を先に置き、同じ話題は続けて置いて中はレベルの低い順にし、話題どうしは最初のページのレベルが低い順に並べる。分野の入口とナビはこの順に並ぶ（工程11、#58）
 
 ### 2.2 冒頭
 
@@ -43,8 +46,8 @@
 
 ### 2.3 見出しと節
 
-- 見出しは `##` から。front matter の `sections` の各節を `## 見出し {#anchor}` の形で必ず置く。見出しに色の印は付けない
-- 節の level はページの level 以上。ページより低い内容は下位のページへのリンクで済ませ、基礎のページの節は青までにする。上位の帯の節は、最初に追加の前提をリンクで示す
+- 見出しは `##` から。front matter の `sections` の各節を `## 見出し {#anchor}` の形で必ず置く。見出しにレベルの印を手で書かない（上の帯の節には、テンプレートが見出しと目次に印を付ける。工程11、#54）
+- 節の level はページの level 以上。ページより低い内容は下位のページへのリンクで済ませ、基礎のページの節は青までにする。上位の帯の節は、最初に追加の前提をリンクで示す（「この節は [X](…) を前提にする。」の形。レベルは書き直さない）
 - 見出しと sections の title に波かっこ `{` `}` を書かない。`集合 {a, b} の和 {#x}` のように組があると attr_list が末尾の `{#anchor}` を拾わず、anchor が変わる（python-markdown で確認）
 
 ### 2.4 文体
@@ -84,10 +87,13 @@
 - **technique（水・青・黄）**：要点 → 必要になる場面 → アイデアとなぜ正しいか（図）→ 処理の流れ → 計算量とその根拠 → 応用の型（サインを添える）→ 落とし穴 → ACL では → 例題 → 練習・力試し → 確認問題 → 使い分け → 参考
 - **technique（基礎）**：要点 → 応用の型 → 落とし穴 → 上位の手法へのつながり → 問題
 - **overview（発展）**：何ができるか → サイン → 計算量 → ライブラリでの使い方（`{#library}`）→ 学ぶための資料（定型の `{#resources}`）→ 例題 0〜2。短く書き、証明や実装の流れは資料に任せる。ACL・Library Checker に対応がないときと、問題が 0 問のときの書き方は §16-1〜5
+  - 似た手法と比べるなら、定型の `## 使い分け {#comparison}` を 2〜4 行で、例題・練習の後、参考の直前に置き、似た手法とハブの節へリンクする（工程11、#67）
 - **hub**：「何から引くか → 使う手法 → ページ」の表とリンクが本体。中身の説明は各ページに任せる。表の例題の列は相手のページの例題の小見出しか `#practice` へリンクしてよい（§16-8）
 - **guide**：構成は自由。目安の例は debugging-checklist の「要点 → 導入 → 症状ごとの節 → 確認問題 → 参考」（§16-10）
 - **thinking**：その型が使える合図 → 最小の例 → ABC の例題 2〜4（方針も折りたたむ）→ 関連する手法。証明の技法は体系的に教えない
+  - 導入の後に「使える合図は N つある。…である。」の段落を置き、問題文の言い回しで合図を 2〜3 個書く。詰まったときの発想リストの対応する表へのリンクは、使い分け（なければ合図の段落の末尾）に置く（工程11、#65）
 - **pattern**：題材の性質 → 「問われ方と手法の一覧」の節（anchor `overview`。中身の節として sections に置く）→ 「よく出る問われ方 → 使う手法 → ページ」の表。問題は行の代表だけで、表の「代表の問題」の列には行き先のページの問題の label を文字だけで書き、リンクは行き先のページに任せる（見本 bracket-sequence の形。§16-7・§16-9）
+  - 表の後に行ごとの節を置く（見出しは「問われ方 → 手法（行き先の id）」）。表の「よく出る問われ方」の列は、その行の節へのリンクにする（§16-7。工程11、#66）
 - **cpp**：一言 → 素朴に書くとどうなるか（同じ意味のコード）→ 版（いつから・AtCoder と手元の g++-15 で使えるか）→ 落とし穴（確かめた実例）→ 確認問題 → 関連。書き方 1 つずつに anchor を付ける
 
 ACL に対応がある手法は「ACL では」の囲みに、名前・宣言・主なメソッド 2〜3 個と計算量・要件だけを書く。ACL v1.6 のドキュメント（`~/lib/ac-library-master/document_ja/`）で確かめ、使い方の例は snippets から取り込む。
@@ -96,6 +102,25 @@ ACL に対応がある手法は「ACL では」の囲みに、名前・宣言・
 !!! info "ACL では"
     `dsu d(n);`。`d.merge(a, b)`・`d.same(a, b)`・`d.size(a)` はどれもならし $O(\alpha(N))$。
 ```
+
+ページの題の部品を自作した実装（ライブラリに入れる形の struct）は、「自作するとき」として次のように置く（工程11、#64）。節の中の変種（双対セグメント木・偶奇の Union-Find など）と使い方の例には当てない。
+
+- **置き場所**：処理の流れの節の中で、手順の擬似コード（なければ手順の説明）の後に置く。境界の小見出しの前でも後でもよい。上の帯の自作の節（lazy-segment-tree#invariants など）があればその節の終わり、発展の概要は `#library` に置く
+- **折りたたむか**：ACL に同じ部品があり「ACL では」の囲みを置くなら、`` ??? note "自作するとき：`型名`（ACL の `名前` に当たる）" `` に入れる。ACL にない部品と、ACL の部品では書けない操作（BIT 上の二分探索など）は折りたたまずに置く
+- **ACL との対応**：折りたたむときは最初の段落に、ACL にそろえた名前と、そろえていない名前・返り値・引数を書く（「根を求める関数は `find`（ACL では `leader`）」）。開いて置くときは、同じ節のコードより前の段落に、ACL にないので自作すること（書けない操作なら理由）と、そろえた ACL の名前（Sparse Table の `prod`）・そろえていない名前と返り値を書く。違いは library-design#acl-names の表にもまとめる（行を足すのは提案）
+- **名前**：メンバ関数の名前・引数の順・0-indexed・半開区間は ACL にそろえる。コンストラクタは ACL のドキュメントの「コンストラクタ」の項の形（`dsu(n)`・`fenwick_tree(n)`・`segtree(v)` など）を持たせ、足したもの（配列から作る `BIT(a)` など）は違いに書く。そろえないのは本文の手順や図と名前を合わせたいとき（Union-Find の `find`）だけにする。同じ部品を別のページでも自作するなら、名前をそろえるか違いを書く（`lower_bound(w)` と `kth(k)`）
+- **試験とリンク**：折りたたむときは、コードの後の段落に試験で確かめたこと（素朴な方法との照合・乱数）を 1〜2 文で書き、library-design の #interface・#verify へのリンクの文（下の例の最後の文）で結ぶ。開いて置くときは、リンクの文をコードの前か後の段落の末尾に置き、試験の文は任意。確認用の問題（verify）はテンプレートがページ下部に出すので、並べ直さない（触れるなら judge.yosupo.jp へのリンクにする。§15-5）
+
+````markdown
+??? note "自作するとき：`UnionFind`（ACL の `dsu` に当たる）"
+    `merge`・`same`・`size` の名前と 0-indexed の添字は、ACL の `dsu` にそろえた。根を求める関数は、本文の手順に合わせて `find` とした（ACL では `leader`）。…
+
+    ```cpp
+    --8<-- "union-find/own-dsu.cpp:core"
+    ```
+
+    試験では、…。名前の約束は[インターフェースの決め方](../guide/library-design.md#interface)、確かめ方は[動作確認の手順](../guide/library-design.md#verify)にある。
+````
 
 ## 5. 分野ごとの書き方
 
@@ -107,6 +132,7 @@ ACL に対応がある手法は「ACL では」の囲みに、名前・宣言・
   - 区間に 1 を足す操作の最小回数・可否は、両端の外も含めて差分を $N + 1$ 個取ると端の場合分けがなくなる（0-indexed で $A_{-1} = A_N = 0$ とし、$d_i = A_i - A_{i-1}$。$d_0 = A_0$、$d_N = -A_{N-1}$）。最小回数は正の差分の和で、負の差分の和の絶対値と等しい（difference-sequence と定義をそろえる）
   - mex を印の配列で求めるときは、配列の大きさを $N + 1$ にし（$N$ 個の値の mex は $N$ になりうる）、$N$ より大きい値は読み飛ばす（持ち主は patterns/mex#pitfalls）
 - **thinking**：主客転倒は和の順序の入れ替えまで、余事象は補集合と 2〜3 条件の包除まで、偶奇・不変量は必要条件の見つけ方まで（一般の包除原理・期待値・ゲームは comb）
+  - basics・ds と同じ考え方を扱うときは、thinking には気づき方（合図）と最小の例を、basics・ds の持ち主の節には手順・証明・実装・落とし穴を書き、持ち主でない側は要点 1〜2 文と持ち主の節へのリンクにする（例：区間加算の最小回数は basics/difference-sequence#min-operations、隣接 swap の最小回数は ds/inversion-number#adjacent-swaps が持ち主。工程11、#70）
 - **dp**：状態の意味（「$\mathrm{dp}[i][j]$ ＝ …」を言葉で 1 文）、遷移（場合分けと式、小さな表の図）、計算順序（依存の向きと、その順でよい理由）、初期値と答え（最適化は ±∞、数え上げは $\mathrm{dp}[0] = 1$、可否は true。答えの取り出し方）を必ず書く。その状態で足りる理由（先の選び方が状態だけで決まる）と計算量（状態数 × 遷移数）も書く。高速化は遷移の式の形から選ぶ（dp-speedup-overview）
   - 積の条件を数える DP の初期値は空の積の 1 にする（余りを状態にするなら $\mathrm{dp}[0][1 \bmod M] = 1$）
   - メモ化再帰は「未計算」の印を答えと別に持つ（-1 などの印が答えになりうるなら、計算済みかを表す配列を別に置く）
@@ -186,7 +212,8 @@ ACL に対応がある手法は「ACL では」の囲みに、名前・宣言・
 
 - 数式は KaTeX。インラインは `$…$`、別行は前後を空行にした `$$…$$`。front matter には KaTeX を使わない（`O(N log N)`、`2×10^5`）
 - 計算量：`$O(N \log N)$`（log の底は書かない）、`$O((N + M) \log N)$`、「ならし $O(\alpha(N))$」「期待 $O(N)$」
-- 区間は半開区間 $[l, r)$ を基本にし、閉区間は「閉区間 $[l, r]$」と明記する
+- 区間は半開区間 $[l, r)$ を基本にし、閉区間は「閉区間 $[l, r]$」と明記する。数式の外（図の代替テキスト・リンクの文字）に区間を書くときは §8 のとおり括弧をエスケープする
+- インラインの数式の `\text{…}` の中に `$…$` を書かない（`$X_i = [i \text{ が条件を満たす}]$` のように数式を外に出す。中に書くと KaTeX が壊れ、赤字のエラーになる）。日本語の長い説明もインラインの数式に入れず、地の文にする（スマホで折り返せず、ページ全体が横にずれる）。どちらも check_pages が見つける（工程11、#31・#33・#61）
 - 添字：問題文は 1-indexed、実装は 0-indexed。どちらで書くかを最初に示し、変換を明示する。例：$a_i = A_{i+1}$、$S_0 = 0$、$S_{i+1} = S_i + a_i$ とすると $[l, r)$ の和は $S_r - S_l$
 - 文字：列の長さ・頂点数 $N$、辺数 $M$、クエリ数 $Q$、列 $A = (A_1, \dots, A_N)$、法 $m$（素数なら $p$）
 - 整数：`$a \equiv b \pmod{m}$`、`$a \bmod m$`、`$\lfloor x \rfloor$`・`$\lceil x \rceil$`、`$a \mid b$`、`$\gcd(a, b)$`・`$\operatorname{lcm}(a, b)$`、`$\binom{n}{k}$`
@@ -217,6 +244,9 @@ ACL に対応がある手法は「ACL では」の囲みに、名前・宣言・
 - **SVG**：`docs/img/<page-id>/<name>.svg` に置き、`![要点を言う代替テキスト](../img/<page-id>/<name>.svg)` で参照する。背景を白で塗る（透明にするとダークモードで読めない）。文字はテキストのまま（`font-family="sans-serif"`）、`viewBox` と、それと同じ比の `width`・`height` を付ける。1 枚の幅は 400 程度までにし、横に並べたいものは 2 枚に分ける（§15-8）。色だけで区別せず、線の種類やラベルも使う
 - **動く図**：`<div class="kp-viz" data-viz="<名前>" data-config='{…}'></div>` で埋め込む。catalog の visual が priority 1 なら必ず作り、2 は余力があれば、3 は静的な図で代えてよい。JS は `overrides/assets/js/viz/<名前>.js` に `states(config)`（各ステップの `caption` を持つ状態の列。DOM を使わない）と `render` を登録し、`tests/viz/<名前>.test.mjs` に試験を書く（見本は binary-search）。色は kp.css の `.kp-v-*` の class で付ける。JS を頼まれていなければ、div と図の仕様を報告に書く
 - 表は横に広げすぎない（スマホで読む。列は 4〜5 まで）
+- **代替テキストとリンクの文字の括弧**（工程11、#50）：区間を書いて対にならない括弧ができるときは逆斜線でエスケープする（`![区間 \[1, 5) に +1](../img/imos/imos-1d.svg)`）。対にならない `[` があると画像として読まれず、図の代わりに文字とリンクが出る。check_pages がエラーにする
+- **SVG の背景**（工程11、#32）：白い背景の rect は viewBox 全体を覆う（viewBox の左上が 0 でないときは x・y も合わせる。`width="100%"` は viewBox の左上からではなく 0 から塗る）。覆わない部分はダークモードで暗い帯になり、文字が読めない。check_svg が警告する
+- **動く図の JS**（工程11、#51）：`data-viz` に書いた名前の JS（`overrides/assets/js/viz/<名前>.js`）がないと、公開中のページに赤字のエラーが出る。置き場だけを先に書かない。check_pages がエラーにする
 
 ## 9. コード片
 
@@ -228,6 +258,9 @@ ACL に対応がある手法は「ACL では」の囲みに、名前・宣言・
 ```
 ````
 
+- コードの下の行（「完全なプログラム：<ファイル名>（GitHub）」と、範囲に `mint` が出れば同じ行の型と modint へのリンク）は `tools/fix_code_links.py` が作るので、手で書かない。取り込みを足したら `python3 tools/fix_code_links.py --page <id>` を流す。CI が `--check` で確かめる（工程11、#8・#62）
+- 本文から snippets のファイルを指すときは `` `snippets/<id>/<名前>` `` と書けば、同じ道具が GitHub へのリンクにする（工程11、#72）
+- 取り込む範囲の外で定義した補助関数や表（`binom`・`comb`・`fact` など）を範囲の中で使うときは、どの前計算か（階乗と逆階乗の表・パスカルの三角形・範囲外の値など）を本文に 1 文で書く。binomial-precompute の該当の節（`#fact-ifact`・`#composite-mod` など）へリンクする（工程11、#62）
 - 設定 `snippets/<page-id>/<name>.yaml`：
 
 ```yaml
@@ -238,7 +271,7 @@ cases:
   - {input: "3\n1 2 3\n", output: "6\n"}
 ```
 
-- プログラムは `main` と `assert` を持つ完全なものにし、cases には空・1 要素・境界を入れる。問題の入出力例は使わない。ACL は v1.6（`third_party/ac-library/`）で、`modint::val()` は `int` を返す
+- プログラムは `main` と `assert` を持つ完全なものにし、cases には空・1 要素・境界を入れる。問題の入出力例は使わない。完全なプログラムは提出用ではないので、入出力は手元で確かめるための自前の形でよい（問題の入力の形に合わせなくてよい。読者向けの説明は how-to-use#page-anatomy）。ACL は v1.6（`third_party/ac-library/`）で、`modint::val()` は `int` を返す
 - 書き方：AtCoder の GCC 15.2（`-std=gnu++23`）で通る範囲で読みやすさを優先する。`#include <bits/stdc++.h>` と `using namespace std;` を使い、マクロ（`rep` など）と型の別名は使わない（`long long` と書く）。ただし、数論のコード片の `using u64 = unsigned long long;`・`using u128 = unsigned __int128;`（§15-9）と ACL の modint は例外で、modint は `using mint = atcoder::modint998244353;`（法が 10^9+7 なら `atcoder::modint1000000007`）を使ってよい。ループは素朴な for を基本にし、範囲 for・構造化束縛・ラムダ（比較関数・DFS・二分探索などの判定の関数、短い補助の関数など）は使ってよく、DFS は `auto dfs = [&](auto&& self, int v, int p) -> void { … };` の形にする。views・`println`・deducing this などを使うときは C++ の章の該当ページへリンクする。C++26 は使わない
 - 変数名は §6 にそろえる（`n`・`a`・`dp`・`par`・`dep`）。添字は 0-indexed、区間は半開、改行は `'\n'`。入出力は最小限にして中心の関数を見せる
 - 法が入力で決まるときは `using mint = atcoder::modint;` と `mint::set_mod(m);` を使ってよい（値を作る前に `set_mod` を呼ぶ）
@@ -268,7 +301,8 @@ cases:
 </div>
 ```
 
-- label は「コンテストの表示名 記号. 題名」（ABC340 E. Mancala 2、典型90 001. Yokan Party（★4）、EDPC A. Frog 1）。label・URL・diff は台帳の値にする（difficulty のない問題は `diff —`）。行を `- abc340_e：要約` と書いて `python3 tools/fix_problems.py --page <id>` で埋めてもよい
+- label は「コンテストの表示名 記号. 題名」（ABC340 E. Mancala 2、典型90 001. Yokan Party（★4）、EDPC A. Frog 1）。label・URL・diff は台帳の値にする（difficulty のない問題は `diff なし`）。行を `- abc340_e：要約` と書いて `python3 tools/fix_problems.py --page <id>` で埋めてもよい
+- difficulty は、ない問題を「（diff なし）」、AtCoder Problems が参考値として出す問題（台帳の `experimental: true`）を「（diff 1856・参考値）」と書く。表の diff の列では、ない値を「—」と書く（工程11、#5・#76）。行は fix_problems.py が台帳から作るので手で書かない
 - 例題は 1 問ずつ `### 例題：ABC382 F. Falling Bars {#abc382_f}`（anchor は問題 ID）を立て、その下に 1 行だけの囲み（`data-role="example"`）、続けて方針を書き、解法の詳細は `??? note "解法の詳細"` に入れる。thinking のページは方針も折りたたむ。練習の方針は一覧の後の折りたたみに書く（一覧で解き方が見えないように）
 - 数の目安：例題 1〜3（基礎は 1、発展は 0〜2、thinking は 2〜4、patterns は 0〜1）、練習 2〜6（patterns は 0〜3）、力試し 0〜3、hub は合わせて 0〜3
 - 例題は 1 問につき 1 ページ（その手法の持ち主）で、ほかのページでは練習か本文の参照にする。catalog で representative の例題は、手法をそのまま使う代表として扱う。並びは易しい順
@@ -334,7 +368,7 @@ cases:
 17. **evidence**：読んだ記事がその問題のものかを最初に確かめる。画像だけの解説（典型90 の jpg）は、同じリポジトリの解答コードで確かめてよい
 18. **fix_problems**：執筆者は `python3 tools/fix_problems.py --page <id>` だけを使い、`--field` を付けない。検査は `--check --page <id>` で行う
 19. **実行時の異常終了**：check_snippets の `expect: crash`（0 以外の終了かシグナル）で確かめる。未定義動作の観測値を期待にしたコード片は、コンパイラの版で値が変わったら「観測値の変化」として直す
-20. **図の目視**：SVG は `tools/render_svg.py`（ヘッドレスの Chrome で PNG にする）で画像にして、執筆者も検証役も目で確かめる
+20. **図の目視**：SVG は `tools/render_svg.py`（ヘッドレスの Chrome で PNG にする）で画像にして、執筆者も検証役も目で確かめる。render_svg.py は SVG を 1 枚ずつ描くので、ページの上での崩れは見えない（#61）。ページの崩れは `tools/render_pages.py` で数える。同じ Chrome が、幅 390px のライトとダークでページを描く。作業用フォルダにビルドして（`uv run mkdocs build -d <作業用フォルダ>/site`）から、`python3 tools/render_pages.py <作業用フォルダ>/site --page <id>` を流す。エラー（KaTeX のエラー・地の文に残った `$` などの記法・ページの横ずれ・動く図のエラー・読めない画像）は直してから報告する。警告（右が隠れる別行の数式と表・縁が透ける図など）は一覧に出る。公開の前には、メインが全ページを調べる（tools/README.md の「公開の前」）
 21. **動く図の置き場**：div の config は執筆者が仮に決めてよい。図の仕様は報告に書き、JS を作るときに config と前後の文章を直してよい
 22. **表記**：付録 A に足した語（最短路・狭義の弱順序・安定ソート・ウォーク・クラスカル法・プリム法・上位 bit・巡回シフト・border・周期・Z 配列）にそろえる。最短経路・歩道は使わない
 23. **リンク**：stub のページへは anchor を付けずにページへリンクする（相手が draft になったらメインが節へ張り替える）。用語・手法へのリンクは、同じ節の中では最初の 1 回だけ（節が変われば再びリンクしてよい）。本文から練習の問題を指すときは、label の一部と `#practice` へのリンクで書く
@@ -350,6 +384,7 @@ cases:
 3. **ACL の節**：骨格の sections に `{#acl}` の中身の節があるページは、その節の中に `!!! info "ACL では"` の囲みを置いてよい（§14-4 の例外）
 4. **使い分けに近い中身の節**：`which-tool`・`when-to-use` など sections にある中身の節は残す（anchor を変えない）。そのページには定型の `## 使い分け {#comparison}` を併せて置かない
 5. **Library Checker の練習**：`## 練習問題 {#practice}` の中に「Library Checker」の小見出しを立て、judge.yosupo.jp へのふつうのリンクの箇条書きで置いてよい。問題の囲み（§10）は atcoder.jp の問題専用のまま（AOJ・CSES への広げ方は §16-6）
+   - front matter の verify の問題は、テンプレートがページ下部の「自作の確認」の行に出す。発展の概要以外のページでは、この小見出しは verify にない問題を足すときか、問題ごとの注意を書くときだけでよい。発展の概要の `#library`（§13-10・§16-4）に書く問題名は judge.yosupo.jp へのリンクにする。発展の概要では本文にリンクのある問題をその行に出さないので、名前だけだと 2 か所に並ぶ（工程11、#53）
 6. **evidence の数**：問題の裏付けは 2 つ以上を目標にする。ikatakos.com が落ちているときは web.archive.org の写しを読んでよい（問題文の節は読まない）。GitHub の個人の解説リポジトリも同じ扱いで、問題文（英訳を含む）の部分は読まず、解法の部分だけを参照する
 7. **level ごとの構成**：執筆の指示の「短く・応用の型と落とし穴に絞る」は基礎のページだけに当たる。水・青・黄のページは level の構成（§4・§14-6）に従う
 8. **図**：1 枚の SVG の幅は 400 程度までにし、横に並べたいものは 2 枚に分ける（幅 760 の図は 360px の画面で文字が 6px ほどになる）。SVG には viewBox と同じ比の `width`・`height` を付ける。値の一覧（$\mu(1), \dots, \mu(12)$ など）は表にせず数式の 1 行で書いてよい
@@ -362,13 +397,14 @@ cases:
 
 バッチ b4（発展の概要）・b5（横断）の提案への決まり（`planning/batches/b5/decisions.md`）。§13〜§15 と食い違うときはこちらを優先する。既存のページをこの決まりにそろえるのは、工程10の全体の検証で行う。
 
-1. **学ぶための資料**：発展の概要の資料の節は定型の `## 学ぶための資料 {#resources}` にする。sections に載せない（§13-1 の一覧に足した）。参考の各行に「（学ぶための資料）」と添えて節を省く形は使わない
+1. **学ぶための資料**：発展の概要の資料の節は定型の `## 学ぶための資料 {#resources}` にする。sections に載せない（§13-1 の一覧に足した）。参考の各行に「（学ぶための資料）」と添えて節を省く形は使わない。各行は参考の節の同じ資料と同じリンク `[著者「題名」](URL)` で始め（題名と URL は参考の行と一字一句同じ。§17-10）、「：」の後に何が学べるかを書く。1 行に資料が 2 つ以上あるときは、それぞれをリンクにして「と」「・」でつなぐ。URL のない資料（書籍・atcoder.jp の解説）はリンクを付けずに書く。資料を足すときは参考の節にも同じ行を足す（工程11、#71）
 2. **ライブラリでの使い方**：発展の概要の中身の節として、anchor を `library` にそろえる（`usage` などにしない）。見出しの文字はページに合わせてよく（「計算量と自作するときの要点」など）、sections に載せてよい
 3. **ACL に対応がないとき**：公開ライブラリの名前と使い方（関数名・引数・返り値）を文章で書き、自作するときの要点を処理の流れで添える。コードは載せない
 4. **Library Checker に対応がないとき**：「専用の問題はなく、部品（LCA など）の問題で確かめる」か「対応する問題はない。愚直な方法と照らし合わせて確かめる」のどちらかを書く
 5. **例題・練習が 0 問の発展の概要**：`## 例題` は省いてよい。`## 練習問題 {#practice}` には「ABC で必須になる問題は確認できなかった」の 1 文と、Library Checker などの小見出しだけを置いてよい
 6. **ほかのジャッジ**：§15-5 の小見出しとふつうのリンクの箇条書きを AOJ・CSES にも広げる（noai の指定がないことを確かめてから。どちらも付録 B にある）。yukicoder は利用規約を確かめるまで使わない
 7. **pattern の「代表の問題」の列**：行き先のページの問題の label を文字だけで書き、リンクは行き先のページに任せる（見本 bracket-sequence の形。§4）。pattern のページが自分の例題・練習の囲みを持つのは構わない
+   - 「よく出る問われ方」の列は、文字をそのまま行の節へのリンクにする（`| [更新ありで区間が正しいか](#range-check) | … |`）。1 つの節が 2 行を受け持つなら、どちらの行も同じ節へリンクする。どの行にも節を置き、「同上」は書かない。「ページ」の列には行き先のページだけを書き、このページの節はリンクにしない（工程11、#66）
 8. **hub の表の例題の列**：相手のページの例題の小見出し（`../dp/cht.md#dp_z`）か `#practice` へリンクしてよい
 9. **pattern の overview**：「問われ方と手法の一覧」の節（anchor `overview`）を中身の節として sections に置く（骨格になければ足す。§4）
 10. **guide の構成**：自由。目安の例は debugging-checklist の「要点 → 導入 → 症状ごとの節 → 確認問題 → 参考」（§4）
@@ -423,7 +459,7 @@ robots の meta と X-Robots-Tag に noai・noimageai がないことを確か�
 - そのほか：ikatakos.com・qiita.com・zenn.dev・github.com・nyaannyaan.github.io・ei1333.github.io・programming-hiroba.com・oraclesqlpuzzle.ninja-web.net・www.cnblogs.com・atcoder-tags.herokuapp.com・maspypy.com・www.mathenachia.blog・cp-algorithms.com・oi-wiki.org・judge.yosupo.jp・ja.wikipedia.org・hackmd.io・en.cppreference.com・cpprefjp.github.io・gcc.gnu.org・usaco.guide（構成の参考だけ）・dev.to・scrapbox.io（プロジェクトごとに書き手が違う。確かめたのは wafuwafualgorithm・nishio・kani・37zigen-43465887・Atcoder-myReflection・konan-compro・pctsnote・Kodaman・esaka-sandbox・procon-kirokuyou・kyopuro-ryusuke920）・chokudai.github.io・developer.apple.com・en.wikipedia.org・www.luogu.com.cn・noshi91.github.io・yamate11.github.io・imoz.jp・soi.ch・robert1003.github.io・raw.githubusercontent.com・hcpc-hokudai.github.io（PDF は読んでいない）・mzhang2021.github.io・kmyk.github.io・js.cytoscape.org・competitive-verifier.github.io・online-judge-tools.github.io・hitonanode.github.io・aruma256.dev・onlinejudge.u-aizu.ac.jp（AOJ）・cses.fi・algo-logic.info・arxiv.org・atcoder-novisteps.vercel.app・blog.nishigake.net・blog.tibrella.space・blog.tiramister.net・book.mynavi.jp・code.claude.com・competitive12.blogspot.com・cplusplus.github.io・gdst.dev・it.commutty.com・kato-hiro.github.io・koosaga.com・kopricky.github.io・kumonosu.cloudsquare.jp・nullkara.jp・oeis.org・picomikan.net・webkit.org・yamanoue.tslmuse.com（この行の algo-logic.info 以降と、はてなブログ・scrapbox で足した分は工程10 の洗い出しで確かめた。2026-10-22）
 - github.com のうち yosupo06/library-checker-problems の issue・PR は出典にしてよい（問題の仕様や計算量の議論）
 - speakerdeck.com はスライドごとに書き手が違う（確かめたのは tatyam_prime の「Monge の手引書」）
-- trap.jp：2026-10-22 の 2 回目の check_noai で、トップページ（https://trap.jp/）を証明書の検証つきで取得でき（HTTP 200）、robots の meta と X-Robots-Tag に noai・noimageai がないことを確かめた。記事（post/2589・2861・1224・1594）は HTTP 503 か証明書の検証の失敗（自己署名の証明書が返る）で取得できなかった。証明書の検証を外した取得は、この環境の権限で断られたので行っていない。使っているのは cpp-environment・cpp-macros-template-file・static-top-tree の 3 ページ（hashing-for-sets の post/1594 は出典から外した）
+- trap.jp：2026-10-22 の 2 回目の check_noai で、トップページ（https://trap.jp/）を証明書の検証つきで取得でき（HTTP 200）、robots の meta と X-Robots-Tag に noai・noimageai がないことを確かめた。記事（post/2589・2861・1224・1594）は HTTP 503 か証明書の検証の失敗（自己署名の証明書が返る）で取得できなかった。証明書の検証を外した取得は、この環境の権限で断られたので行っていない。使っているのは cpp-environment・cpp-macros-template-file・static-top-tree の 3 ページ（hashing-for-sets の post/1594 は出典から外した）。2026-10-29 の check_noai（工程11 の方針のページの下書きの担当）で、記事 post/1224・2589・2861 も HTTP 200 で取得でき、noai・noimageai がないことを確かめた（post/1594 は出典から外してある）
 - 確かめられなかった：yukicoder.me は meta の指定はないが、利用規約を確かめるまで使わない（§16-6）。doi.org（union-find-applications の Tarjan・van Leeuwen の論文）と suzukiapple.tumblr.com（sqrt-decomposition）は HTTP 403 で確かめられないので、前者は書誌情報だけの出典（リンクなし）にし、後者は ikatakos.com の ABC365 の記録に替えた（2026-10-22）
 - web.archive.org：ikatakos.com が落ちているときに写しを読むためだけに使う（問題文の節は読まない。§15-6）
 - note.com は meta の指定はないが、利用条件を記事ごとに確かめる（確かめた記事：igasu_7 の n5bd80b1e0eb9・anoconne の n26b5912e1e9c・vain0x の n0037d6468812・syamashi の nb491ffdf0ca3・nc5b5876e0514・n8e580d4ce59d・hip_crow3665 の ne7a656317cea。後の 5 本は 2026-10-22 に meta の指定がなく、本文に転載・引用・AI の利用を断る記述がない無料の記事であることを確かめた）

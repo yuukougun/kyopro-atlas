@@ -26,7 +26,7 @@ sections:
   - {title: 比は割らずに掛け算で比べる, anchor: compare-ratios}
   - {title: 大きい順に左右の端へ置く, anchor: place-at-ends, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -67,6 +67,9 @@ DP の[状態](../guide/glossary.md#state)には、次の要素を足すとき�
 ```cpp
 --8<-- "exchange-argument-dp/tower.cpp:core"
 ```
+
+完全なプログラム：[`tower.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/exchange-argument-dp/tower.cpp)（GitHub）
+{ .kp-code-src }
 
 重さの合計は「下に置いたブロックの $s$」以下の重さに、そのブロックの重さを足したものなので、$\max s + \max w$ を超えない。表の幅はそこで打ち切れる。計算量はソートの $O(N \log N)$ と DP の $O(N \max s)$ である。DP の手間を決めるのは、遷移で回す $t$ の範囲（$0$ 〜 $s_i$）である。表の幅 $\max s + \max w$ はメモリの量にかかわる。
 
@@ -112,6 +115,9 @@ DP の状態は「ここまでの関数から $c$ 個を選び、並べた順に
 ```cpp
 --8<-- "exchange-argument-dp/composition.cpp:core"
 ```
+
+完全なプログラム：[`composition.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/exchange-argument-dp/composition.cpp)（GitHub）
+{ .kp-code-src }
 
 比較関数は割り算をしない。`double` で $(A_i - 1) / B_i$ を求めると、値が大きいときに違う 2 つの比が同じ値に丸められ、順を取り違えて誤答になる（例は[ソートで考える](../basics/sorting-techniques.md#ratio-and-ties)）。掛け算なら整数のままで誤差がない。掛け算で比べるときの注意は 3 つある。
 
@@ -184,7 +190,7 @@ $A$ の大きい順に $k$ 人を置いたとき、左に $l$ 人・右に $r$ �
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC X. Tower](https://atcoder.jp/contests/dp/tasks/dp_x)（diff —）：重さ・丈夫さ・価値が決まったブロックを積み、各ブロックの上に載る重さの合計が丈夫さ以下になるようにするときの、価値の和の最大を求める。
+- [EDPC X. Tower](https://atcoder.jp/contests/dp/tasks/dp_x)（diff なし）：重さ・丈夫さ・価値が決まったブロックを積み、各ブロックの上に載る重さの合計が丈夫さ以下になるようにするときの、価値の和の最大を求める。
 
 </div>
 
@@ -202,7 +208,7 @@ $A$ の大きい順に $k$ 人を置いたとき、左に $l$ 人・右に $r$ �
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 011. Gravy Jobs（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_k)（diff —）：締切・かかる日数・報酬が決まった仕事を選んで締切までに終えるときの、報酬の和の最大を求める。
+- [典型90 011. Gravy Jobs（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_k)（diff なし）：締切・かかる日数・報酬が決まった仕事を選んで締切までに終えるときの、報酬の和の最大を求める。
 
 </div>
 

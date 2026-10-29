@@ -22,7 +22,7 @@ sections:
   - {title: 題材から引く, anchor: by-topic}
   - {title: 状況から引く, anchor: by-situation}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -76,13 +76,15 @@ flowchart TD
 
 ## 言い回しから引く {#by-phrase}
 
-問題文の表現と、求めるものの形から手法を引く表である。行はページの分野で次の 5 つの群に分かれ、同じページの行はまとめて並ぶ。
+問題文の表現と、求めるものの形から手法を引く表である。行はページの種類（kind の 1 つ目）で次の 5 つの群に分かれ、同じページの行はまとめて並ぶ。
 
 - **探索・最適化**：計算量・全探索・二分探索・貪欲法・ソート・ダブリング・DP・考察の型。
 - **区間・列・データ構造**：累積和・差分列・尺取り法・区間クエリ・データ構造・クエリの処理の工夫。
 - **グラフ・木**：グラフの探索・最短路・連結性・全域木・フロー・木。
 - **整数・数え上げ・確率**：整数論・行列・畳み込み・数え上げ・確率・期待値・bit 演算。
 - **文字列・幾何・ゲーム・そのほか**：文字列・ハッシュ・乱択・幾何・ゲーム・C++・案内と題材のページ。
+
+群は種類の 1 つ目だけで決まる。そのため DP の手法（種類の 1 つ目が DP のページ）は、対象が木やグラフでも[探索・最適化の群](#signs-phrase-search)にある。たとえば木 DP・全方位木 DP・DAG 上の DP の行は「グラフ・木」の群にはないので、木やグラフの問題では両方の群を見る。
 
 似た言い回しが複数の群に出ることがある。「K 番目」は探索の群（K 番目の値）とデータ構造の群（K 番目を答えるデータ構造）の両方にある。どちらを先に疑うかは[見分け方の節](#disambiguation)にまとめた。
 
@@ -121,24 +123,24 @@ flowchart TD
 | 全区間の中央値を集めた中央値 | [平均・中央値の最大化](../basics/fractional-binary-search.md) | 水 |
 | N^2 個（以上）の値の K 番目 | [K 番目の値](../basics/kth-value.md) | 青 |
 | 大きい方から M 個の和 | [K 番目の値](../basics/kth-value.md) | 青 |
-| 時刻や位置を 1 つ選んで、時間やコストを最小化する（谷形） | [三分探索](../basics/ternary-search.md) | 水 |
-| 答えを実数で出力し、誤差が許される | [三分探索](../basics/ternary-search.md) | 水 |
 | Σ\|x − a_i\| を最小化する | [絶対値の和の最小化と中央値](../basics/median-absolute.md) | 基礎 |
 | マンハッタン距離の和が最小になる点 | [絶対値の和の最小化と中央値](../basics/median-absolute.md) | 基礎 |
 | 全員を 1 か所に集める移動の和 | [絶対値の和の最小化と中央値](../basics/median-absolute.md) | 基礎 |
+| 時刻や位置を 1 つ選んで、時間やコストを最小化する（谷形） | [三分探索](../basics/ternary-search.md) | 水 |
+| 答えを実数で出力し、誤差が許される | [三分探索](../basics/ternary-search.md) | 水 |
 | 強いもの・安いものから順に使う | [貪欲法の考え方と正当性](../basics/greedy-basics.md) | 基礎 |
 | 1 回ごとに最大（最小）のものを選ぶ操作を繰り返す | [貪欲法の考え方と正当性](../basics/greedy-basics.md) | 基礎 |
 | 重ならない区間をできるだけ多く選ぶ | [区間スケジューリング・区間の串刺し](../basics/interval-scheduling.md) | 基礎 |
 | すべての区間を最少の点（串）で突く | [区間スケジューリング・区間の串刺し](../basics/interval-scheduling.md) | 基礎 |
+| 辞書順最小（最大）の文字列・列を出力する（なければ −1） | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md) | 基礎 |
+| 条件を満たす中で最も小さいもの | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md) | 基礎 |
+| 辞書順で K 番目 | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md) | 基礎 |
 | 日が進むと選択肢が増え、各日に 1 つ選ぶ | [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md) | 水 |
 | 締め切りまでに何個できるか・報酬の最大 | [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md) | 水 |
 | 毎回いちばん大きい（小さい）ものを取り出して更新する | [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md) | 水 |
 | 組合せの和の小さい方から K 番目（K が小さい） | [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md) | 水 |
 | 並べる順番で結果が変わる | [交換論法と比較関数の設計](../basics/exchange-argument.md) | 青 |
 | 文字列・数を並べて連結した結果を最大（最小）にする | [交換論法と比較関数の設計](../basics/exchange-argument.md) | 青 |
-| 辞書順最小（最大）の文字列・列を出力する（なければ −1） | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md) | 基礎 |
-| 条件を満たす中で最も小さいもの | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md) | 基礎 |
-| 辞書順で K 番目 | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md) | 基礎 |
 | x_{n+1} = f(x_n) の形の漸化式 | [周期性の検出](../basics/periodicity.md) | 基礎 |
 | 同じ模様が繰り返し敷き詰められた盤面 | [周期性の検出](../basics/periodicity.md) | 基礎 |
 | 各状態から次の状態がただ 1 つに決まる | [ダブリング](../basics/doubling.md) | 水 |
@@ -309,6 +311,12 @@ flowchart TD
 | x 以上で最小の値・最も近い値を、追加・削除しながら何度も答える | [set・multiset・map の応用](../ds/ordered-set.md) | 基礎 |
 | まだ使われていない最小の値（mex）を更新のたびに答える | [set・multiset・map の応用](../ds/ordered-set.md) | 基礎 |
 | 同じ行・同じ列で次にある壁や家を見つけて壊す | [set・multiset・map の応用](../ds/ordered-set.md) | 基礎 |
+| 全要素に x を足す・全体に代入する操作がクエリに混ざる | [全体への操作を変数で持つ](../ds/global-offset.md) | 基礎 |
+| 列全体を反転してから先頭・末尾に追加する | [全体への操作を変数で持つ](../ds/global-offset.md) | 基礎 |
+| 配列を回転してから i 番目を参照する | [全体への操作を変数で持つ](../ds/global-offset.md) | 基礎 |
+| 値 x の直後に y を挿入・値 x を削除する操作を繰り返し、最後の列を出力する | [配列で作る連結リスト](../ds/linked-list.md) | 基礎 |
+| カードの山を別のカードの上へ付け替える | [配列で作る連結リスト](../ds/linked-list.md) | 基礎 |
+| 列車の連結・切り離し | [配列で作る連結リスト](../ds/linked-list.md) | 基礎 |
 | 毎回いちばん大きい（小さい）ものを取り出し、新しい候補を入れる | [優先度付きキュー](../ds/priority-queue.md) | 水 |
 | 接頭辞ごとに K 番目に大きい値を答える | [優先度付きキュー](../ds/priority-queue.md) | 水 |
 | グループ間の移動のたびに、各グループの最大値のうちの最小値を答える | [優先度付きキュー](../ds/priority-queue.md) | 水 |
@@ -318,12 +326,6 @@ flowchart TD
 | 区間を塗るたびに、塗られたマスの数や色ごとのマスの数を答える | [区間を set で管理する](../ds/interval-set.md) | 水 |
 | 同じ色でつながった区間をまとめて塗り替える | [区間を set で管理する](../ds/interval-set.md) | 水 |
 | 点 x が覆われているか・x を含む区間はどこか | [区間を set で管理する](../ds/interval-set.md) | 水 |
-| 全要素に x を足す・全体に代入する操作がクエリに混ざる | [全体への操作を変数で持つ](../ds/global-offset.md) | 基礎 |
-| 列全体を反転してから先頭・末尾に追加する | [全体への操作を変数で持つ](../ds/global-offset.md) | 基礎 |
-| 配列を回転してから i 番目を参照する | [全体への操作を変数で持つ](../ds/global-offset.md) | 基礎 |
-| 値 x の直後に y を挿入・値 x を削除する操作を繰り返し、最後の列を出力する | [配列で作る連結リスト](../ds/linked-list.md) | 基礎 |
-| カードの山を別のカードの上へ付け替える | [配列で作る連結リスト](../ds/linked-list.md) | 基礎 |
-| 列車の連結・切り離し | [配列で作る連結リスト](../ds/linked-list.md) | 基礎 |
 | 括弧の対応を取る・対応する括弧ごと消す | [スタック・キュー・deque の使いどころ](../ds/stack-techniques.md) | 基礎 |
 | 特定の並びが現れたら取り除く操作を繰り返した結果 | [スタック・キュー・deque の使いどころ](../ds/stack-techniques.md) | 基礎 |
 | 直前の操作を取り消す（Undo） | [スタック・キュー・deque の使いどころ](../ds/stack-techniques.md) | 基礎 |
@@ -418,6 +420,8 @@ flowchart TD
 | 点 (x, y) の集合で、同じ x・同じ y を持つ点どうしが関係する | [連結成分](../graph/connected-components.md) | 基礎 |
 | 循環している・依存関係が回っている・矛盾があれば −1 | [閉路の検出と復元](../graph/cycle-detection.md) | 基礎 |
 | 閉路を 1 つ見つけて出力せよ | [閉路の検出と復元](../graph/cycle-detection.md) | 基礎 |
+| N 頂点 N 辺の連結グラフ・木に辺を 1 本足したグラフ | [なもりグラフ](../graph/namori-graph.md) | 水 |
+| 2 頂点間の単純パスが一意か | [なもりグラフ](../graph/namori-graph.md) | 水 |
 | 2 つのグループに分ける・隣り合うものは異なる色 | [二部グラフ判定](../graph/bipartite-graph.md) | 基礎 |
 | X_i と Y_i は異なる値、という条件が M 個ある | [二部グラフ判定](../graph/bipartite-graph.md) | 基礎 |
 | 奇数長の閉路があるか | [二部グラフ判定](../graph/bipartite-graph.md) | 基礎 |
@@ -428,8 +432,6 @@ flowchart TD
 | 1 回の移動のコストが 0 か 1 | [01-BFS](../graph/zero-one-bfs.md) | 水 |
 | 辺を 1 本ずつ追加（削除）するたびに、距離についての値を答える | [ワーシャルフロイド法](../graph/warshall-floyd.md) | 水 |
 | 訪れる地点の順番を全部試す（地点間の距離が要る） | [ワーシャルフロイド法](../graph/warshall-floyd.md) | 水 |
-| 負の重みの辺がある・得点を最大化する（符号を反転すると負辺になる） | [ベルマンフォード法](../graph/bellman-ford.md) | 青 |
-| いくらでも大きくできるなら inf と出力する | [ベルマンフォード法](../graph/bellman-ford.md) | 青 |
 | 最短路の本数を数える | [最短路 DAG](../graph/shortest-path-dag.md) | 水 |
 | この辺を通らなくても最短距離は変わらないか・最短路に使われない辺 | [最短路 DAG](../graph/shortest-path-dag.md) | 水 |
 | 始点からの最短距離を保ったまま辺を減らし、全域木を出力する | [最短路 DAG](../graph/shortest-path-dag.md) | 水 |
@@ -440,6 +442,8 @@ flowchart TD
 | 決まった時刻にしか出発できない・待つことができる | [時刻で変わる辺の最短路](../graph/time-dependent-dijkstra.md) | 水 |
 | 出発時刻によって所要時間が変わる | [時刻で変わる辺の最短路](../graph/time-dependent-dijkstra.md) | 水 |
 | 終点に間に合う最も遅い出発時刻 | [時刻で変わる辺の最短路](../graph/time-dependent-dijkstra.md) | 水 |
+| 負の重みの辺がある・得点を最大化する（符号を反転すると負辺になる） | [ベルマンフォード法](../graph/bellman-ford.md) | 青 |
+| いくらでも大きくできるなら inf と出力する | [ベルマンフォード法](../graph/bellman-ford.md) | 青 |
 | x_j − x_i ≤ c の形の条件の下で、ある変数を最大化（最小化）する | [差分制約（牛ゲー）](../graph/difference-constraints.md) | 青 |
 | 区間の和が S 以上・以下という条件が並ぶ | [差分制約（牛ゲー）](../graph/difference-constraints.md) | 青 |
 | 位置の差の情報が矛盾しないか | [差分制約（牛ゲー）](../graph/difference-constraints.md) | 青 |
@@ -455,8 +459,6 @@ flowchart TD
 | 何度でもくり返せる（閉路の中にいる） | [強連結成分分解（SCC）](../graph/scc.md) | 水 |
 | 各 i から A_i へ移動する | [Functional graph（出次数 1 のグラフ）](../graph/functional-graph.md) | 水 |
 | 嫌いな相手・行き先が 1 人（1 つ）ずつ決まっている | [Functional graph（出次数 1 のグラフ）](../graph/functional-graph.md) | 水 |
-| N 頂点 N 辺の連結グラフ・木に辺を 1 本足したグラフ | [なもりグラフ](../graph/namori-graph.md) | 水 |
-| 2 頂点間の単純パスが一意か | [なもりグラフ](../graph/namori-graph.md) | 水 |
 | 各要素が 2 択で「この 2 つは同時に選べない」「少なくともどちらか一方」 | [2-SAT](../graph/two-sat.md) | 発展 |
 | 条件を満たす 2 択の割当があるか、あれば 1 つ出力する | [2-SAT](../graph/two-sat.md) | 発展 |
 | 辺（頂点）を順に削除し、そのつど連結成分の数・大きさを答える（橋が崩落する・停電） | [Union-Find で連結性を扱う](../graph/union-find-connectivity.md) | 水 |
@@ -478,10 +480,10 @@ flowchart TD
 | 条件を満たすグラフ・経路・全域木を 1 つ出力せよ | [DFS 木・BFS 木とグラフの構築](../graph/graph-construction.md) | 青 |
 | 訪問回数の偶奇が指定された経路を作る | [DFS 木・BFS 木とグラフの構築](../graph/graph-construction.md) | 青 |
 | 全点対の距離表からグラフを復元できるか | [DFS 木・BFS 木とグラフの構築](../graph/graph-construction.md) | 青 |
-| すべての辺をちょうど 1 回ずつ通る・一筆書き | [オイラー路（一筆書き）](../graph/euler-path.md) | 黄 |
-| 同じ道を 2 度通らずにすべての道を通れるか | [オイラー路（一筆書き）](../graph/euler-path.md) | 黄 |
 | 頂点とその隣接頂点すべてに対する操作・質問が大量に来る | [次数による平方分割](../graph/degree-sqrt.md) | 青 |
 | 長さ 3・4 の閉路を見つける・数える | [次数による平方分割](../graph/degree-sqrt.md) | 青 |
+| すべての辺をちょうど 1 回ずつ通る・一筆書き | [オイラー路（一筆書き）](../graph/euler-path.md) | 黄 |
+| 同じ道を 2 度通らずにすべての道を通れるか | [オイラー路（一筆書き）](../graph/euler-path.md) | 黄 |
 | 同時に使えない資源を割り当てる・各行・各列に高々 1 つ | [最大流](../graph/max-flow.md) | 黄 |
 | 辺（頂点）を共有しない経路の本数 | [最大流](../graph/max-flow.md) | 黄 |
 | 容量・上限つきで送れる量の最大 | [最大流](../graph/max-flow.md) | 黄 |
@@ -529,13 +531,13 @@ flowchart TD
 | 全頂点を訪れる最短の移動（戻らなくてよい） | [木の直径と最遠点](../tree/tree-diameter.md) | 水 |
 | 各頂点から最も遠い頂点・2 つの木をつないだときの直径 | [木の直径と最遠点](../tree/tree-diameter.md) | 水 |
 | K 個の頂点を選んで通る辺の総長を最大化する（K = 1, 2, … のすべてについて） | [木の直径と最遠点](../tree/tree-diameter.md) | 水 |
-| ペアを作ってパスの長さの和を最大化する | [木の重心](../tree/tree-centroid.md) | 黄 |
-| どの成分も半分以下になるように分ける | [木の重心](../tree/tree-centroid.md) | 黄 |
 | すべての i < j について f(i, j) の総和 | [辺で切って数える](../tree/tree-edge-contribution.md) | 水 |
 | 全ペアのパス上の最大値（最小値）の和 | [辺で切って数える](../tree/tree-edge-contribution.md) | 水 |
 | 条件を満たす木を 1 つ出力せよ（なければ −1） | [木の構築・復元](../tree/tree-construction.md) | 水 |
 | 距離の情報から木を復元できるか | [木の構築・復元](../tree/tree-construction.md) | 水 |
 | 訪問順（DFS 順）から元の木が何通りあるか | [木の構築・復元](../tree/tree-construction.md) | 水 |
+| ペアを作ってパスの長さの和を最大化する | [木の重心](../tree/tree-centroid.md) | 黄 |
+| どの成分も半分以下になるように分ける | [木の重心](../tree/tree-centroid.md) | 黄 |
 | 形が同じ部分木の種類数 | [木の同型判定と木のハッシュ](../tree/tree-isomorphism.md) | 発展 |
 | 2 つの木が同じ形か（根あり・根なし） | [木の同型判定と木のハッシュ](../tree/tree-isomorphism.md) | 発展 |
 | 木の 2 頂点の距離をクエリでたくさん聞かれる | [最小共通祖先（LCA）](../tree/lca.md) | 青 |
@@ -588,10 +590,10 @@ flowchart TD
 | 答えは有理数 P/Q になるので P × Q^(−1) mod 998244353 を出力する | [逆元と mod での割り算](../math/mod-inverse.md) | 基礎 |
 | 平均・等比数列の和などを、割り算を含む式のまま mod で求める | [逆元と mod での割り算](../math/mod-inverse.md) | 基礎 |
 | 法 M（素数とは限らない）が入力で与えられ、その余りで数え上げの答えを出力する | [modint](../math/modint.md) | 基礎 |
-| a&#94;(b&#94;c) mod p のように、指数にさらに指数がある | [フェルマーの小定理と指数の mod](../math/exponent-mod.md) | 水 |
-| 累乗の塔を mod で求める | [フェルマーの小定理と指数の mod](../math/exponent-mod.md) | 水 |
 | 同じ数字列を K 回並べてできる数を mod で求める | [等比数列の和を mod で求める](../math/geometric-series-mod.md) | 基礎 |
 | 法 M が入力で与えられ、素数とは限らない | [等比数列の和を mod で求める](../math/geometric-series-mod.md) | 基礎 |
+| a&#94;(b&#94;c) mod p のように、指数にさらに指数がある | [フェルマーの小定理と指数の mod](../math/exponent-mod.md) | 水 |
+| 累乗の塔を mod で求める | [フェルマーの小定理と指数の mod](../math/exponent-mod.md) | 水 |
 | 数字列の部分文字列を整数とみて、P の倍数になるものを数える | [桁と mod](../math/digit-and-mod.md) | 水 |
 | 桁を消したり並べ替えたりして K の倍数にする | [桁と mod](../math/digit-and-mod.md) | 水 |
 | 2 つの数を文字列として連結した数についての条件 | [桁と mod](../math/digit-and-mod.md) | 水 |
@@ -605,15 +607,15 @@ flowchart TD
 | 区間 [l, r] の素数の個数を何度も答える | [エラトステネスの篩](../math/sieve-eratosthenes.md) | 基礎 |
 | すべての組が互いに素か（pairwise coprime）を判定する | [最小素因数の篩と線形篩](../math/spf-sieve.md) | 基礎 |
 | 各要素の素因数の個数（重複込み）を求める | [最小素因数の篩と線形篩](../math/spf-sieve.md) | 基礎 |
+| 積が平方数（立方数）になる組を数える | [素因数の指数で考える](../math/prime-exponent-vector.md) | 基礎 |
+| 多数の数の lcm を mod で求める | [素因数の指数で考える](../math/prime-exponent-vector.md) | 基礎 |
+| 2 で割り切れる回数・各素数の指数をそろえる | [素因数の指数で考える](../math/prime-exponent-vector.md) | 基礎 |
+| 素因数が P 以下の数（P-smooth 数）を数える | [素因数の指数で考える](../math/prime-exponent-vector.md) | 基礎 |
 | N の約数ごとに〜を計算する・d \| N を満たす d を全部試す | [約数の個数の上界と高度合成数](../math/divisor-count-bound.md) | 水 |
 | N 以下で約数の個数が最大の数・約数が多い数を探す | [約数の個数の上界と高度合成数](../math/divisor-count-bound.md) | 水 |
 | 連続する区間の数をそれぞれ素因数分解する | [区間篩](../math/segmented-sieve.md) | 水 |
 | 二項係数 C(N, K) の分子 N−K+1..N を素因数分解する | [区間篩](../math/segmented-sieve.md) | 水 |
 | 区間の中の素数の累乗（lcm(1, …, n) が変わる位置）を数える | [区間篩](../math/segmented-sieve.md) | 水 |
-| 積が平方数（立方数）になる組を数える | [素因数の指数で考える](../math/prime-exponent-vector.md) | 基礎 |
-| 多数の数の lcm を mod で求める | [素因数の指数で考える](../math/prime-exponent-vector.md) | 基礎 |
-| 2 で割り切れる回数・各素数の指数をそろえる | [素因数の指数で考える](../math/prime-exponent-vector.md) | 基礎 |
-| 素因数が P 以下の数（P-smooth 数）を数える | [素因数の指数で考える](../math/prime-exponent-vector.md) | 基礎 |
 | n と互いに素な 1..n の数の個数・既約分数の個数 | [オイラーの φ 関数](../math/euler-phi.md) | 黄 |
 | 位数が d になる元の個数 | [オイラーの φ 関数](../math/euler-phi.md) | 黄 |
 | a^k ≡ 1 (mod n) となる最小の k を探す | [オイラーの φ 関数](../math/euler-phi.md) | 黄 |
@@ -694,12 +696,12 @@ flowchart TD
 | 2 種類の移動を組み合わせて目的地へ行く方法の数 | [格子路の数え上げ](../comb/lattice-paths.md) | 基礎 |
 | 最大値（最小値）がちょうど K になるものの個数 | [数え上げの考え方](../comb/counting-mindset.md) | 水 |
 | すべての選び方についての〜の総和 | [数え上げの考え方](../comb/counting-mindset.md) | 水 |
-| 単調な数列の個数 | [対応づけ・数える対象の言い換え](../comb/counting-bijection.md) | 青 |
-| 積（和）が決まった値になる数列の個数 | [対応づけ・数える対象の言い換え](../comb/counting-bijection.md) | 青 |
-| 途中で負にならない ±1 の列の個数 | [対応づけ・数える対象の言い換え](../comb/counting-bijection.md) | 青 |
 | A は B より先に来る、という順番の制約がある並べ方の数 | [順序を固定して数える](../comb/counting-fix-order.md) | 水 |
 | 選んだ K 個の最大値（最小値）の総和 | [順序を固定して数える](../comb/counting-fix-order.md) | 水 |
 | 木の頂点に、親が子より先になるように番号を振る方法の数 | [順序を固定して数える](../comb/counting-fix-order.md) | 水 |
+| 単調な数列の個数 | [対応づけ・数える対象の言い換え](../comb/counting-bijection.md) | 青 |
+| 積（和）が決まった値になる数列の個数 | [対応づけ・数える対象の言い換え](../comb/counting-bijection.md) | 青 |
+| 途中で負にならない ±1 の列の個数 | [対応づけ・数える対象の言い換え](../comb/counting-bijection.md) | 青 |
 | 異なる〜の個数（種類数） | [重複の除き方](../comb/counting-dedup.md) | 青 |
 | 操作で作れる文字列（列）の種類数 | [重複の除き方](../comb/counting-dedup.md) | 青 |
 | S を部分列として含む文字列の個数 | [重複の除き方](../comb/counting-dedup.md) | 青 |
@@ -780,13 +782,13 @@ flowchart TD
 | 〜になるまでの操作回数の期待値 | [期待値 DP](../comb/expected-value-dp.md) | 水 |
 | 終わるまでにかかる費用の期待値 | [期待値 DP](../comb/expected-value-dp.md) | 水 |
 | 出た目が〜なら振り直し・確率 p で何も起きない | [期待値 DP](../comb/expected-value-dp.md) | 水 |
-| 最適に行動したときの期待値（勝率） | [最適戦略の期待値](../comb/optimal-strategy-expectation.md) | 黄 |
-| 好きなタイミングでやめられる・最初からやり直せる | [最適戦略の期待値](../comb/optimal-strategy-expectation.md) | 黄 |
-| どれを残すか（どれを選ぶか）を選びながら進む | [最適戦略の期待値](../comb/optimal-strategy-expectation.md) | 黄 |
 | 振り出し（スタート）に戻るマスがある | [閉路のある期待値](../comb/expectation-linear-equations.md) | 青 |
 | 円形に並んだ人が順番に〜する | [閉路のある期待値](../comb/expectation-linear-equations.md) | 青 |
 | 無限に続く可能性がある | [閉路のある期待値](../comb/expectation-linear-equations.md) | 青 |
 | 2 人が交互に繰り返し、決着がつくまで続ける | [閉路のある期待値](../comb/expectation-linear-equations.md) | 青 |
+| 最適に行動したときの期待値（勝率） | [最適戦略の期待値](../comb/optimal-strategy-expectation.md) | 黄 |
+| 好きなタイミングでやめられる・最初からやり直せる | [最適戦略の期待値](../comb/optimal-strategy-expectation.md) | 黄 |
+| どれを残すか（どれを選ぶか）を選びながら進む | [最適戦略の期待値](../comb/optimal-strategy-expectation.md) | 黄 |
 | 最大値（最小値・K 番目の値）の期待値 | [期待値と確率の変換](../comb/expectation-tail-sum.md) | 黄 |
 | 〜がそろうまでに取り出す回数の期待値 | [期待値と確率の変換](../comb/expectation-tail-sum.md) | 黄 |
 | 〜の二乗の期待値 | [二乗の期待値・分散](../comb/expectation-of-square.md) | 黄 |
@@ -962,6 +964,11 @@ flowchart TD
 | 過去の状態に戻す・ある時点の状態をコピーする | [操作列とクエリ](../patterns/operation-sequence.md) | — |
 | 行や列・区間を塗り替える操作の後の最終状態 | [操作列とクエリ](../patterns/operation-sequence.md) | — |
 | 同じ操作を 10^18 回繰り返した後の状態 | [操作列とクエリ](../patterns/operation-sequence.md) | — |
+| N 個が円形に並び、N 番目と 1 番目も隣り合う | [円環](../patterns/circular.md) | — |
+| 円環上の連続する区間の和・個数（端をまたぐ区間も含む） | [円環](../patterns/circular.md) | — |
+| 円形に並ぶものを、隣どうしが違う色で塗る方法の数 | [円環](../patterns/circular.md) | — |
+| 列を何回回転させると、もう一方の列に一致するか | [円環](../patterns/circular.md) | — |
+| 円周上に点が並び、時計回りに進む・点どうしを弦で結ぶ | [円環](../patterns/circular.md) | — |
 | 答えの絶対誤差または相対誤差が 10^-6 以下なら正解とする（小数の桁を指定して出力しないと WA になる） | [入出力と定数倍](../cpp/cpp-io.md) | 基礎 |
 
 <!-- textlint-enable -->
@@ -1013,7 +1020,7 @@ flowchart TD
 | 遷移で dp 全体に一律の加算・平行移動が入る | [インライン DP](../dp/inline-dp.md) | 青 |
 | 区間 [l, r] の右端 r で、l 以降の位置の dp にまとめて加算する | [インライン DP](../dp/inline-dp.md) | 青 |
 | 遷移のコストが i と j の積の項を 1 つだけ含む（(h_i − h_j)^2 など） | [Convex Hull Trick と Li Chao Tree](../dp/cht.md) | 発展 |
-| 区間分割 DP のコストが c(a, c) + c(b, d) ≤ c(a, d) + c(b, c) を満たす（区間を広げるほど増え方が大きい） | [Monge 性による DP の高速化](../dp/monge.md) | 発展 |
+| 区間分割 DP のコストが a ≤ b ≤ c ≤ d について c(a, c) + c(b, d) ≤ c(a, d) + c(b, c) を満たす（区間を広げるほど増え方が大きい） | [Monge 性による DP の高速化](../dp/monge.md) | 発展 |
 | 最適な区切り位置 opt(i) が i について単調に動く | [Monge 性による DP の高速化](../dp/monge.md) | 発展 |
 | K 個選ぶときの答え f(K) が K について凸（1 個増やすときの得が、個数が増えるほど減る） | [Alien DP](../dp/alien-dp.md) | 発展 |
 | dp\[i][x] = min_{y ≤ x} dp\[i−1][y] + \|x − a_i\| のように、x について区分線形で凸 | [Slope Trick](../dp/slope-trick.md) | 発展 |
@@ -1208,6 +1215,7 @@ flowchart TD
 | 部分列・部分文字列 | 判定、選び方の数、異なるものの数、最長の共通部分 | [部分列と部分文字列](../patterns/subsequence-and-substring.md#overview) |
 | 順列 | $i \to P_i$ のサイクル、swap の回数と偶奇、置換の繰り返し | [順列と置換](../patterns/permutation.md#overview) |
 | 括弧列 | 正しいかの判定、`?` の埋め方の数、区間の判定、並べる順序 | [括弧列](../patterns/bracket-sequence.md#overview) |
+| 円環 | 区間が端をまたぐ、最後と最初が隣り合う数え上げ・DP、回転の一致、円周上の点と弦 | [円環](../patterns/circular.md#overview) |
 | mex | mex を求める・更新する・総和を取る | [mex](../patterns/mex.md#overview) |
 | K 番目・中央値 | K 番目に小さい値、上位 K 個の和、中央値 | [K 番目と中央値](../patterns/kth-and-median.md#overview) |
 | XOR | 桁ごとの数え上げ、累積 XOR、作れる値、ゲーム | [XOR](../patterns/xor.md#overview) |

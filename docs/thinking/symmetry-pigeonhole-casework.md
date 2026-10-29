@@ -25,7 +25,7 @@ sections:
   - {title: 鳩の巣原理（必ず一致が起きる・探索の打ち切り回数）, anchor: pigeonhole, level: 水}
   - {title: 場合分け（端の場合・大小関係・操作の順序によらないこと）, anchor: casework}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -43,6 +43,8 @@ updated: 2026-10-22
 <!-- textlint-enable -->
 
 対称性・鳩の巣原理・場合分けは、どれも問題を解く手法ではなく、手法を使える形に問題を整える小さな考え方である。対称性は「入れ替えても同じ」ことを使って計算や場合の数を減らす。鳩の巣原理は「種類が少ないので必ず一致が起きる」ことから、全探索の回数に上限を付ける。場合分けは、1 つの式で書けない端の場合を切り離して、残りを単純にする。
+
+使える合図は 3 つある。「$i < j$ の組すべてについての積の和」のように入れ替えても同じ形の量を求めること、「余りが等しい 2 つ」のように種類の少ない値の一致を探すこと、制約が $N = 1$ を許し、端の場合だけ答えの形が変わりそうなことである。ほかにどの型を試すかは、[詰まったときの発想リスト](../guide/thinking-checklist.md#other-types)の「ほかの型の行き先」の表（鳩の巣原理・場合分け）と「[総和を求める](../guide/thinking-checklist.md#shape-sum)」の表（対称性）で引ける。
 
 ## 対称性で計算を半分にする（添字の小さい順の組の和・全体の XOR から 1 つ除く） {#symmetry}
 
@@ -63,6 +65,9 @@ $$
 ```cpp
 --8<-- "symmetry-pigeonhole-casework/pair-sum.cpp:core"
 ```
+
+完全なプログラム：[`pair-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/symmetry-pigeonhole-casework/pair-sum.cpp)（GitHub）
+{ .kp-code-src }
 
 同じ形は XOR でも現れる。$N$ 人のそれぞれについて「自分以外の全員の XOR」$B_i$ が与えられたとする。$B_1 \oplus \dots \oplus B_N$ では各人の値が $N - 1$ 回ずつ現れる。$N$ が偶数なら $N - 1$ は奇数なので、これは全員の値の XOR $T$ に等しい。各人の値は $T \oplus B_i$ で求まる（同じ値の XOR は打ち消し合う。[XOR の性質](../basics/bit-operations.md#xor-properties)）。$N$ が奇数なら各人の値は偶数回ずつ現れるので、$B$ の XOR は $0$ になり、この方法では $T$ が求まらない。和の場合も同じで、自分以外の和の総和は全員の和の $N - 1$ 倍になる。
 
@@ -105,6 +110,9 @@ $$
 ```cpp
 --8<-- "symmetry-pigeonhole-casework/pigeonhole-subsets.cpp:core"
 ```
+
+完全なプログラム：[`pigeonhole-subsets.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/symmetry-pigeonhole-casework/pigeonhole-subsets.cpp)（GitHub）
+{ .kp-code-src }
 
 鳩の巣原理は「ある」ことを保証するだけで、どれが一致するかは教えてくれない。見つける部分は全探索や記録の配列に任せる。余りについての証明の型は[整数の証明の型](../math/proof-patterns.md#pigeonhole-remainder)にある。グラフで探索を打ち切る応用（長さ 4 の閉路の検出、黄の帯）は[次数で分ける](../graph/degree-sqrt.md#four-cycles)にある。
 

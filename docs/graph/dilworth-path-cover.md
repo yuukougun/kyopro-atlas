@@ -25,7 +25,7 @@ sections:
   - {title: Hall の結婚定理, anchor: hall}
   - {title: 自作するときの要点と Library Checker, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -57,11 +57,14 @@ updated: 2026-10-22
 
 ![出る側の 0〜4 と入る側の 0'〜4' を左右に並べた二部グラフ。辺は 0-2'、1-2'、2-3'、2-4' の 4 本で、マッチングの 0-2' と 2-3' を太い実線、残りの 1-2' と 2-4' を破線で描いている](../img/dilworth-path-cover/split.svg)
 
-中心の部分は次のとおりである（完全なプログラムは `snippets/dilworth-path-cover/path-cover.cpp`）。番号の付け方・閉路があるとき・復元の注意は[自作するときの要点](#library)にまとめた。
+中心の部分は次のとおりである（完全なプログラムは [`snippets/dilworth-path-cover/path-cover.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dilworth-path-cover/path-cover.cpp)）。番号の付け方・閉路があるとき・復元の注意は[自作するときの要点](#library)にまとめた。
 
 ```cpp
 --8<-- "dilworth-path-cover/path-cover.cpp:core"
 ```
+
+完全なプログラム：[`path-cover.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dilworth-path-cover/path-cover.cpp)（GitHub）
+{ .kp-code-src }
 
 ## 推移閉包と最大反鎖（数列なら LIS のページの Dilworth の定理へ） {#antichain}
 
@@ -80,6 +83,9 @@ updated: 2026-10-22
 ```cpp
 --8<-- "dilworth-path-cover/path-cover.cpp:antichain"
 ```
+
+完全なプログラム：[`path-cover.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dilworth-path-cover/path-cover.cpp)（GitHub）
+{ .kp-code-src }
 
 数列を増加列に分ける問題（鎖が「左から右へ狭義増加」）では、二部マッチングを使わずに、最長減少部分列の長さとして $O(N \log N)$ で求まる（[LIS の Dilworth の定理](../dp/lis.md#dilworth)）。2 次元の点の鎖も同じである。一般の半順序のときだけ、このページの二部マッチングを使う。
 
@@ -127,9 +133,9 @@ Library Checker には最小パス被覆そのものの問題はないので、�
 
 ## 学ぶための資料 {#resources}
 
-- Wikipedia（英語）の「Dilworth's theorem」：König の定理からの証明と、二部マッチングで幅（最大反鎖の大きさ）が求まること
-- Wikipedia（英語）の「Hall's marriage theorem」：定理の主張といくつかの証明
-- OI Wiki の「序理论」（中国語）：鎖・反鎖の定義と、Dilworth の定理・Mirsky の定理
+- [Wikipedia「Dilworth's theorem」](https://en.wikipedia.org/wiki/Dilworth%27s_theorem)（英語）：König の定理からの証明と、二部マッチングで幅（最大反鎖の大きさ）が求まること
+- [Wikipedia「Hall's marriage theorem」](https://en.wikipedia.org/wiki/Hall%27s_marriage_theorem)（英語）：定理の主張といくつかの証明
+- [OI Wiki「序理论」](https://oi-wiki.org/math/order-theory/)（中国語）：鎖・反鎖の定義と、Dilworth の定理・Mirsky の定理
 
 ## 例題 {#examples}
 

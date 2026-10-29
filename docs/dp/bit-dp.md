@@ -29,7 +29,7 @@ sections:
   - {title: ゲームの状態を集合で持つ, anchor: games}
   - {title: 素数の使用状況を集合で持つ, anchor: primes, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -94,6 +94,9 @@ bitDP の遷移は、ほとんどが「集合 $S$ から、それより大きい
 --8<-- "bit-dp/matching.cpp:core"
 ```
 
+完全なプログラム：[`matching.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bit-dp/matching.cpp)（GitHub）
+{ .kp-code-src }
+
 状態は $2^N$ 個、各状態の遷移は $N$ 通りなので $O(2^N N)$ である。男性の番号まで状態に持つと $\mathrm{dp}[i][S]$ になるが、$i = \lvert S \rvert$ でない組は使われないので、持つだけ無駄になる。
 
 集合だけを状態にする別の形に、「集合の和を取る」遷移がある。品物 $k$ が集合 $c_k$ を覆い、費用 $a_k$ で買えるとする。$\mathrm{dp}[S]$ ＝ 覆った集合が $S$ になる最小費用として、$\mathrm{dp}[S \cup c_k] \gets \min(\mathrm{dp}[S \cup c_k], \mathrm{dp}[S] + a_k)$ と配る。$S \cup c_k \ge S$ なので、これも昇順でよい（$S \cup c_k = S$ のときは値が良くならないだけである）。
@@ -123,6 +126,9 @@ $N = 3$ で一度動かす。$c(0, 1) = 1$、$c(1, 2) = 2$、$c(2, 0) = 3$、$c(
 ```cpp
 --8<-- "bit-dp/tsp.cpp:core"
 ```
+
+完全なプログラム：[`tsp.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bit-dp/tsp.cpp)（GitHub）
+{ .kp-code-src }
 
 **その状態で足りる理由**：$(S, v)$ から先の最適な回り方は、残りの頂点の集合 $V \setminus S$ と、いまいる $v$ だけで決まる。ここまでの順番は、残りの回り方の選択肢とコストのどちらも変えない。だから同じ $(S, v)$ に来る経路のうち最小のものだけを残してよい。
 
@@ -205,7 +211,7 @@ $N = 3$ で一度動かす。$c(0, 1) = 1$、$c(1, 2) = 2$、$c(2, 0) = 3$、$c(
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC O. Matching](https://atcoder.jp/contests/dp/tasks/dp_o)（diff —）：N 人の男性と N 人の女性の相性が分かっているとき、相性の良い組だけで N 組のペアを作る方法の数を求める。
+- [EDPC O. Matching](https://atcoder.jp/contests/dp/tasks/dp_o)（diff なし）：N 人の男性と N 人の女性の相性が分かっているとき、相性の良い組だけで N 組のペアを作る方法の数を求める。
 
 </div>
 

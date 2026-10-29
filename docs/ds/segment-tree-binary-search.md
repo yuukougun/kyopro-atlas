@@ -29,7 +29,7 @@ sections:
   - {title: 境界（l = N・返り値が N・f(e()) が偽になる条件・1-indexed）, anchor: boundaries}
   - {title: 遅延セグメント木の上の二分探索（単調な列への区間作用）, anchor: on-lazy-segment-tree, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -74,6 +74,9 @@ $f$ が単調なら、これは「$f(\mathrm{prod}(l, r))$ が真になる最小
 --8<-- "segment-tree-binary-search/first-at-least.cpp:left"
 ```
 
+完全なプログラム：[`first-at-least.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-binary-search/first-at-least.cpp)（GitHub）
+{ .kp-code-src }
+
 $f$ には次の 3 つの条件がある。ACL のドキュメントが要件として挙げるのは 1 と 2 で、3 は返り値を「最大の $r$」と読むために要る。
 
 1. **副作用がない**：同じ引数なら同じ値を返す。中で外の変数を書き換えたり、呼ばれた回数を数えたりしない
@@ -98,7 +101,7 @@ ACL と同じく、葉の数を $N$ 以上の最小の 2 の冪 $\mathrm{size}$ 
 
 次の図は、列 $(3, 1, 4, 1, 5, 9, 2, 6)$ の和のセグメント木で、$l = 1$、$f(x) = (x \le 12)$ として `max_right` を動かした様子である。丸の数字は訪れた順を表す。実線の箱は累積に足したノード、破線の箱は足すと $f$ が偽になったノードである。
 
-![和のセグメント木で l = 1 から探す。葉 [1, 2) とノード [2, 4) を足して累積 6、親へ登った [4, 8) は 28 で偽になり、降りて [4, 6) は 20 で偽、[4, 5) は 11 で真なので足して、r = 5 を返す](../img/segment-tree-binary-search/climb-descend.svg)
+![和のセグメント木で l = 1 から探す。葉 \[1, 2) とノード \[2, 4) を足して累積 6、親へ登った \[4, 8) は 28 で偽になり、降りて \[4, 6) は 20 で偽、\[4, 5) は 11 で真なので足して、r = 5 を返す](../img/segment-tree-binary-search/climb-descend.svg)
 
 図の流れを文章で追うと次のとおりである。
 
@@ -120,13 +123,21 @@ ACL と同じく、葉の数を $N$ 以上の最小の 2 の冪 $\mathrm{size}$ 
 
 ### 再帰で書くとき
 
-自作のライブラリでは、再帰で書くと手順が見やすい。ノード $k$（区間 $[k_l, k_r)$）について、$l$ より左なら何もしない。区間が $l$ 以降に収まり、丸ごと足しても真なら足して戻る。そうでなければ左の子、右の子の順に探す。左の子で境目が見つかれば、右の子は見ない。
+自作のライブラリでは、再帰で書くと手順が見やすい。ノード $k$（区間 $[k_l, k_r)$）について、$l$ より左なら何もしない。区間が $l$ 以降に収まり、丸ごと累積に掛けても真なら掛けて戻る。そうでなければ左の子、右の子の順に探す。左の子で境目が見つかれば、右の子は見ない。
 
-```cpp
---8<-- "segment-tree-binary-search/own-max-right.cpp:core"
-```
+訪れるノードは、葉 $l$ への道の上のノードと、その右側で丸ごと掛けるノードと、境目へ降りる 1 本の道だけなので、これも $O(\log N)$ である。`min_left` は左右を入れ替えたもので、右の子を先に見る。累積には左から掛ける（$\mathrm{sm} \leftarrow d[k] \cdot \mathrm{sm}$）。演算が可換でないとき、この掛ける向きを間違えると答えがずれる。
 
-訪れるノードは、葉 $l$ への道の上のノードと、その右側で丸ごと足すノードと、境目へ降りる 1 本の道だけなので、これも $O(\log N)$ である。`min_left` は左右を入れ替えたもので、右の子を先に見る。累積には左から掛ける（$\mathrm{sm} \leftarrow d[k] \cdot \mathrm{sm}$）。演算が可換でないとき、この掛ける向きを間違えると答えがずれる。
+??? note "自作するとき：再帰で書く `max_right`（ACL の `max_right` に当たる）"
+    [セグメント木の自作](../ds/segment-tree.md#operations)の `SegTree` は、ACL と同じ非再帰の手順（登る段階と降りる段階）の `max_right`・`min_left` を持つ。次はその `max_right` を再帰で書いた版である。名前・引数・返り値の約束は ACL の `max_right(l, f)` と同じにし、$f(e)$ が真であることを `assert` で確かめる。`SegTree` で使うときは、非再帰の `max_right` を、この `search` と `max_right` の 2 つで置き換える。両方の `max_right` を残すと、同じ形のメンバ関数が 2 つになってコンパイルできない。
+
+    ```cpp
+    --8<-- "segment-tree-binary-search/own-max-right.cpp:core"
+    ```
+
+    完全なプログラム：[`own-max-right.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-binary-search/own-max-right.cpp)（GitHub）
+    { .kp-code-src }
+
+    試験では、和のセグメント木で「和が $w$ 以下」の境目を、素朴に右へ伸ばした結果と照らし合わせている。名前の約束は[インターフェースの決め方](../guide/library-design.md#interface)、確かめ方は[動作確認の手順](../guide/library-design.md#verify)にある。
 
 ## 条件の書き方の型（初めて x 以上・和が w 以下・mex） {#predicate-patterns}
 
@@ -152,6 +163,9 @@ mex では、値 $0, 1, \dots, N$ を添字にして各値の出現回数を持�
 ```cpp
 --8<-- "segment-tree-binary-search/kth-one.cpp:core"
 ```
+
+完全なプログラム：[`kth-one.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-binary-search/kth-one.cpp)（GitHub）
+{ .kp-code-src }
 
 1 の代わりに「空いている場所」を 1 にすれば、空きの K 番目が求まる。埋めたら 0 に更新する。指定の位置への挿入をくり返す問題は、後ろから処理すると「まだ埋まっていない位置のうち K 番目に置く」に言い換えられ、この形になる（[ABC392 F](#abc392_f)）。
 
@@ -188,6 +202,9 @@ mex では、値 $0, 1, \dots, N$ を添字にして各値の出現回数を持�
 --8<-- "segment-tree-binary-search/lazy-monotone.cpp:core"
 ```
 
+完全なプログラム：[`lazy-monotone.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/segment-tree-binary-search/lazy-monotone.cpp)（GitHub）
+{ .kp-code-src }
+
 この方法の要は、$[i, j)$ に $+1$ しても単調さが崩れないことである。値が $L$ 未満の要素は変わらず、$[L, R]$ の要素は $R + 1$ 以下になり、$R$ を超えていた要素は $R + 1$ 以上である。よって並びは広義単調増加のままで、次の操作でも同じ探し方ができる。
 
 この形は「初期値を変えた多数の質問に、同じ操作列を施した結果を答える」問題で現れる。質問の初期値を小さい順に並べて列にすると、操作が「値が範囲に入っていれば変える」の形で、大小関係を保つなら、列は単調なまま変化する。全質問をまとめて 1 本の遅延セグメント木で処理できる（[ABC389 F](#practice)）。
@@ -213,7 +230,7 @@ mex では、値 $0, 1, \dots, N$ を添字にして各値の出現回数を持�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [PRACTICE2 J. Segment Tree](https://atcoder.jp/contests/practice2/tasks/practice2_j)（diff —）：一点更新・区間の最大値・「位置 X 以降で値が V 以上になる最初の位置」のクエリを処理する。
+- [PRACTICE2 J. Segment Tree](https://atcoder.jp/contests/practice2/tasks/practice2_j)（diff なし）：一点更新・区間の最大値・「位置 X 以降で値が V 以上になる最初の位置」のクエリを処理する。
 
 </div>
 

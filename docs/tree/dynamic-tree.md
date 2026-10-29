@@ -25,7 +25,7 @@ sections:
   - {title: 辺の追加だけならマージテク, anchor: add-only}
   - {title: 自作するときの要点と Library Checker, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -120,18 +120,24 @@ ACL に動的木はない。LCT を自作するときに保つ性質は次の 3 
 - `par[x]` は、splay 木の中の親か、$x$ が splay 木の根なら「パスの親」を指す。親から見て子でないことで、2 つを区別する
 - 各ノードの集約値は、保留（反転）を除いた子の値から作られている。保留は「自分には反映済みで、子にはまだ配っていない」作用である。印を立てるとき（`toggle`）に自分の左右の子を入れ替え、`push` では子に `toggle` を配るだけにする
 
-splay 木の部分では、`rotate` が $x$ とその親の親子を入れ替える回転、`splay` が $x$ を回転で splay 木の根まで上げる操作である。ここは折りたたみに入れた。完全なプログラムは `snippets/dynamic-tree/link-cut-tree.cpp` にあり、乱数の link・cut・加算・パスの和を、隣接集合と DFS による愚直な方法と比べて確かめている。
+splay 木の部分では、`rotate` が $x$ とその親の親子を入れ替える回転、`splay` が $x$ を回転で splay 木の根まで上げる操作である。ここは折りたたみに入れた。完全なプログラムは [`snippets/dynamic-tree/link-cut-tree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dynamic-tree/link-cut-tree.cpp) にあり、乱数の link・cut・加算・パスの和を、隣接集合と DFS による愚直な方法と比べて確かめている。
 
 ??? note "splay 木の部分（is_root・toggle・push・rotate・splay）"
     ```cpp
     --8<-- "dynamic-tree/link-cut-tree.cpp:node"
     ```
 
+    完全なプログラム：[`link-cut-tree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dynamic-tree/link-cut-tree.cpp)（GitHub）
+    { .kp-code-src }
+
 expose と、それで書く操作は次のとおりである。
 
 ```cpp
 --8<-- "dynamic-tree/link-cut-tree.cpp:expose"
 ```
+
+完全なプログラム：[`link-cut-tree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dynamic-tree/link-cut-tree.cpp)（GitHub）
+{ .kp-code-src }
 
 実装で間違えやすい点は次のとおりである。
 
@@ -151,10 +157,10 @@ expose と、それで書く操作は次のとおりである。
 
 ## 学ぶための資料 {#resources}
 
-- ei1333 氏の記事「Link-Cut 木」：優先パスを splay 木で持つ考え方と、expose・link・cut・evert の組み立てを、HL 分解との対応から説明している
-- ferin 氏の記事「Link-Cut tree」：splay 木の回転から、expose・evert・LCA・パス上の $k$ 番目、遅延評価つきのパスのクエリ、ぶら下がる部分を使った部分木のクエリまでを順に扱う
-- Luzhiled's Library（ei1333 氏）の dynamic-tree の項目：LCT・部分木向けの LCT・Top Tree の実装と、使う関数の切り分けの参考になる
-- kopricky 氏のライブラリの Euler Tour Tree：頂点と向きつきの辺を列に入れる形の実装と、部分木・連結成分の操作
+- [ei1333「Link-Cut 木」](https://ei1333.hateblo.jp/entry/2018/05/29/011140)：優先パスを splay 木で持つ考え方と、expose・link・cut・evert の組み立てを、HL 分解との対応から説明している
+- [ferin「Link-Cut tree」](https://ferin-tech.hatenablog.com/entry/2020/01/11/012443)：splay 木の回転から、expose・evert・LCA・パス上の $k$ 番目、遅延評価つきのパスのクエリ、ぶら下がる部分を使った部分木のクエリまでを順に扱う
+- [ei1333「Luzhiled's Library」](https://ei1333.github.io/library/)の structure/dynamic-tree の項目：LCT・部分木向けの LCT・Top Tree の実装と、使う関数の切り分けの参考になる
+- [kopricky「Euler Tour Tree」](https://kopricky.github.io/code/DataStructure_OnGraph/euler_tour_tree.html)：頂点と向きつきの辺を列に入れる形の実装と、部分木・連結成分の操作
 
 ## 練習問題 {#practice}
 

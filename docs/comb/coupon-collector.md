@@ -24,7 +24,7 @@ sections:
   - {title: 失敗の回数（1/p − 1）との違い, anchor: failures}
   - {title: 段階に分けて幾何分布の期待値を足す（コンプガチャ）, anchor: staged}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -114,6 +114,9 @@ $$
 --8<-- "coupon-collector/expected.cpp:core"
 ```
 
+完全なプログラム：[`expected.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/coupon-collector/expected.cpp)（GitHub）
+{ .kp-code-src }
+
 **応用の型**：
 
 - **一部だけそろえる**：$N$ 種類のうち $K$ 種類（どれでもよい）そろうまでなら、段階 $0$ から $K - 1$ までだけを足して $\sum_{k=0}^{K-1} N/(N - k)$ である
@@ -148,6 +151,9 @@ $$
 --8<-- "coupon-collector/expected-mod.cpp:core"
 ```
 
+完全なプログラム：[`expected-mod.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/coupon-collector/expected-mod.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 ## 例題 {#examples}
 
 ### ABC194 D. Journey {#abc194_d}
@@ -169,7 +175,7 @@ $$
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [アルゴ数学 026. Coin Gacha](https://atcoder.jp/contests/math-and-algorithm/tasks/math_and_algorithm_z)（diff —）：N 種類のコインが等確率で 1 枚ずつ出るとき、全種類がそろうまでの回数の期待値を求める。
+- [アルゴ数学 026. Coin Gacha](https://atcoder.jp/contests/math-and-algorithm/tasks/math_and_algorithm_z)（diff なし）：N 種類のコインが等確率で 1 枚ずつ出るとき、全種類がそろうまでの回数の期待値を求める。
 - [ARC085 C. HSI](https://atcoder.jp/contests/arc085/tasks/arc085_a)（diff 752）：N 個のテストのうち M 個はそれぞれ確率 1/2 で通る提出を、全部通るまで繰り返すときの総実行時間の期待値を求める。
 
 </div>

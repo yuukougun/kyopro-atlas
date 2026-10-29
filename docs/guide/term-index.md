@@ -9,7 +9,7 @@ order: 30
 level: null
 kind: [案内]
 prerequisites: []
-related: [glossary, reverse-index-signs, how-to-use#lookup]
+related: [glossary, reverse-index-signs, how-to-use#lookup, problem-index]
 summary: 手法の名前・別名・英語名から、そのページを五十音順と ABC 順で引ける。全ページの題名と別名から生成し、サイト内検索の結果に頼らない入口になる。
 complexity: null
 signs: []
@@ -73,6 +73,7 @@ updated: 2026-10-22
 ### あ行 {#terms-a}
 
 - アダマール変換 → [XOR 畳み込み](../math/hadamard-transform.md)
+- あとで読む → [勉強したいリスト](study-list.md)
 - あふれ → [整数のオーバーフローと \_\_int128](../cpp/cpp-integer-overflow.md)
 - アルゴリズムと数学 → [問題集と練習用コンテストの案内](problem-sets.md)
 - [アルゴリズム関数と ranges 版](../cpp/cpp-algorithms.md)
@@ -105,6 +106,7 @@ updated: 2026-10-22
 - オフライン処理 → [クエリの先読み](../ds/offline-queries.md)
 - オフライン動的連結性 → [辺の追加と削除が混ざる連結性](../graph/offline-dynamic-connectivity.md)
 - オンライン強制 → [クエリの先読み](../ds/offline-queries.md)
+- お気に入り → [勉強したいリスト](study-list.md)
 
 ### か行 {#terms-ka}
 
@@ -291,6 +293,7 @@ updated: 2026-10-22
 - フック長公式 → [Young 図形とフック長公式](../comb/young-tableaux.md)
 - フラクタル → [再帰的な構造](../basics/recursion-structure.md)
 - フロンティア法 → [プロファイル DP](../dp/broken-profile-dp.md)
+- ブックマーク → [勉強したいリスト](study-list.md)
 - ブロックカット木 → [橋・関節点・二重連結成分](../graph/lowlink.md)
 - プリム法 → [最小全域木](../graph/minimum-spanning-tree.md)
 - プリューファー列 → [木の次数列と Prüfer 列](../tree/tree-degree.md)
@@ -369,6 +372,7 @@ updated: 2026-10-22
 - ランダムな順列に置き換える → [対称性で確率を求める](../comb/probability-symmetry.md)
 - ランダム化 → [乱択アルゴリズム](../misc/randomized.md)
 - [ランレングス圧縮](../basics/run-length-encoding.md)
+- リング → [円環](../patterns/circular.md)
 - ループの検出 → [周期性の検出](../basics/periodicity.md)
 - ループの順番 → [DP の計算順序](../dp/dp-order.md)
 - レイヤー化グラフ → [状態を頂点にする](../graph/extended-dijkstra.md)
@@ -615,6 +619,9 @@ updated: 2026-10-22
 - 円と格子点 → [円と幾何の最適化](../geometry/circle-geometry.md)
 - 円の交差判定 → [円と幾何の最適化](../geometry/circle-geometry.md)
 - 円の反転 → [発展の幾何](../geometry/advanced-geometry.md)
+- 円周上に並ぶ → [円環](../patterns/circular.md)
+- 円形に並ぶ → [円環](../patterns/circular.md)
+- [円環](../patterns/circular.md)
 - 円環 DP → [DP の状態の設計](../dp/dp-state-design.md)
 - 円順列 → [和・積の法則と順列・組合せ](../comb/counting-basics.md)
 - 再帰 DP → [メモ化再帰](../dp/memoized-recursion.md)
@@ -630,6 +637,8 @@ updated: 2026-10-22
 - 凸多角形の内外判定 → [凸包と凸多角形](../geometry/convex-hull.md)
 - 凸関数 → [三分探索](../basics/ternary-search.md)
 - 凸関数の極値 → [三分探索](../basics/ternary-search.md)
+- 出典 → [出典と AI 利用の方針](../start/ai-and-sources.md)
+- [出典と AI 利用の方針](../start/ai-and-sources.md)
 - 出発時刻 → [時刻で変わる辺の最短路](../graph/time-dependent-dijkstra.md)
 - 分割の全列挙 → [整数の分割と分割数](../comb/partition-number.md)
 - 分割数 → [整数の分割と分割数](../comb/partition-number.md)
@@ -674,6 +683,8 @@ updated: 2026-10-22
 - 割り算の切り捨ての向き → [数・ビット・乱数の関数](../cpp/cpp-math-functions.md)
 - 割当問題 → [最小費用流](../graph/min-cost-flow.md)
 - 劣モジュラ → [燃やす埋める](../graph/project-selection.md)
+- 勉強したいページ → [勉強したいリスト](study-list.md)
+- [勉強したいリスト](study-list.md)
 - [動的 DP](../dp/dynamic-dp.md)
 - 動的な中央値 → [上位 K 個の和と中央値の管理](../ds/top-k-multiset.md)
 - 動的セグ木 → [値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md)
@@ -741,6 +752,7 @@ updated: 2026-10-22
 - [参照と範囲 for](../cpp/cpp-range-for.md)
 - 参照の無効化 → [未定義動作とダングリング](../cpp/cpp-undefined-behavior.md)
 - 参照渡し → [参照と範囲 for](../cpp/cpp-range-for.md)
+- 参考文献 → [出典と AI 利用の方針](../start/ai-and-sources.md)
 - 双対セグ木 → [遅延セグメント木](../ds/lazy-segment-tree.md)
 - 双方向リスト → [配列で作る連結リスト](../ds/linked-list.md)
 - 反射原理 → [鏡像法とカタラン数](../comb/reflection-principle.md)
@@ -774,8 +786,12 @@ updated: 2026-10-22
 - [和・積の法則と順列・組合せ](../comb/counting-basics.md)
 - [商の列挙](../math/floor-quotient-enum.md)
 - 商列挙 → [商の列挙](../math/floor-quotient-enum.md)
+- 問い合わせ → [出典と AI 利用の方針](../start/ai-and-sources.md)
+- 問題 ID から引く → [問題番号の索引](problem-index.md)
 - 問題を読む順 → [コンテストの戦い方](contest-strategy.md)
 - 問題文のサイン → [逆引き辞典（言い回しから）](reverse-index-signs.md)
+- 問題番号から引く → [問題番号の索引](problem-index.md)
+- [問題番号の索引](problem-index.md)
 - [問題集と練習用コンテストの案内](problem-sets.md)
 - 四角不等式 → [Monge 性による DP の高速化](../dp/monge.md)
 - 四辺形不等式 → [Monge 性による DP の高速化](../dp/monge.md)
@@ -1052,6 +1068,7 @@ updated: 2026-10-22
 - 最小鎖被覆 → [最小パス被覆と Hall の定理](../graph/dilworth-path-cover.md)
 - 最小頂点被覆 → [König の定理](../graph/konig-theorem.md)
 - 最左マッチ → [重複の除き方](../comb/counting-dedup.md)
+- 最後と最初が隣り合う → [円環](../patterns/circular.md)
 - 最短経路の数え上げ → [最短路 DAG](../graph/shortest-path-dag.md)
 - [最短路 DAG](../graph/shortest-path-dag.md)
 - 最短路に必ず使われる辺 → [最短路 DAG](../graph/shortest-path-dag.md)
@@ -1232,7 +1249,9 @@ updated: 2026-10-22
 - 玉と箱 → [写像 12 相](../comb/twelvefold-way.md)
 - 玉と箱の数え上げ → [写像 12 相](../comb/twelvefold-way.md)
 - 珂朵莉树 → [区間を set で管理する](../ds/interval-set.md)
+- 環状 → [円環](../patterns/circular.md)
 - 環状 DP → [DP の状態の設計](../dp/dp-state-design.md)
+- 生成 AI → [出典と AI 利用の方針](../start/ai-and-sources.md)
 - 生成 AI のルール → [AtCoder の仕組み](../start/atcoder-system.md)
 - 生成元 → [位数・原始根・離散対数](../math/multiplicative-order.md)
 - 生成関数 → [母関数の考え方](../comb/generating-function-counting.md)
@@ -1386,6 +1405,7 @@ updated: 2026-10-22
 - [葉から考える](../tree/leaf-first.md)
 - 葉から貪欲 → [葉から考える](../tree/leaf-first.md)
 - 葉を刈る → [葉から考える](../tree/leaf-first.md)
+- 著作権 → [出典と AI 利用の方針](../start/ai-and-sources.md)
 - 虚樹 → [Auxiliary Tree](../tree/auxiliary-tree.md)
 - 行きがけ順 → [根付き木と走査順](../tree/tree-traversal.md)
 - 行きがけ順の番号付け → [オイラーツアー](../tree/euler-tour.md)
@@ -1450,6 +1470,8 @@ updated: 2026-10-22
 - 距離の表から木 → [木の構築・復元](../tree/tree-construction.md)
 - [転倒数](../ds/inversion-number.md)
 - 転置 → [回転・平行移動・アフィン変換](../geometry/rotation-transform.md)
+- 転載 → [出典と AI 利用の方針](../start/ai-and-sources.md)
+- 輪 → [円環](../patterns/circular.md)
 - 辞書の引き方 → [この教材の使い方](../start/how-to-use.md)
 - 辞書順 → [文字列の基本操作と辞書順](../string/string-basics.md)
 - 辞書順 K 番目 → [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md)
@@ -1492,6 +1514,7 @@ updated: 2026-10-22
 - [連結成分](../graph/connected-components.md)
 - 連結成分 DP → [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md)
 - 連結成分分解 → [連結成分](../graph/connected-components.md)
+- 連絡先 → [出典と AI 利用の方針](../start/ai-and-sources.md)
 - [連続値の確率](../comb/continuous-probability.md)
 - 連続確率 → [連続値の確率](../comb/continuous-probability.md)
 - 連続部分列 → [区間](../patterns/interval.md)
@@ -1506,6 +1529,7 @@ updated: 2026-10-22
 - 遅延評価 → [views の基本](../cpp/cpp-views-basics.md)
 - 遅延評価セグメント木 → [遅延セグメント木](../ds/lazy-segment-tree.md)
 - 過半数 → [乱択アルゴリズム](../misc/randomized.md)
+- 過去問の索引 → [問題番号の索引](problem-index.md)
 - 遷移の高速化 → [DP の高速化の選び方](../dp/dp-speedup-overview.md)
 - 遷移行列 → [行列累乗](../math/matrix-power.md)
 - 遷移行列のセグメント木 → [動的 DP](../dp/dynamic-dp.md)
@@ -1636,6 +1660,10 @@ updated: 2026-10-22
 <!-- gen:begin terms-latin -->
 <!-- textlint-disable -->
 
+[0〜9](#terms-latin-digits)・[A](#terms-latin-a)・[B](#terms-latin-b)・[C](#terms-latin-c)・[D](#terms-latin-d)・[E](#terms-latin-e)・[F](#terms-latin-f)・[G](#terms-latin-g)・[H](#terms-latin-h)・[I](#terms-latin-i)・[J](#terms-latin-j)・[K](#terms-latin-k)・[L](#terms-latin-l)・[M](#terms-latin-m)・[N](#terms-latin-n)・[O](#terms-latin-o)・[P](#terms-latin-p)・[Q](#terms-latin-q)・[R](#terms-latin-r)・[S](#terms-latin-s)・[T](#terms-latin-t)・[U](#terms-latin-u)・[V](#terms-latin-v)・[W](#terms-latin-w)・[X](#terms-latin-x)・[Y](#terms-latin-y)・[Z](#terms-latin-z)
+
+### 0〜9 {#terms-latin-digits}
+
 - 0-1 BFS → [01-BFS](../graph/zero-one-bfs.md)
 - 0-1 Knapsack → [ナップサック DP](../dp/knapsack-01.md)
 - 0-1 ナップサック → [ナップサック DP](../dp/knapsack-01.md)
@@ -1663,6 +1691,7 @@ updated: 2026-10-22
 - 2 ポインタ → [尺取り法](../basics/two-pointers.md)
 - 2 乗の木 DP → [二乗の木 DP](../dp/tree-dp-square.md)
 - 2 円の位置関係 → [円と幾何の最適化](../geometry/circle-geometry.md)
+- 2 周分に伸ばす → [円環](../patterns/circular.md)
 - 2 回の BFS → [木の直径と最遠点](../tree/tree-diameter.md)
 - 2 彩色 → [二部グラフ判定](../graph/bipartite-graph.md)
 - 2 条件の包除 → [余事象](../thinking/complement.md)
@@ -1698,6 +1727,9 @@ updated: 2026-10-22
 - 64bit の素数判定 → [大きな数の素数判定と素因数分解](../math/miller-rabin.md)
 - 8 近傍 → [グリッドグラフ](../graph/grid-graph.md)
 - 90 度回転 → [回転・平行移動・アフィン変換](../geometry/rotation-transform.md)
+
+### A {#terms-latin-a}
+
 - a + bX の形で持つ → [閉路のある期待値](../comb/expectation-linear-equations.md)
 - A+A の技 → [Z-algorithm](../string/z-algorithm.md)
 - a+b と b+a → [交換論法と比較関数の設計](../basics/exchange-argument.md)
@@ -1719,6 +1751,7 @@ updated: 2026-10-22
 - Aho-Corasick 上の DP → [照合オートマトン上の DP](../string/string-automaton-dp.md)
 - [Aho-Corasick 法](../string/aho-corasick.md)
 - AHU → [木の同型判定と木のハッシュ](../tree/tree-isomorphism.md)
+- AI の利用 → [出典と AI 利用の方針](../start/ai-and-sources.md)
 - algorithm → [アルゴリズム関数と ranges 版](../cpp/cpp-algorithms.md)
 - [Alien DP](../dp/alien-dp.md)
 - Aliens trick → [Alien DP](../dp/alien-dp.md)
@@ -1752,6 +1785,9 @@ updated: 2026-10-22
 - AWC → [問題集と練習用コンテストの案内](problem-sets.md)
 - ax+by+c=0 → [誤差の扱いと整数での処理](../geometry/geometry-precision.md)
 - ax+by=c → [拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md)
+
+### B {#terms-latin-b}
+
 - b 進法 → [N 進法](../math/base-conversion.md)
 - B_n → [第 2 種スターリング数とベル数](../comb/bell-number.md)
 - baby-step giant-step → [位数・原始根・離散対数](../math/multiplicative-order.md)
@@ -1822,6 +1858,9 @@ updated: 2026-10-22
 - [Burnside の補題](../comb/burnside-lemma.md)
 - Burnside's lemma → [Burnside の補題](../comb/burnside-lemma.md)
 - Bézout's identity → [拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md)
+
+### C {#terms-latin-c}
+
 - c - 'a' → [文字列の操作](../cpp/cpp-string-api.md)
 - C++ の版 → [AtCoder と手元の C++ 環境](../cpp/cpp-environment.md)
 - [C++ の逆引き](../cpp/cpp-reverse-index.md)
@@ -1846,6 +1885,7 @@ updated: 2026-10-22
 - Chu-Liu/Edmonds → [特殊な最小全域木](../graph/spanning-tree-advanced.md)
 - cin.tie(nullptr) → [入出力と定数倍](../cpp/cpp-io.md)
 - Cipolla → [位数・原始根・離散対数](../math/multiplicative-order.md)
+- circular → [円環](../patterns/circular.md)
 - clamp → [数・ビット・乱数の関数](../cpp/cpp-math-functions.md)
 - class template argument deduction → [初期化と CTAD](../cpp/cpp-initialization.md)
 - claude.ai での解説の頼み方 → [この教材の使い方](../start/how-to-use.md)
@@ -1882,6 +1922,10 @@ updated: 2026-10-22
 - cycle decomposition → [置換の巡回分解](../comb/permutation-cycles.md)
 - cycle detection → [閉路の検出と復元](../graph/cycle-detection.md)
 - cycle finding → [周期性の検出](../basics/periodicity.md)
+- cyclic → [円環](../patterns/circular.md)
+
+### D {#terms-latin-d}
+
 - DAG → [トポロジカルソート](../graph/topological-sort.md)
 - DAG DP → [DAG 上の DP](../dp/dp-dag.md)
 - DAG の最長路 → [DAG 上の DP](../dp/dp-dag.md)
@@ -1962,6 +2006,9 @@ updated: 2026-10-22
 - dynamic tree → [動的木](../tree/dynamic-tree.md)
 - dynamic tree DP → [Static Top Tree と木 DP の動的更新](../tree/static-top-tree.md)
 - dynamic_modint → [modint](../math/modint.md)
+
+### E {#terms-latin-e}
+
 - E[X] = Σ P(X ≥ k) → [期待値と確率の変換](../comb/expectation-tail-sum.md)
 - E[X^2] → [二乗の期待値・分散](../comb/expectation-of-square.md)
 - Edit Distance → [最長共通部分列と編集距離](../dp/lcs.md)
@@ -1992,6 +2039,9 @@ updated: 2026-10-22
 - explicit → [初期化と CTAD](../cpp/cpp-initialization.md)
 - extended Euclidean algorithm → [拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md)
 - extgcd → [拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md)
+
+### F {#terms-latin-f}
+
 - F2 の基底 → [XOR 基底](../math/xor-basis.md)
 - fact と ifact → [二項係数の前計算](../comb/binomial-precompute.md)
 - Farey 数列 → [Stern-Brocot 木と連分数](../math/stern-brocot.md)
@@ -2033,6 +2083,9 @@ updated: 2026-10-22
 - from_range → [C++23 の views と ranges::to](../cpp/cpp-views-cpp23.md)
 - [Functional graph（出次数 1 のグラフ）](../graph/functional-graph.md)
 - FWHT → [XOR 畳み込み](../math/hadamard-transform.md)
+
+### G {#terms-latin-g}
+
 - Garner → [中国剰余定理](../math/crt.md)
 - Gauss-Jordan → [掃き出し法](../math/gaussian-elimination.md)
 - Gaussian elimination → [掃き出し法](../math/gaussian-elimination.md)
@@ -2068,6 +2121,9 @@ updated: 2026-10-22
 - Grundy number → [Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md)
 - [Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md)
 - Grundy 数の周期性 → [Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md)
+
+### H {#terms-latin-h}
+
 - Hackenbush → [非不偏ゲーム](../comb/partizan-games.md)
 - Hall's theorem → [最小パス被覆と Hall の定理](../graph/dilworth-path-cover.md)
 - harmonic series → [調和級数と倍数の列挙](../math/harmonic-sum.md)
@@ -2085,6 +2141,9 @@ updated: 2026-10-22
 - Hopcroft-Karp → [二部マッチング](../graph/bipartite-matching.md)
 - Horner 法 → [N 進法](../math/base-conversion.md)
 - H×W → [グリッド](../patterns/grid.md)
+
+### I {#terms-latin-i}
+
 - i128 → [整数のオーバーフローと \_\_int128](../cpp/cpp-integer-overflow.md)
 - if constexpr → [関数テンプレートと constexpr](../cpp/cpp-templates-constexpr.md)
 - imos 法 → [いもす法](../basics/imos.md)
@@ -2115,8 +2174,14 @@ updated: 2026-10-22
 - isqrt → [整数の平方根・K 乗根と累乗数](../math/integer-root.md)
 - it - v.begin() → [コンテナ操作とイテレータ](../cpp/cpp-container-idioms.md)
 - iterator → [コンテナ操作とイテレータ](../cpp/cpp-container-idioms.md)
+
+### J {#terms-latin-j}
+
 - Ji Driver Segment Tree → [Segment Tree Beats](../ds/segment-tree-beats.md)
 - Johnson のアイデア → [ダイクストラ法](../graph/dijkstra.md)
+
+### K {#terms-latin-k}
+
 - k shortest paths → [K 番目の最短路](../graph/k-shortest-paths.md)
 - K 個上の祖先 → [最小共通祖先（LCA）](../tree/lca.md)
 - K 分木 → [完全二分木](../tree/complete-binary-tree.md)
@@ -2153,6 +2218,9 @@ updated: 2026-10-22
 - Kruskal 再構築木 → [併合過程の木](../tree/merge-process-tree.md)
 - [König の定理](../graph/konig-theorem.md)
 - König's theorem → [König の定理](../graph/konig-theorem.md)
+
+### L {#terms-latin-l}
+
 - L1 距離 → [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md)
 - Lagrange interpolation → [ラグランジュ補間とべき乗和](../math/lagrange-interpolation.md)
 - Lagrange 緩和 → [Alien DP](../dp/alien-dp.md)
@@ -2208,6 +2276,9 @@ updated: 2026-10-22
 - Lucy DP → [乗法的関数の和と素数の個数](../math/multiplicative-function.md)
 - Lyndon 分解 → [Suffix Automaton と発展の文字列アルゴリズム](../string/suffix-automaton.md)
 - L∞ 距離 → [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md)
+
+### M {#terms-latin-m}
+
 - macro → [マクロと雛形](../cpp/cpp-macros-template-file.md)
 - Main-Lorentz → [Suffix Automaton と発展の文字列アルゴリズム](../string/suffix-automaton.md)
 - make_pair → [構造化束縛と pair・tuple・optional](../cpp/cpp-structured-bindings.md)
@@ -2291,6 +2362,9 @@ updated: 2026-10-22
 - multiplicative order → [位数・原始根・離散対数](../math/multiplicative-order.md)
 - multiset の削除 → [コンテナ操作とイテレータ](../cpp/cpp-container-idioms.md)
 - Möbius function → [メビウス関数とメビウス反転](../comb/mobius-function.md)
+
+### N {#terms-latin-n}
+
 - N H_N → [幾何分布とコンプリートガチャ](../comb/coupon-collector.md)
 - n 進数 → [N 進法](../math/base-conversion.md)
 - [N 進法](../math/base-conversion.md)
@@ -2308,6 +2382,7 @@ updated: 2026-10-22
 - next_permutation → [bit 全探索と順列全探索](../basics/bit-full-search.md)
 - [Nim と XOR](../comb/nim.md)
 - nimber → [Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md)
+- noai → [出典と AI 利用の方針](../start/ai-and-sources.md)
 - notation → [記法と用語の約束](../start/notation.md)
 - NoviSteps → [問題集と練習用コンテストの案内](problem-sets.md)
 - npos → [文字列の操作](../cpp/cpp-string-api.md)
@@ -2318,6 +2393,9 @@ updated: 2026-10-22
 - numbers::pi → [数・ビット・乱数の関数](../cpp/cpp-math-functions.md)
 - numeric_limits → [数の型とリテラル](../cpp/cpp-types-literals.md)
 - nxt 配列 → [部分列の判定と次の出現位置の表](../string/subsequence-matching.md)
+
+### O {#terms-latin-o}
+
 - O(N log N) の倍数ループ → [調和級数と倍数の列挙](../math/harmonic-sum.md)
 - O(N^2) の木 DP → [二乗の木 DP](../dp/tree-dp-square.md)
 - ODT → [区間を set で管理する](../ds/interval-set.md)
@@ -2337,6 +2415,9 @@ updated: 2026-10-22
 - order_of_key → [コンテナ操作とイテレータ](../cpp/cpp-container-idioms.md)
 - ordered set → [set・multiset・map の応用](../ds/ordered-set.md)
 - osa_k 法 → [最小素因数の篩と線形篩](../math/spf-sieve.md)
+
+### P {#terms-latin-p}
+
 - P × Q^(−1) mod p → [確率・期待値を mod 998244353 で答える](../comb/rational-mod.md)
 - p(n,k) → [整数の分割と分割数](../comb/partition-number.md)
 - pair → [構造化束縛と pair・tuple・optional](../cpp/cpp-structured-bindings.md)
@@ -2396,8 +2477,14 @@ updated: 2026-10-22
 - pull 型 → [DP の基本](../dp/dp-basics.md)
 - push 型 → [DP の基本](../dp/dp-basics.md)
 - Pólya の数え上げ定理 → [Burnside の補題](../comb/burnside-lemma.md)
+
+### Q {#terms-latin-q}
+
 - Quadrangle Inequality → [Monge 性による DP の高速化](../dp/monge.md)
 - queue → [スタック・キュー・deque の使いどころ](../ds/stack-techniques.md)
+
+### R {#terms-latin-r}
+
 - Rabin-Karp → [ローリングハッシュ](../string/rolling-hash.md)
 - random walk → [確率 DP](../comb/probability-dp.md)
 - randomized algorithm → [乱択アルゴリズム](../misc/randomized.md)
@@ -2430,6 +2517,7 @@ updated: 2026-10-22
 - ReRooting DP → [全方位木 DP](../dp/rerooting.md)
 - retrograde analysis → [後退解析](../comb/game-retrograde-analysis.md)
 - rho 形 → [Functional graph（出次数 1 のグラフ）](../graph/functional-graph.md)
+- ring → [円環](../patterns/circular.md)
 - RLE → [ランレングス圧縮](../basics/run-length-encoding.md)
 - RMQ → [セグメント木](../ds/segment-tree.md)
 - Robinson-Schensted 対応 → [Young 図形とフック長公式](../comb/young-tableaux.md)
@@ -2443,6 +2531,9 @@ updated: 2026-10-22
 - Run の列挙 → [Suffix Automaton と発展の文字列アルゴリズム](../string/suffix-automaton.md)
 - run-length encoding → [ランレングス圧縮](../basics/run-length-encoding.md)
 - running median → [上位 K 個の和と中央値の管理](../ds/top-k-multiset.md)
+
+### S {#terms-latin-s}
+
 - s += c → [文字列の操作](../cpp/cpp-string-api.md)
 - S と F の設計 → [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md)
 - S(n,k) → [第 2 種スターリング数とベル数](../comb/bell-number.md)
@@ -2561,6 +2652,9 @@ updated: 2026-10-22
 - swap の回数の偶奇 → [置換の偶奇](../comb/permutation-parity.md)
 - sweep line → [平面走査](../ds/sweep-line-2d.md)
 - sync_with_stdio → [入出力と定数倍](../cpp/cpp-io.md)
+
+### T {#terms-latin-t}
+
 - tail sum → [期待値と確率の変換](../comb/expectation-tail-sum.md)
 - Tarjan → [強連結成分分解（SCC）](../graph/scc.md)
 - Taylor shift → [形式的冪級数と多項式の演算](../math/fps-basics.md)
@@ -2600,6 +2694,9 @@ updated: 2026-10-22
 - two heaps → [上位 K 個の和と中央値の管理](../ds/top-k-multiset.md)
 - two pointers → [尺取り法](../basics/two-pointers.md)
 - two_sat → [2-SAT](../graph/two-sat.md)
+
+### U {#terms-latin-u}
+
 - u=x+y, v=x−y → [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md)
 - UB → [未定義動作とダングリング](../cpp/cpp-undefined-behavior.md)
 - UF → [Union-Find](../ds/union-find.md)
@@ -2627,6 +2724,9 @@ updated: 2026-10-22
 - using ll = long long → [数の型とリテラル](../cpp/cpp-types-literals.md)
 - using namespace atcoder → [ACL の読み方](../cpp/acl-reading.md)
 - using namespace std → [マクロと雛形](../cpp/cpp-macros-template-file.md)
+
+### V {#terms-latin-v}
+
 - v.size() - 1 → [整数のオーバーフローと \_\_int128](../cpp/cpp-integer-overflow.md)
 - v_p(n!) → [素因数分解とルジャンドルの公式](../math/prime-factorization.md)
 - val() → [ACL の読み方](../cpp/acl-reading.md)
@@ -2662,6 +2762,9 @@ updated: 2026-10-22
 - views::zip → [C++23 の views と ranges::to](../cpp/cpp-views-cpp23.md)
 - views::zip_transform → [C++23 の views と ranges::to](../cpp/cpp-views-cpp23.md)
 - Virtual Tree → [Auxiliary Tree](../tree/auxiliary-tree.md)
+
+### W {#terms-latin-w}
+
 - WA の原因 → [WA・TLE・RE・MLE の原因チェックリスト](debugging-checklist.md)
 - Walsh-Hadamard → [XOR 畳み込み](../math/hadamard-transform.md)
 - [Wavelet Matrix](../ds/wavelet-matrix.md)
@@ -2672,6 +2775,9 @@ updated: 2026-10-22
 - Welzl → [円と幾何の最適化](../geometry/circle-geometry.md)
 - work backwards → [後ろから・逆順に考える](../thinking/reverse-thinking.md)
 - WQS 二分 → [Alien DP](../dp/alien-dp.md)
+
+### X {#terms-latin-x}
+
 - x と y を分ける → [言い換えの典型](../thinking/reformulation.md)
 - [XOR](../patterns/xor.md)
 - XOR basis → [XOR 基底](../math/xor-basis.md)
@@ -2686,9 +2792,15 @@ updated: 2026-10-22
 - XOR 最短路 → [XOR 基底](../math/xor-basis.md)
 - [XOR 畳み込み](../math/hadamard-transform.md)
 - XOR 距離 → [木の上の距離](../tree/tree-distance.md)
+
+### Y {#terms-latin-y}
+
 - Yen → [K 番目の最短路](../graph/k-shortest-paths.md)
 - Young tableau → [Young 図形とフック長公式](../comb/young-tableaux.md)
 - [Young 図形とフック長公式](../comb/young-tableaux.md)
+
+### Z {#terms-latin-z}
+
 - Z function → [Z-algorithm](../string/z-algorithm.md)
 - Z 法 → [Z-algorithm](../string/z-algorithm.md)
 - Z 配列 → [Z-algorithm](../string/z-algorithm.md)

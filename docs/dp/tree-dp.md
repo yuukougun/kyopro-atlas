@@ -31,7 +31,7 @@ sections:
   - {title: 二分探索と組み合わせて判定にする, anchor: with-binary-search, level: 黄}
   - {title: 部分木の情報をデータ構造で持ってマージする（マージテク）, anchor: tree-dp-merge, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -69,6 +69,9 @@ updated: 2026-10-22
 --8<-- "tree-dp/postorder.cpp:core"
 ```
 
+完全なプログラム：[`postorder.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-dp/postorder.cpp)（GitHub）
+{ .kp-code-src }
+
 集める値は数に限らない。「部分木に含まれる値の大きい方から $K$ 番目」を答えるなら、各頂点に部分木の上位 $K$ 個の列を持たせ、子の列と自分の値をまとめて上位 $K$ 個に切り詰める（練習の ABC239 E）。子の列をまとめてソートすると、子が $k_v$ 人の頂点で $k_v K + 1$ 個を並べるので、全体は $O(NK \log (NK))$ 程度になる。子を 1 人合わせるたびに $K$ 個へ切り詰めれば $O(NK \log K)$ で済む。$K$ が小さければどちらでも間に合う。
 
 ## 頂点の選択を状態に足す（独立集合型） {#vertex-states}
@@ -96,6 +99,9 @@ $$
 ```cpp
 --8<-- "tree-dp/independent-set.cpp:core"
 ```
+
+完全なプログラム：[`independent-set.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-dp/independent-set.cpp)（GitHub）。`mint` は ACL の `modint1000000007`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 同じ形で、最適化も書ける。隣り合わない頂点の重みの和の最大を求めるなら、積を和に、和を $\max$ に置き換える。すなわち $\mathrm{dp}[v][0] = \sum_c \max(\mathrm{dp}[c][0], \mathrm{dp}[c][1])$、$\mathrm{dp}[v][1] = w_v + \sum_c \mathrm{dp}[c][0]$ とする。状態に足す情報は白黒に限らない。「$v$ に接する辺を何本選んだか」「$v$ が見張られているか」のように、親との間の条件を判定するのに要る最小限の情報を選ぶ。
 
@@ -166,6 +172,9 @@ $$
 --8<-- "tree-dp/reroot-difference.cpp:core"
 ```
 
+完全なプログラム：[`reroot-difference.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-dp/reroot-difference.cpp)（GitHub）
+{ .kp-code-src }
+
 頂点に重み $C_i$ があり $\sum_i C_i \, d(v, i)$ を求めるなら、頂点数の代わりに重みの和を使う。部分木の重みの和を $W_c$、全体を $W$ とすると $f(c) = f(p) + W - 2W_c$ である（練習の ABC348 E）。
 
 差分が $\mathrm{sz}$ のような部分木の量だけで書けないとき（「各頂点から最も遠い頂点への距離」で、親側の部分木の最大が要るときなど）は、親側の値を子に渡す一般の枠組みが要る。それが[全方位木 DP](../dp/rerooting.md) である。
@@ -191,6 +200,9 @@ $$
 ```cpp
 --8<-- "tree-dp/greedy-children.cpp:core"
 ```
+
+完全なプログラム：[`greedy-children.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-dp/greedy-children.cpp)（GitHub）
+{ .kp-code-src }
 
 頂点 $v$ で子の得をソートするので、全体は $O(N \log N)$ である。$\mathrm{rest}[c] = -\infty$ の子は得の候補から外す。外さずに $-\infty$ のまま得を計算すると、$-\infty$ の表し方によってはオーバーフローする。選べない辺は得の候補に入れないのが安全である。
 
@@ -220,7 +232,7 @@ C++ では、子の map を `swap` で親に引き継ぐと、大きい方をコ
 
 ## 落とし穴 {#pitfalls}
 
-- **再帰が深すぎる**：木が一直線（パス状）だと、DFS の再帰は $N$ 段になる。$N = 2 \times 10^5$ 程度で、手元の環境（スタックの上限が 8 MiB のことが多い）では落ちる。ジャッジの上限は環境によるので、手元で落ちるなら提出でも危ないと考える（[環境の設定](../cpp/cpp-environment.md#stack-depth)）。ランダムな木の入力例では起きないので、提出前に一直線の木で試す。心配なら[帰りがけ順に子から集める](#postorder)の BFS 順の逆で書けば、再帰を使わずに済む
+- **再帰が深すぎる**：木が一直線（パス状）だと、DFS の再帰は $N$ 段になる。$N = 2 \times 10^5$ 程度で、手元の環境（スタックの上限が 8 MiB のことが多い）では落ちる。AtCoder ではスタックの上限が大きく、再帰の DFS のままで通ることが多い。ランダムな木の入力例では深くならないので、一直線の木は自分で作って試す。手元で試すときは、スタックの上限を広げるか、[帰りがけ順に子から集める](#postorder)の BFS 順の逆で書いて再帰をなくす（[AtCoder と手元の C++ 環境](../cpp/cpp-environment.md#stack-depth)）。深さが $10^6$ を超えるときや、提出先の上限が分からないときも、再帰をなくす方が確実である
 - **親へ逆流する**：無向の隣接リストには親も入っている。DFS では親を引数 `p` で渡し、`c == p` を飛ばす。BFS 順の作り方でも同じである。忘れると親と子を往復し続けるか、親の値を子として掛けてしまう
 - **次数と子の数を取り違える**：根以外の頂点では「子の数 ＝ 次数 − 1」だが、根では「子の数 ＝ 次数」である。条件が次数（隣接する頂点の数）で書かれているなら、子の数ではなく `g[v].size()` を使う。親も「足」や「残す辺」の候補になるからである
 - **根の選び方**：根なしの木の問題では、どの頂点を根にしても答えは同じである（[確認問題](#vertex-states)）。一方、問題が根付き木として与えられ、部分木が問題文で定義されているなら、その根で DP する。根を勝手に頂点 1 以外にすると答えが変わる
@@ -234,7 +246,7 @@ C++ では、子の map を `swap` で親に引き継ぐと、大きい方をコ
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC P. Independent Set](https://atcoder.jp/contests/dp/tasks/dp_p)（diff —）：N 頂点の木の各頂点を白か黒に塗り、黒どうしが隣り合わないようにする方法の数を求める。
+- [EDPC P. Independent Set](https://atcoder.jp/contests/dp/tasks/dp_p)（diff なし）：N 頂点の木の各頂点を白か黒に塗り、黒どうしが隣り合わないようにする方法の数を求める。
 
 </div>
 
@@ -283,7 +295,7 @@ C++ では、子の map を `swap` で親に引き継ぐと、大きい方をコ
 
 - [ABC239 E. Subtree K-th Max](https://atcoder.jp/contests/abc239/tasks/abc239_e)（diff 1084）：根付き木の各頂点に値があり、頂点 v の部分木に含まれる値の大きい方から K 番目（K ≤ 20）を答えるクエリに答える。
 - [ABC348 E. Minimize Sum of Distances](https://atcoder.jp/contests/abc348/tasks/abc348_e)（diff 1347）：頂点に重み C_i のついた木で、Σ C_i × d(v, i) を最小にする頂点 v での値を求める。
-- [典型90 073. We Need Both a and b（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_bu)（diff —）：a か b が書かれた木の辺をいくつか切り、どの連結成分にも a と b の両方が含まれるようにする方法の数を求める。
+- [典型90 073. We Need Both a and b（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_bu)（diff なし）：a か b が書かれた木の辺をいくつか切り、どの連結成分にも a と b の両方が含まれるようにする方法の数を求める。
 - [ABC133 E. Virus Tree 2](https://atcoder.jp/contests/abc133/tasks/abc133_e)（diff 1505）：N 頂点の木の各頂点を K 色で塗るとき、距離 2 以下の 2 頂点がすべて異なる色になる塗り方の数を求める。
 - [ABC259 F. Select Edges](https://atcoder.jp/contests/abc259/tasks/abc259_f)（diff 1961）：木の辺をいくつか選び、各頂点 i に接する選んだ辺が d_i 本以下になるようにするときの、辺の重みの和の最大を求める。
 

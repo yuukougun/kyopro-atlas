@@ -26,7 +26,7 @@ sections:
   - {title: 訪れた区間の両端と今いる端を状態にする, anchor: visited-range}
   - {title: '桁と区間で分ける（''?'' を含む数の列）', anchor: digits-and-ranges}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -64,7 +64,7 @@ $$
 
 $g$ の和の $m$ は先頭の部分木の終わりで、$m = r$ なら区間全体が 1 本の部分木である。条件 $P_l < P_m$ は、兄弟が番号の小さい順にたどられることを表す。先頭の部分木の根 $P_l$ は、残りの森の最初の根 $P_m$ より小さくなければならない。残りの森の中の根どうしの順を保証するのは $g[m][r]$ なので、隣り合う 2 つの根を比べるだけで足りる。空の森を $g[l][l] = 1$ とし、答えは $f[0][N]$ である。
 
-![行きがけ順 P = 1, 2, 4, 3, 5 の区間 [0, 5) を、根 P[0] = 1 と、子の森 [1, 5) に分ける。子の森は部分木 [1, 3)（2 と 4）と部分木 [3, 5)（3 と 5）に分かれ、根 2 と 3 は 2 < 3 の順に並ぶ。右にはその分け方に対応する木を描いた](../img/interval-dp-advanced/preorder-split.svg)
+![行きがけ順 P = 1, 2, 4, 3, 5 の区間 \[0, 5) を、根 P[0] = 1 と、子の森 \[1, 5) に分ける。子の森は部分木 \[1, 3)（2 と 4）と部分木 \[3, 5)（3 と 5）に分かれ、根 2 と 3 は 2 < 3 の順に並ぶ。右にはその分け方に対応する木を描いた](../img/interval-dp-advanced/preorder-split.svg)
 
 小さな例で確かめる。$P = (1, 2, 3)$ なら、3 を 2 の子にする木（1−2−3 の道）と、2 と 3 を 1 の子にする木の 2 通りがある。後者は兄弟の 2 と 3 が番号の順に並ぶので数える。$P = (1, 3, 2)$ なら、3 と 2 を兄弟にすると番号の小さい 2 が先にたどられてしまうので、1−3−2 の道の 1 通りだけになる。式でも、$g[1][3]$ の $m = 2$ の項は $P_1 = 3 > P_2 = 2$ で除かれる。
 
@@ -75,6 +75,9 @@ $g$ の和の $m$ は先頭の部分木の終わりで、$m = r$ なら区間全
 ```cpp
 --8<-- "interval-dp-advanced/preorder-trees.cpp:core"
 ```
+
+完全なプログラム：[`preorder-trees.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/interval-dp-advanced/preorder-trees.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 **応用の型**：
 
@@ -122,6 +125,9 @@ mex は行き先の数以下なので、手が $N$ 個なら値は $N$ 以下に
 ```cpp
 --8<-- "interval-dp-advanced/visited-range.cpp:core"
 ```
+
+完全なプログラム：[`visited-range.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/interval-dp-advanced/visited-range.cpp)（GitHub）
+{ .kp-code-src }
 
 家が座標 $-1$ と $2$ にあるとき、先に $-1$ へ行くと時刻は $1$ と $1 + 3 = 4$ で和は $5$、先に $2$ へ行くと $2$ と $5$ で和は $7$ になる。DP でも、原点から $-1$ へ歩く 1 の間は 2 軒が待つので $1 \times 2$、$-1$ から $2$ へ歩く 3 の間は 1 軒が待つので $3 \times 1$ で、和は $5$ になる。
 

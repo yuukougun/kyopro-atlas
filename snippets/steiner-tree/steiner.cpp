@@ -6,7 +6,7 @@ struct Edge {
     long long w;
 };
 
-const long long INF = numeric_limits<long long>::max() / 4;
+const long long INF = 1LL << 60;  // INF + INF でもあふれない大きさ
 
 // 無向グラフ（重みは 0 以上）で、指定頂点 term をすべてつなぐ辺の集合の重みの最小と、その辺の番号を返す
 pair<long long, vector<int>> steiner_tree(int n, const vector<Edge>& es, const vector<int>& term) {

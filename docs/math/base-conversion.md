@@ -26,7 +26,7 @@ sections:
   - {title: 負の基数（余りを 0 以上に直してから割る）, anchor: negative-base, level: 水}
   - {title: 基数の二分探索とオーバーフロー（1 桁の場合分け）, anchor: base-binary-search, level: 水}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -66,6 +66,9 @@ $$
 --8<-- "base-conversion/convert.cpp:core"
 ```
 
+完全なプログラム：[`convert.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/base-conversion/convert.cpp)（GitHub）
+{ .kp-code-src }
+
 - **0 は特別扱いする**：`while (n > 0)` のループは $N = 0$ で 1 回も回らず、空文字列を返す。0 を出力する問題では先に `"0"` を返す
 - **10 以上の数字**：16 進などでは 10 以上の桁を文字に対応させる。`'0' + d` のままだと `':'` などの記号になる
 - **2 つの基数の間の変換**：$b_1$ 進から $b_2$ 進へは、いったん整数に戻してから変換すればよい（[練習問題](#practice)の典型90 067）。値が `long long` に収まらない長さなら、桁の配列のまま $b_2$ で割る筆算を繰り返す
@@ -92,6 +95,9 @@ $$
 --8<-- "base-conversion/bijective26.cpp:core"
 ```
 
+完全なプログラム：[`bijective26.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/base-conversion/bijective26.cpp)（GitHub）
+{ .kp-code-src }
+
 具体的に、長さ 1 の名前が 26 個、長さ 2 が $26^2 = 676$ 個あるので、$26 + 676 = 702$ 番目が zz、703 番目が aaa になる。境目の $N = 26, 27, 702, 703$ を手で確かめておくと、1 の引き忘れにすぐ気づける。
 
 ??? question "確認問題：28 番目の名前"
@@ -111,6 +117,9 @@ $$
 ```cpp
 --8<-- "base-conversion/negabinary.cpp:core"
 ```
+
+完全なプログラム：[`negabinary.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/base-conversion/negabinary.cpp)（GitHub）
+{ .kp-code-src }
 
 ループは止まる。$\lvert N \rvert \ge 2$ なら $\lvert q \rvert \le (\lvert N \rvert + 1) / 2 < \lvert N \rvert$ で絶対値が減る。$N = 1$ は 1 回で、$N = -1$ は $-1 \to 1 \to 0$ の 2 回で 0 になる。条件は `n != 0` にする（`n > 0` だと負の $N$ でループに入らない）。
 
@@ -143,6 +152,9 @@ $$
 ```cpp
 --8<-- "base-conversion/base-n.cpp:core"
 ```
+
+完全なプログラム：[`base-n.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/base-conversion/base-n.cpp)（GitHub）
+{ .kp-code-src }
 
 `__int128` を使う場合も、各段で $v \le M$ を確かめて超えたら打ち切る必要がある。打ち切らないと、桁数が多いときに $n^{L}$ が `__int128` の範囲も超える（[整数のオーバーフロー](../cpp/cpp-integer-overflow.md)）。
 
@@ -187,7 +199,7 @@ $$
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC186 C. Unlucky 7](https://atcoder.jp/contests/abc186/tasks/abc186_c)（diff 131）：N 以下の正の整数のうち、10 進でも 8 進でも数字 7 を含まないものの個数を求める。
-- [典型90 067. Base 8 to 9（★2）](https://atcoder.jp/contests/typical90/tasks/typical90_bo)（diff —）：8 進法で表された数 N を 9 進法に直し、数字 8 を 5 に置き換える操作を K 回行った結果を求める。
+- [典型90 067. Base 8 to 9（★2）](https://atcoder.jp/contests/typical90/tasks/typical90_bo)（diff なし）：8 進法で表された数 N を 9 進法に直し、数字 8 を 5 に置き換える操作を K 回行った結果を求める。
 - [ABC105 C. Base -2 Number](https://atcoder.jp/contests/abc105/tasks/abc105_c)（diff 1204）：整数 N（負もありうる）を −2 進法で表す。
 - [ABC192 D. Base n](https://atcoder.jp/contests/abc192/tasks/abc192_d)（diff 1425）：数字列 X を n 進数（n は X の最大の数字 + 1 以上）とみた値のうち、M 以下になるものが何種類あるかを求める（M ≤ 10^18）。
 

@@ -29,7 +29,7 @@ sections:
   - {title: 照合オートマトンとして使う（DP・行列累乗）, anchor: as-automaton}
   - {title: 禁止語の貪欲：一致したら書き換えて状態を根に戻す, anchor: forbidden-greedy, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -70,7 +70,7 @@ Aho-Corasick 法は、[KMP 法](../string/kmp.md)の[照合オートマトン](.
 
 失敗リンクをたどると、Trie にある接尾辞を長い順にすべて訪れる。$\mathrm{str}(v)$ の接尾辞で Trie にあるものは、$v, \mathrm{link}(v), \mathrm{link}(\mathrm{link}(v)), \dots$, 根 のどれかに必ず現れる。$\mathrm{link}(v)$ より長い真の接尾辞は Trie にないので、Trie にある真の接尾辞はすべて $\mathrm{str}(\mathrm{link}(v))$ の接尾辞である。あとは $\mathrm{link}(v)$ について同じ議論をくり返せばよい（KMP 法の [border の連鎖](../string/kmp.md#border-chain)と同じ理由）。この性質が、後の節の出現の判定と集計の土台になる。
 
-次の動く図は、失敗リンクを BFS 順に張っていく様子と、テキスト ushers を流したときの状態の移動を示す。
+次の動く図の前半では、節点を BFS 順に取り出し、その行（[次の節](#build)で述べる遷移表の行で、各文字を読んだ後の状態の並び）を失敗リンク先の行から写しながら子の失敗リンク（破線の矢印）を張る。後半ではテキスト ushers を 1 文字ずつ読み、着いた状態（濃い丸）から失敗リンクの連鎖（薄く塗った丸）をたどって、連鎖の上にある終端（二重丸）を出現として拾う。
 
 <div class="kp-viz" data-viz="aho-corasick" data-config='{"patterns": ["he", "she", "his", "hers"], "text": "ushers"}'></div>
 
@@ -92,6 +92,9 @@ Aho-Corasick 法は、[KMP 法](../string/kmp.md)の[照合オートマトン](.
 ```cpp
 --8<-- "aho-corasick/count.cpp:core"
 ```
+
+完全なプログラム：[`count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/aho-corasick/count.cpp)（GitHub）
+{ .kp-code-src }
 
 `build` は、各節点を取り出したときに失敗リンク先の行を写して自分の行を埋め、同時に子の失敗リンクを決める。行は $\sigma$ 個の欄からなり、節点は $M + 1$ 個以下なので、時間も領域も $O(\sigma M)$ である。表を埋めた後は、テキストの 1 文字ごとに表を 1 回引くだけなので、走査は 1 文字 $O(1)$ になる。
 
@@ -123,6 +126,9 @@ $\sigma = 26$、$M = 10^6$ のとき、表は 32 bit 整数が $2.6 \times 10^7$
 --8<-- "aho-corasick/count.cpp:count"
 ```
 
+完全なプログラム：[`count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/aho-corasick/count.cpp)（GitHub）
+{ .kp-code-src }
+
 計算量は、走査が $O(N)$、足し込みが $O(M)$ で、構築を合わせて $O(\sigma M + N)$ である。同じパターンが 2 回入力されても同じ節点を指すので、パターンごとに終端の節点の番号を覚えておけばよい。
 
 ## 終端の印を失敗リンク先から受け継ぐ {#inherit-terminal}
@@ -139,8 +145,8 @@ Trie を作った直後の「ちょうどこの節点で終わる」印だけで
 
 印の代わりに、接尾辞に現れるパターンの個数・重みの和・パターンの集合を表す bit も同じ形で受け継げる。
 
-- 個数：$\mathrm{num}[v] = (\text{ちょうど } v \text{ で終わるパターンの数}) + \mathrm{num}[\mathrm{link}(v)]$。テキスト全体での出現の総数は、走査で止まった各状態の $\mathrm{num}$ の和になる
-- 集合：$\mathrm{mask}[v] = (\text{ちょうど } v \text{ で終わるパターンの bit}) \mathbin{\text{OR}} \mathrm{mask}[\mathrm{link}(v)]$。「すべて含む」を数える DP で、読んだ文字で新しく含んだパターンを知るのに使う
+- 個数：$\mathrm{num}[v] = \mathrm{num}_0[v] + \mathrm{num}[\mathrm{link}(v)]$。$\mathrm{num}_0[v]$ はちょうど $v$ で終わるパターンの数である。テキスト全体での出現の総数は、走査で止まった各状態の $\mathrm{num}$ の和になる
+- 集合：$\mathrm{mask}[v] = \mathrm{mask}_0[v] \text{ OR } \mathrm{mask}[\mathrm{link}(v)]$。$\mathrm{mask}_0[v]$ はちょうど $v$ で終わるパターンの bit である。「すべて含む」を数える DP で、読んだ文字で新しく含んだパターンを知るのに使う
 
 ## 照合オートマトンとして使う（DP・行列累乗） {#as-automaton}
 
@@ -154,6 +160,9 @@ Trie を作った直後の「ちょうどこの節点で終わる」印だけで
 ```cpp
 --8<-- "aho-corasick/avoid-dp.cpp:dp"
 ```
+
+完全なプログラム：[`avoid-dp.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/aho-corasick/avoid-dp.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 この状態で足りるのは、今後どのパターンが現れるかが、テキストの末尾のうち Trie にある最長の接尾辞だけで決まるからである。それより前の文字は、どのパターンの出現にも関わりえない。計算量は $O(L \sigma M)$ である。
 
@@ -179,6 +188,9 @@ Trie を作った直後の「ちょうどこの節点で終わる」印だけで
 ```cpp
 --8<-- "aho-corasick/taboo-greedy.cpp:greedy"
 ```
+
+完全なプログラム：[`taboo-greedy.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/aho-corasick/taboo-greedy.cpp)（GitHub）
+{ .kp-code-src }
 
 **状態を根に戻してよい理由**。書き換えた位置を含む出現はすべて突かれたので、残る出現は書き換えた位置より後で始まるものだけである。書き換えた文字はどのパターンにも現れないので、それをまたぐ接尾辞は Trie にない。よって次の位置からは、空の文字列から照合をやり直すのと同じになる。根に戻さずに走査を続けると、書き換えた文字をまたいだ一致を数えてしまい、答えが多くなる。
 

@@ -31,7 +31,7 @@ sections:
   - {title: 反転と連結する：後ろからの一致と回文の接尾辞, anchor: reverse}
   - {title: S＋区切り＋T で各位置から S の接頭辞が何文字続くか（DP の材料）, anchor: prefix-extension, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -69,6 +69,9 @@ $$
 --8<-- "z-algorithm/find-all.cpp:core"
 ```
 
+完全なプログラム：[`find-all.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/z-algorithm/find-all.cpp)（GitHub）
+{ .kp-code-src }
+
 ## なぜ O(N) か：Z-box の内側は値をコピーでき、比較のたびに右端が進む {#linear-time}
 
 $z[i]$ を位置ごとに先頭から比べ直すと、$S = \texttt{aa}\dots\texttt{a}$ のような入力で合計 $O(N^2)$ になる。Z-algorithm は、すでに見つけた一致区間を使って比較を省く。
@@ -81,7 +84,7 @@ $1 \le i' < i$ の位置のうち、一致区間 $[i', i' + z[i'])$ の右端が
 
 2 が正しいのは、食い違いが箱の内側で起きるからである。$k = z[i - l]$ とすると $S[i - l + k] \ne S[k]$ で、$i - l + k < r - l$ なので、箱の中の対応する位置の文字 $S[i + k]$ も $S[i - l + k]$ と同じである。よって $S[i + k] \ne S[k]$ となり、$z[i]$ はちょうど $k$ になる。3 では、箱の外の文字は接頭辞の側と同じとは限らないので、そこから先は比べるしかない。
 
-![S = aabaabaac で Z-box は [3, 8)。i = 4 では対応する位置 1 の z[1] = 1 が r − i = 4 より小さいので z[4] = 1 を写す。i = 6 では z[3] = 5 が r − i = 2 以上なので、箱の外の S[8] と S[2] から比べて z[6] = 2 になる](../img/z-algorithm/z-box.svg)
+![S = aabaabaac で Z-box は \[3, 8)。i = 4 では対応する位置 1 の z[1] = 1 が r − i = 4 より小さいので z[4] = 1 を写す。i = 6 では z[3] = 5 が r − i = 2 以上なので、箱の外の S[8] と S[2] から比べて z[6] = 2 になる](../img/z-algorithm/z-box.svg)
 
 次の図は、同じ処理を $i = 1$ から 1 位置ずつ送って見せる。上の段が $S$ で、上の括弧が Z-box、中の段は $S$ の先頭を位置 $i$ にそろえて並べたもの、下の段が決まった $z$ である。箱の内側から写した部分は破線のマス、実際に比べたマスは一致なら塗り、食い違いなら斜線で示し、写すときは対応する位置 $i - l$ から $i$ へ矢印を引く。比べずに写す場合（2）は、箱の内側の対応から分かる食い違いの位置を点線の枠と「≠」で示す。箱を取り替えるステップでは、新しい Z-box を一番上に破線の括弧で描く。
 
@@ -98,6 +101,9 @@ $1 \le i' < i$ の位置のうち、一致区間 $[i', i' + z[i'])$ の右端が
 ```cpp
 --8<-- "z-algorithm/own-z.cpp:core"
 ```
+
+完全なプログラム：[`own-z.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/z-algorithm/own-z.cpp)（GitHub）
+{ .kp-code-src }
 
 ??? question "確認問題：r − i で頭打ちにする理由"
     $i < r$ のとき、初期値を `min(r - i, z[i - l])` にしている。`min` を取らずに `z[i - l]` から比べ始めると何が起きるか。
@@ -126,6 +132,9 @@ $V = B + \# + A + A$ の Z 配列を作り、$k = 0, 1, \dots, N - 1$ の順に 
 --8<-- "z-algorithm/rotation.cpp:core"
 ```
 
+完全なプログラム：[`rotation.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/z-algorithm/rotation.cpp)（GitHub）
+{ .kp-code-src }
+
 $A + A$ の位置 $N$ から始まる窓は $A$ 自身で、0 回転と同じである。「$B$ に一致する回転は何通りか」を数えるときに $k = N$ まで見ると、0 回転を二重に数える。見る範囲を $0 \le k < N$ に限るか、$A + A$ の最後の 1 文字を落とした長さ $2N - 1$ の列を使う。
 
 回転どうしの辞書順の比較は、Z 配列ではなく [Suffix Array の回転の節](../string/suffix-array.md#rotations)の方法を使う。
@@ -143,6 +152,9 @@ $p = N$ はいつでも周期である。Z 配列を 1 回作れば、すべて�
 ```cpp
 --8<-- "z-algorithm/period.cpp:core"
 ```
+
+完全なプログラム：[`period.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/z-algorithm/period.cpp)（GitHub）
+{ .kp-code-src }
 
 周期と「繰り返し」は違う。$S = \texttt{abcab}$ は周期 3 を持つが、長さ 3 の文字列の繰り返しではない。$S$ が長さ $p$ の文字列の繰り返しであるのは、$p$ が周期で、かつ $p \mid N$ のときである。さらに、最小の周期 $p_0$ が $N$ を割り切らなければ、$S$ は $N$ より短いどの文字列の繰り返しでもない。
 
@@ -193,6 +205,9 @@ $$
 ```cpp
 --8<-- "z-algorithm/prefix-concat.cpp:core"
 ```
+
+完全なプログラム：[`prefix-concat.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/z-algorithm/prefix-concat.cpp)（GitHub）
+{ .kp-code-src }
 
 同じつなぎ方で、2 つの文字列の重なりも測れる。$V = b + \# + a$ の Z 配列を作る。$a$ の位置 $j$ の値が $\lvert a \rvert - j$ なら、$a$ の接尾辞 $a[j, \lvert a \rvert)$ は $b$ の接頭辞と一致する。そのような $j$ のうち $\lvert a \rvert - j$ の最大が、$a$ の後ろに $b$ を重ねてつなぐときの重なりである。また、値が $\lvert b \rvert$ 以上の位置があれば $b$ は $a$ に含まれる。複数の文字列をすべて含む最短の文字列は、この重なりを前計算して [bitDP](../dp/bit-dp.md) で並べ順を決める。
 
@@ -263,7 +278,7 @@ $S$ を $L = S[0, i)$ と $Q' = S[i, N)$ に分けると、$T = L + \mathrm{rev}
 
 - [ABC257 G. Prefix Concatenation](https://atcoder.jp/contests/abc257/tasks/abc257_g)（diff 2078）：T を S の接頭辞の連結に分けるときの最小の個数を求める。
 - [ABC343 G. Compress Strings](https://atcoder.jp/contests/abc343/tasks/abc343_g)（diff 2114）：N 個（≤ 20）の文字列をすべて連続部分文字列として含む文字列の長さの最小を求める。
-- [ARC055 C. ABCAC](https://atcoder.jp/contests/arc055/tasks/arc055_c)（diff 2392）：S を A+B+C+A+C の形に分ける方法の数を求める。
+- [ARC055 C. ABCAC](https://atcoder.jp/contests/arc055/tasks/arc055_c)（diff 2392・参考値）：S を A+B+C+A+C の形に分ける方法の数を求める。
 
 </div>
 

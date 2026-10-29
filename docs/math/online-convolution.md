@@ -26,7 +26,7 @@ sections:
   - {title: オンライン畳み込み（左半分を確定させてから右半分へ寄与を足す）, anchor: online}
   - {title: ACL の convolution と自作するときの要点, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -57,6 +57,9 @@ $N$ 個の 1 次式の積 $f(x) = (1 + a_0 x)(1 + a_1 x) \cdots (1 + a_{N-1} x)$
 ```cpp
 --8<-- "online-convolution/product.cpp:core"
 ```
+
+完全なプログラム：[`product.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/online-convolution/product.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 因子の次数がばらばらでも、次数の合計を $D$ とすれば、添字で半分に分けるだけで $O((N + D) \log (N + D) \log N)$ になる（各因子の次数が 1 以上なら $D \ge N$ なので $O(D \log D \log N)$）。次数の小さい 2 つを優先度付きキューで取り出して掛ける書き方（ハフマン符号と同じ順）もよく使われ、同じ計算量で収まる。避けるべきなのは、大きくなった積に小さい因子を 1 つずつ掛ける順だけである。
 
@@ -95,6 +98,9 @@ $\mathrm{dp}[0] = 1$、$\mathrm{dp}[i] = \sum_{j=0}^{i-1} \mathrm{dp}[j] \, g[i-
 --8<-- "online-convolution/online.cpp:core"
 ```
 
+完全なプログラム：[`online.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/online-convolution/online.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 自作するときの要点と Library Checker での確かめ方は[ライブラリの節](#library)にまとめる。
 
 ## ACL の convolution と自作するときの要点 {#library}
@@ -118,9 +124,9 @@ Library Checker では次の問題で確かめられる。オンライン畳み�
 
 ## 学ぶための資料 {#resources}
 
-- Nyaan's Library の Relaxed Convolution：$a_i$ と $b_i$ を 1 項ずつ渡すと $c_i$ を返す、両側オンラインの実装。Library Checker の逆元・exp で確かめられている。
-- けんちょん（drken）氏の ABC213 H の記事：素朴な DP から、なぜ 1 回の畳み込みでは済まないか、左半分から右半分へ寄与を足す分割統治までを順に説明している。
-- kmjp 氏の ABC213 H・ABC352 G の記事：短い記述と実装で、2 つの使い方（オンライン畳み込みと積の分割統治）をそれぞれ確かめられる。
+- [Nyaan「Relaxed Convolution | Nyaan's Library」](https://nyaannyaan.github.io/library/ntt/relaxed-convolution.hpp)：$a_i$ と $b_i$ を 1 項ずつ渡すと $c_i$ を返す、両側オンラインの実装。Library Checker の逆元・exp で確かめられている。
+- [けんちょん「AtCoder ABC 213 H - Stroll (4D, 赤色, 600 点)」](https://drken1215.hatenablog.com/entry/2021/08/14/184730)：素朴な DP から、なぜ 1 回の畳み込みでは済まないか、左半分から右半分へ寄与を足す分割統治までを順に説明している。
+- [kmjp「AtCoder ABC #213 : H - Stroll」](https://kmjp.hatenablog.jp/entry/2021/08/15/0930)と [kmjp「AtCoder ABC #352 : G - Socks 3」](https://kmjp.hatenablog.jp/entry/2024/05/05/0900)：短い記述と実装で、2 つの使い方（オンライン畳み込みと積の分割統治）をそれぞれ確かめられる。
 
 ## 例題 {#examples}
 

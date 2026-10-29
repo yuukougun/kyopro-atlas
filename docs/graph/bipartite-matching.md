@@ -27,7 +27,7 @@ sections:
   - {title: 構造で貪欲が通る特殊な場合との見分け, anchor: greedy-cases}
   - {title: 正則二部グラフの分解・辺彩色, anchor: edge-coloring, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -43,7 +43,7 @@ updated: 2026-10-22
 別名：二部グラフの最大マッチング・Hopcroft-Karp・交互路・完全マッチング・二部グラフの辺彩色・bipartite matching
 <!-- textlint-enable -->
 
-二部マッチングは、左右 2 つのグループに分かれたグラフで、どの頂点も高々 1 本しか使わないように辺を選び、選んだ辺の本数を最大にする問題である。始点から左へ、左から右へ、右から終点へ容量 1 の辺を張った[最大流](../graph/max-flow.md)がそのまま答えになる。AtCoder では ACL の `mf_graph` があるので、中身よりも「何を左右の頂点と辺にするか」と「答えの二分探索とどう組むか」が問われる。
+二部マッチングは、左右 2 つのグループに分かれたグラフで、どの頂点も高々 1 本しか使わないように辺を選び、選んだ辺の本数を最大にする問題である。始点から左へ、左から右へ、右から終点へ容量 1 の辺を張った[最大流](../graph/max-flow.md)がそのまま答えになる。AtCoder では ACL の `mf_graph` があるので、中身よりも「何を左右の頂点と辺にするか」と「答えの二分探索とどう組むか」が問われる。このページでは頂点を 0-indexed で書き、左右の組で別々に 0 から番号を振る（$L_0$・$R_0$ など）。問題文の 1-indexed の番号からは 1 を引いて使う。
 
 ## 最大流への帰着（容量 1） {#reduction}
 
@@ -73,6 +73,9 @@ updated: 2026-10-22
 --8<-- "bipartite-matching/mf-graph.cpp:core"
 ```
 
+完全なプログラム：[`mf-graph.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bipartite-matching/mf-graph.cpp)（GitHub）
+{ .kp-code-src }
+
 頂点の番号は「左 $0..L-1$、右 $L..L+R-1$、$s = L+R$、$t = L+R+1$」のように、重ならないよう先に決めておく。
 
 容量を 1 以外にすると、割り当ての形を広げられる。
@@ -100,6 +103,9 @@ updated: 2026-10-22
 --8<-- "bipartite-matching/kuhn.cpp:core"
 ```
 
+完全なプログラム：[`kuhn.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bipartite-matching/kuhn.cpp)（GitHub）
+{ .kp-code-src }
+
 - 訪れた印は始点ごとに消す（`stamp` を 1 増やす）。1 回の探索の中では、同じ左の頂点を 2 度調べない。調べて失敗した頂点からは、その探索の中で何度来ても失敗するからである
 - 1 回の探索は $O(N + M)$ で、始点は左の頂点の数だけなので、全体で $O(NM)$ である
 - ある始点から増加路が見つからなければ、その後で別の始点から反転しても、その始点から増加路は現れない。だから各始点を 1 回ずつ試せば最大になる
@@ -125,6 +131,9 @@ ACL があれば Hopcroft-Karp を自分で書く必要はほとんどない。K
 ```cpp
 --8<-- "bipartite-matching/bottleneck.cpp:core"
 ```
+
+完全なプログラム：[`bottleneck.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bipartite-matching/bottleneck.cpp)（GitHub）
+{ .kp-code-src }
 
 候補は $N^2$ 個なので、判定は $O(\log N)$ 回で済む。各判定は $N^2$ 本の辺のグラフで最大流を 1 回求める。
 
@@ -162,7 +171,7 @@ ACL があれば Hopcroft-Karp を自分で書く必要はほとんどない。K
 
 - **計算の仕方**：最大流で完全マッチングを求め、取った辺の容量を 1 減らして、また求める。これを $k$ 回くり返すので、マッチング $k$ 回分の時間がかかる。多重辺は、組 $(u, v)$ ごとに容量を本数にした 1 本の辺で持つとよい
 - **サイン**：「各行の中で並べ替えて、各列が順列になるように」は、行と値を左右の頂点にした正則二部グラフの分解である（[力試し](#challenge)の ABC317 G）
-- 速い方法として、オイラー路で辺を半分ずつに分けていく $O(M \log M)$ のアルゴリズム（Alon）などがある。Library Checker の bipartite_edge_coloring で確かめられる
+- 速い方法として、オイラー路で辺を半分ずつに分けていく $O(M \log M)$ のアルゴリズム（Alon）などがある。Library Checker の [Edge Coloring of Bipartite Graph](https://judge.yosupo.jp/problem/bipartite_edge_coloring) で確かめられる
 
 ## 落とし穴 {#pitfalls}
 
@@ -186,7 +195,7 @@ ACL があれば Hopcroft-Karp を自分で書く必要はほとんどない。K
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 077. Planes on a 2D Plane（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_by)（diff —）：N 機の飛行機を時間 T の後に、8 方向のどれかへ（斜めなら x と y の両方を）T だけ動かし、指定の N か所に 1 機ずつ着くようにできるかを判定し、できれば方向を出力する。
+- [典型90 077. Planes on a 2D Plane（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_by)（diff なし）：N 機の飛行機を時間 T の後に、8 方向のどれかへ（斜めなら x と y の両方を）T だけ動かし、指定の N か所に 1 機ずつ着くようにできるかを判定し、できれば方向を出力する。
 
 </div>
 
@@ -218,7 +227,7 @@ ACL があれば Hopcroft-Karp を自分で書く必要はほとんどない。K
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [鉄則本 A69. Bipartite Matching](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bq)（diff —）：N×N の表で、i 行 j 列が # なら左の i 番目と右の j 番目を組にしてよいとき、どの要素も 1 回までしか使わずに作れる組の最大数を求める。
+- [鉄則本 A69. Bipartite Matching](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bq)（diff なし）：N×N の表で、i 行 j 列が # なら左の i 番目と右の j 番目を組にしてよいとき、どの要素も 1 回までしか使わずに作れる組の最大数を求める。
 - [ARC092 C. 2D Plane 2N Points](https://atcoder.jp/contests/arc092/tasks/arc092_a)（diff 1268）：赤い点と青い点が N 個ずつあり、x 座標も y 座標も赤い点の方が小さい組を仲良しとするとき、作れる仲良しの組の最大数を求める。
 - [ABC263 G. Erasing Prime Pairs](https://atcoder.jp/contests/abc263/tasks/abc263_g)（diff 2261）：整数とその個数が与えられ、和が素数になる 2 つを選んで消す操作の最大回数を求める。
 

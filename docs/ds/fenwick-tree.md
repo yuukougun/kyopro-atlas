@@ -30,7 +30,7 @@ sections:
   - {title: 変種（差分の BIT・BIT 2 本・2 次元 BIT・接頭辞の max）, anchor: variants}
   - {title: BIT 上の二分探索, anchor: binary-search}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -115,11 +115,17 @@ add(i, x):               # a_i ← a_i + x
 
 **線形時間の構築**：初期値がある列から作るとき、add を $N$ 回呼ぶと $O(N \log N)$ である。次のようにすると $O(N)$ で作れる。まず $t[i] = a_i$ とし、$i = 1, 2, \dots, N$ の順に $t[i]$ を $t[i + \mathrm{lowbit}(i)]$ に足し込む（$N$ を超えるなら足さない）。$t[i + \mathrm{lowbit}(i)]$ は $t[i]$ の区間を含むすぐ上の箱で、各箱の区間は「自分の要素 1 つ」と「すぐ下の箱たち」にちょうど分かれる。$i$ の小さい順に足せば、$t[i]$ は親へ渡す前に完成している。
 
-外部を 0-indexed の半開区間にした実装は次のとおりである。`lower_bound` は[BIT 上の二分探索](#binary-search)で使う。
+??? note "自作するとき：`BIT`（ACL の `fenwick_tree` に当たる）"
+    外から見た添字は 0-indexed、区間は半開区間である。コンストラクタ `BIT()`・`BIT(n)`（全要素 0）と、`add(p, x)`・`sum(l, r)` の名前と意味は ACL の `fenwick_tree` と同じにした。ACL にないものは 3 つある。初期値の配列から線形時間で作るコンストラクタ `BIT(a)`、先頭から $r$ 個の和の `sum(r)`、[BIT 上の二分探索](#binary-search)の `lower_bound(w)` である。同じ探索を、[K 番目の値を求めるデータ構造](../ds/kth-element.md#bit-binary-search)では `kth(k)` と呼んでいる。ACL と違い、中身は `long long` のまま足す（符号なし整数で持つ ACL の工夫は[境界](#boundaries)にある）。添字の範囲を確かめる `assert` も省いた。
 
-```cpp
---8<-- "fenwick-tree/own-bit.cpp:core"
-```
+    ```cpp
+    --8<-- "fenwick-tree/own-bit.cpp:core"
+    ```
+
+    完全なプログラム：[`own-bit.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/fenwick-tree/own-bit.cpp)（GitHub）
+    { .kp-code-src }
+
+    試験では、区間の和と `lower_bound` の答えを、素朴に足した値と照らし合わせている。線形時間の構築は、`BIT(n)` から `add` を $N$ 回呼んで作った中の配列と比べている。Library Checker の [Point Add Range Sum](https://judge.yosupo.jp/problem/point_add_range_sum) が同じ形の問題である。名前の約束は[インターフェースの決め方](../guide/library-design.md#interface)、確かめ方は[動作確認の手順](../guide/library-design.md#verify)にある。
 
 ## 境界（添字の変換・i = 0・符号なし整数） {#boundaries}
 
@@ -139,11 +145,14 @@ BIT のバグは、ほとんどが次の境界で起きる。
 --8<-- "fenwick-tree/acl-usage.cpp:core"
 ```
 
+完全なプログラム：[`acl-usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/fenwick-tree/acl-usage.cpp)（GitHub）
+{ .kp-code-src }
+
 ## 値を添字にして数える（座標圧縮と組む） {#count-by-value}
 
 BIT が最もよく出るのは、列の位置ではなく値を添字にして「これまでに出た値の個数」を持つ使い方である。「$j < i$ かつ $A_j \le A_i$ となる $j$ の個数」を各 $i$ について求めるなら、左から順に次をくり返す。
 
-1. BIT の $[0, A_i]$ の和を読む。これが「すでに出た値のうち $A_i$ 以下の個数」である
+1. BIT の $[0, A_i + 1)$ の和（`sum(0, A_i + 1)`）を読む。これが「すでに出た値のうち $A_i$ 以下の個数」である
 2. BIT の位置 $A_i$ に 1 を足す
 
 先に読んでから足すので、自分自身は数えない。左から順に処理することで「$j < i$」の条件が、BIT の添字の範囲で「$A_j \le A_i$」の条件が満たされる。1 つの条件を処理の順序で、もう 1 つを BIT の添字で受け持つのが要点である。
@@ -154,9 +163,12 @@ BIT が最もよく出るのは、列の位置ではなく値を添字にして�
 --8<-- "fenwick-tree/count-by-value.cpp:core"
 ```
 
+完全なプログラム：[`count-by-value.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/fenwick-tree/count-by-value.cpp)（GitHub）
+{ .kp-code-src }
+
 この形からいくつかの型に広がる。
 
-- **不等号を変える**：「$A_j < A_i$」なら $[0, \mathrm{id})$、「$A_j > A_i$」なら「これまでの個数 − $[0, \mathrm{id}]$ の和」を読む。等しい値をどちらに入れるかは、問題の不等号をそのまま写す。$i$ より前の大きい値の個数を足し合わせたものが[転倒数](../ds/inversion-number.md)である
+- **不等号を変える**：「$A_j < A_i$」なら $[0, \mathrm{id})$、「$A_j > A_i$」なら「これまでの個数 − $[0, \mathrm{id} + 1)$ の和」を読む。等しい値をどちらに入れるかは、問題の不等号をそのまま写す。$i$ より前の大きい値の個数を足し合わせたものが[転倒数](../ds/inversion-number.md)である
 - **個数と和を両方持つ**：BIT を 2 本にして、一方に個数、もう一方に値の和を足す。「前にある $A_i$ 以下の値との差の和」は「$A_i \times$ 個数 − 和」になる（[例題 ABC351 F](#abc351_f)）
 - **個数でなく重みを足す**：「$2^{-j}$」のような重みを足して、組ごとに変わる寄与をまとめて数える（練習の LEQ）
 - **2 つの条件を持つ組**：$A_j \le A_i$ かつ $B_j \le B_i$ のように条件が 2 つなら、一方でソートして順に処理し、もう一方を BIT の添字にする。2 次元の点の数え上げで、[平面走査](../ds/sweep-line-2d.md#rectangle-count)の基本形である
@@ -180,6 +192,9 @@ $d_k$ を足す BIT と $k \, d_k$ を足す BIT の 2 本を持てば、区間�
 ```cpp
 --8<-- "fenwick-tree/range-add-sum.cpp:core"
 ```
+
+完全なプログラム：[`range-add-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/fenwick-tree/range-add-sum.cpp)（GitHub）
+{ .kp-code-src }
 
 **2 次元 BIT**：$t[i][j]$ を「行 $(i - \mathrm{lowbit}(i), i]$・列 $(j - \mathrm{lowbit}(j), j]$ の長方形の和」とし、add と sum のループを入れ子にする。一点加算と、原点を角とする長方形の和が $O(\log H \log W)$ で、任意の長方形の和は 4 つの長方形の和の足し引き（[2 次元累積和](../basics/prefix-sum-2d.md)と同じ）になる。領域は $O(HW)$ なので、座標が大きいときは使えない。点を先に知っているなら、一方でソートして 1 次元の BIT にする[平面走査](../ds/sweep-line-2d.md)の方が軽い。
 
@@ -215,7 +230,7 @@ for step = (N 以下の最大の 2 の冪), …, 2, 1:
 
 - **1-indexed の閉区間をそのまま渡す**：問題文の $[L, R]$（1-indexed）の和を `fw.sum(L, R)` と書くと、$A_L$ が抜けて $A_{L+1}$〜$A_R$ の和になる。正しくは `fw.sum(L - 1, R)` である。一点の更新も `fw.add(P - 1, x)` にする（`fw.add(N, x)` は ACL の `assert` で止まる）
 - **ACL で XOR をしようとする**：`atcoder::fenwick_tree` は足し算に固定である。XOR の BIT は自作の `+` を `^` に変える（[例題 ABC185 F](#abc185_f)）
-- **読む前に足す**：「前にあるもの」を数えるとき、位置 $A_i$ に足してから $[0, A_i]$ を読むと自分自身を数えてしまう。読んでから足す（[値を添字にして数える](#count-by-value)）
+- **読む前に足す**：「前にあるもの」を数えるとき、位置 $A_i$ に足してから $[0, A_i + 1)$ を読むと自分自身を数えてしまう。読んでから足す（[値を添字にして数える](#count-by-value)）
 - **ほかの節で述べた誤り**：区間の min・max に使う（[何ができるか](#what-it-does)）、値の上限を BIT の長さにする、和や答えの型を `int` にする（どちらも[境界](#boundaries)）
 
 ## 例題 {#examples}
@@ -224,7 +239,7 @@ for step = (N 以下の最大の 2 の冪), …, 2, 1:
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [PRACTICE2 B. Fenwick Tree](https://atcoder.jp/contests/practice2/tasks/practice2_b)（diff —）：一点加算と区間和のクエリを処理する。
+- [PRACTICE2 B. Fenwick Tree](https://atcoder.jp/contests/practice2/tasks/practice2_b)（diff なし）：一点加算と区間和のクエリを処理する。
 
 </div>
 

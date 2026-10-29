@@ -29,7 +29,7 @@ sections:
   - {title: 回転（巡回シフト）の入口：回転回数の全探索と A+A, anchor: rotation}
   - {title: 計算量の落とし穴（substr・+・find は長さに比例する）, anchor: cost-pitfalls}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -107,6 +107,9 @@ C++ の `std::string` の `<`・`==`・`min`・`sort` は、この辞書順で�
 --8<-- "string-basics/char-mapping.cpp:core"
 ```
 
+完全なプログラム：[`char-mapping.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/string-basics/char-mapping.cpp)（GitHub）
+{ .kp-code-src }
+
 同じ考え方で、各文字を「その文字が最初に現れた順の番号」に置き換えると、2 条件を満たす文字列どうしは同じ列になる（`abca` も `xyzx` も `0 1 2 0`）。多数の文字列を「文字の名前を付け替えると一致するもの」ごとにまとめるときは、この列をキーにして `map` に入れる。
 
 操作が「文字 $c$ を一斉に $d$ に置き換える」という片道の置き換えなら、条件は変わる。異なる 2 文字を 1 つにまとめられるので、出どころの一意性は要らない。代わりに、置き換えの順番と、`a`→`b`・`b`→`a` のような巡回をほどくための空いた文字を考える必要がある。操作が入れ替えか片道かを、問題文で必ず確かめる。
@@ -128,6 +131,9 @@ C++ の `std::string` の `<`・`==`・`min`・`sort` は、この辞書順で�
 ```cpp
 --8<-- "string-basics/concat-order.cpp:core"
 ```
+
+完全なプログラム：[`concat-order.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/string-basics/concat-order.cpp)（GitHub）
+{ .kp-code-src }
 
 この比較関数が `sort` に渡してよい[狭義の弱順序](../basics/sorting-techniques.md#strict-weak-ordering)であること（特に推移律）は自明でない。それでも、次のとおり成り立つ。
 
@@ -159,6 +165,9 @@ C++ の `std::string` の `<`・`==`・`min`・`sort` は、この辞書順で�
 ```cpp
 --8<-- "string-basics/min-rotation.cpp:core"
 ```
+
+完全なプログラム：[`min-rotation.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/string-basics/min-rotation.cpp)（GitHub）
+{ .kp-code-src }
 
 回転と別の操作（1 文字の書き換えなど）を混ぜてよい問題では、まず操作の順番を入れ替えられないかを考える。書き換えた文字は回転してもその文字のまま動くだけなので、「回転を先に全部行い、その後で書き換える」と並べ替えても結果とコストは変わらない。そうすれば、回転回数 $k$ を全探索し、それぞれで書き換えの数を数える問題になる。
 
@@ -232,7 +241,7 @@ $A + A$ の中で $B$ を探すのを素朴に行うと $O(N^2)$ かかる。$N$
 
 - [ABC286 C. Rotate and Palindrome](https://atcoder.jp/contests/abc286/tasks/abc286_c)（diff 565）：先頭を末尾へ移す操作（コスト A）と 1 文字の書き換え（コスト B）で、文字列を回文にする最小のコストを求める。
 - [ABC076 C. Dubious Document 2](https://atcoder.jp/contests/abc076/tasks/abc076_c)（diff 846）：? を埋めて T を部分文字列に含む文字列のうち、辞書順で最小のものを求める。
-- [ABC110 C. String Transformation](https://atcoder.jp/contests/abc110/tasks/abc110_c)（diff 949）：文字を一斉に置き換える操作を繰り返して、S を T にできるかを判定する。
+- [ABC110 C. String Transformation](https://atcoder.jp/contests/abc110/tasks/abc110_c)（diff 949）：2 種類の文字を選んで一斉に入れ替える操作を繰り返して、S を T にできるかを判定する。
 - [ARC097 C. K-th Substring](https://atcoder.jp/contests/arc097/tasks/arc097_a)（diff 1108）：S の異なる部分文字列のうち、辞書順で K 番目（K ≤ 5）のものを求める。
 
 </div>

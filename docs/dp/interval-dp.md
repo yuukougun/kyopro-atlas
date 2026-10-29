@@ -28,7 +28,7 @@ sections:
   - {title: 最後に残す・最後に消すものを決める型, anchor: last-operation}
   - {title: 端の相手で分ける数え上げ（二項係数で操作の順序を混ぜる）, anchor: pair-with-left-end}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -62,7 +62,7 @@ updated: 2026-10-22
 
 この状態で足りる理由は、境目 $m$ を決めると左右の部分が互いに影響しないことにある。最後の合体より前は、$[l, m)$ の中の合体と $[m, r)$ の中の合体しか起きない。だから左右を別々に最小にしてよく、それぞれの最小は短い区間の値として表にある。最後の合体のコストは区間全体の和で、境目によらない。
 
-![A = 2, 5, 1, 3 の区間 [0, 4) を、最後の合体の境目 m で 2 つに割る木の図。m = 1・2・3 の候補のうち、左右の和が最小になるのは m = 2 の 7 + 4 = 11 で、最後の合体のコスト 11 を足して dp[0][4] = 22](../img/interval-dp/split.svg)
+![A = 2, 5, 1, 3 の区間 \[0, 4) を、最後の合体の境目 m で 2 つに割る木の図。m = 1・2・3 の候補のうち、左右の和が最小になるのは m = 2 の 7 + 4 = 11 で、最後の合体のコスト 11 を足して dp[0][4] = 22](../img/interval-dp/split.svg)
 
 $A = (2, 5, 1, 3)$ なら、長さ 2 の区間は $\mathrm{dp}[0][2] = 7$、$\mathrm{dp}[1][3] = 6$、$\mathrm{dp}[2][4] = 4$ である。長さ 3 は $\mathrm{dp}[0][3] = \min(0 + 6,\ 7 + 0) + 8 = 14$、$\mathrm{dp}[1][4] = \min(0 + 4,\ 6 + 0) + 9 = 13$ になる。全体は、左右の和が $m = 1$ で 13、$m = 2$ で $7 + 4 = 11$、$m = 3$ で 14 なので、図のとおり $m = 2$ で割るのが最小で、$\mathrm{dp}[0][4] = 11 + 11 = 22$ になる。
 
@@ -100,6 +100,9 @@ for l = N-1 .. 0:
 ```cpp
 --8<-- "interval-dp/slimes.cpp:core"
 ```
+
+完全なプログラム：[`slimes.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/interval-dp/slimes.cpp)（GitHub）
+{ .kp-code-src }
 
 ## 分割点型（最後に行う操作で区間を 2 つに割る） {#split-point}
 
@@ -159,6 +162,9 @@ $$
 --8<-- "interval-dp/erase-pairs.cpp:core"
 ```
 
+完全なプログラム：[`erase-pairs.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/interval-dp/erase-pairs.cpp)（GitHub）
+{ .kp-code-src }
+
 **区間の中で最後に消す要素を決める**。各要素を 1 つずつ消し、消すコストがそのときの両隣で決まる問題では、$\mathrm{dp}[l][r]$ を「外の $a_{l-1}$ と $a_r$ が残ったまま $[l, r)$ を全部消すコストの最小」とし、$[l, r)$ の中で最後に消す要素 $k$ を決める。$k$ が残っている間、$k$ は左右を隔てる壁になるので、$[l, k)$ と $[k+1, r)$ はそれぞれ独立に消える。しかも $k$ を消す瞬間の両隣は、区間の外の $a_{l-1}$ と $a_r$ に決まる。「最初に消すもの」で分けると、消した後に両隣がつながって独立に割れないので、「最後」で分けるのがこつである。
 
 $$
@@ -191,6 +197,9 @@ $$
 --8<-- "interval-dp/pair-count.cpp:core"
 ```
 
+完全なプログラム：[`pair-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/interval-dp/pair-count.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 二項係数の表は $n \le$ 数百ならパスカルの三角形で $O(n^2)$ に作れる。区間は $O(n^2)$ 個、相手の候補は $O(n)$ 個なので全体で $O(n^3)$ である（[練習](#practice)の ABC217 F）。
 
 「内と外を独立に数えて、順序を二項係数で混ぜる」形は、区間で木の形や操作の履歴を数える問題で繰り返し現れる（[区間 DP の応用](../dp/interval-dp-advanced.md)）。
@@ -213,7 +222,7 @@ $$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC N. Slimes](https://atcoder.jp/contests/dp/tasks/dp_n)（diff —）：隣り合うスライムを合体させるたびに大きさの和のコストがかかるとき、全部を 1 匹にするコストの最小を求める。
+- [EDPC N. Slimes](https://atcoder.jp/contests/dp/tasks/dp_n)（diff なし）：隣り合うスライムを合体させるたびに大きさの和のコストがかかるとき、全部を 1 匹にするコストの最小を求める。
 
 </div>
 
@@ -229,7 +238,7 @@ $$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 019. Pick Two（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_s)（diff —）：2N 個の数の列から隣り合う 2 つを取り除く操作を繰り返して全部消すとき、取り除く 2 つの差の絶対値の和の最小を求める。
+- [典型90 019. Pick Two（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_s)（diff なし）：2N 個の数の列から隣り合う 2 つを取り除く操作を繰り返して全部消すとき、取り除く 2 つの差の絶対値の和の最小を求める。
 
 </div>
 
@@ -245,8 +254,8 @@ $$
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [EDPC L. Deque](https://atcoder.jp/contests/dp/tasks/dp_l)（diff —）：数列の両端から交互に 1 つずつ取る 2 人ゲームで、両者が最適に取るときの先手の得点 − 後手の得点を求める。
-- [TDPC I. イウィ](https://atcoder.jp/contests/tdpc/tasks/tdpc_iwi)（diff —）：i と w からなる文字列から、連続する 'iwi' を取り除く操作を繰り返すとき、操作回数の最大を求める。
+- [EDPC L. Deque](https://atcoder.jp/contests/dp/tasks/dp_l)（diff なし）：数列の両端から交互に 1 つずつ取る 2 人ゲームで、両者が最適に取るときの先手の得点 − 後手の得点を求める。
+- [TDPC I. イウィ](https://atcoder.jp/contests/tdpc/tasks/tdpc_iwi)（diff なし）：i と w からなる文字列から、連続する 'iwi' を取り除く操作を繰り返すとき、操作回数の最大を求める。
 - [ABC217 F. Make Pair](https://atcoder.jp/contests/abc217/tasks/abc217_f)（diff 1954）：2N 人の列から、仲の良い隣り合う 2 人を取り除く操作を N 回行う方法の数を求める。
 - [ABC163 E. Active Infants](https://atcoder.jp/contests/abc163/tasks/abc163_e)（diff 2037）：活発度 A_i の幼児を並べ替えて、各幼児の移動距離×活発度の和の最大を求める。
 

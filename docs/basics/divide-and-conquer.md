@@ -28,7 +28,7 @@ sections:
   - {title: 区間クエリを中央で分けて左右の DP を合わせる（区間ナップサック）, anchor: range-knapsack}
   - {title: 他の分野の分割統治（分割統治 DP・分割統治 FFT・CDQ）への案内, anchor: other-fields}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -92,6 +92,9 @@ cross の時間が区間の長さに比例するなら、各段の合計は $O(N
 --8<-- "divide-and-conquer/merge-inversion.cpp:core"
 ```
 
+完全なプログラム：[`merge-inversion.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/divide-and-conquer/merge-inversion.cpp)（GitHub）
+{ .kp-code-src }
+
 等しい値の扱いはマージの比較で決まる。$a_i \le a_j$ のときに左を先に出せば、等しい組は数えない（狭義の転倒）。$a_i < a_j$ のときだけ左を出すと、等しい組も数えてしまう。転倒数そのものは BIT で数える方が短く書けることが多い（[転倒数](../ds/inversion-number.md#count-with-bit)）。分割統治の形は、またぐ条件が BIT に載らない形のときに効く。
 
 **区間をまたぐ場合**：「すべての区間 $[i, j)$ について数える・合計する」問題では、中央 $m$ をまたぐ区間は「左の接尾辞 $[i, m)$」と「右の接頭辞 $[m, j)$」の組である。左の接尾辞の和・最大値などは、$m$ から左へ 1 つずつ伸ばしながら求められる。右の接頭辞も同じように求めると、区間の値は 2 つの値の組み合わせで書ける。条件が「左の値 + 右の値 $\le K$」の形なら、ソートと尺取り法で $O(L \log L)$ で数えられる。
@@ -120,6 +123,9 @@ cross の時間が区間の長さに比例するなら、各段の合計は $O(N
 --8<-- "divide-and-conquer/split-at-max.cpp:core"
 ```
 
+完全なプログラム：[`split-at-max.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/divide-and-conquer/split-at-max.cpp)（GitHub）
+{ .kp-code-src }
+
 **応用の型**：
 
 - 区間の最大値（最小値）が条件に入る区間を数える。最大値の位置 $m$ で分けると、$m$ を含む区間 $[i, j)$（$l \le i \le m < j \le r$）は、どれも最大値が $A_m$ である。短い側の端点を全部試し、長い側を累積和の二分探索で数える（合計 $O(N \log^2 N)$）
@@ -129,7 +135,7 @@ cross の時間が区間の長さに比例するなら、各段の合計は $O(N
 
 この節は [0-1 ナップサック](../dp/knapsack-01.md)の表の作り方を前提にする。「区間 $[l, r)$ の品物だけを使って容量 $c$ 以下での価値の最大を答える」クエリが多数来るとき、クエリごとに DP すると $O(NQC)$ かかる。クエリを全部先に読み（[オフライン](../guide/glossary.md#offline)）、品物の列を中央で分けると、中央をまたぐクエリには左右の表を 1 回ずつ作るだけで答えられる。
 
-![品物 0〜7 の中央 m = 4 で分け、クエリ [1, 7) を左の品物 [1, 4) と右の品物 [4, 7) に分ける。左の表 L[1] は m から左へ、右の表 R[7] は m から右へ 1 品ずつ足して作り、容量を x と c − x に配って足した値の最大が答えになる](../img/divide-and-conquer/range-knapsack.svg)
+![品物 0〜7 の中央 m = 4 で分け、クエリ \[1, 7) を左の品物 \[1, 4) と右の品物 \[4, 7) に分ける。左の表 L[1] は m から左へ、右の表 R[7] は m から右へ 1 品ずつ足して作り、容量を x と c − x に配って足した値の最大が答えになる](../img/divide-and-conquer/range-knapsack.svg)
 
 品物の列 $[lo, hi)$ と、そこに収まるクエリの集まりを受け取り、中央 $m$ で次のようにする。
 
@@ -145,6 +151,9 @@ cross の時間が区間の長さに比例するなら、各段の合計は $O(N
 ```cpp
 --8<-- "divide-and-conquer/range-knapsack.cpp:core"
 ```
+
+完全なプログラム：[`range-knapsack.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/divide-and-conquer/range-knapsack.cpp)（GitHub）
+{ .kp-code-src }
 
 表を作る時間は各段 $O(NC)$ で、段は $O(\log N)$ 個なので $O(NC \log N)$ である。各クエリはどこか 1 つの区間でだけ答え、1 つ $O(C)$ なので合計 $O(QC)$ である。メモリは表 $N + 1$ 行を使い回して $O(NC)$ で済む。
 
@@ -222,7 +231,7 @@ CDQ 分割統治は[またぐものの数え方](#crossing)の延長である。
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [CHOKUDAI_S001 J. 転倒数](https://atcoder.jp/contests/chokudai_S001/tasks/chokudai_S001_j)（diff —）：隣接交換で数列をソートするときの交換回数（転倒数）を求める。
+- [CHOKUDAI_S001 J. 転倒数](https://atcoder.jp/contests/chokudai_S001/tasks/chokudai_S001_j)（diff なし）：隣接交換で数列をソートするときの交換回数（転倒数）を求める。
 - [ARC075 E. Meaningful Mean](https://atcoder.jp/contests/arc075/tasks/arc075_c)（diff 1979）：平均が K 以上になる連続部分列の個数を求める。
 
 </div>

@@ -32,7 +32,7 @@ sections:
   - {title: Cartesian tree（最大値で区間を割る再帰を O(N) で作る）, anchor: cartesian-tree, level: 黄}
   - {title: SWAG：スタック 2 本で作る総積つきキュー, anchor: swag, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -86,6 +86,9 @@ for i = 0, 1, …, N−1:
 --8<-- "monotonic-stack/prev-greater.cpp:core"
 ```
 
+完全なプログラム：[`prev-greater.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/monotonic-stack/prev-greater.cpp)（GitHub）
+{ .kp-code-src }
+
 ### 境界
 
 答えがないとき、左側なら $-1$、右側なら $N$ とする。こうそろえると、幅 $R_i - L_i - 1$ や個数 $(i - L_i)(R_i - i)$ が場合分けなしで正しくなる。空のスタックの top は読まない。降ろすループの条件に空かどうかを先に書くか、左端に番兵 $+\infty$ を置いて空にしない。
@@ -135,6 +138,9 @@ $$
 --8<-- "monotonic-stack/sum-of-min.cpp:core"
 ```
 
+完全なプログラム：[`sum-of-min.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/monotonic-stack/sum-of-min.cpp)（GitHub）
+{ .kp-code-src }
+
 最大値の和なら不等号をすべて逆にする。和の大きさは制約から見積もる。区間は $N(N+1)/2$ 個あるので、$N = 2 \times 10^5$・$A_i \le 10^9$ では和が約 $2 \times 10^{19}$ に届く。これは `long long` の上限（約 $9.2 \times 10^{18}$）を超える。この場合は mod を取るか、`__int128` を使う。和が非負なら、`unsigned long long` の上限約 $1.8 \times 10^{19}$ で足りるかも見積もる。[AGC005 B](#practice) のように値が $N$ 以下なら、和は $N \cdot N(N+1)/2 \approx 4 \times 10^{15}$ 以下で `long long` に収まる。
 
 この形は「区間の最大値と最小値の差の和」（最大値の和から最小値の和を引く）や、「窓の幅ごとの最大値の和」（$i$ が最大になる窓を幅ごとに数える）にも広がる。
@@ -162,6 +168,9 @@ $$
 ```cpp
 --8<-- "monotonic-stack/sliding-min.cpp:core"
 ```
+
+完全なプログラム：[`sliding-min.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/monotonic-stack/sliding-min.cpp)（GitHub）
+{ .kp-code-src }
 
 各添字は 1 回入って高々 1 回出るので、全体で $O(N)$ である。窓の幅が固定でなくても、[尺取り法](../basics/two-pointers.md#fixed-window)のように左端と右端がどちらも戻らずに進むなら、同じ deque が使える。そのときは先頭から捨てる条件を「添字が今の左端より小さい」に変える。最大値なら不等号を逆にする（値の符号を反転してもよい）。
 
@@ -235,11 +244,11 @@ for i = 1, 2, …, N:
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [鉄則本 A60. Stock Price](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bh)（diff —）：各日について、それより前で株価が高かった最後の日を答える。
+- [鉄則本 A60. Stock Price](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bh)（diff なし）：各日について、それより前で株価が高かった最後の日を答える。
 - [ABC189 C. Mandarin Orange](https://atcoder.jp/contests/abc189/tasks/abc189_c)（diff 565）：区間を 1 つ選び、区間の長さと区間の最小値の積の最大値を求める。
 - [ABC352 D. Permutation Subsequence](https://atcoder.jp/contests/abc352/tasks/abc352_d)（diff 714）：順列で、連続する値 K 個の位置の最大 − 最小の最小値を求める。
 - [ABC435 F. Cat exercise](https://atcoder.jp/contests/abc435/tasks/abc435_f)（diff 1385）：最大値の位置で区間を左右に分けて進む過程の、移動距離の合計の最大値を求める。
-- [DONUTS-2015 C. 行列のできるドーナツ屋](https://atcoder.jp/contests/donuts-2015/tasks/donuts_2015_3)（diff 1661）：行列に並ぶ各人から前方に見える人の数を答える。
+- [DONUTS-2015 C. 行列のできるドーナツ屋](https://atcoder.jp/contests/donuts-2015/tasks/donuts_2015_3)（diff 1661・参考値）：行列に並ぶ各人から前方に見える人の数を答える。
 - [AGC005 B. Minimum Sum](https://atcoder.jp/contests/agc005/tasks/agc005_b)（diff 1828）：すべての区間の最小値の総和を求める。
 
 </div>
@@ -311,6 +320,9 @@ for i = 1, 2, …, N:
 ```cpp
 --8<-- "monotonic-stack/cartesian-tree.cpp:core"
 ```
+
+完全なプログラム：[`cartesian-tree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/monotonic-stack/cartesian-tree.cpp)（GitHub）
+{ .kp-code-src }
 
 木ができれば、最大値で割る再帰は木の上の DFS になる。単調な列では木がパス状になり深さが $N$ に達するので、$N = 5 \times 10^5$ では再帰がスタックを使い果たすことがある。再帰を使わずに明示的なスタックで DFS するか、根から BFS の順に並べた列を逆順に処理して、子から親へ値を集める。
 

@@ -94,6 +94,9 @@ $$
 --8<-- "dp-mod-state/max-multiple.cpp:core"
 ```
 
+完全なプログラム：[`max-multiple.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-mod-state/max-multiple.cpp)（GitHub）
+{ .kp-code-src }
+
 DP の値（和の最大）には mod を取らない。値は本当の和で、mod を取ると大小が比べられなくなる。mod を取るのは状態の添字の計算（$r$ を決めるところ）だけである。
 
 ## 平均の扱い（個数を外側で固定する・平均を引いて和 0 にする） {#average}
@@ -112,6 +115,9 @@ $$
 ```cpp
 --8<-- "dp-mod-state/average-count.cpp:core"
 ```
+
+完全なプログラム：[`average-count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-mod-state/average-count.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 $k$ ごとの状態は $(k + 1) k$ 個で、要素ごとに全状態を見るので $O(Nk^2)$ である。$k$ について足すと $\sum_{k=1}^{N} N k^2 \approx N^4 / 3$ になり、$N = 100$ で約 $3.3 \times 10^7$ 回で済む。個数を固定しないと、法が選び方ごとに違うので 1 つの表にまとめられない。
 
@@ -141,6 +147,9 @@ $k$ ごとの状態は $(k + 1) k$ 個で、要素ごとに全状態を見るの
 ```cpp
 --8<-- "dp-mod-state/game-remainder.cpp:core"
 ```
+
+完全なプログラム：[`game-remainder.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-mod-state/game-remainder.cpp)（GitHub）
+{ .kp-code-src }
 
 ## 落とし穴 {#pitfalls}
 

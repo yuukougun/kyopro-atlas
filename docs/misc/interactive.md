@@ -29,7 +29,7 @@ sections:
   - {title: 適応的ジャッジ（最悪の場合の回数で考える）, anchor: adaptive-judge}
   - {title: 手元でのテスト（ジャッジ役のプログラムとパイプでつなぐ）, anchor: local-testing}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -78,6 +78,9 @@ C++ の作法で必ず守るのは次の 3 つである。
 ```cpp
 --8<-- "interactive/boundary.cpp:core"
 ```
+
+完全なプログラム：[`boundary.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/interactive/boundary.cpp)（GitHub）
+{ .kp-code-src }
 
 ## 回数の上限から方針を逆算する（情報量の下界） {#query-budget}
 
@@ -131,6 +134,9 @@ $$
 ```cpp
 --8<-- "interactive/bits.cpp:core"
 ```
+
+完全なプログラム：[`bits.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/interactive/bits.cpp)（GitHub）
+{ .kp-code-src }
 
 この $M$ 人は[情報量の下界](#query-budget)と一致するので、人数としても最少である。候補の数が 2 の冪なら、二分探索の質問も「答えの番号のビットを上から 1 つずつ決めている」と見ることができる。前の答えで質問を変えられるかどうかが違うだけで、どちらも 1 回の質問で 1 ビットを得ている。
 
@@ -240,7 +246,7 @@ $N \le 2 \times 10^5$ に対して上限は 20 回で、$\lceil \log_2 (2 \times
 - [ABC337 E. Bad Juice](https://atcoder.jp/contests/abc337/tasks/abc337_e)（diff 1155）：N 本のジュースのうち 1 本だけ腐っているとき、最少の人数の友人に飲ませて腐った 1 本を特定する。
 - [ABC305 F. Dungeon Explore](https://atcoder.jp/contests/abc305/tasks/abc305_f)（diff 1420）：隣接する頂点だけが分かるグラフで、2N 回以内の移動で頂点 N に着く。
 - [ABC313 D. Odd or Even](https://atcoder.jp/contests/abc313/tasks/abc313_d)（diff 1630）：ちょうど K 個（奇数）の要素の和の偶奇を聞く N 回の質問で、01 列のすべての要素を特定する。
-- [PRACTICE B. Interactive Sorting](https://atcoder.jp/contests/practice/tasks/practice_2)（diff —）：2 つのボールの重さを比べる質問だけで、N 個のボールを軽い順に並べる。
+- [PRACTICE B. Interactive Sorting](https://atcoder.jp/contests/practice/tasks/practice_2)（diff なし）：2 つのボールの重さを比べる質問だけで、N 個のボールを軽い順に並べる。
 
 </div>
 

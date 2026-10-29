@@ -28,7 +28,7 @@ sections:
   - {title: 片側を全探索して残りを速く求める（貪欲・二分探索・累積和）, anchor: half-enumeration}
   - {title: 盤面を動かして全部試す（回転・平行移動）, anchor: move-board, level: 水}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -63,6 +63,9 @@ updated: 2026-10-22
 ```cpp
 --8<-- "brute-force/fix-two.cpp:core"
 ```
+
+完全なプログラム：[`fix-two.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/brute-force/fix-two.cpp)（GitHub）
+{ .kp-code-src }
 
 「決めれば残りが決まる」は等式に限らない。残りの最良の値がすぐ分かる場合も同じである。たとえば 2 種類のセット商品の数を決めると、残りの単品の数は「足りない分だけ買う」で決まる。決める側の変数は、通り数が少ない方、または残りを計算しやすい方を選ぶ。
 
@@ -125,6 +128,8 @@ $L$ と $R$ の境界を半開区間 $[0, k)$ と $[k, N)$ にそろえると、
 
 [半分全列挙](../basics/meet-in-the-middle.md)と混同しやすいが、半分全列挙では両側をどちらも $2^{N/2}$ 通り全列挙してから組み合わせる。この型で全探索するのは片側だけで、もう一方は列挙せずに最良を直接求める。
 
+片側を全探索で固定したあと、残りの条件の形から道具を選ぶ方法は[固定したあとを速くする](../thinking/fix-variable.md#speed-up)にある。
+
 ## 盤面を動かして全部試す（回転・平行移動） {#move-board}
 
 この節の後半は、マスの集合を整数で表すので[bit 演算の基本と XOR の性質](../basics/bit-operations.md)を使う。小さな盤面や型を回転・平行移動して重ねる・敷き詰める問題では、動かし方を全部試せばよい。難しいのは計算量ではなく、動かす範囲の取り方と実装の誤りである。
@@ -143,6 +148,9 @@ $L$ と $R$ の境界を半開区間 $[0, k)$ と $[k, N)$ にそろえると、
 ```cpp
 --8<-- "brute-force/board-shift.cpp:core"
 ```
+
+完全なプログラム：[`board-shift.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/brute-force/board-shift.cpp)（GitHub）
+{ .kp-code-src }
 
 盤面が $4 \times 4$ のように 16 マス以下なら、置いたマスの集合を 16 ビットの整数で表せる。重なりの判定は AND で、全体を埋めたかの判定は OR で書ける。ただし左シフトで平行移動すると、右端からはみ出したマスが次の行に回り込むので、シフトの前に盤面に収まるかを確かめる。
 
@@ -200,7 +208,7 @@ $L$ と $R$ の境界を半開区間 $[0, k)$ と $[k, N)$ にそろえると、
 - [SUMITRUST2019 D. Lucky PIN](https://atcoder.jp/contests/sumitrust2019/tasks/sumitb2019_d)（diff 838）：長さ N の数字列から 3 桁を選んで作れる暗証番号の種類数を求める。
 - [ABC469 D. The Big Two](https://atcoder.jp/contests/abc469/tasks/abc469_d)（diff 1102）：N 人から 2 人を選ぶとき、M 回のどの大会でも、選んだ 2 人の少なくとも一方が決勝に出ているような選び方の数を求める。
 - [ABC112 C. Pyramid](https://atcoder.jp/contests/abc112/tasks/abc112_c)（diff 1147）：いくつかの地点の高さの情報から、ピラミッドの中心座標と高さを特定する。
-- [典型90 063. Monochromatic Subgrid（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_bk)（diff —）：グリッドから行と列をいくつか選び、交差するマスがすべて同じ数になるときのマスの数の最大値を求める。
+- [典型90 063. Monochromatic Subgrid（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_bk)（diff なし）：グリッドから行と列をいくつか選び、交差するマスがすべて同じ数になるときのマスの数の最大値を求める。
 - [ABC307 C. Ideal Sheet](https://atcoder.jp/contests/abc307/tasks/abc307_c)（diff 1307）：2 枚のシートを平行移動して重ね、切り出した結果を目標のシートに一致させられるか判定する。
 
 </div>

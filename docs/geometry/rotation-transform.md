@@ -30,7 +30,7 @@ sections:
   - {title: 三角関数と角度の基本（度とラジアン・π は acos(−1)・余弦定理）, anchor: trig-angle}
   - {title: 点集合の合同判定：重心をそろえて照合する, anchor: congruence, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -145,6 +145,9 @@ $k$ 回目までの合成を $P_k$ とすると、$P_0$ は単位行列で、$P_
 --8<-- "rotation-transform/affine-compose.cpp:core"
 ```
 
+完全なプログラム：[`affine-compose.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rotation-transform/affine-compose.cpp)（GitHub）
+{ .kp-code-src }
+
 実装では次の点に気をつける。
 
 - **$k = 0$ のクエリ**：操作をしていない時点は単位行列 $P_0$ で答える。配列を $M + 1$ 個取り、$P_k$ を「$k$ 回目の後」と決めておくと添字がずれない
@@ -174,6 +177,9 @@ $k$ 回目までの合成を $P_k$ とすると、$P_0$ は単位行列で、$P_
 ```cpp
 --8<-- "rotation-transform/grid-rotate.cpp:core"
 ```
+
+完全なプログラム：[`grid-rotate.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rotation-transform/grid-rotate.cpp)（GitHub）
+{ .kp-code-src }
 
 - **元の配列を上書きしない**：同じ配列の中で入れ替えると、まだ読んでいないマスを先に書き換えてしまう。新しい配列に書いてから差し替える
 - **4 回回すと元に戻る**：「回す」関数を 4 回呼んで元の盤面に戻るかを `assert` で確かめると、添字の誤りがすぐに見つかる
@@ -210,6 +216,9 @@ $$
 ```cpp
 --8<-- "rotation-transform/congruence.cpp:core"
 ```
+
+完全なプログラム：[`congruence.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/rotation-transform/congruence.cpp)（GitHub）
+{ .kp-code-src }
 
 - **重心に重なる点**：重心にある点は回転で動かないので、$a$ に選んではいけない（どの回転でも重なり、回転が決まらない）。照合には含めたままでよい
 - **反転を区別する**：外積の符号が回転の向きを決めるので、鏡に映した形は一致しない。反転も許す問題なら、$S$ を $x$ 軸で反転したものでももう一度判定する
@@ -267,7 +276,7 @@ $N$ が大きいときは、巡回シフトの照合に直す方法を使う。�
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [ABC298 B. Coloring Matrix](https://atcoder.jp/contests/abc298/tasks/abc298_b)（diff —）：行列 A を 90 度ずつ回転させて、条件を満たすようにできるかを判定する。
+- [ABC298 B. Coloring Matrix](https://atcoder.jp/contests/abc298/tasks/abc298_b)（diff なし）：行列 A を 90 度ずつ回転させて、条件を満たすようにできるかを判定する。
 - [ABC168 C. : (Colon)](https://atcoder.jp/contests/abc168/tasks/abc168_c)（diff 230）：時計の長針と短針の先端の距離を求める。
 - [ABC144 D. Water Bottle](https://atcoder.jp/contests/abc144/tasks/abc144_d)（diff 714）：直方体の水筒を傾けて、水がこぼれない最大の角度を求める。
 - [ABC197 D. Opposite](https://atcoder.jp/contests/abc197/tasks/abc197_d)（diff 831）：正 N 角形の向かい合う 2 頂点の座標から、隣の頂点の座標を求める。

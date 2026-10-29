@@ -24,7 +24,7 @@ int main() {
     queue<int> que;
     dep[0] = 0;
     up[0][0] = 0;
-    mx[0][0] = 0;  // 根から上る辺はない。最大値の単位元 0 にしておく
+    mx[0][0] = 0;  // 根から上る辺はない。重みは正とするので、最大値の単位元に 0 を使う
     que.push(0);
     while (!que.empty()) {
         int v = que.front();
