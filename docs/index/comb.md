@@ -289,7 +289,7 @@ search:
 - 種類：数え上げ
 - 前提：`binomial-precompute`
 - サイン：
-    - 式の形：答えの式に Σ_{k≤K} C(n,k) の形の和が、多くの (n, K) について現れる
+    - 式の形：答えの式に k ≤ K の C(n,k) の和が、多くの (n, K) について現れる
 - 節：
     - `binomial-prefix-sum#what` 何ができるか：https://yuukougun.github.io/kyopro-atlas/comb/binomial-prefix-sum/#what
     - `binomial-prefix-sum#update` n と K を 1 ずつ動かす更新式：https://yuukougun.github.io/kyopro-atlas/comb/binomial-prefix-sum/#update

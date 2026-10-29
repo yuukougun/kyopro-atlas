@@ -303,7 +303,7 @@ search:
 - サイン：
     - 言い回し：一点の値の更新と区間の和の質問が交互に来る
     - 言い回し：i より前にある x 以下の要素の個数
-    - 式の形：Σ_{j&lt;i} [A_j ≤ A_i] のように、前にある要素のうち条件を満たすものの個数・和を i ごとに足す
+    - 式の形：j < i の [A_j ≤ A_i] の和のように、前にある要素のうち条件を満たすものの個数・和を i ごとに足す
     - 制約：N, Q ≤ 2×10^5 で更新があり、累積和を毎回作り直すと間に合わない
 - 節：
     - `fenwick-tree#what-it-does` 何ができるか（一点加算・接頭辞の和と逆元）：https://yuukougun.github.io/kyopro-atlas/ds/fenwick-tree/#what-it-does
@@ -456,11 +456,11 @@ search:
     - 言い回し：1 点の更新と、区間が正しい括弧列か・回文かの判定
     - 言い回し：区間で 2 番目に大きい値（の個数）
     - 言い回し：区間の最大部分配列和・区間で最長の連続する 1
-    - 式の形：区間 [l, r) の答えが、各位置の一次関数や小さな行列を順に合成したもので書ける
+    - 式の形：区間 [l, r) の答えが、各位置の 1 次関数や小さな行列を順に合成したもので書ける
 - 節：
     - `segment-tree-monoids#design-steps` 設計の手順（答えに要る情報を足し、結合法則と単位元を確かめる）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-monoids/#design-steps
     - `segment-tree-monoids#pattern-table` 型の表（和・min/max・gcd・最小値と個数・括弧列・最大部分配列和など）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-monoids/#pattern-table
-    - `segment-tree-monoids#non-commutative` 非可換なモノイド（一次関数の合成・ハッシュの連結。積む順序）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-monoids/#non-commutative
+    - `segment-tree-monoids#non-commutative` 非可換なモノイド（1 次関数の合成・ハッシュの連結。積む順序）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-monoids/#non-commutative
     - `segment-tree-monoids#matrix` 行列を載せる（(min,+)・(max,+) の半環も）：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-monoids/#matrix
 
 ## 遅延セグメント木の載せ方の型（lazy-segment-tree-patterns） {#lazy-segment-tree-patterns}
@@ -529,7 +529,7 @@ search:
 - 使い分け：`method-comparison#range-queries`
 - ACL：`fenwick_tree`
 - サイン：
-    - 言い回し：区間 [l, r] に含まれる値の種類数を多数のクエリで答える
+    - 言い回し：区間 [l, r) に含まれる値の種類数を多数のクエリで答える
     - 言い回し：重み w 以下の辺だけを使ったときの連結・X 以下の要素の和をクエリごとに答える
     - 言い回し：クエリどうしが独立で、順番を入れ替えても答えが変わらない
     - 制約：値が 10^9 まで、N, Q ≤ 2×10^5 で、クエリにも新しい値が現れる
@@ -552,7 +552,7 @@ search:
 - ACL：`fenwick_tree`、`lazy_segtree`
 - サイン：
     - 言い回し：長方形の中にある点の数・和を多数のクエリで答える
-    - 言い回し：区間 [p, q] に完全に含まれる区間の数
+    - 言い回し：閉区間 [p, q] に完全に含まれる区間の数
     - 言い回し：幅 W・高さ D の枠に入る点の最大数
     - 制約：座標が 10^9 まで・点とクエリが 2×10^5 個（2 次元累積和の表は作れない）
 - 節：

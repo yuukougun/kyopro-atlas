@@ -14,7 +14,7 @@ difficulty 2400〜（概要だけ） の帯で主に必要になるページ（5
 | ページ | 種類 | 要約 |
 | --- | --- | --- |
 | [動的 DP](../dp/dynamic-dp.md) | DP・線形代数・行列・区間クエリ | 列の各位置の遷移を小さな行列にしてセグメント木に載せると、1 点の書き換えのたびに DP の答えを O(S^3 log N) で求め直せる。行列の積は非可換なので、掛ける向きを最初に決める。 |
-| [Convex Hull Trick と Li Chao Tree](../dp/cht.md) | DP・データ構造 | dp[i] = min_j (dp[j] + a_j·x_i + b_j) のように遷移が一次関数の最小になる DP を、下側の包絡線を持って速くする。単調なら deque、そうでなければ Li Chao Tree を使う。 |
+| [Convex Hull Trick と Li Chao Tree](../dp/cht.md) | DP・データ構造 | dp[i] = min_j (dp[j] + a_j·x_i + b_j) のように遷移が 1 次関数の最小になる DP を、下側の包絡線を持って速くする。単調なら deque、そうでなければ Li Chao Tree を使う。 |
 | [Monge 性による DP の高速化](../dp/monge.md) | DP・ダブリング・分割統治 | コスト c(i, j) が Monge なら各行の最小値を取る位置が単調になり、分割統治（monotone minima）や Knuth-Yao で区間分割 DP・区間 DP を速くできる。凸な列どうしの合成も速い。 |
 | [Alien DP](../dp/alien-dp.md) | DP・二分探索 | 「ちょうど K 個選ぶ」制約のついた最適化で答えが K について凸なら、1 個あたりの罰金 λ を足して制約を外した問題を解き、選ばれる個数が K になる λ を二分探索する。 |
 | [Slope Trick](../dp/slope-trick.md) | DP・データ構造 | dp[x] が x について区分線形で凸なとき、傾きが変わる点を 2 つの優先度付きキューで持ち、「\|x − a\| を足す」「累積 min を取る」「平行移動」を 1 回 O(log N) で行う。 |
@@ -64,12 +64,12 @@ difficulty 2400〜（概要だけ） の帯で主に必要になるページ（5
 
 | ページ | 種類 | 要約 |
 | --- | --- | --- |
-| [大きな数の素数判定と素因数分解](../math/miller-rabin.md) | 整数論・ハッシュ・乱択 | 10^18 程度の数の素数判定を Miller-Rabin で、素因数分解を Pollard's rho で期待 O(N^{1/4}) で行う。64bit の法の掛け算には \_\_int128 か Montgomery 乗算を使う。 |
-| [乗法的関数の和と素数の個数](../math/multiplicative-function.md) | 整数論 | N ≤ 10^10 程度で、φ・μ などの乗法的関数の和 Σ_{n≤N} f(n) や N 以下の素数の個数を、商の列挙を使って O(N^{3/4}/log N) などで求める。関数どうしの関係はディリクレ積で表す。 |
+| [大きな数の素数判定と素因数分解](../math/miller-rabin.md) | 整数論・ハッシュ・乱択 | 10^18 程度の数の素数判定を Miller-Rabin で、素因数分解を Pollard's rho で期待 O(N^(1/4)) で行う。64bit の法の掛け算には \_\_int128 か Montgomery 乗算を使う。 |
+| [乗法的関数の和と素数の個数](../math/multiplicative-function.md) | 整数論 | N ≤ 10^10 程度で、φ・μ などの乗法的関数の和（n ≤ N の f(n) の和）や N 以下の素数の個数を、商の列挙を使って O(N^(3/4)/log N) などで求める。関数どうしの関係はディリクレ積で表す。 |
 | [Stern-Brocot 木と連分数](../math/stern-brocot.md) | 整数論・二分探索 | 分母・分子が N 以下で実数に最も近い分数などを、既約分数をすべて 1 回ずつ含む二分木を降りて O(log N) 段で求める。同じ方向への移動を一度に進めるのが連分数にあたる。 |
 | [行列式](../math/determinant.md) | 線形代数・行列 | 掃き出し法で上三角にし、対角成分の積に行の交換の回数だけ符号を掛けて行列式を O(n³) で求める。全域木の数を数える行列木定理の部品になる。 |
 | [FFT・NTT の仕組みと任意 mod の畳み込み](../math/fft-ntt.md) | 畳み込み・多項式 | 畳み込みを自作するときや任意 mod で求めるときに、多項式を 1 の N 乗根での値に変えて各点の積にし、分割統治で O(N log N) で変換する。任意 mod は 3 つの素数で計算して CRT で戻す。 |
-| [XOR 畳み込み](../math/hadamard-transform.md) | 畳み込み・多項式・ビット演算 | c_k = Σ_{i XOR j = k} a_i b_j を、アダマール変換で各点の積に直して O(N log N) で求める。添字の演算（和・XOR・AND/OR・gcd/lcm）ごとに使う変換が変わる。 |
+| [XOR 畳み込み](../math/hadamard-transform.md) | 畳み込み・多項式・ビット演算 | i XOR j = k となる a_i b_j の和 c_k を、アダマール変換で各点の積に直して O(N log N) で求める。添字の演算（和・XOR・AND/OR・gcd/lcm）ごとに使う変換が変わる。 |
 | [分割統治 FFT・オンライン畳み込み](../math/online-convolution.md) | 畳み込み・多項式・DP・ダブリング・分割統治 | 多数の多項式の積を次数の小さいものから2つずつ掛けて O(N log² N) で求める。dp[i] が dp[0..i−1] と既知の列の畳み込みで決まるときは、左半分を確定させてから右半分へ寄与を足す分割統治で求める。 |
 | [形式的冪級数と多項式の演算](../math/fps-basics.md) | 畳み込み・多項式・数え上げ | 数列を冪級数とみて、逆元 1/f・log・exp・累乗を O(N log N) で計算し、多項式の割り算・Taylor shift・多点評価も行う。数え上げの式を多項式で立てた後の計算を受け持つ。 |
 | [線形漸化式の高速化](../math/linear-recurrence-fast.md) | 線形代数・行列・畳み込み・多項式 | K 項の線形漸化式の第 N 項を、行列累乗より速くきたまさ法 O(K² log N) や Bostan-Mori O(K log K log N) で求める。最初の 2K 項から漸化式を見つける Berlekamp-Massey も使う。 |
@@ -79,8 +79,8 @@ difficulty 2400〜（概要だけ） の帯で主に必要になるページ（5
 
 | ページ | 種類 | 要約 |
 | --- | --- | --- |
-| [Burnside の補題](../comb/burnside-lemma.md) | 数え上げ | 回転・反転などで同一視したときの異なるものの数を、各操作で動かないものの数の平均として求める。重複度が対象ごとに違って単純に割れないときに使い、回転だけの数珠は (1/n) Σ_{d\|n} φ(d) k^(n/d) になる。 |
-| [二項係数の部分和](../comb/binomial-prefix-sum.md) | 数え上げ | 二項係数の部分和 S(n,K) = Σ_{k≤K} C(n,k) を、S(n+1,K) = 2S(n,K) − C(n,K) などの式で (n, K) を 1 ずつ動かしながら更新する。部分和を大量に使う包除の計算で役に立つ。 |
+| [Burnside の補題](../comb/burnside-lemma.md) | 数え上げ | 回転・反転などで同一視したときの異なるものの数を、各操作で動かないものの数の平均として求める。重複度が対象ごとに違って単純に割れないときに使い、回転だけの数珠は d \| n の φ(d) k^(n/d) の和を n で割った値になる。 |
+| [二項係数の部分和](../comb/binomial-prefix-sum.md) | 数え上げ | 二項係数の部分和 S(n,K)（k ≤ K の C(n,k) の和）を、S(n+1,K) = 2S(n,K) − C(n,K) などの式で (n, K) を 1 ずつ動かしながら更新する。部分和を大量に使う包除の計算で役に立つ。 |
 | [LGV 補題](../comb/lgv-lemma.md) | 数え上げ・線形代数・行列 | DAG 上で k 個の始点から k 個の終点への、互いに交わらない経路の組の数（符号付き）を、始点 i から終点 j への経路数を並べた行列の行列式で求める。交わる組は符号で打ち消し合う。 |
 | [母関数の考え方](../comb/generating-function-counting.md) | 数え上げ・畳み込み・多項式 | 選び方の数を多項式の係数で表し、積で独立な選択の組合せ、累乗で同じ選択の繰り返しを表す。DP の遷移も多項式の積・商として立式でき、多項式の演算そのものは FPS に任せる。 |
 | [第 1 種スターリング数](../comb/stirling-first.md) | 数え上げ・畳み込み・多項式 | ちょうど k 個の巡回からなる n 次の置換の数で、c(n,k) = c(n−1,k−1) + (n−1) c(n−1,k) を満たす。上昇階乗 x(x+1)…(x+n−1) の係数なので、FPS で一度に求める。 |
@@ -123,7 +123,7 @@ difficulty 2400〜（概要だけ） の帯で主に必要になるページ（5
 | 接頭辞ごとの版で区間の K 番目・x 以下の個数をオンラインで求める | [永続データ構造](../ds/persistent-data-structures.md#prefix-versions)（青） | データ構造 |
 | 各段に BIT を持たせる（先読みと組む） | [マージソート木](../ds/merge-sort-tree.md#bit-per-level)（青） | データ構造 |
 | 平方剰余と mod の K 乗根（オイラーの規準・Tonelli-Shanks・Cipolla） | [位数・原始根・離散対数](../math/multiplicative-order.md#mod-root)（黄） | 整数論・代数 |
-| 応用の型：bit ごとの popcount・一次式の mod の積 | [floor sum](../math/floor-sum.md#applications)（黄） | 整数論・代数 |
+| 応用の型：bit ごとの popcount・1 次式の mod の積 | [floor sum](../math/floor-sum.md#applications)（黄） | 整数論・代数 |
 | 両端を越えない場合 | [鏡像法とカタラン数](../comb/reflection-principle.md#two-sided)（黄） | 数え上げ・確率・ゲーム |
 | min-max 包除（全種類がそろうまでの期待値） | [包除原理](../comb/inclusion-exclusion.md#min-max)（青） | 数え上げ・確率・ゲーム |
 | 符号付きの木 DP | [包除 DP](../comb/inclusion-exclusion-dp.md#tree)（黄） | 数え上げ・確率・ゲーム |

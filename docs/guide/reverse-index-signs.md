@@ -143,7 +143,7 @@ flowchart TD
 | 組合せの和の小さい方から K 番目（K が小さい） | [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md) | 水 |
 | 並べる順番で結果が変わる | [交換論法と比較関数の設計](../basics/exchange-argument.md) | 青 |
 | 文字列・数を並べて連結した結果を最大（最小）にする | [交換論法と比較関数の設計](../basics/exchange-argument.md) | 青 |
-| x_{n+1} = f(x_n) の形の漸化式 | [周期性の検出](../basics/periodicity.md) | 基礎 |
+| x_(n+1) = f(x_n) の形の漸化式 | [周期性の検出](../basics/periodicity.md) | 基礎 |
 | 同じ模様が繰り返し敷き詰められた盤面 | [周期性の検出](../basics/periodicity.md) | 基礎 |
 | 各状態から次の状態がただ 1 つに決まる | [ダブリング](../basics/doubling.md) | 水 |
 | 途中の和・最小値も必要 | [ダブリング](../basics/doubling.md) | 水 |
@@ -214,7 +214,7 @@ flowchart TD
 | 各 i について、i を使わないときの答え（〜を除いたとき） | [戻す DP](../dp/knapsack-undo.md) | 青 |
 | 好きな順番で、いくつか選んで順に処理する | [並べ替えてから DP する](../dp/exchange-argument-dp.md) | 青 |
 | 締切・積み重ね（上に載せられる重さ）がある | [並べ替えてから DP する](../dp/exchange-argument-dp.md) | 青 |
-| 一次関数を好きな順に合成する | [並べ替えてから DP する](../dp/exchange-argument-dp.md) | 青 |
+| 1 次関数を好きな順に合成する | [並べ替えてから DP する](../dp/exchange-argument-dp.md) | 青 |
 | 最後の 1 つだけ制限を超えてよい | [並べ替えてから DP する](../dp/exchange-argument-dp.md) | 青 |
 | 右か下にしか動けない | [グリッド上の DP](../dp/dp-grid.md) | 水 |
 | 経路の数・経路上で集める値の最大 | [グリッド上の DP](../dp/dp-grid.md) | 水 |
@@ -377,11 +377,11 @@ flowchart TD
 | 配列が変わらず、区間の最小値・最大値・gcd を非常に多く聞かれる | [Sparse Table](../ds/sparse-table.md) | 青 |
 | 区間 chmin・chmax と区間和を同時に答える | [Segment Tree Beats](../ds/segment-tree-beats.md) | 発展 |
 | 区間の各要素を x で割る（切り捨て）操作と区間和 | [Segment Tree Beats](../ds/segment-tree-beats.md) | 発展 |
-| 区間 [l, r] に含まれる値の種類数を多数のクエリで答える | [クエリの先読み](../ds/offline-queries.md) | 水 |
+| 区間 [l, r) に含まれる値の種類数を多数のクエリで答える | [クエリの先読み](../ds/offline-queries.md) | 水 |
 | 重み w 以下の辺だけを使ったときの連結・X 以下の要素の和をクエリごとに答える | [クエリの先読み](../ds/offline-queries.md) | 水 |
 | クエリどうしが独立で、順番を入れ替えても答えが変わらない | [クエリの先読み](../ds/offline-queries.md) | 水 |
 | 長方形の中にある点の数・和を多数のクエリで答える | [平面走査](../ds/sweep-line-2d.md) | 青 |
-| 区間 [p, q] に完全に含まれる区間の数 | [平面走査](../ds/sweep-line-2d.md) | 青 |
+| 閉区間 [p, q] に完全に含まれる区間の数 | [平面走査](../ds/sweep-line-2d.md) | 青 |
 | 幅 W・高さ D の枠に入る点の最大数 | [平面走査](../ds/sweep-line-2d.md) | 青 |
 | 静的な列で、区間ごとの同じ値の組の数・出現回数が条件を満たす値の種類数 | [Mo's algorithm](../ds/mo-algorithm.md) | 青 |
 | 木のパス上の値の頻度を多数のクエリで答える | [Mo's algorithm](../ds/mo-algorithm.md) | 青 |
@@ -646,7 +646,7 @@ flowchart TD
 | b 進法・−2 進法で表す | [N 進法](../math/base-conversion.md) | 基礎 |
 | a, b, …, z, aa, ab, … と続く名前の n 番目 | [N 進法](../math/base-conversion.md) | 基礎 |
 | 文字列を n 進数とみた値が M 以下になる n を数える | [N 進法](../math/base-conversion.md) | 基礎 |
-| Σ_{i=1}^{N} ⌊N/i⌋ を求める | [商の列挙](../math/floor-quotient-enum.md) | 水 |
+| i = 1..N の ⌊N/i⌋ の和を求める | [商の列挙](../math/floor-quotient-enum.md) | 水 |
 | xy ≤ N となる組を数える | [商の列挙](../math/floor-quotient-enum.md) | 水 |
 | N 以下の素数の個数・素数の和 | [乗法的関数の和と素数の個数](../math/multiplicative-function.md) | 発展 |
 | Σ ⌊(ai + b)/m⌋ や Σ (ai + b) mod m を求める | [floor sum](../math/floor-sum.md) | 黄 |
@@ -673,13 +673,13 @@ flowchart TD
 | 畳み込みを自作ライブラリで実装したい・浮動小数の FFT の誤差が心配 | [FFT・NTT の仕組みと任意 mod の畳み込み](../math/fft-ntt.md) | 発展 |
 | i XOR j = k となる組をすべての k について数える | [XOR 畳み込み](../math/hadamard-transform.md) | 発展 |
 | XOR が 0 でない Nim の盤面の数を数える | [XOR 畳み込み](../math/hadamard-transform.md) | 発展 |
-| Π(1 + a_i x) のような多数の一次式の積の係数 | [分割統治 FFT・オンライン畳み込み](../math/online-convolution.md) | 発展 |
+| Π(1 + a_i x) のような多数の 1 次式の積の係数 | [分割統治 FFT・オンライン畳み込み](../math/online-convolution.md) | 発展 |
 | (1 + x^v) を掛ける・割るように、集合への追加と削除を繰り返して個数の分布を求める | [形式的冪級数と多項式の演算](../math/fps-basics.md) | 発展 |
 | 次数の条件つきの木や個数の分布を、多項式の累乗の係数として数える | [形式的冪級数と多項式の演算](../math/fps-basics.md) | 発展 |
 | 有理式 P(x)/Q(x) の N 次の係数 | [線形漸化式の高速化](../math/linear-recurrence-fast.md) | 発展 |
 | 答えが線形漸化式を満たしそうだが式が分からない（最初の項から推定する） | [線形漸化式の高速化](../math/linear-recurrence-fast.md) | 発展 |
 | 答えが N の多項式になる（小さい N で実験すると分かる） | [ラグランジュ補間とべき乗和](../math/lagrange-interpolation.md) | 発展 |
-| Σ_{i=1}^{N} i^k を N ≤ 10^18 で求める | [ラグランジュ補間とべき乗和](../math/lagrange-interpolation.md) | 発展 |
+| i = 1..N の i^k の和を N ≤ 10^18 で求める | [ラグランジュ補間とべき乗和](../math/lagrange-interpolation.md) | 発展 |
 | mod p で p 点の値から多項式の係数を復元する | [ラグランジュ補間とべき乗和](../math/lagrange-interpolation.md) | 発展 |
 | 隣り合うもの（距離 2 以内のもの）が異なるように塗り分ける方法の数 | [和・積の法則と順列・組合せ](../comb/counting-basics.md) | 基礎 |
 | 円形に並べる・円環で最後と最初も隣り合う | [和・積の法則と順列・組合せ](../comb/counting-basics.md) | 基礎 |
@@ -1008,16 +1008,16 @@ flowchart TD
 | dp[x] が x より小さい値の dp で決まるが、どの値が現れるかを前もって列挙しにくい | [メモ化再帰](../dp/memoized-recursion.md) | 基礎 |
 | dp[i] が dp[j]（j > i）から決まる（i 番目以降で最適に行動したときの値） | [DP の計算順序](../dp/dp-order.md) | 水 |
 | 区間 [l, r) の両端を全探索すると O(N^2) になり、各位置の扱いが「区間の前・中・後」で変わる | [フェーズを状態に持つ DP](../dp/dp-phase.md) | 青 |
-| dp[i] = Σ_{j=i−R}^{i−L} dp[j] のように、遷移元が連続した範囲の和 | [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md) | 水 |
+| dp[i] = Σ dp[j]（j = i−R..i−L）のように、遷移元が連続した範囲の和 | [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md) | 水 |
 | dp[i] から i+L〜i+R の範囲へ同じ値を配る | [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md) | 水 |
 | dp\[i]\[a][b] の表が大きすぎ、同じ (i, a) なら b が大きい（小さい）ほど常に良い | [DP の状態の削減](../dp/dp-dimension-reduction.md) | 青 |
-| dp[i] = Σ（または min）\_{j < i, [j, i) が条件を満たす} dp[j] | [区間分割 DP](../dp/dp-sequence-partition.md) | 水 |
+| dp[i] = Σ（または min）dp[j]（j < i で [j, i) が条件を満たすもの） | [区間分割 DP](../dp/dp-sequence-partition.md) | 水 |
 | 根を v としたときの木 DP の値を、すべての v について求めたい（N 回の木 DP は O(N^2)） | [全方位木 DP](../dp/rerooting.md) | 青 |
 | dp\[v][k] を子の dp\[c][j] との (k, j) の組の全探索でマージしていて、O(N^3) に見える | [二乗の木 DP](../dp/tree-dp-square.md) | 黄 |
 | 素直に書いた DP の遷移が状態 1 つあたり O(N) かかり、全体で O(N^2) になる | [DP の高速化の選び方](../dp/dp-speedup-overview.md) | — |
-| dp[i] = max_{j < i, l ≤ a_j ≤ r} dp[j] + c のように、遷移元が添字や値の範囲の最小・最大 | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md) | 青 |
+| dp[i] = max dp[j] + c（j < i、l ≤ a_j ≤ r）のように、遷移元が添字や値の範囲の最小・最大 | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md) | 青 |
 | 遷移のコストに \|x_i − x_j\| を含む（x_j < x_i と x_j > x_i で分けられる） | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md) | 青 |
-| dp[i] = min_{i−K ≤ j < i} dp[j] + c（窓が単調に動く） | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md) | 青 |
+| dp[i] = min dp[j] + c（i−K ≤ j < i。窓が単調に動く） | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md) | 青 |
 | dp\[i][\*] から dp\[i+1][\*] で変わる場所が少ない | [インライン DP](../dp/inline-dp.md) | 青 |
 | 遷移で dp 全体に一律の加算・平行移動が入る | [インライン DP](../dp/inline-dp.md) | 青 |
 | 区間 [l, r] の右端 r で、l 以降の位置の dp にまとめて加算する | [インライン DP](../dp/inline-dp.md) | 青 |
@@ -1025,7 +1025,7 @@ flowchart TD
 | 区間分割 DP のコストが a ≤ b ≤ c ≤ d について c(a, c) + c(b, d) ≤ c(a, d) + c(b, c) を満たす（区間を広げるほど増え方が大きい） | [Monge 性による DP の高速化](../dp/monge.md) | 発展 |
 | 最適な区切り位置 opt(i) が i について単調に動く | [Monge 性による DP の高速化](../dp/monge.md) | 発展 |
 | K 個選ぶときの答え f(K) が K について凸（1 個増やすときの得が、個数が増えるほど減る） | [Alien DP](../dp/alien-dp.md) | 発展 |
-| dp\[i][x] = min_{y ≤ x} dp\[i−1][y] + \|x − a_i\| のように、x について区分線形で凸 | [Slope Trick](../dp/slope-trick.md) | 発展 |
+| dp\[i][x] = min dp\[i−1][y] + \|x − a_i\|（y ≤ x）のように、x について区分線形で凸 | [Slope Trick](../dp/slope-trick.md) | 発展 |
 | 成分ごとの頂点数と辺数の関係（木か・閉路がちょうど 1 つか）で条件が決まる | [連結成分](../graph/connected-components.md) | 基礎 |
 | 言い換えると、辺の重みが 0 と 1 の 2 種類だけのグラフの最短路になる | [01-BFS](../graph/zero-one-bfs.md) | 水 |
 | 距離を dist\[頂点][向き・残り回数・偶奇] のように 2 次元以上で持ちたくなる | [状態を頂点にする](../graph/extended-dijkstra.md) | 水 |
@@ -1036,28 +1036,28 @@ flowchart TD
 | 目的関数が、0/1 変数ごとの項と「x_i = 1 かつ x_j = 0 ならコスト c」の項の和で書ける | [燃やす埋める](../graph/project-selection.md) | 黄 |
 | j − i = A_i + A_j のように、i だけの式と j だけの式が等しい組 (i, j) を数える | [STL コンテナの使い分け](../ds/stl-containers.md) | 基礎 |
 | dp[i] = min(dp[i−K..i−1]) + c のように、直前 K 個の最小値で決まる遷移 | [単調スタックとスライド最小値](../ds/monotonic-stack.md) | 水 |
-| Σ_{j&lt;i} [A_j ≤ A_i] のように、前にある要素のうち条件を満たすものの個数・和を i ごとに足す | [BIT（Fenwick Tree）](../ds/fenwick-tree.md) | 水 |
+| j < i の [A_j ≤ A_i] の和のように、前にある要素のうち条件を満たすものの個数・和を i ごとに足す | [BIT（Fenwick Tree）](../ds/fenwick-tree.md) | 水 |
 | dp[v] = max(dp[v − D..v + D]) + 1 のように、値の範囲から最大を取る遷移 | [値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md) | 水 |
-| 区間 [l, r) の答えが、各位置の一次関数や小さな行列を順に合成したもので書ける | [セグメント木に何を載せるか](../ds/segment-tree-monoids.md) | 青 |
-| Σ_{i=1}^{N} Σ_{j=i}^{N} f(i, j) のように、内側の和の範囲が外側の添字で決まる二重和 | [Σ の変形](../math/sigma-manipulation.md) | 基礎 |
-| Σ_{K=1}^{N} K × (K の約数の個数) のように、約数・倍数の関係で書き換えられる和 | [Σ の変形](../math/sigma-manipulation.md) | 基礎 |
-| Σ_{i=0}^{N−1} A^i の形の和 | [等比数列の和を mod で求める](../math/geometric-series-mod.md) | 基礎 |
-| Σ_{d=1}^{M} Σ_{k=1}^{⌊M/d⌋} f(d, kd) の形の二重ループ | [調和級数と倍数の列挙](../math/harmonic-sum.md) | 水 |
-| Σ_{i=1}^{N} f(⌊N/i⌋) の形の和 | [商の列挙](../math/floor-quotient-enum.md) | 水 |
+| 区間 [l, r) の答えが、各位置の 1 次関数や小さな行列を順に合成したもので書ける | [セグメント木に何を載せるか](../ds/segment-tree-monoids.md) | 青 |
+| i = 1..N、j = i..N の f(i, j) の和のように、内側の和の範囲が外側の添字で決まる二重和 | [Σ の変形](../math/sigma-manipulation.md) | 基礎 |
+| K = 1..N の K × (K の約数の個数) の和のように、約数・倍数の関係で書き換えられる和 | [Σ の変形](../math/sigma-manipulation.md) | 基礎 |
+| i = 0..N−1 の A^i の和の形 | [等比数列の和を mod で求める](../math/geometric-series-mod.md) | 基礎 |
+| d = 1..M、k = 1..⌊M/d⌋ の f(d, kd) の和の形の二重ループ | [調和級数と倍数の列挙](../math/harmonic-sum.md) | 水 |
+| i = 1..N の f(⌊N/i⌋) の和の形 | [商の列挙](../math/floor-quotient-enum.md) | 水 |
 | dp[t+1] の各成分が dp[t] の成分の線形結合で、係数が t によらない | [行列累乗](../math/matrix-power.md) | 青 |
-| 変数の一次式（mod 2 なら XOR）＝定数 の式が複数立つ | [掃き出し法](../math/gaussian-elimination.md) | 青 |
-| c_k = Σ_{i+j=k} a_i b_j の形の和 | [畳み込みの使い方](../math/convolution-ntt.md) | 青 |
-| dp[i] = Σ_{j&lt;i} dp[j]·g[i−j] のように、dp が自分より前の値との畳み込みで決まる | [分割統治 FFT・オンライン畳み込み](../math/online-convolution.md) | 発展 |
+| 変数の 1 次式（mod 2 なら XOR）＝定数 の式が複数立つ | [掃き出し法](../math/gaussian-elimination.md) | 青 |
+| i + j = k となる a_i b_j の和 c_k の形 | [畳み込みの使い方](../math/convolution-ntt.md) | 青 |
+| dp[i] が j < i の dp[j]·g[i−j] の和のように、自分より前の値との畳み込みで決まる | [分割統治 FFT・オンライン畳み込み](../math/online-convolution.md) | 発展 |
 | 遷移が「和が s になる組の数」の形（多項式の積） | [分割統治 FFT・オンライン畳み込み](../math/online-convolution.md) | 発展 |
 | 答えが多項式 f の 1/f・log f・exp f・f^K の係数で書ける | [形式的冪級数と多項式の演算](../math/fps-basics.md) | 発展 |
-| a_n = Σ_{k=1}^{K} c_k a_{n−k} の形の漸化式 | [線形漸化式の高速化](../math/linear-recurrence-fast.md) | 発展 |
+| a_n = c_1 a_(n−1) + … + c_K a_(n−K) の形の漸化式 | [線形漸化式の高速化](../math/linear-recurrence-fast.md) | 発展 |
 | 答え f(N) が N の d 次多項式になる | [ラグランジュ補間とべき乗和](../math/lagrange-interpolation.md) | 発展 |
 | 答えが K(K−1)^(N−1) のような累乗の積の形になる | [和・積の法則と順列・組合せ](../comb/counting-basics.md) | 基礎 |
 | 答えが「K 以下」の個数の差 f(K) − f(K−1) で書ける | [数え上げの考え方](../comb/counting-mindset.md) | 水 |
 | 二項係数の積の和を、1 つの二項係数（経路の数）に直したい | [対応づけ・数える対象の言い換え](../comb/counting-bijection.md) | 青 |
 | 作り方（遷移の列）を数える式で、同じ対象が複数回数えられてしまう | [重複の除き方](../comb/counting-dedup.md) | 青 |
 | Σ の中に二項係数があり、N が大きく項ごとには足せない | [二項係数の恒等式と和の公式](../comb/binomial-identities.md) | 青 |
-| 答えの式に Σ_{k≤K} C(n,k) の形の和が、多くの (n, K) について現れる | [二項係数の部分和](../comb/binomial-prefix-sum.md) | 発展 |
+| 答えの式に k ≤ K の C(n,k) の和が、多くの (n, K) について現れる | [二項係数の部分和](../comb/binomial-prefix-sum.md) | 発展 |
 | 答えが (1 + x + … + x&#94;c)&#94;N のような式の特定の係数になる | [母関数の考え方](../comb/generating-function-counting.md) | 発展 |
 | 遷移が dp'[s] = dp[s] + dp[s − v] のように、値をずらして足す形になる | [母関数の考え方](../comb/generating-function-counting.md) | 発展 |
 | E[s] が、s から 1 手で移る状態の E の平均に定数を足した式になる | [期待値 DP](../comb/expected-value-dp.md) | 水 |
