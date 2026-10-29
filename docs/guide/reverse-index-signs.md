@@ -964,6 +964,11 @@ flowchart TD
 | 過去の状態に戻す・ある時点の状態をコピーする | [操作列とクエリ](../patterns/operation-sequence.md) | — |
 | 行や列・区間を塗り替える操作の後の最終状態 | [操作列とクエリ](../patterns/operation-sequence.md) | — |
 | 同じ操作を 10^18 回繰り返した後の状態 | [操作列とクエリ](../patterns/operation-sequence.md) | — |
+| N 個が円形に並び、N 番目と 1 番目も隣り合う | [円環](../patterns/circular.md) | — |
+| 円環上の連続する区間の和・個数（端をまたぐ区間も含む） | [円環](../patterns/circular.md) | — |
+| 円形に並ぶものを、隣どうしが違う色で塗る方法の数 | [円環](../patterns/circular.md) | — |
+| 列を何回回転させると、もう一方の列に一致するか | [円環](../patterns/circular.md) | — |
+| 円周上に点が並び、時計回りに進む・点どうしを弦で結ぶ | [円環](../patterns/circular.md) | — |
 | 答えの絶対誤差または相対誤差が 10^-6 以下なら正解とする（小数の桁を指定して出力しないと WA になる） | [入出力と定数倍](../cpp/cpp-io.md) | 基礎 |
 
 <!-- textlint-enable -->
@@ -1210,6 +1215,7 @@ flowchart TD
 | 部分列・部分文字列 | 判定、選び方の数、異なるものの数、最長の共通部分 | [部分列と部分文字列](../patterns/subsequence-and-substring.md#overview) |
 | 順列 | $i \to P_i$ のサイクル、swap の回数と偶奇、置換の繰り返し | [順列と置換](../patterns/permutation.md#overview) |
 | 括弧列 | 正しいかの判定、`?` の埋め方の数、区間の判定、並べる順序 | [括弧列](../patterns/bracket-sequence.md#overview) |
+| 円環 | 区間が端をまたぐ、最後と最初が隣り合う数え上げ・DP、回転の一致、円周上の点と弦 | [円環](../patterns/circular.md#overview) |
 | mex | mex を求める・更新する・総和を取る | [mex](../patterns/mex.md#overview) |
 | K 番目・中央値 | K 番目に小さい値、上位 K 個の和、中央値 | [K 番目と中央値](../patterns/kth-and-median.md#overview) |
 | XOR | 桁ごとの数え上げ、累積 XOR、作れる値、ゲーム | [XOR](../patterns/xor.md#overview) |
