@@ -25,7 +25,7 @@ sections:
   - {title: 辺の部分集合の全探索（全域木の全列挙）, anchor: edge-subsets}
   - {title: 彩色は成分ごとに DFS で塗って探索を絞る, anchor: coloring, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"

@@ -1,4 +1,6 @@
 // HL 分解：頂点の値の 1 点変更と、パス u–v 上の最大値の取得（ACL の segtree を番号の列に載せる）
+// 入力：N Q、A_1 … A_N、木の辺 N - 1 本、クエリ Q 行（0 v x：頂点 v の値を x にする、1 u v：パス u–v 上の最大値）。
+// 頂点は 1-indexed。
 #include <bits/stdc++.h>
 #include <atcoder/segtree>
 using namespace std;
@@ -189,6 +191,7 @@ int main() {
     for (int i = 0; i < n - 1; i++) {
         int u, v;
         cin >> u >> v;
+        u--, v--;
         g[u].push_back(v);
         g[v].push_back(u);
     }
@@ -197,13 +200,20 @@ int main() {
     atcoder::segtree<long long, op, e> seg(n);       // 番号 in[v] の位置に頂点 v の値を置く
     for (int v = 0; v < n; v++) seg.set(h.in[v], a[v]);
     for (int i = 0; i < q; i++) {
-        int t, x, y;
-        cin >> t >> x >> y;
+        int t;
+        cin >> t;
         if (t == 0) {
-            seg.set(h.in[x], y);                      // 頂点 x の値を y にする
+            int v;
+            long long x;
+            cin >> v >> x;
+            v--;                                      // 1-indexed → 0-indexed
+            seg.set(h.in[v], x);                      // 頂点 v の値を x にする
         } else {
+            int u, v;
+            cin >> u >> v;
+            u--, v--;                                 // 1-indexed → 0-indexed
             long long res = e();
-            for (auto [l, r] : h.path(x, y)) res = op(res, seg.prod(l, r));  // 区間ごとに集約
+            for (auto [l, r] : h.path(u, v)) res = op(res, seg.prod(l, r));  // 区間ごとに集約
             cout << res << '\n';
         }
     }

@@ -35,7 +35,7 @@ sections:
   - {title: 訪問した集合を持つ（bitDP へのつなぎ）, anchor: visited-set, level: 青}
   - {title: 両端から伸ばす（回文の最短路）, anchor: two-ends, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -54,7 +54,7 @@ updated: 2026-10-22
 別名：状態空間の探索・状態空間 BFS・拡張ダイクストラ・頂点倍化・頂点倍加・レイヤー化グラフ・超頂点・仮想頂点・補助頂点・盤面の BFS・state-space search・layered graph・super vertex
 <!-- textlint-enable -->
 
-状態を頂点にする手法は、「今どの頂点にいるか」に加えて、この先の動きを決めるのに要る情報を組にしたものを 1 つの頂点とみなし、そのグラフで最短路を求める。最短路のアルゴリズム自体は [BFS](../graph/bfs.md)・[01-BFS](../graph/zero-one-bfs.md)・[ダイクストラ法](../graph/dijkstra.md)のままで、変わるのはグラフの作り方だけである。グループ内の全対に辺がある問題では、逆に頂点を 1 つ足して辺を減らす（超頂点）。
+状態を頂点にする手法は、「今どの頂点にいるか」に加えて、この先の動きを決めるのに要る情報を組にしたものを 1 つの頂点とみなし、そのグラフで最短路を求める。最短路のアルゴリズム自体は [BFS](../graph/bfs.md)・[01-BFS](../graph/zero-one-bfs.md)・[ダイクストラ法](../graph/dijkstra.md)のままで、変わるのはグラフの作り方だけである。グループ内の全対に辺がある問題では、逆に頂点を 1 つ足して辺を減らす（超頂点）。このページでは頂点を 0-indexed で書き、問題文の 1-indexed の番号からは 1 を引いて使う（問題文の頂点 1 は頂点 0 になる）。
 
 ## 状態として持つべき情報を決める {#choose-state}
 

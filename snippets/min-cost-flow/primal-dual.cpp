@@ -22,7 +22,7 @@ struct MinCostFlow {
 
     // 流量 limit まで流し、(流量, 最小コスト) を返す
     pair<long long, long long> flow(int s, int t, long long limit) {
-        const long long INF = LLONG_MAX / 4;
+        const long long INF = 1LL << 60;  // INF + INF でもあふれない大きさ
         vector<long long> h(n, 0), dist(n);  // h はポテンシャル。最初は 0（コストが 0 以上なので）
         vector<int> pv(n), pe(n);            // 最短路の木での親と、親からの辺の番号
         long long f = 0, cost = 0;
@@ -78,7 +78,7 @@ int main() {
         mine.add_edge(u, v, cap, cost);
         acl.add_edge(u, v, cap, cost);
     }
-    auto [f, c] = mine.flow(s, t, LLONG_MAX / 4);
+    auto [f, c] = mine.flow(s, t, LLONG_MAX);  // 流せるだけ流す。limit からは引くだけなのでこの値でよい
     auto [f2, c2] = acl.flow(s, t);
     assert(f == f2 && c == c2);
     cout << f << ' ' << c << '\n';

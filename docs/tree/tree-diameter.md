@@ -31,7 +31,7 @@ sections:
   - {title: 中心と半径・直径の個数, anchor: center, level: 黄}
   - {title: 長鎖分解（最も深い子へつなぐ分解と、最も遠い葉を順に選ぶ貪欲）, anchor: long-path-decomposition, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -99,7 +99,7 @@ $$
 --8<-- "tree-diameter/double-sweep.cpp:core"
 ```
 
-探索 1 回は各辺を 2 回ずつ見るだけなので $O(N)$ で、それを 2〜3 回するので全体も $O(N)$ である。Library Checker の Tree Diameter は、直径の長さと頂点列を出力させるので、自作の確かめに使える。
+探索 1 回は各辺を 2 回ずつ見るだけなので $O(N)$ で、それを 2〜3 回するので全体も $O(N)$ である。Library Checker の [Tree Diameter](https://judge.yosupo.jp/problem/tree_diameter) は、直径の長さと頂点列を出力させるので、自作の確かめに使える。
 
 ## 各点の最遠点は直径の端点（離心数） {#eccentricity}
 

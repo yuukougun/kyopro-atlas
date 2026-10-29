@@ -27,7 +27,7 @@ sections:
   - {title: パス上の最大値・和を表と一緒に持つ, anchor: path-aggregate}
   - {title: 条件を満たす最も遠い祖先, anchor: farthest-ancestor}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -120,7 +120,7 @@ $$
 \mathrm{mx}[k+1][v] = \max\bigl(\mathrm{mx}[k][v],\ \mathrm{mx}[k][\mathrm{up}[k][v]]\bigr)
 $$
 
-前半の $2^k$ 本と後半の $2^k$ 本は辺を共有しないので、和を持つときも同じ形で足せる。これは[途中の和・最小値を同じ表に持つ](../basics/doubling.md#aggregates)の、遷移を親にした場合である。根の $\mathrm{mx}[0]$ は演算の[単位元](../guide/glossary.md#identity-element)（最大値なら重みより小さい値、和なら $0$）にする。
+前半の $2^k$ 本と後半の $2^k$ 本は辺を共有しないので、和を持つときも同じ形で足せる。これは[途中の和・最小値を同じ表に持つ](../basics/doubling.md#aggregates)の、遷移を親にした場合である。根の $\mathrm{mx}[0]$ は演算の[単位元](../guide/glossary.md#identity-element)（最大値なら重みより小さい値、和なら $0$）にする。次のコード片は辺の重みを正と仮定し、最大値の単位元に $0$ を使う（パス $u$–$u$ の答えも $0$ になる）。負の重みがありうるなら、単位元を `LLONG_MIN` にする。
 
 ```cpp
 --8<-- "lca/path-max.cpp:build"
@@ -166,7 +166,7 @@ K 個上ごとに表を引き直して二分探索すると 1 回 $O(\log^2 N)$ 
 - **表の向きとメモリ**：`up[k][v]` の順（段が外側）にすると、表を作るときに同じ段を続けて読むので速い。大きさは $18 \times 2 \times 10^5$ 個の `int` で約 14 MB に収まる
 
 !!! info "ACL では"
-    ACL には LCA も木のダブリングもない。自作のライブラリは Library Checker の lca（前処理と LCA のクエリ）で確かめられる。
+    ACL には LCA も木のダブリングもない。自作のライブラリは Library Checker の [Lowest Common Ancestor](https://judge.yosupo.jp/problem/lca)（前処理と LCA のクエリ）で確かめられる。
 
 ## 例題 {#examples}
 

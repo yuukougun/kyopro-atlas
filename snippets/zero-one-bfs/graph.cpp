@@ -15,7 +15,7 @@ int main() {
     }
 
     // --8<-- [start:core]
-    const int INF = INT_MAX;
+    const int INF = INT_MAX;  // INF には足さない（足すのは取り出した頂点の距離だけ）のでこの値でよい
     vector<int> dist(n, INF);
     deque<pair<int, int>> dq;  // (push したときの距離, 頂点)
     dist[s] = 0;

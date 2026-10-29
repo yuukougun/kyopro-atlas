@@ -27,7 +27,7 @@ sections:
   - {title: 向きを状態に持つ（頂点数が 4 倍になる）, anchor: direction-state}
   - {title: '重みが 0, 1, 2 ならどうするか', anchor: weights-012}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -113,6 +113,7 @@ deque が空でない間：
 - **縮んだら push する**：同じ頂点が deque に 2 回入ってよい。上の例の頂点 2 のように、重み 1 の辺で入った後に重み 0 の辺で縮むことがある
 - **古い組を読み飛ばす**：組に push したときの距離を持たせ、$\mathrm{dist}[u]$ より大きければ何もしない。確定済みの印（`done[u]`）で判定してもよい
 - **更新は真に小さいときだけ**：`<` を `<=` にすると、等しい距離でも push し直すので、重み 0 の閉路があると止まらない
+- **INF は `INT_MAX` でよい**：重みを足すのは取り出した組の距離 $d$（有限）だけで、INF には足さないからである。届かない頂点の距離に足す処理を書き加えるなら、[ダイクストラ法の落とし穴](../graph/dijkstra.md#pitfalls)のとおり、足してもあふれない値にする（[INF の決め方](../cpp/cpp-types-literals.md#inf)）
 
 ```cpp
 --8<-- "zero-one-bfs/graph.cpp:core"

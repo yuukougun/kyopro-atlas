@@ -30,7 +30,7 @@ sections:
   - {title: 操作を頂点にする・区間を辺にする, anchor: modeling, level: 青}
   - {title: 辺の重みの種類が少ないとき, anchor: few-weights, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -81,7 +81,7 @@ updated: 2026-10-22
 **計算量**：クラスカル法はソートに $O(M \log M)$、Union-Find の操作が $M$ 回でならし $O(M \alpha(N))$ なので、全体で $O(M \log M)$ である。単純グラフなら $M < N^2$ より $\log M < 2 \log N$ なので、$O(M \log N)$ と書いても同じである。優先度付きキューのプリム法は、各辺で高々 2 回（両向き）push するので $O(M \log M) = O(M \log N)$、配列のプリム法は $N$ 回の各段で $O(N)$ かかるので $O(N^2)$ である。
 
 !!! info "ACL では"
-    最小全域木の関数はない。クラスカル法の成分の管理に `dsu d(n);` を使い、`d.same(a, b)` で同じ成分かを判定し、`d.merge(a, b)` で併合する。どちらもならし $O(\alpha(N))$ である。自作のライブラリは Library Checker の minimum_spanning_tree で確かめられる。
+    最小全域木の関数はない。クラスカル法の成分の管理に `dsu d(n);` を使い、`d.same(a, b)` で同じ成分かを判定し、`d.merge(a, b)` で併合する。どちらもならし $O(\alpha(N))$ である。自作のライブラリは Library Checker の [Minimum Spanning Tree](https://judge.yosupo.jp/problem/minimum_spanning_tree) で確かめられる。
 
 ## 正しさの理由（カット性質・閉路性質） {#why-correct}
 

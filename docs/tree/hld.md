@@ -163,16 +163,13 @@ HL 分解は実装が重いので、軽い方法で足りるかを先に考え�
 !!! info "ACL では"
     ACL に HL 分解そのものはない。番号 $\mathrm{in}[v]$ の位置に頂点 $v$ の値を置いた列に、`segtree<S, op, e> seg(n);` を載せる。`seg.set(p, x)`・`seg.prod(l, r)` はどちらも $O(\log N)$ で、`op` は[結合法則](../guide/glossary.md#associativity)を満たし、`e()` は[単位元](../guide/glossary.md#identity-element)である必要がある。パスへの一括更新には `lazy_segtree` の `seg.apply(l, r, f)` を、パスの各区間に対して呼ぶ。
 
+次のコード片は、番号の列に `segtree` を載せて、頂点の値の 1 点変更とパス上の最大値の取得を処理する。入力の頂点は 1-indexed で、読んだ直後に 1 を引く。
+
 ```cpp
 --8<-- "hld/usage.cpp:query"
 ```
 
-自作したら、Library Checker で確かめる。
-
-- Vertex Add Path Sum：頂点への加算とパスの和（可換な演算の基本）
-- Vertex Add Subtree Sum：同じ番号付けで部分木が区間になることの確認
-- Vertex Set Path Composite：頂点の 1 次関数の変更と、$u$ から $v$ への合成（非可換な演算の向きの確認。このページの検証問題）
-- Lowest Common Ancestor：LCA の部分の確認
+自作したら、Library Checker で確かめる。使う問題は[練習問題](#practice)の Library Checker の節にまとめた。
 
 ## 学ぶための資料 {#resources}
 
@@ -210,6 +207,13 @@ HL 分解は実装が重いので、軽い方法で足りるかを先に考え�
 
 ??? note "練習の方針"
     - ABC294 G：辺の重みを子の頂点に置けば、距離は LCA を除いたパス上の頂点の値の和になる。HL 分解の番号の列に BIT を載せれば、重みの変更は 1 点の更新、距離はパスの区間和で、1 回 $O(\log^2 N)$ になる。和は逆元があるので、根からの距離と LCA を使い、重みの変更をオイラーツアーで部分木への加算にする方法でも解ける（こちらの方が軽い）
+
+### Library Checker
+
+- [Vertex Add Path Sum](https://judge.yosupo.jp/problem/vertex_add_path_sum)：頂点への加算とパスの和（可換な演算の基本）
+- [Vertex Add Subtree Sum](https://judge.yosupo.jp/problem/vertex_add_subtree_sum)：同じ番号付けで部分木が区間になることの確認
+- [Vertex Set Path Composite](https://judge.yosupo.jp/problem/vertex_set_path_composite)：頂点の 1 次関数の変更と、$u$ から $v$ への合成（非可換な演算の向きの確認。このページの検証問題）
+- [Lowest Common Ancestor](https://judge.yosupo.jp/problem/lca)：LCA の部分の確認
 
 ## 参考 {#references}
 

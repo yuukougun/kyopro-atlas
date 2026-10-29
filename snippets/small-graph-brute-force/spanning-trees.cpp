@@ -12,7 +12,7 @@ long long min_tree_mod(int n, const vector<Edge>& edges, long long k) {
     int m = edges.size();
     vector<int> sel(m, 0);
     fill(sel.end() - (n - 1), sel.end(), 1);     // 0…0 1…1（昇順）から始めると C(M, N-1) 通りを全部回る
-    long long best = LLONG_MAX;
+    long long best = LLONG_MAX;  // 最小値を取るだけで足さないのでこの値でよい
     do {
         vector<int> par(n);
         iota(par.begin(), par.end(), 0);

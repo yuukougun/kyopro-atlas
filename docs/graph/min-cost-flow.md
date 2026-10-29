@@ -29,7 +29,7 @@ sections:
   - {title: ACL の mcf_graph（flow と slope）, anchor: acl}
   - {title: 割当問題とハンガリアン法, anchor: hungarian, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"

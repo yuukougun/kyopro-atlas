@@ -26,7 +26,7 @@ sections:
   - {title: 小さければ bitDP, anchor: bitdp}
   - {title: 自作するときの要点と確かめ方, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -126,12 +126,12 @@ ACL に一般グラフのマッチングはないので、必要なら自作す�
 - Edmonds のアルゴリズムを書くなら、花の縮約は「頂点 → 属する花の底」の対応（Union-Find か配列）で表し、グラフを作り直さない。増加路の反転は、木の親と花を閉じた辺をたどって元のグラフの辺に戻す。
 - 重み付きは実装が長く間違えやすいので、確かめ済みのライブラリを使う。
 
-Library Checker では、最大マッチングを General Matching（general_matching）、最大重みマッチングを General Weighted Matching（general_weighted_matching）で確かめられる。どちらも単純グラフ（自己ループなし）で $N \le 500$、General Weighted Matching の重みは 1 以上 $10^6$ 以下である（2026-10-22 に問題の一覧で確かめた）。最大重みマッチングは完全マッチングとは限らない（重みの和が最大になる、本数の少ないマッチングもありうる）。自作したら、小さい乱数のグラフで [bitDP](#bitdp) と比べる。奇閉路が入るよう、辺を密にした入力も混ぜるとよい。
+Library Checker では、最大マッチングを [Matching on General Graph](https://judge.yosupo.jp/problem/general_matching)、最大重みマッチングを [General Weighted Matching](https://judge.yosupo.jp/problem/general_weighted_matching) で確かめられる。どちらも単純グラフ（自己ループなし）で $N \le 500$、General Weighted Matching の重みは 1 以上 $10^6$ 以下である（2026-10-22 に問題の一覧で確かめた）。最大重みマッチングは完全マッチングとは限らない（重みの和が最大になる、本数の少ないマッチングもありうる）。自作したら、小さい乱数のグラフで [bitDP](#bitdp) と比べる。奇閉路が入るよう、辺を密にした入力も混ぜるとよい。
 
 ## 学ぶための資料 {#resources}
 
 - Wikipedia（英語）の Blossom algorithm の項は、花の定義・縮約したグラフで増加路が保たれる理由・増加路を元のグラフに戻す方法を、図と擬似コードで説明している。
-- ei1333 氏のライブラリの Gabow Edmonds は、一般グラフの最大マッチングの実装例で、Library Checker の General Matching で確かめられている。
+- ei1333 氏のライブラリの Gabow Edmonds は、一般グラフの最大マッチングの実装例で、Library Checker の [Matching on General Graph](https://judge.yosupo.jp/problem/general_matching) で確かめられている。
 - Harvey の論文「Algebraic Structures and Algorithms for Matching and Matroid Problems (Preliminary Version)」（英語）は、Tutte 行列に乱数を入れて最大マッチングを求める代数的な方法を扱い、階数と最大マッチングの関係（Lovász）にも触れている。
 
 ## 例題 {#examples}

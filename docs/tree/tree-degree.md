@@ -25,7 +25,7 @@ sections:
   - {title: 次数を配る最適化, anchor: allocate-degrees}
   - {title: 木の数え上げ（Cayley の公式・行列木定理）へのつながり, anchor: counting-links}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -41,7 +41,7 @@ updated: 2026-10-22
 別名：次数列・プリューファー列・Prüfer code・Prüfer sequence・握手補題・星・degree sequence
 <!-- textlint-enable -->
 
-木の次数列と Prüfer 列は、「次数だけを決めたら木が作れるか」に答える道具である。木の形は膨大にあっても、コストや条件が各頂点の[次数](../guide/glossary.md#degree)だけで決まるなら、木を探す代わりに次数列を探せばよい。以下では頂点に 1〜$N$ の番号が付いた木（[ラベル付き木](../guide/glossary.md#labeled-tree)）を考え、頂点 $v$ の次数を $d_v$ と書く。
+木の次数列と Prüfer 列は、「次数だけを決めたら木が作れるか」に答える道具である。木の形は膨大にあっても、コストや条件が各頂点の[次数](../guide/glossary.md#degree)だけで決まるなら、木を探す代わりに次数列を探せばよい。以下では頂点に 1〜$N$ の番号が付いた木（[ラベル付き木](../guide/glossary.md#labeled-tree)）を考え、頂点 $v$ の次数を $d_v$ と書く。コード片は入力から 1 を引いて 0-indexed の $0, \dots, N - 1$ で持ち、出力するときに 1 を足す。
 
 ## 次数だけで分かること（葉の数・星の中心） {#degree-facts}
 

@@ -25,7 +25,7 @@ sections:
   - {title: 応用の型（縮約・辺を足す・向き付け・文字列を辺にする）, anchor: applications}
   - {title: ハミルトン路（頂点をちょうど 1 回、bitDP）との違い, anchor: vs-hamiltonian}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -40,7 +40,7 @@ updated: 2026-10-22
 別名：オイラー閉路・一筆書き・Hierholzer・Euler path・Eulerian trail
 <!-- textlint-enable -->
 
-オイラー路（一筆書き）は、グラフのすべての辺をちょうど 1 回ずつ通る[ウォーク](../guide/glossary.md#path-walk)である。頂点は何度通ってもよい。始点と終点が一致するものをオイラー閉路と呼ぶ。あるかどうかは次数の数え上げで $O(N + M)$ で決まり、頂点をちょうど 1 回ずつ通るハミルトン路（[NP 困難](../guide/glossary.md#np-hard)）とは難しさがまったく違う。
+オイラー路（一筆書き）は、グラフのすべての辺をちょうど 1 回ずつ通る[ウォーク](../guide/glossary.md#path-walk)である。頂点は何度通ってもよい。始点と終点が一致するものをオイラー閉路と呼ぶ。あるかどうかは次数の数え上げで $O(N + M)$ で決まり、頂点をちょうど 1 回ずつ通るハミルトン路（[NP 困難](../guide/glossary.md#np-hard)）とは難しさがまったく違う。以下、頂点の番号は 0-indexed で書き（コード片も同じ）、問題文の 1-indexed の番号からは 1 を引いて使う。
 
 ## 存在条件（無向・有向） {#conditions}
 

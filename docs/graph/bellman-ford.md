@@ -26,7 +26,7 @@ sections:
   - {title: SPFA の注意（最悪の計算量は同じ）, anchor: spfa}
   - {title: 負辺があってもダイクストラ法で済む場合との見分け（ポテンシャル）, anchor: vs-potential}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"

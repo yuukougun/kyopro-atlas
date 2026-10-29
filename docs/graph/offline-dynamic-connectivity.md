@@ -87,7 +87,7 @@ dfs(node):
 --8<-- "offline-dynamic-connectivity/usage.cpp:core"
 ```
 
-クエリを読んで辺の区間を作り、葉で答える部分は次のようになる。
+クエリを読んで辺の区間を作り、葉で答える部分は次のようになる。クエリは「0 u v」（辺の追加）・「1 u v」（辺の削除）・「2 u v」（連結か）・「3」（連結成分の数）の 4 種類とし、頂点は 1-indexed で読んで直後に 1 を引く。
 
 ```cpp
 --8<-- "offline-dynamic-connectivity/usage.cpp:usage"
