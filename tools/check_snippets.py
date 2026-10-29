@@ -28,6 +28,10 @@
   cases: [{input: "3\\n1 2 3\\n", output: "6\\n"}]   出力は各行の末尾の空白と最後の改行を無視して比べる
 知らない項目があれば誤りとする（綴りの誤りを見逃さないため）。範囲の目印（// --8<-- [start:名前] 〜 [end:名前]）の
 対応と名前の重なりも確かめる。.yaml だけで .cpp がないものも誤りとする。
+run・warning の判定では、コードの位置のない -m のオプションへの cc1plus の警告（cc1plus: warning: ‘-mavx10.1’ is aliased
+to 512 bit … など。-march=native では検査を動かす計算機の CPU しだいで出る）を警告に数えず、結果の行の下に注記として出す
+（通ったものも -v なしで出す。#95）。位置（ファイル:行:列・<command-line>）のある警告、ドライバ（g++: warning:）の警告、
+-m 以外のオプションへの警告（command-line option ‘-std=gnu11’ … など）は数える。
 """
 from __future__ import annotations
 
@@ -53,6 +57,12 @@ ACL = ROOT / "third_party" / "ac-library"
 DEFAULTS = {"compilers": ["g++-15"], "flags": "-std=gnu++23 -O2 -Wall -Wextra", "expect": "run", "cases": []}
 EXPECTS = {"run", "compile-error", "warning", "crash"}
 MARK_RE = re.compile(r"--8<--\s*\[(start|end):([A-Za-z0-9_-]+)\]")
+# コードの位置のない、-m のオプションへの cc1plus の警告（#95）。-march=native は、ドライバが検査を動かす計算機の CPU に合わせて
+# -m のオプションに広げてから cc1plus に渡すので、CPU しだいで出る（AVX10.1 を持つ CPU では、GCC 15 の cc1plus が
+# cc1plus: warning: ‘-mavx10.1’ is aliased to 512 bit since GCC14.3 and GCC15.1 … を出す）。コードへの警告ではないので、
+# run・warning の判定に数えずに注記にする。引用符はロケールで変わる（UTF-8 では ‘ ’、C・POSIX では '）
+M_OPTION_WARNING_RE = re.compile(r"cc1plus: warning: [‘']-m")
+NOTE = "注記（判定に数えない警告）: "
 
 
 @dataclass
@@ -151,6 +161,31 @@ def norm_out(s: str) -> str:
     return "\n".join(line.rstrip() for line in s.replace("\r\n", "\n").split("\n")).rstrip("\n")
 
 
+def split_warnings(diag: list[str]) -> tuple[list[str], list[str]]:
+    """コンパイラの出力の行から (判定に数える警告, 数えない -m のオプションへの cc1plus の警告) を取り出す。"""
+    counted: list[str] = []
+    m_option: list[str] = []
+    for x in diag:
+        if M_OPTION_WARNING_RE.match(x):
+            m_option.append(x)
+        elif "warning:" in x:
+            counted.append(x)
+    return counted, m_option
+
+
+def cpu_name() -> str:
+    """検査を動かす計算機の CPU の名前（Linux の /proc/cpuinfo の model name）。分からなければ空。"""
+    try:
+        with open("/proc/cpuinfo", encoding="utf-8", errors="replace") as f:
+            for line in f:
+                key, _, val = line.partition(":")
+                if key.strip() == "model name":
+                    return val.strip()
+    except OSError:
+        pass
+    return ""
+
+
 def run_one(u: Unit, compiler: str, acl: Path | None, timeout: float) -> tuple[bool, str, list[str]]:
     """(期待どおりか, 一言, 詳しい行)。"""
     exe_name = resolve_compiler(compiler)
@@ -168,8 +203,10 @@ def run_one(u: Unit, compiler: str, acl: Path | None, timeout: float) -> tuple[b
         except subprocess.TimeoutExpired:
             return False, "コンパイルが 300 秒で終わらない", []
         diag = cp.stderr.strip().split("\n") if cp.stderr.strip() else []
-        has_warning = any("warning:" in x for x in diag)
+        warnings, m_option = split_warnings(diag)
         expect = conf["expect"]
+        # run・warning の結果（OK でも NG でも）の詳しい行の最後に、判定に数えなかった警告を足す。同じ警告が続けて出ることがある
+        notes = [NOTE + x for x in dict.fromkeys(m_option)][:10] if expect in ("run", "warning") else []
         if expect == "compile-error":
             if cp.returncode != 0:
                 return True, "コンパイルエラー（期待どおり）", []
@@ -177,30 +214,30 @@ def run_one(u: Unit, compiler: str, acl: Path | None, timeout: float) -> tuple[b
         if cp.returncode != 0:
             errs = [x for x in diag if "error" in x]
             return False, "コンパイルエラー", (errs or diag)[:8]
-        if expect == "warning" and not has_warning:
-            return False, "警告が出ない（warning のはず）", []
-        if expect == "run" and has_warning:
-            return False, "警告が出た（run は警告なし。警告を確かめるなら expect: warning）", [x for x in diag if "warning:" in x][:10]
+        if expect == "warning" and not warnings:
+            return False, "警告が出ない（warning のはず）", notes
+        if expect == "run" and warnings:
+            return False, "警告が出た（run は警告なし。警告を確かめるなら expect: warning）", warnings[:10] + notes
         cases = conf["cases"] or ([{"input": "", "output": None}] if expect in ("run", "crash") else [])
         ends: list[str] = []
         for i, c in enumerate(cases):
             try:
                 r = subprocess.run([str(exe)], input=c["input"], capture_output=True, text=True, timeout=timeout, cwd=tmp)
             except subprocess.TimeoutExpired:
-                return False, f"case {i + 1}: {timeout:g} 秒で終わらない", []
+                return False, f"case {i + 1}: {timeout:g} 秒で終わらない", notes
             if expect == "crash":
                 if r.returncode == 0:
                     return False, f"case {i + 1}: 正常に終わった（crash のはず）", r.stdout.strip().split("\n")[:6] if r.stdout.strip() else []
                 ends.append(f"シグナル {signal_name(-r.returncode)}" if r.returncode < 0 else f"終了コード {r.returncode}")
             elif r.returncode != 0:
-                return False, f"case {i + 1}: 終了コード {r.returncode}", (r.stderr.strip().split("\n")[:8] if r.stderr.strip() else [])
+                return False, f"case {i + 1}: 終了コード {r.returncode}", (r.stderr.strip().split("\n")[:8] if r.stderr.strip() else []) + notes
             if c["output"] is not None and norm_out(r.stdout) != norm_out(c["output"]):
                 exp, got = norm_out(c["output"]).split("\n"), norm_out(r.stdout).split("\n")
-                return False, f"case {i + 1}: 出力が違う", [f"期待: {x}" for x in exp[:6]] + [f"出力: {x}" for x in got[:6]]
+                return False, f"case {i + 1}: 出力が違う", [f"期待: {x}" for x in exp[:6]] + [f"出力: {x}" for x in got[:6]] + notes
         what = {"run": f"{len(conf['cases'])} case 一致" if conf["cases"] else "実行できた（case なし）",
                 "warning": "警告あり（期待どおり）" + (f"・{len(conf['cases'])} case 一致" if conf["cases"] else ""),
                 "crash": "異常終了（期待どおり。" + "・".join(dict.fromkeys(ends)) + "）"}[expect]
-        return True, what, []
+        return True, what, notes
 
 
 def git_changed(base_dir: Path, ref: str | None) -> tuple[set[Path], Path] | None:
@@ -294,7 +331,7 @@ def main() -> None:
         for f in cf.as_completed(futs):
             results[futs[f]] = f.result()
 
-    bad = 0
+    bad = noted = 0
     for y in orphans:
         bad += 1
         print(f"NG  {y.relative_to(base)}: 設定だけで .cpp がない")
@@ -305,7 +342,9 @@ def main() -> None:
             continue
         for comp in u.config["compilers"]:
             ok, msg, detail = results[(u.name, comp)]
-            if ok and not args.verbose:
+            has_note = any(x.startswith(NOTE) for x in detail)
+            noted += has_note
+            if ok and not has_note and not args.verbose:       # 注記のある OK は、どの計算機で何が出たかを残すため出す
                 continue
             bad += 0 if ok else 1
             used = resolve_compiler(comp)
@@ -315,6 +354,10 @@ def main() -> None:
                 print("      " + line)
     print(f"\nコード片 {len(units)}・コンパイル {len(jobs)} 回・期待と違う {bad}（{time.time() - t0:.1f} 秒、並列 {args.jobs}"
           + (f"、ACL {acl}" if acl else "、ACL なし") + "）")
+    if noted:
+        cpu = cpu_name()
+        print(f"注記: コードの位置のない -m のオプションへの cc1plus の警告を、run・warning の判定に数えなかった：コンパイル {noted} 回"
+              "（-march=native では、検査を動かす計算機の CPU しだいで出る" + (f"。この計算機の CPU は {cpu}" if cpu else "") + "）")
     sys.exit(1 if bad else 0)
 
 

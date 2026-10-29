@@ -19,7 +19,7 @@
 | `fix_problems.py` | 本文の問題の一覧の各行の label・URL・difficulty を台帳から作り直す（要約は変えない）。difficulty は `（diff 1354）`、台帳で参考値（`experimental: true`）のものは `（diff 1856・参考値）`、値のないものは `（diff なし）` と書く（#5・#76。前の形の `（diff —）` も読んで直す）。`- abc300_e：要約` と書けば行を作る。`--check` は台帳の pages にあるのに本文の囲みにない問題も警告に出す | ページ（`--check` では書かない） |
 | `fix_code_links.py` | 本文に取り込んだコード片（```` ```cpp ```` の中の `--8<--`）の下に、GitHub の完全なプログラムへのリンクの行を置き、取り込む範囲に `mint` が出れば同じ行に型と modint のページへのリンクを添える。地の文の `` `snippets/<id>/<名前>` `` も同じ URL へのリンクにする（#8・#72・#62。下の節）。`--check` で差分、`--stat` で件数だけ。試験は test_fix_code_links.py | ページ（`--check` では書かない） |
 | `frequency.py` | front matter の frequency・frequency_evidence を最近の ABC（recent-abc.yaml）・台帳の古い ABC の数・前提として届くページの数から付け直す（catalog/README §5・手引き §17-7）。`--check` で差分、`--write` でその 2 行だけを書き換える。試験は `python3 -m unittest discover -s tests/tools` | ページの 2 行（`--write`） |
-| `check_snippets.py` | コード片を設定（compilers・flags・expect・cases）どおりにコンパイル・実行して確かめる | なし |
+| `check_snippets.py` | コード片を設定（compilers・flags・expect・cases）どおりにコンパイル・実行して確かめる。コードの位置のない -m のオプションへの cc1plus の警告（`-march=native` では計算機の CPU しだいで出る）は、run・warning の判定に数えず注記として出す（#95）。試験は test_check_snippets.py | なし |
 | `render_svg.py` | 図の SVG（`docs/img/<id>/`）をヘッドレスの Chrome で幅 360px・720px の PNG にして目で確かめる。日本語のフォントがなければ WSL の Windows のフォントを足す | 一時ディレクトリ（`--out`）の PNG |
 | `render_pages.py` | 作業用フォルダにビルドしたサイトを http で配り、全ページをヘッドレスの Chrome で幅 390px のライトとダークで開いて、描いたときにだけ分かる崩れを数える（#61。下の「公開の前」）。Chrome と日本語のフォントは render_svg.py と同じ。CI では動かさない。試験は test_render_pages.py（Chrome がないときと CI では、描く試験を飛ばす） | 結果の JSON（`--json`） |
 | `check_svg.py` | 図の SVG の width・height の欠けと比、幅（§15-8 の目安）、スマホの幅で 9px 未満になる文字、viewBox を覆わない白い背景を警告する（`--strict` で終了コード 1） | なし |
