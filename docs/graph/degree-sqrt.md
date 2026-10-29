@@ -42,7 +42,7 @@ updated: 2026-10-29
 別名：次数の平方分割・重い頂点と軽い頂点・三角形の列挙・4-サイクルの検出・sqrt decomposition on degrees
 <!-- textlint-enable -->
 
-次数による平方分割は、頂点を次数がしきい値 $B$ 以上の重い頂点と、$B$ 未満の軽い頂点に分け、重い頂点の隣接リストを決して全部たどらないように処理を組む方法である。軽い頂点の隣は $B$ 個未満で、重い頂点は全体で $2M/B$ 個以下しかないので、$B$ を $\sqrt{M}$ 程度にすればどちらも $O(\sqrt{M})$ に収まる。辺の数 $M$ で決まる「次数の大きい頂点は少ない」という性質（[握手補題](../graph/graph-basics.md#handshake)）だけを使うので、グラフの形によらず成り立つ。
+次数による平方分割は、頂点を次数がしきい値 $B$ 以上の重い頂点と、$B$ 未満の軽い頂点に分け、重い頂点の隣接リストを決して全部たどらないように処理を組む方法である。軽い頂点の隣は $B$ 個未満で、重い頂点は全体で $2M/B$ 個以下しかないので、$B$ を $\sqrt{M}$ 程度にすればどちらも $O(\sqrt{M})$ に収まる。辺の数 $M$ で決まる「次数の大きい頂点は少ない」という性質（[握手補題](../graph/graph-basics.md#handshake)）だけを使うので、グラフの形によらず成り立つ。以下、頂点は 0-indexed で $0, \dots, N - 1$ と書き、問題文の 1-indexed の番号からは 1 を引いて使う。
 
 ## 重い頂点は 2√M 個以下 {#few-heavy}
 
@@ -93,6 +93,9 @@ $B = \sqrt{M}$ なら重い頂点は $2\sqrt{M}$ 個以下である。どの頂�
 --8<-- "degree-sqrt/paint-query.cpp:core"
 ```
 
+完全なプログラム：[`paint-query.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/degree-sqrt/paint-query.cpp)（GitHub）
+{ .kp-code-src }
+
 **1 点を書き換え、隣すべての和を聞く**場合は向きが逆になる。重い頂点 $h$ ごとに「隣の値の和」$S[h]$ を持っておき、頂点 $x$ の値を $d$ 増やすときは、$\mathrm{hn}[x]$ のすべての $h$ について $S[h]$ にも $d$ を足す。質問では、重い $x$ は $S[x]$ を読むだけ、軽い $x$ は隣接リストを全部たどって足す。和や個数のように、古い値を引いて取り除ける量なら同じ形で書ける。最大値・最小値は、値が一方向にしか変わらないとき（「最後の時刻」など）だけ 1 つの数で持てる。値を任意に書き換えるなら、重い頂点ごとに隣の値の多重集合を持つ（[確認問題](#quiz)の 3 問目）。
 
 まとめる演算に要る条件は型によって違う。塗る問題のように配った記録と取りに行った記録を最後に合わせる型では、2 つの記録を合わせられれば足り、時刻の最大でよい。重い頂点が隣の集計を持ち続ける型では、それに加えて古い値を取り除けなければならず、和・個数は使えるが最大値は一般には使えない。「隣の値の種類数」のように合わせることもできない量は、どちらの型でもこのままでは扱えない。
@@ -121,9 +124,12 @@ $$
 --8<-- "degree-sqrt/triangles.cpp:core"
 ```
 
+完全なプログラム：[`triangles.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/degree-sqrt/triangles.cpp)（GitHub）
+{ .kp-code-src }
+
 向き付けの比べ方を頂点番号だけにすると、この上限が崩れる。番号が真ん中の頂点 $h$ を中心にした星形を考える。番号が $h$ より小さい葉はどれも $h$ へ向き、$h$ からは番号の大きい葉すべてへ向く。小さい葉 $u$ ごとに $u \to h$ をたどって $h$ の出次数の約 $N/2$ 個を見るので、全体で約 $N^2/4$ 回になる。次数で比べれば中心の順位が最も大きくなり、中心から出る辺はなくなる。
 
-各頂点に値があり、三角形ごとの積の和などを求める問題も、報告する代わりにその場で足せばよい（Library Checker の Enumerate Triangles）。頂点数が数千で辺が密なら、三角形が $10^9$ 個を超えることもあり、1 つずつ列挙すると間に合わない。個数だけなら、隣接行列の行を bitset にして共通の隣を数える方が速い（[bitset による高速化](../misc/bitset-speedup.md)）。
+各頂点に値があり、三角形ごとの積の和などを求める問題も、報告する代わりにその場で足せばよい（Library Checker の [Enumerate Triangles](https://judge.yosupo.jp/problem/enumerate_triangles)）。頂点数が数千で辺が密なら、三角形が $10^9$ 個を超えることもあり、1 つずつ列挙すると間に合わない。個数だけなら、隣接行列の行を bitset にして共通の隣を数える方が速い（[bitset による高速化](../misc/bitset-speedup.md)）。
 
 ## 長さ 4 の閉路の検出（鳩の巣原理で打ち切る） {#four-cycles}
 
@@ -137,6 +143,9 @@ $$
 --8<-- "degree-sqrt/four-cycle.cpp:detect"
 ```
 
+完全なプログラム：[`four-cycle.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/degree-sqrt/four-cycle.cpp)（GitHub）
+{ .kp-code-src }
+
 **すべて数える**ときは打ち切れないので、三角形と同じく $(\deg v, v)$ の順位を使う。閉路 $v - u - w - u' - v$ を、順位が最大の頂点 $v$ と、その向かいの頂点 $w$ で数える。
 
 1. 各頂点 $v$ について、順位が $v$ より小さい隣 $u$ を選び、さらに $u$ の隣で順位が $v$ より小さい $w$ を選ぶ（$w = v$ はこの条件で除かれる）
@@ -149,7 +158,10 @@ $$
 --8<-- "degree-sqrt/four-cycle.cpp:count"
 ```
 
-Library Checker の Counting C4's は、辺ごとに「その辺を含む長さ 4 の閉路の個数」を求める発展版で、多重辺を含みうる（自己ループはない）。
+完全なプログラム：[`four-cycle.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/degree-sqrt/four-cycle.cpp)（GitHub）
+{ .kp-code-src }
+
+Library Checker の [Counting C4's](https://judge.yosupo.jp/problem/counting_c4) は、辺ごとに「その辺を含む長さ 4 の閉路の個数」を求める発展版で、多重辺を含みうる（自己ループはない）。
 
 ## 落とし穴 {#pitfalls}
 

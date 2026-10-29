@@ -59,6 +59,9 @@ atcoder: true
 --8<-- "cpp-comparators/strict-weak.cpp:core"
 ```
 
+完全なプログラム：[`strict-weak.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-comparators/strict-weak.cpp)（GitHub）
+{ .kp-code-src }
+
 入力 `ccc b aa d ee` なら `b d aa ee ccc` と出る。長さ 1 の `b`・`d`、長さ 2 の `aa`・`ee` は、それぞれ入力の順のまま並ぶ。
 
 - **既定では**：比較関数を渡さない `sort(v.begin(), v.end())` は、要素の `<` を使う。`cmp` を渡すと、その `<` を `cmp` に置き換えて並べる
@@ -71,6 +74,9 @@ atcoder: true
 ```cpp
 --8<-- "cpp-comparators/less-equal.cpp:core"
 ```
+
+完全なプログラム：[`less-equal.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-comparators/less-equal.cpp)（GitHub）
+{ .kp-code-src }
 
 手元で、同じ値 `1` だけが並ぶ配列を `<=` の比較関数で `sort` した（g++-13・g++-15、`-O2`）。結果は要素の数で変わり、小さな入力の試しでは気づけない（表の 17〜3×10^4 は 17・1000・3×10^4 などで、最後の行は 3.5×10^4・4×10^4・10^5 などで試した）。
 
@@ -95,6 +101,9 @@ atcoder: true
 --8<-- "cpp-comparators/greater.cpp:core"
 ```
 
+完全なプログラム：[`greater.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-comparators/greater.cpp)（GitHub）
+{ .kp-code-src }
+
 - `greater<T>()`：`T` 型の 2 つを比べる。引数は、比べる前に `T` へ変換される
 - `greater<>()`：`greater<void>` の略（C++14）。引数を変換せず、そのままの型で `>` を呼ぶ。型の違う 2 つも比べられる
 - `greater{}`：型引数を省いた `greater` から、[CTAD](../cpp/cpp-initialization.md#ctad)（C++17）で `greater<void>` が選ばれる。意味は `greater<>()` と同じ
@@ -104,6 +113,9 @@ atcoder: true
 ```cpp
 --8<-- "cpp-comparators/greater.cpp:pitfall"
 ```
+
+完全なプログラム：[`greater.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-comparators/greater.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：`greater<>` は C++14、`greater{}` は C++17。g++-13・g++-15 で使える
 - **使い分け**：型を書き間違えないよう、`greater<>()` か `greater{}` を使うとよい。`less` も同じで、`less<>` は `<` を型を変換せずに呼ぶ
@@ -116,6 +128,9 @@ atcoder: true
 ```cpp
 --8<-- "cpp-comparators/pq-order.cpp:core"
 ```
+
+完全なプログラム：[`pq-order.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-comparators/pq-order.cpp)（GitHub）
+{ .kp-code-src }
 
 同じ比較関数でも、コンテナによって「true の側」の行き先が違う。次の表は `cmp(a, b)` が true のときの意味と、先に出てくる要素である（`sort` と `set` は先頭から、`priority_queue` は `top` から出てくる）。
 
@@ -133,6 +148,9 @@ atcoder: true
 --8<-- "cpp-comparators/pq-order.cpp:dijkstra"
 ```
 
+完全なプログラム：[`pq-order.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-comparators/pq-order.cpp)（GitHub）
+{ .kp-code-src }
+
 - **素朴に書くと**：最小を取り出すキューは、値の符号を反転して既定の `priority_queue` に入れても作れる（`push(-x)` して `-top()` を読む）。符号の戻し忘れが起きやすいので、`greater` を渡すほうが安全である
 - **落とし穴**：要素を `pair` にしたとき、比べるのは `first` からである。距離で取り出したいなら、距離を `first` に置く
 - **落とし穴**：`const auto& [d, v] = pq.top(); pq.pop();` は `pop` の後に消えた要素を読む。値で受ける（[構造化束縛](../cpp/cpp-structured-bindings.md#pq-top-reference)）
@@ -144,6 +162,9 @@ atcoder: true
 ```cpp
 --8<-- "cpp-comparators/set-equivalence.cpp:core"
 ```
+
+完全なプログラム：[`set-equivalence.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-comparators/set-equivalence.cpp)（GitHub）
+{ .kp-code-src }
 
 `second` だけで比べる `set` に `{1, 5}` と `{2, 5}` を入れると、`{2, 5}` は `{1, 5}` に等しいとみなされ、入らない。`count({9, 5})` も 1 を返す。等しいときの比べ方（ここでは `first`）を後ろに足して全部のメンバを比べると、両方が残る。
 
@@ -158,11 +179,17 @@ atcoder: true
 --8<-- "cpp-comparators/multiple-keys.cpp:pair"
 ```
 
+完全なプログラム：[`multiple-keys.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-comparators/multiple-keys.cpp)（GitHub）
+{ .kp-code-src }
+
 構造体のメンバで比べるときは、`tie` でメンバへの参照の `tuple` を作り、`<` で比べる。キーごとに向きを変えたいときは、降順にするキーだけ `a` と `b` を入れ替える。次の例は、得点の大きい順、得点が等しければ名前の辞書順である。
 
 ```cpp
 --8<-- "cpp-comparators/multiple-keys.cpp:core"
 ```
+
+完全なプログラム：[`multiple-keys.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-comparators/multiple-keys.cpp)（GitHub）
+{ .kp-code-src }
 
 `tie(b.score, a.name) < tie(a.score, b.name)` は、1 つ目のキーでは `b.score < a.score`（得点の降順）を、2 つ目のキーでは `a.name < b.name`（名前の昇順）を比べる。入力 `80 bob`・`90 carol`・`80 alice`・`70 dave` なら、`90 carol`・`80 alice`・`80 bob`・`70 dave` の順になる。
 
@@ -180,17 +207,26 @@ C++20 では、キャプチャのないラムダの型から比較関数を作�
 --8<-- "cpp-comparators/lambda-type.cpp:core"
 ```
 
+完全なプログラム：[`lambda-type.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-comparators/lambda-type.cpp)（GitHub）
+{ .kp-code-src }
+
 C++17 では、ラムダの型から比較関数を作れないので、`set<int, decltype(cmp)> st;` はコンパイルエラーになる（g++-13・g++-15 の `-std=gnu++17` で確かめた）。コンストラクタに `cmp` を渡す。
 
 ```cpp
 --8<-- "cpp-comparators/lambda-type-17.cpp:core"
 ```
 
+完全なプログラム：[`lambda-type-17.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-comparators/lambda-type-17.cpp)（GitHub）
+{ .kp-code-src }
+
 キャプチャのあるラムダ（`[&]` で外の配列を見るものなど）は、C++20 でも型から作れない。`set<int, decltype(by_w)> idx;` は `use of deleted function` のエラーになるので、常に `cmp` を渡す。
 
 ```cpp
 --8<-- "cpp-comparators/lambda-type.cpp:capture"
 ```
+
+完全なプログラム：[`lambda-type.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-comparators/lambda-type.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：型だけを渡す書き方は C++20。AtCoder の `-std=gnu++23` と g++-13・g++-15 で使える。`cmp` を渡す書き方はどの版でも使えるので、迷ったら渡す
 - **落とし穴**：`by_w` で比べる `set` に入れた後で `w` を書き換えると、`set` の中の並びが崩れ、`find` などが正しく動かない。キーにする値は、入れている間は変えない
@@ -204,11 +240,17 @@ C++17 では、ラムダの型から比較関数を作れないので、`set<int
 --8<-- "cpp-comparators/operator-less.cpp:core"
 ```
 
+完全なプログラム：[`operator-less.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-comparators/operator-less.cpp)（GitHub）
+{ .kp-code-src }
+
 最後の `const` は「この関数は自分を書き換えない」という印である。`set`・`priority_queue`・`ranges::sort` は要素を `const` のまま比べるので、`const` のない `operator<` は呼べず、コンパイルエラーになる。
 
 ```cpp
 --8<-- "cpp-comparators/operator-less-ng.cpp:core"
 ```
+
+完全なプログラム：[`operator-less-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-comparators/operator-less-ng.cpp)（GitHub）
+{ .kp-code-src }
 
 g++-13・g++-15 では `no match for 'operator<' (operand types are 'const Seg' and 'const Seg')` と出る。紛らわしいことに、`std::sort` だけなら `const` がなくても通る（手元で確かめた）。`sort` が通ったコードも、`set` に入れたところで初めてエラーになる。
 
@@ -226,6 +268,9 @@ g++-13・g++-15 では `no match for 'operator<' (operand types are 'const Seg' 
 ```cpp
 --8<-- "cpp-comparators/spaceship.cpp:use"
 ```
+
+完全なプログラム：[`spaceship.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-comparators/spaceship.cpp)（GitHub）
+{ .kp-code-src }
 
 `Edge` は `cost`・`u`・`v` の順に比べられるので、`sort` するとコストの小さい順に並ぶ（[クラスカル法](../graph/minimum-spanning-tree.md)で辺を並べる形）。比べる順を変えたいときは、メンバの宣言の順を入れ替える。
 

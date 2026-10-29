@@ -95,6 +95,9 @@ $$
 --8<-- "crt/crt-merge.cpp:core"
 ```
 
+完全なプログラム：[`crt-merge.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/crt/crt-merge.cpp)（GitHub）
+{ .kp-code-src }
+
 - `r0` と `r1` を最初に $[0, m)$ に直すのは、`-1` のような負の余りを渡せるようにするためである
 - $\frac{r_1 - r_0}{g} \cdot p$ は、どちらの因数も $10^{18}$ 近くになりうる。`__int128` で掛けてから $u_1$ で割った余りを取る（[整数のオーバーフロー](../cpp/cpp-integer-overflow.md)）
 - 戻り値の `m0 * t` は lcm 未満なので、lcm が `long long` に収まればあふれない
@@ -112,6 +115,9 @@ $$
 ```cpp
 --8<-- "crt/crt-merge.cpp:fold"
 ```
+
+完全なプログラム：[`crt-merge.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/crt/crt-merge.cpp)（GitHub）
+{ .kp-code-src }
 
 どの 2 式も $r_i \equiv r_j \pmod{\gcd(m_i, m_j)}$ を満たせば全体に解があり、解は $L = \operatorname{lcm}(m_0, \dots, m_{n-1})$ を法としてただ 1 つに決まる。統合 1 回は拡張ユークリッドの互除法 1 回で $O(\log \min(z, m_i))$ なので、全体は $O(n \log L)$ である。
 
@@ -167,6 +173,9 @@ for i = 0, …, K-1:
 --8<-- "crt/garner.cpp:core"
 ```
 
+完全なプログラム：[`garner.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/crt/garner.cpp)（GitHub）
+{ .kp-code-src }
+
 - 法が互いに素でないときは、そのままでは使えない。素因数ごとに分けて互いに素な法に直してから使う
 - $M$ が $10^{18}$ 近くでも動くよう、積はすべて `__int128` で計算している。法が $10^9$ 程度なら `long long` で足りる
 - 多数の式の統合（[前の節](#many-equations)）とは役割が違う。統合は解そのもの（$L$ が収まるとき）、Garner は解の $\bmod M$（$L$ が収まらないとき）を求める
@@ -183,6 +192,9 @@ ACL の `crt` は、[多数の式の統合](#many-equations)をそのまま行�
 ```cpp
 --8<-- "crt/sum-multiple.cpp:core"
 ```
+
+完全なプログラム：[`sum-multiple.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/crt/sum-multiple.cpp)（GitHub）
+{ .kp-code-src }
 
 - 解なしは $z = 0$ で判定する。$y$ は解があっても 0 になりうるので、$y$ では判定できない
 - 返る $y$ は非負の最小の解である。「正の整数で最小」を問われたら、$y = 0$ のときは $z$ に直す

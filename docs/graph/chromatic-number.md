@@ -76,6 +76,9 @@ $$
 --8<-- "chromatic-number/chromatic.cpp:core"
 ```
 
+完全なプログラム：[`chromatic.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/chromatic-number/chromatic.cpp)（GitHub）
+{ .kp-code-src }
+
 $f(k)$ は最大で $2^{Nk}$ ほどの巨大な数なので、mod で計算する。mod の値は大小を比べられず、正の $f(k)$ の余りが偶然 0 になると「塗れない」と誤判定する。上のコード片は 2 つの素数で計算し、どちらかが 0 でなければ塗れるとしている（$f(k)$ は 0 以上なので、余りが 0 でなければ $f(k) > 0$ は確実である）。気になるなら法を乱択する。
 
 部分集合の部分集合を回す $\mathrm{dp}[S] = \min_{T \subseteq S,\ T \text{ は独立}} \mathrm{dp}[S \setminus T] + 1$ で求める方法もあるが、$O(3^N)$ かかる（[部分集合を列挙する DP](../dp/subset-enumeration-dp.md#vs-zeta)）。$N = 20$ では $3^{20} \approx 3.5 \times 10^9$ で重い。
@@ -104,6 +107,9 @@ $f(k)$ は最大で $2^{Nk}$ ほどの巨大な数なので、mod で計算す�
 ```cpp
 --8<-- "chromatic-number/mis.cpp:core"
 ```
+
+完全なプログラム：[`mis.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/chromatic-number/mis.cpp)（GitHub）
+{ .kp-code-src }
 
 **分枝**：残っているグラフで頂点 $v$ を 1 つ選び、「$v$ を取る（$v$ と隣を消す）」と「$v$ を取らない（$v$ を消す）」に分けて再帰する。工夫なしでは $2^N$ のままなので、次の規則で枝を減らす。
 

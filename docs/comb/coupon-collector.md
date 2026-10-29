@@ -114,6 +114,9 @@ $$
 --8<-- "coupon-collector/expected.cpp:core"
 ```
 
+完全なプログラム：[`expected.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/coupon-collector/expected.cpp)（GitHub）
+{ .kp-code-src }
+
 **応用の型**：
 
 - **一部だけそろえる**：$N$ 種類のうち $K$ 種類（どれでもよい）そろうまでなら、段階 $0$ から $K - 1$ までだけを足して $\sum_{k=0}^{K-1} N/(N - k)$ である
@@ -147,6 +150,9 @@ $$
 ```cpp
 --8<-- "coupon-collector/expected-mod.cpp:core"
 ```
+
+完全なプログラム：[`expected-mod.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/coupon-collector/expected-mod.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 ## 例題 {#examples}
 

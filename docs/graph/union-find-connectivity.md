@@ -76,6 +76,9 @@ Union-Find で連結性を扱うとは、[Union-Find](../ds/union-find.md) が�
 --8<-- "union-find-connectivity/reverse-deletion.cpp:core"
 ```
 
+完全なプログラム：[`reverse-deletion.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/union-find-connectivity/reverse-deletion.cpp)（GitHub）
+{ .kp-code-src }
+
 最初の併合と逆順の追加を合わせて、併合は全体で $M$ 回なので、ならし $O((N + M + Q)\,\alpha(N))$ で済む。
 
 ### 頂点を削除するとき {#vertex-deletion}

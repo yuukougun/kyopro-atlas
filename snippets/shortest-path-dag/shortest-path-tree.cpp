@@ -2,7 +2,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const long long INF = LLONG_MAX / 4;
+const long long INF = 1LL << 60;  // INF + INF でもあふれない大きさ
 
 int main() {
     int n, m;

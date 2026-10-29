@@ -79,6 +79,9 @@ updated: 2026-10-22
 --8<-- "stack-techniques/cancel.cpp:core"
 ```
 
+完全なプログラム：[`cancel.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/stack-techniques/cancel.cpp)（GitHub）
+{ .kp-code-src }
+
 1 文字ごとの照合は消す並びの長さ $\lvert T \rvert$ に比例するので、全体は $O(N \lvert T \rvert)$ である。「ABC」「fox」のように $\lvert T \rvert$ が定数なら $O(N)$ になる。
 
 スタックに積むのは文字に限らない。完全二分木の上で「子へ進む（L・R）」と「親へ戻る（U）」を繰り返す移動では、L か R の直後の U は打ち消し合う。移動の列をスタックで簡約し、U を読んだときに先頭が L か R ならそれを降ろす。スタックが空のときの U は、それより前の移動と打ち消し合わないので、その場で頂点の番号を親に移す。残った L・R だけを最後に適用すれば、途中で番号が巨大になることを避けられる（[完全二分木](../tree/complete-binary-tree.md)）。
@@ -98,6 +101,9 @@ updated: 2026-10-22
 ```cpp
 --8<-- "stack-techniques/run-length.cpp:core"
 ```
+
+完全なプログラム：[`run-length.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/stack-techniques/run-length.cpp)（GitHub）
+{ .kp-code-src }
 
 スタックの隣り合う組は、常に値が違う。新しい値は先頭と同じなら個数を増やし、違うときだけ新しい組を積むからである。消えるのは常に先頭の組だけなので、消した後の先頭とその下の組も値が違う。また、どの組も個数は値より少ない。消した後の新しい先頭は、積まれたときから個数が変わっておらず値より少ないので、続けて消えることはない。次に入れる玉が新しい先頭と同じ値なら、ふつうどおり個数を増やす。
 
@@ -119,6 +125,9 @@ updated: 2026-10-22
 ```cpp
 --8<-- "stack-techniques/undo.cpp:core"
 ```
+
+完全なプログラム：[`undo.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/stack-techniques/undo.cpp)（GitHub）
+{ .kp-code-src }
 
 取り消しのスタックで戻れるのは、直前から順にさかのぼることだけである。やり直し（取り消しの取り消し）だけなら、取り消しで降ろした状態を 2 本目のスタックに積んでおき、新しい操作をしたらそれを空にすればよい。$k$ 回さかのぼってから別の操作をするのも、$k$ 回降ろしてから積めば済む。保存しておいた任意の版を読み込むなど、一度捨てた版へ戻る操作が混ざるなら、版を木にして持つ（[永続データ構造](../ds/persistent-data-structures.md#version-tree)）。
 
@@ -143,6 +152,9 @@ updated: 2026-10-22
 ```cpp
 --8<-- "stack-techniques/chords.cpp:core"
 ```
+
+完全なプログラム：[`chords.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/stack-techniques/chords.cpp)（GitHub）
+{ .kp-code-src }
 
 ??? note "なぜスタックが空で終わることと交差しないことが同じか"
     交差がなければ、どの閉じる端点を読むときも、その弦の内側で開いた弦はすべて閉じている（入れ子なので先に閉じる）。だから相手の端点は常に先頭にあり、すべて降ろされて空で終わる。

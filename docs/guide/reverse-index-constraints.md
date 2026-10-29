@@ -77,6 +77,9 @@ AtCoder の C++ は C++23（GCC 15.2.0）で、`-std=gnu++23 -O2 -march=native` 
 --8<-- "reverse-index-constraints/ops-benchmark.cpp:core"
 ```
 
+完全なプログラム：[`ops-benchmark.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/reverse-index-constraints/ops-benchmark.cpp)（GitHub）
+{ .kp-code-src }
+
 定数倍を減らす書き方（配列で持つ・連続して読む・入出力を速くする）は、[計算量の見積もりの定数倍の節](../basics/complexity-estimation.md#constant-factor)と[入出力と定数倍](../cpp/cpp-io.md#tle-causes)にある。
 
 ## 制約 → 計算量 → 候補の手法 {#constraint-table}

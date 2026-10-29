@@ -60,6 +60,9 @@ C++23 の views は、[views の基本](../cpp/cpp-views-basics.md)の部品（`
 --8<-- "cpp-views-cpp23/enumerate.cpp:core"
 ```
 
+完全なプログラム：[`enumerate.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-views-cpp23/enumerate.cpp)（GitHub）
+{ .kp-code-src }
+
 - **素朴に書くと**：`for (int i = 0; i < (int)a.size(); i++) { int& x = a[i]; … }` と同じである
 - **添字の型**：`ptrdiff_t`（64 bit の Linux では `long`）である。`int` の変数と混ぜたときの問題は [enumerate の添字を int にしたいとき](#int-index)
 - **版**：C++23。g++-13・g++-15 で使える
@@ -69,6 +72,9 @@ C++23 の views は、[views の基本](../cpp/cpp-views-basics.md)の部品（`
 ```cpp
 --8<-- "cpp-views-cpp23/enumerate-scc.cpp:core"
 ```
+
+完全なプログラム：[`enumerate-scc.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-views-cpp23/enumerate-scc.cpp)（GitHub）
+{ .kp-code-src }
 
 この 1 行は「何を回すか（`g.scc()` の各成分）」「何を受け取るか（添字と成分の組）」「どう受け取るか（`const auto&`）」に分けて読む。`g.scc()` は一時オブジェクトだが、右辺値をパイプに流すと view の中に移されるので、ループの間は生きている（[view の寿命](../cpp/cpp-views-basics.md#lifetime)）。強連結成分そのものは[強連結成分分解](../graph/scc.md)で扱う。
 
@@ -81,6 +87,9 @@ C++23 の views は、[views の基本](../cpp/cpp-views-basics.md)の部品（`
 ```cpp
 --8<-- "cpp-views-cpp23/zip.cpp:core"
 ```
+
+完全なプログラム：[`zip.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-views-cpp23/zip.cpp)（GitHub）
+{ .kp-code-src }
 
 入力が `a = (1, 2, 3, 4)`、`b = (5, 1)` なら、組は 2 個だけで、積の和は $1 \cdot 5 + 2 \cdot 1 = 7$ になる。
 
@@ -95,6 +104,9 @@ C++23 の views は、[views の基本](../cpp/cpp-views-basics.md)の部品（`
 ```cpp
 --8<-- "cpp-views-cpp23/adjacent.cpp:core"
 ```
+
+完全なプログラム：[`adjacent.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-views-cpp23/adjacent.cpp)（GitHub）
+{ .kp-code-src }
 
 入力 `3 1 4 1 5 9 2 6` は単調増加ではない。山は $(1, 4, 1)$ と $(5, 9, 2)$ の 2 個で、差分は `-2 3 -3 4 4 -7 4` の 7 個になる。
 
@@ -114,6 +126,9 @@ C++23 の views は、[views の基本](../cpp/cpp-views-basics.md)の部品（`
 --8<-- "cpp-views-cpp23/chunk-slide-stride.cpp:core"
 ```
 
+完全なプログラム：[`chunk-slide-stride.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-views-cpp23/chunk-slide-stride.cpp)（GitHub）
+{ .kp-code-src }
+
 入力 `3 1 4 1 5 9 2 6`・$k = 3$ では、塊の和が `8 15 8`、窓の和が `8 6 10 15 16 17`、3 個おきが `3 1 2` になる。`ranges::fold_left`（C++23）は初期値と演算を渡して畳み込む関数で、[アルゴリズムの定型](../cpp/cpp-algorithms.md)で扱う。
 
 - **素朴に書くと**：`chunk` は、`for (int l = 0; l < n; l += k)` の各回で $[l, \min(l + k, n))$ を見るのと同じである。`stride` は `for (int i = 0; i < n; i += k)` と同じである
@@ -128,6 +143,9 @@ C++23 の views は、[views の基本](../cpp/cpp-views-basics.md)の部品（`
 --8<-- "cpp-views-cpp23/chunk-by.cpp:core"
 ```
 
+完全なプログラム：[`chunk-by.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-views-cpp23/chunk-by.cpp)（GitHub）
+{ .kp-code-src }
+
 入力 `aaabccdd` に対して `a 3`・`b 1`・`c 2`・`d 2` と出る。手で書くと、塊の終わりを見つけて最後の塊を足し忘れない処理が要る（[塊への分け方](../basics/run-length-encoding.md#split)）。`chunk_by` ならその境界を自分で書かずに済む。
 
 `pred` を `less_equal{}` にすると、広義単調増加の区間ごとに分かれる。最長の単調な区間の長さは次のように求まる。
@@ -135,6 +153,9 @@ C++23 の views は、[views の基本](../cpp/cpp-views-basics.md)の部品（`
 ```cpp
 --8<-- "cpp-views-cpp23/chunk-by-inc.cpp:core"
 ```
+
+完全なプログラム：[`chunk-by-inc.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-views-cpp23/chunk-by-inc.cpp)（GitHub）
+{ .kp-code-src }
 
 - **素朴に書くと**：`for (int l = 0; l < n; )` で、`r = l + 1` から `pred(a[r - 1], a[r])` が真の間 `r` を進め、$[l, r)$ を 1 つの塊として `l = r` とするのと同じである
 - **版**：C++23。g++-13・g++-15 で使える
@@ -148,6 +169,9 @@ C++23 の views は、[views の基本](../cpp/cpp-views-basics.md)の部品（`
 ```cpp
 --8<-- "cpp-views-cpp23/cartesian-product.cpp:core"
 ```
+
+完全なプログラム：[`cartesian-product.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-views-cpp23/cartesian-product.cpp)（GitHub）
+{ .kp-code-src }
 
 - **素朴に書くと**：`for (int i = 0; i < h; i++) for (int j = 0; j < w; j++)` と同じ順である。3 つ以上の範囲も渡せる
 - **版**：C++23。g++-13・g++-15 で使える。`views::iota(0, h)` の要素が `int` なので、`i`・`j` も `int` である
@@ -165,6 +189,9 @@ C++23 の views は、[views の基本](../cpp/cpp-views-basics.md)の部品（`
 --8<-- "cpp-views-cpp23/repeat-join-with.cpp:core"
 ```
 
+完全なプログラム：[`repeat-join-with.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-views-cpp23/repeat-join-with.cpp)（GitHub）
+{ .kp-code-src }
+
 入力 `10 -2 3` なら、2 行目は `10 -2 3` と、末尾に空白なしで出る。
 
 - **素朴に書くと**：`join_with(' ')` は、`i > 0` のときだけ空白を出してから `a[i]` を出すループと同じである（出力の書き方は[入出力](../cpp/cpp-io.md)）
@@ -179,6 +206,9 @@ C++23 の views は、[views の基本](../cpp/cpp-views-basics.md)の部品（`
 --8<-- "cpp-views-cpp23/reference-tuples.cpp:core"
 ```
 
+完全なプログラム：[`reference-tuples.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-views-cpp23/reference-tuples.cpp)（GitHub）
+{ .kp-code-src }
+
 - **`auto [i, x]` でも元が変わる**：`auto` でコピーされるのは組だけで、組の中の参照 `int&` は元の要素を指したままである。`x *= 2` で `v` が書き換わる。`zip` で受けた `b` への代入も `w` を変える
 - **`const auto&` でも防げない**：`const` が付くのは組のほうで、組が持つ参照の先ではない。`x` の型は `int&` のままで、代入がコンパイルを通る（`static_assert` で確かめた）
 - **`auto&` はコンパイルエラー**：その場で作られる組（一時オブジェクト）を、`const` のない参照では受けられない
@@ -187,6 +217,9 @@ C++23 の views は、[views の基本](../cpp/cpp-views-basics.md)の部品（`
 --8<-- "cpp-views-cpp23/reference-tuples-ng.cpp:core"
 ```
 
+完全なプログラム：[`reference-tuples-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-views-cpp23/reference-tuples-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 g++-13・g++-15 とも、エラーは `cannot bind non-const lvalue reference of type 'std::tuple<long int, int&>&' to an rvalue of type 'std::tuple<long int, int&>'` と出る。受け方は `auto`・`const auto&`・`auto&&` のどれでもよく、元が書き換わるかはどれも同じである。
 
 読むだけで書き換えたくないときは、`views::as_const` を先に挟む。`x` が `const int&` になり、誤った代入はコンパイルエラーで止まる。
@@ -194,6 +227,9 @@ g++-13・g++-15 とも、エラーは `cannot bind non-const lvalue reference of
 ```cpp
 --8<-- "cpp-views-cpp23/as-const.cpp:core"
 ```
+
+完全なプログラム：[`as-const.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-views-cpp23/as-const.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：C++23。g++-13・g++-15 で同じ型だった
 - **落とし穴**：「`auto` で受けたからコピーで安全」と考えて、ループの中で `x` を作業用の変数として書き換えると、元の配列が壊れる。作業用にするなら `int y = x;` と別の変数に写す
@@ -206,11 +242,17 @@ g++-13・g++-15 とも、エラーは `cannot bind non-const lvalue reference of
 --8<-- "cpp-views-cpp23/int-index-ng.cpp:core"
 ```
 
+完全なプログラム：[`int-index-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-views-cpp23/int-index-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 エラーは `no matching function for call to 'max(int&, std::tuple_element<0, std::tuple<long int, int&> >::type&)'` と出る。添字を `int` にしたいなら、`views::iota(0)` と `zip` する。`views::iota(0)` の要素は始まりの `0` の型 `int` になる（[要素の型は始まりで決まる](../cpp/cpp-views-basics.md#iota-int)）。`zip` は短いほうに合わせるので、終わりのない `iota(0)` でも `v` の長さで止まる。
 
 ```cpp
 --8<-- "cpp-views-cpp23/int-index.cpp:core"
 ```
+
+完全なプログラム：[`int-index.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-views-cpp23/int-index.cpp)（GitHub）
+{ .kp-code-src }
 
 - **ほかの直し方**：`max<long long>(best, i)` と型を明示する、`best` を `ptrdiff_t` にする、`(int)i` と変換する、のどれでも通る
 - **版**：C++23。g++-13・g++-15 で、`zip(iota(0), v)` の `i` が `int` になることを確かめた
@@ -224,6 +266,9 @@ g++-13・g++-15 とも、エラーは `cannot bind non-const lvalue reference of
 ```cpp
 --8<-- "cpp-views-cpp23/ranges-to.cpp:core"
 ```
+
+完全なプログラム：[`ranges-to.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-views-cpp23/ranges-to.cpp)（GitHub）
+{ .kp-code-src }
 
 1 つ目は、（値, 添字）の組を値の順に並べる定型である。入力 `3 1 4 1` に対して、並べた後の添字は `1 3 0 2` になる。`zip` の要素（`tuple<int&, int>`）は `pair<int, int>` に変換されて入る。
 
@@ -243,6 +288,9 @@ GCC 15 から、コンテナの側にも範囲を受け取る関数がある。
 --8<-- "cpp-views-cpp23/from-range.cpp:core"
 ```
 
+完全なプログラム：[`from-range.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-views-cpp23/from-range.cpp)（GitHub）
+{ .kp-code-src }
+
 - **版**：C++23。GCC 15 から使え、AtCoder の GCC 15.2 では使える。g++-13 では `from_range` が宣言されていないというエラーになる。GCC 15 の更新の一覧には `from_range` のコンストラクタと `insert_range` などが載っている
 - **使い分け**：新しく作るなら `ranges::to`、既にあるコンテナに足すなら `insert_range`・`append_range` と使い分ける
 
@@ -252,11 +300,17 @@ g++-13 で手元を動かすときは、イテレータの組を取る昔から�
 --8<-- "cpp-views-cpp23/common-ng.cpp:core"
 ```
 
+完全なプログラム：[`common-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-views-cpp23/common-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 `| views::common` を挟むと `begin` と `end` の型がそろい、g++-13 でも通る（[common](../cpp/cpp-views-basics.md#common)）。
 
 ```cpp
 --8<-- "cpp-views-cpp23/common-ok.cpp:core"
 ```
+
+完全なプログラム：[`common-ok.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-views-cpp23/common-ok.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：C++20 の `views::common` なので、g++-13・g++-15 のどちらでも通る。`enumerate`・`chunk_by` を `vector` にかけた view は、手元では `common` なしでも `begin` と `end` が同じ型だった
 - **落とし穴**：要素の型を省いて `vector w{r.begin(), r.end()}` と波かっこで書くと、型の推論で「イテレータ 2 個の `vector`」になる（[初期化の書き方](../cpp/cpp-initialization.md)）。手元の g++-13・g++-15 で、大きさが 2 だった。イテレータの組から作るときは丸かっこで書く
@@ -269,11 +323,17 @@ g++-13 で手元を動かすときは、イテレータの組を取る昔から�
 --8<-- "cpp-views-cpp23/concat-ng.cpp:core"
 ```
 
+完全なプログラム：[`concat-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-views-cpp23/concat-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 g++-13・g++-15 とも `-std=gnu++23` で `'concat' is not a member of 'std::views'` のコンパイルエラーになる。C++23 で 2 つの範囲を続けて回すなら、ループを 2 つ書くか、範囲を並べた配列を `views::join` で平らにする。
 
 ```cpp
 --8<-- "cpp-views-cpp23/concat-alt.cpp:core"
 ```
+
+完全なプログラム：[`concat-alt.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-views-cpp23/concat-alt.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：C++26（GCC 15 の C++26 の実験的な機能）。AtCoder では使えない
 - **落とし穴**：手元で `-std=gnu++26` を付けて試すと通ってしまう。手元のコンパイルの設定は AtCoder と同じ `-std=gnu++23` にそろえる（[AtCoder と手元の環境](../cpp/cpp-environment.md#options)）

@@ -63,11 +63,17 @@ atcoder: true
 --8<-- "cpp-templates-constexpr/power.cpp:core"
 ```
 
+完全なプログラム：[`power.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-templates-constexpr/power.cpp)（GitHub）
+{ .kp-code-src }
+
 呼ぶときに型を書く必要はない。1 つ目の引数の型から `T` が決まる。
 
 ```cpp
 --8<-- "cpp-templates-constexpr/power.cpp:call"
 ```
+
+完全なプログラム：[`power.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-templates-constexpr/power.cpp)（GitHub）
+{ .kp-code-src }
 
 素朴に書くと、`long long power(long long a, long long n)` と `double power(double a, long long n)` を 2 つ書くのと同じである。コンパイラは呼ばれた型ごとに別の関数を作る（インスタンス化）ので、実行時の速さは手で書いた関数と変わらない。
 
@@ -81,6 +87,9 @@ atcoder: true
 ```cpp
 --8<-- "cpp-templates-constexpr/chmin-ng.cpp:core"
 ```
+
+完全なプログラム：[`chmin-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-templates-constexpr/chmin-ng.cpp)（GitHub）
+{ .kp-code-src }
 
 g++-15 のエラーは次のとおりで、g++-13 も同じだった。
 
@@ -101,11 +110,17 @@ note:   deduced conflicting types for parameter 'const T' ('long long int' and '
 --8<-- "cpp-templates-constexpr/chmin-ok.cpp:call"
 ```
 
+完全なプログラム：[`chmin-ok.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-templates-constexpr/chmin-ok.cpp)（GitHub）
+{ .kp-code-src }
+
 もう 1 つは、2 つ目の引数を `type_identity_t<T>`（C++20）で包み、そこからは推論させない形である。`T` は `a` だけから決まり、`b` はその型に直される。
 
 ```cpp
 --8<-- "cpp-templates-constexpr/chmin-ok.cpp:identity"
 ```
+
+完全なプログラム：[`chmin-ok.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-templates-constexpr/chmin-ok.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：`type_identity_t` は C++20。それ以外は C++98 から。g++-13・g++-15 で使える
 - **落とし穴**：2 つの型引数を取る形では、`a = b` で `b` が `a` の型に黙って直される。`int` の変数 `a` へ、`int` の範囲を超える `long long` を入れると、上位のビットが落ちる。手元では、`-Wall -Wextra` でも警告が出なかった（`-Wconversion` を付けると出た）。`chmin` に渡す変数は、入れうる値の入る型にしておく
@@ -113,6 +128,9 @@ note:   deduced conflicting types for parameter 'const T' ('long long int' and '
 ```cpp
 --8<-- "cpp-templates-constexpr/chmin-narrow.cpp:core"
 ```
+
+完全なプログラム：[`chmin-narrow.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-templates-constexpr/chmin-narrow.cpp)（GitHub）
+{ .kp-code-src }
 
 ## 型を明示して呼ぶ（max に long long を指定する） {#explicit-type}
 
@@ -122,11 +140,17 @@ note:   deduced conflicting types for parameter 'const T' ('long long int' and '
 --8<-- "cpp-templates-constexpr/max-ng.cpp:core"
 ```
 
+完全なプログラム：[`max-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-templates-constexpr/max-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 関数名の後に `<型>` を書くと、型推論をせずにその型を使う。`T` が決まっているので、`int` の引数はその型に直されて通る。
 
 ```cpp
 --8<-- "cpp-templates-constexpr/max-ok.cpp:core"
 ```
+
+完全なプログラム：[`max-ok.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-templates-constexpr/max-ok.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：C++98 から。3 個以上を `{}` で渡す `min({…})` は C++11。g++-13・g++-15 で使える
 - **落とし穴**：`min({a, 3, b})` のように `{}` で渡すときも、中身の型をそろえる。`a` が `long long` なら `3LL` と書く
@@ -144,6 +168,9 @@ note:   deduced conflicting types for parameter 'const T' ('long long int' and '
 --8<-- "cpp-templates-constexpr/abbrev.cpp:call"
 ```
 
+完全なプログラム：[`abbrev.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-templates-constexpr/abbrev.cpp)（GitHub）
+{ .kp-code-src }
+
 `add(x, 1)` が通るのは、`a` と `b` の型が別々に決まるからである。[型推論の失敗](#deduction-failure)の 2 つの型引数を取る形と同じことが、短く書ける。戻り値の型の `auto` は、`return` の式から決まる（`add(1, 2.5)` は `double`）。ラムダ式の `[](auto x) { … }`（C++14）も、同じ考え方で型ごとに作られる（[ラムダ式](../cpp/cpp-lambda.md)）。
 
 - **版**：C++20。g++-13・g++-15 で使える。`-std=gnu++17` でも GCC は通す。ただし `use of 'auto' in parameter declaration only available with '-std=c++20' or '-fconcepts'` という警告が出る。これは GNU の拡張で、`-std=c++17 -pedantic-errors` ではエラーになる
@@ -157,11 +184,17 @@ note:   deduced conflicting types for parameter 'const T' ('long long int' and '
 --8<-- "cpp-templates-constexpr/concepts.cpp:core"
 ```
 
+完全なプログラム：[`concepts.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-templates-constexpr/concepts.cpp)（GitHub）
+{ .kp-code-src }
+
 条件を満たさない型で呼ぶと、関数の中身を調べる前の段階でコンパイルエラーになる。
 
 ```cpp
 --8<-- "cpp-templates-constexpr/concepts-ng.cpp:core"
 ```
+
+完全なプログラム：[`concepts-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-templates-constexpr/concepts-ng.cpp)（GitHub）
+{ .kp-code-src }
 
 エラーは `no matching function for call to 'floor_div(double, double)'` の後に `constraints not satisfied` と出る（g++-13・g++-15 で同じ）。エラーは呼んだ行に出て、どの条件を満たさないかが示される。条件がないと、エラーは関数の中の `%` を使った行に出る。この短い例なら読めるが、ライブラリの関数なら深いところの行になり、どこで誤った型を渡したかが分かりにくい。
 
@@ -178,6 +211,9 @@ note:   deduced conflicting types for parameter 'const T' ('long long int' and '
 --8<-- "cpp-templates-constexpr/constexpr.cpp:core"
 ```
 
+完全なプログラム：[`constexpr.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-templates-constexpr/constexpr.cpp)（GitHub）
+{ .kp-code-src }
+
 `TEN` はラムダ式ではなく、ラムダが返した `array<long long, 19>` である。`static_assert` で値を確かめているので、表を作る式を書き間違えるとコンパイルが通らない。
 
 - **版**：C++11 から。ループや変数の書き換えを含む `constexpr` 関数は C++14、ラムダ式の `constexpr` は C++17。g++-13・g++-15 で使える
@@ -187,11 +223,17 @@ note:   deduced conflicting types for parameter 'const T' ('long long int' and '
 --8<-- "cpp-templates-constexpr/constexpr-vector-ng.cpp:core"
 ```
 
+完全なプログラム：[`constexpr-vector-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-templates-constexpr/constexpr-vector-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 - **落とし穴 2**：大きな表はコンパイル時に作れない。GCC は、定数式の中の 1 つのループを 262144 回（$2^{18}$）まで、計算の手数を 33554432 回（$2^{25}$）までに制限している。$10^6$ までの篩をコンパイル時に作ろうとすると、`'constexpr' loop iteration count exceeds limit of 262144` で止まる（g++-13・g++-15 で同じ）。制限の内側でも遅く、手元では $2 \times 10^5$ までの篩のコンパイルに g++-15 で約 10 秒、g++-13 で約 14 秒かかった。$10^5$ を超える表は、`main` の中で実行時に作る
 
 ```cpp
 --8<-- "cpp-templates-constexpr/constexpr-limit-ng.cpp:core"
 ```
+
+完全なプログラム：[`constexpr-limit-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-templates-constexpr/constexpr-limit-ng.cpp)（GitHub）
+{ .kp-code-src }
 
 ## static_assert と if constexpr（if constexpr は C++17） {#static-assert}
 
@@ -201,17 +243,26 @@ note:   deduced conflicting types for parameter 'const T' ('long long int' and '
 --8<-- "cpp-templates-constexpr/if-constexpr.cpp:assert"
 ```
 
+完全なプログラム：[`if-constexpr.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-templates-constexpr/if-constexpr.cpp)（GitHub）
+{ .kp-code-src }
+
 `if constexpr (条件)` は、条件をコンパイル時に判定する。関数テンプレートを型ごとに作るとき、選ばれなかった側の枝は作らない。関数テンプレートの中で、型によって書き方を変えるときに使う。次の `print` は、数なら 1 つ出し、それ以外なら範囲として要素を並べる。
 
 ```cpp
 --8<-- "cpp-templates-constexpr/if-constexpr.cpp:core"
 ```
 
+完全なプログラム：[`if-constexpr.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-templates-constexpr/if-constexpr.cpp)（GitHub）
+{ .kp-code-src }
+
 普通の `if` にすると、`print(3)` でコンパイルエラーになる。普通の `if` は実行時に枝を選ぶので、`T = int` のときも両方の枝がコンパイルされ、`int` を範囲 for で回す行が通らないからである。エラーは g++-13・g++-15 とも `'begin' was not declared in this scope` と出る。
 
 ```cpp
 --8<-- "cpp-templates-constexpr/if-plain-ng.cpp:core"
 ```
+
+完全なプログラム：[`if-plain-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-templates-constexpr/if-plain-ng.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：`static_assert` は C++11、メッセージの省略と `if constexpr` は C++17。g++-13・g++-15 で使える
 - **落とし穴**：`if constexpr` で捨てた枝がコンパイルされないのは、関数テンプレートの中で、枝の中身が型引数（`T` や `x`）に依存しているときだけである。テンプレートでない普通の関数の中や、`T` に関係しない誤り（たとえば `int y` を範囲 for で回す行）は、捨てた枝でもエラーになる
@@ -224,6 +275,9 @@ note:   deduced conflicting types for parameter 'const T' ('long long int' and '
 --8<-- "cpp-templates-constexpr/fold.cpp:core"
 ```
 
+完全なプログラム：[`fold.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-templates-constexpr/fold.cpp)（GitHub）
+{ .kp-code-src }
+
 `((cerr << xs << ' '), ...)` は、`xs` の各要素について `(cerr << x << ' ')` を作り、カンマ演算子でつないだ式に展開される。`debug(n, m, s)` なら `(cerr << n << ' '), (cerr << m << ' '), (cerr << s << ' ')` となり、左から順に出る。引数が 0 個でも通る（カンマの畳み込みは空なら何もしない）。
 
 足し算などの演算子でも畳み込める。`(xs + ... + 0)` は全部の和で、最後の `0` は引数が 0 個のときの値である。
@@ -232,12 +286,18 @@ note:   deduced conflicting types for parameter 'const T' ('long long int' and '
 --8<-- "cpp-templates-constexpr/fold.cpp:sum"
 ```
 
+完全なプログラム：[`fold.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-templates-constexpr/fold.cpp)（GitHub）
+{ .kp-code-src }
+
 - **版**：可変長テンプレートは C++11、畳み込み式は C++17。g++-13・g++-15 で使える
 - **落とし穴 1**：`(cout << ... << xs)` と書くと、区切りなしで続けて出る。`1, 23, "ab"` が `123ab` になり、数の切れ目が分からない。区切りを入れるならカンマの畳み込みを使う
 
 ```cpp
 --8<-- "cpp-templates-constexpr/fold-nosep.cpp:core"
 ```
+
+完全なプログラム：[`fold-nosep.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-templates-constexpr/fold-nosep.cpp)（GitHub）
+{ .kp-code-src }
 
 - **落とし穴 2**：`cerr` への出力は、AtCoder では採点されないが、時間はかかる。ループの中で何万回も呼ぶと TLE の原因になる。提出前に消すか、`#ifdef LOCAL` で手元だけ有効にする（[マクロと雛形](../cpp/cpp-macros-template-file.md)）
 
@@ -258,6 +318,9 @@ note:   deduced conflicting types for parameter 'const T' ('long long int' and '
 --8<-- "cpp-templates-constexpr/attributes.cpp:body"
 ```
 
+完全なプログラム：[`attributes.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-templates-constexpr/attributes.cpp)（GitHub）
+{ .kp-code-src }
+
 `[[assume(g >= 0)]]` は、入力の値が 0 以上だから書ける。負の値があると `gcd_ll` は負の数を返しうる（`%` の結果は割られる数の符号になる）ので、前提が本当に成り立つときだけ書く。
 
 `[[nodiscard]]` の関数の戻り値を捨てると、g++-13・g++-15 とも `-Wall` なしで次の警告が出た。
@@ -265,6 +328,9 @@ note:   deduced conflicting types for parameter 'const T' ('long long int' and '
 ```cpp
 --8<-- "cpp-templates-constexpr/nodiscard-warn.cpp:core"
 ```
+
+完全なプログラム：[`nodiscard-warn.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-templates-constexpr/nodiscard-warn.cpp)（GitHub）
+{ .kp-code-src }
 
 ```text
 warning: ignoring return value of 'long long int gcd_ll(long long int, long long int)', declared with attribute 'nodiscard' [-Wunused-result]

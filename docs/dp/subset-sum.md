@@ -69,6 +69,9 @@ $t - a_i < 0$ の項はないものとして扱う。最大の形は、和をち
 --8<-- "subset-sum/count.cpp:core"
 ```
 
+完全なプログラム：[`count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/subset-sum/count.cpp)（GitHub）
+{ .kp-code-src }
+
 可否と数え上げを別の配列にしているのは、数え上げを mod で持つと、選び方があっても値が 0 になることがあるからである（[落とし穴](#pitfalls)）。
 
 ## 典型の言い換え（2 グループに分ける・± の和・x と y が独立・平均） {#reformulations}

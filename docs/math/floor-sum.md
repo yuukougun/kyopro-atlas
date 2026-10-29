@@ -139,6 +139,9 @@ loop:
 --8<-- "floor-sum/floor-sum.cpp:core"
 ```
 
+完全なプログラム：[`floor-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/floor-sum/floor-sum.cpp)（GitHub）
+{ .kp-code-src }
+
 自作のライブラリにするときの要点は次のとおり。
 
 - **型は `unsigned long long`**。答えは $n^2 a / m$ 程度になりうるので、ACL と同じく「あふれたら $2^{64}$ で割った余り」と決めておく。符号付きのあふれは[未定義動作](../cpp/cpp-integer-overflow.md)なので、符号なしで計算する
@@ -191,6 +194,9 @@ $$
 ```cpp
 --8<-- "floor-sum/acl-usage.cpp:core"
 ```
+
+完全なプログラム：[`acl-usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/floor-sum/acl-usage.cpp)（GitHub）
+{ .kp-code-src }
 
 ## 例題 {#examples}
 

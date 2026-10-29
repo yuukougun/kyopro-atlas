@@ -93,6 +93,9 @@ $h$ の更新で $\mathrm{dist}[t]$ を上限にするのは、$t$ より遠い�
     --8<-- "min-cost-flow/primal-dual.cpp:core"
     ```
 
+    完全なプログラム：[`primal-dual.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/min-cost-flow/primal-dual.cpp)（GitHub）
+    { .kp-code-src }
+
 ## コストは 0 以上（最大化は「定数 − 利得」に直す） {#nonnegative-cost}
 
 ACL の `mcf_graph` は、辺のコストが 0 以上であることを求める（最初のポテンシャルを 0 で始めるため）。一方、問題の多くは「選んだものの価値の和を最大にする」形で、そのままではコストが負になる。そこで、利得 $a$ の辺のコストを $B - a$（$B$ は利得の最大以上の定数）にする。
@@ -152,6 +155,9 @@ ACL の `slope` は折れ線の頂点だけを返し、同じ直線上にある�
 ```cpp
 --8<-- "min-cost-flow/slope.cpp:core"
 ```
+
+完全なプログラム：[`slope.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/min-cost-flow/slope.cpp)（GitHub）
+{ .kp-code-src }
 
 - 流量が決まっている問題で `flow(s, t, limit)` を使うときは、返った流量が `limit` に届いたかを確かめる。届かなければ、その流量は流せない（条件を満たす選び方がない）。
 - 選んだ組を出力するときは、`g.edges()` の中で `flow` が正の辺を読む。`add_edge` の返り値を覚えておけば `g.get_edge(i)` でも読める。

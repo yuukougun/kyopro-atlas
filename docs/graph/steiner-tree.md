@@ -98,11 +98,14 @@ for S = 1 .. 2^K - 1:
 
 2 種類の遷移を合わせて、全体は $O(3^K N + 2^K (N + M) \log N)$ である。指定頂点が 10 個、$N = 4000$、$M = 8000$ なら、前半は $3^{10} \times 4000 \approx 2.4 \times 10^8$、後半は $2^{10} \times 12000 \times 12 \approx 1.5 \times 10^8$ ほどの回数になる。前半のループは単純な足し算と比較なので、制限時間に収まる見当である。
 
-C++ では次のように書く（完全なプログラムは `snippets/steiner-tree/steiner.cpp`）。`by_mask` と `by_edge` は、値がどの遷移から来たかを記録する復元用の配列である。
+C++ では次のように書く（完全なプログラムは [`snippets/steiner-tree/steiner.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/steiner-tree/steiner.cpp)）。`by_mask` と `by_edge` は、値がどの遷移から来たかを記録する復元用の配列である。
 
 ```cpp
 --8<-- "steiner-tree/steiner.cpp:core"
 ```
+
+完全なプログラム：[`steiner.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/steiner-tree/steiner.cpp)（GitHub）
+{ .kp-code-src }
 
 ## 木の上なら易しい（木の章の「指定頂点を結ぶ最小の部分木」） {#on-tree}
 
@@ -115,7 +118,7 @@ C++ では次のように書く（完全なプログラムは `snippets/steiner-
 ACL に最小シュタイナー木はない。自作するときの要点は次のとおりである。
 
 - **DP の表の大きさ**：$2^K \times N$ 個の値を持つ。$K = 12$、$N = 10^5$ なら $4 \times 10^8$ 個で、`long long` で約 3.3 GB になり、メモリ制限（1024 MiB など）に収まらない。$K$ と $N$ の両方の上限からメモリを見積もる
-- **$\infty$ の足し算**：分ける遷移で $\infty + \infty$ を作らないよう、どちらかが $\infty$ なら飛ばすか、$\infty$ を上限の 4 分の 1 程度にする
+- **$\infty$ の足し算**：分ける遷移で $\infty + \infty$ を作らないよう、どちらかが $\infty$ なら飛ばすか、$\infty$ を `1LL << 60` のように足してもあふれない値にする（[INF の決め方](../cpp/cpp-types-literals.md#inf)）
 - **答えの頂点**：答えは $\mathrm{dp}[\text{全体}][t_0]$ で、指定されていない頂点で最小を取る必要はない。$K = 1$ なら答えは 0 になる
 - **辺の集合の復元**：各 $\mathrm{dp}[S][v]$ について、分ける遷移なら $T$ を、辺の遷移なら辺の番号を記録する。$\mathrm{dp}[\text{全体}][t_0]$ から記録を再帰でたどって辺を集める。重みが正なら同じ辺は 2 回出ないが、重み 0 の辺は 2 つの枝で重なることがあるので、使った辺に印を付けて重複を除く
 - **密グラフ**：辺が $N^2$ 本近いなら、優先度付きキューより配列のダイクストラ法の方が速い
@@ -126,7 +129,10 @@ ACL に最小シュタイナー木はない。自作するときの要点は次�
 --8<-- "steiner-tree/steiner.cpp:restore"
 ```
 
-Library Checker の Minimum Steiner Tree（minimum_steiner_tree）が、この DP をそのまま確かめる問題である。制約は $N \le 100$、$M \le 1000$、$K \le 12$、辺の重みは $1$ 以上 $10^9$ 以下で、重みの和に加えて使う辺の番号も出力する（2026-10-22 に問題の設定ファイルで確かめた）。自作したら、小さいグラフで辺の部分集合をすべて試す方法と比べる。`snippets/steiner-tree/steiner.cpp` の `main` はこの比べ方をしている。
+完全なプログラム：[`steiner.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/steiner-tree/steiner.cpp)（GitHub）
+{ .kp-code-src }
+
+Library Checker の Minimum Steiner Tree（minimum_steiner_tree）が、この DP をそのまま確かめる問題である。制約は $N \le 100$、$M \le 1000$、$K \le 12$、辺の重みは $1$ 以上 $10^9$ 以下で、重みの和に加えて使う辺の番号も出力する（2026-10-22 に問題の設定ファイルで確かめた）。自作したら、小さいグラフで辺の部分集合をすべて試す方法と比べる。[`snippets/steiner-tree/steiner.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/steiner-tree/steiner.cpp) の `main` はこの比べ方をしている。
 
 ## 学ぶための資料 {#resources}
 

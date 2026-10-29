@@ -17,6 +17,7 @@
 | `gen_site.py` | front matter・本文の問題の一覧・台帳・最近の ABC から生成物を作る。`--check` で鮮度だけを見る。試験は `python3 -m unittest discover -s tests/tools`（test_gen_site.py） | `nav.yml`・`docs/<field>/index.md`・`docs/lists/`・`docs/llms.txt`・`docs/index/`・`overrides/assets/data/graph.json`・手書きのページの目印の中 |
 | `check_pages.py` | ページの検査（front matter の schema・id・参照・循環・レベル・問題の一覧と台帳・囲みの外の問題リンク・```cpp・要点の囲み・draft 以降の節の anchor と別名・本文のリンク・描画の崩れ） | なし |
 | `fix_problems.py` | 本文の問題の一覧の各行の label・URL・difficulty を台帳から作り直す（要約は変えない）。difficulty は `（diff 1354）`、台帳で参考値（`experimental: true`）のものは `（diff 1856・参考値）`、値のないものは `（diff なし）` と書く（#5・#76。前の形の `（diff —）` も読んで直す）。`- abc300_e：要約` と書けば行を作る。`--check` は台帳の pages にあるのに本文の囲みにない問題も警告に出す | ページ（`--check` では書かない） |
+| `fix_code_links.py` | 本文に取り込んだコード片（```` ```cpp ```` の中の `--8<--`）の下に、GitHub の完全なプログラムへのリンクの行を置き、取り込む範囲に `mint` が出れば同じ行に型と modint のページへのリンクを添える。地の文の `` `snippets/<id>/<名前>` `` も同じ URL へのリンクにする（#8・#72・#62。下の節）。`--check` で差分、`--stat` で件数だけ。試験は test_fix_code_links.py | ページ（`--check` では書かない） |
 | `frequency.py` | front matter の frequency・frequency_evidence を最近の ABC（recent-abc.yaml）・台帳の古い ABC の数・前提として届くページの数から付け直す（catalog/README §5・手引き §17-7）。`--check` で差分、`--write` でその 2 行だけを書き換える。試験は `python3 -m unittest discover -s tests/tools` | ページの 2 行（`--write`） |
 | `check_snippets.py` | コード片を設定（compilers・flags・expect・cases）どおりにコンパイル・実行して確かめる | なし |
 | `render_svg.py` | 図の SVG（`docs/img/<id>/`）をヘッドレスの Chrome で幅 360px・720px の PNG にして目で確かめる。日本語のフォントがなければ WSL の Windows のフォントを足す | 一時ディレクトリ（`--out`）の PNG |
@@ -49,6 +50,7 @@ check_svg.py は、文書の順で最初の白い rect を背景とみなし、v
 ```sh
 python3 tools/check_pages.py                 # 全ページの検査（エラーがあれば終了コード 1）
 python3 tools/fix_problems.py --check        # 問題の一覧の行が台帳と合っているか（直すときは --check を外す）
+python3 tools/fix_code_links.py --check --stat  # コードの下の完全なプログラムへのリンクの行が最新か（直すときは --check を外す）
 python3 tools/check_snippets.py              # コード片（third_party/ac-library がないときは --acl ~/lib/ac-library-master）
 python3 tools/gen_site.py --check            # 生成物が最新か（書くのはメインのセッション：python3 tools/gen_site.py）
 python3 tools/check_noai.py https://…        # 新しいドメインを資料にする前に。結果は style-guide の記録へ
@@ -71,7 +73,7 @@ python3 tools/check_pages.py && python3 tools/gen_site.py --check && mkdocs buil
 
 | 誰が | すること |
 | --- | --- |
-| 執筆者 | 担当ページを書き、stage を draft にして `check_pages.py --page <id>`・`fix_problems.py --page <id>`・`check_snippets.py snippets/<id>` を通す |
+| 執筆者 | 担当ページを書き、stage を draft にして `check_pages.py --page <id>`・`fix_problems.py --page <id>`・`fix_code_links.py --page <id>`・`check_snippets.py snippets/<id>` を通す |
 | 検証役 | `check_pages.py --page <id> -v` の警告（別名が冒頭にない、complexity が null、要点の「（執筆時に書く）」など）も見る。reviewed にすると別名の欠けはエラーになる |
 | メイン | バッチの終わりに `check_pages.py`・`gen_site.py`（書く）・`gen_site.py --check`・`mkdocs build --strict` を通して commit・push |
 
@@ -109,6 +111,27 @@ python3 tools/render_pages.py DIR/site --field comb -v  # その分野だけ。�
 - 同じ要素の同じ指摘が幅・配色の違う回に出たときは 1 件にまとめて［390 ライト・390 ダーク］と添える。ページの横ずれ・別行の数式・表は px の数が文に入るので、幅が違えば別の件になる。同じ回の中の、文が同じ別の要素（見出しの行と幅が同じ表など）はまとめない。エラーがあれば終了コード 1（`--strict` なら警告でも 1）。警告は種類ごとに 3 件と件数を出し、`-v` で全件、`--json` で一覧とページごとの数を書く
 - 幅は手元のフォントで測るので、実機と数 px 違うことがある。Material がリポジトリの星の数を取る api.github.com は止め、ほかのサイトの読み込みの失敗は数えない
 - 見つけたものの直し方は手引き §8（図）・§6（記法）。図そのものの見た目は render_svg.py で確かめる
+
+## fix_code_links.py が作る行（#8・#72・#62）
+
+本文のコードは要所だけを取り込み、完全なプログラム（自前の入出力。提出用ではない）は GitHub の `snippets/` で見せる（工程11 の決定。読者向けの説明は docs/start/how-to-use.md#page-anatomy）。行は道具が作るので、手で書かない・直さない。
+
+````markdown
+```cpp
+--8<-- "binomial-precompute/binom.cpp:core"
+```
+
+完全なプログラム：[`binom.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/binomial-precompute/binom.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+````
+
+- 置く場所：閉じのフェンスの後に空行を 1 つ挟む（挟まないと、Python-Markdown がコードの塊ごと段落に入れる）。字下げはフェンスの開きに合わせるので、折りたたみ・囲み・タブ・箇条書きの中でも同じ入れ物に入る。2 行目は attr_list の class で、p 要素に `kp-code-src` が付く
+- 同じファイルを続けて取り込むとき：空行だけを挟んで続き、字下げと取り込むファイルの組が同じフェンスは 1 つの続きとみなし、最後のフェンスの下にだけ置く。地の文を挟めば、それぞれのフェンスの下に置く（節だけを読んでも、各コードの近くにリンクがある）。1 つのフェンスで同じファイルを 2 回取り込んでもリンクは 1 つ
+- mint の注記：取り込む範囲（`[start:名前]`〜`[end:名前]`・行の範囲・ファイル全体。pymdownx.snippets と同じ切り出し）に `mint` という語が出れば、ファイルの `using mint = …;` の型を書く（`atcoder::` を外す。ACL の型でなければ「ACL の」を付けない）。modint のページ自身には付けない。型が読めない・2 通りあるときは「直せない」に出し、注記を付けない
+- 作り直し：「完全なプログラム：」で始まり次の行が `{ .kp-code-src }` の段落は道具のものとみなし、毎回外してから置き直す。ファイル名の変更・mint の有無の変化・続きになって要らなくなった行・フェンスのない行も追う
+- 見ないもの：```` ```cpp ```` 以外のフェンス（c++・cxx・cc・hpp・h は見る）、HTML のコメントの中のフェンス、`;` でエスケープした取り込み
+- 地の文の `` `snippets/<id>/<名前>` ``（行の中のコード）は `` [`snippets/<id>/<名前>`](https://github.com/…/blob/main/snippets/<id>/<名前>) `` にする（フォルダは `…/tree/main/…`）。リンクの文字の中にあるものはそのまま。見出しの中・HTML のコメントのある行・ないファイルは直さず「直せない」に出す
+- 試すとき：`--root DIR` で DIR/docs を直す（コード片は DIR/snippets、なければリポジトリの snippets/。`--snippets` で変えられる）
 
 ## gen_site.py が書く手書きのページの生成部分
 

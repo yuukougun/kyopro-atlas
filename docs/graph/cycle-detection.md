@@ -56,6 +56,9 @@ updated: 2026-10-22
 --8<-- "cycle-detection/undirected.cpp:core"
 ```
 
+完全なプログラム：[`undirected.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cycle-detection/undirected.cpp)（GitHub）
+{ .kp-code-src }
+
 [自己ループ](../guide/glossary.md#self-loop) $(v, v)$ はそれ自体が長さ 1 の閉路である。上のコードでは自分自身が探索中なので、そのまま閉路として見つかる。Union-Find でも $v$ と $v$ は同じ成分なので閉路として数えられる。
 
 ## 有向グラフ：3 色の DFS（探索中の頂点への辺だけが閉路） {#directed}
@@ -75,6 +78,9 @@ updated: 2026-10-22
 ```cpp
 --8<-- "cycle-detection/directed.cpp:core"
 ```
+
+完全なプログラム：[`directed.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cycle-detection/directed.cpp)（GitHub）
+{ .kp-code-src }
 
 すべての頂点を始点に試すのは、頂点 0 から届かない所に閉路があるかもしれないからである。各頂点は 1 回だけ探索中になり、各辺は 1 回だけ調べるので $O(N + M)$ である。
 

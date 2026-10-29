@@ -5,7 +5,7 @@
 using namespace std;
 
 // --8<-- [start:core]
-const long long INF = LLONG_MAX / 4;  // INF + c でもあふれない大きさ
+const long long INF = 1LL << 60;  // INF + INF でもあふれない大きさ
 
 struct Constraint {
     int u, v;

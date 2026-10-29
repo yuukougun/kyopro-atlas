@@ -58,6 +58,9 @@ updated: 2026-10-29
 --8<-- "grid-graph/grid-bfs.cpp:core"
 ```
 
+完全なプログラム：[`grid-bfs.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/grid-graph/grid-bfs.cpp)（GitHub）
+{ .kp-code-src }
+
 - **隣接リストを作らない**：辺は配列から毎回計算できる。$4 \times 10^6$ 頂点の `vector<vector<int>>` を作ると、確保だけで時間とメモリを大きく使う
 - **計算量**：各マスはキューに 1 回だけ入り、取り出すたびに隣を 4 個（8 近傍なら 8 個）調べるので $O(HW)$ である。$H = W = 2000$ でも $4 \times 10^6 \times 4$ 回ほどの処理で済む
 - **移動の仕方を変える**：配列の中身を変えるだけで、8 近傍や桂馬跳びのような移動にも同じコードが使える。重みが 0 と 1 なら [01-BFS](../graph/zero-one-bfs.md)、一般の非負の重みなら[ダイクストラ法](../graph/dijkstra.md)に替える
@@ -88,6 +91,9 @@ updated: 2026-10-29
 ```cpp
 --8<-- "grid-graph/components-8.cpp:core"
 ```
+
+完全なプログラム：[`components-8.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/grid-graph/components-8.cpp)（GitHub）
+{ .kp-code-src }
 
 ## 止まるマス・境界のマスの数え方 {#boundary-cells}
 
@@ -149,6 +155,9 @@ updated: 2026-10-29
 ```cpp
 --8<-- "grid-graph/obstacle-dual.cpp:core"
 ```
+
+完全なプログラム：[`obstacle-dual.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/grid-graph/obstacle-dual.cpp)（GitHub）
+{ .kp-code-src }
 
 - **端の扱い**：$H = 1$ のときは、どの障害物も上端と下端の両方に接するので、障害物が 1 つでもあれば行けない。式を変えずにこの場合も正しく扱える
 - **移動と連結の近傍は入れ替わる**：移動が 8 近傍なら、ふさぐ壁は斜めの隙間を抜けられるので、障害物は 4 近傍でつないで判定する

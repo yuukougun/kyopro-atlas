@@ -76,6 +76,9 @@ $g$ の和の $m$ は先頭の部分木の終わりで、$m = r$ なら区間全
 --8<-- "interval-dp-advanced/preorder-trees.cpp:core"
 ```
 
+完全なプログラム：[`preorder-trees.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/interval-dp-advanced/preorder-trees.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 **応用の型**：
 
 - **括弧列と森**：行きがけ順で「入る」を `(`、「出る」を `)` と書くと、森は正しい括弧列と一対一に対応する。部分木は対応する括弧の組で囲まれた区間になる。上の $f$ と $g$ の分け方は、括弧列を「左端の `(` とその相手で閉じた塊」と「残り」に分ける形で、[左端の相手で分ける型](../dp/interval-dp.md#pair-with-left-end)と同じである。「行きがけ順」「括弧列」「区間の入れ子」のどれで書かれていても、同じ DP で数えられる
@@ -122,6 +125,9 @@ mex は行き先の数以下なので、手が $N$ 個なら値は $N$ 以下に
 ```cpp
 --8<-- "interval-dp-advanced/visited-range.cpp:core"
 ```
+
+完全なプログラム：[`visited-range.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/interval-dp-advanced/visited-range.cpp)（GitHub）
+{ .kp-code-src }
 
 家が座標 $-1$ と $2$ にあるとき、先に $-1$ へ行くと時刻は $1$ と $1 + 3 = 4$ で和は $5$、先に $2$ へ行くと $2$ と $5$ で和は $7$ になる。DP でも、原点から $-1$ へ歩く 1 の間は 2 軒が待つので $1 \times 2$、$-1$ から $2$ へ歩く 3 の間は 1 軒が待つので $3 \times 1$ で、和は $5$ になる。
 

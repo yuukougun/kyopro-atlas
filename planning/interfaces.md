@@ -2,7 +2,7 @@
 
 工程6（土台作り）で、サイト・生成スクリプト・検査・CI・執筆の手引きを別々の担当が作るので、その間の約束をここに決める。上位の決定は設計書（[design.md](design.md)）と [design-review.md](design-review.md)。この文書と食い違ったら、この文書を直してから作る。
 
-- 版：2026-10-21 初版。2026-10-29 ページの部品を足した（§2 の related の表示、§7 の段階と更新日・誤りの報告・関連・節のレベルの印。Issue #9・#10・#54・#56）
+- 版：2026-10-21 初版。2026-10-29 ページの部品を足した（§2 の related・verify の表示、§7 の段階と更新日・誤りの報告・関連・節のレベルの印・自作の確認・コードの下の行。Issue #8・#9・#10・#53・#54・#56・#62）
 
 ## 1. ファイルの置き場所と URL
 
@@ -48,7 +48,7 @@ complexity: null                       # 本文を書くときに入れる（骨
 signs:
   - {type: phrase, text: 区間に一括で加算・代入し、区間の和や最小値を何度も答える}
 acl: [lazy_segtree]
-verify: [range_affine_range_sum]
+verify: [range_affine_range_sum]       # Library Checker の問題名。ページ下部の「自作の確認」に出る（§7）
 frequency: A                           # technique・thinking・overview だけ
 frequency_evidence: "recent 3（…）"
 sections:                              # 上位の帯の節の扱いと、アンカーの一覧
@@ -66,6 +66,7 @@ atcoder: null                          # cpp だけ（true / false）
 - 本文の見出しには、sections の anchor を `## 区間の長さを S に持たせる {#size-in-node}` の形で付ける。stage が draft 以降なら、sections の全 anchor が本文にあることを検査する
 - 骨格（stub）のページの本文は、冒頭の要点の囲みだけ（§4）
 - related は、知識マップのほかに、ページの下の「関連」の欄に書いた順で出る（§7）。書いた順が表示の順になるので、近いものから書く。`id#anchor` は「ページの題名 › 節の題」で節へリンクする（節の題は相手の sections の title。相手が stub の間は、節ではなくページへリンクする）
+- verify（Library Checker の問題名）は、ページ下部の「自作の確認」の行に judge.yosupo.jp の問題へのリンクとして出る（§7）。発展の概要では、本文にリンクのある問題を出さない
 - sections の level は、見出しと目次の項目のレベルの印と、「理解した」のチェック欄になる（§7）。見出しに色の印を手で書かない
 - stage と updated は、ページの最後の行に出る（§7。stage の表示名は stub＝準備中・draft＝下書き・reviewed＝検証済み・done＝完成）
 
@@ -156,6 +157,8 @@ atcoder: null                          # cpp だけ（true / false）
 | 「理解した」のチェック | テンプレートがページ×レベルのチェック欄の HTML を出し、`progress.js` が localStorage と結ぶ。チェック欄（`label.kp-check`）はどれも（ページのレベルの欄も）`span.kp-understood__item` で包む。上の帯の節の欄（「青の節」など）にだけ、横にその帯の最初の節（sections の順）へ移るリンク（`a.kp-check__jump`。矢印は CSS で、上では↓・下では↑）を置く。準備中のページは本文に節の見出しがないので置かない |
 | 節のレベルの印 | sections に level のある節の見出しと目次の項目に、テンプレートが `span.kp-mini.kp-lv-<色>.kp-sec-lv` を入れる。見出しは本文の HTML の `<a class="headerlink" href="#<anchor>"` の前（toc の permalink が前提）、目次は `site_nav` ブロックの HTML の `<a href="#<anchor>" class="md-nav__link">` の直後（CSS の order で題の後ろに出す）。どちらも文字列の置き換えで、JS を使わない（HTML に書かれるので instant navigation でも出る。目次の部分テンプレートは上書きしない） |
 | 前提・次に読む・関連 | テンプレートが `nav.pages` の各ページの meta を引いて出す（次に読むは同じレベルと1つ上を優先して8件まで。残りは知識マップの焦点の表示へのリンク）。関連は related を書いた順に20件まで（超えた分は知識マップの焦点の表示へのリンク）。`id#anchor` は「ページの題名 › 節の題」で、レベルの印は節の level（なければページの level）。相手のページが stub なら、本文に節の見出しがないので、節ではなくページへのリンクにする（印はページの level）。前提・出した次に読む・関連にすでに出たページは、関連に重ねて出さない（節への関連は出す） |
+| 自作の確認 | テンプレートが front matter の `verify` から、関連の欄の後（知識マップへのリンクの前）に `p.kp-links__verify` の 1 行「自作の確認：Library Checker の <問題名>、…（確かめ方）」を出す。問題名は `https://judge.yosupo.jp/problem/<名前>`、「確かめ方」は library-design の #verify へのリンク。type が overview のページでは、本文の HTML に `judge.yosupo.jp/problem/<名前>"` がある問題を出さない（本文の #library に書く決まり。手引き §13-10・§16-4）。出す問題がなければ行もない（工程11、#53） |
+| コードの下の行 | テンプレートでも JS でもなく、`tools/fix_code_links.py` が本文に書く。取り込みのフェンス（```` ```cpp ````）の後に空行を挟んで、``完全なプログラム：[`<名前>`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/<id>/<名前>)（GitHub）`` と `{ .kp-code-src }` の 2 行の段落（attr_list で `p.kp-code-src`。見た目は kp.css）を置く。範囲に `mint` が出れば、同じ行に型と modint のページへのリンクを添える。同じファイルのフェンスが空行だけを挟んで続くときは最後の下だけに置く。地の文の `` `snippets/<id>/<名前>` `` も同じ URL へのリンクにする。check.yml が `--check` で確かめる（手引き §9。工程11、#8・#62・#72） |
 | 段階・更新日・誤りの報告 | テンプレートがページの最後の行（`div.kp-page-info`）に出す。段階と更新日は id のあるページだけ（段階は「この教材の使い方」の #stub へのリンク）。「このページの誤りを報告する」はどのページにも出し、GitHub の新しい Issue を `?template=page-error.yml&title=誤りの報告：<題名>&page-title=<題名>&page-url=<URL>&page-updated=<updated>` で開く（ひな形は `.github/ISSUE_TEMPLATE/page-error.yml`。項目の id が引数の名前。題名は front matter の title、URL は page.canonical_url）。labels などの引数は権限のない人には 404 になるので付けない |
 | 解いたチェック | `progress.js` が `.kp-problems` の各行の先頭にチェック欄を付ける |
 | 知識マップ | `docs/guide/knowledge-map.md` の `<div id="kp-map"></div>`。`map.js` が graph.json を読み、既定は分野ごとの表示、`?focus=<id>` で祖先と子孫だけ、全体は分野を頂点にした図。理解したページを塗る |

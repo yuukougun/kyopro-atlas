@@ -63,6 +63,9 @@ updated: 2026-10-22
 --8<-- "spf-sieve/spf.cpp:core"
 ```
 
+完全なプログラム：[`spf.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/spf-sieve/spf.cpp)（GitHub）
+{ .kp-code-src }
+
 表の大きさは「値の上限 + 1」である。要素の個数 $N$ ではない。表に載るのは $V$ 以下の数だけなので、$V$ を超える数（たとえば $10^9$）は分解できない。その場合は[試し割り](../math/prime-factorization.md#which-method)に戻る。
 
 ??? question "確認問題：書き始めを 2p にしたら"
@@ -115,6 +118,9 @@ $N$ 個の数 $A_1, \dots, A_N$（どれも $V$ 以下）を分解する全体�
 ```cpp
 --8<-- "spf-sieve/linear-sieve.cpp:core"
 ```
+
+完全なプログラム：[`linear-sieve.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/spf-sieve/linear-sieve.cpp)（GitHub）
+{ .kp-code-src }
 
 線形篩でなければ間に合わない ABC の問題は、見つかっていない。$V = 10^7$ でもエラトステネスの篩の $\log \log V$ は 3 程度で、実際の速さはほぼ変わらない。φ・μ の表も、エラトステネスの篩の変形（素数 $p$ の倍数ごとに $\varphi$ に $(1 - 1/p)$ を掛ける）で作れる。線形篩は、表を 1 回の走査でまとめて作りたいときの選択肢と考えればよい。
 

@@ -75,6 +75,9 @@ $$
 --8<-- "prefix-sum/range-sum.cpp:core"
 ```
 
+完全なプログラム：[`range-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/prefix-sum/range-sum.cpp)（GitHub）
+{ .kp-code-src }
+
 このコードは $Q$ 個の区間の和に答える。前計算が $O(N)$、各クエリが $O(1)$ なので、全体は $O(N + Q)$ である。
 
 累積和の応用は、「区間の量を、両端の境界での値の差に直す」という見方にまとまる。たとえば「区間に含まれる条件を満たす要素の個数」なら、条件を満たす位置を 1、それ以外を 0 にした列の累積和を取ればよい。数える対象が 2 文字にまたがる（"AC" の出現など）ときは、どの位置に 1 を置くかを先に決める（[例題](#abc122_c)）。
@@ -100,6 +103,9 @@ $$
 ```cpp
 --8<-- "prefix-sum/exclude-one.cpp:core"
 ```
+
+完全なプログラム：[`exclude-one.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/prefix-sum/exclude-one.cpp)（GitHub）
+{ .kp-code-src }
 
 前計算は左右それぞれ $O(N)$ 回の gcd で、各 $i$ の値は gcd 1 回で求まる（gcd 1 回は値の上限を $V$ として $O(\log V)$）。素朴に「$a_i$ を除いて全体を計算し直す」と $O(N^2)$ 回の演算になる。
 

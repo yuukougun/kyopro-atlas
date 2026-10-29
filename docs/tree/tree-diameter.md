@@ -99,7 +99,10 @@ $$
 --8<-- "tree-diameter/double-sweep.cpp:core"
 ```
 
-探索 1 回は各辺を 2 回ずつ見るだけなので $O(N)$ で、それを 2〜3 回するので全体も $O(N)$ である。Library Checker の Tree Diameter は、直径の長さと頂点列を出力させるので、自作の確かめに使える。
+完全なプログラム：[`double-sweep.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-diameter/double-sweep.cpp)（GitHub）
+{ .kp-code-src }
+
+探索 1 回は各辺を 2 回ずつ見るだけなので $O(N)$ で、それを 2〜3 回するので全体も $O(N)$ である。Library Checker の [Tree Diameter](https://judge.yosupo.jp/problem/tree_diameter) は、直径の長さと頂点列を出力させるので、自作の確かめに使える。
 
 ## 各点の最遠点は直径の端点（離心数） {#eccentricity}
 

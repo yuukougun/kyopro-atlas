@@ -107,6 +107,9 @@ $y = x$ はどちらの範囲に入れても費用 0 で同じ値になるので
 --8<-- "dp-segment-tree/split-abs.cpp:core"
 ```
 
+完全なプログラム：[`split-abs.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-segment-tree/split-abs.cpp)（GitHub）
+{ .kp-code-src }
+
 遷移 1 回で取得 2 回と更新 2 回なので、市場の数を $M$ として全体 $O(N + M \log N)$ である。
 
 **なぜ 2 本に分けるのか**：1 本の木に $\mathrm{dp}[y]$ だけを載せると、$C \lvert x - y \rvert$ は $x$ が変わるたびに全部の $y$ で値が変わるので、木の中身を作り直すことになる。分けた後の $\mathrm{dp}[y] \pm C y$ は $x$ によらないので、一度書けば次の遷移でもそのまま使える。
@@ -131,6 +134,9 @@ $$
 --8<-- "dp-segment-tree/interval-cover.cpp:core"
 ```
 
+完全なプログラム：[`interval-cover.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-segment-tree/interval-cover.cpp)（GitHub）
+{ .kp-code-src }
+
 区間の数を $N$ として、ソートと遷移を合わせて $O(N \log N + L)$ である。座標が大きいときは、区間の両端点と $0$・$L$ を座標圧縮すれば $O(N \log N)$ になる。
 
 **応用の型**：同じ形は「点を順に進み、1 回で $[l, r)$ の範囲まで跳べる」最小回数・最小費用にも現れる。費用がすべて等しい（区間の数の最小）なら DP は要らず、「覆えている位置から始められる区間のうち、右端が最大のものを選ぶ」[貪欲法](../basics/greedy-basics.md)で足りる。区間の入れ子の深さを求める DP（[力試しの ABC410 G](#challenge)）では、取るのが最小ではなく最大になる。
@@ -150,6 +156,9 @@ $$
 ```cpp
 --8<-- "dp-segment-tree/window-row.cpp:core"
 ```
+
+完全なプログラム：[`window-row.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-segment-tree/window-row.cpp)（GitHub）
+{ .kp-code-src }
 
 作れない量（$-\infty$）は deque に入れない。入れると、$-\infty + V_i$ が溢れるか、作れない状態から遷移した値が残る。窓が空になる $j$ では deque も空になるので、先頭を読む前に空かを確かめる。全体は $O(NW)$ で、セグメント木で書けば $O(NW \log W)$ である。
 

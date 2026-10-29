@@ -53,6 +53,9 @@ atcoder: true
 --8<-- "cpp-string-api/substr-find.cpp:core"
 ```
 
+完全なプログラム：[`substr-find.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-string-api/substr-find.cpp)（GitHub）
+{ .kp-code-src }
+
 入力 `abababa aba` なら、`bab`・`bababa`・`0` と出て、`aba` の出現位置は 0・2・4 の 3 個になる。
 
 - **境界**：`len` が残りの文字数より長ければ、あるだけを返す（`"hello".substr(3, 100)` は `lo`）。`i == s.size()` なら空文字列で、`i > s.size()` なら `out_of_range` の例外が投げられ、捕まえなければ実行時エラー（RE）になる
@@ -62,6 +65,9 @@ atcoder: true
 ```cpp
 --8<-- "cpp-string-api/find-ng.cpp:core"
 ```
+
+完全なプログラム：[`find-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-string-api/find-ng.cpp)（GitHub）
+{ .kp-code-src }
 
 - **落とし穴 3**：`find` の計算量は規格で決まっていない。libstdc++ の実装は位置ごとに比べ直すので、最悪 $O(\lvert s \rvert \lvert t \rvert)$ になる。手元で、`a` が $2 \times 10^5$ 個の `s` から「`a` が $10^5$ 個と `b`」を探すと、1 回で 360〜470 ms かかった（g++-15・g++-13、`-O2`）。長い `t` を探す、または何度も探すなら Z-algorithm か [KMP 法](../string/kmp.md)で線形にする
 
@@ -86,6 +92,9 @@ $N = 2 \times 10^5$ ではメモリのコピーが速く 1 秒を切るが、$O(
 --8<-- "cpp-string-api/append.cpp:core"
 ```
 
+完全なプログラム：[`append.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-string-api/append.cpp)（GitHub）
+{ .kp-code-src }
+
 - **素朴に書くと**：`s = char('a' + i % 26) + s;` を $N$ 回で、全体 $O(N^2)$ になる
 - **落とし穴**：`insert`（途中に挿入）と `erase`（途中を削除）も、後ろの文字を全部ずらすので $O(\lvert s \rvert)$ である。両端に出し入れするなら `deque<char>` を使う。`s += t`（文字列を足す）は $O(\lvert t \rvert)$ で、`s = s + t` は $O(\lvert s \rvert + \lvert t \rvert)$ である
 
@@ -100,6 +109,9 @@ $N = 2 \times 10^5$ ではメモリのコピーが速く 1 秒を切るが、$O(
 --8<-- "cpp-string-api/char-arithmetic.cpp:core"
 ```
 
+完全なプログラム：[`char-arithmetic.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-string-api/char-arithmetic.cpp)（GitHub）
+{ .kp-code-src }
+
 入力 `banana 2026` なら `abn 10` と出る。
 
 - **落とし穴 1**：`char` と `int` の和は `int` になる。`cout << 'a' + i` は文字ではなく数を出す。文字として出すには `char(...)` で戻す
@@ -107,6 +119,9 @@ $N = 2 \times 10^5$ ではメモリのコピーが速く 1 秒を切るが、$O(
 ```cpp
 --8<-- "cpp-string-api/char-print.cpp:core"
 ```
+
+完全なプログラム：[`char-print.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-string-api/char-print.cpp)（GitHub）
+{ .kp-code-src }
 
 - **落とし穴 2**：英大文字は `c - 'A'` で、大文字と小文字は連続していない（`'Z'` と `'a'` の間に記号がある）。英字を 52 通りにまとめるなら `isupper(c) ? c - 'A' + 26 : c - 'a'` のように分ける
 - **使い分け**：1 文字の数字を数にするなら、`stoi(string(1, c))` ではなく `c - '0'` でよい
@@ -120,6 +135,9 @@ $N = 2 \times 10^5$ ではメモリのコピーが速く 1 秒を切るが、$O(
 --8<-- "cpp-string-api/to-string.cpp:core"
 ```
 
+完全なプログラム：[`to-string.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-string-api/to-string.cpp)（GitHub）
+{ .kp-code-src }
+
 - **落とし穴 1**：`to_string(double)` は C の `printf` の `%f` と同じ書式で、小数点以下が常に 6 桁になる。`1e-7` は `0.000000` になって値が消え、`1e20` は 21 桁の整数部で出る。小数を出力するなら `cout << fixed << setprecision(15)` か `printf` で桁を指定する（[入出力と定数倍](../cpp/cpp-io.md#float-output)）。なお C++26 では `std::format` と同じ書式へ変わる予定で、AtCoder の `-std=gnu++23` では 6 桁のままである
 - **落とし穴 2**：`stoi` は先頭の空白を飛ばし、数として読めない文字の手前で止まる（`"12ab"` は 12）。先頭から読めなければ `invalid_argument`、`int` に入らなければ `out_of_range` の例外が投げられ、捕まえなければ RE になる。$2^{31}$ 以上になりうるなら `stoll` を使う。$2^{63} - 1$（約 $9.2 \times 10^{18}$）を超える数（20 桁以上は必ず超える）は `stoll` でも入らないので、文字列のまま扱う。`unsigned long long` を返す `stoull` なら約 $1.8 \times 10^{19}$ まで読める
 
@@ -130,6 +148,9 @@ $N = 2 \times 10^5$ ではメモリのコピーが速く 1 秒を切るが、$O(
 ```cpp
 --8<-- "cpp-string-api/starts-with.cpp:core"
 ```
+
+完全なプログラム：[`starts-with.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-string-api/starts-with.cpp)（GitHub）
+{ .kp-code-src }
 
 - **素朴に書くと**：`starts_with` は `s.size() >= t.size() && s.compare(0, t.size(), t) == 0` と同じである。`contains` は `s.find(t) != string::npos` と同じである。`s.substr(0, t.size()) == t` でも書けるが、コピーが起きる
 - **版**：`starts_with`・`ends_with` は C++20、`contains` は C++23。g++-13・g++-15 とも `-std=gnu++23` ならすべて使え、AtCoder でも使える。`-std=gnu++20` では `contains` だけが `has no member named 'contains'` のコンパイルエラーになる（手元の g++-13・g++-15 で確かめた）
@@ -143,6 +164,9 @@ $N = 2 \times 10^5$ ではメモリのコピーが速く 1 秒を切るが、$O(
 --8<-- "cpp-string-api/construct-compare.cpp:core"
 ```
 
+完全なプログラム：[`construct-compare.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-string-api/construct-compare.cpp)（GitHub）
+{ .kp-code-src }
+
 - **落とし穴 1**：`string(n, c)` は個数が先である。`string('a', 3)` と逆に書くと、`'a'`（97）個の `char(3)` という意図しない文字列になる
 - **落とし穴 2**：数字の文字列の比較は数の大小にならない（`"10" < "9"` が真）。同じ桁数にそろっていれば数の大小と一致するので、長さで先に比べてから文字列で比べる
 - **落とし穴 3**：`set<string>` や `sort` で文字列を並べると、比較のたびに最悪で文字列の長さの分かかる。長さ $M$ の文字列 $N$ 個をソートすると $O(NM \log N)$ である
@@ -155,6 +179,9 @@ $N = 2 \times 10^5$ ではメモリのコピーが速く 1 秒を切るが、$O(
 --8<-- "cpp-string-api/string-view.cpp:core"
 ```
 
+完全なプログラム：[`string-view.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-string-api/string-view.cpp)（GitHub）
+{ .kp-code-src }
+
 入力 `abababc ab` なら、先頭から `ab` を 3 回取り除けるので 3 と出る。
 
 - **版**：C++17。g++-13・g++-15 と AtCoder で使える
@@ -163,6 +190,9 @@ $N = 2 \times 10^5$ ではメモリのコピーが速く 1 秒を切るが、$O(
 ```cpp
 --8<-- "cpp-string-api/string-view-ng.cpp:core"
 ```
+
+完全なプログラム：[`string-view-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-string-api/string-view-ng.cpp)（GitHub）
+{ .kp-code-src }
 
 - **落とし穴 2**：元の `string` に `+=` などで書き足すと、中身が別の場所へ移ることがあり、前に作った `string_view` は壊れる（`vector` の再確保と同じ）。`string_view` は、元を変えない間にその場で使い切る（寿命の罠の全体は[未定義動作](../cpp/cpp-undefined-behavior.md#dangling-string-view)）
 - **落とし穴 3**：`string_view` から `string` には暗黙に変わらない。`map<string, int>` のキーにするなど、`string` が要る所では `string(sv)` と書く。末尾にヌル文字がある保証もないので、C の関数（`printf("%s")` など）に渡さない
@@ -177,6 +207,9 @@ $N = 2 \times 10^5$ ではメモリのコピーが速く 1 秒を切るが、$O(
 ```cpp
 --8<-- "cpp-string-api/split.cpp:core"
 ```
+
+完全なプログラム：[`split.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-string-api/split.cpp)（GitHub）
+{ .kp-code-src }
 
 入力 `a  b `（間に空白 2 個、末尾に空白）なら、`split` は `a`・空・`b`・空の 4 個に分け、`istringstream` は `a`・`b` の 2 個を読む。
 
@@ -193,11 +226,17 @@ $N = 2 \times 10^5$ ではメモリのコピーが速く 1 秒を切るが、$O(
 --8<-- "cpp-string-api/getline-ng.cpp:core"
 ```
 
+完全なプログラム：[`getline-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-string-api/getline-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 入力が `3` の行と `hello world` の行なら、`line` は空になる。`getline(cin >> ws, line)` と書けば、`ws` が空白と改行を読み飛ばしてから 1 行を読む。
 
 ```cpp
 --8<-- "cpp-string-api/getline.cpp:core"
 ```
+
+完全なプログラム：[`getline.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-string-api/getline.cpp)（GitHub）
+{ .kp-code-src }
 
 - **落とし穴 1**：`ws` は空の行も行頭の空白も飛ばす。空の行や行頭の空白に意味があるなら、`cin.ignore()` で次の 1 文字を捨ててから `getline` を呼ぶ。これは数のすぐ後が改行であることを前提にする（行末に空白があると、空白だけが捨てられて空の行が返る）。AtCoder の入力は行末に空白がないので、この前提を満たす
 - **落とし穴 2**：手元で作った入力ファイルの改行が `\r\n`（Windows の形）だと、`getline` で読んだ行の末尾に `\r` が残る。AtCoder の入力は `\n` なので起きないが、手元の試験で比較が合わないときは疑う。入出力の全体は[入出力と定数倍](../cpp/cpp-io.md)で扱う

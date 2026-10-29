@@ -1,4 +1,5 @@
 // 自作の BIT：内部は 1-indexed、外部は 0-indexed の半開区間。線形時間の構築と BIT 上の二分探索つき
+// コンストラクタは ACL の fenwick_tree と同じ BIT()・BIT(n)（全要素 0）に、配列から線形時間で作る BIT(a) を足した
 // 入力：N Q、a_0 … a_{N-1}（非負）、続く Q 行は「0 p x」（a_p += x、x ≥ 0）か「1 l r」（[l, r) の和）か
 //       「2 w」（a_0 + … + a_r ≥ w となる最小の r。なければ N）
 #include <bits/stdc++.h>
@@ -8,7 +9,9 @@ using namespace std;
 struct BIT {
     int n;
     vector<long long> t;  // t[i]（1 ≤ i ≤ n）：区間 (i - lowbit(i), i] の和（1-indexed）
-    BIT(const vector<long long>& a) : n(a.size()), t(a.size() + 1, 0) {
+    BIT() : BIT(0) {}
+    explicit BIT(int n) : n(n), t(n + 1, 0) {}  // 全要素 0（ACL の fenwick_tree(n) と同じ）
+    explicit BIT(const vector<long long>& a) : n(a.size()), t(a.size() + 1, 0) {
         for (int i = 1; i <= n; i++) t[i] = a[i - 1];
         for (int i = 1; i <= n; i++) {  // 線形時間の構築：自分を親の箱へ足し込む
             int j = i + (i & -i);
@@ -44,7 +47,12 @@ int main() {
     cin >> n >> q;
     vector<long long> a(n);
     for (int i = 0; i < n; i++) cin >> a[i];
-    BIT bit(a);
+    BIT bit(a);  // 線形時間の構築
+    BIT slow(n);  // 全要素 0 から add を n 回呼ぶ作り方（ACL と同じ。O(N log N)）
+    for (int i = 0; i < n; i++) slow.add(i, a[i]);
+    assert(bit.t == slow.t);  // 2 つの作り方で中の配列が一致する
+    BIT empty;
+    assert(empty.n == 0 && empty.sum(0) == 0);
     for (int i = 0; i < q; i++) {
         int t;
         cin >> t;

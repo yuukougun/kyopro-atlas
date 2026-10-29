@@ -97,6 +97,9 @@ $$
 --8<-- "fractional-binary-search/average-subarray.cpp:core"
 ```
 
+完全なプログラム：[`average-subarray.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/fractional-binary-search/average-subarray.cpp)（GitHub）
+{ .kp-code-src }
+
 $r$ を 1 つ進めると、左端の候補が $S_{r-K}$ の 1 つだけ増える。左端の候補は増えるだけで減らないので、尺取り法のように左端を進めて候補を捨てる操作は要らず、最小値を 1 つ持って前の値と比べて更新すれば足りる。「区間に条件を満たす要素が $K$ 個以上」のように左端の候補の範囲が右端とともに広がる制約でも、同じように最小値を持ち続けられる（[例題の ABC469 E](#abc469_e)）。
 
 **個数が決まっているなら上位 $K$ 個**。「$N$ 個から $K$ 個選ぶ」なら、各要素の値 $a_i - x \, b_i$ を計算し、大きい順に $K$ 個取った和が 0 以上かを判定する。個数が $K$ に決まっているので、和を最大にするには値の大きい $K$ 個を取ればよい。判定 1 回はソートで $O(N \log N)$ である（`nth_element` なら $O(N)$）。
@@ -147,6 +150,9 @@ $$
 ```cpp
 --8<-- "fractional-binary-search/median-subarray.cpp:core"
 ```
+
+完全なプログラム：[`median-subarray.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/fractional-binary-search/median-subarray.cpp)（GitHub）
+{ .kp-code-src }
 
 ??? question "確認問題：最小化のとき"
     「中央値の最小値」を求めるときは、どんな判定にすればよいか。

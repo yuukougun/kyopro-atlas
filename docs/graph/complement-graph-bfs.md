@@ -83,11 +83,17 @@ $\mathrm{rest}$ を配列で持ち、残す頂点だけを新しい配列に移�
 --8<-- "complement-graph-bfs/complement-bfs.cpp:core"
 ```
 
+完全なプログラム：[`complement-bfs.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/complement-graph-bfs/complement-bfs.cpp)（GitHub）
+{ .kp-code-src }
+
 **応用の型：補グラフの連結成分**（サイン：「辺のない組が与えられ、互いに行き来できるグループに分けよ」）。$\mathrm{rest}$ をすべての BFS で共有し、$\mathrm{rest}$ が空になるまで「残っている頂点を 1 つ取り出して BFS を始める」をくり返す。1 回の BFS で取り出した頂点が 1 つの連結成分になる。$\mathrm{rest}$ を共有しているので、全体でもやはり $O(N + M)$ である。Library Checker の [Connected Components of Complement Graph](https://judge.yosupo.jp/problem/connected_components_of_complement_graph) がこの型そのもので、練習に使える。
 
 ```cpp
 --8<-- "complement-graph-bfs/components.cpp:core"
 ```
+
+完全なプログラム：[`components.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/complement-graph-bfs/components.cpp)（GitHub）
+{ .kp-code-src }
 
 ## 各頂点が 1 回しか取り出されない理由（O(N + M)） {#complexity}
 
@@ -128,6 +134,9 @@ $\mathrm{cnt}[s] = 1$ から始め、距離の小さい層から順に求める�
 ```cpp
 --8<-- "complement-graph-bfs/complement-bfs.cpp:count"
 ```
+
+完全なプログラム：[`complement-bfs.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/complement-graph-bfs/complement-bfs.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 引くのは**距離 $d - 1$ の隣だけ**である。$G$ での隣が同じ層や 2 つ以上前の層にあっても、それはもともと $T_{d-1}$ に入っていないので引かない。本数は mod で答えるのがふつうで、引き算で負にならないよう modint を使うか、`long long` なら引いた後に法を足して余りを取り直す。
 

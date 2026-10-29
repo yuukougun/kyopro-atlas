@@ -90,6 +90,9 @@ Kosaraju 法は、次の 2 回の DFS で成分を求める。
     --8<-- "scc/kosaraju.cpp:core"
     ```
 
+    完全なプログラム：[`kosaraju.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/scc/kosaraju.cpp)（GitHub）
+    { .kp-code-src }
+
     `comp[v]` は 0 から始まる成分の番号で、番号の小さい成分から大きい成分へだけ辺が向く。
 
 ### Tarjan 法（DFS を 1 回）
@@ -133,6 +136,9 @@ ACL の `scc_graph` は、強連結成分を「頂点のリストのリスト」
 --8<-- "scc/condense-dp.cpp:core"
 ```
 
+完全なプログラム：[`condense-dp.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/scc/condense-dp.cpp)（GitHub）
+{ .kp-code-src }
+
 - **順の向き**：`scc()` の順は「辺が前から後ろへ向く」順である。「行き先の値から自分の値を決める」DP は後ろの成分から、「来た元の値を配る」DP は前の成分から回す
 - **前にあっても辿り着けるとは限らない**：保証されるのは「辿り着けるなら前」だけである。番号が小さいからといって、大きい番号の成分へ辿り着けるとは限らない
 - **DAG なら頂点の並びそのもの**：閉路のないグラフでは成分が 1 頂点ずつになり、`scc()` の順がそのままトポロジカル順になる。ただし辞書順最小のトポロジカル順になるとは限らない（[トポロジカルソート](../graph/topological-sort.md)）
@@ -150,6 +156,9 @@ ACL の `scc_graph` は、強連結成分を「頂点のリストのリスト」
 ```cpp
 --8<-- "scc/on-cycle.cpp:core"
 ```
+
+完全なプログラム：[`on-cycle.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/scc/on-cycle.cpp)（GitHub）
+{ .kp-code-src }
 
 閉路に含まれる頂点が分かれば、「閉路に辿り着ける頂点」（そこから無限に動き続けられる頂点）も求まる。縮約した DAG で、自分が閉路の成分であるか、行き先に「辿り着ける」成分があれば「辿り着ける」とし、後ろの成分から決めればよい。同じ答えは、出次数 0 の頂点を逆辺で取り除いていく方法でも求まる（[トポロジカルソート](../graph/topological-sort.md)）。
 

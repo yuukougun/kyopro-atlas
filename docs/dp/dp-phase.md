@@ -68,6 +68,9 @@ updated: 2026-10-29
 --8<-- "dp-phase/kadane.cpp:core"
 ```
 
+完全なプログラム：[`kadane.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-phase/kadane.cpp)（GitHub）
+{ .kp-code-src }
+
 $f_0$ は常に 0 なので、$f_1$ の式は $\max(0, f_1) + a_i$ になり、$f_2$ は「これまでの $f_1$ の最大」になる。これが Kadane のアルゴリズムとして知られる形「位置 $i$ で終わる区間の和の最大と、そのこれまでの最大を持つ」と同じものである。Kadane の形は段階 3 つの DP を手で潰したものなので、区間の中と外の扱いが変わる問題でも、潰す前の段階の DP から考えれば同じように作れる。
 
 空の区間（和 0）を許す問題なら、段階 0 から段階 2 へ直接進む遷移を足す。答えは $\max(\mathrm{dp}[N][0], \mathrm{dp}[N][1], \mathrm{dp}[N][2])$ でもよい。Kadane の形では $\max(\text{答え}, 0)$ にあたる。
@@ -112,6 +115,9 @@ $$
 --8<-- "dp-phase/matched-prefix.cpp:core"
 ```
 
+完全なプログラム：[`matched-prefix.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-phase/matched-prefix.cpp)（GitHub）。`mint` は ACL の `modint1000000007`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 **'?' を埋めた全通りの和**。$S$ に '?' があり、埋め方すべてについての個数の総和を求めるときも、状態は同じでよい。$\mathrm{dp}[i][j]$ を「先頭 $i$ 文字の埋め方すべてについての、$T$ の先頭 $j$ 文字と一致する選び方の数の和」とする。'?' の位置では、選ばない遷移は埋め方が $k$ 通り（文字の種類の数）あるので $k$ 倍し、選ぶ遷移は '?' を $T[j]$ にする 1 通りだけなので 1 倍にする。
 
 **応用の型**。サインは「部分列として 'atcoder' がいくつ含まれるか」「'?' を埋めた全通りの、'ABC' の個数の和」。段階の数は $T$ の長さ + 1 である。部分文字列（連続）として含むかを問うなら、一致が途中で崩れたときに戻る先が要るので[照合オートマトン上の DP](../string/string-automaton-dp.md) にする。できる文字列の種類を数えるなら[部分列 DP](../dp/subsequence-dp.md#positions-or-strings) にする。
@@ -133,6 +139,9 @@ $$
 ```cpp
 --8<-- "dp-phase/flip.cpp:core"
 ```
+
+完全なプログラム：[`flip.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-phase/flip.cpp)（GitHub）
+{ .kp-code-src }
 
 **1 か所だけ変更できる**。区間の代わりに 1 つの位置だけを変えられるなら、段階は「まだ変えていない」「変えた」の 2 つで足りる（変えた位置は、段階が切り替わる位置である）。最長増加部分列で 1 か所だけ好きな値に変えてよい問題は、この形に [LIS](../dp/lis.md#variants) の求め方を組み合わせる。
 
@@ -190,6 +199,9 @@ $$
     ```cpp
     --8<-- "dp-phase/all-segments.cpp:core"
     ```
+
+    完全なプログラム：[`all-segments.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-phase/all-segments.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+    { .kp-code-src }
 
     別の数え方として、選んだ値の最も左の添字を $l$、最も右を $r$（0-indexed）とすると、それを含む区間は $(l + 1)(N - r)$ 個ある。段階を「最初の値を選ぶ前・選んだ後・最後の値を選んだ後」にし、段階を進めるときに $(l+1)$ や $(N-r)$ を掛けても同じ答えになる。この形では、1 つしか選ばないとき同じ位置で段階が 0 から 2 まで進むことに注意する。
 

@@ -59,6 +59,9 @@ updated: 2026-10-22
 --8<-- "tree-traversal/dfs-order.cpp:core"
 ```
 
+完全なプログラム：[`dfs-order.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-traversal/dfs-order.cpp)（GitHub）
+{ .kp-code-src }
+
 `in`・`pre`・`post` は、次の節で扱う行きがけ番号・行きがけ順・帰りがけ順の記録である。無向の隣接リストには親も入っているので、親を引数 `p` で渡して `c == p` を飛ばす。木では親以外の隣はすべて未訪問の子なので、`visited` の配列は要らない（[木の基本性質と表現](../tree/tree-basics.md)）。各頂点で隣を 1 回ずつ見るので、全体は隣接リストの長さの和 $2(N - 1)$ に比例し、$O(N)$ である。
 
 次の図は、7 頂点の木を頂点 1 から、隣を番号の小さい順に調べて DFS した結果である（図の頂点は問題文に合わせて 1 から番号を振る）。
@@ -105,6 +108,9 @@ DFS で頂点に入った順を行きがけ順（preorder）、頂点から出�
 --8<-- "tree-traversal/bfs-order.cpp:core"
 ```
 
+完全なプログラム：[`bfs-order.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-traversal/bfs-order.cpp)（GitHub）
+{ .kp-code-src }
+
 - **配列をキューとして使う**：`order` に頂点を追加しながら、添字 `i` で前から読む。読み終えた `order` がそのまま BFS 順になり、`queue` から取り出した順を別に記録する必要がない
 - **逆順のループは `i >= 1` まで**：`order[0]` は根で、親がない。根まで回すと `par[0] = -1` に足して範囲外を書く
 - **使える計算**：子をまとめる演算が子の順によらないものなら、帰りがけ順と BFS 順の逆は同じ結果になる。子を訪れた順そのものが要る計算（訪問順の出力や行きがけ番号）には使えず、DFS が要る
@@ -124,6 +130,9 @@ BFS 順の逆は、再帰を使わないので、パス状の木でもスタッ�
 ```cpp
 --8<-- "tree-traversal/parent-index.cpp:core"
 ```
+
+完全なプログラム：[`parent-index.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-traversal/parent-index.cpp)（GitHub）
+{ .kp-code-src }
 
 番号の順は BFS 順と同じ役割をする。番号の順に読めば深さや「親から受け継ぐ値」が求まり、番号の逆順に読めば部分木サイズや「子から集める値」が求まる。練習の ABC309 E は、番号の順に「あと何世代まで及ぶか」を子へ配るだけで解ける。
 

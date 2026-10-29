@@ -57,6 +57,9 @@ modint が自動でするのは次の 3 つである。どれも「値は常に 
 --8<-- "modint/conversion.cpp:core"
 ```
 
+完全なプログラム：[`conversion.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/modint/conversion.cpp)（GitHub）
+{ .kp-code-src }
+
 避け方は「片方を先に mint にする」ことである。`mint(a) * b` は左が mint なので、`b` も mint に直ってから掛け算が行われる。読み込んだ値を、最初から mint の変数や `vector<mint>` へ入れてしまうのも確実である。
 
 ??? question "確認問題：どれが正しい？"
@@ -84,6 +87,9 @@ ACL の modint には、法をコンパイル時に決める static_modint と�
 ```cpp
 --8<-- "modint/dynamic.cpp:core"
 ```
+
+完全なプログラム：[`dynamic.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/modint/dynamic.cpp)（GitHub）
+{ .kp-code-src }
 
 - **set_mod を忘れても動いてしまう**：`modint` の既定の法は 998244353 なので、`set_mod` を書き忘れてもコンパイルと実行は通り、答えだけが違う。入出力例の法がたまたま 998244353 だと気づけない
 - **set_mod の前に作った値**：`set_mod` より前に作った mint（グローバルの `vector<mint>` を整数で初期化したものなど）は、古い法の余りのまま残る。表は `set_mod` の後で作る
@@ -147,6 +153,9 @@ modint は、mod の値を扱う上位の手法の部品として使われる。
 ```cpp
 --8<-- "modint/self-made.cpp:core"
 ```
+
+完全なプログラム：[`self-made.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/modint/self-made.cpp)（GitHub）
+{ .kp-code-src }
 
 - **足し算・引き算は条件分岐**：$0 \le v, w < m$ なら $v + w < 2m$ なので、$m$ 以上なら 1 回引くだけでよい。`%` より速い。引き算は $v + (m - w)$ として同じ形にすると、符号なし整数のまま負にならない
 - **掛け算は 64bit**：$v \times w < m^2 < 2^{62}$ なので、`unsigned long long` に直してから掛けて余りを取る。32bit のまま掛けるとあふれる。法が $2^{32}$ を超えるなら `__int128` が要る

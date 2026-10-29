@@ -107,17 +107,23 @@ $$
 - 親の優先度は子の優先度以上である（ヒープの条件。優先度はランダムに決める）
 - 各ノードの $\mathrm{sz}$ と集約値は、保留を除いた子の値から正しく作られている。保留は「自分の集約値には反映済みで、子にはまだ配っていない」作用である（反転の保留の扱いは下の「push の位置」）
 
-ノードは配列に置き、子は番号で持つ（$-1$ を空の木とする）と、ポインタを使わずに書ける。各ノードには値 `val`・部分木の和 `sum`・優先度 `pri`・要素数 `sz`・反転の保留 `rev` と左右の子 `l`・`r` を持たせる。中心のコードは次のとおりである（完全なプログラムは `snippets/balanced-bst/implicit-treap.cpp` で、乱数の操作を `vector` の愚直な方法と比べて確かめている）。まず、子から作り直す pull と、保留を降ろす push である。
+ノードは配列に置き、子は番号で持つ（$-1$ を空の木とする）と、ポインタを使わずに書ける。各ノードには値 `val`・部分木の和 `sum`・優先度 `pri`・要素数 `sz`・反転の保留 `rev` と左右の子 `l`・`r` を持たせる。中心のコードは次のとおりである（完全なプログラムは [`snippets/balanced-bst/implicit-treap.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/balanced-bst/implicit-treap.cpp) で、乱数の操作を `vector` の愚直な方法と比べて確かめている）。まず、子から作り直す pull と、保留を降ろす push である。
 
 ```cpp
 --8<-- "balanced-bst/implicit-treap.cpp:node"
 ```
+
+完全なプログラム：[`implicit-treap.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/balanced-bst/implicit-treap.cpp)（GitHub）
+{ .kp-code-src }
 
 `using namespace std;` の下では `merge` が `std::merge` と同じ名前になるので、コード片では `join` と名付けた。
 
 ```cpp
 --8<-- "balanced-bst/implicit-treap.cpp:core"
 ```
+
+完全なプログラム：[`implicit-treap.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/balanced-bst/implicit-treap.cpp)（GitHub）
+{ .kp-code-src }
 
 挿入・削除・反転・区間の和は、[何ができるか](#what-it-does)の表のとおり、split で区間を切り出してから merge で戻す形になる（完全なプログラムの `insert_at`・`erase_at`・`reverse_range`・`range_sum`）。
 

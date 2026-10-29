@@ -99,6 +99,9 @@ $$
 --8<-- "bit-operations/xor-range.cpp:core"
 ```
 
+完全なプログラム：[`xor-range.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bit-operations/xor-range.cpp)（GitHub）
+{ .kp-code-src }
+
 ??? question "確認問題：和と XOR"
     非負整数 $a, b$ が $a + b = 10$、$a \oplus b = 4$ を満たすとき、$a \text{ AND } b$ はいくつか。また $a + b = 10$、$a \oplus b = 6$ を満たす $a, b$ はあるか。
 
@@ -135,6 +138,9 @@ $s - 1$ は最下位の 1 を 0 にし、それより下の桁をすべて 1 に
 --8<-- "bit-operations/submask.cpp:core"
 ```
 
+完全なプログラム：[`submask.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bit-operations/submask.cpp)（GitHub）
+{ .kp-code-src }
+
 ループの終わり方に注意する。$s = 0$ も $m$ の部分集合だが、`for (s = m; s > 0; s = (s - 1) & m)` と書くと 0 を処理せずに止まる。逆に止める条件を書かないと、$(0 - 1) \text{ AND } m = m$ に戻って無限に回る。0 を処理してから `break` する形が安全である。
 
 **全体で $3^N$ になる理由**。$N$ 要素のすべての集合 $t$ について、$t$ の部分集合 $s$ を列挙すると、組 $(t, s)$ の数は $3^N$ である。各要素は「$t$ に入らない」「$t$ に入り $s$ に入らない」「$s$ に入る」の 3 通りで、組と 3 通りの選び方の列が 1 対 1 に対応するからである（式では $\sum_t 2^{\mathrm{popcount}(t)} = \sum_k \binom{N}{k} 2^k = 3^N$）。
@@ -142,6 +148,9 @@ $s - 1$ は最下位の 1 を 0 にし、それより下の桁をすべて 1 に
 ```cpp
 --8<-- "bit-operations/submask.cpp:all-pairs"
 ```
+
+完全なプログラム：[`submask.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bit-operations/submask.cpp)（GitHub）
+{ .kp-code-src }
 
 $3^{15} \approx 1.4 \times 10^7$、$3^{16} \approx 4.3 \times 10^7$、$3^{18} \approx 3.9 \times 10^8$ なので、$N \le 16$ 程度なら軽く、$N = 18$ は中身の軽いループでなければ苦しい。$2^N \times 2^N = 4^N$ と見積もると多すぎて諦めてしまうので、3 通りの数え方を覚えておく。この形は「集合 $t$ を、1 つのグループ $s$ と残り $t \setminus s$ に分ける」DP の遷移にそのまま使う（[部分集合を列挙する DP](../dp/subset-enumeration-dp.md#submask-loop)）。
 
@@ -214,6 +223,9 @@ $3^{15} \approx 1.4 \times 10^7$、$3^{16} \approx 4.3 \times 10^7$、$3^{18} \a
     ```cpp
     --8<-- "bit-operations/count-bit.cpp:core"
     ```
+
+    完全なプログラム：[`count-bit.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bit-operations/count-bit.cpp)（GitHub）
+    { .kp-code-src }
 
 ## 参考 {#references}
 

@@ -4,7 +4,7 @@
 using namespace std;
 
 // --8<-- [start:core]
-const long long INF = LLONG_MAX / 4;
+const long long INF = 1LL << 60;  // INF + INF でもあふれない大きさ
 
 // g[v] = {(行き先, コスト)}。返り値は dist[v * (K + 1) + k]
 vector<long long> layered_dijkstra(const vector<vector<pair<int, long long>>>& g, int K, int s) {

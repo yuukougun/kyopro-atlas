@@ -78,6 +78,9 @@ $$
 --8<-- "dp-prefix-sum/pull.cpp:core"
 ```
 
+完全なプログラム：[`pull.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-prefix-sum/pull.cpp)（GitHub）
+{ .kp-code-src }
+
 **配る形といもす法**。同じ DP を配る形で書くと、確定した $\mathrm{dp}[i]$ を閉区間 $[i + L, i + R]$ のすべてのマスへ足すことになる。これも 1 回に $R - L + 1$ 回かかる。範囲への同じ値の足し込みは、差分の配列 $D$（コードの `diff`）に「$D[i + L] \mathrel{+}= \mathrm{dp}[i]$、$D[i + R + 1] \mathrel{-}= \mathrm{dp}[i]$」と 2 か所書けば済む。$D$ を左から累積した値（コードの `cur`）が、そのマスに配られた合計である。
 
 配る先はいつも自分より右なので、マス $i$ に配られる値は、$i$ を見る時点ですべて書き込み済みである。したがって、累積を最後にまとめて取る必要はない。左から進みながら $D[i]$ を足し込んだ値が、そのまま $\mathrm{dp}[i]$ になる。
@@ -85,6 +88,9 @@ $$
 ```cpp
 --8<-- "dp-prefix-sum/push.cpp:core"
 ```
+
+完全なプログラム：[`push.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-prefix-sum/push.cpp)（GitHub）
+{ .kp-code-src }
 
 **なぜ正しいか**。どちらの形も、素直な DP と同じ値を足している。累積和は「区間の和」を、差分は「区間への同じ値の足し込み」を、それぞれ端の 2 か所の操作で表しただけで、足し合わせる項の集合は変わらない。素直な DP が正しければ、高速化した DP も正しい。
 
@@ -127,6 +133,9 @@ $$
 ```cpp
 --8<-- "dp-prefix-sum/candies.cpp:core"
 ```
+
+完全なプログラム：[`candies.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dp-prefix-sum/candies.cpp)（GitHub）
+{ .kp-code-src }
 
 例として $a = (1, 2, 3)$、$K = 4$ なら、段は $\mathrm{dp}[1] = (1, 1, 0, 0, 0)$、$\mathrm{dp}[2] = (1, 2, 2, 1, 0)$ と進む。最後は $\mathrm{dp}[3][4] = \mathrm{dp}[2][1] + \dots + \mathrm{dp}[2][4] = 2 + 2 + 1 + 0 = 5$ で、$S_2 = (0, 1, 3, 5, 6, 6)$ から $S_2[5] - S_2[1] = 5$ と同じ値が出る。
 

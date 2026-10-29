@@ -156,6 +156,9 @@ $i \ne j$ は順序付きの組（$(1, 2)$ と $(2, 1)$ を別に数える）、
 --8<-- "sigma-manipulation/pair-product.cpp:core"
 ```
 
+完全なプログラム：[`pair-product.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/sigma-manipulation/pair-product.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
 差の絶対値の和 $\sum_{i<j} \lvert a_i - a_j \rvert$ も、昇順に並べてから同じ発想で 1 重の和にできる。昇順の $j$ 番目の値は、前の $j - 1$ 個との組では大きい側、後ろの $N - j$ 個との組では小さい側になるので、和は $\sum_{j=1}^{N} (2j - N - 1)\, a_j$ である。
 
 ## 空の和は 0・空の積は 1 と境界 {#empty-sum}
@@ -208,6 +211,9 @@ $K$ ごとに約数を数えると、試し割りでは $O(N\sqrt{N})$ になり
     ```cpp
     --8<-- "sigma-manipulation/divisor-sum.cpp:core"
     ```
+
+    完全なプログラム：[`divisor-sum.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/sigma-manipulation/divisor-sum.cpp)（GitHub）
+    { .kp-code-src }
 
 ## 練習問題 {#practice}
 

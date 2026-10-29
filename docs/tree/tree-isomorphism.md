@@ -67,6 +67,9 @@ AHU 法（Aho・Hopcroft・Ullman による）は、各頂点 $v$ の部分木�
 --8<-- "tree-isomorphism/ahu.cpp:core"
 ```
 
+完全なプログラム：[`ahu.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-isomorphism/ahu.cpp)（GitHub）
+{ .kp-code-src }
+
 名前の種類数 `dict.size()` が「形が違う部分木の種類数」で、頂点 $u$ と $v$ の部分木が同型かは `name[u] == name[v]` で判定できる。
 
 ## 木のハッシュと衝突しにくい設計 {#tree-hash}
@@ -110,6 +113,9 @@ $$
 ```cpp
 --8<-- "tree-isomorphism/unrooted-hash.cpp:core"
 ```
+
+完全なプログラム：[`unrooted-hash.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/tree-isomorphism/unrooted-hash.cpp)（GitHub）
+{ .kp-code-src }
 
 ## 公開ライブラリと自作するときの要点 {#library}
 

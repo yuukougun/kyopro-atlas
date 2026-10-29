@@ -57,6 +57,9 @@ atcoder: true
 --8<-- "cpp-lambda/capture.cpp:core"
 ```
 
+完全なプログラム：[`capture.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-lambda/capture.cpp)（GitHub）
+{ .kp-code-src }
+
 ![外側の変数 k と 2 つのクロージャの図。[&] のクロージャは k への参照を持ち実線の矢印で k を指す。[=] のクロージャは作った時点の値 10 を箱の中に持ち、後で k が 20 になっても 10 のまま](../img/cpp-lambda/capture.svg)
 
 `[&]` のラムダは `k` を指しているだけなので、`k = 20` の後に呼ぶと 21 を返す。`[=]` のラムダは作った時点の 10 を持っているので 11 を返す。DFS や判定の関数のように、作ったその場で使い切るラムダは `[&]` で書けばよい。配列を `[=]` で取り込むと、ラムダを作るたびに配列全体がコピーされる。
@@ -71,6 +74,9 @@ atcoder: true
 --8<-- "cpp-lambda/capture.cpp:init"
 ```
 
+完全なプログラム：[`capture.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-lambda/capture.cpp)（GitHub）
+{ .kp-code-src }
+
 - **版**：`[&]`・`[=]`・`mutable` は C++11、初期化キャプチャは C++14。g++-13・g++-15 で使える
 - **落とし穴**：参照キャプチャしたラムダを、取り込んだ変数より長く使うと[未定義動作](../cpp/cpp-undefined-behavior.md)になる。典型は、関数の引数や局所変数を `[&]` で取り込んだラムダを返す書き方である
 
@@ -78,11 +84,17 @@ atcoder: true
 --8<-- "cpp-lambda/dangling.cpp:bad"
 ```
 
+完全なプログラム：[`dangling.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-lambda/dangling.cpp)（GitHub）
+{ .kp-code-src }
+
 `make_adder_bad(5)` の結果に 1 を渡すと 6 を返すはずである。手元の g++-13・g++-15（`-O2`）では 1 が出た。警告は `-Wall -Wextra` で `'k' is used uninitialized` と出たが、原因が寿命だとは読み取りにくい。AddressSanitizer（`-fsanitize=address`）を付けると `stack-use-after-return` で止まった。ラムダを返す・保存して後で呼ぶときは、使う変数をコピーで取り込む。
 
 ```cpp
 --8<-- "cpp-lambda/dangling.cpp:good"
 ```
+
+完全なプログラム：[`dangling.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-lambda/dangling.cpp)（GitHub）
+{ .kp-code-src }
 
 ## auto 引数のジェネリックラムダ、テンプレート構文（C++20）、static ラムダ（C++23・GCC 13〜） {#generic-lambda}
 
@@ -96,6 +108,9 @@ atcoder: true
 --8<-- "cpp-lambda/generic.cpp:core"
 ```
 
+完全なプログラム：[`generic.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-lambda/generic.cpp)（GitHub）
+{ .kp-code-src }
+
 - **版**：`auto` 引数は C++14、テンプレート構文は C++20、`static` ラムダは C++23。`static` ラムダは g++-13・g++-15 の `-std=gnu++23` で通る。`-std=gnu++20` ではどちらも「‘static’ only valid in lambda with ‘-std=c++23’ or ‘-std=gnu++23’」という警告になる
 - **落とし穴**：`static` ラムダはキャプチャを書くとコンパイルエラーになる。`[&]` が要るなら `static` を付けない
 
@@ -106,6 +121,9 @@ atcoder: true
 ```cpp
 --8<-- "cpp-lambda/iife.cpp:core"
 ```
+
+完全なプログラム：[`iife.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-lambda/iife.cpp)（GitHub）
+{ .kp-code-src }
 
 - 引数のないラムダは `()` を省いて `[&] { ... }` と書ける。最後の `()` は呼び出しである。これを忘れると、右辺はラムダそのものになる。`int` へ変換できないので、コンパイルエラーになる
 - 本体の `return` が 1 か所でも型の違う値を返すと推論できない。`[&]() -> long long { ... }()` のように戻り値の型を書く（[戻り値の型](#return-type)）
@@ -120,6 +138,9 @@ atcoder: true
 --8<-- "cpp-lambda/pass.cpp:sort"
 ```
 
+完全なプログラム：[`pass.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-lambda/pass.cpp)（GitHub）
+{ .kp-code-src }
+
 比較関数は「`i` を `j` より前に置くなら真」を返す。`a[i] <= a[j]` のように等しいときに真を返すと、`sort` が前提とする順序の条件（[狭義の弱順序](../guide/glossary.md#strict-weak-ordering)）を破り、範囲外を読んで落ちることがある。比較関数の決まりと `greater<>` などの使い分けは[比較関数と順序](../cpp/cpp-comparators.md)で扱う。
 
 [答えで二分探索](../basics/binary-search-answer.md)の判定も、ラムダにすると入力をそのまま読める。長さ `a[i]` の棒を長さ `x` に切って `k` 本以上取れるかを判定し、取れる最大の `x` を求める例である。
@@ -127,6 +148,9 @@ atcoder: true
 ```cpp
 --8<-- "cpp-lambda/pass.cpp:check"
 ```
+
+完全なプログラム：[`pass.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-lambda/pass.cpp)（GitHub）
+{ .kp-code-src }
 
 - 判定のラムダが `bool` を返すことは、`return cnt >= k;` から推論される。`return` が複数あるなら、すべて同じ型にする
 - **落とし穴**：比較関数を `[=]` で書くと、配列が大きいときにラムダを作るたびにコピーが走る。`sort` に渡したラムダは中でさらにコピーされることがあるので、配列は `[&]` で取り込む
@@ -139,6 +163,9 @@ atcoder: true
 --8<-- "cpp-lambda/decltype-type.cpp:core"
 ```
 
+完全なプログラム：[`decltype-type.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-lambda/decltype-type.cpp)（GitHub）
+{ .kp-code-src }
+
 `set` は比較関数が真になる側を前に並べるので、`x > y` なら大きい順になる。`priority_queue` は逆で、比較関数が真になる側を後ろ（`top` から遠い側）に置くので、`x > y` なら `top` は最小になる。
 
 この書き方が通るのは、C++20 から「キャプチャのないラムダは、引数なしで作れる（既定構築できる）」からである。`set` は型 `decltype(cmp)` から比較関数のオブジェクトを自分で作る。C++17 まではラムダを既定構築できず、上のコードは `-std=gnu++17` で g++-13・g++-15 ともコンパイルエラーになる（`use of deleted function`）。C++17 では、ラムダそのものをコンストラクタに渡す。
@@ -147,12 +174,18 @@ atcoder: true
 --8<-- "cpp-lambda/decltype-cxx17.cpp:core"
 ```
 
+完全なプログラム：[`decltype-cxx17.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-lambda/decltype-cxx17.cpp)（GitHub）
+{ .kp-code-src }
+
 - **版**：既定構築は C++20。g++-13・g++-15 の `-std=gnu++20` 以降で通る
 - **落とし穴**：キャプチャのあるラムダは、C++20 でも既定構築できない。ダイクストラ法で距離の配列 `d` を読む比較関数のように `[&]` が要るときは、C++23 でも `pq(cmp)` と渡す。省くと `no matching function for call to ‘std::priority_queue<...>::priority_queue()’` というエラーになる
 
 ```cpp
 --8<-- "cpp-lambda/decltype-capture.cpp:core"
 ```
+
+完全なプログラム：[`decltype-capture.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-lambda/decltype-capture.cpp)（GitHub）
+{ .kp-code-src }
 
 ## テンプレート引数にキャプチャのないラムダを渡す（GCC で通る。ACL の segtree） {#template-argument}
 
@@ -162,11 +195,17 @@ ACL の `segtree<S, op, e>` は、演算 `op` と単位元を返す `e` を、�
 --8<-- "cpp-lambda/segtree.cpp:core"
 ```
 
+完全なプログラム：[`segtree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-lambda/segtree.cpp)（GitHub）
+{ .kp-code-src }
+
 テンプレート引数は、コンパイル時に値が決まっていなければならない。GCC では、キャプチャのないラムダは中身を持たない空のオブジェクトとして、コンパイル時に決まった値のように扱われ、テンプレート引数に渡せる（AtCoder の GCC 15.2 でも通る）。ただし規格では、2023 年の欠陥報告（CWG2542）でラムダの型をテンプレート引数の型に使えないと決めたので、Clang などほかのコンパイラでは通らないことがある。確実にするなら、普通の関数を書いて `segtree<int, op, e>` と渡す。キャプチャのあるラムダは、実行時に取り込んだ変数を持つので、GCC でも渡せない。
 
 ```cpp
 --8<-- "cpp-lambda/segtree-capture-ng.cpp:core"
 ```
+
+完全なプログラム：[`segtree-capture-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-lambda/segtree-capture-ng.cpp)（GitHub）
+{ .kp-code-src }
 
 g++-15 では `the value of ‘op’ is not usable in a constant expression` というエラーになる。演算が実行時の値（上の `lower`）に依存するなら、その値を `S` の要素に入れるか、グローバル変数にする。ACL の segtree の引数の決め方は [ACL の読み方](../cpp/acl-reading.md)で扱う。
 
@@ -180,6 +219,9 @@ g++-15 では `the value of ‘op’ is not usable in a constant expression` と
 ```cpp
 --8<-- "cpp-lambda/recursive-ng.cpp:core"
 ```
+
+完全なプログラム：[`recursive-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-lambda/recursive-ng.cpp)（GitHub）
+{ .kp-code-src }
 
 エラーは `use of ‘fact’ before deduction of ‘auto’` である。`auto fact = ...` の `fact` の型は、右辺のラムダ式を最後まで読んで初めて決まる。本体の中の `fact(n - 1)` は、型が決まる前の変数を使うことになる。`[&]` で取り込もうとしても、取り込む `fact` の型がまだないので同じである。
 
@@ -202,6 +244,9 @@ AtCoder 向けには、`auto&& self` か deducing this を勧める。手元が 
 --8<-- "cpp-lambda/std-function.cpp:core"
 ```
 
+完全なプログラム：[`std-function.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-lambda/std-function.cpp)（GitHub）
+{ .kp-code-src }
+
 読みやすいが、遅い。`std::function` は、関数とラムダを同じ型で持てるよう、中身の型を隠している（[型消去](../guide/glossary.md#type-erasure)）。呼ぶたびに、隠した中身を関数ポインタ経由で呼び出す。コンパイラは中身を見通せないので、インライン化などの最適化がかかりにくい。
 
 ![再帰の 1 回の呼び出しの経路の比較。std::function は型消去の入れ物を経て間接的に本体を呼ぶ。auto&& self と this auto&& self は直接本体を呼ぶ](../img/cpp-lambda/call-path.svg)
@@ -217,6 +262,9 @@ AtCoder 向けには、`auto&& self` か deducing this を勧める。手元が 
 --8<-- "cpp-lambda/self-arg.cpp:core"
 ```
 
+完全なプログラム：[`self-arg.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-lambda/self-arg.cpp)（GitHub）
+{ .kp-code-src }
+
 `self` の型は `auto&&` なので、このラムダはジェネリックラムダ（関数テンプレート）である。`dfs(dfs, 0, -1)` と呼ぶと、`self` の型が「`dfs` の型への参照」に決まる。型がコンパイル時に分かるので、`self(self, to, v)` は直接の呼び出しになり、普通の関数の再帰と同じ速さで動く。
 
 - **版**：C++14。g++-13・g++-15 で使える。解説コードでよく見る形である
@@ -231,6 +279,9 @@ C++23 の deducing this は、最初の引数に `this` を付けると、そこ
 --8<-- "cpp-lambda/deducing-this.cpp:core"
 ```
 
+完全なプログラム：[`deducing-this.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-lambda/deducing-this.cpp)（GitHub）
+{ .kp-code-src }
+
 速さは `auto&& self` と同じである（どちらも型がコンパイル時に決まる直接の呼び出し）。
 
 - **版**：C++23。GCC 14 から使え、AtCoder の GCC 15.2 では通る。g++-13 では `-std=gnu++23` でも `expected identifier before ‘this’` というエラーになる。手元が g++-13 の人は、AtCoder の解説コードの `this auto&& self` を `auto&& self` に直し、呼び出しに自分を足して試す
@@ -244,11 +295,17 @@ C++23 の deducing this は、最初の引数に `this` を付けると、そこ
 --8<-- "cpp-lambda/fixpoint.cpp:fixpoint"
 ```
 
+完全なプログラム：[`fixpoint.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-lambda/fixpoint.cpp)（GitHub）
+{ .kp-code-src }
+
 `FixPoint` はラムダ `f` を継承した構造体である。`dfs(0, -1)` と呼ぶと、`operator()` が自分自身（`*this`）を先頭に足して `f(*this, 0, -1)` を呼ぶ。ラムダの中の `self(to, v)` も `FixPoint` の呼び出しなので、同じように自分が足される。
 
 ```cpp
 --8<-- "cpp-lambda/fixpoint.cpp:core"
 ```
+
+完全なプログラム：[`fixpoint.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-lambda/fixpoint.cpp)（GitHub）
+{ .kp-code-src }
 
 - **版**：C++14 で書ける（上の形は C++17 のクラステンプレートの実引数推論で `FixPoint(...)` と書いている）。g++-13・g++-15 で使える
 - **読み方**：解説コードで `FixPoint`・`MFP` を見たら、「ラムダの最初の引数が自分自身で、呼ぶときは省いてよい」と読めばよい。deducing this の `this auto&& self` と同じ意味である
@@ -264,11 +321,17 @@ C++23 の deducing this は、最初の引数に `this` を付けると、そこ
 --8<-- "cpp-lambda/return-type-ng.cpp:core"
 ```
 
+完全なプログラム：[`return-type-ng.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-lambda/return-type-ng.cpp)（GitHub）
+{ .kp-code-src }
+
 `if (n == 0) return 1LL;` を先に置けば、そこで `long long` に決まるので通る。迷ったら `-> void`・`-> long long` と書けば必ず通る。
 
 ```cpp
 --8<-- "cpp-lambda/return-type.cpp:core"
 ```
+
+完全なプログラム：[`return-type.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/cpp-lambda/return-type.cpp)（GitHub）
+{ .kp-code-src }
 
 - `std::function` は型を先に書くので、この問題は起きない
 - **落とし穴**：`-> int` と書いて `long long` の値を返すと、黙って `int` に切り詰められる（[オーバーフロー](../cpp/cpp-integer-overflow.md)）。数え上げや距離の再帰は `-> long long` にする

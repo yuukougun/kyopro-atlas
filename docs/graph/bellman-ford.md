@@ -26,7 +26,7 @@ sections:
   - {title: SPFA の注意（最悪の計算量は同じ）, anchor: spfa}
   - {title: 負辺があってもダイクストラ法で済む場合との見分け（ポテンシャル）, anchor: vs-potential}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -69,6 +69,9 @@ N-1 回くり返す：
 ```cpp
 --8<-- "bellman-ford/bellman-ford.cpp:core"
 ```
+
+完全なプログラム：[`bellman-ford.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/bellman-ford/bellman-ford.cpp)（GitHub）
+{ .kp-code-src }
 
 途中で更新がなくなったら打ち切るのは、次の回も同じ $\mathrm{dist}$ から同じ辺を見るだけで、何も変わらないからである。負閉路がない入力の多くはこれで早く終わる。
 

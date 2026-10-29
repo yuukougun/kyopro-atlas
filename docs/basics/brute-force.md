@@ -64,6 +64,9 @@ updated: 2026-10-29
 --8<-- "brute-force/fix-two.cpp:core"
 ```
 
+完全なプログラム：[`fix-two.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/brute-force/fix-two.cpp)（GitHub）
+{ .kp-code-src }
+
 「決めれば残りが決まる」は等式に限らない。残りの最良の値がすぐ分かる場合も同じである。たとえば 2 種類のセット商品の数を決めると、残りの単品の数は「足りない分だけ買う」で決まる。決める側の変数は、通り数が少ない方、または残りを計算しやすい方を選ぶ。
 
 ??? question "確認問題：決めた後に確かめること"
@@ -145,6 +148,9 @@ $L$ と $R$ の境界を半開区間 $[0, k)$ と $[k, N)$ にそろえると、
 ```cpp
 --8<-- "brute-force/board-shift.cpp:core"
 ```
+
+完全なプログラム：[`board-shift.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/brute-force/board-shift.cpp)（GitHub）
+{ .kp-code-src }
 
 盤面が $4 \times 4$ のように 16 マス以下なら、置いたマスの集合を 16 ビットの整数で表せる。重なりの判定は AND で、全体を埋めたかの判定は OR で書ける。ただし左シフトで平行移動すると、右端からはみ出したマスが次の行に回り込むので、シフトの前に盤面に収まるかを確かめる。
 

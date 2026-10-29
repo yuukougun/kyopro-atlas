@@ -8,7 +8,7 @@ struct Train {
     long long l, d, k, c;
 };
 
-const long long INF = 2'000'000'000'000'000'000LL;
+const long long INF = LLONG_MAX;  // INF には足さず、c と l を引くだけなのでこの値でよい
 
 // --8<-- [start:core]
 // 時刻 t までに終点 u に着かなければならないとき、辺 e の始点を出られる最も遅い時刻（無理なら -1）

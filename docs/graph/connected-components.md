@@ -60,6 +60,9 @@ updated: 2026-10-22
 --8<-- "connected-components/bfs-tally.cpp:core"
 ```
 
+完全なプログラム：[`bfs-tally.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/connected-components/bfs-tally.cpp)（GitHub）
+{ .kp-code-src }
+
 探索の始点を「未訪問の全頂点」にするのが要点である。頂点 0 から 1 回探索するだけでは、0 の成分しか分からない。「グラフ全体が連結か」だけなら、頂点 0 から 1 回探索して全頂点に届いたかを見ればよい。
 
 Union-Find は隣接リストを作らずに辺を読みながら併合でき、最大の成分の大きさのような量なら短く書ける。一方で、成分の中の距離や経路は分からない。辺の追加と質問が交互に来るとき、質問のたびに探索し直すと $O(Q(N + M))$ かかるので、Union-Find を使う。削除があるときは [Union-Find で連結性を扱う](../graph/union-find-connectivity.md)の逆順の処理を使う。
@@ -70,6 +73,9 @@ Union-Find は隣接リストを作らずに辺を読みながら併合でき、
 ```cpp
 --8<-- "connected-components/acl-dsu.cpp:core"
 ```
+
+完全なプログラム：[`acl-dsu.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/connected-components/acl-dsu.cpp)（GitHub）
+{ .kp-code-src }
 
 ## 成分ごとの集計（頂点数と辺数で木・なもり・それ以外を見分ける） {#per-component}
 

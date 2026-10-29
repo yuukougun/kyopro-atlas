@@ -120,18 +120,24 @@ ACL に動的木はない。LCT を自作するときに保つ性質は次の 3 
 - `par[x]` は、splay 木の中の親か、$x$ が splay 木の根なら「パスの親」を指す。親から見て子でないことで、2 つを区別する
 - 各ノードの集約値は、保留（反転）を除いた子の値から作られている。保留は「自分には反映済みで、子にはまだ配っていない」作用である。印を立てるとき（`toggle`）に自分の左右の子を入れ替え、`push` では子に `toggle` を配るだけにする
 
-splay 木の部分では、`rotate` が $x$ とその親の親子を入れ替える回転、`splay` が $x$ を回転で splay 木の根まで上げる操作である。ここは折りたたみに入れた。完全なプログラムは `snippets/dynamic-tree/link-cut-tree.cpp` にあり、乱数の link・cut・加算・パスの和を、隣接集合と DFS による愚直な方法と比べて確かめている。
+splay 木の部分では、`rotate` が $x$ とその親の親子を入れ替える回転、`splay` が $x$ を回転で splay 木の根まで上げる操作である。ここは折りたたみに入れた。完全なプログラムは [`snippets/dynamic-tree/link-cut-tree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dynamic-tree/link-cut-tree.cpp) にあり、乱数の link・cut・加算・パスの和を、隣接集合と DFS による愚直な方法と比べて確かめている。
 
 ??? note "splay 木の部分（is_root・toggle・push・rotate・splay）"
     ```cpp
     --8<-- "dynamic-tree/link-cut-tree.cpp:node"
     ```
 
+    完全なプログラム：[`link-cut-tree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dynamic-tree/link-cut-tree.cpp)（GitHub）
+    { .kp-code-src }
+
 expose と、それで書く操作は次のとおりである。
 
 ```cpp
 --8<-- "dynamic-tree/link-cut-tree.cpp:expose"
 ```
+
+完全なプログラム：[`link-cut-tree.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/dynamic-tree/link-cut-tree.cpp)（GitHub）
+{ .kp-code-src }
 
 実装で間違えやすい点は次のとおりである。
 

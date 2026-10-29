@@ -149,6 +149,9 @@ leftist heap は、併合の再帰が右の背骨だけを降りることで速�
 --8<-- "advanced-ds-catalog/leftist-heap.cpp:core"
 ```
 
+完全なプログラム：[`leftist-heap.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/advanced-ds-catalog/leftist-heap.cpp)（GitHub）
+{ .kp-code-src }
+
 - **空の節点**：添字 0 を空とし、`dist[0] = 0` にしておくと、子が空の場合を分けずに書ける。
 - **降ろす順**：`meld` で `rc[a]` を書き換える前と、`pop` で子を併合する前に `push` で保留の加算を配る。配る前に子を付け替えると、加算がほかの部分木に混ざる。
 - **根の比較**：根の値は保留の加算を含んだ値にしておく（`add_all` で根の値にも足す）。そうすれば根どうしをそのまま比べられる。
@@ -158,6 +161,9 @@ leftist heap は、併合の再帰が右の背骨だけを降りることで速�
 ```cpp
 --8<-- "advanced-ds-catalog/pbds-join.cpp:core"
 ```
+
+完全なプログラム：[`pbds-join.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/advanced-ds-catalog/pbds-join.cpp)（GitHub）
+{ .kp-code-src }
 
 ## 確認問題 {#quiz}
 

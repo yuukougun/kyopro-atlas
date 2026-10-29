@@ -126,17 +126,26 @@ $t(S)$ は $2^N$ 個の集合それぞれで行列式を求めて $O(2^N N^3)$�
 --8<-- "matrix-tree-theorem/count.cpp:det"
 ```
 
-無向の全域木と、根から出る全域木の数は次のとおりである（完全なプログラムは `snippets/matrix-tree-theorem/count.cpp`。小さいグラフで、辺の部分集合の全列挙と一致することを確かめている）。
+完全なプログラム：[`count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/matrix-tree-theorem/count.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
+
+無向の全域木と、根から出る全域木の数は次のとおりである（完全なプログラムは [`snippets/matrix-tree-theorem/count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/matrix-tree-theorem/count.cpp)。小さいグラフで、辺の部分集合の全列挙と一致することを確かめている）。
 
 ```cpp
 --8<-- "matrix-tree-theorem/count.cpp:laplacian"
 ```
+
+完全なプログラム：[`count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/matrix-tree-theorem/count.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 BEST 定理は、次数と連結性を確かめ、辺のない頂点を除いてから使う。
 
 ```cpp
 --8<-- "matrix-tree-theorem/count.cpp:best"
 ```
+
+完全なプログラム：[`count.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/matrix-tree-theorem/count.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 自作するときに気をつける点は次のとおりである。
 

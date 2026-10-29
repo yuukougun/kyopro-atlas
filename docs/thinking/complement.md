@@ -124,6 +124,9 @@ $$
 --8<-- "complement/two-conditions-mod.cpp:core"
 ```
 
+完全なプログラム：[`two-conditions-mod.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/complement/two-conditions-mod.cpp)（GitHub）
+{ .kp-code-src }
+
 - **`+ MOD` を 1 回足すだけでは足りないことがある**：`(a - b + MOD) % MOD` は引き算が 1 回なら正しいが、`(a - b - c + MOD) % MOD` は $a - b - c$ が $-\mathrm{MOD}$ より小さいと負のままになる。先に `%` を取ってから負なら足す、という形にしておけば、引く回数によらず正しい（[引き算の後の負の数を 0 以上に直す](../math/mod-arithmetic.md#negative)）
 - **modint を使えば気にしなくてよい**：ACL の modint は引き算の結果を自動で $[0, \mathrm{MOD})$ に戻す（[modint](../math/modint.md#what-is-automatic)）
 - **余りの大小で場合分けしない**：全体の余りが補集合の余りより小さくても、本当の個数が負になったわけではない。「引いた結果が負なら 0 を出す」のような処理は誤りである（[mod を取った値で大小比較・最大値を考えてはいけない](../math/mod-arithmetic.md#no-compare)）

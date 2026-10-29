@@ -74,6 +74,9 @@ L か R の直後の U は打ち消し合い、何もしなかったのと同じ
 --8<-- "complete-binary-tree/lru-moves.cpp:core"
 ```
 
+完全なプログラム：[`lru-moves.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/complete-binary-tree/lru-moves.cpp)（GitHub）
+{ .kp-code-src }
+
 計算量は移動の列を $S$ として $O(\lvert S \rvert)$ である。打ち消しの考え方は、括弧列や「消すべき並びを取り除く」問題と同じ形である（[直前と打ち消し合うものを消す](../ds/stack-techniques.md#cancel)）。
 
 別の方法として、番号の 2 進表記を文字列で持ち、L で `0` を、R で `1` を末尾に足し、U で末尾を消してもよい。文字列の長さは最初の桁数と移動の数の和を超えないので、これも $O(\lvert S \rvert)$ である。最後に文字列を数に戻す。
@@ -95,6 +98,9 @@ L か R の直後の U は打ち消し合い、何もしなかったのと同じ
 ```cpp
 --8<-- "complete-binary-tree/lca-by-index.cpp:core"
 ```
+
+完全なプログラム：[`lca-by-index.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/complete-binary-tree/lca-by-index.cpp)（GitHub）
+{ .kp-code-src }
 
 各頂点の祖先は $O(\log N)$ 個なので、ループは $O(\log N)$ 回で終わる。距離は深さを使って $d(x, y) = \mathrm{dep}[x] + \mathrm{dep}[y] - 2\,\mathrm{dep}[\mathrm{lca}(x, y)]$ とも書ける（[距離の式](../tree/lca.md#distance)）。コードは $k$ 分木のまま書いてあり、$k = 2$ が完全二分木である（[K 分木への一般化](#k-ary)）。
 
@@ -134,6 +140,9 @@ $c'$ の番号は、$X$ の側の子 $c$ の最後の桁を反転した $c \oplu
 ```cpp
 --8<-- "complete-binary-tree/count-at-distance.cpp:core"
 ```
+
+完全なプログラム：[`count-at-distance.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/complete-binary-tree/count-at-distance.cpp)（GitHub）
+{ .kp-code-src }
 
 `count_below` では $v \cdot 2^d$ を一度に計算せず、1 段ずつ区間の両端を 2 倍しながら、左端が $N$ を超えたら止める。$d$ が $10^{18}$ のように大きくても 60 回ほどで抜け、`long long` もあふれない。祖先が $O(\log N)$ 個で、それぞれで $O(\log N)$ 回の 2 倍をするので、1 回の問い合わせは $O((\log N)^2)$ である。
 

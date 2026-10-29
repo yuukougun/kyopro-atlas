@@ -71,6 +71,9 @@ $\pi[6] = 3$ は、$S[0, 7) = \texttt{abacaba}$ の先頭 3 文字と末尾 3 �
 --8<-- "kmp/prefix-function.cpp:core"
 ```
 
+完全なプログラム：[`prefix-function.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/kmp/prefix-function.cpp)（GitHub）
+{ .kp-code-src }
+
 **添字の流儀**。解説によって配列の持ち方が 2 通りある。
 
 - **$\pi[0] = 0$ の流儀**（このページ）：長さ $N$ の配列で、$\pi[i]$ は $S[0, i + 1)$ の最長の border の長さ。ループは `j > 0` の間だけたどる
@@ -106,6 +109,9 @@ $\pi$ の作り方は二重ループに見えるが、全体で $O(N)$ である
 --8<-- "kmp/match.cpp:core"
 ```
 
+完全なプログラム：[`match.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/kmp/match.cpp)（GitHub）
+{ .kp-code-src }
+
 計算量は $\pi$ の構築と同じ議論で、$j$ が増えるのは $T$ の 1 文字につき高々 1 回なので $O(N)$、$\pi$ の構築と合わせて $O(N + M)$ である。$T$ を先まで知らなくても、文字が来るたびにその場で判定できる。
 
 **区切りでつなぐ書き方**。$P + \# + T$（$\#$ はどちらにも現れない文字）の $\pi$ を作り、$T$ 側の位置で $\pi = M$ となる所を出現とみなしてもよい。区切りがあるので border は $M$ を超えない。照合の関数を別に書かなくて済むが、区切りの文字の選び方は [Z-algorithm](../string/z-algorithm.md#acl) と同じ注意が要る。上の照合の関数は区切りが要らないので、整数の列の検索（[ABC150 F](#abc150_f)）にもそのまま使える。
@@ -134,6 +140,9 @@ $S$ の border は、最長の border の長さ $\pi[N - 1]$ から始めて $b 
 --8<-- "kmp/borders.cpp:core"
 ```
 
+完全なプログラム：[`borders.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/kmp/borders.cpp)（GitHub）
+{ .kp-code-src }
+
 受け渡しは $k$ の大きい順に行う。$\pi[k - 1] < k$ なので、`cnt[k]` は自分より長い接頭辞からの受け渡しがすべて済んでから読まれる。
 
 ## 周期と繰り返し：最小周期と、繰り返しで書ける条件（弱周期定理） {#string-period}
@@ -151,6 +160,9 @@ $$
 ```cpp
 --8<-- "kmp/prefix-function.cpp:period"
 ```
+
+完全なプログラム：[`prefix-function.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/kmp/prefix-function.cpp)（GitHub）
+{ .kp-code-src }
 
 > **弱周期定理**：$p$ と $q$ がどちらも $S$ の周期で $p + q \le N$ なら、$\gcd(p, q)$ も $S$ の周期である。
 
@@ -205,6 +217,9 @@ $\pi[j - 1] < j$ なので、3 つ目で写す行はもう埋まっている。�
 --8<-- "kmp/automaton.cpp:core"
 ```
 
+完全なプログラム：[`automaton.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/kmp/automaton.cpp)（GitHub）
+{ .kp-code-src }
+
 表があると、1 文字あたりの手間がならしでなく常に $O(1)$ になる。これが効くのは次の 2 つの場面である。
 
 - **DP の状態にする**：「長さ $L$ の文字列で $P$ を含まないものの数」は、$\mathrm{dp}[j]$ ＝ いまの照合の状態が $j$ の文字列の数として、表の遷移で配れば $O(L \sigma M)$ で求まる。状態 $M$ に入る遷移を捨てればよい。$L$ が巨大なら遷移を行列にして累乗する（[照合オートマトン上の DP](../string/string-automaton-dp.md#matrix-power)）
@@ -213,6 +228,9 @@ $\pi[j - 1] < j$ なので、3 つ目で写す行はもう埋まっている。�
 ```cpp
 --8<-- "kmp/automaton.cpp:dp"
 ```
+
+完全なプログラム：[`automaton.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/kmp/automaton.cpp)（GitHub）。`mint` は ACL の `modint998244353`（[modint](../math/modint.md)）。
+{ .kp-code-src }
 
 パターンが複数あるときは、パターンを [Trie](../string/trie.md) にまとめ、$\pi$ の代わりに失敗リンクを張る。これが [Aho-Corasick 法](../string/aho-corasick.md#failure-links)で、表の埋め方は同じ考え方である。
 
