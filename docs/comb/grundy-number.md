@@ -1,7 +1,8 @@
 ---
 id: grundy-number
 title: Grundy 数と Sprague-Grundy の定理
-aliases: [nimber, Sprague-Grundy の定理, ゲームの和, Grundy 数の周期性, Sprague-Grundy theorem, Grundy number]
+aliases: [nimber, Sprague-Grundy の定理, ゲームの和, Grundy 数の周期性, Sprague-Grundy theorem, Grundy number, グランディ数]
+tags: [グランディ]
 type: technique
 field: comb
 chapter: ゲーム
@@ -40,7 +41,7 @@ updated: 2026-10-29
     - **前提**：[Nim と XOR](../comb/nim.md)
 
 <!-- textlint-disable -->
-別名：nimber・Sprague-Grundy の定理・ゲームの和・Grundy 数の周期性・Sprague-Grundy theorem・Grundy number
+別名：nimber・Sprague-Grundy の定理・ゲームの和・Grundy 数の周期性・Sprague-Grundy theorem・Grundy number・グランディ数
 <!-- textlint-enable -->
 
 Grundy 数は、不偏ゲーム（どちらの手番でも打てる手が同じゲーム）の各局面に、「Nim の山の何個分に当たるか」を表す 0 以上の整数を割り当てたものである。Sprague-Grundy の定理により、独立なゲームを並べて「どれか 1 つを選んで 1 手進める」ゲームの勝敗は、各ゲームの Grundy 数の XOR で決まる。ゲームごとの表は小さな DP で作り、山が大きすぎるときは表の規則を見つけて式にする。
@@ -55,10 +56,10 @@ Grundy 数が要るのは、独立なゲームがいくつも並ぶときであ�
 
 **mex**（minimum excludant）は、0 以上の整数の集合 $S$ に対し、$S$ に含まれない最小の 0 以上の整数である。$\mathrm{mex}\{0, 1, 3\} = 2$、$\mathrm{mex}\{1, 2\} = 0$、空集合なら $\mathrm{mex}\{\} = 0$ になる。mex そのものの求め方と性質は [mex](../patterns/mex.md#properties) のページにまとめる。
 
-局面 $v$ の **Grundy 数** $g(v)$ は、1 手で移れる局面の Grundy 数の mex である。
+局面 $v$ の **Grundy 数** $g(v)$ は、1 手で移れる局面（行き先）の Grundy 数の mex である。
 
 $$
-g(v) = \mathrm{mex}\{\, g(w) \mid v \text{ から 1 手で } w \text{ へ移れる} \,\}
+g(v) = \mathrm{mex}\{\, g(w) \mid w \text{ は } v \text{ の行き先} \,\}
 $$
 
 手のない局面（終局）は行き先が空なので $g = 0$ である。行き先はどれも手数が短い局面なので、[勝敗の DP](../comb/game-basics.md#win-lose) と同じく、終局から順にすべての局面の値が決まる。
@@ -98,7 +99,7 @@ Nim の山（1 個以上なら何個でも取れる）で、石が $k$ 個の山
 **Sprague-Grundy の定理**：和の局面の Grundy 数は、各ゲームの局面の Grundy 数の XOR である。
 
 $$
-g(v_1, v_2, \dots, v_N) = g(v_1) \oplus g(v_2) \oplus \dots \oplus g(v_N)
+g(v_1, \dots, v_N) = g(v_1) \oplus \dots \oplus g(v_N)
 $$
 
 したがって、和の局面が必敗なのは XOR が 0 のときだけである。[Nim の判定](../comb/nim.md#bouton)は、各山の Grundy 数が山の個数そのもの、という特別な場合にあたる。全体の局面は各ゲームの局面の組なので数が積になるが、Grundy 数の表はゲームごとに作れば足りる。
@@ -147,7 +148,10 @@ mex を求めるには、行き先の値に印を付けて、印のない最小�
 **1 手で局面が独立な部分に分かれるとき（区間）**。並んだものの途中を取り除くと、左右が二度と影響し合わない 2 つのゲームになることがある。分かれた後の局面はゲームの和なので、その値は左右の Grundy 数の XOR である。
 
 $$
-g(\text{局面}) = \mathrm{mex}\{\, g(\text{左}) \oplus g(\text{右}) \mid \text{取り除き方} \,\}
+\begin{aligned}
+&g(\text{局面}) \\
+&= \mathrm{mex}\{\, g(\text{左}) \oplus g(\text{右}) \mid \text{取り除き方} \,\}
+\end{aligned}
 $$
 
 残っている範囲を[半開区間](../guide/glossary.md#half-open-interval) $[l, r)$ で表すと、$g[l][r]$ は範囲の中で選べる手ごとに $g[l][x] \oplus g[y][r]$（取り除いたのが $[x, y)$）を集めた mex になる。短い範囲から順に埋める[区間 DP](../dp/interval-dp.md) である。範囲の位置によらず長さだけで手が決まるなら、状態は長さ 1 つで済む。

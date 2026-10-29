@@ -55,7 +55,10 @@ updated: 2026-10-29
 期待値の線形性とは、確率変数 $X, Y$ と定数 $c$ について、次の 2 つが成り立つことである。$X$ と $Y$ が独立かどうかは問わない。
 
 $$
-E[X + Y] = E[X] + E[Y], \qquad E[cX] = c\,E[X]
+\begin{aligned}
+E[X + Y] &= E[X] + E[Y], \\
+E[cX] &= c\,E[X]
+\end{aligned}
 $$
 
 繰り返し使えば、$N$ 個の確率変数について $E[X_1 + \dots + X_N] = E[X_1] + \dots + E[X_N]$ となる。
@@ -63,7 +66,12 @@ $$
 **なぜ成り立つか**：起こりうる場合（根元事象）$\omega$ が有限個で、それぞれ確率 $P(\omega)$ で起こるとする。期待値の定義どおりに書いて、和を 2 つに分けるだけである。
 
 $$
-E[X + Y] = \sum_\omega P(\omega)\bigl(X(\omega) + Y(\omega)\bigr) = \sum_\omega P(\omega) X(\omega) + \sum_\omega P(\omega) Y(\omega) = E[X] + E[Y]
+\begin{aligned}
+&E[X + Y] \\
+&= \sum_\omega P(\omega)\bigl(X(\omega) + Y(\omega)\bigr) \\
+&= \sum_\omega P(\omega) X(\omega) + \sum_\omega P(\omega) Y(\omega) \\
+&= E[X] + E[Y]
+\end{aligned}
 $$
 
 この式変形のどこにも独立性は出てこない。確率変数を表に書くと見やすい。行を起こりうる場合、列を部分の量にすると、「行ごとに和を取ってから平均する」のと「列ごとに平均してから足す」のは、表の全マスを重み付きで足す順序を変えただけである。
@@ -159,7 +167,10 @@ $$
 この節では[対称性で確率を求める](../comb/probability-symmetry.md)考え方を使う。転倒数のように「条件を満たすペアの個数」の期待値は、ペア $(i, j)$ ごとの指示確率変数に分けて、ペアごとの確率の和にする。
 
 $$
-E[\text{転倒数}] = \sum_{i < j} P(\text{$i$ 番目の値} > \text{$j$ 番目の値})
+\begin{aligned}
+&E[\text{転倒数}] \\
+&= \sum_{i < j} P(\text{$i$ 番目の値} > \text{$j$ 番目の値})
+\end{aligned}
 $$
 
 ペアは $N(N-1)/2$ 個あるので、そのまま足すと $O(N^2)$ 項になる。ペアの確率が少ない種類に分かれるなら、種類ごとにまとめて数える（同じ確率のペアの個数を掛ける）。
@@ -179,7 +190,10 @@ $$
 起こりうる場合が $M$ 通りで、どれも同じ確率 $1/M$ なら、期待値の定義から次の関係がある。
 
 $$
-E[X] = \frac{1}{M} \sum_{\omega} X(\omega), \qquad \sum_{\omega} X(\omega) = M \cdot E[X]
+\begin{aligned}
+E[X] &= \frac{1}{M} \sum_{\omega} X(\omega), \\
+\sum_{\omega} X(\omega) &= M \cdot E[X]
+\end{aligned}
 $$
 
 「期待値を求めよ」は「全パターンの和を求めて $M$ で割れ」と同じであり、逆に「全パターンについての和を求めよ」は「一様に選んだときの期待値に $M$ を掛けよ」と同じである。どちらで考えやすいかで行き来してよい。

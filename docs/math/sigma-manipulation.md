@@ -28,7 +28,7 @@ sections:
   - {title: よく使う和の公式と、異なる 2 つの積の和を和の 2 乗で表す式, anchor: formulas}
   - {title: 空の和は 0・空の積は 1 と境界, anchor: empty-sum}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -53,19 +53,29 @@ updated: 2026-10-22
 Σ の変形でいちばん多く使うのは、次の 2 つの規則（線形性）である。
 
 $$
-\sum_{i} c\, a_i = c \sum_{i} a_i, \qquad \sum_{i} (a_i + b_i) = \sum_{i} a_i + \sum_{i} b_i
+\begin{aligned}
+\sum_{i} c\, a_i &= c \sum_{i} a_i, \\
+\sum_{i} (a_i + b_i) &= \sum_{i} a_i + \sum_{i} b_i
+\end{aligned}
 $$
 
 競技プログラミングで効くのは、「添字 $i$ によらない量は外に出せる」という読み方である。二重和では、内側の和にとって外側の添字は定数なので外に出せる。
 
 $$
-\sum_{i=1}^{N} \sum_{j=1}^{N} a_i b_j = \sum_{i=1}^{N} a_i \Bigl( \sum_{j=1}^{N} b_j \Bigr) = \Bigl( \sum_{i=1}^{N} a_i \Bigr) \Bigl( \sum_{j=1}^{N} b_j \Bigr)
+\begin{aligned}
+\sum_{i=1}^{N} \sum_{j=1}^{N} a_i b_j &= \sum_{i=1}^{N} a_i \Bigl( \sum_{j=1}^{N} b_j \Bigr) \\
+&= \Bigl( \sum_{i=1}^{N} a_i \Bigr) \Bigl( \sum_{j=1}^{N} b_j \Bigr)
+\end{aligned}
 $$
 
 左辺を素直に計算すると $N^2$ 回の掛け算だが、右辺は 2 つの和の積なので $O(N)$ で済む。$(a_i - a_j)^2$ や $(a_i + b_j)^2$ のように展開できる式も、展開して「$i$ だけの項」「$j$ だけの項」「積の項」に分ければ、それぞれをこの形にできる。
 
 $$
-\sum_{i=1}^{N} \sum_{j=1}^{N} (a_i - a_j)^2 = \sum_{i}\sum_{j} \bigl(a_i^2 - 2a_i a_j + a_j^2\bigr) = 2N \sum_{i} a_i^2 - 2 \Bigl( \sum_{i} a_i \Bigr)^2
+\begin{aligned}
+&\sum_{i=1}^{N} \sum_{j=1}^{N} (a_i - a_j)^2 \\
+&= \sum_{i}\sum_{j} \bigl(a_i^2 - 2a_i a_j + a_j^2\bigr) \\
+&= 2N \sum_{i} a_i^2 - 2 \Bigl( \sum_{i} a_i \Bigr)^2
+\end{aligned}
 $$
 
 分けてよいのは和だけである。$\sum_i a_i b_i$ は一般に $(\sum_i a_i)(\sum_i b_i)$ と等しくない（添字が同じ $i$ でつながっているから）。$\max$・$\min$・$\lfloor \cdot \rfloor$・$\bmod$ も和と入れ替えられない。たとえば $\sum_i \max(a_i, b_i) \ne \max(\sum_i a_i, \sum_i b_i)$、$\sum_i \lfloor a_i / k \rfloor \ne \lfloor \sum_i a_i / k \rfloor$ である。$\sum_i\sum_j \bigl((a_i + b_j) \bmod m\bigr)$ も項に分けられず、$a_i + b_j \ge m$ になる組の個数を別に数える必要がある。
@@ -124,7 +134,10 @@ $$
 これは「添字 $i$」と「値 $v$」の二重和 $\sum_{v} \sum_{i} [A_i = v]\, g(v)$ の順序を入れ替えたものである。二重和の形にすると、組の問題にも使える。$h$ が対称（$h(u, v) = h(v, u)$。$\max$・$\min$・積など）なら、値の組を $u < v$ と $u = v$ に分けて
 
 $$
-\sum_{i<j} h(A_i, A_j) = \sum_{u<v} c_u c_v\, h(u, v) + \sum_{v} \binom{c_v}{2} h(v, v)
+\begin{aligned}
+\sum_{i<j} h(A_i, A_j) &= \sum_{u<v} c_u c_v\, h(u, v) \\
+&\quad + \sum_{v} \binom{c_v}{2} h(v, v)
+\end{aligned}
 $$
 
 になる。同じ値どうしの組は $\binom{c_v}{2}$ 個なので、$u < v$ の組とは別に数える。$h$ が対称でないと、$i < j$ でも $A_i > A_j$ のことがあるので、この式は成り立たない。値が $10^6$ 以下なら、値を配列の添字にして、$c_v$ の[累積和](../basics/prefix-sum.md)と倍数の列挙を組み合わせられる（[練習の ABC356 E](#practice) がこの型）。
@@ -147,7 +160,10 @@ $$
 すべての組の積の和は、2 乗の展開から得る。$\bigl(\sum_i a_i\bigr)^2$ を展開すると、$i = j$ の項 $a_i^2$ と $i \ne j$ の項 $a_i a_j$ が全部 1 回ずつ現れるので、
 
 $$
-\sum_{i \ne j} a_i a_j = \Bigl(\sum_{i} a_i\Bigr)^2 - \sum_{i} a_i^2, \qquad \sum_{i < j} a_i a_j = \frac{1}{2} \Bigl( \Bigl(\sum_{i} a_i\Bigr)^2 - \sum_{i} a_i^2 \Bigr)
+\begin{aligned}
+\sum_{i \ne j} a_i a_j &= \Bigl(\sum_{i} a_i\Bigr)^2 - \sum_{i} a_i^2, \\
+\sum_{i < j} a_i a_j &= \frac{1}{2} \Bigl( \Bigl(\sum_{i} a_i\Bigr)^2 - \sum_{i} a_i^2 \Bigr)
+\end{aligned}
 $$
 
 $i \ne j$ は順序付きの組（$(1, 2)$ と $(2, 1)$ を別に数える）、$i < j$ は順序なしの組である。$a_i a_j = a_j a_i$ だから、順序なしは順序付きの半分になる。和と 2 乗の和を求めるだけなので、$O(N^2)$ の二重ループが $O(N)$ になる。答えを素数 $p$ で割った余りで求めるときは、2 で割る代わりに 2 の逆元を掛ける。次のコードの `mint` は ACL の `modint998244353`（[modint](modint.md)）で、`mint(2).inv()` が 2 の逆元である。

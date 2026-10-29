@@ -63,7 +63,10 @@ updated: 2026-10-29
 2 つの関数の**ディリクレ積**を $(f * g)(n) = \sum_{d \mid n} f(d) \, g(n/d)$ と決める。和の順を入れ替えても同じなので $f * g = g * f$ で、$\varepsilon$ を掛けても変わらない。乗法的な関数どうしのディリクレ積は、また乗法的になる。上の関数は次の関係で結ばれる。
 
 $$
-1 * 1 = d, \qquad \mathrm{id} * 1 = \sigma, \qquad \varphi * 1 = \mathrm{id}, \qquad \mu * 1 = \varepsilon, \qquad \mu * \mathrm{id} = \varphi
+\begin{gathered}
+1 * 1 = d, \qquad \mathrm{id} * 1 = \sigma, \qquad \varphi * 1 = \mathrm{id}, \\
+\mu * 1 = \varepsilon, \qquad \mu * \mathrm{id} = \varphi
+\end{gathered}
 $$
 
 $\varphi * 1 = \mathrm{id}$ は「$n$ の約数 $d$ について $\varphi(d)$ を足すと $n$」の言い換えで（[約数についての φ の和](../math/euler-phi.md#divisor-sum)）、$\mu * 1 = \varepsilon$ は「$\mu$ を約数について足すと $n = 1$ のときだけ 1」の言い換えである。「$1$ を掛ける」は約数についての和（[約数のゼータ変換](../comb/zeta-mobius-divisor.md)）で、「$\mu$ を掛ける」はそれを戻す操作（メビウス反転）になる。
@@ -88,7 +91,10 @@ $S(x, p)$ を「$2$ 以上 $x$ 以下の整数のうち、素数であるか、�
 - $p^2 \le x$ なら、新しく消えるのは最小素因数がちょうど $p$ の合成数 $pm$（$p \le m \le x/p$、$m$ は $p$ 未満の素因数を持たない）である。その個数は $S(\lfloor x/p \rfloor, p - 1)$ から $p$ 未満の素数の個数 $S(p - 1, p - 1)$ を引いたものなので、次の式になる。
 
 $$
-S(x, p) = S(x, p - 1) - \bigl( S(\lfloor x/p \rfloor, p - 1) - S(p - 1, p - 1) \bigr)
+\begin{aligned}
+&S(x, p) = S(x, p - 1) \\
+&\quad - \bigl( S(\lfloor x/p \rfloor, p - 1) - S(p - 1, p - 1) \bigr)
+\end{aligned}
 $$
 
 $\sqrt{N}$ 以下の素数まで処理すると $S(N, \cdot) = \pi(N)$ になる。右辺に出る $\lfloor x/p \rfloor$ も $p - 1$（$p \le \sqrt{N}$ なので $\lfloor N/k \rfloor$ の形で書ける）も商の値なので、表は $O(\sqrt{N})$ 個で閉じる。

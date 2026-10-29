@@ -94,11 +94,13 @@ $$
 分母 $V(x) = Q(x) Q(-x)$ は $x$ を $-x$ にしても変わらないので、偶数次の項しか持たず $V(x) = V_e(x^2)$ と書ける。分子 $U(x) = P(x) Q(-x)$ を偶数次と奇数次に分けて $U(x) = U_e(x^2) + x U_o(x^2)$ とすると、$1/V_e(x^2)$ も偶数次の項しか持たないので、$x^N$ の係数に効くのは $N$ と偶奇が同じ側だけである。
 
 $$
-[x^N] \frac{P(x)}{Q(x)} =
-\begin{cases}
+\begin{aligned}
+&[x^N] \frac{P(x)}{Q(x)} \\
+&= \begin{cases}
 [x^{N/2}] \dfrac{U_e(x)}{V_e(x)} & (N \text{ が偶数}) \\[2ex]
 [x^{(N-1)/2}] \dfrac{U_o(x)}{V_e(x)} & (N \text{ が奇数})
 \end{cases}
+\end{aligned}
 $$
 
 $V_e$ の次数は $K$、$U_e$・$U_o$ の次数は $K$ 未満のままで、$N$ だけが半分になる。$N = 0$ になったら答えは $P(0)/Q(0)$ である。

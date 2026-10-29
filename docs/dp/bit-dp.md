@@ -1,7 +1,8 @@
 ---
 id: bit-dp
 title: bitDP
-aliases: [ビット DP, 集合 DP, Bitmask DP, 巡回セールスマン問題, TSP, Traveling Salesman Problem, ハミルトン路]
+aliases: [ビット DP, 集合 DP, Bitmask DP, 巡回セールスマン問題, TSP, Traveling Salesman Problem, ハミルトン路, bit DP]
+tags: [ビット]
 type: technique
 field: dp
 chapter: 状態の形で分かれる DP
@@ -43,7 +44,7 @@ updated: 2026-10-29
     - **前提**：[DP の状態の設計](../dp/dp-state-design.md)、[bit 全探索と順列全探索](../basics/bit-full-search.md)
 
 <!-- textlint-disable -->
-別名：ビット DP・集合 DP・Bitmask DP・巡回セールスマン問題・TSP・Traveling Salesman Problem・ハミルトン路
+別名：ビット DP・集合 DP・Bitmask DP・巡回セールスマン問題・TSP・Traveling Salesman Problem・ハミルトン路・bit DP
 <!-- textlint-enable -->
 
 bitDP は、$N$ 個のものの部分集合を $0$ 以上 $2^N$ 未満の整数で表し、その整数を DP の添字にする手法である。$N!$ 通りの順番を調べる代わりに、将来に効く情報だけを集合として持つので、$N \le 20$ 程度まで扱える。
@@ -140,10 +141,13 @@ $N = 3$ で一度動かす。$c(0, 1) = 1$、$c(1, 2) = 2$、$c(2, 0) = 3$、$c(
 
 計算量は「状態数 × 1 状態あたりの遷移数」である。
 
-| 形 | 状態数 | 遷移数 | 計算量 | $N = 17$ | $N = 20$ |
-| --- | --- | --- | --- | --- | --- |
-| 集合だけ | $2^N$ | $N$ | $O(2^N N)$ | $2.2 \times 10^6$ | $2.1 \times 10^7$ |
-| 集合と最後 | $2^N N$ | $N$ | $O(2^N N^2)$ | $3.8 \times 10^7$ | $4.2 \times 10^8$ |
+| 形 | 集合だけ | 集合と最後 |
+| --- | --- | --- |
+| 状態数 | $2^N$ | $2^N N$ |
+| 遷移数 | $N$ | $N$ |
+| 計算量 | $O(2^N N)$ | $O(2^N N^2)$ |
+| $N = 17$ | $2.2 \times 10^6$ | $3.8 \times 10^7$ |
+| $N = 20$ | $2.1 \times 10^7$ | $4.2 \times 10^8$ |
 
 集合と最後を持つ形は、$N = 17$ 前後までなら余裕がある。$N = 20$ では $4.2 \times 10^8$ 回になり、到達できない状態（値が $+\infty$）を飛ばすなど、内側のループを軽く保つ必要がある。問題の制約が $N \le 16$〜$18$ 程度なのは、この形を想定していることが多い。
 

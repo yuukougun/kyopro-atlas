@@ -9,7 +9,7 @@ search:
 
 # 幾何の詳細索引
 
-分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
+分野の全ページの id・URL・別名・サイン・種類・前提・使い分け・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
 
 ## ベクトルと外積（geometry-vectors） {#geometry-vectors}
 
@@ -41,6 +41,7 @@ search:
 - 別名：浮動小数点の誤差、floating-point error、EPS、整数化、桁落ち、直線の正規化、方向ベクトルの約分、ax+by+c=0
 - 種類：幾何、整数論
 - 前提：`geometry-vectors`、`gcd-lcm`
+- 使い分け：`method-comparison#numbers`
 - サイン：
     - 言い回し：座標や値が小数第 k 位まで与えられる
     - 言い回し：ちょうど境界上か・整数になるかを判定する

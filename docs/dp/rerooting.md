@@ -1,7 +1,8 @@
 ---
 id: rerooting
 title: 全方位木 DP
-aliases: [Rerooting, ReRooting DP, 換根 DP]
+aliases: [Rerooting, ReRooting DP, 換根 DP, 全方位]
+tags: [全方位]
 type: technique
 field: dp
 chapter: 状態の形で分かれる DP
@@ -39,7 +40,7 @@ updated: 2026-10-29
     - **前提**：[木 DP](../dp/tree-dp.md)、[累積和](../basics/prefix-sum.md)
 
 <!-- textlint-disable -->
-別名：Rerooting・ReRooting DP・換根 DP
+別名：Rerooting・ReRooting DP・換根 DP・全方位
 <!-- textlint-enable -->
 
 全方位木 DP は、[木 DP](../dp/tree-dp.md) の根を各頂点に変えたときの値を、根ごとのやり直しなしで求める方法である。根を 1 つ決めて木 DP をすると、根以外の頂点の値は「その頂点の下側」しか見ていない。そこで 2 回目の走査で「親側の部分木の値」を上から配り、下側の値と合わせて各頂点の答えを作る。頂点数は $N$ で、問題文の頂点番号は 1-indexed、実装は 0-indexed で書く。

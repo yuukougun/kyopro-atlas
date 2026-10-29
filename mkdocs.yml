@@ -119,4 +119,5 @@ extra_javascript:
   - assets/js/katex-init.js
   - assets/js/progress.js
   - assets/js/viz.js
+  - assets/js/filter.js # 語で表の行を絞り込む欄と、照合の規則（map.js も使うので map.js より前）
   - assets/js/map.js # Cytoscape.js は地図のあるページでだけ読み込む

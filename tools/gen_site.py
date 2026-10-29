@@ -16,14 +16,15 @@ data/recent-abc.yaml（最近の ABC）。front matter が足りないページ�
   nav.yml                              分野の順 → 分野の入口 → chapter のないページ → chapter ごと（order の順）。nav_title が
                                        あればそれを使う。先頭にホーム（docs/index.md があれば）、最後に「一覧」（lists/ の全ページ。
                                        テンプレートは nav にある一覧にだけバッジのリンクを張るため）。extra.kp に一覧の slug
-                                       （levels・kinds）と分野の表示名（fields）を書く（overrides/main.html が引く。interfaces.md の外）
+                                       （levels・kinds）と分野の表示名（fields）と、似た手法の使い分けの戻り道（compare：ページ id →
+                                       そのページへリンクする使い分けの節の anchor。#57）を書く（overrides/main.html が引く。interfaces.md §8）
   docs/<field>/index.md                分野の入口。ページのある分野だけ（Issue #58。entrance の注記）：
                                        説明の 1 文 → 分野の注記（FIELD_NOTES）→ 関連する案内の 1 段落（学ぶ順・使い分け・問題集・自作）
                                        → 章ごとのページの箇条書き（題名・レベルの小さな印・準備中の印・要約の 1 文目）と、章の後の
                                        「ほかの章の関連ページ」→ 最後に「ほかの分野にある関連ページ」。章の中は order の順（並べ替えない）
   docs/lists/index.md・level-<…>.md・kind-<…>.md   レベル別・種類別の一覧（ページのあるものだけ。名前は LEVEL_SLUGS・KIND_SLUGS）
   docs/llms.txt                        1行1ページ「- [タイトル](URL)（id・レベル・分野・段階）：要約」と、使い方・版・詳細索引への案内
-  docs/index/<field>.md                分野ごとの詳細索引（id・URL・別名・サイン・kind・前提・ACL・節）。サイト内検索からは外す
+  docs/index/<field>.md                分野ごとの詳細索引（id・URL・別名・サイン・kind・前提・使い分け・ACL・節）。サイト内検索からは外す
   overrides/assets/data/graph.json     interfaces.md §5（pages は1行1ページ）
   手書きのページの生成部分             <!-- gen:begin 名前 --> 〜 <!-- gen:end 名前 --> の間（名前は --list-blocks）。
                                        フェンスの中の目印は無視する。目印のないページ・まだないページは飛ばして知らせる。
@@ -45,9 +46,11 @@ import collections
 import difflib
 import hashlib
 import json
+import posixpath
 import re
 import sys
 import unicodedata
+import urllib.parse
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -133,6 +136,11 @@ SERIES_RE = re.compile(r"(?P<series>" + "|".join(INDEX_SERIES) + r")(?P<num>\d+)
 INDEX_PARTS = INDEX_SERIES + ["sets", "other"]   # 問題番号の索引の区分（生成部分 problem-index-<区分> と同じ順）
 ABC_RANGE = 50                              # 問題番号の索引の ABC の小見出しの回の幅（abc-001・abc-050・abc-100…）
 LEVEL_CLASS = {"基礎": "kiso", "水": "mizu", "青": "ao", "黄": "ki", "発展": "hatten"}   # overrides/main.html の LV_CLASS と同じ
+COMPARISON_PAGE = "method-comparison"       # 似た手法の使い分けのページ（guide/method-comparison）の id
+# 使い分けの戻り道（#57）：使い分けのページの節のうち、手法を比べる表でない節（比べる観点）と、戻り道を出さない分野
+# （横断ページ・はじめに。用語集・ストレステストなど、手法ではなく道具や約束のページ）
+COMPARISON_SKIP_SECTIONS = {"criteria"}
+COMPARISON_SKIP_FIELDS = {"start", "guide"}
 # 分野の入口の「使い分け」：guide/method-comparison の節（anchor）。その分野のページへのリンクが多い節を選んだ（2026-10-29）。
 # 節がなくなれば飛ばし、どれもなければページへのリンクにする
 FIELD_COMPARISONS = {
@@ -424,6 +432,7 @@ class Site:
         self.used_problems = self._used_problems()
         self.uses = self._problem_uses()
         self.index_parts = self._index_parts()
+        self.compare = self._comparisons()
         self.version = self._version()
         ups = [p.updated for p in self.pages if p.updated]
         self.updated = max(ups) if ups else None
@@ -489,6 +498,39 @@ class Site:
             else:
                 parts["other"].append(((0, cp.contest_name(cid).casefold() + "\0" + cid), qid))
         return {k: [q for _, q in sorted(v, key=lambda t: (t[0], self.index_key(t[1])))] for k, v in parts.items()}
+
+    def _comparisons(self) -> dict[str, list[str]]:
+        """似た手法の使い分けへの戻り道（#57）：ページ id → 使い分けのページ（COMPARISON_PAGE）の節のうち、そのページへ
+        リンクする節の anchor の列。節は front matter の sections にある ## 見出しで区切り、節の本文（表・箇条書き・段落。
+        フェンス・コード・数式の中は除く）の相対リンクの行き先のページを数える。比べる観点の節（COMPARISON_SKIP_SECTIONS）と、
+        横断ページ・はじめに（COMPARISON_SKIP_FIELDS）へのリンクは数えない。ページはナビゲーションの順、節は使い分けの
+        ページの順に並べる。使い分けのページが準備中なら本文に節の見出しがないので空。overrides/main.html がページ下部の
+        「似た手法の使い分け」の欄に出す（nav.yml の extra.kp.compare）。"""
+        mc = self.by_id.get(COMPARISON_PAGE)
+        if mc is None or mc.stub:
+            return {}
+        by_rel = {p.rel: p for p in self.pages}
+        order = {s["anchor"]: k for k, s in enumerate(mc.sections)}
+        found: dict[str, set[str]] = collections.defaultdict(set)
+        cur = None
+        for i, s in cp.prose_lines(mc.page):
+            h = cp.HEADING_RE.match(mc.page.lines[i])
+            if h:
+                if len(h.group("hashes")) <= 2:
+                    hid, _ = cp.heading_attr(h.group("text"))
+                    cur = hid if hid in order and hid not in COMPARISON_SKIP_SECTIONS else None
+                continue
+            if cur is None:
+                continue
+            for m in cp.LINK_RE.finditer(s):
+                parts = urllib.parse.urlsplit(cp.link_dest(m.group("dest")))
+                if parts.scheme or parts.netloc or not parts.path:
+                    continue
+                trel = posixpath.normpath(posixpath.join(posixpath.dirname(mc.rel), urllib.parse.unquote(parts.path)))
+                q = by_rel.get(trel)
+                if q is not None and q is not mc and q.field not in COMPARISON_SKIP_FIELDS:
+                    found[q.id].add(cur)
+        return {p.id: sorted(found[p.id], key=order.__getitem__) for p in self.pages if p.id in found}
 
     def _version(self) -> str:
         data = {
@@ -639,6 +681,10 @@ class Site:
         lines += [f"      {yaml_scalar(k)}: {slug}" for k, slug in KIND_SLUGS.items()]
         lines.append("    fields:")
         lines += [f"      {f}: {yaml_scalar(cp.FIELD_TITLES[f])}" for f in cp.FIELDS]
+        if self.compare:
+            # ページ下部の「似た手法の使い分け」の欄（#57）：ページ id → 使い分けのページの節のうち、そのページへリンクする節
+            lines.append("    compare:")
+            lines += [f"      {yaml_scalar(pid)}: {json.dumps(anchors)}" for pid, anchors in self.compare.items()]
         return "\n".join(lines) + "\n"
 
     # ---- 分野の入口（Issue #58）
@@ -703,7 +749,7 @@ class Site:
         rm = self.by_id.get("roadmap")
         if rm and any(p.level for p in ps):
             parts.append("学ぶ順：" + self.link(host, rm, "reading-order"))
-        mc = self.by_id.get("method-comparison")
+        mc = self.by_id.get(COMPARISON_PAGE)
         if mc and FIELD_COMPARISONS.get(f):
             titles = {s["anchor"]: s["title"] for s in mc.sections}
             links = [self.link(host, mc, a, text=cp.md_text(titles[a]).replace("[", "\\[").replace("]", "\\]"))
@@ -851,7 +897,7 @@ class Site:
     def field_index(self, f: str) -> str:
         ps = [p for p in self.pages if p.field == f]
         out = self.front(f"{cp.FIELD_TITLES[f]}の詳細索引", search_exclude=True)
-        out += (f"# {cp.FIELD_TITLES[f]}の詳細索引\n\n分野の全ページの id・URL・別名・サイン・種類・前提・節。"
+        out += (f"# {cp.FIELD_TITLES[f]}の詳細索引\n\n分野の全ページの id・URL・別名・サイン・種類・前提・使い分け・節。"
                 f"全分野の1行の一覧と索引の版は {cp.SITE_URL}llms.txt にある。"
                 + ("stub（準備中）のページは要約と前提しかなく、節の見出しもまだない。" if any(p.stub for p in ps) else "") + "\n")
         for p in ps:
@@ -865,6 +911,8 @@ class Site:
                 out += f"- 種類：{'、'.join(p.kind)}\n"
             if p.prerequisites:
                 out += f"- 前提：{'、'.join(f'`{x}`' for x in p.prerequisites)}\n"
+            if p.id in self.compare:
+                out += f"- 使い分け：{'、'.join(f'`{COMPARISON_PAGE}#{a}`' for a in self.compare[p.id])}\n"
             if p.acl:
                 out += f"- ACL：{'、'.join(f'`{x}`' for x in p.acl)}\n"
             if p.signs:
@@ -886,7 +934,8 @@ class Site:
         for p in self.pages:
             rel = list(dict.fromkeys(r.partition("#")[0] for r in p.related if r.partition("#")[0] != p.id))
             pages.append({
-                "id": p.id, "title": p.title, "nav_title": p.nav_title, "field": p.field, "chapter": p.chapter, "order": p.order,
+                "id": p.id, "title": p.title, "nav_title": p.nav_title, "aliases": p.aliases,
+                "field": p.field, "chapter": p.chapter, "order": p.order,
                 "type": p.type, "level": p.level, "kind": p.kind, "frequency": p.frequency, "stage": p.stage, "url": p.url,
                 "summary": p.summary, "prerequisites": p.prerequisites, "related": rel,
                 "sections": [{"anchor": s["anchor"], "title": s["title"], "level": s["level"]} for s in p.sections if self.upper(p, s)],

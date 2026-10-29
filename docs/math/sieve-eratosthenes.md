@@ -1,7 +1,7 @@
 ---
 id: sieve-eratosthenes
 title: エラトステネスの篩
-aliases: [篩, sieve of Eratosthenes, 素数の列挙, 素数表]
+aliases: [篩, sieve of Eratosthenes, 素数の列挙, 素数表, エラトステネスのふるい]
 type: technique
 field: math
 chapter: 素数と約数
@@ -40,7 +40,7 @@ updated: 2026-10-29
     - **前提**：[約数列挙と素数判定](../math/divisor-enum.md)
 
 <!-- textlint-disable -->
-別名：篩・sieve of Eratosthenes・素数の列挙・素数表
+別名：篩・sieve of Eratosthenes・素数の列挙・素数表・エラトステネスのふるい
 <!-- textlint-enable -->
 
 エラトステネスの篩は、$2$ から順に「まだ消えていない数は素数」と確定させ、その倍数を表から消していく方法である。1 つずつ[試し割り](../math/divisor-enum.md)すると $N$ 個で $O(N \sqrt{N})$ かかるところを、ほぼ線形の $O(N \log \log N)$ で全部判定できる。

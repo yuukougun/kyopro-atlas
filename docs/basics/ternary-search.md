@@ -1,7 +1,7 @@
 ---
 id: ternary-search
 title: 三分探索
-aliases: [三分法, 黄金分割探索, 凸関数の極値, 凸関数, 離散凸, 増分が単調, ternary search]
+aliases: [三分法, 黄金分割探索, 凸関数の極値, 凸関数, 離散凸, 増分が単調, ternary search, 3 分探索]
 type: technique
 field: basics
 chapter: 凸と三分探索
@@ -40,7 +40,7 @@ updated: 2026-10-29
     - **前提**：[答えで二分探索](../basics/binary-search-answer.md)
 
 <!-- textlint-disable -->
-別名：三分法・黄金分割探索・凸関数の極値・凸関数・離散凸・増分が単調・ternary search
+別名：三分法・黄金分割探索・凸関数の極値・凸関数・離散凸・増分が単調・ternary search・3 分探索
 <!-- textlint-enable -->
 
 三分探索は、[下に凸](../guide/glossary.md#convex-function)な関数 $f$ の最小値を、区間の中の 2 点の値を比べて区間を縮めながら求める方法である。[答えで二分探索](../basics/binary-search-answer.md)は「$x$ で可能か」という判定が単調なときに使うが、「$x$ を大きくすると一方の量は減り、もう一方は増える」ような最適化では判定が作れない。値そのものが谷形なら、谷の底がどちら側にあるかを 2 点の比較で決められる。整数の範囲なら、差分の符号で二分探索に直すほうが書き間違えにくい。

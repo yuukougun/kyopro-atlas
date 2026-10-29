@@ -1,7 +1,7 @@
 ---
 id: inclusion-exclusion
 title: 包除原理
-aliases: [包除, 撹乱順列, 完全順列, モンモール数, 全射の数, min-max 包除, inclusion-exclusion principle, derangement]
+aliases: [包除, 撹乱順列, 完全順列, モンモール数, 全射の数, min-max 包除, inclusion-exclusion principle, derangement, 包含除外原理, 包除の原理]
 type: technique
 field: comb
 chapter: 包除の系統
@@ -43,7 +43,7 @@ updated: 2026-10-29
     - **前提**：[数え上げの考え方](../comb/counting-mindset.md)、[余事象](../thinking/complement.md)、[bit 全探索と順列全探索](../basics/bit-full-search.md)
 
 <!-- textlint-disable -->
-別名：包除・撹乱順列・完全順列・モンモール数・全射の数・min-max 包除・inclusion-exclusion principle・derangement
+別名：包除・撹乱順列・完全順列・モンモール数・全射の数・min-max 包除・inclusion-exclusion principle・derangement・包含除外原理・包除の原理
 <!-- textlint-enable -->
 
 包除原理は、「どの条件も破らない」ものを直接数える代わりに、「指定した条件を少なくとも破る」ものの個数を足し引きして求める方法である。直接数えると条件どうしが絡み合うのに、条件を破る側に固定すると残りが自由になり、積の法則で数えられることが多い。2〜3 条件の足し引きは[余事象](../thinking/complement.md#two-conditions)で済むので、ここでは条件が多い場合と、条件が対称な場合の式を扱う。
@@ -53,13 +53,16 @@ updated: 2026-10-29
 数える対象の全体を $U$、条件を $1, \dots, M$ とする。条件 $i$ を破るものの集合を $A_i$ とし、条件の集合 $S \subseteq \{1, \dots, M\}$ について次の量を考える。
 
 $$
-N(S) = \Bigl\lvert \bigcap_{i \in S} A_i \Bigr\rvert \quad (\text{$S$ の条件をすべて破るもの。$S$ の外の条件は破っても破らなくてもよい})
+N(S) = \Bigl\lvert \bigcap_{i \in S} A_i \Bigr\rvert
 $$
 
-空集合では $N(\emptyset) = \lvert U \rvert$ である。このとき、どの条件も破らないものの個数は次の式で求まる。
+$N(S)$ は $S$ の条件をすべて破るものの個数で、$S$ の外の条件は破っても破らなくてもよい。空集合では $N(\emptyset) = \lvert U \rvert$ である。このとき、どの条件も破らないものの個数は次の式で求まる。
 
 $$
-\Bigl\lvert U \setminus (A_1 \cup \dots \cup A_M) \Bigr\rvert = \sum_{S \subseteq \{1, \dots, M\}} (-1)^{\lvert S \rvert} N(S)
+\begin{aligned}
+&\Bigl\lvert U \setminus (A_1 \cup \dots \cup A_M) \Bigr\rvert \\
+&= \sum_{S \subseteq \{1, \dots, M\}} (-1)^{\lvert S \rvert} N(S)
+\end{aligned}
 $$
 
 和集合の大きさを求めたいときは、$\lvert U \rvert$ から引いて $\lvert A_1 \cup \dots \cup A_M \rvert = \sum_{S \ne \emptyset} (-1)^{\lvert S \rvert + 1} N(S)$ と書いてもよい。どちらの形でも、数えるのは共通部分（「少なくとも $S$ を破る」）だけである。
@@ -121,10 +124,10 @@ $N(S)$ の求め方は、条件を同時に破ったときに何が「共通部�
 
 ## 対称なら破る個数 k ごとに足す {#symmetric}
 
-$N(S)$ が $S$ の中身によらず大きさ $\lvert S \rvert = k$ だけで決まるときは、大きさ $k$ の $S$ が $\binom{M}{k}$ 個あるので、和をまとめられる。
+$N(S)$ が $S$ の中身によらず大きさ $\lvert S \rvert = k$ だけで決まるときは、大きさ $k$ の $S$ が $\binom{M}{k}$ 個あるので、和をまとめられる。$\lvert S \rvert = k$ のときの $N(S)$ を $f(k)$ とすると、次のようになる。
 
 $$
-\sum_{S} (-1)^{\lvert S \rvert} N(S) = \sum_{k=0}^{M} (-1)^k \binom{M}{k} f(k) \qquad (f(k) \text{ は } \lvert S \rvert = k \text{ のときの } N(S))
+\sum_{S} (-1)^{\lvert S \rvert} N(S) = \sum_{k=0}^{M} (-1)^k \binom{M}{k} f(k)
 $$
 
 項は $M + 1$ 個に減るので、$M$ が $10^5$ 以上でも計算できる。二項係数と階乗は[前計算](../comb/binomial-precompute.md)しておき、各項を $O(1)$ で求める。答えは [modint](../math/modint.md) で求めることが多く、引き算で負にならないよう気をつける（[余事象の mod の引き算](../thinking/complement.md#mod-and-empty)）。

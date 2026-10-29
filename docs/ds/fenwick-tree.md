@@ -2,6 +2,8 @@
 id: fenwick-tree
 title: BIT（Fenwick Tree）
 aliases: [Binary Indexed Tree, フェニック木, fenwick_tree]
+tags: [フェニック]
+search: {boost: 1.8}
 type: technique
 field: ds
 chapter: 区間クエリ

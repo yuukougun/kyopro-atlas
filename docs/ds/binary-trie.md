@@ -2,6 +2,7 @@
 id: binary-trie
 title: Binary Trie
 aliases: [二分トライ, 2 進 Trie, ビット Trie, XOR Trie, XOR の最小化]
+tags: [ビット]
 type: technique
 field: ds
 chapter: そのほかのデータ構造

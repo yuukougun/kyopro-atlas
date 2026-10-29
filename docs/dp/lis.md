@@ -2,6 +2,7 @@
 id: lis
 title: 最長増加部分列
 aliases: [LIS, Longest Increasing Subsequence, 最長減少部分列, Dilworth の定理, 増加列への最小分割]
+search: {boost: 1.1}
 type: technique
 field: dp
 chapter: 列の DP

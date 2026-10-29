@@ -1,6 +1,8 @@
 """tools/gen_site.py の小さな試験：制約のサインの上限の読み方（#42）・英字の索引の小見出し（#45）・最近の ABC の表示名（#46）・
-章の表の「一覧」（#49）・問題番号の索引（#6）・ホームの目的別の入口（#7）・分野の入口（#58・#65・#75）。
+章の表の「一覧」（#49）・問題番号の索引（#6）・ホームの目的別の入口（#7）・分野の入口（#58・#65・#75）・
+似た手法の使い分けへの戻り道（#57）・graph.json の別名（#59）。
 python3 -m unittest discover -s tests/tools"""
+import json
 import re
 import sys
 import tempfile
@@ -292,6 +294,101 @@ class EntrancesTest(unittest.TestCase):
         self.assertIn("\n- [区間](interval.md)：区間で引ける（かっこ。の中）。\n", pat)
         for s in ("—", "kp-mini", "ページ名の横の印"):
             self.assertNotIn(s, pat)
+
+
+# 使い分けのページ（#57）。比べる観点の節・横断ページ・節に入らない見出し・フェンス・コードの中のリンクは数えない
+COMPARISON_BODY = """!!! abstract "要点"
+    - **何のページか**：[累積和](../basics/prefix-sum.md)を比べる（要点は節の外）
+
+## 比べる観点 {#criteria}
+
+[逆元](../guide/glossary.md#inverse-element)と[計算量の見積もり](../basics/complexity-estimation.md)。
+
+## 区間の集約 {#range-queries}
+
+| 状況 | 使う手法 |
+| --- | --- |
+| 更新なし | [累積和](../basics/prefix-sum.md#half-open) |
+| 一点の更新 | [BIT](../ds/fenwick-tree.md#operations) |
+
+### 小見出し
+
+段落の[セグメント木](../ds/segment-tree.md)と[用語集](../guide/glossary.md)と[同じページの節](#criteria)。`[コード](../ds/stl-containers.md)`
+
+```text
+[フェンスの中](../ds/stl-containers.md)
+```
+
+## 二分探索の種類 {#binary-search}
+
+- [BIT 上の二分探索](../ds/fenwick-tree.md#binary-search)・[累積和](../basics/prefix-sum.md)
+
+## 確認問題 {#quiz}
+
+[節に入らない見出し](../ds/stl-containers.md)
+"""
+
+
+class ComparisonTest(unittest.TestCase):
+    """似た手法の使い分けへの戻り道（#57）と graph.json の別名（#59）。"""
+
+    def make_site(self, stage: str = "reviewed") -> gs.Site:
+        docs = Path(self.tmp.name) / "docs"
+        specs = [
+            # (分野, id, 題名, 別名, 本文)
+            ("guide", "glossary", "用語集", [], "本文"),
+            ("guide", "method-comparison", "似た手法の使い分け", ["使い分け"], COMPARISON_BODY),
+            ("basics", "prefix-sum", "累積和", ["prefix sum"], "## 半開区間 {#half-open}"),
+            ("basics", "complexity-estimation", "計算量の見積もり", [], "本文"),
+            ("ds", "stl-containers", "STL コンテナの使い分け", [], "本文"),
+            ("ds", "fenwick-tree", "BIT（Fenwick Tree）", ["フェニック木"], "## 操作 {#operations}\n\n## 二分探索 {#binary-search}"),
+            ("ds", "segment-tree", "セグメント木", ["セグ木"], "本文"),
+        ]
+        for i, (field, pid, title, aliases, body) in enumerate(specs):
+            secs = [{"title": t, "anchor": a} for t, a in re.findall(r"^## (.+?) \{#([a-z0-9-]+)\}$", body, flags=re.M) if a != "quiz"]
+            fm = {"id": pid, "title": title, "aliases": aliases, "type": "guide" if field == "guide" else "technique", "field": field,
+                  "order": 10 * (i + 1), "level": None if field == "guide" else "基礎",
+                  "kind": ["案内"] if field == "guide" else ["データ構造"], "summary": f"{title}。",
+                  "stage": stage if pid == "method-comparison" else "draft", "sections": secs}
+            path = docs / field / f"{pid}.md"
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text("---\n" + yaml.safe_dump(fm, allow_unicode=True, sort_keys=False) + "---\n\n" + body + "\n", encoding="utf-8")
+        pages, others = cp.load_docs(docs)
+        return gs.Site(docs, pages, others, {}, [])
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def test_compare_map(self):
+        site = self.make_site()
+        # ナビゲーションの順（basics → ds）、節は使い分けのページの順。用語集（横断ページ）・比べる観点の節・確認問題・
+        # 同じページの節・要点の囲み・コードとフェンスの中のリンクは数えない
+        self.assertEqual(site.compare, {"prefix-sum": ["range-queries", "binary-search"],
+                                        "fenwick-tree": ["range-queries", "binary-search"],
+                                        "segment-tree": ["range-queries"]})
+
+    def test_compare_outputs(self):
+        site = self.make_site()
+        nav = yaml.safe_load(site.nav_yml())
+        self.assertEqual(nav["extra"]["kp"]["compare"], site.compare)
+        index = site.field_index("ds")
+        self.assertIn("- 使い分け：`method-comparison#range-queries`、`method-comparison#binary-search`\n", index)
+        self.assertNotIn("使い分け：`method-comparison", site.field_index("guide"))
+
+    def test_compare_stub(self):
+        # 使い分けのページが準備中なら本文に節の見出しがないので、戻り道を作らない
+        site = self.make_site(stage="stub")
+        self.assertEqual(site.compare, {})
+        self.assertNotIn("compare:", site.nav_yml())
+
+    def test_graph_aliases(self):
+        site = self.make_site()
+        by_id = {p["id"]: p for p in json.loads(site.graph_json())["pages"]}
+        self.assertEqual(by_id["fenwick-tree"]["aliases"], ["フェニック木"])
+        self.assertEqual(by_id["glossary"]["aliases"], [])
 
 
 if __name__ == "__main__":

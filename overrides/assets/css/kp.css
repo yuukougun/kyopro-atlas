@@ -847,3 +847,179 @@
   .md-typeset .kp-wishlist__undo { min-height: 44px; }
   .md-typeset .kp-order__check { min-height: 44px; min-width: 44px; }
 }
+
+/* ---------- 知識マップ：点の説明を地図に重ねる（map.js。#59） ---------- */
+/* 説明は地図（.kp-map__stage）の中に重ねる。点が地図の下半分なら上（--top）、上半分なら下に出し、点を隠さない。
+   上の .kp-map__info の規則（地図の下に出していたときの見た目）は、ここで上書きする */
+.md-typeset .kp-map__stage { position: relative; }
+.md-typeset .kp-map__stage > .kp-map__info {
+  position: absolute;
+  z-index: 2;
+  left: 0.5rem;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  box-sizing: border-box;
+  max-width: 24rem;
+  max-height: 60%;
+  overflow: auto;
+  overscroll-behavior: contain;
+  margin: 0;
+  padding: 0.4em 2.6em 0.4em 0.8em;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-left: 0.2rem solid var(--md-default-fg-color--light);
+  border-radius: 0.2rem;
+  background: var(--md-default-bg-color);
+  box-shadow: var(--md-shadow-z2);
+}
+.md-typeset .kp-map__stage > .kp-map__info--top { top: 0.5rem; bottom: auto; }
+.md-typeset .kp-map__stage > .kp-map__info--pinned { border-left-color: var(--md-accent-fg-color); }
+.md-typeset .kp-map__info .kp-map__close {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.2rem;
+  width: 2em;
+  height: 2em;
+  padding: 0;
+  border: 0;
+  border-radius: 0.2rem;
+  background: transparent;
+  color: var(--md-default-fg-color--light);
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.md-typeset .kp-map__info .kp-map__close:hover,
+.md-typeset .kp-map__info .kp-map__close:focus-visible { color: var(--md-accent-fg-color); }
+.md-typeset .kp-map__acts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4em 1em;
+}
+.md-typeset .kp-map__info .kp-map__acts a { margin-right: 0; }
+.md-typeset .kp-map__acts button,
+.md-typeset .kp-map__alts button {
+  min-height: 2em;
+  padding: 0 0.6em;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 0.2rem;
+  background: transparent;
+  color: var(--md-typeset-a-color);
+  font: inherit;
+  cursor: pointer;
+}
+.md-typeset .kp-map__acts button:hover,
+.md-typeset .kp-map__acts button:focus-visible,
+.md-typeset .kp-map__alts button:hover,
+.md-typeset .kp-map__alts button:focus-visible { border-color: var(--md-accent-fg-color); }
+.md-typeset .kp-map__hint { color: var(--md-default-fg-color--light); font-size: 0.9em; }
+.md-typeset .kp-map__alts { margin-left: 0.5em; }
+.md-typeset .kp-map__alts button { margin: 0.2em 0 0 0.4em; }
+
+/* ---------- 語で行を絞り込む欄（filter.js。#60） ---------- */
+/* 欄はページの題の下（要点の前）に出る。語を入れている間は、当たった行（項目）と、それを含む表・箇条書き・見出しだけを残す */
+.md-typeset .kp-filter { margin: 0 0 1em; }
+.md-typeset .kp-filter__box {
+  display: flex;
+  align-items: stretch;
+  gap: 0.4em;
+}
+.md-typeset .kp-filter__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  box-sizing: border-box;
+  min-height: 2.2rem;
+  margin: 0;
+  padding: 0 0.6em;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 0.2rem;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  font: inherit;
+  font-size: 0.8rem; /* 16px 以上にして、iOS でフォーカスしたときに拡大されないようにする */
+}
+.md-typeset .kp-filter__input::placeholder { color: var(--md-default-fg-color--light); opacity: 1; }
+.md-typeset .kp-filter__input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; } /* 消すボタンは自前の × */
+.md-typeset .kp-filter__input:focus {
+  border-color: var(--md-accent-fg-color);
+  outline: 1px solid var(--md-accent-fg-color);
+}
+.md-typeset .kp-filter__clear {
+  flex: none;
+  min-width: 2.2rem;
+  padding: 0;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 0.2rem;
+  background: transparent;
+  color: var(--md-default-fg-color--light);
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.md-typeset .kp-filter__clear[hidden] { display: none; }
+.md-typeset .kp-filter__clear:hover,
+.md-typeset .kp-filter__clear:focus-visible { border-color: var(--md-accent-fg-color); color: var(--md-accent-fg-color); }
+.md-typeset .kp-filter__status {
+  margin: 0.3em 0 0;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.7rem;
+  line-height: 1.5;
+}
+.md-typeset .kp-filter-off { display: none !important; }
+/* 絞っている間は、欄の後ろの本文のうち残す印（kp-filter-keep）のない要素を隠す。ページ下部の欄（前提・関連など）は残す */
+.md-typeset.kp-filtering > .kp-filter ~ :not(.kp-filter-keep):not(.kp-links):not(.kp-page-info):not(.md-source-file) {
+  display: none !important;
+}
+
+@media (pointer: coarse) {
+  .md-typeset .kp-map__info .kp-map__close { width: 44px; height: 44px; }
+  .md-typeset .kp-map__acts a { display: inline-flex; align-items: center; min-height: 44px; }
+  .md-typeset .kp-map__acts button,
+  .md-typeset .kp-map__alts button { min-height: 44px; }
+  .md-typeset .kp-filter__input { min-height: 44px; }
+  .md-typeset .kp-filter__clear { min-width: 44px; min-height: 44px; }
+}
+
+/* ---------- 表と別行の数式の横のはみ出し（#55） ---------- */
+/* 狭い画面では、Material が表の見出しのセルに付ける min-width（5rem）を 4em（表の字で約 51px。余白を除いて全角 2 字が入る）に
+   下げ、セルの余白を詰める。どの列も 100px 前後を取るのをやめ、中身の幅で列を分ける。下限を 0 にすると、折り返せない語（コード・
+   数式・長いリンク）の列が幅を取り、短い日本語の列（頻度・レベルなど）が 1 字の幅まで縮んで縦に積まれるので、下限は残す。
+   詳細度は Material の規則と同じなので、後に読む kp.css が勝つ。
+   ロードマップの表の # の欄（table[data-kp-order] tr > :first-child）は詳細度の高いそちらの規則が勝ち、ここではぶつからない */
+@media screen and (max-width: 44.984375em) {
+  .md-typeset table:not([class]) th { min-width: 4em; }
+  .md-typeset table:not([class]) th,
+  .md-typeset table:not([class]) td { padding: 0.75em 0.6em; }
+  /* 囲み（admonition・details）の中の別行の数式は、Material が表にしているのと同じく、囲みの余白（0.6rem）の分だけ広げる。
+     Material の -0.8rem のままだと囲みの枠に重なり、下の影の覆い（背景の色）が枠の線を隠す */
+  .md-typeset .admonition div.arithmatex,
+  .md-typeset details div.arithmatex { margin-right: -0.6rem; margin-left: -0.6rem; }
+}
+
+/* 列が 7 つ以上の表は、見出しのセルの下限（狭い画面の 4em・広い画面の Material の 5rem）だけで本文の幅を超えるので、下限を外す
+   （幅を問わない。広い画面でも comb/grundy-number の表は 1280px で 414px はみ出していた）。
+   この教材では添字と値を並べた表（comb/grundy-number・string/kmp など）だけで、どのセルも 1〜2 字である。
+   :has() の中の th:nth-child(7) の分だけ詳細度が高く、上の狭い画面の規則より勝つ */
+.md-typeset table:not([class]):has(th:nth-child(7)) th { min-width: 0; }
+
+/* 表の中の Library Checker の問題名（dynamic_graph_vertex_add_component_sum など）は長い 1 語で、折り返せないと列が 300px 前後を
+   取り、ほかの列を最小の幅まで押し縮める（guide/library-design の表は、広い画面でも数 px はみ出していた）。ページ下部の自作の確認
+   （.kp-links__verify a）と同じく、幅を問わず途中で折り返す */
+.md-typeset table:not([class]) a[href^="https://judge.yosupo.jp/"] { overflow-wrap: anywhere; }
+
+/* 横にはみ出す表と別行の数式は、まだ送れる側の端に影を出し、続きがあると分かるようにする（幅を問わない）。
+   影は枠に固定し（scroll）、それを隠す覆いは中身と一緒に動かす（local）。端まで送ると覆いが影に重なって影が消え、
+   はみ出さないときは初めから重なっている。表の背景は透明にして、枠の背景にある影が透けて見えるようにする。
+   local は iOS・macOS の Safari では 15.4 から効く（それより前は覆いが動かず、影が出ないだけで崩れはしない） */
+:root { --kp-scroll-shadow: rgba(0, 0, 0, 0.22); }
+[data-md-color-scheme="slate"] { --kp-scroll-shadow: rgba(0, 0, 0, 0.8); } /* 暗い背景では濃くしないと見えない */
+.md-typeset .md-typeset__scrollwrap,
+.md-typeset div.arithmatex {
+  background:
+    linear-gradient(to right, var(--md-default-bg-color) 50%, transparent) left / 2em 100% no-repeat local,
+    linear-gradient(to left, var(--md-default-bg-color) 50%, transparent) right / 2em 100% no-repeat local,
+    linear-gradient(to right, var(--kp-scroll-shadow), transparent) left / 0.9em 100% no-repeat scroll,
+    linear-gradient(to left, var(--kp-scroll-shadow), transparent) right / 0.9em 100% no-repeat scroll;
+}
+.md-typeset .md-typeset__table table:not([class]) { background-color: transparent; }
