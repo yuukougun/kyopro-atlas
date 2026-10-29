@@ -22,7 +22,7 @@ sections:
   - {title: 指定されていない葉を削り続ける, anchor: prune-leaves}
   - {title: 一般のグラフのシュタイナー木は別物（グラフの章）, anchor: vs-graph}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -138,7 +138,7 @@ $$
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [典型90 035. Preserve Connectivity（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_ai)（diff —）：木と多数のクエリが与えられ、各クエリで指定された頂点をすべてつなぐのに必要な辺の数の最小値を答える。
+- [典型90 035. Preserve Connectivity（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_ai)（diff なし）：木と多数のクエリが与えられ、各クエリで指定された頂点をすべてつなぐのに必要な辺の数の最小値を答える。
 - [ABC149 F. Surrounded Nodes](https://atcoder.jp/contests/abc149/tasks/abc149_f)（diff 2208）：木の各頂点を確率 1/2 で黒に塗り、黒い頂点をすべて含む最小の部分木に含まれる白い頂点の数の期待値を求める。
 
 </div>

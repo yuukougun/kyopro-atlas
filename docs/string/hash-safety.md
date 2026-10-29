@@ -29,7 +29,7 @@ sections:
   - {title: 二重ハッシュとの比較, anchor: double-hashing}
   - {title: unordered_map への攻撃と、乱数を混ぜたカスタムハッシュ, anchor: unordered-map}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -242,7 +242,7 @@ GCC の標準ライブラリ（libstdc++）では、整数の既定のハッシ�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 047. Monochromatic Diagonal（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_au)（diff —）：R・G・B からなる 2 つの列で各マスの色が決まるマス目について、すべてのマスが同じ色である斜めの線の数を求める。
+- [典型90 047. Monochromatic Diagonal（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_au)（diff なし）：R・G・B からなる 2 つの列で各マスの色が決まるマス目について、すべてのマスが同じ色である斜めの線の数を求める。
 
 </div>
 

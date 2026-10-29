@@ -25,7 +25,7 @@ sections:
   - {title: パス上の最大値の和（重みの小さい順に併合して数える型は Union-Find の応用へ）, anchor: max-on-path}
   - {title: 期待値・特定の色を通らないパスへの応用, anchor: expectation, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -184,7 +184,7 @@ dfs(v):
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 039. Tree Distance（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_am)（diff —）：木のすべての頂点の組について、距離を足し合わせた値を求める
+- [典型90 039. Tree Distance（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_am)（diff なし）：木のすべての頂点の組について、距離を足し合わせた値を求める
 
 </div>
 

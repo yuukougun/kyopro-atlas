@@ -26,7 +26,7 @@ sections:
   - {title: 負の基数（余りを 0 以上に直してから割る）, anchor: negative-base, level: 水}
   - {title: 基数の二分探索とオーバーフロー（1 桁の場合分け）, anchor: base-binary-search, level: 水}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -187,7 +187,7 @@ $$
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC186 C. Unlucky 7](https://atcoder.jp/contests/abc186/tasks/abc186_c)（diff 131）：N 以下の正の整数のうち、10 進でも 8 進でも数字 7 を含まないものの個数を求める。
-- [典型90 067. Base 8 to 9（★2）](https://atcoder.jp/contests/typical90/tasks/typical90_bo)（diff —）：8 進法で表された数 N を 9 進法に直し、数字 8 を 5 に置き換える操作を K 回行った結果を求める。
+- [典型90 067. Base 8 to 9（★2）](https://atcoder.jp/contests/typical90/tasks/typical90_bo)（diff なし）：8 進法で表された数 N を 9 進法に直し、数字 8 を 5 に置き換える操作を K 回行った結果を求める。
 - [ABC105 C. Base -2 Number](https://atcoder.jp/contests/abc105/tasks/abc105_c)（diff 1204）：整数 N（負もありうる）を −2 進法で表す。
 - [ABC192 D. Base n](https://atcoder.jp/contests/abc192/tasks/abc192_d)（diff 1425）：数字列 X を n 進数（n は X の最大の数字 + 1 以上）とみた値のうち、M 以下になるものが何種類あるかを求める（M ≤ 10^18）。
 

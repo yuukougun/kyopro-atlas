@@ -30,7 +30,7 @@ sections:
   - {title: 定数倍（配列と set・map の差・メモリの連続性・bitset）, anchor: constant-factor, level: 水}
   - {title: 複数テストケースは合計（ΣN）で見積もる, anchor: multiple-testcases}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -189,7 +189,7 @@ $M = 10^6$ なら約 $1.4 \times 10^7$ 回で、二重ループに見えても $
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 055. Select 5（★2）](https://atcoder.jp/contests/typical90/tasks/typical90_bc)（diff —）：最大 100 個の整数から 5 個を選ぶ組合せのうち、積の余りが条件を満たすものを数える。
+- [典型90 055. Select 5（★2）](https://atcoder.jp/contests/typical90/tasks/typical90_bc)（diff なし）：最大 100 個の整数から 5 個を選ぶ組合せのうち、積の余りが条件を満たすものを数える。
 
 </div>
 
@@ -206,7 +206,7 @@ $M = 10^6$ なら約 $1.4 \times 10^7$ 回で、二重ループに見えても $
 
 - [HHKB2020 C. Neq Min](https://atcoder.jp/contests/hhkb2020/tasks/hhkb2020_c)（diff 352）：数を 1 つずつ追加するたびに、まだ現れていない最小の非負整数を出力する。
 - [ABC278 D. All Assign Point Add](https://atcoder.jp/contests/abc278/tasks/abc278_d)（diff 559）：全体への一括代入・一点への加算・一点の取得のクエリを処理する。
-- [典型90 072. Loop Railway Plan（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_bt)（diff —）：$H \times W \le 16$ のグリッドで、山のマスを避けて同じマスを通らずに戻ってくる最長の経路を求める。
+- [典型90 072. Loop Railway Plan（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_bt)（diff なし）：$H \times W \le 16$ のグリッドで、山のマスを避けて同じマスを通らずに戻ってくる最長の経路を求める。
 - [ABC196 D. Hanjo](https://atcoder.jp/contests/abc196/tasks/abc196_d)（diff 1277）：H×W ≤ 16 のマス目を、枚数の決まった 1×2 の畳と 1×1 の畳で敷き詰める方法の数を求める。
 
 </div>

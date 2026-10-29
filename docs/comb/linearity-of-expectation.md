@@ -245,7 +245,7 @@ $$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 066. Various Arrays（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_bn)（diff —）：各 i で値を L_i 以上 R_i 以下から一様に選んだ数列の、転倒数の期待値を求める。
+- [典型90 066. Various Arrays（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_bn)（diff なし）：各 i で値を L_i 以上 R_i 以下から一様に選んだ数列の、転倒数の期待値を求める。
 
 </div>
 

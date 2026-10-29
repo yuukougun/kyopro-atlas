@@ -28,7 +28,7 @@ sections:
   - {title: 向きを反転してもう一度, anchor: flip-direction}
   - {title: 経路上の上位 K 個（K 番目を固定して状態に）, anchor: top-k-on-path, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -213,7 +213,7 @@ $\mathrm{dp}[i][j][k]$ ＝「$(i, j)$ まで進み、数えたマスが $k$ 個�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC H. Grid 1](https://atcoder.jp/contests/dp/tasks/dp_h)（diff —）：壁のあるグリッドを右か下にだけ進んで、左上から右下へ行く経路の数を求める。
+- [EDPC H. Grid 1](https://atcoder.jp/contests/dp/tasks/dp_h)（diff なし）：壁のあるグリッドを右か下にだけ進んで、左上から右下へ行く経路の数を求める。
 
 </div>
 

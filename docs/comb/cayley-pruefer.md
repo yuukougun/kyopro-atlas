@@ -25,7 +25,7 @@ sections:
   - {title: 次数列ごとに数えて総和を取る, anchor: sum-over-degrees}
   - {title: 多項式（母関数）と組み合わせる, anchor: with-polynomials, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -207,7 +207,7 @@ $[x^{m}] P(x)$ は $P$ の $x^m$ の係数である。右辺の積の $x^{N-2}$ 
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [NYC2015 E. ひも](https://atcoder.jp/contests/NYC2015/tasks/nyc2015_5)（diff —）：完全グラフの全域木のうち、各頂点 v の次数がちょうど a_v（1〜3）であるものの数を 10^9+7 で割った余りで求める（N ≤ 10^5）。
+- [NYC2015 E. ひも](https://atcoder.jp/contests/NYC2015/tasks/nyc2015_5)（diff なし）：完全グラフの全域木のうち、各頂点 v の次数がちょうど a_v（1〜3）であるものの数を 10^9+7 で割った余りで求める（N ≤ 10^5）。
 
 </div>
 

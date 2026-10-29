@@ -26,7 +26,7 @@ sections:
   - {title: 何文字目まで集めたか（部分列として現れる回数を数える）, anchor: matched-prefix}
   - {title: 区間の反転・変更を段階の切り替えで表す, anchor: flip-interval}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -158,7 +158,7 @@ $$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 008. AtCounter（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_h)（diff —）：文字列から部分列として 'atcoder' を取り出す方法の数を求める。
+- [典型90 008. AtCounter（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_h)（diff なし）：文字列から部分列として 'atcoder' を取り出す方法の数を求める。
 
 </div>
 

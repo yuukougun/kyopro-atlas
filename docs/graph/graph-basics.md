@@ -23,7 +23,7 @@ sections:
   - {title: 用語（次数・パスとウォーク・単純グラフ・連結・木・DAG・二部グラフ・補グラフ）, anchor: terms}
   - {title: 握手補題（次数の和は 2M）, anchor: handshake}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -167,7 +167,7 @@ $$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 078. Easy Graph Problem（★2）](https://atcoder.jp/contests/typical90/tasks/typical90_bz)（diff —）：各頂点の隣接頂点のうち、自分より番号の小さいものの個数についての条件を満たす頂点を数える。
+- [典型90 078. Easy Graph Problem（★2）](https://atcoder.jp/contests/typical90/tasks/typical90_bz)（diff なし）：各頂点の隣接頂点のうち、自分より番号の小さいものの個数についての条件を満たす頂点を数える。
 
 </div>
 

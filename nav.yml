@@ -417,6 +417,7 @@ nav:
       - 約数と倍数: patterns/divisors-and-multiples.md
       - グリッド: patterns/grid.md
       - 操作列とクエリ: patterns/operation-sequence.md
+      - 円環: patterns/circular.md
   - C++:
       - cpp/index.md
       - C++ の逆引き: cpp/cpp-reverse-index.md

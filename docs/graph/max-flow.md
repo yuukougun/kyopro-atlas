@@ -206,7 +206,7 @@ dfs(v, up):                  # v まで up だけ届いている。t へ流せ�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [PRACTICE2 D. Maxflow](https://atcoder.jp/contests/practice2/tasks/practice2_d)（diff —）：障害物のあるマス目に 1×2 のタイルを重ならないように最大何枚置けるかを求め、置き方を出力する。
+- [PRACTICE2 D. Maxflow](https://atcoder.jp/contests/practice2/tasks/practice2_d)（diff なし）：障害物のあるマス目に 1×2 のタイルを重ならないように最大何枚置けるかを求め、置き方を出力する。
 
 </div>
 
@@ -246,7 +246,7 @@ ACL の `mf_graph` の使い方を示すための問題である。隣り合う 
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [鉄則本 A68. Maximum Flow](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bp)（diff —）：容量付きの有向グラフで、頂点 1 から頂点 N へ流せる量の最大を求める。
+- [鉄則本 A68. Maximum Flow](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bp)（diff なし）：容量付きの有向グラフで、頂点 1 から頂点 N へ流せる量の最大を求める。
 - [ABC318 G. Typical Path Problem](https://atcoder.jp/contests/abc318/tasks/abc318_g)（diff 2260）：無向グラフで、頂点 A から頂点 B を通って頂点 C へ行く、同じ頂点を 2 度通らないパスがあるかを判定する。
 
 </div>

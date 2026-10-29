@@ -234,7 +234,7 @@ C++ では、子の map を `swap` で親に引き継ぐと、大きい方をコ
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC P. Independent Set](https://atcoder.jp/contests/dp/tasks/dp_p)（diff —）：N 頂点の木の各頂点を白か黒に塗り、黒どうしが隣り合わないようにする方法の数を求める。
+- [EDPC P. Independent Set](https://atcoder.jp/contests/dp/tasks/dp_p)（diff なし）：N 頂点の木の各頂点を白か黒に塗り、黒どうしが隣り合わないようにする方法の数を求める。
 
 </div>
 
@@ -283,7 +283,7 @@ C++ では、子の map を `swap` で親に引き継ぐと、大きい方をコ
 
 - [ABC239 E. Subtree K-th Max](https://atcoder.jp/contests/abc239/tasks/abc239_e)（diff 1084）：根付き木の各頂点に値があり、頂点 v の部分木に含まれる値の大きい方から K 番目（K ≤ 20）を答えるクエリに答える。
 - [ABC348 E. Minimize Sum of Distances](https://atcoder.jp/contests/abc348/tasks/abc348_e)（diff 1347）：頂点に重み C_i のついた木で、Σ C_i × d(v, i) を最小にする頂点 v での値を求める。
-- [典型90 073. We Need Both a and b（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_bu)（diff —）：a か b が書かれた木の辺をいくつか切り、どの連結成分にも a と b の両方が含まれるようにする方法の数を求める。
+- [典型90 073. We Need Both a and b（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_bu)（diff なし）：a か b が書かれた木の辺をいくつか切り、どの連結成分にも a と b の両方が含まれるようにする方法の数を求める。
 - [ABC133 E. Virus Tree 2](https://atcoder.jp/contests/abc133/tasks/abc133_e)（diff 1505）：N 頂点の木の各頂点を K 色で塗るとき、距離 2 以下の 2 頂点がすべて異なる色になる塗り方の数を求める。
 - [ABC259 F. Select Edges](https://atcoder.jp/contests/abc259/tasks/abc259_f)（diff 1961）：木の辺をいくつか選び、各頂点 i に接する選んだ辺が d_i 本以下になるようにするときの、辺の重みの和の最大を求める。
 

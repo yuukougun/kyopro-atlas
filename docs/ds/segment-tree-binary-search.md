@@ -213,7 +213,7 @@ mex では、値 $0, 1, \dots, N$ を添字にして各値の出現回数を持�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [PRACTICE2 J. Segment Tree](https://atcoder.jp/contests/practice2/tasks/practice2_j)（diff —）：一点更新・区間の最大値・「位置 X 以降で値が V 以上になる最初の位置」のクエリを処理する。
+- [PRACTICE2 J. Segment Tree](https://atcoder.jp/contests/practice2/tasks/practice2_j)（diff なし）：一点更新・区間の最大値・「位置 X 以降で値が V 以上になる最初の位置」のクエリを処理する。
 
 </div>
 

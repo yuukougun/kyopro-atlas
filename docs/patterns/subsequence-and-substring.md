@@ -74,20 +74,20 @@ updated: 2026-10-29
 
 ## 問われ方と手法の一覧 {#overview}
 
-問題文の形から行を探し、手法のページへ進む。上の 6 行が部分列、下の 4 行が主に部分文字列の問われ方である。代表の問題は、このページに載せたものだけを書いた。
+問題文の形から行を探し、問われ方のリンクから行の節へ移る。節で言い換えを確かめてから、手法のページへ進む。上の 6 行が部分列、下の 4 行が主に部分文字列の問われ方である。代表の問題は、このページに載せたものだけを書いた。
 
 | よく出る問われ方 | 使う手法 | ページ | 代表の問題 |
 |---|---|---|---|
-| T が S の部分列か（多数の T・辞書順最小の部分列も） | 前から貪欲に照合、次の出現位置の表 | [部分列の判定と次の出現位置の表](../string/subsequence-matching.md) | — |
-| T が部分列として現れる選び方の数 | 照合した文字数を状態にした DP | [フェーズを状態に持つ DP](../dp/dp-phase.md#matched-prefix) | ABC211 C |
-| 条件を満たす部分列（位置の選び方）の数 | 末尾の文字・余りを状態にした DP | [DP の状態の設計](../dp/dp-state-design.md)、[余り・個数を状態に持つ DP](../dp/dp-mod-state.md) | ABC456 D |
-| 異なる部分列（文字列の種類）の数・K 番目 | 最も左の取り出し方を数える部分列 DP | [部分列 DP](../dp/subsequence-dp.md)、[数え上げの重複の除き方](../comb/counting-dedup.md#leftmost) | — |
-| 添字が増える 3 つ組の数 | 段階を状態にした DP、真ん中を固定 | [フェーズを状態に持つ DP](../dp/dp-phase.md#counting-phases) | — |
-| 最長共通部分列・最長増加部分列 | LCS・LIS | [最長共通部分列](../dp/lcs.md)、[最長増加部分列](../dp/lis.md) | — |
-| 部分文字列どうしの一致・パターンの出現位置 | ローリングハッシュ、Z-algorithm、KMP 法 | [ローリングハッシュ](../string/rolling-hash.md)、[Z-algorithm](../string/z-algorithm.md)、[KMP 法](../string/kmp.md#matching) | — |
-| 異なる部分文字列の数・辞書順 K 番目 | Suffix Array と LCP 配列 | [Suffix Array](../string/suffix-array.md#distinct-substrings) | — |
-| 回文の部分文字列の数・最長回文部分列 | 中心から伸ばす・Manacher、S と反転の LCS・区間 DP | [回文の扱い](../string/palindrome.md)、[区間 DP](../dp/interval-dp.md) | — |
-| T を部分文字列に含まない文字列の数 | 照合の状態を持つ DP | [照合オートマトン上の DP](../string/string-automaton-dp.md) | — |
+| [T が S の部分列か（多数の T・辞書順最小の部分列も）](#is-subsequence) | 前から貪欲に照合、次の出現位置の表 | [部分列の判定と次の出現位置の表](../string/subsequence-matching.md) | — |
+| [T が部分列として現れる選び方の数](#count-occurrences) | 照合した文字数を状態にした DP | [フェーズを状態に持つ DP](../dp/dp-phase.md#matched-prefix) | ABC211 C |
+| [条件を満たす部分列（位置の選び方）の数](#count-with-condition) | 末尾の文字・余りを状態にした DP | [DP の状態の設計](../dp/dp-state-design.md)、[余り・個数を状態に持つ DP](../dp/dp-mod-state.md) | ABC456 D |
+| [異なる部分列（文字列の種類）の数・K 番目](#distinct-subsequences) | 最も左の取り出し方を数える部分列 DP | [部分列 DP](../dp/subsequence-dp.md)、[数え上げの重複の除き方](../comb/counting-dedup.md#leftmost) | — |
+| [添字が増える 3 つ組の数](#index-tuples) | 段階を状態にした DP、真ん中を固定 | [フェーズを状態に持つ DP](../dp/dp-phase.md#counting-phases) | — |
+| [最長共通部分列・最長増加部分列](#longest) | LCS・LIS | [最長共通部分列](../dp/lcs.md)、[最長増加部分列](../dp/lis.md) | — |
+| [部分文字列どうしの一致・パターンの出現位置](#substring-match) | ローリングハッシュ、Z-algorithm、KMP 法 | [ローリングハッシュ](../string/rolling-hash.md)、[Z-algorithm](../string/z-algorithm.md)、[KMP 法](../string/kmp.md#matching) | — |
+| [異なる部分文字列の数・辞書順 K 番目](#distinct-substrings) | Suffix Array と LCP 配列 | [Suffix Array](../string/suffix-array.md#distinct-substrings) | — |
+| [回文の部分文字列の数・最長回文部分列](#palindromes) | 中心から伸ばす・Manacher、S と反転の LCS・区間 DP | [回文の扱い](../string/palindrome.md)、[区間 DP](../dp/interval-dp.md) | — |
+| [T を部分文字列に含まない文字列の数](#avoid-substring) | 照合の状態を持つ DP | [照合オートマトン上の DP](../string/string-automaton-dp.md) | — |
 
 数列の連続部分列（区間）の和や個数は、文字列ではなく[区間の題材のページ](#subarrays)へ進む。問題へのリンクは、[例題](#examples)と[練習問題](#practice)の囲みにある。
 

@@ -27,7 +27,7 @@ sections:
   - {title: 多始点 BFS（超頂点から距離 0 の辺を張るのと同じ）, anchor: multi-source}
   - {title: 重みが 1 と 2 なら辺を割る・重み付きなら 01-BFS かダイクストラ法, anchor: weighted}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -182,7 +182,7 @@ BFS が使えるのは、すべての辺の重みが等しいときだけであ�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [ABC007 C. 幅優先探索](https://atcoder.jp/contests/abc007/tasks/abc007_3)（diff 1024）：壁と通路からなる迷路で、スタートのマスからゴールのマスまで上下左右に進むときの最小の移動回数を求める。
+- [ABC007 C. 幅優先探索](https://atcoder.jp/contests/abc007/tasks/abc007_3)（diff 1024・参考値）：壁と通路からなる迷路で、スタートのマスからゴールのマスまで上下左右に進むときの最小の移動回数を求める。
 
 </div>
 

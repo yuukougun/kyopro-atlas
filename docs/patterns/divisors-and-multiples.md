@@ -32,7 +32,7 @@ sections:
   - {title: '差の gcd・区間の gcd の値の種類 → gcd の性質（gcd-lcm, gcd-properties）', anchor: gcd}
   - {title: ⌊N/i⌋ の値ごとにまとめる → floor の値の列挙（floor-quotient-enum）, anchor: floor-sums}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -71,21 +71,21 @@ $d$ が大きい行ほど訪れる倍数が少なくなる。行ごとに処理�
 
 ## 問われ方と手法の一覧 {#overview}
 
-問題文の形から行を探し、手法のページへ進む。代表の問題は、このページに載せたものだけを書いた。
+問題文の形から行を探し、問われ方のリンクから行の節へ移る。節で言い換えを確かめてから、手法のページへ進む。代表の問題は、このページに載せたものだけを書いた。
 
 | よく出る問われ方 | 使う手法 | ページ | 代表の問題 |
 |---|---|---|---|
-| 1 つの数 $N \le 10^{12}$ の約数をすべて | $\sqrt{N}$ までの割り算 | [約数列挙と素数判定](../math/divisor-enum.md#enumerate) | ABC180 C |
-| 約数（の組）を全部試して間に合うか | 約数の個数の上限 | [約数の個数の上界](../math/divisor-count-bound.md#table) | — |
-| 1〜M の各数について、約数・倍数から値を集める | 倍数を回す | [調和級数](../math/harmonic-sum.md#collect-multiples) | — |
-| 1 つの数の素因数分解 | 試し割り | [素因数分解](../math/prime-factorization.md#procedure) | 典型90 075 |
-| 多数の数の素因数分解 | 最小素因数の篩 | [最小素因数の篩](../math/spf-sieve.md#many-numbers) | — |
-| 約数の個数・約数の和 | 素因数の指数の公式 | [約数列挙と素数判定](../math/divisor-enum.md#count-and-sum) | — |
-| gcd がちょうど $g$ の組・部分集合の数 | 倍数で数えて大きい方から引く | [約数包除](../comb/divisor-inclusion-exclusion.md#order) | — |
-| 約数・倍数の向きの和、GCD 畳み込み | 約数のゼータ変換・メビウス変換 | [約数のゼータ変換](../comb/zeta-mobius-divisor.md#per-prime) | — |
-| 積が平方数・積がちょうど $N$ | 素因数の指数で考える | [素因数の指数で考える](../math/prime-exponent-vector.md#squarefree-kernel) | — |
-| 全体に足した数との gcd・区間の gcd | gcd の性質 | [gcd の性質](../math/gcd-properties.md#difference-gcd) | — |
-| $N \le 10^{12}$ で $\lfloor N/i \rfloor$ の和 | 商の列挙 | [商の列挙](../math/floor-quotient-enum.md#block-end) | — |
+| [1 つの数 $N \le 10^{12}$ の約数をすべて](#enumerate) | $\sqrt{N}$ までの割り算 | [約数列挙と素数判定](../math/divisor-enum.md#enumerate) | ABC180 C |
+| [約数（の組）を全部試して間に合うか](#count-bound) | 約数の個数の上限 | [約数の個数の上界](../math/divisor-count-bound.md#table) | — |
+| [1〜M の各数について、約数・倍数から値を集める](#harmonic) | 倍数を回す | [調和級数](../math/harmonic-sum.md#collect-multiples) | — |
+| [1 つの数の素因数分解](#factorize) | 試し割り | [素因数分解](../math/prime-factorization.md#procedure) | 典型90 075 |
+| [多数の数の素因数分解](#factorize) | 最小素因数の篩 | [最小素因数の篩](../math/spf-sieve.md#many-numbers) | — |
+| [約数の個数・約数の和](#divisor-functions) | 素因数の指数の公式 | [約数列挙と素数判定](../math/divisor-enum.md#count-and-sum) | — |
+| [gcd がちょうど $g$ の組・部分集合の数](#exact-gcd) | 倍数で数えて大きい方から引く | [約数包除](../comb/divisor-inclusion-exclusion.md#order) | — |
+| [約数・倍数の向きの和、GCD 畳み込み](#zeta) | 約数のゼータ変換・メビウス変換 | [約数のゼータ変換](../comb/zeta-mobius-divisor.md#per-prime) | — |
+| [積が平方数・積がちょうど $N$](#products) | 素因数の指数で考える | [素因数の指数で考える](../math/prime-exponent-vector.md#squarefree-kernel) | — |
+| [全体に足した数との gcd・区間の gcd](#gcd) | gcd の性質 | [gcd の性質](../math/gcd-properties.md#difference-gcd) | — |
+| [$N \le 10^{12}$ で $\lfloor N/i \rfloor$ の和](#floor-sums) | 商の列挙 | [商の列挙](../math/floor-quotient-enum.md#block-end) | — |
 
 問題へのリンクは、[練習問題](#practice)の囲みにある。
 
@@ -220,7 +220,7 @@ $N \le 10^6$ 程度なら右辺をそのまま足せばよいが、$N = 10^{12}$
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC180 C. Cream puff](https://atcoder.jp/contests/abc180/tasks/abc180_c)（diff 142）：N 個の品物を何人かで余りなく等しく分けるとき、分けられる人数をすべて小さい順に出力する。
-- [典型90 075. Magic For Balls（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_bw)（diff —）：整数 N が書かれたボールがあり、1 回の魔法で、素数でないボールをすべて同時に、積が元の数になる 2 以上の 2 つの整数のボールに分ける。すべてのボールが素数になるまでの最小の回数を求める。
+- [典型90 075. Magic For Balls（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_bw)（diff なし）：整数 N が書かれたボールがあり、1 回の魔法で、素数でないボールをすべて同時に、積が元の数になる 2 以上の 2 つの整数のボールに分ける。すべてのボールが素数になるまでの最小の回数を求める。
 
 </div>
 

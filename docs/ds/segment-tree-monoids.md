@@ -279,7 +279,7 @@ K 日続く休日の始まりの日を決めると、その中の各日を「払
 
 - [ABC460 F. Farthest Pair Query](https://atcoder.jp/contests/abc460/tasks/abc460_f)（diff 1987）：木の頂点の白と黒を切り替えるクエリのたびに、黒い頂点どうしの距離の最大を答える。
 - [ABC467 F. Email Scheduling Optimization](https://atcoder.jp/contests/abc467/tasks/abc467_f)（diff 2052）：各メールに書く時間 A_j と返信までの時間 B_j があり、A・B の 1 点更新のたびに、メールを 1 通ずつ好きな順に書いて送るとき、すべての返信が届く最小の時刻を答える。
-- [ARC008 D. タコヤキオイシクナール](https://atcoder.jp/contests/arc008/tasks/arc008_4)（diff 2430）：一次関数の列を 1 つずつ差し替えながら、すべてを合成した結果の値の最大・最小を求める。
+- [ARC008 D. タコヤキオイシクナール](https://atcoder.jp/contests/arc008/tasks/arc008_4)（diff 2430・参考値）：一次関数の列を 1 つずつ差し替えながら、すべてを合成した結果の値の最大・最小を求める。
 
 </div>
 

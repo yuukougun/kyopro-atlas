@@ -31,7 +31,7 @@ sections:
   - {title: 過去の版に戻る・版をコピーする → 版の木・永続データ構造, anchor: versions}
   - {title: '同じ操作を非常に多く繰り返す → 周期で打ち切る・操作の合成をダブリング（periodicity, doubling）', anchor: repeat}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -71,22 +71,20 @@ updated: 2026-10-22
 
 ## 問われ方と手法の一覧 {#overview}
 
-問題文の形から行を探し、手法のページへ進む。代表の問題は、行き先のページの例題か練習にある。
+問題文の形から行を探し、問われ方のリンクから行の節へ移る。節で使い分けを確かめてから、手法のページへ進む。代表の問題は、行き先のページの例題か練習にある。
 
 | よく出る問われ方 | 使う手法 | ページ | 代表の問題 |
 |---|---|---|---|
-| 全体に足す・全体を反転・回転する | オフセット・反転フラグ・先頭位置の変数 | [全体への操作を変数で持つ](../ds/global-offset.md) | ABC212 D |
-| 値の直後に挿入・削除し、最後の列を出力する | 配列で持つ連結リスト | [配列で作る連結リスト](../ds/linked-list.md) | ABC344 E |
-| 直前と打ち消し合うものを消す・直前を取り消す | スタック・deque | [スタック・キュー・deque の使いどころ](../ds/stack-techniques.md) | ABC328 D |
-| 区間を塗るたびに塗られた数を答える | 区間を set で管理 | [区間を set で管理する](../ds/interval-set.md) | ABC435 E |
-| 最後の状態だけを問う・後の操作が上書きする | 後ろから見て確定させる | [後ろから・逆順に考える](../thinking/reverse-thinking.md) | ABC466 D（このページの[練習](#practice)） |
-| 辺や頂点を順に削除し、連結成分を答える | 逆順の追加と Union-Find | [Union-Find で連結性を扱う](../graph/union-find-connectivity.md) | ABC229 E |
-| クエリが独立で、全部を先に読める | 並べ替えてまとめて処理 | [クエリの先読み](../ds/offline-queries.md) | ABC174 F |
-| 更新と区間の質問が交互に来る | セグメント木・遅延セグメント木 | [セグメント木](../ds/segment-tree.md)、[遅延セグメント木](../ds/lazy-segment-tree.md) | ABC341 E |
-| 保存した状態に戻る・版をコピーする | 版の木・永続データ構造 | [永続データ構造](../ds/persistent-data-structures.md) | ABC273 E |
-| 同じ操作を $10^{18}$ 回繰り返す | 周期で打ち切る・ダブリング | [周期性の検出](../basics/periodicity.md)、[ダブリング](../basics/doubling.md) | ABC167 D |
-
-ページの欄に複数の手法がある行は、行の節で使い分けを確かめてから進む。
+| [全体に足す・全体を反転・回転する](#global-ops) | オフセット・反転フラグ・先頭位置の変数 | [全体への操作を変数で持つ](../ds/global-offset.md) | ABC212 D |
+| [値の直後に挿入・削除し、最後の列を出力する](#insert-delete) | 配列で持つ連結リスト | [配列で作る連結リスト](../ds/linked-list.md) | ABC344 E |
+| [直前と打ち消し合うものを消す・直前を取り消す](#insert-delete) | スタック・deque | [スタック・キュー・deque の使いどころ](../ds/stack-techniques.md) | ABC328 D |
+| [区間を塗るたびに塗られた数を答える](#paint) | 区間を set で管理 | [区間を set で管理する](../ds/interval-set.md) | ABC435 E |
+| [最後の状態だけを問う・後の操作が上書きする](#overwrite) | 後ろから見て確定させる | [後ろから・逆順に考える](../thinking/reverse-thinking.md) | ABC466 D（このページの[練習](#practice)） |
+| [辺や頂点を順に削除し、連結成分を答える](#reverse-deletion) | 逆順の追加と Union-Find | [Union-Find で連結性を扱う](../graph/union-find-connectivity.md) | ABC229 E |
+| [クエリが独立で、全部を先に読める](#offline) | 並べ替えてまとめて処理 | [クエリの先読み](../ds/offline-queries.md) | ABC174 F |
+| [更新と区間の質問が交互に来る](#online) | セグメント木・遅延セグメント木 | [セグメント木](../ds/segment-tree.md)、[遅延セグメント木](../ds/lazy-segment-tree.md) | ABC341 E |
+| [保存した状態に戻る・版をコピーする](#versions) | 版の木・永続データ構造 | [永続データ構造](../ds/persistent-data-structures.md) | ABC273 E |
+| [同じ操作を $10^{18}$ 回繰り返す](#repeat) | 周期で打ち切る・ダブリング | [周期性の検出](../basics/periodicity.md)、[ダブリング](../basics/doubling.md) | ABC167 D |
 
 ## 全体への加算・反転・回転 → 全体の操作を変数で持つ（global-offset） {#global-ops}
 

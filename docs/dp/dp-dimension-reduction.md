@@ -24,7 +24,7 @@ sections:
   - {title: 値と添字の入れ替え（同じ添字なら値が良い方が常に良いとき）, anchor: dp-swap-key-value}
   - {title: どれを添字に残すか（範囲が小さい量を選ぶ）, anchor: which-to-index}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -143,7 +143,7 @@ DP の状態の削減は、正しい[状態](../guide/glossary.md#state)を立�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC E. Knapsack 2](https://atcoder.jp/contests/dp/tasks/dp_e)（diff —）：重さの上限 W が 10^9 と大きく価値の総和が 10^5 程度の品物で、重さの合計が W 以下での価値の和の最大を求める。
+- [EDPC E. Knapsack 2](https://atcoder.jp/contests/dp/tasks/dp_e)（diff なし）：重さの上限 W が 10^9 と大きく価値の総和が 10^5 程度の品物で、重さの合計が W 以下での価値の和の最大を求める。
 
 </div>
 

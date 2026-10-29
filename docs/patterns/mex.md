@@ -73,17 +73,17 @@ mex は、非負整数の集合に含まれない最小の非負整数である�
 
 ## 問われ方と手法の一覧 {#overview}
 
-問題文の形から行を探し、手法のページへ進む。代表の問題は、このページかリンク先のページに載せたものだけを書いた。
+問題文の形から行を探し、問われ方のリンクから行の節へ移る。節で性質の使い方を確かめてから、手法のページへ進む。代表の問題は、このページかリンク先のページに載せたものだけを書いた。
 
 | よく出る問われ方 | 使う手法 | ページ | 代表の問題 |
 |---|---|---|---|
-| 1 点を書き換えるたびに mex | 出現回数 0 の値の set、個数のセグメント木の上の二分探索 | [set・multiset・map の応用](../ds/ordered-set.md#mex)、[セグメント木上の二分探索](../ds/segment-tree-binary-search.md#predicate-patterns) | ABC330 E |
-| 値の範囲が大きい・区間でまとめて入る | 出ている値を区間の集合で持つ | [区間を set で管理する](../ds/interval-set.md#applications) | — |
-| 長さ M の窓の mex の最小値 | 値を固定し、出現位置の間隔を見る | [一部を固定して数える](../thinking/fix-variable.md) | ABC194 E |
-| 長さ M の窓の mex の最大値 | 答えで二分探索と窓の個数の管理 | [答えで二分探索](../basics/binary-search-answer.md#monotonicity)、[尺取り法](../basics/two-pointers.md#fixed-window) | — |
-| 全区間・全パスの mex の総和 | mex が k+1 以上の数を k について足す | [主客転倒](../thinking/contribution.md#swap-roles)、[遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md#reformulate) | ABC438 F、ABC470 G |
-| ゲームの勝敗 | 行き先の値の mex（Grundy 数） | [Grundy 数](../comb/grundy-number.md#definition) | ABC368 F |
-| mex を指定した値にする | 0〜k−1 を入れて k を入れない | [構築](../thinking/construction.md#necessary-conditions) | — |
+| [1 点を書き換えるたびに mex](#online-mex) | 出現回数 0 の値の set、個数のセグメント木の上の二分探索 | [set・multiset・map の応用](../ds/ordered-set.md#mex)、[セグメント木上の二分探索](../ds/segment-tree-binary-search.md#predicate-patterns) | ABC330 E |
+| [値の範囲が大きい・区間でまとめて入る](#interval-values) | 出ている値を区間の集合で持つ | [区間を set で管理する](../ds/interval-set.md#applications) | — |
+| [長さ M の窓の mex の最小値](#window-mex) | 値を固定し、出現位置の間隔を見る | [一部を固定して数える](../thinking/fix-variable.md) | ABC194 E |
+| [長さ M の窓の mex の最大値](#window-mex) | 答えで二分探索と窓の個数の管理 | [答えで二分探索](../basics/binary-search-answer.md#monotonicity)、[尺取り法](../basics/two-pointers.md#fixed-window) | — |
+| [全区間・全パスの mex の総和](#sum-of-mex) | mex が k+1 以上の数を k について足す | [主客転倒](../thinking/contribution.md#swap-roles)、[遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md#reformulate) | ABC438 F、ABC470 G |
+| [ゲームの勝敗](#grundy) | 行き先の値の mex（Grundy 数） | [Grundy 数](../comb/grundy-number.md#definition) | ABC368 F |
+| [mex を指定した値にする](#construction) | 0〜k−1 を入れて k を入れない | [構築](../thinking/construction.md#necessary-conditions) | — |
 
 このページの問題へのリンクは[例題](#examples)と[練習問題](#practice)の囲みにある。ABC330 E は [set の応用の練習](../ds/ordered-set.md#practice)、ABC470 G は[遅延セグメント木の載せ方の型の力試し](../ds/lazy-segment-tree-patterns.md#challenge)、ABC368 F は [Grundy 数の例題](../comb/grundy-number.md#abc368_f)に載せた。
 
