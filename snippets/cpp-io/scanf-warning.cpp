@@ -4,7 +4,7 @@ using namespace std;
 int main() {
     // --8<-- [start:core]
     int n;
-    scanf("%d", &n);  // 手元の Ubuntu の g++ では -O2 で「戻り値を無視した」警告が出る
+    scanf("%d", &n);  // -O2 と -D_FORTIFY_SOURCE=2 で「戻り値を無視した」警告が出る（Ubuntu の g++ は自動で足す）
     // --8<-- [end:core]
     printf("%d\n", n);
 }
