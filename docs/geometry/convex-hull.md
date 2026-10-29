@@ -31,7 +31,7 @@ sections:
   - {title: 一般の多角形の内外判定（交差数の偶奇）, anchor: point-in-polygon}
   - {title: '格子点：線分上は gcd(|dx|, |dy|)+1、多角形は Pick の定理', anchor: lattice-points}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -256,7 +256,7 @@ $$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 041. Piles in AtCoder Farm（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_ao)（diff —）：格子点にある N 本の杭をすべて囲む周の最も短い塀を作り、塀の上と内側にある格子点のうち、まだ杭のない点の数を求める。
+- [典型90 041. Piles in AtCoder Farm（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_ao)（diff なし）：格子点にある N 本の杭をすべて囲む周の最も短い塀を作り、塀の上と内側にある格子点のうち、まだ杭のない点の数を求める。
 
 </div>
 

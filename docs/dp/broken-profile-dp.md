@@ -27,7 +27,7 @@ sections:
   - {title: 長さが巨大なら行列累乗と組み合わせる, anchor: with-matrix-power}
   - {title: 連結性を持つ（フロンティア法）, anchor: connectivity, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -210,7 +210,7 @@ $H \times W \le 200$ なので、縦横を入れ替えて短い辺を横にす�
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [典型90 023. Avoid War（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_w)（diff —）：H×W の盤の空いたマスに、互いに隣接（8 近傍）しないようにキングを置く方法の数を求める。
+- [典型90 023. Avoid War（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_w)（diff なし）：H×W の盤の空いたマスに、互いに隣接（8 近傍）しないようにキングを置く方法の数を求める。
 - [ABC204 F. Hanjo 2](https://atcoder.jp/contests/abc204/tasks/abc204_f)（diff 2044）：H×W（H ≤ 6、W ≤ 10^12）の部屋に 1×1 と 1×2 の畳を敷き詰める方法の数を求める。
 
 </div>
@@ -223,7 +223,7 @@ $H \times W \le 200$ なので、縦横を入れ替えて短い辺を横にす�
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [TDPC S. マス目](https://atcoder.jp/contests/tdpc/tasks/tdpc_grid)（diff —）：H×W（H ≤ 6）のグリッドを白黒に塗り、左上と右下が黒マスだけを通ってつながるようにする方法の数を求める。
+- [TDPC S. マス目](https://atcoder.jp/contests/tdpc/tasks/tdpc_grid)（diff なし）：H×W（H ≤ 6）のグリッドを白黒に塗り、左上と右下が黒マスだけを通ってつながるようにする方法の数を求める。
 - [ABC296 Ex. Unite](https://atcoder.jp/contests/abc296/tasks/abc296_h)（diff 2822）：白黒のグリッドで、白マスをいくつか黒に塗って黒マス全体を連結にするときの、塗るマスの数の最小を求める。
 
 </div>

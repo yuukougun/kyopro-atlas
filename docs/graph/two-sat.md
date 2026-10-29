@@ -151,7 +151,7 @@ $l_p$ と $l_q$（$p < q$）がともに真だとすると、$l_p \to s_p \to \d
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [PRACTICE2 H. Two SAT](https://atcoder.jp/contests/practice2/tasks/practice2_h)（diff —）：N 本の旗をそれぞれ 2 つの候補の座標のどちらかに置き、どの 2 本も距離 D 以上離れるようにできるかを判定し、できれば配置を出力する。
+- [PRACTICE2 H. Two SAT](https://atcoder.jp/contests/practice2/tasks/practice2_h)（diff なし）：N 本の旗をそれぞれ 2 つの候補の座標のどちらかに置き、どの 2 本も距離 D 以上離れるようにできるかを判定し、できれば配置を出力する。
 
 </div>
 

@@ -27,7 +27,7 @@ sections:
   - {title: 最短路の本数（距離が確定した順に配る）, anchor: count-shortest-paths}
   - {title: 閉路があるとき（SCC で縮約する・最短路に切り替える）, anchor: with-cycles}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -174,7 +174,7 @@ DAG 上の DP は、ほかの手法の判定や下ごしらえとしてよく現
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC G. Longest Path](https://atcoder.jp/contests/dp/tasks/dp_g)（diff —）：閉路のない有向グラフで、最長の有向路の長さを求める。
+- [EDPC G. Longest Path](https://atcoder.jp/contests/dp/tasks/dp_g)（diff なし）：閉路のない有向グラフで、最長の有向路の長さを求める。
 
 </div>
 

@@ -27,7 +27,7 @@ sections:
   - {title: K 番目と全体への XOR（bit ごとの反転フラグ）, anchor: kth-and-global-xor}
   - {title: 明示的に作らない Binary Trie（上位 bit で分ける再帰）, anchor: implicit}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -207,7 +207,7 @@ $T$ の bit $b$ が 1 であることは、深さ $B - 1 - b$ のすべてのノ
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [ARC033 C. データ構造](https://atcoder.jp/contests/arc033/tasks/arc033_3)（diff 1641）：数の集合に値を追加するクエリと、小さい方から x 番目の値を出力してそれを集合から取り除くクエリを処理する。
+- [ARC033 C. データ構造](https://atcoder.jp/contests/arc033/tasks/arc033_3)（diff 1641・参考値）：数の集合に値を追加するクエリと、小さい方から x 番目の値を出力してそれを集合から取り除くクエリを処理する。
 - [ABC403 G. Odd Position Sum Query](https://atcoder.jp/contests/abc403/tasks/abc403_g)（diff 2028）：空の多重集合に値を 1 つずつ追加し、そのたびに昇順に並べたときの奇数番目の要素の和を答える（追加する値は前の答えから決まる）。
 - [ABC425 G. Sum of Min of XOR](https://atcoder.jp/contests/abc425/tasks/abc425_g)（diff 2205）：x = 0, 1, …, M − 1 について min_i (x xor A_i) を求め、その総和を答える。
 

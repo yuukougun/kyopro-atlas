@@ -220,7 +220,7 @@ $N \le 10^6$ 程度なら右辺をそのまま足せばよいが、$N = 10^{12}$
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC180 C. Cream puff](https://atcoder.jp/contests/abc180/tasks/abc180_c)（diff 142）：N 個の品物を何人かで余りなく等しく分けるとき、分けられる人数をすべて小さい順に出力する。
-- [典型90 075. Magic For Balls（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_bw)（diff —）：整数 N が書かれたボールがあり、1 回の魔法で、素数でないボールをすべて同時に、積が元の数になる 2 以上の 2 つの整数のボールに分ける。すべてのボールが素数になるまでの最小の回数を求める。
+- [典型90 075. Magic For Balls（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_bw)（diff なし）：整数 N が書かれたボールがあり、1 回の魔法で、素数でないボールをすべて同時に、積が元の数になる 2 以上の 2 つの整数のボールに分ける。すべてのボールが素数になるまでの最小の回数を求める。
 
 </div>
 

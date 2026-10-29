@@ -27,7 +27,7 @@ sections:
   - {title: 2 進の桁 DP（XOR・AND）, anchor: binary}
   - {title: 割る数を全探索して桁 DP を繰り返す, anchor: fix-divisor}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -226,7 +226,7 @@ $X < N$ なら、この桁 $i$ は 1 つに決まる。桁 $i$ より上は $N$ 
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC S. Digit Sum](https://atcoder.jp/contests/dp/tasks/dp_s)（diff —）：1 以上 K 以下（K は最大 10^4 桁）の整数のうち、各桁の和が D の倍数になるものの個数を求める。
+- [EDPC S. Digit Sum](https://atcoder.jp/contests/dp/tasks/dp_s)（diff なし）：1 以上 K 以下（K は最大 10^4 桁）の整数のうち、各桁の和が D の倍数になるものの個数を求める。
 
 </div>
 

@@ -27,7 +27,7 @@ sections:
   - {title: 塊ごとに偶奇で振り分ける, anchor: parity-per-run}
   - {title: ランレングスのまま処理する, anchor: keep-compressed, level: 水}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -188,7 +188,7 @@ while i < |X| and j < |Y|:
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC380 C. Move Segment](https://atcoder.jp/contests/abc380/tasks/abc380_c)（diff 223）：0 と 1 の文字列で、K 番目の 1 の塊を K−1 番目の 1 の塊の直後に移した文字列を求める。
-- [典型90 084. There are two types of characters（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_cf)（diff —）：o と x からなる文字列で、o と x の両方を含む区間の数を求める。
+- [典型90 084. There are two types of characters（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_cf)（diff なし）：o と x からなる文字列で、o と x の両方を含む区間の数を求める。
 - [ABC136 D. Gathering Children](https://atcoder.jp/contests/abc136/tasks/abc136_d)（diff 794）：各マスに L か R が書かれたマス目で、子どもが 10^100 回移動した後に各マスにいる人数を求める。
 - [ABC140 D. Face Produces Unhappiness](https://atcoder.jp/contests/abc140/tasks/abc140_d)（diff 1074）：向き（L/R）の列に区間の反転を K 回まで行い、幸福な人の数を最大化する。
 

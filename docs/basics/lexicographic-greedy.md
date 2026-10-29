@@ -26,7 +26,7 @@ sections:
   - {title: 辞書順 K 番目（先頭ごとの個数と K を比べる）, anchor: kth}
   - {title: 判定が重い型, anchor: heavy-check, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -202,7 +202,7 @@ $$
 - [ABC202 D. aab aba baa](https://atcoder.jp/contests/abc202/tasks/abc202_d)（diff 966）：a が A 個・b が B 個の文字列のうち、辞書順で K 番目のものを求める。
 - [ABC223 D. Restricted Permutation](https://atcoder.jp/contests/abc223/tasks/abc223_d)（diff 1069）：「a は b より前」の条件をすべて満たす順列のうち、辞書順最小のものを求める。
 - [ARC097 C. K-th Substring](https://atcoder.jp/contests/arc097/tasks/arc097_a)（diff 1108）：文字列の異なる部分文字列のうち、辞書順で K 番目（K ≤ 5）を求める。
-- [典型90 006. Smallest Subsequence（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_f)（diff —）：文字列の長さ K の部分列のうち、辞書順最小のものを求める。
+- [典型90 006. Smallest Subsequence（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_f)（diff なし）：文字列の長さ K の部分列のうち、辞書順最小のものを求める。
 
 </div>
 
@@ -216,7 +216,7 @@ $$
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [ABC009 C. 辞書式順序ふたたび](https://atcoder.jp/contests/abc009/tasks/abc009_3)（diff 1915）：文字列を並べ替え、元と異なる位置が K 個以下になるもののうち辞書順最小を求める。
+- [ABC009 C. 辞書式順序ふたたび](https://atcoder.jp/contests/abc009/tasks/abc009_3)（diff 1915・参考値）：文字列を並べ替え、元と異なる位置が K 個以下になるもののうち辞書順最小を求める。
 
 </div>
 

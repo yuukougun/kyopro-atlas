@@ -24,7 +24,7 @@ sections:
   - {title: 頂点を入口と出口に分けて頂点カットを表す, anchor: vertex-cut}
   - {title: カットの形を決め打つ, anchor: cut-shape, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -139,7 +139,7 @@ $\infty$ は「有限の容量の総和 + 1」にしてある。流した量が�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [ABC010 D. 浮気予防](https://atcoder.jp/contests/abc010/tasks/abc010_4)（diff 1777）：頂点 0 から指定された頂点群のどれにも行けなくするのに必要な、最小の操作回数を求める。
+- [ABC010 D. 浮気予防](https://atcoder.jp/contests/abc010/tasks/abc010_4)（diff 1777・参考値）：頂点 0 から指定された頂点群のどれにも行けなくするのに必要な、最小の操作回数を求める。
 
 </div>
 

@@ -27,7 +27,7 @@ sections:
   - {title: 距離の和で判定して二分探索する, anchor: with-binary-search, level: 青}
   - {title: 二乗和の最小（平均）との違い, anchor: vs-squares}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -209,7 +209,7 @@ $\lvert A_i - (b + i) \rvert = \lvert b - (A_i - i) \rvert$ と変形すると�
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [典型90 070. Plant Planning（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_br)（diff —）：平面上の N 点からのマンハッタン距離の和が最小になる点で、その和を求める。
+- [典型90 070. Plant Planning（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_br)（diff なし）：平面上の N 点からのマンハッタン距離の和が最小になる点で、その和を求める。
 - [ABC330 F. Minimize Bounding  Square](https://atcoder.jp/contests/abc330/tasks/abc330_f)（diff 1718）：点を合計 K 回以下動かして、すべてを辺の長さ d の正方形に収められる最小の d を求める。
 
 </div>

@@ -29,7 +29,7 @@ sections:
   - {title: ランクと解の個数 p^(変数の数 − ランク), anchor: rank}
   - {title: 実数の掃き出し（部分ピボット選択と誤差）, anchor: real}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -197,7 +197,7 @@ $2^{m-r}$ は $m - r$ が 60 を超えうるので、`1LL << (m - r)` ではな�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 057. Flip Flap（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_be)（diff —）：N 個のスイッチがそれぞれ決まった複数のパネルを反転させるとき、すべてのパネルを目標の状態にする押し方の数を 998244353 で割った余りで求める。
+- [典型90 057. Flip Flap（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_be)（diff なし）：N 個のスイッチがそれぞれ決まった複数のパネルを反転させるとき、すべてのパネルを目標の状態にする押し方の数を 998244353 で割った余りで求める。
 
 </div>
 
@@ -213,9 +213,9 @@ $2^{m-r}$ は $m - r$ が 60 を超えうるので、`1LL << (m - r)` ではな�
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC128 C. Switches](https://atcoder.jp/contests/abc128/tasks/abc128_c)（diff 805）：N 個のスイッチと M 個の電球があり、各電球はつながったスイッチのうち ON の個数の偶奇が決まった値のときに点く。すべての電球が点くスイッチの状態の数を求める（N, M ≤ 10）。
-- [CODE-THANKS-FESTIVAL-2017 F. Limited Xor Subset](https://atcoder.jp/contests/code-thanks-festival-2017/tasks/code_thanks_festival_2017_f)（diff —）：N 個（N ≤ 10^5）の正の整数から 0 個以上を選んで XOR が K になる選び方の数を、10^9+7 で割った余りで求める（値は 10^5 以下）。
-- [JAG2013SUMMER-DAY4 F. Graph Automata Player](https://atcoder.jp/contests/jag2013summer-day4/tasks/icpc2013summer_day4_f)（diff —）：N 頂点（N ≤ 300）の有向グラフで、各頂点の 0/1 の値が「辺の先で 1 の頂点の数が奇数なら 1」という規則で一斉に変わるとき、T 回後の値から元の値を復元し、解がなければ none、複数あれば ambiguous と答える。
-- [BITFLYER2018-FINAL D. 数列 XOR](https://atcoder.jp/contests/bitflyer2018-final/tasks/bitflyer2018_final_d)（diff —）：長さ N（N ≤ 10^5）の 60 bit の整数の列 A に、隣り合う 2 項の一方をその 2 項の XOR に置き換える操作を何度でも行って、列 B にできるかを判定する。
+- [CODE-THANKS-FESTIVAL-2017 F. Limited Xor Subset](https://atcoder.jp/contests/code-thanks-festival-2017/tasks/code_thanks_festival_2017_f)（diff なし）：N 個（N ≤ 10^5）の正の整数から 0 個以上を選んで XOR が K になる選び方の数を、10^9+7 で割った余りで求める（値は 10^5 以下）。
+- [JAG2013SUMMER-DAY4 F. Graph Automata Player](https://atcoder.jp/contests/jag2013summer-day4/tasks/icpc2013summer_day4_f)（diff なし）：N 頂点（N ≤ 300）の有向グラフで、各頂点の 0/1 の値が「辺の先で 1 の頂点の数が奇数なら 1」という規則で一斉に変わるとき、T 回後の値から元の値を復元し、解がなければ none、複数あれば ambiguous と答える。
+- [BITFLYER2018-FINAL D. 数列 XOR](https://atcoder.jp/contests/bitflyer2018-final/tasks/bitflyer2018_final_d)（diff なし）：長さ N（N ≤ 10^5）の 60 bit の整数の列 A に、隣り合う 2 項の一方をその 2 項の XOR に置き換える操作を何度でも行って、列 B にできるかを判定する。
 
 </div>
 

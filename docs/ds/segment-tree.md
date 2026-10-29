@@ -274,7 +274,7 @@ DP の遷移が「ある範囲の $\mathrm{dp}[j]$ の最大値（最小値・�
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [鉄則本 A58. RMQ (Range Maximum Queries)](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bf)（diff —）：一点の値の変更と区間の最大値のクエリを処理する。
+- [鉄則本 A58. RMQ (Range Maximum Queries)](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bf)（diff なし）：一点の値の変更と区間の最大値のクエリを処理する。
 - [ABC476 E. Min-Max Swap](https://atcoder.jp/contests/abc476/tasks/abc476_e)（diff 964）：数列の区間を指定するたびに、その区間の最小値と最大値の位置を入れ替え、すべての操作の後の数列を求める。
 - [ABC185 F. Range Xor Query](https://atcoder.jp/contests/abc185/tasks/abc185_f)（diff 1053）：一点を XOR で更新し、区間の XOR を答える。
 - [ABC461 E. E-liter](https://atcoder.jp/contests/abc461/tasks/abc461_e)（diff 1431）：白いマス目の行を黒く塗る操作と列を白く塗る操作のたびに、黒いマスの数を答える。

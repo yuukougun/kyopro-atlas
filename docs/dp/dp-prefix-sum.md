@@ -28,7 +28,7 @@ sections:
   - {title: 余りごとの累積, anchor: by-remainder, level: 青}
   - {title: 2 次元の累積, anchor: two-dimensional, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -237,7 +237,7 @@ $$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC M. Candies](https://atcoder.jp/contests/dp/tasks/dp_m)（diff —）：N 人の子どもに K 個の飴を、i 番目の子には 0〜a_i 個ずつ、余さず配る方法の数を求める。
+- [EDPC M. Candies](https://atcoder.jp/contests/dp/tasks/dp_m)（diff なし）：N 人の子どもに K 個の飴を、i 番目の子には 0〜a_i 個ずつ、余さず配る方法の数を求める。
 
 </div>
 
@@ -256,9 +256,9 @@ $i$ 番目の子に配る個数で場合分けすると、遷移元は前の段�
 - [ABC178 D. Redistribution](https://atcoder.jp/contests/abc178/tasks/abc178_d)（diff 875）：各項が 3 以上の整数で、総和が S になる数列の個数を求める。
 - [ABC253 E. Distance Sequence](https://atcoder.jp/contests/abc253/tasks/abc253_e)（diff 1073）：長さ N・各項が 1〜M で、隣り合う項の差の絶対値が K 以上の数列の個数を求める。
 - [ABC183 E. Queen on Grid](https://atcoder.jp/contests/abc183/tasks/abc183_e)（diff 1288）：壁のあるグリッドで、右・下・右下のどれかへ壁の手前まで何マスでも進めるとき、左上から右下へ行く方法の数を求める。
-- [典型90 042. Multiple of 9（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_ap)（diff —）：各桁が 1〜9 で桁の和が K になる正の整数のうち、9 の倍数の個数を求める。
+- [典型90 042. Multiple of 9（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_ap)（diff なし）：各桁が 1〜9 で桁の和が K になる正の整数のうち、9 の倍数の個数を求める。
 - [ABC442 F. Diagonal Separation 2](https://atcoder.jp/contests/abc442/tasks/abc442_f)（diff 1295）：グリッドのマスを塗り替えて、各行の左側に並ぶ白の個数が下の行ほど減る形にするときの、塗り替えの最小数を求める。
-- [TDPC F. 準急](https://atcoder.jp/contests/tdpc/tasks/tdpc_semiexp)（diff —）：1 番目と N 番目の駅には止まり、K 駅以上連続しては止まらない停車駅の選び方の数を求める。
+- [TDPC F. 準急](https://atcoder.jp/contests/tdpc/tasks/tdpc_semiexp)（diff なし）：1 番目と N 番目の駅には止まり、K 駅以上連続しては止まらない停車駅の選び方の数を求める。
 - [ABC207 E. Mod i](https://atcoder.jp/contests/abc207/tasks/abc207_e)（diff 1820）：数列をいくつかの区間に区切り、K 番目の区間の和が K で割り切れるようにする方法の数を求める。
 
 </div>

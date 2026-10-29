@@ -82,7 +82,7 @@ atcoder: null                          # cpp だけ（true / false）
 ```
 
 - `data-role` は example・practice・challenge のどれか
-- 1行の形（正規表現）：`^- \[(?P<label>[^\]]+)\]\((?P<url>https://atcoder\.jp/contests/(?P<contest>[^/]+)/tasks/(?P<id>[A-Za-z0-9_]+))\)（diff (?P<diff>\d+|—)）：(?P<summary>.+)$`
+- 1行の形（正規表現）：`^- \[(?P<label>[^\]]+)\]\((?P<url>https://atcoder\.jp/contests/(?P<contest>[^/]+)/tasks/(?P<id>[A-Za-z0-9_]+))\)（diff (?P<diff>\d+(?:・参考値)?|なし)）：(?P<summary>.+)$`
 - label・url・diff は台帳（`data/problems.yaml`）から機械的に作れる形にする。label は「コンテストの表示名＋空白＋記号. 題名」。表示名：abcNNN → `ABCNNN`、arcNNN → `ARCNNN`、agcNNN → `AGCNNN`、typical90 → `典型90`、dp → `EDPC`、tdpc → `TDPC`、math-and-algorithm → `アルゴ数学`、tessoku-book → `鉄則本`、ほかは contest id を大文字にしたもの
 - 例題は、ページの中で1問ずつ小見出しを立て、その下に1行だけの囲み（`data-role="example"`）を置き、続けて方針を書く。解法の詳細は折りたたみ（`??? note "解法の詳細"`）
 - 本文の atcoder.jp の問題へのリンクは、すべてこの囲みの中に置く（本文中で問題に触れるときは、ページの id かその小見出しへのリンクにする）
