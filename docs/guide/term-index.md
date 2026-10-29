@@ -73,6 +73,7 @@ updated: 2026-10-22
 ### あ行 {#terms-a}
 
 - アダマール変換 → [XOR 畳み込み](../math/hadamard-transform.md)
+- あとで読む → [勉強したいリスト](study-list.md)
 - あふれ → [整数のオーバーフローと \_\_int128](../cpp/cpp-integer-overflow.md)
 - アルゴリズムと数学 → [問題集と練習用コンテストの案内](problem-sets.md)
 - [アルゴリズム関数と ranges 版](../cpp/cpp-algorithms.md)
@@ -105,6 +106,7 @@ updated: 2026-10-22
 - オフライン処理 → [クエリの先読み](../ds/offline-queries.md)
 - オフライン動的連結性 → [辺の追加と削除が混ざる連結性](../graph/offline-dynamic-connectivity.md)
 - オンライン強制 → [クエリの先読み](../ds/offline-queries.md)
+- お気に入り → [勉強したいリスト](study-list.md)
 
 ### か行 {#terms-ka}
 
@@ -291,6 +293,7 @@ updated: 2026-10-22
 - フック長公式 → [Young 図形とフック長公式](../comb/young-tableaux.md)
 - フラクタル → [再帰的な構造](../basics/recursion-structure.md)
 - フロンティア法 → [プロファイル DP](../dp/broken-profile-dp.md)
+- ブックマーク → [勉強したいリスト](study-list.md)
 - ブロックカット木 → [橋・関節点・二重連結成分](../graph/lowlink.md)
 - プリム法 → [最小全域木](../graph/minimum-spanning-tree.md)
 - プリューファー列 → [木の次数列と Prüfer 列](../tree/tree-degree.md)
@@ -678,6 +681,8 @@ updated: 2026-10-22
 - 割り算の切り捨ての向き → [数・ビット・乱数の関数](../cpp/cpp-math-functions.md)
 - 割当問題 → [最小費用流](../graph/min-cost-flow.md)
 - 劣モジュラ → [燃やす埋める](../graph/project-selection.md)
+- 勉強したいページ → [勉強したいリスト](study-list.md)
+- [勉強したいリスト](study-list.md)
 - [動的 DP](../dp/dynamic-dp.md)
 - 動的な中央値 → [上位 K 個の和と中央値の管理](../ds/top-k-multiset.md)
 - 動的セグ木 → [値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md)
