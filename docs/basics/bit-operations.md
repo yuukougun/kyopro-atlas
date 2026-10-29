@@ -2,6 +2,7 @@
 id: bit-operations
 title: bit 演算の基本と XOR の性質
 aliases: [ビット演算, bitwise operations, popcount, submask, 最下位ビット, XOR の打ち消し]
+tags: [ビット]
 type: technique
 field: basics
 chapter: 計算量と bit 演算

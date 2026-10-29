@@ -1,7 +1,8 @@
 ---
 id: bit-dp
 title: bitDP
-aliases: [ビット DP, 集合 DP, Bitmask DP, 巡回セールスマン問題, TSP, Traveling Salesman Problem, ハミルトン路]
+aliases: [ビット DP, 集合 DP, Bitmask DP, 巡回セールスマン問題, TSP, Traveling Salesman Problem, ハミルトン路, bit DP]
+tags: [ビット]
 type: technique
 field: dp
 chapter: 状態の形で分かれる DP
@@ -43,7 +44,7 @@ updated: 2026-10-29
     - **前提**：[DP の状態の設計](../dp/dp-state-design.md)、[bit 全探索と順列全探索](../basics/bit-full-search.md)
 
 <!-- textlint-disable -->
-別名：ビット DP・集合 DP・Bitmask DP・巡回セールスマン問題・TSP・Traveling Salesman Problem・ハミルトン路
+別名：ビット DP・集合 DP・Bitmask DP・巡回セールスマン問題・TSP・Traveling Salesman Problem・ハミルトン路・bit DP
 <!-- textlint-enable -->
 
 bitDP は、$N$ 個のものの部分集合を $0$ 以上 $2^N$ 未満の整数で表し、その整数を DP の添字にする手法である。$N!$ 通りの順番を調べる代わりに、将来に効く情報だけを集合として持つので、$N \le 20$ 程度まで扱える。

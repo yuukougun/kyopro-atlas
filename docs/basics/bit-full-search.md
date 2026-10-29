@@ -2,6 +2,7 @@
 id: bit-full-search
 title: bit 全探索と順列全探索
 aliases: [ビット全探索, 部分集合の全列挙, 2^N 全探索, 3 進全探索, next_permutation, N! 全探索, bit brute force]
+tags: [ビット]
 type: technique
 field: basics
 chapter: 全探索

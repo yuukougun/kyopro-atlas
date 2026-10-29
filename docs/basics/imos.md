@@ -2,6 +2,7 @@
 id: imos
 title: いもす法
 aliases: [imos 法, 差分配列, difference array, 2 次元いもす法, 階差, 隣接差, 等差数列の区間加算]
+search: {boost: 1.05}
 type: technique
 field: basics
 chapter: 累積和といもす法

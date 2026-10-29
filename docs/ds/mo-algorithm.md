@@ -2,6 +2,7 @@
 id: mo-algorithm
 title: Mo's algorithm
 aliases: [Mo, Mo 法, クエリ平方分割, 木上の Mo, Mo on tree, 時間付き Mo]
+tags: [Mo]
 type: technique
 field: ds
 chapter: クエリ処理の工夫

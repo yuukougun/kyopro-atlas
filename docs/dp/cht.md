@@ -2,6 +2,7 @@
 id: cht
 title: Convex Hull Trick と Li Chao Tree
 aliases: [CHT, 傾き最適化, 斜率优化, 李超线段树, 直線の最小値]
+tags: [CHT]
 type: overview
 field: dp
 chapter: DP の高速化

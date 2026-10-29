@@ -1,7 +1,7 @@
 ---
 id: min-cost-flow
 title: 最小費用流
-aliases: [primal-dual, 重み付きマッチング, 割当問題, ハンガリアン法, slope, minimum cost flow]
+aliases: [primal-dual, 重み付きマッチング, 割当問題, ハンガリアン法, slope, minimum cost flow, 最小費用フロー]
 type: technique
 field: graph
 chapter: フロー・マッチング
@@ -43,7 +43,7 @@ updated: 2026-10-29
     - **前提**：[最大流](../graph/max-flow.md)、[ダイクストラ法](../graph/dijkstra.md)
 
 <!-- textlint-disable -->
-別名：primal-dual・重み付きマッチング・割当問題・ハンガリアン法・slope・minimum cost flow
+別名：primal-dual・重み付きマッチング・割当問題・ハンガリアン法・slope・minimum cost flow・最小費用フロー
 <!-- textlint-enable -->
 
 最小費用流は、各辺に容量と「1 単位流すごとのコスト」を持たせ、始点 $s$ から終点 $t$ へ決まった量を流すときの総コストを最小にする問題である。[最大流](../graph/max-flow.md)が「どれだけ流せるか」だけを問うのに対し、「どの経路で流すと安いか」まで決める。競プロでは、重み付きのマッチングや「$K$ 個選んだときの最大」を、何を頂点・辺・コストにするかのモデル化で解く場面が多い。

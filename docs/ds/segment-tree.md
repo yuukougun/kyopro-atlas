@@ -1,7 +1,8 @@
 ---
 id: segment-tree
 title: セグメント木
-aliases: [セグ木, segtree, Segment Tree, RMQ, 非再帰セグ木, 区間最小値, 文字の集合を持つセグ木]
+aliases: [セグ木, segtree, Segment Tree, RMQ, 非再帰セグ木, 区間最小値, 文字の集合を持つセグ木, セグメントツリー, セグツリー]
+search: {boost: 1.1}
 type: technique
 field: ds
 chapter: 区間クエリ
@@ -43,7 +44,7 @@ updated: 2026-10-29
     - **前提**：[累積和](../basics/prefix-sum.md)
 
 <!-- textlint-disable -->
-別名：セグ木・segtree・Segment Tree・RMQ・非再帰セグ木・区間最小値・文字の集合を持つセグ木
+別名：セグ木・segtree・Segment Tree・RMQ・非再帰セグ木・区間最小値・文字の集合を持つセグ木・セグメントツリー・セグツリー
 <!-- textlint-enable -->
 
 セグメント木は、列を 2 の冪の長さの区間に階層的に区切り、各区間の総積を完全二分木のノードに持たせたデータ構造である。どの区間も $O(\log N)$ 個のノードに分けられるので区間の取得が速く、一点を変えても作り直すのは葉から根までの $O(\log N)$ 個のノードで済む。

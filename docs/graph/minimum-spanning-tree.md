@@ -1,7 +1,8 @@
 ---
 id: minimum-spanning-tree
 title: 最小全域木
-aliases: [MST, クラスカル法, プリム法, Kruskal, Prim, 最大全域木, minimum spanning tree]
+aliases: [MST, クラスカル法, プリム法, Kruskal, Prim, 最大全域木, minimum spanning tree, スパニングツリー]
+search: {boost: 1.05}
 type: technique
 field: graph
 chapter: 連結性と全域木
@@ -44,7 +45,7 @@ updated: 2026-10-29
     - **前提**：[Union-Find](../ds/union-find.md)、[ソートで考える](../basics/sorting-techniques.md)
 
 <!-- textlint-disable -->
-別名：MST・クラスカル法・プリム法・Kruskal・Prim・最大全域木・minimum spanning tree
+別名：MST・クラスカル法・プリム法・Kruskal・Prim・最大全域木・minimum spanning tree・スパニングツリー
 <!-- textlint-enable -->
 
 最小全域木は、連結な無向グラフの[全域木](../guide/glossary.md#spanning-tree)（すべての頂点を含み、閉路のない部分グラフ。辺はちょうど $N - 1$ 本）のうち、辺の重みの和が最小のものである。「軽い辺から貪欲に採ってよい」ことが正しさの核で、ABC ではアルゴリズムそのものより、何を頂点と辺にするか、辺をどう減らすかが問われる。

@@ -1,7 +1,7 @@
 ---
 id: palindrome
 title: 回文の扱いと Manacher
-aliases: [回文, palindrome, 回文判定, Manacher's algorithm, 回文半径, 中心から伸ばす, 両端から作る]
+aliases: [回文, palindrome, 回文判定, Manacher's algorithm, 回文半径, 中心から伸ばす, 両端から作る, マナカー]
 type: technique
 field: string
 chapter: 線形時間の照合と回文
@@ -30,7 +30,7 @@ sections:
   - {title: 外側から組み立てる（回文の式・約数）, anchor: build-outside-in, level: 青}
   - {title: Manacher：各中心の最長回文半径を O(N) で（Z と同じく内側をコピーする）, anchor: manacher, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -45,7 +45,7 @@ updated: 2026-10-22
     - **前提**：[文字列の基本操作と辞書順](../string/string-basics.md)
 
 <!-- textlint-disable -->
-別名：回文・palindrome・回文判定・Manacher's algorithm・回文半径・中心から伸ばす・両端から作る
+別名：回文・palindrome・回文判定・Manacher's algorithm・回文半径・中心から伸ばす・両端から作る・マナカー
 <!-- textlint-enable -->
 
 回文は、反転しても変わらない文字列（列）である。回文の問題の多くは「外側の 1 組をはがしても回文のまま」という性質を使い、対称な位置の組・中心・両端の組のどれかを単位にして状態を小さくする。このページでは文字列を 0-indexed で書き、長さ $N$ の $S$ で位置 $i$ と対になる位置を $N - 1 - i$ とする。

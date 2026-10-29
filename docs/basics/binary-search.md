@@ -1,7 +1,7 @@
 ---
 id: binary-search
 title: 二分探索
-aliases: [二分法, lower_bound, upper_bound, めぐる式二分探索, partition_point, binary search]
+aliases: [二分法, lower_bound, upper_bound, めぐる式二分探索, partition_point, binary search, にぶたん, バイナリサーチ, 2 分探索]
 type: technique
 field: basics
 chapter: ソートと二分探索
@@ -40,7 +40,7 @@ updated: 2026-10-29
     - **前提**：[ソートで考える](../basics/sorting-techniques.md)
 
 <!-- textlint-disable -->
-別名：二分法・lower_bound・upper_bound・めぐる式二分探索・partition_point・binary search
+別名：二分法・lower_bound・upper_bound・めぐる式二分探索・partition_point・binary search・にぶたん・バイナリサーチ・2 分探索
 <!-- textlint-enable -->
 
 二分探索は、ある位置を境に条件の真偽が 1 回だけ切り替わるとき、その境界を候補の幅の $\log$ 回の判定で見つける方法である。基本の形は「ソート済みの列から $x$ 以上の最初の要素を探す」だが、本当に要るのは列ではなく条件の[単調性](../guide/glossary.md#monotonicity)である。競プロでは、全探索の内側の 1 重のループを二分探索に置き換えて $O(N^2)$ を $O(N \log N)$ にする使い方がよく出る。

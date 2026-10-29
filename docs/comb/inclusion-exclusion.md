@@ -1,7 +1,7 @@
 ---
 id: inclusion-exclusion
 title: 包除原理
-aliases: [包除, 撹乱順列, 完全順列, モンモール数, 全射の数, min-max 包除, inclusion-exclusion principle, derangement]
+aliases: [包除, 撹乱順列, 完全順列, モンモール数, 全射の数, min-max 包除, inclusion-exclusion principle, derangement, 包含除外原理, 包除の原理]
 type: technique
 field: comb
 chapter: 包除の系統
@@ -43,7 +43,7 @@ updated: 2026-10-29
     - **前提**：[数え上げの考え方](../comb/counting-mindset.md)、[余事象](../thinking/complement.md)、[bit 全探索と順列全探索](../basics/bit-full-search.md)
 
 <!-- textlint-disable -->
-別名：包除・撹乱順列・完全順列・モンモール数・全射の数・min-max 包除・inclusion-exclusion principle・derangement
+別名：包除・撹乱順列・完全順列・モンモール数・全射の数・min-max 包除・inclusion-exclusion principle・derangement・包含除外原理・包除の原理
 <!-- textlint-enable -->
 
 包除原理は、「どの条件も破らない」ものを直接数える代わりに、「指定した条件を少なくとも破る」ものの個数を足し引きして求める方法である。直接数えると条件どうしが絡み合うのに、条件を破る側に固定すると残りが自由になり、積の法則で数えられることが多い。2〜3 条件の足し引きは[余事象](../thinking/complement.md#two-conditions)で済むので、ここでは条件が多い場合と、条件が対称な場合の式を扱う。

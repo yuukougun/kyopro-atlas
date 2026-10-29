@@ -1,7 +1,7 @@
 ---
 id: bipartite-graph
 title: 二部グラフ判定
-aliases: [二部グラフ, 2 彩色, 奇閉路, 2 色の塗り分け, bipartite graph]
+aliases: [二部グラフ, 2 彩色, 奇閉路, 2 色の塗り分け, bipartite graph, 2 部グラフ, 二分グラフ]
 type: technique
 field: graph
 chapter: 基本と探索
@@ -26,7 +26,7 @@ sections:
   - {title: Union-Find（頂点を 2 倍にする・偶奇を持つ）で判定する, anchor: union-find}
   - {title: 木・4 近傍のグリッドは必ず二部グラフ, anchor: always-bipartite}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -39,7 +39,7 @@ updated: 2026-10-22
     - **前提**：[深さ優先探索（DFS）](../graph/dfs.md)、[幅優先探索（BFS）と無重み最短路](../graph/bfs.md)
 
 <!-- textlint-disable -->
-別名：二部グラフ・2 彩色・奇閉路・2 色の塗り分け・bipartite graph
+別名：二部グラフ・2 彩色・奇閉路・2 色の塗り分け・bipartite graph・2 部グラフ・二分グラフ
 <!-- textlint-enable -->
 
 二部グラフ判定は、無向グラフの頂点を 2 つの組に分けて、どの辺も組をまたぐようにできるかを調べる方法である。2 つの組を白と黒の 2 色と見れば、「隣り合う頂点は違う色」という塗り分けができるかという問題になる。探索で塗るだけなら易しいが、問題文に「二部グラフ」と書かれることは少なく、「異なる値を割り当てる」「2 チームに分ける」といった条件から自分でグラフを作る場面で使う。

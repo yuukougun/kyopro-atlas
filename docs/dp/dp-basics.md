@@ -1,7 +1,7 @@
 ---
 id: dp-basics
 title: DP の基本
-aliases: [動的計画法, DP, Dynamic Programming, 漸化式, 配る DP, 貰う DP, push 型, pull 型]
+aliases: [動的計画法, DP, Dynamic Programming, 漸化式, 配る DP, 貰う DP, push 型, pull 型, もらう DP]
 type: technique
 field: dp
 chapter: DP の考え方
@@ -42,7 +42,7 @@ updated: 2026-10-29
     - **前提**：[全探索の設計](../basics/brute-force.md)
 
 <!-- textlint-disable -->
-別名：動的計画法・DP・Dynamic Programming・漸化式・配る DP・貰う DP・push 型・pull 型
+別名：動的計画法・DP・Dynamic Programming・漸化式・配る DP・貰う DP・push 型・pull 型・もらう DP
 <!-- textlint-enable -->
 
 DP（動的計画法）は、全探索の途中で同じ「途中の状況」に何度もたどり着くとき、その状況ごとの答えを表に 1 回だけ書いて使い回す方法である。指数通りある選び方を、状況の数 × [遷移](../guide/glossary.md#transition)の数の計算にまとめる。このページでは、どの DP にも共通する骨組みと、配る形・貰う形の書き分け、よくあるバグを扱う。
