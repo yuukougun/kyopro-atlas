@@ -27,7 +27,7 @@ sections:
   - {title: 括弧列と格子路、ラベル付き木と Prüfer 列, anchor: classic-bijections}
   - {title: 単射でない対応は重複する, anchor: non-injective}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -74,7 +74,7 @@ $f : X \to Y$ が[全単射](../guide/glossary.md#bijection)（$X$ のどの要�
 
 対象が「いくつかの成分の組」と 1 対 1 に対応し、どの条件も 1 つの成分の中だけで閉じていれば、個数は成分ごとの個数の積になる。$X$ を成分の組の集合 $Y_1 \times Y_2 \times \dots \times Y_m$ と対応させ、$\lvert X \rvert = \lvert Y_1 \rvert \cdots \lvert Y_m \rvert$ とする考え方である（分け方の一般論は[独立に分解する](../thinking/reformulation.md#independence)）。
 
-**素因数ごとに分ける**。積が $M$ になる長さ $N$ の正の整数列は、$M = \prod p^{e_p}$ と素因数分解すると、素数 $p$ ごとの「指数の列 $(x_1, \dots, x_N)$ で和が $e_p$ のもの」の組と 1 対 1 に対応する。素因数分解の一意性が、列から指数の組への写像も、指数の組から列への逆向きも、ただ 1 通りに決まることを保証する。各素数の指数の配り方は[重複組合せ](../comb/stars-and-bars.md#applications)で $\binom{e_p + N - 1}{N - 1}$ 通りなので、答えはその積である。
+**素因数ごとに分ける**。積が $M$ になる長さ $N$ の正の整数列は、$M = \prod p^{e_p}$ と素因数分解すると、素数 $p$ ごとの「指数の列 $(x_1, \dots, x_N)$ で和が $e_p$ のもの」の組と 1 対 1 に対応する。素因数分解の一意性が、列から指数の組への写像も、指数の組から列への逆向きも、ただ 1 通りに決まることを保証する。各素数の指数の配り方は[重複組合せ](../comb/stars-and-bars.md#applications)で $\binom{e_p + N - 1}{N - 1}$ 通りなので、答えはその積である。コードの `comb(n, r)` は、階乗と逆階乗の表（$2 \times 10^5$ まで）を前計算しておき、$\binom{n}{r}$ を $O(1)$ で返す関数で、範囲外では 0 を返す（[二項係数の前計算](../comb/binomial-precompute.md#fact-ifact)）。
 
 ```cpp
 --8<-- "counting-bijection/factorization.cpp:core"
