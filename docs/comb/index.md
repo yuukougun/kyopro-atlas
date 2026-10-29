@@ -23,8 +23,8 @@ type: generated
 ## 数え方の考え方
 
 - [数え上げの考え方](counting-mindset.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：数え上げを、対象の確定 → 数えやすい言い換え → 排反な場合の和と独立な段階の積 → 重複と漏れの確認 → 小さいケースでの検算の順に解く。
-- [対応づけ・数える対象の言い換え](counting-bijection.md) <span class="kp-mini kp-lv-ao" title="difficulty 1600〜1999">青</span>：数えにくい対象を、個数が同じで数えやすい対象に 1 対 1 で対応させて数える。
 - [順序を固定して数える](counting-fix-order.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：並べ方の一部の相対順序を固定して数え、全体の何分の一かを掛ける（k 個の順序が決まっていれば n!/k!）。
+- [対応づけ・数える対象の言い換え](counting-bijection.md) <span class="kp-mini kp-lv-ao" title="difficulty 1600〜1999">青</span>：数えにくい対象を、個数が同じで数えやすい対象に 1 対 1 で対応させて数える。
 - [重複の除き方](counting-dedup.md) <span class="kp-mini kp-lv-ao" title="difficulty 1600〜1999">青</span>：同じ対象を何度も数えてしまうとき、どれもちょうど c 回ずつなら c で割り、重複度がばらばらなら代表元を 1 つ決めて代表元だけを数える。
 - [Burnside の補題](burnside-lemma.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：回転・反転などで同一視したときの異なるものの数を、各操作で動かないものの数の平均として求める。
 
@@ -32,8 +32,8 @@ type: generated
 
 - [多項係数](multinomial-coefficient.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：種類ごとの個数が a_1, …, a_m の並べ方は (Σa_i)!/(a_1! … a_m!) 通りで、全部を区別した並べ方を同じ種類の入れ替えで割って得る。
 - [二項係数の恒等式と和の公式](binomial-identities.md) <span class="kp-mini kp-lv-ao" title="difficulty 1600〜1999">青</span>：二項定理・Vandermonde の恒等式・縦の和（hockey stick）・吸収公式などで、二項係数を含む和を閉じた式にする。
-- [二項係数の部分和](binomial-prefix-sum.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：二項係数の部分和 S(n,K) = Σ_{k≤K} C(n,k) を、S(n+1,K) = 2S(n,K) − C(n,K) などの式で (n, K) を 1 ずつ動かしながら更新する。
 - [鏡像法とカタラン数](reflection-principle.md) <span class="kp-mini kp-lv-ki" title="difficulty 2000〜2399">黄</span>：境界を越える格子路を、最初に境界に触れた点から先を折り返して別の終点への経路と 1 対 1 に対応させ、全体から引いて数える。
+- [二項係数の部分和](binomial-prefix-sum.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：二項係数の部分和 S(n,K) = Σ_{k≤K} C(n,k) を、S(n+1,K) = 2S(n,K) − C(n,K) などの式で (n, K) を 1 ずつ動かしながら更新する。
 - [LGV 補題](lgv-lemma.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：DAG 上で k 個の始点から k 個の終点への、互いに交わらない経路の組の数（符号付き）を、始点 i から終点 j への経路数を並べた行列の行列式で求める。
 - [母関数の考え方](generating-function-counting.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：選び方の数を多項式の係数で表し、積で独立な選択の組合せ、累乗で同じ選択の繰り返しを表す。
 
@@ -66,8 +66,8 @@ type: generated
 - [対称性で確率を求める](probability-symmetry.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：入れ替えても変わらない対象は同じ確率を持つので、1 つの確率・期待値を求めて個数を掛ければよい。
 - [確率 DP](probability-dp.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：dp\[t][s] = 時刻 t に状態 s にいる確率を、初期状態の 1 から前向きに配って求める。
 - [期待値 DP](expected-value-dp.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：終わるまでの量の期待値 E[s] を、最初の一手で場合分けした E[s] = c(s) + Σ P(s→t) E[t] で、終状態の E = 0 から後ろ向きに埋める。
-- [最適戦略の期待値](optimal-strategy-expectation.md) <span class="kp-mini kp-lv-ki" title="difficulty 2000〜2399">黄</span>：選択と偶然が交互に来る確率過程で、期待値を最大（最小）にする戦略のもとでの期待値を、残すものや知っている情報を状態にして後ろから求める。
 - [閉路のある期待値](expectation-linear-equations.md) <span class="kp-mini kp-lv-ao" title="difficulty 1600〜1999">青</span>：閉路があって後ろ向きに埋められない期待値を、戻る先の期待値を未知数 X とおき各状態を a + bX の形で持って、最後に X = a + bX を解いて求める。
+- [最適戦略の期待値](optimal-strategy-expectation.md) <span class="kp-mini kp-lv-ki" title="difficulty 2000〜2399">黄</span>：選択と偶然が交互に来る確率過程で、期待値を最大（最小）にする戦略のもとでの期待値を、残すものや知っている情報を状態にして後ろから求める。
 - [期待値と確率の変換](expectation-tail-sum.md) <span class="kp-mini kp-lv-ki" title="difficulty 2000〜2399">黄</span>：非負整数の確率変数 X について E[X] = Σ_{k≥1} P(X ≥ k) が成り立つ。
 - [二乗の期待値・分散](expectation-of-square.md) <span class="kp-mini kp-lv-ki" title="difficulty 2000〜2399">黄</span>：E[X^2] は線形性で直接は求まらないので、X^2 = Σ_i Σ_j X_i X_j とペアごとの期待値を足すか、DP で確率・期待値 × 確率・二乗の期待値 × 確率を同時に運ぶ。
 - [連続値の確率](continuous-probability.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：[0, 1] の一様乱数のような連続な確率変数について、確率は長さ・面積・角度の比、期待値は積分で求める。

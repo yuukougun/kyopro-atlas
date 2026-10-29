@@ -30,10 +30,10 @@ type: generated
 - [ダイクストラ法](dijkstra.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：辺の重みが非負のグラフで、暫定距離が最小の頂点から順に確定させ、単一始点の最短距離を O((N+M) log N) で求める。
 - [01-BFS](zero-one-bfs.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：辺の重みが 0 か 1 のとき、コスト 0 の辺で得た頂点は deque の先頭へ、コスト 1 の辺は末尾へ入れて、最短距離を O(N+M) で求める。
 - [ワーシャルフロイド法](warshall-floyd.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：経由してよい頂点を 1 つずつ増やす DP で、全点対の最短距離を O(N^3) で求める。
-- [ベルマンフォード法](bellman-ford.md) <span class="kp-mini kp-lv-ao" title="difficulty 1600〜1999">青</span>：負の辺があっても、全辺の緩和を N−1 回くり返して単一始点の最短距離を O(NM) で求める。
 - [最短路 DAG](shortest-path-dag.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：始点からの距離 d で d(v) = d(u) + w(u, v) を満たす辺だけを残すと DAG になり、最短路はその上のパスと一対一に対応する。
 - [状態を頂点にする](extended-dijkstra.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：元の頂点だけでは次の動きが決まらないとき、向き・残り回数・偶奇・盤面などを組にした状態を頂点にして最短路を求める。
 - [時刻で変わる辺の最短路](time-dependent-dijkstra.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：辺の所要時間が出発時刻で変わる最短路は、早く着いて損をしない（待てる）なら、各頂点で最も早い到着時刻だけを持つダイクストラ法で求まる。
+- [ベルマンフォード法](bellman-ford.md) <span class="kp-mini kp-lv-ao" title="difficulty 1600〜1999">青</span>：負の辺があっても、全辺の緩和を N−1 回くり返して単一始点の最短距離を O(NM) で求める。
 - [差分制約（牛ゲー）](difference-constraints.md) <span class="kp-mini kp-lv-ao" title="difficulty 1600〜1999">青</span>：x_v − x_u ≤ c の形の条件を辺 u→v（重み c）と読み、始点からの最短距離で全条件を満たす最大の解を求める。
 - [補グラフ上の BFS](complement-graph-bfs.md) <span class="kp-mini kp-lv-ki" title="difficulty 2000〜2399">黄</span>：完全グラフから M 本の辺を除いたグラフ（補グラフ）を、未訪問頂点の集合から元のグラフで隣接しない頂点を一度に取り出す BFS で、O(N + M) で探索する。
 - [剰余を頂点にする最短路](modular-shortest-path.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：K で割った余りを頂点、数を作る操作を辺にした最短路で、K の倍数のうち桁和が最小のものや、いくつかの数の和で作れる数を求める。
@@ -65,8 +65,8 @@ type: generated
 ## 探索木と次数の性質
 
 - [DFS 木・BFS 木とグラフの構築](graph-construction.md) <span class="kp-mini kp-lv-ao" title="difficulty 1600〜1999">青</span>：無向グラフの DFS 木では木に入らない辺がすべて祖先と子孫を結び、BFS 木では層が高々 1 違う頂点どうしを結ぶ。
-- [オイラー路（一筆書き）](euler-path.md) <span class="kp-mini kp-lv-ki" title="difficulty 2000〜2399">黄</span>：すべての辺をちょうど 1 回ずつ通る路は、辺のある頂点が連結で、奇数次数の頂点が 0 個か 2 個（有向なら入次数と出次数の条件）のときに限りあり、Hierholzer 法で O(N + M) で作れる。
 - [次数による平方分割](degree-sqrt.md) <span class="kp-mini kp-lv-ao" title="difficulty 1600〜1999">青</span>：次数が √M を超える重い頂点は 2√M 個以下しかないことを使い、重い頂点と軽い頂点で処理を分けて、頂点とその隣接頂点すべてへのクエリを O(√M) にする。
+- [オイラー路（一筆書き）](euler-path.md) <span class="kp-mini kp-lv-ki" title="difficulty 2000〜2399">黄</span>：すべての辺をちょうど 1 回ずつ通る路は、辺のある頂点が連結で、奇数次数の頂点が 0 個か 2 個（有向なら入次数と出次数の条件）のときに限りあり、Hierholzer 法で O(N + M) で作れる。
 
 ## フロー・マッチング
 

@@ -26,9 +26,9 @@ type: generated
 ## 木全体の形
 
 - [木の直径と最遠点](tree-diameter.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：直径（最も遠い 2 点を結ぶパス）は、任意の点から最も遠い点 a を求め、a から最も遠い点 b を求めれば a–b になる（重みが非負のとき）。
-- [木の重心](tree-centroid.md) <span class="kp-mini kp-lv-ki" title="difficulty 2000〜2399">黄</span>：取り除いたときに残る成分の大きさがすべて N/2 以下になる頂点（重心。1 個か隣り合う 2 個ある）を、部分木サイズから O(N) で求める。
 - [辺で切って数える](tree-edge-contribution.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：全ペアのパスについての量の和を、各辺（頂点）が何ペアのパスに含まれるかで数え直す。
 - [木の構築・復元](tree-construction.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：距離の情報・訪問順・次数の条件などから、条件を満たす木を作るか、ないと判定する（何通りあるかを数えることもある）。
+- [木の重心](tree-centroid.md) <span class="kp-mini kp-lv-ki" title="difficulty 2000〜2399">黄</span>：取り除いたときに残る成分の大きさがすべて N/2 以下になる頂点（重心。1 個か隣り合う 2 個ある）を、部分木サイズから O(N) で求める。
 - [木の同型判定と木のハッシュ](tree-isomorphism.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：根付き木の同型は、葉から順に「子の部分木の名前の多重集合」に名前を付ける AHU 法か、多重集合のハッシュで判定する。
 
 ## パス

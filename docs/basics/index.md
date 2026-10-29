@@ -56,16 +56,16 @@ type: generated
 
 ## 凸と三分探索
 
-- [三分探索](ternary-search.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：下に凸（谷が 1 つ）な関数の最小値を、2 点の値を比べて外側を捨てながら求める。
 - [絶対値の和の最小化と中央値](median-absolute.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：Σ|x − a_i| は中央値で最小になる（x を動かしたときの傾きが「左の点の数 − 右の点の数」になるため）。
+- [三分探索](ternary-search.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：下に凸（谷が 1 つ）な関数の最小値を、2 点の値を比べて外側を捨てながら求める。
 
 ## 貪欲
 
 - [貪欲法の考え方と正当性](greedy-basics.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：その場で最もよいものを選び続ける方針が正しいことを、交換論法（最適解を貪欲解に近づけても悪くならない）や帰納法で確かめてから使う。
 - [区間スケジューリング・区間の串刺し](interval-scheduling.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：重ならない区間をできるだけ多く選ぶには、右端の小さい順に、選んだ区間と重ならないものを取ればよい。
+- [辞書順最小を前から決める貪欲](lexicographic-greedy.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：条件を満たすもののうち辞書順最小を、先頭から 1 つずつ「小さい候補から試し、残りで条件を満たせるならその候補に確定」で作る。
 - [優先度付きキューを使う貪欲](greedy-priority-queue.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：締め切りのある仕事の選び方や、毎回最大（最小）を取り出す操作の繰り返しを、候補を優先度付きキューに入れて O(N log N) で処理する。
 - [交換論法と比較関数の設計](exchange-argument.md) <span class="kp-mini kp-lv-ao" title="difficulty 1600〜1999">青</span>：隣り合う 2 つを入れ替えたときに変わる項だけを比べ、「i を先に置くべき条件」を式で導いて比較関数にする。
-- [辞書順最小を前から決める貪欲](lexicographic-greedy.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：条件を満たすもののうち辞書順最小を、先頭から 1 つずつ「小さい候補から試し、残りで条件を満たせるならその候補に確定」で作る。
 
 ほかの章の関連ページ：[ソートで考える](sorting-techniques.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>（ソートと二分探索の章）
 

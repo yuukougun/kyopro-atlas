@@ -59,14 +59,14 @@ nav:
           - 平均・中央値の最大化: basics/fractional-binary-search.md
           - K 番目の値: basics/kth-value.md
       - 凸と三分探索:
-          - 三分探索: basics/ternary-search.md
           - 絶対値の和の最小化と中央値: basics/median-absolute.md
+          - 三分探索: basics/ternary-search.md
       - 貪欲:
           - 貪欲法の考え方と正当性: basics/greedy-basics.md
           - 区間スケジューリング・区間の串刺し: basics/interval-scheduling.md
+          - 辞書順最小を前から決める貪欲: basics/lexicographic-greedy.md
           - 優先度付きキューを使う貪欲: basics/greedy-priority-queue.md
           - 交換論法と比較関数の設計: basics/exchange-argument.md
-          - 辞書順最小を前から決める貪欲: basics/lexicographic-greedy.md
       - 周期とダブリング:
           - 周期性の検出: basics/periodicity.md
           - ダブリング: basics/doubling.md
@@ -146,10 +146,10 @@ nav:
           - ダイクストラ法: graph/dijkstra.md
           - 01-BFS: graph/zero-one-bfs.md
           - ワーシャルフロイド法: graph/warshall-floyd.md
-          - ベルマンフォード法: graph/bellman-ford.md
           - 最短路 DAG: graph/shortest-path-dag.md
           - 状態を頂点にする: graph/extended-dijkstra.md
           - 時刻で変わる辺の最短路: graph/time-dependent-dijkstra.md
+          - ベルマンフォード法: graph/bellman-ford.md
           - 差分制約（牛ゲー）: graph/difference-constraints.md
           - 補グラフ上の BFS: graph/complement-graph-bfs.md
           - 剰余を頂点にする最短路: graph/modular-shortest-path.md
@@ -171,8 +171,8 @@ nav:
           - 行列木定理: graph/matrix-tree-theorem.md
       - 探索木と次数の性質:
           - DFS 木・BFS 木とグラフの構築: graph/graph-construction.md
-          - オイラー路（一筆書き）: graph/euler-path.md
           - 次数による平方分割: graph/degree-sqrt.md
+          - オイラー路（一筆書き）: graph/euler-path.md
       - フロー・マッチング:
           - 最大流: graph/max-flow.md
           - 最小カット: graph/min-cut.md
@@ -197,9 +197,9 @@ nav:
           - 木の次数列と Prüfer 列: tree/tree-degree.md
       - 木全体の形:
           - 木の直径と最遠点: tree/tree-diameter.md
-          - 木の重心: tree/tree-centroid.md
           - 辺で切って数える: tree/tree-edge-contribution.md
           - 木の構築・復元: tree/tree-construction.md
+          - 木の重心: tree/tree-centroid.md
           - 木の同型判定と木のハッシュ: tree/tree-isomorphism.md
       - パス:
           - 最小共通祖先（LCA）: tree/lca.md
@@ -221,11 +221,11 @@ nav:
       - 標準コンテナの応用:
           - STL コンテナの使い分け: ds/stl-containers.md
           - set・multiset・map の応用: ds/ordered-set.md
+          - 全体への操作を変数で持つ: ds/global-offset.md
+          - 配列で作る連結リスト: ds/linked-list.md
           - 優先度付きキュー: ds/priority-queue.md
           - 上位 K 個の和と中央値の管理: ds/top-k-multiset.md
           - 区間を set で管理する: ds/interval-set.md
-          - 全体への操作を変数で持つ: ds/global-offset.md
-          - 配列で作る連結リスト: ds/linked-list.md
       - スタックとキュー:
           - スタック・キュー・deque の使いどころ: ds/stack-techniques.md
           - 単調スタックとスライド最小値: ds/monotonic-stack.md
@@ -271,27 +271,27 @@ nav:
           - 繰り返し二乗法: math/mod-pow.md
           - 逆元と mod での割り算: math/mod-inverse.md
           - modint: math/modint.md
-          - フェルマーの小定理と指数の mod: math/exponent-mod.md
           - 等比数列の和を mod で求める: math/geometric-series-mod.md
+          - フェルマーの小定理と指数の mod: math/exponent-mod.md
           - 桁と mod: math/digit-and-mod.md
       - 素数と約数:
           - 約数列挙と素数判定: math/divisor-enum.md
           - 素因数分解とルジャンドルの公式: math/prime-factorization.md
           - エラトステネスの篩: math/sieve-eratosthenes.md
           - 最小素因数の篩と線形篩: math/spf-sieve.md
+          - 素因数の指数で考える: math/prime-exponent-vector.md
           - 調和級数と倍数の列挙: math/harmonic-sum.md
           - 約数の個数の上界と高度合成数: math/divisor-count-bound.md
           - 区間篩: math/segmented-sieve.md
-          - 素因数の指数で考える: math/prime-exponent-vector.md
           - オイラーの φ 関数: math/euler-phi.md
           - 大きな数の素数判定と素因数分解: math/miller-rabin.md
       - GCD と合同式:
           - GCD・LCM とユークリッドの互除法: math/gcd-lcm.md
+          - 整数の証明の型: math/proof-patterns.md
           - 拡張ユークリッドの互除法と一次合同式: math/ext-gcd.md
           - GCD の性質: math/gcd-properties.md
           - 中国剰余定理: math/crt.md
           - 位数・原始根・離散対数: math/multiplicative-order.md
-          - 整数の証明の型: math/proof-patterns.md
       - floor と商:
           - 整数の平方根・K 乗根と累乗数: math/integer-root.md
           - N 進法: math/base-conversion.md
@@ -323,15 +323,15 @@ nav:
           - 写像 12 相: comb/twelvefold-way.md
       - 数え方の考え方:
           - 数え上げの考え方: comb/counting-mindset.md
-          - 対応づけ・数える対象の言い換え: comb/counting-bijection.md
           - 順序を固定して数える: comb/counting-fix-order.md
+          - 対応づけ・数える対象の言い換え: comb/counting-bijection.md
           - 重複の除き方: comb/counting-dedup.md
           - Burnside の補題: comb/burnside-lemma.md
       - 二項係数の系統:
           - 多項係数: comb/multinomial-coefficient.md
           - 二項係数の恒等式と和の公式: comb/binomial-identities.md
-          - 二項係数の部分和: comb/binomial-prefix-sum.md
           - 鏡像法とカタラン数: comb/reflection-principle.md
+          - 二項係数の部分和: comb/binomial-prefix-sum.md
           - LGV 補題: comb/lgv-lemma.md
           - 母関数の考え方: comb/generating-function-counting.md
       - 包除の系統:
@@ -358,8 +358,8 @@ nav:
           - 対称性で確率を求める: comb/probability-symmetry.md
           - 確率 DP: comb/probability-dp.md
           - 期待値 DP: comb/expected-value-dp.md
-          - 最適戦略の期待値: comb/optimal-strategy-expectation.md
           - 閉路のある期待値: comb/expectation-linear-equations.md
+          - 最適戦略の期待値: comb/optimal-strategy-expectation.md
           - 期待値と確率の変換: comb/expectation-tail-sum.md
           - 二乗の期待値・分散: comb/expectation-of-square.md
           - 連続値の確率: comb/continuous-probability.md
@@ -418,6 +418,7 @@ nav:
       - 約数と倍数: patterns/divisors-and-multiples.md
       - グリッド: patterns/grid.md
       - 操作列とクエリ: patterns/operation-sequence.md
+      - 円環: patterns/circular.md
   - C++:
       - cpp/index.md
       - C++ の逆引き: cpp/cpp-reverse-index.md

@@ -2,7 +2,7 @@
 
 工程6（土台作り）で、サイト・生成スクリプト・検査・CI・執筆の手引きを別々の担当が作るので、その間の約束をここに決める。上位の決定は設計書（[design.md](design.md)）と [design-review.md](design-review.md)。この文書と食い違ったら、この文書を直してから作る。
 
-- 版：2026-10-21 初版
+- 版：2026-10-21 初版。2026-10-29 ページの部品を足した（§2 の related の表示、§7 の段階と更新日・誤りの報告・関連・節のレベルの印。Issue #9・#10・#54・#56）
 
 ## 1. ファイルの置き場所と URL
 
@@ -65,6 +65,9 @@ atcoder: null                          # cpp だけ（true / false）
 - `status` は使わない（Material の予約キー）
 - 本文の見出しには、sections の anchor を `## 区間の長さを S に持たせる {#size-in-node}` の形で付ける。stage が draft 以降なら、sections の全 anchor が本文にあることを検査する
 - 骨格（stub）のページの本文は、冒頭の要点の囲みだけ（§4）
+- related は、知識マップのほかに、ページの下の「関連」の欄に書いた順で出る（§7）。書いた順が表示の順になるので、近いものから書く。`id#anchor` は「ページの題名 › 節の題」で節へリンクする（節の題は相手の sections の title。相手が stub の間は、節ではなくページへリンクする）
+- sections の level は、見出しと目次の項目のレベルの印と、「理解した」のチェック欄になる（§7）。見出しに色の印を手で書かない
+- stage と updated は、ページの最後の行に出る（§7。stage の表示名は stub＝準備中・draft＝下書き・reviewed＝検証済み・done＝完成）
 
 ## 3. 問題の一覧の書式
 
@@ -142,8 +145,10 @@ atcoder: null                          # cpp だけ（true / false）
 | 表示 | 作り方 |
 | --- | --- |
 | ページ上部のバッジ（レベル・分野・kind・準備中） | `overrides/main.html` が `page.meta` から出す。レベルは AtCoder の色。kind は種類別の一覧（`lists/kind-<…>`）へのリンク。stage が stub なら「準備中」の帯 |
-| 「理解した」のチェック | テンプレートがページ×レベルのチェック欄の HTML を出し、`progress.js` が localStorage と結ぶ |
-| 前提・次に読む | テンプレートが `nav.pages` の各ページの meta を引いて出す（次に読むは同じレベルと1つ上を優先して8件まで。残りは知識マップの焦点の表示へのリンク） |
+| 「理解した」のチェック | テンプレートがページ×レベルのチェック欄の HTML を出し、`progress.js` が localStorage と結ぶ。チェック欄（`label.kp-check`）はどれも（ページのレベルの欄も）`span.kp-understood__item` で包む。上の帯の節の欄（「青の節」など）にだけ、横にその帯の最初の節（sections の順）へ移るリンク（`a.kp-check__jump`。矢印は CSS で、上では↓・下では↑）を置く。準備中のページは本文に節の見出しがないので置かない |
+| 節のレベルの印 | sections に level のある節の見出しと目次の項目に、テンプレートが `span.kp-mini.kp-lv-<色>.kp-sec-lv` を入れる。見出しは本文の HTML の `<a class="headerlink" href="#<anchor>"` の前（toc の permalink が前提）、目次は `site_nav` ブロックの HTML の `<a href="#<anchor>" class="md-nav__link">` の直後（CSS の order で題の後ろに出す）。どちらも文字列の置き換えで、JS を使わない（HTML に書かれるので instant navigation でも出る。目次の部分テンプレートは上書きしない） |
+| 前提・次に読む・関連 | テンプレートが `nav.pages` の各ページの meta を引いて出す（次に読むは同じレベルと1つ上を優先して8件まで。残りは知識マップの焦点の表示へのリンク）。関連は related を書いた順に20件まで（超えた分は知識マップの焦点の表示へのリンク）。`id#anchor` は「ページの題名 › 節の題」で、レベルの印は節の level（なければページの level）。相手のページが stub なら、本文に節の見出しがないので、節ではなくページへのリンクにする（印はページの level）。前提・出した次に読む・関連にすでに出たページは、関連に重ねて出さない（節への関連は出す） |
+| 段階・更新日・誤りの報告 | テンプレートがページの最後の行（`div.kp-page-info`）に出す。段階と更新日は id のあるページだけ（段階は「この教材の使い方」の #stub へのリンク）。「このページの誤りを報告する」はどのページにも出し、GitHub の新しい Issue を `?template=page-error.yml&title=誤りの報告：<題名>&page-title=<題名>&page-url=<URL>&page-updated=<updated>` で開く（ひな形は `.github/ISSUE_TEMPLATE/page-error.yml`。項目の id が引数の名前。題名は front matter の title、URL は page.canonical_url）。labels などの引数は権限のない人には 404 になるので付けない |
 | 解いたチェック | `progress.js` が `.kp-problems` の各行の先頭にチェック欄を付ける |
 | 知識マップ | `docs/guide/knowledge-map.md` の `<div id="kp-map"></div>`。`map.js` が graph.json を読み、既定は分野ごとの表示、`?focus=<id>` で祖先と子孫だけ、全体は分野を頂点にした図。理解したページを塗る |
 | ロードマップの集計 | `progress.js` が graph.json と localStorage から、レベル・分野ごとの解いた数・理解した数を出す（`<div class="kp-roadmap-stats"></div>`） |

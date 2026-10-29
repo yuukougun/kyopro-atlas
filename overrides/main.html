@@ -4,17 +4,43 @@
   kyopro-atlas のテンプレートの上書き（planning/interfaces.md §7、design.md §8.4）
 
   front matter に id を持つページにだけ、次を出す。
-  - ページ上部：準備中の帯（stage が stub）、バッジ（レベル＝AtCoder の色・分野・種類）、「理解した」のチェック欄
-  - ページ下部：前提・次に読む・知識マップの焦点の表示へのリンク、「理解した」のチェック欄（もう一度）
+  - ページ上部：準備中の帯（stage が stub）、バッジ（レベル＝AtCoder の色・分野・種類）、「理解した」のチェック欄。
+    上の帯の節のチェック欄（「青の節」など）の横に、その帯の最初の節へ移るリンク（kp-check__jump）
+  - 本文と目次：sections に level のある節の見出しと目次の項目に、レベルの印（kp-sec-lv。#54）
+  - ページ下部：前提・次に読む・関連（related。#56）・知識マップの焦点の表示へのリンク、「理解した」のチェック欄（もう一度）
+  どのページにも、最後の行に段階（stage）と更新日（updated）（id を持つページだけ。#9）と、
+  「このページの誤りを報告する」（GitHub の新しい Issue。.github/ISSUE_TEMPLATE/page-error.yml。#10）を出す。
 
   ほかのページの meta は nav.pages から引く（全ページの front matter は描画の前に読まれている）。
   レベル別・種類別の一覧の URL は lists/level-<slug>/・lists/kind-<slug>/。slug の対応は tools/gen_site.py が持つので、
   nav.yml の extra.kp.levels・extra.kp.kinds（と extra.kp.fields：分野の表示名）にあればそれを使い、なければ下の既定を使う。
   どちらの場合も、nav にその一覧のページがあるときだけリンクにする（リンク切れを出さない）。
 
+  見出しと目次の印は、Material の出力の文字列を置き換えて入れる（見出しは <a class="headerlink" href="#…"> の前、
+  目次は <a href="#…" class="md-nav__link"> の直後。目次の部分テンプレートは上書きしない）。HTML に書かれるので、
+  instant navigation で入れ替わったページにもそのまま出て、JS は要らない。見出しの印は markdown_extensions の
+  toc の permalink（headerlink）があることを前提にする。検索の索引は本文の HTML から作られるので、印は入らない。
+
   Zensical（MiniJinja）でも読めるよう、Python のメソッドの呼び出しは使わない。MkDocs の Jinja は自動でエスケープしないので、
-  front matter の文字列は | e を通す。
+  front matter の文字列は | e を通す。置き換えた後の HTML は | safe で出す（自動でエスケープする環境で二重にしないため）。
 -#}
+
+{#- 目次（右の欄と、狭い画面でナビゲーションの中に出る目次）の、level のある節の項目にレベルの印を付ける。
+    印は HTML では題の前にある（CSS の order で後ろに見せる）ので、読み上げで題の前に来ないよう aria-hidden にする
+    （帯は本文の見出しの印で読み上げられる） -#}
+{% block site_nav %}
+{%- set m = page.meta if (page and page.meta) else {} -%}
+{%- set nav_ns = namespace(html=super()) -%}
+{%- if m.id and m.sections -%}
+  {%- set LV_CLASS = {"基礎": "kiso", "水": "mizu", "青": "ao", "黄": "ki", "発展": "hatten"} -%}
+  {%- for s in m.sections if s.level in LV_CLASS and s.anchor -%}
+    {%- set link = '<a href="#' ~ s.anchor ~ '" class="md-nav__link">' -%}
+    {%- set badge = '<span class="kp-mini kp-lv-' ~ LV_CLASS[s.level] ~ ' kp-sec-lv" title="' ~ s.level ~ 'の節" aria-hidden="true">' ~ s.level ~ '</span>' -%}
+    {%- set nav_ns.html = nav_ns.html | replace(link, link ~ badge) -%}
+  {%- endfor -%}
+{%- endif -%}
+{{ nav_ns.html | safe }}
+{% endblock %}
 
 {% block content %}
 {%- set m = page.meta if (page and page.meta) else {} -%}
@@ -38,10 +64,14 @@
     "start": "はじめに", "guide": "横断ページ", "basics": "基本テクニック", "thinking": "考察", "dp": "動的計画法",
     "graph": "グラフ", "tree": "木", "ds": "データ構造", "math": "整数論・代数", "comb": "数え上げ・確率・ゲーム",
     "string": "文字列", "geometry": "幾何", "misc": "その他の技法", "patterns": "題材別", "cpp": "C++"} -%}
+  {#- 関連の欄に出す件数の上限（今の最大は 20 件）。超えた分は知識マップの焦点の表示（関連の囲みが出る）へつなぐ -#}
+  {%- set REL_MAX = 20 -%}
+  {#- related を探すための文字列。",a,b#x," の形で、"," ~ id ~ "," か "," ~ id ~ "#" を含めば related にある -#}
+  {%- set rel_str = "," ~ ((m.related or []) | join(",")) ~ "," -%}
 
-  {#- nav を1回だけ見て、一覧・分野の入口・知識マップ・前提・次に読むを集める。
+  {#- nav を1回だけ見て、一覧・分野の入口・知識マップ・前提・次に読む・関連を集める。
       ページは URL（lists/kind-dp/ のようなサイトのルートからの相対）で見分ける。p.file は Zensical にないので使わない -#}
-  {%- set ns = namespace(lists=[], field_url=none, map_url=none, howto_url=none, prereqs=[], near=[], far=[]) -%}
+  {%- set ns = namespace(lists=[], field_url=none, map_url=none, howto_url=none, prereqs=[], near=[], far=[], rel=[]) -%}
   {%- for p in nav.pages -%}
     {%- set pm = p.meta or {} -%}
     {%- set pu = (p.url or "")[1:] if (p.url or "")[:1] == "/" else (p.url or "") -%}
@@ -63,37 +93,76 @@
           {%- set ns.far = ns.far + [p] -%}
         {%- endif -%}
       {%- endif -%}
+      {%- if ("," ~ pm.id ~ ",") in rel_str or ("," ~ pm.id ~ "#") in rel_str -%}
+        {%- set ns.rel = ns.rel + [p] -%}
+      {%- endif -%}
     {%- endif -%}
   {%- endfor -%}
   {%- set nexts = ns.near + ns.far -%}
 
-  {#- 「理解した」のチェック：ページの level と、sections にある上位の level -#}
+  {#- 関連：related を front matter の順に並べる。id#anchor は相手の sections の節の題と level を添える。
+      相手が準備中（stub）なら本文に節の見出しがないので、id#anchor も節ではなくページへのリンクにする（印はページの level）。
+      前提・次に読む（出す8件）・関連に出したページは重ねて出さない（節への関連は出す） -#}
+  {%- set shown_ns = namespace(ids=[]) -%}
+  {%- for q in ns.prereqs -%}{%- set shown_ns.ids = shown_ns.ids + [q.meta.id] -%}{%- endfor -%}
+  {%- for q in nexts[:8] -%}{%- set shown_ns.ids = shown_ns.ids + [q.meta.id] -%}{%- endfor -%}
+  {%- set rel_ns = namespace(items=[]) -%}
+  {%- for r in (m.related or []) -%}
+    {%- for q in ns.rel -%}
+      {%- set qid = q.meta.id -%}
+      {%- set qn = qid | length -%}
+      {%- set is_sec = r[:qn + 1] == qid ~ "#" -%}
+      {%- if r == qid or (is_sec and q.meta.stage == "stub") -%}
+        {%- if qid not in shown_ns.ids -%}
+          {%- set rel_ns.items = rel_ns.items + [{"page": q, "anchor": "", "title": "", "level": q.meta.level}] -%}
+          {%- set shown_ns.ids = shown_ns.ids + [qid] -%}
+        {%- endif -%}
+      {%- elif is_sec -%}
+        {%- set sec_ns = namespace(anchor=r[qn + 1:], title="", level=q.meta.level) -%}
+        {%- for s in (q.meta.sections or []) if s.anchor == sec_ns.anchor -%}
+          {%- set sec_ns.title = s.title -%}
+          {%- if s.level -%}{%- set sec_ns.level = s.level -%}{%- endif -%}
+        {%- endfor -%}
+        {%- set rel_ns.items = rel_ns.items + [{"page": q, "anchor": sec_ns.anchor, "title": sec_ns.title, "level": sec_ns.level}] -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endfor -%}
+
+  {#- 「理解した」のチェック：ページの level と、sections にある上位の level。
+      for の if で lv_ns.levels を見ると、MiniJinja は先に全部を選ぶので、同じ帯の節が2つ以上あるとチェック欄が重なる。
+      帯ごとに selectattr で節があるかだけを見る -#}
   {%- set lv_ns = namespace(levels=[]) -%}
   {%- if m.level in LV_RANK -%}
     {%- for lv in ["基礎", "水", "青", "黄", "発展"] -%}
       {%- if lv == m.level -%}
         {%- set lv_ns.levels = lv_ns.levels + [lv] -%}
-      {%- elif LV_RANK[lv] > LV_RANK[m.level] -%}
-        {%- for s in (m.sections or []) if s.level == lv and lv not in lv_ns.levels -%}
-          {%- set lv_ns.levels = lv_ns.levels + [lv] -%}
-        {%- endfor -%}
+      {%- elif LV_RANK[lv] > LV_RANK[m.level] and ((m.sections or []) | selectattr("level", "equalto", lv) | list) -%}
+        {%- set lv_ns.levels = lv_ns.levels + [lv] -%}
       {%- endif -%}
     {%- endfor -%}
   {%- endif -%}
 
+  {#- 上の帯の節のチェック欄の横に、その帯の最初の節へ移るリンクを置く（矢印は CSS で、上では↓・下では↑）。
+      準備中のページは本文に節の見出しがないので置かない -#}
   {%- set checks -%}
     {%- if lv_ns.levels -%}
     <div class="kp-understood" role="group" aria-label="理解したかの記録（この端末のブラウザに保存する）">
       <span class="kp-understood__label">理解した</span>
       {%- for lv in lv_ns.levels %}
-      {%- set titles = [] -%}
+      {%- set secs = [] -%}
       {%- if lv != m.level -%}
-        {%- set titles = (m.sections or []) | selectattr("level", "equalto", lv) | map(attribute="title") | list -%}
-      {%- endif %}
-      <label class="kp-check kp-lv-{{ LV_CLASS[lv] }}"{% if titles %} title="{{ lv }}の節：{{ titles | join('、') | e }}"{% endif %}>
-        <input type="checkbox" data-kp-understood="{{ m.id | e }}" data-kp-level="{{ lv }}">
-        <span class="kp-check__text">{{ lv }}{% if lv != m.level %}の節{% endif %}</span>
-      </label>
+        {%- set secs = (m.sections or []) | selectattr("level", "equalto", lv) | list -%}
+      {%- endif -%}
+      {%- set titles = secs | map(attribute="title") | list %}
+      <span class="kp-understood__item">
+        <label class="kp-check kp-lv-{{ LV_CLASS[lv] }}"{% if titles %} title="{{ lv }}の節：{{ titles | join('、') | e }}"{% endif %}>
+          <input type="checkbox" data-kp-understood="{{ m.id | e }}" data-kp-level="{{ lv }}">
+          <span class="kp-check__text">{{ lv }}{% if lv != m.level %}の節{% endif %}</span>
+        </label>
+        {%- if secs and (secs | first).anchor and m.stage != "stub" %}
+        <a class="kp-check__jump kp-lv-{{ LV_CLASS[lv] }}" href="#{{ (secs | first).anchor | e }}" title="{{ lv }}の節へ移る：{{ titles | join('、') | e }}" aria-label="{{ lv }}の節へ移る"></a>
+        {%- endif %}
+      </span>
       {%- endfor %}
     </div>
     {%- endif -%}
@@ -152,13 +221,22 @@
     {{ checks }}
   </div>
 {%- endif %}
-{{ super() }}
+{#- 本文：sections に level のある節の見出しに、レベルの印を付ける（headerlink の前に入れる） -#}
+{%- set body_ns = namespace(html=super()) -%}
+{%- if m.id -%}
+  {%- for s in (m.sections or []) if s.level in LV_CLASS and s.anchor -%}
+    {%- set hl = '<a class="headerlink" href="#' ~ s.anchor ~ '"' -%}
+    {%- set badge = '<span class="kp-mini kp-lv-' ~ LV_CLASS[s.level] ~ ' kp-sec-lv" title="' ~ s.level ~ 'の節（difficulty ' ~ LV_RANGE[s.level] ~ '）">' ~ s.level ~ '</span>' -%}
+    {%- set body_ns.html = body_ns.html | replace(hl, badge ~ hl) -%}
+  {%- endfor -%}
+{%- endif %}
+{{ body_ns.html | safe }}
 {%- if m.id %}
   {%- set show_prereq = ns.prereqs or (m.level in LV_RANK) %}
   {#- 次に読むが8件を超えるときは「ほか N ページ」が同じリンクになるので、まとめのリンクは出さない -#}
   {%- set show_map = ns.map_url and m.id != "knowledge-map" and (ns.prereqs or nexts) and nexts | length <= 8 %}
-  {%- if show_prereq or nexts or show_map or lv_ns.levels %}
-  <nav class="kp-links" aria-label="このページの前後">
+  {%- if show_prereq or nexts or rel_ns.items or show_map or lv_ns.levels %}
+  <nav class="kp-links" aria-label="このページの前後と関連">
     {%- if show_prereq %}
     <div class="kp-links__col">
       <p class="kp-links__heading">前提</p>
@@ -192,11 +270,77 @@
       {%- endif %}
     </div>
     {%- endif %}
+    {%- if rel_ns.items %}
+    <div class="kp-links__col kp-links__col--related">
+      <p class="kp-links__heading">関連</p>
+      <ul class="kp-links__list">
+        {%- for it in rel_ns.items[:REL_MAX] %}
+        {%- set q = it.page %}
+        <li><a href="{{ q.url | url }}{% if it.anchor %}#{{ it.anchor | e }}{% endif %}"{% if q.meta.summary %} title="{{ q.meta.summary | e }}"{% endif %}>{{ (q.meta.nav_title or q.title) | e }}{% if it.title %} › {{ it.title | e }}{% endif %}</a>
+          {%- if it.level in LV_RANK %} <span class="kp-mini kp-lv-{{ LV_CLASS[it.level] }}">{{ it.level }}</span>{% endif %}</li>
+        {%- endfor %}
+      </ul>
+      {%- if rel_ns.items | length > REL_MAX and ns.map_url %}
+      <p class="kp-links__more"><a href="{{ ns.map_url | url }}?focus={{ m.id | urlencode }}">ほか {{ rel_ns.items | length - REL_MAX }} 件は知識マップで見る</a></p>
+      {%- elif rel_ns.items | length > REL_MAX %}
+      <p class="kp-links__more">ほか {{ rel_ns.items | length - REL_MAX }} 件</p>
+      {%- endif %}
+    </div>
+    {%- endif %}
     {%- if show_map %}
     <p class="kp-links__map"><a href="{{ ns.map_url | url }}?focus={{ m.id | urlencode }}">知識マップでこのページの前後を見る</a></p>
     {%- endif %}
     {{ checks }}
   </nav>
   {%- endif %}
+{%- endif %}
+{#- 最後の行：段階と更新日（id を持つページ）と、誤りの報告（どのページにも）。
+    報告は GitHub の新しい Issue を、ひな形 .github/ISSUE_TEMPLATE/page-error.yml の項目（id：page-title・page-url・
+    page-updated）に題名・URL・更新日を入れて開く。labels などの引数は、権限のない人が開くと 404 になるので付けない -#}
+{%- set STAGE_NAME = {"stub": "準備中", "draft": "下書き", "reviewed": "検証済み", "done": "完成"} -%}
+{%- set upd = (m.updated | string) if m.updated else "" -%}
+{%- set show_meta = m.id and (m.stage in STAGE_NAME or upd) -%}
+{%- set info_ns = namespace(repo=config.repo_url or "") -%}
+{%- if info_ns.repo[-1:] == "/" -%}{%- set info_ns.repo = info_ns.repo[:-1] -%}{%- endif -%}
+{%- set show_report = info_ns.repo[:19] == "https://github.com/" -%}
+{%- if show_meta or show_report %}
+  <div class="kp-page-info">
+    {%- if show_meta %}
+    <dl class="kp-page-info__meta">
+      {%- if m.stage in STAGE_NAME %}
+      <div>
+        <dt>段階</dt>
+        <dd>
+          {%- if ns.howto_url -%}
+          <a class="kp-stage kp-stage--{{ m.stage }}" href="{{ ns.howto_url | url }}#stub" title="段階の意味（この教材の使い方）">{{ STAGE_NAME[m.stage] }}</a>
+          {%- else -%}
+          <span class="kp-stage kp-stage--{{ m.stage }}">{{ STAGE_NAME[m.stage] }}</span>
+          {%- endif -%}
+        </dd>
+      </div>
+      {%- endif %}
+      {%- if upd %}
+      <div>
+        <dt>更新日</dt>
+        <dd><time datetime="{{ upd | e }}">{{ upd | e }}</time></dd>
+      </div>
+      {%- endif %}
+    </dl>
+    {%- endif %}
+    {%- if show_report %}
+    {#- 題名は front matter の title（nav_title のあるページでは page.title が短い名前になるため） -#}
+    {%- set rtitle = m.title or (page.title if page else "") or config.site_name -%}
+    {%- set rurl = (page.canonical_url if page else "") or ((config.site_url or "") ~ ((page.url if page else "") or "")) -%}
+    {%- set report_url = info_ns.repo ~ "/issues/new?template=page-error.yml"
+        ~ "&title=" ~ (("誤りの報告：" ~ rtitle) | urlencode)
+        ~ "&page-title=" ~ (rtitle | urlencode)
+        ~ "&page-url=" ~ (rurl | urlencode)
+        ~ (("&page-updated=" ~ (upd | urlencode)) if upd else "") %}
+    <a class="kp-page-info__report" href="{{ report_url | e }}" target="_blank" rel="noopener" title="GitHub の新しい Issue を開く（ページの題名と URL が入る。GitHub のアカウントが要る）">
+      <span class="kp-page-info__icon" aria-hidden="true">{% include ".icons/octicons/report-16.svg" %}</span>
+      <span>このページの誤りを報告する</span>
+    </a>
+    {%- endif %}
+  </div>
 {%- endif %}
 {% endblock %}

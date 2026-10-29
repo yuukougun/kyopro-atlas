@@ -26,7 +26,7 @@ sections:
   - {title: 市松模様の偶奇, anchor: checkerboard, level: 青}
   - {title: 二部グラフ・ゲームとのつながり, anchor: bipartite-game}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -44,6 +44,8 @@ updated: 2026-10-22
 <!-- textlint-enable -->
 
 偶奇に着目するとは、操作のたびに決まった量だけ変わる値を見つけ、その値を 2 で割った余りがどう動くかから「できない」を見抜く考え方である。偶奇の条件はたいてい[必要条件](../guide/glossary.md#necessary-condition)にすぎないので、それを満たせば本当にできることを、具体的な手順（往復でむだに 1 往復させる、など）で別に確かめる。偶奇は[不変量](../thinking/invariant.md)の中で最もよく出る例である。
+
+使える合図は 3 つある。「ちょうど $K$ 回の操作で」「時刻 $t$ に」のように回数や時刻が決まっていること、「上下左右に 1 マス動く」のように 1 回で量が奇数だけ変わること、「2 つの値の和が偶数」のように偶奇の関係が条件にあることである。操作の問題で、ほかにどの型を試すかは[詰まったときの発想リスト](../guide/thinking-checklist.md#shape-operation)の「操作できるか・最小回数」の表で引ける。
 
 ## 1 歩ごとに偶奇が入れ替わる {#alternating}
 

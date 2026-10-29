@@ -22,8 +22,8 @@ mod、素数・約数、GCD と合同式、floor、行列・線形代数、畳�
 - [繰り返し二乗法](mod-pow.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：a^n mod m を、n の2進表記に沿って a, a², a⁴, … を掛け合わせて O(log n) で求める。
 - [逆元と mod での割り算](mod-inverse.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：a·x ≡ 1 (mod m) となる逆元 x を求め、mod での割り算を掛け算に直す。
 - [modint](modint.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：四則演算のたびに自動で余りを取る型で、mod 付きの数え上げを素直に書ける。
-- [フェルマーの小定理と指数の mod](exponent-mod.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：a&#94;(K&#94;N) のように指数が巨大な累乗の mod を、gcd(a, p) = 1 なら指数を p − 1 で割った余りに直して求める。
 - [等比数列の和を mod で求める](geometric-series-mod.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：1 + r + … + r^(n−1) を mod で求める。
+- [フェルマーの小定理と指数の mod](exponent-mod.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：a&#94;(K&#94;N) のように指数が巨大な累乗の mod を、gcd(a, p) = 1 なら指数を p − 1 で割った余りに直して求める。
 - [桁と mod](digit-and-mod.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：10 進数の桁を mod で考えて、倍数判定・数の連結 x·10^d + y・部分文字列が P の倍数になる個数を求める。
 
 ## 素数と約数
@@ -32,21 +32,21 @@ mod、素数・約数、GCD と合同式、floor、行列・線形代数、畳�
 - [素因数分解とルジャンドルの公式](prime-factorization.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：√N までの数で割れるだけ割り、残りが 1 より大きければそれも素数として、N = Π p^e を O(√N) で求める。
 - [エラトステネスの篩](sieve-eratosthenes.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：N 以下の素数を、小さい素数の倍数を順に消して O(N log log N) で列挙する。
 - [最小素因数の篩と線形篩](spf-sieve.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：篩のついでに各数の最小素因数を記録し、それで割り続けて O(log n) で素因数分解する。
+- [素因数の指数で考える](prime-exponent-vector.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：積が平方数になる組・巨大な lcm・割り切れる回数などを、整数を素数ごとの指数のベクトルとみて素数ごとに独立に考える。
 - [調和級数と倍数の列挙](harmonic-sum.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：割り切る・割り切られる関係にある組を値ごとに数えるとき、各 d の倍数をすべてたどる二重ループが、値の上限 M に対して合計 M/1 + … + M/M ≈ M ln M 回で済むことを使う。
 - [約数の個数の上界と高度合成数](divisor-count-bound.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：約数（の組）を全部試す全探索が間に合うかを、約数の個数の上界（10^9 以下で 1344、10^18 以下で 103680）から見積もる。
 - [区間篩](segmented-sieve.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：L が 10^12 と大きくても R − L が 10^6 程度なら、√R までの素数で区間 [L, R] だけを篩える。
-- [素因数の指数で考える](prime-exponent-vector.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：積が平方数になる組・巨大な lcm・割り切れる回数などを、整数を素数ごとの指数のベクトルとみて素数ごとに独立に考える。
 - [オイラーの φ 関数](euler-phi.md) <span class="kp-mini kp-lv-ki" title="difficulty 2000〜2399">黄</span>：1..n で n と互いに素な数の個数 φ(n) を、素因数分解から φ(n) = n Π(1 − 1/p) で求める。
 - [大きな数の素数判定と素因数分解](miller-rabin.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：10^18 程度の数の素数判定を Miller-Rabin で、素因数分解を Pollard's rho で期待 O(N^{1/4}) で行う。
 
 ## GCD と合同式
 
 - [GCD・LCM とユークリッドの互除法](gcd-lcm.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：gcd(a, b) = gcd(b, a mod b) を繰り返して最大公約数を O(log min(a, b)) で求め、lcm は a / gcd × b で求める。
+- [整数の証明の型](proof-patterns.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：実験で見つけた整数の規則が正しいかを、定番の筋道で確かめる。
 - [拡張ユークリッドの互除法と一次合同式](ext-gcd.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：互除法の途中経過から ax + by = gcd(a, b) の整数解を求める。
 - [GCD の性質](gcd-properties.md) <span class="kp-mini kp-lv-ao" title="difficulty 1600〜1999">青</span>：全体に同じ数を足したときの gcd を隣接差の gcd に直し、左端を固定した区間 gcd が O(log A) 種類しかないことで区間 gcd を速く求める。
 - [中国剰余定理](crt.md) <span class="kp-mini kp-lv-ao" title="difficulty 1600〜1999">青</span>：複数の合同式 x ≡ r_i (mod m_i) を同時に満たす x を、拡張ユークリッドで2式ずつ合わせて mod lcm でただ1つに求める。
 - [位数・原始根・離散対数](multiplicative-order.md) <span class="kp-mini kp-lv-ki" title="difficulty 2000〜2399">黄</span>：a^k ≡ 1 となる最小の k（位数）を φ(m) の約数から求め、原始根で掛け算を指数の足し算に直す。
-- [整数の証明の型](proof-patterns.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：実験で見つけた整数の規則が正しいかを、定番の筋道で確かめる。
 
 ## floor と商
 

@@ -124,24 +124,6 @@ search:
     - `modint#self-made` 自作するときの設計（加減の条件分岐・64bit の掛け算・pow と inv・入出力）：https://yuukougun.github.io/kyopro-atlas/math/modint/#self-made
     - `modint#acl-internals` ACL の中身（Barrett 還元・raw）：https://yuukougun.github.io/kyopro-atlas/math/modint/#acl-internals
 
-## フェルマーの小定理と指数の mod（exponent-mod） {#exponent-mod}
-
-- id：`exponent-mod`　レベル：水　段階：reviewed　type：technique
-- URL：https://yuukougun.github.io/kyopro-atlas/math/exponent-mod/
-- 別名：指数の mod、オイラーの定理、Fermat's little theorem、Euler's theorem、指数を p−1 で割る、累乗の塔、tetration
-- 種類：整数論
-- 前提：`mod-inverse`
-- ACL：`pow_mod`
-- サイン：
-    - 言い回し：a&#94;(b&#94;c) mod p のように、指数にさらに指数がある
-    - 言い回し：累乗の塔を mod で求める
-    - 制約：指数が 10^18 をさらに累乗した大きさになる
-- 節：
-    - `exponent-mod#fermat` フェルマーの小定理と、指数を p − 1 で割ってよい理由（累乗の周期）：https://yuukougun.github.io/kyopro-atlas/math/exponent-mod/#fermat
-    - `exponent-mod#exponent-mod-p-1` 指数の計算は mod (p − 1)（p − 1 は合成数なので割り算はできない）：https://yuukougun.github.io/kyopro-atlas/math/exponent-mod/#exponent-mod-p-1
-    - `exponent-mod#base-multiple` 底が p の倍数の場合（答えは 0、指数が 0 なら 1）：https://yuukougun.github.io/kyopro-atlas/math/exponent-mod/#base-multiple
-    - `exponent-mod#euler-theorem` 一般の法：オイラーの定理と、互いに素でないときの一般化（累乗の塔）（黄）：https://yuukougun.github.io/kyopro-atlas/math/exponent-mod/#euler-theorem
-
 ## 等比数列の和を mod で求める（geometric-series-mod） {#geometric-series-mod}
 
 - id：`geometric-series-mod`　レベル：基礎　段階：reviewed　type：technique
@@ -159,6 +141,24 @@ search:
     - `geometric-series-mod#halving` 法が任意のとき：S(2k) = S(k)(1 + r^k) で半分に割る（水）：https://yuukougun.github.io/kyopro-atlas/math/geometric-series-mod/#halving
     - `geometric-series-mod#matrix` 2×2 行列の累乗による別解（青）：https://yuukougun.github.io/kyopro-atlas/math/geometric-series-mod/#matrix
     - `geometric-series-mod#repeated-digits` 同じ数字列を並べた数は公比 10^d の等比数列の和になる：https://yuukougun.github.io/kyopro-atlas/math/geometric-series-mod/#repeated-digits
+
+## フェルマーの小定理と指数の mod（exponent-mod） {#exponent-mod}
+
+- id：`exponent-mod`　レベル：水　段階：reviewed　type：technique
+- URL：https://yuukougun.github.io/kyopro-atlas/math/exponent-mod/
+- 別名：指数の mod、オイラーの定理、Fermat's little theorem、Euler's theorem、指数を p−1 で割る、累乗の塔、tetration
+- 種類：整数論
+- 前提：`mod-inverse`
+- ACL：`pow_mod`
+- サイン：
+    - 言い回し：a&#94;(b&#94;c) mod p のように、指数にさらに指数がある
+    - 言い回し：累乗の塔を mod で求める
+    - 制約：指数が 10^18 をさらに累乗した大きさになる
+- 節：
+    - `exponent-mod#fermat` フェルマーの小定理と、指数を p − 1 で割ってよい理由（累乗の周期）：https://yuukougun.github.io/kyopro-atlas/math/exponent-mod/#fermat
+    - `exponent-mod#exponent-mod-p-1` 指数の計算は mod (p − 1)（p − 1 は合成数なので割り算はできない）：https://yuukougun.github.io/kyopro-atlas/math/exponent-mod/#exponent-mod-p-1
+    - `exponent-mod#base-multiple` 底が p の倍数の場合（答えは 0、指数が 0 なら 1）：https://yuukougun.github.io/kyopro-atlas/math/exponent-mod/#base-multiple
+    - `exponent-mod#euler-theorem` 一般の法：オイラーの定理と、互いに素でないときの一般化（累乗の塔）（黄）：https://yuukougun.github.io/kyopro-atlas/math/exponent-mod/#euler-theorem
 
 ## 桁と mod（digit-and-mod） {#digit-and-mod}
 
@@ -251,6 +251,24 @@ search:
     - `spf-sieve#linear-sieve` 線形篩：各合成数を1回だけ作り、φ・μ の表を同時に作る（青）：https://yuukougun.github.io/kyopro-atlas/math/spf-sieve/#linear-sieve
     - `spf-sieve#memory` メモリの見積もり（int で 10^7 個は 40 MB）：https://yuukougun.github.io/kyopro-atlas/math/spf-sieve/#memory
 
+## 素因数の指数で考える（prime-exponent-vector） {#prime-exponent-vector}
+
+- id：`prime-exponent-vector`　レベル：基礎　段階：reviewed　type：technique
+- URL：https://yuukougun.github.io/kyopro-atlas/math/prime-exponent-vector/
+- 別名：指数ベクトル、平方因子、squarefree、smooth 数、平方数の判定、素数ごとに独立
+- 種類：整数論
+- 前提：`prime-factorization`
+- サイン：
+    - 言い回し：積が平方数（立方数）になる組を数える
+    - 言い回し：多数の数の lcm を mod で求める
+    - 言い回し：2 で割り切れる回数・各素数の指数をそろえる
+    - 言い回し：素因数が P 以下の数（P-smooth 数）を数える
+- 節：
+    - `prime-exponent-vector#exponent-ops` 積は和・gcd は min・lcm は max・割り切りは全成分で ≤（算術の基本定理）：https://yuukougun.github.io/kyopro-atlas/math/prime-exponent-vector/#exponent-ops
+    - `prime-exponent-vector#squarefree-kernel` 平方因子を除いた核で、積が平方数になる組を数える（0 の扱い）：https://yuukougun.github.io/kyopro-atlas/math/prime-exponent-vector/#squarefree-kernel
+    - `prime-exponent-vector#huge-lcm` 巨大な lcm を指数の最大で持つ（水）：https://yuukougun.github.io/kyopro-atlas/math/prime-exponent-vector/#huge-lcm
+    - `prime-exponent-vector#single-prime` 特定の素数（2 など）の指数だけを比べる（水）：https://yuukougun.github.io/kyopro-atlas/math/prime-exponent-vector/#single-prime
+
 ## 調和級数と倍数の列挙（harmonic-sum） {#harmonic-sum}
 
 - id：`harmonic-sum`　レベル：水　段階：reviewed　type：technique
@@ -307,24 +325,6 @@ search:
     - `segmented-sieve#complexity` 計算量とメモリの見積もり：https://yuukougun.github.io/kyopro-atlas/math/segmented-sieve/#complexity
     - `segmented-sieve#patterns` 応用の型：https://yuukougun.github.io/kyopro-atlas/math/segmented-sieve/#patterns
 
-## 素因数の指数で考える（prime-exponent-vector） {#prime-exponent-vector}
-
-- id：`prime-exponent-vector`　レベル：基礎　段階：reviewed　type：technique
-- URL：https://yuukougun.github.io/kyopro-atlas/math/prime-exponent-vector/
-- 別名：指数ベクトル、平方因子、squarefree、smooth 数、平方数の判定、素数ごとに独立
-- 種類：整数論
-- 前提：`prime-factorization`
-- サイン：
-    - 言い回し：積が平方数（立方数）になる組を数える
-    - 言い回し：多数の数の lcm を mod で求める
-    - 言い回し：2 で割り切れる回数・各素数の指数をそろえる
-    - 言い回し：素因数が P 以下の数（P-smooth 数）を数える
-- 節：
-    - `prime-exponent-vector#exponent-ops` 積は和・gcd は min・lcm は max・割り切りは全成分で ≤（算術の基本定理）：https://yuukougun.github.io/kyopro-atlas/math/prime-exponent-vector/#exponent-ops
-    - `prime-exponent-vector#squarefree-kernel` 平方因子を除いた核で、積が平方数になる組を数える（0 の扱い）：https://yuukougun.github.io/kyopro-atlas/math/prime-exponent-vector/#squarefree-kernel
-    - `prime-exponent-vector#huge-lcm` 巨大な lcm を指数の最大で持つ（水）：https://yuukougun.github.io/kyopro-atlas/math/prime-exponent-vector/#huge-lcm
-    - `prime-exponent-vector#single-prime` 特定の素数（2 など）の指数だけを比べる（水）：https://yuukougun.github.io/kyopro-atlas/math/prime-exponent-vector/#single-prime
-
 ## オイラーの φ 関数（euler-phi） {#euler-phi}
 
 - id：`euler-phi`　レベル：黄　段階：reviewed　type：technique
@@ -378,6 +378,25 @@ search:
     - `gcd-lcm#lcm-overflow` lcm のオーバーフロー（割ってから掛ける）：https://yuukougun.github.io/kyopro-atlas/math/gcd-lcm/#lcm-overflow
     - `gcd-lcm#prefix-suffix-gcd` 左右からの累積 gcd（1 つ除いた gcd）：https://yuukougun.github.io/kyopro-atlas/math/gcd-lcm/#prefix-suffix-gcd
     - `gcd-lcm#reduce-fraction` 分数・傾きを既約にして map のキーにする（水）：https://yuukougun.github.io/kyopro-atlas/math/gcd-lcm/#reduce-fraction
+
+## 整数の証明の型（proof-patterns） {#proof-patterns}
+
+- id：`proof-patterns`　レベル：基礎　段階：reviewed　type：thinking
+- URL：https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/
+- 別名：整数問題の証明、並べ替え論法、余りの鳩の巣、gcd が不変、mod での矛盾
+- 種類：考察、整数論
+- 前提：`gcd-lcm`
+- サイン：
+    - 言い回し：操作を好きなだけ繰り返したとき、最後に残る値や作れる値を答える
+    - 言い回し：大きい方から小さい方を引く・余りに置き換える操作を繰り返す
+    - 言い回し：区間の幅が法 m 以上なら答えが決まる（余りは m 種類しかない）
+- 節：
+    - `proof-patterns#gcd-invariant` 操作で gcd が変わらない（互除法の不変量）：https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/#gcd-invariant
+    - `proof-patterns#mutual-divisibility` 互いに割り切り合うことで等号を示す：https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/#mutual-divisibility
+    - `proof-patterns#rearrangement` 並べ替え論法（a, 2a, …, (p−1)a が余りの並べ替えになる）：https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/#rearrangement
+    - `proof-patterns#pigeonhole-remainder` 余りの鳩の巣（m + 1 個のうち 2 つは同じ余り）：https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/#pigeonhole-remainder
+    - `proof-patterns#contradiction-mod` mod での矛盾で「できない」を示す：https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/#contradiction-mod
+    - `proof-patterns#necessary-sufficient` 必要条件と十分条件（実験の結果を信じてよいか）：https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/#necessary-sufficient
 
 ## 拡張ユークリッドの互除法と一次合同式（ext-gcd） {#ext-gcd}
 
@@ -464,25 +483,6 @@ search:
     - `multiplicative-order#bsgs-details` gcd(a, m) ≠ 1 の場合と、最小の解の取り方：https://yuukougun.github.io/kyopro-atlas/math/multiplicative-order/#bsgs-details
     - `multiplicative-order#affine-recurrence` 一次漸化式を不動点で等比数列に直して離散対数に帰着する：https://yuukougun.github.io/kyopro-atlas/math/multiplicative-order/#affine-recurrence
     - `multiplicative-order#mod-root` 平方剰余と mod の K 乗根（オイラーの規準・Tonelli-Shanks・Cipolla）（発展）：https://yuukougun.github.io/kyopro-atlas/math/multiplicative-order/#mod-root
-
-## 整数の証明の型（proof-patterns） {#proof-patterns}
-
-- id：`proof-patterns`　レベル：基礎　段階：reviewed　type：thinking
-- URL：https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/
-- 別名：整数問題の証明、並べ替え論法、余りの鳩の巣、gcd が不変、mod での矛盾
-- 種類：考察、整数論
-- 前提：`gcd-lcm`
-- サイン：
-    - 言い回し：操作を好きなだけ繰り返したとき、最後に残る値や作れる値を答える
-    - 言い回し：大きい方から小さい方を引く・余りに置き換える操作を繰り返す
-    - 言い回し：区間の幅が法 m 以上なら答えが決まる（余りは m 種類しかない）
-- 節：
-    - `proof-patterns#gcd-invariant` 操作で gcd が変わらない（互除法の不変量）：https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/#gcd-invariant
-    - `proof-patterns#mutual-divisibility` 互いに割り切り合うことで等号を示す：https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/#mutual-divisibility
-    - `proof-patterns#rearrangement` 並べ替え論法（a, 2a, …, (p−1)a が余りの並べ替えになる）：https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/#rearrangement
-    - `proof-patterns#pigeonhole-remainder` 余りの鳩の巣（m + 1 個のうち 2 つは同じ余り）：https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/#pigeonhole-remainder
-    - `proof-patterns#contradiction-mod` mod での矛盾で「できない」を示す：https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/#contradiction-mod
-    - `proof-patterns#necessary-sufficient` 必要条件と十分条件（実験の結果を信じてよいか）：https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/#necessary-sufficient
 
 ## 整数の平方根・K 乗根と累乗数（integer-root） {#integer-root}
 

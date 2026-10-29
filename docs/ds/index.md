@@ -15,11 +15,11 @@ STL の応用、スタック・キュー、Union-Find、BIT・セグメント木
 
 - [STL コンテナの使い分け](stl-containers.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：どの操作を速くしたいかで vector・deque・set・map・priority_queue・unordered_map を選ぶ。
 - [set・multiset・map の応用](ordered-set.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：set・multiset・map の lower_bound で「x 以上の最小」「x 未満の最大」を O(log N) で求め、要素の追加・削除と組み合わせる。
+- [全体への操作を変数で持つ](global-offset.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：「全要素に x を足す」「全体を反転する」「全体を回転する」を、要素を書き換えずにオフセット・反転フラグ・先頭位置の変数で表す。
+- [配列で作る連結リスト](linked-list.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：各要素の前と次を配列（値が大きければ map）で持つ双方向リストで、「x の直後に y を挿入」「x を削除」「列の付け替え」を O(1) で行い、最後に先頭からたどって列を出力する。
 - [優先度付きキュー](priority-queue.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：最大（最小）の要素の取り出しと追加を O(log N) で行う。
 - [上位 K 個の和と中央値の管理](top-k-multiset.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：追加・削除のたびに上位（下位）K 個の和や中央値を O(log N) で答える。
 - [区間を set で管理する](interval-set.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：互いに重ならない区間を左端をキーにした set・map で持ち、点を含む区間の検索・区間の追加と併合・区間への代入を、ならし O(log N) で行う。
-- [全体への操作を変数で持つ](global-offset.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：「全要素に x を足す」「全体を反転する」「全体を回転する」を、要素を書き換えずにオフセット・反転フラグ・先頭位置の変数で表す。
-- [配列で作る連結リスト](linked-list.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：各要素の前と次を配列（値が大きければ map）で持つ双方向リストで、「x の直後に y を挿入」「x を削除」「列の付け替え」を O(1) で行い、最後に先頭からたどって列を出力する。
 
 ## スタックとキュー
 

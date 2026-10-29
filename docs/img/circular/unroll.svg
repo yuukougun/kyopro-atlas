@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 392" width="400" height="392" font-family="sans-serif" font-size="14">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1f4e9a"/></marker></defs>
+<rect width="400" height="392" fill="#ffffff"/>
+<text x="12" y="24" fill="#222" font-weight="bold">端をまたぐ区間は、2 周分の列で 1 本の区間になる</text>
+<circle cx="200" cy="140" r="62" fill="none" stroke="#999" stroke-width="1.5"/>
+<path d="M 131.1 197.9 A 90 90 0 1 1 284.6 109.2" fill="none" stroke="#1f4e9a" stroke-width="2.5" marker-end="url(#arrow)"/>
+<line x1="186.0" y1="115.8" x2="148.0" y2="49.9" stroke="#b34700" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="142.0" y="47" text-anchor="end" font-size="13" fill="#b34700">切れ目</text>
+<circle cx="200.0" cy="78.0" r="17" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
+<text x="200.0" y="83.0" text-anchor="middle" fill="#222">0</text>
+<circle cx="253.7" cy="109.0" r="17" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
+<text x="253.7" y="114.0" text-anchor="middle" fill="#222">1</text>
+<circle cx="253.7" cy="171.0" r="17" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="253.7" y="176.0" text-anchor="middle" fill="#222">2</text>
+<circle cx="200.0" cy="202.0" r="17" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="200.0" y="207.0" text-anchor="middle" fill="#222">3</text>
+<circle cx="146.3" cy="171.0" r="17" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
+<text x="146.3" y="176.0" text-anchor="middle" fill="#222">4</text>
+<circle cx="146.3" cy="109.0" r="17" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
+<text x="146.3" y="114.0" text-anchor="middle" fill="#222">5</text>
+<text x="12" y="244" font-size="13" fill="#1f4e9a">4 から時計回りの 4 個（4・5・0・1）は切れ目をまたぐ</text>
+<text x="12" y="268" font-size="13" fill="#222">切れ目で切り開き、同じ 6 個をもう 1 周つなげる</text>
+<text x="136" y="292" text-anchor="middle" font-size="12" fill="#555">1 周目</text>
+<text x="304" y="292" text-anchor="middle" font-size="12" fill="#555">2 周目（写し）</text>
+<text x="46" y="310" text-anchor="end" font-size="12" fill="#666">添字</text>
+<text x="46" y="337" text-anchor="end" font-size="12" fill="#666">位置</text>
+<text x="66" y="310" text-anchor="middle" font-size="12" fill="#666">0</text>
+<rect x="52" y="316" width="28" height="32" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="66" y="337" text-anchor="middle" fill="#222">0</text>
+<text x="94" y="310" text-anchor="middle" font-size="12" fill="#666">1</text>
+<rect x="80" y="316" width="28" height="32" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="94" y="337" text-anchor="middle" fill="#222">1</text>
+<text x="122" y="310" text-anchor="middle" font-size="12" fill="#666">2</text>
+<rect x="108" y="316" width="28" height="32" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="122" y="337" text-anchor="middle" fill="#222">2</text>
+<text x="150" y="310" text-anchor="middle" font-size="12" fill="#666">3</text>
+<rect x="136" y="316" width="28" height="32" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="150" y="337" text-anchor="middle" fill="#222">3</text>
+<text x="178" y="310" text-anchor="middle" font-size="12" fill="#666">4</text>
+<rect x="164" y="316" width="28" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
+<text x="178" y="337" text-anchor="middle" fill="#222">4</text>
+<text x="206" y="310" text-anchor="middle" font-size="12" fill="#666">5</text>
+<rect x="192" y="316" width="28" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
+<text x="206" y="337" text-anchor="middle" fill="#222">5</text>
+<text x="234" y="310" text-anchor="middle" font-size="12" fill="#666">6</text>
+<rect x="220" y="316" width="28" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
+<text x="234" y="337" text-anchor="middle" fill="#222">0</text>
+<text x="262" y="310" text-anchor="middle" font-size="12" fill="#666">7</text>
+<rect x="248" y="316" width="28" height="32" fill="#cfe3ff" stroke="#1f4e9a" stroke-width="2.5"/>
+<text x="262" y="337" text-anchor="middle" fill="#222">1</text>
+<text x="290" y="310" text-anchor="middle" font-size="12" fill="#666">8</text>
+<rect x="276" y="316" width="28" height="32" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="290" y="337" text-anchor="middle" fill="#222">2</text>
+<text x="318" y="310" text-anchor="middle" font-size="12" fill="#666">9</text>
+<rect x="304" y="316" width="28" height="32" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="318" y="337" text-anchor="middle" fill="#222">3</text>
+<text x="346" y="310" text-anchor="middle" font-size="12" fill="#666">10</text>
+<rect x="332" y="316" width="28" height="32" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="346" y="337" text-anchor="middle" fill="#222">4</text>
+<text x="374" y="310" text-anchor="middle" font-size="12" fill="#666">11</text>
+<rect x="360" y="316" width="28" height="32" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+<text x="374" y="337" text-anchor="middle" fill="#222">5</text>
+<rect x="164" y="316" width="28" height="32" fill="none" stroke="#1f4e9a" stroke-width="2.5"/>
+<rect x="192" y="316" width="28" height="32" fill="none" stroke="#1f4e9a" stroke-width="2.5"/>
+<rect x="220" y="316" width="28" height="32" fill="none" stroke="#1f4e9a" stroke-width="2.5"/>
+<rect x="248" y="316" width="28" height="32" fill="none" stroke="#1f4e9a" stroke-width="2.5"/>
+<line x1="220" y1="298" x2="220" y2="354" stroke="#b34700" stroke-width="2" stroke-dasharray="6 4"/>
+<line x1="164" y1="360" x2="276" y2="360" stroke="#1f4e9a" stroke-width="2.5"/>
+<line x1="164" y1="354" x2="164" y2="366" stroke="#1f4e9a" stroke-width="2"/>
+<line x1="276" y1="354" x2="276" y2="366" stroke="#1f4e9a" stroke-width="2"/>
+<text x="220" y="382" text-anchor="middle" font-size="13" fill="#1f4e9a">添字 4〜7 の区間 [4, 8) になる</text>
+</svg>

@@ -425,7 +425,7 @@ updated: 2026-10-29
 - ABC223 G. Vertex Deletion → [全方位木 DP](../dp/rerooting.md#challenge)（力試し）
 - ABC224 C. Triangle? → [ベクトルと外積](../geometry/geometry-vectors.md#practice)（練習）
 - ABC224 D. 8 Puzzle on Graph → [状態を頂点にする](../graph/extended-dijkstra.md#practice)（練習）
-- ABC224 G. Roll or Increment → [最適戦略の期待値](../comb/optimal-strategy-expectation.md#challenge)（力試し）、[閉路のある期待値](../comb/expectation-linear-equations.md#challenge)（力試し）
+- ABC224 G. Roll or Increment → [閉路のある期待値](../comb/expectation-linear-equations.md#challenge)（力試し）、[最適戦略の期待値](../comb/optimal-strategy-expectation.md#challenge)（力試し）
 - ABC225 E. 7 → [偏角ソート](../geometry/argument-sort.md#practice)（練習）
 - ABC225 G. X → [燃やす埋める](../graph/project-selection.md#challenge)（力試し）
 - ABC226 F. Score of Permutations → [整数の分割と分割数](../comb/partition-number.md#abc226_f)（例題）
