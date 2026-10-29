@@ -114,7 +114,10 @@ $\operatorname{lcm}(a, b) = ab / \gcd(a, b)$ だが、この順で計算する�
 「$A_i$ を 1 つ除いた残りの gcd」を各 $i$ で求めるには、左からと右からの累積 gcd を前計算する。gcd には引き算に当たる逆の操作がないので、累積和のように全体から $A_i$ の分を取り除くことはできない。添字は 0-indexed で $a_i = A_{i+1}$ とし、
 
 $$
-\mathrm{pre}_i = \gcd(a_0, \dots, a_{i-1}), \qquad \mathrm{suf}_i = \gcd(a_i, \dots, a_{N-1})
+\begin{aligned}
+\mathrm{pre}_i &= \gcd(a_0, \dots, a_{i-1}), \\
+\mathrm{suf}_i &= \gcd(a_i, \dots, a_{N-1})
+\end{aligned}
 $$
 
 と置く。空の範囲は単位元の 0 にし（$\mathrm{pre}_0 = \mathrm{suf}_N = 0$）、$\mathrm{pre}_{i+1} = \gcd(\mathrm{pre}_i, a_i)$ と $\mathrm{suf}_i = \gcd(a_i, \mathrm{suf}_{i+1})$ で左右から埋める。$a_i$ を除いた gcd は $\gcd(\mathrm{pre}_i, \mathrm{suf}_{i+1})$ で、端の $i = 0$・$i = N - 1$ も場合分けが要らない。前計算と各 $i$ の計算を合わせて $O(N \log V)$ で、素朴に除くたびに計算し直す $O(N^2)$ 回の gcd より速い。max・min でも同じ形が使える（[累積和の左右からの累積](../basics/prefix-sum.md#left-right)）。

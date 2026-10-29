@@ -29,7 +29,7 @@ sections:
   - {title: 二項定理で累乗の和を展開する, anchor: power-sums}
   - {title: 式変形の検算（小さいケース）, anchor: verify}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -82,8 +82,10 @@ $$
 偶数個を選ぶ方法の数は、二項定理の 2 つの式を足して 2 で割ると求まる。$(1 + 1)^n$ と $(1 - 1)^n$ を足すと奇数の $k$ の項が打ち消し合い、偶数の $k$ の項が 2 倍で残る。
 
 $$
-\sum_{k \text{ が偶数}} \binom{n}{k} = \frac{2^n + [n = 0]}{2} =
-\begin{cases} 2^{n-1} & (n \ge 1) \\ 1 & (n = 0) \end{cases}
+\begin{aligned}
+\sum_{k \text{ が偶数}} \binom{n}{k} &= \frac{2^n + [n = 0]}{2} \\
+&= \begin{cases} 2^{n-1} & (n \ge 1) \\ 1 & (n = 0) \end{cases}
+\end{aligned}
 $$
 
 奇数個なら引いて 2 で割り、$n \ge 1$ で同じく $2^{n-1}$、$n = 0$ で 0 になる。重みがあるときも同じ考え方で、$\sum_{k \text{ が偶数}} \binom{n}{k} x^k = \frac{(1 + x)^n + (1 - x)^n}{2}$ となる。
@@ -184,7 +186,11 @@ $k$ が掛かった和は、吸収公式で $k$ を外に出すと二項定理�
 全ペアの $(A_i + A_j)^x$ の和は、二項定理で展開すると、列 $A$ の累乗の和の積に分かれる。$S_t = \sum_i A_i^t$（$S_0 = N$）とおく。
 
 $$
-\sum_{i} \sum_{j} (A_i + A_j)^x = \sum_{t=0}^{x} \binom{x}{t} \sum_i A_i^t \sum_j A_j^{x-t} = \sum_{t=0}^{x} \binom{x}{t} S_t S_{x-t}
+\begin{aligned}
+&\sum_{i} \sum_{j} (A_i + A_j)^x \\
+&= \sum_{t=0}^{x} \binom{x}{t} \sum_i A_i^t \sum_j A_j^{x-t} \\
+&= \sum_{t=0}^{x} \binom{x}{t} S_t S_{x-t}
+\end{aligned}
 $$
 
 左辺は $N^2$ 個の項があるが、右辺は $S_0, \dots, S_x$ があれば $O(x)$ で計算できる。$i$ と $j$ が別々の $\sum$ に分かれるのは、展開した各項が「$i$ だけの式」×「$j$ だけの式」になっているからである（[和の分解](../math/sigma-manipulation.md#linearity)）。

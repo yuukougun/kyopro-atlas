@@ -23,7 +23,7 @@ sections:
   - {title: 全射のマス：二項係数の系統と包除の系統の合流, anchor: surjection}
   - {title: 問題文から区別の有無と制限を読み取る, anchor: reading}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -128,7 +128,10 @@ $n = 4$、$k = 3$ の両方を区別しないマスを書き出すと、制限�
 「各箱 1 個以上」の列は、ほかの列とのつなぎ目になる。箱を区別するとき、制限なしの入れ方は「どの $j$ 個の箱が空でないか」を選び、その $j$ 箱への全射を数えればよい。どの入れ方も空でない箱の集合がただ 1 つに決まるので、重複も漏れもない。
 
 $$
-k^n = \sum_{j=0}^{k} \binom{k}{j} \cdot j! \, S(n, j), \qquad \binom{n+k-1}{n} = \sum_{j=0}^{k} \binom{k}{j} \binom{n-1}{j-1}
+\begin{aligned}
+k^n &= \sum_{j=0}^{k} \binom{k}{j} \cdot j! \, S(n, j), \\
+\binom{n+k-1}{n} &= \sum_{j=0}^{k} \binom{k}{j} \binom{n-1}{j-1}
+\end{aligned}
 $$
 
 2 つ目は $n \ge 1$ で成り立つ（$n = 0$ では $\binom{-1}{j-1}$ が 0 になって崩れる）。$n = 4$、$k = 3$ で 1 つ目は $3 \cdot 1 + 3 \cdot 14 + 1 \cdot 36 = 81$、2 つ目は $3 \cdot 1 + 3 \cdot 3 + 1 \cdot 3 = 15$ である（$j = 0$ の項は 0）。
@@ -136,7 +139,10 @@ $$
 逆向きに、制限なしから全射を求めるのが包除原理である。「箱 $i$ が空」を破る条件とみて、少なくとも $i$ 個の箱が空の入れ方を引いたり足したりする。
 
 $$
-k! \, S(n, k) = \sum_{i=0}^{k} (-1)^i \binom{k}{i} (k-i)^n, \qquad \binom{n-1}{k-1} = \sum_{i=0}^{k} (-1)^i \binom{k}{i} \binom{n+k-i-1}{n}
+\begin{aligned}
+k! \, S(n, k) &= \sum_{i=0}^{k} (-1)^i \binom{k}{i} (k-i)^n, \\
+\binom{n-1}{k-1} &= \sum_{i=0}^{k} (-1)^i \binom{k}{i} \binom{n+k-i-1}{n}
+\end{aligned}
 $$
 
 2 つ目も $n \ge 1$ で成り立ち、$n = 4$、$k = 3$ で $15 - 3 \cdot 5 + 3 \cdot 1 - 0 = 3$ と合う。このように全射のマスは、二項係数の系統（重複組合せ）からも包除の系統からも届く。どちらで求めるかは、数える対象で選ぶ。

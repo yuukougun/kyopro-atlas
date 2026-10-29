@@ -58,7 +58,10 @@ updated: 2026-10-29
 0 でないのは [squarefree](../guide/glossary.md#squarefree) な数だけで、符号は素因数の個数の偶奇で決まる。$n = 1, \dots, 12$ の値は次のとおりである。
 
 $$
-\mu(1), \mu(2), \dots, \mu(12) = 1, -1, -1, 0, -1, 1, -1, 0, 0, 1, -1, 0
+\begin{aligned}
+\mu(1), \dots, \mu(6) &= 1, -1, -1, 0, -1, 1, \\
+\mu(7), \dots, \mu(12) &= -1, 0, 0, 1, -1, 0
+\end{aligned}
 $$
 
 $\mu$ の性質のうち、使うのはほぼ次の 1 つだけである。
@@ -84,13 +87,20 @@ $n \ge 2$ なら $r \ge 1$ なので 0、$n = 1$ なら $r = 0$ で空の和の�
 約数についての和で作った $F$ から、元の $f$ を取り出す公式をメビウス反転と呼ぶ。
 
 $$
-F(n) = \sum_{d \mid n} f(d) \quad \Longrightarrow \quad f(n) = \sum_{d \mid n} \mu\!\left(\frac{n}{d}\right) F(d)
+\begin{aligned}
+& F(n) = \sum_{d \mid n} f(d) \\
+\Longrightarrow \quad & f(n) = \sum_{d \mid n} \mu\!\left(\frac{n}{d}\right) F(d)
+\end{aligned}
 $$
 
 右辺に $F$ の定義を入れ、和の順序を入れ替えると確かめられる。$e \mid d \mid n$ となる組 $(e, d)$ を、$e$ を外側にして数え直すと、$d = ek$ の $k$ は $n/e$ の約数を動く。
 
 $$
-\sum_{d \mid n} \mu\!\left(\frac{n}{d}\right) \sum_{e \mid d} f(e) = \sum_{e \mid n} f(e) \sum_{k \mid n/e} \mu\!\left(\frac{n/e}{k}\right) = \sum_{e \mid n} f(e) \, [n/e = 1] = f(n)
+\begin{aligned}
+&\sum_{d \mid n} \mu\!\left(\frac{n}{d}\right) \sum_{e \mid d} f(e) \\
+&= \sum_{e \mid n} f(e) \sum_{k \mid n/e} \mu\!\left(\frac{n/e}{k}\right) \\
+&= \sum_{e \mid n} f(e) \, [n/e = 1] = f(n)
+\end{aligned}
 $$
 
 内側の和は $n/e$ のすべての約数についての $\mu$ の和なので、[定義の節](#definition)の性質から $n/e = 1$、すなわち $e = n$ のときだけ 1 が残る。
@@ -100,7 +110,10 @@ $$
 約数の代わりに倍数について足した形でも、同じく反転できる。$f(m)$ が上限 $V$ を超える $m$ で 0 なら、次のとおりである。
 
 $$
-F(d) = \sum_{k \ge 1} f(kd) \quad \Longrightarrow \quad f(d) = \sum_{k \ge 1} \mu(k) \, F(kd)
+\begin{aligned}
+& F(d) = \sum_{k \ge 1} f(kd) \\
+\Longrightarrow \quad & f(d) = \sum_{k \ge 1} \mu(k) \, F(kd)
+\end{aligned}
 $$
 
 [約数包除](../comb/divisor-inclusion-exclusion.md)の「すべて $g$ の倍数」の個数 $F(g)$ と「gcd がちょうど $g$」の個数 $f(g)$ はこの関係にある。周期の数え上げ（最小の周期が $d$ の文字列）は約数の形で、[KMP 法の周期を数える節](../string/kmp.md#count-periodic)にある。
@@ -121,9 +134,11 @@ $$
 **互いに素な組の数**。$1 \le i \le N$、$1 \le j \le M$ の順序つきの組で、$\gcd(i, j) = 1$ となるものを数える。
 
 $$
-\sum_{i=1}^{N} \sum_{j=1}^{M} [\gcd(i, j) = 1]
-= \sum_{d \ge 1} \mu(d) \Bigl(\sum_{i \le N} [d \mid i]\Bigr) \Bigl(\sum_{j \le M} [d \mid j]\Bigr)
-= \sum_{d = 1}^{\min(N, M)} \mu(d) \left\lfloor \frac{N}{d} \right\rfloor \left\lfloor \frac{M}{d} \right\rfloor
+\begin{aligned}
+&\sum_{i=1}^{N} \sum_{j=1}^{M} [\gcd(i, j) = 1] \\
+&= \sum_{d \ge 1} \mu(d) \Bigl(\sum_{i \le N} [d \mid i]\Bigr) \Bigl(\sum_{j \le M} [d \mid j]\Bigr) \\
+&= \sum_{d = 1}^{\min(N, M)} \mu(d) \left\lfloor \frac{N}{d} \right\rfloor \left\lfloor \frac{M}{d} \right\rfloor
+\end{aligned}
 $$
 
 $d$ を固定すると、$i$ と $j$ の和は独立になり、それぞれ $d$ の倍数の個数になる。$N = M = 4$ なら $\mu(1), \dots, \mu(4) = 1, -1, -1, 0$ なので、$16 - 4 - 1 + 0 = 11$ である（$i = j$ の $(1, 1)$ を含む 11 組）。$\mu$ の表があれば $O(\min(N, M))$ で求まる。
@@ -132,10 +147,10 @@ $d$ を固定すると、$i$ と $j$ の和は独立になり、それぞれ $d$
 --8<-- "mobius-function/coprime-pairs.cpp:coprime"
 ```
 
-**gcd の関数の和**。ここからは、長さ $N$ の列 $A$ から 2 つ選ぶ組を考える。$[\gcd = 1]$ は「$f(1) = 1$、ほかは $f(n) = 0$」という関数の値 $f(\gcd)$ である。一般の $f$ でも、[メビウス反転](#inversion)で $w(n) = \sum_{d \mid n} \mu(n/d) f(d)$ を作れば $f(n) = \sum_{d \mid n} w(d)$ なので、同じ置き換えができる。
+**gcd の関数の和**。ここからは、長さ $N$ の列 $A$ から 2 つ選ぶ組を考える。$[\gcd = 1]$ は「$f(1) = 1$、ほかは $f(n) = 0$」という関数の値 $f(\gcd)$ である。一般の $f$ でも、[メビウス反転](#inversion)で $w(n) = \sum_{d \mid n} \mu(n/d) f(d)$ を作れば $f(n) = \sum_{d \mid n} w(d)$ なので、同じ置き換えができる。$d$ の倍数である $A_i$ の個数を $C(d)$ とすると、次のようになる。
 
 $$
-\sum_{i, j} f(\gcd(A_i, A_j)) = \sum_{d} w(d) \, C(d)^2 \qquad (C(d) = d \text{ の倍数である } A_i \text{ の個数})
+\sum_{i, j} f(\gcd(A_i, A_j)) = \sum_{d} w(d) \, C(d)^2
 $$
 
 $f = [n = 1]$ なら $w = \mu$、$f(n) = n$（gcd の総和）なら $w = \varphi$ である。$f(n) = 1/n$ とすると、$\operatorname{lcm}(x, y) = xy / \gcd(x, y)$ を使って lcm の総和に使える。ただし各項に重み $A_i A_j$ が付くので、$C(d)$ の代わりに「$d$ の倍数である $A_i$ の和」$s(d)$ が入り、$\sum_d w(d) \, s(d)^2$ になる（[例題の AGC038 C](#agc038_c)）。$w$ は $f$ と $\mu$ から倍数を回して、値の上限を $V$ として $O(V \log V)$ で作れる（[調和級数](../math/harmonic-sum.md)）。

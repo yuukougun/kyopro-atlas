@@ -26,7 +26,7 @@ sections:
   - {title: 連続値の場合（積分）, anchor: continuous, level: 発展}
   - {title: 「ちょうど」と「以上」の行き来, anchor: exactly-vs-at-least}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -91,7 +91,10 @@ $$
 **K 番目の値**。昇順に並べた $K$ 番目が $k$ 以上であることは、「$k$ 未満の値が $K - 1$ 個以下」すなわち「$k$ 以上の値が $N - K + 1$ 個以上」と同じである。$N$ 個が独立で、どれも確率 $p_k$ で $k$ 以上になるなら、$k$ 以上の個数は二項分布に従う。
 
 $$
-P(K \text{ 番目} \ge k) = \sum_{j = N-K+1}^{N} \binom{N}{j} p_k^{\,j} (1 - p_k)^{N-j}
+\begin{aligned}
+&P(K \text{ 番目} \ge k) \\
+&= \sum_{j = N-K+1}^{N} \binom{N}{j} p_k^{\,j} (1 - p_k)^{N-j}
+\end{aligned}
 $$
 
 $K = N$ なら最大値、$K = 1$ なら最小値の式に戻る。値の範囲が $1$〜$M$ なら $k = 1, \dots, M$ について足すので、二項係数を[前計算](../comb/binomial-precompute.md)しておけば全体で $O(NM)$ である。
@@ -111,7 +114,10 @@ $K = N$ なら最大値、$K = 1$ なら最小値の式に戻る。値の範囲�
 試行を繰り返して、条件がそろったら止める。止まるまでの回数 $T$（$T \ge 1$）の期待値は、$k \ge 0$ についての $P(T > k)$ の和である。$T > k$ は「$k$ 回目が終わった時点でまだ止まっていない」という事象で、状態の推移を追わずに、$k$ 回分の結果だけを見て確率を数えられることが多い。
 
 $$
-E[T] = \sum_{k \ge 0} P(T > k) = \sum_{k \ge 0} P(k \text{ 回目までに終わらない})
+\begin{aligned}
+E[T] &= \sum_{k \ge 0} P(T > k) \\
+&= \sum_{k \ge 0} P(k \text{ 回目までに終わらない})
+\end{aligned}
 $$
 
 **幾何分布**。1 回ごとに確率 $p$ で成功し、成功したら止めるなら、$P(T > k) = (1 - p)^k$ である。等比級数の和で $E[T] = \sum_{k \ge 0} (1 - p)^k = 1/p$ になる（[幾何分布](../comb/coupon-collector.md#geometric)の「1 回目で場合分け」の式と同じ値）。
@@ -119,7 +125,10 @@ $$
 **回数に上限があるとき**。$N$ 種類の靴下が $A_i$ 枚ずつ（合計 $S$ 枚）袋に入っていて、同じ種類の 2 枚がそろうまで 1 枚ずつ取り出すとする。[鳩の巣原理](../thinking/symmetry-pigeonhole-casework.md#pigeonhole)より $N + 1$ 枚目までに必ずそろうので、和は $k = 0, \dots, N$ で終わる。$T > k$ は「最初の $k$ 枚の種類がすべて違う」ことである。靴下は同じ種類でも 1 枚ずつ区別して数える。最初の $k$ 枚を集合として見ると、取り出し方は $\binom{S}{k}$ 通りが等確率である。そのうち種類が違う $k$ 種類 $i_1, \dots, i_k$ を選んで各種類から 1 枚ずつ選ぶ方法は $A_{i_1} \cdots A_{i_k}$ 通りある。
 
 $$
-P(T > k) = \frac{e_k}{\binom{S}{k}}, \qquad e_k = \sum_{i_1 < \dots < i_k} A_{i_1} A_{i_2} \cdots A_{i_k}
+\begin{aligned}
+P(T > k) &= \frac{e_k}{\binom{S}{k}}, \\
+e_k &= \sum_{i_1 < \dots < i_k} A_{i_1} A_{i_2} \cdots A_{i_k}
+\end{aligned}
 $$
 
 $e_k$ は多項式 $\prod_i (1 + A_i x)$ の $x^k$ の係数なので、多項式の積で全部の $k$ について一度に求まる（[力試し](#challenge)の ABC352 G）。
@@ -139,7 +148,10 @@ $$
 たとえば $[0, 1]$ から一様に選んだ $N$ 個の実数の最大値は、$P(\max > t) = 1 - t^N$ なので次のようになる。
 
 $$
-E[\max] = \int_0^1 (1 - t^N) \, dt = 1 - \frac{1}{N + 1} = \frac{N}{N + 1}
+\begin{aligned}
+E[\max] &= \int_0^1 (1 - t^N) \, dt \\
+&= 1 - \frac{1}{N + 1} = \frac{N}{N + 1}
+\end{aligned}
 $$
 
 値ごとに区間 $[L_i, R_i]$ が違うときは、$P(K \text{ 番目} > t)$ が区間の端点で区切られた区分ごとの多項式になるので、区分ごとに積分して足す。この形の問題は[連続値の確率](../comb/continuous-probability.md#piecewise)で扱う。
@@ -149,7 +161,10 @@ $$
 「以上」の確率 $G(k) = P(X \ge k)$ と「ちょうど」の確率は、隣どうしの差で行き来できる。累積の形 $P(X \le k)$ からも同じように求まる。
 
 $$
-P(X = k) = G(k) - G(k + 1) = P(X \le k) - P(X \le k - 1)
+\begin{aligned}
+P(X = k) &= G(k) - G(k + 1) \\
+&= P(X \le k) - P(X \le k - 1)
+\end{aligned}
 $$
 
 数え上げで「ちょうど」を「以下」の差で数えるのと同じ考え方である（[「ちょうど」を「以下」の差で数える](../comb/counting-mindset.md#exactly-vs-at-most)）。$E[X]$ だけが欲しいなら差をとる必要はなく、$G(k)$ をそのまま足せばよい。差をとって分布を求めるのは、$X$ の関数の期待値が欲しいときである。

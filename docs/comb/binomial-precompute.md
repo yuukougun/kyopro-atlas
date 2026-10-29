@@ -66,7 +66,10 @@ updated: 2026-10-29
 表ができれば、1 回の計算は掛け算 2 回で済む。
 
 $$
-\binom{n}{k} \equiv \mathrm{fact}[n] \cdot \mathrm{ifact}[k] \cdot \mathrm{ifact}[n-k] \pmod{p}
+\begin{aligned}
+\binom{n}{k} &\equiv \mathrm{fact}[n] \cdot \mathrm{ifact}[k] \\
+&\quad \cdot \mathrm{ifact}[n-k] \pmod{p}
+\end{aligned}
 $$
 
 ```cpp
@@ -122,7 +125,10 @@ $$
 法 $M$ が入力で与えられ素数とは限らないとき、$k!$ と $M$ は互いに素とは限らず、逆元が存在しないことがある。このとき割り算を使わない漸化式で表を作る。
 
 $$
-\binom{i}{0} = 1, \qquad \binom{i}{j} = \binom{i-1}{j-1} + \binom{i-1}{j} \quad (1 \le j \le i)
+\begin{aligned}
+\binom{i}{0} &= 1, \\
+\binom{i}{j} &= \binom{i-1}{j-1} + \binom{i-1}{j} \quad (1 \le j \le i)
+\end{aligned}
 $$
 
 足し算だけなので、どの法でも mod を取りながら計算できる。$0 \le j \le i \le N$ の表を作るのに $O(N^2)$ の時間とメモリがかかるので、$N$ が数千までのときに使う。$N = 5000$ なら 64 bit の整数で約 200 MB になるので、法が $10^9$ 程度までなら 32 bit で持つ（足してから mod を取る間は 64 bit で計算する）か、使う行だけを残す。
@@ -155,7 +161,10 @@ $$
     $p$ が素数なら、$1 \le j \le p - 1$ で $\binom{p}{j} = \dfrac{p!}{j!\,(p-j)!}$ は $p$ の倍数である（分子に $p$ があり、分母にはない）。よって多項式として $(1 + x)^p \equiv 1 + x^p \pmod{p}$ で、これを繰り返すと $(1 + x)^{p^i} \equiv 1 + x^{p^i}$ になる。
 
     $$
-    (1 + x)^n = \prod_i \left( (1 + x)^{p^i} \right)^{n_i} \equiv \prod_i \left( 1 + x^{p^i} \right)^{n_i} \pmod{p}
+    \begin{aligned}
+    (1 + x)^n &= \prod_i \left( (1 + x)^{p^i} \right)^{n_i} \\
+    &\equiv \prod_i \left( 1 + x^{p^i} \right)^{n_i} \pmod{p}
+    \end{aligned}
     $$
 
     左辺の $x^k$ の係数は $\binom{n}{k}$ である。右辺で $i$ 番目の因子から $x^{p^i}$ を $c_i$ 個（$0 \le c_i \le n_i < p$）選ぶと $x^{\sum c_i p^i}$ が出る。$p$ 進法の表し方はただ 1 つなので、$\sum_i c_i p^i = k$ になるのは各桁で $c_i = k_i$ のときだけである。その係数は $\prod_i \binom{n_i}{k_i}$ になる。
@@ -175,7 +184,11 @@ $p = 2$ でパスカルの三角形を塗ると、奇数の位置がシェルピ
 この節は [Lucas の定理](#lucas)と [bit 演算](../basics/bit-operations.md)を前提にする。$p = 2$ では各桁の $\binom{n_i}{k_i}$ は $\binom{0}{0} = \binom{1}{0} = \binom{1}{1} = 1$、$\binom{0}{1} = 0$ なので、次のように言い換えられる。
 
 $$
-\binom{n}{k} \text{ が奇数} \iff k \text{ の 1 のビットが、} n \text{ でもすべて 1} \iff (n \text{ AND } k) = k
+\begin{aligned}
+& \binom{n}{k} \text{ が奇数} \\
+\iff & k \text{ の 1 のビットが、} n \text{ でもすべて 1} \\
+\iff & (n \text{ AND } k) = k
+\end{aligned}
 $$
 
 C++ では `(n & k) == k` の 1 行で、表も要らない。たとえば $10 = 1010_2$、$3 = 0011_2$ では $3$ の最下位 bit が $10$ にないので、$\binom{10}{3} = 120$ は偶数である。

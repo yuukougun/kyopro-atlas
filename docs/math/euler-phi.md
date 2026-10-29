@@ -26,7 +26,7 @@ sections:
   - {title: オイラーの定理 a^φ(n) ≡ 1 と、位数・指数の mod への応用, anchor: euler-theorem}
   - {title: 約数についての φ の和が n になることと、位数が d の元が φ(d) 個あること, anchor: divisor-sum}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -55,7 +55,7 @@ $\varphi(n)$ は、$1 \le k \le n$ かつ $\gcd(k, n) = 1$ となる $k$ の個�
 $k$ が $n$ と互いに素でないのは、$n$ の素因数のどれかで $k$ が割り切れるときである。図のように、$12 = 2^2 \times 3$ なら「2 の倍数」と「3 の倍数」を除けばよい。[包除原理](../comb/inclusion-exclusion.md)で数えると $12 - 6 - 4 + 2 = 4$ になる。一般に、$n$ の異なる素因数を $p_1, \dots, p_r$ とすると、次の公式になる。
 
 $$
-\varphi(n) = n \left(1 - \frac{1}{p_1}\right) \left(1 - \frac{1}{p_2}\right) \cdots \left(1 - \frac{1}{p_r}\right)
+\varphi(n) = n \left(1 - \frac{1}{p_1}\right) \cdots \left(1 - \frac{1}{p_r}\right)
 $$
 
 ??? note "包除原理から公式を導く"

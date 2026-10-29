@@ -207,7 +207,10 @@ $$
 たとえば、$A$ を巡回シフトしたときの $\sum_i (A_{(i+p) \bmod N} \text{ OR } B_i)$ をすべての $p$ について求めたいとする。bit $k$ について、$x_i$ を $A_i$ の bit $k$、$y_i$ を $B_i$ の bit $k$ とすると、
 
 $$
-\sum_i (x_{(i+p) \bmod N} \text{ OR } y_i) = \Bigl(\sum_i x_i\Bigr) + \Bigl(\sum_i y_i\Bigr) - \sum_i x_{(i+p) \bmod N}\, y_i
+\begin{aligned}
+&\sum_i (x_{(i+p) \bmod N} \text{ OR } y_i) \\
+&= \Bigl(\sum_i x_i\Bigr) + \Bigl(\sum_i y_i\Bigr) - \sum_i x_{(i+p) \bmod N}\, y_i
+\end{aligned}
 $$
 
 となる。最初の 2 つの和はシフトによらない定数で、最後の和は「$x$ を 2 周並べた列」と「反転した $y$」の畳み込みで、すべての $p$ について求まる。bit ごとに $2^k$ 倍して足せば答えになる。値が $L$ bit なら、畳み込みは $L$ 回で済む。$1 - (1 - x)(1 - y)$ と書けば、0 と 1 を入れ替えた列どうしの積の和（元の列で両方 0 の位置の数）を $N$ から引いても求まる。

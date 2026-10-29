@@ -28,7 +28,7 @@ sections:
   - {title: '線分上の格子点は gcd(|dx|, |dy|) + 1 個', anchor: lattice-on-segment}
   - {title: 'ax + by（x, y ≥ 0）で表せない最大の数 ab − a − b', anchor: frobenius}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -61,7 +61,10 @@ $$
 $x$ を含むのは 1 項だけになり、残りは $x$ によらない定数 $b - a$ である。項がいくつあっても同じで、隣り合う項の差を取って並べ替えると次の形になる。
 
 $$
-\gcd(a_0, a_1, \dots, a_{k-1}) = \gcd(a_0,\ a_1 - a_0,\ a_2 - a_1,\ \dots,\ a_{k-1} - a_{k-2})
+\begin{aligned}
+&\gcd(a_0, a_1, \dots, a_{k-1}) \\
+&= \gcd(a_0,\ a_1 - a_0,\ \dots,\ a_{k-1} - a_{k-2})
+\end{aligned}
 $$
 
 左から 1 つずつ $\gcd(\dots, a_i) = \gcd(\dots, a_i - a_{i-1})$ と置き換えても、$a_{i-1}$ が組に残っている限り公約数の集合は変わらないからである。全体に $x$ を足しても差の部分は変わらない。差の gcd を $D = \gcd(a_1 - a_0, \dots, a_{k-1} - a_{k-2})$ と置くと、$\gcd(a_0 + x, \dots, a_{k-1} + x) = \gcd(a_0 + x, D)$ である。$x$ を何通りも変えて聞かれても、$D$ を 1 回求めておけば 1 回の gcd で答えられる。
@@ -69,13 +72,19 @@ $$
 **$A_i + B_j$ の矩形**。行 $[h_1, h_2)$・列 $[w_1, w_2)$ の成分 $A_i + B_j$ の gcd を考える。列 $j$ を固定すると、$B_j$ は全体に足した数なので、行の方向は $A$ の隣接差に直る。
 
 $$
-\gcd_{h_1 \le i < h_2} (A_i + B_j) = \gcd\bigl(A_{h_1} + B_j,\ \Delta A\bigr), \quad \Delta A = \gcd_{h_1 \le i < h_2 - 1} (A_{i+1} - A_i)
+\begin{aligned}
+\gcd_{h_1 \le i < h_2} (A_i + B_j) &= \gcd\bigl(A_{h_1} + B_j,\ \Delta A\bigr), \\
+\Delta A &= \gcd_{h_1 \le i < h_2 - 1} (A_{i+1} - A_i)
+\end{aligned}
 $$
 
 続けて $j$ を動かすと、今度は $A_{h_1}$ が全体に足した数なので、列の方向も $B$ の隣接差に直る。
 
 $$
-\gcd_{i, j} (A_i + B_j) = \gcd\bigl(A_{h_1} + B_{w_1},\ \Delta A,\ \Delta B\bigr), \quad \Delta B = \gcd_{w_1 \le j < w_2 - 1} (B_{j+1} - B_j)
+\begin{aligned}
+\gcd_{i, j} (A_i + B_j) &= \gcd\bigl(A_{h_1} + B_{w_1},\ \Delta A,\ \Delta B\bigr), \\
+\Delta B &= \gcd_{w_1 \le j < w_2 - 1} (B_{j+1} - B_j)
+\end{aligned}
 $$
 
 $\Delta A$ と $\Delta B$ は差の列の区間 gcd なので、次の節の Sparse Table で $O(\log A)$ で求まる。2 次元の問題が 1 次元の区間 gcd 2 つに分かれる（[例題 ABC254 F](#abc254_f)）。

@@ -28,7 +28,7 @@ sections:
   - {title: グループ分けは未使用の最小番号から決める, anchor: min-index}
   - {title: DP の中で代表を決める（何も変えない操作を除く・最初に〜で場合分け・包除で重なりを引く）, anchor: in-dp}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -112,7 +112,10 @@ $$
 **部分集合の DP**。$\mathrm{dp}[X]$ ＝ 集合 $X$ を条件を満たすグループに分ける方法の数、とする。$X$ の最小番号の要素 $v$ を含むグループ $Y$（$v \in Y \subseteq X$）を選び、残りを $\mathrm{dp}[X \setminus Y]$ で数える。
 
 $$
-\mathrm{dp}[X] = \sum_{v \in Y \subseteq X,\ Y \text{ がグループにできる}} \mathrm{dp}[X \setminus Y], \qquad \mathrm{dp}[\varnothing] = 1
+\begin{aligned}
+\mathrm{dp}[X] &= \sum_{\substack{v \in Y \subseteq X \\[0.3em] Y \text{ がグループにできる}}} \mathrm{dp}[X \setminus Y], \\
+\mathrm{dp}[\varnothing] &= 1
+\end{aligned}
 $$
 
 部分集合の部分集合を回すので、全体で $O(3^N)$ になる（[部分集合の部分集合を回す DP](../dp/subset-enumeration-dp.md)）。

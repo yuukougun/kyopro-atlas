@@ -27,7 +27,7 @@ sections:
   - {title: mod を取った値で大小比較・最大値を考えてはいけない, anchor: no-compare}
   - {title: なぜ 998244353 か（素数で、NTT に向く形）, anchor: why-998244353}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -56,7 +56,11 @@ $m$ で割った余りが等しい 2 数を「$m$ を法として[合同](../gui
 足し算は輪の上で時計回りに進むことなので、出発点を同じ位置の別の数に取り替えても着く位置は変わらない。式で言うと、$a \equiv a'$ かつ $b \equiv b' \pmod{m}$ なら次が成り立つ。
 
 $$
-a + b \equiv a' + b', \qquad a - b \equiv a' - b', \qquad a b \equiv a' b' \pmod{m}
+\begin{aligned}
+a + b &\equiv a' + b', \\
+a - b &\equiv a' - b', \\
+a b &\equiv a' b' \pmod{m}
+\end{aligned}
 $$
 
 理由は、$a = a' + sm$、$b = b' + tm$（$s, t$ は整数）と書けることにある。和と差は $m$ の倍数 $(s \pm t)m$ だけずれる。積は $ab = a'b' + (a't + b's + stm)m$ となり、やはり $m$ の倍数だけずれる。だから式のどこで $\bmod m$ を挟んでも、最後の余りは本当の値の余りと一致する。

@@ -66,7 +66,10 @@ $$
 **フェルマーの小定理だけでは足りない例**。$n = 561 = 3 \times 11 \times 17$ は、$n$ と互いに素なすべての $a$ で $a^{560} \equiv 1$ になる合成数（カーマイケル数）で、最後の項だけを見る判定では見抜けない。$560 = 2^4 \times 35$ なので、$a = 2$ の列は次のようになる。
 
 $$
-2^{35} \equiv 263,\quad 2^{70} \equiv 166,\quad 2^{140} \equiv 67,\quad 2^{280} \equiv 1,\quad 2^{560} \equiv 1 \pmod{561}
+\begin{gathered}
+2^{35} \equiv 263,\quad 2^{70} \equiv 166,\quad 2^{140} \equiv 67, \\
+2^{280} \equiv 1,\quad 2^{560} \equiv 1 \pmod{561}
+\end{gathered}
 $$
 
 1 の直前が $67$ で、$-1 \equiv 560$ ではない。$67^2 \equiv 1$ なのに $67 \not\equiv \pm 1$ なので、561 は素数でないと分かる。

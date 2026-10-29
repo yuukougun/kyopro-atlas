@@ -44,10 +44,10 @@ LGV 補題は、[DAG](../guide/glossary.md#dag) の上で「どの 2 本も頂�
 
 ## 何ができるか（行列式で数える） {#what}
 
-DAG の始点 $a_1, \dots, a_k$ と終点 $b_1, \dots, b_k$ を決め、$a_i$ から $b_j$ への経路の数を $e(a_i, b_j)$ とする。行列 $M$ を $M_{ij} = e(a_i, b_j)$ で作ると、次が成り立つ。
+DAG の始点 $a_1, \dots, a_k$ と終点 $b_1, \dots, b_k$ を決め、$a_i$ から $b_j$ への経路の数を $e(a_i, b_j)$ とする。行列 $M$ を $M_{ij} = e(a_i, b_j)$ で作る。置換 $\sigma$ ごとに、$P_i$ が $a_i$ から $b_{\sigma(i)}$ への経路で、どの 2 本も頂点を共有しない組 $(P_1, \dots, P_k)$ の数を $n(\sigma)$ とすると、次が成り立つ。
 
 $$
-\det M = \sum_{\sigma} \operatorname{sgn}(\sigma) \cdot \#\{\, (P_1, \dots, P_k) : P_i \text{ は } a_i \to b_{\sigma(i)} \text{、どの 2 本も頂点を共有しない} \,\}
+\det M = \sum_{\sigma} \operatorname{sgn}(\sigma) \cdot n(\sigma)
 $$
 
 和は $1, \dots, k$ の置換 $\sigma$ すべてにわたり、$\operatorname{sgn}(\sigma)$ は[置換の符号](../comb/permutation-parity.md#sign)（偶置換なら $+1$、奇置換なら $-1$）である。

@@ -27,7 +27,7 @@ sections:
   - {title: 接尾辞の余りで部分文字列を数える（10 と P が互いに素なとき）, anchor: suffix-remainder}
   - {title: P が 2・5 のときの場合分け, anchor: p-2-5}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -99,13 +99,19 @@ $$
 境目 $i$（$0 \le i \le N$）ごとに、接尾辞 $S[i, N)$ の値の余りを $U_i = \mathrm{val}(S[i, N)) \bmod P$ とする。$U_N$ は空の接尾辞なので 0 である。接尾辞 $S[l, N)$ は、$S[l, r)$ の後ろに $N - r$ 桁の $S[r, N)$ を連結したものなので、[数の連結の式](#concatenation)から次が成り立つ。
 
 $$
-\mathrm{val}(S[l, N)) - \mathrm{val}(S[r, N)) = \mathrm{val}(S[l, r)) \cdot 10^{N-r}
+\begin{aligned}
+&\mathrm{val}(S[l, N)) - \mathrm{val}(S[r, N)) \\
+&= \mathrm{val}(S[l, r)) \cdot 10^{N-r}
+\end{aligned}
 $$
 
 $10$ と $P$ が[互いに素](../guide/glossary.md#coprime)なら、$10^{N-r}$ と $P$ も互いに素なので、右辺が $P$ の倍数であることと $\mathrm{val}(S[l, r))$ が $P$ の倍数であることは同じである。$P$ と互いに素な数を掛けたり割ったりしても、$P$ で割り切れるかは変わらないからである。よって次の同値が成り立つ。
 
 $$
-\mathrm{val}(S[l, r)) \equiv 0 \pmod P \iff U_l \equiv U_r \pmod P
+\begin{aligned}
+& \mathrm{val}(S[l, r)) \equiv 0 \pmod P \\
+\iff & U_l \equiv U_r \pmod P
+\end{aligned}
 $$
 
 部分文字列を数える問題が、「余りが等しい境目の組 $(l, r)$（$l < r$）を数える」問題に変わった。余り $u$ を持つ境目が $c_u$ 個あれば、組は $\binom{c_u}{2}$ 個ある。これは[累積和の余りが等しい組を数える](../basics/prefix-sum-counting.md#same-remainder)のと同じ形で、累積和を後ろから取ったものにあたる。

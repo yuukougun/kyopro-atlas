@@ -178,7 +178,10 @@ for i = 1, 2, ..., n:
 $\gcd(a, m) = g \ne 1$ だと $a$ に逆元がなく、BSGS の同値変形が使えない。そこで、$x \ge 1$ のとき $a^x = a \cdot a^{x-1}$ と 1 つ取り出し、両辺を $g$ で割る。
 
 $$
-a \cdot a^{x-1} \equiv b \pmod{m} \iff \frac{a}{g} \cdot a^{x-1} \equiv \frac{b}{g} \pmod{\frac{m}{g}}
+\begin{aligned}
+& a \cdot a^{x-1} \equiv b \pmod{m} \\
+\iff & \frac{a}{g} \cdot a^{x-1} \equiv \frac{b}{g} \pmod{\frac{m}{g}}
+\end{aligned}
 $$
 
 $b$ が $g$ で割り切れなければ、左辺は $g$ の倍数なので解はない。これを $\gcd(a, m) = 1$ になるまで繰り返すと、$\mathrm{coef} \cdot a^y \equiv b \pmod{m}$（$x = y + k$、$k$ は取り出した回数）の形になる。$a/g$ と $m/g$ は互いに素なので、$\mathrm{coef}$ は残った法と互いに素であり、giant step を $\mathrm{coef}$ から始めれば BSGS がそのまま使える。$m$ は 1 回ごとに半分以下になるので、割る回数は $O(\log m)$ である。

@@ -29,7 +29,7 @@ sections:
   - {title: 和の代わりに上位 2 つを持つ, anchor: top-two}
   - {title: XOR 畳み込みとの違い, anchor: vs-xor}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -152,7 +152,11 @@ $$
 $A, B$ を全部試すと $O(4^n)$ になる。鍵は「$A \cup B \subseteq S$」が「$A \subseteq S$ かつ $B \subseteq S$」と同じことである。和集合が $S$ の部分集合になる組の和は、2 つの和の積に分かれる。
 
 $$
-\hat h(S) = \sum_{A \cup B \subseteq S} f(A) \, g(B) = \Bigl(\sum_{A \subseteq S} f(A)\Bigr) \Bigl(\sum_{B \subseteq S} g(B)\Bigr) = \hat f(S) \, \hat g(S)
+\begin{aligned}
+\hat h(S) &= \sum_{A \cup B \subseteq S} f(A) \, g(B) \\
+&= \Bigl(\sum_{A \subseteq S} f(A)\Bigr) \Bigl(\sum_{B \subseteq S} g(B)\Bigr) \\
+&= \hat f(S) \, \hat g(S)
+\end{aligned}
 $$
 
 よって次の 3 段で $h$ が求まり、全体で $O(n 2^n)$ になる。

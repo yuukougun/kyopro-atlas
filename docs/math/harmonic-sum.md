@@ -29,7 +29,7 @@ sections:
   - {title: 商が同じ範囲を倍数で区切って数える, anchor: quotient-ranges}
   - {title: 素数の倍数だけをたどる篩（M log log M）との違い, anchor: vs-sieve}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -59,7 +59,10 @@ updated: 2026-10-22
 $d$ の行の ● は $\lfloor M/d \rfloor$ 個なので、全部の行をたどる回数は次の和である。
 
 $$
-\sum_{d=1}^{M} \left\lfloor \frac{M}{d} \right\rfloor \le M \left( 1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{M} \right) = M H_M
+\begin{aligned}
+\sum_{d=1}^{M} \left\lfloor \frac{M}{d} \right\rfloor &\le M \left( 1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{M} \right) \\
+&= M H_M
+\end{aligned}
 $$
 
 $H_M = 1 + 1/2 + \dots + 1/M$ を調和級数（の部分和）と呼ぶ。$H_M$ は $\ln M$ とほぼ同じ速さで増え、$\ln(M + 1) \le H_M \le 1 + \ln M$ が成り立つ。$M = 10^6$ なら $\ln M \approx 13.8$、$H_M \approx 14.4$ で、たどる回数は約 $1.4 \times 10^7$ 回（正確な $\sum \lfloor M/d \rfloor$ は $13970034$）である。$M = 2 \times 10^5$ なら約 $2.5 \times 10^6$ 回、$M = 10^7$ でも約 $1.6 \times 10^8$ 回で、単純な処理なら間に合う。
@@ -108,7 +111,10 @@ for d = 1..M:
 印を付けるのとは逆向きに、$d$ の倍数の位置から値を集めると、「$d$ の倍数である要素の個数」がすべての $d$ について求まる。
 
 $$
-c[d] = \sum_{d \mid k,\ k \le M} \mathrm{cnt}[k] = \mathrm{cnt}[d] + \mathrm{cnt}[2d] + \mathrm{cnt}[3d] + \cdots
+\begin{aligned}
+c[d] &= \sum_{d \mid k,\ k \le M} \mathrm{cnt}[k] \\
+&= \mathrm{cnt}[d] + \mathrm{cnt}[2d] + \mathrm{cnt}[3d] + \cdots
+\end{aligned}
 $$
 
 $c[d]$ は「すべて $d$ の倍数」という条件で数えた量であり、gcd の問題で効く。要素をいくつか選んだときの gcd が $d$ の倍数であることは、選んだ要素がすべて $d$ の倍数であることと同じだからである。だから「$K$ 個選んで gcd を $d$ の倍数にできるか」は「$c[d] \ge K$ か」に言い換わる。$K$ 個の gcd の最大値は、$c[d] \ge K$ となる最大の $d$ である。
@@ -158,10 +164,10 @@ $$
 
 ## 商が同じ範囲を倍数で区切って数える {#quotient-ranges}
 
-すべての組の $\lfloor \max / \min \rfloor$ の和のように、$\lfloor y/x \rfloor$ を値ごとにまとめたいときも、$x$ の倍数で区切る。小さい方の値 $x$ を固定すると、$\lfloor y/x \rfloor = q$ となる $y$ は閉区間 $[qx, (q + 1)x - 1]$ に並ぶ。区切りの位置 $x, 2x, 3x, \dots$ は $x$ の倍数そのものである。
+すべての組の $\lfloor \max / \min \rfloor$ の和のように、$\lfloor y/x \rfloor$ を値ごとにまとめたいときも、$x$ の倍数で区切る。小さい方の値 $x$ を固定すると、$\lfloor y/x \rfloor = q$ となる $y$ は閉区間 $[qx, (q + 1)x - 1]$ に並ぶ。区切りの位置 $x, 2x, 3x, \dots$ は $x$ の倍数そのものである。値が閉区間 $[qx, (q + 1)x - 1]$ にあり $x$ より大きい要素の個数を $n_q$ とすると、次の式になる。
 
 $$
-\sum_{y > x} \mathrm{cnt}[y] \left\lfloor \frac{y}{x} \right\rfloor = \sum_{q \ge 1} q \times \bigl(\text{値が } [qx, (q+1)x - 1] \text{ にあり } x \text{ より大きい要素の個数}\bigr)
+\sum_{y > x} \mathrm{cnt}[y] \left\lfloor \frac{y}{x} \right\rfloor = \sum_{q \ge 1} q \times n_q
 $$
 
 区間の中の個数は、値ごとの個数の[累積和](../basics/prefix-sum.md) $s[v]$（値が $v$ 以下の要素の個数）を作っておけば $O(1)$ で求まる。$x$ ごとの区間は $\lfloor M/x \rfloor$ 個なので、すべての $x$ で合計 $O(M \log M)$ である。小さい方が $x$ の要素は $\mathrm{cnt}[x]$ 個あるので、$x$ ごとの和に $\mathrm{cnt}[x]$ を掛ける。同じ値どうしの組は $\lfloor x/x \rfloor = 1$ なので、$\binom{\mathrm{cnt}[x]}{2}$ 組として別に足す。

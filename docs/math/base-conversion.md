@@ -51,7 +51,10 @@ N 進法は、整数を「$b$ の累乗の何倍の和か」で表す書き方�
 $b$ 進表記への変換は、$N$ を $b$ で割った余りを 1 の位として取り出し、商で同じことを繰り返す手順である。正しい理由は、どんな $N \ge 0$ も
 
 $$
-N = b \cdot \lfloor N / b \rfloor + (N \bmod b), \qquad 0 \le N \bmod b < b
+\begin{gathered}
+N = b \cdot \lfloor N / b \rfloor + (N \bmod b), \\
+0 \le N \bmod b < b
+\end{gathered}
 $$
 
 と書けることにある。$N = d_0 + b(d_1 + b(d_2 + \cdots))$ なので、$N \bmod b$ が $d_0$ になる。商 $\lfloor N / b \rfloor$ は「1 桁右にずらした数」$d_1 + b d_2 + \cdots$ である。商は毎回 $1/b$ 以下になるので、ループは桁数 $\lfloor \log_b N \rfloor + 1$ 回で止まる。表し方は 1 通りに決まる（各桁が $0$ 以上 $b$ 未満という条件が、割り算の商と余りの一意性そのものだから）。
@@ -83,7 +86,10 @@ $$
 普通の 26 進のつもりで $N \bmod 26$ を桁にすると、$N = 26$ で余りが 0 になり、対応する文字がない。そこで 1 の位を 1〜26 の範囲で決める。$c_0 \equiv N \pmod{26}$ かつ $1 \le c_0 \le 26$ となるのは
 
 $$
-c_0 = (N - 1) \bmod 26 + 1, \qquad \text{残り} = \frac{N - c_0}{26} = \left\lfloor \frac{N - 1}{26} \right\rfloor
+\begin{aligned}
+c_0 &= (N - 1) \bmod 26 + 1, \\
+\text{残り} &= \frac{N - c_0}{26} = \left\lfloor \frac{N - 1}{26} \right\rfloor
+\end{aligned}
 $$
 
 である。つまり「1 を引いてから普通に 26 で割る」を各桁で繰り返せばよく、余り $0$〜$25$ を a〜z に対応させる。1 を引くのは最初だけでなく、毎回の桁で行う。

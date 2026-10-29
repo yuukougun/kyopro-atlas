@@ -59,13 +59,19 @@ $\binom{n}{k}$ は[二項係数の前計算](../comb/binomial-precompute.md)で 
 $K$ を動かす式は、和の項を 1 つ足し引きするだけである。
 
 $$
-S(n, K+1) = S(n, K) + \binom{n}{K+1}, \qquad S(n, K-1) = S(n, K) - \binom{n}{K}
+\begin{aligned}
+S(n, K+1) &= S(n, K) + \binom{n}{K+1}, \\
+S(n, K-1) &= S(n, K) - \binom{n}{K}
+\end{aligned}
 $$
 
 $n$ を動かす式は、パスカルの三角形の関係 $\binom{n+1}{k} = \binom{n}{k} + \binom{n}{k-1}$ を $k = 0, \dots, K$ で足して得る。
 
 $$
-S(n+1, K) = S(n, K) + S(n, K-1) = 2S(n, K) - \binom{n}{K}
+\begin{aligned}
+S(n+1, K) &= S(n, K) + S(n, K-1) \\
+&= 2S(n, K) - \binom{n}{K}
+\end{aligned}
 $$
 
 行 $n$ の各項は、下の行の真下と右下の 2 か所へ足し込まれる。和を $k \le K$ で切ると、右端の $\binom{n}{K}$ だけは右下（$k = K+1$）への寄与が範囲の外に出る。だから「2 倍して $\binom{n}{K}$ を引く」になる。

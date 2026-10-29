@@ -57,7 +57,10 @@ $$
 **なぜ各点の積になるか**：符号 $\chi_s(i) = (-1)^{\operatorname{popcount}(i \text{ AND } s)}$ は、$s$ の 1 の位置のうち $i$ も 1 である bit の個数の偶奇である。bit ごとに見ると $(i \oplus j)$ の bit は $i$ と $j$ の bit の和の偶奇なので、$\chi_s(i)\,\chi_s(j) = \chi_s(i \oplus j)$ が成り立つ。よって $c = a \ast_{\oplus} b$ について
 
 $$
-\hat{c}_s = \sum_{k} \chi_s(k) \sum_{i \oplus j = k} a_i b_j = \sum_{i, j} \chi_s(i)\,a_i \cdot \chi_s(j)\,b_j = \hat{a}_s \, \hat{b}_s
+\begin{aligned}
+\hat{c}_s &= \sum_{k} \chi_s(k) \sum_{i \oplus j = k} a_i b_j \\
+&= \sum_{i, j} \chi_s(i)\,a_i \cdot \chi_s(j)\,b_j = \hat{a}_s \, \hat{b}_s
+\end{aligned}
 $$
 
 となる。和の畳み込みで指数法則 $x^i x^j = x^{i+j}$ が担う役目を、XOR では $\chi_s(i)\chi_s(j) = \chi_s(i \oplus j)$ が担っている。

@@ -27,7 +27,7 @@ sections:
   - {title: 分母が 0 になる式変形に注意する, anchor: zero-denominator}
   - {title: 検算：出力を分数に戻す（有理数復元）, anchor: reconstruct}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -67,7 +67,12 @@ updated: 2026-10-22
 一般に、分母が $p$ の倍数でない分数 $a/b$ を $f(a/b) = a \times b^{-1} \bmod p$ に移すと、次が成り立つ。
 
 $$
-f(x + y) = f(x) + f(y), \quad f(x - y) = f(x) - f(y), \quad f(xy) = f(x) f(y), \quad f(x / y) = f(x) / f(y)
+\begin{aligned}
+f(x + y) &= f(x) + f(y), \\
+f(x - y) &= f(x) - f(y), \\
+f(xy) &= f(x) f(y), \\
+f(x / y) &= f(x) / f(y)
+\end{aligned}
 $$
 
 右辺の演算はどれも mod $p$ で行う。最後の割り算だけは $f(y) \not\equiv 0$ が要る。だから、四則演算だけでできた実数の計算の手順は、各値を $f$ で移した mod の世界でそのまま実行でき、最後に得られる値は $f(\text{答え})$ になる。これが「割り算を逆元の掛け算に置き換えるだけで、期待値 DP などをそのまま mod で計算してよい」理由である。

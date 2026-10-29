@@ -115,17 +115,18 @@ $$
 この節は[行列累乗](../math/matrix-power.md)を前提にする。$S(n)$ は「$x$ を $rx + 1$ に置き換える」操作を $x = 0$ から $n$ 回くり返した値である（$S(t + 1) = r S(t) + 1$）。定数項 1 を状態に入れて、$(S(t), 1)$ を 1 歩進める行列を作る（[定数項を状態に入れる](../math/matrix-power.md#write-as-matrix)）。
 
 $$
+\begin{aligned}
 \begin{pmatrix} S(t + 1) \\ 1 \end{pmatrix}
-=
+&=
 \begin{pmatrix} r & 1 \\ 0 & 1 \end{pmatrix}
-\begin{pmatrix} S(t) \\ 1 \end{pmatrix},
-\qquad
+\begin{pmatrix} S(t) \\ 1 \end{pmatrix}, \\[1ex]
 \begin{pmatrix} r & 1 \\ 0 & 1 \end{pmatrix}^{n}
-=
+&=
 \begin{pmatrix} r^n & S(n) \\ 0 & 1 \end{pmatrix}
+\end{aligned}
 $$
 
-$n$ 乗の右上が $S(n)$、左上が $r^n$ である。右の式は $n$ についての帰納法で確かめられる（$n$ 乗にもう 1 つ掛けると、右上は $r S(n) + 1 = S(n + 1)$ になる）。2×2 の行列の累乗は $O(\log n)$ で、掛け算と足し算しか使わないので法は任意でよい。
+$n$ 乗の右上が $S(n)$、左上が $r^n$ である。2 つ目の式は $n$ についての帰納法で確かめられる（$n$ 乗にもう 1 つ掛けると、右上は $r S(n) + 1 = S(n + 1)$ になる）。2×2 の行列の累乗は $O(\log n)$ で、掛け算と足し算しか使わないので法は任意でよい。
 
 半分に割る方法と比べると、計算の中身は同じで書き方が違うだけである。行列で書く利点は、和の形が少し変わっても行列を大きくするだけで対応できることにある。
 
@@ -137,7 +138,11 @@ $n$ 乗の右上が $S(n)$、左上が $r^n$ である。右の式は $n$ につ
 10 進で $d$ 桁の数字列 $T$ を $K$ 回並べた数は、$T$ を $10^d$ ずつずらして足したものである。
 
 $$
-\underbrace{TT\cdots T}_{K \text{ 回}} = T \cdot \left(1 + 10^d + 10^{2d} + \dots + 10^{(K-1)d}\right) = T \cdot S(K) \quad (r = 10^d)
+\begin{aligned}
+&\underbrace{TT\cdots T}_{K \text{ 回}} \\
+&= T \cdot \left(1 + 10^d + 10^{2d} + \dots + 10^{(K-1)d}\right) \\
+&= T \cdot S(K) \quad (r = 10^d)
+\end{aligned}
 $$
 
 例えば $T = 12$（$d = 2$）を 3 回並べると $121212 = 12 \times (1 + 100 + 10000)$ である。並べる回数 $K$ が $10^{18}$ でも、公比 $r = 10^d \bmod m$ を先に求めておけば、ここまでの方法で $O(\log K)$ になる。数の連結の一般形（$x$ の後ろに $d$ 桁の $y$ を付けると $x \cdot 10^d + y$）は[桁と mod](../math/digit-and-mod.md)にある。
