@@ -377,6 +377,7 @@ updated: 2026-10-29
 
 ### ら行 {#terms-ra}
 
+- ライセンス → [出典と AI 利用の方針](../start/ai-and-sources.md)
 - ライツアウト → [掃き出し法](../math/gaussian-elimination.md)
 - ライブラリチェッカー → [自作ライブラリの設計と動作確認](library-design.md)
 - ライブラリの動作確認 → [自作ライブラリの設計と動作確認](library-design.md)

@@ -75,13 +75,14 @@ search:
 
 ## 出典と AI 利用の方針（ai-and-sources） {#ai-and-sources}
 
-- id：`ai-and-sources`　レベル：—　段階：draft　type：guide
+- id：`ai-and-sources`　レベル：—　段階：reviewed　type：guide
 - URL：https://yuukougun.github.io/kyopro-atlas/start/ai-and-sources/
-- 別名：AI の利用、生成 AI、出典、参考文献、転載、noai、著作権、問い合わせ、連絡先
+- 別名：AI の利用、生成 AI、出典、参考文献、転載、noai、著作権、ライセンス、問い合わせ、連絡先
 - 種類：案内
 - 節：
     - `ai-and-sources#ai-writing` AI で書いていることと確かめ方：https://yuukougun.github.io/kyopro-atlas/start/ai-and-sources/#ai-writing
     - `ai-and-sources#no-copying` 他者の記事を転載しない：https://yuukougun.github.io/kyopro-atlas/start/ai-and-sources/#no-copying
     - `ai-and-sources#citations` 参考にした資料の示し方：https://yuukougun.github.io/kyopro-atlas/start/ai-and-sources/#citations
     - `ai-and-sources#noai` AI の利用を断るサイトを資料にしない：https://yuukougun.github.io/kyopro-atlas/start/ai-and-sources/#noai
+    - `ai-and-sources#license` 教材のライセンス：https://yuukougun.github.io/kyopro-atlas/start/ai-and-sources/#license
     - `ai-and-sources#contact` 掲載内容についての連絡と対応：https://yuukougun.github.io/kyopro-atlas/start/ai-and-sources/#contact
