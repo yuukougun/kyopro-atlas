@@ -163,9 +163,9 @@ K が 5 程度に小さいなら、multiset の `lower_bound` からイテレー
 
 ## 学ぶための資料 {#resources}
 
-- hamamu 氏の Qiita の Implicit Treap の解説記事：位置で分割・結合する treap の split・merge、区間の反転、遅延評価による区間の作用と取得を、日本語で順に説明している
-- Luzhiled's Library（ei1333 氏）の平衡二分探索木の一覧：RBST・splay 木・赤黒木などに、遅延評価や反転を付けたライブラリがあり、自作するときの関数の切り分けの参考になる
-- GCC の Policy-Based Data Structures の手引き：pb_ds の tree の型引数と `tree_order_statistics_node_update` の説明（英語）
+- [hamamu「Implicit Treap解説」](https://qiita.com/hamamu/items/570e7c36bf73913cbeb8)（Qiita）：位置で分割・結合する treap の split・merge、区間の反転、遅延評価による区間の作用と取得を、日本語で順に説明している
+- [ei1333「Luzhiled's Library」](https://ei1333.github.io/library/)の平衡二分探索木（structure/bbst）の一覧：RBST・splay 木・赤黒木などに、遅延評価や反転を付けたライブラリがあり、自作するときの関数の切り分けの参考になる
+- [GCC「Policy-Based Data Structures」](https://gcc.gnu.org/onlinedocs/libstdc++/manual/policy_data_structures.html)（英語）：pb_ds の tree の型引数と `tree_order_statistics_node_update` の説明
 
 ## 練習問題 {#practice}
 

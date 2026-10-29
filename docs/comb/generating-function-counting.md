@@ -26,7 +26,7 @@ sections:
   - {title: 多項式の演算（逆元・log・exp）は FPS のページへ, anchor: to-fps}
   - {title: ライブラリでの使い方, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -161,9 +161,9 @@ $K$ は求めたい係数の次数である。逆元・log・exp・累乗の $O(
 
 ## 学ぶための資料 {#resources}
 
-- hotman78 氏の「形式的冪級数の応用テクニック（前編）」は、逆元・log・exp・累乗をニュートン法で求める流れと計算量をまとめている。和が $t$ になる部分集合の数を $\exp\left(\sum \log(1 + x^{e})\right)$ で求める例もある
-- Nyaan's Library の「多項式/形式的冪級数ライブラリ」は、NTT 向きの法での演算をひとまとめにした実装で、自作するときの関数の切り分けの参考になる
-- 立式の流れは、例題の ABC303 Ex の解説（けんちょん氏）が短く追いやすい。Prüfer 列で木を列に言い換えた後、母関数の累乗の係数に落とす
+- [hotman78「【競技プログラミング】形式的冪級数の応用テクニック(前編)」](https://qiita.com/hotman78/items/f0e6d2265badd84d429a)：逆元・log・exp・累乗をニュートン法で求める流れと計算量をまとめている。和が $t$ になる部分集合の数を $\exp\left(\sum \log(1 + x^{e})\right)$ で求める例もある
+- [Nyaan「多項式/形式的冪級数ライブラリ」](https://nyaannyaan.github.io/library/fps/formal-power-series.hpp)：NTT 向きの法での演算をひとまとめにした実装で、自作するときの関数の切り分けの参考になる
+- [drken「AtCoder ABC 303 Ex - Constrained Tree Degree (橙色, 600 点)」](https://drken1215.hatenablog.com/entry/2023/05/28/010200)：例題 ABC303 Ex の立式の流れが短く追いやすい。Prüfer 列で木を列に言い換えた後、母関数の累乗の係数に落とす
 
 ## 例題 {#examples}
 

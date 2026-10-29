@@ -2,8 +2,8 @@
 
 > AtCoder で黄色（レート 2000）を目指す学習者向けの、辞書として引く競技プログラミングの教材。手法・考察・データ構造・数学・C++ のページを分野ごとに置く。
 
-- 版：9d105969f6d0（updated の最大：2026-10-29）。tools/gen_site.py が生成する
-- ページ数：353
+- 版：816781b5c123（updated の最大：2026-10-29）。tools/gen_site.py が生成する
+- ページ数：354
 - 1 行が 1 ページ：「- [タイトル](URL)（id・レベル・分野・段階）：要約」
 - レベルは difficulty の帯：基礎 〜1199・水 1200〜1599・青 1600〜1999・黄 2000〜2399・発展 2400〜（概要だけ）。「—」はレベルを持たないページ
 - 段階：stub は準備中（要約と前提しかないので根拠にしない）、draft は本文あり・未検証、reviewed は検証済み、done は完成
@@ -24,7 +24,7 @@
 - [文字列](https://yuukougun.github.io/kyopro-atlas/index/string/)：13 ページ。ハッシュ、Z・KMP・Manacher、Trie、Suffix Array、Aho-Corasick
 - [幾何](https://yuukougun.github.io/kyopro-atlas/index/geometry/)：8 ページ。ベクトルと外積、誤差、凸包、偏角ソート、45 度回転など
 - [その他の技法](https://yuukougun.github.io/kyopro-atlas/index/misc/)：4 ページ。インタラクティブ、乱択、bitset による高速化、構文解析
-- [題材別](https://yuukougun.github.io/kyopro-atlas/index/patterns/)：10 ページ。括弧列・mex・順列・XOR・区間・グリッドなど、問題に現れる対象から手法を引く案内
+- [題材別](https://yuukougun.github.io/kyopro-atlas/index/patterns/)：11 ページ。括弧列・mex・順列・XOR・区間・グリッドなど、問題に現れる対象から手法を引く案内
 - [C++](https://yuukougun.github.io/kyopro-atlas/index/cpp/)：20 ページ。解説コードに出る書き方、AtCoder と手元の環境、落とし穴、ACL の読み方
 
 ## はじめに
@@ -401,6 +401,7 @@
 - [約数と倍数](https://yuukougun.github.io/kyopro-atlas/patterns/divisors-and-multiples/)（divisors-and-multiples・—・patterns・reviewed）：約数・倍数・gcd が出てくる問題で、問われ方から使う手法を引ける。約数の列挙、倍数を回して集める調和級数、素因数分解、gcd がちょうど g の数え上げ、約数の個数の上限の問われ方に分ける。
 - [グリッド](https://yuukougun.github.io/kyopro-atlas/patterns/grid/)（grid・—・patterns・reviewed）：H×W のマス目が出てくる問題で、問われ方から使う手法を引ける。マスを頂点とする最短路、右・下に進む DP、長方形の累積和、行と列の独立、市松模様の偶奇、45 度回転、盤面の回転へつなぐ。
 - [操作列とクエリ](https://yuukougun.github.io/kyopro-atlas/patterns/operation-sequence/)（operation-sequence・—・patterns・reviewed）：操作やクエリが Q 個続く問題で、問われ方から処理の仕方を引ける。全体の操作を変数で持つ、後ろから見る、削除を逆順の追加にする、先読みして並べ替える、過去の版に戻る、周期で打ち切る、などの型に分ける。
+- [円環](https://yuukougun.github.io/kyopro-atlas/patterns/circular/)（circular・—・patterns・draft）：円形に並ぶ列のように、最後と最初も隣り合う並びを含む問題で、問われ方から使う手法を引ける。2 周分に伸ばす、1 か所で切って固定する、回転を 2 周分の窓とみる、の 3 つの言い換えが共通の出発点になる。
 
 ## C++
 

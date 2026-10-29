@@ -1,0 +1,66 @@
+{% extends "main.html" %}
+
+{#-
+  存在しない URL を開いたときのページ（Issue #73）。Material の 404.html と同じく content ブロックを上書きする。
+
+  - GitHub Pages は /kyopro-atlas/ の下の存在しない URL に、どの深さでもこのファイルをそのまま返すので、相対パスは使えない。
+    MkDocs はエラーのページを page なし・base_url を site_url のパス（/kyopro-atlas/）にして描くので、
+    base_url と | url はどちらも /kyopro-atlas/… の絶対パスになる（site_url がなければ /）。
+    Zensical 0.0.71 の base_url は末尾の / がない（/kyopro-atlas）ので、ホームの URL は / をそろえてから使う
+  - 入口のページは nav.pages から front matter の id で引く（main.html と同じ）。nav にないものは出さない（リンク切れを出さない）
+  - 検索のリンクは、URL の最後の部分（.html・.md と index は除く）を ?q= に入れたホームへのリンクを、下の script で作る。
+    Material は ?q= をページを読み込んだときにだけ読むので、instant navigation に横取りされないよう target="_self" を付ける
+    （instant navigation は target のあるリンクを横取りしない）。script が動かないときは出さない
+  - Zensical（MiniJinja）でも読めるよう、Python のメソッドの呼び出しは使わない
+-#}
+
+{% block htmltitle %}
+  <title>ページが見つからない - {{ config.site_name }}</title>
+{% endblock %}
+
+{% block content %}
+  {%- set home = base_url ~ ("" if base_url[-1:] == "/" else "/") %}
+  {%- set ENTRIES = [
+    ["how-to-use", "教材の引き方の順と、レベル・記録の意味"],
+    ["term-index", "手法の名前・別名・英語名から引く"],
+    ["reverse-index-signs", "問題文の言い回しから、疑う手法を引く"],
+    ["knowledge-map", "ページの前提関係をたどる"]
+  ] %}
+  <h1>ページが見つからない</h1>
+  <p>開いた URL にページがない（404）。URL の打ち間違いか、ページの移動が考えられる。</p>
+  <p id="kp-not-found-search" hidden>
+    <a class="md-button md-button--primary" href="{{ home }}" target="_self" style="overflow-wrap: anywhere">「<span id="kp-not-found-term"></span>」<span style="white-space: nowrap">をサイト内で検索</span></a>
+  </p>
+  <h2>入口から探す</h2>
+  <ul>
+    <li><a href="{{ home }}">ホーム</a>：教材の概要と、入口の一覧</li>
+    {%- for e in ENTRIES %}
+    {%- for p in nav.pages if p.meta and p.meta.id == e[0] %}
+    <li><a href="{{ p.url | url }}">{{ (p.meta.nav_title or p.title) | e }}</a>：{{ e[1] }}</li>
+    {%- endfor %}
+    {%- endfor %}
+  </ul>
+  <script>
+    (function () {
+      var box = document.getElementById("kp-not-found-search");
+      var link = box && box.querySelector("a");
+      if (!link) return;
+      var home = new URL(link.href);
+      var path = location.pathname;
+      if (path.indexOf(home.pathname) === 0) path = path.slice(home.pathname.length);
+      var parts = path.split("/");
+      var term = "";
+      while (parts.length && !term) {
+        term = parts.pop();
+        try { term = decodeURIComponent(term); } catch (e) { /* 壊れた % の並びはそのまま使う */ }
+        term = term.replace(/\.(html?|md)$/i, "").trim();
+        if (term === "index") term = "";
+      }
+      if (!term) return;
+      home.searchParams.set("q", term);
+      link.href = home.href;
+      document.getElementById("kp-not-found-term").textContent = term;
+      box.hidden = false;
+    })();
+  </script>
+{% endblock %}

@@ -526,3 +526,114 @@
   .md-typeset .kp-map__toolbar input,
   .md-typeset .kp-viz__speed select { min-height: 44px; }
 }
+
+/* ---------- 節のレベルの印（#54） ---------- */
+/* sections に level のある節の見出しと目次の項目に、テンプレートが <span class="kp-mini kp-lv-… kp-sec-lv"> を入れる。
+   見出しでは題の後ろ（headerlink の前）。目次は .md-typeset の外なので、.kp-mini の形をここでも書き、題の後ろに並べる */
+.md-typeset h2 > .kp-sec-lv,
+.md-typeset h3 > .kp-sec-lv {
+  margin-left: 0.5em;
+  font-size: 0.6em;
+  font-weight: 400;
+  letter-spacing: 0;
+  vertical-align: 0.2em;
+}
+.md-nav__link > .kp-sec-lv {
+  flex: none;
+  order: 1; /* HTML では題の前にあるが、題の後ろに出す */
+  align-self: flex-start;
+  padding: 0 0.45em;
+  border-radius: 0.6em;
+  background: var(--kp-c);
+  color: var(--kp-cf);
+  font-size: 0.85em;
+  line-height: 1.5;
+}
+
+/* 「理解した」の上の帯の節のチェック欄と、その帯の最初の節へ移るリンク（上の帯では↓、ページの下では↑） */
+.md-typeset .kp-understood__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2em;
+}
+.md-typeset a.kp-check__jump {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 2em;
+  height: 2em;
+  border: 2px solid var(--kp-c, var(--md-default-fg-color--lighter));
+  border-radius: 50%;
+  color: var(--md-default-fg-color);
+  font-weight: 700;
+  line-height: 1;
+}
+.md-typeset a.kp-check__jump::before { content: "↓"; }
+.md-typeset .kp-links a.kp-check__jump::before { content: "↑"; }
+.md-typeset a.kp-check__jump:hover,
+.md-typeset a.kp-check__jump:focus-visible {
+  background: var(--kp-c);
+  color: var(--kp-cf);
+}
+
+/* ---------- ページ下部：関連（#56） ---------- */
+/* 件数が多いので、行の全幅を使い、幅に応じて段に分ける */
+.md-typeset .kp-links__col--related { grid-column: 1 / -1; }
+.md-typeset .kp-links__col--related > ul.kp-links__list {
+  column-width: 15em;
+  column-gap: 2em;
+}
+.md-typeset .kp-links__col--related > ul.kp-links__list > li { break-inside: avoid; }
+
+/* ---------- ページの最後の行：段階・更新日（#9）と誤りの報告（#10） ---------- */
+.md-typeset .kp-page-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4em 1.5em;
+  margin: 1.5em 0 0;
+  padding-top: 0.6em;
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+  color: var(--md-default-fg-color--light);
+  font-size: 0.7rem;
+  line-height: 1.6;
+}
+.md-typeset dl.kp-page-info__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2em 1.2em;
+  margin: 0;
+}
+.md-typeset .kp-page-info__meta > div {
+  display: flex;
+  gap: 0.4em;
+}
+.md-typeset .kp-page-info__meta dt {
+  margin: 0;
+  font-weight: 400;
+}
+.md-typeset .kp-page-info__meta dd {
+  margin: 0;
+  color: var(--md-default-fg-color);
+}
+.md-typeset .kp-stage { font-weight: 700; }
+.md-typeset .kp-stage--stub,
+.md-typeset .kp-stage--draft { color: var(--kp-stub-color); }
+.md-typeset a.kp-page-info__report {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+}
+.md-typeset .kp-page-info__icon { display: inline-flex; }
+.md-typeset .kp-page-info__icon svg {
+  width: 1.1em;
+  height: 1.1em;
+  fill: currentcolor;
+}
+
+@media (pointer: coarse) {
+  .md-typeset a.kp-check__jump { width: 44px; height: 44px; }
+}

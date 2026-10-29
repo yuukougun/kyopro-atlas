@@ -25,7 +25,7 @@ sections:
   - {title: 木の上なら易しい（木の章の「指定頂点を結ぶ最小の部分木」）, anchor: on-tree}
   - {title: 自作するときの要点と確かめ方, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -130,9 +130,9 @@ Library Checker の Minimum Steiner Tree（minimum_steiner_tree）が、この D
 
 ## 学ぶための資料 {#resources}
 
-- ikatakos 氏の ABC364 の記録の G 問題の節は、$\mathrm{DP}[S][v]$ の定義・2 種類の遷移・計算量を短くまとめている。載っているコードは空集合の値を 0 に置いて実装を簡単にしている
-- ei1333 氏のライブラリの Minimum Steiner Tree のドキュメントは、計算量 $O(N 3^K + (N + M) 2^K \log N)$ と、DP の表と辺の復元を持つライブラリの形を示している
-- Library Checker の問題のリポジトリにある minimum_steiner_tree の設定で、制約と出力の形を確かめられる
+- [ikatakos「日本レジストリサービス（JPRS）プログラミングコンテスト2024#2（AtCoder Beginner Contest 364）F,G問題メモ」](https://ikatakos.com/pot/programming_algorithm/contest_history/atcoder/2024/0727_abc364)の G 問題の節：$\mathrm{DP}[S][v]$ の定義・2 種類の遷移・計算量を短くまとめている。載っているコードは空集合の値を 0 に置いて実装を簡単にしている
+- [ei1333「Minimum Steiner Tree」](https://github.com/ei1333/library/blob/master/docs/minimum-steiner-tree.md)（ライブラリのドキュメント）：計算量 $O(N 3^K + (N + M) 2^K \log N)$ と、DP の表と辺の復元を持つライブラリの形を示している
+- [yosupo「Library Checker の問題（minimum_steiner_tree）」](https://github.com/yosupo06/library-checker-problems/tree/master/graph/minimum_steiner_tree)：問題のリポジトリにある設定で、制約と出力の形を確かめられる
 
 ## 例題 {#examples}
 
