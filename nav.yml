@@ -13,6 +13,7 @@ nav:
           - 逆引き辞典（言い回しから）: guide/reverse-index-signs.md
           - 逆引き辞典（制約・計算量から）: guide/reverse-index-constraints.md
           - 用語の索引: guide/term-index.md
+          - 問題番号の索引: guide/problem-index.md
           - 知識マップ: guide/knowledge-map.md
           - 似た手法の使い分け: guide/method-comparison.md
       - 学び方と練習:

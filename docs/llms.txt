@@ -2,8 +2,8 @@
 
 > AtCoder で黄色（レート 2000）を目指す学習者向けの、辞書として引く競技プログラミングの教材。手法・考察・データ構造・数学・C++ のページを分野ごとに置く。
 
-- 版：9d105969f6d0（updated の最大：2026-10-29）。tools/gen_site.py が生成する
-- ページ数：353
+- 版：18d3adffb7f2（updated の最大：2026-10-29）。tools/gen_site.py が生成する
+- ページ数：354
 - 1 行が 1 ページ：「- [タイトル](URL)（id・レベル・分野・段階）：要約」
 - レベルは difficulty の帯：基礎 〜1199・水 1200〜1599・青 1600〜1999・黄 2000〜2399・発展 2400〜（概要だけ）。「—」はレベルを持たないページ
 - 段階：stub は準備中（要約と前提しかないので根拠にしない）、draft は本文あり・未検証、reviewed は検証済み、done は完成
@@ -12,7 +12,7 @@
 ## 分野ごとの詳細索引
 
 - [はじめに](https://yuukougun.github.io/kyopro-atlas/index/start/)：3 ページ。この教材の使い方、記法と用語の約束、AtCoder の仕組み
-- [横断ページ](https://yuukougun.github.io/kyopro-atlas/index/guide/)：15 ページ。逆引き辞典、用語の索引、使い分け、知識マップ、ロードマップ、早見表、戦い方など
+- [横断ページ](https://yuukougun.github.io/kyopro-atlas/index/guide/)：16 ページ。逆引き辞典、用語の索引、問題番号の索引、使い分け、知識マップ、ロードマップ、早見表、戦い方など
 - [基本テクニック](https://yuukougun.github.io/kyopro-atlas/index/basics/)：32 ページ。計算量の見積もり、全探索、二分探索、累積和・いもす法、尺取り法、ソート・座標圧縮、貪欲、半分全列挙、ダブリング、分割統治、周期性、bit 演算
 - [考察](https://yuukougun.github.io/kyopro-atlas/index/thinking/)：9 ページ。言い換え・主客転倒・寄与・余事象・偶奇・不変量・構築などの考察の型
 - [動的計画法](https://yuukougun.github.io/kyopro-atlas/index/dp/)：38 ページ。DP の考え方、列・区間・集合・桁・木の DP、DP の高速化
@@ -38,6 +38,7 @@
 - [逆引き辞典（言い回しから）](https://yuukougun.github.io/kyopro-atlas/guide/reverse-index-signs/)（reverse-index-signs・—・guide・reviewed）：問題文の言い回しや求めるもの、立てた式の形から、疑う手法とページを引ける。表は各ページのサインから生成し、どれから疑うかの注記を手で添える。
 - [逆引き辞典（制約・計算量から）](https://yuukougun.github.io/kyopro-atlas/guide/reverse-index-constraints/)（reverse-index-constraints・—・guide・reviewed）：N の上限などの制約から、間に合う計算量と候補の手法を引ける。計算量から手法を引く逆向きの表も持ち、制約の帯ごとの候補のページは各ページの制約のサインから生成する。
 - [用語の索引](https://yuukougun.github.io/kyopro-atlas/guide/term-index/)（term-index・—・guide・reviewed）：手法の名前・別名・英語名から、そのページを五十音順と ABC 順で引ける。全ページの題名と別名から生成し、サイト内検索の結果に頼らない入口になる。
+- [問題番号の索引](https://yuukougun.github.io/kyopro-atlas/guide/problem-index/)（problem-index・—・guide・draft）：本文の例題・練習・力試しに載せた問題を、ABC・ARC・AGC・問題集などに分けて回の順に並べ、問題番号から載せたページと役割を引ける。全ページの問題の一覧から生成する。
 - [知識マップ](https://yuukougun.github.io/kyopro-atlas/guide/knowledge-map/)（knowledge-map・—・guide・reviewed）：ページの前提関係を有向グラフで見て、選んだページの前提と次に読むページをたどれる。「理解した」ページと、前提をすべて理解した次の候補を塗り分ける。
 - [似た手法の使い分け](https://yuukougun.github.io/kyopro-atlas/guide/method-comparison/)（method-comparison・—・guide・reviewed）：BFS・01-BFS・ダイクストラ法や累積和・BIT・セグメント木のように混同しやすい手法の組を、できる操作・計算量・前提条件で比べ、条件から選べる。
 - [色別ロードマップ](https://yuukougun.github.io/kyopro-atlas/guide/roadmap/)（roadmap・—・guide・reviewed）：目標の色ごとに、到達の目安、読むページの順、最近の ABC の位置ごとの頻出手法、解いた数の進捗を見られる。ページの列はレベル・前提・出題頻度から生成する。
