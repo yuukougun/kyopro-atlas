@@ -30,7 +30,7 @@ sections:
   - {title: 1 か所だけ変更できる LIS・木の上の LIS, anchor: variants, level: 青}
   - {title: Dilworth の定理（増加列への最小分割数＝最長減少部分列の長さ）, anchor: dilworth, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -238,7 +238,7 @@ $a_i$ を含む増加部分列は、「$a_i$ で終わる左側」と「$a_i$ �
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 060. Chimera（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_bh)（diff —）：数列から部分列を選び、ある位置までは狭義増加・そこからは狭義減少になる山型の部分列の長さの最大を求める。
+- [典型90 060. Chimera（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_bh)（diff なし）：数列から部分列を選び、ある位置までは狭義増加・そこからは狭義減少になる山型の部分列の長さの最大を求める。
 
 </div>
 
@@ -253,9 +253,9 @@ $a_i$ を含む増加部分列は、「$a_i$ で終わる左側」と「$a_i$ �
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [EDPC Q. Flowers](https://atcoder.jp/contests/dp/tasks/dp_q)（diff —）：高さが相異なる花の列から、高さが左から単調増加になるように選ぶときの美しさの和の最大を求める。
+- [EDPC Q. Flowers](https://atcoder.jp/contests/dp/tasks/dp_q)（diff なし）：高さが相異なる花の列から、高さが左から単調増加になるように選ぶときの美しさの和の最大を求める。
 - [ABC354 F. Useless for LIS](https://atcoder.jp/contests/abc354/tasks/abc354_f)（diff 1639）：数列の各要素について、その要素を含む最長増加部分列が存在するかを判定する。
-- [ABC006 D. トランプ挿入ソート](https://atcoder.jp/contests/abc006/tasks/abc006_4)（diff 1696）：トランプの列で「1 枚抜いて好きな位置に差し込む」操作を繰り返して昇順に並べるときの、操作回数の最小を求める。
+- [ABC006 D. トランプ挿入ソート](https://atcoder.jp/contests/abc006/tasks/abc006_4)（diff 1696・参考値）：トランプの列で「1 枚抜いて好きな位置に差し込む」操作を繰り返して昇順に並べるときの、操作回数の最小を求める。
 - [ABC165 F. LIS on Tree](https://atcoder.jp/contests/abc165/tasks/abc165_f)（diff 1843）：木の各頂点 k について、根から k へのパス上の値の列の最長増加部分列の長さを求める。
 - [ABC457 G. Catch All Apples](https://atcoder.jp/contests/abc457/tasks/abc457_g)（diff 1928）：数直線上の決まった時刻・位置に落ちるリンゴを、速さが 1 以下のロボットですべて受け取るとき、ロボットの台数の最小を求める。
 - [ABC360 G. Suitable Edit for LIS](https://atcoder.jp/contests/abc360/tasks/abc360_g)（diff 1982）：数列の要素を 1 つだけ好きな整数に変えてよいとき、最長増加部分列の長さの最大を求める。
@@ -274,7 +274,7 @@ $a_i$ を含む増加部分列は、「$a_i$ で終わる左側」と「$a_i$ �
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [TDPC K. ターゲット](https://atcoder.jp/contests/tdpc/tasks/tdpc_target)（diff —）：数直線上に中心を持つ円の集合から、入れ子（次の円の内側にある）の鎖になるように選べる円の個数の最大を求める。
+- [TDPC K. ターゲット](https://atcoder.jp/contests/tdpc/tasks/tdpc_target)（diff なし）：数直線上に中心を持つ円の集合から、入れ子（次の円の内側にある）の鎖になるように選べる円の個数の最大を求める。
 - [ABC476 G. Increasing Popcount](https://atcoder.jp/contests/abc476/tasks/abc476_g)（diff 2477）：L 以上 R 以下の各整数に正の整数を割り当て、同じ値を割り当てた 2 つの整数では小さい方の popcount が大きい方より小さくなるようにするとき、割り当てる値の最大の最小を求める。
 
 </div>

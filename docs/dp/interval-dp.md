@@ -213,7 +213,7 @@ $$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC N. Slimes](https://atcoder.jp/contests/dp/tasks/dp_n)（diff —）：隣り合うスライムを合体させるたびに大きさの和のコストがかかるとき、全部を 1 匹にするコストの最小を求める。
+- [EDPC N. Slimes](https://atcoder.jp/contests/dp/tasks/dp_n)（diff なし）：隣り合うスライムを合体させるたびに大きさの和のコストがかかるとき、全部を 1 匹にするコストの最小を求める。
 
 </div>
 
@@ -229,7 +229,7 @@ $$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 019. Pick Two（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_s)（diff —）：2N 個の数の列から隣り合う 2 つを取り除く操作を繰り返して全部消すとき、取り除く 2 つの差の絶対値の和の最小を求める。
+- [典型90 019. Pick Two（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_s)（diff なし）：2N 個の数の列から隣り合う 2 つを取り除く操作を繰り返して全部消すとき、取り除く 2 つの差の絶対値の和の最小を求める。
 
 </div>
 
@@ -245,8 +245,8 @@ $$
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [EDPC L. Deque](https://atcoder.jp/contests/dp/tasks/dp_l)（diff —）：数列の両端から交互に 1 つずつ取る 2 人ゲームで、両者が最適に取るときの先手の得点 − 後手の得点を求める。
-- [TDPC I. イウィ](https://atcoder.jp/contests/tdpc/tasks/tdpc_iwi)（diff —）：i と w からなる文字列から、連続する 'iwi' を取り除く操作を繰り返すとき、操作回数の最大を求める。
+- [EDPC L. Deque](https://atcoder.jp/contests/dp/tasks/dp_l)（diff なし）：数列の両端から交互に 1 つずつ取る 2 人ゲームで、両者が最適に取るときの先手の得点 − 後手の得点を求める。
+- [TDPC I. イウィ](https://atcoder.jp/contests/tdpc/tasks/tdpc_iwi)（diff なし）：i と w からなる文字列から、連続する 'iwi' を取り除く操作を繰り返すとき、操作回数の最大を求める。
 - [ABC217 F. Make Pair](https://atcoder.jp/contests/abc217/tasks/abc217_f)（diff 1954）：2N 人の列から、仲の良い隣り合う 2 人を取り除く操作を N 回行う方法の数を求める。
 - [ABC163 E. Active Infants](https://atcoder.jp/contests/abc163/tasks/abc163_e)（diff 2037）：活発度 A_i の幼児を並べ替えて、各幼児の移動距離×活発度の和の最大を求める。
 

@@ -28,7 +28,7 @@ sections:
   - {title: Berlekamp-Massey（漸化式を見つける）, anchor: berlekamp-massey}
   - {title: ACL の convolution を使った実装, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -176,7 +176,7 @@ Berlekamp-Massey は、今の漸化式で次の項を予測したずれ $\delta$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [TDPC T. フィボナッチ](https://atcoder.jp/contests/tdpc/tasks/tdpc_fibonacci)（diff —）：a_1 = … = a_K = 1、a_i = a_{i−1} + … + a_{i−K} で定まる数列の第 N 項を 10^9+7 で割った余りで求める（K ≤ 1000、N ≤ 10^9）。
+- [TDPC T. フィボナッチ](https://atcoder.jp/contests/tdpc/tasks/tdpc_fibonacci)（diff なし）：a_1 = … = a_K = 1、a_i = a_{i−1} + … + a_{i−K} で定まる数列の第 N 項を 10^9+7 で割った余りで求める（K ≤ 1000、N ≤ 10^9）。
 
 </div>
 

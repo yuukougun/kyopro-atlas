@@ -24,7 +24,7 @@ sections:
   - {title: 操作とコンテナの計算量の早見表, anchor: complexity-table}
   - {title: map で数えながら走査する（→ 累積和と連想配列で区間を数える）, anchor: counting-map}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -160,8 +160,8 @@ set・map は平衡二分探索木（libstdc++ では赤黒木）で、木の高
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [鉄則本 A54. Map](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bb)（diff —）：名前ごとの点数の登録と参照のクエリを処理する。
-- [鉄則本 A55. Set](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bc)（diff —）：整数の追加・削除と「x 以上で最小の値」のクエリを処理する。
+- [鉄則本 A54. Map](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bb)（diff なし）：名前ごとの点数の登録と参照のクエリを処理する。
+- [鉄則本 A55. Set](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bc)（diff なし）：整数の追加・削除と「x 以上で最小の値」のクエリを処理する。
 - [ABC166 E. This Message Will Self-Destruct in 5s](https://atcoder.jp/contests/abc166/tasks/abc166_e)（diff 1062）：j − i = A_i + A_j を満たす組 (i, j) の数を求める。
 
 </div>

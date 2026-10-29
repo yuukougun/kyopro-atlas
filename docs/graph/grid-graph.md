@@ -26,7 +26,7 @@ sections:
   - {title: 市松模様で二部グラフになる（フロー・マッチングへの入口）, anchor: checkerboard}
   - {title: 障害物どうしの 8 近傍の連結で通れるかを判定する, anchor: obstacle-dual, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -206,7 +206,7 @@ updated: 2026-10-22
 
 - [ABC351 D. Grid and Magnet](https://atcoder.jp/contests/abc351/tasks/abc351_d)（diff 974）：磁石の隣のマスに入ると動けなくなるグリッドで、あるマスから行けるマスの数の最大値を求める。
 - [ABC088 D. Grid Repainting](https://atcoder.jp/contests/abc088/tasks/abc088_d)（diff 999）：迷路で、スタートからゴールへ行ける状態を保ったまま黒く塗れる白マスの最大数を求める。
-- [典型90 012. Red Painting（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_l)（diff —）：マスを赤く塗るクエリと、2 マスが赤いマスだけでつながっているかを問うクエリに答える。
+- [典型90 012. Red Painting（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_l)（diff なし）：マスを赤く塗るクエリと、2 マスが赤いマスだけでつながっているかを問うクエリに答える。
 
 </div>
 

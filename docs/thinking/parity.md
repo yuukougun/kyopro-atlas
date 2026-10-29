@@ -26,7 +26,7 @@ sections:
   - {title: 市松模様の偶奇, anchor: checkerboard, level: 青}
   - {title: 二部グラフ・ゲームとのつながり, anchor: bipartite-game}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -188,7 +188,7 @@ $L$ マスを通る道筋で、最初のマスの色を灰とすると、
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [典型90 024. Select +／- One（★2）](https://atcoder.jp/contests/typical90/tasks/typical90_x)（diff —）：A の要素に ±1 する操作をちょうど K 回行って B にできるか判定する。
+- [典型90 024. Select +／- One（★2）](https://atcoder.jp/contests/typical90/tasks/typical90_x)（diff なし）：A の要素に ±1 する操作をちょうど K 回行って B にできるか判定する。
 - [ABC454 E. LRUD Moving](https://atcoder.jp/contests/abc454/tasks/abc454_e)（diff 1627）：N×N のグリッドで、指定された 1 マスだけを通らずにほかのすべてのマスをちょうど 1 回ずつ通って左上から右下へ行く移動の列があるかを判定し、あれば 1 つ示す。
 
 </div>

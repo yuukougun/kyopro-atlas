@@ -246,7 +246,7 @@ $N \le 2 \times 10^5$、$A_i \le 10^6$ で、答えは mod 998244353 で求め�
 
 - [ABC248 G. GCD cost on the tree](https://atcoder.jp/contests/abc248/tasks/abc248_g)（diff 2514）：各頂点に正の整数が書かれた木で、すべての 2 頂点の組についての「パス上の値の gcd × パスの頂点数」の総和を求める。
 - [ABC230 G. GCD Permutation](https://atcoder.jp/contests/abc230/tasks/abc230_g)（diff 2516）：1〜N の順列 P について、gcd(i, j) ≠ 1 かつ gcd(P_i, P_j) ≠ 1 となる組 (i, j) の数を求める。
-- [ABC020 D. LCM Rush](https://atcoder.jp/contests/abc020/tasks/abc020_d)（diff 2695）：1 ≤ i ≤ N について lcm(i, K) の総和を mod 10^9+7 で求める（N, K ≤ 10^9）。
+- [ABC020 D. LCM Rush](https://atcoder.jp/contests/abc020/tasks/abc020_d)（diff 2695・参考値）：1 ≤ i ≤ N について lcm(i, K) の総和を mod 10^9+7 で求める（N, K ≤ 10^9）。
 
 </div>
 

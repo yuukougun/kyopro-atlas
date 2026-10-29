@@ -26,7 +26,7 @@ sections:
   - {title: 圧縮木で木 DP をするときの要点, anchor: library}
   - {title: マージテク・平方分割で代用できる場合, anchor: alternatives}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -134,7 +134,7 @@ Auxiliary Tree が向くのは、指定頂点がクエリごとに与えられ�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 035. Preserve Connectivity（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_ai)（diff —）：木と多数のクエリが与えられ、各クエリで指定された頂点をすべてつなぐのに必要な辺の数の最小値を答える。
+- [典型90 035. Preserve Connectivity（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_ai)（diff なし）：木と多数のクエリが与えられ、各クエリで指定された頂点をすべてつなぐのに必要な辺の数の最小値を答える。
 
 </div>
 

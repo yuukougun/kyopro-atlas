@@ -184,7 +184,7 @@ K 番目を求める方法には、もう 1 つ「答え $x$ を二分探索し�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [ARC033 C. データ構造](https://atcoder.jp/contests/arc033/tasks/arc033_3)（diff 1641）：数の集合への追加と、小さい方から x 番目の数を答えて削除するクエリを処理する。
+- [ARC033 C. データ構造](https://atcoder.jp/contests/arc033/tasks/arc033_3)（diff 1641・参考値）：数の集合への追加と、小さい方から x 番目の数を答えて削除するクエリを処理する。
 
 </div>
 

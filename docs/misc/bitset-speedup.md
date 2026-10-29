@@ -31,7 +31,7 @@ sections:
   - {title: C++ の作法（大きさはコンパイル時の定数・大きな bitset をスタックに置かない）, anchor: cpp}
   - {title: bitDP との違い, anchor: vs-bit-dp}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -249,7 +249,7 @@ $N = 3000$ の $O(N^3)$ は約 $2.7 \times 10^{10}$ 回で厳しいが、内側�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 059. Many Graph Queries（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_bg)（diff —）：DAG で、頂点 u から v へ到達できるかを答えるクエリに大量に答える。
+- [典型90 059. Many Graph Queries（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_bg)（diff なし）：DAG で、頂点 u から v へ到達できるかを答えるクエリに大量に答える。
 
 </div>
 

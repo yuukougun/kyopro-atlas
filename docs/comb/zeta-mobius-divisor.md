@@ -25,7 +25,7 @@ sections:
   - {title: GCD 畳み込み・LCM 畳み込み, anchor: gcd-lcm-convolution}
   - {title: 部分集合のゼータ変換との対応（指数ベクトルの累積和）, anchor: vs-subset}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -209,7 +209,7 @@ $\{1, \dots, N\}$ は指数の組の「箱」にはならない（$2^{19} \le N$
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC393 E. GCD of Subset](https://atcoder.jp/contests/abc393/tasks/abc393_e)（diff 1253）：長さ N の列 A の各 i について、A_i を含む K 個の要素を選んだときの gcd の最大値を求める。
-- [YAHOO-PROCON2018-FINAL A. Uncommon](https://atcoder.jp/contests/yahoo-procon2018-final/tasks/yahoo_procon2018_final_a)（diff —）：相異なる N 個の整数 a_1, …, a_N（値は 10^5 以下）と M が与えられ、i = 1, …, M のそれぞれについて i と互いに素な a_j の個数を求める。
+- [YAHOO-PROCON2018-FINAL A. Uncommon](https://atcoder.jp/contests/yahoo-procon2018-final/tasks/yahoo_procon2018_final_a)（diff なし）：相異なる N 個の整数 a_1, …, a_N（値は 10^5 以下）と M が与えられ、i = 1, …, M のそれぞれについて i と互いに素な a_j の個数を求める。
 
 </div>
 

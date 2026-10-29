@@ -26,7 +26,7 @@ sections:
   - {title: 辺の追加と削除が混ざるとき（ロールバック Union-Find・オフライン動的連結性へ）, anchor: mixed-updates}
   - {title: 二分探索と連結判定の組合せ, anchor: binary-search, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -226,7 +226,7 @@ Union-Find では、まとめ方が 2 通りある。
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC264 E. Blackout 2](https://atcoder.jp/contests/abc264/tasks/abc264_e)（diff 1229）：電線が 1 本ずつ切れていくとき、各時点で発電所のどれかとつながっている都市の数を求める。
-- [ABC040 D. 道路の老朽化対策について](https://atcoder.jp/contests/abc040/tasks/abc040_d)（diff 1656）：各道路に建設年があり、各国民について、ある年より後に作られた道路だけで行ける都市の数を求める。
+- [ABC040 D. 道路の老朽化対策について](https://atcoder.jp/contests/abc040/tasks/abc040_d)（diff 1656・参考値）：各道路に建設年があり、各国民について、ある年より後に作られた道路だけで行ける都市の数を求める。
 - [ABC413 G. Big Banned Grid](https://atcoder.jp/contests/abc413/tasks/abc413_g)（diff 1723）：障害物のある巨大なグリッドで、左上から右下へ行けるかを判定する。
 
 </div>

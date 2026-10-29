@@ -27,7 +27,7 @@ sections:
   - {title: 「等しい」を区間にまとめる符号付き DP, anchor: equal-blocks}
   - {title: 符号付きの木 DP, anchor: tree, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -206,7 +206,7 @@ $$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC Y. Grid 2](https://atcoder.jp/contests/dp/tasks/dp_y)（diff —）：H×W のグリッドに N 個の壁のマスがあるとき、左上から右下へ右と下だけで進み、壁を通らない経路の数を求める。
+- [EDPC Y. Grid 2](https://atcoder.jp/contests/dp/tasks/dp_y)（diff なし）：H×W のグリッドに N 個の壁のマスがあるとき、左上から右下へ右と下だけで進み、壁を通らない経路の数を求める。
 
 </div>
 

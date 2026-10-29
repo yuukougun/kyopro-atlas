@@ -163,7 +163,7 @@ Library Checker の対応は次のとおりである。どちらも $N, Q \le 2 
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [EDPC Z. Frog 3](https://atcoder.jp/contests/dp/tasks/dp_z)（diff —）：足場を前から順に跳んで進み、i から j へ跳ぶと (h_j − h_i)^2 + C のコストがかかるとき、最後の足場までのコストの和の最小を求める。
+- [EDPC Z. Frog 3](https://atcoder.jp/contests/dp/tasks/dp_z)（diff なし）：足場を前から順に跳んで進み、i から j へ跳ぶと (h_j − h_i)^2 + C のコストがかかるとき、最後の足場までのコストの和の最小を求める。
 
 </div>
 

@@ -262,7 +262,7 @@ NTT は長さ $2^c$ の変換に「$2^c$ 乗して初めて 1 になる数」を
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [PRACTICE2 F. Convolution](https://atcoder.jp/contests/practice2/tasks/practice2_f)（diff —）：2 つの数列 a, b について、c_k = Σ_{i+j=k} a_i b_j を 998244353 で割った余りですべての k について求める。
+- [PRACTICE2 F. Convolution](https://atcoder.jp/contests/practice2/tasks/practice2_f)（diff なし）：2 つの数列 a, b について、c_k = Σ_{i+j=k} a_i b_j を 998244353 で割った余りですべての k について求める。
 
 </div>
 
@@ -297,7 +297,7 @@ $B - A = C - B$ は $A + C = 2B$ と同じである。真ん中の $B$ を固定
 - [ABC143 D. Triangles](https://atcoder.jp/contests/abc143/tasks/abc143_d)（diff 686）：N 本の棒から 3 本を選んで三角形を作れる組の数を求める。
 - [ABC291 G. OR Sum](https://atcoder.jp/contests/abc291/tasks/abc291_g)（diff 2176）：長さ N の数列 A, B（各値は 32 未満）について、A を巡回シフトしたときの Σ (A_i OR B_i) の最大値を求める。
 - [ABC196 F. Substring 2](https://atcoder.jp/contests/abc196/tasks/abc196_f)（diff 2274）：0/1 の文字列 T を S の連続する部分と比べるとき、一致させるために書き換える文字数の最小値を求める（|S|, |T| ≤ 10^6）。
-- [典型90 065. RGB Balls 2（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_bm)（diff —）：赤・緑・青のボールから個数の条件を満たすように選ぶ方法の数を、998244353 で割った余りで求める。
+- [典型90 065. RGB Balls 2（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_bm)（diff なし）：赤・緑・青のボールから個数の条件を満たすように選ぶ方法の数を、998244353 で割った余りで求める。
 
 </div>
 

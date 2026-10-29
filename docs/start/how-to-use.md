@@ -227,7 +227,7 @@ flowchart TD
 ```
 
 - **題名**：「コンテストの表示名 記号. 題名」で、AtCoder の問題ページへのリンクになっている。表示名は ABCNNN・ARCNNN のほか、典型90・EDPC（Educational DP Contest）・鉄則本・アルゴ数学などがある。
-- **diff**：AtCoder Problems の difficulty である。difficulty の付かない問題（典型90 など）は「diff —」と書く。値は取得した時点のもので、後で少し変わることがある。
+- **diff**：AtCoder Problems の difficulty である。difficulty の付かない問題（典型90 など）は「diff なし」と書く。典型90 は題名の★が難しさの目安になる（[典型90問の★とレベル](../guide/problem-sets.md#typical90-stars)）。「diff 1024・参考値」のように「参考値」を添えた値は、2016 年 7 月までの [Rated](../guide/glossary.md#rated) でなかったコンテストの問題に AtCoder Problems が参考として出している値で、ふつうの値より確かさが低い。値は取得した時点のもので、後で少し変わることがある。
 - **要約**：何を問う問題かを、手法名を出さずに 1 文で書いたものである。解き方が見えないように、問いだけを書いている。
 
 問題は役割で 3 つに分けてある。

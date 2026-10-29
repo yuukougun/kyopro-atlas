@@ -25,7 +25,7 @@ sections:
   - {title: 独立な部分に分ける（奇数部分ごと）, anchor: independent-parts}
   - {title: 偶奇・構築・ゲームとのつながり, anchor: connections}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -204,7 +204,7 @@ $H \times W$ の行列で「$2 \times 2$ の正方形の 4 マスに同じ値を
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [典型90 079. Two by Two（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_ca)（diff —）：2×2 の正方形の 4 マスに同じ値を足し引きする操作で、行列 A を B にできるか判定する。
+- [典型90 079. Two by Two（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_ca)（diff なし）：2×2 の正方形の 4 マスに同じ値を足し引きする操作で、行列 A を B にできるか判定する。
 - [ABC140 D. Face Produces Unhappiness](https://atcoder.jp/contests/abc140/tasks/abc140_d)（diff 1074）：向き（L/R）の列に区間の反転を K 回まで行い、幸福な人の数を最大化する。
 
 </div>

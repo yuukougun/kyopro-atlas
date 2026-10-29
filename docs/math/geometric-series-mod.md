@@ -27,7 +27,7 @@ sections:
   - {title: 2×2 行列の累乗による別解, anchor: matrix, level: 青}
   - {title: 同じ数字列を並べた数は公比 10^d の等比数列の和になる, anchor: repeated-digits}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -213,7 +213,7 @@ $N$ の桁数を $d$ とすると、求める数は $N$ を $10^d$ ずつずら�
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [アルゴ数学 053. Sum of 4^N](https://atcoder.jp/contests/math-and-algorithm/tasks/math_and_algorithm_as)（diff —）：4^0 + 4^1 + … + 4^N を 10^9+7 で割った余りで求める（N ≤ 10^18）。
+- [アルゴ数学 053. Sum of 4^N](https://atcoder.jp/contests/math-and-algorithm/tasks/math_and_algorithm_as)（diff なし）：4^0 + 4^1 + … + 4^N を 10^9+7 で割った余りで求める（N ≤ 10^18）。
 - [ABC293 E. Geometric Progression](https://atcoder.jp/contests/abc293/tasks/abc293_e)（diff 1453）：A^0 + A^1 + … + A^(X−1) を M で割った余りを求める（A, M ≤ 10^9、X ≤ 10^12、M は素数とは限らない）。
 
 </div>

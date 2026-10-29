@@ -28,7 +28,7 @@ sections:
   - {title: 差分で更新する（先頭を末尾へ回す・全体に足して mod を取る・色ごとの転倒数を引く）, anchor: incremental}
   - {title: 窓を伸縮しながら転倒数を増減する（尺取り・期待値と組む）, anchor: sliding-window, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -167,7 +167,7 @@ updated: 2026-10-22
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [CHOKUDAI_S001 J. 転倒数](https://atcoder.jp/contests/chokudai_S001/tasks/chokudai_S001_j)（diff —）：数列を隣接交換でソートするときの交換回数を求める。
+- [CHOKUDAI_S001 J. 転倒数](https://atcoder.jp/contests/chokudai_S001/tasks/chokudai_S001_j)（diff なし）：数列を隣接交換でソートするときの交換回数を求める。
 
 </div>
 
