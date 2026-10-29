@@ -636,3 +636,196 @@
 @media (pointer: coarse) {
   .md-typeset a.kp-check__jump { width: 44px; height: 44px; }
 }
+
+/* ---------- 「勉強したい」の切り替え（#1） ---------- */
+/* ページの上（.kp-page-head）と下（.kp-links__actions）に、テンプレートが span.kp-wish を出す。チェック欄は見えなくし
+   （読み上げとキーボードの操作には残す）、しおりの印（中抜き・塗り）で状態を見せる。kp-is-checked は progress.js が付ける */
+.md-typeset .kp-wish {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.2em 0.7em;
+}
+.md-typeset .kp-page-head > .kp-wish { margin-left: auto; }
+.md-typeset .kp-page-head > .kp-understood + .kp-wish { margin-left: 0; }
+.md-typeset .kp-wish__toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  min-height: 2em;
+  padding: 0 0.75em 0 0.55em;
+  border: 2px solid var(--md-default-fg-color--lighter);
+  border-radius: 1em;
+  cursor: pointer;
+  user-select: none;
+}
+.md-typeset .kp-wish__toggle input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.md-typeset .kp-wish__icon { display: inline-flex; }
+.md-typeset .kp-wish__icon svg {
+  width: 1.15em;
+  height: 1.15em;
+  fill: currentcolor;
+}
+.md-typeset .kp-wish__icon--on,
+.md-typeset .kp-wish__toggle.kp-is-checked .kp-wish__icon--off { display: none; }
+.md-typeset .kp-wish__toggle.kp-is-checked .kp-wish__icon--on { display: inline-flex; }
+.md-typeset .kp-wish__toggle:hover { border-color: var(--md-accent-fg-color); }
+.md-typeset .kp-wish__toggle.kp-is-checked {
+  border-color: var(--md-accent-fg-color);
+  background: var(--md-accent-fg-color);
+  color: var(--md-accent-bg-color);
+}
+.md-typeset .kp-wish__toggle:focus-within { box-shadow: 0 0 0 2px var(--md-accent-fg-color); }
+.md-typeset .kp-wish__toggle.kp-is-checked:focus-within { box-shadow: 0 0 0 2px var(--md-default-bg-color), 0 0 0 4px var(--md-accent-fg-color); }
+
+/* ページの下：「理解した」と「勉強したい」を全幅の1行に並べる */
+.md-typeset .kp-links__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5em 1.5em;
+  grid-column: 1 / -1;
+}
+
+/* ---------- ロードマップの色ごとの列の「理解した」（#74） ---------- */
+/* progress.js が生成された表（h3#reading-order-<色> の後）の各行の # の欄にチェック欄を付け、行に data-kp-row を付ける。
+   表には class を付けない（Material は class のない表だけを整える）。隠す切り替えは表の data-kp-hide */
+.md-typeset .kp-order__check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  min-height: 1.6em;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.md-typeset .kp-order__check input {
+  width: 1.05em;
+  height: 1.05em;
+  margin: 0;
+  accent-color: var(--kp-c);
+  cursor: pointer;
+}
+.md-typeset tr.kp-is-understood > td { background: var(--md-accent-fg-color--transparent); }
+.md-typeset table[data-kp-hide] tr.kp-is-understood { display: none; }
+/* # の欄はチェック欄と番号が入る幅にする（Material の th の min-width 5rem を外し、狭い画面でページの欄を広くする） */
+.md-typeset table[data-kp-order] tr > :first-child {
+  min-width: 0;
+  padding-right: 0.5em;
+  padding-left: 0.9em;
+}
+.md-typeset .kp-order__count {
+  margin: 0.3em 0;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.7rem;
+}
+/* JS が取り付けたときだけ枠を出す（JS が動かないときに空の枠を残さない） */
+.md-typeset .kp-order-tools[data-kp-mounted] {
+  margin: 1em 0;
+  padding: 0.5em 0.8em;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.2rem;
+}
+.md-typeset .kp-order-tools p { margin: 0.3em 0 0; }
+.md-typeset .kp-order-tools__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  min-height: 2em;
+  font-weight: 700;
+  cursor: pointer;
+}
+.md-typeset .kp-order-tools__toggle input {
+  width: 1.05em;
+  height: 1.05em;
+  margin: 0;
+  accent-color: var(--md-accent-fg-color);
+}
+
+/* ---------- 勉強したいリスト（guide/study-list の div.kp-wishlist。#1） ---------- */
+.md-typeset .kp-wishlist { margin: 1em 0; }
+.md-typeset .kp-wishlist [hidden] { display: none !important; }
+.md-typeset .kp-wishlist__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4em 1em;
+  font-size: 0.75rem;
+}
+.md-typeset .kp-wishlist__count { margin: 0; font-weight: 700; }
+.md-typeset .kp-wishlist__sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+}
+.md-typeset .kp-wishlist__sort select {
+  min-height: 2.2em;
+  padding: 0 0.3em;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 0.2rem;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  font: inherit;
+}
+.md-typeset ul.kp-wishlist__list {
+  margin: 0.5em 0;
+  padding: 0;
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+  list-style: none;
+}
+.md-typeset ul.kp-wishlist__list > li.kp-wishlist__item {
+  display: flex;
+  align-items: center;
+  gap: 0.5em 1em;
+  margin: 0;
+  padding: 0.5em 0.2em;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+.md-typeset .kp-wishlist__main { flex: 1 1 auto; min-width: 0; }
+.md-typeset .kp-wishlist__title { margin: 0; overflow-wrap: anywhere; }
+.md-typeset .kp-wishlist__meta {
+  margin: 0.15em 0 0;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.7rem;
+}
+.md-typeset .kp-wishlist__done { color: var(--md-default-fg-color); }
+.md-typeset .kp-wishlist__empty { color: var(--md-default-fg-color--light); }
+.md-typeset .kp-wishlist__status:empty {
+  min-height: 0;
+  margin: 0;
+}
+.md-typeset .kp-wishlist__remove,
+.md-typeset .kp-wishlist__undo {
+  flex: none;
+  min-height: 2.2em;
+  padding: 0 0.9em;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 0.2rem;
+  background: transparent;
+  color: var(--md-typeset-a-color);
+  font: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+.md-typeset .kp-wishlist__undo { margin-left: 0.6em; }
+.md-typeset .kp-wishlist__remove:hover,
+.md-typeset .kp-wishlist__remove:focus-visible,
+.md-typeset .kp-wishlist__undo:hover,
+.md-typeset .kp-wishlist__undo:focus-visible { border-color: var(--md-accent-fg-color); }
+
+@media (pointer: coarse) {
+  .md-typeset .kp-wish__toggle,
+  .md-typeset .kp-order-tools__toggle,
+  .md-typeset .kp-wishlist__sort select,
+  .md-typeset .kp-wishlist__remove,
+  .md-typeset .kp-wishlist__undo { min-height: 44px; }
+  .md-typeset .kp-order__check { min-height: 44px; min-width: 44px; }
+}

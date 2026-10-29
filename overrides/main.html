@@ -8,6 +8,8 @@
     上の帯の節のチェック欄（「青の節」など）の横に、その帯の最初の節へ移るリンク（kp-check__jump）
   - 本文と目次：sections に level のある節の見出しと目次の項目に、レベルの印（kp-sec-lv。#54）
   - ページ下部：前提・次に読む・関連（related。#56）・知識マップの焦点の表示へのリンク、「理解した」のチェック欄（もう一度）
+  - 上部と下部の「理解した」の後に、「勉強したい」の切り替え（input[data-kp-wish]。progress.js が localStorage と結ぶ。#1）と、
+    勉強したいリストのページ（id：study-list）へのリンク。リストのページ自身には出さない
   どのページにも、最後の行に段階（stage）と更新日（updated）（id を持つページだけ。#9）と、
   「このページの誤りを報告する」（GitHub の新しい Issue。.github/ISSUE_TEMPLATE/page-error.yml。#10）を出す。
 
@@ -71,7 +73,7 @@
 
   {#- nav を1回だけ見て、一覧・分野の入口・知識マップ・前提・次に読む・関連を集める。
       ページは URL（lists/kind-dp/ のようなサイトのルートからの相対）で見分ける。p.file は Zensical にないので使わない -#}
-  {%- set ns = namespace(lists=[], field_url=none, map_url=none, howto_url=none, prereqs=[], near=[], far=[], rel=[]) -%}
+  {%- set ns = namespace(lists=[], field_url=none, map_url=none, howto_url=none, wish_url=none, prereqs=[], near=[], far=[], rel=[]) -%}
   {%- for p in nav.pages -%}
     {%- set pm = p.meta or {} -%}
     {%- set pu = (p.url or "")[1:] if (p.url or "")[:1] == "/" else (p.url or "") -%}
@@ -83,6 +85,7 @@
     {%- if pm.id -%}
       {%- if pm.id == "knowledge-map" -%}{%- set ns.map_url = p.url -%}{%- endif -%}
       {%- if pm.id == "how-to-use" -%}{%- set ns.howto_url = p.url -%}{%- endif -%}
+      {%- if pm.id == "study-list" -%}{%- set ns.wish_url = p.url -%}{%- endif -%}
       {%- if pm.id in (m.prerequisites or []) -%}
         {%- set ns.prereqs = ns.prereqs + [p] -%}
       {%- endif -%}
@@ -168,6 +171,24 @@
     {%- endif -%}
   {%- endset -%}
 
+  {#- 「勉強したい」の切り替え（#1）。チェック欄は見えなくし、しおりの印（中抜き・塗り）で状態を見せる。
+      状態の class（kp-is-checked）は progress.js が記録に合わせて付ける。title は変えない（Material の tooltips が預かるため） -#}
+  {%- set wish -%}
+    {%- if m.id != "study-list" %}
+    <span class="kp-wish">
+      <label class="kp-wish__toggle" title="勉強したいリストに入れる・外す（この端末のブラウザに保存する）">
+        <input type="checkbox" data-kp-wish="{{ m.id | e }}" aria-label="勉強したいリストに入れる">
+        <span class="kp-wish__icon kp-wish__icon--off" aria-hidden="true">{% include ".icons/material/bookmark-outline.svg" %}</span>
+        <span class="kp-wish__icon kp-wish__icon--on" aria-hidden="true">{% include ".icons/material/bookmark.svg" %}</span>
+        <span class="kp-wish__text">勉強したい</span>
+      </label>
+      {%- if ns.wish_url %}
+      <a class="kp-wish__list" href="{{ ns.wish_url | url }}" title="勉強したいリストを開く">リストを見る</a>
+      {%- endif %}
+    </span>
+    {%- endif -%}
+  {%- endset -%}
+
   {%- if m.stage == "stub" %}
   <div class="kp-stub" role="note">
     <span class="kp-stub__label">準備中</span>
@@ -219,6 +240,7 @@
       {%- endif %}
     </dl>
     {{ checks }}
+    {{ wish }}
   </div>
 {%- endif %}
 {#- 本文：sections に level のある節の見出しに、レベルの印を付ける（headerlink の前に入れる） -#}
@@ -290,7 +312,13 @@
     {%- if show_map %}
     <p class="kp-links__map"><a href="{{ ns.map_url | url }}?focus={{ m.id | urlencode }}">知識マップでこのページの前後を見る</a></p>
     {%- endif %}
+    {#- 「理解した」と「勉強したい」を1行に並べる（.kp-links は格子なので、まとめて全幅の1行にする） #}
+    {%- if lv_ns.levels or m.id != "study-list" %}
+    <div class="kp-links__actions">
     {{ checks }}
+    {{ wish }}
+    </div>
+    {%- endif %}
   </nav>
   {%- endif %}
 {%- endif %}
