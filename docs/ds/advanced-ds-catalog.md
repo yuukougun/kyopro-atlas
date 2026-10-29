@@ -93,18 +93,18 @@ updated: 2026-10-29
 
 この教材に独立のページがないデータ構造を並べた。$N$ は要素数、$C$ は値の範囲、$H \times W$ は盤面の大きさである。代わりの手の列は、先に考えるとよい軽い方法を書いた。
 
-| 名前 | 何ができるか | 計算量 | 代わりになる手 |
-| --- | --- | --- | --- |
-| セグ木のマージ・分割 | 値を添字にした動的セグ木どうしを併合し、値の境目で 2 つに分ける | 併合は全体でならし $O(N \log C)$、分割は 1 回 $O(\log C)$ | [マージテク](../tree/small-to-large.md#subtree-merge)で set や BIT を併合（$O(N \log^2 N)$） |
-| 2 次元セグ木（セグ木の入れ子） | 点の更新と長方形の集約を、逆元のない演算（最大値など）でもオンラインで答える | 1 回 $O(\log H \log W)$、メモリ $O(HW)$ | 更新がなければ[平面走査](../ds/sweep-line-2d.md)、和なら 2 次元 BIT や [CDQ 分割統治](../ds/cdq-divide-and-conquer.md#alternatives) |
-| 2 次元 BIT | 座標が小さい盤面で、一点への加算と長方形の和 | 1 回 $O(\log H \log W)$、メモリ $O(HW)$ | 点を先に知っていれば[平面走査](../ds/sweep-line-2d.md#rectangle-count) |
-| K-D tree | 多次元の点のうち長方形に入るものの探索、最も近い点の探索 | 構築 $O(N \log N)$、2 次元の長方形の集約は 1 回 $O(\sqrt{N})$（入る点を列挙するなら個数 $K$ の分 $+K$）、最近点は最悪 $O(N)$ | [平面走査](../ds/sweep-line-2d.md)、マンハッタン距離なら 45 度回転 |
-| 併合可能なヒープ | 2 つのヒープを 1 つに併合する | 併合・追加・取り出しが $O(\log N)$ | [マージテク](../tree/small-to-large.md#why-log)で入れ直す（[次の節](#meldable-heap)） |
-| Fast Set（64 分木） | $0$ 以上 $N$ 未満の整数の集合への追加・削除と、$x$ 以上の最小・$x$ 以下の最大 | どれも $O(\log_{64} N)$、メモリは $N/64$ 語ほど（全段で $N/63$ 語ほど） | `std::set`、削除しかないなら[次の空きへ飛ぶ Union-Find](../ds/union-find-applications.md#next-pointer) |
-| Fractional Cascading | [マージソート木](../ds/merge-sort-tree.md)の各ノードの二分探索を、根での 1 回にまとめる | 区間の $x$ 以下の個数が $O(\log N)$（素朴なマージソート木は $O(\log^2 N)$） | [Wavelet Matrix](../ds/wavelet-matrix.md)、[永続セグ木](../ds/persistent-data-structures.md#prefix-versions) |
-| 析合木（permutation tree） | 順列で、値が連続した範囲になる区間をすべて木で表す | 構築 $O(N \log N)$（線形の方法もある） | 区間の個数だけなら、最大値・最小値と遅延セグ木で数える |
-| Kinetic Segment Tree | 各要素が一次関数 $a_i t + b_i$ で、$t$ を増やしながら区間の最小値（最大値）を答える | 取得と一点の更新は 1 回 $O(\log N)$、更新がなければ $t$ を進める操作は全体でならし $O(N \log^2 N)$ | 全体の最小なら [CHT・Li Chao Tree](../dp/cht.md#li-chao-tree)、更新がなければ各ノードに下側の包絡線を持つセグ木 |
-| Sqrt Tree | 結合法則を満たす演算の、静的な列の区間の積 | 前計算 $O(N \log \log N)$、取得 $O(1)$ | [Disjoint Sparse Table](../ds/sparse-table.md#disjoint-sparse-table)（前計算 $O(N \log N)$、取得 $O(1)$）、[セグメント木](../ds/segment-tree.md) |
+| 名前：何ができるか | 計算量 | 代わりになる手 |
+| --- | --- | --- |
+| **セグ木のマージ・分割**：値を添字にした動的セグ木どうしを併合し、値の境目で 2 つに分ける | 併合は全体でならし $O(N \log C)$、分割は 1 回 $O(\log C)$ | [マージテク](../tree/small-to-large.md#subtree-merge)で set や BIT を併合（$O(N \log^2 N)$） |
+| **2 次元セグ木（セグ木の入れ子）**：点の更新と長方形の集約を、逆元のない演算（最大値など）でもオンラインで答える | 1 回 $O(\log H \log W)$、メモリ $O(HW)$ | 更新がなければ[平面走査](../ds/sweep-line-2d.md)、和なら 2 次元 BIT や [CDQ 分割統治](../ds/cdq-divide-and-conquer.md#alternatives) |
+| **2 次元 BIT**：座標が小さい盤面で、一点への加算と長方形の和 | 1 回 $O(\log H \log W)$、メモリ $O(HW)$ | 点を先に知っていれば[平面走査](../ds/sweep-line-2d.md#rectangle-count) |
+| **K-D tree**：多次元の点のうち長方形に入るものの探索、最も近い点の探索 | 構築 $O(N \log N)$、2 次元の長方形の集約は 1 回 $O(\sqrt{N})$（入る点を列挙するなら個数 $K$ の分 $+K$）、最近点は最悪 $O(N)$ | [平面走査](../ds/sweep-line-2d.md)、マンハッタン距離なら 45 度回転 |
+| **併合可能なヒープ**：2 つのヒープを 1 つに併合する | 併合・追加・取り出しが $O(\log N)$ | [マージテク](../tree/small-to-large.md#why-log)で入れ直す（[次の節](#meldable-heap)） |
+| **Fast Set（64 分木）**：$0$ 以上 $N$ 未満の整数の集合への追加・削除と、$x$ 以上の最小・$x$ 以下の最大 | どれも $O(\log_{64} N)$、メモリは $N/64$ 語ほど（全段で $N/63$ 語ほど） | `std::set`、削除しかないなら[次の空きへ飛ぶ Union-Find](../ds/union-find-applications.md#next-pointer) |
+| **Fractional Cascading**：[マージソート木](../ds/merge-sort-tree.md)の各ノードの二分探索を、根での 1 回にまとめる | 区間の $x$ 以下の個数が $O(\log N)$（素朴なマージソート木は $O(\log^2 N)$） | [Wavelet Matrix](../ds/wavelet-matrix.md)、[永続セグ木](../ds/persistent-data-structures.md#prefix-versions) |
+| **析合木（permutation tree）**：順列で、値が連続した範囲になる区間をすべて木で表す | 構築 $O(N \log N)$（線形の方法もある） | 区間の個数だけなら、最大値・最小値と遅延セグ木で数える |
+| **Kinetic Segment Tree**：各要素が 1 次関数 $a_i t + b_i$ で、$t$ を増やしながら区間の最小値（最大値）を答える | 取得と一点の更新は 1 回 $O(\log N)$、更新がなければ $t$ を進める操作は全体でならし $O(N \log^2 N)$ | 全体の最小なら [CHT・Li Chao Tree](../dp/cht.md#li-chao-tree)、更新がなければ各ノードに下側の包絡線を持つセグ木 |
+| **Sqrt Tree**：結合法則を満たす演算の、静的な列の区間の積 | 前計算 $O(N \log \log N)$、取得 $O(1)$ | [Disjoint Sparse Table](../ds/sparse-table.md#disjoint-sparse-table)（前計算 $O(N \log N)$、取得 $O(1)$）、[セグメント木](../ds/segment-tree.md) |
 
 表の行のうち、仕組みの要点があると代わりの手を選びやすいものを補う。
 
@@ -183,7 +183,7 @@ leftist heap は、併合の再帰が右の背骨だけを降りることで速�
 - [cp-algorithms「Sqrt Tree」](https://cp-algorithms.com/data_structures/sqrt-tree.html)：前計算 $O(N \log \log N)$・取得 $O(1)$ と、演算に要る条件（文章は使っていない）
 - [Wikipedia「Skew heap」](https://en.wikipedia.org/wiki/Skew_heap)：skew heap の操作がならし $O(\log N)$ で、深さの保証がないこと
 - [Wikipedia「Pairing heap」](https://en.wikipedia.org/wiki/Pairing_heap)：pairing heap の取り出しのならし $O(\log N)$ と、併合の $O(1)$
-- [koosaga「Segment Tree Beats와 Kinetic Segment Tree」](https://koosaga.com/307)：Kinetic Segment Tree の操作（一次関数・区間の最小値・時刻を進める操作）と、更新がないときの全体 $O(N \log^2 N)$
+- [koosaga「Segment Tree Beats와 Kinetic Segment Tree」](https://koosaga.com/307)：Kinetic Segment Tree の操作（1 次関数・区間の最小値・時刻を進める操作）と、更新がないときの全体 $O(N \log^2 N)$
 - [maspypy「library: ds/fastset.hpp」](https://github.com/maspypy/library/blob/main/ds/fastset.hpp)：64 分木の段の持ち方と、メモリがおよそ $N/63$ 語であること
 - [GCC「Policy-Based Data Structures: Design」](https://gcc.gnu.org/onlinedocs/libstdc++/manual/policy_data_structures_design.html)：pb_ds の `priority_queue` の既定が pairing heap で、`join` が $O(1)$ であること
 - [yosupo06「library-checker-problems」](https://github.com/yosupo06/library-checker-problems)：検証に使う問題（predecessor_problem・point_add_rectangle_sum・common_interval_decomposition_tree）の内容

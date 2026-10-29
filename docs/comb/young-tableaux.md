@@ -143,7 +143,7 @@ $$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [ABC378 G. Everlasting LIDS](https://atcoder.jp/contests/abc378/tasks/abc378_g)（diff 3051）：長さ $AB - 1$ の順列のうち、LIS の長さが $A$、LDS の長さが $B$ であり、末尾に値を 1 つ付け加えて両方の長さを保てるものの数を、素数で割った余りとして求める。
+- [ABC378 G. Everlasting LIDS](https://atcoder.jp/contests/abc378/tasks/abc378_g)（diff 3051）：長さ AB − 1 の順列のうち、LIS の長さが A、LDS の長さが B であり、末尾に値を 1 つ付け加えて両方の長さを保てるものの数を、素数で割った余りとして求める。
 
 </div>
 

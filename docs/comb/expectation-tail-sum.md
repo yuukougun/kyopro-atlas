@@ -10,7 +10,7 @@ level: 黄
 kind: [確率・期待値]
 prerequisites: [linearity-of-expectation, counting-mindset]
 related: [coupon-collector, continuous-probability, binomial-precompute]
-summary: 非負整数の確率変数 X について E[X] = Σ_{k≥1} P(X ≥ k) が成り立つ。最大値・最小値・K 番目の値の期待値を「X ≥ k となる確率」の和に直して求め、「〜になるまでの回数」の期待値にも使う。
+summary: 非負整数の確率変数 X について、E[X] は k ≥ 1 の P(X ≥ k) の和に等しい。最大値・最小値・K 番目の値の期待値を「X ≥ k となる確率」の和に直して求め、「〜になるまでの回数」の期待値にも使う。
 complexity: P(X ≥ k) を 1 つ求める計算量 × 値の範囲 M（N 個の値の K 番目の期待値なら O(NM)）
 signs:
   - {type: phrase, text: 最大値（最小値・K 番目の値）の期待値}

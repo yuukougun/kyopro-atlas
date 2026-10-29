@@ -175,12 +175,6 @@ $$
 - **対応づけ**：玉と仕切りのように、数えにくい対象を数えやすい列へ 1 対 1 に対応させる考え方は[対応づけ・数える対象の言い換え](../comb/counting-bijection.md#bijection)にある。
 - **多項係数**：箱ごとの個数を決めた後の並べ方は多項係数で数える（[多項係数](../comb/multinomial-coefficient.md#meaning)）。
 
-## 使い分け {#comparison}
-
-- 玉も区別するなら（区別のある $n$ 個を $k$ 個の箱へ）、制限なしは $k^n$、各箱の個数を決めるなら[多項係数](../comb/multinomial-coefficient.md)である。玉と箱の区別と制限の全体の地図は[写像 12 相](../comb/twelvefold-way.md)にある
-- 変数ごとに上限や「偶数だけ」のような制限があるときは、[包除原理](../comb/inclusion-exclusion.md)か[母関数](../comb/generating-function-counting.md#formulas)で考える。$\frac{1}{(1-x)^k}$ の $x^n$ の係数が $\binom{n+k-1}{k-1}$ であることが、母関数の側から見た重複組合せである
-- 問題が「和の組」の形に見えないときは、[対応づけ](../comb/counting-bijection.md)で数える対象を言い換える
-
 ## 例題 {#examples}
 
 ### ABC185 C. Duodecim Ferra {#abc185_c}
@@ -218,6 +212,12 @@ $$
     - **ABC110 D**：$M$ を素因数分解し、素数ごとに指数 $e$ を $N$ 個へ配る $\binom{e+N-1}{N-1}$ を掛ける
     - **ABC021 D**：広義単調な列の個数そのもので $\binom{n+k-1}{k}$
     - **典型90 015**：差が $k$ 以上で $a$ 個選ぶ方法は $\binom{N-(k-1)(a-1)}{a}$。$a$ は $N/k + 1$ 程度までしかないので、すべての $k$ で足しても調和級数で $O(N \log N)$
+
+## 使い分け {#comparison}
+
+- 玉も区別するなら（区別のある $n$ 個を $k$ 個の箱へ）、制限なしは $k^n$、各箱の個数を決めるなら[多項係数](../comb/multinomial-coefficient.md)である。玉と箱の区別と制限の全体の地図は[写像 12 相](../comb/twelvefold-way.md)にある
+- 変数ごとに上限や「偶数だけ」のような制限があるときは、[包除原理](../comb/inclusion-exclusion.md)か[母関数](../comb/generating-function-counting.md#formulas)で考える。$\frac{1}{(1-x)^k}$ の $x^n$ の係数が $\binom{n+k-1}{k-1}$ であることが、母関数の側から見た重複組合せである
+- 問題が「和の組」の形に見えないときは、[対応づけ](../comb/counting-bijection.md)で数える対象を言い換える
 
 ## 参考 {#references}
 

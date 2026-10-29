@@ -26,7 +26,7 @@ sections:
   - {title: 一部を先に並べて残りを挿入する, anchor: insert-rest, level: 黄}
   - {title: 区別しない同じ大きさのグループを割る, anchor: same-size-groups, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -185,13 +185,6 @@ $$
 
 **mod を取った値を比べる**。多項係数を mod $p$ で求めた値は大小比較できない。最大の並べ方を探すなど大小が要るときは、正確な値か対数で比べる。
 
-## 使い分け {#comparison}
-
-- 区別しないものを区別する箱に配る（各箱の個数だけを決める）なら[重複組合せ](../comb/stars-and-bars.md)。多項係数は個数が決まった後の並べ方を数える
-- 重複の回数がそろわない数え方の直し方は[重複の除き方](../comb/counting-dedup.md#representative)
-- 玉と箱の区別と制限の組合せで式を選ぶなら[写像 12 相](../comb/twelvefold-way.md)
-- swap などの操作で列を並べ替えられる範囲を問うときは、操作の偶奇で作れない並べ方を除く（[置換の偶奇](../comb/permutation-parity.md)）
-
 ## 例題 {#examples}
 
 ### ABC234 F. Reordering {#abc234_f}
@@ -234,6 +227,13 @@ $$
 
 ??? note "力試しの方針"
     - **ARC067 E**：組の人数を $A$ から $B$ まで順に見て、その人数の組を 0 個か $C$〜$D$ 個作る DP にする。$k$ 個作るときは、残りの人から選んで名前のない $k$ 組に分ける数 $\binom{n - i}{sk} \cdot \dfrac{(sk)!}{(s!)^k \, k!}$ を掛ける（[同じ大きさのグループを割る節](#same-size-groups)）。人数 $s$ では $k \le N / s$ なので、全体は調和級数で $O(N^2 \log N)$
+
+## 使い分け {#comparison}
+
+- 区別しないものを区別する箱に配る（各箱の個数だけを決める）なら[重複組合せ](../comb/stars-and-bars.md)。多項係数は個数が決まった後の並べ方を数える
+- 重複の回数がそろわない数え方の直し方は[重複の除き方](../comb/counting-dedup.md#representative)
+- 玉と箱の区別と制限の組合せで式を選ぶなら[写像 12 相](../comb/twelvefold-way.md)
+- swap などの操作で列を並べ替えられる範囲を問うときは、操作の偶奇で作れない並べ方を除く（[置換の偶奇](../comb/permutation-parity.md)）
 
 ## 参考 {#references}
 
