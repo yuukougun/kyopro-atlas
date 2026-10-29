@@ -9,7 +9,7 @@ order: 80
 level: null
 kind: [案内]
 prerequisites: []
-related: [practice-method, roadmap#recent-positions, library-design#verify-table, atcoder-system#contests]
+related: [practice-method, roadmap#recent-positions, library-design#verify-table, atcoder-system#contests, problem-index]
 summary: 典型90問・EDPC・鉄則本・ACL Practice などの問題集と練習用コンテストを、構成とレベルの目安から選べる。最近の ABC と各問題集の問題から、使う手法のページも引ける。
 complexity: null
 signs: []
@@ -23,12 +23,12 @@ sections:
   - {title: AtCoder 以外の道具, anchor: tools}
   - {title: ライブラリの確かめ用の問題集, anchor: verify-sets}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
     - **何のページか**：典型90問・EDPC・鉄則本・ACL Practice などの問題集と練習用コンテストを、問題数・中身・レベルの目安から選べる。最近の ABC と各問題集の問題から、使う手法のページも引ける。
-    - **使い方**：問題集を選ぶなら[問題集の一覧](#collections)、典型90問の★を帯に読み替えるなら[典型90問の★とレベル](#typical90-stars)を見る。解けなかった問題の手法を探すなら、[最近の ABC → ページ](#recent-abc)か[問題集の問題 → ページ](#sets-to-pages)の表で問題を探す。
+    - **使い方**：問題集を選ぶなら[問題集の一覧](#collections)、典型90問の★を帯に読み替えるなら[典型90問の★とレベル](#typical90-stars)を見る。解けなかった問題の手法を探すなら、[最近の ABC → ページ](#recent-abc)か[問題集の問題 → ページ](#sets-to-pages)の表で問題を探す。古い ABC・ARC・AGC を含め、本文に載せた全問題は[問題番号の索引](problem-index.md)で引ける。
     - **数の出どころ**：問題数・開催日・difficulty は AtCoder Problems の公開データ（2026-10-21 取得）による。
 
 <!-- textlint-disable -->
@@ -90,6 +90,7 @@ updated: 2026-10-22
 - 「位置」は問題の記号、「diff」は AtCoder Problems の difficulty である。最近の ABC では、おおよそ D が基礎、E が水、F が青、G が黄の帯に当たる（[色別ロードマップ](../guide/roadmap.md)）。
 - 「使う手法のページ」の › の後は、そのページの中で特に使う節の題である。
 - 位置ごとにどの手法が多いかの集計は、[色別ロードマップ](../guide/roadmap.md#recent-positions)にある。
+- この表は、本文に載せていない問題も手法のページに対応させている。本文の例題・練習・力試しに載せた問題は、古い ABC や ARC・AGC も含めて[問題番号の索引](problem-index.md#abc)で引ける。
 
 <!-- gen:begin recent-abc -->
 <!-- textlint-disable -->
@@ -228,6 +229,7 @@ updated: 2026-10-22
 - 問題集の difficulty は付かないので、diff の列はほとんど「—」になる。典型90問は題名の★を見る。
 - 問題集の後に、ABC・ARC・AGC 以外の本番のコンテスト（企業の名前の付いたコンテストなど）の問題も、コンテストごとに並ぶ。
 - 表は本文の問題の一覧から自動で作るので、ページが増えると行も増える。
+- 同じ問題は、[問題番号の索引](problem-index.md#sets)の問題集とそのほかのコンテストの節にもある。索引は ABC・ARC・AGC を含む全問題を問題番号の順に並べ、diff の列を持たない。
 
 <!-- gen:begin problem-sets -->
 <!-- textlint-disable -->
@@ -236,321 +238,321 @@ updated: 2026-10-22
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| 典型90 001. Yokan Party（★4） | — | [答えで二分探索](../basics/binary-search-answer.md)（例題） |
-| 典型90 002. Encyclopedia of Parentheses（★3） | — | [再帰的な構造](../basics/recursion-structure.md)（練習） |
-| 典型90 003. Longest Circular Road（★4） | — | [木の直径と最遠点](../tree/tree-diameter.md)（練習） |
-| 典型90 005. Restricted Digits（★7） | — | [行列累乗](../math/matrix-power.md)（力試し） |
-| 典型90 006. Smallest Subsequence（★5） | — | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md)（練習）、[部分列 DP](../dp/subsequence-dp.md)（練習）、[部分列の判定と次の出現位置の表](../string/subsequence-matching.md)（練習） |
-| 典型90 008. AtCounter（★4） | — | [フェーズを状態に持つ DP](../dp/dp-phase.md)（例題） |
-| 典型90 009. Three Point Angle（★6） | — | [偏角ソート](../geometry/argument-sort.md)（例題） |
-| 典型90 011. Gravy Jobs（★6） | — | [並べ替えてから DP する](../dp/exchange-argument-dp.md)（例題） |
-| 典型90 012. Red Painting（★4） | — | [グリッドグラフ](../graph/grid-graph.md)（練習）、[Union-Find](../ds/union-find.md)（練習） |
-| 典型90 013. Passing（★5） | — | [ダイクストラ法](../graph/dijkstra.md)（練習） |
-| 典型90 014. We Used to Sing a Song Together（★3） | — | [ソートで考える](../basics/sorting-techniques.md)（練習） |
-| 典型90 015. Don't be too close（★6） | — | [重複組合せ](../comb/stars-and-bars.md)（練習） |
-| 典型90 019. Pick Two（★6） | — | [区間 DP](../dp/interval-dp.md)（例題） |
-| 典型90 021. Come Back in One Piece（★5） | — | [強連結成分分解（SCC）](../graph/scc.md)（例題） |
-| 典型90 022. Cubic Cake（★2） | — | [GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md)（練習） |
-| 典型90 023. Avoid War（★7） | — | [プロファイル DP](../dp/broken-profile-dp.md)（練習） |
-| 典型90 024. Select +／- One（★2） | — | [偶奇に着目する](../thinking/parity.md)（練習） |
-| 典型90 025. Digit Product Equation（★7） | — | [素因数の指数で考える](../math/prime-exponent-vector.md)（力試し） |
-| 典型90 026. Independent Set on a Tree（★4） | — | [木の 2 色塗り分けと距離の偶奇](../tree/tree-bipartite.md)（練習） |
-| 典型90 028. Cluttered Paper（★4） | — | [いもす法](../basics/imos.md)（練習） |
-| 典型90 029. Long Bricks（★5） | — | [座標圧縮](../basics/coordinate-compression.md)（練習）、[遅延セグメント木](../ds/lazy-segment-tree.md)（練習） |
-| 典型90 030. K Factors（★5） | — | [エラトステネスの篩](../math/sieve-eratosthenes.md)（練習） |
-| 典型90 031. VS AtCoder（★6） | — | [Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md)（練習） |
-| 典型90 034. There are few types of elements（★4） | — | [尺取り法](../basics/two-pointers.md)（練習） |
-| 典型90 035. Preserve Connectivity（★7） | — | [指定頂点を結ぶ最小の部分木](../tree/steiner-subtree.md)（力試し）、[最小共通祖先（LCA）](../tree/lca.md)（練習）、[Auxiliary Tree](../tree/auxiliary-tree.md)（例題） |
-| 典型90 037. Don't Leave the Spice（★5） | — | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md)（例題） |
-| 典型90 038. Large LCM（★3） | — | [整数の割り算と余り](../math/integer-division.md)（練習） |
-| 典型90 039. Tree Distance（★5） | — | [辺で切って数える](../tree/tree-edge-contribution.md)（例題） |
-| 典型90 040. Get More Money（★7） | — | [燃やす埋める](../graph/project-selection.md)（例題） |
-| 典型90 041. Piles in AtCoder Farm（★7） | — | [凸包と凸多角形](../geometry/convex-hull.md)（例題） |
-| 典型90 042. Multiple of 9（★4） | — | [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md)（練習） |
-| 典型90 043. Maze Challenge with Lack of Sleep（★4） | — | [01-BFS](../graph/zero-one-bfs.md)（練習） |
-| 典型90 044. Shift and Swapping（★3） | — | [全体への操作を変数で持つ](../ds/global-offset.md)（練習） |
-| 典型90 045. Simple Grouping（★6） | — | [部分集合を列挙する DP](../dp/subset-enumeration-dp.md)（練習）、[第 2 種スターリング数とベル数](../comb/bell-number.md)（練習） |
-| 典型90 047. Monochromatic Diagonal（★7） | — | [ローリングハッシュ](../string/rolling-hash.md)（力試し）、[ハッシュの衝突と安全な設計](../string/hash-safety.md)（例題） |
-| 典型90 049. Flip Digits 2（★6） | — | [最小全域木](../graph/minimum-spanning-tree.md)（練習） |
-| 典型90 051. Typical Shop（★5） | — | [半分全列挙](../basics/meet-in-the-middle.md)（例題） |
-| 典型90 054. Takahashi Number（★6） | — | [状態を頂点にする](../graph/extended-dijkstra.md)（練習） |
-| 典型90 055. Select 5（★2） | — | [計算量の見積もり](../basics/complexity-estimation.md)（例題） |
-| 典型90 056. Lucky Bag（★5） | — | [DP の復元](../dp/dp-reconstruction.md)（例題） |
-| 典型90 057. Flip Flap（★6） | — | [掃き出し法](../math/gaussian-elimination.md)（例題） |
-| 典型90 058. Original Calculator（★4） | — | [周期性の検出](../basics/periodicity.md)（練習） |
-| 典型90 059. Many Graph Queries（★7） | — | [bitset による高速化](../misc/bitset-speedup.md)（例題） |
-| 典型90 060. Chimera（★5） | — | [最長増加部分列](../dp/lis.md)（例題） |
-| 典型90 063. Monochromatic Subgrid（★4） | — | [全探索の設計](../basics/brute-force.md)（練習） |
-| 典型90 064. Uplift（★3） | — | [いもす法](../basics/imos.md)（練習） |
-| 典型90 065. RGB Balls 2（★7） | — | [畳み込みの使い方](../math/convolution-ntt.md)（練習） |
-| 典型90 066. Various Arrays（★5） | — | [期待値の線形性と指示確率変数](../comb/linearity-of-expectation.md)（例題） |
-| 典型90 067. Base 8 to 9（★2） | — | [N 進法](../math/base-conversion.md)（練習） |
-| 典型90 068. Paired Information（★5） | — | [重み付き Union-Find](../ds/weighted-union-find.md)（練習） |
-| 典型90 069. Colorful Blocks 2（★3） | — | [繰り返し二乗法](../math/mod-pow.md)（練習）、[和・積の法則と順列・組合せ](../comb/counting-basics.md)（例題） |
-| 典型90 070. Plant Planning（★4） | — | [絶対値の和の最小化と中央値](../basics/median-absolute.md)（練習） |
-| 典型90 071. Fuzzy Priority（★7） | — | [トポロジカルソート](../graph/topological-sort.md)（力試し） |
-| 典型90 072. Loop Railway Plan（★4） | — | [計算量の見積もり](../basics/complexity-estimation.md)（練習）、[深さ優先探索（DFS）](../graph/dfs.md)（練習） |
-| 典型90 073. We Need Both a and b（★5） | — | [木 DP](../dp/tree-dp.md)（練習） |
-| 典型90 075. Magic For Balls（★3） | — | [約数と倍数](../patterns/divisors-and-multiples.md)（練習） |
-| 典型90 076. Cake Cut（★3） | — | [累積和](../basics/prefix-sum.md)（練習） |
-| 典型90 077. Planes on a 2D Plane（★7） | — | [二部マッチング](../graph/bipartite-matching.md)（例題） |
-| 典型90 078. Easy Graph Problem（★2） | — | [グラフの表現と用語](../graph/graph-basics.md)（例題） |
-| 典型90 079. Two by Two（★3） | — | [不変量・単調に変わる量](../thinking/invariant.md)（練習） |
-| 典型90 082. Counting Numbers（★3） | — | [逆元と mod での割り算](../math/mod-inverse.md)（例題） |
-| 典型90 083. Colorful Graph（★6） | — | [次数による平方分割](../graph/degree-sqrt.md)（例題） |
-| 典型90 084. There are two types of characters（★3） | — | [ランレングス圧縮](../basics/run-length-encoding.md)（練習） |
-| 典型90 085. Multiplication 085（★4） | — | [約数の個数の上界と高度合成数](../math/divisor-count-bound.md)（練習） |
-| 典型90 087. Chokudai's Demand（★5） | — | [ワーシャルフロイド法](../graph/warshall-floyd.md)（練習） |
-| 典型90 089. Partitions and Inversions（★7） | — | [区間分割 DP](../dp/dp-sequence-partition.md)（練習） |
-| 典型90 090. Tenkei90's Last Problem（★7） | — | [DP の高速化の選び方](../dp/dp-speedup-overview.md)（力試し） |
+| 典型90 001. Yokan Party（★4） | — | [答えで二分探索](../basics/binary-search-answer.md#typical90_a)（例題） |
+| 典型90 002. Encyclopedia of Parentheses（★3） | — | [再帰的な構造](../basics/recursion-structure.md#practice)（練習） |
+| 典型90 003. Longest Circular Road（★4） | — | [木の直径と最遠点](../tree/tree-diameter.md#practice)（練習） |
+| 典型90 005. Restricted Digits（★7） | — | [行列累乗](../math/matrix-power.md#challenge)（力試し） |
+| 典型90 006. Smallest Subsequence（★5） | — | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md#practice)（練習）、[部分列 DP](../dp/subsequence-dp.md#practice)（練習）、[部分列の判定と次の出現位置の表](../string/subsequence-matching.md#practice)（練習） |
+| 典型90 008. AtCounter（★4） | — | [フェーズを状態に持つ DP](../dp/dp-phase.md#typical90_h)（例題） |
+| 典型90 009. Three Point Angle（★6） | — | [偏角ソート](../geometry/argument-sort.md#typical90_i)（例題） |
+| 典型90 011. Gravy Jobs（★6） | — | [並べ替えてから DP する](../dp/exchange-argument-dp.md#typical90_k)（例題） |
+| 典型90 012. Red Painting（★4） | — | [グリッドグラフ](../graph/grid-graph.md#practice)（練習）、[Union-Find](../ds/union-find.md#practice)（練習） |
+| 典型90 013. Passing（★5） | — | [ダイクストラ法](../graph/dijkstra.md#practice)（練習） |
+| 典型90 014. We Used to Sing a Song Together（★3） | — | [ソートで考える](../basics/sorting-techniques.md#practice)（練習） |
+| 典型90 015. Don't be too close（★6） | — | [重複組合せ](../comb/stars-and-bars.md#practice)（練習） |
+| 典型90 019. Pick Two（★6） | — | [区間 DP](../dp/interval-dp.md#typical90_s)（例題） |
+| 典型90 021. Come Back in One Piece（★5） | — | [強連結成分分解（SCC）](../graph/scc.md#typical90_u)（例題） |
+| 典型90 022. Cubic Cake（★2） | — | [GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md#practice)（練習） |
+| 典型90 023. Avoid War（★7） | — | [プロファイル DP](../dp/broken-profile-dp.md#practice)（練習） |
+| 典型90 024. Select +／- One（★2） | — | [偶奇に着目する](../thinking/parity.md#practice)（練習） |
+| 典型90 025. Digit Product Equation（★7） | — | [素因数の指数で考える](../math/prime-exponent-vector.md#challenge)（力試し） |
+| 典型90 026. Independent Set on a Tree（★4） | — | [木の 2 色塗り分けと距離の偶奇](../tree/tree-bipartite.md#practice)（練習） |
+| 典型90 028. Cluttered Paper（★4） | — | [いもす法](../basics/imos.md#practice)（練習） |
+| 典型90 029. Long Bricks（★5） | — | [座標圧縮](../basics/coordinate-compression.md#practice)（練習）、[遅延セグメント木](../ds/lazy-segment-tree.md#practice)（練習） |
+| 典型90 030. K Factors（★5） | — | [エラトステネスの篩](../math/sieve-eratosthenes.md#practice)（練習） |
+| 典型90 031. VS AtCoder（★6） | — | [Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md#practice)（練習） |
+| 典型90 034. There are few types of elements（★4） | — | [尺取り法](../basics/two-pointers.md#practice)（練習） |
+| 典型90 035. Preserve Connectivity（★7） | — | [Auxiliary Tree](../tree/auxiliary-tree.md#typical90_ai)（例題）、[最小共通祖先（LCA）](../tree/lca.md#practice)（練習）、[指定頂点を結ぶ最小の部分木](../tree/steiner-subtree.md#challenge)（力試し） |
+| 典型90 037. Don't Leave the Spice（★5） | — | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md#typical90_ak)（例題） |
+| 典型90 038. Large LCM（★3） | — | [整数の割り算と余り](../math/integer-division.md#practice)（練習） |
+| 典型90 039. Tree Distance（★5） | — | [辺で切って数える](../tree/tree-edge-contribution.md#typical90_am)（例題） |
+| 典型90 040. Get More Money（★7） | — | [燃やす埋める](../graph/project-selection.md#typical90_an)（例題） |
+| 典型90 041. Piles in AtCoder Farm（★7） | — | [凸包と凸多角形](../geometry/convex-hull.md#typical90_ao)（例題） |
+| 典型90 042. Multiple of 9（★4） | — | [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md#practice)（練習） |
+| 典型90 043. Maze Challenge with Lack of Sleep（★4） | — | [01-BFS](../graph/zero-one-bfs.md#practice)（練習） |
+| 典型90 044. Shift and Swapping（★3） | — | [全体への操作を変数で持つ](../ds/global-offset.md#practice)（練習） |
+| 典型90 045. Simple Grouping（★6） | — | [部分集合を列挙する DP](../dp/subset-enumeration-dp.md#practice)（練習）、[第 2 種スターリング数とベル数](../comb/bell-number.md#practice)（練習） |
+| 典型90 047. Monochromatic Diagonal（★7） | — | [ハッシュの衝突と安全な設計](../string/hash-safety.md#typical90_au)（例題）、[ローリングハッシュ](../string/rolling-hash.md#challenge)（力試し） |
+| 典型90 049. Flip Digits 2（★6） | — | [最小全域木](../graph/minimum-spanning-tree.md#practice)（練習） |
+| 典型90 051. Typical Shop（★5） | — | [半分全列挙](../basics/meet-in-the-middle.md#typical90_ay)（例題） |
+| 典型90 054. Takahashi Number（★6） | — | [状態を頂点にする](../graph/extended-dijkstra.md#practice)（練習） |
+| 典型90 055. Select 5（★2） | — | [計算量の見積もり](../basics/complexity-estimation.md#typical90_bc)（例題） |
+| 典型90 056. Lucky Bag（★5） | — | [DP の復元](../dp/dp-reconstruction.md#typical90_bd)（例題） |
+| 典型90 057. Flip Flap（★6） | — | [掃き出し法](../math/gaussian-elimination.md#typical90_be)（例題） |
+| 典型90 058. Original Calculator（★4） | — | [周期性の検出](../basics/periodicity.md#practice)（練習） |
+| 典型90 059. Many Graph Queries（★7） | — | [bitset による高速化](../misc/bitset-speedup.md#typical90_bg)（例題） |
+| 典型90 060. Chimera（★5） | — | [最長増加部分列](../dp/lis.md#typical90_bh)（例題） |
+| 典型90 063. Monochromatic Subgrid（★4） | — | [全探索の設計](../basics/brute-force.md#practice)（練習） |
+| 典型90 064. Uplift（★3） | — | [いもす法](../basics/imos.md#practice)（練習） |
+| 典型90 065. RGB Balls 2（★7） | — | [畳み込みの使い方](../math/convolution-ntt.md#practice)（練習） |
+| 典型90 066. Various Arrays（★5） | — | [期待値の線形性と指示確率変数](../comb/linearity-of-expectation.md#typical90_bn)（例題） |
+| 典型90 067. Base 8 to 9（★2） | — | [N 進法](../math/base-conversion.md#practice)（練習） |
+| 典型90 068. Paired Information（★5） | — | [重み付き Union-Find](../ds/weighted-union-find.md#practice)（練習） |
+| 典型90 069. Colorful Blocks 2（★3） | — | [和・積の法則と順列・組合せ](../comb/counting-basics.md#typical90_bq)（例題）、[繰り返し二乗法](../math/mod-pow.md#practice)（練習） |
+| 典型90 070. Plant Planning（★4） | — | [絶対値の和の最小化と中央値](../basics/median-absolute.md#practice)（練習） |
+| 典型90 071. Fuzzy Priority（★7） | — | [トポロジカルソート](../graph/topological-sort.md#challenge)（力試し） |
+| 典型90 072. Loop Railway Plan（★4） | — | [計算量の見積もり](../basics/complexity-estimation.md#practice)（練習）、[深さ優先探索（DFS）](../graph/dfs.md#practice)（練習） |
+| 典型90 073. We Need Both a and b（★5） | — | [木 DP](../dp/tree-dp.md#practice)（練習） |
+| 典型90 075. Magic For Balls（★3） | — | [約数と倍数](../patterns/divisors-and-multiples.md#practice)（練習） |
+| 典型90 076. Cake Cut（★3） | — | [累積和](../basics/prefix-sum.md#practice)（練習） |
+| 典型90 077. Planes on a 2D Plane（★7） | — | [二部マッチング](../graph/bipartite-matching.md#typical90_by)（例題） |
+| 典型90 078. Easy Graph Problem（★2） | — | [グラフの表現と用語](../graph/graph-basics.md#typical90_bz)（例題） |
+| 典型90 079. Two by Two（★3） | — | [不変量・単調に変わる量](../thinking/invariant.md#practice)（練習） |
+| 典型90 082. Counting Numbers（★3） | — | [逆元と mod での割り算](../math/mod-inverse.md#typical90_cd)（例題） |
+| 典型90 083. Colorful Graph（★6） | — | [次数による平方分割](../graph/degree-sqrt.md#typical90_ce)（例題） |
+| 典型90 084. There are two types of characters（★3） | — | [ランレングス圧縮](../basics/run-length-encoding.md#practice)（練習） |
+| 典型90 085. Multiplication 085（★4） | — | [約数の個数の上界と高度合成数](../math/divisor-count-bound.md#practice)（練習） |
+| 典型90 087. Chokudai's Demand（★5） | — | [ワーシャルフロイド法](../graph/warshall-floyd.md#practice)（練習） |
+| 典型90 089. Partitions and Inversions（★7） | — | [区間分割 DP](../dp/dp-sequence-partition.md#practice)（練習） |
+| 典型90 090. Tenkei90's Last Problem（★7） | — | [DP の高速化の選び方](../dp/dp-speedup-overview.md#challenge)（力試し） |
 
 ### EDPC（Educational DP Contest） {#problem-sets-dp}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| EDPC A. Frog 1 | — | [DP の基本](../dp/dp-basics.md)（例題） |
-| EDPC B. Frog 2 | — | [DP の基本](../dp/dp-basics.md)（練習） |
-| EDPC C. Vacation | — | [DP の状態の設計](../dp/dp-state-design.md)（例題） |
-| EDPC D. Knapsack 1 | — | [ナップサック DP](../dp/knapsack-01.md)（例題） |
-| EDPC E. Knapsack 2 | — | [DP の状態の削減](../dp/dp-dimension-reduction.md)（例題） |
-| EDPC F. LCS | — | [DP の復元](../dp/dp-reconstruction.md)（練習）、[最長共通部分列と編集距離](../dp/lcs.md)（例題） |
-| EDPC G. Longest Path | — | [メモ化再帰](../dp/memoized-recursion.md)（練習）、[DAG 上の DP](../dp/dp-dag.md)（例題） |
-| EDPC H. Grid 1 | — | [グリッド上の DP](../dp/dp-grid.md)（例題） |
-| EDPC I. Coins | — | [確率 DP](../comb/probability-dp.md)（例題） |
-| EDPC J. Sushi | — | [期待値 DP](../comb/expected-value-dp.md)（例題） |
-| EDPC K. Stones | — | [ゲームの基本と勝敗の DP](../comb/game-basics.md)（例題） |
-| EDPC L. Deque | — | [区間 DP](../dp/interval-dp.md)（練習）、[ミニマックス](../comb/minimax.md)（例題） |
-| EDPC M. Candies | — | [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md)（例題） |
-| EDPC N. Slimes | — | [区間 DP](../dp/interval-dp.md)（例題） |
-| EDPC O. Matching | — | [bitDP](../dp/bit-dp.md)（例題） |
-| EDPC P. Independent Set | — | [木 DP](../dp/tree-dp.md)（例題） |
-| EDPC Q. Flowers | — | [最長増加部分列](../dp/lis.md)（練習）、[セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md)（例題） |
-| EDPC R. Walk | — | [行列累乗](../math/matrix-power.md)（例題） |
-| EDPC S. Digit Sum | — | [桁 DP](../dp/digit-dp.md)（例題） |
-| EDPC T. Permutation | — | [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md)（例題） |
-| EDPC U. Grouping | — | [部分集合を列挙する DP](../dp/subset-enumeration-dp.md)（例題）、[第 2 種スターリング数とベル数](../comb/bell-number.md)（練習） |
-| EDPC V. Subtree | — | [全方位木 DP](../dp/rerooting.md)（例題） |
-| EDPC W. Intervals | — | [インライン DP](../dp/inline-dp.md)（例題） |
-| EDPC X. Tower | — | [並べ替えてから DP する](../dp/exchange-argument-dp.md)（例題） |
-| EDPC Y. Grid 2 | — | [包除 DP](../comb/inclusion-exclusion-dp.md)（例題） |
-| EDPC Z. Frog 3 | — | [Convex Hull Trick と Li Chao Tree](../dp/cht.md)（例題） |
+| EDPC A. Frog 1 | — | [DP の基本](../dp/dp-basics.md#dp_a)（例題） |
+| EDPC B. Frog 2 | — | [DP の基本](../dp/dp-basics.md#practice)（練習） |
+| EDPC C. Vacation | — | [DP の状態の設計](../dp/dp-state-design.md#dp_c)（例題） |
+| EDPC D. Knapsack 1 | — | [ナップサック DP](../dp/knapsack-01.md#dp_d)（例題） |
+| EDPC E. Knapsack 2 | — | [DP の状態の削減](../dp/dp-dimension-reduction.md#dp_e)（例題） |
+| EDPC F. LCS | — | [最長共通部分列と編集距離](../dp/lcs.md#dp_f)（例題）、[DP の復元](../dp/dp-reconstruction.md#practice)（練習） |
+| EDPC G. Longest Path | — | [DAG 上の DP](../dp/dp-dag.md#dp_g)（例題）、[メモ化再帰](../dp/memoized-recursion.md#practice)（練習） |
+| EDPC H. Grid 1 | — | [グリッド上の DP](../dp/dp-grid.md#dp_h)（例題） |
+| EDPC I. Coins | — | [確率 DP](../comb/probability-dp.md#dp_i)（例題） |
+| EDPC J. Sushi | — | [期待値 DP](../comb/expected-value-dp.md#dp_j)（例題） |
+| EDPC K. Stones | — | [ゲームの基本と勝敗の DP](../comb/game-basics.md#dp_k)（例題） |
+| EDPC L. Deque | — | [ミニマックス](../comb/minimax.md#dp_l)（例題）、[区間 DP](../dp/interval-dp.md#practice)（練習） |
+| EDPC M. Candies | — | [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md#dp_m)（例題） |
+| EDPC N. Slimes | — | [区間 DP](../dp/interval-dp.md#dp_n)（例題） |
+| EDPC O. Matching | — | [bitDP](../dp/bit-dp.md#dp_o)（例題） |
+| EDPC P. Independent Set | — | [木 DP](../dp/tree-dp.md#dp_p)（例題） |
+| EDPC Q. Flowers | — | [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md#dp_q)（例題）、[最長増加部分列](../dp/lis.md#practice)（練習） |
+| EDPC R. Walk | — | [行列累乗](../math/matrix-power.md#dp_r)（例題） |
+| EDPC S. Digit Sum | — | [桁 DP](../dp/digit-dp.md#dp_s)（例題） |
+| EDPC T. Permutation | — | [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md#dp_t)（例題） |
+| EDPC U. Grouping | — | [部分集合を列挙する DP](../dp/subset-enumeration-dp.md#dp_u)（例題）、[第 2 種スターリング数とベル数](../comb/bell-number.md#practice)（練習） |
+| EDPC V. Subtree | — | [全方位木 DP](../dp/rerooting.md#dp_v)（例題） |
+| EDPC W. Intervals | — | [インライン DP](../dp/inline-dp.md#dp_w)（例題） |
+| EDPC X. Tower | — | [並べ替えてから DP する](../dp/exchange-argument-dp.md#dp_x)（例題） |
+| EDPC Y. Grid 2 | — | [包除 DP](../comb/inclusion-exclusion-dp.md#dp_y)（例題） |
+| EDPC Z. Frog 3 | — | [Convex Hull Trick と Li Chao Tree](../dp/cht.md#dp_z)（例題） |
 
 ### TDPC（Typical DP Contest） {#problem-sets-tdpc}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| TDPC A. コンテスト | — | [部分和 DP](../dp/subset-sum.md)（例題） |
-| TDPC B. ゲーム | — | [ミニマックス](../comb/minimax.md)（練習） |
-| TDPC D. サイコロ | — | [確率 DP](../comb/probability-dp.md)（練習） |
-| TDPC F. 準急 | — | [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md)（練習） |
-| TDPC G. 辞書順 | — | [部分列 DP](../dp/subsequence-dp.md)（力試し） |
-| TDPC I. イウィ | — | [区間 DP](../dp/interval-dp.md)（練習） |
-| TDPC J. ボール | — | [期待値 DP](../comb/expected-value-dp.md)（力試し） |
-| TDPC K. ターゲット | — | [最長増加部分列](../dp/lis.md)（力試し）、[インライン DP](../dp/inline-dp.md)（練習） |
-| TDPC N. 木 | — | [全方位木 DP](../dp/rerooting.md)（練習） |
-| TDPC O. 文字列 | — | [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md)（練習） |
-| TDPC P. うなぎ | — | [二乗の木 DP](../dp/tree-dp-square.md)（練習） |
-| TDPC S. マス目 | — | [プロファイル DP](../dp/broken-profile-dp.md)（力試し） |
-| TDPC T. フィボナッチ | — | [線形漸化式の高速化](../math/linear-recurrence-fast.md)（例題） |
+| TDPC A. コンテスト | — | [部分和 DP](../dp/subset-sum.md#tdpc_contest)（例題） |
+| TDPC B. ゲーム | — | [ミニマックス](../comb/minimax.md#practice)（練習） |
+| TDPC D. サイコロ | — | [確率 DP](../comb/probability-dp.md#practice)（練習） |
+| TDPC F. 準急 | — | [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md#practice)（練習） |
+| TDPC G. 辞書順 | — | [部分列 DP](../dp/subsequence-dp.md#challenge)（力試し） |
+| TDPC I. イウィ | — | [区間 DP](../dp/interval-dp.md#practice)（練習） |
+| TDPC J. ボール | — | [期待値 DP](../comb/expected-value-dp.md#challenge)（力試し） |
+| TDPC K. ターゲット | — | [インライン DP](../dp/inline-dp.md#practice)（練習）、[最長増加部分列](../dp/lis.md#challenge)（力試し） |
+| TDPC N. 木 | — | [全方位木 DP](../dp/rerooting.md#practice)（練習） |
+| TDPC O. 文字列 | — | [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md#practice)（練習） |
+| TDPC P. うなぎ | — | [二乗の木 DP](../dp/tree-dp-square.md#practice)（練習） |
+| TDPC S. マス目 | — | [プロファイル DP](../dp/broken-profile-dp.md#challenge)（力試し） |
+| TDPC T. フィボナッチ | — | [線形漸化式の高速化](../math/linear-recurrence-fast.md#tdpc_fibonacci)（例題） |
 
 ### ACL Practice（AtCoder Library Practice Contest） {#problem-sets-practice2}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| PRACTICE2 A. Disjoint Set Union | — | [Union-Find](../ds/union-find.md)（練習） |
-| PRACTICE2 B. Fenwick Tree | — | [BIT（Fenwick Tree）](../ds/fenwick-tree.md)（例題） |
-| PRACTICE2 C. Floor Sum | — | [floor sum](../math/floor-sum.md)（例題） |
-| PRACTICE2 D. Maxflow | — | [最大流](../graph/max-flow.md)（例題） |
-| PRACTICE2 E. MinCostFlow | — | [最小費用流](../graph/min-cost-flow.md)（例題） |
-| PRACTICE2 F. Convolution | — | [畳み込みの使い方](../math/convolution-ntt.md)（例題） |
-| PRACTICE2 G. SCC | — | [強連結成分分解（SCC）](../graph/scc.md)（例題） |
-| PRACTICE2 H. Two SAT | — | [2-SAT](../graph/two-sat.md)（例題） |
-| PRACTICE2 I. Number of Substrings | — | [Suffix Array と LCP 配列](../string/suffix-array.md)（例題） |
-| PRACTICE2 J. Segment Tree | — | [セグメント木上の二分探索](../ds/segment-tree-binary-search.md)（例題） |
-| PRACTICE2 K. Range Affine Range Sum | — | [遅延セグメント木](../ds/lazy-segment-tree.md)（例題） |
-| PRACTICE2 L. Lazy Segment Tree | — | [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md)（練習） |
+| PRACTICE2 A. Disjoint Set Union | — | [Union-Find](../ds/union-find.md#practice)（練習） |
+| PRACTICE2 B. Fenwick Tree | — | [BIT（Fenwick Tree）](../ds/fenwick-tree.md#practice2_b)（例題） |
+| PRACTICE2 C. Floor Sum | — | [floor sum](../math/floor-sum.md#practice2_c)（例題） |
+| PRACTICE2 D. Maxflow | — | [最大流](../graph/max-flow.md#practice2_d)（例題） |
+| PRACTICE2 E. MinCostFlow | — | [最小費用流](../graph/min-cost-flow.md#practice2_e)（例題） |
+| PRACTICE2 F. Convolution | — | [畳み込みの使い方](../math/convolution-ntt.md#practice2_f)（例題） |
+| PRACTICE2 G. SCC | — | [強連結成分分解（SCC）](../graph/scc.md#practice2_g)（例題） |
+| PRACTICE2 H. Two SAT | — | [2-SAT](../graph/two-sat.md#practice2_h)（例題） |
+| PRACTICE2 I. Number of Substrings | — | [Suffix Array と LCP 配列](../string/suffix-array.md#practice2_i)（例題） |
+| PRACTICE2 J. Segment Tree | — | [セグメント木上の二分探索](../ds/segment-tree-binary-search.md#practice2_j)（例題） |
+| PRACTICE2 K. Range Affine Range Sum | — | [遅延セグメント木](../ds/lazy-segment-tree.md#practice2_k)（例題） |
+| PRACTICE2 L. Lazy Segment Tree | — | [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md#practice)（練習） |
 
 ### 鉄則本（競技プログラミングの鉄則 演習問題集） {#problem-sets-tessoku-book}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| 鉄則本 A30. Combination | — | [二項係数の前計算](../comb/binomial-precompute.md)（例題） |
-| 鉄則本 A33. Game 2 | — | [Nim と XOR](../comb/nim.md)（例題） |
-| 鉄則本 A34. Game 3 | — | [Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md)（例題） |
-| 鉄則本 A35. Game 4 | — | [ミニマックス](../comb/minimax.md)（練習） |
-| 鉄則本 A54. Map | — | [STL コンテナの使い分け](../ds/stl-containers.md)（練習） |
-| 鉄則本 A55. Set | — | [STL コンテナの使い分け](../ds/stl-containers.md)（練習） |
-| 鉄則本 A58. RMQ (Range Maximum Queries) | — | [セグメント木](../ds/segment-tree.md)（練習） |
-| 鉄則本 A60. Stock Price | — | [単調スタックとスライド最小値](../ds/monotonic-stack.md)（練習） |
-| 鉄則本 A68. Maximum Flow | — | [最大流](../graph/max-flow.md)（練習） |
-| 鉄則本 A69. Bipartite Matching | — | [二部マッチング](../graph/bipartite-matching.md)（練習） |
-| 鉄則本 B68. ALGO Express | — | [燃やす埋める](../graph/project-selection.md)（練習） |
+| 鉄則本 A30. Combination | — | [二項係数の前計算](../comb/binomial-precompute.md#tessoku_book_ad)（例題） |
+| 鉄則本 A33. Game 2 | — | [Nim と XOR](../comb/nim.md#tessoku_book_ag)（例題） |
+| 鉄則本 A34. Game 3 | — | [Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md#tessoku_book_ah)（例題） |
+| 鉄則本 A35. Game 4 | — | [ミニマックス](../comb/minimax.md#practice)（練習） |
+| 鉄則本 A54. Map | — | [STL コンテナの使い分け](../ds/stl-containers.md#practice)（練習） |
+| 鉄則本 A55. Set | — | [STL コンテナの使い分け](../ds/stl-containers.md#practice)（練習） |
+| 鉄則本 A58. RMQ (Range Maximum Queries) | — | [セグメント木](../ds/segment-tree.md#practice)（練習） |
+| 鉄則本 A60. Stock Price | — | [単調スタックとスライド最小値](../ds/monotonic-stack.md#practice)（練習） |
+| 鉄則本 A68. Maximum Flow | — | [最大流](../graph/max-flow.md#practice)（練習） |
+| 鉄則本 A69. Bipartite Matching | — | [二部マッチング](../graph/bipartite-matching.md#practice)（練習） |
+| 鉄則本 B68. ALGO Express | — | [燃やす埋める](../graph/project-selection.md#practice)（練習） |
 
 ### アルゴ数学（アルゴリズムと数学 演習問題集） {#problem-sets-math-and-algorithm}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| アルゴ数学 026. Coin Gacha | — | [幾何分布とコンプリートガチャ](../comb/coupon-collector.md)（練習） |
-| アルゴ数学 053. Sum of 4^N | — | [逆元と mod での割り算](../math/mod-inverse.md)（練習）、[等比数列の和を mod で求める](../math/geometric-series-mod.md)（練習） |
-| アルゴ数学 057. Domino Tiling | — | [行列累乗](../math/matrix-power.md)（練習） |
-| アルゴ数学 097. Primes in an Interval | — | [区間篩](../math/segmented-sieve.md)（練習） |
+| アルゴ数学 026. Coin Gacha | — | [幾何分布とコンプリートガチャ](../comb/coupon-collector.md#practice)（練習） |
+| アルゴ数学 053. Sum of 4^N | — | [逆元と mod での割り算](../math/mod-inverse.md#practice)（練習）、[等比数列の和を mod で求める](../math/geometric-series-mod.md#practice)（練習） |
+| アルゴ数学 057. Domino Tiling | — | [行列累乗](../math/matrix-power.md#practice)（練習） |
+| アルゴ数学 097. Primes in an Interval | — | [区間篩](../math/segmented-sieve.md#practice)（練習） |
 
 ### NYC2015 {#problem-sets-NYC2015}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| NYC2015 E. ひも | — | [ラベル付き木の数え上げ](../comb/cayley-pruefer.md)（練習） |
+| NYC2015 E. ひも | — | [ラベル付き木の数え上げ](../comb/cayley-pruefer.md#practice)（練習） |
 
 ### ABL {#problem-sets-abl}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| ABL D. Flat Subsequence | 1283 | [値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md)（練習） |
-| ABL E. Replace Digits | 1706 | [遅延セグメント木](../ds/lazy-segment-tree.md)（練習） |
+| ABL D. Flat Subsequence | 1283 | [値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md#practice)（練習） |
+| ABL E. Replace Digits | 1706 | [遅延セグメント木](../ds/lazy-segment-tree.md#practice)（練習） |
 
 ### ACL1 {#problem-sets-acl1}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| ACL1 B. Sum is Multiple | 1785 | [約数の個数の上界と高度合成数](../math/divisor-count-bound.md)（練習）、[拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md)（力試し）、[中国剰余定理](../math/crt.md)（例題） |
+| ACL1 B. Sum is Multiple | 1785 | [中国剰余定理](../math/crt.md#acl1_b)（例題）、[約数の個数の上界と高度合成数](../math/divisor-count-bound.md#practice)（練習）、[拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md#challenge)（力試し） |
 
 ### BITFLYER2018-FINAL {#problem-sets-bitflyer2018-final}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| BITFLYER2018-FINAL D. 数列 XOR | — | [掃き出し法](../math/gaussian-elimination.md)（練習） |
+| BITFLYER2018-FINAL D. 数列 XOR | — | [掃き出し法](../math/gaussian-elimination.md#practice)（練習） |
 
 ### CHOKUDAI_S001 {#problem-sets-chokudai_S001}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| CHOKUDAI_S001 J. 転倒数 | — | [分割統治](../basics/divide-and-conquer.md)（練習）、[転倒数](../ds/inversion-number.md)（例題） |
+| CHOKUDAI_S001 J. 転倒数 | — | [転倒数](../ds/inversion-number.md#chokudai_S001_j)（例題）、[分割統治](../basics/divide-and-conquer.md#practice)（練習） |
 
 ### CODE-FESTIVAL-2017-QUALB {#problem-sets-code-festival-2017-qualb}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| CODE-FESTIVAL-2017-QUALB C. 3 Steps | 1883 | [二部グラフ判定](../graph/bipartite-graph.md)（力試し） |
+| CODE-FESTIVAL-2017-QUALB C. 3 Steps | 1883 | [二部グラフ判定](../graph/bipartite-graph.md#challenge)（力試し） |
 
 ### CODE-THANKS-FESTIVAL-2017 {#problem-sets-code-thanks-festival-2017}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| CODE-THANKS-FESTIVAL-2017 F. Limited Xor Subset | — | [掃き出し法](../math/gaussian-elimination.md)（練習） |
-| CODE-THANKS-FESTIVAL-2017 H. Union Sets | — | [部分永続 Union-Find](../ds/partially-persistent-union-find.md)（例題）、[並列二分探索](../ds/parallel-binary-search.md)（練習） |
+| CODE-THANKS-FESTIVAL-2017 F. Limited Xor Subset | — | [掃き出し法](../math/gaussian-elimination.md#practice)（練習） |
+| CODE-THANKS-FESTIVAL-2017 H. Union Sets | — | [部分永続 Union-Find](../ds/partially-persistent-union-find.md#code_thanks_festival_2017_h)（例題）、[並列二分探索](../ds/parallel-binary-search.md#practice)（練習） |
 
 ### DDCC2016-QUAL {#problem-sets-ddcc2016-qual}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| DDCC2016-QUAL D. 道路網 | — | [重心分解](../tree/centroid-decomposition.md)（力試し） |
+| DDCC2016-QUAL D. 道路網 | — | [重心分解](../tree/centroid-decomposition.md#challenge)（力試し） |
 
 ### DIVERTA2019 {#problem-sets-diverta2019}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| DIVERTA2019 D. DivRem Number | 1098 | [約数列挙と素数判定](../math/divisor-enum.md)（練習） |
+| DIVERTA2019 D. DivRem Number | 1098 | [約数列挙と素数判定](../math/divisor-enum.md#practice)（練習） |
 
 ### DONUTS-2015 {#problem-sets-donuts-2015}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| DONUTS-2015 C. 行列のできるドーナツ屋 | 1661 | [単調スタックとスライド最小値](../ds/monotonic-stack.md)（練習） |
+| DONUTS-2015 C. 行列のできるドーナツ屋 | 1661 | [単調スタックとスライド最小値](../ds/monotonic-stack.md#practice)（練習） |
 
 ### DWACON2018-PRELIMS {#problem-sets-dwacon2018-prelims}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| DWACON2018-PRELIMS C. Kill/Death | — | [整数の分割と分割数](../comb/partition-number.md)（練習） |
-| DWACON2018-PRELIMS E. ニワンゴくんの家探し | — | [木の重心](../tree/tree-centroid.md)（練習） |
+| DWACON2018-PRELIMS C. Kill/Death | — | [整数の分割と分割数](../comb/partition-number.md#practice)（練習） |
+| DWACON2018-PRELIMS E. ニワンゴくんの家探し | — | [木の重心](../tree/tree-centroid.md#practice)（練習） |
 
 ### EXAWIZARDS2019 {#problem-sets-exawizards2019}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| EXAWIZARDS2019 D. Modulo Operations | 2075 | [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md)（練習） |
+| EXAWIZARDS2019 D. Modulo Operations | 2075 | [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md#practice)（練習） |
 
 ### HHKB2020 {#problem-sets-hhkb2020}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| HHKB2020 C. Neq Min | 352 | [計算量の見積もり](../basics/complexity-estimation.md)（練習） |
-| HHKB2020 F. Random Max | 2691 | [期待値と確率の変換](../comb/expectation-tail-sum.md)（力試し） |
+| HHKB2020 C. Neq Min | 352 | [計算量の見積もり](../basics/complexity-estimation.md#practice)（練習） |
+| HHKB2020 F. Random Max | 2691 | [期待値と確率の変換](../comb/expectation-tail-sum.md#challenge)（力試し） |
 
 ### JAG2013SUMMER-DAY4 {#problem-sets-jag2013summer-day4}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| JAG2013SUMMER-DAY4 F. Graph Automata Player | — | [掃き出し法](../math/gaussian-elimination.md)（練習） |
+| JAG2013SUMMER-DAY4 F. Graph Automata Player | — | [掃き出し法](../math/gaussian-elimination.md#practice)（練習） |
 
 ### JOI2020YO2 {#problem-sets-joi2020yo2}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| JOI2020YO2 E. じゃんけん式 (Rock-Scissors-Paper Expression) | — | [構文解析](../misc/parsing.md)（練習） |
+| JOI2020YO2 E. じゃんけん式 (Rock-Scissors-Paper Expression) | — | [構文解析](../misc/parsing.md#practice)（練習） |
 
 ### KEYENCE2019 {#problem-sets-keyence2019}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| KEYENCE2019 E. Connecting Cities | 2623 | [分割統治](../basics/divide-and-conquer.md)（力試し）、[特殊な最小全域木](../graph/spanning-tree-advanced.md)（練習）、[重心分解](../tree/centroid-decomposition.md)（力試し） |
+| KEYENCE2019 E. Connecting Cities | 2623 | [特殊な最小全域木](../graph/spanning-tree-advanced.md#practice)（練習）、[分割統治](../basics/divide-and-conquer.md#challenge)（力試し）、[重心分解](../tree/centroid-decomposition.md#challenge)（力試し） |
 
 ### KEYENCE2020 {#problem-sets-keyence2020}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| KEYENCE2020 C. Subarray Sum | 625 | [構築問題の考え方](../thinking/construction.md)（練習） |
+| KEYENCE2020 C. Subarray Sum | 625 | [構築問題の考え方](../thinking/construction.md#practice)（練習） |
 
 ### NIKKEI2019-FINAL {#problem-sets-nikkei2019-final}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| NIKKEI2019-FINAL G. Greatest Journey | — | [重心分解](../tree/centroid-decomposition.md)（力試し） |
+| NIKKEI2019-FINAL G. Greatest Journey | — | [重心分解](../tree/centroid-decomposition.md#challenge)（力試し） |
 
 ### PANASONIC2020 {#problem-sets-panasonic2020}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| PANASONIC2020 C. Sqrt Inequality | 701 | [整数の平方根・K 乗根と累乗数](../math/integer-root.md)（練習） |
+| PANASONIC2020 C. Sqrt Inequality | 701 | [整数の平方根・K 乗根と累乗数](../math/integer-root.md#practice)（練習） |
 
 ### PRACTICE {#problem-sets-practice}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| PRACTICE B. Interactive Sorting | — | [インタラクティブ問題](../misc/interactive.md)（練習） |
+| PRACTICE B. Interactive Sorting | — | [インタラクティブ問題](../misc/interactive.md#practice)（練習） |
 
 ### SOUNDHOUND2018-SUMMER-QUAL {#problem-sets-soundhound2018-summer-qual}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| SOUNDHOUND2018-SUMMER-QUAL D. Saving Snuuk | 1637 | [ダイクストラ法](../graph/dijkstra.md)（力試し） |
+| SOUNDHOUND2018-SUMMER-QUAL D. Saving Snuuk | 1637 | [ダイクストラ法](../graph/dijkstra.md#challenge)（力試し） |
 
 ### SUMITRUST2019 {#problem-sets-sumitrust2019}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| SUMITRUST2019 D. Lucky PIN | 838 | [全探索の設計](../basics/brute-force.md)（練習） |
+| SUMITRUST2019 D. Lucky PIN | 838 | [全探索の設計](../basics/brute-force.md#practice)（練習） |
 
 ### YAHOO-PROCON2018-FINAL {#problem-sets-yahoo-procon2018-final}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| YAHOO-PROCON2018-FINAL A. Uncommon | — | [約数・倍数のゼータ変換とメビウス変換](../comb/zeta-mobius-divisor.md)（練習） |
-| YAHOO-PROCON2018-FINAL C. 木の問題 | — | [重心分解](../tree/centroid-decomposition.md)（練習） |
+| YAHOO-PROCON2018-FINAL A. Uncommon | — | [約数・倍数のゼータ変換とメビウス変換](../comb/zeta-mobius-divisor.md#practice)（練習） |
+| YAHOO-PROCON2018-FINAL C. 木の問題 | — | [重心分解](../tree/centroid-decomposition.md#practice)（練習） |
 
 ### YAHOO-PROCON2019-QUAL {#problem-sets-yahoo-procon2019-qual}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| YAHOO-PROCON2019-QUAL D. Ears | 1998 | [フェーズを状態に持つ DP](../dp/dp-phase.md)（練習） |
-| YAHOO-PROCON2019-QUAL E. Odd Subrectangles | 2585 | [掃き出し法](../math/gaussian-elimination.md)（力試し） |
+| YAHOO-PROCON2019-QUAL D. Ears | 1998 | [フェーズを状態に持つ DP](../dp/dp-phase.md#practice)（練習） |
+| YAHOO-PROCON2019-QUAL E. Odd Subrectangles | 2585 | [掃き出し法](../math/gaussian-elimination.md#challenge)（力試し） |
 
 ### ZONE2021 {#problem-sets-zone2021}
 
 | 問題 | diff | ページ（役割） |
 | --- | --- | --- |
-| ZONE2021 E. Sneaking | 1624 | [状態を頂点にする](../graph/extended-dijkstra.md)（練習） |
-| ZONE2021 F. Encounter and Farewell | 2197 | [XOR 基底](../math/xor-basis.md)（練習） |
+| ZONE2021 E. Sneaking | 1624 | [状態を頂点にする](../graph/extended-dijkstra.md#practice)（練習） |
+| ZONE2021 F. Encounter and Farewell | 2197 | [XOR 基底](../math/xor-basis.md#practice)（練習） |
 
 <!-- textlint-enable -->
 <!-- gen:end problem-sets -->

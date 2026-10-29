@@ -1,0 +1,1410 @@
+---
+id: problem-index
+title: 問題番号の索引
+aliases: [問題番号から引く, 問題 ID から引く, 過去問の索引]
+type: guide
+field: guide
+chapter: 辞書として引く
+order: 35
+level: null
+kind: [案内]
+prerequisites: []
+related: [problem-sets#recent-abc, problem-sets#sets-to-pages, reverse-index-signs, reverse-index-constraints, term-index, how-to-use#lookup]
+summary: 本文の例題・練習・力試しに載せた問題を、ABC・ARC・AGC・問題集などに分けて回の順に並べ、問題番号から載せたページと役割を引ける。全ページの問題の一覧から生成する。
+complexity: null
+signs: []
+acl: []
+sections:
+  - {title: 引き方, anchor: how-to-read}
+  - {title: ABC, anchor: abc}
+  - {title: ARC, anchor: arc}
+  - {title: AGC, anchor: agc}
+  - {title: 問題集, anchor: sets}
+  - {title: そのほかのコンテスト, anchor: others}
+stage: draft
+updated: 2026-10-29
+---
+
+!!! abstract "要点"
+    - **何のページか**：本文の例題・練習・力試しに載せた問題を、ABC・ARC・AGC・問題集・そのほかのコンテストに分けて回の順に並べ、問題番号から載せたページと役割を引ける。全ページの問題の一覧から生成する。
+    - **使い方**：ABC の問題は[ABC](#abc)の節の最初の行で回の範囲を選んで探す。ほかは[ARC](#arc)・[AGC](#agc)・[問題集](#sets)・[そのほかのコンテスト](#others)の節にある。ブラウザのページ内検索で「ABC174 E」のように打っても探せる。
+    - **ほかの入口**：載っていない問題は、問題文の言い回しから[逆引き辞典（言い回しから）](reverse-index-signs.md)、制約から[逆引き辞典（制約・計算量から）](reverse-index-constraints.md)で手法を引く。最近の ABC の D〜G は[最近の ABC → ページ](problem-sets.md#recent-abc)の表でも引ける。
+
+<!-- textlint-disable -->
+別名：問題番号から引く・問題 ID から引く・過去問の索引
+<!-- textlint-enable -->
+
+問題番号の索引は、各ページの例題・練習・力試しの一覧に載せた問題を 1 問 1 行に並べ、その問題を載せたページへつないだものである。解けなかった問題がこの教材に載っていれば、問題番号からそのページへ直接行ける。行はすべて各ページの問題の一覧から自動で作るので、ページや問題が増えると索引も増える。
+
+## 引き方 {#how-to-read}
+
+行は「問題の表示名 → ページ（役割）」の形をとる。
+
+- **表示名**：各ページの問題の一覧と同じ「ABC174 E. Logs」の形（コンテストの略称と回、問題の記号、題名）である。問題文へのリンクは、行き先のページの問題の一覧にある。
+- **役割**：そのページでの扱いである。例題は方針と解法の詳細があり、練習・力試しは問題の一覧に載せただけである。1 つの問題を複数のページに載せたときは、例題として載せたページを先に並べるので、左のページから読むとよい。
+- **行き先**：例題なら例題の小見出しへ、練習・力試しならその問題の一覧の節へ跳ぶ。
+
+並びは次のとおりである。
+
+- **ABC・ARC・AGC**：回の順で、同じ回の中は問題の記号の順に並ぶ。ABC は回の 50 ごとに小見出しを分けてあり、節の最初の行から跳べる。
+- **問題集**：典型90問・EDPC などの問題集ごとに小見出しを分け、中は問題の番号の順に並ぶ。
+- **そのほかのコンテスト**：企業の名前の付いたコンテストなど、上のどれでもないコンテストの問題を、コンテストの名前の順に並べる。
+
+探している問題がないときは、次の順に確かめる。
+
+- **最近の ABC**：[最近の ABC → ページ](problem-sets.md#recent-abc)の表は、最近の ABC の D〜G を、本文に載せていない問題も含めて使う手法のページに対応させている。表にある回は、その回を含む ABC の小見出しの最初にも書いてある。
+- **この教材に載っていない問題**：ABC の多くの問題はどのページにも載っていない。問題文の言い回しや求めるものからは[逆引き辞典（言い回しから）](reverse-index-signs.md)、制約の数字からは[逆引き辞典（制約・計算量から）](reverse-index-constraints.md)で手法を引く。解説を読んで手法の名前が分かったときは、[用語の索引](term-index.md)で引く。
+
+問題集の問題は、[問題集の問題 → ページ](problem-sets.md#sets-to-pages)にも問題集ごとの表がある。そちらの表には difficulty の列があり、問題集の中身とレベルの目安の説明と並べて見られる。
+
+## ABC {#abc}
+
+<!-- gen:begin problem-index-abc -->
+<!-- textlint-disable -->
+
+[001〜049](#abc-001)・[050〜099](#abc-050)・[100〜149](#abc-100)・[150〜199](#abc-150)・[200〜249](#abc-200)・[250〜299](#abc-250)・[300〜349](#abc-300)・[350〜399](#abc-350)・[400〜449](#abc-400)・[450〜480](#abc-450)
+
+### ABC001〜ABC049 {#abc-001}
+
+- ABC006 D. トランプ挿入ソート → [最長増加部分列](../dp/lis.md#practice)（練習）
+- ABC007 C. 幅優先探索 → [幅優先探索（BFS）と無重み最短路](../graph/bfs.md#abc007_3)（例題）
+- ABC008 C. コイン → [確率の基本](../comb/probability-basics.md#challenge)（力試し）
+- ABC009 C. 辞書式順序ふたたび → [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md#challenge)（力試し）
+- ABC009 D. 漸化式 → [行列累乗](../math/matrix-power.md#practice)（練習）
+- ABC010 D. 浮気予防 → [最小カット](../graph/min-cut.md#abc010_4)（例題）
+- ABC011 D. 大ジャンプ → [格子路の数え上げ](../comb/lattice-paths.md#practice)（練習）、[確率 DP](../comb/probability-dp.md#practice)（練習）
+- ABC013 D. 阿弥陀 → [ダブリング](../basics/doubling.md#practice)（練習）
+- ABC014 D. 閉路 → [最小共通祖先（LCA）](../tree/lca.md#abc014_4)（例題）
+- ABC016 D. 一刀両断 → [ベクトルと外積](../geometry/geometry-vectors.md#practice)（練習）
+- ABC019 D. 高橋くんと木の直径 → [木の直径と最遠点](../tree/tree-diameter.md#practice)（練習）
+- ABC020 D. LCM Rush → [メビウス関数とメビウス反転](../comb/mobius-function.md#challenge)（力試し）
+- ABC021 D. 多重ループ → [重複組合せ](../comb/stars-and-bars.md#practice)（練習）
+- ABC025 C. 双子と○×ゲーム → [ミニマックス](../comb/minimax.md#practice)（練習）
+- ABC026 D. 高橋君ボール1号 → [答えで二分探索](../basics/binary-search-answer.md#practice)（練習）
+- ABC028 D. 乱数生成 → [確率の基本](../comb/probability-basics.md#practice)（練習）
+- ABC032 C. 列 → [尺取り法](../basics/two-pointers.md#practice)（練習）
+- ABC032 D. ナップサック問題 → [ナップサック DP](../dp/knapsack-01.md#challenge)（力試し）
+- ABC034 D. 食塩水 → [平均・中央値の最大化](../basics/fractional-binary-search.md#practice)（練習）
+- ABC035 D. トレジャーハント → [ダイクストラ法](../graph/dijkstra.md#challenge)（力試し）
+- ABC036 C. 座圧 → [座標圧縮](../basics/coordinate-compression.md#practice)（練習）
+- ABC040 D. 道路の老朽化対策について → [Union-Find で連結性を扱う](../graph/union-find-connectivity.md#practice)（練習）、[クエリの先読み](../ds/offline-queries.md#practice)（練習）
+- ABC042 B. Iroha Loves Strings (ABC Edition) → [文字列の基本操作と辞書順](../string/string-basics.md#abc042_b)（例題）
+- ABC048 B. Between a and b ... → [整数の割り算と余り](../math/integer-division.md#practice)（練習）
+
+### ABC050〜ABC099 {#abc-050}
+
+- ABC051 D. Candidates of No Shortest Paths → [最短路 DAG](../graph/shortest-path-dag.md#practice)（練習）
+- ABC055 B. Training Camp → [mod の計算の基本](../math/mod-arithmetic.md#practice)（練習）
+- ABC057 C. Digits in Multiplication → [約数列挙と素数判定](../math/divisor-enum.md#practice)（練習）
+- ABC057 D. Maximum Average Sets → [二項係数の意味と性質](../comb/binomial-coefficient.md#practice)（練習）
+- ABC060 B. Choose Integers → [拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md#practice)（練習）
+- ABC061 D. Score Attack → [ベルマンフォード法](../graph/bellman-ford.md#abc061_d)（例題）
+- ABC070 C. Multiple Clocks → [GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md#practice)（練習）
+- ABC070 D. Transit Tree Path → [木の上の距離](../tree/tree-distance.md#abc070_d)（例題）
+- ABC073 D. joisino's travel → [ワーシャルフロイド法](../graph/warshall-floyd.md#practice)（練習）
+- ABC075 C. Bridge → [橋・関節点・二重連結成分](../graph/lowlink.md#abc075_c)（例題）
+- ABC075 D. Axis-Parallel Rectangle → [2 次元累積和](../basics/prefix-sum-2d.md#practice)（練習）
+- ABC076 C. Dubious Document 2 → [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md#abc076_c)（例題）、[文字列の基本操作と辞書順](../string/string-basics.md#practice)（練習）
+- ABC079 D. Wall → [ワーシャルフロイド法](../graph/warshall-floyd.md#abc079_d)（例題）
+- ABC084 C. Special Trains → [時刻で変わる辺の最短路](../graph/time-dependent-dijkstra.md#practice)（練習）、[整数の割り算と余り](../math/integer-division.md#practice)（練習）
+- ABC084 D. 2017-like Number → [エラトステネスの篩](../math/sieve-eratosthenes.md#practice)（練習）
+- ABC085 C. Otoshidama → [全探索の設計](../basics/brute-force.md#abc085_c)（例題）
+- ABC085 D. Katana Thrower → [貪欲法の考え方と正当性](../basics/greedy-basics.md#abc085_d)（例題）
+- ABC088 D. Grid Repainting → [グリッドグラフ](../graph/grid-graph.md#practice)（練習）
+- ABC099 C. Strange Bank → [DP の基本](../dp/dp-basics.md#practice)（練習）
+
+### ABC100〜ABC149 {#abc-100}
+
+- ABC100 D. Patisserie ABC → [bit 全探索と順列全探索](../basics/bit-full-search.md#practice)（練習）
+- ABC103 D. Islands War → [区間スケジューリング・区間の串刺し](../basics/interval-scheduling.md#practice)（練習）
+- ABC104 D. We Love ABC → [フェーズを状態に持つ DP](../dp/dp-phase.md#practice)（練習）
+- ABC105 C. Base -2 Number → [N 進法](../math/base-conversion.md#practice)（練習）
+- ABC105 D. Candy Distribution → [言い換えの典型](../thinking/reformulation.md#abc105_d)（例題）、[累積和と連想配列で区間を数える](../basics/prefix-sum-counting.md#practice)（練習）
+- ABC106 C. To Infinity → [周期性の検出](../basics/periodicity.md#practice)（練習）
+- ABC106 D. AtCoder Express 2 → [イベントソートと平面走査の基本](../basics/event-sort.md#practice)（練習）、[平面走査](../ds/sweep-line-2d.md#practice)（練習）
+- ABC109 C. Skip → [GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md#abc109_c)（例題）
+- ABC110 C. String Transformation → [文字列の基本操作と辞書順](../string/string-basics.md#practice)（練習）
+- ABC110 D. Factorization → [対応づけ・数える対象の言い換え](../comb/counting-bijection.md#abc110_d)（例題）、[重複組合せ](../comb/stars-and-bars.md#practice)（練習）、[素因数分解とルジャンドルの公式](../math/prime-factorization.md#challenge)（力試し）
+- ABC112 C. Pyramid → [全探索の設計](../basics/brute-force.md#practice)（練習）
+- ABC112 D. Partition → [約数列挙と素数判定](../math/divisor-enum.md#abc112_d)（例題）
+- ABC113 C. ID → [座標圧縮](../basics/coordinate-compression.md#practice)（練習）
+- ABC113 D. Number of Amidakuji → [プロファイル DP](../dp/broken-profile-dp.md#abc113_d)（例題）
+- ABC114 C. 755 → [再帰による全列挙](../basics/recursive-enumeration.md#practice)（練習）
+- ABC114 D. 756 → [素因数分解とルジャンドルの公式](../math/prime-factorization.md#practice)（練習）
+- ABC115 D. Christmas → [再帰的な構造](../basics/recursion-structure.md#abc115_d)（例題）
+- ABC116 D. Various Sushi → [交換論法と比較関数の設計](../basics/exchange-argument.md#abc116_d)（例題）、[優先度付きキュー](../ds/priority-queue.md#practice)（練習）
+- ABC117 D. XXOR → [bit ごとに独立に考える](../basics/bitwise-independence.md#practice)（練習）、[桁 DP](../dp/digit-dp.md#practice)（練習）
+- ABC118 C. Monsters Battle Royale → [整数の証明の型](../math/proof-patterns.md#abc118_c)（例題）
+- ABC119 D. Lazy Faith → [二分探索](../basics/binary-search.md#challenge)（力試し）
+- ABC120 D. Decayed Bridges → [Union-Find で連結性を扱う](../graph/union-find-connectivity.md#abc120_d)（例題）、[後ろから・逆順に考える](../thinking/reverse-thinking.md#practice)（練習）
+- ABC121 C. Energy Drink Collector → [ソートで考える](../basics/sorting-techniques.md#abc121_c)（例題）
+- ABC121 D. XOR World → [bit 演算の基本と XOR の性質](../basics/bit-operations.md#practice)（練習）
+- ABC122 C. GeT AC → [累積和](../basics/prefix-sum.md#abc122_c)（例題）
+- ABC122 D. We Like AGC → [DP の状態の設計](../dp/dp-state-design.md#abc122_d)（例題）、[照合オートマトン上の DP](../string/string-automaton-dp.md#practice)（練習）
+- ABC123 D. Cake 123 → [優先度付きキュー](../ds/priority-queue.md#abc123_d)（例題）
+- ABC124 D. Handstand → [ランレングス圧縮](../basics/run-length-encoding.md#abc124_d)（例題）
+- ABC125 C. GCD on Blackboard → [累積和](../basics/prefix-sum.md#practice)（練習）、[Sparse Table](../ds/sparse-table.md#practice)（練習）、[GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md#practice)（練習）
+- ABC125 D. Flipping Signs → [不変量・単調に変わる量](../thinking/invariant.md#abc125_d)（例題）
+- ABC126 C. Dice and Coin → [確率の基本](../comb/probability-basics.md#abc126_c)（例題）
+- ABC126 D. Even Relation → [木の 2 色塗り分けと距離の偶奇](../tree/tree-bipartite.md#practice)（練習）
+- ABC126 E. 1 or 2 → [偶奇に着目する](../thinking/parity.md#abc126_e)（例題）
+- ABC126 F. XOR Matching → [構築問題の考え方](../thinking/construction.md#challenge)（力試し）
+- ABC127 E. Cell Distance → [数え上げの考え方](../comb/counting-mindset.md#abc127_e)（例題）
+- ABC127 F. Absolute Minima → [Slope Trick](../dp/slope-trick.md#practice)（練習）、[上位 K 個の和と中央値の管理](../ds/top-k-multiset.md#challenge)（力試し）
+- ABC128 C. Switches → [bit 全探索と順列全探索](../basics/bit-full-search.md#practice)（練習）、[掃き出し法](../math/gaussian-elimination.md#practice)（練習）
+- ABC128 E. Roadwork → [クエリの先読み](../ds/offline-queries.md#practice)（練習）、[イベントソートと平面走査の基本](../basics/event-sort.md#challenge)（力試し）
+- ABC128 F. Frog Jump → [調和級数と倍数の列挙](../math/harmonic-sum.md#challenge)（力試し）
+- ABC129 C. Typical Stairs → [DP の基本](../dp/dp-basics.md#practice)（練習）
+- ABC129 E. Sum Equals Xor → [bit ごとに独立に考える](../basics/bitwise-independence.md#practice)（練習）、[桁 DP](../dp/digit-dp.md#practice)（練習）
+- ABC129 F. Takahashi's Basics in Education and Learning → [等比数列の和を mod で求める](../math/geometric-series-mod.md#challenge)（力試し）
+- ABC130 D. Enough Array → [尺取り法](../basics/two-pointers.md#abc130_d)（例題）
+- ABC130 E. Common Subsequence → [最長共通部分列と編集距離](../dp/lcs.md#practice)（練習）、[重複の除き方](../comb/counting-dedup.md#practice)（練習）
+- ABC130 F. Minimum Bounding Box → [三分探索](../basics/ternary-search.md#challenge)（力試し）、[円と幾何の最適化](../geometry/circle-geometry.md#challenge)（力試し）
+- ABC131 C. Anti-Division → [余事象](../thinking/complement.md#practice)（練習）、[整数の割り算と余り](../math/integer-division.md#practice)（練習）
+- ABC131 D. Megalomania → [交換論法と比較関数の設計](../basics/exchange-argument.md#abc131_d)（例題）
+- ABC131 E. Friendships → [構築問題の考え方](../thinking/construction.md#abc131_e)（例題）
+- ABC131 F. Must Be Rectangular! → [グラフへの帰着](../graph/graph-modeling.md#practice)（練習）、[連結成分](../graph/connected-components.md#challenge)（力試し）、[Union-Find の応用](../ds/union-find-applications.md#challenge)（力試し）
+- ABC132 D. Blue and Red Balls → [二項係数の前計算](../comb/binomial-precompute.md#practice)（練習）、[重複組合せ](../comb/stars-and-bars.md#practice)（練習）
+- ABC132 E. Hopscotch Addict → [状態を頂点にする](../graph/extended-dijkstra.md#abc132_e)（例題）
+- ABC132 F. Small Products → [商の列挙](../math/floor-quotient-enum.md#challenge)（力試し）
+- ABC133 C. Remainder Minimization 2019 → [整数の証明の型](../math/proof-patterns.md#abc133_c)（例題）
+- ABC133 E. Virus Tree 2 → [順序を固定して数える](../comb/counting-fix-order.md#abc133_e)（例題）、[木 DP](../dp/tree-dp.md#practice)（練習）、[根付き木と走査順](../tree/tree-traversal.md#challenge)（力試し）、[和・積の法則と順列・組合せ](../comb/counting-basics.md#challenge)（力試し）
+- ABC133 F. Colorful Tree → [木の上のパスの判定と分解](../tree/tree-path.md#practice)（練習）、[根からのパスを DFS で持ち回る](../tree/root-path-dfs.md#challenge)（力試し）、[永続データ構造](../ds/persistent-data-structures.md#challenge)（力試し）
+- ABC134 D. Preparing Boxes → [後ろから・逆順に考える](../thinking/reverse-thinking.md#abc134_d)（例題）、[調和級数と倍数の列挙](../math/harmonic-sum.md#practice)（練習）
+- ABC134 E. Sequence Decomposing → [最長増加部分列](../dp/lis.md#abc134_e)（例題）
+- ABC134 F. Permutation Oddness → [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md#abc134_f)（例題）
+- ABC135 D. Digits Parade → [余り・個数を状態に持つ DP](../dp/dp-mod-state.md#practice)（練習）、[桁 DP](../dp/digit-dp.md#practice)（練習）
+- ABC135 F. Strings of Eternity → [KMP 法と文字列の周期](../string/kmp.md#practice)（練習）、[ローリングハッシュ](../string/rolling-hash.md#challenge)（力試し）
+- ABC136 D. Gathering Children → [ランレングス圧縮](../basics/run-length-encoding.md#practice)（練習）
+- ABC136 F. Enclosed Points → [平面走査](../ds/sweep-line-2d.md#challenge)（力試し）
+- ABC137 D. Summer Vacation → [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md#abc137_d)（例題）
+- ABC137 E. Coins Respawn → [ベルマンフォード法](../graph/bellman-ford.md#abc137_e)（例題）
+- ABC137 F. Polynomial Construction → [ラグランジュ補間とべき乗和](../math/lagrange-interpolation.md#abc137_f)（例題）
+- ABC138 D. Ki → [木の上の累積和・いもす法](../tree/tree-imos.md#practice)（練習）
+- ABC138 F. Coincidence → [桁 DP の応用](../dp/digit-dp-advanced.md#challenge)（力試し）
+- ABC139 D. ModSum → [構築問題の考え方](../thinking/construction.md#abc139_d)（例題）
+- ABC139 E. League → [DAG 上の DP](../dp/dp-dag.md#practice)（練習）
+- ABC139 F. Engines → [偏角ソート](../geometry/argument-sort.md#practice)（練習）
+- ABC140 D. Face Produces Unhappiness → [ランレングス圧縮](../basics/run-length-encoding.md#practice)（練習）、[不変量・単調に変わる量](../thinking/invariant.md#practice)（練習）
+- ABC140 E. Second Sum → [主客転倒・寄与](../thinking/contribution.md#challenge)（力試し）、[set・multiset・map の応用](../ds/ordered-set.md#challenge)（力試し）
+- ABC141 D. Powerful Discount Tickets → [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md#practice)（練習）
+- ABC141 E. Who Says a Pun? → [ローリングハッシュ](../string/rolling-hash.md#abc141_e)（例題）、[最長共通部分列と編集距離](../dp/lcs.md#practice)（練習）、[ハッシュの衝突と安全な設計](../string/hash-safety.md#practice)（練習）、[Z-algorithm](../string/z-algorithm.md#practice)（練習）
+- ABC141 F. Xor Sum 3 → [XOR 基底](../math/xor-basis.md#practice)（練習）
+- ABC142 D. Disjoint Set of Common Divisors → [素因数分解とルジャンドルの公式](../math/prime-factorization.md#practice)（練習）
+- ABC142 E. Get Everything → [bitDP](../dp/bit-dp.md#practice)（練習）
+- ABC143 D. Triangles → [二分探索](../basics/binary-search.md#abc143_d)（例題）、[畳み込みの使い方](../math/convolution-ntt.md#practice)（練習）
+- ABC143 E. Travel by Car → [ワーシャルフロイド法](../graph/warshall-floyd.md#practice)（練習）
+- ABC144 D. Water Bottle → [回転・平行移動・アフィン変換](../geometry/rotation-transform.md#practice)（練習）
+- ABC144 E. Gluttony → [答えで二分探索](../basics/binary-search-answer.md#challenge)（力試し）
+- ABC144 F. Fork in the Road → [期待値 DP](../comb/expected-value-dp.md#challenge)（力試し）
+- ABC145 C. Average Length → [bit 全探索と順列全探索](../basics/bit-full-search.md#practice)（練習）
+- ABC145 D. Knight → [格子路の数え上げ](../comb/lattice-paths.md#abc145_d)（例題）、[対応づけ・数える対象の言い換え](../comb/counting-bijection.md#practice)（練習）
+- ABC145 E. All-you-can-eat → [並べ替えてから DP する](../dp/exchange-argument-dp.md#practice)（練習）
+- ABC146 C. Buy an Integer → [答えで二分探索](../basics/binary-search-answer.md#practice)（練習）
+- ABC146 D. Coloring Edges on Tree → [根付き木と走査順](../tree/tree-traversal.md#practice)（練習）
+- ABC146 E. Rem of Sum is Num → [言い換えの典型](../thinking/reformulation.md#practice)（練習）、[累積和と連想配列で区間を数える](../basics/prefix-sum-counting.md#challenge)（力試し）
+- ABC146 F. Sugoroku → [DP の復元](../dp/dp-reconstruction.md#abc146_f)（例題）、[DP の計算順序](../dp/dp-order.md#practice)（練習）
+- ABC147 C. HonestOrUnkind2 → [bit 全探索と順列全探索](../basics/bit-full-search.md#practice)（練習）
+- ABC147 D. Xor Sum 4 → [bit ごとに独立に考える](../basics/bitwise-independence.md#abc147_d)（例題）
+- ABC147 E. Balanced Path → [DP の状態の設計](../dp/dp-state-design.md#practice)（練習）、[グリッド上の DP](../dp/dp-grid.md#practice)（練習）、[bitset による高速化](../misc/bitset-speedup.md#practice)（練習）
+- ABC148 E. Double Factorial → [素因数分解とルジャンドルの公式](../math/prime-factorization.md#practice)（練習）
+- ABC148 F. Playing Tag on Tree → [木の上の距離](../tree/tree-distance.md#practice)（練習）
+- ABC149 C. Next Prime → [約数列挙と素数判定](../math/divisor-enum.md#practice)（練習）
+- ABC149 E. Handshake → [K 番目の値](../basics/kth-value.md#challenge)（力試し）
+- ABC149 F. Surrounded Nodes → [指定頂点を結ぶ最小の部分木](../tree/steiner-subtree.md#challenge)（力試し）、[辺で切って数える](../tree/tree-edge-contribution.md#challenge)（力試し）、[期待値の線形性と指示確率変数](../comb/linearity-of-expectation.md#challenge)（力試し）
+
+### ABC150〜ABC199 {#abc-150}
+
+- ABC150 C. Count Order → [順列と置換](../patterns/permutation.md#practice)（練習）
+- ABC150 D. Semi Common Multiple → [素因数の指数で考える](../math/prime-exponent-vector.md#practice)（練習）
+- ABC150 E. Change a Little Bit → [数え上げの考え方](../comb/counting-mindset.md#practice)（練習）、[二項係数の恒等式と和の公式](../comb/binomial-identities.md#practice)（練習）
+- ABC150 F. Xor Shift → [KMP 法と文字列の周期](../string/kmp.md#abc150_f)（例題）、[ローリングハッシュ](../string/rolling-hash.md#challenge)（力試し）
+- ABC151 D. Maze Master → [幅優先探索（BFS）と無重み最短路](../graph/bfs.md#practice)（練習）
+- ABC151 E. Max-Min Sums → [主客転倒・寄与](../thinking/contribution.md#abc151_e)（例題）、[順序を固定して数える](../comb/counting-fix-order.md#practice)（練習）
+- ABC151 F. Enclose All → [円と幾何の最適化](../geometry/circle-geometry.md#abc151_f)（例題）、[三分探索](../basics/ternary-search.md#practice)（練習）
+- ABC152 E. Flatten → [素因数の指数で考える](../math/prime-exponent-vector.md#practice)（練習）、[最小素因数の篩と線形篩](../math/spf-sieve.md#challenge)（力試し）
+- ABC152 F. Tree and Constraints → [木の上のパスの判定と分解](../tree/tree-path.md#abc152_f)（例題）、[包除原理](../comb/inclusion-exclusion.md#practice)（練習）
+- ABC153 D. Caracal vs Monster → [再帰的な構造](../basics/recursion-structure.md#practice)（練習）
+- ABC153 E. Crested Ibis vs Monster → [ナップサック DP](../dp/knapsack-01.md#practice)（練習）
+- ABC153 F. Silver Fox vs Monster → [尺取り法](../basics/two-pointers.md#challenge)（力試し）
+- ABC154 D. Dice in Line → [期待値の線形性と指示確率変数](../comb/linearity-of-expectation.md#practice)（練習）
+- ABC154 E. Almost Everywhere Zero → [桁 DP](../dp/digit-dp.md#abc154_e)（例題）
+- ABC154 F. Many Many Paths → [二項係数の恒等式と和の公式](../comb/binomial-identities.md#abc154_f)（例題）、[格子路の数え上げ](../comb/lattice-paths.md#practice)（練習）
+- ABC155 D. Pairs → [K 番目の値](../basics/kth-value.md#abc155_d)（例題）
+- ABC156 D. Bouquet → [二項係数の前計算](../comb/binomial-precompute.md#practice)（練習）
+- ABC156 E. Roaming → [数え上げの考え方](../comb/counting-mindset.md#abc156_e)（例題）、[重複組合せ](../comb/stars-and-bars.md#practice)（練習）
+- ABC157 D. Friend Suggestions → [連結成分](../graph/connected-components.md#practice)（練習）、[Union-Find](../ds/union-find.md#practice)（練習）
+- ABC157 E. Simple String Queries → [セグメント木](../ds/segment-tree.md#abc157_e)（例題）
+- ABC157 F. Yakiniku Optimization Problem → [円と幾何の最適化](../geometry/circle-geometry.md#challenge)（力試し）
+- ABC158 D. String Formation → [全体への操作を変数で持つ](../ds/global-offset.md#practice)（練習）
+- ABC158 E. Divisible Substring → [桁と mod](../math/digit-and-mod.md#practice)（練習）
+- ABC159 E. Dividing Chocolate → [bit 全探索と順列全探索](../basics/bit-full-search.md#challenge)（力試し）
+- ABC159 F. Knapsack for All Segments → [フェーズを状態に持つ DP](../dp/dp-phase.md#abc159_f)（例題）
+- ABC160 D. Line++ → [幅優先探索（BFS）と無重み最短路](../graph/bfs.md#practice)（練習）
+- ABC160 F. Distributing Integers → [全方位木 DP](../dp/rerooting.md#practice)（練習）、[順序を固定して数える](../comb/counting-fix-order.md#challenge)（力試し）
+- ABC161 D. Lunlun Number → [再帰による全列挙](../basics/recursive-enumeration.md#abc161_d)（例題）
+- ABC161 F. Division or Subtraction → [約数列挙と素数判定](../math/divisor-enum.md#practice)（練習）
+- ABC162 D. RGB Triplets → [余事象](../thinking/complement.md#abc162_d)（例題）
+- ABC162 E. Sum of gcd of Tuples (Hard) → [約数包除](../comb/divisor-inclusion-exclusion.md#abc162_e)（例題）、[オイラーの φ 関数](../math/euler-phi.md#practice)（練習）
+- ABC163 E. Active Infants → [区間 DP](../dp/interval-dp.md#practice)（練習）、[交換論法と比較関数の設計](../basics/exchange-argument.md#challenge)（力試し）、[並べ替えてから DP する](../dp/exchange-argument-dp.md#challenge)（力試し）
+- ABC164 D. Multiple of 2019 → [桁と mod](../math/digit-and-mod.md#abc164_d)（例題）、[累積和と連想配列で区間を数える](../basics/prefix-sum-counting.md#practice)（練習）
+- ABC164 E. Two Currencies → [状態を頂点にする](../graph/extended-dijkstra.md#challenge)（力試し）
+- ABC165 D. Floor Function → [整数の割り算と余り](../math/integer-division.md#practice)（練習）
+- ABC165 F. LIS on Tree → [根からのパスを DFS で持ち回る](../tree/root-path-dfs.md#abc165_f)（例題）、[最長増加部分列](../dp/lis.md#practice)（練習）、[永続データ構造](../ds/persistent-data-structures.md#practice)（練習）
+- ABC166 E. This Message Will Self-Destruct in 5s → [STL コンテナの使い分け](../ds/stl-containers.md#practice)（練習）
+- ABC167 D. Teleporter → [ダブリング](../basics/doubling.md#abc167_d)（例題）、[Functional graph（出次数 1 のグラフ）](../graph/functional-graph.md#practice)（練習）
+- ABC167 E. Colorful Blocks → [数え上げの考え方](../comb/counting-mindset.md#abc167_e)（例題）
+- ABC167 F. Bracket Sequencing → [括弧列](../patterns/bracket-sequence.md#practice)（練習）
+- ABC168 C. : (Colon) → [回転・平行移動・アフィン変換](../geometry/rotation-transform.md#practice)（練習）
+- ABC168 D. .. (Double Dots) → [幅優先探索（BFS）と無重み最短路](../graph/bfs.md#practice)（練習）
+- ABC169 C. Multiplication 3 → [誤差の扱いと整数での処理](../geometry/geometry-precision.md#abc169_c)（例題）
+- ABC169 D. Div Game → [素因数分解とルジャンドルの公式](../math/prime-factorization.md#abc169_d)（例題）
+- ABC169 F. Knapsack for All Subsets → [部分和 DP](../dp/subset-sum.md#practice)（練習）
+- ABC170 D. Not Divisible → [調和級数と倍数の列挙](../math/harmonic-sum.md#abc170_d)（例題）
+- ABC170 E. Smart Infants → [優先度付きキュー](../ds/priority-queue.md#abc170_e)（例題）
+- ABC171 C. One Quadrillion and One Dalmatians → [N 進法](../math/base-conversion.md#abc171_c)（例題）
+- ABC171 E. Red Scarf → [XOR](../patterns/xor.md#abc171_e)（例題）
+- ABC171 F. Strivore → [重複の除き方](../comb/counting-dedup.md#abc171_f)（例題）
+- ABC172 C. Tsundoku → [累積和](../basics/prefix-sum.md#practice)（練習）
+- ABC172 D. Sum of Divisors → [Σ の変形](../math/sigma-manipulation.md#abc172_d)（例題）、[商の列挙](../math/floor-quotient-enum.md#practice)（練習）
+- ABC172 E. NEQ → [包除原理](../comb/inclusion-exclusion.md#abc172_e)（例題）
+- ABC172 F. Unfair Nim → [Nim と XOR](../comb/nim.md#challenge)（力試し）
+- ABC173 F. Intervals on Tree → [辺で切って数える](../tree/tree-edge-contribution.md#practice)（練習）、[数え上げの考え方](../comb/counting-mindset.md#practice)（練習）
+- ABC174 C. Repsept → [対称性・鳩の巣原理・場合分け](../thinking/symmetry-pigeonhole-casework.md#practice)（練習）
+- ABC174 E. Logs → [答えで二分探索](../basics/binary-search-answer.md#practice)（練習）
+- ABC174 F. Range Set Query → [クエリの先読み](../ds/offline-queries.md#abc174_f)（例題）、[マージソート木](../ds/merge-sort-tree.md#practice)（練習）
+- ABC175 D. Moving Piece → [置換の巡回分解](../comb/permutation-cycles.md#practice)（練習）、[周期性の検出](../basics/periodicity.md#challenge)（力試し）
+- ABC175 E. Picking Goods → [グリッド上の DP](../dp/dp-grid.md#practice)（練習）
+- ABC176 D. Wizard in Maze → [01-BFS](../graph/zero-one-bfs.md#abc176_d)（例題）
+- ABC177 C. Sum of product of pairs → [対称性・鳩の巣原理・場合分け](../thinking/symmetry-pigeonhole-casework.md#abc177_c)（例題）
+- ABC177 D. Friends → [連結成分](../graph/connected-components.md#abc177_d)（例題）、[Union-Find](../ds/union-find.md#practice)（練習）
+- ABC177 E. Coprime → [最小素因数の篩と線形篩](../math/spf-sieve.md#abc177_e)（例題）
+- ABC178 C. Ubiquity → [余事象](../thinking/complement.md#abc178_c)（例題）、[和・積の法則と順列・組合せ](../comb/counting-basics.md#practice)（練習）
+- ABC178 D. Redistribution → [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md#practice)（練習）、[重複組合せ](../comb/stars-and-bars.md#practice)（練習）
+- ABC178 E. Dist Max → [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md#abc178_e)（例題）
+- ABC179 C. A x B + C → [調和級数と倍数の列挙](../math/harmonic-sum.md#practice)（練習）
+- ABC179 D. Leaping Tak → [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md#abc179_d)（例題）
+- ABC179 E. Sequence Sum → [周期性の検出](../basics/periodicity.md#abc179_e)（例題）
+- ABC179 F. Simplified Reversi → [遅延セグメント木](../ds/lazy-segment-tree.md#practice)（練習）
+- ABC180 C. Cream puff → [約数と倍数](../patterns/divisors-and-multiples.md#practice)（練習）
+- ABC180 E. Traveling Salesman among Aerial Cities → [bitDP](../dp/bit-dp.md#abc180_e)（例題）
+- ABC180 F. Unbranched → [連結なグラフの数え上げ](../comb/counting-labeled-graphs.md#practice)（練習）、[数え上げの考え方](../comb/counting-mindset.md#challenge)（力試し）、[重複の除き方](../comb/counting-dedup.md#challenge)（力試し）
+- ABC181 C. Collinearity → [ベクトルと外積](../geometry/geometry-vectors.md#abc181_c)（例題）
+- ABC181 D. Hachi → [桁と mod](../math/digit-and-mod.md#practice)（練習）
+- ABC181 F. Silver Woods → [円と幾何の最適化](../geometry/circle-geometry.md#abc181_f)（例題）、[最小ボトルネック路](../graph/bottleneck-path.md#practice)（練習）、[Union-Find で連結性を扱う](../graph/union-find-connectivity.md#challenge)（力試し）
+- ABC182 C. To 3 → [bit 全探索と順列全探索](../basics/bit-full-search.md#abc182_c)（例題）、[桁と mod](../math/digit-and-mod.md#practice)（練習）
+- ABC183 D. Water Heater → [いもす法](../basics/imos.md#abc183_d)（例題）
+- ABC183 E. Queen on Grid → [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md#practice)（練習）、[グリッド上の DP](../dp/dp-grid.md#practice)（練習）
+- ABC183 F. Confluence → [マージテク](../tree/small-to-large.md#abc183_f)（例題）、[併合過程の木](../tree/merge-process-tree.md#practice)（練習）、[Union-Find の応用](../ds/union-find-applications.md#practice)（練習）
+- ABC184 C. Super Ryuma → [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md#practice)（練習）
+- ABC184 D. increment of coins → [期待値 DP](../comb/expected-value-dp.md#abc184_d)（例題）
+- ABC184 E. Third Avenue → [状態を頂点にする](../graph/extended-dijkstra.md#abc184_e)（例題）
+- ABC184 F. Programming Contest → [半分全列挙](../basics/meet-in-the-middle.md#abc184_f)（例題）
+- ABC185 C. Duodecim Ferra → [重複組合せ](../comb/stars-and-bars.md#abc185_c)（例題）
+- ABC185 E. Sequence Matching → [最長共通部分列と編集距離](../dp/lcs.md#abc185_e)（例題）
+- ABC185 F. Range Xor Query → [BIT（Fenwick Tree）](../ds/fenwick-tree.md#abc185_f)（例題）、[セグメント木](../ds/segment-tree.md#practice)（練習）
+- ABC186 C. Unlucky 7 → [N 進法](../math/base-conversion.md#practice)（練習）
+- ABC186 D. Sum of difference → [主客転倒・寄与](../thinking/contribution.md#abc186_d)（例題）
+- ABC186 E. Throne → [拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md#abc186_e)（例題）、[逆元と mod での割り算](../math/mod-inverse.md#practice)（練習）、[オイラーの φ 関数](../math/euler-phi.md#practice)（練習）
+- ABC186 F. Rook on Grid → [平面走査](../ds/sweep-line-2d.md#practice)（練習）
+- ABC187 D. Choose Me → [ソートで考える](../basics/sorting-techniques.md#practice)（練習）
+- ABC187 E. Through Path → [木の上の累積和・いもす法](../tree/tree-imos.md#abc187_e)（例題）
+- ABC187 F. Close Group → [部分集合を列挙する DP](../dp/subset-enumeration-dp.md#abc187_f)（例題）
+- ABC188 D. Snuke Prime → [イベントソートと平面走査の基本](../basics/event-sort.md#practice)（練習）
+- ABC188 E. Peddler → [DP の計算順序](../dp/dp-order.md#abc188_e)（例題）
+- ABC189 C. Mandarin Orange → [単調スタックとスライド最小値](../ds/monotonic-stack.md#practice)（練習）、[区間](../patterns/interval.md#practice)（練習）
+- ABC189 E. Rotate and Flip → [回転・平行移動・アフィン変換](../geometry/rotation-transform.md#abc189_e)（例題）、[行列累乗](../math/matrix-power.md#practice)（練習）
+- ABC189 F. Sugoroku2 → [閉路のある期待値](../comb/expectation-linear-equations.md#practice)（練習）
+- ABC190 E. Magical Ornament → [bitDP](../dp/bit-dp.md#practice)（練習）
+- ABC190 F. Shift and Inversions → [転倒数](../ds/inversion-number.md#abc190_f)（例題）
+- ABC191 D. Circle Lattice Points → [誤差の扱いと整数での処理](../geometry/geometry-precision.md#practice)（練習）、[円と幾何の最適化](../geometry/circle-geometry.md#practice)（練習）
+- ABC192 D. Base n → [N 進法](../math/base-conversion.md#practice)（練習）
+- ABC192 E. Train → [時刻で変わる辺の最短路](../graph/time-dependent-dijkstra.md#abc192_e)（例題）
+- ABC193 C. Unexpressed → [余事象](../thinking/complement.md#practice)（練習）、[整数の平方根・K 乗根と累乗数](../math/integer-root.md#practice)（練習）
+- ABC193 D. Poker → [確率の基本](../comb/probability-basics.md#practice)（練習）
+- ABC193 E. Oversleeping → [中国剰余定理](../math/crt.md#practice)（練習）
+- ABC193 F. Zebraness → [燃やす埋める](../graph/project-selection.md#practice)（練習）
+- ABC194 D. Journey → [幾何分布とコンプリートガチャ](../comb/coupon-collector.md#abc194_d)（例題）
+- ABC194 E. Mex Min → [mex](../patterns/mex.md#abc194_e)（例題）
+- ABC194 F. Digits Paradise in Hexadecimal → [桁 DP の応用](../dp/digit-dp-advanced.md#practice)（練習）
+- ABC195 E. Lucky 7 Battle → [余り・個数を状態に持つ DP](../dp/dp-mod-state.md#practice)（練習）、[ゲームの基本と勝敗の DP](../comb/game-basics.md#practice)（練習）
+- ABC195 F. Coprime Present → [bitDP](../dp/bit-dp.md#challenge)（力試し）
+- ABC196 D. Hanjo → [計算量の見積もり](../basics/complexity-estimation.md#practice)（練習）
+- ABC196 F. Substring 2 → [畳み込みの使い方](../math/convolution-ntt.md#practice)（練習）
+- ABC197 C. ORXOR → [bit 全探索と順列全探索](../basics/bit-full-search.md#practice)（練習）、[XOR](../patterns/xor.md#practice)（練習）
+- ABC197 D. Opposite → [回転・平行移動・アフィン変換](../geometry/rotation-transform.md#practice)（練習）
+- ABC197 E. Traveler → [DP の計算順序](../dp/dp-order.md#abc197_e)（例題）
+- ABC197 F. Construct a Palindrome → [状態を頂点にする](../graph/extended-dijkstra.md#challenge)（力試し）、[回文の扱いと Manacher](../string/palindrome.md#challenge)（力試し）
+- ABC198 E. Unique Color → [根からのパスを DFS で持ち回る](../tree/root-path-dfs.md#abc198_e)（例題）
+- ABC198 F. Cube → [Burnside の補題](../comb/burnside-lemma.md#abc198_f)（例題）
+- ABC199 C. IPFL → [全体への操作を変数で持つ](../ds/global-offset.md#practice)（練習）
+- ABC199 D. RGB Coloring 2 → [小さいグラフの全探索](../graph/small-graph-brute-force.md#challenge)（力試し）
+- ABC199 F. Graph Smoothing → [行列累乗](../math/matrix-power.md#abc199_f)（例題）、[期待値の線形性と指示確率変数](../comb/linearity-of-expectation.md#challenge)（力試し）
+
+### ABC200〜ABC249 {#abc-200}
+
+- ABC200 D. Happy Birthday! 2 → [対称性・鳩の巣原理・場合分け](../thinking/symmetry-pigeonhole-casework.md#abc200_d)（例題）
+- ABC201 D. Game in Momotetsu World → [ミニマックス](../comb/minimax.md#abc201_d)（例題）
+- ABC201 E. Xor Distances → [木の上の距離](../tree/tree-distance.md#practice)（練習）
+- ABC202 D. aab aba baa → [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md#practice)（練習）、[DP の復元](../dp/dp-reconstruction.md#practice)（練習）、[二項係数の意味と性質](../comb/binomial-coefficient.md#practice)（練習）
+- ABC202 E. Count Descendants → [オイラーツアー](../tree/euler-tour.md#abc202_e)（例題）、[マージソート木](../ds/merge-sort-tree.md#practice)（練習）
+- ABC202 F. Integer Convex Hull → [凸包と凸多角形](../geometry/convex-hull.md#challenge)（力試し）
+- ABC203 D. Pond → [平均・中央値の最大化](../basics/fractional-binary-search.md#abc203_d)（例題）
+- ABC203 E. White Pawn → [インライン DP](../dp/inline-dp.md#practice)（練習）
+- ABC203 F. Weed → [DP の状態の削減](../dp/dp-dimension-reduction.md#challenge)（力試し）
+- ABC204 D. Cooking → [部分和 DP](../dp/subset-sum.md#practice)（練習）
+- ABC204 E. Rush Hour 2 → [時刻で変わる辺の最短路](../graph/time-dependent-dijkstra.md#practice)（練習）
+- ABC204 F. Hanjo 2 → [プロファイル DP](../dp/broken-profile-dp.md#practice)（練習）、[行列累乗](../math/matrix-power.md#practice)（練習）
+- ABC205 D. Kth Excluded → [二分探索](../basics/binary-search.md#practice)（練習）、[K 番目の値](../basics/kth-value.md#practice)（練習）
+- ABC205 E. White and Black Balls → [鏡像法とカタラン数](../comb/reflection-principle.md#abc205_e)（例題）
+- ABC205 F. Grid and Tokens → [最大流](../graph/max-flow.md#abc205_f)（例題）
+- ABC206 D. KAIBUNsyo → [Union-Find](../ds/union-find.md#practice)（練習）、[Union-Find の応用](../ds/union-find-applications.md#practice)（練習）、[回文の扱いと Manacher](../string/palindrome.md#practice)（練習）
+- ABC206 E. Divide Both → [約数包除](../comb/divisor-inclusion-exclusion.md#abc206_e)（例題）
+- ABC206 F. Interval Game 2 → [区間 DP の応用](../dp/interval-dp-advanced.md#practice)（練習）、[Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md#practice)（練習）
+- ABC207 D. Congruence Points → [偏角ソート](../geometry/argument-sort.md#challenge)（力試し）、[回転・平行移動・アフィン変換](../geometry/rotation-transform.md#challenge)（力試し）
+- ABC207 E. Mod i → [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md#practice)（練習）、[区間分割 DP](../dp/dp-sequence-partition.md#practice)（練習）
+- ABC207 F. Tree Patrolling → [二乗の木 DP](../dp/tree-dp-square.md#practice)（練習）
+- ABC208 D. Shortest Path Queries 2 → [ワーシャルフロイド法](../graph/warshall-floyd.md#abc208_d)（例題）
+- ABC208 E. Digit Products → [桁 DP の応用](../dp/digit-dp-advanced.md#abc208_e)（例題）
+- ABC209 C. Not Equal → [順序を固定して数える](../comb/counting-fix-order.md#practice)（練習）
+- ABC209 D. Collision → [木の 2 色塗り分けと距離の偶奇](../tree/tree-bipartite.md#abc209_d)（例題）
+- ABC209 E. Shiritori → [後退解析](../comb/game-retrograde-analysis.md#abc209_e)（例題）
+- ABC209 F. Deforestation → [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md#abc209_f)（例題）
+- ABC210 D. National Railway → [グリッド上の DP](../dp/dp-grid.md#practice)（練習）、[マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md#practice)（練習）
+- ABC210 E. Ring MST → [GCD の性質](../math/gcd-properties.md#practice)（練習）、[最小全域木](../graph/minimum-spanning-tree.md#challenge)（力試し）
+- ABC210 F. Coprime Solitaire → [2-SAT](../graph/two-sat.md#abc210_f)（例題）
+- ABC211 C. chokudai → [部分列と部分文字列](../patterns/subsequence-and-substring.md#abc211_c)（例題）
+- ABC211 D. Number of Shortest paths → [最短路 DAG](../graph/shortest-path-dag.md#abc211_d)（例題）、[DAG 上の DP](../dp/dp-dag.md#practice)（練習）
+- ABC212 D. Querying Multiset → [全体への操作を変数で持つ](../ds/global-offset.md#abc212_d)（例題）
+- ABC212 G. Power Pair → [オイラーの φ 関数](../math/euler-phi.md#abc212_g)（例題）、[フェルマーの小定理と指数の mod](../math/exponent-mod.md#practice)（練習）、[位数・原始根・離散対数](../math/multiplicative-order.md#practice)（練習）
+- ABC212 H. Nim Counting → [XOR 畳み込み](../math/hadamard-transform.md#abc212_h)（例題）、[Nim と XOR](../comb/nim.md#challenge)（力試し）
+- ABC213 A. Bitwise Exclusive Or → [bit 演算の基本と XOR の性質](../basics/bit-operations.md#practice)（練習）
+- ABC213 C. Reorder Cards → [座標圧縮](../basics/coordinate-compression.md#abc213_c)（例題）
+- ABC213 D. Takahashi Tour → [根付き木と走査順](../tree/tree-traversal.md#abc213_d)（例題）
+- ABC213 E. Stronger Takahashi → [01-BFS](../graph/zero-one-bfs.md#practice)（練習）
+- ABC213 F. Common Prefixes → [Suffix Array と LCP 配列](../string/suffix-array.md#abc213_f)（例題）
+- ABC213 G. Connectivity 2 → [部分集合の高速ゼータ変換とメビウス変換](../comb/zeta-mobius-subset.md#challenge)（力試し）、[連結なグラフの数え上げ](../comb/counting-labeled-graphs.md#challenge)（力試し）
+- ABC213 H. Stroll → [分割統治 FFT・オンライン畳み込み](../math/online-convolution.md#abc213_h)（例題）
+- ABC214 D. Sum of Maximum Weights → [Union-Find の応用](../ds/union-find-applications.md#abc214_d)（例題）、[辺で切って数える](../tree/tree-edge-contribution.md#practice)（練習）
+- ABC214 E. Packing Under Range Regulations → [優先度付きキュー](../ds/priority-queue.md#practice)（練習）
+- ABC214 F. Substrings → [部分列 DP](../dp/subsequence-dp.md#abc214_f)（例題）
+- ABC214 G. Three Permutations → [包除 DP](../comb/inclusion-exclusion-dp.md#challenge)（力試し）
+- ABC215 D. Coprime 2 → [最小素因数の篩と線形篩](../math/spf-sieve.md#practice)（練習）
+- ABC215 G. Colorful Candies 2 → [期待値の線形性と指示確率変数](../comb/linearity-of-expectation.md#challenge)（力試し）
+- ABC215 H. Cabbage Master → [最小パス被覆と Hall の定理](../graph/dilworth-path-cover.md#practice)（練習）、[部分集合の高速ゼータ変換とメビウス変換](../comb/zeta-mobius-subset.md#challenge)（力試し）
+- ABC216 D. Pair of Balls → [トポロジカルソート](../graph/topological-sort.md#practice)（練習）
+- ABC216 E. Amusement Park → [貪欲法の考え方と正当性](../basics/greedy-basics.md#practice)（練習）
+- ABC216 F. Max Sum Counting → [部分和 DP](../dp/subset-sum.md#practice)（練習）、[並べ替えてから DP する](../dp/exchange-argument-dp.md#practice)（練習）、[順序を固定して数える](../comb/counting-fix-order.md#practice)（練習）
+- ABC216 G. 01Sequence → [差分制約（牛ゲー）](../graph/difference-constraints.md#abc216_g)（例題）
+- ABC216 H. Random Robots → [LGV 補題](../comb/lgv-lemma.md#abc216_h)（例題）
+- ABC217 D. Cutting Woods → [set・multiset・map の応用](../ds/ordered-set.md#abc217_d)（例題）
+- ABC217 E. Sorting Queries → [優先度付きキュー](../ds/priority-queue.md#practice)（練習）
+- ABC217 F. Make Pair → [区間 DP](../dp/interval-dp.md#practice)（練習）
+- ABC217 G. Groups → [第 2 種スターリング数とベル数](../comb/bell-number.md#practice)（練習）
+- ABC217 H. Snuketoon → [Slope Trick](../dp/slope-trick.md#abc217_h)（例題）
+- ABC218 E. Destruction → [最小全域木](../graph/minimum-spanning-tree.md#abc218_e)（例題）
+- ABC218 F. Blocked Roads → [最短路 DAG](../graph/shortest-path-dag.md#practice)（練習）
+- ABC218 G. Game on Tree 2 → [根からのパスを DFS で持ち回る](../tree/root-path-dfs.md#challenge)（力試し）、[ミニマックス](../comb/minimax.md#challenge)（力試し）
+- ABC218 H. Red and Blue Lamps → [Alien DP](../dp/alien-dp.md#abc218_h)（例題）
+- ABC219 D. Strange Lunchbox → [ナップサック DP](../dp/knapsack-01.md#practice)（練習）
+- ABC219 G. Propagation → [平方分割](../ds/sqrt-decomposition.md#abc219_g)（例題）、[次数による平方分割](../graph/degree-sqrt.md#challenge)（力試し）
+- ABC220 D. FG operation → [余り・個数を状態に持つ DP](../dp/dp-mod-state.md#practice)（練習）
+- ABC220 E. Distance on Large Perfect Binary Tree → [完全二分木](../tree/complete-binary-tree.md#challenge)（力試し）
+- ABC220 F. Distance Sums 2 → [木 DP](../dp/tree-dp.md#abc220_f)（例題）
+- ABC220 G. Isosceles Trapezium → [誤差の扱いと整数での処理](../geometry/geometry-precision.md#challenge)（力試し）
+- ABC221 D. Online games → [いもす法](../basics/imos.md#practice)（練習）
+- ABC221 E. LEQ → [BIT（Fenwick Tree）](../ds/fenwick-tree.md#practice)（練習）
+- ABC221 F. Diameter set → [木の直径と最遠点](../tree/tree-diameter.md#challenge)（力試し）
+- ABC221 G. Jumping sequence → [bitset による高速化](../misc/bitset-speedup.md#challenge)（力試し）
+- ABC221 H. Count Multiset → [整数の分割と分割数](../comb/partition-number.md#challenge)（力試し）
+- ABC222 E. Red and Blue Tree → [部分和 DP](../dp/subset-sum.md#practice)（練習）、[木の上の累積和・いもす法](../tree/tree-imos.md#practice)（練習）
+- ABC222 F. Expensive Expense → [全方位木 DP](../dp/rerooting.md#abc222_f)（例題）
+- ABC222 G. 222 → [位数・原始根・離散対数](../math/multiplicative-order.md#abc222_g)（例題）、[フェルマーの小定理と指数の mod](../math/exponent-mod.md#practice)（練習）、[オイラーの φ 関数](../math/euler-phi.md#practice)（練習）
+- ABC223 D. Restricted Permutation → [トポロジカルソート](../graph/topological-sort.md#abc223_d)（例題）、[辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md#practice)（練習）
+- ABC223 F. Parenthesis Checking → [セグメント木に何を載せるか](../ds/segment-tree-monoids.md#abc223_f)（例題）
+- ABC223 G. Vertex Deletion → [全方位木 DP](../dp/rerooting.md#challenge)（力試し）
+- ABC224 C. Triangle? → [ベクトルと外積](../geometry/geometry-vectors.md#practice)（練習）
+- ABC224 D. 8 Puzzle on Graph → [状態を頂点にする](../graph/extended-dijkstra.md#practice)（練習）
+- ABC224 G. Roll or Increment → [最適戦略の期待値](../comb/optimal-strategy-expectation.md#challenge)（力試し）、[閉路のある期待値](../comb/expectation-linear-equations.md#challenge)（力試し）
+- ABC225 E. 7 → [偏角ソート](../geometry/argument-sort.md#practice)（練習）
+- ABC225 G. X → [燃やす埋める](../graph/project-selection.md#challenge)（力試し）
+- ABC226 F. Score of Permutations → [整数の分割と分割数](../comb/partition-number.md#abc226_f)（例題）
+- ABC226 H. Random Kth Max → [連続値の確率](../comb/continuous-probability.md#abc226_h)（例題）
+- ABC227 F. Treasure Hunting → [グリッド上の DP](../dp/dp-grid.md#challenge)（力試し）
+- ABC227 G. Divisors of Binomial Coefficient → [区間篩](../math/segmented-sieve.md#practice)（練習）
+- ABC228 D. Linear Probing → [Union-Find の応用](../ds/union-find-applications.md#practice)（練習）
+- ABC228 E. Integer Sequence Fair → [フェルマーの小定理と指数の mod](../math/exponent-mod.md#abc228_e)（例題）、[繰り返し二乗法](../math/mod-pow.md#practice)（練習）
+- ABC228 H. Histogram → [Convex Hull Trick と Li Chao Tree](../dp/cht.md#practice)（練習）
+- ABC229 E. Graph Destruction → [Union-Find で連結性を扱う](../graph/union-find-connectivity.md#abc229_e)（例題）
+- ABC229 H. Advance or Eat → [非不偏ゲーム](../comb/partizan-games.md#abc229_h)（例題）
+- ABC230 D. Destroyer Takahashi → [区間スケジューリング・区間の串刺し](../basics/interval-scheduling.md#abc230_d)（例題）
+- ABC230 E. Fraction Floor Sum → [商の列挙](../math/floor-quotient-enum.md#abc230_e)（例題）、[Σ の変形](../math/sigma-manipulation.md#practice)（練習）
+- ABC230 F. Predilection → [部分列 DP](../dp/subsequence-dp.md#abc230_f)（例題）
+- ABC230 G. GCD Permutation → [メビウス関数とメビウス反転](../comb/mobius-function.md#challenge)（力試し）
+- ABC231 E. Minimal payments → [桁 DP の応用](../dp/digit-dp-advanced.md#abc231_e)（例題）
+- ABC231 F. Jealous Two → [BIT（Fenwick Tree）](../ds/fenwick-tree.md#practice)（練習）
+- ABC231 H. Minimum Coloring → [最小費用流](../graph/min-cost-flow.md#challenge)（力試し）
+- ABC232 C. Graph Isomorphism → [小さいグラフの全探索](../graph/small-graph-brute-force.md#abc232_c)（例題）、[bit 全探索と順列全探索](../basics/bit-full-search.md#practice)（練習）
+- ABC232 E. Rook Path → [DP の状態の設計](../dp/dp-state-design.md#practice)（練習）
+- ABC232 H. King's Tour → [DFS 木・BFS 木とグラフの構築](../graph/graph-construction.md#challenge)（力試し）
+- ABC233 D. Count Interval → [累積和と連想配列で区間を数える](../basics/prefix-sum-counting.md#abc233_d)（例題）
+- ABC234 D. Prefix K-th Max → [優先度付きキュー](../ds/priority-queue.md#abc234_d)（例題）
+- ABC234 F. Reordering → [多項係数](../comb/multinomial-coefficient.md#abc234_f)（例題）
+- ABC235 E. MST + 1 → [最小全域木](../graph/minimum-spanning-tree.md#abc235_e)（例題）、[最小共通祖先（LCA）](../tree/lca.md#practice)（練習）、[クエリの先読み](../ds/offline-queries.md#practice)（練習）
+- ABC235 F. Variety of Digits → [桁 DP の応用](../dp/digit-dp-advanced.md#practice)（練習）
+- ABC235 G. Gardens → [二項係数の部分和](../comb/binomial-prefix-sum.md#abc235_g)（例題）
+- ABC236 D. Dance → [再帰による全列挙](../basics/recursive-enumeration.md#practice)（練習）
+- ABC236 E. Average and Median → [平均・中央値の最大化](../basics/fractional-binary-search.md#practice)（練習）
+- ABC236 F. Spices → [XOR 基底](../math/xor-basis.md#abc236_f)（例題）
+- ABC237 D. LR insertion → [配列で作る連結リスト](../ds/linked-list.md#practice)（練習）、[スタック・キュー・deque の使いどころ](../ds/stack-techniques.md#practice)（練習）
+- ABC237 E. Skiing → [ダイクストラ法](../graph/dijkstra.md#practice)（練習）、[ベルマンフォード法](../graph/bellman-ford.md#practice)（練習）
+- ABC237 G. Range Sort Query → [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md#practice)（練習）
+- ABC237 Ex. Hakata → [最小パス被覆と Hall の定理](../graph/dilworth-path-cover.md#abc237_h)（例題）
+- ABC238 E. Range Sums → [Union-Find の応用](../ds/union-find-applications.md#abc238_e)（例題）
+- ABC238 G. Cubic? → [集合・多重集合のハッシュ](../string/hashing-for-sets.md#practice)（練習）、[乱択アルゴリズム](../misc/randomized.md#practice)（練習）
+- ABC239 B. Integer Division → [整数の割り算と余り](../math/integer-division.md#abc239_b)（例題）
+- ABC239 E. Subtree K-th Max → [木 DP](../dp/tree-dp.md#practice)（練習）、[オイラーツアー](../tree/euler-tour.md#practice)（練習）
+- ABC239 F. Construct Highway → [木の次数列と Prüfer 列](../tree/tree-degree.md#practice)（練習）、[木の構築・復元](../tree/tree-construction.md#practice)（練習）
+- ABC239 G. Builder Takahashi → [最小カット](../graph/min-cut.md#abc239_g)（例題）
+- ABC240 C. Jumping Takahashi → [DP の基本](../dp/dp-basics.md#practice)（練習）
+- ABC240 D. Strange Balls → [スタック・キュー・deque の使いどころ](../ds/stack-techniques.md#practice)（練習）
+- ABC240 E. Ranges on Tree → [オイラーツアー](../tree/euler-tour.md#practice)（練習）
+- ABC240 G. Teleporting Takahashi → [格子路の数え上げ](../comb/lattice-paths.md#challenge)（力試し）
+- ABC241 D. Sequence Query → [set・multiset・map の応用](../ds/ordered-set.md#practice)（練習）、[K 番目の値を求めるデータ構造](../ds/kth-element.md#practice)（練習）、[平衡二分探索木と pb_ds の tree](../ds/balanced-bst.md#practice)（練習）
+- ABC241 E. Putting Candies → [ダブリング](../basics/doubling.md#abc241_e)（例題）
+- ABC241 G. Round Robin → [最大流](../graph/max-flow.md#challenge)（力試し）
+- ABC242 C. 1111gal password → [DP の基本](../dp/dp-basics.md#practice)（練習）
+- ABC242 F. Black and White Rooks → [包除原理](../comb/inclusion-exclusion.md#challenge)（力試し）
+- ABC242 G. Range Pairing Query → [Mo's algorithm](../ds/mo-algorithm.md#abc242_g)（例題）
+- ABC243 D. Moves on Binary Tree → [完全二分木](../tree/complete-binary-tree.md#abc243_d)（例題）、[スタック・キュー・deque の使いどころ](../ds/stack-techniques.md#practice)（練習）
+- ABC243 E. Edge Deletion → [ワーシャルフロイド法](../graph/warshall-floyd.md#practice)（練習）
+- ABC243 G. Sqrt → [整数の平方根・K 乗根と累乗数](../math/integer-root.md#challenge)（力試し）
+- ABC244 C. Yamanote Line Game → [インタラクティブ問題](../misc/interactive.md#practice)（練習）
+- ABC244 F. Shortest Good Path → [状態を頂点にする](../graph/extended-dijkstra.md#practice)（練習）
+- ABC244 G. Construct Good Path → [DFS 木・BFS 木とグラフの構築](../graph/graph-construction.md#practice)（練習）
+- ABC244 Ex. Linear Maximization → [発展の幾何](../geometry/advanced-geometry.md#practice)（練習）
+- ABC245 D. Polynomial division → [形式的冪級数と多項式の演算](../math/fps-basics.md#practice)（練習）
+- ABC245 E. Wrapping Chocolate → [イベントソートと平面走査の基本](../basics/event-sort.md#practice)（練習）、[set・multiset・map の応用](../ds/ordered-set.md#practice)（練習）
+- ABC245 F. Endless Walk → [トポロジカルソート](../graph/topological-sort.md#practice)（練習）、[後退解析](../comb/game-retrograde-analysis.md#practice)（練習）
+- ABC246 E. Bishop 2 → [01-BFS](../graph/zero-one-bfs.md#practice)（練習）
+- ABC246 F. typewriter → [包除原理](../comb/inclusion-exclusion.md#abc246_f)（例題）
+- ABC246 G. Game on Tree 3 → [答えで二分探索](../basics/binary-search-answer.md#challenge)（力試し）、[木 DP](../dp/tree-dp.md#challenge)（力試し）、[ミニマックス](../comb/minimax.md#challenge)（力試し）
+- ABC246 Ex. 01? Queries → [動的 DP](../dp/dynamic-dp.md#abc246_h)（例題）
+- ABC247 G. Dream Team → [最小費用流](../graph/min-cost-flow.md#abc247_g)（例題）
+- ABC247 Ex. Rearranging Problem → [第 1 種スターリング数](../comb/stirling-first.md#practice)（練習）
+- ABC248 E. K-colinear Line → [誤差の扱いと整数での処理](../geometry/geometry-precision.md#practice)（練習）
+- ABC248 G. GCD cost on the tree → [メビウス関数とメビウス反転](../comb/mobius-function.md#challenge)（力試し）
+- ABC249 G. Xor Cards → [XOR 基底](../math/xor-basis.md#challenge)（力試し）
+
+### ABC250〜ABC299 {#abc-250}
+
+- ABC250 D. 250-like Number → [エラトステネスの篩](../math/sieve-eratosthenes.md#abc250_d)（例題）
+- ABC250 E. Prefix Equality → [集合・多重集合のハッシュ](../string/hashing-for-sets.md#abc250_e)（例題）
+- ABC250 F. One Fourth → [ベクトルと外積](../geometry/geometry-vectors.md#challenge)（力試し）
+- ABC251 F. Two Spanning Trees → [DFS 木・BFS 木とグラフの構築](../graph/graph-construction.md#abc251_f)（例題）
+- ABC251 G. Intersection of Polygons → [凸包と凸多角形](../geometry/convex-hull.md#practice)（練習）
+- ABC252 E. Road Reduction → [最短路 DAG](../graph/shortest-path-dag.md#abc252_e)（例題）
+- ABC252 G. Pre-Order → [区間 DP の応用](../dp/interval-dp-advanced.md#abc252_g)（例題）、[木の構築・復元](../tree/tree-construction.md#challenge)（力試し）
+- ABC253 C. Max - Min Query → [STL コンテナの使い分け](../ds/stl-containers.md#abc253_c)（例題）
+- ABC253 E. Distance Sequence → [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md#practice)（練習）
+- ABC253 F. Operations on a Matrix → [クエリの先読み](../ds/offline-queries.md#abc253_f)（例題）
+- ABC254 D. Together Square → [一部を固定して数える](../thinking/fix-variable.md#practice)（練習）、[素因数の指数で考える](../math/prime-exponent-vector.md#practice)（練習）
+- ABC254 F. Rectangle GCD → [GCD の性質](../math/gcd-properties.md#abc254_f)（例題）、[Sparse Table](../ds/sparse-table.md#practice)（練習）
+- ABC255 G. Constrained Nim → [Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md#challenge)（力試し）
+- ABC255 Ex. Range Harvest Query → [区間を set で管理する](../ds/interval-set.md#challenge)（力試し）
+- ABC256 E. Takahashi's Anguish → [Functional graph（出次数 1 のグラフ）](../graph/functional-graph.md#abc256_e)（例題）
+- ABC256 G. Black and White Stones → [行列累乗](../math/matrix-power.md#challenge)（力試し）
+- ABC256 Ex. I like Query Problem → [Segment Tree Beats](../ds/segment-tree-beats.md#abc256_h)（例題）、[区間を set で管理する](../ds/interval-set.md#challenge)（力試し）
+- ABC257 D. Jumping Takahashi 2 → [答えで二分探索](../basics/binary-search-answer.md#practice)（練習）
+- ABC257 G. Prefix Concatenation → [Z-algorithm](../string/z-algorithm.md#challenge)（力試し）
+- ABC258 E. Packing Potatoes → [ダブリング](../basics/doubling.md#practice)（練習）
+- ABC258 G. Triangle → [bitset による高速化](../misc/bitset-speedup.md#abc258_g)（例題）
+- ABC259 B. Counterclockwise Rotation → [回転・平行移動・アフィン変換](../geometry/rotation-transform.md#abc259_b)（例題）
+- ABC259 D. Circumferences → [円と幾何の最適化](../geometry/circle-geometry.md#abc259_d)（例題）
+- ABC259 F. Select Edges → [木 DP](../dp/tree-dp.md#practice)（練習）
+- ABC259 G. Grid Card Game → [燃やす埋める](../graph/project-selection.md#practice)（練習）
+- ABC259 Ex. Yet Another Path Counting → [平方分割](../ds/sqrt-decomposition.md#challenge)（力試し）
+- ABC260 E. At Least One → [いもす法](../basics/imos.md#challenge)（力試し）
+- ABC260 F. Find 4-cycle → [次数による平方分割](../graph/degree-sqrt.md#practice)（練習）
+- ABC261 F. Sorting Color Balls → [転倒数](../ds/inversion-number.md#practice)（練習）
+- ABC261 Ex. Game on Graph → [後退解析](../comb/game-retrograde-analysis.md#challenge)（力試し）
+- ABC262 D. I Hate Non-integer Number → [余り・個数を状態に持つ DP](../dp/dp-mod-state.md#abc262_d)（例題）
+- ABC262 E. Red and Blue Graph → [二項係数の恒等式と和の公式](../comb/binomial-identities.md#abc262_e)（例題）
+- ABC263 B. Ancestor → [木の基本性質と表現](../tree/tree-basics.md#practice)（練習）
+- ABC263 E. Sugoroku 3 → [期待値 DP](../comb/expected-value-dp.md#practice)（練習）
+- ABC263 G. Erasing Prime Pairs → [二部マッチング](../graph/bipartite-matching.md#practice)（練習）
+- ABC264 D. "redocta".swap(i,i+1) → [転倒数](../ds/inversion-number.md#practice)（練習）
+- ABC264 E. Blackout 2 → [Union-Find で連結性を扱う](../graph/union-find-connectivity.md#practice)（練習）
+- ABC265 D. Iroha and Haiku (New ABC Edition) → [区間](../patterns/interval.md#practice)（練習）
+- ABC265 F. Manhattan Cafe → [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md#challenge)（力試し）、[マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md#challenge)（力試し）
+- ABC265 G. 012 Inversion → [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md#challenge)（力試し）
+- ABC265 Ex. No-capture Lance Game → [非不偏ゲーム](../comb/partizan-games.md#practice)（練習）
+- ABC266 B. Modulo Number → [mod の計算の基本](../math/mod-arithmetic.md#practice)（練習）
+- ABC266 C. Convex Quadrilateral → [ベクトルと外積](../geometry/geometry-vectors.md#practice)（練習）
+- ABC266 E. Throwing the Die → [DP の計算順序](../dp/dp-order.md#practice)（練習）、[期待値 DP](../comb/expected-value-dp.md#practice)（練習）
+- ABC266 F. Well-defined Path Queries on a Namori → [なもりグラフ](../graph/namori-graph.md#abc266_f)（例題）、[葉から考える](../tree/leaf-first.md#practice)（練習）
+- ABC266 G. Yet Another RGB Sequence → [多項係数](../comb/multinomial-coefficient.md#practice)（練習）
+- ABC267 F. Exactly K Steps → [最小共通祖先（LCA）](../tree/lca.md#abc267_f)（例題）、[木の直径と最遠点](../tree/tree-diameter.md#practice)（練習）、[重心分解](../tree/centroid-decomposition.md#practice)（練習）
+- ABC267 G. Increasing K Times → [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md#challenge)（力試し）
+- ABC268 G. Random Student ID → [対称性で確率を求める](../comb/probability-symmetry.md#challenge)（力試し）、[Trie](../string/trie.md#challenge)（力試し）
+- ABC268 Ex. Taboo → [Aho-Corasick 法](../string/aho-corasick.md#challenge)（力試し）
+- ABC269 C. Submask → [bit 演算の基本と XOR の性質](../basics/bit-operations.md#abc269_c)（例題）
+- ABC269 E. Last Rook → [インタラクティブ問題](../misc/interactive.md#practice)（練習）
+- ABC270 C. Simple path → [根付き木と走査順](../tree/tree-traversal.md#practice)（練習）
+- ABC270 D. Stones → [ゲームの基本と勝敗の DP](../comb/game-basics.md#practice)（練習）
+- ABC270 G. Sequence in mod P → [位数・原始根・離散対数](../math/multiplicative-order.md#abc270_g)（例題）
+- ABC271 D. Flip and Adjust → [DP の復元](../dp/dp-reconstruction.md#abc271_d)（例題）
+- ABC271 E. Subsequence Path → [インライン DP](../dp/inline-dp.md#abc271_e)（例題）
+- ABC271 F. XOR on Grid Path → [半分全列挙](../basics/meet-in-the-middle.md#practice)（練習）
+- ABC271 G. Access Counter → [確率 DP](../comb/probability-dp.md#challenge)（力試し）、[閉路のある期待値](../comb/expectation-linear-equations.md#challenge)（力試し）
+- ABC272 F. Two Strings → [Suffix Array と LCP 配列](../string/suffix-array.md#practice)（練習）
+- ABC272 G. Yet Another mod M → [乱択アルゴリズム](../misc/randomized.md#abc272_g)（例題）
+- ABC273 E. Notebook → [永続データ構造](../ds/persistent-data-structures.md#abc273_e)（例題）、[根からのパスを DFS で持ち回る](../tree/root-path-dfs.md#practice)（練習）
+- ABC273 F. Hammer 2 → [区間 DP の応用](../dp/interval-dp-advanced.md#practice)（練習）
+- ABC274 D. Robot Arms 2 → [部分和 DP](../dp/subset-sum.md#practice)（練習）
+- ABC274 E. Booster → [bitDP](../dp/bit-dp.md#practice)（練習）
+- ABC274 G. Security Camera 3 → [König の定理](../graph/konig-theorem.md#abc274_g)（例題）
+- ABC275 B. ABC-DEF → [mod の計算の基本](../math/mod-arithmetic.md#abc275_b)（例題）
+- ABC275 D. Yet Another Recursive Function → [メモ化再帰](../dp/memoized-recursion.md#practice)（練習）
+- ABC275 E. Sugoroku 4 → [確率 DP](../comb/probability-dp.md#abc275_e)（例題）
+- ABC276 B. Adjacency List → [グラフの表現と用語](../graph/graph-basics.md#practice)（練習）
+- ABC276 F. Double Chance → [BIT（Fenwick Tree）](../ds/fenwick-tree.md#practice)（練習）、[値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md#practice)（練習）、[期待値の線形性と指示確率変数](../comb/linearity-of-expectation.md#practice)（練習）
+- ABC277 G. Random Walk to Millionaire → [二乗の期待値・分散](../comb/expectation-of-square.md#challenge)（力試し）
+- ABC277 Ex. Constrained Sums → [2-SAT](../graph/two-sat.md#practice)（練習）
+- ABC278 D. All Assign Point Add → [計算量の見積もり](../basics/complexity-estimation.md#practice)（練習）、[全体への操作を変数で持つ](../ds/global-offset.md#practice)（練習）
+- ABC278 F. Shiritori → [bitDP](../dp/bit-dp.md#practice)（練習）、[ゲームの基本と勝敗の DP](../comb/game-basics.md#practice)（練習）
+- ABC278 G. Generalized Subtraction Game → [Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md#challenge)（力試し）
+- ABC279 D. Freefall → [三分探索](../basics/ternary-search.md#abc279_d)（例題）
+- ABC280 D. Factorial and Multiple → [素因数分解とルジャンドルの公式](../math/prime-factorization.md#practice)（練習）
+- ABC280 E. Critical Hit → [期待値 DP](../comb/expected-value-dp.md#abc280_e)（例題）、[確率・期待値を mod 998244353 で答える](../comb/rational-mod.md#practice)（練習）
+- ABC280 F. Pay or Receive → [ベルマンフォード法](../graph/bellman-ford.md#practice)（練習）、[重み付き Union-Find](../ds/weighted-union-find.md#practice)（練習）
+- ABC281 D. Max Multiple → [余り・個数を状態に持つ DP](../dp/dp-mod-state.md#abc281_d)（例題）
+- ABC281 E. Least Elements → [値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md#abc281_e)（例題）、[上位 K 個の和と中央値の管理](../ds/top-k-multiset.md#practice)（練習）、[K 番目の値を求めるデータ構造](../ds/kth-element.md#practice)（練習）
+- ABC281 F. Xor Minimization → [Binary Trie](../ds/binary-trie.md#abc281_f)（例題）、[bit ごとに独立に考える](../basics/bitwise-independence.md#challenge)（力試し）
+- ABC281 G. Farthest City → [連結なグラフの数え上げ](../comb/counting-labeled-graphs.md#abc281_g)（例題）、[modint](../math/modint.md#practice)（練習）、[二項係数の前計算](../comb/binomial-precompute.md#challenge)（力試し）
+- ABC281 Ex. Alchemy → [分割統治 FFT・オンライン畳み込み](../math/online-convolution.md#practice)（練習）
+- ABC282 D. Make Bipartite 2 → [二部グラフ判定](../graph/bipartite-graph.md#practice)（練習）
+- ABC282 E. Choose Two and Eat One → [最小全域木](../graph/minimum-spanning-tree.md#practice)（練習）
+- ABC282 F. Union of Two Sets → [Sparse Table](../ds/sparse-table.md#abc282_f)（例題）、[インタラクティブ問題](../misc/interactive.md#challenge)（力試し）
+- ABC282 G. Similar Permutation → [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md#challenge)（力試し）
+- ABC282 Ex. Min + Sum → [分割統治](../basics/divide-and-conquer.md#challenge)（力試し）
+- ABC283 D. Scope → [スタック・キュー・deque の使いどころ](../ds/stack-techniques.md#practice)（練習）
+- ABC283 F. Permutation Distance → [値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md#practice)（練習）
+- ABC283 G. Partial Xor Enumeration → [XOR 基底](../math/xor-basis.md#abc283_g)（例題）
+- ABC283 Ex. Popcount Sum → [floor sum](../math/floor-sum.md#challenge)（力試し）
+- ABC284 C. Count Connected Components → [グラフの表現と用語](../graph/graph-basics.md#practice)（練習）、[連結成分](../graph/connected-components.md#practice)（練習）
+- ABC284 E. Count Simple Paths → [深さ優先探索（DFS）](../graph/dfs.md#practice)（練習）
+- ABC284 F. ABCBAC → [Z-algorithm](../string/z-algorithm.md#abc284_f)（例題）、[ローリングハッシュ](../string/rolling-hash.md#practice)（練習）
+- ABC285 D. Change Usernames → [閉路の検出と復元](../graph/cycle-detection.md#abc285_d)（例題）
+- ABC285 F. Substring of Sorted String → [セグメント木](../ds/segment-tree.md#practice)（練習）
+- ABC285 G. Tatami → [最小流量制約付きフロー](../graph/flow-lower-bounds.md#abc285_g)（例題）
+- ABC286 C. Rotate and Palindrome → [文字列の基本操作と辞書順](../string/string-basics.md#practice)（練習）
+- ABC286 D. Money in Hand → [ナップサック DP](../dp/knapsack-01.md#practice)（練習）
+- ABC286 F. Guess The Number 2 → [中国剰余定理](../math/crt.md#practice)（練習）、[インタラクティブ問題](../misc/interactive.md#challenge)（力試し）
+- ABC286 G. Unique Walk → [オイラー路（一筆書き）](../graph/euler-path.md#abc286_g)（例題）、[グラフへの帰着](../graph/graph-modeling.md#practice)（練習）
+- ABC287 E. Karuta → [Trie](../string/trie.md#abc287_e)（例題）
+- ABC287 F. Components → [二乗の木 DP](../dp/tree-dp-square.md#abc287_f)（例題）
+- ABC287 G. Balance Update Query → [値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md#challenge)（力試し）
+- ABC287 Ex. Directed Graph and Query → [bitset による高速化](../misc/bitset-speedup.md#practice)（練習）
+- ABC288 C. Don’t be cycle → [Union-Find](../ds/union-find.md#abc288_c)（例題）、[閉路の検出と復元](../graph/cycle-detection.md#practice)（練習）
+- ABC289 G. Shopping in AtCoder store → [Convex Hull Trick と Li Chao Tree](../dp/cht.md#practice)（練習）
+- ABC290 E. Make it Palindrome → [回文の扱いと Manacher](../string/palindrome.md#practice)（練習）
+- ABC290 F. Maximum Diameter → [ラベル付き木の数え上げ](../comb/cayley-pruefer.md#abc290_f)（例題）、[二項係数の恒等式と和の公式](../comb/binomial-identities.md#challenge)（力試し）
+- ABC291 G. OR Sum → [畳み込みの使い方](../math/convolution-ntt.md#practice)（練習）
+- ABC291 Ex. Balanced Tree → [重心分解](../tree/centroid-decomposition.md#abc291_h)（例題）
+- ABC292 D. Unicyclic Components → [連結成分](../graph/connected-components.md#practice)（練習）、[なもりグラフ](../graph/namori-graph.md#practice)（練習）、[Union-Find](../ds/union-find.md#practice)（練習）
+- ABC292 F. Regular Triangle Inside a Rectangle → [回転・平行移動・アフィン変換](../geometry/rotation-transform.md#practice)（練習）、[円と幾何の最適化](../geometry/circle-geometry.md#practice)（練習）
+- ABC292 G. Count Strictly Increasing Sequences → [区間 DP の応用](../dp/interval-dp-advanced.md#practice)（練習）
+- ABC293 E. Geometric Progression → [等比数列の和を mod で求める](../math/geometric-series-mod.md#practice)（練習）
+- ABC293 G. Triple Index → [Mo's algorithm](../ds/mo-algorithm.md#abc293_g)（例題）
+- ABC294 F. Sugar Water 2 → [平均・中央値の最大化](../basics/fractional-binary-search.md#practice)（練習）
+- ABC294 G. Distance Queries on a Tree → [オイラーツアー](../tree/euler-tour.md#abc294_g)（例題）、[最小共通祖先（LCA）](../tree/lca.md#practice)（練習）、[HL 分解](../tree/hld.md#practice)（練習）
+- ABC295 E. Kth Number → [期待値と確率の変換](../comb/expectation-tail-sum.md#abc295_e)（例題）
+- ABC295 Ex. E or m → [部分集合の高速ゼータ変換とメビウス変換](../comb/zeta-mobius-subset.md#challenge)（力試し）
+- ABC296 D. M<=ab → [商の列挙](../math/floor-quotient-enum.md#practice)（練習）
+- ABC296 E. Transition Game → [強連結成分分解（SCC）](../graph/scc.md#practice)（練習）、[Functional graph（出次数 1 のグラフ）](../graph/functional-graph.md#practice)（練習）
+- ABC296 F. Simultaneous Swap → [置換の偶奇](../comb/permutation-parity.md#practice)（練習）
+- ABC296 G. Polygon and Points → [凸包と凸多角形](../geometry/convex-hull.md#abc296_g)（例題）、[誤差の扱いと整数での処理](../geometry/geometry-precision.md#challenge)（力試し）
+- ABC296 Ex. Unite → [プロファイル DP](../dp/broken-profile-dp.md#challenge)（力試し）
+- ABC297 E. Kth Takoyaki Set → [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md#practice)（練習）
+- ABC297 F. Minimum Bounding Box 2 → [包除原理](../comb/inclusion-exclusion.md#practice)（練習）
+- ABC297 G. Constrained Nim 2 → [Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md#abc297_g)（例題）
+- ABC298 B. Coloring Matrix → [回転・平行移動・アフィン変換](../geometry/rotation-transform.md#practice)（練習）
+- ABC298 E. Unfair Sugoroku → [確率 DP](../comb/probability-dp.md#practice)（練習）
+- ABC298 Ex. Sum of Min of Length → [木の上のパスの判定と分解](../tree/tree-path.md#challenge)（力試し）
+- ABC299 D. Find by Query → [インタラクティブ問題](../misc/interactive.md#abc299_d)（例題）、[二分探索](../basics/binary-search.md#practice)（練習）
+- ABC299 F. Square Subsequence → [部分列 DP](../dp/subsequence-dp.md#practice)（練習）
+
+### ABC300〜ABC349 {#abc-300}
+
+- ABC300 D. AABCC → [エラトステネスの篩](../math/sieve-eratosthenes.md#practice)（練習）
+- ABC300 E. Dice Product 3 → [メモ化再帰](../dp/memoized-recursion.md#practice)（練習）、[確率・期待値を mod 998244353 で答える](../comb/rational-mod.md#practice)（練習）、[期待値 DP](../comb/expected-value-dp.md#practice)（練習）
+- ABC300 G. P-smooth number → [半分全列挙](../basics/meet-in-the-middle.md#challenge)（力試し）、[素因数の指数で考える](../math/prime-exponent-vector.md#challenge)（力試し）
+- ABC300 Ex. Fibonacci: Revisited → [線形漸化式の高速化](../math/linear-recurrence-fast.md#practice)（練習）
+- ABC301 E. Pac-Takahashi → [bitDP](../dp/bit-dp.md#practice)（練習）
+- ABC302 D. Impartial Gift → [二分探索](../basics/binary-search.md#practice)（練習）
+- ABC302 F. Merge Set → [状態を頂点にする](../graph/extended-dijkstra.md#practice)（練習）
+- ABC302 Ex. Ball Collector → [ロールバックできる Union-Find](../ds/rollback-union-find.md#abc302_h)（例題）、[根からのパスを DFS で持ち回る](../tree/root-path-dfs.md#challenge)（力試し）
+- ABC303 E. A Gift From the Stars → [木の基本性質と表現](../tree/tree-basics.md#abc303_e)（例題）、[木の次数列と Prüfer 列](../tree/tree-degree.md#practice)（練習）
+- ABC303 G. Bags Game → [ミニマックス](../comb/minimax.md#challenge)（力試し）
+- ABC303 Ex. Constrained Tree Degree → [母関数の考え方](../comb/generating-function-counting.md#abc303_h)（例題）、[形式的冪級数と多項式の演算](../math/fps-basics.md#practice)（練習）、[ラベル付き木の数え上げ](../comb/cayley-pruefer.md#challenge)（力試し）
+- ABC304 F. Shift Table → [KMP 法と文字列の周期](../string/kmp.md#abc304_f)（例題）、[約数包除](../comb/divisor-inclusion-exclusion.md#practice)（練習）、[メビウス関数とメビウス反転](../comb/mobius-function.md#practice)（練習）
+- ABC305 F. Dungeon Explore → [インタラクティブ問題](../misc/interactive.md#practice)（練習）
+- ABC305 G. Banned Substrings → [行列累乗](../math/matrix-power.md#abc305_g)（例題）、[照合オートマトン上の DP](../string/string-automaton-dp.md#practice)（練習）
+- ABC306 D. Poisonous Full-Course → [DP の状態の設計](../dp/dp-state-design.md#practice)（練習）
+- ABC306 E. Best Performances → [上位 K 個の和と中央値の管理](../ds/top-k-multiset.md#abc306_e)（例題）
+- ABC307 C. Ideal Sheet → [全探索の設計](../basics/brute-force.md#practice)（練習）
+- ABC307 D. Mismatched Parentheses → [スタック・キュー・deque の使いどころ](../ds/stack-techniques.md#practice)（練習）
+- ABC307 E. Distinct Adjacent → [DP の状態の設計](../dp/dp-state-design.md#practice)（練習）、[和・積の法則と順列・組合せ](../comb/counting-basics.md#practice)（練習）
+- ABC307 F. Virus 2 → [セグメント木上の二分探索](../ds/segment-tree-binary-search.md#challenge)（力試し）
+- ABC308 C. Standings → [ソートで考える](../basics/sorting-techniques.md#practice)（練習）
+- ABC308 G. Minimum Xor Pair Query → [Binary Trie](../ds/binary-trie.md#abc308_g)（例題）
+- ABC309 C. Medicine → [イベントソートと平面走査の基本](../basics/event-sort.md#abc309_c)（例題）
+- ABC309 E. Family and Insurance → [根付き木と走査順](../tree/tree-traversal.md#practice)（練習）、[木の上の累積和・いもす法](../tree/tree-imos.md#practice)（練習）
+- ABC309 F. Box in Box → [値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md#practice)（練習）
+- ABC309 G. Ban Permutation → [包除 DP](../comb/inclusion-exclusion-dp.md#abc309_g)（例題）、[挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md#practice)（練習）
+- ABC309 Ex. Simple Path Counting Problem → [鏡像法とカタラン数](../comb/reflection-principle.md#challenge)（力試し）
+- ABC310 D. Peaceful Teams → [再帰による全列挙](../basics/recursive-enumeration.md#abc310_d)（例題）、[部分集合を列挙する DP](../dp/subset-enumeration-dp.md#practice)（練習）、[重複の除き方](../comb/counting-dedup.md#practice)（練習）、[第 2 種スターリング数とベル数](../comb/bell-number.md#practice)（練習）
+- ABC311 C. Find it! → [閉路の検出と復元](../graph/cycle-detection.md#practice)（練習）
+- ABC311 E. Defect-free Squares → [グリッド上の DP](../dp/dp-grid.md#abc311_e)（例題）、[2 次元累積和](../basics/prefix-sum-2d.md#practice)（練習）
+- ABC311 F. Yet Another Grid Task → [重複の除き方](../comb/counting-dedup.md#practice)（練習）
+- ABC311 G. One More Grid Task → [単調スタックとスライド最小値](../ds/monotonic-stack.md#challenge)（力試し）
+- ABC311 Ex. Many Illumination Plans → [Static Top Tree と木 DP の動的更新](../tree/static-top-tree.md#practice)（練習）
+- ABC312 D. Count Bracket Sequences → [DP の状態の設計](../dp/dp-state-design.md#practice)（練習）
+- ABC312 Ex. snukesnuke → [KMP 法と文字列の周期](../string/kmp.md#challenge)（力試し）
+- ABC313 D. Odd or Even → [掃き出し法](../math/gaussian-elimination.md#abc313_d)（例題）、[インタラクティブ問題](../misc/interactive.md#practice)（練習）
+- ABC313 G. Redistribution of Piles → [floor sum](../math/floor-sum.md#challenge)（力試し）
+- ABC314 E. Roulettes → [期待値 DP](../comb/expected-value-dp.md#practice)（練習）、[最適戦略の期待値](../comb/optimal-strategy-expectation.md#practice)（練習）
+- ABC314 F. A Certain Game → [マージテク](../tree/small-to-large.md#practice)（練習）
+- ABC315 E. Prerequisites → [深さ優先探索（DFS）](../graph/dfs.md#abc315_e)（例題）、[トポロジカルソート](../graph/topological-sort.md#practice)（練習）
+- ABC315 F. Shortcuts → [DP の状態の削減](../dp/dp-dimension-reduction.md#practice)（練習）
+- ABC315 G. Ai + Bj + Ck = X (1 <= i, j, k <= N) → [拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md#challenge)（力試し）
+- ABC317 D. President → [ナップサック DP](../dp/knapsack-01.md#practice)（練習）
+- ABC317 F. Nim → [桁 DP の応用](../dp/digit-dp-advanced.md#practice)（練習）
+- ABC317 G. Rearranging → [二部マッチング](../graph/bipartite-matching.md#challenge)（力試し）
+- ABC318 E. Sandwiches → [一部を固定して数える](../thinking/fix-variable.md#abc318_e)（例題）
+- ABC318 G. Typical Path Problem → [最大流](../graph/max-flow.md#practice)（練習）
+- ABC318 Ex. Count Strong Test Cases → [形式的冪級数と多項式の演算](../math/fps-basics.md#abc318_h)（例題）
+- ABC319 E. Bus Stops → [時刻で変わる辺の最短路](../graph/time-dependent-dijkstra.md#practice)（練習）
+- ABC319 G. Counting Shortest Paths → [補グラフ上の BFS](../graph/complement-graph-bfs.md#abc319_g)（例題）
+- ABC320 G. Slot Strategy 2 (Hard) → [二部マッチング](../graph/bipartite-matching.md#challenge)（力試し）
+- ABC321 D. Set Menu → [二分探索](../basics/binary-search.md#practice)（練習）
+- ABC321 E. Complete Binary Tree → [完全二分木](../tree/complete-binary-tree.md#challenge)（力試し）
+- ABC321 F. #(subset sum = K) with Add and Erase → [戻す DP](../dp/knapsack-undo.md#abc321_f)（例題）、[形式的冪級数と多項式の演算](../math/fps-basics.md#practice)（練習）、[母関数の考え方](../comb/generating-function-counting.md#practice)（練習）
+- ABC321 G. Electric Circuit → [連結なグラフの数え上げ](../comb/counting-labeled-graphs.md#practice)（練習）、[部分集合を列挙する DP](../dp/subset-enumeration-dp.md#challenge)（力試し）
+- ABC322 D. Polyomino → [全探索の設計](../basics/brute-force.md#challenge)（力試し）
+- ABC322 E. Product Development → [DP の状態の設計](../dp/dp-state-design.md#practice)（練習）
+- ABC322 F. Vacation Query → [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md#abc322_f)（例題）
+- ABC323 D. Merge Slimes → [不変量・単調に変わる量](../thinking/invariant.md#abc323_d)（例題）
+- ABC323 E. Playlist → [確率・期待値を mod 998244353 で答える](../comb/rational-mod.md#abc323_e)（例題）、[確率 DP](../comb/probability-dp.md#practice)（練習）
+- ABC324 E. Joint Two Strings → [言い換えの典型](../thinking/reformulation.md#abc324_e)（例題）、[部分列の判定と次の出現位置の表](../string/subsequence-matching.md#practice)（練習）
+- ABC324 F. Beautiful Path → [平均・中央値の最大化](../basics/fractional-binary-search.md#abc324_f)（例題）
+- ABC324 G. Generate Arrays → [Wavelet Matrix](../ds/wavelet-matrix.md#abc324_g)（例題）
+- ABC325 C. Sensors → [グリッドグラフ](../graph/grid-graph.md#abc325_c)（例題）
+- ABC325 D. Printing Machine → [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md#abc325_d)（例題）
+- ABC325 E. Our clients, please wait a moment → [ダイクストラ法](../graph/dijkstra.md#practice)（練習）
+- ABC325 F. Sensor Optimization Dilemma → [DP の状態の削減](../dp/dp-dimension-reduction.md#abc325_f)（例題）
+- ABC325 G. offence → [区間 DP](../dp/interval-dp.md#challenge)（力試し）
+- ABC326 C. Peak → [尺取り法](../basics/two-pointers.md#practice)（練習）
+- ABC326 E. Revenge of "The Salary of AtCoder Inc." → [確率・期待値を mod 998244353 で答える](../comb/rational-mod.md#practice)（練習）
+- ABC326 G. Unlock Achievement → [燃やす埋める](../graph/project-selection.md#practice)（練習）
+- ABC327 D. Good Tuple Problem → [二部グラフ判定](../graph/bipartite-graph.md#abc327_d)（例題）、[重み付き Union-Find](../ds/weighted-union-find.md#practice)（練習）
+- ABC327 F. Apples → [平面走査](../ds/sweep-line-2d.md#abc327_f)（例題）
+- ABC328 D. Take ABC → [スタック・キュー・deque の使いどころ](../ds/stack-techniques.md#abc328_d)（例題）
+- ABC328 E. Modulo MST → [小さいグラフの全探索](../graph/small-graph-brute-force.md#practice)（練習）
+- ABC328 F. Good Set Query → [重み付き Union-Find](../ds/weighted-union-find.md#abc328_f)（例題）
+- ABC329 F. Colored Ball → [マージテク](../tree/small-to-large.md#abc329_f)（例題）
+- ABC330 D. Counting Ls → [一部を固定して数える](../thinking/fix-variable.md#abc330_d)（例題）
+- ABC330 E. Mex and Update → [set・multiset・map の応用](../ds/ordered-set.md#practice)（練習）、[区間を set で管理する](../ds/interval-set.md#practice)（練習）、[セグメント木上の二分探索](../ds/segment-tree-binary-search.md#practice)（練習）
+- ABC330 F. Minimize Bounding  Square → [絶対値の和の最小化と中央値](../basics/median-absolute.md#practice)（練習）、[マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md#practice)（練習）
+- ABC331 D. Tile Pattern → [2 次元累積和](../basics/prefix-sum-2d.md#abc331_d)（例題）
+- ABC331 F. Palindrome Query → [ローリングハッシュ](../string/rolling-hash.md#abc331_f)（例題）、[セグメント木に何を載せるか](../ds/segment-tree-monoids.md#practice)（練習）、[ハッシュの衝突と安全な設計](../string/hash-safety.md#practice)（練習）
+- ABC331 G. Collect Them All → [包除原理](../comb/inclusion-exclusion.md#challenge)（力試し）
+- ABC332 E. Lucky bag → [部分集合を列挙する DP](../dp/subset-enumeration-dp.md#practice)（練習）、[二乗の期待値・分散](../comb/expectation-of-square.md#practice)（練習）
+- ABC332 F. Random Update Query → [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md#practice)（練習）
+- ABC332 G. Not Too Many Balls → [最小カット](../graph/min-cut.md#challenge)（力試し）
+- ABC333 D. Erase Leaves → [根付き木と走査順](../tree/tree-traversal.md#practice)（練習）、[葉から考える](../tree/leaf-first.md#practice)（練習）
+- ABC333 F. Bomb Game 2 → [閉路のある期待値](../comb/expectation-linear-equations.md#abc333_f)（例題）
+- ABC333 G. Nearest Fraction → [Stern-Brocot 木と連分数](../math/stern-brocot.md#abc333_g)（例題）
+- ABC334 E. Christmas Color Grid 1 → [期待値の線形性と指示確率変数](../comb/linearity-of-expectation.md#abc334_e)（例題）
+- ABC334 G. Christmas Color Grid 2 → [辺の追加と削除が混ざる連結性](../graph/offline-dynamic-connectivity.md#abc334_g)（例題）、[橋・関節点・二重連結成分](../graph/lowlink.md#practice)（練習）
+- ABC335 E. Non-Decreasing Colorful Path → [DAG 上の DP](../dp/dp-dag.md#practice)（練習）
+- ABC335 F. Hop Sugoroku → [平方分割](../ds/sqrt-decomposition.md#abc335_f)（例題）
+- ABC335 G. Discrete Logarithm Problems → [位数・原始根・離散対数](../math/multiplicative-order.md#challenge)（力試し）
+- ABC336 E. Digit Sum Divisible → [桁 DP](../dp/digit-dp.md#practice)（練習）
+- ABC336 G. 16 Integers → [行列木定理](../graph/matrix-tree-theorem.md#abc336_g)（例題）
+- ABC337 C. Lining Up 2 → [配列で作る連結リスト](../ds/linked-list.md#practice)（練習）
+- ABC337 E. Bad Juice → [インタラクティブ問題](../misc/interactive.md#practice)（練習）
+- ABC337 G. Tree Inversion → [オイラーツアー](../tree/euler-tour.md#challenge)（力試し）
+- ABC338 E. Chords → [スタック・キュー・deque の使いどころ](../ds/stack-techniques.md#practice)（練習）
+- ABC338 F. Negative Traveling Salesman → [bitDP](../dp/bit-dp.md#practice)（練習）、[ワーシャルフロイド法](../graph/warshall-floyd.md#challenge)（力試し）
+- ABC338 G. evall → [構文解析](../misc/parsing.md#challenge)（力試し）
+- ABC339 D. Synchronized Players → [状態を頂点にする](../graph/extended-dijkstra.md#abc339_d)（例題）
+- ABC339 E. Smooth Subsequence → [値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md#abc339_e)（例題）、[セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md#practice)（練習）
+- ABC339 F. Product Equality → [ハッシュの衝突と安全な設計](../string/hash-safety.md#abc339_f)（例題）、[乱択アルゴリズム](../misc/randomized.md#practice)（練習）
+- ABC339 G. Smaller Sum → [マージソート木](../ds/merge-sort-tree.md#abc339_g)（例題）、[永続データ構造](../ds/persistent-data-structures.md#practice)（練習）、[Wavelet Matrix](../ds/wavelet-matrix.md#practice)（練習）
+- ABC340 C. Divide and Divide → [メモ化再帰](../dp/memoized-recursion.md#abc340_c)（例題）
+- ABC340 D. Super Takahashi Bros. → [ダイクストラ法](../graph/dijkstra.md#practice)（練習）
+- ABC340 E. Mancala 2 → [BIT（Fenwick Tree）](../ds/fenwick-tree.md#practice)（練習）、[遅延セグメント木](../ds/lazy-segment-tree.md#practice)（練習）
+- ABC340 F. S = 1 → [拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md#practice)（練習）
+- ABC340 G. Leaf Color → [Auxiliary Tree](../tree/auxiliary-tree.md#abc340_g)（例題）
+- ABC341 D. Only one of two → [K 番目の値](../basics/kth-value.md#abc341_d)（例題）
+- ABC341 E. Alternating String → [セグメント木](../ds/segment-tree.md#abc341_e)（例題）
+- ABC341 F. Breakdown → [DP の計算順序](../dp/dp-order.md#practice)（練習）
+- ABC341 G. Highest Ratio → [凸包と凸多角形](../geometry/convex-hull.md#abc341_g)（例題）
+- ABC342 D. Square Pair → [素因数の指数で考える](../math/prime-exponent-vector.md#abc342_d)（例題）、[最小素因数の篩と線形篩](../math/spf-sieve.md#practice)（練習）
+- ABC342 E. Last Train → [時刻で変わる辺の最短路](../graph/time-dependent-dijkstra.md#abc342_e)（例題）
+- ABC342 F. Black Jack → [最適戦略の期待値](../comb/optimal-strategy-expectation.md#practice)（練習）
+- ABC342 G. Retroactive Range Chmax → [遅延セグメント木](../ds/lazy-segment-tree.md#challenge)（力試し）
+- ABC343 B. Adjacency Matrix → [グラフの表現と用語](../graph/graph-basics.md#practice)（練習）
+- ABC343 F. Second Largest Query → [セグメント木に何を載せるか](../ds/segment-tree-monoids.md#abc343_f)（例題）
+- ABC343 G. Compress Strings → [bitDP](../dp/bit-dp.md#challenge)（力試し）、[Z-algorithm](../string/z-algorithm.md#challenge)（力試し）
+- ABC344 D. String Bags → [ナップサック DP](../dp/knapsack-01.md#practice)（練習）
+- ABC344 E. Insert or Erase → [配列で作る連結リスト](../ds/linked-list.md#abc344_e)（例題）
+- ABC344 F. Earn to Advance → [グリッド上の DP](../dp/dp-grid.md#practice)（練習）
+- ABC345 D. Tiling → [再帰による全列挙](../basics/recursive-enumeration.md#practice)（練習）
+- ABC345 E. Colorful Subsequence → [DP の状態の設計](../dp/dp-state-design.md#challenge)（力試し）
+- ABC345 F. Many Lamps → [葉から考える](../tree/leaf-first.md#challenge)（力試し）
+- ABC346 F. SSttrriinngg in StringString → [部分列の判定と次の出現位置の表](../string/subsequence-matching.md#practice)（練習）
+- ABC346 G. Alone → [平面走査](../ds/sweep-line-2d.md#practice)（練習）
+- ABC347 G. Grid Coloring 2 → [燃やす埋める](../graph/project-selection.md#challenge)（力試し）
+- ABC348 D. Medicines on Grid → [状態を頂点にする](../graph/extended-dijkstra.md#practice)（練習）
+- ABC348 E. Minimize Sum of Distances → [木 DP](../dp/tree-dp.md#practice)（練習）、[木の重心](../tree/tree-centroid.md#practice)（練習）
+- ABC348 F. Oddly Similar → [bitset による高速化](../misc/bitset-speedup.md#abc348_f)（例題）
+- ABC348 G. Max (Sum - Max) → [Monge 性による DP の高速化](../dp/monge.md#abc348_g)（例題）
+- ABC349 E. Weighted Tic-Tac-Toe → [ミニマックス](../comb/minimax.md#practice)（練習）
+- ABC349 F. Subsequence LCM → [部分集合の高速ゼータ変換とメビウス変換](../comb/zeta-mobius-subset.md#practice)（練習）
+
+### ABC350〜ABC399 {#abc-350}
+
+- ABC350 C. Sort → [構築問題の考え方](../thinking/construction.md#practice)（練習）
+- ABC350 E. Toward 0 → [期待値 DP](../comb/expected-value-dp.md#practice)（練習）
+- ABC350 F. Transpose → [構文解析](../misc/parsing.md#practice)（練習）
+- ABC350 G. Mediator → [次数による平方分割](../graph/degree-sqrt.md#practice)（練習）、[動的木](../tree/dynamic-tree.md#practice)（練習）、[マージテク](../tree/small-to-large.md#practice)（練習）、[bitset による高速化](../misc/bitset-speedup.md#practice)（練習）
+- ABC351 D. Grid and Magnet → [グリッドグラフ](../graph/grid-graph.md#practice)（練習）
+- ABC351 E. Jump Distance Sum → [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md#abc351_e)（例題）
+- ABC351 F. Double Sum → [BIT（Fenwick Tree）](../ds/fenwick-tree.md#abc351_f)（例題）、[主客転倒・寄与](../thinking/contribution.md#practice)（練習）
+- ABC351 G. Hash on Tree → [Static Top Tree と木 DP の動的更新](../tree/static-top-tree.md#abc351_g)（例題）
+- ABC352 D. Permutation Subsequence → [単調スタックとスライド最小値](../ds/monotonic-stack.md#practice)（練習）
+- ABC352 E. Clique Connect → [最小全域木](../graph/minimum-spanning-tree.md#practice)（練習）
+- ABC352 G. Socks 3 → [分割統治 FFT・オンライン畳み込み](../math/online-convolution.md#abc352_g)（例題）、[期待値と確率の変換](../comb/expectation-tail-sum.md#challenge)（力試し）
+- ABC353 E. Yet Another Sigma Problem → [Trie](../string/trie.md#abc353_e)（例題）
+- ABC353 G. Merchant Takahashi → [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md#abc353_g)（例題）
+- ABC354 D. AtCoder Wallpaper → [周期性の検出](../basics/periodicity.md#practice)（練習）
+- ABC354 E. Remove Pairs → [ゲームの基本と勝敗の DP](../comb/game-basics.md#abc354_e)（例題）
+- ABC354 F. Useless for LIS → [最長増加部分列](../dp/lis.md#practice)（練習）
+- ABC354 G. Select Strings → [最小パス被覆と Hall の定理](../graph/dilworth-path-cover.md#practice)（練習）
+- ABC355 E. Guess the Sum → [インタラクティブ問題](../misc/interactive.md#challenge)（力試し）
+- ABC355 F. MST Query → [最小全域木](../graph/minimum-spanning-tree.md#challenge)（力試し）、[Union-Find の応用](../ds/union-find-applications.md#challenge)（力試し）
+- ABC355 G. Baseball → [Alien DP](../dp/alien-dp.md#practice)（練習）
+- ABC356 D. Masked Popcount → [bit 演算の基本と XOR の性質](../basics/bit-operations.md#practice)（練習）
+- ABC356 E. Max/Min → [Σ の変形](../math/sigma-manipulation.md#practice)（練習）、[調和級数と倍数の列挙](../math/harmonic-sum.md#practice)（練習）
+- ABC356 F. Distance Component Size Query → [クエリの先読み](../ds/offline-queries.md#challenge)（力試し）
+- ABC357 C. Sierpinski carpet → [再帰的な構造](../basics/recursion-structure.md#practice)（練習）
+- ABC357 D. 88888888 → [等比数列の和を mod で求める](../math/geometric-series-mod.md#abc357_d)（例題）、[逆元と mod での割り算](../math/mod-inverse.md#practice)（練習）、[modint](../math/modint.md#practice)（練習）
+- ABC357 E. Reachability in Functional Graph → [Functional graph（出次数 1 のグラフ）](../graph/functional-graph.md#abc357_e)（例題）、[メモ化再帰](../dp/memoized-recursion.md#practice)（練習）、[強連結成分分解（SCC）](../graph/scc.md#practice)（練習）
+- ABC357 F. Two Sequence Queries → [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md#abc357_f)（例題）
+- ABC359 D. Avoid K Palindrome → [DP の状態の設計](../dp/dp-state-design.md#abc359_d)（例題）、[回文の扱いと Manacher](../string/palindrome.md#practice)（練習）
+- ABC359 E. Water Tank → [単調スタックとスライド最小値](../ds/monotonic-stack.md#abc359_e)（例題）、[セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md#practice)（練習）
+- ABC359 F. Tree Degree Optimization → [木の次数列と Prüfer 列](../tree/tree-degree.md#abc359_f)（例題）、[三分探索](../basics/ternary-search.md#practice)（練習）
+- ABC359 G. Sum of Tree Distance → [マージテク](../tree/small-to-large.md#practice)（練習）、[重心分解](../tree/centroid-decomposition.md#practice)（練習）、[Auxiliary Tree](../tree/auxiliary-tree.md#practice)（練習）、[木 DP](../dp/tree-dp.md#challenge)（力試し）
+- ABC360 E. Random Swaps of Balls → [対称性で確率を求める](../comb/probability-symmetry.md#abc360_e)（例題）
+- ABC360 F. InterSections → [平面走査](../ds/sweep-line-2d.md#challenge)（力試し）
+- ABC360 G. Suitable Edit for LIS → [最長増加部分列](../dp/lis.md#practice)（練習）
+- ABC361 B. Intersection of Cuboids → [ベクトルと外積](../geometry/geometry-vectors.md#practice)（練習）
+- ABC361 D. Go Stone Puzzle → [状態を頂点にする](../graph/extended-dijkstra.md#practice)（練習）
+- ABC361 E. Tree and Hamilton Path 2 → [木の直径と最遠点](../tree/tree-diameter.md#abc361_e)（例題）
+- ABC361 F. x = a^b → [整数の平方根・K 乗根と累乗数](../math/integer-root.md#practice)（練習）、[約数包除](../comb/divisor-inclusion-exclusion.md#practice)（練習）
+- ABC362 D. Shortest Path 3 → [ダイクストラ法](../graph/dijkstra.md#abc362_d)（例題）
+- ABC362 F. Perfect Matching on a Tree → [木の重心](../tree/tree-centroid.md#abc362_f)（例題）
+- ABC362 G. Count Substring Query → [Aho-Corasick 法](../string/aho-corasick.md#abc362_g)（例題）、[Suffix Array と LCP 配列](../string/suffix-array.md#practice)（練習）
+- ABC363 F. Palindromic Expression → [回文の扱いと Manacher](../string/palindrome.md#challenge)（力試し）
+- ABC364 D. K-th Nearest → [K 番目の値](../basics/kth-value.md#practice)（練習）
+- ABC364 E. Maximum Glutton → [DP の状態の削減](../dp/dp-dimension-reduction.md#practice)（練習）
+- ABC364 F. Range Connect MST → [最小全域木](../graph/minimum-spanning-tree.md#challenge)（力試し）、[Union-Find の応用](../ds/union-find-applications.md#challenge)（力試し）
+- ABC364 G. Last Major City → [最小シュタイナー木](../graph/steiner-tree.md#abc364_g)（例題）
+- ABC365 E. Xor Sigma Problem → [bit ごとに独立に考える](../basics/bitwise-independence.md#practice)（練習）
+- ABC365 G. AtCoder Office → [平方分割](../ds/sqrt-decomposition.md#practice)（練習）
+- ABC366 E. Manhattan Multifocal Ellipse → [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md#abc366_e)（例題）
+- ABC366 F. Maximum Composition → [並べ替えてから DP する](../dp/exchange-argument-dp.md#abc366_f)（例題）、[交換論法と比較関数の設計](../basics/exchange-argument.md#practice)（練習）
+- ABC366 G. XOR Neighbors → [掃き出し法](../math/gaussian-elimination.md#challenge)（力試し）
+- ABC367 D. Pedometer → [累積和と連想配列で区間を数える](../basics/prefix-sum-counting.md#practice)（練習）
+- ABC367 E. Permute K times → [ダブリング](../basics/doubling.md#practice)（練習）
+- ABC367 F. Rearrange Query → [集合・多重集合のハッシュ](../string/hashing-for-sets.md#abc367_f)（例題）
+- ABC368 D. Minimum Steiner Tree → [指定頂点を結ぶ最小の部分木](../tree/steiner-subtree.md#abc368_d)（例題）
+- ABC368 F. Dividing Game → [Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md#abc368_f)（例題）、[最小素因数の篩と線形篩](../math/spf-sieve.md#practice)（練習）、[Nim と XOR](../comb/nim.md#practice)（練習）
+- ABC369 C. Count Arithmetic Subarrays → [いもす法](../basics/imos.md#practice)（練習）
+- ABC369 F. Gather Coins → [DP の復元](../dp/dp-reconstruction.md#practice)（練習）、[グリッド上の DP](../dp/dp-grid.md#practice)（練習）
+- ABC369 G. As far as possible → [木の直径と最遠点](../tree/tree-diameter.md#challenge)（力試し）
+- ABC370 D. Cross Explosion → [set・multiset・map の応用](../ds/ordered-set.md#practice)（練習）
+- ABC371 C. Make Isomorphic → [小さいグラフの全探索](../graph/small-graph-brute-force.md#practice)（練習）
+- ABC371 F. Takahashi in Narrow Road → [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md#practice)（練習）
+- ABC371 G. Lexicographically Smallest Permutation → [中国剰余定理](../math/crt.md#challenge)（力試し）、[置換の巡回分解](../comb/permutation-cycles.md#challenge)（力試し）
+- ABC372 D. Buildings → [単調スタックとスライド最小値](../ds/monotonic-stack.md#abc372_d)（例題）
+- ABC372 E. K-th Largest Connected Components → [Union-Find の応用](../ds/union-find-applications.md#abc372_e)（例題）
+- ABC372 F. Teleporting Takahashi 2 → [インライン DP](../dp/inline-dp.md#abc372_f)（例題）
+- ABC373 D. Hidden Weights → [重み付き Union-Find](../ds/weighted-union-find.md#practice)（練習）
+- ABC373 F. Knapsack with Diminishing Values → [ナップサック DP](../dp/knapsack-01.md#challenge)（力試し）
+- ABC373 G. No Cross Matching → [ベクトルと外積](../geometry/geometry-vectors.md#challenge)（力試し）
+- ABC374 G. Only One Product Name → [最小パス被覆と Hall の定理](../graph/dilworth-path-cover.md#practice)（練習）
+- ABC375 F. Road Blocked → [ワーシャルフロイド法](../graph/warshall-floyd.md#abc375_f)（例題）
+- ABC375 G. Road Blocked 2 → [橋・関節点・二重連結成分](../graph/lowlink.md#practice)（練習）、[最短路 DAG](../graph/shortest-path-dag.md#challenge)（力試し）
+- ABC376 D. Cycle → [ダイクストラ法](../graph/dijkstra.md#practice)（練習）
+- ABC376 E. Max × Sum → [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md#practice)（練習）
+- ABC376 F. Hands on Ring (Hard) → [DP の状態の削減](../dp/dp-dimension-reduction.md#practice)（練習）
+- ABC376 G. Treasure Hunting → [比で親に併合する貪欲](../tree/tree-ratio-greedy.md#abc376_g)（例題）
+- ABC377 E. Permute K times 2 → [グラフへの帰着](../graph/graph-modeling.md#practice)（練習）、[Functional graph（出次数 1 のグラフ）](../graph/functional-graph.md#practice)（練習）、[置換の巡回分解](../comb/permutation-cycles.md#practice)（練習）
+- ABC377 F. Avoid Queen Attack → [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md#challenge)（力試し）
+- ABC377 G. Edit to Match → [ハッシュの衝突と安全な設計](../string/hash-safety.md#practice)（練習）、[Trie](../string/trie.md#practice)（練習）
+- ABC378 D. Count Simple Paths → [深さ優先探索（DFS）](../graph/dfs.md#practice)（練習）
+- ABC378 E. Mod Sigma Problem → [転倒数](../ds/inversion-number.md#practice)（練習）
+- ABC378 F. Add One Edge 2 → [なもりグラフ](../graph/namori-graph.md#practice)（練習）、[木の基本性質と表現](../tree/tree-basics.md#practice)（練習）
+- ABC378 G. Everlasting LIDS → [Young 図形とフック長公式](../comb/young-tableaux.md#abc378_g)（例題）
+- ABC379 D. Home Garden → [全体への操作を変数で持つ](../ds/global-offset.md#practice)（練習）
+- ABC379 E. Sum of All Substrings → [主客転倒・寄与](../thinking/contribution.md#practice)（練習）
+- ABC379 F. Buildings 2 → [マージソート木](../ds/merge-sort-tree.md#practice)（練習）
+- ABC379 G. Count Grid 3-coloring → [プロファイル DP](../dp/broken-profile-dp.md#abc379_g)（例題）
+- ABC380 B. Hurdle Parsing → [構文解析](../misc/parsing.md#practice)（練習）
+- ABC380 C. Move Segment → [ランレングス圧縮](../basics/run-length-encoding.md#practice)（練習）
+- ABC380 E. 1D Bucket Tool → [区間を set で管理する](../ds/interval-set.md#abc380_e)（例題）
+- ABC380 F. Exchange Game → [ゲームの基本と勝敗の DP](../comb/game-basics.md#practice)（練習）、[メモ化再帰](../dp/memoized-recursion.md#challenge)（力試し）
+- ABC380 G. Another Shuffle Window → [期待値の線形性と指示確率変数](../comb/linearity-of-expectation.md#practice)（練習）、[対称性で確率を求める](../comb/probability-symmetry.md#practice)（練習）、[転倒数](../ds/inversion-number.md#challenge)（力試し）
+- ABC382 C. Kaiten Sushi → [セグメント木上の二分探索](../ds/segment-tree-binary-search.md#abc382_c)（例題）
+- ABC382 E. Expansion Packs → [確率 DP](../comb/probability-dp.md#practice)（練習）、[期待値 DP](../comb/expected-value-dp.md#practice)（練習）
+- ABC382 F. Falling Bars → [遅延セグメント木](../ds/lazy-segment-tree.md#abc382_f)（例題）
+- ABC383 C. Humidifier 3 → [幅優先探索（BFS）と無重み最短路](../graph/bfs.md#practice)（練習）
+- ABC383 E. Sum of Max Matching → [最小ボトルネック路](../graph/bottleneck-path.md#abc383_e)（例題）
+- ABC383 G. Bar Cover → [Monge 性による DP の高速化](../dp/monge.md#practice)（練習）
+- ABC384 G. Abs Sum → [Mo's algorithm](../ds/mo-algorithm.md#practice)（練習）
+- ABC385 D. Santa Claus 2 → [set・multiset・map の応用](../ds/ordered-set.md#practice)（練習）
+- ABC385 E. Snowflake Tree → [木の次数列と Prüfer 列](../tree/tree-degree.md#practice)（練習）
+- ABC385 F. Visible Buildings → [誤差の扱いと整数での処理](../geometry/geometry-precision.md#abc385_f)（例題）
+- ABC385 G. Counting Buildings → [第 1 種スターリング数](../comb/stirling-first.md#abc385_g)（例題）、[母関数の考え方](../comb/generating-function-counting.md#practice)（練習）
+- ABC389 F. Rated Range → [セグメント木上の二分探索](../ds/segment-tree-binary-search.md#practice)（練習）
+- ABC389 G. Odd Even Graph → [連結なグラフの数え上げ](../comb/counting-labeled-graphs.md#challenge)（力試し）
+- ABC390 D. Stone XOR → [第 2 種スターリング数とベル数](../comb/bell-number.md#abc390_d)（例題）、[再帰による全列挙](../basics/recursive-enumeration.md#challenge)（力試し）
+- ABC391 F. K-th Largest Triplet → [優先度付きキュー](../ds/priority-queue.md#practice)（練習）
+- ABC391 G. Many LCS → [最長共通部分列と編集距離](../dp/lcs.md#challenge)（力試し）
+- ABC392 F. Insert → [セグメント木上の二分探索](../ds/segment-tree-binary-search.md#abc392_f)（例題）、[K 番目の値を求めるデータ構造](../ds/kth-element.md#practice)（練習）
+- ABC392 G. Fine Triplets → [畳み込みの使い方](../math/convolution-ntt.md#abc392_g)（例題）
+- ABC393 E. GCD of Subset → [調和級数と倍数の列挙](../math/harmonic-sum.md#abc393_e)（例題）、[約数・倍数のゼータ変換とメビウス変換](../comb/zeta-mobius-divisor.md#practice)（練習）
+- ABC394 D. Colorful Bracket Sequence → [括弧列](../patterns/bracket-sequence.md#practice)（練習）
+- ABC394 E. Palindromic Shortest Path → [回文の扱いと Manacher](../string/palindrome.md#abc394_e)（例題）
+- ABC394 G. Dense Buildings → [最小ボトルネック路](../graph/bottleneck-path.md#practice)（練習）、[マージテク](../tree/small-to-large.md#practice)（練習）
+- ABC395 G. Minimum Steiner Tree 2 → [最小シュタイナー木](../graph/steiner-tree.md#practice)（練習）
+- ABC396 F. Rotated Inversions → [転倒数](../ds/inversion-number.md#practice)（練習）
+- ABC397 E. Path Decomposition of a Tree → [葉から考える](../tree/leaf-first.md#abc397_e)（例題）
+- ABC397 G. Maximize Distance → [最小カット](../graph/min-cut.md#challenge)（力試し）
+- ABC398 E. Tree Game → [ゲームの基本と勝敗の DP](../comb/game-basics.md#abc398_e)（例題）、[木の 2 色塗り分けと距離の偶奇](../tree/tree-bipartite.md#challenge)（力試し）
+- ABC398 F. ABCBA → [回文の扱いと Manacher](../string/palindrome.md#abc398_f)（例題）、[ローリングハッシュ](../string/rolling-hash.md#practice)（練習）、[Z-algorithm](../string/z-algorithm.md#practice)（練習）
+- ABC399 C. Make it Forest → [木の基本性質と表現](../tree/tree-basics.md#practice)（練習）
+
+### ABC400〜ABC449 {#abc-400}
+
+- ABC400 C. 2^a b^2 → [整数の平方根・K 乗根と累乗数](../math/integer-root.md#abc400_c)（例題）
+- ABC401 F. Add One Edge 3 → [木の直径と最遠点](../tree/tree-diameter.md#practice)（練習）
+- ABC401 G. Push Simultaneously → [二部マッチング](../graph/bipartite-matching.md#abc401_g)（例題）
+- ABC403 E. Forbidden Prefix → [Trie](../string/trie.md#practice)（練習）
+- ABC403 F. Shortest One Formula → [構文解析](../misc/parsing.md#abc403_f)（例題）
+- ABC403 G. Odd Position Sum Query → [平方分割](../ds/sqrt-decomposition.md#practice)（練習）、[Binary Trie](../ds/binary-trie.md#practice)（練習）、[値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md#challenge)（力試し）
+- ABC404 F. Lost and Pound → [整数の分割と分割数](../comb/partition-number.md#abc404_f)（例題）
+- ABC404 G. Specified Range Sums → [ベルマンフォード法](../graph/bellman-ford.md#practice)（練習）、[差分制約（牛ゲー）](../graph/difference-constraints.md#practice)（練習）
+- ABC405 E. Fruit Lineup → [二項係数の恒等式と和の公式](../comb/binomial-identities.md#practice)（練習）
+- ABC405 F. Chord Crossing → [マージソート木](../ds/merge-sort-tree.md#practice)（練習）
+- ABC405 G. Range Shuffle Query → [Mo's algorithm](../ds/mo-algorithm.md#challenge)（力試し）
+- ABC406 F. Compare Tree Weights → [オイラーツアー](../tree/euler-tour.md#abc406_f)（例題）
+- ABC407 E. Most Valuable Parentheses → [括弧列](../patterns/bracket-sequence.md#abc407_e)（例題）
+- ABC407 G. Domino Covering SUM → [最小費用流](../graph/min-cost-flow.md#practice)（練習）
+- ABC409 E. Pair Annihilation → [葉から考える](../tree/leaf-first.md#practice)（練習）
+- ABC409 F. Connecting Points → [Union-Find の応用](../ds/union-find-applications.md#practice)（練習）
+- ABC410 E. Battles in a Row → [DP の状態の削減](../dp/dp-dimension-reduction.md#practice)（練習）
+- ABC410 G. Longest Chord Chain → [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md#challenge)（力試し）
+- ABC411 E. E [max] → [期待値と確率の変換](../comb/expectation-tail-sum.md#practice)（練習）
+- ABC412 E. LCM Sequence → [区間篩](../math/segmented-sieve.md#abc412_e)（例題）
+- ABC412 F. Socks 4 → [最適戦略の期待値](../comb/optimal-strategy-expectation.md#abc412_f)（例題）
+- ABC412 G. Degree Harmony → [一般グラフのマッチング](../graph/general-matching.md#abc412_g)（例題）
+- ABC413 G. Big Banned Grid → [Union-Find で連結性を扱う](../graph/union-find-connectivity.md#practice)（練習）、[グリッドグラフ](../graph/grid-graph.md#challenge)（力試し）
+- ABC414 E. Count A%B=C → [商の列挙](../math/floor-quotient-enum.md#practice)（練習）
+- ABC414 G. AtCoder Express 4 → [区間に辺を張る](../graph/segment-tree-graph.md#abc414_g)（例題）
+- ABC415 E. Hungry Takahashi → [答えで二分探索](../basics/binary-search-answer.md#practice)（練習）
+- ABC417 F. Random Gathering → [期待値の線形性と指示確率変数](../comb/linearity-of-expectation.md#abc417_f)（例題）
+- ABC418 E. Trapezium → [誤差の扱いと整数での処理](../geometry/geometry-precision.md#abc418_e)（例題）
+- ABC419 F. All Included → [照合オートマトン上の DP](../string/string-automaton-dp.md#abc419_f)（例題）、[Aho-Corasick 法](../string/aho-corasick.md#practice)（練習）
+- ABC420 E. Reachability Query → [Union-Find の応用](../ds/union-find-applications.md#practice)（練習）
+- ABC421 D. RLE Moving → [ランレングス圧縮](../basics/run-length-encoding.md#challenge)（力試し）
+- ABC421 E. Yacht → [最適戦略の期待値](../comb/optimal-strategy-expectation.md#abc421_e)（例題）
+- ABC421 G. Increase to make it Increasing → [最小費用流](../graph/min-cost-flow.md#practice)（練習）
+- ABC422 E. Colinear → [乱択アルゴリズム](../misc/randomized.md#abc422_e)（例題）
+- ABC424 F. Adding Chords → [集合・多重集合のハッシュ](../string/hashing-for-sets.md#practice)（練習）
+- ABC425 G. Sum of Min of XOR → [Binary Trie](../ds/binary-trie.md#practice)（練習）
+- ABC426 G. Range Knapsack Query → [分割統治](../basics/divide-and-conquer.md#abc426_g)（例題）
+- ABC428 C. Brackets Stack Query → [スタック・キュー・deque の使いどころ](../ds/stack-techniques.md#practice)（練習）
+- ABC428 E. Farthest Vertex → [木の直径と最遠点](../tree/tree-diameter.md#abc428_e)（例題）
+- ABC428 G. Necklace → [Burnside の補題](../comb/burnside-lemma.md#abc428_g)（例題）
+- ABC430 E. Shift String → [Z-algorithm](../string/z-algorithm.md#abc430_e)（例題）、[ローリングハッシュ](../string/rolling-hash.md#practice)（練習）、[KMP 法と文字列の周期](../string/kmp.md#practice)（練習）
+- ABC430 G. Range Set Modifying Query → [区間を set で管理する](../ds/interval-set.md#practice)（練習）
+- ABC432 C. Candy Tribulation → [整数の割り算と余り](../math/integer-division.md#practice)（練習）
+- ABC433 G. Substring Game → [Suffix Array と LCP 配列](../string/suffix-array.md#practice)（練習）
+- ABC435 E. Cover query → [区間を set で管理する](../ds/interval-set.md#abc435_e)（例題）
+- ABC435 F. Cat exercise → [単調スタックとスライド最小値](../ds/monotonic-stack.md#practice)（練習）
+- ABC436 E. Minimum Swap → [置換の巡回分解](../comb/permutation-cycles.md#abc436_e)（例題）
+- ABC436 G. Linear Inequation → [線形漸化式の高速化](../math/linear-recurrence-fast.md#abc436_g)（例題）
+- ABC437 E. Sort Arrays → [Trie](../string/trie.md#practice)（練習）
+- ABC437 F. Manhattan Christmas Tree 2 → [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md#practice)（練習）
+- ABC438 F. Sum of Mex → [mex](../patterns/mex.md#practice)（練習）
+- ABC441 F. Must Buy → [戻す DP](../dp/knapsack-undo.md#practice)（練習）
+- ABC442 E. Laser Takahashi → [偏角ソート](../geometry/argument-sort.md#abc442_e)（例題）
+- ABC442 F. Diagonal Separation 2 → [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md#practice)（練習）
+- ABC443 G. Another Mod of Linear Problem → [floor sum](../math/floor-sum.md#abc443_g)（例題）
+- ABC445 G. Knight Placement → [燃やす埋める](../graph/project-selection.md#abc445_g)（例題）、[König の定理](../graph/konig-theorem.md#practice)（練習）
+- ABC447 F. Centipede Graph → [木 DP](../dp/tree-dp.md#abc447_f)（例題）、[木の直径と最遠点](../tree/tree-diameter.md#practice)（練習）
+- ABC447 G. Div. 1 & Div. 2 → [乱択アルゴリズム](../misc/randomized.md#challenge)（力試し）
+- ABC449 G. Many Repunit Sum 2 → [母関数の考え方](../comb/generating-function-counting.md#abc449_g)（例題）
+
+### ABC450〜ABC480 {#abc-450}
+
+ABC451〜ABC480 の D〜G（120 問）は、本文に載せていない問題も[最近の ABC → ページ](problem-sets.md#recent-abc)の表で、使う手法のページを引ける。
+
+- ABC450 G. Random Subtraction → [二乗の期待値・分散](../comb/expectation-of-square.md#abc450_g)（例題）
+- ABC451 E. Tree Distance → [木の構築・復元](../tree/tree-construction.md#abc451_e)（例題）
+- ABC451 F. Make Bipartite 3 → [二部グラフ判定](../graph/bipartite-graph.md#practice)（練習）、[重み付き Union-Find](../ds/weighted-union-find.md#practice)（練習）
+- ABC451 G. Minimum XOR Walk → [XOR 基底](../math/xor-basis.md#practice)（練習）、[Binary Trie](../ds/binary-trie.md#challenge)（力試し）
+- ABC452 D. No-Subsequence Substring → [部分列の判定と次の出現位置の表](../string/subsequence-matching.md#abc452_d)（例題）
+- ABC452 E. You WILL Like Sigma Problem → [周期性の検出](../basics/periodicity.md#practice)（練習）
+- ABC452 F. Interval Inversion Count → [転倒数](../ds/inversion-number.md#abc452_f)（例題）
+- ABC452 G. 221 Substring → [Suffix Automaton と発展の文字列アルゴリズム](../string/suffix-automaton.md#abc452_g)（例題）、[Suffix Array と LCP 配列](../string/suffix-array.md#practice)（練習）
+- ABC453 D. Go Straight → [状態を頂点にする](../graph/extended-dijkstra.md#practice)（練習）
+- ABC453 E. Team Division → [一部を固定して数える](../thinking/fix-variable.md#challenge)（力試し）
+- ABC453 G. Copy Query → [永続データ構造](../ds/persistent-data-structures.md#abc453_g)（例題）、[根からのパスを DFS で持ち回る](../tree/root-path-dfs.md#practice)（練習）
+- ABC454 D. (xx) → [括弧列](../patterns/bracket-sequence.md#practice)（練習）
+- ABC454 E. LRUD Moving → [偶奇に着目する](../thinking/parity.md#practice)（練習）
+- ABC454 F. Make it Palindrome 2 → [差分列への言い換え](../basics/difference-sequence.md#abc454_f)（例題）
+- ABC454 G. Mode in the Subtree → [マージテク](../tree/small-to-large.md#challenge)（力試し）
+- ABC455 D. Card Pile Query → [配列で作る連結リスト](../ds/linked-list.md#practice)（練習）
+- ABC455 E. Unbalanced ABC Substrings → [余事象](../thinking/complement.md#practice)（練習）
+- ABC455 F. Merge Slimes 2 → [遅延セグメント木](../ds/lazy-segment-tree.md#practice)（練習）
+- ABC455 G. Balanced Subarrays → [集合・多重集合のハッシュ](../string/hashing-for-sets.md#challenge)（力試し）
+- ABC456 D. Not Adjacent 2 → [部分列と部分文字列](../patterns/subsequence-and-substring.md#practice)（練習）
+- ABC456 E. Endless Holidays → [閉路の検出と復元](../graph/cycle-detection.md#challenge)（力試し）
+- ABC456 F. Plan Holidays → [セグメント木に何を載せるか](../ds/segment-tree-monoids.md#abc456_f)（例題）、[行列累乗](../math/matrix-power.md#practice)（練習）
+- ABC457 E. Crossing Table Cloth → [区間](../patterns/interval.md#practice)（練習）
+- ABC457 G. Catch All Apples → [最長増加部分列](../dp/lis.md#practice)（練習）、[マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md#challenge)（力試し）
+- ABC458 D. Chalkboard Median → [上位 K 個の和と中央値の管理](../ds/top-k-multiset.md#practice)（練習）
+- ABC458 F. Critical Misread → [照合オートマトン上の DP](../string/string-automaton-dp.md#abc458_f)（例題）、[行列累乗](../math/matrix-power.md#practice)（練習）、[Aho-Corasick 法](../string/aho-corasick.md#practice)（練習）
+- ABC458 G. Children Yearn for the Evil Kindergarten → [Monge 性による DP の高速化](../dp/monge.md#practice)（練習）、[Slope Trick](../dp/slope-trick.md#challenge)（力試し）
+- ABC459 D. Adjacent Distinct String → [貪欲法の考え方と正当性](../basics/greedy-basics.md#practice)（練習）
+- ABC459 E. Select from Subtrees → [葉から考える](../tree/leaf-first.md#abc459_e)（例題）
+- ABC459 F. -1, +1 → [差分列への言い換え](../basics/difference-sequence.md#abc459_f)（例題）
+- ABC460 D. Repeatedly Repainting → [幅優先探索（BFS）と無重み最短路](../graph/bfs.md#challenge)（力試し）
+- ABC460 E. x + y ≡ x + y → [言い換えの典型](../thinking/reformulation.md#practice)（練習）、[桁と mod](../math/digit-and-mod.md#practice)（練習）、[数え上げの考え方](../comb/counting-mindset.md#practice)（練習）
+- ABC460 F. Farthest Pair Query → [木の直径と最遠点](../tree/tree-diameter.md#practice)（練習）、[最小共通祖先（LCA）](../tree/lca.md#challenge)（力試し）、[セグメント木に何を載せるか](../ds/segment-tree-monoids.md#challenge)（力試し）
+- ABC460 G. Vertex Flip Query → [HL 分解](../tree/hld.md#abc460_g)（例題）
+- ABC461 D. Count Subgrid Sum = K → [2 次元累積和](../basics/prefix-sum-2d.md#practice)（練習）
+- ABC461 E. E-liter → [セグメント木](../ds/segment-tree.md#practice)（練習）
+- ABC461 F. Total Product is N → [約数の個数の上界と高度合成数](../math/divisor-count-bound.md#challenge)（力試し）
+- ABC461 G. Graph Problem 2026 → [König の定理](../graph/konig-theorem.md#practice)（練習）
+- ABC462 D. Accomplice → [いもす法](../basics/imos.md#practice)（練習）
+- ABC462 E. Alternating Costs → [対称性・鳩の巣原理・場合分け](../thinking/symmetry-pigeonhole-casework.md#practice)（練習）
+- ABC462 G. Completely Wrong → [包除 DP](../comb/inclusion-exclusion-dp.md#practice)（練習）、[包除原理](../comb/inclusion-exclusion.md#challenge)（力試し）
+- ABC463 D. Maximize the Gap → [答えで二分探索](../basics/binary-search-answer.md#practice)（練習）
+- ABC463 E. Roads and Gates → [状態を頂点にする](../graph/extended-dijkstra.md#practice)（練習）
+- ABC463 G. Random Walk Distance → [確率 DP](../comb/probability-dp.md#challenge)（力試し）
+- ABC464 E. Fill-Rect Query → [グリッド](../patterns/grid.md#practice)（練習）
+- ABC464 F. Random Vault Heist → [半分全列挙](../basics/meet-in-the-middle.md#challenge)（力試し）、[対称性で確率を求める](../comb/probability-symmetry.md#challenge)（力試し）
+- ABC464 G. Celester 2 → [Alien DP](../dp/alien-dp.md#practice)（練習）
+- ABC465 D. X to Y → [完全二分木](../tree/complete-binary-tree.md#practice)（練習）
+- ABC465 E. Digit Circus → [桁 DP](../dp/digit-dp.md#practice)（練習）
+- ABC465 F. Sjeltzer? → [2 次元累積和](../basics/prefix-sum-2d.md#challenge)（力試し）
+- ABC466 D. Placing Rooks → [操作列とクエリ](../patterns/operation-sequence.md#practice)（練習）
+- ABC466 E. Range Flip → [いもす法](../basics/imos.md#practice)（練習）、[差分列への言い換え](../basics/difference-sequence.md#practice)（練習）、[フェーズを状態に持つ DP](../dp/dp-phase.md#practice)（練習）
+- ABC466 F. Many Mod Calculation → [後ろから・逆順に考える](../thinking/reverse-thinking.md#challenge)（力試し）
+- ABC467 D. Concentric Circles → [誤差の扱いと整数での処理](../geometry/geometry-precision.md#practice)（練習）
+- ABC467 F. Email Scheduling Optimization → [交換論法と比較関数の設計](../basics/exchange-argument.md#challenge)（力試し）、[セグメント木に何を載せるか](../ds/segment-tree-monoids.md#challenge)（力試し）
+- ABC467 G. Many Sweets Problem → [マージソート木](../ds/merge-sort-tree.md#challenge)（力試し）
+- ABC468 D. Pre-Palindrome → [回文の扱いと Manacher](../string/palindrome.md#abc468_d)（例題）
+- ABC468 E. Sum of Average → [主客転倒・寄与](../thinking/contribution.md#practice)（練習）
+- ABC468 G. Restricted Permutation → [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md#practice)（練習）
+- ABC469 D. The Big Two → [全探索の設計](../basics/brute-force.md#practice)（練習）
+- ABC469 E. Pro Exam Eligibility → [平均・中央値の最大化](../basics/fractional-binary-search.md#abc469_e)（例題）
+- ABC469 F. GCD Maximum Spanning Tree → [最小全域木](../graph/minimum-spanning-tree.md#practice)（練習）、[調和級数と倍数の列挙](../math/harmonic-sum.md#practice)（練習）
+- ABC470 D. Inverse and Swap → [順列と置換](../patterns/permutation.md#practice)（練習）
+- ABC470 E. Concentration → [最適戦略の期待値](../comb/optimal-strategy-expectation.md#practice)（練習）
+- ABC470 F. Googol Swaps → [置換の偶奇](../comb/permutation-parity.md#abc470_f)（例題）、[多項係数](../comb/multinomial-coefficient.md#practice)（練習）
+- ABC470 G. Σex → [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md#challenge)（力試し）
+- ABC471 D. Chargers → [優先度付きキュー](../ds/priority-queue.md#practice)（練習）
+- ABC471 E. Sum of Square of Sum → [対称性・鳩の巣原理・場合分け](../thinking/symmetry-pigeonhole-casework.md#practice)（練習）、[Σ の変形](../math/sigma-manipulation.md#practice)（練習）
+- ABC471 F. Concat (maximize) → [交換論法と比較関数の設計](../basics/exchange-argument.md#practice)（練習）
+- ABC471 G. Caeser Syllables → [畳み込みの使い方](../math/convolution-ntt.md#challenge)（力試し）
+- ABC472 D. Bomber Mad → [グリッド](../patterns/grid.md#practice)（練習）
+- ABC472 E. Odd Cycle → [二部グラフ判定](../graph/bipartite-graph.md#practice)（練習）
+- ABC472 F. Centroid of a Slice → [ベクトルと外積](../geometry/geometry-vectors.md#challenge)（力試し）
+- ABC472 G. Cascading Grid → [燃やす埋める](../graph/project-selection.md#abc472_g)（例題）、[部分集合の高速ゼータ変換とメビウス変換](../comb/zeta-mobius-subset.md#practice)（練習）
+- ABC473 D. Coefficient Stair → [再帰による全列挙](../basics/recursive-enumeration.md#practice)（練習）
+- ABC473 E. K-Divisible Subarrays → [累積和と連想配列で区間を数える](../basics/prefix-sum-counting.md#practice)（練習）
+- ABC473 F. A/AB Insertion → [遅延セグメント木](../ds/lazy-segment-tree.md#abc473_f)（例題）
+- ABC473 G. Wipeout → [対称性で確率を求める](../comb/probability-symmetry.md#practice)（練習）
+- ABC474 F. Increment All Divisors → [約数・倍数のゼータ変換とメビウス変換](../comb/zeta-mobius-divisor.md#abc474_f)（例題）
+- ABC474 G. LRUD Moving 2 → [偶奇に着目する](../thinking/parity.md#challenge)（力試し）
+- ABC475 D. Alphametic Prime → [エラトステネスの篩](../math/sieve-eratosthenes.md#practice)（練習）
+- ABC475 F. Rectangle Filling → [包除原理](../comb/inclusion-exclusion.md#practice)（練習）
+- ABC475 G. Has Many Divisors → [約数の個数の上界と高度合成数](../math/divisor-count-bound.md#challenge)（力試し）
+- ABC476 E. Min-Max Swap → [セグメント木](../ds/segment-tree.md#practice)（練習）
+- ABC476 F. Chebyshev Cafe → [マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md#practice)（練習）
+- ABC476 G. Increasing Popcount → [最長増加部分列](../dp/lis.md#challenge)（力試し）
+- ABC477 D. Masking Tape → [後ろから・逆順に考える](../thinking/reverse-thinking.md#practice)（練習）
+- ABC477 E. Wheel Distance → [ダイクストラ法](../graph/dijkstra.md#practice)（練習）
+- ABC477 F. Count Cells in a Window → [平面走査](../ds/sweep-line-2d.md#abc477_f)（例題）
+- ABC477 G. Frequency Query on Tree → [Mo's algorithm](../ds/mo-algorithm.md#practice)（練習）
+- ABC478 D. Range Set Insertion Query → [イベントソートと平面走査の基本](../basics/event-sort.md#practice)（練習）
+- ABC478 E. lt and le → [強連結成分分解（SCC）](../graph/scc.md#practice)（練習）
+- ABC478 F. Min-First Search → [木の構築・復元](../tree/tree-construction.md#abc478_f)（例題）、[セグメント木上の二分探索](../ds/segment-tree-binary-search.md#practice)（練習）
+- ABC478 G. Division Point Hull → [発展の幾何](../geometry/advanced-geometry.md#abc478_g)（例題）、[分割統治](../basics/divide-and-conquer.md#challenge)（力試し）
+- ABC479 F. Narrow Passage → [言い換えの典型](../thinking/reformulation.md#challenge)（力試し）、[転倒数](../ds/inversion-number.md#challenge)（力試し）
+- ABC479 G. Tuning → [偏角ソート](../geometry/argument-sort.md#challenge)（力試し）
+- ABC480 G. Zonal Score Minimization → [インライン DP](../dp/inline-dp.md#challenge)（力試し）
+
+<!-- textlint-enable -->
+<!-- gen:end problem-index-abc -->
+
+## ARC {#arc}
+
+<!-- gen:begin problem-index-arc -->
+<!-- textlint-disable -->
+
+- ARC005 C. 器物損壊！高橋君 → [01-BFS](../graph/zero-one-bfs.md#arc005_3)（例題）
+- ARC008 D. タコヤキオイシクナール → [セグメント木に何を載せるか](../ds/segment-tree-monoids.md#challenge)（力試し）
+- ARC013 C. 笑いをとれるかな？ → [Nim と XOR](../comb/nim.md#practice)（練習）
+- ARC022 B. 細長いお菓子 → [尺取り法](../basics/two-pointers.md#practice)（練習）
+- ARC025 B. チョコレート → [2 次元累積和](../basics/prefix-sum-2d.md#practice)（練習）
+- ARC026 C. 蛍光灯 → [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md#practice)（練習）
+- ARC026 D. 道を直すお仕事 → [平均・中央値の最大化](../basics/fractional-binary-search.md#challenge)（力試し）
+- ARC033 C. データ構造 → [K 番目の値を求めるデータ構造](../ds/kth-element.md#arc033_3)（例題）、[Binary Trie](../ds/binary-trie.md#practice)（練習）、[平衡二分探索木と pb_ds の tree](../ds/balanced-bst.md#practice)（練習）
+- ARC037 C. 億マス計算 → [K 番目の値](../basics/kth-value.md#practice)（練習）
+- ARC038 D. 有向グラフと数 → [後退解析](../comb/game-retrograde-analysis.md#challenge)（力試し）
+- ARC039 D. 旅行会社高橋君 → [橋・関節点・二重連結成分](../graph/lowlink.md#challenge)（力試し）
+- ARC042 D. あまり → [位数・原始根・離散対数](../math/multiplicative-order.md#practice)（練習）
+- ARC044 B. 最短路問題 → [DFS 木・BFS 木とグラフの構築](../graph/graph-construction.md#practice)（練習）
+- ARC045 C. エックスオア多橋君 → [木の上の距離](../tree/tree-distance.md#challenge)（力試し）
+- ARC046 B. 石取り大作戦 → [Nim と XOR](../comb/nim.md#practice)（練習）
+- ARC054 B. ムーアの法則 → [三分探索](../basics/ternary-search.md#arc054_b)（例題）
+- ARC055 C. ABCAC → [Z-algorithm](../string/z-algorithm.md#challenge)（力試し）
+- ARC058 D. Iroha and a Grid → [格子路の数え上げ](../comb/lattice-paths.md#practice)（練習）、[対応づけ・数える対象の言い換え](../comb/counting-bijection.md#practice)（練習）
+- ARC060 C. Tak and Cards → [余り・個数を状態に持つ DP](../dp/dp-mod-state.md#practice)（練習）
+- ARC060 D. Digit Sum → [商の列挙](../math/floor-quotient-enum.md#challenge)（力試し）
+- ARC060 F. Best Representation → [KMP 法と文字列の周期](../string/kmp.md#challenge)（力試し）
+- ARC061 C. Many Formulas → [構文解析](../misc/parsing.md#arc061_a)（例題）
+- ARC061 E. Snuke's Subway Trip → [状態を頂点にする](../graph/extended-dijkstra.md#challenge)（力試し）
+- ARC064 D. An Ordinary Game → [ゲームの基本と勝敗の DP](../comb/game-basics.md#practice)（練習）
+- ARC065 C. Daydream → [後ろから・逆順に考える](../thinking/reverse-thinking.md#arc065_a)（例題）、[区間分割 DP](../dp/dp-sequence-partition.md#practice)（練習）
+- ARC065 D. Connectivity → [Union-Find の応用](../ds/union-find-applications.md#challenge)（力試し）
+- ARC067 C. Factors of Factorial → [素因数分解とルジャンドルの公式](../math/prime-factorization.md#practice)（練習）
+- ARC067 E. Grouping → [多項係数](../comb/multinomial-coefficient.md#challenge)（力試し）
+- ARC068 D. Card Eater → [不変量・単調に変わる量](../thinking/invariant.md#arc068_b)（例題）
+- ARC068 E. Snuke Line → [BIT（Fenwick Tree）](../ds/fenwick-tree.md#challenge)（力試し）
+- ARC070 D. No Need → [戻す DP](../dp/knapsack-undo.md#practice)（練習）、[bitset による高速化](../misc/bitset-speedup.md#practice)（練習）
+- ARC074 D. 3N Numbers → [上位 K 個の和と中央値の管理](../ds/top-k-multiset.md#practice)（練習）
+- ARC074 F. Lotus Leaves → [最小カット](../graph/min-cut.md#practice)（練習）
+- ARC075 E. Meaningful Mean → [分割統治](../basics/divide-and-conquer.md#practice)（練習）、[転倒数](../ds/inversion-number.md#practice)（練習）
+- ARC076 D. Built? → [最小全域木](../graph/minimum-spanning-tree.md#practice)（練習）
+- ARC076 E. Connected? → [スタック・キュー・deque の使いどころ](../ds/stack-techniques.md#challenge)（力試し）
+- ARC077 C. pushpush → [全体への操作を変数で持つ](../ds/global-offset.md#practice)（練習）
+- ARC077 D. 11 → [重複の除き方](../comb/counting-dedup.md#arc077_b)（例題）
+- ARC081 E. Don't Be a Subsequence → [部分列 DP](../dp/subsequence-dp.md#practice)（練習）、[DP の復元](../dp/dp-reconstruction.md#challenge)（力試し）、[部分列の判定と次の出現位置の表](../string/subsequence-matching.md#challenge)（力試し）
+- ARC083 D. Restoring Road Network → [DFS 木・BFS 木とグラフの構築](../graph/graph-construction.md#arc083_b)（例題）
+- ARC084 C. Snuke Festival → [二分探索](../basics/binary-search.md#practice)（練習）
+- ARC084 D. Small Multiple → [剰余を頂点にする最短路](../graph/modular-shortest-path.md#arc084_b)（例題）、[桁と mod](../math/digit-and-mod.md#challenge)（力試し）
+- ARC085 C. HSI → [幾何分布とコンプリートガチャ](../comb/coupon-collector.md#practice)（練習）
+- ARC089 C. Traveling → [偶奇に着目する](../thinking/parity.md#arc089_a)（例題）
+- ARC090 D. People on a Line → [重み付き Union-Find](../ds/weighted-union-find.md#arc090_b)（例題）、[差分制約（牛ゲー）](../graph/difference-constraints.md#practice)（練習）
+- ARC091 C. Flip,Flip, and Flip...... → [対称性・鳩の巣原理・場合分け](../thinking/symmetry-pigeonhole-casework.md#arc091_a)（例題）
+- ARC092 C. 2D Plane 2N Points → [イベントソートと平面走査の基本](../basics/event-sort.md#arc092_a)（例題）、[二部マッチング](../graph/bipartite-matching.md#practice)（練習）
+- ARC095 D. Binomial Coefficients → [二項係数の意味と性質](../comb/binomial-coefficient.md#arc095_b)（例題）
+- ARC097 C. K-th Substring → [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md#practice)（練習）、[文字列の基本操作と辞書順](../string/string-basics.md#practice)（練習）
+- ARC098 C. Attention → [累積和](../basics/prefix-sum.md#practice)（練習）
+- ARC098 D. Xor Sum 2 → [尺取り法](../basics/two-pointers.md#challenge)（力試し）
+- ARC100 C. Linear Approximation → [絶対値の和の最小化と中央値](../basics/median-absolute.md#arc100_a)（例題）
+- ARC100 E. Or Plus Max → [部分集合の高速ゼータ変換とメビウス変換](../comb/zeta-mobius-subset.md#arc100_c)（例題）
+- ARC101 D. Median of Medians → [平均・中央値の最大化](../basics/fractional-binary-search.md#challenge)（力試し）
+- ARC101 E. Ribbons on Tree → [包除 DP](../comb/inclusion-exclusion-dp.md#challenge)（力試し）
+- ARC102 C. Triangular Relationship → [一部を固定して数える](../thinking/fix-variable.md#practice)（練習）
+- ARC104 C. Fair Elevator → [区間分割 DP](../dp/dp-sequence-partition.md#challenge)（力試し）
+- ARC105 B. MAX-=min → [整数の証明の型](../math/proof-patterns.md#practice)（練習）
+- ARC105 D. Let's Play Nim → [ゲームの基本と勝敗の DP](../comb/game-basics.md#practice)（練習）、[Nim と XOR](../comb/nim.md#challenge)（力試し）
+- ARC106 C. Solutions → [区間スケジューリング・区間の串刺し](../basics/interval-scheduling.md#practice)（練習）
+- ARC106 D. Powers → [二項係数の恒等式と和の公式](../comb/binomial-identities.md#practice)（練習）
+- ARC106 F. Figures → [ラベル付き木の数え上げ](../comb/cayley-pruefer.md#challenge)（力試し）
+- ARC107 D. Number of Multisets → [整数の分割と分割数](../comb/partition-number.md#practice)（練習）
+- ARC108 B. Abbreviate Fox → [スタック・キュー・deque の使いどころ](../ds/stack-techniques.md#practice)（練習）
+- ARC110 D. Binomial Coefficient is Fun → [対応づけ・数える対象の言い換え](../comb/counting-bijection.md#challenge)（力試し）、[二項係数の恒等式と和の公式](../comb/binomial-identities.md#challenge)（力試し）
+- ARC111 A. Simple Math 2 → [繰り返し二乗法](../math/mod-pow.md#arc111_a)（例題）、[mod の計算の基本](../math/mod-arithmetic.md#practice)（練習）
+- ARC111 D. Orientation → [DFS 木・BFS 木とグラフの構築](../graph/graph-construction.md#practice)（練習）
+- ARC111 E. Simple Math 3 → [floor sum](../math/floor-sum.md#challenge)（力試し）
+- ARC115 C. ℕ Coloring → [構築問題の考え方](../thinking/construction.md#practice)（練習）
+- ARC115 E. LEQ and NEQ → [包除 DP](../comb/inclusion-exclusion-dp.md#practice)（練習）
+- ARC116 B. Products of Min-Max → [順序を固定して数える](../comb/counting-fix-order.md#practice)（練習）
+- ARC117 C. Tricolor Pyramid → [二項係数の前計算](../comb/binomial-precompute.md#practice)（練習）
+- ARC121 E. Directed Tree → [包除 DP](../comb/inclusion-exclusion-dp.md#challenge)（力試し）
+- ARC122 A. Many Formulae → [構文解析](../misc/parsing.md#practice)（練習）
+- ARC122 D. XOR Game → [Binary Trie](../ds/binary-trie.md#challenge)（力試し）
+- ARC123 D. Inc, Dec - Decomposition → [Slope Trick](../dp/slope-trick.md#practice)（練習）
+- ARC130 D. Zigzag Tree → [二乗の木 DP](../dp/tree-dp-square.md#challenge)（力試し）
+- ARC136 B. Triple Shift → [置換の偶奇](../comb/permutation-parity.md#practice)（練習）
+- ARC137 D. Prefix XORs → [部分集合の高速ゼータ変換とメビウス変換](../comb/zeta-mobius-subset.md#practice)（練習）
+- ARC142 C. Tree Queries → [木の上のパスの判定と分解](../tree/tree-path.md#practice)（練習）
+- ARC143 C. Piles of Pebbles → [Nim と XOR](../comb/nim.md#practice)（練習）
+- ARC143 D. Bridges → [DFS 木・BFS 木とグラフの構築](../graph/graph-construction.md#challenge)（力試し）
+- ARC145 C. Split and Maximize → [鏡像法とカタラン数](../comb/reflection-principle.md#practice)（練習）
+- ARC150 C. Path and Subsequence → [時刻で変わる辺の最短路](../graph/time-dependent-dijkstra.md#challenge)（力試し）
+- ARC160 B. Triple Pair → [商の列挙](../math/floor-quotient-enum.md#arc160_b)（例題）
+- ARC167 B. Product of Divisors → [約数の個数の上界と高度合成数](../math/divisor-count-bound.md#arc167_b)（例題）
+- ARC168 B. Arbitrary Nim → [Nim と XOR](../comb/nim.md#arc168_b)（例題）
+- ARC171 C. Swap on Tree → [二乗の木 DP](../dp/tree-dp-square.md#practice)（練習）
+- ARC174 C. Catastrophic Roulette → [閉路のある期待値](../comb/expectation-linear-equations.md#arc174_c)（例題）
+- ARC185 E. Adjacent GCD → [オイラーの φ 関数](../math/euler-phi.md#practice)（練習）、[約数・倍数のゼータ変換とメビウス変換](../comb/zeta-mobius-divisor.md#challenge)（力試し）
+- ARC188 C. Honest or Liar or Confused → [重み付き Union-Find](../ds/weighted-union-find.md#challenge)（力試し）
+- ARC189 D. Takahashi is Slime → [分割統治](../basics/divide-and-conquer.md#arc189_d)（例題）、[単調スタックとスライド最小値](../ds/monotonic-stack.md#challenge)（力試し）
+
+<!-- textlint-enable -->
+<!-- gen:end problem-index-arc -->
+
+## AGC {#agc}
+
+<!-- gen:begin problem-index-agc -->
+<!-- textlint-disable -->
+
+- AGC001 E. BBQ Hard → [格子路の数え上げ](../comb/lattice-paths.md#challenge)（力試し）
+- AGC002 D. Stamp Rally → [並列二分探索](../ds/parallel-binary-search.md#agc002_d)（例題）、[併合過程の木](../tree/merge-process-tree.md#practice)（練習）、[部分永続 Union-Find](../ds/partially-persistent-union-find.md#practice)（練習）
+- AGC003 A. Wanna go back home → [言い換えの典型](../thinking/reformulation.md#practice)（練習）
+- AGC003 D. Anticube → [素因数の指数で考える](../math/prime-exponent-vector.md#challenge)（力試し）
+- AGC005 B. Minimum Sum → [単調スタックとスライド最小値](../ds/monotonic-stack.md#practice)（練習）
+- AGC005 C. Tree Restoring → [木の構築・復元](../tree/tree-construction.md#practice)（練習）
+- AGC010 B. Boxes → [差分列への言い換え](../basics/difference-sequence.md#practice)（練習）
+- AGC014 D. Black and White Tree → [葉から考える](../tree/leaf-first.md#challenge)（力試し）、[ゲームの基本と勝敗の DP](../comb/game-basics.md#challenge)（力試し）
+- AGC018 A. Getting Difference → [整数の証明の型](../math/proof-patterns.md#practice)（練習）
+- AGC018 D. Tree and Hamilton Path → [木の重心](../tree/tree-centroid.md#challenge)（力試し）
+- AGC020 C. Median Sum → [bitset による高速化](../misc/bitset-speedup.md#practice)（練習）
+- AGC021 B. Holes → [連続値の確率](../comb/continuous-probability.md#agc021_b)（例題）、[凸包と凸多角形](../geometry/convex-hull.md#practice)（練習）
+- AGC021 D. Reversed LCS → [最長共通部分列と編集距離](../dp/lcs.md#challenge)（力試し）
+- AGC026 B. rng_10s → [GCD の性質](../math/gcd-properties.md#practice)（練習）
+- AGC026 C. String Coloring → [半分全列挙](../basics/meet-in-the-middle.md#practice)（練習）
+- AGC031 A. Colorful Subsequence → [和・積の法則と順列・組合せ](../comb/counting-basics.md#practice)（練習）
+- AGC031 B. Reversi → [区間分割 DP](../dp/dp-sequence-partition.md#agc031_b)（例題）
+- AGC032 A. Limited Insertion → [後ろから・逆順に考える](../thinking/reverse-thinking.md#agc032_a)（例題）
+- AGC032 C. Three Circuits → [オイラー路（一筆書き）](../graph/euler-path.md#practice)（練習）
+- AGC033 A. Darker and Darker → [幅優先探索（BFS）と無重み最短路](../graph/bfs.md#practice)（練習）
+- AGC035 B. Even Degrees → [DFS 木・BFS 木とグラフの構築](../graph/graph-construction.md#practice)（練習）
+- AGC038 C. LCMs → [メビウス関数とメビウス反転](../comb/mobius-function.md#agc038_c)（例題）、[約数・倍数のゼータ変換とメビウス変換](../comb/zeta-mobius-divisor.md#challenge)（力試し）
+- AGC039 C. Division by Two with Something → [メビウス関数とメビウス反転](../comb/mobius-function.md#practice)（練習）
+- AGC043 B. 123 Triangle → [二項係数の前計算](../comb/binomial-precompute.md#practice)（練習）
+- AGC045 A. Xor Battle → [XOR 基底](../math/xor-basis.md#practice)（練習）
+- AGC047 C. Product Modulo → [位数・原始根・離散対数](../math/multiplicative-order.md#challenge)（力試し）
+- AGC049 A. Erasing Vertices → [期待値の線形性と指示確率変数](../comb/linearity-of-expectation.md#practice)（練習）
+
+<!-- textlint-enable -->
+<!-- gen:end problem-index-agc -->
+
+## 問題集 {#sets}
+
+問題集ごとの問題数・中身・レベルの目安は、[問題集の一覧](problem-sets.md#collections)にある。
+
+<!-- gen:begin problem-index-sets -->
+<!-- textlint-disable -->
+
+[典型90問](#sets-typical90)・[EDPC](#sets-dp)・[TDPC](#sets-tdpc)・[ACL Practice](#sets-practice2)・[鉄則本](#sets-tessoku-book)・[アルゴ数学](#sets-math-and-algorithm)
+
+### 競プロ典型 90 問 {#sets-typical90}
+
+- 典型90 001. Yokan Party（★4） → [答えで二分探索](../basics/binary-search-answer.md#typical90_a)（例題）
+- 典型90 002. Encyclopedia of Parentheses（★3） → [再帰的な構造](../basics/recursion-structure.md#practice)（練習）
+- 典型90 003. Longest Circular Road（★4） → [木の直径と最遠点](../tree/tree-diameter.md#practice)（練習）
+- 典型90 005. Restricted Digits（★7） → [行列累乗](../math/matrix-power.md#challenge)（力試し）
+- 典型90 006. Smallest Subsequence（★5） → [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md#practice)（練習）、[部分列 DP](../dp/subsequence-dp.md#practice)（練習）、[部分列の判定と次の出現位置の表](../string/subsequence-matching.md#practice)（練習）
+- 典型90 008. AtCounter（★4） → [フェーズを状態に持つ DP](../dp/dp-phase.md#typical90_h)（例題）
+- 典型90 009. Three Point Angle（★6） → [偏角ソート](../geometry/argument-sort.md#typical90_i)（例題）
+- 典型90 011. Gravy Jobs（★6） → [並べ替えてから DP する](../dp/exchange-argument-dp.md#typical90_k)（例題）
+- 典型90 012. Red Painting（★4） → [グリッドグラフ](../graph/grid-graph.md#practice)（練習）、[Union-Find](../ds/union-find.md#practice)（練習）
+- 典型90 013. Passing（★5） → [ダイクストラ法](../graph/dijkstra.md#practice)（練習）
+- 典型90 014. We Used to Sing a Song Together（★3） → [ソートで考える](../basics/sorting-techniques.md#practice)（練習）
+- 典型90 015. Don't be too close（★6） → [重複組合せ](../comb/stars-and-bars.md#practice)（練習）
+- 典型90 019. Pick Two（★6） → [区間 DP](../dp/interval-dp.md#typical90_s)（例題）
+- 典型90 021. Come Back in One Piece（★5） → [強連結成分分解（SCC）](../graph/scc.md#typical90_u)（例題）
+- 典型90 022. Cubic Cake（★2） → [GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md#practice)（練習）
+- 典型90 023. Avoid War（★7） → [プロファイル DP](../dp/broken-profile-dp.md#practice)（練習）
+- 典型90 024. Select +／- One（★2） → [偶奇に着目する](../thinking/parity.md#practice)（練習）
+- 典型90 025. Digit Product Equation（★7） → [素因数の指数で考える](../math/prime-exponent-vector.md#challenge)（力試し）
+- 典型90 026. Independent Set on a Tree（★4） → [木の 2 色塗り分けと距離の偶奇](../tree/tree-bipartite.md#practice)（練習）
+- 典型90 028. Cluttered Paper（★4） → [いもす法](../basics/imos.md#practice)（練習）
+- 典型90 029. Long Bricks（★5） → [座標圧縮](../basics/coordinate-compression.md#practice)（練習）、[遅延セグメント木](../ds/lazy-segment-tree.md#practice)（練習）
+- 典型90 030. K Factors（★5） → [エラトステネスの篩](../math/sieve-eratosthenes.md#practice)（練習）
+- 典型90 031. VS AtCoder（★6） → [Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md#practice)（練習）
+- 典型90 034. There are few types of elements（★4） → [尺取り法](../basics/two-pointers.md#practice)（練習）
+- 典型90 035. Preserve Connectivity（★7） → [Auxiliary Tree](../tree/auxiliary-tree.md#typical90_ai)（例題）、[最小共通祖先（LCA）](../tree/lca.md#practice)（練習）、[指定頂点を結ぶ最小の部分木](../tree/steiner-subtree.md#challenge)（力試し）
+- 典型90 037. Don't Leave the Spice（★5） → [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md#typical90_ak)（例題）
+- 典型90 038. Large LCM（★3） → [整数の割り算と余り](../math/integer-division.md#practice)（練習）
+- 典型90 039. Tree Distance（★5） → [辺で切って数える](../tree/tree-edge-contribution.md#typical90_am)（例題）
+- 典型90 040. Get More Money（★7） → [燃やす埋める](../graph/project-selection.md#typical90_an)（例題）
+- 典型90 041. Piles in AtCoder Farm（★7） → [凸包と凸多角形](../geometry/convex-hull.md#typical90_ao)（例題）
+- 典型90 042. Multiple of 9（★4） → [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md#practice)（練習）
+- 典型90 043. Maze Challenge with Lack of Sleep（★4） → [01-BFS](../graph/zero-one-bfs.md#practice)（練習）
+- 典型90 044. Shift and Swapping（★3） → [全体への操作を変数で持つ](../ds/global-offset.md#practice)（練習）
+- 典型90 045. Simple Grouping（★6） → [部分集合を列挙する DP](../dp/subset-enumeration-dp.md#practice)（練習）、[第 2 種スターリング数とベル数](../comb/bell-number.md#practice)（練習）
+- 典型90 047. Monochromatic Diagonal（★7） → [ハッシュの衝突と安全な設計](../string/hash-safety.md#typical90_au)（例題）、[ローリングハッシュ](../string/rolling-hash.md#challenge)（力試し）
+- 典型90 049. Flip Digits 2（★6） → [最小全域木](../graph/minimum-spanning-tree.md#practice)（練習）
+- 典型90 051. Typical Shop（★5） → [半分全列挙](../basics/meet-in-the-middle.md#typical90_ay)（例題）
+- 典型90 054. Takahashi Number（★6） → [状態を頂点にする](../graph/extended-dijkstra.md#practice)（練習）
+- 典型90 055. Select 5（★2） → [計算量の見積もり](../basics/complexity-estimation.md#typical90_bc)（例題）
+- 典型90 056. Lucky Bag（★5） → [DP の復元](../dp/dp-reconstruction.md#typical90_bd)（例題）
+- 典型90 057. Flip Flap（★6） → [掃き出し法](../math/gaussian-elimination.md#typical90_be)（例題）
+- 典型90 058. Original Calculator（★4） → [周期性の検出](../basics/periodicity.md#practice)（練習）
+- 典型90 059. Many Graph Queries（★7） → [bitset による高速化](../misc/bitset-speedup.md#typical90_bg)（例題）
+- 典型90 060. Chimera（★5） → [最長増加部分列](../dp/lis.md#typical90_bh)（例題）
+- 典型90 063. Monochromatic Subgrid（★4） → [全探索の設計](../basics/brute-force.md#practice)（練習）
+- 典型90 064. Uplift（★3） → [いもす法](../basics/imos.md#practice)（練習）
+- 典型90 065. RGB Balls 2（★7） → [畳み込みの使い方](../math/convolution-ntt.md#practice)（練習）
+- 典型90 066. Various Arrays（★5） → [期待値の線形性と指示確率変数](../comb/linearity-of-expectation.md#typical90_bn)（例題）
+- 典型90 067. Base 8 to 9（★2） → [N 進法](../math/base-conversion.md#practice)（練習）
+- 典型90 068. Paired Information（★5） → [重み付き Union-Find](../ds/weighted-union-find.md#practice)（練習）
+- 典型90 069. Colorful Blocks 2（★3） → [和・積の法則と順列・組合せ](../comb/counting-basics.md#typical90_bq)（例題）、[繰り返し二乗法](../math/mod-pow.md#practice)（練習）
+- 典型90 070. Plant Planning（★4） → [絶対値の和の最小化と中央値](../basics/median-absolute.md#practice)（練習）
+- 典型90 071. Fuzzy Priority（★7） → [トポロジカルソート](../graph/topological-sort.md#challenge)（力試し）
+- 典型90 072. Loop Railway Plan（★4） → [計算量の見積もり](../basics/complexity-estimation.md#practice)（練習）、[深さ優先探索（DFS）](../graph/dfs.md#practice)（練習）
+- 典型90 073. We Need Both a and b（★5） → [木 DP](../dp/tree-dp.md#practice)（練習）
+- 典型90 075. Magic For Balls（★3） → [約数と倍数](../patterns/divisors-and-multiples.md#practice)（練習）
+- 典型90 076. Cake Cut（★3） → [累積和](../basics/prefix-sum.md#practice)（練習）
+- 典型90 077. Planes on a 2D Plane（★7） → [二部マッチング](../graph/bipartite-matching.md#typical90_by)（例題）
+- 典型90 078. Easy Graph Problem（★2） → [グラフの表現と用語](../graph/graph-basics.md#typical90_bz)（例題）
+- 典型90 079. Two by Two（★3） → [不変量・単調に変わる量](../thinking/invariant.md#practice)（練習）
+- 典型90 082. Counting Numbers（★3） → [逆元と mod での割り算](../math/mod-inverse.md#typical90_cd)（例題）
+- 典型90 083. Colorful Graph（★6） → [次数による平方分割](../graph/degree-sqrt.md#typical90_ce)（例題）
+- 典型90 084. There are two types of characters（★3） → [ランレングス圧縮](../basics/run-length-encoding.md#practice)（練習）
+- 典型90 085. Multiplication 085（★4） → [約数の個数の上界と高度合成数](../math/divisor-count-bound.md#practice)（練習）
+- 典型90 087. Chokudai's Demand（★5） → [ワーシャルフロイド法](../graph/warshall-floyd.md#practice)（練習）
+- 典型90 089. Partitions and Inversions（★7） → [区間分割 DP](../dp/dp-sequence-partition.md#practice)（練習）
+- 典型90 090. Tenkei90's Last Problem（★7） → [DP の高速化の選び方](../dp/dp-speedup-overview.md#challenge)（力試し）
+
+### EDPC（Educational DP Contest） {#sets-dp}
+
+- EDPC A. Frog 1 → [DP の基本](../dp/dp-basics.md#dp_a)（例題）
+- EDPC B. Frog 2 → [DP の基本](../dp/dp-basics.md#practice)（練習）
+- EDPC C. Vacation → [DP の状態の設計](../dp/dp-state-design.md#dp_c)（例題）
+- EDPC D. Knapsack 1 → [ナップサック DP](../dp/knapsack-01.md#dp_d)（例題）
+- EDPC E. Knapsack 2 → [DP の状態の削減](../dp/dp-dimension-reduction.md#dp_e)（例題）
+- EDPC F. LCS → [最長共通部分列と編集距離](../dp/lcs.md#dp_f)（例題）、[DP の復元](../dp/dp-reconstruction.md#practice)（練習）
+- EDPC G. Longest Path → [DAG 上の DP](../dp/dp-dag.md#dp_g)（例題）、[メモ化再帰](../dp/memoized-recursion.md#practice)（練習）
+- EDPC H. Grid 1 → [グリッド上の DP](../dp/dp-grid.md#dp_h)（例題）
+- EDPC I. Coins → [確率 DP](../comb/probability-dp.md#dp_i)（例題）
+- EDPC J. Sushi → [期待値 DP](../comb/expected-value-dp.md#dp_j)（例題）
+- EDPC K. Stones → [ゲームの基本と勝敗の DP](../comb/game-basics.md#dp_k)（例題）
+- EDPC L. Deque → [ミニマックス](../comb/minimax.md#dp_l)（例題）、[区間 DP](../dp/interval-dp.md#practice)（練習）
+- EDPC M. Candies → [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md#dp_m)（例題）
+- EDPC N. Slimes → [区間 DP](../dp/interval-dp.md#dp_n)（例題）
+- EDPC O. Matching → [bitDP](../dp/bit-dp.md#dp_o)（例題）
+- EDPC P. Independent Set → [木 DP](../dp/tree-dp.md#dp_p)（例題）
+- EDPC Q. Flowers → [セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md#dp_q)（例題）、[最長増加部分列](../dp/lis.md#practice)（練習）
+- EDPC R. Walk → [行列累乗](../math/matrix-power.md#dp_r)（例題）
+- EDPC S. Digit Sum → [桁 DP](../dp/digit-dp.md#dp_s)（例題）
+- EDPC T. Permutation → [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md#dp_t)（例題）
+- EDPC U. Grouping → [部分集合を列挙する DP](../dp/subset-enumeration-dp.md#dp_u)（例題）、[第 2 種スターリング数とベル数](../comb/bell-number.md#practice)（練習）
+- EDPC V. Subtree → [全方位木 DP](../dp/rerooting.md#dp_v)（例題）
+- EDPC W. Intervals → [インライン DP](../dp/inline-dp.md#dp_w)（例題）
+- EDPC X. Tower → [並べ替えてから DP する](../dp/exchange-argument-dp.md#dp_x)（例題）
+- EDPC Y. Grid 2 → [包除 DP](../comb/inclusion-exclusion-dp.md#dp_y)（例題）
+- EDPC Z. Frog 3 → [Convex Hull Trick と Li Chao Tree](../dp/cht.md#dp_z)（例題）
+
+### TDPC（Typical DP Contest） {#sets-tdpc}
+
+- TDPC A. コンテスト → [部分和 DP](../dp/subset-sum.md#tdpc_contest)（例題）
+- TDPC B. ゲーム → [ミニマックス](../comb/minimax.md#practice)（練習）
+- TDPC D. サイコロ → [確率 DP](../comb/probability-dp.md#practice)（練習）
+- TDPC F. 準急 → [累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md#practice)（練習）
+- TDPC G. 辞書順 → [部分列 DP](../dp/subsequence-dp.md#challenge)（力試し）
+- TDPC I. イウィ → [区間 DP](../dp/interval-dp.md#practice)（練習）
+- TDPC J. ボール → [期待値 DP](../comb/expected-value-dp.md#challenge)（力試し）
+- TDPC K. ターゲット → [インライン DP](../dp/inline-dp.md#practice)（練習）、[最長増加部分列](../dp/lis.md#challenge)（力試し）
+- TDPC N. 木 → [全方位木 DP](../dp/rerooting.md#practice)（練習）
+- TDPC O. 文字列 → [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md#practice)（練習）
+- TDPC P. うなぎ → [二乗の木 DP](../dp/tree-dp-square.md#practice)（練習）
+- TDPC S. マス目 → [プロファイル DP](../dp/broken-profile-dp.md#challenge)（力試し）
+- TDPC T. フィボナッチ → [線形漸化式の高速化](../math/linear-recurrence-fast.md#tdpc_fibonacci)（例題）
+
+### ACL Practice（AtCoder Library Practice Contest） {#sets-practice2}
+
+- PRACTICE2 A. Disjoint Set Union → [Union-Find](../ds/union-find.md#practice)（練習）
+- PRACTICE2 B. Fenwick Tree → [BIT（Fenwick Tree）](../ds/fenwick-tree.md#practice2_b)（例題）
+- PRACTICE2 C. Floor Sum → [floor sum](../math/floor-sum.md#practice2_c)（例題）
+- PRACTICE2 D. Maxflow → [最大流](../graph/max-flow.md#practice2_d)（例題）
+- PRACTICE2 E. MinCostFlow → [最小費用流](../graph/min-cost-flow.md#practice2_e)（例題）
+- PRACTICE2 F. Convolution → [畳み込みの使い方](../math/convolution-ntt.md#practice2_f)（例題）
+- PRACTICE2 G. SCC → [強連結成分分解（SCC）](../graph/scc.md#practice2_g)（例題）
+- PRACTICE2 H. Two SAT → [2-SAT](../graph/two-sat.md#practice2_h)（例題）
+- PRACTICE2 I. Number of Substrings → [Suffix Array と LCP 配列](../string/suffix-array.md#practice2_i)（例題）
+- PRACTICE2 J. Segment Tree → [セグメント木上の二分探索](../ds/segment-tree-binary-search.md#practice2_j)（例題）
+- PRACTICE2 K. Range Affine Range Sum → [遅延セグメント木](../ds/lazy-segment-tree.md#practice2_k)（例題）
+- PRACTICE2 L. Lazy Segment Tree → [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md#practice)（練習）
+
+### 鉄則本（競技プログラミングの鉄則 演習問題集） {#sets-tessoku-book}
+
+- 鉄則本 A30. Combination → [二項係数の前計算](../comb/binomial-precompute.md#tessoku_book_ad)（例題）
+- 鉄則本 A33. Game 2 → [Nim と XOR](../comb/nim.md#tessoku_book_ag)（例題）
+- 鉄則本 A34. Game 3 → [Grundy 数と Sprague-Grundy の定理](../comb/grundy-number.md#tessoku_book_ah)（例題）
+- 鉄則本 A35. Game 4 → [ミニマックス](../comb/minimax.md#practice)（練習）
+- 鉄則本 A54. Map → [STL コンテナの使い分け](../ds/stl-containers.md#practice)（練習）
+- 鉄則本 A55. Set → [STL コンテナの使い分け](../ds/stl-containers.md#practice)（練習）
+- 鉄則本 A58. RMQ (Range Maximum Queries) → [セグメント木](../ds/segment-tree.md#practice)（練習）
+- 鉄則本 A60. Stock Price → [単調スタックとスライド最小値](../ds/monotonic-stack.md#practice)（練習）
+- 鉄則本 A68. Maximum Flow → [最大流](../graph/max-flow.md#practice)（練習）
+- 鉄則本 A69. Bipartite Matching → [二部マッチング](../graph/bipartite-matching.md#practice)（練習）
+- 鉄則本 B68. ALGO Express → [燃やす埋める](../graph/project-selection.md#practice)（練習）
+
+### アルゴ数学（アルゴリズムと数学 演習問題集） {#sets-math-and-algorithm}
+
+- アルゴ数学 026. Coin Gacha → [幾何分布とコンプリートガチャ](../comb/coupon-collector.md#practice)（練習）
+- アルゴ数学 053. Sum of 4^N → [逆元と mod での割り算](../math/mod-inverse.md#practice)（練習）、[等比数列の和を mod で求める](../math/geometric-series-mod.md#practice)（練習）
+- アルゴ数学 057. Domino Tiling → [行列累乗](../math/matrix-power.md#practice)（練習）
+- アルゴ数学 097. Primes in an Interval → [区間篩](../math/segmented-sieve.md#practice)（練習）
+
+<!-- textlint-enable -->
+<!-- gen:end problem-index-sets -->
+
+## そのほかのコンテスト {#others}
+
+ABC・ARC・AGC と上の問題集のほかのコンテストの問題を、コンテストの名前の順に並べる。
+
+<!-- gen:begin problem-index-other -->
+<!-- textlint-disable -->
+
+- ABL D. Flat Subsequence → [値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md#practice)（練習）
+- ABL E. Replace Digits → [遅延セグメント木](../ds/lazy-segment-tree.md#practice)（練習）
+- ACL1 B. Sum is Multiple → [中国剰余定理](../math/crt.md#acl1_b)（例題）、[約数の個数の上界と高度合成数](../math/divisor-count-bound.md#practice)（練習）、[拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md#challenge)（力試し）
+- BITFLYER2018-FINAL D. 数列 XOR → [掃き出し法](../math/gaussian-elimination.md#practice)（練習）
+- CHOKUDAI_S001 J. 転倒数 → [転倒数](../ds/inversion-number.md#chokudai_S001_j)（例題）、[分割統治](../basics/divide-and-conquer.md#practice)（練習）
+- CODE-FESTIVAL-2017-QUALB C. 3 Steps → [二部グラフ判定](../graph/bipartite-graph.md#challenge)（力試し）
+- CODE-THANKS-FESTIVAL-2017 F. Limited Xor Subset → [掃き出し法](../math/gaussian-elimination.md#practice)（練習）
+- CODE-THANKS-FESTIVAL-2017 H. Union Sets → [部分永続 Union-Find](../ds/partially-persistent-union-find.md#code_thanks_festival_2017_h)（例題）、[並列二分探索](../ds/parallel-binary-search.md#practice)（練習）
+- DDCC2016-QUAL D. 道路網 → [重心分解](../tree/centroid-decomposition.md#challenge)（力試し）
+- DIVERTA2019 D. DivRem Number → [約数列挙と素数判定](../math/divisor-enum.md#practice)（練習）
+- DONUTS-2015 C. 行列のできるドーナツ屋 → [単調スタックとスライド最小値](../ds/monotonic-stack.md#practice)（練習）
+- DWACON2018-PRELIMS C. Kill/Death → [整数の分割と分割数](../comb/partition-number.md#practice)（練習）
+- DWACON2018-PRELIMS E. ニワンゴくんの家探し → [木の重心](../tree/tree-centroid.md#practice)（練習）
+- EXAWIZARDS2019 D. Modulo Operations → [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md#practice)（練習）
+- HHKB2020 C. Neq Min → [計算量の見積もり](../basics/complexity-estimation.md#practice)（練習）
+- HHKB2020 F. Random Max → [期待値と確率の変換](../comb/expectation-tail-sum.md#challenge)（力試し）
+- JAG2013SUMMER-DAY4 F. Graph Automata Player → [掃き出し法](../math/gaussian-elimination.md#practice)（練習）
+- JOI2020YO2 E. じゃんけん式 (Rock-Scissors-Paper Expression) → [構文解析](../misc/parsing.md#practice)（練習）
+- KEYENCE2019 E. Connecting Cities → [特殊な最小全域木](../graph/spanning-tree-advanced.md#practice)（練習）、[分割統治](../basics/divide-and-conquer.md#challenge)（力試し）、[重心分解](../tree/centroid-decomposition.md#challenge)（力試し）
+- KEYENCE2020 C. Subarray Sum → [構築問題の考え方](../thinking/construction.md#practice)（練習）
+- NIKKEI2019-FINAL G. Greatest Journey → [重心分解](../tree/centroid-decomposition.md#challenge)（力試し）
+- NYC2015 E. ひも → [ラベル付き木の数え上げ](../comb/cayley-pruefer.md#practice)（練習）
+- PANASONIC2020 C. Sqrt Inequality → [整数の平方根・K 乗根と累乗数](../math/integer-root.md#practice)（練習）
+- PRACTICE B. Interactive Sorting → [インタラクティブ問題](../misc/interactive.md#practice)（練習）
+- SOUNDHOUND2018-SUMMER-QUAL D. Saving Snuuk → [ダイクストラ法](../graph/dijkstra.md#challenge)（力試し）
+- SUMITRUST2019 D. Lucky PIN → [全探索の設計](../basics/brute-force.md#practice)（練習）
+- YAHOO-PROCON2018-FINAL A. Uncommon → [約数・倍数のゼータ変換とメビウス変換](../comb/zeta-mobius-divisor.md#practice)（練習）
+- YAHOO-PROCON2018-FINAL C. 木の問題 → [重心分解](../tree/centroid-decomposition.md#practice)（練習）
+- YAHOO-PROCON2019-QUAL D. Ears → [フェーズを状態に持つ DP](../dp/dp-phase.md#practice)（練習）
+- YAHOO-PROCON2019-QUAL E. Odd Subrectangles → [掃き出し法](../math/gaussian-elimination.md#challenge)（力試し）
+- ZONE2021 E. Sneaking → [状態を頂点にする](../graph/extended-dijkstra.md#practice)（練習）
+- ZONE2021 F. Encounter and Farewell → [XOR 基底](../math/xor-basis.md#practice)（練習）
+
+<!-- textlint-enable -->
+<!-- gen:end problem-index-other -->
