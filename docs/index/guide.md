@@ -122,6 +122,17 @@ search:
     - `roadmap#progress` 解いた数・理解した数：https://yuukougun.github.io/kyopro-atlas/guide/roadmap/#progress
     - `roadmap#not-a-syllabus` シラバスではないこと：https://yuukougun.github.io/kyopro-atlas/guide/roadmap/#not-a-syllabus
 
+## 勉強したいリスト（study-list） {#study-list}
+
+- id：`study-list`　レベル：—　段階：draft　type：guide
+- URL：https://yuukougun.github.io/kyopro-atlas/guide/study-list/
+- 別名：お気に入り、あとで読む、ブックマーク、勉強したいページ
+- 種類：案内
+- 節：
+    - `study-list#list` リストの中身：https://yuukougun.github.io/kyopro-atlas/guide/study-list/#list
+    - `study-list#how` 入れ方と外し方：https://yuukougun.github.io/kyopro-atlas/guide/study-list/#how
+    - `study-list#storage` 記録の保存と退避：https://yuukougun.github.io/kyopro-atlas/guide/study-list/#storage
+
 ## 精進の仕方（practice-method） {#practice-method}
 
 - id：`practice-method`　レベル：—　段階：reviewed　type：guide
