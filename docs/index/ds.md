@@ -9,7 +9,7 @@ search:
 
 # データ構造の詳細索引
 
-分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
+分野の全ページの id・URL・別名・サイン・種類・前提・使い分け・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
 
 ## STL コンテナの使い分け（stl-containers） {#stl-containers}
 
@@ -17,6 +17,7 @@ search:
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/stl-containers/
 - 別名：STL、STL containers、標準ライブラリのコンテナ、コンテナの計算量
 - 種類：データ構造、実装・C++
+- 使い分け：`method-comparison#containers`
 - サイン：
     - 言い回し：要素の追加・削除と、検索・最小値の取り出しのクエリが混ざる
     - 式の形：j − i = A_i + A_j のように、i だけの式と j だけの式が等しい組 (i, j) を数える
@@ -32,6 +33,7 @@ search:
 - 別名：順序付き集合、ordered set、set::lower_bound、前後の要素、番兵、パレート境界
 - 種類：データ構造
 - 前提：`stl-containers`
+- 使い分け：`method-comparison#containers`
 - サイン：
     - 言い回し：x 以上で最小の値・最も近い値を、追加・削除しながら何度も答える
     - 言い回し：まだ使われていない最小の値（mex）を更新のたびに答える
@@ -87,6 +89,7 @@ search:
 - 別名：priority_queue、ヒープ、heap、二分ヒープ、binary heap、削除できるヒープ、遅延削除、erasable heap
 - 種類：データ構造、貪欲
 - 前提：`stl-containers`
+- 使い分け：`method-comparison#containers`
 - サイン：
     - 言い回し：毎回いちばん大きい（小さい）ものを取り出し、新しい候補を入れる
     - 言い回し：接頭辞ごとに K 番目に大きい値を答える
@@ -147,6 +150,7 @@ search:
 - 別名：stack、queue、括弧の対応、打ち消し、操作の取り消し
 - 種類：データ構造
 - 前提：`stl-containers`
+- 使い分け：`method-comparison#containers`
 - サイン：
     - 言い回し：括弧の対応を取る・対応する括弧ごと消す
     - 言い回し：特定の並びが現れたら取り除く操作を繰り返した結果
@@ -167,6 +171,7 @@ search:
 - 別名：monotonic stack、単調 stack、ヒストグラム内最大長方形、sliding window minimum、単調 deque、単調キュー、SWAG、Sliding Window Aggregation、Cartesian Tree、デカルト木
 - 種類：データ構造、尺取り・スライド窓
 - 前提：`stack-techniques`
+- 使い分け：`method-comparison#range-queries`
 - サイン：
     - 言い回し：左（右）で初めて自分より大きい（小さい）要素の位置
     - 言い回し：各ビルから見えるビルの数・すべての区間の最小値の和
@@ -190,6 +195,7 @@ search:
 - 別名：UF、DSU、Disjoint Set Union、disjoint set、素集合データ構造、経路圧縮、union by size
 - 種類：データ構造、連結性・全域木
 - 前提：`graph-basics`
+- 使い分け：`method-comparison#connectivity`
 - ACL：`dsu`
 - サイン：
     - 言い回し：辺を追加していきながら、2 頂点が同じグループか・グループの大きさを答える
@@ -211,6 +217,7 @@ search:
 - 別名：UF に情報を持たせる、併合時の寄与、成分ごとの集約、次の空きへ飛ぶ Union-Find、次の要素へのポインタ、区間を塗る UF
 - 種類：データ構造、連結性・全域木
 - 前提：`union-find`
+- 使い分け：`method-comparison#connectivity`
 - ACL：`dsu`
 - サイン：
     - 言い回し：全頂点対について、パス上の最大の辺の重みの総和
@@ -232,6 +239,7 @@ search:
 - 別名：weighted union-find、ポテンシャル付き Union-Find、重み付き UF、偶奇の Union-Find、二部グラフの Union-Find、頂点倍化の Union-Find、差分の矛盾判定
 - 種類：データ構造、連結性・全域木
 - 前提：`union-find`
+- 使い分け：`method-comparison#connectivity`
 - サイン：
     - 言い回し：x_R − x_L = D の形の情報が順に与えられ、矛盾しないかを判定する
     - 言い回し：相対的な位置・差だけが分かっている
@@ -254,6 +262,7 @@ search:
 - 別名：部分永続 UF、時刻つき Union-Find、partially persistent union-find
 - 種類：データ構造、連結性・全域木
 - 前提：`union-find`、`binary-search`
+- 使い分け：`method-comparison#connectivity`
 - サイン：
     - 言い回し：最初の t 本の辺だけを使ったときに連結か・成分の大きさは
     - 言い回し：x と y が初めて同じ集合になるのは何回目の操作か
@@ -271,6 +280,7 @@ search:
 - 別名：ロールバック UF、Undo つき Union-Find、undoable union-find、rollback union-find
 - 種類：データ構造、連結性・全域木
 - 前提：`union-find`
+- 使い分け：`method-comparison#connectivity`
 - サイン：
     - 言い回し：木の根から各頂点へのパスごとに、パス上の要素どうしのつながりを答える
     - 言い回し：辺の追加と削除が混ざり、そのたびに 2 頂点が連結かを答える
@@ -288,6 +298,7 @@ search:
 - 別名：Binary Indexed Tree、フェニック木、fenwick_tree
 - 種類：データ構造、区間クエリ
 - 前提：`prefix-sum`、`bit-operations`
+- 使い分け：`method-comparison#range-queries`、`method-comparison#binary-search`
 - ACL：`fenwick_tree`
 - サイン：
     - 言い回し：一点の値の更新と区間の和の質問が交互に来る
@@ -310,6 +321,7 @@ search:
 - 別名：inversion、inversion number、inversion count、反転数、バブルソートの交換回数、隣接 swap の最小回数
 - 種類：データ構造、数え上げ
 - 前提：`fenwick-tree`、`coordinate-compression`
+- 使い分け：`method-comparison#similar-names`
 - ACL：`fenwick_tree`
 - サイン：
     - 言い回し：隣り合う要素の交換でソートする最小回数・バブルソートの交換回数
@@ -330,6 +342,7 @@ search:
 - 別名：BIT 上の二分探索、Fenwick tree binary search、order statistics、順序統計量、空きの K 番目
 - 種類：データ構造、二分探索
 - 前提：`fenwick-tree`、`ordered-set`
+- 使い分け：`method-comparison#containers`
 - ACL：`fenwick_tree`
 - サイン：
     - 言い回し：数の追加・削除と、K 番目に小さい値の質問
@@ -347,6 +360,7 @@ search:
 - 別名：セグ木、segtree、Segment Tree、RMQ、非再帰セグ木、区間最小値、文字の集合を持つセグ木
 - 種類：データ構造、区間クエリ
 - 前提：`prefix-sum`
+- 使い分け：`method-comparison#range-queries`
 - ACL：`segtree`
 - サイン：
     - 言い回し：配列の値を書き換えながら、区間の最小値（最大値・gcd）を何度も答える
@@ -369,6 +383,7 @@ search:
 - 別名：セグ木上の二分探索、セグ木の二分探索、binary search on segment tree、max_right、min_left
 - 種類：データ構造、二分探索、区間クエリ
 - 前提：`segment-tree`、`binary-search`
+- 使い分け：`method-comparison#binary-search`
 - ACL：`segtree`、`lazy_segtree`
 - サイン：
     - 言い回し：位置 i 以降で初めて値が x 以上になる位置
@@ -390,6 +405,7 @@ search:
 - 別名：値域セグ木、権値線段樹、値を添字にするセグ木、動的セグ木、dynamic segment tree、sparse segment tree
 - 種類：データ構造、区間クエリ、ソート・座標圧縮
 - 前提：`fenwick-tree`、`segment-tree`、`coordinate-compression`
+- 使い分け：`method-comparison#containers`
 - ACL：`segtree`、`fenwick_tree`
 - サイン：
     - 言い回し：隣り合う要素の差が D 以下の部分列の最長
@@ -411,6 +427,7 @@ search:
 - 別名：遅延セグ木、Lazy Segment Tree、lazy segtree、遅延評価セグメント木、遅延伝搬、区間作用・区間取得、双対セグ木、Dual Segment Tree
 - 種類：データ構造、区間クエリ
 - 前提：`segment-tree`
+- 使い分け：`method-comparison#range-queries`
 - ACL：`lazy_segtree`
 - サイン：
     - 言い回し：区間に一律に加算・代入・アフィン変換・反転し、区間の和・最小値・最大値を答える
@@ -475,6 +492,7 @@ search:
 - 別名：スパーステーブル、ST 表、静的 RMQ、Disjoint Sparse Table
 - 種類：データ構造、区間クエリ、ダブリング・分割統治
 - 前提：`doubling`
+- 使い分け：`method-comparison#range-queries`
 - サイン：
     - 言い回し：配列が変わらず、区間の最小値・最大値・gcd を非常に多く聞かれる
     - 制約：クエリが 10^6 級で、1 回 O(1) で答えたい
@@ -508,6 +526,7 @@ search:
 - 別名：オフライン処理、offline queries、クエリ先読み、クエリのソート、区間の種類数、Range Set Query、オンライン強制
 - 種類：クエリ処理の工夫、データ構造
 - 前提：`fenwick-tree`、`sorting-techniques`
+- 使い分け：`method-comparison#range-queries`
 - ACL：`fenwick_tree`
 - サイン：
     - 言い回し：区間 [l, r] に含まれる値の種類数を多数のクエリで答える
@@ -551,6 +570,7 @@ search:
 - 別名：Mo、Mo 法、クエリ平方分割、木上の Mo、Mo on tree、時間付き Mo
 - 種類：クエリ処理の工夫、区間クエリ
 - 前提：`offline-queries`
+- 使い分け：`method-comparison#range-queries`
 - サイン：
     - 言い回し：静的な列で、区間ごとの同じ値の組の数・出現回数が条件を満たす値の種類数
     - 言い回し：木のパス上の値の頻度を多数のクエリで答える
@@ -570,6 +590,7 @@ search:
 - 別名：sqrt decomposition、バケット法、bucket method、根号で場合分け、heavy/light、クエリの平方分割
 - 種類：クエリ処理の工夫、データ構造、計算量
 - 前提：`segment-tree`
+- 使い分け：`method-comparison#range-queries`
 - サイン：
     - 言い回し：次数の合計が 2M・各色の個数の合計が N のように、合計だけが抑えられている
     - 言い回し：位置 i から A_i ずつ先へ跳ぶ・配る

@@ -9,7 +9,7 @@ search:
 
 # その他の技法の詳細索引
 
-分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
+分野の全ページの id・URL・別名・サイン・種類・前提・使い分け・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
 
 ## インタラクティブ問題（interactive） {#interactive}
 
@@ -60,6 +60,7 @@ search:
 - 別名：bitset、ビット並列、ワード並列、1/64 倍、bitset で部分和、推移閉包、到達可能性クエリ、bitset speedup
 - 種類：ビット演算、計算量、DP
 - 前提：`bit-operations`、`complexity-estimation`
+- 使い分け：`method-comparison#small-n`
 - サイン：
     - 制約：N ≤ 2000〜5000 程度で、O(N^3) や O(N^2 M) が少し間に合わない
     - 言い回し：部分和として作れる値か（和の上限が 10&#94;5〜10&#94;6）

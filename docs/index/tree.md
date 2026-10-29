@@ -9,7 +9,7 @@ search:
 
 # 木の詳細索引
 
-分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
+分野の全ページの id・URL・別名・サイン・種類・前提・使い分け・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
 
 ## 木の基本性質と表現（tree-basics） {#tree-basics}
 
@@ -193,6 +193,7 @@ search:
 - 別名：辺の寄与、木の主客転倒、全点対の距離の和、全ペアのパスの寄与、contribution of edges
 - 種類：木、考察
 - 前提：`tree-traversal`、`contribution`
+- 使い分け：`method-comparison#trees`
 - サイン：
     - 言い回し：すべての i < j について f(i, j) の総和
     - 言い回し：全ペアのパス上の最大値（最小値）の和
@@ -261,6 +262,7 @@ search:
 - 別名：LCA、Lowest Common Ancestor、最近共通祖先、木のダブリング、K 個上の祖先、level ancestor
 - 種類：木、ダブリング・分割統治
 - 前提：`tree-traversal`、`doubling`
+- 使い分け：`method-comparison#repetition`、`method-comparison#trees`
 - サイン：
     - 言い回し：木の 2 頂点の距離をクエリでたくさん聞かれる
     - 制約：パス u–v に関するクエリが Q ≤ 2×10^5 個
@@ -317,6 +319,7 @@ search:
 - 別名：Euler Tour、行きがけ順の番号付け、in/out、木の平坦化、tree flattening、辺のオイラーツアー、DFS 順で部分木を区間にする
 - 種類：木、区間クエリ
 - 前提：`tree-traversal`、`fenwick-tree`
+- 使い分け：`method-comparison#trees`、`method-comparison#similar-names`
 - ACL：`fenwick_tree`、`segtree`、`lazy_segtree`
 - サイン：
     - 言い回し：部分木の和・最大・個数を、更新を挟みながら聞かれる
@@ -340,6 +343,7 @@ search:
 - 別名：HLD、Heavy-Light Decomposition、重軽分解
 - 種類：木、区間クエリ
 - 前提：`euler-tour`、`lca`、`segment-tree`
+- 使い分け：`method-comparison#trees`
 - ACL：`segtree`、`lazy_segtree`
 - サイン：
     - 言い回し：パスへの一括更新とパスの取得が混ざる
@@ -389,6 +393,7 @@ search:
 - 別名：small-to-large、小さい方を大きい方へ移す、データ構造をマージする一般的なテク、weighted union heuristic、DSU on Tree、Sack
 - 種類：データ構造、木
 - 前提：`union-find`、`ordered-set`
+- 使い分け：`method-comparison#trees`
 - ACL：`dsu`
 - サイン：
     - 言い回し：グループの併合と、グループ内の種類数・個数の問い合わせ
@@ -410,6 +415,7 @@ search:
 - 別名：centroid decomposition、点分治、木の分割統治
 - 種類：木、ダブリング・分割統治
 - 前提：`tree-centroid`、`divide-and-conquer`
+- 使い分け：`method-comparison#trees`
 - サイン：
     - 言い回し：距離がちょうど K の頂点の組の個数
     - 言い回し：全ペアのパスについての量で、辺ごとに分解できないもの
@@ -445,6 +451,7 @@ search:
 - 別名：クラスカル再構築木、Kruskal 再構築木、Kruskal reconstruction tree、KRT、DSU-tree、Union-Find の併合の過程を表す木
 - 種類：木、連結性・全域木
 - 前提：`minimum-spanning-tree`、`euler-tour`、`lca`
+- 使い分け：`method-comparison#connectivity`
 - ACL：`dsu`
 - サイン：
     - 言い回し：ある時点のグループについての問い合わせ（オフライン）

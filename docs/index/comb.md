@@ -9,7 +9,7 @@ search:
 
 # 数え上げ・確率・ゲームの詳細索引
 
-分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
+分野の全ページの id・URL・別名・サイン・種類・前提・使い分け・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
 
 ## 和・積の法則と順列・組合せ（counting-basics） {#counting-basics}
 
@@ -55,6 +55,7 @@ search:
 - 別名：nCr mod p、階乗と逆階乗の表、fact と ifact、逆階乗、Combination テーブル、任意 mod の二項係数、Lucas の定理、nCr mod 2、Lucas's theorem
 - 種類：数え上げ、整数論
 - 前提：`binomial-coefficient`、`mod-inverse`
+- 使い分け：`method-comparison#numbers`
 - ACL：`modint`
 - サイン：
     - 制約：N ≤ 2×10^5 程度で C(n,k) を何度も求める
@@ -339,6 +340,7 @@ search:
 - 別名：包除、撹乱順列、完全順列、モンモール数、全射の数、min-max 包除、inclusion-exclusion principle、derangement
 - 種類：数え上げ
 - 前提：`counting-mindset`、`complement`、`bit-full-search`
+- 使い分け：`method-comparison#counting`
 - サイン：
     - 言い回し：すべて異なる・A_i ≠ B_i となるものの個数
     - 言い回し：どの禁止条件も満たさないものの個数
@@ -360,6 +362,7 @@ search:
 - 別名：符号付き DP、最初に踏む障害物で分類、障害物 DP、包除原理を DP に載せる
 - 種類：数え上げ、DP
 - 前提：`inclusion-exclusion`、`dp-basics`、`lattice-paths`
+- 使い分け：`method-comparison#counting`
 - サイン：
     - 制約：H, W ≤ 10^5 のグリッドに障害物が N ≤ 3000 個
     - 言い回し：禁止条件が列や木に沿って並ぶ数え上げ
@@ -379,6 +382,7 @@ search:
 - 別名：約数系包除、gcd がちょうど g、倍数から引く、互いに素な組の数、gcd の総和
 - 種類：数え上げ、整数論
 - 前提：`counting-mindset`、`gcd-lcm`、`harmonic-sum`
+- 使い分け：`method-comparison#counting`
 - サイン：
     - 言い回し：gcd の総和を求める
     - 言い回し：gcd が 1 になる（互いに素な）組の個数
@@ -454,6 +458,7 @@ search:
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/permutation-cycles/
 - 別名：巡回置換、サイクル分解、順列のサイクル、swap でソートする最小回数、置換の位数、cycle decomposition
 - 種類：数え上げ、考察
+- 使い分け：`method-comparison#similar-names`
 - サイン：
     - 言い回し：順列を任意の 2 要素の swap でソートする最小回数
     - 言い回し：i → P_i をたどる・置換を何回も繰り返す
@@ -652,6 +657,7 @@ search:
 - 別名：期待値の線形性、和の期待値は期待値の和、指示確率変数、indicator、ペアごとの確率、総和と期待値の行き来、linearity of expectation
 - 種類：確率・期待値
 - 前提：`probability-basics`
+- 使い分け：`method-comparison#counting`
 - サイン：
     - 言い回し：〜の個数（種類数）の期待値
     - 言い回し：転倒数・連結成分の数などの期待値
@@ -713,6 +719,7 @@ search:
 - 別名：後ろから決める期待値、残りの期待値、全期待値の公式、自己ループ、振り直し、移項して解く、選択は max・偶然は平均
 - 種類：確率・期待値、DP
 - 前提：`linearity-of-expectation`、`dp-order`
+- 使い分け：`method-comparison#counting`
 - ACL：`modint`
 - サイン：
     - 言い回し：〜になるまでの操作回数の期待値
@@ -737,6 +744,7 @@ search:
 - 別名：期待値の方程式、a + bX の形で持つ、吸収マルコフ連鎖、閉路のある DP、振り出しに戻る、absorbing Markov chain
 - 種類：確率・期待値、DP、線形代数・行列
 - 前提：`expected-value-dp`
+- 使い分け：`method-comparison#counting`
 - ACL：`modint`
 - サイン：
     - 言い回し：振り出し（スタート）に戻るマスがある
@@ -758,6 +766,7 @@ search:
 - 別名：最適停止、expectimax、期待値の最大化、optimal stopping
 - 種類：確率・期待値、DP
 - 前提：`expected-value-dp`
+- 使い分け：`method-comparison#games`
 - サイン：
     - 言い回し：最適に行動したときの期待値（勝率）
     - 言い回し：好きなタイミングでやめられる・最初からやり直せる
@@ -776,6 +785,7 @@ search:
 - 別名：E[X] = Σ P(X ≥ k)、tail sum、期待値と確率の行き来、最大値の期待値、K 番目の値の期待値
 - 種類：確率・期待値
 - 前提：`linearity-of-expectation`、`counting-mindset`
+- 使い分け：`method-comparison#counting`
 - サイン：
     - 言い回し：最大値（最小値・K 番目の値）の期待値
     - 言い回し：〜がそろうまでに取り出す回数の期待値
@@ -828,6 +838,7 @@ search:
 - 別名：ゲーム DP、必勝法、必勝・必敗、勝ち局面・負け局面、二人零和有限確定完全情報ゲーム、手数の偶奇、真似戦略、ペアリング戦略
 - 種類：ゲーム、DP
 - 前提：`memoized-recursion`、`dp-order`
+- 使い分け：`method-comparison#games`
 - サイン：
     - 言い回し：先手と後手が交互に操作し、両者が最適に行動したとき勝つのはどちらか
     - 言い回し：First / Second（Takahashi / Aoki）を出力する
@@ -852,6 +863,7 @@ search:
 - 別名：negamax、得点差 DP、自分 − 相手の最大化、得点差を最大化するゲーム、minimax
 - 種類：ゲーム、DP
 - 前提：`game-basics`
+- 使い分け：`method-comparison#games`
 - サイン：
     - 言い回し：両者が最適に行動したときの得点（の差）
     - 言い回し：太郎は X − Y を最大化し、次郎は最小化する
@@ -872,6 +884,7 @@ search:
 - 別名：ニム、ニム和、石取りゲーム、上限つき Nim、逆形 Nim、Bouton の定理、misère Nim
 - 種類：ゲーム、ビット演算
 - 前提：`game-basics`、`bit-operations`
+- 使い分け：`method-comparison#games`
 - サイン：
     - 言い回し：いくつかの山から石を取り合い、最後に取った人が勝ち
     - 言い回し：1 回に取れる個数に上限（範囲）がある
@@ -891,6 +904,7 @@ search:
 - 別名：nimber、Sprague-Grundy の定理、ゲームの和、Grundy 数の周期性、Sprague-Grundy theorem、Grundy number
 - 種類：ゲーム
 - 前提：`nim`
+- 使い分け：`method-comparison#games`
 - サイン：
     - 言い回し：複数の山（盤面）があり、どれか 1 つを選んで操作する
     - 言い回し：先手と後手の取れる手が同じ
@@ -910,6 +924,7 @@ search:
 - 別名：retrograde analysis、引き分けのあるゲーム、閉路のあるグラフ上のゲーム、グラフ上のゲーム
 - 種類：ゲーム、DP、グラフ探索
 - 前提：`game-basics`、`bfs`
+- 使い分け：`method-comparison#games`
 - サイン：
     - 言い回し：無限に続く場合は Draw（引き分け）を出力する
     - 言い回し：同じ局面が繰り返し現れうる

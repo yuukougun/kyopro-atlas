@@ -9,7 +9,7 @@ search:
 
 # 動的計画法の詳細索引
 
-分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
+分野の全ページの id・URL・別名・サイン・種類・前提・使い分け・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
 
 ## DP の基本（dp-basics） {#dp-basics}
 
@@ -54,6 +54,7 @@ search:
 - 別名：DAG DP、DP on DAG、DAG の最長路、経路の数え上げ、トポロジカル順の DP
 - 種類：DP、グラフ探索
 - 前提：`dp-basics`、`topological-sort`
+- 使い分け：`method-comparison#shortest-path`、`method-comparison#shortest-path-steps`、`method-comparison#connectivity`
 - サイン：
     - 言い回し：番号の小さい頂点から大きい頂点へだけ辺がある（u < v）
     - 言い回し：値が増える向きにしか移動できない
@@ -90,6 +91,7 @@ search:
 - 別名：状態設計、DP の状態、直前を状態に持つ、末尾の数文字を状態に持つ、環状 DP、円環 DP、括弧列の DP
 - 種類：DP
 - 前提：`dp-basics`
+- 使い分け：`method-comparison#optimization`
 - サイン：
     - 言い回し：隣り合う〜が異なる・同じことを連続して〜しない
     - 言い回し：直前の選択でコストが変わる・モードが切り替わる
@@ -205,6 +207,7 @@ search:
 - 別名：部分和、部分和問題、Subset Sum、部分和の数え上げ
 - 種類：DP
 - 前提：`dp-basics`
+- 使い分け：`method-comparison#small-n`
 - サイン：
     - 言い回し：いくつか選んで和をちょうど S にできるか・その選び方の数
     - 言い回し：2 つのグループに分けて差（遅い方）を最小にする
@@ -256,6 +259,7 @@ search:
 - 別名：交換論法＋DP、ソートしてから DP、座布団 DP、締切つきナップサック
 - 種類：DP、貪欲
 - 前提：`exchange-argument`、`knapsack-01`
+- 使い分け：`method-comparison#optimization`
 - サイン：
     - 言い回し：好きな順番で、いくつか選んで順に処理する
     - 言い回し：締切・積み重ね（上に載せられる重さ）がある
@@ -413,6 +417,7 @@ search:
 - 別名：ビット DP、集合 DP、Bitmask DP、巡回セールスマン問題、TSP、Traveling Salesman Problem、ハミルトン路
 - 種類：DP、ビット演算
 - 前提：`dp-state-design`、`bit-full-search`
+- 使い分け：`method-comparison#shortest-path-steps`、`method-comparison#small-n`
 - サイン：
     - 制約：N ≤ 16〜20
     - 言い回し：すべての地点を 1 回ずつ回って戻る最短の経路
@@ -434,6 +439,7 @@ search:
 - 別名：3^N DP、部分集合の部分集合、Submask Enumeration、グループ分け DP
 - 種類：DP、ビット演算
 - 前提：`bit-dp`
+- 使い分け：`method-comparison#small-n`
 - サイン：
     - 言い回し：N 個をいくつかのグループに分ける方法の数・最適値
     - 言い回し：集合を部分集合の和に分割する
@@ -509,6 +515,7 @@ search:
 - 別名：Tree DP、部分木の DP、木の上の DP
 - 種類：DP、木
 - 前提：`dp-basics`、`tree-traversal`
+- 使い分け：`method-comparison#trees`
 - サイン：
     - 言い回し：木の各頂点を塗る・選ぶ（隣り合う頂点に条件がある）
     - 言い回し：木の辺を選ぶ（次数の上限つき）
@@ -532,6 +539,7 @@ search:
 - 別名：Rerooting、ReRooting DP、換根 DP
 - 種類：DP、木
 - 前提：`tree-dp`、`prefix-sum`
+- 使い分け：`method-comparison#trees`
 - サイン：
     - 言い回し：すべての頂点について、その頂点を根（起点）としたときの値
     - 言い回し：各頂点から最も遠い頂点までの距離（頂点や辺の重みつき）
@@ -586,6 +594,7 @@ search:
 - 別名：DP の高速化、DP 高速化、DP 最適化、DP Optimization、遷移の高速化
 - 種類：DP、案内
 - 前提：`dp-basics`
+- 使い分け：`method-comparison#optimization`
 - サイン：
     - 式の形：素直に書いた DP の遷移が状態 1 つあたり O(N) かかり、全体で O(N^2) になる
 - 節：

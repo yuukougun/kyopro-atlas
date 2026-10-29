@@ -9,7 +9,7 @@ search:
 
 # 基本テクニックの詳細索引
 
-分野の全ページの id・URL・別名・サイン・種類・前提・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
+分野の全ページの id・URL・別名・サイン・種類・前提・使い分け・節。全分野の1行の一覧と索引の版は https://yuukougun.github.io/kyopro-atlas/llms.txt にある。
 
 ## 計算量の見積もり（complexity-estimation） {#complexity-estimation}
 
@@ -96,6 +96,7 @@ search:
 - 別名：ビット全探索、部分集合の全列挙、2^N 全探索、3 進全探索、next_permutation、N! 全探索、bit brute force
 - 種類：全探索、ビット演算
 - 前提：`brute-force`、`bit-operations`
+- 使い分け：`method-comparison#small-n`
 - サイン：
     - 制約：N ≤ 15〜20 で各要素を「選ぶ／選ばない」
     - 制約：N ≤ 8〜10 で並び順・割り当て・頂点の対応を決める
@@ -116,6 +117,7 @@ search:
 - 別名：DFS による全列挙、バックトラック、枝刈り、組分けの全列挙、グループ分けの全列挙、集合分割の全列挙、backtracking
 - 種類：全探索
 - 前提：`bit-full-search`
+- 使い分け：`method-comparison#small-n`
 - サイン：
     - 言い回し：条件を満たす数・列を小さい順にすべて作る
     - 制約：N ≤ 10〜12 人を組・グループに分ける（ベル数 B12 ≈ 4.2×10^6）
@@ -154,6 +156,7 @@ search:
 - 別名：二分法、lower_bound、upper_bound、めぐる式二分探索、partition_point、binary search
 - 種類：二分探索
 - 前提：`sorting-techniques`
+- 使い分け：`method-comparison#binary-search`
 - サイン：
     - 言い回し：ソート済みの列で x 以上の最初の位置・x 以下の個数
     - 言い回し：片方を固定して、もう片方が条件を満たす個数を数える
@@ -172,6 +175,7 @@ search:
 - 別名：決め打ち二分探索、答えの二分探索、最小値の最大化、最大値の最小化、判定問題、実数の二分探索、判定 DP、二分探索と DP、binary search on the answer、parametric search
 - 種類：二分探索
 - 前提：`binary-search`
+- 使い分け：`method-comparison#binary-search`、`method-comparison#optimization`
 - サイン：
     - 言い回し：最小値を最大化する／最大値を最小化する
     - 言い回し：〜を満たす最大（最小）の X を求める
@@ -192,6 +196,7 @@ search:
 - 別名：座圧、値の圧縮、離散化、coordinate compression
 - 種類：ソート・座標圧縮
 - 前提：`binary-search`
+- 使い分け：`method-comparison#containers`
 - サイン：
     - 制約：値は 10^9 まであるが、個数は 2×10^5 以下
     - 言い回し：大小関係（順位）だけが重要
@@ -228,6 +233,7 @@ search:
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum/
 - 別名：prefix sum、cumulative sum、累積 GCD、累積 XOR、累積 max、左右からの累積
 - 種類：累積和・差分、区間クエリ
+- 使い分け：`method-comparison#range-queries`
 - サイン：
     - 言い回し：区間の和を何度も聞かれる
     - 言い回し：1 つだけ除いた（変えた）ときの値
@@ -287,6 +293,7 @@ search:
 - 別名：imos 法、差分配列、difference array、2 次元いもす法、階差、隣接差、等差数列の区間加算
 - 種類：累積和・差分
 - 前提：`prefix-sum`
+- 使い分け：`method-comparison#range-queries`
 - サイン：
     - 言い回し：区間にまとめて加算し、最後に各点の値を知りたい
     - 言い回し：各時刻に何人いるか・ちょうど k 個重なる長さ
@@ -330,6 +337,7 @@ search:
 - 別名：しゃくとり法、two pointers、2 ポインタ、スライディングウィンドウ、固定長の窓
 - 種類：尺取り・スライド窓
 - 前提：`prefix-sum`、`complexity-estimation`
+- 使い分け：`method-comparison#binary-search`
 - サイン：
     - 言い回し：条件を満たす最長（最短）の連続区間・連続区間の個数
     - 言い回し：区間を縮めても（広げても）条件が保たれる
@@ -368,6 +376,7 @@ search:
 - 別名：Meet in the Middle、半分全探索、折半全列挙
 - 種類：全探索、二分探索
 - 前提：`bit-full-search`、`binary-search`
+- 使い分け：`method-comparison#small-n`
 - サイン：
     - 制約：N ≤ 40 で部分集合を選ぶ（2^N は無理だが 2^(N/2) は間に合う）
     - 言い回し：2 つの独立な選択を組み合わせて条件を満たす
@@ -386,6 +395,7 @@ search:
 - 別名：平均の最大化、比の最大化、中央値の最大化、分数計画、濃度の最大化、中央値の二分探索、中央値の中央値、fractional programming、Dinkelbach
 - 種類：二分探索
 - 前提：`binary-search-answer`、`prefix-sum`
+- 使い分け：`method-comparison#binary-search`
 - サイン：
     - 言い回し：平均・濃度・割合・(Σa)/(Σb) の最大（最小）
     - 言い回し：中央値の最大値・最小値
@@ -410,6 +420,7 @@ search:
 - 別名：K 番目を二分探索で求める、順位を数える、N^2 個の K 番目、K-th smallest
 - 種類：二分探索
 - 前提：`binary-search-answer`、`two-pointers`
+- 使い分け：`method-comparison#binary-search`
 - サイン：
     - 言い回し：N^2 個（以上）の値の K 番目
     - 言い回し：大きい方から M 個の和
@@ -446,6 +457,7 @@ search:
 - 別名：三分法、黄金分割探索、凸関数の極値、凸関数、離散凸、増分が単調、ternary search
 - 種類：二分探索
 - 前提：`binary-search-answer`
+- 使い分け：`method-comparison#binary-search`
 - サイン：
     - 言い回し：時刻や位置を 1 つ選んで、時間やコストを最小化する（谷形）
     - 言い回し：答えを実数で出力し、誤差が許される
@@ -465,6 +477,7 @@ search:
 - 別名：グリーディ、Greedy、貪欲、交換しても悪化しない、マトロイド
 - 種類：貪欲
 - 前提：`sorting-techniques`
+- 使い分け：`method-comparison#optimization`
 - サイン：
     - 言い回し：強いもの・安いものから順に使う
     - 言い回し：1 回ごとに最大（最小）のものを選ぶ操作を繰り返す
@@ -541,6 +554,7 @@ search:
 - 別名：隣接交換、exchange argument、ソートの比較関数を作る、連結して最大・最小、a+b と b+a
 - 種類：貪欲、ソート・座標圧縮
 - 前提：`greedy-basics`
+- 使い分け：`method-comparison#optimization`
 - サイン：
     - 言い回し：並べる順番で結果が変わる
     - 言い回し：文字列・数を並べて連結した結果を最大（最小）にする
@@ -559,6 +573,7 @@ search:
 - URL：https://yuukougun.github.io/kyopro-atlas/basics/periodicity/
 - 別名：周期性、周期の検出、ρ 型、ループの検出、シミュレーションの高速化、cycle finding
 - 種類：ダブリング・分割統治
+- 使い分け：`method-comparison#repetition`
 - サイン：
     - 制約：K ≤ 10&#94;18 回の操作で、状態の種類は 10&#94;5〜10&#94;6 程度
     - 言い回し：x_{n+1} = f(x_n) の形の漸化式
@@ -579,6 +594,7 @@ search:
 - 別名：binary lifting、倍化、2^k 回後の表、ダブリング上の二分探索、doubling
 - 種類：ダブリング・分割統治
 - 前提：`periodicity`、`bit-operations`
+- 使い分け：`method-comparison#repetition`
 - サイン：
     - 制約：K ≤ 10^18 回の移動・操作で、始点やクエリが多い
     - 言い回し：各状態から次の状態がただ 1 つに決まる
