@@ -224,7 +224,7 @@ for step = (N 以下の最大の 2 の冪), …, 2, 1:
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [PRACTICE2 B. Fenwick Tree](https://atcoder.jp/contests/practice2/tasks/practice2_b)（diff —）：一点加算と区間和のクエリを処理する。
+- [PRACTICE2 B. Fenwick Tree](https://atcoder.jp/contests/practice2/tasks/practice2_b)（diff なし）：一点加算と区間和のクエリを処理する。
 
 </div>
 

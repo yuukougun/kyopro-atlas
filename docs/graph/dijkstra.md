@@ -31,7 +31,7 @@ sections:
   - {title: 逆向きのグラフと両端からの最短路, anchor: reverse-graph, level: 水}
   - {title: ポテンシャルで負辺を消す（Johnson のアイデア）, anchor: potential, level: 水}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -275,7 +275,7 @@ $p(s) - p(t)$ は道によらない定数なので、$s$ から $t$ への道の
 - [ABC325 E. Our clients, please wait a moment](https://atcoder.jp/contests/abc325/tasks/abc325_e)（diff 1093）：社用車から電車へ 1 回だけ乗り換えられるとき、都市 1 から都市 N への最短時間を求める。
 - [ABC237 E. Skiing](https://atcoder.jp/contests/abc237/tasks/abc237_e)（diff 1208）：標高の差で楽しさが増減する移動で、広場 1 から出発したときの楽しさの最大値を求める。
 - [ABC477 E. Wheel Distance](https://atcoder.jp/contests/abc477/tasks/abc477_e)（diff 1235）：外周の閉路と中心の頂点からなる車輪の形の重み付きグラフで、2 頂点の間の最短距離を多数のクエリについて答える。
-- [典型90 013. Passing（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_m)（diff —）：各頂点 k について、頂点 1 から頂点 k を経由して頂点 N へ行く最短距離を求める。
+- [典型90 013. Passing（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_m)（diff なし）：各頂点 k について、頂点 1 から頂点 k を経由して頂点 N へ行く最短距離を求める。
 
 </div>
 
@@ -291,7 +291,7 @@ $p(s) - p(t)$ は道によらない定数なので、$s$ から $t$ への道の
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [ABC035 D. トレジャーハント](https://atcoder.jp/contests/abc035/tasks/abc035_d)（diff 1591）：時間 T 以内に町 1 から出発して 1 つの町に滞在し、町 1 へ戻るとき、滞在で得られるお金の最大値を求める。
+- [ABC035 D. トレジャーハント](https://atcoder.jp/contests/abc035/tasks/abc035_d)（diff 1591・参考値）：時間 T 以内に町 1 から出発して 1 つの町に滞在し、町 1 へ戻るとき、滞在で得られるお金の最大値を求める。
 - [SOUNDHOUND2018-SUMMER-QUAL D. Saving Snuuk](https://atcoder.jp/contests/soundhound2018-summer-qual/tasks/soundhound2018_summer_qual_d)（diff 1637）：円とスヌークの 2 つの運賃がある路線で、両替所が年ごとに閉じていくとき、各年に旅行した場合に手元に残るスヌークの最大値を求める。
 
 </div>

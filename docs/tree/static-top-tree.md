@@ -23,7 +23,7 @@ sections:
   - {title: Static Top Tree（圧縮と併合）, anchor: compress-rake}
   - {title: 自作するときの要点と検証, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -139,11 +139,11 @@ Library Checker では次の 2 問で確かめられる（[練習問題](#practi
 
 ## 学ぶための資料 {#resources}
 
-- ABC351 G の公式解説は、ABC の想定解として Static Top Tree を初めて正面から扱ったもので、下の記事の多くが出発点にしている。AtCoder の解説ページなので、このサイトからはリンクしない。
-- blue_jam 氏の Zenn の記事（Static Top Tree の覚え書き）は、5 つの操作の前後に来られる操作の組と、節点の数が $O(N)$ になる理由を整理している。
-- noya2 氏の traP ブログの記事「式変形で導出する Static Top Tree」は、部品（クラスタ）の考え方から入らず、HL 分解の式を変形して同じ構造にたどり着く。HL 分解とセグメント木の方法から入りたい人に向く。全方位木 DP への広げ方にも触れている。
-- maspy 氏の記事「[Library Checker] Point Set Tree Path Composite Sum」は、根を毎回変える版を Static Top Tree で解く方法と、部品に持たせる値を説明している。
-- 実装の参考には、ei1333 氏の Luzhiled's Library（Static Top Tree DP）と hitonanode 氏の cplib-cpp（Static top tree）がある。
+- [ABC351 G](#abc351_g) の公式解説は、ABC の想定解として Static Top Tree を初めて正面から扱ったもので、下の記事の多くが出発点にしている。AtCoder の解説ページなので、このサイトからは解説へリンクしない。
+- [blue_jam「Static Top Treeの覚書」](https://zenn.dev/blue_jam/articles/0526c70b74f6bb)（Zenn）：5 つの操作の前後に来られる操作の組と、節点の数が $O(N)$ になる理由を整理している。
+- [noya2「式変形で導出する Static Top Tree」](https://trap.jp/post/2861/)（traP ブログ）：部品（クラスタ）の考え方から入らず、HL 分解の式を変形して同じ構造にたどり着く。HL 分解とセグメント木の方法から入りたい人に向く。全方位木 DP への広げ方にも触れている。
+- [maspy「[Library Checker] Point Set Tree Path Composite Sum」](https://maspypy.com/library-checker-point-set-tree-path-composite-sum)：根を毎回変える版を Static Top Tree で解く方法と、部品に持たせる値を説明している。
+- [ei1333「Luzhiled's Library: Static Top Tree DP」](https://ei1333.github.io/library/graph/tree/static-top-tree-dp.hpp.html)と [hitonanode「cplib-cpp: Static top tree」](https://hitonanode.github.io/cplib-cpp/data_structure/static_toptree.hpp.html)：実装の参考になる。
 
 ## 例題 {#examples}
 

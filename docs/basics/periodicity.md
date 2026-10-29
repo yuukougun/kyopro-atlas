@@ -197,7 +197,7 @@ $K$ 回の遷移を速く進める手法は 3 つあり、遷移の形と問い�
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC106 C. To Infinity](https://atcoder.jp/contests/abc106/tasks/abc106_c)（diff 441）：1〜9 の数字列に「各数字 d を d 個並べる」置換を 5000 兆回行った後の、K 文字目を求める。
-- [典型90 058. Original Calculator（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_bf)（diff —）：各桁の和を足す操作を K 回行った後の値を求める。
+- [典型90 058. Original Calculator（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_bf)（diff なし）：各桁の和を足す操作を K 回行った後の値を求める。
 - [ABC354 D. AtCoder Wallpaper](https://atcoder.jp/contests/abc354/tasks/abc354_d)（diff 1259）：無限に続く白黒の模様のうち、長方形の範囲にある黒い部分の面積を求める。
 - [ABC452 E. You WILL Like Sigma Problem](https://atcoder.jp/contests/abc452/tasks/abc452_e)（diff 1318）：長さ N の数列 A と長さ M の数列 B について、すべての組 (i, j) の A_i × B_j × (i mod j) の和を 998244353 で割った余りを求める。
 

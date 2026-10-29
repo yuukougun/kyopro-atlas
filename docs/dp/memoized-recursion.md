@@ -24,7 +24,7 @@ sections:
   - {title: ボトムアップとの使い分け（速さ・スタック・高速化の載せやすさ）, anchor: vs-bottom-up}
   - {title: 到達する状態だけを持つ（map でメモ化・現れる値の個数の見積もり）, anchor: dp-map-sparse}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -182,7 +182,7 @@ $$
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC275 D. Yet Another Recursive Function](https://atcoder.jp/contests/abc275/tasks/abc275_d)（diff 606）：f(0) = 1、f(k) = f(⌊k/2⌋) + f(⌊k/3⌋) で定まる f(N) を求める（N ≤ 10^18）。
-- [EDPC G. Longest Path](https://atcoder.jp/contests/dp/tasks/dp_g)（diff —）：閉路のない有向グラフで、最長の有向路の長さを求める。
+- [EDPC G. Longest Path](https://atcoder.jp/contests/dp/tasks/dp_g)（diff なし）：閉路のない有向グラフで、最長の有向路の長さを求める。
 - [ABC357 E. Reachability in Functional Graph](https://atcoder.jp/contests/abc357/tasks/abc357_e)（diff 1295）：各頂点から出る辺がちょうど 1 本の有向グラフで、u から v へ到達できる組 (u, v) の個数を求める。
 - [ABC300 E. Dice Product 3](https://atcoder.jp/contests/abc300/tasks/abc300_e)（diff 1354）：1〜6 の目のサイコロを振って出た目を掛けていくとき、積がちょうど N になる確率を求める（mod 998244353）。
 

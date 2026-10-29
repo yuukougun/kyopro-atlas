@@ -28,7 +28,7 @@ sections:
   - {title: 係数の復元（O(d²)）, anchor: coefficients}
   - {title: 自作するときの要点と Library Checker, anchor: library}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -141,9 +141,9 @@ Library Checker の対応：
 
 ## 学ぶための資料 {#resources}
 
-- ikatakos 氏の「ラグランジュ補間」のページ：一意性（ヴァンデルモンドの行列式）、$O(d^2)$ の公式、等差数列の標本点での $O(d)$ 化、係数の復元、答えが多項式かどうかの見分け方までが 1 ページにまとまっている。
-- ei1333 氏の「ラグランジュ補間」の記事：連続した標本点での $O(d)$ の補間を、前後からの積と階乗で書く手順とコード。
-- Nyaan 氏のライブラリの $\sum a^i f(i)$ の解説：べき乗和に等比数列が掛かった和を、母関数を使って $O(d + \log p)$ で求める方法。
+- [ikatakos「ラグランジュ補間」](https://ikatakos.com/pot/programming_algorithm/linear_algebra/lagrange_interpolation)：一意性（ヴァンデルモンドの行列式）、$O(d^2)$ の公式、等差数列の標本点での $O(d)$ 化、係数の復元、答えが多項式かどうかの見分け方までが 1 ページにまとまっている。
+- [ei1333「ラグランジュ補間」](https://ei1333.hateblo.jp/entry/2021/07/08/221742)：連続した標本点での $O(d)$ の補間を、前後からの積と階乗で書く手順とコード。
+- [Nyaan「$\sum_{i}a^i f(i)$」](https://nyaannyaan.github.io/library/fps/sum-of-exponential-times-poly.hpp)：べき乗和に等比数列が掛かった和を、母関数を使って $O(d + \log p)$ で求める方法。
 
 ## 例題 {#examples}
 

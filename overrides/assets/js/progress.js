@@ -286,7 +286,9 @@
     [1600, "cyan", "水", "1200〜1599"], [2000, "blue", "青", "1600〜1999"], [2400, "yellow", "黄", "2000〜2399"],
     [2800, "orange", "橙", "2400〜2799"], [Infinity, "red", "赤", "2800〜"],
   ];
-  var DIFF_TEXT = /（(diff (\d+))）/;
+  // 問題の行の difficulty の 3 つの形（tools/check_pages.py の PROBLEM_LINE_RE。#5・#76）：
+  // 「（diff 1354）」・台帳で参考値のもの「（diff 1856・参考値）」・値のないもの「（diff なし）」
+  var DIFF_TEXT = /（(diff (\d+))(・参考値)?）|（diff なし）/;
 
   function diffBand(d) {
     if (typeof d !== "number" || !isFinite(d)) return -1;
@@ -295,14 +297,16 @@
     return k;
   }
 
-  // 行の「（diff NNNN）」の「diff NNNN」を色の帯の class を付けた span で包む。丸は帯の中の位置だけ塗る
-  // （AtCoder Problems の表し方）。「diff —」（difficulty なし）は色を付けない
+  // 行の「（diff NNNN）」「（diff NNNN・参考値）」の「diff NNNN」を色の帯の class を付けた span で包む。丸は帯の中の
+  // 位置だけ塗る（AtCoder Problems の表し方）。「・参考値」は span の外の文字のまま残し、title に添える。
+  // 「diff なし」は色を付けない
   function markDifficulty(body) {
     var walker = document.createTreeWalker(body, NodeFilter.SHOW_TEXT);
     var node;
     while ((node = walker.nextNode())) {
       var m = DIFF_TEXT.exec(node.nodeValue);
       if (!m) continue;
+      if (!m[1]) return; // 「diff なし」。行の difficulty はこれで終わり（後ろの要約は見ない）
       var d = Number(m[2]);
       var k = diffBand(d);
       // 帯の幅は 400。3200 以上は全部塗る（AtCoder Problems は金属の色にするが、ここでは赤のまま）
@@ -311,7 +315,7 @@
       target.splitText(m[1].length); // 「diff NNNN」だけを切り出す
       var span = document.createElement("span");
       span.className = "kp-diff kp-diff--" + DIFF_BANDS[k][1];
-      span.title = "difficulty " + d + "（" + DIFF_BANDS[k][2] + "）";
+      span.title = "difficulty " + d + (m[3] || "") + "（" + DIFF_BANDS[k][2] + "）"; // 参考値は「difficulty 1856・参考値（青）」
       span.style.setProperty("--kp-diff-fill", fill + "%");
       target.parentNode.replaceChild(span, target);
       span.appendChild(target);

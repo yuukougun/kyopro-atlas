@@ -32,7 +32,7 @@ sections:
   - {title: 辞書順で K 番目の文字列・順列 → 残りの個数を数えて先頭から決める, anchor: lexicographic-kth}
   - {title: XOR で作れる値の K 番目 → XOR 基底（xor-basis）, anchor: xor-kth}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -76,20 +76,20 @@ $\mathrm{count}(x)$ は $x$ について広義単調増加なので、$K$ 番目
 
 ## 問われ方と手法の一覧 {#overview}
 
-問題文の形とデータの動き方から行を探し、手法のページへ進む。代表の問題は、行き先のページの例題・練習にある。
+問題文の形とデータの動き方から行を探し、問われ方のリンクから行の節へ移る。節で言い換えを確かめてから、手法のページへ進む。代表の問題は、行き先のページの例題・練習にある。
 
 | よく出る問われ方 | 使う手法 | ページ | 代表の問題 |
 |---|---|---|---|
-| $N^2$ 個の積・和の $K$ 番目、条件を満たす整数の $K$ 番目 | $x$ 以下の個数で答えを二分探索 | [K 番目の値](../basics/kth-value.md) | ABC155 D |
-| 値を追加しながら $K$ 番目（$K$ は固定） | 大きさ $K$ のヒープ | [優先度付きキュー](../ds/priority-queue.md#patterns) | ABC234 D |
-| 更新のたびに上位 $K$ 個の和・中央値 | 2 つの multiset | [上位 K 個の和と中央値の管理](../ds/top-k-multiset.md) | ABC306 E |
-| 追加と削除があり、毎回違う $K$ を聞く | BIT 上の二分探索・値を添字にするセグメント木 | [K 番目の値を求めるデータ構造](../ds/kth-element.md) | ARC033 C |
-| 小さい方から $K$ 個を列挙する（$K$ が小さい） | 最小を取り出して次の候補を入れる | [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md#k-best)、[優先度付きキュー](../ds/priority-queue.md#patterns) | ABC123 D（大きい方から） |
-| 列の区間の $K$ 番目・$x$ 以下の個数 | 先読みして BIT、Wavelet Matrix | [クエリの先読み](../ds/offline-queries.md#threshold)、[Wavelet Matrix](../ds/wavelet-matrix.md) | ABC324 G |
-| 中央値・平均の最大化・最小化 | 値を引く・±1 にして符号で判定 | [平均・中央値の最大化](../basics/fractional-binary-search.md) | ABC203 D |
-| $\sum_i \lvert x - a_i \rvert$ の最小 | 中央値を選ぶ | [絶対値の和の最小化と中央値](../basics/median-absolute.md) | ARC100 C |
-| 辞書順で $K$ 番目の文字列・順列 | 先頭ごとの個数と $K$ を比べる | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md#kth) | ABC202 D |
-| XOR で作れる値の $K$ 番目 | 簡約した基底 | [XOR 基底](../math/xor-basis.md#kth) | ABC283 G |
+| [$N^2$ 個の積・和の $K$ 番目、条件を満たす整数の $K$ 番目](#count-and-search) | $x$ 以下の個数で答えを二分探索 | [K 番目の値](../basics/kth-value.md) | ABC155 D |
+| [値を追加しながら $K$ 番目（$K$ は固定）](#streaming) | 大きさ $K$ のヒープ | [優先度付きキュー](../ds/priority-queue.md#patterns) | ABC234 D |
+| [更新のたびに上位 $K$ 個の和・中央値](#streaming) | 2 つの multiset | [上位 K 個の和と中央値の管理](../ds/top-k-multiset.md) | ABC306 E |
+| [追加と削除があり、毎回違う $K$ を聞く](#dynamic) | BIT 上の二分探索・値を添字にするセグメント木 | [K 番目の値を求めるデータ構造](../ds/kth-element.md) | ARC033 C |
+| [小さい方から $K$ 個を列挙する（$K$ が小さい）](#k-best) | 最小を取り出して次の候補を入れる | [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md#k-best)、[優先度付きキュー](../ds/priority-queue.md#patterns) | ABC123 D（大きい方から） |
+| [列の区間の $K$ 番目・$x$ 以下の個数](#range-kth) | 先読みして BIT、Wavelet Matrix | [クエリの先読み](../ds/offline-queries.md#threshold)、[Wavelet Matrix](../ds/wavelet-matrix.md) | ABC324 G |
+| [中央値・平均の最大化・最小化](#maximize-median) | 値を引く・±1 にして符号で判定 | [平均・中央値の最大化](../basics/fractional-binary-search.md) | ABC203 D |
+| [$\sum_i \lvert x - a_i \rvert$ の最小](#absolute-sum) | 中央値を選ぶ | [絶対値の和の最小化と中央値](../basics/median-absolute.md) | ARC100 C |
+| [辞書順で $K$ 番目の文字列・順列](#lexicographic-kth) | 先頭ごとの個数と $K$ を比べる | [辞書順最小を前から決める貪欲](../basics/lexicographic-greedy.md#kth) | ABC202 D |
+| [XOR で作れる値の $K$ 番目](#xor-kth) | 簡約した基底 | [XOR 基底](../math/xor-basis.md#kth) | ABC283 G |
 
 迷ったら、次の 3 つを順に確かめる。
 

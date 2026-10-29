@@ -5,7 +5,7 @@ aliases: [指数ベクトル, 平方因子, squarefree, smooth 数, 平方数の
 type: technique
 field: math
 chapter: 素数と約数
-order: 170
+order: 135
 level: 基礎
 kind: [整数論]
 prerequisites: [prime-factorization]
@@ -27,7 +27,7 @@ sections:
   - {title: 巨大な lcm を指数の最大で持つ, anchor: huge-lcm, level: 水}
   - {title: 特定の素数（2 など）の指数だけを比べる, anchor: single-prime, level: 水}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -195,7 +195,7 @@ $A_i \le 2 \times 10^5$ と小さいので、各要素の核を試し割りで�
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [典型90 025. Digit Product Equation（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_y)（diff —）：1 以上 N 以下の整数 m で、m − f(m) = B（f(m) は m の各桁の積）となるものの個数を求める（N ≤ 10^11）。
+- [典型90 025. Digit Product Equation（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_y)（diff なし）：1 以上 N 以下の整数 m で、m − f(m) = B（f(m) は m の各桁の積）となるものの個数を求める（N ≤ 10^11）。
 - [ABC300 G. P-smooth number](https://atcoder.jp/contests/abc300/tasks/abc300_g)（diff 2343）：素因数がすべて P 以下である N 以下の正の整数の個数を求める（N ≤ 10^16、P ≤ 100）。
 - [AGC003 D. Anticube](https://atcoder.jp/contests/agc003/tasks/agc003_d)（diff 2608）：N 個の整数から、どの 2 つを選んでも積が立方数にならないように選べる最大の個数を求める。
 

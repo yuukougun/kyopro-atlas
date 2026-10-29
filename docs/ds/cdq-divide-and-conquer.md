@@ -25,7 +25,7 @@ sections:
   - {title: 自作するときの要点と Library Checker, anchor: library}
   - {title: 代わりの手（座標が小さいなら 2 次元 BIT、更新がなければ平面走査）, anchor: alternatives}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -122,8 +122,8 @@ CDQ 分割統治より軽い方法で足りるかを先に考える。
 
 ## 学ぶための資料 {#resources}
 
-- OI Wiki の「CDQ 分治」（中国語）：3 次元の支配点の数え上げ、DP の遷移の高速化、動的な問題を静的にする使い方の 3 つの型と例題がまとまっている。同じ点をまとめる実装もここで確かめられる
-- robert1003 氏の「A Simple Introduction to CDQ Divide and Conquer」（英語）：分割・再帰・左から右への寄与・マージの 4 段で枠組みを説明し、3 次元の支配点、点の追加つきの長方形の和、削除つきの転倒数へと進む
+- [OI Wiki「CDQ 分治」](https://oi-wiki.org/misc/cdq-divide/)（中国語）：3 次元の支配点の数え上げ、DP の遷移の高速化、動的な問題を静的にする使い方の 3 つの型と例題がまとまっている。同じ点をまとめる実装もここで確かめられる
+- [robert1003「A Simple Introduction to CDQ Divide and Conquer」](https://robert1003.github.io/2020/01/31/cdq-divide-and-conquer.html)（英語）：分割・再帰・左から右への寄与・マージの 4 段で枠組みを説明し、3 次元の支配点、点の追加つきの長方形の和、削除つきの転倒数へと進む
 
 ## 参考 {#references}
 

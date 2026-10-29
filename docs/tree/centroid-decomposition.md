@@ -208,7 +208,7 @@ $$
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [YAHOO-PROCON2018-FINAL C. 木の問題](https://atcoder.jp/contests/yahoo-procon2018-final/tasks/yahoo_procon2018_final_c)（diff —）：木の頂点 V_i から距離がちょうど K_i の頂点の個数を、多数のクエリについて答える。
+- [YAHOO-PROCON2018-FINAL C. 木の問題](https://atcoder.jp/contests/yahoo-procon2018-final/tasks/yahoo_procon2018_final_c)（diff なし）：木の頂点 V_i から距離がちょうど K_i の頂点の個数を、多数のクエリについて答える。
 - [ABC267 F. Exactly K Steps](https://atcoder.jp/contests/abc267/tasks/abc267_f)（diff 1939）：木の頂点 U_i から距離がちょうど K_i の頂点を 1 つ答える（なければ −1）クエリに、Q 回答える。
 - [ABC359 G. Sum of Tree Distance](https://atcoder.jp/contests/abc359/tasks/abc359_g)（diff 2099）：各頂点に色がついた木で、同じ色の頂点の組すべてについての距離の総和を求める。
 
@@ -223,8 +223,8 @@ $$
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [DDCC2016-QUAL D. 道路網](https://atcoder.jp/contests/ddcc2016-qual/tasks/ddcc_2016_qual_d)（diff —）：N 頂点の完全グラフで、N−1 本の辺は木をなして長さが与えられ、残りの辺の長さがすべて X のとき、全頂点対の最短距離の総和を求める。
-- [NIKKEI2019-FINAL G. Greatest Journey](https://atcoder.jp/contests/nikkei2019-final/tasks/nikkei2019_final_g)（diff —）：重み付きの木で、頂点 V_i から始まる長さ L_i のウォークについて、通った辺の重みの和の最大値を多数のクエリについて答える。
+- [DDCC2016-QUAL D. 道路網](https://atcoder.jp/contests/ddcc2016-qual/tasks/ddcc_2016_qual_d)（diff なし）：N 頂点の完全グラフで、N−1 本の辺は木をなして長さが与えられ、残りの辺の長さがすべて X のとき、全頂点対の最短距離の総和を求める。
+- [NIKKEI2019-FINAL G. Greatest Journey](https://atcoder.jp/contests/nikkei2019-final/tasks/nikkei2019_final_g)（diff なし）：重み付きの木で、頂点 V_i から始まる長さ L_i のウォークについて、通った辺の重みの和の最大値を多数のクエリについて答える。
 - [KEYENCE2019 E. Connecting Cities](https://atcoder.jp/contests/keyence2019/tasks/keyence2019_e)（diff 2623）：一列に並ぶ都市を結ぶ完全グラフで、辺の重みが番号の差と両端の値で決まるときの最小全域木の重みを求める。
 
 </div>

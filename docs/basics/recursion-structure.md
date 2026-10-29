@@ -26,7 +26,7 @@ sections:
   - {title: 必要な深さは log K（長さの上限で打ち切る）, anchor: depth}
   - {title: 再帰の深さとスタック, anchor: stack}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -181,7 +181,7 @@ $K$ 番目を探す再帰は、各レベルで自分を 1 回だけ呼び、そ�
 
 - [ABC153 D. Caracal vs Monster](https://atcoder.jp/contests/abc153/tasks/abc153_d)（diff 129）：体力が半分になって 2 体に分裂するモンスターを、すべて倒すための攻撃回数を求める。
 - [ABC357 C. Sierpinski carpet](https://atcoder.jp/contests/abc357/tasks/abc357_c)（diff 371）：レベル N のシェルピンスキーのカーペットを描く。
-- [典型90 002. Encyclopedia of Parentheses（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_b)（diff —）：長さ N の正しい括弧列を辞書順にすべて出力する。
+- [典型90 002. Encyclopedia of Parentheses（★3）](https://atcoder.jp/contests/typical90/tasks/typical90_b)（diff なし）：長さ N の正しい括弧列を辞書順にすべて出力する。
 
 </div>
 

@@ -26,7 +26,7 @@ sections:
   - {title: 期待値の定義, anchor: expectation}
   - {title: 浮動小数点の誤差と出力の桁数, anchor: precision}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -185,7 +185,7 @@ $$
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC193 D. Poker](https://atcoder.jp/contests/abc193/tasks/abc193_d)（diff 866）：見えているカードと残りのカードの枚数から、2 人に伏せたカードが 1 枚ずつ配られたときに高橋君が勝つ確率を求める。
-- [ABC028 D. 乱数生成](https://atcoder.jp/contests/abc028/tasks/abc028_d)（diff 920）：1〜N の整数を独立に一様に 3 回選んだとき、3 つの中央値が K になる確率を求める。
+- [ABC028 D. 乱数生成](https://atcoder.jp/contests/abc028/tasks/abc028_d)（diff 920・参考値）：1〜N の整数を独立に一様に 3 回選んだとき、3 つの中央値が K になる確率を求める。
 
 </div>
 
@@ -197,7 +197,7 @@ $$
 
 <div class="kp-problems" data-role="challenge" markdown>
 
-- [ABC008 C. コイン](https://atcoder.jp/contests/abc008/tasks/abc008_3)（diff 1836）：数の書かれた N 枚のコインを一様にランダムな順に並べ、左から順に各コインについて右にある倍数のコインを裏返すとき、最後に表のコインの枚数の期待値を求める。
+- [ABC008 C. コイン](https://atcoder.jp/contests/abc008/tasks/abc008_3)（diff 1836・参考値）：数の書かれた N 枚のコインを一様にランダムな順に並べ、左から順に各コインについて右にある倍数のコインを裏返すとき、最後に表のコインの枚数の期待値を求める。
 
 </div>
 

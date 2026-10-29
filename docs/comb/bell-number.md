@@ -23,7 +23,7 @@ sections:
   - {title: ベル数と全列挙の個数の見積もり（B_10 = 115975、B_12 = 4213597）, anchor: size}
   - {title: bitDP・3^N の部分集合 DP との使い分け, anchor: vs-subset-dp}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -186,8 +186,8 @@ $O(2^N N)$ の bitDP は、要素を 1 つずつ足していき、順番や最�
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC310 D. Peaceful Teams](https://atcoder.jp/contests/abc310/tasks/abc310_d)（diff 1368）：N 人（N ≤ 10）を T 個のチームに分ける方法のうち、指定された仲の悪い 2 人の組がどれも同じチームにならないものの数を求める。
-- [EDPC U. Grouping](https://atcoder.jp/contests/dp/tasks/dp_u)（diff —）：N 羽（N ≤ 16）のうさぎをいくつかのグループに分け、同じグループになった 2 羽の組ごとに決まる得点の和の最大を求める。
-- [典型90 045. Simple Grouping（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_as)（diff —）：平面上の N 点を K 個の空でないグループに分け、各グループの中で最も遠い 2 点の距離の、全グループでの最大を最小化する。
+- [EDPC U. Grouping](https://atcoder.jp/contests/dp/tasks/dp_u)（diff なし）：N 羽（N ≤ 16）のうさぎをいくつかのグループに分け、同じグループになった 2 羽の組ごとに決まる得点の和の最大を求める。
+- [典型90 045. Simple Grouping（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_as)（diff なし）：平面上の N 点を K 個の空でないグループに分け、各グループの中で最も遠い 2 点の距離の、全グループでの最大を最小化する。
 - [ABC217 G. Groups](https://atcoder.jp/contests/abc217/tasks/abc217_g)（diff 2047）：1〜N の番号の N 人を、番号を M で割った余りが等しい 2 人が同じ組に入らないように k 個の空でない組に分ける方法の数を、k = 1, …, N のそれぞれについて 998244353 で割った余りで求める。
 
 </div>

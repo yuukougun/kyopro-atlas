@@ -82,7 +82,7 @@ atcoder: null                          # cpp だけ（true / false）
 ```
 
 - `data-role` は example・practice・challenge のどれか
-- 1行の形（正規表現）：`^- \[(?P<label>[^\]]+)\]\((?P<url>https://atcoder\.jp/contests/(?P<contest>[^/]+)/tasks/(?P<id>[A-Za-z0-9_]+))\)（diff (?P<diff>\d+|—)）：(?P<summary>.+)$`
+- 1行の形（正規表現）：`^- \[(?P<label>[^\]]+)\]\((?P<url>https://atcoder\.jp/contests/(?P<contest>[^/]+)/tasks/(?P<id>[A-Za-z0-9_]+))\)（diff (?P<diff>\d+(?:・参考値)?|なし)）：(?P<summary>.+)$`
 - label・url・diff は台帳（`data/problems.yaml`）から機械的に作れる形にする。label は「コンテストの表示名＋空白＋記号. 題名」。表示名：abcNNN → `ABCNNN`、arcNNN → `ARCNNN`、agcNNN → `AGCNNN`、typical90 → `典型90`、dp → `EDPC`、tdpc → `TDPC`、math-and-algorithm → `アルゴ数学`、tessoku-book → `鉄則本`、ほかは contest id を大文字にしたもの
 - 例題は、ページの中で1問ずつ小見出しを立て、その下に1行だけの囲み（`data-role="example"`）を置き、続けて方針を書く。解法の詳細は折りたたみ（`??? note "解法の詳細"`）
 - 本文の atcoder.jp の問題へのリンクは、すべてこの囲みの中に置く（本文中で問題に触れるときは、ページの id かその小見出しへのリンクにする）
@@ -171,12 +171,12 @@ atcoder: null                          # cpp だけ（true / false）
 | 生成物 | 中身 |
 | --- | --- |
 | `nav.yml` | 分野の順（§1）→ 分野の入口 → chapter ごと（order の順）。chapter のないページは分野の先頭。nav_title があればそれを使う |
-| `docs/<field>/index.md` | 分野の入口：章ごとのページの一覧（題名・レベル・要約・準備中の印） |
+| `docs/<field>/index.md` | 分野の入口：説明の 1 文と、学ぶ順・使い分け・問題集・自作の手引きのうち関係するものへの案内（分野によっては注記の 1 行も）、章ごとのページの箇条書き（題名・レベルの小さな印 `span.kp-mini.kp-lv-<色>`・準備中の印・要約の 1 文目。章の中は order の順）、章の後のほかの章の関連ページ、最後のほかの分野にある関連ページ（`#elsewhere`。工程11、#58・#65・#75） |
 | `docs/lists/` | レベル別（`level-<基礎…>`）と種類別（`kind-<…>`）の一覧。ファイル名は英字の短い名前にし、対応を gen_site.py に持つ |
 | `docs/llms.txt` | 1行「- [タイトル](URL)（id・レベル・分野・段階）：要約」。冒頭に使い方と分野ごとの詳細索引への案内、版（入力の内容のハッシュと updated の最大値） |
 | `docs/index/<field>.md` | 分野ごとの詳細索引：ページごとに id・URL・別名・サイン・kind・節（`id#anchor` と URL） |
 | `overrides/assets/data/graph.json` | §5 |
-| 手書きのページの生成部分 | `<!-- gen:begin 名前 -->` 〜 `<!-- gen:end 名前 -->` の間：逆引き辞典（constraint・phrase・shape）、ロードマップの列（色ごとに前提の順の1本の列。上位の節を含む）、位置ごとの頻出手法（recent-abc.yaml から）、問題 → ページ・最近の ABC → ページの表、Library Checker の対応表（verify から）、用語の索引（題名・別名・acl から） |
+| 手書きのページの生成部分 | `<!-- gen:begin 名前 -->` 〜 `<!-- gen:end 名前 -->` の間：逆引き辞典（constraint・phrase・shape）、ロードマップの列（色ごとに前提の順の1本の列。上位の節を含む）、位置ごとの頻出手法（recent-abc.yaml から）、問題 → ページ・最近の ABC → ページの表、問題番号の索引（`guide/problem-index.md`。本文に載せた全問題を ABC・ARC・AGC・問題集・そのほかに分けて回の順に並べ、1 行は「表示名 → ページ（役割）」。例題のページが先。工程11、#6）、ホームの目的別の入口（工程11、#7）、Library Checker の対応表（verify から）、用語の索引（題名・別名・acl から） |
 
 ## 9. コード片
 

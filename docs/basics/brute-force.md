@@ -202,7 +202,7 @@ $L$ と $R$ の境界を半開区間 $[0, k)$ と $[k, N)$ にそろえると、
 - [SUMITRUST2019 D. Lucky PIN](https://atcoder.jp/contests/sumitrust2019/tasks/sumitb2019_d)（diff 838）：長さ N の数字列から 3 桁を選んで作れる暗証番号の種類数を求める。
 - [ABC469 D. The Big Two](https://atcoder.jp/contests/abc469/tasks/abc469_d)（diff 1102）：N 人から 2 人を選ぶとき、M 回のどの大会でも、選んだ 2 人の少なくとも一方が決勝に出ているような選び方の数を求める。
 - [ABC112 C. Pyramid](https://atcoder.jp/contests/abc112/tasks/abc112_c)（diff 1147）：いくつかの地点の高さの情報から、ピラミッドの中心座標と高さを特定する。
-- [典型90 063. Monochromatic Subgrid（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_bk)（diff —）：グリッドから行と列をいくつか選び、交差するマスがすべて同じ数になるときのマスの数の最大値を求める。
+- [典型90 063. Monochromatic Subgrid（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_bk)（diff なし）：グリッドから行と列をいくつか選び、交差するマスがすべて同じ数になるときのマスの数の最大値を求める。
 - [ABC307 C. Ideal Sheet](https://atcoder.jp/contests/abc307/tasks/abc307_c)（diff 1307）：2 枚のシートを平行移動して重ね、切り出した結果を目標のシートに一致させられるか判定する。
 
 </div>

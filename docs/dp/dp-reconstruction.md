@@ -25,7 +25,7 @@ sections:
   - {title: 辞書順最小の復元（後ろからの DP と前からの貪欲）, anchor: lexicographic-min}
   - {title: 辞書順 K 番目を数え上げで決める（個数が K を超えたら打ち切る）, anchor: dp-kth-lexicographic}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -213,7 +213,7 @@ $\mathrm{cnt}[N][p] = 1$ で、$\mathrm{cnt}[i][0] = \mathrm{cnt}[i+1][0] + \mat
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 056. Lucky Bag（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_bd)（diff —）：N 日間、毎日 A_i か B_i のどちらかを買って合計をちょうど S にする選び方を 1 つ出力する。
+- [典型90 056. Lucky Bag（★5）](https://atcoder.jp/contests/typical90/tasks/typical90_bd)（diff なし）：N 日間、毎日 A_i か B_i のどちらかを買って合計をちょうど S にする選び方を 1 つ出力する。
 
 </div>
 
@@ -248,7 +248,7 @@ $\mathrm{cnt}[N][p] = 1$ で、$\mathrm{cnt}[i][0] = \mathrm{cnt}[i+1][0] + \mat
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC202 D. aab aba baa](https://atcoder.jp/contests/abc202/tasks/abc202_d)（diff 966）：a が A 個・b が B 個の文字列のうち、辞書順で K 番目のものを求める。
-- [EDPC F. LCS](https://atcoder.jp/contests/dp/tasks/dp_f)（diff —）：2 つの文字列の最長共通部分列を 1 つ出力する。
+- [EDPC F. LCS](https://atcoder.jp/contests/dp/tasks/dp_f)（diff なし）：2 つの文字列の最長共通部分列を 1 つ出力する。
 - [ABC369 F. Gather Coins](https://atcoder.jp/contests/abc369/tasks/abc369_f)（diff 1618）：グリッドを右か下にだけ進んでコインを集めるとき、集める枚数の最大と、そのときの経路を求める。
 
 </div>

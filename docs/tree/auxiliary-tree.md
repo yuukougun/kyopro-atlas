@@ -26,7 +26,7 @@ sections:
   - {title: 圧縮木で木 DP をするときの要点, anchor: library}
   - {title: マージテク・平方分割で代用できる場合, anchor: alternatives}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -122,11 +122,11 @@ Auxiliary Tree が向くのは、指定頂点がクエリごとに与えられ�
 
 ## 学ぶための資料 {#resources}
 
-次の 3 つがよい（URL は参考の節にある）。
+次の 3 つがよい。
 
-- Kyopro Encyclopedia of Algorithms の項目：定義（2 点の LCA 全体を頂点とする木）、頂点数が $2 \lvert X \rvert - 1$ 以下であること、線形時間の構築まで含む計算量の整理、呼び名の注意。
-- smijake3 氏のブログの記事：行きがけ順にソートして LCA を足す手順と、ソート 1 回・2 回の 2 通りのスタックの組み立てを、図と実装で説明している。
-- ngtkana 氏のブログの記事：LCA を使わず、[マージテク](../tree/small-to-large.md)で色ごとの圧縮木をまとめて作る方法。
+- [Kyopro Encyclopedia of Algorithms「指定された頂点たちの最小共通祖先関係を保って木を圧縮してできる補助的な木」](https://noshi91.github.io/algorithm-encyclopedia/auxiliary-tree)：定義（2 点の LCA 全体を頂点とする木）、頂点数が $2 \lvert X \rvert - 1$ 以下であること、線形時間の構築まで含む計算量の整理、呼び名の注意。
+- [smijake3「LCAをベースに構築するAuxiliary Treeのメモ」](https://smijake3.hatenablog.com/entry/2019/09/15/200200)：行きがけ順にソートして LCA を足す手順と、ソート 1 回・2 回の 2 通りのスタックの組み立てを、図と実装で説明している。
+- [ngtkana「マージテクで、いわゆる auxiliary tree を構築する方法」](https://ngtkana.hatenablog.com/entry/2024/03/13/202220)：LCA を使わず、[マージテク](../tree/small-to-large.md)で色ごとの圧縮木をまとめて作る方法。
 
 ## 例題 {#examples}
 
@@ -134,7 +134,7 @@ Auxiliary Tree が向くのは、指定頂点がクエリごとに与えられ�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 035. Preserve Connectivity（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_ai)（diff —）：木と多数のクエリが与えられ、各クエリで指定された頂点をすべてつなぐのに必要な辺の数の最小値を答える。
+- [典型90 035. Preserve Connectivity（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_ai)（diff なし）：木と多数のクエリが与えられ、各クエリで指定された頂点をすべてつなぐのに必要な辺の数の最小値を答える。
 
 </div>
 

@@ -5,7 +5,7 @@ aliases: [重心, centroid, 重み付き重心, tree centroid]
 type: technique
 field: tree
 chapter: 木全体の形
-order: 110
+order: 135
 level: 黄
 kind: [木]
 prerequisites: [tree-traversal]
@@ -24,7 +24,7 @@ sections:
   - {title: 重心で分けて別の枝どうしを組む, anchor: pair-across}
   - {title: 中心との違い, anchor: vs-center}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -177,7 +177,7 @@ $$
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC348 E. Minimize Sum of Distances](https://atcoder.jp/contests/abc348/tasks/abc348_e)（diff 1347）：頂点に重み C_i のついた木で、頂点 v を 1 つ選んだときの Σ C_i·d(v, i) の最小値を求める。
-- [DWACON2018-PRELIMS E. ニワンゴくんの家探し](https://atcoder.jp/contests/dwacon2018-prelims/tasks/dwacon2018_prelims_e)（diff —）：次数が 5 以下の N 頂点（N ≤ 2000）の木で隠された頂点を、「2 頂点 u, v のどちらが近いか（等しければ 0）」を答える質問を 14 回までして当てる対話型の問題である。
+- [DWACON2018-PRELIMS E. ニワンゴくんの家探し](https://atcoder.jp/contests/dwacon2018-prelims/tasks/dwacon2018_prelims_e)（diff なし）：次数が 5 以下の N 頂点（N ≤ 2000）の木で隠された頂点を、「2 頂点 u, v のどちらが近いか（等しければ 0）」を答える質問を 14 回までして当てる対話型の問題である。
 
 </div>
 

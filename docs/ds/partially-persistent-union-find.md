@@ -26,7 +26,7 @@ sections:
   - {title: 時刻の二分探索で「初めて連結になる時刻」を求める, anchor: binary-search-time}
   - {title: 代わりの手（並列二分探索・併合過程の木（Kruskal 再構築木））, anchor: alternatives}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -119,8 +119,8 @@ $x$ と $y$ が同じ集合かどうかは、時刻について[単調](../guide
 
 ## 学ぶための資料 {#resources}
 
-- noshi91 氏の Union-Find の知見をまとめた記事：union by size だけでも $O(\log N)$ になること、部分永続は効率よく作れるが完全永続は $O(\log^2 N)$ ほどかかることを、Union-Find の変形の一覧の中で説明している
-- drken 氏の CODE THANKS FESTIVAL 2017 H の解説記事：根でなくなった時刻と大きさの履歴を持つ実装を、問題に沿って示している
+- [noshi91「UnionFindTree に関する知見の諸々」](https://noshi91.hatenablog.com/entry/2018/05/30/191943)：union by size だけでも $O(\log N)$ になること、部分永続は効率よく作れるが完全永続は $O(\log^2 N)$ ほどかかることを、Union-Find の変形の一覧の中で説明している
+- [drken「CODE THANKS FESTIVAL 2017 H - Union Sets (3D, 600 点)」](https://drken1215.hatenablog.com/entry/2018/09/15/193740)：根でなくなった時刻と大きさの履歴を持つ実装を、問題に沿って示している
 
 ## 例題 {#examples}
 
@@ -128,7 +128,7 @@ $x$ と $y$ が同じ集合かどうかは、時刻について[単調](../guide
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [CODE-THANKS-FESTIVAL-2017 H. Union Sets](https://atcoder.jp/contests/code-thanks-festival-2017/tasks/code_thanks_festival_2017_h)（diff —）：集合の併合を順に行う列に対し、2 要素が初めて同じ集合になった操作の番号を各クエリで答える。
+- [CODE-THANKS-FESTIVAL-2017 H. Union Sets](https://atcoder.jp/contests/code-thanks-festival-2017/tasks/code_thanks_festival_2017_h)（diff なし）：集合の併合を順に行う列に対し、2 要素が初めて同じ集合になった操作の番号を各クエリで答える。
 
 </div>
 

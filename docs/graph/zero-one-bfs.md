@@ -27,7 +27,7 @@ sections:
   - {title: 向きを状態に持つ（頂点数が 4 倍になる）, anchor: direction-state}
   - {title: '重みが 0, 1, 2 ならどうするか', anchor: weights-012}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -221,7 +221,7 @@ BFS では、頂点を初めて見つけたときに距離を書き込み、訪�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [ARC005 C. 器物損壊！高橋君](https://atcoder.jp/contests/arc005/tasks/arc005_3)（diff 1503）：塀を 2 回まで壊して進めるとき、家から魚屋へ行けるかを判定する
+- [ARC005 C. 器物損壊！高橋君](https://atcoder.jp/contests/arc005/tasks/arc005_3)（diff 1503・参考値）：塀を 2 回まで壊して進めるとき、家から魚屋へ行けるかを判定する
 
 </div>
 
@@ -236,7 +236,7 @@ BFS では、頂点を初めて見つけたときに距離を書き込み、訪�
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [典型90 043. Maze Challenge with Lack of Sleep（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_aq)（diff —）：迷路で、スタートからゴールまでに方向転換する回数の最小値を求める
+- [典型90 043. Maze Challenge with Lack of Sleep（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_aq)（diff なし）：迷路で、スタートからゴールまでに方向転換する回数の最小値を求める
 - [ABC213 E. Stronger Takahashi](https://atcoder.jp/contests/abc213/tasks/abc213_e)（diff 1423）：道は歩けて、2×2 のマスの塀を壊すパンチが使える迷路で、ゴールまでのパンチの最小回数を求める
 - [ABC246 E. Bishop 2](https://atcoder.jp/contests/abc246/tasks/abc246_e)（diff 1476）：障害物のある盤面で、ビショップが始点から終点へ移動する最小の手数を求める
 

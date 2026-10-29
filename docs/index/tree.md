@@ -186,22 +186,6 @@ search:
     - `tree-diameter#center` 中心と半径・直径の個数（黄）：https://yuukougun.github.io/kyopro-atlas/tree/tree-diameter/#center
     - `tree-diameter#long-path-decomposition` 長鎖分解（最も深い子へつなぐ分解と、最も遠い葉を順に選ぶ貪欲）（黄）：https://yuukougun.github.io/kyopro-atlas/tree/tree-diameter/#long-path-decomposition
 
-## 木の重心（tree-centroid） {#tree-centroid}
-
-- id：`tree-centroid`　レベル：黄　段階：reviewed　type：technique
-- URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-centroid/
-- 別名：重心、centroid、重み付き重心、tree centroid
-- 種類：木
-- 前提：`tree-traversal`
-- サイン：
-    - 言い回し：ペアを作ってパスの長さの和を最大化する
-    - 言い回し：どの成分も半分以下になるように分ける
-- 節：
-    - `tree-centroid#definition` 定義と求め方（子の部分木と親側の N − sz）：https://yuukougun.github.io/kyopro-atlas/tree/tree-centroid/#definition
-    - `tree-centroid#one-or-two` 重心は 1 個か隣接する 2 個：https://yuukougun.github.io/kyopro-atlas/tree/tree-centroid/#one-or-two
-    - `tree-centroid#pair-across` 重心で分けて別の枝どうしを組む：https://yuukougun.github.io/kyopro-atlas/tree/tree-centroid/#pair-across
-    - `tree-centroid#vs-center` 中心との違い：https://yuukougun.github.io/kyopro-atlas/tree/tree-centroid/#vs-center
-
 ## 辺で切って数える（tree-edge-contribution） {#tree-edge-contribution}
 
 - id：`tree-edge-contribution`　レベル：水　段階：reviewed　type：technique
@@ -237,6 +221,22 @@ search:
     - `tree-construction#verify-output` 作った木を必ず確かめる：https://yuukougun.github.io/kyopro-atlas/tree/tree-construction/#verify-output
     - `tree-construction#from-degrees` 次数の条件から作る（次数の足りない成分どうしをつなぐ）（青）：https://yuukougun.github.io/kyopro-atlas/tree/tree-construction/#from-degrees
     - `tree-construction#from-eccentricities` 最遠距離の列から直径を決める（青）：https://yuukougun.github.io/kyopro-atlas/tree/tree-construction/#from-eccentricities
+
+## 木の重心（tree-centroid） {#tree-centroid}
+
+- id：`tree-centroid`　レベル：黄　段階：reviewed　type：technique
+- URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-centroid/
+- 別名：重心、centroid、重み付き重心、tree centroid
+- 種類：木
+- 前提：`tree-traversal`
+- サイン：
+    - 言い回し：ペアを作ってパスの長さの和を最大化する
+    - 言い回し：どの成分も半分以下になるように分ける
+- 節：
+    - `tree-centroid#definition` 定義と求め方（子の部分木と親側の N − sz）：https://yuukougun.github.io/kyopro-atlas/tree/tree-centroid/#definition
+    - `tree-centroid#one-or-two` 重心は 1 個か隣接する 2 個：https://yuukougun.github.io/kyopro-atlas/tree/tree-centroid/#one-or-two
+    - `tree-centroid#pair-across` 重心で分けて別の枝どうしを組む：https://yuukougun.github.io/kyopro-atlas/tree/tree-centroid/#pair-across
+    - `tree-centroid#vs-center` 中心との違い：https://yuukougun.github.io/kyopro-atlas/tree/tree-centroid/#vs-center
 
 ## 木の同型判定と木のハッシュ（tree-isomorphism） {#tree-isomorphism}
 

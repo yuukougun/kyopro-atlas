@@ -34,7 +34,7 @@ sections:
   - {title: 一次漸化式を不動点で等比数列に直して離散対数に帰着する, anchor: affine-recurrence}
   - {title: 平方剰余と mod の K 乗根（オイラーの規準・Tonelli-Shanks・Cipolla）, anchor: mod-root, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -303,7 +303,7 @@ $P \le 10^9$ の素数で、テストケースは 100 個まである。列の�
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC212 G. Power Pair](https://atcoder.jp/contests/abc212/tasks/abc212_g)（diff 2150）：素数 P について、0 ≤ x, y ≤ P − 1 の組 (x, y) のうち x^n ≡ y (mod P) を満たす正の整数 n があるものの個数を求める（P ≤ 10^12）。
-- [ARC042 D. あまり](https://atcoder.jp/contests/arc042/tasks/arc042_d)（diff 2247）：素数 P について、A ≤ i ≤ B の範囲での X^i mod P の最小値を求める。
+- [ARC042 D. あまり](https://atcoder.jp/contests/arc042/tasks/arc042_d)（diff 2247・参考値）：素数 P について、A ≤ i ≤ B の範囲での X^i mod P の最小値を求める。
 
 </div>
 

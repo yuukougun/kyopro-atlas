@@ -152,9 +152,9 @@ Library Checker には、Alien DP そのものを確かめる問題はない（2
 
 ## 学ぶための資料 {#resources}
 
-- noshi91 氏の Kyopro Encyclopedia of Algorithms の「Monge グラフ上の d-辺最短路長を計算するアルゴリズム」は、Monge なときに個数についての凸性が成り立つ証明と、罰金を足した問題の最大が元の答えに一致する理由を、式で丁寧に書いている
-- Swiss Olympiad in Informatics の「Alien Optimization」（英語）は、凸な折れ線に傾き $\lambda$ の直線を当てる見方で、罰金と最適な個数の関係を図で説明している
-- かんプリン氏の「競技プログラミング　典型問題メモ」の AlienDP の項に、この手法で解く問題の一覧がある
+- [noshi91「Monge グラフ上の d-辺最短路長を計算するアルゴリズム」](https://noshi91.github.io/algorithm-encyclopedia/d-edge-shortest-path-monge)：Kyopro Encyclopedia of Algorithms の記事。Monge なときに個数についての凸性が成り立つ証明と、罰金を足した問題の最大が元の答えに一致する理由を、式で丁寧に書いている
+- [Daniel Rutschmann「Alien Optimization」](https://soi.ch/wiki/alien-optimization/)（英語）：Swiss Olympiad in Informatics の解説。凸な折れ線に傾き $\lambda$ の直線を当てる見方で、罰金と最適な個数の関係を図で説明している
+- [かんプリン「競技プログラミング　典型問題メモ」](https://kanpurin.hatenablog.com/entry/2020/04/07/182948)：AlienDP の項に、この手法で解く問題の一覧がある
 
 ## 例題 {#examples}
 
@@ -186,6 +186,13 @@ Library Checker には、Alien DP そのものを確かめる問題はない（2
 ??? note "練習の方針"
     - ABC464 G：位置 $i, i+1$ を「RS」にするのに要る操作の回数を $C_i$ とすると、隣り合う 2 つの位置は同時に「RS」にできない。「隣り合わない $x$ 個を選ぶ $C_i$ の和の最小」をすべての $x$ で求める。各 $k$ の答えは、その最小が $k$ 以下になる最大の $x$ である。すべての $x$ が要るので、Alien DP ではなく[取り消し付きの貪欲](#undoable-greedy)（最小化の向き）を使う
     - ABC355 G：選んだ位置で列を区切り、隣り合う 2 つの選んだ位置の間の点のコストを区間のコストとする。両端に番兵を置き、端の区間は片側の距離だけを数える。中点で左右に分けて累積和で $O(1)$ で求められ、このコストは Monge になる。選ぶ個数を罰金に置き換え、罰金つきの 1 次元の DP を Monge 性で速く解き、$\lambda$ を探す（[Monge な区間分割](#with-monge)）
+
+## 使い分け {#comparison}
+
+- 個数 $K$ が小さく、選んだ個数を状態に持つ DP（状態数が $K$ 倍）でも間に合うなら、Alien DP は要らない。凸性を確かめる手間も、同点の扱いもなくなる。
+- すべての $k$ について答えが要るなら、$K$ ごとに二分探索をくり返す Alien DP は向かない。[取り消し付きの貪欲](#undoable-greedy)か、区間ごとの列を差分のマージで合成する[凸な列どうしの (max,+) 畳み込み](../dp/monge.md#convex-max-plus-convolution)を考える。
+- 凸なのが個数についての答えではなく、DP の値を状態の値 $x$ の関数とみた折れ線なら、[Slope Trick](../dp/slope-trick.md#breakpoints) を考える。罰金つきの問題の遷移が重いときは、コストの形で [CHT](../dp/cht.md#lines) か [Monge](../dp/monge.md#smawk-larsch) を選ぶ（[Monge な区間分割と組み合わせる](#with-monge)）。
+- CHT・Monge・Alien DP・Slope Trick の確かめ方と選び方は、[凸性を使う高速化の使いどころ](../dp/dp-speedup-overview.md#convexity)にまとめる。
 
 ## 参考 {#references}
 

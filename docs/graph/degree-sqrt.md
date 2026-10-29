@@ -5,7 +5,7 @@ aliases: [次数の平方分割, 重い頂点と軽い頂点, 三角形の列挙
 type: technique
 field: graph
 chapter: 探索木と次数の性質
-order: 380
+order: 365
 level: 青
 kind: [グラフ探索, クエリ処理の工夫]
 prerequisites: [graph-basics]
@@ -26,7 +26,7 @@ sections:
   - {title: 三角形の列挙（次数の小さい方から向き付ける）, anchor: triangles, level: 黄}
   - {title: 長さ 4 の閉路の検出（鳩の巣原理で打ち切る）, anchor: four-cycles, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -171,7 +171,7 @@ Library Checker の Counting C4's は、辺ごとに「その辺を含む長さ 
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [典型90 083. Colorful Graph（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_ce)（diff —）：「頂点 x の今の色を答え、x とその隣接頂点すべてを色 y にする」クエリを順に処理する。
+- [典型90 083. Colorful Graph（★6）](https://atcoder.jp/contests/typical90/tasks/typical90_ce)（diff なし）：「頂点 x の今の色を答え、x とその隣接頂点すべてを色 y にする」クエリを順に処理する。
 
 </div>
 

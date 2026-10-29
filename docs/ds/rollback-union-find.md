@@ -26,7 +26,7 @@ sections:
   - {title: 木の DFS と組む（入るとき併合・出るとき取り消し）, anchor: with-dfs}
   - {title: オフライン動的連結性の部品（時間軸のセグメント木に辺を載せる → グラフの章）, anchor: offline-dynamic-connectivity}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -106,8 +106,8 @@ ABC で出てくるのは、根付き木を DFS しながら、頂点に入る�
 
 ## 学ぶための資料 {#resources}
 
-- cp-algorithms の「Deleting from a data structure in O(T(n) log n)」（英語）：時間軸のセグメント木に辺を載せ、経路圧縮なしの Union-Find を DFS で取り消しながら使う手順を、短い実装とともに説明している
-- OI Wiki の「线段树与离线询问」（中国語）：時間軸のセグメント木で取り消しの構造を使う方法と、その応用の例がまとまっている
+- [cp-algorithms「Deleting from a data structure in O(T(n) log n)」](https://cp-algorithms.com/data_structures/deleting_in_log_n.html)（英語）：時間軸のセグメント木に辺を載せ、経路圧縮なしの Union-Find を DFS で取り消しながら使う手順を、短い実装とともに説明している
+- [OI Wiki「线段树与离线询问」](https://oi-wiki.org/topic/segment-tree-offline/)（中国語）：時間軸のセグメント木で取り消しの構造を使う方法と、その応用の例がまとまっている
 
 ## 例題 {#examples}
 
