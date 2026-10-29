@@ -21,6 +21,7 @@
 | `frequency.py` | front matter の frequency・frequency_evidence を最近の ABC（recent-abc.yaml）・台帳の古い ABC の数・前提として届くページの数から付け直す（catalog/README §5・手引き §17-7）。`--check` で差分、`--write` でその 2 行だけを書き換える。試験は `python3 -m unittest discover -s tests/tools` | ページの 2 行（`--write`） |
 | `check_snippets.py` | コード片を設定（compilers・flags・expect・cases）どおりにコンパイル・実行して確かめる | なし |
 | `render_svg.py` | 図の SVG（`docs/img/<id>/`）をヘッドレスの Chrome で幅 360px・720px の PNG にして目で確かめる。日本語のフォントがなければ WSL の Windows のフォントを足す | 一時ディレクトリ（`--out`）の PNG |
+| `render_pages.py` | 作業用フォルダにビルドしたサイトを http で配り、全ページをヘッドレスの Chrome で幅 390px のライトとダークで開いて、描いたときにだけ分かる崩れを数える（#61。下の「公開の前」）。Chrome と日本語のフォントは render_svg.py と同じ。CI では動かさない。試験は test_render_pages.py（Chrome がないときと CI では、描く試験を飛ばす） | 結果の JSON（`--json`） |
 | `check_svg.py` | 図の SVG の width・height の欠けと比、幅（§15-8 の目安）、スマホの幅で 9px 未満になる文字、viewBox を覆わない白い背景を警告する（`--strict` で終了コード 1） | なし |
 | `check_noai.py` | URL の robots の meta と X-Robots-Tag の noai・noimageai を調べる（atcoder.jp・codeforces.com は取得せず「既知の noai」） | なし |
 | `textlint_targets.py` | textlint の対象の Markdown の一覧を出す（stub と生成物を除く。package.json の `lint:text` が使う） | なし |
@@ -82,7 +83,34 @@ python3 tools/check_pages.py && python3 tools/gen_site.py --check && mkdocs buil
 
 - `frequency.py --check`（台帳・recent-abc・prerequisites を直したあと。差分があれば `--write`）
 - `check_pages.py -v`（警告まで全部）、`check_snippets.py`（すべて）、`gen_site.py --check --diff`
-- CI：check.yml が `check_pages.py`・`check_svg.py`（警告は出すだけ）・`python -m unittest discover -s tests/tools` と `check_snippets.py --changed --base <元>`、deploy.yml が `gen_site.py --check --diff` と `mkdocs build --strict`、snippets-weekly.yml が `check_snippets.py`（すべて）を動かす。gcc の公式コンテナには `g++-15` という名前がないので、check_snippets.py は `g++-N` がなければ版が N の `g++` を使う。コンパイラを絞るときは `--compiler g++-15`
+- CI：check.yml が `check_pages.py`・`check_svg.py`（警告は出すだけ）・`python -m unittest discover -s tests/tools` と `check_snippets.py --changed --base <元>`、deploy.yml が `gen_site.py --check --diff` と `mkdocs build --strict`、snippets-weekly.yml が `check_snippets.py`（すべて）を動かす。gcc の公式コンテナには `g++-15` という名前がないので、check_snippets.py は `g++-N` がなければ版が N の `g++` を使う。コンパイラを絞るときは `--compiler g++-15`。`render_pages.py` は Chrome が要るので CI に入れず、公開の前に手元で流す（次の節）
+
+### 公開の前（手元で。ヘッドレスの Chrome が要る）
+
+check_pages.py・check_svg.py は Markdown と SVG を読むだけなので、描いて初めて分かる崩れは見えない（#61。KaTeX のエラー #31、横ずれ #33、JS のない動く図 #51 など）。公開の前に、作業用フォルダへビルドしたサイトを render_pages.py で描いて数える。リポジトリの `site/` には書かない（ほかの担当とぶつかる）。
+
+```sh
+uv run mkdocs build -d DIR/site                         # 作業用フォルダへビルドする
+python3 tools/render_pages.py DIR/site --json DIR/render.json   # 全ページ（今は 424）を 390px のライト・ダークで。-j 4 で 4〜5 分
+python3 tools/render_pages.py DIR/site --page exponent-mod --width 360,390   # 直したページだけを、幅を変えて
+python3 tools/render_pages.py DIR/site --field comb -v  # その分野だけ。警告も全件
+```
+
+| 重さ | 種類 | 見るもの |
+| --- | --- | --- |
+| エラー | KaTeX のエラー・描かれない数式 | 構文の誤りで全体が赤字になる `.katex-error` と、描けた数式の中の赤字（KaTeX の errorColor の #cc0000）。katex-init.js は `throwOnError: false` で描くので、KaTeX にない命令（`\abs`・`\floor`・打ち間違い）と使えない命令（`\href`）は `.katex-error` にならず、命令の名前だけが赤字になる。KaTeX の印（`data-kp-rendered`）の付かない `.arithmatex` も出す |
+| エラー | 地の文に残った記法 | コード・数式・図の外の文字に残った `$`・2 文字以上の TeX の命令・`![`・`](`・`**`・`{#…}` と、画像を包まない `.svg` へのリンク。KaTeX のエラーにならずに崩れた数式（閉じの `$` の前に空白がある `$S = $`、段落に続けて書いた `$$`）や、画像にならない図（#50）がここに出る |
+| エラー | ページの横ずれ | `document.documentElement.scrollWidth` が画面の幅を超える。はみ出した要素（親ははみ出さず、横にスクロールする入れ物と position: fixed の中でないもの）を 5 つまで出す |
+| エラー | 動く図のエラー・描かれない動く図 | `.kp-viz__error` の文と、描けた図の全ステップを送って出た「図を描けなかった」、待っても何も出ない図 |
+| エラー | 読めない画像・開けないページ | 読み込みが終わらない・decode できない `<img>`。ページが 30 秒で読めないときは Chrome を起動し直して 1 回やり直す |
+| 警告 | 画面の幅を超える別行の数式・表 | 数式・表の右端が、横スクロールの入れ物の見える右端を超える（右が隠れ、横にスクロールしないと読めない。#55）。Material が付ける 0.8rem の余白だけがはみ出すものは数えない |
+| 警告 | 縁が透ける図 | SVG の画像を canvas に描き、端から続く透明な行・列の幅を出す（#32。ダークモードで暗い帯になる） |
+| 警告 | 描かれない Mermaid の図・JS のエラー | 残った `pre.mermaid`（Mermaid は unpkg.com から読むので、ネットワークがないときも出る）と、例外・console.error・サイトの中のファイルの読み込みの失敗 |
+
+- 開き方：sitemap.xml の URL のパス（`/kyopro-atlas/`）の下に 127.0.0.1 の空いたポートで配り、1 ページずつ開く（オリジンが違うので instant navigation は働かない）。読み込みの後、数式・動く図・Mermaid・画像・フォントを待ち、折りたたみを開いてタブの中身もすべて見せてから測る。指摘には節の anchor と「折りたたみの中」「タブの中」を添える
+- 同じ要素の同じ指摘が幅・配色の違う回に出たときは 1 件にまとめて［390 ライト・390 ダーク］と添える。ページの横ずれ・別行の数式・表は px の数が文に入るので、幅が違えば別の件になる。同じ回の中の、文が同じ別の要素（見出しの行と幅が同じ表など）はまとめない。エラーがあれば終了コード 1（`--strict` なら警告でも 1）。警告は種類ごとに 3 件と件数を出し、`-v` で全件、`--json` で一覧とページごとの数を書く
+- 幅は手元のフォントで測るので、実機と数 px 違うことがある。Material がリポジトリの星の数を取る api.github.com は止め、ほかのサイトの読み込みの失敗は数えない
+- 見つけたものの直し方は手引き §8（図）・§6（記法）。図そのものの見た目は render_svg.py で確かめる
 
 ## fix_code_links.py が作る行（#8・#72・#62）
 
