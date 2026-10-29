@@ -11,6 +11,10 @@
     "title": {"type": "string", "minLength": 1},
     "nav_title": {"type": ["string", "null"], "minLength": 1, "description": "題名が長いときだけ、ナビゲーション用の短い名前"},
     "aliases": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "tags": {
+      "type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true,
+      "description": "サイト内検索で題名より強く効かせる語（略称など。#52）。Material for MkDocs の検索は tags を題名の 1000 倍の重みで全部の節に入れ、結果に印として出す（tags プラグインは使わないので、ページには出ない）。題名か aliases に含まれる語だけを書き、木・DP・Tree のようにほかのページの題名にも出る語や、漢字で始まる語（2 字の語の検索が 1 字目で引かれるので当たりやすい）はなるべく避ける。題名か別名の一部の語（ビット）を書くときは、その語を題名か別名に含むページのすべてに付ける（tools/check_pages.py が見る）。Zensical では検索の重みにならず、ページの下に印として出る（interfaces.md の外）"
+    },
     "type": {"enum": ["technique", "thinking", "pattern", "hub", "overview", "cpp", "guide"]},
     "field": {"enum": ["start", "guide", "basics", "thinking", "dp", "graph", "tree", "ds", "math", "comb", "string", "geometry", "misc", "patterns", "cpp"]},
     "chapter": {"type": ["string", "null"], "minLength": 1, "description": "分野の中の章。小さい分野と分野の先頭のページは省く"},
@@ -44,7 +48,7 @@
     "search": {
       "type": "object", "additionalProperties": false,
       "properties": {"boost": {"type": "number"}, "exclude": {"type": "boolean"}},
-      "description": "Material for MkDocs の検索の調整（interfaces.md の外）"
+      "description": "Material for MkDocs の検索の調整（interfaces.md の外）。boost はそのページの全部の節の点に掛かる。同じ語を題名に持つページの族で元のページ（セグメント木・Union-Find など）を上に出すときだけ使い、0 より大きく 2 以下にする（大きいと、ほかのページの別名の検索で 1 位を奪う。tools/check_pages.py が見る）。exclude: true でページを検索の索引から外す。Zensical は exclude だけを読み、boost は読まない"
     }
   },
   "allOf": [
