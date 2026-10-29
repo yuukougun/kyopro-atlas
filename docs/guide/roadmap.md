@@ -9,7 +9,7 @@ order: 60
 level: null
 kind: [案内]
 prerequisites: []
-related: [knowledge-map, atcoder-system#difficulty-by-position, contest-strategy, practice-method, problem-sets#recent-abc, reformulation]
+related: [knowledge-map, atcoder-system#difficulty-by-position, contest-strategy, practice-method, problem-sets#recent-abc, reformulation, study-list]
 summary: 目標の色ごとに、到達の目安、読むページの順、最近の ABC の位置ごとの頻出手法、解いた数の進捗を見られる。ページの列はレベル・前提・出題頻度から生成する。
 complexity: null
 signs: []
@@ -207,6 +207,10 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 - **余裕があれば**：それ以外である。発展のページの多くがここに入る。
 
 列は番号の順に全部読むためのものではない。まず「必修」の行を前から読み、「準必修」と「余裕があれば」は、例題や本番で出会ったときに読めばよい。節の行は、そのページの下の帯の部分を読んでいれば、節だけを読めば足りる。黄を目指すときは、黄の列と並行して青までの「必修」を復習する（[黄を目指す段の主な条件](#yellow)）。前提のつながりを図で見るときは[知識マップ](knowledge-map.md#focus)を使う。
+
+各行の先頭のチェック欄は、そのページの「理解した」と同じ記録である。節の行は、ページの上の「水の節」のような欄にあたる。ページの上と下の欄で付けても、この列の欄で付けてもよい。次の欄で「理解した行を隠す」を選ぶと、まだ理解していない行だけが残る。
+
+<div class="kp-order-tools"></div>
 
 <!-- gen:begin roadmap-order -->
 <!-- textlint-disable -->
@@ -753,20 +757,21 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 
 ## 解いた数・理解した数 {#progress}
 
-下の表は、このブラウザで付けた「理解した」と「解いた」のチェックを、レベル別と分野別に集計したものである。
+下の表は、このブラウザで付けた「理解した」と「解いた」のチェックを集計したものである。レベル別・分野別の表と、問題の difficulty の色別の表がある。
 
-- **理解した**：各ページの上と下にあるチェック欄から数える。チェック欄はページのレベルと、ページの中の上の帯の節のレベルの数だけあり、1 つずつ数える。
-- **解いた問題**：各ページの例題・練習・力試しの一覧の、行の先頭のチェック欄から数える。
+- **理解した**：各ページの上と下にあるチェック欄と、[色ごとのページの列](#reading-order)の行のチェック欄から数える。チェック欄はページのレベルと、ページの中の上の帯の節のレベルの数だけあり、1 つずつ数える。
+- **解いた問題**：各ページの例題・練習・力試しの一覧の、行の先頭のチェック欄から数える。レベル別・分野別の表では、問題を載せたページのレベル・分野で数える。
+- **difficulty の色別**：解いた問題を、問題そのものの difficulty の色（灰・茶・緑・水・青・黄・橙・赤）で数える。基礎のページにも difficulty の高い力試しが載るので、水の difficulty の問題を何問解いたかは、この表で見る。
 
 <div class="kp-roadmap-stats"></div>
 
-記録はこのブラウザの localStorage にだけ保存し、端末どうしで同期しない。別の端末へ移すときや退避するときは、次の欄で書き出し・読み込みをする。
+記録はこのブラウザの localStorage にだけ保存し、端末どうしで同期しない。別の端末へ移すときや退避するときは、次の欄で書き出し・読み込みをする。「ファイルに保存」で記録を JSON のファイルに書き出し、別の端末では「ファイルから読み込む」でそのファイルを選ぶ。欄には、最後に書き出した日も出る。
 
 <div class="kp-progress-io"></div>
 
-iPhone や Mac の Safari では、Safari を使った 7 日の間にこのサイトを一度も操作しないと、localStorage を含む保存データが消える。WebKit の Intelligent Tracking Prevention の仕様である。ホーム画面に追加したウェブアプリは、そのアプリを実際に使った日だけを数えるので消えにくい。Safari で読むときは、ときどき書き出して退避しておく。
+iPhone や Mac の Safari では、Safari を使った 7 日の間にこのサイトを一度も操作しないと、localStorage を含む保存データが消える。WebKit の Intelligent Tracking Prevention の仕様である。ホーム画面に追加したウェブアプリは、そのアプリを実際に使った日だけを数えるので消えにくい。Safari で読むときは、ときどきファイルに保存して退避しておく。
 
-理解したページと前提のつながりは、[知識マップ](knowledge-map.md#progress)で塗り分けて見られる。
+理解したページと前提のつながりは、[知識マップ](knowledge-map.md#progress)で塗り分けて見られる。あとで読みたいページは、各ページの「勉強したい」で[勉強したいリスト](study-list.md)に入れておける。
 
 ## シラバスではないこと {#not-a-syllabus}
 
