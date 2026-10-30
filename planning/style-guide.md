@@ -389,7 +389,7 @@ cases:
 4. **使い分けに近い中身の節**：`which-tool`・`when-to-use` など sections にある中身の節は残す（anchor を変えない）。そのページには定型の `## 使い分け {#comparison}` を併せて置かない
 5. **Library Checker の練習**：`## 練習問題 {#practice}` の中に「Library Checker」の小見出しを立て、judge.yosupo.jp へのふつうのリンクの箇条書きで置いてよい。問題の囲み（§10）は atcoder.jp の問題専用のまま（AOJ・CSES への広げ方は §16-6）
    - front matter の verify の問題は、テンプレートがページ下部の「自作の確認」の行に出す。発展の概要以外のページでは、この小見出しは verify にない問題を足すときか、問題ごとの注意を書くときだけでよい。発展の概要の `#library`（§13-10・§16-4）に書く問題名は judge.yosupo.jp へのリンクにする。発展の概要では本文にリンクのある問題をその行に出さないので、名前だけだと 2 か所に並ぶ（工程11、#53）
-6. **evidence の数**：問題の裏付けは 2 つ以上を目標にする。ikatakos.com が落ちているときは web.archive.org の写しを読んでよい（問題文の節は読まない）。GitHub の個人の解説リポジトリも同じ扱いで、問題文（英訳を含む）の部分は読まず、解法の部分だけを参照する
+6. **evidence の数**：問題の裏付けは 2 つ以上を目標にする。ikatakos.com が落ちているときは web.archive.org の写しを読んでよい。GitHub の個人の解説リポジトリも裏付けに使える
 7. **level ごとの構成**：執筆の指示の「短く・応用の型と落とし穴に絞る」は基礎のページだけに当たる。水・青・黄のページは level の構成（§4・§14-6）に従う
 8. **図**：1 枚の SVG の幅は 400 程度までにし、横に並べたいものは 2 枚に分ける（幅 760 の図は 360px の画面で文字が 6px ほどになる）。SVG には viewBox と同じ比の `width`・`height` を付ける。値の一覧（$\mu(1), \dots, \mu(12)$ など）は表にせず数式の 1 行で書いてよい
 9. **コード片**：`using namespace std;` の下で std の名前と同じ関数名を作らない（§9）。数論のコード片に限り `using u64 = unsigned long long;`・`using u128 = unsigned __int128;` を使ってよい（§9 の型の別名の例外）。短い補助の関数をラムダで書くのは§9 のラムダの例の「など」に入る
@@ -465,7 +465,7 @@ robots の meta と X-Robots-Tag に noai・noimageai がないことを確か�
 - speakerdeck.com はスライドごとに書き手が違う（確かめたのは tatyam_prime の「Monge の手引書」）
 - trap.jp：2026-10-22 の 2 回目の check_noai で、トップページ（https://trap.jp/）を証明書の検証つきで取得でき（HTTP 200）、robots の meta と X-Robots-Tag に noai・noimageai がないことを確かめた。記事（post/2589・2861・1224・1594）は HTTP 503 か証明書の検証の失敗（自己署名の証明書が返る）で取得できなかった。証明書の検証を外した取得は、この環境の権限で断られたので行っていない。使っているのは cpp-environment・cpp-macros-template-file・static-top-tree の 3 ページ（hashing-for-sets の post/1594 は出典から外した）。2026-10-29 の check_noai（工程11 の方針のページの下書きの担当）で、記事 post/1224・2589・2861 も HTTP 200 で取得でき、noai・noimageai がないことを確かめた（post/1594 は出典から外してある）
 - 確かめられなかった：yukicoder.me は meta の指定はないが、利用規約を確かめるまで使わない（§16-6）。doi.org（union-find-applications の Tarjan・van Leeuwen の論文）と suzukiapple.tumblr.com（sqrt-decomposition）は HTTP 403 で確かめられないので、前者は書誌情報だけの出典（リンクなし）にし、後者は ikatakos.com の ABC365 の記録に替えた（2026-10-22）
-- web.archive.org：ikatakos.com が落ちているときに写しを読むためだけに使う（問題文の節は読まない。§15-6）
+- web.archive.org：ikatakos.com が落ちているときに写しを読むためだけに使う（§15-6）
 - note.com は meta の指定はないが、利用条件を記事ごとに確かめる（確かめた記事：igasu_7 の n5bd80b1e0eb9・anoconne の n26b5912e1e9c・vain0x の n0037d6468812・syamashi の nb491ffdf0ca3・nc5b5876e0514・n8e580d4ce59d・hip_crow3665 の ne7a656317cea。後の 5 本は 2026-10-22 に meta の指定がなく、本文に転載・引用・AI の利用を断る記述がない無料の記事であることを確かめた）
 - creativecommons.org：ライセンスの deed.ja・legalcode.ja（2026-10-29。方針のページと LICENSE-docs のリンク）
 - kenkoooo.com：AtCoder Problems の公開データ（tools/ap.py が取る JSON。2026-10-29）
