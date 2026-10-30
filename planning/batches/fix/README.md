@@ -39,4 +39,4 @@ GitHub の Issue（#4〜#77。調査は 2026-10-29）を、バッチに分けて
 | snippet-ci（fix/snippet-ci） | #85 コード片 scanf-warning を CI の環境で通す | 完了（#87） |
 | snippet-option-warning（fix/snippet-option-warning） | #95 -march=native が広げた -m のオプションの警告 | 完了（#96） |
 | drop-copies-rule（fix/drop-copies-rule） | #2 の続き：問題文の写し・訳と引用を読まない約束を外す | 完了（#98） |
-| wrap-up（fix/wrap-up） | 全ページの段階を完成にする・トップページの「制作中」を外す・frequency の付け直し | 完了 |
+| wrap-up（fix/wrap-up） | 全ページの段階を完成にする・トップページの「制作中」を外す・frequency の付け直し | 完了（#99） |
