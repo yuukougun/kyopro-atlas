@@ -24,7 +24,7 @@ sections:
   - {title: '範囲 for の初期化式 for (int i = 0; auto x : v)（C++20。i の更新は自分で書く）', anchor: range-for-init}
   - {title: ループの中で同じ vector に追加しない（再確保で壊れる）, anchor: modify-in-loop}
   - {title: 範囲に一時オブジェクトの中身を渡すとき（C++23・GCC 15〜でだけ安全な形）, anchor: temporary-range}
-stage: reviewed
+stage: done
 updated: 2026-10-22
 cpp_std: 17
 gcc_min: 13

@@ -23,7 +23,7 @@ frequency_evidence: recent 0・前提として 72 ページに届く（直接 5�
 sections:
   - {title: 操作とコンテナの計算量の早見表, anchor: complexity-table}
   - {title: map で数えながら走査する（→ 累積和と連想配列で区間を数える）, anchor: counting-map}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

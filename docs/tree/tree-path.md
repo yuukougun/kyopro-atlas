@@ -28,7 +28,7 @@ sections:
   - {title: 頂点の値と辺の値で LCA の扱いが違う, anchor: vertex-vs-edge}
   - {title: パスを辺の集合として扱う（包除原理）, anchor: edge-set}
   - {title: パスへの一括更新があるなら HL 分解, anchor: to-hld, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

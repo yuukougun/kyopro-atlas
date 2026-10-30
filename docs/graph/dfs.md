@@ -24,7 +24,7 @@ sections:
   - {title: バックトラック型（帰りがけで印を外す）, anchor: backtracking}
   - {title: 行きがけ順と帰りがけ順, anchor: pre-post-order}
   - {title: 非再帰の DFS と再帰の深さ, anchor: iterative}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

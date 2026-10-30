@@ -27,7 +27,7 @@ sections:
   - {title: 応用の型（範囲を余りに直す・分けて戻す）, anchor: applications}
   - {title: Garner のアルゴリズム（巨大な解を mod で求める）, anchor: garner, level: 黄}
   - {title: 'ACL の crt（解がなければ (0, 0)）', anchor: acl}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

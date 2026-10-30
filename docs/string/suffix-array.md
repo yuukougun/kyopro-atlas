@@ -32,7 +32,7 @@ sections:
   - {title: 回転どうしの比較：S+S+T+T の SA, anchor: rotations}
   - {title: 部分文字列の辞書順 K 番目, anchor: kth-substring, level: 発展}
   - {title: 自作するなら：ダブリング O(N log^2 N) → O(N log N) → SA-IS, anchor: build-your-own}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

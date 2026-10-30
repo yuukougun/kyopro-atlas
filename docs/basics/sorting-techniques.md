@@ -25,7 +25,7 @@ sections:
   - {title: 2 つの列を 1 対 1 に対応させる（両方ソートして順に組む）, anchor: matching-two-lists}
   - {title: 比較関数の要件（狭義の弱順序）, anchor: strict-weak-ordering}
   - {title: 比率は掛け算で比べる・同点の順序（stable_sort）, anchor: ratio-and-ties}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

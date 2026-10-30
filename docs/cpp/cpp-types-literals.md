@@ -25,7 +25,7 @@ sections:
   - {title: 1e18 は double：long long に直す位置で値が変わる、auto INF = 1e18 も double, anchor: double-1e18}
   - {title: 浮動小数点数を == で比べない（誤差を許すか、整数で計算する）, anchor: float-compare}
   - {title: float128_t（stdfloat ヘッダ。C++23・GCC 13〜。解説コードではまれ）, anchor: float128}
-stage: reviewed
+stage: done
 updated: 2026-10-22
 cpp_std: 17
 gcc_min: 13

@@ -28,7 +28,7 @@ sections:
   - {title: 不動点コンビネータ（雛形の FixPoint・MFP）, anchor: fixpoint}
   - {title: 戻り値の型を後置で書く場面（再帰より前に型の決まる return がないとき）, anchor: return-type}
   - {title: '速さの比較：std::function は fib(40) で約 5 倍、木の DFS で約 1.5 倍遅い', anchor: speed}
-stage: reviewed
+stage: done
 updated: 2026-10-22
 cpp_std: null
 gcc_min: null

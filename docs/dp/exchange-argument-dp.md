@@ -25,7 +25,7 @@ sections:
   - {title: 比較の基準の作り方（入れ替えの差を i だけの量と j だけの量に分ける）, anchor: comparison-key}
   - {title: 比は割らずに掛け算で比べる, anchor: compare-ratios}
   - {title: 大きい順に左右の端へ置く, anchor: place-at-ends, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

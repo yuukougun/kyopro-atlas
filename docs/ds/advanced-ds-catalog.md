@@ -19,7 +19,7 @@ sections:
   - {title: ほかのページにあるもの（木の動的な構造は木の章、CDQ 分割統治・時間付き Mo・Li Chao Tree は各ページ）, anchor: elsewhere}
   - {title: 名前・何ができるか・代わりになる手の表, anchor: table}
   - {title: 併合可能なヒープ（skew heap・leftist heap・ランダム化ヒープ。マージテクで足りることが多い）, anchor: meldable-heap}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

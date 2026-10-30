@@ -31,7 +31,7 @@ sections:
   - {title: メモリの見積もりと 64 個ずつのクエリの処理, anchor: memory-batching, level: 黄}
   - {title: C++ の作法（大きさはコンパイル時の定数・大きな bitset をスタックに置かない）, anchor: cpp}
   - {title: bitDP との違い, anchor: vs-bit-dp}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

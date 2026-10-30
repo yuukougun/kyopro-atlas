@@ -27,7 +27,7 @@ sections:
   - {title: 周期の数え上げ（約数の周期で重複した分を引く）, anchor: period}
   - {title: 累乗数の重複を指数ごとに除く, anchor: perfect-powers}
   - {title: メビウス関数での書き方との対応, anchor: vs-mobius}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

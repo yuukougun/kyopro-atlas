@@ -24,7 +24,7 @@ sections:
   - {title: Euler Tour Tree・Top Tree, anchor: ett-top-tree}
   - {title: 辺の追加だけならマージテク, anchor: add-only}
   - {title: 自作するときの要点と Library Checker, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

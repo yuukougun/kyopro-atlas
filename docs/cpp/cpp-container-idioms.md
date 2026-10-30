@@ -27,7 +27,7 @@ sections:
   - {title: イテレータと参照の無効化：vector の再確保はすべてを無効にし、set・map は消した要素だけ, anchor: invalidation}
   - {title: unordered_map：pair のキーにはハッシュがない、自作のハッシュ、衝突を狙った入力, anchor: unordered-map}
   - {title: pb_ds の順序付き集合：tree と order_of_key・find_by_order（GCC の拡張）, anchor: pb-ds}
-stage: reviewed
+stage: done
 updated: 2026-10-22
 cpp_std: null
 gcc_min: null

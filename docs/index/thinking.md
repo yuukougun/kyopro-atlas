@@ -13,7 +13,7 @@ search:
 
 ## 言い換えの典型（reformulation） {#reformulation}
 
-- id：`reformulation`　レベル：水　段階：reviewed　type：thinking
+- id：`reformulation`　レベル：水　段階：done　type：thinking
 - URL：https://yuukougun.github.io/kyopro-atlas/thinking/reformulation/
 - 別名：言い換え、式変形、条件の言い換え、独立に分解、x と y を分ける、変数変換、reformulation
 - 種類：考察
@@ -30,7 +30,7 @@ search:
 
 ## 一部を固定して数える（fix-variable） {#fix-variable}
 
-- id：`fix-variable`　レベル：基礎　段階：reviewed　type：thinking
+- id：`fix-variable`　レベル：基礎　段階：done　type：thinking
 - URL：https://yuukougun.github.io/kyopro-atlas/thinking/fix-variable/
 - 別名：決め打ち、固定して全探索、真ん中を固定、片方を固定、最大値を固定、fix one variable
 - 種類：考察、全探索
@@ -48,7 +48,7 @@ search:
 
 ## 主客転倒・寄与（contribution） {#contribution}
 
-- id：`contribution`　レベル：水　段階：reviewed　type：thinking
+- id：`contribution`　レベル：水　段階：done　type：thinking
 - URL：https://yuukougun.github.io/kyopro-atlas/thinking/contribution/
 - 別名：主客転倒、寄与、貢献度、contribution technique、足された回数、各要素が何回数えられるか
 - 種類：考察、数え上げ
@@ -67,7 +67,7 @@ search:
 
 ## 余事象（complement） {#complement}
 
-- id：`complement`　レベル：基礎　段階：reviewed　type：thinking
+- id：`complement`　レベル：基礎　段階：done　type：thinking
 - URL：https://yuukougun.github.io/kyopro-atlas/thinking/complement/
 - 別名：補集合、全体から引く、少なくとも 1 つ、2 条件の包除、complementary counting
 - 種類：考察、数え上げ
@@ -84,7 +84,7 @@ search:
 
 ## 偶奇に着目する（parity） {#parity}
 
-- id：`parity`　レベル：基礎　段階：reviewed　type：thinking
+- id：`parity`　レベル：基礎　段階：done　type：thinking
 - URL：https://yuukougun.github.io/kyopro-atlas/thinking/parity/
 - 別名：パリティ、偶奇性、mod 2、市松模様、チェッカーボード、parity
 - 種類：考察
@@ -102,7 +102,7 @@ search:
 
 ## 不変量・単調に変わる量（invariant） {#invariant}
 
-- id：`invariant`　レベル：基礎　段階：reviewed　type：thinking
+- id：`invariant`　レベル：基礎　段階：done　type：thinking
 - URL：https://yuukougun.github.io/kyopro-atlas/thinking/invariant/
 - 別名：モノバリアント、保存量、単調量、操作の順序によらない、invariant、monovariant
 - 種類：考察
@@ -119,7 +119,7 @@ search:
 
 ## 後ろから・逆順に考える（reverse-thinking） {#reverse-thinking}
 
-- id：`reverse-thinking`　レベル：基礎　段階：reviewed　type：thinking
+- id：`reverse-thinking`　レベル：基礎　段階：done　type：thinking
 - URL：https://yuukougun.github.io/kyopro-atlas/thinking/reverse-thinking/
 - 別名：逆から考える、操作を逆再生、クエリを逆順に処理、削除を追加に、work backwards
 - 種類：考察、クエリ処理の工夫
@@ -135,7 +135,7 @@ search:
 
 ## 構築問題の考え方（construction） {#construction}
 
-- id：`construction`　レベル：基礎　段階：reviewed　type：thinking
+- id：`construction`　レベル：基礎　段階：done　type：thinking
 - URL：https://yuukougun.github.io/kyopro-atlas/thinking/construction/
 - 別名：構築、constructive、1 つ出力せよ、上界と下界、必要条件と十分性、constructive algorithms
 - 種類：考察
@@ -152,7 +152,7 @@ search:
 
 ## 対称性・鳩の巣原理・場合分け（symmetry-pigeonhole-casework） {#symmetry-pigeonhole-casework}
 
-- id：`symmetry-pigeonhole-casework`　レベル：基礎　段階：reviewed　type：thinking
+- id：`symmetry-pigeonhole-casework`　レベル：基礎　段階：done　type：thinking
 - URL：https://yuukougun.github.io/kyopro-atlas/thinking/symmetry-pigeonhole-casework/
 - 別名：対称性、鳩の巣原理、部屋割り論法、場合分け、pigeonhole principle、端の場合を分ける
 - 種類：考察

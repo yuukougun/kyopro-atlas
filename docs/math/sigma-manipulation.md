@@ -27,7 +27,7 @@ sections:
   - {title: 値でまとめ直す（同じ値になる添字の個数を掛ける）, anchor: group-by-value}
   - {title: よく使う和の公式と、異なる 2 つの積の和を和の 2 乗で表す式, anchor: formulas}
   - {title: 空の和は 0・空の積は 1 と境界, anchor: empty-sum}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

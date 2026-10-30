@@ -13,7 +13,7 @@ search:
 
 ## この教材の使い方（how-to-use） {#how-to-use}
 
-- id：`how-to-use`　レベル：—　段階：reviewed　type：guide
+- id：`how-to-use`　レベル：—　段階：done　type：guide
 - URL：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/
 - 別名：使い方、教材の引き方、辞書の引き方、claude.ai での解説の頼み方、データの書き出し
 - 種類：案内
@@ -36,7 +36,7 @@ search:
 
 ## 記法と用語の約束（notation） {#notation}
 
-- id：`notation`　レベル：—　段階：reviewed　type：guide
+- id：`notation`　レベル：—　段階：done　type：guide
 - URL：https://yuukougun.github.io/kyopro-atlas/start/notation/
 - 別名：記法、0-indexed、1-indexed、半開区間、数学の記法、合同式、整除、床関数、天井関数、Σ の記法、notation
 - 種類：案内
@@ -57,7 +57,7 @@ search:
 
 ## AtCoder の仕組み（atcoder-system） {#atcoder-system}
 
-- id：`atcoder-system`　レベル：—　段階：reviewed　type：guide
+- id：`atcoder-system`　レベル：—　段階：done　type：guide
 - URL：https://yuukougun.github.io/kyopro-atlas/start/atcoder-system/
 - 別名：レーティング、パフォーマンス、difficulty の読み方、ABC の形式、ARC の区分、生成 AI のルール、AtCoder生成AI対策ルール、色
 - 種類：案内
@@ -75,7 +75,7 @@ search:
 
 ## 出典と AI 利用の方針（ai-and-sources） {#ai-and-sources}
 
-- id：`ai-and-sources`　レベル：—　段階：reviewed　type：guide
+- id：`ai-and-sources`　レベル：—　段階：done　type：guide
 - URL：https://yuukougun.github.io/kyopro-atlas/start/ai-and-sources/
 - 別名：AI の利用、生成 AI、出典、参考文献、転載、noai、著作権、ライセンス、問い合わせ、連絡先
 - 種類：案内

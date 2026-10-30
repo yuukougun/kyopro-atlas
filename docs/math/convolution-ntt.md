@@ -30,7 +30,7 @@ sections:
   - {title: 文字列の照合：ずらしたときの一致数・ハミング距離・ワイルドカード, anchor: string-matching, level: 黄}
   - {title: bit ごと・文字ごとに分けて畳み込む（OR の和など）, anchor: split-by-bit, level: 黄}
   - {title: ACL の convolution の要件（法の形と長さ）, anchor: acl}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

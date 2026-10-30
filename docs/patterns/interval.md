@@ -37,7 +37,7 @@ sections:
   - {title: 区間の和集合・塗りつぶし・残りの長さ → 区間を set で管理（interval-set）, anchor: union}
   - {title: '含まれる・交差する区間の数 → イベントソート・平面走査（event-sort, sweep-line-2d）', anchor: containment}
   - {title: 数列ではなく文字列の連続部分 → 部分列と部分文字列（subsequence-and-substring）, anchor: substrings}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

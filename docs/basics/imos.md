@@ -32,7 +32,7 @@ sections:
   - {title: '2 階の差分（区間に 1, 2, 3, … を足す）', anchor: second-order}
   - {title: 2 次元いもす法（四隅に ±1、横と縦に累積）, anchor: imos-2d}
   - {title: 途中で値を読むなら BIT・遅延セグ木, anchor: online}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

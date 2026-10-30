@@ -37,7 +37,7 @@ sections:
   - {title: 円周上の弦が交わるか → 1 か所で切って区間にする（stack-techniques）, anchor: chords}
   - {title: '円周を K ずつ進む → gcd と一次合同式（gcd-properties, ext-gcd）', anchor: step}
   - {title: N 頂点 N 辺の連結グラフ → 閉路とぶら下がる木に分ける（namori-graph）, anchor: namori}
-stage: draft
+stage: done
 updated: 2026-10-29
 ---
 

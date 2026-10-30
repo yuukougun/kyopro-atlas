@@ -26,7 +26,7 @@ sections:
   - {title: 数の連結：x の後ろに d 桁の y を付けると x·10^d + y, anchor: concatenation}
   - {title: 接尾辞の余りで部分文字列を数える（10 と P が互いに素なとき）, anchor: suffix-remainder}
   - {title: P が 2・5 のときの場合分け, anchor: p-2-5}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

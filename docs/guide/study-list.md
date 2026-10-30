@@ -18,7 +18,7 @@ sections:
   - {title: リストの中身, anchor: list}
   - {title: 入れ方と外し方, anchor: how}
   - {title: 記録の保存と退避, anchor: storage}
-stage: draft
+stage: done
 updated: 2026-10-29
 ---
 

@@ -29,7 +29,7 @@ sections:
   - {title: DP の値の凸性（個数について凸な答え）, anchor: dp-convexity}
   - {title: '凸な列どうしの (max,+) 畳み込み（差分のマージ）', anchor: convex-max-plus-convolution}
   - {title: ライブラリでの検証, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

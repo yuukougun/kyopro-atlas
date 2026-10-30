@@ -22,7 +22,7 @@ sections:
   - {title: 各辺の存在する区間を時間軸のセグ木に載せる, anchor: time-segment-tree}
   - {title: DFS で入るときに併合・出るときに取り消す（ロールバック Union-Find はデータ構造の章）, anchor: dfs-rollback}
   - {title: 自作するときの要点と Library Checker, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

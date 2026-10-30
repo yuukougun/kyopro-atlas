@@ -27,7 +27,7 @@ sections:
   - {title: べき乗和・多項式になる DP への応用, anchor: applications}
   - {title: 係数の復元（O(d²)）, anchor: coefficients}
   - {title: 自作するときの要点と Library Checker, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -30,7 +30,7 @@ sections:
   - {title: 辺の候補を減らす（ソートした隣どうし・約数で絞る）, anchor: reduce-candidates}
   - {title: 操作を頂点にする・区間を辺にする, anchor: modeling, level: 青}
   - {title: 辺の重みの種類が少ないとき, anchor: few-weights, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

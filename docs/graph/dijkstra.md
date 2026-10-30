@@ -30,7 +30,7 @@ sections:
   - {title: 最短閉路（ある頂点を含む閉路の最小の長さ）, anchor: shortest-cycle}
   - {title: 逆向きのグラフと両端からの最短路, anchor: reverse-graph, level: 水}
   - {title: ポテンシャルで負辺を消す（Johnson のアイデア）, anchor: potential, level: 水}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

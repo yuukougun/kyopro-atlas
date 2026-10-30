@@ -29,7 +29,7 @@ sections:
   - {title: 括弧列の DP（開き括弧の残り数を状態にする）, anchor: bracket-dp}
   - {title: 環状の列（1 か所で切り、最初の状態を固定して DP を回す）, anchor: dp-cyclic}
   - {title: 状態数の見積もり（(P+1)^K・2^K・末尾の数文字の組の数）, anchor: state-count}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

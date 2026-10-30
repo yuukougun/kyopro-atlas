@@ -26,7 +26,7 @@ sections:
   - {title: 答えの二分探索と完全マッチングの判定, anchor: binary-search}
   - {title: 構造で貪欲が通る特殊な場合との見分け, anchor: greedy-cases}
   - {title: 正則二部グラフの分解・辺彩色, anchor: edge-coloring, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -27,7 +27,7 @@ sections:
   - {title: 貪欲が最適でない例, anchor: greedy-fails}
   - {title: 木の上のゲーム, anchor: tree, level: 黄}
   - {title: 答えを決め打ちして勝敗に直す, anchor: binary-search, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -26,7 +26,7 @@ sections:
   - {title: 値の大きい（小さい）順に挿入していく見方, anchor: insert-by-value}
   - {title: 箱根駅伝 DP（相手が未定の位置と値の数を持つ）, anchor: hakone-ekiden-dp}
   - {title: 連結成分 DP（ブロックを作る・端に付ける・つなぐ）, anchor: connected-component-dp, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -28,7 +28,7 @@ sections:
   - {title: 直前の操作を取り消す（変更前の値を積んで戻す。任意の版へ戻るなら永続データ構造）, anchor: undo}
   - {title: deque（両端への追加・真ん中への挿入は deque 2 本）, anchor: deque}
   - {title: 円を切り開いて弦の交差判定に帰着する, anchor: chords, level: 水}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -26,7 +26,7 @@ sections:
   - {title: 最小有向全域木（Chu-Liu/Edmonds）, anchor: directed}
   - {title: 第 2 最小全域木, anchor: second-best}
   - {title: 自作するときの要点と Library Checker, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

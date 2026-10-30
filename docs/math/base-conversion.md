@@ -25,7 +25,7 @@ sections:
   - {title: 0 を使わない 26 進（1 を引いてから割る）, anchor: bijective-26}
   - {title: 負の基数（余りを 0 以上に直してから割る）, anchor: negative-base, level: 水}
   - {title: 基数の二分探索とオーバーフロー（1 桁の場合分け）, anchor: base-binary-search, level: 水}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

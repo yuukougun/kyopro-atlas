@@ -25,7 +25,7 @@ sections:
   - {title: 自作するときの設計（加減の条件分岐・64bit の掛け算・pow と inv・入出力）, anchor: self-made}
   - {title: ACL の中身（Barrett 還元・raw）, anchor: acl-internals}
   - {title: 上位の手法での使われ方（階乗の表・畳み込み・行列・期待値）, anchor: connections}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -13,7 +13,7 @@ search:
 
 ## 和・積の法則と順列・組合せ（counting-basics） {#counting-basics}
 
-- id：`counting-basics`　レベル：基礎　段階：reviewed　type：technique
+- id：`counting-basics`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/counting-basics/
 - 別名：和の法則、積の法則、円順列、重複順列、nPr、塗り分けの数、rule of product
 - 種類：数え上げ
@@ -31,7 +31,7 @@ search:
 
 ## 二項係数の意味と性質（binomial-coefficient） {#binomial-coefficient}
 
-- id：`binomial-coefficient`　レベル：基礎　段階：reviewed　type：technique
+- id：`binomial-coefficient`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/binomial-coefficient/
 - 別名：二項係数、nCr、パスカルの三角形、辞書順 K 番目の組合せ、組合せの順位、binomial coefficient
 - 種類：数え上げ
@@ -50,7 +50,7 @@ search:
 
 ## 二項係数の前計算（binomial-precompute） {#binomial-precompute}
 
-- id：`binomial-precompute`　レベル：基礎　段階：reviewed　type：technique
+- id：`binomial-precompute`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/binomial-precompute/
 - 別名：nCr mod p、階乗と逆階乗の表、fact と ifact、逆階乗、Combination テーブル、任意 mod の二項係数、Lucas の定理、nCr mod 2、Lucas's theorem
 - 種類：数え上げ、整数論
@@ -75,7 +75,7 @@ search:
 
 ## 重複組合せ（stars-and-bars） {#stars-and-bars}
 
-- id：`stars-and-bars`　レベル：基礎　段階：reviewed　type：technique
+- id：`stars-and-bars`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/stars-and-bars/
 - 別名：玉と仕切り、ₖHₙ、非負整数解の個数、隣り合わない選び方、stars and bars
 - 種類：数え上げ
@@ -94,7 +94,7 @@ search:
 
 ## 格子路の数え上げ（lattice-paths） {#lattice-paths}
 
-- id：`lattice-paths`　レベル：基礎　段階：reviewed　type：technique
+- id：`lattice-paths`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/lattice-paths/
 - 別名：格子路、グリッドの最短経路の数、障害物のある経路、lattice path
 - 種類：数え上げ
@@ -113,7 +113,7 @@ search:
 
 ## 写像 12 相（twelvefold-way） {#twelvefold-way}
 
-- id：`twelvefold-way`　レベル：—　段階：reviewed　type：hub
+- id：`twelvefold-way`　レベル：—　段階：done　type：hub
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/twelvefold-way/
 - 別名：玉と箱、玉と箱の数え上げ、区別する・しない、twelvefold way
 - 種類：案内、数え上げ
@@ -130,7 +130,7 @@ search:
 
 ## 数え上げの考え方（counting-mindset） {#counting-mindset}
 
-- id：`counting-mindset`　レベル：水　段階：reviewed　type：technique
+- id：`counting-mindset`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/counting-mindset/
 - 別名：数え上げの基本方針、ちょうど 1 回数える、ちょうど＝以下の差、式で数えるか DP で数えるか
 - 種類：数え上げ、考察
@@ -148,7 +148,7 @@ search:
 
 ## 順序を固定して数える（counting-fix-order） {#counting-fix-order}
 
-- id：`counting-fix-order`　レベル：水　段階：reviewed　type：technique
+- id：`counting-fix-order`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/counting-fix-order/
 - 別名：相対順序の固定、ソートしてから数える、数える順番の工夫、n!/k!
 - 種類：数え上げ、考察
@@ -166,7 +166,7 @@ search:
 
 ## 対応づけ・数える対象の言い換え（counting-bijection） {#counting-bijection}
 
-- id：`counting-bijection`　レベル：青　段階：reviewed　type：technique
+- id：`counting-bijection`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/counting-bijection/
 - 別名：全単射、1 対 1 対応、経路数に帰着、bijection、bijective proof
 - 種類：数え上げ、考察
@@ -185,7 +185,7 @@ search:
 
 ## 重複の除き方（counting-dedup） {#counting-dedup}
 
-- id：`counting-dedup`　レベル：青　段階：reviewed　type：technique
+- id：`counting-dedup`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/counting-dedup/
 - 別名：ダブルカウントを防ぐ、重複を除く、代表元、正規形、最左マッチ、最小添字規則
 - 種類：数え上げ、DP、考察
@@ -205,7 +205,7 @@ search:
 
 ## Burnside の補題（burnside-lemma） {#burnside-lemma}
 
-- id：`burnside-lemma`　レベル：発展　段階：reviewed　type：overview
+- id：`burnside-lemma`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/burnside-lemma/
 - 別名：Pólya の数え上げ定理、ネックレス、数珠順列、回転で同一視して数える、Burnside's lemma
 - 種類：数え上げ
@@ -224,7 +224,7 @@ search:
 
 ## 多項係数（multinomial-coefficient） {#multinomial-coefficient}
 
-- id：`multinomial-coefficient`　レベル：水　段階：reviewed　type：technique
+- id：`multinomial-coefficient`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/multinomial-coefficient/
 - 別名：同じものを含む順列、並べ替えの数、グループ分けの数、多項定理、multinomial coefficient
 - 種類：数え上げ
@@ -242,7 +242,7 @@ search:
 
 ## 二項係数の恒等式と和の公式（binomial-identities） {#binomial-identities}
 
-- id：`binomial-identities`　レベル：青　段階：reviewed　type：technique
+- id：`binomial-identities`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/binomial-identities/
 - 別名：二項定理、Vandermonde の恒等式、hockey stick、縦の和の公式、吸収公式、二項係数の和、binomial theorem、Vandermonde's identity
 - 種類：数え上げ
@@ -263,7 +263,7 @@ search:
 
 ## 鏡像法とカタラン数（reflection-principle） {#reflection-principle}
 
-- id：`reflection-principle`　レベル：黄　段階：reviewed　type：technique
+- id：`reflection-principle`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/reflection-principle/
 - 別名：鏡像法、反射原理、カタラン数、ballot 数、Dyck path、正しい括弧列の個数、reflection principle、Catalan number
 - 種類：数え上げ
@@ -283,7 +283,7 @@ search:
 
 ## 二項係数の部分和（binomial-prefix-sum） {#binomial-prefix-sum}
 
-- id：`binomial-prefix-sum`　レベル：発展　段階：reviewed　type：overview
+- id：`binomial-prefix-sum`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/binomial-prefix-sum/
 - 別名：二項係数の累積和、Σ_{k≤K} C(n,k)
 - 種類：数え上げ
@@ -299,7 +299,7 @@ search:
 
 ## LGV 補題（lgv-lemma） {#lgv-lemma}
 
-- id：`lgv-lemma`　レベル：発展　段階：reviewed　type：overview
+- id：`lgv-lemma`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/lgv-lemma/
 - 別名：Lindström-Gessel-Viennot の補題、交わらない経路の組、LGV lemma
 - 種類：数え上げ、線形代数・行列
@@ -316,7 +316,7 @@ search:
 
 ## 母関数の考え方（generating-function-counting） {#generating-function-counting}
 
-- id：`generating-function-counting`　レベル：発展　段階：reviewed　type：overview
+- id：`generating-function-counting`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/generating-function-counting/
 - 別名：母関数、生成関数、数え上げの多項式表現、形式的冪級数で数える、generating function
 - 種類：数え上げ、畳み込み・多項式
@@ -335,7 +335,7 @@ search:
 
 ## 包除原理（inclusion-exclusion） {#inclusion-exclusion}
 
-- id：`inclusion-exclusion`　レベル：青　段階：reviewed　type：technique
+- id：`inclusion-exclusion`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/inclusion-exclusion/
 - 別名：包除、撹乱順列、完全順列、モンモール数、全射の数、min-max 包除、inclusion-exclusion principle、derangement、包含除外原理、包除の原理
 - 種類：数え上げ
@@ -357,7 +357,7 @@ search:
 
 ## 包除 DP（inclusion-exclusion-dp） {#inclusion-exclusion-dp}
 
-- id：`inclusion-exclusion-dp`　レベル：黄　段階：reviewed　type：technique
+- id：`inclusion-exclusion-dp`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/inclusion-exclusion-dp/
 - 別名：符号付き DP、最初に踏む障害物で分類、障害物 DP、包除原理を DP に載せる
 - 種類：数え上げ、DP
@@ -377,7 +377,7 @@ search:
 
 ## 約数包除（divisor-inclusion-exclusion） {#divisor-inclusion-exclusion}
 
-- id：`divisor-inclusion-exclusion`　レベル：青　段階：reviewed　type：technique
+- id：`divisor-inclusion-exclusion`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/divisor-inclusion-exclusion/
 - 別名：約数系包除、gcd がちょうど g、倍数から引く、互いに素な組の数、gcd の総和
 - 種類：数え上げ、整数論
@@ -398,7 +398,7 @@ search:
 
 ## 約数・倍数のゼータ変換とメビウス変換（zeta-mobius-divisor） {#zeta-mobius-divisor}
 
-- id：`zeta-mobius-divisor`　レベル：青　段階：reviewed　type：technique
+- id：`zeta-mobius-divisor`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/zeta-mobius-divisor/
 - 別名：約数ゼータ変換、倍数ゼータ変換、約数メビウス変換、倍数メビウス変換、GCD 畳み込み、LCM 畳み込み、GCD convolution、LCM convolution
 - 種類：数え上げ、整数論、畳み込み・多項式
@@ -415,7 +415,7 @@ search:
 
 ## メビウス関数とメビウス反転（mobius-function） {#mobius-function}
 
-- id：`mobius-function`　レベル：黄　段階：reviewed　type：technique
+- id：`mobius-function`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/mobius-function/
 - 別名：メビウス関数、μ、メビウス反転、Möbius function、Mobius inversion
 - 種類：数え上げ、整数論
@@ -434,7 +434,7 @@ search:
 
 ## 部分集合の高速ゼータ変換とメビウス変換（zeta-mobius-subset） {#zeta-mobius-subset}
 
-- id：`zeta-mobius-subset`　レベル：黄　段階：reviewed　type：technique
+- id：`zeta-mobius-subset`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/zeta-mobius-subset/
 - 別名：高速ゼータ変換、高速メビウス変換、SOS DP、部分集合にわたる和、上位集合の和、OR 畳み込み、AND 畳み込み、zeta transform
 - 種類：数え上げ、ビット演算、畳み込み・多項式
@@ -454,7 +454,7 @@ search:
 
 ## 置換の巡回分解（permutation-cycles） {#permutation-cycles}
 
-- id：`permutation-cycles`　レベル：基礎　段階：reviewed　type：technique
+- id：`permutation-cycles`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/permutation-cycles/
 - 別名：巡回置換、サイクル分解、順列のサイクル、swap でソートする最小回数、置換の位数、cycle decomposition
 - 種類：数え上げ、考察
@@ -473,7 +473,7 @@ search:
 
 ## 置換の偶奇（permutation-parity） {#permutation-parity}
 
-- id：`permutation-parity`　レベル：青　段階：reviewed　type：technique
+- id：`permutation-parity`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/permutation-parity/
 - 別名：偶置換、奇置換、置換の符号、swap の回数の偶奇、3 要素の巡回、sign of a permutation
 - 種類：数え上げ、考察
@@ -492,7 +492,7 @@ search:
 
 ## 第 1 種スターリング数（stirling-first） {#stirling-first}
 
-- id：`stirling-first`　レベル：発展　段階：reviewed　type：overview
+- id：`stirling-first`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/stirling-first/
 - 別名：巡回の個数ごとの順列の数、上昇階乗、Stirling numbers of the first kind
 - 種類：数え上げ、畳み込み・多項式
@@ -512,7 +512,7 @@ search:
 
 ## 第 2 種スターリング数とベル数（bell-number） {#bell-number}
 
-- id：`bell-number`　レベル：青　段階：reviewed　type：technique
+- id：`bell-number`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/bell-number/
 - 別名：集合の分割の数、第 2 種スターリング数、ベル数、S(n,k)、B_n、Stirling numbers of the second kind、Bell number
 - 種類：数え上げ、DP
@@ -527,7 +527,7 @@ search:
 
 ## 整数の分割と分割数（partition-number） {#partition-number}
 
-- id：`partition-number`　レベル：黄　段階：reviewed　type：technique
+- id：`partition-number`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/partition-number/
 - 別名：分割数、p(n,k)、分割の全列挙、巡回型、partition number、integer partition
 - 種類：数え上げ、DP
@@ -546,7 +546,7 @@ search:
 
 ## Young 図形とフック長公式（young-tableaux） {#young-tableaux}
 
-- id：`young-tableaux`　レベル：発展　段階：reviewed　type：overview
+- id：`young-tableaux`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/young-tableaux/
 - 別名：ヤング図形、標準タブロー、フック長公式、Robinson-Schensted 対応、Young tableau、hook length formula
 - 種類：数え上げ
@@ -561,7 +561,7 @@ search:
 
 ## ラベル付き木の数え上げ（cayley-pruefer） {#cayley-pruefer}
 
-- id：`cayley-pruefer`　レベル：黄　段階：reviewed　type：technique
+- id：`cayley-pruefer`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/cayley-pruefer/
 - 別名：Cayley の公式、n^(n−2)、次数を指定した木の数、頂点にラベルのある木の個数、Cayley's formula
 - 種類：数え上げ、木
@@ -578,7 +578,7 @@ search:
 
 ## 連結なグラフの数え上げ（counting-labeled-graphs） {#counting-labeled-graphs}
 
-- id：`counting-labeled-graphs`　レベル：黄　段階：reviewed　type：technique
+- id：`counting-labeled-graphs`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/counting-labeled-graphs/
 - 別名：連結グラフの数え上げ、全体から非連結を引く、頂点 1 を含む成分で分類、条件を満たすグラフの個数
 - 種類：数え上げ、DP
@@ -598,7 +598,7 @@ search:
 
 ## 確率の基本（probability-basics） {#probability-basics}
 
-- id：`probability-basics`　レベル：基礎　段階：reviewed　type：technique
+- id：`probability-basics`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/probability-basics/
 - 別名：確率、条件付き確率、全確率の公式、独立と排反、期待値の定義、conditional probability
 - 種類：確率・期待値
@@ -616,7 +616,7 @@ search:
 
 ## 幾何分布とコンプリートガチャ（coupon-collector） {#coupon-collector}
 
-- id：`coupon-collector`　レベル：基礎　段階：reviewed　type：technique
+- id：`coupon-collector`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/coupon-collector/
 - 別名：幾何分布、成功するまでの回数、1/p、コンプガチャ、クーポンコレクター、N H_N、coupon collector's problem、geometric distribution
 - 種類：確率・期待値
@@ -632,7 +632,7 @@ search:
 
 ## 確率・期待値を mod 998244353 で答える（rational-mod） {#rational-mod}
 
-- id：`rational-mod`　レベル：水　段階：reviewed　type：technique
+- id：`rational-mod`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/rational-mod/
 - 別名：有理数 mod、有理数の mod 表現、P × Q^(−1) mod p、確率 mod 998244353、分数を mod で表す
 - 種類：確率・期待値、整数論
@@ -652,7 +652,7 @@ search:
 
 ## 期待値の線形性と指示確率変数（linearity-of-expectation） {#linearity-of-expectation}
 
-- id：`linearity-of-expectation`　レベル：水　段階：reviewed　type：technique
+- id：`linearity-of-expectation`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/linearity-of-expectation/
 - 別名：期待値の線形性、和の期待値は期待値の和、指示確率変数、indicator、ペアごとの確率、総和と期待値の行き来、linearity of expectation
 - 種類：確率・期待値
@@ -674,7 +674,7 @@ search:
 
 ## 対称性で確率を求める（probability-symmetry） {#probability-symmetry}
 
-- id：`probability-symmetry`　レベル：水　段階：reviewed　type：technique
+- id：`probability-symmetry`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/probability-symmetry/
 - 別名：どれも同じ確率、ランダムな順列に置き換える、2 状態に縮める
 - 種類：確率・期待値、考察
@@ -693,7 +693,7 @@ search:
 
 ## 確率 DP（probability-dp） {#probability-dp}
 
-- id：`probability-dp`　レベル：水　段階：reviewed　type：technique
+- id：`probability-dp`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/probability-dp/
 - 別名：前向きに確率を配る、到達確率、分布を求める DP、ランダムウォーク、random walk
 - 種類：確率・期待値、DP
@@ -714,7 +714,7 @@ search:
 
 ## 期待値 DP（expected-value-dp） {#expected-value-dp}
 
-- id：`expected-value-dp`　レベル：水　段階：reviewed　type：technique
+- id：`expected-value-dp`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/expected-value-dp/
 - 別名：後ろから決める期待値、残りの期待値、全期待値の公式、自己ループ、振り直し、移項して解く、選択は max・偶然は平均
 - 種類：確率・期待値、DP
@@ -739,7 +739,7 @@ search:
 
 ## 閉路のある期待値（expectation-linear-equations） {#expectation-linear-equations}
 
-- id：`expectation-linear-equations`　レベル：青　段階：reviewed　type：technique
+- id：`expectation-linear-equations`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/expectation-linear-equations/
 - 別名：期待値の方程式、a + bX の形で持つ、吸収マルコフ連鎖、閉路のある DP、振り出しに戻る、absorbing Markov chain
 - 種類：確率・期待値、DP、線形代数・行列
@@ -761,7 +761,7 @@ search:
 
 ## 最適戦略の期待値（optimal-strategy-expectation） {#optimal-strategy-expectation}
 
-- id：`optimal-strategy-expectation`　レベル：黄　段階：reviewed　type：technique
+- id：`optimal-strategy-expectation`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/optimal-strategy-expectation/
 - 別名：最適停止、expectimax、期待値の最大化、optimal stopping
 - 種類：確率・期待値、DP
@@ -780,7 +780,7 @@ search:
 
 ## 期待値と確率の変換（expectation-tail-sum） {#expectation-tail-sum}
 
-- id：`expectation-tail-sum`　レベル：黄　段階：reviewed　type：technique
+- id：`expectation-tail-sum`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/expectation-tail-sum/
 - 別名：E[X] = Σ P(X ≥ k)、tail sum、期待値と確率の行き来、最大値の期待値、K 番目の値の期待値
 - 種類：確率・期待値
@@ -799,7 +799,7 @@ search:
 
 ## 二乗の期待値・分散（expectation-of-square） {#expectation-of-square}
 
-- id：`expectation-of-square`　レベル：黄　段階：reviewed　type：technique
+- id：`expectation-of-square`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/expectation-of-square/
 - 別名：二乗の期待値、分散、E[X^2]、確率・期待値・二乗を同時に運ぶ、variance
 - 種類：確率・期待値
@@ -816,7 +816,7 @@ search:
 
 ## 連続値の確率（continuous-probability） {#continuous-probability}
 
-- id：`continuous-probability`　レベル：発展　段階：reviewed　type：overview
+- id：`continuous-probability`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/continuous-probability/
 - 別名：連続確率、一様乱数、確率と積分、長さ・面積・角度の比、continuous probability
 - 種類：確率・期待値
@@ -833,7 +833,7 @@ search:
 
 ## ゲームの基本と勝敗の DP（game-basics） {#game-basics}
 
-- id：`game-basics`　レベル：水　段階：reviewed　type：technique
+- id：`game-basics`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/game-basics/
 - 別名：ゲーム DP、必勝法、必勝・必敗、勝ち局面・負け局面、二人零和有限確定完全情報ゲーム、手数の偶奇、真似戦略、ペアリング戦略
 - 種類：ゲーム、DP
@@ -858,7 +858,7 @@ search:
 
 ## ミニマックス（minimax） {#minimax}
 
-- id：`minimax`　レベル：水　段階：reviewed　type：technique
+- id：`minimax`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/minimax/
 - 別名：negamax、得点差 DP、自分 − 相手の最大化、得点差を最大化するゲーム、minimax
 - 種類：ゲーム、DP
@@ -879,7 +879,7 @@ search:
 
 ## Nim と XOR（nim） {#nim}
 
-- id：`nim`　レベル：水　段階：reviewed　type：technique
+- id：`nim`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/nim/
 - 別名：ニム、ニム和、石取りゲーム、上限つき Nim、逆形 Nim、Bouton の定理、misère Nim
 - 種類：ゲーム、ビット演算
@@ -899,7 +899,7 @@ search:
 
 ## Grundy 数と Sprague-Grundy の定理（grundy-number） {#grundy-number}
 
-- id：`grundy-number`　レベル：青　段階：reviewed　type：technique
+- id：`grundy-number`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/grundy-number/
 - 別名：nimber、Sprague-Grundy の定理、ゲームの和、Grundy 数の周期性、Sprague-Grundy theorem、Grundy number、グランディ数
 - 種類：ゲーム
@@ -919,7 +919,7 @@ search:
 
 ## 後退解析（game-retrograde-analysis） {#game-retrograde-analysis}
 
-- id：`game-retrograde-analysis`　レベル：黄　段階：reviewed　type：technique
+- id：`game-retrograde-analysis`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/game-retrograde-analysis/
 - 別名：retrograde analysis、引き分けのあるゲーム、閉路のあるグラフ上のゲーム、グラフ上のゲーム
 - 種類：ゲーム、DP、グラフ探索
@@ -938,7 +938,7 @@ search:
 
 ## 非不偏ゲーム（partizan-games） {#partizan-games}
 
-- id：`partizan-games`　レベル：発展　段階：reviewed　type：overview
+- id：`partizan-games`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/comb/partizan-games/
 - 別名：超現実数、組合せゲーム理論、Hackenbush、partizan game、combinatorial game theory
 - 種類：ゲーム

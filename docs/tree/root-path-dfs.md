@@ -25,7 +25,7 @@ sections:
   - {title: パス上の LIS・中央値・種類数, anchor: path-statistics}
   - {title: 操作の履歴を木にする型は永続データ構造の版の木へ, anchor: to-version-tree}
   - {title: 経路圧縮つきの Union-Find は戻せない（取り消せる Union-Find はデータ構造の章）, anchor: no-path-compression}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

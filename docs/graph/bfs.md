@@ -26,7 +26,7 @@ sections:
   - {title: 経路復元（発見したときの親を記録して終点からたどる）, anchor: path-restoration}
   - {title: 多始点 BFS（超頂点から距離 0 の辺を張るのと同じ）, anchor: multi-source}
   - {title: 重みが 1 と 2 なら辺を割る・重み付きなら 01-BFS かダイクストラ法, anchor: weighted}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

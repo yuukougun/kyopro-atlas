@@ -27,7 +27,7 @@ sections:
   - {title: 折り返す線のずれ（+1）と条件を満たせないときの 0, anchor: offset}
   - {title: 括弧列を DP で数えるときとの使い分け, anchor: vs-dp}
   - {title: 両端を越えない場合, anchor: two-sided, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

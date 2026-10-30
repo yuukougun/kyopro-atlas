@@ -22,7 +22,7 @@ sections:
   - {title: 不変条件と境界のテスト, anchor: tests}
   - {title: 動作確認の手順, anchor: verify}
   - {title: ページ → 確認用の問題, anchor: verify-table}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

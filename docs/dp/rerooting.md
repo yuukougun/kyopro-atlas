@@ -26,7 +26,7 @@ sections:
   - {title: 自分以外の兄弟の合成（左右からの累積）, anchor: exclude-self}
   - {title: 合成と根を付ける操作の作り方の型, anchor: patterns}
   - {title: 使い分け（最遠点は直径の性質で、距離の総和は根の移動の差分で済む）, anchor: when-to-use}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

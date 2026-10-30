@@ -26,7 +26,7 @@ sections:
   - {title: 格子路に帰着できないかを疑う, anchor: to-lattice-paths}
   - {title: 括弧列と格子路、ラベル付き木と Prüfer 列, anchor: classic-bijections}
   - {title: 単射でない対応は重複する, anchor: non-injective}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

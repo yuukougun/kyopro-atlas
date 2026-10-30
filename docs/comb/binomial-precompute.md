@@ -30,7 +30,7 @@ sections:
   - {title: p = 2 では (n & k) == k、ピラミッドの係数を二項係数と見抜く, anchor: parity-pyramid, level: 青}
   - {title: mod を取らない正確な値（掛けてから割る・__int128）, anchor: exact}
   - {title: ACL では modint998244353 の inv()・pow() で自作する, anchor: acl}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -29,7 +29,7 @@ sections:
   - {title: インタラクティブ問題のフラッシュ：同期を切る 2 行を書いたら、質問のたびに endl か fflush(stdout) が要る, anchor: flush}
   - {title: そのままでは出力できない型：__int128・modint・vector, anchor: unprintable-types}
   - {title: C++ 側で TLE になる書き方の一覧と計測, anchor: tle-causes}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 cpp_std: null
 gcc_min: null

@@ -27,7 +27,7 @@ sections:
   - {title: lcm のオーバーフロー（割ってから掛ける）, anchor: lcm-overflow}
   - {title: 左右からの累積 gcd（1 つ除いた gcd）, anchor: prefix-suffix-gcd}
   - {title: 分数・傾きを既約にして map のキーにする, anchor: reduce-fraction, level: 水}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

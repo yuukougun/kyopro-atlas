@@ -30,7 +30,7 @@ sections:
   - {title: 再帰型と非再帰型, anchor: recursive-vs-iterative}
   - {title: 文字列へのクエリ（文字の集合をビットで持つ）, anchor: string-queries}
   - {title: DP の配列を載せる, anchor: dp}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

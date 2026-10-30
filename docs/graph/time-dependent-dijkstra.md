@@ -24,7 +24,7 @@ sections:
   - {title: 次の出発時刻まで待つ遷移, anchor: wait}
   - {title: 最終電車型：終点から逆向きに最も遅い時刻を確定させる, anchor: latest-departure}
   - {title: 最適な出発時刻を計算してから進む, anchor: optimal-departure, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

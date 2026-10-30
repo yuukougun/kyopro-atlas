@@ -26,7 +26,7 @@ sections:
   - {title: XOR の性質（打ち消し・a + b との関係・0〜n の XOR）, anchor: xor-properties}
   - {title: popcount・最下位 bit, anchor: popcount}
   - {title: 部分集合の部分集合の列挙（3^N）, anchor: submask}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

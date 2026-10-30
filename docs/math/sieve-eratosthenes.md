@@ -26,7 +26,7 @@ sections:
   - {title: 篩の結果を累積和にして区間の素数を数える, anchor: prefix-count}
   - {title: 篩の変形（異なる素因数の個数を数える）, anchor: variants}
   - {title: メモリの見積もり（10^8 までは bit で持つ）, anchor: memory}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

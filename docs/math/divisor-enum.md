@@ -27,7 +27,7 @@ sections:
   - {title: 約数の列挙とソート・平方数での重複, anchor: enumerate}
   - {title: 約数の個数 Π(e+1) と約数の総和の公式, anchor: count-and-sum}
   - {title: 答えの候補が約数に限られる型（gcd の最大・商と余り・割るか引くか）, anchor: candidates}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

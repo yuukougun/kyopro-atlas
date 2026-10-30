@@ -30,7 +30,7 @@ sections:
   - {title: '条件を満たす順列の数 → 挿入 DP・撹乱順列（insertion-dp, inclusion-exclusion）', anchor: counting}
   - {title: 辞書順で何番目・K 番目の順列 → 残りの並べ方の数・順列全探索, anchor: lexicographic}
   - {title: 増加部分列・いくつの増加部分列に分けるか → LIS（lis）, anchor: increasing}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

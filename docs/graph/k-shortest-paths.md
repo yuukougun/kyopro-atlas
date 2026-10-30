@@ -22,7 +22,7 @@ sections:
   - {title: 各頂点を K 回まで取り出すダイクストラ法, anchor: k-times}
   - {title: 単純パス（Yen）とウォークの高速な列挙（Eppstein）, anchor: yen-eppstein}
   - {title: 自作するときの要点と Library Checker, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

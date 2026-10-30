@@ -24,7 +24,7 @@ sections:
   - {title: クラスカル法の順に成分を併合しながら答える, anchor: kruskal-order}
   - {title: 多数の 2 点の質問：成分にクエリを持たせて小さい方から移す, anchor: many-queries, level: 黄}
   - {title: 併合過程の木（Kruskal 再構築木）でオンラインに答える（木の章へ）, anchor: reconstruction-tree, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-22
 ---
 

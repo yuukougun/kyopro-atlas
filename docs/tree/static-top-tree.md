@@ -22,7 +22,7 @@ sections:
   - {title: 重いパスの上で DP をセグ木に載せる, anchor: heavy-path-dp}
   - {title: Static Top Tree（圧縮と併合）, anchor: compress-rake}
   - {title: 自作するときの要点と検証, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

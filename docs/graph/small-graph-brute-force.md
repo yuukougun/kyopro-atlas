@@ -24,7 +24,7 @@ sections:
   - {title: 頂点の対応の全探索（同型の判定・同型にするコスト）, anchor: isomorphism}
   - {title: 辺の部分集合の全探索（全域木の全列挙）, anchor: edge-subsets}
   - {title: 彩色は成分ごとに DFS で塗って探索を絞る, anchor: coloring, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

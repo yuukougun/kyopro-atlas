@@ -23,7 +23,7 @@ sections:
   - {title: カットの復元（ACL の min_cut）, anchor: restore}
   - {title: 頂点を入口と出口に分けて頂点カットを表す, anchor: vertex-cut}
   - {title: カットの形を決め打つ, anchor: cut-shape, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

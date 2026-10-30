@@ -22,7 +22,7 @@ sections:
   - {title: フック長公式, anchor: hook-length}
   - {title: Robinson-Schensted 対応と LIS・LDS, anchor: robinson-schensted}
   - {title: 分割数との関係, anchor: partitions}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

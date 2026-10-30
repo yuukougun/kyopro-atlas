@@ -25,7 +25,7 @@ sections:
   - {title: 約数の組を全部試す見積もり（1344² ≈ 1.8×10^6）, anchor: pairs}
   - {title: 約数を状態にした DP（約数の個数が少ないことを使う）, anchor: divisor-dp, level: 青}
   - {title: 高度合成数の列挙（小さい素数の指数が単調に減る形を DFS で）, anchor: enumerate-hcn, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

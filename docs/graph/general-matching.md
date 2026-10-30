@@ -25,7 +25,7 @@ sections:
   - {title: 大きさだけなら乱択（Tutte 行列の階数）, anchor: tutte-matrix}
   - {title: 小さければ bitDP, anchor: bitdp}
   - {title: 自作するときの要点と確かめ方, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

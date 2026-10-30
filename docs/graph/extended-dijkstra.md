@@ -34,7 +34,7 @@ sections:
   - {title: 資源を状態に持ち、上限で打ち切る, anchor: resource-state, level: 青}
   - {title: 訪問した集合を持つ（bitDP へのつなぎ）, anchor: visited-set, level: 青}
   - {title: 両端から伸ばす（回文の最短路）, anchor: two-ends, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -26,7 +26,7 @@ sections:
   - {title: 根号で場合分け（合計が抑えられた量の大小で分ける）, anchor: heavy-light}
   - {title: クエリの平方分割（√Q 個ごとに作り直し、未反映の分は愚直に補正する）, anchor: query-buckets}
   - {title: 実装の要点（ブロック番号・同じブロックの場合・タグの押し下げ・B の選び方）, anchor: implementation}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

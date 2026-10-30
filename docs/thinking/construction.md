@@ -24,7 +24,7 @@ sections:
   - {title: 上界・下界を示して達成する例を作る, anchor: bound-and-construct}
   - {title: 出力を検査するプログラムで確かめる, anchor: checker}
   - {title: ABC の構築の型（手順・数列・グラフ）, anchor: abc-patterns, level: 水}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

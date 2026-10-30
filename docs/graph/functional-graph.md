@@ -26,7 +26,7 @@ sections:
   - {title: 全頂点について閉路上かを求める（入次数 0 から剥がす・SCC）, anchor: on-cycle}
   - {title: 閉路ごとの集計・到達できる頂点の数, anchor: per-cycle}
   - {title: 置換は閉路の集まり（巡回分解は数え上げの章）, anchor: permutation}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

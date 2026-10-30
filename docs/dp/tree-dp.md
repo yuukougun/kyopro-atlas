@@ -30,7 +30,7 @@ sections:
   - {title: 子ごとの「得」を大きい順に取る, anchor: greedy-children, level: 青}
   - {title: 二分探索と組み合わせて判定にする, anchor: with-binary-search, level: 黄}
   - {title: 部分木の情報をデータ構造で持ってマージする（マージテク）, anchor: tree-dp-merge, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

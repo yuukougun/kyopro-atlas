@@ -26,7 +26,7 @@ sections:
   - {title: 残りから一様に選ぶ = ランダムな順列, anchor: random-permutation}
   - {title: ペアの大小は確率 1/2, anchor: pairs}
   - {title: 対称でない要素（初期位置・特別な要素）に注意する, anchor: asymmetric}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

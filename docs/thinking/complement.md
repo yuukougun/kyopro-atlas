@@ -23,7 +23,7 @@ sections:
   - {title: 全体 − 補集合, anchor: whole-minus-complement}
   - {title: 2〜3 条件の包除（重なりを足し戻す）, anchor: two-conditions}
   - {title: mod の引き算と空集合の扱い, anchor: mod-and-empty}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

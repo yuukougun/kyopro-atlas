@@ -25,7 +25,7 @@ sections:
   - {title: '|x − a| を足す・累積 min・平行移動', anchor: operations}
   - {title: 木の上で凸関数をマージする（マージテクと組む）, anchor: on-trees}
   - {title: 自作ライブラリでの扱い, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

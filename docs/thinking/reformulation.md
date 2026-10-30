@@ -24,7 +24,7 @@ sections:
   - {title: 独立に分解する（x と y・bit ごと・連結成分ごと）, anchor: independence}
   - {title: 操作の言い換え（区間操作を差分列で・隣接 swap を転倒数で）, anchor: operations}
   - {title: 言い換えてからデータ構造に載せる, anchor: then-data-structure, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

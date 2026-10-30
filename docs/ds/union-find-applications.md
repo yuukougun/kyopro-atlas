@@ -28,7 +28,7 @@ sections:
   - {title: 次の空きへ飛ぶ Union-Find, anchor: next-pointer}
   - {title: グラフの章との分担, anchor: vs-graph}
   - {title: しきい値ごと・関係ごとに Union-Find を持つ, anchor: multiple-uf, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

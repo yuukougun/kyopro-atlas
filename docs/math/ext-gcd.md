@@ -29,7 +29,7 @@ sections:
   - {title: 一次合同式 ax ≡ b (mod m) と、gcd で割ること, anchor: linear-congruence}
   - {title: 応用の型（円周の移動・倍数の余り・面積 1 の格子点・CRT）, anchor: applications}
   - {title: ACL では（inv_mod の内部の inv_gcd。拡張ユークリッドそのものは公開 API にない）, anchor: acl}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

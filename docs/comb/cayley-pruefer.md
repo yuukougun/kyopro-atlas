@@ -24,7 +24,7 @@ sections:
   - {title: 次数を指定した木の数（多項係数）, anchor: degree-sequence}
   - {title: 次数列ごとに数えて総和を取る, anchor: sum-over-degrees}
   - {title: 多項式（母関数）と組み合わせる, anchor: with-polynomials, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

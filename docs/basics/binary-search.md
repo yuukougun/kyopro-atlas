@@ -25,7 +25,7 @@ sections:
   - {title: lower_bound・upper_bound と個数の数え方, anchor: lower-bound}
   - {title: 片方を固定してもう片方を二分探索する, anchor: fix-one-side}
   - {title: 質問で二分探索する（インタラクティブ問題へ）, anchor: interactive}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -25,7 +25,7 @@ sections:
   - {title: 作った木を必ず確かめる, anchor: verify-output}
   - {title: 次数の条件から作る（次数の足りない成分どうしをつなぐ）, anchor: from-degrees, level: 青}
   - {title: 最遠距離の列から直径を決める, anchor: from-eccentricities, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

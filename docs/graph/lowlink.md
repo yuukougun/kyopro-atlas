@@ -27,7 +27,7 @@ sections:
   - {title: 二重辺連結成分（橋で分けて縮約すると木になる）, anchor: two-edge-connected}
   - {title: 有向グラフの SCC（同じ ord・low の考え方）との対比, anchor: vs-scc}
   - {title: 二重頂点連結成分とブロックカット木, anchor: block-cut-tree, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

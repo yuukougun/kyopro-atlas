@@ -25,7 +25,7 @@ sections:
   - {title: 段階の数え方（区間の外側にも段階がある）, anchor: counting-phases}
   - {title: 何文字目まで集めたか（部分列として現れる回数を数える）, anchor: matched-prefix}
   - {title: 区間の反転・変更を段階の切り替えで表す, anchor: flip-interval}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

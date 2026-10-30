@@ -23,7 +23,7 @@ sections:
   - {title: 上限で打ち切る（log 回で十分な量・目標以上をまとめる）, anchor: cap}
   - {title: 値と添字の入れ替え（同じ添字なら値が良い方が常に良いとき）, anchor: dp-swap-key-value}
   - {title: どれを添字に残すか（範囲が小さい量を選ぶ）, anchor: which-to-index}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

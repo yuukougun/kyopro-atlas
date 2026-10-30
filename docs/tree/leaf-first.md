@@ -24,7 +24,7 @@ sections:
   - {title: 次数 1 の頂点をキューで削る, anchor: peel-leaves}
   - {title: 帰りがけ順に葉から情報を上へ送る, anchor: send-up}
   - {title: 木の最大マッチング（葉と親を組む）, anchor: tree-matching}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

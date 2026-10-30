@@ -24,7 +24,7 @@ sections:
   - {title: BIT 上の二分探索の手順（値が 0 以上であることが前提）, anchor: bit-binary-search}
   - {title: 挿入を逆順に処理して「空きの P 番目」に置く, anchor: reverse-insertion}
   - {title: 答えの二分探索で K 番目を数える方法との違い, anchor: vs-kth-value}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -30,7 +30,7 @@ sections:
   - {title: 更新と質問が交互で区間を扱う → セグメント木・遅延セグメント木・平方分割, anchor: online}
   - {title: 過去の版に戻る・版をコピーする → 版の木・永続データ構造, anchor: versions}
   - {title: '同じ操作を非常に多く繰り返す → 周期で打ち切る・操作の合成をダブリング（periodicity, doubling）', anchor: repeat}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

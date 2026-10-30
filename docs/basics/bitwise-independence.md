@@ -28,7 +28,7 @@ sections:
   - {title: 上の bit から決める貪欲（上限は桁 DP の考え方）, anchor: top-down}
   - {title: 上位 bit で 2 つに分けて再帰する, anchor: split-by-top-bit, level: 青}
   - {title: 足し算では使えない理由（繰り上がり）, anchor: addition}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

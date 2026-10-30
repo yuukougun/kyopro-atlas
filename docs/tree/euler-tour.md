@@ -30,7 +30,7 @@ sections:
   - {title: 根からのパスを区間で扱う（辺の重みを子の部分木に配る）, anchor: root-path}
   - {title: 木上の Mo（データ構造の章）, anchor: mo-on-tree}
   - {title: 逆元がない演算・パスへの一括更新は HL 分解, anchor: to-hld, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

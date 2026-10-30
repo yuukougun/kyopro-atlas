@@ -25,7 +25,7 @@ sections:
   - {title: 重心を通るペアを数え、同じ成分の中のペアを引く, anchor: count-through}
   - {title: 木全体の数え上げと、重心木を上にたどるクエリ, anchor: centroid-tree-queries}
   - {title: 距離の頻度表は畳み込みと組む, anchor: with-convolution, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

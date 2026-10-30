@@ -25,7 +25,7 @@ sections:
   - {title: 指数の計算は mod (p − 1)（p − 1 は合成数なので割り算はできない）, anchor: exponent-mod-p-1}
   - {title: 底が p の倍数の場合（答えは 0、指数が 0 なら 1）, anchor: base-multiple}
   - {title: 一般の法：オイラーの定理と、互いに素でないときの一般化（累乗の塔）, anchor: euler-theorem, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

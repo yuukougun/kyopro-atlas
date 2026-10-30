@@ -33,7 +33,7 @@ sections:
   - {title: 'gcd(a, m) ≠ 1 の場合と、最小の解の取り方', anchor: bsgs-details}
   - {title: 一次漸化式を不動点で等比数列に直して離散対数に帰着する, anchor: affine-recurrence}
   - {title: 平方剰余と mod の K 乗根（オイラーの規準・Tonelli-Shanks・Cipolla）, anchor: mod-root, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -28,7 +28,7 @@ sections:
   - {title: 中央値を保つ（個数の差を 1 以内に。削除がなければヒープ 2 本）と Σ|x − a_i| の更新, anchor: median}
   - {title: 値を添字にした BIT・セグメント木で書く方法（→ 値を添字にする BIT・セグメント木）, anchor: by-index}
   - {title: '|x − a| + b を足していく関数の最小値（中央値の更新の応用。Slope Trick の入口）', anchor: absolute-sum-function, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

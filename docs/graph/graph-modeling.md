@@ -19,7 +19,7 @@ sections:
   - {title: 何を辺にするか（関係・操作・制約・写像）, anchor: what-to-edge}
   - {title: 制約を辺にすると何の問題になるか（二部グラフ・閉路・差分制約）, anchor: constraints-to-edges}
   - {title: 自由に行き来できる部分を 1 点に縮約する（Union-Find・SCC・次数 2 の頂点を消す）, anchor: contraction}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

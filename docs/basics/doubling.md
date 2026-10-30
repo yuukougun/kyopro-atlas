@@ -26,7 +26,7 @@ sections:
   - {title: ダブリング上の二分探索（条件を満たす最大の回数）, anchor: binary-search-on-doubling}
   - {title: 置換の K 回合成, anchor: permutation-power}
   - {title: 段数とメモリの見積もり, anchor: memory}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

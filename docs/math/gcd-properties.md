@@ -27,7 +27,7 @@ sections:
   - {title: 'mod N で A ずつ進むと gcd(A, N) の倍数だけを回る（周期と連結性）', anchor: step-mod}
   - {title: '線分上の格子点は gcd(|dx|, |dy|) + 1 個', anchor: lattice-on-segment}
   - {title: 'ax + by（x, y ≥ 0）で表せない最大の数 ab − a − b', anchor: frobenius}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

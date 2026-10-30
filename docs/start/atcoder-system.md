@@ -24,7 +24,7 @@ sections:
   - {title: ARC・AGC・AHC と ARC の区分, anchor: contests}
   - {title: 練習用のコンテスト, anchor: practice-contests}
   - {title: 生成 AI のルール, anchor: ai-rules}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -25,7 +25,7 @@ sections:
   - {title: 根から y 世代までに及ぶ値を伝える, anchor: depth-limited}
   - {title: 途中で値を聞かれるならオイラーツアーと BIT, anchor: online-queries}
   - {title: パスへの加算（LCA に印を置いて葉から上へ累積する）, anchor: path-add, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

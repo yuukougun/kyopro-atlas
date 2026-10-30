@@ -26,7 +26,7 @@ sections:
   - {title: 同じ商になる区間の右端 ⌊N/⌊N/l⌋⌋, anchor: block-end}
   - {title: √N を境に場合分けする（片方を √N まで全探索）, anchor: split-at-sqrt}
   - {title: 調和級数・floor sum との使い分け, anchor: vs-others}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

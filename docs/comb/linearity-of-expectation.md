@@ -28,7 +28,7 @@ sections:
   - {title: ペアごとの確率と対称性, anchor: pairs, level: 青}
   - {title: 総和と期待値の行き来, anchor: sum-vs-expectation}
   - {title: 線形性が使えない量（積・二乗・max）, anchor: nonlinear}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

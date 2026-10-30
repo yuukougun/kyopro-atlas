@@ -24,7 +24,7 @@ sections:
   - {title: 典型の順序（添字・逆順・値の順・区間の長さ順・集合の昇順・木の帰りがけ順）, anchor: typical-orders}
   - {title: 後ろから解くサイン（終わりの値が分かっている・辞書順最小の復元）, anchor: backward}
   - {title: 期待値 DP・ゲーム DP の計算順序（確率・期待値・ゲームの章へ）, anchor: expectation-and-games}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

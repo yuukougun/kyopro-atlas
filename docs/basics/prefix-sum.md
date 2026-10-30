@@ -27,7 +27,7 @@ sections:
   - {title: 円環は 2 周分に伸ばす, anchor: circular}
   - {title: 累積和の上で二分探索・尺取り, anchor: with-binary-search}
   - {title: 値が更新されるなら BIT、静的な区間 min なら Sparse Table, anchor: next-tools}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

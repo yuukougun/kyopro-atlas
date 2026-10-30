@@ -25,7 +25,7 @@ sections:
   - {title: 複素数の FFT と誤差、NTT に向く素数（c·2^k + 1）と原始根, anchor: ntt-prime}
   - {title: 任意 mod の畳み込み（3 素数 NTT と Garner、convolution_ll）, anchor: arbitrary-mod}
   - {title: ACL の convolution と自作するときの要点, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

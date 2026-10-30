@@ -30,7 +30,7 @@ sections:
   - {title: 境界（葉の長さ・e()・代入の番兵・INF・mod）, anchor: boundaries}
   - {title: 双対セグメント木（区間作用・一点取得）, anchor: dual-segment-tree}
   - {title: 保つ性質と push の手順（自作するとき）, anchor: invariants, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

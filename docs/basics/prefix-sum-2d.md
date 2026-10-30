@@ -27,7 +27,7 @@ sections:
   - {title: 周期的な盤面（周期で分割する）, anchor: periodic-board}
   - {title: '区間を点 (l, r) と見て数える', anchor: intervals-as-points}
   - {title: 3 次元以上（項の数と符号の決め方）, anchor: higher-dimensions, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

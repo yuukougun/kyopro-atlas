@@ -27,7 +27,7 @@ sections:
   - {title: 余りの鳩の巣（m + 1 個のうち 2 つは同じ余り）, anchor: pigeonhole-remainder}
   - {title: mod での矛盾で「できない」を示す, anchor: contradiction-mod}
   - {title: 必要条件と十分条件（実験の結果を信じてよいか）, anchor: necessary-sufficient}
-stage: reviewed
+stage: done
 updated: 2026-10-22
 ---
 

@@ -24,7 +24,7 @@ sections:
   - {title: ラムダの比較関数を型として渡す：decltype（C++20。C++17 では pq(cmp) と渡す）, anchor: lambda-comparator-type}
   - {title: 構造体に比較演算子の小なりを持たせる（メンバ関数に const が要る）, anchor: operator-less}
   - {title: 三方比較演算子の default で 6 つの比較を宣言順の辞書順にする（C++20）, anchor: spaceship}
-stage: reviewed
+stage: done
 updated: 2026-10-22
 cpp_std: null
 gcc_min: null

@@ -13,7 +13,7 @@ search:
 
 ## STL コンテナの使い分け（stl-containers） {#stl-containers}
 
-- id：`stl-containers`　レベル：基礎　段階：reviewed　type：technique
+- id：`stl-containers`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/stl-containers/
 - 別名：STL、STL containers、標準ライブラリのコンテナ、コンテナの計算量
 - 種類：データ構造、実装・C++
@@ -28,7 +28,7 @@ search:
 
 ## set・multiset・map の応用（ordered-set） {#ordered-set}
 
-- id：`ordered-set`　レベル：基礎　段階：reviewed　type：technique
+- id：`ordered-set`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/ordered-set/
 - 別名：順序付き集合、ordered set、set::lower_bound、前後の要素、番兵、パレート境界
 - 種類：データ構造
@@ -49,7 +49,7 @@ search:
 
 ## 全体への操作を変数で持つ（global-offset） {#global-offset}
 
-- id：`global-offset`　レベル：基礎　段階：reviewed　type：technique
+- id：`global-offset`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/global-offset/
 - 別名：global offset、オフセット、全体加算、反転フラグ、回転量、全体に反映させる値を別に持つ
 - 種類：データ構造、クエリ処理の工夫
@@ -68,7 +68,7 @@ search:
 
 ## 配列で作る連結リスト（linked-list） {#linked-list}
 
-- id：`linked-list`　レベル：基礎　段階：reviewed　type：technique
+- id：`linked-list`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/linked-list/
 - 別名：連結リスト、双方向リスト、linked list、doubly linked list、prev・next の配列
 - 種類：データ構造
@@ -84,7 +84,7 @@ search:
 
 ## 優先度付きキュー（priority-queue） {#priority-queue}
 
-- id：`priority-queue`　レベル：水　段階：reviewed　type：technique
+- id：`priority-queue`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/priority-queue/
 - 別名：priority_queue、ヒープ、heap、二分ヒープ、binary heap、削除できるヒープ、遅延削除、erasable heap、プライオリティキュー、優先順位付きキュー
 - 種類：データ構造、貪欲
@@ -105,7 +105,7 @@ search:
 
 ## 上位 K 個の和と中央値の管理（top-k-multiset） {#top-k-multiset}
 
-- id：`top-k-multiset`　レベル：水　段階：reviewed　type：technique
+- id：`top-k-multiset`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/top-k-multiset/
 - 別名：2 つの multiset、2 つのヒープ、two heaps、下位 K 個の和、動的な中央値、running median、Priority Sum Structure
 - 種類：データ構造
@@ -125,7 +125,7 @@ search:
 
 ## 区間を set で管理する（interval-set） {#interval-set}
 
-- id：`interval-set`　レベル：水　段階：reviewed　type：technique
+- id：`interval-set`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/interval-set/
 - 別名：IntervalSet、RangeSet、ODT、Chtholly Tree、珂朵莉树、互いに素な区間の集合
 - 種類：データ構造
@@ -145,7 +145,7 @@ search:
 
 ## スタック・キュー・deque の使いどころ（stack-techniques） {#stack-techniques}
 
-- id：`stack-techniques`　レベル：基礎　段階：reviewed　type：technique
+- id：`stack-techniques`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/stack-techniques/
 - 別名：stack、queue、括弧の対応、打ち消し、操作の取り消し、デック
 - 種類：データ構造
@@ -166,7 +166,7 @@ search:
 
 ## 単調スタックとスライド最小値（monotonic-stack） {#monotonic-stack}
 
-- id：`monotonic-stack`　レベル：水　段階：reviewed　type：technique
+- id：`monotonic-stack`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/monotonic-stack/
 - 別名：monotonic stack、単調 stack、ヒストグラム内最大長方形、sliding window minimum、単調 deque、単調キュー、SWAG、Sliding Window Aggregation、Cartesian Tree、デカルト木
 - 種類：データ構造、尺取り・スライド窓
@@ -190,7 +190,7 @@ search:
 
 ## Union-Find（union-find） {#union-find}
 
-- id：`union-find`　レベル：基礎　段階：reviewed　type：technique
+- id：`union-find`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/union-find/
 - 別名：UF、DSU、Disjoint Set Union、disjoint set、素集合データ構造、経路圧縮、union by size、ユニオンファインド
 - 種類：データ構造、連結性・全域木
@@ -212,7 +212,7 @@ search:
 
 ## Union-Find の応用（union-find-applications） {#union-find-applications}
 
-- id：`union-find-applications`　レベル：水　段階：reviewed　type：technique
+- id：`union-find-applications`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/union-find-applications/
 - 別名：UF に情報を持たせる、併合時の寄与、成分ごとの集約、次の空きへ飛ぶ Union-Find、次の要素へのポインタ、区間を塗る UF
 - 種類：データ構造、連結性・全域木
@@ -234,7 +234,7 @@ search:
 
 ## 重み付き Union-Find（weighted-union-find） {#weighted-union-find}
 
-- id：`weighted-union-find`　レベル：水　段階：reviewed　type：technique
+- id：`weighted-union-find`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/weighted-union-find/
 - 別名：weighted union-find、ポテンシャル付き Union-Find、重み付き UF、偶奇の Union-Find、二部グラフの Union-Find、頂点倍化の Union-Find、差分の矛盾判定
 - 種類：データ構造、連結性・全域木
@@ -257,7 +257,7 @@ search:
 
 ## 部分永続 Union-Find（partially-persistent-union-find） {#partially-persistent-union-find}
 
-- id：`partially-persistent-union-find`　レベル：発展　段階：reviewed　type：overview
+- id：`partially-persistent-union-find`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/partially-persistent-union-find/
 - 別名：部分永続 UF、時刻つき Union-Find、partially persistent union-find
 - 種類：データ構造、連結性・全域木
@@ -275,7 +275,7 @@ search:
 
 ## ロールバックできる Union-Find（rollback-union-find） {#rollback-union-find}
 
-- id：`rollback-union-find`　レベル：発展　段階：reviewed　type：overview
+- id：`rollback-union-find`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/rollback-union-find/
 - 別名：ロールバック UF、Undo つき Union-Find、undoable union-find、rollback union-find
 - 種類：データ構造、連結性・全域木
@@ -293,7 +293,7 @@ search:
 
 ## BIT（Fenwick Tree）（fenwick-tree） {#fenwick-tree}
 
-- id：`fenwick-tree`　レベル：水　段階：reviewed　type：technique
+- id：`fenwick-tree`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/fenwick-tree/
 - 別名：Binary Indexed Tree、フェニック木、fenwick_tree
 - 種類：データ構造、区間クエリ
@@ -316,7 +316,7 @@ search:
 
 ## 転倒数（inversion-number） {#inversion-number}
 
-- id：`inversion-number`　レベル：水　段階：reviewed　type：technique
+- id：`inversion-number`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/inversion-number/
 - 別名：inversion、inversion number、inversion count、反転数、バブルソートの交換回数、隣接 swap の最小回数
 - 種類：データ構造、数え上げ
@@ -337,7 +337,7 @@ search:
 
 ## K 番目の値を求めるデータ構造（kth-element） {#kth-element}
 
-- id：`kth-element`　レベル：水　段階：reviewed　type：technique
+- id：`kth-element`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/kth-element/
 - 別名：BIT 上の二分探索、Fenwick tree binary search、order statistics、順序統計量、空きの K 番目
 - 種類：データ構造、二分探索
@@ -355,7 +355,7 @@ search:
 
 ## セグメント木（segment-tree） {#segment-tree}
 
-- id：`segment-tree`　レベル：水　段階：reviewed　type：technique
+- id：`segment-tree`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree/
 - 別名：セグ木、segtree、Segment Tree、RMQ、非再帰セグ木、区間最小値、文字の集合を持つセグ木、セグメントツリー、セグツリー
 - 種類：データ構造、区間クエリ
@@ -378,7 +378,7 @@ search:
 
 ## セグメント木上の二分探索（segment-tree-binary-search） {#segment-tree-binary-search}
 
-- id：`segment-tree-binary-search`　レベル：水　段階：reviewed　type：technique
+- id：`segment-tree-binary-search`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-binary-search/
 - 別名：セグ木上の二分探索、セグ木の二分探索、binary search on segment tree、max_right、min_left
 - 種類：データ構造、二分探索、区間クエリ
@@ -400,7 +400,7 @@ search:
 
 ## 値を添字にする BIT・セグメント木（segment-tree-on-values） {#segment-tree-on-values}
 
-- id：`segment-tree-on-values`　レベル：水　段階：reviewed　type：technique
+- id：`segment-tree-on-values`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-on-values/
 - 別名：値域セグ木、権値線段樹、値を添字にするセグ木、動的セグ木、dynamic segment tree、sparse segment tree
 - 種類：データ構造、区間クエリ、ソート・座標圧縮
@@ -422,7 +422,7 @@ search:
 
 ## 遅延セグメント木（lazy-segment-tree） {#lazy-segment-tree}
 
-- id：`lazy-segment-tree`　レベル：水　段階：reviewed　type：technique
+- id：`lazy-segment-tree`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/lazy-segment-tree/
 - 別名：遅延セグ木、Lazy Segment Tree、lazy segtree、遅延評価セグメント木、遅延伝搬、区間作用・区間取得、双対セグ木、Dual Segment Tree
 - 種類：データ構造、区間クエリ
@@ -446,7 +446,7 @@ search:
 
 ## セグメント木に何を載せるか（segment-tree-monoids） {#segment-tree-monoids}
 
-- id：`segment-tree-monoids`　レベル：青　段階：reviewed　type：technique
+- id：`segment-tree-monoids`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-monoids/
 - 別名：モノイドの設計、monoid design、抽象化セグ木、second best、行列を載せるセグ木
 - 種類：データ構造、区間クエリ
@@ -465,7 +465,7 @@ search:
 
 ## 遅延セグメント木の載せ方の型（lazy-segment-tree-patterns） {#lazy-segment-tree-patterns}
 
-- id：`lazy-segment-tree-patterns`　レベル：青　段階：reviewed　type：technique
+- id：`lazy-segment-tree-patterns`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/lazy-segment-tree-patterns/
 - 別名：遅延セグ木のチートシート、S と F の設計、区間加算区間最小、区間代入区間和、Range Affine Range Sum、区間反転
 - 種類：データ構造、区間クエリ、考察
@@ -487,7 +487,7 @@ search:
 
 ## Sparse Table（sparse-table） {#sparse-table}
 
-- id：`sparse-table`　レベル：青　段階：reviewed　type：technique
+- id：`sparse-table`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/sparse-table/
 - 別名：スパーステーブル、ST 表、静的 RMQ、Disjoint Sparse Table
 - 種類：データ構造、区間クエリ、ダブリング・分割統治
@@ -504,7 +504,7 @@ search:
 
 ## Segment Tree Beats（segment-tree-beats） {#segment-tree-beats}
 
-- id：`segment-tree-beats`　レベル：発展　段階：reviewed　type：overview
+- id：`segment-tree-beats`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-beats/
 - 別名：beats、Ji Driver Segment Tree、吉司机线段树、区間 chmin 区間和、区間 chmin・chmax
 - 種類：データ構造、区間クエリ
@@ -521,7 +521,7 @@ search:
 
 ## クエリの先読み（offline-queries） {#offline-queries}
 
-- id：`offline-queries`　レベル：水　段階：reviewed　type：technique
+- id：`offline-queries`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/offline-queries/
 - 別名：オフライン処理、offline queries、クエリ先読み、クエリのソート、区間の種類数、Range Set Query、オンライン強制
 - 種類：クエリ処理の工夫、データ構造
@@ -544,7 +544,7 @@ search:
 
 ## 平面走査（sweep-line-2d） {#sweep-line-2d}
 
-- id：`sweep-line-2d`　レベル：青　段階：reviewed　type：technique
+- id：`sweep-line-2d`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/sweep-line-2d/
 - 別名：sweep line、plane sweep、走査線、スイープライン、2 次元クエリ、矩形内の点の数、長方形クエリ
 - 種類：クエリ処理の工夫、区間クエリ、ソート・座標圧縮
@@ -565,7 +565,7 @@ search:
 
 ## Mo's algorithm（mo-algorithm） {#mo-algorithm}
 
-- id：`mo-algorithm`　レベル：青　段階：reviewed　type：technique
+- id：`mo-algorithm`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/mo-algorithm/
 - 別名：Mo、Mo 法、クエリ平方分割、木上の Mo、Mo on tree、時間付き Mo
 - 種類：クエリ処理の工夫、区間クエリ
@@ -585,7 +585,7 @@ search:
 
 ## 平方分割（sqrt-decomposition） {#sqrt-decomposition}
 
-- id：`sqrt-decomposition`　レベル：黄　段階：reviewed　type：technique
+- id：`sqrt-decomposition`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/sqrt-decomposition/
 - 別名：sqrt decomposition、バケット法、bucket method、根号で場合分け、heavy/light、クエリの平方分割
 - 種類：クエリ処理の工夫、データ構造、計算量
@@ -604,7 +604,7 @@ search:
 
 ## 並列二分探索（parallel-binary-search） {#parallel-binary-search}
 
-- id：`parallel-binary-search`　レベル：発展　段階：reviewed　type：overview
+- id：`parallel-binary-search`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/parallel-binary-search/
 - 別名：parallel binary search、整体二分、全クエリの二分探索を同時に進める
 - 種類：クエリ処理の工夫、二分探索
@@ -621,7 +621,7 @@ search:
 
 ## CDQ 分割統治（cdq-divide-and-conquer） {#cdq-divide-and-conquer}
 
-- id：`cdq-divide-and-conquer`　レベル：発展　段階：reviewed　type：overview
+- id：`cdq-divide-and-conquer`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/cdq-divide-and-conquer/
 - 別名：CDQ divide and conquer、時系列の分割統治、オフラインの分割統治、3 次元の支配点の数え上げ
 - 種類：クエリ処理の工夫、ダブリング・分割統治
@@ -637,7 +637,7 @@ search:
 
 ## 永続データ構造（persistent-data-structures） {#persistent-data-structures}
 
-- id：`persistent-data-structures`　レベル：青　段階：reviewed　type：technique
+- id：`persistent-data-structures`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/persistent-data-structures/
 - 別名：persistent data structure、永続、版の木、永続スタック、永続セグ木、経路コピー、path copying、操作の巻き戻し
 - 種類：データ構造、クエリ処理の工夫
@@ -655,7 +655,7 @@ search:
 
 ## マージソート木（merge-sort-tree） {#merge-sort-tree}
 
-- id：`merge-sort-tree`　レベル：青　段階：reviewed　type：technique
+- id：`merge-sort-tree`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/merge-sort-tree/
 - 別名：Merge Sort Tree、マージソートツリー、領域木、Range Tree
 - 種類：データ構造、区間クエリ
@@ -671,7 +671,7 @@ search:
 
 ## Wavelet Matrix（wavelet-matrix） {#wavelet-matrix}
 
-- id：`wavelet-matrix`　レベル：発展　段階：reviewed　type：overview
+- id：`wavelet-matrix`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/wavelet-matrix/
 - 別名：ウェーブレット行列、Wavelet Tree、区間の K 番目
 - 種類：データ構造、区間クエリ、ビット演算
@@ -686,7 +686,7 @@ search:
 
 ## Binary Trie（binary-trie） {#binary-trie}
 
-- id：`binary-trie`　レベル：青　段階：reviewed　type：technique
+- id：`binary-trie`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/binary-trie/
 - 別名：二分トライ、2 進 Trie、ビット Trie、XOR Trie、XOR の最小化
 - 種類：データ構造、ビット演算
@@ -704,7 +704,7 @@ search:
 
 ## 平衡二分探索木と pb_ds の tree（balanced-bst） {#balanced-bst}
 
-- id：`balanced-bst`　レベル：発展　段階：reviewed　type：overview
+- id：`balanced-bst`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/balanced-bst/
 - 別名：平衡二分木、balanced binary search tree、treap、implicit treap、RBST、splay、pb_ds tree、order statistics tree
 - 種類：データ構造
@@ -721,7 +721,7 @@ search:
 
 ## 見慣れないデータ構造の名前と用途（advanced-ds-catalog） {#advanced-ds-catalog}
 
-- id：`advanced-ds-catalog`　レベル：—　段階：reviewed　type：hub
+- id：`advanced-ds-catalog`　レベル：—　段階：done　type：hub
 - URL：https://yuukougun.github.io/kyopro-atlas/ds/advanced-ds-catalog/
 - 別名：セグ木マージ、segment tree merging、2 次元セグ木、2 次元 BIT、K-D tree、併合可能なヒープ、meldable heap、skew heap、leftist heap、Fast Set、Fractional Cascading、析合木、Kinetic Segment Tree
 - 種類：案内、データ構造

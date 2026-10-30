@@ -25,7 +25,7 @@ sections:
   - {title: 自作するときの要点と Library Checker, anchor: library}
   - {title: Union-Find と組む例（最初の t 本の辺で条件を満たすか）, anchor: with-union-find}
   - {title: 代わりの手（部分永続 Union-Find・併合過程の木）, anchor: alternatives}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

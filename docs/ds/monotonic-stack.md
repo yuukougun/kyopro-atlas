@@ -31,7 +31,7 @@ sections:
   - {title: DP の遷移の高速化に使う, anchor: dp-transition}
   - {title: Cartesian tree（最大値で区間を割る再帰を O(N) で作る）, anchor: cartesian-tree, level: 黄}
   - {title: SWAG：スタック 2 本で作る総積つきキュー, anchor: swag, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

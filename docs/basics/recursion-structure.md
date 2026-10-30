@@ -25,7 +25,7 @@ sections:
   - {title: 再帰で描く, anchor: draw}
   - {title: 必要な深さは log K（長さの上限で打ち切る）, anchor: depth}
   - {title: 再帰の深さとスタック, anchor: stack}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

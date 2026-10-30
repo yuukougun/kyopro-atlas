@@ -25,7 +25,7 @@ sections:
   - {title: 「〜になるまでの回数」= Σ P(k 回目までに終わらない), anchor: waiting-time}
   - {title: 連続値の場合（積分）, anchor: continuous, level: 発展}
   - {title: 「ちょうど」と「以上」の行き来, anchor: exactly-vs-at-least}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

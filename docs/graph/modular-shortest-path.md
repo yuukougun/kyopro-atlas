@@ -22,7 +22,7 @@ frequency_evidence: recent 0・前提として届くページなし・古い ABC
 sections:
   - {title: 余りを頂点、操作を辺にする, anchor: residue-vertices}
   - {title: 同余最短路（最小の数で割った余りごとの最小値）, anchor: congruence}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

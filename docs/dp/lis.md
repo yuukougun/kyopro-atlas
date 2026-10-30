@@ -30,7 +30,7 @@ sections:
   - {title: 2 次元の入れ子（一方は昇順・もう一方は降順に並べる）, anchor: nesting, level: 青}
   - {title: 1 か所だけ変更できる LIS・木の上の LIS, anchor: variants, level: 青}
   - {title: Dilworth の定理（増加列への最小分割数＝最長減少部分列の長さ）, anchor: dilworth, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

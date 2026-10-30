@@ -30,7 +30,7 @@ sections:
   - {title: 2 つの木をつないだ直径, anchor: join-trees, level: 青}
   - {title: 中心と半径・直径の個数, anchor: center, level: 黄}
   - {title: 長鎖分解（最も深い子へつなぐ分解と、最も遠い葉を順に選ぶ貪欲）, anchor: long-path-decomposition, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

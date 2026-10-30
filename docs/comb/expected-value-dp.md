@@ -30,7 +30,7 @@ sections:
   - {title: 選択がある期待値：選択は max、偶然は平均, anchor: choice}
   - {title: 遷移を累積和でまとめる, anchor: prefix-sum, level: 青}
   - {title: 前向きの確率 DP との使い分け, anchor: vs-probability-dp}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

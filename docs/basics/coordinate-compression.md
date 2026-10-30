@@ -25,7 +25,7 @@ sections:
   - {title: 圧縮後の番号で長さを測らない（元の値を残す）, anchor: keep-original}
   - {title: BIT・セグメント木・いもす法と組む, anchor: with-ds}
   - {title: map で足りる場合との使い分け, anchor: vs-map}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

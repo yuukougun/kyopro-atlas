@@ -29,7 +29,7 @@ sections:
   - {title: 代入の小技：exchange で代入して前の値を返す、tie と pair でまとめて更新する, anchor: exchange}
   - {title: optional：値がないことを表す（nullopt・has_value・value_or。C++17）, anchor: optional}
   - {title: apply と、同じ型の組としての array（apply は C++17）, anchor: apply}
-stage: reviewed
+stage: done
 updated: 2026-10-22
 cpp_std: 17
 gcc_min: null

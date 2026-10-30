@@ -27,7 +27,7 @@ sections:
   - {title: 深い入れ子と再帰の深さ, anchor: deep-nesting}
   - {title: 文法に沿った DP, anchor: grammar-dp}
   - {title: 式の部分文字列の総和, anchor: substring-sum, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

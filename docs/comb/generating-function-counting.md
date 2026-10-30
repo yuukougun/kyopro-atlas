@@ -25,7 +25,7 @@ sections:
   - {title: DP の遷移を多項式の積・商として見る, anchor: dp-as-polynomial}
   - {title: 多項式の演算（逆元・log・exp）は FPS のページへ, anchor: to-fps}
   - {title: ライブラリでの使い方, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -24,7 +24,7 @@ sections:
   - {title: prev・next の配列と番兵（先頭・末尾）, anchor: arrays}
   - {title: 挿入・削除・付け替えの手順, anchor: operations}
   - {title: 最後に先頭からたどって出力する, anchor: output}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -30,7 +30,7 @@ sections:
   - {title: ボロノイ図・ドロネー三角形分割, anchor: voronoi}
   - {title: 線分の交点の列挙（Bentley-Ottmann）, anchor: segment-intersections}
   - {title: 自作するときの要点と Library Checker, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

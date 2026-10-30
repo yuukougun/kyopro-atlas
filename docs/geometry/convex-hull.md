@@ -30,7 +30,7 @@ sections:
   - {title: 凸多角形の内外判定：扇形に分けて二分探索（O(log N)）, anchor: point-in-convex-polygon}
   - {title: 一般の多角形の内外判定（交差数の偶奇）, anchor: point-in-polygon}
   - {title: '格子点：線分上は gcd(|dx|, |dy|)+1、多角形は Pick の定理', anchor: lattice-points}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

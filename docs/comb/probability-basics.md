@@ -25,7 +25,7 @@ sections:
   - {title: 条件付き確率と全確率の公式, anchor: conditional}
   - {title: 期待値の定義, anchor: expectation}
   - {title: 浮動小数点の誤差と出力の桁数, anchor: precision}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

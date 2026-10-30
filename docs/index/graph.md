@@ -13,7 +13,7 @@ search:
 
 ## グラフの表現と用語（graph-basics） {#graph-basics}
 
-- id：`graph-basics`　レベル：基礎　段階：reviewed　type：technique
+- id：`graph-basics`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/graph-basics/
 - 別名：グラフの基本、隣接リスト、隣接行列、辺リスト、次数、adjacency list、graph representation
 - 種類：グラフ探索
@@ -27,7 +27,7 @@ search:
 
 ## グラフへの帰着（graph-modeling） {#graph-modeling}
 
-- id：`graph-modeling`　レベル：—　段階：reviewed　type：hub
+- id：`graph-modeling`　レベル：—　段階：done　type：hub
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/graph-modeling/
 - 別名：グラフに言い換える、モデル化、何を頂点にするか、何を辺にするか、グラフの縮約、graph modeling
 - 種類：案内、グラフ探索、考察
@@ -40,7 +40,7 @@ search:
 
 ## 深さ優先探索（DFS）（dfs） {#dfs}
 
-- id：`dfs`　レベル：基礎　段階：reviewed　type：technique
+- id：`dfs`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/dfs/
 - 別名：深さ優先探索、DFS、depth-first search、単純パスの列挙
 - 種類：グラフ探索
@@ -57,7 +57,7 @@ search:
 
 ## 幅優先探索（BFS）と無重み最短路（bfs） {#bfs}
 
-- id：`bfs`　レベル：基礎　段階：reviewed　type：technique
+- id：`bfs`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/bfs/
 - 別名：幅優先探索、BFS、breadth-first search、無重み最短路、多始点 BFS、最短路の復元、経路復元
 - 種類：グラフ探索、最短路
@@ -77,7 +77,7 @@ search:
 
 ## グリッドグラフ（grid-graph） {#grid-graph}
 
-- id：`grid-graph`　レベル：基礎　段階：reviewed　type：technique
+- id：`grid-graph`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/grid-graph/
 - 別名：グリッド BFS、迷路の探索、4 近傍、8 近傍、grid graph
 - 種類：グラフ探索
@@ -95,7 +95,7 @@ search:
 
 ## 連結成分（connected-components） {#connected-components}
 
-- id：`connected-components`　レベル：基礎　段階：reviewed　type：technique
+- id：`connected-components`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/connected-components/
 - 別名：連結成分分解、連結判定、connected components
 - 種類：グラフ探索、連結性・全域木
@@ -115,7 +115,7 @@ search:
 
 ## 閉路の検出と復元（cycle-detection） {#cycle-detection}
 
-- id：`cycle-detection`　レベル：基礎　段階：reviewed　type：technique
+- id：`cycle-detection`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/cycle-detection/
 - 別名：閉路検出、サイクル検出、有向閉路、無向閉路、3 色の DFS、cycle detection
 - 種類：グラフ探索
@@ -134,7 +134,7 @@ search:
 
 ## なもりグラフ（namori-graph） {#namori-graph}
 
-- id：`namori-graph`　レベル：水　段階：reviewed　type：technique
+- id：`namori-graph`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/
 - 別名：なもり、unicyclic graph、pseudotree、閉路が 1 つのグラフ、木に辺を 1 本足したグラフ、N 頂点 N 辺の連結グラフ
 - 種類：グラフ探索、木
@@ -153,7 +153,7 @@ search:
 
 ## 二部グラフ判定（bipartite-graph） {#bipartite-graph}
 
-- id：`bipartite-graph`　レベル：基礎　段階：reviewed　type：technique
+- id：`bipartite-graph`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/bipartite-graph/
 - 別名：二部グラフ、2 彩色、奇閉路、2 色の塗り分け、bipartite graph、2 部グラフ、二分グラフ
 - 種類：グラフ探索
@@ -173,7 +173,7 @@ search:
 
 ## 小さいグラフの全探索（small-graph-brute-force） {#small-graph-brute-force}
 
-- id：`small-graph-brute-force`　レベル：基礎　段階：reviewed　type：technique
+- id：`small-graph-brute-force`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/small-graph-brute-force/
 - 別名：グラフ同型、全域木の全列挙、彩色の全探索、頂点の対応の全探索、graph isomorphism
 - 種類：全探索、グラフ探索
@@ -190,7 +190,7 @@ search:
 
 ## 彩色数・最大独立集合・最大クリーク（chromatic-number） {#chromatic-number}
 
-- id：`chromatic-number`　レベル：発展　段階：reviewed　type：overview
+- id：`chromatic-number`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/chromatic-number/
 - 別名：彩色数、頂点彩色、最大クリーク、一般グラフの最大独立集合、chromatic number、maximum independent set
 - 種類：DP、数え上げ
@@ -206,7 +206,7 @@ search:
 
 ## ダイクストラ法（dijkstra） {#dijkstra}
 
-- id：`dijkstra`　レベル：基礎　段階：reviewed　type：technique
+- id：`dijkstra`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/dijkstra/
 - 別名：ダイクストラ、Dijkstra、Dijkstra's algorithm、経由点の最短路、両端からのダイクストラ、逆向きのグラフ、最短閉路、ポテンシャルで負辺を消す、Johnson のアイデア
 - 種類：最短路
@@ -229,7 +229,7 @@ search:
 
 ## 01-BFS（zero-one-bfs） {#zero-one-bfs}
 
-- id：`zero-one-bfs`　レベル：水　段階：reviewed　type：technique
+- id：`zero-one-bfs`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/zero-one-bfs/
 - 別名：0-1 BFS、deque BFS、01BFS
 - 種類：最短路
@@ -249,7 +249,7 @@ search:
 
 ## ワーシャルフロイド法（warshall-floyd） {#warshall-floyd}
 
-- id：`warshall-floyd`　レベル：水　段階：reviewed　type：technique
+- id：`warshall-floyd`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/warshall-floyd/
 - 別名：ワーシャルフロイド、Floyd-Warshall、全点対最短路、all-pairs shortest paths、フロイドワーシャル法
 - 種類：最短路、DP
@@ -269,7 +269,7 @@ search:
 
 ## 最短路 DAG（shortest-path-dag） {#shortest-path-dag}
 
-- id：`shortest-path-dag`　レベル：水　段階：reviewed　type：technique
+- id：`shortest-path-dag`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/shortest-path-dag/
 - 別名：最短路木、最短経路の数え上げ、最短路に必ず使われる辺、すべての最短路に含まれる辺、shortest path DAG
 - 種類：最短路、DP
@@ -288,7 +288,7 @@ search:
 
 ## 状態を頂点にする（extended-dijkstra） {#extended-dijkstra}
 
-- id：`extended-dijkstra`　レベル：水　段階：reviewed　type：technique
+- id：`extended-dijkstra`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/extended-dijkstra/
 - 別名：状態空間の探索、状態空間 BFS、拡張ダイクストラ、頂点倍化、頂点倍加、レイヤー化グラフ、超頂点、仮想頂点、補助頂点、盤面の BFS、state-space search、layered graph、super vertex
 - 種類：最短路、グラフ探索
@@ -316,7 +316,7 @@ search:
 
 ## 時刻で変わる辺の最短路（time-dependent-dijkstra） {#time-dependent-dijkstra}
 
-- id：`time-dependent-dijkstra`　レベル：水　段階：reviewed　type：technique
+- id：`time-dependent-dijkstra`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/time-dependent-dijkstra/
 - 別名：時刻依存の最短路、待機、最終電車、出発時刻、time-dependent shortest path
 - 種類：最短路
@@ -334,7 +334,7 @@ search:
 
 ## ベルマンフォード法（bellman-ford） {#bellman-ford}
 
-- id：`bellman-ford`　レベル：青　段階：reviewed　type：technique
+- id：`bellman-ford`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/bellman-ford/
 - 別名：ベルマンフォード、Bellman-Ford、負閉路検出、SPFA、負辺のある最短路
 - 種類：最短路
@@ -353,7 +353,7 @@ search:
 
 ## 差分制約（牛ゲー）（difference-constraints） {#difference-constraints}
 
-- id：`difference-constraints`　レベル：青　段階：reviewed　type：technique
+- id：`difference-constraints`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/difference-constraints/
 - 別名：牛ゲー、差分制約系、不等式を辺にする、difference constraints
 - 種類：最短路
@@ -372,7 +372,7 @@ search:
 
 ## 補グラフ上の BFS（complement-graph-bfs） {#complement-graph-bfs}
 
-- id：`complement-graph-bfs`　レベル：黄　段階：reviewed　type：technique
+- id：`complement-graph-bfs`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/complement-graph-bfs/
 - 別名：補グラフ、未訪問頂点の集合、complement graph
 - 種類：グラフ探索
@@ -387,7 +387,7 @@ search:
 
 ## 剰余を頂点にする最短路（modular-shortest-path） {#modular-shortest-path}
 
-- id：`modular-shortest-path`　レベル：発展　段階：reviewed　type：overview
+- id：`modular-shortest-path`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/modular-shortest-path/
 - 別名：同余最短路、剰余グラフ、mod を頂点に
 - 種類：最短路、整数論
@@ -402,7 +402,7 @@ search:
 
 ## 区間に辺を張る（segment-tree-graph） {#segment-tree-graph}
 
-- id：`segment-tree-graph`　レベル：発展　段階：reviewed　type：overview
+- id：`segment-tree-graph`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/segment-tree-graph/
 - 別名：区間に辺を張るテク、セグ木グラフ、セグメント木の形の補助頂点、segment tree graph
 - 種類：最短路、データ構造
@@ -417,7 +417,7 @@ search:
 
 ## K 番目の最短路（k-shortest-paths） {#k-shortest-paths}
 
-- id：`k-shortest-paths`　レベル：発展　段階：reviewed　type：overview
+- id：`k-shortest-paths`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/k-shortest-paths/
 - 別名：k shortest paths、K 番目に短い経路、Eppstein、Yen
 - 種類：最短路
@@ -431,7 +431,7 @@ search:
 
 ## 最小シュタイナー木（steiner-tree） {#steiner-tree}
 
-- id：`steiner-tree`　レベル：発展　段階：reviewed　type：overview
+- id：`steiner-tree`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/steiner-tree/
 - 別名：シュタイナー木、Steiner tree、Dreyfus-Wagner
 - 種類：最短路、DP
@@ -447,7 +447,7 @@ search:
 
 ## トポロジカルソート（topological-sort） {#topological-sort}
 
-- id：`topological-sort`　レベル：基礎　段階：reviewed　type：technique
+- id：`topological-sort`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/topological-sort/
 - 別名：トポロジカル順序、Kahn 法、入次数、DAG、topological sort
 - 種類：グラフ探索
@@ -468,7 +468,7 @@ search:
 
 ## 強連結成分分解（SCC）（scc） {#scc}
 
-- id：`scc`　レベル：水　段階：reviewed　type：technique
+- id：`scc`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/scc/
 - 別名：強連結成分、SCC、Kosaraju、Tarjan、strongly connected components
 - 種類：グラフ探索
@@ -489,7 +489,7 @@ search:
 
 ## Functional graph（出次数 1 のグラフ）（functional-graph） {#functional-graph}
 
-- id：`functional-graph`　レベル：水　段階：reviewed　type：technique
+- id：`functional-graph`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/functional-graph/
 - 別名：関数グラフ、ρ 形、rho 形、successor graph
 - 種類：グラフ探索
@@ -510,7 +510,7 @@ search:
 
 ## 2-SAT（two-sat） {#two-sat}
 
-- id：`two-sat`　レベル：発展　段階：reviewed　type：overview
+- id：`two-sat`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/two-sat/
 - 別名：2SAT、充足可能性、含意グラフ、2-satisfiability
 - 種類：グラフ探索
@@ -531,7 +531,7 @@ search:
 
 ## Union-Find で連結性を扱う（union-find-connectivity） {#union-find-connectivity}
 
-- id：`union-find-connectivity`　レベル：水　段階：reviewed　type：technique
+- id：`union-find-connectivity`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/union-find-connectivity/
 - 別名：逆順 Union-Find、削除を逆順の追加にする、辺の削除を逆から、オフラインの連結判定、offline connectivity
 - 種類：連結性・全域木、クエリ処理の工夫
@@ -551,7 +551,7 @@ search:
 
 ## 最小全域木（minimum-spanning-tree） {#minimum-spanning-tree}
 
-- id：`minimum-spanning-tree`　レベル：水　段階：reviewed　type：technique
+- id：`minimum-spanning-tree`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/minimum-spanning-tree/
 - 別名：MST、クラスカル法、プリム法、Kruskal、Prim、最大全域木、minimum spanning tree、スパニングツリー
 - 種類：連結性・全域木、貪欲
@@ -574,7 +574,7 @@ search:
 
 ## 最小ボトルネック路（bottleneck-path） {#bottleneck-path}
 
-- id：`bottleneck-path`　レベル：青　段階：reviewed　type：technique
+- id：`bottleneck-path`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/bottleneck-path/
 - 別名：minimax 経路、ボトルネック、経路上の最大の辺の最小化、bottleneck path
 - 種類：連結性・全域木
@@ -592,7 +592,7 @@ search:
 
 ## 橋・関節点・二重連結成分（lowlink） {#lowlink}
 
-- id：`lowlink`　レベル：黄　段階：reviewed　type：technique
+- id：`lowlink`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/lowlink/
 - 別名：lowlink、橋、関節点、二重辺連結成分、二重頂点連結成分、ブロックカット木、ord と low、bridge、articulation point、biconnected components、block-cut tree
 - 種類：連結性・全域木、グラフ探索
@@ -612,7 +612,7 @@ search:
 
 ## 辺の追加と削除が混ざる連結性（offline-dynamic-connectivity） {#offline-dynamic-connectivity}
 
-- id：`offline-dynamic-connectivity`　レベル：発展　段階：reviewed　type：overview
+- id：`offline-dynamic-connectivity`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/offline-dynamic-connectivity/
 - 別名：Offline Dynamic Connectivity、オフライン動的連結性、時間軸のセグ木、辺の削除がある連結判定
 - 種類：連結性・全域木、クエリ処理の工夫
@@ -628,7 +628,7 @@ search:
 
 ## 特殊な最小全域木（spanning-tree-advanced） {#spanning-tree-advanced}
 
-- id：`spanning-tree-advanced`　レベル：発展　段階：reviewed　type：overview
+- id：`spanning-tree-advanced`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/spanning-tree-advanced/
 - 別名：Borůvka 法、Boruvka、Manhattan MST、Chu-Liu/Edmonds、最小有向全域木、第 2 最小全域木、directed MST
 - 種類：連結性・全域木
@@ -646,7 +646,7 @@ search:
 
 ## 行列木定理（matrix-tree-theorem） {#matrix-tree-theorem}
 
-- id：`matrix-tree-theorem`　レベル：発展　段階：reviewed　type：overview
+- id：`matrix-tree-theorem`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/matrix-tree-theorem/
 - 別名：Kirchhoff の定理、全域木の個数、全域木の数え上げ、BEST 定理、matrix-tree theorem
 - 種類：数え上げ、線形代数・行列、連結性・全域木
@@ -663,7 +663,7 @@ search:
 
 ## DFS 木・BFS 木とグラフの構築（graph-construction） {#graph-construction}
 
-- id：`graph-construction`　レベル：青　段階：reviewed　type：technique
+- id：`graph-construction`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/graph-construction/
 - 別名：グラフの構築、DFS 木、BFS 木、後退辺、グラフの復元、DFS tree、back edge
 - 種類：グラフ探索、考察
@@ -680,7 +680,7 @@ search:
 
 ## 次数による平方分割（degree-sqrt） {#degree-sqrt}
 
-- id：`degree-sqrt`　レベル：青　段階：reviewed　type：technique
+- id：`degree-sqrt`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/degree-sqrt/
 - 別名：次数の平方分割、重い頂点と軽い頂点、三角形の列挙、4-サイクルの検出、sqrt decomposition on degrees
 - 種類：グラフ探索、クエリ処理の工夫
@@ -697,7 +697,7 @@ search:
 
 ## オイラー路（一筆書き）（euler-path） {#euler-path}
 
-- id：`euler-path`　レベル：黄　段階：reviewed　type：technique
+- id：`euler-path`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/euler-path/
 - 別名：オイラー閉路、一筆書き、Hierholzer、Euler path、Eulerian trail
 - 種類：グラフ探索
@@ -714,7 +714,7 @@ search:
 
 ## 最大流（max-flow） {#max-flow}
 
-- id：`max-flow`　レベル：黄　段階：reviewed　type：technique
+- id：`max-flow`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/max-flow/
 - 別名：最大フロー、Ford-Fulkerson、Dinic、残余グラフ、増加路、maximum flow
 - 種類：フロー・マッチング
@@ -734,7 +734,7 @@ search:
 
 ## 最小カット（min-cut） {#min-cut}
 
-- id：`min-cut`　レベル：黄　段階：reviewed　type：technique
+- id：`min-cut`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/min-cut/
 - 別名：最大流最小カット定理、頂点カット、頂点分割、カットの復元、minimum cut、s-t cut
 - 種類：フロー・マッチング
@@ -751,7 +751,7 @@ search:
 
 ## 燃やす埋める（project-selection） {#project-selection}
 
-- id：`project-selection`　レベル：黄　段階：reviewed　type：technique
+- id：`project-selection`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/project-selection/
 - 別名：Project Selection、最大重み閉包、劣モジュラ、project selection problem
 - 種類：フロー・マッチング
@@ -775,7 +775,7 @@ search:
 
 ## 二部マッチング（bipartite-matching） {#bipartite-matching}
 
-- id：`bipartite-matching`　レベル：黄　段階：reviewed　type：technique
+- id：`bipartite-matching`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/bipartite-matching/
 - 別名：二部グラフの最大マッチング、Hopcroft-Karp、交互路、完全マッチング、二部グラフの辺彩色、bipartite matching
 - 種類：フロー・マッチング
@@ -794,7 +794,7 @@ search:
 
 ## König の定理（konig-theorem） {#konig-theorem}
 
-- id：`konig-theorem`　レベル：黄　段階：reviewed　type：technique
+- id：`konig-theorem`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/konig-theorem/
 - 別名：Konig の定理、最小頂点被覆、最大独立集合、最小辺被覆、LP の半整数性、König's theorem
 - 種類：フロー・マッチング
@@ -813,7 +813,7 @@ search:
 
 ## 最小費用流（min-cost-flow） {#min-cost-flow}
 
-- id：`min-cost-flow`　レベル：黄　段階：reviewed　type：technique
+- id：`min-cost-flow`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/min-cost-flow/
 - 別名：primal-dual、重み付きマッチング、割当問題、ハンガリアン法、slope、minimum cost flow、最小費用フロー
 - 種類：フロー・マッチング
@@ -835,7 +835,7 @@ search:
 
 ## 最小パス被覆と Hall の定理（dilworth-path-cover） {#dilworth-path-cover}
 
-- id：`dilworth-path-cover`　レベル：発展　段階：reviewed　type：overview
+- id：`dilworth-path-cover`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/dilworth-path-cover/
 - 別名：最小パス被覆、最大反鎖、最小鎖被覆、結婚定理、マッチングの双対、path cover、Hall's theorem
 - 種類：フロー・マッチング
@@ -853,7 +853,7 @@ search:
 
 ## 最小流量制約付きフロー（flow-lower-bounds） {#flow-lower-bounds}
 
-- id：`flow-lower-bounds`　レベル：発展　段階：reviewed　type：overview
+- id：`flow-lower-bounds`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/flow-lower-bounds/
 - 別名：下限付きフロー、最小流量制約、flow with demands、flow with lower bounds
 - 種類：フロー・マッチング
@@ -869,7 +869,7 @@ search:
 
 ## 一般グラフのマッチング（general-matching） {#general-matching}
 
-- id：`general-matching`　レベル：発展　段階：reviewed　type：overview
+- id：`general-matching`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/graph/general-matching/
 - 別名：Edmonds、blossom、花のアルゴリズム、一般グラフの最大マッチング、general matching
 - 種類：フロー・マッチング

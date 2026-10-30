@@ -24,7 +24,7 @@ sections:
   - {title: 閉路の頂点ごとにぶら下がる木に分ける, anchor: hanging-trees}
   - {title: 単純パスが一意になる条件, anchor: unique-path}
   - {title: 有向版は Functional graph, anchor: directed-version}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

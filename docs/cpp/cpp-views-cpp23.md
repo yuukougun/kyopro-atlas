@@ -27,7 +27,7 @@ sections:
   - {title: 'ranges::to でコンテナに変換する（入れ子も。C++23・GCC 14〜）', anchor: ranges-to}
   - {title: from_range・insert_range・append_range（C++23・GCC 15〜）と GCC 13 での代わり, anchor: from-range}
   - {title: 'views::concat（C++26）は AtCoder では使えない', anchor: concat}
-stage: reviewed
+stage: done
 updated: 2026-10-22
 cpp_std: 23
 gcc_min: 13

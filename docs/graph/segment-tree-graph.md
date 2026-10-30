@@ -21,7 +21,7 @@ sections:
   - {title: 下向きの木と上向きの木（コスト 0 の辺）, anchor: two-trees}
   - {title: 区間を O(log N) 個のノードで覆う, anchor: cover}
   - {title: 自作するときの要点と Library Checker, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -24,7 +24,7 @@ sections:
   - {title: よく使う公式, anchor: formulas}
   - {title: bit 演算の小技, anchor: bit-tricks}
   - {title: C++ の版と GCC・INF の候補, anchor: cpp}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

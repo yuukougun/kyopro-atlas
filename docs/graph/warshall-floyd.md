@@ -26,7 +26,7 @@ sections:
   - {title: 距離表を作ってから順列全探索・bitDP, anchor: with-enumeration}
   - {title: 距離以外の値を同じ形で求める（到達可能性・ボトルネック・2 つの基準）, anchor: beyond-distance}
   - {title: 迂回できる辺は不要, anchor: redundant-edges, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

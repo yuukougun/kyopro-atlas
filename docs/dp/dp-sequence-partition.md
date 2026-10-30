@@ -25,7 +25,7 @@ sections:
   - {title: 区間 DP との違い, anchor: vs-interval-dp}
   - {title: 遷移元の範囲が単調に動く：尺取りと累積和, anchor: two-pointers}
   - {title: 区間の番号に依存する条件：番号を状態に足す, anchor: block-index, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

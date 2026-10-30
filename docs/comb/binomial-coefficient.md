@@ -26,7 +26,7 @@ sections:
   - {title: 範囲の外の k（負や n 超え）を 0 とする約束, anchor: out-of-range}
   - {title: mod を取らないときの大きさとオーバーフロー, anchor: overflow}
   - {title: 辞書順 K 番目の組合せと順位, anchor: kth}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -28,7 +28,7 @@ sections:
   - {title: 倍数の箱を後ろから決める, anchor: decide-from-back}
   - {title: 商が同じ範囲を倍数で区切って数える, anchor: quotient-ranges}
   - {title: 素数の倍数だけをたどる篩（M log log M）との違い, anchor: vs-sieve}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

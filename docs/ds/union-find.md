@@ -30,7 +30,7 @@ sections:
   - {title: なぜ速いか（union by size だけで深さ log N、経路圧縮と合わせてならし O(α(N))）, anchor: complexity}
   - {title: 境界（同じグループどうしの併合・自己ループと多重辺・成分数・大きさの積のあふれ）, anchor: boundaries}
   - {title: 根に大きさ・辺数を持たせる（ほかの情報を持たせる型は Union-Find の応用）, anchor: size-and-edges}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

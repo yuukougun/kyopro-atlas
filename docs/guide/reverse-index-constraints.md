@@ -23,7 +23,7 @@ sections:
   - {title: 値や複数の制約から読めるサイン, anchor: value-signs}
   - {title: 見た目より速い・遅い計算量, anchor: deceptive}
   - {title: 計算量から手法を引く, anchor: complexity-to-methods}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -25,7 +25,7 @@ sections:
   - {title: 個数も状態に持つ（K 個選んで和が D の倍数）, anchor: with-count}
   - {title: 平均の扱い（個数を外側で固定する・平均を引いて和 0 にする）, anchor: average}
   - {title: 後ろから余りごとの勝敗を決めるゲーム, anchor: game-by-remainder, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-22
 ---
 

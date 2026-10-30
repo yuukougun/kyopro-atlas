@@ -22,7 +22,7 @@ sections:
   - {title: 隣接リスト・隣接行列・辺リストとアルゴリズムごとの使い分け, anchor: representations}
   - {title: 用語（次数・パスとウォーク・単純グラフ・連結・木・DAG・二部グラフ・補グラフ）, anchor: terms}
   - {title: 握手補題（次数の和は 2M）, anchor: handshake}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

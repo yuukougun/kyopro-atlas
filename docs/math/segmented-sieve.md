@@ -27,7 +27,7 @@ sections:
   - {title: 区間の各数の素因数分解（√R までで割った残りは素数）, anchor: factorize-range}
   - {title: 計算量とメモリの見積もり, anchor: complexity}
   - {title: 応用の型, anchor: patterns}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

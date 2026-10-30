@@ -29,7 +29,7 @@ sections:
   - {title: 'グリッドの回転・転置・反転の添字（(i, j) → (j, N−1−i)）', anchor: grid-rotation}
   - {title: 三角関数と角度の基本（度とラジアン・π は acos(−1)・余弦定理）, anchor: trig-angle}
   - {title: 点集合の合同判定：重心をそろえて照合する, anchor: congruence, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

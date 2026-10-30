@@ -27,7 +27,7 @@ sections:
   - {title: 両端型（左端か右端を取る）, anchor: ends}
   - {title: 最後に残す・最後に消すものを決める型, anchor: last-operation}
   - {title: 端の相手で分ける数え上げ（二項係数で操作の順序を混ぜる）, anchor: pair-with-left-end}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

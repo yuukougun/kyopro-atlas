@@ -27,7 +27,7 @@ sections:
   - {title: 最大値の位置で分ける, anchor: split-at-max}
   - {title: 区間クエリを中央で分けて左右の DP を合わせる（区間ナップサック）, anchor: range-knapsack}
   - {title: 他の分野の分割統治（分割統治 DP・分割統治 FFT・CDQ）への案内, anchor: other-fields}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -26,7 +26,7 @@ sections:
   - {title: 下の桁からの繰り上がりを状態にする, anchor: carry}
   - {title: 状態の種類が少ないことを使う（桁の積を map で・数字の集合を bit で）, anchor: sparse-states}
   - {title: 個数と総和を同時に持つ（総和 += 個数×桁の値）, anchor: count-and-sum}
-stage: reviewed
+stage: done
 updated: 2026-10-22
 ---
 

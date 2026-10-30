@@ -25,7 +25,7 @@ sections:
   - {title: 終了前の 10〜15 分, anchor: last-minutes}
   - {title: 生成 AI のルール, anchor: ai-rules}
   - {title: 終了後の振り返り, anchor: after-contest}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

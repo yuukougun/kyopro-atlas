@@ -25,7 +25,7 @@ sections:
   - {title: 配るか取りに行くかを次数で決める, anchor: push-pull}
   - {title: 三角形の列挙（次数の小さい方から向き付ける）, anchor: triangles, level: 黄}
   - {title: 長さ 4 の閉路の検出（鳩の巣原理で打ち切る）, anchor: four-cycles, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

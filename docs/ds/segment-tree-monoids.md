@@ -26,7 +26,7 @@ sections:
   - {title: 型の表（和・min/max・gcd・最小値と個数・括弧列・最大部分配列和など）, anchor: pattern-table}
   - {title: 非可換なモノイド（1 次関数の合成・ハッシュの連結。積む順序）, anchor: non-commutative}
   - {title: '行列を載せる（(min,+)・(max,+) の半環も）', anchor: matrix}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

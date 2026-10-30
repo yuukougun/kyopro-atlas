@@ -27,7 +27,7 @@ sections:
   - {title: 判定を貪欲・探索で作る, anchor: greedy-check}
   - {title: 判定を DP で作る（決め打ちごとに初期化し直す）, anchor: dp-check, level: 青}
   - {title: 実数の二分探索（反復回数を固定する）, anchor: real-number, level: 水}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

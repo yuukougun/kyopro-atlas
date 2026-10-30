@@ -30,7 +30,7 @@ sections:
   - {title: 周期の判定：p が周期であることと Z 配列の値の関係, anchor: period}
   - {title: 反転と連結する：後ろからの一致と回文の接尾辞, anchor: reverse}
   - {title: S＋区切り＋T で各位置から S の接頭辞が何文字続くか（DP の材料）, anchor: prefix-extension, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

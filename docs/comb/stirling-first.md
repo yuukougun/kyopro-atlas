@@ -26,7 +26,7 @@ sections:
   - {title: FPS・分割統治で一度に求める, anchor: fps}
   - {title: ライブラリでの使い方, anchor: library}
   - {title: 第 2 種との違い, anchor: vs-second-kind}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

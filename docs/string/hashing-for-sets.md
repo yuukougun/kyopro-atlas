@@ -28,7 +28,7 @@ sections:
   - {title: BIT と組んで点の更新に対応する, anchor: with-fenwick}
   - {title: 衝突確率と乱数の作り方（mt19937_64）, anchor: collision-and-rng}
   - {title: 各値が偶数個・k の倍数個かの判定（指数 mod k を乱数で符号化）, anchor: multiplicity-mod-k, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

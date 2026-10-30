@@ -25,7 +25,7 @@ sections:
   - {title: 超頂点と組み合わせる, anchor: super-vertex}
   - {title: 辺の追加と削除が混ざるとき（ロールバック Union-Find・オフライン動的連結性へ）, anchor: mixed-updates}
   - {title: 二分探索と連結判定の組合せ, anchor: binary-search, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

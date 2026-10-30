@@ -29,7 +29,7 @@ sections:
   - {title: 表せる項と表せない項（劣モジュラ）, anchor: submodular}
   - {title: 二部グラフで片側の意味を反転する, anchor: flip-side}
   - {title: 多値変数を頂点の列で表す, anchor: multi-valued, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

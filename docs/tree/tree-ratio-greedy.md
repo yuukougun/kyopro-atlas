@@ -23,7 +23,7 @@ sections:
   - {title: 比が最大の塊は親の直後に来てよい理由, anchor: why-ratio}
   - {title: Union-Find と優先度付きキューで併合する, anchor: merge-with-heap}
   - {title: 計算量と自作するときの要点, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

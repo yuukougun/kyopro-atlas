@@ -22,7 +22,7 @@ sections:
   - {title: 選んだページの前提と次に読むページ, anchor: focus}
   - {title: 理解したページと次の候補, anchor: progress}
   - {title: 表で見る, anchor: as-table}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

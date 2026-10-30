@@ -30,7 +30,7 @@ sections:
   - {title: 幾何の最適化の選び方：候補の列挙・答えの二分探索（半径・時刻）・三分探索, anchor: geometry-optimization}
   - {title: 三分探索の注意：凸性の確認・入れ子の三分探索・式の変わり目の時刻を列挙する方法, anchor: ternary-search-caveats, level: 黄}
   - {title: 山登り・焼きなましに頼らない（ABC の幾何の最適化は凸性や候補の列挙で解ける）, anchor: no-heuristics}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

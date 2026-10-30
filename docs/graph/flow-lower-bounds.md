@@ -22,7 +22,7 @@ sections:
   - {title: 下限を先に流したことにする, anchor: pre-flow}
   - {title: 超頂点で過不足を調整して判定する, anchor: super-vertex}
   - {title: 自作するときの要点と Library Checker, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

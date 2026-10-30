@@ -25,7 +25,7 @@ sections:
   - {title: 逆辺と、勝ちと確定していない行き先の数のカウンタ, anchor: counter}
   - {title: 決まらない局面 = 引き分け, anchor: draw}
   - {title: 得点のあるゲームはダイクストラ法の要領で確定させる, anchor: weighted, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

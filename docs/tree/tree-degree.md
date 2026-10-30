@@ -24,7 +24,7 @@ sections:
   - {title: Prüfer 列と木の全単射（出現回数 = 次数 − 1）, anchor: pruefer}
   - {title: 次数を配る最適化, anchor: allocate-degrees}
   - {title: 木の数え上げ（Cayley の公式・行列木定理）へのつながり, anchor: counting-links}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

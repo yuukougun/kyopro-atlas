@@ -26,7 +26,7 @@ sections:
   - {title: 64bit の法での掛け算（128 bit 整数・Montgomery・Barrett）, anchor: mulmod}
   - {title: 'ACL の内部実装（internal::is_prime_constexpr）', anchor: acl-internal}
   - {title: 自作するときの要点と確かめ方, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -26,7 +26,7 @@ sections:
   - {title: 集合（set・multiset）を更新しながら走査する, anchor: with-set}
   - {title: 平面走査の基本（一方の座標で並べ、もう一方を集合で）, anchor: plane-sweep}
   - {title: BIT・セグ木と組む平面走査へ（データ構造の章）, anchor: to-data-structures}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

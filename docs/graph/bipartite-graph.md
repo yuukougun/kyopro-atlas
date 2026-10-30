@@ -25,7 +25,7 @@ sections:
   - {title: 成分ごとの色の数を使う数え上げ, anchor: count-by-color}
   - {title: Union-Find（頂点を 2 倍にする・偶奇を持つ）で判定する, anchor: union-find}
   - {title: 木・4 近傍のグリッドは必ず二部グラフ, anchor: always-bipartite}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

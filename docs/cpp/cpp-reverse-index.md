@@ -26,7 +26,7 @@ sections:
   - {title: '混同しやすい書き方の対（std::iota と views::iota、unique と erase など）', anchor: confusing-pairs}
   - {title: 症状から引く：WA・RE・TLE と、手元と AtCoder で結果が違うとき, anchor: symptoms}
   - {title: 'コンパイルエラーのメッセージから引く（最初の error: の行と、required from here で自分の行を探す読み方を含む）', anchor: compile-errors}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

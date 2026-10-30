@@ -29,7 +29,7 @@ sections:
   - {title: 答えを 2 時点の差に分ける, anchor: difference-of-times}
   - {title: 先に全部読んで座標圧縮する, anchor: compress}
   - {title: オンライン強制の見分け方と、そのときの構造（永続・マージソート木・動的セグメント木）, anchor: online}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

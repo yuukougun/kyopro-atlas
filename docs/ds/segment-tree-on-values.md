@@ -28,7 +28,7 @@ sections:
   - {title: 上位 K 個の和（境界はセグメント木上の二分探索で探す）, anchor: top-k-sum, level: 青}
   - {title: 左の個数の偶奇で右の読み方が変わる量（ソート後の奇数番目の和）, anchor: odd-position-sum, level: 黄}
   - {title: 動的セグメント木（必要なノードだけ作る）, anchor: dynamic-segment-tree, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

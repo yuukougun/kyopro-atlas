@@ -25,7 +25,7 @@ sections:
   - {title: 最小の要素を含むグループから決める（順序の重複を除く）, anchor: fix-minimum}
   - {title: グループの数を状態に足す, anchor: group-count}
   - {title: 高速ゼータ変換との使い分け, anchor: vs-zeta, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -26,7 +26,7 @@ sections:
   - {title: 分解した後の使い方（異なる素因数・指数・約数）, anchor: after-factor}
   - {title: 線形篩：各合成数を1回だけ作り、φ・μ の表を同時に作る, anchor: linear-sieve, level: 青}
   - {title: メモリの見積もり（int で 10^7 個は 40 MB）, anchor: memory}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -26,7 +26,7 @@ sections:
   - {title: 結合法則を満たす演算の累乗（行列・写像の合成）, anchor: monoid-power}
   - {title: 'ACL の pow_mod と modint::pow', anchor: acl}
   - {title: 繰り返し二乗法を部品にする手法, anchor: building-block}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

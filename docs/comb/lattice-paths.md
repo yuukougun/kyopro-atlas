@@ -26,7 +26,7 @@ sections:
   - {title: 禁止領域を避ける：境界を越える点で分類する, anchor: forbidden-region, level: 青}
   - {title: 経路数の総和と、二項係数の和を経路数として一括で求める, anchor: sum-of-paths, level: 青}
   - {title: 移動を軸ごとの回数に分けて独立にする（45 度回転）, anchor: independent-axes, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

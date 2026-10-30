@@ -32,7 +32,7 @@ sections:
   - {title: 斜めの移動・マンハッタン距離・ひし形の範囲 → 45 度回転・斜めの座標（manhattan-chebyshev）, anchor: diagonal}
   - {title: '盤面の回転・反転・平行移動 → 添字の対応の式・全部試す（rotation-transform, brute-force）', anchor: rotation}
   - {title: ドミノの配置・隣り合わないマスの選び方 → 二部マッチング・プロファイル DP, anchor: tiling}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

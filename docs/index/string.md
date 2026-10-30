@@ -13,7 +13,7 @@ search:
 
 ## 文字列の基本操作と辞書順（string-basics） {#string-basics}
 
-- id：`string-basics`　レベル：基礎　段階：reviewed　type：technique
+- id：`string-basics`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/string-basics/
 - 別名：辞書順、文字列の比較、文字の一斉置換、文字列の回転、連結して辞書順最小、lexicographical order
 - 種類：文字列
@@ -34,7 +34,7 @@ search:
 
 ## 部分列の判定と次の出現位置の表（subsequence-matching） {#subsequence-matching}
 
-- id：`subsequence-matching`　レベル：基礎　段階：reviewed　type：technique
+- id：`subsequence-matching`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/subsequence-matching/
 - 別名：部分列判定、次の出現位置、nxt 配列、部分列オートマトン、序列自動機、部分列として含むか、subsequence automaton
 - 種類：文字列
@@ -54,7 +54,7 @@ search:
 
 ## ローリングハッシュ（rolling-hash） {#rolling-hash}
 
-- id：`rolling-hash`　レベル：水　段階：reviewed　type：technique
+- id：`rolling-hash`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/rolling-hash/
 - 別名：ロリハ、多項式ハッシュ、Rabin-Karp、文字列のハッシュ、部分文字列のハッシュ、ハッシュのセグ木、rolling hash
 - 種類：文字列、ハッシュ・乱択
@@ -77,7 +77,7 @@ search:
 
 ## 集合・多重集合のハッシュ（hashing-for-sets） {#hashing-for-sets}
 
-- id：`hashing-for-sets`　レベル：水　段階：reviewed　type：technique
+- id：`hashing-for-sets`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/hashing-for-sets/
 - 別名：Zobrist hashing、集合のハッシュ、多重集合のハッシュ、XOR ハッシュ、和のハッシュ、乱択ハッシュ、並べ替えて一致するか
 - 種類：ハッシュ・乱択、累積和・差分
@@ -98,7 +98,7 @@ search:
 
 ## ハッシュの衝突と安全な設計（hash-safety） {#hash-safety}
 
-- id：`hash-safety`　レベル：青　段階：reviewed　type：technique
+- id：`hash-safety`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/hash-safety/
 - 別名：ハッシュの衝突確率、誕生日のパラドックス、mod 2^61-1、ハッシュの mod の選び方、anti-hash、ハッシュが落とされる、unordered_map の衝突、カスタムハッシュ、hash collision
 - 種類：ハッシュ・乱択
@@ -119,7 +119,7 @@ search:
 
 ## Z-algorithm（z-algorithm） {#z-algorithm}
 
-- id：`z-algorithm`　レベル：水　段階：reviewed　type：technique
+- id：`z-algorithm`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/z-algorithm/
 - 別名：Z 法、Z 配列、Z function、拡張 KMP、z_algorithm、各位置からの最長共通接頭辞、巡回シフト、A+A の技、Z アルゴリズム
 - 種類：文字列
@@ -143,7 +143,7 @@ search:
 
 ## KMP 法と文字列の周期（kmp） {#kmp}
 
-- id：`kmp`　レベル：青　段階：reviewed　type：technique
+- id：`kmp`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/kmp/
 - 別名：KMP、MP 法、Knuth-Morris-Pratt、失敗関数、prefix function、π 配列、border、最小周期、繰り返し単位
 - 種類：文字列
@@ -167,7 +167,7 @@ search:
 
 ## 回文の扱いと Manacher（palindrome） {#palindrome}
 
-- id：`palindrome`　レベル：水　段階：reviewed　type：technique
+- id：`palindrome`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/palindrome/
 - 別名：回文、palindrome、回文判定、Manacher's algorithm、回文半径、中心から伸ばす、両端から作る、マナカー
 - 種類：文字列
@@ -189,7 +189,7 @@ search:
 
 ## Trie（trie） {#trie}
 
-- id：`trie`　レベル：水　段階：reviewed　type：technique
+- id：`trie`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/trie/
 - 別名：トライ木、接頭辞木、prefix tree、全ペアの LCP の和
 - 種類：文字列、データ構造
@@ -211,7 +211,7 @@ search:
 
 ## Aho-Corasick 法（aho-corasick） {#aho-corasick}
 
-- id：`aho-corasick`　レベル：青　段階：reviewed　type：technique
+- id：`aho-corasick`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/aho-corasick/
 - 別名：AC オートマトン、失敗リンク、複数パターン照合、禁止語、Aho-Corasick algorithm、エイホコラシック法
 - 種類：文字列
@@ -232,7 +232,7 @@ search:
 
 ## 照合オートマトン上の DP（string-automaton-dp） {#string-automaton-dp}
 
-- id：`string-automaton-dp`　レベル：青　段階：reviewed　type：technique
+- id：`string-automaton-dp`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/string-automaton-dp/
 - 別名：オートマトン DP、KMP DP、Aho-Corasick 上の DP、照合状態の DP、禁止文字列、禁止部分文字列、automaton DP
 - 種類：DP、文字列
@@ -253,7 +253,7 @@ search:
 
 ## Suffix Array と LCP 配列（suffix-array） {#suffix-array}
 
-- id：`suffix-array`　レベル：黄　段階：reviewed　type：technique
+- id：`suffix-array`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/string/suffix-array/
 - 別名：接尾辞配列、SA、LCP 配列、SA-IS、Kasai 法、suffix_array、lcp_array、異なる部分文字列の数、サフィックスアレイ
 - 種類：文字列、データ構造
@@ -279,7 +279,7 @@ search:
 
 ## Suffix Automaton と発展の文字列アルゴリズム（suffix-automaton） {#suffix-automaton}
 
-- id：`suffix-automaton`　レベル：発展　段階：reviewed　type：overview
+- id：`suffix-automaton`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/string/suffix-automaton/
 - 別名：SAM、接尾辞オートマトン、DAWG、回文木、eertree、Palindromic Tree、Lyndon 分解、Duval、最小回転、Run の列挙、Main-Lorentz、逆 Manacher、逆 Z
 - 種類：文字列

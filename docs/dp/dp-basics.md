@@ -27,7 +27,7 @@ sections:
   - {title: 貰う形にすると遷移元が区間になる（累積和でまとめる高速化へ）, anchor: pull-to-prefix-sum, level: 水}
   - {title: 貪欲で解けないことの確かめ方（反例から DP へ）, anchor: greedy-counterexample}
   - {title: DP の型の地図（列・区間・集合・桁・木・順列・確率・ゲーム・高速化）, anchor: map}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

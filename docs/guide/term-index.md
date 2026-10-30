@@ -20,7 +20,7 @@ sections:
   - {title: 五十音順, anchor: kana}
   - {title: 英字の名前（ABC 順）, anchor: latin}
   - {title: 複数のページに当たる語, anchor: shared-terms}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

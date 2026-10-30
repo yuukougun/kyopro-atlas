@@ -27,7 +27,7 @@ sections:
   - {title: 遷移元が接頭辞なら累積 min・累積 max でもよい, anchor: prefix-min}
   - {title: 余りごとの累積, anchor: by-remainder, level: 青}
   - {title: 2 次元の累積, anchor: two-dimensional, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

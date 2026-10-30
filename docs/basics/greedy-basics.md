@@ -25,7 +25,7 @@ sections:
   - {title: 同じ値をまとめて処理する, anchor: batch-same-values}
   - {title: 反例の探し方（小さいケースの全探索と比べる）, anchor: counterexamples}
   - {title: 貪欲が失敗する例と DP への切り替え, anchor: when-greedy-fails}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

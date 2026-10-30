@@ -25,7 +25,7 @@ sections:
   - {title: 成分ごとの集計（頂点数と辺数で木・なもり・それ以外を見分ける）, anchor: per-component}
   - {title: 森の連結成分の数は N − M, anchor: forest}
   - {title: 座標や値を頂点にして成分を考える, anchor: values-as-vertices, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

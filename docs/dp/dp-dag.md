@@ -26,7 +26,7 @@ sections:
   - {title: DAG だと気づく・作る（値の順・距離の層・同じ値の頂点をまとめる）, anchor: find-dag, level: 水}
   - {title: 最短路の本数（距離が確定した順に配る）, anchor: count-shortest-paths}
   - {title: 閉路があるとき（SCC で縮約する・最短路に切り替える）, anchor: with-cycles}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -29,7 +29,7 @@ sections:
   - {title: すべて含む：含んだパターンの集合を bit で持つ, anchor: contain-all}
   - {title: N が巨大なとき：遷移行列の累乗・ダブリング, anchor: matrix-power}
   - {title: 包除はどこで破綻するか（位置の重なりとパターンの集合）, anchor: why-not-inclusion-exclusion}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

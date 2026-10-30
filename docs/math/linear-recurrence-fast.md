@@ -27,7 +27,7 @@ sections:
   - {title: Bostan-Mori（Q(x)Q(−x) で次数を半分にする）, anchor: bostan-mori}
   - {title: Berlekamp-Massey（漸化式を見つける）, anchor: berlekamp-massey}
   - {title: ACL の convolution を使った実装, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

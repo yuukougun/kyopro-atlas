@@ -21,7 +21,7 @@ sections:
   - {title: 1 つのサインに複数の手法が当たるとき, anchor: disambiguation}
   - {title: 題材から引く, anchor: by-topic}
   - {title: 状況から引く, anchor: by-situation}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

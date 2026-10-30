@@ -25,7 +25,7 @@ sections:
   - {title: DP で個数を決めながら合流ごとに二項係数を掛ける, anchor: dp-merge}
   - {title: 一部を先に並べて残りを挿入する, anchor: insert-rest, level: 黄}
   - {title: 区別しない同じ大きさのグループを割る, anchor: same-size-groups, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

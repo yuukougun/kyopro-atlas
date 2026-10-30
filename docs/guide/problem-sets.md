@@ -22,7 +22,7 @@ sections:
   - {title: 練習用のコンテスト, anchor: practice-contests}
   - {title: AtCoder 以外の道具, anchor: tools}
   - {title: ライブラリの確かめ用の問題集, anchor: verify-sets}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

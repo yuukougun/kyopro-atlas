@@ -23,7 +23,7 @@ sections:
   - {title: 何ができるか（区間の K 番目・x 未満の個数・和）, anchor: what-it-does}
   - {title: 段の作り方（上位 bit から安定に振り分ける）, anchor: build}
   - {title: ライブラリでの使い方と、マージソート木・永続セグメント木との比較, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

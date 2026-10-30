@@ -26,7 +26,7 @@ sections:
   - {title: Color Coding, anchor: color-coding, level: 黄}
   - {title: C++ の乱数（mt19937_64・時間計測）, anchor: cpp-random}
   - {title: 焼きなましなどのヒューリスティックは ABC の範囲外（AHC）, anchor: heuristics}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 
