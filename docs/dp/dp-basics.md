@@ -19,7 +19,7 @@ signs:
   - {type: shape, text: 'dp[i] が dp[i−1]・dp[i−2] など定数個の前の状態から決まる'}
 acl: []
 frequency: A
-frequency_evidence: recent 0・前提として 63 ページに届く（直接 19）・古い ABC 4 問
+frequency_evidence: recent 0・前提として 63 ページに届く（直接 20）・古い ABC 4 問
 sections:
   - {title: 状態・遷移・初期値・答えの 4 つを決める, anchor: four-parts}
   - {title: 最適化・数え上げ・可否判定を同じ骨組みで書く（演算と単位元・到達できない状態の表し方）, anchor: three-kinds}

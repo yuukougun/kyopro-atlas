@@ -21,7 +21,7 @@ signs:
 acl: []
 verify: [static_convex_hull]
 frequency: B
-frequency_evidence: recent 1（abc478_g）・前提として 2 ページに届く（直接 2）・古い ABC 4 問
+frequency_evidence: recent 1（abc478_g）・前提として 1 ページに届く（直接 1）・古い ABC 4 問
 sections:
   - {title: Andrew 法（monotone chain）：下側と上側を作る, anchor: andrew}
   - {title: 一直線上の点・重複点・全点が一直線上のときの扱い（外積の不等号の向き）, anchor: degenerate}

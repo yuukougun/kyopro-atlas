@@ -22,7 +22,7 @@ signs:
 acl: []
 verify: []
 frequency: A
-frequency_evidence: recent 2（abc467_d・abc472_f）・前提として 7 ページに届く（直接 4）・古い ABC 7 問
+frequency_evidence: recent 2（abc467_d・abc472_f）・前提として 6 ページに届く（直接 4）・古い ABC 7 問
 sections:
   - {title: 外積と内積の意味（符号と大きさ）, anchor: cross-and-dot}
   - {title: ccw：3 点の回り方・一直線上の判定・凸性の判定, anchor: ccw}

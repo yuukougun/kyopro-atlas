@@ -20,7 +20,7 @@ signs:
   - {type: constraint, text: N ≤ 15〜16 程度で、集合とその部分集合の組をすべて調べる（全体で 3^N）}
 acl: []
 frequency: A
-frequency_evidence: recent 1（abc476_g）・前提として 45 ページに届く（直接 13）・古い ABC 4 問
+frequency_evidence: recent 1（abc476_g）・前提として 48 ページに届く（直接 13）・古い ABC 4 問
 sections:
   - {title: AND・OR・XOR・シフトと演算子の優先順位, anchor: operators}
   - {title: XOR の性質（打ち消し・a + b との関係・0〜n の XOR）, anchor: xor-properties}

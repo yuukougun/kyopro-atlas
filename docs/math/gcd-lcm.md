@@ -20,7 +20,7 @@ signs:
 acl: []
 verify: []
 frequency: A
-frequency_evidence: recent 1（abc460_e）・前提として 14 ページに届く（直接 8）・古い ABC 3 問
+frequency_evidence: recent 1（abc460_e）・前提として 13 ページに届く（直接 8）・古い ABC 3 問
 sections:
   - {title: 互除法の正しさ（公約数の集合が変わらない）と回数の上限（隣り合うフィボナッチ数）, anchor: euclid}
   - {title: '複数の数の gcd・lcm と gcd(0, a) = a', anchor: many-numbers}

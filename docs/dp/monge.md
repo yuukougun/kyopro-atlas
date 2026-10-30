@@ -20,7 +20,7 @@ signs:
 acl: []
 verify: [min_plus_convolution_convex_arbitrary, min_plus_convolution_convex_convex]
 frequency: B
-frequency_evidence: recent 1（abc458_g）・前提として 1 ページに届く（直接 1）・古い ABC 2 問
+frequency_evidence: recent 1（abc458_g）・前提として届くページなし・古い ABC 2 問
 sections:
   - {title: Monge 性の定義と確かめ方, anchor: definition}
   - {title: monotone minima（分割統治で O(N log N)）, anchor: monotone-minima}

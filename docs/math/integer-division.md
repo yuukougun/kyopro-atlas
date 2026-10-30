@@ -21,7 +21,7 @@ signs:
 acl: []
 verify: []
 frequency: A
-frequency_evidence: recent 1（abc460_e）・前提として 67 ページに届く（直接 6）・古い ABC 6 問
+frequency_evidence: recent 1（abc460_e）・前提として 66 ページに届く（直接 6）・古い ABC 6 問
 sections:
   - {title: C++ の / と % と、数学の floor・mod の違い, anchor: cpp-vs-math}
   - {title: 負の数でも正しい floor_div・ceil_div・safe_mod, anchor: floor-ceil}

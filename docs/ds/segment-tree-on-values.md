@@ -21,7 +21,7 @@ signs:
 acl: [segtree, fenwick_tree]
 verify: [point_set_range_composite_large_array]
 frequency: B
-frequency_evidence: recent 0・前提として 2 ページに届く（直接 1）・古い ABC 5 問
+frequency_evidence: recent 0・前提として 2 ページに届く（直接 1）・古い ABC 7 問
 sections:
   - {title: 値を添字にする（個数・和を載せる）と座標圧縮, anchor: index-by-value}
   - {title: DP の値を値の添字で持つ, anchor: dp-on-values}
