@@ -11,13 +11,16 @@ Chrome が要るので CI では動かさない。公開の前に手元で流す
   python3 tools/render_pages.py DIR/site --page bfs --page graph/dijkstra
                                                         そのページだけ（id・URL のパス・docs/ のパス。くり返し・カンマ区切り可）
   python3 tools/render_pages.py DIR/site --field graph  その分野（URL の最初のフォルダ。lists・index も可）のページだけ
+  python3 tools/render_pages.py DIR/site --changed      git で変わったファイルに関わるページだけ（既定は origin/main との分かれ目
+                                                        からの変更と、コミットしていない変更・追跡していないファイル。下の「変えたページ」）
+  python3 tools/render_pages.py DIR/site --changed main その ref との分かれ目（merge-base）から。--page・--field と合わせると、どれかに当たるページ
   python3 tools/render_pages.py DIR/site --json DIR/render.json
                                                         指摘の一覧とページごとの数を JSON に書く
   python3 tools/render_pages.py DIR/site --docs DIR/src/docs
                                                         指摘に添える元の Markdown を探す docs/（既定はリポジトリ。別の木からビルドしたとき）
   python3 tools/render_pages.py DIR/site --width 360,390 --scheme dark
                                                         幅（px。くり返し・カンマ区切り可。既定 390）と配色（light・dark。既定は両方）
-  python3 tools/render_pages.py DIR/site -j 8           同時に開く Chrome の数（既定 4）
+  python3 tools/render_pages.py DIR/site -j 8           同時に開くタブの数（既定 4。Chrome は 1 つ）
   python3 tools/render_pages.py DIR/site -v             警告も全件を出す（既定は種類ごとに 3 件と件数）
   python3 tools/render_pages.py DIR/site --chrome PATH  Chrome の場所（既定は render_svg.py と同じ探し方：~/.cache/puppeteer の
                                                         chrome-headless-shell、なければ chrome、環境変数 CHROME）
@@ -27,10 +30,23 @@ Chrome が要るので CI では動かさない。公開の前に手元で流す
 sitemap.xml のオリジンが違うので instant navigation は働かないが、1 ページずつ開くので要らない。ページは DIR の index.html
 （と 404.html）のすべて。日本語のフォントは render_svg.py と同じく、fontconfig になければ WSL の Windows のフォントを足す。
 
+Chrome の使い方: Chrome は 1 つだけ起動し、-j 個のタブを並べて開く。タブは 1 ページ・1 つの幅ごとに、新しい browser context
+（別のプロファイルのようなもの。localStorage・キャッシュも別）の中に開き、調べ終えたら context ごと閉じる。同じタブで
+開き直し続けると描画のプロセスにメモリがたまり、425 ページで Chrome 1 つが約 6GB になった（#100）。api.github.com は
+名前を引けないようにして止める（Network の domain を使わないので、通信の中身を Chrome にためない）。
+
 1 ページの調べ方: 画面を幅 W・高さ 844 のスマートフォン（mobile）にし、配色（prefers-color-scheme）を合わせて開く。
-読み込みの後、数式（KaTeX の印 data-kp-rendered）・動く図（図か .kp-viz__error）・Mermaid・画像・フォントを待ち
-（数式・動く図・画像は 8 秒、Mermaid は 15 秒まで）、折りたたみ（details）を開き、タブの中身をすべて見せてから測る
+読み込みの後、数式（KaTeX の印 data-kp-rendered）・動く図（図か .kp-viz__error）・ロードマップの集計の表
+（.kp-roadmap-stats）・Mermaid・画像・フォントを待ち（検査を始めてからの合計で、数式・動く図・集計・画像は 8 秒、
+Mermaid は 15 秒まで。配色を替えて調べ直すときは、そこから数え直す）、折りたたみ（details）を開き、タブの中身を
+すべて見せてから測る
 （閉じた中身は読者が開いたときの形で見る。指摘に「折りたたみの中」「タブの中」と添える）。
+同じ幅のほかの配色は、読み込み直さずに prefers-color-scheme だけを替え、Material が data-md-color-scheme を替え終わるのを
+待って調べ直す（mkdocs.yml の palette の最初が「システムの設定に従う」で、localStorage に選んだ配色がなければ Material は
+prefers-color-scheme の変化に合わせて配色を替える。context が毎回新しいので、選んだ配色が残ることはない）。読み込みの間の
+JS のエラーは、同じ読み込みで調べたどの配色にも数える（読み込み直していた版と同じく、どの回にも出る）。
+2 回目からの配色は読み込みから時間がたってから調べるので、待たずに後から作られる中身は、1 回目にはまだなく 2 回目には
+あることがある。そのため、graph.json を読んでから作るロードマップの集計の表（.kp-roadmap-stats）も 8 秒まで待つ。
 
 エラー（公開すると崩れて見える）
   KaTeX のエラー        .katex-error（構文の誤りで、数式の全体が赤字になる。#31）。title の KaTeX の文を添える。
@@ -46,7 +62,8 @@ sitemap.xml のオリジンが違うので instant navigation は働かないが
   動く図のエラー        .kp-viz__error の文（#51）。描けた図は全ステップを送り、「図を描けなかった」が出たステップを出す
   描かれない動く図      待っても図も .kp-viz__error も出ない
   読めない画像          <img> の読み込みが終わらない、または naturalWidth が 0 で decode できない
-  開けないページ        読み込みが終わらない・検査の JS が止まった（Chrome を起動し直して 1 回だけやり直す）
+  開けないページ        読み込みが終わらない・検査の JS が止まった（タブを開き直して 1 回だけやり直す。Chrome が答えなければ
+                        Chrome を起動し直す。そのとき同時に開いていたほかのタブも 1 回やり直しになる）
 警告（読めるが直したい）
   画面の幅を超える別行の数式
                         数式の右端（.katex-html の .base の右端）が、入れ物 div.arithmatex の見える右端（左端 + clientWidth）を
@@ -59,6 +76,18 @@ sitemap.xml のオリジンが違うので instant navigation は働かないが
                         pre.mermaid が残る。Material は Mermaid を unpkg.com から読むので、ネットワークがないときにも出る
   JS のエラー           例外・console.error・読み込めないファイル（Log の error）。読み込みの失敗は配ったサイトの URL のものだけを
                         数え、URL はサイトの中のパスに縮める。Material が星の数を取る api.github.com は止めておく
+変えたページ（--changed）: git の差分のファイルから、描き直すページを選ぶ（changed_pages）。
+  docs/<…>.md               そのページ（gen_site.py の生成物も docs/ にあるので、台帳 data/ の変更は生成物の差分で拾う）
+  snippets/<id>/…           id が <id> のページと、本文にそのファイル（snippets/ からのパス）を書いたページ
+  docs/img/<id>/…           id が <id> のページと、本文にそのファイル（img/<id>/…）を書いたページ
+  docs/img/ の直下のファイル  本文にそのファイル（img/<名前>）を書いたページだけ
+  overrides/assets/js/viz/<名前>.js    本文に data-viz="<名前>" を書いたページ
+  map.js・filter.js・graph.json        使う部品（kp-map・kp-filter・kp-roadmap-stats・kp-wishlist）を本文に書いたページ
+  overrides/404.html        404.html
+  共有のファイル            mkdocs.yml・nav.yml・overrides/ のほかのファイル（main.html・kp.css・katex-init.js・viz.js・
+                            progress.js・vendor/）・docs/ の Markdown と画像のほかのファイル・pyproject.toml・uv.lock。
+                            どのページにも効くので、変わったファイルを知らせて全ページを流す
+  そのほか（tools/・tests/・planning/・data/・docs/llms.txt など）はサイトの見た目を変えないので見ない
 同じ要素の同じ指摘が幅・配色の違う回に出たときは 1 件にまとめ、出た回を添える（例：［390 ライト・390 ダーク］）。ページの横ずれ・
 別行の数式・表は文に px の数が入るので、幅が違えば別の件になる。同じ回の中の、文が同じ別の要素（見出しの行と幅が同じ表など）は
 まとめない（回の中で同じ文の何番目かで、ほかの回と突き合わせる）。
@@ -101,7 +130,7 @@ CLEAR_FRAC = 0.5             # 縁の 1 行・1 列のうち、これより多�
 # KaTeX が描けない命令を描く赤（errorColor の既定 #cc0000 の、計算した色）。katex-init.js は errorColor を変えない
 # （変えたらここも変える。試験が katex-init.js と同梱の KaTeX の既定を確かめる）
 KATEX_ERROR_COLOR = "rgb(204, 0, 0)"
-BLOCKED_URLS = ["*://api.github.com/*"]   # Material がリポジトリの情報を取る。Chrome ごとに呼ぶと回数の制限にかかるので止める
+BLOCKED_HOSTS = ["api.github.com"]   # Material がリポジトリの情報を取る。ページごとに呼ぶと回数の制限にかかるので止める
 SCHEME_NAMES = {"light": "ライト", "dark": "ダーク"}
 SCHEME_ATTR = {"light": "default", "dark": "slate"}      # Material の data-md-color-scheme
 
@@ -148,20 +177,29 @@ async (cfg) => {
     return s.length > n ? s.slice(0, n - 1) + "…" : s;
   };
 
-  // 1. 描き終わるのを待つ
+  // 1. 描き終わるのを待つ（同じ読み込みで配色を替えて調べ直すときは、Material が配色を替え終わるのも待つ）
   const waited = {};
+  if (cfg.scheme && document.body && document.body.hasAttribute("data-md-color-scheme")) {
+    await until(() => document.body.getAttribute("data-md-color-scheme") === cfg.scheme, cfg.wait);   // 替わらなければ注意に出る
+  }
   waited.math = await until(() => !window.katex || all(".arithmatex").every((e) => e.dataset.kpRendered), cfg.wait);
   waited.viz = await until(() => all(".kp-viz[data-viz]").every((e) => e.querySelector(".kp-viz__svg, .kp-viz__error")), cfg.wait);
+  // ロードマップの集計（progress.js が graph.json を読んでから表を作る。読めなければ data-kp-mounted を空にして文を出す）。
+  // 置いたページでだけ待つ。waited には足さない（JSON の形を変えない）
+  await until(() => all(".kp-roadmap-stats").every((e) => e.querySelector("table") || e.dataset.kpMounted === ""), cfg.wait);
   waited.mermaid = await until(() => !document.querySelector("pre.mermaid"), cfg.waitMermaid);
   all('img[loading="lazy"]').forEach((i) => { i.loading = "eager"; });
   waited.img = await until(() => all("img").every((i) => i.complete), cfg.wait);
 
-  // 2. 閉じた中身を見せる（折りたたみを開き、タブの中身をすべて出す）
-  const closed = all("details:not([open])");
-  closed.forEach((d) => { d.open = true; });
-  const style = document.createElement("style");
-  style.textContent = ".md-typeset .tabbed-set > .tabbed-content > .tabbed-block { display: block !important; }";
-  document.head.appendChild(style);
+  // 2. 閉じた中身を見せる（折りたたみを開き、タブの中身をすべて出す）。調べ直すときは、最初に閉じていたものを使う
+  if (!window.__kpClosed) {
+    window.__kpClosed = all("details:not([open])");
+    window.__kpClosed.forEach((d) => { d.open = true; });
+    const style = document.createElement("style");
+    style.textContent = ".md-typeset .tabbed-set > .tabbed-content > .tabbed-block { display: block !important; }";
+    document.head.appendChild(style);
+  }
+  const closed = window.__kpClosed;
   try { await document.fonts.ready; } catch (e) { /* 測るのは続ける */ }
   await frames();
 
@@ -531,30 +569,40 @@ class Tab:
 NO_PROXY = urllib.request.build_opener(urllib.request.ProxyHandler({}))
 
 
+@dataclass
+class Page:
+    """使い捨てのタブ（1 ページ・1 つの幅）。browser context ごと閉じる。"""
+    tab: Tab
+    context: str                   # Target.createBrowserContext の browserContextId
+    scheme: str | None = None      # いま合わせている prefers-color-scheme
+
+
 class Browser:
-    """ヘッドレスの Chrome を 1 つ起動し、空のページにつなぐ。プロファイルは一時フォルダ（閉じると消す）。"""
+    """ヘッドレスの Chrome を 1 つ起動し、browser の target につなぐ。プロファイルは一時フォルダ（閉じると消す）。
+
+    ページは open_page で新しい browser context の中のタブに開き、close_page で context ごと閉じる（描画のプロセスも
+    終わるので、メモリがたまらない）。browser との会話は 1 本の WebSocket なので、スレッドの間で lock を取る。
+    タブとは、タブごとの WebSocket（/devtools/page/<targetId>）で話す。"""
 
     def __init__(self, chrome: Path, env: dict[str, str] | None, work: Path):
         self.dir = Path(tempfile.mkdtemp(prefix="chrome-", dir=work))
         self.log = open(self.dir / "chrome.log", "wb")
+        rules = ",".join(f"MAP {h} ~NOTFOUND" for h in BLOCKED_HOSTS)
         args = [str(chrome), "--headless", "--disable-gpu", "--no-sandbox", "--hide-scrollbars", "--no-first-run",
                 "--no-default-browser-check", "--disable-extensions", "--mute-audio",
                 "--disable-background-timer-throttling", "--disable-renderer-backgrounding",
-                "--disable-backgrounding-occluded-windows", f"--user-data-dir={self.dir / 'profile'}",
+                "--disable-backgrounding-occluded-windows", f"--host-resolver-rules={rules}",
+                f"--user-data-dir={self.dir / 'profile'}",
                 "--remote-debugging-port=0", f"--window-size=390,{HEIGHT}", "about:blank"]
         self.proc = subprocess.Popen(args, stdin=subprocess.DEVNULL, stdout=self.log, stderr=self.log, env=env,
                                      start_new_session=True)      # 閉じるときに子のプロセスもまとめて止める
-        self.tab: Tab | None = None
+        self.conn: Tab | None = None
+        self.lock = threading.Lock()
         self.closed = False
         try:
-            port = self._port()
-            with NO_PROXY.open(f"http://127.0.0.1:{port}/json/list", timeout=10) as r:
-                targets = json.load(r)
-            page = next(t for t in targets if t.get("type") == "page")
-            self.tab = Tab(page["webSocketDebuggerUrl"])
-            for m in ("Page.enable", "Runtime.enable", "Log.enable", "Network.enable"):
-                self.tab.call(m)
-            self.tab.call("Network.setBlockedURLs", {"urls": BLOCKED_URLS})
+            self.port = self._port()
+            with NO_PROXY.open(f"http://127.0.0.1:{self.port}/json/version", timeout=10) as r:
+                self.conn = Tab(json.load(r)["webSocketDebuggerUrl"])
         except BaseException:
             self.close()
             raise
@@ -576,13 +624,49 @@ class Browser:
             time.sleep(0.05)
         raise RuntimeError("Chrome が 30 秒で起動しない")
 
+    def call(self, method: str, params: dict | None = None) -> dict:
+        """browser への命令。来たイベントは使わないので捨てる。"""
+        with self.lock:
+            if self.conn is None:
+                raise ConnectionError("Chrome を閉じた")
+            try:
+                return self.conn.call(method, params)
+            finally:
+                self.conn.events.clear()
+
+    def open_page(self) -> Page:
+        """新しい browser context にタブを 1 つ開いてつなぐ。"""
+        ctx = self.call("Target.createBrowserContext", {"disposeOnDetach": True})["browserContextId"]
+        try:
+            tid = self.call("Target.createTarget", {"url": "about:blank", "browserContextId": ctx})["targetId"]
+            tab = Tab(f"ws://127.0.0.1:{self.port}/devtools/page/{tid}")
+        except BaseException:
+            self.call("Target.disposeBrowserContext", {"browserContextId": ctx})
+            raise
+        page = Page(tab, ctx)
+        try:
+            for m in ("Page.enable", "Runtime.enable", "Log.enable"):
+                tab.call(m)
+        except BaseException:
+            self.close_page(page)
+            raise
+        return page
+
+    def close_page(self, page: Page) -> None:
+        """タブを context ごと閉じる。Chrome が答えなければ例外（呼んだ側が Chrome を起動し直す）。"""
+        try:
+            page.tab.close()
+        except OSError:
+            pass
+        self.call("Target.disposeBrowserContext", {"browserContextId": page.context})
+
     def close(self) -> None:
         if self.closed:
             return
         self.closed = True
-        if self.tab:
+        if self.conn:
             try:
-                self.tab.close()
+                self.conn.close()
             except OSError:
                 pass
         if self.proc.poll() is None:
@@ -707,6 +791,89 @@ def select_pages(pages: list[SitePage], want_pages: list[str], want_fields: list
     return [p for p in pages if p.path in keep]
 
 
+# ---------------------------------------------------------------- 変えたページ（--changed）
+
+# サイトの見た目を変えない（見ない）もの。ここにも下の SHARED にも当たらないものも見ない
+SHARED = ("mkdocs.yml", "nav.yml", "pyproject.toml", "uv.lock")     # どのページにも効くファイル
+# 部品の JS・データ → それを置いたページの本文の印（overrides/assets/ からのパス）
+PARTS = {
+    "js/map.js": ('id="kp-map"',),
+    "js/filter.js": ('class="kp-filter"', 'id="kp-map"'),         # 知識マップも使う
+    "data/graph.json": ('id="kp-map"', 'class="kp-roadmap-stats"', 'class="kp-wishlist"'),
+}
+
+
+def git_changed(top: Path, ref: str) -> tuple[list[str], str]:
+    """top のリポジトリで、ref との分かれ目（merge-base）から変わったファイル（コミットしていない変更・追跡していない
+    ファイルも。消したもの・名前を変えたものは両方の名前）。(top からのパス, 分かれ目の短い名前)。使えなければ SystemExit。"""
+    def git(*a: str) -> str:
+        cp = subprocess.run(["git", "-C", str(top), *a], capture_output=True, text=True)
+        if cp.returncode:
+            sys.exit(f"--changed: git {' '.join(a)} が失敗した（{cp.stderr.strip()}）")
+        return cp.stdout
+    try:
+        mb = git("merge-base", "HEAD", ref).strip()
+    except FileNotFoundError:
+        sys.exit("--changed: git がない")
+    files = git("diff", "--name-only", "--no-renames", "-z", mb).split("\0")
+    files += git("ls-files", "--others", "--exclude-standard", "-z").split("\0")
+    return sorted({f for f in files if f}), mb[:9]
+
+
+def changed_pages(files: list[str], pages: list[SitePage], docs: Path) -> tuple[list[str], list[str]]:
+    """変わったファイル（リポジトリの根からのパス）から、描き直すページを選ぶ（docstring の「変えたページ」）。
+    (ページのパス, 共有のファイル)。共有のファイルが 1 つでもあれば、ページは全部。docs はページの Markdown を読む場所。"""
+    ids: dict[str, list[str]] = collections.defaultdict(list)
+    for p in pages:
+        ids[aliases(p)[1]].append(p.path)
+    texts: dict[str, str] = {}
+
+    def text(p: SitePage) -> str:
+        if p.path not in texts:
+            try:
+                texts[p.path] = (docs / p.source[len("docs/"):]).read_text(encoding="utf-8") if p.source else ""
+            except OSError:
+                texts[p.path] = ""
+        return texts[p.path]
+
+    def citing(*marks: str) -> set[str]:
+        return {p.path for p in pages if any(m in text(p) for m in marks)}
+
+    keep: set[str] = set()
+    shared = []
+    for f in files:
+        parts = f.split("/")
+        if f in SHARED:
+            shared.append(f)
+        elif parts[0] == "docs":
+            rel = "/".join(parts[1:])
+            if f.endswith(".md"):
+                keep |= {p.path for p in pages if p.source == f}
+            elif parts[1:2] == ["img"]:
+                keep |= set(ids.get(parts[2], [])) if len(parts) > 3 else set()
+                keep |= citing(rel)
+            elif f != "docs/llms.txt":
+                shared.append(f)
+        elif parts[0] == "snippets" and len(parts) > 1:
+            rel = "/".join(parts[1:])
+            if len(parts) > 2:
+                keep |= set(ids.get(parts[1], []))
+            keep |= citing(f'"{rel}', f"'{rel}")
+        elif parts[0] == "overrides":
+            rel = "/".join(parts[2:]) if parts[1:2] == ["assets"] else None
+            if f == "overrides/404.html":
+                keep |= {p.path for p in pages if p.path == "404.html"}
+            elif rel and rel.startswith("js/viz/") and rel.endswith(".js") and rel.count("/") == 2:
+                keep |= citing(f'data-viz="{Path(rel).stem}"')
+            elif rel in PARTS:
+                keep |= citing(*PARTS[rel])
+            else:
+                shared.append(f)
+    if shared:
+        return [p.path for p in pages], shared
+    return [p.path for p in pages if p.path in keep], []
+
+
 # ---------------------------------------------------------------- 1 ページを調べる
 
 
@@ -755,18 +922,31 @@ def console_errors(events: list[dict], base: str) -> list[str]:
     return seen
 
 
-def visit(tab: Tab, url: str, v: Variant, base: str, timeout: float) -> dict:
-    """1 ページを 1 つの幅・配色で開いて調べる。開けなければ {"failed": 理由}。"""
+def load(page: Page, url: str, v: Variant, timeout: float) -> str | None:
+    """タブに 1 ページを 1 つの幅・配色で読み込む。開けなければその理由。"""
+    tab = page.tab
     tab.call("Emulation.setDeviceMetricsOverride", {"width": v.width, "height": HEIGHT, "deviceScaleFactor": 1,
                                                     "mobile": v.width < 600})
     tab.call("Emulation.setEmulatedMedia", {"features": [{"name": "prefers-color-scheme", "value": v.scheme}]})
+    page.scheme = v.scheme
     tab.events.clear()
     nav = tab.call("Page.navigate", {"url": url}, timeout=timeout)
     if nav.get("errorText"):
-        return {"failed": f"開けない（{nav['errorText']}）"}
+        return f"開けない（{nav['errorText']}）"
     tab.wait_event("Page.loadEventFired", timeout)
+    return None
+
+
+def probe(page: Page, v: Variant, base: str, timeout: float) -> dict:
+    """読み込んだページを配色 v.scheme で調べる。配色が違えば prefers-color-scheme だけを替えて調べ直す。
+    開けなければ {"failed": 理由}。JS のエラーは読み込みからのすべて（同じ読み込みのどの配色にも数える）。"""
+    tab = page.tab
+    again = page.scheme != v.scheme
+    if again:
+        tab.call("Emulation.setEmulatedMedia", {"features": [{"name": "prefers-color-scheme", "value": v.scheme}]})
+        page.scheme = v.scheme
     cfg = {"wait": WAIT_MS, "waitMermaid": WAIT_MERMAID_MS, "leak": LEAK_RE, "maxCulprits": MAX_CULPRITS,
-           "clearFrac": CLEAR_FRAC, "errorColor": KATEX_ERROR_COLOR}
+           "clearFrac": CLEAR_FRAC, "errorColor": KATEX_ERROR_COLOR, "scheme": SCHEME_ATTR[v.scheme] if again else None}
     r = tab.call("Runtime.evaluate", {"expression": f"({PROBE})({json.dumps(cfg)})", "awaitPromise": True,
                                       "returnByValue": True},
                  timeout=timeout + max(WAIT_MS, WAIT_MERMAID_MS) / 1000)
@@ -781,6 +961,10 @@ def visit(tab: Tab, url: str, v: Variant, base: str, timeout: float) -> dict:
     return res
 
 
+class Stopped(Exception):
+    """止めた（Ctrl-C・kill）ので、worker を終える。"""
+
+
 @dataclass
 class Context:
     chrome: Path
@@ -792,57 +976,101 @@ class Context:
     stop: threading.Event = field(default_factory=threading.Event)
     done: int = 0
     lock: threading.Lock = field(default_factory=threading.Lock)
-    live: set = field(default_factory=set)        # 動いている Browser（止めたときにまとめて閉じる）
+    browser: Browser | None = None                 # 動いている Chrome（1 つ）
+    starting: threading.Lock = field(default_factory=threading.Lock)
 
-    def open_browser(self) -> Browser:
-        b = Browser(self.chrome, self.env, self.work)
-        with self.lock:
-            self.live.add(b)
-        return b
+    def current(self) -> Browser:
+        """動いている Chrome。なければ起動する。"""
+        with self.starting:
+            if self.stop.is_set():
+                raise Stopped
+            if self.browser is None:
+                self.browser = Browser(self.chrome, self.env, self.work)
+            return self.browser
 
-    def close_browser(self, b: Browser) -> None:
-        with self.lock:
-            self.live.discard(b)
-        b.close()
+    def restart(self, old: Browser) -> None:
+        """old が答えないので閉じる（次の current で起動し直す）。ほかの worker が先に起動し直していれば何もしない。"""
+        with self.starting:
+            if self.browser is old:
+                self.browser = None
+                old.close()
+
+    def close(self) -> None:
+        with self.starting:
+            b, self.browser = self.browser, None
+        if b:
+            b.close()
 
 
-def worker(ctx: Context, browser: Browser | None, tasks: queue.Queue, results: dict, progress) -> None:
+def check_page(ctx: Context, url: str) -> list[tuple[Variant, dict]]:
+    """1 ページを ctx.variants で調べる。幅ごとに 1 回読み込み、配色は読み込み直さずに替える。
+    開けない回は、タブを開き直して 1 回だけやり直す（Chrome が答えなければ Chrome を起動し直す）。"""
+    out = []
+    for width in dict.fromkeys(v.width for v in ctx.variants):
+        pending = [v for v in ctx.variants if v.width == width]
+        tries: collections.Counter = collections.Counter()
+        browser: Browser | None = None
+        page: Page | None = None
+
+        def drop() -> None:
+            nonlocal page
+            if page is not None and browser is not None:
+                try:
+                    browser.close_page(page)
+                except OSError:                     # 時間切れ・接続が切れた：Chrome が答えないので起動し直す
+                    ctx.restart(browser)
+                except (CDPError, ValueError):      # 閉じる命令だけが失敗した：ほかのタブは巻き込まない
+                    pass
+            page = None
+        try:
+            while pending:
+                v = pending[0]
+                try:
+                    if page is None:
+                        browser = ctx.current()
+                        try:
+                            page = browser.open_page()
+                        except OSError:             # 時間切れ・接続が切れた。CDP のエラーはこのタブだけのやり直しにする
+                            ctx.restart(browser)
+                            raise
+                        failed = load(page, url, v, ctx.timeout)
+                        res = {"failed": failed} if failed else probe(page, v, ctx.base, ctx.timeout)
+                    else:
+                        res = probe(page, v, ctx.base, ctx.timeout)
+                except (OSError, RuntimeError, ValueError, KeyError) as e:   # 接続・時間切れ・CDP・JSON
+                    if ctx.stop.is_set():
+                        raise Stopped from e
+                    res = {"failed": f"{type(e).__name__}: {e}"}
+                if "failed" in res:
+                    drop()
+                    tries[v] += 1
+                    if tries[v] < 2:
+                        continue
+                out.append((v, res))
+                pending.pop(0)
+        finally:
+            drop()
+    return out
+
+
+def worker(ctx: Context, tasks: queue.Queue, results: dict, progress) -> None:
     try:
         while not ctx.stop.is_set():
             try:
                 page = tasks.get_nowait()
             except queue.Empty:
                 return
-            out = []
-            for v in ctx.variants:
-                res: dict = {}
-                for _ in range(2):                      # 開けなければ Chrome を起動し直して 1 回だけやり直す
-                    try:
-                        if browser is None:
-                            browser = ctx.open_browser()
-                        res = visit(browser.tab, ctx.base + page.path, v, ctx.base, ctx.timeout)
-                    except (OSError, RuntimeError, ValueError, StopIteration) as e:   # 接続・時間切れ・CDP・JSON
-                        if ctx.stop.is_set():
-                            return
-                        res = {"failed": f"{type(e).__name__}: {e}"}
-                        if browser:
-                            ctx.close_browser(browser)
-                            browser = None
-                    if "failed" not in res:
-                        break
-                out.append((v, res))
-            results[page.path] = out
+            results[page.path] = check_page(ctx, ctx.base + page.path)
             with ctx.lock:
                 ctx.done += 1
                 progress(ctx.done)
-    finally:
-        if browser:
-            ctx.close_browser(browser)
+    except Stopped:
+        return
 
 
 def run(site: Path, pages: list[SitePage], variants: list[Variant], chrome: Path, jobs: int, timeout: float,
         work: Path, env: dict[str, str] | None, progress=lambda n: None) -> dict[str, list[tuple[Variant, dict]]]:
-    """pages を variants で開いて調べる。{ページのパス: [(Variant, 結果)]}。"""
+    """pages を variants で開いて調べる。Chrome は 1 つで、jobs 個のタブを並べる。{ページのパス: [(Variant, 結果)]}。"""
     server, base = serve(site, site_prefix(site))
     ctx = Context(chrome, env, work, base, variants, timeout)
     tasks: queue.Queue = queue.Queue()
@@ -852,9 +1080,9 @@ def run(site: Path, pages: list[SitePage], variants: list[Variant], chrome: Path
     n = max(1, min(jobs, len(pages)))
     threads = []
     try:
-        browsers = [ctx.open_browser() for _ in range(n)]   # 先に起動して、起動できないことをすぐに知らせる
-        for b in browsers:
-            t = threading.Thread(target=worker, args=(ctx, b, tasks, results, progress), daemon=True)
+        ctx.current()                                   # 先に起動して、起動できないことをすぐに知らせる
+        for _ in range(n):
+            t = threading.Thread(target=worker, args=(ctx, tasks, results, progress), daemon=True)
             t.start()
             threads.append(t)
         for t in threads:
@@ -862,10 +1090,7 @@ def run(site: Path, pages: list[SitePage], variants: list[Variant], chrome: Path
                 t.join(0.2)
     finally:
         ctx.stop.set()
-        with ctx.lock:
-            live = list(ctx.live)
-        for b in live:                                  # 途中で止めたとき（Ctrl-C）。ソケットが切れて worker も終わる
-            b.close()
+        ctx.close()                                     # 途中で止めたとき（Ctrl-C）。ソケットが切れて worker も終わる
         for t in threads:
             t.join(10)
         server.shutdown()
@@ -1043,20 +1268,29 @@ def parse_list(values: list[str]) -> list[str]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("site", type=Path, help="ビルドしたサイトのフォルダ（mkdocs build -d の先。index.html と sitemap.xml がある）")
+    parser.add_argument("site", type=Path, nargs="?", help="ビルドしたサイトのフォルダ（mkdocs build -d の先。index.html と sitemap.xml がある）")
     parser.add_argument("--page", action="append", default=[], help="そのページだけ（id・URL のパス・docs/ のパス。くり返し・カンマ区切り可）")
     parser.add_argument("--field", action="append", default=[], help="その分野のページだけ（URL の最初のフォルダ。くり返し・カンマ区切り可）")
+    parser.add_argument("--changed", nargs="?", const="origin/main", metavar="REF",
+                        help="git で変わったファイルに関わるページだけ（REF との分かれ目から。既定 origin/main。"
+                             "コミットしていない変更・追跡していないファイルも。REF は --changed=REF とも書ける。"
+                             "--changed DIR/site のようにフォルダが続いたら、それをサイトとみなす）")
     parser.add_argument("--json", type=Path, help="結果を書く JSON のファイル")
     parser.add_argument("--docs", type=Path, default=ROOT / "docs",
                         help="指摘に添える元の Markdown を探す docs/（既定はリポジトリ。別の木からビルドしたとき）")
     parser.add_argument("--width", action="append", default=[], help="画面の幅（px。くり返し・カンマ区切り可。既定 390）")
     parser.add_argument("--scheme", action="append", default=[], help="配色 light・dark（くり返し・カンマ区切り可。既定は両方）")
-    parser.add_argument("-j", "--jobs", type=int, default=4, help="同時に開く Chrome の数（既定 4）")
+    parser.add_argument("-j", "--jobs", type=int, default=4, help="同時に開くタブの数（既定 4。Chrome は 1 つ）")
     parser.add_argument("--timeout", type=float, default=30.0, help="1 ページの読み込みを待つ秒数（既定 30）")
     parser.add_argument("--chrome", help="Chrome の実行ファイル")
     parser.add_argument("--strict", action="store_true", help="警告があっても終了コード 1")
     parser.add_argument("-v", "--verbose", action="store_true", help="警告も全件を出す")
     args = parser.parse_args()
+    if args.site is None:          # --changed DIR/site と書くと、サイトが REF に入る
+        if args.changed and Path(args.changed).expanduser().is_dir():
+            args.site, args.changed = Path(args.changed), "origin/main"
+        else:
+            parser.error("ビルドしたサイトのフォルダ（site）がない")
 
     site = args.site.expanduser().resolve()
     if not (site / "index.html").is_file():
@@ -1071,7 +1305,35 @@ def main() -> None:
     if bad := [s for s in schemes if s not in SCHEME_NAMES]:
         sys.exit(f"--scheme は light か dark（{'・'.join(bad)} は使えない）")
     variants = [Variant(w, s) for w in dict.fromkeys(widths) for s in dict.fromkeys(schemes)]
-    pages = select_pages(list_pages(site, args.docs.expanduser()), parse_list(args.page), parse_list(args.field))
+    docs = args.docs.expanduser().resolve()
+    every = list_pages(site, docs)
+    want_pages, want_fields = parse_list(args.page), parse_list(args.field)
+    pages = select_pages(every, want_pages, want_fields)
+    if args.changed is not None:
+        try:
+            cp = subprocess.run(["git", "-C", str(docs), "rev-parse", "--show-toplevel"], capture_output=True, text=True)
+        except FileNotFoundError:
+            sys.exit("--changed: git がない")
+        if cp.returncode or not cp.stdout.strip():
+            sys.exit(f"--changed: {docs} が git のリポジトリの中にない（--docs の木の差分を見る）")
+        files, mb = git_changed(Path(cp.stdout.strip()), args.changed)
+        paths, shared = changed_pages(files, every, docs)
+        if shared:
+            print(f"--changed: 共有のファイルが変わったので全ページを流す（{'・'.join(shared[:5])}"
+                  f"{f' ほか {len(shared) - 5}' if len(shared) > 5 else ''}）")
+        keep = set(paths) | ({p.path for p in pages} if want_pages or want_fields else set())
+        pages = [p for p in every if p.path in keep]
+        if not shared:
+            names = "・".join(p.rstrip("/") or "/" for p in paths) if 0 < len(paths) <= 10 else ""
+            print(f"--changed: {args.changed}（分かれ目 {mb}）から変わった {len(files)} ファイルに関わるページ {len(paths)}"
+                  + (f"（{names}）" if names else ""))
+        if not pages:
+            print("--changed: 調べるページがない（Chrome は起動しない）")
+            if args.json:          # 前の結果を新しいものと取り違えないよう、空の結果を書く
+                found = render_svg.find_chrome(args.chrome)
+                report_json(args.json.expanduser(), site, found or "", variants, [], {}, [], [], 0.0)
+                print(f"JSON: {args.json}")
+            sys.exit(0)
     if not pages:
         sys.exit(f"{site} に調べるページがない")
     chrome = render_svg.find_chrome(args.chrome)
@@ -1089,7 +1351,7 @@ def main() -> None:
         elif n % 50 == 0 or n == total:
             print(f"  … {n}/{total} ページ", file=sys.stderr, flush=True)
 
-    print(f"ページ {total}・{'／'.join(v.label for v in variants)}・Chrome {max(1, min(args.jobs, total))} 個（{chrome}）")
+    print(f"ページ {total}・{'／'.join(v.label for v in variants)}・タブ {max(1, min(args.jobs, total))} 個（{chrome}）")
     t0 = time.monotonic()
     with tempfile.TemporaryDirectory(prefix="kp-render-pages-") as tmp:
         env, note = render_svg.font_env(Path(tmp))
