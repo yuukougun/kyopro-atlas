@@ -27,7 +27,7 @@ sections:
   - {title: 同じ値があれば偶奇を調整できる, anchor: duplicates}
   - {title: ちょうど K 回の操作で作れるもの, anchor: exactly-k}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -154,12 +154,6 @@ $K = 10^{100}$ のように十分大きいときは、最小回数の条件は�
 
 **$N$ が小さいときの扱い**。$N \le 2$ では 3 要素の巡回ができず、$N = 1$ では swap もできない。「ちょうど $K$ 回の swap」で $N = 1$ なら、$K \ge 1$ のとき操作そのものができない。境界を判定の前に分けるか、定義に従って小さい場合を全探索で確かめる。
 
-## 使い分け {#comparison}
-
-- 並べ替えの最小回数を問うなら、任意の swap は[巡回分解](../comb/permutation-cycles.md)、隣接 swap は[転倒数](../ds/inversion-number.md)で求める。偶奇はどちらの最小回数とも一致する
-- 置換に限らず、操作で変わらない量から必要条件を見つける一般の考え方は[不変量](../thinking/invariant.md)にある
-- ゲームで総手数の偶奇が決まっていて勝敗がそれで決まる形は[ゲームの基本](../comb/game-basics.md#move-parity)を見る
-
 ## 例題 {#examples}
 
 ### ABC470 F. Googol Swaps {#abc470_f}
@@ -218,6 +212,12 @@ swap できる位置の組を辺とするグラフを考えると、連結成分
 
     ??? success "答え"
         転倒数は $(3, 2)$・$(3, 1)$・$(2, 1)$ の 3 なので、隣接 swap では 3 回である。巡回は $1 \leftrightarrow 3$ と $2$ の 2 つなので、任意の swap では $3 - 2 = 1$ 回（位置 1 と 3 の swap）である。どちらも奇数で、偶奇は一致する。
+
+## 使い分け {#comparison}
+
+- 並べ替えの最小回数を問うなら、任意の swap は[巡回分解](../comb/permutation-cycles.md)、隣接 swap は[転倒数](../ds/inversion-number.md)で求める。偶奇はどちらの最小回数とも一致する
+- 置換に限らず、操作で変わらない量から必要条件を見つける一般の考え方は[不変量](../thinking/invariant.md)にある
+- ゲームで総手数の偶奇が決まっていて勝敗がそれで決まる形は[ゲームの基本](../comb/game-basics.md#move-parity)を見る
 
 ## 参考 {#references}
 

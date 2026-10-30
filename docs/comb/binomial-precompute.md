@@ -272,19 +272,6 @@ ACL に二項係数の関数はない。[modint](../math/modint.md) を使って
 - **頂点を選んで数える DP**：連結なグラフの数え上げでは、成分に入る頂点を選ぶ二項係数を DP の遷移ごとに掛ける（[連結なグラフの数え上げ](../comb/counting-labeled-graphs.md#by-size)）。
 - **確率・期待値を mod で答える**：分数の答えも、逆元を使って同じ法の値として扱う（[確率・期待値を mod 998244353 で答える](../comb/rational-mod.md)）。
 
-## 使い分け {#comparison}
-
-| 状況 | 方法 | 前計算 | 1 回 |
-| --- | --- | --- | --- |
-| $n < p$、$n \le 10^7$ 程度で何度も | fact と ifact の表 | $O(N + \log p)$ | $O(1)$ |
-| $n$ が巨大で $k$ が小さい（$k < p$） | 分子 $k$ 項の積と $k!$ の逆元 | なし | $O(k + \log p)$ |
-| 法が素数でない、$n$ が数千まで | パスカルの三角形 | $O(N^2)$ | $O(1)$ |
-| 法が小さい素数（$n \ge p$ がある） | Lucas の定理 | $O(p^2)$ | $O(\log_p n)$ |
-| 法が 2 | `(n & k) == k` | なし | $O(1)$ |
-| mod なしの正確な値 | 掛けてから割る・`__int128` | なし | $O(k)$ |
-
-同じものを含む順列 $\dfrac{n!}{a_1!\, a_2! \cdots a_m!}$ も、同じ表で $\mathrm{fact}[n] \prod \mathrm{ifact}[a_j]$ と求まる（[多項係数](../comb/multinomial-coefficient.md)）。
-
 ## 例題 {#examples}
 
 ### 鉄則本 A30. Combination {#tessoku_book_ad}
@@ -329,6 +316,19 @@ $\binom{n}{r} = \dfrac{n!}{r!\,(n-r)!}$ の分母を、$10^9 + 7$ が素数で�
 
 ??? note "力試しの方針"
     - **ABC281 G**：法が入力で与えられ素数とは限らないので、二項係数は[パスカルの三角形](#composite-mod)で作る。頂点 1 からの距離ごとに頂点を層に分け、層の大きさを状態にした DP で、層の間と層の中の辺の張り方を数えて掛ける。数え上げの本体は[連結なグラフの数え上げ](../comb/counting-labeled-graphs.md#bfs-layers)で扱う
+
+## 使い分け {#comparison}
+
+| 状況 | 方法 | 前計算 | 1 回 |
+| --- | --- | --- | --- |
+| $n < p$、$n \le 10^7$ 程度で何度も | fact と ifact の表 | $O(N + \log p)$ | $O(1)$ |
+| $n$ が巨大で $k$ が小さい（$k < p$） | 分子 $k$ 項の積と $k!$ の逆元 | なし | $O(k + \log p)$ |
+| 法が素数でない、$n$ が数千まで | パスカルの三角形 | $O(N^2)$ | $O(1)$ |
+| 法が小さい素数（$n \ge p$ がある） | Lucas の定理 | $O(p^2)$ | $O(\log_p n)$ |
+| 法が 2 | `(n & k) == k` | なし | $O(1)$ |
+| mod なしの正確な値 | 掛けてから割る・`__int128` | なし | $O(k)$ |
+
+同じものを含む順列 $\dfrac{n!}{a_1!\, a_2! \cdots a_m!}$ も、同じ表で $\mathrm{fact}[n] \prod \mathrm{ifact}[a_j]$ と求まる（[多項係数](../comb/multinomial-coefficient.md)）。
 
 ## 参考 {#references}
 

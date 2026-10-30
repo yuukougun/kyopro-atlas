@@ -84,18 +84,18 @@ updated: 2026-10-29
 | 0/1 反転・1 の個数：（1 の数, $\mathit{len}$） | 反転なら（$\mathit{len} -$ 1 の数, $\mathit{len}$） | XOR と false |
 | 0/1 反転・転倒数：（0 の数, 1 の数, 転倒数） | [反転の節](#flip) | XOR と false |
 | 0/1 反転・1 の最長の連続：0 と 1 それぞれの（接頭辞, 接尾辞, 最長）と $\mathit{len}$ | 0 と 1 の欄を入れ替える | XOR と false |
-| $-1$ 倍・区間最大：（最大, 最小） | 反転なら（$-$最小, $-$最大） | XOR と false |
+| $-1$ 倍・区間最大：（最大, 最小） | 反転なら（$-$ 最小, $-$ 最大） | XOR と false |
 | 2 列への加算・$\sum a_i b_i$：$(\Sigma a, \Sigma b, \Sigma ab, \mathit{len})$ | [等差数列の節](#arithmetic-add) | 成分ごとの和と $(0, 0)$ |
 | 等差数列の加算・区間和：（和, $\mathit{len}$, 添字の和） | $(c, d)$：和 $+ c \cdot \mathit{len} + d \cdot$ 添字の和 | 成分ごとの和と $(0, 0)$ |
 | 区間 chmin・区間最大：値。`max` と $-\infty$ | $\min(f, x)$ | $\min(f, g)$ と $+\infty$ |
 | 値の置き換え（0〜2）・転倒数：各値の個数と、各順序対の個数 | 置き換えの表 $f$ で個数を移す | 表の合成 $v \mapsto f[g[v]]$ と恒等の表 |
-| 区間代入・一次関数の合成：（左から合成した一次関数, $\mathit{len}$） | 代入する関数 $h$：$h$ を $\mathit{len}$ 回合成したもの | 「なし」なら $g$、ほかは $f$ と「なし」 |
+| 区間代入・1 次関数の合成：（左から合成した 1 次関数, $\mathit{len}$） | 代入する関数 $h$：$h$ を $\mathit{len}$ 回合成したもの | 「なし」なら $g$、ほかは $f$ と「なし」 |
 
 表の下の 3 行には補足がある。
 
 - **区間 chmin・区間最大**：$\min(f, \max(x, y)) = \max(\min(f, x), \min(f, y))$ なので条件 3 を満たす。区間の最小値でも同じである。区間の**和**とは組めない（[載らない作用](#not-applicable)）
 - **値の置き換え**：値が 0・1・2 の 3 種類なら、各値の個数 3 つと、順序対 $(u, v)$（$i < j$ で $a_i = u$、$a_j = v$）の個数 9 つを持つ（対角の $(u, u)$ は置き換えの後も対角に移るだけで転倒数にもつなぎにも使わないので、異なる値の対 6 つでもよい。9 つの表にすると書きやすい）。`op` で左右をつなぐと、対の個数に「左の $u$ の個数 × 右の $v$ の個数」が加わる。`mapping` は個数を $f[u]$ の欄へ、対を $(f[u], f[v])$ の欄へ足し込む。2 つの値が同じ値に移ると欄が合流するが、足し込むので正しく数えられる
-- **区間代入・一次関数の合成**：Library Checker の range_set_range_composite の型である。区間に同じ関数 $h$ が $\mathit{len}$ 個並ぶので、合成は $h^{\mathit{len}}$ になる。これを[繰り返し二乗法](../math/mod-pow.md)で求めると `mapping` が $O(\log N)$ かかり、全体で 1 回 $O(\log^2 N)$ になる。関数の合成は可換でないので、`op` で左右の順序を守る
+- **区間代入・1 次関数の合成**：Library Checker の range_set_range_composite の型である。区間に同じ関数 $h$ が $\mathit{len}$ 個並ぶので、合成は $h^{\mathit{len}}$ になる。これを[繰り返し二乗法](../math/mod-pow.md)で求めると `mapping` が $O(\log N)$ かかり、全体で 1 回 $O(\log^2 N)$ になる。関数の合成は可換でないので、`op` で左右の順序を守る
 
 ## 区間代入の「なし」の番兵と composition の向き {#assign-sentinel}
 
@@ -146,7 +146,7 @@ ACL の `composition(f, g)` の $f$ は新しく届いた作用、$g$ はノー�
 完全なプログラム：[`flip-run.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lazy-segment-tree-patterns/flip-run.cpp)（GitHub）
 { .kp-code-src }
 
-**応用の型**：符号の反転（$-1$ 倍）と区間最大値も同じ考え方である。（最大, 最小）を持てば、$-1$ 倍の後は（$-$最小, $-$最大）になる。括弧列の `(` と `)` の入れ替えも、両方の向きの情報を持てば載る（[括弧列をモノイドにする](../patterns/bracket-sequence.md#monoid)）。サインは「反転」「入れ替え」と、区間の個数・最長・転倒数の質問が並ぶことである。
+**応用の型**：符号の反転（$-1$ 倍）と区間最大値も同じ考え方である。（最大, 最小）を持てば、$-1$ 倍の後は（$-$ 最小, $-$ 最大）になる。括弧列の `(` と `)` の入れ替えも、両方の向きの情報を持てば載る（[括弧列をモノイドにする](../patterns/bracket-sequence.md#monoid)）。サインは「反転」「入れ替え」と、区間の個数・最長・転倒数の質問が並ぶことである。
 
 ## 等差数列の加算・2 列の積の和（添字の和や Σa・Σb を S に足す） {#arithmetic-add}
 
@@ -292,9 +292,9 @@ $$
 
 </div>
 
-??? note "方針"
+??? note "練習の方針"
     - **PRACTICE2 L**：[反転の節](#flip)の転倒数の型である。$S$ を（0 の数, 1 の数, 転倒数）にし、反転後の転倒数を「0 の数 × 1 の数 − 転倒数」で求める
-    - **ABC332 F**：長さ $w$ の区間の各要素は、確率 $1/w$ で $X$ になり、残りの確率で元のままである。よって期待値は $x \mapsto (1 - 1/w) x + X/w$ という一次関数で変わる。区間アフィンの作用を積み、最後に各点の値を `get` で読む。区間の取得がないので、[双対セグメント木](../ds/lazy-segment-tree.md#dual-segment-tree)でも足りる
+    - **ABC332 F**：長さ $w$ の区間の各要素は、確率 $1/w$ で $X$ になり、残りの確率で元のままである。よって期待値は $x \mapsto (1 - 1/w) x + X/w$ という 1 次関数で変わる。区間アフィンの作用を積み、最後に各点の値を `get` で読む。区間の取得がないので、[双対セグメント木](../ds/lazy-segment-tree.md#dual-segment-tree)でも足りる
     - **ABC237 G**：[しきい値で 0/1 にする](#reformulate)型である。しきい値 $X$ と $X + 1$ の 2 本の 0/1 列それぞれで、ソートを「1 の数を数えて 2 つの区間に代入する」操作として再現する。最後に 2 本で食い違う位置が答えである
     - **ABC371 F**：[X_i − i に直す](#reformulate)型である。$Y_i = X_i - i$ は単調なので、押される人の範囲を二分探索で求めて区間代入し、移動量を区間和の変化で数える。値に（和, 最小, 最大, 長さ）を持てば、二分探索の判定に最小・最大を使える
 
@@ -307,7 +307,7 @@ $$
 
 </div>
 
-??? note "方針"
+??? note "力試しの方針"
     - **ABC470 G**：[寄与に言い換える](#reformulate)型である。mex を「$0, \dots, m$ をすべて含む区間の数」の $m$ についての和に直し、左端ごとの最小の右端を $m$ の小さい順に更新する。最小の右端は左端について単調なので、chmax は二分探索と区間代入で書ける（Segment Tree Beats の区間 chmax・区間和でもよい）
     - **ABC265 G**：[型の表](#pattern-table)の値の置き換えである。各値の個数 3 つと順序対の個数 9 つ（異なる値の対 6 つでもよい）を持ち、置き換えの表で欄を移し替える。転倒数は対 $(1, 0)$・$(2, 0)$・$(2, 1)$ の個数の和である
 
@@ -342,7 +342,7 @@ $$
 - [drken「AtCoder ABC 357 F - Two Sequence Queries (2D, 青色, 550 点)」](https://drken1215.hatenablog.com/entry/2024/06/09/022229)：例題 abc357_f の値と作用の設計・制約
 - [drken「AtCoder ABC 322 F - Vacation Query (2D, 青色, 550 点)」](https://drken1215.hatenablog.com/entry/2023/10/08/033507)：例題 abc322_f の値の持ち方と反転の扱い・制約
 - [drken「AtCoder Library Practice Contest L - Lazy Segment Tree (2D)」](https://drken1215.hatenablog.com/entry/2023/11/18/030700)：練習 practice2_l の転倒数の合成と反転
-- [merom686「ABC332」](https://merom686.hatenablog.com/entry/2023/12/11/021036)：練習 abc332_f の一次関数の作用
+- [merom686「ABC332」](https://merom686.hatenablog.com/entry/2023/12/11/021036)：練習 abc332_f の 1 次関数の作用
 - [kmjp「AtCoder ABC #237 : G - Range Sort Query」](https://kmjp.hatenablog.jp/entry/2022/01/31/0900)：練習 abc237_g の 2 通りのしきい値と、区間和・代入でのソートの再現
 - [merom686「ABC371」](https://merom686.hatenablog.com/entry/2024/09/15/021105)：練習 abc371_f の添字を引く言い換えと、区間代入・最小・最大・和を持つ値
 - [kmjp「AtCoder ABC #470 (JPRSプログラミングコンテスト2026#2) : G - ΣШX」](https://kmjp.hatenablog.jp/entry/2026/08/13/0930)：力試し abc470_g の寄与への言い換えと、区間 chmax・区間和（Segment Tree Beats による解）

@@ -83,18 +83,18 @@ updated: 2026-10-29
 
 ### この教材の自作と ACL の名前 {#acl-names}
 
-データ構造のページの自作の例は、ACL にある部品なら名前と引数の約束を ACL にそろえている。そろえていない名前と返り値は、各ページの「自作するとき」の囲み（ACL にない部品はコードの前の文）に書いた。まとめると次のとおりである。確認の問題は Library Checker の問題で、各ページの末尾の「自作の確認」にも出る（発展の概要では、本文のライブラリの節や練習問題の「Library Checker」などにある）。
+データ構造のページの自作の例は、ACL にある部品なら名前と引数の約束を ACL にそろえている。そろえていない名前と返り値は、各ページの「自作するとき」の囲み（ACL にない部品はコードの前の文）に書いた。まとめると次のとおりである。各部品の確認に使う Library Checker の問題は、[ページ → 確認用の問題](#verify-table)の表で手法のページの行を引く。
 
-| 部品 | ACL | この教材の自作 | ACL との違い | 確認の問題 |
-| --- | --- | --- | --- | --- |
-| [Union-Find](../ds/union-find.md#operations) | `dsu`・`leader` | `UnionFind`・`find` | 根を求める関数の名前が違う。`merge` は併合したかの `bool` を返す（ACL は新しい代表元）。`groups` はない | [unionfind](https://judge.yosupo.jp/problem/unionfind) |
-| [重み付き Union-Find](../ds/weighted-union-find.md#operations) | なし | `WeightedUnionFind`・`find` | `merge(u, v, w)` は矛盾しなければ `true` を返す。差は `get_diff(u, v)` で読む | [unionfind_with_potential](https://judge.yosupo.jp/problem/unionfind_with_potential) |
-| [ロールバックできる Union-Find](../ds/rollback-union-find.md#library) | なし | `RollbackUnionFind`・`leader` | `merge` は併合したかの `bool` を返す。`undo`・`snapshot`・`rollback` を足した | [dynamic_graph_vertex_add_component_sum](https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum) |
-| [BIT](../ds/fenwick-tree.md#operations) | `fenwick_tree` | `BIT` | コンストラクタ `BIT()`・`BIT(n)` は ACL と同じ。配列から $O(N)$ で作る `BIT(a)`・先頭からの和 `sum(r)`・`lower_bound(w)` を足した。中身は `long long` のまま足す | [point_add_range_sum](https://judge.yosupo.jp/problem/point_add_range_sum) |
-| [K 番目の値（BIT）](../ds/kth-element.md#bit-binary-search) | なし（`segtree` の `max_right` で書く） | `Fenwick`・`kth(k)` | `kth(k)` は BIT の `lower_bound(w)` と同じ探索 | [ordered_set](https://judge.yosupo.jp/problem/ordered_set) |
-| [セグメント木](../ds/segment-tree.md#operations) | `segtree` | `SegTree` | `max_right<f>(l)`・`min_left<f>(r)` の形がない。ほかは同じ | [point_set_range_composite](https://judge.yosupo.jp/problem/point_set_range_composite) |
-| [遅延セグメント木](../ds/lazy-segment-tree.md#invariants) | `lazy_segtree` | `LazySegTree` | 区間の操作を再帰で書いた。`max_right`・`min_left`・一点への `apply(p, f)` がない | [range_affine_range_sum](https://judge.yosupo.jp/problem/range_affine_range_sum) |
-| [Sparse Table](../ds/sparse-table.md#build) | なし | `SparseTable`・`prod` | 取得の名前を `segtree` の `prod` にそろえた。空の区間は渡せない | [staticrmq](https://judge.yosupo.jp/problem/staticrmq) |
+| 部品 | ACL | この教材の自作 | ACL との違い |
+| --- | --- | --- | --- |
+| [Union-Find](../ds/union-find.md#operations) | `dsu`・`leader` | `UnionFind`・`find` | 根を求める関数の名前が違う。`merge` は併合したかの `bool` を返す（ACL は新しい代表元）。`groups` はない |
+| [重み付き Union-Find](../ds/weighted-union-find.md#operations) | なし | `WeightedUnionFind`・`find` | `merge(u, v, w)` は矛盾しなければ `true` を返す。差は `get_diff(u, v)` で読む |
+| [ロールバックできる Union-Find](../ds/rollback-union-find.md#library) | なし | `RollbackUnionFind`・`leader` | `merge` は併合したかの `bool` を返す。`undo`・`snapshot`・`rollback` を足した |
+| [BIT](../ds/fenwick-tree.md#operations) | `fenwick_tree` | `BIT` | コンストラクタ `BIT()`・`BIT(n)` は ACL と同じ。配列から $O(N)$ で作る `BIT(a)`・先頭からの和 `sum(r)`・`lower_bound(w)` を足した。中身は `long long` のまま足す |
+| [K 番目の値（BIT）](../ds/kth-element.md#bit-binary-search) | なし（`segtree` の `max_right` で書く） | `Fenwick`・`kth(k)` | `kth(k)` は BIT の `lower_bound(w)` と同じ探索 |
+| [セグメント木](../ds/segment-tree.md#operations) | `segtree` | `SegTree` | `max_right<f>(l)`・`min_left<f>(r)` の形がない。ほかは同じ |
+| [遅延セグメント木](../ds/lazy-segment-tree.md#invariants) | `lazy_segtree` | `LazySegTree` | 区間の操作を再帰で書いた。`max_right`・`min_left`・一点への `apply(p, f)` がない |
+| [Sparse Table](../ds/sparse-table.md#build) | なし | `SparseTable`・`prod` | 取得の名前を `segtree` の `prod` にそろえた。空の区間は渡せない |
 
 - **find と leader**：Union-Find の `find` は、本文の手順と図で使う名前に合わせて残した。ライブラリにするなら ACL の `leader` にそろえると、ACL から乗り換えても呼び出し側を直さずに済む
 - **merge の返り値**：`bool` か代表元かは、乗り換えるときに気づきにくい違いである。`if (uf.merge(a, b))` は、ACL の `dsu` では代表元が 0 でないかを見るだけになる（[Union-Find の ACL の囲み](../ds/union-find.md#operations)）

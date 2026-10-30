@@ -33,7 +33,7 @@ type: generated
 - [多項係数](multinomial-coefficient.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：種類ごとの個数が a_1, …, a_m の並べ方は (Σa_i)!/(a_1! … a_m!) 通りで、全部を区別した並べ方を同じ種類の入れ替えで割って得る。
 - [二項係数の恒等式と和の公式](binomial-identities.md) <span class="kp-mini kp-lv-ao" title="difficulty 1600〜1999">青</span>：二項定理・Vandermonde の恒等式・縦の和（hockey stick）・吸収公式などで、二項係数を含む和を閉じた式にする。
 - [鏡像法とカタラン数](reflection-principle.md) <span class="kp-mini kp-lv-ki" title="difficulty 2000〜2399">黄</span>：境界を越える格子路を、最初に境界に触れた点から先を折り返して別の終点への経路と 1 対 1 に対応させ、全体から引いて数える。
-- [二項係数の部分和](binomial-prefix-sum.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：二項係数の部分和 S(n,K) = Σ_{k≤K} C(n,k) を、S(n+1,K) = 2S(n,K) − C(n,K) などの式で (n, K) を 1 ずつ動かしながら更新する。
+- [二項係数の部分和](binomial-prefix-sum.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：二項係数の部分和 S(n,K)（k ≤ K の C(n,k) の和）を、S(n+1,K) = 2S(n,K) − C(n,K) などの式で (n, K) を 1 ずつ動かしながら更新する。
 - [LGV 補題](lgv-lemma.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：DAG 上で k 個の始点から k 個の終点への、互いに交わらない経路の組の数（符号付き）を、始点 i から終点 j への経路数を並べた行列の行列式で求める。
 - [母関数の考え方](generating-function-counting.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：選び方の数を多項式の係数で表し、積で独立な選択の組合せ、累乗で同じ選択の繰り返しを表す。
 
@@ -43,7 +43,7 @@ type: generated
 - [包除 DP](inclusion-exclusion-dp.md) <span class="kp-mini kp-lv-ki" title="difficulty 2000〜2399">黄</span>：包除の和 Σ(−1)^|S| N(S) の項が多すぎて列挙できないとき、S を作る過程を DP にし、符号を DP の値に掛けて運ぶ。
 - [約数包除](divisor-inclusion-exclusion.md) <span class="kp-mini kp-lv-ao" title="difficulty 1600〜1999">青</span>：gcd がちょうど g の個数 f(g) を、すべて g の倍数の個数 F(g) から大きい g の順に f(g) = F(g) − f(2g) − f(3g) − … で求める。
 - [約数・倍数のゼータ変換とメビウス変換](zeta-mobius-divisor.md) <span class="kp-mini kp-lv-ao" title="difficulty 1600〜1999">青</span>：すべての d について d の倍数（約数）にわたる和を求める変換とその逆変換で、素数ごとに累積和を取って O(N log log N) で求める。
-- [メビウス関数とメビウス反転](mobius-function.md) <span class="kp-mini kp-lv-ki" title="difficulty 2000〜2399">黄</span>：約数にわたる和 F(n) = Σ_{d|n} f(d) から f をメビウス関数 μ で戻す（メビウス反転）。
+- [メビウス関数とメビウス反転](mobius-function.md) <span class="kp-mini kp-lv-ki" title="difficulty 2000〜2399">黄</span>：約数にわたる和 F(n)（d | n の f(d) の和）から f をメビウス関数 μ で戻す（メビウス反転）。
 - [部分集合の高速ゼータ変換とメビウス変換](zeta-mobius-subset.md) <span class="kp-mini kp-lv-ki" title="difficulty 2000〜2399">黄</span>：すべての集合 S について、部分集合（上位集合）にわたる和を bit ごとの累積和として O(n 2^n) で求める（素朴には O(3^n)）。
 
 ## 置換・分割・木の数え上げ
@@ -68,7 +68,7 @@ type: generated
 - [期待値 DP](expected-value-dp.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：終わるまでの量の期待値 E[s] を、最初の一手で場合分けした E[s] = c(s) + Σ P(s→t) E[t] で、終状態の E = 0 から後ろ向きに埋める。
 - [閉路のある期待値](expectation-linear-equations.md) <span class="kp-mini kp-lv-ao" title="difficulty 1600〜1999">青</span>：閉路があって後ろ向きに埋められない期待値を、戻る先の期待値を未知数 X とおき各状態を a + bX の形で持って、最後に X = a + bX を解いて求める。
 - [最適戦略の期待値](optimal-strategy-expectation.md) <span class="kp-mini kp-lv-ki" title="difficulty 2000〜2399">黄</span>：選択と偶然が交互に来る確率過程で、期待値を最大（最小）にする戦略のもとでの期待値を、残すものや知っている情報を状態にして後ろから求める。
-- [期待値と確率の変換](expectation-tail-sum.md) <span class="kp-mini kp-lv-ki" title="difficulty 2000〜2399">黄</span>：非負整数の確率変数 X について E[X] = Σ_{k≥1} P(X ≥ k) が成り立つ。
+- [期待値と確率の変換](expectation-tail-sum.md) <span class="kp-mini kp-lv-ki" title="difficulty 2000〜2399">黄</span>：非負整数の確率変数 X について、E[X] は k ≥ 1 の P(X ≥ k) の和に等しい。
 - [二乗の期待値・分散](expectation-of-square.md) <span class="kp-mini kp-lv-ki" title="difficulty 2000〜2399">黄</span>：E[X^2] は線形性で直接は求まらないので、X^2 = Σ_i Σ_j X_i X_j とペアごとの期待値を足すか、DP で確率・期待値 × 確率・二乗の期待値 × 確率を同時に運ぶ。
 - [連続値の確率](continuous-probability.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：[0, 1] の一様乱数のような連続な確率変数について、確率は長さ・面積・角度の比、期待値は積分で求める。
 

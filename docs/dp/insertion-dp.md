@@ -74,7 +74,7 @@ $$
 \end{cases}
 $$
 
-そのまま足すと 1 マスに $O(N)$、全体で $O(N^3)$ かかる。前の段の累積和 $\mathrm{pre}[j] = \mathrm{dp}[i][0] + \dots + \mathrm{dp}[i][j-1]$ を先に作っておく。すると$p_i < p_{i+1}$ は $\mathrm{pre}[k]$、$p_i > p_{i+1}$ は $\mathrm{pre}[i] - \mathrm{pre}[k]$ で $O(1)$ になる。
+そのまま足すと 1 マスに $O(N)$、全体で $O(N^3)$ かかる。前の段の累積和 $\mathrm{pre}[j] = \mathrm{dp}[i][0] + \dots + \mathrm{dp}[i][j-1]$ を先に作っておく。すると $p_i < p_{i+1}$ は $\mathrm{pre}[k]$、$p_i > p_{i+1}$ は $\mathrm{pre}[i] - \mathrm{pre}[k]$ で $O(1)$ になる。
 
 状態が $O(N^2)$ 個で遷移が $O(1)$ なので、全体は $O(N^2)$ である。$N = 3000$ なら約 $10^7$ 回で間に合う。累積和の作り方と半開区間の添字の合わせ方は、[累積和・いもす法による DP の高速化](../dp/dp-prefix-sum.md)と同じである。
 
@@ -259,7 +259,7 @@ AtCoder の ABC での出題は確かめられなかった。USACO Guide の DP 
 <div class="kp-problems" data-role="challenge" markdown>
 
 - [ABC282 G. Similar Permutation](https://atcoder.jp/contests/abc282/tasks/abc282_g)（diff 2412）：1〜N の順列の組 (P, Q) のうち、隣り合う要素の大小関係が P と Q で一致する位置の数がちょうど K になるものの個数を求める。
-- [ABC267 G. Increasing K Times](https://atcoder.jp/contests/abc267/tasks/abc267_g)（diff 2561）：数列の並べ替えのうち、A_i < A_{i+1} となる i がちょうど K 個あるものの個数を求める。
+- [ABC267 G. Increasing K Times](https://atcoder.jp/contests/abc267/tasks/abc267_g)（diff 2561）：長さ N の数列 A の並べ替え N! 通り（同じ値の要素も区別する）のうち、A_i < A_(i+1) となる i がちょうど K 個あるものの個数を求める。
 
 </div>
 

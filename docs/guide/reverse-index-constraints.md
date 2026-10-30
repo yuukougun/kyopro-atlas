@@ -323,7 +323,7 @@ $N \le 10^7$ の行では、計算量より先にメモリを見積もる。`int
 | 座標が整数で \|x\|, \|y\| ≤ 10^9（外積は long long にぎりぎり収まる） | [ベクトルと外積](../geometry/geometry-vectors.md) | 基礎 |
 | 座標が 10^9 規模の整数で、傾きや角度を比べる | [誤差の扱いと整数での処理](../geometry/geometry-precision.md) | 水 |
 | 座標が 10^9 規模の整数で、角度の大小や一致を正確に比べる | [偏角ソート](../geometry/argument-sort.md) | 水 |
-| N ≤ 10&#94;10〜10&#94;11 で Σ_{n≤N} f(n)（f は φ・約数の個数など）を求める | [乗法的関数の和と素数の個数](../math/multiplicative-function.md) | 発展 |
+| N ≤ 10&#94;10〜10&#94;11 で n ≤ N の f(n) の和（f は φ・約数の個数など）を求める | [乗法的関数の和と素数の個数](../math/multiplicative-function.md) | 発展 |
 | K ≤ 10^12 で約数を扱う（約数の個数は最大 6720） | [全探索の設計](../basics/brute-force.md) | 基礎 |
 | N ≤ 10^12 程度（√N ≤ 10^6）の約数・素数判定 | [約数列挙と素数判定](../math/divisor-enum.md) | 基礎 |
 | N ≤ 10^12 程度の数を1つだけ素因数分解する | [素因数分解とルジャンドルの公式](../math/prime-factorization.md) | 基礎 |
@@ -459,13 +459,13 @@ $N$ の上限のほかにも、値の上限や制約の組み合わせ方から�
     ??? success "答え"
         $2^{40} \approx 1.1 \times 10^{12}$ なので全部の部分集合は試せない。値が大きいので和を添字にする DP も使えない。半分の 20 個ずつで $2^{20} \approx 10^6$ 通りの和を作り、片方をソートしてもう片方から二分探索する $O(2^{N/2} N)$ を狙う（[半分全列挙](../basics/meet-in-the-middle.md#combine-halves)）。
 
-??? question "確認問題：N ≤ 10^18 でできること"
+??? question "確認問題：$N \le 10^{18}$ でできること"
     $N \le 10^{18}$ の制約で、$N$ に比例する回数のループは書けない。どんな計算量の手法を疑うか、3 つ挙げよ。
 
     ??? success "答え"
         $O(\log N)$ か $O(\log^2 N)$、$O(1)$ の手法である。たとえば、答えの範囲を半分ずつ絞る[答えで二分探索](../basics/binary-search-answer.md#monotonicity)、$N$ 回の操作を 2 進数で分ける[ダブリング](../basics/doubling.md#table)や[繰り返し二乗法](../math/mod-pow.md#binary-expansion)・[行列累乗](../math/matrix-power.md#fast-power)、$N$ 以下の数を桁ごとに数える[桁 DP](../dp/digit-dp.md#tight-flag) がある。状態の種類が少なければ[周期性の検出](../basics/periodicity.md#rho)も使える。
 
-??? question "確認問題：クエリごとに O(N) をかけてよいとき"
+??? question "確認問題：クエリごとに $O(N)$ をかけてよいとき"
     $Q$ 個のクエリのそれぞれに $O(N)$ かける素朴な方法が間に合うのは、どんな制約のときか。
 
     ??? success "答え"

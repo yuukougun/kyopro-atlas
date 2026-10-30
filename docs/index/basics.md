@@ -576,7 +576,7 @@ search:
 - 使い分け：`method-comparison#repetition`
 - サイン：
     - 制約：K ≤ 10&#94;18 回の操作で、状態の種類は 10&#94;5〜10&#94;6 程度
-    - 言い回し：x_{n+1} = f(x_n) の形の漸化式
+    - 言い回し：x_(n+1) = f(x_n) の形の漸化式
     - 言い回し：同じ模様が繰り返し敷き詰められた盤面
 - 節：
     - `periodicity#rho` 尾と周期（ρ 型）と K 回後の求め方：https://yuukougun.github.io/kyopro-atlas/basics/periodicity/#rho

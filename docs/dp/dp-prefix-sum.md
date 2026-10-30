@@ -15,7 +15,7 @@ complexity: 遷移 1 回 O(1)、累積和の作成は段ごとに O(段の幅)�
 signs:
   - {type: phrase, text: 各人に 0〜a_i 個を配る方法の数（上限つきの配り方）}
   - {type: constraint, text: N ≤ 100、K ≤ 10^5 程度で、O(NK) は通るが O(NK^2) は通らない}
-  - {type: shape, text: 'dp[i] = Σ_{j=i−R}^{i−L} dp[j] のように、遷移元が連続した範囲の和'}
+  - {type: shape, text: 'dp[i] = Σ dp[j]（j = i−R..i−L）のように、遷移元が連続した範囲の和'}
   - {type: shape, text: 'dp[i] から i+L〜i+R の範囲へ同じ値を配る'}
 acl: []
 frequency: B
@@ -185,7 +185,7 @@ min と max に使えるのは、範囲が端から始まるときだけであ�
 **余りが一致する遷移元**。数列を区間に区切り、$k$ 番目の区間の和が $k$ で割り切れるようにする数え上げを考える。$A$ の累積和を $P$ とし、「$\mathrm{dp}[i][k]$ ＝ 先頭 $i$ 項を $k$ 個の区間に区切る方法の数」とする。最後の区間を $(t, i]$ とすると、条件は $P_i - P_t \equiv 0 \pmod{k}$、すなわち $P_t \equiv P_i \pmod{k}$ である。
 
 $$
-\mathrm{dp}[i][k] = \sum_{t < i,\ P_t \equiv P_i \ (\mathrm{mod}\ k)} \mathrm{dp}[t][k - 1]
+\mathrm{dp}[i][k] = \sum_{t < i,\ P_t \equiv P_i \pmod{k}} \mathrm{dp}[t][k - 1]
 $$
 
 そこで $\mathrm{acc}[k][r]$ ＝「これまでの $t$ で $P_t \bmod k = r$ のものについての $\mathrm{dp}[t][k - 1]$ の和」を持つ。$\mathrm{dp}[i][k] = \mathrm{acc}[k][P_i \bmod k]$ と $O(1)$ で読み、$i$ の値がそろったら各 $k$ について $\mathrm{acc}[k][P_i \bmod k] \mathrel{+}= \mathrm{dp}[i][k - 1]$ と足し込む。区切りの数 $k$ は最大 $N$ で、余りは $k$ 通りある。したがって $\mathrm{acc}$ の大きさと全体の時間はどちらも $O(N^2)$ である。この節の内容は[区間分割 DP](../dp/dp-sequence-partition.md) と合わせて読むとよい。
@@ -309,7 +309,7 @@ $i$ 番目の子に配る個数で場合分けすると、遷移元は前の段�
 - 遷移元・遷移先が連続した範囲の**和**なら累積和・いもす法、端から始まる範囲の **min・max** なら累積 min・max を使う
 - 任意の範囲の min・max、または値の更新と範囲の取得が入り混じるなら[セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md)を使う
 - 前の段をほぼそのまま写し、一部の範囲にだけ一律に足すなら、表を作り直さない[インライン DP](../dp/inline-dp.md) を考える
-- どの道具を選ぶかは、貰う形の式を書いて右辺の形を見て決める（[DP の高速化の全体像](../dp/dp-speedup-overview.md#read-the-recurrence)）
+- どの道具を選ぶかは、貰う形の式を書いて右辺の形を見て決める（[DP の高速化の選び方](../dp/dp-speedup-overview.md#read-the-recurrence)）
 
 ## 参考 {#references}
 

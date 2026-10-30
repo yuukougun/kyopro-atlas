@@ -204,15 +204,6 @@ $k^n$ と $n^k$ を取り違えやすい。「選ぶ側」が 1 つずつ「選�
 - **重なりを引く**：和の法則の場合が重なるときは、包除原理で重なりを足し引きする（[包除原理](../comb/inclusion-exclusion.md#general)）。
 - **数え上げの手順**：対象の確定から検算までの流れは[数え上げの考え方](../comb/counting-mindset.md#procedure)にまとめてある。
 
-## 使い分け {#comparison}
-
-- 選ぶだけで順序を区別しない → [二項係数](../comb/binomial-coefficient.md)
-- 区別しない玉を箱に分ける・個数の制限がある → [写像 12 相](../comb/twelvefold-way.md)・[重複組合せ](../comb/stars-and-bars.md)
-- 「少なくとも 1 つ」「どれも 1 個以上」→ [余事象](../thinking/complement.md)・[包除原理](../comb/inclusion-exclusion.md)
-- 回転して同じものを同一視し、同じ色を含む → [Burnside の補題](../comb/burnside-lemma.md#necklace)
-- 選択肢の数を決める情報が少数の値にまとまる → [DP の状態の設計](../dp/dp-state-design.md)
-- 何を数えるかの言い換え全般 → [数え上げの考え方](../comb/counting-mindset.md)
-
 ## 例題 {#examples}
 
 ### 典型90 069. Colorful Blocks 2（★3） {#typical90_bq}
@@ -262,6 +253,15 @@ $k^n$ と $n^k$ を取り違えやすい。「選ぶ側」が 1 つずつ「選�
 
 ??? note "力試しの方針"
     - **ABC133 E**：根から順に色を決める。根は $K$ 通り、根の子は $K - 1$ 色から、ほかの頂点の子は自分と親の色を除く $K - 2$ 色から、兄弟どうしで違う色を選ぶ。選択肢の数が前の選び方によらず一定なので、全頂点の積で数えられる
+
+## 使い分け {#comparison}
+
+- 選ぶだけで順序を区別しない → [二項係数](../comb/binomial-coefficient.md)
+- 区別しない玉を箱に分ける・個数の制限がある → [写像 12 相](../comb/twelvefold-way.md)・[重複組合せ](../comb/stars-and-bars.md)
+- 「少なくとも 1 つ」「どれも 1 個以上」→ [余事象](../thinking/complement.md)・[包除原理](../comb/inclusion-exclusion.md)
+- 回転して同じものを同一視し、同じ色を含む → [Burnside の補題](../comb/burnside-lemma.md#necklace)
+- 選択肢の数を決める情報が少数の値にまとまる → [DP の状態の設計](../dp/dp-state-design.md)
+- 何を数えるかの言い換え全般 → [数え上げの考え方](../comb/counting-mindset.md)
 
 ## 参考 {#references}
 

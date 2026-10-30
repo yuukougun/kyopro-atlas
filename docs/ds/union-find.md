@@ -196,20 +196,6 @@ x == y なら edges[x] += 1        # 自己ループ・多重辺もここで数�
 
 **1-indexed のまま使う**。問題の頂点番号は 1 から始まる。`dsu d(n)` に $N$ をそのまま渡すと、頂点 $N$ が範囲の外になる。ACL では assert で止まり、自作では配列の外を読む。読んだ直後に 1 を引くか、大きさ $N + 1$ で作って 0 番を使わない。
 
-## 使い分け {#comparison}
-
-- **グラフが最初から全部与えられる**：連結成分を 1 回求めるだけなら、[BFS](../graph/bfs.md)・[DFS](../graph/dfs.md)・Union-Find のどれでもよい（[連結成分](../graph/connected-components.md)）。Union-Find は隣接リストを作らずに済むので短く書ける
-- **辺の追加と質問が交互に来る**：Union-Find を使う。BFS で毎回調べ直すと間に合わない
-- **距離や経路そのものが要る**：Union-Find は連結かどうかしか分からない。BFS などの探索を使う
-- **辺や頂点の削除がある**：削除の順序が最初に全部分かる（オフライン）なら、操作を逆順に見て「追加」に直すことで Union-Find を使える（[Union-Find で連結性を扱う](../graph/union-find-connectivity.md)）。追加と削除が入り混じるなら、発展の[辺の追加と削除が混ざる連結性](../graph/offline-dynamic-connectivity.md)の方法を使う（これも先読みが前提で、部品は[ロールバックできる Union-Find](../ds/rollback-union-find.md#offline-dynamic-connectivity)）
-- **有向グラフ**：Union-Find は向きを無視した連結しか扱えない。互いに行き来できるかは[強連結成分分解](../graph/scc.md)を使う
-
-??? question "確認問題：削除のクエリ"
-    $N$ 頂点 $M$ 辺のグラフから辺を 1 本ずつ取り除き、取り除くたびに連結成分の数を答える。Union-Find で解けるか。
-
-    ??? success "答え"
-        Union-Find は分割ができないので、そのままでは解けない。ただし取り除く順序が最初に全部分かるので、最後の状態（取り除かれない辺だけのグラフ）から始め、逆順に辺を足していけば Union-Find で解ける。答えは逆順に記録し、最後に反転して出力する。
-
 ## 上位の手法へのつながり {#next-steps}
 
 - **根に情報を持たせる・併合で数える**：成分ごとの最小値や上位 $K$ 個を持つ型、辺を重みの順に足して組の数を数える型（[Union-Find の応用](../ds/union-find-applications.md)）
@@ -255,6 +241,20 @@ x == y なら edges[x] += 1        # 自己ループ・多重辺もここで数�
     - **ABC157 D**：友達関係で併合し、人 $i$ の答えは「成分の大きさ − 1 − 同じ成分にいる友達とブロック相手の数」である。友達は必ず同じ成分にいるので次数を引き、ブロック相手は同じ成分のときだけ引く
     - **典型90 012**：マス $(r, c)$ を $rW + c$ の番号にする（0-indexed）。塗るたびに上下左右の赤いマスと併合する。判定では、まず 2 マスとも赤いかを確かめてから $\mathrm{same}$ を見る
     - **PRACTICE2 A**：ACL の `dsu` か自作の Union-Find をそのまま使う。自作の動作確認に使える
+
+## 使い分け {#comparison}
+
+- **グラフが最初から全部与えられる**：連結成分を 1 回求めるだけなら、[BFS](../graph/bfs.md)・[DFS](../graph/dfs.md)・Union-Find のどれでもよい（[連結成分](../graph/connected-components.md)）。Union-Find は隣接リストを作らずに済むので短く書ける
+- **辺の追加と質問が交互に来る**：Union-Find を使う。BFS で毎回調べ直すと間に合わない
+- **距離や経路そのものが要る**：Union-Find は連結かどうかしか分からない。BFS などの探索を使う
+- **辺や頂点の削除がある**：削除の順序が最初に全部分かる（オフライン）なら、操作を逆順に見て「追加」に直すことで Union-Find を使える（[Union-Find で連結性を扱う](../graph/union-find-connectivity.md)）。追加と削除が入り混じるなら、発展の[辺の追加と削除が混ざる連結性](../graph/offline-dynamic-connectivity.md)の方法を使う（これも先読みが前提で、部品は[ロールバックできる Union-Find](../ds/rollback-union-find.md#offline-dynamic-connectivity)）
+- **有向グラフ**：Union-Find は向きを無視した連結しか扱えない。互いに行き来できるかは[強連結成分分解](../graph/scc.md)を使う
+
+??? question "確認問題：削除のクエリ"
+    $N$ 頂点 $M$ 辺のグラフから辺を 1 本ずつ取り除き、取り除くたびに連結成分の数を答える。Union-Find で解けるか。
+
+    ??? success "答え"
+        Union-Find は分割ができないので、そのままでは解けない。ただし取り除く順序が最初に全部分かるので、最後の状態（取り除かれない辺だけのグラフ）から始め、逆順に辺を足していけば Union-Find で解ける。答えは逆順に記録し、最後に反転して出力する。
 
 ## 参考 {#references}
 

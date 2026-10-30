@@ -10,13 +10,13 @@ level: 水
 kind: [整数論]
 prerequisites: [sigma-manipulation, integer-division]
 related: [harmonic-sum, floor-sum, sqrt-decomposition, base-conversion, multiplicative-function]
-summary: Σ_{i=1}^{N} f(⌊N/i⌋) を、⌊N/i⌋ の値が高々 2√N 種類で同じ値の i が区間をなすことを使って O(√N) で求める。√N を境に「i が小さい側」と「商が小さい側」に分けて考える型にも使う。
+summary: i = 1..N の f(⌊N/i⌋) の和を、⌊N/i⌋ の値が高々 2√N 種類で同じ値の i が区間をなすことを使って O(√N) で求める。√N を境に「i が小さい側」と「商が小さい側」に分けて考える型にも使う。
 complexity: O(√N)（商が同じ区間は高々 2√N 個で、区間ごとの処理を O(1) とした場合）
 signs:
-  - {type: phrase, text: 'Σ_{i=1}^{N} ⌊N/i⌋ を求める'}
+  - {type: phrase, text: i = 1..N の ⌊N/i⌋ の和を求める}
   - {type: constraint, text: N ≤ 10^12 で i を全部回すと間に合わない}
   - {type: phrase, text: xy ≤ N となる組を数える}
-  - {type: shape, text: 'Σ_{i=1}^{N} f(⌊N/i⌋) の形の和'}
+  - {type: shape, text: i = 1..N の f(⌊N/i⌋) の和の形}
 acl: []
 verify: [enumerate_quotients]
 frequency: B
@@ -27,7 +27,7 @@ sections:
   - {title: √N を境に場合分けする（片方を √N まで全探索）, anchor: split-at-sqrt}
   - {title: 調和級数・floor sum との使い分け, anchor: vs-others}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -136,6 +136,20 @@ $$
 
 どの場合も、境界の値（$i = s$ や $p = s$ 付近）を両側で二重に数えたり、どちらでも数えなかったりしやすい。境界を $\le s$ と $> s$ のように片方にだけ含めて書き、小さい $N$ で全探索と比べて確かめる。
 
+## 調和級数・floor sum との使い分け {#vs-others}
+
+$\lfloor \cdot \rfloor$ を含む和は、$i$ が式のどこにあるかと、何が欲しいかで道具を選ぶ。
+
+| 和の形・欲しいもの | 道具 | 計算量 |
+| --- | --- | --- |
+| $\sum_{i=1}^{N} f(\lfloor N/i \rfloor)$ の値だけ（$i$ が分母） | 商の列挙 | $O(\sqrt{N})$ |
+| $k \le N$ の各 $k$ ごとの約数の個数・和の表 | [調和級数](../math/harmonic-sum.md) | $O(N \log N)$ |
+| $\sum_{i} \lfloor (ai + b)/m \rfloor$（$i$ が分子に 1 次） | [floor sum](../math/floor-sum.md) | $O(\log m)$ |
+
+- 調和級数の倍数の列挙は、$d$ ごとに $d$ の倍数を $\lfloor N/d \rfloor$ 個たどるので、合計の回数が $\sum_d \lfloor N/d \rfloor$ になる。各数の情報を表として残せる代わりに、$N$ は $10^6$〜$10^7$ 程度までである。和の値だけが欲しく、$N$ が $10^{12}$ 程度なら商の列挙を使う
+- $i$ が分子に 1 次で入る形では、商が $i$ とともにほぼ一定の割合で増え、値の種類が少なくならない。区間にまとめても速くならないので floor sum を使う
+- 配列を $\sqrt{N}$ 個のブロックに分ける[平方分割](../ds/sqrt-decomposition.md)も $\sqrt{N}$ を境に考える手法だが、扱う対象はクエリと配列で、ここでの商の場合分けとは別物である
+
 ## 落とし穴 {#pitfalls}
 
 **$\sqrt{N}$ を `double` で求めて境界がずれる**。`(long long)sqrt(n)` は、$N$ が $2^{52}$（約 $4.5 \times 10^{15}$）程度を超えると、`double` の精度が足りず 1 ずれることがある。たとえば $N = m^2 - 1$ の形では、$\sqrt{N}$ と $m$ の差が小さすぎて `double` で区別できず、$m$ に丸められる。$s$ を誤ると、場合分けの式で $s^2$ を引く量が変わり答えが合わない。`sqrtl` で近い値を出してから、`s * s > n` の間は減らし、`(s + 1) * (s + 1) <= n` の間は増やして直す。直さずに済ませたいなら、ループを `for (long long i = 1; i * i <= n; i++)` と書けば $s$ を求めなくてよい。$N \le 10^{18}$ なら $i \le 10^9$ で $i \cdot i$ は `long long` に収まる。
@@ -150,27 +164,13 @@ $$
 
 **複数のテストケース**。1 ケース $O(\sqrt{N})$ でも、ケース数 $T$ を掛けた $O(T \sqrt{N})$ が全体の計算量になる。$N = 10^9$、$T = 100$ なら約 $3.2 \times 10^6$ 回で間に合うが、$N = 10^{12}$、$T = 10^4$ では $10^{10}$ 回で間に合わない。
 
-## 調和級数・floor sum との使い分け {#vs-others}
-
-$\lfloor \cdot \rfloor$ を含む和は、$i$ が式のどこにあるかと、何が欲しいかで道具を選ぶ。
-
-| 和の形・欲しいもの | 道具 | 計算量 |
-| --- | --- | --- |
-| $\sum_{i=1}^{N} f(\lfloor N/i \rfloor)$ の値だけ（$i$ が分母） | 商の列挙 | $O(\sqrt{N})$ |
-| $k \le N$ の各 $k$ ごとの約数の個数・和の表 | [調和級数](../math/harmonic-sum.md) | $O(N \log N)$ |
-| $\sum_{i} \lfloor (ai + b)/m \rfloor$（$i$ が分子に一次） | [floor sum](../math/floor-sum.md) | $O(\log m)$ |
-
-- 調和級数の倍数の列挙は、$d$ ごとに $d$ の倍数を $\lfloor N/d \rfloor$ 個たどるので、合計の回数が $\sum_d \lfloor N/d \rfloor$ になる。各数の情報を表として残せる代わりに、$N$ は $10^6$〜$10^7$ 程度までである。和の値だけが欲しく、$N$ が $10^{12}$ 程度なら商の列挙を使う
-- $i$ が分子に一次で入る形では、商が $i$ とともにほぼ一定の割合で増え、値の種類が少なくならない。区間にまとめても速くならないので floor sum を使う
-- 配列を $\sqrt{N}$ 個のブロックに分ける[平方分割](../ds/sqrt-decomposition.md)も $\sqrt{N}$ を境に考える手法だが、扱う対象はクエリと配列で、ここでの商の場合分けとは別物である
-
 ## 例題 {#examples}
 
 ### ABC230 E. Fraction Floor Sum {#abc230_e}
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [ABC230 E. Fraction Floor Sum](https://atcoder.jp/contests/abc230/tasks/abc230_e)（diff 969）：Σ_{i=1}^{N} ⌊N/i⌋ を求める（N ≤ 10^12）。
+- [ABC230 E. Fraction Floor Sum](https://atcoder.jp/contests/abc230/tasks/abc230_e)（diff 969）：i = 1..N の ⌊N/i⌋ の和を求める（N ≤ 10^12）。
 
 </div>
 
@@ -206,7 +206,7 @@ $\lfloor \cdot \rfloor$ を含む和は、$i$ が式のどこにあるかと、�
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [ABC172 D. Sum of Divisors](https://atcoder.jp/contests/abc172/tasks/abc172_d)（diff 963）：x の約数の個数を f(x) とするとき、Σ_{x=1}^{N} x·f(x) を求める（N ≤ 10^7）。
+- [ABC172 D. Sum of Divisors](https://atcoder.jp/contests/abc172/tasks/abc172_d)（diff 963）：x の約数の個数を f(x) とするとき、x = 1..N の x·f(x) の和を求める（N ≤ 10^7）。
 - [ABC296 D. M<=ab](https://atcoder.jp/contests/abc296/tasks/abc296_d)（diff 999）：1 ≤ a, b ≤ N を満たす a × b のうち、M 以上で最小の値を求める（N, M ≤ 10^12、なければ −1）。
 - [ABC414 E. Count A%B=C](https://atcoder.jp/contests/abc414/tasks/abc414_e)（diff 1296）：1 以上 N 以下の互いに異なる整数の組 (a, b, c) で、a を b で割った余りが c になるものの個数を 998244353 で割った余りで求める（3 ≤ N ≤ 10^12）。
 
@@ -232,7 +232,7 @@ $\lfloor \cdot \rfloor$ を含む和は、$i$ が式のどこにあるかと、�
 
 ## 確認問題 {#quiz}
 
-??? question "確認問題：N = 10^12 での値の種類"
+??? question "確認問題：$N = 10^{12}$ での値の種類"
     $N = 10^{12}$ のとき、$\lfloor N/i \rfloor$（$1 \le i \le N$）の異なる値は何個か。
 
     ??? success "答え"

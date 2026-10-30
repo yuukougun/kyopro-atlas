@@ -29,7 +29,7 @@ sections:
   - {title: グラフの章との分担, anchor: vs-graph}
   - {title: しきい値ごと・関係ごとに Union-Find を持つ, anchor: multiple-uf, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -204,13 +204,6 @@ $$
 
 **次の空きへ飛ぶ Union-Find を再帰の find で書く**。この型は union by size を使わないので、経路圧縮が効く前は $\mathrm{nxt}$ が長さ $N$ の鎖になりうる。再帰で find を書くと再帰の深さが $N$ になり、$N = 10^6$ では手元の既定のスタック（Linux で 8MB 程度）からあふれうる。`next-pointer.cpp` のように while ループで書く。番兵 $N$ のために配列を $N + 1$ 個取ることも忘れない。
 
-## 使い分け {#comparison}
-
-- グラフが最初から固定で、成分ごとの集計を一度するだけなら、[連結成分](../graph/connected-components.md)を BFS・DFS で求めて数えれば足りる。辺の追加と質問が交互に来るときに Union-Find が要る
-- 値ごとの個数の質問がオフラインで、map のマージテクが重いときは、[併合過程を表す木](../tree/merge-process-tree.md#group-as-interval)で各時点の成分を DFS 順の区間にする方法もある
-- 次の空きを探すだけなら、次の空きへ飛ぶ Union-Find でも `std::set` の `lower_bound` でもよい。区間ごとに色や値を持ち、塗り替えもするなら[区間を set で管理する](../ds/interval-set.md)方法を使う
-- 削除を含むなら、逆順の追加にするか（[Union-Find で連結性を扱う](../graph/union-find-connectivity.md)）、オフラインの発展的な方法に頼る（[ロールバックできる Union-Find](../ds/rollback-union-find.md#offline-dynamic-connectivity)）
-
 ## 例題 {#examples}
 
 ### ABC372 E. K-th Largest Connected Components {#abc372_e}
@@ -295,6 +288,13 @@ $k \le 10$ なので、各成分の頂点番号の上位 10 個だけを根に�
     - **ABC355 F**：重み $c = 1, \dots, 10$ ごとに、重み $c$ 以下の辺だけの Union-Find を持つ。連結成分の数から重みごとの辺の本数を求めて、最小全域木の重みを出す（[しきい値ごと・関係ごとに Union-Find を持つ](#multiple-uf)）
     - **ABC131 F**：$x$ 座標と $y$ 座標をそれぞれ頂点にし、点 $(x, y)$ を 2 つをつなぐ辺にする（[何を頂点にするかの言い換え](#modeling)）。操作を続けると、成分の中の $x$ と $y$ の組がすべて点になるので、成分ごとに（$x$ の数）×（$y$ の数）を足し、元の点の数を引けば答えになる。根に $x$ と $y$ の数を別々に持てばよい
     - **ARC065 D**：道路用と鉄道用の Union-Find を作り、各都市を（道路の根, 鉄道の根）の組で分類して、組ごとの都市数を数える
+
+## 使い分け {#comparison}
+
+- グラフが最初から固定で、成分ごとの集計を一度するだけなら、[連結成分](../graph/connected-components.md)を BFS・DFS で求めて数えれば足りる。辺の追加と質問が交互に来るときに Union-Find が要る
+- 値ごとの個数の質問がオフラインで、map のマージテクが重いときは、[併合過程を表す木](../tree/merge-process-tree.md#group-as-interval)で各時点の成分を DFS 順の区間にする方法もある
+- 次の空きを探すだけなら、次の空きへ飛ぶ Union-Find でも `std::set` の `lower_bound` でもよい。区間ごとに色や値を持ち、塗り替えもするなら[区間を set で管理する](../ds/interval-set.md)方法を使う
+- 削除を含むなら、逆順の追加にするか（[Union-Find で連結性を扱う](../graph/union-find-connectivity.md)）、オフラインの発展的な方法に頼る（[ロールバックできる Union-Find](../ds/rollback-union-find.md#offline-dynamic-connectivity)）
 
 ## 参考 {#references}
 

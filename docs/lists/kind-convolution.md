@@ -13,9 +13,9 @@ type: generated
 
 | ページ | レベル | 要約 |
 | --- | --- | --- |
-| [畳み込みの使い方](../math/convolution-ntt.md) | 青 | c_k = Σ_{i+j=k} a_i b_j（多項式の積）を ACL の convolution で O(N log N) で求める。和が k になる組の数や、ずらしたときの一致数をすべての k について一度に数える。 |
+| [畳み込みの使い方](../math/convolution-ntt.md) | 青 | i + j = k となる a_i b_j の和 c_k（多項式の積）を ACL の convolution で O(N log N) で求める。和が k になる組の数や、ずらしたときの一致数をすべての k について一度に数える。 |
 | [FFT・NTT の仕組みと任意 mod の畳み込み](../math/fft-ntt.md) | 発展 | 畳み込みを自作するときや任意 mod で求めるときに、多項式を 1 の N 乗根での値に変えて各点の積にし、分割統治で O(N log N) で変換する。任意 mod は 3 つの素数で計算して CRT で戻す。 |
-| [XOR 畳み込み](../math/hadamard-transform.md) | 発展 | c_k = Σ_{i XOR j = k} a_i b_j を、アダマール変換で各点の積に直して O(N log N) で求める。添字の演算（和・XOR・AND/OR・gcd/lcm）ごとに使う変換が変わる。 |
+| [XOR 畳み込み](../math/hadamard-transform.md) | 発展 | i XOR j = k となる a_i b_j の和 c_k を、アダマール変換で各点の積に直して O(N log N) で求める。添字の演算（和・XOR・AND/OR・gcd/lcm）ごとに使う変換が変わる。 |
 | [分割統治 FFT・オンライン畳み込み](../math/online-convolution.md) | 発展 | 多数の多項式の積を次数の小さいものから2つずつ掛けて O(N log² N) で求める。dp[i] が dp[0..i−1] と既知の列の畳み込みで決まるときは、左半分を確定させてから右半分へ寄与を足す分割統治で求める。 |
 | [形式的冪級数と多項式の演算](../math/fps-basics.md) | 発展 | 数列を冪級数とみて、逆元 1/f・log・exp・累乗を O(N log N) で計算し、多項式の割り算・Taylor shift・多点評価も行う。数え上げの式を多項式で立てた後の計算を受け持つ。 |
 | [線形漸化式の高速化](../math/linear-recurrence-fast.md) | 発展 | K 項の線形漸化式の第 N 項を、行列累乗より速くきたまさ法 O(K² log N) や Bostan-Mori O(K log K log N) で求める。最初の 2K 項から漸化式を見つける Berlekamp-Massey も使う。 |

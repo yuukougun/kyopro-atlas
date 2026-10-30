@@ -50,13 +50,13 @@ $$
 f(v) = p_v \cdot f(h) + A_v
 $$
 
-になる。重い子の値 $x = f(h)$ を入れると $f(v)$ を返す一次関数 $\varphi_v(x) = p_v x + A_v$ を頂点 $v$ に持たせる。葉は $\varphi_v(x) = A_v$（$p_v = 0$ とみる）である。1 本の[重いパス](../guide/glossary.md#heavy-path)の頂点を浅い順に $u_1, \dots, u_k$（$u_k$ は葉）とすると、パスの先頭の値は合成
+になる。重い子の値 $x = f(h)$ を入れると $f(v)$ を返す 1 次関数 $\varphi_v(x) = p_v x + A_v$ を頂点 $v$ に持たせる。葉は $\varphi_v(x) = A_v$（$p_v = 0$ とみる）である。1 本の[重いパス](../guide/glossary.md#heavy-path)の頂点を浅い順に $u_1, \dots, u_k$（$u_k$ は葉）とすると、パスの先頭の値は合成
 
 $$
 f(u_1) = (\varphi_{u_1} \circ \varphi_{u_2} \circ \cdots \circ \varphi_{u_k})(0)
 $$
 
-で求まる。一次関数の合成は[結合法則](../guide/glossary.md#associativity)を満たすので、HL 分解の番号の列にセグメント木を載せればよい。番号は重いパスの浅い方ほど小さいので、積は番号の順（浅い方が左）に並ぶ。[木の上の動的 DP](../dp/dynamic-dp.md#on-trees) の行列の書き方と同じ向きである。
+で求まる。1 次関数の合成は[結合法則](../guide/glossary.md#associativity)を満たすので、HL 分解の番号の列にセグメント木を載せればよい。番号は重いパスの浅い方ほど小さいので、積は番号の順（浅い方が左）に並ぶ。[木の上の動的 DP](../dp/dynamic-dp.md#on-trees) の行列の書き方と同じ向きである。
 
 $A_v$ を書き換えたときは次のように直す。
 
@@ -76,7 +76,7 @@ HL 分解の方法で $\log$ が 2 つ付くのは、重いパスごとのセグ
 
 前の節のハッシュ $f(v) = A_v + \prod_c f(c)$ を例にする。木を部品に分けて、2 種類の部品を考える。
 
-- **パスの部品**：重いパスの連続する一部の頂点と、それらにぶら下がる軽い子の部分木全体。上端の頂点で上につながり、下端の頂点の重い子の位置に「穴」が 1 つある。値は「穴に入る値 $x$ から上端の DP の値を返す関数」で、上の例では一次関数 $(a, b)$：$x \mapsto ax + b$ になる。
+- **パスの部品**：重いパスの連続する一部の頂点と、それらにぶら下がる軽い子の部分木全体。上端の頂点で上につながり、下端の頂点の重い子の位置に「穴」が 1 つある。値は「穴に入る値 $x$ から上端の DP の値を返す関数」で、上の例では 1 次関数 $(a, b)$：$x \mapsto ax + b$ になる。
 - **束の部品**：1 つの頂点にぶら下がる軽い子の部分木をいくつか束ねたもの（頂点そのものは含まない）。上の例では、束ねた子の値の積を持つ。
 
 部品は次の 5 つの操作で組み立てる（名前は資料によって英語のまま Vertex・AddEdge・Rake・AddVertex・Compress と呼ぶ）。
@@ -133,14 +133,14 @@ DP の部分は、5 つの操作を `switch` で書き分け、更新では頂�
 
 自作するときの要点は次のとおりである。
 
-- **値の意味を先に決める**：パスの部品の値は「穴に入る値の関数」、束の部品の値は「束ねた子の値の要約」である。関数を有限個の数で表せる（一次関数・小さな行列・max と足し算の組など）ことが、Static Top Tree を使える条件になる。
+- **値の意味を先に決める**：パスの部品の値は「穴に入る値の関数」、束の部品の値は「束ねた子の値の要約」である。関数を有限個の数で表せる（1 次関数・小さな行列・max と足し算の組など）ことが、Static Top Tree を使える条件になる。
 - **穴のある・なしを区別する**：パスの部品のうち、下端が葉で終わるもの（辺を付ける直前と根）だけが定数になる。葉の頂点を $(0, A_v)$ のように「穴を無視する関数」にしておくと、場合分けが減る。
 - **再帰の深さ**：組み立ての再帰は軽い辺と分割の深さぶんで $O(\log N)$ 段に収まる。部分木サイズを求める DFS は $N$ 段になりうるので、BFS 順の逆で求める。
 - **確かめ方**：小さな乱数の木で、毎回 DP をやり直す愚直な方法と比べる。値に 0 を多く混ぜ、パスと星の形でも高さが $O(\log N)$ に収まるかを見る（コード片の `self_test` がその形である）。
 
-Library Checker では次の 2 問で確かめられる（[練習問題](#practice)に載せた）。どちらも頂点の値 $a_v$ と辺の一次関数 $f_e$ を書き換えるたびに、パスに沿って合成した値の総和を答える問題である。
+Library Checker では次の 2 問で確かめられる（[練習問題](#practice)に載せた）。どちらも頂点の値 $a_v$ と辺の 1 次関数 $f_e$ を書き換えるたびに、パスに沿って合成した値の総和を答える問題である。
 
-- Point Set Tree Path Composite Sum (Fixed Root)：根 0 からの合成の総和。パスの部品に「合成した一次関数」「部品の中の値の和」「頂点数」を持たせる。辺の値は、辺の子の側の頂点に寄せて持つ。
+- Point Set Tree Path Composite Sum (Fixed Root)：根 0 からの合成の総和。パスの部品に「合成した 1 次関数」「部品の中の値の和」「頂点数」を持たせる。辺の値は、辺の子の側の頂点に寄せて持つ。
 - Point Set Tree Path Composite Sum：毎回指定される頂点 $r$ を根にしたときの総和。パスの部品に上向きと下向きの両方の値を持たせる必要があり、さらに難しい。このページの検証問題である。
 
 ## 学ぶための資料 {#resources}
@@ -157,14 +157,14 @@ Library Checker では次の 2 問で確かめられる（[練習問題](#practi
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [ABC351 G. Hash on Tree](https://atcoder.jp/contests/abc351/tasks/abc351_g)（diff 2920）：根付き木で、葉のハッシュは頂点の値 $A_v$、ほかの頂点のハッシュは $A_v$ に子のハッシュの積を足したものとする。$A_v$ を 1 つ書き換えるたびに、根のハッシュを 998244353 で割った余りを答える。
+- [ABC351 G. Hash on Tree](https://atcoder.jp/contests/abc351/tasks/abc351_g)（diff 2920）：根付き木で、葉のハッシュは頂点の値 A_v、ほかの頂点のハッシュは A_v に子のハッシュの積を足したものとする。A_v を 1 つ書き換えるたびに、根のハッシュを 998244353 で割った余りを答える。
 
 </div>
 
-方針：頂点 $v$ のハッシュは、重い子のハッシュ $x$ の一次関数 $p_v x + A_v$（$p_v$ は軽い子のハッシュの積）になる。この一次関数を重いパスに沿って合成すれば、[重いパスの上で DP をセグ木に載せる](#heavy-path-dp)方法で 1 回 $O(\log^2 N)$、[Static Top Tree](#compress-rake) で 1 回 $O(\log N)$ になる。
+方針：頂点 $v$ のハッシュは、重い子のハッシュ $x$ の 1 次関数 $p_v x + A_v$（$p_v$ は軽い子のハッシュの積）になる。この 1 次関数を重いパスに沿って合成すれば、[重いパスの上で DP をセグ木に載せる](#heavy-path-dp)方法で 1 回 $O(\log^2 N)$、[Static Top Tree](#compress-rake) で 1 回 $O(\log N)$ になる。
 
 ??? note "解法の詳細"
-    - Static Top Tree では、パスの部品に一次関数 $(a, b)$、束の部品に子のハッシュの積を持たせる。5 つの操作の値は [Static Top Tree の節](#compress-rake)の表のとおりで、コード片の `HashDP` がこの問題の形そのものである。コード片の組み立て方では、全体で $O(N \log N + Q \log N)$ になる。
+    - Static Top Tree では、パスの部品に 1 次関数 $(a, b)$、束の部品に子のハッシュの積を持たせる。5 つの操作の値は [Static Top Tree の節](#compress-rake)の表のとおりで、コード片の `HashDP` がこの問題の形そのものである。コード片の組み立て方では、全体で $O(N \log N + Q \log N)$ になる。
     - HL 分解とセグメント木で解くときは、$p_v$ の中の古い値を外す割り算が問題になる。ハッシュは 998244353 で割った余りなので 0 になりうる。軽い子の値を「0 でない値の積」と「0 の個数」の組で持てば、割り算を 0 でない値に限れる。全体で $O(N + Q \log^2 N)$ である。
     - 素朴に親をたどる方法は、パス状の木で 1 回 $O(N)$ になり間に合わない。
 
@@ -172,7 +172,7 @@ Library Checker では次の 2 問で確かめられる（[練習問題](#practi
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [ABC311 Ex. Many Illumination Plans](https://atcoder.jp/contests/abc311/tasks/abc311_h)（diff 3605）：美しさ・重さ・2 色のどちらかを持つ頂点の根付き木で、頂点 $v$ ごとに、$v$ の部分木から $v$ 以外の頂点を取り除いて親子の色がすべて異なる木を作る。残した頂点の重さの和が $X$ 以下での美しさの和の最大値を求める（取り除いた頂点の子は残った最も近い祖先につなぎ直す）。
+- [ABC311 Ex. Many Illumination Plans](https://atcoder.jp/contests/abc311/tasks/abc311_h)（diff 3605）：美しさ・重さ・2 色のどちらかを持つ頂点の根付き木で、頂点 v ごとに、v の部分木から v 以外の頂点を取り除いて親子の色がすべて異なる木を作る。残した頂点の重さの和が X 以下での美しさの和の最大値を求める（取り除いた頂点の子は残った最も近い祖先につなぎ直す）。
 
 </div>
 
@@ -181,14 +181,14 @@ Library Checker では次の 2 問で確かめられる（[練習問題](#practi
 
 ### Library Checker
 
-- [Point Set Tree Path Composite Sum (Fixed Root)](https://judge.yosupo.jp/problem/point_set_tree_path_composite_sum_fixed_root)：根 0 からパスに沿って一次関数を合成した値の総和を、頂点の値と辺の関数の書き換えのたびに答える。
+- [Point Set Tree Path Composite Sum (Fixed Root)](https://judge.yosupo.jp/problem/point_set_tree_path_composite_sum_fixed_root)：根 0 からパスに沿って 1 次関数を合成した値の総和を、頂点の値と辺の関数の書き換えのたびに答える。
 - [Point Set Tree Path Composite Sum](https://judge.yosupo.jp/problem/point_set_tree_path_composite_sum)：同じ総和を、クエリごとに指定される頂点を根にして答える。
 
 ## 参考 {#references}
 
 - [yosupo06「library-checker-problems/tree」](https://github.com/yosupo06/library-checker-problems/tree/master/tree)：point_set_tree_path_composite_sum と point_set_tree_path_composite_sum_fixed_root の問いの確認
 - [blue_jam「Static Top Treeの覚書」](https://zenn.dev/blue_jam/articles/0526c70b74f6bb)：学ぶための資料。5 つの操作と、節点の数が $O(N)$ になる理由
-- [noya2「式変形で導出する Static Top Tree」](https://trap.jp/post/2861/)：学ぶための資料。HL 分解の式から同じ構造を導く見方と、例題 ABC351 G の一次関数の形。ABC351 G で Static Top Tree が ABC の想定解として初めて明示的に扱われたこと
+- [noya2「式変形で導出する Static Top Tree」](https://trap.jp/post/2861/)：学ぶための資料。HL 分解の式から同じ構造を導く見方と、例題 ABC351 G の 1 次関数の形。ABC351 G で Static Top Tree が ABC の想定解として初めて明示的に扱われたこと
 - [maspy「[Library Checker] Point Set Tree Path Composite Sum」](https://maspypy.com/library-checker-point-set-tree-path-composite-sum)：学ぶための資料。根を変える版で部品に持たせる値と、ほかの方法との比較
 - [ei1333「Luzhiled's Library: Static Top Tree DP」](https://ei1333.github.io/library/graph/tree/static-top-tree-dp.hpp.html)：5 つの操作を渡す形のライブラリの関数の切り分けと計算量
 - [hitonanode「cplib-cpp: Static top tree」](https://hitonanode.github.io/cplib-cpp/data_structure/static_toptree.hpp.html)：学ぶための資料。実装の参考

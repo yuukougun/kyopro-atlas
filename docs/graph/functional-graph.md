@@ -27,13 +27,13 @@ sections:
   - {title: 閉路ごとの集計・到達できる頂点の数, anchor: per-cycle}
   - {title: 置換は閉路の集まり（巡回分解は数え上げの章）, anchor: permutation}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
     - **何ができるか**：各頂点から出る辺がちょうど 1 本の有向グラフで、$K$ 回進んだ位置・閉路に入るまでの長さ・閉路上の頂点や閉路ごとの集計を求める。各成分は閉路がちょうど 1 つあってそこへ木が流れ込む ρ の形なので、閉路に入るまでと閉路の周回に分けて考え、全頂点についてまとめて $O(N)$ で求まる。
     - **いつ使うか**：
-        - 各 i から A_i へ移動する。
+        - 各 $i$ から $A_i$ へ移動する。
         - K 回（$K \le 10^{18}$）移動した後の位置を問われる。
         - 嫌いな相手・行き先が 1 人（1 つ）ずつ決まっている。
         - 遷移が $x \to f(x)$ の写像 1 つで決まる。
@@ -218,7 +218,7 @@ $a$ が置換（$0, \dots, N-1$ の並べ替え）なら、出次数に加えて
 
 - [ABC167 D. Teleporter](https://atcoder.jp/contests/abc167/tasks/abc167_d)（diff 754）：各町のテレポーターで決まった町へ移動するとき、町 1 から K ≤ 10^18 回移動した後の町を求める。
 - [ABC296 E. Transition Game](https://atcoder.jp/contests/abc296/tasks/abc296_e)（diff 1285）：x から A_x へ移る操作について、相手が回数 K をどう選んでも、出発点をうまく選べば K 回の移動の後に i にいられるような i の個数を求める。
-- [ABC377 E. Permute K times 2](https://atcoder.jp/contests/abc377/tasks/abc377_e)（diff 1685）：順列 P に対して、すべての i で P_i を P_{P_i} に同時に置き換える操作を K 回行った後の列を求める
+- [ABC377 E. Permute K times 2](https://atcoder.jp/contests/abc377/tasks/abc377_e)（diff 1685）：順列 P に対して、すべての i で P_i を P_(P_i) に同時に置き換える操作を K 回行った後の列を求める。
 
 </div>
 

@@ -170,7 +170,7 @@ search:
 - サイン：
     - 言い回し：各人に 0〜a_i 個を配る方法の数（上限つきの配り方）
     - 制約：N ≤ 100、K ≤ 10^5 程度で、O(NK) は通るが O(NK^2) は通らない
-    - 式の形：dp[i] = Σ_{j=i−R}^{i−L} dp[j] のように、遷移元が連続した範囲の和
+    - 式の形：dp[i] = Σ dp[j]（j = i−R..i−L）のように、遷移元が連続した範囲の和
     - 式の形：dp[i] から i+L〜i+R の範囲へ同じ値を配る
 - 節：
     - `dp-prefix-sum#pull-and-push` 貰う形と累積和・配る形といもす法：https://yuukougun.github.io/kyopro-atlas/dp/dp-prefix-sum/#pull-and-push
@@ -263,7 +263,7 @@ search:
 - サイン：
     - 言い回し：好きな順番で、いくつか選んで順に処理する
     - 言い回し：締切・積み重ね（上に載せられる重さ）がある
-    - 言い回し：一次関数を好きな順に合成する
+    - 言い回し：1 次関数を好きな順に合成する
     - 言い回し：最後の 1 つだけ制限を超えてよい
 - 節：
     - `exchange-argument-dp#set-and-order` 選ぶ集合と順序を分けて考える：https://yuukougun.github.io/kyopro-atlas/dp/exchange-argument-dp/#set-and-order
@@ -302,7 +302,7 @@ search:
     - 言い回し：列をいくつかの連続部分に分ける方法の数
     - 言い回し：各区間のコストの和の最小
     - 言い回し：各区間が条件を満たすように区切れるか
-    - 式の形：dp[i] = Σ（または min）\_{j < i, [j, i) が条件を満たす} dp[j]
+    - 式の形：dp[i] = Σ（または min）dp[j]（j < i で [j, i) が条件を満たすもの）
 - 節：
     - `dp-sequence-partition#last-block` 最後の区間で分ける（空の区切りを 1 通りと数える）：https://yuukougun.github.io/kyopro-atlas/dp/dp-sequence-partition/#last-block
     - `dp-sequence-partition#vs-interval-dp` 区間 DP との違い：https://yuukougun.github.io/kyopro-atlas/dp/dp-sequence-partition/#vs-interval-dp
@@ -614,9 +614,9 @@ search:
 - ACL：`segtree`、`fenwick_tree`
 - サイン：
     - 言い回し：隣り合う要素の差が D 以下になるように選ぶ部分列の最長
-    - 式の形：dp[i] = max_{j < i, l ≤ a_j ≤ r} dp[j] + c のように、遷移元が添字や値の範囲の最小・最大
+    - 式の形：dp[i] = max dp[j] + c（j < i、l ≤ a_j ≤ r）のように、遷移元が添字や値の範囲の最小・最大
     - 式の形：遷移のコストに |x_i − x_j| を含む（x_j < x_i と x_j > x_i で分けられる）
-    - 式の形：dp[i] = min_{i−K ≤ j < i} dp[j] + c（窓が単調に動く）
+    - 式の形：dp[i] = min dp[j] + c（i−K ≤ j < i。窓が単調に動く）
 - 節：
     - `dp-segment-tree#values-on-segment-tree` dp の値を位置や値を添字にしたセグメント木に載せる（座標圧縮）：https://yuukougun.github.io/kyopro-atlas/dp/dp-segment-tree/#values-on-segment-tree
     - `dp-segment-tree#split-abs` |x − y| を左右に分けて 2 本のセグメント木に：https://yuukougun.github.io/kyopro-atlas/dp/dp-segment-tree/#split-abs
@@ -727,7 +727,7 @@ search:
 - サイン：
     - 言い回し：数列を単調（広義増加）にするための、値の変更量の和の最小
     - 言い回し：時刻ごとに位置を少しずつ動かせるときの最小コスト
-    - 式の形：dp\[i][x] = min_{y ≤ x} dp\[i−1][y] + |x − a_i| のように、x について区分線形で凸
+    - 式の形：dp\[i][x] = min dp\[i−1][y] + |x − a_i|（y ≤ x）のように、x について区分線形で凸
 - 節：
     - `slope-trick#breakpoints` 凸関数を傾きの変わる点の集まりで表す：https://yuukougun.github.io/kyopro-atlas/dp/slope-trick/#breakpoints
     - `slope-trick#two-heaps` 2 つのヒープで中央値を管理する（入口）：https://yuukougun.github.io/kyopro-atlas/dp/slope-trick/#two-heaps

@@ -209,7 +209,7 @@ $M = 10^6$ なら約 $1.4 \times 10^7$ 回で、二重ループに見えても $
 
 - [HHKB2020 C. Neq Min](https://atcoder.jp/contests/hhkb2020/tasks/hhkb2020_c)（diff 352）：数を 1 つずつ追加するたびに、まだ現れていない最小の非負整数を出力する。
 - [ABC278 D. All Assign Point Add](https://atcoder.jp/contests/abc278/tasks/abc278_d)（diff 559）：全体への一括代入・一点への加算・一点の取得のクエリを処理する。
-- [典型90 072. Loop Railway Plan（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_bt)（diff なし）：$H \times W \le 16$ のグリッドで、山のマスを避けて同じマスを通らずに戻ってくる最長の経路を求める。
+- [典型90 072. Loop Railway Plan（★4）](https://atcoder.jp/contests/typical90/tasks/typical90_bt)（diff なし）：H × W ≤ 16 のグリッドで、山のマスを避けて同じマスを通らずに戻ってくる最長の経路を求める。
 - [ABC196 D. Hanjo](https://atcoder.jp/contests/abc196/tasks/abc196_d)（diff 1277）：H×W ≤ 16 のマス目を、枚数の決まった 1×2 の畳と 1×1 の畳で敷き詰める方法の数を求める。
 
 </div>
@@ -228,7 +228,7 @@ $M = 10^6$ なら約 $1.4 \times 10^7$ 回で、二重ループに見えても $
     ??? success "答え"
         $2^{40} \approx 1.1 \times 10^{12}$ なので間に合わない。半分の 20 個ずつに分けると、それぞれ $2^{20} \approx 10^6$ 通りで、片方をソートしてもう片方から二分探索すれば $O(2^{N/2} N)$ で済む（[半分全列挙](../basics/meet-in-the-middle.md)）。
 
-??? question "確認問題：クエリごとに O(N)"
+??? question "確認問題：クエリごとに $O(N)$"
     $N, Q \le 2 \times 10^5$ で、各クエリが区間 $[l, r)$ の和を聞く。クエリごとに区間を足し合わせると間に合うか。
 
     ??? success "答え"

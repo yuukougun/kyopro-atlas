@@ -72,7 +72,7 @@ problems:
   difficulty: 2213
   experimental: true
   difficulty_fetched: '2026-10-21'
-  summary: A_{n} = (C_1 AND A_{n−1}) XOR … XOR (C_K AND A_{n−K}) で定まる数列の第 M 項を求める（M ≤ 10^9）。
+  summary: A_n = (C_1 AND A_(n−1)) XOR … XOR (C_K AND A_(n−K)) で定まる数列の第 M 項を求める（M ≤ 10^9）。
   approach: AND を掛け算、XOR を足し算とみた行列の累乗
   pages:
   - {id: matrix-power, role: practice}
@@ -1835,7 +1835,7 @@ problems:
   difficulty: 2402
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: 素数 p と 0/1 の列 a_0, …, a_{p−1} が与えられるとき、f(i) ≡ a_i (mod p) を満たす p − 1 次以下の多項式 f の係数を求める。
+  summary: 素数 p と 0/1 の列 a_0, …, a_(p−1) が与えられるとき、f(i) ≡ a_i (mod p) を満たす p − 1 次以下の多項式 f の係数を求める。
   approach: 1 − (x − i)^(p−1) の和、またはラグランジュ補間で O(p²)
   pages:
   - {id: lagrange-interpolation, role: example}
@@ -3298,7 +3298,7 @@ problems:
   alternatives:
   - pages:
     - floor-quotient-enum
-    summary: x の約数の個数を f(x) とするとき、Σ_{x=1}^{N} x·f(x) を求める（N ≤ 10^7）。
+    summary: x の約数の個数を f(x) とするとき、x = 1..N の x·f(x) の和を求める（N ≤ 10^7）。
     approach: 約数 a ごとに a·k(k+1)/2（k = ⌊N/a⌋）を足し、k が同じ a の区間を等差数列の和でまとめて O(√N)
   pages:
   - {id: sigma-manipulation, role: example}
@@ -3610,7 +3610,7 @@ problems:
   difficulty: 1175
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: A_1 = X、A_{n+1} = A_n^2 mod M で定まる数列の、最初の N 項の和を求める。
+  summary: A_1 = X、A_(n+1) = A_n^2 mod M で定まる数列の、最初の N 項の和を求める。
   approach: 値は M 種類しかないので周期を見つけ、残りを割り算で足す
   pages:
   - {id: periodicity, role: example}
@@ -6165,7 +6165,7 @@ problems:
   experimental: false
   difficulty_fetched: '2026-10-21'
   summary: 数列の値を 1 増やすたびに要素ごとの費用がかかるとき、増やした費用と「値の種類数 × X」の和の最小を求める。
-  approach: ソート後の DP の遷移が一次関数の最小になる
+  approach: ソート後の DP の遷移が1 次関数の最小になる
   pages:
   - {id: cht, role: practice}
   evidence:
@@ -6225,12 +6225,12 @@ problems:
   difficulty: 969
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: Σ_{i=1}^{N} ⌊N/i⌋ を求める（N ≤ 10^12）。
+  summary: i = 1..N の ⌊N/i⌋ の和を求める（N ≤ 10^12）。
   approach: 同じ商になる i の区間ごとに足して O(√N)
   alternatives:
   - pages:
     - sigma-manipulation
-    summary: Σ_{i=1}^{N} ⌊N/i⌋ を求める（N ≤ 10^12）。
+    summary: i = 1..N の ⌊N/i⌋ の和を求める（N ≤ 10^12）。
     approach: 同じ商になる i を区間にして O(√N)。値でまとめ直す例として本文で参照する（例題は floor-quotient-enum）
   pages:
   - {id: sigma-manipulation, role: practice}
@@ -6803,7 +6803,7 @@ problems:
   difficulty: 1248
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: 飴の個数 X に A_{(X mod N)} 個を足す操作を K ≤ 10^12 回行った後の飴の個数を求める。
+  summary: 飴の個数 X に A_(X mod N) 個を足す操作を K ≤ 10^12 回行った後の飴の個数を求める。
   approach: 周期の検出でもダブリングでも解ける
   pages:
   - {id: doubling, role: example}
@@ -7918,7 +7918,7 @@ problems:
   - pages:
     - expected-value-dp
     summary: 6 面のサイコロを最大 N 回振れ、振るたびにやめてその目を得点にできるとき、得点の期待値の最大を求める。
-    approach: 残り k 回のときの期待値 E_k を、出目と E_{k−1} の大きい方の平均で後ろから求める（選択は max、偶然は平均）
+    approach: 残り k 回のときの期待値 E_k を、出目と E_(k−1) の大きい方の平均で後ろから求める（選択は max、偶然は平均）
   pages:
   - {id: dp-order, role: practice}
   - {id: expected-value-dp, role: practice}
@@ -7996,7 +7996,7 @@ problems:
   difficulty: 2561
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: 長さ N の数列 A の並べ替え N! 通り（同じ値の要素も区別する）のうち、A_i < A_{i+1} となる i がちょうど K 個あるものの個数を求める。
+  summary: 長さ N の数列 A の並べ替え N! 通り（同じ値の要素も区別する）のうち、A_i < A_(i+1) となる i がちょうど K 個あるものの個数を求める。
   approach: 値の小さい順に挿入して、増える回数を数える（節 insert-by-value）
   pages:
   - {id: insertion-dp, role: challenge}
@@ -8109,7 +8109,7 @@ problems:
   difficulty: 2220
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: X_{i+1} = (A·X_i + B) mod P で定まる数列で、値 G が最初に現れる番号を求める（P は素数、なければ −1）。
+  summary: X_(i+1) = (A·X_i + B) mod P で定まる数列で、値 G が最初に現れる番号を求める（P は素数、なければ −1）。
   approach: 不動点で等比数列に直し、Baby-step Giant-step で離散対数を求める
   pages:
   - {id: multiplicative-order, role: example}
@@ -9062,7 +9062,7 @@ problems:
   experimental: false
   difficulty_fetched: '2026-10-21'
   summary: 客ごとの購買意欲と商品ごとの価値から、価格に応じて買う客が決まるとき、商品ごとに売上（価格×買う人数）の最大を求める。
-  approach: 買う人数ごとの売上が価格の一次関数になるので、CHT で最大を取る
+  approach: 買う人数ごとの売上が価格の1 次関数になるので、CHT で最大を取る
   pages:
   - {id: cht, role: practice}
   evidence:
@@ -9592,7 +9592,7 @@ problems:
   difficulty: 3209
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: a_0 = … = a_{K−1} = 1、a_i = a_{i−1} + … + a_{i−K}（i ≥ K）で定まる数列について、m AND N = m を満たす非負整数 m すべてにわたる a_m の和を 998244353 で割った余りで求める（K ≤ 5×10^4、N ≤ 10^18）。
+  summary: a_0 = … = a_(K−1) = 1、a_i = a_(i−1) + … + a_(i−K)（i ≥ K）で定まる数列について、m AND N = m を満たす非負整数 m すべてにわたる a_m の和を 998244353 で割った余りで求める（K ≤ 5×10^4、N ≤ 10^18）。
   approach: Bostan-Mori で、添字の bit 条件付きの項の和を求める
   pages:
   - {id: linear-recurrence-fast, role: practice}
@@ -9743,7 +9743,7 @@ problems:
   - pages:
     - mobius-function
     summary: '''.'' と ''#'' からなる長さ N の予定 S について、''#'' の一部を ''.'' に変えてできる列のうち、N 未満の N の約数 M を周期に持つものの数を mod 998244353 で求める。'
-    approach: 周期 d を持つ列の数 F(d) から、最小周期がちょうど d の数をメビウス反転で戻し、答えを −Σ_{d|N, d<N} μ(N/d) F(d) とする
+    approach: 周期 d を持つ列の数 F(d) から、最小周期がちょうど d の数をメビウス反転で戻し、答えを、d | N かつ d < N の μ(N/d) F(d) の和の −1 倍とする
   pages:
   - {id: divisor-inclusion-exclusion, role: practice}
   - {id: kmp, role: example}
@@ -10761,7 +10761,7 @@ problems:
   difficulty: 709
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: 長さ M の 2 つの数列 S・T について、すべての i で X_{S_i} ≠ X_{T_i} となる 0/1 の列 X が存在するかを判定する。
+  summary: 長さ M の 2 つの数列 S・T について、すべての i で X_(S_i) ≠ X_(T_i) となる 0/1 の列 X が存在するかを判定する。
   approach: S_i と T_i を辺で結んだグラフが二部グラフかを判定する
   alternatives:
   - pages:
@@ -12771,13 +12771,13 @@ problems:
   difficulty: 1819
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: N 個の一次関数 f_i(x) = A_i x + B_i から異なる K 個を選んで好きな順に合成し、1 に適用した値の最大を求める。
+  summary: N 個の1 次関数 f_i(x) = A_i x + B_i から異なる K 個を選んで好きな順に合成し、1 に適用した値の最大を求める。
   approach: 適用する順は比の大小で決まるので、その順に並べてから K 個選ぶ DP をする
   alternatives:
   - pages:
     - exchange-argument
-    summary: N 個の一次関数から K 個を選んで順に合成した値の最大値を求める。
-    approach: 2 つの一次関数を適用する順は比の大小で決まるので、その順に並べてから K 個選ぶ DP をする（DP の章と共通）
+    summary: N 個の1 次関数から K 個を選んで順に合成した値の最大値を求める。
+    approach: 2 つの1 次関数を適用する順は比の大小で決まるので、その順に並べてから K 個選ぶ DP をする（DP の章と共通）
   pages:
   - {id: exchange-argument, role: practice}
   - {id: exchange-argument-dp, role: example}
@@ -12826,7 +12826,7 @@ problems:
   difficulty: 1370
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: 各 i について B_i = A_{X_i} とする操作を K ≤ 10^18 回行った後の数列を求める。
+  summary: 各 i について B_i = A_(X_i) とする操作を K ≤ 10^18 回行った後の数列を求める。
   approach: 写像 X をダブリング（繰り返し二乗法）で K 回合成する
   pages:
   - {id: doubling, role: practice}
@@ -13236,16 +13236,16 @@ problems:
   difficulty: 1685
   experimental: false
   difficulty_fetched: '2026-10-21'
-  summary: 順列 P に対して、すべての i で P_i を P_{P_i} に同時に置き換える操作を K 回行った後の列を求める。
+  summary: 順列 P に対して、すべての i で P_i を P_(P_i) に同時に置き換える操作を K 回行った後の列を求める。
   approach: i → P_i の辺で閉路の集まりと見ると、K 回の操作は閉路上を 2^K 歩進むことになる
   alternatives:
   - pages:
     - functional-graph
-    summary: 順列 P に対して、すべての i で P_i を P_{P_i} に同時に置き換える操作を K 回行った後の列を求める。
+    summary: 順列 P に対して、すべての i で P_i を P_(P_i) に同時に置き換える操作を K 回行った後の列を求める。
     approach: i → P_i の閉路の上で、K 回の操作は 2^K 歩進むことになる
   - pages:
     - permutation-cycles
-    summary: 順列 P に対して、すべての i で P_i を P_{P_i} に同時に置き換える操作を K 回行った後の P を求める。
+    summary: 順列 P に対して、すべての i で P_i を P_(P_i) に同時に置き換える操作を K 回行った後の P を求める。
     approach: 1 回の操作で巡回の上の歩数が 2 倍になるので、K 回後は 2^K 歩進む。2^K を巡回の長さで割った余りだけ進める
   pages:
   - {id: graph-modeling, role: practice}
@@ -14801,7 +14801,7 @@ problems:
   experimental: false
   difficulty_fetched: '2026-10-21'
   summary: Σ A_i x_i ≤ M を満たす非負整数の組 (x_1, …, x_N) の個数を 998244353 で割った余りで求める（M は非常に大きい）。
-  approach: 1/((1 − x)Π(1 − x^{A_i})) の係数として Bostan-Mori（か Berlekamp-Massey）で求める
+  approach: 1/((1 − x)Π(1 − x^(A_i))) の係数として Bostan-Mori（か Berlekamp-Massey）で求める
   pages:
   - {id: linear-recurrence-fast, role: example}
   evidence:
@@ -16263,7 +16263,7 @@ problems:
   - pages:
     - sigma-manipulation
     summary: N 個の整数から K 個を選ぶすべての選び方について、選んだ値の和の 2 乗を足し合わせ、998244353 で割った余りを求める。
-    approach: 和の 2 乗を a_i² の項と a_i a_j（i ≠ j）の項に展開し、各項を含む選び方 C(N−1, K−1)・C(N−2, K−2) を掛ける。Σ_{i≠j} a_i a_j = (Σa)² − Σa²
+    approach: 和の 2 乗を a_i² の項と a_i a_j（i ≠ j）の項に展開し、各項を含む選び方 C(N−1, K−1)・C(N−2, K−2) を掛ける。i ≠ j の a_i a_j の和は (Σa)² − Σa²
   pages:
   - {id: symmetry-pigeonhole-casework, role: practice}
   - {id: sigma-manipulation, role: practice}
@@ -17330,7 +17330,7 @@ problems:
   difficulty: 2430
   experimental: true
   difficulty_fetched: '2026-10-21'
-  summary: 一次関数の列を 1 つずつ差し替えながら、すべてを合成した結果の値の最大・最小を求める。
+  summary: 1 次関数の列を 1 つずつ差し替えながら、すべてを合成した結果の値の最大・最小を求める。
   approach: （傾き, 切片）の合成を載せ、座標圧縮する
   pages:
   - {id: segment-tree-monoids, role: challenge}
@@ -18671,7 +18671,7 @@ problems:
   experimental: false
   difficulty_fetched: '2026-10-21'
   summary: 各頂点に値 A_v がある連結な無向グラフと数列 B（長さ K）について、頂点 1 から N へのどの単純パスでも、通った頂点の A の列が B を部分列に含むかを判定する。
-  approach: 各頂点で B と貪欲に一致した個数の最小値を距離とし、単調な遷移 x → x + [A_v = B_{x+1}] でダイクストラ法（01-BFS）を回す
+  approach: 各頂点で B と貪欲に一致した個数の最小値を距離とし、単調な遷移 x → x + [A_v = B_(x+1)] でダイクストラ法（01-BFS）を回す
   pages:
   - {id: time-dependent-dijkstra, role: challenge}
   evidence:
@@ -18702,7 +18702,7 @@ problems:
   experimental: false
   difficulty_fetched: '2026-10-21'
   summary: A^B の正の約数をすべて掛けた積が A で何回割り切れるかを、998244353 で割った余りで求める（A ≤ 10^12、B ≤ 10^18）。
-  approach: 約数の積は M^{d(M)/2}。指数 B·Π(B e_i + 1) の半分を、偶奇を mod の前の値で判定して求める
+  approach: 約数の積は M^(d(M)/2)。指数 B·Π(B e_i + 1) の半分を、偶奇を mod の前の値で判定して求める
   pages:
   - {id: divisor-count-bound, role: example}
   evidence:
@@ -18763,7 +18763,7 @@ problems:
   experimental: false
   difficulty_fetched: '2026-10-21'
   summary: 数列の長さ M の接頭辞それぞれについて、空でない部分列すべての「隣り合う 2 要素の gcd の和」を合計した値を 998244353 で割った余りで求める。
-  approach: f(n+1) = 2f(n) + Σ 2^x gcd(A_x, A_n) の gcd を Σ_{d|gcd} φ(d) に分け、d ごとに d の倍数である前の要素の 2^x の和を持って更新する
+  approach: f(n+1) = 2f(n) + Σ 2^x gcd(A_x, A_n) の gcd を d | gcd の φ(d) の和に分け、d ごとに d の倍数である前の要素の 2^x の和を持って更新する
   alternatives:
   - pages:
     - zeta-mobius-divisor
@@ -19678,7 +19678,7 @@ problems:
   difficulty: null
   experimental: null
   difficulty_fetched: '2026-10-21'
-  summary: T 個のケースそれぞれで Σ_{i=0}^{N−1} ⌊(A × i + B)/M⌋ を求める。
+  summary: T 個のケースそれぞれで i = 0..N−1 の ⌊(A × i + B)/M⌋ の和を求める。
   approach: ACL の floor_sum をそのまま使う
   pages:
   - {id: floor-sum, role: example}
@@ -19723,7 +19723,7 @@ problems:
   difficulty: null
   experimental: null
   difficulty_fetched: '2026-10-21'
-  summary: 2 つの数列 a, b について、c_k = Σ_{i+j=k} a_i b_j を 998244353 で割った余りですべての k について求める。
+  summary: 2 つの数列 a, b について、i + j = k となる a_i b_j の和 c_k を、998244353 で割った余りですべての k について求める。
   approach: ACL の convolution をそのまま使う
   pages:
   - {id: convolution-ntt, role: example}
@@ -19936,7 +19936,7 @@ problems:
   difficulty: null
   experimental: null
   difficulty_fetched: '2026-10-21'
-  summary: a_1 = … = a_K = 1、a_i = a_{i−1} + … + a_{i−K} で定まる数列の第 N 項を 10^9+7 で割った余りで求める（K ≤ 1000、N ≤ 10^9）。
+  summary: a_1 = … = a_K = 1、a_i = a_(i−1) + … + a_(i−K) で定まる数列の第 N 項を 10^9+7 で割った余りで求める（K ≤ 1000、N ≤ 10^9）。
   approach: きたまさ法（または Bostan-Mori）で求める
   pages:
   - {id: linear-recurrence-fast, role: example}

@@ -173,7 +173,7 @@ Auxiliary Tree が向くのは、指定頂点がクエリごとに与えられ�
 
 </div>
 
-??? note "方針"
+??? note "練習の方針"
     - **Sum of Tree Distance**：色 $c$ の頂点が $k$ 個あるとき、色 $c$ の圧縮木の辺 $(p, v)$ の上を通る組は、$v$ の部分木にある色 $c$ の頂点の数を $s$ として $s(k - s)$ 個である。辺の長さ $\mathrm{dep}[v] - \mathrm{dep}[p]$ を掛けて足せば、色 $c$ の距離の和になる（[辺の寄与](../tree/tree-edge-contribution.md#edge-pairs)を圧縮木の上でする）。[マージテク](../tree/small-to-large.md)・[重心分解](../tree/centroid-decomposition.md)・平方分割でも解ける。
 
 ## 確認問題 {#quiz}

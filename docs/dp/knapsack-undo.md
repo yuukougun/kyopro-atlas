@@ -25,7 +25,7 @@ sections:
   - {title: 前後からの DP をマージする, anchor: prefix-and-suffix}
   - {title: 分割統治でオフラインに処理する, anchor: offline-divide-and-conquer, level: 黄}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -107,7 +107,10 @@ max・min の DP で要素を除きたいときは、取り除く操作そのも
 $\mathrm{pre}[0][j]$ と $\mathrm{suf}[N][j]$ をすべて 0 で始めれば、更新は普通のナップサックのままで「$j$ 以下」の意味になる。「ちょうど $j$」の意味にするなら、$j = 0$ だけを 0、ほかを $-\infty$ で始める。どちらも $O(NW)$ で作れる（$W$ は重さの上限で、要点の和の上限 $K$ にあたる）。品物 $i$ を除いた最大は、前に重さ $j$、後ろに $W - j$ を割り振る全通りの最大である。
 
 $$
-\mathrm{without}[i] = \max_{0 \le j \le W} \left( \mathrm{pre}[i][j] + \mathrm{suf}[i + 1][W - j] \right)
+\begin{aligned}
+\mathrm{without}[i] &= \max_{0 \le j \le W} \bigl( \mathrm{pre}[i][j] \\
+&\qquad + \mathrm{suf}[i + 1][W - j] \bigr)
+\end{aligned}
 $$
 
 表を「$j$ 以下」の意味で持つのが要点である。前で実際に使う重さを $a$、後ろを $b$ とする。$a + b \le W$ なら、$j = a$ のとき後ろの上限 $W - j \ge b$ に収まる。だから最適な選び方は必ずどれかの $j$ で数えられる。「ちょうど $j$」の表で同じことをすると、$j$ と $W - j$ の組だけでは足りず、和が $W$ 未満の組を取りこぼす。
@@ -123,7 +126,7 @@ $$
 
 マージの形は問いに合わせて変える。
 
-- **品物 $i$ を必ず使うときの最大**：$\max_j \left( \mathrm{pre}[i][j] + \mathrm{suf}[i + 1][W - w_i - j] \right) + v_i$。全体の最大と比べれば、$i$ が「どの最適解にも入る」「どれにも入らない」「入る最適解と入らない最適解の両方がある」を判定できる
+- **品物 $i$ を必ず使うときの最大**：$\mathrm{pre}[i][j] + \mathrm{suf}[i + 1][W - w_i - j]$ の $j$ についての最大に、$v_i$ を足した値である。全体の最大と比べれば、$i$ が「どの最適解にも入る」「どれにも入らない」「入る最適解と入らない最適解の両方がある」を判定できる
 - **数え上げで和がちょうど $K$**：$\sum_j \mathrm{pre}[i][j] \cdot \mathrm{suf}[i + 1][K - j]$。ここでは表を「ちょうど $j$」の意味で持つ
 - **和が区間 $[L, R)$ に入るものがあるか**：後ろの表の可否を累積和にしておけば、各 $j$ について $[L - j, R - j)$ に作れる和があるかを $O(1)$ で調べられる
 

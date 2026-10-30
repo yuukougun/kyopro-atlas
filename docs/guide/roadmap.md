@@ -696,7 +696,7 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 44 | [Wavelet Matrix](../ds/wavelet-matrix.md) | データ構造 | 余裕があれば |
 | 45 | [平衡二分探索木と pb_ds の tree](../ds/balanced-bst.md) | データ構造 | 余裕があれば |
 | 46 | [位数・原始根・離散対数](../math/multiplicative-order.md#mod-root) › 平方剰余と mod の K 乗根（オイラーの規準・Tonelli-Shanks・Cipolla）（黄のページの節） | 整数論・代数 | 準必修 |
-| 47 | [floor sum](../math/floor-sum.md#applications) › 応用の型：bit ごとの popcount・一次式の mod の積（黄のページの節） | 整数論・代数 | 準必修 |
+| 47 | [floor sum](../math/floor-sum.md#applications) › 応用の型：bit ごとの popcount・1 次式の mod の積（黄のページの節） | 整数論・代数 | 準必修 |
 | 48 | [分割統治 FFT・オンライン畳み込み](../math/online-convolution.md) | 整数論・代数 | 準必修 |
 | 49 | [形式的冪級数と多項式の演算](../math/fps-basics.md) | 整数論・代数 | 準必修 |
 | 50 | [大きな数の素数判定と素因数分解](../math/miller-rabin.md) | 整数論・代数 | 余裕があれば |

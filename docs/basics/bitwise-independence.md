@@ -29,7 +29,7 @@ sections:
   - {title: 上位 bit で 2 つに分けて再帰する, anchor: split-by-top-bit, level: 青}
   - {title: 足し算では使えない理由（繰り上がり）, anchor: addition}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -210,13 +210,6 @@ XOR は「繰り上がりを無視した足し算」で、AND が繰り上がり
 
 **和の最大化で上の bit を優先する**。$\sum_i (X \oplus a_i)$ のような寄与の和では、下の bit の寄与が上の bit を上回りうる（[上の bit から決める貪欲](#top-down)の確認問題）。上の bit を優先してよいのは、1 つの値の大小を比べるときである。
 
-## 使い分け {#comparison}
-
-- 要素をいくつでも選んで XOR したときに作れる値（最大値・個数・K 番目）は、bit ごとには分けられない。[XOR 基底](../math/xor-basis.md)で掃き出す
-- 要素の追加・削除をしながら「$x$ との XOR の最小・最大」を何度も答えるなら [Binary Trie](../ds/binary-trie.md#xor-min-max) に載せる。1 回だけなら[上位 bit で分ける再帰](#split-by-top-bit)で足りる
-- $X \le K$ のような上限が、和の最大化や数え上げと組み合わさるなら [桁 DP](../dp/digit-dp.md) の形で書くと場合分けを間違えにくい
-- XOR を含む問題全体の入口は [XOR](../patterns/xor.md#overview)、bit 以外の「独立に分ける」言い換えは[言い換えの典型](../thinking/reformulation.md)にある
-
 ## 例題 {#examples}
 
 ### ABC147 D. Xor Sum 4 {#abc147_d}
@@ -259,6 +252,13 @@ $N \le 3 \times 10^5$ なのでペアを全部作ると間に合わない。XOR 
 
 ??? note "力試しの方針"
     - **ABC281 F**：[上位 bit で 2 つに分けて再帰する](#split-by-top-bit)の $f(S, k)$ をそのまま使う。$A_i < 2^{30}$ なので bit 29 から始める。ソートしておけば、分けたグループを添字の区間で表せる
+
+## 使い分け {#comparison}
+
+- 要素をいくつでも選んで XOR したときに作れる値（最大値・個数・K 番目）は、bit ごとには分けられない。[XOR 基底](../math/xor-basis.md)で掃き出す
+- 要素の追加・削除をしながら「$x$ との XOR の最小・最大」を何度も答えるなら [Binary Trie](../ds/binary-trie.md#xor-min-max) に載せる。1 回だけなら[上位 bit で分ける再帰](#split-by-top-bit)で足りる
+- $X \le K$ のような上限が、和の最大化や数え上げと組み合わさるなら [桁 DP](../dp/digit-dp.md) の形で書くと場合分けを間違えにくい
+- XOR を含む問題全体の入口は [XOR](../patterns/xor.md#overview)、bit 以外の「独立に分ける」言い換えは[言い換えの典型](../thinking/reformulation.md)にある
 
 ## 参考 {#references}
 

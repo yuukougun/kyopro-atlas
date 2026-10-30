@@ -193,13 +193,6 @@ $\mathrm{cnt}[N][p] = 1$ で、$\mathrm{cnt}[i][0] = \mathrm{cnt}[i+1][0] + \mat
 
 **最適値と復元で計算を変える**。逆算の等号の判定は、表を作ったときと同じ式・同じ型で行う。表は `min(K, …)` で頭打ちにしたり mod を取ったりしたのに、復元で生の値と比べると一致しない。
 
-## 使い分け {#comparison}
-
-- 選び方を 1 つだけ出すなら、終端から逆にたどる。辞書順の条件がつくなら、後ろからの DP と前からの貪欲にする
-- 「残りで完成させられるか」が DP なしで分かるとき（文字の残りの個数や、次の出現位置だけで分かるとき）は、DP を作らずに[辞書順の貪欲](../basics/lexicographic-greedy.md#feasibility)で決める
-- 個数が二項係数で出るなら[二項係数の K 番目](../comb/binomial-coefficient.md#kth)、部分列の個数なら[部分列 DP](../dp/subsequence-dp.md#kth-subsequence) の数え方を使う
-- グラフの最短路の経路は、遷移元（直前の頂点）を記録して復元する（[幅優先探索](../graph/bfs.md#path-restoration)）。後ろからの最短距離を求めておけば、辞書順最小の経路も同じ考え方で作れる
-
 ## 例題 {#examples}
 
 ### ABC271 D. Flip and Adjust {#abc271_d}
@@ -277,6 +270,13 @@ $\mathrm{cnt}[N][p] = 1$ で、$\mathrm{cnt}[i][0] = \mathrm{cnt}[i+1][0] + \mat
 
 ??? note "力試しの方針"
     - **ARC081 E**：$\mathrm{dp}[i]$ ＝ $A[i, \lvert A \rvert)$ の部分列でない最短の文字列の長さ、を後ろから求める。文字 $c$ の位置 $i$ 以降の最初の出現を $\mathrm{nxt}[i][c]$ とすると、$c$ が現れなければ長さ 1、現れれば $\mathrm{dp}[\mathrm{nxt}[i][c] + 1] + 1$ の最小が $\mathrm{dp}[i]$ である。復元は位置 0 から、最小を与える文字のうち最小の $c$ を選んで $\mathrm{nxt}[i][c] + 1$ へ進む（[部分列 DP](../dp/subsequence-dp.md#shortest-non-subsequence)）
+
+## 使い分け {#comparison}
+
+- 選び方を 1 つだけ出すなら、終端から逆にたどる。辞書順の条件がつくなら、後ろからの DP と前からの貪欲にする
+- 「残りで完成させられるか」が DP なしで分かるとき（文字の残りの個数や、次の出現位置だけで分かるとき）は、DP を作らずに[辞書順の貪欲](../basics/lexicographic-greedy.md#feasibility)で決める
+- 個数が二項係数で出るなら[二項係数の K 番目](../comb/binomial-coefficient.md#kth)、部分列の個数なら[部分列 DP](../dp/subsequence-dp.md#kth-subsequence) の数え方を使う
+- グラフの最短路の経路は、遷移元（直前の頂点）を記録して復元する（[幅優先探索](../graph/bfs.md#path-restoration)）。後ろからの最短距離を求めておけば、辞書順最小の経路も同じ考え方で作れる
 
 ## 参考 {#references}
 

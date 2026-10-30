@@ -16,7 +16,7 @@ signs:
   - {type: constraint, text: 線形漸化式の項数 K が数百〜数千で、N ≤ 10^18}
   - {type: phrase, text: 有理式 P(x)/Q(x) の N 次の係数}
   - {type: phrase, text: 答えが線形漸化式を満たしそうだが式が分からない（最初の項から推定する）}
-  - {type: shape, text: 'a_n = Σ_{k=1}^{K} c_k a_{n−k} の形の漸化式'}
+  - {type: shape, text: a_n = c_1 a_(n−1) + … + c_K a_(n−K) の形の漸化式}
 acl: [convolution]
 verify: [kth_term_of_linearly_recurrent_sequence, find_linear_recurrence, consecutive_terms_of_linear_recurrent_sequence]
 frequency: C
@@ -34,10 +34,10 @@ updated: 2026-10-29
 !!! abstract "要点"
     - **何ができるか**：$K$ 項の線形漸化式の第 $N$ 項を、行列累乗より速く求める（きたまさ法なら $O(K^2 \log N)$、Bostan-Mori なら $O(K \log K \log N)$）。漸化式が分からなくても、最初の $2K$ 項から Berlekamp-Massey で漸化式そのものを見つけられる。
     - **いつ使うか**：
-        - 線形漸化式の項数 K が数百〜数千で、N ≤ 10^18
-        - 有理式 P(x)/Q(x) の N 次の係数
+        - 線形漸化式の項数 $K$ が数百〜数千で、$N \le 10^{18}$
+        - 有理式 $P(x)/Q(x)$ の $N$ 次の係数
         - 答えが線形漸化式を満たしそうだが式が分からない（最初の項から推定する）
-        - a_n = Σ_{k=1}^{K} c_k a_{n−k} の形の漸化式
+        - $a_n = \sum_{k=1}^{K} c_k a_{n-k}$ の形の漸化式
     - **計算量**：第 $N$ 項はきたまさ法（素朴な掛け算）$O(K^2 \log N)$、Bostan-Mori（NTT）$O(K \log K \log N)$。漸化式の発見は Berlekamp-Massey で $2K$ 項から $O(K^2)$（法は素数）
     - **前提**：[行列累乗](../math/matrix-power.md)、[形式的冪級数と多項式の演算](../math/fps-basics.md)
 
@@ -181,7 +181,7 @@ Berlekamp-Massey は、今の漸化式で次の項を予測したずれ $\delta$
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [TDPC T. フィボナッチ](https://atcoder.jp/contests/tdpc/tasks/tdpc_fibonacci)（diff なし）：a_1 = … = a_K = 1、a_i = a_{i−1} + … + a_{i−K} で定まる数列の第 N 項を 10^9+7 で割った余りで求める（K ≤ 1000、N ≤ 10^9）。
+- [TDPC T. フィボナッチ](https://atcoder.jp/contests/tdpc/tasks/tdpc_fibonacci)（diff なし）：a_1 = … = a_K = 1、a_i = a_(i−1) + … + a_(i−K) で定まる数列の第 N 項を 10^9+7 で割った余りで求める（K ≤ 1000、N ≤ 10^9）。
 
 </div>
 
@@ -211,11 +211,11 @@ Berlekamp-Massey は、今の漸化式で次の項を予測したずれ $\delta$
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [ABC300 Ex. Fibonacci: Revisited](https://atcoder.jp/contests/abc300/tasks/abc300_h)（diff 3209）：a_0 = … = a_{K−1} = 1、a_i = a_{i−1} + … + a_{i−K}（i ≥ K）で定まる数列について、m AND N = m を満たす非負整数 m すべてにわたる a_m の和を 998244353 で割った余りで求める（K ≤ 5×10^4、N ≤ 10^18）。
+- [ABC300 Ex. Fibonacci: Revisited](https://atcoder.jp/contests/abc300/tasks/abc300_h)（diff 3209）：a_0 = … = a_(K−1) = 1、a_i = a_(i−1) + … + a_(i−K)（i ≥ K）で定まる数列について、m AND N = m を満たす非負整数 m すべてにわたる a_m の和を 998244353 で割った余りで求める（K ≤ 5×10^4、N ≤ 10^18）。
 
 </div>
 
-??? note "方針"
+??? note "練習の方針"
     母関数 $P(x)/Q(x)$ に Bostan-Mori を使い、$N$ の bit を下から見る。bit が 0 なら $m$ のその bit は 0 なので偶数次の側だけを残し、bit が 1 なら 0 でも 1 でもよいので偶数次と奇数次の側の和を残す。計算量は通常の Bostan-Mori と同じ $O(K \log K \log N)$ である。
 
 ## 参考 {#references}

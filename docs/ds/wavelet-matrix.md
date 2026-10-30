@@ -152,7 +152,7 @@ ACL には Wavelet Matrix がない。自作するなら、上のコード片か
 
 </div>
 
-??? note "方針"
+??? note "練習の方針"
     - **Smaller Sum**：前の答えで次の質問が決まるので先読みできない。Wavelet Matrix に和の累積を持たせ、$X + 1$ 未満の和を答える。値は $10^9$ 程度なので、座標圧縮するか $L = 30$ で載せる。[マージソート木](../ds/merge-sort-tree.md)の例題でもあり、そちらの 1 回 $O(\log^2 N)$ でも間に合う。
 
 ### Library Checker

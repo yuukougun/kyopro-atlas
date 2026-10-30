@@ -29,7 +29,7 @@ sections:
   - {title: 木上の Mo（入りと出の両方を記録した列で、パスを区間にする。LCA を別に足す）, anchor: mo-on-tree, level: 黄}
   - {title: 時間付き Mo・ロールバック Mo, anchor: variants, level: 発展}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -138,40 +138,8 @@ Mo's algorithm の本体は、クエリを並べ替えて端を動かすだけ�
 
 **取得を重くしてよい（値の平方分割）**。伸縮は $O(N \sqrt{Q})$ 回あるのに対し、answer は $Q$ 回しかない。伸縮を $O(1)$ に軽くするかわりに answer を $O(\sqrt{V})$ に重くすると、全体が速くなる（$V$ は値の範囲。座標圧縮すれば $V \le N$）。たとえば「区間の中で値が $x$ 未満の要素の数」を BIT で持つと、伸縮も取得も $O(\log N)$ で、全体は $O(N \sqrt{Q} \log N)$ である。値の範囲 $[0, V)$ を大きさ $\sqrt{V}$ のブロックに分ける。値ごとの個数とブロックごとの個数の合計を持てば、伸縮は 2 か所を直すだけの $O(1)$ になる。取得は、$x$ 未満の完全なブロックの合計と、端のブロックの値ごとの個数を足して $O(\sqrt{V})$ になる。全体は $O(N \sqrt{Q} + Q \sqrt{V})$ で、$\log$ が消える。この考え方は[平方分割](../ds/sqrt-decomposition.md)と同じである。
 
-??? question "確認問題：区間の中の最頻値の出現回数を、伸縮 O(1) で答えるには"
+??? question "確認問題：区間の中の最頻値の出現回数を、伸縮 $O(1)$ で答えるには"
     値ごとの個数 $\mathrm{cnt}[x]$ に加えて、「個数がちょうど $k$ の値の数」$\mathrm{num}[k]$ と、今の最大の個数 $m$ を持つ。add では $\mathrm{num}[\mathrm{cnt}[x]]$ を 1 減らし、$\mathrm{cnt}[x]$ を 1 増やして $\mathrm{num}[\mathrm{cnt}[x]]$ を 1 増やし、$m$ を $\max(m, \mathrm{cnt}[x])$ にする。remove では、出す値の個数がちょうど $m$ で、それが $\mathrm{num}[m]$ の最後の 1 つなら、$m$ を 1 減らす。個数は 1 ずつしか減らないので、その値の個数は $m - 1$ に残り、新しい最大は $m - 1$ である。どちらも $O(1)$ である。
-
-## 例題 {#examples}
-
-### ABC293 G. Triple Index {#abc293_g}
-
-<div class="kp-problems" data-role="example" markdown>
-
-- [ABC293 G. Triple Index](https://atcoder.jp/contests/abc293/tasks/abc293_g)（diff 1753）：区間内で同じ値を持つ 3 つ組 (i < j < k) の個数を、多数のクエリで答える。
-
-</div>
-
-区間の 3 つ組の数は、左右の区間に分けると、またがる組が数えられないので合成できない。値ごとの個数 $\mathrm{cnt}[x]$ を持てば、1 要素の出入りで $\binom{c}{2}$ だけ増減するので、Mo's algorithm の典型の形になる。add・remove は[実装の要点](#implementation)の 3 つ組のコードそのものである。
-
-??? note "解法の詳細"
-    答えは $\sum_x \binom{\mathrm{cnt}[x]}{3}$ である。値 $x$ の個数が $c$ から $c + 1$ になると、$\binom{c+1}{3} - \binom{c}{3} = \binom{c}{2}$ だけ増える。新しい要素と、すでにある $c$ 個から 2 つを選ぶ組がちょうど増えるからである。remove はこの逆で、$\mathrm{cnt}[x]$ を 1 減らしてから $\binom{\mathrm{cnt}[x]}{2}$ を引く。
-
-    問題文の区間は 1-indexed の閉区間 $[L, R]$ なので、0-indexed の半開区間 $[L - 1, R)$ に直してから並べる。答えは区間の長さの 3 乗のオーダー（$10^{15}$ 程度）になりうるので `long long` で持つ。1 回の伸縮が $O(1)$ なので、全体は $O(N \sqrt{Q} + Q \log Q)$ である。
-
-### ABC242 G. Range Pairing Query {#abc242_g}
-
-<div class="kp-problems" data-role="example" markdown>
-
-- [ABC242 G. Range Pairing Query](https://atcoder.jp/contests/abc242/tasks/abc242_g)（diff 1828）：区間内で同じ値どうしを組にするとき、作れる組の最大数を多数のクエリで答える。
-
-</div>
-
-値 $x$ が区間に $\mathrm{cnt}[x]$ 個あれば、その値だけで $\lfloor \mathrm{cnt}[x] / 2 \rfloor$ 組が作れ、異なる値は組にならない。答えはこの和なので、1 要素の出入りで答えが $1$ だけ変わるかどうかを個数の偶奇で決められる。$N \le 10^5$ に対して $Q \le 10^6$ とクエリが多いので、ブロックの大きさは $N / \sqrt{Q}$ にする。
-
-??? note "解法の詳細"
-    値 $x$ の個数が $c$ から $c + 1$ になると、$\lfloor (c + 1) / 2 \rfloor - \lfloor c / 2 \rfloor$ は $c$ が奇数なら 1、偶数なら 0 である。出すときは、$c$ から $c - 1$ になるとき $c$ が偶数なら答えが 1 減る。
-
-    $B = N / \sqrt{Q} \approx 100$ にすると、伸縮は上限の見積もりで合計 $2 N \sqrt{Q} \approx 2 \times 10^8$ 回である（[ブロックの大きさを √N にしない](#ordering)）。$Q$ が大きいので入出力も重く、入出力を速くする書き方（`ios::sync_with_stdio(false)` など）を使う。並べ替えは $O(Q \log Q)$ である。
 
 ## 2 つの接頭辞の長さ (X, Y) を区間と見る {#two-prefixes}
 
@@ -232,6 +200,38 @@ DFS で頂点に入るときと出るときの両方で頂点を列に記録し�
 - **answer が重い**：answer に $O(N)$ かけると全体が $O(NQ)$ になる。answer は $O(\sqrt{N})$ 程度までに抑え、それ以上かかるなら、伸縮のたびに答えそのものを直す形にする
 - **伸縮の関数が遅い**：伸縮は $10^8$ 回ほど呼ばれるので、`std::function` に入れて渡すと、呼び出しのたびに間接呼び出しになって遅くなりやすい。ラムダ式はテンプレートの引数で受け取る。伸縮の中では `map` や `set` を使わず、値を座標圧縮して配列で持つ
 - **木上の Mo で LCA を印で入れる**：LCA を反転の関数で入れて出し忘れると、印が残って次のクエリの答えがずれる（[木上の Mo](#mo-on-tree)）
+
+## 例題 {#examples}
+
+### ABC293 G. Triple Index {#abc293_g}
+
+<div class="kp-problems" data-role="example" markdown>
+
+- [ABC293 G. Triple Index](https://atcoder.jp/contests/abc293/tasks/abc293_g)（diff 1753）：区間内で同じ値を持つ 3 つ組 (i < j < k) の個数を、多数のクエリで答える。
+
+</div>
+
+区間の 3 つ組の数は、左右の区間に分けると、またがる組が数えられないので合成できない。値ごとの個数 $\mathrm{cnt}[x]$ を持てば、1 要素の出入りで $\binom{c}{2}$ だけ増減するので、Mo's algorithm の典型の形になる。add・remove は[実装の要点](#implementation)の 3 つ組のコードそのものである。
+
+??? note "解法の詳細"
+    答えは $\sum_x \binom{\mathrm{cnt}[x]}{3}$ である。値 $x$ の個数が $c$ から $c + 1$ になると、$\binom{c+1}{3} - \binom{c}{3} = \binom{c}{2}$ だけ増える。新しい要素と、すでにある $c$ 個から 2 つを選ぶ組がちょうど増えるからである。remove はこの逆で、$\mathrm{cnt}[x]$ を 1 減らしてから $\binom{\mathrm{cnt}[x]}{2}$ を引く。
+
+    問題文の区間は 1-indexed の閉区間 $[L, R]$ なので、0-indexed の半開区間 $[L - 1, R)$ に直してから並べる。答えは区間の長さの 3 乗のオーダー（$10^{15}$ 程度）になりうるので `long long` で持つ。1 回の伸縮が $O(1)$ なので、全体は $O(N \sqrt{Q} + Q \log Q)$ である。
+
+### ABC242 G. Range Pairing Query {#abc242_g}
+
+<div class="kp-problems" data-role="example" markdown>
+
+- [ABC242 G. Range Pairing Query](https://atcoder.jp/contests/abc242/tasks/abc242_g)（diff 1828）：区間内で同じ値どうしを組にするとき、作れる組の最大数を多数のクエリで答える。
+
+</div>
+
+値 $x$ が区間に $\mathrm{cnt}[x]$ 個あれば、その値だけで $\lfloor \mathrm{cnt}[x] / 2 \rfloor$ 組が作れ、異なる値は組にならない。答えはこの和なので、1 要素の出入りで答えが $1$ だけ変わるかどうかを個数の偶奇で決められる。$N \le 10^5$ に対して $Q \le 10^6$ とクエリが多いので、ブロックの大きさは $N / \sqrt{Q}$ にする。
+
+??? note "解法の詳細"
+    値 $x$ の個数が $c$ から $c + 1$ になると、$\lfloor (c + 1) / 2 \rfloor - \lfloor c / 2 \rfloor$ は $c$ が奇数なら 1、偶数なら 0 である。出すときは、$c$ から $c - 1$ になるとき $c$ が偶数なら答えが 1 減る。
+
+    $B = N / \sqrt{Q} \approx 100$ にすると、伸縮は上限の見積もりで合計 $2 N \sqrt{Q} \approx 2 \times 10^8$ 回である（[ブロックの大きさを √N にしない](#ordering)）。$Q$ が大きいので入出力も重く、入出力を速くする書き方（`ios::sync_with_stdio(false)` など）を使う。並べ替えは $O(Q \log Q)$ である。
 
 ## 練習問題 {#practice}
 

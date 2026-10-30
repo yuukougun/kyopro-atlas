@@ -25,7 +25,7 @@ sections:
   - {title: bit 演算の小技, anchor: bit-tricks}
   - {title: C++ の版と GCC・INF の候補, anchor: cpp}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -227,7 +227,7 @@ ABC の多くはメモリ制限が 1024 MiB である。1024 MiB に入る個数
 
 ## ACL の機能と計算量 {#acl}
 
-ACL v1.6 のドキュメントに書かれた計算量である。$n$ は要素数や頂点数、$m$ は辺数である。呼び出し方は [ACL の読み方](../cpp/acl-reading.md#components)にある。
+ACL v1.6 のドキュメントに書かれた計算量である。$n$ は要素数や頂点数、$m$ は辺数（`pow_mod`・`inv_mod`・`modint` の行では法、`floor_sum` の行では割る数）、$p$ は素数の法である。呼び出し方は [ACL の読み方](../cpp/acl-reading.md#components)にある。
 
 | 機能 | 計算量 | ページ |
 | --- | --- | --- |
@@ -238,11 +238,11 @@ ACL v1.6 のドキュメントに書かれた計算量である。$n$ は要素�
 | `scc_graph`・`two_sat` | $O(n + m)$ | [SCC](../graph/scc.md)・[2-SAT](../graph/two-sat.md) |
 | `mf_graph`：`flow` | $O(n^2 m)$。容量がすべて 1 なら $O((n + m) \sqrt{m})$ | [最大流](../graph/max-flow.md#acl) |
 | `mcf_graph`：`flow` | 流量 $F$ に対して $O(F (n + m) \log (n + m))$ | [最小費用流](../graph/min-cost-flow.md#acl) |
-| `convolution` | $O(n \log n + \log \mathrm{mod})$ | [畳み込みの使い方](../math/convolution-ntt.md#acl) |
+| `convolution` | $O(n \log n + \log p)$ | [畳み込みの使い方](../math/convolution-ntt.md#acl) |
 | `suffix_array`（文字列）・`lcp_array`・`z_algorithm` | $O(n)$ | [Suffix Array](../string/suffix-array.md)・[Z-algorithm](../string/z-algorithm.md) |
 | `pow_mod`・`inv_mod`・`floor_sum` | $O(\log n)$・$O(\log m)$・$O(\log m)$ | [繰り返し二乗法](../math/mod-pow.md#acl)・[floor sum](../math/floor-sum.md) |
 | `crt` | $O(n \log \operatorname{lcm})$ | [中国剰余定理](../math/crt.md#acl) |
-| `modint`：四則 | $O(1)$（割り算と `inv` は $O(\log \mathrm{mod})$） | [modint](../math/modint.md) |
+| `modint`：四則 | $O(1)$（割り算と `inv` は $O(\log m)$） | [modint](../math/modint.md) |
 
 `mf_graph` の `flow` は、流した量を $F$ として $O(F (n + m))$ とも書かれている。`segtree`・`lazy_segtree` の計算量は、渡した演算が定数時間で動くと仮定した値である。
 

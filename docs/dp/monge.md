@@ -197,7 +197,7 @@ ACL には Monge に関する機能がない。自作したら Library Checker �
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC383 G. Bar Cover](https://atcoder.jp/contests/abc383/tasks/abc383_g)（diff 3026）：長さ K の区間を重ならないように i 個選ぶときの和の最大を、すべての i について求める。
-- [ABC458 G. Children Yearn for the Evil Kindergarten](https://atcoder.jp/contests/abc458/tasks/abc458_g)（diff 2831）：毎日、集めたメダルにその日の分 $A_i$ を足して園児に配り直し、$B_i$ 枚に満たない園児は脱落、残りは $B_i$ 枚を失い、$C_i$ 枚以上を持つ園児は脱出できる。$N$ 日で脱出できる人数の最大を求める。
+- [ABC458 G. Children Yearn for the Evil Kindergarten](https://atcoder.jp/contests/abc458/tasks/abc458_g)（diff 2831）：メダルを持たない多数の園児が N 日を過ごす。毎日、集めたメダルにその日の分 A_i を足して配り直し、B_i 枚に満たない園児は脱落し、残りは B_i 枚を失い、C_i 枚以上を持つ園児は脱出できる。脱出できる人数の最大を求める。
 
 </div>
 

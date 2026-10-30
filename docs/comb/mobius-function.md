@@ -10,7 +10,7 @@ level: 黄
 kind: [数え上げ, 整数論]
 prerequisites: [divisor-inclusion-exclusion, sieve-eratosthenes]
 related: [zeta-mobius-divisor, multiplicative-function, floor-quotient-enum, euler-phi]
-summary: 約数にわたる和 F(n) = Σ_{d|n} f(d) から f をメビウス関数 μ で戻す（メビウス反転）。[gcd = 1] = Σ_{d|gcd} μ(d) と置き換えて和の順序を入れ替えるのが典型である。
+summary: 約数にわたる和 F(n)（d | n の f(d) の和）から f をメビウス関数 μ で戻す（メビウス反転）。[gcd = 1] を d | gcd の μ(d) の和に置き換えて、和の順序を入れ替えるのが典型である。
 complexity: μ の表は値の上限 V まで篩で O(V log log V)（線形篩なら O(V)）。1 ≤ i ≤ N・1 ≤ j ≤ M の互いに素な組の数は、表の後 O(min(N, M))、μ の累積和と商の列挙で束ねれば 1 回 O(√N + √M)
 signs:
   - {type: phrase, text: 'gcd(i, j) = 1 となる組の個数・和'}

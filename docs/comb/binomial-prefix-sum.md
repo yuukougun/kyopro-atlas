@@ -10,10 +10,10 @@ level: 発展
 kind: [数え上げ]
 prerequisites: [binomial-precompute]
 related: [binomial-identities, inclusion-exclusion, mo-algorithm]
-summary: 二項係数の部分和 S(n,K) = Σ_{k≤K} C(n,k) を、S(n+1,K) = 2S(n,K) − C(n,K) などの式で (n, K) を 1 ずつ動かしながら更新する。部分和を大量に使う包除の計算で役に立つ。
+summary: 二項係数の部分和 S(n,K)（k ≤ K の C(n,k) の和）を、S(n+1,K) = 2S(n,K) − C(n,K) などの式で (n, K) を 1 ずつ動かしながら更新する。部分和を大量に使う包除の計算で役に立つ。
 complexity: 前計算 O(N)、(n, K) を 1 動かす更新 O(1)、Q 個の (n, K) を Mo の順に処理して O(N√Q + Q log Q)
 signs:
-  - {type: shape, text: '答えの式に Σ_{k≤K} C(n,k) の形の和が、多くの (n, K) について現れる'}
+  - {type: shape, text: '答えの式に k ≤ K の C(n,k) の和が、多くの (n, K) について現れる'}
 acl: []
 frequency: C
 frequency_evidence: recent 0・前提として届くページなし・古い ABC 1 問

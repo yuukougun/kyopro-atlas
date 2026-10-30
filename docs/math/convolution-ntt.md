@@ -10,14 +10,14 @@ level: 青
 kind: [畳み込み・多項式]
 prerequisites: [mod-arithmetic]
 related: [fft-ntt, online-convolution, generating-function-counting, hadamard-transform, rolling-hash, z-algorithm, zeta-mobius-subset]
-summary: c_k = Σ_{i+j=k} a_i b_j（多項式の積）を ACL の convolution で O(N log N) で求める。和が k になる組の数や、ずらしたときの一致数をすべての k について一度に数える。
+summary: i + j = k となる a_i b_j の和 c_k（多項式の積）を ACL の convolution で O(N log N) で求める。和が k になる組の数や、ずらしたときの一致数をすべての k について一度に数える。
 complexity: 長さ N と M の列の畳み込みは O((N + M) log(N + M))。convolution_ll はその約 3 倍の定数倍
 signs:
   - {type: phrase, text: すべての k について、和が k になる組の数を求める}
   - {type: phrase, text: 列をずらしたときの一致数・不一致の数を、すべてのずらし方について求める}
   - {type: phrase, text: 'ワイルドカード（?）を含むパターンの照合'}
   - {type: constraint, text: 値の範囲や列の長さが 10^5〜10^6 程度で、組の全探索 O(N²) が間に合わない}
-  - {type: shape, text: 'c_k = Σ_{i+j=k} a_i b_j の形の和'}
+  - {type: shape, text: i + j = k となる a_i b_j の和 c_k の形}
 acl: [convolution, convolution_ll]
 verify: [convolution_mod, wildcard_pattern_matching]
 frequency: B
@@ -280,7 +280,7 @@ NTT は長さ $2^c$ の変換に「$2^c$ 乗して初めて 1 になる数」を
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [PRACTICE2 F. Convolution](https://atcoder.jp/contests/practice2/tasks/practice2_f)（diff なし）：2 つの数列 a, b について、c_k = Σ_{i+j=k} a_i b_j を 998244353 で割った余りですべての k について求める。
+- [PRACTICE2 F. Convolution](https://atcoder.jp/contests/practice2/tasks/practice2_f)（diff なし）：2 つの数列 a, b について、i + j = k となる a_i b_j の和 c_k を、998244353 で割った余りですべての k について求める。
 
 </div>
 
@@ -322,7 +322,7 @@ $B - A = C - B$ は $A + C = 2B$ と同じである。真ん中の $B$ を固定
 
 </div>
 
-??? note "方針"
+??? note "練習の方針"
     - **ABC143 D**：ソートと二分探索で解ける問題だが、長さの値が $10^3$ 以下なので畳み込みの入門にもなる。3 辺のうち最長の辺が残り 2 辺の和以上なら三角形にならず、長さが正なのでそうなる辺は高々 1 本である。よって答えは $\binom{N}{3}$ から「棒 $k$ と、ほかの 2 本で長さの和が $L_k$ 以下の組」の数を引いたものになる。長さの出現回数を自分と畳み込み、同じ棒の組を引いて 2 で割ると、和ごとの組の数が求まる。その累積和で各 $L_k$ 以下の組を数える
     - **ABC291 G**：[bit ごとに分ける節](#split-by-bit)の OR の式そのものである。bit ごとに $A$ を 2 周並べ、反転した $B$ と畳み込んで両方 1 の数を求める。5 回の畳み込みで済む
     - **ABC196 F**：$T$ を反転して畳み込み、すべての位置のハミング距離を求めて最小値を答える。0 と 1 の 2 回の畳み込みか、$\pm 1$ に置き換えた 1 回で求まる
@@ -336,7 +336,7 @@ $B - A = C - B$ は $A + C = 2B$ と同じである。真ん中の $B$ を固定
 
 </div>
 
-??? note "方針"
+??? note "力試しの方針"
     - **ABC471 G**：音節の数は「先頭が母音か」と「子音の直後に母音が来る箇所の数」で決まる。隣り合う 2 文字の差（文字の番号の差）はずらしても変わらないので、隣の組を差 $d$ ごとにまとめる。差 $d$ ごとに「文字 $x$ から $x + d$ への組の数」と「$x$ が子音で $x + d$ が母音か」を巡回の畳み込みで掛け合わせると、すべてのずらし幅への寄与が一度に求まる。$K$ 回の畳み込みで、全体は $O(N + K^2 \log K)$ である
 
 ## 確認問題 {#quiz}
@@ -344,10 +344,10 @@ $B - A = C - B$ は $A + C = 2B$ と同じである。真ん中の $B$ を固定
 ??? question "確認問題：列 A から 1 つ、列 B から 1 つ選んだ和が k になる組の数を、すべての k について求めたい。何と何を畳み込むか"
     $A$ の値の出現回数の列 $f$（$f_v$ は $A$ の中の $v$ の個数）と、$B$ の値の出現回数の列 $g$ を畳み込む。第 $k$ 項が答えである。$A$ と $B$ そのものを畳み込むと、添字の和が $k$ になる組の値の積の和になり、別物である。
 
-??? question "確認問題：A_i − B_j = d となる組の数を、すべての d について求めるにはどうするか"
+??? question "確認問題：$A_i - B_j = d$ となる組の数を、すべての $d$ について求めるにはどうするか"
     $B$ の値 $w$ を添字 $V_B - w$ に置いた出現回数の列（反転した $g$）と $f$ を畳み込む。第 $t$ 項が $d = t - V_B$ の組の数になる。$d$ が負の場合も $t \ge 0$ の添字に収まる。
 
-??? question "確認問題：長さ 2×10^5 の列の、値の出現回数どうしを convolution で畳み込んだ。答えを整数で出すとき何が起きうるか"
+??? question "確認問題：長さ $2 \times 10^5$ の列の、値の出現回数どうしを convolution で畳み込んだ。答えを整数で出すとき何が起きうるか"
     組の数は最大で $(2 \times 10^5)^2 = 4 \times 10^{10}$ で、$998244353$ を超える。超えた項は余りで返るので、誤った値になる。`convolution_ll` を使うか、問題が余りを求めているならそのままでよい。
 
 ??? question "確認問題：列 A の異なる 3 要素（添字が異なり、順序なし）の和が s になる選び方を、すべての s について求めるにはどうするか"

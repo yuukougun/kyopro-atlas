@@ -29,7 +29,7 @@ sections:
   - {title: パレート境界を map で持つ（支配される点を消す。ならし O(log N)）, anchor: pareto, level: 水}
   - {title: ソート順で隣り合う組の集合（2 番目に大きい値の寄与。最小 XOR の組は Binary Trie のページ）, anchor: adjacent-pairs, level: 青}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -185,14 +185,6 @@ $$
 
 **map の `[]` で要素ができる**。行ごとの `map<int, set<int>>` で `row[y].lower_bound(l)` と書くと、行 $y$ がなかったときに空の set ができる。結果は正しいが、存在を調べるつもりで `[]` を使うと要素が増え、`size()` を数える処理を壊す。調べるだけなら `find`・`contains`（C++20）を使う（[contains と find・count](../cpp/cpp-container-idioms.md#contains)）。
 
-## 使い分け {#comparison}
-
-- 要素が変わらないなら、ソートした vector と `lower_bound` で足りる（[二分探索](../basics/binary-search.md#lower-bound)）。set より定数倍が小さい
-- 最小値・最大値の取り出しだけなら priority_queue で足りる（[優先度付きキュー](../ds/priority-queue.md)）。任意の値の削除や、最小と最大の両方が要るなら multiset を使う
-- 「$x$ 未満の個数」や「$K$ 番目」を $K$ が大きいまま聞くなら、set では速くならない。値を添字にした BIT（[K 番目の値を求めるデータ構造](../ds/kth-element.md)）か pb_ds の tree を使う
-- 上位 $K$ 個の和や中央値を更新のたびに答えるなら、multiset を 2 つに分けて持つ（[上位 K 個の和と中央値の管理](../ds/top-k-multiset.md)）
-- 重ならない区間の集まりを持ち、塗る・併合するなら、左端をキーにした set で持つ（[区間を set で管理する](../ds/interval-set.md)）
-
 ## 上位の手法へのつながり {#next-steps}
 
 set・multiset・map の操作は、次の手法の部品になる。
@@ -250,6 +242,14 @@ $L$ は $10^9$ まであるので、長さ $L$ の配列は作れない。切れ
 
 ??? note "力試しの方針"
     - **ABC140 E**：値の大きい順に位置を set（番兵を 2 個ずつ入れるので multiset）に入れ、入れた位置から左右に 2 つずつ近い位置を取る。各値が 2 番目になる区間の数を[ソート順で隣り合う組の節](#adjacent-pairs)の式で数え、値との積を足す。答えは `long long` で持つ
+
+## 使い分け {#comparison}
+
+- 要素が変わらないなら、ソートした vector と `lower_bound` で足りる（[二分探索](../basics/binary-search.md#lower-bound)）。set より定数倍が小さい
+- 最小値・最大値の取り出しだけなら priority_queue で足りる（[優先度付きキュー](../ds/priority-queue.md)）。任意の値の削除や、最小と最大の両方が要るなら multiset を使う
+- 「$x$ 未満の個数」や「$K$ 番目」を $K$ が大きいまま聞くなら、set では速くならない。値を添字にした BIT（[K 番目の値を求めるデータ構造](../ds/kth-element.md)）か pb_ds の tree を使う
+- 上位 $K$ 個の和や中央値を更新のたびに答えるなら、multiset を 2 つに分けて持つ（[上位 K 個の和と中央値の管理](../ds/top-k-multiset.md)）
+- 重ならない区間の集まりを持ち、塗る・併合するなら、左端をキーにした set で持つ（[区間を set で管理する](../ds/interval-set.md)）
 
 ## 参考 {#references}
 
