@@ -107,10 +107,26 @@ check_pages.py・check_svg.py は Markdown と SVG を読むだけなので、�
 
 ```sh
 uv run mkdocs build -d DIR/site                         # 作業用フォルダへビルドする
-python3 tools/render_pages.py DIR/site --json DIR/render.json   # 全ページ（今は 424）を 390px のライト・ダークで。-j 4 で 4〜5 分
+python3 tools/render_pages.py DIR/site --changed       # ふだん：origin/main との分かれ目から変えたファイルに関わるページだけ
+python3 tools/render_pages.py DIR/site --json DIR/render.json   # 全ページ（今は 425）を 390px のライト・ダークで。-j 4 で約 1 分半
 python3 tools/render_pages.py DIR/site --page exponent-mod --width 360,390   # 直したページだけを、幅を変えて
 python3 tools/render_pages.py DIR/site --field comb -v  # その分野だけ。警告も全件
 ```
+
+- Chrome は 1 つだけ起動し、`-j` 個（既定 4）のタブを並べる。タブは 1 ページ・1 つの幅ごとに、新しい browser context の中で開いて調べ、閉じる。これでメモリがたまらない（#100。2026-10-30 の全 425 ページで、Chrome の合計は -j 4 で約 1.5GB、-j 8 で約 2.6GB）。同じ幅のライトとダークは 1 回の読み込みで、配色（prefers-color-scheme）だけを替えて調べる。Material は、選んだ配色が localStorage になければ、配色の変化に合わせて data-md-color-scheme を替える（mkdocs.yml の palette の最初が「システムの設定に従う」のため）
+- `--changed [REF]` は、REF（既定 `origin/main`）との分かれ目（merge-base）からの変更と、コミットしていない変更・追跡していないファイルから、描き直すページを選ぶ。`--page`・`--field` と合わせると、どれかに当たるページを流す。関わるページがなければ Chrome を起動せずに終わる（終了コード 0。`--json` には空の結果を書く）。REF は `--changed=REF` とも書ける。`--changed DIR/site` のようにフォルダが続いたときは、それをサイトとみなす
+
+| 変わったファイル | 流すページ |
+| --- | --- |
+| `docs/<…>.md` | そのページ。gen_site.py の生成物（分野の入口・一覧・詳細索引・生成部分）も docs/ にあるので、台帳 `data/` の変更は gen_site.py を流したあとの生成物の差分で拾う |
+| `snippets/<id>/…` | id が `<id>` のページと、本文の `--8<--` にそのファイルを書いたページ |
+| `docs/img/<id>/…` | id が `<id>` のページと、本文にそのファイル（`img/<id>/…`）を書いたページ |
+| `docs/img/` の直下のファイル | 本文にそのファイル（`img/<名前>`）を書いたページだけ |
+| `overrides/assets/js/viz/<名前>.js` | 本文に `data-viz="<名前>"` を書いたページ |
+| `map.js`・`filter.js`・`data/graph.json`（overrides/assets/ の下） | その部品（`kp-map`・`kp-filter`・`kp-roadmap-stats`・`kp-wishlist`）を本文に置いたページ |
+| `overrides/404.html` | 404.html |
+| 共有のファイル：`mkdocs.yml`・`nav.yml`・`pyproject.toml`・`uv.lock`・overrides/ のほかのファイル（`main.html`・`kp.css`・`katex-init.js`・`viz.js`・`progress.js`・`vendor/`）・docs/ の Markdown と画像のほかのファイル | どのページにも効くので、変わったファイルを知らせて全ページを流す |
+| そのほか（tools/・tests/・planning/・data/・`docs/llms.txt` など） | 見ない（サイトの見た目を変えない） |
 
 | 重さ | 種類 | 見るもの |
 | --- | --- | --- |
@@ -118,7 +134,7 @@ python3 tools/render_pages.py DIR/site --field comb -v  # その分野だけ。�
 | エラー | 地の文に残った記法 | コード・数式・図の外の文字に残った `$`・2 文字以上の TeX の命令・`![`・`](`・`**`・`{#…}` と、画像を包まない `.svg` へのリンク。KaTeX のエラーにならずに崩れた数式（閉じの `$` の前に空白がある `$S = $`、段落に続けて書いた `$$`）や、画像にならない図（#50）がここに出る |
 | エラー | ページの横ずれ | `document.documentElement.scrollWidth` が画面の幅を超える。はみ出した要素（親ははみ出さず、横にスクロールする入れ物と position: fixed の中でないもの）を 5 つまで出す |
 | エラー | 動く図のエラー・描かれない動く図 | `.kp-viz__error` の文と、描けた図の全ステップを送って出た「図を描けなかった」、待っても何も出ない図 |
-| エラー | 読めない画像・開けないページ | 読み込みが終わらない・decode できない `<img>`。ページが 30 秒で読めないときは Chrome を起動し直して 1 回やり直す |
+| エラー | 読めない画像・開けないページ | 読み込みが終わらない・decode できない `<img>`。ページが 30 秒で読めないときはタブを開き直して 1 回やり直す（Chrome が答えなければ Chrome を起動し直す） |
 | 警告 | 画面の幅を超える別行の数式・表 | 数式・表の右端が、横スクロールの入れ物の見える右端を超える（右が隠れ、横にスクロールしないと読めない。#55）。Material が付ける 0.8rem の余白だけがはみ出すものは数えない |
 | 警告 | 縁が透ける図 | SVG の画像を canvas に描き、端から続く透明な行・列の幅を出す（#32。ダークモードで暗い帯になる） |
 | 警告 | 描かれない Mermaid の図・JS のエラー | 残った `pre.mermaid`（Mermaid は unpkg.com から読むので、ネットワークがないときも出る）と、例外・console.error・サイトの中のファイルの読み込みの失敗 |

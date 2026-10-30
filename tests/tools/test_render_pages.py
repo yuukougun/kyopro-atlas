@@ -9,6 +9,7 @@ import os
 import re
 import socket
 import struct
+import subprocess
 import sys
 import tempfile
 import threading
@@ -230,6 +231,91 @@ class SiteTest(unittest.TestCase):
             server.server_close()
 
 
+class ChangedTest(unittest.TestCase):
+    """--changed：変わったファイルから描き直すページを選ぶ（changed_pages）と、git の差分の取り方（git_changed）。"""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        t = Path(self.tmp.name)
+        self.site, self.docs = t / "site", t / "docs"
+        md = {
+            "index.md": "ホーム",
+            "graph/index.md": "分野の入口",
+            "graph/bfs.md": '<div class="kp-viz" data-viz="bfs-layers"></div>\n![図](../img/bfs/layers.svg)\n',
+            "graph/dijkstra.md": '--8<-- "bfs/grid.cpp:core"\n<div class="kp-viz" data-viz="dijkstra"></div>\n',
+            "guide/knowledge-map.md": '<div id="kp-map"></div>',
+            "guide/roadmap.md": '<div class="kp-roadmap-stats"></div>',
+            "guide/search.md": '<div class="kp-filter"></div>',
+            "lists/kind-dp.md": "生成した一覧",
+        }
+        for p, text in md.items():
+            write(self.docs / p, text)
+            stem = p[:-3]
+            stem = "" if stem == "index" else stem.removesuffix("/index") + "/"
+            write(self.site / stem / "index.html", "<p>x</p>")
+        write(self.site / "404.html", "<p>404</p>")
+        self.pages = rp.list_pages(self.site, self.docs)
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def pick(self, *files):
+        return rp.changed_pages(list(files), self.pages, self.docs)
+
+    def test_pages(self):
+        self.assertEqual(self.pick("docs/graph/bfs.md"), (["graph/bfs/"], []))
+        self.assertEqual(self.pick("docs/graph/index.md", "docs/lists/kind-dp.md"), (["graph/", "lists/kind-dp/"], []))
+        self.assertEqual(self.pick("docs/graph/gone.md"), ([], []))                      # 消したページ
+        self.assertEqual(self.pick("snippets/bfs/grid.cpp"), (["graph/bfs/", "graph/dijkstra/"], []))   # id と本文の --8<--
+        self.assertEqual(self.pick("snippets/dijkstra/main.yaml"), (["graph/dijkstra/"], []))
+        self.assertEqual(self.pick("docs/img/bfs/layers.svg"), (["graph/bfs/"], []))
+        self.assertEqual(self.pick("overrides/assets/js/viz/dijkstra.js"), (["graph/dijkstra/"], []))
+        self.assertEqual(self.pick("overrides/assets/js/map.js"), (["guide/knowledge-map/"], []))
+        self.assertEqual(self.pick("overrides/assets/js/filter.js"), (["guide/knowledge-map/", "guide/search/"], []))
+        self.assertEqual(self.pick("overrides/assets/data/graph.json"), (["guide/knowledge-map/", "guide/roadmap/"], []))
+        self.assertEqual(self.pick("overrides/404.html"), (["404.html"], []))
+
+    def test_ignored(self):
+        self.assertEqual(self.pick("tools/check_pages.py", "tests/viz/dijkstra.test.mjs", "data/problems.yaml",
+                                   "planning/progress.md", "docs/llms.txt", "snippets/README.md"), ([], []))
+
+    def test_shared(self):
+        everything = [p.path for p in self.pages]
+        for f in ("mkdocs.yml", "nav.yml", "uv.lock", "overrides/main.html", "overrides/assets/css/kp.css",
+                  "overrides/assets/js/viz.js", "overrides/assets/js/katex-init.js",
+                  "overrides/assets/vendor/katex-0.16.47/katex.min.js", "docs/robots.txt"):
+            self.assertEqual(self.pick("docs/graph/bfs.md", f), (everything, [f]), f)
+
+    def test_git(self):
+        top = Path(self.tmp.name) / "repo"
+        top.mkdir()
+
+        def git(*a):
+            subprocess.run(["git", "-C", str(top), *a], check=True, capture_output=True)
+        git("init", "-q", "-b", "main")
+        git("config", "user.email", "t@example.com")
+        git("config", "user.name", "t")
+        for p in ("docs/a.md", "docs/b.md", "docs/c.md", "docs/e.md"):
+            write(top / p, "x")
+        git("add", ".")
+        git("commit", "-q", "-m", "1")
+        git("checkout", "-q", "-b", "topic")
+        write(top / "docs/a.md", "y")                                   # コミットした変更
+        git("commit", "-q", "-am", "2")
+        git("checkout", "-q", "main")
+        write(top / "docs/e.md", "main だけの変更")                       # 分かれ目より後の main の変更は入れない
+        git("commit", "-q", "-am", "3")
+        git("checkout", "-q", "topic")
+        write(top / "docs/b.md", "z")                                   # コミットしていない変更
+        write(top / "docs/new.md", "n")                                 # 追跡していないファイル
+        git("mv", "docs/c.md", "docs/d.md")                             # 名前を変えたものは両方
+        files, mb = rp.git_changed(top, "main")
+        self.assertEqual(files, ["docs/a.md", "docs/b.md", "docs/c.md", "docs/d.md", "docs/new.md"])
+        self.assertEqual(len(mb), 9)
+        with self.assertRaises(SystemExit):
+            rp.git_changed(top, "no-such-ref")
+
+
 class CollectTest(unittest.TestCase):
     LIGHT, DARK = rp.Variant(390, "light"), rp.Variant(390, "dark")
 
@@ -315,7 +401,8 @@ class KatexColorTest(unittest.TestCase):
 
 
 # 崩れを仕込んだページ。Material と KaTeX は使わず、描いた後の形（data-kp-rendered・.katex-html > .base・
-# .md-typeset__scrollwrap・.kp-viz）を手で書く。配色は prefers-color-scheme から Material と同じ属性を付ける
+# .md-typeset__scrollwrap・.kp-viz）を手で書く。配色は prefers-color-scheme から Material と同じ属性を付け、Material と同じく
+# prefers-color-scheme が替わったら付け直す（render_pages は同じ幅のほかの配色を、読み込み直さずに調べる）
 HEAD = """<!doctype html><html lang="ja"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
@@ -323,8 +410,10 @@ body { margin: 0; font: 16px sans-serif; } .md-content { padding: 0 16px; }
 div.arithmatex { overflow: auto; } .md-typeset__scrollwrap { overflow-x: auto; }
 .katex-display { display: block; } .base { display: inline-block; white-space: nowrap; }
 </style>
-<script>document.addEventListener("DOMContentLoaded", () => document.body.setAttribute("data-md-color-scheme",
-  matchMedia("(prefers-color-scheme: dark)").matches ? "slate" : "default"));</script>
+<script>const kpDark = matchMedia("(prefers-color-scheme: dark)");
+const kpScheme = () => document.body.setAttribute("data-md-color-scheme", kpDark.matches ? "slate" : "default");
+document.addEventListener("DOMContentLoaded", kpScheme);
+kpDark.addEventListener("change", () => setTimeout(kpScheme, 100));</script>
 </head><body><div class="md-content"><article>
 """
 TAIL = "</article></div></body></html>\n"
