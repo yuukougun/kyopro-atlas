@@ -15,7 +15,7 @@
 ## 守ること
 
 - ファイルを直さない。指摘は報告に書く（直すのは書いた担当）。git は読むだけ
-- atcoder.jp・codeforces.com を開かない。第三者のサイトにある問題文の写しや訳（洛谷の問題ページ、記録に引用された問題文の節）も読まない（手引き §2.6）。問題の情報は `python3 tools/ap.py show <ID>` で確かめる
+- atcoder.jp・codeforces.com を開かない。問題の情報は `python3 tools/ap.py show <ID>` で確かめる
 
 ## スクリーンショット
 
