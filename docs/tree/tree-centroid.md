@@ -23,7 +23,7 @@ sections:
   - {title: 重心は 1 個か隣接する 2 個, anchor: one-or-two}
   - {title: 重心で分けて別の枝どうしを組む, anchor: pair-across}
   - {title: 中心との違い, anchor: vs-center}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -28,7 +28,7 @@ sections:
   - {title: 和が K に達する位置（K 番目の 1・空きの K 番目）, anchor: kth-one}
   - {title: 境界（l = N・返り値が N・f(e()) が偽になる条件・1-indexed）, anchor: boundaries}
   - {title: 遅延セグメント木の上の二分探索（単調な列への区間作用）, anchor: on-lazy-segment-tree, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

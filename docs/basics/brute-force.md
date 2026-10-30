@@ -27,7 +27,7 @@ sections:
   - {title: 候補が少ないことに気づく（答えの側・小さい次元・約数の個数・log 回の収束）, anchor: small-candidates}
   - {title: 片側を全探索して残りを速く求める（貪欲・二分探索・累積和）, anchor: half-enumeration}
   - {title: 盤面を動かして全部試す（回転・平行移動）, anchor: move-board, level: 水}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

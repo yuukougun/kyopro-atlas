@@ -29,7 +29,7 @@ sections:
   - {title: 一周を扱う：配列を 2 周分にして尺取り, anchor: wrap-around, level: 青}
   - {title: 反対方向に最も近い点の二分探索, anchor: opposite-direction, level: 青}
   - {title: 角度の区間のスケジューリング・連続する範囲だけを試す最適化, anchor: angular-intervals, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

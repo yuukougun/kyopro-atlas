@@ -28,7 +28,7 @@ sections:
   - {title: OR 畳み込み・AND 畳み込み, anchor: or-and-convolution}
   - {title: 和の代わりに上位 2 つを持つ, anchor: top-two}
   - {title: XOR 畳み込みとの違い, anchor: vs-xor}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

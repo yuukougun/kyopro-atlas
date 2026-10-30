@@ -21,7 +21,7 @@ sections:
   - {title: 指定頂点を根にして、部分木に指定頂点を含むかで判定する, anchor: root-at-terminal}
   - {title: 指定されていない葉を削り続ける, anchor: prune-leaves}
   - {title: 一般のグラフのシュタイナー木は別物（グラフの章）, anchor: vs-graph}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

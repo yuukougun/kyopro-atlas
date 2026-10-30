@@ -24,7 +24,7 @@ sections:
   - {title: 距離の偶奇は深さだけで分かる, anchor: distance-parity}
   - {title: 多い方の色は N/2 個以上, anchor: majority-color}
   - {title: 色の違う組の数（二部グラフのまま足せる辺）, anchor: cross-pairs}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

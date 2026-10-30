@@ -26,7 +26,7 @@ sections:
   - {title: 先手と後手で取れる数が違うとき, anchor: asymmetric, level: 青}
   - {title: 逆形 Nim（最後に取った方が負け）, anchor: misere, level: 発展}
   - {title: 必勝局面の数え上げ（XOR 畳み込み）, anchor: counting, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

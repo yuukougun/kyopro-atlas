@@ -25,7 +25,7 @@ sections:
   - {title: 自作するときの要点と Library Checker, anchor: library}
   - {title: pb_ds の tree（order_of_key・find_by_order。重複は値と通し番号の組にする）, anchor: pbds}
   - {title: 代わりの手（BIT 上の二分探索・連結リスト・逆順の処理と BIT）, anchor: alternatives}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

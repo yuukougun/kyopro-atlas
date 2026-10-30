@@ -26,7 +26,7 @@ sections:
   - {title: 最短周期で分類して割る方法（約数包除の形）, anchor: by-period}
   - {title: 立方体の 24 通りの回転, anchor: cube}
   - {title: 自作するときの要点と検証, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

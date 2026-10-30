@@ -32,7 +32,7 @@ sections:
   - {title: 累乗でなく合成として使う（アフィン変換の積）, anchor: composition}
   - {title: ダブリングで遷移を合成する（行列にすると大きすぎるとき・桁を倍々に伸ばす）, anchor: doubling-transition, level: 黄}
   - {title: プロファイル DP の遷移行列と状態数の見積もり, anchor: profile-dp, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

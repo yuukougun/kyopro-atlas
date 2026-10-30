@@ -21,7 +21,7 @@ signs:
 acl: []
 verify: [static_convex_hull]
 frequency: B
-frequency_evidence: recent 1（abc478_g）・前提として 2 ページに届く（直接 2）・古い ABC 4 問
+frequency_evidence: recent 1（abc478_g）・前提として 1 ページに届く（直接 1）・古い ABC 4 問
 sections:
   - {title: Andrew 法（monotone chain）：下側と上側を作る, anchor: andrew}
   - {title: 一直線上の点・重複点・全点が一直線上のときの扱い（外積の不等号の向き）, anchor: degenerate}
@@ -30,7 +30,7 @@ sections:
   - {title: 凸多角形の内外判定：扇形に分けて二分探索（O(log N)）, anchor: point-in-convex-polygon}
   - {title: 一般の多角形の内外判定（交差数の偶奇）, anchor: point-in-polygon}
   - {title: '格子点：線分上は gcd(|dx|, |dy|)+1、多角形は Pick の定理', anchor: lattice-points}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

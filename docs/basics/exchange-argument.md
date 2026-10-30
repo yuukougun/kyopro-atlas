@@ -26,7 +26,7 @@ sections:
   - {title: 連結の比較（a+b と b+a）, anchor: concatenation}
   - {title: 順に並べてから DP（DP の章へ）, anchor: then-dp}
   - {title: 入れ替えで改善できるかを考える型, anchor: improve-by-swap}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

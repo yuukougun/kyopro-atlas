@@ -24,7 +24,7 @@ sections:
   - {title: 戻せない DP（max・min・OR）, anchor: not-undoable}
   - {title: 前後からの DP をマージする, anchor: prefix-and-suffix}
   - {title: 分割統治でオフラインに処理する, anchor: offline-divide-and-conquer, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

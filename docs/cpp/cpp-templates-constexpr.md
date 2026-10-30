@@ -25,7 +25,7 @@ sections:
   - {title: static_assert と if constexpr（if constexpr は C++17）, anchor: static-assert}
   - {title: 畳み込み式で可変長引数を展開する：デバッグ出力の例（C++17）, anchor: fold-expression}
   - {title: 属性：maybe_unused・nodiscard（C++17）、likely（C++20）、assume（C++23・GCC 13〜）, anchor: attributes}
-stage: reviewed
+stage: done
 updated: 2026-10-22
 cpp_std: 20
 gcc_min: 13

@@ -25,7 +25,7 @@ sections:
   - {title: 二分探索による整数の K 乗根（途中の累乗のあふれ）, anchor: kth-root}
   - {title: 累乗数の数え上げ（b ≥ 3 は列挙、b = 2 は ⌊√N⌋、重複を除く）, anchor: perfect-powers}
   - {title: √ を含む式の大小を整数で比べる, anchor: compare-sqrt}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

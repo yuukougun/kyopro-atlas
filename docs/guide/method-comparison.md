@@ -32,7 +32,7 @@ sections:
   - {title: 最適化の方針, anchor: optimization}
   - {title: 名前が似た別物, anchor: similar-names}
   - {title: 数の扱い, anchor: numbers}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

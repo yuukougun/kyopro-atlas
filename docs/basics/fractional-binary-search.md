@@ -31,7 +31,7 @@ sections:
   - {title: 全区間の中央値の中央値（転倒数で数える）, anchor: median-of-medians, level: 黄}
   - {title: 実数の精度と分母 0, anchor: precision}
   - {title: Dinkelbach 法, anchor: dinkelbach, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

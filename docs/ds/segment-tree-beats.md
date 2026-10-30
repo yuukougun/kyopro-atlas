@@ -25,7 +25,7 @@ sections:
   - {title: 自作するときの要点と Library Checker, anchor: library}
   - {title: 計算量（chmin と和だけならならし O((N+Q) log N)、区間加算が混ざると log^2）, anchor: complexity}
   - {title: 値が潰れる操作（割り算・mod・平方根）と、区間を set で管理する別解, anchor: shrinking-values}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

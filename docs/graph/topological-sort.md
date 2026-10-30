@@ -26,7 +26,7 @@ sections:
   - {title: 出次数 0 の頂点から逆向きに剥がす, anchor: peel-sinks}
   - {title: DAG 上の DP へ（DP の章）, anchor: to-dag-dp}
   - {title: ACL の scc_graph を使う（DAG なら scc() の順がトポロジカル順）, anchor: acl}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

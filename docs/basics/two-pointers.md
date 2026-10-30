@@ -27,7 +27,7 @@ sections:
   - {title: 固定長の窓をずらす, anchor: fixed-window}
   - {title: 負の値があるとき（累積和＋連想配列へ）, anchor: negative-values}
   - {title: 二分探索との関係（O(N log N) でも解ける）, anchor: vs-binary-search}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

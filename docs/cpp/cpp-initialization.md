@@ -26,7 +26,7 @@ sections:
   - {title: 'CTAD：vector dp(n, vector(m, 0LL)) で型を内側から決める（0 と書くと int になる）（C++17）', anchor: ctad}
   - {title: pair・tuple・array・priority_queue の CTAD（C++17）, anchor: ctad-std-types}
   - {title: CTAD の罠：波括弧にイテレータ 2 個を渡すとイテレータの vector になる（C++17）, anchor: ctad-pitfall}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 cpp_std: 20
 gcc_min: 13

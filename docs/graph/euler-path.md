@@ -24,7 +24,7 @@ sections:
   - {title: Hierholzer 法で構成する, anchor: hierholzer}
   - {title: 応用の型（縮約・辺を足す・向き付け・文字列を辺にする）, anchor: applications}
   - {title: ハミルトン路（頂点をちょうど 1 回、bitDP）との違い, anchor: vs-hamiltonian}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

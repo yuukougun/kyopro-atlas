@@ -29,7 +29,7 @@ sections:
   - {title: グラフ上の回文：頂点の組を状態にして両端から BFS（出会う位置の偶奇）, anchor: palindrome-path}
   - {title: 外側から組み立てる（回文の式・約数）, anchor: build-outside-in, level: 青}
   - {title: Manacher：各中心の最長回文半径を O(N) で（Z と同じく内側をコピーする）, anchor: manacher, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

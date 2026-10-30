@@ -24,7 +24,7 @@ sections:
   - {title: 木のハッシュと衝突しにくい設計, anchor: tree-hash}
   - {title: 根のない木は中心を根にする, anchor: unrooted}
   - {title: 公開ライブラリと自作するときの要点, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

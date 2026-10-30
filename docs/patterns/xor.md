@@ -35,7 +35,7 @@ sections:
   - {title: 2 つの集合が一致するか → 乱数の XOR によるハッシュ（hashing-for-sets）, anchor: set-hash}
   - {title: 添字の XOR で畳み込む → アダマール変換（hadamard-transform）, anchor: xor-convolution}
   - {title: 列全体を同じ値で XOR したものを探す → 隣どうしの XOR の列で照合（kmp）, anchor: adjacent-xor}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

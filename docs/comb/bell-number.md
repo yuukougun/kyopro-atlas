@@ -22,7 +22,7 @@ sections:
   - {title: 'S(n,k) の漸化式（最後の要素が新しい組を作るか既存の組に入るか）', anchor: recurrence}
   - {title: ベル数と全列挙の個数の見積もり（B_10 = 115975、B_12 = 4213597）, anchor: size}
   - {title: bitDP・3^N の部分集合 DP との使い分け, anchor: vs-subset-dp}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

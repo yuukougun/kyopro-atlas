@@ -25,7 +25,7 @@ sections:
   - {title: DP の遷移を多項式の積とみる, anchor: dp-as-polynomial}
   - {title: オンライン畳み込み（左半分を確定させてから右半分へ寄与を足す）, anchor: online}
   - {title: ACL の convolution と自作するときの要点, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

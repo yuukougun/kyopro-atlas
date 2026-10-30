@@ -27,7 +27,7 @@ sections:
   - {title: 等比級数で閉じる（交互に繰り返す）, anchor: geometric-series}
   - {title: 一般の連立方程式（掃き出し法は math へ）, anchor: linear-system}
   - {title: b = 1 のとき（期待値が無限大）, anchor: infinite}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

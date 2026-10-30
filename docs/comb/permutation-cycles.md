@@ -26,7 +26,7 @@ sections:
   - {title: 隣接 swap（転倒数）との違い, anchor: vs-adjacent}
   - {title: K 回の合成と元に戻る回数（巡回の長さの lcm）, anchor: power, level: 青}
   - {title: Functional graph との関係, anchor: functional-graph}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

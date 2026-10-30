@@ -26,7 +26,7 @@ sections:
   - {title: 取り得る状態だけを列挙して番号を付ける（圧縮）, anchor: compress}
   - {title: 長さが巨大なら行列累乗と組み合わせる, anchor: with-matrix-power}
   - {title: 連結性を持つ（フロンティア法）, anchor: connectivity, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

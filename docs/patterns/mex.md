@@ -26,7 +26,7 @@ sections:
   - {title: 全区間・全パスの mex の総和 → mex が k+1 以上の数を足す主客転倒, anchor: sum-of-mex}
   - {title: ゲームの局面の値 → Grundy 数（grundy-number）, anchor: grundy}
   - {title: mex を指定した値にする構築 → 0〜k−1 を入れて k を入れない（construction）, anchor: construction}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -24,7 +24,7 @@ sections:
   - {title: ペアに分ける（i = j の項を忘れない）, anchor: pairs}
   - {title: (x + 1)^2 = x^2 + 2x + 1 で 3 つの量を同時に運ぶ, anchor: carry-three}
   - {title: 分散と二乗和の関係, anchor: variance}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -13,7 +13,7 @@ search:
 
 ## 木の基本性質と表現（tree-basics） {#tree-basics}
 
-- id：`tree-basics`　レベル：基礎　段階：reviewed　type：technique
+- id：`tree-basics`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-basics/
 - 別名：木の定義、森、根付き木、木の性質、親の番号が自分より小さい入力、tree、forest
 - 種類：木
@@ -31,7 +31,7 @@ search:
 
 ## 根付き木と走査順（tree-traversal） {#tree-traversal}
 
-- id：`tree-traversal`　レベル：基礎　段階：reviewed　type：technique
+- id：`tree-traversal`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-traversal/
 - 別名：木の探索、行きがけ順、帰りがけ順、DFS 順、BFS 順、部分木サイズ、深さ、preorder、postorder
 - 種類：木、グラフ探索
@@ -50,7 +50,7 @@ search:
 
 ## 木の 2 色塗り分けと距離の偶奇（tree-bipartite） {#tree-bipartite}
 
-- id：`tree-bipartite`　レベル：基礎　段階：reviewed　type：technique
+- id：`tree-bipartite`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-bipartite/
 - 別名：木は二部グラフ、深さの偶奇、距離の偶奇、tree bipartition
 - 種類：木
@@ -67,7 +67,7 @@ search:
 
 ## 木の上の距離（tree-distance） {#tree-distance}
 
-- id：`tree-distance`　レベル：基礎　段階：reviewed　type：technique
+- id：`tree-distance`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-distance/
 - 別名：木の距離、根からの累積、XOR 距離、追いかけっこ、2 点からの距離、distance on a tree
 - 種類：木
@@ -83,7 +83,7 @@ search:
 
 ## 木の上の累積和・いもす法（tree-imos） {#tree-imos}
 
-- id：`tree-imos`　レベル：基礎　段階：reviewed　type：technique
+- id：`tree-imos`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-imos/
 - 別名：木上のいもす法、部分木加算、パス加算、木上の累積和、prefix sums on a tree
 - 種類：木、累積和・差分
@@ -101,7 +101,7 @@ search:
 
 ## 指定頂点を結ぶ最小の部分木（steiner-subtree） {#steiner-subtree}
 
-- id：`steiner-subtree`　レベル：基礎　段階：reviewed　type：technique
+- id：`steiner-subtree`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/steiner-subtree/
 - 別名：指定頂点を含む最小の部分木、必要な辺の数、木の上のシュタイナー木、Steiner tree on a tree
 - 種類：木
@@ -115,7 +115,7 @@ search:
 
 ## 完全二分木（complete-binary-tree） {#complete-binary-tree}
 
-- id：`complete-binary-tree`　レベル：基礎　段階：reviewed　type：technique
+- id：`complete-binary-tree`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/complete-binary-tree/
 - 別名：ヒープ番号、親は i/2、K 分木、heap numbering、perfect binary tree
 - 種類：木、ビット演算
@@ -132,7 +132,7 @@ search:
 
 ## 葉から考える（leaf-first） {#leaf-first}
 
-- id：`leaf-first`　レベル：水　段階：reviewed　type：technique
+- id：`leaf-first`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/leaf-first/
 - 別名：葉から貪欲、葉を刈る、次数 1 の頂点を削る、葉から決める貪欲、greedy from leaves
 - 種類：木、貪欲
@@ -149,7 +149,7 @@ search:
 
 ## 木の次数列と Prüfer 列（tree-degree） {#tree-degree}
 
-- id：`tree-degree`　レベル：青　段階：reviewed　type：technique
+- id：`tree-degree`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-degree/
 - 別名：次数列、プリューファー列、Prüfer code、Prüfer sequence、握手補題、星、degree sequence
 - 種類：木、数え上げ
@@ -166,7 +166,7 @@ search:
 
 ## 木の直径と最遠点（tree-diameter） {#tree-diameter}
 
-- id：`tree-diameter`　レベル：水　段階：reviewed　type：technique
+- id：`tree-diameter`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-diameter/
 - 別名：直径、最遠点、離心数、double sweep、2 回の BFS、木の中心、半径、長鎖分解、long-path decomposition、tree diameter
 - 種類：木
@@ -188,7 +188,7 @@ search:
 
 ## 辺で切って数える（tree-edge-contribution） {#tree-edge-contribution}
 
-- id：`tree-edge-contribution`　レベル：水　段階：reviewed　type：technique
+- id：`tree-edge-contribution`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-edge-contribution/
 - 別名：辺の寄与、木の主客転倒、全点対の距離の和、全ペアのパスの寄与、contribution of edges
 - 種類：木、考察
@@ -206,7 +206,7 @@ search:
 
 ## 木の構築・復元（tree-construction） {#tree-construction}
 
-- id：`tree-construction`　レベル：水　段階：reviewed　type：technique
+- id：`tree-construction`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-construction/
 - 別名：木の構築、木の復元、距離の表から木、訪問順から木、tree construction
 - 種類：木、考察
@@ -225,7 +225,7 @@ search:
 
 ## 木の重心（tree-centroid） {#tree-centroid}
 
-- id：`tree-centroid`　レベル：黄　段階：reviewed　type：technique
+- id：`tree-centroid`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-centroid/
 - 別名：重心、centroid、重み付き重心、tree centroid
 - 種類：木
@@ -241,7 +241,7 @@ search:
 
 ## 木の同型判定と木のハッシュ（tree-isomorphism） {#tree-isomorphism}
 
-- id：`tree-isomorphism`　レベル：発展　段階：reviewed　type：overview
+- id：`tree-isomorphism`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-isomorphism/
 - 別名：木の同型、木のハッシュ、AHU、rooted tree hash、tree isomorphism
 - 種類：木、ハッシュ・乱択
@@ -257,7 +257,7 @@ search:
 
 ## 最小共通祖先（LCA）（lca） {#lca}
 
-- id：`lca`　レベル：青　段階：reviewed　type：technique
+- id：`lca`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/lca/
 - 別名：LCA、Lowest Common Ancestor、最近共通祖先、木のダブリング、K 個上の祖先、level ancestor、最低共通祖先
 - 種類：木、ダブリング・分割統治
@@ -276,7 +276,7 @@ search:
 
 ## 木の上のパスの判定と分解（tree-path） {#tree-path}
 
-- id：`tree-path`　レベル：青　段階：reviewed　type：technique
+- id：`tree-path`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-path/
 - 別名：パスクエリ、2 頂点間のパス、パスの分解、合流点、パスの交差、path queries on a tree
 - 種類：木
@@ -296,7 +296,7 @@ search:
 
 ## 根からのパスを DFS で持ち回る（root-path-dfs） {#root-path-dfs}
 
-- id：`root-path-dfs`　レベル：青　段階：reviewed　type：technique
+- id：`root-path-dfs`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/root-path-dfs/
 - 別名：DFS の巻き戻し、根からのパスの情報、入るとき足して出るとき戻す、rollback on DFS
 - 種類：木、クエリ処理の工夫
@@ -314,7 +314,7 @@ search:
 
 ## オイラーツアー（euler-tour） {#euler-tour}
 
-- id：`euler-tour`　レベル：青　段階：reviewed　type：technique
+- id：`euler-tour`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/euler-tour/
 - 別名：Euler Tour、行きがけ順の番号付け、in/out、木の平坦化、tree flattening、辺のオイラーツアー、DFS 順で部分木を区間にする
 - 種類：木、区間クエリ
@@ -338,7 +338,7 @@ search:
 
 ## HL 分解（hld） {#hld}
 
-- id：`hld`　レベル：発展　段階：reviewed　type：overview
+- id：`hld`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/hld/
 - 別名：HLD、Heavy-Light Decomposition、重軽分解
 - 種類：木、区間クエリ
@@ -358,7 +358,7 @@ search:
 
 ## Static Top Tree と木 DP の動的更新（static-top-tree） {#static-top-tree}
 
-- id：`static-top-tree`　レベル：発展　段階：reviewed　type：overview
+- id：`static-top-tree`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/static-top-tree/
 - 別名：Static Top Tree、動的木 DP、dynamic tree DP
 - 種類：木、DP、データ構造
@@ -372,7 +372,7 @@ search:
 
 ## 動的木（dynamic-tree） {#dynamic-tree}
 
-- id：`dynamic-tree`　レベル：発展　段階：reviewed　type：overview
+- id：`dynamic-tree`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/dynamic-tree/
 - 別名：Link-Cut Tree、LCT、Euler Tour Tree、Top Tree、dynamic tree
 - 種類：木、データ構造
@@ -388,7 +388,7 @@ search:
 
 ## マージテク（small-to-large） {#small-to-large}
 
-- id：`small-to-large`　レベル：水　段階：reviewed　type：technique
+- id：`small-to-large`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/small-to-large/
 - 別名：small-to-large、小さい方を大きい方へ移す、データ構造をマージする一般的なテク、weighted union heuristic、DSU on Tree、Sack
 - 種類：データ構造、木
@@ -410,7 +410,7 @@ search:
 
 ## 重心分解（centroid-decomposition） {#centroid-decomposition}
 
-- id：`centroid-decomposition`　レベル：黄　段階：reviewed　type：technique
+- id：`centroid-decomposition`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/centroid-decomposition/
 - 別名：centroid decomposition、点分治、木の分割統治
 - 種類：木、ダブリング・分割統治
@@ -428,7 +428,7 @@ search:
 
 ## Auxiliary Tree（auxiliary-tree） {#auxiliary-tree}
 
-- id：`auxiliary-tree`　レベル：発展　段階：reviewed　type：overview
+- id：`auxiliary-tree`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/auxiliary-tree/
 - 別名：Virtual Tree、虚樹、圧縮木、LCA 木、指定頂点の圧縮木
 - 種類：木
@@ -446,7 +446,7 @@ search:
 
 ## 併合過程の木（merge-process-tree） {#merge-process-tree}
 
-- id：`merge-process-tree`　レベル：発展　段階：reviewed　type：overview
+- id：`merge-process-tree`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/merge-process-tree/
 - 別名：クラスカル再構築木、Kruskal 再構築木、Kruskal reconstruction tree、KRT、DSU-tree、Union-Find の併合の過程を表す木
 - 種類：木、連結性・全域木
@@ -466,7 +466,7 @@ search:
 
 ## 比で親に併合する貪欲（tree-ratio-greedy） {#tree-ratio-greedy}
 
-- id：`tree-ratio-greedy`　レベル：発展　段階：reviewed　type：overview
+- id：`tree-ratio-greedy`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/tree/tree-ratio-greedy/
 - 別名：01 on Tree、木の上の順序最適化、比による併合、親を先に選ぶ制約つきの並べ方
 - 種類：木、貪欲

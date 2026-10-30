@@ -31,7 +31,7 @@ sections:
   - {title: Σ|x − a_i| の最小 → 中央値を選ぶ（median-absolute）, anchor: absolute-sum}
   - {title: 辞書順で K 番目の文字列・順列 → 残りの個数を数えて先頭から決める, anchor: lexicographic-kth}
   - {title: XOR で作れる値の K 番目 → XOR 基底（xor-basis）, anchor: xor-kth}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

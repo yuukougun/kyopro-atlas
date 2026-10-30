@@ -27,7 +27,7 @@ sections:
   - {title: 森に辺を足すとき小さい方を根付け直す, anchor: reroot-smaller, level: 黄}
   - {title: 部分木ごとの集合の併合（木 DP での使い方は DP の章）, anchor: subtree-merge, level: 黄}
   - {title: DSU on Tree（重い子の結果を残す）, anchor: dsu-on-tree, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

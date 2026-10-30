@@ -27,7 +27,7 @@ sections:
   - {title: 部分列として含む文字列は最も左の埋め込みで数える, anchor: leftmost}
   - {title: グループ分けは未使用の最小番号から決める, anchor: min-index}
   - {title: DP の中で代表を決める（何も変えない操作を除く・最初に〜で場合分け・包除で重なりを引く）, anchor: in-dp}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

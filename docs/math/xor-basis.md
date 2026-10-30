@@ -28,7 +28,7 @@ sections:
   - {title: 簡約した基底と K 番目に小さい値, anchor: kth}
   - {title: コストの小さい順に基底へ入れる貪欲（線形マトロイド）, anchor: min-cost}
   - {title: グラフのウォークの XOR（全域木の根からの XOR と、閉路の XOR の基底）, anchor: xor-walk}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

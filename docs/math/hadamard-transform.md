@@ -25,7 +25,7 @@ sections:
   - {title: 同じ配列を K 回 XOR 畳み込みする（変換後の累乗）, anchor: power}
   - {title: 添字の演算と変換の対応（和は FFT、AND/OR は高速ゼータ変換、gcd/lcm は約数のゼータ変換）, anchor: index-operations}
   - {title: 自作するときの要点と Library Checker, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

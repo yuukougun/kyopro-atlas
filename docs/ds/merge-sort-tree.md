@@ -24,7 +24,7 @@ sections:
   - {title: 作り方（子の列をマージする）とメモリ O(N log N), anchor: build}
   - {title: クエリの手順（O(log N) 個のノードで二分探索）と累積和で和も, anchor: query}
   - {title: 各段に BIT を持たせる（先読みと組む）, anchor: bit-per-level, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

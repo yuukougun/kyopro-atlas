@@ -28,7 +28,7 @@ sections:
   - {title: mod 2 の掃き出しは XOR、bitset で速くする, anchor: mod-2}
   - {title: ランクと解の個数 p^(変数の数 − ランク), anchor: rank}
   - {title: 実数の掃き出し（部分ピボット選択と誤差）, anchor: real}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -19,13 +19,13 @@ signs:
   - {type: shape, text: 'dp[i] = Σ（または min）dp[j]（j < i で [j, i) が条件を満たすもの）'}
 acl: []
 frequency: C
-frequency_evidence: recent 0・前提として 2 ページに届く（直接 1）・古い ABC 1 問
+frequency_evidence: recent 0・前提として 1 ページに届く（直接 1）・古い ABC 1 問
 sections:
   - {title: 最後の区間で分ける（空の区切りを 1 通りと数える）, anchor: last-block}
   - {title: 区間 DP との違い, anchor: vs-interval-dp}
   - {title: 遷移元の範囲が単調に動く：尺取りと累積和, anchor: two-pointers}
   - {title: 区間の番号に依存する条件：番号を状態に足す, anchor: block-index, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

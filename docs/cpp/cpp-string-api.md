@@ -24,7 +24,7 @@ sections:
   - {title: string_view：コピーしない部分文字列。一時的な string を入れると壊れる（C++17）, anchor: string-view}
   - {title: '区切る：views::split('' '') と string_view(w)（C++20）', anchor: split}
   - {title: cin で読む文字列は空白で区切られる、その後の getline は残った改行を読む, anchor: getline}
-stage: reviewed
+stage: done
 updated: 2026-10-22
 cpp_std: null
 gcc_min: null

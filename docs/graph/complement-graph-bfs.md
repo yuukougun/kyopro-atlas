@@ -23,7 +23,7 @@ sections:
   - {title: 未訪問頂点の集合から取り出す, anchor: take-unvisited}
   - {title: 各頂点が 1 回しか取り出されない理由（O(N + M)）, anchor: complexity}
   - {title: 層ごとに最短路の本数を数える, anchor: count-by-layer}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

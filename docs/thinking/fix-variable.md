@@ -24,7 +24,7 @@ sections:
   - {title: 角・余り・平方因子を除いた部分を固定する, anchor: fix-parts}
   - {title: 最大値を固定して残りを最適化する, anchor: fix-maximum}
   - {title: 固定したあとを速くする（二分探索・累積和・連想配列）, anchor: speed-up}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

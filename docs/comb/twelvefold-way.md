@@ -22,7 +22,7 @@ sections:
   - {title: 箱を区別しないと k! で割れない理由（空の箱）, anchor: why-not-divide}
   - {title: 全射のマス：二項係数の系統と包除の系統の合流, anchor: surjection}
   - {title: 問題文から区別の有無と制限を読み取る, anchor: reading}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

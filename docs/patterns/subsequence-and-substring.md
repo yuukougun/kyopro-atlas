@@ -31,7 +31,7 @@ sections:
   - {title: '回文の部分文字列・部分列 → 回文のページと区間 DP（palindrome, interval-dp）', anchor: palindromes}
   - {title: T を部分文字列に含まない文字列の数 → 照合の状態を持つ DP（string-automaton-dp）, anchor: avoid-substring}
   - {title: 数列の連続部分列 → 題材別の区間（interval）, anchor: subarrays}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

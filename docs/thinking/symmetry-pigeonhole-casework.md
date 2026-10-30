@@ -24,7 +24,7 @@ sections:
   - {title: 対称性で場合を減らす（N ≤ M に入れ替える）, anchor: symmetry-cases}
   - {title: 鳩の巣原理（必ず一致が起きる・探索の打ち切り回数）, anchor: pigeonhole, level: 水}
   - {title: 場合分け（端の場合・大小関係・操作の順序によらないこと）, anchor: casework}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

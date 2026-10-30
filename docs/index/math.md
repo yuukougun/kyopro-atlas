@@ -13,7 +13,7 @@ search:
 
 ## Σ の変形（sigma-manipulation） {#sigma-manipulation}
 
-- id：`sigma-manipulation`　レベル：基礎　段階：reviewed　type：technique
+- id：`sigma-manipulation`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/sigma-manipulation/
 - 別名：シグマの変形、和の順序交換、総和の変形、二重和、添字の付け替え、order of summation
 - 種類：考察、数え上げ
@@ -31,7 +31,7 @@ search:
 
 ## 整数の割り算と余り（integer-division） {#integer-division}
 
-- id：`integer-division`　レベル：基礎　段階：reviewed　type：technique
+- id：`integer-division`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/integer-division/
 - 別名：floor_div、floor division、切り捨て除算、切り上げ、負の数の割り算、負の数の余り、オーバーフロー判定、割り算で比較
 - 種類：整数論
@@ -51,7 +51,7 @@ search:
 
 ## mod の計算の基本（mod-arithmetic） {#mod-arithmetic}
 
-- id：`mod-arithmetic`　レベル：基礎　段階：reviewed　type：technique
+- id：`mod-arithmetic`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/mod-arithmetic/
 - 別名：剰余演算、余りを取る、合同式の計算、modular arithmetic、mod 998244353、mod 1e9+7
 - 種類：整数論
@@ -69,7 +69,7 @@ search:
 
 ## 繰り返し二乗法（mod-pow） {#mod-pow}
 
-- id：`mod-pow`　レベル：基礎　段階：reviewed　type：technique
+- id：`mod-pow`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/mod-pow/
 - 別名：二分累乗法、高速累乗、binary exponentiation、modpow、pow_mod、モノイドの累乗
 - 種類：整数論、ダブリング・分割統治
@@ -89,7 +89,7 @@ search:
 
 ## 逆元と mod での割り算（mod-inverse） {#mod-inverse}
 
-- id：`mod-inverse`　レベル：基礎　段階：reviewed　type：technique
+- id：`mod-inverse`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/mod-inverse/
 - 別名：モジュラ逆元、modular inverse、modinv、inv_mod、mod での割り算、逆元表
 - 種類：整数論
@@ -110,7 +110,7 @@ search:
 
 ## modint（modint） {#modint}
 
-- id：`modint`　レベル：基礎　段階：reviewed　type：technique
+- id：`modint`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/modint/
 - 別名：static_modint、dynamic_modint、mint、modint998244353、modint1000000007
 - 種類：整数論、実装・C++
@@ -128,7 +128,7 @@ search:
 
 ## 等比数列の和を mod で求める（geometric-series-mod） {#geometric-series-mod}
 
-- id：`geometric-series-mod`　レベル：基礎　段階：reviewed　type：technique
+- id：`geometric-series-mod`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/geometric-series-mod/
 - 別名：等比級数、geometric series、repunit、Σ A^i、同じ数字を並べた数
 - 種類：整数論、ダブリング・分割統治
@@ -146,7 +146,7 @@ search:
 
 ## フェルマーの小定理と指数の mod（exponent-mod） {#exponent-mod}
 
-- id：`exponent-mod`　レベル：水　段階：reviewed　type：technique
+- id：`exponent-mod`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/exponent-mod/
 - 別名：指数の mod、オイラーの定理、Fermat's little theorem、Euler's theorem、指数を p−1 で割る、累乗の塔、tetration
 - 種類：整数論
@@ -164,7 +164,7 @@ search:
 
 ## 桁と mod（digit-and-mod） {#digit-and-mod}
 
-- id：`digit-and-mod`　レベル：水　段階：reviewed　type：technique
+- id：`digit-and-mod`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/digit-and-mod/
 - 別名：九去法、倍数判定、divisibility rule、数の連結、10 倍して a を足す、部分文字列の余り、桁和
 - 種類：整数論、累積和・差分
@@ -182,7 +182,7 @@ search:
 
 ## 約数列挙と素数判定（divisor-enum） {#divisor-enum}
 
-- id：`divisor-enum`　レベル：基礎　段階：reviewed　type：technique
+- id：`divisor-enum`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/divisor-enum/
 - 別名：試し割り、trial division、divisor enumeration、primality test、√N まで調べる、約数の総和
 - 種類：整数論、全探索
@@ -202,7 +202,7 @@ search:
 
 ## 素因数分解とルジャンドルの公式（prime-factorization） {#prime-factorization}
 
-- id：`prime-factorization`　レベル：基礎　段階：reviewed　type：technique
+- id：`prime-factorization`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/prime-factorization/
 - 別名：prime factorization、Legendre's formula、階乗の素因数、末尾の 0 の個数、v_p(n!)
 - 種類：整数論
@@ -221,7 +221,7 @@ search:
 
 ## エラトステネスの篩（sieve-eratosthenes） {#sieve-eratosthenes}
 
-- id：`sieve-eratosthenes`　レベル：基礎　段階：reviewed　type：technique
+- id：`sieve-eratosthenes`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/sieve-eratosthenes/
 - 別名：篩、sieve of Eratosthenes、素数の列挙、素数表、エラトステネスのふるい
 - 種類：整数論
@@ -240,7 +240,7 @@ search:
 
 ## 最小素因数の篩と線形篩（spf-sieve） {#spf-sieve}
 
-- id：`spf-sieve`　レベル：基礎　段階：reviewed　type：technique
+- id：`spf-sieve`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/spf-sieve/
 - 別名：osa_k 法、最小素因数、smallest prime factor、SPF、高速素因数分解、linear sieve
 - 種類：整数論
@@ -259,7 +259,7 @@ search:
 
 ## 素因数の指数で考える（prime-exponent-vector） {#prime-exponent-vector}
 
-- id：`prime-exponent-vector`　レベル：基礎　段階：reviewed　type：technique
+- id：`prime-exponent-vector`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/prime-exponent-vector/
 - 別名：指数ベクトル、平方因子、squarefree、smooth 数、平方数の判定、素数ごとに独立
 - 種類：整数論
@@ -277,7 +277,7 @@ search:
 
 ## 調和級数と倍数の列挙（harmonic-sum） {#harmonic-sum}
 
-- id：`harmonic-sum`　レベル：水　段階：reviewed　type：technique
+- id：`harmonic-sum`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/harmonic-sum/
 - 別名：harmonic series、N/1+N/2+…+N/N、O(N log N) の倍数ループ、倍数を回す
 - 種類：計算量、整数論
@@ -297,7 +297,7 @@ search:
 
 ## 約数の個数の上界と高度合成数（divisor-count-bound） {#divisor-count-bound}
 
-- id：`divisor-count-bound`　レベル：水　段階：reviewed　type：technique
+- id：`divisor-count-bound`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/divisor-count-bound/
 - 別名：約数の個数の最大値、highly composite number、約数が多い数、素因数の種類数の上界
 - 種類：整数論、計算量
@@ -314,7 +314,7 @@ search:
 
 ## 区間篩（segmented-sieve） {#segmented-sieve}
 
-- id：`segmented-sieve`　レベル：水　段階：reviewed　type：technique
+- id：`segmented-sieve`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/segmented-sieve/
 - 別名：区間ふるい、segmented sieve、区間の素因数分解
 - 種類：整数論
@@ -334,7 +334,7 @@ search:
 
 ## オイラーの φ 関数（euler-phi） {#euler-phi}
 
-- id：`euler-phi`　レベル：黄　段階：reviewed　type：technique
+- id：`euler-phi`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/euler-phi/
 - 別名：トーシェント、totient、Euler's totient function、φ(n)、互いに素な数の個数
 - 種類：整数論
@@ -351,7 +351,7 @@ search:
 
 ## 大きな数の素数判定と素因数分解（miller-rabin） {#miller-rabin}
 
-- id：`miller-rabin`　レベル：発展　段階：reviewed　type：overview
+- id：`miller-rabin`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/math/miller-rabin/
 - 別名：ミラー・ラビン、Miller-Rabin、ポラード・ロー、Pollard's rho、Montgomery 乗算、64bit の素数判定
 - 種類：整数論、ハッシュ・乱択
@@ -370,7 +370,7 @@ search:
 
 ## GCD・LCM とユークリッドの互除法（gcd-lcm） {#gcd-lcm}
 
-- id：`gcd-lcm`　レベル：基礎　段階：reviewed　type：technique
+- id：`gcd-lcm`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/gcd-lcm/
 - 別名：最大公約数、最小公倍数、互除法、Euclidean algorithm、std::gcd、既約分数
 - 種類：整数論
@@ -389,7 +389,7 @@ search:
 
 ## 整数の証明の型（proof-patterns） {#proof-patterns}
 
-- id：`proof-patterns`　レベル：基礎　段階：reviewed　type：thinking
+- id：`proof-patterns`　レベル：基礎　段階：done　type：thinking
 - URL：https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/
 - 別名：整数問題の証明、並べ替え論法、余りの鳩の巣、gcd が不変、mod での矛盾
 - 種類：考察、整数論
@@ -408,7 +408,7 @@ search:
 
 ## 拡張ユークリッドの互除法と一次合同式（ext-gcd） {#ext-gcd}
 
-- id：`ext-gcd`　レベル：水　段階：reviewed　type：technique
+- id：`ext-gcd`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/ext-gcd/
 - 別名：拡張 Euclid、extended Euclidean algorithm、extgcd、ベズーの等式、Bézout's identity、ax+by=c、一次不定方程式、linear congruence
 - 種類：整数論
@@ -430,7 +430,7 @@ search:
 
 ## GCD の性質（gcd-properties） {#gcd-properties}
 
-- id：`gcd-properties`　レベル：青　段階：reviewed　type：technique
+- id：`gcd-properties`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/gcd-properties/
 - 別名：差の gcd、区間 gcd、gcd の変化は log 回、gcd と周期
 - 種類：整数論、区間クエリ
@@ -449,7 +449,7 @@ search:
 
 ## 中国剰余定理（crt） {#crt}
 
-- id：`crt`　レベル：青　段階：reviewed　type：technique
+- id：`crt`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/crt/
 - 別名：CRT、Chinese remainder theorem、中国の剰余定理、Garner、連立合同式
 - 種類：整数論
@@ -469,7 +469,7 @@ search:
 
 ## 位数・原始根・離散対数（multiplicative-order） {#multiplicative-order}
 
-- id：`multiplicative-order`　レベル：黄　段階：reviewed　type：technique
+- id：`multiplicative-order`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/multiplicative-order/
 - 別名：multiplicative order、primitive root、discrete logarithm、累乗の周期、生成元、BSGS、baby-step giant-step、平方剰余、mod の平方根、mod の K 乗根、Tonelli-Shanks、Cipolla
 - 種類：整数論
@@ -494,7 +494,7 @@ search:
 
 ## 整数の平方根・K 乗根と累乗数（integer-root） {#integer-root}
 
-- id：`integer-root`　レベル：基礎　段階：reviewed　type：technique
+- id：`integer-root`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/integer-root/
 - 別名：isqrt、integer square root、整数平方根、累乗数、perfect power、誤差のない平方根、sqrt の誤差
 - 種類：整数論、二分探索
@@ -511,7 +511,7 @@ search:
 
 ## N 進法（base-conversion） {#base-conversion}
 
-- id：`base-conversion`　レベル：基礎　段階：reviewed　type：technique
+- id：`base-conversion`　レベル：基礎　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/base-conversion/
 - 別名：基数変換、base conversion、b 進法、n 進数、−2 進法、26 進、Horner 法
 - 種類：整数論
@@ -528,7 +528,7 @@ search:
 
 ## 商の列挙（floor-quotient-enum） {#floor-quotient-enum}
 
-- id：`floor-quotient-enum`　レベル：水　段階：reviewed　type：technique
+- id：`floor-quotient-enum`　レベル：水　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/floor-quotient-enum/
 - 別名：商列挙、enumerate quotients、数論分块、√N 分割、floor でまとめる、約数の個数の和
 - 種類：整数論
@@ -546,7 +546,7 @@ search:
 
 ## 乗法的関数の和と素数の個数（multiplicative-function） {#multiplicative-function}
 
-- id：`multiplicative-function`　レベル：発展　段階：reviewed　type：overview
+- id：`multiplicative-function`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/math/multiplicative-function/
 - 別名：ディリクレ積、Dirichlet convolution、杜教筛、Min_25、乗法的関数の prefix sum、素数計数、prime counting、Lucy DP、Meissel-Lehmer
 - 種類：整数論
@@ -562,7 +562,7 @@ search:
 
 ## floor sum（floor-sum） {#floor-sum}
 
-- id：`floor-sum`　レベル：黄　段階：reviewed　type：technique
+- id：`floor-sum`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/floor-sum/
 - 別名：floor_sum、類ユークリッド、sum of floor of linear、mod of linear、一次式の mod の和、直線の下の格子点
 - 種類：整数論
@@ -584,7 +584,7 @@ search:
 
 ## Stern-Brocot 木と連分数（stern-brocot） {#stern-brocot}
 
-- id：`stern-brocot`　レベル：発展　段階：reviewed　type：overview
+- id：`stern-brocot`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/math/stern-brocot/
 - 別名：Stern-Brocot tree、continued fraction、最良近似、最良有理近似、Farey 数列、有理数の二分探索
 - 種類：整数論、二分探索
@@ -600,7 +600,7 @@ search:
 
 ## 行列累乗（matrix-power） {#matrix-power}
 
-- id：`matrix-power`　レベル：青　段階：reviewed　type：technique
+- id：`matrix-power`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/matrix-power/
 - 別名：行列の累乗、matrix exponentiation、行列累乗 DP、遷移行列、隣接行列の累乗、min-plus 行列、(max,+) 行列、半環の行列
 - 種類：線形代数・行列、DP、ダブリング・分割統治
@@ -625,7 +625,7 @@ search:
 
 ## 掃き出し法（gaussian-elimination） {#gaussian-elimination}
 
-- id：`gaussian-elimination`　レベル：青　段階：reviewed　type：technique
+- id：`gaussian-elimination`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/gaussian-elimination/
 - 別名：ガウスの消去法、Gaussian elimination、Gauss-Jordan、連立一次方程式、ランク、ライツアウト、mod 2 の連立方程式
 - 種類：線形代数・行列
@@ -645,7 +645,7 @@ search:
 
 ## XOR 基底（xor-basis） {#xor-basis}
 
-- id：`xor-basis`　レベル：黄　段階：reviewed　type：technique
+- id：`xor-basis`　レベル：黄　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/xor-basis/
 - 別名：XOR basis、線形基底、linear basis、F2 の基底、部分集合の XOR、XOR で作れる値、閉路基底、サイクル基底、サイクル空間、XOR 最短路
 - 種類：線形代数・行列、ビット演算
@@ -665,7 +665,7 @@ search:
 
 ## 行列式（determinant） {#determinant}
 
-- id：`determinant`　レベル：発展　段階：reviewed　type：overview
+- id：`determinant`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/math/determinant/
 - 別名：determinant、行列式 mod p
 - 種類：線形代数・行列
@@ -681,7 +681,7 @@ search:
 
 ## 畳み込みの使い方（convolution-ntt） {#convolution-ntt}
 
-- id：`convolution-ntt`　レベル：青　段階：reviewed　type：technique
+- id：`convolution-ntt`　レベル：青　段階：done　type：technique
 - URL：https://yuukougun.github.io/kyopro-atlas/math/convolution-ntt/
 - 別名：畳み込み、convolution、多項式の積、ACL の convolution、convolution_ll、ずらしたときの一致数、全シフトのハミング距離、ワイルドカード照合
 - 種類：畳み込み・多項式
@@ -705,7 +705,7 @@ search:
 
 ## FFT・NTT の仕組みと任意 mod の畳み込み（fft-ntt） {#fft-ntt}
 
-- id：`fft-ntt`　レベル：発展　段階：reviewed　type：overview
+- id：`fft-ntt`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/math/fft-ntt/
 - 別名：FFT、NTT、高速フーリエ変換、fast Fourier transform、数論変換、number theoretic transform、任意 mod 畳み込み、3 素数 NTT
 - 種類：畳み込み・多項式
@@ -723,7 +723,7 @@ search:
 
 ## XOR 畳み込み（hadamard-transform） {#hadamard-transform}
 
-- id：`hadamard-transform`　レベル：発展　段階：reviewed　type：overview
+- id：`hadamard-transform`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/math/hadamard-transform/
 - 別名：アダマール変換、Walsh-Hadamard、FWHT、XOR convolution、添字の XOR の畳み込み
 - 種類：畳み込み・多項式、ビット演算
@@ -740,7 +740,7 @@ search:
 
 ## 分割統治 FFT・オンライン畳み込み（online-convolution） {#online-convolution}
 
-- id：`online-convolution`　レベル：発展　段階：reviewed　type：overview
+- id：`online-convolution`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/math/online-convolution/
 - 別名：online convolution、relaxed convolution、多項式の積の分割統治、FFT DP、多項式で DP
 - 種類：畳み込み・多項式、DP、ダブリング・分割統治
@@ -758,7 +758,7 @@ search:
 
 ## 形式的冪級数と多項式の演算（fps-basics） {#fps-basics}
 
-- id：`fps-basics`　レベル：発展　段階：reviewed　type：overview
+- id：`fps-basics`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/math/fps-basics/
 - 別名：FPS、formal power series、多項式の逆元、多項式の割り算、Taylor shift、多点評価、冪級数の log・exp、形式的べき級数
 - 種類：畳み込み・多項式、数え上げ
@@ -776,7 +776,7 @@ search:
 
 ## 線形漸化式の高速化（linear-recurrence-fast） {#linear-recurrence-fast}
 
-- id：`linear-recurrence-fast`　レベル：発展　段階：reviewed　type：overview
+- id：`linear-recurrence-fast`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/math/linear-recurrence-fast/
 - 別名：きたまさ法、Bostan-Mori、Berlekamp-Massey、Fiduccia、線形漸化式の第 N 項
 - 種類：線形代数・行列、畳み込み・多項式
@@ -797,7 +797,7 @@ search:
 
 ## ラグランジュ補間とべき乗和（lagrange-interpolation） {#lagrange-interpolation}
 
-- id：`lagrange-interpolation`　レベル：発展　段階：reviewed　type：overview
+- id：`lagrange-interpolation`　レベル：発展　段階：done　type：overview
 - URL：https://yuukougun.github.io/kyopro-atlas/math/lagrange-interpolation/
 - 別名：Lagrange interpolation、多項式補間、補間、べき乗和、Faulhaber、答えが多項式になる
 - 種類：畳み込み・多項式

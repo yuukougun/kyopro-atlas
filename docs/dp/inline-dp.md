@@ -25,7 +25,7 @@ sections:
   - {title: 全体のシフトを添字のずらしで表す, anchor: global-shift}
   - {title: 区間加算と区間最大を遅延セグメント木で（区間の右端で加算する）, anchor: lazy-segment-tree}
   - {title: 単調スタックと組み合わせる, anchor: with-monotonic-stack, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

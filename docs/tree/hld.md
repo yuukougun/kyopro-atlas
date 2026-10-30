@@ -26,7 +26,7 @@ sections:
   - {title: 辺の値は子の頂点に置く・非可換な演算の向き, anchor: edge-values}
   - {title: いつ使うか（オイラーツアーと LCA で足りる場合との使い分け）, anchor: when-to-use}
   - {title: 自作ライブラリでの扱い, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

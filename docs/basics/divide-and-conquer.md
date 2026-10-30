@@ -20,14 +20,14 @@ signs:
   - {type: shape, text: 区間の最大値の位置で左右に分けると、それぞれが同じ形の問題になる}
 acl: []
 frequency: A
-frequency_evidence: recent 2（abc451_g・abc478_g）・前提として 4 ページに届く（直接 3）・古い ABC 2 問
+frequency_evidence: recent 2（abc451_g・abc478_g）・前提として 3 ページに届く（直接 3）・古い ABC 2 問
 sections:
   - {title: 漸化式 T(N) = 2T(N/2) + O(N) と計算量, anchor: recurrence}
   - {title: またぐものの数え方（マージソートで転倒数）, anchor: crossing}
   - {title: 最大値の位置で分ける, anchor: split-at-max}
   - {title: 区間クエリを中央で分けて左右の DP を合わせる（区間ナップサック）, anchor: range-knapsack}
   - {title: 他の分野の分割統治（分割統治 DP・分割統治 FFT・CDQ）への案内, anchor: other-fields}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

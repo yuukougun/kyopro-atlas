@@ -22,7 +22,7 @@ signs:
 acl: [fenwick_tree]
 verify: [point_add_range_sum, static_range_sum]
 frequency: A
-frequency_evidence: recent 2（abc452_f・abc467_g）・前提として 13 ページに届く（直接 5）・古い ABC 6 問
+frequency_evidence: recent 2（abc452_f・abc467_g）・前提として 16 ページに届く（直接 6）・古い ABC 6 問
 sections:
   - {title: 何ができるか（一点加算・接頭辞の和と逆元）, anchor: what-it-does}
   - {title: 保つ性質（添字 i は、i で終わる長さ lowbit(i) の区間の和を持つ）, anchor: invariants}
@@ -31,7 +31,7 @@ sections:
   - {title: 値を添字にして数える（座標圧縮と組む）, anchor: count-by-value}
   - {title: 変種（差分の BIT・BIT 2 本・2 次元 BIT・接頭辞の max）, anchor: variants}
   - {title: BIT 上の二分探索, anchor: binary-search}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

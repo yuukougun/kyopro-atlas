@@ -27,7 +27,7 @@ sections:
   - {title: 盤面・剰余の周期を割り算で数える, anchor: periodic-patterns, level: 水}
   - {title: シミュレーションを速く進める（ずれ・反転は全体への操作を変数で持つページへ）, anchor: simulation-speedup}
   - {title: ダブリング・行列累乗との使い分け, anchor: vs-doubling}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

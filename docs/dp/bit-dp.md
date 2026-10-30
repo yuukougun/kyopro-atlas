@@ -29,7 +29,7 @@ sections:
   - {title: ほかの探索と組み合わせる（BFS・ワーシャルフロイド法で距離を前計算してから）, anchor: with-shortest-paths, level: 青}
   - {title: ゲームの状態を集合で持つ, anchor: games}
   - {title: 素数の使用状況を集合で持つ, anchor: primes, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

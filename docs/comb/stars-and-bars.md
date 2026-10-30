@@ -26,7 +26,7 @@ sections:
   - {title: 広義単調な列との対応, anchor: monotone}
   - {title: 隣り合わない選び方・間隔 d 以上の選び方, anchor: gaps}
   - {title: 場合分けしてから配る・素因数ごとに配る, anchor: applications, level: 水}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

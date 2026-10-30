@@ -25,7 +25,7 @@ sections:
   - {title: ボトルネックは LCA の重み, anchor: bottleneck}
   - {title: マージテク・部分永続 Union-Find・並列二分探索との使い分け, anchor: alternatives}
   - {title: 自作するときの要点と Library Checker, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

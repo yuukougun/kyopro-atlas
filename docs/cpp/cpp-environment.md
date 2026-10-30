@@ -29,7 +29,7 @@ sections:
   - {title: C++ の版と GCC の対応表（g++-13 と AtCoder の GCC 15.2）, anchor: version-matrix}
   - {title: GCC 13 で通らない書き方（GCC 14〜・GCC 15〜の C++23 の機能）, anchor: gcc13-limits}
   - {title: AtCoder で使えないもの：C++26 の機能と GCC 16 からの機能, anchor: not-on-atcoder}
-stage: reviewed
+stage: done
 updated: 2026-10-22
 cpp_std: 23
 gcc_min: 15

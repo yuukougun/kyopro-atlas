@@ -28,7 +28,7 @@ sections:
   - {title: AtCoder で狙われる条件（事前に固定されたテストと、誰でも使う固定の選択）, anchor: atcoder-tests}
   - {title: 二重ハッシュとの比較, anchor: double-hashing}
   - {title: unordered_map への攻撃と、乱数を混ぜたカスタムハッシュ, anchor: unordered-map}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

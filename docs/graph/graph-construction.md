@@ -24,7 +24,7 @@ sections:
   - {title: BFS 木の性質（層が高々 1 違う）, anchor: bfs-tree}
   - {title: 距離表からの復元（迂回できる辺は不要）, anchor: from-distances}
   - {title: DFS 木をたどって偶奇を合わせる, anchor: parity-walk, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

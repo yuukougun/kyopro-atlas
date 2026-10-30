@@ -23,7 +23,7 @@ sections:
   - {title: 色ごとの練習の方法, anchor: practice}
   - {title: 解いた数・理解した数, anchor: progress}
   - {title: シラバスではないこと, anchor: not-a-syllabus}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -26,7 +26,7 @@ sections:
   - {title: '自作のヘッダを #include "..." したコードは、提出前に 1 ファイルに展開する（バンドル）', anchor: bundling}
   - {title: 展開の道具：cph の提出用のコピー・ACL の expander.py・oj-bundle, anchor: bundling-tools}
   - {title: '// @impl で main の後ろに回せるもの・回せないもの', anchor: impl-marker}
-stage: reviewed
+stage: done
 updated: 2026-10-22
 cpp_std: null
 gcc_min: null

@@ -27,7 +27,7 @@ sections:
   - {title: Grundy 数を DP で求める（区間・2 種類の石）, anchor: dp}
   - {title: 規則を見つける：小さい局面の表と周期, anchor: patterns}
   - {title: 使えない場合（1 手で複数を動かす・非不偏）, anchor: limitations}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

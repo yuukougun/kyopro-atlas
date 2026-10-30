@@ -19,7 +19,7 @@ signs:
   - {type: shape, text: 'dp[i] から i+L〜i+R の範囲へ同じ値を配る'}
 acl: []
 frequency: B
-frequency_evidence: recent 0・前提として 6 ページに届く（直接 3）・古い ABC 7 問
+frequency_evidence: recent 0・前提として 5 ページに届く（直接 3）・古い ABC 7 問
 sections:
   - {title: 貰う形と累積和・配る形といもす法, anchor: pull-and-push}
   - {title: 同じ段の累積和（上限つきの配り方）, anchor: same-row}
@@ -27,7 +27,7 @@ sections:
   - {title: 遷移元が接頭辞なら累積 min・累積 max でもよい, anchor: prefix-min}
   - {title: 余りごとの累積, anchor: by-remainder, level: 青}
   - {title: 2 次元の累積, anchor: two-dimensional, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

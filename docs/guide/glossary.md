@@ -23,7 +23,7 @@ sections:
   - {title: 手法一般とデータ構造・代数, anchor: techniques}
   - {title: 数学・グラフと木・文字列と幾何・実装, anchor: domains}
   - {title: 表記の正規形と別名の対応表, anchor: canonical-forms}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

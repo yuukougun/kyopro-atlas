@@ -23,7 +23,7 @@ sections:
   - {title: 再帰とメモの書き方（未計算の印と答えの値の衝突を避ける）, anchor: write-memo}
   - {title: ボトムアップとの使い分け（速さ・スタック・高速化の載せやすさ）, anchor: vs-bottom-up}
   - {title: 到達する状態だけを持つ（map でメモ化・現れる値の個数の見積もり）, anchor: dp-map-sparse}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

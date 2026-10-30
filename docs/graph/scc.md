@@ -27,7 +27,7 @@ sections:
   - {title: 閉路に含まれる頂点（自己ループに注意）, anchor: on-cycle}
   - {title: 縮約した DAG の上で DP する, anchor: dp-on-dag}
   - {title: 縮約の応用の型（組の数・不等式の割り当て・2-SAT）, anchor: patterns}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

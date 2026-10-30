@@ -25,7 +25,7 @@ sections:
   - {title: なぜ経路圧縮をしないのか（戻すコストとならしの保証が崩れること）, anchor: no-path-compression}
   - {title: 木の DFS と組む（入るとき併合・出るとき取り消し）, anchor: with-dfs}
   - {title: オフライン動的連結性の部品（時間軸のセグメント木に辺を載せる → グラフの章）, anchor: offline-dynamic-connectivity}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

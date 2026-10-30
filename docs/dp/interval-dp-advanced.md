@@ -25,7 +25,7 @@ sections:
   - {title: 区間ごとの Grundy 数（ゲーム）, anchor: grundy}
   - {title: 訪れた区間の両端と今いる端を状態にする, anchor: visited-range}
   - {title: '桁と区間で分ける（''?'' を含む数の列）', anchor: digits-and-ranges}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -26,7 +26,7 @@ sections:
   - {title: 一列の塗り分けと円環の塗り分け, anchor: coloring}
   - {title: 決める順番を変えて積の法則を使えるようにする, anchor: order-of-choice}
   - {title: 写像 12 相の「玉も箱も区別する」マス（k^n と順列）, anchor: twelvefold-cells}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

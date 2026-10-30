@@ -23,7 +23,7 @@ sections:
   - {title: 幾何分布：E = 1 + (1 − p)E から 1/p, anchor: geometric}
   - {title: 失敗の回数（1/p − 1）との違い, anchor: failures}
   - {title: 段階に分けて幾何分布の期待値を足す（コンプガチャ）, anchor: staged}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

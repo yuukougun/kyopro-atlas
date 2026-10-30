@@ -25,7 +25,7 @@ sections:
   - {title: 典型の言い換え（2 グループに分ける・± の和・x と y が独立・平均）, anchor: reformulations}
   - {title: 最大値を固定するためにソートしてから数える, anchor: sort-then-count, level: 水}
   - {title: 全部分集合についての和（含む部分集合の数を重みにする）, anchor: over-all-subsets, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

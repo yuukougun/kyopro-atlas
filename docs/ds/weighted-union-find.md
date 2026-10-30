@@ -30,7 +30,7 @@ sections:
   - {title: 計算量とその根拠, anchor: complexity}
   - {title: 一般化（XOR で偶奇・二部グラフ、頂点を 2 倍にする）, anchor: generalization}
   - {title: 応用の型, anchor: applications}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

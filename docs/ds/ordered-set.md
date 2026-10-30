@@ -28,7 +28,7 @@ sections:
   - {title: 行ごと・列ごとの set（グリッドで次の壁を探し、両方から消す）, anchor: rows-and-columns, level: 水}
   - {title: パレート境界を map で持つ（支配される点を消す。ならし O(log N)）, anchor: pareto, level: 水}
   - {title: ソート順で隣り合う組の集合（2 番目に大きい値の寄与。最小 XOR の組は Binary Trie のページ）, anchor: adjacent-pairs, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -26,7 +26,7 @@ sections:
   - {title: 3 要素の巡回は偶置換, anchor: three-cycle}
   - {title: 同じ値があれば偶奇を調整できる, anchor: duplicates}
   - {title: ちょうど K 回の操作で作れるもの, anchor: exactly-k}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

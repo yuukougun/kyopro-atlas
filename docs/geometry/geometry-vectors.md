@@ -22,7 +22,7 @@ signs:
 acl: []
 verify: []
 frequency: A
-frequency_evidence: recent 2（abc467_d・abc472_f）・前提として 7 ページに届く（直接 4）・古い ABC 7 問
+frequency_evidence: recent 2（abc467_d・abc472_f）・前提として 6 ページに届く（直接 4）・古い ABC 7 問
 sections:
   - {title: 外積と内積の意味（符号と大きさ）, anchor: cross-and-dot}
   - {title: ccw：3 点の回り方・一直線上の判定・凸性の判定, anchor: ccw}
@@ -31,7 +31,7 @@ sections:
   - {title: 線分の交差判定（端点で接する・同一直線上の場合）と点と直線の距離, anchor: segment-intersection, level: 水}
   - {title: 3 次元の基本：軸に平行な直方体の共通部分は軸ごとの区間の積, anchor: 3d-geometry}
   - {title: '点の表し方：整数の構造体と std::complex', anchor: point-representation}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -24,7 +24,7 @@ sections:
   - {title: mod p での計算と、法が素数でない場合（互除法による掃き出し）, anchor: modulus}
   - {title: 行列木定理・LGV 補題への入口, anchor: applications}
   - {title: 計算量と自作するときの要点, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

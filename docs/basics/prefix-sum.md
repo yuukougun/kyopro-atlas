@@ -20,14 +20,14 @@ signs:
   - {type: constraint, text: Q ≤ 2×10^5 個の区間和のクエリで、値の更新がない}
 acl: []
 frequency: A
-frequency_evidence: recent 11（abc452_e・abc468_e・abc469_e・abc472_f・abc473_f・abc474_eほか）・前提として 51 ページに届く（直接 13）・古い ABC 3 問
+frequency_evidence: recent 11（abc452_e・abc468_e・abc469_e・abc472_f・abc473_f・abc474_eほか）・前提として 50 ページに届く（直接 13）・古い ABC 3 問
 sections:
   - {title: 半開区間と、先頭に 0 を置く約束, anchor: half-open}
   - {title: 左右からの累積（1 つ除いた gcd・max）, anchor: left-right}
   - {title: 円環は 2 周分に伸ばす, anchor: circular}
   - {title: 累積和の上で二分探索・尺取り, anchor: with-binary-search}
   - {title: 値が更新されるなら BIT、静的な区間 min なら Sparse Table, anchor: next-tools}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

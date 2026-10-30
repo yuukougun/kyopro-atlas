@@ -24,7 +24,7 @@ sections:
   - {title: ダイクストラ法で v を動かす遷移, anchor: dijkstra-step}
   - {title: 木の上なら易しい（木の章の「指定頂点を結ぶ最小の部分木」）, anchor: on-tree}
   - {title: 自作するときの要点と確かめ方, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

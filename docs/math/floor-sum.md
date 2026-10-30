@@ -29,7 +29,7 @@ sections:
   - {title: x mod m = x − m⌊x/m⌋ への書き換え, anchor: mod-to-floor}
   - {title: 'ACL の floor_sum（引数の範囲と負の a, b）', anchor: acl}
   - {title: 応用の型：bit ごとの popcount・1 次式の mod の積, anchor: applications, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

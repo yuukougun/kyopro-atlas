@@ -29,7 +29,7 @@ sections:
   - {title: 中点を整数にするために座標を 2 倍する, anchor: double-coordinates}
   - {title: 実数が避けられないとき：long double と、値の大きさに合わせた EPS, anchor: eps}
   - {title: 出力の桁数と、実数の二分探索の打ち切り, anchor: output-and-binary-search}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

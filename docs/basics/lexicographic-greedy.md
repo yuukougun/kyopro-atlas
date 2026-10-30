@@ -25,7 +25,7 @@ sections:
   - {title: 順序の制約は入次数 0 を小さい順に（トポロジカルソート）, anchor: topological}
   - {title: 辞書順 K 番目（先頭ごとの個数と K を比べる）, anchor: kth}
   - {title: 判定が重い型, anchor: heavy-check, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

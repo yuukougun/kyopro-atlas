@@ -25,7 +25,7 @@ sections:
   - {title: 比較は実数で、答えは mod で（比較できない落とし穴）, anchor: compare-real}
   - {title: やり直しがあるときは答えを仮定して二分探索する, anchor: guess-answer}
   - {title: 「最大値の期待値」との違い, anchor: vs-max}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

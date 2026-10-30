@@ -29,7 +29,7 @@ sections:
   - {title: ハッシュ＋二分探索：LCP・辞書順の比較・最長の繰り返し, anchor: hash-lcp-binary-search}
   - {title: 'セグ木に載せるハッシュ：（ハッシュ, B^長さ）の組で更新ありの一致・回文判定', anchor: hash-segment-tree, level: 青}
   - {title: ハッシュで代用できる場面とできない場面（Z・Manacher・SA・畳み込みとの使い分け）, anchor: when-to-use}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -25,7 +25,7 @@ sections:
   - {title: 左端の順・長さの順が失敗する例, anchor: counterexamples}
   - {title: 処理時間と締め切りがある場合（優先度付きキューの貪欲へ）, anchor: deadlines}
   - {title: 区間に重みがあるなら DP, anchor: weighted}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

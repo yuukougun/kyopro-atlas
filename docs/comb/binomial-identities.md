@@ -28,7 +28,7 @@ sections:
   - {title: '吸収公式 k C(n,k) = n C(n−1, k−1)', anchor: absorption}
   - {title: 二項定理で累乗の和を展開する, anchor: power-sums}
   - {title: 式変形の検算（小さいケース）, anchor: verify}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

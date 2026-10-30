@@ -28,7 +28,7 @@ sections:
   - {title: 'ranges::unique は後ろの不要部分を返す（C++20）', anchor: ranges-unique}
   - {title: fold_left・contains・find_last（C++23・GCC 13〜）と AtCoder にない starts_with, anchor: fold-left}
   - {title: '一時オブジェクトを渡すと戻り値が ranges::dangling になる（使うとコンパイルエラー）', anchor: ranges-dangling}
-stage: reviewed
+stage: done
 updated: 2026-10-22
 cpp_std: 20
 gcc_min: 13

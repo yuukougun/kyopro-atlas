@@ -24,7 +24,7 @@ sections:
   - {title: 操作の順序によらないなら都合のよい順で考える, anchor: order-independence}
   - {title: 独立な部分に分ける（奇数部分ごと）, anchor: independent-parts}
   - {title: 偶奇・構築・ゲームとのつながり, anchor: connections}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

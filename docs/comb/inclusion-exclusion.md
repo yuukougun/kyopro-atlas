@@ -28,7 +28,7 @@ sections:
   - {title: 全射の数（各色を少なくとも 1 回使う）, anchor: surjection}
   - {title: 使い分け：余事象・包除 DP・約数包除, anchor: when-to-use}
   - {title: min-max 包除（全種類がそろうまでの期待値）, anchor: min-max, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

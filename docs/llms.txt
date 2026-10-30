@@ -2,11 +2,11 @@
 
 > AtCoder で黄色（レート 2000）を目指す学習者向けの、辞書として引く競技プログラミングの教材。手法・考察・データ構造・数学・C++ のページを分野ごとに置く。
 
-- 版：b0a0a832178e（updated の最大：2026-10-30）。tools/gen_site.py が生成する
+- 版：27594140e382（updated の最大：2026-10-30）。tools/gen_site.py が生成する
 - ページ数：357
 - 1 行が 1 ページ：「- [タイトル](URL)（id・レベル・分野・段階）：要約」
 - レベルは difficulty の帯：基礎 〜1199・水 1200〜1599・青 1600〜1999・黄 2000〜2399・発展 2400〜（概要だけ）。「—」はレベルを持たないページ
-- 段階：stub は準備中（要約と前提しかないので根拠にしない）、draft は本文あり・未検証、reviewed は検証済み、done は完成
+- 段階：stub は準備中（要約と前提しかないので根拠にしない）、draft は下書き（本文あり・未検証）、reviewed は検証済み、done は完成
 - 別名・問題のサイン・手法の種類・前提・節（アンカー付きの URL）は、下の分野ごとの詳細索引にある
 
 ## 分野ごとの詳細索引
@@ -29,402 +29,402 @@
 
 ## はじめに
 
-- [この教材の使い方](https://yuukougun.github.io/kyopro-atlas/start/how-to-use/)（how-to-use・—・start・reviewed）：解けなかった ABC の問題から、逆引き辞典 → ページ冒頭の要点 → 前提の順に教材を引ける。レベルの意味、進捗の記録と退避、claude.ai での解説の頼み方も示す。
-- [記法と用語の約束](https://yuukougun.github.io/kyopro-atlas/start/notation/)（notation・—・start・reviewed）：教材全体で使う記法の約束を引ける。計算量、半開区間、添字、合同式・整除・floor・ceil・Σ などの数学の記法、グラフ・木・文字列の記号を定め、各ページは定義を繰り返さずに参照する。
-- [AtCoder の仕組み](https://yuukougun.github.io/kyopro-atlas/start/atcoder-system/)（atcoder-system・—・start・reviewed）：レート・パフォーマンス・色、difficulty、ABC の形式と順位、練習用コンテスト、生成 AI のルールがわかる。教材のレベルは difficulty（その問題を半々で解けるレート）の帯で決まる。
-- [出典と AI 利用の方針](https://yuukougun.github.io/kyopro-atlas/start/ai-and-sources/)（ai-and-sources・—・start・reviewed）：この教材の本文を AI（Claude）が書き、別の AI の担当と機械の検査で確かめている流れと、段階「完成」の意味がわかる。他者の記事を転載しない約束、出典の示し方、AI の利用を断るサイトの扱い、ライセンス、連絡先も示す。
+- [この教材の使い方](https://yuukougun.github.io/kyopro-atlas/start/how-to-use/)（how-to-use・—・start・done）：解けなかった ABC の問題から、逆引き辞典 → ページ冒頭の要点 → 前提の順に教材を引ける。レベルの意味、進捗の記録と退避、claude.ai での解説の頼み方も示す。
+- [記法と用語の約束](https://yuukougun.github.io/kyopro-atlas/start/notation/)（notation・—・start・done）：教材全体で使う記法の約束を引ける。計算量、半開区間、添字、合同式・整除・floor・ceil・Σ などの数学の記法、グラフ・木・文字列の記号を定め、各ページは定義を繰り返さずに参照する。
+- [AtCoder の仕組み](https://yuukougun.github.io/kyopro-atlas/start/atcoder-system/)（atcoder-system・—・start・done）：レート・パフォーマンス・色、difficulty、ABC の形式と順位、練習用コンテスト、生成 AI のルールがわかる。教材のレベルは difficulty（その問題を半々で解けるレート）の帯で決まる。
+- [出典と AI 利用の方針](https://yuukougun.github.io/kyopro-atlas/start/ai-and-sources/)（ai-and-sources・—・start・done）：この教材の本文を AI（Claude）が書き、別の AI の担当と機械の検査で確かめている流れと、段階「完成」の意味がわかる。他者の記事を転載しない約束、出典の示し方、AI の利用を断るサイトの扱い、ライセンス、連絡先も示す。
 
 ## 横断ページ
 
-- [逆引き辞典（言い回しから）](https://yuukougun.github.io/kyopro-atlas/guide/reverse-index-signs/)（reverse-index-signs・—・guide・reviewed）：問題文の言い回しや求めるもの、立てた式の形から、疑う手法とページを引ける。表は各ページのサインから生成し、どれから疑うかの注記を手で添える。
-- [逆引き辞典（制約・計算量から）](https://yuukougun.github.io/kyopro-atlas/guide/reverse-index-constraints/)（reverse-index-constraints・—・guide・reviewed）：N の上限などの制約から、間に合う計算量と候補の手法を引ける。計算量から手法を引く逆向きの表も持ち、制約の帯ごとの候補のページは各ページの制約のサインから生成する。
-- [用語の索引](https://yuukougun.github.io/kyopro-atlas/guide/term-index/)（term-index・—・guide・reviewed）：手法の名前・別名・英語名から、そのページを五十音順と ABC 順で引ける。全ページの題名と別名から生成し、サイト内検索の結果に頼らない入口になる。
-- [問題番号の索引](https://yuukougun.github.io/kyopro-atlas/guide/problem-index/)（problem-index・—・guide・draft）：本文の例題・練習・力試しに載せた問題を、ABC・ARC・AGC・問題集などに分けて回の順に並べ、問題番号から載せたページと役割を引ける。全ページの問題の一覧から生成する。
-- [知識マップ](https://yuukougun.github.io/kyopro-atlas/guide/knowledge-map/)（knowledge-map・—・guide・reviewed）：ページの前提関係を有向グラフで見て、選んだページの前提と次に読むページをたどれる。「理解した」ページと、前提をすべて理解した次の候補を塗り分ける。
-- [似た手法の使い分け](https://yuukougun.github.io/kyopro-atlas/guide/method-comparison/)（method-comparison・—・guide・reviewed）：BFS・01-BFS・ダイクストラ法や累積和・BIT・セグメント木のように混同しやすい手法の組を、できる操作・計算量・前提条件で比べ、条件から選べる。
-- [色別ロードマップ](https://yuukougun.github.io/kyopro-atlas/guide/roadmap/)（roadmap・—・guide・reviewed）：目標の色ごとに、到達の目安、読むページの順、最近の ABC の位置ごとの頻出手法、解いた数の進捗を見られる。ページの列はレベル・前提・出題頻度から生成する。
-- [勉強したいリスト](https://yuukougun.github.io/kyopro-atlas/guide/study-list/)（study-list・—・guide・draft）：各ページの「勉強したい」で入れたページを、題名・レベル・分野・入れた日の一覧で見られる。読み終えたページや要らなくなったページは、一覧から外せる。
-- [精進の仕方](https://yuukougun.github.io/kyopro-atlas/guide/practice-method/)（practice-method・—・guide・reviewed）：解けなかった問題との付き合い方がわかる。解説を見るまでの時間、解説の読み方、upsolve と復習、記録、演習の量と難しさの選び方を、教材の解説と記録の仕組みにつなげる。
-- [問題集と練習用コンテストの案内](https://yuukougun.github.io/kyopro-atlas/guide/problem-sets/)（problem-sets・—・guide・reviewed）：典型90問・EDPC・鉄則本・ACL Practice などの問題集と練習用コンテストを、構成とレベルの目安から選べる。最近の ABC と各問題集の問題から、使う手法のページも引ける。
-- [コンテストの戦い方](https://yuukougun.github.io/kyopro-atlas/guide/contest-strategy/)（contest-strategy・—・guide・reviewed）：ABC の 100 分の使い方がわかる。位置ごとの難しさと時間の目安、問題を読む順、取り組む問題の選び方と切り替え、終了前と終了後の過ごし方を示す。
-- [詰まったときの発想リスト](https://yuukougun.github.io/kyopro-atlas/guide/thinking-checklist/)（thinking-checklist・—・guide・reviewed）：方針が立たないときに、問題の形から試す考察の型を引き、上から順に問いを当てられる。各型は考察の章と手法のページへつなぐ入口で、型の説明の本体はそちらにある。
-- [WA・TLE・RE・MLE の原因チェックリスト](https://yuukougun.github.io/kyopro-atlas/guide/debugging-checklist/)（debugging-checklist・—・guide・reviewed）：提出前の確認と、WA・TLE・RE・MLE の症状ごとに疑う原因を順にたどれる。各項目から C++ 章の落とし穴や手法のページへつなぐ。
-- [ストレステストと実験](https://yuukougun.github.io/kyopro-atlas/guide/stress-testing/)（stress-testing・—・guide・reviewed）：WA の原因が見つからないときに、愚直解と本解を小さいランダムな入力で比べて反例を探せる。小さいケースの全探索で表を作り、規則を予想する実験の手順も示す。
-- [早見表](https://yuukougun.github.io/kyopro-atlas/guide/cheatsheet/)（cheatsheet・—・guide・reviewed）：コンテスト中や解説を読むときに、計算量と制約、型の範囲、数の目安、STL と ACL の計算量、mod の性質、よく使う公式、bit 演算の小技をすぐ引ける。各行から詳しいページへつなぐ。
-- [用語集](https://yuukougun.github.io/kyopro-atlas/guide/glossary/)（glossary・—・guide・reviewed）：本文で使う用語の短い定義と、表記の正規形（セグ木とセグメント木、DFS と深さ優先探索など）を引ける。本文の用語の最初の出現からリンクされ、表記の検査（prh）の元にもなる。
-- [自作ライブラリの設計と動作確認](https://yuukougun.github.io/kyopro-atlas/guide/library-design/)（library-design・—・guide・reviewed）：自作ライブラリを何から作るか、ACL を手本にしたインターフェースとヘッダの書き方、Library Checker などでの動作確認の手順がわかる。提出用の展開の仕方と、各ページの確認用の問題の表もある。
+- [逆引き辞典（言い回しから）](https://yuukougun.github.io/kyopro-atlas/guide/reverse-index-signs/)（reverse-index-signs・—・guide・done）：問題文の言い回しや求めるもの、立てた式の形から、疑う手法とページを引ける。表は各ページのサインから生成し、どれから疑うかの注記を手で添える。
+- [逆引き辞典（制約・計算量から）](https://yuukougun.github.io/kyopro-atlas/guide/reverse-index-constraints/)（reverse-index-constraints・—・guide・done）：N の上限などの制約から、間に合う計算量と候補の手法を引ける。計算量から手法を引く逆向きの表も持ち、制約の帯ごとの候補のページは各ページの制約のサインから生成する。
+- [用語の索引](https://yuukougun.github.io/kyopro-atlas/guide/term-index/)（term-index・—・guide・done）：手法の名前・別名・英語名から、そのページを五十音順と ABC 順で引ける。全ページの題名と別名から生成し、サイト内検索の結果に頼らない入口になる。
+- [問題番号の索引](https://yuukougun.github.io/kyopro-atlas/guide/problem-index/)（problem-index・—・guide・done）：本文の例題・練習・力試しに載せた問題を、ABC・ARC・AGC・問題集などに分けて回の順に並べ、問題番号から載せたページと役割を引ける。全ページの問題の一覧から生成する。
+- [知識マップ](https://yuukougun.github.io/kyopro-atlas/guide/knowledge-map/)（knowledge-map・—・guide・done）：ページの前提関係を有向グラフで見て、選んだページの前提と次に読むページをたどれる。「理解した」ページと、前提をすべて理解した次の候補を塗り分ける。
+- [似た手法の使い分け](https://yuukougun.github.io/kyopro-atlas/guide/method-comparison/)（method-comparison・—・guide・done）：BFS・01-BFS・ダイクストラ法や累積和・BIT・セグメント木のように混同しやすい手法の組を、できる操作・計算量・前提条件で比べ、条件から選べる。
+- [色別ロードマップ](https://yuukougun.github.io/kyopro-atlas/guide/roadmap/)（roadmap・—・guide・done）：目標の色ごとに、到達の目安、読むページの順、最近の ABC の位置ごとの頻出手法、解いた数の進捗を見られる。ページの列はレベル・前提・出題頻度から生成する。
+- [勉強したいリスト](https://yuukougun.github.io/kyopro-atlas/guide/study-list/)（study-list・—・guide・done）：各ページの「勉強したい」で入れたページを、題名・レベル・分野・入れた日の一覧で見られる。読み終えたページや要らなくなったページは、一覧から外せる。
+- [精進の仕方](https://yuukougun.github.io/kyopro-atlas/guide/practice-method/)（practice-method・—・guide・done）：解けなかった問題との付き合い方がわかる。解説を見るまでの時間、解説の読み方、upsolve と復習、記録、演習の量と難しさの選び方を、教材の解説と記録の仕組みにつなげる。
+- [問題集と練習用コンテストの案内](https://yuukougun.github.io/kyopro-atlas/guide/problem-sets/)（problem-sets・—・guide・done）：典型90問・EDPC・鉄則本・ACL Practice などの問題集と練習用コンテストを、構成とレベルの目安から選べる。最近の ABC と各問題集の問題から、使う手法のページも引ける。
+- [コンテストの戦い方](https://yuukougun.github.io/kyopro-atlas/guide/contest-strategy/)（contest-strategy・—・guide・done）：ABC の 100 分の使い方がわかる。位置ごとの難しさと時間の目安、問題を読む順、取り組む問題の選び方と切り替え、終了前と終了後の過ごし方を示す。
+- [詰まったときの発想リスト](https://yuukougun.github.io/kyopro-atlas/guide/thinking-checklist/)（thinking-checklist・—・guide・done）：方針が立たないときに、問題の形から試す考察の型を引き、上から順に問いを当てられる。各型は考察の章と手法のページへつなぐ入口で、型の説明の本体はそちらにある。
+- [WA・TLE・RE・MLE の原因チェックリスト](https://yuukougun.github.io/kyopro-atlas/guide/debugging-checklist/)（debugging-checklist・—・guide・done）：提出前の確認と、WA・TLE・RE・MLE の症状ごとに疑う原因を順にたどれる。各項目から C++ 章の落とし穴や手法のページへつなぐ。
+- [ストレステストと実験](https://yuukougun.github.io/kyopro-atlas/guide/stress-testing/)（stress-testing・—・guide・done）：WA の原因が見つからないときに、愚直解と本解を小さいランダムな入力で比べて反例を探せる。小さいケースの全探索で表を作り、規則を予想する実験の手順も示す。
+- [早見表](https://yuukougun.github.io/kyopro-atlas/guide/cheatsheet/)（cheatsheet・—・guide・done）：コンテスト中や解説を読むときに、計算量と制約、型の範囲、数の目安、STL と ACL の計算量、mod の性質、よく使う公式、bit 演算の小技をすぐ引ける。各行から詳しいページへつなぐ。
+- [用語集](https://yuukougun.github.io/kyopro-atlas/guide/glossary/)（glossary・—・guide・done）：本文で使う用語の短い定義と、表記の正規形（セグ木とセグメント木、DFS と深さ優先探索など）を引ける。本文の用語の最初の出現からリンクされ、表記の検査（prh）の元にもなる。
+- [自作ライブラリの設計と動作確認](https://yuukougun.github.io/kyopro-atlas/guide/library-design/)（library-design・—・guide・done）：自作ライブラリを何から作るか、ACL を手本にしたインターフェースとヘッダの書き方、Library Checker などでの動作確認の手順がわかる。提出用の展開の仕方と、各ページの確認用の問題の表もある。
 
 ## 基本テクニック
 
-- [計算量の見積もり](https://yuukougun.github.io/kyopro-atlas/basics/complexity-estimation/)（complexity-estimation・基礎・basics・reviewed）：制約の大きさから許される計算量を逆算し、使える手法の候補を絞る。C++ なら 1 秒に 10^8〜数×10^8 回を目安に、ループの回数・log の数・定数倍・メモリを見積もる。
-- [bit 演算の基本と XOR の性質](https://yuukougun.github.io/kyopro-atlas/basics/bit-operations/)（bit-operations・基礎・basics・reviewed）：XOR の打ち消し（x xor x = 0）、a + b = (a xor b) + 2(a and b)、0〜n の XOR の周期などで式を簡単にする。部分集合の部分集合は s = (s − 1) & m で列挙できる。
-- [bit ごとに独立に考える](https://yuukougun.github.io/kyopro-atlas/basics/bitwise-independence/)（bitwise-independence・水・basics・reviewed）：XOR・AND・OR の結果は bit ごとに独立に決まるので、bit ごとに 0 と 1 の個数を数えて 2^k を掛けて足す。最大化・最小化は上位 bit から決め、繰り上がりで bit が干渉する足し算には使えない。
-- [全探索の設計](https://yuukougun.github.io/kyopro-atlas/basics/brute-force/)（brute-force・基礎・basics・reviewed）：何を全探索するかを選び直して通り数を減らす。いくつか決めれば残りが計算で決まる、答えの候補の側を試す、小さい次元だけを試して残りを速く求める、などの型がある。
-- [bit 全探索と順列全探索](https://yuukougun.github.io/kyopro-atlas/basics/bit-full-search/)（bit-full-search・基礎・basics・reviewed）：N ≤ 20 程度なら部分集合 2^N 通りを整数の各 bit で表して全部試し、N ≤ 8〜10 なら順列 N! 通りを next_permutation で全部試す。片側だけを全探索して残りを貪欲で決める型もよく出る。
-- [再帰による全列挙](https://yuukougun.github.io/kyopro-atlas/basics/recursive-enumeration/)（recursive-enumeration・水・basics・reviewed）：部分的に決めた状態から 1 つずつ決めていく再帰で、条件を満たす数・組分け・敷き詰めを全部列挙する。組分けは「まだ組のない最小番号の人から決める」と同じ分け方を二度数えない。
-- [ソートで考える](https://yuukougun.github.io/kyopro-atlas/basics/sorting-techniques/)（sorting-techniques・基礎・basics・reviewed）：並べ替えてよい問題では、ソートすると貪欲の順番が決まり、二分探索や尺取りが使えるようになる。比較関数は狭義の弱順序（<= を書かない）にし、比率は掛け算で比べる。
-- [二分探索](https://yuukougun.github.io/kyopro-atlas/basics/binary-search/)（binary-search・基礎・basics・reviewed）：単調な条件の境界を、ok 側と ng 側の不変条件を保ちながら区間を半分ずつ狭めて O(log N) で見つける。ソート済みの列では lower_bound・upper_bound で x 以上の位置や個数を求められる。
-- [答えで二分探索](https://yuukougun.github.io/kyopro-atlas/basics/binary-search-answer/)（binary-search-answer・基礎・basics・reviewed）：「答えを x にできるか」の判定が x について単調なら、x を二分探索して最適値を求める。最大値の最小化・最小値の最大化に使い、判定の中身（貪欲・探索・DP）が問題の本体になる。
-- [座標圧縮](https://yuukougun.github.io/kyopro-atlas/basics/coordinate-compression/)（coordinate-compression・基礎・basics・reviewed）：値を sort・unique・lower_bound で 0〜K−1 の番号に置き換え、大小関係だけを残したまま配列の添字にできるようにする。BIT・セグ木・いもす法と組んで使う。
-- [イベントソートと平面走査の基本](https://yuukougun.github.io/kyopro-atlas/basics/event-sort/)（event-sort・水・basics・reviewed）：区間の開始・終了・クエリを (座標, 種類) の組にして並べ、左から順に処理しながら集合や合計を更新する。2 次元の点を一方の座標の順に処理し、もう一方を集合で管理するのが平面走査の基本形。
-- [累積和](https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum/)（prefix-sum・基礎・basics・reviewed）：S[0] = 0、S[i+1] = S[i] + a[i] と前計算すると、区間 [l, r) の和が S[r] − S[l] で O(1) で求まる。引き算できない演算（gcd・max）は左右からの累積で「1 つ除いた値」を作る。
-- [累積和と連想配列で区間を数える](https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum-counting/)（prefix-sum-counting・基礎・basics・reviewed）：和がちょうど K の区間や和が M の倍数の区間の個数を、条件を S_r と S_l の関係に言い換えて数える。左から S_l の個数を連想配列に記録しながら組を足していく。
-- [2 次元累積和](https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum-2d/)（prefix-sum-2d・水・basics・reviewed）：長方形領域の和を、S[i+1][j+1] = S[i][j+1] + S[i+1][j] − S[i][j] + a[i][j] の前計算と 4 項の足し引きで O(1) で求める。3 次元以上も包除の符号で同じように求められる。
-- [いもす法](https://yuukougun.github.io/kyopro-atlas/basics/imos/)（imos・基礎・basics・reviewed）：区間 [l, r) に x を足す操作を D[l] += x、D[r] −= x と記録し、最後に累積和を取って一度に反映する。Q 回の区間加算が O(N + Q) になり、2 次元では長方形の四隅に印を置く。
-- [差分列への言い換え](https://yuukougun.github.io/kyopro-atlas/basics/difference-sequence/)（difference-sequence・黄・basics・reviewed）：区間に ±1 する操作の最小回数や可否を、隣接差の列（差分列）の 2 点の操作に言い換えて解く。狭義の条件は a_i − i で広義に直し、回文の条件は左右の差の列に直してから差分を取る。
-- [尺取り法](https://yuukougun.github.io/kyopro-atlas/basics/two-pointers/)（two-pointers・基礎・basics・reviewed）：区間 [l, r) について、各 l に対する最大（最小）の r が l とともに単調に増えるなら、r を戻さずに動かして全体を O(N) で調べられる。区間を縮めても条件が保たれるかで単調性を見抜く。
-- [ランレングス圧縮](https://yuukougun.github.io/kyopro-atlas/basics/run-length-encoding/)（run-length-encoding・基礎・basics・reviewed）：同じ値（文字）の連続を（値, 長さ）の組にして、塊の単位で考える。多くの操作は塊の内部では一様で境界でだけ変化するので、境界の数や塊の列の尺取りで考えられる。
-- [半分全列挙](https://yuukougun.github.io/kyopro-atlas/basics/meet-in-the-middle/)（meet-in-the-middle・水・basics・reviewed）：N ≤ 40 程度の部分集合の問題を前半と後半に分け、それぞれ 2^(N/2) 通りを列挙してから、ソートと二分探索（または尺取り）で組み合わせる。
-- [平均・中央値の最大化](https://yuukougun.github.io/kyopro-atlas/basics/fractional-binary-search/)（fractional-binary-search・水・basics・reviewed）：平均・比・中央値の最大化を、答え x を決めた判定問題にして x を二分探索する。平均 ≥ x ⇔ Σ(a_i − x) ≥ 0、中央値 ≥ x ⇔ x 以上を +1・未満を −1 にした和が正、と言い換える。
-- [K 番目の値](https://yuukougun.github.io/kyopro-atlas/basics/kth-value/)（kth-value・青・basics・reviewed）：N^2 個の積・和のように全部は列挙できない値の K 番目を、「x 以下の個数 ≥ K」となる最小の x として二分探索で求める。x 以下の個数を速く数えられることが条件になる。
-- [絶対値の和の最小化と中央値](https://yuukougun.github.io/kyopro-atlas/basics/median-absolute/)（median-absolute・基礎・basics・reviewed）：Σ|x − a_i| は中央値で最小になる（x を動かしたときの傾きが「左の点の数 − 右の点の数」になるため）。マンハッタン距離の和は x と y に分けてそれぞれ中央値を取る。
-- [三分探索](https://yuukougun.github.io/kyopro-atlas/basics/ternary-search/)（ternary-search・水・basics・reviewed）：下に凸（谷が 1 つ）な関数の最小値を、2 点の値を比べて外側を捨てながら求める。整数なら f(x+1) − f(x) の符号で二分探索するほうが安全で、凸性は「凸関数の和・最大は凸」で確かめる。
-- [貪欲法の考え方と正当性](https://yuukougun.github.io/kyopro-atlas/basics/greedy-basics/)（greedy-basics・基礎・basics・reviewed）：その場で最もよいものを選び続ける方針が正しいことを、交換論法（最適解を貪欲解に近づけても悪くならない）や帰納法で確かめてから使う。怪しいときは小さいケースの全探索と比べる。
-- [区間スケジューリング・区間の串刺し](https://yuukougun.github.io/kyopro-atlas/basics/interval-scheduling/)（interval-scheduling・基礎・basics・reviewed）：重ならない区間をできるだけ多く選ぶには、右端の小さい順に、選んだ区間と重ならないものを取ればよい。すべての区間を最少の点で突く問題も、右端でソートして右端に点を置く同じ貪欲で解ける。
-- [辞書順最小を前から決める貪欲](https://yuukougun.github.io/kyopro-atlas/basics/lexicographic-greedy/)（lexicographic-greedy・基礎・basics・reviewed）：条件を満たすもののうち辞書順最小を、先頭から 1 つずつ「小さい候補から試し、残りで条件を満たせるならその候補に確定」で作る。残りで実現できるかの判定を速く正しく行うことが問題の本体になる。
-- [優先度付きキューを使う貪欲](https://yuukougun.github.io/kyopro-atlas/basics/greedy-priority-queue/)（greedy-priority-queue・水・basics・reviewed）：締め切りのある仕事の選び方や、毎回最大（最小）を取り出す操作の繰り返しを、候補を優先度付きキューに入れて O(N log N) で処理する。小さい順に K 個を列挙するときは、取り出したものから次の候補を作って入れる。
-- [交換論法と比較関数の設計](https://yuukougun.github.io/kyopro-atlas/basics/exchange-argument/)（exchange-argument・青・basics・reviewed）：隣り合う 2 つを入れ替えたときに変わる項だけを比べ、「i を先に置くべき条件」を式で導いて比較関数にする。導いた比較が推移的（狭義の弱順序）かを確かめ、その順に並べてから貪欲や DP を行う。
-- [周期性の検出](https://yuukougun.github.io/kyopro-atlas/basics/periodicity/)（periodicity・基礎・basics・reviewed）：状態が S 種類しかなければ、S 回進むまでに必ず以前と同じ状態が現れる（鳩の巣原理）。初めて訪れた時刻を記録して尾の長さと周期を求め、K 回後の状態や途中の和を割り算で一度に求める。
-- [ダブリング](https://yuukougun.github.io/kyopro-atlas/basics/doubling/)（doubling・水・basics・reviewed）：各状態から次の状態が決まる遷移を K ≤ 10^18 回進めた結果や途中の和を、2^k 回後の表を作って O(log K) で求める。表は nxt[k+1][v] = nxt[k][nxt[k][v]] で作り、K を 2 進展開して跳ぶ。
-- [再帰的な構造](https://yuukougun.github.io/kyopro-atlas/basics/recursion-structure/)（recursion-structure・基礎・basics・reviewed）：レベル N のものがレベル N − 1 のものの組合せで定義される構造の K 番目を、各レベルの長さを前計算して再帰でたどって求める。長さが指数的に増えるので、必要な深さは log K 程度で済む。
-- [分割統治](https://yuukougun.github.io/kyopro-atlas/basics/divide-and-conquer/)（divide-and-conquer・黄・basics・reviewed）：区間を半分に分けて左右を再帰で解き、中央を「またぐもの」だけを O(長さ) で処理すれば全体が O(N log N) になる。マージソートでの転倒数、最大値の位置での分割、区間クエリの左右の DP の合成に使う。
+- [計算量の見積もり](https://yuukougun.github.io/kyopro-atlas/basics/complexity-estimation/)（complexity-estimation・基礎・basics・done）：制約の大きさから許される計算量を逆算し、使える手法の候補を絞る。C++ なら 1 秒に 10^8〜数×10^8 回を目安に、ループの回数・log の数・定数倍・メモリを見積もる。
+- [bit 演算の基本と XOR の性質](https://yuukougun.github.io/kyopro-atlas/basics/bit-operations/)（bit-operations・基礎・basics・done）：XOR の打ち消し（x xor x = 0）、a + b = (a xor b) + 2(a and b)、0〜n の XOR の周期などで式を簡単にする。部分集合の部分集合は s = (s − 1) & m で列挙できる。
+- [bit ごとに独立に考える](https://yuukougun.github.io/kyopro-atlas/basics/bitwise-independence/)（bitwise-independence・水・basics・done）：XOR・AND・OR の結果は bit ごとに独立に決まるので、bit ごとに 0 と 1 の個数を数えて 2^k を掛けて足す。最大化・最小化は上位 bit から決め、繰り上がりで bit が干渉する足し算には使えない。
+- [全探索の設計](https://yuukougun.github.io/kyopro-atlas/basics/brute-force/)（brute-force・基礎・basics・done）：何を全探索するかを選び直して通り数を減らす。いくつか決めれば残りが計算で決まる、答えの候補の側を試す、小さい次元だけを試して残りを速く求める、などの型がある。
+- [bit 全探索と順列全探索](https://yuukougun.github.io/kyopro-atlas/basics/bit-full-search/)（bit-full-search・基礎・basics・done）：N ≤ 20 程度なら部分集合 2^N 通りを整数の各 bit で表して全部試し、N ≤ 8〜10 なら順列 N! 通りを next_permutation で全部試す。片側だけを全探索して残りを貪欲で決める型もよく出る。
+- [再帰による全列挙](https://yuukougun.github.io/kyopro-atlas/basics/recursive-enumeration/)（recursive-enumeration・水・basics・done）：部分的に決めた状態から 1 つずつ決めていく再帰で、条件を満たす数・組分け・敷き詰めを全部列挙する。組分けは「まだ組のない最小番号の人から決める」と同じ分け方を二度数えない。
+- [ソートで考える](https://yuukougun.github.io/kyopro-atlas/basics/sorting-techniques/)（sorting-techniques・基礎・basics・done）：並べ替えてよい問題では、ソートすると貪欲の順番が決まり、二分探索や尺取りが使えるようになる。比較関数は狭義の弱順序（<= を書かない）にし、比率は掛け算で比べる。
+- [二分探索](https://yuukougun.github.io/kyopro-atlas/basics/binary-search/)（binary-search・基礎・basics・done）：単調な条件の境界を、ok 側と ng 側の不変条件を保ちながら区間を半分ずつ狭めて O(log N) で見つける。ソート済みの列では lower_bound・upper_bound で x 以上の位置や個数を求められる。
+- [答えで二分探索](https://yuukougun.github.io/kyopro-atlas/basics/binary-search-answer/)（binary-search-answer・基礎・basics・done）：「答えを x にできるか」の判定が x について単調なら、x を二分探索して最適値を求める。最大値の最小化・最小値の最大化に使い、判定の中身（貪欲・探索・DP）が問題の本体になる。
+- [座標圧縮](https://yuukougun.github.io/kyopro-atlas/basics/coordinate-compression/)（coordinate-compression・基礎・basics・done）：値を sort・unique・lower_bound で 0〜K−1 の番号に置き換え、大小関係だけを残したまま配列の添字にできるようにする。BIT・セグ木・いもす法と組んで使う。
+- [イベントソートと平面走査の基本](https://yuukougun.github.io/kyopro-atlas/basics/event-sort/)（event-sort・水・basics・done）：区間の開始・終了・クエリを (座標, 種類) の組にして並べ、左から順に処理しながら集合や合計を更新する。2 次元の点を一方の座標の順に処理し、もう一方を集合で管理するのが平面走査の基本形。
+- [累積和](https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum/)（prefix-sum・基礎・basics・done）：S[0] = 0、S[i+1] = S[i] + a[i] と前計算すると、区間 [l, r) の和が S[r] − S[l] で O(1) で求まる。引き算できない演算（gcd・max）は左右からの累積で「1 つ除いた値」を作る。
+- [累積和と連想配列で区間を数える](https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum-counting/)（prefix-sum-counting・基礎・basics・done）：和がちょうど K の区間や和が M の倍数の区間の個数を、条件を S_r と S_l の関係に言い換えて数える。左から S_l の個数を連想配列に記録しながら組を足していく。
+- [2 次元累積和](https://yuukougun.github.io/kyopro-atlas/basics/prefix-sum-2d/)（prefix-sum-2d・水・basics・done）：長方形領域の和を、S[i+1][j+1] = S[i][j+1] + S[i+1][j] − S[i][j] + a[i][j] の前計算と 4 項の足し引きで O(1) で求める。3 次元以上も包除の符号で同じように求められる。
+- [いもす法](https://yuukougun.github.io/kyopro-atlas/basics/imos/)（imos・基礎・basics・done）：区間 [l, r) に x を足す操作を D[l] += x、D[r] −= x と記録し、最後に累積和を取って一度に反映する。Q 回の区間加算が O(N + Q) になり、2 次元では長方形の四隅に印を置く。
+- [差分列への言い換え](https://yuukougun.github.io/kyopro-atlas/basics/difference-sequence/)（difference-sequence・黄・basics・done）：区間に ±1 する操作の最小回数や可否を、隣接差の列（差分列）の 2 点の操作に言い換えて解く。狭義の条件は a_i − i で広義に直し、回文の条件は左右の差の列に直してから差分を取る。
+- [尺取り法](https://yuukougun.github.io/kyopro-atlas/basics/two-pointers/)（two-pointers・基礎・basics・done）：区間 [l, r) について、各 l に対する最大（最小）の r が l とともに単調に増えるなら、r を戻さずに動かして全体を O(N) で調べられる。区間を縮めても条件が保たれるかで単調性を見抜く。
+- [ランレングス圧縮](https://yuukougun.github.io/kyopro-atlas/basics/run-length-encoding/)（run-length-encoding・基礎・basics・done）：同じ値（文字）の連続を（値, 長さ）の組にして、塊の単位で考える。多くの操作は塊の内部では一様で境界でだけ変化するので、境界の数や塊の列の尺取りで考えられる。
+- [半分全列挙](https://yuukougun.github.io/kyopro-atlas/basics/meet-in-the-middle/)（meet-in-the-middle・水・basics・done）：N ≤ 40 程度の部分集合の問題を前半と後半に分け、それぞれ 2^(N/2) 通りを列挙してから、ソートと二分探索（または尺取り）で組み合わせる。
+- [平均・中央値の最大化](https://yuukougun.github.io/kyopro-atlas/basics/fractional-binary-search/)（fractional-binary-search・水・basics・done）：平均・比・中央値の最大化を、答え x を決めた判定問題にして x を二分探索する。平均 ≥ x ⇔ Σ(a_i − x) ≥ 0、中央値 ≥ x ⇔ x 以上を +1・未満を −1 にした和が正、と言い換える。
+- [K 番目の値](https://yuukougun.github.io/kyopro-atlas/basics/kth-value/)（kth-value・青・basics・done）：N^2 個の積・和のように全部は列挙できない値の K 番目を、「x 以下の個数 ≥ K」となる最小の x として二分探索で求める。x 以下の個数を速く数えられることが条件になる。
+- [絶対値の和の最小化と中央値](https://yuukougun.github.io/kyopro-atlas/basics/median-absolute/)（median-absolute・基礎・basics・done）：Σ|x − a_i| は中央値で最小になる（x を動かしたときの傾きが「左の点の数 − 右の点の数」になるため）。マンハッタン距離の和は x と y に分けてそれぞれ中央値を取る。
+- [三分探索](https://yuukougun.github.io/kyopro-atlas/basics/ternary-search/)（ternary-search・水・basics・done）：下に凸（谷が 1 つ）な関数の最小値を、2 点の値を比べて外側を捨てながら求める。整数なら f(x+1) − f(x) の符号で二分探索するほうが安全で、凸性は「凸関数の和・最大は凸」で確かめる。
+- [貪欲法の考え方と正当性](https://yuukougun.github.io/kyopro-atlas/basics/greedy-basics/)（greedy-basics・基礎・basics・done）：その場で最もよいものを選び続ける方針が正しいことを、交換論法（最適解を貪欲解に近づけても悪くならない）や帰納法で確かめてから使う。怪しいときは小さいケースの全探索と比べる。
+- [区間スケジューリング・区間の串刺し](https://yuukougun.github.io/kyopro-atlas/basics/interval-scheduling/)（interval-scheduling・基礎・basics・done）：重ならない区間をできるだけ多く選ぶには、右端の小さい順に、選んだ区間と重ならないものを取ればよい。すべての区間を最少の点で突く問題も、右端でソートして右端に点を置く同じ貪欲で解ける。
+- [辞書順最小を前から決める貪欲](https://yuukougun.github.io/kyopro-atlas/basics/lexicographic-greedy/)（lexicographic-greedy・基礎・basics・done）：条件を満たすもののうち辞書順最小を、先頭から 1 つずつ「小さい候補から試し、残りで条件を満たせるならその候補に確定」で作る。残りで実現できるかの判定を速く正しく行うことが問題の本体になる。
+- [優先度付きキューを使う貪欲](https://yuukougun.github.io/kyopro-atlas/basics/greedy-priority-queue/)（greedy-priority-queue・水・basics・done）：締め切りのある仕事の選び方や、毎回最大（最小）を取り出す操作の繰り返しを、候補を優先度付きキューに入れて O(N log N) で処理する。小さい順に K 個を列挙するときは、取り出したものから次の候補を作って入れる。
+- [交換論法と比較関数の設計](https://yuukougun.github.io/kyopro-atlas/basics/exchange-argument/)（exchange-argument・青・basics・done）：隣り合う 2 つを入れ替えたときに変わる項だけを比べ、「i を先に置くべき条件」を式で導いて比較関数にする。導いた比較が推移的（狭義の弱順序）かを確かめ、その順に並べてから貪欲や DP を行う。
+- [周期性の検出](https://yuukougun.github.io/kyopro-atlas/basics/periodicity/)（periodicity・基礎・basics・done）：状態が S 種類しかなければ、S 回進むまでに必ず以前と同じ状態が現れる（鳩の巣原理）。初めて訪れた時刻を記録して尾の長さと周期を求め、K 回後の状態や途中の和を割り算で一度に求める。
+- [ダブリング](https://yuukougun.github.io/kyopro-atlas/basics/doubling/)（doubling・水・basics・done）：各状態から次の状態が決まる遷移を K ≤ 10^18 回進めた結果や途中の和を、2^k 回後の表を作って O(log K) で求める。表は nxt[k+1][v] = nxt[k][nxt[k][v]] で作り、K を 2 進展開して跳ぶ。
+- [再帰的な構造](https://yuukougun.github.io/kyopro-atlas/basics/recursion-structure/)（recursion-structure・基礎・basics・done）：レベル N のものがレベル N − 1 のものの組合せで定義される構造の K 番目を、各レベルの長さを前計算して再帰でたどって求める。長さが指数的に増えるので、必要な深さは log K 程度で済む。
+- [分割統治](https://yuukougun.github.io/kyopro-atlas/basics/divide-and-conquer/)（divide-and-conquer・黄・basics・done）：区間を半分に分けて左右を再帰で解き、中央を「またぐもの」だけを O(長さ) で処理すれば全体が O(N log N) になる。マージソートでの転倒数、最大値の位置での分割、区間クエリの左右の DP の合成に使う。
 
 ## 考察
 
-- [言い換えの典型](https://yuukougun.github.io/kyopro-atlas/thinking/reformulation/)（reformulation・水・thinking・reviewed）：条件や目的関数を、数えやすい・判定しやすい形に書き直す。区間和が M の倍数 ⇔ 累積和の余りが等しい、平均 ≥ x ⇔ Σ(a − x) ≥ 0 のように、手法に結びつく言い換えの型を表で引ける。
-- [一部を固定して数える](https://yuukougun.github.io/kyopro-atlas/thinking/fix-variable/)（fix-variable・基礎・thinking・reviewed）：変数の一部（3 つ組の真ん中・最大値・余りなど）を固定すると、残りの条件が単純になって独立に数えられる。固定したあとは二分探索・累積和・連想配列で残りを速く数える。
-- [主客転倒・寄与](https://yuukougun.github.io/kyopro-atlas/thinking/contribution/)（contribution・水・thinking・reviewed）：全ペア・全区間・全部分集合についての総和を、「各要素が何回数えられるか × 値」の和に入れ替えて求める。各要素が最大・最小になる回数や各桁が現れる回数を数えれば、対象を 1 つずつ列挙しなくて済む。
-- [余事象](https://yuukougun.github.io/kyopro-atlas/thinking/complement/)（complement・基礎・thinking・reviewed）：「少なくとも 1 つ」「〜でない」ものは、全体から数えやすい補集合を引いて数える。条件が 2〜3 個なら包除原理で重なりを足し引きし、mod での引き算は負にならないように直す。
-- [偶奇に着目する](https://yuukougun.github.io/kyopro-atlas/thinking/parity/)（parity・基礎・thinking・reviewed）：1 歩ごとに (x + y) の偶奇が入れ替わる、±1 をちょうど K 回なら差と K の偶奇がそろう、など偶奇の必要条件から可否を判定する。グリッドでは市松模様の色の偶奇が不変量になる。
-- [不変量・単調に変わる量](https://yuukougun.github.io/kyopro-atlas/thinking/invariant/)（invariant・基礎・thinking・reviewed）：操作で変わらない量（和の余り・個数の偶奇・XOR）を見つけて必要条件を得て、十分性は構築で示す。操作で必ず減る量（単調量）は操作回数の上界・下界や停止性の証明に使う。
-- [後ろから・逆順に考える](https://yuukougun.github.io/kyopro-atlas/thinking/reverse-thinking/)（reverse-thinking・基礎・thinking・reviewed）：後ろから決めると選択肢が一意になる、最後の操作が特定できれば逆再生で取り除ける、削除を逆にすると追加になる、など時間の向きを逆にして考える。
-- [構築問題の考え方](https://yuukougun.github.io/kyopro-atlas/thinking/construction/)（construction・基礎・thinking・reviewed）：条件を満たすものを 1 つ作る問題は、小さい N で手で作って規則を見つけ、不可能な場合の必要条件を先に挙げてから一般化する。最大値を求める問題では、上界を示してそれを達成する例を作る。
-- [対称性・鳩の巣原理・場合分け](https://yuukougun.github.io/kyopro-atlas/thinking/symmetry-pigeonhole-casework/)（symmetry-pigeonhole-casework・基礎・thinking・reviewed）：対称性で計算や場合を半分に減らし、鳩の巣原理で「必ず一致が起きる」ことから探索の回数の上限を得る。端の場合（N = 1 など）や大小関係で場合を分けて、それぞれを単純な問題にする。
+- [言い換えの典型](https://yuukougun.github.io/kyopro-atlas/thinking/reformulation/)（reformulation・水・thinking・done）：条件や目的関数を、数えやすい・判定しやすい形に書き直す。区間和が M の倍数 ⇔ 累積和の余りが等しい、平均 ≥ x ⇔ Σ(a − x) ≥ 0 のように、手法に結びつく言い換えの型を表で引ける。
+- [一部を固定して数える](https://yuukougun.github.io/kyopro-atlas/thinking/fix-variable/)（fix-variable・基礎・thinking・done）：変数の一部（3 つ組の真ん中・最大値・余りなど）を固定すると、残りの条件が単純になって独立に数えられる。固定したあとは二分探索・累積和・連想配列で残りを速く数える。
+- [主客転倒・寄与](https://yuukougun.github.io/kyopro-atlas/thinking/contribution/)（contribution・水・thinking・done）：全ペア・全区間・全部分集合についての総和を、「各要素が何回数えられるか × 値」の和に入れ替えて求める。各要素が最大・最小になる回数や各桁が現れる回数を数えれば、対象を 1 つずつ列挙しなくて済む。
+- [余事象](https://yuukougun.github.io/kyopro-atlas/thinking/complement/)（complement・基礎・thinking・done）：「少なくとも 1 つ」「〜でない」ものは、全体から数えやすい補集合を引いて数える。条件が 2〜3 個なら包除原理で重なりを足し引きし、mod での引き算は負にならないように直す。
+- [偶奇に着目する](https://yuukougun.github.io/kyopro-atlas/thinking/parity/)（parity・基礎・thinking・done）：1 歩ごとに (x + y) の偶奇が入れ替わる、±1 をちょうど K 回なら差と K の偶奇がそろう、など偶奇の必要条件から可否を判定する。グリッドでは市松模様の色の偶奇が不変量になる。
+- [不変量・単調に変わる量](https://yuukougun.github.io/kyopro-atlas/thinking/invariant/)（invariant・基礎・thinking・done）：操作で変わらない量（和の余り・個数の偶奇・XOR）を見つけて必要条件を得て、十分性は構築で示す。操作で必ず減る量（単調量）は操作回数の上界・下界や停止性の証明に使う。
+- [後ろから・逆順に考える](https://yuukougun.github.io/kyopro-atlas/thinking/reverse-thinking/)（reverse-thinking・基礎・thinking・done）：後ろから決めると選択肢が一意になる、最後の操作が特定できれば逆再生で取り除ける、削除を逆にすると追加になる、など時間の向きを逆にして考える。
+- [構築問題の考え方](https://yuukougun.github.io/kyopro-atlas/thinking/construction/)（construction・基礎・thinking・done）：条件を満たすものを 1 つ作る問題は、小さい N で手で作って規則を見つけ、不可能な場合の必要条件を先に挙げてから一般化する。最大値を求める問題では、上界を示してそれを達成する例を作る。
+- [対称性・鳩の巣原理・場合分け](https://yuukougun.github.io/kyopro-atlas/thinking/symmetry-pigeonhole-casework/)（symmetry-pigeonhole-casework・基礎・thinking・done）：対称性で計算や場合を半分に減らし、鳩の巣原理で「必ず一致が起きる」ことから探索の回数の上限を得る。端の場合（N = 1 など）や大小関係で場合を分けて、それぞれを単純な問題にする。
 
 ## 動的計画法
 
-- [DP の基本](https://yuukougun.github.io/kyopro-atlas/dp/dp-basics/)（dp-basics・基礎・dp・reviewed）：全探索で同じ部分問題が何度も現れるとき、状態ごとの最良値や場合の数を表に 1 回だけ求めて使い回す。状態・遷移・初期値・答えの取り出し方の 4 つを決めれば書ける。
-- [メモ化再帰](https://yuukougun.github.io/kyopro-atlas/dp/memoized-recursion/)（memoized-recursion・基礎・dp・reviewed）：漸化式を再帰関数のまま書き、計算済みの値を覚えて使い回す。計算順序を考えなくてよく、⌊N/2⌋ のようにまばらにしか現れない状態だけを計算できる。
-- [DAG 上の DP](https://yuukougun.github.io/kyopro-atlas/dp/dp-dag/)（dp-dag・基礎・dp・reviewed）：閉路のない有向グラフで、最長路や経路の数をトポロジカル順の DP で O(N+M) で求める。どの DP も、状態を頂点・遷移を辺とする DAG の上の計算と見られる。
-- [DP の計算順序](https://yuukougun.github.io/kyopro-atlas/dp/dp-order/)（dp-order・水・dp・reviewed）：dp[x] を計算する時点で、依存する値がすべて確定している順に状態を回す。添字の昇順に限らず、後ろから・値の順・区間の長さ順・集合の包含順などを依存の向きから選ぶ。
-- [DP の状態の設計](https://yuukougun.github.io/kyopro-atlas/dp/dp-state-design/)（dp-state-design・水・dp・reviewed）：過去の選び方そのものではなく、将来の選び方と評価に影響する要約（直前の値・個数・末尾の数文字・開き括弧の数など）だけを状態に持つ。要約が同じ状態は同一視しても答えが変わらない。
-- [余り・個数を状態に持つ DP](https://yuukougun.github.io/kyopro-atlas/dp/dp-mod-state/)（dp-mod-state・水・dp・reviewed）：「和が M の倍数」「平均が整数」のような条件は、和そのものではなく M で割った余りを状態に持てば数えられる。平均は選ぶ個数を外側で固定するか、各値から平均を引いて和 0 に直す。
-- [フェーズを状態に持つ DP](https://yuukougun.github.io/kyopro-atlas/dp/dp-phase/)（dp-phase・青・dp・reviewed）：区間を 1 つ選ぶ・何文字目まで集めたか、のように各位置でいまどの段階にいるかを状態に持つ。区間の両端を全探索する代わりに段階の切り替えを遷移にして、O(N^2) を O(N) にする。
-- [DP の復元](https://yuukougun.github.io/kyopro-atlas/dp/dp-reconstruction/)（dp-reconstruction・水・dp・reviewed）：最適値だけでなく選び方そのものを出力するとき、完成した表を終端から逆にたどって最適な遷移を復元する。辞書順最小は後ろからの DP と前からの貪欲で、辞書順 K 番目は個数を数えて先頭から決める。
-- [累積和・いもす法による DP の高速化](https://yuukougun.github.io/kyopro-atlas/dp/dp-prefix-sum/)（dp-prefix-sum・水・dp・reviewed）：遷移元が連続した範囲の和になる DP を、前の段の累積和で 1 回 O(1) にする。遷移先が範囲なら、いもす法で差分に書いておき後で累積する。
-- [ナップサック DP](https://yuukougun.github.io/kyopro-atlas/dp/knapsack-01/)（knapsack-01・基礎・dp・reviewed）：品物を 1 つずつ「選ぶ・選ばない」で分け、重さの合計ごとに価値の最大を求める。1 次元の配列で書くと、ループの向きで 0-1（大きい方から）と個数制限なし（小さい方から）が分かれる。
-- [部分和 DP](https://yuukougun.github.io/kyopro-atlas/dp/subset-sum/)（subset-sum・基礎・dp・reviewed）：いくつか選んで作れる和の集合や、和が S になる選び方の数を、和を添字にした DP で求める。2 グループへの分け方や ± の符号の付け方も、部分和に言い換えて解ける。
-- [DP の状態の削減](https://yuukougun.github.io/kyopro-atlas/dp/dp-dimension-reduction/)（dp-dimension-reduction・青・dp・reviewed）：DP の表が大きすぎるとき、範囲を上限で打ち切るか、ほかの添字から決まる量・支配される量を値の側に回して状態を減らす。どれを添字に残すかは、範囲が小さい量で決める。
-- [戻す DP](https://yuukougun.github.io/kyopro-atlas/dp/knapsack-undo/)（knapsack-undo・青・dp・reviewed）：数え上げの部分和 DP の更新は逆向きに解けるので、要素を 1 つ取り除いた状態に戻せる。max や min の DP は戻せないので、前後からの DP のマージや分割統治を使う。
-- [並べ替えてから DP する](https://yuukougun.github.io/kyopro-atlas/dp/exchange-argument-dp/)（exchange-argument-dp・青・dp・reviewed）：選ぶ集合が決まれば最適な順序がソートで決まるとき、先にその順に並べてから「選ぶ・選ばない」の DP をする。並べる基準は、隣り合う 2 つを入れ替えたときの損得の式から作る。
-- [グリッド上の DP](https://yuukougun.github.io/kyopro-atlas/dp/dp-grid/)（dp-grid・水・dp・reviewed）：右か下にしか動けないグリッドで、経路の数や経路上の値の最大を、マスの昇順の DP で求める。上下左右に動けるなら閉路ができるので、BFS やダイクストラ法を使う。
-- [区間分割 DP](https://yuukougun.github.io/kyopro-atlas/dp/dp-sequence-partition/)（dp-sequence-partition・水・dp・reviewed）：列をいくつかの区間に区切る方法の数や最小コストを、最後の区間の左端 j で分けて求める。j の範囲が単調に動くなら尺取りと累積和で、区間の番号に依存するなら番号を状態に足して速くする。
-- [最長増加部分列](https://yuukougun.github.io/kyopro-atlas/dp/lis/)（lis・水・dp・reviewed）：列から順序を保って選ぶ増加列の最長を、長さごとの末尾の最小値の配列を二分探索で更新して O(N log N) で求める。値を添字にしたセグメント木を使えば、重み付きや数え上げにも広げられる。
-- [最長共通部分列と編集距離](https://yuukougun.github.io/kyopro-atlas/dp/lcs/)（lcs・水・dp・reviewed）：2 つの文字列の最長共通部分列の長さを、末尾どうしが一致するかで分ける 2 次元の DP で O(NM) で求める。同じ表で挿入・削除・置換のコストを取れば編集距離になる。
-- [部分列 DP](https://yuukougun.github.io/kyopro-atlas/dp/subsequence-dp/)（subsequence-dp・黄・dp・reviewed）：異なる部分列の個数を、各文字を「まだ使っていない位置のうち最も左」から取る取り出し方だけを数えて求める。次の出現位置の表を使い、各位置から文字ごとに配る DP になる。
-- [区間 DP](https://yuukougun.github.io/kyopro-atlas/dp/interval-dp/)（interval-dp・青・dp・reviewed）：dp[l][r]＝区間 [l, r) について求めた値を、内側の短い区間の値から求める。区間の短い順に埋めれば依存関係が満たされ、分割点を全探索する O(N^3) が基本になる。
-- [区間 DP の応用](https://yuukougun.github.io/kyopro-atlas/dp/interval-dp-advanced/)（interval-dp-advanced・黄・dp・reviewed）：区間 DP の上で、DFS 順の区間を部分木とみる木の数え上げ、区間ごとの Grundy 数、訪れた範囲の両端を状態にする移動などを解く。区間の内と外を独立に数え、順序を二項係数で混ぜる設計が多い。
-- [bitDP](https://yuukougun.github.io/kyopro-atlas/dp/bit-dp/)（bit-dp・水・dp・reviewed）：順列の探索のうち将来に効くのが「使ったものの集合」と「最後に使ったもの」だけなら、状態を 2^N·N に減らせる。集合を整数で表し、整数の昇順に回せば依存関係が満たされる。
-- [部分集合を列挙する DP](https://yuukougun.github.io/kyopro-atlas/dp/subset-enumeration-dp/)（subset-enumeration-dp・青・dp・reviewed）：集合を部分集合と残りに分ける遷移を T = (T − 1) & S で列挙し、グループ分けの最適値や数を全体 O(3^N) で求める。順序の重複を除くため、最小の要素を含む部分集合だけを列挙する。
-- [プロファイル DP](https://yuukougun.github.io/kyopro-atlas/dp/broken-profile-dp/)（broken-profile-dp・黄・dp・reviewed）：幅の小さいグリッドを 1 マスずつ進め、まだ処理していない部分に影響する境界の情報だけを bit で持って、敷き詰め方や塗り方を数える。取り得る状態だけに圧縮すると状態がさらに減る。
-- [桁 DP](https://yuukougun.github.io/kyopro-atlas/dp/digit-dp/)（digit-dp・水・dp・reviewed）：N 以下の整数のうち条件を満たすものの個数や総和を、上の桁から決め、それまでの桁が N と一致しているかのフラグと問題の情報を状態にして求める。計算量は桁数に比例する。
-- [桁 DP の応用](https://yuukougun.github.io/kyopro-atlas/dp/digit-dp-advanced/)（digit-dp-advanced・黄・dp・reviewed）：桁 DP を、2 つ以上の数を同時に決める・下の桁からの繰り上がりを状態にする・種類の少ない状態を map や bit で持つ、などに広げる。上限と下限の両方があるときはフラグを 2 つ持つ。
-- [木 DP](https://yuukougun.github.io/kyopro-atlas/dp/tree-dp/)（tree-dp・水・dp・reviewed）：根を決めると同じ頂点の子の部分木どうしは交わらない小問題に分かれるので、部分木ごとの値を子の値から帰りがけ順に求める。頂点自身の選択（白黒・選ぶか）を状態に足すのが基本形である。
-- [全方位木 DP](https://yuukougun.github.io/kyopro-atlas/dp/rerooting/)（rerooting・青・dp・reviewed）：すべての頂点を根としたときの木 DP の値を、下向きの値と親側の部分木の値を 2 回の DFS で求めて O(N) で出す。兄弟を除いた合成は左右からの累積で作るので逆元が要らない。
-- [二乗の木 DP](https://yuukougun.github.io/kyopro-atlas/dp/tree-dp-square/)（tree-dp-square・黄・dp・reviewed）：子の配列を順にマージする木の上のナップサックのような DP は、配列の長さを部分木のサイズに合わせると全体 O(N^2) で済む。どの頂点の組も、LCA でのマージで 1 回だけ数えられるからである。
-- [挿入 DP・箱根駅伝 DP](https://yuukougun.github.io/kyopro-atlas/dp/insertion-dp/)（insertion-dp・黄・dp・reviewed）：順列を、決めた部分の相対順位や「相手が未定の要素の数」だけを状態にして数える。隣り合う大小関係が指定された順列は、最後の要素の相対順位を状態にし累積和で O(N^2) になる。
-- [DP の高速化の選び方](https://yuukougun.github.io/kyopro-atlas/dp/dp-speedup-overview/)（dp-speedup-overview・—・dp・reviewed）：素直な DP が間に合わないとき、貰う形の式の右辺の形（区間の和・区間の最小・多項式の積・同じ線形の遷移の繰り返し・1 次関数の最小など）から速くする道具を選ぶ。
-- [セグメント木・スライド最小値による DP の高速化](https://yuukougun.github.io/kyopro-atlas/dp/dp-segment-tree/)（dp-segment-tree・青・dp・reviewed）：遷移元が添字や値の範囲の最小・最大・和になる DP を、dp の値をセグメント木に載せて 1 回 O(log N) にする。遷移元の窓が単調に動くだけなら、スライド最小値でならし O(1) にできる。
-- [インライン DP](https://yuukougun.github.io/kyopro-atlas/dp/inline-dp/)（inline-dp・青・dp・reviewed）：dp[i][*] から dp[i+1][*] へほとんどの値がそのまま写るとき、配列を 1 本だけ持って変わる場所だけを書き換える。一律の加算や区間加算は遅延セグメント木で、全体の平行移動は添字のずらしで表す。
-- [動的 DP](https://yuukougun.github.io/kyopro-atlas/dp/dynamic-dp/)（dynamic-dp・発展・dp・reviewed）：列の各位置の遷移を小さな行列にしてセグメント木に載せると、1 点の書き換えのたびに DP の答えを O(S^3 log N) で求め直せる。行列の積は非可換なので、掛ける向きを最初に決める。
-- [Convex Hull Trick と Li Chao Tree](https://yuukougun.github.io/kyopro-atlas/dp/cht/)（cht・発展・dp・reviewed）：dp[i] = min_j (dp[j] + a_j·x_i + b_j) のように遷移が 1 次関数の最小になる DP を、下側の包絡線を持って速くする。単調なら deque、そうでなければ Li Chao Tree を使う。
-- [Monge 性による DP の高速化](https://yuukougun.github.io/kyopro-atlas/dp/monge/)（monge・発展・dp・reviewed）：コスト c(i, j) が Monge なら各行の最小値を取る位置が単調になり、分割統治（monotone minima）や Knuth-Yao で区間分割 DP・区間 DP を速くできる。凸な列どうしの合成も速い。
-- [Alien DP](https://yuukougun.github.io/kyopro-atlas/dp/alien-dp/)（alien-dp・発展・dp・reviewed）：「ちょうど K 個選ぶ」制約のついた最適化で答えが K について凸なら、1 個あたりの罰金 λ を足して制約を外した問題を解き、選ばれる個数が K になる λ を二分探索する。
-- [Slope Trick](https://yuukougun.github.io/kyopro-atlas/dp/slope-trick/)（slope-trick・発展・dp・reviewed）：dp[x] が x について区分線形で凸なとき、傾きが変わる点を 2 つの優先度付きキューで持ち、「|x − a| を足す」「累積 min を取る」「平行移動」を 1 回 O(log N) で行う。
+- [DP の基本](https://yuukougun.github.io/kyopro-atlas/dp/dp-basics/)（dp-basics・基礎・dp・done）：全探索で同じ部分問題が何度も現れるとき、状態ごとの最良値や場合の数を表に 1 回だけ求めて使い回す。状態・遷移・初期値・答えの取り出し方の 4 つを決めれば書ける。
+- [メモ化再帰](https://yuukougun.github.io/kyopro-atlas/dp/memoized-recursion/)（memoized-recursion・基礎・dp・done）：漸化式を再帰関数のまま書き、計算済みの値を覚えて使い回す。計算順序を考えなくてよく、⌊N/2⌋ のようにまばらにしか現れない状態だけを計算できる。
+- [DAG 上の DP](https://yuukougun.github.io/kyopro-atlas/dp/dp-dag/)（dp-dag・基礎・dp・done）：閉路のない有向グラフで、最長路や経路の数をトポロジカル順の DP で O(N+M) で求める。どの DP も、状態を頂点・遷移を辺とする DAG の上の計算と見られる。
+- [DP の計算順序](https://yuukougun.github.io/kyopro-atlas/dp/dp-order/)（dp-order・水・dp・done）：dp[x] を計算する時点で、依存する値がすべて確定している順に状態を回す。添字の昇順に限らず、後ろから・値の順・区間の長さ順・集合の包含順などを依存の向きから選ぶ。
+- [DP の状態の設計](https://yuukougun.github.io/kyopro-atlas/dp/dp-state-design/)（dp-state-design・水・dp・done）：過去の選び方そのものではなく、将来の選び方と評価に影響する要約（直前の値・個数・末尾の数文字・開き括弧の数など）だけを状態に持つ。要約が同じ状態は同一視しても答えが変わらない。
+- [余り・個数を状態に持つ DP](https://yuukougun.github.io/kyopro-atlas/dp/dp-mod-state/)（dp-mod-state・水・dp・done）：「和が M の倍数」「平均が整数」のような条件は、和そのものではなく M で割った余りを状態に持てば数えられる。平均は選ぶ個数を外側で固定するか、各値から平均を引いて和 0 に直す。
+- [フェーズを状態に持つ DP](https://yuukougun.github.io/kyopro-atlas/dp/dp-phase/)（dp-phase・青・dp・done）：区間を 1 つ選ぶ・何文字目まで集めたか、のように各位置でいまどの段階にいるかを状態に持つ。区間の両端を全探索する代わりに段階の切り替えを遷移にして、O(N^2) を O(N) にする。
+- [DP の復元](https://yuukougun.github.io/kyopro-atlas/dp/dp-reconstruction/)（dp-reconstruction・水・dp・done）：最適値だけでなく選び方そのものを出力するとき、完成した表を終端から逆にたどって最適な遷移を復元する。辞書順最小は後ろからの DP と前からの貪欲で、辞書順 K 番目は個数を数えて先頭から決める。
+- [累積和・いもす法による DP の高速化](https://yuukougun.github.io/kyopro-atlas/dp/dp-prefix-sum/)（dp-prefix-sum・水・dp・done）：遷移元が連続した範囲の和になる DP を、前の段の累積和で 1 回 O(1) にする。遷移先が範囲なら、いもす法で差分に書いておき後で累積する。
+- [ナップサック DP](https://yuukougun.github.io/kyopro-atlas/dp/knapsack-01/)（knapsack-01・基礎・dp・done）：品物を 1 つずつ「選ぶ・選ばない」で分け、重さの合計ごとに価値の最大を求める。1 次元の配列で書くと、ループの向きで 0-1（大きい方から）と個数制限なし（小さい方から）が分かれる。
+- [部分和 DP](https://yuukougun.github.io/kyopro-atlas/dp/subset-sum/)（subset-sum・基礎・dp・done）：いくつか選んで作れる和の集合や、和が S になる選び方の数を、和を添字にした DP で求める。2 グループへの分け方や ± の符号の付け方も、部分和に言い換えて解ける。
+- [DP の状態の削減](https://yuukougun.github.io/kyopro-atlas/dp/dp-dimension-reduction/)（dp-dimension-reduction・青・dp・done）：DP の表が大きすぎるとき、範囲を上限で打ち切るか、ほかの添字から決まる量・支配される量を値の側に回して状態を減らす。どれを添字に残すかは、範囲が小さい量で決める。
+- [戻す DP](https://yuukougun.github.io/kyopro-atlas/dp/knapsack-undo/)（knapsack-undo・青・dp・done）：数え上げの部分和 DP の更新は逆向きに解けるので、要素を 1 つ取り除いた状態に戻せる。max や min の DP は戻せないので、前後からの DP のマージや分割統治を使う。
+- [並べ替えてから DP する](https://yuukougun.github.io/kyopro-atlas/dp/exchange-argument-dp/)（exchange-argument-dp・青・dp・done）：選ぶ集合が決まれば最適な順序がソートで決まるとき、先にその順に並べてから「選ぶ・選ばない」の DP をする。並べる基準は、隣り合う 2 つを入れ替えたときの損得の式から作る。
+- [グリッド上の DP](https://yuukougun.github.io/kyopro-atlas/dp/dp-grid/)（dp-grid・水・dp・done）：右か下にしか動けないグリッドで、経路の数や経路上の値の最大を、マスの昇順の DP で求める。上下左右に動けるなら閉路ができるので、BFS やダイクストラ法を使う。
+- [区間分割 DP](https://yuukougun.github.io/kyopro-atlas/dp/dp-sequence-partition/)（dp-sequence-partition・水・dp・done）：列をいくつかの区間に区切る方法の数や最小コストを、最後の区間の左端 j で分けて求める。j の範囲が単調に動くなら尺取りと累積和で、区間の番号に依存するなら番号を状態に足して速くする。
+- [最長増加部分列](https://yuukougun.github.io/kyopro-atlas/dp/lis/)（lis・水・dp・done）：列から順序を保って選ぶ増加列の最長を、長さごとの末尾の最小値の配列を二分探索で更新して O(N log N) で求める。値を添字にしたセグメント木を使えば、重み付きや数え上げにも広げられる。
+- [最長共通部分列と編集距離](https://yuukougun.github.io/kyopro-atlas/dp/lcs/)（lcs・水・dp・done）：2 つの文字列の最長共通部分列の長さを、末尾どうしが一致するかで分ける 2 次元の DP で O(NM) で求める。同じ表で挿入・削除・置換のコストを取れば編集距離になる。
+- [部分列 DP](https://yuukougun.github.io/kyopro-atlas/dp/subsequence-dp/)（subsequence-dp・黄・dp・done）：異なる部分列の個数を、各文字を「まだ使っていない位置のうち最も左」から取る取り出し方だけを数えて求める。次の出現位置の表を使い、各位置から文字ごとに配る DP になる。
+- [区間 DP](https://yuukougun.github.io/kyopro-atlas/dp/interval-dp/)（interval-dp・青・dp・done）：dp[l][r]＝区間 [l, r) について求めた値を、内側の短い区間の値から求める。区間の短い順に埋めれば依存関係が満たされ、分割点を全探索する O(N^3) が基本になる。
+- [区間 DP の応用](https://yuukougun.github.io/kyopro-atlas/dp/interval-dp-advanced/)（interval-dp-advanced・黄・dp・done）：区間 DP の上で、DFS 順の区間を部分木とみる木の数え上げ、区間ごとの Grundy 数、訪れた範囲の両端を状態にする移動などを解く。区間の内と外を独立に数え、順序を二項係数で混ぜる設計が多い。
+- [bitDP](https://yuukougun.github.io/kyopro-atlas/dp/bit-dp/)（bit-dp・水・dp・done）：順列の探索のうち将来に効くのが「使ったものの集合」と「最後に使ったもの」だけなら、状態を 2^N·N に減らせる。集合を整数で表し、整数の昇順に回せば依存関係が満たされる。
+- [部分集合を列挙する DP](https://yuukougun.github.io/kyopro-atlas/dp/subset-enumeration-dp/)（subset-enumeration-dp・青・dp・done）：集合を部分集合と残りに分ける遷移を T = (T − 1) & S で列挙し、グループ分けの最適値や数を全体 O(3^N) で求める。順序の重複を除くため、最小の要素を含む部分集合だけを列挙する。
+- [プロファイル DP](https://yuukougun.github.io/kyopro-atlas/dp/broken-profile-dp/)（broken-profile-dp・黄・dp・done）：幅の小さいグリッドを 1 マスずつ進め、まだ処理していない部分に影響する境界の情報だけを bit で持って、敷き詰め方や塗り方を数える。取り得る状態だけに圧縮すると状態がさらに減る。
+- [桁 DP](https://yuukougun.github.io/kyopro-atlas/dp/digit-dp/)（digit-dp・水・dp・done）：N 以下の整数のうち条件を満たすものの個数や総和を、上の桁から決め、それまでの桁が N と一致しているかのフラグと問題の情報を状態にして求める。計算量は桁数に比例する。
+- [桁 DP の応用](https://yuukougun.github.io/kyopro-atlas/dp/digit-dp-advanced/)（digit-dp-advanced・黄・dp・done）：桁 DP を、2 つ以上の数を同時に決める・下の桁からの繰り上がりを状態にする・種類の少ない状態を map や bit で持つ、などに広げる。上限と下限の両方があるときはフラグを 2 つ持つ。
+- [木 DP](https://yuukougun.github.io/kyopro-atlas/dp/tree-dp/)（tree-dp・水・dp・done）：根を決めると同じ頂点の子の部分木どうしは交わらない小問題に分かれるので、部分木ごとの値を子の値から帰りがけ順に求める。頂点自身の選択（白黒・選ぶか）を状態に足すのが基本形である。
+- [全方位木 DP](https://yuukougun.github.io/kyopro-atlas/dp/rerooting/)（rerooting・青・dp・done）：すべての頂点を根としたときの木 DP の値を、下向きの値と親側の部分木の値を 2 回の DFS で求めて O(N) で出す。兄弟を除いた合成は左右からの累積で作るので逆元が要らない。
+- [二乗の木 DP](https://yuukougun.github.io/kyopro-atlas/dp/tree-dp-square/)（tree-dp-square・黄・dp・done）：子の配列を順にマージする木の上のナップサックのような DP は、配列の長さを部分木のサイズに合わせると全体 O(N^2) で済む。どの頂点の組も、LCA でのマージで 1 回だけ数えられるからである。
+- [挿入 DP・箱根駅伝 DP](https://yuukougun.github.io/kyopro-atlas/dp/insertion-dp/)（insertion-dp・黄・dp・done）：順列を、決めた部分の相対順位や「相手が未定の要素の数」だけを状態にして数える。隣り合う大小関係が指定された順列は、最後の要素の相対順位を状態にし累積和で O(N^2) になる。
+- [DP の高速化の選び方](https://yuukougun.github.io/kyopro-atlas/dp/dp-speedup-overview/)（dp-speedup-overview・—・dp・done）：素直な DP が間に合わないとき、貰う形の式の右辺の形（区間の和・区間の最小・多項式の積・同じ線形の遷移の繰り返し・1 次関数の最小など）から速くする道具を選ぶ。
+- [セグメント木・スライド最小値による DP の高速化](https://yuukougun.github.io/kyopro-atlas/dp/dp-segment-tree/)（dp-segment-tree・青・dp・done）：遷移元が添字や値の範囲の最小・最大・和になる DP を、dp の値をセグメント木に載せて 1 回 O(log N) にする。遷移元の窓が単調に動くだけなら、スライド最小値でならし O(1) にできる。
+- [インライン DP](https://yuukougun.github.io/kyopro-atlas/dp/inline-dp/)（inline-dp・青・dp・done）：dp[i][*] から dp[i+1][*] へほとんどの値がそのまま写るとき、配列を 1 本だけ持って変わる場所だけを書き換える。一律の加算や区間加算は遅延セグメント木で、全体の平行移動は添字のずらしで表す。
+- [動的 DP](https://yuukougun.github.io/kyopro-atlas/dp/dynamic-dp/)（dynamic-dp・発展・dp・done）：列の各位置の遷移を小さな行列にしてセグメント木に載せると、1 点の書き換えのたびに DP の答えを O(S^3 log N) で求め直せる。行列の積は非可換なので、掛ける向きを最初に決める。
+- [Convex Hull Trick と Li Chao Tree](https://yuukougun.github.io/kyopro-atlas/dp/cht/)（cht・発展・dp・done）：dp[i] = min_j (dp[j] + a_j·x_i + b_j) のように遷移が 1 次関数の最小になる DP を、下側の包絡線を持って速くする。単調なら deque、そうでなければ Li Chao Tree を使う。
+- [Monge 性による DP の高速化](https://yuukougun.github.io/kyopro-atlas/dp/monge/)（monge・発展・dp・done）：コスト c(i, j) が Monge なら各行の最小値を取る位置が単調になり、分割統治（monotone minima）や Knuth-Yao で区間分割 DP・区間 DP を速くできる。凸な列どうしの合成も速い。
+- [Alien DP](https://yuukougun.github.io/kyopro-atlas/dp/alien-dp/)（alien-dp・発展・dp・done）：「ちょうど K 個選ぶ」制約のついた最適化で答えが K について凸なら、1 個あたりの罰金 λ を足して制約を外した問題を解き、選ばれる個数が K になる λ を二分探索する。
+- [Slope Trick](https://yuukougun.github.io/kyopro-atlas/dp/slope-trick/)（slope-trick・発展・dp・done）：dp[x] が x について区分線形で凸なとき、傾きが変わる点を 2 つの優先度付きキューで持ち、「|x − a| を足す」「累積 min を取る」「平行移動」を 1 回 O(log N) で行う。
 
 ## グラフ
 
-- [グラフの表現と用語](https://yuukougun.github.io/kyopro-atlas/graph/graph-basics/)（graph-basics・基礎・graph・reviewed）：N 頂点 M 辺のグラフを隣接リスト・隣接行列・辺リストのどれで持つかを選び、次数・パス・連結・木・DAG などの用語をそろえる。アルゴリズムごとに向く表現が決まっている。
-- [グラフへの帰着](https://yuukougun.github.io/kyopro-atlas/graph/graph-modeling/)（graph-modeling・—・graph・reviewed）：物・値・座標・状態・時刻・剰余などを頂点に、関係・操作・制約を辺にすると、問題が既知のグラフの問題（連結・二部・閉路・最短路）に変わる。自由に行き来できる部分は 1 点に縮約できる。
-- [深さ優先探索（DFS）](https://yuukougun.github.io/kyopro-atlas/graph/dfs/)（dfs・基礎・graph・reviewed）：行けるところまで進んでから戻る探索で、到達可能性・連結成分・閉路検出・トポロジカル順の土台になる。帰りがけで訪問の印を外せば単純パスを全列挙できる。
-- [幅優先探索（BFS）と無重み最短路](https://yuukougun.github.io/kyopro-atlas/graph/bfs/)（bfs・基礎・graph・reviewed）：始点に近い順に頂点を確定させる探索で、辺の重みがすべて等しいグラフの最短距離を O(N+M) で求める。親を記録すれば経路を復元でき、全始点をキューに入れれば多始点の距離になる。
-- [グリッドグラフ](https://yuukougun.github.io/kyopro-atlas/graph/grid-graph/)（grid-graph・基礎・graph・reviewed）：マスを頂点、隣り合うマスを辺と見て、BFS・DFS・Union-Find をそのまま使う。(i, j) の 1 次元化・番兵・止まるマスの扱いと、市松模様で二部グラフになることが要点になる。
-- [連結成分](https://yuukougun.github.io/kyopro-atlas/graph/connected-components/)（connected-components・基礎・graph・reviewed）：無向グラフを互いに行き来できる頂点の集まりに分け、成分ごとに頂点数・辺数などを集計する。グラフが固定なら DFS・BFS、辺が増えていくなら Union-Find を使う。
-- [閉路の検出と復元](https://yuukougun.github.io/kyopro-atlas/graph/cycle-detection/)（cycle-detection・基礎・graph・reviewed）：無向グラフでは Union-Find か親以外の訪問済み頂点への辺、有向グラフでは探索中の頂点への辺（3 色の DFS）で閉路を見つけ、親をたどって復元する。シミュレーションの周期の検出とは別物である。
-- [なもりグラフ](https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/)（namori-graph・水・graph・reviewed）：N 頂点 N 辺の連結グラフは木に辺を 1 本足した形で、閉路がちょうど 1 つあり、閉路上の各頂点から木がぶら下がる。次数 1 の頂点を削り続けると閉路だけが残る。
-- [二部グラフ判定](https://yuukougun.github.io/kyopro-atlas/graph/bipartite-graph/)（bipartite-graph・基礎・graph・reviewed）：隣り合う頂点を反対の色で塗っていき、同じ色どうしを結ぶ辺（奇数長の閉路）があれば二部グラフでない。成分ごとの色の数を使う数え上げや、二部マッチング・最小カットの前提になる。
-- [小さいグラフの全探索](https://yuukougun.github.io/kyopro-atlas/graph/small-graph-brute-force/)（small-graph-brute-force・基礎・graph・reviewed）：N ≤ 8〜10 程度の小さいグラフで、頂点の対応（N! 通り）・辺の部分集合・彩色を全部試す。場合の数の見積もりと成分ごとに分ける枝刈りが要で、彩色は塗る順を工夫すれば N ≤ 20 まで届く。
-- [彩色数・最大独立集合・最大クリーク](https://yuukougun.github.io/kyopro-atlas/graph/chromatic-number/)（chromatic-number・発展・graph・reviewed）：一般グラフの彩色数・最大独立集合・最大クリークは NP 困難で、彩色数は包除原理で O(2^N N)、最大独立集合は N ≤ 40 程度なら分枝や半分全列挙で求める。二部グラフなら易しい。
-- [ダイクストラ法](https://yuukougun.github.io/kyopro-atlas/graph/dijkstra/)（dijkstra・基礎・graph・reviewed）：辺の重みが非負のグラフで、暫定距離が最小の頂点から順に確定させ、単一始点の最短距離を O((N+M) log N) で求める。逆向きのグラフや両端からの距離を組み合わせれば、経由点や往復の問題も解ける。
-- [01-BFS](https://yuukougun.github.io/kyopro-atlas/graph/zero-one-bfs/)（zero-one-bfs・水・graph・reviewed）：辺の重みが 0 か 1 のとき、コスト 0 の辺で得た頂点は deque の先頭へ、コスト 1 の辺は末尾へ入れて、最短距離を O(N+M) で求める。壁を壊す回数や向きを変える回数の最小化に使う。
-- [ワーシャルフロイド法](https://yuukougun.github.io/kyopro-atlas/graph/warshall-floyd/)（warshall-floyd・水・graph・reviewed）：経由してよい頂点を 1 つずつ増やす DP で、全点対の最短距離を O(N^3) で求める。負辺があっても使え、辺を 1 本足したときは O(N^2) で更新できる。
-- [最短路 DAG](https://yuukougun.github.io/kyopro-atlas/graph/shortest-path-dag/)（shortest-path-dag・水・graph・reviewed）：始点からの距離 d で d(v) = d(u) + w(u, v) を満たす辺だけを残すと DAG になり、最短路はその上のパスと一対一に対応する。最短路の本数・最短路木・必ず使われる辺が分かる。
-- [状態を頂点にする](https://yuukougun.github.io/kyopro-atlas/graph/extended-dijkstra/)（extended-dijkstra・水・graph・reviewed）：元の頂点だけでは次の動きが決まらないとき、向き・残り回数・偶奇・盤面などを組にした状態を頂点にして最短路を求める。グループ内を自由に行き来できるなら、超頂点を足して辺を減らす。
-- [時刻で変わる辺の最短路](https://yuukougun.github.io/kyopro-atlas/graph/time-dependent-dijkstra/)（time-dependent-dijkstra・水・graph・reviewed）：辺の所要時間が出発時刻で変わる最短路は、早く着いて損をしない（待てる）なら、各頂点で最も早い到着時刻だけを持つダイクストラ法で求まる。終点に間に合う最も遅い出発時刻は逆向きに確定させる。
-- [ベルマンフォード法](https://yuukougun.github.io/kyopro-atlas/graph/bellman-ford/)（bellman-ford・青・graph・reviewed）：負の辺があっても、全辺の緩和を N−1 回くり返して単一始点の最短距離を O(NM) で求める。答えに影響するのは、始点から届き終点へ行ける負閉路だけである。
-- [差分制約（牛ゲー）](https://yuukougun.github.io/kyopro-atlas/graph/difference-constraints/)（difference-constraints・青・graph・reviewed）：x_v − x_u ≤ c の形の条件を辺 u→v（重み c）と読み、始点からの最短距離で全条件を満たす最大の解を求める。負閉路があれば解はなく、区間の和の条件は累積和の差に直せる。
-- [補グラフ上の BFS](https://yuukougun.github.io/kyopro-atlas/graph/complement-graph-bfs/)（complement-graph-bfs・黄・graph・reviewed）：完全グラフから M 本の辺を除いたグラフ（補グラフ）を、未訪問頂点の集合から元のグラフで隣接しない頂点を一度に取り出す BFS で、O(N + M) で探索する。
-- [剰余を頂点にする最短路](https://yuukougun.github.io/kyopro-atlas/graph/modular-shortest-path/)（modular-shortest-path・発展・graph・reviewed）：K で割った余りを頂点、数を作る操作を辺にした最短路で、K の倍数のうち桁和が最小のものや、いくつかの数の和で作れる数を求める。
-- [区間に辺を張る](https://yuukougun.github.io/kyopro-atlas/graph/segment-tree-graph/)（segment-tree-graph・発展・graph・reviewed）：頂点から区間内の全頂点へ辺がある問題で、セグメント木のノードを補助頂点にして区間を O(log N) 個で覆い、辺の数を O(M log N) に減らして最短路を求める。
-- [K 番目の最短路](https://yuukougun.github.io/kyopro-atlas/graph/k-shortest-paths/)（k-shortest-paths・発展・graph・reviewed）：始点から終点への経路のうち、短い方から K 番目の長さを求める。ウォークなら各頂点を K 回まで取り出すダイクストラ法で求まり、単純パスは Yen、ウォークの列挙は Eppstein の方法を使う。
-- [最小シュタイナー木](https://yuukougun.github.io/kyopro-atlas/graph/steiner-tree/)（steiner-tree・発展・graph・reviewed）：一般のグラフで指定した K 点（K ≤ 10 程度）をすべてつなぐ最小コストを、端点の集合と頂点を状態にした DP で O(3^K N + 2^K (N + M) log N) で求める。部分集合の分割とダイクストラ法を交互に行う。
-- [トポロジカルソート](https://yuukougun.github.io/kyopro-atlas/graph/topological-sort/)（topological-sort・基礎・graph・reviewed）：閉路のない有向グラフの頂点を、すべての辺が前から後ろへ向くように O(N+M) で並べる。入次数 0 の頂点から取り出す Kahn 法か DFS の帰りがけ順の逆で求め、閉路があれば並べられない。
-- [強連結成分分解（SCC）](https://yuukougun.github.io/kyopro-atlas/graph/scc/)（scc・水・graph・reviewed）：有向グラフを互いに行き来できる頂点の極大集合に分け、成分を 1 点に縮めて DAG にする。Kosaraju か Tarjan で O(N+M) で求まり、ACL の scc_graph は成分をトポロジカル順に返す。
-- [Functional graph（出次数 1 のグラフ）](https://yuukougun.github.io/kyopro-atlas/graph/functional-graph/)（functional-graph・水・graph・reviewed）：各頂点から出る辺がちょうど 1 本の有向グラフは、各成分に閉路がちょうど 1 つあり、そこへ木が流れ込む ρ の形になる。K 回進んだ位置は、閉路に入るまでと閉路の周回に分けて求める。
-- [2-SAT](https://yuukougun.github.io/kyopro-atlas/graph/two-sat/)（two-sat・発展・graph・reviewed）：各変数が真か偽で、条件がすべて「2 つのリテラルの OR」のとき、全条件を満たす割当を含意グラフの SCC で O(N+M) で求める。ACL の two_sat で書けるので、条件を節に直すモデル化が中心になる。
-- [Union-Find で連結性を扱う](https://yuukougun.github.io/kyopro-atlas/graph/union-find-connectivity/)（union-find-connectivity・水・graph・reviewed）：辺や頂点の削除を時間の逆順の追加に直したり、しきい値の順に辺を足したりして、連結成分の数・大きさや 2 点の連結を Union-Find で答える。答えは逆順に記録してから反転する。
-- [最小全域木](https://yuukougun.github.io/kyopro-atlas/graph/minimum-spanning-tree/)（minimum-spanning-tree・水・graph・reviewed）：連結グラフの全域木のうち辺の重みの和が最小のものを、辺を重みの昇順に見て閉路を作らない辺だけを採るクラスカル法か、頂点を 1 つずつ伸ばすプリム法で求める。候補の辺を減らせば完全グラフにも使える。
-- [最小ボトルネック路](https://yuukougun.github.io/kyopro-atlas/graph/bottleneck-path/)（bottleneck-path・青・graph・reviewed）：経路上の辺の最大値を最小にする経路は最小全域木の上で実現でき、クラスカル法で辺を足して 2 点が初めてつながったときの重みが答えになる。多数の 2 点の質問は、成分にクエリを持たせる併合か併合過程の木で答える。
-- [橋・関節点・二重連結成分](https://yuukougun.github.io/kyopro-atlas/graph/lowlink/)（lowlink・黄・graph・reviewed）：DFS 木の行きがけ番号 ord と、部分木から後退辺を 1 本使って戻れる最小の番号 low から、取り除くと非連結になる辺（橋）と頂点（関節点）を O(N+M) で求める。橋や関節点で分けた成分を縮約すると木になる。
-- [辺の追加と削除が混ざる連結性](https://yuukougun.github.io/kyopro-atlas/graph/offline-dynamic-connectivity/)（offline-dynamic-connectivity・発展・graph・reviewed）：辺の追加と削除が混ざる連結性の質問に、各辺が存在する時間の区間を時間軸のセグ木の O(log Q) 個のノードに載せ、DFS で入るときに併合・出るときに取り消してオフラインで答える。
-- [特殊な最小全域木](https://yuukougun.github.io/kyopro-atlas/graph/spanning-tree-advanced/)（spanning-tree-advanced・発展・graph・reviewed）：辺が暗黙に与えられる完全グラフの最小全域木を Borůvka 法で求め、マンハッタン距離の完全グラフは候補辺を O(N) 本に絞る。有向グラフの最小全域木（Chu-Liu/Edmonds）と第 2 最小全域木の求め方もある。
-- [行列木定理](https://yuukougun.github.io/kyopro-atlas/graph/matrix-tree-theorem/)（matrix-tree-theorem・発展・graph・reviewed）：無向グラフの全域木の個数は、ラプラシアン行列（次数行列 − 隣接行列）から 1 行 1 列を除いた行列の行列式に等しい。有向グラフの版と、有向オイラー閉路を数える BEST 定理もある。
-- [DFS 木・BFS 木とグラフの構築](https://yuukougun.github.io/kyopro-atlas/graph/graph-construction/)（graph-construction・青・graph・reviewed）：無向グラフの DFS 木では木に入らない辺がすべて祖先と子孫を結び、BFS 木では層が高々 1 違う頂点どうしを結ぶ。この性質で条件を満たす木や経路を作り、距離表からグラフを復元する。
-- [次数による平方分割](https://yuukougun.github.io/kyopro-atlas/graph/degree-sqrt/)（degree-sqrt・青・graph・reviewed）：次数が √M を超える重い頂点は 2√M 個以下しかないことを使い、重い頂点と軽い頂点で処理を分けて、頂点とその隣接頂点すべてへのクエリを O(√M) にする。三角形の列挙や長さ 4 の閉路の検出も同じ考え方で速くなる。
-- [オイラー路（一筆書き）](https://yuukougun.github.io/kyopro-atlas/graph/euler-path/)（euler-path・黄・graph・reviewed）：すべての辺をちょうど 1 回ずつ通る路は、辺のある頂点が連結で、奇数次数の頂点が 0 個か 2 個（有向なら入次数と出次数の条件）のときに限りあり、Hierholzer 法で O(N + M) で作れる。
-- [最大流](https://yuukougun.github.io/kyopro-atlas/graph/max-flow/)（max-flow・黄・graph・reviewed）：容量付きの有向グラフで s から t へ流せる最大量を、残余グラフ上の増加路に流すことをくり返して求める。逆辺で押し戻せることが正しさの要で、ACL の mf_graph（Dinic）で書ける。
-- [最小カット](https://yuukougun.github.io/kyopro-atlas/graph/min-cut/)（min-cut・黄・graph・reviewed）：頂点を s 側と t 側に分けたとき、s 側から t 側へ向かう辺の容量の和の最小値は最大流に等しい。流し終えた残余グラフで s から届く頂点を s 側とすれば、カットを復元できる。
-- [燃やす埋める](https://yuukougun.github.io/kyopro-atlas/graph/project-selection/)（project-selection・黄・graph・reviewed）：各要素を選ぶか選ばないかの 2 択とその組合せのコストを辺に直し、最小カットで最適な選び方を求める。利得は定数を足してコストに読み替え、二部グラフなら片側の意味を反転する。
-- [二部マッチング](https://yuukougun.github.io/kyopro-atlas/graph/bipartite-matching/)（bipartite-matching・黄・graph・reviewed）：二部グラフで端点を共有しない辺の最大集合を、容量 1 の最大流（s → 左 → 右 → t）で求める。交互路を反転するとマッチングが 1 増えることが要で、答えの二分探索と完全マッチングの判定を組む型が多い。
-- [König の定理](https://yuukougun.github.io/kyopro-atlas/graph/konig-theorem/)（konig-theorem・黄・graph・reviewed）：二部グラフでは最大マッチングの大きさが最小頂点被覆の大きさに等しく、最大独立集合は頂点数から最小頂点被覆を引いたものになる。被覆は最小カットから復元できる。
-- [最小費用流](https://yuukougun.github.io/kyopro-atlas/graph/min-cost-flow/)（min-cost-flow・黄・graph・reviewed）：流量 F を流すときのコストの最小値を、残余グラフ上のコストの最短路に沿って流すことをくり返して求める。逆辺の負のコストはポテンシャルで消してダイクストラ法を使い、ACL の mcf_graph で書ける。
-- [最小パス被覆と Hall の定理](https://yuukougun.github.io/kyopro-atlas/graph/dilworth-path-cover/)（dilworth-path-cover・発展・graph・reviewed）：DAG の頂点を最少の本数のパスで覆う数は、頂点を 2 つに分けた二部グラフの最大マッチングから求まる。完全マッチングがあるかは、Hall の定理で部分集合ごとに確かめられる。
-- [最小流量制約付きフロー](https://yuukougun.github.io/kyopro-atlas/graph/flow-lower-bounds/)（flow-lower-bounds・発展・graph・reviewed）：辺に「少なくとも L は流す」という下限があるとき、L を先に流したことにして超頂点で過不足を調整し、普通の最大流に帰着する。
-- [一般グラフのマッチング](https://yuukougun.github.io/kyopro-atlas/graph/general-matching/)（general-matching・発展・graph・reviewed）：二部グラフでないグラフの最大マッチングは、奇閉路（花）を縮約する Edmonds のアルゴリズムで多項式時間で求まる。N ≤ 16 程度なら bitDP で足りる。
+- [グラフの表現と用語](https://yuukougun.github.io/kyopro-atlas/graph/graph-basics/)（graph-basics・基礎・graph・done）：N 頂点 M 辺のグラフを隣接リスト・隣接行列・辺リストのどれで持つかを選び、次数・パス・連結・木・DAG などの用語をそろえる。アルゴリズムごとに向く表現が決まっている。
+- [グラフへの帰着](https://yuukougun.github.io/kyopro-atlas/graph/graph-modeling/)（graph-modeling・—・graph・done）：物・値・座標・状態・時刻・剰余などを頂点に、関係・操作・制約を辺にすると、問題が既知のグラフの問題（連結・二部・閉路・最短路）に変わる。自由に行き来できる部分は 1 点に縮約できる。
+- [深さ優先探索（DFS）](https://yuukougun.github.io/kyopro-atlas/graph/dfs/)（dfs・基礎・graph・done）：行けるところまで進んでから戻る探索で、到達可能性・連結成分・閉路検出・トポロジカル順の土台になる。帰りがけで訪問の印を外せば単純パスを全列挙できる。
+- [幅優先探索（BFS）と無重み最短路](https://yuukougun.github.io/kyopro-atlas/graph/bfs/)（bfs・基礎・graph・done）：始点に近い順に頂点を確定させる探索で、辺の重みがすべて等しいグラフの最短距離を O(N+M) で求める。親を記録すれば経路を復元でき、全始点をキューに入れれば多始点の距離になる。
+- [グリッドグラフ](https://yuukougun.github.io/kyopro-atlas/graph/grid-graph/)（grid-graph・基礎・graph・done）：マスを頂点、隣り合うマスを辺と見て、BFS・DFS・Union-Find をそのまま使う。(i, j) の 1 次元化・番兵・止まるマスの扱いと、市松模様で二部グラフになることが要点になる。
+- [連結成分](https://yuukougun.github.io/kyopro-atlas/graph/connected-components/)（connected-components・基礎・graph・done）：無向グラフを互いに行き来できる頂点の集まりに分け、成分ごとに頂点数・辺数などを集計する。グラフが固定なら DFS・BFS、辺が増えていくなら Union-Find を使う。
+- [閉路の検出と復元](https://yuukougun.github.io/kyopro-atlas/graph/cycle-detection/)（cycle-detection・基礎・graph・done）：無向グラフでは Union-Find か親以外の訪問済み頂点への辺、有向グラフでは探索中の頂点への辺（3 色の DFS）で閉路を見つけ、親をたどって復元する。シミュレーションの周期の検出とは別物である。
+- [なもりグラフ](https://yuukougun.github.io/kyopro-atlas/graph/namori-graph/)（namori-graph・水・graph・done）：N 頂点 N 辺の連結グラフは木に辺を 1 本足した形で、閉路がちょうど 1 つあり、閉路上の各頂点から木がぶら下がる。次数 1 の頂点を削り続けると閉路だけが残る。
+- [二部グラフ判定](https://yuukougun.github.io/kyopro-atlas/graph/bipartite-graph/)（bipartite-graph・基礎・graph・done）：隣り合う頂点を反対の色で塗っていき、同じ色どうしを結ぶ辺（奇数長の閉路）があれば二部グラフでない。成分ごとの色の数を使う数え上げや、二部マッチング・最小カットの前提になる。
+- [小さいグラフの全探索](https://yuukougun.github.io/kyopro-atlas/graph/small-graph-brute-force/)（small-graph-brute-force・基礎・graph・done）：N ≤ 8〜10 程度の小さいグラフで、頂点の対応（N! 通り）・辺の部分集合・彩色を全部試す。場合の数の見積もりと成分ごとに分ける枝刈りが要で、彩色は塗る順を工夫すれば N ≤ 20 まで届く。
+- [彩色数・最大独立集合・最大クリーク](https://yuukougun.github.io/kyopro-atlas/graph/chromatic-number/)（chromatic-number・発展・graph・done）：一般グラフの彩色数・最大独立集合・最大クリークは NP 困難で、彩色数は包除原理で O(2^N N)、最大独立集合は N ≤ 40 程度なら分枝や半分全列挙で求める。二部グラフなら易しい。
+- [ダイクストラ法](https://yuukougun.github.io/kyopro-atlas/graph/dijkstra/)（dijkstra・基礎・graph・done）：辺の重みが非負のグラフで、暫定距離が最小の頂点から順に確定させ、単一始点の最短距離を O((N+M) log N) で求める。逆向きのグラフや両端からの距離を組み合わせれば、経由点や往復の問題も解ける。
+- [01-BFS](https://yuukougun.github.io/kyopro-atlas/graph/zero-one-bfs/)（zero-one-bfs・水・graph・done）：辺の重みが 0 か 1 のとき、コスト 0 の辺で得た頂点は deque の先頭へ、コスト 1 の辺は末尾へ入れて、最短距離を O(N+M) で求める。壁を壊す回数や向きを変える回数の最小化に使う。
+- [ワーシャルフロイド法](https://yuukougun.github.io/kyopro-atlas/graph/warshall-floyd/)（warshall-floyd・水・graph・done）：経由してよい頂点を 1 つずつ増やす DP で、全点対の最短距離を O(N^3) で求める。負辺があっても使え、辺を 1 本足したときは O(N^2) で更新できる。
+- [最短路 DAG](https://yuukougun.github.io/kyopro-atlas/graph/shortest-path-dag/)（shortest-path-dag・水・graph・done）：始点からの距離 d で d(v) = d(u) + w(u, v) を満たす辺だけを残すと DAG になり、最短路はその上のパスと一対一に対応する。最短路の本数・最短路木・必ず使われる辺が分かる。
+- [状態を頂点にする](https://yuukougun.github.io/kyopro-atlas/graph/extended-dijkstra/)（extended-dijkstra・水・graph・done）：元の頂点だけでは次の動きが決まらないとき、向き・残り回数・偶奇・盤面などを組にした状態を頂点にして最短路を求める。グループ内を自由に行き来できるなら、超頂点を足して辺を減らす。
+- [時刻で変わる辺の最短路](https://yuukougun.github.io/kyopro-atlas/graph/time-dependent-dijkstra/)（time-dependent-dijkstra・水・graph・done）：辺の所要時間が出発時刻で変わる最短路は、早く着いて損をしない（待てる）なら、各頂点で最も早い到着時刻だけを持つダイクストラ法で求まる。終点に間に合う最も遅い出発時刻は逆向きに確定させる。
+- [ベルマンフォード法](https://yuukougun.github.io/kyopro-atlas/graph/bellman-ford/)（bellman-ford・青・graph・done）：負の辺があっても、全辺の緩和を N−1 回くり返して単一始点の最短距離を O(NM) で求める。答えに影響するのは、始点から届き終点へ行ける負閉路だけである。
+- [差分制約（牛ゲー）](https://yuukougun.github.io/kyopro-atlas/graph/difference-constraints/)（difference-constraints・青・graph・done）：x_v − x_u ≤ c の形の条件を辺 u→v（重み c）と読み、始点からの最短距離で全条件を満たす最大の解を求める。負閉路があれば解はなく、区間の和の条件は累積和の差に直せる。
+- [補グラフ上の BFS](https://yuukougun.github.io/kyopro-atlas/graph/complement-graph-bfs/)（complement-graph-bfs・黄・graph・done）：完全グラフから M 本の辺を除いたグラフ（補グラフ）を、未訪問頂点の集合から元のグラフで隣接しない頂点を一度に取り出す BFS で、O(N + M) で探索する。
+- [剰余を頂点にする最短路](https://yuukougun.github.io/kyopro-atlas/graph/modular-shortest-path/)（modular-shortest-path・発展・graph・done）：K で割った余りを頂点、数を作る操作を辺にした最短路で、K の倍数のうち桁和が最小のものや、いくつかの数の和で作れる数を求める。
+- [区間に辺を張る](https://yuukougun.github.io/kyopro-atlas/graph/segment-tree-graph/)（segment-tree-graph・発展・graph・done）：頂点から区間内の全頂点へ辺がある問題で、セグメント木のノードを補助頂点にして区間を O(log N) 個で覆い、辺の数を O(M log N) に減らして最短路を求める。
+- [K 番目の最短路](https://yuukougun.github.io/kyopro-atlas/graph/k-shortest-paths/)（k-shortest-paths・発展・graph・done）：始点から終点への経路のうち、短い方から K 番目の長さを求める。ウォークなら各頂点を K 回まで取り出すダイクストラ法で求まり、単純パスは Yen、ウォークの列挙は Eppstein の方法を使う。
+- [最小シュタイナー木](https://yuukougun.github.io/kyopro-atlas/graph/steiner-tree/)（steiner-tree・発展・graph・done）：一般のグラフで指定した K 点（K ≤ 10 程度）をすべてつなぐ最小コストを、端点の集合と頂点を状態にした DP で O(3^K N + 2^K (N + M) log N) で求める。部分集合の分割とダイクストラ法を交互に行う。
+- [トポロジカルソート](https://yuukougun.github.io/kyopro-atlas/graph/topological-sort/)（topological-sort・基礎・graph・done）：閉路のない有向グラフの頂点を、すべての辺が前から後ろへ向くように O(N+M) で並べる。入次数 0 の頂点から取り出す Kahn 法か DFS の帰りがけ順の逆で求め、閉路があれば並べられない。
+- [強連結成分分解（SCC）](https://yuukougun.github.io/kyopro-atlas/graph/scc/)（scc・水・graph・done）：有向グラフを互いに行き来できる頂点の極大集合に分け、成分を 1 点に縮めて DAG にする。Kosaraju か Tarjan で O(N+M) で求まり、ACL の scc_graph は成分をトポロジカル順に返す。
+- [Functional graph（出次数 1 のグラフ）](https://yuukougun.github.io/kyopro-atlas/graph/functional-graph/)（functional-graph・水・graph・done）：各頂点から出る辺がちょうど 1 本の有向グラフは、各成分に閉路がちょうど 1 つあり、そこへ木が流れ込む ρ の形になる。K 回進んだ位置は、閉路に入るまでと閉路の周回に分けて求める。
+- [2-SAT](https://yuukougun.github.io/kyopro-atlas/graph/two-sat/)（two-sat・発展・graph・done）：各変数が真か偽で、条件がすべて「2 つのリテラルの OR」のとき、全条件を満たす割当を含意グラフの SCC で O(N+M) で求める。ACL の two_sat で書けるので、条件を節に直すモデル化が中心になる。
+- [Union-Find で連結性を扱う](https://yuukougun.github.io/kyopro-atlas/graph/union-find-connectivity/)（union-find-connectivity・水・graph・done）：辺や頂点の削除を時間の逆順の追加に直したり、しきい値の順に辺を足したりして、連結成分の数・大きさや 2 点の連結を Union-Find で答える。答えは逆順に記録してから反転する。
+- [最小全域木](https://yuukougun.github.io/kyopro-atlas/graph/minimum-spanning-tree/)（minimum-spanning-tree・水・graph・done）：連結グラフの全域木のうち辺の重みの和が最小のものを、辺を重みの昇順に見て閉路を作らない辺だけを採るクラスカル法か、頂点を 1 つずつ伸ばすプリム法で求める。候補の辺を減らせば完全グラフにも使える。
+- [最小ボトルネック路](https://yuukougun.github.io/kyopro-atlas/graph/bottleneck-path/)（bottleneck-path・青・graph・done）：経路上の辺の最大値を最小にする経路は最小全域木の上で実現でき、クラスカル法で辺を足して 2 点が初めてつながったときの重みが答えになる。多数の 2 点の質問は、成分にクエリを持たせる併合か併合過程の木で答える。
+- [橋・関節点・二重連結成分](https://yuukougun.github.io/kyopro-atlas/graph/lowlink/)（lowlink・黄・graph・done）：DFS 木の行きがけ番号 ord と、部分木から後退辺を 1 本使って戻れる最小の番号 low から、取り除くと非連結になる辺（橋）と頂点（関節点）を O(N+M) で求める。橋や関節点で分けた成分を縮約すると木になる。
+- [辺の追加と削除が混ざる連結性](https://yuukougun.github.io/kyopro-atlas/graph/offline-dynamic-connectivity/)（offline-dynamic-connectivity・発展・graph・done）：辺の追加と削除が混ざる連結性の質問に、各辺が存在する時間の区間を時間軸のセグ木の O(log Q) 個のノードに載せ、DFS で入るときに併合・出るときに取り消してオフラインで答える。
+- [特殊な最小全域木](https://yuukougun.github.io/kyopro-atlas/graph/spanning-tree-advanced/)（spanning-tree-advanced・発展・graph・done）：辺が暗黙に与えられる完全グラフの最小全域木を Borůvka 法で求め、マンハッタン距離の完全グラフは候補辺を O(N) 本に絞る。有向グラフの最小全域木（Chu-Liu/Edmonds）と第 2 最小全域木の求め方もある。
+- [行列木定理](https://yuukougun.github.io/kyopro-atlas/graph/matrix-tree-theorem/)（matrix-tree-theorem・発展・graph・done）：無向グラフの全域木の個数は、ラプラシアン行列（次数行列 − 隣接行列）から 1 行 1 列を除いた行列の行列式に等しい。有向グラフの版と、有向オイラー閉路を数える BEST 定理もある。
+- [DFS 木・BFS 木とグラフの構築](https://yuukougun.github.io/kyopro-atlas/graph/graph-construction/)（graph-construction・青・graph・done）：無向グラフの DFS 木では木に入らない辺がすべて祖先と子孫を結び、BFS 木では層が高々 1 違う頂点どうしを結ぶ。この性質で条件を満たす木や経路を作り、距離表からグラフを復元する。
+- [次数による平方分割](https://yuukougun.github.io/kyopro-atlas/graph/degree-sqrt/)（degree-sqrt・青・graph・done）：次数が √M を超える重い頂点は 2√M 個以下しかないことを使い、重い頂点と軽い頂点で処理を分けて、頂点とその隣接頂点すべてへのクエリを O(√M) にする。三角形の列挙や長さ 4 の閉路の検出も同じ考え方で速くなる。
+- [オイラー路（一筆書き）](https://yuukougun.github.io/kyopro-atlas/graph/euler-path/)（euler-path・黄・graph・done）：すべての辺をちょうど 1 回ずつ通る路は、辺のある頂点が連結で、奇数次数の頂点が 0 個か 2 個（有向なら入次数と出次数の条件）のときに限りあり、Hierholzer 法で O(N + M) で作れる。
+- [最大流](https://yuukougun.github.io/kyopro-atlas/graph/max-flow/)（max-flow・黄・graph・done）：容量付きの有向グラフで s から t へ流せる最大量を、残余グラフ上の増加路に流すことをくり返して求める。逆辺で押し戻せることが正しさの要で、ACL の mf_graph（Dinic）で書ける。
+- [最小カット](https://yuukougun.github.io/kyopro-atlas/graph/min-cut/)（min-cut・黄・graph・done）：頂点を s 側と t 側に分けたとき、s 側から t 側へ向かう辺の容量の和の最小値は最大流に等しい。流し終えた残余グラフで s から届く頂点を s 側とすれば、カットを復元できる。
+- [燃やす埋める](https://yuukougun.github.io/kyopro-atlas/graph/project-selection/)（project-selection・黄・graph・done）：各要素を選ぶか選ばないかの 2 択とその組合せのコストを辺に直し、最小カットで最適な選び方を求める。利得は定数を足してコストに読み替え、二部グラフなら片側の意味を反転する。
+- [二部マッチング](https://yuukougun.github.io/kyopro-atlas/graph/bipartite-matching/)（bipartite-matching・黄・graph・done）：二部グラフで端点を共有しない辺の最大集合を、容量 1 の最大流（s → 左 → 右 → t）で求める。交互路を反転するとマッチングが 1 増えることが要で、答えの二分探索と完全マッチングの判定を組む型が多い。
+- [König の定理](https://yuukougun.github.io/kyopro-atlas/graph/konig-theorem/)（konig-theorem・黄・graph・done）：二部グラフでは最大マッチングの大きさが最小頂点被覆の大きさに等しく、最大独立集合は頂点数から最小頂点被覆を引いたものになる。被覆は最小カットから復元できる。
+- [最小費用流](https://yuukougun.github.io/kyopro-atlas/graph/min-cost-flow/)（min-cost-flow・黄・graph・done）：流量 F を流すときのコストの最小値を、残余グラフ上のコストの最短路に沿って流すことをくり返して求める。逆辺の負のコストはポテンシャルで消してダイクストラ法を使い、ACL の mcf_graph で書ける。
+- [最小パス被覆と Hall の定理](https://yuukougun.github.io/kyopro-atlas/graph/dilworth-path-cover/)（dilworth-path-cover・発展・graph・done）：DAG の頂点を最少の本数のパスで覆う数は、頂点を 2 つに分けた二部グラフの最大マッチングから求まる。完全マッチングがあるかは、Hall の定理で部分集合ごとに確かめられる。
+- [最小流量制約付きフロー](https://yuukougun.github.io/kyopro-atlas/graph/flow-lower-bounds/)（flow-lower-bounds・発展・graph・done）：辺に「少なくとも L は流す」という下限があるとき、L を先に流したことにして超頂点で過不足を調整し、普通の最大流に帰着する。
+- [一般グラフのマッチング](https://yuukougun.github.io/kyopro-atlas/graph/general-matching/)（general-matching・発展・graph・done）：二部グラフでないグラフの最大マッチングは、奇閉路（花）を縮約する Edmonds のアルゴリズムで多項式時間で求まる。N ≤ 16 程度なら bitDP で足りる。
 
 ## 木
 
-- [木の基本性質と表現](https://yuukougun.github.io/kyopro-atlas/tree/tree-basics/)（tree-basics・基礎・tree・reviewed）：連結で閉路がない・連結で辺が N−1 本・閉路がなく辺が N−1 本・どの 2 点間もパスが 1 本、の 4 つは同値で、辺を 1 本除くと 2 つに分かれ、1 本足すと閉路ができる。根の決め方と辺の値を子に寄せる小技が出発点になる。
-- [根付き木と走査順](https://yuukougun.github.io/kyopro-atlas/tree/tree-traversal/)（tree-traversal・基礎・tree・reviewed）：根を決めて DFS か BFS をすると、親・深さ・部分木サイズ・行きがけ順・帰りがけ順が O(N) で求まる。帰りがけ順（または BFS 順の逆）で子の結果を親へ集約するのが木 DP の土台になる。
-- [木の 2 色塗り分けと距離の偶奇](https://yuukougun.github.io/kyopro-atlas/tree/tree-bipartite/)（tree-bipartite・基礎・tree・reviewed）：木は閉路がないので深さの偶奇で必ず 2 色に塗れ、2 点の距離の偶奇は深さの和の偶奇で分かる。多い方の色が N/2 個以上あることや、色の違う組の数を使う問題に効く。
-- [木の上の距離](https://yuukougun.github.io/kyopro-atlas/tree/tree-distance/)（tree-distance・基礎・tree・reviewed）：木では 2 点間のパスが一意なので、重み付きでも DFS 1 回で 1 点からの距離が求まる。2 点からの距離を比べる型と、根からの累積値で 2 点間の値を表す型（XOR なら LCA がいらない）がある。
-- [木の上の累積和・いもす法](https://yuukougun.github.io/kyopro-atlas/tree/tree-imos/)（tree-imos・基礎・tree・reviewed）：部分木への加算をまとめて受けてから値を出力するなら、部分木の根に印を置いて根から下へ累積する。パスへの加算は端点と LCA に印を置いて葉から上へ累積し、途中で値を聞かれるならオイラーツアーを使う。
-- [指定頂点を結ぶ最小の部分木](https://yuukougun.github.io/kyopro-atlas/tree/steiner-subtree/)（steiner-subtree・基礎・tree・reviewed）：指定した K 頂点をすべて含む最小の連結な部分グラフは一意な部分木で、指定頂点の 1 つを根にして、部分木に指定頂点を含む頂点を残せば求まる。指定されていない葉を削り続けても同じになる。
-- [完全二分木](https://yuukougun.github.io/kyopro-atlas/tree/complete-binary-tree/)（complete-binary-tree・基礎・tree・reviewed）：頂点 i の子が 2i と 2i+1、親が ⌊i/2⌋ の木は深さが log N 程度しかないので、N が 10^18 でも祖先を全部たどれる。番号の 2 進表記が根からの道順を表し、LCA と距離も番号だけで求まる。
-- [葉から考える](https://yuukougun.github.io/kyopro-atlas/tree/leaf-first/)（leaf-first・水・tree・reviewed）：葉は辺が 1 本しかないので選択肢が少なく、葉から順に決めると貪欲が正しくなりやすい。次数 1 の頂点をキューで削るか帰りがけ順に情報を上へ送り、正しさは交換論法で示す。
-- [木の次数列と Prüfer 列](https://yuukougun.github.io/kyopro-atlas/tree/tree-degree/)（tree-degree・青・tree・reviewed）：各次数が 1 以上で和が 2N−2 なら、その次数列の木が必ず作れる。Prüfer 列（最小番号の葉を消して隣を記録する列）が木と一対一に対応し、各頂点の出現回数が次数 − 1 になることが理由である。
-- [木の直径と最遠点](https://yuukougun.github.io/kyopro-atlas/tree/tree-diameter/)（tree-diameter・水・tree・reviewed）：直径（最も遠い 2 点を結ぶパス）は、任意の点から最も遠い点 a を求め、a から最も遠い点 b を求めれば a–b になる（重みが非負のとき）。各点の最遠点は直径の端点のどちらかになる。
-- [辺で切って数える](https://yuukougun.github.io/kyopro-atlas/tree/tree-edge-contribution/)（tree-edge-contribution・水・tree・reviewed）：全ペアのパスについての量の和を、各辺（頂点）が何ペアのパスに含まれるかで数え直す。辺で切った両側の大きさが s と N−s なら、その辺を通るペアは s(N−s) 個になる。
-- [木の構築・復元](https://yuukougun.github.io/kyopro-atlas/tree/tree-construction/)（tree-construction・水・tree・reviewed）：距離の情報・訪問順・次数の条件などから、条件を満たす木を作るか、ないと判定する（何通りあるかを数えることもある）。作った木が本当に条件を満たすかを最後に確かめることが要になる。
-- [木の重心](https://yuukougun.github.io/kyopro-atlas/tree/tree-centroid/)（tree-centroid・黄・tree・reviewed）：取り除いたときに残る成分の大きさがすべて N/2 以下になる頂点（重心。1 個か隣り合う 2 個ある）を、部分木サイズから O(N) で求める。全ペアが重心を通るペアの作り方や重心分解に使う。
-- [木の同型判定と木のハッシュ](https://yuukougun.github.io/kyopro-atlas/tree/tree-isomorphism/)（tree-isomorphism・発展・tree・reviewed）：根付き木の同型は、葉から順に「子の部分木の名前の多重集合」に名前を付ける AHU 法か、多重集合のハッシュで判定する。根のない木は中心（1〜2 個）を根にして比べる。
-- [最小共通祖先（LCA）](https://yuukougun.github.io/kyopro-atlas/tree/lca/)（lca・青・tree・reviewed）：根付き木で 2 頂点の共通の祖先のうち最も深いものを、各頂点の 2^k 個上の祖先の表（ダブリング）で、前処理 O(N log N)・1 回 O(log N) で求める。2 点間の距離・K 個上の祖先・パス上の最大値にそのまま使える。
-- [木の上のパスの判定と分解](https://yuukougun.github.io/kyopro-atlas/tree/tree-path/)（tree-path・青・tree・reviewed）：パス u–v を「u から LCA へ上る」と「LCA から v へ下る」に分け、点がパス上にあるか・3 点の合流点・2 本のパスの交差・パス上の K 番目の頂点を、LCA と距離の式で判定する。
-- [根からのパスを DFS で持ち回る](https://yuukougun.github.io/kyopro-atlas/tree/root-path-dfs/)（root-path-dfs・青・tree・reviewed）：DFS で頂点に入るときにデータ構造へ情報を足し、出るときに元に戻すと、常に根から今の頂点までのパスの情報だけを持てる。パス上の色の数・LIS・中央値などを全頂点について求められる。
-- [オイラーツアー](https://yuukougun.github.io/kyopro-atlas/tree/euler-tour/)（euler-tour・青・tree・reviewed）：DFS の行きがけ順に番号 in[v] を振り、子孫を回り終えた時点の番号 out[v] を記録すると、v の部分木が列の区間 [in[v], out[v]) になる。部分木の和や加算が BIT・セグメント木の区間クエリになる。
-- [HL 分解](https://yuukougun.github.io/kyopro-atlas/tree/hld/)（hld・発展・tree・reviewed）：各頂点で部分木が最大の子へ重い辺を引き、重いパスごとに番号が連続するように振ると、任意のパスが O(log N) 個の区間に分かれる。パスへの一括更新や逆元のない演算の集約を、セグメント木と組んで O(log^2 N) で処理できる。
-- [Static Top Tree と木 DP の動的更新](https://yuukougun.github.io/kyopro-atlas/tree/static-top-tree/)（static-top-tree・発展・tree・reviewed）：頂点の値を書き換えるたびに、木 DP の根の値を O(log N) 程度で更新する。HL 分解の重いパスの上で DP をセグメント木に載せる方法と、木をパスの圧縮と部分木の併合で平衡に組み直す Static Top Tree がある。
-- [動的木](https://yuukougun.github.io/kyopro-atlas/tree/dynamic-tree/)（dynamic-tree・発展・tree・reviewed）：辺の追加と削除がある森で、パスのクエリや根の付け替えを償却 O(log N) で処理する Link-Cut Tree と、部分木のクエリ向けの Euler Tour Tree、両方に使える Top Tree がある。
-- [マージテク](https://yuukougun.github.io/kyopro-atlas/tree/small-to-large/)（small-to-large・水・tree・reviewed）：2 つの集合を併合するとき小さい方の要素を大きい方へ移すと、1 つの要素が移るのは高々 log N 回なので全体で O(N log N) になる。グループの併合と種類数の問い合わせや、部分木ごとの集計（DSU on Tree）に使う。
-- [重心分解](https://yuukougun.github.io/kyopro-atlas/tree/centroid-decomposition/)（centroid-decomposition・黄・tree・reviewed）：重心を取り、重心を通るパスを一度に処理してから重心を消し、残った各成分で再帰する。成分の大きさが半分以下になるので深さは O(log N) で、距離がちょうど K のペアの数など、辺ごとに分けられない全ペアの量を数えられる。
-- [Auxiliary Tree](https://yuukougun.github.io/kyopro-atlas/tree/auxiliary-tree/)（auxiliary-tree・発展・tree・reviewed）：色ごと・クエリごとに少数の頂点だけが関わる木の問題で、指定頂点と DFS 順で隣り合う 2 点の LCA だけからなる圧縮木を作って木 DP をする。関わる頂点数の合計が O(N) なら全体で O(N log N) になる。
-- [併合過程の木](https://yuukougun.github.io/kyopro-atlas/tree/merge-process-tree/)（merge-process-tree・発展・tree・reviewed）：Union-Find の併合のたびに新しい頂点を作って 2 つの成分を子にした木を作ると、ある時点のグループが DFS 順の区間になる。辺を重みの順に併合すれば、2 点の LCA の重みが経路の最大の辺の最小値になる。
-- [比で親に併合する貪欲](https://yuukougun.github.io/kyopro-atlas/tree/tree-ratio-greedy/)（tree-ratio-greedy・発展・tree・reviewed）：「親を子より先に選ぶ」制約つきで、順番に依存する重み付きの和を最適化する。比が最大の塊は親の塊の直後に訪れてよい（交換論法）ので、優先度付きキューと Union-Find で親の塊へ併合していく。
+- [木の基本性質と表現](https://yuukougun.github.io/kyopro-atlas/tree/tree-basics/)（tree-basics・基礎・tree・done）：連結で閉路がない・連結で辺が N−1 本・閉路がなく辺が N−1 本・どの 2 点間もパスが 1 本、の 4 つは同値で、辺を 1 本除くと 2 つに分かれ、1 本足すと閉路ができる。根の決め方と辺の値を子に寄せる小技が出発点になる。
+- [根付き木と走査順](https://yuukougun.github.io/kyopro-atlas/tree/tree-traversal/)（tree-traversal・基礎・tree・done）：根を決めて DFS か BFS をすると、親・深さ・部分木サイズ・行きがけ順・帰りがけ順が O(N) で求まる。帰りがけ順（または BFS 順の逆）で子の結果を親へ集約するのが木 DP の土台になる。
+- [木の 2 色塗り分けと距離の偶奇](https://yuukougun.github.io/kyopro-atlas/tree/tree-bipartite/)（tree-bipartite・基礎・tree・done）：木は閉路がないので深さの偶奇で必ず 2 色に塗れ、2 点の距離の偶奇は深さの和の偶奇で分かる。多い方の色が N/2 個以上あることや、色の違う組の数を使う問題に効く。
+- [木の上の距離](https://yuukougun.github.io/kyopro-atlas/tree/tree-distance/)（tree-distance・基礎・tree・done）：木では 2 点間のパスが一意なので、重み付きでも DFS 1 回で 1 点からの距離が求まる。2 点からの距離を比べる型と、根からの累積値で 2 点間の値を表す型（XOR なら LCA がいらない）がある。
+- [木の上の累積和・いもす法](https://yuukougun.github.io/kyopro-atlas/tree/tree-imos/)（tree-imos・基礎・tree・done）：部分木への加算をまとめて受けてから値を出力するなら、部分木の根に印を置いて根から下へ累積する。パスへの加算は端点と LCA に印を置いて葉から上へ累積し、途中で値を聞かれるならオイラーツアーを使う。
+- [指定頂点を結ぶ最小の部分木](https://yuukougun.github.io/kyopro-atlas/tree/steiner-subtree/)（steiner-subtree・基礎・tree・done）：指定した K 頂点をすべて含む最小の連結な部分グラフは一意な部分木で、指定頂点の 1 つを根にして、部分木に指定頂点を含む頂点を残せば求まる。指定されていない葉を削り続けても同じになる。
+- [完全二分木](https://yuukougun.github.io/kyopro-atlas/tree/complete-binary-tree/)（complete-binary-tree・基礎・tree・done）：頂点 i の子が 2i と 2i+1、親が ⌊i/2⌋ の木は深さが log N 程度しかないので、N が 10^18 でも祖先を全部たどれる。番号の 2 進表記が根からの道順を表し、LCA と距離も番号だけで求まる。
+- [葉から考える](https://yuukougun.github.io/kyopro-atlas/tree/leaf-first/)（leaf-first・水・tree・done）：葉は辺が 1 本しかないので選択肢が少なく、葉から順に決めると貪欲が正しくなりやすい。次数 1 の頂点をキューで削るか帰りがけ順に情報を上へ送り、正しさは交換論法で示す。
+- [木の次数列と Prüfer 列](https://yuukougun.github.io/kyopro-atlas/tree/tree-degree/)（tree-degree・青・tree・done）：各次数が 1 以上で和が 2N−2 なら、その次数列の木が必ず作れる。Prüfer 列（最小番号の葉を消して隣を記録する列）が木と一対一に対応し、各頂点の出現回数が次数 − 1 になることが理由である。
+- [木の直径と最遠点](https://yuukougun.github.io/kyopro-atlas/tree/tree-diameter/)（tree-diameter・水・tree・done）：直径（最も遠い 2 点を結ぶパス）は、任意の点から最も遠い点 a を求め、a から最も遠い点 b を求めれば a–b になる（重みが非負のとき）。各点の最遠点は直径の端点のどちらかになる。
+- [辺で切って数える](https://yuukougun.github.io/kyopro-atlas/tree/tree-edge-contribution/)（tree-edge-contribution・水・tree・done）：全ペアのパスについての量の和を、各辺（頂点）が何ペアのパスに含まれるかで数え直す。辺で切った両側の大きさが s と N−s なら、その辺を通るペアは s(N−s) 個になる。
+- [木の構築・復元](https://yuukougun.github.io/kyopro-atlas/tree/tree-construction/)（tree-construction・水・tree・done）：距離の情報・訪問順・次数の条件などから、条件を満たす木を作るか、ないと判定する（何通りあるかを数えることもある）。作った木が本当に条件を満たすかを最後に確かめることが要になる。
+- [木の重心](https://yuukougun.github.io/kyopro-atlas/tree/tree-centroid/)（tree-centroid・黄・tree・done）：取り除いたときに残る成分の大きさがすべて N/2 以下になる頂点（重心。1 個か隣り合う 2 個ある）を、部分木サイズから O(N) で求める。全ペアが重心を通るペアの作り方や重心分解に使う。
+- [木の同型判定と木のハッシュ](https://yuukougun.github.io/kyopro-atlas/tree/tree-isomorphism/)（tree-isomorphism・発展・tree・done）：根付き木の同型は、葉から順に「子の部分木の名前の多重集合」に名前を付ける AHU 法か、多重集合のハッシュで判定する。根のない木は中心（1〜2 個）を根にして比べる。
+- [最小共通祖先（LCA）](https://yuukougun.github.io/kyopro-atlas/tree/lca/)（lca・青・tree・done）：根付き木で 2 頂点の共通の祖先のうち最も深いものを、各頂点の 2^k 個上の祖先の表（ダブリング）で、前処理 O(N log N)・1 回 O(log N) で求める。2 点間の距離・K 個上の祖先・パス上の最大値にそのまま使える。
+- [木の上のパスの判定と分解](https://yuukougun.github.io/kyopro-atlas/tree/tree-path/)（tree-path・青・tree・done）：パス u–v を「u から LCA へ上る」と「LCA から v へ下る」に分け、点がパス上にあるか・3 点の合流点・2 本のパスの交差・パス上の K 番目の頂点を、LCA と距離の式で判定する。
+- [根からのパスを DFS で持ち回る](https://yuukougun.github.io/kyopro-atlas/tree/root-path-dfs/)（root-path-dfs・青・tree・done）：DFS で頂点に入るときにデータ構造へ情報を足し、出るときに元に戻すと、常に根から今の頂点までのパスの情報だけを持てる。パス上の色の数・LIS・中央値などを全頂点について求められる。
+- [オイラーツアー](https://yuukougun.github.io/kyopro-atlas/tree/euler-tour/)（euler-tour・青・tree・done）：DFS の行きがけ順に番号 in[v] を振り、子孫を回り終えた時点の番号 out[v] を記録すると、v の部分木が列の区間 [in[v], out[v]) になる。部分木の和や加算が BIT・セグメント木の区間クエリになる。
+- [HL 分解](https://yuukougun.github.io/kyopro-atlas/tree/hld/)（hld・発展・tree・done）：各頂点で部分木が最大の子へ重い辺を引き、重いパスごとに番号が連続するように振ると、任意のパスが O(log N) 個の区間に分かれる。パスへの一括更新や逆元のない演算の集約を、セグメント木と組んで O(log^2 N) で処理できる。
+- [Static Top Tree と木 DP の動的更新](https://yuukougun.github.io/kyopro-atlas/tree/static-top-tree/)（static-top-tree・発展・tree・done）：頂点の値を書き換えるたびに、木 DP の根の値を O(log N) 程度で更新する。HL 分解の重いパスの上で DP をセグメント木に載せる方法と、木をパスの圧縮と部分木の併合で平衡に組み直す Static Top Tree がある。
+- [動的木](https://yuukougun.github.io/kyopro-atlas/tree/dynamic-tree/)（dynamic-tree・発展・tree・done）：辺の追加と削除がある森で、パスのクエリや根の付け替えを償却 O(log N) で処理する Link-Cut Tree と、部分木のクエリ向けの Euler Tour Tree、両方に使える Top Tree がある。
+- [マージテク](https://yuukougun.github.io/kyopro-atlas/tree/small-to-large/)（small-to-large・水・tree・done）：2 つの集合を併合するとき小さい方の要素を大きい方へ移すと、1 つの要素が移るのは高々 log N 回なので全体で O(N log N) になる。グループの併合と種類数の問い合わせや、部分木ごとの集計（DSU on Tree）に使う。
+- [重心分解](https://yuukougun.github.io/kyopro-atlas/tree/centroid-decomposition/)（centroid-decomposition・黄・tree・done）：重心を取り、重心を通るパスを一度に処理してから重心を消し、残った各成分で再帰する。成分の大きさが半分以下になるので深さは O(log N) で、距離がちょうど K のペアの数など、辺ごとに分けられない全ペアの量を数えられる。
+- [Auxiliary Tree](https://yuukougun.github.io/kyopro-atlas/tree/auxiliary-tree/)（auxiliary-tree・発展・tree・done）：色ごと・クエリごとに少数の頂点だけが関わる木の問題で、指定頂点と DFS 順で隣り合う 2 点の LCA だけからなる圧縮木を作って木 DP をする。関わる頂点数の合計が O(N) なら全体で O(N log N) になる。
+- [併合過程の木](https://yuukougun.github.io/kyopro-atlas/tree/merge-process-tree/)（merge-process-tree・発展・tree・done）：Union-Find の併合のたびに新しい頂点を作って 2 つの成分を子にした木を作ると、ある時点のグループが DFS 順の区間になる。辺を重みの順に併合すれば、2 点の LCA の重みが経路の最大の辺の最小値になる。
+- [比で親に併合する貪欲](https://yuukougun.github.io/kyopro-atlas/tree/tree-ratio-greedy/)（tree-ratio-greedy・発展・tree・done）：「親を子より先に選ぶ」制約つきで、順番に依存する重み付きの和を最適化する。比が最大の塊は親の塊の直後に訪れてよい（交換論法）ので、優先度付きキューと Union-Find で親の塊へ併合していく。
 
 ## データ構造
 
-- [STL コンテナの使い分け](https://yuukougun.github.io/kyopro-atlas/ds/stl-containers/)（stl-containers・基礎・ds・reviewed）：どの操作を速くしたいかで vector・deque・set・map・priority_queue・unordered_map を選ぶ。multiset の erase(x) は同じ値を全部消し、map の [] は要素を作る。
-- [set・multiset・map の応用](https://yuukougun.github.io/kyopro-atlas/ds/ordered-set/)（ordered-set・基礎・ds・reviewed）：set・multiset・map の lower_bound で「x 以上の最小」「x 未満の最大」を O(log N) で求め、要素の追加・削除と組み合わせる。番兵で端の場合分けを消し、mex や同じ行・列の次の要素も同じ形で求める。
-- [全体への操作を変数で持つ](https://yuukougun.github.io/kyopro-atlas/ds/global-offset/)（global-offset・基礎・ds・reviewed）：「全要素に x を足す」「全体を反転する」「全体を回転する」を、要素を書き換えずにオフセット・反転フラグ・先頭位置の変数で表す。入れるときに引き、取り出すときに足すのが基本になる。
-- [配列で作る連結リスト](https://yuukougun.github.io/kyopro-atlas/ds/linked-list/)（linked-list・基礎・ds・reviewed）：各要素の前と次を配列（値が大きければ map）で持つ双方向リストで、「x の直後に y を挿入」「x を削除」「列の付け替え」を O(1) で行い、最後に先頭からたどって列を出力する。
-- [優先度付きキュー](https://yuukougun.github.io/kyopro-atlas/ds/priority-queue/)（priority-queue・水・ds・reviewed）：最大（最小）の要素の取り出しと追加を O(log N) で行う。ソートと組む貪欲・上位 K 個の列挙・接頭辞の K 番目に使い、任意の要素の削除は削除予定のヒープで遅らせて行う。
-- [上位 K 個の和と中央値の管理](https://yuukougun.github.io/kyopro-atlas/ds/top-k-multiset/)（top-k-multiset・水・ds・reviewed）：追加・削除のたびに上位（下位）K 個の和や中央値を O(log N) で答える。小さい方の K 個と残りを 2 つの multiset（ヒープ）に分けて持ち、境界の 1 個を移して分け方を保つ。
-- [区間を set で管理する](https://yuukougun.github.io/kyopro-atlas/ds/interval-set/)（interval-set・水・ds・reviewed）：互いに重ならない区間を左端をキーにした set・map で持ち、点を含む区間の検索・区間の追加と併合・区間への代入を、ならし O(log N) で行う。座標が 10^9 でも使える。
-- [スタック・キュー・deque の使いどころ](https://yuukougun.github.io/kyopro-atlas/ds/stack-techniques/)（stack-techniques・基礎・ds・reviewed）：スタックで括弧の対応・直前との打ち消し・操作の取り消しを、deque で両端への追加を処理する。ランレングスを積む、円を切り開いて弦の交差判定に帰着する、などの型がある。
-- [単調スタックとスライド最小値](https://yuukougun.github.io/kyopro-atlas/ds/monotonic-stack/)（monotonic-stack・水・ds・reviewed）：各要素について「左（右）で初めて自分より大きい（小さい）要素」を、添字を単調に積んだスタックで全体 O(N) で求める。同じ考え方で幅 K の窓の最小値を deque で O(N) で求め、Cartesian tree も作れる。
-- [Union-Find](https://yuukougun.github.io/kyopro-atlas/ds/union-find/)（union-find・基礎・ds・reviewed）：要素を互いに素なグループに分けて持ち、2 つのグループの併合と「同じグループか」の判定を、union by size と経路圧縮でならし O(α(N)) で行う。グループの大きさや個数も数えられる。
-- [Union-Find の応用](https://yuukougun.github.io/kyopro-atlas/ds/union-find-applications/)（union-find-applications・水・ds・reviewed）：Union-Find の根に成分の情報（サイズ・辺数・上位 K 個・値ごとの個数）を持たせ、併合のときに合成する。辺を重みの順に足して組の数を数える型、区間の和を辺に言い換える型、次の空きへ飛ぶ型がある。
-- [重み付き Union-Find](https://yuukougun.github.io/kyopro-atlas/ds/weighted-union-find/)（weighted-union-find・水・ds・reviewed）：x_v − x_u = w の形の情報を順に受け取りながら、矛盾の判定と同じ成分の 2 要素の差の取得を行う。各要素に親との差を持たせた Union-Find で、差を XOR にすると 2 色の塗り分けになる。
-- [部分永続 Union-Find](https://yuukougun.github.io/kyopro-atlas/ds/partially-persistent-union-find/)（partially-persistent-union-find・発展・ds・reviewed）：過去の時刻 t の時点での連結判定や成分の大きさを答えられる Union-Find。経路圧縮をせず各頂点に根でなくなった時刻を記録し、時刻の二分探索で初めて連結になる時刻も求める。
-- [ロールバックできる Union-Find](https://yuukougun.github.io/kyopro-atlas/ds/rollback-union-find/)（rollback-union-find・発展・ds・reviewed）：直前の併合から順に取り消せる Union-Find。経路圧縮をせず、書き換えた場所と元の値をスタックに積み、木の DFS（入るとき併合・出るとき取り消し）やオフライン動的連結性の部品に使う。
-- [BIT（Fenwick Tree）](https://yuukougun.github.io/kyopro-atlas/ds/fenwick-tree/)（fenwick-tree・水・ds・reviewed）：一点への加算と接頭辞の和（したがって区間の和）を、どちらも O(log N) で行う。区間の和は 2 つの接頭辞の差なので演算に逆元が要り、値を添字にして個数を数える使い方が多い。
-- [転倒数](https://yuukougun.github.io/kyopro-atlas/ds/inversion-number/)（inversion-number・水・ds・reviewed）：列の転倒数（i < j かつ A_i > A_j の組の数）を、左から見て既に出た値のうち自分より大きいものの個数を BIT で足して O(N log N) で数える。隣接 swap でソートする最小回数に等しい。
-- [K 番目の値を求めるデータ構造](https://yuukougun.github.io/kyopro-atlas/ds/kth-element/)（kth-element・水・ds・reviewed）：値の追加・削除がある多重集合で、K 番目に小さい値や x 以下の個数を O(log N) で求める。値を添字にした個数の BIT の上で、2 べきの歩幅を大きい順に試して境界を探す。
-- [セグメント木](https://yuukougun.github.io/kyopro-atlas/ds/segment-tree/)（segment-tree・水・ds・reviewed）：結合律と単位元を持つ演算（モノイド）が載った列で、一点の更新と区間の総積（和・最小・最大・gcd など）の取得を、どちらも O(log N) で行う。演算は可換でなくてよい。
-- [セグメント木上の二分探索](https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-binary-search/)（segment-tree-binary-search・水・ds・reviewed）：左端 l を固定し、区間 [l, r) の総積が条件を満たす最大の r を、木を登って降りる手順で O(log N) で求める。l 以降で初めて x 以上になる位置・和が w を超えない最長の区間・K 番目の 1 に使う。
-- [値を添字にする BIT・セグメント木](https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-on-values/)（segment-tree-on-values・水・ds・reviewed）：値（必要なら座標圧縮した値）を添字にした BIT・セグメント木に個数や和を載せ、「x 以下の個数・和」「上位 K 個の和」を O(log N) で求める。DP の「その値で終わる最良」も値の添字で持てる。
-- [遅延セグメント木](https://yuukougun.github.io/kyopro-atlas/ds/lazy-segment-tree/)（lazy-segment-tree・水・ds・reviewed）：区間の全要素への加算・代入・アフィン変換と、区間の和・最小値などの取得を、どちらも O(log N) で行う。ACL の lazy_segtree に標準の型を渡して使い、区間の和には S に区間の長さを持たせる。
-- [セグメント木に何を載せるか](https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-monoids/)（segment-tree-monoids・青・ds・reviewed）：左右の子の情報だけから親の情報を作れるように、答えに要る情報を足してセグメント木に載せる。最小値とその個数、最大値と 2 番目、括弧列の (和, 最小接頭和)、ハッシュ、1 次関数の合成、行列などの型がある。
-- [遅延セグメント木の載せ方の型](https://yuukougun.github.io/kyopro-atlas/ds/lazy-segment-tree-patterns/)（lazy-segment-tree-patterns・青・ds・reviewed）：区間作用の問題で、遅延セグメント木に載せる S（値）と F（作用）・mapping・composition の組を型の表から選ぶ。0/1 列や X_i − i への言い換えで、そのままでは載らない問題を載る形に直す。
-- [Sparse Table](https://yuukougun.github.io/kyopro-atlas/ds/sparse-table/)（sparse-table・青・ds・reviewed）：更新のない列で、冪等な演算（min・max・gcd・and・or）の区間クエリに、前処理 O(N log N)・質問 O(1) で答える。長さ 2^k の区間の答えを持ち、質問は重なってよい 2 つの区間で覆う。
-- [Segment Tree Beats](https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-beats/)（segment-tree-beats・発展・ds・reviewed）：区間 chmin・chmax と区間和のように遅延セグメント木の条件を満たさない更新を、ならし計算量で処理する。効かないなら止める・最大値だけ変わるならタグ・それ以外は子へ、の 3 つに分ける。
-- [クエリの先読み](https://yuukougun.github.io/kyopro-atlas/ds/offline-queries/)（offline-queries・水・ds・reviewed）：クエリを入力の順に答えなくてよいとき、答えやすい順（右端の順・しきい値の順・時間の逆順）に並べ替えて処理し、最後に元の順に戻す。前の答えで次の入力が決まる問題には使えない。
-- [平面走査](https://yuukougun.github.io/kyopro-atlas/ds/sweep-line-2d/)（sweep-line-2d・青・ds・reviewed）：2 次元の問題を、一方の座標の順にイベント（点・区間の端・クエリ）を並べ、走査線を動かしながらもう一方の座標を BIT・セグメント木で持つ形にする。長方形内の点の数や固定幅の窓の最大を求める。
-- [Mo's algorithm](https://yuukougun.github.io/kyopro-atlas/ds/mo-algorithm/)（mo-algorithm・青・ds・reviewed）：更新のない列への区間クエリを並べ替え（l のブロックの順、次に r の順）、前の区間から 1 要素ずつ伸び縮みして答える。伸縮は合計 O(N√Q) 回で、区間の種類数のように左右を合成できない量に使う。
-- [平方分割](https://yuukougun.github.io/kyopro-atlas/ds/sqrt-decomposition/)（sqrt-decomposition・黄・ds・reviewed）：セグメント木に載らない区間操作や、合計だけが抑えられた量の処理を、√N を境に分けて O(N√N) 程度で行う。ブロックごとに集約とタグを持つ方法と、大きいものと小さいもので処理を変える方法がある。
-- [並列二分探索](https://yuukougun.github.io/kyopro-atlas/ds/parallel-binary-search/)（parallel-binary-search・発展・ds・reviewed）：多数のクエリがそれぞれ「単調な過程のどの時点で条件を満たすか」を二分探索するとき、全クエリの探索を同時に進める。各段で過程を最初から 1 回だけ流して判定し、段の数は O(log M) で済む。
-- [CDQ 分割統治](https://yuukougun.github.io/kyopro-atlas/ds/cdq-divide-and-conquer/)（cdq-divide-and-conquer・発展・ds・reviewed）：3 次元の支配点の数え上げや、点の追加つきの長方形クエリを、オフラインで O(N log^2 N) で解く。更新とクエリの列を時刻で半分に分け、左の更新が右のクエリに与える影響だけを BIT で処理する。
-- [永続データ構造](https://yuukougun.github.io/kyopro-atlas/ds/persistent-data-structures/)（persistent-data-structures・青・ds・reviewed）：過去の版を残したまま更新し、任意の版から続きの操作をする。末尾の追加・削除・保存・読み込みは版を木の頂点にして表し（版の木）、配列やセグメント木は更新した経路だけを作り直して古い版と共有する。
-- [マージソート木](https://yuukougun.github.io/kyopro-atlas/ds/merge-sort-tree/)（merge-sort-tree・青・ds・reviewed）：区間内の x 以下の要素の個数・和を、オンラインで O(log^2 N) で答える静的な構造。セグメント木の各ノードにその区間をソートした列と累積和を持ち、メモリは O(N log N)。
-- [Wavelet Matrix](https://yuukougun.github.io/kyopro-atlas/ds/wavelet-matrix/)（wavelet-matrix・発展・ds・reviewed）：区間の K 番目の値・x 未満の個数・和を、オンラインで O(log σ) で答える静的な構造。値を上位 bit から順に安定に 0/1 で振り分けた段を重ね、各段で 0 の個数の累積を持つ。
-- [Binary Trie](https://yuukougun.github.io/kyopro-atlas/ds/binary-trie/)（binary-trie・青・ds・reviewed）：整数を 2 進数の上位 bit から Trie に入れ、各ノードに部分木の個数を持たせる。x との XOR の最小・最大、K 番目に小さい値、全体に XOR をかける操作を O(ビット数) で処理する。
-- [平衡二分探索木と pb_ds の tree](https://yuukougun.github.io/kyopro-atlas/ds/balanced-bst/)（balanced-bst・発展・ds・reviewed）：位置で指定した挿入・削除・区間の反転・区間の総積を、期待 O(log N) で処理する列の構造。treap などで split・merge を基本操作にし、K 番目と順位だけなら GCC の pb_ds の tree で足りる。
-- [見慣れないデータ構造の名前と用途](https://yuukougun.github.io/kyopro-atlas/ds/advanced-ds-catalog/)（advanced-ds-catalog・—・ds・reviewed）：解説に見慣れない名前のデータ構造が出てきたときに、何ができるかと代わりになる手を 1 行ずつ引く。セグ木のマージ・2 次元セグ木・K-D tree・併合可能なヒープ・Fast Set・析合木などを並べる。
+- [STL コンテナの使い分け](https://yuukougun.github.io/kyopro-atlas/ds/stl-containers/)（stl-containers・基礎・ds・done）：どの操作を速くしたいかで vector・deque・set・map・priority_queue・unordered_map を選ぶ。multiset の erase(x) は同じ値を全部消し、map の [] は要素を作る。
+- [set・multiset・map の応用](https://yuukougun.github.io/kyopro-atlas/ds/ordered-set/)（ordered-set・基礎・ds・done）：set・multiset・map の lower_bound で「x 以上の最小」「x 未満の最大」を O(log N) で求め、要素の追加・削除と組み合わせる。番兵で端の場合分けを消し、mex や同じ行・列の次の要素も同じ形で求める。
+- [全体への操作を変数で持つ](https://yuukougun.github.io/kyopro-atlas/ds/global-offset/)（global-offset・基礎・ds・done）：「全要素に x を足す」「全体を反転する」「全体を回転する」を、要素を書き換えずにオフセット・反転フラグ・先頭位置の変数で表す。入れるときに引き、取り出すときに足すのが基本になる。
+- [配列で作る連結リスト](https://yuukougun.github.io/kyopro-atlas/ds/linked-list/)（linked-list・基礎・ds・done）：各要素の前と次を配列（値が大きければ map）で持つ双方向リストで、「x の直後に y を挿入」「x を削除」「列の付け替え」を O(1) で行い、最後に先頭からたどって列を出力する。
+- [優先度付きキュー](https://yuukougun.github.io/kyopro-atlas/ds/priority-queue/)（priority-queue・水・ds・done）：最大（最小）の要素の取り出しと追加を O(log N) で行う。ソートと組む貪欲・上位 K 個の列挙・接頭辞の K 番目に使い、任意の要素の削除は削除予定のヒープで遅らせて行う。
+- [上位 K 個の和と中央値の管理](https://yuukougun.github.io/kyopro-atlas/ds/top-k-multiset/)（top-k-multiset・水・ds・done）：追加・削除のたびに上位（下位）K 個の和や中央値を O(log N) で答える。小さい方の K 個と残りを 2 つの multiset（ヒープ）に分けて持ち、境界の 1 個を移して分け方を保つ。
+- [区間を set で管理する](https://yuukougun.github.io/kyopro-atlas/ds/interval-set/)（interval-set・水・ds・done）：互いに重ならない区間を左端をキーにした set・map で持ち、点を含む区間の検索・区間の追加と併合・区間への代入を、ならし O(log N) で行う。座標が 10^9 でも使える。
+- [スタック・キュー・deque の使いどころ](https://yuukougun.github.io/kyopro-atlas/ds/stack-techniques/)（stack-techniques・基礎・ds・done）：スタックで括弧の対応・直前との打ち消し・操作の取り消しを、deque で両端への追加を処理する。ランレングスを積む、円を切り開いて弦の交差判定に帰着する、などの型がある。
+- [単調スタックとスライド最小値](https://yuukougun.github.io/kyopro-atlas/ds/monotonic-stack/)（monotonic-stack・水・ds・done）：各要素について「左（右）で初めて自分より大きい（小さい）要素」を、添字を単調に積んだスタックで全体 O(N) で求める。同じ考え方で幅 K の窓の最小値を deque で O(N) で求め、Cartesian tree も作れる。
+- [Union-Find](https://yuukougun.github.io/kyopro-atlas/ds/union-find/)（union-find・基礎・ds・done）：要素を互いに素なグループに分けて持ち、2 つのグループの併合と「同じグループか」の判定を、union by size と経路圧縮でならし O(α(N)) で行う。グループの大きさや個数も数えられる。
+- [Union-Find の応用](https://yuukougun.github.io/kyopro-atlas/ds/union-find-applications/)（union-find-applications・水・ds・done）：Union-Find の根に成分の情報（サイズ・辺数・上位 K 個・値ごとの個数）を持たせ、併合のときに合成する。辺を重みの順に足して組の数を数える型、区間の和を辺に言い換える型、次の空きへ飛ぶ型がある。
+- [重み付き Union-Find](https://yuukougun.github.io/kyopro-atlas/ds/weighted-union-find/)（weighted-union-find・水・ds・done）：x_v − x_u = w の形の情報を順に受け取りながら、矛盾の判定と同じ成分の 2 要素の差の取得を行う。各要素に親との差を持たせた Union-Find で、差を XOR にすると 2 色の塗り分けになる。
+- [部分永続 Union-Find](https://yuukougun.github.io/kyopro-atlas/ds/partially-persistent-union-find/)（partially-persistent-union-find・発展・ds・done）：過去の時刻 t の時点での連結判定や成分の大きさを答えられる Union-Find。経路圧縮をせず各頂点に根でなくなった時刻を記録し、時刻の二分探索で初めて連結になる時刻も求める。
+- [ロールバックできる Union-Find](https://yuukougun.github.io/kyopro-atlas/ds/rollback-union-find/)（rollback-union-find・発展・ds・done）：直前の併合から順に取り消せる Union-Find。経路圧縮をせず、書き換えた場所と元の値をスタックに積み、木の DFS（入るとき併合・出るとき取り消し）やオフライン動的連結性の部品に使う。
+- [BIT（Fenwick Tree）](https://yuukougun.github.io/kyopro-atlas/ds/fenwick-tree/)（fenwick-tree・水・ds・done）：一点への加算と接頭辞の和（したがって区間の和）を、どちらも O(log N) で行う。区間の和は 2 つの接頭辞の差なので演算に逆元が要り、値を添字にして個数を数える使い方が多い。
+- [転倒数](https://yuukougun.github.io/kyopro-atlas/ds/inversion-number/)（inversion-number・水・ds・done）：列の転倒数（i < j かつ A_i > A_j の組の数）を、左から見て既に出た値のうち自分より大きいものの個数を BIT で足して O(N log N) で数える。隣接 swap でソートする最小回数に等しい。
+- [K 番目の値を求めるデータ構造](https://yuukougun.github.io/kyopro-atlas/ds/kth-element/)（kth-element・水・ds・done）：値の追加・削除がある多重集合で、K 番目に小さい値や x 以下の個数を O(log N) で求める。値を添字にした個数の BIT の上で、2 べきの歩幅を大きい順に試して境界を探す。
+- [セグメント木](https://yuukougun.github.io/kyopro-atlas/ds/segment-tree/)（segment-tree・水・ds・done）：結合律と単位元を持つ演算（モノイド）が載った列で、一点の更新と区間の総積（和・最小・最大・gcd など）の取得を、どちらも O(log N) で行う。演算は可換でなくてよい。
+- [セグメント木上の二分探索](https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-binary-search/)（segment-tree-binary-search・水・ds・done）：左端 l を固定し、区間 [l, r) の総積が条件を満たす最大の r を、木を登って降りる手順で O(log N) で求める。l 以降で初めて x 以上になる位置・和が w を超えない最長の区間・K 番目の 1 に使う。
+- [値を添字にする BIT・セグメント木](https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-on-values/)（segment-tree-on-values・水・ds・done）：値（必要なら座標圧縮した値）を添字にした BIT・セグメント木に個数や和を載せ、「x 以下の個数・和」「上位 K 個の和」を O(log N) で求める。DP の「その値で終わる最良」も値の添字で持てる。
+- [遅延セグメント木](https://yuukougun.github.io/kyopro-atlas/ds/lazy-segment-tree/)（lazy-segment-tree・水・ds・done）：区間の全要素への加算・代入・アフィン変換と、区間の和・最小値などの取得を、どちらも O(log N) で行う。ACL の lazy_segtree に標準の型を渡して使い、区間の和には S に区間の長さを持たせる。
+- [セグメント木に何を載せるか](https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-monoids/)（segment-tree-monoids・青・ds・done）：左右の子の情報だけから親の情報を作れるように、答えに要る情報を足してセグメント木に載せる。最小値とその個数、最大値と 2 番目、括弧列の (和, 最小接頭和)、ハッシュ、1 次関数の合成、行列などの型がある。
+- [遅延セグメント木の載せ方の型](https://yuukougun.github.io/kyopro-atlas/ds/lazy-segment-tree-patterns/)（lazy-segment-tree-patterns・青・ds・done）：区間作用の問題で、遅延セグメント木に載せる S（値）と F（作用）・mapping・composition の組を型の表から選ぶ。0/1 列や X_i − i への言い換えで、そのままでは載らない問題を載る形に直す。
+- [Sparse Table](https://yuukougun.github.io/kyopro-atlas/ds/sparse-table/)（sparse-table・青・ds・done）：更新のない列で、冪等な演算（min・max・gcd・and・or）の区間クエリに、前処理 O(N log N)・質問 O(1) で答える。長さ 2^k の区間の答えを持ち、質問は重なってよい 2 つの区間で覆う。
+- [Segment Tree Beats](https://yuukougun.github.io/kyopro-atlas/ds/segment-tree-beats/)（segment-tree-beats・発展・ds・done）：区間 chmin・chmax と区間和のように遅延セグメント木の条件を満たさない更新を、ならし計算量で処理する。効かないなら止める・最大値だけ変わるならタグ・それ以外は子へ、の 3 つに分ける。
+- [クエリの先読み](https://yuukougun.github.io/kyopro-atlas/ds/offline-queries/)（offline-queries・水・ds・done）：クエリを入力の順に答えなくてよいとき、答えやすい順（右端の順・しきい値の順・時間の逆順）に並べ替えて処理し、最後に元の順に戻す。前の答えで次の入力が決まる問題には使えない。
+- [平面走査](https://yuukougun.github.io/kyopro-atlas/ds/sweep-line-2d/)（sweep-line-2d・青・ds・done）：2 次元の問題を、一方の座標の順にイベント（点・区間の端・クエリ）を並べ、走査線を動かしながらもう一方の座標を BIT・セグメント木で持つ形にする。長方形内の点の数や固定幅の窓の最大を求める。
+- [Mo's algorithm](https://yuukougun.github.io/kyopro-atlas/ds/mo-algorithm/)（mo-algorithm・青・ds・done）：更新のない列への区間クエリを並べ替え（l のブロックの順、次に r の順）、前の区間から 1 要素ずつ伸び縮みして答える。伸縮は合計 O(N√Q) 回で、区間の種類数のように左右を合成できない量に使う。
+- [平方分割](https://yuukougun.github.io/kyopro-atlas/ds/sqrt-decomposition/)（sqrt-decomposition・黄・ds・done）：セグメント木に載らない区間操作や、合計だけが抑えられた量の処理を、√N を境に分けて O(N√N) 程度で行う。ブロックごとに集約とタグを持つ方法と、大きいものと小さいもので処理を変える方法がある。
+- [並列二分探索](https://yuukougun.github.io/kyopro-atlas/ds/parallel-binary-search/)（parallel-binary-search・発展・ds・done）：多数のクエリがそれぞれ「単調な過程のどの時点で条件を満たすか」を二分探索するとき、全クエリの探索を同時に進める。各段で過程を最初から 1 回だけ流して判定し、段の数は O(log M) で済む。
+- [CDQ 分割統治](https://yuukougun.github.io/kyopro-atlas/ds/cdq-divide-and-conquer/)（cdq-divide-and-conquer・発展・ds・done）：3 次元の支配点の数え上げや、点の追加つきの長方形クエリを、オフラインで O(N log^2 N) で解く。更新とクエリの列を時刻で半分に分け、左の更新が右のクエリに与える影響だけを BIT で処理する。
+- [永続データ構造](https://yuukougun.github.io/kyopro-atlas/ds/persistent-data-structures/)（persistent-data-structures・青・ds・done）：過去の版を残したまま更新し、任意の版から続きの操作をする。末尾の追加・削除・保存・読み込みは版を木の頂点にして表し（版の木）、配列やセグメント木は更新した経路だけを作り直して古い版と共有する。
+- [マージソート木](https://yuukougun.github.io/kyopro-atlas/ds/merge-sort-tree/)（merge-sort-tree・青・ds・done）：区間内の x 以下の要素の個数・和を、オンラインで O(log^2 N) で答える静的な構造。セグメント木の各ノードにその区間をソートした列と累積和を持ち、メモリは O(N log N)。
+- [Wavelet Matrix](https://yuukougun.github.io/kyopro-atlas/ds/wavelet-matrix/)（wavelet-matrix・発展・ds・done）：区間の K 番目の値・x 未満の個数・和を、オンラインで O(log σ) で答える静的な構造。値を上位 bit から順に安定に 0/1 で振り分けた段を重ね、各段で 0 の個数の累積を持つ。
+- [Binary Trie](https://yuukougun.github.io/kyopro-atlas/ds/binary-trie/)（binary-trie・青・ds・done）：整数を 2 進数の上位 bit から Trie に入れ、各ノードに部分木の個数を持たせる。x との XOR の最小・最大、K 番目に小さい値、全体に XOR をかける操作を O(ビット数) で処理する。
+- [平衡二分探索木と pb_ds の tree](https://yuukougun.github.io/kyopro-atlas/ds/balanced-bst/)（balanced-bst・発展・ds・done）：位置で指定した挿入・削除・区間の反転・区間の総積を、期待 O(log N) で処理する列の構造。treap などで split・merge を基本操作にし、K 番目と順位だけなら GCC の pb_ds の tree で足りる。
+- [見慣れないデータ構造の名前と用途](https://yuukougun.github.io/kyopro-atlas/ds/advanced-ds-catalog/)（advanced-ds-catalog・—・ds・done）：解説に見慣れない名前のデータ構造が出てきたときに、何ができるかと代わりになる手を 1 行ずつ引く。セグ木のマージ・2 次元セグ木・K-D tree・併合可能なヒープ・Fast Set・析合木などを並べる。
 
 ## 整数論・代数
 
-- [Σ の変形](https://yuukougun.github.io/kyopro-atlas/math/sigma-manipulation/)（sigma-manipulation・基礎・math・reviewed）：二重和の順序交換・添字の範囲の書き換え・付け替え・線形性で、Σ の式を計算しやすい形に変える。同じ和を別の順で計算して計算量を下げる式変形の土台になる。
-- [整数の割り算と余り](https://yuukougun.github.io/kyopro-atlas/math/integer-division/)（integer-division・基礎・math・reviewed）：負の数を含む割り算・余り・切り上げや区間の倍数の個数を、C++ の / と % の切り捨ての向きに注意して正しく求める。積があふれるかどうかも、掛ける前に割り算で判定する。
-- [mod の計算の基本](https://yuukougun.github.io/kyopro-atlas/math/mod-arithmetic/)（mod-arithmetic・基礎・math・reviewed）：答えを m で割った余りで求めるとき、足し算・引き算・掛け算は途中で何度余りを取ってもよい。割り算と大小比較はそのままではできず、負の数とあふれにも注意が要る。
-- [繰り返し二乗法](https://yuukougun.github.io/kyopro-atlas/math/mod-pow/)（mod-pow・基礎・math・reviewed）：a^n mod m を、n の2進表記に沿って a, a², a⁴, … を掛け合わせて O(log n) で求める。結合法則を満たす演算（行列・写像の合成など）なら同じ方法で累乗できる。
-- [逆元と mod での割り算](https://yuukougun.github.io/kyopro-atlas/math/mod-inverse/)（mod-inverse・基礎・math・reviewed）：a·x ≡ 1 (mod m) となる逆元 x を求め、mod での割り算を掛け算に直す。素数 mod ならフェルマーの小定理で a^(m−2)、一般の法では拡張ユークリッドで求める。
-- [modint](https://yuukougun.github.io/kyopro-atlas/math/modint/)（modint・基礎・math・reviewed）：四則演算のたびに自動で余りを取る型で、mod 付きの数え上げを素直に書ける。法が固定なら static_modint、入力で決まるなら dynamic_modint を使い、値は val() で取り出す。
-- [等比数列の和を mod で求める](https://yuukougun.github.io/kyopro-atlas/math/geometric-series-mod/)（geometric-series-mod・基礎・math・reviewed）：1 + r + … + r^(n−1) を mod で求める。素数 mod で r ≢ 1 なら (r^n − 1)/(r − 1)、法が任意なら和を半分に割る漸化式か行列の累乗で O(log n) にする。
-- [フェルマーの小定理と指数の mod](https://yuukougun.github.io/kyopro-atlas/math/exponent-mod/)（exponent-mod・水・math・reviewed）：a^(K^N) のように指数が巨大な累乗の mod を、gcd(a, p) = 1 なら指数を p − 1 で割った余りに直して求める。一般の法ではオイラーの定理を使い、底が法の倍数になる場合を分ける。
-- [桁と mod](https://yuukougun.github.io/kyopro-atlas/math/digit-and-mod/)（digit-and-mod・水・math・reviewed）：10 進数の桁を mod で考えて、倍数判定・数の連結 x·10^d + y・部分文字列が P の倍数になる個数を求める。部分文字列は接尾辞の余りが等しい組を数え、P が 2・5 のときは場合を分ける。
-- [約数列挙と素数判定](https://yuukougun.github.io/kyopro-atlas/math/divisor-enum/)（divisor-enum・基礎・math・reviewed）：d と N/d が √N を境に対になることを使い、素数判定と約数の列挙を O(√N) で行う。答えの候補が N の約数に限られる問題で、約数を全部試す全探索に使う。
-- [素因数分解とルジャンドルの公式](https://yuukougun.github.io/kyopro-atlas/math/prime-factorization/)（prime-factorization・基礎・math・reviewed）：√N までの数で割れるだけ割り、残りが 1 より大きければそれも素数として、N = Π p^e を O(√N) で求める。N! の素因数 p の指数はルジャンドルの公式 Σ ⌊N/p^k⌋ で直接求める。
-- [エラトステネスの篩](https://yuukougun.github.io/kyopro-atlas/math/sieve-eratosthenes/)（sieve-eratosthenes・基礎・math・reviewed）：N 以下の素数を、小さい素数の倍数を順に消して O(N log log N) で列挙する。区間にある素数の個数を何度も答えるなら、篩の結果を累積和にする。
-- [最小素因数の篩と線形篩](https://yuukougun.github.io/kyopro-atlas/math/spf-sieve/)（spf-sieve・基礎・math・reviewed）：篩のついでに各数の最小素因数を記録し、それで割り続けて O(log n) で素因数分解する。10^6〜10^7 以下の多数の数を、それぞれ素因数分解するときに使う。
-- [素因数の指数で考える](https://yuukougun.github.io/kyopro-atlas/math/prime-exponent-vector/)（prime-exponent-vector・基礎・math・reviewed）：積が平方数になる組・巨大な lcm・割り切れる回数などを、整数を素数ごとの指数のベクトルとみて素数ごとに独立に考える。積は和、gcd は min、lcm は max、平方数は全成分が偶数になる。
-- [調和級数と倍数の列挙](https://yuukougun.github.io/kyopro-atlas/math/harmonic-sum/)（harmonic-sum・水・math・reviewed）：割り切る・割り切られる関係にある組を値ごとに数えるとき、各 d の倍数をすべてたどる二重ループが、値の上限 M に対して合計 M/1 + … + M/M ≈ M ln M 回で済むことを使う。M が 10^6 程度なら間に合う。
-- [約数の個数の上界と高度合成数](https://yuukougun.github.io/kyopro-atlas/math/divisor-count-bound/)（divisor-count-bound・水・math・reviewed）：約数（の組）を全部試す全探索が間に合うかを、約数の個数の上界（10^9 以下で 1344、10^18 以下で 103680）から見積もる。約数の多い数は、小さい素数の指数が減っていく形に限って列挙する。
-- [区間篩](https://yuukougun.github.io/kyopro-atlas/math/segmented-sieve/)（segmented-sieve・水・math・reviewed）：L が 10^12 と大きくても R − L が 10^6 程度なら、√R までの素数で区間 [L, R] だけを篩える。区間の各数の素数判定や素因数分解を O((R−L) log log R + √R log log R) で行う。
-- [オイラーの φ 関数](https://yuukougun.github.io/kyopro-atlas/math/euler-phi/)（euler-phi・黄・math・reviewed）：1..n で n と互いに素な数の個数 φ(n) を、素因数分解から φ(n) = n Π(1 − 1/p) で求める。オイラーの定理 a^φ(n) ≡ 1 を通じて、位数や指数の mod の計算に使う。
-- [大きな数の素数判定と素因数分解](https://yuukougun.github.io/kyopro-atlas/math/miller-rabin/)（miller-rabin・発展・math・reviewed）：10^18 程度の数の素数判定を Miller-Rabin で、素因数分解を Pollard's rho で期待 O(N^(1/4)) で行う。64bit の法の掛け算には __int128 か Montgomery 乗算を使う。
-- [GCD・LCM とユークリッドの互除法](https://yuukougun.github.io/kyopro-atlas/math/gcd-lcm/)（gcd-lcm・基礎・math・reviewed）：gcd(a, b) = gcd(b, a mod b) を繰り返して最大公約数を O(log min(a, b)) で求め、lcm は a / gcd × b で求める。1 つ除いた gcd を累積 gcd で求め、分数を既約にして比べる。
-- [整数の証明の型](https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/)（proof-patterns・基礎・math・reviewed）：実験で見つけた整数の規則が正しいかを、定番の筋道で確かめる。操作で gcd が変わらない、a, 2a, … が余りを並べ替える、余りの鳩の巣、mod での矛盾などを使う。
-- [拡張ユークリッドの互除法と一次合同式](https://yuukougun.github.io/kyopro-atlas/math/ext-gcd/)（ext-gcd・水・math・reviewed）：互除法の途中経過から ax + by = gcd(a, b) の整数解を求める。ax + by = c は gcd | c のときだけ解をもち、一次合同式 ax ≡ b (mod m) や法が素数でないときの逆元もこれで解く。
-- [GCD の性質](https://yuukougun.github.io/kyopro-atlas/math/gcd-properties/)（gcd-properties・青・math・reviewed）：全体に同じ数を足したときの gcd を隣接差の gcd に直し、左端を固定した区間 gcd が O(log A) 種類しかないことで区間 gcd を速く求める。mod N で A ずつ進むと gcd(A, N) の倍数だけを回ることも使う。
-- [中国剰余定理](https://yuukougun.github.io/kyopro-atlas/math/crt/)（crt・青・math・reviewed）：複数の合同式 x ≡ r_i (mod m_i) を同時に満たす x を、拡張ユークリッドで2式ずつ合わせて mod lcm でただ1つに求める。解があるのは r1 ≡ r2 (mod gcd(m1, m2)) のときだけである。
-- [位数・原始根・離散対数](https://yuukougun.github.io/kyopro-atlas/math/multiplicative-order/)（multiplicative-order・黄・math・reviewed）：a^k ≡ 1 となる最小の k（位数）を φ(m) の約数から求め、原始根で掛け算を指数の足し算に直す。a^x ≡ b を満たす x（離散対数）は Baby-step Giant-step で O(√m) で求める。
-- [整数の平方根・K 乗根と累乗数](https://yuukougun.github.io/kyopro-atlas/math/integer-root/)（integer-root・基礎・math・reviewed）：⌊√N⌋ を double の sqrt で求めると 10^18 付近で ±1 ずれるので、r² ≤ N < (r+1)² になるまで整数で補正するか二分探索で求める。a^b ≤ N となる a の上限や、累乗数を重複なく数えるのに使う。
-- [N 進法](https://yuukougun.github.io/kyopro-atlas/math/base-conversion/)（base-conversion・基礎・math・reviewed）：N を b で割った余りを並べて b 進表記にし、Horner 法で数に戻す。負の基数（−2 進）や 0 を使わない 26 進（a..z, aa..）、基数を変数とみた二分探索といった変形にも使う。
-- [商の列挙](https://yuukougun.github.io/kyopro-atlas/math/floor-quotient-enum/)（floor-quotient-enum・水・math・reviewed）：i = 1..N の f(⌊N/i⌋) の和を、⌊N/i⌋ の値が高々 2√N 種類で同じ値の i が区間をなすことを使って O(√N) で求める。√N を境に「i が小さい側」と「商が小さい側」に分けて考える型にも使う。
-- [乗法的関数の和と素数の個数](https://yuukougun.github.io/kyopro-atlas/math/multiplicative-function/)（multiplicative-function・発展・math・reviewed）：N ≤ 10^10 程度で、φ・μ などの乗法的関数の和（n ≤ N の f(n) の和）や N 以下の素数の個数を、商の列挙を使って O(N^(3/4)/log N) などで求める。関数どうしの関係はディリクレ積で表す。
-- [floor sum](https://yuukougun.github.io/kyopro-atlas/math/floor-sum/)（floor-sum・黄・math・reviewed）：i = 0..n−1 の ⌊(ai + b)/m⌋ の和を、互除法と同じ形の再帰で O(log m) で求める。(ai + b) mod m の和や、1 次式の条件を満たす個数もこれに帰着できる。
-- [Stern-Brocot 木と連分数](https://yuukougun.github.io/kyopro-atlas/math/stern-brocot/)（stern-brocot・発展・math・reviewed）：分母・分子が N 以下で実数に最も近い分数などを、既約分数をすべて 1 回ずつ含む二分木を降りて O(log N) 段で求める。同じ方向への移動を一度に進めるのが連分数にあたる。
-- [行列累乗](https://yuukougun.github.io/kyopro-atlas/math/matrix-power/)（matrix-power・青・math・reviewed）：状態が毎回同じ線形の遷移 v' = Av で変わるとき、K 回後の A^K v を行列の繰り返し二乗法で O(n³ log K) で求める。DP の遷移や、足し算と掛け算を min と + に替えた行列にも使える。
-- [掃き出し法](https://yuukougun.github.io/kyopro-atlas/math/gaussian-elimination/)（gaussian-elimination・青・math・reviewed）：行基本変形で行列を階段形にし、連立一次方程式の解なし・一意・無数を判定してランクを O(n³) で求める。mod 2 では XOR で消去して bitset で速くでき、解の個数は 2^(変数の数 − ランク) になる。
-- [XOR 基底](https://yuukougun.github.io/kyopro-atlas/math/xor-basis/)（xor-basis・黄・math・reviewed）：整数の集合から XOR で作れる値の全体を、最上位 bit が互いに異なる r 個の基底で表す。作れる値は 2^r 種類で、最大値は上の bit から貪欲に、K 番目に小さい値は簡約した基底から求まる。
-- [行列式](https://yuukougun.github.io/kyopro-atlas/math/determinant/)（determinant・発展・math・reviewed）：掃き出し法で上三角にし、対角成分の積に行の交換の回数だけ符号を掛けて行列式を O(n³) で求める。全域木の数を数える行列木定理の部品になる。
-- [畳み込みの使い方](https://yuukougun.github.io/kyopro-atlas/math/convolution-ntt/)（convolution-ntt・青・math・reviewed）：i + j = k となる a_i b_j の和 c_k（多項式の積）を ACL の convolution で O(N log N) で求める。和が k になる組の数や、ずらしたときの一致数をすべての k について一度に数える。
-- [FFT・NTT の仕組みと任意 mod の畳み込み](https://yuukougun.github.io/kyopro-atlas/math/fft-ntt/)（fft-ntt・発展・math・reviewed）：畳み込みを自作するときや任意 mod で求めるときに、多項式を 1 の N 乗根での値に変えて各点の積にし、分割統治で O(N log N) で変換する。任意 mod は 3 つの素数で計算して CRT で戻す。
-- [XOR 畳み込み](https://yuukougun.github.io/kyopro-atlas/math/hadamard-transform/)（hadamard-transform・発展・math・reviewed）：i XOR j = k となる a_i b_j の和 c_k を、アダマール変換で各点の積に直して O(N log N) で求める。添字の演算（和・XOR・AND/OR・gcd/lcm）ごとに使う変換が変わる。
-- [分割統治 FFT・オンライン畳み込み](https://yuukougun.github.io/kyopro-atlas/math/online-convolution/)（online-convolution・発展・math・reviewed）：多数の多項式の積を次数の小さいものから2つずつ掛けて O(N log² N) で求める。dp[i] が dp[0..i−1] と既知の列の畳み込みで決まるときは、左半分を確定させてから右半分へ寄与を足す分割統治で求める。
-- [形式的冪級数と多項式の演算](https://yuukougun.github.io/kyopro-atlas/math/fps-basics/)（fps-basics・発展・math・reviewed）：数列を冪級数とみて、逆元 1/f・log・exp・累乗を O(N log N) で計算し、多項式の割り算・Taylor shift・多点評価も行う。数え上げの式を多項式で立てた後の計算を受け持つ。
-- [線形漸化式の高速化](https://yuukougun.github.io/kyopro-atlas/math/linear-recurrence-fast/)（linear-recurrence-fast・発展・math・reviewed）：K 項の線形漸化式の第 N 項を、行列累乗より速くきたまさ法 O(K² log N) や Bostan-Mori O(K log K log N) で求める。最初の 2K 項から漸化式を見つける Berlekamp-Massey も使う。
-- [ラグランジュ補間とべき乗和](https://yuukougun.github.io/kyopro-atlas/math/lagrange-interpolation/)（lagrange-interpolation・発展・math・reviewed）：d 次多項式は d + 1 点の値で決まるので、x = 0..d での値から任意の x での値を階乗の逆元を使って O(d) で求める。べき乗和 Σ i^k や、答えが N の多項式になる DP を小さい N で計算して補間するのに使う。
+- [Σ の変形](https://yuukougun.github.io/kyopro-atlas/math/sigma-manipulation/)（sigma-manipulation・基礎・math・done）：二重和の順序交換・添字の範囲の書き換え・付け替え・線形性で、Σ の式を計算しやすい形に変える。同じ和を別の順で計算して計算量を下げる式変形の土台になる。
+- [整数の割り算と余り](https://yuukougun.github.io/kyopro-atlas/math/integer-division/)（integer-division・基礎・math・done）：負の数を含む割り算・余り・切り上げや区間の倍数の個数を、C++ の / と % の切り捨ての向きに注意して正しく求める。積があふれるかどうかも、掛ける前に割り算で判定する。
+- [mod の計算の基本](https://yuukougun.github.io/kyopro-atlas/math/mod-arithmetic/)（mod-arithmetic・基礎・math・done）：答えを m で割った余りで求めるとき、足し算・引き算・掛け算は途中で何度余りを取ってもよい。割り算と大小比較はそのままではできず、負の数とあふれにも注意が要る。
+- [繰り返し二乗法](https://yuukougun.github.io/kyopro-atlas/math/mod-pow/)（mod-pow・基礎・math・done）：a^n mod m を、n の2進表記に沿って a, a², a⁴, … を掛け合わせて O(log n) で求める。結合法則を満たす演算（行列・写像の合成など）なら同じ方法で累乗できる。
+- [逆元と mod での割り算](https://yuukougun.github.io/kyopro-atlas/math/mod-inverse/)（mod-inverse・基礎・math・done）：a·x ≡ 1 (mod m) となる逆元 x を求め、mod での割り算を掛け算に直す。素数 mod ならフェルマーの小定理で a^(m−2)、一般の法では拡張ユークリッドで求める。
+- [modint](https://yuukougun.github.io/kyopro-atlas/math/modint/)（modint・基礎・math・done）：四則演算のたびに自動で余りを取る型で、mod 付きの数え上げを素直に書ける。法が固定なら static_modint、入力で決まるなら dynamic_modint を使い、値は val() で取り出す。
+- [等比数列の和を mod で求める](https://yuukougun.github.io/kyopro-atlas/math/geometric-series-mod/)（geometric-series-mod・基礎・math・done）：1 + r + … + r^(n−1) を mod で求める。素数 mod で r ≢ 1 なら (r^n − 1)/(r − 1)、法が任意なら和を半分に割る漸化式か行列の累乗で O(log n) にする。
+- [フェルマーの小定理と指数の mod](https://yuukougun.github.io/kyopro-atlas/math/exponent-mod/)（exponent-mod・水・math・done）：a^(K^N) のように指数が巨大な累乗の mod を、gcd(a, p) = 1 なら指数を p − 1 で割った余りに直して求める。一般の法ではオイラーの定理を使い、底が法の倍数になる場合を分ける。
+- [桁と mod](https://yuukougun.github.io/kyopro-atlas/math/digit-and-mod/)（digit-and-mod・水・math・done）：10 進数の桁を mod で考えて、倍数判定・数の連結 x·10^d + y・部分文字列が P の倍数になる個数を求める。部分文字列は接尾辞の余りが等しい組を数え、P が 2・5 のときは場合を分ける。
+- [約数列挙と素数判定](https://yuukougun.github.io/kyopro-atlas/math/divisor-enum/)（divisor-enum・基礎・math・done）：d と N/d が √N を境に対になることを使い、素数判定と約数の列挙を O(√N) で行う。答えの候補が N の約数に限られる問題で、約数を全部試す全探索に使う。
+- [素因数分解とルジャンドルの公式](https://yuukougun.github.io/kyopro-atlas/math/prime-factorization/)（prime-factorization・基礎・math・done）：√N までの数で割れるだけ割り、残りが 1 より大きければそれも素数として、N = Π p^e を O(√N) で求める。N! の素因数 p の指数はルジャンドルの公式 Σ ⌊N/p^k⌋ で直接求める。
+- [エラトステネスの篩](https://yuukougun.github.io/kyopro-atlas/math/sieve-eratosthenes/)（sieve-eratosthenes・基礎・math・done）：N 以下の素数を、小さい素数の倍数を順に消して O(N log log N) で列挙する。区間にある素数の個数を何度も答えるなら、篩の結果を累積和にする。
+- [最小素因数の篩と線形篩](https://yuukougun.github.io/kyopro-atlas/math/spf-sieve/)（spf-sieve・基礎・math・done）：篩のついでに各数の最小素因数を記録し、それで割り続けて O(log n) で素因数分解する。10^6〜10^7 以下の多数の数を、それぞれ素因数分解するときに使う。
+- [素因数の指数で考える](https://yuukougun.github.io/kyopro-atlas/math/prime-exponent-vector/)（prime-exponent-vector・基礎・math・done）：積が平方数になる組・巨大な lcm・割り切れる回数などを、整数を素数ごとの指数のベクトルとみて素数ごとに独立に考える。積は和、gcd は min、lcm は max、平方数は全成分が偶数になる。
+- [調和級数と倍数の列挙](https://yuukougun.github.io/kyopro-atlas/math/harmonic-sum/)（harmonic-sum・水・math・done）：割り切る・割り切られる関係にある組を値ごとに数えるとき、各 d の倍数をすべてたどる二重ループが、値の上限 M に対して合計 M/1 + … + M/M ≈ M ln M 回で済むことを使う。M が 10^6 程度なら間に合う。
+- [約数の個数の上界と高度合成数](https://yuukougun.github.io/kyopro-atlas/math/divisor-count-bound/)（divisor-count-bound・水・math・done）：約数（の組）を全部試す全探索が間に合うかを、約数の個数の上界（10^9 以下で 1344、10^18 以下で 103680）から見積もる。約数の多い数は、小さい素数の指数が減っていく形に限って列挙する。
+- [区間篩](https://yuukougun.github.io/kyopro-atlas/math/segmented-sieve/)（segmented-sieve・水・math・done）：L が 10^12 と大きくても R − L が 10^6 程度なら、√R までの素数で区間 [L, R] だけを篩える。区間の各数の素数判定や素因数分解を O((R−L) log log R + √R log log R) で行う。
+- [オイラーの φ 関数](https://yuukougun.github.io/kyopro-atlas/math/euler-phi/)（euler-phi・黄・math・done）：1..n で n と互いに素な数の個数 φ(n) を、素因数分解から φ(n) = n Π(1 − 1/p) で求める。オイラーの定理 a^φ(n) ≡ 1 を通じて、位数や指数の mod の計算に使う。
+- [大きな数の素数判定と素因数分解](https://yuukougun.github.io/kyopro-atlas/math/miller-rabin/)（miller-rabin・発展・math・done）：10^18 程度の数の素数判定を Miller-Rabin で、素因数分解を Pollard's rho で期待 O(N^(1/4)) で行う。64bit の法の掛け算には __int128 か Montgomery 乗算を使う。
+- [GCD・LCM とユークリッドの互除法](https://yuukougun.github.io/kyopro-atlas/math/gcd-lcm/)（gcd-lcm・基礎・math・done）：gcd(a, b) = gcd(b, a mod b) を繰り返して最大公約数を O(log min(a, b)) で求め、lcm は a / gcd × b で求める。1 つ除いた gcd を累積 gcd で求め、分数を既約にして比べる。
+- [整数の証明の型](https://yuukougun.github.io/kyopro-atlas/math/proof-patterns/)（proof-patterns・基礎・math・done）：実験で見つけた整数の規則が正しいかを、定番の筋道で確かめる。操作で gcd が変わらない、a, 2a, … が余りを並べ替える、余りの鳩の巣、mod での矛盾などを使う。
+- [拡張ユークリッドの互除法と一次合同式](https://yuukougun.github.io/kyopro-atlas/math/ext-gcd/)（ext-gcd・水・math・done）：互除法の途中経過から ax + by = gcd(a, b) の整数解を求める。ax + by = c は gcd | c のときだけ解をもち、一次合同式 ax ≡ b (mod m) や法が素数でないときの逆元もこれで解く。
+- [GCD の性質](https://yuukougun.github.io/kyopro-atlas/math/gcd-properties/)（gcd-properties・青・math・done）：全体に同じ数を足したときの gcd を隣接差の gcd に直し、左端を固定した区間 gcd が O(log A) 種類しかないことで区間 gcd を速く求める。mod N で A ずつ進むと gcd(A, N) の倍数だけを回ることも使う。
+- [中国剰余定理](https://yuukougun.github.io/kyopro-atlas/math/crt/)（crt・青・math・done）：複数の合同式 x ≡ r_i (mod m_i) を同時に満たす x を、拡張ユークリッドで2式ずつ合わせて mod lcm でただ1つに求める。解があるのは r1 ≡ r2 (mod gcd(m1, m2)) のときだけである。
+- [位数・原始根・離散対数](https://yuukougun.github.io/kyopro-atlas/math/multiplicative-order/)（multiplicative-order・黄・math・done）：a^k ≡ 1 となる最小の k（位数）を φ(m) の約数から求め、原始根で掛け算を指数の足し算に直す。a^x ≡ b を満たす x（離散対数）は Baby-step Giant-step で O(√m) で求める。
+- [整数の平方根・K 乗根と累乗数](https://yuukougun.github.io/kyopro-atlas/math/integer-root/)（integer-root・基礎・math・done）：⌊√N⌋ を double の sqrt で求めると 10^18 付近で ±1 ずれるので、r² ≤ N < (r+1)² になるまで整数で補正するか二分探索で求める。a^b ≤ N となる a の上限や、累乗数を重複なく数えるのに使う。
+- [N 進法](https://yuukougun.github.io/kyopro-atlas/math/base-conversion/)（base-conversion・基礎・math・done）：N を b で割った余りを並べて b 進表記にし、Horner 法で数に戻す。負の基数（−2 進）や 0 を使わない 26 進（a..z, aa..）、基数を変数とみた二分探索といった変形にも使う。
+- [商の列挙](https://yuukougun.github.io/kyopro-atlas/math/floor-quotient-enum/)（floor-quotient-enum・水・math・done）：i = 1..N の f(⌊N/i⌋) の和を、⌊N/i⌋ の値が高々 2√N 種類で同じ値の i が区間をなすことを使って O(√N) で求める。√N を境に「i が小さい側」と「商が小さい側」に分けて考える型にも使う。
+- [乗法的関数の和と素数の個数](https://yuukougun.github.io/kyopro-atlas/math/multiplicative-function/)（multiplicative-function・発展・math・done）：N ≤ 10^10 程度で、φ・μ などの乗法的関数の和（n ≤ N の f(n) の和）や N 以下の素数の個数を、商の列挙を使って O(N^(3/4)/log N) などで求める。関数どうしの関係はディリクレ積で表す。
+- [floor sum](https://yuukougun.github.io/kyopro-atlas/math/floor-sum/)（floor-sum・黄・math・done）：i = 0..n−1 の ⌊(ai + b)/m⌋ の和を、互除法と同じ形の再帰で O(log m) で求める。(ai + b) mod m の和や、1 次式の条件を満たす個数もこれに帰着できる。
+- [Stern-Brocot 木と連分数](https://yuukougun.github.io/kyopro-atlas/math/stern-brocot/)（stern-brocot・発展・math・done）：分母・分子が N 以下で実数に最も近い分数などを、既約分数をすべて 1 回ずつ含む二分木を降りて O(log N) 段で求める。同じ方向への移動を一度に進めるのが連分数にあたる。
+- [行列累乗](https://yuukougun.github.io/kyopro-atlas/math/matrix-power/)（matrix-power・青・math・done）：状態が毎回同じ線形の遷移 v' = Av で変わるとき、K 回後の A^K v を行列の繰り返し二乗法で O(n³ log K) で求める。DP の遷移や、足し算と掛け算を min と + に替えた行列にも使える。
+- [掃き出し法](https://yuukougun.github.io/kyopro-atlas/math/gaussian-elimination/)（gaussian-elimination・青・math・done）：行基本変形で行列を階段形にし、連立一次方程式の解なし・一意・無数を判定してランクを O(n³) で求める。mod 2 では XOR で消去して bitset で速くでき、解の個数は 2^(変数の数 − ランク) になる。
+- [XOR 基底](https://yuukougun.github.io/kyopro-atlas/math/xor-basis/)（xor-basis・黄・math・done）：整数の集合から XOR で作れる値の全体を、最上位 bit が互いに異なる r 個の基底で表す。作れる値は 2^r 種類で、最大値は上の bit から貪欲に、K 番目に小さい値は簡約した基底から求まる。
+- [行列式](https://yuukougun.github.io/kyopro-atlas/math/determinant/)（determinant・発展・math・done）：掃き出し法で上三角にし、対角成分の積に行の交換の回数だけ符号を掛けて行列式を O(n³) で求める。全域木の数を数える行列木定理の部品になる。
+- [畳み込みの使い方](https://yuukougun.github.io/kyopro-atlas/math/convolution-ntt/)（convolution-ntt・青・math・done）：i + j = k となる a_i b_j の和 c_k（多項式の積）を ACL の convolution で O(N log N) で求める。和が k になる組の数や、ずらしたときの一致数をすべての k について一度に数える。
+- [FFT・NTT の仕組みと任意 mod の畳み込み](https://yuukougun.github.io/kyopro-atlas/math/fft-ntt/)（fft-ntt・発展・math・done）：畳み込みを自作するときや任意 mod で求めるときに、多項式を 1 の N 乗根での値に変えて各点の積にし、分割統治で O(N log N) で変換する。任意 mod は 3 つの素数で計算して CRT で戻す。
+- [XOR 畳み込み](https://yuukougun.github.io/kyopro-atlas/math/hadamard-transform/)（hadamard-transform・発展・math・done）：i XOR j = k となる a_i b_j の和 c_k を、アダマール変換で各点の積に直して O(N log N) で求める。添字の演算（和・XOR・AND/OR・gcd/lcm）ごとに使う変換が変わる。
+- [分割統治 FFT・オンライン畳み込み](https://yuukougun.github.io/kyopro-atlas/math/online-convolution/)（online-convolution・発展・math・done）：多数の多項式の積を次数の小さいものから2つずつ掛けて O(N log² N) で求める。dp[i] が dp[0..i−1] と既知の列の畳み込みで決まるときは、左半分を確定させてから右半分へ寄与を足す分割統治で求める。
+- [形式的冪級数と多項式の演算](https://yuukougun.github.io/kyopro-atlas/math/fps-basics/)（fps-basics・発展・math・done）：数列を冪級数とみて、逆元 1/f・log・exp・累乗を O(N log N) で計算し、多項式の割り算・Taylor shift・多点評価も行う。数え上げの式を多項式で立てた後の計算を受け持つ。
+- [線形漸化式の高速化](https://yuukougun.github.io/kyopro-atlas/math/linear-recurrence-fast/)（linear-recurrence-fast・発展・math・done）：K 項の線形漸化式の第 N 項を、行列累乗より速くきたまさ法 O(K² log N) や Bostan-Mori O(K log K log N) で求める。最初の 2K 項から漸化式を見つける Berlekamp-Massey も使う。
+- [ラグランジュ補間とべき乗和](https://yuukougun.github.io/kyopro-atlas/math/lagrange-interpolation/)（lagrange-interpolation・発展・math・done）：d 次多項式は d + 1 点の値で決まるので、x = 0..d での値から任意の x での値を階乗の逆元を使って O(d) で求める。べき乗和 Σ i^k や、答えが N の多項式になる DP を小さい N で計算して補間するのに使う。
 
 ## 数え上げ・確率・ゲーム
 
-- [和・積の法則と順列・組合せ](https://yuukougun.github.io/kyopro-atlas/comb/counting-basics/)（counting-basics・基礎・comb・reviewed）：排反な場合分けは足し、独立な段階の選択は掛けて数える。積の法則は前の段階で何を選んでも次の選択肢の数が同じときだけ使え、円環の塗り分けでは最後の要素の選択肢の数が変わる。
-- [二項係数の意味と性質](https://yuukougun.github.io/kyopro-atlas/comb/binomial-coefficient/)（binomial-coefficient・基礎・comb・reviewed）：n 個から k 個を選ぶ数 C(n,k) を、選び方・1 が k 個の 0/1 列・格子路の 3 つの意味で使い分ける。パスカルの漸化式と対称性、範囲外を 0 とする約束を使い、辞書順 K 番目の組合せも作れる。
-- [二項係数の前計算](https://yuukougun.github.io/kyopro-atlas/comb/binomial-precompute/)（binomial-precompute・基礎・comb・reviewed）：素数 p を法として階乗と逆階乗を前計算し、C(n,k) を O(1) で求める。n が巨大なら O(k) の積、p が小さく n ≥ p なら Lucas の定理、法が素数でなければパスカルの三角形を使う。
-- [重複組合せ](https://yuukougun.github.io/kyopro-atlas/comb/stars-and-bars/)（stars-and-bars・基礎・comb・reviewed）：x_1 + … + x_k = n の非負整数解は C(n+k−1, k−1) 個、正の整数解は C(n−1, k−1) 個で、玉と仕切りの並べ方に 1 対 1 に対応する。広義単調な列や間隔を空けて選ぶ方法も、同じ形に直して数える。
-- [格子路の数え上げ](https://yuukougun.github.io/kyopro-atlas/comb/lattice-paths/)（lattice-paths・基礎・comb・reviewed）：(0,0) から (a,b) への右・上の最短路は C(a+b, a) 通りで、R と U の列に 1 対 1 に対応する。移動の種類が違えば回数の組に直し、禁止領域は境界を越える点で分けて数える。
-- [写像 12 相](https://yuukougun.github.io/kyopro-atlas/comb/twelvefold-way/)（twelvefold-way・—・comb・reviewed）：n 個の玉を k 個の箱に入れる方法を、玉・箱の区別の有無と各箱の個数の制限で 12 通りに分け、各マスの式と行き先のページを引く。箱を区別しないとき k! で割れるのは、どの箱も空でない場合だけである。
-- [数え上げの考え方](https://yuukougun.github.io/kyopro-atlas/comb/counting-mindset/)（counting-mindset・水・comb・reviewed）：数え上げを、対象の確定 → 数えやすい言い換え → 排反な場合の和と独立な段階の積 → 重複と漏れの確認 → 小さいケースでの検算の順に解く。「ちょうど」は「以下」の差で、全通りの総和は寄与で数える。
-- [順序を固定して数える](https://yuukougun.github.io/kyopro-atlas/comb/counting-fix-order/)（counting-fix-order・水・comb・reviewed）：並べ方の一部の相対順序を固定して数え、全体の何分の一かを掛ける（k 個の順序が決まっていれば n!/k!）。ソート順や BFS 順など、次の選択肢の数が一定になる順番で決めれば積の法則が使える。
-- [対応づけ・数える対象の言い換え](https://yuukougun.github.io/kyopro-atlas/comb/counting-bijection/)（counting-bijection・青・comb・reviewed）：数えにくい対象を、個数が同じで数えやすい対象に 1 対 1 で対応させて数える。逆向きの写像が作れることが正しさの確かめになり、単射でない対応では同じものを重複して数えてしまう。
-- [重複の除き方](https://yuukougun.github.io/kyopro-atlas/comb/counting-dedup/)（counting-dedup・青・comb・reviewed）：同じ対象を何度も数えてしまうとき、どれもちょうど c 回ずつなら c で割り、重複度がばらばらなら代表元を 1 つ決めて代表元だけを数える。数え上げ DP では、最も左を取る・最小番号から決めるなどで作り方を 1 通りにする。
-- [Burnside の補題](https://yuukougun.github.io/kyopro-atlas/comb/burnside-lemma/)（burnside-lemma・発展・comb・reviewed）：回転・反転などで同一視したときの異なるものの数を、各操作で動かないものの数の平均として求める。重複度が対象ごとに違って単純に割れないときに使い、回転だけの数珠は d | n の φ(d) k^(n/d) の和を n で割った値になる。
-- [多項係数](https://yuukougun.github.io/kyopro-atlas/comb/multinomial-coefficient/)（multinomial-coefficient・水・comb・reviewed）：種類ごとの個数が a_1, …, a_m の並べ方は (Σa_i)!/(a_1! … a_m!) 通りで、全部を区別した並べ方を同じ種類の入れ替えで割って得る。大きさを指定したグループ分けも同じ式で数える。
-- [二項係数の恒等式と和の公式](https://yuukougun.github.io/kyopro-atlas/comb/binomial-identities/)（binomial-identities・青・comb・reviewed）：二項定理・Vandermonde の恒等式・縦の和（hockey stick）・吸収公式などで、二項係数を含む和を閉じた式にする。どれも同じものを 2 通りに数えて説明でき、式変形は小さいケースで検算する。
-- [鏡像法とカタラン数](https://yuukougun.github.io/kyopro-atlas/comb/reflection-principle/)（reflection-principle・黄・comb・reviewed）：境界を越える格子路を、最初に境界に触れた点から先を折り返して別の終点への経路と 1 対 1 に対応させ、全体から引いて数える。対角線を越えない経路の数がカタラン数 C(2n,n)/(n+1) で、正しい括弧列の個数に等しい。
-- [二項係数の部分和](https://yuukougun.github.io/kyopro-atlas/comb/binomial-prefix-sum/)（binomial-prefix-sum・発展・comb・reviewed）：二項係数の部分和 S(n,K)（k ≤ K の C(n,k) の和）を、S(n+1,K) = 2S(n,K) − C(n,K) などの式で (n, K) を 1 ずつ動かしながら更新する。部分和を大量に使う包除の計算で役に立つ。
-- [LGV 補題](https://yuukougun.github.io/kyopro-atlas/comb/lgv-lemma/)（lgv-lemma・発展・comb・reviewed）：DAG 上で k 個の始点から k 個の終点への、互いに交わらない経路の組の数（符号付き）を、始点 i から終点 j への経路数を並べた行列の行列式で求める。交わる組は符号で打ち消し合う。
-- [母関数の考え方](https://yuukougun.github.io/kyopro-atlas/comb/generating-function-counting/)（generating-function-counting・発展・comb・reviewed）：選び方の数を多項式の係数で表し、積で独立な選択の組合せ、累乗で同じ選択の繰り返しを表す。DP の遷移も多項式の積・商として立式でき、多項式の演算そのものは FPS に任せる。
-- [包除原理](https://yuukougun.github.io/kyopro-atlas/comb/inclusion-exclusion/)（inclusion-exclusion・青・comb・reviewed）：どの条件も破らないものの個数を、条件の集合 S を少なくとも破るものの個数 N(S) の符号付きの和 Σ(−1)^|S| N(S) で求める。条件が少なければ bit 全探索し、対称なら破る個数ごとに足して撹乱順列や全射の数も求める。
-- [包除 DP](https://yuukougun.github.io/kyopro-atlas/comb/inclusion-exclusion-dp/)（inclusion-exclusion-dp・黄・comb・reviewed）：包除の和 Σ(−1)^|S| N(S) の項が多すぎて列挙できないとき、S を作る過程を DP にし、符号を DP の値に掛けて運ぶ。障害物を並べて最初に踏む障害物で分類し全体から引く形も同じ仲間である。
-- [約数包除](https://yuukougun.github.io/kyopro-atlas/comb/divisor-inclusion-exclusion/)（divisor-inclusion-exclusion・青・comb・reviewed）：gcd がちょうど g の個数 f(g) を、すべて g の倍数の個数 F(g) から大きい g の順に f(g) = F(g) − f(2g) − f(3g) − … で求める。値の上限を M として O(M log M) になる。
-- [約数・倍数のゼータ変換とメビウス変換](https://yuukougun.github.io/kyopro-atlas/comb/zeta-mobius-divisor/)（zeta-mobius-divisor・青・comb・reviewed）：すべての d について d の倍数（約数）にわたる和を求める変換とその逆変換で、素数ごとに累積和を取って O(N log log N) で求める。GCD 畳み込みは倍数の版、LCM 畳み込みは約数の版の変換で求める。
-- [メビウス関数とメビウス反転](https://yuukougun.github.io/kyopro-atlas/comb/mobius-function/)（mobius-function・黄・comb・reviewed）：約数にわたる和 F(n)（d | n の f(d) の和）から f をメビウス関数 μ で戻す（メビウス反転）。[gcd = 1] を d | gcd の μ(d) の和に置き換えて、和の順序を入れ替えるのが典型である。
-- [部分集合の高速ゼータ変換とメビウス変換](https://yuukougun.github.io/kyopro-atlas/comb/zeta-mobius-subset/)（zeta-mobius-subset・黄・comb・reviewed）：すべての集合 S について、部分集合（上位集合）にわたる和を bit ごとの累積和として O(n 2^n) で求める（素朴には O(3^n)）。逆変換（メビウス変換）で戻せ、OR・AND 畳み込みは変換 → 各点の積 → 逆変換で求める。
-- [置換の巡回分解](https://yuukougun.github.io/kyopro-atlas/comb/permutation-cycles/)（permutation-cycles・基礎・comb・reviewed）：順列 P を i → P_i の矢印で描くといくつかの巡回に分かれ、任意の 2 要素の swap でソートする最小回数は N − (巡回の個数) になる。K 回の合成は各巡回の上を K 歩進む操作である。
-- [置換の偶奇](https://yuukougun.github.io/kyopro-atlas/comb/permutation-parity/)（permutation-parity・青・comb・reviewed）：同じ置換をどんな swap の列で作っても swap の回数の偶奇は変わらない（置換の符号）。ちょうど K 回の swap や 3 要素の巡回だけで作れる列は偶奇で決まり、同じ値があれば偶奇を調整できる。
-- [第 1 種スターリング数](https://yuukougun.github.io/kyopro-atlas/comb/stirling-first/)（stirling-first・発展・comb・reviewed）：ちょうど k 個の巡回からなる n 次の置換の数で、c(n,k) = c(n−1,k−1) + (n−1) c(n−1,k) を満たす。上昇階乗 x(x+1)…(x+n−1) の係数なので、FPS で一度に求める。
-- [第 2 種スターリング数とベル数](https://yuukougun.github.io/kyopro-atlas/comb/bell-number/)（bell-number・青・comb・reviewed）：区別できる n 個を区別しない k 個の空でない組に分ける数が S(n,k)、組の数を問わない総数がベル数 B_n である。最後の要素で場合分けした漸化式で求め、B_12 ≈ 4.2×10^6 から全列挙の可否を見積もる。
-- [整数の分割と分割数](https://yuukougun.github.io/kyopro-atlas/comb/partition-number/)（partition-number・黄・comb・reviewed）：n を順序を区別せずに正の整数の和で表す方法の数が分割数 p(n) で、p(n,k) = p(n,k−1) + p(n−k,k) で数える。降順の列だけを作れば重複なく全列挙でき、p(50) = 204226 と少ない。
-- [Young 図形とフック長公式](https://yuukougun.github.io/kyopro-atlas/comb/young-tableaux/)（young-tableaux・発展・comb・reviewed）：1〜N を Young 図形に行・列とも増加するように書き込む方法の数を、フック長公式 N!/Π(フック長) で求める。Robinson-Schensted 対応で、順列の LIS・LDS の長さの条件を図形の形の条件に言い換えられる。
-- [ラベル付き木の数え上げ](https://yuukougun.github.io/kyopro-atlas/comb/cayley-pruefer/)（cayley-pruefer・黄・comb・reviewed）：頂点にラベルのある n 頂点の木は n^(n−2) 個で、Prüfer 列に頂点 i がちょうど（次数 − 1）回現れることから、次数を指定した木は (n−2)!/Π(d_i − 1)! 個になる。次数列ごとに数えて総和を取る問題で使う。
-- [連結なグラフの数え上げ](https://yuukougun.github.io/kyopro-atlas/comb/counting-labeled-graphs/)（counting-labeled-graphs・黄・comb・reviewed）：連結なものを全体 − 非連結なもので数え、非連結なものは頂点 1 を含む連結成分の大きさや頂点集合で分類して DP する。代表の頂点 1 を含む成分から決めるので、成分の順序による重複が出ない。
-- [確率の基本](https://yuukougun.github.io/kyopro-atlas/comb/probability-basics/)（probability-basics・基礎・comb・reviewed）：同様に確からしいときは「確率 = 条件を満たす場合の数 / 全体の場合の数」で、独立な事象は掛け、排反な事象は足す。条件付き確率と全確率の公式（最初の一手で場合分け）は、期待値 DP の式の根拠になる。
-- [幾何分布とコンプリートガチャ](https://yuukougun.github.io/kyopro-atlas/comb/coupon-collector/)（coupon-collector・基礎・comb・reviewed）：成功確率 p の試行を成功するまで繰り返す回数の期待値は 1/p である。N 種類が等確率で出るとき全種類がそろうまでの回数の期待値は、段階ごとの N/(N−k) を足した N(1 + 1/2 + … + 1/N) になる。
-- [確率・期待値を mod 998244353 で答える](https://yuukougun.github.io/kyopro-atlas/comb/rational-mod/)（rational-mod・水・comb・reviewed）：確率・期待値の既約分数 P/Q を P × Q^(−1) mod 998244353 で答える。逆元の掛け算でも四則の関係は保たれるので実数の計算をそのまま mod で行ってよいが、mod の値どうしは大小を比べられない。
-- [期待値の線形性と指示確率変数](https://yuukougun.github.io/kyopro-atlas/comb/linearity-of-expectation/)（linearity-of-expectation・水・comb・reviewed）：E[X + Y] = E[X] + E[Y] は独立でなくても成り立つので、複雑な量を部分の和に分けて各部分の期待値を足せる。個数の期待値は各候補が条件を満たす確率の和で、一様なら「期待値 = 総和 / 総数」になる。
-- [対称性で確率を求める](https://yuukougun.github.io/kyopro-atlas/comb/probability-symmetry/)（probability-symmetry・水・comb・reviewed）：入れ替えても変わらない対象は同じ確率を持つので、1 つの確率・期待値を求めて個数を掛ければよい。一様に選び続ける過程は一様ランダムな順列と同じで、状態を特別な 1 つとその他に縮められる。
-- [確率 DP](https://yuukougun.github.io/kyopro-atlas/comb/probability-dp/)（probability-dp・水・comb・reviewed）：dp[t][s] = 時刻 t に状態 s にいる確率を、初期状態の 1 から前向きに配って求める。確率の和が 1 に保たれることが検算になり、時刻が決まっている問題や分布そのものが要る問題に向く。
-- [期待値 DP](https://yuukougun.github.io/kyopro-atlas/comb/expected-value-dp/)（expected-value-dp・水・comb・reviewed）：終わるまでの量の期待値 E[s] を、最初の一手で場合分けした E[s] = c(s) + Σ P(s→t) E[t] で、終状態の E = 0 から後ろ向きに埋める。自己ループは移項して消し、選択がある状態では max を取る。
-- [閉路のある期待値](https://yuukougun.github.io/kyopro-atlas/comb/expectation-linear-equations/)（expectation-linear-equations・青・comb・reviewed）：閉路があって後ろ向きに埋められない期待値を、戻る先の期待値を未知数 X とおき各状態を a + bX の形で持って、最後に X = a + bX を解いて求める。一般の状態は連立一次方程式で解く。
-- [最適戦略の期待値](https://yuukougun.github.io/kyopro-atlas/comb/optimal-strategy-expectation/)（optimal-strategy-expectation・黄・comb・reviewed）：選択と偶然が交互に来る確率過程で、期待値を最大（最小）にする戦略のもとでの期待値を、残すものや知っている情報を状態にして後ろから求める。mod で答える問題でも比較は実数で行い、やり直せるなら答えを仮定して二分探索する。
-- [期待値と確率の変換](https://yuukougun.github.io/kyopro-atlas/comb/expectation-tail-sum/)（expectation-tail-sum・黄・comb・reviewed）：非負整数の確率変数 X について、E[X] は k ≥ 1 の P(X ≥ k) の和に等しい。最大値・最小値・K 番目の値の期待値を「X ≥ k となる確率」の和に直して求め、「〜になるまでの回数」の期待値にも使う。
-- [二乗の期待値・分散](https://yuukougun.github.io/kyopro-atlas/comb/expectation-of-square/)（expectation-of-square・黄・comb・reviewed）：E[X^2] は線形性で直接は求まらないので、X^2 = Σ_i Σ_j X_i X_j とペアごとの期待値を足すか、DP で確率・期待値 × 確率・二乗の期待値 × 確率を同時に運ぶ。分散は E[X^2] − E[X]^2 で求める。
-- [連続値の確率](https://yuukougun.github.io/kyopro-atlas/comb/continuous-probability/)（continuous-probability・発展・comb・reviewed）：[0, 1] の一様乱数のような連続な確率変数について、確率は長さ・面積・角度の比、期待値は積分で求める。E[X] = ∫ P(X > t) dt や「N 個の一様乱数の K 番目の期待値は K/(N+1)」を使う。
-- [ゲームの基本と勝敗の DP](https://yuukougun.github.io/kyopro-atlas/comb/game-basics/)（game-basics・水・comb・reviewed）：二人零和有限確定完全情報ゲームの各局面は、手番の人の必勝か必敗に決まる。終局から「負け局面へ 1 手で移れるなら勝ち、どこへ移っても勝ち局面なら負け」と DP で埋め、状態が大きすぎるなら手数の偶奇や真似戦略で決まらないかを疑う。
-- [ミニマックス](https://yuukougun.github.io/kyopro-atlas/comb/minimax/)（minimax・水・comb・reviewed）：両者が「自分の得点 − 相手の得点」を最大化するゲームで、f(局面) = 手番の人が以後に得る差の最大値とおくと f = max(その手の得点 − f(次の局面)) と 1 本の式で書け、後ろから値が決まる。
-- [Nim と XOR](https://yuukougun.github.io/kyopro-atlas/comb/nim/)（nim・水・comb・reviewed）：山から 1 個以上取り合い最後の石を取った方が勝つゲームは、全山の個数の XOR が 0 なら後手必勝、そうでなければ先手必勝である。XOR が 0 の局面からは必ず 0 でなくなり、0 でない局面からは 0 にできる。
-- [Grundy 数と Sprague-Grundy の定理](https://yuukougun.github.io/kyopro-atlas/comb/grundy-number/)（grundy-number・青・comb・reviewed）：不偏ゲームの局面に Grundy 数 g = mex{次の局面の g} を割り当てると g = 0 ⇔ 必敗で、独立なゲームの和の Grundy 数は各 Grundy 数の XOR になる。状態が大きければ小さい局面の表から周期を見つける。
-- [後退解析](https://yuukougun.github.io/kyopro-atlas/comb/game-retrograde-analysis/)（game-retrograde-analysis・黄・comb・reviewed）：局面の遷移に閉路があり引き分け（終わらない）もありうるゲームで、終局から逆辺をたどって勝敗を確定させる。勝ちと確定していない行き先の数が 0 になれば負け、負け局面へ移れれば勝ちと確定させ、最後まで決まらない局面が引き分けになる。
-- [非不偏ゲーム](https://yuukougun.github.io/kyopro-atlas/comb/partizan-games/)（partizan-games・発展・comb・reviewed）：先手と後手で取れる手が違うゲームでは Grundy 数が使えないので、局面に数（超現実数）を割り当て、独立な部分の和の符号で勝敗を判定する。
+- [和・積の法則と順列・組合せ](https://yuukougun.github.io/kyopro-atlas/comb/counting-basics/)（counting-basics・基礎・comb・done）：排反な場合分けは足し、独立な段階の選択は掛けて数える。積の法則は前の段階で何を選んでも次の選択肢の数が同じときだけ使え、円環の塗り分けでは最後の要素の選択肢の数が変わる。
+- [二項係数の意味と性質](https://yuukougun.github.io/kyopro-atlas/comb/binomial-coefficient/)（binomial-coefficient・基礎・comb・done）：n 個から k 個を選ぶ数 C(n,k) を、選び方・1 が k 個の 0/1 列・格子路の 3 つの意味で使い分ける。パスカルの漸化式と対称性、範囲外を 0 とする約束を使い、辞書順 K 番目の組合せも作れる。
+- [二項係数の前計算](https://yuukougun.github.io/kyopro-atlas/comb/binomial-precompute/)（binomial-precompute・基礎・comb・done）：素数 p を法として階乗と逆階乗を前計算し、C(n,k) を O(1) で求める。n が巨大なら O(k) の積、p が小さく n ≥ p なら Lucas の定理、法が素数でなければパスカルの三角形を使う。
+- [重複組合せ](https://yuukougun.github.io/kyopro-atlas/comb/stars-and-bars/)（stars-and-bars・基礎・comb・done）：x_1 + … + x_k = n の非負整数解は C(n+k−1, k−1) 個、正の整数解は C(n−1, k−1) 個で、玉と仕切りの並べ方に 1 対 1 に対応する。広義単調な列や間隔を空けて選ぶ方法も、同じ形に直して数える。
+- [格子路の数え上げ](https://yuukougun.github.io/kyopro-atlas/comb/lattice-paths/)（lattice-paths・基礎・comb・done）：(0,0) から (a,b) への右・上の最短路は C(a+b, a) 通りで、R と U の列に 1 対 1 に対応する。移動の種類が違えば回数の組に直し、禁止領域は境界を越える点で分けて数える。
+- [写像 12 相](https://yuukougun.github.io/kyopro-atlas/comb/twelvefold-way/)（twelvefold-way・—・comb・done）：n 個の玉を k 個の箱に入れる方法を、玉・箱の区別の有無と各箱の個数の制限で 12 通りに分け、各マスの式と行き先のページを引く。箱を区別しないとき k! で割れるのは、どの箱も空でない場合だけである。
+- [数え上げの考え方](https://yuukougun.github.io/kyopro-atlas/comb/counting-mindset/)（counting-mindset・水・comb・done）：数え上げを、対象の確定 → 数えやすい言い換え → 排反な場合の和と独立な段階の積 → 重複と漏れの確認 → 小さいケースでの検算の順に解く。「ちょうど」は「以下」の差で、全通りの総和は寄与で数える。
+- [順序を固定して数える](https://yuukougun.github.io/kyopro-atlas/comb/counting-fix-order/)（counting-fix-order・水・comb・done）：並べ方の一部の相対順序を固定して数え、全体の何分の一かを掛ける（k 個の順序が決まっていれば n!/k!）。ソート順や BFS 順など、次の選択肢の数が一定になる順番で決めれば積の法則が使える。
+- [対応づけ・数える対象の言い換え](https://yuukougun.github.io/kyopro-atlas/comb/counting-bijection/)（counting-bijection・青・comb・done）：数えにくい対象を、個数が同じで数えやすい対象に 1 対 1 で対応させて数える。逆向きの写像が作れることが正しさの確かめになり、単射でない対応では同じものを重複して数えてしまう。
+- [重複の除き方](https://yuukougun.github.io/kyopro-atlas/comb/counting-dedup/)（counting-dedup・青・comb・done）：同じ対象を何度も数えてしまうとき、どれもちょうど c 回ずつなら c で割り、重複度がばらばらなら代表元を 1 つ決めて代表元だけを数える。数え上げ DP では、最も左を取る・最小番号から決めるなどで作り方を 1 通りにする。
+- [Burnside の補題](https://yuukougun.github.io/kyopro-atlas/comb/burnside-lemma/)（burnside-lemma・発展・comb・done）：回転・反転などで同一視したときの異なるものの数を、各操作で動かないものの数の平均として求める。重複度が対象ごとに違って単純に割れないときに使い、回転だけの数珠は d | n の φ(d) k^(n/d) の和を n で割った値になる。
+- [多項係数](https://yuukougun.github.io/kyopro-atlas/comb/multinomial-coefficient/)（multinomial-coefficient・水・comb・done）：種類ごとの個数が a_1, …, a_m の並べ方は (Σa_i)!/(a_1! … a_m!) 通りで、全部を区別した並べ方を同じ種類の入れ替えで割って得る。大きさを指定したグループ分けも同じ式で数える。
+- [二項係数の恒等式と和の公式](https://yuukougun.github.io/kyopro-atlas/comb/binomial-identities/)（binomial-identities・青・comb・done）：二項定理・Vandermonde の恒等式・縦の和（hockey stick）・吸収公式などで、二項係数を含む和を閉じた式にする。どれも同じものを 2 通りに数えて説明でき、式変形は小さいケースで検算する。
+- [鏡像法とカタラン数](https://yuukougun.github.io/kyopro-atlas/comb/reflection-principle/)（reflection-principle・黄・comb・done）：境界を越える格子路を、最初に境界に触れた点から先を折り返して別の終点への経路と 1 対 1 に対応させ、全体から引いて数える。対角線を越えない経路の数がカタラン数 C(2n,n)/(n+1) で、正しい括弧列の個数に等しい。
+- [二項係数の部分和](https://yuukougun.github.io/kyopro-atlas/comb/binomial-prefix-sum/)（binomial-prefix-sum・発展・comb・done）：二項係数の部分和 S(n,K)（k ≤ K の C(n,k) の和）を、S(n+1,K) = 2S(n,K) − C(n,K) などの式で (n, K) を 1 ずつ動かしながら更新する。部分和を大量に使う包除の計算で役に立つ。
+- [LGV 補題](https://yuukougun.github.io/kyopro-atlas/comb/lgv-lemma/)（lgv-lemma・発展・comb・done）：DAG 上で k 個の始点から k 個の終点への、互いに交わらない経路の組の数（符号付き）を、始点 i から終点 j への経路数を並べた行列の行列式で求める。交わる組は符号で打ち消し合う。
+- [母関数の考え方](https://yuukougun.github.io/kyopro-atlas/comb/generating-function-counting/)（generating-function-counting・発展・comb・done）：選び方の数を多項式の係数で表し、積で独立な選択の組合せ、累乗で同じ選択の繰り返しを表す。DP の遷移も多項式の積・商として立式でき、多項式の演算そのものは FPS に任せる。
+- [包除原理](https://yuukougun.github.io/kyopro-atlas/comb/inclusion-exclusion/)（inclusion-exclusion・青・comb・done）：どの条件も破らないものの個数を、条件の集合 S を少なくとも破るものの個数 N(S) の符号付きの和 Σ(−1)^|S| N(S) で求める。条件が少なければ bit 全探索し、対称なら破る個数ごとに足して撹乱順列や全射の数も求める。
+- [包除 DP](https://yuukougun.github.io/kyopro-atlas/comb/inclusion-exclusion-dp/)（inclusion-exclusion-dp・黄・comb・done）：包除の和 Σ(−1)^|S| N(S) の項が多すぎて列挙できないとき、S を作る過程を DP にし、符号を DP の値に掛けて運ぶ。障害物を並べて最初に踏む障害物で分類し全体から引く形も同じ仲間である。
+- [約数包除](https://yuukougun.github.io/kyopro-atlas/comb/divisor-inclusion-exclusion/)（divisor-inclusion-exclusion・青・comb・done）：gcd がちょうど g の個数 f(g) を、すべて g の倍数の個数 F(g) から大きい g の順に f(g) = F(g) − f(2g) − f(3g) − … で求める。値の上限を M として O(M log M) になる。
+- [約数・倍数のゼータ変換とメビウス変換](https://yuukougun.github.io/kyopro-atlas/comb/zeta-mobius-divisor/)（zeta-mobius-divisor・青・comb・done）：すべての d について d の倍数（約数）にわたる和を求める変換とその逆変換で、素数ごとに累積和を取って O(N log log N) で求める。GCD 畳み込みは倍数の版、LCM 畳み込みは約数の版の変換で求める。
+- [メビウス関数とメビウス反転](https://yuukougun.github.io/kyopro-atlas/comb/mobius-function/)（mobius-function・黄・comb・done）：約数にわたる和 F(n)（d | n の f(d) の和）から f をメビウス関数 μ で戻す（メビウス反転）。[gcd = 1] を d | gcd の μ(d) の和に置き換えて、和の順序を入れ替えるのが典型である。
+- [部分集合の高速ゼータ変換とメビウス変換](https://yuukougun.github.io/kyopro-atlas/comb/zeta-mobius-subset/)（zeta-mobius-subset・黄・comb・done）：すべての集合 S について、部分集合（上位集合）にわたる和を bit ごとの累積和として O(n 2^n) で求める（素朴には O(3^n)）。逆変換（メビウス変換）で戻せ、OR・AND 畳み込みは変換 → 各点の積 → 逆変換で求める。
+- [置換の巡回分解](https://yuukougun.github.io/kyopro-atlas/comb/permutation-cycles/)（permutation-cycles・基礎・comb・done）：順列 P を i → P_i の矢印で描くといくつかの巡回に分かれ、任意の 2 要素の swap でソートする最小回数は N − (巡回の個数) になる。K 回の合成は各巡回の上を K 歩進む操作である。
+- [置換の偶奇](https://yuukougun.github.io/kyopro-atlas/comb/permutation-parity/)（permutation-parity・青・comb・done）：同じ置換をどんな swap の列で作っても swap の回数の偶奇は変わらない（置換の符号）。ちょうど K 回の swap や 3 要素の巡回だけで作れる列は偶奇で決まり、同じ値があれば偶奇を調整できる。
+- [第 1 種スターリング数](https://yuukougun.github.io/kyopro-atlas/comb/stirling-first/)（stirling-first・発展・comb・done）：ちょうど k 個の巡回からなる n 次の置換の数で、c(n,k) = c(n−1,k−1) + (n−1) c(n−1,k) を満たす。上昇階乗 x(x+1)…(x+n−1) の係数なので、FPS で一度に求める。
+- [第 2 種スターリング数とベル数](https://yuukougun.github.io/kyopro-atlas/comb/bell-number/)（bell-number・青・comb・done）：区別できる n 個を区別しない k 個の空でない組に分ける数が S(n,k)、組の数を問わない総数がベル数 B_n である。最後の要素で場合分けした漸化式で求め、B_12 ≈ 4.2×10^6 から全列挙の可否を見積もる。
+- [整数の分割と分割数](https://yuukougun.github.io/kyopro-atlas/comb/partition-number/)（partition-number・黄・comb・done）：n を順序を区別せずに正の整数の和で表す方法の数が分割数 p(n) で、p(n,k) = p(n,k−1) + p(n−k,k) で数える。降順の列だけを作れば重複なく全列挙でき、p(50) = 204226 と少ない。
+- [Young 図形とフック長公式](https://yuukougun.github.io/kyopro-atlas/comb/young-tableaux/)（young-tableaux・発展・comb・done）：1〜N を Young 図形に行・列とも増加するように書き込む方法の数を、フック長公式 N!/Π(フック長) で求める。Robinson-Schensted 対応で、順列の LIS・LDS の長さの条件を図形の形の条件に言い換えられる。
+- [ラベル付き木の数え上げ](https://yuukougun.github.io/kyopro-atlas/comb/cayley-pruefer/)（cayley-pruefer・黄・comb・done）：頂点にラベルのある n 頂点の木は n^(n−2) 個で、Prüfer 列に頂点 i がちょうど（次数 − 1）回現れることから、次数を指定した木は (n−2)!/Π(d_i − 1)! 個になる。次数列ごとに数えて総和を取る問題で使う。
+- [連結なグラフの数え上げ](https://yuukougun.github.io/kyopro-atlas/comb/counting-labeled-graphs/)（counting-labeled-graphs・黄・comb・done）：連結なものを全体 − 非連結なもので数え、非連結なものは頂点 1 を含む連結成分の大きさや頂点集合で分類して DP する。代表の頂点 1 を含む成分から決めるので、成分の順序による重複が出ない。
+- [確率の基本](https://yuukougun.github.io/kyopro-atlas/comb/probability-basics/)（probability-basics・基礎・comb・done）：同様に確からしいときは「確率 = 条件を満たす場合の数 / 全体の場合の数」で、独立な事象は掛け、排反な事象は足す。条件付き確率と全確率の公式（最初の一手で場合分け）は、期待値 DP の式の根拠になる。
+- [幾何分布とコンプリートガチャ](https://yuukougun.github.io/kyopro-atlas/comb/coupon-collector/)（coupon-collector・基礎・comb・done）：成功確率 p の試行を成功するまで繰り返す回数の期待値は 1/p である。N 種類が等確率で出るとき全種類がそろうまでの回数の期待値は、段階ごとの N/(N−k) を足した N(1 + 1/2 + … + 1/N) になる。
+- [確率・期待値を mod 998244353 で答える](https://yuukougun.github.io/kyopro-atlas/comb/rational-mod/)（rational-mod・水・comb・done）：確率・期待値の既約分数 P/Q を P × Q^(−1) mod 998244353 で答える。逆元の掛け算でも四則の関係は保たれるので実数の計算をそのまま mod で行ってよいが、mod の値どうしは大小を比べられない。
+- [期待値の線形性と指示確率変数](https://yuukougun.github.io/kyopro-atlas/comb/linearity-of-expectation/)（linearity-of-expectation・水・comb・done）：E[X + Y] = E[X] + E[Y] は独立でなくても成り立つので、複雑な量を部分の和に分けて各部分の期待値を足せる。個数の期待値は各候補が条件を満たす確率の和で、一様なら「期待値 = 総和 / 総数」になる。
+- [対称性で確率を求める](https://yuukougun.github.io/kyopro-atlas/comb/probability-symmetry/)（probability-symmetry・水・comb・done）：入れ替えても変わらない対象は同じ確率を持つので、1 つの確率・期待値を求めて個数を掛ければよい。一様に選び続ける過程は一様ランダムな順列と同じで、状態を特別な 1 つとその他に縮められる。
+- [確率 DP](https://yuukougun.github.io/kyopro-atlas/comb/probability-dp/)（probability-dp・水・comb・done）：dp[t][s] = 時刻 t に状態 s にいる確率を、初期状態の 1 から前向きに配って求める。確率の和が 1 に保たれることが検算になり、時刻が決まっている問題や分布そのものが要る問題に向く。
+- [期待値 DP](https://yuukougun.github.io/kyopro-atlas/comb/expected-value-dp/)（expected-value-dp・水・comb・done）：終わるまでの量の期待値 E[s] を、最初の一手で場合分けした E[s] = c(s) + Σ P(s→t) E[t] で、終状態の E = 0 から後ろ向きに埋める。自己ループは移項して消し、選択がある状態では max を取る。
+- [閉路のある期待値](https://yuukougun.github.io/kyopro-atlas/comb/expectation-linear-equations/)（expectation-linear-equations・青・comb・done）：閉路があって後ろ向きに埋められない期待値を、戻る先の期待値を未知数 X とおき各状態を a + bX の形で持って、最後に X = a + bX を解いて求める。一般の状態は連立一次方程式で解く。
+- [最適戦略の期待値](https://yuukougun.github.io/kyopro-atlas/comb/optimal-strategy-expectation/)（optimal-strategy-expectation・黄・comb・done）：選択と偶然が交互に来る確率過程で、期待値を最大（最小）にする戦略のもとでの期待値を、残すものや知っている情報を状態にして後ろから求める。mod で答える問題でも比較は実数で行い、やり直せるなら答えを仮定して二分探索する。
+- [期待値と確率の変換](https://yuukougun.github.io/kyopro-atlas/comb/expectation-tail-sum/)（expectation-tail-sum・黄・comb・done）：非負整数の確率変数 X について、E[X] は k ≥ 1 の P(X ≥ k) の和に等しい。最大値・最小値・K 番目の値の期待値を「X ≥ k となる確率」の和に直して求め、「〜になるまでの回数」の期待値にも使う。
+- [二乗の期待値・分散](https://yuukougun.github.io/kyopro-atlas/comb/expectation-of-square/)（expectation-of-square・黄・comb・done）：E[X^2] は線形性で直接は求まらないので、X^2 = Σ_i Σ_j X_i X_j とペアごとの期待値を足すか、DP で確率・期待値 × 確率・二乗の期待値 × 確率を同時に運ぶ。分散は E[X^2] − E[X]^2 で求める。
+- [連続値の確率](https://yuukougun.github.io/kyopro-atlas/comb/continuous-probability/)（continuous-probability・発展・comb・done）：[0, 1] の一様乱数のような連続な確率変数について、確率は長さ・面積・角度の比、期待値は積分で求める。E[X] = ∫ P(X > t) dt や「N 個の一様乱数の K 番目の期待値は K/(N+1)」を使う。
+- [ゲームの基本と勝敗の DP](https://yuukougun.github.io/kyopro-atlas/comb/game-basics/)（game-basics・水・comb・done）：二人零和有限確定完全情報ゲームの各局面は、手番の人の必勝か必敗に決まる。終局から「負け局面へ 1 手で移れるなら勝ち、どこへ移っても勝ち局面なら負け」と DP で埋め、状態が大きすぎるなら手数の偶奇や真似戦略で決まらないかを疑う。
+- [ミニマックス](https://yuukougun.github.io/kyopro-atlas/comb/minimax/)（minimax・水・comb・done）：両者が「自分の得点 − 相手の得点」を最大化するゲームで、f(局面) = 手番の人が以後に得る差の最大値とおくと f = max(その手の得点 − f(次の局面)) と 1 本の式で書け、後ろから値が決まる。
+- [Nim と XOR](https://yuukougun.github.io/kyopro-atlas/comb/nim/)（nim・水・comb・done）：山から 1 個以上取り合い最後の石を取った方が勝つゲームは、全山の個数の XOR が 0 なら後手必勝、そうでなければ先手必勝である。XOR が 0 の局面からは必ず 0 でなくなり、0 でない局面からは 0 にできる。
+- [Grundy 数と Sprague-Grundy の定理](https://yuukougun.github.io/kyopro-atlas/comb/grundy-number/)（grundy-number・青・comb・done）：不偏ゲームの局面に Grundy 数 g = mex{次の局面の g} を割り当てると g = 0 ⇔ 必敗で、独立なゲームの和の Grundy 数は各 Grundy 数の XOR になる。状態が大きければ小さい局面の表から周期を見つける。
+- [後退解析](https://yuukougun.github.io/kyopro-atlas/comb/game-retrograde-analysis/)（game-retrograde-analysis・黄・comb・done）：局面の遷移に閉路があり引き分け（終わらない）もありうるゲームで、終局から逆辺をたどって勝敗を確定させる。勝ちと確定していない行き先の数が 0 になれば負け、負け局面へ移れれば勝ちと確定させ、最後まで決まらない局面が引き分けになる。
+- [非不偏ゲーム](https://yuukougun.github.io/kyopro-atlas/comb/partizan-games/)（partizan-games・発展・comb・done）：先手と後手で取れる手が違うゲームでは Grundy 数が使えないので、局面に数（超現実数）を割り当て、独立な部分の和の符号で勝敗を判定する。
 
 ## 文字列
 
-- [文字列の基本操作と辞書順](https://yuukougun.github.io/kyopro-atlas/string/string-basics/)（string-basics・基礎・string・reviewed）：辞書順の最小・回転・文字の一斉置換を問う文字列の問題を、定義に沿った全探索と比較で解く。辞書順は最初に異なる位置の文字で決まり、片方が尽きたら短い方が小さい。
-- [部分列の判定と次の出現位置の表](https://yuukougun.github.io/kyopro-atlas/string/subsequence-matching/)（subsequence-matching・基礎・string・reviewed）：T が S の部分列かを、S を左から見て T の文字をできるだけ早く拾う貪欲で判定する。各位置から各文字が次に現れる位置の表を作れば、多数の判定や辞書順最小の部分列も速く求まる。
-- [ローリングハッシュ](https://yuukougun.github.io/kyopro-atlas/string/rolling-hash/)（rolling-hash・水・string・reviewed）：文字列を B 進数の値（mod p）とみなし、接頭辞のハッシュから任意の部分文字列のハッシュを O(1) で取り出して、部分文字列どうしの一致を確率的に判定する。二分探索と組めば LCP や辞書順の比較もできる。
-- [集合・多重集合のハッシュ](https://yuukougun.github.io/kyopro-atlas/string/hashing-for-sets/)（hashing-for-sets・水・string・reviewed）：値ごとに独立な 64 ビットの乱数を割り当て、集合は XOR、多重集合は和で表すと、2 つの集合が等しいかを順序に関係なく O(1) で比べられる。累積と組めば、区間どうしが並べ替えで一致するかも判定できる。
-- [ハッシュの衝突と安全な設計](https://yuukougun.github.io/kyopro-atlas/string/hash-safety/)（hash-safety・青・string・reviewed）：比べるハッシュの組の数から衝突確率を見積もり、固定のテストでも落ちない mod と基数を選ぶ。mod 10^9 程度の 1 つでは全ペアの比較に耐えないので、mod 2^61−1 と実行時に乱択した基数（値のハッシュなら素数）を使う。
-- [Z-algorithm](https://yuukougun.github.io/kyopro-atlas/string/z-algorithm/)（z-algorithm・水・string・reviewed）：Z 配列 z[i]（S と S[i:] の最長共通接頭辞の長さ）を O(N) で求める。P＋区切り＋T の Z 配列でパターンの全出現を決定的に見つけられ、回転の検索や周期の判定にも使える。
-- [KMP 法と文字列の周期](https://yuukougun.github.io/kyopro-atlas/string/kmp/)（kmp・青・string・reviewed）：π[i]（先頭 i+1 文字の、接頭辞でも接尾辞でもある最長の真の部分の長さ）を O(N) で求める。π をたどると全 border と最小周期が分かり、照合に失敗したときのずらし方や照合オートマトンの遷移にも使える。
-- [回文の扱いと Manacher](https://yuukougun.github.io/kyopro-atlas/string/palindrome/)（palindrome・水・string・reviewed）：回文の問題を、対称な位置の組を見る・中心から伸ばす・両端から作るの 3 つの見方で小さな状態に落とす。各中心の最長回文の半径は Manacher で O(N) で求まる。
-- [Trie](https://yuukougun.github.io/kyopro-atlas/string/trie/)（trie・水・string・reviewed）：文字列の集合を、共通の接頭辞を共有する木に入れる。各節点に通過数を持てば、全ペアの最長共通接頭辞の和や、ある接頭辞を持つ文字列の数が、長さの総和に比例する時間で求まる。
-- [Aho-Corasick 法](https://yuukougun.github.io/kyopro-atlas/string/aho-corasick/)（aho-corasick・青・string・reviewed）：パターンの Trie に失敗リンク（Trie にある最長の真の接尾辞へのリンク）を BFS 順に張り、全文字の遷移を埋めたオートマトンにする。テキストを 1 回流すだけで、多数のパターンの出現をまとめて数えられる。
-- [照合オートマトン上の DP](https://yuukougun.github.io/kyopro-atlas/string/string-automaton-dp/)（string-automaton-dp・青・string・reviewed）：KMP 法や Aho-Corasick 法の状態（いまの接尾辞のうちパターンの接頭辞になっている最長のもの）を DP の状態にして、パターンを含まない・すべて含む長さ N の文字列を数える。N が巨大なら遷移を行列にして累乗する。
-- [Suffix Array と LCP 配列](https://yuukougun.github.io/kyopro-atlas/string/suffix-array/)（suffix-array・黄・string・reviewed）：全接尾辞を辞書順に並べた添字の列（SA）と隣どうしの最長共通接頭辞（LCP 配列）を作る。異なる部分文字列の数・任意の 2 接尾辞の LCP・パターンの出現回数が求まり、ACL の suffix_array・lcp_array で使える。
-- [Suffix Automaton と発展の文字列アルゴリズム](https://yuukougun.github.io/kyopro-atlas/string/suffix-automaton/)（suffix-automaton・発展・string・reviewed）：Suffix Automaton は全部分文字列を状態数 2N−1 以下の DFA で表し、文字を足しながら異なる部分文字列の数を答える。回文木・Lyndon 分解なども、ABC では SA・Z・Manacher で代えられることが多い。
+- [文字列の基本操作と辞書順](https://yuukougun.github.io/kyopro-atlas/string/string-basics/)（string-basics・基礎・string・done）：辞書順の最小・回転・文字の一斉置換を問う文字列の問題を、定義に沿った全探索と比較で解く。辞書順は最初に異なる位置の文字で決まり、片方が尽きたら短い方が小さい。
+- [部分列の判定と次の出現位置の表](https://yuukougun.github.io/kyopro-atlas/string/subsequence-matching/)（subsequence-matching・基礎・string・done）：T が S の部分列かを、S を左から見て T の文字をできるだけ早く拾う貪欲で判定する。各位置から各文字が次に現れる位置の表を作れば、多数の判定や辞書順最小の部分列も速く求まる。
+- [ローリングハッシュ](https://yuukougun.github.io/kyopro-atlas/string/rolling-hash/)（rolling-hash・水・string・done）：文字列を B 進数の値（mod p）とみなし、接頭辞のハッシュから任意の部分文字列のハッシュを O(1) で取り出して、部分文字列どうしの一致を確率的に判定する。二分探索と組めば LCP や辞書順の比較もできる。
+- [集合・多重集合のハッシュ](https://yuukougun.github.io/kyopro-atlas/string/hashing-for-sets/)（hashing-for-sets・水・string・done）：値ごとに独立な 64 ビットの乱数を割り当て、集合は XOR、多重集合は和で表すと、2 つの集合が等しいかを順序に関係なく O(1) で比べられる。累積と組めば、区間どうしが並べ替えで一致するかも判定できる。
+- [ハッシュの衝突と安全な設計](https://yuukougun.github.io/kyopro-atlas/string/hash-safety/)（hash-safety・青・string・done）：比べるハッシュの組の数から衝突確率を見積もり、固定のテストでも落ちない mod と基数を選ぶ。mod 10^9 程度の 1 つでは全ペアの比較に耐えないので、mod 2^61−1 と実行時に乱択した基数（値のハッシュなら素数）を使う。
+- [Z-algorithm](https://yuukougun.github.io/kyopro-atlas/string/z-algorithm/)（z-algorithm・水・string・done）：Z 配列 z[i]（S と S[i:] の最長共通接頭辞の長さ）を O(N) で求める。P＋区切り＋T の Z 配列でパターンの全出現を決定的に見つけられ、回転の検索や周期の判定にも使える。
+- [KMP 法と文字列の周期](https://yuukougun.github.io/kyopro-atlas/string/kmp/)（kmp・青・string・done）：π[i]（先頭 i+1 文字の、接頭辞でも接尾辞でもある最長の真の部分の長さ）を O(N) で求める。π をたどると全 border と最小周期が分かり、照合に失敗したときのずらし方や照合オートマトンの遷移にも使える。
+- [回文の扱いと Manacher](https://yuukougun.github.io/kyopro-atlas/string/palindrome/)（palindrome・水・string・done）：回文の問題を、対称な位置の組を見る・中心から伸ばす・両端から作るの 3 つの見方で小さな状態に落とす。各中心の最長回文の半径は Manacher で O(N) で求まる。
+- [Trie](https://yuukougun.github.io/kyopro-atlas/string/trie/)（trie・水・string・done）：文字列の集合を、共通の接頭辞を共有する木に入れる。各節点に通過数を持てば、全ペアの最長共通接頭辞の和や、ある接頭辞を持つ文字列の数が、長さの総和に比例する時間で求まる。
+- [Aho-Corasick 法](https://yuukougun.github.io/kyopro-atlas/string/aho-corasick/)（aho-corasick・青・string・done）：パターンの Trie に失敗リンク（Trie にある最長の真の接尾辞へのリンク）を BFS 順に張り、全文字の遷移を埋めたオートマトンにする。テキストを 1 回流すだけで、多数のパターンの出現をまとめて数えられる。
+- [照合オートマトン上の DP](https://yuukougun.github.io/kyopro-atlas/string/string-automaton-dp/)（string-automaton-dp・青・string・done）：KMP 法や Aho-Corasick 法の状態（いまの接尾辞のうちパターンの接頭辞になっている最長のもの）を DP の状態にして、パターンを含まない・すべて含む長さ N の文字列を数える。N が巨大なら遷移を行列にして累乗する。
+- [Suffix Array と LCP 配列](https://yuukougun.github.io/kyopro-atlas/string/suffix-array/)（suffix-array・黄・string・done）：全接尾辞を辞書順に並べた添字の列（SA）と隣どうしの最長共通接頭辞（LCP 配列）を作る。異なる部分文字列の数・任意の 2 接尾辞の LCP・パターンの出現回数が求まり、ACL の suffix_array・lcp_array で使える。
+- [Suffix Automaton と発展の文字列アルゴリズム](https://yuukougun.github.io/kyopro-atlas/string/suffix-automaton/)（suffix-automaton・発展・string・done）：Suffix Automaton は全部分文字列を状態数 2N−1 以下の DFA で表し、文字を足しながら異なる部分文字列の数を答える。回文木・Lyndon 分解なども、ABC では SA・Z・Manacher で代えられることが多い。
 
 ## 幾何
 
-- [ベクトルと外積](https://yuukougun.github.io/kyopro-atlas/geometry/geometry-vectors/)（geometry-vectors・基礎・geometry・reviewed）：外積 a.x·b.y − a.y·b.x の符号で向き（左・右・一直線上）が、絶対値で平行四辺形の面積が分かる。3 点の一直線判定・凸性・多角形の面積・線分の交差を、整数のまま誤差なく判定できる。
-- [誤差の扱いと整数での処理](https://yuukougun.github.io/kyopro-atlas/geometry/geometry-precision/)（geometry-precision・水・geometry・reviewed）：幾何の計算をできるだけ整数で行い、誤差による判定の誤りを防ぐ。小数の入力は 10^k 倍し、比較は外積・内積・距離の 2 乗で、傾きや直線は gcd で約分して符号をそろえた組で表し、実数は避けられないときだけ使う。
-- [偏角ソート](https://yuukougun.github.io/kyopro-atlas/geometry/argument-sort/)（argument-sort・水・geometry・reviewed）：点を原点から見た角度の順に並べる。整数座標なら上下の半平面に分け、同じ半平面の中は外積の符号で比べることで、atan2 を使わず誤差なく O(N log N) で並べられる。
-- [回転・平行移動・アフィン変換](https://yuukougun.github.io/kyopro-atlas/geometry/rotation-transform/)（rotation-transform・水・geometry・reviewed）：点の回転・反転・平行移動を式で計算し、操作列を何回か行った後の位置を求める。90 度回転は (−y, x) で整数のまま書け、操作は (x, y, 1) に掛ける 3×3 行列にすると積の累積で合成できる。
-- [マンハッタン距離と 45 度回転](https://yuukougun.github.io/kyopro-atlas/geometry/manhattan-chebyshev/)（manhattan-chebyshev・水・geometry・reviewed）：u = x+y、v = x−y と座標を変える（45 度回転）と、マンハッタン距離はチェビシェフ距離 max(|Δu|, |Δv|) になる。ひし形の範囲が正方形に変わり、最遠点対・距離の和・斜め移動を x と y に分けて解ける。
-- [円と幾何の最適化](https://yuukougun.github.io/kyopro-atlas/geometry/circle-geometry/)（circle-geometry・青・geometry・reviewed）：2 円の位置関係は、中心間の距離と半径の和・差を 2 乗して整数のまま判定できる。実数の位置・半径・時刻の最適化は、最適解が少数の点で決まるなら候補を列挙し、判定が単調なら答えで二分探索、凸なら三分探索する。
-- [凸包と凸多角形](https://yuukougun.github.io/kyopro-atlas/geometry/convex-hull/)（convex-hull・黄・geometry・reviewed）：点を x 座標でソートし、スタックの末尾が凹む間は取り除くことで、全点を囲む最小の凸多角形（凸包）を O(N log N) で作る。凸多角形への多数の点の内外判定（1 点 O(log N)）や、格子点の数（Pick の定理）にも使う。
-- [発展の幾何](https://yuukougun.github.io/kyopro-atlas/geometry/advanced-geometry/)（advanced-geometry・発展・geometry・reviewed）：動的な凸包・回転キャリパー（最遠点対）・最近点対・半平面交差・ミンコフスキー和で、点集合と凸図形の最大・最小・共通部分を O(N log N) 前後で求める。ABC での出題はまれで、Library Checker で確かめられる。
+- [ベクトルと外積](https://yuukougun.github.io/kyopro-atlas/geometry/geometry-vectors/)（geometry-vectors・基礎・geometry・done）：外積 a.x·b.y − a.y·b.x の符号で向き（左・右・一直線上）が、絶対値で平行四辺形の面積が分かる。3 点の一直線判定・凸性・多角形の面積・線分の交差を、整数のまま誤差なく判定できる。
+- [誤差の扱いと整数での処理](https://yuukougun.github.io/kyopro-atlas/geometry/geometry-precision/)（geometry-precision・水・geometry・done）：幾何の計算をできるだけ整数で行い、誤差による判定の誤りを防ぐ。小数の入力は 10^k 倍し、比較は外積・内積・距離の 2 乗で、傾きや直線は gcd で約分して符号をそろえた組で表し、実数は避けられないときだけ使う。
+- [偏角ソート](https://yuukougun.github.io/kyopro-atlas/geometry/argument-sort/)（argument-sort・水・geometry・done）：点を原点から見た角度の順に並べる。整数座標なら上下の半平面に分け、同じ半平面の中は外積の符号で比べることで、atan2 を使わず誤差なく O(N log N) で並べられる。
+- [回転・平行移動・アフィン変換](https://yuukougun.github.io/kyopro-atlas/geometry/rotation-transform/)（rotation-transform・水・geometry・done）：点の回転・反転・平行移動を式で計算し、操作列を何回か行った後の位置を求める。90 度回転は (−y, x) で整数のまま書け、操作は (x, y, 1) に掛ける 3×3 行列にすると積の累積で合成できる。
+- [マンハッタン距離と 45 度回転](https://yuukougun.github.io/kyopro-atlas/geometry/manhattan-chebyshev/)（manhattan-chebyshev・水・geometry・done）：u = x+y、v = x−y と座標を変える（45 度回転）と、マンハッタン距離はチェビシェフ距離 max(|Δu|, |Δv|) になる。ひし形の範囲が正方形に変わり、最遠点対・距離の和・斜め移動を x と y に分けて解ける。
+- [円と幾何の最適化](https://yuukougun.github.io/kyopro-atlas/geometry/circle-geometry/)（circle-geometry・青・geometry・done）：2 円の位置関係は、中心間の距離と半径の和・差を 2 乗して整数のまま判定できる。実数の位置・半径・時刻の最適化は、最適解が少数の点で決まるなら候補を列挙し、判定が単調なら答えで二分探索、凸なら三分探索する。
+- [凸包と凸多角形](https://yuukougun.github.io/kyopro-atlas/geometry/convex-hull/)（convex-hull・黄・geometry・done）：点を x 座標でソートし、スタックの末尾が凹む間は取り除くことで、全点を囲む最小の凸多角形（凸包）を O(N log N) で作る。凸多角形への多数の点の内外判定（1 点 O(log N)）や、格子点の数（Pick の定理）にも使う。
+- [発展の幾何](https://yuukougun.github.io/kyopro-atlas/geometry/advanced-geometry/)（advanced-geometry・発展・geometry・done）：動的な凸包・回転キャリパー（最遠点対）・最近点対・半平面交差・ミンコフスキー和で、点集合と凸図形の最大・最小・共通部分を O(N log N) 前後で求める。ABC での出題はまれで、Library Checker で確かめられる。
 
 ## その他の技法
 
-- [インタラクティブ問題](https://yuukougun.github.io/kyopro-atlas/misc/interactive/)（interactive・基礎・misc・reviewed）：質問を出力してジャッジの答えを受け取る形式の問題で、質問回数の上限から方針を逆算する（2 択の質問なら ⌈log2 候補数⌉ 回）。出力のたびに flush し、二分探索や 2 進表記で質問を設計する。
-- [乱択アルゴリズム](https://yuukougun.github.io/kyopro-atlas/misc/randomized/)（randomized・青・misc・reviewed）：乱数を使って、一定の確率で誤るが速い方法（モンテカルロ法）や、常に正しいが時間が確率的な方法（ラスベガス法）を作る。成功確率 p の試行を k 回繰り返すと失敗確率は (1 − p)^k になるので、回数を見積もって決める。
-- [bitset による高速化](https://yuukougun.github.io/kyopro-atlas/misc/bitset-speedup/)（bitset-speedup・青・misc・reviewed）：bool を 64 個ずつ 1 語に詰め、AND・OR・XOR・シフトを語単位で行って計算量をおよそ 1/64 にする。部分和 DP のシフト OR、共通の隣接頂点・三角形の数え上げ、偶奇の集計、DAG の到達可能性に使う。
-- [構文解析](https://yuukougun.github.io/kyopro-atlas/misc/parsing/)（parsing・青・misc・reviewed）：+・*・括弧を含む式の文字列を、演算子の優先順位どおりに評価・解析する。文法の規則（式・項・因子）ごとに関数を作り、読み取り位置を共有して再帰的に読む（再帰下降構文解析）。
+- [インタラクティブ問題](https://yuukougun.github.io/kyopro-atlas/misc/interactive/)（interactive・基礎・misc・done）：質問を出力してジャッジの答えを受け取る形式の問題で、質問回数の上限から方針を逆算する（2 択の質問なら ⌈log2 候補数⌉ 回）。出力のたびに flush し、二分探索や 2 進表記で質問を設計する。
+- [乱択アルゴリズム](https://yuukougun.github.io/kyopro-atlas/misc/randomized/)（randomized・青・misc・done）：乱数を使って、一定の確率で誤るが速い方法（モンテカルロ法）や、常に正しいが時間が確率的な方法（ラスベガス法）を作る。成功確率 p の試行を k 回繰り返すと失敗確率は (1 − p)^k になるので、回数を見積もって決める。
+- [bitset による高速化](https://yuukougun.github.io/kyopro-atlas/misc/bitset-speedup/)（bitset-speedup・青・misc・done）：bool を 64 個ずつ 1 語に詰め、AND・OR・XOR・シフトを語単位で行って計算量をおよそ 1/64 にする。部分和 DP のシフト OR、共通の隣接頂点・三角形の数え上げ、偶奇の集計、DAG の到達可能性に使う。
+- [構文解析](https://yuukougun.github.io/kyopro-atlas/misc/parsing/)（parsing・青・misc・done）：+・*・括弧を含む式の文字列を、演算子の優先順位どおりに評価・解析する。文法の規則（式・項・因子）ごとに関数を作り、読み取り位置を共有して再帰的に読む（再帰下降構文解析）。
 
 ## 題材別
 
-- [区間](https://yuukougun.github.io/kyopro-atlas/patterns/interval/)（interval・—・patterns・reviewed）：連続部分列や与えられた区間の集合が出てくる問題で、問われ方から使う手法を引ける。連続部分列を数える・選ぶ、区間に操作して質問する、区間の集合を選ぶ・つなぐ、の3つの型に分ける。
-- [部分列と部分文字列](https://yuukougun.github.io/kyopro-atlas/patterns/subsequence-and-substring/)（subsequence-and-substring・—・patterns・reviewed）：部分列（飛び飛びに選ぶ）と部分文字列（連続する部分）が出てくる問題で、問われ方から使う手法を引ける。判定・選び方の数・異なるものの数・最長の共通部分・種類数の問われ方に分ける。
-- [順列と置換](https://yuukougun.github.io/kyopro-atlas/patterns/permutation/)（permutation・—・patterns・reviewed）：1〜N の順列が与えられる問題で、問われ方から使う手法を引ける。i → P_i の矢印の巡回、swap の回数と偶奇、置換の繰り返し、順列の数え上げ、辞書順の問われ方に分ける。
-- [括弧列](https://yuukougun.github.io/kyopro-atlas/patterns/bracket-sequence/)（bracket-sequence・—・patterns・reviewed）：括弧列が出てくる問題で、判定・数え上げ・区間の判定・並べる順序・価値の最大化の手法を引ける。'(' を +1、')' を −1 とした累積和が途中で負にならず最後に 0 なら正しい、という言い換えが共通の出発点になる。
-- [mex](https://yuukougun.github.io/kyopro-atlas/patterns/mex/)（mex・—・patterns・reviewed）：集合に含まれない最小の非負整数 mex を求める・更新する・総和を取る問題で、問われ方から使う手法を引ける。「N 要素の mex は N 以下」「mex ≥ k+1 ⇔ 0〜k をすべて含む」の 2 つの性質から考える。
-- [K 番目と中央値](https://yuukougun.github.io/kyopro-atlas/patterns/kth-and-median/)（kth-and-median・—・patterns・reviewed）：K 番目に小さい値・上位 K 個の和・中央値を問う問題で、データの動き方から手法を引ける。構造で保つか、「x 以下が K 個以上か」で答えを二分探索するか、小さい順に取り出すかを選ぶ。
-- [XOR](https://yuukougun.github.io/kyopro-atlas/patterns/xor/)（xor・—・patterns・reviewed）：XOR が出てくる問題で、問われ方から使う手法を引ける。桁ごとに独立で、同じ値どうしで打ち消し合う、という 2 つの性質から、桁ごとの数え上げ・累積 XOR・XOR 基底・Binary Trie・Nim・集合のハッシュへつなぐ。
-- [約数と倍数](https://yuukougun.github.io/kyopro-atlas/patterns/divisors-and-multiples/)（divisors-and-multiples・—・patterns・reviewed）：約数・倍数・gcd が出てくる問題で、問われ方から使う手法を引ける。約数の列挙、倍数を回して集める調和級数、素因数分解、gcd がちょうど g の数え上げ、約数の個数の上限の問われ方に分ける。
-- [グリッド](https://yuukougun.github.io/kyopro-atlas/patterns/grid/)（grid・—・patterns・reviewed）：H×W のマス目が出てくる問題で、問われ方から使う手法を引ける。マスを頂点とする最短路、右・下に進む DP、長方形の累積和、行と列の独立、市松模様の偶奇、45 度回転、盤面の回転へつなぐ。
-- [操作列とクエリ](https://yuukougun.github.io/kyopro-atlas/patterns/operation-sequence/)（operation-sequence・—・patterns・reviewed）：操作やクエリが Q 個続く問題で、問われ方から処理の仕方を引ける。全体の操作を変数で持つ、後ろから見る、削除を逆順の追加にする、先読みして並べ替える、過去の版に戻る、周期で打ち切る、などの型に分ける。
-- [円環](https://yuukougun.github.io/kyopro-atlas/patterns/circular/)（circular・—・patterns・draft）：円形に並ぶ列のように、最後と最初も隣り合う並びを含む問題で、問われ方から使う手法を引ける。2 周分に伸ばす、1 か所で切って固定する、回転を 2 周分の窓とみる、の 3 つの言い換えが共通の出発点になる。
+- [区間](https://yuukougun.github.io/kyopro-atlas/patterns/interval/)（interval・—・patterns・done）：連続部分列や与えられた区間の集合が出てくる問題で、問われ方から使う手法を引ける。連続部分列を数える・選ぶ、区間に操作して質問する、区間の集合を選ぶ・つなぐ、の3つの型に分ける。
+- [部分列と部分文字列](https://yuukougun.github.io/kyopro-atlas/patterns/subsequence-and-substring/)（subsequence-and-substring・—・patterns・done）：部分列（飛び飛びに選ぶ）と部分文字列（連続する部分）が出てくる問題で、問われ方から使う手法を引ける。判定・選び方の数・異なるものの数・最長の共通部分・種類数の問われ方に分ける。
+- [順列と置換](https://yuukougun.github.io/kyopro-atlas/patterns/permutation/)（permutation・—・patterns・done）：1〜N の順列が与えられる問題で、問われ方から使う手法を引ける。i → P_i の矢印の巡回、swap の回数と偶奇、置換の繰り返し、順列の数え上げ、辞書順の問われ方に分ける。
+- [括弧列](https://yuukougun.github.io/kyopro-atlas/patterns/bracket-sequence/)（bracket-sequence・—・patterns・done）：括弧列が出てくる問題で、判定・数え上げ・区間の判定・並べる順序・価値の最大化の手法を引ける。'(' を +1、')' を −1 とした累積和が途中で負にならず最後に 0 なら正しい、という言い換えが共通の出発点になる。
+- [mex](https://yuukougun.github.io/kyopro-atlas/patterns/mex/)（mex・—・patterns・done）：集合に含まれない最小の非負整数 mex を求める・更新する・総和を取る問題で、問われ方から使う手法を引ける。「N 要素の mex は N 以下」「mex ≥ k+1 ⇔ 0〜k をすべて含む」の 2 つの性質から考える。
+- [K 番目と中央値](https://yuukougun.github.io/kyopro-atlas/patterns/kth-and-median/)（kth-and-median・—・patterns・done）：K 番目に小さい値・上位 K 個の和・中央値を問う問題で、データの動き方から手法を引ける。構造で保つか、「x 以下が K 個以上か」で答えを二分探索するか、小さい順に取り出すかを選ぶ。
+- [XOR](https://yuukougun.github.io/kyopro-atlas/patterns/xor/)（xor・—・patterns・done）：XOR が出てくる問題で、問われ方から使う手法を引ける。桁ごとに独立で、同じ値どうしで打ち消し合う、という 2 つの性質から、桁ごとの数え上げ・累積 XOR・XOR 基底・Binary Trie・Nim・集合のハッシュへつなぐ。
+- [約数と倍数](https://yuukougun.github.io/kyopro-atlas/patterns/divisors-and-multiples/)（divisors-and-multiples・—・patterns・done）：約数・倍数・gcd が出てくる問題で、問われ方から使う手法を引ける。約数の列挙、倍数を回して集める調和級数、素因数分解、gcd がちょうど g の数え上げ、約数の個数の上限の問われ方に分ける。
+- [グリッド](https://yuukougun.github.io/kyopro-atlas/patterns/grid/)（grid・—・patterns・done）：H×W のマス目が出てくる問題で、問われ方から使う手法を引ける。マスを頂点とする最短路、右・下に進む DP、長方形の累積和、行と列の独立、市松模様の偶奇、45 度回転、盤面の回転へつなぐ。
+- [操作列とクエリ](https://yuukougun.github.io/kyopro-atlas/patterns/operation-sequence/)（operation-sequence・—・patterns・done）：操作やクエリが Q 個続く問題で、問われ方から処理の仕方を引ける。全体の操作を変数で持つ、後ろから見る、削除を逆順の追加にする、先読みして並べ替える、過去の版に戻る、周期で打ち切る、などの型に分ける。
+- [円環](https://yuukougun.github.io/kyopro-atlas/patterns/circular/)（circular・—・patterns・done）：円形に並ぶ列のように、最後と最初も隣り合う並びを含む問題で、問われ方から使う手法を引ける。2 周分に伸ばす、1 か所で切って固定する、回転を 2 周分の窓とみる、の 3 つの言い換えが共通の出発点になる。
 
 ## C++
 
-- [C++ の逆引き](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-reverse-index/)（cpp-reverse-index・—・cpp・reviewed）：解説コードの書き方・実行時の症状・コンパイルエラーのメッセージから、意味と C++ 章の該当する節を引く。1 行を「何を回すか・何を受け取るか・どう受け取るか」に分けて読む手順も示す。
-- [数の型とリテラル](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-types-literals/)（cpp-types-literals・基礎・cpp・reviewed）：整数・浮動小数点数の型とリテラル、INF の値を、値が収まり意図どおりの型になるように選ぶ。auto x = 0 が int、1e18 が double になるような、型のずれによる誤りを防ぐ。
-- [整数のオーバーフローと __int128](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-integer-overflow/)（cpp-integer-overflow・基礎・cpp・reviewed）：int どうしの積・1 << k・size() の符号なしなど、型の幅を超えて値が壊れる書き方を見分けて直す。64 bit を超える中間値は GCC の拡張 __int128 で持てるが、入出力などに制限がある。
-- [初期化と CTAD](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-initialization/)（cpp-initialization・基礎・cpp・reviewed）：vector・多次元 vector・array・構造体を、意図した大きさと初期値で作る。型引数を省いて中身から型を決める CTAD（C++17）と、括弧の種類で意味が変わる罠も分かる。
-- [数・ビット・乱数の関数](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-math-functions/)（cpp-math-functions・基礎・cpp・reviewed）：gcd・割り算・sqrt などの数の関数、popcount・bitset などのビットの関数、乱数と時間計測を正しく使う。整数の割り算が 0 に向かって切り捨てることや、sqrt の誤差に気をつける。
-- [参照と範囲 for](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-range-for/)（cpp-range-for・基礎・cpp・reviewed）：値をコピーで受けるか参照で受けるかを選び、範囲 for と関数の引数で無駄なコピーと書き換え漏れを防ぐ。値渡しの再帰が遅い理由と、swap が O(1) の理由も分かる。
-- [構造化束縛と pair・tuple・optional](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-structured-bindings/)（cpp-structured-bindings・基礎・cpp・reviewed）：pair・tuple・構造体の中身に名前を付けて取り出し（構造化束縛）、tie・optional で組や「値がない」を表す。pq.top() を参照で受けてから pop するような、受け方の誤りを防ぐ。
-- [ラムダ式と再帰ラムダ](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-lambda/)（cpp-lambda・基礎・cpp・reviewed）：その場で関数を作るラムダ式で、比較関数・判定関数・DFS を書く。ラムダで再帰する 4 つの書き方（std::function・auto&& self・deducing this・不動点コンビネータ）の違いと速さも比べる。
-- [関数テンプレートと constexpr](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-templates-constexpr/)（cpp-templates-constexpr・基礎・cpp・reviewed）：型を引数にした関数（テンプレート・auto 引数・コンセプト）と、コンパイル時に値を決める constexpr・static_assert を読み書きする。chmin(a, 3) が通らないような型推論の失敗を避ける。
-- [マクロと雛形](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-macros-template-file/)（cpp-macros-template-file・基礎・cpp・reviewed）：解説コードの先頭に並ぶ #include・using namespace std・マクロ・chmin・#pragma の意味と落とし穴が分かる。自作のヘッダを使うコードを、提出前に 1 ファイルに展開する方法も示す。
-- [コンテナ操作とイテレータ](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-container-idioms/)（cpp-container-idioms・基礎・cpp・reviewed）：set・map・multiset の定型の操作（erase_if・contains・1 個だけ消す）とイテレータを正しく書く。map の [] が要素を作る、set に std::lower_bound を使うと遅い、などの事故を防ぐ。
-- [比較関数と順序](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-comparators/)（cpp-comparators・基礎・cpp・reviewed）：sort・set・priority_queue に渡す比較関数を約束（狭義の弱順序）と向きを守って書き、構造体に operator< や <=> で順序を持たせる。比較関数に <= を書いて sort が落ちるような事故を防ぐ。
-- [アルゴリズム関数と ranges 版](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/)（cpp-algorithms・基礎・cpp・reviewed）：sort・unique・lower_bound・accumulate などの定型と、射影も使える ranges 版（C++20）を使い分ける。accumulate の初期値の型や、unique だけでは要素が減らない点に気をつける。
-- [文字列の操作](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-string-api/)（cpp-string-api・基礎・cpp・reviewed）：std::string の操作（substr・find・+=・数との変換）と string_view を、計算量と寿命に気をつけて書く。s = s + c が全体をコピーして遅いことや、cin >> の後の getline の罠を防ぐ。
-- [ACL の読み方](https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/)（acl-reading・基礎・cpp・reviewed）：AtCoder Library（ACL）を使う解説コードを共通の約束（0-indexed・半開区間）とともに読む。modint の val() と出力、segtree・lazy_segtree のテンプレート引数にラムダを渡す書き方を知る。
-- [views の基本](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-views-basics/)（cpp-views-basics・基礎・cpp・reviewed）：| でつなぐ views（iota・filter・transform・split など）を、取り出すときに計算する遅延評価として読み書きする。views::iota(0, v.size()) が通らない理由など、型と寿命の罠も分かる。
-- [C++23 の views と ranges::to](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-views-cpp23/)（cpp-views-cpp23・基礎・cpp・reviewed）：C++23 の views（enumerate・zip・pairwise・chunk_by など）で添字付きや隣どうしのループを短く書き、ranges::to で結果をコンテナにする。要素は参照を含む組で、受けた変数への代入が元を変える。
-- [入出力と定数倍](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-io/)（cpp-io・基礎・cpp・reviewed）：入出力を速くし（sync_with_stdio・cin.tie）、println・小数の桁の指定・インタラクティブ問題のフラッシュを正しく書く。C++ の書き方が原因で TLE になる例も、計測つきで示す。
-- [AtCoder と手元の C++ 環境](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-environment/)（cpp-environment・—・cpp・reviewed）：手元の g++ と AtCoder（GCC 15.2・-std=gnu++23）の違いで結果が変わる場面（未初期化変数・スタック・GNU 拡張・ACL の版）を知り、同じ条件で試す。各機能が GCC のどの版から使えるかも分かる。
-- [未定義動作とダングリング](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-undefined-behavior/)（cpp-undefined-behavior・基礎・cpp・reviewed）：あふれ・範囲外・未初期化変数・ダングリングなどの未定義動作が、-O2 や手元と AtCoder で結果を変える仕組みを知り、デバッグ用のビルドで見つける。ダングリングの 4 つの型も示す。
+- [C++ の逆引き](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-reverse-index/)（cpp-reverse-index・—・cpp・done）：解説コードの書き方・実行時の症状・コンパイルエラーのメッセージから、意味と C++ 章の該当する節を引く。1 行を「何を回すか・何を受け取るか・どう受け取るか」に分けて読む手順も示す。
+- [数の型とリテラル](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-types-literals/)（cpp-types-literals・基礎・cpp・done）：整数・浮動小数点数の型とリテラル、INF の値を、値が収まり意図どおりの型になるように選ぶ。auto x = 0 が int、1e18 が double になるような、型のずれによる誤りを防ぐ。
+- [整数のオーバーフローと __int128](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-integer-overflow/)（cpp-integer-overflow・基礎・cpp・done）：int どうしの積・1 << k・size() の符号なしなど、型の幅を超えて値が壊れる書き方を見分けて直す。64 bit を超える中間値は GCC の拡張 __int128 で持てるが、入出力などに制限がある。
+- [初期化と CTAD](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-initialization/)（cpp-initialization・基礎・cpp・done）：vector・多次元 vector・array・構造体を、意図した大きさと初期値で作る。型引数を省いて中身から型を決める CTAD（C++17）と、括弧の種類で意味が変わる罠も分かる。
+- [数・ビット・乱数の関数](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-math-functions/)（cpp-math-functions・基礎・cpp・done）：gcd・割り算・sqrt などの数の関数、popcount・bitset などのビットの関数、乱数と時間計測を正しく使う。整数の割り算が 0 に向かって切り捨てることや、sqrt の誤差に気をつける。
+- [参照と範囲 for](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-range-for/)（cpp-range-for・基礎・cpp・done）：値をコピーで受けるか参照で受けるかを選び、範囲 for と関数の引数で無駄なコピーと書き換え漏れを防ぐ。値渡しの再帰が遅い理由と、swap が O(1) の理由も分かる。
+- [構造化束縛と pair・tuple・optional](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-structured-bindings/)（cpp-structured-bindings・基礎・cpp・done）：pair・tuple・構造体の中身に名前を付けて取り出し（構造化束縛）、tie・optional で組や「値がない」を表す。pq.top() を参照で受けてから pop するような、受け方の誤りを防ぐ。
+- [ラムダ式と再帰ラムダ](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-lambda/)（cpp-lambda・基礎・cpp・done）：その場で関数を作るラムダ式で、比較関数・判定関数・DFS を書く。ラムダで再帰する 4 つの書き方（std::function・auto&& self・deducing this・不動点コンビネータ）の違いと速さも比べる。
+- [関数テンプレートと constexpr](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-templates-constexpr/)（cpp-templates-constexpr・基礎・cpp・done）：型を引数にした関数（テンプレート・auto 引数・コンセプト）と、コンパイル時に値を決める constexpr・static_assert を読み書きする。chmin(a, 3) が通らないような型推論の失敗を避ける。
+- [マクロと雛形](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-macros-template-file/)（cpp-macros-template-file・基礎・cpp・done）：解説コードの先頭に並ぶ #include・using namespace std・マクロ・chmin・#pragma の意味と落とし穴が分かる。自作のヘッダを使うコードを、提出前に 1 ファイルに展開する方法も示す。
+- [コンテナ操作とイテレータ](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-container-idioms/)（cpp-container-idioms・基礎・cpp・done）：set・map・multiset の定型の操作（erase_if・contains・1 個だけ消す）とイテレータを正しく書く。map の [] が要素を作る、set に std::lower_bound を使うと遅い、などの事故を防ぐ。
+- [比較関数と順序](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-comparators/)（cpp-comparators・基礎・cpp・done）：sort・set・priority_queue に渡す比較関数を約束（狭義の弱順序）と向きを守って書き、構造体に operator< や <=> で順序を持たせる。比較関数に <= を書いて sort が落ちるような事故を防ぐ。
+- [アルゴリズム関数と ranges 版](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/)（cpp-algorithms・基礎・cpp・done）：sort・unique・lower_bound・accumulate などの定型と、射影も使える ranges 版（C++20）を使い分ける。accumulate の初期値の型や、unique だけでは要素が減らない点に気をつける。
+- [文字列の操作](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-string-api/)（cpp-string-api・基礎・cpp・done）：std::string の操作（substr・find・+=・数との変換）と string_view を、計算量と寿命に気をつけて書く。s = s + c が全体をコピーして遅いことや、cin >> の後の getline の罠を防ぐ。
+- [ACL の読み方](https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/)（acl-reading・基礎・cpp・done）：AtCoder Library（ACL）を使う解説コードを共通の約束（0-indexed・半開区間）とともに読む。modint の val() と出力、segtree・lazy_segtree のテンプレート引数にラムダを渡す書き方を知る。
+- [views の基本](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-views-basics/)（cpp-views-basics・基礎・cpp・done）：| でつなぐ views（iota・filter・transform・split など）を、取り出すときに計算する遅延評価として読み書きする。views::iota(0, v.size()) が通らない理由など、型と寿命の罠も分かる。
+- [C++23 の views と ranges::to](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-views-cpp23/)（cpp-views-cpp23・基礎・cpp・done）：C++23 の views（enumerate・zip・pairwise・chunk_by など）で添字付きや隣どうしのループを短く書き、ranges::to で結果をコンテナにする。要素は参照を含む組で、受けた変数への代入が元を変える。
+- [入出力と定数倍](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-io/)（cpp-io・基礎・cpp・done）：入出力を速くし（sync_with_stdio・cin.tie）、println・小数の桁の指定・インタラクティブ問題のフラッシュを正しく書く。C++ の書き方が原因で TLE になる例も、計測つきで示す。
+- [AtCoder と手元の C++ 環境](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-environment/)（cpp-environment・—・cpp・done）：手元の g++ と AtCoder（GCC 15.2・-std=gnu++23）の違いで結果が変わる場面（未初期化変数・スタック・GNU 拡張・ACL の版）を知り、同じ条件で試す。各機能が GCC のどの版から使えるかも分かる。
+- [未定義動作とダングリング](https://yuukougun.github.io/kyopro-atlas/cpp/cpp-undefined-behavior/)（cpp-undefined-behavior・基礎・cpp・done）：あふれ・範囲外・未初期化変数・ダングリングなどの未定義動作が、-O2 や手元と AtCoder で結果を変える仕組みを知り、デバッグ用のビルドで見つける。ダングリングの 4 つの型も示す。

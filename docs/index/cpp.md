@@ -13,7 +13,7 @@ search:
 
 ## C++ の逆引き（cpp-reverse-index） {#cpp-reverse-index}
 
-- id：`cpp-reverse-index`　レベル：—　段階：reviewed　type：guide
+- id：`cpp-reverse-index`　レベル：—　段階：done　type：guide
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-reverse-index/
 - 別名：解説コードの読み方、解説コードが読めない、モダン C++ の読み方、書き方から引く、症状から引く、Segmentation fault、コンパイルエラーの読み方、エラーメッセージ、required from here
 - 種類：実装・C++、案内
@@ -33,7 +33,7 @@ search:
 
 ## 数の型とリテラル（cpp-types-literals） {#cpp-types-literals}
 
-- id：`cpp-types-literals`　レベル：基礎　段階：reviewed　type：cpp
+- id：`cpp-types-literals`　レベル：基礎　段階：done　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-types-literals/
 - 別名：整数の型、long long、LL、ULL、桁区切り、2 進リテラル、0uz、auto の推論、using ll = long long、static_cast、INF、numeric_limits、LLONG_MAX、INT_MAX、0x3f3f3f3f、1LL << 60、double、long double、1e18、浮動小数点数の型
 - 種類：実装・C++
@@ -52,7 +52,7 @@ search:
 
 ## 整数のオーバーフローと \_\_int128（cpp-integer-overflow） {#cpp-integer-overflow}
 
-- id：`cpp-integer-overflow`　レベル：基礎　段階：reviewed　type：cpp
+- id：`cpp-integer-overflow`　レベル：基礎　段階：done　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-integer-overflow/
 - 別名：オーバーフロー、integer overflow、あふれ、int の掛け算、1LL \* a \* b、1 << 40、符号なし整数、v.size() - 1、ssize、\_\_int128、i128、128bit 整数、\_\_builtin_mul_overflow
 - 種類：実装・C++
@@ -74,7 +74,7 @@ search:
 
 ## 初期化と CTAD（cpp-initialization） {#cpp-initialization}
 
-- id：`cpp-initialization`　レベル：基礎　段階：reviewed　type：cpp
+- id：`cpp-initialization`　レベル：基礎　段階：done　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-initialization/
 - 別名：初期化、多次元 vector、多次元配列、vector の初期化、array&lt;int, 26> cnt{\}、値初期化、memset、fill、assign、指示付き初期化、集成体、explicit、クラステンプレートの実引数推論、class template argument deduction、vector dp(n, vector(m, 0LL))
 - 種類：実装・C++
@@ -94,7 +94,7 @@ search:
 
 ## 数・ビット・乱数の関数（cpp-math-functions） {#cpp-math-functions}
 
-- id：`cpp-math-functions`　レベル：基礎　段階：reviewed　type：cpp
+- id：`cpp-math-functions`　レベル：基礎　段階：done　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-math-functions/
 - 別名：gcd、lcm、midpoint、clamp、割り算の切り捨ての向き、pow、sqrt、sqrtl、numbers::pi、std::popcount、countr_zero、bit_width、\_\_builtin_popcount、\_\_builtin_ctz、\_\_lg、std::bitset、\_Find_first、mt19937_64、uniform_int_distribution、shuffle、chrono、乱数、時間計測
 - 種類：実装・C++、ビット演算
@@ -115,7 +115,7 @@ search:
 
 ## 参照と範囲 for（cpp-range-for） {#cpp-range-for}
 
-- id：`cpp-range-for`　レベル：基礎　段階：reviewed　type：cpp
+- id：`cpp-range-for`　レベル：基礎　段階：done　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-range-for/
 - 別名：参照、参照渡し、const 参照、値渡し、コピー、ムーブ、std::move、std::swap、範囲 for、range-based for、auto&&、const auto&、for (auto& x : v)、vector&lt;bool>
 - 種類：実装・C++
@@ -132,7 +132,7 @@ search:
 
 ## 構造化束縛と pair・tuple・optional（cpp-structured-bindings） {#cpp-structured-bindings}
 
-- id：`cpp-structured-bindings`　レベル：基礎　段階：reviewed　type：cpp
+- id：`cpp-structured-bindings`　レベル：基礎　段階：done　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-structured-bindings/
 - 別名：構造化束縛、structured binding、auto [a, b]、分解宣言、pair、tuple、tie、get<0>、make_pair、optional、nullopt、value_or、exchange、初期化式付き if
 - 種類：実装・C++
@@ -154,7 +154,7 @@ search:
 
 ## ラムダ式と再帰ラムダ（cpp-lambda） {#cpp-lambda}
 
-- id：`cpp-lambda`　レベル：基礎　段階：reviewed　type：cpp
+- id：`cpp-lambda`　レベル：基礎　段階：done　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-lambda/
 - 別名：ラムダ、lambda、無名関数、クロージャ、キャプチャ、[&]、[=]、ジェネリックラムダ、再帰ラムダ、std::function、auto&& self、this auto&& self、deducing this、不動点コンビネータ、FixPoint
 - 種類：実装・C++
@@ -176,7 +176,7 @@ search:
 
 ## 関数テンプレートと constexpr（cpp-templates-constexpr） {#cpp-templates-constexpr}
 
-- id：`cpp-templates-constexpr`　レベル：基礎　段階：reviewed　type：cpp
+- id：`cpp-templates-constexpr`　レベル：基礎　段階：done　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-templates-constexpr/
 - 別名：テンプレート、template、関数テンプレート、template &lt;class T>、型推論、auto 引数、コンセプト、concepts、requires、static_assert、if constexpr、畳み込み式、fold expression、属性、[[maybe_unused]]
 - 種類：実装・C++
@@ -194,7 +194,7 @@ search:
 
 ## マクロと雛形（cpp-macros-template-file） {#cpp-macros-template-file}
 
-- id：`cpp-macros-template-file`　レベル：基礎　段階：reviewed　type：cpp
+- id：`cpp-macros-template-file`　レベル：基礎　段階：done　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-macros-template-file/
 - 別名：マクロ、macro、テンプレート（雛形）、rep マクロ、all マクロ、\#define int long long、signed main()、chmin、chmax、\#ifdef LOCAL、\#pragma GCC optimize、bits/stdc++.h、using namespace std、import std;、名前の衝突、バンドル、ライブラリの展開、expander.py、提出用にコピー
 - 種類：実装・C++
@@ -214,7 +214,7 @@ search:
 
 ## コンテナ操作とイテレータ（cpp-container-idioms） {#cpp-container-idioms}
 
-- id：`cpp-container-idioms`　レベル：基礎　段階：reviewed　type：cpp
+- id：`cpp-container-idioms`　レベル：基礎　段階：done　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-container-idioms/
 - 別名：erase_if、contains、emplace_back、map の []、multiset の削除、ms.erase(ms.find(x))、イテレータ、iterator、std::prev、std::next、rbegin、it - v.begin()、イテレータの無効化、unordered_map のハッシュ、pb_ds、order_of_key、find_by_order
 - 種類：実装・C++、データ構造
@@ -235,7 +235,7 @@ search:
 
 ## 比較関数と順序（cpp-comparators） {#cpp-comparators}
 
-- id：`cpp-comparators`　レベル：基礎　段階：reviewed　type：cpp
+- id：`cpp-comparators`　レベル：基礎　段階：done　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-comparators/
 - 別名：comparator、greater<>、greater{\}、priority_queue の向き、最小ヒープ、厳密弱順序、strict weak ordering、operator&lt;、三方比較演算子、宇宙船演算子、<=>、= default、構造体のソート、複数キーのソート
 - 種類：実装・C++、ソート・座標圧縮
@@ -253,7 +253,7 @@ search:
 
 ## アルゴリズム関数と ranges 版（cpp-algorithms） {#cpp-algorithms}
 
-- id：`cpp-algorithms`　レベル：基礎　段階：reviewed　type：cpp
+- id：`cpp-algorithms`　レベル：基礎　段階：done　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-algorithms/
 - 別名：algorithm、sort、unique、std::lower_bound、std::upper_bound、accumulate、reduce、partial_sum、std::iota、std::next_permutation、max_element、max({a, b, c})、ranges::sort、射影、projection、ranges::unique、ranges::fold_left、ranges::contains
 - 種類：実装・C++、ソート・座標圧縮
@@ -275,7 +275,7 @@ search:
 
 ## 文字列の操作（cpp-string-api） {#cpp-string-api}
 
-- id：`cpp-string-api`　レベル：基礎　段階：reviewed　type：cpp
+- id：`cpp-string-api`　レベル：基礎　段階：done　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-string-api/
 - 別名：string、substr、string::find、npos、to_string、stoi、stoll、starts_with、ends_with、string_view、s += c、getline、c - 'a'、文字と数の変換
 - 種類：実装・C++
@@ -292,7 +292,7 @@ search:
 
 ## ACL の読み方（acl-reading） {#acl-reading}
 
-- id：`acl-reading`　レベル：基礎　段階：reviewed　type：cpp
+- id：`acl-reading`　レベル：基礎　段階：done　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/acl-reading/
 - 別名：AtCoder Library、ACL、atcoder/all、using namespace atcoder、val()、segtree&lt;S, op, e>、lazy_segtree のテンプレート引数、テンプレート引数、ラムダをテンプレート引数に
 - 種類：実装・C++
@@ -314,7 +314,7 @@ search:
 
 ## views の基本（cpp-views-basics） {#cpp-views-basics}
 
-- id：`cpp-views-basics`　レベル：基礎　段階：reviewed　type：cpp
+- id：`cpp-views-basics`　レベル：基礎　段階：done　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-views-basics/
 - 別名：views、ビュー、Range アダプタ、range adaptor、パイプ、遅延評価、views::iota、views::reverse、views::filter、views::transform、views::take、views::keys、views::split、views::join、views::common
 - 種類：実装・C++
@@ -334,7 +334,7 @@ search:
 
 ## C++23 の views と ranges::to（cpp-views-cpp23） {#cpp-views-cpp23}
 
-- id：`cpp-views-cpp23`　レベル：基礎　段階：reviewed　type：cpp
+- id：`cpp-views-cpp23`　レベル：基礎　段階：done　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-views-cpp23/
 - 別名：views::enumerate、views::zip、views::zip_transform、views::pairwise、views::adjacent、views::chunk、views::slide、views::chunk_by、views::stride、views::cartesian_product、views::repeat、views::join_with、ranges::to、to&lt;vector>、from_range、append_range
 - 種類：実装・C++
@@ -355,7 +355,7 @@ search:
 
 ## 入出力と定数倍（cpp-io） {#cpp-io}
 
-- id：`cpp-io`　レベル：基礎　段階：reviewed　type：cpp
+- id：`cpp-io`　レベル：基礎　段階：done　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-io/
 - 別名：入出力、fast I/O、cin.tie(nullptr)、sync_with_stdio、endl、println、std::print、std::format、printf、setprecision、fixed、小数の出力、fflush(stdout)、TLE になる書き方、入出力が遅い
 - 種類：実装・C++、計算量
@@ -378,7 +378,7 @@ search:
 
 ## AtCoder と手元の C++ 環境（cpp-environment） {#cpp-environment}
 
-- id：`cpp-environment`　レベル：—　段階：reviewed　type：cpp
+- id：`cpp-environment`　レベル：—　段階：done　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-environment/
 - 別名：AtCoder の C++、コンパイルオプション、GCC 15.2、-std=gnu++23、-std=c++23、-ftrivial-auto-var-init=zero、言語アップデート、C++ の版、版の対応表、スタックオーバーフロー、ulimit -s、深い再帰、手元と結果が違う
 - 種類：実装・C++
@@ -401,7 +401,7 @@ search:
 
 ## 未定義動作とダングリング（cpp-undefined-behavior） {#cpp-undefined-behavior}
 
-- id：`cpp-undefined-behavior`　レベル：基礎　段階：reviewed　type：cpp
+- id：`cpp-undefined-behavior`　レベル：基礎　段階：done　type：cpp
 - URL：https://yuukougun.github.io/kyopro-atlas/cpp/cpp-undefined-behavior/
 - 別名：未定義動作、UB、undefined behavior、範囲外アクセス、未初期化変数、初期化忘れ、ゴミの値、ダングリング、dangling reference、use-after-free、参照の無効化、一時オブジェクトの寿命、pq.top() の参照、\_GLIBCXX_DEBUG、\_GLIBCXX_ASSERTIONS、-fsanitize=address、AddressSanitizer、UndefinedBehaviorSanitizer、デバッグ用ビルド、assert
 - 種類：実装・C++

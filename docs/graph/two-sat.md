@@ -27,7 +27,7 @@ sections:
   - {title: モデル化の早見表（同時に選べない・どちらかは必ず・a なら b）, anchor: cheatsheet}
   - {title: 「高々 1 つ」を補助変数で O(K) 本の節にする, anchor: at-most-one}
   - {title: ACL の two_sat と自作するときの要点, anchor: acl}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

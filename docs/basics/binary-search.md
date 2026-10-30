@@ -19,13 +19,13 @@ signs:
   - {type: constraint, text: N ≤ 2×10^5 個の値に対して、Q ≤ 2×10^5 個の位置・個数の質問がある}
 acl: []
 frequency: A
-frequency_evidence: recent 4（abc457_e・abc476_d・abc480_d・abc480_e）・前提として 26 ページに届く（直接 12）・古い ABC 6 問
+frequency_evidence: recent 4（abc457_e・abc476_d・abc480_d・abc480_e）・前提として 25 ページに届く（直接 12）・古い ABC 6 問
 sections:
   - {title: めぐる式（ok と ng の不変条件・初期値は判定しない番兵）, anchor: meguru}
   - {title: lower_bound・upper_bound と個数の数え方, anchor: lower-bound}
   - {title: 片方を固定してもう片方を二分探索する, anchor: fix-one-side}
   - {title: 質問で二分探索する（インタラクティブ問題へ）, anchor: interactive}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

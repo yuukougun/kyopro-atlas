@@ -30,7 +30,7 @@ sections:
   - {title: 盤面の斜め：r+c・r−c で斜めの線に番号を付ける（色の偶奇は parity）, anchor: diagonal-coordinates}
   - {title: 回転後の偶奇：u と v の偶奇がそろう点だけが元の格子点（チェビシェフ → マンハッタンで 1/2 が出る）, anchor: parity-after-rotation, level: 青}
   - {title: ひし形の範囲を正方形にして 2 次元累積和, anchor: diamond-range, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

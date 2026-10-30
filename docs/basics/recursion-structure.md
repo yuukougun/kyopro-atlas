@@ -19,13 +19,13 @@ signs:
   - {type: constraint, text: レベルは 50 程度まででも、全体の長さが 10^15 を超える}
 acl: []
 frequency: B
-frequency_evidence: recent 1（abc476_g）・前提として 6 ページに届く（直接 2）・古い ABC 3 問
+frequency_evidence: recent 1（abc476_g）・前提として 5 ページに届く（直接 2）・古い ABC 3 問
 sections:
   - {title: 長さを前計算して K 番目を再帰で探す, anchor: kth-by-length}
   - {title: 再帰で描く, anchor: draw}
   - {title: 必要な深さは log K（長さの上限で打ち切る）, anchor: depth}
   - {title: 再帰の深さとスタック, anchor: stack}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -28,7 +28,7 @@ sections:
   - {title: '2 つの接頭辞の長さ (X, Y) を区間と見る', anchor: two-prefixes, level: 黄}
   - {title: 木上の Mo（入りと出の両方を記録した列で、パスを区間にする。LCA を別に足す）, anchor: mo-on-tree, level: 黄}
   - {title: 時間付き Mo・ロールバック Mo, anchor: variants, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

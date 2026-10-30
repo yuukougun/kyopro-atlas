@@ -23,7 +23,7 @@ sections:
   - {title: 1 点からの距離（ダイクストラ法はいらない）, anchor: from-one}
   - {title: 2 点からの距離を比べる, anchor: from-two}
   - {title: 根からの累積値で 2 点間を表す（XOR は LCA が不要、和は LCA が要る）, anchor: root-prefix}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -31,7 +31,7 @@ sections:
   - {title: 周期と繰り返し：最小周期と、繰り返しで書ける条件（弱周期定理）, anchor: string-period}
   - {title: N の約数の周期を数える：約数ごとに数えて包除（メビウス）, anchor: count-periodic}
   - {title: 照合オートマトン（状態×文字 → 次の状態）を表に埋める, anchor: automaton}
-stage: reviewed
+stage: done
 updated: 2026-10-22
 ---
 

@@ -25,7 +25,7 @@ sections:
   - {title: 篩で 1..N の φ をすべて求める, anchor: sieve}
   - {title: オイラーの定理 a^φ(n) ≡ 1 と、位数・指数の mod への応用, anchor: euler-theorem}
   - {title: 約数についての φ の和が n になることと、位数が d の元が φ(d) 個あること, anchor: divisor-sum}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

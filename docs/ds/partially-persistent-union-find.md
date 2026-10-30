@@ -25,7 +25,7 @@ sections:
   - {title: なぜ経路圧縮をしないのか, anchor: no-path-compression}
   - {title: 時刻の二分探索で「初めて連結になる時刻」を求める, anchor: binary-search-time}
   - {title: 代わりの手（並列二分探索・併合過程の木（Kruskal 再構築木））, anchor: alternatives}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

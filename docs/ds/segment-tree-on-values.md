@@ -21,14 +21,14 @@ signs:
 acl: [segtree, fenwick_tree]
 verify: [point_set_range_composite_large_array]
 frequency: B
-frequency_evidence: recent 0・前提として 2 ページに届く（直接 1）・古い ABC 5 問
+frequency_evidence: recent 0・前提として 2 ページに届く（直接 1）・古い ABC 7 問
 sections:
   - {title: 値を添字にする（個数・和を載せる）と座標圧縮, anchor: index-by-value}
   - {title: DP の値を値の添字で持つ, anchor: dp-on-values}
   - {title: 上位 K 個の和（境界はセグメント木上の二分探索で探す）, anchor: top-k-sum, level: 青}
   - {title: 左の個数の偶奇で右の読み方が変わる量（ソート後の奇数番目の和）, anchor: odd-position-sum, level: 黄}
   - {title: 動的セグメント木（必要なノードだけ作る）, anchor: dynamic-segment-tree, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

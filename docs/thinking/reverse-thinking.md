@@ -23,7 +23,7 @@ sections:
   - {title: 最後の操作を特定して逆再生する, anchor: undo-last}
   - {title: 締め切りを後ろから見る, anchor: deadlines}
   - {title: 削除を逆順の追加にする（Union-Find はグラフの章）, anchor: delete-to-add, level: 水}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

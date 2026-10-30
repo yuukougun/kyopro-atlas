@@ -26,7 +26,7 @@ sections:
   - {title: leading zero を区別するとき, anchor: leading-zero}
   - {title: 2 進の桁 DP（XOR・AND）, anchor: binary}
   - {title: 割る数を全探索して桁 DP を繰り返す, anchor: fix-divisor}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -24,7 +24,7 @@ sections:
   - {title: 素数の個数・素数の和（Lucy DP）, anchor: prime-counting}
   - {title: 和の求め方の概要（杜教篩・Lucy DP・Min_25 篩）, anchor: prefix-sums}
   - {title: 公開ライブラリと自作するときの要点, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

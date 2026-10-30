@@ -26,7 +26,7 @@ sections:
   - {title: クエリが単調でないとき（二分探索）, anchor: non-monotone-queries}
   - {title: Li Chao Tree（区間の真ん中で勝つ直線を残す）, anchor: li-chao-tree}
   - {title: ライブラリでの検証, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

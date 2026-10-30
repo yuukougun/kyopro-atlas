@@ -24,7 +24,7 @@ sections:
   - {title: 推移閉包と最大反鎖（数列なら LIS のページの Dilworth の定理へ）, anchor: antichain}
   - {title: Hall の結婚定理, anchor: hall}
   - {title: 自作するときの要点と Library Checker, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

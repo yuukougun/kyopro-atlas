@@ -28,7 +28,7 @@ sections:
   - {title: 先に構造を出力してから答える, anchor: output-structure-first, level: 青}
   - {title: 適応的ジャッジ（最悪の場合の回数で考える）, anchor: adaptive-judge}
   - {title: 手元でのテスト（ジャッジ役のプログラムとパイプでつなぐ）, anchor: local-testing}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

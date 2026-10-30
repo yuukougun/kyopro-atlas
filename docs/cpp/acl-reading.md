@@ -27,7 +27,7 @@ sections:
   - {title: キャプチャのあるラムダは op・e に渡せない（max_right・min_left の判定関数には渡せる）, anchor: capturing-lambda, level: 水}
   - {title: 'lazy_segtree の 7 つの引数：composition(f, g) は g の後に f', anchor: lazy-segtree-args, level: 水}
   - {title: 'テンプレート引数の形が合わないときの static_assert（mapping must work as S(F, S) など）', anchor: template-arg-errors, level: 水}
-stage: reviewed
+stage: done
 updated: 2026-10-22
 cpp_std: null
 gcc_min: null

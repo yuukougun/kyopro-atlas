@@ -26,7 +26,7 @@ sections:
   - {title: 閉路の復元（親をたどる）, anchor: restore}
   - {title: 出次数 1 のグラフでは同じ頂点に 2 回来るまで進む, anchor: out-degree-one}
   - {title: シミュレーションの周期の検出（基本テクニックの章）との違い, anchor: vs-periodicity}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -31,7 +31,7 @@ sections:
   - {title: 有名な手法を当てはめる, anchor: q-known-methods}
   - {title: 一度離れる, anchor: q-step-away}
   - {title: 問題集の考察の型との対応, anchor: book-mapping}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

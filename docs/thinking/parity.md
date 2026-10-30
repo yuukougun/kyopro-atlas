@@ -25,7 +25,7 @@ sections:
   - {title: 偶奇の条件でつながった成分（Union-Find）, anchor: components}
   - {title: 市松模様の偶奇, anchor: checkerboard, level: 青}
   - {title: 二部グラフ・ゲームとのつながり, anchor: bipartite-game}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

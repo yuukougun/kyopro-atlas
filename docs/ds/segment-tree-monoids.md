@@ -20,13 +20,13 @@ signs:
 acl: [segtree]
 verify: []
 frequency: A
-frequency_evidence: recent 2（abc456_f・abc460_f）・前提として 2 ページに届く（直接 2）・古い ABC 5 問
+frequency_evidence: recent 2（abc456_f・abc460_f）・前提として 2 ページに届く（直接 2）・古い ABC 3 問
 sections:
   - {title: 設計の手順（答えに要る情報を足し、結合法則と単位元を確かめる）, anchor: design-steps}
   - {title: 型の表（和・min/max・gcd・最小値と個数・括弧列・最大部分配列和など）, anchor: pattern-table}
   - {title: 非可換なモノイド（1 次関数の合成・ハッシュの連結。積む順序）, anchor: non-commutative}
   - {title: '行列を載せる（(min,+)・(max,+) の半環も）', anchor: matrix}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

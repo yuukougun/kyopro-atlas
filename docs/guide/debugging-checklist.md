@@ -23,7 +23,7 @@ sections:
   - {title: MLE のとき, anchor: mle}
   - {title: 手元と AtCoder で結果が違う, anchor: local-vs-judge}
   - {title: 最後の手段, anchor: last-resort}
-stage: reviewed
+stage: done
 updated: 2026-10-22
 ---
 

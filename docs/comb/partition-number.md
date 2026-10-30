@@ -26,7 +26,7 @@ sections:
   - {title: 全列挙の個数の見積もり（p(30) = 5604、p(50) = 204226）, anchor: size}
   - {title: 置換の巡回型ごとの数 N!/Π(ℓ^m_ℓ · m_ℓ!), anchor: cycle-type}
   - {title: 分割数型の DP, anchor: partition-dp, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

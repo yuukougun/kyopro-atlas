@@ -28,7 +28,7 @@ sections:
   - {title: 決めてから整合性を確かめる型, anchor: assume-and-check}
   - {title: 片側を bit で決めて残りは貪欲, anchor: half-greedy, level: 水}
   - {title: 順列全探索と next_permutation（昇順から始める・重複要素）, anchor: permutations}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

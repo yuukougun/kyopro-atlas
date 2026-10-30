@@ -25,7 +25,7 @@ sections:
   - {title: 「ちょうど」を「以下」の差で数える, anchor: exactly-vs-at-most}
   - {title: 二項係数と組み合わせた寄与（残りの選び方を掛ける）, anchor: contribution-with-binomial, level: 青}
   - {title: 小さいケースの全探索で式を検算する, anchor: verify-small}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

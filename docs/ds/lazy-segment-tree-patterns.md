@@ -29,7 +29,7 @@ sections:
   - {title: 等差数列の加算・2 列の積の和（添字の和や Σa・Σb を S に足す）, anchor: arithmetic-add}
   - {title: 載らない作用（区間 chmin と区間和・区間の割り算・区間の並べ替え）と逃げ道, anchor: not-applicable}
   - {title: 言い換えてから載せる（しきい値で 0/1 にする・X_i − i・寄与）, anchor: reformulate, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

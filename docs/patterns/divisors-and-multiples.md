@@ -31,7 +31,7 @@ sections:
   - {title: 積が平方数・積がちょうど N → 素因数の指数で考える（prime-exponent-vector）, anchor: products}
   - {title: '差の gcd・区間の gcd の値の種類 → gcd の性質（gcd-lcm, gcd-properties）', anchor: gcd}
   - {title: ⌊N/i⌋ の値ごとにまとめる → floor の値の列挙（floor-quotient-enum）, anchor: floor-sums}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

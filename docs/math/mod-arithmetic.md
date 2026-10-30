@@ -26,7 +26,7 @@ sections:
   - {title: 割り算はそのままではできない（→ 逆元）, anchor: division}
   - {title: mod を取った値で大小比較・最大値を考えてはいけない, anchor: no-compare}
   - {title: なぜ 998244353 か（素数で、NTT に向く形）, anchor: why-998244353}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

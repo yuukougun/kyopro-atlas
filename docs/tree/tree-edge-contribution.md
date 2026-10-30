@@ -24,7 +24,7 @@ sections:
   - {title: 森の成分数 = 頂点数 − 辺数 に分けて数える, anchor: forest-count}
   - {title: パス上の最大値の和（重みの小さい順に併合して数える型は Union-Find の応用へ）, anchor: max-on-path}
   - {title: 期待値・特定の色を通らないパスへの応用, anchor: expectation, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -26,7 +26,7 @@ sections:
   - {title: 平らな部分がある関数での失敗, anchor: flat-pitfall}
   - {title: 黄金分割探索, anchor: golden-section}
   - {title: 増分が単調なら 1 単位ずつ貪欲に配る, anchor: marginal-greedy, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

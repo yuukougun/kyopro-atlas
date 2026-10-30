@@ -27,7 +27,7 @@ sections:
   - {title: 頂点集合ごとの DP（3^N）, anchor: subset-dp}
   - {title: 距離の層ごとに頂点を配る, anchor: bfs-layers}
   - {title: 「ちょうど L」を「L 以下」の差で数える, anchor: exactly-l}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

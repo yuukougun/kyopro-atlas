@@ -24,7 +24,7 @@ sections:
   - {title: なぜ重なってよいか（冪等）と k = ⌊log₂ L⌋, anchor: idempotent}
   - {title: 作り方（長さが 2 のべきの区間の表と log の表）, anchor: build}
   - {title: 冪等でない演算（2 べきに分けて O(log N)、Disjoint Sparse Table）, anchor: disjoint-sparse-table, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

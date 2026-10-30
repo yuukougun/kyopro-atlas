@@ -13,7 +13,7 @@ search:
 
 ## 区間（interval） {#interval}
 
-- id：`interval`　レベル：—　段階：reviewed　type：pattern
+- id：`interval`　レベル：—　段階：done　type：pattern
 - URL：https://yuukougun.github.io/kyopro-atlas/patterns/interval/
 - 別名：連続部分列、部分配列、subarray、区間の集合、interval
 - 種類：案内、区間クエリ、累積和・差分
@@ -45,7 +45,7 @@ search:
 
 ## 部分列と部分文字列（subsequence-and-substring） {#subsequence-and-substring}
 
-- id：`subsequence-and-substring`　レベル：—　段階：reviewed　type：pattern
+- id：`subsequence-and-substring`　レベル：—　段階：done　type：pattern
 - URL：https://yuukougun.github.io/kyopro-atlas/patterns/subsequence-and-substring/
 - 別名：部分列、部分文字列、subsequence、substring
 - 種類：案内、文字列、DP
@@ -72,7 +72,7 @@ search:
 
 ## 順列と置換（permutation） {#permutation}
 
-- id：`permutation`　レベル：—　段階：reviewed　type：pattern
+- id：`permutation`　レベル：—　段階：done　type：pattern
 - URL：https://yuukougun.github.io/kyopro-atlas/patterns/permutation/
 - 別名：permutation、置換、1〜N の順列
 - 種類：案内、数え上げ、考察
@@ -97,7 +97,7 @@ search:
 
 ## 括弧列（bracket-sequence） {#bracket-sequence}
 
-- id：`bracket-sequence`　レベル：—　段階：reviewed　type：pattern
+- id：`bracket-sequence`　レベル：—　段階：done　type：pattern
 - URL：https://yuukougun.github.io/kyopro-atlas/patterns/bracket-sequence/
 - 別名：正しい括弧列、カッコ列、parentheses、バランスの取れた括弧列、bracket sequence
 - 種類：案内、文字列、累積和・差分
@@ -122,7 +122,7 @@ search:
 
 ## mex（mex） {#mex}
 
-- id：`mex`　レベル：—　段階：reviewed　type：pattern
+- id：`mex`　レベル：—　段階：done　type：pattern
 - URL：https://yuukougun.github.io/kyopro-atlas/patterns/mex/
 - 別名：minimum excluded、含まれない最小の非負整数、まだ出ていない最小の値
 - 種類：案内、データ構造、考察
@@ -143,7 +143,7 @@ search:
 
 ## K 番目と中央値（kth-and-median） {#kth-and-median}
 
-- id：`kth-and-median`　レベル：—　段階：reviewed　type：pattern
+- id：`kth-and-median`　レベル：—　段階：done　type：pattern
 - URL：https://yuukougun.github.io/kyopro-atlas/patterns/kth-and-median/
 - 別名：K 番目、中央値、メディアン、上位 K 個、median
 - 種類：案内、二分探索、データ構造
@@ -170,7 +170,7 @@ search:
 
 ## XOR（xor） {#xor}
 
-- id：`xor`　レベル：—　段階：reviewed　type：pattern
+- id：`xor`　レベル：—　段階：done　type：pattern
 - URL：https://yuukougun.github.io/kyopro-atlas/patterns/xor/
 - 別名：排他的論理和、ビットごとの排他的論理和、exclusive or
 - 種類：案内、ビット演算、線形代数・行列
@@ -200,7 +200,7 @@ search:
 
 ## 約数と倍数（divisors-and-multiples） {#divisors-and-multiples}
 
-- id：`divisors-and-multiples`　レベル：—　段階：reviewed　type：pattern
+- id：`divisors-and-multiples`　レベル：—　段階：done　type：pattern
 - URL：https://yuukougun.github.io/kyopro-atlas/patterns/divisors-and-multiples/
 - 別名：約数、倍数、divisor、multiple
 - 種類：案内、整数論
@@ -226,7 +226,7 @@ search:
 
 ## グリッド（grid） {#grid}
 
-- id：`grid`　レベル：—　段階：reviewed　type：pattern
+- id：`grid`　レベル：—　段階：done　type：pattern
 - URL：https://yuukougun.github.io/kyopro-atlas/patterns/grid/
 - 別名：マス目、盤面、H×W、二次元配列、grid
 - 種類：案内、グラフ探索、DP
@@ -253,7 +253,7 @@ search:
 
 ## 操作列とクエリ（operation-sequence） {#operation-sequence}
 
-- id：`operation-sequence`　レベル：—　段階：reviewed　type：pattern
+- id：`operation-sequence`　レベル：—　段階：done　type：pattern
 - URL：https://yuukougun.github.io/kyopro-atlas/patterns/operation-sequence/
 - 別名：クエリの列、操作の列、逆順処理、シミュレーション
 - 種類：案内、クエリ処理の工夫、データ構造
@@ -278,7 +278,7 @@ search:
 
 ## 円環（circular） {#circular}
 
-- id：`circular`　レベル：—　段階：draft　type：pattern
+- id：`circular`　レベル：—　段階：done　type：pattern
 - URL：https://yuukougun.github.io/kyopro-atlas/patterns/circular/
 - 別名：環状、円形に並ぶ、円周上に並ぶ、最後と最初が隣り合う、2 周分に伸ばす、輪、リング、circular、cyclic、ring
 - 種類：案内、累積和・差分、数え上げ

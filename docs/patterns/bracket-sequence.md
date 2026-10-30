@@ -29,7 +29,7 @@ sections:
   - {title: 複数の括弧列を並べる順序 → 要約して 2 組に分けてソート（exchange-argument）, anchor: ordering}
   - {title: 価値が最大の正しい括弧列 → 先頭からの条件に言い換えて優先度付きキュー（greedy-priority-queue）, anchor: max-value}
   - {title: 数式・入れ子の構造の解析 → 構文解析（parsing）, anchor: parsing}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

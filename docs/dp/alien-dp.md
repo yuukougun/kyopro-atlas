@@ -25,7 +25,7 @@ sections:
   - {title: 取り消し付きの貪欲で解ける場合（優先度付きキュー）, anchor: undoable-greedy}
   - {title: Monge な区間分割と組み合わせる, anchor: with-monge}
   - {title: 自作するときの要点と確かめ方, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

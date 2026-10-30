@@ -26,7 +26,7 @@ sections:
   - {title: K 個上の祖先（K を 2 進数に分けて跳ぶ）, anchor: kth-ancestor}
   - {title: パス上の最大値・和を表と一緒に持つ, anchor: path-aggregate}
   - {title: 条件を満たす最も遠い祖先, anchor: farthest-ancestor}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

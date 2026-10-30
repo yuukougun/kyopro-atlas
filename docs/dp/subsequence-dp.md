@@ -27,7 +27,7 @@ sections:
   - {title: 部分列として現れない最短の文字列（後ろから DP して辞書順最小に復元）, anchor: shortest-non-subsequence}
   - {title: 辞書順 K 番目の部分列（後ろからの個数で先頭から決める）, anchor: kth-subsequence}
   - {title: 条件付き・言い換えてから数える（隣り合う位置を選ばない・累積和の列・TT の形）, anchor: with-conditions}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

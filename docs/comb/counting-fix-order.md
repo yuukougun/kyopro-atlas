@@ -25,7 +25,7 @@ sections:
   - {title: 積の法則が使える順番で決める（BFS 順）, anchor: bfs-order}
   - {title: 木の上の順番 n!/Π 部分木の大きさ, anchor: tree-order, level: 黄}
   - {title: 順序を状態に持つ DP（挿入 DP・bitDP）との使い分け, anchor: vs-dp}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

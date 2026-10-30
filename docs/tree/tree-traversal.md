@@ -26,7 +26,7 @@ sections:
   - {title: 親の番号が自分より小さいなら、番号の逆順で足りる, anchor: parent-index}
   - {title: 再帰の深さ（パス状の木）と非再帰の書き方, anchor: recursion-depth}
   - {title: 一般の木 DP は DP の章へ, anchor: to-tree-dp}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

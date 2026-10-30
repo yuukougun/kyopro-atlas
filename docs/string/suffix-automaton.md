@@ -31,7 +31,7 @@ sections:
   - {title: 文字列アルゴリズムの逆問題（逆 Manacher・逆 Z）, anchor: inverse-string-problems}
   - {title: そのほかの名前（2 次元ローリングハッシュ・Suffix Tree・Boyer-Moore の検索）, anchor: others}
   - {title: ライブラリと Library Checker での確かめ方, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

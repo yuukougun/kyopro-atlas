@@ -25,7 +25,7 @@ sections:
   - {title: 止まるマス・境界のマスの数え方, anchor: boundary-cells}
   - {title: 市松模様で二部グラフになる（フロー・マッチングへの入口）, anchor: checkerboard}
   - {title: 障害物どうしの 8 近傍の連結で通れるかを判定する, anchor: obstacle-dual, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

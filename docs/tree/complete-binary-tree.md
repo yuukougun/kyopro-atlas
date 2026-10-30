@@ -24,7 +24,7 @@ sections:
   - {title: 番号だけで LCA を求める（大きい方を 2 で割る）, anchor: lca-by-index}
   - {title: K 分木への一般化, anchor: k-ary}
   - {title: 距離 K の頂点の数（部分木の深さの範囲を N で切る）, anchor: count-at-distance, level: 青}
-stage: reviewed
+stage: done
 updated: 2026-10-22
 ---
 

@@ -25,7 +25,7 @@ sections:
   - {title: BEST 定理（有向オイラー閉路の数）, anchor: best-theorem}
   - {title: 頂点集合ごとに数えて部分集合の DP と組む, anchor: subset-dp}
   - {title: 計算量と自作するときの要点, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

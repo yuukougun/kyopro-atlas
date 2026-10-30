@@ -26,7 +26,7 @@ sections:
   - {title: 部分永続と完全永続, anchor: partial-vs-full}
   - {title: 操作の版を木にしてオフラインで処理する（版の木の DFS と取り消し）, anchor: offline-version-tree}
   - {title: 接頭辞ごとの版で区間の K 番目・x 以下の個数をオンラインで求める, anchor: prefix-versions, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

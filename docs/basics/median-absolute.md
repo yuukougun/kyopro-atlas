@@ -26,7 +26,7 @@ sections:
   - {title: x と y に分ける, anchor: separate-axes}
   - {title: 距離の和で判定して二分探索する, anchor: with-binary-search, level: 青}
   - {title: 二乗和の最小（平均）との違い, anchor: vs-squares}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

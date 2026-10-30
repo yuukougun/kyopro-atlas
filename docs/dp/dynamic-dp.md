@@ -25,7 +25,7 @@ sections:
   - {title: 積の向きと単位行列, anchor: order-and-identity}
   - {title: 木の上の動的 DP（Static Top Tree へ）, anchor: on-trees}
   - {title: ライブラリでの検証, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

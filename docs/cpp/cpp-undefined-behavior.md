@@ -28,7 +28,7 @@ sections:
   - {title: 見つける道具と見つけられるもの：警告・アサーション・デバッグモード・サニタイザ, anchor: detection-tools}
   - {title: 不具合を探すビルドを cph とは別に用意する, anchor: debug-build}
   - {title: assert で WA を RE に変えて気づく（AtCoder では NDEBUG が付かない）, anchor: assert}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 cpp_std: null
 gcc_min: null

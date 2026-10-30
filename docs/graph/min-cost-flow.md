@@ -28,7 +28,7 @@ sections:
   - {title: モデル化の型（重み付き二部マッチング・市松模様・差分列の流れ）, anchor: modeling}
   - {title: ACL の mcf_graph（flow と slope）, anchor: acl}
   - {title: 割当問題とハンガリアン法, anchor: hungarian, level: 発展}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

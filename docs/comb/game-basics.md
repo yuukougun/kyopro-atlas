@@ -31,7 +31,7 @@ sections:
   - {title: 総手数の偶奇・不変量で決まるゲーム（最終形から数える）, anchor: move-parity}
   - {title: 真似戦略・ペアリング戦略（真似した手が合法かを確かめる）, anchor: mirror-strategy, level: 青}
   - {title: インタラクティブ：必勝戦略を実行する, anchor: interactive}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

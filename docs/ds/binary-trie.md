@@ -27,7 +27,7 @@ sections:
   - {title: XOR の最小・最大（同じ側を優先して降りる）, anchor: xor-min-max}
   - {title: K 番目と全体への XOR（bit ごとの反転フラグ）, anchor: kth-and-global-xor}
   - {title: 明示的に作らない Binary Trie（上位 bit で分ける再帰）, anchor: implicit}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

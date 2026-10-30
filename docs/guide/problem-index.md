@@ -21,7 +21,7 @@ sections:
   - {title: AGC, anchor: agc}
   - {title: 問題集, anchor: sets}
   - {title: そのほかのコンテスト, anchor: others}
-stage: draft
+stage: done
 updated: 2026-10-29
 ---
 

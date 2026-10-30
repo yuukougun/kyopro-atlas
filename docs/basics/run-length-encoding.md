@@ -26,7 +26,7 @@ sections:
   - {title: 塊の列で尺取りする, anchor: two-pointers-on-runs}
   - {title: 塊ごとに偶奇で振り分ける, anchor: parity-per-run}
   - {title: ランレングスのまま処理する, anchor: keep-compressed, level: 水}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

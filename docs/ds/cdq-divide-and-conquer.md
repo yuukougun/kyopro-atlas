@@ -24,7 +24,7 @@ sections:
   - {title: 手順（左の更新 → 右のクエリを平面走査で処理する）と計算量 O(N log^2 N), anchor: procedure}
   - {title: 自作するときの要点と Library Checker, anchor: library}
   - {title: 代わりの手（座標が小さいなら 2 次元 BIT、更新がなければ平面走査）, anchor: alternatives}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

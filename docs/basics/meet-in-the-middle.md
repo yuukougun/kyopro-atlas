@@ -25,7 +25,7 @@ sections:
   - {title: グリッドの経路を対角線で分ける, anchor: grid-diagonal, level: 青}
   - {title: 「片側を全探索して残りは貪欲」との違い, anchor: vs-greedy}
   - {title: 値の範囲が小さければナップサック DP, anchor: vs-knapsack}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

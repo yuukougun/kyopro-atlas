@@ -25,7 +25,7 @@ sections:
   - {title: 各桁・各約数の寄与, anchor: digits-divisors}
   - {title: 各要素が最大・最小になる回数（同じ値の扱い）, anchor: max-min-count}
   - {title: 数え上げ・期待値での使い方（数え上げの章へ）, anchor: counting}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

@@ -26,7 +26,7 @@ sections:
   - {title: μ を篩で作る, anchor: sieve}
   - {title: 商の列挙で同じ値の範囲を束ねる, anchor: quotient, level: 発展}
   - {title: 約数包除との書き換え, anchor: vs-divisor-ie}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

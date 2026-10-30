@@ -27,7 +27,7 @@ sections:
   - {title: 最大の正方形（左・上・左上の min + 1）, anchor: largest-square}
   - {title: 向きを反転してもう一度, anchor: flip-direction}
   - {title: 経路上の上位 K 個（K 番目を固定して状態に）, anchor: top-k-on-path, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

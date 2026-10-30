@@ -20,14 +20,14 @@ signs:
 acl: []
 verify: []
 frequency: A
-frequency_evidence: recent 1（abc460_e）・前提として 14 ページに届く（直接 8）・古い ABC 3 問
+frequency_evidence: recent 1（abc460_e）・前提として 13 ページに届く（直接 8）・古い ABC 3 問
 sections:
   - {title: 互除法の正しさ（公約数の集合が変わらない）と回数の上限（隣り合うフィボナッチ数）, anchor: euclid}
   - {title: '複数の数の gcd・lcm と gcd(0, a) = a', anchor: many-numbers}
   - {title: lcm のオーバーフロー（割ってから掛ける）, anchor: lcm-overflow}
   - {title: 左右からの累積 gcd（1 つ除いた gcd）, anchor: prefix-suffix-gcd}
   - {title: 分数・傾きを既約にして map のキーにする, anchor: reduce-fraction, level: 水}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

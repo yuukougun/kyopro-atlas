@@ -24,7 +24,7 @@ sections:
   - {title: 同じ方向の移動を一度に進める（連分数）, anchor: continued-fraction}
   - {title: 最良有理近似と比較の精度（128 bit 整数）, anchor: best-approximation}
   - {title: 自作するときの要点と Library Checker, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

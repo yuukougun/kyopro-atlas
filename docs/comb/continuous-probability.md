@@ -24,7 +24,7 @@ sections:
   - {title: 積分と tail sum, anchor: integral}
   - {title: 区分的な多項式の積分, anchor: piecewise}
   - {title: 自作するときの要点, anchor: library}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

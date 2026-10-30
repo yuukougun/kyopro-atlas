@@ -27,7 +27,7 @@ sections:
   - {title: 期待値 DP との使い分け（前向きと後ろ向き）, anchor: vs-expected-value-dp}
   - {title: ランダムウォークと二項係数, anchor: random-walk, level: 青}
   - {title: 同じ遷移を多数回行うときは行列累乗へ, anchor: matrix-power, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

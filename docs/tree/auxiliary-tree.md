@@ -25,7 +25,7 @@ sections:
   - {title: スタックで組み立てる, anchor: stack-build}
   - {title: 圧縮木で木 DP をするときの要点, anchor: library}
   - {title: マージテク・平方分割で代用できる場合, anchor: alternatives}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

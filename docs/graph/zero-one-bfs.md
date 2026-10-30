@@ -26,7 +26,7 @@ sections:
   - {title: 何をコスト 1 にするか, anchor: cost-modeling}
   - {title: 向きを状態に持つ（頂点数が 4 倍になる）, anchor: direction-state}
   - {title: '重みが 0, 1, 2 ならどうするか', anchor: weights-012}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

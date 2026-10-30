@@ -27,7 +27,7 @@ sections:
   - {title: 有理数 P/Q を P × Q^(−1) で表す計算, anchor: rational}
   - {title: 割れないときの3つの場合（割る数が p の倍数・公比 ≡ 1・法が素数でない）, anchor: not-invertible}
   - {title: 'ACL の inv_mod と modint::inv', anchor: acl}
-stage: reviewed
+stage: done
 updated: 2026-10-29
 ---
 

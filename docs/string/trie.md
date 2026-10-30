@@ -29,7 +29,7 @@ sections:
   - {title: ソートして隣どうしの LCP を見る代用, anchor: sort-alternative}
   - {title: Trie 上の DFS と、節点に値を持つ DP, anchor: dp-on-trie, level: 青}
   - {title: Trie 上の確率・期待値, anchor: expectation-on-trie, level: 黄}
-stage: reviewed
+stage: done
 updated: 2026-10-22
 ---
 
