@@ -33,7 +33,7 @@ updated: 2026-10-29
     - **何ができるか**：無向グラフの頂点を、どの辺の両端も違う色になるように 2 色で塗れるかを判定する。隣り合う頂点を反対の色で塗っていき、同じ色どうしを結ぶ辺（奇数長の閉路）が見つかれば二部グラフでない。成分ごとの色の数を使う数え上げや、二部マッチング・最小カットの前提になる。
     - **いつ使うか**：
         - 2 つのグループに分ける・隣り合うものは異なる色。
-        - X_i と Y_i は異なる値、という条件が M 個ある。
+        - $X_i$ と $Y_i$ は異なる値、という条件が $M$ 個ある。
         - 奇数長の閉路があるか。
     - **計算量**：BFS・DFS で $O(N + M)$。辺を 1 本ずつ足しながら判定するなら、Union-Find で 1 辺あたりならし $O(\alpha(N))$。
     - **前提**：[深さ優先探索（DFS）](../graph/dfs.md)、[幅優先探索（BFS）と無重み最短路](../graph/bfs.md)
@@ -186,7 +186,7 @@ DFS で塗った場合は、無向グラフの DFS 木に含まれない辺は�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [ABC327 D. Good Tuple Problem](https://atcoder.jp/contests/abc327/tasks/abc327_d)（diff 709）：長さ M の 2 つの数列 S・T について、すべての i で X_{S_i} ≠ X_{T_i} となる 0/1 の列 X が存在するかを判定する
+- [ABC327 D. Good Tuple Problem](https://atcoder.jp/contests/abc327/tasks/abc327_d)（diff 709）：長さ M の 2 つの数列 S・T について、すべての i で X_(S_i) ≠ X_(T_i) となる 0/1 の列 X が存在するかを判定する。
 
 </div>
 

@@ -40,6 +40,10 @@
                 ](…) が画像の場所にならなければ崩れ。代替テキストの対にならない [・] で起き、「![…」の文字と図へのリンクが出る）、
                 class="kp-viz" と data-viz="名前" を持つタグの overrides/assets/js/viz/名前.js がない（タグは行をまたいでよい）、
                 インラインの数式 $…$ の中の \\text{…} に $ がある（arithmatex が中の $ で数式を切る）
+  数式の $      （#68。手引き §6）数式にならずに地の文に残る $：arithmatex の smart_dollar（開きの $ の直後・閉じの $ の
+                直前が空白なら数式にならない）で対にならない $（\\$ は数えない）と、前後の行と同じ段落に入った別行の数式の $$。
+                段落・箇条書きの項目・見出し・表のセル・囲みの題の塊を Python-Markdown 3.11 のブロックの処理のまねで切り出して
+                数える（text_runs。段落の中の改行をまたぐ数式も読む）
 警告
   前提のレベルの逆転、節のレベルがページより低い・基礎のページに黄・発展の節、同じ分野の前提が order で後ろ、
   推移的に冗長な前提、前提と related の重複、自分への related、level が発展なのに type が overview でない、
@@ -52,7 +56,13 @@
   search.boost が 2 より大きい、題名か別名の一部の語（ビット）を tags にしたページがあるのに、その語を題名か別名に含む
   ほかのページの tags にない（#52。別名そのものの tags（UF・DSU）は見ない）、
   インラインの数式の折り返せない塊（一番外の関係・二項演算子で区切る）の \\text が、幅 360px の画面の入れ物に入らない
-  （段落 16 字・箇条書き 1 段 14.5 字など。入れ物は字下げで追う。表は見ない。スマホの幅でページが横にずれる。#61）
+  （段落 16 字・箇条書き 1 段 14.5 字など。入れ物は字下げで追う。表は見ない。スマホの幅でページが横にずれる。#61）、
+  書き方（工程11。#68・#69。手引き §4・§6・§7・§10）：要点の囲みと囲み・折りたたみの題の素の文字の数式（数式・コードの外の
+  10^6・X_i・_{・\\[・\\le と、題の素の計算量 O(…)）、和文の字に接した $…$、平文の欄（front matter の title・nav_title・summary・complexity・signs・
+  sections の title、本文の問題の行の要約、台帳の summary・approach と alternatives の中のもの）の _{・^{・\\le などの命令・$、
+  節の並び（定型の節は 落とし穴 → 上位の手法へのつながり（technique だけ）→ 学ぶための資料 → 例題 → 練習問題 →
+  力試し → 確認問題 → 使い分け → 参考 の相対順。technique は中身の節を最初の定型の節より後ろに置かない）、
+  練習問題・力試しの節の方針の折りたたみの題（練習の方針・力試しの方針）、数式の中の法を表す \\mathrm{mod}・\\text{mod}
 
 このファイルには、gen_site.py・fix_problems.py・make_skeleton.py が使う共通の部品（定数、ページの読み込み、問題の一覧の
 読み取り、台帳と問題の表示名、Markdown の文字のエスケープ、schema の検査器）も置く。MkDocs は import しない。
@@ -66,6 +76,7 @@ import argparse
 import bisect
 import collections
 import datetime
+import html
 import json
 import posixpath
 import re
@@ -976,7 +987,8 @@ def check_links(all_pages: list[Page], rep: Report, docs: Path) -> None:
 # 代替テキストの後半を文字にした図へのリンクが出る。docs に参照の定義（[id]: url）はないので reference（170）はまねない
 MD_MATH_RE = re.compile(  # arithmatex の inline（smart_dollar の $…$ と \(…\)。RE_SMART_DOLLAR_INLINE・RE_BRACKET_INLINE のまま）
     r"(?:(?:(?<!\\)((?:\\{2})+)(?=\$)|(?<!\\)(\$)(?!\s)((?:\\.|[^\\$\x02\x03])+?)(?<!\s)(?:\$))"
-    r"|(?:(?<!\\)((?:\\{2})+?)(?=\\\()|(?<!\\)(\\\()((?:\\[^)]|[^\\\x02\x03])+?)(?:\\\))))")
+    r"|(?:(?<!\\)((?:\\{2})+?)(?=\\\()|(?<!\\)(\\\()((?:\\[^)]|[^\\\x02\x03])+?)(?:\\\))))",
+    re.DOTALL)              # Python-Markdown は inline の正規表現を DOTALL で使う（段落の中の改行の前の \\ も対にする）
 MD_ESCAPE_RE = re.compile(r"\\(.)")
 MD_ESCAPED = set("\\`*_{}[]()>#+-.!$|")               # Markdown.ESCAPED_CHARS と、arithmatex の $・tables の |
 LINK_START_RE = re.compile(r"(?<!!)\[")
@@ -1530,6 +1542,626 @@ def check_conventions(pages: list[Page], rep: Report) -> None:
             rep.warn("同じ URL の出典の題名が違う", keys, f"{url}: {desc}")
 
 
+# ---------------------------------------------------------------- 書き方（工程11。#68・#69。手引き §4・§6・§7・§10）
+
+# 本文の inline の塊（#68）。arithmatex（smart_dollar）は、Python-Markdown が inline の処理を 1 まとまりでかける文字
+# （段落・箇条書きの項目・見出し・表のセル・囲みと折りたたみの題）の中で $…$ を探す。段落の中では改行をまたいでよく、
+# 行の中のコード（`…`。行をまたいでよい）とフェンス（superfences の置き換えの印）はまたがない。text_runs はその塊を
+# Python-Markdown 3.11 のブロックの処理（優先度の順）のまねで切り出す（2026-10-29 に tests/tools/test_check_writing.py の
+# 乱択の試験で本物と突き合わせた）：
+# - 空行と、行頭（字下げ 3 字まで）の HTML のコメント・<div> などの行（HTML の前処理）でブロックが分かれる
+# - 囲み・折りたたみ・タブの題（!!!・???・===。優先度 105）と見出し（70）・引用（20）は、前の行に続けて書いても分かれる。
+#   囲みの中身は字下げ 4 字で、字下げが浅くなれば終わる（中の箇条書きも）。箇条書きの項目は、空行がなければ字下げの浅い
+#   行も同じ項目の続き（lazy continuation）。箇条書きのブロックの中では印の行が新しい項目になり、段落の次の行の印は
+#   段落の続き。囲みの中の項目の、空行の後の続きのブロックは、項目の中身より浅い行で終わる（parse_content の detab）。
+#   ブロックの始まりで入れ物の中身より 4 字以上深いものはコード（80）
+# - 別行の数式（79.9）は、ブロックの始まり（箇条書きの印・引用の > の後ろも）が $$ で、ブロック全体が $$…$$
+#   （RE_DOLLAR_BLOCK）のときだけになる。見出し・引用の前で分けた前の部分も試される。前の行（フェンスを含む）か
+#   後ろの行に続けて書くと段落の文字になり、$$ と中の TeX が地の文に残る（euler-phi の #formula）
+# - 表（75）は、ブロックの 1 行目と 2 行目が見出しの行と区切りの行のとき。セルごとに inline の処理がかかる
+BLOCK_HTML_RE = re.compile(r"</?(?:address|article|aside|blockquote|details|div|dl|fieldset|figcaption|figure|footer|form|"
+                           r"h[1-6]|header|hr|main|nav|ol|p|pre|section|summary|table|ul|script|style)(?=[\s>/]|$)",
+                           re.IGNORECASE)
+# 囲み（admonition の RE）・折りたたみ（pymdownx.details の START。題があれば種類は省ける）・タブ（pymdownx.tabbed の START）の
+# 題の行。題は t・d・u
+CONTAINER_HEAD_RE = re.compile(r'!!! ?[\w\-]+(?: +[\w\-]+)*(?: +"(?P<t>.*?)")? *$'
+                               r'|\?{3}\+? ?(?:(?:[\w\-]+(?: +[\w\-]+)*?)?(?: +"(?P<d>.*?)")|[\w\-]+(?: +[\w\-]+)*?) *$'
+                               r'|={3}(?:\+|\+!|!\+|!)? +"(?P<u>.*?)" *$')
+HEAD_LINE_RE = re.compile(r"#{1,6}")
+QUOTE_RE = re.compile(r"(?:>[ ]?)+")
+ITEM_MARK_RE = re.compile(r"(?:[*+-]|\d+\.)[ ]+")       # 箇条書きの印（UListProcessor・OListProcessor。「1)」は印でない）
+CODE_PIPES_RE = re.compile(r"(?:(\\\\)|(\\`+)|(`+)|(\\\|)|(\|))")      # tables の RE_CODE_PIPES
+END_BORDER_RE = re.compile(r"(?<!\\)(?:\\\\)*\|$")                    # tables の RE_END_BORDER
+DISPLAY_RE = re.compile(r"(?s)(?:\$\$(?:\\.|[^\\])+?\$\$)[ ]*$")      # arithmatex の RE_DOLLAR_BLOCK（ブロック全体に当てる）
+# 和文の字（ひらがな・カタカナ・漢字。「・」（U+30FB）は除く）。和文と $…$ の間には空白を入れる（手引き §7）
+JA_CHAR_RE = re.compile(r"[\u3041-\u309f\u30a0-\u30fa\u30fc-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff々〆]")
+# 法を表す文字に使った mod（#68。法は m、素数なら p。start/notation#numbers）。演算子の \bmod・\pmod は当たらない
+MOD_VAR_RE = re.compile(r"\\(?:mathrm|text(?:rm|up|normal)?|operatorname\*?)\s*\{\s*(?i:mod)\s*\}")
+# 「(\mathrm{mod}\ k)」の形（\pmod の代わりに書いた演算子）：直前が開きかっこ
+MOD_OP_BEFORE_RE = re.compile(r"(?:\(|\\left\s*\()\s*$")
+
+
+@dataclass
+class TextRun:
+    """inline の処理を 1 まとまりでかける文字（kind が inline）か、別行の数式 $$…$$ の行（display）。
+    text は行を \\n でつないだもの（フェンスは置き換えの印の \\x02 の 1 字）。parts は (本文の行, text の中の開始, 行の中の開始)。
+    role は塊の種類（para・item・quote・fence・heading・title・cell。続きの行を足してよいかに使う）。"""
+    kind: str
+    role: str = "para"
+    text: str = ""
+    parts: list[tuple[int, int, int]] = field(default_factory=list)
+
+    def add(self, i: int, col: int, s: str) -> None:
+        if self.parts:
+            self.text += "\n"
+        self.parts.append((i, len(self.text), col))
+        self.text += s
+
+    def at(self, k: int) -> tuple[int, int]:
+        """text の k 字目の (本文の行, 行の中の位置)。"""
+        j = max(bisect.bisect_right([a for _, a, _ in self.parts], k) - 1, 0)
+        i, a, col = self.parts[j]
+        return i, col + k - a
+
+
+def split_row(row: str, border: bool) -> list[tuple[int, str]]:
+    """表の 1 行（両端の空白を除いたもの）のセル (行の中の開始, 文字)。Python-Markdown 3.11 の tables の _split_row のまね：
+    両端の | を外し、対になった ` の列の中の | と \\| を除いた | で分ける（コードの中の | は区切りでない。手引き §6）。"""
+    off = 0
+    if border:
+        if row.startswith("|"):
+            row, off = row[1:], 1
+        row = END_BORDER_RE.sub("", row)
+    pipes, tics = [], []
+    for m in CODE_PIPES_RE.finditer(row):
+        if m.group(2):
+            tics.append((len(m.group(2)) - 1, m.start(2), m.end(2) - 1, 1))
+        elif m.group(3):
+            tics.append((len(m.group(3)), m.start(3), m.end(3) - 1, 0))
+        elif m.group(5):
+            pipes.append(m.start(5))
+    regions, k = [], 0
+    while k < len(tics):
+        size = tics[k][0] - tics[k][3]
+        nxt = [x for x in range(k + 1, len(tics)) if tics[x][0] == size] if size else []
+        if nxt:
+            regions.append((tics[k][1], tics[nxt[0]][2]))
+            k = nxt[0] + 1
+        else:
+            k += 1
+    out, pos = [], 0
+    for x in pipes:
+        if not any(r0 <= x <= r1 for r0, r1 in regions):
+            out.append((off + pos, row[pos:x]))
+            pos = x + 1
+    out.append((off + pos, row[pos:]))
+    return out
+
+
+def table_head(rows: list[str]) -> tuple[bool, int] | None:
+    """ブロックの行（両端の空白を除いたもの）が表になるなら (両端の | の有無, 列の数)。TableProcessor.test のまね：
+    1 行目が 2 列以上（1 列なら各行に | がある）で、2 行目が同じ列の数の区切り（| : - と空白だけ）。"""
+    if len(rows) < 2:
+        return None
+    border = rows[0].startswith("|") or END_BORDER_RE.search(rows[0]) is not None
+    cols = len(split_row(rows[0], border))
+    ok = cols > 1
+    if cols == 1 and border:
+        ok = all(r.startswith("|") or END_BORDER_RE.search(r) is not None for r in rows[1:])
+    sep = split_row(rows[1], border)
+    if ok and len(sep) == cols and set("".join(c for _, c in sep)) <= set("|:- "):
+        return border, cols
+    return None
+
+
+def text_runs(p: Page) -> list[TextRun]:
+    """本文を、Python-Markdown が inline の処理をかける塊と、別行の数式の塊に分ける（上の注記の規則のまね）。
+    HTML のコメント・<div> の行と、字下げのコードのブロックは塊に入れない。表の区切りの行は飛ばす。"""
+    lines, n = p.lines, len(p.lines)
+    fence_end = {a: b for a, b, _, _ in p.spans}
+    runs: list[TextRun] = []
+    cur: TextRun | None = None
+    stack: list[list] = []                     # 入れ物 [種類 "box"・"li", 中身の字下げ, 厳しく閉じるか]。外から順
+    blank = True                               # 前の行が空行か
+    list_block = False                         # 今のブロックが箇条書きか（印の行が新しい項目になる）
+    block_base = 0                             # 今のブロックが始まった入れ物の字下げ（続きの行の見出し・引用などの基準）
+    in_comment = False
+
+    def close() -> None:
+        nonlocal cur
+        if cur is not None:
+            runs.append(cur)
+            cur = None
+
+    def indent(s: str) -> int:
+        return len(s) - len(s.lstrip(" "))
+
+    def base_at(col: int) -> int:
+        """字下げ col の行が属する入れ物の中身の字下げ（入れ物の外なら 0）。"""
+        return next((c for _, c, _ in reversed(stack) if c <= col), 0)
+
+    def rel(col: int) -> int:
+        """続きの行の、ブロックの中での字下げ。ブロックの字下げ以上の行はそれを外し（detab）、浅い行はそのまま
+        （looseDetab は字下げの足りない行を変えない）。"""
+        return col - block_base if col >= block_base else col
+
+    def box_end(col: int) -> int | None:
+        """字下げ col の行で終わる囲みのうち一番外のものの、stack の中の位置。"""
+        return next((k for k, (kind, c, _) in enumerate(stack) if kind == "box" and col < c), None)
+
+    def dedent(col: int) -> None:
+        """字下げ col の行の前で、終わる入れ物を外す。囲みは中身より浅ければ終わり（中の箇条書きも）、箇条書きは
+        空行の後なら終わる（空行がなければ項目の続き）。囲みの中の項目は、空行の後の続きのブロックからは厳しく閉じる
+        （admonition・details の parse_content が中身の字下げで detab する。囲みの外は looseDetab で続きになる）。"""
+        nonlocal list_block
+        k = box_end(col)
+        if k is not None:
+            del stack[k:]
+            close()
+            list_block = False
+        while stack and col < stack[-1][1] and (blank or stack[-1][0] != "li" or stack[-1][2]):
+            stack.pop()
+            close()
+
+    def block_comment(raw: str) -> bool:
+        return indent(raw) <= 3 and raw.lstrip(" ").startswith("<!--")
+
+    def hard(k: int) -> bool:
+        """行 k の前でブロックが必ず分かれるか（空行・行頭のコメントと HTML・囲みの題・囲みの終わり）。"""
+        raw = lines[k]
+        rest = raw.lstrip(" ")
+        col = indent(raw)
+        return (not rest.strip() or block_comment(raw) or (col <= 3 and BLOCK_HTML_RE.match(rest) is not None)
+                or box_end(col) is not None or any(e[0] == "li" and e[2] and col < e[1] for e in stack)
+                or (rel(col) == 0 and CONTAINER_HEAD_RE.match(rest) is not None))
+
+    def soft(k: int, quote: bool) -> bool:
+        """見出し・引用の行か（別行の数式と表がブロック全体に当たらなければ、その前で分かれる）。"""
+        rest = lines[k].lstrip(" ")
+        col = indent(lines[k])
+        return bool((rel(col) == 0 and HEAD_LINE_RE.match(rest)) or (not quote and rel(col) <= 3 and QUOTE_RE.match(rest)))
+
+    def block(i: int, role: str, split: bool) -> list[int]:
+        """行 i から始まるブロックの行（フェンスは開きの行だけ。置き換えの印になって同じブロックに残る）。
+        split なら見出し・引用の前でも終わる。項目（item）の中身は次の印の前、引用（quote）の中身は > だけの行の前でも
+        終わり、どちらも見出しの前で終わる（見出しで分けた後に箇条書き（30）・引用（20）がかかるため）。"""
+        out, k = [i], (fence_end[i] + 1 if i in fence_end else i + 1)
+        while k < n:
+            if k not in fence_end:
+                rest = lines[k].lstrip(" ")
+                q = QUOTE_RE.match(rest)
+                if (hard(k) or (split and soft(k, role == "quote"))
+                        or (role != "para" and rel(indent(lines[k])) == 0 and HEAD_LINE_RE.match(rest))
+                        or (role == "quote" and q and not rest[q.end():].strip())
+                        or (role == "item" and ITEM_MARK_RE.match(rest))):
+                    break
+            out.append(k)
+            k = fence_end[k] + 1 if k in fence_end else k + 1
+        return out
+
+    def after(rows: list[int]) -> int:
+        return fence_end[rows[-1]] + 1 if rows[-1] in fence_end else rows[-1] + 1
+
+    def text_of(x: int) -> tuple[int, str]:
+        """ブロックの続きの行 x の (行の中の開始, 文字)。字下げと引用の > を外す。フェンスは \x02。"""
+        if x in fence_end:
+            return 0, "\x02"
+        t = lines[x].lstrip(" ")
+        q = QUOTE_RE.match(t)
+        if q:
+            return indent(lines[x]) + q.end(), t[q.end():]
+        return indent(lines[x]), t
+
+    def start(i: int, col: int, rest: str, role: str) -> int:
+        """ブロックの始まりの行 i（文字 rest は行の col 字目から）を読み、次に読む行を返す。別行の数式・表ならその塊を、
+        そうでなければ role（para・item・quote）の塊を始める。"""
+        nonlocal cur
+        full = block(i, role, False)
+
+        def texts(rows: list[int]) -> list[tuple[int, str]]:
+            return [(col, rest) if x == i else text_of(x) for x in rows]
+
+        if rest.startswith("$$") and (role != "para" or col == base_at(col)):
+            # ブロック全体か、見出し・引用の前で分けた前の部分が $$…$$ なら別行の数式
+            cut = block(i, role, True)
+            for rows in ([full, cut] if cut != full else [full]):
+                ts = texts(rows)
+                if DISPLAY_RE.match("\n".join(t for _, t in ts)):
+                    r = TextRun("display", "display")
+                    for x, (c, t) in zip(rows, ts):
+                        r.add(x, c, t)
+                    runs.append(r)
+                    return after(rows)
+        ts = texts(full)
+        head = table_head([t.strip(" ") for _, t in ts]) if "|" in rest else None
+        if head is not None:
+            border, cols = head
+            for k, (x, (c, t)) in enumerate(zip(full, ts)):
+                if k == 1 or x in fence_end:
+                    continue
+                lead = len(t) - len(t.lstrip(" "))
+                for a, cell in split_row(t.strip(" "), border)[:cols]:
+                    r = TextRun("inline", "cell")
+                    r.add(x, c + lead + a, cell)
+                    runs.append(r)
+            return after(full)
+        cur = TextRun("inline", role)
+        cur.add(i, col, rest)
+        return i + 1
+
+    def absorb(i: int) -> int:
+        """段落の途中の $$ の行：分けたブロックの終わりまで（項目なら次の印の前まで）を文字として今の塊に足す
+        （中の行を箇条書き・表などと読まない）。"""
+        rows = block(i, cur.role, True)
+        for x in rows:
+            c, t = text_of(x)
+            cur.add(x, c, t)
+        return after(rows)
+
+    def item(i: int, col: int, rest: str) -> int:
+        """箇条書きの印の行。項目の中身の字下げは、印の字下げ（0〜3 字）によらず入れ物の中身から 4 字。"""
+        nonlocal list_block
+        close()
+        while stack and stack[-1][0] == "li" and stack[-1][1] > col:
+            stack.pop()
+        mk = ITEM_MARK_RE.match(rest)
+        stack.append(["li", base_at(col) + 4, False])
+        list_block = True
+        return start(i, col + mk.end(), rest[mk.end():], "item")
+
+    i = 0
+    while i < n:
+        if i in fence_end:
+            dedent(indent(lines[i]))
+            if cur is None:
+                if not list_block:
+                    block_base = base_at(indent(lines[i]))
+                cur = TextRun("inline", "fence")
+            cur.add(i, 0, "\x02")
+            i, blank = fence_end[i] + 1, False
+            continue
+        raw = lines[i]
+        if in_comment or block_comment(raw):
+            close()
+            in_comment = "-->" not in (raw if in_comment else raw.split("<!--", 1)[1])
+            i, blank, list_block = i + 1, False, False
+            continue
+        if not raw.strip():
+            close()
+            for k, e in enumerate(stack):
+                if e[0] == "li" and any(x[0] == "box" for x in stack[:k]):
+                    e[2] = True
+            i, blank, list_block = i + 1, True, False
+            continue
+        rest = raw.lstrip(" ")
+        col = len(raw) - len(rest)
+        dedent(col)
+        # 見出し・囲みの題・引用・印を見分ける字下げの基準。ブロックの始まりなら入れ物の中身の字下げ。続きの行は、
+        # ブロックの文字に字下げのまま入って RE.search で探される（箇条書きの項目の続きも get_items が字下げのまま足す）
+        # ので、ブロックが始まった入れ物の字下げ（項目の中身の字下げにある「> 」は引用にならない）
+        at_start = cur is None and not list_block
+        if at_start:
+            block_base = base_at(col)
+        b = col - rel(col)                      # 見分けに使う基準（rel(col) == col - b）
+        nxt = i + 1
+        if col <= 3 and BLOCK_HTML_RE.match(rest) or col == b and (HEAD_LINE_RE.match(rest) or CONTAINER_HEAD_RE.match(rest)):
+            # 段落の続きにならない行：字下げの浅い箇条書きも終わる
+            close()
+            while stack and stack[-1][0] == "li" and col < stack[-1][1]:
+                stack.pop()
+            list_block = False
+            if HEAD_LINE_RE.match(rest) and col == b:
+                m = re.match(r"#{1,6}[ \t]*", rest)
+                _, htext = heading_attr(rest[m.end():])
+                htext = re.sub(r"(?:^|[ \t]+)#+[ \t]*$", "", htext.rstrip())
+                r = TextRun("inline", "heading")
+                r.add(i, col + m.end(), htext)
+                runs.append(r)
+            elif (h := CONTAINER_HEAD_RE.match(rest)) and col == b:
+                g = next((x for x in ("t", "d", "u") if h.group(x) is not None), None)
+                if g:
+                    r = TextRun("inline", "title")
+                    r.add(i, col + h.start(g), h.group(g))
+                    runs.append(r)
+                stack.append(["box", col + 4, False])
+        elif col - b <= 3 and (q := QUOTE_RE.match(rest)):
+            body = rest[q.end():]
+            if not body.strip():
+                close()
+            elif cur is not None and cur.role == "quote":
+                cur.add(i, col + q.end(), body)
+            else:
+                close()
+                nxt = start(i, col + q.end(), body, "quote")
+        elif col - b <= 7 and ITEM_MARK_RE.match(rest) and (list_block or cur is not None and cur.role == "item"):
+            nxt = item(i, col, rest)            # 箇条書きのブロックの中の印は新しい項目（4〜7 字なら入れ子。引用などの後でも）
+        elif cur is not None:
+            if rest.startswith("$$"):
+                nxt = absorb(i)
+            else:
+                cur.add(i, col, rest)           # 段落の続き（段落の次の行の印も続き）
+        elif col >= b + 4:                      # 字下げのコードのブロック（箇条書きの印より先に見る）
+            while nxt < n and nxt not in fence_end and (not lines[nxt].strip() or indent(lines[nxt]) >= b + 4):
+                if not lines[nxt].strip() and (nxt + 1 >= n or indent(lines[nxt + 1]) < b + 4):
+                    break
+                nxt += 1
+        elif ITEM_MARK_RE.match(rest):
+            nxt = item(i, col, rest)
+        else:
+            nxt = start(i, col, rest, "para")
+        i, blank = nxt, False
+    close()
+    return runs
+
+
+def run_math(text: str) -> tuple[list[tuple[int, int]], list[int]]:
+    """inline の塊の文字の (数式 $…$・\\(…\\) の範囲 [開始, 終わり) の列, 数式にならずに地の文に残る $ の位置の列)。
+    コード（`…`）を埋めてから、arithmatex の inline の規則（MD_MATH_RE。smart_dollar）で前から切り出す。
+    奇数個の \\ の後の $（\\$。$ そのものを書いたもの）は数えない。"""
+    spans: list[tuple[int, int]] = []
+
+    def take(m: re.Match) -> str:
+        if m.group(2) or m.group(5):          # 逆斜線の並びだけの当たり（\\\\$ の \\\\）は数式でない
+            spans.append((m.start(), m.end()))
+        return "\x02" * len(m.group(0))
+
+    t = replace_each(MD_MATH_RE, mask_code(text), take)
+    # 行の中の HTML のコメント（数式に食われていないもの）は描かれないので、中の $ は数えない
+    hidden = [(m.start(), m.end()) for m in re.finditer(r"<!--.*?-->", t, re.DOTALL)]
+    left = []
+    for k, c in enumerate(t):
+        if c == "$" and not any(a <= k < b for a, b in hidden):
+            b = k
+            while b > 0 and t[b - 1] == "\\":
+                b -= 1
+            if (k - b) % 2 == 0:
+                left.append(k)
+    return spans, left
+
+
+def check_math_text(all_pages: list[Page], rep: Report) -> None:
+    """数式の書き方（#68。手引き §6・§7）：数式にならずに残る $（エラー）、和文に接した数式、法を表す mod の文字（警告）。
+    フェンス・HTML のコメント・行の中のコードの中は見ない。"""
+    def short(t: str, k: int = 40) -> str:
+        t = t.replace("\n", " ").replace("\x02", "…").strip()
+        return t if len(t) <= k else t[:k - 1] + "…"
+
+    for p in all_pages:
+        mods: dict[int, list[str]] = collections.defaultdict(list)        # 行 → 法の文字に使った mod
+        ops: dict[int, list[str]] = collections.defaultdict(list)         # 行 → 「(\\mathrm{mod}\\ k)」の形の演算子
+
+        def add_mod(text: str, m: re.Match, line: int) -> None:
+            (ops if MOD_OP_BEFORE_RE.search(text, 0, m.start()) else mods)[line].append(m.group(0))
+        for r in text_runs(p):
+            if r.kind == "display":
+                for m in MOD_VAR_RE.finditer(r.text):
+                    add_mod(r.text, m, r.at(m.start())[0])
+                continue
+            spans, left = run_math(r.text)
+            by_line: dict[int, list[int]] = collections.defaultdict(list)
+            for k in left:
+                by_line[r.at(k)[0]].append(k)
+            for i, ks in sorted(by_line.items()):
+                raw = p.lines[i].strip()
+                if raw.startswith("$$") or raw.endswith("$$"):
+                    why = ("別行の数式の $$ が前後の行と同じ段落に入っていて、数式にならない（$$ の行の前後を空行にする。"
+                           "フェンスの直後も空行が要る）")
+                else:
+                    a = max(ks[0] - 12, 0)
+                    why = (f"数式にならずに地の文に残る $ が {len(ks)} 個：「{short(r.text[a:ks[-1] + 14], 48)}」（開きの $ の直後と"
+                           "閉じの $ の直前に空白を置かない。$S = $ a は数式にならないので $S =$ a か $S$ = a にする。"
+                           "$ そのものは \\$）")
+                rep.error("数式にならずに残る $", p.rel, f"{p.rel}:{p.line_no(i)}: {why}")
+            for a, b in spans:
+                before = r.text[a - 1] if a > 0 else ""
+                after = r.text[b] if b < len(r.text) else ""
+                side = [x for x, c in (("前", before), ("後ろ", after)) if c and JA_CHAR_RE.match(c)]
+                if side:
+                    rep.warn("和文に接した数式", p.rel,
+                             f"{p.rel}:{p.line_no(r.at(a)[0])}: 数式 {short(r.text[a:b], 30)} の{'と'.join(side)}が和文の字に"
+                             f"接している（「{short(r.text[max(a - 4, 0):b + 4], 40)}」。和文と $…$ の間に空白を入れる。手引き §7）")
+                for m in MOD_VAR_RE.finditer(r.text, a, b):
+                    add_mod(r.text, m, r.at(m.start())[0])
+        for i in sorted(set(mods) | set(ops)):
+            parts = []
+            if mods.get(i):
+                ms = mods[i]
+                parts.append(f"数式の中の {'・'.join(dict.fromkeys(ms))} を法の文字に使っている"
+                             f"{f'（{len(ms)} か所）' if len(ms) > 1 else ''}（法の文字は $m$、素数なら $p$ と書く。"
+                             "大文字の MOD も同じ。start/notation#numbers。演算子の mod なら、合同式のかっこ付きの法は \\pmod{k}、2 項の演算子は \\bmod）")
+            if ops.get(i):
+                ms = ops[i]
+                parts.append(f"数式の中の {'・'.join(dict.fromkeys(ms))} を「(\\mathrm{{mod}}\\ k)」の形の演算子に使っている"
+                             f"{f'（{len(ms)} か所）' if len(ms) > 1 else ''}（演算子の \\pmod{{k}} にする。a \\equiv b \\pmod{{k}}。"
+                             "2 項の演算子は \\bmod）")
+            rep.warn("法を表す mod の文字", p.rel, f"{p.rel}:{p.line_no(i)}: " + "。".join(parts))
+
+
+# 要点の囲み・囲みと折りたたみの題の素の文字の数式（#68。手引き §6）。数式・コード・リンクの行き先の外で、英数字に挟まれた ^
+# （10^6・N^3）、1 字の英字の後の _（X_i。lower_bound・pb_ds・Min_25 のような 2 字以上の語の _ は名前とみなす）、_{・^{、
+# エスケープした \[（dp\[i] は [ のまま出る）、2 字以上の英字の命令（\le）。文字参照（&#94;）と \_ は戻してから見る
+RAW_SCRIPT_RE = re.compile(r"(?<=[A-Za-z0-9])\^(?=[A-Za-z0-9])|(?<![A-Za-z0-9])[A-Za-z]_(?=[A-Za-z0-9])|[_^]\{")
+RAW_TEX_RE = re.compile(r"\\\[|\\[A-Za-z]{2,}")
+# 題の素の計算量（O(N)・O(N log N)。前が英数字の O( は語の一部なので見ない）。題の中でも $O(N)$ は描ける
+RAW_BIG_O_RE = re.compile(r"(?<![A-Za-z0-9_])O\(")
+LINK_DEST_RE = re.compile(r"\]\((?:[^()\n]|\([^()\n]*\))*\)|<https?://[^>\s]+>")
+ENTITY_SCRIPT_RE = re.compile(r"&#(?:94|x5[eE]);|&#(?:95|x5[fF]);|\\_")     # md_text が書く ^・_ の文字参照と \_
+# 平文の欄（#68。front matter の title・nav_title・summary・complexity・signs・sections の title、台帳の summary・approach、
+# 本文の問題の行の要約）の TeX の記号。KaTeX が描かれない所（分野の入口・一覧・検索・llms.txt・知識マップ・リンクの title）に出る
+PLAIN_TEX_RE = re.compile(r"_\{|\^\{|\\[A-Za-z]{2,}|\$")
+PLAIN_HINT = ("平文で書く：上付き・下付きは 1 字なら ^・_、2 字以上はかっこ（N^(1/4)・A_(i+1)）、範囲つきの和は言葉で"
+              "（i = 1..N の ⌊N/i⌋ の和）か範囲を外した Σ f(i)、記号は Unicode（≤・×・Σ・⌊⌋）。手引き §6")
+
+
+def raw_math_tokens(s: str, big_o: bool = False) -> list[str]:
+    """1 行の文字の、数式・コード・リンクの行き先の外にある素の文字の数式の語（「10^6」「X_i」「dp\\[i]」など）の列。
+    big_o なら素の計算量 O(…)（対のかっこまで。「O(N log N)」）も語にする（題だけ。要点の囲みは見ない）。"""
+    t = replace_each(MD_MATH_RE, mask_code(s), lambda m: "\x02" * len(m.group(0)))
+    t = LINK_DEST_RE.sub(lambda m: "\x02" * len(m.group(0)), t)
+    out: list[str] = []
+    if big_o:
+        for m in RAW_BIG_O_RE.finditer(t):
+            depth, b = 0, m.end() - 1
+            while b < len(t):
+                depth += {"(": 1, ")": -1}.get(t[b], 0)
+                b += 1
+                if depth == 0:
+                    break
+            w = html.unescape(s[m.start():b]).strip()
+            if w not in out:
+                out.append(w)
+    marks = [m.start() for m in RAW_TEX_RE.finditer(t)]
+    # 文字参照（&#94; は ^、&#95; は _）と \_ を 1 字に戻した文字で ^・_ を探し、位置を t に戻す
+    chars, pos, k = [], [], 0
+    while k < len(t):
+        m = ENTITY_SCRIPT_RE.match(t, k)
+        chars.append(("^" if m.group(0).lower() in ("&#94;", "&#x5e;") else "_") if m else t[k])
+        pos.append(k)
+        k = m.end() if m else k + 1
+    u = "".join(chars)
+    marks += [pos[m.start() + max(m.group(0).find("^"), m.group(0).find("_"))] for m in RAW_SCRIPT_RE.finditer(u)]
+    stop = "、。：；（）「」\x02"
+    for k in sorted(set(marks)):
+        a = k
+        while a > 0 and not t[a - 1].isspace() and not JA_CHAR_RE.match(t[a - 1]) and t[a - 1] not in stop:
+            a -= 1
+        b = k + 1
+        while b < len(t) and not t[b].isspace() and not JA_CHAR_RE.match(t[b]) and t[b] not in stop:
+            b += 1
+        w = html.unescape(s[a:b]).strip()
+        if w and w not in out and not any(w in x for x in out):
+            out.append(w)
+    return out
+
+
+def check_raw_math(all_pages: list[Page], rep: Report) -> None:
+    """要点の囲みと、囲み・折りたたみ・タブの題に、KaTeX でない素の文字の数式があるか（#68。手引き §6。題の中でも $…$ は描ける）。"""
+    for p in all_pages:
+        targets: list[tuple[int, str, str]] = []
+        start, box = p.abstract()
+        if start is not None:
+            targets += [(start + 1 + k, raw, "要点") for k, raw in enumerate(box)]
+        for i, raw in enumerate(p.lines):
+            if p.in_fence[i]:
+                continue
+            h = CONTAINER_HEAD_RE.match(raw.lstrip(" "))
+            g = next((x for x in ("t", "d", "u") if h.group(x) is not None), None) if h else None
+            if g and not ABSTRACT_RE.match(raw.rstrip()):
+                targets.append((i, h.group(g), "題"))
+        for i, text, where in targets:
+            words = raw_math_tokens(text, big_o=where == "題")
+            if words:
+                what = "要点の囲み" if where == "要点" else "囲み・折りたたみの題"
+                rep.warn("要点・題の素の数式", p.rel,
+                         f"{p.rel}:{p.line_no(i)}: {what}に素の文字の数式「{'」「'.join(words[:4])}」がある（$…$ の KaTeX にする。"
+                         "front matter の signs を写すときも KaTeX にする。手引き §6）")
+
+
+def check_plain_text(pages: list[Page], others: list[Page], ledger: dict[str, dict], rep: Report) -> None:
+    """平文の欄（#68）の TeX の記号（_{・^{・\\le などの命令・$）。aliases は検索のための別の書き方なので見ない。"""
+    def found(s) -> list[str]:
+        return list(dict.fromkeys(m.group(0) for m in PLAIN_TEX_RE.finditer(s))) if isinstance(s, str) else []
+
+    shown: dict[str, set[str]] = collections.defaultdict(set)       # 問題 → その問題の行を持つページ
+    for p in pages + others:
+        for q in p.problems:
+            shown[q.id].add(p.rel)
+            bad = found(mask_code(q.summary, " "))
+            if bad:
+                rep.warn("平文の欄の TeX の記号", p.rel, f"{p.rel}:{q.line}: {q.id} の問題の行の要約に「{'」「'.join(bad)}」がある"
+                         f"（{PLAIN_HINT}。台帳の summary も同じ文にそろえる）")
+    for p in pages:
+        if p.meta is None:
+            continue
+        fields: list[tuple[str, object]] = [(k, p.get(k)) for k in ("title", "nav_title", "summary", "complexity")]
+        fields += [(f"signs[{k}]", sg.get("text")) for k, sg in enumerate(p.get("signs") or []) if isinstance(sg, dict)]
+        fields += [(f"sections[{k}].title", sc.get("title")) for k, sc in enumerate(p.get("sections") or []) if isinstance(sc, dict)]
+        for name, v in fields:
+            bad = found(v)
+            if bad:
+                rep.warn("平文の欄の TeX の記号", p.rel, f"{p.rel}: front matter の {name} に「{'」「'.join(bad)}」がある（{PLAIN_HINT}）")
+    rel_of = {p.id: p.rel for p in pages}
+    for qid, e in ledger.items():
+        # 台帳の項目と、ページごとの言い回し（alternatives。pages に書いたページでの summary・approach）
+        items = [("", e, sorted(shown.get(qid, ())))]
+        items += [(f"alternatives[{k}].", a, sorted(rel_of[x] for x in a.get("pages") or [] if x in rel_of))
+                  for k, a in enumerate(e.get("alternatives") or []) if isinstance(a, dict)]
+        for prefix, d, rels in items:
+            for name in ("summary", "approach"):
+                bad = found(d.get(name))
+                if bad:
+                    rep.warn("平文の欄の TeX の記号", ("data/problems.yaml", *rels),
+                             f"data/problems.yaml: {qid} の {prefix}{name} に「{'」「'.join(bad)}」がある（{PLAIN_HINT}）")
+
+
+# 節の並び（#69。手引き §4）。定型の節の相対順。上位の手法へのつながり（next-steps）は technique でだけ（どの帯でも）定型として扱う
+SECTION_ORDER = ["pitfalls", "next-steps", "resources", "examples", "practice", "challenge", "quiz", "comparison", "references"]
+SECTION_RANK = {a: k for k, a in enumerate(SECTION_ORDER)}
+SECTION_NAMES = {**STANDARD_SECTIONS, "next-steps": "上位の手法へのつながり"}
+# 上位の手法へのつながりと同じ役の中身の節（§17-4）。technique では next-steps の位置に置く
+NEXT_STEPS_EQUIVALENTS = {("modint", "connections"), ("mod-pow", "building-block"), ("global-offset", "to-lazy-segment-tree")}
+# 方針の折りたたみの題（#69。手引き §10）。問題ごとに分けるなら「練習の方針（ABC142 E）」
+STRATEGY_TITLES = {"practice": "練習の方針", "challenge": "力試しの方針"}
+
+
+def section_key(p: Page, an: str | None, text: str) -> str | None:
+    """h2 の節が定型ならその anchor（定型の順の鍵）、中身の節なら None。"""
+    tech = p.get("type") == "technique"
+    if an is None:
+        an = {v: k for k, v in SECTION_NAMES.items()}.get(text)
+    if tech and (p.id, an) in NEXT_STEPS_EQUIVALENTS:
+        return "next-steps"
+    if an not in SECTION_RANK or (p.id, an) in STANDARD_ANCHOR_EXCEPTIONS or (an == "next-steps" and not tech):
+        return None
+    return an
+
+
+def check_section_order(pages: list[Page], rep: Report) -> None:
+    """節の並び（#69。手引き §4）：定型の節は落とし穴 → 上位の手法へのつながり → 学ぶための資料 → 例題 → 練習問題 → 力試し →
+    確認問題 → 使い分け → 参考 の相対順（ないものは飛ばす）。technique は中身の節を最初の定型の節より後ろに置かない。"""
+    for p in pages:
+        if p.meta is None:
+            continue
+        heads = [(i, an, text, section_key(p, an, text)) for i, an, text in h2_sections(p)]
+        std = [(i, key) for i, _, _, key in heads if key]
+        parts, lines = [], []
+        want = sorted(std, key=lambda x: SECTION_RANK[x[1]])
+        if [k for _, k in std] != [k for _, k in want]:
+            lines.append(next(i for (i, k), (_, w) in zip(std, want) if k != w))
+            parts.append("定型の節の順が違う（今は " + " → ".join(SECTION_NAMES[k] for _, k in std)
+                         + "。手引きの順は " + " → ".join(SECTION_NAMES[k] for _, k in want) + "）")
+        if p.get("type") == "technique" and std:
+            late = [(i, an, text) for i, an, text, key in heads if key is None and i > std[0][0]]
+            if late:
+                lines.append(late[0][0])
+                parts.append("中身の節 " + "・".join("{#" + an + "}" if an else f"「{text}」" for _, an, text in late)
+                             + f" が最初の定型の節（{SECTION_NAMES[std[0][1]]}）より後ろにある"
+                             "（technique の中身の節は、上の帯の節も含めて落とし穴などの定型の節より前に置く）")
+        if parts:
+            rep.warn("節の並び", p.rel, f"{p.rel}:{p.line_no(min(lines))}: 節の並びが手引き §4 と違う：" + "。".join(parts))
+
+
+def check_strategy_titles(pages: list[Page], rep: Report) -> None:
+    """練習問題・力試しの節の中の、方針の折りたたみの題（#69。手引き §10）。"""
+    for p in pages:
+        heads = h2_sections(p)
+        bounds = [i for i, _, _ in heads] + [len(p.lines)]
+        for k, (i, an, _) in enumerate(heads):
+            want = STRATEGY_TITLES.get(an)
+            if want is None or (p.id, an) in STANDARD_ANCHOR_EXCEPTIONS:
+                continue
+            for j in range(i + 1, bounds[k + 1]):
+                rest = p.lines[j].lstrip(" ")
+                h = CONTAINER_HEAD_RE.match(rest) if not p.in_fence[j] and rest.startswith("???") else None
+                title = h.group("d") if h else None
+                if title and "方針" in title and not re.fullmatch(re.escape(want) + r"(?:（.+）)?", title):
+                    tail = re.search(r"（.+）$", title)
+                    good = want + (tail.group(0) if tail else "")
+                    rep.warn("方針の折りたたみの題", p.rel,
+                             f"{p.rel}:{p.line_no(j)}: {STANDARD_SECTIONS[an]}の節の折りたたみの題「{title}」は「{good}」にする"
+                             f"（問題ごとに分けるなら「{want}（ABC142 E）」の形。手引き §10）")
+
+
 def page_names(p: Page) -> list[str]:
     """照合用の題名と別名（norm_text 済み）。"""
     return [norm_text(p.get("title") or "")] + [norm_text(a) for a in p.get("aliases") or [] if isinstance(a, str)]
@@ -1585,6 +2217,12 @@ def check_all(pages: list[Page], others: list[Page], rep: Report, ledger: dict[s
     viz_dir = docs.parent / VIZ_DIR_REL if docs is not None else None
     check_rendering(pages + others, rep, viz_dir if viz_dir is not None and viz_dir.is_dir() else None)
     check_conventions(pages, rep)
+    # 書き方（工程11。#68・#69）
+    check_math_text(pages + others, rep)
+    check_raw_math(pages + others, rep)
+    check_plain_text(pages, others, ledger, rep)
+    check_section_order(pages, rep)
+    check_strategy_titles(pages, rep)
     # ---- ページごと
     by_id: dict[str, Page] = {}
     for p in pages:

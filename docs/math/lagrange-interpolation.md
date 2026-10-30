@@ -14,7 +14,7 @@ summary: d 次多項式は d + 1 点の値で決まるので、x = 0..d での�
 complexity: x = 0..d の値から 1 点の値を O(d)（逆元 1 回を含めると O(d + log p)）、係数の復元 O(d^2)、べき乗和 Σ i^k（i ≤ N）は O(k log k)
 signs:
   - {type: phrase, text: 答えが N の多項式になる（小さい N で実験すると分かる）}
-  - {type: phrase, text: 'Σ_{i=1}^{N} i^k を N ≤ 10^18 で求める'}
+  - {type: phrase, text: i = 1..N の i^k の和を N ≤ 10^18 で求める}
   - {type: phrase, text: mod p で p 点の値から多項式の係数を復元する}
   - {type: shape, text: 答え f(N) が N の d 次多項式になる}
 acl: []
@@ -116,7 +116,7 @@ $$
 
 法 $p$ で $x = 0, 1, \dots, p-1$ の全部の値が分かっているときは、フェルマーの小定理で割り算を避けられる。$a \not\equiv 0$ なら $a^{p-1} \equiv 1$、$a \equiv 0$ なら $0$ なので、$1 - (x - i)^{p-1}$ は $x = i$ で 1、ほかの点で 0 になる。$y_i \bigl(1 - (x - i)^{p-1}\bigr)$ を、$(x - i)^{p-1}$ を二項定理で展開して足せば、やはり $O(p^2)$ で係数が出る（[例題 ABC137 F](#abc137_f)）。
 
-連立 1 次方程式 $\sum_k c_k x_i^k = y_i$ を[掃き出し法](../math/gaussian-elimination.md#mod-p)で解いても係数は出るが $O(d^3)$ である。$d$ が $10^5$ 以上なら $O(d \log^2 d)$ の方法（[形式的冪級数](../math/fps-basics.md#polynomial-ops)の多点評価・補間）が要る。
+連立一次方程式 $\sum_k c_k x_i^k = y_i$ を[掃き出し法](../math/gaussian-elimination.md#mod-p)で解いても係数は出るが $O(d^3)$ である。$d$ が $10^5$ 以上なら $O(d \log^2 d)$ の方法（[形式的冪級数](../math/fps-basics.md#polynomial-ops)の多点評価・補間）が要る。
 
 ## 自作するときの要点と Library Checker {#library}
 
@@ -144,7 +144,7 @@ Library Checker の対応：
 
 ## 学ぶための資料 {#resources}
 
-- [ikatakos「ラグランジュ補間」](https://ikatakos.com/pot/programming_algorithm/linear_algebra/lagrange_interpolation)：一意性（ヴァンデルモンドの行列式）、$O(d^2)$ の公式、等差数列の標本点での $O(d)$ 化、係数の復元、答えが多項式かどうかの見分け方までが 1 ページにまとまっている。
+- [ikatakos「ラグランジュ補間」](https://ikatakos.com/pot/programming_algorithm/linear_algebra/lagrange_interpolation)：一意性（Vandermonde の行列式）、$O(d^2)$ の公式、等差数列の標本点での $O(d)$ 化、係数の復元、答えが多項式かどうかの見分け方までが 1 ページにまとまっている。
 - [ei1333「ラグランジュ補間」](https://ei1333.hateblo.jp/entry/2021/07/08/221742)：連続した標本点での $O(d)$ の補間を、前後からの積と階乗で書く手順とコード。
 - [Nyaan「$\sum_{i}a^i f(i)$」](https://nyaannyaan.github.io/library/fps/sum-of-exponential-times-poly.hpp)：べき乗和に等比数列が掛かった和を、母関数を使って $O(d + \log p)$ で求める方法。
 
@@ -154,7 +154,7 @@ Library Checker の対応：
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [ABC137 F. Polynomial Construction](https://atcoder.jp/contests/abc137/tasks/abc137_f)（diff 2402）：素数 p と 0/1 の列 a_0, …, a_{p−1} が与えられるとき、f(i) ≡ a_i (mod p) を満たす p − 1 次以下の多項式 f の係数を求める。
+- [ABC137 F. Polynomial Construction](https://atcoder.jp/contests/abc137/tasks/abc137_f)（diff 2402）：素数 p と 0/1 の列 a_0, …, a_(p−1) が与えられるとき、f(i) ≡ a_i (mod p) を満たす p − 1 次以下の多項式 f の係数を求める。
 
 </div>
 

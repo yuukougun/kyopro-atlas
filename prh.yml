@@ -52,6 +52,44 @@ rules:
     pattern: 二次元
   - expected: 3 次元
     pattern: 三次元
+  # 次数は算用数字（工程11、#77。手引き §7）。空白のない「1次関数」は ja-space-between-half-and-full-width が直す
+  - expected: 1 次関数
+    pattern: 一次関数
+    specs:
+      - {from: 一次関数の合成, to: 1 次関数の合成}
+      - {from: 1 次関数, to: 1 次関数}
+  - expected: 1 次式
+    pattern: 一次式
+    specs:
+      - {from: 一次式の mod, to: 1 次式の mod}
+      - {from: 一次合同式, to: 一次合同式}   # この規則では変えない（一次式を含まない）
+  - expected: 2 次関数
+    pattern: 二次関数
+  - expected: 2 次式
+    pattern: 二次式
+  # 一次独立・一次従属は線形代数の用語として漢数字のまま（二分探索と同じ。#77）
+  - expected: 一次$1
+    pattern: '/(?:(?<=[ぁ-んァ-ヶー一-龠々]) )?[1１] ?次(独立|従属)/'
+    specs:
+      - {from: 1 次独立, to: 一次独立}
+      - {from: 1次従属な式, to: 一次従属な式}
+      - {from: が 1 次独立, to: が一次独立}
+      - {from: 一次独立, to: 一次独立}
+  # 一次方程式（連立一次方程式も）・一次結合も用語として漢数字のまま（一次合同式・一次不定方程式・一次漸化式は算用数字の形がない。#77）
+  - expected: 一次方程式
+    pattern: '/(?:(?<=[ぁ-んァ-ヶー一-龠々]) )?[1１] ?次方程式/'
+    specs:
+      - {from: 1 次方程式を解く, to: 一次方程式を解く}
+      - {from: 連立 1 次方程式, to: 連立一次方程式}
+      - {from: 連立1次方程式, to: 連立一次方程式}
+      - {from: 一次方程式, to: 一次方程式}
+      - {from: 2 次方程式, to: 2 次方程式}
+  - expected: 一次結合
+    pattern: '/(?:(?<=[ぁ-んァ-ヶー一-龠々]) )?[1１] ?次結合/'
+    specs:
+      - {from: 1 次結合で書ける, to: 一次結合で書ける}
+      - {from: x の 1 次結合, to: x の一次結合}   # 和文の字の後の空白も取る（一次は漢字なので）
+      - {from: 一次結合, to: 一次結合}
 
   # ---- 基本テクニック ----
   - expected: 二分探索
@@ -241,6 +279,21 @@ rules:
     pattern: 杜教筛
 
   # ---- 数え上げ・確率・ゲーム ----
+  # 人名の定理は Vandermonde（工程11、#77。「Vandermonde の恒等式」「Vandermonde 行列」）。後ろに語が続くときは空白を足す
+  - expected: Vandermonde の恒等式
+    pattern: '/[ヴフバ]ァ?ンデルモンドの(?:恒)?等式/'
+    specs:
+      - {from: ヴァンデルモンドの等式, to: Vandermonde の恒等式}
+      - {from: ファンデルモンドの恒等式, to: Vandermonde の恒等式}
+  - expected: 'Vandermonde '
+    pattern: '/[ヴフバ]ァ?ンデルモンド(?!の恒?等式)(?=[ぁ-んァ-ヶー一-龠A-Za-z0-9])/'
+    specs:
+      - {from: ヴァンデルモンドの行列式, to: Vandermonde の行列式}
+      - {from: ファンデルモンド行列, to: Vandermonde 行列}
+  - expected: Vandermonde
+    pattern: '/[ヴフバ]ァ?ンデルモンド(?![ぁ-んァ-ヶー一-龠A-Za-z0-9])/'
+    specs:
+      - {from: ヴァンデルモンド）, to: Vandermonde）}
   - expected: 包除原理
     patterns:
       - 包含除外原理

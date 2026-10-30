@@ -105,12 +105,6 @@ dfs(node):
 
 クエリが前の答えに依存して先に読めない（[オンライン強制](../guide/glossary.md#forced-online)）なら、この方法は使えない（[オンライン強制の見分け方](../ds/offline-queries.md#online)）。
 
-## 使い分け {#comparison}
-
-- 辺の削除だけで、先に全部読めるなら、時間を逆にたどって追加に変える（[Union-Find で連結性を扱う](../graph/union-find-connectivity.md#reverse-deletion)）。ロールバックと $\log$ の分が要らない
-- 辺や頂点を「1 つだけ」除いたときの連結成分の数を、全部の候補について求めるなら、[橋と関節点](../graph/lowlink.md#conditions)で $O(N + M)$ で済む
-- 追加と削除が混ざり、先に全部読めるなら、このページの方法を使う
-
 ## 自作するときの要点と Library Checker {#library}
 
 ACL の `dsu` は経路圧縮をするので取り消せず、この方法には使えない。[ロールバックできる Union-Find](../ds/rollback-union-find.md) と時間軸のセグメント木を自作する。
@@ -152,6 +146,12 @@ Library Checker の Dynamic Graph Vertex Add Component Sum（[練習問題](#pra
 ### Library Checker
 
 - [Dynamic Graph Vertex Add Component Sum](https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum)：辺の追加と削除、頂点の値への加算が混ざり、頂点を含む連結成分の値の合計を答える。[DFS の節](#dfs-rollback)の加算の扱いをそのまま使える。
+
+## 使い分け {#comparison}
+
+- 辺の削除だけで、先に全部読めるなら、時間を逆にたどって追加に変える（[Union-Find で連結性を扱う](../graph/union-find-connectivity.md#reverse-deletion)）。ロールバックと $\log$ の分が要らない
+- 辺や頂点を「1 つだけ」除いたときの連結成分の数を、全部の候補について求めるなら、[橋と関節点](../graph/lowlink.md#conditions)で $O(N + M)$ で済む
+- 追加と削除が混ざり、先に全部読めるなら、このページの方法を使う
 
 ## 参考 {#references}
 

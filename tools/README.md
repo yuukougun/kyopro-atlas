@@ -15,7 +15,7 @@
 | `build_ledger.py` | 問題の台帳の下書きを作る。台帳は手で直したので作り直さない。骨格（8a）以降は catalog が凍結なので、`--check`（catalog との食い違い）は食い違いを必ず出す（予期したもの。CI では警告だけ）。台帳の確認は `check_pages.py` と `fix_problems.py --check` で行う | なし（`--check`） |
 | `make_skeleton.py` | catalog から骨格のページ（stage: stub）を作る。front matter と要点の囲みだけ。あるページは上書きしない | `docs/<field>/<id>.md` |
 | `gen_site.py` | front matter・本文の問題の一覧・台帳・最近の ABC から生成物を作る。`--check` で鮮度だけを見る。試験は `python3 -m unittest discover -s tests/tools`（test_gen_site.py） | `nav.yml`・`docs/<field>/index.md`・`docs/lists/`・`docs/llms.txt`・`docs/index/`・`overrides/assets/data/graph.json`・手書きのページの目印の中 |
-| `check_pages.py` | ページの検査（front matter の schema・id・参照・循環・レベル・問題の一覧と台帳・囲みの外の問題リンク・```cpp・要点の囲み・draft 以降の節の anchor と別名・本文のリンク・描画の崩れ） | なし |
+| `check_pages.py` | ページの検査（front matter の schema・id・参照・循環・レベル・問題の一覧と台帳・囲みの外の問題リンク・```cpp・要点の囲み・draft 以降の節の anchor と別名・本文のリンク・描画の崩れ・書き方（数式の `$`・素の文字の数式・平文の欄・節の並び。下の節）） | なし |
 | `fix_problems.py` | 本文の問題の一覧の各行の label・URL・difficulty を台帳から作り直す（要約は変えない）。difficulty は `（diff 1354）`、台帳で参考値（`experimental: true`）のものは `（diff 1856・参考値）`、値のないものは `（diff なし）` と書く（#5・#76。前の形の `（diff —）` も読んで直す）。`- abc300_e：要約` と書けば行を作る。`--check` は台帳の pages にあるのに本文の囲みにない問題も警告に出す | ページ（`--check` では書かない） |
 | `fix_code_links.py` | 本文に取り込んだコード片（```` ```cpp ```` の中の `--8<--`）の下に、GitHub の完全なプログラムへのリンクの行を置き、取り込む範囲に `mint` が出れば同じ行に型と modint のページへのリンクを添える。地の文の `` `snippets/<id>/<名前>` `` も同じ URL へのリンクにする（#8・#72・#62。下の節）。`--check` で差分、`--stat` で件数だけ。試験は test_fix_code_links.py | ページ（`--check` では書かない） |
 | `frequency.py` | front matter の frequency・frequency_evidence を最近の ABC（recent-abc.yaml）・台帳の古い ABC の数・前提として届くページの数から付け直す（catalog/README §5・手引き §17-7）。`--check` で差分、`--write` でその 2 行だけを書き換える。試験は `python3 -m unittest discover -s tests/tools` | ページの 2 行（`--write`） |
@@ -38,6 +38,22 @@ check_pages.py は本文のリンクを mkdocs build --strict と同じ見方で
 | エラー | class に `kp-viz` があり `data-viz="名前"` を持つタグの `overrides/assets/js/viz/名前.js` がない（タグは行をまたいでよい。`--root` の木に overrides/ がなければ見ない） | 「図を表示できなかった」と出る |
 | エラー | インラインの数式 `$…$` の中の `\text{…}` に `$` がある | arithmatex が中の `$` で数式を切り、KaTeX のエラーか崩れた表示になる。別行の `$$…$$` の中ならよい |
 | 警告 | インラインの数式の折り返せない塊（一番外の関係・二項演算子の後で区切る）の `\text` の字数（全角を 1、半角を 0.5。上付き・下付き・分数の中は 0.7 倍）が、幅 360px の画面の入れ物に入らない。目安は段落 16.0 字・箇条書き 1 段 14.5 字・2 段 12.9 字・囲みの中 18.5 字・囲みの中の箇条書き 17.0 字で、入れ物は字下げで追う。表の行は見ない | `\text` は折り返せず、ページ全体が横にずれる |
+
+書き方の決まり（工程11、#68・#69。手引き §4・§6・§7・§10、decisions.md の 2026-10-29）も見る。数式の検査は、フェンス・HTML のコメント・行の中のコードの中を見ない。
+
+| 重さ | 種類 | 見るもの |
+| --- | --- | --- |
+| エラー | 数式にならずに残る $ | arithmatex の smart_dollar（`MD_MATH_RE`。開きの `$` の直後・閉じの `$` の直前が空白なら数式にならない）で対にならない `$`（`\$` は数えない）と、前後の行と同じ段落に入った別行の数式の `$$`。`$S = $ "a"` のように `$` が地の文に残り、KaTeX のエラーにならないので render_pages でしか見えなかったもの |
+| 警告 | 要点・題の素の数式 | 要点の囲みと、囲み・折りたたみ・タブの題の、数式・コード・リンクの行き先の外にある素の文字の数式：英数字に挟まれた `^`（`10^6`）、1 字の英字の後の `_`（`X_i`。`lower_bound`・`pb_ds`・`Min_25` のような 2 字以上の語の `_` は名前とみなす）、`_{`・`^{`、エスケープした `\[`（`dp\[i]`）、2 字以上の英字の命令（`\le`）。題では素の計算量 `O(…)`（`O(N)`・`O(N log N)`。対のかっこまで）も当てる。文字参照の `&#94;` と `\_` は戻してから見る。`N = 40`・`dp[i]` のような印のない式は誤検出が多いので見ない |
+| 警告 | 和文に接した数式 | `$…$` の直前・直後が和文の字（ひらがな・カタカナ（「・」を除く）・漢字）。数式の中は textlint が見ないので、ここで見る |
+| 警告 | 平文の欄の TeX の記号 | front matter の title・nav_title・summary・complexity・signs・sections の title、本文の問題の行の要約（コードの外）、台帳の summary・approach（alternatives の中も）に `_{`・`^{`・2 字以上の英字の命令・`$`。aliases は見ない |
+| 警告 | 節の並び | 定型の節（見出しと anchor の対応は `STANDARD_SECTIONS`。上位の手法へのつながり `next-steps` は technique ならどの帯でも定型、§17-4 の同じ役の中身の節もその位置。使い分けに近い中身の節と `acl` は中身の節で、例外は作らない）が 落とし穴 → 上位の手法へのつながり → 学ぶための資料 → 例題 → 練習問題 → 力試し → 確認問題 → 使い分け → 参考 の相対順でない。technique は中身の節が最初の定型の節より後ろにあるものも。1 ページ 1 件で、今の順と手引きの順を出す |
+| 警告 | 方針の折りたたみの題 | 練習問題・力試しの節の中の `???` の題のうち「方針」を含むものが「練習の方針」「力試しの方針」（後ろに「（ABC142 E）」の形を付けてよい）でない |
+| 警告 | 法を表す mod の文字 | 数式の中の `\mathrm{mod}`・`\text{mod}`・`\operatorname{mod}`（大文字の MOD も。演算子の `\bmod`・`\pmod` は当たらない）。直前が開きかっこの `(\mathrm{mod}\ k)` の形は、法の文字ではなく演算子の書き方として「`\pmod{k}` にする」と出す。1 行 1 件 |
+
+- 数式にならずに残る `$` は、段落・箇条書きの項目・見出し・表のセル・囲みの題ごとの塊（`text_runs`）の中で数える。Python-Markdown が inline の処理をかける単位で、段落の中の改行をまたぐ数式も読む。塊は Python-Markdown 3.11 のブロックの処理（囲み・折りたたみ・タブの題と見出し・引用・箇条書き・表・字下げのコード・HTML のコメントと `<div>`・別行の数式の優先度と字下げ）のまねで切り出す。2026-10-29 の全ページで、本物の Python-Markdown（mkdocs.yml の拡張）の HTML の地の文に残る `$`（56 個・13 ページ）と一致し、render_pages の地の文に残った記法の 25 件（13 ページ）をすべて含む。試験 test_check_writing.py は、Python-Markdown があれば乱択の文書 600 個で本物と突き合わせる
+- まねていないもの：閉じないフェンス（`fence_spans` と同じく最後までコードとみなす）、本文の先頭の空白だけの行、行の中の HTML のタグの属性の `$`、リンクの行き先の中の `$`（`[t](http://a/$x)`。本物では地の文に残らないが、検査は数える）、行頭の HTML のブロック（`<details><summary>$x = $</summary>` など）の中の文字（本物では `$x$` も数式にならず `$` が地の文に残るが、検査は見ない）。どれも今のページにはない
+- 生成ページ（docs/<field>/index.md・docs/lists/・docs/index/）は、ほかの検査と同じく見ない。front matter の要約は md_text が `\$`・`\_` にエスケープして写すので地の文に `$` は残らず、平文の欄は元の front matter で見る（2026-10-29 に生成ページ 66 枚で新しい検査を流して 0 件）
 
 check_svg.py は、文書の順で最初の白い rect を背景とみなし、viewBox を覆うかを見る（`width="100%"` は viewBox の幅に対してなので、viewBox の左端が 0 でなければ `x` も要る）。
 

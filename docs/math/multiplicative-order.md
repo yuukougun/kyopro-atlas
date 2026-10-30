@@ -262,26 +262,13 @@ $G = S$ の判定は最初に行う。$A = 1$ では $1 - A$ の逆元が取れ�
 
 **$x = 0$ の扱い**。BSGS の giant step は $i \ge 1$ から始まるので、$b \equiv 1$ の $x = 0$ は別に確かめる。逆に「正の整数 $x$」を求める問題で $x = 0$ を返さない。
 
-## 使い分け {#comparison}
-
-| 求めるもの | 使う方法 |
-| --- | --- |
-| $a^n \bmod m$（$n$ が巨大） | [指数の mod](../math/exponent-mod.md) |
-| $a^x \equiv 1$ となる最小の $x \ge 1$ | 位数（$\varphi(m)$ の約数） |
-| $a^x \equiv b$ となる最小の $x$ | BSGS |
-| 一般の関数の繰り返しで初めて $G$ になる回数 | [周期の検出](../basics/periodicity.md#rho)（周期が小さいとき） |
-| アフィン変換の繰り返し | 不動点で等比数列に直す |
-
-- $a^x \equiv 1$ の最小の正の解を BSGS で求めることもできるが、位数の方が $O(\log^2 m)$ で速く、表も要らない
-- 関数が累乗やアフィン変換でなければ、離散対数の工夫は使えない。周期が $10^6$ 程度までなら、訪問した値を記録してシミュレーションする（[出次数 1 のグラフ](../graph/cycle-detection.md#out-degree-one)）
-
 ## 例題 {#examples}
 
 ### ABC270 G. Sequence in mod P {#abc270_g}
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [ABC270 G. Sequence in mod P](https://atcoder.jp/contests/abc270/tasks/abc270_g)（diff 2220）：X_{i+1} = (A·X_i + B) mod P で定まる数列で、値 G が最初に現れる番号を求める（P は素数、なければ −1）。
+- [ABC270 G. Sequence in mod P](https://atcoder.jp/contests/abc270/tasks/abc270_g)（diff 2220）：X_(i+1) = (A·X_i + B) mod P で定まる数列で、値 G が最初に現れる番号を求める（P は素数、なければ −1）。
 
 </div>
 
@@ -361,6 +348,19 @@ $P \le 10^9$ の素数で、テストケースは 100 個まである。列の�
 
     ??? success "答え"
         $\mathrm{coef} = 1$、$b = 0$、$m = 8$ から始める。$\mathrm{coef} \ne b$ で $\gcd(2, 8) = 2$、$b = 0$ は 2 で割り切れるので、$m = 4$、$b = 0$、$\mathrm{coef} = 1$、$k = 1$ になる。同じ手順を 2 回繰り返すと $m = 1$ になり、法 1 では $\mathrm{coef} \equiv b \equiv 0$ なので $x = k = 3$ を返す。実際 $2^3 = 8 \equiv 0$ で、$2^1, 2^2$ は 0 でない。
+
+## 使い分け {#comparison}
+
+| 求めるもの | 使う方法 |
+| --- | --- |
+| $a^n \bmod m$（$n$ が巨大） | [指数の mod](../math/exponent-mod.md) |
+| $a^x \equiv 1$ となる最小の $x \ge 1$ | 位数（$\varphi(m)$ の約数） |
+| $a^x \equiv b$ となる最小の $x$ | BSGS |
+| 一般の関数の繰り返しで初めて $G$ になる回数 | [周期の検出](../basics/periodicity.md#rho)（周期が小さいとき） |
+| アフィン変換の繰り返し | 不動点で等比数列に直す |
+
+- $a^x \equiv 1$ の最小の正の解を BSGS で求めることもできるが、位数の方が $O(\log^2 m)$ で速く、表も要らない
+- 関数が累乗やアフィン変換でなければ、離散対数の工夫は使えない。周期が $10^6$ 程度までなら、訪問した値を記録してシミュレーションする（[出次数 1 のグラフ](../graph/cycle-detection.md#out-degree-one)）
 
 ## 参考 {#references}
 

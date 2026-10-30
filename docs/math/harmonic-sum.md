@@ -16,7 +16,7 @@ signs:
   - {type: constraint, text: A_i ≤ 10^6 程度で、値を配列の添字にできる}
   - {type: phrase, text: 割り切る・割り切られる関係にある組を数える}
   - {type: phrase, text: 各 d について、d の倍数である要素の個数や和を求める}
-  - {type: shape, text: 'Σ_{d=1}^{M} Σ_{k=1}^{⌊M/d⌋} f(d, kd) の形の二重ループ'}
+  - {type: shape, text: 'd = 1..M、k = 1..⌊M/d⌋ の f(d, kd) の和の形の二重ループ'}
 acl: []
 verify: []
 frequency: A
@@ -67,7 +67,7 @@ $$
 
 $H_M = 1 + 1/2 + \dots + 1/M$ を調和級数（の部分和）と呼ぶ。$H_M$ は $\ln M$ とほぼ同じ速さで増え、$\ln(M + 1) \le H_M \le 1 + \ln M$ が成り立つ。$M = 10^6$ なら $\ln M \approx 13.8$、$H_M \approx 14.4$ で、たどる回数は約 $1.4 \times 10^7$ 回（正確な $\sum \lfloor M/d \rfloor$ は $13970034$）である。$M = 2 \times 10^5$ なら約 $2.5 \times 10^6$ 回、$M = 10^7$ でも約 $1.6 \times 10^8$ 回で、単純な処理なら間に合う。
 
-??? note "証明：ln(M + 1) ≤ H_M ≤ 1 + ln M"
+??? note "証明：$\ln(M + 1) \le H_M \le 1 + \ln M$"
     関数 $1/x$ は $x > 0$ で減少する。$d \ge 1$ について、区間 $[d, d + 1]$ では $1/x \le 1/d$ なので、$\int_d^{d+1} \frac{dx}{x} \le \frac{1}{d}$ である。$d = 1, \dots, M$ で足すと $\ln(M + 1) = \int_1^{M+1} \frac{dx}{x} \le H_M$ になる。
 
     逆に $d \ge 2$ について、区間 $[d - 1, d]$ では $1/x \ge 1/d$ なので、$\frac{1}{d} \le \int_{d-1}^{d} \frac{dx}{x}$ である。$d = 2, \dots, M$ で足して $1$ を加えると $H_M \le 1 + \int_1^{M} \frac{dx}{x} = 1 + \ln M$ になる。

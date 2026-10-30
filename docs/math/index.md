@@ -37,7 +37,7 @@ mod、素数・約数、GCD と合同式、floor、行列・線形代数、畳�
 - [約数の個数の上界と高度合成数](divisor-count-bound.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：約数（の組）を全部試す全探索が間に合うかを、約数の個数の上界（10^9 以下で 1344、10^18 以下で 103680）から見積もる。
 - [区間篩](segmented-sieve.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：L が 10^12 と大きくても R − L が 10^6 程度なら、√R までの素数で区間 [L, R] だけを篩える。
 - [オイラーの φ 関数](euler-phi.md) <span class="kp-mini kp-lv-ki" title="difficulty 2000〜2399">黄</span>：1..n で n と互いに素な数の個数 φ(n) を、素因数分解から φ(n) = n Π(1 − 1/p) で求める。
-- [大きな数の素数判定と素因数分解](miller-rabin.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：10^18 程度の数の素数判定を Miller-Rabin で、素因数分解を Pollard's rho で期待 O(N^{1/4}) で行う。
+- [大きな数の素数判定と素因数分解](miller-rabin.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：10^18 程度の数の素数判定を Miller-Rabin で、素因数分解を Pollard's rho で期待 O(N^(1/4)) で行う。
 
 ## GCD と合同式
 
@@ -52,9 +52,9 @@ mod、素数・約数、GCD と合同式、floor、行列・線形代数、畳�
 
 - [整数の平方根・K 乗根と累乗数](integer-root.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：⌊√N⌋ を double の sqrt で求めると 10^18 付近で ±1 ずれるので、r² ≤ N < (r+1)² になるまで整数で補正するか二分探索で求める。
 - [N 進法](base-conversion.md) <span class="kp-mini kp-lv-kiso" title="difficulty 〜1199">基礎</span>：N を b で割った余りを並べて b 進表記にし、Horner 法で数に戻す。
-- [商の列挙](floor-quotient-enum.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：Σ_{i=1}^{N} f(⌊N/i⌋) を、⌊N/i⌋ の値が高々 2√N 種類で同じ値の i が区間をなすことを使って O(√N) で求める。
-- [乗法的関数の和と素数の個数](multiplicative-function.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：N ≤ 10^10 程度で、φ・μ などの乗法的関数の和 Σ_{n≤N} f(n) や N 以下の素数の個数を、商の列挙を使って O(N^{3/4}/log N) などで求める。
-- [floor sum](floor-sum.md) <span class="kp-mini kp-lv-ki" title="difficulty 2000〜2399">黄</span>：Σ_{i=0}^{n−1} ⌊(ai + b)/m⌋ を、互除法と同じ形の再帰で O(log m) で求める。
+- [商の列挙](floor-quotient-enum.md) <span class="kp-mini kp-lv-mizu" title="difficulty 1200〜1599">水</span>：i = 1..N の f(⌊N/i⌋) の和を、⌊N/i⌋ の値が高々 2√N 種類で同じ値の i が区間をなすことを使って O(√N) で求める。
+- [乗法的関数の和と素数の個数](multiplicative-function.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：N ≤ 10^10 程度で、φ・μ などの乗法的関数の和（n ≤ N の f(n) の和）や N 以下の素数の個数を、商の列挙を使って O(N^(3/4)/log N) などで求める。
+- [floor sum](floor-sum.md) <span class="kp-mini kp-lv-ki" title="difficulty 2000〜2399">黄</span>：i = 0..n−1 の ⌊(ai + b)/m⌋ の和を、互除法と同じ形の再帰で O(log m) で求める。
 - [Stern-Brocot 木と連分数](stern-brocot.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：分母・分子が N 以下で実数に最も近い分数などを、既約分数をすべて 1 回ずつ含む二分木を降りて O(log N) 段で求める。
 
 ## 行列と線形代数
@@ -66,9 +66,9 @@ mod、素数・約数、GCD と合同式、floor、行列・線形代数、畳�
 
 ## 畳み込みと多項式
 
-- [畳み込みの使い方](convolution-ntt.md) <span class="kp-mini kp-lv-ao" title="difficulty 1600〜1999">青</span>：c_k = Σ_{i+j=k} a_i b_j（多項式の積）を ACL の convolution で O(N log N) で求める。
+- [畳み込みの使い方](convolution-ntt.md) <span class="kp-mini kp-lv-ao" title="difficulty 1600〜1999">青</span>：i + j = k となる a_i b_j の和 c_k（多項式の積）を ACL の convolution で O(N log N) で求める。
 - [FFT・NTT の仕組みと任意 mod の畳み込み](fft-ntt.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：畳み込みを自作するときや任意 mod で求めるときに、多項式を 1 の N 乗根での値に変えて各点の積にし、分割統治で O(N log N) で変換する。
-- [XOR 畳み込み](hadamard-transform.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：c_k = Σ_{i XOR j = k} a_i b_j を、アダマール変換で各点の積に直して O(N log N) で求める。
+- [XOR 畳み込み](hadamard-transform.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：i XOR j = k となる a_i b_j の和 c_k を、アダマール変換で各点の積に直して O(N log N) で求める。
 - [分割統治 FFT・オンライン畳み込み](online-convolution.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：多数の多項式の積を次数の小さいものから2つずつ掛けて O(N log² N) で求める。
 - [形式的冪級数と多項式の演算](fps-basics.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：数列を冪級数とみて、逆元 1/f・log・exp・累乗を O(N log N) で計算し、多項式の割り算・Taylor shift・多点評価も行う。
 - [線形漸化式の高速化](linear-recurrence-fast.md) <span class="kp-mini kp-lv-hatten" title="difficulty 2400〜（概要だけ）">発展</span>：K 項の線形漸化式の第 N 項を、行列累乗より速くきたまさ法 O(K² log N) や Bostan-Mori O(K log K log N) で求める。

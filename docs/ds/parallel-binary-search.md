@@ -169,7 +169,7 @@ Library Checker で確かめるなら、[練習問題](#practice)の Range Kth S
 
 </div>
 
-??? note "方針"
+??? note "練習の方針"
     - **Union Sets**：操作を併合、判定を「2 要素が同じ集合か」にして並列二分探索する。[Union-Find と組む例](#with-union-find)の使い方がそのまま当てはまる。最後まで同じ集合にならないクエリは、ok が番兵の $M + 1$ のまま残る。そのクエリには -1 を出力する。
 
 ### Library Checker

@@ -19,8 +19,8 @@ search:
 - 種類：考察、数え上げ
 - サイン：
     - 言い回し：すべての組 (i, j)（i < j）について〜を足した和を求める
-    - 式の形：Σ_{i=1}^{N} Σ_{j=i}^{N} f(i, j) のように、内側の和の範囲が外側の添字で決まる二重和
-    - 式の形：Σ_{K=1}^{N} K × (K の約数の個数) のように、約数・倍数の関係で書き換えられる和
+    - 式の形：i = 1..N、j = i..N の f(i, j) の和のように、内側の和の範囲が外側の添字で決まる二重和
+    - 式の形：K = 1..N の K × (K の約数の個数) の和のように、約数・倍数の関係で書き換えられる和
 - 節：
     - `sigma-manipulation#linearity` Σ の線形性と分解（定数を外に出す・和を分ける）：https://yuukougun.github.io/kyopro-atlas/math/sigma-manipulation/#linearity
     - `sigma-manipulation#swap-order` 二重和の順序交換と添字の範囲（i ≤ j ≤ N を j の側から見る）：https://yuukougun.github.io/kyopro-atlas/math/sigma-manipulation/#swap-order
@@ -122,9 +122,9 @@ search:
     - `modint#what-is-automatic` 何が自動になるか（加減乗除と負の数の正規化）：https://yuukougun.github.io/kyopro-atlas/math/modint/#what-is-automatic
     - `modint#static-dynamic` static_modint と dynamic_modint（set_mod）の使い分け：https://yuukougun.github.io/kyopro-atlas/math/modint/#static-dynamic
     - `modint#division` 割り算の条件（法が素数でなければ互いに素が必要）：https://yuukougun.github.io/kyopro-atlas/math/modint/#division
-    - `modint#connections` 上位の手法での使われ方（階乗の表・畳み込み・行列・期待値）：https://yuukougun.github.io/kyopro-atlas/math/modint/#connections
     - `modint#self-made` 自作するときの設計（加減の条件分岐・64bit の掛け算・pow と inv・入出力）：https://yuukougun.github.io/kyopro-atlas/math/modint/#self-made
     - `modint#acl-internals` ACL の中身（Barrett 還元・raw）：https://yuukougun.github.io/kyopro-atlas/math/modint/#acl-internals
+    - `modint#connections` 上位の手法での使われ方（階乗の表・畳み込み・行列・期待値）：https://yuukougun.github.io/kyopro-atlas/math/modint/#connections
 
 ## 等比数列の和を mod で求める（geometric-series-mod） {#geometric-series-mod}
 
@@ -137,7 +137,7 @@ search:
     - 言い回し：同じ数字列を K 回並べてできる数を mod で求める
     - 言い回し：法 M が入力で与えられ、素数とは限らない
     - 制約：項数 N ≤ 10&#94;12〜10&#94;18 の等比数列の和を、素数とは限らない法 M ≤ 10&#94;9 で求める
-    - 式の形：Σ_{i=0}^{N−1} A^i の形の和
+    - 式の形：i = 0..N−1 の A^i の和の形
 - 節：
     - `geometric-series-mod#formula` 公式 (r^n − 1)/(r − 1) と r ≡ 1 の場合分け：https://yuukougun.github.io/kyopro-atlas/math/geometric-series-mod/#formula
     - `geometric-series-mod#halving` 法が任意のとき：S(2k) = S(k)(1 + r^k) で半分に割る（水）：https://yuukougun.github.io/kyopro-atlas/math/geometric-series-mod/#halving
@@ -286,7 +286,7 @@ search:
     - 制約：A_i ≤ 10^6 程度で、値を配列の添字にできる
     - 言い回し：割り切る・割り切られる関係にある組を数える
     - 言い回し：各 d について、d の倍数である要素の個数や和を求める
-    - 式の形：Σ_{d=1}^{M} Σ_{k=1}^{⌊M/d⌋} f(d, kd) の形の二重ループ
+    - 式の形：d = 1..M、k = 1..⌊M/d⌋ の f(d, kd) の和の形の二重ループ
 - 節：
     - `harmonic-sum#why-n-log-n` M/1 + M/2 + … + M/M ≈ M ln M の根拠（M = 10^6 で約 1.4×10^7）：https://yuukougun.github.io/kyopro-atlas/math/harmonic-sum/#why-n-log-n
     - `harmonic-sum#mark-multiples` 値の倍数に印を付ける：https://yuukougun.github.io/kyopro-atlas/math/harmonic-sum/#mark-multiples
@@ -534,10 +534,10 @@ search:
 - 種類：整数論
 - 前提：`sigma-manipulation`、`integer-division`
 - サイン：
-    - 言い回し：Σ_{i=1}^{N} ⌊N/i⌋ を求める
+    - 言い回し：i = 1..N の ⌊N/i⌋ の和を求める
     - 制約：N ≤ 10^12 で i を全部回すと間に合わない
     - 言い回し：xy ≤ N となる組を数える
-    - 式の形：Σ_{i=1}^{N} f(⌊N/i⌋) の形の和
+    - 式の形：i = 1..N の f(⌊N/i⌋) の和の形
 - 節：
     - `floor-quotient-enum#why-sqrt` 値が O(√N) 種類である理由（i が √N 以下か、√N より大きいか）：https://yuukougun.github.io/kyopro-atlas/math/floor-quotient-enum/#why-sqrt
     - `floor-quotient-enum#block-end` 同じ商になる区間の右端 ⌊N/⌊N/l⌋⌋：https://yuukougun.github.io/kyopro-atlas/math/floor-quotient-enum/#block-end
@@ -552,7 +552,7 @@ search:
 - 種類：整数論
 - 前提：`euler-phi`、`floor-quotient-enum`
 - サイン：
-    - 制約：N ≤ 10&#94;10〜10&#94;11 で Σ_{n≤N} f(n)（f は φ・約数の個数など）を求める
+    - 制約：N ≤ 10&#94;10〜10&#94;11 で n ≤ N の f(n) の和（f は φ・約数の個数など）を求める
     - 言い回し：N 以下の素数の個数・素数の和
 - 節：
     - `multiplicative-function#dirichlet` 乗法的関数（φ・μ・d・σ）とディリクレ積（φ \* 1 = id など）：https://yuukougun.github.io/kyopro-atlas/math/multiplicative-function/#dirichlet
@@ -580,7 +580,7 @@ search:
     - `floor-sum#procedure` 処理の流れと自作するときの要点：https://yuukougun.github.io/kyopro-atlas/math/floor-sum/#procedure
     - `floor-sum#mod-to-floor` x mod m = x − m⌊x/m⌋ への書き換え：https://yuukougun.github.io/kyopro-atlas/math/floor-sum/#mod-to-floor
     - `floor-sum#acl` ACL の floor_sum（引数の範囲と負の a, b）：https://yuukougun.github.io/kyopro-atlas/math/floor-sum/#acl
-    - `floor-sum#applications` 応用の型：bit ごとの popcount・一次式の mod の積（発展）：https://yuukougun.github.io/kyopro-atlas/math/floor-sum/#applications
+    - `floor-sum#applications` 応用の型：bit ごとの popcount・1 次式の mod の積（発展）：https://yuukougun.github.io/kyopro-atlas/math/floor-sum/#applications
 
 ## Stern-Brocot 木と連分数（stern-brocot） {#stern-brocot}
 
@@ -635,7 +635,7 @@ search:
     - 言い回し：条件を満たす押し方の数を mod で答える
     - 言い回し：各頂点に書いた値の、隣接する頂点の XOR が 0 になるように決める
     - 制約：変数・式の数が数百〜2000 程度で O(n³) や O(n³/64)
-    - 式の形：変数の一次式（mod 2 なら XOR）＝定数 の式が複数立つ
+    - 式の形：変数の 1 次式（mod 2 なら XOR）＝定数 の式が複数立つ
 - 節：
     - `gaussian-elimination#row-reduction` 行基本変形と階段形、解なし（0 = 1）・一意・無数の判定：https://yuukougun.github.io/kyopro-atlas/math/gaussian-elimination/#row-reduction
     - `gaussian-elimination#mod-p` mod p の掃き出し（ピボットで割る＝逆元）：https://yuukougun.github.io/kyopro-atlas/math/gaussian-elimination/#mod-p
@@ -693,7 +693,7 @@ search:
     - 言い回し：列をずらしたときの一致数・不一致の数を、すべてのずらし方について求める
     - 言い回し：ワイルドカード（?）を含むパターンの照合
     - 制約：値の範囲や列の長さが 10&#94;5〜10&#94;6 程度で、組の全探索 O(N²) が間に合わない
-    - 式の形：c_k = Σ_{i+j=k} a_i b_j の形の和
+    - 式の形：i + j = k となる a_i b_j の和 c_k の形
 - 節：
     - `convolution-ntt#sum-pairs` i + j = k の形に言い換える（出現回数の配列）：https://yuukougun.github.io/kyopro-atlas/math/convolution-ntt/#sum-pairs
     - `convolution-ntt#reverse` i − j = k の形は片方を反転する：https://yuukougun.github.io/kyopro-atlas/math/convolution-ntt/#reverse
@@ -747,8 +747,8 @@ search:
 - 前提：`convolution-ntt`
 - ACL：`convolution`
 - サイン：
-    - 言い回し：Π(1 + a_i x) のような多数の一次式の積の係数
-    - 式の形：dp[i] = Σ_{j&lt;i} dp[j]·g[i−j] のように、dp が自分より前の値との畳み込みで決まる
+    - 言い回し：Π(1 + a_i x) のような多数の 1 次式の積の係数
+    - 式の形：dp[i] が j < i の dp[j]·g[i−j] の和のように、自分より前の値との畳み込みで決まる
     - 式の形：遷移が「和が s になる組の数」の形（多項式の積）
 - 節：
     - `online-convolution#product-of-many` 多数の多項式の積（次数の小さいものから掛ける・分割統治）：https://yuukougun.github.io/kyopro-atlas/math/online-convolution/#product-of-many
@@ -787,7 +787,7 @@ search:
     - 制約：線形漸化式の項数 K が数百〜数千で、N ≤ 10^18
     - 言い回し：有理式 P(x)/Q(x) の N 次の係数
     - 言い回し：答えが線形漸化式を満たしそうだが式が分からない（最初の項から推定する）
-    - 式の形：a_n = Σ_{k=1}^{K} c_k a_{n−k} の形の漸化式
+    - 式の形：a_n = c_1 a_(n−1) + … + c_K a_(n−K) の形の漸化式
 - 節：
     - `linear-recurrence-fast#vs-matrix` 行列累乗との比較（いつ必要になるか）：https://yuukougun.github.io/kyopro-atlas/math/linear-recurrence-fast/#vs-matrix
     - `linear-recurrence-fast#kitamasa` きたまさ法（x^N mod 特性多項式）：https://yuukougun.github.io/kyopro-atlas/math/linear-recurrence-fast/#kitamasa
@@ -804,7 +804,7 @@ search:
 - 前提：`mod-inverse`
 - サイン：
     - 言い回し：答えが N の多項式になる（小さい N で実験すると分かる）
-    - 言い回し：Σ_{i=1}^{N} i^k を N ≤ 10^18 で求める
+    - 言い回し：i = 1..N の i^k の和を N ≤ 10^18 で求める
     - 言い回し：mod p で p 点の値から多項式の係数を復元する
     - 式の形：答え f(N) が N の d 次多項式になる
 - 節：

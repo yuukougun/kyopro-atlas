@@ -85,7 +85,7 @@ $B = \sqrt{M}$ なら重い頂点は $2\sqrt{M}$ 個以下である。どの頂�
 - $\mathrm{pushed}[v]$：軽い頂点が配った塗りのうち、$v$ に届いた最新の時刻
 - $\mathrm{own}[h]$：重い頂点 $h$ を中心に塗った最新の時刻（隣には配らない）
 - 時刻 $t$ に頂点 $x$ を中心に塗る：$x$ が軽ければ、$x$ と隣すべての $\mathrm{pushed}$ を $t$ にする（$B$ 個未満）。$x$ が重ければ $\mathrm{own}[x] \leftarrow t$ だけにする（$O(1)$）
-- 頂点 $x$ の色を聞く：$x$ を最後に塗ったのは、$x$ 自身か隣のどれかを中心にしたクエリである。軽い頂点からの塗りは $\mathrm{pushed}[x]$ に届いている。よって最後に塗った時刻は $\max(\mathrm{pushed}[x], \mathrm{own}[x], \max_{h \in \mathrm{hn}[x]} \mathrm{own}[h])$ である（$\mathrm{hn}[x]$ は $2M/B$ 個以下）
+- 頂点 $x$ の色を聞く：$x$ を最後に塗ったのは、$x$ 自身か隣のどれかを中心にしたクエリである。軽い頂点からの塗りは $\mathrm{pushed}[x]$ に届いている。よって最後に塗った時刻は、$\mathrm{pushed}[x]$・$\mathrm{own}[x]$ と、$h \in \mathrm{hn}[x]$ のすべての $\mathrm{own}[h]$ のうちの最大である（$\mathrm{hn}[x]$ は $2M/B$ 個以下）
 
 次のコードは、頂点 $x$ の今の色（初期値 0）を返してから $x$ とその隣接頂点すべてを色 $y$ にするクエリを処理する。
 

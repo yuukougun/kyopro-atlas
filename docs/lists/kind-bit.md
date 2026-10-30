@@ -43,7 +43,7 @@ type: generated
 | ページ | レベル | 要約 |
 | --- | --- | --- |
 | [XOR 基底](../math/xor-basis.md) | 黄 | 整数の集合から XOR で作れる値の全体を、最上位 bit が互いに異なる r 個の基底で表す。作れる値は 2^r 種類で、最大値は上の bit から貪欲に、K 番目に小さい値は簡約した基底から求まる。 |
-| [XOR 畳み込み](../math/hadamard-transform.md) | 発展 | c_k = Σ_{i XOR j = k} a_i b_j を、アダマール変換で各点の積に直して O(N log N) で求める。添字の演算（和・XOR・AND/OR・gcd/lcm）ごとに使う変換が変わる。 |
+| [XOR 畳み込み](../math/hadamard-transform.md) | 発展 | i XOR j = k となる a_i b_j の和 c_k を、アダマール変換で各点の積に直して O(N log N) で求める。添字の演算（和・XOR・AND/OR・gcd/lcm）ごとに使う変換が変わる。 |
 
 ## 数え上げ・確率・ゲーム
 

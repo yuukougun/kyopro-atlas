@@ -205,6 +205,64 @@ ACL の 3 つの関数の意味と、引数の順序は次のとおりである�
 !!! tip "一点取得だけなら差分の BIT でもよい"
     区間加算・一点取得は、差分の列 $b_i = a_i - a_{i-1}$ を [BIT](../ds/fenwick-tree.md) に持てば、区間加算は 2 点の加算、一点取得は接頭辞の和になる。加算だけならこちらが短く書ける。
 
+## 保つ性質と push の手順（自作するとき） {#invariants}
+
+この節は自分でライブラリを書く人向けで、[セグメント木](../ds/segment-tree.md)を配列で実装できることを前提にする。ACL と同じく、葉の数を $N$ 以上の最小の 2 の冪 $\mathrm{size}$ とし、根を 1、ノード $k$ の子を $2k$ と $2k + 1$、葉 $p$ をノード $\mathrm{size} + p$ に置く。
+
+### 保つ性質
+
+- $d[k]$（$1 \le k < 2 \cdot \mathrm{size}$）：$k$ の区間の集約値から、$k$ より上の祖先に残る保留の影響を除いたもの
+- $\mathrm{lz}[k]$（$1 \le k < \mathrm{size}$、内部ノードだけ）：$d[k]$ には施し済みで、子にはまだ配っていない作用
+- 祖先の保留をすべて施した $d[k]$ が、$k$ の区間の本当の集約値になる
+
+### 各操作の手順
+
+再帰で書くと次のようになる。ノード $k$ は区間 $[k_l, k_r)$ を受け持つ。
+
+```text
+all_apply(k, f):                 # ノード k の区間全体に f を施す
+    d[k] ← mapping(f, d[k])
+    k が内部ノードなら lz[k] ← composition(f, lz[k])
+
+push(k):                         # 保留を子へ 1 段降ろす
+    all_apply(2k, lz[k]); all_apply(2k+1, lz[k]); lz[k] ← id
+
+apply(l, r, f, k, [kl, kr)):
+    重ならない（r ≤ kl または kr ≤ l）なら戻る
+    すっぽり入る（l ≤ kl かつ kr ≤ r）なら all_apply(k, f) して戻る
+    push(k)                      # 一部だけ重なる：子を触る前に降ろす
+    m ← (kl + kr) / 2
+    apply(l, r, f, 2k, [kl, m)); apply(l, r, f, 2k+1, [m, kr))
+    d[k] ← op(d[2k], d[2k+1])    # 子から作り直す
+
+prod(l, r, k, [kl, kr)):
+    重ならないなら e() を返す
+    すっぽり入るなら d[k] を返す
+    push(k)
+    左右の子の prod を op で結んで返す（左が先）
+```
+
+ACL の実装は再帰を使わず、下から上へ書いている。区間作用・区間取得の前に、葉 $\mathrm{size} + l$ と $\mathrm{size} + r - 1$ の祖先を上から push する。ただし、区間の端がその段のノードの境目にそろっていれば、その段の push は省く。そろっている段のノードは区間に丸ごと入るか丸ごと外れるので、読むノードの祖先にならないからである。続けてセグメント木と同じ手順で区間をノードに分け、作用なら各ノードに `all_apply` する。作用の後は、同じ 2 本の経路を下から作り直す。
+
+### 境界（自作で増えるもの）
+
+- 保留は内部ノードだけが持つ。葉に `composition` を呼ぶと、配列の外を触るか、不要な計算が増える
+- 余りの葉は `e()` で埋める。作用を置くのは $[0, N)$ に収まるノードだけなので、余りの葉には何もしない作用しか届かない
+- 演算が可換でないときは、`prod` で左の子の結果を先に結ぶ
+- push を忘れて子を読むと、上の保留が施されていない値を返す。取得の関数でも push する
+
+??? note "自作するとき：`LazySegTree`（ACL の `lazy_segtree` に当たる）"
+    ACL の `lazy_segtree` と同じ 7 つの部品を受け取る。部品は `S`・`op`・`e`・`F`・`mapping`・`composition`・`id` で、意味も同じである。コンストラクタとメンバ関数の名前（`set`・`get`・`prod`・`all_prod`・`apply`）と引数の約束も ACL にそろえた。ACL との違いは 2 つある。区間の操作をこの節の手順のとおり再帰で書いたことと、`max_right`・`min_left`・一点への `apply(p, f)` を持たないことである。区間加算・区間最小値では、`mapping(f, x)` が $x + f$、`composition(f, g)` が $f + g$、`id()` が $0$、`e()` が大きい番兵を返す（[標準の型の表](#acl-standard)）。
+
+    ```cpp
+    --8<-- "lazy-segment-tree/own.cpp:core"
+    ```
+
+    完全なプログラム：[`own.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lazy-segment-tree/own.cpp)（GitHub）
+    { .kp-code-src }
+
+    試験では、区間加算・区間最小値と、作用が可換でない区間アフィン・区間和の 2 つで、乱数の操作の列を素朴な方法と比べた。`all_apply` の合成の向きを逆にしたり、`set` の前の push を忘れたりすると、この試験で見つかる。`max_right` を足すなら、[セグメント木上の二分探索](../ds/segment-tree-binary-search.md#complexity)の再帰の `search` で、子を探す前に `push(k)` を呼ぶ。祖先の保留を降ろしてから子の値を読むためである。名前の約束は[インターフェースの決め方](../guide/library-design.md#interface)、確かめ方は[動作確認の手順](../guide/library-design.md#verify)にある。
+
 ## 例題 {#examples}
 
 ### PRACTICE2 K. Range Affine Range Sum {#practice2_k}
@@ -270,7 +328,7 @@ A を $+1$、B を $-1$ に置き換えて累積和を取ると、部分文字�
 
 </div>
 
-??? note "方針"
+??? note "練習の方針"
     - **ABC340 E**：取り出した箱は、一点取得した値を引いて 0 にする。配る玉のうち 1 周を超える分は全体への加算にし、余りは区間加算にする（円環の端を跨ぐなら 2 つの区間に分ける）。区間加算・一点取得なので、双対セグメント木か差分の BIT でもよい
     - **典型90 029**：レンガの範囲の最大値に 1 を足した高さに置き、その範囲を新しい高さで上書きする。区間最大値・区間代入である
     - **ABC455 F**：コストはまとめる順序によらず、相異なる 2 要素の積の和になる。値を（長さ, 和, 相異なる 2 要素の積の和）にする。区間に $f$ を加えたときの積の和の増分は $f \cdot (\text{長さ} - 1) \cdot \text{和} + f^2 \binom{\text{長さ}}{2}$ である
@@ -285,7 +343,7 @@ A を $+1$、B を $-1$ に置き換えて累積和を取ると、部分文字�
 
 </div>
 
-??? note "方針"
+??? note "力試しの方針"
     - **ABC342 G**：取り消しがあるので保留を合成できない。セグメント木の各ノードに作用の多重集合を持たせ、区間をノードに分けて追加・削除する。一点の値は、葉から根までの各ノードの最大値と初期値の最大である（双対セグメント木の考え方）
 
 ## 確認問題 {#quiz}
@@ -299,7 +357,7 @@ A を $+1$、B を $-1$ に置き換えて累積和を取ると、部分文字�
 ??? question "確認問題：区間 chmin と区間和の組が、この枠組みに乗らないのはなぜか"
     区間の和に「$t$ との min を取る」を施した結果は、区間の中で $t$ を超える要素の個数と、それらの和によって決まる。どの $t$ が来ても計算できるようにするには、値に区間の全要素の分布を持たせる必要があり、固定の大きさの値では条件 3 を満たせない。Segment Tree Beats は、最大値・2 番目の最大値・最大値の個数を持ち、条件が成り立たないノードだけ子へ降りることで、これをならし計算量で扱う。
 
-??? question "確認問題：ACL の lazy_segtree の get が O(1) でなく O(log N) なのはなぜか"
+??? question "確認問題：ACL の lazy_segtree の get が $O(1)$ でなく $O(\log N)$ なのはなぜか"
     葉の値 $d[p]$ には、祖先に残る保留がまだ施されていないことがあるからである。`get` は葉の祖先を上から順に push してから葉を読むので、高さぶんの $O(\log N)$ かかる。
 
 ## 使い分け {#comparison}
@@ -314,64 +372,6 @@ A を $+1$、B を $-1$ に置き換えて累積和を取ると、部分文字�
 | 値と作用を自分で設計する | [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md#design-steps) |
 | 区間 chmin・区間和、区間の除算など | [Segment Tree Beats](../ds/segment-tree-beats.md)・[平方分割](../ds/sqrt-decomposition.md) |
 | 区間を塗って、同じ値の区間をまとめて扱う | [区間を set で管理する](../ds/interval-set.md) |
-
-## 保つ性質と push の手順（自作するとき） {#invariants}
-
-この節は自分でライブラリを書く人向けで、[セグメント木](../ds/segment-tree.md)を配列で実装できることを前提にする。ACL と同じく、葉の数を $N$ 以上の最小の 2 の冪 $\mathrm{size}$ とし、根を 1、ノード $k$ の子を $2k$ と $2k + 1$、葉 $p$ をノード $\mathrm{size} + p$ に置く。
-
-### 保つ性質
-
-- $d[k]$（$1 \le k < 2 \cdot \mathrm{size}$）：$k$ の区間の集約値から、$k$ より上の祖先に残る保留の影響を除いたもの
-- $\mathrm{lz}[k]$（$1 \le k < \mathrm{size}$、内部ノードだけ）：$d[k]$ には施し済みで、子にはまだ配っていない作用
-- 祖先の保留をすべて施した $d[k]$ が、$k$ の区間の本当の集約値になる
-
-### 各操作の手順
-
-再帰で書くと次のようになる。ノード $k$ は区間 $[k_l, k_r)$ を受け持つ。
-
-```text
-all_apply(k, f):                 # ノード k の区間全体に f を施す
-    d[k] ← mapping(f, d[k])
-    k が内部ノードなら lz[k] ← composition(f, lz[k])
-
-push(k):                         # 保留を子へ 1 段降ろす
-    all_apply(2k, lz[k]); all_apply(2k+1, lz[k]); lz[k] ← id
-
-apply(l, r, f, k, [kl, kr)):
-    重ならない（r ≤ kl または kr ≤ l）なら戻る
-    すっぽり入る（l ≤ kl かつ kr ≤ r）なら all_apply(k, f) して戻る
-    push(k)                      # 一部だけ重なる：子を触る前に降ろす
-    m ← (kl + kr) / 2
-    apply(l, r, f, 2k, [kl, m)); apply(l, r, f, 2k+1, [m, kr))
-    d[k] ← op(d[2k], d[2k+1])    # 子から作り直す
-
-prod(l, r, k, [kl, kr)):
-    重ならないなら e() を返す
-    すっぽり入るなら d[k] を返す
-    push(k)
-    左右の子の prod を op で結んで返す（左が先）
-```
-
-ACL の実装は再帰を使わず、下から上へ書いている。区間作用・区間取得の前に、葉 $\mathrm{size} + l$ と $\mathrm{size} + r - 1$ の祖先を上から push する。ただし、区間の端がその段のノードの境目にそろっていれば、その段の push は省く。そろっている段のノードは区間に丸ごと入るか丸ごと外れるので、読むノードの祖先にならないからである。続けてセグメント木と同じ手順で区間をノードに分け、作用なら各ノードに `all_apply` する。作用の後は、同じ 2 本の経路を下から作り直す。
-
-### 境界（自作で増えるもの）
-
-- 保留は内部ノードだけが持つ。葉に `composition` を呼ぶと、配列の外を触るか、不要な計算が増える
-- 余りの葉は `e()` で埋める。作用を置くのは $[0, N)$ に収まるノードだけなので、余りの葉には何もしない作用しか届かない
-- 演算が可換でないときは、`prod` で左の子の結果を先に結ぶ
-- push を忘れて子を読むと、上の保留が施されていない値を返す。取得の関数でも push する
-
-??? note "自作するとき：`LazySegTree`（ACL の `lazy_segtree` に当たる）"
-    ACL の `lazy_segtree` と同じ 7 つの部品を受け取る。部品は `S`・`op`・`e`・`F`・`mapping`・`composition`・`id` で、意味も同じである。コンストラクタとメンバ関数の名前（`set`・`get`・`prod`・`all_prod`・`apply`）と引数の約束も ACL にそろえた。ACL との違いは 2 つある。区間の操作をこの節の手順のとおり再帰で書いたことと、`max_right`・`min_left`・一点への `apply(p, f)` を持たないことである。区間加算・区間最小値では、`mapping(f, x)` が $x + f$、`composition(f, g)` が $f + g$、`id()` が $0$、`e()` が大きい番兵を返す（[標準の型の表](#acl-standard)）。
-
-    ```cpp
-    --8<-- "lazy-segment-tree/own.cpp:core"
-    ```
-
-    完全なプログラム：[`own.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/lazy-segment-tree/own.cpp)（GitHub）
-    { .kp-code-src }
-
-    試験では、区間加算・区間最小値と、作用が可換でない区間アフィン・区間和の 2 つで、乱数の操作の列を素朴な方法と比べた。`all_apply` の合成の向きを逆にしたり、`set` の前の push を忘れたりすると、この試験で見つかる。`max_right` を足すなら、[セグメント木上の二分探索](../ds/segment-tree-binary-search.md#complexity)の再帰の `search` で、子を探す前に `push(k)` を呼ぶ。祖先の保留を降ろしてから子の値を読むためである。名前の約束は[インターフェースの決め方](../guide/library-design.md#interface)、確かめ方は[動作確認の手順](../guide/library-design.md#verify)にある。
 
 ## 参考 {#references}
 

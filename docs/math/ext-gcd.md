@@ -30,7 +30,7 @@ sections:
   - {title: 応用の型（円周の移動・倍数の余り・面積 1 の格子点・CRT）, anchor: applications}
   - {title: ACL では（inv_mod の内部の inv_gcd。拡張ユークリッドそのものは公開 API にない）, anchor: acl}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -194,6 +194,15 @@ $a = 0$ でも手順はそのまま動く。$\gcd(0, m) = m$ なので、$b \equ
 - **中国剰余定理**：$x \equiv r_1 \pmod{m_1}$ と $x \equiv r_2 \pmod{m_2}$ を同時に満たす $x$ は、$x = r_1 + m_1 t$ と置くと $m_1 t \equiv r_2 - r_1 \pmod{m_2}$ という一次合同式になる。式が増えても 2 つずつ合わせればよい（[中国剰余定理](../math/crt.md)）
 - **法が素数でないときの逆元**：$\gcd(a, m) = 1$ なら、$ax + my = 1$ の $x$ が $a$ の逆元である。フェルマーの小定理の $a^{m-2}$ は $m$ が素数のときしか使えない（[逆元](../math/mod-inverse.md#ext-gcd)）
 
+## ACL では（inv_mod の内部の inv_gcd。拡張ユークリッドそのものは公開 API にない） {#acl}
+
+ACL に拡張ユークリッドの公開の関数はない。逆元と中国剰余定理の関数が、内部で同じ計算を使う。
+
+!!! info "ACL では"
+    `long long y = atcoder::inv_mod(x, m);`。$xy \equiv 1 \pmod{m}$ となる $0 \le y < m$ を $O(\log m)$ で返す。要件は $\gcd(x, m) = 1$ と $1 \le m$ で、互いに素でなければ assert で止まる。中身は `atcoder::internal::inv_gcd(a, b)` で、$\{g, x\}$（$ax \equiv g \pmod{b}$、$0 \le x < b/g$）を返す。`internal` の関数はドキュメントにない内部の実装なので、使うなら版の違いに注意する。
+
+ACL の `crt(r, m)` も中で `inv_gcd` を使い、法が互いに素でなくても解を返す（[中国剰余定理](../math/crt.md)）。一次合同式 $ax \equiv b \pmod{m}$ を ACL だけで解くなら、$g = \gcd(a, m)$ で割ってから `inv_mod(a / g, m / g)` を掛ける。法 $m$ が実行時に決まるなら、`atcoder::modint` の `set_mod` と `inv()` も使える。ただし `inv()` も互いに素であることが要件である。
+
 ## 落とし穴 {#pitfalls}
 
 **gcd で割らずに逆元を取る**。一次合同式で $\gcd(a, m) > 1$ なのに $a$ の逆元を求めようとすると、ACL の `inv_mod` は assert で止まり、自作の関数なら意味のない値が返る。解の存在を $g \mid b$ で判定し、両辺と法を $g$ で割ってから解く（[一次合同式](#linear-congruence)）。
@@ -207,15 +216,6 @@ $a = 0$ でも手順はそのまま動く。$\gcd(0, m) = m$ なので、$b \equ
 **入力に 0 や負の数が来る**。$\gcd(0, 0) = 0$ で割ると実行時エラーになる。$a = 0$ や $b = 0$ が来うるなら、手順の前に場合を分ける。負の係数は絶対値で解いてから符号を戻す。
 
 **フェルマーの小定理を法が素数でないときに使う**。$a^{m-2}$ が逆元になるのは $m$ が素数のときだけである。法が $10^9$ 程度の任意の数なら、拡張ユークリッドか `inv_mod` を使う。
-
-## ACL では（inv_mod の内部の inv_gcd。拡張ユークリッドそのものは公開 API にない） {#acl}
-
-ACL に拡張ユークリッドの公開の関数はない。逆元と中国剰余定理の関数が、内部で同じ計算を使う。
-
-!!! info "ACL では"
-    `long long y = atcoder::inv_mod(x, m);`。$xy \equiv 1 \pmod{m}$ となる $0 \le y < m$ を $O(\log m)$ で返す。要件は $\gcd(x, m) = 1$ と $1 \le m$ で、互いに素でなければ assert で止まる。中身は `atcoder::internal::inv_gcd(a, b)` で、$\{g, x\}$（$ax \equiv g \pmod{b}$、$0 \le x < b/g$）を返す。`internal` の関数はドキュメントにない内部の実装なので、使うなら版の違いに注意する。
-
-ACL の `crt(r, m)` も中で `inv_gcd` を使い、法が互いに素でなくても解を返す（[中国剰余定理](../math/crt.md)）。一次合同式 $ax \equiv b \pmod{m}$ を ACL だけで解くなら、$g = \gcd(a, m)$ で割ってから `inv_mod(a / g, m / g)` を掛ける。法 $m$ が実行時に決まるなら、`atcoder::modint` の `set_mod` と `inv()` も使える。ただし `inv()` も互いに素であることが要件である。
 
 ## 例題 {#examples}
 

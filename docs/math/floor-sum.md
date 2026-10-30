@@ -10,7 +10,7 @@ level: 黄
 kind: [整数論]
 prerequisites: [sigma-manipulation, gcd-lcm]
 related: [floor-quotient-enum, convex-hull#lattice-points, integer-division, stern-brocot]
-summary: Σ_{i=0}^{n−1} ⌊(ai + b)/m⌋ を、互除法と同じ形の再帰で O(log m) で求める。(ai + b) mod m の和や、一次式の条件を満たす個数もこれに帰着できる。
+summary: i = 0..n−1 の ⌊(ai + b)/m⌋ の和を、互除法と同じ形の再帰で O(log m) で求める。(ai + b) mod m の和や、1 次式の条件を満たす個数もこれに帰着できる。
 complexity: 1 回 O(log m)（ACL は 0 ≤ n < 2^32、1 ≤ m < 2^32）
 signs:
   - {type: phrase, text: Σ ⌊(ai + b)/m⌋ や Σ (ai + b) mod m を求める}
@@ -28,13 +28,13 @@ sections:
   - {title: 処理の流れと自作するときの要点, anchor: procedure}
   - {title: x mod m = x − m⌊x/m⌋ への書き換え, anchor: mod-to-floor}
   - {title: 'ACL の floor_sum（引数の範囲と負の a, b）', anchor: acl}
-  - {title: 応用の型：bit ごとの popcount・一次式の mod の積, anchor: applications, level: 発展}
+  - {title: 応用の型：bit ごとの popcount・1 次式の mod の積, anchor: applications, level: 発展}
 stage: reviewed
 updated: 2026-10-29
 ---
 
 !!! abstract "要点"
-    - **何ができるか**：$\sum_{i=0}^{n-1} \lfloor (ai + b)/m \rfloor$ を、互除法と同じ形の再帰により $O(\log m)$ で求める。$(ai + b) \bmod m$ の和や、一次式の条件を満たす個数もこれに帰着できる。
+    - **何ができるか**：$\sum_{i=0}^{n-1} \lfloor (ai + b)/m \rfloor$ を、互除法と同じ形の再帰により $O(\log m)$ で求める。$(ai + b) \bmod m$ の和や、1 次式の条件を満たす個数もこれに帰着できる。
     - **いつ使うか**：
         - $\sum \lfloor (ai + b)/m \rfloor$ や $\sum (ai + b) \bmod m$ を求める
         - $(Ak + B) \bmod M$ が条件を満たす $k$ の個数
@@ -47,7 +47,7 @@ updated: 2026-10-29
 別名：floor_sum・類ユークリッド・sum of floor of linear・mod of linear・一次式の mod の和・直線の下の格子点
 <!-- textlint-enable -->
 
-floor sum は、一次式を $m$ で割った商の和を、項を 1 つずつ足さずに求める方法である。和を直線の下の格子点の数とみて、「$a$・$b$ を $m$ 未満にする」と「縦と横を入れ替える」をくり返すと、$(m, a)$ がユークリッドの互除法と同じように小さくなる。
+floor sum は、1 次式を $m$ で割った商の和を、項を 1 つずつ足さずに求める方法である。和を直線の下の格子点の数とみて、「$a$・$b$ を $m$ 未満にする」と「縦と横を入れ替える」をくり返すと、$(m, a)$ がユークリッドの互除法と同じように小さくなる。
 
 このページで使う記法：$f(n, m, a, b) = \sum_{i=0}^{n-1} \lfloor (ai + b)/m \rfloor$（$n \ge 0$、$m \ge 1$）。和は $i = 0$ から $n - 1$ までの $n$ 項で、$n = 0$ なら $0$ である。ほかの記法は[記法と用語の約束](../start/notation.md)にそろえる。
 
@@ -55,7 +55,7 @@ floor sum は、一次式を $m$ で割った商の和を、項を 1 つずつ�
 
 $\lfloor (ai + b)/m \rfloor$ を $i = 0, 1, \dots, n-1$ について足すだけなら、$O(n)$ のループで済む。$n$ が $10^9$ を超えたり、この和を $10^5$ ケース答えたりすると、ループは間に合わない。
 
-商の値ごとにまとめる[商の列挙](../math/floor-quotient-enum.md)は $\lfloor N/i \rfloor$ のように $i$ が分母にある形の道具で、$i$ が分子に一次で入るこの形には使えない。floor sum は、和の形を保ったまま引数を小さくしていき、1 回 $O(\log m)$ で答える。
+商の値ごとにまとめる[商の列挙](../math/floor-quotient-enum.md)は $\lfloor N/i \rfloor$ のように $i$ が分母にある形の道具で、$i$ が分子に 1 次で入るこの形には使えない。floor sum は、和の形を保ったまま引数を小さくしていき、1 回 $O(\log m)$ で答える。
 
 和が直接問われることは少なく、たいていは次の形から帰着する。
 
@@ -114,7 +114,7 @@ $f(6, 5, 3, 2)$ で確かめる。列ごとの点の数は $0, 1, 1, 2, 2, 3$ �
 
 ![f(6,5,3,2) の格子点 9 個を、上の図は列ごとに 0+1+1+2+2+3、下の図は行ごとに 5+3+1+0 と数える。行の個数は直線から x=6 までの横の距離（帯）を切り捨てたもので、上から k=0〜3 と振ると f(4,3,5,0) の各項になる](../img/floor-sum/swap.svg)
 
-??? note "証明：行ごとの個数が ⌊(y_max − jm)/a⌋ になること"
+??? note "証明：行ごとの個数が $\lfloor (y_{\max} - jm)/a \rfloor$ になること"
     $jm \le ai + b$ は $i \ge (jm - b)/a$ と同じなので、条件を満たす $i$ は $\lceil (jm - b)/a \rceil \le i \le n - 1$ である。$b < m$ と $j \ge 1$ から $jm - b > 0$ で、左端は $1$ 以上である。
 
     個数は $n - \lceil (jm - b)/a \rceil$ で、整数 $x$ について $\lceil x/a \rceil = -\lfloor -x/a \rfloor$ を使うと、$n + \lfloor (b - jm)/a \rfloor = \lfloor (an + b - jm)/a \rfloor = \lfloor (y_{\max} - jm)/a \rfloor$ になる。
@@ -183,22 +183,7 @@ $$
 \end{gathered}
 $$
 
-左辺の $[\cdot]$ は、条件が成り立つとき $1$、成り立たないとき $0$ を表す。$x$ と $c$ がどちらも $i$ の一次式なら、右辺を $i$ について足したものは floor sum 2 つの差になる。[例題の ABC443 G](#abc443_g) は、$c = k + 1$ が添字とともに動く場合である。
-
-## 応用の型：bit ごとの popcount・一次式の mod の積 {#applications}
-
-追加の前提：[bit 演算の基本と XOR の性質](../basics/bit-operations.md)。この節は発展の問題で使う型である。
-
-**bit ごとの個数**。整数 $x \ge 0$ の下から $d$ 番目の bit が 1 であることは、$x \bmod 2^{d+1} \ge 2^d$ と同じである。これは $(x + 2^d) \bmod 2^{d+1} < 2^d$ と言い換えられる。[書き換えの節](#mod-to-floor)の式に $x + 2^d$・$m = 2^{d+1}$・$c = 2^d$ を入れると、bit が 1 かどうかは $\lfloor (x + 2^d)/2^{d+1} \rfloor - \lfloor x/2^{d+1} \rfloor$ になる。$x$ が等差数列 $Mt + R$ を動くなら、bit ごとに floor sum 2 回で「その bit が 1 の項の個数」が求まる。それを bit について足すと popcount の和になる。bit の数を $B$ とすると floor sum を $2B$ 回呼ぶ。法は $2^{d+1}$ なので 1 回 $O(B)$ で、全体で $O(B^2)$ である。
-
-**一次式の mod の積・重み付きの和**。$\sum ((ai + b) \bmod m)((ci + d) \bmod m)$ のような積の和は、展開すると $\sum i \lfloor \cdot \rfloor$ や、2 つの floor の積の和が要る。縦横を入れ替える再帰は、数える量を点の個数から重み付きの和に変えても同じ形で回せる（ACL にはない）。
-
-## 落とし穴 {#pitfalls}
-
-- **和の範囲**。$f(n, m, a, b)$ は $i = 0$ から $n - 1$ までで、$i = n$ を含まない。$1 \le i \le N$ の和なら $i = i' + 1$ と置き、$f(N, m, a, a + b)$ にする。閉区間 $[0, N]$ なら $f(N + 1, m, a, b)$ である
-- **戻り値の型**。ACL の `floor_sum` は `long long` を返すが、中身は $2^{64}$ で割った余りである。2 つの floor sum の差を取るときは、`long long` のまま引くと符号付きのあふれになりうるので、`unsigned long long` にしてから引く
-- **$n$ の上限**。ACL は $n < 2^{32}$ を `assert` で確かめる。$n$ が $10^{18}$ のような問題では、そのままでは使えない。条件から範囲を絞れないかを先に考える（[ABC443 G](#abc443_g) の $\min(N, M)$ がその例である）
-- **余りの式は $x \ge 0$ のとき**。$x \bmod m = x - m \lfloor x/m \rfloor$ は数学の floor で書けば負の $x$ でも成り立つが、C++ の `/` と `%` は 0 の方向に切り捨てるので、負の数では食い違う（[整数の割り算と余り](../math/integer-division.md)）
+左辺の $[\cdot]$ は、条件が成り立つとき $1$、成り立たないとき $0$ を表す。$x$ と $c$ がどちらも $i$ の 1 次式なら、右辺を $i$ について足したものは floor sum 2 つの差になる。[例題の ABC443 G](#abc443_g) は、$c = k + 1$ が添字とともに動く場合である。
 
 ## ACL の floor_sum（引数の範囲と負の a, b） {#acl}
 
@@ -216,13 +201,28 @@ $$
 完全なプログラム：[`acl-usage.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/floor-sum/acl-usage.cpp)（GitHub）
 { .kp-code-src }
 
+## 応用の型：bit ごとの popcount・1 次式の mod の積 {#applications}
+
+追加の前提：[bit 演算の基本と XOR の性質](../basics/bit-operations.md)。この節は発展の問題で使う型である。
+
+**bit ごとの個数**。整数 $x \ge 0$ の下から $d$ 番目の bit が 1 であることは、$x \bmod 2^{d+1} \ge 2^d$ と同じである。これは $(x + 2^d) \bmod 2^{d+1} < 2^d$ と言い換えられる。[書き換えの節](#mod-to-floor)の式に $x + 2^d$・$m = 2^{d+1}$・$c = 2^d$ を入れると、bit が 1 かどうかは $\lfloor (x + 2^d)/2^{d+1} \rfloor - \lfloor x/2^{d+1} \rfloor$ になる。$x$ が等差数列 $Mt + R$ を動くなら、bit ごとに floor sum 2 回で「その bit が 1 の項の個数」が求まる。それを bit について足すと popcount の和になる。bit の数を $B$ とすると floor sum を $2B$ 回呼ぶ。法は $2^{d+1}$ なので 1 回 $O(B)$ で、全体で $O(B^2)$ である。
+
+**1 次式の mod の積・重み付きの和**。$\sum ((ai + b) \bmod m)((ci + d) \bmod m)$ のような積の和は、展開すると $\sum i \lfloor \cdot \rfloor$ や、2 つの floor の積の和が要る。縦横を入れ替える再帰は、数える量を点の個数から重み付きの和に変えても同じ形で回せる（ACL にはない）。
+
+## 落とし穴 {#pitfalls}
+
+- **和の範囲**。$f(n, m, a, b)$ は $i = 0$ から $n - 1$ までで、$i = n$ を含まない。$1 \le i \le N$ の和なら $i = i' + 1$ と置き、$f(N, m, a, a + b)$ にする。閉区間 $[0, N]$ なら $f(N + 1, m, a, b)$ である
+- **戻り値の型**。ACL の `floor_sum` は `long long` を返すが、中身は $2^{64}$ で割った余りである。2 つの floor sum の差を取るときは、`long long` のまま引くと符号付きのあふれになりうるので、`unsigned long long` にしてから引く
+- **$n$ の上限**。ACL は $n < 2^{32}$ を `assert` で確かめる。$n$ が $10^{18}$ のような問題では、そのままでは使えない。条件から範囲を絞れないかを先に考える（[ABC443 G](#abc443_g) の $\min(N, M)$ がその例である）
+- **余りの式は $x \ge 0$ のとき**。$x \bmod m = x - m \lfloor x/m \rfloor$ は数学の floor で書けば負の $x$ でも成り立つが、C++ の `/` と `%` は 0 の方向に切り捨てるので、負の数では食い違う（[整数の割り算と余り](../math/integer-division.md)）
+
 ## 例題 {#examples}
 
 ### PRACTICE2 C. Floor Sum {#practice2_c}
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [PRACTICE2 C. Floor Sum](https://atcoder.jp/contests/practice2/tasks/practice2_c)（diff なし）：T 個のケースそれぞれで Σ_{i=0}^{N−1} ⌊(A × i + B)/M⌋ を求める。
+- [PRACTICE2 C. Floor Sum](https://atcoder.jp/contests/practice2/tasks/practice2_c)（diff なし）：T 個のケースそれぞれで i = 0..N−1 の ⌊(A × i + B)/M⌋ の和を求める。
 
 </div>
 
@@ -271,14 +271,14 @@ ACL の `floor_sum(N, M, A, B)` をケースごとに 1 回呼ぶだけである
 
 </div>
 
-??? note "方針"
+??? note "力試しの方針"
     - **ABC313 G**：石を袋へ移した回数ごとに、袋の石の数を $N$ で割った商から並びの数が決まる。並びの数を足し合わせる式が、等差数列を $N$ で割った商の和になる
     - **ARC111 E**：区間の長さ $(C - B) i$ が $D - 1$ 以上になると必ず倍数が入るので、$i$ の上限 $m$ を決める。$1 \le i \le m$ では区間に入る $D$ の倍数の個数 $\lfloor (A + Ci)/D \rfloor - \lfloor (A - 1 + Bi)/D \rfloor$ が 0 か 1 なので、その和を floor sum 2 回の差で求め、$m$ から引く
     - **ABC283 Ex**：[応用の型](#applications)の bit ごとの数え方をそのまま使う。$x = Mt + R$ と置き、bit ごとに floor sum の差を足す
 
 ## 確認問題 {#quiz}
 
-??? question "確認問題：Σ_{i=1}^{N} (Ai) mod M を f で表すと？"
+??? question "確認問題：$\sum_{i=1}^{N} (Ai) \bmod M$ を $f$ で表すと？"
     $i = i' + 1$（$i' = 0, \dots, N-1$）と置くと $(Ai) \bmod M = (Ai' + A) \bmod M$ なので、[書き換えの節](#mod-to-floor)の式で $a = A$・$b = A$ とする。
 
     $$
@@ -300,7 +300,7 @@ ACL の `floor_sum(N, M, A, B)` をケースごとに 1 回呼ぶだけである
 | 和の形 | 道具 | 計算量 |
 | --- | --- | --- |
 | $\sum_i g(\lfloor N/i \rfloor)$（$i$ が分母） | [商の列挙](../math/floor-quotient-enum.md) | $O(\sqrt{N})$ |
-| $\sum_i \lfloor (ai + b)/m \rfloor$（$i$ が分子に一次） | floor sum | $O(\log m)$ |
+| $\sum_i \lfloor (ai + b)/m \rfloor$（$i$ が分子に 1 次） | floor sum | $O(\log m)$ |
 | 多角形の内部・辺上の格子点 | [凸包](../geometry/convex-hull.md#lattice-points)のページの Pick の定理 | $O(N \log C)$ |
 
 表の $N$ は頂点数、$C$ は座標の絶対値の上限である。直線の下の格子点でも、端点が格子点の線分なら gcd と Pick の定理で済むことがある。傾きや切片が整数比で与えられ、$x$ の範囲で切り取られる形なら floor sum を使う。

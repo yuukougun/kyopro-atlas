@@ -167,17 +167,6 @@ $K$ を 1-indexed と 0-indexed のどちらで扱うかを最初に決め、比
 - **格子路**：0/1 列の意味は右・上の最短路の数え上げになり、禁止領域を避ける経路や越えない経路へ広がる（[格子路の数え上げ](../comb/lattice-paths.md)、[鏡像法とカタラン数](../comb/reflection-principle.md#reflection)）。
 - **和を閉じた式にする**：二項係数を含む和は、Vandermonde の恒等式や縦の和で閉じた式にできることが多い（[二項係数の恒等式と和の公式](../comb/binomial-identities.md)）。
 
-## 使い分け {#comparison}
-
-| 状況 | 方法 |
-| --- | --- |
-| mod なしで $n \le 66$ | パスカルの三角形の表（[範囲外の約束](#out-of-range)のコード） |
-| mod なしで値 1 つ、途中があふれうる | $k$ を $\min(k, n-k)$ にして、掛けてから割る逐次計算と `__int128` |
-| mod が素数で $n \le 10^7$ 程度、質問が多い | 階乗と逆階乗の前計算（[二項係数の前計算](../comb/binomial-precompute.md)） |
-| mod が素数でない、$n \le 5000$ 程度 | パスカルの三角形の表を mod を取りながら作る |
-
-二項係数どうしの和や積をまとめる公式（[Vandermonde の恒等式](../comb/binomial-identities.md#vandermonde)・hockey stick など）は[二項係数の恒等式](../comb/binomial-identities.md)で扱う。
-
 ## 例題 {#examples}
 
 ### ARC095 D. Binomial Coefficients {#arc095_b}
@@ -207,6 +196,17 @@ $K$ を 1-indexed と 0-indexed のどちらで扱うかを最初に決め、比
 ??? note "練習の方針"
     - **ABC202 D**：a を 0、b を 1 と読めば、[辞書順 K 番目](#kth)の手順そのものである。先頭を a にしたときの並べ方 $\binom{A+B-1}{A-1}$ と $K$ を比べて 1 文字ずつ決める。$A, B \le 30$ なので値は $\binom{60}{30}$ までで、パスカルの表が `long long` に収まる
     - **ABC057 D**：平均の最大は、大きい順に $A$ 個取ったときである。数えるのは、$A$ 番目の値 $v$ と同じ値を何個、全体の $v$ の個数 $V$ から選ぶかで、$\binom{V}{a}$ になる（$a$ は上位 $A$ 個の中の $v$ の個数）。上位 $A$ 個がすべて $v$ なら $v$ を何個足しても平均は変わらないので、$\sum_{j=A}^{B} \binom{V}{j}$ を足す。範囲外を 0 とする約束があれば $j > V$ の項を気にしなくてよい。$N \le 50$ なのでパスカルの表で足りる
+
+## 使い分け {#comparison}
+
+| 状況 | 方法 |
+| --- | --- |
+| mod なしで $n \le 66$ | パスカルの三角形の表（[範囲外の約束](#out-of-range)のコード） |
+| mod なしで値 1 つ、途中があふれうる | $k$ を $\min(k, n-k)$ にして、掛けてから割る逐次計算と `__int128` |
+| mod が素数で $n \le 10^7$ 程度、質問が多い | 階乗と逆階乗の前計算（[二項係数の前計算](../comb/binomial-precompute.md)） |
+| mod が素数でない、$n \le 5000$ 程度 | パスカルの三角形の表を mod を取りながら作る |
+
+二項係数どうしの和や積をまとめる公式（[Vandermonde の恒等式](../comb/binomial-identities.md#vandermonde)・hockey stick など）は[二項係数の恒等式](../comb/binomial-identities.md)で扱う。
 
 ## 参考 {#references}
 

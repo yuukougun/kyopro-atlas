@@ -221,13 +221,6 @@ $$
 - **途中で値を読む**：加算と取得が交互に来るなら、差分を [BIT](../ds/fenwick-tree.md#variants) に持つか、[遅延セグメント木](../ds/lazy-segment-tree.md)を使う
 - **問題そのものを言い換える**：区間の操作を差分列の 2 点の操作に直すと、最小回数や可否の問題が解ける（[差分列への言い換え](../basics/difference-sequence.md#to-point-operations)）
 
-## 使い分け {#comparison}
-
-- 値が固定で区間の和を何度も読むなら[累積和](../basics/prefix-sum.md)、区間に足して最後に点の値を読むならいもす法である
-- 加算と読み出しが交互に来るなら、BIT（区間加算・1 点の値）か遅延セグメント木（区間加算・区間の集約）を使う
-- 端点が大きいときは、端点だけを並べる[イベントソート](../basics/event-sort.md)か[座標圧縮](../basics/coordinate-compression.md)と組む
-- 区間の操作の最小回数や可否を問われたら、隣接差の 2 点の操作に言い換える[差分列への言い換え](../basics/difference-sequence.md#min-operations)を考える
-
 ## 例題 {#examples}
 
 ### ABC183 D. Water Heater {#abc183_d}
@@ -277,6 +270,13 @@ $$
 
 ??? note "力試しの方針"
     - **ABC260 E**：位置は 1 から $M$ で数える（1-indexed）。区間を広げても条件は崩れないので、左端ごとに条件を満たす最小の右端が決まり、左端を右へ動かすと右端も戻らない（尺取り法）。左端 $l$ と最小の右端 $r_l$ が分かれば、長さ $r_l - l + 1$ から $M - l + 1$ までに $+1$ をいもす法で置き、最後に累積する。条件を満たす右端がない左端は何もしない（[区間長や開始時刻の範囲に直して加算する](#by-length)）
+
+## 使い分け {#comparison}
+
+- 値が固定で区間の和を何度も読むなら[累積和](../basics/prefix-sum.md)、区間に足して最後に点の値を読むならいもす法である
+- 加算と読み出しが交互に来るなら、BIT（区間加算・1 点の値）か遅延セグメント木（区間加算・区間の集約）を使う
+- 端点が大きいときは、端点だけを並べる[イベントソート](../basics/event-sort.md)か[座標圧縮](../basics/coordinate-compression.md)と組む
+- 区間の操作の最小回数や可否を問われたら、隣接差の 2 点の操作に言い換える[差分列への言い換え](../basics/difference-sequence.md#min-operations)を考える
 
 ## 参考 {#references}
 

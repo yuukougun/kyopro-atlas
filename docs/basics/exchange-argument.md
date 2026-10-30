@@ -27,7 +27,7 @@ sections:
   - {title: 順に並べてから DP（DP の章へ）, anchor: then-dp}
   - {title: 入れ替えで改善できるかを考える型, anchor: improve-by-swap}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -73,7 +73,7 @@ $$
 5. key の順にソートし、その順で貪欲・DP を行う
 ```
 
-手順 2 が成り立たない問題に、隣接交換をそのまま使うことはできない。たとえば $i, j$ の順で「後ろへ渡す状態」が変わるなら、後ろの要素の値も変わる。それでも、状態が大きいほど後ろにとって得になる（単調）と言えるなら、渡す状態が大きい方の順を選べばよい。一次関数を順に合成する問題（[練習問題](#practice)の ABC366 F）がこの形である。
+手順 2 が成り立たない問題に、隣接交換をそのまま使うことはできない。たとえば $i, j$ の順で「後ろへ渡す状態」が変わるなら、後ろの要素の値も変わる。それでも、状態が大きいほど後ろにとって得になる（単調）と言えるなら、渡す状態が大きい方の順を選べばよい。1 次関数を順に合成する問題（[練習問題](#practice)の ABC366 F）がこの形である。
 
 ??? note "証明：隣り合う入れ替えだけで全体の最適が言える理由"
     手順 3・4 で得た比較を $\prec$ と書き、$\prec$ が狭義の弱順序だとする。任意の並び $P$ を取る。$P$ が $\prec$ の順になっていなければ、隣り合う $P_k, P_{k+1}$ で $P_{k+1} \prec P_k$ となる組がある（なければ、狭義の弱順序の推移性から $P$ 全体が $\prec$ の順に並んでいる）。この 2 つを入れ替えると、手順 3 から値は悪くならない。入れ替えるたびに「$\prec$ で逆順になっている組」の数が 1 減るので、有限回で $\prec$ の順の並びに着く。$\prec$ で同等な要素どうしは入れ替えても値が同じなので、$\prec$ の順の並びはどれも同じ値である。よって $\prec$ の順の並びは、どの $P$ と比べても悪くない。
@@ -152,7 +152,7 @@ $$
 いくつかを選び、選んだものを好きな順に処理する問題では、選び方と並べ方を分けて考える。選んだ集合が何であっても、隣接交換で導いた順が最適だとする。すると、全体を先にその順でソートしておけば、選んだものは自動的に最適な順に並ぶ。残るのは「前から見て選ぶか選ばないか」の DP で、[ナップサック DP](../dp/knapsack-01.md)の形になる。
 
 - 締め切りのある仕事から選ぶなら、締め切りの順に並べてから「使った時間」を状態にする
-- 一次関数を選んで合成するなら、合成の順を比の大小で決めてから「選んだ個数」を状態にする（[練習問題](#practice)の ABC366 F）
+- 1 次関数を選んで合成するなら、合成の順を比の大小で決めてから「選んだ個数」を状態にする（[練習問題](#practice)の ABC366 F）
 
 比較の基準の作り方と DP の状態の決め方は[並べ替えてから DP する](../dp/exchange-argument-dp.md)にまとめる。
 
@@ -222,7 +222,7 @@ $$
 
 <div class="kp-problems" data-role="practice" markdown>
 
-- [ABC366 F. Maximum Composition](https://atcoder.jp/contests/abc366/tasks/abc366_f)（diff 1819）：N 個の一次関数 f_i(x) = A_i x + B_i から異なる K 個を選んで好きな順に合成し、1 に適用した値の最大を求める。
+- [ABC366 F. Maximum Composition](https://atcoder.jp/contests/abc366/tasks/abc366_f)（diff 1819）：N 個の 1 次関数 f_i(x) = A_i x + B_i から異なる K 個を選んで好きな順に合成し、1 に適用した値の最大を求める。
 - [ABC471 F. Concat (maximize)](https://atcoder.jp/contests/abc471/tasks/abc471_f)（diff 1895）：数字からなる N 個の文字列から K 個を選んで好きな順に連結し、整数として読んだ値を最大にする（先頭に 0 がある文字列もある）。
 
 </div>
@@ -236,7 +236,7 @@ $$
 <div class="kp-problems" data-role="challenge" markdown>
 
 - [ABC163 E. Active Infants](https://atcoder.jp/contests/abc163/tasks/abc163_e)（diff 2037）：幼児を並べ替えて、活発度 × 移動距離の和を最大化する。
-- [ABC467 F. Email Scheduling Optimization](https://atcoder.jp/contests/abc467/tasks/abc467_f)（diff 2052）：書くのに $A_j$ 分かかり、送ってから $B_j$ 分後に返信が届くメールを 1 通ずつ書くとき、すべての返信が届く時刻の最小を、$A_i$ か $B_i$ を書き換えるクエリのたびに答える。
+- [ABC467 F. Email Scheduling Optimization](https://atcoder.jp/contests/abc467/tasks/abc467_f)（diff 2052）：書くのに A_j 分かかり、送ってから B_j 分後に返信が届くメールを 1 通ずつ書くとき、すべての返信が届く時刻の最小を、A_i か B_i を書き換えるクエリのたびに答える。
 
 </div>
 

@@ -19,7 +19,7 @@ type: generated
 
 | ページ | レベル | 要約 |
 | --- | --- | --- |
-| [大きな数の素数判定と素因数分解](../math/miller-rabin.md) | 発展 | 10^18 程度の数の素数判定を Miller-Rabin で、素因数分解を Pollard's rho で期待 O(N^{1/4}) で行う。64bit の法の掛け算には \_\_int128 か Montgomery 乗算を使う。 |
+| [大きな数の素数判定と素因数分解](../math/miller-rabin.md) | 発展 | 10^18 程度の数の素数判定を Miller-Rabin で、素因数分解を Pollard's rho で期待 O(N^(1/4)) で行う。64bit の法の掛け算には \_\_int128 か Montgomery 乗算を使う。 |
 
 ## 文字列
 

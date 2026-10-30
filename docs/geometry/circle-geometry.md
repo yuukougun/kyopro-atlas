@@ -31,7 +31,7 @@ sections:
   - {title: 三分探索の注意：凸性の確認・入れ子の三分探索・式の変わり目の時刻を列挙する方法, anchor: ternary-search-caveats, level: 黄}
   - {title: 山登り・焼きなましに頼らない（ABC の幾何の最適化は凸性や候補の列挙で解ける）, anchor: no-heuristics}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 ---
 
 !!! abstract "要点"
@@ -186,7 +186,7 @@ u_x = \frac{c_y \lvert b \rvert^2 - b_y \lvert c \rvert^2}{2 (b \times c)}, \qqu
 u_y = \frac{b_x \lvert c \rvert^2 - c_x \lvert b \rvert^2}{2 (b \times c)}
 $$
 
-ここで $b \times c = b_x c_y - b_y c_x$ は[外積](../guide/glossary.md#cross-product)、$\lvert b \rvert^2 = b_x^2 + b_y^2$ である。外心は $A + (u_x, u_y)$ になる。この式は「外心から $A$・$B$ への距離が等しい」「$A$・$C$ への距離が等しい」の 2 本の 1 次方程式（2 本の垂直二等分線）を連立して解いたものである。
+ここで $b \times c = b_x c_y - b_y c_x$ は[外積](../guide/glossary.md#cross-product)、$\lvert b \rvert^2 = b_x^2 + b_y^2$ である。外心は $A + (u_x, u_y)$ になる。この式は「外心から $A$・$B$ への距離が等しい」「$A$・$C$ への距離が等しい」の 2 本の一次方程式（2 本の垂直二等分線）を連立して解いたものである。
 
 分母の外積が 0 になるのは、3 点が一直線上にあるときである。このとき垂直二等分線が平行になり、外接円はない。
 

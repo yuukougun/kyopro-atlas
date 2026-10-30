@@ -154,7 +154,7 @@ $K$ は求めたい係数の次数である。逆元・log・exp・累乗の $O(
 ## ライブラリでの使い方 {#library}
 
 !!! info "ACL では"
-    `#include <atcoder/convolution>`。`atcoder::convolution(a, b)` は 2 つの列の畳み込みを $998244353$ で割った余りで返し、計算量は $n = \lvert a \rvert + \lvert b \rvert$ として $O(n \log n + \log \mathrm{mod})$（法を固定すれば $O(n \log n)$）である。`vector<modint998244353>` をそのまま渡せる。法の条件と長さの上限は[ACL の convolution の要件](../math/convolution-ntt.md#acl)にある。逆元・log・exp・累乗は ACL にないので、自作するか他のライブラリを使う。
+    `#include <atcoder/convolution>`。`atcoder::convolution(a, b)` は 2 つの列の畳み込みを $998244353$ で割った余りで返し、計算量は $n = \lvert a \rvert + \lvert b \rvert$、法を $m$ として $O(n \log n + \log m)$（法を固定すれば $O(n \log n)$）である。`vector<modint998244353>` をそのまま渡せる。法の条件と長さの上限は[ACL の convolution の要件](../math/convolution-ntt.md#acl)にある。逆元・log・exp・累乗は ACL にないので、自作するか他のライブラリを使う。
 
 自作するときの要点は次のとおりである。
 

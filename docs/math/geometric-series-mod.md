@@ -16,7 +16,7 @@ signs:
   - {type: phrase, text: 同じ数字列を K 回並べてできる数を mod で求める}
   - {type: phrase, text: 法 M が入力で与えられ、素数とは限らない}
   - {type: constraint, text: 項数 N ≤ 10^12〜10^18 の等比数列の和を、素数とは限らない法 M ≤ 10^9 で求める}
-  - {type: shape, text: 'Σ_{i=0}^{N−1} A^i の形の和'}
+  - {type: shape, text: i = 0..N−1 の A^i の和の形}
 acl: []
 verify: []
 frequency: B
@@ -178,26 +178,6 @@ $$
 - **ダブリング**：$(S(k), r^k)$ の組は「$x \mapsto r^k x + S(k)$」という 1 次関数を表していて、半分に割る方法はこの関数の合成である。$S(2^j)$ と $r^{2^j}$ を表にして $n$ を 2 進で分解すれば、[ダブリングで途中の和を持つ](../basics/doubling.md#aggregates)のと同じ形になる。
 - **位数と指数の mod**：「1 を何個並べると $K$ の倍数になるか」のように、和が 0 になる最小の項数を問う問題は、$(10^n - 1)/9$ が $K$ の倍数、つまり $10^n \equiv 1 \pmod{9K}$ となる最小の $n$ を探す問題に言い換わる（$K$ が 3 の倍数でなければ mod $K$ でよい）。[フェルマーの小定理と指数の mod](../math/exponent-mod.md)を使う。
 
-## 確認問題 {#quiz}
-
-??? question "確認問題：素数 mod でも r ≡ 1 になる例"
-    法 $p = 998244353$ で、公比 $r = 998244354$、項数 $n = 7$ の等比数列の和はいくつか。公式 $(r^n - 1)/(r - 1)$ に入れると何が起きるか。
-
-    ??? success "答え"
-        $r = p + 1 \equiv 1$ なので、各項は 1 と合同で、和は $7$ である。公式に入れると分母 $r - 1 = p \equiv 0$ に逆元がなく、割れない。$r$ を法で割った余りで場合分けする。
-
-??? question "確認問題：半分に割る方法で r ≡ 1 は大丈夫か"
-    [半分に割る方法](#halving)は、$r \equiv 1$ や法が素数でない場合にも正しい値を返すか。
-
-    ??? success "答え"
-        返す。$S(2k) = S(k)(1 + r^k)$ と $S(n) = 1 + rS(n - 1)$ はどちらも和の並べ替えだけから出る恒等式で、割り算を使わない。整数で成り立つ式なので、両辺を $m$ で割った余りでもそのまま成り立つ。$r \equiv 1$ なら $S(n) \equiv n$ がこの漸化式から自然に出てくる。
-
-## 使い分け {#comparison}
-
-- 法が固定の素数（998244353・$10^9 + 7$）なら[公式](#formula)が最も短い。$r \equiv 1$ の分岐を 1 行入れる
-- 法が入力で与えられる、または $r - 1$ が法と互いに素とは限らないなら[半分に割る方法](#halving)か[行列](#matrix)にする
-- 和の形が等比数列から少し外れる（係数が付く・漸化式が 2 項以上）なら[行列累乗](../math/matrix-power.md)にする
-
 ## 例題 {#examples}
 
 ### ABC357 D. 88888888 {#abc357_d}
@@ -247,10 +227,30 @@ $N$ の桁数を $d$ とすると、求める数は $N$ を $10^d$ ずつずら�
 ??? note "力試しの方針"
     - **ABC129 F**：項を桁数 $d$（1〜18）ごとに分ける。同じ桁数の項が続く間は「今の値を $10^d$ 倍して次の項を足す。次の項は $B$ 増える」という操作のくり返しで、状態を（連結した値、今の項、1）にした 3×3 の行列で書ける。法は素数とは限らないので逆元を使わず、桁数ごとに行列累乗する
 
+## 確認問題 {#quiz}
+
+??? question "確認問題：素数 mod でも r ≡ 1 になる例"
+    法 $p = 998244353$ で、公比 $r = 998244354$、項数 $n = 7$ の等比数列の和はいくつか。公式 $(r^n - 1)/(r - 1)$ に入れると何が起きるか。
+
+    ??? success "答え"
+        $r = p + 1 \equiv 1$ なので、各項は 1 と合同で、和は $7$ である。公式に入れると分母 $r - 1 = p \equiv 0$ に逆元がなく、割れない。$r$ を法で割った余りで場合分けする。
+
+??? question "確認問題：半分に割る方法で r ≡ 1 は大丈夫か"
+    [半分に割る方法](#halving)は、$r \equiv 1$ や法が素数でない場合にも正しい値を返すか。
+
+    ??? success "答え"
+        返す。$S(2k) = S(k)(1 + r^k)$ と $S(n) = 1 + rS(n - 1)$ はどちらも和の並べ替えだけから出る恒等式で、割り算を使わない。整数で成り立つ式なので、両辺を $m$ で割った余りでもそのまま成り立つ。$r \equiv 1$ なら $S(n) \equiv n$ がこの漸化式から自然に出てくる。
+
+## 使い分け {#comparison}
+
+- 法が固定の素数（998244353・$10^9 + 7$）なら[公式](#formula)が最も短い。$r \equiv 1$ の分岐を 1 行入れる
+- 法が入力で与えられる、または $r - 1$ が法と互いに素とは限らないなら[半分に割る方法](#halving)か[行列](#matrix)にする
+- 和の形が等比数列から少し外れる（係数が付く・漸化式が 2 項以上）なら[行列累乗](../math/matrix-power.md)にする
+
 ## 参考 {#references}
 
 - [drken「AtCoder ABC 357 D - 88888888 (1Q, 緑色, 350 点)」](https://drken1215.hatenablog.com/entry/2024/06/10/000051)：例題の式 $N \cdot (1 + 10^d + \dots)$ と、公比 ≡ 1 のときの扱い
 - [Kazun「AtCoder Beginner Contest 293 E問題 Geometric Progression」](https://kazun-kyopro.hatenablog.com/entry/ABC/293/E)：練習の方針（偶数で半分・奇数で 1 減らす漸化式）
 - [E869120「math-algorithm-book の解答例 prob4-6-3.cpp」](https://github.com/E869120/math-algorithm-book/blob/main/editorial/chap4-6/prob4-6-3.cpp)：練習の方針（4 の累乗の和と 3 の逆元）
 - [drken「AtCoder ABC 129 F - Takahashi's Basics in Education and Learning (3D, 橙色, 600 点)」](https://drken1215.hatenablog.com/entry/2019/06/10/172000)：力試しの方針（桁数ごとの分割と、等比・等差 × 等比の和の行列）
-- [AtCoder Library「modint」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/modint.md)：modint の割り算の制約（$\gcd(b, \text{mod}) = 1$）
+- [AtCoder Library「modint」（document_ja）](https://github.com/atcoder/ac-library/blob/master/document_ja/modint.md)：modint の割り算の制約（法を $m$ として $\gcd(b, m) = 1$）

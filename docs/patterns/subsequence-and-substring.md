@@ -237,7 +237,7 @@ $T$ が短ければ、末尾の $M - 1$ 文字をそのまま状態にしても�
 </div>
 
 ??? note "練習の方針"
-    - **ABC456 D**：[条件を満たす部分列の数](#count-with-condition)の、末尾の文字を状態にする型である。末尾が a・b・c の部分列の数 $\mathrm{cnt}[a]$・$\mathrm{cnt}[b]$・$\mathrm{cnt}[c]$ を持つ。$S[i] = $ a なら、$\mathrm{cnt}[a]$ に $\mathrm{cnt}[b] + \mathrm{cnt}[c] + 1$ を足す（b か c で終わる部分列の後ろにつなぐか、a 1 文字だけにする）。答えは 3 つの和で、全体で $O(N)$ である。
+    - **ABC456 D**：[条件を満たす部分列の数](#count-with-condition)の、末尾の文字を状態にする型である。末尾が a・b・c の部分列の数 $\mathrm{cnt}[a]$・$\mathrm{cnt}[b]$・$\mathrm{cnt}[c]$ を持つ。$S[i] =$ a なら、$\mathrm{cnt}[a]$ に $\mathrm{cnt}[b] + \mathrm{cnt}[c] + 1$ を足す（b か c で終わる部分列の後ろにつなぐか、a 1 文字だけにする）。答えは 3 つの和で、全体で $O(N)$ である。
 
 ## 確認問題 {#quiz}
 

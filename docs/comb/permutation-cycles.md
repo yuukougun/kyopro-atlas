@@ -191,7 +191,7 @@ swap できるのが隣り合う 2 要素だけなら、ソートの最小回数
 <div class="kp-problems" data-role="practice" markdown>
 
 - [ABC175 D. Moving Piece](https://atcoder.jp/contests/abc175/tasks/abc175_d)（diff 1491）：マス i のコマが P_i へ移る順列に従って、好きなマスに置いたコマを 1 回以上 K 回以下動かし、止まったマスの値の和を最大にする。
-- [ABC377 E. Permute K times 2](https://atcoder.jp/contests/abc377/tasks/abc377_e)（diff 1685）：順列 P に対して、すべての i で P_i を P_{P_i} に同時に置き換える操作を K 回行った後の P を求める。
+- [ABC377 E. Permute K times 2](https://atcoder.jp/contests/abc377/tasks/abc377_e)（diff 1685）：順列 P に対して、すべての i で P_i を P_(P_i) に同時に置き換える操作を K 回行った後の P を求める。
 
 </div>
 

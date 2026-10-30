@@ -10,7 +10,7 @@ level: 発展
 kind: [畳み込み・多項式, ビット演算]
 prerequisites: [convolution-ntt, bit-operations]
 related: [zeta-mobius-subset, zeta-mobius-divisor, nim, fft-ntt]
-summary: c_k = Σ_{i XOR j = k} a_i b_j を、アダマール変換で各点の積に直して O(N log N) で求める。添字の演算（和・XOR・AND/OR・gcd/lcm）ごとに使う変換が変わる。
+summary: i XOR j = k となる a_i b_j の和 c_k を、アダマール変換で各点の積に直して O(N log N) で求める。添字の演算（和・XOR・AND/OR・gcd/lcm）ごとに使う変換が変わる。
 complexity: 長さ 2^n の列で、変換・逆変換・XOR 畳み込みは O(n 2^n)（長さ N = 2^n なら O(N log N)）。同じ列の K 回の畳み込みは O(2^n (n + log K))
 signs:
   - {type: phrase, text: i XOR j = k となる組をすべての k について数える}
@@ -67,7 +67,7 @@ $$
 
 **逆変換は同じ変換を 2^n で割ったもの**：同じ変換をもう一度かけて $2^n$ で割ると元に戻る。
 
-??? note "証明：2 回かけると 2^n 倍に戻る"
+??? note "証明：2 回かけると $2^n$ 倍に戻る"
     変換を 2 回かけると $\sum_s \chi_s(i)\chi_s(k) = \sum_s \chi_s(i \oplus k)$ が掛かる。$i = k$ なら $2^n$ である。$i \ne k$ なら $i \oplus k$ の 1 の bit $t$ を 1 つ取ると、$s$ と $s \oplus 2^t$ で符号が逆になり、和は 0 になる。したがって 2 回かけると元の列の $2^n$ 倍に戻り、逆変換は「もう一度変換して $2^n$ で割る」で済む。
 
 **なぜ速いか**：符号は bit ごとの積 $\chi_s(i) = \prod_t (-1)^{i_t s_t}$ に分かれるので、変換も 1 bit ずつ行える。bit $t$ だけが違う添字の組 $(x, y)$（$x$ が bit $t$ が 0 の側）を $(x + y,\ x - y)$ に置き換える操作を、$t = 0, 1, \dots, n - 1$ の順に全体へ行う。1 段が $O(2^n)$ で $n$ 段なので $O(n 2^n)$ である。[高速ゼータ変換](../comb/zeta-mobius-subset.md#vs-xor)と同じ形のループで、1 段の式だけが違う。

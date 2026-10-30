@@ -27,7 +27,7 @@ sections:
   - {title: pair・tuple・array・priority_queue の CTAD（C++17）, anchor: ctad-std-types}
   - {title: CTAD の罠：波括弧にイテレータ 2 個を渡すとイテレータの vector になる（C++17）, anchor: ctad-pitfall}
 stage: reviewed
-updated: 2026-10-22
+updated: 2026-10-29
 cpp_std: 20
 gcc_min: 13
 atcoder: true
@@ -325,15 +325,6 @@ CTAD でも、波括弧は「中の値を並べた vector」を作る。`vector 
 - **版**：C++17。g++-13・g++-15 とも `-Wall -Wextra` で警告は出なかった
 - **落とし穴**：`w` を使う行でようやく型の合わないエラーが出るか、`w.size()` だけを使えば黙って 2 になる。イテレータの組から作るときは丸括弧、型を書くなら `vector<int> w(v.begin(), v.end());` とする
 
-## 使い分け {#comparison}
-
-| 作りたいもの | 書き方 |
-| --- | --- |
-| 大きさが入力で決まる表 | `vector` の入れ子（CTAD で型を省いてよい） |
-| 内側の長さが小さな定数 | `vector<array<T, K>>` |
-| 長さが決まった数えるための配列 | `array<int, 26> cnt{};` |
-| 大きさが上限で決まる大きな表 | グローバルの C 配列（0 で始まる） |
-
 ## 確認問題 {#quiz}
 
 ??? question "確認問題：`int n = 5; vector<int> a{n};` の `a.size()` は？"
@@ -347,6 +338,15 @@ CTAD でも、波括弧は「中の値を並べた vector」を作る。`vector 
 
 ??? question "確認問題：`long long sum;` から足すコードが AtCoder でだけ合うのはなぜか？"
     AtCoder の GCC には `-ftrivial-auto-var-init=zero` が付いている。これが初期化していない関数の中の変数を 0 にする。手元ではそのオプションがないので、値が決まらない。どちらでも正しく動くよう `long long sum = 0;` と書く。
+
+## 使い分け {#comparison}
+
+| 作りたいもの | 書き方 |
+| --- | --- |
+| 大きさが入力で決まる表 | `vector` の入れ子（CTAD で型を省いてよい） |
+| 内側の長さが小さな定数 | `vector<array<T, K>>` |
+| 長さが決まった数えるための配列 | `array<int, 26> cnt{};` |
+| 大きさが上限で決まる大きな表 | グローバルの C 配列（0 で始まる） |
 
 ## 参考 {#references}
 

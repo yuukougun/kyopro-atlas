@@ -11,7 +11,7 @@ level: 発展
 kind: [DP, データ構造]
 prerequisites: [dp-basics]
 related: [dp-segment-tree, segment-tree, monge, alien-dp, dp-speedup-overview, convex-hull#cht-duality]
-summary: dp[i] = min_j (dp[j] + a_j·x_i + b_j) のように遷移が一次関数の最小になる DP を、下側の包絡線を持って速くする。単調なら deque、そうでなければ Li Chao Tree を使う。
+summary: dp[i] = min_j (dp[j] + a_j·x_i + b_j) のように遷移が 1 次関数の最小になる DP を、下側の包絡線を持って速くする。単調なら deque、そうでなければ Li Chao Tree を使う。
 complexity: 傾きもクエリも単調なら全体 O(N)（ならし）、クエリだけ単調でないなら 1 回 O(log N)、Li Chao Tree は直線の追加と取得が O(log X)・線分の追加が O(log^2 X)（X は x の候補の数）
 signs:
   - {type: shape, text: 遷移のコストが i と j の積の項を 1 つだけ含む（(h_i − h_j)^2 など）}
@@ -31,7 +31,7 @@ updated: 2026-10-29
 ---
 
 !!! abstract "要点"
-    - **何ができるか**：$\mathrm{dp}[i] = \min_j (\mathrm{dp}[j] + a_j x_i + b_j)$ のように遷移が一次関数の最小になる DP を、直線の集まりの下側の包絡線だけを持って $O(N^2)$ から速くする。傾きもクエリも単調なら deque、そうでなければ二分探索か Li Chao Tree を使う。
+    - **何ができるか**：$\mathrm{dp}[i] = \min_j (\mathrm{dp}[j] + a_j x_i + b_j)$ のように遷移が 1 次関数の最小になる DP を、直線の集まりの下側の包絡線だけを持って $O(N^2)$ から速くする。傾きもクエリも単調なら deque、そうでなければ二分探索か Li Chao Tree を使う。
     - **いつ使うか**：
         - 遷移のコストが $i$ と $j$ の積の項を 1 つだけ含む（$(h_i - h_j)^2$ など）
         - 直線を追加しながら、任意の $x$ での最小値・最大値を答える
@@ -193,7 +193,7 @@ Library Checker の対応は次のとおりである。どちらも $N, Q \le 2 
 </div>
 
 ??? note "練習の方針"
-    - ABC289 G：客を購買意欲でソートすると、価格をある客の購買意欲に合わせたとき買う人数 $k$ が決まる。売上は $k$ を傾きとする商品の価値の一次関数になるので、直線の最大を商品ごとに問う。傾きは単調に並べられ、クエリは二分探索か、商品を価値でソートしてから単調に処理する。
+    - ABC289 G：客を購買意欲でソートすると、価格をある客の購買意欲に合わせたとき買う人数 $k$ が決まる。売上は $k$ を傾きとする商品の価値の 1 次関数になるので、直線の最大を商品ごとに問う。傾きは単調に並べられ、クエリは二分探索か、商品を価値でソートしてから単調に処理する。
     - ABC228 H：値でソートすると、まとめて同じ値にそろえる要素はソート後の連続する区間になる。費用の累積和を使うと、区間 $(i, j]$ をそろえる遷移が「$i$ ごとの直線を $x = A_j$ で評価した最小」になる。傾きは累積和の符号を反転したもので単調に、クエリはソート順で単調に並ぶ。
 
 ### Library Checker
@@ -212,7 +212,7 @@ Library Checker の対応は次のとおりである。どちらも $N, Q \le 2 
 ## 使い分け {#comparison}
 
 - 遷移のコストが $j$ だけの値の和で、範囲の最小を取るだけなら、[セグメント木・スライド最小値による DP の高速化](../dp/dp-segment-tree.md)で足りる。$a_j x_i$ のような積の項が残ると範囲の最小では取れず、CHT になる。
-- コストが一次関数の形にならなくても、Monge 性（最適な遷移元の位置が単調）があれば [Monge 性による DP の高速化](../dp/monge.md#monotone-minima)の方法が使える。
+- コストが 1 次関数の形にならなくても、Monge 性（最適な遷移元の位置が単調）があれば [Monge 性による DP の高速化](../dp/monge.md#monotone-minima)の方法が使える。
 - 遷移の個数に制約がある（ちょうど $K$ 回）DP は、[Alien DP](../dp/alien-dp.md#penalty) で制約を外してから CHT と組むことがある。
 - 全体の選び方は [DP の高速化の選び方](../dp/dp-speedup-overview.md#shape-to-tool)に、CHT・Monge・Alien DP・Slope Trick の確かめ方は[凸性を使う高速化の使いどころ](../dp/dp-speedup-overview.md#convexity)にまとめる。
 

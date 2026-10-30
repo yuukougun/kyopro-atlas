@@ -14,7 +14,7 @@ summary: 状態が S 種類しかなければ、S 回進むまでに必ず以前
 complexity: 前計算 O(S)（S は状態の種類、遷移 1 回が O(1) のとき）。K 回後の状態と最初の K 項の和は 1 回 O(1)
 signs:
   - {type: constraint, text: K ≤ 10^18 回の操作で、状態の種類は 10^5〜10^6 程度}
-  - {type: phrase, text: 'x_{n+1} = f(x_n) の形の漸化式'}
+  - {type: phrase, text: 'x_(n+1) = f(x_n) の形の漸化式'}
   - {type: phrase, text: 同じ模様が繰り返し敷き詰められた盤面}
 acl: []
 frequency: B
@@ -185,7 +185,7 @@ $K$ 回の遷移を速く進める手法は 3 つあり、遷移の形と問い�
 
 <div class="kp-problems" data-role="example" markdown>
 
-- [ABC179 E. Sequence Sum](https://atcoder.jp/contests/abc179/tasks/abc179_e)（diff 1175）：A_1 = X、A_{n+1} = A_n^2 mod M で定まる数列の、最初の N 項の和を求める。
+- [ABC179 E. Sequence Sum](https://atcoder.jp/contests/abc179/tasks/abc179_e)（diff 1175）：A_1 = X、A_(n+1) = A_n^2 mod M で定まる数列の、最初の N 項の和を求める。
 
 </div>
 
