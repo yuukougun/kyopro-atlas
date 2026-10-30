@@ -27,7 +27,7 @@ sections:
   - {title: 順に並べてから DP（DP の章へ）, anchor: then-dp}
   - {title: 入れ替えで改善できるかを考える型, anchor: improve-by-swap}
 stage: done
-updated: 2026-10-29
+updated: 2026-10-30
 ---
 
 !!! abstract "要点"
@@ -236,7 +236,7 @@ $$
 <div class="kp-problems" data-role="challenge" markdown>
 
 - [ABC163 E. Active Infants](https://atcoder.jp/contests/abc163/tasks/abc163_e)（diff 2037）：幼児を並べ替えて、活発度 × 移動距離の和を最大化する。
-- [ABC467 F. Email Scheduling Optimization](https://atcoder.jp/contests/abc467/tasks/abc467_f)（diff 2052）：書くのに A_j 分かかり、送ってから B_j 分後に返信が届くメールを 1 通ずつ書くとき、すべての返信が届く時刻の最小を、A_i か B_i を書き換えるクエリのたびに答える。
+- [ABC467 F. Email Scheduling Optimization](https://atcoder.jp/contests/abc467/tasks/abc467_f)（diff 2052）：各メールに書く時間 A_j と返信までの時間 B_j があり、A・B の 1 点更新のたびに、メールを 1 通ずつ好きな順に書いて送るとき、すべての返信が届く最小の時刻を答える。
 
 </div>
 
