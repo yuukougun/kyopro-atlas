@@ -19,11 +19,12 @@ sections:
   - {title: 典型90問の★とレベル, anchor: typical90-stars}
   - {title: 最近の ABC → ページ, anchor: recent-abc}
   - {title: 問題集の問題 → ページ, anchor: sets-to-pages}
+  - {title: AtCoder Algorithm Lectures（AAL）, anchor: aal}
   - {title: 練習用のコンテスト, anchor: practice-contests}
   - {title: AtCoder 以外の道具, anchor: tools}
   - {title: ライブラリの確かめ用の問題集, anchor: verify-sets}
 stage: done
-updated: 2026-10-29
+updated: 2026-11-13
 ---
 
 !!! abstract "要点"
@@ -50,7 +51,7 @@ updated: 2026-10-29
 | [鉄則本の演習問題集](#problem-sets-tessoku-book)（tessoku-book） | 151 | 『競技プログラミングの鉄則』の章（累積和・二分探索・DP・数学・考察・データ構造・グラフ・ヒューリスティック・総合問題）に沿う | 基礎〜水が多い。最大流・二部マッチング・燃やす埋めるなど黄のページの練習も入る |
 | [アルゴリズムと数学 演習問題集](#problem-sets-math-and-algorithm)（math-and-algorithm） | 104 | 『アルゴリズム×数学』の本に沿う数学の基礎（素数・場合の数・確率・行列累乗など） | 基礎が中心 |
 | [ACL Practice](#problem-sets-practice2)（practice2） | 12 | ACL の主な機能を 1 問ずつ（遅延セグメント木は 2 問） | 機能ごとのページ（水〜黄が多い）の例題 |
-| AAL Contest 001: Let's use segtree!（aalc001） | 24 | セグメント木の問題集。2026-10。題名に Lazy Segment Tree・Binary Search on a Segment Tree・Inversion Count など | 本文ではまだ使っていない |
+| AAL Contest 001: Let's use segtree!（aalc001） | 24 | [AAL](#aal) の演習用のコンテスト。セグメント木の問題集。2026-10。題名に Lazy Segment Tree・Binary Search on a Segment Tree・Inversion Count など | 本文ではまだ使っていない |
 | FPS 24 題（fps-24） | 24 | 形式的冪級数。2025-11 | 発展（[形式的冪級数](../math/fps-basics.md)は発展の帯） |
 | 組合せゲーム 24 題（game-24） | 24 | Nim・Grundy 数などのゲーム。2026-10 | 本文ではまだ使っていない |
 | AtCoder Typical Contest 001・002（atc001・atc002） | 3・3 | DFS・Union-Find・FFT と、BFS・繰り返し二乗法・最適二分探索木 | 基本の確かめ（atc002 C の満点は発展） |
@@ -557,6 +558,10 @@ updated: 2026-10-29
 <!-- textlint-enable -->
 <!-- gen:end problem-sets -->
 
+## AtCoder Algorithm Lectures（AAL） {#aal}
+
+AtCoder Algorithm Lectures（AAL）は、AtCoder の公式の講座シリーズである。演習用のコンテストとして AAL Contest があり、[問題集の一覧](#collections)の aalc001 はその 1 つである。この教材を読んだ後に、より深く学ぶ先として使える。入口は [AtCoder Algorithm Lectures のトップページ](https://info.atcoder.jp/entry/algorithm_lectures/index)である。
+
 ## 練習用のコンテスト {#practice-contests}
 
 決まった時刻に始まり、制限時間の中で解く形の練習には、次のコンテストがある。AtCoder Problems のデータでは、どれもレートが変わらない（Rated の範囲が付いていない）。
@@ -595,7 +600,7 @@ ARC にも Rated の範囲の違う区分（ARC--・ARC・ARC++）があり、�
 
 - **ACL Practice（practice2）**：ACL の主な機能を 1 問ずつ（遅延セグメント木は 2 問）、計 12 問が並ぶ。Union-Find・BIT・floor sum・最大流・最小費用流・畳み込み・SCC・2-SAT・Suffix Array・セグメント木・遅延セグメント木を扱う。各問題がどのページの例題かは [ACL Practice の表](#problem-sets-practice2)にある。自作したデータ構造を、ACL と同じ問題で確かめるのにも使える。
 - **Library Checker**（[judge.yosupo.jp](https://judge.yosupo.jp/)）：データ構造・アルゴリズムごとに、確かめ用の問題を集めたジャッジである。問題の一覧には、14 の分野（データ構造・グラフ・木・畳み込み・数論・多項式・文字列・幾何など）に 235 問がある。
-- **AAL Contest 001: Let's use segtree!（aalc001）**：セグメント木の 24 問。題名から、ふつうのセグメント木・遅延セグメント木・セグメント木上の二分探索・転倒数などを順に使う構成と読める。[セグメント木](../ds/segment-tree.md)と[遅延セグメント木](../ds/lazy-segment-tree.md)を自作した後の確かめに向く。
+- **AAL Contest 001: Let's use segtree!（aalc001）**：[AAL](#aal) の演習用のコンテストで、セグメント木の 24 問。題名から、ふつうのセグメント木・遅延セグメント木・セグメント木上の二分探索・転倒数などを順に使う構成と読める。[セグメント木](../ds/segment-tree.md)と[遅延セグメント木](../ds/lazy-segment-tree.md)を自作した後の確かめに向く。
 - **AtCoder Typical Contest 001・002**：DFS・Union-Find・FFT・BFS・繰り返し二乗法など、基本のアルゴリズムを入出力の素直な形で問う。ただし atc002 C（最適二分探索木）は、満点を取るには $O(N \log N)$ の解法（Hu-Tucker など）が要り、基本の確かめの範囲を超える。
 - **ACL Beginner Contest（abl）**：ACL を使うことを想定した本番の ABC（2020-09、6 問）。こちらは本番として開かれたので difficulty が付く。
 
