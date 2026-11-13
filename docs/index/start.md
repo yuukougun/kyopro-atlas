@@ -86,3 +86,15 @@ search:
     - `ai-and-sources#noai` AI の利用を断るサイトを資料にしない：https://yuukougun.github.io/kyopro-atlas/start/ai-and-sources/#noai
     - `ai-and-sources#license` 教材のライセンス：https://yuukougun.github.io/kyopro-atlas/start/ai-and-sources/#license
     - `ai-and-sources#contact` 掲載内容についての連絡と対応：https://yuukougun.github.io/kyopro-atlas/start/ai-and-sources/#contact
+
+## 謝辞（acknowledgments） {#acknowledgments}
+
+- id：`acknowledgments`　レベル：—　段階：done　type：guide
+- URL：https://yuukougun.github.io/kyopro-atlas/start/acknowledgments/
+- 別名：謝辞、参考にした書き手、感謝
+- 種類：案内
+- 節：
+    - `acknowledgments#main-thanks` 特に多く参考にした書き手：https://yuukougun.github.io/kyopro-atlas/start/acknowledgments/#main-thanks
+    - `acknowledgments#writers` 書き手と資料：https://yuukougun.github.io/kyopro-atlas/start/acknowledgments/#writers
+    - `acknowledgments#problem-sets` 例題と練習に使った問題集：https://yuukougun.github.io/kyopro-atlas/start/acknowledgments/#problem-sets
+    - `acknowledgments#tools` 教材の作成に使ったサービスとライブラリ：https://yuukougun.github.io/kyopro-atlas/start/acknowledgments/#tools
