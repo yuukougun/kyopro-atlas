@@ -208,14 +208,16 @@ $N = 1, 2, 3$ や極端な入力（全部同じ値・単調な列・パス状の
 | 添字と値を混ぜた式を分けられるか？ | $A_j - A_i = j - i$ → $A_j - j = A_i - i$ | [i と j を分離する](../thinking/reformulation.md#separate-indices) |
 | 対称性で半分にできるか？ | $N \le M$ に入れ替える | [対称性で場合を減らす](../thinking/symmetry-pigeonhole-casework.md#symmetry-cases) |
 
-形の表に出てきた次の言い換えも、ここで当て直す。
+??? note "形の表と重なる言い換え"
 
-- 1 つを固定する（[一部を固定して数える](../thinking/fix-variable.md#fix-middle)）
-- 要素の側から数える（[主客転倒・寄与](../thinking/contribution.md#swap-roles)）
-- 補集合を数える（[余事象](../thinking/complement.md#whole-minus-complement)）
-- 独立に分ける（[独立に分解する](../thinking/reformulation.md#independence)）
-- 操作を点の操作に直す（[操作の言い換え](../thinking/reformulation.md#operations)）
-- グラフにする（[グラフへの帰着](../graph/graph-modeling.md#what-to-vertex)）
+    | 問い | 言い換えの例 | ページ |
+    | --- | --- | --- |
+    | 1 つを固定すると、残りが易しくなるか？ | 3 つ組 → 真ん中を固定して左右の積 | [一部を固定して数える](../thinking/fix-variable.md#fix-middle) |
+    | 要素の側から数えられるか？ | 全区間の和 → 各要素が含まれる区間の数 | [主客転倒・寄与](../thinking/contribution.md#swap-roles) |
+    | 補集合の方が数えやすいか？ | 「少なくとも 1 つ」→ 全体 − 「1 つもない」 | [余事象](../thinking/complement.md#whole-minus-complement) |
+    | 独立な部分に分けられるか？ | x と y・bit ごと・連結成分ごと | [独立に分解する](../thinking/reformulation.md#independence) |
+    | 操作を点の操作に直せるか？ | 区間への一律の加算 → 差分列の 2 点の変更 | [操作の言い換え](../thinking/reformulation.md#operations) |
+    | グラフにすると、知っている問題になるか？ | 移動・依存・同じであるという関係を辺にする | [グラフへの帰着](../graph/graph-modeling.md#what-to-vertex) |
 
 言い換えた後は、元の問題と答えが一致するかを小さいケースで確かめる。条件を 1 つ落とした言い換え（必要条件だけを満たすもの）になっていることがある。
 

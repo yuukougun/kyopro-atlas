@@ -101,6 +101,13 @@ updated: 2026-11-13
 - 解説は作者の GitHub のリポジトリに画像で置かれている（[参考](#references)）。
 - 本文で例題・練習に使った典型90問は、[典型90問の表](#problem-sets-typical90)に問題番号の順で並ぶ。
 
+??? note "作者の勧める取り組み方"
+
+    - 解法が分かったら、AC まで実装する。
+    - 1 日考えても解けなければ、解説を読む。
+    - 解説にある類題をいくつか解く。
+    - 本番のコンテストにも出て、身につけた典型を使ってみる。
+
 ## 最近の ABC → ページ {#recent-abc}
 
 abc451〜abc480 の D〜G の 120 問を、使う手法のページに対応させた表である。解けなかった最近の ABC の問題から、復習するページを引くのに使う。
@@ -622,7 +629,7 @@ ARC にも Rated の範囲の違う区分（ARC--・ARC・ARC++）があり、�
 
 ## 参考 {#references}
 
-- [E869120「AtCoder での実力アップを目指そう！　～競プロ典型 90 問～」](https://qiita.com/e869120/items/1b2a5f0f07fd927e44e9)：★と difficulty の対応、出題の期間
+- [E869120「AtCoder での実力アップを目指そう！　～競プロ典型 90 問～」](https://qiita.com/e869120/items/1b2a5f0f07fd927e44e9)：★と difficulty の対応、出題の期間、勧める取り組み方
 - [E869120「kyopro_educational_90」](https://github.com/E869120/kyopro_educational_90)：典型90問の解説の置き場
 - [E869120「kyopro-tessoku」](https://github.com/E869120/kyopro-tessoku)：鉄則本の章立てと、章ごとの解答コード
 - [drken「動的計画法超入門！ Educational DP Contest の A ～ E 問題の解説と類題集」](https://qiita.com/drken/items/dc53c683d6de8aeacf5a)：EDPC の位置づけ（DP を初めて学ぶ人向けの問題）

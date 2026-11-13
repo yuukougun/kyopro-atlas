@@ -130,6 +130,9 @@ class SiteTest(unittest.TestCase):
         self.assertIn("| 種類 | ページ | 問題 | 問題数 |", pos)
         self.assertIn("| ABC451&nbsp;E・ABC452&nbsp;E | 2 |", pos)
         self.assertNotIn("abc451_e", pos)
+        self.assertIn('<span id="recent-positions-e"></span>', pos)      # 前の小見出しの anchor を残す
+        self.assertIn('=== "E 問題（水の帯）"', pos)                     # 位置ごとのタブ
+        self.assertIn("    | 種類 | ページ | 問題 | 問題数 |", pos)
 
     def test_fields_has_lists_chapter(self):
         rows = self.site.b_fields("start/how-to-use.md").split("\n")

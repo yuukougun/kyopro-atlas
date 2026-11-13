@@ -220,12 +220,7 @@ library/
 
 手法のページごとに、自作の部品の確認に使える Library Checker の問題を並べた表である。問題名は judge.yosupo.jp の URL の末尾と同じで、リンクから問題文に行ける。表にない部品は、Library Checker の問題一覧から入出力の形が近いものを探し、見つからなければ[不変条件と境界のテスト](#tests)の突き合わせだけで確かめる。
 
-??? note "表の読み方"
-
-    - **1 つのページに問題が複数ある**：確かめられる使い方がそれぞれ違う。たとえば遅延セグメント木の `range_affine_range_sum` は区間のアフィン変換と区間和、`range_add_range_min` は区間加算と区間最小値で、載せる演算の違う 2 種類を確かめられる
-    - **同じ問題が複数のページにある**：`point_set_range_composite` はセグメント木と動的 DP の両方の行にある。非可換の演算（1 次関数の合成）を載せるので、演算の左右を取り違えたバグが出る
-
-??? note "ページ → Library Checker の問題の表"
+???+ note "ページ → Library Checker の問題の表"
 
     <!-- gen:begin verify-table -->
     <!-- textlint-disable -->
@@ -319,6 +314,11 @@ library/
 
     <!-- textlint-enable -->
     <!-- gen:end verify-table -->
+
+??? note "表の読み方"
+
+    - **1 つのページに問題が複数ある**：確かめられる使い方がそれぞれ違う。たとえば遅延セグメント木の `range_affine_range_sum` は区間のアフィン変換と区間和、`range_add_range_min` は区間加算と区間最小値で、載せる演算の違う 2 種類を確かめられる
+    - **同じ問題が複数のページにある**：`point_set_range_composite` はセグメント木と動的 DP の両方の行にある。非可換の演算（1 次関数の合成）を載せるので、演算の左右を取り違えたバグが出る
 
 ## 確認問題 {#quiz}
 

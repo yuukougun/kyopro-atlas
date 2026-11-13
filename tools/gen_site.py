@@ -1267,13 +1267,17 @@ class Site:
                              str(len(g["problems"]))])
             lvl = POSITION_LEVEL.get(pos, "")
             # 位置ごとのタブ（#110）。中身は 4 字下げ
-            body = (f"abc451〜abc480 の {pos} の {len(probs)} 問で使われた手法を、ページの種類（kind の1つ目）で分けて多い順に並べる。"
-                    "かっこの数は、その位置でそのページを使った問題の数（1 のときは書かない）。\n\n"
-                    + table(["種類", "ページ", "問題", "問題数"], rows))
+            body = f"{pos} の {len(probs)} 問。\n\n" + table(["種類", "ページ", "問題", "問題数"], rows)
             out.append(f'=== "{pos} 問題（{lvl}の帯）"\n\n' + "\n".join(("    " + x) if x else "" for x in body.split("\n")))
         if missing:
             self.notes.append("recent-abc.yaml の参照でページのないもの: " + "、".join(sorted(missing)))
-        return "\n\n".join(out) or "（data/recent-abc.yaml に問題がない）"
+        if not out:
+            return "（data/recent-abc.yaml に問題がない）"
+        # 前の版の小見出しの anchor（#recent-positions-e など）は、タブの前の空の目印で残す
+        marks = "".join(f'<span id="recent-positions-{p.lower()}"></span>' for p in RECENT_POSITIONS)
+        head = ("abc451〜abc480 の各位置の問題で使われた手法を、ページの種類で分けて多い順に並べる。"
+                "かっこの数は、その位置でそのページを使った問題の数（1 のときは書かない）。")
+        return head + "\n\n" + marks + "\n\n" + "\n\n".join(out)
 
     def b_recent_abc(self, host: str) -> str:
         rows = []
