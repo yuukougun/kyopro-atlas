@@ -33,7 +33,7 @@ updated: 2026-11-13
 別名：AI の利用・生成 AI・出典・参考文献・転載・noai・著作権・ライセンス・問い合わせ・連絡先
 <!-- textlint-enable -->
 
-出典と AI 利用の方針は、この教材を誰がどのように書いて確かめ、何を資料にし、資料をどう示しているかの説明である。教材を使うときのライセンスと、掲載内容についての連絡先も示す。参考にした記事の書き手への感謝は、[謝辞](acknowledgments.md)のページにまとめている。読者が claude.ai に解説を頼むときの約束は、[claude.ai での解説の頼み方](how-to-use.md#claude)にある。
+読者が claude.ai に解説を頼むときの約束は、このページではなく[claude.ai での解説の頼み方](how-to-use.md#claude)にある。
 
 ## AI で書いていることと確かめ方 {#ai-writing}
 
@@ -54,20 +54,23 @@ updated: 2026-11-13
 - 他者の文章を転載せず、参考にした資料を出典として残す。
 - AI の利用を断る指定のあるサイトを資料にしない。
 
-機械の検査は変更を push するたびに GitHub Actions で動き、すべてのコード片のコンパイルと外部のリンクの確認は週に 1 回動く。
-
-ページごとの検証に加えて、次の 2 つの見直しを行った。どちらも、直した結果を別の担当が検証した。
-
-1. **全体の検証**：全ページを書き終えた後（2026-10-22）、2 巡行った。1 巡目は構成・ページどうしの関係・事実・図・共有のファイルの 5 つの観点で全ページの問題点を洗い出して直し、2 巡目は残った点を直した。その時点の全ページの段階を「検証済み」にした。
-2. **Issue の対応**：その後に見つけた点と、読者から寄せられた要望を GitHub の Issue にまとめて直す。2026-10-30 に一通りの対応を終え、全ページの段階を「完成」にした。
+全ページの記述を作者が確かめるのは現実的でないので、記述の正しさは AI の担当と機械の検査に任せる。これがこの教材の運用の方針である。
 
 各ページの最後の行には、ページの段階と更新日が出る。本文を書いたページの段階は、次のように進む（準備中を含む 4 つの段階の一覧は[ページの段階と「準備中」の帯](how-to-use.md#stub)）。
 
-- **下書き**：AI の担当が書き、まだ検証していない。
-- **検証済み**：別の担当が検証し、指摘を直した。
-- **完成**：執筆・別の担当の検証・Issue の対応を一通り終え、作者が公開してよいとした。
+| 段階 | 意味 |
+| --- | --- |
+| 下書き | AI の担当が書き、まだ検証していない |
+| 検証済み | 別の担当が検証し、指摘を直した |
+| 完成 | 執筆・別の担当の検証・Issue の対応を一通り終え、作者が公開してよいとした |
 
-全ページの記述を作者が確かめるのは現実的でないので、記述の正しさは AI の担当と機械の検査に任せる。これがこの教材の運用の方針である。
+??? note "検査の頻度と、全体の見直し"
+    機械の検査は変更を push するたびに GitHub Actions で動き、すべてのコード片のコンパイルと外部のリンクの確認は週に 1 回動く。
+
+    ページごとの検証に加えて、次の 2 つの見直しを行った。どちらも、直した結果を別の担当が検証した。
+
+    1. **全体の検証**：全ページを書き終えた後（2026-10-22）、2 巡行った。1 巡目は構成・ページどうしの関係・事実・図・共有のファイルの 5 つの観点で全ページの問題点を洗い出して直し、2 巡目は残った点を直した。その時点の全ページの段階を「検証済み」にした。
+    2. **Issue の対応**：その後に見つけた点と、読者から寄せられた要望を GitHub の Issue にまとめて直す。2026-10-30 に一通りの対応を終え、全ページの段階を「完成」にした。
 
 「完成」のページも、検証をすり抜けた誤りの残ることがある。AtCoder Algorithm Lectures（AtCoder の公式の講座）で扱う手法は、この教材の説明をその講座と照らして確かめられる（[問題集の案内](../guide/problem-sets.md#aal)）。誤りに気づいたら、[掲載内容についての連絡と対応](#contact)の方法で知らせてほしい。
 
@@ -95,22 +98,23 @@ updated: 2026-11-13
 
 問題（例題・練習・力試し）について、何を問い、どう解けるかは、解説で確かめた。使った解説の多くは、第三者の書いたものである。典型90問・鉄則本・アルゴリズムと数学・ACL Practice では、出題者が GitHub に公開している資料（解説・解答例。典型90問では問題文も）も参考にし、それだけで確かめた問題もある。確かめた資料の URL は、リポジトリの[問題の台帳](https://github.com/yuukougun/kyopro-atlas/blob/main/data/problems.yaml)に、問題ごとの記録として残している。裏付けの取れない問題は載せない。
 
-参考には、atcoder.jp と codeforces.com の URL を入れない（[AI の利用を断るサイトを資料にしない](#noai)）。atcoder.jp にある AtCoder の解説ページも、資料にしていない。典型90問では、出題者が GitHub に公開している解説が公式の解説にあたり、参考にも挙げている。問題の行のリンクは atcoder.jp の問題ページを指すが、これは読者が問題を開くためのものである。
+参考には、atcoder.jp と codeforces.com の URL を入れない（[AI の利用を断るサイトを資料にしない](#noai)）。問題の行のリンクは atcoder.jp の問題ページを指すが、これは読者が問題を開くためのものである。典型90問では、出題者が GitHub に公開している解説が公式の解説にあたり、参考にも挙げている。
 
 ## AI の利用を断るサイトを資料にしない {#noai}
 
-Web のサイトには、AI による利用を断る指定を置いているものがある。この教材は、そうしたサイトを資料にしない。
+Web のサイトには、AI による利用を断る指定を置いているものがある。この教材は、そうしたサイトを資料にしない。利用規約などで AI の利用を断っていると分かったサイトも、資料にしない。
 
-資料にするドメインは、使う前に、次の 2 か所に noai・noimageai の指定がないことを確かめる。確かめるプログラムは、リポジトリの [tools/check_noai.py](https://github.com/yuukougun/kyopro-atlas/blob/main/tools/check_noai.py) である。
+AtCoder の問題ページと解説ページには noai と noimageai の指定があり、Codeforces のページにも同じ指定がある（制作の始めの 2026-10-21 に確かめた）。そのため、制作では AtCoder の問題ページと解説ページ（atcoder.jp とそのサブドメイン）と、codeforces.com のページを AI で開かない。atcoder.jp にある AtCoder の解説ページも資料にしていない。問題の題名と difficulty は AtCoder Problems の公開データで確かめ、問いと解き方は第三者や出題者が公開している解説などで確かめる（[参考にした資料の示し方](#citations)）。
 
-- ページの HTML にある robots の meta タグ（`<meta name="robots" content="noai">` の形。クローラの名前を指定したものも含む）
-- HTTP の応答の X-Robots-Tag ヘッダー
+??? note "指定の確かめ方"
+    資料にするドメインは、使う前に、次の 2 か所に noai・noimageai の指定がないことを確かめる。確かめるプログラムは、リポジトリの [tools/check_noai.py](https://github.com/yuukougun/kyopro-atlas/blob/main/tools/check_noai.py) である。
 
-利用規約などで AI の利用を断っていると分かったサイトも、資料にしない。はてなブログ・Scrapbox・note のように書き手ごとに設定や条件の違うサービスは、書き手・プロジェクト・記事ごとに確かめる。確かめたドメインは、確かめた日とともに[執筆の手引き](https://github.com/yuukougun/kyopro-atlas/blob/main/planning/style-guide.md)の付録 B に記録している。
+    - ページの HTML にある robots の meta タグ（`<meta name="robots" content="noai">` の形。クローラの名前を指定したものも含む）
+    - HTTP の応答の X-Robots-Tag ヘッダー
 
-AtCoder の問題ページと解説ページには noai と noimageai の指定があり、Codeforces のページにも同じ指定がある。どちらも制作の始め（2026-10-21）に確かめた。そのため、制作では AtCoder の問題ページと解説ページ（atcoder.jp とそのサブドメイン）と、codeforces.com のページを AI で開かない。問題の題名と difficulty は AtCoder Problems の公開データで確かめ、問いと解き方は第三者や出題者が公開している解説などで確かめる（[参考にした資料の示し方](#citations)）。AtCoder の言語の一覧（img.atcoder.jp の静的ファイル）には noai の指定がないことも、同じ日に確かめた。
+    はてなブログ・Scrapbox・note のように書き手ごとに設定や条件の違うサービスは、書き手・プロジェクト・記事ごとに確かめる。確かめたドメインは、確かめた日とともに[執筆の手引き](https://github.com/yuukougun/kyopro-atlas/blob/main/planning/style-guide.md)の付録 B に記録している。AtCoder の言語の一覧（img.atcoder.jp の静的ファイル）には noai の指定がないことも、2026-10-21 に確かめた。
 
-読者が claude.ai に解説を頼むときも、Claude にこの 2 つのサイトを開かせない約束にしている（[claude.ai での解説の頼み方](how-to-use.md#claude)）。開催中のコンテストの問題に使わない約束は、[AtCoder生成AI対策ルールの版](how-to-use.md#ai-rule-version)にある。
+読者が claude.ai に解説を頼むときも、Claude にこの 2 つのサイトを開かせず、開催中のコンテストの問題には使わない約束にしている（[claude.ai での解説の頼み方](how-to-use.md#claude)・[AtCoder生成AI対策ルールの版](how-to-use.md#ai-rule-version)）。
 
 ## 教材のライセンス {#license}
 
@@ -118,15 +122,18 @@ AtCoder の問題ページと解説ページには noai と noimageai の指定�
 
 - **本文と図**：[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ja)（クリエイティブ・コモンズ 表示 4.0 国際）である。下の段落の表示をすれば、複製・再配布・改変ができ、営利の目的にも使える。
 - **コード**：MIT ライセンスである。ページに載るコード片と、その元の完全なプログラム、サイトを作るプログラム（索引や一覧を作るスクリプト・テンプレート・動く図の JavaScript など）が対象である。
-- **同梱している外部のもの**：それぞれのライセンスに従う。コード片が呼び出す AtCoder Library（ACL）は CC0 である。サイトの表示に使う KaTeX・Cytoscape.js・cytoscape-dagre は MIT ライセンスで、KaTeX のフォントは SIL Open Font License 1.1 である。ライセンスの文書はリポジトリの同じディレクトリに置いている（KaTeX のフォントは、フォントのファイルの中にライセンスの表示がある）。
+- **同梱している外部のもの**：それぞれのライセンスに従う（下の折りたたみ）。
 
 本文や図を使うときは、出典として kyopro-atlas（作者 yuukougun）とページの題名・URL を示し、CC BY 4.0 へのリンクを添え、手を加えたときはその旨を書く。ライセンスの文書は、リポジトリの [LICENSE-docs](https://github.com/yuukougun/kyopro-atlas/blob/main/LICENSE-docs)（本文と図。法的な全文は[リーガル・コード](https://creativecommons.org/licenses/by/4.0/legalcode.ja)）と [LICENSE](https://github.com/yuukougun/kyopro-atlas/blob/main/LICENSE)（コード）にある。どのファイルがどちらにあたるかは、LICENSE-docs と [README](https://github.com/yuukougun/kyopro-atlas/blob/main/README.md) のライセンスの節に書いてある。問題の題名や参考に挙げた資料の題名など、ページに出る他者のものは、このライセンスの対象ではない。
+
+??? note "同梱している外部のもののライセンス"
+    コード片が呼び出す AtCoder Library（ACL）は CC0 である。サイトの表示に使う KaTeX・Cytoscape.js・cytoscape-dagre は MIT ライセンスで、KaTeX のフォントは SIL Open Font License 1.1 である。ライセンスの文書はリポジトリの同じディレクトリに置いている（KaTeX のフォントは、フォントのファイルの中にライセンスの表示がある）。
 
 ## 掲載内容についての連絡と対応 {#contact}
 
 この教材は、参考に挙げた多くの記事の書き手に支えられている。書き手の方々への感謝は[謝辞](acknowledgments.md)にまとめた。掲載内容への感想・補足・誤りの指摘は、記事の書き手と読者のどちらからでも歓迎する。
 
-連絡は、GitHub の [kyopro-atlas の Issue](https://github.com/yuukougun/kyopro-atlas/issues) で受け付ける。連絡の受け口は GitHub の Issue だけで、Issue を立てるには GitHub のアカウントが要る。各ページの最後の行の「このページの誤りを報告する」から開くと、ページの題名・URL・更新日が入った画面になる（[誤りの報告](how-to-use.md#report)）。
+連絡は、GitHub の [kyopro-atlas の Issue](https://github.com/yuukougun/kyopro-atlas/issues) だけで受け付ける（GitHub のアカウントが要る）。各ページの最後の行の「このページの誤りを報告する」から開くと、ページの題名・URL・更新日が入った画面になる（[誤りの報告](how-to-use.md#report)）。
 
 たとえば次のような連絡を受け付ける。どれも歓迎する。
 

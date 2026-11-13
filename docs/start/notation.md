@@ -28,7 +28,7 @@ sections:
   - {title: コード片の約束, anchor: code}
   - {title: 用語の表記, anchor: terms}
 stage: done
-updated: 2026-10-29
+updated: 2026-11-13
 ---
 
 !!! abstract "要点"
@@ -40,17 +40,21 @@ updated: 2026-10-29
 別名：記法・0-indexed・1-indexed・半開区間・数学の記法・合同式・整除・床関数・天井関数・Σ の記法・notation
 <!-- textlint-enable -->
 
-記法と用語の約束は、教材のどのページでも同じ意味で使う記号と書き方の一覧である。語の意味は[用語集](../guide/glossary.md)、数値の目安は[早見表](../guide/cheatsheet.md)にあり、ここは記号の読み方を受け持つ。ページごとに意味の変わる記号（$d(n)$ や $\sigma$ など）は、そのページの冒頭で定め、ここには代表的な使われ方だけを載せる。
+語の意味は[用語集](../guide/glossary.md)、数値の目安は[早見表](../guide/cheatsheet.md)にあり、ここは記号の読み方を受け持つ。
 
 ## 計算量の書き方 {#complexity}
 
 計算量は $O(N \log N)$ のように、入力の大きさを表す文字で書く。log の底は書かない。$\log_2 N$ と $\log_{10} N$ は定数倍しか違わないので、$O$ の中では区別しないからである。見積もりで回数を出すときだけ、底を 2 として $\log_2 (2 \times 10^5) \approx 17.6$ のように数える（[計算量の見積もり](../basics/complexity-estimation.md#how-to-estimate)）。
 
-- **文字が複数あるとき**：グラフは頂点数 $N$ と辺数 $M$ を両方残し、$O(N + M)$・$O((N + M) \log N)$ と書く。クエリは $O(N + Q \log N)$ のように前計算と分ける。
-- **$\log^2 N$**：$(\log N)^2$ のことで、$\log \log N$ とは別である。
-- **条件の付く計算量**：[ならし計算量](../guide/glossary.md#amortized-complexity)は「ならし $O(\alpha(N))$」、乱択やハッシュの平均は「期待 $O(N)$」と、語を前に付けて書く。何も付けなければ最悪の場合の計算量である。
-- **前計算とクエリ**：「前計算 $O(N)$、1 回 $O(1)$」のように分けて書く。
-- **メモリ**：「メモリ $O(N)$」と書き、時間と区別する。
+| 書き方 | 意味 |
+| --- | --- |
+| $O(N + M)$・$O((N + M) \log N)$ | グラフは頂点数 $N$ と辺数 $M$ を両方残す |
+| $O(N + Q \log N)$・「前計算 $O(N)$、1 回 $O(1)$」 | 前計算とクエリを分ける |
+| $\log^2 N$ | $(\log N)^2$ のことで、$\log \log N$ とは別 |
+| ならし $O(\alpha(N))$ | [ならし計算量](../guide/glossary.md#amortized-complexity) |
+| 期待 $O(N)$ | 乱択やハッシュの平均の計算量 |
+| 語の付かない $O(\cdot)$ | 最悪の場合の計算量 |
+| メモリ $O(N)$ | メモリの量（時間と区別する） |
 
 front matter と索引の文字には数式を使わず、`O(N log N)`・`O((N+M) log N)` と書く。制約から許される計算量を探すときは[制約 → 許される計算量の表](../basics/complexity-estimation.md#constraint-table)を引く。
 
@@ -76,10 +80,14 @@ front matter と索引の文字には数式を使わず、`O(N log N)`・`O((N+M
 
 問題文は 1-indexed（$A_1, \dots, A_N$、頂点 $1, \dots, N$）、実装は 0-indexed（$a_0, \dots, a_{N-1}$、頂点 $0, \dots, N - 1$）で書く。各ページは最初にどちらで書くかを示し、変換を式で書く。
 
-- **列**：$a_i = A_{i+1}$。大文字を問題文の 1-indexed、小文字を実装の 0-indexed にすることが多い。
-- **頂点**：読み込んだ直後に 1 を引く。出力するときに 1 を足す。
-- **累積和**：$S_0 = 0$ を置くので、$S$ は長さ $N + 1$ で $S_0, \dots, S_N$ になる。
-- **数学の式**：和・二項係数・数列の漸化式のページは、数学の慣習どおり 1-indexed で書くことがある。そのときはページの冒頭で示す（[和の計算](../math/sigma-manipulation.md)など）。
+| 対象 | 約束 |
+| --- | --- |
+| 列 | $a_i = A_{i+1}$。大文字を問題文の 1-indexed、小文字を実装の 0-indexed にすることが多い |
+| 頂点 | 読み込んだ直後に 1 を引き、出力するときに 1 を足す |
+| 累積和 | $S_0 = 0$ を置くので、$S$ は長さ $N + 1$ で $S_0, \dots, S_N$ になる |
+| bit | 最下位を 0 番目と数える（$2^i$ の位が $i$ 番目の bit） |
+| グリッド | マス $(i, j)$ は $i$ 行目・$j$ 列目で、$0 \le i < H$、$0 \le j < W$。移動量の配列は di・dj と書く（[グリッドの 4 近傍](../graph/grid-graph.md#neighbors)） |
+| 数学の式 | 和・二項係数・数列の漸化式のページは 1-indexed で書くことがあり、ページの冒頭で示す（[和の計算](../math/sigma-manipulation.md)など） |
 
 次のコード片は、1-indexed で与えられた辺を読み込んだ直後に 0-indexed へ直し、各頂点の次数を出す。
 
@@ -89,8 +97,6 @@ front matter と索引の文字には数式を使わず、`O(N log N)`・`O((N+M
 
 完全なプログラム：[`conventions.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/notation/conventions.cpp)（GitHub）
 { .kp-code-src }
-
-bit の番号は、最下位を 0 番目と数える（$2^i$ の位が $i$ 番目の bit）。グリッドのマス $(i, j)$ は $i$ 行目・$j$ 列目で、0-indexed の $0 \le i < H$、$0 \le j < W$ にする。移動量の配列は行と列の取り違えを避けて di・dj と書く（[グリッドの 4 近傍](../graph/grid-graph.md#neighbors)）。
 
 ## 数と制約の書き方 {#numbers}
 
@@ -105,9 +111,19 @@ bit の番号は、最下位を 0 番目と数える（$2^i$ の位が $i$ 番�
 - **$1 \le A_i \le 10^9$**：各要素の範囲である。和は $N \times 10^9$ になりうるので、`int` に収まるかを別に確かめる（[型の範囲](../guide/cheatsheet.md#type-limits)）。
 - **総和の制約**：複数テストケースで「$N$ の総和は $2 \times 10^5$ 以下」とあれば、ケースごとではなく総和で見積もる（[複数テストケース](../basics/complexity-estimation.md#multiple-testcases)）。
 
-文字は、列の長さや頂点数を $N$、辺数を $M$、クエリ数を $Q$、グリッドの大きさを $H \times W$、法を $m$（素数なら $p$）とする。値の上限には決まった文字を当てず、ページの冒頭で定める（辺の出てこないページでは $M$ を使うこともある）。数式の無限大は $\infty$ で、コードでは定数 `INF` を置く（[INF の選び方](../cpp/cpp-types-literals.md#inf)）。
+文字は次のように当てる。値の上限には決まった文字を当てず、ページの冒頭で定める（辺の出てこないページでは $M$ を使うこともある）。
 
-量の単位は数と単位の間に半角の空白を入れ、「40 MB」と書く。見積もりは 1 MB を $10^6$ バイトとして数える。メモリ制限は AtCoder の表示どおり MiB（1 MiB は $2^{20}$ バイト）で書き、1024 MiB は約 $1.07 \times 10^9$ バイトである。
+| 文字 | 意味 |
+| --- | --- |
+| $N$ | 列の長さ・頂点数 |
+| $M$ | 辺数 |
+| $Q$ | クエリ数 |
+| $H \times W$ | グリッドの大きさ |
+| $m$・$p$ | 法（素数なら $p$） |
+| $\infty$ | 数式の無限大。コードでは定数 `INF` を置く（[INF の選び方](../cpp/cpp-types-literals.md#inf)） |
+
+??? note "メモリの単位（MB と MiB）"
+    量の単位は数と単位の間に半角の空白を入れ、「40 MB」と書く。見積もりは 1 MB を $10^6$ バイトとして数える。メモリ制限は AtCoder の表示どおり MiB（1 MiB は $2^{20}$ バイト）で書き、1024 MiB は約 $1.07 \times 10^9$ バイトである。
 
 ## 数学の記法 {#math}
 
@@ -133,34 +149,40 @@ $a \bmod m$ と $a \equiv b \pmod{m}$ は役割が違う。$\bmod$ は値を 1 �
 
 ### 和と積・条件の記号
 
-- **$\sum$・$\prod$**：$\sum_{i=0}^{N-1} a_i$ は $i = 0, 1, \dots, N - 1$ の和で、上端と下端をどちらも含む。$\sum_{d \mid n}$ は $n$ の正の約数 $d$ すべてについての和、$\prod_{p \mid n}$ は $n$ の異なる素因数 $p$ すべてについての積である。
-- **空の和と空の積**：足す項がなければ和は 0、掛ける項がなければ積は 1 と約束する。$0! = 1$ もこの約束による（[空の和は 0・空の積は 1](../math/sigma-manipulation.md#empty-sum)）。
-- **Iverson の記法 $[P]$**：条件 $P$ が成り立てば 1、そうでなければ 0 を表す。$\sum_{i=1}^{N} [A_i \text{ が偶数}]$ は偶数の個数である。和の範囲を条件に移すときに使う。
-- **$\max$・$\min$・絶対値**：本文では $\lvert x \rvert$ と書く。表の中では `|` が列の区切りになるので、必ず `\lvert x \rvert` と書く。
+| 記法 | 意味 |
+| --- | --- |
+| $\sum_{i=0}^{N-1} a_i$・$\prod$ | $i = 0, 1, \dots, N - 1$ の和（積）で、上端と下端をどちらも含む |
+| $\sum_{d \mid n}$・$\prod_{p \mid n}$ | $n$ の正の約数 $d$ すべてについての和・$n$ の異なる素因数 $p$ すべてについての積 |
+| 空の和・空の積 | 足す項がなければ和は 0、掛ける項がなければ積は 1。$0! = 1$ もこの約束による（[空の和は 0・空の積は 1](../math/sigma-manipulation.md#empty-sum)） |
+| $[P]$ | Iverson の記法。条件 $P$ が成り立てば 1、そうでなければ 0。$\sum_{i=1}^{N} [A_i \text{ が偶数}]$ は偶数の個数 |
+| $\lvert x \rvert$ | 絶対値。表の中では `|` が列の区切りになるので、必ず `\lvert x \rvert` と書く |
 
 ### ページごとに定める数論の記号
 
 次の記号は、使うページの冒頭で定める。同じ文字が別の意味になることがあるので、ページの定義を優先する。
 
-- $v_p(n)$：$n$ を素因数分解したときの素数 $p$ の指数（[素因数分解](../math/prime-factorization.md)）
-- $d(n)$・$\sigma(n)$：$n$ の正の約数の個数・和（[約数の個数と和](../math/divisor-enum.md#count-and-sum)）
-- $\varphi(n)$：$1$ 以上 $n$ 以下で $n$ と[互いに素](../guide/glossary.md#coprime)な整数の個数（[オイラーの φ 関数](../math/euler-phi.md#formula)）
-- $\omega(n)$・$\Omega(n)$：異なる素因数の個数・重複も数えた素因数の個数（[約数の個数の上界](../math/divisor-count-bound.md)・[最小素因数の篩](../math/spf-sieve.md)）
-- $\pi(x)$：$x$ 以下の素数の個数（[エラトステネスの篩](../math/sieve-eratosthenes.md)）
-- $\operatorname{ord}_m(a)$：法 $m$ での $a$ の位数（[位数](../math/multiplicative-order.md#order)）
-- $[x^n] f$：多項式・形式的冪級数 $f$ の $x^n$ の係数（[形式的冪級数](../math/fps-basics.md)）
-- $\mathrm{C}[n][k]$：パスカルの三角形で作った二項係数の表（[パスカルの三角形](../comb/binomial-coefficient.md#pascal)）
+| 記法 | 意味 | 詳しいページ |
+| --- | --- | --- |
+| $v_p(n)$ | $n$ を素因数分解したときの素数 $p$ の指数 | [素因数分解](../math/prime-factorization.md) |
+| $d(n)$・$\sigma(n)$ | $n$ の正の約数の個数・和 | [約数の個数と和](../math/divisor-enum.md#count-and-sum) |
+| $\varphi(n)$ | $1$ 以上 $n$ 以下で $n$ と[互いに素](../guide/glossary.md#coprime)な整数の個数 | [オイラーの φ 関数](../math/euler-phi.md#formula) |
+| $\omega(n)$・$\Omega(n)$ | 異なる素因数の個数・重複も数えた素因数の個数 | [約数の個数の上界](../math/divisor-count-bound.md)・[最小素因数の篩](../math/spf-sieve.md) |
+| $\pi(x)$ | $x$ 以下の素数の個数 | [エラトステネスの篩](../math/sieve-eratosthenes.md) |
+| $\operatorname{ord}_m(a)$ | 法 $m$ での $a$ の位数 | [位数](../math/multiplicative-order.md#order) |
+| $[x^n] f$ | 多項式・形式的冪級数 $f$ の $x^n$ の係数 | [形式的冪級数](../math/fps-basics.md) |
+| $\mathrm{C}[n][k]$ | パスカルの三角形で作った二項係数の表 | [パスカルの三角形](../comb/binomial-coefficient.md#pascal) |
 
 ### 名前の付いた量・表・擬似コード
 
-- **2 文字以上の名前**：$\mathrm{dp}[i][j]$・$\mathrm{cnt}[v]$・$\mathrm{val}(x)$ のように `\mathrm` で立体にする。斜体のままだと $d \cdot p$ の積に見える。
-- **配列と関数**：表の値は角括弧 $\mathrm{dist}[v]$、式で決まる値は丸括弧 $\mathrm{lca}(u, v)$ と書く。
-- **代入**：擬似コード（`text` のコードの囲み）では $x \leftarrow y$ を `x ← y` と書く。擬似コードの中では絶対値・要素数を `|x|` と書いてよい。
-- **一般の二項演算**：問題に合わせた結合法則を満たす演算は、本文で $\circ$ や `op` と書き、そのページで定義する。
+| 書き方 | 意味 |
+| --- | --- |
+| $\mathrm{dp}[i][j]$・$\mathrm{cnt}[v]$・$\mathrm{val}(x)$ | 2 文字以上の名前は `\mathrm` で立体にする。斜体のままだと $d \cdot p$ の積に見える |
+| $\mathrm{dist}[v]$・$\mathrm{lca}(u, v)$ | 表の値は角括弧、式で決まる値は丸括弧 |
+| `x ← y` | 擬似コード（`text` のコードの囲み）での代入 $x \leftarrow y$。擬似コードの中では絶対値・要素数を `|x|` と書いてよい |
+| $\circ$・`op` | 問題に合わせた結合法則を満たす演算。そのページで定義する |
 
-### 行列とベクトルの向き
-
-[行列累乗](../math/matrix-power.md#write-as-matrix)では、状態を縦に並べた列ベクトル $v$ とし、1 回の遷移を $v' = Av$ と書く。$A$ の $(i, j)$ 成分 $a_{ij}$ は「状態 $j$ から状態 $i$ へ移る係数」である。区間の遷移を[セグメント木に載せる](../ds/segment-tree-monoids.md#matrix)ときは、状態を横ベクトルにして $v \leftarrow vT$ と書く。こうすると左の区間の行列を左に置けばよく、`op(a, b)` が積 $ab$ そのものになる。どちらの向きかは各ページの冒頭で示す。
+??? note "行列とベクトルの向き"
+    [行列累乗](../math/matrix-power.md#write-as-matrix)では、状態を縦に並べた列ベクトル $v$ とし、1 回の遷移を $v' = Av$ と書く。$A$ の $(i, j)$ 成分 $a_{ij}$ は「状態 $j$ から状態 $i$ へ移る係数」である。区間の遷移を[セグメント木に載せる](../ds/segment-tree-monoids.md#matrix)ときは、状態を横ベクトルにして $v \leftarrow vT$ と書く。こうすると左の区間の行列を左に置けばよく、`op(a, b)` が積 $ab$ そのものになる。どちらの向きかは各ページの冒頭で示す。
 
 ## 合同式で割ってよいとき {#congruence-division}
 
@@ -178,9 +200,12 @@ $$
 
 集合の記号は次のとおりである。全体の集合を $U$ とする。
 
-- **部分集合**：$S \subseteq T$ は $S$ の要素がすべて $T$ に入ること（$S = T$ も含む）。要素が $N$ 個の集合の部分集合は、空集合も含めて $2^N$ 個ある。
-- **要素数**：$\lvert S \rvert$。
-- **和・共通部分・差・補集合**：$S \cup T$・$S \cap T$・$S \setminus T$。補集合は $U \setminus S$ と書き、確率の余事象では $\overline{A}$ と書く。
+| 記法 | 意味 |
+| --- | --- |
+| $S \subseteq T$ | $S$ の要素がすべて $T$ に入る（$S = T$ も含む）。要素が $N$ 個の集合の部分集合は、空集合も含めて $2^N$ 個 |
+| $\lvert S \rvert$ | 要素数 |
+| $S \cup T$・$S \cap T$・$S \setminus T$ | 和・共通部分・差 |
+| $U \setminus S$ | 補集合（確率の余事象では $\overline{A}$） |
 
 部分集合を整数で表すときは、要素 $i$（$0 \le i < N$）を $i$ 番目の bit に対応させ、$i$ 番目の bit が 1 なら $i$ を含むとする（[bit 全探索の書き方](../basics/bit-full-search.md#bitmask)）。集合の演算は bit 演算に対応する。
 
@@ -198,12 +223,14 @@ $$
 
 確率と期待値の記号は次のとおりである。
 
-- **$P(A)$**：事象 $A$ の起きる確率。$P(A \cap B)$ は $A$ と $B$ が両方起きる確率である。
-- **$\overline{A}$**：$A$ が起きないという事象（余事象）。$P(\overline{A}) = 1 - P(A)$ である。
-- **$P(A \mid B)$**：$B$ が起きたときの $A$ の条件付き確率で、$P(B) > 0$ のとき $P(A \cap B)/P(B)$ である（[条件付き確率](../comb/probability-basics.md#conditional)）。
-- **独立**：$P(A \cap B) = P(A)P(B)$ が成り立つこと（[独立](../comb/probability-basics.md#independence)）。
-- **$E[X]$**：確率変数 $X$ の期待値。期待値の線形性 $E[X + Y] = E[X] + E[Y]$ は、$X$ と $Y$ が独立でなくても成り立つ（[期待値の線形性](../comb/linearity-of-expectation.md#linearity)）。
-- **$V[X]$**：分散で、$V[X] = E[X^2] - E[X]^2$ である（[分散](../comb/expectation-of-square.md#variance)）。
+| 記法 | 意味 |
+| --- | --- |
+| $P(A)$ | 事象 $A$ の起きる確率。$P(A \cap B)$ は $A$ と $B$ が両方起きる確率 |
+| $\overline{A}$ | $A$ が起きないという事象（余事象）。$P(\overline{A}) = 1 - P(A)$ |
+| $P(A \mid B)$ | $B$ が起きたときの $A$ の条件付き確率。$P(B) > 0$ のとき $P(A \cap B)/P(B)$（[条件付き確率](../comb/probability-basics.md#conditional)） |
+| 独立 | $P(A \cap B) = P(A)P(B)$ が成り立つこと（[独立](../comb/probability-basics.md#independence)） |
+| $E[X]$ | 確率変数 $X$ の期待値。線形性 $E[X + Y] = E[X] + E[Y]$ は独立でなくても成り立つ（[期待値の線形性](../comb/linearity-of-expectation.md#linearity)） |
+| $V[X]$ | 分散。$V[X] = E[X^2] - E[X]^2$（[分散](../comb/expectation-of-square.md#variance)） |
 
 事象 $A$ が起きたら 1、起きなければ 0 をとる確率変数を[指示確率変数](../guide/glossary.md#indicator)と呼び、その期待値は $P(A)$ に等しい。条件 $P$ の Iverson の記法 $[P]$ と同じ形で、確率変数として使うときの呼び名である。
 
@@ -211,10 +238,14 @@ $$
 
 グラフは頂点数 $N$・辺数 $M$ で書き、頂点は実装では $0, \dots, N - 1$ とする。
 
-- **辺**：無向辺は $\{u, v\}$ か「辺 $(u, v)$」、有向辺は $u \to v$ と書く。辺の重みは $w$ で、辺 $e$ の重みを $w(e)$ と書くこともある。
-- **隣接リスト**：$g[v]$ は $v$ から出る辺（または隣の頂点）の一覧である（[グラフの表し方](../graph/graph-basics.md#representations)）。
-- **次数**：$\deg(v)$ は $v$ につながる辺の本数。$\sum_v \deg(v) = 2M$ である（[握手補題](../graph/graph-basics.md#handshake)）。
-- **最短距離**：始点を決めた最短距離の表を $\mathrm{dist}[v]$、2 頂点の間の最短距離を $\mathrm{dist}(s \to t)$ と書く。届かない頂点は $\infty$ とする（[ダイクストラ法](../graph/dijkstra.md)）。
+| 記法 | 意味 |
+| --- | --- |
+| $\{u, v\}$・辺 $(u, v)$ | 無向辺 |
+| $u \to v$ | 有向辺 |
+| $w$・$w(e)$ | 辺の重み・辺 $e$ の重み |
+| $g[v]$ | $v$ から出る辺（または隣の頂点）の一覧（[グラフの表し方](../graph/graph-basics.md#representations)） |
+| $\deg(v)$ | $v$ につながる辺の本数。$\sum_v \deg(v) = 2M$（[握手補題](../graph/graph-basics.md#handshake)） |
+| $\mathrm{dist}[v]$・$\mathrm{dist}(s \to t)$ | 始点を決めた最短距離の表・2 頂点の間の最短距離。届かない頂点は $\infty$（[ダイクストラ法](../graph/dijkstra.md)） |
 
 グラフの用語（次数・自己ループ・多重辺・パスとウォーク）の意味は[グラフの基本の用語](../graph/graph-basics.md#terms)と[用語集](../guide/glossary.md#path-walk)にある。
 
@@ -235,18 +266,22 @@ $$
 
 $\mathrm{out}[v]$ は「最後に振った番号」ではなく「次に振る番号」なので、部分木が半開区間になり、$\mathrm{out}[v] - \mathrm{in}[v] = \mathrm{sz}[v]$ である。辺の本数で測るとき、$d(u, v) = \mathrm{dep}[u] + \mathrm{dep}[v] - 2\,\mathrm{dep}[\mathrm{lca}(u, v)]$ である。
 
-木上の Mo では、入るときと出るときに頂点を 1 回ずつ書いた長さ $2N$ の列を使う。この列で頂点 $v$ が最初に現れる位置を $\mathrm{ST}(v)$、2 回目に現れる位置を $\mathrm{EN}(v)$ と書く（[木上の Mo](../tree/euler-tour.md#mo-on-tree)）。
+??? note "木上の Mo の $\mathrm{ST}(v)$・$\mathrm{EN}(v)$"
+    木上の Mo では、入るときと出るときに頂点を 1 回ずつ書いた長さ $2N$ の列を使う。この列で頂点 $v$ が最初に現れる位置を $\mathrm{ST}(v)$、2 回目に現れる位置を $\mathrm{EN}(v)$ と書く（[木上の Mo](../tree/euler-tour.md#mo-on-tree)）。
 
 ## 文字列の記法 {#string}
 
 文字列 $S$ の記号は次のとおりである。添字は 0-indexed で書く。
 
-- **長さ**：$\lvert S \rvert$。
-- **文字**：$S[i]$ は $i$ 番目（$0 \le i < \lvert S \rvert$）の文字。
-- **部分文字列**：$S[l, r)$ は $S[l], S[l + 1], \dots, S[r - 1]$ をこの順に並べた連続する部分で、長さは $r - l$ である。
-- **接頭辞・接尾辞**：$S[0, i)$ が接頭辞、$S[i, \lvert S \rvert)$ が接尾辞である（$0 \le i \le \lvert S \rvert$）。$i = 0$ の接頭辞と $i = \lvert S \rvert$ の接尾辞は空文字列、$i = \lvert S \rvert$ の接頭辞と $i = 0$ の接尾辞は $S$ 自身である。
-- **連結・反転**：$S$ と $T$ の連結を $ST$ か $S + T$、反転した文字列を $S^R$ と書く。
-- **具体的な文字列**：本文では `abc` のように等幅で、数式の中では $\texttt{abc}$ と書く。
+| 記法 | 意味 |
+| --- | --- |
+| $\lvert S \rvert$ | 長さ |
+| $S[i]$ | $i$ 番目（$0 \le i < \lvert S \rvert$）の文字 |
+| $S[l, r)$ | 部分文字列。$S[l], S[l + 1], \dots, S[r - 1]$ をこの順に並べた連続する部分で、長さは $r - l$ |
+| $S[0, i)$・$S[i, \lvert S \rvert)$ | 接頭辞・接尾辞（$0 \le i \le \lvert S \rvert$）。$i = 0$ の接頭辞と $i = \lvert S \rvert$ の接尾辞は空文字列 |
+| $ST$・$S + T$ | 連結 |
+| $S^R$ | 反転した文字列 |
+| `abc`・$\texttt{abc}$ | 具体的な文字列（本文では等幅、数式の中では `\texttt`） |
 
 部分文字列は連続する部分、部分列は飛び飛びに選んで順序を保った列で、別の語である（[部分文字列と部分列の違い](../string/string-basics.md#substring-vs-subsequence)、[部分列](../guide/glossary.md#subsequence)）。$\texttt{ace}$ は $\texttt{abcde}$ の部分列だが、部分文字列ではない。
 
@@ -262,13 +297,11 @@ $\mathrm{out}[v]$ は「最後に振った番号」ではなく「次に振る�
 - **入出力**：改行は `'\n'` で書く（[endl と改行文字の違い](../cpp/cpp-io.md#endl)）。
 - **再帰**：DFS は `auto dfs = [&](auto&& self, int v, int p) -> void { … };` の形にし、`-> void` を省かない。
 
-コード片は本文に全体を載せず、要点の数行だけを取り込む。完全なプログラムは手元でコンパイルと実行を確かめてある。各コードの下のリンクから GitHub で見られる（[ページの構成と読み方](how-to-use.md#page-anatomy)）。
+コード片は要点の数行だけを取り込み、完全なプログラムは各コードの下のリンクから GitHub で見られる（[ページの構成と読み方](how-to-use.md#page-anatomy)）。
 
 ## 用語の表記 {#terms}
 
-用語の書き方は[用語集の表記の正規形](../guide/glossary.md#canonical-forms)にそろえる。かっこ内の書き方（セグ木・BIT など）は本文で使ってよく、ほかの別名は各ページの別名の行でだけ使う。表記の揺れは textlint と prh で検査する。
-
-すべての語に共通する約束（人名のハイフン、半角と全角の間の空白、算用数字と漢数字、ひらがなで書く語、組合せと組み合わせる、閉路と巡回）は[表記の規則](../guide/glossary.md#canonical-rules)にある。本文は だ・である調で書く。
+用語の書き方は[用語集の表記の正規形](../guide/glossary.md#canonical-forms)と[表記の規則](../guide/glossary.md#canonical-rules)にそろえる。
 
 ## 確認問題 {#quiz}
 

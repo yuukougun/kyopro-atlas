@@ -18,21 +18,21 @@ search:
 - 別名：使い方、教材の引き方、辞書の引き方、claude.ai での解説の頼み方、データの書き出し
 - 種類：案内
 - 節：
-    - `how-to-use#purpose` この教材の目的と範囲：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#purpose
-    - `how-to-use#structure` 章の構成：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#structure
     - `how-to-use#lookup` 辞書としての引き方：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#lookup
     - `how-to-use#by-color` 色ごとに学ぶとき：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#by-color
     - `how-to-use#levels` レベルの意味：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#levels
-    - `how-to-use#page-anatomy` ページの構成と読み方：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#page-anatomy
-    - `how-to-use#problems` 問題の表示：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#problems
-    - `how-to-use#stub` ページの段階と「準備中」の帯：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#stub
-    - `how-to-use#report` 誤りの報告：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#report
     - `how-to-use#progress` 進捗の記録（解いた・理解した）：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#progress
     - `how-to-use#wishlist` 勉強したいリスト：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#wishlist
     - `how-to-use#backup` 書き出しと読み込み（手動の退避）：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#backup
     - `how-to-use#claude` claude.ai での解説の頼み方：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#claude
     - `how-to-use#ai-rule-version` AtCoder生成AI対策ルールの版：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#ai-rule-version
     - `how-to-use#record-skill` 記録用スキル /record-problem：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#record-skill
+    - `how-to-use#report` 誤りの報告：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#report
+    - `how-to-use#page-anatomy` ページの構成と読み方：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#page-anatomy
+    - `how-to-use#problems` 問題の表示：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#problems
+    - `how-to-use#stub` ページの段階と「準備中」の帯：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#stub
+    - `how-to-use#purpose` この教材の目的と範囲：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#purpose
+    - `how-to-use#structure` 章の構成：https://yuukougun.github.io/kyopro-atlas/start/how-to-use/#structure
 
 ## 記法と用語の約束（notation） {#notation}
 
