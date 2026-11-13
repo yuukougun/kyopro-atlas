@@ -49,7 +49,7 @@ updated: 2026-11-13
 別名：手法の比較・どれを使うか・使い分け・混同しやすい手法・最短路の選び方・最短路の比較・最短路アルゴリズムの使い分け
 <!-- textlint-enable -->
 
-このページは中身の説明を各ページに任せ、「どの条件ならどれか」と、その理由の要点だけを書く。問題文の言い回しから手法を探すときは[逆引き辞典（言い回しから）](../guide/reverse-index-signs.md#by-phrase)、制約から探すときは[逆引き辞典（制約・計算量から）](../guide/reverse-index-constraints.md#constraint-table)を使う。
+似た手法の使い分けは、中身の説明を各ページに任せ、「どの条件ならどれか」と、その理由の要点だけを書いたページである。問題文の言い回しから手法を探すときは[逆引き辞典（言い回しから）](../guide/reverse-index-signs.md#by-phrase)、制約から探すときは[逆引き辞典（制約・計算量から）](../guide/reverse-index-constraints.md#constraint-table)を使う。
 
 ## 比べる観点 {#criteria}
 

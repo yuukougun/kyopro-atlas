@@ -39,7 +39,7 @@ updated: 2026-11-13
 別名：時間配分・問題を読む順・立ち回り・詰まったときの切り替え
 <!-- textlint-enable -->
 
-同じ問題を解ける人でも、読む順・見切りの早さ・誤答の数でパフォーマンスは数百変わる。考察の中身は[詰まったときの発想リスト](thinking-checklist.md)、バグの探し方は [WA・TLE・RE・MLE の原因チェックリスト](debugging-checklist.md)に任せる。
+コンテストの戦い方は、同じ問題を解ける人でも読む順・見切りの早さ・誤答の数でパフォーマンスが数百変わることを踏まえ、ABC の時間の使い方を決めるためのページである。考察の中身は[詰まったときの発想リスト](thinking-checklist.md)、バグの探し方は [WA・TLE・RE・MLE の原因チェックリスト](debugging-checklist.md)に任せる。
 
 ## 位置ごとの難しさと色 {#difficulty-by-position}
 
