@@ -391,5 +391,36 @@ class ComparisonTest(unittest.TestCase):
         self.assertEqual(by_id["glossary"]["aliases"], [])
 
 
+class AcknowledgmentsTest(unittest.TestCase):
+    """謝辞の集計（#106）：表記の揺れをまとめ、ページの数で数え、人と資料を分ける。"""
+
+    def test_counts(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            docs = Path(tmp) / "docs"
+            refs = {
+                "a": ["- [drken「A」](https://qiita.com/drken/items/1)：x", "- [けんちょん「B」](https://drken1215.hatenablog.com/entry/1)：x",
+                      "- [cpprefjp「C」](https://cpprefjp.github.io/x)：x"],
+                "b": ["- [Drken「D」](https://qiita.com/drken/items/2)：x", "- [someone「E」](https://example.com/e)：x",
+                      "- [kyopro-atlas「F」](https://github.com/yuukougun/kyopro-atlas)：x"],
+            }
+            for i, (pid, lines) in enumerate(refs.items()):
+                fm = {"id": pid, "title": pid, "aliases": [], "type": "technique", "field": "basics", "order": 10 * (i + 1),
+                      "level": "基礎", "kind": ["データ構造"], "summary": f"{pid}。", "stage": "draft",
+                      "sections": [{"title": "参考", "anchor": "references"}]}
+                path = docs / "basics" / f"{pid}.md"
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text("---\n" + yaml.safe_dump(fm, allow_unicode=True, sort_keys=False) + "---\n\n## 参考 {#references}\n\n"
+                                + "\n".join(lines) + "\n", encoding="utf-8")
+            pages, others = cp.load_docs(docs)
+            site = gs.Site(docs, pages, others, {}, [])
+            with mock.patch.object(gs, "ACK_MAIN", 2):
+                out = site.b_acknowledgments("start/acknowledgments.md")
+        self.assertIn("書き手は 2 人、資料は 1 件", out)
+        self.assertIn("| drken | `qiita.com/drken` | 2 |", out)          # けんちょん・Drken をまとめる
+        self.assertIn("| cpprefjp | `cpprefjp.github.io` | 1 |", out)
+        self.assertIn("そのほかの書き手（1 人）", out)
+        self.assertNotIn("kyopro-atlas", out)
+
+
 if __name__ == "__main__":
     unittest.main()

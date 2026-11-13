@@ -64,7 +64,7 @@ GEN_BEGIN_RE = re.compile(r"^<!--\s*gen:begin\s+(?P<name>[A-Za-z0-9_-]+)\s*-->$"
 GEN_END_RE = re.compile(r"^<!--\s*gen:end(?:\s+(?P<name>[A-Za-z0-9_-]+))?\s*-->$")
 
 FIELD_DESCRIPTIONS = {   # 設計書 §2.1 の「中身」
-    "start": "この教材の使い方、記法と用語の約束、AtCoder の仕組み、出典と AI 利用の方針",
+    "start": "この教材の使い方、記法と用語の約束、AtCoder の仕組み、出典と AI 利用の方針、謝辞",
     "guide": "逆引き辞典、用語の索引、問題番号の索引、使い分け、知識マップ、ロードマップ、早見表、戦い方など",
     "basics": "計算量の見積もり、全探索、二分探索、累積和・いもす法、尺取り法、ソート・座標圧縮、貪欲、半分全列挙、ダブリング、分割統治、周期性、bit 演算",
     "thinking": "言い換え・主客転倒・寄与・余事象・偶奇・不変量・構築などの考察の型",
@@ -193,7 +193,32 @@ BLOCKS = {
     "problem-index-sets": ("問題番号の索引：問題集（問題集ごとの小見出しと跳び先の行）", "guide/problem-index.md"),
     "problem-index-other": ("問題番号の索引：ABC・ARC・AGC と問題集のほかのコンテスト（名前の順）", "guide/problem-index.md"),
     "verify-table": ("ページ → Library Checker の問題（verify）", "guide/library-design.md"),
+    "acknowledgments": ("謝辞：参考の節に挙げた書き手と資料（参考に挙げたページの数の順。Issue #106）", "start/acknowledgments.md"),
 }
+
+# 謝辞の集計（b_acknowledgments）。参考の行「- [著者「題名」](URL)」の著者の表記の揺れを、1 人の名前にまとめる。
+# URL の場所が同じであることを確かめてから足す（大文字・小文字だけの違いは自動でまとめる）
+ACK_ALIASES = {
+    "けんちょん": "drken", "drken1215": "drken", "drken のカテゴリ": "drken",
+    "kmjp's blog": "kmjp", "ikatakos の競プロ Wiki": "ikatakos",
+    "はまやんはまやんはまやん": "hamayan", "はまやん": "hamayan", "hamayanhamayan": "hamayan",
+    "yosupo": "yosupo06", "NyaanNyaan": "Nyaan", "maspypy": "maspy", "kanpurin": "かんプリン",
+    "programming-hiroba": "プロひろ", "プログラミングのひろば": "プロひろ", "プログラミング広場": "プロひろ",
+    "KCPC ブログ": "KCPC", "iwamutsu": "iwamutsu256", "rsk0315（えびちゃんの日記）": "rsk0315",
+    "Qiita Shizen_Tota": "Shizen_Tota", "ACL": "AtCoder Library", "AtCoder": "AtCoder Library",
+    "日本語版 Wikipedia": "Wikipedia", "Wikipedia（英語）": "Wikipedia",
+    "yosupo06/library-checker-problems issue #1263": "library-checker-problems",
+}
+# 人ではなく、サイト・ライブラリ・仕様などの資料として挙げるもの（ACK_ALIASES でまとめた後の名前）
+ACK_SITES = {
+    "AtCoder Library", "AtCoder", "AtCoder NoviSteps", "Library Checker", "library-checker-problems", "cppreference",
+    "cpprefjp", "Wikipedia", "cp-algorithms", "OI Wiki", "GCC", "GCC Bugzilla", "CSES", "OEIS", "KACTL", "HackMD",
+    "WebKit", "Apple", "Creative Commons", "Claude Code Docs", "Kyopro Encyclopedia of Algorithms",
+    "online-judge-tools", "competitive-verifier", "Luogu 专栏",
+}
+ACK_USER_HOSTS = {"qiita.com", "github.com", "zenn.dev", "www.cnblogs.com", "note.com", "dev.to"}  # 場所を利用者の名前まで見る
+ACK_SKIP = {"kyopro-atlas"}          # この教材自身
+ACK_MAIN = 10                        # 表に挙げる書き手：参考に挙げたページがこの数以上
 
 
 # ---------------------------------------------------------------- ページ
@@ -1349,6 +1374,50 @@ class Site:
 
     def b_problem_index_other(self, host: str) -> str:
         return self.index_lines(host, self.index_parts["other"]) or "（本文の問題の一覧に、そのほかのコンテストの問題がまだない）"
+
+    def b_acknowledgments(self, host: str) -> str:
+        """参考の節の行から、著者ごとに参考に挙げたページの数と、URL の主な場所（ホスト。qiita.com などは利用者の名前まで）を数える。"""
+        pages: dict[str, set[str]] = {}
+        places: dict[str, collections.Counter] = {}
+        names: dict[str, str] = {}
+        for p in self.pages:
+            pg = p.page
+            heads = cp.h2_sections(pg)
+            bounds = [i for i, _, _ in heads] + [len(pg.lines)]
+            for k, (i, an, _) in enumerate(heads):
+                if an != "references":
+                    continue
+                for j in range(i + 1, bounds[k + 1]):
+                    m = None if pg.in_fence[j] else cp.SOURCE_LINE_RE.match(pg.lines[j])
+                    if not m or "「" not in m.group("title"):
+                        continue
+                    a = m.group("title").split("「", 1)[0].strip()
+                    a = ACK_ALIASES.get(a, a)
+                    if not a or a in ACK_SKIP:
+                        continue
+                    a = names.setdefault(a.casefold(), a)
+                    pages.setdefault(a, set()).add(p.id)
+                    parts = re.sub(r"^https?://", "", m.group("url")).split("/")
+                    place = "/".join(parts[:2]) if parts[0] in ACK_USER_HOSTS and len(parts) > 1 else parts[0]
+                    places.setdefault(a, collections.Counter())[place] += 1
+        order = sorted(pages, key=lambda a: (-len(pages[a]), a.casefold()))
+        people = [a for a in order if a not in ACK_SITES]
+        main, rest = [a for a in people if len(pages[a]) >= ACK_MAIN], [a for a in people if len(pages[a]) < ACK_MAIN]
+        sites = [a for a in order if a in ACK_SITES]
+
+        def row(a: str) -> list[str]:
+            return [cp.md_text(a, table=True), f"`{places[a].most_common(1)[0][0]}`", str(len(pages[a]))]
+
+        out = [f"参考の節に挙げた書き手は {len(people)} 人、資料は {len(sites)} 件である（{len(self.pages)} ページの参考の節から数えた）。"]
+        out.append(f"### 参考に多く挙げた書き手 {{#main-writers}}\n\n{ACK_MAIN} ページ以上の参考に挙げた書き手を、ページの数の順に並べる。\n\n"
+                   + table(["書き手", "主な場所", "ページ数"], [row(a) for a in main]))
+        if sites:
+            out.append("### 資料とライブラリ {#sources}\n\n" + table(["資料", "主な場所", "ページ数"], [row(a) for a in sites]))
+        if rest:
+            out.append(f'??? note "そのほかの書き手（{len(rest)} 人）"\n\n'
+                       f"    {ACK_MAIN} ページ未満の参考に挙げた書き手を、ページの数の順に並べる。\n\n"
+                       "    " + "・".join(cp.md_text(a) for a in rest))
+        return "\n\n".join(out)
 
     def b_verify_table(self, host: str) -> str:
         rows = [[self.link(host, p, table_cell=True) + self.mark(p), cp.FIELD_TITLES[p.field],
