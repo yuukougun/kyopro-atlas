@@ -255,10 +255,11 @@ class EntrancesTest(unittest.TestCase):
 
     def test_home_links(self):
         out = self.site.b_home_links("index.md")
-        self.assertEqual([x for x in out.split("\n") if x.startswith("### ")],
-                         ["### 解けなかった問題から引く {#from-problem}", "### 色ごとに順に学ぶ {#by-color}", "### 初めて使う {#first-time}"])
-        self.assertIn("- [辞書としての引き方](start/how-to-use.md#lookup)：", out)
-        self.assertIn("- [この教材の使い方](start/how-to-use.md)：", out)
+        self.assertTrue(out.startswith('<div class="grid cards" markdown>') and out.endswith("</div>"))
+        self.assertEqual([x for x in out.split("\n") if x.startswith("-   ")],
+                         ["-   **解けなかった問題から引く**{#from-problem}", "-   **色ごとに順に学ぶ**{#by-color}", "-   **初めて使う**{#first-time}"])
+        self.assertIn("    - [辞書としての引き方](start/how-to-use.md#lookup)：", out)
+        self.assertIn("    - [この教材の使い方](start/how-to-use.md)：", out)
         self.assertIn("問題番号の索引（準備中）", out)          # まだないページはリンクにしない
 
     def test_entrance_items_and_guides(self):

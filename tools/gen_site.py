@@ -172,7 +172,7 @@ POSITION_LEVEL = {"D": "基礎", "E": "水", "F": "青", "G": "黄・発展"}
 
 # 手書きのページに置ける生成部分：名前 → (中身, 置く想定のページ。None はどこでもよい)
 BLOCKS = {
-    "home-links": ("ホームの目的別の入口（解けなかった問題から引く・色ごとに順に学ぶ・初めて使う の ### と行）", "index.md"),
+    "home-links": ("ホームの目的別の入口（解けなかった問題から引く・色ごとに順に学ぶ・初めて使う の 3 枚のカード）", "index.md"),
     "version": ("索引の版（入力のハッシュと updated の最大値）", None),
     "fields": ("章の一覧（分野の入口へのリンク・ページ数・準備中があればその数と、最後の章「一覧」）", None),
     "lists": ("レベル別・種類別の一覧へのリンク", None),
@@ -983,7 +983,7 @@ class Site:
         return getattr(self, "b_" + name.replace("-", "_"))(host)
 
     def b_home_links(self, host: str) -> str:
-        """ホームの目的別の入口（Issue #7）。目的ごとに ### の小見出しを立て、最初の行に最初に読むページを置く。
+        """ホームの目的別の入口（Issue #7・#110）。目的ごとにカードを 1 枚置き、最初の行に最初に読むページを置く。
         ページの題名・節の有無・レベル別の一覧の有無で行が変わる部分をここで作り、目的の説明・対象の読者・ページの読み方は
         docs/index.md の手書きの部分に書く。"""
         def page(pid: str, text: str, anchor: str | None = None) -> str:
@@ -1009,7 +1009,12 @@ class Site:
                 f"{page('notation', '記法と用語の約束')}：計算量・半開区間・添字・数学の記号など、全ページで使う記法と用語の表記",
             ]),
         ]
-        return "\n\n".join(f"### {title} {{#{anchor}}}\n\n" + "\n".join(f"- {x}" for x in rows) for title, anchor, rows in groups)
+        # 3 枚のカード（Material の grid cards。#110）。目的の名前に anchor を付け、カードの中は「---」の下に箇条書き
+        cards = []
+        for title, anchor, rows in groups:
+            body = "\n".join(f"    - {x}" for x in rows)
+            cards.append(f"-   **{title}**{{#{anchor}}}\n\n    ---\n\n{body}")
+        return '<div class="grid cards" markdown>\n\n' + "\n\n".join(cards) + "\n\n</div>"
 
     def b_version(self, host: str) -> str:
         return f"索引の版：`{self.version}`（ページの updated の最大：{self.updated or '—'}）"
