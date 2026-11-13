@@ -560,7 +560,7 @@ updated: 2026-11-13
 
 ## AtCoder Algorithm Lectures（AAL） {#aal}
 
-AtCoder Algorithm Lectures（AAL）は、AtCoder が 2026-04-10 に公開した公式の講座シリーズである。演習用のコンテストとして AAL Contest があり、[問題集の一覧](#collections)の aalc001 はその 1 つである。この教材で読んだ手法を、公式の講座で学び直したり確かめたりする先に使える。入口は [AtCoder Algorithm Lectures のトップページ](https://info.atcoder.jp/entry/algorithm_lectures/index)である。
+AtCoder Algorithm Lectures（AAL）は、AtCoder の公式の講座シリーズである。演習用のコンテストとして AAL Contest があり、[問題集の一覧](#collections)の aalc001 はその 1 つである。この教材を読んだ後に、より深く学ぶ先として使える。入口は [AtCoder Algorithm Lectures のトップページ](https://info.atcoder.jp/entry/algorithm_lectures/index)である。
 
 ## 練習用のコンテスト {#practice-contests}
 
