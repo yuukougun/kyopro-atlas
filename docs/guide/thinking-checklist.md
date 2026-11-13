@@ -32,7 +32,7 @@ sections:
   - {title: 一度離れる, anchor: q-step-away}
   - {title: 問題集の考察の型との対応, anchor: book-mapping}
 stage: done
-updated: 2026-10-29
+updated: 2026-11-13
 ---
 
 !!! abstract "要点"
@@ -48,19 +48,13 @@ updated: 2026-10-29
 別名：考察の引き出し・考察の手順・発想の型・方針が立たないとき・考察の型の一覧・典型考察・考察テクニック
 <!-- textlint-enable -->
 
-詰まったときの発想リストは、方針が立たない問題に当てる問いを、問題の形ごとの表と、順にたどる問いの列の 2 つにまとめたものである。どの行も、型の説明は考察の章（[言い換えの典型](../thinking/reformulation.md)・[主客転倒・寄与](../thinking/contribution.md)など）と手法のページに任せ、ここでは「この形ならこの型を試す」という対応と、そのページへのリンクだけを置く。問題文の言い回しから手法を探すときは[逆引き辞典（言い回しから）](reverse-index-signs.md)、混同しやすい手法から 1 つを選ぶときは[似た手法の使い分け](method-comparison.md)を使う。
-
 ## 使い方 {#how-to-use}
 
-発想リストは 2 段で使う。1 段目は**問われているものの形**から試す型を選ぶ表で、2 段目は形で決まらないときに**上から順に当てる問い**である。
+1. **問われているものの形を決める**：総和・個数・操作の可否や最小回数・最大最小・構築のどれかに分ける。どれにも当たらなければ[ほかの型の行き先](#other-types)を見る。複数の形を持つ問題（「操作の最小回数の総和」など）は両方の表を試す。
+2. **形の表から型を試す**：問題に近い行の問いを当て、答えが「はい」ならリンク先で条件と手順を確かめる。外れたら同じ表の別の行を試す。
+3. **表で決まらなければ問いを順にたどる**：[誤読を疑う](#q-misreading)から[一度離れる](#q-step-away)まで、8 つの問いを上から当てる。前の問いほど確かめる手間が少なく、飛ばしたときの損が大きい。コンテスト中に回す短い版は[詰まったとき](contest-strategy.md#when-stuck)にある。
 
-1. **問われているものの形を決める**：出力するものを、総和・条件を満たすものの個数・操作の可否や最小回数・最大値や最小値・条件を満たすもの 1 つのどれかに分ける。どれにも当たらなければ[ほかの型の行き先](#other-types)を見る。
-2. **形の表から型を試す**：表の左の列から問題に近い行を探し、行の問いを自分の問題に当ててみる。答えが「はい」なら、リンク先のページで条件と手順を確かめる。
-3. **表で決まらなければ問いを順にたどる**：[誤読を疑う](#q-misreading)から[一度離れる](#q-step-away)まで、8 つの問いを上から当てる。前の問いほど確かめる手間が少なく、飛ばして後で気づいたときの損が大きいので、この順に並べた。
-
-1 つの問題が複数の形を持つこともあり（「操作の最小回数の総和」など）、そのときは両方の表を試す。
-
-表で選んだ型が外れたら、同じ表の別の行を試し、それでも進まなければ問いの列に移る。問いの列は、コンテスト中に回す順として[詰まったとき](contest-strategy.md#when-stuck)にも短く載せてある。
+型の説明の本体は考察の章と手法のページにあり、ここには対応とリンクだけを置く。問題文の言い回しから手法を探すときは[逆引き辞典（言い回しから）](reverse-index-signs.md)、混同しやすい手法から 1 つを選ぶときは[似た手法の使い分け](method-comparison.md)を使う。
 
 ## 総和を求める {#shape-sum}
 
@@ -211,14 +205,17 @@ $N = 1, 2, 3$ や極端な入力（全部同じ値・単調な列・パス状の
 | --- | --- | --- |
 | 答えを決め打ちすると、判定は易しいか？ | 最小値の最大化 → 「全部 $x$ 以上にできるか」 | [判定の単調性を確かめる](../basics/binary-search-answer.md#monotonicity) |
 | 後ろから見ると、選択肢が 1 つに決まるか？ | 後ろの値から順に決める | [後ろから決めると一意になる](../thinking/reverse-thinking.md#decide-from-back) |
-| 1 つを固定すると、残りが易しくなるか？ | 3 つ組 → 真ん中を固定して左右の積 | [一部を固定して数える](../thinking/fix-variable.md#fix-middle) |
-| 要素の側から数えられるか？ | 全区間の和 → 各要素が含まれる区間の数 | [主客転倒・寄与](../thinking/contribution.md#swap-roles) |
-| 補集合の方が数えやすいか？ | 「少なくとも 1 つ」→ 全体 − 「1 つもない」 | [余事象](../thinking/complement.md#whole-minus-complement) |
 | 添字と値を混ぜた式を分けられるか？ | $A_j - A_i = j - i$ → $A_j - j = A_i - i$ | [i と j を分離する](../thinking/reformulation.md#separate-indices) |
-| 独立な部分に分けられるか？ | x と y・bit ごと・連結成分ごと | [独立に分解する](../thinking/reformulation.md#independence) |
-| 操作を点の操作に直せるか？ | 区間への一律の加算 → 差分列の 2 点の変更 | [操作の言い換え](../thinking/reformulation.md#operations) |
 | 対称性で半分にできるか？ | $N \le M$ に入れ替える | [対称性で場合を減らす](../thinking/symmetry-pigeonhole-casework.md#symmetry-cases) |
-| グラフにすると、知っている問題になるか？ | 移動・依存・同じであるという関係を辺にする | [グラフへの帰着](../graph/graph-modeling.md#what-to-vertex) |
+
+形の表に出てきた次の言い換えも、ここで当て直す。
+
+- 1 つを固定する（[一部を固定して数える](../thinking/fix-variable.md#fix-middle)）
+- 要素の側から数える（[主客転倒・寄与](../thinking/contribution.md#swap-roles)）
+- 補集合を数える（[余事象](../thinking/complement.md#whole-minus-complement)）
+- 独立に分ける（[独立に分解する](../thinking/reformulation.md#independence)）
+- 操作を点の操作に直す（[操作の言い換え](../thinking/reformulation.md#operations)）
+- グラフにする（[グラフへの帰着](../graph/graph-modeling.md#what-to-vertex)）
 
 言い換えた後は、元の問題と答えが一致するかを小さいケースで確かめる。条件を 1 つ落とした言い換え（必要条件だけを満たすもの）になっていることがある。
 
@@ -268,33 +265,33 @@ $N = 1, 2, 3$ や極端な入力（全部同じ値・単調な列・パス状の
 
 問題集の考察の章で学んだ型を、このサイトのページへ対応づける。対応は節の題名と例題の解答のコード、各ページが扱う範囲から決めた。本の節の中身と完全に一致するとは限らない。
 
-『競技プログラミングの鉄則』（鉄則本）6 章「考察テクニック」の各節は次のページに当たる。
+??? note "鉄則本 6 章「考察テクニック」"
 
-| 本の節 | このサイトのページ |
-| --- | --- |
-| 6.1 偶奇を考える | [偶奇に着目する](../thinking/parity.md) |
-| 6.2 足された回数を考える | [主客転倒・寄与](../thinking/contribution.md) |
-| 6.3 上限値を考える | [上界・下界を示して達成する例を作る](../thinking/construction.md#bound-and-construct) |
-| 6.4 一手先を考える | [区間スケジューリング](../basics/interval-scheduling.md#why-right-end)・[貪欲法の考え方と正当性](../basics/greedy-basics.md) |
-| 6.5 個数を考える | [map で数えながら走査する](../ds/stl-containers.md#counting-map)・[二項係数](../comb/binomial-coefficient.md#meanings)（値ごとの個数を数えてから組を数える） |
-| 6.6 後ろから考える | [後ろから・逆順に考える](../thinking/reverse-thinking.md) |
-| 6.7 固定して全探索 | [一部を固定して数える](../thinking/fix-variable.md) |
-| 6.8 問題を言い換える | [言い換えの典型](../thinking/reformulation.md) |
-| 6.9 データの持ち方を工夫する | [反転フラグ](../ds/global-offset.md#flip-flag) |
-| 6.10 不変量に着目する | [不変量・単調に変わる量](../thinking/invariant.md) |
+    | 本の節 | このサイトのページ |
+    | --- | --- |
+    | 6.1 偶奇を考える | [偶奇に着目する](../thinking/parity.md) |
+    | 6.2 足された回数を考える | [主客転倒・寄与](../thinking/contribution.md) |
+    | 6.3 上限値を考える | [上界・下界を示して達成する例を作る](../thinking/construction.md#bound-and-construct) |
+    | 6.4 一手先を考える | [区間スケジューリング](../basics/interval-scheduling.md#why-right-end)・[貪欲法の考え方と正当性](../basics/greedy-basics.md) |
+    | 6.5 個数を考える | [map で数えながら走査する](../ds/stl-containers.md#counting-map)・[二項係数](../comb/binomial-coefficient.md#meanings)（値ごとの個数を数えてから組を数える） |
+    | 6.6 後ろから考える | [後ろから・逆順に考える](../thinking/reverse-thinking.md) |
+    | 6.7 固定して全探索 | [一部を固定して数える](../thinking/fix-variable.md) |
+    | 6.8 問題を言い換える | [言い換えの典型](../thinking/reformulation.md) |
+    | 6.9 データの持ち方を工夫する | [反転フラグ](../ds/global-offset.md#flip-flag) |
+    | 6.10 不変量に着目する | [不変量・単調に変わる量](../thinking/invariant.md) |
 
-『問題解決のための「アルゴリズム×数学」が基礎からしっかり身につく本』5 章「問題解決のための数学的考察」の各節は次のページに当たる。
+??? note "アルゴリズム×数学 5 章「問題解決のための数学的考察」"
 
-| 本の節 | このサイトのページ |
-| --- | --- |
-| 5.2 規則性を考える | [周期性の検出](../basics/periodicity.md)・[小さいケースを試す](#q-small-cases) |
-| 5.3 偶奇に着目する | [偶奇に着目する](../thinking/parity.md) |
-| 5.4 集合を上手く扱う | [余事象](../thinking/complement.md)・[包除原理](../comb/inclusion-exclusion.md) |
-| 5.5 ギリギリを考える | [候補の数で見積もる](../basics/complexity-estimation.md#count-candidates)（推定。最適解のある境界に候補を絞る） |
-| 5.6 小問題に分解する | [独立に分解する](../thinking/reformulation.md#independence) |
-| 5.7 足された回数を考える | [主客転倒・寄与](../thinking/contribution.md) |
-| 5.8 上界を考える | [上界・下界を示して達成する例を作る](../thinking/construction.md#bound-and-construct) |
-| 5.9 次の手だけを考える〜貪欲法〜 | [貪欲法の考え方と正当性](../basics/greedy-basics.md) |
+    | 本の節 | このサイトのページ |
+    | --- | --- |
+    | 5.2 規則性を考える | [周期性の検出](../basics/periodicity.md)・[小さいケースを試す](#q-small-cases) |
+    | 5.3 偶奇に着目する | [偶奇に着目する](../thinking/parity.md) |
+    | 5.4 集合を上手く扱う | [余事象](../thinking/complement.md)・[包除原理](../comb/inclusion-exclusion.md) |
+    | 5.5 ギリギリを考える | [候補の数で見積もる](../basics/complexity-estimation.md#count-candidates)（推定。最適解のある境界に候補を絞る） |
+    | 5.6 小問題に分解する | [独立に分解する](../thinking/reformulation.md#independence) |
+    | 5.7 足された回数を考える | [主客転倒・寄与](../thinking/contribution.md) |
+    | 5.8 上界を考える | [上界・下界を示して達成する例を作る](../thinking/construction.md#bound-and-construct) |
+    | 5.9 次の手だけを考える〜貪欲法〜 | [貪欲法の考え方と正当性](../basics/greedy-basics.md) |
 
 ## 参考 {#references}
 

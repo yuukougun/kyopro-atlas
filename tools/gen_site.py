@@ -1266,10 +1266,11 @@ class Site:
                              "・".join(self.recent_label(by_id[q], short=True).replace(" ", "&nbsp;") for q in g["problems"]),
                              str(len(g["problems"]))])
             lvl = POSITION_LEVEL.get(pos, "")
-            out.append(f"### {pos} 問題（{lvl}の帯） {{#recent-positions-{pos.lower()}}}\n\n"
-                       f"abc451〜abc480 の {pos} の {len(probs)} 問で使われた手法を、ページの種類（kind の1つ目）で分けて多い順に並べる。"
-                       "かっこの数は、その位置でそのページを使った問題の数（1 のときは書かない）。\n\n"
-                       + table(["種類", "ページ", "問題", "問題数"], rows))
+            # 位置ごとのタブ（#110）。中身は 4 字下げ
+            body = (f"abc451〜abc480 の {pos} の {len(probs)} 問で使われた手法を、ページの種類（kind の1つ目）で分けて多い順に並べる。"
+                    "かっこの数は、その位置でそのページを使った問題の数（1 のときは書かない）。\n\n"
+                    + table(["種類", "ページ", "問題", "問題数"], rows))
+            out.append(f'=== "{pos} 問題（{lvl}の帯）"\n\n' + "\n".join(("    " + x) if x else "" for x in body.split("\n")))
         if missing:
             self.notes.append("recent-abc.yaml の参照でページのないもの: " + "、".join(sorted(missing)))
         return "\n\n".join(out) or "（data/recent-abc.yaml に問題がない）"
@@ -1297,7 +1298,7 @@ class Site:
             sets[cid].append(qid)
         known = [c for c, _ in PROBLEM_SETS]
         names = dict(PROBLEM_SETS)
-        out = []
+        out, others = [], []
         for cid in known + sorted(c for c in sets if c not in known):
             if not sets.get(cid):
                 continue
@@ -1306,7 +1307,13 @@ class Site:
                 info = self.used_problems[qid]
                 rows.append([cp.md_text(info["label"], table=True), str(info["difficulty"] or "—"),
                              "、".join(self.problem_link(host, p, a, table_cell=True) + f"（{cp.ROLE_JA.get(r, r)}）" for p, r, a in uses[qid])])
-            out.append(f"### {cp.md_text(names.get(cid, cp.contest_name(cid)))} {{#problem-sets-{cid}}}\n\n" + table(["問題", "diff", "ページ（役割）"], rows))
+            sec = f"### {cp.md_text(names.get(cid, cp.contest_name(cid)))} {{#problem-sets-{cid}}}\n\n" + table(["問題", "diff", "ページ（役割）"], rows)
+            (out if cid in names else others).append(sec)
+        if others:
+            # 問題集でないコンテストは 1 つの折りたたみにまとめる（#110）
+            body = "\n\n".join(others)
+            out.append(f'??? note "そのほかのコンテスト（{len(others)} 個）"\n\n'
+                       + "\n".join(("    " + x) if x else "" for x in body.split("\n")))
         return "\n\n".join(out) or "（本文の問題の一覧に、問題集の問題がまだない）"
 
     # ---- 問題番号の索引（Issue #6。guide/problem-index.md の problem-index-<区分>）
