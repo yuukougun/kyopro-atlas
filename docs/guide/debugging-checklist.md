@@ -28,7 +28,7 @@ updated: 2026-11-13
 ---
 
 !!! abstract "要点"
-    - **何のページか**：提出前の確認と、[WA](glossary.md#wa)・[TLE](glossary.md#tle)・[RE](glossary.md#re)・[MLE](glossary.md#mle) の症状ごとに疑う原因を順にたどれる。各項目から C++ 章の落とし穴や手法のページへつなぐ。
+    - **何のページか**：提出前の確認と、[WA](../guide/glossary.md#wa)・[TLE](../guide/glossary.md#tle)・[RE](../guide/glossary.md#re)・[MLE](../guide/glossary.md#mle) の症状ごとに疑う原因を順にたどれる。各項目から C++ 章の落とし穴や手法のページへつなぐ。
     - **使い方**：提出の前に[提出前の確認](#before-submit)を一通り見る。結果が AC でなければ、まず[落ちたケースの割合](#partial)を見て、症状の節を上から順に疑う。原因の中身と直し方は、各項目のリンク先で確かめる。
     - **見つからないとき**：[最後の手段](#last-resort)の、愚直解との比較と書き直しに進む。
 
