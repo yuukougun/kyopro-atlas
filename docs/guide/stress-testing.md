@@ -22,7 +22,7 @@ sections:
   - {title: 実験で規則を予想する, anchor: experiment}
   - {title: インタラクティブ問題を手元で試す, anchor: interactive}
 stage: done
-updated: 2026-10-22
+updated: 2026-11-13
 ---
 
 !!! abstract "要点"
@@ -55,15 +55,13 @@ flowchart LR
     C -- "食い違う" --> R["入力を残して止める<br>（反例を手で追う）"]
 ```
 
-この図は、生成器が作った同じ入力を本解と愚直解の両方に与え、出力が一致する限り生成に戻る、というループを表す。ループを抜けるのは食い違ったときだけで、そのときの入力が手で追う材料になる。
-
 反例は小さいほど追いやすい。長さ 1〜3 の入力で見つかれば、紙の上で本解を動かせる。そのため、生成器は小さい範囲から始め、見つからなければ長さや値の範囲を少しずつ広げる。小さい順にすべての入力を試せば（[書き方の形](#setups)の全数テスト）、最初に見つかる反例がそのまま最小の反例になる。
 
 コンテスト中は、生成器と比べる仕組みの準備が長引けば、その分だけ考察の時間が減る。betrue12 氏は、コードを見直す間に裏で回しておき、反例が出れば助かる程度に考える使い方を勧めている。本番で素早く使えるように、ふだんの練習で一度組んでおく。
 
 ## 書き方の形 {#setups}
 
-ストレステストの組み方は、1 つのプログラムにまとめる形・3 つのプログラムをシェルで回す形・online-judge-tools に任せる形の 3 通りがある。手軽さの順に並べると次のようになる。
+ストレステストの組み方は、手軽さの順に次の 3 通りがある。それぞれの書き方は表の下のタブに、乱数の代わりに入力をすべて試す全数テストはタブの後ろに置いた。
 
 | 形 | 準備 | 向く場面 |
 | --- | --- | --- |
@@ -71,29 +69,51 @@ flowchart LR
 | 3 つのプログラムとシェル | 3 つを別々にコンパイルし、ループで出力を比べる | 本解のファイルに手を入れたくない |
 | online-judge-tools | 生成器と愚直解を渡して `oj` に回させる | `oj` を入れてあり、ファイルで管理したい |
 
-### 1 つのプログラムにまとめる
+=== "1 つのプログラム"
+    1 つのプログラムにまとめる形は、本解と愚直解を関数に分け、`main` の中で生成と比較を繰り返す。入出力の形式を気にしなくてよいので、最も早く組める。例として、空でない区間の和の最大を求める本解と、すべての区間 $[l, r)$ を調べる愚直解を比べる。本解には「最大値を 0 で始める」誤りをわざと入れてある。
 
-1 つのプログラムにまとめる形は、本解と愚直解を関数に分け、`main` の中で生成と比較を繰り返す。入出力の形式を気にしなくてよいので、最も早く組める。例として、空でない区間の和の最大を求める本解と、すべての区間 $[l, r)$ を調べる愚直解を比べる。本解には「最大値を 0 で始める」誤りをわざと入れてある。
+    ```cpp
+    --8<-- "stress-testing/compare-random.cpp:funcs"
+    ```
 
-```cpp
---8<-- "stress-testing/compare-random.cpp:funcs"
-```
+    完全なプログラム：[`compare-random.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/stress-testing/compare-random.cpp)（GitHub）
+    { .kp-code-src }
 
-完全なプログラム：[`compare-random.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/stress-testing/compare-random.cpp)（GitHub）
-{ .kp-code-src }
+    比べる部分は次のとおりである。乱数は `mt19937_64` で作り（[乱数の作り方](../cpp/cpp-math-functions.md#random)）、食い違ったら入力と両方の答えを出して止める。
 
-比べる部分は次のとおりである。乱数は `mt19937_64` で作り（[乱数の作り方](../cpp/cpp-math-functions.md#random)）、食い違ったら入力と両方の答えを出して止める。
+    ```cpp
+    --8<-- "stress-testing/compare-random.cpp:core"
+    ```
 
-```cpp
---8<-- "stress-testing/compare-random.cpp:core"
-```
+    完全なプログラム：[`compare-random.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/stress-testing/compare-random.cpp)（GitHub）
+    { .kp-code-src }
 
-完全なプログラム：[`compare-random.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/stress-testing/compare-random.cpp)（GitHub）
-{ .kp-code-src }
+    値の範囲を $-5$ 以上 $5$ 以下にして種 7 で回すと、6 回目に長さ 1 の列 $(-5)$ で止まる。本解は 0、愚直解は $-5$ を返すので、値がすべて負のときに最大値の初期値 0 が残る誤りだと分かる。種を出力しておけば、同じ乱数の列を後で再現できる（同じ種で同じ列になるのは、標準ライブラリが同じときに限る）。
 
-値の範囲を $-5$ 以上 $5$ 以下にして種 7 で回すと、6 回目に長さ 1 の列 $(-5)$ で止まる。本解は 0、愚直解は $-5$ を返すので、値がすべて負のときに最大値の初期値 0 が残る誤りだと分かる。種を出力しておけば、同じ乱数の列を後で再現できる（同じ種で同じ列になるのは、標準ライブラリが同じときに限る）。
+    この形では、本解を関数に切り出す手間がかかる。提出用のコードがグローバル変数を使っているなら、ケースごとに初期化し直すのを忘れないようにする。
 
-この形では、本解を関数に切り出す手間がかかる。提出用のコードがグローバル変数を使っているなら、ケースごとに初期化し直すのを忘れないようにする。
+=== "シェルで回す"
+    本解・愚直解・生成器を別々のプログラムにして、シェルのループで回す形もある。本解のファイルをそのまま使えるのが利点である。処理の流れは次のとおりで、ループの中身を bash などで書く。
+
+    ```text
+    繰り返す:
+        生成器を実行して、入力をファイル input.txt に書く
+        本解を input.txt で実行して、出力を out1.txt に書く
+        愚直解を input.txt で実行して、出力を out2.txt に書く
+        out1.txt と out2.txt が違えば（cmp や diff で比べる）:
+            input.txt と 2 つの出力を表示して止める
+    ```
+
+    入力を毎回同じファイルに上書きしておけば、ループが止まった時点の input.txt がそのまま反例になる。本解と愚直解は、実行ファイルの名前を分けてコンパイルしておく（g++ なら `-o` で名前を指定する）。
+
+=== "online-judge-tools"
+    online-judge-tools（`oj` コマンド）は、生成器で入力を作るサブコマンド `oj g/i` と、愚直解で出力を作る `oj g/o` を持つ。食い違う入力を探すだけなら、次の 1 行で生成と比較を繰り返し、見つかった入力を `test/` に保存する。
+
+    ```bash
+    oj g/i --hack-actual ./a.out --hack-expected ./naive 'python3 generate.py'
+    ```
+
+    `--hack-actual` に本解、`--hack-expected` に愚直解、最後に生成器を渡す。`--hack-expected` を省くと、本解が RE になる入力を探す（`-t 2` のように制限時間を渡せば、TLE になる入力も探す。渡さなければ制限時間はなく、本解が止まらないとそのまま待ち続ける）。並列に回す `-j` もある。
 
 ### 小さい順にすべて試す（全数テスト）
 
@@ -107,31 +127,6 @@ flowchart LR
 { .kp-code-src }
 
 長さ 4 以下・値 $-2$ 以上 $2$ 以下で試すと、最初の入力の長さ 1 の列 $(-2)$ で止まる。長さ $n$ の列は $(2v + 1)^n$ 通りあるので、試せるのは長さか値の範囲がごく小さいときだけである。$v = 2$ で長さ 8 なら $5^8 \approx 3.9 \times 10^5$ 通りで、愚直解が軽ければ一瞬で終わる。
-
-### 3 つのプログラムをシェルで回す
-
-本解・愚直解・生成器を別々のプログラムにして、シェルのループで回す形もある。本解のファイルをそのまま使えるのが利点である。処理の流れは次のとおりで、ループの中身を bash などで書く。
-
-```text
-繰り返す:
-    生成器を実行して、入力をファイル input.txt に書く
-    本解を input.txt で実行して、出力を out1.txt に書く
-    愚直解を input.txt で実行して、出力を out2.txt に書く
-    out1.txt と out2.txt が違えば（cmp や diff で比べる）:
-        input.txt と 2 つの出力を表示して止める
-```
-
-入力を毎回同じファイルに上書きしておけば、ループが止まった時点の input.txt がそのまま反例になる。本解と愚直解は、実行ファイルの名前を分けてコンパイルしておく（g++ なら `-o` で名前を指定する）。
-
-### online-judge-tools に任せる
-
-online-judge-tools（`oj` コマンド）は、生成器で入力を作るサブコマンド `oj g/i` と、愚直解で出力を作る `oj g/o` を持つ。食い違う入力を探すだけなら、次の 1 行で生成と比較を繰り返し、見つかった入力を `test/` に保存する。
-
-```bash
-oj g/i --hack-actual ./a.out --hack-expected ./naive 'python3 generate.py'
-```
-
-`--hack-actual` に本解、`--hack-expected` に愚直解、最後に生成器を渡す。`--hack-expected` を省くと、本解が RE になる入力を探す（`-t 2` のように制限時間を渡せば、TLE になる入力も探す。渡さなければ制限時間はなく、本解が止まらないとそのまま待ち続ける）。並列に回す `-j` もある。
 
 ## 生成器のコツ {#generators}
 
@@ -176,8 +171,6 @@ oj g/i --hack-actual ./a.out --hack-expected ./naive 'python3 generate.py'
 - **誤差が許される問題**：小数の出力は、差の絶対値か相対誤差で比べる（[浮動小数点数の比較](../cpp/cpp-types-literals.md#float-compare)）。`oj t` では `-e 1e-6` のように許す誤差を指定する。
 
 未定義動作の検出と組み合わせると、見つかる誤りが増える。不具合を探すビルドで本解をコンパイルしてからストレステストを回せば、範囲外の読み書きは食い違いが出る前に止まる（[不具合を探すビルド](../cpp/cpp-undefined-behavior.md#debug-build)）。思い込みを `assert` で書いておけば、崩れた入力で止まる（[assert で気づく](../cpp/cpp-undefined-behavior.md#assert)）。
-
-GCC 9.2 より前の Windows の MinGW では、`random_device` が実行ごとに同じ値を返す（betrue12 氏の記事、2019 年）。これは GCC の不具合 PR 85494 で、mingw-w64 では GCC 9.2 で直った。古い環境で生成器を回しても同じ入力しか出ないときは、時刻を種にする。
 
 ## 実験で規則を予想する {#experiment}
 
@@ -236,9 +229,8 @@ $i = 0, \dots, 20$ の表は `LWLWWWWLWLWWWWLWLWWWW` で、負け（L）は $i =
 
 ## 参考 {#references}
 
-- [betrue12「競プロでWAが出たときのランダム入力データ生成入門」](https://betrue12.hateblo.jp/entry/2019/09/07/171628)：手順の 3 段階と反例の追い方、生成器の大きさの目安、互いに異なる値・木・連結なグラフ・多重辺の作り方、答えが偏る問題の作り方、MinGW の注意、事前の練習
+- [betrue12「競プロでWAが出たときのランダム入力データ生成入門」](https://betrue12.hateblo.jp/entry/2019/09/07/171628)：手順の 3 段階と反例の追い方、生成器の大きさの目安、互いに異なる値・木・連結なグラフ・多重辺の作り方、答えが偏る問題の作り方、事前の練習
 - [kmyk「競技プログラミングにおける様々なテスト」](https://kmyk.github.io/blog/blog/2020/11/12/various-tests-in-competitive-programming/)：ランダムテスト・ストレステスト・全数テストの呼び方、完全なランダムでは端のケースを逃すこと
 - [online-judge-tools「getting-started.ja.md」](https://github.com/online-judge-tools/oj/blob/master/docs/getting-started.ja.md)：`oj g/i`・`oj g/o`・`--hack`・`-j`、誤差の `-e`、チェッカーの `--judge-command`、インタラクティブの `oj t/r`
 - [online-judge-tools「generate_input.py」](https://github.com/online-judge-tools/oj/blob/master/onlinejudge_command/subcommand/generate_input.py)：`--hack-actual`・`--hack-expected` の引数の意味と、`--hack-expected` を省いたときの動き
 - [OEIS「A000045」](https://oeis.org/A000045)・[OEIS「A047352」](https://oeis.org/A047352)：実験の例の数列（フィボナッチ数、7 で割った余りが 0 か 2 の数）
-- [GCC Bugzilla「Bug 85494」](https://gcc.gnu.org/bugzilla/show_bug.cgi?id=85494)：MinGW の `random_device` が固定の種を使っていた不具合と、mingw-w64 で GCC 9.2 で直ったこと

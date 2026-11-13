@@ -23,7 +23,7 @@ sections:
   - {title: 動作確認の手順, anchor: verify}
   - {title: ページ → 確認用の問題, anchor: verify-table}
 stage: done
-updated: 2026-10-29
+updated: 2026-11-13
 ---
 
 !!! abstract "要点"
@@ -36,17 +36,15 @@ updated: 2026-10-29
 別名：ライブラリ整備・自作ライブラリ・Library Checker・verify・ライブラリの動作確認・ライブラリチェッカー
 <!-- textlint-enable -->
 
-自作ライブラリの設計と動作確認は、コンテストで何度も書く部品をヘッダにまとめ、正しいと確かめてから使うまでの流れである。手法そのものの説明は各ページにあり、ここでは部品にするときの約束と確かめ方だけを書く。流れの全体は次の図のとおりで、1 つのヘッダを手元のテストと確認用の問題の両方で確かめ、確かめたヘッダをコンテストの解答から使う。
+手法そのものの説明は各ページにあり、ここでは部品にするときの約束と確かめ方だけを書く。流れの全体は次の図のとおりで、1 つのヘッダを手元のテストと確認用の問題の両方で確かめ、確かめたヘッダをコンテストの解答から使う。
 
 ![ライブラリの本体のヘッダを、手元のテスト・確認用の解答・コンテストの解答の 3 つが include する。手元のテストは手元で実行し、確認用の解答は oj-verify などが Library Checker の入出力で判定し、コンテストの解答は 1 ファイルに展開して AtCoder に提出する](../img/library-design/workflow.svg)
-
-手元のテストと確認用の解答は、どちらもヘッダを書き換えるたびに回して正しさを確かめる。コンテストの解答だけは提出前に 1 つのファイルへ展開するので、確かめたヘッダがそのまま提出に入る。
 
 ## 何を自作するか {#what-to-build}
 
 自作の部品は、ACL にあるものも含めて作り直してよい。ACL を読むだけでは、不変条件や境界の扱いが手に残らない。自分で書いて確かめた部品なら、問題に合わせて中身を変えられる（区間の長さを持たせる、二分探索を足すなど）。
 
-作る順は、使う回数が多く、短く書けるものからにする。次の表は目安で、上の段から順に作る。ただし作り始めるのは、下の「作り始める合図」が来てからである。表は、書く機会が来た部品のうち、どれからヘッダにするかを決める目安である。
+作る順は、使う回数が多く、短く書けるものからにする。次の表の上の段から順に作るが、作り始めるのは下の「作り始める合図」が来てからである。
 
 | 段階 | 部品 | 手法のページ |
 | --- | --- | --- |
@@ -78,12 +76,15 @@ updated: 2026-10-29
 完全なプログラム：[`fenwick-tests.cpp`](https://github.com/yuukougun/kyopro-atlas/blob/main/snippets/library-design/fenwick-tests.cpp)（GitHub）
 { .kp-code-src }
 
-- **ACL の工夫**：ACL の `fenwick_tree` は、中の配列を符号なし整数（`T = long long` なら `unsigned long long`）で持って足している。符号なし整数のあふれは $2^{64}$ を法とした値になり、[未定義動作](../guide/glossary.md#undefined-behavior)にならない。途中の和があふれても、最後の差が `long long` に収まれば正しい値が返る
-- **名前**：メンバ関数の名前（`add`・`sum`・`prod`・`merge`・`same`）も ACL にそろえると、解説コードと読み比べやすい。この教材の自作の例と ACL の名前の対応は[次の表](#acl-names)にある
+メンバ関数の名前（`add`・`sum`・`prod`・`merge`・`same`）も ACL にそろえると、解説コードと読み比べやすい。この教材の自作の例と ACL の名前の対応は[次の表](#acl-names)にある。
+
+??? note "ACL の工夫：符号なし整数で足す"
+
+    ACL の `fenwick_tree` は、中の配列を符号なし整数（`T = long long` なら `unsigned long long`）で持って足している。符号なし整数のあふれは $2^{64}$ を法とした値になり、[未定義動作](../guide/glossary.md#undefined-behavior)にならない。途中の和があふれても、最後の差が `long long` に収まれば正しい値が返る。
 
 ### この教材の自作と ACL の名前 {#acl-names}
 
-データ構造のページの自作の例は、ACL にある部品なら名前と引数の約束を ACL にそろえている。そろえていない名前と返り値は、各ページの「自作するとき」の囲み（ACL にない部品はコードの前の文）に書いた。まとめると次のとおりである。各部品の確認に使う Library Checker の問題は、[ページ → 確認用の問題](#verify-table)の表で手法のページの行を引く。
+データ構造のページの自作の例は、ACL にある部品なら名前と引数の約束を ACL にそろえている。そろえていない名前と返り値をまとめると次のとおりである（詳しくは各ページの「自作するとき」の囲み）。
 
 | 部品 | ACL | この教材の自作 | ACL との違い |
 | --- | --- | --- | --- |
@@ -96,9 +97,12 @@ updated: 2026-10-29
 | [遅延セグメント木](../ds/lazy-segment-tree.md#invariants) | `lazy_segtree` | `LazySegTree` | 区間の操作を再帰で書いた。`max_right`・`min_left`・一点への `apply(p, f)` がない |
 | [Sparse Table](../ds/sparse-table.md#build) | なし | `SparseTable`・`prod` | 取得の名前を `segtree` の `prod` にそろえた。空の区間は渡せない |
 
-- **find と leader**：Union-Find の `find` は、本文の手順と図で使う名前に合わせて残した。ライブラリにするなら ACL の `leader` にそろえると、ACL から乗り換えても呼び出し側を直さずに済む
-- **merge の返り値**：`bool` か代表元かは、乗り換えるときに気づきにくい違いである。`if (uf.merge(a, b))` は、ACL の `dsu` では代表元が 0 でないかを見るだけになる（[Union-Find の ACL の囲み](../ds/union-find.md#operations)）
-- **assert**：Union-Find と BIT の例は、短く見せるため添字の範囲の `assert` を省いた（セグメント木・遅延セグメント木・Sparse Table の例には入れた）。ライブラリにするときは、[インターフェースの決め方](#interface)の 3 のとおり関数の入口で確かめる
+乗り換えるときに最も気づきにくいのは `merge` の返り値である。`if (uf.merge(a, b))` は、ACL の `dsu` では代表元が 0 でないかを見るだけになる（[Union-Find の ACL の囲み](../ds/union-find.md#operations)）。
+
+??? note "find の名前と、省いた assert"
+
+    - **find と leader**：Union-Find の `find` は、本文の手順と図で使う名前に合わせて残した。ライブラリにするなら ACL の `leader` にそろえると、ACL から乗り換えても呼び出し側を直さずに済む
+    - **assert**：Union-Find と BIT の例は、短く見せるため添字の範囲の `assert` を省いた（セグメント木・遅延セグメント木・Sparse Table の例には入れた）。ライブラリにするときは、[インターフェースの決め方](#interface)の 3 のとおり関数の入口で確かめる
 
 ## ヘッダの書き方 {#headers}
 
@@ -116,13 +120,15 @@ library/
 
 ヘッダでは次の 5 つを守る。
 
-- **先頭に `#pragma once`**：同じヘッダを 2 回読んでも中身が 1 回だけになる。展開の道具（[バンドル](#bundling)）も、これを手がかりに同じファイルを 1 回だけ展開する。oj-bundle は、1 行目に `#pragma once` を書いたヘッダなら確実に 1 回だけ展開する。インクルードガード（`#ifndef` の組）はガードの外に行があるとエラーになり、`#pragma once` も 1 行目以外に書くとエラーになる。そこで 1 行目の `#pragma once` にそろえる
+- **1 行目に `#pragma once`**：同じヘッダを 2 回読んでも中身は 1 回だけ入る。展開の道具（[バンドル](#bundling)）も、同じファイルを 1 回だけ展開する。oj-bundle は、インクルードガード（`#ifndef` の組）の外に行があるときや、`#pragma once` が 1 行目にないときはエラーを出すので、1 行目の `#pragma once` にそろえる
 - **名前空間に入れる**：`namespace mylib { … }` で囲む。解答の側の `using namespace std;` や ACL の名前とぶつからない。グローバルに `count` などを置くとエラーになる理由は[名前の衝突](../cpp/cpp-macros-template-file.md#namespaces)にある。補助の関数は `mylib::internal` のような内側の名前空間に入れると、使う側の名前を汚さない（ACL は `atcoder::internal`）
 - **ヘッダの中で `using namespace std;` とマクロを書かない**：展開した後のファイル全体に効いてしまう。ヘッダの中では `std::vector` と `std::` を付けて書く。`rep` などのマクロは解答の雛形の側に置く（[マクロ](../cpp/cpp-macros-template-file.md#macros)）
 - **使う標準ヘッダを自分で include する**：`<vector>`・`<cassert>` など、そのヘッダが使うものを書く。解答の側の `#include <bits/stdc++.h>` に頼ると、テストのファイルだけをコンパイルしたときに通らない
 - **自作のヘッダは `#include "..."`（二重引用符）で読む**：展開の道具の多くは二重引用符の include だけを展開し、山括弧 `<...>` は標準ライブラリか ACL として残す。自作のヘッダを山括弧で書くと展開されずに残り、ジャッジで `No such file or directory` になる
 
-cph の改造版の展開を使い、目印 `// @impl` でヘッダを分けるなら、さらに目印の位置に気をつける。この展開は目印より下を `main` の後ろへ回すので、戻り値が `auto` の関数、定数式で使う `constexpr` 関数、クラスの定義は目印より上に置く（[@impl](../cpp/cpp-macros-template-file.md#impl-marker)）。
+??? note "cph の改造版で `// @impl` を使うとき"
+
+    目印 `// @impl` でヘッダを分けるなら、目印の位置に気をつける。この展開は目印より下を `main` の後ろへ回すので、戻り値が `auto` の関数、定数式で使う `constexpr` 関数、クラスの定義は目印より上に置く（[@impl](../cpp/cpp-macros-template-file.md#impl-marker)）。
 
 ## 提出用に 1 ファイルに展開する {#bundling}
 
@@ -174,7 +180,7 @@ cph の改造版の展開を使い、目印 `// @impl` でヘッダを分ける�
 
 手元のテストが通ったら、ジャッジの問題で確かめる。ジャッジのテストケースには最大の制約と意地の悪い入力が入っているので、正しさに加えて速さも確かめられる。おもな確認先は次の 2 つである。
 
-- **Library Checker**（judge.yosupo.jp）：ライブラリの確認のための問題集で、入出力の形が単純である。2026-10-22 に問題の分類の一覧（GitHub の categories.toml）を数えると、一覧に載る問題は 14 の分類で 235 問あった。多い分類は Data Structure 43・Graph 36・Polynomial 26・Number Theory 22・Tree 20 で、235 問には動作確認の練習用の Sample 3 問を含む。一覧に載らない問題もリポジトリにあり、問題の総数はこれより多い。各ページの問題は[ページ → 確認用の問題](#verify-table)の表にある
+- **Library Checker**（judge.yosupo.jp）：ライブラリの確認のための問題集で、入出力の形が単純である。Data Structure・Graph・Polynomial・Number Theory・Tree など 14 の分類に 235 問が並ぶ（2026-10 の一覧）。各ページの問題は[ページ → 確認用の問題](#verify-table)の表にある
 - **AtCoder Library Practice Contest**（practice2）：ACL の部品の名前（Disjoint Set Union・Fenwick Tree・Segment Tree など）を題にした 12 問（A〜L）がある。ACL と同じ部品を自作したときの確認に向く。各問題とページの対応は[問題集の案内](../guide/problem-sets.md#problem-sets-practice2)で引く
 
 手順は次のとおりである。
@@ -186,8 +192,13 @@ cph の改造版の展開を使い、目印 `// @impl` でヘッダを分ける�
 
 自動にする道具は 2 つある。どちらも、確認用の解答に問題の URL を書いておくと、テストケースを取ってきて全ケースで判定する。
 
-- **oj-verify**（online-judge-verify-helper）：拡張子の前に `.test` を付けたファイル（`point_add_range_sum.test.cpp`）を確認用の解答とみなす。ファイルの先頭に `#define PROBLEM "URL"` を書き、`oj-verify run` で回す。おもに Library Checker と Aizu Online Judge の問題に対応している
-- **competitive-verifier**：oj-verify の流れをくむ道具で、`// competitive-verifier: PROBLEM URL` の形のコメントで問題を指定する。互換のために `#define PROBLEM` も読めるが、非推奨である。`competitive-verifier migrate` で oj-verify の形から移せる。GitHub Actions で回し、確認の結果をつけたドキュメントのサイトを作れる
+=== "oj-verify"
+
+    online-judge-verify-helper のことで、拡張子の前に `.test` を付けたファイル（`point_add_range_sum.test.cpp`）を確認用の解答とみなす。ファイルの先頭に `#define PROBLEM "URL"` を書き、`oj-verify run` で回す。おもに Library Checker と Aizu Online Judge の問題に対応している。
+
+=== "competitive-verifier"
+
+    oj-verify の流れをくむ道具で、`// competitive-verifier: PROBLEM URL` の形のコメントで問題を指定する。互換のために `#define PROBLEM` も読めるが、非推奨である。`competitive-verifier migrate` で oj-verify の形から移せる。GitHub Actions で回し、確認の結果をつけたドキュメントのサイトを作れる。
 
 次は oj-verify で回す確認用の解答の例である。1 行目の `PROBLEM` が問題の URL で、ライブラリは実際には `#include "../lib/fenwick_tree.hpp"` の 1 行で読む。2 つのコード片の間には、この 1 行の代わりにヘッダの中身が入っている（動かすため 1 ファイルにした）。
 
@@ -207,104 +218,107 @@ cph の改造版の展開を使い、目印 `// @impl` でヘッダを分ける�
 
 ## ページ → 確認用の問題 {#verify-table}
 
-次の表は、手法のページごとに、自作の部品の確認に使える Library Checker の問題を並べたものである。各ページの front matter の `verify` から作っているので、ページが増えると表も増える。問題名は judge.yosupo.jp の URL の末尾と同じで、リンクから問題文に行ける。
+手法のページごとに、自作の部品の確認に使える Library Checker の問題を並べた表である。問題名は judge.yosupo.jp の URL の末尾と同じで、リンクから問題文に行ける。表にない部品は、Library Checker の問題一覧から入出力の形が近いものを探し、見つからなければ[不変条件と境界のテスト](#tests)の突き合わせだけで確かめる。
 
-- **読み方**：1 つのページに問題が複数あるときは、確かめられる使い方がそれぞれ違う。たとえば遅延セグメント木の `range_affine_range_sum` は区間のアフィン変換と区間和、`range_add_range_min` は区間加算と区間最小値で、載せる演算の違う 2 種類を確かめられる
-- **同じ問題が複数のページにある**：`point_set_range_composite` はセグメント木と動的 DP の両方の行にある。非可換の演算（1 次関数の合成）を載せるので、演算の左右を取り違えたバグが出る
-- **表にない部品**：Library Checker の問題一覧から、入出力の形が近いものを探す。見つからなければ、[不変条件と境界のテスト](#tests)の突き合わせだけで確かめる
+???+ note "ページ → Library Checker の問題の表"
 
-<!-- gen:begin verify-table -->
-<!-- textlint-disable -->
+    <!-- gen:begin verify-table -->
+    <!-- textlint-disable -->
 
-| ページ | 分野 | Library Checker の問題 |
-| --- | --- | --- |
-| [最長増加部分列](../dp/lis.md) | 動的計画法 | [longest_increasing_subsequence](https://judge.yosupo.jp/problem/longest_increasing_subsequence) |
-| [動的 DP](../dp/dynamic-dp.md) | 動的計画法 | [point_set_range_composite](https://judge.yosupo.jp/problem/point_set_range_composite) |
-| [Convex Hull Trick と Li Chao Tree](../dp/cht.md) | 動的計画法 | [line_add_get_min](https://judge.yosupo.jp/problem/line_add_get_min)、[segment_add_get_min](https://judge.yosupo.jp/problem/segment_add_get_min) |
-| [Monge 性による DP の高速化](../dp/monge.md) | 動的計画法 | [min_plus_convolution_convex_arbitrary](https://judge.yosupo.jp/problem/min_plus_convolution_convex_arbitrary)、[min_plus_convolution_convex_convex](https://judge.yosupo.jp/problem/min_plus_convolution_convex_convex) |
-| [閉路の検出と復元](../graph/cycle-detection.md) | グラフ | [cycle_detection](https://judge.yosupo.jp/problem/cycle_detection)、[cycle_detection_undirected](https://judge.yosupo.jp/problem/cycle_detection_undirected) |
-| [彩色数・最大独立集合・最大クリーク](../graph/chromatic-number.md) | グラフ | [chromatic_number](https://judge.yosupo.jp/problem/chromatic_number)、[maximum_independent_set](https://judge.yosupo.jp/problem/maximum_independent_set) |
-| [ダイクストラ法](../graph/dijkstra.md) | グラフ | [shortest_path](https://judge.yosupo.jp/problem/shortest_path) |
-| [補グラフ上の BFS](../graph/complement-graph-bfs.md) | グラフ | [connected_components_of_complement_graph](https://judge.yosupo.jp/problem/connected_components_of_complement_graph) |
-| [K 番目の最短路](../graph/k-shortest-paths.md) | グラフ | [k_shortest_walk](https://judge.yosupo.jp/problem/k_shortest_walk) |
-| [最小シュタイナー木](../graph/steiner-tree.md) | グラフ | [minimum_steiner_tree](https://judge.yosupo.jp/problem/minimum_steiner_tree) |
-| [強連結成分分解（SCC）](../graph/scc.md) | グラフ | [scc](https://judge.yosupo.jp/problem/scc) |
-| [2-SAT](../graph/two-sat.md) | グラフ | [two_sat](https://judge.yosupo.jp/problem/two_sat) |
-| [最小全域木](../graph/minimum-spanning-tree.md) | グラフ | [minimum_spanning_tree](https://judge.yosupo.jp/problem/minimum_spanning_tree) |
-| [橋・関節点・二重連結成分](../graph/lowlink.md) | グラフ | [two_edge_connected_components](https://judge.yosupo.jp/problem/two_edge_connected_components)、[biconnected_components](https://judge.yosupo.jp/problem/biconnected_components) |
-| [特殊な最小全域木](../graph/spanning-tree-advanced.md) | グラフ | [directedmst](https://judge.yosupo.jp/problem/directedmst)、[manhattanmst](https://judge.yosupo.jp/problem/manhattanmst) |
-| [行列木定理](../graph/matrix-tree-theorem.md) | グラフ | [counting_spanning_tree_undirected](https://judge.yosupo.jp/problem/counting_spanning_tree_undirected)、[counting_spanning_tree_directed](https://judge.yosupo.jp/problem/counting_spanning_tree_directed) |
-| [次数による平方分割](../graph/degree-sqrt.md) | グラフ | [enumerate_triangles](https://judge.yosupo.jp/problem/enumerate_triangles)、[counting_c4](https://judge.yosupo.jp/problem/counting_c4) |
-| [オイラー路（一筆書き）](../graph/euler-path.md) | グラフ | [eulerian_trail_directed](https://judge.yosupo.jp/problem/eulerian_trail_directed)、[eulerian_trail_undirected](https://judge.yosupo.jp/problem/eulerian_trail_undirected) |
-| [二部マッチング](../graph/bipartite-matching.md) | グラフ | [bipartitematching](https://judge.yosupo.jp/problem/bipartitematching) |
-| [最小費用流](../graph/min-cost-flow.md) | グラフ | [min_cost_b_flow](https://judge.yosupo.jp/problem/min_cost_b_flow)、[assignment](https://judge.yosupo.jp/problem/assignment) |
-| [一般グラフのマッチング](../graph/general-matching.md) | グラフ | [general_matching](https://judge.yosupo.jp/problem/general_matching)、[general_weighted_matching](https://judge.yosupo.jp/problem/general_weighted_matching) |
-| [木の直径と最遠点](../tree/tree-diameter.md) | 木 | [tree_diameter](https://judge.yosupo.jp/problem/tree_diameter) |
-| [木の同型判定と木のハッシュ](../tree/tree-isomorphism.md) | 木 | [rooted_tree_isomorphism_classification](https://judge.yosupo.jp/problem/rooted_tree_isomorphism_classification) |
-| [最小共通祖先（LCA）](../tree/lca.md) | 木 | [lca](https://judge.yosupo.jp/problem/lca) |
-| [木の上のパスの判定と分解](../tree/tree-path.md) | 木 | [jump_on_tree](https://judge.yosupo.jp/problem/jump_on_tree) |
-| [オイラーツアー](../tree/euler-tour.md) | 木 | [vertex_add_subtree_sum](https://judge.yosupo.jp/problem/vertex_add_subtree_sum) |
-| [HL 分解](../tree/hld.md) | 木 | [vertex_set_path_composite](https://judge.yosupo.jp/problem/vertex_set_path_composite) |
-| [Static Top Tree と木 DP の動的更新](../tree/static-top-tree.md) | 木 | [point_set_tree_path_composite_sum](https://judge.yosupo.jp/problem/point_set_tree_path_composite_sum) |
-| [動的木](../tree/dynamic-tree.md) | 木 | [dynamic_tree_vertex_add_path_sum](https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_path_sum) |
-| [重心分解](../tree/centroid-decomposition.md) | 木 | [frequency_table_of_tree_distance](https://judge.yosupo.jp/problem/frequency_table_of_tree_distance) |
-| [比で親に併合する貪欲](../tree/tree-ratio-greedy.md) | 木 | [rooted_tree_topological_order_with_minimum_inversions](https://judge.yosupo.jp/problem/rooted_tree_topological_order_with_minimum_inversions) |
-| [STL コンテナの使い分け](../ds/stl-containers.md) | データ構造 | [associative_array](https://judge.yosupo.jp/problem/associative_array) |
-| [set・multiset・map の応用](../ds/ordered-set.md) | データ構造 | [predecessor_problem](https://judge.yosupo.jp/problem/predecessor_problem)、[double_ended_priority_queue](https://judge.yosupo.jp/problem/double_ended_priority_queue) |
-| [単調スタックとスライド最小値](../ds/monotonic-stack.md) | データ構造 | [queue_operate_all_composite](https://judge.yosupo.jp/problem/queue_operate_all_composite)、[deque_operate_all_composite](https://judge.yosupo.jp/problem/deque_operate_all_composite) |
-| [Union-Find](../ds/union-find.md) | データ構造 | [unionfind](https://judge.yosupo.jp/problem/unionfind) |
-| [重み付き Union-Find](../ds/weighted-union-find.md) | データ構造 | [unionfind_with_potential](https://judge.yosupo.jp/problem/unionfind_with_potential)、[unionfind_with_potential_non_commutative_group](https://judge.yosupo.jp/problem/unionfind_with_potential_non_commutative_group) |
-| [ロールバックできる Union-Find](../ds/rollback-union-find.md) | データ構造 | [dynamic_graph_vertex_add_component_sum](https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum) |
-| [BIT（Fenwick Tree）](../ds/fenwick-tree.md) | データ構造 | [point_add_range_sum](https://judge.yosupo.jp/problem/point_add_range_sum)、[static_range_sum](https://judge.yosupo.jp/problem/static_range_sum) |
-| [K 番目の値を求めるデータ構造](../ds/kth-element.md) | データ構造 | [ordered_set](https://judge.yosupo.jp/problem/ordered_set) |
-| [セグメント木](../ds/segment-tree.md) | データ構造 | [point_set_range_composite](https://judge.yosupo.jp/problem/point_set_range_composite) |
-| [値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md) | データ構造 | [point_set_range_composite_large_array](https://judge.yosupo.jp/problem/point_set_range_composite_large_array) |
-| [遅延セグメント木](../ds/lazy-segment-tree.md) | データ構造 | [range_affine_range_sum](https://judge.yosupo.jp/problem/range_affine_range_sum)、[range_add_range_min](https://judge.yosupo.jp/problem/range_add_range_min)、[range_affine_point_get](https://judge.yosupo.jp/problem/range_affine_point_get) |
-| [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md) | データ構造 | [range_set_range_composite](https://judge.yosupo.jp/problem/range_set_range_composite) |
-| [Sparse Table](../ds/sparse-table.md) | データ構造 | [staticrmq](https://judge.yosupo.jp/problem/staticrmq) |
-| [Segment Tree Beats](../ds/segment-tree-beats.md) | データ構造 | [range_chmin_chmax_add_range_sum](https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum) |
-| [クエリの先読み](../ds/offline-queries.md) | データ構造 | [static_range_count_distinct](https://judge.yosupo.jp/problem/static_range_count_distinct)、[static_range_frequency](https://judge.yosupo.jp/problem/static_range_frequency) |
-| [平面走査](../ds/sweep-line-2d.md) | データ構造 | [rectangle_sum](https://judge.yosupo.jp/problem/rectangle_sum)、[area_of_union_of_rectangles](https://judge.yosupo.jp/problem/area_of_union_of_rectangles) |
-| [Mo's algorithm](../ds/mo-algorithm.md) | データ構造 | [static_range_inversions_query](https://judge.yosupo.jp/problem/static_range_inversions_query) |
-| [平方分割](../ds/sqrt-decomposition.md) | データ構造 | [static_range_mode_query](https://judge.yosupo.jp/problem/static_range_mode_query) |
-| [CDQ 分割統治](../ds/cdq-divide-and-conquer.md) | データ構造 | [point_add_rectangle_sum](https://judge.yosupo.jp/problem/point_add_rectangle_sum) |
-| [永続データ構造](../ds/persistent-data-structures.md) | データ構造 | [persistent_queue](https://judge.yosupo.jp/problem/persistent_queue)、[persistent_range_affine_range_sum](https://judge.yosupo.jp/problem/persistent_range_affine_range_sum) |
-| [マージソート木](../ds/merge-sort-tree.md) | データ構造 | [static_range_sum_with_upper_bound](https://judge.yosupo.jp/problem/static_range_sum_with_upper_bound) |
-| [Wavelet Matrix](../ds/wavelet-matrix.md) | データ構造 | [range_kth_smallest](https://judge.yosupo.jp/problem/range_kth_smallest) |
-| [Binary Trie](../ds/binary-trie.md) | データ構造 | [set_xor_min](https://judge.yosupo.jp/problem/set_xor_min) |
-| [平衡二分探索木と pb_ds の tree](../ds/balanced-bst.md) | データ構造 | [range_reverse_range_sum](https://judge.yosupo.jp/problem/range_reverse_range_sum)、[dynamic_sequence_range_affine_range_sum](https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum) |
-| [フェルマーの小定理と指数の mod](../math/exponent-mod.md) | 整数論・代数 | [tetration_mod](https://judge.yosupo.jp/problem/tetration_mod) |
-| [エラトステネスの篩](../math/sieve-eratosthenes.md) | 整数論・代数 | [enumerate_primes](https://judge.yosupo.jp/problem/enumerate_primes) |
-| [大きな数の素数判定と素因数分解](../math/miller-rabin.md) | 整数論・代数 | [primality_test](https://judge.yosupo.jp/problem/primality_test)、[factorize](https://judge.yosupo.jp/problem/factorize) |
-| [位数・原始根・離散対数](../math/multiplicative-order.md) | 整数論・代数 | [discrete_logarithm_mod](https://judge.yosupo.jp/problem/discrete_logarithm_mod)、[primitive_root](https://judge.yosupo.jp/problem/primitive_root)、[sqrt_mod](https://judge.yosupo.jp/problem/sqrt_mod)、[kth_root_mod](https://judge.yosupo.jp/problem/kth_root_mod) |
-| [整数の平方根・K 乗根と累乗数](../math/integer-root.md) | 整数論・代数 | [kth_root_integer](https://judge.yosupo.jp/problem/kth_root_integer) |
-| [商の列挙](../math/floor-quotient-enum.md) | 整数論・代数 | [enumerate_quotients](https://judge.yosupo.jp/problem/enumerate_quotients) |
-| [乗法的関数の和と素数の個数](../math/multiplicative-function.md) | 整数論・代数 | [counting_primes](https://judge.yosupo.jp/problem/counting_primes)、[sum_of_totient_function](https://judge.yosupo.jp/problem/sum_of_totient_function)、[sum_of_multiplicative_function](https://judge.yosupo.jp/problem/sum_of_multiplicative_function) |
-| [floor sum](../math/floor-sum.md) | 整数論・代数 | [sum_of_floor_of_linear](https://judge.yosupo.jp/problem/sum_of_floor_of_linear)、[min_of_mod_of_linear](https://judge.yosupo.jp/problem/min_of_mod_of_linear) |
-| [Stern-Brocot 木と連分数](../math/stern-brocot.md) | 整数論・代数 | [stern_brocot_tree](https://judge.yosupo.jp/problem/stern_brocot_tree)、[rational_approximation](https://judge.yosupo.jp/problem/rational_approximation) |
-| [行列累乗](../math/matrix-power.md) | 整数論・代数 | [matrix_product](https://judge.yosupo.jp/problem/matrix_product)、[pow_of_matrix](https://judge.yosupo.jp/problem/pow_of_matrix) |
-| [掃き出し法](../math/gaussian-elimination.md) | 整数論・代数 | [system_of_linear_equations](https://judge.yosupo.jp/problem/system_of_linear_equations)、[system_of_linear_equations_mod_2](https://judge.yosupo.jp/problem/system_of_linear_equations_mod_2)、[matrix_rank](https://judge.yosupo.jp/problem/matrix_rank)、[matrix_rank_mod_2](https://judge.yosupo.jp/problem/matrix_rank_mod_2)、[inverse_matrix](https://judge.yosupo.jp/problem/inverse_matrix) |
-| [XOR 基底](../math/xor-basis.md) | 整数論・代数 | [intersection_of_f2_vector_spaces](https://judge.yosupo.jp/problem/intersection_of_f2_vector_spaces) |
-| [行列式](../math/determinant.md) | 整数論・代数 | [matrix_det](https://judge.yosupo.jp/problem/matrix_det)、[matrix_det_mod_2](https://judge.yosupo.jp/problem/matrix_det_mod_2)、[matrix_det_arbitrary_mod](https://judge.yosupo.jp/problem/matrix_det_arbitrary_mod) |
-| [畳み込みの使い方](../math/convolution-ntt.md) | 整数論・代数 | [convolution_mod](https://judge.yosupo.jp/problem/convolution_mod)、[wildcard_pattern_matching](https://judge.yosupo.jp/problem/wildcard_pattern_matching) |
-| [FFT・NTT の仕組みと任意 mod の畳み込み](../math/fft-ntt.md) | 整数論・代数 | [convolution_mod](https://judge.yosupo.jp/problem/convolution_mod)、[convolution_mod_1000000007](https://judge.yosupo.jp/problem/convolution_mod_1000000007)、[convolution_mod_2_64](https://judge.yosupo.jp/problem/convolution_mod_2_64) |
-| [XOR 畳み込み](../math/hadamard-transform.md) | 整数論・代数 | [bitwise_xor_convolution](https://judge.yosupo.jp/problem/bitwise_xor_convolution) |
-| [形式的冪級数と多項式の演算](../math/fps-basics.md) | 整数論・代数 | [inv_of_formal_power_series](https://judge.yosupo.jp/problem/inv_of_formal_power_series)、[log_of_formal_power_series](https://judge.yosupo.jp/problem/log_of_formal_power_series)、[exp_of_formal_power_series](https://judge.yosupo.jp/problem/exp_of_formal_power_series)、[pow_of_formal_power_series](https://judge.yosupo.jp/problem/pow_of_formal_power_series)、[sqrt_of_formal_power_series](https://judge.yosupo.jp/problem/sqrt_of_formal_power_series)、[division_of_polynomials](https://judge.yosupo.jp/problem/division_of_polynomials)、[polynomial_taylor_shift](https://judge.yosupo.jp/problem/polynomial_taylor_shift)、[multipoint_evaluation](https://judge.yosupo.jp/problem/multipoint_evaluation)、[polynomial_interpolation](https://judge.yosupo.jp/problem/polynomial_interpolation) |
-| [線形漸化式の高速化](../math/linear-recurrence-fast.md) | 整数論・代数 | [kth_term_of_linearly_recurrent_sequence](https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence)、[find_linear_recurrence](https://judge.yosupo.jp/problem/find_linear_recurrence)、[consecutive_terms_of_linear_recurrent_sequence](https://judge.yosupo.jp/problem/consecutive_terms_of_linear_recurrent_sequence) |
-| [ラグランジュ補間とべき乗和](../math/lagrange-interpolation.md) | 整数論・代数 | [shift_of_sampling_points_of_polynomial](https://judge.yosupo.jp/problem/shift_of_sampling_points_of_polynomial)、[sum_of_exponential_times_polynomial](https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial) |
-| [部分集合の高速ゼータ変換とメビウス変換](../comb/zeta-mobius-subset.md) | 数え上げ・確率・ゲーム | [bitwise_and_convolution](https://judge.yosupo.jp/problem/bitwise_and_convolution) |
-| [Z-algorithm](../string/z-algorithm.md) | 文字列 | [zalgorithm](https://judge.yosupo.jp/problem/zalgorithm) |
-| [回文の扱いと Manacher](../string/palindrome.md) | 文字列 | [enumerate_palindromes](https://judge.yosupo.jp/problem/enumerate_palindromes) |
-| [Aho-Corasick 法](../string/aho-corasick.md) | 文字列 | [aho_corasick](https://judge.yosupo.jp/problem/aho_corasick) |
-| [Suffix Array と LCP 配列](../string/suffix-array.md) | 文字列 | [suffixarray](https://judge.yosupo.jp/problem/suffixarray)、[number_of_substrings](https://judge.yosupo.jp/problem/number_of_substrings) |
-| [Suffix Automaton と発展の文字列アルゴリズム](../string/suffix-automaton.md) | 文字列 | [eertree](https://judge.yosupo.jp/problem/eertree)、[lyndon_factorization](https://judge.yosupo.jp/problem/lyndon_factorization)、[runenumerate](https://judge.yosupo.jp/problem/runenumerate) |
-| [偏角ソート](../geometry/argument-sort.md) | 幾何 | [sort_points_by_argument](https://judge.yosupo.jp/problem/sort_points_by_argument) |
-| [円と幾何の最適化](../geometry/circle-geometry.md) | 幾何 | [minimum_enclosing_circle](https://judge.yosupo.jp/problem/minimum_enclosing_circle) |
-| [凸包と凸多角形](../geometry/convex-hull.md) | 幾何 | [static_convex_hull](https://judge.yosupo.jp/problem/static_convex_hull) |
-| [発展の幾何](../geometry/advanced-geometry.md) | 幾何 | [closest_pair](https://judge.yosupo.jp/problem/closest_pair)、[furthest_pair](https://judge.yosupo.jp/problem/furthest_pair) |
+    | ページ | 分野 | Library Checker の問題 |
+    | --- | --- | --- |
+    | [最長増加部分列](../dp/lis.md) | 動的計画法 | [longest_increasing_subsequence](https://judge.yosupo.jp/problem/longest_increasing_subsequence) |
+    | [動的 DP](../dp/dynamic-dp.md) | 動的計画法 | [point_set_range_composite](https://judge.yosupo.jp/problem/point_set_range_composite) |
+    | [Convex Hull Trick と Li Chao Tree](../dp/cht.md) | 動的計画法 | [line_add_get_min](https://judge.yosupo.jp/problem/line_add_get_min)、[segment_add_get_min](https://judge.yosupo.jp/problem/segment_add_get_min) |
+    | [Monge 性による DP の高速化](../dp/monge.md) | 動的計画法 | [min_plus_convolution_convex_arbitrary](https://judge.yosupo.jp/problem/min_plus_convolution_convex_arbitrary)、[min_plus_convolution_convex_convex](https://judge.yosupo.jp/problem/min_plus_convolution_convex_convex) |
+    | [閉路の検出と復元](../graph/cycle-detection.md) | グラフ | [cycle_detection](https://judge.yosupo.jp/problem/cycle_detection)、[cycle_detection_undirected](https://judge.yosupo.jp/problem/cycle_detection_undirected) |
+    | [彩色数・最大独立集合・最大クリーク](../graph/chromatic-number.md) | グラフ | [chromatic_number](https://judge.yosupo.jp/problem/chromatic_number)、[maximum_independent_set](https://judge.yosupo.jp/problem/maximum_independent_set) |
+    | [ダイクストラ法](../graph/dijkstra.md) | グラフ | [shortest_path](https://judge.yosupo.jp/problem/shortest_path) |
+    | [補グラフ上の BFS](../graph/complement-graph-bfs.md) | グラフ | [connected_components_of_complement_graph](https://judge.yosupo.jp/problem/connected_components_of_complement_graph) |
+    | [K 番目の最短路](../graph/k-shortest-paths.md) | グラフ | [k_shortest_walk](https://judge.yosupo.jp/problem/k_shortest_walk) |
+    | [最小シュタイナー木](../graph/steiner-tree.md) | グラフ | [minimum_steiner_tree](https://judge.yosupo.jp/problem/minimum_steiner_tree) |
+    | [強連結成分分解（SCC）](../graph/scc.md) | グラフ | [scc](https://judge.yosupo.jp/problem/scc) |
+    | [2-SAT](../graph/two-sat.md) | グラフ | [two_sat](https://judge.yosupo.jp/problem/two_sat) |
+    | [最小全域木](../graph/minimum-spanning-tree.md) | グラフ | [minimum_spanning_tree](https://judge.yosupo.jp/problem/minimum_spanning_tree) |
+    | [橋・関節点・二重連結成分](../graph/lowlink.md) | グラフ | [two_edge_connected_components](https://judge.yosupo.jp/problem/two_edge_connected_components)、[biconnected_components](https://judge.yosupo.jp/problem/biconnected_components) |
+    | [特殊な最小全域木](../graph/spanning-tree-advanced.md) | グラフ | [directedmst](https://judge.yosupo.jp/problem/directedmst)、[manhattanmst](https://judge.yosupo.jp/problem/manhattanmst) |
+    | [行列木定理](../graph/matrix-tree-theorem.md) | グラフ | [counting_spanning_tree_undirected](https://judge.yosupo.jp/problem/counting_spanning_tree_undirected)、[counting_spanning_tree_directed](https://judge.yosupo.jp/problem/counting_spanning_tree_directed) |
+    | [次数による平方分割](../graph/degree-sqrt.md) | グラフ | [enumerate_triangles](https://judge.yosupo.jp/problem/enumerate_triangles)、[counting_c4](https://judge.yosupo.jp/problem/counting_c4) |
+    | [オイラー路（一筆書き）](../graph/euler-path.md) | グラフ | [eulerian_trail_directed](https://judge.yosupo.jp/problem/eulerian_trail_directed)、[eulerian_trail_undirected](https://judge.yosupo.jp/problem/eulerian_trail_undirected) |
+    | [二部マッチング](../graph/bipartite-matching.md) | グラフ | [bipartitematching](https://judge.yosupo.jp/problem/bipartitematching) |
+    | [最小費用流](../graph/min-cost-flow.md) | グラフ | [min_cost_b_flow](https://judge.yosupo.jp/problem/min_cost_b_flow)、[assignment](https://judge.yosupo.jp/problem/assignment) |
+    | [一般グラフのマッチング](../graph/general-matching.md) | グラフ | [general_matching](https://judge.yosupo.jp/problem/general_matching)、[general_weighted_matching](https://judge.yosupo.jp/problem/general_weighted_matching) |
+    | [木の直径と最遠点](../tree/tree-diameter.md) | 木 | [tree_diameter](https://judge.yosupo.jp/problem/tree_diameter) |
+    | [木の同型判定と木のハッシュ](../tree/tree-isomorphism.md) | 木 | [rooted_tree_isomorphism_classification](https://judge.yosupo.jp/problem/rooted_tree_isomorphism_classification) |
+    | [最小共通祖先（LCA）](../tree/lca.md) | 木 | [lca](https://judge.yosupo.jp/problem/lca) |
+    | [木の上のパスの判定と分解](../tree/tree-path.md) | 木 | [jump_on_tree](https://judge.yosupo.jp/problem/jump_on_tree) |
+    | [オイラーツアー](../tree/euler-tour.md) | 木 | [vertex_add_subtree_sum](https://judge.yosupo.jp/problem/vertex_add_subtree_sum) |
+    | [HL 分解](../tree/hld.md) | 木 | [vertex_set_path_composite](https://judge.yosupo.jp/problem/vertex_set_path_composite) |
+    | [Static Top Tree と木 DP の動的更新](../tree/static-top-tree.md) | 木 | [point_set_tree_path_composite_sum](https://judge.yosupo.jp/problem/point_set_tree_path_composite_sum) |
+    | [動的木](../tree/dynamic-tree.md) | 木 | [dynamic_tree_vertex_add_path_sum](https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_path_sum) |
+    | [重心分解](../tree/centroid-decomposition.md) | 木 | [frequency_table_of_tree_distance](https://judge.yosupo.jp/problem/frequency_table_of_tree_distance) |
+    | [比で親に併合する貪欲](../tree/tree-ratio-greedy.md) | 木 | [rooted_tree_topological_order_with_minimum_inversions](https://judge.yosupo.jp/problem/rooted_tree_topological_order_with_minimum_inversions) |
+    | [STL コンテナの使い分け](../ds/stl-containers.md) | データ構造 | [associative_array](https://judge.yosupo.jp/problem/associative_array) |
+    | [set・multiset・map の応用](../ds/ordered-set.md) | データ構造 | [predecessor_problem](https://judge.yosupo.jp/problem/predecessor_problem)、[double_ended_priority_queue](https://judge.yosupo.jp/problem/double_ended_priority_queue) |
+    | [単調スタックとスライド最小値](../ds/monotonic-stack.md) | データ構造 | [queue_operate_all_composite](https://judge.yosupo.jp/problem/queue_operate_all_composite)、[deque_operate_all_composite](https://judge.yosupo.jp/problem/deque_operate_all_composite) |
+    | [Union-Find](../ds/union-find.md) | データ構造 | [unionfind](https://judge.yosupo.jp/problem/unionfind) |
+    | [重み付き Union-Find](../ds/weighted-union-find.md) | データ構造 | [unionfind_with_potential](https://judge.yosupo.jp/problem/unionfind_with_potential)、[unionfind_with_potential_non_commutative_group](https://judge.yosupo.jp/problem/unionfind_with_potential_non_commutative_group) |
+    | [ロールバックできる Union-Find](../ds/rollback-union-find.md) | データ構造 | [dynamic_graph_vertex_add_component_sum](https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum) |
+    | [BIT（Fenwick Tree）](../ds/fenwick-tree.md) | データ構造 | [point_add_range_sum](https://judge.yosupo.jp/problem/point_add_range_sum)、[static_range_sum](https://judge.yosupo.jp/problem/static_range_sum) |
+    | [K 番目の値を求めるデータ構造](../ds/kth-element.md) | データ構造 | [ordered_set](https://judge.yosupo.jp/problem/ordered_set) |
+    | [セグメント木](../ds/segment-tree.md) | データ構造 | [point_set_range_composite](https://judge.yosupo.jp/problem/point_set_range_composite) |
+    | [値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md) | データ構造 | [point_set_range_composite_large_array](https://judge.yosupo.jp/problem/point_set_range_composite_large_array) |
+    | [遅延セグメント木](../ds/lazy-segment-tree.md) | データ構造 | [range_affine_range_sum](https://judge.yosupo.jp/problem/range_affine_range_sum)、[range_add_range_min](https://judge.yosupo.jp/problem/range_add_range_min)、[range_affine_point_get](https://judge.yosupo.jp/problem/range_affine_point_get) |
+    | [遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md) | データ構造 | [range_set_range_composite](https://judge.yosupo.jp/problem/range_set_range_composite) |
+    | [Sparse Table](../ds/sparse-table.md) | データ構造 | [staticrmq](https://judge.yosupo.jp/problem/staticrmq) |
+    | [Segment Tree Beats](../ds/segment-tree-beats.md) | データ構造 | [range_chmin_chmax_add_range_sum](https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum) |
+    | [クエリの先読み](../ds/offline-queries.md) | データ構造 | [static_range_count_distinct](https://judge.yosupo.jp/problem/static_range_count_distinct)、[static_range_frequency](https://judge.yosupo.jp/problem/static_range_frequency) |
+    | [平面走査](../ds/sweep-line-2d.md) | データ構造 | [rectangle_sum](https://judge.yosupo.jp/problem/rectangle_sum)、[area_of_union_of_rectangles](https://judge.yosupo.jp/problem/area_of_union_of_rectangles) |
+    | [Mo's algorithm](../ds/mo-algorithm.md) | データ構造 | [static_range_inversions_query](https://judge.yosupo.jp/problem/static_range_inversions_query) |
+    | [平方分割](../ds/sqrt-decomposition.md) | データ構造 | [static_range_mode_query](https://judge.yosupo.jp/problem/static_range_mode_query) |
+    | [CDQ 分割統治](../ds/cdq-divide-and-conquer.md) | データ構造 | [point_add_rectangle_sum](https://judge.yosupo.jp/problem/point_add_rectangle_sum) |
+    | [永続データ構造](../ds/persistent-data-structures.md) | データ構造 | [persistent_queue](https://judge.yosupo.jp/problem/persistent_queue)、[persistent_range_affine_range_sum](https://judge.yosupo.jp/problem/persistent_range_affine_range_sum) |
+    | [マージソート木](../ds/merge-sort-tree.md) | データ構造 | [static_range_sum_with_upper_bound](https://judge.yosupo.jp/problem/static_range_sum_with_upper_bound) |
+    | [Wavelet Matrix](../ds/wavelet-matrix.md) | データ構造 | [range_kth_smallest](https://judge.yosupo.jp/problem/range_kth_smallest) |
+    | [Binary Trie](../ds/binary-trie.md) | データ構造 | [set_xor_min](https://judge.yosupo.jp/problem/set_xor_min) |
+    | [平衡二分探索木と pb_ds の tree](../ds/balanced-bst.md) | データ構造 | [range_reverse_range_sum](https://judge.yosupo.jp/problem/range_reverse_range_sum)、[dynamic_sequence_range_affine_range_sum](https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum) |
+    | [フェルマーの小定理と指数の mod](../math/exponent-mod.md) | 整数論・代数 | [tetration_mod](https://judge.yosupo.jp/problem/tetration_mod) |
+    | [エラトステネスの篩](../math/sieve-eratosthenes.md) | 整数論・代数 | [enumerate_primes](https://judge.yosupo.jp/problem/enumerate_primes) |
+    | [大きな数の素数判定と素因数分解](../math/miller-rabin.md) | 整数論・代数 | [primality_test](https://judge.yosupo.jp/problem/primality_test)、[factorize](https://judge.yosupo.jp/problem/factorize) |
+    | [位数・原始根・離散対数](../math/multiplicative-order.md) | 整数論・代数 | [discrete_logarithm_mod](https://judge.yosupo.jp/problem/discrete_logarithm_mod)、[primitive_root](https://judge.yosupo.jp/problem/primitive_root)、[sqrt_mod](https://judge.yosupo.jp/problem/sqrt_mod)、[kth_root_mod](https://judge.yosupo.jp/problem/kth_root_mod) |
+    | [整数の平方根・K 乗根と累乗数](../math/integer-root.md) | 整数論・代数 | [kth_root_integer](https://judge.yosupo.jp/problem/kth_root_integer) |
+    | [商の列挙](../math/floor-quotient-enum.md) | 整数論・代数 | [enumerate_quotients](https://judge.yosupo.jp/problem/enumerate_quotients) |
+    | [乗法的関数の和と素数の個数](../math/multiplicative-function.md) | 整数論・代数 | [counting_primes](https://judge.yosupo.jp/problem/counting_primes)、[sum_of_totient_function](https://judge.yosupo.jp/problem/sum_of_totient_function)、[sum_of_multiplicative_function](https://judge.yosupo.jp/problem/sum_of_multiplicative_function) |
+    | [floor sum](../math/floor-sum.md) | 整数論・代数 | [sum_of_floor_of_linear](https://judge.yosupo.jp/problem/sum_of_floor_of_linear)、[min_of_mod_of_linear](https://judge.yosupo.jp/problem/min_of_mod_of_linear) |
+    | [Stern-Brocot 木と連分数](../math/stern-brocot.md) | 整数論・代数 | [stern_brocot_tree](https://judge.yosupo.jp/problem/stern_brocot_tree)、[rational_approximation](https://judge.yosupo.jp/problem/rational_approximation) |
+    | [行列累乗](../math/matrix-power.md) | 整数論・代数 | [matrix_product](https://judge.yosupo.jp/problem/matrix_product)、[pow_of_matrix](https://judge.yosupo.jp/problem/pow_of_matrix) |
+    | [掃き出し法](../math/gaussian-elimination.md) | 整数論・代数 | [system_of_linear_equations](https://judge.yosupo.jp/problem/system_of_linear_equations)、[system_of_linear_equations_mod_2](https://judge.yosupo.jp/problem/system_of_linear_equations_mod_2)、[matrix_rank](https://judge.yosupo.jp/problem/matrix_rank)、[matrix_rank_mod_2](https://judge.yosupo.jp/problem/matrix_rank_mod_2)、[inverse_matrix](https://judge.yosupo.jp/problem/inverse_matrix) |
+    | [XOR 基底](../math/xor-basis.md) | 整数論・代数 | [intersection_of_f2_vector_spaces](https://judge.yosupo.jp/problem/intersection_of_f2_vector_spaces) |
+    | [行列式](../math/determinant.md) | 整数論・代数 | [matrix_det](https://judge.yosupo.jp/problem/matrix_det)、[matrix_det_mod_2](https://judge.yosupo.jp/problem/matrix_det_mod_2)、[matrix_det_arbitrary_mod](https://judge.yosupo.jp/problem/matrix_det_arbitrary_mod) |
+    | [畳み込みの使い方](../math/convolution-ntt.md) | 整数論・代数 | [convolution_mod](https://judge.yosupo.jp/problem/convolution_mod)、[wildcard_pattern_matching](https://judge.yosupo.jp/problem/wildcard_pattern_matching) |
+    | [FFT・NTT の仕組みと任意 mod の畳み込み](../math/fft-ntt.md) | 整数論・代数 | [convolution_mod](https://judge.yosupo.jp/problem/convolution_mod)、[convolution_mod_1000000007](https://judge.yosupo.jp/problem/convolution_mod_1000000007)、[convolution_mod_2_64](https://judge.yosupo.jp/problem/convolution_mod_2_64) |
+    | [XOR 畳み込み](../math/hadamard-transform.md) | 整数論・代数 | [bitwise_xor_convolution](https://judge.yosupo.jp/problem/bitwise_xor_convolution) |
+    | [形式的冪級数と多項式の演算](../math/fps-basics.md) | 整数論・代数 | [inv_of_formal_power_series](https://judge.yosupo.jp/problem/inv_of_formal_power_series)、[log_of_formal_power_series](https://judge.yosupo.jp/problem/log_of_formal_power_series)、[exp_of_formal_power_series](https://judge.yosupo.jp/problem/exp_of_formal_power_series)、[pow_of_formal_power_series](https://judge.yosupo.jp/problem/pow_of_formal_power_series)、[sqrt_of_formal_power_series](https://judge.yosupo.jp/problem/sqrt_of_formal_power_series)、[division_of_polynomials](https://judge.yosupo.jp/problem/division_of_polynomials)、[polynomial_taylor_shift](https://judge.yosupo.jp/problem/polynomial_taylor_shift)、[multipoint_evaluation](https://judge.yosupo.jp/problem/multipoint_evaluation)、[polynomial_interpolation](https://judge.yosupo.jp/problem/polynomial_interpolation) |
+    | [線形漸化式の高速化](../math/linear-recurrence-fast.md) | 整数論・代数 | [kth_term_of_linearly_recurrent_sequence](https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence)、[find_linear_recurrence](https://judge.yosupo.jp/problem/find_linear_recurrence)、[consecutive_terms_of_linear_recurrent_sequence](https://judge.yosupo.jp/problem/consecutive_terms_of_linear_recurrent_sequence) |
+    | [ラグランジュ補間とべき乗和](../math/lagrange-interpolation.md) | 整数論・代数 | [shift_of_sampling_points_of_polynomial](https://judge.yosupo.jp/problem/shift_of_sampling_points_of_polynomial)、[sum_of_exponential_times_polynomial](https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial) |
+    | [部分集合の高速ゼータ変換とメビウス変換](../comb/zeta-mobius-subset.md) | 数え上げ・確率・ゲーム | [bitwise_and_convolution](https://judge.yosupo.jp/problem/bitwise_and_convolution) |
+    | [Z-algorithm](../string/z-algorithm.md) | 文字列 | [zalgorithm](https://judge.yosupo.jp/problem/zalgorithm) |
+    | [回文の扱いと Manacher](../string/palindrome.md) | 文字列 | [enumerate_palindromes](https://judge.yosupo.jp/problem/enumerate_palindromes) |
+    | [Aho-Corasick 法](../string/aho-corasick.md) | 文字列 | [aho_corasick](https://judge.yosupo.jp/problem/aho_corasick) |
+    | [Suffix Array と LCP 配列](../string/suffix-array.md) | 文字列 | [suffixarray](https://judge.yosupo.jp/problem/suffixarray)、[number_of_substrings](https://judge.yosupo.jp/problem/number_of_substrings) |
+    | [Suffix Automaton と発展の文字列アルゴリズム](../string/suffix-automaton.md) | 文字列 | [eertree](https://judge.yosupo.jp/problem/eertree)、[lyndon_factorization](https://judge.yosupo.jp/problem/lyndon_factorization)、[runenumerate](https://judge.yosupo.jp/problem/runenumerate) |
+    | [偏角ソート](../geometry/argument-sort.md) | 幾何 | [sort_points_by_argument](https://judge.yosupo.jp/problem/sort_points_by_argument) |
+    | [円と幾何の最適化](../geometry/circle-geometry.md) | 幾何 | [minimum_enclosing_circle](https://judge.yosupo.jp/problem/minimum_enclosing_circle) |
+    | [凸包と凸多角形](../geometry/convex-hull.md) | 幾何 | [static_convex_hull](https://judge.yosupo.jp/problem/static_convex_hull) |
+    | [発展の幾何](../geometry/advanced-geometry.md) | 幾何 | [closest_pair](https://judge.yosupo.jp/problem/closest_pair)、[furthest_pair](https://judge.yosupo.jp/problem/furthest_pair) |
 
-<!-- textlint-enable -->
-<!-- gen:end verify-table -->
+    <!-- textlint-enable -->
+    <!-- gen:end verify-table -->
+
+??? note "表の読み方"
+
+    - **1 つのページに問題が複数ある**：確かめられる使い方がそれぞれ違う。たとえば遅延セグメント木の `range_affine_range_sum` は区間のアフィン変換と区間和、`range_add_range_min` は区間加算と区間最小値で、載せる演算の違う 2 種類を確かめられる
+    - **同じ問題が複数のページにある**：`point_set_range_composite` はセグメント木と動的 DP の両方の行にある。非可換の演算（1 次関数の合成）を載せるので、演算の左右を取り違えたバグが出る
 
 ## 確認問題 {#quiz}
 

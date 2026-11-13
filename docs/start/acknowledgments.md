@@ -49,7 +49,7 @@ updated: 2026-11-13
 <!-- gen:begin acknowledgments -->
 <!-- textlint-disable -->
 
-参考の節に挙げた書き手の名義は 219、資料は 23 件である（全ページの参考の節から数えた）。
+参考の節に挙げた書き手の名義は 219、資料は 22 件である（全ページの参考の節から数えた）。
 
 ### 参考に多く挙げた書き手 {#main-writers}
 
@@ -100,7 +100,6 @@ updated: 2026-11-13
 | competitive-verifier | `competitive-verifier.github.io` | 1 |
 | Creative Commons | `creativecommons.org` | 1 |
 | CSES | `cses.fi` | 1 |
-| GCC Bugzilla | `gcc.gnu.org` | 1 |
 | HackMD | `hackmd.io` | 1 |
 | KACTL | `github.com/kth-competitive-programming` | 1 |
 | Kyopro Encyclopedia of Algorithms | `noshi91.github.io` | 1 |

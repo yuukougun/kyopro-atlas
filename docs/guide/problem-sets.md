@@ -36,11 +36,15 @@ updated: 2026-11-13
 別名：典型90問・EDPC・TDPC・NDPC・鉄則本の問題集・アルゴリズムと数学・ACL Practice・AAL・ADT・AWC・NoviSteps・最近の ABC の対応表
 <!-- textlint-enable -->
 
-問題集と練習用コンテストの案内は、過去の ABC 以外の練習の材料を探すときと、問題集で解けなかった問題の手法をこの教材で引くときに使う。問題集は AtCoder の上にコンテストの形で置かれ、過去問と同じように提出して判定を受けられる。解き方の進め方（解説を見るまでの時間・復習）は[精進の仕方](../guide/practice-method.md)、レートや ABC の形式は [AtCoder の仕組み](../start/atcoder-system.md)に任せる。
+問題集は AtCoder の上にコンテストの形で置かれ、過去問と同じように提出して判定を受けられる。解き方の進め方（解説を見るまでの時間・復習）は[精進の仕方](../guide/practice-method.md)、レートや ABC の形式は [AtCoder の仕組み](../start/atcoder-system.md)に任せる。
 
 ## 問題集の一覧 {#collections}
 
-問題集の多くには、AtCoder Problems の difficulty（その問題を半々の確率で解けるレート）が付かない。difficulty は参加者のレートとコンテストの結果から推定する値で、レートの変わらない問題集の問題にはほとんど付かない。そこで次の表の「レベルの目安」は、典型90問は作者の★から、ほかは本文でその問題集の問題を載せたページの帯から書いた。本文でまだ使っていない問題集は、題名から分かる分野だけを書いた。
+問題集の問題には difficulty がほとんど付かないので、「レベルの目安」は、典型90問は作者の★から、ほかは本文でその問題集の問題を載せたページの帯から書いた。
+
+??? note "difficulty が付かない理由"
+
+    difficulty（その問題を半々の確率で解けるレート）は、参加者のレートとコンテストの結果から推定する値である。レートの変わらない問題集の問題には、推定の元になる結果がない。本文でまだ使っていない問題集は、題名から分かる分野だけを書いた。
 
 | 問題集（contest id） | 問題数 | 中身 | レベルの目安 |
 | --- | ---: | --- | --- |
@@ -57,18 +61,31 @@ updated: 2026-11-13
 | AtCoder Typical Contest 001・002（atc001・atc002） | 3・3 | DFS・Union-Find・FFT と、BFS・繰り返し二乗法・最適二分探索木 | 基本の確かめ（atc002 C の満点は発展） |
 | AtCoder Beginners Selection（abs） | 11 | ABC の A〜C の過去問 10 問と練習問題 1 問の入門 | この教材の範囲より易しい |
 
-表の左の列のリンクは、このページの[問題集の問題 → ページ](#sets-to-pages)の表の、その問題集の部分へ飛ぶ。リンクのない問題集は、本文の問題の一覧にまだ載っていない。
-
 目的ごとの選び方の目安は次のとおりである。
 
-- **典型を一通り知りたい**：典型90問の★5〜★7（水〜黄）を順に解く。1 問ごとに考察の型が違うので、[知識マップ](../guide/knowledge-map.md#by-field)で分野の位置を確かめながら進めるとよい。
-- **DP を固めたい**：EDPC で基本形を一通り解き、TDPC・NDPC へ進む。EDPC の各問題がどのページの例題かは[EDPC の表](#problem-sets-dp)にある。
-- **ACL の使い方を覚えたい**：ACL Practice を機能ごとに解き、各機能のページの「ACL では」の囲みと見比べる（[ライブラリの確かめ用の問題集](#verify-sets)）。
-- **本と一緒に進めたい**：鉄則本とアルゴリズムと数学の演習問題集は、本の章の順に並ぶ。本の例題を自分で書いて提出して確かめる。
+<div class="grid cards" markdown>
+
+- **典型を一通り知りたい**
+
+    典型90問の★5〜★7（水〜黄）を順に解く。1 問ごとに考察の型が違うので、[知識マップ](../guide/knowledge-map.md#by-field)で分野の位置を確かめながら進めるとよい。
+
+- **DP を固めたい**
+
+    EDPC で基本形を一通り解き、TDPC・NDPC へ進む。各問題がどのページの例題かは[EDPC の表](#problem-sets-dp)にある。
+
+- **ACL の使い方を覚えたい**
+
+    ACL Practice を機能ごとに解き、各機能のページの「ACL では」の囲みと見比べる（[ライブラリの確かめ用の問題集](#verify-sets)）。
+
+- **本と一緒に進めたい**
+
+    鉄則本とアルゴリズムと数学の演習問題集は、本の章の順に並ぶ。本の例題を自分で書いて提出して確かめる。
+
+</div>
 
 ## 典型90問の★とレベル {#typical90-stars}
 
-典型90問の問題名に付く★は、作者が問題ごとに付けた難しさで、★ごとに difficulty の範囲が決まっている。典型90問には AtCoder Problems の difficulty が付かないので、この教材では★を帯の根拠にする。
+典型90問の問題名に付く★は、作者が問題ごとに付けた難しさで、★ごとに difficulty の範囲が決まっている。この教材では★を帯の根拠にする。
 
 | ★ | difficulty の範囲 | この教材の帯 | 問題数 |
 | --- | --- | --- | ---: |
@@ -81,17 +98,22 @@ updated: 2026-11-13
 
 - difficulty の範囲は作者の告知記事の表、問題数は AtCoder Problems の問題名から数えた値である。★1（〜149）の問題はない。
 - ★の範囲は difficulty の範囲なので、difficulty と同じく「★5 の問題は、レート 1200〜1599 の人が半々の確率で解ける程度」と読める。
-- 作者の勧める取り組み方は 4 つある。解法が分かったら AC まで実装する。1 日考えても解けなければ解説を読む。解説にある類題をいくつか解く。本番のコンテストにも出て、身につけた典型を使ってみる。解説は作者の GitHub のリポジトリに画像で置かれている。
+- 解説は作者の GitHub のリポジトリに画像で置かれている（[参考](#references)）。
 - 本文で例題・練習に使った典型90問は、[典型90問の表](#problem-sets-typical90)に問題番号の順で並ぶ。
+
+??? note "作者の勧める取り組み方"
+
+    - 解法が分かったら、AC まで実装する。
+    - 1 日考えても解けなければ、解説を読む。
+    - 解説にある類題をいくつか解く。
+    - 本番のコンテストにも出て、身につけた典型を使ってみる。
 
 ## 最近の ABC → ページ {#recent-abc}
 
-次の表は、abc451〜abc480 の D〜G の 120 問について、第三者の解説で使われた手法を確かめ、この教材のページに対応させたものである。解いた（解けなかった）最近の ABC の問題から、復習するページを引くのに使う。
+abc451〜abc480 の D〜G の 120 問を、使う手法のページに対応させた表である。解けなかった最近の ABC の問題から、復習するページを引くのに使う。
 
-- 「位置」は問題の記号、「diff」は AtCoder Problems の difficulty である。最近の ABC では、おおよそ D が基礎、E が水、F が青、G が黄の帯に当たる（[色別ロードマップ](../guide/roadmap.md)）。
-- 「使う手法のページ」の › の後は、そのページの中で特に使う節の題である。
-- 位置ごとにどの手法が多いかの集計は、[色別ロードマップ](../guide/roadmap.md#recent-positions)にある。
-- この表は、本文に載せていない問題も手法のページに対応させている。本文の例題・練習・力試しに載せた問題は、古い ABC や ARC・AGC も含めて[問題番号の索引](problem-index.md#abc)で引ける。
+- 「diff」は AtCoder Problems の difficulty、› の後はそのページの中で特に使う節である。
+- 位置ごとの集計は[色別ロードマップ](../guide/roadmap.md#recent-positions)、本文に載せた古い ABC や ARC・AGC の問題は[問題番号の索引](problem-index.md#abc)で引ける。
 
 <!-- gen:begin recent-abc -->
 <!-- textlint-disable -->
@@ -224,13 +246,10 @@ updated: 2026-11-13
 
 ## 問題集の問題 → ページ {#sets-to-pages}
 
-次の表は、本文の例題・練習・力試しに載せた問題集の問題を問題集ごとに並べ、載せたページと役割を示したものである。問題集で解けなかった問題から、その手法のページを引くのに使う。
+本文の例題・練習・力試しに載せた問題集の問題を、問題集ごとに並べた表である。問題集で解けなかった問題から、その手法のページを引くのに使う。
 
-- 「ページ（役割）」の役割は、そのページでの扱い（例題は方針と解法の詳細があり、練習・力試しは問題の一覧だけ）である。例題として載せたページから読むとよい。
-- 問題集の difficulty は付かないので、diff の列はほとんど「—」になる。典型90問は題名の★を見る。
-- 問題集の後に、ABC・ARC・AGC 以外の本番のコンテスト（企業の名前の付いたコンテストなど）の問題も、コンテストごとに並ぶ。
-- 表は本文の問題の一覧から自動で作るので、ページが増えると行も増える。
-- 同じ問題は、[問題番号の索引](problem-index.md#sets)の問題集とそのほかのコンテストの節にもある。索引は ABC・ARC・AGC を含む全問題を問題番号の順に並べ、diff の列を持たない。
+- 「ページ（役割）」は、例題として載せたページ（方針と解法の詳細がある）から読むとよい。diff の列はほとんど「—」なので、典型90問は題名の★を見る。
+- 問題集の後に、ABC・ARC・AGC 以外の本番のコンテスト（企業の名前の付いたコンテストなど）の問題も並ぶ。同じ問題は[問題番号の索引](problem-index.md#sets)にもある。
 
 <!-- gen:begin problem-sets -->
 <!-- textlint-disable -->
@@ -398,162 +417,164 @@ updated: 2026-11-13
 | アルゴ数学 057. Domino Tiling | — | [行列累乗](../math/matrix-power.md#practice)（練習） |
 | アルゴ数学 097. Primes in an Interval | — | [区間篩](../math/segmented-sieve.md#practice)（練習） |
 
-### NYC2015 {#problem-sets-NYC2015}
+??? note "そのほかのコンテスト（25 個）"
 
-| 問題 | diff | ページ（役割） |
-| --- | --- | --- |
-| NYC2015 E. ひも | — | [ラベル付き木の数え上げ](../comb/cayley-pruefer.md#practice)（練習） |
+    ### NYC2015 {#problem-sets-NYC2015}
 
-### ABL {#problem-sets-abl}
+    | 問題 | diff | ページ（役割） |
+    | --- | --- | --- |
+    | NYC2015 E. ひも | — | [ラベル付き木の数え上げ](../comb/cayley-pruefer.md#practice)（練習） |
 
-| 問題 | diff | ページ（役割） |
-| --- | --- | --- |
-| ABL D. Flat Subsequence | 1283 | [値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md#practice)（練習） |
-| ABL E. Replace Digits | 1706 | [遅延セグメント木](../ds/lazy-segment-tree.md#practice)（練習） |
+    ### ABL {#problem-sets-abl}
 
-### ACL1 {#problem-sets-acl1}
+    | 問題 | diff | ページ（役割） |
+    | --- | --- | --- |
+    | ABL D. Flat Subsequence | 1283 | [値を添字にする BIT・セグメント木](../ds/segment-tree-on-values.md#practice)（練習） |
+    | ABL E. Replace Digits | 1706 | [遅延セグメント木](../ds/lazy-segment-tree.md#practice)（練習） |
 
-| 問題 | diff | ページ（役割） |
-| --- | --- | --- |
-| ACL1 B. Sum is Multiple | 1785 | [中国剰余定理](../math/crt.md#acl1_b)（例題）、[約数の個数の上界と高度合成数](../math/divisor-count-bound.md#practice)（練習）、[拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md#challenge)（力試し） |
+    ### ACL1 {#problem-sets-acl1}
 
-### BITFLYER2018-FINAL {#problem-sets-bitflyer2018-final}
+    | 問題 | diff | ページ（役割） |
+    | --- | --- | --- |
+    | ACL1 B. Sum is Multiple | 1785 | [中国剰余定理](../math/crt.md#acl1_b)（例題）、[約数の個数の上界と高度合成数](../math/divisor-count-bound.md#practice)（練習）、[拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md#challenge)（力試し） |
 
-| 問題 | diff | ページ（役割） |
-| --- | --- | --- |
-| BITFLYER2018-FINAL D. 数列 XOR | — | [掃き出し法](../math/gaussian-elimination.md#practice)（練習） |
+    ### BITFLYER2018-FINAL {#problem-sets-bitflyer2018-final}
 
-### CHOKUDAI_S001 {#problem-sets-chokudai_S001}
+    | 問題 | diff | ページ（役割） |
+    | --- | --- | --- |
+    | BITFLYER2018-FINAL D. 数列 XOR | — | [掃き出し法](../math/gaussian-elimination.md#practice)（練習） |
 
-| 問題 | diff | ページ（役割） |
-| --- | --- | --- |
-| CHOKUDAI_S001 J. 転倒数 | — | [転倒数](../ds/inversion-number.md#chokudai_S001_j)（例題）、[分割統治](../basics/divide-and-conquer.md#practice)（練習） |
+    ### CHOKUDAI_S001 {#problem-sets-chokudai_S001}
 
-### CODE-FESTIVAL-2017-QUALB {#problem-sets-code-festival-2017-qualb}
+    | 問題 | diff | ページ（役割） |
+    | --- | --- | --- |
+    | CHOKUDAI_S001 J. 転倒数 | — | [転倒数](../ds/inversion-number.md#chokudai_S001_j)（例題）、[分割統治](../basics/divide-and-conquer.md#practice)（練習） |
 
-| 問題 | diff | ページ（役割） |
-| --- | --- | --- |
-| CODE-FESTIVAL-2017-QUALB C. 3 Steps | 1883 | [二部グラフ判定](../graph/bipartite-graph.md#challenge)（力試し） |
+    ### CODE-FESTIVAL-2017-QUALB {#problem-sets-code-festival-2017-qualb}
 
-### CODE-THANKS-FESTIVAL-2017 {#problem-sets-code-thanks-festival-2017}
+    | 問題 | diff | ページ（役割） |
+    | --- | --- | --- |
+    | CODE-FESTIVAL-2017-QUALB C. 3 Steps | 1883 | [二部グラフ判定](../graph/bipartite-graph.md#challenge)（力試し） |
 
-| 問題 | diff | ページ（役割） |
-| --- | --- | --- |
-| CODE-THANKS-FESTIVAL-2017 F. Limited Xor Subset | — | [掃き出し法](../math/gaussian-elimination.md#practice)（練習） |
-| CODE-THANKS-FESTIVAL-2017 H. Union Sets | — | [部分永続 Union-Find](../ds/partially-persistent-union-find.md#code_thanks_festival_2017_h)（例題）、[並列二分探索](../ds/parallel-binary-search.md#practice)（練習） |
+    ### CODE-THANKS-FESTIVAL-2017 {#problem-sets-code-thanks-festival-2017}
 
-### DDCC2016-QUAL {#problem-sets-ddcc2016-qual}
+    | 問題 | diff | ページ（役割） |
+    | --- | --- | --- |
+    | CODE-THANKS-FESTIVAL-2017 F. Limited Xor Subset | — | [掃き出し法](../math/gaussian-elimination.md#practice)（練習） |
+    | CODE-THANKS-FESTIVAL-2017 H. Union Sets | — | [部分永続 Union-Find](../ds/partially-persistent-union-find.md#code_thanks_festival_2017_h)（例題）、[並列二分探索](../ds/parallel-binary-search.md#practice)（練習） |
 
-| 問題 | diff | ページ（役割） |
-| --- | --- | --- |
-| DDCC2016-QUAL D. 道路網 | — | [重心分解](../tree/centroid-decomposition.md#challenge)（力試し） |
+    ### DDCC2016-QUAL {#problem-sets-ddcc2016-qual}
 
-### DIVERTA2019 {#problem-sets-diverta2019}
+    | 問題 | diff | ページ（役割） |
+    | --- | --- | --- |
+    | DDCC2016-QUAL D. 道路網 | — | [重心分解](../tree/centroid-decomposition.md#challenge)（力試し） |
 
-| 問題 | diff | ページ（役割） |
-| --- | --- | --- |
-| DIVERTA2019 D. DivRem Number | 1098 | [約数列挙と素数判定](../math/divisor-enum.md#practice)（練習） |
+    ### DIVERTA2019 {#problem-sets-diverta2019}
 
-### DONUTS-2015 {#problem-sets-donuts-2015}
+    | 問題 | diff | ページ（役割） |
+    | --- | --- | --- |
+    | DIVERTA2019 D. DivRem Number | 1098 | [約数列挙と素数判定](../math/divisor-enum.md#practice)（練習） |
 
-| 問題 | diff | ページ（役割） |
-| --- | --- | --- |
-| DONUTS-2015 C. 行列のできるドーナツ屋 | 1661 | [単調スタックとスライド最小値](../ds/monotonic-stack.md#practice)（練習） |
+    ### DONUTS-2015 {#problem-sets-donuts-2015}
 
-### DWACON2018-PRELIMS {#problem-sets-dwacon2018-prelims}
+    | 問題 | diff | ページ（役割） |
+    | --- | --- | --- |
+    | DONUTS-2015 C. 行列のできるドーナツ屋 | 1661 | [単調スタックとスライド最小値](../ds/monotonic-stack.md#practice)（練習） |
 
-| 問題 | diff | ページ（役割） |
-| --- | --- | --- |
-| DWACON2018-PRELIMS C. Kill/Death | — | [整数の分割と分割数](../comb/partition-number.md#practice)（練習） |
-| DWACON2018-PRELIMS E. ニワンゴくんの家探し | — | [木の重心](../tree/tree-centroid.md#practice)（練習） |
+    ### DWACON2018-PRELIMS {#problem-sets-dwacon2018-prelims}
 
-### EXAWIZARDS2019 {#problem-sets-exawizards2019}
+    | 問題 | diff | ページ（役割） |
+    | --- | --- | --- |
+    | DWACON2018-PRELIMS C. Kill/Death | — | [整数の分割と分割数](../comb/partition-number.md#practice)（練習） |
+    | DWACON2018-PRELIMS E. ニワンゴくんの家探し | — | [木の重心](../tree/tree-centroid.md#practice)（練習） |
 
-| 問題 | diff | ページ（役割） |
-| --- | --- | --- |
-| EXAWIZARDS2019 D. Modulo Operations | 2075 | [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md#practice)（練習） |
+    ### EXAWIZARDS2019 {#problem-sets-exawizards2019}
 
-### HHKB2020 {#problem-sets-hhkb2020}
+    | 問題 | diff | ページ（役割） |
+    | --- | --- | --- |
+    | EXAWIZARDS2019 D. Modulo Operations | 2075 | [挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md#practice)（練習） |
 
-| 問題 | diff | ページ（役割） |
-| --- | --- | --- |
-| HHKB2020 C. Neq Min | 352 | [計算量の見積もり](../basics/complexity-estimation.md#practice)（練習） |
-| HHKB2020 F. Random Max | 2691 | [期待値と確率の変換](../comb/expectation-tail-sum.md#challenge)（力試し） |
+    ### HHKB2020 {#problem-sets-hhkb2020}
 
-### JAG2013SUMMER-DAY4 {#problem-sets-jag2013summer-day4}
+    | 問題 | diff | ページ（役割） |
+    | --- | --- | --- |
+    | HHKB2020 C. Neq Min | 352 | [計算量の見積もり](../basics/complexity-estimation.md#practice)（練習） |
+    | HHKB2020 F. Random Max | 2691 | [期待値と確率の変換](../comb/expectation-tail-sum.md#challenge)（力試し） |
 
-| 問題 | diff | ページ（役割） |
-| --- | --- | --- |
-| JAG2013SUMMER-DAY4 F. Graph Automata Player | — | [掃き出し法](../math/gaussian-elimination.md#practice)（練習） |
+    ### JAG2013SUMMER-DAY4 {#problem-sets-jag2013summer-day4}
 
-### JOI2020YO2 {#problem-sets-joi2020yo2}
+    | 問題 | diff | ページ（役割） |
+    | --- | --- | --- |
+    | JAG2013SUMMER-DAY4 F. Graph Automata Player | — | [掃き出し法](../math/gaussian-elimination.md#practice)（練習） |
 
-| 問題 | diff | ページ（役割） |
-| --- | --- | --- |
-| JOI2020YO2 E. じゃんけん式 (Rock-Scissors-Paper Expression) | — | [構文解析](../misc/parsing.md#practice)（練習） |
+    ### JOI2020YO2 {#problem-sets-joi2020yo2}
 
-### KEYENCE2019 {#problem-sets-keyence2019}
+    | 問題 | diff | ページ（役割） |
+    | --- | --- | --- |
+    | JOI2020YO2 E. じゃんけん式 (Rock-Scissors-Paper Expression) | — | [構文解析](../misc/parsing.md#practice)（練習） |
 
-| 問題 | diff | ページ（役割） |
-| --- | --- | --- |
-| KEYENCE2019 E. Connecting Cities | 2623 | [特殊な最小全域木](../graph/spanning-tree-advanced.md#practice)（練習）、[分割統治](../basics/divide-and-conquer.md#challenge)（力試し）、[重心分解](../tree/centroid-decomposition.md#challenge)（力試し） |
+    ### KEYENCE2019 {#problem-sets-keyence2019}
 
-### KEYENCE2020 {#problem-sets-keyence2020}
+    | 問題 | diff | ページ（役割） |
+    | --- | --- | --- |
+    | KEYENCE2019 E. Connecting Cities | 2623 | [特殊な最小全域木](../graph/spanning-tree-advanced.md#practice)（練習）、[分割統治](../basics/divide-and-conquer.md#challenge)（力試し）、[重心分解](../tree/centroid-decomposition.md#challenge)（力試し） |
 
-| 問題 | diff | ページ（役割） |
-| --- | --- | --- |
-| KEYENCE2020 C. Subarray Sum | 625 | [構築問題の考え方](../thinking/construction.md#practice)（練習） |
+    ### KEYENCE2020 {#problem-sets-keyence2020}
 
-### NIKKEI2019-FINAL {#problem-sets-nikkei2019-final}
+    | 問題 | diff | ページ（役割） |
+    | --- | --- | --- |
+    | KEYENCE2020 C. Subarray Sum | 625 | [構築問題の考え方](../thinking/construction.md#practice)（練習） |
 
-| 問題 | diff | ページ（役割） |
-| --- | --- | --- |
-| NIKKEI2019-FINAL G. Greatest Journey | — | [重心分解](../tree/centroid-decomposition.md#challenge)（力試し） |
+    ### NIKKEI2019-FINAL {#problem-sets-nikkei2019-final}
 
-### PANASONIC2020 {#problem-sets-panasonic2020}
+    | 問題 | diff | ページ（役割） |
+    | --- | --- | --- |
+    | NIKKEI2019-FINAL G. Greatest Journey | — | [重心分解](../tree/centroid-decomposition.md#challenge)（力試し） |
 
-| 問題 | diff | ページ（役割） |
-| --- | --- | --- |
-| PANASONIC2020 C. Sqrt Inequality | 701 | [整数の平方根・K 乗根と累乗数](../math/integer-root.md#practice)（練習） |
+    ### PANASONIC2020 {#problem-sets-panasonic2020}
 
-### PRACTICE {#problem-sets-practice}
+    | 問題 | diff | ページ（役割） |
+    | --- | --- | --- |
+    | PANASONIC2020 C. Sqrt Inequality | 701 | [整数の平方根・K 乗根と累乗数](../math/integer-root.md#practice)（練習） |
 
-| 問題 | diff | ページ（役割） |
-| --- | --- | --- |
-| PRACTICE B. Interactive Sorting | — | [インタラクティブ問題](../misc/interactive.md#practice)（練習） |
+    ### PRACTICE {#problem-sets-practice}
 
-### SOUNDHOUND2018-SUMMER-QUAL {#problem-sets-soundhound2018-summer-qual}
+    | 問題 | diff | ページ（役割） |
+    | --- | --- | --- |
+    | PRACTICE B. Interactive Sorting | — | [インタラクティブ問題](../misc/interactive.md#practice)（練習） |
 
-| 問題 | diff | ページ（役割） |
-| --- | --- | --- |
-| SOUNDHOUND2018-SUMMER-QUAL D. Saving Snuuk | 1637 | [ダイクストラ法](../graph/dijkstra.md#challenge)（力試し） |
+    ### SOUNDHOUND2018-SUMMER-QUAL {#problem-sets-soundhound2018-summer-qual}
 
-### SUMITRUST2019 {#problem-sets-sumitrust2019}
+    | 問題 | diff | ページ（役割） |
+    | --- | --- | --- |
+    | SOUNDHOUND2018-SUMMER-QUAL D. Saving Snuuk | 1637 | [ダイクストラ法](../graph/dijkstra.md#challenge)（力試し） |
 
-| 問題 | diff | ページ（役割） |
-| --- | --- | --- |
-| SUMITRUST2019 D. Lucky PIN | 838 | [全探索の設計](../basics/brute-force.md#practice)（練習） |
+    ### SUMITRUST2019 {#problem-sets-sumitrust2019}
 
-### YAHOO-PROCON2018-FINAL {#problem-sets-yahoo-procon2018-final}
+    | 問題 | diff | ページ（役割） |
+    | --- | --- | --- |
+    | SUMITRUST2019 D. Lucky PIN | 838 | [全探索の設計](../basics/brute-force.md#practice)（練習） |
 
-| 問題 | diff | ページ（役割） |
-| --- | --- | --- |
-| YAHOO-PROCON2018-FINAL A. Uncommon | — | [約数・倍数のゼータ変換とメビウス変換](../comb/zeta-mobius-divisor.md#practice)（練習） |
-| YAHOO-PROCON2018-FINAL C. 木の問題 | — | [重心分解](../tree/centroid-decomposition.md#practice)（練習） |
+    ### YAHOO-PROCON2018-FINAL {#problem-sets-yahoo-procon2018-final}
 
-### YAHOO-PROCON2019-QUAL {#problem-sets-yahoo-procon2019-qual}
+    | 問題 | diff | ページ（役割） |
+    | --- | --- | --- |
+    | YAHOO-PROCON2018-FINAL A. Uncommon | — | [約数・倍数のゼータ変換とメビウス変換](../comb/zeta-mobius-divisor.md#practice)（練習） |
+    | YAHOO-PROCON2018-FINAL C. 木の問題 | — | [重心分解](../tree/centroid-decomposition.md#practice)（練習） |
 
-| 問題 | diff | ページ（役割） |
-| --- | --- | --- |
-| YAHOO-PROCON2019-QUAL D. Ears | 1998 | [フェーズを状態に持つ DP](../dp/dp-phase.md#practice)（練習） |
-| YAHOO-PROCON2019-QUAL E. Odd Subrectangles | 2585 | [掃き出し法](../math/gaussian-elimination.md#challenge)（力試し） |
+    ### YAHOO-PROCON2019-QUAL {#problem-sets-yahoo-procon2019-qual}
 
-### ZONE2021 {#problem-sets-zone2021}
+    | 問題 | diff | ページ（役割） |
+    | --- | --- | --- |
+    | YAHOO-PROCON2019-QUAL D. Ears | 1998 | [フェーズを状態に持つ DP](../dp/dp-phase.md#practice)（練習） |
+    | YAHOO-PROCON2019-QUAL E. Odd Subrectangles | 2585 | [掃き出し法](../math/gaussian-elimination.md#challenge)（力試し） |
 
-| 問題 | diff | ページ（役割） |
-| --- | --- | --- |
-| ZONE2021 E. Sneaking | 1624 | [状態を頂点にする](../graph/extended-dijkstra.md#practice)（練習） |
-| ZONE2021 F. Encounter and Farewell | 2197 | [XOR 基底](../math/xor-basis.md#practice)（練習） |
+    ### ZONE2021 {#problem-sets-zone2021}
+
+    | 問題 | diff | ページ（役割） |
+    | --- | --- | --- |
+    | ZONE2021 E. Sneaking | 1624 | [状態を頂点にする](../graph/extended-dijkstra.md#practice)（練習） |
+    | ZONE2021 F. Encounter and Farewell | 2197 | [XOR 基底](../math/xor-basis.md#practice)（練習） |
 
 <!-- textlint-enable -->
 <!-- gen:end problem-sets -->
@@ -566,19 +587,21 @@ AtCoder Algorithm Lectures（AAL）は、AtCoder の公式の講座シリーズ�
 
 決まった時刻に始まり、制限時間の中で解く形の練習には、次のコンテストがある。AtCoder Problems のデータでは、どれもレートが変わらない（Rated の範囲が付いていない）。
 
-- **AtCoder Daily Training（ADT）**：過去の ABC の問題を組み直して、平日に 60 分で出すコンテストである（ごく一部に CODE QUEEN の問題が混じる）。2023-10-17 から開かれ、2026 年は主に平日に 1 日 2 回開かれている。EASY（5 問）と ALL（9 問）の 2 つのコースがあり、2026-02-05 までは MEDIUM と HARD（各 5 問）もあった。
-- **AtCoder Weekday Contest（AWC）**：2026-02-09 から平日に毎日開かれている Beta のコンテストである。ほとんどの回が 5 問で、制限時間は awc0006 から 60 分（awc0001〜awc0005 は 90 分）。awc0100 と awc0150 は 15 問・150 分の回だった。問題は AWC のために用意されたもので（AtCoder Problems のデータでは、過去の問題を使い回していない）、difficulty は付かない。
+- **AtCoder Daily Training（ADT）**：過去の ABC の問題を組み直して、主に平日に 60 分で出すコンテストである。EASY（5 問）と ALL（9 問）の 2 つのコースがある。
+- **AtCoder Weekday Contest（AWC）**：平日に毎日開かれている Beta のコンテストである。ほとんどの回が 5 問・60 分で、問題は AWC のために用意されたもの（difficulty は付かない）。
 - **アルゴリズム実技検定（PAST）の過去問**：AtCoder Problems のデータに 24 回分（各 15 問）が載っている。1 回分を通しで解くと、典型の当てはめの速さを確かめられる。
 - **過去の ABC の[バーチャル参加](../guide/glossary.md#virtual-participation)**：好きな時刻に本番の形で解くなら、AtCoder Problems のバーチャルコンテスト（[AtCoder 以外の道具](#tools)）を使い、過去の ABC を時間を計って解く。
 
-ADT の各位置の difficulty の中央値（2023-10〜2026-10 の全回、AtCoder Problems のデータから計算）は次のとおりである。400 未満の値は、AtCoder Problems の表示と同じく縮めた値である（[400 未満は縮めた値](../start/atcoder-system.md#difficulty)）。ALL の A〜E は同じ回の EASY と同じ問題で、ALL にはその後に F〜I が足される。
+ADT の ALL の H は水、I は青の帯に当たる（difficulty の中央値）。レート 1000 前後から黄を目指すなら、ALL を選び、H・I を解き切ることを目標にするとよい。解いたことのある問題が混じったら、解法を思い出す速さと実装の速さの練習に使う。
 
-| コース | A〜E | F | G | H | I |
-| --- | --- | ---: | ---: | ---: | ---: |
-| EASY | 12・13・57・60・354 | — | — | — | — |
-| ALL | 12・13・57・60・354 | 357 | 844 | 1295 | 1819 |
+??? note "ADT の位置ごとの difficulty の中央値"
 
-中央値で見ると、ALL の H は水、I は青の帯に当たる。レート 1000 前後から黄を目指すなら、ALL を選び、H・I を解き切ることを目標にするとよい。問題は過去の ABC から選ばれるので、解いたことのある問題も混じる。そのときは、解法を思い出す速さと、実装の速さの練習に使う。
+    2023-10〜2026-10 の全回を AtCoder Problems のデータから計算した。ALL の A〜E は同じ回の EASY と同じ問題で、ALL にはその後に F〜I が足される。400 未満の値は、AtCoder Problems の表示と同じく縮めた値である（[400 未満は縮めた値](../start/atcoder-system.md#difficulty)）。
+
+    | コース | A〜E | F | G | H | I |
+    | --- | --- | ---: | ---: | ---: | ---: |
+    | EASY | 12・13・57・60・354 | — | — | — | — |
+    | ALL | 12・13・57・60・354 | 357 | 844 | 1295 | 1819 |
 
 ARC にも Rated の範囲の違う区分（ARC--・ARC・ARC++）があり、レートの低い人も出られる回がある。区分の詳しい話は [AtCoder の仕組み](../start/atcoder-system.md#contests)に任せる。
 
@@ -596,7 +619,7 @@ ARC にも Rated の範囲の違う区分（ARC--・ARC・ARC++）があり、�
 
 ## ライブラリの確かめ用の問題集 {#verify-sets}
 
-自作のライブラリや ACL の使い方が正しいかは、入力の形が決まった問題に提出して確かめる。確かめ方の手順とページごとの対応は[自作ライブラリの設計と動作確認](../guide/library-design.md#verify)に任せ、ここでは問題集だけを挙げる。
+自作のライブラリや ACL の使い方が正しいかは、入力の形が決まった問題に提出して確かめる。ここでは問題集だけを挙げ、確かめ方の手順は[自作ライブラリの設計と動作確認](../guide/library-design.md#verify)に任せる。
 
 - **ACL Practice（practice2）**：ACL の主な機能を 1 問ずつ（遅延セグメント木は 2 問）、計 12 問が並ぶ。Union-Find・BIT・floor sum・最大流・最小費用流・畳み込み・SCC・2-SAT・Suffix Array・セグメント木・遅延セグメント木を扱う。各問題がどのページの例題かは [ACL Practice の表](#problem-sets-practice2)にある。自作したデータ構造を、ACL と同じ問題で確かめるのにも使える。
 - **Library Checker**（[judge.yosupo.jp](https://judge.yosupo.jp/)）：データ構造・アルゴリズムごとに、確かめ用の問題を集めたジャッジである。問題の一覧には、14 の分野（データ構造・グラフ・木・畳み込み・数論・多項式・文字列・幾何など）に 235 問がある。
@@ -606,7 +629,7 @@ ARC にも Rated の範囲の違う区分（ARC--・ARC・ARC++）があり、�
 
 ## 参考 {#references}
 
-- [E869120「AtCoder での実力アップを目指そう！　～競プロ典型 90 問～」](https://qiita.com/e869120/items/1b2a5f0f07fd927e44e9)：★と difficulty の対応、出題の期間、勧める進め方
+- [E869120「AtCoder での実力アップを目指そう！　～競プロ典型 90 問～」](https://qiita.com/e869120/items/1b2a5f0f07fd927e44e9)：★と difficulty の対応、出題の期間、勧める取り組み方
 - [E869120「kyopro_educational_90」](https://github.com/E869120/kyopro_educational_90)：典型90問の解説の置き場
 - [E869120「kyopro-tessoku」](https://github.com/E869120/kyopro-tessoku)：鉄則本の章立てと、章ごとの解答コード
 - [drken「動的計画法超入門！ Educational DP Contest の A ～ E 問題の解説と類題集」](https://qiita.com/drken/items/dc53c683d6de8aeacf5a)：EDPC の位置づけ（DP を初めて学ぶ人向けの問題）

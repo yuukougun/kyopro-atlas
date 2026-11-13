@@ -10,7 +10,7 @@ level: null
 kind: [案内]
 prerequisites: []
 related: [knowledge-map, atcoder-system#difficulty-by-position, contest-strategy, practice-method, problem-sets#recent-abc, reformulation, study-list]
-summary: 目標の色ごとに、到達の目安、読むページの順、最近の ABC の位置ごとの頻出手法、解いた数の進捗を見られる。ページの列はレベル・前提・出題頻度から生成する。
+summary: 目標の色ごとに、到達の目安、読むページの順、最近の ABC の位置ごとの頻出手法、解いた数の進捗を見られる。
 complexity: null
 signs: []
 acl: []
@@ -28,7 +28,7 @@ updated: 2026-11-13
 ---
 
 !!! abstract "要点"
-    - **何のページか**：目標の色ごとに、到達の目安、読むページの順、最近の ABC の位置ごとの頻出手法、解いた数の進捗を見られる。ページの列はレベル・前提・出題頻度から生成する。
+    - **何のページか**：目標の色ごとに、到達の目安、読むページの順、最近の ABC の位置ごとの頻出手法、解いた数の進捗を見られる。
     - **使い方**：今のレートから次の色を 1 つ決め、その色の列を「必修」の行から読む。最近の ABC の E・F・G で何が使われたかは、位置ごとの表で確かめる。
     - **前提**：なし
 
@@ -36,20 +36,18 @@ updated: 2026-11-13
 別名：学習順序・何から学ぶか・水色・青・黄色のロードマップ・推奨ルート・位置ごとの頻出手法
 <!-- textlint-enable -->
 
-色別ロードマップは、目標の色に向けて次に何を読むかを決めるための案内である。ページの列と位置ごとの頻出手法の表は、各ページのレベル・前提・出題頻度と、最近 30 回の ABC の分類から機械的に作る。到達の目安と練習の方法は、AtCoder Problems のデータと[色変記事](../guide/glossary.md#color-change-article)をもとに手で書いた。
-
 ## 今の位置と目標 {#goal}
 
 この教材のレベルは、その手法がまとまって使われ始める問題の [difficulty](../guide/glossary.md#difficulty) の帯で決めている。基礎は 1199 まで、水は 1200〜1599、青は 1600〜1999、黄は 2000〜2399、発展は 2400 からで、発展は概要だけを置く。
 
-ABC の位置とレベルは、おおよそ次のように対応する（abc400〜abc480 の 81 回の difficulty による）。
+ABC の位置で言えば、水のページは E と易しい F、青のページは F と難しい E、黄のページは難しい F と易しい G で使う知識にあたる（位置ごとの分布は[AtCoder の仕組み](../start/atcoder-system.md#difficulty-by-position)）。
 
-- D は 93% が基礎である。
-- E は水 59%・基礎 31%・青以上 10% である。
-- F は青 49%・水 26%・黄 19%・発展 6% である。
-- G は 38% が黄、49% が発展である。
+??? note "位置とレベルの割合（abc400〜abc480 の 81 回）"
 
-つまり、水のページは E と易しい F、青のページは F と難しい E、黄のページは難しい F と易しい G で使う知識にあたる。位置ごとの difficulty の分布は[AtCoder の仕組み](../start/atcoder-system.md#difficulty-by-position)に図で、[コンテストの戦い方](contest-strategy.md#difficulty-by-position)に数で示した。
+    - D は 93% が基礎である。
+    - E は水 59%・基礎 31%・青以上 10% である。
+    - F は青 49%・水 26%・黄 19%・発展 6% である。
+    - G は 38% が黄、49% が発展である。
 
 今のレートから、次の目標と読む列を決める。
 
@@ -59,11 +57,11 @@ ABC の位置とレベルは、おおよそ次のように対応する（abc400�
 | 1200〜1599 | 青（1600） | 水の残り → 青 | E を落とさず、F を解く |
 | 1600〜1999 | 黄（2000） | 青までの復習 → 黄 | F を速く、易しい G を解く |
 
-色が上がるのは、目標の色の[パフォーマンス](../guide/glossary.md#performance)を何度も続けて出したときである（[レーティング](../guide/glossary.md#rating)は過去のパフォーマンスから決まる）。1 回の上振れでは届かないので、目標は「その色のパフォーマンスを安定して出す」ことに置く。
+[レーティング](../guide/glossary.md#rating)は過去の[パフォーマンス](../guide/glossary.md#performance)から決まるので、1 回の上振れでは色は上がらない。目標は「その色のパフォーマンスを安定して出す」ことに置く。
 
 ## 色ごとの到達の目安 {#targets}
 
-目標の色のパフォーマンスを出すには、どの位置までを何分で解けばよいかを、AtCoder Problems のモデルで見積もった。表は abc400〜abc480 の 81 回について、レート P の人が A から順に解いたとき、各位置まで解き終える時刻と、E・F を解く確率の中央値である。
+レート P の人が A から順に解いたとき、各位置まで解き終える時刻と、E・F を解く確率の中央値である（abc400〜abc480 の 81 回、AtCoder Problems のモデルによる見積もり）。
 
 | P | A〜D | A〜E | E を解く確率 | F を解く確率 |
 | --- | --- | --- | --- | --- |
@@ -71,25 +69,29 @@ ABC の位置とレベルは、おおよそ次のように対応する（abc400�
 | 1600 | 30 分 | 56 分 | 80% | 34% |
 | 2000 | 22 分 | 43 分 | 96% | 76% |
 
-解く確率は difficulty のロジスティック曲線から、時刻は問題ごとの予測解答時間の和から求めた。予測解答時間は解けた人だけから求めた値なので、解く確率の低い位置では「もし解けたなら」の目安になる。
+??? note "表の求め方と読み方の注意"
 
-解く確率の列は「難しさが中央値の問題を解く確率」で、そのまま「何回に何回解けるか」ではない。回ごとの見込みは 81 回の確率の平均で言う方がよく、下の「何回に何回」は平均から出した。
+    解く確率は difficulty のロジスティック曲線から、時刻は問題ごとの予測解答時間の和から求めた。予測解答時間は解けた人だけから求めた値なので、解く確率の低い位置では「もし解けたなら」の目安になる。
+
+    解く確率の列は「難しさが中央値の問題を解く確率」で、そのまま「何回に何回解けるか」ではない。下の「何回に何回」は、81 回の確率の平均から出した。
 
 - **水（1200）**：A〜D を約 40 分で解き、E は 5 回に 2 回解ける。D を落とさないことが土台で、E は解ければ上振れになる。
 - **青（1600）**：A〜E を約 55 分で解き、E を 8 割の回で落とさない。F は 3 回に 1 回である。
 - **黄（2000）**：A〜E を約 45 分、A〜F を約 70 分で解き、F は 3 回に 2 回ほど解ける（3 回に 1 回は落とす）。G を解くのは 5 回に 1 回ほどである。
 
-A〜F まで含めた時刻の表、完答数とパフォーマンスの関係、コンテスト中の判断は[コンテストの戦い方](contest-strategy.md#time-targets)にまとめた。
+A〜F まで含めた時刻と、コンテスト中の判断は[コンテストの戦い方](contest-strategy.md#time-targets)にある。
 
 ## 黄を目指す段の主な条件 {#yellow}
 
 黄のパフォーマンスの主な条件は、黄のページの知識よりも、青までの知識を確実に速く使えることである。abc400〜abc480 の F は 75% が difficulty 2000 未満で、[到達の目安](#targets)のとおり G を解ける回は多くない。黄のページの知識が効くのは、難しい F と易しい G である。
 
-色変記事にも、同じ趣旨の声が複数ある。
+[色変記事](../guide/glossary.md#color-change-article)にも、同じ趣旨の声が複数ある。
 
-- 青から黄までに新しく覚えた知識を本番で使った場面は少なく、必要な知識の多くは水色の時点で持っていた。効いたのは、青・黄 diff の問題を解いて身についた典型の力と考察の力、問題文を速く読む力やデバッグだった（nouka28 氏）。
-- ローリングハッシュ・形式的冪級数・HL 分解を学ばないまま黄色に届いた。最後の決め手は、青 diff の正答率が上がったことだった（ks2m 氏）。
-- 7 問体制の ABC では、6 完を安定させたうえで 550 点程度までの G を解けることが目安になる（bluebery1001 氏）。
+??? note "色変記事の声"
+
+    - 青から黄までに新しく覚えた知識を本番で使った場面は少なく、必要な知識の多くは水色の時点で持っていた。効いたのは、青・黄 diff の問題を解いて身についた典型の力と考察の力、問題文を速く読む力やデバッグだった（nouka28 氏）。
+    - ローリングハッシュ・形式的冪級数・HL 分解を学ばないまま黄色に届いた。最後の決め手は、青 diff の正答率が上がったことだった（ks2m 氏）。
+    - 7 問体制の ABC では、6 完を安定させたうえで 550 点程度までの G を解けることが目安になる（bluebery1001 氏）。
 
 この段では、次の順に時間を配るとよい。
 
@@ -99,116 +101,118 @@ A〜F まで含めた時刻の表、完答数とパフォーマンスの関係�
 
 ## 位置ごとの頻出手法（最近30回） {#recent-positions}
 
-abc451〜abc480 の D〜G の 120 問について、第三者の解説で使われた手法を確かめ、この教材のページに対応させた。下の表は E・F・G ごとに、使ったページを種類で分け、その種類のページを使った問題の数の多い順に並べたものである。1 問が複数の種類に入るので、問題数の合計は 30 を超える。
-
-表から読み取れる傾向は次のとおりである。
+abc451〜abc480 の E・F・G で使われた手法を、ページの種類で分け、多い順に並べた。1 問が複数の種類に入るので、問題数の合計は 30 を超える。傾向は次のとおりである。
 
 - **E**：累積和・いもす法と、一部を固定して数える・寄与・余事象などの考察が多い。二項係数の前計算と組む数え上げも目立つ。
 - **F**：セグメント木・BIT・遅延セグメント木などのデータ構造が最も多く（30 問のうち 11 問）、単独のページでは言い換えの典型が最も多い（4 問）。データ構造に載せる前の言い換えは[言い換えてからデータ構造に載せる](../thinking/reformulation.md#then-data-structure)の節にある。
 - **G**：DP の発展（Monge・Alien DP・Slope Trick・挿入 DP）、クエリの先読みと Mo's algorithm、畳み込みと形式的冪級数、フロー、幾何など、専用の手法が散らばる。
 
-30 回は少ないので、表に 1 回しか出ない手法や表にない手法も、今後は出うる。表は「どの種類の知識が多く使われたか」を見るためのもので、出題の予想ではない。問題ごとに使う手法のページを引くときは、[問題集と練習用コンテストの案内](problem-sets.md#recent-abc)の「最近の ABC → ページ」の表を使う。
+表は「どの種類の知識が多く使われたか」を見るためのもので、出題の予想ではない（30 回は少なく、表にない手法も出うる）。問題ごとのページは[最近の ABC → ページ](problem-sets.md#recent-abc)の表で引く。
 
 <!-- gen:begin recent-positions -->
 <!-- textlint-disable -->
 
-### E 問題（水の帯） {#recent-positions-e}
+abc451〜abc480 の各位置の問題で使われた手法を、ページの種類で分けて多い順に並べる。かっこの数は、その位置でそのページを使った問題の数（1 のときは書かない）。
 
-abc451〜abc480 の E の 30 問で使われた手法を、ページの種類（kind の1つ目）で分けて多い順に並べる。かっこの数は、その位置でそのページを使った問題の数（1 のときは書かない）。
+<span id="recent-positions-e"></span><span id="recent-positions-f"></span><span id="recent-positions-g"></span>
 
-| 種類 | ページ | 問題 | 問題数 |
-| --- | --- | --- | --- |
-| 考察 | [一部を固定して数える](../thinking/fix-variable.md)（3）、[言い換えの典型](../thinking/reformulation.md)（2）、[主客転倒・寄与](../thinking/contribution.md)（2）、[偶奇に着目する](../thinking/parity.md)（2）、[余事象](../thinking/complement.md)、[構築問題の考え方](../thinking/construction.md)、[対称性・鳩の巣原理・場合分け](../thinking/symmetry-pigeonhole-casework.md)、[Σ の変形](../math/sigma-manipulation.md) | ABC453&nbsp;E・ABC454&nbsp;E・ABC455&nbsp;E・ABC458&nbsp;E・ABC461&nbsp;E・ABC462&nbsp;E・ABC466&nbsp;E・ABC467&nbsp;E・ABC468&nbsp;E・ABC471&nbsp;E・ABC475&nbsp;E | 11 |
-| 累積和・差分 | [累積和](../basics/prefix-sum.md)（5）、[いもす法](../basics/imos.md)（3）、[累積和と連想配列で区間を数える](../basics/prefix-sum-counting.md)（2） | ABC452&nbsp;E・ABC453&nbsp;E・ABC455&nbsp;E・ABC464&nbsp;E・ABC466&nbsp;E・ABC468&nbsp;E・ABC469&nbsp;E・ABC473&nbsp;E・ABC474&nbsp;E・ABC477&nbsp;E | 10 |
-| データ構造 | [セグメント木](../ds/segment-tree.md)（2）、[set・multiset・map の応用](../ds/ordered-set.md)、[Union-Find](../ds/union-find.md) | ABC451&nbsp;E・ABC461&nbsp;E・ABC475&nbsp;E・ABC476&nbsp;E | 4 |
-| 数え上げ | [二項係数の前計算](../comb/binomial-precompute.md)（4）、[数え上げの考え方](../comb/counting-mindset.md) | ABC453&nbsp;E・ABC458&nbsp;E・ABC459&nbsp;E・ABC471&nbsp;E | 4 |
-| 二分探索 | [二分探索](../basics/binary-search.md)（2）、[平均・中央値の最大化](../basics/fractional-binary-search.md) | ABC457&nbsp;E・ABC469&nbsp;E・ABC480&nbsp;E | 3 |
-| ソート・座標圧縮 | [ソートで考える](../basics/sorting-techniques.md)（2）、[イベントソートと平面走査の基本](../basics/event-sort.md) | ABC457&nbsp;E・ABC467&nbsp;E・ABC474&nbsp;E | 3 |
-| DP | [メモ化再帰](../dp/memoized-recursion.md)、[フェーズを状態に持つ DP](../dp/dp-phase.md)、[桁 DP](../dp/digit-dp.md) | ABC465&nbsp;E・ABC466&nbsp;E・ABC470&nbsp;E | 3 |
-| グラフ探索 | [閉路の検出と復元](../graph/cycle-detection.md)、[二部グラフ判定](../graph/bipartite-graph.md)、[トポロジカルソート](../graph/topological-sort.md)、[強連結成分分解（SCC）](../graph/scc.md) | ABC456&nbsp;E・ABC472&nbsp;E・ABC478&nbsp;E | 3 |
-| 最短路 | [ダイクストラ法](../graph/dijkstra.md)（2）、[状態を頂点にする](../graph/extended-dijkstra.md)（2） | ABC456&nbsp;E・ABC463&nbsp;E・ABC477&nbsp;E | 3 |
-| 木 | [根付き木と走査順](../tree/tree-traversal.md)（2）、[木の上の距離](../tree/tree-distance.md)、[葉から考える](../tree/leaf-first.md)、[辺で切って数える](../tree/tree-edge-contribution.md)、[木の構築・復元](../tree/tree-construction.md) | ABC451&nbsp;E・ABC459&nbsp;E・ABC479&nbsp;E | 3 |
-| 全探索 | [全探索の設計](../basics/brute-force.md)（2） | ABC474&nbsp;E・ABC480&nbsp;E | 2 |
-| 整数論 | [整数の割り算と余り](../math/integer-division.md)、[逆元と mod での割り算](../math/mod-inverse.md)、[桁と mod](../math/digit-and-mod.md)、[GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md) | ABC460&nbsp;E・ABC468&nbsp;E | 2 |
-| 計算量 | [調和級数と倍数の列挙](../math/harmonic-sum.md) | ABC452&nbsp;E | 1 |
-| 貪欲 | [貪欲法の考え方と正当性](../basics/greedy-basics.md) | ABC473&nbsp;E | 1 |
-| ダブリング・分割統治 | [周期性の検出](../basics/periodicity.md) | ABC452&nbsp;E | 1 |
-| 連結性・全域木 | [最小全域木](../graph/minimum-spanning-tree.md) | ABC451&nbsp;E | 1 |
-| 確率・期待値 | [最適戦略の期待値](../comb/optimal-strategy-expectation.md) | ABC470&nbsp;E | 1 |
+=== "E 問題（水の帯）"
 
-### F 問題（青の帯） {#recent-positions-f}
+    E の 30 問。
 
-abc451〜abc480 の F の 30 問で使われた手法を、ページの種類（kind の1つ目）で分けて多い順に並べる。かっこの数は、その位置でそのページを使った問題の数（1 のときは書かない）。
+    | 種類 | ページ | 問題 | 問題数 |
+    | --- | --- | --- | --- |
+    | 考察 | [一部を固定して数える](../thinking/fix-variable.md)（3）、[言い換えの典型](../thinking/reformulation.md)（2）、[主客転倒・寄与](../thinking/contribution.md)（2）、[偶奇に着目する](../thinking/parity.md)（2）、[余事象](../thinking/complement.md)、[構築問題の考え方](../thinking/construction.md)、[対称性・鳩の巣原理・場合分け](../thinking/symmetry-pigeonhole-casework.md)、[Σ の変形](../math/sigma-manipulation.md) | ABC453&nbsp;E・ABC454&nbsp;E・ABC455&nbsp;E・ABC458&nbsp;E・ABC461&nbsp;E・ABC462&nbsp;E・ABC466&nbsp;E・ABC467&nbsp;E・ABC468&nbsp;E・ABC471&nbsp;E・ABC475&nbsp;E | 11 |
+    | 累積和・差分 | [累積和](../basics/prefix-sum.md)（5）、[いもす法](../basics/imos.md)（3）、[累積和と連想配列で区間を数える](../basics/prefix-sum-counting.md)（2） | ABC452&nbsp;E・ABC453&nbsp;E・ABC455&nbsp;E・ABC464&nbsp;E・ABC466&nbsp;E・ABC468&nbsp;E・ABC469&nbsp;E・ABC473&nbsp;E・ABC474&nbsp;E・ABC477&nbsp;E | 10 |
+    | データ構造 | [セグメント木](../ds/segment-tree.md)（2）、[set・multiset・map の応用](../ds/ordered-set.md)、[Union-Find](../ds/union-find.md) | ABC451&nbsp;E・ABC461&nbsp;E・ABC475&nbsp;E・ABC476&nbsp;E | 4 |
+    | 数え上げ | [二項係数の前計算](../comb/binomial-precompute.md)（4）、[数え上げの考え方](../comb/counting-mindset.md) | ABC453&nbsp;E・ABC458&nbsp;E・ABC459&nbsp;E・ABC471&nbsp;E | 4 |
+    | 二分探索 | [二分探索](../basics/binary-search.md)（2）、[平均・中央値の最大化](../basics/fractional-binary-search.md) | ABC457&nbsp;E・ABC469&nbsp;E・ABC480&nbsp;E | 3 |
+    | ソート・座標圧縮 | [ソートで考える](../basics/sorting-techniques.md)（2）、[イベントソートと平面走査の基本](../basics/event-sort.md) | ABC457&nbsp;E・ABC467&nbsp;E・ABC474&nbsp;E | 3 |
+    | DP | [メモ化再帰](../dp/memoized-recursion.md)、[フェーズを状態に持つ DP](../dp/dp-phase.md)、[桁 DP](../dp/digit-dp.md) | ABC465&nbsp;E・ABC466&nbsp;E・ABC470&nbsp;E | 3 |
+    | グラフ探索 | [閉路の検出と復元](../graph/cycle-detection.md)、[二部グラフ判定](../graph/bipartite-graph.md)、[トポロジカルソート](../graph/topological-sort.md)、[強連結成分分解（SCC）](../graph/scc.md) | ABC456&nbsp;E・ABC472&nbsp;E・ABC478&nbsp;E | 3 |
+    | 最短路 | [ダイクストラ法](../graph/dijkstra.md)（2）、[状態を頂点にする](../graph/extended-dijkstra.md)（2） | ABC456&nbsp;E・ABC463&nbsp;E・ABC477&nbsp;E | 3 |
+    | 木 | [根付き木と走査順](../tree/tree-traversal.md)（2）、[木の上の距離](../tree/tree-distance.md)、[葉から考える](../tree/leaf-first.md)、[辺で切って数える](../tree/tree-edge-contribution.md)、[木の構築・復元](../tree/tree-construction.md) | ABC451&nbsp;E・ABC459&nbsp;E・ABC479&nbsp;E | 3 |
+    | 全探索 | [全探索の設計](../basics/brute-force.md)（2） | ABC474&nbsp;E・ABC480&nbsp;E | 2 |
+    | 整数論 | [整数の割り算と余り](../math/integer-division.md)、[逆元と mod での割り算](../math/mod-inverse.md)、[桁と mod](../math/digit-and-mod.md)、[GCD・LCM とユークリッドの互除法](../math/gcd-lcm.md) | ABC460&nbsp;E・ABC468&nbsp;E | 2 |
+    | 計算量 | [調和級数と倍数の列挙](../math/harmonic-sum.md) | ABC452&nbsp;E | 1 |
+    | 貪欲 | [貪欲法の考え方と正当性](../basics/greedy-basics.md) | ABC473&nbsp;E | 1 |
+    | ダブリング・分割統治 | [周期性の検出](../basics/periodicity.md) | ABC452&nbsp;E | 1 |
+    | 連結性・全域木 | [最小全域木](../graph/minimum-spanning-tree.md) | ABC451&nbsp;E | 1 |
+    | 確率・期待値 | [最適戦略の期待値](../comb/optimal-strategy-expectation.md) | ABC470&nbsp;E | 1 |
 
-| 種類 | ページ | 問題 | 問題数 |
-| --- | --- | --- | --- |
-| データ構造 | [転倒数](../ds/inversion-number.md)（2）、[遅延セグメント木](../ds/lazy-segment-tree.md)（2）、[セグメント木に何を載せるか](../ds/segment-tree-monoids.md)（2）、[set・multiset・map の応用](../ds/ordered-set.md)、[重み付き Union-Find](../ds/weighted-union-find.md)、[BIT（Fenwick Tree）](../ds/fenwick-tree.md)、[セグメント木](../ds/segment-tree.md)、[セグメント木上の二分探索](../ds/segment-tree-binary-search.md)、[遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md) | ABC451&nbsp;F・ABC452&nbsp;F・ABC455&nbsp;F・ABC456&nbsp;F・ABC460&nbsp;F・ABC466&nbsp;F・ABC467&nbsp;F・ABC473&nbsp;F・ABC477&nbsp;F・ABC478&nbsp;F・ABC479&nbsp;F | 11 |
-| 考察 | [言い換えの典型](../thinking/reformulation.md)（4）、[対称性・鳩の巣原理・場合分け](../thinking/symmetry-pigeonhole-casework.md)（2）、[主客転倒・寄与](../thinking/contribution.md)、[後ろから・逆順に考える](../thinking/reverse-thinking.md)、[構築問題の考え方](../thinking/construction.md)、[Σ の変形](../math/sigma-manipulation.md) | ABC453&nbsp;F・ABC454&nbsp;F・ABC455&nbsp;F・ABC457&nbsp;F・ABC459&nbsp;F・ABC463&nbsp;F・ABC466&nbsp;F・ABC479&nbsp;F・ABC480&nbsp;F | 9 |
-| DP | [DP の状態の設計](../dp/dp-state-design.md)（2）、[ナップサック DP](../dp/knapsack-01.md)、[グリッド上の DP](../dp/dp-grid.md)、[最長増加部分列](../dp/lis.md)、[bitDP](../dp/bit-dp.md)、[照合オートマトン上の DP](../string/string-automaton-dp.md) | ABC457&nbsp;F・ABC458&nbsp;F・ABC461&nbsp;F・ABC462&nbsp;F・ABC468&nbsp;F・ABC476&nbsp;F・ABC480&nbsp;F | 7 |
-| 累積和・差分 | [累積和](../basics/prefix-sum.md)（2）、[2 次元累積和](../basics/prefix-sum-2d.md)（2）、[差分列への言い換え](../basics/difference-sequence.md)（2）、[いもす法](../basics/imos.md) | ABC454&nbsp;F・ABC459&nbsp;F・ABC465&nbsp;F・ABC472&nbsp;F・ABC473&nbsp;F・ABC475&nbsp;F | 6 |
-| 数え上げ | [二項係数の前計算](../comb/binomial-precompute.md)、[数え上げの考え方](../comb/counting-mindset.md)、[多項係数](../comb/multinomial-coefficient.md)、[包除原理](../comb/inclusion-exclusion.md)、[約数・倍数のゼータ変換とメビウス変換](../comb/zeta-mobius-divisor.md)、[置換の偶奇](../comb/permutation-parity.md) | ABC457&nbsp;F・ABC463&nbsp;F・ABC470&nbsp;F・ABC474&nbsp;F・ABC475&nbsp;F | 5 |
-| 貪欲 | [貪欲法の考え方と正当性](../basics/greedy-basics.md)（3）、[交換論法と比較関数の設計](../basics/exchange-argument.md)（2） | ABC454&nbsp;F・ABC467&nbsp;F・ABC468&nbsp;F・ABC471&nbsp;F | 4 |
-| 木 | [木の直径と最遠点](../tree/tree-diameter.md)、[木の構築・復元](../tree/tree-construction.md)、[木の重心](../tree/tree-centroid.md)、[最小共通祖先（LCA）](../tree/lca.md) | ABC453&nbsp;F・ABC460&nbsp;F・ABC478&nbsp;F | 3 |
-| 尺取り・スライド窓 | [尺取り法](../basics/two-pointers.md)（2） | ABC452&nbsp;F・ABC464&nbsp;F | 2 |
-| グラフ探索 | [連結成分](../graph/connected-components.md)、[二部グラフ判定](../graph/bipartite-graph.md) | ABC451&nbsp;F・ABC470&nbsp;F | 2 |
-| 線形代数・行列 | [行列累乗](../math/matrix-power.md)（2） | ABC456&nbsp;F・ABC458&nbsp;F | 2 |
-| 確率・期待値 | [確率の基本](../comb/probability-basics.md)、[期待値の線形性と指示確率変数](../comb/linearity-of-expectation.md)、[対称性で確率を求める](../comb/probability-symmetry.md) | ABC463&nbsp;F・ABC464&nbsp;F | 2 |
-| 幾何 | [ベクトルと外積](../geometry/geometry-vectors.md)、[マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md) | ABC472&nbsp;F・ABC476&nbsp;F | 2 |
-| 計算量 | [調和級数と倍数の列挙](../math/harmonic-sum.md) | ABC469&nbsp;F | 1 |
-| 全探索 | [半分全列挙](../basics/meet-in-the-middle.md) | ABC464&nbsp;F | 1 |
-| ソート・座標圧縮 | [座標圧縮](../basics/coordinate-compression.md) | ABC467&nbsp;F | 1 |
-| 連結性・全域木 | [最小全域木](../graph/minimum-spanning-tree.md) | ABC469&nbsp;F | 1 |
-| クエリ処理の工夫 | [クエリの先読み](../ds/offline-queries.md)、[平面走査](../ds/sweep-line-2d.md) | ABC477&nbsp;F | 1 |
-| 整数論 | [約数列挙と素数判定](../math/divisor-enum.md)、[約数の個数の上界と高度合成数](../math/divisor-count-bound.md) | ABC461&nbsp;F | 1 |
-| 文字列 | [Aho-Corasick 法](../string/aho-corasick.md) | ABC458&nbsp;F | 1 |
+=== "F 問題（青の帯）"
 
-### G 問題（黄・発展の帯） {#recent-positions-g}
+    F の 30 問。
 
-abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（kind の1つ目）で分けて多い順に並べる。かっこの数は、その位置でそのページを使った問題の数（1 のときは書かない）。
+    | 種類 | ページ | 問題 | 問題数 |
+    | --- | --- | --- | --- |
+    | データ構造 | [転倒数](../ds/inversion-number.md)（2）、[遅延セグメント木](../ds/lazy-segment-tree.md)（2）、[セグメント木に何を載せるか](../ds/segment-tree-monoids.md)（2）、[set・multiset・map の応用](../ds/ordered-set.md)、[重み付き Union-Find](../ds/weighted-union-find.md)、[BIT（Fenwick Tree）](../ds/fenwick-tree.md)、[セグメント木](../ds/segment-tree.md)、[セグメント木上の二分探索](../ds/segment-tree-binary-search.md)、[遅延セグメント木の載せ方の型](../ds/lazy-segment-tree-patterns.md) | ABC451&nbsp;F・ABC452&nbsp;F・ABC455&nbsp;F・ABC456&nbsp;F・ABC460&nbsp;F・ABC466&nbsp;F・ABC467&nbsp;F・ABC473&nbsp;F・ABC477&nbsp;F・ABC478&nbsp;F・ABC479&nbsp;F | 11 |
+    | 考察 | [言い換えの典型](../thinking/reformulation.md)（4）、[対称性・鳩の巣原理・場合分け](../thinking/symmetry-pigeonhole-casework.md)（2）、[主客転倒・寄与](../thinking/contribution.md)、[後ろから・逆順に考える](../thinking/reverse-thinking.md)、[構築問題の考え方](../thinking/construction.md)、[Σ の変形](../math/sigma-manipulation.md) | ABC453&nbsp;F・ABC454&nbsp;F・ABC455&nbsp;F・ABC457&nbsp;F・ABC459&nbsp;F・ABC463&nbsp;F・ABC466&nbsp;F・ABC479&nbsp;F・ABC480&nbsp;F | 9 |
+    | DP | [DP の状態の設計](../dp/dp-state-design.md)（2）、[ナップサック DP](../dp/knapsack-01.md)、[グリッド上の DP](../dp/dp-grid.md)、[最長増加部分列](../dp/lis.md)、[bitDP](../dp/bit-dp.md)、[照合オートマトン上の DP](../string/string-automaton-dp.md) | ABC457&nbsp;F・ABC458&nbsp;F・ABC461&nbsp;F・ABC462&nbsp;F・ABC468&nbsp;F・ABC476&nbsp;F・ABC480&nbsp;F | 7 |
+    | 累積和・差分 | [累積和](../basics/prefix-sum.md)（2）、[2 次元累積和](../basics/prefix-sum-2d.md)（2）、[差分列への言い換え](../basics/difference-sequence.md)（2）、[いもす法](../basics/imos.md) | ABC454&nbsp;F・ABC459&nbsp;F・ABC465&nbsp;F・ABC472&nbsp;F・ABC473&nbsp;F・ABC475&nbsp;F | 6 |
+    | 数え上げ | [二項係数の前計算](../comb/binomial-precompute.md)、[数え上げの考え方](../comb/counting-mindset.md)、[多項係数](../comb/multinomial-coefficient.md)、[包除原理](../comb/inclusion-exclusion.md)、[約数・倍数のゼータ変換とメビウス変換](../comb/zeta-mobius-divisor.md)、[置換の偶奇](../comb/permutation-parity.md) | ABC457&nbsp;F・ABC463&nbsp;F・ABC470&nbsp;F・ABC474&nbsp;F・ABC475&nbsp;F | 5 |
+    | 貪欲 | [貪欲法の考え方と正当性](../basics/greedy-basics.md)（3）、[交換論法と比較関数の設計](../basics/exchange-argument.md)（2） | ABC454&nbsp;F・ABC467&nbsp;F・ABC468&nbsp;F・ABC471&nbsp;F | 4 |
+    | 木 | [木の直径と最遠点](../tree/tree-diameter.md)、[木の構築・復元](../tree/tree-construction.md)、[木の重心](../tree/tree-centroid.md)、[最小共通祖先（LCA）](../tree/lca.md) | ABC453&nbsp;F・ABC460&nbsp;F・ABC478&nbsp;F | 3 |
+    | 尺取り・スライド窓 | [尺取り法](../basics/two-pointers.md)（2） | ABC452&nbsp;F・ABC464&nbsp;F | 2 |
+    | グラフ探索 | [連結成分](../graph/connected-components.md)、[二部グラフ判定](../graph/bipartite-graph.md) | ABC451&nbsp;F・ABC470&nbsp;F | 2 |
+    | 線形代数・行列 | [行列累乗](../math/matrix-power.md)（2） | ABC456&nbsp;F・ABC458&nbsp;F | 2 |
+    | 確率・期待値 | [確率の基本](../comb/probability-basics.md)、[期待値の線形性と指示確率変数](../comb/linearity-of-expectation.md)、[対称性で確率を求める](../comb/probability-symmetry.md) | ABC463&nbsp;F・ABC464&nbsp;F | 2 |
+    | 幾何 | [ベクトルと外積](../geometry/geometry-vectors.md)、[マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md) | ABC472&nbsp;F・ABC476&nbsp;F | 2 |
+    | 計算量 | [調和級数と倍数の列挙](../math/harmonic-sum.md) | ABC469&nbsp;F | 1 |
+    | 全探索 | [半分全列挙](../basics/meet-in-the-middle.md) | ABC464&nbsp;F | 1 |
+    | ソート・座標圧縮 | [座標圧縮](../basics/coordinate-compression.md) | ABC467&nbsp;F | 1 |
+    | 連結性・全域木 | [最小全域木](../graph/minimum-spanning-tree.md) | ABC469&nbsp;F | 1 |
+    | クエリ処理の工夫 | [クエリの先読み](../ds/offline-queries.md)、[平面走査](../ds/sweep-line-2d.md) | ABC477&nbsp;F | 1 |
+    | 整数論 | [約数列挙と素数判定](../math/divisor-enum.md)、[約数の個数の上界と高度合成数](../math/divisor-count-bound.md) | ABC461&nbsp;F | 1 |
+    | 文字列 | [Aho-Corasick 法](../string/aho-corasick.md) | ABC458&nbsp;F | 1 |
 
-| 種類 | ページ | 問題 | 問題数 |
-| --- | --- | --- | --- |
-| DP | [最長増加部分列](../dp/lis.md)（2）、[挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md)（2）、[桁 DP](../dp/digit-dp.md)、[桁 DP の応用](../dp/digit-dp-advanced.md)、[インライン DP](../dp/inline-dp.md)、[Monge 性による DP の高速化](../dp/monge.md)、[Alien DP](../dp/alien-dp.md)、[Slope Trick](../dp/slope-trick.md) | ABC457&nbsp;G・ABC458&nbsp;G・ABC464&nbsp;G・ABC466&nbsp;G・ABC468&nbsp;G・ABC473&nbsp;G・ABC476&nbsp;G・ABC480&nbsp;G | 8 |
-| データ構造 | [遅延セグメント木](../ds/lazy-segment-tree.md)（2）、[マージテク](../tree/small-to-large.md)、[単調スタックとスライド最小値](../ds/monotonic-stack.md)、[BIT（Fenwick Tree）](../ds/fenwick-tree.md)、[セグメント木](../ds/segment-tree.md)、[永続データ構造](../ds/persistent-data-structures.md)、[マージソート木](../ds/merge-sort-tree.md) | ABC453&nbsp;G・ABC454&nbsp;G・ABC460&nbsp;G・ABC467&nbsp;G・ABC470&nbsp;G・ABC480&nbsp;G | 6 |
-| クエリ処理の工夫 | [クエリの先読み](../ds/offline-queries.md)（3）、[Mo's algorithm](../ds/mo-algorithm.md) | ABC453&nbsp;G・ABC463&nbsp;G・ABC467&nbsp;G・ABC477&nbsp;G | 4 |
-| 数え上げ | [包除原理](../comb/inclusion-exclusion.md)（2）、[二項係数の意味と性質](../comb/binomial-coefficient.md)、[二項係数の前計算](../comb/binomial-precompute.md)、[重複組合せ](../comb/stars-and-bars.md)、[数え上げの考え方](../comb/counting-mindset.md) | ABC456&nbsp;G・ABC462&nbsp;G・ABC463&nbsp;G・ABC476&nbsp;G | 4 |
-| 考察 | [主客転倒・寄与](../thinking/contribution.md)（2）、[偶奇に着目する](../thinking/parity.md)（2）、[言い換えの典型](../thinking/reformulation.md)、[構築問題の考え方](../thinking/construction.md) | ABC459&nbsp;G・ABC470&nbsp;G・ABC471&nbsp;G・ABC474&nbsp;G | 4 |
-| ダブリング・分割統治 | [分割統治](../basics/divide-and-conquer.md)（2）、[再帰的な構造](../basics/recursion-structure.md) | ABC451&nbsp;G・ABC476&nbsp;G・ABC478&nbsp;G | 3 |
-| 木 | [オイラーツアー](../tree/euler-tour.md)（2）、[最小共通祖先（LCA）](../tree/lca.md)、[HL 分解](../tree/hld.md) | ABC453&nbsp;G・ABC460&nbsp;G・ABC477&nbsp;G | 3 |
-| 畳み込み・多項式 | [畳み込みの使い方](../math/convolution-ntt.md)、[分割統治 FFT・オンライン畳み込み](../math/online-convolution.md)、[形式的冪級数と多項式の演算](../math/fps-basics.md) | ABC462&nbsp;G・ABC471&nbsp;G・ABC473&nbsp;G | 3 |
-| 幾何 | [偏角ソート](../geometry/argument-sort.md)、[マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md)、[凸包と凸多角形](../geometry/convex-hull.md)、[発展の幾何](../geometry/advanced-geometry.md) | ABC457&nbsp;G・ABC478&nbsp;G・ABC479&nbsp;G | 3 |
-| 尺取り・スライド窓 | [尺取り法](../basics/two-pointers.md)（2） | ABC455&nbsp;G・ABC470&nbsp;G | 2 |
-| フロー・マッチング | [最小カット](../graph/min-cut.md)、[燃やす埋める](../graph/project-selection.md)、[二部マッチング](../graph/bipartite-matching.md)、[König の定理](../graph/konig-theorem.md) | ABC461&nbsp;G・ABC472&nbsp;G | 2 |
-| 整数論 | [約数の個数の上界と高度合成数](../math/divisor-count-bound.md)、[拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md) | ABC459&nbsp;G・ABC475&nbsp;G | 2 |
-| 線形代数・行列 | [行列累乗](../math/matrix-power.md)、[XOR 基底](../math/xor-basis.md) | ABC451&nbsp;G・ABC469&nbsp;G | 2 |
-| 確率・期待値 | [対称性で確率を求める](../comb/probability-symmetry.md)、[確率 DP](../comb/probability-dp.md) | ABC463&nbsp;G・ABC473&nbsp;G | 2 |
-| 二分探索 | [答えで二分探索](../basics/binary-search-answer.md) | ABC458&nbsp;G | 1 |
-| 累積和・差分 | [累積和](../basics/prefix-sum.md) | ABC479&nbsp;G | 1 |
-| 貪欲 | [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md) | ABC464&nbsp;G | 1 |
-| 文字列 | [ランレングス圧縮](../basics/run-length-encoding.md)、[Suffix Array と LCP 配列](../string/suffix-array.md)、[Suffix Automaton と発展の文字列アルゴリズム](../string/suffix-automaton.md) | ABC452&nbsp;G | 1 |
-| ハッシュ・乱択 | [集合・多重集合のハッシュ](../string/hashing-for-sets.md) | ABC455&nbsp;G | 1 |
-| ビット演算 | [bit 演算の基本と XOR の性質](../basics/bit-operations.md) | ABC476&nbsp;G | 1 |
+=== "G 問題（黄・発展の帯）"
+
+    G の 30 問。
+
+    | 種類 | ページ | 問題 | 問題数 |
+    | --- | --- | --- | --- |
+    | DP | [最長増加部分列](../dp/lis.md)（2）、[挿入 DP・箱根駅伝 DP](../dp/insertion-dp.md)（2）、[桁 DP](../dp/digit-dp.md)、[桁 DP の応用](../dp/digit-dp-advanced.md)、[インライン DP](../dp/inline-dp.md)、[Monge 性による DP の高速化](../dp/monge.md)、[Alien DP](../dp/alien-dp.md)、[Slope Trick](../dp/slope-trick.md) | ABC457&nbsp;G・ABC458&nbsp;G・ABC464&nbsp;G・ABC466&nbsp;G・ABC468&nbsp;G・ABC473&nbsp;G・ABC476&nbsp;G・ABC480&nbsp;G | 8 |
+    | データ構造 | [遅延セグメント木](../ds/lazy-segment-tree.md)（2）、[マージテク](../tree/small-to-large.md)、[単調スタックとスライド最小値](../ds/monotonic-stack.md)、[BIT（Fenwick Tree）](../ds/fenwick-tree.md)、[セグメント木](../ds/segment-tree.md)、[永続データ構造](../ds/persistent-data-structures.md)、[マージソート木](../ds/merge-sort-tree.md) | ABC453&nbsp;G・ABC454&nbsp;G・ABC460&nbsp;G・ABC467&nbsp;G・ABC470&nbsp;G・ABC480&nbsp;G | 6 |
+    | クエリ処理の工夫 | [クエリの先読み](../ds/offline-queries.md)（3）、[Mo's algorithm](../ds/mo-algorithm.md) | ABC453&nbsp;G・ABC463&nbsp;G・ABC467&nbsp;G・ABC477&nbsp;G | 4 |
+    | 数え上げ | [包除原理](../comb/inclusion-exclusion.md)（2）、[二項係数の意味と性質](../comb/binomial-coefficient.md)、[二項係数の前計算](../comb/binomial-precompute.md)、[重複組合せ](../comb/stars-and-bars.md)、[数え上げの考え方](../comb/counting-mindset.md) | ABC456&nbsp;G・ABC462&nbsp;G・ABC463&nbsp;G・ABC476&nbsp;G | 4 |
+    | 考察 | [主客転倒・寄与](../thinking/contribution.md)（2）、[偶奇に着目する](../thinking/parity.md)（2）、[言い換えの典型](../thinking/reformulation.md)、[構築問題の考え方](../thinking/construction.md) | ABC459&nbsp;G・ABC470&nbsp;G・ABC471&nbsp;G・ABC474&nbsp;G | 4 |
+    | ダブリング・分割統治 | [分割統治](../basics/divide-and-conquer.md)（2）、[再帰的な構造](../basics/recursion-structure.md) | ABC451&nbsp;G・ABC476&nbsp;G・ABC478&nbsp;G | 3 |
+    | 木 | [オイラーツアー](../tree/euler-tour.md)（2）、[最小共通祖先（LCA）](../tree/lca.md)、[HL 分解](../tree/hld.md) | ABC453&nbsp;G・ABC460&nbsp;G・ABC477&nbsp;G | 3 |
+    | 畳み込み・多項式 | [畳み込みの使い方](../math/convolution-ntt.md)、[分割統治 FFT・オンライン畳み込み](../math/online-convolution.md)、[形式的冪級数と多項式の演算](../math/fps-basics.md) | ABC462&nbsp;G・ABC471&nbsp;G・ABC473&nbsp;G | 3 |
+    | 幾何 | [偏角ソート](../geometry/argument-sort.md)、[マンハッタン距離と 45 度回転](../geometry/manhattan-chebyshev.md)、[凸包と凸多角形](../geometry/convex-hull.md)、[発展の幾何](../geometry/advanced-geometry.md) | ABC457&nbsp;G・ABC478&nbsp;G・ABC479&nbsp;G | 3 |
+    | 尺取り・スライド窓 | [尺取り法](../basics/two-pointers.md)（2） | ABC455&nbsp;G・ABC470&nbsp;G | 2 |
+    | フロー・マッチング | [最小カット](../graph/min-cut.md)、[燃やす埋める](../graph/project-selection.md)、[二部マッチング](../graph/bipartite-matching.md)、[König の定理](../graph/konig-theorem.md) | ABC461&nbsp;G・ABC472&nbsp;G | 2 |
+    | 整数論 | [約数の個数の上界と高度合成数](../math/divisor-count-bound.md)、[拡張ユークリッドの互除法と一次合同式](../math/ext-gcd.md) | ABC459&nbsp;G・ABC475&nbsp;G | 2 |
+    | 線形代数・行列 | [行列累乗](../math/matrix-power.md)、[XOR 基底](../math/xor-basis.md) | ABC451&nbsp;G・ABC469&nbsp;G | 2 |
+    | 確率・期待値 | [対称性で確率を求める](../comb/probability-symmetry.md)、[確率 DP](../comb/probability-dp.md) | ABC463&nbsp;G・ABC473&nbsp;G | 2 |
+    | 二分探索 | [答えで二分探索](../basics/binary-search-answer.md) | ABC458&nbsp;G | 1 |
+    | 累積和・差分 | [累積和](../basics/prefix-sum.md) | ABC479&nbsp;G | 1 |
+    | 貪欲 | [優先度付きキューを使う貪欲](../basics/greedy-priority-queue.md) | ABC464&nbsp;G | 1 |
+    | 文字列 | [ランレングス圧縮](../basics/run-length-encoding.md)、[Suffix Array と LCP 配列](../string/suffix-array.md)、[Suffix Automaton と発展の文字列アルゴリズム](../string/suffix-automaton.md) | ABC452&nbsp;G | 1 |
+    | ハッシュ・乱択 | [集合・多重集合のハッシュ](../string/hashing-for-sets.md) | ABC455&nbsp;G | 1 |
+    | ビット演算 | [bit 演算の基本と XOR の性質](../basics/bit-operations.md) | ABC476&nbsp;G | 1 |
 
 <!-- textlint-enable -->
 <!-- gen:end recent-positions -->
 
 ## 色ごとのページの列 {#reading-order}
 
-下の列は、各ページの front matter から次の手順で作る。
+列は番号の順に全部読むためのものではない。まず「必修」の行を前から読み、「準必修」と「余裕があれば」は、例題や本番で出会ったときに読めばよい。黄を目指すときは、黄の列と並行して青までの「必修」を復習する（[黄を目指す段の主な条件](#yellow)）。前提のつながりを図で見るときは[知識マップ](knowledge-map.md#focus)を使う。
 
-1. その色のレベルのページを集める。下のレベルのページにある上の帯の節も、「ページ › 節（基礎のページの節）」のような行として、その色の列に入れる。
-2. 同じ色の中の前提の深さで並べる。同じ色に前提を持たないページが先に来て、分野をまたぐ前提も先に並ぶ。
-3. 前提の深さが同じなら、分野の並び、頻度、分野の中の順で並べる。
+| 頻度 | 付ける条件（abc451〜abc480 の D〜G の分類による） |
+| --- | --- |
+| 必修 | 最近の ABC で 2 回以上使われたか、多くのページの前提になっている |
+| 準必修 | 最近の ABC で 1 回使われたか、古い ABC で繰り返し使われた |
+| 余裕があれば | それ以外。発展のページの多くがここに入る |
 
-頻度の欄は、最近の ABC（abc451〜abc480 の D〜G の分類）での出題の多さから付けた。
+「ページ › 節（基礎のページの節）」の行は、下のレベルのページにある上の帯の節である。ページの下の帯の部分を読んでいれば、節だけを読めば足りる。各行のチェック欄は、そのページ（節の行は「水の節」のような欄）の「理解した」と同じ記録である。次の欄で「理解した行を隠す」を選ぶと、まだ理解していない行だけが残る。
 
-- **必修**：最近の ABC で 2 回以上使われたか、多くのページの前提になっている。
-- **準必修**：最近の ABC で 1 回使われたか、古い ABC で繰り返し使われた。
-- **余裕があれば**：それ以外である。発展のページの多くがここに入る。
+??? note "列の並べ方"
 
-列は番号の順に全部読むためのものではない。まず「必修」の行を前から読み、「準必修」と「余裕があれば」は、例題や本番で出会ったときに読めばよい。節の行は、そのページの下の帯の部分を読んでいれば、節だけを読めば足りる。黄を目指すときは、黄の列と並行して青までの「必修」を復習する（[黄を目指す段の主な条件](#yellow)）。前提のつながりを図で見るときは[知識マップ](knowledge-map.md#focus)を使う。
-
-各行の先頭のチェック欄は、そのページの「理解した」と同じ記録である。節の行は、ページの上の「水の節」のような欄にあたる。ページの上と下の欄で付けても、この列の欄で付けてもよい。次の欄で「理解した行を隠す」を選ぶと、まだ理解していない行だけが残る。
+    1. その色のレベルのページと、下のレベルのページにある上の帯の節を集める。
+    2. 同じ色の中の前提の深さで並べる。同じ色に前提を持たないページが先に来て、分野をまたぐ前提も先に並ぶ。
+    3. 前提の深さが同じなら、分野の並び、頻度、分野の中の順で並べる。
 
 <div class="kp-order-tools"></div>
 
@@ -747,7 +751,7 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 | 青 | F と難しい E | 1600〜1999 | 典型90 の★6、[EDPC](../guide/glossary.md#edpc) |
 | 黄 | 難しい F と易しい G | 2000〜2399 | 典型90 の★7 |
 
-典型90 の★ごとに difficulty の範囲が決まっていて、仮に AtCoder に出たら、どのレート帯の参加者の半分が解きそうかを表す。★5 は 1200〜1599、★6 は 1600〜1999、★7 は 2000 以上にあたる（[典型90問の★とレベル](problem-sets.md#typical90-stars)）。
+典型90 の★5・★6・★7 は、difficulty 1200〜1599・1600〜1999・2000 以上にあたる（[典型90問の★とレベル](problem-sets.md#typical90-stars)）。
 
 - **水**：E を解く練習と同じくらい、D までを速く確実に解く練習が効く。A〜D を約 40 分で解けないうちは、E を解いても水のパフォーマンスに届きにくい（[到達の目安](#targets)）。
 - **青**：F で最も多いのはデータ構造なので、水の列のセグメント木を、条件を言い換えて載せる練習まで含めて身につける。E を落とした回は、E の見直しを優先する。
@@ -755,23 +759,37 @@ abc451〜abc480 の G の 30 問で使われた手法を、ページの種類（
 
 水以上を目指すなら、AtCoder の公式の講座と演習用のコンテストも、より深く学ぶ先に使える（[AtCoder Algorithm Lectures](problem-sets.md#aal)）。
 
-過去の ABC から問題を選ぶときは、位置ではなく difficulty で選ぶ。6 問体制（abc126〜abc211）の E・F は今より難しく、E の difficulty の中央値は 1528（abc400〜abc480 では 1286）、F は 2132（同じく 1744）である。8 問体制（abc212〜abc318）の E・F・G は今とほぼ同じ難しさで（中央値 1308・1866・2326。今の G は 2391）、その上の Ex は今の G より難しい（中央値 2912）。2023 年 9 月の abc319 からは 7 問体制で、E〜G の難しさに一方向の変化は見えないので、abc319 以降なら位置をそのまま目安にしてよい。
+過去の ABC から問題を選ぶときは、位置ではなく difficulty で選ぶ。abc319 以降（7 問体制）なら位置をそのまま目安にしてよいが、6 問体制（abc126〜abc211）の E・F は今より難しい。
+
+??? note "問題の数ごとの難しさ（difficulty の中央値）"
+
+    | 時期 | E | F | G | Ex |
+    | --- | --- | --- | --- | --- |
+    | 6 問体制（abc126〜abc211） | 1528 | 2132 | — | — |
+    | 8 問体制（abc212〜abc318） | 1308 | 1866 | 2326 | 2912 |
+    | 今（abc400〜abc480） | 1286 | 1744 | 2391 | — |
+
+    abc319（2023 年 9 月）からの 7 問体制では、E〜G の難しさに一方向の変化は見えない。
 
 ## 解いた数・理解した数 {#progress}
 
-下の表は、このブラウザで付けた「理解した」と「解いた」のチェックを集計したものである。レベル別・分野別の表と、問題の difficulty の色別の表がある。
+このブラウザで付けた「理解した」と「解いた」のチェックを、レベル別・分野別と、問題の difficulty の色別に集計する。
 
-- **理解した**：各ページの上と下にあるチェック欄と、[色ごとのページの列](#reading-order)の行のチェック欄から数える。チェック欄はページのレベルと、ページの中の上の帯の節のレベルの数だけあり、1 つずつ数える。
-- **解いた問題**：各ページの例題・練習・力試しの一覧の、行の先頭のチェック欄から数える。レベル別・分野別の表では、問題を載せたページのレベル・分野で数える。
-- **difficulty の色別**：解いた問題を、問題そのものの difficulty の色（灰・茶・緑・水・青・黄・橙・赤）で数える。基礎のページにも difficulty の高い力試しが載るので、水の difficulty の問題を何問解いたかは、この表で見る。
+??? note "何を数えるか"
+
+    - **理解した**：各ページの上と下にあるチェック欄と、[色ごとのページの列](#reading-order)の行のチェック欄から数える。チェック欄はページのレベルと、ページの中の上の帯の節のレベルの数だけあり、1 つずつ数える。
+    - **解いた問題**：各ページの例題・練習・力試しの一覧の、行の先頭のチェック欄から数える。レベル別・分野別の表では、問題を載せたページのレベル・分野で数える。
+    - **difficulty の色別**：問題そのものの difficulty の色で数える。基礎のページにも difficulty の高い力試しが載るので、水の difficulty の問題を何問解いたかは、この表で見る。
 
 <div class="kp-roadmap-stats"></div>
 
-記録はこのブラウザの localStorage にだけ保存し、端末どうしで同期しない。別の端末へ移すときや退避するときは、次の欄で書き出し・読み込みをする。「ファイルに保存」で記録を JSON のファイルに書き出し、別の端末では「ファイルから読み込む」でそのファイルを選ぶ。欄には、最後に書き出した日も出る。
+記録はこのブラウザにだけ保存し、端末どうしで同期しない。別の端末へ移すときや退避するときは、次の欄の「ファイルに保存」で書き出し、別の端末の「ファイルから読み込む」でそのファイルを選ぶ。
 
 <div class="kp-progress-io"></div>
 
-iPhone や Mac の Safari では、Safari を使った 7 日の間にこのサイトを一度も操作しないと、localStorage を含む保存データが消える。WebKit の Intelligent Tracking Prevention の仕様である。ホーム画面に追加したウェブアプリは、そのアプリを実際に使った日だけを数えるので消えにくい。Safari で読むときは、ときどきファイルに保存して退避しておく。
+??? warning "Safari で読むとき"
+
+    iPhone や Mac の Safari では、Safari を使った 7 日の間にこのサイトを一度も操作しないと、保存した記録が消える（WebKit の Intelligent Tracking Prevention の仕様）。ホーム画面に追加したウェブアプリは、そのアプリを使った日だけを数えるので消えにくい。ときどきファイルに保存して退避しておく。
 
 理解したページと前提のつながりは、[知識マップ](knowledge-map.md#progress)で塗り分けて見られる。あとで読みたいページは、各ページの「勉強したい」で[勉強したいリスト](study-list.md)に入れておける。
 
@@ -779,10 +797,9 @@ iPhone や Mac の Safari では、Safari を使った 7 日の間にこのサ�
 
 このロードマップは読む順の案内であり、出題範囲の一覧（シラバス）ではない。
 
-- **列にない知識も出る**：G の上半分では発展の手法が使われ、どのページにも当たらない考察だけで解く問題もある。
-- **レベルは使われ始める帯である**：同じ手法でも、易しい使い方と難しい使い方で帯が変わる。そのためページの中に上の帯の節があり、列に節の行として入る。
-- **列を終えてから次の色へ進むのではない**：水の列を全部読む前に E を解き始めてよい。列は、解けなかった問題の手法を探すときの地図としても使う。
-- **列と頻度は変わる**：ページが増えたときや、最近の ABC の分類を付け直したときに、並びと頻度が変わる。
+- **列にない知識も出る**：G の上半分では発展の手法や、どのページにも当たらない考察が使われる。
+- **列を終えてから次の色へ進むのではない**：水の列を全部読む前に E を解き始めてよい。
+- **列と頻度は変わる**：ページが増えたときや、最近の ABC の分類を付け直したときに変わる。
 
 解けなかった問題から手法を探すときは、[逆引き辞典（言い回しから）](reverse-index-signs.md#by-phrase)・[逆引き辞典（制約から）](reverse-index-constraints.md#constraint-table)と、[詰まったときの発想リスト](thinking-checklist.md)を使う。
 
