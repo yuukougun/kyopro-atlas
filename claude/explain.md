@@ -54,4 +54,4 @@ claude.ai/code の Projects のスレッド（リポジトリを clone した Cl
 
 ## 4. 記録用まとめ
 
-- 利用者に頼まれたときだけ、`claude/record-format.md` の形で出す。記録は利用者が手元の Claude Code の `/record-problem` で行う（クラウドのスレッドで notes/ に書いても手元に残らないので、スキルは使わない）
+- 利用者に頼まれたときだけ、`claude/record-format.md` の形（v2）で出す。`support` は、この解説で選んだ「ヒントだけ」「解説まで」をそのまま書き、利用者が最後まで自分で解けたと言えば `自力`、自分で解くのをやめて答えを見たと言えば `ギブアップ` にする。`status` は利用者が AC したと言ったときだけ `AC` にし、ほかは null。`code` は手元のファイルが分からないので null にする。記録は利用者が手元の Claude Code の `/record-problem` で行う（クラウドのスレッドで notes/ に書いても手元に残らないので、スキルは使わない）
