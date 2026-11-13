@@ -24,7 +24,7 @@ updated: 2026-11-13
 
 !!! abstract "要点"
     - **何のページか**：この教材が参考にした解説記事の書き手と、例題に使った問題集・使ったサービスやライブラリへの謝意を示す。
-    - **使い方**：特に多く参考にした書き手と助けられた点は、[特に多く参考にした書き手](#main-thanks)で読める。参考に挙げたすべての書き手と資料は、[書き手と資料](#writers)の表と一覧にある。
+    - **使い方**：特に多く参考にした書き手と助けられた点は、[特に多く参考にした書き手](#main-thanks)で読める。参考に挙げた書き手と資料は、[書き手と資料](#writers)の表と一覧にある。
     - **出典との違い**：どの記事のどこを参考にしたかは、各ページの末尾の参考の節に書いている（[参考にした資料の示し方](ai-and-sources.md#citations)）。このページは、それとは別に感謝を伝えるためにある。
 
 <!-- textlint-disable -->
@@ -44,12 +44,12 @@ updated: 2026-11-13
 
 ## 書き手と資料 {#writers}
 
-参考の節に挙げたすべての書き手と資料を、参考に挙げたページの数とともに次に示す。表と一覧は、全ページの参考の節からサイトを作るプログラムが数えたもので、ページを直すたびに作り直す。1 ページだけの参考でも、そのページの説明や例題はその記事に支えられている。ここに名前のあるすべての書き手に感謝する。
+参考の節に挙げた書き手と資料を、参考に挙げたページの数とともに次に示す。表と一覧は、サイトを作るプログラムが全ページの参考の節から数えたもので、ページを直すたびに作り直す。数えるのは、書き手の名前の後に題名を鉤括弧に入れて書いた行だけである。論文などのこの形でない行は数に入らない。1 ページだけの参考でも、そのページの説明や例題はその記事に支えられている。ここに名前のあるすべての書き手に感謝する。
 
 <!-- gen:begin acknowledgments -->
 <!-- textlint-disable -->
 
-参考の節に挙げた書き手は 223 人、資料は 23 件である（358 ページの参考の節から数えた）。
+参考の節に挙げた書き手の名義は 219、資料は 23 件である（全ページの参考の節から数えた）。
 
 ### 参考に多く挙げた書き手 {#main-writers}
 
@@ -68,8 +68,8 @@ updated: 2026-11-13
 | comet725 | `qiita.com/comet725` | 32 |
 | oraclesqlpuzzle | `oraclesqlpuzzle.ninja-web.net` | 28 |
 | プロひろ | `programming-hiroba.com` | 28 |
-| kyo-pro | `kyo-pro.hatenablog.com` | 24 |
-| ei1333 | `ei1333.github.io` | 19 |
+| kyo-pro | `kyo-pro.hatenablog.com` | 27 |
+| ei1333 | `ei1333.github.io` | 21 |
 | torus711 | `torus711.hatenablog.com` | 18 |
 | gotoki_no_joe | `qiita.com/gotoki_no_joe` | 16 |
 | Nyaan | `nyaannyaan.github.io` | 16 |
@@ -107,11 +107,11 @@ updated: 2026-11-13
 | Luogu 专栏 | `www.luogu.com.cn` | 1 |
 | OEIS | `oeis.org` | 1 |
 
-??? note "そのほかの書き手（202 人）"
+??? note "そのほかの書き手（198 の名義）"
 
     10 ページ未満の参考に挙げた書き手を、ページの数の順に並べる。
 
-    sigma425・hyouri・noshi91・recuraki・betrue12・KCPC・kyopro_friends・sano192・hitonanode・hotman78・kmyk・m193h・Shizen_Tota・snuke・syamashi・tayu0110・Yuulis・2yuu・ageprocpp・Billlly・bit_otter・chokudai・fjnkt98・inamori・iwamutsu256・kenkoooo・keymoon・Motsu_xe・navel_tos・No_Play_Yes_Splay・procon-kirokuyou・rsk0315・testcampus・yamate11・yuu_kyopro・ZOI_dayo・アルゴリズムロジック・競プロはじめました・bfs・bluebery1001・cirrostratus・convexineq・dvoraker3・ebisuke・ferin・flkanjin・hibit・jikei・Konini64・loop0919・Luzhiled's Library・mattsunkun・miscalc・nakst_hide・nouka28・omakasessan・pyteyon・rareshana・siooisi・smijake3・tatyam・tmsn・ToastUz・traP・vain0x・wafuwafualgorithm・Youteru・あめんばーど・いもす研・37zigen・51_24_11_・\_mattu34_・agrawal-d・akiku・AKpirion・algo-logic・Alin Bostan, Ryuhei Mori・alpha0314alpha・amoshyc・anoconne・anqooqie・ARMERIA・aruru88・asamichiruko・at274・Atcoder-myReflection・atlantis・Authns・Bellala・blue_jam・bondo・bouzuya・buyoh・c-yan・chiaoi・codwarm・cry999・cutelxy・Daniel Rutschmann・DeltaStruct・dokaraya・edon8618・emtubasa・enakai00・esaka-sandbox・fairy_lettuce・firiexp・FisherGoGo・fken_prime_57・Florian Ingels・fukuro-hoho・geam1113・H. Bannai ほか・hal_mat・hamamu・Heartlessly・hossie・igeee・ikunTLE・Iroha_3856・izu_nori・Jijidawang・kazuma8128・Kiri8128・kiwamachan・KK_lang・Kodaman・kokiymgch・konan-compro・koosaga・kopricky・ks2m・kumonosu・kyopuro-ryusuke920・M. Rubinchik, A. M. Shur・mackerel38・masa2796・Melville・mhiro216・MichaelChick・miraclepbc・miti-7・mkreem・mmrz・mmxsrup・motoya0118・MoyouSayuki・mzhang2021・nabata・nagi0724・nariaki3551・ngtkana・Nicholas J. A. Harvey・nishio・noya2・nullkara・okm-uv・pctsnote・perogram・PHarr・picomikan・potato167・punirunrun・reika727・robert1003・RomanLin・rsm9（ひとなので）・rui_er・ryuhe1・samekard・sansaqua・sapphire15・satanic0258・SayA・Sen・sen-comp・Sen_comp・sirsoldano・snsn46・Sonnety・sounansya・tibrella・tiramister・tototti・tsutaj・Un_titled・untan・viral_8・Wakako19972899・wanggk・wangsenyuan・WineChord・yamanoue・yaohaoyou・Yoyoyo8128・zk_phi・かに・ファイ・一ノ瀬朱紅・下蛋爷・箱星・西懸のメモ帳
+    sigma425・hyouri・noshi91・betrue12・recuraki・KCPC・kyopro_friends・sano192・hitonanode・hotman78・kmyk・m193h・Shizen_Tota・snuke・syamashi・tayu0110・Yuulis・アルゴリズムロジック・2yuu・ageprocpp・Billlly・bit_otter・chokudai・fjnkt98・inamori・kenkoooo・keymoon・Motsu_xe・navel_tos・No_Play_Yes_Splay・procon-kirokuyou・rsk0315・testcampus・yamate11・yuu_kyopro・ZOI_dayo・bfs・bluebery1001・cirrostratus・convexineq・dvoraker3・ebisuke・ferin・flkanjin・hibit・iwamutsu256・jikei・Konini64・loop0919・mattsunkun・miscalc・nakst_hide・nouka28・omakasessan・pyteyon・rareshana・sen-comp・siooisi・smijake3・tatyam・tmsn・ToastUz・traP・vain0x・wafuwafualgorithm・Youteru・あめんばーど・いもす研・37zigen・51_24_11_・\_mattu34_・agrawal-d・akiku・AKpirion・Alin Bostan, Ryuhei Mori・alpha0314alpha・amoshyc・anoconne・anqooqie・aruru88・asamichiruko・at274・Atcoder-myReflection・atlantis・Authns・Bellala・blue_jam・bondo・bouzuya・buyoh・c-yan・chiaoi・codwarm・cry999・cutelxy・Daniel Rutschmann・DeltaStruct・dokaraya・edon8618・emtubasa・enakai00・esaka-sandbox・fairy_lettuce・firiexp・FisherGoGo・fken_prime_57・Florian Ingels・fukuro-hoho・geam1113・H. Bannai ほか・hal_mat・hamamu・Heartlessly・hossie・igeee・ikunTLE・Iroha_3856・iwamutsu・izu_nori・Jijidawang・kazuma8128・Kiri8128・kiwamachan・KK_lang・Kodaman・kokiymgch・konan-compro・koosaga・kopricky・ks2m・kumonosu・kyopuro-ryusuke920・M. Rubinchik, A. M. Shur・mackerel38・masa2796・Melville・mhiro216・MichaelChick・miraclepbc・miti-7・mkreem・mmrz・mmxsrup・motoya0118・MoyouSayuki・mzhang2021・nabata・nagi0724・nariaki3551・ngtkana・Nicholas J. A. Harvey・nishio・noya2・nullkara・okm-uv・pctsnote・perogram・PHarr・picomikan・potato167・punirunrun・reika727・robert1003・RomanLin・rsm9・rui_er・ryuhe1・samekard・sansaqua・sapphire15・satanic0258・SayA・Sen_comp・sirsoldano・snsn46・Sonnety・sounansya・tibrella・tiramister・tototti・tsutaj・Un_titled・untan・viral_8・Wakako19972899・wanggk・wangsenyuan・WineChord・yamanoue・yaohaoyou・Yoyoyo8128・zk_phi・かに・ファイ・一ノ瀬朱紅・下蛋爷・箱星・西懸のメモ帳
 
 <!-- textlint-enable -->
 <!-- gen:end acknowledgments -->
@@ -120,7 +120,7 @@ updated: 2026-11-13
 
 ## 例題と練習に使った問題集 {#problem-sets}
 
-本文の例題と練習問題の多くは、AtCoder の上にコンテストの形で置かれた問題集から採った。主なものは、考察の典型を 1 問ずつ並べた競プロ典型 90 問、DP の基本形を集めた EDPC と TDPC、鉄則本の演習問題集、アルゴリズムと数学 演習問題集、ACL の機能を 1 問ずつ確かめる ACL Practice である。それぞれの中身は[問題集と練習用コンテストの案内](../guide/problem-sets.md#collections)で読める。手法ごとの最初の例題として解ける問題がそろっているので、例題を選びやすかった。問題を作り、誰でも提出して確かめられる形で公開している方々に感謝する。
+本文の例題と練習問題の大半は ABC・ARC・AGC の過去問である。一部は、AtCoder の上にコンテストの形で置かれた問題集から採った。主なものは、競プロ典型 90 問（考察の典型）、EDPC（DP の基本形）とその先の TDPC、鉄則本の演習問題集、アルゴリズムと数学 演習問題集、ACL Practice（ACL の機能）である。それぞれの中身は[問題集と練習用コンテストの案内](../guide/problem-sets.md#collections)で読める。手法ごとの最初の例題として解ける問題がそろっているので、例題を選びやすかった。問題集を作って公開している方々と、ABC・ARC・AGC の問題を作ってきた方々に感謝する。
 
 典型90問・鉄則本の演習問題集・アルゴリズムと数学 演習問題集では、E869120 氏が GitHub に公開している次の資料も参考にした。本そのものは資料にしていない。
 
