@@ -422,7 +422,7 @@ class AcknowledgmentsTest(unittest.TestCase):
         self.assertIn("書き手の名義は 2、資料は 1 件", out)
         self.assertIn("| drken | `qiita.com/drken` | 2 |", out)          # けんちょん・Drken をまとめる
         self.assertIn("| cpprefjp | `cpprefjp.github.io` | 1 |", out)
-        self.assertIn("そのほかの書き手（1 の名義）", out)
+        self.assertIn("そのほかの書き手（1）", out)
         self.assertNotIn("kyopro-atlas", out)
 
 

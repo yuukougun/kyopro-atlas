@@ -214,7 +214,7 @@ ACK_ALIASES = {
 # 人ではなく、サイト・ライブラリ・仕様などの資料として挙げるもの（ACK_ALIASES でまとめた後の名前）
 ACK_SITES = {
     "AtCoder Library", "AtCoder NoviSteps", "Library Checker", "library-checker-problems", "cppreference",
-    "cpprefjp", "Wikipedia", "cp-algorithms", "OI Wiki", "GCC", "GCC Bugzilla", "CSES", "OEIS", "KACTL", "HackMD",
+    "cpprefjp", "Wikipedia", "cp-algorithms", "OI Wiki", "GCC", "CSES", "OEIS", "KACTL", "HackMD",
     "WebKit", "Apple", "Creative Commons", "Claude Code Docs", "Kyopro Encyclopedia of Algorithms",
     "online-judge-tools", "competitive-verifier", "Luogu 专栏",
 }
@@ -1280,8 +1280,7 @@ class Site:
             return "（data/recent-abc.yaml に問題がない）"
         # 前の版の小見出しの anchor（#recent-positions-e など）は、タブの前の空の目印で残す
         marks = "".join(f'<span id="recent-positions-{p.lower()}"></span>' for p in RECENT_POSITIONS)
-        head = ("abc451〜abc480 の各位置の問題で使われた手法を、ページの種類で分けて多い順に並べる。"
-                "かっこの数は、その位置でそのページを使った問題の数（1 のときは書かない）。")
+        head = "かっこの数は、その位置でそのページを使った問題の数（1 のときは書かない）。"   # 何を並べた表かは手書きの節の冒頭に書く
         return head + "\n\n" + marks + "\n\n" + "\n\n".join(out)
 
     def b_recent_abc(self, host: str) -> str:
@@ -1436,7 +1435,7 @@ class Site:
         if sites:
             out.append("### 資料とライブラリ {#sources}\n\n" + table(["資料", "主な場所", "ページ数"], [row(a) for a in sites]))
         if rest:
-            out.append(f'??? note "そのほかの書き手（{len(rest)} の名義）"\n\n'
+            out.append(f'??? note "そのほかの書き手（{len(rest)}）"\n\n'
                        f"    {ACK_MAIN} ページ未満の参考に挙げた書き手を、ページの数の順に並べる。\n\n"
                        "    " + "・".join(cp.md_text(a) for a in rest))
         return "\n\n".join(out)
