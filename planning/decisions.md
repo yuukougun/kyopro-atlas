@@ -98,4 +98,6 @@
 
 | 項目 | 決定 | 補足 |
 | --- | --- | --- |
+| Issue のテンプレート（#109） | 書式を 3 つにする。ページの誤りの報告（page-error.yml。ページの題名を必須でなくし「参考にされた記事の URL」を足して、自分の記事から来た書き手も使えるようにした）・要望・提案（request.yml：種類と内容）・全体の改善（improvement.yml：背景・やること・完了の条件。#3 の sub-issue は今までどおり場所・今の状態・直したあと）。config.yml で方針のページ #contact へのリンクを出す | ユーザーの判断 |
+| 白紙の Issue（#109） | Web の画面では閉じる（blank_issues_enabled: false）。`gh issue create` などテンプレートを通らない立て方は今までどおり使う | ユーザーの判断 |
 | AAL のトップへのリンク（#108） | atcoder.jp へのリンクは問題の囲みの中だけに置く決まり（手引き §10・§17）の例外として、guide/problem-sets#aal に AtCoder Algorithm Lectures のトップページ（info.atcoder.jp）へのリンクを置く。講座の中身（どの回があるか）には触れず、サイトがあることと演習用の AAL Contest があることだけを書く。info.atcoder.jp は atcoder.jp のサブドメインなので AI は開かない | ユーザーの判断 |
