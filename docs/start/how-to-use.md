@@ -30,7 +30,7 @@ sections:
   - {title: AtCoder生成AI対策ルールの版, anchor: ai-rule-version}
   - {title: 記録用スキル /record-problem, anchor: record-skill}
 stage: done
-updated: 2026-10-29
+updated: 2026-11-13
 ---
 
 !!! abstract "要点"
@@ -287,7 +287,13 @@ flowchart TD
 
 Issue は公開され、誰でも読める。問題文や解説の文章は写さず（ほかの人の文章の転載になる）、問題は問題 ID（`abc340_e` など）で示す。報告を受けて直したページは、更新日が新しくなる。
 
-自分の記事が写されている・参考の行が違うなど、出典についての申し出も同じように Issue で受け付ける（[出典と AI 利用の方針](ai-and-sources.md#contact)）。
+ページから開かずに [Issue を立てる画面](https://github.com/yuukougun/kyopro-atlas/issues/new/choose)を開くと、次の 3 つの書式から選べる。
+
+| 書式 | 使うとき |
+| --- | --- |
+| ページの誤りの報告 | ページの誤りや分かりにくいところ。自分の記事が写されている・参考の行が違うなど、出典についての申し出もここで受ける（[出典と AI 利用の方針](ai-and-sources.md#contact)） |
+| 要望・提案 | 手法・題材・問題の追加や、検索・記録などの使い勝手についての要望。感想もここで送る |
+| 全体の改善 | 複数のページにまたがる修正や方針の見直し |
 
 ## 進捗の記録（解いた・理解した） {#progress}
 
@@ -368,7 +374,7 @@ ABCxxx E の解説を頼みたい。終了したコンテストの問題であ�
 <!-- gen:begin version -->
 <!-- textlint-disable -->
 
-索引の版：`35063c9b2da8`（ページの updated の最大：2026-10-30）
+索引の版：`b9653a528312`（ページの updated の最大：2026-11-13）
 
 <!-- textlint-enable -->
 <!-- gen:end version -->

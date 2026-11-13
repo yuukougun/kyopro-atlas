@@ -1,0 +1,31 @@
+# 要望・提案（Issue #109）：読者からの、ページの誤り以外の声。
+name: 要望・提案
+description: 手法・題材・問題の追加や使い勝手についての要望、感想を送る
+title: "要望："
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        教材への要望や提案を送る。ページの誤りは「ページの誤りの報告」から送る。
+
+        Issue は公開され、誰でも読める。問題文や解説の文章は写さず（ほかの人の文章の転載になる）、問題は問題 ID（`abc340_e` など）で示す。
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 種類
+      options:
+        - 手法・題材のページの追加
+        - 例題・練習問題の提案
+        - 使い勝手（検索・記録・表示など）
+        - 感想
+        - その他
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: 内容
+      description: 何がほしいか、どんなときに困ったか。関係するページの URL や問題 ID があれば添える
+    validations:
+      required: true

@@ -1,0 +1,6 @@
+# Issue を立てる画面（Issue #109）。白紙の Issue は閉じる（gh issue create など、テンプレートを通らない立て方は使える）
+blank_issues_enabled: false
+contact_links:
+  - name: 出典と AI 利用の方針
+    url: https://yuukougun.github.io/kyopro-atlas/start/ai-and-sources/#contact
+    about: この教材の書き方と確かめ方、出典の扱い、掲載内容についての連絡の受け方
