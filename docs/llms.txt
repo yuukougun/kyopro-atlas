@@ -2,7 +2,7 @@
 
 > AtCoder で黄色（レート 2000）を目指す学習者向けの、辞書として引く競技プログラミングの教材。手法・考察・データ構造・数学・C++ のページを分野ごとに置く。
 
-- 版：7542616d7c80（updated の最大：2026-11-13）。tools/gen_site.py が生成する
+- 版：e6809f5315a2（updated の最大：2026-11-13）。tools/gen_site.py が生成する
 - ページ数：358
 - 1 行が 1 ページ：「- [タイトル](URL)（id・レベル・分野・段階）：要約」
 - レベルは difficulty の帯：基礎 〜1199・水 1200〜1599・青 1600〜1999・黄 2000〜2399・発展 2400〜（概要だけ）。「—」はレベルを持たないページ
@@ -32,7 +32,7 @@
 - [この教材の使い方](https://yuukougun.github.io/kyopro-atlas/start/how-to-use/)（how-to-use・—・start・done）：解けなかった ABC の問題から、逆引き辞典 → ページ冒頭の要点 → 前提の順に教材を引ける。レベルの意味、進捗の記録と退避、claude.ai での解説の頼み方も示す。
 - [記法と用語の約束](https://yuukougun.github.io/kyopro-atlas/start/notation/)（notation・—・start・done）：教材全体で使う記法の約束を引ける。計算量、半開区間、添字、合同式・整除・floor・ceil・Σ などの数学の記法、グラフ・木・文字列の記号を定め、各ページは定義を繰り返さずに参照する。
 - [AtCoder の仕組み](https://yuukougun.github.io/kyopro-atlas/start/atcoder-system/)（atcoder-system・—・start・done）：レート・パフォーマンス・色、difficulty、ABC の形式と順位、練習用コンテスト、生成 AI のルールがわかる。教材のレベルは difficulty（その問題を半々で解けるレート）の帯で決まる。
-- [出典と AI 利用の方針](https://yuukougun.github.io/kyopro-atlas/start/ai-and-sources/)（ai-and-sources・—・start・done）：この教材の本文を AI（Claude）が書き、別の AI の担当と機械の検査で確かめている流れと、段階「完成」の意味がわかる。他者の記事を転載しない約束、出典の示し方、AI の利用を断るサイトの扱い、ライセンス・連絡先・謝辞への案内も示す。
+- [出典と AI 利用の方針](https://yuukougun.github.io/kyopro-atlas/start/ai-and-sources/)（ai-and-sources・—・start・done）：この教材の本文を AI（Claude）が書いて確かめる流れと、作者・AI・機械の検査の分担、段階「完成」の意味がわかる。他者の記事を転載しない約束、出典の示し方、AI の利用を断るサイトの扱い、ライセンス・連絡先・謝辞への案内も示す。
 - [謝辞](https://yuukougun.github.io/kyopro-atlas/start/acknowledgments/)（acknowledgments・—・start・done）：この教材が参考にした解説記事の書き手と、例題に使った問題集・使ったサービスやライブラリへの謝意を示す。
 
 ## 横断ページ
