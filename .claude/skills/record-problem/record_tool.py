@@ -1,14 +1,19 @@
 #!/usr/bin/env python3
-"""記録用スキル /record-problem の補助。読むだけで、ファイルは書かない。
+"""記録用スキル /record-problem の補助。読むだけで、ファイルは書かない（ap fetch のキャッシュを除く）。
 
-リポジトリの根で実行する:
-  python3 .claude/skills/record-problem/record_tool.py pages [語 ...] [--problem ID] [--limit 20]
+どのフォルダで実行してもよい。根は、このファイルの実体の場所から求める（シンボリックリンク経由で呼んでも、
+リンク先の kyopro-atlas を指す）。<tool> は python3 <このファイル> のこと:
+  <tool> root
+      リポジトリの根の絶対パスを出す。notes/ と claude/record-format.md はこれを基準にする
+  <tool> ap show ID [...] [--json] / ap contest CONTEST_ID [--json] / ap fetch [--force]
+      tools/ap.py を代わりに呼ぶ（この 3 つだけ）。ap.py の場所が環境ごとに違っても、スキルの許可が 1 種類で済む
+  <tool> pages [語 ...] [--problem ID] [--limit 20]
       関連ページの候補。docs/ の各ページの front matter の id・題名・別名・節の題名に語を含むものを出す。
       docs/ にまだないページは planning/catalog/*.yaml から補う（段階の欄が「目次のみ」）。
       --problem を付けると、台帳（data/problems.yaml・data/recent-abc.yaml）でその問題に結び付いたページを先に出す
-  python3 .claude/skills/record-problem/record_tool.py url ID[#anchor] [...]
+  <tool> url ID[#anchor] [...]
       ページ（節）の id を確かめて公開 URL を出す。ページの URL を渡してもよい。見つからなければ終了コード 1
-  python3 .claude/skills/record-problem/record_tool.py check notes/<問題ID>.md
+  <tool> check <根>/notes/<問題ID>.md
       記録のファイル（形は SKILL.md）の front matter と本文の節を確かめる。問題があれば終了コード 1
 """
 from __future__ import annotations
@@ -16,6 +21,7 @@ from __future__ import annotations
 import argparse
 import datetime
 import re
+import subprocess
 import sys
 import unicodedata
 from pathlib import Path
@@ -23,13 +29,16 @@ from pathlib import Path
 try:
     import yaml
 except ImportError:
-    sys.exit("PyYAML がない。`uv run python3 …` で実行するか、python3-yaml を入れる")
+    yaml = None     # root・ap は使わない。pages・url・check は main で止める
 
 ROOT = Path(__file__).resolve().parents[3]
 SITE_URL = "https://yuukougun.github.io/kyopro-atlas/"  # mkdocs.yml に site_url があればそちらを使う
 CAUSES = ("知識不足", "気づけなかった", "実装ミス", "時間不足")
-RECORD_KEYS = ("date", "cause", "learned", "pages", "improvement")
-LOADER = getattr(yaml, "CSafeLoader", yaml.SafeLoader)
+RECORD_KEYS = ("date", "cause", "learned", "pages", "improvement")   # v1 から必ずある項目
+SUPPORTS = ("自力", "ヒントだけ", "解説まで", "ギブアップ")              # v2 の任意の項目 support の値
+STATUSES = ("AC", "未AC")                                                  # v2 の任意の項目 status の値
+AP_COMMANDS = ("show", "contest", "fetch")                                 # ap で通す tools/ap.py の命令
+LOADER = getattr(yaml, "CSafeLoader", None) or getattr(yaml, "SafeLoader", None)
 FRONT = re.compile(r"\A---[ \t]*\r?\n(.*?)^---[ \t]*\r?$", re.S | re.M)
 
 
@@ -243,6 +252,13 @@ def cmd_check(path: Path) -> int:
             errors.append(f"{at}：pages は id と url の組の列（url は {base} で始まる。ないときは []）")
         if r.get("improvement") is not None and not isinstance(r.get("improvement"), str):
             errors.append(f"{at}：improvement は文字列か null")
+        # v2 の任意の項目（なくてもよい）
+        if r.get("support") is not None and r.get("support") not in SUPPORTS:
+            errors.append(f"{at}：support は {'・'.join(SUPPORTS)} のどれかか null")
+        if r.get("status") is not None and r.get("status") not in STATUSES:
+            errors.append(f"{at}：status は {'・'.join(STATUSES)} のどれかか null")
+        if r.get("code") is not None and (not isinstance(r.get("code"), str) or not r["code"].strip()):
+            errors.append(f"{at}：code は解答ファイルのパスの文字列か null")
     for e in errors:
         print(f"NG  {path}：{e}")
     if not errors:
@@ -250,7 +266,22 @@ def cmd_check(path: Path) -> int:
     return 1 if errors else 0
 
 
+def cmd_ap(rest: list[str]) -> int:
+    """tools/ap.py の show・contest・fetch だけを、同じ引数で呼ぶ。"""
+    if not rest or rest[0] not in AP_COMMANDS:
+        print(f"ap で使えるのは {'・'.join(AP_COMMANDS)} だけ", file=sys.stderr)
+        return 2
+    return subprocess.run([sys.executable, str(ROOT / "tools" / "ap.py"), *rest]).returncode
+
+
 def main() -> int:
+    if sys.argv[1:2] == ["root"]:
+        print(ROOT)
+        return 0
+    if sys.argv[1:2] == ["ap"]:     # 後ろの引数は ap.py にそのまま渡す（argparse に解かせない）
+        return cmd_ap(sys.argv[2:])
+    if yaml is None:
+        sys.exit("PyYAML がない。python3-yaml（pip なら PyYAML）を入れる")
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     p = sub.add_parser("pages")
