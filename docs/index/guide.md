@@ -160,6 +160,7 @@ search:
     - `problem-sets#typical90-stars` 典型90問の★とレベル：https://yuukougun.github.io/kyopro-atlas/guide/problem-sets/#typical90-stars
     - `problem-sets#recent-abc` 最近の ABC → ページ：https://yuukougun.github.io/kyopro-atlas/guide/problem-sets/#recent-abc
     - `problem-sets#sets-to-pages` 問題集の問題 → ページ：https://yuukougun.github.io/kyopro-atlas/guide/problem-sets/#sets-to-pages
+    - `problem-sets#aal` AtCoder Algorithm Lectures（AAL）：https://yuukougun.github.io/kyopro-atlas/guide/problem-sets/#aal
     - `problem-sets#practice-contests` 練習用のコンテスト：https://yuukougun.github.io/kyopro-atlas/guide/problem-sets/#practice-contests
     - `problem-sets#tools` AtCoder 以外の道具：https://yuukougun.github.io/kyopro-atlas/guide/problem-sets/#tools
     - `problem-sets#verify-sets` ライブラリの確かめ用の問題集：https://yuukougun.github.io/kyopro-atlas/guide/problem-sets/#verify-sets
