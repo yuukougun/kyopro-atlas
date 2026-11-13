@@ -7,13 +7,13 @@
       リポジトリの根の絶対パスを出す。notes/ と claude/record-format.md はこれを基準にする
   <tool> ap show ID [...] [--json] / ap contest CONTEST_ID [--json] / ap fetch [--force]
       tools/ap.py を代わりに呼ぶ（この 3 つだけ）。ap.py の場所が環境ごとに違っても、スキルの許可が 1 種類で済む
-  python3 .claude/skills/record-problem/record_tool.py pages [語 ...] [--problem ID] [--limit 20]
+  <tool> pages [語 ...] [--problem ID] [--limit 20]
       関連ページの候補。docs/ の各ページの front matter の id・題名・別名・節の題名に語を含むものを出す。
       docs/ にまだないページは planning/catalog/*.yaml から補う（段階の欄が「目次のみ」）。
       --problem を付けると、台帳（data/problems.yaml・data/recent-abc.yaml）でその問題に結び付いたページを先に出す
-  python3 .claude/skills/record-problem/record_tool.py url ID[#anchor] [...]
+  <tool> url ID[#anchor] [...]
       ページ（節）の id を確かめて公開 URL を出す。ページの URL を渡してもよい。見つからなければ終了コード 1
-  python3 .claude/skills/record-problem/record_tool.py check notes/<問題ID>.md
+  <tool> check <根>/notes/<問題ID>.md
       記録のファイル（形は SKILL.md）の front matter と本文の節を確かめる。問題があれば終了コード 1
 """
 from __future__ import annotations
@@ -29,7 +29,7 @@ from pathlib import Path
 try:
     import yaml
 except ImportError:
-    sys.exit("PyYAML がない。`uv run python3 …` で実行するか、python3-yaml を入れる")
+    yaml = None     # root・ap は使わない。pages・url・check は main で止める
 
 ROOT = Path(__file__).resolve().parents[3]
 SITE_URL = "https://yuukougun.github.io/kyopro-atlas/"  # mkdocs.yml に site_url があればそちらを使う
@@ -38,7 +38,7 @@ RECORD_KEYS = ("date", "cause", "learned", "pages", "improvement")   # v1 から
 SUPPORTS = ("自力", "ヒントだけ", "解説まで", "ギブアップ")              # v2 の任意の項目 support の値
 STATUSES = ("AC", "未AC")                                                  # v2 の任意の項目 status の値
 AP_COMMANDS = ("show", "contest", "fetch")                                 # ap で通す tools/ap.py の命令
-LOADER = getattr(yaml, "CSafeLoader", yaml.SafeLoader)
+LOADER = getattr(yaml, "CSafeLoader", None) or getattr(yaml, "SafeLoader", None)
 FRONT = re.compile(r"\A---[ \t]*\r?\n(.*?)^---[ \t]*\r?$", re.S | re.M)
 
 
@@ -280,6 +280,8 @@ def main() -> int:
         return 0
     if sys.argv[1:2] == ["ap"]:     # 後ろの引数は ap.py にそのまま渡す（argparse に解かせない）
         return cmd_ap(sys.argv[2:])
+    if yaml is None:
+        sys.exit("PyYAML がない。python3-yaml（pip なら PyYAML）を入れる")
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     p = sub.add_parser("pages")

@@ -57,6 +57,9 @@ class RecordToolTest(unittest.TestCase):
         self.assertEqual(r.returncode, 2)
         self.assertIn("show・contest・fetch", r.stderr)
         self.assertEqual(run("ap", cwd=self.dir).returncode, 2)
+        r = run("ap", "show", "--help", cwd=self.dir)              # 許した命令は引数をそのまま ap.py に渡す
+        self.assertEqual(r.returncode, 0)
+        self.assertIn("usage: ap.py show", r.stdout)
 
     def check(self, extra: str) -> subprocess.CompletedProcess:
         path = self.dir / "abc300_e.md"
@@ -72,6 +75,8 @@ class RecordToolTest(unittest.TestCase):
         self.assertEqual(r.returncode, 1)
         self.assertIn("support は", r.stdout)
         self.assertIn("status は", r.stdout)
+        self.assertEqual(self.check('    code: ""\n').returncode, 1)
+        self.assertEqual(self.check("    code: 123\n").returncode, 1)
 
 
 if __name__ == "__main__":

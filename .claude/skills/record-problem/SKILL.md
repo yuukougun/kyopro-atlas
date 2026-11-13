@@ -14,12 +14,12 @@ allowed-tools:
 
 ## 守ること
 
+- 以下の `<tool>` は `python3 ${CLAUDE_SKILL_DIR}/record_tool.py` のこと（どのフォルダで実行してもよい）。最初に `<tool> root` を実行し、出た kyopro-atlas の根を `<根>` とする。`notes/` と `claude/record-format.md` は、いつも `<根>/notes/…`・`<根>/claude/record-format.md` の絶対パスで読み書きする。kyopro-atlas の外で起動したセッションでは、`<根>/notes/` の読み書きで許可を聞かれることがある（そのまま許可してよい）
 - **atcoder.jp・codeforces.com を開かない**（noai 指定）。ほかのフォルダから呼ばれたときも同じ。問題の実在・題名・difficulty は `<tool> ap` だけで確かめ、記憶で補わない
 - **問題文や解説の文章を写さない**。会話で見た問題文・解説も、memo・learned には自分の言葉で書く
 - **1問1ファイル**。同じ問題のファイルがあれば、新しく作らずに追記する
 - **集計しない**（件数・傾向・一覧を出さない）。`notes/` は git の追跡外（.gitignore 済み）なので、git add・commit もしない
 - **クラウドのセッションでは使わない**。書いた記録が手元に残らないため。最初に `printenv CLAUDE_CODE_REMOTE` を実行し、`true` と出たら何も書かずに「手元の Claude Code で使う」と伝えて終える
-- 以下の `<tool>` は `python3 ${CLAUDE_SKILL_DIR}/record_tool.py` のこと（どのフォルダで実行してもよい）。最初に `<tool> root` を実行し、出た kyopro-atlas の根を `<根>` とする。`notes/` と `claude/record-format.md` は、いつも `<根>/notes/…`・`<根>/claude/record-format.md` の絶対パスで読み書きする
 
 ## 手順
 
@@ -32,7 +32,7 @@ allowed-tools:
    - difficulty が null なら「未定」と書く
 3. **中身をそろえる**
    - 貼り付けがなければ、1回のメッセージで短く聞く：原因（知識不足／気づけなかった／実装ミス／時間不足）、学んだことを一言、関連ページ（手法の名前でよい）、教材の改善案（なければ「なし」）
-   - 同じセッションでヒントや添削の会話をしていたら、その流れから原因・学んだこと・関連ページの案を出し、利用者に確かめる（聞き直さずに済むものは聞かない）。任意の項目（support・status・code）も、会話や作業フォルダの記録（例：review.json の進み具合）から分かれば案を出す。分からなければ null にし、無理に聞かない
+   - 同じセッションでヒントや添削の会話をしていたら、その流れから原因・学んだこと・関連ページの案を出し、利用者に確かめる（聞き直さずに済むものは聞かない）。任意の項目（support・status・code）も、会話や作業フォルダの記録（例：review.json の進み具合）から分かれば案を出す。分からなければ書かず、無理に聞かない
    - 関連ページの候補は `<tool> pages --problem <ID> <語>…` で出す。docs/ の front matter の id・題名・別名・節から探し（ページがまだなければ planning/catalog/ から）、台帳にある問題は結び付いたページが先に出る。利用者が選んだものだけを書く
    - 貼り付けの関連ページは `<tool> url <id>…` で確かめ、id と URL を出力に合わせる。NG のものは候補を示して利用者に確かめる
    - 原因が4つのどれでもない、学んだことがない、といった欠けは利用者に聞く（解けたが残したいときは、原因を null にする）
@@ -72,7 +72,7 @@ records:
 ```
 
 - problem・contest・title・url・difficulty は、`<tool> ap show --json` の id・contest_id・title・url・difficulty を写す
-- records は記録1回につき1件、古い順。項目の意味は `<根>/claude/record-format.md` と同じ。support・status・code は任意の項目で、分からなければ書かない（null でもよい）。date は記録用まとめにあればその日、なければ今日。pages がなければ `[]`、improvement がなければ null
+- records は記録1回につき1件、古い順。項目の意味は `<根>/claude/record-format.md` と同じ。support・status・code は任意の項目で、分からなければ書かない。date は記録用まとめにあればその日、なければ今日。pages がなければ `[]`、improvement がなければ null
 - title・learned・improvement は二重引用符で囲む
 - 本文は、最初に問題へのリンクの見出しを1つ置き、記録ごとに「## 日付（原因）」の節を立てる（原因が null なら日付だけ）。節の中身は記録用まとめの memo か利用者の言葉で2〜3行（どこで詰まったか・鍵になった見方）。なければ learned を1行。問題文は写さない
 
