@@ -1,0 +1,28 @@
+# 全体の改善（Issue #109）：複数のページの修正・ページの追加・方針の決定など。1 ページの数行で済む小さな修正は #3 の sub-issue にする。
+name: 全体の改善
+description: 複数のページにまたがる修正、ページの追加、方針の決定など
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        1 ページの誤りは「ページの誤りの報告」から、読者としての要望は「要望・提案」から立てる。
+  - type: textarea
+    id: background
+    attributes:
+      label: 背景
+      description: 何が問題か、なぜ直すか
+    validations:
+      required: true
+  - type: textarea
+    id: todo
+    attributes:
+      label: やること
+      description: 直す場所と直し方。決まっていないことは「決めること」として書く
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: 完了の条件
+      description: 何が確かめられたら閉じるか
