@@ -33,7 +33,7 @@ updated: 2026-11-13
 別名：AI の利用・生成 AI・出典・参考文献・転載・noai・著作権・ライセンス・問い合わせ・連絡先
 <!-- textlint-enable -->
 
-読者が claude.ai に解説を頼むときの約束は、このページではなく[claude.ai での解説の頼み方](how-to-use.md#claude)にある。
+出典と AI 利用の方針は、この教材の書き方・資料・ライセンス・連絡先を示すページである。読者が claude.ai に解説を頼むときの約束は、このページではなく[claude.ai での解説の頼み方](how-to-use.md#claude)にある。
 
 ## AI で書いていることと確かめ方 {#ai-writing}
 

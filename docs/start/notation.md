@@ -40,7 +40,7 @@ updated: 2026-11-13
 別名：記法・0-indexed・1-indexed・半開区間・数学の記法・合同式・整除・床関数・天井関数・Σ の記法・notation
 <!-- textlint-enable -->
 
-語の意味は[用語集](../guide/glossary.md)、数値の目安は[早見表](../guide/cheatsheet.md)にあり、ここは記号の読み方を受け持つ。
+記法と用語の約束は、教材のどのページでも同じ意味で使う記号と書き方を引くページである。語の意味は[用語集](../guide/glossary.md)、数値の目安は[早見表](../guide/cheatsheet.md)にあり、ここは記号の読み方を受け持つ。
 
 ## 計算量の書き方 {#complexity}
 
@@ -278,7 +278,7 @@ $\mathrm{out}[v]$ は「最後に振った番号」ではなく「次に振る�
 | $\lvert S \rvert$ | 長さ |
 | $S[i]$ | $i$ 番目（$0 \le i < \lvert S \rvert$）の文字 |
 | $S[l, r)$ | 部分文字列。$S[l], S[l + 1], \dots, S[r - 1]$ をこの順に並べた連続する部分で、長さは $r - l$ |
-| $S[0, i)$・$S[i, \lvert S \rvert)$ | 接頭辞・接尾辞（$0 \le i \le \lvert S \rvert$）。$i = 0$ の接頭辞と $i = \lvert S \rvert$ の接尾辞は空文字列 |
+| $S[0, i)$・$S[i, \lvert S \rvert)$ | 接頭辞・接尾辞（$0 \le i \le \lvert S \rvert$）。$i = 0$ の接頭辞と $i = \lvert S \rvert$ の接尾辞は空文字列、$i = \lvert S \rvert$ の接頭辞と $i = 0$ の接尾辞は $S$ 自身 |
 | $ST$・$S + T$ | 連結 |
 | $S^R$ | 反転した文字列 |
 | `abc`・$\texttt{abc}$ | 具体的な文字列（本文では等幅、数式の中では `\texttt`） |
@@ -297,11 +297,11 @@ $\mathrm{out}[v]$ は「最後に振った番号」ではなく「次に振る�
 - **入出力**：改行は `'\n'` で書く（[endl と改行文字の違い](../cpp/cpp-io.md#endl)）。
 - **再帰**：DFS は `auto dfs = [&](auto&& self, int v, int p) -> void { … };` の形にし、`-> void` を省かない。
 
-コード片は要点の数行だけを取り込み、完全なプログラムは各コードの下のリンクから GitHub で見られる（[ページの構成と読み方](how-to-use.md#page-anatomy)）。
+コード片は要点の数行だけを取り込む。完全なプログラムは手元でコンパイルと実行を確かめてあり、各コードの下のリンクから GitHub で見られる（[ページの構成と読み方](how-to-use.md#page-anatomy)）。
 
 ## 用語の表記 {#terms}
 
-用語の書き方は[用語集の表記の正規形](../guide/glossary.md#canonical-forms)と[表記の規則](../guide/glossary.md#canonical-rules)にそろえる。
+用語の書き方は[用語集の表記の正規形](../guide/glossary.md#canonical-forms)と[表記の規則](../guide/glossary.md#canonical-rules)にそろえる。かっこ内の書き方（セグ木・BIT など）は本文で使ってよく、ほかの別名は各ページの別名の行でだけ使う。
 
 ## 確認問題 {#quiz}
 
