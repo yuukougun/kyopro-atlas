@@ -1,6 +1,7 @@
 # 要望・提案（Issue #109）：読者からの、ページの誤り以外の声。
 name: 要望・提案
-description: 手法・題材・問題の追加や、使い勝手についての要望を送る
+description: 手法・題材・問題の追加や使い勝手についての要望、感想を送る
+title: "要望："
 labels: ["enhancement"]
 body:
   - type: markdown
@@ -17,6 +18,7 @@ body:
         - 手法・題材のページの追加
         - 例題・練習問題の提案
         - 使い勝手（検索・記録・表示など）
+        - 感想
         - その他
     validations:
       required: true

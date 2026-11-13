@@ -1,6 +1,7 @@
 # 全体の改善（Issue #109）：複数のページの修正・ページの追加・方針の決定など。1 ページの数行で済む小さな修正は #3 の sub-issue にする。
 name: 全体の改善
 description: 複数のページにまたがる修正、ページの追加、方針の決定など
+title: "改善："
 labels: ["enhancement"]
 body:
   - type: markdown
